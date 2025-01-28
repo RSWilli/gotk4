@@ -36,6 +36,19 @@
 							gotk4-nix.overlays.patchelf
 						];
 					};
+					buildInputs = with pkgs.gst_all_1; [
+						gst-devtools
+						gst-editing-services
+						gst-libav
+						gst-plugins-bad
+						gst-plugins-base
+						gst-plugins-good
+						gst-plugins-rs
+						gst-plugins-ugly
+						gst-rtsp-server
+						gst-vaapi
+						gstreamer
+					];
 				};
 				packages.dockerEnv = let
 					env = pkgs.writeShellScriptBin "docker-env" ''
