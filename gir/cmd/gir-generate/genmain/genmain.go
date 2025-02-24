@@ -3,13 +3,16 @@ package genmain
 import (
 	"flag"
 	"log"
-	"os"
 
 	"github.com/diamondburned/gotk4/gir"
+	"github.com/diamondburned/gotk4/gir/gencontext"
 	"github.com/diamondburned/gotk4/gir/girgen"
+	"github.com/diamondburned/gotk4/gir/girgen/file"
+	"github.com/diamondburned/gotk4/gir/girgen/generators"
 	"github.com/diamondburned/gotk4/gir/girgen/logger"
 	"github.com/diamondburned/gotk4/gir/girgen/types"
 	"github.com/diamondburned/gotk4/gir/girgen/types/typeconv"
+	"github.com/diamondburned/gotk4/gir/girgen/typesystem"
 )
 
 var (
@@ -145,6 +148,7 @@ func Run(data Data) {
 	ParseFlag()
 
 	repos := MustLoadPackages(data.Packages)
+	// add known packages so we can create a full type system:
 	MustAddPackages(&repos, data.KnownPackages)
 	PrintAddedPkgs(repos)
 
@@ -168,36 +172,38 @@ func Generate(repos gir.Repositories, data Data) {
 		}
 	}
 
-	gen := girgen.NewGenerator(repos, ModulePath(data.Module, overrides))
-	gen.Logger = log.New(os.Stderr, "girgen: ", log.Lmsgprefix)
-	gen.Opts.SingleFile = data.SingleFile
-	gen.ApplyPreprocessors(data.Preprocessors)
-	gen.AddPostprocessors(data.Postprocessors)
-	gen.AddFilters(data.Filters)
-	gen.AddProcessConverters(data.ProcessConverters)
+	// TODO: add some options that allow the user to supply custom value transformers
+
+	ts := typesystem.FromRepositories(repos, data.Module, overrides)
+
+	ctx := gencontext.Base(ts)
+
+	// TODO: add a hook stage here, where the user can filter and modify gir definitions
+
+	// reposToGenerate contains all packages we need to generate, other repos are only for type system
+	reposToGenerate := repos[:len(data.Packages)]
+
+	var gen []generators.Generator
 
 	if !CgoLink {
-		gen.DynamicLinkNamespaces(data.DynamicLinkNamespaces)
+		gen = generators.WithDynamicLinking(ctx, reposToGenerate)
+	} else {
+		gen = generators.WithRuntimeLinking(ctx, reposToGenerate)
 	}
 
-	if err := CleanDirectory(Output, data.PkgExceptions); err != nil {
-		log.Fatalln("failed to clean output directory:", err)
-	}
+	// TODO: add a hook stage here, where the user can filter and modify all generators in "gen"
 
-	genErrs := GeneratePackages(gen, Output, data.Packages, data.GenerateExceptions)
-	if len(genErrs) > 0 {
-		for _, err := range genErrs {
-			log.Println("generation error:", err)
+	for _, g := range gen {
+		w := file.NewWriter(Output)
+
+		g.Generate(w)
+
+		// in theory we can add a pre commit stage here, but I don't know if this is useful
+
+		err := w.Commit()
+
+		if err != nil {
+			panic(err)
 		}
-		os.Exit(1)
-	}
-
-	if err := AppendGoFiles(Output, data.ExtraGoContents); err != nil {
-		log.Fatalln("failed to append files post-generation:", err)
-	}
-
-	finalFiles := [][]string{data.PkgExceptions, data.PkgGenerated}
-	if err := EnsureDirectory(Output, finalFiles...); err != nil {
-		log.Fatalln("error verifying generation:", err)
 	}
 }

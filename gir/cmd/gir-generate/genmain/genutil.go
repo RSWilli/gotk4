@@ -36,7 +36,7 @@ func StringSet(strs ...[]string) map[string]struct{} {
 	return set
 }
 
-// ModulePath crafts the full module path from the given base module path. If
+// ModulePath returns a function that crafts the full module path from the given base module path. If
 // the overrides map is given, then the function will use that as the list of
 // special cases.
 func ModulePath(module string, overrides map[string]string) func(*gir.Namespace) string {

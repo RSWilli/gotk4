@@ -75,6 +75,7 @@ type GeneratedGType struct {
 	GetType string
 }
 
+// Deprecated: old
 func GenerateGType(gen FileGeneratorWriter, name, glibGetType string) (GeneratedGType, bool) {
 	var gtype GeneratedGType
 

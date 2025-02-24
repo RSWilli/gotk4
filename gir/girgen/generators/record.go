@@ -4,8 +4,11 @@ import (
 	"fmt"
 	"strings"
 	"text/tabwriter"
+	"unicode"
+	"unicode/utf8"
 
 	"github.com/diamondburned/gotk4/gir"
+	"github.com/diamondburned/gotk4/gir/gencontext"
 	"github.com/diamondburned/gotk4/gir/girgen/file"
 	"github.com/diamondburned/gotk4/gir/girgen/generators/callable"
 	"github.com/diamondburned/gotk4/gir/girgen/gotmpl"
@@ -158,7 +161,7 @@ func GenerateRecord(gen FileGeneratorWriter, record *gir.Record) bool {
 	// 	}
 	// }
 
-	recordGen := NewRecordGenerator(gen)
+	recordGen := NewLegacyRecordGenerator(gen)
 	if !recordGen.Use(record) {
 		return false
 	}
@@ -177,7 +180,7 @@ func GenerateRecord(gen FileGeneratorWriter, record *gir.Record) bool {
 	return true
 }
 
-type RecordGenerator struct {
+type LegacyRecordGenerator struct {
 	*gir.Record
 	GoName    string
 	Marshaler bool
@@ -221,19 +224,19 @@ type recordSetter struct {
 	Block string
 }
 
-func NewRecordGenerator(gen FileGenerator) RecordGenerator {
-	return RecordGenerator{
+func NewLegacyRecordGenerator(gen FileGenerator) LegacyRecordGenerator {
+	return LegacyRecordGenerator{
 		gen:      gen,
 		Callable: callable.NewGenerator(gen),
 	}
 }
 
 // hHeader returns the RecordGenerator's current file header.
-func (rg *RecordGenerator) Header() *file.Header {
+func (rg *LegacyRecordGenerator) Header() *file.Header {
 	return &rg.hdr
 }
 
-func (rg *RecordGenerator) Use(rec *gir.Record) bool {
+func (rg *LegacyRecordGenerator) Use(rec *gir.Record) bool {
 	rg.hdr.Reset()
 	rg.Marshaler = false
 
@@ -252,7 +255,7 @@ func (rg *RecordGenerator) Use(rec *gir.Record) bool {
 	return true
 }
 
-func (rg *RecordGenerator) UseConstructor(ctor *gir.Constructor) bool {
+func (rg *LegacyRecordGenerator) UseConstructor(ctor *gir.Constructor) bool {
 	if types.FilterSub(rg.gen, rg.Name, ctor.Name, ctor.CIdentifier) {
 		return false
 	}
@@ -268,7 +271,7 @@ func (rg *RecordGenerator) UseConstructor(ctor *gir.Constructor) bool {
 	return true
 }
 
-func (rg *RecordGenerator) methods() {
+func (rg *LegacyRecordGenerator) methods() {
 	callables := callable.Grow(rg.Methods, len(rg.Record.Methods))
 
 	for i := range rg.Record.Methods {
@@ -293,7 +296,7 @@ func (rg *RecordGenerator) methods() {
 	rg.Methods = callables
 }
 
-func (rg *RecordGenerator) getters() {
+func (rg *LegacyRecordGenerator) getters() {
 	rg.Getters = rg.Getters[:0]
 	rg.Setters = rg.Setters[:0]
 
@@ -440,7 +443,7 @@ func (rg *RecordGenerator) getters() {
 	}
 }
 
-func (rg *RecordGenerator) genManualConstructor() {
+func (rg *LegacyRecordGenerator) genManualConstructor() {
 	params := pen.NewJoints(", ", len(rg.Fields))
 	convts := make([]typeconv.ConversionValue, 0, len(rg.Fields))
 
@@ -525,7 +528,7 @@ func ignoreField(field gir.Field) bool {
 	return field.Private || field.Bits > 0 || !field.IsReadable()
 }
 
-func (rg *RecordGenerator) CGoPtrType() string {
+func (rg *LegacyRecordGenerator) CGoPtrType() string {
 	switch rg.gen.LinkMode() {
 	case types.DynamicLinkMode:
 		return "*C." + rg.Record.CType
@@ -536,7 +539,7 @@ func (rg *RecordGenerator) CGoPtrType() string {
 	}
 }
 
-func (rg *RecordGenerator) Logln(lvl logger.Level, v ...interface{}) {
+func (rg *LegacyRecordGenerator) Logln(lvl logger.Level, v ...interface{}) {
 	p := fmt.Sprintf("record %s (C.%s):", rg.GoName, rg.Record.CType)
 	rg.gen.Logln(lvl, logger.Prefix(v, p)...)
 }
@@ -570,4 +573,97 @@ func GenerateCPrimitiveRecord(gen types.FileGenerator, rec *gir.Record) string {
 	}
 
 	return fmt.Sprintf("struct %s {\n%s\n};", rec.Name, b.String())
+}
+
+type RecordGenerator struct {
+	Doc               Generator
+	GoName            string
+	CGoType           string
+	GoNamePrivate     string
+	GenerateMarshaler bool
+
+	// sub generators:
+	Constructors GeneratorList
+	Getters      GeneratorList
+	Setters      GeneratorList
+	Methods      GeneratorList
+}
+
+func (g *RecordGenerator) Generate(w *file.Writer) {
+	g.Doc.Generate(w)
+
+	fmt.Fprintf(w.Go(), "type %s struct {\n", g.GoName)
+	fmt.Fprintf(w.Go(), "\t*%s\n", g.GoNamePrivate)
+	fmt.Fprintf(w.Go(), "}\n\n")
+
+	fmt.Fprintf(w.Go(), "// %s is the struct that's finalized\n", g.GoNamePrivate)
+	fmt.Fprintf(w.Go(), "type %s struct {\n", g.GoNamePrivate)
+	fmt.Fprintf(w.Go(), "\tnative *%s\n", g.CGoType)
+	fmt.Fprintf(w.Go(), "}\n\n")
+
+	if g.GenerateMarshaler {
+		w.GoImport("unsafe")
+
+		fmt.Fprintf(w.Go(), "func marshal%s(p uintptr) (interface{}, error) {\n", g.GoName)
+		fmt.Fprintf(w.Go(), "\tb := coreglib.ValueFromNative(unsafe.Pointer(p)).Boxed()\n")
+		fmt.Fprintf(w.Go(), "\treturn &%s{&%s{(*%s)(b)}}, nil\n", g.GoName, g.GoNamePrivate, g.CGoType)
+		fmt.Fprintf(w.Go(), "}\n\n")
+	}
+
+	GenerateAll(
+		w,
+		g.Constructors,
+		g.Getters,
+		g.Setters,
+		g.Methods,
+	)
+}
+
+func NewRecordGenerator(ctx gencontext.GenerationContext, r gir.Record) *RecordGenerator {
+	if !r.IsIntrospectable() || strings.HasSuffix(r.Name, "Private") {
+		return nil
+	}
+
+	meta := ctx.LookupType(r.CType)
+
+	if meta == nil {
+		return nil
+	}
+
+	goPrivate := firstToLower(meta.GoType)
+
+	g := &RecordGenerator{
+		Doc:               NewGoDocGenerator(r, 0),
+		GoName:            meta.GoType,
+		CGoType:           meta.CGoType,
+		GoNamePrivate:     goPrivate,
+		GenerateMarshaler: r.GLibGetType != "",
+	}
+
+	for _, constructor := range r.Constructors {
+		if constGen := NewRecordConstructorGenerator(ctx, g, constructor); constGen != nil {
+			g.Constructors = append(g.Constructors, constGen)
+		}
+	}
+
+	for _, method := range r.Methods {
+		if constGen := NewRecordMethodGenerator(ctx, g, method); constGen != nil {
+			g.Methods = append(g.Methods, constGen)
+		}
+	}
+
+	return g
+}
+
+// see https://stackoverflow.com/a/75989905
+func firstToLower(s string) string {
+	r, size := utf8.DecodeRuneInString(s)
+	if r == utf8.RuneError && size <= 1 {
+		return s
+	}
+	lc := unicode.ToLower(r)
+	if r == lc {
+		return s
+	}
+	return string(lc) + s[size:]
 }

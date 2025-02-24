@@ -1,14 +1,17 @@
 package generators
 
 import (
+	"fmt"
 	"strconv"
 
 	"github.com/diamondburned/gotk4/gir"
+	"github.com/diamondburned/gotk4/gir/girgen/file"
 	"github.com/diamondburned/gotk4/gir/girgen/gotmpl"
 	"github.com/diamondburned/gotk4/gir/girgen/strcases"
 	"github.com/diamondburned/gotk4/gir/girgen/types"
 )
 
+// Deprecated: old
 var bitfieldTmpl = gotmpl.NewGoTemplate(`
 	{{ GoDoc . 0 (OverrideSelfName .GoName) }}
 	type {{ .GoName }} C.guint
@@ -60,6 +63,7 @@ var bitfieldTmpl = gotmpl.NewGoTemplate(`
 	}
 `)
 
+// Deprecated: old
 type bitfieldData struct {
 	*gir.Bitfield
 	GoName    string
@@ -70,6 +74,7 @@ type bitfieldData struct {
 	gen FileGenerator
 }
 
+// Deprecated: old
 func (*bitfieldData) Bits(v string) string {
 	b, err := strconv.ParseUint(v, 10, 64)
 	if err != nil {
@@ -79,15 +84,19 @@ func (*bitfieldData) Bits(v string) string {
 	return "0b" + strconv.FormatUint(b, 2)
 }
 
+// Deprecated: old
 func (b *bitfieldData) FormatMember(member gir.Member) string {
-	return FormatEnumMember(member)
+	return formatEnumMember(member)
 }
 
+// Deprecated: old
 func (b *bitfieldData) UniqueMembers() []gir.Member {
-	return UniqueEnumMembers(b.Members)
+	return uniqueValuesEnumMembers(b.Members)
 }
 
 // CanGenerateBitfield returns false if the bitfield cannot be generated.
+//
+// Deprecated: old
 func CanGenerateBitfield(gen FileGenerator, bitfield *gir.Bitfield) bool {
 	if !bitfield.IsIntrospectable() || types.Filter(gen, bitfield.Name, bitfield.CType) {
 		return false
@@ -98,6 +107,8 @@ func CanGenerateBitfield(gen FileGenerator, bitfield *gir.Bitfield) bool {
 // GenerateBitfield generates a bitfield type declaration as well as the
 // constants and the type marshaler into the given file generator. If the
 // generation fails or is ignored, then false is returned.
+//
+// Deprecated: old
 func GenerateBitfield(gen FileGeneratorWriter, bitfield *gir.Bitfield) bool {
 	if !CanGenerateBitfield(gen, bitfield) {
 		return false
@@ -145,4 +156,142 @@ func GenerateBitfield(gen FileGeneratorWriter, bitfield *gir.Bitfield) bool {
 
 	writer.Pen().WriteTmpl(bitfieldTmpl, &data)
 	return true
+}
+
+type BitfieldMember struct {
+	Doc       Generator
+	Name      string
+	ShortName string
+	Value     string
+}
+
+func bits(v string) string {
+	b, err := strconv.ParseUint(v, 10, 64)
+	if err != nil {
+		return v
+	}
+
+	return "0b" + strconv.FormatUint(b, 2)
+}
+
+type BitfieldGenerator struct {
+	Doc  Generator
+	Name string
+
+	MethodReceiver  string
+	StringedMembers []BitfieldMember // only unique members are considered, to avoid switch case clash
+	MaxStringLen    int
+
+	Marshaler Generator
+
+	Members []BitfieldMember
+}
+
+func (g *BitfieldGenerator) Generate(w *file.Writer) {
+	g.Doc.Generate(w)
+	w.GoImport("fmt")
+	w.GoImport("strings")
+
+	fmt.Fprintf(w.Go(), "type %s C.guint\n\n", g.Name)
+
+	fmt.Fprintln(w.Go(), "const (")
+	for _, m := range g.Members {
+		m.Doc.Generate(w)
+		fmt.Fprintf(w.Go(), "\t%s %s = %s\n", m.Name, g.Name, m.Value)
+	}
+	fmt.Fprint(w.Go(), ")\n\n")
+
+	g.Marshaler.Generate(w)
+
+	fmt.Fprintln(w.Go(), "// String returns the names in string for AllocatorFlags.")
+	fmt.Fprintf(w.Go(), "func (%s %s) String() string {\n", g.MethodReceiver, g.Name)
+	fmt.Fprintf(w.Go(), "\tif %s == 0 {\n", g.MethodReceiver)
+	fmt.Fprintf(w.Go(), "\t\treturn \"%s(0)\"\n", g.Name)
+	fmt.Fprintf(w.Go(), "\t}\n\n")
+
+	fmt.Fprintf(w.Go(), "\tvar builder strings.Builder\n")
+	fmt.Fprintf(w.Go(), "\tbuilder.Grow(%d)\n\n", g.MaxStringLen)
+
+	fmt.Fprintf(w.Go(), "\tfor %s != 0 {\n", g.MethodReceiver)
+	fmt.Fprintf(w.Go(), "\t\tnext := %s & (%s - 1)\n", g.MethodReceiver, g.MethodReceiver)
+	fmt.Fprintf(w.Go(), "\t\tbit := %s - next\n\n", g.MethodReceiver)
+
+	fmt.Fprintf(w.Go(), "\t\tswitch bit {\n")
+	for _, m := range g.StringedMembers {
+		fmt.Fprintf(w.Go(), "\t\tcase %s:\n", m.Name)
+		fmt.Fprintf(w.Go(), "\t\t\tbuilder.WriteString(\"%s|\")\n", m.ShortName)
+	}
+	fmt.Fprintf(w.Go(), "\t\tdefault:\n")
+	fmt.Fprintf(w.Go(), "\t\t\tbuilder.WriteString(fmt.Sprintf(\"%s(0b%%b)|\", bit))\n", g.Name)
+	fmt.Fprintf(w.Go(), "\t\t}\n\n")
+
+	fmt.Fprintf(w.Go(), "\t\t%s = next\n", g.MethodReceiver)
+	fmt.Fprintf(w.Go(), "\t}\n\n")
+
+	fmt.Fprintf(w.Go(), "\treturn strings.TrimSuffix(builder.String(), \"|\")\n")
+	fmt.Fprintf(w.Go(), "}\n\n")
+
+	fmt.Fprintf(w.Go(), "// Has returns true if %s contains other\n", g.MethodReceiver)
+	fmt.Fprintf(w.Go(), "func (%s %s) Has(other %s) bool {\n", g.MethodReceiver, g.Name, g.Name)
+	fmt.Fprintf(w.Go(), "\treturn (%s & other) == other\n", g.MethodReceiver)
+	fmt.Fprintf(w.Go(), "}\n\n")
+}
+
+func NewBitfieldGenerator(b gir.Bitfield) *BitfieldGenerator {
+	// TODO: use gencontext lookup
+
+	var members []BitfieldMember
+
+	maxStrLen := 0
+
+	for i, m := range b.Members {
+		mm := BitfieldMember{
+			Doc:       NewGoDocGenerator(m, 1),
+			Name:      formatEnumMember(m),
+			ShortName: strcases.SnakeToGo(true, m.Name()),
+			Value:     bits(m.Value),
+		}
+		members = append(members, mm)
+
+		maxStrLen += len(mm.Name)
+		if i > 0 {
+			maxStrLen++ // account for '|'
+		}
+	}
+
+	stringerMembers := dedupValues(members)
+
+	goName := strcases.PascalToGo(b.Name)
+
+	var marshalGen Generator = NoopGenerator{}
+
+	if b.GLibGetType != "" {
+		marshalGen = NewMarshalBifieldGenerator(goName)
+	}
+
+	return &BitfieldGenerator{
+		Doc:             NewGoDocGenerator(b, 0),
+		Name:            goName,
+		Members:         members,
+		MethodReceiver:  strcases.FirstLetter(goName),
+		Marshaler:       marshalGen,
+		MaxStringLen:    maxStrLen,
+		StringedMembers: stringerMembers,
+	}
+}
+
+func dedupValues(members []BitfieldMember) []BitfieldMember {
+	seen := make(map[string]struct{})
+	uniques := make([]BitfieldMember, 0, len(members))
+
+	for _, m := range members {
+		if _, ok := seen[m.Value]; ok {
+			continue
+		}
+
+		uniques = append(uniques, m)
+		seen[m.Value] = struct{}{}
+	}
+
+	return uniques
 }

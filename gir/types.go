@@ -415,7 +415,7 @@ type Type struct {
 	Introspectable *bool  `xml:"introspectable,attr"`
 
 	DocElements
-	// Types is the type's inner types.
+	// Types is the type's inner types. e.g. generic types of container types
 	Types []Type `xml:"http://www.gtk.org/introspection/core/1.0 type"`
 }
 

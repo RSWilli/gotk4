@@ -518,6 +518,8 @@ var girToBuiltin = map[string]string{
 
 // GIRPrimitiveGo returns Go built-in types (primitive types and string). It
 // returns an empty string if there's none.
+//
+// Deprecated: old
 func GIRBuiltinGo(typ string) string {
 	return girToBuiltin[typ]
 }
