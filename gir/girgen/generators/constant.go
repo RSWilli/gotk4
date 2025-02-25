@@ -83,8 +83,10 @@ func NewConstantGenerator(ctx gencontext.GenerationContext, constant gir.Constan
 
 	goValue := constant.Value
 
-	if resolvedType.GoType == "string" {
+	if resolvedType.GoType() == "string" {
 		goValue = strconv.Quote(goValue)
+	} else if resolvedType.GoBaseType == "string" && resolvedType.GoPointers > 0 {
+		panic("unhandled case: pointer to string constant")
 	}
 
 	return &ConstantGenerator{

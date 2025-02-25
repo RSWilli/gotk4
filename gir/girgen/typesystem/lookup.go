@@ -31,25 +31,32 @@ func (r *Registry) GetNamespaceMetadata(ns *gir.Namespace) *NamespaceMetadata {
 }
 
 type TypeMetadata struct {
-	GoType          string
-	CGoType         string
+	GoPointers      int
+	CGoPointers     int
+	GoBaseType      string
+	CGoBaseType     string
 	RequiredImports []string
 
 	GirType any
 }
 
+func (tm TypeMetadata) GoType() string {
+	return addPointers(tm.GoBaseType, tm.GoPointers)
+}
+
+func (tm TypeMetadata) CGoType() string {
+	return addPointers(tm.CGoBaseType, tm.CGoPointers)
+}
+
 // LookupType finds a type in the registry and attaches metadata needed for generation. The typestring must be versioned or primitive.
 func (r *Registry) LookupType(typ string) *TypeMetadata {
-	baseType, pointers := trimPointers(typ)
-
-	parts := strings.Split(baseType, ".")
+	parts := strings.Split(typ, ".")
 
 	if len(parts) > 1 {
 		panic("searching for versioned type in whole registry not yet implemented")
 	}
 
 	if t := lookupPrimitive(parts[0]); t != nil {
-		addGoPointers(t, pointers)
 		return t
 	}
 
@@ -88,9 +95,7 @@ func (n *namespace) LookupType(typ string) *TypeMetadata {
 		// and attach the required import:
 		t.RequiredImports = append(t.RequiredImports, reffedNS.goImportPath)
 		// the imported package is also needed for the type name:
-		t.GoType = reffedNS.goPackageName + "." + t.GoType
-
-		addGoPointers(t, pointers)
+		t.GoBaseType = reffedNS.goPackageName + "." + t.GoBaseType
 
 		return t
 	}
@@ -104,9 +109,9 @@ func (n *namespace) LookupType(typ string) *TypeMetadata {
 	for name, girType := range n.aliasesByName {
 		if name == baseType {
 			meta = &TypeMetadata{
-				GoType:  strcases.PascalToGo(girType.Name),
-				CGoType: ctypeToCGo(baseType),
-				GirType: &girType,
+				GoBaseType:  strcases.PascalToGo(girType.Name),
+				CGoBaseType: ctypeToCGo(baseType),
+				GirType:     &girType,
 			}
 		}
 	}
@@ -114,9 +119,9 @@ func (n *namespace) LookupType(typ string) *TypeMetadata {
 	for name, girType := range n.classesByName {
 		if name == baseType {
 			meta = &TypeMetadata{
-				GoType:  strcases.PascalToGo(girType.Name),
-				CGoType: ctypeToCGo(baseType),
-				GirType: &girType,
+				GoBaseType:  strcases.PascalToGo(girType.Name),
+				CGoBaseType: ctypeToCGo(baseType),
+				GirType:     &girType,
 			}
 		}
 	}
@@ -124,9 +129,9 @@ func (n *namespace) LookupType(typ string) *TypeMetadata {
 	for name, girType := range n.interfacesByName {
 		if name == baseType {
 			meta = &TypeMetadata{
-				GoType:  strcases.PascalToGo(girType.Name),
-				CGoType: ctypeToCGo(baseType),
-				GirType: &girType,
+				GoBaseType:  strcases.PascalToGo(girType.Name),
+				CGoBaseType: ctypeToCGo(baseType),
+				GirType:     &girType,
 			}
 		}
 	}
@@ -134,9 +139,9 @@ func (n *namespace) LookupType(typ string) *TypeMetadata {
 	for name, girType := range n.recordsByName {
 		if name == baseType {
 			meta = &TypeMetadata{
-				GoType:  strcases.PascalToGo(girType.Name),
-				CGoType: ctypeToCGo(baseType),
-				GirType: &girType,
+				GoBaseType:  strcases.PascalToGo(girType.Name),
+				CGoBaseType: ctypeToCGo(baseType),
+				GirType:     &girType,
 			}
 		}
 	}
@@ -144,9 +149,9 @@ func (n *namespace) LookupType(typ string) *TypeMetadata {
 	for name, girType := range n.enumsByName {
 		if name == baseType {
 			meta = &TypeMetadata{
-				GoType:  strcases.PascalToGo(girType.Name),
-				CGoType: ctypeToCGo(baseType),
-				GirType: &girType,
+				GoBaseType:  strcases.PascalToGo(girType.Name),
+				CGoBaseType: ctypeToCGo(baseType),
+				GirType:     &girType,
 			}
 		}
 	}
@@ -154,9 +159,9 @@ func (n *namespace) LookupType(typ string) *TypeMetadata {
 	for name, girType := range n.functionsByName {
 		if name == baseType {
 			meta = &TypeMetadata{
-				GoType:  strcases.PascalToGo(girType.Name),
-				CGoType: ctypeToCGo(baseType),
-				GirType: &girType,
+				GoBaseType:  strcases.PascalToGo(girType.Name),
+				CGoBaseType: ctypeToCGo(baseType),
+				GirType:     &girType,
 			}
 		}
 	}
@@ -164,9 +169,9 @@ func (n *namespace) LookupType(typ string) *TypeMetadata {
 	for name, girType := range n.unionsByName {
 		if name == baseType {
 			meta = &TypeMetadata{
-				GoType:  strcases.PascalToGo(girType.Name),
-				CGoType: ctypeToCGo(baseType),
-				GirType: &girType,
+				GoBaseType:  strcases.PascalToGo(girType.Name),
+				CGoBaseType: ctypeToCGo(baseType),
+				GirType:     &girType,
 			}
 		}
 	}
@@ -174,20 +179,20 @@ func (n *namespace) LookupType(typ string) *TypeMetadata {
 	for name, girType := range n.bitfieldsByName {
 		if name == baseType {
 			meta = &TypeMetadata{
-				GoType:  strcases.PascalToGo(girType.Name),
-				CGoType: ctypeToCGo(baseType),
-				GirType: &girType,
+				GoBaseType:  strcases.PascalToGo(girType.Name),
+				CGoBaseType: ctypeToCGo(baseType),
+				GirType:     &girType,
 			}
 		}
 	}
 
 	for name, girType := range n.callbacksByName {
 		if name == baseType {
-			goType := strcases.PascalToGo(girType.Name)
+			goBaseType := strcases.PascalToGo(girType.Name)
 			meta = &TypeMetadata{
-				GoType:  goType,
-				CGoType: fmt.Sprintf("_gotk4_%s%s_%s", n.goPackageName, gir.MajorVersion(n.version), goType),
-				GirType: &girType,
+				GoBaseType:  goBaseType,
+				CGoBaseType: fmt.Sprintf("_gotk4_%s%s_%s", n.goPackageName, gir.MajorVersion(n.version), goBaseType),
+				GirType:     &girType,
 			}
 		}
 	}
@@ -195,14 +200,15 @@ func (n *namespace) LookupType(typ string) *TypeMetadata {
 	for name, girType := range n.constantsByName {
 		if name == baseType {
 			meta = &TypeMetadata{
-				GoType:  strcases.PascalToGo(girType.Name),
-				CGoType: ctypeToCGo(baseType),
-				GirType: &girType,
+				GoBaseType:  strcases.PascalToGo(girType.Name),
+				CGoBaseType: ctypeToCGo(baseType),
+				GirType:     &girType,
 			}
 		}
 	}
 
-	addGoPointers(meta, pointers)
+	meta.CGoPointers = pointers
+	meta.GoPointers = pointers
 
 	return meta
 }
@@ -260,19 +266,27 @@ var builtinTypeMap = map[string]string{
 	"guintptr": "uintptr",
 	"utf8":     "string",
 	"filename": "string",
-	// special pointer types
-	"gchar*": "string",
 }
 
 func lookupPrimitive(t string) *TypeMetadata {
-	if goType, ok := builtinTypeMap[t]; ok {
-		base, ptrs := trimPointers(t)
-		meta := &TypeMetadata{
-			GoType:  goType,
-			CGoType: ctypeToCGo(base),
-		}
+	base, ptrs := trimPointers(t)
 
-		addGoPointers(meta, ptrs)
+	if base == "gchar" && ptrs >= 1 {
+		return &TypeMetadata{
+			GoBaseType:  "string",
+			CGoBaseType: base,
+			GoPointers:  ptrs - 1,
+			CGoPointers: ptrs,
+		}
+	}
+
+	if goType, ok := builtinTypeMap[base]; ok {
+		meta := &TypeMetadata{
+			GoBaseType:  goType,
+			CGoBaseType: ctypeToCGo(base),
+			GoPointers:  ptrs,
+			CGoPointers: ptrs,
+		}
 
 		return meta
 	}
@@ -280,14 +294,14 @@ func lookupPrimitive(t string) *TypeMetadata {
 	switch t {
 	case "gpointer":
 		return &TypeMetadata{
-			GoType:          "unsafe.Pointer",
-			CGoType:         "C.gpointer",
+			GoBaseType:      "unsafe.Pointer",
+			CGoBaseType:     "C.gpointer",
 			RequiredImports: []string{"unsafe"},
 		}
 	case "gconstpointer":
 		return &TypeMetadata{
-			GoType:          "unsafe.Pointer",
-			CGoType:         "C.gconstpointer",
+			GoBaseType:      "unsafe.Pointer",
+			CGoBaseType:     "C.gconstpointer",
 			RequiredImports: []string{"unsafe"},
 		}
 	}
@@ -301,12 +315,11 @@ func trimPointers(t string) (basetype string, pointercount int) {
 	return strings.TrimRight(t, "*"), count
 }
 
-func addGoPointers(t *TypeMetadata, pointers int) {
-	if pointers == 0 || t == nil {
-		return
+func addPointers(t string, pointers int) string {
+	if pointers == 0 || t == "" {
+		return ""
 	}
 	pointerstr := strings.Repeat("*", pointers)
 
-	t.GoType = pointerstr + t.GoType
-	t.CGoType = pointerstr + t.CGoType
+	return pointerstr + t
 }

@@ -630,12 +630,12 @@ func NewRecordGenerator(ctx gencontext.GenerationContext, r gir.Record) *RecordG
 		return nil
 	}
 
-	goPrivate := firstToLower(meta.GoType)
+	goPrivate := firstToLower(meta.GoBaseType)
 
 	g := &RecordGenerator{
 		Doc:               NewGoDocGenerator(r, 0),
-		GoName:            meta.GoType,
-		CGoType:           meta.CGoType,
+		GoName:            meta.GoBaseType,
+		CGoType:           meta.CGoBaseType,
 		GoNamePrivate:     goPrivate,
 		GenerateMarshaler: r.GLibGetType != "",
 	}

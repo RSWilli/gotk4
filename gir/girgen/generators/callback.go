@@ -2,6 +2,7 @@ package generators
 
 import (
 	"fmt"
+	"strings"
 
 	"github.com/diamondburned/gotk4/gir"
 	"github.com/diamondburned/gotk4/gir/gencontext"
@@ -88,7 +89,13 @@ func (c *CallbackGenerator) generateGo(w *file.Writer) {
 
 func (c *CallbackGenerator) generateExport(w *file.Writer) {
 	fmt.Fprintf(w.Exported.Go(), "//export %s\n", c.CgoName)
-	fmt.Fprintf(w.Exported.Go(), "func %s(%s)%s {\n", c.CgoName, c.CGoParameters.CGoParameterDeclList(), c.CGoReturn.CGoReturnDecl())
+
+	cret := c.CGoReturn.CGoReturnDecl()
+	if cret != "" {
+		cret = "(" + cret + ")" // wrap non void returns in brackets
+	}
+
+	fmt.Fprintf(w.Exported.Go(), "func %s(%s)%s {\n", c.CgoName, c.CGoParameters.CGoParameterDeclList(), cret)
 
 	sections := value.NewFunctionCallSections()
 
@@ -107,6 +114,14 @@ func (c *CallbackGenerator) generateExport(w *file.Writer) {
 }
 
 func NewCallbackGenerator(ctx gencontext.GenerationContext, cb gir.Callback) *CallbackGenerator {
+	if !cb.IsIntrospectable() {
+		return nil
+	}
+
+	if strings.HasSuffix(cb.Name, "DestroyNotify") {
+		return nil
+	}
+
 	meta := ctx.LookupType(cb.Name)
 
 	if meta == nil {
@@ -131,8 +146,8 @@ func NewCallbackGenerator(ctx gencontext.GenerationContext, cb gir.Callback) *Ca
 
 	g := &CallbackGenerator{
 		Doc:     NewGoDocGenerator(cb, 0),
-		GoName:  meta.GoType,
-		CgoName: meta.CGoType,
+		GoName:  meta.GoBaseType,
+		CgoName: meta.CGoBaseType,
 
 		CGoReturn:     value.NoopConverter{},
 		Values:        make(value.ConverterList, 0, valueCount),
@@ -143,7 +158,7 @@ func NewCallbackGenerator(ctx gencontext.GenerationContext, cb gir.Callback) *Ca
 
 	if cb.Parameters != nil {
 		for i, param := range cb.Parameters.Parameters {
-			conv := value.NewParamConverter(ctx, i, param)
+			conv := value.NewParamConverter(ctx, meta.GoType, i, param)
 
 			if conv == nil {
 				// conversion not possible, skip callback
@@ -169,6 +184,8 @@ func NewCallbackGenerator(ctx gencontext.GenerationContext, cb gir.Callback) *Ca
 		}
 
 		g.CGoReturn = conv
+
+		// the converter could turn the c return into a param:
 
 		g.Values = append(g.Values, conv)
 		g.CGoParameters = append(g.CGoParameters, conv)
