@@ -2,6 +2,7 @@ package typesystem
 
 import (
 	"fmt"
+	"log"
 	"strings"
 
 	"github.com/diamondburned/gotk4/gir"
@@ -207,8 +208,12 @@ func (n *namespace) LookupType(typ string) *TypeMetadata {
 		}
 	}
 
-	meta.CGoPointers = pointers
-	meta.GoPointers = pointers
+	if meta != nil {
+		meta.CGoPointers = pointers
+		meta.GoPointers = pointers
+	} else {
+		log.Printf("type lookup not found: %s\n", typ)
+	}
 
 	return meta
 }
@@ -316,7 +321,7 @@ func trimPointers(t string) (basetype string, pointercount int) {
 }
 
 func addPointers(t string, pointers int) string {
-	if pointers == 0 || t == "" {
+	if t == "" {
 		return ""
 	}
 	pointerstr := strings.Repeat("*", pointers)

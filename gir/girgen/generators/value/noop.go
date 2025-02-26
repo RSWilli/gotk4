@@ -1,31 +1,35 @@
 package value
 
-type NoopConverter struct{}
+import "fmt"
 
-// CGoReturnDecl implements ValueConverter.
-func (NoopConverter) CGoReturnDecl() string { return "" }
+// NoopConverter will declare the incoming type but will drop it
+type NoopConverter struct {
+	dir    ConversionDirection
+	inName string
+	inType string
+}
 
-// CGoReturnIdentifier implements ValueConverter.
-func (NoopConverter) CGoReturnIdentifier() string { return "" }
+// Conversion implements Converter.
+func (n NoopConverter) Conversion() string {
+	return fmt.Sprintf("_ = %s // no-op conversion\n", n.inName)
+}
 
-// GoReturnDecl implements ValueConverter.
-func (NoopConverter) GoReturnDecl() string { return "" }
+// AddImports implements Converter.
+func (n NoopConverter) AddImports(importer) {}
 
-// GoReturnIdentifier implements ValueConverter.
-func (NoopConverter) GoReturnIdentifier() string { return "" }
+// ConversionDirection implements Converter.
+func (n NoopConverter) ConversionDirection() ConversionDirection { return n.dir }
+
+// In implements Converter.
+func (n NoopConverter) InIdentifier() string { return n.inName }
+
+// InType implements Converter.
+func (n NoopConverter) InType() string { return n.inType }
+
+// Out implements Converter.
+func (n NoopConverter) OutIdentifier() string { return "_" }
+
+// OutType implements Converter.
+func (n NoopConverter) OutType() string { return "struct{}" }
 
 var _ Converter = NoopConverter{}
-
-func (NoopConverter) Generate(importer, FunctionCallSections) {}
-
-// CGoParameterDecl implements ValueConverter.
-func (NoopConverter) CGoParameterDecl() string { return "" }
-
-// CGoParameterIdentifier implements ValueConverter.
-func (NoopConverter) CGoParameterIdentifier() string { return "" }
-
-// GoParameterDecl implements ValueConverter.
-func (NoopConverter) GoParameterDecl() string { return "" }
-
-// GoParameterIdentifier implements ValueConverter.
-func (NoopConverter) GoParameterIdentifier() string { return "" }

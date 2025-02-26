@@ -1,7 +1,9 @@
 package generators
 
 import (
+	"bytes"
 	"fmt"
+	"io"
 	"strings"
 
 	"github.com/diamondburned/gotk4/gir"
@@ -53,11 +55,14 @@ type CallbackGenerator struct {
 	GoName  string
 	CgoName string
 
-	// Values contains all the parameter generators. These are executed in order and are used
-	// for converting the cgo parameters to go, and the go returns to cgo. This is
-	Values value.ConverterList
+	// ClosureArg
+	ClosureArg string
 
-	// CgoParameters contains the same generators as Values. They are used to generate the cgo function signature.
+	// Converters contains all the parameter converters. These are executed in order and are used
+	// for converting the cgo parameters to go, and the go returns to cgo. This is
+	Converters value.ConverterList
+
+	// CgoParameters contains the converters as Converters used to generate the cgo function signature.
 	//
 	// It is not recommended to reorder them, because this will most likely break the types
 	CGoParameters value.ConverterList
@@ -65,12 +70,13 @@ type CallbackGenerator struct {
 	// CGoReturn contains the return param of the cgo function. C can only return one value.
 	CGoReturn value.Converter
 
-	// GoParameters contains the same generators as values, but here the girgen user can reorder them via the hook stage.
+	// GoParameters contains the converters as Converters used to generate the go parameters. Compared to CGoParameters there might
+	// be some parameters missing, e.g. out params get turned into return values in go. The girgen user is free to reorder this list.
 	//
 	// common reorderings are already applied, e.g. moving context to the front
 	GoParameters value.ConverterList
 
-	// GoReturns contains the same generators as Values, but is used to generate the go return values.
+	// GoReturns contains the same converters as Converters, but is used to generate the go return values.
 	GoReturns value.ConverterList
 }
 
@@ -82,32 +88,79 @@ func (c *CallbackGenerator) Generate(w *file.Writer) {
 
 func (c *CallbackGenerator) generateGo(w *file.Writer) {
 	c.Doc.Generate(w)
-	fmt.Fprintf(w.Go(), "type %s func(%s)%s\n", c.GoName, c.GoParameters.GoParameterDeclList(), c.GoReturns.GoReturnDeclList())
+
+	ret := c.GoReturns.GoDeclList()
+
+	if ret != "" {
+		ret = " (" + ret + ")"
+	}
+
+	fmt.Fprintf(w.Go(), "type %s func(%s)%s\n", c.GoName, c.GoParameters.GoDeclList(), ret)
 
 	fmt.Fprintln(w.Go())
 }
 
 func (c *CallbackGenerator) generateExport(w *file.Writer) {
+	w.Exported.GoImportCore("gbox")
+
 	fmt.Fprintf(w.Exported.Go(), "//export %s\n", c.CgoName)
 
-	cret := c.CGoReturn.CGoReturnDecl()
-	if cret != "" {
-		cret = "(" + cret + ")" // wrap non void returns in brackets
+	cret := ""
+	if c.CGoReturn != nil {
+		// CGoReturn converts go->c, so the values are in "Out"
+		cret = fmt.Sprintf(" (%s %s)", c.CGoReturn.OutIdentifier(), c.CGoReturn.OutType())
 	}
 
-	fmt.Fprintf(w.Exported.Go(), "func %s(%s)%s {\n", c.CgoName, c.CGoParameters.CGoParameterDeclList(), cret)
+	fmt.Fprintf(w.Exported.Go(), "func %s(%s)%s {\n", c.CgoName, c.CGoParameters.CDeclList(), cret)
 
-	sections := value.NewFunctionCallSections()
+	fmt.Fprintf(w.Exported.Go(), "\tvar fn %s\n", c.GoName)
+	fmt.Fprintf(w.Exported.Go(), "\t{\n")
+	fmt.Fprintf(w.Exported.Go(), "\t\tv := gbox.Get(uintptr(%s))\n", c.ClosureArg)
+	fmt.Fprintf(w.Exported.Go(), "\t\tif v == nil {\n")
+	fmt.Fprintf(w.Exported.Go(), "\t\t\tpanic(`callback not found`)\n")
+	fmt.Fprintf(w.Exported.Go(), "\t\t}\n")
+	fmt.Fprintf(w.Exported.Go(), "\t\tfn = v.(%s)\n", c.GoName)
+	fmt.Fprintf(w.Exported.Go(), "\t}\n\n")
 
-	fmt.Fprintf(sections.FnCall(), "%s = fn(%s)\n", c.GoReturns.GoReturnIdentifierList(), c.GoParameters.GoParameterIdentifierList())
+	var secInputPre bytes.Buffer
+	var secInputConv bytes.Buffer
+	var secFnCall bytes.Buffer
+	var secOutputPre bytes.Buffer
+	var secOutputConv bytes.Buffer
+	var secReturn bytes.Buffer
+
+	goReturns := c.GoReturns.InIdentifierList()
+
+	if goReturns == "" {
+		fmt.Fprintf(&secFnCall, "\tfn(%s)\n", c.GoParameters.OutIdentifierList())
+	} else {
+		fmt.Fprintf(&secFnCall, "\t%s := fn(%s)\n", goReturns, c.GoParameters.OutIdentifierList())
+	}
+	if c.CGoReturn != nil {
+		fmt.Fprintf(&secReturn, "\treturn %s\n", c.CGoReturn.OutIdentifier())
+	}
 
 	// generate all value conversions:
-	for _, value := range c.Values {
-		value.Generate(&w.Exported, sections)
+	for _, v := range c.Converters {
+		v.AddImports(&w.Exported)
+		if v.ConversionDirection() == value.ConvertCToGo {
+			fmt.Fprintf(&secInputPre, "\tvar %s %s // out\n", v.OutIdentifier(), v.OutType())
+			fmt.Fprint(&secInputConv, v.Conversion())
+		} else if goReturns != "" {
+			fmt.Fprintf(&secOutputPre, "\tvar _ %s\n", v.InType()) // this is not needed, but here for debugging purposes
+			fmt.Fprint(&secOutputConv, v.Conversion())
+		}
 	}
 
+	// separate the sections with newlines:
+	fmt.Fprintln(&secInputPre)
+	fmt.Fprintln(&secInputConv)
+	fmt.Fprintln(&secFnCall)
+	fmt.Fprintln(&secOutputPre)
+	fmt.Fprintln(&secOutputConv)
+
 	// write the grouped sections:
-	sections.WriteTo(w.Exported.Go())
+	io.Copy(w.Exported.Go(), io.MultiReader(&secInputPre, &secInputConv, &secFnCall, &secOutputPre, &secOutputConv, &secReturn))
 
 	fmt.Fprintln(w.Exported.Go(), "}")
 	fmt.Fprintln(w.Exported.Go())
@@ -122,17 +175,23 @@ func NewCallbackGenerator(ctx gencontext.GenerationContext, cb gir.Callback) *Ca
 		return nil
 	}
 
-	meta := ctx.LookupType(cb.Name)
+	callbackMeta := ctx.LookupType(cb.Name)
 
-	if meta == nil {
+	if callbackMeta == nil {
 		return nil
 	}
 
-	var valueCount int
-
-	if cb.Parameters != nil {
-		valueCount += len(cb.Parameters.Parameters)
+	if cb.Parameters == nil {
+		return nil // we cannot call a go closure without more info
 	}
+
+	closureArg, ok := findClosureArg(cb.Parameters.Parameters)
+
+	if !ok {
+		return nil // we cannot call a go closure without user data
+	}
+
+	valueCount := len(cb.Parameters.Parameters)
 
 	if cb.ReturnValue != nil {
 		valueCount += 1
@@ -146,11 +205,11 @@ func NewCallbackGenerator(ctx gencontext.GenerationContext, cb gir.Callback) *Ca
 
 	g := &CallbackGenerator{
 		Doc:     NewGoDocGenerator(cb, 0),
-		GoName:  meta.GoBaseType,
-		CgoName: meta.CGoBaseType,
+		GoName:  callbackMeta.GoBaseType,
+		CgoName: callbackMeta.CGoBaseType,
 
-		CGoReturn:     value.NoopConverter{},
-		Values:        make(value.ConverterList, 0, valueCount),
+		CGoReturn:     nil,
+		Converters:    make(value.ConverterList, 0, valueCount),
 		CGoParameters: make(value.ConverterList, 0, valueCount),
 		GoParameters:  make(value.ConverterList, 0, valueCount),
 		GoReturns:     make(value.ConverterList, 0, valueCount),
@@ -158,42 +217,62 @@ func NewCallbackGenerator(ctx gencontext.GenerationContext, cb gir.Callback) *Ca
 
 	if cb.Parameters != nil {
 		for i, param := range cb.Parameters.Parameters {
-			conv := value.NewParamConverter(ctx, meta.GoType, i, param)
+			conv := value.NewParamConverter(ctx, value.ConvertCToGo, i, param)
 
 			if conv == nil {
 				// conversion not possible, skip callback
 				return nil
 			}
 
-			// any converter could decide to e.g. move an "out" param into the go returns, so we add them
-			// to all of the ConverterLists
-
-			g.Values = append(g.Values, conv)
 			g.CGoParameters = append(g.CGoParameters, conv)
-			g.GoParameters = append(g.GoParameters, conv)
-			g.GoReturns = append(g.GoReturns, conv)
+
+			if i == closureArg {
+				g.ClosureArg = conv.InIdentifier()
+				continue // don't convert or call go func with this argument
+			}
+
+			g.Converters = append(g.Converters, conv)
+
+			if conv.ConversionDirection() == value.ConvertGoToC {
+				// the converter turned the direction around, this is now a go return value
+				g.GoReturns = append(g.GoReturns, conv)
+			} else {
+				g.GoParameters = append(g.GoParameters, conv)
+			}
 		}
 	}
 
 	if cb.ReturnValue != nil {
-		conv := value.NewReturnConverter(ctx, *cb.ReturnValue)
+		conv := value.NewReturnConverter(ctx, value.ConvertGoToC, *cb.ReturnValue)
 
 		if conv == nil {
 			// conversion not possible, skip callback
 			return nil
 		}
 
+		g.Converters = append(g.Converters, conv)
+
 		g.CGoReturn = conv
-
-		// the converter could turn the c return into a param:
-
-		g.Values = append(g.Values, conv)
-		g.CGoParameters = append(g.CGoParameters, conv)
-		g.GoParameters = append(g.GoParameters, conv)
 		g.GoReturns = append(g.GoReturns, conv)
+	}
+
+	if cb.Throws {
+		// TODO:
+		panic("throwing callback unimplemented")
 	}
 
 	// TODO: perform common reorderings here, e.g. move context to front.
 
 	return g
+}
+
+// findClosureArg returns the index of the closure argument, and whether it was found
+func findClosureArg(params []gir.Parameter) (int, bool) {
+	for _, param := range params {
+		if param.Closure != nil {
+			return *param.Closure, true
+		}
+	}
+
+	return 0, false
 }
