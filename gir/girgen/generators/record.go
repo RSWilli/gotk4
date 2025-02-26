@@ -646,9 +646,22 @@ func NewRecordGenerator(ctx gencontext.GenerationContext, r gir.Record) *RecordG
 		}
 	}
 
+	// Disguised means opaque, so we're not supposed to access these fields.
+	if !r.Disguised {
+		for _, field := range r.Fields {
+			if getterGen := NewRecordFieldGetterGenerator(ctx, g, field); getterGen != nil {
+				g.Getters = append(g.Getters, getterGen)
+			}
+
+			if setterGen := NewRecordFieldSetterGenerator(ctx, g, field); setterGen != nil {
+				g.Setters = append(g.Setters, setterGen)
+			}
+		}
+	}
+
 	for _, method := range r.Methods {
-		if constGen := NewRecordMethodGenerator(ctx, g, method); constGen != nil {
-			g.Methods = append(g.Methods, constGen)
+		if methGen := NewRecordMethodGenerator(ctx, g, method); methGen != nil {
+			g.Methods = append(g.Methods, methGen)
 		}
 	}
 

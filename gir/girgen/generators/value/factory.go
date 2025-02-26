@@ -3,6 +3,7 @@ package value
 import (
 	"fmt"
 	"log"
+	"strings"
 
 	"github.com/diamondburned/gotk4/gir"
 	"github.com/diamondburned/gotk4/gir/gencontext"
@@ -33,8 +34,10 @@ func NewReturnConverter(ctx gencontext.GenerationContext, direction ConversionDi
 	inType := inType(meta, direction)
 	outType := outType(meta, direction)
 
-	defaultInIdent := inIdent(direction, "cret", ret.Type.Name)
-	defaultOutIdent := outIdent(direction, "cret", ret.Type.Name)
+	typename := strings.ToLower(ret.Type.Name)
+
+	defaultInIdent := inIdent(direction, "cret", typename)
+	defaultOutIdent := outIdent(direction, "cret", typename)
 
 	switch {
 	case meta.CGoBaseType == "C.gboolean":
@@ -67,14 +70,15 @@ func NewReturnConverter(ctx gencontext.GenerationContext, direction ConversionDi
 			OutTyp:    outType,
 		}
 	case *gir.Record:
-		_ = girType // TODO: the girType contains infos about the transfer mode and more
-		return &RecordConverter{
-			Direction: direction,
-			InIdent:   defaultInIdent,
-			InTyp:     inType,
-			OutIdent:  defaultOutIdent,
-			OutTyp:    outType,
-		}
+		return NewRecordConverter(
+			ctx,
+			girType,
+			direction,
+			defaultInIdent,
+			inType,
+			defaultOutIdent,
+			outType,
+		)
 	}
 
 	panic("unhandled case for returnvalue conversion: " + meta.CGoType() + " " + meta.GoType())
@@ -99,6 +103,11 @@ func NewParamConverter(ctx gencontext.GenerationContext, direction ConversionDir
 
 	guessedParamDir := types.GuessParameterOutput(&param)
 
+	if guessedParamDir == "inout" {
+		log.Println("skipping inout parameter")
+		return nil
+	}
+
 	if guessedParamDir == "out" {
 		direction = direction.Switch()
 		meta.GoPointers-- // one pointer less needed, because the converter will add it back
@@ -111,6 +120,8 @@ func NewParamConverter(ctx gencontext.GenerationContext, direction ConversionDir
 
 	// primitive cases
 	switch {
+	case meta.CGoType() == "*C.void" && param.Closure != nil && direction == ConvertCToGo:
+		fallthrough
 	case meta.CGoBaseType == "C.gpointer" && param.Closure != nil && direction == ConvertCToGo:
 		// we are converting a user_data param that should yield the function from a gbox, this is handled in the callback generator
 		return NoopConverter{
@@ -127,11 +138,17 @@ func NewParamConverter(ctx gencontext.GenerationContext, direction ConversionDir
 			OutTyp:    outType,
 		}
 	case meta.CGoBaseType == "C.guint" ||
-		meta.CGoBaseType == "C.gdouble" ||
-		meta.CGoBaseType == "C.gssize" ||
-		meta.CGoBaseType == "C.gsize" ||
+		meta.CGoBaseType == "C.gint" ||
+		meta.CGoBaseType == "C.gint64" ||
 		meta.CGoBaseType == "C.guint64" ||
-		meta.CGoBaseType == "C.guint8":
+		meta.CGoBaseType == "C.gsize" ||
+		meta.CGoBaseType == "C.gssize" ||
+		meta.CGoBaseType == "C.guint8" ||
+		meta.CGoBaseType == "C.guint16" ||
+		meta.CGoBaseType == "C.guint32" ||
+		meta.CGoBaseType == "C.gint8" ||
+		meta.CGoBaseType == "C.gdouble" ||
+		meta.CGoBaseType == "C.gfloat":
 		return &PrimitiveConverter{
 			Direction: direction,
 			InIdent:   argName,

@@ -77,7 +77,7 @@ func (g *AliasGenerator) Generate(w *file.Writer) {
 		w.GoImport(imp)
 	}
 
-	fmt.Fprintf(w.Go(), "type %s = %s\n", g.Name, g.AliasFor.GoType)
+	fmt.Fprintf(w.Go(), "type %s = %s\n", g.Name, g.AliasFor.GoType())
 }
 
 func NewAliasGenerator(ctx gencontext.GenerationContext, alias gir.Alias) *AliasGenerator {

@@ -54,7 +54,8 @@ func GenerateConstant(gen FileGeneratorWriter, constant *gir.Constant) bool {
 }
 
 type ConstantGenerator struct {
-	c    gir.Constant
+	Gir gir.Constant
+
 	Doc  Generator
 	Name string
 	// Value is directly printed, must be quoted if it's a string
@@ -85,12 +86,14 @@ func NewConstantGenerator(ctx gencontext.GenerationContext, constant gir.Constan
 
 	if resolvedType.GoType() == "string" {
 		goValue = strconv.Quote(goValue)
-	} else if resolvedType.GoBaseType == "string" && resolvedType.GoPointers > 0 {
-		panic("unhandled case: pointer to string constant")
+	}
+
+	if resolvedType.GoPointers > 0 {
+		panic("unhandled case: pointer constant")
 	}
 
 	return &ConstantGenerator{
-		c:     constant,
+		Gir:   constant,
 		Doc:   NewGoDocGenerator(constant, 0),
 		Name:  name,
 		Value: goValue,

@@ -245,6 +245,7 @@ var builtinTypeMap = map[string]string{
 	"unsigned long long": "C.ulonglong",
 
 	"none":     "",
+	"void":     "",
 	"gboolean": "bool",
 	"gfloat":   "float32",
 	"gdouble":  "float64",
