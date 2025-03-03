@@ -2,6 +2,7 @@ package generators
 
 import (
 	"fmt"
+	"log"
 	"strings"
 
 	"github.com/diamondburned/gotk4/gir"
@@ -13,10 +14,11 @@ import (
 
 type RecordConstructorGenerator struct {
 	GoName string
-	CName  string
 
 	Params value.ConverterList
 	Return value.Converter
+
+	FuncBody Generator
 }
 
 // Generate implements Generator.
@@ -31,32 +33,9 @@ func (r *RecordConstructorGenerator) Generate(w *file.Writer) {
 	fmt.Fprintf(w.Go(), "// %s constructs a struct %s.\n", r.GoName, r.Return.OutType()) // TODO: use godoc generator instead
 	fmt.Fprintf(w.Go(), "func %s(%s) %s {\n", r.GoName, r.Params.GoDeclList(), r.Return.OutType())
 
-	for _, param := range r.Params {
-		fmt.Fprintf(w.Go(), "\tvar %s %s // out\n", param.OutIdentifier(), param.OutType())
-	}
+	r.FuncBody.Generate(w)
 
-	fmt.Fprintf(w.Go(), "\tvar %s %s // in\n", r.Return.InIdentifier(), r.Return.InType())
-
-	fmt.Fprintln(w.Go())
-
-	for _, param := range r.Params {
-		fmt.Fprintln(w.Go(), param.Conversion())
-	}
-
-	// func call:
-	fmt.Fprintf(w.Go(), "\t%s = %s(%s)\n", r.Return.InIdentifier(), r.CName, r.Params.OutIdentifierList())
-
-	for _, param := range r.Params {
-		fmt.Fprintf(w.Go(), "\truntime.KeepAlive(%s)\n", param.InIdentifier())
-	}
-
-	fmt.Fprintln(w.Go())
-
-	fmt.Fprintf(w.Go(), "\tvar %s %s // out\n\n", r.Return.OutIdentifier(), r.Return.OutType())
-
-	fmt.Fprintln(w.Go(), r.Return.Conversion())
-
-	fmt.Fprintf(w.Go(), "\treturn %s\n", r.Return.OutIdentifier())
+	fmt.Fprintf(w.Go(), "\n\treturn %s\n", r.Return.OutIdentifier())
 	fmt.Fprintf(w.Go(), "}\n\n")
 }
 
@@ -70,30 +49,41 @@ func NewRecordConstructorGenerator(ctx gencontext.GenerationContext, parent *Rec
 		return nil
 	}
 
-	conv := value.NewReturnConverter(ctx, value.ConvertCToGo, *c.ReturnValue)
+	goRet := fmt.Sprintf("_%s", firstToLower(parent.GoName))
+
+	conv := value.NewReturnConverter(ctx, value.ConvertCToGo, *c.ReturnValue, "_cret", goRet)
+
+	if conv == nil {
+		return nil // cannot convert
+	}
 
 	g := &RecordConstructorGenerator{
 		GoName: goConstructorName(c.Name, parent.GoName),
-		CName:  "C." + c.CIdentifier,
 
 		Return: conv,
 	}
 
 	if c.Parameters != nil {
 		for i, param := range c.Parameters.Parameters {
-			conv := value.NewParamConverter(ctx, value.ConvertGoToC, i, param)
+
+			cArg := fmt.Sprintf("_arg%d", i+1)
+
+			conv := value.NewParamConverter(ctx, value.ConvertGoToC, param.ParameterAttrs, cArg, DodgeReservedFieldName(param.Name))
 
 			if conv == nil {
 				return nil
 			}
 
 			if conv.ConversionDirection() == value.ConvertCToGo {
-				panic("unhandled out constructor param")
+				log.Printf("skipping constructor %s (%s) because of out param\n", g.GoName, c.CIdentifier)
+				return nil
 			}
 
 			g.Params = append(g.Params, conv)
 		}
 	}
+
+	g.FuncBody = NewCallableBodyGenerator("C."+c.CIdentifier, g.Params, g.Return)
 
 	return g
 }

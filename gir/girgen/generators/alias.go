@@ -91,9 +91,11 @@ func NewAliasGenerator(ctx gencontext.GenerationContext, alias gir.Alias) *Alias
 		return nil
 	}
 
+	goName := strcases.PascalToGo(alias.Name)
+
 	return &AliasGenerator{
-		Doc:      NewGoDocGenerator(alias, 0),
-		Name:     strcases.PascalToGo(alias.Name),
+		Doc:      NewGoDocGenerator(goName, alias, 0),
+		Name:     goName,
 		AliasFor: resolvedType,
 	}
 }

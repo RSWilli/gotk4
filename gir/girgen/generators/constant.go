@@ -94,7 +94,7 @@ func NewConstantGenerator(ctx gencontext.GenerationContext, constant gir.Constan
 
 	return &ConstantGenerator{
 		Gir:   constant,
-		Doc:   NewGoDocGenerator(constant, 0),
+		Doc:   NewGoDocGenerator(name, constant, 0),
 		Name:  name,
 		Value: goValue,
 	}

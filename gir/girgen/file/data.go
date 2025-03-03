@@ -88,13 +88,13 @@ type SectionWriter interface {
 	io.ByteWriter
 }
 
-func (d *filedata) Go() io.Writer {
+func (d *filedata) Go() SectionWriter {
 	d.used = true
 
 	return &d.goContents
 }
 
-func (d *filedata) C() io.Writer {
+func (d *filedata) C() SectionWriter {
 	d.used = true
 
 	return &d.cPreamble

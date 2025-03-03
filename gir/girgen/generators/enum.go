@@ -240,9 +240,11 @@ func NewEnumGenerator(enum gir.Enum) *EnumGenerator {
 	members := make([]EnumMember, 0, len(enum.Members))
 
 	for _, member := range enum.Members {
+		goName := formatEnumMember(member) // FIXME: this causes some problems with non prefixed enums
+
 		members = append(members, EnumMember{
-			Doc:    NewGoDocGenerator(member, 1),
-			Name:   formatEnumMember(member),
+			Doc:    NewGoDocGenerator(goName, member, 1),
+			Name:   goName,
 			Value:  member.Value,
 			String: strcases.SnakeToGo(true, member.Name()),
 		})
@@ -266,7 +268,7 @@ func NewEnumGenerator(enum gir.Enum) *EnumGenerator {
 	}
 
 	return &EnumGenerator{
-		Doc:              NewGoDocGenerator(enum, 0),
+		Doc:              NewGoDocGenerator(goName, enum, 0),
 		Name:             goName,
 		IsIota:           isIota,
 		Members:          members,

@@ -8,7 +8,7 @@ import (
 )
 
 func Test(t *testing.T) {
-	w := file.NewWriter("/home/wbartel/projects/go-gst/gotk4/pkg")
+	w := file.NewWriter("/tmp")
 
 	w.SetGoPackageName("test", 1)
 

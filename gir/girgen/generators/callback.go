@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"fmt"
 	"io"
+	"log"
 	"strings"
 
 	"github.com/diamondburned/gotk4/gir"
@@ -55,11 +56,16 @@ type CallbackGenerator struct {
 	GoName  string
 	CgoName string
 
+	// CReturnType contains the actual c return type needed for the extern declare
+	CReturnType string
+	// CParamTypes contains the actual c param types needed for the extern declare
+	CParamTypes []string
+
 	// ClosureArg
 	ClosureArg string
 
 	// Converters contains all the parameter converters. These are executed in order and are used
-	// for converting the cgo parameters to go, and the go returns to cgo. This is
+	// for converting the cgo parameters to go, and the go returns to cgo.
 	Converters value.ConverterList
 
 	// CgoParameters contains the converters as Converters used to generate the cgo function signature.
@@ -89,6 +95,9 @@ func (c *CallbackGenerator) Generate(w *file.Writer) {
 func (c *CallbackGenerator) generateGo(w *file.Writer) {
 	c.Doc.Generate(w)
 
+	// FIXME: maybe this should be declared at the caller site, because it can be referenced from another package, see _gotk4_glib2_CompareDataFunc
+	fmt.Fprintf(w.C(), "extern %s %s(%s);\n", c.CReturnType, c.CgoName, strings.Join(c.CParamTypes, ", "))
+
 	ret := c.GoReturns.GoDeclList()
 
 	if ret != "" {
@@ -108,7 +117,7 @@ func (c *CallbackGenerator) generateExport(w *file.Writer) {
 	cret := ""
 	if c.CGoReturn != nil {
 		// CGoReturn converts go->c, so the values are in "Out"
-		cret = fmt.Sprintf(" (%s %s)", c.CGoReturn.OutIdentifier(), c.CGoReturn.OutType())
+		cret = fmt.Sprintf(" (%s %s)", c.CReturnType, c.CGoReturn.OutType())
 	}
 
 	fmt.Fprintf(w.Exported.Go(), "func %s(%s)%s {\n", c.CgoName, c.CGoParameters.CDeclList(), cret)
@@ -198,15 +207,17 @@ func NewCallbackGenerator(ctx gencontext.GenerationContext, cb gir.Callback) *Ca
 	}
 
 	if cb.Parameters != nil && cb.Parameters.InstanceParameter != nil {
-		// valueCount += 1
-
 		panic("unimplemented instance param for callbacks")
 	}
 
+	var docParams []ParamDoc
+	var docReturns []ParamDoc
+
 	g := &CallbackGenerator{
-		Doc:     NewGoDocGenerator(cb, 0),
 		GoName:  callbackMeta.GoBaseType,
 		CgoName: callbackMeta.CGoBaseType,
+
+		CReturnType: "void",
 
 		CGoReturn:     nil,
 		Converters:    make(value.ConverterList, 0, valueCount),
@@ -217,12 +228,26 @@ func NewCallbackGenerator(ctx gencontext.GenerationContext, cb gir.Callback) *Ca
 
 	if cb.Parameters != nil {
 		for i, param := range cb.Parameters.Parameters {
-			conv := value.NewParamConverter(ctx, value.ConvertCToGo, i, param)
+
+			ctype, isArray := value.AnyTypeC(param.AnyType)
+
+			if isArray {
+				// TODO: handle array types
+				log.Printf("skipping callback %s (%s) because of array param", g.GoName, g.CgoName)
+				return nil
+			}
+
+			cname := fmt.Sprintf("arg%d", i+1)
+			goname := fmt.Sprintf("_%s", param.Name)
+
+			conv := value.NewParamConverter(ctx, value.ConvertCToGo, param.ParameterAttrs, cname, goname)
 
 			if conv == nil {
 				// conversion not possible, skip callback
 				return nil
 			}
+
+			g.CParamTypes = append(g.CParamTypes, ctype)
 
 			g.CGoParameters = append(g.CGoParameters, conv)
 
@@ -236,30 +261,50 @@ func NewCallbackGenerator(ctx gencontext.GenerationContext, cb gir.Callback) *Ca
 			if conv.ConversionDirection() == value.ConvertGoToC {
 				// the converter turned the direction around, this is now a go return value
 				g.GoReturns = append(g.GoReturns, conv)
+				docReturns = append(docReturns, ParamDocFromParameter(conv.InIdentifier(), param))
 			} else {
 				g.GoParameters = append(g.GoParameters, conv)
+				docParams = append(docParams, ParamDocFromParameter(conv.OutIdentifier(), param))
 			}
 		}
 	}
 
-	if cb.ReturnValue != nil {
-		conv := value.NewReturnConverter(ctx, value.ConvertGoToC, *cb.ReturnValue)
+	if cb.ReturnValue != nil && !value.IsVoid(cb.ReturnValue.AnyType) {
+		ctype, isArray := value.AnyTypeC(cb.ReturnValue.AnyType)
+
+		if isArray {
+			log.Printf("skipping %s (%s) because of array return\n", g.GoName, cb.Name)
+			return nil // TODO: handle array return type
+		}
+
+		goname := fmt.Sprintf("_%s", firstToLower(ctype))
+
+		if ctype == "gboolean" {
+			goname = "ok"
+		}
+
+		conv := value.NewReturnConverter(ctx, value.ConvertGoToC, *cb.ReturnValue, "cret", goname)
 
 		if conv == nil {
 			// conversion not possible, skip callback
 			return nil
 		}
 
+		g.CReturnType = cb.ReturnValue.AnyType.Type.CType
+
 		g.Converters = append(g.Converters, conv)
 
 		g.CGoReturn = conv
 		g.GoReturns = append(g.GoReturns, conv)
+
+		docReturns = append(docReturns, ParamDocFromReturn(conv.InIdentifier(), *cb.ReturnValue))
 	}
 
 	if cb.Throws {
-		// TODO:
 		panic("throwing callback unimplemented")
 	}
+
+	g.Doc = NewCallableGoDocGenerator(g.GoName, cb, 0, docParams, docReturns)
 
 	// TODO: perform common reorderings here, e.g. move context to front.
 

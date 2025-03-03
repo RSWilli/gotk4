@@ -245,9 +245,10 @@ func NewBitfieldGenerator(b gir.Bitfield) *BitfieldGenerator {
 	maxStrLen := 0
 
 	for i, m := range b.Members {
+		goName := formatEnumMember(m)
 		mm := BitfieldMember{
-			Doc:       NewGoDocGenerator(m, 1),
-			Name:      formatEnumMember(m),
+			Doc:       NewGoDocGenerator(goName, m, 1),
+			Name:      goName,
 			ShortName: strcases.SnakeToGo(true, m.Name()),
 			Value:     bits(m.Value),
 		}
@@ -270,7 +271,7 @@ func NewBitfieldGenerator(b gir.Bitfield) *BitfieldGenerator {
 	}
 
 	return &BitfieldGenerator{
-		Doc:             NewGoDocGenerator(b, 0),
+		Doc:             NewGoDocGenerator(goName, b, 0),
 		Name:            goName,
 		Members:         members,
 		MethodReceiver:  strcases.FirstLetter(goName),

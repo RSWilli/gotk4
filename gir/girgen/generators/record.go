@@ -582,6 +582,17 @@ type RecordGenerator struct {
 	GoNamePrivate     string
 	GenerateMarshaler bool
 
+	// unsafe constructors names:
+	GoUnsafeFromGlibBorrowName string
+	GoUnsafeFromGlibFullName   string
+	GoUnsafeFromGlibNoneName   string
+
+	CgoRefFunction   string
+	CgoUnrefFunction string
+
+	// infos used by sub generators:
+	ReceiverName string
+
 	// sub generators:
 	Constructors GeneratorList
 	Getters      GeneratorList
@@ -590,6 +601,13 @@ type RecordGenerator struct {
 }
 
 func (g *RecordGenerator) Generate(w *file.Writer) {
+	if g.CgoUnrefFunction == "" {
+		panic("cannot generate record without an unref method")
+	}
+
+	w.GoImport("unsafe")
+	w.GoImport("runtime")
+
 	g.Doc.Generate(w)
 
 	fmt.Fprintf(w.Go(), "type %s struct {\n", g.GoName)
@@ -602,13 +620,42 @@ func (g *RecordGenerator) Generate(w *file.Writer) {
 	fmt.Fprintf(w.Go(), "}\n\n")
 
 	if g.GenerateMarshaler {
-		w.GoImport("unsafe")
-
 		fmt.Fprintf(w.Go(), "func marshal%s(p uintptr) (interface{}, error) {\n", g.GoName)
 		fmt.Fprintf(w.Go(), "\tb := coreglib.ValueFromNative(unsafe.Pointer(p)).Boxed()\n")
-		fmt.Fprintf(w.Go(), "\treturn &%s{&%s{(*%s)(b)}}, nil\n", g.GoName, g.GoNamePrivate, g.CGoType)
+		fmt.Fprintf(w.Go(), "\treturn %s(b), nil\n", g.GoUnsafeFromGlibBorrowName) // TODO: does this need to be a copy?
 		fmt.Fprintf(w.Go(), "}\n\n")
 	}
+
+	fmt.Fprintf(w.Go(), "// %s is used to convert raw %s pointers to go. This is used by the bindings internally.\n", g.GoUnsafeFromGlibNoneName, g.CGoType)
+	fmt.Fprintf(w.Go(), "func %s(p unsafe.Pointer) *%s {\n", g.GoUnsafeFromGlibBorrowName, g.GoName)
+	fmt.Fprintf(w.Go(), "\treturn &%s{&%s{(*%s)(p)}}\n", g.GoName, g.GoNamePrivate, g.CGoType)
+	fmt.Fprintf(w.Go(), "}\n\n")
+
+	mkFinalizer := func() {
+		fmt.Fprintf(w.Go(), "\truntime.SetFinalizer(\n")
+		fmt.Fprintf(w.Go(), "\t\twrapped.%s,\n", g.GoNamePrivate)
+		fmt.Fprintf(w.Go(), "\t\tfunc (intern *%s) {\n", g.GoNamePrivate)
+		fmt.Fprintf(w.Go(), "\t\t\t%s(intern.native)\n", g.CgoUnrefFunction)
+		fmt.Fprintf(w.Go(), "\t\t},\n")
+		fmt.Fprintf(w.Go(), "\t)\n")
+	}
+
+	if g.CgoRefFunction != "" {
+		fmt.Fprintf(w.Go(), "// %s is used to convert raw %s pointers to go while taking a reference. This is used by the bindings internally.\n", g.GoUnsafeFromGlibNoneName, g.CGoType)
+		fmt.Fprintf(w.Go(), "func %s(p unsafe.Pointer) *%s {\n", g.GoUnsafeFromGlibNoneName, g.GoName)
+		fmt.Fprintf(w.Go(), "\t%s(p)\n", g.CgoRefFunction)
+		fmt.Fprintf(w.Go(), "\twrapped := %s(p)\n", g.GoUnsafeFromGlibBorrowName)
+		mkFinalizer()
+		fmt.Fprintf(w.Go(), "\treturn wrapped\n")
+		fmt.Fprintf(w.Go(), "}\n\n")
+	}
+
+	fmt.Fprintf(w.Go(), "// %s is used to convert raw %s pointers to go while taking a reference. This is used by the bindings internally.\n", g.GoUnsafeFromGlibFullName, g.CGoType)
+	fmt.Fprintf(w.Go(), "func %s(p unsafe.Pointer) *%s {\n", g.GoUnsafeFromGlibFullName, g.GoName)
+	fmt.Fprintf(w.Go(), "\twrapped := %s(p)\n", g.GoUnsafeFromGlibBorrowName)
+	mkFinalizer()
+	fmt.Fprintf(w.Go(), "\treturn wrapped\n")
+	fmt.Fprintf(w.Go(), "}\n\n")
 
 	GenerateAll(
 		w,
@@ -617,6 +664,11 @@ func (g *RecordGenerator) Generate(w *file.Writer) {
 		g.Setters,
 		g.Methods,
 	)
+
+	fmt.Fprintf(w.Go(), "// Unsafe returns the underlying C pointer. This is used by the bindings internally.\n")
+	fmt.Fprintf(w.Go(), "func (%s *%s) Unsafe() unsafe.Pointer {\n", g.ReceiverName, g.GoName)
+	fmt.Fprintf(w.Go(), "\treturn unsafe.Pointer(%s.native)\n", g.ReceiverName)
+	fmt.Fprintf(w.Go(), "}\n\n")
 }
 
 func NewRecordGenerator(ctx gencontext.GenerationContext, r gir.Record) *RecordGenerator {
@@ -633,11 +685,17 @@ func NewRecordGenerator(ctx gencontext.GenerationContext, r gir.Record) *RecordG
 	goPrivate := firstToLower(meta.GoBaseType)
 
 	g := &RecordGenerator{
-		Doc:               NewGoDocGenerator(r, 0),
-		GoName:            meta.GoBaseType,
-		CGoType:           meta.CGoBaseType,
-		GoNamePrivate:     goPrivate,
-		GenerateMarshaler: r.GLibGetType != "",
+		Doc:                        NewGoDocGenerator(meta.GoBaseType, r, 0),
+		GoName:                     meta.GoBaseType,
+		GoUnsafeFromGlibBorrowName: fmt.Sprintf("NewUnsafe%sFromGlibBorrow", meta.GoBaseType),
+		GoUnsafeFromGlibNoneName:   fmt.Sprintf("NewUnsafe%sFromGlibNone", meta.GoBaseType),
+		GoUnsafeFromGlibFullName:   fmt.Sprintf("NewUnsafe%sFromGlibFull", meta.GoBaseType),
+		CgoUnrefFunction:           "C.free", // replaced below if an unref method is found
+		CGoType:                    meta.CGoBaseType,
+		GoNamePrivate:              goPrivate,
+		GenerateMarshaler:          r.GLibGetType != "",
+
+		ReceiverName: strcases.FirstLetter(meta.GoBaseType),
 	}
 
 	for _, constructor := range r.Constructors {
@@ -660,6 +718,16 @@ func NewRecordGenerator(ctx gencontext.GenerationContext, r gir.Record) *RecordG
 	}
 
 	for _, method := range r.Methods {
+		if method.Name == "ref" || strings.HasSuffix(method.Name, "_ref") {
+			g.CgoRefFunction = "C." + method.CIdentifier
+			continue
+		}
+
+		if method.Name == "unref" || strings.HasSuffix(method.Name, "_unref") {
+			g.CgoUnrefFunction = "C." + method.CIdentifier
+			continue
+		}
+
 		if methGen := NewRecordMethodGenerator(ctx, g, method); methGen != nil {
 			g.Methods = append(g.Methods, methGen)
 		}

@@ -3,90 +3,45 @@ package value
 import (
 	"fmt"
 	"log"
-	"strings"
 
 	"github.com/diamondburned/gotk4/gir"
 	"github.com/diamondburned/gotk4/gir/gencontext"
-	"github.com/diamondburned/gotk4/gir/girgen/types"
 	"github.com/diamondburned/gotk4/gir/girgen/typesystem"
 )
 
-func NewInstanceParamConverter(ctx gencontext.GenerationContext, param gir.InstanceParameter) Converter {
-	panic("unimplemented")
+func NewInstanceParamConverter(ctx gencontext.GenerationContext, direction ConversionDirection, param gir.InstanceParameter, cIdent, goIdent string) Converter {
+	return NewParamConverter(ctx, direction, gir.ParameterAttrs{
+		Closure:  param.Closure,
+		Destroy:  param.Destroy,
+		Scope:    param.Scope,
+		Skip:     param.Skip,
+		Nullable: param.Nullable,
+		Optional: param.Skip,
+
+		TransferOwnership: param.TransferOwnership,
+		AnyType:           param.AnyType,
+		Doc:               param.Doc,
+	}, cIdent, goIdent)
 }
 
-func NewReturnConverter(ctx gencontext.GenerationContext, direction ConversionDirection, ret gir.ReturnValue) Converter {
-	if ret.AnyType.Type == nil {
-		log.Println("skipping array return type")
-		return nil // TODO: handle array types
-	}
+func NewReturnConverter(ctx gencontext.GenerationContext, direction ConversionDirection, ret gir.ReturnValue, cIdent, goIdent string) Converter {
+	return NewParamConverter(ctx, direction, gir.ParameterAttrs{
+		Closure:  ret.Closure,
+		Destroy:  ret.Destroy,
+		Scope:    ret.Scope,
+		Skip:     ret.Skip,
+		Nullable: ret.Nullable,
+		Optional: ret.Skip,
 
-	if ret.Type.Name == "none" {
-		return NoopConverter{}
-	}
-
-	meta := ctx.LookupType(ret.Type.CType)
-
-	if meta == nil {
-		return nil // unknown type
-	}
-
-	inType := inType(meta, direction)
-	outType := outType(meta, direction)
-
-	typename := strings.ToLower(ret.Type.Name)
-
-	defaultInIdent := inIdent(direction, "cret", typename)
-	defaultOutIdent := outIdent(direction, "cret", typename)
-
-	switch {
-	case meta.CGoBaseType == "C.gboolean":
-		return &BooleanConverter{
-			Direction: direction,
-			InIdent:   inIdent(direction, "cret", "ok"),
-			InTyp:     inType,
-			OutIdent:  outIdent(direction, "cret", "ok"),
-			OutTyp:    outType,
-		}
-	case meta.GoType() == "string":
-		return &StringConverter{
-			Direction: direction,
-			InIdent:   defaultInIdent,
-			InTyp:     inType,
-			OutIdent:  defaultOutIdent,
-			OutTyp:    outType,
-		}
-	case meta.CGoBaseType == "C.gpointer":
-		return nil // cannot convert gpointer
-	}
-
-	switch girType := meta.GirType.(type) {
-	case *gir.Enum:
-		return &EnumConverter{
-			Direction: direction,
-			InIdent:   defaultInIdent,
-			InTyp:     inType,
-			OutIdent:  defaultOutIdent,
-			OutTyp:    outType,
-		}
-	case *gir.Record:
-		return NewRecordConverter(
-			ctx,
-			girType,
-			direction,
-			defaultInIdent,
-			inType,
-			defaultOutIdent,
-			outType,
-		)
-	}
-
-	panic("unhandled case for returnvalue conversion: " + meta.CGoType() + " " + meta.GoType())
+		TransferOwnership: ret.TransferOwnership,
+		AnyType:           ret.AnyType,
+		Doc:               ret.Doc,
+	}, cIdent, goIdent)
 }
 
 // NewParamConverter creates an appropriate converter for the given param. The index is used to allow the converter
 // to create unique variable names for the conversion
-func NewParamConverter(ctx gencontext.GenerationContext, direction ConversionDirection, paramindex int, param gir.Parameter) Converter {
+func NewParamConverter(ctx gencontext.GenerationContext, direction ConversionDirection, param gir.ParameterAttrs, cIdent, goIdent string) Converter {
 	if param.AnyType.Type == nil {
 		log.Println("skipping array param")
 		return nil // TODO: handle array types
@@ -98,22 +53,25 @@ func NewParamConverter(ctx gencontext.GenerationContext, direction ConversionDir
 		return nil // unknown type
 	}
 
-	argName := fmt.Sprintf("arg%d", paramindex+1)
-	outName := param.Name // FIXME: maybe this is better? fmt.Sprintf("_%s", param.Name)
-
-	guessedParamDir := types.GuessParameterOutput(&param)
+	guessedParamDir := guessParameterOutput(param)
 
 	if guessedParamDir == "inout" {
 		log.Println("skipping inout parameter")
 		return nil
 	}
 
+	if guessedParamDir == "out" && meta.CGoPointers <= 1 {
+		log.Println("skipping out param without enough pointers")
+		return nil
+	}
+
 	if guessedParamDir == "out" {
 		direction = direction.Switch()
 		meta.GoPointers-- // one pointer less needed, because the converter will add it back
-
-		argName, outName = outName, argName
 	}
+
+	inIdent := inIdentByDir(direction, cIdent, goIdent)
+	outIdent := outIdentByDir(direction, cIdent, goIdent)
 
 	inType := inType(meta, direction)
 	outType := outType(meta, direction)
@@ -126,34 +84,44 @@ func NewParamConverter(ctx gencontext.GenerationContext, direction ConversionDir
 		// we are converting a user_data param that should yield the function from a gbox, this is handled in the callback generator
 		return NoopConverter{
 			dir:    direction,
-			inName: argName,
+			inName: inIdent,
 			inType: inType,
 		}
 	case meta.CGoBaseType == "C.gboolean":
 		return &BooleanConverter{
 			Direction: direction,
-			InIdent:   argName,
+			InIdent:   inIdent,
 			InTyp:     inType,
-			OutIdent:  "ok",
+			OutIdent:  outIdent,
 			OutTyp:    outType,
 		}
 	case meta.CGoBaseType == "C.guint" ||
-		meta.CGoBaseType == "C.gint" ||
-		meta.CGoBaseType == "C.gint64" ||
-		meta.CGoBaseType == "C.guint64" ||
-		meta.CGoBaseType == "C.gsize" ||
-		meta.CGoBaseType == "C.gssize" ||
 		meta.CGoBaseType == "C.guint8" ||
 		meta.CGoBaseType == "C.guint16" ||
 		meta.CGoBaseType == "C.guint32" ||
+		meta.CGoBaseType == "C.guint64" ||
+		meta.CGoBaseType == "C.gint" ||
 		meta.CGoBaseType == "C.gint8" ||
+		meta.CGoBaseType == "C.gint16" ||
+		meta.CGoBaseType == "C.gint32" ||
+		meta.CGoBaseType == "C.gint64" ||
+		meta.CGoBaseType == "C.gsize" ||
+		meta.CGoBaseType == "C.gssize" ||
 		meta.CGoBaseType == "C.gdouble" ||
 		meta.CGoBaseType == "C.gfloat":
 		return &PrimitiveConverter{
 			Direction: direction,
-			InIdent:   argName,
+			InIdent:   inIdent,
 			InTyp:     inType,
-			OutIdent:  outName,
+			OutIdent:  outIdent,
+			OutTyp:    outType,
+		}
+	case meta.GoType() == "string":
+		return &StringConverter{
+			Direction: direction,
+			InIdent:   inIdent,
+			InTyp:     inType,
+			OutIdent:  outIdent,
 			OutTyp:    outType,
 		}
 	}
@@ -169,46 +137,46 @@ func NewParamConverter(ctx gencontext.GenerationContext, direction ConversionDir
 			ctx,
 			girType,
 			direction,
-			argName,
+			inIdent,
 			inType,
-			outName,
+			outIdent,
 			outType,
 		)
 	case *gir.Class:
 		return &ClassConverter{
 			Direction: direction,
-			InIdent:   argName,
+			InIdent:   inIdent,
 			InTyp:     inType,
-			OutIdent:  outName,
+			OutIdent:  outIdent,
 			OutTyp:    outType,
 		}
 	case *gir.Alias:
 		return &AliasConverter{
 			Direction: direction,
-			InIdent:   argName,
+			InIdent:   inIdent,
 			InTyp:     inType,
-			OutIdent:  outName,
+			OutIdent:  outIdent,
 			OutTyp:    outType,
 		}
 	case *gir.Enum:
 		return &EnumConverter{
 			Direction: direction,
-			InIdent:   argName,
+			InIdent:   inIdent,
 			InTyp:     inType,
-			OutIdent:  outName,
+			OutIdent:  outIdent,
 			OutTyp:    outType,
 		}
 	case *gir.Bitfield:
 		return &BitfieldConverter{
 			Direction: direction,
-			InIdent:   argName,
+			InIdent:   inIdent,
 			InTyp:     inType,
-			OutIdent:  outName,
+			OutIdent:  outIdent,
 			OutTyp:    outType,
 		}
 	}
 
-	panic("unhandled case for parameter conversion: " + meta.CGoBaseType + " " + meta.GoBaseType)
+	panic("unhandled case for conversion: " + meta.CGoBaseType + " " + meta.GoBaseType)
 }
 
 func inType(meta *typesystem.TypeMetadata, dir ConversionDirection) string {
@@ -233,7 +201,7 @@ func outType(meta *typesystem.TypeMetadata, dir ConversionDirection) string {
 	}
 }
 
-func inIdent(dir ConversionDirection, cIndent, goIndent string) string {
+func inIdentByDir(dir ConversionDirection, cIndent, goIndent string) string {
 	switch dir {
 	case ConvertCToGo:
 		return cIndent
@@ -244,7 +212,7 @@ func inIdent(dir ConversionDirection, cIndent, goIndent string) string {
 	}
 }
 
-func outIdent(dir ConversionDirection, cIndent, goIndent string) string {
+func outIdentByDir(dir ConversionDirection, cIndent, goIndent string) string {
 	switch dir {
 	case ConvertCToGo:
 		return goIndent

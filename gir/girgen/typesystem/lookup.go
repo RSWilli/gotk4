@@ -38,6 +38,8 @@ type TypeMetadata struct {
 	CGoBaseType     string
 	RequiredImports []string
 
+	IsCastable bool
+
 	GirType any
 }
 
@@ -51,6 +53,8 @@ func (tm TypeMetadata) CGoType() string {
 
 // LookupType finds a type in the registry and attaches metadata needed for generation. The typestring must be versioned or primitive.
 func (r *Registry) LookupType(typ string) *TypeMetadata {
+	typ = strings.TrimPrefix(typ, "const ")
+
 	parts := strings.Split(typ, ".")
 
 	if len(parts) > 1 {
@@ -67,6 +71,8 @@ func (r *Registry) LookupType(typ string) *TypeMetadata {
 // LookupType finds a type from within a namespace. Will only resolve the types known to the namespace. The type must not be versioned,
 // instead the correct version of the include from the namespace is taken.
 func (n *namespace) LookupType(typ string) *TypeMetadata {
+	typ = strings.TrimPrefix(typ, "const ")
+
 	// some types with pointers are not pointer types in go, e.g. gchar*
 	if t := lookupPrimitive(typ); t != nil {
 		return t
@@ -102,6 +108,8 @@ func (n *namespace) LookupType(typ string) *TypeMetadata {
 	}
 
 	if t := lookupPrimitive(parts[0]); t != nil {
+		t.CGoPointers += pointers
+		t.GoPointers += pointers
 		return t
 	}
 
@@ -113,6 +121,7 @@ func (n *namespace) LookupType(typ string) *TypeMetadata {
 				GoBaseType:  strcases.PascalToGo(girType.Name),
 				CGoBaseType: ctypeToCGo(baseType),
 				GirType:     &girType,
+				IsCastable:  true,
 			}
 		}
 	}
@@ -153,6 +162,7 @@ func (n *namespace) LookupType(typ string) *TypeMetadata {
 				GoBaseType:  strcases.PascalToGo(girType.Name),
 				CGoBaseType: ctypeToCGo(baseType),
 				GirType:     &girType,
+				IsCastable:  true,
 			}
 		}
 	}
@@ -205,6 +215,27 @@ func (n *namespace) LookupType(typ string) *TypeMetadata {
 				CGoBaseType: ctypeToCGo(baseType),
 				GirType:     &girType,
 			}
+		}
+	}
+
+	if meta == nil && n.name != "GObject" {
+
+		// special case: GObject types are referenced without a namespace prefix
+		if reffedNS, ok := n.includes["GObject"]; ok {
+			log.Printf("trying fallback to GObject.%s\n", typ)
+
+			t := reffedNS.LookupType(typ)
+
+			if t == nil {
+				return nil
+			}
+
+			// and attach the required import:
+			t.RequiredImports = append(t.RequiredImports, reffedNS.goImportPath)
+			// the imported package is also needed for the type name:
+			t.GoBaseType = reffedNS.goPackageName + "." + t.GoBaseType
+
+			return t
 		}
 	}
 
@@ -280,9 +311,10 @@ func lookupPrimitive(t string) *TypeMetadata {
 	if base == "gchar" && ptrs >= 1 {
 		return &TypeMetadata{
 			GoBaseType:  "string",
-			CGoBaseType: base,
+			CGoBaseType: "C." + base,
 			GoPointers:  ptrs - 1,
 			CGoPointers: ptrs,
+			IsCastable:  false,
 		}
 	}
 
@@ -292,6 +324,7 @@ func lookupPrimitive(t string) *TypeMetadata {
 			CGoBaseType: ctypeToCGo(base),
 			GoPointers:  ptrs,
 			CGoPointers: ptrs,
+			IsCastable:  goType != "string",
 		}
 
 		return meta
@@ -303,12 +336,14 @@ func lookupPrimitive(t string) *TypeMetadata {
 			GoBaseType:      "unsafe.Pointer",
 			CGoBaseType:     "C.gpointer",
 			RequiredImports: []string{"unsafe"},
+			IsCastable:      true,
 		}
 	case "gconstpointer":
 		return &TypeMetadata{
 			GoBaseType:      "unsafe.Pointer",
 			CGoBaseType:     "C.gconstpointer",
 			RequiredImports: []string{"unsafe"},
+			IsCastable:      true,
 		}
 	}
 
