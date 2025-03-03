@@ -1,6 +1,7 @@
 package value
 
 import (
+	"regexp"
 	"strings"
 
 	"github.com/diamondburned/gotk4/gir"
@@ -53,4 +54,10 @@ func IsVoid(anyT gir.AnyType) bool {
 	}
 
 	return t == "void"
+}
+
+var validGoIndentRegex = regexp.MustCompile("^[a-zA-Z_][a-zA-Z_0-9]*$")
+
+func isValidGoIndent(indent string) bool {
+	return validGoIndentRegex.Match([]byte(indent))
 }

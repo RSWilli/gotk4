@@ -42,6 +42,11 @@ func NewReturnConverter(ctx gencontext.GenerationContext, direction ConversionDi
 // NewParamConverter creates an appropriate converter for the given param. The index is used to allow the converter
 // to create unique variable names for the conversion
 func NewParamConverter(ctx gencontext.GenerationContext, direction ConversionDirection, param gir.ParameterAttrs, cIdent, goIdent string) Converter {
+	if !isValidGoIndent(cIdent) || !isValidGoIndent(goIdent) {
+		log.Println("skipping because identifier contains invalid chars")
+		return nil
+	}
+
 	if param.AnyType.Type == nil {
 		log.Println("skipping array param")
 		return nil // TODO: handle array types
@@ -60,7 +65,7 @@ func NewParamConverter(ctx gencontext.GenerationContext, direction ConversionDir
 		return nil
 	}
 
-	if guessedParamDir == "out" && meta.CGoPointers <= 1 {
+	if guessedParamDir == "out" && meta.CGoPointers < 1 {
 		log.Println("skipping out param without enough pointers")
 		return nil
 	}

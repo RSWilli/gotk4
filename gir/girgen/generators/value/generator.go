@@ -77,7 +77,7 @@ func (list ConverterList) CDeclList() string {
 	})
 }
 
-// CDeclList returns the c declarations comma separated
+// GoDeclList returns the go declarations comma separated
 func (list ConverterList) GoDeclList() string {
 	return list.makeCommaSeparated(func(c Converter) string {
 		var ident, typ string
@@ -103,6 +103,16 @@ func (list ConverterList) InIdentifierList() string {
 // OutIdentifierList returns all "Out" identifiers comma separated
 func (list ConverterList) OutIdentifierList() string {
 	return list.makeCommaSeparated((Converter).OutIdentifier)
+}
+
+// InTypeList returns all "In" types comma separated
+func (list ConverterList) InTypeList() string {
+	return list.makeCommaSeparated((Converter).InType)
+}
+
+// OutTypeList returns all "Out" types comma separated
+func (list ConverterList) OutTypeList() string {
+	return list.makeCommaSeparated((Converter).OutType)
 }
 
 // makeCommaSeparated returns a comma separated list of the non empty strings returned by the accessor function

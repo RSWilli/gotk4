@@ -669,6 +669,12 @@ func (g *RecordGenerator) Generate(w *file.Writer) {
 	fmt.Fprintf(w.Go(), "func (%s *%s) Unsafe() unsafe.Pointer {\n", g.ReceiverName, g.GoName)
 	fmt.Fprintf(w.Go(), "\treturn unsafe.Pointer(%s.native)\n", g.ReceiverName)
 	fmt.Fprintf(w.Go(), "}\n\n")
+
+	fmt.Fprintf(w.Go(), "// UnsafeTransferFull returns the underlying C pointer. This is used by the bindings internally.\n")
+	fmt.Fprintf(w.Go(), "func (%s *%s) UnsafeTransferFull() unsafe.Pointer {\n", g.ReceiverName, g.GoName)
+	fmt.Fprintf(w.Go(), "\truntime.SetFinalizer(%s.%s, nil)\n", g.ReceiverName, g.GoNamePrivate)
+	fmt.Fprintf(w.Go(), "\treturn unsafe.Pointer(%s.native)\n", g.ReceiverName)
+	fmt.Fprintf(w.Go(), "}\n\n")
 }
 
 func NewRecordGenerator(ctx gencontext.GenerationContext, r gir.Record) *RecordGenerator {

@@ -36,10 +36,12 @@ type RecordMethodGenerator struct {
 func (m *RecordMethodGenerator) Generate(w *file.Writer) {
 	m.Doc.Generate(w)
 
-	ret := m.GoReturns.GoDeclList()
+	var ret string
 
-	if ret != "" {
-		ret = " (" + ret + ")"
+	if len(m.GoReturns) == 1 {
+		ret = " " + m.GoReturns[0].OutType()
+	} else if len(m.GoReturns) > 1 {
+		ret = "(" + m.GoReturns.OutTypeList() + ")"
 	}
 
 	fmt.Fprintf(w.Go(), "func (%s *%s) %s(%s)%s {\n", m.GoReceiver.InIdentifier(), m.parent.GoName, m.GoName, m.GoParameters.GoDeclList(), ret)
