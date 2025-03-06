@@ -85,7 +85,7 @@ func NewAliasGenerator(ctx gencontext.GenerationContext, alias gir.Alias) *Alias
 		return nil
 	}
 
-	resolvedType := ctx.LookupType(alias.Type.CType)
+	resolvedType := ctx.LookupType(alias.Name, "")
 
 	if resolvedType == nil {
 		return nil

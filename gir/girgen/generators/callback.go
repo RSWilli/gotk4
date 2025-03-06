@@ -184,7 +184,7 @@ func NewCallbackGenerator(ctx gencontext.GenerationContext, cb gir.Callback) *Ca
 		return nil
 	}
 
-	callbackMeta := ctx.LookupType(cb.Name)
+	callbackMeta := ctx.LookupType(cb.Name, "")
 
 	if callbackMeta == nil {
 		return nil

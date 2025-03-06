@@ -12,7 +12,7 @@ import (
 
 // InfoFields contains common fields that a GIR schema type may contain.
 type InfoFields struct {
-	CName      *string
+	CName      string
 	Attrs      *gir.InfoAttrs
 	Elements   *gir.InfoElements
 	Parameters *gir.Parameters
@@ -25,51 +25,59 @@ func GetInfoFields(v interface{}) InfoFields {
 
 	switch t := v.(type) {
 	case gir.Alias:
-		inf.CName = &t.CType
+		inf.CName = t.CType
 		inf.Attrs = &t.InfoAttrs
 		inf.Elements = &t.InfoElements
 	case gir.Bitfield:
-		inf.CName = &t.CType
+		inf.CName = t.CType
 		inf.Attrs = &t.InfoAttrs
 		inf.Elements = &t.InfoElements
 	case gir.Class:
-		inf.CName = &t.CType
+		inf.CName = t.CType
 		inf.Attrs = &t.InfoAttrs
 		inf.Elements = &t.InfoElements
 	case gir.Interface:
-		inf.CName = &t.CType
+		inf.CName = t.CType
 		inf.Attrs = &t.InfoAttrs
 		inf.Elements = &t.InfoElements
 	case gir.Record:
-		inf.CName = &t.CType
+		inf.CName = t.CType
 		inf.Attrs = &t.InfoAttrs
 		inf.Elements = &t.InfoElements
 	case gir.Union:
-		inf.CName = &t.CType
+		inf.CName = t.CType
 		inf.Attrs = &t.InfoAttrs
 		inf.Elements = &t.InfoElements
 	case gir.Enum:
-		inf.CName = &t.CType
+		inf.CName = t.CType
+		inf.Attrs = &t.InfoAttrs
+		inf.Elements = &t.InfoElements
+	case gir.Member:
+		inf.CName = t.CIdentifier
+		inf.Attrs = &t.InfoAttrs
+		inf.Elements = &t.InfoElements
+	case gir.Constant:
+		inf.CName = t.Name
 		inf.Attrs = &t.InfoAttrs
 		inf.Elements = &t.InfoElements
 	case gir.Field:
-		inf.CName = &t.Name
+		inf.CName = t.Name
 
 	// Callables:
 	case gir.Callback:
-		inf.CName = &t.CIdentifier
+		inf.CName = t.CIdentifier
 		inf.Attrs = &t.InfoAttrs
 		inf.Elements = &t.InfoElements
 	case gir.Function:
-		inf.CName = &t.CIdentifier
+		inf.CName = t.CIdentifier
 		inf.Attrs = &t.InfoAttrs
 		inf.Elements = &t.InfoElements
 	case gir.Method:
-		inf.CName = &t.CIdentifier
+		inf.CName = t.CIdentifier
 		inf.Attrs = &t.InfoAttrs
 		inf.Elements = &t.InfoElements
 	case gir.VirtualMethod:
-		inf.CName = &t.CIdentifier
+		inf.CName = t.CIdentifier
 		inf.Attrs = &t.InfoAttrs
 		inf.Elements = &t.InfoElements
 	default:
@@ -99,9 +107,11 @@ func (docg *GoDocGenerator) Generate(w *file.Writer) {
 }
 
 func NewGoDocGenerator(goName string, girWithDoc any, indent int) *GoDocGenerator {
+	info := GetInfoFields(girWithDoc)
+
 	return &GoDocGenerator{
 		Indentation: indent,
-		DocString:   fmt.Sprintf("%s should be documented more", goName),
+		DocString:   fmt.Sprintf("%s (%s) should be documented more", goName, info.CName),
 	}
 }
 
@@ -123,6 +133,14 @@ func ParamDocFromReturn(goName string, r gir.ReturnValue) ParamDoc {
 		Name:     goName,
 		Optional: false,
 		Doc:      doc,
+	}
+}
+
+func ParamDocFromThrow(goName string) ParamDoc {
+	return ParamDoc{
+		Name:     goName,
+		Optional: true,
+		Doc:      "an error",
 	}
 }
 

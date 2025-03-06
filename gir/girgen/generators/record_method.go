@@ -147,7 +147,15 @@ func NewRecordMethodGenerator(ctx gencontext.GenerationContext, parent *RecordGe
 	}
 
 	if m.Throws {
-		panic("throwing method unimplemented")
+		conv := value.NewThrowConverter(ctx, value.ConvertCToGo, "_cerr", "_goerr")
+
+		if conv == nil {
+			return nil
+		}
+
+		g.GoReturns = append(g.GoReturns, conv)
+		cGoParameters = append(cGoParameters, conv)
+		docReturns = append(docReturns, ParamDocFromThrow("error"))
 	}
 
 	g.Doc = NewCallableGoDocGenerator(goName, m, 0, docParams, docReturns)

@@ -2,6 +2,8 @@ package gir
 
 import (
 	"encoding/xml"
+	"log"
+	"strconv"
 )
 
 // https://gitlab.gnome.org/GNOME/gobject-introspection/-/blob/HEAD/docs/gir-1.2.rnc
@@ -298,6 +300,17 @@ type Namespace struct {
 	Constants   []Constant   `xml:"http://www.gtk.org/introspection/core/1.0 constant"`
 	Annotations []Annotation `xml:"http://www.gtk.org/introspection/core/1.0 attribute"`
 	Boxeds      []Boxed      `xml:"http://www.gtk.org/introspection/core/1.0 boxed"`
+}
+
+func (ns Namespace) MajorVersion() int {
+	major := MajorVersion(ns.Version)
+
+	v, err := strconv.Atoi(major)
+	if err != nil {
+		log.Panicf("invalid major %q", major)
+	}
+
+	return v
 }
 
 type Package struct {

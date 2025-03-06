@@ -665,12 +665,29 @@ func (g *RecordGenerator) Generate(w *file.Writer) {
 		g.Methods,
 	)
 
+	if g.CgoRefFunction != "" {
+		fmt.Fprintf(w.Go(), "// UnsafeRef increases the refcount on the underlying resource. This is used by the bindings internally.\n")
+		fmt.Fprintf(w.Go(), "// \n")
+		fmt.Fprintf(w.Go(), "// When this is called without an associated call to [%s.UnsafeUnref], then [%s] will leak memory.\n", g.GoName, g.GoName)
+		fmt.Fprintf(w.Go(), "func (%s *%s) UnsafeRef() {\n", g.ReceiverName, g.GoName)
+		fmt.Fprintf(w.Go(), "\t%s(%s.native)\n", g.CgoRefFunction, g.ReceiverName)
+		fmt.Fprintf(w.Go(), "}\n\n")
+	}
+
+	fmt.Fprintf(w.Go(), "// UnsafeUnref unrefs/frees the underlying resource. This is used by the bindings internally.\n")
+	fmt.Fprintf(w.Go(), "// \n")
+	fmt.Fprintf(w.Go(), "// After this is called, no other method on [%s] is expected to work anymore.\n", g.GoName)
+	fmt.Fprintf(w.Go(), "func (%s *%s) UnsafeUnref() {\n", g.ReceiverName, g.GoName)
+	fmt.Fprintf(w.Go(), "\t%s(%s.native)\n", g.CgoUnrefFunction, g.ReceiverName)
+	fmt.Fprintf(w.Go(), "}\n\n")
+
 	fmt.Fprintf(w.Go(), "// Unsafe returns the underlying C pointer. This is used by the bindings internally.\n")
 	fmt.Fprintf(w.Go(), "func (%s *%s) Unsafe() unsafe.Pointer {\n", g.ReceiverName, g.GoName)
 	fmt.Fprintf(w.Go(), "\treturn unsafe.Pointer(%s.native)\n", g.ReceiverName)
 	fmt.Fprintf(w.Go(), "}\n\n")
 
-	fmt.Fprintf(w.Go(), "// UnsafeTransferFull returns the underlying C pointer. This is used by the bindings internally.\n")
+	fmt.Fprintf(w.Go(), "// UnsafeTransferFull returns the underlying C pointer and clears the finalizer.\n")
+	fmt.Fprintf(w.Go(), "// This is used by the bindings internally.\n")
 	fmt.Fprintf(w.Go(), "func (%s *%s) UnsafeTransferFull() unsafe.Pointer {\n", g.ReceiverName, g.GoName)
 	fmt.Fprintf(w.Go(), "\truntime.SetFinalizer(%s.%s, nil)\n", g.ReceiverName, g.GoNamePrivate)
 	fmt.Fprintf(w.Go(), "\treturn unsafe.Pointer(%s.native)\n", g.ReceiverName)
@@ -682,7 +699,7 @@ func NewRecordGenerator(ctx gencontext.GenerationContext, r gir.Record) *RecordG
 		return nil
 	}
 
-	meta := ctx.LookupType(r.CType)
+	meta := ctx.LookupType(r.Name, r.CType)
 
 	if meta == nil {
 		return nil
@@ -693,9 +710,9 @@ func NewRecordGenerator(ctx gencontext.GenerationContext, r gir.Record) *RecordG
 	g := &RecordGenerator{
 		Doc:                        NewGoDocGenerator(meta.GoBaseType, r, 0),
 		GoName:                     meta.GoBaseType,
-		GoUnsafeFromGlibBorrowName: fmt.Sprintf("NewUnsafe%sFromGlibBorrow", meta.GoBaseType),
-		GoUnsafeFromGlibNoneName:   fmt.Sprintf("NewUnsafe%sFromGlibNone", meta.GoBaseType),
-		GoUnsafeFromGlibFullName:   fmt.Sprintf("NewUnsafe%sFromGlibFull", meta.GoBaseType),
+		GoUnsafeFromGlibBorrowName: fmt.Sprintf("Unsafe%sFromGlibBorrow", meta.GoBaseType),
+		GoUnsafeFromGlibNoneName:   fmt.Sprintf("Unsafe%sFromGlibNone", meta.GoBaseType),
+		GoUnsafeFromGlibFullName:   fmt.Sprintf("Unsafe%sFromGlibFull", meta.GoBaseType),
 		CgoUnrefFunction:           "C.free", // replaced below if an unref method is found
 		CGoType:                    meta.CGoBaseType,
 		GoNamePrivate:              goPrivate,
@@ -724,12 +741,16 @@ func NewRecordGenerator(ctx gencontext.GenerationContext, r gir.Record) *RecordG
 	}
 
 	for _, method := range r.Methods {
-		if method.Name == "ref" || strings.HasSuffix(method.Name, "_ref") {
+		if method.Name == "weak_ref" || method.Name == "weak_unref" {
+			continue
+		}
+
+		if method.Name == "ref" {
 			g.CgoRefFunction = "C." + method.CIdentifier
 			continue
 		}
 
-		if method.Name == "unref" || strings.HasSuffix(method.Name, "_unref") {
+		if method.Name == "unref" {
 			g.CgoUnrefFunction = "C." + method.CIdentifier
 			continue
 		}

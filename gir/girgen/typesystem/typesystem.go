@@ -8,45 +8,46 @@ import (
 )
 
 type Registry struct {
-	namespaces map[versionedNamespace]*namespace
+	namespaces map[VersionedNamespace]*Namespace
 }
 
-type versionedNamespace struct {
-	name         string
-	majorversion string
+type VersionedNamespace struct {
+	Name         string
+	MajorVersion int
 }
 
-func versionedNsFromString(s string) versionedNamespace {
+func versionedNsFromString(s string) VersionedNamespace {
 	parts := strings.Split(s, "-")
 
 	if len(parts) > 2 {
 		panic("got invalid versioned namespace string " + s)
 	}
 
-	return versionedNamespace{
-		name:         parts[0],
-		majorversion: gir.MajorVersion(parts[1]),
+	return VersionedNamespace{
+		Name:         parts[0],
+		MajorVersion: parseMajorVersion(parts[1]),
 	}
 }
 
 // FromRepositories loads all repositories into the registry and checks whether all includes are present
 func FromRepositories(repos gir.Repositories, modulePath string, importOverrides map[string]string) *Registry {
 	r := &Registry{
-		namespaces: make(map[versionedNamespace]*namespace, len(repos)),
+		namespaces: make(map[VersionedNamespace]*Namespace, len(repos)),
 	}
 
 	for _, repo := range repos {
 		includes := repoPrefilledIncludes(repo.Repository)
 
 		for _, ns := range repo.Namespaces {
-			r.namespaces[versionedNamespace{
-				name:         ns.Name,
-				majorversion: gir.MajorVersion(ns.Version),
-			}] = &namespace{
-				name:    ns.Name,
-				version: ns.Version,
+			versioned := VersionedNamespace{
+				Name:         ns.Name,
+				MajorVersion: parseMajorVersion(ns.Version),
+			}
 
-				goPackageName: goPackageName(ns.Name),
+			r.namespaces[versioned] = &Namespace{
+				VersionedName: versioned,
+
+				GoPackageName: goPackageName(ns.Name),
 				goImportPath:  goImportPath(modulePath, ns.Name, ns.Version),
 
 				includes: includes,
@@ -69,10 +70,10 @@ func FromRepositories(repos gir.Repositories, modulePath string, importOverrides
 
 	for _, ns := range r.namespaces {
 		for name, i := range ns.includes {
-			included, ok := r.namespaces[versionedNamespace{name: i.name, majorversion: gir.MajorVersion(i.version)}]
+			included, ok := r.namespaces[i.VersionedName]
 
 			if !ok {
-				log.Printf("typesystem: could not find included namespace %s-%s, ignoring for now\n", i.name, i.version)
+				log.Printf("typesystem: could not find included namespace %s-%d, ignoring for now\n", i.VersionedName.Name, i.VersionedName.MajorVersion)
 			}
 
 			ns.includes[name] = included
@@ -92,14 +93,13 @@ func FromRepositories(repos gir.Repositories, modulePath string, importOverrides
 	return r
 }
 
-type namespace struct {
-	name    string
-	version string
+type Namespace struct {
+	VersionedName VersionedNamespace
 
-	goPackageName string
+	GoPackageName string
 	goImportPath  string
 
-	includes map[string]*namespace
+	includes map[string]*Namespace
 
 	aliasesByName    map[string]gir.Alias
 	classesByName    map[string]gir.Class
@@ -113,23 +113,10 @@ type namespace struct {
 	constantsByName  map[string]gir.Constant
 }
 
-// repoPrefilledIncludes prefills the includes with namespaces name and version, to
-// be able to later
-func repoPrefilledIncludes(r gir.Repository) map[string]*namespace {
-	m := make(map[string]*namespace)
-	for _, v := range r.Includes {
-		m[v.Name] = &namespace{
-			name:    v.Name,
-			version: v.Version,
-		}
-	}
-	return m
-}
-
 func nsAliases(ns gir.Namespace) map[string]gir.Alias {
 	m := make(map[string]gir.Alias)
 	for _, v := range ns.Aliases {
-		m[v.CType] = v
+		m[v.Name] = v
 	}
 	return m
 }
@@ -137,7 +124,7 @@ func nsAliases(ns gir.Namespace) map[string]gir.Alias {
 func nsClasses(ns gir.Namespace) map[string]gir.Class {
 	m := make(map[string]gir.Class)
 	for _, v := range ns.Classes {
-		m[v.CType] = v
+		m[v.Name] = v
 	}
 	return m
 }
@@ -145,7 +132,7 @@ func nsClasses(ns gir.Namespace) map[string]gir.Class {
 func nsInterfaces(ns gir.Namespace) map[string]gir.Interface {
 	m := make(map[string]gir.Interface)
 	for _, v := range ns.Interfaces {
-		m[v.CType] = v
+		m[v.Name] = v
 	}
 	return m
 }
@@ -153,7 +140,7 @@ func nsInterfaces(ns gir.Namespace) map[string]gir.Interface {
 func nsRecords(ns gir.Namespace) map[string]gir.Record {
 	m := make(map[string]gir.Record)
 	for _, v := range ns.Records {
-		m[v.CType] = v
+		m[v.Name] = v
 	}
 	return m
 }
@@ -161,7 +148,7 @@ func nsRecords(ns gir.Namespace) map[string]gir.Record {
 func nsEnums(ns gir.Namespace) map[string]gir.Enum {
 	m := make(map[string]gir.Enum)
 	for _, v := range ns.Enums {
-		m[v.CType] = v
+		m[v.Name] = v
 	}
 	return m
 }
@@ -169,7 +156,7 @@ func nsEnums(ns gir.Namespace) map[string]gir.Enum {
 func nsFunctions(ns gir.Namespace) map[string]gir.Function {
 	m := make(map[string]gir.Function)
 	for _, v := range ns.Functions {
-		m[v.CIdentifier] = v
+		m[v.Name] = v
 	}
 	return m
 }
@@ -177,7 +164,7 @@ func nsFunctions(ns gir.Namespace) map[string]gir.Function {
 func nsUnions(ns gir.Namespace) map[string]gir.Union {
 	m := make(map[string]gir.Union)
 	for _, v := range ns.Unions {
-		m[v.CType] = v
+		m[v.Name] = v
 	}
 	return m
 }
@@ -185,7 +172,7 @@ func nsUnions(ns gir.Namespace) map[string]gir.Union {
 func nsBitfiels(ns gir.Namespace) map[string]gir.Bitfield {
 	m := make(map[string]gir.Bitfield)
 	for _, v := range ns.Bitfields {
-		m[v.CType] = v
+		m[v.Name] = v
 	}
 	return m
 }

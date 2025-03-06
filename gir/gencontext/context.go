@@ -8,8 +8,8 @@ import (
 // GenerationContext contains the information that is useful for every generator in the tree. It gets passed
 // through the generator constructors.
 type GenerationContext interface {
-	NamespaceMetadata(ns *gir.Namespace) *typesystem.NamespaceMetadata
-	LookupType(typ string) *typesystem.TypeMetadata
+	Namespace(ns *gir.Namespace) *typesystem.Namespace
+	LookupType(typename, cType string) *typesystem.TypeMetadata
 }
 
 type baseGenerationContext struct {
@@ -22,30 +22,30 @@ func Base(typesystem *typesystem.Registry) GenerationContext {
 	}
 }
 
-func (ctx *baseGenerationContext) NamespaceMetadata(ns *gir.Namespace) *typesystem.NamespaceMetadata {
-	return ctx.Typesystem.GetNamespaceMetadata(ns)
+func (ctx *baseGenerationContext) Namespace(ns *gir.Namespace) *typesystem.Namespace {
+	return ctx.Typesystem.GetNamespace(ns)
 }
 
-func (ctx *baseGenerationContext) LookupType(typ string) *typesystem.TypeMetadata {
-	return ctx.Typesystem.LookupType(typ)
+func (ctx *baseGenerationContext) LookupType(typename, cType string) *typesystem.TypeMetadata {
+	return ctx.Typesystem.LookupType(typename, cType)
 }
 
-func Namespaced(namespace *typesystem.NamespaceMetadata, base GenerationContext) GenerationContext {
+func Namespaced(base GenerationContext, namespace *typesystem.Namespace) GenerationContext {
 	return &namespacedGenerationContext{
-		base:          base,
-		namespaceMeta: namespace,
+		base:      base,
+		namespace: namespace,
 	}
 }
 
 type namespacedGenerationContext struct {
-	base          GenerationContext
-	namespaceMeta *typesystem.NamespaceMetadata
+	base      GenerationContext
+	namespace *typesystem.Namespace
 }
 
-func (ctx *namespacedGenerationContext) NamespaceMetadata(ns *gir.Namespace) *typesystem.NamespaceMetadata {
-	return ctx.base.NamespaceMetadata(ns)
+func (ctx *namespacedGenerationContext) Namespace(ns *gir.Namespace) *typesystem.Namespace {
+	return ctx.base.Namespace(ns)
 }
 
-func (ctx *namespacedGenerationContext) LookupType(typ string) *typesystem.TypeMetadata {
-	return ctx.namespaceMeta.Namespace.LookupType(typ)
+func (ctx *namespacedGenerationContext) LookupType(typename, cType string) *typesystem.TypeMetadata {
+	return ctx.namespace.LookupType(typename, cType)
 }

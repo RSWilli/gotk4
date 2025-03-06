@@ -9,26 +9,14 @@ import (
 	"github.com/diamondburned/gotk4/gir/girgen/strcases"
 )
 
-type NamespaceMetadata struct {
-	MajorVersion int
-
-	GoPackageName string
-
-	Namespace *namespace
-}
-
-func (r *Registry) GetNamespaceMetadata(ns *gir.Namespace) *NamespaceMetadata {
-	found, ok := r.namespaces[versionedNamespace{name: ns.Name, majorversion: gir.MajorVersion(ns.Version)}]
+func (r *Registry) GetNamespace(ns *gir.Namespace) *Namespace {
+	found, ok := r.namespaces[VersionedNamespace{Name: ns.Name, MajorVersion: ns.MajorVersion()}]
 
 	if !ok {
 		return nil
 	}
 
-	return &NamespaceMetadata{
-		MajorVersion:  parseMajorVersion(found.version),
-		GoPackageName: found.goPackageName,
-		Namespace:     found,
-	}
+	return found
 }
 
 type TypeMetadata struct {
@@ -40,7 +28,8 @@ type TypeMetadata struct {
 
 	IsCastable bool
 
-	GirType any
+	GirType   any
+	Namespace *Namespace
 }
 
 func (tm TypeMetadata) GoType() string {
@@ -51,75 +40,94 @@ func (tm TypeMetadata) CGoType() string {
 	return addPointers(tm.CGoBaseType, tm.CGoPointers)
 }
 
+type TypeSystem interface {
+	LookupType(typname, ctype string) *TypeMetadata
+}
+
 // LookupType finds a type in the registry and attaches metadata needed for generation. The typestring must be versioned or primitive.
-func (r *Registry) LookupType(typ string) *TypeMetadata {
-	typ = strings.TrimPrefix(typ, "const ")
+func (r *Registry) LookupType(typname, ctype string) *TypeMetadata {
+	ctype = strings.TrimPrefix(ctype, "const ")
 
-	parts := strings.Split(typ, ".")
+	parts := strings.Split(typname, ".")
 
-	if len(parts) > 1 {
-		panic("searching for versioned type in whole registry not yet implemented")
+	if len(parts) > 2 {
+		panic(fmt.Sprintf("received invalid type name %s", typname))
 	}
 
-	if t := lookupPrimitive(parts[0]); t != nil {
-		return t
+	if len(parts) == 1 {
+		return lookupPrimitive(ctype)
 	}
 
-	return nil
+	// TODO: GObject.Object does not suffice for a lookup, because we might have multiple versions of gobject
+
+	panic("Lookup for versioned types unimplemented")
 }
 
 // LookupType finds a type from within a namespace. Will only resolve the types known to the namespace. The type must not be versioned,
 // instead the correct version of the include from the namespace is taken.
-func (n *namespace) LookupType(typ string) *TypeMetadata {
-	typ = strings.TrimPrefix(typ, "const ")
+func (n *Namespace) LookupType(typname, ctype string) *TypeMetadata {
+	ctype = strings.TrimPrefix(ctype, "const ")
 
-	// some types with pointers are not pointer types in go, e.g. gchar*
-	if t := lookupPrimitive(typ); t != nil {
+	// some types with pointers are not pointer types in go, e.g. gchar*, resolve them before trimming the pointers
+	if t := lookupPrimitive(ctype); t != nil {
 		return t
 	}
 
-	baseType, pointers := trimPointers(typ)
+	_, pointers := trimPointers(ctype)
 
-	parts := strings.Split(baseType, ".")
+	parts := strings.Split(typname, ".")
 
-	if len(parts) > 1 {
-		// lookup in referenced namespace again
-		typ := strings.Join(parts[1:], ".")
-
-		// search in the correct included namespace.
-		reffedNS := n.includes[parts[0]]
-
-		if reffedNS == nil {
-			return nil
-		}
-
-		t := reffedNS.LookupType(typ)
-
-		if t == nil {
-			return nil
-		}
-
-		// and attach the required import:
-		t.RequiredImports = append(t.RequiredImports, reffedNS.goImportPath)
-		// the imported package is also needed for the type name:
-		t.GoBaseType = reffedNS.goPackageName + "." + t.GoBaseType
-
-		return t
-	}
-
-	if t := lookupPrimitive(parts[0]); t != nil {
-		t.CGoPointers += pointers
-		t.GoPointers += pointers
-		return t
+	if len(parts) > 2 {
+		panic(fmt.Sprintf("received invalid type name %s", typname))
 	}
 
 	var meta *TypeMetadata
 
+	switch len(parts) {
+	case 1:
+		// look in current namespace
+		meta = n.findByName(parts[0])
+
+		if meta != nil {
+			meta.Namespace = n
+		}
+	case 2:
+		// look in referenced namespace
+		if reffedNS, ok := n.includes[parts[0]]; ok && reffedNS != nil {
+			meta = reffedNS.findByName(parts[1])
+
+			if meta != nil {
+				// and attach the required import:
+				meta.RequiredImports = append(meta.RequiredImports, reffedNS.goImportPath)
+				// the imported package is also needed for the type name:
+				meta.GoBaseType = reffedNS.GoPackageName + "." + meta.GoBaseType
+
+				meta.Namespace = reffedNS
+			}
+		}
+	default:
+		panic(fmt.Sprintf("received invalid type name %s", typname))
+	}
+
+	if meta != nil {
+		meta.CGoPointers = pointers
+		meta.GoPointers = pointers
+	} else {
+		log.Printf("type lookup not found for %s\n", typname)
+	}
+
+	return meta
+}
+
+// findByName returns the [TypeMetdaata] for the named type
+func (n *Namespace) findByName(typeName string) *TypeMetadata {
+	var meta *TypeMetadata
+
 	for name, girType := range n.aliasesByName {
-		if name == baseType {
+		if name == typeName {
 			meta = &TypeMetadata{
 				GoBaseType:  strcases.PascalToGo(girType.Name),
-				CGoBaseType: ctypeToCGo(baseType),
+				CGoBaseType: ctypeToCGo(girType.CType),
 				GirType:     &girType,
 				IsCastable:  true,
 			}
@@ -127,40 +135,40 @@ func (n *namespace) LookupType(typ string) *TypeMetadata {
 	}
 
 	for name, girType := range n.classesByName {
-		if name == baseType {
+		if name == typeName {
 			meta = &TypeMetadata{
 				GoBaseType:  strcases.PascalToGo(girType.Name),
-				CGoBaseType: ctypeToCGo(baseType),
+				CGoBaseType: ctypeToCGo(girType.CType),
 				GirType:     &girType,
 			}
 		}
 	}
 
 	for name, girType := range n.interfacesByName {
-		if name == baseType {
+		if name == typeName {
 			meta = &TypeMetadata{
 				GoBaseType:  strcases.PascalToGo(girType.Name),
-				CGoBaseType: ctypeToCGo(baseType),
+				CGoBaseType: ctypeToCGo(girType.CType),
 				GirType:     &girType,
 			}
 		}
 	}
 
 	for name, girType := range n.recordsByName {
-		if name == baseType {
+		if name == typeName {
 			meta = &TypeMetadata{
 				GoBaseType:  strcases.PascalToGo(girType.Name),
-				CGoBaseType: ctypeToCGo(baseType),
+				CGoBaseType: ctypeToCGo(girType.CType),
 				GirType:     &girType,
 			}
 		}
 	}
 
 	for name, girType := range n.enumsByName {
-		if name == baseType {
+		if name == typeName {
 			meta = &TypeMetadata{
 				GoBaseType:  strcases.PascalToGo(girType.Name),
-				CGoBaseType: ctypeToCGo(baseType),
+				CGoBaseType: ctypeToCGo(girType.CType),
 				GirType:     &girType,
 				IsCastable:  true,
 			}
@@ -168,82 +176,54 @@ func (n *namespace) LookupType(typ string) *TypeMetadata {
 	}
 
 	for name, girType := range n.functionsByName {
-		if name == baseType {
+		if name == typeName {
 			meta = &TypeMetadata{
 				GoBaseType:  strcases.PascalToGo(girType.Name),
-				CGoBaseType: ctypeToCGo(baseType),
+				CGoBaseType: ctypeToCGo(girType.CIdentifier),
 				GirType:     &girType,
 			}
 		}
 	}
 
 	for name, girType := range n.unionsByName {
-		if name == baseType {
+		if name == typeName {
 			meta = &TypeMetadata{
 				GoBaseType:  strcases.PascalToGo(girType.Name),
-				CGoBaseType: ctypeToCGo(baseType),
+				CGoBaseType: ctypeToCGo(girType.CType),
 				GirType:     &girType,
 			}
 		}
 	}
 
 	for name, girType := range n.bitfieldsByName {
-		if name == baseType {
+		if name == typeName {
 			meta = &TypeMetadata{
 				GoBaseType:  strcases.PascalToGo(girType.Name),
-				CGoBaseType: ctypeToCGo(baseType),
+				CGoBaseType: ctypeToCGo(girType.CType),
 				GirType:     &girType,
 			}
 		}
 	}
 
 	for name, girType := range n.callbacksByName {
-		if name == baseType {
+		if name == typeName {
 			goBaseType := strcases.PascalToGo(girType.Name)
 			meta = &TypeMetadata{
 				GoBaseType:  goBaseType,
-				CGoBaseType: fmt.Sprintf("_gotk4_%s%s_%s", n.goPackageName, gir.MajorVersion(n.version), goBaseType),
+				CGoBaseType: fmt.Sprintf("_gotk4_%s%d_%s", n.GoPackageName, n.VersionedName.MajorVersion, goBaseType),
 				GirType:     &girType,
 			}
 		}
 	}
 
 	for name, girType := range n.constantsByName {
-		if name == baseType {
+		if name == typeName {
 			meta = &TypeMetadata{
 				GoBaseType:  strcases.PascalToGo(girType.Name),
-				CGoBaseType: ctypeToCGo(baseType),
+				CGoBaseType: ctypeToCGo(girType.CType),
 				GirType:     &girType,
 			}
 		}
-	}
-
-	if meta == nil && n.name != "GObject" {
-
-		// special case: GObject types are referenced without a namespace prefix
-		if reffedNS, ok := n.includes["GObject"]; ok {
-			log.Printf("trying fallback to GObject.%s\n", typ)
-
-			t := reffedNS.LookupType(typ)
-
-			if t == nil {
-				return nil
-			}
-
-			// and attach the required import:
-			t.RequiredImports = append(t.RequiredImports, reffedNS.goImportPath)
-			// the imported package is also needed for the type name:
-			t.GoBaseType = reffedNS.goPackageName + "." + t.GoBaseType
-
-			return t
-		}
-	}
-
-	if meta != nil {
-		meta.CGoPointers = pointers
-		meta.GoPointers = pointers
-	} else {
-		log.Printf("type lookup not found: %s\n", typ)
 	}
 
 	return meta
@@ -280,6 +260,7 @@ var builtinTypeMap = map[string]string{
 	"gboolean": "bool",
 	"gfloat":   "float32",
 	"gdouble":  "float64",
+	"int":      "int",
 	"gint":     "int",
 	"gssize":   "int",
 	"gint8":    "int8",
@@ -305,8 +286,8 @@ var builtinTypeMap = map[string]string{
 	"filename": "string",
 }
 
-func lookupPrimitive(t string) *TypeMetadata {
-	base, ptrs := trimPointers(t)
+func lookupPrimitive(ctype string) *TypeMetadata {
+	base, ptrs := trimPointers(ctype)
 
 	if base == "gchar" && ptrs >= 1 {
 		return &TypeMetadata{
@@ -330,7 +311,7 @@ func lookupPrimitive(t string) *TypeMetadata {
 		return meta
 	}
 
-	switch t {
+	switch ctype {
 	case "gpointer":
 		return &TypeMetadata{
 			GoBaseType:      "unsafe.Pointer",

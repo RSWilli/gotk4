@@ -39,6 +39,25 @@ func NewReturnConverter(ctx gencontext.GenerationContext, direction ConversionDi
 	}, cIdent, goIdent)
 }
 
+func NewThrowConverter(ctx gencontext.GenerationContext, direction ConversionDirection, cIdent, goIdent string) Converter {
+	return NewParamConverter(ctx, direction, gir.ParameterAttrs{
+		TransferOwnership: gir.TransferOwnership{
+			TransferOwnership: "full",
+		},
+		AnyType: gir.AnyType{
+			Type: &gir.Type{
+				Name: "GLib.Error",
+				// Function parameter type is technically a double-pointer
+				// here.
+				CType: "GError**",
+			},
+		},
+		Optional:  true,
+		Nullable:  true,
+		Direction: "out",
+	}, cIdent, goIdent)
+}
+
 // NewParamConverter creates an appropriate converter for the given param. The index is used to allow the converter
 // to create unique variable names for the conversion
 func NewParamConverter(ctx gencontext.GenerationContext, direction ConversionDirection, param gir.ParameterAttrs, cIdent, goIdent string) Converter {
@@ -52,7 +71,7 @@ func NewParamConverter(ctx gencontext.GenerationContext, direction ConversionDir
 		return nil // TODO: handle array types
 	}
 
-	meta := ctx.LookupType(param.Type.CType)
+	meta := ctx.LookupType(param.Type.Name, param.Type.CType)
 
 	if meta == nil {
 		return nil // unknown type
@@ -113,7 +132,11 @@ func NewParamConverter(ctx gencontext.GenerationContext, direction ConversionDir
 		meta.CGoBaseType == "C.gsize" ||
 		meta.CGoBaseType == "C.gssize" ||
 		meta.CGoBaseType == "C.gdouble" ||
-		meta.CGoBaseType == "C.gfloat":
+		meta.CGoBaseType == "C.gfloat" ||
+		meta.CGoBaseType == "C.glong" ||
+		meta.CGoBaseType == "C.gulong" ||
+		meta.CGoBaseType == "C.int" ||
+		meta.CGoBaseType == "C.uint":
 		return &PrimitiveConverter{
 			Direction: direction,
 			InIdent:   inIdent,
@@ -131,8 +154,12 @@ func NewParamConverter(ctx gencontext.GenerationContext, direction ConversionDir
 		}
 	}
 
-	if meta.CGoBaseType == "C.gpointer" {
-		return nil // cannot handle gpointer if not a userdata arg
+	if meta.GoBaseType == "gobject.Value" {
+		return nil // TODO: use coreglib for this
+	}
+
+	if meta.GoBaseType == "unsafe.Pointer" || meta.GoBaseType == "uintptr" {
+		return nil // will not handle unsafe pointers if not a userdata arg
 	}
 
 	// cases that might be in other packages generated
@@ -173,6 +200,14 @@ func NewParamConverter(ctx gencontext.GenerationContext, direction ConversionDir
 		}
 	case *gir.Bitfield:
 		return &BitfieldConverter{
+			Direction: direction,
+			InIdent:   inIdent,
+			InTyp:     inType,
+			OutIdent:  outIdent,
+			OutTyp:    outType,
+		}
+	case *gir.Callback:
+		return &CallbackConverter{
 			Direction: direction,
 			InIdent:   inIdent,
 			InTyp:     inType,

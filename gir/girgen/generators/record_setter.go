@@ -43,7 +43,7 @@ func NewRecordFieldSetterGenerator(ctx gencontext.GenerationContext, parent *Rec
 		return nil
 	}
 
-	meta := ctx.LookupType(f.Type.CType)
+	meta := ctx.LookupType(f.Type.Name, f.Type.CType)
 
 	if meta == nil {
 		return nil

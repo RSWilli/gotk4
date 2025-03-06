@@ -36,3 +36,11 @@ func NewMarshalBifieldGenerator(goName string) *MarshalGenerator {
 		ValueFunction: "Flags",
 	}
 }
+
+func NewMarshalObjectGenerator(goName string, wrapCoreObjectName string) *MarshalGenerator {
+	return &MarshalGenerator{
+		GoName:        goName,
+		WrapFunction:  wrapCoreObjectName,
+		ValueFunction: "Object",
+	}
+}

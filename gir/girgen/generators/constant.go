@@ -75,7 +75,7 @@ func NewConstantGenerator(ctx gencontext.GenerationContext, constant gir.Constan
 
 	name := constant.Name
 
-	resolvedType := ctx.LookupType(constant.Type.CType)
+	resolvedType := ctx.LookupType(constant.Type.Name, constant.Type.CType)
 
 	if resolvedType == nil {
 		log.Printf("skipping constant %s because %s did not map to a known go type", constant.Name, constant.Type.Name)

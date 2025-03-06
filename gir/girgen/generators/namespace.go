@@ -67,19 +67,19 @@ func NewNamespaceGenerator(
 	cIncludes []gir.CInclude,
 	packages []gir.Package,
 ) *NamespaceGenerator {
-	meta := ctx.NamespaceMetadata(ns)
+	namespace := ctx.Namespace(ns)
 	gen := &NamespaceGenerator{
 		ctx: ctx,
 		ns:  ns,
 
-		GoPackageName:  meta.GoPackageName,
-		GoPackageMajor: meta.MajorVersion,
+		GoPackageName:  namespace.GoPackageName,
+		GoPackageMajor: namespace.VersionedName.MajorVersion,
 
 		GTypes: NewRegisterGTypeGenerator(ctx, ns),
 	}
 
 	// use a namespaced context for sub types lookup etc
-	ctx = gencontext.Namespaced(meta, ctx)
+	ctx = gencontext.Namespaced(ctx, namespace)
 
 	for _, cIncl := range cIncludes {
 		gen.cIncludes = append(gen.cIncludes, cIncl.Name)
@@ -115,12 +115,18 @@ func NewNamespaceGenerator(
 			gen.Callbacks = append(gen.Callbacks, cbgen)
 		}
 	}
-	// for _, v := range ns.Functions {
-	// }
+	for _, f := range ns.Functions {
+		if fgen := NewFunctionGenerator(ctx, f); fgen != nil {
+			gen.Functions = append(gen.Functions, fgen)
+		}
+	}
 	// for _, v := range ns.Interfaces {
 	// }
-	// for _, v := range ns.Classes {
-	// }
+	for _, class := range ns.Classes {
+		if classgen := NewClassGenerator(ctx, class); classgen != nil {
+			gen.Classes = append(gen.Classes, classgen)
+		}
+	}
 	for _, r := range ns.Records {
 		if rgen := NewRecordGenerator(ctx, r); rgen != nil {
 			gen.Records = append(gen.Records, rgen)
