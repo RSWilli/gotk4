@@ -1,7 +1,6 @@
 package typesystem
 
 import (
-	"fmt"
 	"log"
 	"strconv"
 	"strings"
@@ -39,12 +38,37 @@ func parseMajorVersion(version string) int {
 	return v
 }
 
-func goImportPath(base, name, version string) string {
-	folder := goPackageName(name)
+// this is an invalid type indentifier, that can be used for types that do not have a
+// c or go type, e.g. callbacks. This is chosen becaus it will also break go/cgo compilation when used
+const typeInvalid = "// invalid type"
 
-	if version := parseMajorVersion(version); version > 1 {
-		folder += fmt.Sprintf("/v%d", version)
-	}
-
-	return base + "/" + folder
+// GoKeywords includes Go keywords. This is primarily to prevent collisions with
+// meaningful Go words.
+var GoKeywords = map[string]string{
+	// Keywords.
+	"break":       "",
+	"default":     "",
+	"func":        "fn",
+	"interface":   "iface",
+	"select":      "sel",
+	"case":        "",
+	"defer":       "",
+	"go":          "",
+	"map":         "",
+	"struct":      "",
+	"chan":        "ch",
+	"else":        "",
+	"goto":        "",
+	"package":     "pkg",
+	"switch":      "",
+	"const":       "",
+	"fallthrough": "",
+	"if":          "",
+	"range":       "",
+	"type":        "typ",
+	"continue":    "",
+	"for":         "",
+	"import":      "",
+	"return":      "ret",
+	"var":         "",
 }

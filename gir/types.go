@@ -87,6 +87,7 @@ type CallableAttrs struct {
 
 type Callback struct {
 	XMLName xml.Name `xml:"http://www.gtk.org/introspection/core/1.0 callback"`
+	CType   string   `xml:"http://www.gtk.org/introspection/c/1.0 type,attr"`
 	CallableAttrs
 }
 

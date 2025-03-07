@@ -1,49 +1,65 @@
 package typesystem
 
 import (
+	"fmt"
+	"log"
+
 	"github.com/diamondburned/gotk4/gir"
-	"golang.org/x/exp/maps"
 )
 
-// namespaceIncludes wraps a gir.Namespace and contains resolved includes
+// namespaceWithIncludes wraps a gir.Namespace and contains resolved includes
 //
 // it is used as a preprocessing step before resolving all the types in the namespace
-type namespaceIncludes struct {
-	versionedName VersionedNamespace
-	includes      map[string]*namespaceIncludes
+type namespaceWithIncludes struct {
+	versionedName versionedNamespace
+	includes      map[string]*namespaceWithIncludes
 
 	repository *gir.Repository
 	gir.Namespace
 }
 
-func resolveNamespaceIncludes(repos gir.Repositories) []*namespaceIncludes {
-	namespaces := make(map[VersionedNamespace]*namespaceIncludes)
+type versionedNamespace struct {
+	name         string
+	majorVersion int
+}
+
+func (v versionedNamespace) String() string {
+	return fmt.Sprintf("%s-%d", v.name, v.majorVersion)
+}
+
+func resolveNamespaceIncludes(repos gir.Repositories) []*namespaceWithIncludes {
+	namespacesByName := make(map[versionedNamespace]*namespaceWithIncludes)
+	namespaces := make([]*namespaceWithIncludes, 0, len(repos))
 
 	for _, repo := range repos {
 		includes := repoPrefilledIncludes(repo.Repository)
 
 		for _, ns := range repo.Namespaces {
-			versioned := VersionedNamespace{
-				Name:         ns.Name,
-				MajorVersion: parseMajorVersion(ns.Version),
+			versioned := versionedNamespace{
+				name:         ns.Name,
+				majorVersion: parseMajorVersion(ns.Version),
 			}
 
-			namespaces[versioned] = &namespaceIncludes{
+			namespace := &namespaceWithIncludes{
 				versionedName: versioned,
 				includes:      includes,
 
 				repository: &repo.Repository,
 				Namespace:  ns,
 			}
+
+			namespacesByName[versioned] = namespace
+			namespaces = append(namespaces, namespace)
 		}
 	}
 
 	// we need to loop again to resolve the includes correctly:
-	for _, ns := range namespaces {
+	for _, ns := range namespacesByName {
 		for name, i := range ns.includes {
-			included, ok := namespaces[i.versionedName]
+			included, ok := namespacesByName[i.versionedName]
 
 			if !ok {
+				log.Printf("%s included namespace %s which wasn't found, ignoring for now\n", ns.versionedName, i.versionedName)
 				delete(ns.includes, name)
 			} else {
 				ns.includes[name] = included
@@ -51,18 +67,27 @@ func resolveNamespaceIncludes(repos gir.Repositories) []*namespaceIncludes {
 		}
 	}
 
-	return maps.Values(namespaces)
+	// and one more time for transitive includes:
+	for _, ns := range namespaces {
+		for _, incl := range ns.includes {
+			for name, transIncl := range incl.includes {
+				ns.includes[name] = transIncl
+			}
+		}
+	}
+
+	return namespaces
 }
 
 // repoPrefilledIncludes prefills the includes with namespaces name and version, to
 // be able to later
-func repoPrefilledIncludes(r gir.Repository) map[string]*namespaceIncludes {
-	m := make(map[string]*namespaceIncludes)
+func repoPrefilledIncludes(r gir.Repository) map[string]*namespaceWithIncludes {
+	m := make(map[string]*namespaceWithIncludes)
 	for _, v := range r.Includes {
-		m[v.Name] = &namespaceIncludes{
-			versionedName: VersionedNamespace{
-				Name:         v.Name,
-				MajorVersion: parseMajorVersion(v.Version),
+		m[v.Name] = &namespaceWithIncludes{
+			versionedName: versionedNamespace{
+				name:         v.Name,
+				majorVersion: parseMajorVersion(v.Version),
 			},
 		}
 	}

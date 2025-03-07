@@ -1,24 +1,5 @@
 package typesystem
 
-import (
-	"fmt"
-	"log"
-	"strings"
-
-	"github.com/diamondburned/gotk4/gir"
-	"github.com/diamondburned/gotk4/gir/girgen/strcases"
-)
-
-func (r *Registry) GetNamespace(ns *gir.Namespace) *Namespace {
-	found, ok := r.namespaces[VersionedNamespace{Name: ns.Name, MajorVersion: ns.MajorVersion()}]
-
-	if !ok {
-		return nil
-	}
-
-	return found
-}
-
 type TypeMetadata struct {
 	GoPointers      int
 	CGoPointers     int
@@ -33,13 +14,14 @@ type TypeMetadata struct {
 }
 
 func (tm TypeMetadata) GoType() string {
-	return addPointers(tm.GoBaseType, tm.GoPointers)
+	panic("")
 }
 
 func (tm TypeMetadata) CGoType() string {
-	return addPointers(tm.CGoBaseType, tm.CGoPointers)
+	panic("")
 }
 
+/*
 type TypeSystem interface {
 	LookupType(typname, ctype string) *TypeMetadata
 }
@@ -345,3 +327,5 @@ func addPointers(t string, pointers int) string {
 
 	return pointerstr + t
 }
+
+*/

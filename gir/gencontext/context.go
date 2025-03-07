@@ -23,11 +23,11 @@ func Base(typesystem *typesystem.Registry) GenerationContext {
 }
 
 func (ctx *baseGenerationContext) Namespace(ns *gir.Namespace) *typesystem.Namespace {
-	return ctx.Typesystem.GetNamespace(ns)
+	panic("")
 }
 
 func (ctx *baseGenerationContext) LookupType(typename, cType string) *typesystem.TypeMetadata {
-	return ctx.Typesystem.LookupType(typename, cType)
+	panic("")
 }
 
 func Namespaced(base GenerationContext, namespace *typesystem.Namespace) GenerationContext {
@@ -47,5 +47,5 @@ func (ctx *namespacedGenerationContext) Namespace(ns *gir.Namespace) *typesystem
 }
 
 func (ctx *namespacedGenerationContext) LookupType(typename, cType string) *typesystem.TypeMetadata {
-	return ctx.namespace.LookupType(typename, cType)
+	panic("")
 }

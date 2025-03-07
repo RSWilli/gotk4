@@ -147,9 +147,10 @@ func Overlay(data ...Data) Data {
 func Run(data Data) {
 	ParseFlag()
 
-	repos := MustLoadPackages(data.Packages)
-	// add known packages so we can create a full type system:
-	MustAddPackages(&repos, data.KnownPackages)
+	// load known packages first and then the packages we want to generate,
+	// to keep the order for the typesystem
+	repos := MustLoadPackages(data.KnownPackages)
+	MustAddPackages(&repos, data.Packages)
 	PrintAddedPkgs(repos)
 
 	if ListPkg {
@@ -174,14 +175,14 @@ func Generate(repos gir.Repositories, data Data) {
 
 	// TODO: add some options that allow the user to supply custom value transformers
 
-	ts := typesystem.FromRepositories(repos, data.Module, overrides)
+	ts := typesystem.FromRepositories(repos)
 
 	ctx := gencontext.Base(ts)
 
 	// TODO: add a hook stage here, where the user can filter and modify gir definitions
 
 	// reposToGenerate contains all packages we need to generate, other repos are only for type system
-	reposToGenerate := repos[:len(data.Packages)]
+	reposToGenerate := repos[len(data.KnownPackages)-1:]
 
 	var gen []generators.Generator
 
