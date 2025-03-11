@@ -1,6 +1,7 @@
 package typesystem
 
 import (
+	"log"
 	"strings"
 
 	"github.com/diamondburned/gotk4/gir"
@@ -62,12 +63,13 @@ func (b baseType) GoType() string {
 var _ Type = baseType{}
 
 func CountPointers(ctype string) int {
-	switch ctype {
-	case "gpointer", "gconstpointer":
-		return 1
-	default:
-		return strings.Count(ctype, "*")
+	pointers := strings.Count(ctype, "*")
+
+	if strings.HasPrefix(ctype, "gpointer") || strings.HasPrefix(ctype, "gconstpointer") {
+		return pointers + 1
 	}
+
+	return pointers
 }
 
 // WithPointers optionally wraps the found type in a PointerType if the pointercount does not match the
@@ -75,6 +77,10 @@ func CountPointers(ctype string) int {
 func WithPointers(girType *gir.Type, t Type) Type {
 	if t == nil {
 		panic("cannot wrap nil type with pointers")
+	}
+
+	if girType.CType == "" {
+		return t
 	}
 
 	cleanedCType := cleanCType(girType.CType)
@@ -89,7 +95,8 @@ func WithPointers(girType *gir.Type, t Type) Type {
 	missing := girPointers - typPointers
 
 	if missing < 0 {
-		panic("too many pointers on type")
+		log.Printf("too many pointers on type %s vs %s", cleanedCType, t.CType())
+		return nil
 	}
 
 	if missing == 0 {

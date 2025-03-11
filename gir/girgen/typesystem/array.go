@@ -90,7 +90,7 @@ func getArrayType(ns *Namespace, arr *gir.Array) *Array {
 	}
 
 	if arr.Type == nil {
-		log.Printf("array type is nil, needs special handling for Ctype %s\n", arr.CType)
+		log.Printf("FIXME: array type is nil, needs special handling for Ctype %s\n", arr.CType)
 		return nil
 	}
 
@@ -131,9 +131,9 @@ func getArrayType(ns *Namespace, arr *gir.Array) *Array {
 		}
 	}
 
-	if array.CType() != cleanedCtype {
-		log.Printf("array ctype wrong, expected %s got %s", cleanedCtype, array.CType())
-	}
+	// if array.CType() != cleanedCtype {
+	// 	log.Printf("array ctype wrong, expected %s got %s", cleanedCtype, array.CType())
+	// }
 
 	return array
 }

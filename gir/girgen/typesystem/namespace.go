@@ -163,6 +163,12 @@ func (ns *Namespace) findType(t *gir.Type) Type {
 		return nil
 	}
 
+	typ = resolveInnerTypes(ns, typ, t)
+
+	if typ == nil {
+		return nil
+	}
+
 	return WithPointers(t, typ)
 }
 

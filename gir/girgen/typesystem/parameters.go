@@ -2,6 +2,7 @@ package typesystem
 
 import (
 	"fmt"
+	"log"
 
 	"github.com/diamondburned/gotk4/gir"
 )
@@ -41,7 +42,11 @@ type Param struct {
 	Nullable          bool
 	Direction         string
 	Scope             CallbackParamScope
-	CallerAllocates   bool
+
+	// CallerAllocates means that the out param allocation must be provided by the caller.
+	//
+	// in practise this means that we need one more pointer if the param direction is out and this is false
+	CallerAllocates bool
 
 	// Implicit declares that this param is referenced by another param, either through closure, destroy or
 	// array size. It will be omitted in the go call, because it will get it's value from another source.
@@ -96,7 +101,20 @@ func NewParameters(ns *Namespace, girparams *gir.Parameters, ret *gir.ReturnValu
 		}
 
 		for i, p := range girparams.Parameters {
-			t := ns.findAnyType(p.AnyType)
+			paramType := p.AnyType
+
+			if p.Direction == "out" && !p.CallerAllocates && !canBeOutParamType(paramType) {
+				log.Printf("ignoring out param type without enough pointers: %s", debugCTypeFromAnytype(paramType))
+				return nil
+			}
+
+			if p.Direction == "out" && !p.CallerAllocates {
+				// decrease the pointers, the last pointer will be added by the generator
+				// when passing the value to the function
+				paramType = decreasePointers(paramType)
+			}
+
+			t := ns.findAnyType(paramType)
 
 			if t == nil {
 				return nil
@@ -189,4 +207,20 @@ func NewParameters(ns *Namespace, girparams *gir.Parameters, ret *gir.ReturnValu
 	}
 
 	return params
+}
+
+// canBeOutParamType returns true if the AnyType has enough pointers to be an "out" parameter
+//
+// if this is false then it's most likely that the documentation is wrong
+func canBeOutParamType(t gir.AnyType) bool {
+	switch {
+	case t.Array != nil:
+		// needs a pointer to the array, resulting in at least 2 pointers
+		return CountPointers(t.Array.CType) >= 2
+	case t.Type != nil:
+		// needs at least a pointer to the value.
+		return CountPointers(t.Type.CType) >= 1
+	default:
+		panic("invalid anytype")
+	}
 }

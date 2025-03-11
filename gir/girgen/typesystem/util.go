@@ -79,3 +79,50 @@ func cleanCType(ctype string) string {
 
 	return ctype
 }
+
+// decreasePointers removes one pointer from the ctype of the [gir.AnyType], but doesn't modify the original
+// value
+func decreasePointers(t gir.AnyType) gir.AnyType {
+	var newType *gir.Type
+	var newArray *gir.Array
+
+	if t.Type != nil {
+		newType = &gir.Type{
+			XMLName:        t.Type.XMLName,
+			Name:           t.Type.Name,
+			CType:          strings.TrimSuffix(t.Type.CType, "*"),
+			Introspectable: t.Type.Introspectable,
+			DocElements:    t.Type.DocElements,
+			Types:          t.Type.Types,
+		}
+	}
+
+	if t.Array != nil {
+		newArray = &gir.Array{
+			XMLName:        t.Array.XMLName,
+			Name:           t.Array.Name,
+			CType:          strings.TrimSuffix(t.Array.CType, "*"),
+			Length:         t.Array.Length,
+			ZeroTerminated: t.Array.ZeroTerminated,
+			FixedSize:      t.Array.FixedSize,
+			Introspectable: t.Array.Introspectable,
+			Type:           t.Array.Type,
+		}
+	}
+
+	return gir.AnyType{
+		Type:  newType,
+		Array: newArray,
+	}
+}
+
+func debugCTypeFromAnytype(t gir.AnyType) string {
+	switch {
+	case t.Array != nil:
+		return "(array) " + t.Array.CType
+	case t.Type != nil:
+		return t.Type.CType
+	default:
+		panic("invalid anytype")
+	}
+}
