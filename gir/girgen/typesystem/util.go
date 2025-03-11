@@ -72,3 +72,10 @@ var GoKeywords = map[string]string{
 	"return":      "ret",
 	"var":         "",
 }
+
+func cleanCType(ctype string) string {
+	ctype = strings.TrimPrefix(ctype, "const ")
+	ctype = strings.TrimPrefix(ctype, "volatile ")
+
+	return ctype
+}

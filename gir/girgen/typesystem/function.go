@@ -1,63 +1,72 @@
 package typesystem
 
-import "github.com/diamondburned/gotk4/gir"
+import (
+	"github.com/diamondburned/gotk4/gir"
+)
 
-type Callable struct {
+type CallableSignature struct {
 	GoName  string
+	CName   string
 	CGoName string
 	*Parameters
 }
 
-func NewFunction(ns *Namespace, v gir.Function) *Callable {
+func DeclareFunction(ns *Namespace, v gir.Function) *CallableSignature {
 	if !v.IsIntrospectable() {
 		return nil
 	}
 
-	params := NewParameters(ns, v.CallableAttrs)
+	params := NewCallableParameters(ns, v.CallableAttrs)
 
 	if params == nil {
+		// log.Printf("could not create parameters for function %s\n", v.CIdentifier)
 		return nil
 	}
 
-	return &Callable{
+	return &CallableSignature{
 		GoName:     v.Name,
-		CGoName:    v.CIdentifier,
+		CName:      v.CIdentifier,
+		CGoName:    "C." + v.CIdentifier,
 		Parameters: params,
 	}
 }
 
-func NewMethod(ns *Namespace, v gir.Method) *Callable {
+func NewMethod(ns *Namespace, v gir.Method) *CallableSignature {
 	if !v.IsIntrospectable() {
 		return nil
 	}
 
-	params := NewParameters(ns, v.CallableAttrs)
+	params := NewCallableParameters(ns, v.CallableAttrs)
 
 	if params == nil {
+		// log.Printf("could not create parameters for method %s\n", v.CIdentifier)
 		return nil
 	}
 
-	return &Callable{
+	return &CallableSignature{
 		GoName:     v.Name,
-		CGoName:    v.CIdentifier,
+		CName:      v.CIdentifier,
+		CGoName:    "C." + v.CIdentifier,
 		Parameters: params,
 	}
 }
 
-func NewConstructor(ns *Namespace, v gir.Constructor) *Callable {
+func DeclareConstructor(ns *Namespace, v gir.Constructor) *CallableSignature {
 	if !v.IsIntrospectable() {
 		return nil
 	}
 
-	params := NewParameters(ns, v.CallableAttrs)
+	params := NewCallableParameters(ns, v.CallableAttrs)
 
 	if params == nil {
+		// log.Printf("could not create parameters for constructor %s\n", v.CIdentifier)
 		return nil
 	}
 
-	return &Callable{
+	return &CallableSignature{
 		GoName:     v.Name,
-		CGoName:    v.CIdentifier,
+		CName:      v.CIdentifier,
+		CGoName:    "C." + v.CIdentifier,
 		Parameters: params,
 	}
 }

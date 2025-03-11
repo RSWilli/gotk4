@@ -12,7 +12,7 @@ type Enum struct {
 	Members []*Member
 }
 
-func NewEnum(ns *Namespace, v gir.Enum) *Enum {
+func DeclareEnum(ns *Namespace, v gir.Enum) *Enum {
 	if !v.IsIntrospectable() {
 		return nil
 	}
@@ -21,8 +21,8 @@ func NewEnum(ns *Namespace, v gir.Enum) *Enum {
 		baseType: baseType{
 			girName: v.Name,
 			goType:  strcases.PascalToGo(v.Name),
-			cGoType: "C." + v.Name,
-			cType:   v.Name,
+			cGoType: "C." + v.CType,
+			cType:   v.CType,
 		},
 		Doc:     NewDoc(&v.InfoAttrs, &v.InfoElements),
 		Members: GetMembers(v.Members),

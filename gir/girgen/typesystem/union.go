@@ -11,13 +11,13 @@ type Union struct {
 
 	GetType string
 
-	Functions    []*Callable
-	Methods      []*Callable
-	Constructors []*Callable
+	Functions    []*CallableSignature
+	Methods      []*CallableSignature
+	Constructors []*CallableSignature
 	Fields       []*Field
 }
 
-func NewUnion(ns *Namespace, v gir.Union) *Union {
+func DelcareUnion(ns *Namespace, v gir.Union) *Union {
 	if !v.IsIntrospectable() {
 		return nil
 	}
@@ -36,7 +36,7 @@ func NewUnion(ns *Namespace, v gir.Union) *Union {
 
 func (u *Union) resolveNested(ns *Namespace, v gir.Union) {
 	for _, v := range v.Functions {
-		if t := NewFunction(ns, v); t != nil {
+		if t := DeclareFunction(ns, v); t != nil {
 			u.Functions = append(u.Functions, t)
 		}
 	}
@@ -48,7 +48,7 @@ func (u *Union) resolveNested(ns *Namespace, v gir.Union) {
 	}
 
 	for _, v := range v.Constructors {
-		if t := NewConstructor(ns, v); t != nil {
+		if t := DeclareConstructor(ns, v); t != nil {
 			u.Constructors = append(u.Constructors, t)
 		}
 	}

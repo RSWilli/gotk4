@@ -4,10 +4,16 @@ import (
 	"log"
 
 	"github.com/diamondburned/gotk4/gir"
+	"github.com/diamondburned/gotk4/gir/girgen/strcases"
 )
 
 type Class struct {
 	baseType
+
+	// GoInterfaceName is the name of the interface that describes the class. Every extending class will implement this
+	// interface. Constructors and methods on the class will use the interface (e.g. MyClasser) name instead of the pointer type
+	// (e.g. *MyClass) to allow easy passing of child class types.
+	GoInterfaceName string
 
 	Abstract bool
 
@@ -20,13 +26,13 @@ type Class struct {
 
 	TypeStruct *Record
 	Parent     Type
-	// Implements contains the implemented interfaces. This also contains [*Class].
+	// Implements contains the implemented interfaces and parent [Class].
 	Implements []Type
 
-	Functions      []*Callable
-	Methods        []*Callable
+	Functions      []*CallableSignature
+	Methods        []*CallableSignature
 	VirtualMethods []*VirtualMethod
-	Constructors   []*Callable
+	Constructors   []*CallableSignature
 	Fields         []*Field
 	Signals        []*Signal
 }
@@ -39,8 +45,9 @@ func NewClass(ns *Namespace, v gir.Class) *Class {
 	}
 
 	return &Class{
-		Abstract: v.Abstract,
-		GetType:  v.GLibGetType,
+		Abstract:        v.Abstract,
+		GetType:         v.GLibGetType,
+		GoInterfaceName: strcases.Interfacify(v.Name),
 		baseType: baseType{
 			girName: v.Name,
 			goType:  v.Name,
@@ -78,13 +85,14 @@ func (r *Class) resolveNested(ns *Namespace, v gir.Class) {
 		typeStruct, ok := typeStructType.(*Record)
 
 		if !ok {
+			log.Printf("type struct for %s is not a record but instead %T", v.Name, typeStructType)
 			return
 		}
 
 		r.TypeStruct = typeStruct
 
 		for _, v := range v.VirtualMethods {
-			if t := NewVirtualMethod(ns, typeStruct, v); t != nil {
+			if t := NewVirtualMethod(ns, r, typeStruct, v); t != nil {
 				r.VirtualMethods = append(r.VirtualMethods, t)
 			}
 		}
@@ -105,7 +113,7 @@ func (r *Class) resolveNested(ns *Namespace, v gir.Class) {
 	}
 
 	for _, v := range v.Functions {
-		if t := NewFunction(ns, v); t != nil {
+		if t := DeclareFunction(ns, v); t != nil {
 			r.Functions = append(r.Functions, t)
 		}
 	}
@@ -117,7 +125,7 @@ func (r *Class) resolveNested(ns *Namespace, v gir.Class) {
 	}
 
 	for _, v := range v.Constructors {
-		if t := NewConstructor(ns, v); t != nil {
+		if t := DeclareConstructor(ns, v); t != nil {
 			r.Constructors = append(r.Constructors, t)
 		}
 	}

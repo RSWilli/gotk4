@@ -9,8 +9,10 @@ import (
 type CallbackParamScope string
 
 const (
-	CallbackParamScopeCall     CallbackParamScope = "call"
-	CallbackParamScopeAsync    CallbackParamScope = "async"
+	CallbackParamScopeCall  CallbackParamScope = "call"
+	CallbackParamScopeAsync CallbackParamScope = "async"
+
+	// CallbackParamScopeNofified must be accompanied by a Destroy parameter.
 	CallbackParamScopeNofified CallbackParamScope = "nofified"
 	CallbackParamScopeForever  CallbackParamScope = "forever"
 )
@@ -60,21 +62,29 @@ type Parameters struct {
 	GoParameters []*Param
 }
 
-func NewParameters(ns *Namespace, v gir.CallableAttrs) *Parameters {
-	params := &Parameters{
-		Doc: NewDoc(&v.InfoAttrs, &v.InfoElements),
+func NewCallableParameters(ns *Namespace, v gir.CallableAttrs) *Parameters {
+	params := NewParameters(ns, v.Parameters, v.ReturnValue, v.Throws)
+
+	if params != nil {
+		params.Doc = NewDoc(&v.InfoAttrs, &v.InfoElements)
 	}
 
-	if v.Parameters != nil {
-		if v.Parameters.InstanceParameter != nil {
-			t := ns.findAnyType(v.Parameters.InstanceParameter.AnyType)
+	return params
+}
+
+func NewParameters(ns *Namespace, girparams *gir.Parameters, ret *gir.ReturnValue, throws bool) *Parameters {
+	params := &Parameters{}
+
+	if girparams != nil {
+		if girparams.InstanceParameter != nil {
+			t := ns.findAnyType(girparams.InstanceParameter.AnyType)
 
 			if t == nil {
 				return nil
 			}
 
 			params.GoReceiver = &Param{
-				Doc: NewParamDoc(v.Parameters.InstanceParameter.ParameterAttrs),
+				Doc: NewParamDoc(girparams.InstanceParameter.ParameterAttrs),
 
 				CName:  "carg0",
 				GoName: "arg0", // TODO: find a better go name
@@ -85,7 +95,7 @@ func NewParameters(ns *Namespace, v gir.CallableAttrs) *Parameters {
 			params.CParameters = append(params.CParameters, params.GoReceiver)
 		}
 
-		for i, p := range v.Parameters.Parameters {
+		for i, p := range girparams.Parameters {
 			t := ns.findAnyType(p.AnyType)
 
 			if t == nil {
@@ -119,7 +129,7 @@ func NewParameters(ns *Namespace, v gir.CallableAttrs) *Parameters {
 		}
 
 		// mark the implicit params. The idx is the index in c parameters, with a given instance param
-		for i, p := range v.Parameters.Parameters {
+		for i, p := range girparams.Parameters {
 			param := params.GoParameters[i]
 			if p.Closure != nil {
 				param.Closure = params.CParameters[*p.Closure]
@@ -140,7 +150,7 @@ func NewParameters(ns *Namespace, v gir.CallableAttrs) *Parameters {
 		}
 	}
 
-	if v.Throws {
+	if throws {
 		throwParam := &Param{
 			Doc:               ParamDoc{},
 			CName:             "_cerr",
@@ -157,22 +167,25 @@ func NewParameters(ns *Namespace, v gir.CallableAttrs) *Parameters {
 		params.GoReturns = append(params.GoReturns, throwParam)
 	}
 
-	if v.ReturnValue != nil {
-		t := ns.findAnyType(v.ReturnValue.AnyType)
+	if ret != nil {
+		t := ns.findAnyType(ret.AnyType)
 
 		if t == nil {
 			return nil
 		}
 
-		ret := &Param{
-			Doc:    NewReturnDoc(v.ReturnValue),
-			CName:  "cret",
-			GoName: "ret",
-			Type:   t,
+		if t.GIRName() != "none" {
+			ret := &Param{
+				Doc:    NewReturnDoc(ret),
+				CName:  "cret",
+				GoName: "ret",
+				Type:   t,
+			}
+
+			params.CReturn = ret
+			params.GoReturns = append(params.GoReturns, ret)
 		}
 
-		params.CReturn = ret
-		params.GoReturns = append(params.GoReturns, ret)
 	}
 
 	return params

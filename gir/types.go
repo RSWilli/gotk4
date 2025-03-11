@@ -208,6 +208,10 @@ type InfoAttrs struct {
 	Stability         string `xml:"stability,attr"`
 }
 
+func (inf InfoAttrs) GetInfoAttrs() InfoAttrs {
+	return inf
+}
+
 // IsIntrospectable returns true if the InfoAttrs indicates that the type is
 // introspectable.
 func (inf InfoAttrs) IsIntrospectable() bool {

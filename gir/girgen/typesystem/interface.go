@@ -18,13 +18,13 @@ type Interface struct {
 
 	Prerequesite []Type // Class or Interface
 
-	Functions      []*Callable
-	Methods        []*Callable
+	Functions      []*CallableSignature
+	Methods        []*CallableSignature
 	VirtualMethods []*VirtualMethod
 	Signals        []*Signal
 }
 
-func NewInterface(ns *Namespace, v gir.Interface) *Interface {
+func DeclareInterface(ns *Namespace, v gir.Interface) *Interface {
 	ctype := v.CType
 
 	if ctype == "" {
@@ -78,17 +78,17 @@ func (r *Interface) resolveNested(ns *Namespace, v gir.Interface) {
 		r.TypeStruct = typeStruct
 
 		for _, v := range v.VirtualMethods {
-			if t := NewVirtualMethod(ns, typeStruct, v); t != nil {
+			if t := NewVirtualMethod(ns, r, typeStruct, v); t != nil {
 				r.VirtualMethods = append(r.VirtualMethods, t)
 			}
 		}
 	}
 
-	// ------------- from here on the class is valid and we will only omit invalid parts ----------------
+	// ------------- from here on the interface is valid and we will only omit invalid parts ----------------
 	r.Valid = true
 
 	for _, v := range v.Functions {
-		if t := NewFunction(ns, v); t != nil {
+		if t := DeclareFunction(ns, v); t != nil {
 			r.Functions = append(r.Functions, t)
 		}
 	}

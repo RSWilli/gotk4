@@ -28,7 +28,7 @@ type Namespace struct {
 	Records    []*Record
 	Unions     []*Union
 
-	Functions []*Callable
+	Functions []*CallableSignature
 }
 
 func newNamespace(reg *Registry, ns *namespaceWithIncludes) *Namespace {
@@ -61,38 +61,31 @@ func newNamespace(reg *Registry, ns *namespaceWithIncludes) *Namespace {
 	// these are deferred and resolved at the end of the namespace creation.
 
 	for _, v := range ns.Unions {
-		if t := NewUnion(namespace, v); t != nil {
+		if t := DelcareUnion(namespace, v); t != nil {
 			namespace.Unions = append(namespace.Unions, t)
 
 			defer t.resolveNested(namespace, v)
 		}
 	}
 	for _, v := range ns.Enums {
-		if t := NewEnum(namespace, v); t != nil {
+		if t := DeclareEnum(namespace, v); t != nil {
 			namespace.Enums = append(namespace.Enums, t)
 		}
 	}
 	for _, v := range ns.Bitfields {
-		if t := NewBitfield(namespace, v); t != nil {
+		if t := DeclareBitfield(namespace, v); t != nil {
 			namespace.Bitfields = append(namespace.Bitfields, t)
 		}
 	}
 	for _, v := range ns.Callbacks {
-		if t := NewCallback(namespace, v); t != nil {
+		if t := DeclareCallback(namespace, v); t != nil {
 			namespace.Callbacks = append(namespace.Callbacks, t)
 
 			defer t.resolveParameters(namespace, v)
 		}
 	}
-	for _, v := range ns.Records {
-		if t := NewRecord(namespace, v); t != nil {
-			namespace.Records = append(namespace.Records, t)
-
-			defer t.resolveNested(namespace, v)
-		}
-	}
 	for _, v := range ns.Interfaces {
-		if t := NewInterface(namespace, v); t != nil {
+		if t := DeclareInterface(namespace, v); t != nil {
 			namespace.Interfaces = append(namespace.Interfaces, t)
 
 			defer t.resolveNested(namespace, v)
@@ -105,21 +98,29 @@ func newNamespace(reg *Registry, ns *namespaceWithIncludes) *Namespace {
 			defer t.resolveNested(namespace, v)
 		}
 	}
+	for _, v := range ns.Records {
+		if t := DeclareRecord(namespace, v); t != nil {
+			namespace.Records = append(namespace.Records, t)
+
+			// needs to be after classes/interfaces, because this defer needs to run before the classes/interfaces:
+			defer t.resolveNested(namespace, v)
+		}
+	}
 	for _, v := range ns.Aliases {
-		if t := NewAlias(namespace, v); t != nil {
+		if t := DeclareAlias(namespace, v); t != nil {
 			namespace.Aliases = append(namespace.Aliases, t)
 		}
 	}
 
-	// create these after initializing all types:
+	// declare these after declaring all types, because they reference the above:
 
 	for _, v := range ns.Functions {
-		if t := NewFunction(namespace, v); t != nil {
+		if t := DeclareFunction(namespace, v); t != nil {
 			namespace.Functions = append(namespace.Functions, t)
 		}
 	}
 	for _, v := range ns.Constants {
-		if t := NewConstant(namespace, v); t != nil {
+		if t := DeclareConstant(namespace, v); t != nil {
 			namespace.Constants = append(namespace.Constants, t)
 		}
 	}
@@ -153,51 +154,67 @@ func (ns *Namespace) findAnyType(t gir.AnyType) Type {
 	panic("received invalid anytype")
 }
 
+// findType searches for a declared type in the namespace. It makes sure that the returned type
+// contains the same amount of pointers as the given gir type
 func (ns *Namespace) findType(t *gir.Type) Type {
-	if isIgnoredType(t) {
+	typ := ns.findTypeByGIRName(t.Name)
+
+	if typ == nil {
 		return nil
 	}
 
-	parts := strings.Split(t.Name, ".")
+	return WithPointers(t, typ)
+}
+
+func (ns *Namespace) findTypeByGIRName(t string) Type {
+	if isIgnoredTypeName(t) {
+		return nil
+	}
+
+	parts := strings.Split(t, ".")
 
 	if len(parts) > 2 {
 		panic("received invalid type name")
 	}
 
 	if len(parts) == 1 {
-		primitive := findPrimitiveType(t)
+		primitive := findPrimitiveByName(t)
 
 		if primitive != nil {
 			return primitive
 		}
 
-		typ := ns.findLocalType(t)
+		typ := ns.findLocalTypeByGIRName(t)
 
 		if typ == nil {
-			log.Printf("type %s not found in namespace %s\n", t.Name, ns.v)
+			log.Printf("type %s not found in namespace %s\n", t, ns.v)
 			return nil
 		}
 
 		return typ
 	}
 
-	// remove the namespace identifier in front:
-	foreignType := *t
-	foreignType.Name = parts[1]
+	foreignNSName := parts[0]
+	foreignTypeName := parts[1]
 
-	if parts[0] == ns.v.name {
-		// some glib types are referenced with glib prefix, e.g. HashTable
-		return ns.findType(&foreignType)
-	}
-
-	reffedNS, ok := ns.Included[parts[0]]
-
-	if !ok {
-		log.Printf("type %s referenced unknown namespace %s\n", t.Name, parts[0])
+	if isIgnoredNSName(foreignNSName) {
 		return nil
 	}
 
-	foreign := reffedNS.findLocalType(&foreignType)
+	if foreignNSName == ns.v.name {
+		// some glib types are always referenced with glib prefix, e.g. HashTable
+		// even in glib namespace.
+		return ns.findTypeByGIRName(foreignTypeName)
+	}
+
+	reffedNS, ok := ns.Included[foreignNSName]
+
+	if !ok {
+		log.Printf("type %s referenced unknown namespace %s\n", t, foreignNSName)
+		return nil
+	}
+
+	foreign := reffedNS.findLocalTypeByGIRName(foreignTypeName)
 
 	if foreign != nil {
 		return &ForeignType{
@@ -206,31 +223,20 @@ func (ns *Namespace) findType(t *gir.Type) Type {
 		}
 	}
 
-	log.Printf("type %s not found in namespace %s\n", t.Name, ns.v)
+	log.Printf("type %s not found in namespace %s\n", t, ns.v)
 
 	return nil
 }
 
-// findLocalType returns the [Type] for the named type
-func (n *Namespace) findLocalType(gir *gir.Type) Type {
-	return n.findTypeWith(func(t Type) bool {
-		return t.GIRName() == gir.Name
+// findLocalTypeByGIRName returns the [Type] for the named type
+func (n *Namespace) findLocalTypeByGIRName(girname string) Type {
+	return n.findLocalTypeWith(func(t Type) bool {
+		return t.GIRName() == girname
 	})
 }
 
-// findCType returns the [Type] for the ctype. ctype must be pointerless
-func (n *Namespace) findCType(ctype string) Type {
-	ctype = strings.TrimPrefix("const ", ctype)
-
-	// TODO: find primitive by ctype
-
-	return n.findTypeWith(func(t Type) bool {
-		return t.CType() == ctype
-	})
-}
-
-// findTypeWith returns the [Type] where the predicate returns true
-func (n *Namespace) findTypeWith(pred func(t Type) bool) Type {
+// findLocalTypeWith returns the [Type] where the predicate returns true
+func (n *Namespace) findLocalTypeWith(pred func(t Type) bool) Type {
 	for _, a := range n.Aliases {
 		if pred(a) {
 			return a

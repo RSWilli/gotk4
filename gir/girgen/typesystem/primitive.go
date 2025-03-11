@@ -1,7 +1,5 @@
 package typesystem
 
-import "github.com/diamondburned/gotk4/gir"
-
 type Primitive struct {
 	baseType
 }
@@ -24,7 +22,7 @@ var Primitives = []*Primitive{
 	prim("guint32", "guint32", "C.guint32", "uint32"),
 	prim("guint64", "guint64", "C.guint64", "uint64"),
 
-	prim("gint", "gint", "C.gint", "int"),
+	prim("gint", "gint", "C.int", "int"),
 	prim("gint8", "gint8", "C.gint8", "int8"),
 	prim("gint16", "gint16", "C.gint16", "int16"),
 	prim("gint32", "gint32", "C.gint32", "int32"),
@@ -77,14 +75,14 @@ var Void = &VoidType{
 	},
 }
 
-func findPrimitiveType(t *gir.Type) Type {
-	if t.Name == Void.GIRName() {
+func findPrimitiveByName(girname string) Type {
+	if girname == Void.GIRName() {
 		return Void
 	}
 
 	for _, p := range Primitives {
-		if p.GIRName() == t.Name {
-			return WithPointers(t, p)
+		if p.GIRName() == girname {
+			return p
 		}
 	}
 
@@ -105,12 +103,29 @@ var TypeError = &Error{
 }
 
 var IgnoredTypes = []string{
-	"long double", // may be more precise than float64
+	"long double", // may be more precise than float64, so we do not have a go equivalent
 }
 
-func isIgnoredType(t *gir.Type) bool {
+func isIgnoredTypeName(girname string) bool {
 	for _, ign := range IgnoredTypes {
-		if ign == t.Name {
+		if ign == girname {
+			return true
+		}
+	}
+
+	return false
+}
+
+// TODO: configure this somehow from genmain
+var IgnoredNamespaces = []string{
+	"xlib",
+	"HarfBuzz",
+	"DBus",
+}
+
+func isIgnoredNSName(foreignNSName string) bool {
+	for _, ns := range IgnoredNamespaces {
+		if ns == foreignNSName {
 			return true
 		}
 	}

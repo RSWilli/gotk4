@@ -17,25 +17,28 @@ type Callback struct {
 	*Parameters
 }
 
-// NewCallback declares a new callback. This way the type can be resolved by others, but the referenced parameters
+// DeclareCallback declares a new callback. This way the type can be resolved by others, but the referenced parameters
 // have to be resolved later, because the callback params could be referencing other record types
-func NewCallback(ns *Namespace, v gir.Callback) *Callback {
+func DeclareCallback(ns *Namespace, v gir.Callback) *Callback {
 	if !v.IsIntrospectable() {
 		return nil
 	}
 
+	goType := strcases.PascalToGo(v.Name)
+
 	return &Callback{
 		baseType: baseType{
 			girName: v.Name,
-			goType:  strcases.PascalToGo(v.Name),
+			goType:  goType,
 			cGoType: "C." + v.CType,
 			cType:   v.CType,
 		},
-		TrampolineName: fmt.Sprintf("_gotk4_%s%d_%s", ns.GoName, ns.v.majorVersion, v.Name),
+		// e.g. _gotk4_gtk4_AssistantPageFunc
+		TrampolineName: fmt.Sprintf("_gotk4_%s%d_%s", ns.GoName, ns.v.majorVersion, goType),
 		Parameters:     nil, // resolved later
 	}
 }
 
 func (cb *Callback) resolveParameters(ns *Namespace, v gir.Callback) {
-	cb.Parameters = NewParameters(ns, v.CallableAttrs)
+	cb.Parameters = NewCallableParameters(ns, v.CallableAttrs)
 }

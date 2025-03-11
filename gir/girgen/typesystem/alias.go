@@ -12,7 +12,7 @@ type Alias struct {
 	AliasedType Type
 }
 
-func NewAlias(ns *Namespace, v gir.Alias) *Alias {
+func DeclareAlias(ns *Namespace, v gir.Alias) *Alias {
 	if !v.IsIntrospectable() {
 		return nil
 	}
@@ -27,8 +27,8 @@ func NewAlias(ns *Namespace, v gir.Alias) *Alias {
 		baseType: baseType{
 			girName: v.Name,
 			goType:  strcases.PascalToGo(v.Name),
-			cGoType: "C." + v.Name,
-			cType:   v.Name,
+			cGoType: "C." + v.CType,
+			cType:   v.CType,
 		},
 		AliasedType: subtype,
 		Doc:         NewDoc(&v.InfoAttrs, &v.InfoElements),
