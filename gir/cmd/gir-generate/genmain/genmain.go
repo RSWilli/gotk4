@@ -175,7 +175,9 @@ func Generate(repos gir.Repositories, data Data) {
 
 	// TODO: add some options that allow the user to supply custom value transformers
 
-	ts := typesystem.FromRepositories(repos)
+	tsCfg := typesystem.Config{}
+
+	ts := typesystem.FromRepositories(tsCfg, repos)
 
 	ctx := gencontext.Base(ts)
 

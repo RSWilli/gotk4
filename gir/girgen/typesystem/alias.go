@@ -12,8 +12,8 @@ type Alias struct {
 	AliasedType Type
 }
 
-func DeclareAlias(ns *Namespace, v gir.Alias) *Alias {
-	if !v.IsIntrospectable() {
+func DeclareAlias(ns context, v gir.Alias) *Alias {
+	if ns.skipType(v) {
 		return nil
 	}
 

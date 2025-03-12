@@ -13,8 +13,8 @@ type Bitfield struct {
 	Members []*Member
 }
 
-func DeclareBitfield(ns *Namespace, v gir.Bitfield) *Bitfield {
-	if !v.IsIntrospectable() {
+func DeclareBitfield(ctx context, v gir.Bitfield) *Bitfield {
+	if ctx.skipType(v) {
 		return nil
 	}
 

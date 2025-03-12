@@ -50,7 +50,7 @@ func NewNamespaceGenerator(g *Generator, n *gir.NamespaceFindResult) *NamespaceG
 		Generator:  g,
 		PkgPath:    g.ModPath(n.Namespace),
 		PkgName:    gir.GoNamespace(n.Namespace),
-		PkgVersion: gir.MajorVersion(n.Namespace.Version),
+		PkgVersion: gir.MajorVersion(n.Namespace.Version.String()),
 		Files:      map[string]FileGenerator{},
 		current:    n,
 		canResolve: map[string]bool{},
@@ -187,8 +187,8 @@ func (n *NamespaceGenerator) FileWriter(info cmt.InfoFields, export bool) genera
 		filename = strings.TrimSuffix(filename, ext)
 	}
 
-	if info.Attrs != nil && info.Attrs.Version != "" {
-		filename += "_" + strings.ReplaceAll(info.Attrs.Version, ".", "_") // ex: gtk_3_2.go
+	if info.Attrs != nil && info.Attrs.Version.String() != "" {
+		filename += "_" + strings.ReplaceAll(info.Attrs.Version.String(), ".", "_") // ex: gtk_3_2.go
 	}
 
 	if export {

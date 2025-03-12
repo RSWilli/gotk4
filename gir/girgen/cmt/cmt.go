@@ -253,8 +253,8 @@ func goDoc(v interface{}, indentLvl int, opts []Option) string {
 		case inf.Elements != nil && inf.Elements.DocDeprecated != nil:
 			v := strings.TrimSuffix(inf.Elements.DocDeprecated.String, ".")
 			fmt.Fprintf(&docBuilder, "Deprecated: %s.", v)
-		case inf.Attrs.DeprecatedVersion != "":
-			v := strings.TrimSuffix(inf.Attrs.DeprecatedVersion, ".")
+		case inf.Attrs.DeprecatedVersion.String() != "":
+			v := strings.TrimSuffix(inf.Attrs.DeprecatedVersion.String(), ".")
 			fmt.Fprintf(&docBuilder, "Deprecated: since version %s.", v)
 		default:
 			fmt.Fprintf(&docBuilder, "Deprecated.")

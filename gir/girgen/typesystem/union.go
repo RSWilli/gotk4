@@ -17,8 +17,8 @@ type Union struct {
 	Fields       []*Field
 }
 
-func DelcareUnion(ns *Namespace, v gir.Union) *Union {
-	if !v.IsIntrospectable() {
+func DeclareUnion(ctx context, v gir.Union) *Union {
+	if ctx.skipType(v) {
 		return nil
 	}
 
@@ -34,7 +34,7 @@ func DelcareUnion(ns *Namespace, v gir.Union) *Union {
 	}
 }
 
-func (u *Union) resolveNested(ns *Namespace, v gir.Union) {
+func (u *Union) resolveNested(ns context, v gir.Union) {
 	for _, v := range v.Functions {
 		if t := DeclareFunction(ns, v); t != nil {
 			u.Functions = append(u.Functions, t)

@@ -19,12 +19,12 @@ type namespaceWithIncludes struct {
 }
 
 type versionedNamespace struct {
-	name         string
-	majorVersion int
+	name    string
+	version gir.Version
 }
 
 func (v versionedNamespace) String() string {
-	return fmt.Sprintf("%s-%d", v.name, v.majorVersion)
+	return fmt.Sprintf("%s-%s", v.name, v.version)
 }
 
 func resolveNamespaceIncludes(repos gir.Repositories) []*namespaceWithIncludes {
@@ -36,8 +36,8 @@ func resolveNamespaceIncludes(repos gir.Repositories) []*namespaceWithIncludes {
 
 		for _, ns := range repo.Namespaces {
 			versioned := versionedNamespace{
-				name:         ns.Name,
-				majorVersion: parseMajorVersion(ns.Version),
+				name:    ns.Name,
+				version: ns.Version,
 			}
 
 			namespace := &namespaceWithIncludes{
@@ -86,8 +86,8 @@ func repoPrefilledIncludes(r gir.Repository) map[string]*namespaceWithIncludes {
 	for _, v := range r.Includes {
 		m[v.Name] = &namespaceWithIncludes{
 			versionedName: versionedNamespace{
-				name:         v.Name,
-				majorVersion: parseMajorVersion(v.Version),
+				name:    v.Name,
+				version: v.Version,
 			},
 		}
 	}

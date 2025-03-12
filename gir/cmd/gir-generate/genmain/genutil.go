@@ -56,7 +56,7 @@ func ModulePath(module string, overrides map[string]string) func(*gir.Namespace)
 
 // MajorVersion returns the major version of the GIR namespace in int.
 func MajorVersion(nsp *gir.Namespace) int {
-	version := gir.MajorVersion(nsp.Version)
+	version := gir.MajorVersion(nsp.Version.String())
 
 	v, err := strconv.Atoi(version)
 	if err != nil {
@@ -182,9 +182,9 @@ func GenerateAll(gen *girgen.Generator, dst string, except []string) []error {
 				continue
 			}
 
-			ng := gen.UseNamespace(namespace.Name, namespace.Version)
+			ng := gen.UseNamespace(namespace.Name, namespace.Version.String())
 			if ng == nil {
-				log.Fatalln("cannot find namespace", namespace.Name, "v"+namespace.Version)
+				log.Fatalln("cannot find namespace", namespace.Name, "v"+namespace.Version.String())
 			}
 
 			sema.Acquire(context.Background(), 1)
@@ -228,9 +228,9 @@ func GeneratePackages(gen *girgen.Generator, dst string, pkgs []Package, except 
 			return
 		}
 
-		ng := gen.UseNamespace(namespace.Name, namespace.Version)
+		ng := gen.UseNamespace(namespace.Name, namespace.Version.String())
 		if ng == nil {
-			log.Fatalln("cannot find namespace", namespace.Name, "v"+namespace.Version)
+			log.Fatalln("cannot find namespace", namespace.Name, "v"+namespace.Version.String())
 		}
 
 		sema.Acquire(context.Background(), 1)

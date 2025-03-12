@@ -26,7 +26,7 @@ type Signal struct {
 	*Parameters
 }
 
-func NewSignal(ns *Namespace, v gir.Signal) *Signal {
+func NewSignal(ns context, v gir.Signal) *Signal {
 	params := NewParameters(ns, v.Parameters, v.ReturnValue, false)
 
 	if params == nil {

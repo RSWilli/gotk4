@@ -24,7 +24,7 @@ type Field struct {
 	Bits int
 }
 
-func NewField(ns *Namespace, v gir.Field) *Field {
+func NewField(ns context, v gir.Field) *Field {
 	if v.Private || !(v.IsReadable() || v.Writable) {
 		return nil
 	}

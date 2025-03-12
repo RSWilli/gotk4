@@ -1,9 +1,11 @@
 package gir
 
 import (
+	"encoding"
 	"encoding/xml"
-	"log"
+	"fmt"
 	"strconv"
+	"strings"
 )
 
 // https://gitlab.gnome.org/GNOME/gobject-introspection/-/blob/HEAD/docs/gir-1.2.rnc
@@ -197,20 +199,106 @@ type Implements struct {
 type Include struct {
 	XMLName xml.Name `xml:"http://www.gtk.org/introspection/core/1.0 include"`
 	Name    string   `xml:"name,attr"`
-	Version string   `xml:"version,attr"`
+	Version Version  `xml:"version,attr"`
 }
 
 type InfoAttrs struct {
-	Introspectable    *bool  `xml:"introspectable,attr"` // default true
-	Deprecated        bool   `xml:"deprecated,attr"`
-	DeprecatedVersion string `xml:"deprecated-version,attr"`
-	Version           string `xml:"version,attr"`
-	Stability         string `xml:"stability,attr"`
+	Introspectable    *bool   `xml:"introspectable,attr"` // default true
+	Deprecated        bool    `xml:"deprecated,attr"`
+	DeprecatedVersion Version `xml:"deprecated-version,attr"`
+	Version           Version `xml:"version,attr"`
+	Stability         string  `xml:"stability,attr"`
 }
 
 func (inf InfoAttrs) GetInfoAttrs() InfoAttrs {
 	return inf
 }
+
+func ParseVersion(str string) (Version, error) {
+	var v Version
+
+	err := v.UnmarshalText([]byte(str))
+
+	if err != nil {
+		return v, err
+	}
+
+	return v, nil
+}
+
+type Version struct {
+	Major int
+	Minor int
+	Patch int
+}
+
+func (v Version) String() string {
+	return fmt.Sprintf("%d.%d.%d", v.Major, v.Minor, v.Patch)
+}
+
+// Lte implements the less than or equals relation
+func (v Version) Lte(other Version) bool {
+	if v.Major > other.Major {
+		return false
+	}
+	if v.Minor > other.Minor {
+		return false
+	}
+	if v.Patch > other.Patch {
+		return false
+	}
+
+	return true
+}
+
+// UnmarshalText implements encoding.TextUnmarshaler.
+func (v *Version) UnmarshalText(in []byte) error {
+	text := string(in)
+
+	if len(text) == 0 {
+		return nil
+	}
+
+	parts := strings.Split(text, ".")
+
+	if len(parts) > 3 {
+		return fmt.Errorf("invalid version")
+	}
+
+	var major int
+	var minor int
+	var patch int
+	var err error
+
+	if len(parts) > 0 {
+		major, err = strconv.Atoi(parts[0])
+		if err != nil {
+			return fmt.Errorf(`error while parsing major version "%s" of "%s": %w`, parts[0], text, err)
+		}
+	}
+	if len(parts) > 1 {
+		minor, err = strconv.Atoi(parts[1])
+		if err != nil {
+			return fmt.Errorf(`error while parsing minor version "%s" of "%s": %w`, parts[1], text, err)
+		}
+	}
+	if len(parts) > 2 && parts[2] != "" {
+		patch, err = strconv.Atoi(parts[2])
+		if err != nil {
+			return fmt.Errorf(`error while parsing patch version "%s" of "%s": %w`, parts[2], text, err)
+		}
+	}
+
+	*v = Version{
+		Major: major,
+		Minor: minor,
+		Patch: patch,
+	}
+
+	return nil
+}
+
+var _ encoding.TextUnmarshaler = &Version{}
 
 // IsIntrospectable returns true if the InfoAttrs indicates that the type is
 // introspectable.
@@ -286,12 +374,12 @@ type Method struct {
 type Namespace struct {
 	XMLName xml.Name `xml:"http://www.gtk.org/introspection/core/1.0 namespace"`
 
-	Name                string `xml:"name,attr"`
-	Version             string `xml:"version,attr"`
-	CIdentifierPrefixes string `xml:"http://www.gtk.org/introspection/c/1.0 identifier-prefixes,attr"`
-	CSymbolPrefixes     string `xml:"http://www.gtk.org/introspection/c/1.0 symbol-prefixes,attr"`
-	Prefix              string `xml:"http://www.gtk.org/introspection/c/1.0 prefix,attr"`
-	SharedLibrary       string `xml:"shared-library,attr"`
+	Name                string  `xml:"name,attr"`
+	Version             Version `xml:"version,attr"`
+	CIdentifierPrefixes string  `xml:"http://www.gtk.org/introspection/c/1.0 identifier-prefixes,attr"`
+	CSymbolPrefixes     string  `xml:"http://www.gtk.org/introspection/c/1.0 symbol-prefixes,attr"`
+	Prefix              string  `xml:"http://www.gtk.org/introspection/c/1.0 prefix,attr"`
+	SharedLibrary       string  `xml:"shared-library,attr"`
 
 	Aliases     []Alias      `xml:"http://www.gtk.org/introspection/core/1.0 alias"`
 	Classes     []Class      `xml:"http://www.gtk.org/introspection/core/1.0 class"`
@@ -305,17 +393,6 @@ type Namespace struct {
 	Constants   []Constant   `xml:"http://www.gtk.org/introspection/core/1.0 constant"`
 	Annotations []Annotation `xml:"http://www.gtk.org/introspection/core/1.0 attribute"`
 	Boxeds      []Boxed      `xml:"http://www.gtk.org/introspection/core/1.0 boxed"`
-}
-
-func (ns Namespace) MajorVersion() int {
-	major := MajorVersion(ns.Version)
-
-	v, err := strconv.Atoi(major)
-	if err != nil {
-		log.Panicf("invalid major %q", major)
-	}
-
-	return v
 }
 
 type Package struct {

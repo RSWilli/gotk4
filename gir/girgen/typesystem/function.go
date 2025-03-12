@@ -11,12 +11,12 @@ type CallableSignature struct {
 	*Parameters
 }
 
-func DeclareFunction(ns *Namespace, v gir.Function) *CallableSignature {
-	if !v.IsIntrospectable() {
+func DeclareFunction(ctx context, v gir.Function) *CallableSignature {
+	if ctx.skipType(v) {
 		return nil
 	}
 
-	params := NewCallableParameters(ns, v.CallableAttrs)
+	params := NewCallableParameters(ctx, v.CallableAttrs)
 
 	if params == nil {
 		// log.Printf("could not create parameters for function %s\n", v.CIdentifier)
@@ -31,12 +31,12 @@ func DeclareFunction(ns *Namespace, v gir.Function) *CallableSignature {
 	}
 }
 
-func NewMethod(ns *Namespace, v gir.Method) *CallableSignature {
-	if !v.IsIntrospectable() {
+func NewMethod(ctx context, v gir.Method) *CallableSignature {
+	if ctx.skipType(v) {
 		return nil
 	}
 
-	params := NewCallableParameters(ns, v.CallableAttrs)
+	params := NewCallableParameters(ctx, v.CallableAttrs)
 
 	if params == nil {
 		// log.Printf("could not create parameters for method %s\n", v.CIdentifier)
@@ -51,12 +51,12 @@ func NewMethod(ns *Namespace, v gir.Method) *CallableSignature {
 	}
 }
 
-func DeclareConstructor(ns *Namespace, v gir.Constructor) *CallableSignature {
-	if !v.IsIntrospectable() {
+func DeclareConstructor(ctx context, v gir.Constructor) *CallableSignature {
+	if ctx.skipType(v) {
 		return nil
 	}
 
-	params := NewCallableParameters(ns, v.CallableAttrs)
+	params := NewCallableParameters(ctx, v.CallableAttrs)
 
 	if params == nil {
 		// log.Printf("could not create parameters for constructor %s\n", v.CIdentifier)

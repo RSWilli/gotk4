@@ -11,8 +11,8 @@ type Constant struct {
 	GoValue string
 }
 
-func DeclareConstant(ns *Namespace, v gir.Constant) *Constant {
-	if !v.IsIntrospectable() {
+func DeclareConstant(ctx context, v gir.Constant) *Constant {
+	if ctx.skipType(v) {
 		return nil
 	}
 

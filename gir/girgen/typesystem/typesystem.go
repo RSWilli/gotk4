@@ -11,16 +11,18 @@ type Registry struct {
 // FromRepositories loads all repositories into the registry and resolves all type references.
 //
 // the repositories must be loaded in the correct order to be able to resolve all types
-func FromRepositories(repos gir.Repositories) *Registry {
+func FromRepositories(cfg Config, repos gir.Repositories) *Registry {
 	r := &Registry{
 		Namespaces: make([]*Namespace, 0, len(repos)),
 	}
 
 	withIncludes := resolveNamespaceIncludes(repos)
 
+	skipFuncs := cfg.getSkipFuncs(withIncludes)
+
 	for _, nsTmp := range withIncludes {
 
-		ns := newNamespace(r, nsTmp)
+		ns := r.newNamespace(skipFuncs[nsTmp.versionedName], nsTmp)
 
 		if ns == nil {
 			continue

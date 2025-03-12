@@ -67,7 +67,7 @@ type Parameters struct {
 	GoParameters []*Param
 }
 
-func NewCallableParameters(ns *Namespace, v gir.CallableAttrs) *Parameters {
+func NewCallableParameters(ns context, v gir.CallableAttrs) *Parameters {
 	params := NewParameters(ns, v.Parameters, v.ReturnValue, v.Throws)
 
 	if params != nil {
@@ -77,7 +77,7 @@ func NewCallableParameters(ns *Namespace, v gir.CallableAttrs) *Parameters {
 	return params
 }
 
-func NewParameters(ns *Namespace, girparams *gir.Parameters, ret *gir.ReturnValue, throws bool) *Parameters {
+func NewParameters(ns context, girparams *gir.Parameters, ret *gir.ReturnValue, throws bool) *Parameters {
 	params := &Parameters{}
 
 	if girparams != nil {

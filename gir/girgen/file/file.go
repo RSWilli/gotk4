@@ -205,8 +205,8 @@ func CallableExportedName(source *gir.NamespaceFindResult, callable *gir.Callabl
 // Deprecated: old
 func ExportedName(source *gir.NamespaceFindResult, suffixes ...string) string {
 	namespaceName := strings.ToLower(source.Namespace.Name)
-	if source.Namespace.Version != "" {
-		namespaceName += gir.MajorVersion(source.Namespace.Version)
+	if source.Namespace.Version.String() != "" {
+		namespaceName += gir.MajorVersion(source.Namespace.Version.String())
 	}
 
 	return callbackPrefix + "_" + namespaceName + "_" + strings.Join(suffixes, "_")

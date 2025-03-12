@@ -12,8 +12,8 @@ type Enum struct {
 	Members []*Member
 }
 
-func DeclareEnum(ns *Namespace, v gir.Enum) *Enum {
-	if !v.IsIntrospectable() {
+func DeclareEnum(ctx context, v gir.Enum) *Enum {
+	if ctx.skipType(v) {
 		return nil
 	}
 

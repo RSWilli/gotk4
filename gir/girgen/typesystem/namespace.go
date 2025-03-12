@@ -12,8 +12,9 @@ type Namespace struct {
 
 	Included map[string]*Namespace
 
-	GoName       string
-	MajorVersion int
+	Name    string
+	GoName  string
+	Version gir.Version
 
 	Packages  []string
 	CIncludes []string
@@ -31,12 +32,13 @@ type Namespace struct {
 	Functions []*CallableSignature
 }
 
-func newNamespace(reg *Registry, ns *namespaceWithIncludes) *Namespace {
+func (reg *Registry) newNamespace(sf skipFunc, ns *namespaceWithIncludes) *Namespace {
 	namespace := &Namespace{
-		v:            ns.versionedName,
-		GoName:       goPackageName(ns.Name),
-		MajorVersion: ns.versionedName.majorVersion,
-		Included:     make(map[string]*Namespace, len(ns.includes)),
+		v:        ns.versionedName,
+		Name:     ns.Name,
+		GoName:   goPackageName(ns.Name),
+		Version:  ns.versionedName.version,
+		Included: make(map[string]*Namespace, len(ns.includes)),
 	}
 
 	for ident, incl := range ns.includes {
@@ -57,57 +59,62 @@ func newNamespace(reg *Registry, ns *namespaceWithIncludes) *Namespace {
 		namespace.Packages = append(namespace.Packages, pkg.Name)
 	}
 
+	ctx := namespaceContext{
+		skipTypeFunc: sf,
+		Namespace:    namespace,
+	}
+
 	// types must be declared first. Some types contain nested references to other types.
 	// these are deferred and resolved at the end of the namespace creation.
 
 	for _, v := range ns.Unions {
-		if t := DelcareUnion(namespace, v); t != nil {
+		if t := DeclareUnion(ctx, v); t != nil {
 			namespace.Unions = append(namespace.Unions, t)
 
-			defer t.resolveNested(namespace, v)
+			defer t.resolveNested(ctx, v)
 		}
 	}
 	for _, v := range ns.Enums {
-		if t := DeclareEnum(namespace, v); t != nil {
+		if t := DeclareEnum(ctx, v); t != nil {
 			namespace.Enums = append(namespace.Enums, t)
 		}
 	}
 	for _, v := range ns.Bitfields {
-		if t := DeclareBitfield(namespace, v); t != nil {
+		if t := DeclareBitfield(ctx, v); t != nil {
 			namespace.Bitfields = append(namespace.Bitfields, t)
 		}
 	}
 	for _, v := range ns.Callbacks {
-		if t := DeclareCallback(namespace, v); t != nil {
+		if t := DeclareCallback(ctx, v); t != nil {
 			namespace.Callbacks = append(namespace.Callbacks, t)
 
-			defer t.resolveParameters(namespace, v)
+			defer t.resolveParameters(ctx, v)
 		}
 	}
 	for _, v := range ns.Interfaces {
-		if t := DeclareInterface(namespace, v); t != nil {
+		if t := DeclareInterface(ctx, v); t != nil {
 			namespace.Interfaces = append(namespace.Interfaces, t)
 
-			defer t.resolveNested(namespace, v)
+			defer t.resolveNested(ctx, v)
 		}
 	}
 	for _, v := range ns.Classes {
-		if t := NewClass(namespace, v); t != nil {
+		if t := NewClass(ctx, v); t != nil {
 			namespace.Classes = append(namespace.Classes, t)
 
-			defer t.resolveNested(namespace, v)
+			defer t.resolveNested(ctx, v)
 		}
 	}
 	for _, v := range ns.Records {
-		if t := DeclareRecord(namespace, v); t != nil {
+		if t := DeclareRecord(ctx, v); t != nil {
 			namespace.Records = append(namespace.Records, t)
 
 			// needs to be after classes/interfaces, because this defer needs to run before the classes/interfaces:
-			defer t.resolveNested(namespace, v)
+			defer t.resolveNested(ctx, v)
 		}
 	}
 	for _, v := range ns.Aliases {
-		if t := DeclareAlias(namespace, v); t != nil {
+		if t := DeclareAlias(ctx, v); t != nil {
 			namespace.Aliases = append(namespace.Aliases, t)
 		}
 	}
@@ -115,12 +122,12 @@ func newNamespace(reg *Registry, ns *namespaceWithIncludes) *Namespace {
 	// declare these after declaring all types, because they reference the above:
 
 	for _, v := range ns.Functions {
-		if t := DeclareFunction(namespace, v); t != nil {
+		if t := DeclareFunction(ctx, v); t != nil {
 			namespace.Functions = append(namespace.Functions, t)
 		}
 	}
 	for _, v := range ns.Constants {
-		if t := DeclareConstant(namespace, v); t != nil {
+		if t := DeclareConstant(ctx, v); t != nil {
 			namespace.Constants = append(namespace.Constants, t)
 		}
 	}
@@ -151,7 +158,8 @@ func (ns *Namespace) findAnyType(t gir.AnyType) Type {
 		return arr
 	}
 
-	panic("received invalid anytype")
+	// this happens e.g. on vararg params
+	return nil
 }
 
 // findType searches for a declared type in the namespace. It makes sure that the returned type

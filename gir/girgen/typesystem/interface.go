@@ -24,7 +24,7 @@ type Interface struct {
 	Signals        []*Signal
 }
 
-func DeclareInterface(ns *Namespace, v gir.Interface) *Interface {
+func DeclareInterface(ns context, v gir.Interface) *Interface {
 	ctype := v.CType
 
 	if ctype == "" {
@@ -42,7 +42,7 @@ func DeclareInterface(ns *Namespace, v gir.Interface) *Interface {
 	}
 }
 
-func (r *Interface) resolveNested(ns *Namespace, v gir.Interface) {
+func (r *Interface) resolveNested(ns context, v gir.Interface) {
 	for _, prereq := range v.Prerequisites {
 		inter := ns.findType(&gir.Type{Name: prereq.Name})
 

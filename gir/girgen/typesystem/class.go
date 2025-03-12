@@ -37,7 +37,7 @@ type Class struct {
 	Signals        []*Signal
 }
 
-func NewClass(ns *Namespace, v gir.Class) *Class {
+func NewClass(ns context, v gir.Class) *Class {
 	ctype := v.CType
 
 	if ctype == "" {
@@ -57,7 +57,7 @@ func NewClass(ns *Namespace, v gir.Class) *Class {
 	}
 }
 
-func (r *Class) resolveNested(ns *Namespace, v gir.Class) {
+func (r *Class) resolveNested(ns context, v gir.Class) {
 	if v.Parent != "" {
 		parent := ns.findType(&gir.Type{Name: v.Parent})
 

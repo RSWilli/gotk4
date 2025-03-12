@@ -852,7 +852,7 @@ func GLibLogs(nsgen *girgen.NamespaceGenerator) error {
 func GtkNewDialog(nsgen *girgen.NamespaceGenerator) error {
 	name := fmt.Sprintf(
 		"_gotk4_gtk%s_dialog_new2",
-		gir.MajorVersion(nsgen.Namespace().Namespace.Version),
+		gir.MajorVersion(nsgen.Namespace().Namespace.Version.String()),
 	)
 
 	fg := nsgen.MakeFile("gtkdialog-new.go")

@@ -72,7 +72,7 @@ func EqVersion(v1, v2 string) bool { return MajorVersion(v1) == MajorVersion(v2)
 
 // VersionedNamespace returns the versioned name for the given namespace.
 func VersionedNamespace(namespace *Namespace) string {
-	return VersionedName(namespace.Name, namespace.Version)
+	return VersionedName(namespace.Name, namespace.Version.String())
 }
 
 // VersionedName returns the name appended with the version suffix.
@@ -230,7 +230,7 @@ func (repos *Repositories) add(r Repository, pkg, path string) error {
 	for _, repo := range *repos {
 		for _, repoNsp := range repo.Namespaces {
 			for _, addingNsp := range r.Namespaces {
-				if addingNsp.Name == repoNsp.Name && EqVersion(addingNsp.Version, repoNsp.Version) {
+				if addingNsp.Name == repoNsp.Name && EqVersion(addingNsp.Version.String(), repoNsp.Version.String()) {
 					return nil
 				}
 			}
@@ -304,7 +304,7 @@ func (repos Repositories) FindNamespace(name string) *NamespaceFindResult {
 
 		for j := range repository.Namespaces {
 			namespace := &repository.Namespaces[j]
-			if namespace.Name != name || MajorVersion(namespace.Version) != version {
+			if namespace.Name != name || MajorVersion(namespace.Version.String()) != version {
 				continue
 			}
 
@@ -465,7 +465,7 @@ func (repos Repositories) FindInclude(
 			continue
 		}
 
-		nspIncl := repos.FindNamespace(VersionedName(incl.Name, incl.Version))
+		nspIncl := repos.FindNamespace(VersionedName(incl.Name, incl.Version.String()))
 		if nspIncl == nil {
 			// Include found but not the namespace, so it's probably not added
 			// at all.
@@ -476,7 +476,7 @@ func (repos Repositories) FindInclude(
 	}
 
 	for _, incl := range res.Repository.Includes {
-		nspIncl := repos.FindNamespace(VersionedName(incl.Name, incl.Version))
+		nspIncl := repos.FindNamespace(VersionedName(incl.Name, incl.Version.String()))
 		if nspIncl == nil {
 			continue
 		}
