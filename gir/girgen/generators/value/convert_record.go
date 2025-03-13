@@ -1,10 +1,5 @@
 package value
 
-import (
-	"github.com/diamondburned/gotk4/gir"
-	"github.com/diamondburned/gotk4/gir/gencontext"
-)
-
 type RecordConverter struct {
 	Direction ConversionDirection
 	InIdent   string
@@ -48,12 +43,12 @@ func (r *RecordConverter) OutType() string {
 
 var _ Converter = &RecordConverter{}
 
-func NewRecordConverter(ctx gencontext.GenerationContext, r *gir.Record, direction ConversionDirection, inIdent string, inTyp string, outIdent string, outTyp string) *RecordConverter {
-	return &RecordConverter{
-		Direction: direction,
-		InIdent:   inIdent,
-		InTyp:     inTyp,
-		OutIdent:  outIdent,
-		OutTyp:    outTyp,
-	}
-}
+// func NewRecordConverter(ctx gencontext.GenerationContext, r *gir.Record, direction ConversionDirection, inIdent string, inTyp string, outIdent string, outTyp string) *RecordConverter {
+// 	return &RecordConverter{
+// 		Direction: direction,
+// 		InIdent:   inIdent,
+// 		InTyp:     inTyp,
+// 		OutIdent:  outIdent,
+// 		OutTyp:    outTyp,
+// 	}
+// }

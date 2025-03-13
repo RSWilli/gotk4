@@ -19,6 +19,18 @@ type Array struct {
 	FixedSize      int
 }
 
+// GLibGetType implements Type.
+func (a *Array) GLibGetType() string {
+	panic("unimplemented")
+}
+
+// MarshalFuncName implements Type.
+func (a *Array) MarshalFuncName() string {
+	panic("unimplemented")
+}
+
+var _ Type = (*Array)(nil)
+
 // CGoType implements Type.
 func (a *Array) CGoType() string {
 	if a.cGoTypeOverride != "" {

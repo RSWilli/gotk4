@@ -1,6 +1,7 @@
 package typesystem
 
 import (
+	"fmt"
 	"log"
 	"strings"
 
@@ -12,12 +13,40 @@ type Type interface {
 	GoType() string
 	CGoType() string
 	CType() string
+
+	GLibGetType() string
+	MarshalFuncName() string
 }
+
+var _ Type = (*PointerType)(nil)
 
 // ForeignType describes a type that must be imported from another Namespace
 type ForeignType struct {
 	SourceNamespace *Namespace
 	Type
+}
+
+// GoType implements Type.
+func (b *ForeignType) GoType() string {
+	if _, ok := b.Type.(*PointerType); ok {
+		panic("foreign pointer type")
+	}
+	return fmt.Sprintf("%s.%s", b.SourceNamespace.GoName, b.Type.GoType())
+}
+
+func IsForeignType(t Type) bool {
+	switch t := t.(type) {
+	case *ForeignType:
+		return true
+	case *PointerType:
+		return IsForeignType(t.Base)
+	default:
+		return false
+	}
+}
+
+func Is(t, other Type) bool {
+	return UnderlyingType(t) == other
 }
 
 // UnderlyingType removes the [ForeignType] or [PointerType] if there is one. This is useful for type assertions
@@ -33,34 +62,44 @@ func UnderlyingType(t Type) Type {
 	}
 }
 
-type baseType struct {
-	girName string
-	goType  string
-	cGoType string
-	cType   string
+type BaseType struct {
+	GirName string
+	GoTyp   string
+	CGoTyp  string
+	CTyp    string
+
+	GlibGetTypeFn string
 }
 
 // GIRName implements Type.
-func (b baseType) GIRName() string {
-	return b.girName
+func (b BaseType) GIRName() string {
+	return b.GirName
 }
 
 // CGoType implements Type.
-func (b baseType) CGoType() string {
-	return b.cGoType
+func (b BaseType) CGoType() string {
+	return b.CGoTyp
 }
 
 // CType implements Type.
-func (b baseType) CType() string {
-	return b.cType
+func (b BaseType) CType() string {
+	return b.CTyp
 }
 
 // GoType implements Type.
-func (b baseType) GoType() string {
-	return b.goType
+func (b BaseType) GoType() string {
+	return b.GoTyp
 }
 
-var _ Type = baseType{}
+func (b BaseType) GLibGetType() string {
+	return b.GlibGetTypeFn
+}
+
+func (b BaseType) MarshalFuncName() string {
+	return fmt.Sprintf("marshal%s", b.GoTyp)
+}
+
+var _ Type = BaseType{}
 
 func CountPointers(ctype string) int {
 	pointers := strings.Count(ctype, "*")
@@ -116,6 +155,16 @@ type PointerType struct {
 	Base     Type
 }
 
+// GLibGetType implements Type.
+func (b *PointerType) GLibGetType() string {
+	return b.Base.GLibGetType()
+}
+
+// MarshalFuncName implements Type.
+func (b *PointerType) MarshalFuncName() string {
+	return b.Base.MarshalFuncName()
+}
+
 // GIRName implements Type.
 func (b PointerType) GIRName() string {
 	return b.Base.GIRName()
@@ -136,4 +185,13 @@ func (b PointerType) GoType() string {
 	return strings.Repeat("*", b.Pointers) + b.Base.GoType()
 }
 
-var _ Type = PointerType{}
+func Pointers(t Type) int {
+	switch t := t.(type) {
+	case *ForeignType:
+		return Pointers(t.Type)
+	case *PointerType:
+		return t.Pointers
+	default:
+		return 0
+	}
+}

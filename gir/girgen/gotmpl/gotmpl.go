@@ -29,7 +29,7 @@ func NewGoTemplate(block string) *template.Template {
 		"UnexportPascal": strcases.UnexportPascal,
 		"KebabToGo":      strcases.KebabToGo,
 		"SnakeToGo":      strcases.SnakeToGo,
-		"FirstLetter":    strcases.FirstLetter,
+		"FirstLetter":    strcases.ReceiverName,
 		"CGoField":       strcases.CGoField,
 
 		"GoDoc":            cmt.GoDoc,

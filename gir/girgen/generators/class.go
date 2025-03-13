@@ -3,12 +3,10 @@ package generators
 import (
 	"fmt"
 	"log"
-	"strings"
 
-	"github.com/diamondburned/gotk4/gir"
-	"github.com/diamondburned/gotk4/gir/gencontext"
 	"github.com/diamondburned/gotk4/gir/girgen/file"
 	"github.com/diamondburned/gotk4/gir/girgen/strcases"
+	"github.com/diamondburned/gotk4/gir/girgen/typesystem"
 )
 
 type MethodGenerator interface {
@@ -32,13 +30,11 @@ func (list MethodGeneratorList) Generate(w *file.Writer) {
 }
 
 type ClassGenerator struct {
-	Doc          Generator
-	GoName       string
-	CGoType      string
-	GoNameParent string
+	Doc Generator
 
-	Marshaler              Generator
-	GoWrapCoreObjectFnName string
+	*typesystem.Class
+
+	Marshaler Generator
 
 	// infos used by sub generators:
 	ReceiverName string
@@ -57,22 +53,31 @@ func (g *ClassGenerator) Generate(w *file.Writer) {
 
 	g.Doc.Generate(w)
 
-	fmt.Fprintf(w.Go(), "type %s struct {\n", g.GoName)
+	fmt.Fprintf(w.Go(), "type %s struct {\n", g.GoType())
 	fmt.Fprintf(w.Go(), "\t_ [0]func() // equal guard\n")
-	fmt.Fprintf(w.Go(), "\t%s\n", g.GoNameParent)
-	fmt.Fprintf(w.Go(), "}\n\n")
-
-	fmt.Fprintf(w.Go(), "// %s is the struct that's finalized\n", g.GoNameParent)
-	fmt.Fprintf(w.Go(), "type %s struct {\n", g.GoNameParent)
-	fmt.Fprintf(w.Go(), "\tnative *%s\n", g.CGoType)
+	fmt.Fprintf(w.Go(), "\t%s\n", g.Parent.GoType())
 	fmt.Fprintf(w.Go(), "}\n\n")
 
 	if g.Marshaler != nil {
 		g.Marshaler.Generate(w)
 	}
 
-	fmt.Fprintf(w.Go(), "func %s(obj *coreglib.Object) *%s {\n", g.GoWrapCoreObjectFnName, g.GoName)
-	fmt.Fprintf(w.Go(), "\tpanic(\"TODO\")\n")
+	// TODO: imports
+	parents := g.AllParents()
+
+	fmt.Fprintf(w.Go(), "func %s(obj *coreglib.Object) *%s {\n", g.GoWrapFunctionName, g.GoType())
+	fmt.Fprintf(w.Go(), "\treturn &%s{\n", g.GoType())
+	for _, p := range parents[:len(parents)-1] {
+		fmt.Fprintf(w.Go(), "\t%s: %s{\n", typesystem.UnderlyingType(p).GoType(), p.GoType())
+	}
+
+	fmt.Fprintf(w.Go(), "\t%s: obj,\n", typesystem.UnderlyingType(parents[len(parents)-1]).GoType())
+
+	for range parents[:len(parents)-1] {
+		fmt.Fprintf(w.Go(), "\t},\n")
+	}
+
+	fmt.Fprintf(w.Go(), "\t}\n")
 	fmt.Fprintf(w.Go(), "}\n\n")
 
 	GenerateAll(
@@ -83,47 +88,33 @@ func (g *ClassGenerator) Generate(w *file.Writer) {
 	)
 }
 
-func NewClassGenerator(ctx gencontext.GenerationContext, c gir.Class) *ClassGenerator {
-	if !c.IsIntrospectable() || strings.HasSuffix(c.Name, "Private") {
+func NewClassGenerator(c *typesystem.Class) *ClassGenerator {
+	if !c.Valid {
 		return nil
 	}
 
-	meta := ctx.LookupType(c.Name, c.CType)
-
-	if meta == nil {
-		return nil
+	if !extendsGlibObject(c) {
+		log.Printf("skipping class %s because it does not extend GObject\n", c.GoType())
+		return nil // FIXME: this is not a problem per se, but tricky.
 	}
 
-	parents := GetParents(ctx, c)
-
-	if len(parents) == 0 && c.Parent != "" {
-		log.Printf("skipping class %s because parent %s is unknown\n", c.Name, c.Parent)
-		return nil
-	}
-
-	if len(parents) == 0 || parents[len(parents)-1].GoBaseType != "gobject.Object" {
-		log.Printf("FIXME: skipping class %s because it doesn't extend GObject\n", c.Name)
-		return nil
+	if c.Parent == nil {
+		log.Printf("skipping generation of %s because it is GObject\n", c.GoType())
+		return nil // FIXME: intercept this type in the typesystem
 	}
 
 	var marshaler Generator
-	wrapFn := "wrap" + meta.GoBaseType
 
-	if c.GLibGetType != "" {
-		marshaler = NewMarshalObjectGenerator(meta.GoBaseType, "wrap"+meta.GoBaseType)
+	if c.GLibGetType() != "" {
+		marshaler = NewMarshalObjectGenerator(c, c.GoWrapFunctionName)
 	}
 
-	// goPrivate := firstToLower(meta.GoBaseType)
-
 	g := &ClassGenerator{
-		Doc:                    NewGoDocGenerator(meta.GoBaseType, c, 0),
-		GoName:                 meta.GoBaseType,
-		CGoType:                meta.CGoBaseType,
-		GoNameParent:           parents[0].GoBaseType,
-		Marshaler:              marshaler,
-		GoWrapCoreObjectFnName: wrapFn,
+		Doc:       NewTypeGoDocGenerator(c, 0),
+		Class:     c,
+		Marshaler: marshaler,
 
-		ReceiverName: strcases.FirstLetter(meta.GoBaseType),
+		ReceiverName: strcases.ReceiverName(c.GoType()),
 	}
 
 	// for _, constructor := range r.Constructors {
@@ -153,4 +144,38 @@ func NewClassGenerator(ctx gencontext.GenerationContext, c gir.Class) *ClassGene
 	// }
 
 	return g
+}
+
+func extendsGlibObject(c *typesystem.Class) bool {
+	if c.CType() == "GObject" {
+		return true
+	}
+
+	if c.Parent == nil {
+		return false
+	}
+
+	switch parent := c.Parent.(type) {
+	case *typesystem.Class:
+		return extendsGlibObject(parent)
+	case *typesystem.ForeignType:
+		return foreignExtendsGlibObject(parent)
+	}
+
+	return false
+}
+
+func foreignExtendsGlibObject(c *typesystem.ForeignType) bool {
+	if c.CType() == "GObject" {
+		return true
+	}
+
+	switch parent := c.Type.(type) {
+	case *typesystem.Class:
+		return extendsGlibObject(parent)
+	case *typesystem.ForeignType:
+		return foreignExtendsGlibObject(parent)
+	}
+
+	return false
 }

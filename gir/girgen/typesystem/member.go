@@ -10,9 +10,9 @@ import (
 )
 
 type Member struct {
-	Doc    Doc
-	GoName string
-	Value  string
+	Doc
+	Identifier
+	Value string
 }
 
 func GetMembers(ms []gir.Member) []*Member {
@@ -33,9 +33,13 @@ func NewMember(m gir.Member) *Member {
 	}
 
 	return &Member{
-		Doc:    NewDoc(&m.InfoAttrs, &m.InfoElements),
-		GoName: formatMember(m),
-		Value:  "C." + m.CIdentifier, // using the C identifier directly to avoid string quoting issues etc.
+		Doc: NewDoc(&m.InfoAttrs, &m.InfoElements),
+		Identifier: &baseIdentifier{
+			cIndentifier:   m.CIdentifier,
+			goIndentifier:  formatMember(m),
+			cGoIndentifier: "C." + m.CIdentifier,
+		},
+		Value: "C." + m.CIdentifier, // using the C identifier directly to avoid string quoting issues etc.
 	}
 }
 

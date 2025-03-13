@@ -7,6 +7,16 @@ type Container struct {
 	Inner []Type
 }
 
+// GLibGetType implements Type.
+func (c *Container) GLibGetType() string {
+	return ""
+}
+
+// MarshalFuncName implements Type.
+func (c *Container) MarshalFuncName() string {
+	return ""
+}
+
 // CGoType implements Type.
 func (c *Container) CGoType() string {
 	return c.Outer.CGoType()

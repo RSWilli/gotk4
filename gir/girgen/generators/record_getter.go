@@ -3,74 +3,54 @@ package generators
 import (
 	"fmt"
 
-	"github.com/diamondburned/gotk4/gir"
-	"github.com/diamondburned/gotk4/gir/gencontext"
 	"github.com/diamondburned/gotk4/gir/girgen/file"
 	"github.com/diamondburned/gotk4/gir/girgen/strcases"
+	"github.com/diamondburned/gotk4/gir/girgen/typesystem"
 )
 
 type RecordFieldGetterGenerator struct {
-	Doc     Generator
-	GoName  string
-	CGoName string
+	Doc Generator
 
-	GoType  string
-	CgoType string
+	ReceiverName string
 
-	GoImports []string
-
-	parent *RecordGenerator
+	*typesystem.Field
 }
 
 // Generate implements Generator.
 func (g *RecordFieldGetterGenerator) Generate(w *file.Writer) {
 	g.Doc.Generate(w)
 
-	for _, pkg := range g.GoImports {
-		w.GoImport(pkg)
-	}
-
 	// TODO: simplify, this is only for legacy compat, can be maybe be simplified:
 
-	fmt.Fprintf(w.Go(), "func (%s *%s) %s() %s {\n", g.parent.ReceiverName, g.parent.GoName, g.GoName, g.GoType)
-	fmt.Fprintf(w.Go(), "\tvalptr := &%s.native.%s\n", g.parent.ReceiverName, g.CGoName)
-	fmt.Fprintf(w.Go(), "\tvar _v %s // out\n", g.GoType)
-	fmt.Fprintf(w.Go(), "\t_v = %s(*valptr)\n", g.GoType)
+	fmt.Fprintf(w.Go(), "func (%s *%s) %s() %s {\n", g.ReceiverName, g.Parent.GoType(), g.GoGetterName, g.Type.GoType())
+	fmt.Fprintf(w.Go(), "\tvalptr := &%s.native.%s\n", g.ReceiverName, g.CGoIndentifier())
+	fmt.Fprintf(w.Go(), "\tvar _v %s // out\n", g.Type.GoType())
+	fmt.Fprintf(w.Go(), "\t_v = %s(*valptr)\n", g.Type.GoType())
 	fmt.Fprintf(w.Go(), "\treturn _v\n")
 	fmt.Fprintf(w.Go(), "}\n\n")
 }
 
-func NewRecordFieldGetterGenerator(ctx gencontext.GenerationContext, parent *RecordGenerator, f gir.Field) *RecordFieldGetterGenerator {
-	if !f.IsReadable() || f.Private || f.Type == nil || f.Bits > 0 {
+func NewRecordFieldGetterGenerator(f *typesystem.Field) *RecordFieldGetterGenerator {
+	if f.GoGetterName == "" {
 		return nil
 	}
 
-	meta := ctx.LookupType(f.Type.Name, f.Type.CType)
-
-	if meta == nil {
+	if !typesystem.IsPrimitive(f.Type) || typesystem.Pointers(f.Type) > 0 {
+		// TODO: this can be done, but remember that the returned value is only borrowed, so it has to keep the record alive
+		// if we are wrapping a pointer into the record.
 		return nil
 	}
 
-	if meta.CGoPointers > 0 || meta.GoPointers > 0 || !meta.IsCastable {
-		return nil
+	if typesystem.Is(f.Type, typesystem.Utf8) {
+		return nil // TODO
 	}
-
-	// TODO: use value converter instead of casting. Remember that the returned value is only borrowed, so it has to keep the record alive
-	// if we are wrapping a pointer into the record.
-
-	// TODO: check if this getter collides with any method
-	goName := strcases.SnakeToGo(true, f.Name)
 
 	g := &RecordFieldGetterGenerator{
-		Doc:     NewGoDocGenerator(goName, f, 0),
-		GoName:  goName,
-		CGoName: DodgeReservedFieldName(f.Name),
-		parent:  parent,
+		Doc: NewIdentifierGoDocGenerator(f, 0),
 
-		GoImports: meta.RequiredImports,
+		ReceiverName: strcases.ReceiverName(f.Parent.GoType()),
 
-		GoType:  meta.GoType(),
-		CgoType: meta.CGoType(),
+		Field: f,
 	}
 
 	return g

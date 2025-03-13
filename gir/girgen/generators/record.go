@@ -4,11 +4,8 @@ import (
 	"fmt"
 	"strings"
 	"text/tabwriter"
-	"unicode"
-	"unicode/utf8"
 
 	"github.com/diamondburned/gotk4/gir"
-	"github.com/diamondburned/gotk4/gir/gencontext"
 	"github.com/diamondburned/gotk4/gir/girgen/file"
 	"github.com/diamondburned/gotk4/gir/girgen/generators/callable"
 	"github.com/diamondburned/gotk4/gir/girgen/gotmpl"
@@ -17,6 +14,7 @@ import (
 	"github.com/diamondburned/gotk4/gir/girgen/strcases"
 	"github.com/diamondburned/gotk4/gir/girgen/types"
 	"github.com/diamondburned/gotk4/gir/girgen/types/typeconv"
+	"github.com/diamondburned/gotk4/gir/girgen/typesystem"
 )
 
 // recordIgnoreSuffixes is a list of suffixes that structs must not have,
@@ -317,7 +315,7 @@ func (rg *LegacyRecordGenerator) getters() {
 		return collides
 	}
 
-	recv := strcases.FirstLetter(rg.GoName)
+	recv := strcases.ReceiverName(rg.GoName)
 	values := make([]typeconv.ConversionValue, 0, len(rg.Fields))
 	fields := make([]string, 0, len(rg.Fields))
 
@@ -577,18 +575,9 @@ func GenerateCPrimitiveRecord(gen types.FileGenerator, rec *gir.Record) string {
 
 type RecordGenerator struct {
 	Doc               Generator
-	GoName            string
-	CGoType           string
-	GoNamePrivate     string
 	GenerateMarshaler bool
 
-	// unsafe constructors names:
-	GoUnsafeFromGlibBorrowName string
-	GoUnsafeFromGlibFullName   string
-	GoUnsafeFromGlibNoneName   string
-
-	CgoRefFunction   string
-	CgoUnrefFunction string
+	*typesystem.Record
 
 	// infos used by sub generators:
 	ReceiverName string
@@ -610,49 +599,50 @@ func (g *RecordGenerator) Generate(w *file.Writer) {
 
 	g.Doc.Generate(w)
 
-	fmt.Fprintf(w.Go(), "type %s struct {\n", g.GoName)
-	fmt.Fprintf(w.Go(), "\t*%s\n", g.GoNamePrivate)
+	// TODO: attach a cleanup field here of type runtime.Cleanup, and drop the SetFinalizer for AddCleanup
+	fmt.Fprintf(w.Go(), "type %s struct {\n", g.GoType())
+	fmt.Fprintf(w.Go(), "\t*%s\n", g.PrivateGoType)
 	fmt.Fprintf(w.Go(), "}\n\n")
 
-	fmt.Fprintf(w.Go(), "// %s is the struct that's finalized\n", g.GoNamePrivate)
-	fmt.Fprintf(w.Go(), "type %s struct {\n", g.GoNamePrivate)
-	fmt.Fprintf(w.Go(), "\tnative *%s\n", g.CGoType)
+	fmt.Fprintf(w.Go(), "// %s is the struct that's finalized\n", g.PrivateGoType)
+	fmt.Fprintf(w.Go(), "type %s struct {\n", g.PrivateGoType)
+	fmt.Fprintf(w.Go(), "\tnative *%s\n", g.CGoType())
 	fmt.Fprintf(w.Go(), "}\n\n")
 
 	if g.GenerateMarshaler {
-		fmt.Fprintf(w.Go(), "func marshal%s(p uintptr) (interface{}, error) {\n", g.GoName)
+		fmt.Fprintf(w.Go(), "func %s(p uintptr) (interface{}, error) {\n", g.MarshalFuncName())
 		fmt.Fprintf(w.Go(), "\tb := coreglib.ValueFromNative(unsafe.Pointer(p)).Boxed()\n")
-		fmt.Fprintf(w.Go(), "\treturn %s(b), nil\n", g.GoUnsafeFromGlibBorrowName) // TODO: does this need to be a copy?
+		fmt.Fprintf(w.Go(), "\treturn %s(b), nil\n", g.GoUnsafeBorrowFunction) // TODO: does this need to be a copy?
 		fmt.Fprintf(w.Go(), "}\n\n")
 	}
 
-	fmt.Fprintf(w.Go(), "// %s is used to convert raw %s pointers to go. This is used by the bindings internally.\n", g.GoUnsafeFromGlibNoneName, g.CGoType)
-	fmt.Fprintf(w.Go(), "func %s(p unsafe.Pointer) *%s {\n", g.GoUnsafeFromGlibBorrowName, g.GoName)
-	fmt.Fprintf(w.Go(), "\treturn &%s{&%s{(*%s)(p)}}\n", g.GoName, g.GoNamePrivate, g.CGoType)
+	fmt.Fprintf(w.Go(), "// %s is used to convert raw %s pointers to go. This is used by the bindings internally.\n", g.GoUnsafeTransferNoneFunction, g.CGoType())
+	fmt.Fprintf(w.Go(), "func %s(p unsafe.Pointer) *%s {\n", g.GoUnsafeBorrowFunction, g.GoType())
+	fmt.Fprintf(w.Go(), "\treturn &%s{&%s{(*%s)(p)}}\n", g.GoType(), g.PrivateGoType, g.CGoType())
 	fmt.Fprintf(w.Go(), "}\n\n")
 
 	mkFinalizer := func() {
 		fmt.Fprintf(w.Go(), "\truntime.SetFinalizer(\n")
-		fmt.Fprintf(w.Go(), "\t\twrapped.%s,\n", g.GoNamePrivate)
-		fmt.Fprintf(w.Go(), "\t\tfunc (intern *%s) {\n", g.GoNamePrivate)
+		fmt.Fprintf(w.Go(), "\t\twrapped.%s,\n", g.PrivateGoType)
+		fmt.Fprintf(w.Go(), "\t\tfunc (intern *%s) {\n", g.PrivateGoType)
 		fmt.Fprintf(w.Go(), "\t\t\t%s(intern.native)\n", g.CgoUnrefFunction)
 		fmt.Fprintf(w.Go(), "\t\t},\n")
 		fmt.Fprintf(w.Go(), "\t)\n")
 	}
 
 	if g.CgoRefFunction != "" {
-		fmt.Fprintf(w.Go(), "// %s is used to convert raw %s pointers to go while taking a reference. This is used by the bindings internally.\n", g.GoUnsafeFromGlibNoneName, g.CGoType)
-		fmt.Fprintf(w.Go(), "func %s(p unsafe.Pointer) *%s {\n", g.GoUnsafeFromGlibNoneName, g.GoName)
+		fmt.Fprintf(w.Go(), "// %s is used to convert raw %s pointers to go while taking a reference. This is used by the bindings internally.\n", g.GoUnsafeTransferNoneFunction, g.CGoType())
+		fmt.Fprintf(w.Go(), "func %s(p unsafe.Pointer) *%s {\n", g.GoUnsafeTransferNoneFunction, g.GoType())
 		fmt.Fprintf(w.Go(), "\t%s(p)\n", g.CgoRefFunction)
-		fmt.Fprintf(w.Go(), "\twrapped := %s(p)\n", g.GoUnsafeFromGlibBorrowName)
+		fmt.Fprintf(w.Go(), "\twrapped := %s(p)\n", g.GoUnsafeTransferNoneFunction)
 		mkFinalizer()
 		fmt.Fprintf(w.Go(), "\treturn wrapped\n")
 		fmt.Fprintf(w.Go(), "}\n\n")
 	}
 
-	fmt.Fprintf(w.Go(), "// %s is used to convert raw %s pointers to go while taking a reference. This is used by the bindings internally.\n", g.GoUnsafeFromGlibFullName, g.CGoType)
-	fmt.Fprintf(w.Go(), "func %s(p unsafe.Pointer) *%s {\n", g.GoUnsafeFromGlibFullName, g.GoName)
-	fmt.Fprintf(w.Go(), "\twrapped := %s(p)\n", g.GoUnsafeFromGlibBorrowName)
+	fmt.Fprintf(w.Go(), "// %s is used to convert raw %s pointers to go while taking a reference. This is used by the bindings internally.\n", g.GoUnsafeTransferFullFunction, g.CGoType())
+	fmt.Fprintf(w.Go(), "func %s(p unsafe.Pointer) *%s {\n", g.GoUnsafeTransferFullFunction, g.GoType())
+	fmt.Fprintf(w.Go(), "\twrapped := %s(p)\n", g.GoUnsafeBorrowFunction)
 	mkFinalizer()
 	fmt.Fprintf(w.Go(), "\treturn wrapped\n")
 	fmt.Fprintf(w.Go(), "}\n\n")
@@ -666,112 +656,66 @@ func (g *RecordGenerator) Generate(w *file.Writer) {
 	)
 
 	if g.CgoRefFunction != "" {
-		fmt.Fprintf(w.Go(), "// UnsafeRef increases the refcount on the underlying resource. This is used by the bindings internally.\n")
+		fmt.Fprintf(w.Go(), "// %s increases the refcount on the underlying resource. This is used by the bindings internally.\n", g.GoUnsafeRefFunction)
 		fmt.Fprintf(w.Go(), "// \n")
-		fmt.Fprintf(w.Go(), "// When this is called without an associated call to [%s.UnsafeUnref], then [%s] will leak memory.\n", g.GoName, g.GoName)
-		fmt.Fprintf(w.Go(), "func (%s *%s) UnsafeRef() {\n", g.ReceiverName, g.GoName)
+		fmt.Fprintf(w.Go(), "// When this is called without an associated call to [%s.%s], then [%s] will leak memory.\n", g.GoType(), g.GoUnsafeUnrefFunction, g.GoType())
+		fmt.Fprintf(w.Go(), "func (%s *%s) %s() {\n", g.ReceiverName, g.GoType(), g.GoUnsafeRefFunction)
 		fmt.Fprintf(w.Go(), "\t%s(%s.native)\n", g.CgoRefFunction, g.ReceiverName)
 		fmt.Fprintf(w.Go(), "}\n\n")
 	}
 
-	fmt.Fprintf(w.Go(), "// UnsafeUnref unrefs/frees the underlying resource. This is used by the bindings internally.\n")
+	fmt.Fprintf(w.Go(), "// %s unrefs/frees the underlying resource. This is used by the bindings internally.\n", g.GoUnsafeUnrefFunction)
 	fmt.Fprintf(w.Go(), "// \n")
-	fmt.Fprintf(w.Go(), "// After this is called, no other method on [%s] is expected to work anymore.\n", g.GoName)
-	fmt.Fprintf(w.Go(), "func (%s *%s) UnsafeUnref() {\n", g.ReceiverName, g.GoName)
+	fmt.Fprintf(w.Go(), "// After this is called, no other method on [%s] is expected to work anymore.\n", g.GoType())
+	fmt.Fprintf(w.Go(), "func (%s *%s) %s() {\n", g.ReceiverName, g.GoType(), g.GoUnsafeUnrefFunction)
 	fmt.Fprintf(w.Go(), "\t%s(%s.native)\n", g.CgoUnrefFunction, g.ReceiverName)
 	fmt.Fprintf(w.Go(), "}\n\n")
 
-	fmt.Fprintf(w.Go(), "// Unsafe returns the underlying C pointer. This is used by the bindings internally.\n")
-	fmt.Fprintf(w.Go(), "func (%s *%s) Unsafe() unsafe.Pointer {\n", g.ReceiverName, g.GoName)
+	fmt.Fprintf(w.Go(), "// %s returns the underlying C pointer. This is used by the bindings internally.\n", g.GoUnsafeToGlibNoneMethod)
+	fmt.Fprintf(w.Go(), "func (%s *%s) %s() unsafe.Pointer {\n", g.ReceiverName, g.GoType(), g.GoUnsafeToGlibNoneMethod)
 	fmt.Fprintf(w.Go(), "\treturn unsafe.Pointer(%s.native)\n", g.ReceiverName)
 	fmt.Fprintf(w.Go(), "}\n\n")
 
-	fmt.Fprintf(w.Go(), "// UnsafeTransferFull returns the underlying C pointer and clears the finalizer.\n")
+	fmt.Fprintf(w.Go(), "// %s returns the underlying C pointer and gives up ownership.\n", g.GoUnsafeToGlibFullMethod)
 	fmt.Fprintf(w.Go(), "// This is used by the bindings internally.\n")
-	fmt.Fprintf(w.Go(), "func (%s *%s) UnsafeTransferFull() unsafe.Pointer {\n", g.ReceiverName, g.GoName)
-	fmt.Fprintf(w.Go(), "\truntime.SetFinalizer(%s.%s, nil)\n", g.ReceiverName, g.GoNamePrivate)
-	fmt.Fprintf(w.Go(), "\treturn unsafe.Pointer(%s.native)\n", g.ReceiverName)
+	fmt.Fprintf(w.Go(), "func (%s *%s) %s() unsafe.Pointer {\n", g.ReceiverName, g.GoType(), g.GoUnsafeToGlibFullMethod)
+	fmt.Fprintf(w.Go(), "\truntime.SetFinalizer(%s.%s, nil)\n", g.ReceiverName, g.PrivateGoType)
+	fmt.Fprintf(w.Go(), "\t_p := unsafe.Pointer(%s.native)\n", g.ReceiverName)
+	fmt.Fprintf(w.Go(), "\t%s.native = nil // %s is invalid from here on\n", g.ReceiverName, g.GoType())
+	fmt.Fprintf(w.Go(), "\treturn _p\n")
 	fmt.Fprintf(w.Go(), "}\n\n")
 }
 
-func NewRecordGenerator(ctx gencontext.GenerationContext, r gir.Record) *RecordGenerator {
-	if !r.IsIntrospectable() || strings.HasSuffix(r.Name, "Private") {
-		return nil
-	}
-
-	meta := ctx.LookupType(r.Name, r.CType)
-
-	if meta == nil {
-		return nil
-	}
-
-	goPrivate := firstToLower(meta.GoBaseType)
-
+func NewRecordGenerator(r *typesystem.Record) *RecordGenerator {
 	g := &RecordGenerator{
-		Doc:                        NewGoDocGenerator(meta.GoBaseType, r, 0),
-		GoName:                     meta.GoBaseType,
-		GoUnsafeFromGlibBorrowName: fmt.Sprintf("Unsafe%sFromGlibBorrow", meta.GoBaseType),
-		GoUnsafeFromGlibNoneName:   fmt.Sprintf("Unsafe%sFromGlibNone", meta.GoBaseType),
-		GoUnsafeFromGlibFullName:   fmt.Sprintf("Unsafe%sFromGlibFull", meta.GoBaseType),
-		CgoUnrefFunction:           "C.free", // replaced below if an unref method is found
-		CGoType:                    meta.CGoBaseType,
-		GoNamePrivate:              goPrivate,
-		GenerateMarshaler:          r.GLibGetType != "",
+		Doc:               NewTypeGoDocGenerator(r, 0),
+		Record:            r,
+		GenerateMarshaler: r.GLibGetType() != "",
 
-		ReceiverName: strcases.FirstLetter(meta.GoBaseType),
+		ReceiverName: strcases.ReceiverName(r.GoType()),
 	}
 
 	for _, constructor := range r.Constructors {
-		if constGen := NewRecordConstructorGenerator(ctx, g, constructor); constGen != nil {
+		if constGen := NewCallableGenerator(constructor); constGen != nil {
 			g.Constructors = append(g.Constructors, constGen)
 		}
 	}
 
-	// Disguised means opaque, so we're not supposed to access these fields.
-	if !r.Disguised {
-		for _, field := range r.Fields {
-			if getterGen := NewRecordFieldGetterGenerator(ctx, g, field); getterGen != nil {
-				g.Getters = append(g.Getters, getterGen)
-			}
-
-			if setterGen := NewRecordFieldSetterGenerator(ctx, g, field); setterGen != nil {
-				g.Setters = append(g.Setters, setterGen)
-			}
-		}
-	}
-
 	for _, method := range r.Methods {
-		if method.Name == "weak_ref" || method.Name == "weak_unref" {
-			continue
-		}
-
-		if method.Name == "ref" {
-			g.CgoRefFunction = "C." + method.CIdentifier
-			continue
-		}
-
-		if method.Name == "unref" {
-			g.CgoUnrefFunction = "C." + method.CIdentifier
-			continue
-		}
-
-		if methGen := NewRecordMethodGenerator(ctx, g, method); methGen != nil {
+		if methGen := NewCallableGenerator(method); methGen != nil {
 			g.Methods = append(g.Methods, methGen)
 		}
 	}
 
-	return g
-}
+	for _, field := range r.Fields {
+		if getterGen := NewRecordFieldGetterGenerator(field); getterGen != nil {
+			g.Getters = append(g.Getters, getterGen)
+		}
 
-// see https://stackoverflow.com/a/75989905
-func firstToLower(s string) string {
-	r, size := utf8.DecodeRuneInString(s)
-	if r == utf8.RuneError && size <= 1 {
-		return s
+		if setterGen := NewRecordFieldSetterGenerator(field); setterGen != nil {
+			g.Setters = append(g.Setters, setterGen)
+		}
 	}
-	lc := unicode.ToLower(r)
-	if r == lc {
-		return s
-	}
-	return string(lc) + s[size:]
+
+	return g
 }

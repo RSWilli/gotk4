@@ -52,7 +52,7 @@ func findTypeStructField(virtual gir.VirtualMethod, ts *Record) *Field {
 	// }
 
 	for _, field := range ts.Fields {
-		if field.CName == name {
+		if field.CIndentifier() == name {
 			return field
 		}
 	}

@@ -6,14 +6,13 @@ import (
 )
 
 type Field struct {
-	Doc Doc
-	// CName is the original field name. This may not be valid in go, because C does not
-	// reserve "type" as a name.
-	CName string
-	// CGoName is a sanitized name that does not interfere with go's keywords.
-	// it should be used by the generator whenever in the go context.
-	CGoName string
-	Type    Type
+	Doc
+
+	Parent Type
+
+	Identifier
+
+	Type Type
 
 	GoGetterName string
 	GoSetterName string
@@ -24,9 +23,13 @@ type Field struct {
 	Bits int
 }
 
-func NewField(ns context, v gir.Field) *Field {
+func NewField(ns context, parent Type, v gir.Field) *Field {
 	if v.Private || !(v.IsReadable() || v.Writable) {
 		return nil
+	}
+
+	if v.Bits > 0 {
+		return nil // TODO: what does bits mean?
 	}
 
 	var t Type
@@ -55,9 +58,14 @@ func NewField(ns context, v gir.Field) *Field {
 	}
 
 	return &Field{
-		Doc:      NewSimpleDoc(v.Doc),
-		CName:    v.Name,
-		CGoName:  DodgeReservedFieldName(v.Name),
+		Doc:    NewSimpleDoc(v.Doc),
+		Parent: parent,
+		Identifier: &baseIdentifier{
+			cIndentifier:   v.Name,
+			cGoIndentifier: strcases.CGoField(v.Name),
+			goIndentifier:  strcases.CGoField(v.Name),
+		},
+		Bits:     v.Bits,
 		Type:     t,
 		Readable: v.IsReadable(),
 		Writable: v.Writable,
@@ -65,14 +73,4 @@ func NewField(ns context, v gir.Field) *Field {
 		GoGetterName: getterName,
 		GoSetterName: setterName,
 	}
-}
-
-// DodgeReservedFieldName replaces reserved go keywords with an underscore prefixed version
-// the same way that cgo does (source needed)
-func DodgeReservedFieldName(s string) string {
-	if _, ok := GoKeywords[s]; ok {
-		return "_" + s
-	}
-
-	return s
 }

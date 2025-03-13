@@ -8,7 +8,7 @@ import (
 )
 
 type Callback struct {
-	baseType
+	BaseType
 
 	TrampolineName string
 
@@ -27,11 +27,13 @@ func DeclareCallback(ctx context, v gir.Callback) *Callback {
 	goType := strcases.PascalToGo(v.Name)
 
 	return &Callback{
-		baseType: baseType{
-			girName: v.Name,
-			goType:  goType,
-			cGoType: "C." + v.CType,
-			cType:   v.CType,
+		BaseType: BaseType{
+			GirName: v.Name,
+			GoTyp:   goType,
+			CGoTyp:  "C." + v.CType,
+			CTyp:    v.CType,
+
+			GlibGetTypeFn: "",
 		},
 		// e.g. _gotk4_gtk4_AssistantPageFunc
 		TrampolineName: fmt.Sprintf("_gotk4_%s%d_%s", ctx.goName(), ctx.majorVersion(), goType),

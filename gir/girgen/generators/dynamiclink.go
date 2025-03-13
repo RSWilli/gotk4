@@ -1,20 +1,14 @@
 package generators
 
 import (
-	"github.com/diamondburned/gotk4/gir"
-	"github.com/diamondburned/gotk4/gir/gencontext"
+	"github.com/diamondburned/gotk4/gir/girgen/typesystem"
 )
 
 // WithDynamicLinking builds all generators needed for generated cgo dynamic linked code.
-func WithDynamicLinking(ctx gencontext.GenerationContext, repos gir.Repositories) (gens []Generator) {
-	for _, repo := range repos {
-		for _, ns := range repo.Namespaces {
-			gens = append(gens, NewNamespaceGenerator(
-				ctx,
-				&ns,
-				repo.CIncludes,
-				repo.Packages,
-			))
+func WithDynamicLinking(repositories []*typesystem.Repository) (gens []Generator) {
+	for _, ns := range repositories {
+		for _, ns := range ns.Namespaces {
+			gens = append(gens, NewNamespaceGenerator(ns))
 		}
 	}
 

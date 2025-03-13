@@ -12,6 +12,7 @@ import (
 	"github.com/diamondburned/gotk4/gir/girgen/gotmpl"
 	"github.com/diamondburned/gotk4/gir/girgen/strcases"
 	"github.com/diamondburned/gotk4/gir/girgen/types"
+	"github.com/diamondburned/gotk4/gir/girgen/typesystem"
 )
 
 var enumTmpl = gotmpl.NewGoTemplate(`
@@ -173,106 +174,58 @@ func GenerateEnum(gen FileGeneratorWriter, enum *gir.Enum) bool {
 type EnumMember struct {
 	Doc Generator
 
-	Name   string
-	Value  string
-	String string
+	*typesystem.Member
 }
 
 type EnumGenerator struct {
 	Doc Generator
 
-	Name string
-	// iota enums will use go iota
-	IsIota  bool
+	*typesystem.Enum
+
 	Members []EnumMember
 
 	Marshaler Generator
-
-	// the receiver name used in the String() method
-	StringerReceiver string
 }
 
 func (g *EnumGenerator) Generate(w *file.Writer) {
 	// TODO: use gencontext Lookup
 
-	w.GoImport("fmt")
-
 	g.Doc.Generate(w)
 
-	fmt.Fprintf(w.Go(), "type %s C.int\n\nconst(\n", g.Name)
+	fmt.Fprintf(w.Go(), "type %s C.int\n\nconst (\n", g.GoType())
 
-	for i, member := range g.Members {
+	for _, member := range g.Members {
 		member.Doc.Generate(w)
 
-		if g.IsIota && i == 0 {
-			fmt.Fprintf(w.Go(), "\t%s %s = iota\n", member.Name, g.Name)
-		} else if g.IsIota {
-			fmt.Fprintf(w.Go(), "\t%s\n", member.Name)
-		} else {
-			fmt.Fprintf(w.Go(), "\t%s %s = %s\n", member.Name, g.Name, member.Value)
-		}
+		fmt.Fprintf(w.Go(), "\t%s %s = %s\n", member.GoIndentifier(), g.GoType(), member.Value)
 	}
 
 	fmt.Fprint(w.Go(), ")\n\n")
 
 	g.Marshaler.Generate(w)
-
-	fmt.Fprintf(w.Go(), "func (%s %s)String() string {\n", g.StringerReceiver, g.Name)
-	fmt.Fprintf(w.Go(), "\tswitch %s {\n", g.StringerReceiver)
-
-	for _, member := range g.Members {
-		fmt.Fprintf(w.Go(), "\tcase %s:\n", member.Name)
-		fmt.Fprintf(w.Go(), "\t\treturn \"%s\"\n", member.String)
-	}
-
-	fmt.Fprintf(w.Go(), "\tdefault:\n")
-	fmt.Fprintf(w.Go(), "\t\treturn fmt.Sprintf(\"%s(%%d)\", %s)\n", g.Name, g.StringerReceiver)
-
-	fmt.Fprintln(w.Go(), "\t}")
-	fmt.Fprintf(w.Go(), "}\n\n")
 }
 
-func NewEnumGenerator(enum gir.Enum) *EnumGenerator {
-	if !enum.IsIntrospectable() {
-		return nil
-	}
-
+func NewEnumGenerator(enum *typesystem.Enum) *EnumGenerator {
 	members := make([]EnumMember, 0, len(enum.Members))
 
 	for _, member := range enum.Members {
-		goName := formatEnumMember(member) // FIXME: this causes some problems with non prefixed enums
-
 		members = append(members, EnumMember{
-			Doc:    NewGoDocGenerator(goName, member, 1),
-			Name:   goName,
-			Value:  member.Value,
-			String: strcases.SnakeToGo(true, member.Name()),
+			Doc: NewIdentifierGoDocGenerator(member, 1),
+
+			Member: member,
 		})
 	}
 
-	isIota := true
-
-	for i := 0; i < len(enum.Members); i++ {
-		if enum.Members[i].Value != strconv.Itoa(i) {
-			isIota = false
-			break
-		}
-	}
-
-	goName := strcases.PascalToGo(enum.Name)
-
 	var marshalGen Generator = NoopGenerator{}
 
-	if enum.GLibGetType != "" {
-		marshalGen = NewMarshalEnumGenerator(goName)
+	if enum.GLibGetType() != "" {
+		marshalGen = NewMarshalEnumGenerator(enum)
 	}
 
 	return &EnumGenerator{
-		Doc:              NewGoDocGenerator(goName, enum, 0),
-		Name:             goName,
-		IsIota:           isIota,
-		Members:          members,
-		Marshaler:        marshalGen,
-		StringerReceiver: strcases.FirstLetter(goName),
+		Doc:       NewTypeGoDocGenerator(enum, 0),
+		Enum:      enum,
+		Members:   members,
+		Marshaler: marshalGen,
 	}
 }

@@ -4,10 +4,8 @@ import (
 	"fmt"
 
 	"github.com/diamondburned/gotk4/gir"
-	"github.com/diamondburned/gotk4/gir/gencontext"
 	"github.com/diamondburned/gotk4/gir/girgen/file"
 	"github.com/diamondburned/gotk4/gir/girgen/gotmpl"
-	"github.com/diamondburned/gotk4/gir/girgen/strcases"
 	"github.com/diamondburned/gotk4/gir/girgen/types"
 	"github.com/diamondburned/gotk4/gir/girgen/typesystem"
 )
@@ -64,38 +62,22 @@ func GenerateAlias(gen FileGeneratorWriter, alias *gir.Alias) bool {
 }
 
 type AliasGenerator struct {
-	Doc  Generator
-	Name string
-	// AliasFor must be a valid go type
-	AliasFor *typesystem.TypeMetadata
+	Doc Generator
+
+	*typesystem.Alias
 }
 
 func (g *AliasGenerator) Generate(w *file.Writer) {
 	g.Doc.Generate(w)
 
-	for _, imp := range g.AliasFor.RequiredImports {
-		w.GoImport(imp)
-	}
+	// TODO: imports of foreign type namespaces
 
-	fmt.Fprintf(w.Go(), "type %s = %s\n", g.Name, g.AliasFor.GoType())
+	fmt.Fprintf(w.Go(), "type %s = %s\n", g.GoType(), g.AliasedType.GoType())
 }
 
-func NewAliasGenerator(ctx gencontext.GenerationContext, alias gir.Alias) *AliasGenerator {
-	if !alias.IsIntrospectable() || !alias.Type.IsIntrospectable() {
-		return nil
-	}
-
-	resolvedType := ctx.LookupType(alias.Name, "")
-
-	if resolvedType == nil {
-		return nil
-	}
-
-	goName := strcases.PascalToGo(alias.Name)
-
+func NewAliasGenerator(alias *typesystem.Alias) *AliasGenerator {
 	return &AliasGenerator{
-		Doc:      NewGoDocGenerator(goName, alias, 0),
-		Name:     goName,
-		AliasFor: resolvedType,
+		Doc:   NewTypeGoDocGenerator(alias, 0),
+		Alias: alias,
 	}
 }

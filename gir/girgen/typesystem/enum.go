@@ -6,8 +6,8 @@ import (
 )
 
 type Enum struct {
-	baseType
-	Doc Doc
+	BaseType
+	Doc
 
 	Members []*Member
 }
@@ -18,11 +18,13 @@ func DeclareEnum(ctx context, v gir.Enum) *Enum {
 	}
 
 	return &Enum{
-		baseType: baseType{
-			girName: v.Name,
-			goType:  strcases.PascalToGo(v.Name),
-			cGoType: "C." + v.CType,
-			cType:   v.CType,
+		BaseType: BaseType{
+			GirName: v.Name,
+			GoTyp:   strcases.PascalToGo(v.Name),
+			CGoTyp:  "C." + v.CType,
+			CTyp:    v.CType,
+
+			GlibGetTypeFn: v.GLibGetType,
 		},
 		Doc:     NewDoc(&v.InfoAttrs, &v.InfoElements),
 		Members: GetMembers(v.Members),

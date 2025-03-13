@@ -3,6 +3,7 @@ package typesystem
 import (
 	"fmt"
 	"log"
+	"strings"
 
 	"github.com/diamondburned/gotk4/gir"
 )
@@ -56,15 +57,39 @@ type Param struct {
 	Destroy *Param
 }
 
+func (p *Param) CDeclaration() string {
+	return fmt.Sprintf("%s %s", p.CName, p.Type.CType())
+}
+
+func (p *Param) CGoDeclaration() string {
+	return fmt.Sprintf("%s %s", p.CName, p.Type.CGoType())
+}
+
+func (p *Param) GoDeclaration() string {
+	return fmt.Sprintf("%s %s", p.GoName, p.Type.GoType())
+}
+
 type Parameters struct {
-	Doc Doc
+	Doc
 
-	CReturn     *Param
-	CParameters []*Param
+	// CReturn contains the param that the c function returns
+	CReturn *Param
 
-	GoReceiver   *Param
-	GoReturns    []*Param
-	GoParameters []*Param
+	// CParameters contains the params that the c function requires
+	CParameters ParamList
+
+	// GoReceiver contains the C instance param, which will be used as a method receiver
+	// for the go function.
+	GoReceiver *Param
+
+	// GoReturns containts the return values of the Go function. C Params that are declared as "out"
+	// will also get moved here, so this may differ from CParameters, but must contain pointers to the same
+	// objects.
+	GoReturns ParamList
+
+	// GoParameters will contain the parameters of the go function. C Params that are declared as "out"
+	// will not be in this list.
+	GoParameters ParamList
 }
 
 func NewCallableParameters(ns context, v gir.CallableAttrs) *Parameters {
@@ -77,12 +102,12 @@ func NewCallableParameters(ns context, v gir.CallableAttrs) *Parameters {
 	return params
 }
 
-func NewParameters(ns context, girparams *gir.Parameters, ret *gir.ReturnValue, throws bool) *Parameters {
+func NewParameters(ctx context, girparams *gir.Parameters, ret *gir.ReturnValue, throws bool) *Parameters {
 	params := &Parameters{}
 
 	if girparams != nil {
 		if girparams.InstanceParameter != nil {
-			t := ns.findAnyType(girparams.InstanceParameter.AnyType)
+			t := ctx.findAnyType(girparams.InstanceParameter.AnyType)
 
 			if t == nil {
 				return nil
@@ -114,7 +139,7 @@ func NewParameters(ns context, girparams *gir.Parameters, ret *gir.ReturnValue, 
 				paramType = decreasePointers(paramType)
 			}
 
-			t := ns.findAnyType(paramType)
+			t := ctx.findAnyType(paramType)
 
 			if t == nil {
 				return nil
@@ -186,7 +211,7 @@ func NewParameters(ns context, girparams *gir.Parameters, ret *gir.ReturnValue, 
 	}
 
 	if ret != nil {
-		t := ns.findAnyType(ret.AnyType)
+		t := ctx.findAnyType(ret.AnyType)
 
 		if t == nil {
 			return nil
@@ -206,6 +231,9 @@ func NewParameters(ns context, girparams *gir.Parameters, ret *gir.ReturnValue, 
 
 	}
 
+	ctx.sortGoParams(params.GoParameters)
+	ctx.sortGoReturns(params.GoReturns)
+
 	return params
 }
 
@@ -223,4 +251,46 @@ func canBeOutParamType(t gir.AnyType) bool {
 	default:
 		panic("invalid anytype")
 	}
+}
+
+type ParamList []*Param
+
+func (pl ParamList) GoDeclarations() string {
+	decls := make([]string, 0, len(pl))
+
+	for _, p := range pl {
+		decls = append(decls, p.GoDeclaration())
+	}
+
+	return strings.Join(decls, ", ")
+}
+
+func (pl ParamList) GoIdentifiers() string {
+	decls := make([]string, 0, len(pl))
+
+	for _, p := range pl {
+		decls = append(decls, p.GoName)
+	}
+
+	return strings.Join(decls, ", ")
+}
+
+func (pl ParamList) GoTypes() string {
+	decls := make([]string, 0, len(pl))
+
+	for _, p := range pl {
+		decls = append(decls, p.Type.GoType())
+	}
+
+	return strings.Join(decls, ", ")
+}
+
+func (pl ParamList) CGoDeclarations() string {
+	decls := make([]string, 0, len(pl))
+
+	for _, p := range pl {
+		decls = append(decls, p.CGoDeclaration())
+	}
+
+	return strings.Join(decls, ", ")
 }

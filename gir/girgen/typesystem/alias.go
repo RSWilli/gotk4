@@ -6,8 +6,8 @@ import (
 )
 
 type Alias struct {
-	baseType
-	Doc Doc
+	BaseType
+	Doc
 
 	AliasedType Type
 }
@@ -24,11 +24,14 @@ func DeclareAlias(ns context, v gir.Alias) *Alias {
 	}
 
 	return &Alias{
-		baseType: baseType{
-			girName: v.Name,
-			goType:  strcases.PascalToGo(v.Name),
-			cGoType: "C." + v.CType,
-			cType:   v.CType,
+		BaseType: BaseType{
+			GirName: v.Name,
+			GoTyp:   strcases.PascalToGo(v.Name),
+			CGoTyp:  "C." + v.CType,
+			CTyp:    v.CType,
+
+			// has no get type, but will be marshaled by calling the subtype marshaler.
+			GlibGetTypeFn: "",
 		},
 		AliasedType: subtype,
 		Doc:         NewDoc(&v.InfoAttrs, &v.InfoElements),

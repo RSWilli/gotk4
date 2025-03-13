@@ -7,8 +7,8 @@ import (
 
 // Bitfield is always a wrapper type for int in go
 type Bitfield struct {
-	baseType
-	Doc Doc
+	BaseType
+	Doc
 
 	Members []*Member
 }
@@ -19,11 +19,13 @@ func DeclareBitfield(ctx context, v gir.Bitfield) *Bitfield {
 	}
 
 	return &Bitfield{
-		baseType: baseType{
-			girName: v.Name,
-			goType:  strcases.PascalToGo(v.Name),
-			cGoType: "C." + v.CType,
-			cType:   v.CType,
+		BaseType: BaseType{
+			GirName: v.Name,
+			GoTyp:   strcases.PascalToGo(v.Name),
+			CGoTyp:  "C." + v.CType,
+			CTyp:    v.CType,
+
+			GlibGetTypeFn: v.GLibGetType,
 		},
 		Doc:     NewDoc(&v.InfoAttrs, &v.InfoElements),
 		Members: GetMembers(v.Members),

@@ -161,10 +161,11 @@ func PascalToGo(pascal string) string {
 	return pascal
 }
 
-// FirstLetter returns the first letter in lower-case.
-func FirstLetter(p string) string {
+// ReceiverName returns the first letter in lower-case.
+func ReceiverName(p string) string {
 	r, sz := utf8.DecodeRuneInString(p)
 	if sz > 0 && r != utf8.RuneError {
+		// FIXME: this could return "_" which is not a valid receiver
 		return string(unicode.ToLower(r))
 	}
 

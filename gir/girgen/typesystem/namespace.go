@@ -59,7 +59,7 @@ func (reg *Registry) newNamespace(sf skipFunc, ns *namespaceWithIncludes) *Names
 		namespace.Packages = append(namespace.Packages, pkg.Name)
 	}
 
-	ctx := namespaceContext{
+	ctx := &namespaceContext{
 		skipTypeFunc: sf,
 		Namespace:    namespace,
 	}
@@ -232,7 +232,7 @@ func (ns *Namespace) findTypeByGIRName(t string) Type {
 
 	if foreign != nil {
 		return &ForeignType{
-			SourceNamespace: ns,
+			SourceNamespace: reffedNS,
 			Type:            foreign,
 		}
 	}

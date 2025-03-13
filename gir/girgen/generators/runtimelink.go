@@ -1,10 +1,9 @@
 package generators
 
 import (
-	"github.com/diamondburned/gotk4/gir"
-	"github.com/diamondburned/gotk4/gir/gencontext"
+	"github.com/diamondburned/gotk4/gir/girgen/typesystem"
 )
 
-func WithRuntimeLinking(ctx gencontext.GenerationContext, repos gir.Repositories) []Generator {
+func WithRuntimeLinking(repos []*typesystem.Repository) []Generator {
 	panic("runtime linking is not implemented")
 }

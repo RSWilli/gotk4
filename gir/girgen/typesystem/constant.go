@@ -6,8 +6,9 @@ import (
 )
 
 type Constant struct {
-	Doc     Doc
-	GoName  string
+	Doc
+	Identifier
+
 	GoValue string
 }
 
@@ -17,8 +18,12 @@ func DeclareConstant(ctx context, v gir.Constant) *Constant {
 	}
 
 	return &Constant{
-		Doc:     NewDoc(&v.InfoAttrs, &v.InfoElements),
-		GoName:  strcases.SnakeToGo(true, v.Name),
-		GoValue: "C." + v.CType, // we use the C constant directly as this prevents any of the quoting issues
+		Doc: NewDoc(&v.InfoAttrs, &v.InfoElements),
+		Identifier: &baseIdentifier{
+			goIndentifier:  strcases.SnakeToGo(true, v.Name),
+			cIndentifier:   v.Name,
+			cGoIndentifier: "C." + v.Name,
+		},
+		GoValue: "C." + v.Name, // we use the C constant directly as this prevents any of the quoting issues
 	}
 }

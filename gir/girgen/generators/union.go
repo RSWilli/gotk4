@@ -138,7 +138,7 @@ func (ug *UnionGenerator) Header() *file.Header {
 
 // Recv returns the method receiver.
 func (ug *UnionGenerator) Recv() string {
-	return strcases.FirstLetter(ug.GoName)
+	return strcases.ReceiverName(ug.GoName)
 }
 
 func (ug *UnionGenerator) Use(union *gir.Union) bool {

@@ -2,10 +2,18 @@ package typesystem
 
 import "github.com/diamondburned/gotk4/gir"
 
+type Documented interface {
+	Documentation() Doc
+}
+
 type Doc struct {
 	Doc           string
 	DocDeprecated string
 	Deprecated    bool
+}
+
+func (d Doc) Documentation() Doc {
+	return d
 }
 
 func NewSimpleDoc(girdoc *gir.Doc) Doc {

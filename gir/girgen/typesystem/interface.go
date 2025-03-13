@@ -7,8 +7,7 @@ import (
 )
 
 type Interface struct {
-	baseType
-	GetType    string
+	BaseType
 	TypeStruct *Record
 
 	// Valid signifies that the interfaces prerequesites have been resolved correctly.
@@ -32,12 +31,13 @@ func DeclareInterface(ns context, v gir.Interface) *Interface {
 	}
 
 	return &Interface{
-		GetType: v.GLibGetType,
-		baseType: baseType{
-			girName: v.Name,
-			goType:  v.Name,
-			cGoType: "C." + ctype,
-			cType:   ctype,
+		BaseType: BaseType{
+			GirName: v.Name,
+			GoTyp:   v.Name,
+			CGoTyp:  "C." + ctype,
+			CTyp:    ctype,
+
+			GlibGetTypeFn: v.GLibGetType,
 		},
 	}
 }
@@ -51,11 +51,8 @@ func (r *Interface) resolveNested(ns context, v gir.Interface) {
 			return
 		}
 
-		switch underlying := UnderlyingType(inter).(type) {
-		case *Class:
-		case *Interface:
-		default:
-			log.Printf("prerequisite %s of interface %s is not class or interface, but %T instead\n", inter.GIRName(), v.Name, underlying)
+		if !IsInterface(inter) && !IsClass(inter) {
+			log.Printf("prerequisite %s of interface %s is not class or interface, but %T instead\n", inter.GIRName(), v.Name, UnderlyingType(inter))
 			return
 		}
 
@@ -103,5 +100,16 @@ func (r *Interface) resolveNested(ns context, v gir.Interface) {
 		if t := NewSignal(ns, v); t != nil {
 			r.Signals = append(r.Signals, t)
 		}
+	}
+}
+
+func IsInterface(t Type) bool {
+	switch p := t.(type) {
+	case *Interface:
+		return true
+	case *ForeignType:
+		return IsInterface(p.Type)
+	default:
+		return false
 	}
 }

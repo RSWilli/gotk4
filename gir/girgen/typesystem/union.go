@@ -5,7 +5,7 @@ import (
 )
 
 type Union struct {
-	baseType
+	BaseType
 
 	Doc Doc
 
@@ -25,11 +25,13 @@ func DeclareUnion(ctx context, v gir.Union) *Union {
 	return &Union{
 		Doc:     NewDoc(&v.InfoAttrs, &v.InfoElements),
 		GetType: v.GLibGetType,
-		baseType: baseType{
-			girName: v.Name,
-			goType:  v.Name,
-			cGoType: "C." + v.CType,
-			cType:   v.CType,
+		BaseType: BaseType{
+			GirName: v.Name,
+			GoTyp:   v.Name,
+			CGoTyp:  "C." + v.CType,
+			CTyp:    v.CType,
+
+			GlibGetTypeFn: v.GLibGetType,
 		},
 	}
 }
@@ -48,13 +50,13 @@ func (u *Union) resolveNested(ns context, v gir.Union) {
 	}
 
 	for _, v := range v.Constructors {
-		if t := DeclareConstructor(ns, v); t != nil {
+		if t := DeclareConstructor(ns, u, v); t != nil {
 			u.Constructors = append(u.Constructors, t)
 		}
 	}
 
 	for _, v := range v.Fields {
-		if t := NewField(ns, v); t != nil {
+		if t := NewField(ns, u, v); t != nil {
 			u.Fields = append(u.Fields, t)
 		}
 	}

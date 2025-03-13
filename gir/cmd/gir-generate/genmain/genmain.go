@@ -3,9 +3,9 @@ package genmain
 import (
 	"flag"
 	"log"
+	"slices"
 
 	"github.com/diamondburned/gotk4/gir"
-	"github.com/diamondburned/gotk4/gir/gencontext"
 	"github.com/diamondburned/gotk4/gir/girgen"
 	"github.com/diamondburned/gotk4/gir/girgen/file"
 	"github.com/diamondburned/gotk4/gir/girgen/generators"
@@ -147,21 +147,29 @@ func Overlay(data ...Data) Data {
 func Run(data Data) {
 	ParseFlag()
 
+	log.Println("loading packages...")
 	// load known packages first and then the packages we want to generate,
 	// to keep the order for the typesystem
-	repos := MustLoadPackages(data.KnownPackages)
-	MustAddPackages(&repos, data.Packages)
+	knownRepos := MustLoadPackages(data.KnownPackages)
+	repos := MustLoadPackages(data.Packages)
+	PrintAddedPkgs(knownRepos)
 	PrintAddedPkgs(repos)
 
 	if ListPkg {
 		return
 	}
 
-	Generate(repos, data)
+	Generate(knownRepos, repos, data)
 }
 
 // Generate generates the packages based on the given data.
-func Generate(repos gir.Repositories, data Data) {
+func Generate(known, repos gir.Repositories, data Data) {
+	err := CleanDirectory(Output, data.PkgExceptions)
+
+	if err != nil {
+		log.Fatalln("failed to clean output directory:", err)
+	}
+
 	overrides := data.ImportOverrides
 	if overrides == nil {
 		overrides = map[string]string{}
@@ -177,21 +185,18 @@ func Generate(repos gir.Repositories, data Data) {
 
 	tsCfg := typesystem.Config{}
 
-	ts := typesystem.FromRepositories(tsCfg, repos)
-
-	ctx := gencontext.Base(ts)
+	ts := typesystem.FromRepositories(tsCfg, slices.Concat(known, repos))
 
 	// TODO: add a hook stage here, where the user can filter and modify gir definitions
 
-	// reposToGenerate contains all packages we need to generate, other repos are only for type system
-	reposToGenerate := repos[len(data.KnownPackages)-1:]
+	reposToGenerate := ts.Repositories[len(known):]
 
 	var gen []generators.Generator
 
 	if !CgoLink {
-		gen = generators.WithDynamicLinking(ctx, reposToGenerate)
+		gen = generators.WithDynamicLinking(reposToGenerate)
 	} else {
-		gen = generators.WithRuntimeLinking(ctx, reposToGenerate)
+		gen = generators.WithRuntimeLinking(reposToGenerate)
 	}
 
 	// TODO: add a hook stage here, where the user can filter and modify all generators in "gen"

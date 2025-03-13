@@ -2,6 +2,7 @@ package typesystem
 
 import (
 	"log"
+	"slices"
 
 	"github.com/diamondburned/gotk4/gir"
 )
@@ -17,12 +18,41 @@ type context interface {
 	findAnyType(t gir.AnyType) Type
 
 	skipType(t girType) bool
+
+	sortGoReturns([]*Param)
+	sortGoParams([]*Param)
 }
+
+type ParamCompareFunc func(a, b *Param) int
 
 type namespaceContext struct {
 	skipTypeFunc func(t girType) bool
+
+	compareParams  ParamCompareFunc
+	compareReturns ParamCompareFunc
+
 	*Namespace
 }
+
+// sortGoParams implements context.
+func (c *namespaceContext) sortGoParams(ps []*Param) {
+	if c.compareParams == nil {
+		return
+	}
+
+	slices.SortFunc(ps, c.compareParams)
+}
+
+// sortGoReturns implements context.
+func (c *namespaceContext) sortGoReturns(ps []*Param) {
+	if c.compareReturns == nil {
+		return
+	}
+
+	slices.SortFunc(ps, c.compareReturns)
+}
+
+var _ context = (*namespaceContext)(nil)
 
 func (c namespaceContext) goName() string {
 	return c.GoName

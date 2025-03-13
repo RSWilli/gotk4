@@ -2,16 +2,15 @@ package generators
 
 import (
 	"fmt"
-	"log"
 	"strconv"
 	"strings"
 
 	"github.com/diamondburned/gotk4/gir"
-	"github.com/diamondburned/gotk4/gir/gencontext"
 	"github.com/diamondburned/gotk4/gir/girgen/file"
 	"github.com/diamondburned/gotk4/gir/girgen/gotmpl"
 	"github.com/diamondburned/gotk4/gir/girgen/logger"
 	"github.com/diamondburned/gotk4/gir/girgen/types"
+	"github.com/diamondburned/gotk4/gir/girgen/typesystem"
 )
 
 // Deprecated: old
@@ -54,48 +53,20 @@ func GenerateConstant(gen FileGeneratorWriter, constant *gir.Constant) bool {
 }
 
 type ConstantGenerator struct {
-	Gir gir.Constant
+	Doc Generator
 
-	Doc  Generator
-	Name string
-	// Value is directly printed, must be quoted if it's a string
-	Value string
+	*typesystem.Constant
 }
 
 func (g *ConstantGenerator) Generate(w *file.Writer) {
 	g.Doc.Generate(w)
 
-	fmt.Fprintf(w.Go(), "const %s = %s\n", g.Name, g.Value)
+	fmt.Fprintf(w.Go(), "const %s = %s\n", g.GoIndentifier(), g.GoValue)
 }
 
-func NewConstantGenerator(ctx gencontext.GenerationContext, constant gir.Constant) *ConstantGenerator {
-	if !constant.IsIntrospectable() {
-		return nil
-	}
-
-	name := constant.Name
-
-	resolvedType := ctx.LookupType(constant.Type.Name, constant.Type.CType)
-
-	if resolvedType == nil {
-		log.Printf("skipping constant %s because %s did not map to a known go type", constant.Name, constant.Type.Name)
-		return nil
-	}
-
-	goValue := constant.Value
-
-	if resolvedType.GoType() == "string" {
-		goValue = strconv.Quote(goValue)
-	}
-
-	if resolvedType.GoPointers > 0 {
-		panic("unhandled case: pointer constant")
-	}
-
+func NewConstantGenerator(constant *typesystem.Constant) *ConstantGenerator {
 	return &ConstantGenerator{
-		Gir:   constant,
-		Doc:   NewGoDocGenerator(name, constant, 0),
-		Name:  name,
-		Value: goValue,
+		Doc:      NewIdentifierGoDocGenerator(constant, 0),
+		Constant: constant,
 	}
 }

@@ -4,10 +4,12 @@ import (
 	"fmt"
 
 	"github.com/diamondburned/gotk4/gir/girgen/file"
+	"github.com/diamondburned/gotk4/gir/girgen/typesystem"
 )
 
 type MarshalGenerator struct {
-	GoName       string
+	typesystem.Type
+
 	WrapFunction string // may be equal to GoName for Enums and simple conversions
 	// ValueFunction is the method on coregllib.Value to use
 	ValueFunction string
@@ -16,30 +18,30 @@ type MarshalGenerator struct {
 func (g *MarshalGenerator) Generate(w *file.Writer) {
 	w.GoImport("unsafe")
 
-	fmt.Fprintf(w.Go(), "func marshal%s(p uintptr) (interface{}, error) {\n", g.GoName)
+	fmt.Fprintf(w.Go(), "func %s(p uintptr) (interface{}, error) {\n", g.MarshalFuncName())
 	fmt.Fprintf(w.Go(), "\treturn %s(coreglib.ValueFromNative(unsafe.Pointer(p)).%s()), nil\n", g.WrapFunction, g.ValueFunction)
 	fmt.Fprintf(w.Go(), "}\n\n")
 }
 
-func NewMarshalEnumGenerator(goName string) *MarshalGenerator {
+func NewMarshalEnumGenerator(typ typesystem.Type) *MarshalGenerator {
 	return &MarshalGenerator{
-		GoName:        goName,
-		WrapFunction:  goName,
+		Type:          typ,
+		WrapFunction:  typ.GoType(),
 		ValueFunction: "Enum",
 	}
 }
 
-func NewMarshalBifieldGenerator(goName string) *MarshalGenerator {
+func NewMarshalBifieldGenerator(typ typesystem.Type) *MarshalGenerator {
 	return &MarshalGenerator{
-		GoName:        goName,
-		WrapFunction:  goName,
+		Type:          typ,
+		WrapFunction:  typ.GoType(),
 		ValueFunction: "Flags",
 	}
 }
 
-func NewMarshalObjectGenerator(goName string, wrapCoreObjectName string) *MarshalGenerator {
+func NewMarshalObjectGenerator(typ typesystem.Type, wrapCoreObjectName string) *MarshalGenerator {
 	return &MarshalGenerator{
-		GoName:        goName,
+		Type:          typ,
 		WrapFunction:  wrapCoreObjectName,
 		ValueFunction: "Object",
 	}

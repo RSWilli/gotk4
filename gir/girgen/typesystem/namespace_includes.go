@@ -18,6 +18,12 @@ type namespaceWithIncludes struct {
 	gir.Namespace
 }
 
+type repoWithIncludes struct {
+	gir.Repository
+
+	namespaces []*namespaceWithIncludes
+}
+
 type versionedNamespace struct {
 	name    string
 	version gir.Version
@@ -27,12 +33,16 @@ func (v versionedNamespace) String() string {
 	return fmt.Sprintf("%s-%s", v.name, v.version)
 }
 
-func resolveNamespaceIncludes(repos gir.Repositories) []*namespaceWithIncludes {
+func resolveNamespaceIncludes(repos gir.Repositories) []*repoWithIncludes {
 	namespacesByName := make(map[versionedNamespace]*namespaceWithIncludes)
-	namespaces := make([]*namespaceWithIncludes, 0, len(repos))
+	outRepos := make([]*repoWithIncludes, 0, len(repos))
 
 	for _, repo := range repos {
 		includes := repoPrefilledIncludes(repo.Repository)
+
+		outRepo := &repoWithIncludes{
+			Repository: repo.Repository,
+		}
 
 		for _, ns := range repo.Namespaces {
 			versioned := versionedNamespace{
@@ -49,8 +59,10 @@ func resolveNamespaceIncludes(repos gir.Repositories) []*namespaceWithIncludes {
 			}
 
 			namespacesByName[versioned] = namespace
-			namespaces = append(namespaces, namespace)
+			outRepo.namespaces = append(outRepo.namespaces, namespace)
 		}
+
+		outRepos = append(outRepos, outRepo)
 	}
 
 	// we need to loop again to resolve the includes correctly:
@@ -68,19 +80,24 @@ func resolveNamespaceIncludes(repos gir.Repositories) []*namespaceWithIncludes {
 	}
 
 	// and one more time for transitive includes:
-	for _, ns := range namespaces {
-		for _, incl := range ns.includes {
-			for name, transIncl := range incl.includes {
-				ns.includes[name] = transIncl
+	//
+	// we are using the repos in the given order, which means we hopefully get all transitive imports
+	// in a single loop, given all depended repos come before
+	for _, repo := range outRepos {
+		for _, ns := range repo.namespaces {
+			for _, incl := range ns.includes {
+				for name, transIncl := range incl.includes {
+					ns.includes[name] = transIncl
+				}
 			}
 		}
 	}
 
-	return namespaces
+	return outRepos
 }
 
 // repoPrefilledIncludes prefills the includes with namespaces name and version, to
-// be able to later
+// be able to later set it to the actual pointer to the foreign namespace
 func repoPrefilledIncludes(r gir.Repository) map[string]*namespaceWithIncludes {
 	m := make(map[string]*namespaceWithIncludes)
 	for _, v := range r.Includes {

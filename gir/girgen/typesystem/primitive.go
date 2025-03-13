@@ -1,77 +1,120 @@
 package typesystem
 
+import "slices"
+
 type Primitive struct {
-	baseType
+	BaseType
+}
+
+func IsPrimitive(t Type) bool {
+	_, ok := t.(*Primitive)
+
+	return ok
 }
 
 func prim(girName, cType, cGoType, goType string) *Primitive {
 	return &Primitive{
-		baseType: baseType{
-			girName: girName,
-			cType:   cType,
-			cGoType: cGoType,
-			goType:  goType,
+		BaseType: BaseType{
+			GirName: girName,
+			CTyp:    cType,
+			CGoTyp:  cGoType,
+			GoTyp:   goType,
 		},
 	}
 }
 
+var (
+	Guint    = prim("guint", "guint", "C.guint", "uint")
+	Guint8   = prim("guint8", "guint8", "C.guint8", "uint8")
+	Guint16  = prim("guint16", "guint16", "C.guint16", "uint16")
+	Guint32  = prim("guint32", "guint32", "C.guint32", "uint32")
+	Guint64  = prim("guint64", "guint64", "C.guint64", "uint64")
+	Gint     = prim("gint", "gint", "C.int", "int")
+	Gint8    = prim("gint8", "gint8", "C.gint8", "int8")
+	Gint16   = prim("gint16", "gint16", "C.gint16", "int16")
+	Gint32   = prim("gint32", "gint32", "C.gint32", "int32")
+	Gint64   = prim("gint64", "gint64", "C.gint64", "int64")
+	Gshort   = prim("gshort", "gshort", "C.gshort", "int16")
+	Gushort  = prim("gushort", "gushort", "C.gushort", "uint16")
+	Gsize    = prim("gsize", "gsize", "C.gsize", "uint")
+	Gssize   = prim("gssize", "gssize", "C.gssize", "int")
+	Gchar    = prim("gchar", "gchar", "C.char", "byte")
+	Gunichar = prim("gunichar", "gunichar", "C.gunichar", "uint32")
+	Gboolean = prim("gboolean", "gboolean", "C.gboolean", "bool")
+	Gfloat   = prim("gfloat", "gfloat", "C.gfloat", "float32")
+	Gdouble  = prim("gdouble", "gdouble", "C.gdouble", "float64")
+	Utf8     = prim("utf8", "gchar*", "*C.gchar", "string")
+	Filename = prim("filename", "gchar*", "*C.gchar", "string")
+	Gintptr  = prim("gintptr", "gintptr", "C.gintptr", "uintptr")
+	Guintptr = prim("guintptr", "guintptr", "C.guintptr", "uintptr")
+	Gpointer = prim("gpointer", "gpointer", "C.gpointer", "unsafe.Pointer")
+	Glong    = prim("glong", "glong", "C.glong", "int32")
+	Gulong   = prim("gulong", "gulong", "C.gulong", "uint32")
+	Time_t   = prim("time_t", "time_t", "C.time_t", "uint64") // TODO: check go type
+	GType    = prim("GType", "GType", "C.GType", "GType")     // TODO: check go type
+	Pid_t    = prim("pid_t", "pid_t", "C.pid_t", "int")       // process ids
+	Ino_t    = prim("ino_t", "ino_t", "C.ino_t", "uint")      // file serial ids
+	Uid_t    = prim("uid_t", "uid_t", "C.uid_t", "uint")      // user ids, may be signed on some platforms
+	Gid_t    = prim("gid_t", "gid_t", "C.gid_t", "uint")      // group ids, may be signed on some platforms
+)
+
 var Primitives = []*Primitive{
-	prim("guint", "guint", "C.guint", "uint"),
-	prim("guint8", "guint8", "C.guint8", "uint8"),
-	prim("guint16", "guint16", "C.guint16", "uint16"),
-	prim("guint32", "guint32", "C.guint32", "uint32"),
-	prim("guint64", "guint64", "C.guint64", "uint64"),
+	Guint,
+	Guint8,
+	Guint16,
+	Guint32,
+	Guint64,
 
-	prim("gint", "gint", "C.int", "int"),
-	prim("gint8", "gint8", "C.gint8", "int8"),
-	prim("gint16", "gint16", "C.gint16", "int16"),
-	prim("gint32", "gint32", "C.gint32", "int32"),
-	prim("gint64", "gint64", "C.gint64", "int64"),
+	Gint,
+	Gint8,
+	Gint16,
+	Gint32,
+	Gint64,
 
-	prim("gshort", "gshort", "C.gshort", "int16"),
-	prim("gushort", "gushort", "C.gushort", "uint16"),
+	Gshort,
+	Gushort,
 
-	prim("gsize", "gsize", "C.gsize", "uint"),
-	prim("gssize", "gssize", "C.gssize", "int"),
+	Gsize,
+	Gssize,
 
-	prim("gchar", "gchar", "C.char", "byte"),
-	prim("gunichar", "gunichar", "C.gunichar", "uint32"),
+	Gchar,
+	Gunichar,
 
-	prim("gboolean", "gboolean", "C.gboolean", "bool"),
+	Gboolean,
 
-	prim("gfloat", "gfloat", "C.gfloat", "float32"),
-	prim("gdouble", "gdouble", "C.gdouble", "float64"),
+	Gfloat,
+	Gdouble,
 
-	prim("utf8", "gchar*", "*C.gchar", "string"),
-	prim("filename", "gchar*", "*C.gchar", "string"),
+	Utf8,
+	Filename,
 
-	prim("gintptr", "gintptr", "C.gintptr", "uintptr"),
-	prim("guintptr", "guintptr", "C.guintptr", "uintptr"),
-	prim("gpointer", "gpointer", "C.gpointer", "unsafe.Pointer"),
+	Gintptr,
+	Guintptr,
+	Gpointer,
 
-	prim("glong", "glong", "C.glong", "int32"),
-	prim("gulong", "gulong", "C.gulong", "uint32"),
+	Glong,
+	Gulong,
 
-	prim("time_t", "time_t", "C.time_t", "uint64"), // TODO: check go type
+	Time_t,
 
-	prim("GType", "GType", "C.GType", "GType"), // TODO: check go type
+	GType,
 
-	prim("pid_t", "pid_t", "C.pid_t", "int"),  // process ids
-	prim("ino_t", "ino_t", "C.ino_t", "uint"), // file serial ids
-	prim("uid_t", "uid_t", "C.uid_t", "uint"), // user ids, may be signed on some platforms
-	prim("gid_t", "gid_t", "C.gid_t", "uint"), // group ids, may be signed on some platforms
+	Pid_t,
+	Ino_t,
+	Uid_t,
+	Gid_t,
 }
 
 type VoidType struct {
-	baseType
+	BaseType
 }
 
 var Void = &VoidType{
-	baseType: baseType{
-		girName: "none",
-		goType:  typeInvalid,
-		cGoType: "C.void",
-		cType:   "void",
+	BaseType: BaseType{
+		GirName: "none",
+		GoTyp:   typeInvalid,
+		CGoTyp:  "C.void",
+		CTyp:    "void",
 	},
 }
 
@@ -90,15 +133,15 @@ func findPrimitiveByName(girname string) Type {
 }
 
 type Error struct {
-	baseType
+	BaseType
 }
 
 var TypeError = &Error{
-	baseType: baseType{
-		girName: "GLib.Error", // this doesn't resolve correctly from the GLib namespace
-		goType:  "error",
-		cGoType: "**C.GError",
-		cType:   "GError**",
+	BaseType: BaseType{
+		GirName: "GLib.Error", // this doesn't resolve correctly from the GLib namespace
+		GoTyp:   "error",
+		CGoTyp:  "**C.GError",
+		CTyp:    "GError**",
 	},
 }
 
@@ -124,11 +167,5 @@ var IgnoredNamespaces = []string{
 }
 
 func isIgnoredNSName(foreignNSName string) bool {
-	for _, ns := range IgnoredNamespaces {
-		if ns == foreignNSName {
-			return true
-		}
-	}
-
-	return false
+	return slices.Contains(IgnoredNamespaces, foreignNSName)
 }
