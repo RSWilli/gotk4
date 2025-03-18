@@ -24,10 +24,8 @@ type Class struct {
 
 	Abstract bool
 
-	// Valid signifies that the classes parent has been resolved correctly
-	// if this is false then the class generator must ignore this or the generation will
-	// be wrong
-	Valid bool
+	// gir is used to resolve the class and it's nested definitions after it has been declared
+	gir gir.Class
 
 	TypeStruct *Record
 	Parent     Type
@@ -42,14 +40,16 @@ type Class struct {
 	Signals        []*Signal
 }
 
-func NewClass(ns context, v gir.Class) *Class {
+// DeclareClass declares a new class, it returns the class type and whether this instance needs additional
+// resolving, because it has dependencies to other types
+func DeclareClass(e *env, v gir.Class) (*Class, bool) {
 	ctype := v.CType
 
 	if ctype == "" {
 		ctype = v.Name
 	}
 
-	return &Class{
+	c := &Class{
 		Doc:                NewDoc(&v.InfoAttrs, &v.InfoElements),
 		Abstract:           v.Abstract,
 		GoInterfaceName:    strcases.Interfacify(v.Name),
@@ -63,90 +63,99 @@ func NewClass(ns context, v gir.Class) *Class {
 			GlibGetTypeFn: v.GLibGetType,
 		},
 	}
-}
 
-func (r *Class) resolveNested(ns context, v gir.Class) {
-	if v.Parent != "" {
-		parent := ns.findType(&gir.Type{Name: v.Parent})
-
-		if parent == nil {
-			return
-		}
-
-		if !IsClass(parent) {
-			log.Printf("parent %s of class %s is not a class, but %T instead\n", parent.GIRName(), v.Name, UnderlyingType(parent))
-			return
-		}
-
-		r.Parent = parent
-	}
-
-	if v.GLibTypeStruct != "" {
-		typeStructType := ns.findType(&gir.Type{Name: v.GLibTypeStruct})
+	if c.gir.GLibTypeStruct != "" {
+		typeStructType := e.findType(&gir.Type{Name: c.gir.GLibTypeStruct})
 
 		if typeStructType == nil {
-			return
+			return nil, false
 		}
 
 		typeStruct, ok := typeStructType.(*Record)
 
 		if !ok {
-			log.Printf("type struct for %s is not a record but instead %T", v.Name, typeStructType)
-			return
+			log.Printf("type struct for %s is not a record but instead %T", c.gir.Name, typeStructType)
+			return nil, false
 		}
 
-		r.TypeStruct = typeStruct
-
-		for _, v := range v.VirtualMethods {
-			if t := NewVirtualMethod(ns, r, typeStruct, v); t != nil {
-				r.VirtualMethods = append(r.VirtualMethods, t)
-			}
-		}
+		c.TypeStruct = typeStruct
 	}
 
-	// ------------- from here on the class is valid and we will only omit invalid parts ----------------
-	r.Valid = true
+	return c, v.Parent != "" || len(v.Implements) > 0
+}
 
-	for _, impl := range v.Implements {
-		inter := ns.findType(&gir.Type{Name: impl.Name})
+func (c *Class) resolve(e *env) bool {
+	if c.gir.Parent != "" {
+		parent := e.findType(&gir.Type{Name: c.gir.Parent})
+
+		if parent == nil {
+			return false
+		}
+
+		if !IsClass(parent) {
+			log.Printf("parent %s of class %s is not a class, but %T instead\n", parent.GIRName(), c.gir.Name, UnderlyingType(parent))
+			return false
+		}
+
+		c.Parent = parent
+	}
+
+	for _, impl := range c.gir.Implements {
+		inter := e.findType(&gir.Type{Name: impl.Name})
 
 		if inter == nil {
 			log.Printf("interface %s not found\n", impl.Name)
 			continue
 		}
 
-		r.Implements = append(r.Implements, inter)
+		if !IsInterface(inter) && !IsClass(inter) {
+			return false
+		}
+
+		c.Implements = append(c.Implements, inter)
 	}
 
-	for _, v := range v.Functions {
-		if t := DeclareFunction(ns, v); t != nil {
-			r.Functions = append(r.Functions, t)
+	return true
+}
+
+func (c *Class) declareNested(e *env) {
+	for _, v := range c.gir.Functions {
+		if t := DeclareFunction(e, v); t != nil {
+			c.Functions = append(c.Functions, t)
 		}
 	}
 
-	for _, v := range v.Methods {
+	for _, v := range c.gir.Methods {
 		// TODO: handle ref and unref like the records do
 
-		if t := NewMethod(ns, v); t != nil {
-			r.Methods = append(r.Methods, t)
+		if t := NewMethod(e, v); t != nil {
+			c.Methods = append(c.Methods, t)
 		}
 	}
 
-	for _, v := range v.Constructors {
-		if t := DeclareConstructor(ns, r, v); t != nil {
-			r.Constructors = append(r.Constructors, t)
+	for _, v := range c.gir.Constructors {
+		if t := DeclareConstructor(e, c, v); t != nil {
+			c.Constructors = append(c.Constructors, t)
 		}
 	}
 
-	for _, v := range v.Signals {
-		if t := NewSignal(ns, v); t != nil {
-			r.Signals = append(r.Signals, t)
+	for _, v := range c.gir.Signals {
+		if t := NewSignal(e, v); t != nil {
+			c.Signals = append(c.Signals, t)
 		}
 	}
 
-	for _, v := range v.Fields {
-		if t := NewField(ns, r, v); t != nil {
-			r.Fields = append(r.Fields, t)
+	for _, v := range c.gir.Fields {
+		if t := NewField(e, c, v); t != nil {
+			c.Fields = append(c.Fields, t)
+		}
+	}
+
+	if c.TypeStruct != nil {
+		for _, v := range c.gir.VirtualMethods {
+			if t := NewVirtualMethod(e, c, c.TypeStruct, v); t != nil {
+				c.VirtualMethods = append(c.VirtualMethods, t)
+			}
 		}
 	}
 }

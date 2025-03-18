@@ -13,8 +13,8 @@ type Bitfield struct {
 	Members []*Member
 }
 
-func DeclareBitfield(ctx context, v gir.Bitfield) *Bitfield {
-	if ctx.skipType(v) {
+func DeclareBitfield(e *env, v gir.Bitfield) *Bitfield {
+	if e.skipType(v) {
 		return nil
 	}
 

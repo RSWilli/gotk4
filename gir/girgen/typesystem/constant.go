@@ -12,8 +12,25 @@ type Constant struct {
 	GoValue string
 }
 
-func DeclareConstant(ctx context, v gir.Constant) *Constant {
-	if ctx.skipType(v) {
+func DeclareConstant(e *env, v gir.Constant) *Constant {
+	if e.skipType(v) { // TODO: a constant is not a type
+		return nil
+	}
+
+	// for some reason the name of the constant is listed under the ctype
+	cIdentifier := v.CType
+
+	underlying := e.findType(&v.Type)
+
+	if underlying == nil {
+		return nil
+	}
+
+	if Pointers(underlying) > 0 {
+		return nil
+	}
+
+	if underlying == Utf8 {
 		return nil
 	}
 
@@ -21,9 +38,9 @@ func DeclareConstant(ctx context, v gir.Constant) *Constant {
 		Doc: NewDoc(&v.InfoAttrs, &v.InfoElements),
 		Identifier: &baseIdentifier{
 			goIndentifier:  strcases.SnakeToGo(true, v.Name),
-			cIndentifier:   v.Name,
-			cGoIndentifier: "C." + v.Name,
+			cIndentifier:   cIdentifier,
+			cGoIndentifier: "C." + cIdentifier,
 		},
-		GoValue: "C." + v.Name, // we use the C constant directly as this prevents any of the quoting issues
+		GoValue: "C." + cIdentifier, // we use the C constant directly as this prevents any of the quoting issues
 	}
 }

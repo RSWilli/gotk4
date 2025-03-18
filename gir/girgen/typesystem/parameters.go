@@ -92,8 +92,8 @@ type Parameters struct {
 	GoParameters ParamList
 }
 
-func NewCallableParameters(ns context, v gir.CallableAttrs) *Parameters {
-	params := NewParameters(ns, v.Parameters, v.ReturnValue, v.Throws)
+func NewCallableParameters(e *env, v gir.CallableAttrs) *Parameters {
+	params := NewParameters(e, v.Parameters, v.ReturnValue, v.Throws)
 
 	if params != nil {
 		params.Doc = NewDoc(&v.InfoAttrs, &v.InfoElements)
@@ -102,12 +102,12 @@ func NewCallableParameters(ns context, v gir.CallableAttrs) *Parameters {
 	return params
 }
 
-func NewParameters(ctx context, girparams *gir.Parameters, ret *gir.ReturnValue, throws bool) *Parameters {
+func NewParameters(e *env, girparams *gir.Parameters, ret *gir.ReturnValue, throws bool) *Parameters {
 	params := &Parameters{}
 
 	if girparams != nil {
 		if girparams.InstanceParameter != nil {
-			t := ctx.findAnyType(girparams.InstanceParameter.AnyType)
+			t := e.findAnyType(girparams.InstanceParameter.AnyType)
 
 			if t == nil {
 				return nil
@@ -139,7 +139,7 @@ func NewParameters(ctx context, girparams *gir.Parameters, ret *gir.ReturnValue,
 				paramType = decreasePointers(paramType)
 			}
 
-			t := ctx.findAnyType(paramType)
+			t := e.findAnyType(paramType)
 
 			if t == nil {
 				return nil
@@ -211,7 +211,7 @@ func NewParameters(ctx context, girparams *gir.Parameters, ret *gir.ReturnValue,
 	}
 
 	if ret != nil {
-		t := ctx.findAnyType(ret.AnyType)
+		t := e.findAnyType(ret.AnyType)
 
 		if t == nil {
 			return nil
@@ -231,8 +231,8 @@ func NewParameters(ctx context, girparams *gir.Parameters, ret *gir.ReturnValue,
 
 	}
 
-	ctx.sortGoParams(params.GoParameters)
-	ctx.sortGoReturns(params.GoReturns)
+	e.sortGoParams(params.GoParameters)
+	e.sortGoReturns(params.GoReturns)
 
 	return params
 }
@@ -259,6 +259,10 @@ func (pl ParamList) GoDeclarations() string {
 	decls := make([]string, 0, len(pl))
 
 	for _, p := range pl {
+		if p.Skip || p.Implicit {
+			continue
+		}
+
 		decls = append(decls, p.GoDeclaration())
 	}
 

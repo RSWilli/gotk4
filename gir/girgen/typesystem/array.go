@@ -63,7 +63,8 @@ func (a *Array) GoType() string {
 	return fmt.Sprintf("[]%s", a.Inner.GoType())
 }
 
-func getArrayType(ns *Namespace, arr *gir.Array) *Array {
+// getArrayType resolves the array type in the current env
+func (e *env) getArrayType(arr *gir.Array) *Array {
 	if arr.Length == nil && arr.FixedSize == 0 && !arr.IsZeroTerminated() {
 		// this is an unbounded array, which requires some unsafe preconditions not
 		// documented in GIR, FIXME: can we even handle this?
@@ -115,7 +116,7 @@ func getArrayType(ns *Namespace, arr *gir.Array) *Array {
 		return nil
 	}
 
-	inner := ns.findTypeByGIRName(arr.Type.Name)
+	inner := e.findTypeByGIRName(arr.Type.Name)
 	if inner == nil {
 		log.Printf("could not find array inner type %s", arr.Type.Name)
 		return nil

@@ -39,7 +39,7 @@ func FromRepositories(cfg Config, repos gir.Repositories) *Registry {
 	return r
 }
 
-func (r *Registry) findNS(v versionedNamespace) *Namespace {
+func (r *Registry) findNS(v versionedName) *Namespace {
 	for _, repo := range r.Repositories {
 		for _, ns := range repo.Namespaces {
 			if ns.v == v {

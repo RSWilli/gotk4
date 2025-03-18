@@ -1,7 +1,5 @@
 package typesystem
 
-import "slices"
-
 type Primitive struct {
 	BaseType
 }
@@ -51,7 +49,7 @@ var (
 	Glong    = prim("glong", "glong", "C.glong", "int32")
 	Gulong   = prim("gulong", "gulong", "C.gulong", "uint32")
 	Time_t   = prim("time_t", "time_t", "C.time_t", "uint64") // TODO: check go type
-	GType    = prim("GType", "GType", "C.GType", "GType")     // TODO: check go type
+	GType    = prim("GType", "GType", "C.GType", "GType")     // TODO: move to coreglib.Type
 	Pid_t    = prim("pid_t", "pid_t", "C.pid_t", "int")       // process ids
 	Ino_t    = prim("ino_t", "ino_t", "C.ino_t", "uint")      // file serial ids
 	Uid_t    = prim("uid_t", "uid_t", "C.uid_t", "uint")      // user ids, may be signed on some platforms
@@ -132,40 +130,16 @@ func findPrimitiveByName(girname string) Type {
 	return nil
 }
 
-type Error struct {
-	BaseType
-}
-
-var TypeError = &Error{
-	BaseType: BaseType{
-		GirName: "GLib.Error", // this doesn't resolve correctly from the GLib namespace
-		GoTyp:   "error",
-		CGoTyp:  "**C.GError",
-		CTyp:    "GError**",
-	},
-}
-
-var IgnoredTypes = []string{
+var IncompatibleTypes = []string{
 	"long double", // may be more precise than float64, so we do not have a go equivalent
 }
 
-func isIgnoredTypeName(girname string) bool {
-	for _, ign := range IgnoredTypes {
+func isIncompatible(girname string) bool {
+	for _, ign := range IncompatibleTypes {
 		if ign == girname {
 			return true
 		}
 	}
 
 	return false
-}
-
-// TODO: configure this somehow from genmain
-var IgnoredNamespaces = []string{
-	"xlib",
-	"HarfBuzz",
-	"DBus",
-}
-
-func isIgnoredNSName(foreignNSName string) bool {
-	return slices.Contains(IgnoredNamespaces, foreignNSName)
 }

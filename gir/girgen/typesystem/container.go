@@ -1,6 +1,8 @@
 package typesystem
 
-import "github.com/diamondburned/gotk4/gir"
+import (
+	"github.com/diamondburned/gotk4/gir"
+)
 
 type Container struct {
 	Outer Type
@@ -39,7 +41,7 @@ func (c *Container) GoType() string {
 
 var _ Type = &Container{}
 
-func resolveInnerTypes(ns *Namespace, outer Type, t *gir.Type) Type {
+func (e *env) resolveInnerTypes(outer Type, t *gir.Type) Type {
 	if len(t.Types) == 0 {
 		return outer
 	}
@@ -49,7 +51,7 @@ func resolveInnerTypes(ns *Namespace, outer Type, t *gir.Type) Type {
 	}
 
 	for _, inner := range t.Types {
-		innerTyp := ns.findTypeByGIRName(inner.Name)
+		innerTyp := e.findTypeByGIRName(inner.Name)
 
 		if innerTyp == nil {
 			return nil

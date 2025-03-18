@@ -2,7 +2,6 @@ package typesystem
 
 import (
 	"fmt"
-	"log"
 	"strings"
 
 	"github.com/diamondburned/gotk4/gir"
@@ -13,9 +12,9 @@ type Record struct {
 	Doc
 	BaseType
 
-	Fields []*Field
+	gir gir.Record
 
-	IsTypeStructFor Type
+	Fields []*Field
 
 	// PrivateGoType is the inner struct that contains the C pointer and gets the finalizer attached
 	PrivateGoType string
@@ -43,8 +42,8 @@ type Record struct {
 	Properties []*struct{}
 }
 
-func DeclareRecord(ctx context, v gir.Record) *Record {
-	if ctx.skipType(v) {
+func DeclareRecord(e *env, v gir.Record) *Record {
+	if e.skipType(v) {
 		return nil
 	}
 
@@ -52,7 +51,7 @@ func DeclareRecord(ctx context, v gir.Record) *Record {
 		return nil
 	}
 
-	r := &Record{
+	return &Record{
 		Doc:           NewDoc(&v.InfoAttrs, &v.InfoElements),
 		PrivateGoType: strcases.UnexportPascal(v.Name),
 
@@ -74,37 +73,18 @@ func DeclareRecord(ctx context, v gir.Record) *Record {
 
 			GlibGetTypeFn: v.GLibGetType,
 		},
+		gir: v,
 	}
-
-	return r
 }
 
-func (r *Record) resolveNested(ctx context, v gir.Record) {
-	if v.GLibIsGTypeStructFor != "" {
-		classType := ctx.findType(&gir.Type{Name: v.GLibIsGTypeStructFor})
-
-		if classType == nil {
-			return
-		}
-
-		switch classType.(type) {
-		case *Class:
-		case *Interface:
-		default:
-			log.Printf("%s should be a type struct for %s, but %s is %T and not class or interface\n", v.Name, v.GLibIsGTypeStructFor, v.GLibIsGTypeStructFor, classType)
-			return
-		}
-
-		r.IsTypeStructFor = classType
-	}
-
-	for _, v := range v.Functions {
-		if t := DeclareFunction(ctx, v); t != nil {
+func (r *Record) declareNested(e *env) {
+	for _, v := range r.gir.Functions {
+		if t := DeclareFunction(e, v); t != nil {
 			r.Functions = append(r.Functions, t)
 		}
 	}
 
-	for _, v := range v.Methods {
+	for _, v := range r.gir.Methods {
 		if v.Name == "weak_ref" || v.Name == "weak_unref" {
 			continue
 		}
@@ -121,21 +101,21 @@ func (r *Record) resolveNested(ctx context, v gir.Record) {
 			continue
 		}
 
-		if t := NewMethod(ctx, v); t != nil {
+		if t := NewMethod(e, v); t != nil {
 			r.Methods = append(r.Methods, t)
 		}
 	}
 
-	for _, v := range v.Constructors {
-		if t := DeclareConstructor(ctx, r, v); t != nil {
+	for _, v := range r.gir.Constructors {
+		if t := DeclareConstructor(e, r, v); t != nil {
 			r.Constructors = append(r.Constructors, t)
 		}
 	}
 
 	// Disguised means opaque, so we're not supposed to access these fields.
-	if !v.Disguised {
-		for _, v := range v.Fields {
-			if t := NewField(ctx, r, v); t != nil {
+	if !r.gir.Disguised {
+		for _, v := range r.gir.Fields {
+			if t := NewField(e, r, v); t != nil {
 				r.Fields = append(r.Fields, t)
 			}
 		}

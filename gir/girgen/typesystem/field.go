@@ -23,7 +23,7 @@ type Field struct {
 	Bits int
 }
 
-func NewField(ns context, parent Type, v gir.Field) *Field {
+func NewField(e *env, parent Type, v gir.Field) *Field {
 	if v.Private || !(v.IsReadable() || v.Writable) {
 		return nil
 	}
@@ -40,7 +40,7 @@ func NewField(ns context, parent Type, v gir.Field) *Field {
 	//
 	// this will be done by the bindings and not exposed to the user
 	if v.Callback == nil {
-		t = ns.findAnyType(v.AnyType)
+		t = e.findAnyType(v.AnyType)
 
 		if t == nil {
 			return nil

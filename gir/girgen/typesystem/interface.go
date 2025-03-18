@@ -10,10 +10,7 @@ type Interface struct {
 	BaseType
 	TypeStruct *Record
 
-	// Valid signifies that the interfaces prerequesites have been resolved correctly.
-	// if this is false then the class generator must ignore this or the generation will
-	// be wrong
-	Valid bool
+	gir gir.Interface
 
 	Prerequesite []Type // Class or Interface
 
@@ -23,14 +20,14 @@ type Interface struct {
 	Signals        []*Signal
 }
 
-func DeclareInterface(ns context, v gir.Interface) *Interface {
+func DeclareInterface(e *env, v gir.Interface) (*Interface, bool) {
 	ctype := v.CType
 
 	if ctype == "" {
 		ctype = v.Name
 	}
 
-	return &Interface{
+	i := &Interface{
 		BaseType: BaseType{
 			GirName: v.Name,
 			GoTyp:   v.Name,
@@ -39,66 +36,72 @@ func DeclareInterface(ns context, v gir.Interface) *Interface {
 
 			GlibGetTypeFn: v.GLibGetType,
 		},
-	}
-}
-
-func (r *Interface) resolveNested(ns context, v gir.Interface) {
-	for _, prereq := range v.Prerequisites {
-		inter := ns.findType(&gir.Type{Name: prereq.Name})
-
-		if inter == nil {
-			log.Printf("interface %s not found\n", prereq.Name)
-			return
-		}
-
-		if !IsInterface(inter) && !IsClass(inter) {
-			log.Printf("prerequisite %s of interface %s is not class or interface, but %T instead\n", inter.GIRName(), v.Name, UnderlyingType(inter))
-			return
-		}
-
-		r.Prerequesite = append(r.Prerequesite, inter)
+		gir: v,
 	}
 
 	if v.GLibTypeStruct != "" {
-		typeStructType := ns.findType(&gir.Type{Name: v.GLibTypeStruct})
+		typeStructType := e.findType(&gir.Type{Name: v.GLibTypeStruct})
 
 		if typeStructType == nil {
-			return
+			return nil, false
 		}
 
 		typeStruct, ok := typeStructType.(*Record)
 
 		if !ok {
-			return
+			return nil, false
 		}
 
-		r.TypeStruct = typeStruct
+		i.TypeStruct = typeStruct
+	}
 
-		for _, v := range v.VirtualMethods {
-			if t := NewVirtualMethod(ns, r, typeStruct, v); t != nil {
-				r.VirtualMethods = append(r.VirtualMethods, t)
+	return i, len(v.Prerequisites) > 0
+}
+
+func (in *Interface) resolve(e *env) bool {
+	for _, prereq := range in.gir.Prerequisites {
+		inter := e.findType(&gir.Type{Name: prereq.Name})
+
+		if inter == nil {
+			log.Printf("interface %s not found\n", prereq.Name)
+			return false
+		}
+
+		if !IsInterface(inter) && !IsClass(inter) {
+			log.Printf("prerequisite %s of interface %s is not class or interface, but %T instead\n", inter.GIRName(), in.gir.Name, UnderlyingType(inter))
+			return false
+		}
+
+		in.Prerequesite = append(in.Prerequesite, inter)
+	}
+
+	return true
+}
+
+func (in *Interface) declareNested(e *env) {
+	for _, v := range in.gir.Functions {
+		if t := DeclareFunction(e, v); t != nil {
+			in.Functions = append(in.Functions, t)
+		}
+	}
+
+	for _, v := range in.gir.Methods {
+		if t := NewMethod(e, v); t != nil {
+			in.Methods = append(in.Methods, t)
+		}
+	}
+
+	for _, v := range in.gir.Signals {
+		if t := NewSignal(e, v); t != nil {
+			in.Signals = append(in.Signals, t)
+		}
+	}
+
+	if in.TypeStruct != nil {
+		for _, v := range in.gir.VirtualMethods {
+			if t := NewVirtualMethod(e, in, in.TypeStruct, v); t != nil {
+				in.VirtualMethods = append(in.VirtualMethods, t)
 			}
-		}
-	}
-
-	// ------------- from here on the interface is valid and we will only omit invalid parts ----------------
-	r.Valid = true
-
-	for _, v := range v.Functions {
-		if t := DeclareFunction(ns, v); t != nil {
-			r.Functions = append(r.Functions, t)
-		}
-	}
-
-	for _, v := range v.Methods {
-		if t := NewMethod(ns, v); t != nil {
-			r.Methods = append(r.Methods, t)
-		}
-	}
-
-	for _, v := range v.Signals {
-		if t := NewSignal(ns, v); t != nil {
-			r.Signals = append(r.Signals, t)
 		}
 	}
 }

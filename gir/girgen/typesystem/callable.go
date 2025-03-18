@@ -12,8 +12,8 @@ type CallableSignature struct {
 	*Parameters
 }
 
-func DeclareFunction(ctx context, v gir.Function) *CallableSignature {
-	if ctx.skipType(v) {
+func DeclareFunction(e *env, v gir.Function) *CallableSignature {
+	if e.skipType(v) {
 		return nil
 	}
 
@@ -22,7 +22,7 @@ func DeclareFunction(ctx context, v gir.Function) *CallableSignature {
 		return nil
 	}
 
-	params := NewCallableParameters(ctx, v.CallableAttrs)
+	params := NewCallableParameters(e, v.CallableAttrs)
 
 	if params == nil {
 		// log.Printf("could not create parameters for function %s\n", v.CIdentifier)
@@ -39,8 +39,8 @@ func DeclareFunction(ctx context, v gir.Function) *CallableSignature {
 	}
 }
 
-func NewMethod(ctx context, v gir.Method) *CallableSignature {
-	if ctx.skipType(v) {
+func NewMethod(e *env, v gir.Method) *CallableSignature {
+	if e.skipType(v) {
 		return nil
 	}
 
@@ -49,7 +49,7 @@ func NewMethod(ctx context, v gir.Method) *CallableSignature {
 		return nil
 	}
 
-	params := NewCallableParameters(ctx, v.CallableAttrs)
+	params := NewCallableParameters(e, v.CallableAttrs)
 
 	if params == nil {
 		// log.Printf("could not create parameters for method %s\n", v.CIdentifier)
@@ -90,15 +90,19 @@ func (c *constructorIdentifier) CIndentifier() string {
 func (c *constructorIdentifier) GoIndentifier() string {
 	pascal := strcases.SnakeToGo(true, c.girname)
 
-	noNew := strings.TrimPrefix(pascal, "New")
+	noNew, ok := strings.CutPrefix(pascal, "New")
 
-	return "New" + c.parent.GoType() + noNew
+	if ok {
+		return "New" + c.parent.GoType() + noNew
+	}
+
+	return c.parent.GoType() + pascal
 }
 
 var _ Identifier = &constructorIdentifier{}
 
-func DeclareConstructor(ctx context, parent Type, v gir.Constructor) *CallableSignature {
-	if ctx.skipType(v) {
+func DeclareConstructor(e *env, parent Type, v gir.Constructor) *CallableSignature {
+	if e.skipType(v) {
 		return nil
 	}
 
@@ -107,7 +111,7 @@ func DeclareConstructor(ctx context, parent Type, v gir.Constructor) *CallableSi
 		return nil
 	}
 
-	params := NewCallableParameters(ctx, v.CallableAttrs)
+	params := NewCallableParameters(e, v.CallableAttrs)
 
 	if params == nil {
 		// log.Printf("could not create parameters for constructor %s\n", v.CIdentifier)

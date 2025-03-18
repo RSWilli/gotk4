@@ -11,7 +11,7 @@ import (
 //
 // it is used as a preprocessing step before resolving all the types in the namespace
 type namespaceWithIncludes struct {
-	versionedName versionedNamespace
+	versionedName versionedName
 	includes      map[string]*namespaceWithIncludes
 
 	repository *gir.Repository
@@ -24,17 +24,17 @@ type repoWithIncludes struct {
 	namespaces []*namespaceWithIncludes
 }
 
-type versionedNamespace struct {
+type versionedName struct {
 	name    string
 	version gir.Version
 }
 
-func (v versionedNamespace) String() string {
+func (v versionedName) String() string {
 	return fmt.Sprintf("%s-%s", v.name, v.version)
 }
 
 func resolveNamespaceIncludes(repos gir.Repositories) []*repoWithIncludes {
-	namespacesByName := make(map[versionedNamespace]*namespaceWithIncludes)
+	namespacesByName := make(map[versionedName]*namespaceWithIncludes)
 	outRepos := make([]*repoWithIncludes, 0, len(repos))
 
 	for _, repo := range repos {
@@ -45,7 +45,7 @@ func resolveNamespaceIncludes(repos gir.Repositories) []*repoWithIncludes {
 		}
 
 		for _, ns := range repo.Namespaces {
-			versioned := versionedNamespace{
+			versioned := versionedName{
 				name:    ns.Name,
 				version: ns.Version,
 			}
@@ -102,7 +102,7 @@ func repoPrefilledIncludes(r gir.Repository) map[string]*namespaceWithIncludes {
 	m := make(map[string]*namespaceWithIncludes)
 	for _, v := range r.Includes {
 		m[v.Name] = &namespaceWithIncludes{
-			versionedName: versionedNamespace{
+			versionedName: versionedName{
 				name:    v.Name,
 				version: v.Version,
 			},

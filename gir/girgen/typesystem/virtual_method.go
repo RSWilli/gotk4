@@ -15,15 +15,15 @@ type VirtualMethod struct {
 	*Parameters
 }
 
-func NewVirtualMethod(ctx context, parent Type, typestruct *Record, v gir.VirtualMethod) *VirtualMethod {
-	if ctx.skipType(v) {
+func NewVirtualMethod(e *env, parent Type, typestruct *Record, v gir.VirtualMethod) *VirtualMethod {
+	if e.skipType(v) {
 		return nil
 	}
 
 	// e.g. _gotk4_gtk4_AccessibleText_virtual_get_contents
-	tramp := fmt.Sprintf("_gotk4_%s%d_%s_%s", ctx.goName(), ctx.majorVersion(), parent.GoType(), v.Name)
+	tramp := fmt.Sprintf("%s_%s_virtual_%s", e.trampolinePrefix(), parent.GoType(), v.Name)
 
-	params := NewCallableParameters(ctx, v.CallableAttrs)
+	params := NewCallableParameters(e, v.CallableAttrs)
 
 	if params == nil {
 		// log.Printf("could not create parameters for virtual method %s\n", tramp)

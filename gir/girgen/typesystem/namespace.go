@@ -2,13 +2,12 @@ package typesystem
 
 import (
 	"log"
-	"strings"
 
 	"github.com/diamondburned/gotk4/gir"
 )
 
 type Namespace struct {
-	v versionedNamespace
+	v versionedName
 
 	Included map[string]*Namespace
 
@@ -19,16 +18,20 @@ type Namespace struct {
 	Packages  []string
 	CIncludes []string
 
-	Constants  []*Constant
+	// immediately available types:
+	Bitfields []*Bitfield
+	Enums     []*Enum
+
+	// lazily resolved types, which need a declare and a resolve step
 	Aliases    []*Alias
-	Bitfields  []*Bitfield
-	Enums      []*Enum
 	Callbacks  []*Callback
 	Classes    []*Class
 	Interfaces []*Interface
 	Records    []*Record
 	Unions     []*Union
 
+	// identifiers, these are eagerly resolved
+	Constants []*Constant
 	Functions []*CallableSignature
 }
 
@@ -59,75 +62,100 @@ func (reg *Registry) newNamespace(sf skipFunc, ns *namespaceWithIncludes) *Names
 		namespace.Packages = append(namespace.Packages, pkg.Name)
 	}
 
-	ctx := &namespaceContext{
+	e := &env{
 		skipTypeFunc: sf,
-		Namespace:    namespace,
+		namespace:    namespace,
 	}
 
-	// types must be declared first. Some types contain nested references to other types.
-	// these are deferred and resolved at the end of the namespace creation.
+	if e.isIgnoredNamespace(namespace.Name) {
+		return namespace
+	}
 
+	// these types are directly valid and will only omit child declarations afterwards:
 	for _, v := range ns.Unions {
-		if t := DeclareUnion(ctx, v); t != nil {
+		if t := DeclareUnion(e, v); t != nil {
 			namespace.Unions = append(namespace.Unions, t)
-
-			defer t.resolveNested(ctx, v)
 		}
 	}
 	for _, v := range ns.Enums {
-		if t := DeclareEnum(ctx, v); t != nil {
+		if t := DeclareEnum(e, v); t != nil {
 			namespace.Enums = append(namespace.Enums, t)
 		}
 	}
 	for _, v := range ns.Bitfields {
-		if t := DeclareBitfield(ctx, v); t != nil {
+		if t := DeclareBitfield(e, v); t != nil {
 			namespace.Bitfields = append(namespace.Bitfields, t)
 		}
 	}
-	for _, v := range ns.Callbacks {
-		if t := DeclareCallback(ctx, v); t != nil {
-			namespace.Callbacks = append(namespace.Callbacks, t)
+	for _, v := range ns.Records {
+		if t := DeclareRecord(e, v); t != nil {
+			namespace.Records = append(namespace.Records, t)
+		}
+	}
 
-			defer t.resolveParameters(ctx, v)
+	// these types may have references to other types that are not yet known to be valid:
+	var unresolvedClasses []*Class
+	var unresolvedInterfaces []*Interface
+	var unresolvedCallbacks []*Callback
+	var unresolvedAliases []*Alias
+
+	for _, v := range ns.Callbacks {
+		if t := DeclareCallback(e, v); t != nil {
+			unresolvedCallbacks = append(unresolvedCallbacks, t)
 		}
 	}
 	for _, v := range ns.Interfaces {
-		if t := DeclareInterface(ctx, v); t != nil {
-			namespace.Interfaces = append(namespace.Interfaces, t)
-
-			defer t.resolveNested(ctx, v)
+		if t, needsResolve := DeclareInterface(e, v); t != nil {
+			if !needsResolve {
+				namespace.Interfaces = append(namespace.Interfaces, t)
+			} else {
+				unresolvedInterfaces = append(unresolvedInterfaces, t)
+			}
 		}
 	}
 	for _, v := range ns.Classes {
-		if t := NewClass(ctx, v); t != nil {
-			namespace.Classes = append(namespace.Classes, t)
-
-			defer t.resolveNested(ctx, v)
-		}
-	}
-	for _, v := range ns.Records {
-		if t := DeclareRecord(ctx, v); t != nil {
-			namespace.Records = append(namespace.Records, t)
-
-			// needs to be after classes/interfaces, because this defer needs to run before the classes/interfaces:
-			defer t.resolveNested(ctx, v)
+		if t, needsResolve := DeclareClass(e, v); t != nil {
+			if !needsResolve {
+				namespace.Classes = append(namespace.Classes, t)
+			} else {
+				unresolvedClasses = append(unresolvedClasses, t)
+			}
 		}
 	}
 	for _, v := range ns.Aliases {
-		if t := DeclareAlias(ctx, v); t != nil {
-			namespace.Aliases = append(namespace.Aliases, t)
+		if t := DeclareAlias(e, v); t != nil {
+			unresolvedAliases = append(unresolvedAliases, t)
 		}
 	}
 
-	// declare these after declaring all types, because they reference the above:
+	namespace.resolveAll(
+		e,
+		unresolvedClasses,
+		unresolvedInterfaces,
+		unresolvedCallbacks,
+		unresolvedAliases,
+	)
 
+	// declare these after declaring all types, because they reference the above:
+	for _, v := range namespace.Unions {
+		v.declareNested(e)
+	}
+	for _, v := range namespace.Records {
+		v.declareNested(e)
+	}
+	for _, v := range namespace.Classes {
+		v.declareNested(e)
+	}
+	for _, v := range namespace.Interfaces {
+		v.declareNested(e)
+	}
 	for _, v := range ns.Functions {
-		if t := DeclareFunction(ctx, v); t != nil {
+		if t := DeclareFunction(e, v); t != nil {
 			namespace.Functions = append(namespace.Functions, t)
 		}
 	}
 	for _, v := range ns.Constants {
-		if t := DeclareConstant(ctx, v); t != nil {
+		if t := DeclareConstant(e, v); t != nil {
 			namespace.Constants = append(namespace.Constants, t)
 		}
 	}
@@ -135,111 +163,74 @@ func (reg *Registry) newNamespace(sf skipFunc, ns *namespaceWithIncludes) *Names
 	return namespace
 }
 
-func (ns *Namespace) findAnyType(t gir.AnyType) Type {
-	if t.Type != nil && t.Array != nil {
-		panic("received invalid anytype")
-	}
+// resolveAll tries to resolve the given unresolved types until either:
+//
+// * all types are resolved
+//
+// * a single iteration does not shrink the list of unresolved types
+func (n *Namespace) resolveAll(e *env, unresolvedClasses []*Class, unresolvedInterfaces []*Interface, unresolvedCallbacks []*Callback, unresolvedAliases []*Alias) {
+	for {
+		stillUnresolvedClasses := unresolvedClasses[0:0]
+		stillUnresolvedInterfaces := unresolvedInterfaces[0:0]
+		stillUnresolvedCallbacks := unresolvedCallbacks[0:0]
+		stillUnresolvedAliases := unresolvedAliases[0:0]
 
-	if t.Type != nil {
-		typ := ns.findType(t.Type)
-
-		if typ == nil {
-			return nil
-		}
-		return typ
-	}
-
-	if t.Array != nil {
-		arr := getArrayType(ns, t.Array)
-
-		if arr == nil {
-			return nil
-		}
-		return arr
-	}
-
-	// this happens e.g. on vararg params
-	return nil
-}
-
-// findType searches for a declared type in the namespace. It makes sure that the returned type
-// contains the same amount of pointers as the given gir type
-func (ns *Namespace) findType(t *gir.Type) Type {
-	typ := ns.findTypeByGIRName(t.Name)
-
-	if typ == nil {
-		return nil
-	}
-
-	typ = resolveInnerTypes(ns, typ, t)
-
-	if typ == nil {
-		return nil
-	}
-
-	return WithPointers(t, typ)
-}
-
-func (ns *Namespace) findTypeByGIRName(t string) Type {
-	if isIgnoredTypeName(t) {
-		return nil
-	}
-
-	parts := strings.Split(t, ".")
-
-	if len(parts) > 2 {
-		panic("received invalid type name")
-	}
-
-	if len(parts) == 1 {
-		primitive := findPrimitiveByName(t)
-
-		if primitive != nil {
-			return primitive
+		for _, v := range unresolvedClasses {
+			if v.resolve(e) {
+				n.Classes = append(n.Classes, v)
+			} else {
+				stillUnresolvedClasses = append(stillUnresolvedClasses, v)
+			}
 		}
 
-		typ := ns.findLocalTypeByGIRName(t)
-
-		if typ == nil {
-			log.Printf("type %s not found in namespace %s\n", t, ns.v)
-			return nil
+		for _, v := range unresolvedInterfaces {
+			if v.resolve(e) {
+				n.Interfaces = append(n.Interfaces, v)
+			} else {
+				stillUnresolvedInterfaces = append(stillUnresolvedInterfaces, v)
+			}
 		}
 
-		return typ
-	}
-
-	foreignNSName := parts[0]
-	foreignTypeName := parts[1]
-
-	if isIgnoredNSName(foreignNSName) {
-		return nil
-	}
-
-	if foreignNSName == ns.v.name {
-		// some glib types are always referenced with glib prefix, e.g. HashTable
-		// even in glib namespace.
-		return ns.findTypeByGIRName(foreignTypeName)
-	}
-
-	reffedNS, ok := ns.Included[foreignNSName]
-
-	if !ok {
-		log.Printf("type %s referenced unknown namespace %s\n", t, foreignNSName)
-		return nil
-	}
-
-	foreign := reffedNS.findLocalTypeByGIRName(foreignTypeName)
-
-	if foreign != nil {
-		return &ForeignType{
-			SourceNamespace: reffedNS,
-			Type:            foreign,
+		for _, v := range unresolvedCallbacks {
+			if v.resolveParameters(e) {
+				n.Callbacks = append(n.Callbacks, v)
+			} else {
+				stillUnresolvedCallbacks = append(stillUnresolvedCallbacks, v)
+			}
 		}
+
+		for _, v := range unresolvedAliases {
+			if v.resolve(e) {
+				n.Aliases = append(n.Aliases, v)
+			} else {
+				stillUnresolvedAliases = append(stillUnresolvedAliases, v)
+			}
+		}
+
+		if len(stillUnresolvedClasses) == 0 &&
+			len(stillUnresolvedInterfaces) == 0 &&
+			len(stillUnresolvedCallbacks) == 0 &&
+			len(stillUnresolvedAliases) == 0 {
+			// we are done
+			log.Printf("successfully resolved all classes, interfaces, callbacks and aliases in %s", n.v)
+			return
+		}
+
+		if len(stillUnresolvedClasses) == len(unresolvedClasses) &&
+			len(stillUnresolvedInterfaces) == len(unresolvedInterfaces) &&
+			len(stillUnresolvedCallbacks) == len(unresolvedCallbacks) &&
+			len(stillUnresolvedAliases) == len(unresolvedAliases) {
+			// we did not make progress, so we drop the unresolvable types
+			log.Printf("could not resolve %d classes, %d interfaces, %d callbacks and %d aliases in %s", len(unresolvedClasses), len(unresolvedInterfaces), len(unresolvedCallbacks), len(unresolvedAliases), n.v)
+
+			return
+		}
+
+		unresolvedClasses = stillUnresolvedClasses
+		unresolvedInterfaces = stillUnresolvedInterfaces
+		unresolvedCallbacks = stillUnresolvedCallbacks
+		unresolvedAliases = stillUnresolvedAliases
 	}
-
-	log.Printf("type %s not found in namespace %s\n", t, ns.v)
-
-	return nil
 }
 
 // findLocalTypeByGIRName returns the [Type] for the named type

@@ -6,6 +6,7 @@ import (
 
 type Union struct {
 	BaseType
+	gir gir.Union
 
 	Doc Doc
 
@@ -17,8 +18,8 @@ type Union struct {
 	Fields       []*Field
 }
 
-func DeclareUnion(ctx context, v gir.Union) *Union {
-	if ctx.skipType(v) {
+func DeclareUnion(e *env, v gir.Union) *Union {
+	if e.skipType(v) {
 		return nil
 	}
 
@@ -33,30 +34,31 @@ func DeclareUnion(ctx context, v gir.Union) *Union {
 
 			GlibGetTypeFn: v.GLibGetType,
 		},
+		gir: v,
 	}
 }
 
-func (u *Union) resolveNested(ns context, v gir.Union) {
-	for _, v := range v.Functions {
-		if t := DeclareFunction(ns, v); t != nil {
+func (u *Union) declareNested(e *env) resolvedState {
+	for _, v := range u.gir.Functions {
+		if t := DeclareFunction(e, v); t != nil {
 			u.Functions = append(u.Functions, t)
 		}
 	}
 
-	for _, v := range v.Methods {
-		if t := NewMethod(ns, v); t != nil {
+	for _, v := range u.gir.Methods {
+		if t := NewMethod(e, v); t != nil {
 			u.Methods = append(u.Methods, t)
 		}
 	}
 
-	for _, v := range v.Constructors {
-		if t := DeclareConstructor(ns, u, v); t != nil {
+	for _, v := range u.gir.Constructors {
+		if t := DeclareConstructor(e, u, v); t != nil {
 			u.Constructors = append(u.Constructors, t)
 		}
 	}
 
-	for _, v := range v.Fields {
-		if t := NewField(ns, u, v); t != nil {
+	for _, v := range u.gir.Fields {
+		if t := NewField(e, u, v); t != nil {
 			u.Fields = append(u.Fields, t)
 		}
 	}
@@ -64,4 +66,6 @@ func (u *Union) resolveNested(ns context, v gir.Union) {
 	// for range v.Records {
 	// 	TODO
 	// }
+
+	return okResolved
 }

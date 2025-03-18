@@ -26,8 +26,8 @@ type Signal struct {
 	*Parameters
 }
 
-func NewSignal(ns context, v gir.Signal) *Signal {
-	params := NewParameters(ns, v.Parameters, v.ReturnValue, false)
+func NewSignal(e *env, v gir.Signal) *Signal {
+	params := NewParameters(e, v.Parameters, v.ReturnValue, false)
 
 	if params == nil {
 		log.Printf("could not create parameters for signal %s", v.Name)

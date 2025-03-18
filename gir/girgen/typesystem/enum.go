@@ -12,8 +12,8 @@ type Enum struct {
 	Members []*Member
 }
 
-func DeclareEnum(ctx context, v gir.Enum) *Enum {
-	if ctx.skipType(v) {
+func DeclareEnum(e *env, v gir.Enum) *Enum {
+	if e.skipType(v) {
 		return nil
 	}
 

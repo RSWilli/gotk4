@@ -14,8 +14,8 @@ type Config struct {
 }
 
 // getSkipFuncs returns a map that contains every skip func for each of the given namespaces
-func (c *Config) getSkipFuncs(repos []*repoWithIncludes) map[versionedNamespace]skipFunc {
-	m := make(map[versionedNamespace]skipFunc)
+func (c *Config) getSkipFuncs(repos []*repoWithIncludes) map[versionedName]skipFunc {
+	m := make(map[versionedName]skipFunc)
 
 	for _, repo := range repos {
 		for _, ns := range repo.namespaces {
