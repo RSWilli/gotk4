@@ -7,6 +7,7 @@ import (
 	"path"
 	"strings"
 
+	"github.com/diamondburned/gotk4/gir/girgen/typesystem"
 	"golang.org/x/exp/maps"
 )
 
@@ -21,6 +22,8 @@ type Writer struct {
 
 	filedata
 	Exported filedata
+
+	registeredTypes gTypes
 
 	// cflags are only present on the file.go
 	cflags map[string]struct{}
@@ -56,6 +59,12 @@ func (w *Writer) AddCFlag(flag string) {
 	w.cflags[flag] = struct{}{}
 }
 
+func (w *Writer) RegisterGType(t typesystem.Type) {
+	w.GoImportCoreGlib()
+
+	w.registeredTypes = append(w.registeredTypes, gType{t})
+}
+
 func (w *Writer) Commit() error {
 	err := os.MkdirAll(w.folder(), 0700)
 
@@ -65,7 +74,7 @@ func (w *Writer) Commit() error {
 
 	// TODO: concurrent writing
 	if !w.Exported.empty() {
-		exportsFile := path.Join(w.folder(), fmt.Sprintf("%s_export.go", w.packageIdent))
+		exportsFile := path.Join(w.folder(), fmt.Sprintf("%s_export.gen.go", w.packageIdent))
 
 		err := w.writeFile(exportsFile, w.exportFile())
 
@@ -74,7 +83,7 @@ func (w *Writer) Commit() error {
 		}
 	}
 
-	goFile := path.Join(w.folder(), fmt.Sprintf("%s.go", w.packageIdent))
+	goFile := path.Join(w.folder(), fmt.Sprintf("%s.gen.go", w.packageIdent))
 
 	err = w.writeFile(goFile, w.file())
 
@@ -126,6 +135,8 @@ func (w *Writer) file() io.Reader {
 		w.cIncludes.Reader(),
 		w.c(),
 		str("import \"C\"\n"),
+		str("\n"),
+		w.registeredTypes.reader(),
 		str("\n"),
 		&w.goContents,
 	)

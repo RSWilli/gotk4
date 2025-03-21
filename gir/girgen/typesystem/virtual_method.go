@@ -16,7 +16,11 @@ type VirtualMethod struct {
 }
 
 func NewVirtualMethod(e *env, parent Type, typestruct *Record, v gir.VirtualMethod) *VirtualMethod {
-	if e.skipType(v) {
+	if !v.IsIntrospectable() {
+		return nil
+	}
+
+	if e.skip(parent, v) {
 		return nil
 	}
 

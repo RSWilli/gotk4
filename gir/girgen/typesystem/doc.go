@@ -7,9 +7,10 @@ type Documented interface {
 }
 
 type Doc struct {
-	Doc           string
-	DocDeprecated string
-	Deprecated    bool
+	Doc               string
+	DocDeprecated     string
+	DeprecatedVersion string
+	Deprecated        bool
 }
 
 func (d Doc) Documentation() Doc {
@@ -32,9 +33,16 @@ func NewDoc(attrs *gir.InfoAttrs, elements *gir.InfoElements) Doc {
 	var doc string
 	var docDeprecated string
 	var deprecated bool
+	var deprecatedVersion string
 
 	if attrs != nil {
 		deprecated = attrs.Deprecated
+	}
+
+	var zeroversion gir.Version
+
+	if attrs != nil && attrs.DeprecatedVersion != zeroversion {
+		deprecatedVersion = attrs.DeprecatedVersion.String()
 	}
 
 	if elements != nil && elements.Doc != nil {
@@ -42,13 +50,14 @@ func NewDoc(attrs *gir.InfoAttrs, elements *gir.InfoElements) Doc {
 	}
 
 	if elements != nil && elements.DocDeprecated != nil {
-		doc = elements.DocDeprecated.String
+		docDeprecated = elements.DocDeprecated.String
 	}
 
 	return Doc{
-		Doc:           doc,
-		DocDeprecated: docDeprecated,
-		Deprecated:    deprecated,
+		Doc:               doc,
+		DocDeprecated:     docDeprecated,
+		Deprecated:        deprecated,
+		DeprecatedVersion: deprecatedVersion,
 	}
 }
 
@@ -60,9 +69,23 @@ type ParamDoc struct {
 }
 
 func NewParamDoc(attrs gir.ParameterAttrs) ParamDoc {
-	return ParamDoc{}
+	var doc string
+	if attrs.Doc != nil {
+		doc = attrs.Doc.String
+	}
+	return ParamDoc{
+		Doc:      doc,
+		Optional: attrs.Optional,
+		Nullable: attrs.Nullable,
+		Name:     attrs.Name,
+	}
 }
 
 func NewReturnDoc(attrs *gir.ReturnValue) ParamDoc {
-	return ParamDoc{}
+	return ParamDoc{
+		Name:     "",
+		Doc:      "",
+		Optional: false,
+		Nullable: attrs.Nullable,
+	}
 }

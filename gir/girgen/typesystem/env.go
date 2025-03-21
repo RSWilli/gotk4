@@ -14,38 +14,84 @@ type ParamCompareFunc func(a, b *Param) int
 type env struct {
 	namespace *Namespace
 
+	minVersion gir.Version
+
 	// user overridable settings via [Config]:
 
-	skipTypeFunc func(t girType) bool
+	ignore IgnoreFunc
 
 	compareParams  ParamCompareFunc
 	compareReturns ParamCompareFunc
-
-	ignoredNamespaces []string
 }
 
-func (c *env) sortGoParams(ps []*Param) {
-	if c.compareParams == nil {
+func (e *env) sortGoParams(ps []*Param) {
+	if e.compareParams == nil {
 		return
 	}
 
-	slices.SortFunc(ps, c.compareParams)
+	slices.SortFunc(ps, e.compareParams)
 }
 
-func (c *env) sortGoReturns(ps []*Param) {
-	if c.compareReturns == nil {
+func (e *env) sortGoReturns(ps []*Param) {
+	if e.compareReturns == nil {
 		return
 	}
 
-	slices.SortFunc(ps, c.compareReturns)
+	slices.SortFunc(ps, e.compareReturns)
 }
 
-func (c env) trampolinePrefix() string {
-	return fmt.Sprintf("_gotk4_%s%d", c.namespace.GoName, c.namespace.Version.Major)
+func (e *env) trampolinePrefix() string {
+	return fmt.Sprintf("_gotk4_%s%d", e.namespace.GoName, e.namespace.Version.Major)
 }
 
-func (c env) skipType(t girType) bool {
-	return c.skipTypeFunc(t)
+// skip returns true if the gir type/identifier should be skipped. Any optional parent can be passed
+// to handle nested gir identifiers
+func (e *env) skip(parent Type, anygir any) bool {
+	name, kind := infoFromAnyGir(anygir)
+
+	if e.ingoreDeprecated(name, kind, anygir) {
+		return true
+	}
+
+	for _, m := range e.namespace.Manual {
+		if m.GIRName() == name {
+			log.Printf("skipping %s %s because it is manually implemented", kind, name)
+		}
+	}
+
+	var parentName string
+	if parent != nil {
+		parentName = parent.GIRName()
+	}
+
+	id := GIRIdentifier{
+		Parent: parentName,
+		Name:   name,
+		Kind:   kind,
+	}
+
+	return e.ignore(id)
+}
+
+type girWithInfoAttrs interface {
+	GetInfoAttrs() gir.InfoAttrs
+}
+
+func (e *env) ingoreDeprecated(name string, kind GIRKind, anygir any) bool {
+	gt, ok := anygir.(girWithInfoAttrs)
+
+	if !ok {
+		return false
+	}
+
+	attrs := gt.GetInfoAttrs()
+
+	if attrs.Deprecated && attrs.DeprecatedVersion.Lte(e.minVersion) {
+		log.Printf("skipping %s %s in %s that is deprecated since %s, min allowed version: %s", kind, name, e.namespace.v, attrs.DeprecatedVersion, e.minVersion)
+		return true
+	}
+
+	return false
 }
 
 func (e *env) findAnyType(t gir.AnyType) Type {
@@ -124,10 +170,6 @@ func (e *env) findTypeByGIRName(t string) Type {
 	foreignNSName := parts[0]
 	foreignTypeName := parts[1]
 
-	if e.isIgnoredNamespace(foreignNSName) {
-		return nil
-	}
-
 	if foreignNSName == e.namespace.v.name {
 		// some glib types are always referenced with glib prefix, e.g. HashTable
 		// even in glib namespace.
@@ -144,17 +186,10 @@ func (e *env) findTypeByGIRName(t string) Type {
 	foreign := reffedNS.findLocalTypeByGIRName(foreignTypeName)
 
 	if foreign != nil {
-		return &ForeignType{
-			SourceNamespace: reffedNS,
-			Type:            foreign,
-		}
+		return mkForeign(reffedNS, foreign)
 	}
 
 	log.Printf("type %s not found in namespace %s\n", t, e.namespace.v)
 
 	return nil
-}
-
-func (c *env) isIgnoredNamespace(girnamespace string) bool {
-	return slices.Contains(c.ignoredNamespaces, girnamespace)
 }

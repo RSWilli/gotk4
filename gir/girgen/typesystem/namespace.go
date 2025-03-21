@@ -18,6 +18,9 @@ type Namespace struct {
 	Packages  []string
 	CIncludes []string
 
+	// User overwritten types for resolving in other namespaces:
+	Manual []Type
+
 	// immediately available types:
 	Bitfields []*Bitfield
 	Enums     []*Enum
@@ -35,7 +38,7 @@ type Namespace struct {
 	Functions []*CallableSignature
 }
 
-func (reg *Registry) newNamespace(sf skipFunc, ns *namespaceWithIncludes) *Namespace {
+func (reg *Registry) newNamespace(cfg NamespaceConfig, ns *namespaceWithIncludes) *Namespace {
 	namespace := &Namespace{
 		v:        ns.versionedName,
 		Name:     ns.Name,
@@ -62,13 +65,10 @@ func (reg *Registry) newNamespace(sf skipFunc, ns *namespaceWithIncludes) *Names
 		namespace.Packages = append(namespace.Packages, pkg.Name)
 	}
 
-	e := &env{
-		skipTypeFunc: sf,
-		namespace:    namespace,
-	}
+	e := cfg.getEnv(namespace)
 
-	if e.isIgnoredNamespace(namespace.Name) {
-		return namespace
+	for _, t := range cfg.ManualTypes {
+		namespace.Manual = append(namespace.Manual, t)
 	}
 
 	// these types are directly valid and will only omit child declarations afterwards:
@@ -105,21 +105,13 @@ func (reg *Registry) newNamespace(sf skipFunc, ns *namespaceWithIncludes) *Names
 		}
 	}
 	for _, v := range ns.Interfaces {
-		if t, needsResolve := DeclareInterface(e, v); t != nil {
-			if !needsResolve {
-				namespace.Interfaces = append(namespace.Interfaces, t)
-			} else {
-				unresolvedInterfaces = append(unresolvedInterfaces, t)
-			}
+		if t := DeclareInterface(e, v); t != nil {
+			unresolvedInterfaces = append(unresolvedInterfaces, t)
 		}
 	}
 	for _, v := range ns.Classes {
-		if t, needsResolve := DeclareClass(e, v); t != nil {
-			if !needsResolve {
-				namespace.Classes = append(namespace.Classes, t)
-			} else {
-				unresolvedClasses = append(unresolvedClasses, t)
-			}
+		if t := DeclareClass(e, v); t != nil {
+			unresolvedClasses = append(unresolvedClasses, t)
 		}
 	}
 	for _, v := range ns.Aliases {
@@ -136,7 +128,7 @@ func (reg *Registry) newNamespace(sf skipFunc, ns *namespaceWithIncludes) *Names
 		unresolvedAliases,
 	)
 
-	// declare these after declaring all types, because they reference the above:
+	// declare these after resolving all types, because they reference the above:
 	for _, v := range namespace.Unions {
 		v.declareNested(e)
 	}
@@ -150,7 +142,7 @@ func (reg *Registry) newNamespace(sf skipFunc, ns *namespaceWithIncludes) *Names
 		v.declareNested(e)
 	}
 	for _, v := range ns.Functions {
-		if t := DeclareFunction(e, v); t != nil {
+		if t := DeclareFunction(e, nil, v); t != nil {
 			namespace.Functions = append(namespace.Functions, t)
 		}
 	}
@@ -242,6 +234,12 @@ func (n *Namespace) findLocalTypeByGIRName(girname string) Type {
 
 // findLocalTypeWith returns the [Type] where the predicate returns true
 func (n *Namespace) findLocalTypeWith(pred func(t Type) bool) Type {
+	for _, m := range n.Manual {
+		if pred(m) {
+			return m
+		}
+	}
+
 	for _, a := range n.Aliases {
 		if pred(a) {
 			return a

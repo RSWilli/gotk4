@@ -13,7 +13,11 @@ type Constant struct {
 }
 
 func DeclareConstant(e *env, v gir.Constant) *Constant {
-	if e.skipType(v) { // TODO: a constant is not a type
+	if !v.IsIntrospectable() {
+		return nil
+	}
+
+	if e.skip(nil, v) {
 		return nil
 	}
 

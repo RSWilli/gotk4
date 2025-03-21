@@ -183,6 +183,7 @@ var Preprocessors = []Preprocessor{
 
 	// Fix up the return array type for (*Variant).String().
 	ModifyCallable("GLib-2.Variant.get_string", func(c *gir.CallableAttrs) {
+		c.ReturnValue.Type = nil
 		c.ReturnValue.Array = &gir.Array{
 			CType:          "const gchar*",
 			Type:           &gir.Type{Name: "gchar"},

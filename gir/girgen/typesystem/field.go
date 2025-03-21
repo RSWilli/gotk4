@@ -24,6 +24,10 @@ type Field struct {
 }
 
 func NewField(e *env, parent Type, v gir.Field) *Field {
+	if e.skip(parent, v) {
+		return nil
+	}
+
 	if v.Private || !(v.IsReadable() || v.Writable) {
 		return nil
 	}

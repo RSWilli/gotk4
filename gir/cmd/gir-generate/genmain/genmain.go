@@ -3,7 +3,8 @@ package genmain
 import (
 	"flag"
 	"log"
-	"slices"
+
+	"maps"
 
 	"github.com/diamondburned/gotk4/gir"
 	"github.com/diamondburned/gotk4/gir/girgen"
@@ -150,20 +151,19 @@ func Run(data Data) {
 	log.Println("loading packages...")
 	// load known packages first and then the packages we want to generate,
 	// to keep the order for the typesystem
-	knownRepos := MustLoadPackages(data.KnownPackages)
-	repos := MustLoadPackages(data.Packages)
-	PrintAddedPkgs(knownRepos)
+	repos := MustLoadPackages(data.KnownPackages)
+	MustAddPackages(&repos, data.Packages)
 	PrintAddedPkgs(repos)
 
 	if ListPkg {
 		return
 	}
 
-	Generate(knownRepos, repos, data)
+	Generate(repos, data)
 }
 
 // Generate generates the packages based on the given data.
-func Generate(known, repos gir.Repositories, data Data) {
+func Generate(repos gir.Repositories, data Data) {
 	err := CleanDirectory(Output, data.PkgExceptions)
 
 	if err != nil {
@@ -176,20 +176,116 @@ func Generate(known, repos gir.Repositories, data Data) {
 	}
 
 	for mod, extern := range data.ExternOverrides {
-		for k, v := range LoadExternOverrides(mod, extern) {
-			overrides[k] = v
-		}
+		maps.Copy(overrides, LoadExternOverrides(mod, extern))
 	}
 
-	// TODO: add some options that allow the user to supply custom value transformers
+	types.ApplyPreprocessors(repos, data.Preprocessors)
 
-	tsCfg := typesystem.Config{}
+	tsCfg := typesystem.Config{
+		Namespaces: map[string]typesystem.NamespaceConfig{
+			"GLib-2": {
+				MinVersion: "2.80",
+				ManualTypes: []typesystem.Type{
+					&typesystem.ForeignType{
+						SourceNamespace: &typesystem.Namespace{GoName: "gbox"},
+						Type: &typesystem.Callback{
+							BaseType: typesystem.BaseType{
+								GirName:       "DestroyNotify",
+								GoTyp:         "DestroyNotify",
+								CGoTyp:        "C.GDestroyNotify",
+								CTyp:          "GDestroyNotify",
+								GlibGetTypeFn: "",
+							},
+							Parameters:     &typesystem.Parameters{},
+							TrampolineName: "callbackDelete",
+						},
+					},
+				},
+				// Ignored: []typesystem.IgnoreFunc{
+				// 	typesystem.IgnoreMatching(typesystem.GIRCallbackPattern("DestroyNotify")),
+				// },
+			},
+			"GObject-2": {
+				ManualTypes: []typesystem.Type{
+					// &typesystem.Class{
+					// 	BaseType: typesystem.BaseType{
+					// 		GirName: "InitiallyUnowned",
+					// 	},
+					// },
+					&typesystem.ForeignType{
+						SourceNamespace: &typesystem.Namespace{GoName: "coreglib"},
+						Type: &typesystem.Class{
+							BaseType: typesystem.BaseType{
+								GirName: "Object",
+								GoTyp:   "Object",
+								CTyp:    "GObject",
+								CGoTyp:  "C.GObject",
+							},
+							GoInterfaceName:              "Objector",
+							Doc:                          typesystem.Doc{},
+							GoUnsafeBorrowFunction:       "TODO",
+							GoUnsafeTransferFullFunction: "AssumeOwnership",
+							GoUnsafeTransferNoneFunction: "Take",
+							GoUnsafeToGlibNoneMethod:     "TODO",
+							GoUnsafeToGlibFullMethod:     "TODO",
+						},
+					},
+					&typesystem.ForeignType{
+						SourceNamespace: &typesystem.Namespace{GoName: "coreglib"},
+						Type: &typesystem.Record{
+							BaseType: typesystem.BaseType{
+								GirName: "ObjectClass",
+								GoTyp:   "ObjectClass",
+								CTyp:    "GObjectClass",
+								CGoTyp:  "C.GObjectClass",
+							},
+						},
+					},
+					&typesystem.ForeignType{
+						SourceNamespace: &typesystem.Namespace{GoName: "coreglib"},
+						Type: &typesystem.Record{
+							BaseType: typesystem.BaseType{
+								GirName: "Value",
+								GoTyp:   "Value",
+								CTyp:    "GValue",
+								CGoTyp:  "C.GValue",
+							},
+						},
+					},
+					// &typesystem.ForeignType{
+					// 	SourceNamespace: &typesystem.Namespace{GoName: "coreglib"},
+					// 	Type: &typesystem.Class{
+					// 		BaseType: typesystem.BaseType{
+					// 			GirName: "ParamSpec",
+					// 			GoTyp:   "ParamSpec",
+					// 			CTyp:    "GParamSpec",
+					// 			CGoTyp:  "C.GParamSpec",
+					// 		},
+					// 	},
+					// },
+				},
+				Ignored: []typesystem.IgnoreFunc{
+					// manually implemented, but hidden from the user
+					typesystem.IgnoreMatching(typesystem.GIRRecordPattern("ParamSpec")),
+				},
+			},
+		},
+	}
 
-	ts := typesystem.FromRepositories(tsCfg, slices.Concat(known, repos))
+	ts := typesystem.FromRepositories(tsCfg, repos)
 
-	// TODO: add a hook stage here, where the user can filter and modify gir definitions
+	// TODO: add a hook stage here, where the user can modify the chosen names of the typesystem
 
-	reposToGenerate := ts.Repositories[len(known):]
+	var reposToGenerate []*typesystem.Repository
+
+	for _, repo := range ts.Repositories {
+		for _, pkg := range data.Packages {
+			if pkg.Name == repo.Pkg {
+				reposToGenerate = append(reposToGenerate, repo)
+				break
+			}
+		}
+	}
 
 	var gen []generators.Generator
 
@@ -199,7 +295,7 @@ func Generate(known, repos gir.Repositories, data Data) {
 		gen = generators.WithRuntimeLinking(reposToGenerate)
 	}
 
-	// TODO: add a hook stage here, where the user can filter and modify all generators in "gen"
+	// TODO: add a hook stage here, where the user can modify all generators in "gen"
 
 	for _, g := range gen {
 		w := file.NewWriter(Output)

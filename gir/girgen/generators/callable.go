@@ -74,19 +74,7 @@ type FunctionGenerator struct {
 func (m *FunctionGenerator) Generate(w *file.Writer) {
 	m.Doc.Generate(w)
 
-	var recv string
-	if m.GoReceiver != nil {
-		recv = fmt.Sprintf(" (%s %s)", m.GoReceiver.GoName, m.GoReceiver.Type.GoType())
-	}
-
-	var ret string
-	if len(m.GoReturns) == 1 {
-		ret = " " + m.GoReturns[0].Type.GoType()
-	} else if len(m.GoReturns) > 1 {
-		ret = "(" + m.GoReturns.GoTypes() + ")"
-	}
-
-	fmt.Fprintf(w.Go(), "func%s %s(%s)%s {\n", recv, m.GoIndentifier(), m.GoParameters.GoDeclarations(), ret)
+	fmt.Fprintf(w.Go(), "%s {\n", m.GoSignature())
 
 	// TODO converters
 
@@ -98,12 +86,9 @@ func (m *FunctionGenerator) Generate(w *file.Writer) {
 }
 
 func NewCallableGenerator(f *typesystem.CallableSignature) *FunctionGenerator {
-	if f.Parameters == nil {
-		return nil
-	}
 
-	if f.Parameters.GoReceiver != nil && typesystem.IsForeignType(f.Parameters.GoReceiver.Type) {
-		log.Panicf("received callable %s with foreign receiver %s", f.CIndentifier(), f.Parameters.GoReceiver.GoName)
+	if f.Parameters.InstanceParam != nil && typesystem.IsForeignType(f.Parameters.InstanceParam.Type) {
+		log.Panicf("received callable %s with foreign receiver %s", f.CIndentifier(), f.Parameters.InstanceParam.GoName)
 	}
 
 	return &FunctionGenerator{

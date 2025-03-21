@@ -43,7 +43,7 @@ func NewRecordFieldSetterGenerator(f *typesystem.Field) *RecordFieldSetterGenera
 	}
 
 	g := &RecordFieldSetterGenerator{
-		Doc:          NewIdentifierGoDocGenerator(f, 0),
+		Doc:          NewIdentifierGoDocGenerator(f),
 		ReceiverName: strcases.ReceiverName(f.Parent.GoType()),
 		Field:        f,
 	}

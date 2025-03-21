@@ -1,6 +1,7 @@
 package typesystem
 
 import (
+	"fmt"
 	"strings"
 
 	"github.com/diamondburned/gotk4/gir"
@@ -12,13 +13,17 @@ type CallableSignature struct {
 	*Parameters
 }
 
-func DeclareFunction(e *env, v gir.Function) *CallableSignature {
-	if e.skipType(v) {
+func DeclareFunction(e *env, parent Type, v gir.Function) *CallableSignature {
+	if !v.IsIntrospectable() {
 		return nil
 	}
 
 	if v.ShadowedBy != "" || v.MovedTo != "" {
 		// log.Printf("skipping shadowed or moved function %s", v.CIdentifier)
+		return nil
+	}
+
+	if e.skip(parent, v) {
 		return nil
 	}
 
@@ -39,13 +44,17 @@ func DeclareFunction(e *env, v gir.Function) *CallableSignature {
 	}
 }
 
-func NewMethod(e *env, v gir.Method) *CallableSignature {
-	if e.skipType(v) {
+func NewMethod(e *env, parent Type, v gir.Method) *CallableSignature {
+	if !v.IsIntrospectable() {
 		return nil
 	}
 
 	if v.ShadowedBy != "" || v.MovedTo != "" {
 		// log.Printf("skipping shadowed or moved function %s", v.CIdentifier)
+		return nil
+	}
+
+	if e.skip(parent, v) {
 		return nil
 	}
 
@@ -102,12 +111,16 @@ func (c *constructorIdentifier) GoIndentifier() string {
 var _ Identifier = &constructorIdentifier{}
 
 func DeclareConstructor(e *env, parent Type, v gir.Constructor) *CallableSignature {
-	if e.skipType(v) {
+	if !v.IsIntrospectable() {
 		return nil
 	}
 
 	if v.ShadowedBy != "" || v.MovedTo != "" {
 		// log.Printf("skipping shadowed or moved function %s", v.CIdentifier)
+		return nil
+	}
+
+	if e.skip(parent, v) {
 		return nil
 	}
 
@@ -126,4 +139,33 @@ func DeclareConstructor(e *env, parent Type, v gir.Constructor) *CallableSignatu
 		},
 		Parameters: params,
 	}
+}
+
+// GoSignature returns a string of the go function signature.
+func (m *CallableSignature) GoSignature() string {
+	var recv string
+	if m.InstanceParam != nil {
+		recv = fmt.Sprintf(" (%s %s)", m.InstanceParam.GoName, m.InstanceParam.Type.GoType())
+	}
+
+	var ret string
+	if len(m.GoReturns) == 1 {
+		ret = " " + m.GoReturns[0].Type.GoType()
+	} else if len(m.GoReturns) > 1 {
+		ret = "(" + m.GoReturns.GoTypes() + ")"
+	}
+
+	return fmt.Sprintf("func%s %s(%s)%s", recv, m.GoIndentifier(), m.GoParameters.GoDeclarations(), ret)
+}
+
+// GoSignature returns a string of the go function signature.
+func (m *CallableSignature) GoInterfaceDeclaration() string {
+	var ret string
+	if len(m.GoReturns) == 1 {
+		ret = " " + m.GoReturns[0].Type.GoType()
+	} else if len(m.GoReturns) > 1 {
+		ret = "(" + m.GoReturns.GoTypes() + ")"
+	}
+
+	return fmt.Sprintf("%s(%s)%s", m.GoIndentifier(), m.GoParameters.GoTypes(), ret)
 }

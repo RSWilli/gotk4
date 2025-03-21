@@ -43,7 +43,11 @@ type Record struct {
 }
 
 func DeclareRecord(e *env, v gir.Record) *Record {
-	if e.skipType(v) {
+	if !v.IsIntrospectable() {
+		return nil
+	}
+
+	if e.skip(nil, v) {
 		return nil
 	}
 
@@ -63,7 +67,7 @@ func DeclareRecord(e *env, v gir.Record) *Record {
 		GoUnsafeToGlibFullMethod: fmt.Sprintf("Unsafe%sToGlibFull", v.Name),
 
 		GoUnsafeUnrefFunction: "UnsafeFree",
-		CgoUnrefFunction:      "C.free", // replaced below if an unref method is found
+		CgoUnrefFunction:      "C.free", // replaced below if an unref or custom free method is found
 
 		BaseType: BaseType{
 			GirName: v.Name,
@@ -79,15 +83,19 @@ func DeclareRecord(e *env, v gir.Record) *Record {
 
 func (r *Record) declareNested(e *env) {
 	for _, v := range r.gir.Functions {
-		if t := DeclareFunction(e, v); t != nil {
+		if t := DeclareFunction(e, r, v); t != nil {
 			r.Functions = append(r.Functions, t)
 		}
 	}
 
 	for _, v := range r.gir.Methods {
 		if v.Name == "weak_ref" || v.Name == "weak_unref" {
+			// we don't want the user to be able to weakly reference the object
+			// as there are better tools for this and this will only cause problems
 			continue
 		}
+
+		// see https://github.com/gtk-rs/gir/blob/87cddb70c739f25edd8047e6780e3934af8ff474/src/library.rs#L459-L481
 
 		if v.Name == "ref" {
 			r.GoUnsafeRefFunction = "UnsafeRef"
@@ -101,7 +109,30 @@ func (r *Record) declareNested(e *env) {
 			continue
 		}
 
-		if t := NewMethod(e, v); t != nil {
+		if v.Name == "copy" {
+			r.GoUnsafeRefFunction = "UnsafeCopy"
+			continue
+		}
+
+		if v.Name == "copy_into" {
+			// TODO: how to handle this? It sounds like we need to allocate a copy struct before
+			// beeing able to copy into it
+			continue
+		}
+
+		if v.Name == "free" {
+			r.GoUnsafeUnrefFunction = "UnsafeUnref"
+			r.CgoUnrefFunction = "C." + v.CIdentifier
+			continue
+		}
+
+		if v.Name == "destroy" {
+			r.GoUnsafeUnrefFunction = "UnsafeDestroy"
+			r.CgoUnrefFunction = "C." + v.CIdentifier
+			continue
+		}
+
+		if t := NewMethod(e, r, v); t != nil {
 			r.Methods = append(r.Methods, t)
 		}
 	}

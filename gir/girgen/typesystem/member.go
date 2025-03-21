@@ -15,11 +15,11 @@ type Member struct {
 	Value string
 }
 
-func GetMembers(ms []gir.Member) []*Member {
+func GetMembers(e *env, parent Type, ms []gir.Member) []*Member {
 	var mems []*Member
 
 	for _, girM := range ms {
-		if m := NewMember(girM); m != nil {
+		if m := NewMember(e, parent, girM); m != nil {
 			mems = append(mems, m)
 		}
 	}
@@ -27,8 +27,12 @@ func GetMembers(ms []gir.Member) []*Member {
 	return mems
 }
 
-func NewMember(m gir.Member) *Member {
+func NewMember(e *env, parent Type, m gir.Member) *Member {
 	if !m.IsIntrospectable() {
+		return nil
+	}
+
+	if e.skip(parent, m) {
 		return nil
 	}
 

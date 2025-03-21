@@ -19,7 +19,11 @@ type Union struct {
 }
 
 func DeclareUnion(e *env, v gir.Union) *Union {
-	if e.skipType(v) {
+	if !v.IsIntrospectable() {
+		return nil
+	}
+
+	if e.skip(nil, v) {
 		return nil
 	}
 
@@ -40,13 +44,13 @@ func DeclareUnion(e *env, v gir.Union) *Union {
 
 func (u *Union) declareNested(e *env) resolvedState {
 	for _, v := range u.gir.Functions {
-		if t := DeclareFunction(e, v); t != nil {
+		if t := DeclareFunction(e, u, v); t != nil {
 			u.Functions = append(u.Functions, t)
 		}
 	}
 
 	for _, v := range u.gir.Methods {
-		if t := NewMethod(e, v); t != nil {
+		if t := NewMethod(e, u, v); t != nil {
 			u.Methods = append(u.Methods, t)
 		}
 	}

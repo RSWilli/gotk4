@@ -14,11 +14,15 @@ type Bitfield struct {
 }
 
 func DeclareBitfield(e *env, v gir.Bitfield) *Bitfield {
-	if e.skipType(v) {
+	if !v.IsIntrospectable() {
 		return nil
 	}
 
-	return &Bitfield{
+	if e.skip(nil, v) {
+		return nil
+	}
+
+	b := &Bitfield{
 		BaseType: BaseType{
 			GirName: v.Name,
 			GoTyp:   strcases.PascalToGo(v.Name),
@@ -27,7 +31,10 @@ func DeclareBitfield(e *env, v gir.Bitfield) *Bitfield {
 
 			GlibGetTypeFn: v.GLibGetType,
 		},
-		Doc:     NewDoc(&v.InfoAttrs, &v.InfoElements),
-		Members: GetMembers(v.Members),
+		Doc: NewDoc(&v.InfoAttrs, &v.InfoElements),
 	}
+
+	b.Members = GetMembers(e, b, v.Members)
+
+	return b
 }

@@ -1,37 +1,43 @@
 package typesystem
 
-import (
-	"fmt"
-	"log"
-
-	"github.com/diamondburned/gotk4/gir"
-)
+import "github.com/diamondburned/gotk4/gir"
 
 type Config struct {
-	// MinVersions maps the versioned package name (e.g. GLib-2) to the minimal version that should be supported in
-	// type resolution. Everything that is deprecated longer than this version will be ignored.
-	MinVersions map[string]string
+	// Namespaces contains the configuration for the given versioned namespace (e.g. GLib-2). If a key is missing in this map,
+	// then the typesystem will resolve everything in that namespace
+	Namespaces map[string]NamespaceConfig
 }
 
-// getSkipFuncs returns a map that contains every skip func for each of the given namespaces
-func (c *Config) getSkipFuncs(repos []*repoWithIncludes) map[versionedName]skipFunc {
-	m := make(map[versionedName]skipFunc)
+type NamespaceConfig struct {
+	// MinVersion declares the minimal version that should be supported in
+	// type resolution. Everything that is deprecated longer than this version will be ignored.
+	MinVersion string
 
-	for _, repo := range repos {
-		for _, ns := range repo.namespaces {
-			if minVersion, ok := c.MinVersions[fmt.Sprintf("%s-%d", ns.Name, ns.Version.Major)]; ok {
-				v, err := gir.ParseVersion(minVersion)
+	Ignored []IgnoreFunc
 
-				if err != nil {
-					log.Panicf("received invalid minVersion %s: %v", minVersion, err)
-				}
+	// ManualTypes contains the gir name to a manual type override that will be imported instead of generated
+	ManualTypes []Type
+}
 
-				m[ns.versionedName] = skipDeprecatedLongerThan(ns.versionedName.String(), v)
-			} else {
-				m[ns.versionedName] = defaultSkipFunc
-			}
+func (c NamespaceConfig) getEnv(namespace *Namespace) *env {
+	var err error
+	var v gir.Version
+
+	if c.MinVersion != "" {
+		v, err = gir.ParseVersion(c.MinVersion)
+
+		if err != nil {
+			panic(err)
 		}
 	}
 
-	return m
+	// TODO: do we need to add the manual types to the ignored functions?
+
+	return &env{
+		minVersion:     v,
+		ignore:         ignoreOr(c.Ignored...),
+		namespace:      namespace,
+		compareParams:  nil,
+		compareReturns: nil,
+	}
 }

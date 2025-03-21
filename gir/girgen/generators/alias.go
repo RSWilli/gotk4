@@ -77,7 +77,7 @@ func (g *AliasGenerator) Generate(w *file.Writer) {
 
 func NewAliasGenerator(alias *typesystem.Alias) *AliasGenerator {
 	return &AliasGenerator{
-		Doc:   NewTypeGoDocGenerator(alias, 0),
+		Doc:   NewTypeGoDocGenerator(alias),
 		Alias: alias,
 	}
 }

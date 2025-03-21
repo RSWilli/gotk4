@@ -136,12 +136,12 @@ func (c *CallbackGenerator) generateExport(w *file.Writer) {
 }
 
 func NewCallbackGenerator(cb *typesystem.Callback) *CallbackGenerator {
-	if cb.Parameters == nil {
-		return nil // callback params invalid
+	if cb.InstanceParam != nil {
+		panic("callback with instance param unimplemented")
 	}
 
 	g := &CallbackGenerator{
-		Doc:      NewTypeGoDocGenerator(cb, 0),
+		Doc:      NewTypeGoDocGenerator(cb),
 		Callback: cb,
 
 		Converters: make(value.ConverterList, 0), // TODO: convert

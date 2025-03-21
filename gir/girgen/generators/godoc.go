@@ -2,7 +2,6 @@ package generators
 
 import (
 	"bufio"
-	"bytes"
 	"fmt"
 	"strings"
 
@@ -11,21 +10,58 @@ import (
 )
 
 type GoDocGenerator struct {
-	Indentation int
-
 	DocString string
+	GIRDoc    typesystem.Doc
 }
 
 func (docg *GoDocGenerator) Generate(w *file.Writer) {
-	// scan the lines of the comment and prefix each line with tabs and "// "
+	// scan the lines of the comment and prefix each line with "// "
 	r := strings.NewReader(docg.DocString)
 	scanner := bufio.NewScanner(r) // scan lines
 
 	for scanner.Scan() {
-		w.Go().Write(bytes.Repeat([]byte{'\t'}, docg.Indentation))
-		w.Go().WriteString("// ")
+		w.Go().Write([]byte("// "))
 		w.Go().Write(scanner.Bytes())
-		w.Go().WriteByte('\n')
+		w.Go().Write([]byte("\n"))
+	}
+
+	var zerodoc typesystem.Doc
+
+	if docg.GIRDoc == zerodoc {
+		return
+	}
+
+	w.Go().Write([]byte("//\n"))
+
+	// scan the lines of the comment and prefix each line with "//\t" to signify a quote/code example
+	r = strings.NewReader(docg.GIRDoc.Doc)
+	scanner = bufio.NewScanner(r) // scan lines
+
+	for scanner.Scan() {
+		w.Go().Write([]byte("//\t"))
+		w.Go().Write(scanner.Bytes())
+		w.Go().Write([]byte("\n"))
+	}
+
+	if docg.GIRDoc.Deprecated {
+		w.Go().Write([]byte("//\n"))
+		w.Go().Write([]byte("// Deprecated: "))
+		if docg.GIRDoc.DeprecatedVersion != "" {
+			fmt.Fprintf(w.Go(), "(since %s) ", docg.GIRDoc.DeprecatedVersion)
+		}
+
+		r := strings.NewReader(docg.GIRDoc.DocDeprecated)
+		scanner := bufio.NewScanner(r) // scan lines
+
+		scanner.Scan() // initial deprecated line is already prefied
+
+		fmt.Fprintf(w.Go(), "%s\n", scanner.Bytes())
+
+		for scanner.Scan() {
+			w.Go().Write([]byte("// "))
+			w.Go().Write(scanner.Bytes())
+			w.Go().Write([]byte("\n"))
+		}
 	}
 }
 
@@ -39,24 +75,24 @@ type DocumentedIdentifier interface {
 	typesystem.Documented
 }
 
-func NewIdentifierGoDocGenerator(identifier DocumentedIdentifier, indent int) *GoDocGenerator {
+func NewIdentifierGoDocGenerator(identifier DocumentedIdentifier) *GoDocGenerator {
 	return &GoDocGenerator{
-		Indentation: indent,
-		DocString:   fmt.Sprintf("%s (%s) should be documented more", identifier.GoIndentifier(), identifier.CIndentifier()),
+		DocString: fmt.Sprintf("%s wraps %s", identifier.GoIndentifier(), identifier.CIndentifier()),
+		GIRDoc:    identifier.Documentation(),
 	}
 }
 
-func NewTypeGoDocGenerator(typ DocumentedType, indent int) *GoDocGenerator {
+func NewTypeGoDocGenerator(typ DocumentedType) *GoDocGenerator {
 	// info := GetInfoFields(girWithDoc)
 
 	return &GoDocGenerator{
-		Indentation: indent,
-		DocString:   fmt.Sprintf("%s (%s) should be documented more", typ.GoType(), typ.CType()),
+		DocString: fmt.Sprintf("%s wraps %s", typ.GoType(), typ.CType()),
+		GIRDoc:    typ.Documentation(),
 	}
 }
 
 func NewCallableGoDocGenerator(callable *typesystem.CallableSignature) *GoDocGenerator {
-	g := NewIdentifierGoDocGenerator(callable, 0)
+	g := NewIdentifierGoDocGenerator(callable)
 
 	var doc strings.Builder
 
@@ -66,21 +102,41 @@ func NewCallableGoDocGenerator(callable *typesystem.CallableSignature) *GoDocGen
 		doc.WriteString("\n\nThe function takes the following parameters:\n\n")
 
 		for _, param := range callable.GoParameters {
-			_ = param
-			fmt.Fprintf(&doc, "\t- %s TODO\n", param.GoName)
+			if param.Skip || param.Implicit {
+				continue
+			}
+			fmt.Fprintf(&doc, "\t- %s \n", paramDocListItem(param))
 		}
 	}
 
 	if len(callable.GoReturns) > 0 {
-		doc.WriteString("\n\nThe function returns the following values:\n\n")
+		doc.WriteString("\nThe function returns the following values:\n\n")
 
 		for _, rv := range callable.GoReturns {
-			_ = rv
-			fmt.Fprintf(&doc, "\t- %s TODO\n", rv.GoName)
+			fmt.Fprintf(&doc, "\t- %s \n", paramDocListItem(rv))
 		}
 	}
 
 	g.DocString = doc.String()
 
 	return g
+}
+
+func paramDocListItem(p *typesystem.Param) string {
+	docStr := fmt.Sprintf("%s %s", p.GoName, p.Type.GoType())
+
+	if p.Nullable {
+		docStr += " (nullable)"
+	}
+
+	if p.Optional {
+		docStr = " (optional)"
+	}
+
+	if p.Doc.Doc != "" {
+		docStr += ": "
+		docStr += p.Doc.Doc
+	}
+
+	return docStr
 }

@@ -194,15 +194,20 @@ func (g *EnumGenerator) Generate(w *file.Writer) {
 
 	fmt.Fprintf(w.Go(), "type %s C.int\n\nconst (\n", g.GoType())
 
+	w.Go().Indent()
 	for _, member := range g.Members {
 		member.Doc.Generate(w)
 
-		fmt.Fprintf(w.Go(), "\t%s %s = %s\n", member.GoIndentifier(), g.GoType(), member.Value)
+		fmt.Fprintf(w.Go(), "%s %s = %s\n", member.GoIndentifier(), g.GoType(), member.Value)
 	}
+	w.Go().Unindent()
 
 	fmt.Fprint(w.Go(), ")\n\n")
 
-	g.Marshaler.Generate(w)
+	if g.Marshaler != nil {
+		w.RegisterGType(g)
+		g.Marshaler.Generate(w)
+	}
 }
 
 func NewEnumGenerator(enum *typesystem.Enum) *EnumGenerator {
@@ -210,20 +215,20 @@ func NewEnumGenerator(enum *typesystem.Enum) *EnumGenerator {
 
 	for _, member := range enum.Members {
 		members = append(members, EnumMember{
-			Doc: NewIdentifierGoDocGenerator(member, 1),
+			Doc: NewIdentifierGoDocGenerator(member),
 
 			Member: member,
 		})
 	}
 
-	var marshalGen Generator = NoopGenerator{}
+	var marshalGen Generator
 
 	if enum.GLibGetType() != "" {
 		marshalGen = NewMarshalEnumGenerator(enum)
 	}
 
 	return &EnumGenerator{
-		Doc:       NewTypeGoDocGenerator(enum, 0),
+		Doc:       NewTypeGoDocGenerator(enum),
 		Enum:      enum,
 		Members:   members,
 		Marshaler: marshalGen,

@@ -16,7 +16,11 @@ type Alias struct {
 }
 
 func DeclareAlias(e *env, v gir.Alias) *Alias {
-	if e.skipType(v) {
+	if !v.IsIntrospectable() {
+		return nil
+	}
+
+	if e.skip(nil, v) {
 		return nil
 	}
 

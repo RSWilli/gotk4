@@ -26,7 +26,11 @@ type Signal struct {
 	*Parameters
 }
 
-func NewSignal(e *env, v gir.Signal) *Signal {
+func NewSignal(e *env, parent Type, v gir.Signal) *Signal {
+	if e.skip(parent, v) {
+		return nil
+	}
+
 	params := NewParameters(e, v.Parameters, v.ReturnValue, false)
 
 	if params == nil {

@@ -19,7 +19,7 @@ type namespaceWithIncludes struct {
 }
 
 type repoWithIncludes struct {
-	gir.Repository
+	gir.PkgRepository
 
 	namespaces []*namespaceWithIncludes
 }
@@ -41,7 +41,7 @@ func resolveNamespaceIncludes(repos gir.Repositories) []*repoWithIncludes {
 		includes := repoPrefilledIncludes(repo.Repository)
 
 		outRepo := &repoWithIncludes{
-			Repository: repo.Repository,
+			PkgRepository: repo,
 		}
 
 		for _, ns := range repo.Namespaces {

@@ -594,6 +594,10 @@ func (g *RecordGenerator) Generate(w *file.Writer) {
 		panic("cannot generate record without an unref method")
 	}
 
+	// Need this for g_value_get_boxed, TODO: where?
+	w.AddPackage("glib-2.0")
+	w.CInclude("glib-object.h")
+
 	w.GoImport("unsafe")
 	w.GoImport("runtime")
 
@@ -610,24 +614,27 @@ func (g *RecordGenerator) Generate(w *file.Writer) {
 	fmt.Fprintf(w.Go(), "}\n\n")
 
 	if g.GenerateMarshaler {
+		w.RegisterGType(g)
 		fmt.Fprintf(w.Go(), "func %s(p uintptr) (interface{}, error) {\n", g.MarshalFuncName())
 		fmt.Fprintf(w.Go(), "\tb := coreglib.ValueFromNative(unsafe.Pointer(p)).Boxed()\n")
 		fmt.Fprintf(w.Go(), "\treturn %s(b), nil\n", g.GoUnsafeBorrowFunction) // TODO: does this need to be a copy?
 		fmt.Fprintf(w.Go(), "}\n\n")
 	}
 
-	fmt.Fprintf(w.Go(), "// %s is used to convert raw %s pointers to go. This is used by the bindings internally.\n", g.GoUnsafeTransferNoneFunction, g.CGoType())
+	fmt.Fprintf(w.Go(), "// %s is used to convert raw %s pointers to go. This is used by the bindings internally.\n", g.GoUnsafeBorrowFunction, g.CGoType())
 	fmt.Fprintf(w.Go(), "func %s(p unsafe.Pointer) *%s {\n", g.GoUnsafeBorrowFunction, g.GoType())
 	fmt.Fprintf(w.Go(), "\treturn &%s{&%s{(*%s)(p)}}\n", g.GoType(), g.PrivateGoType, g.CGoType())
 	fmt.Fprintf(w.Go(), "}\n\n")
 
 	mkFinalizer := func() {
-		fmt.Fprintf(w.Go(), "\truntime.SetFinalizer(\n")
-		fmt.Fprintf(w.Go(), "\t\twrapped.%s,\n", g.PrivateGoType)
-		fmt.Fprintf(w.Go(), "\t\tfunc (intern *%s) {\n", g.PrivateGoType)
-		fmt.Fprintf(w.Go(), "\t\t\t%s(intern.native)\n", g.CgoUnrefFunction)
-		fmt.Fprintf(w.Go(), "\t\t},\n")
-		fmt.Fprintf(w.Go(), "\t)\n")
+		w.Go().Indent()
+		fmt.Fprintf(w.Go(), "runtime.SetFinalizer(\n")
+		fmt.Fprintf(w.Go(), "\twrapped.%s,\n", g.PrivateGoType)
+		fmt.Fprintf(w.Go(), "\tfunc (intern *%s) {\n", g.PrivateGoType)
+		fmt.Fprintf(w.Go(), "\t\t%s(unsafe.Pointer(intern.native))\n", g.CgoUnrefFunction)
+		fmt.Fprintf(w.Go(), "\t},\n")
+		fmt.Fprintf(w.Go(), ")\n")
+		w.Go().Unindent()
 	}
 
 	if g.CgoRefFunction != "" {
@@ -683,12 +690,12 @@ func (g *RecordGenerator) Generate(w *file.Writer) {
 	fmt.Fprintf(w.Go(), "\t_p := unsafe.Pointer(%s.native)\n", g.ReceiverName)
 	fmt.Fprintf(w.Go(), "\t%s.native = nil // %s is invalid from here on\n", g.ReceiverName, g.GoType())
 	fmt.Fprintf(w.Go(), "\treturn _p\n")
-	fmt.Fprintf(w.Go(), "}\n\n")
+	fmt.Fprintf(w.Go(), "}\n")
 }
 
 func NewRecordGenerator(r *typesystem.Record) *RecordGenerator {
 	g := &RecordGenerator{
-		Doc:               NewTypeGoDocGenerator(r, 0),
+		Doc:               NewTypeGoDocGenerator(r),
 		Record:            r,
 		GenerateMarshaler: r.GLibGetType() != "",
 

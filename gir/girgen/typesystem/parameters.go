@@ -78,9 +78,9 @@ type Parameters struct {
 	// CParameters contains the params that the c function requires
 	CParameters ParamList
 
-	// GoReceiver contains the C instance param, which will be used as a method receiver
-	// for the go function.
-	GoReceiver *Param
+	// InstanceParam contains the C instance param, which will be used as a method receiver
+	// for the go function. It is also always the first parameter for the c function call
+	InstanceParam *Param
 
 	// GoReturns containts the return values of the Go function. C Params that are declared as "out"
 	// will also get moved here, so this may differ from CParameters, but must contain pointers to the same
@@ -113,16 +113,13 @@ func NewParameters(e *env, girparams *gir.Parameters, ret *gir.ReturnValue, thro
 				return nil
 			}
 
-			params.GoReceiver = &Param{
+			params.InstanceParam = &Param{
 				Doc: NewParamDoc(girparams.InstanceParameter.ParameterAttrs),
 
 				CName:  "carg0",
 				GoName: "arg0", // TODO: find a better go name
 				Type:   t,
 			}
-
-			// instance param is always first C param
-			params.CParameters = append(params.CParameters, params.GoReceiver)
 		}
 
 		for i, p := range girparams.Parameters {
@@ -148,7 +145,7 @@ func NewParameters(e *env, girparams *gir.Parameters, ret *gir.ReturnValue, thro
 			param := &Param{
 				Doc:               NewParamDoc(p.ParameterAttrs),
 				CName:             fmt.Sprintf("carg%d", i+1),
-				GoName:            fmt.Sprintf("arg%d", i+1), // TODO: find a better go name
+				GoName:            fmt.Sprintf("arg%d", i+1),
 				Type:              t,
 				TransferOwnership: TransferOwnership(p.TransferOwnership.TransferOwnership),
 				Skip:              p.Skip || p.Direction == "out",
@@ -172,30 +169,31 @@ func NewParameters(e *env, girparams *gir.Parameters, ret *gir.ReturnValue, thro
 		}
 
 		// mark the implicit params. The idx is the index in c parameters, with a given instance param
+		// a parameter may have multiple implicit params
 		for i, p := range girparams.Parameters {
 			param := params.GoParameters[i]
 			if p.Closure != nil {
 				param.Closure = params.CParameters[*p.Closure]
 				param.Closure.Implicit = true
-				continue
 			}
 			if p.Destroy != nil {
 				param.Destroy = params.CParameters[*p.Destroy]
 				param.Destroy.Implicit = true
-				continue
 			}
 			if p.AnyType.Array != nil && p.AnyType.Array.Length != nil {
 				// type must be an array type here:
 				param.Type.(*Array).Length = params.CParameters[*p.Array.Length]
 				params.CParameters[*p.Array.Length].Implicit = true
-				continue
 			}
 		}
 	}
 
 	if throws {
 		throwParam := &Param{
-			Doc:               ParamDoc{},
+			Doc: ParamDoc{
+				Name: "err",
+				Doc:  "an error",
+			},
 			CName:             "_cerr",
 			GoName:            "_goerr",
 			Type:              TypeError,
@@ -217,15 +215,16 @@ func NewParameters(e *env, girparams *gir.Parameters, ret *gir.ReturnValue, thro
 			return nil
 		}
 
-		if t.GIRName() != "none" {
-			ret := &Param{
-				Doc:    NewReturnDoc(ret),
-				CName:  "cret",
-				GoName: "ret",
-				Type:   t,
-			}
+		ret := &Param{
+			Doc:    NewReturnDoc(ret),
+			CName:  "cret",
+			GoName: "ret",
+			Type:   t,
+		}
 
-			params.CReturn = ret
+		params.CReturn = ret
+
+		if t.GIRName() != "none" {
 			params.GoReturns = append(params.GoReturns, ret)
 		}
 
@@ -273,6 +272,10 @@ func (pl ParamList) GoIdentifiers() string {
 	decls := make([]string, 0, len(pl))
 
 	for _, p := range pl {
+		if p.Skip || p.Implicit {
+			continue
+		}
+
 		decls = append(decls, p.GoName)
 	}
 
@@ -283,6 +286,10 @@ func (pl ParamList) GoTypes() string {
 	decls := make([]string, 0, len(pl))
 
 	for _, p := range pl {
+		if p.Skip || p.Implicit {
+			continue
+		}
+
 		decls = append(decls, p.Type.GoType())
 	}
 

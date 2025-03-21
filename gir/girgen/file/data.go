@@ -1,7 +1,6 @@
 package file
 
 import (
-	"bytes"
 	"io"
 	"sync"
 
@@ -16,9 +15,9 @@ type filedata struct {
 
 	// cIncludes contains the deduped c #include directives that will be placed at the top
 	cIncludes cIncludes
-	cPreamble bytes.Buffer
+	cPreamble internal.CodeWriter
 
-	goContents bytes.Buffer
+	goContents internal.CodeWriter
 
 	goImports goImports
 }
@@ -82,19 +81,19 @@ func (d *filedata) GoImportAliased(pkg string, alias string) {
 	d.goImports[pkg] = alias
 }
 
-type SectionWriter interface {
+type CodeWriter interface {
 	io.Writer
-	io.StringWriter
-	io.ByteWriter
+	Indent()
+	Unindent()
 }
 
-func (d *filedata) Go() SectionWriter {
+func (d *filedata) Go() CodeWriter {
 	d.used = true
 
 	return &d.goContents
 }
 
-func (d *filedata) C() SectionWriter {
+func (d *filedata) C() CodeWriter {
 	d.used = true
 
 	return &d.cPreamble

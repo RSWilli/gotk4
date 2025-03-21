@@ -20,7 +20,7 @@ func (g *MarshalGenerator) Generate(w *file.Writer) {
 
 	fmt.Fprintf(w.Go(), "func %s(p uintptr) (interface{}, error) {\n", g.MarshalFuncName())
 	fmt.Fprintf(w.Go(), "\treturn %s(coreglib.ValueFromNative(unsafe.Pointer(p)).%s()), nil\n", g.WrapFunction, g.ValueFunction)
-	fmt.Fprintf(w.Go(), "}\n\n")
+	fmt.Fprintf(w.Go(), "}\n")
 }
 
 func NewMarshalEnumGenerator(typ typesystem.Type) *MarshalGenerator {
@@ -43,6 +43,6 @@ func NewMarshalObjectGenerator(typ typesystem.Type, wrapCoreObjectName string) *
 	return &MarshalGenerator{
 		Type:          typ,
 		WrapFunction:  wrapCoreObjectName,
-		ValueFunction: "Object",
+		ValueFunction: "UnsafeObject",
 	}
 }

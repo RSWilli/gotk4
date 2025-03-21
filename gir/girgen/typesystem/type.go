@@ -26,12 +26,34 @@ type ForeignType struct {
 	Type
 }
 
+// mkForeign wraps the given type in a [ForeignType] if the type is not already wrapped
+func mkForeign(ns *Namespace, t Type) Type {
+	if t == nil {
+		return nil
+	}
+
+	_, isForeign := t.(*ForeignType)
+
+	if isForeign {
+		return t
+	}
+
+	return &ForeignType{
+		SourceNamespace: ns,
+		Type:            t,
+	}
+}
+
 // GoType implements Type.
 func (b *ForeignType) GoType() string {
+	return b.AddForeignNamespace(b.Type.GoType())
+}
+
+func (b *ForeignType) AddForeignNamespace(str string) string {
 	if _, ok := b.Type.(*PointerType); ok {
 		panic("foreign pointer type")
 	}
-	return fmt.Sprintf("%s.%s", b.SourceNamespace.GoName, b.Type.GoType())
+	return fmt.Sprintf("%s.%s", b.SourceNamespace.GoName, str)
 }
 
 func IsForeignType(t Type) bool {

@@ -7,12 +7,15 @@ import (
 	"github.com/diamondburned/gotk4/gir/girgen/typesystem"
 )
 
-type ClassGenerator struct {
+type InterfaceGenerator struct {
 	Doc Generator
 
-	*typesystem.Class
+	*typesystem.Interface
 
 	Marshaler Generator
+
+	// infos used by sub generators:
+	ReceiverName string
 
 	// sub generators:
 	Constructors GeneratorList
@@ -20,7 +23,7 @@ type ClassGenerator struct {
 	Methods      GeneratorList
 }
 
-func (g *ClassGenerator) Generate(w *file.Writer) {
+func (g *InterfaceGenerator) Generate(w *file.Writer) {
 	w.GoImportCoreGlib()
 	w.GoImport("unsafe")
 	w.GoImport("runtime")
@@ -30,10 +33,7 @@ func (g *ClassGenerator) Generate(w *file.Writer) {
 	fmt.Fprintf(w.Go(), "type %s struct {\n", g.GoType())
 	fmt.Fprintf(w.Go(), "\t_ [0]func() // equal guard\n")
 	fmt.Fprintf(w.Go(), "\t*%s\n", g.Parent.GoType())
-	if len(g.Implements) > 0 {
-		fmt.Fprintf(w.Go(), "\t// implemented interfaces:\n")
-	}
-	for _, inter := range g.Implements {
+	for _, inter := range g.Prerequesite {
 		fmt.Fprintf(w.Go(), "\t*%s\n", inter.GoType())
 	}
 	fmt.Fprintf(w.Go(), "}\n\n")
@@ -43,12 +43,12 @@ func (g *ClassGenerator) Generate(w *file.Writer) {
 	fmt.Fprintf(w.Go(), "type %s interface {\n", g.GoInterfaceName)
 	w.Go().Indent()
 	fmt.Fprintln(w.Go(), g.ParentGoInterfaceName())
-	for inter := range g.ImplementedGoInterfaceNames() {
+	for inter := range g.PrerequesitesGoInterfaceNames() {
 		fmt.Fprintln(w.Go(), inter)
 	}
 	fmt.Fprintln(w.Go())
 
-	for _, m := range g.Class.Methods {
+	for _, m := range g.Interface.Methods {
 		fmt.Fprintln(w.Go(), m.GoInterfaceDeclaration())
 	}
 
@@ -72,10 +72,10 @@ func (g *ClassGenerator) Generate(w *file.Writer) {
 		fmt.Fprintf(w.Go(), "return &%s{\n", g.GoType())
 		w.Go().Indent()
 		fmt.Fprintf(w.Go(), "%s: %s(c),\n", parentTypeName, parentConstName)
-		if len(g.Implements) > 0 {
-			fmt.Fprintf(w.Go(), "// implemented interfaces are always borrowed:\n")
+		if len(g.Prerequesite) > 0 {
+			fmt.Fprintf(w.Go(), "// prerequesites are always borrowed:\n")
 		}
-		for typeName, constName := range g.ImplementsConstructors() {
+		for typeName, constName := range g.PrerequesiteConstructors() {
 			fmt.Fprintf(w.Go(), "%s: %s(c),\n", typeName, constName)
 		}
 		w.Go().Unindent()
@@ -99,30 +99,29 @@ func (g *ClassGenerator) Generate(w *file.Writer) {
 	)
 }
 
-func NewClassGenerator(c *typesystem.Class) *ClassGenerator {
+func NewInterfaceGenerator(c *typesystem.Interface) *InterfaceGenerator {
 	var marshaler Generator
 
 	if c.GLibGetType() != "" {
 		marshaler = NewMarshalObjectGenerator(c, c.GoUnsafeTransferNoneFunction)
 	}
 
-	g := &ClassGenerator{
+	g := &InterfaceGenerator{
 		Doc:       NewTypeGoDocGenerator(c),
-		Class:     c,
+		Interface: c,
 		Marshaler: marshaler,
 	}
 
-	for _, constructor := range c.Constructors {
-		g.Constructors = append(g.Constructors, NewCallableGenerator(constructor))
-	}
-
 	for _, fn := range c.Functions {
-		g.Functions = append(g.Functions, NewCallableGenerator(fn))
-
+		if fGen := NewCallableGenerator(fn); fGen != nil {
+			g.Functions = append(g.Functions, fGen)
+		}
 	}
 
 	for _, method := range c.Methods {
-		g.Methods = append(g.Methods, NewCallableGenerator(method))
+		if methGen := NewCallableGenerator(method); methGen != nil {
+			g.Methods = append(g.Methods, methGen)
+		}
 	}
 
 	return g

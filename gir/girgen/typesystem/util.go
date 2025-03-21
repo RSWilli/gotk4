@@ -1,6 +1,7 @@
 package typesystem
 
 import (
+	"fmt"
 	"log"
 	"strconv"
 	"strings"
@@ -124,5 +125,44 @@ func debugCTypeFromAnytype(t gir.AnyType) string {
 		return t.Type.CType
 	default:
 		panic("invalid anytype")
+	}
+}
+
+func infoFromAnyGir(girAny any) (string, GIRKind) {
+	switch t := girAny.(type) {
+	case gir.Class:
+		return t.Name, GIRKindClass
+	case gir.Interface:
+		return t.Name, GIRKindInterface
+	case gir.Callback:
+		return t.Name, GIRKindCallback
+	case gir.Field:
+		return t.Name, GIRKindField
+	case gir.Enum:
+		return t.Name, GIRKindEnum
+	case gir.Bitfield:
+		return t.Name, GIRKindBitfield
+	case gir.Member:
+		return t.Name(), GIRKindMember
+	case gir.Record:
+		return t.Name, GIRKindRecord
+	case gir.Constant:
+		return t.Name, GIRKindConstant
+	case gir.Constructor:
+		return t.Name, GIRKindConstructor
+	case gir.Method:
+		return t.Name, GIRKindMethod
+	case gir.VirtualMethod:
+		return t.Name, GIRKindVirtualMethod
+	case gir.Union:
+		return t.Name, GIRKindUnion
+	case gir.Alias:
+		return t.Name, GIRKindAlias
+	case gir.Function:
+		return t.Name, GIRKindFunction
+	case gir.Signal:
+		return t.Name, GIRKindSignal
+	default:
+		panic(fmt.Sprintf("received unhandled type: %T", t))
 	}
 }

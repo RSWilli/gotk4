@@ -9,7 +9,6 @@ type NamespaceGenerator struct {
 	ns *typesystem.Namespace
 
 	// Sub generators:
-	GTypes     Generator
 	Constants  GeneratorList
 	Aliases    GeneratorList
 	Enums      GeneratorList
@@ -40,7 +39,6 @@ func (g *NamespaceGenerator) Generate(w *file.Writer) {
 	// run sub generators
 	GenerateAll(
 		w,
-		g.GTypes,
 		g.Constants,
 		g.Aliases,
 		g.Enums,
@@ -60,8 +58,6 @@ func NewNamespaceGenerator(
 	// namespace := ctx.Namespace(ns)
 	gen := &NamespaceGenerator{
 		ns: ns,
-
-		GTypes: NewRegisterGTypeGenerator(ns),
 	}
 
 	for _, c := range ns.Constants {
@@ -95,8 +91,11 @@ func NewNamespaceGenerator(
 			gen.Functions = append(gen.Functions, fgen)
 		}
 	}
-	// for _, v := range ns.Interfaces {
-	// }
+	for _, inter := range ns.Interfaces {
+		if intergen := NewInterfaceGenerator(inter); intergen != nil {
+			gen.Interfaces = append(gen.Interfaces, intergen)
+		}
+	}
 	for _, class := range ns.Classes {
 		if classgen := NewClassGenerator(class); classgen != nil {
 			gen.Classes = append(gen.Classes, classgen)
