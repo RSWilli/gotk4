@@ -2,6 +2,7 @@ package generators
 
 import (
 	"fmt"
+	"log"
 
 	"github.com/diamondburned/gotk4/gir/girgen/file"
 	"github.com/diamondburned/gotk4/gir/girgen/typesystem"
@@ -29,12 +30,12 @@ func (g *ClassGenerator) Generate(w *file.Writer) {
 
 	fmt.Fprintf(w.Go(), "type %s struct {\n", g.GoType())
 	fmt.Fprintf(w.Go(), "\t_ [0]func() // equal guard\n")
-	fmt.Fprintf(w.Go(), "\t*%s\n", g.Parent.GoType())
+	fmt.Fprintf(w.Go(), "\t%s\n", g.Parent.GoType())
 	if len(g.Implements) > 0 {
 		fmt.Fprintf(w.Go(), "\t// implemented interfaces:\n")
 	}
 	for _, inter := range g.Implements {
-		fmt.Fprintf(w.Go(), "\t*%s\n", inter.GoType())
+		fmt.Fprintf(w.Go(), "\t%s\n", inter.GoType())
 	}
 	fmt.Fprintf(w.Go(), "}\n\n")
 
@@ -55,6 +56,8 @@ func (g *ClassGenerator) Generate(w *file.Writer) {
 	w.Go().Unindent()
 	fmt.Fprintf(w.Go(), "}\n\n")
 
+	g.generateWrapFunction(w.Go())
+
 	if g.Marshaler != nil {
 		w.RegisterGType(g)
 		g.Marshaler.Generate(w)
@@ -63,33 +66,21 @@ func (g *ClassGenerator) Generate(w *file.Writer) {
 
 	// TODO: imports
 
-	// the struct key is the name without foreign module references
-	parentTypeName := typesystem.UnderlyingType(g.Parent).GoType()
-
-	mkConstructor := func(constName, parentConstName string) {
-		fmt.Fprintf(w.Go(), "func %s(c unsafe.Pointer) *%s {\n", constName, g.GoType())
+	mkConstructor := func(constructorName, baseConstructorName string) {
+		fmt.Fprintf(w.Go(), "func %s(c unsafe.Pointer) *%s {\n", constructorName, g.GoType())
 		w.Go().Indent()
-		fmt.Fprintf(w.Go(), "return &%s{\n", g.GoType())
-		w.Go().Indent()
-		fmt.Fprintf(w.Go(), "%s: %s(c),\n", parentTypeName, parentConstName)
-		if len(g.Implements) > 0 {
-			fmt.Fprintf(w.Go(), "// implemented interfaces are always borrowed:\n")
-		}
-		for typeName, constName := range g.ImplementsConstructors() {
-			fmt.Fprintf(w.Go(), "%s: %s(c),\n", typeName, constName)
-		}
-		w.Go().Unindent()
-		fmt.Fprintf(w.Go(), "}\n")
+		fmt.Fprintf(w.Go(), "base := %s(c)\n", baseConstructorName)
+		fmt.Fprintf(w.Go(), "return %s(base)\n", g.GoWrapBaseClassFunction)
 		w.Go().Unindent()
 		fmt.Fprintf(w.Go(), "}\n\n")
 	}
 
 	fmt.Fprintf(w.Go(), "// %s is used to convert raw %s pointers to go. This is used by the bindings internally.\n", g.GoUnsafeBorrowFunction, g.CType())
-	mkConstructor(g.GoUnsafeBorrowFunction, g.ParentGoUnsafeBorrowFunction())
+	mkConstructor(g.GoUnsafeBorrowFunction, g.BaseClassGoUnsafeBorrowFunction())
 	fmt.Fprintf(w.Go(), "// %s is used to convert raw %s pointers to go while taking a reference and attaching a finalizer. This is used by the bindings internally.\n", g.GoUnsafeTransferNoneFunction, g.CType())
-	mkConstructor(g.GoUnsafeTransferNoneFunction, g.ParentGoUnsafeTransferNoneFunction())
+	mkConstructor(g.GoUnsafeTransferNoneFunction, g.BaseClassGoUnsafeTransferNoneFunction())
 	fmt.Fprintf(w.Go(), "// %s is used to convert raw %s pointers to go while attaching a finalizer. This is used by the bindings internally.\n", g.GoUnsafeTransferFullFunction, g.CType())
-	mkConstructor(g.GoUnsafeTransferFullFunction, g.ParentGoUnsafeTransferFullFunction())
+	mkConstructor(g.GoUnsafeTransferFullFunction, g.BaseClassGoUnsafeTransferFullFunction())
 
 	GenerateAll(
 		w,
@@ -99,11 +90,33 @@ func (g *ClassGenerator) Generate(w *file.Writer) {
 	)
 }
 
+func (g *ClassGenerator) generateWrapFunction(w file.CodeWriter) {
+	baseClassIdentifier := "base"
+
+	fmt.Fprintf(w, "func %s(%s *%s) *%s {\n", g.GoWrapBaseClassFunction, baseClassIdentifier, g.BaseClass().GoType(), g.GoType())
+	w.Indent()
+	fmt.Fprintf(w, "return &%s{\n", g.GoType())
+	w.Indent()
+
+	wrapClass(w, g.Class.Parent, baseClassIdentifier)
+
+	w.Indent()
+	for _, inter := range g.Implements {
+		wrapInterface(w, inter, baseClassIdentifier)
+	}
+	w.Unindent()
+
+	fmt.Fprintf(w, "}\n")
+	w.Unindent()
+
+	fmt.Fprintf(w, "}\n\n")
+}
+
 func NewClassGenerator(c *typesystem.Class) *ClassGenerator {
 	var marshaler Generator
 
 	if c.GLibGetType() != "" {
-		marshaler = NewMarshalObjectGenerator(c, c.GoUnsafeTransferNoneFunction)
+		marshaler = NewMarshalObjectGenerator(c, c.GoWrapBaseClassFunction)
 	}
 
 	g := &ClassGenerator{
@@ -126,4 +139,61 @@ func NewClassGenerator(c *typesystem.Class) *ClassGenerator {
 	}
 
 	return g
+}
+
+func wrapClass(w file.CodeWriter, t typesystem.Type, baseClassIdentifier string) {
+	parent := typesystem.GetClassParent(t)
+
+	if parent == nil {
+		// current type is the base class
+		fmt.Fprintf(w, "%s: *%s,\n", typesystem.UnderlyingType(t).GoType(), baseClassIdentifier)
+
+		w.Unindent()
+		return
+	}
+
+	var currentNs *typesystem.Namespace
+	var implementedInterfaces []typesystem.Type
+
+	switch t := t.(type) {
+	case *typesystem.ForeignType:
+		currentNs = t.SourceNamespace
+		implementedInterfaces = t.Type.(*typesystem.Class).Implements
+	case *typesystem.Class:
+		implementedInterfaces = t.Implements
+	default:
+		log.Panicf("unexpected class parent %T", t)
+	}
+
+	fmt.Fprintf(w, "%s: %s{\n", typesystem.UnderlyingType(t).GoType(), t.GoType())
+
+	w.Indent()
+	defer w.Unindent()
+
+	switch t := parent.(type) {
+	case *typesystem.ForeignType:
+		wrapClass(w, t, baseClassIdentifier)
+	case *typesystem.Class:
+		// the class is foreign if resolved from another foreign type
+		if currentNs == nil {
+			wrapClass(w, t, baseClassIdentifier)
+		} else {
+			foreign := &typesystem.ForeignType{
+				SourceNamespace: currentNs,
+				Type:            t,
+			}
+
+			wrapClass(w, foreign, baseClassIdentifier)
+		}
+	default:
+		log.Panicf("unexpected class parent %T", t)
+	}
+
+	w.Indent()
+	for _, inter := range implementedInterfaces {
+		wrapInterface(w, inter, baseClassIdentifier)
+	}
+	w.Unindent()
+
+	fmt.Fprintf(w, "},\n")
 }

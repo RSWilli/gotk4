@@ -60,9 +60,11 @@ func (p *CodeWriter) Indent() {
 }
 
 func (p *CodeWriter) Unindent() {
-	if p.indentLevel > 0 {
-		p.indentLevel--
+	if p.indentLevel == 0 {
+		panic("indent mismatch: can't unindent level 0")
 	}
+
+	p.indentLevel--
 }
 
 func (p *CodeWriter) Len() int {

@@ -207,11 +207,6 @@ func Generate(repos gir.Repositories, data Data) {
 			},
 			"GObject-2": {
 				ManualTypes: []typesystem.Type{
-					// &typesystem.Class{
-					// 	BaseType: typesystem.BaseType{
-					// 		GirName: "InitiallyUnowned",
-					// 	},
-					// },
 					&typesystem.ForeignType{
 						SourceNamespace: &typesystem.Namespace{GoName: "coreglib"},
 						Type: &typesystem.Class{

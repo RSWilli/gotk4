@@ -43,6 +43,6 @@ func NewMarshalObjectGenerator(typ typesystem.Type, wrapCoreObjectName string) *
 	return &MarshalGenerator{
 		Type:          typ,
 		WrapFunction:  wrapCoreObjectName,
-		ValueFunction: "UnsafeObject",
+		ValueFunction: "Object",
 	}
 }

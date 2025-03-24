@@ -9,6 +9,7 @@ import (
 	"github.com/diamondburned/gotk4/gir/girgen/strcases"
 )
 
+// Interface declares an interface implemented by a GObject.
 type Interface struct {
 	Doc
 	BaseType
@@ -16,9 +17,11 @@ type Interface struct {
 
 	TypeStruct *Record
 
-	// Parent is always (foreign) GObject, because at runtime we will receive a GObject
+	// Parent is always (foreign) GObject, because at runtime we will receive a GObject pointer
 	// and wrap it. We look it up because we don't know the implementation here.
 	Parent Type
+
+	GoWrapBaseClassFunction string
 
 	GoInterfaceName string
 
@@ -65,6 +68,8 @@ func DeclareInterface(e *env, v gir.Interface) *Interface {
 		},
 		GoInterfaceName: strcases.Interfacify(v.Name),
 
+		GoWrapBaseClassFunction: fmt.Sprintf("unsafeWrap%s", v.Name),
+
 		GoUnsafeBorrowFunction:       fmt.Sprintf("Unsafe%sFromGlibBorrow", v.Name),
 		GoUnsafeTransferNoneFunction: fmt.Sprintf("Unsafe%sFromGlibNone", v.Name),
 		GoUnsafeTransferFullFunction: fmt.Sprintf("Unsafe%sFromGlibFull", v.Name),
@@ -75,7 +80,7 @@ func DeclareInterface(e *env, v gir.Interface) *Interface {
 	}
 
 	if v.GLibTypeStruct != "" {
-		typeStructType := e.findType(&gir.Type{Name: v.GLibTypeStruct})
+		typeStructType := e.findTypeByGIRName(v.GLibTypeStruct)
 
 		if typeStructType == nil {
 			return nil
@@ -107,7 +112,7 @@ func (in *Interface) resolve(e *env) bool {
 	in.Parent = parent
 
 	for _, prereq := range in.gir.Prerequisites {
-		inter := e.findType(&gir.Type{Name: prereq.Name})
+		inter := e.findTypeByGIRName(prereq.Name)
 
 		if inter == nil {
 			log.Printf("interface %s not found\n", prereq.Name)

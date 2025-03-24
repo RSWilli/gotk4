@@ -33,9 +33,9 @@ func (g *InterfaceGenerator) Generate(w *file.Writer) {
 	fmt.Fprintf(w.Go(), "type %s struct {\n", g.GoType())
 	fmt.Fprintf(w.Go(), "\t_ [0]func() // equal guard\n")
 	fmt.Fprintf(w.Go(), "\t*%s\n", g.Parent.GoType())
-	for _, inter := range g.Prerequesite {
-		fmt.Fprintf(w.Go(), "\t*%s\n", inter.GoType())
-	}
+	// for _, inter := range g.Prerequesite {
+	// 	fmt.Fprintf(w.Go(), "\t*%s\n", inter.GoType())
+	// }
 	fmt.Fprintf(w.Go(), "}\n\n")
 
 	fmt.Fprintf(w.Go(), "var _ %s = (*%s)(nil)\n\n", g.GoInterfaceName, g.GoType())
@@ -43,16 +43,32 @@ func (g *InterfaceGenerator) Generate(w *file.Writer) {
 	fmt.Fprintf(w.Go(), "type %s interface {\n", g.GoInterfaceName)
 	w.Go().Indent()
 	fmt.Fprintln(w.Go(), g.ParentGoInterfaceName())
-	for inter := range g.PrerequesitesGoInterfaceNames() {
-		fmt.Fprintln(w.Go(), inter)
-	}
-	fmt.Fprintln(w.Go())
+	// for inter := range g.PrerequesitesGoInterfaceNames() {
+	// 	fmt.Fprintln(w.Go(), inter)
+	// }
+	// fmt.Fprintln(w.Go())
 
 	for _, m := range g.Interface.Methods {
+		// TODO: godoc, use g.Methods instead and create a custom generator type
 		fmt.Fprintln(w.Go(), m.GoInterfaceDeclaration())
 	}
 
 	w.Go().Unindent()
+	fmt.Fprintf(w.Go(), "}\n\n")
+
+	baseClassIdentifier := "base"
+
+	fmt.Fprintf(w.Go(), "func %s(%s *%s) *%s {\n", g.GoWrapBaseClassFunction, baseClassIdentifier, g.Parent.GoType(), g.GoType())
+	w.Go().Indent()
+	fmt.Fprintf(w.Go(), "return &%s{\n", g.GoType())
+	w.Go().Indent()
+
+	fmt.Fprintf(w.Go(), "%s: %s,\n", typesystem.UnderlyingType(g.Parent).GoType(), baseClassIdentifier)
+	w.Go().Unindent()
+
+	fmt.Fprintf(w.Go(), "}\n")
+	w.Go().Unindent()
+
 	fmt.Fprintf(w.Go(), "}\n\n")
 
 	if g.Marshaler != nil {
@@ -63,23 +79,11 @@ func (g *InterfaceGenerator) Generate(w *file.Writer) {
 
 	// TODO: imports
 
-	// the struct key is the name without foreign module references
-	parentTypeName := typesystem.UnderlyingType(g.Parent).GoType()
-
-	mkConstructor := func(constName, parentConstName string) {
-		fmt.Fprintf(w.Go(), "func %s(c unsafe.Pointer) *%s {\n", constName, g.GoType())
+	mkConstructor := func(constructorName, parentConstructorName string) {
+		fmt.Fprintf(w.Go(), "func %s(c unsafe.Pointer) *%s {\n", constructorName, g.GoType())
 		w.Go().Indent()
-		fmt.Fprintf(w.Go(), "return &%s{\n", g.GoType())
-		w.Go().Indent()
-		fmt.Fprintf(w.Go(), "%s: %s(c),\n", parentTypeName, parentConstName)
-		if len(g.Prerequesite) > 0 {
-			fmt.Fprintf(w.Go(), "// prerequesites are always borrowed:\n")
-		}
-		for typeName, constName := range g.PrerequesiteConstructors() {
-			fmt.Fprintf(w.Go(), "%s: %s(c),\n", typeName, constName)
-		}
-		w.Go().Unindent()
-		fmt.Fprintf(w.Go(), "}\n")
+		fmt.Fprintf(w.Go(), "base := %s(c)\n", parentConstructorName)
+		fmt.Fprintf(w.Go(), "return %s(base)\n", g.GoWrapBaseClassFunction)
 		w.Go().Unindent()
 		fmt.Fprintf(w.Go(), "}\n\n")
 	}
@@ -103,7 +107,7 @@ func NewInterfaceGenerator(c *typesystem.Interface) *InterfaceGenerator {
 	var marshaler Generator
 
 	if c.GLibGetType() != "" {
-		marshaler = NewMarshalObjectGenerator(c, c.GoUnsafeTransferNoneFunction)
+		marshaler = NewMarshalObjectGenerator(c, c.GoWrapBaseClassFunction)
 	}
 
 	g := &InterfaceGenerator{
@@ -125,4 +129,28 @@ func NewInterfaceGenerator(c *typesystem.Interface) *InterfaceGenerator {
 	}
 
 	return g
+}
+
+func wrapInterface(w file.CodeWriter, t typesystem.Type, baseClassIdentifier string) {
+	fmt.Fprintf(w, "%s: %s{\n", typesystem.UnderlyingType(t).GoType(), t.GoType())
+
+	var parent typesystem.Type
+
+	switch t := t.(type) {
+	case *typesystem.ForeignType:
+		parent = t.Type.(*typesystem.Interface).Parent
+	case *typesystem.Interface:
+		parent = t.Parent
+	default:
+		panic("invalid type")
+	}
+
+	w.Indent()
+
+	// parent is always the base class
+	fmt.Fprintf(w, "%s: *%s,\n", typesystem.UnderlyingType(parent).GoType(), baseClassIdentifier)
+
+	w.Unindent()
+
+	fmt.Fprintf(w, "},\n")
 }
