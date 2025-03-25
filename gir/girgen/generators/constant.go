@@ -53,13 +53,13 @@ func GenerateConstant(gen FileGeneratorWriter, constant *gir.Constant) bool {
 }
 
 type ConstantGenerator struct {
-	Doc Generator
+	Doc SubGenerator
 
 	*typesystem.Constant
 }
 
 func (g *ConstantGenerator) Generate(w *file.Writer) {
-	g.Doc.Generate(w)
+	g.Doc.Generate(w.Go())
 
 	fmt.Fprintf(w.Go(), "const %s = %s\n", g.GoIndentifier(), g.GoValue)
 }

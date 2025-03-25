@@ -62,13 +62,13 @@ func GenerateAlias(gen FileGeneratorWriter, alias *gir.Alias) bool {
 }
 
 type AliasGenerator struct {
-	Doc Generator
+	Doc SubGenerator
 
 	*typesystem.Alias
 }
 
 func (g *AliasGenerator) Generate(w *file.Writer) {
-	g.Doc.Generate(w)
+	g.Doc.Generate(w.Go())
 
 	// TODO: imports of foreign type namespaces
 

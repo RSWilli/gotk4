@@ -14,15 +14,15 @@ type GoDocGenerator struct {
 	GIRDoc    typesystem.Doc
 }
 
-func (docg *GoDocGenerator) Generate(w *file.Writer) {
+func (docg *GoDocGenerator) Generate(w file.CodeWriter) {
 	// scan the lines of the comment and prefix each line with "// "
 	r := strings.NewReader(docg.DocString)
 	scanner := bufio.NewScanner(r) // scan lines
 
 	for scanner.Scan() {
-		w.Go().Write([]byte("// "))
-		w.Go().Write(scanner.Bytes())
-		w.Go().Write([]byte("\n"))
+		w.Write([]byte("// "))
+		w.Write(scanner.Bytes())
+		w.Write([]byte("\n"))
 	}
 
 	var zerodoc typesystem.Doc
@@ -31,23 +31,23 @@ func (docg *GoDocGenerator) Generate(w *file.Writer) {
 		return
 	}
 
-	w.Go().Write([]byte("//\n"))
+	w.Write([]byte("//\n"))
 
 	// scan the lines of the comment and prefix each line with "//\t" to signify a quote/code example
 	r = strings.NewReader(docg.GIRDoc.Doc)
 	scanner = bufio.NewScanner(r) // scan lines
 
 	for scanner.Scan() {
-		w.Go().Write([]byte("//\t"))
-		w.Go().Write(scanner.Bytes())
-		w.Go().Write([]byte("\n"))
+		w.Write([]byte("//\t"))
+		w.Write(scanner.Bytes())
+		w.Write([]byte("\n"))
 	}
 
 	if docg.GIRDoc.Deprecated {
-		w.Go().Write([]byte("//\n"))
-		w.Go().Write([]byte("// Deprecated: "))
+		w.Write([]byte("//\n"))
+		w.Write([]byte("// Deprecated: "))
 		if docg.GIRDoc.DeprecatedVersion != "" {
-			fmt.Fprintf(w.Go(), "(since %s) ", docg.GIRDoc.DeprecatedVersion)
+			fmt.Fprintf(w, "(since %s) ", docg.GIRDoc.DeprecatedVersion)
 		}
 
 		r := strings.NewReader(docg.GIRDoc.DocDeprecated)
@@ -55,12 +55,12 @@ func (docg *GoDocGenerator) Generate(w *file.Writer) {
 
 		scanner.Scan() // initial deprecated line is already prefied
 
-		fmt.Fprintf(w.Go(), "%s\n", scanner.Bytes())
+		fmt.Fprintf(w, "%s\n", scanner.Bytes())
 
 		for scanner.Scan() {
-			w.Go().Write([]byte("// "))
-			w.Go().Write(scanner.Bytes())
-			w.Go().Write([]byte("\n"))
+			w.Write([]byte("// "))
+			w.Write(scanner.Bytes())
+			w.Write([]byte("\n"))
 		}
 	}
 }

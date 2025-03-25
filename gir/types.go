@@ -236,19 +236,16 @@ func (v Version) String() string {
 	return fmt.Sprintf("%d.%d.%d", v.Major, v.Minor, v.Patch)
 }
 
-// Lte implements the less than or equals relation
-func (v Version) Lte(other Version) bool {
-	if v.Major > other.Major {
-		return false
+// Less implements the less than relation
+func (v Version) Less(other Version) bool {
+	if v.Major < other.Major {
+		return true
 	}
-	if v.Minor > other.Minor {
-		return false
-	}
-	if v.Patch > other.Patch {
-		return false
+	if v.Minor < other.Minor {
+		return true
 	}
 
-	return true
+	return v.Patch < other.Patch
 }
 
 // UnmarshalText implements encoding.TextUnmarshaler.

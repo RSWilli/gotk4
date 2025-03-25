@@ -160,7 +160,7 @@ func GenerateBitfield(gen FileGeneratorWriter, bitfield *gir.Bitfield) bool {
 }
 
 type BitfieldMember struct {
-	Doc Generator
+	Doc SubGenerator
 
 	*typesystem.Member
 }
@@ -175,7 +175,7 @@ func bits(v string) string {
 }
 
 type BitfieldGenerator struct {
-	Doc Generator
+	Doc SubGenerator
 
 	*typesystem.Bitfield
 
@@ -187,14 +187,14 @@ type BitfieldGenerator struct {
 }
 
 func (g *BitfieldGenerator) Generate(w *file.Writer) {
-	g.Doc.Generate(w)
+	g.Doc.Generate(w.Go())
 
 	fmt.Fprintf(w.Go(), "type %s C.gint\n\n", g.GoType())
 
 	fmt.Fprintln(w.Go(), "const (")
 	w.Go().Indent()
 	for _, m := range g.Members {
-		m.Doc.Generate(w)
+		m.Doc.Generate(w.Go())
 		fmt.Fprintf(w.Go(), "%s %s = %s\n", m.GoIndentifier(), g.GoType(), m.Value)
 	}
 	w.Go().Unindent()

@@ -6,6 +6,10 @@ type Generator interface {
 	Generate(*file.Writer)
 }
 
+type SubGenerator interface {
+	Generate(file.CodeWriter)
+}
+
 type GeneratorList []Generator
 
 var _ Generator = GeneratorList{}

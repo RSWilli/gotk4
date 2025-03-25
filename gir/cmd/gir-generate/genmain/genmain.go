@@ -183,6 +183,12 @@ func Generate(repos gir.Repositories, data Data) {
 
 	tsCfg := typesystem.Config{
 		Namespaces: map[string]typesystem.NamespaceConfig{
+			"cairo-1": {
+				Ignored: true, // FIXME: manually implemented
+			},
+			"Atspi-2": {
+				Ignored: true, // Missing AtspiDevice
+			},
 			"GLib-2": {
 				MinVersion: "2.80",
 				ManualTypes: []typesystem.Type{
@@ -259,7 +265,7 @@ func Generate(repos gir.Repositories, data Data) {
 					// 	},
 					// },
 				},
-				Ignored: []typesystem.IgnoreFunc{
+				IgnoredDefinitions: []typesystem.IgnoreFunc{
 					// manually implemented, but hidden from the user
 					typesystem.IgnoreMatching(typesystem.GIRRecordPattern("ParamSpec")),
 				},

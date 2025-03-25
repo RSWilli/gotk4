@@ -93,27 +93,27 @@ func DeclareClass(e *env, v gir.Class) *Class {
 		gir: v,
 	}
 
+	return c
+}
+
+func (c *Class) resolve(e *env) bool {
 	if c.gir.GLibTypeStruct != "" {
 		typeStructType := e.findTypeByGIRName(c.gir.GLibTypeStruct)
 
 		if typeStructType == nil {
-			return nil
+			return false
 		}
 
 		typeStruct, ok := typeStructType.(*Record)
 
 		if !ok {
 			log.Printf("type struct for %s is not a record but instead %T", c.gir.Name, typeStructType)
-			return nil
+			return false
 		}
 
 		c.TypeStruct = typeStruct
 	}
 
-	return c
-}
-
-func (c *Class) resolve(e *env) bool {
 	parent := e.findTypeByGIRName(c.gir.Parent)
 
 	if parent == nil {
@@ -180,7 +180,7 @@ func (c *Class) declareNested(e *env) {
 		}
 
 		if v.Name == "ref" || v.Name == "unref" {
-			// reffing will be done on the parent GObject, and we don't want such methods generated
+			// reffing will be done on the base GObject, and we don't want such methods generated
 			// because they will cause mem leaks
 			continue
 		}

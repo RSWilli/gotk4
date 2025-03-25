@@ -39,6 +39,11 @@ type Namespace struct {
 }
 
 func (reg *Registry) newNamespace(cfg NamespaceConfig, ns *namespaceWithIncludes) *Namespace {
+	if cfg.Ignored {
+		log.Printf("ignoring ignored namespace %s", ns.versionedName)
+		return nil
+	}
+
 	namespace := &Namespace{
 		v:        ns.versionedName,
 		Name:     ns.Name,

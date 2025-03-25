@@ -56,6 +56,7 @@ func (e *env) skip(parent Type, anygir any) bool {
 	for _, m := range e.namespace.Manual {
 		if m.GIRName() == name {
 			log.Printf("skipping %s %s because it is manually implemented", kind, name)
+			return true
 		}
 	}
 
@@ -86,7 +87,7 @@ func (e *env) ingoreDeprecated(name string, kind GIRKind, anygir any) bool {
 
 	attrs := gt.GetInfoAttrs()
 
-	if attrs.Deprecated && attrs.DeprecatedVersion.Lte(e.minVersion) {
+	if attrs.Deprecated && attrs.DeprecatedVersion.Less(e.minVersion) {
 		log.Printf("skipping %s %s in %s that is deprecated since %s, min allowed version: %s", kind, name, e.namespace.v, attrs.DeprecatedVersion, e.minVersion)
 		return true
 	}

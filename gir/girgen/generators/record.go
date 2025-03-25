@@ -574,7 +574,7 @@ func GenerateCPrimitiveRecord(gen types.FileGenerator, rec *gir.Record) string {
 }
 
 type RecordGenerator struct {
-	Doc               Generator
+	Doc               SubGenerator
 	GenerateMarshaler bool
 
 	*typesystem.Record
@@ -601,7 +601,7 @@ func (g *RecordGenerator) Generate(w *file.Writer) {
 	w.GoImport("unsafe")
 	w.GoImport("runtime")
 
-	g.Doc.Generate(w)
+	g.Doc.Generate(w.Go())
 
 	// TODO: attach a cleanup field here of type runtime.Cleanup, and drop the SetFinalizer for AddCleanup
 	fmt.Fprintf(w.Go(), "type %s struct {\n", g.GoType())

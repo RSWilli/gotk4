@@ -9,7 +9,7 @@ import (
 )
 
 type ClassGenerator struct {
-	Doc Generator
+	Doc SubGenerator
 
 	*typesystem.Class
 
@@ -18,15 +18,14 @@ type ClassGenerator struct {
 	// sub generators:
 	Constructors GeneratorList
 	Functions    GeneratorList
-	Methods      GeneratorList
+	Methods      MethodGeneratorList
 }
 
 func (g *ClassGenerator) Generate(w *file.Writer) {
 	w.GoImportCoreGlib()
 	w.GoImport("unsafe")
-	w.GoImport("runtime")
 
-	g.Doc.Generate(w)
+	g.Doc.Generate(w.Go())
 
 	fmt.Fprintf(w.Go(), "type %s struct {\n", g.GoType())
 	fmt.Fprintf(w.Go(), "\t_ [0]func() // equal guard\n")
@@ -49,9 +48,7 @@ func (g *ClassGenerator) Generate(w *file.Writer) {
 	}
 	fmt.Fprintln(w.Go())
 
-	for _, m := range g.Class.Methods {
-		fmt.Fprintln(w.Go(), m.GoInterfaceDeclaration())
-	}
+	g.Methods.GenerateInterfaceSignatures(w.Go())
 
 	w.Go().Unindent()
 	fmt.Fprintf(w.Go(), "}\n\n")
@@ -141,6 +138,7 @@ func NewClassGenerator(c *typesystem.Class) *ClassGenerator {
 	return g
 }
 
+// wrapClass generates the tree like structure needed to construct the whole struct
 func wrapClass(w file.CodeWriter, t typesystem.Type, baseClassIdentifier string) {
 	parent := typesystem.GetClassParent(t)
 

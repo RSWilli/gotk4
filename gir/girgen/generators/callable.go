@@ -63,16 +63,23 @@ func GeneratePrefixedFunction(gen FileGeneratorWriter, fn *gir.Function, prefix 
 }
 
 type FunctionGenerator struct {
-	Doc Generator
+	Doc SubGenerator
 
 	Converters value.ConverterList
 
 	*typesystem.CallableSignature
 }
 
+// GenerateInterfaceSignature implements MethodGenerator.
+func (m *FunctionGenerator) GenerateInterfaceSignature(w file.CodeWriter) {
+	m.Doc.Generate(w)
+
+	fmt.Fprintln(w, m.GoInterfaceDeclaration())
+}
+
 // Generate implements Generator.
 func (m *FunctionGenerator) Generate(w *file.Writer) {
-	m.Doc.Generate(w)
+	m.Doc.Generate(w.Go())
 
 	fmt.Fprintf(w.Go(), "%s {\n", m.GoSignature())
 

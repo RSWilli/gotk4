@@ -50,7 +50,7 @@ func GenerateCallback(gen FileGeneratorWriter, cb *gir.Callback) bool {
 }
 
 type CallbackGenerator struct {
-	Doc Generator
+	Doc SubGenerator
 
 	*typesystem.Callback
 
@@ -64,7 +64,7 @@ func (c *CallbackGenerator) Generate(w *file.Writer) {
 }
 
 func (c *CallbackGenerator) generateGo(w *file.Writer) {
-	c.Doc.Generate(w)
+	c.Doc.Generate(w.Go())
 
 	// TODO: the caller must declare the extern C function trampoline, because it can be referenced from another package, see _gotk4_glib2_CompareDataFunc
 

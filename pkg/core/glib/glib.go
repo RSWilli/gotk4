@@ -1702,8 +1702,8 @@ func (v *Value) Enum() int {
 }
 
 // Flags is a wrapper around g_value_get_flags().
-func (v *Value) Flags() int {
-	u := int(C.g_value_get_flags(v.native()))
+func (v *Value) Flags() uint {
+	u := uint(C.g_value_get_flags(v.native()))
 	runtime.KeepAlive(v)
 	return u
 }

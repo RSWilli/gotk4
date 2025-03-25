@@ -8,7 +8,7 @@ import (
 )
 
 type InterfaceGenerator struct {
-	Doc Generator
+	Doc SubGenerator
 
 	*typesystem.Interface
 
@@ -20,7 +20,7 @@ type InterfaceGenerator struct {
 	// sub generators:
 	Constructors GeneratorList
 	Functions    GeneratorList
-	Methods      GeneratorList
+	Methods      MethodGeneratorList
 }
 
 func (g *InterfaceGenerator) Generate(w *file.Writer) {
@@ -28,7 +28,7 @@ func (g *InterfaceGenerator) Generate(w *file.Writer) {
 	w.GoImport("unsafe")
 	w.GoImport("runtime")
 
-	g.Doc.Generate(w)
+	g.Doc.Generate(w.Go())
 
 	fmt.Fprintf(w.Go(), "type %s struct {\n", g.GoType())
 	fmt.Fprintf(w.Go(), "\t_ [0]func() // equal guard\n")
@@ -48,10 +48,7 @@ func (g *InterfaceGenerator) Generate(w *file.Writer) {
 	// }
 	// fmt.Fprintln(w.Go())
 
-	for _, m := range g.Interface.Methods {
-		// TODO: godoc, use g.Methods instead and create a custom generator type
-		fmt.Fprintln(w.Go(), m.GoInterfaceDeclaration())
-	}
+	g.Methods.GenerateInterfaceSignatures(w.Go())
 
 	w.Go().Unindent()
 	fmt.Fprintf(w.Go(), "}\n\n")

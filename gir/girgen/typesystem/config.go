@@ -9,11 +9,14 @@ type Config struct {
 }
 
 type NamespaceConfig struct {
+	// Ignored signifies that the whole namespace should be treated as not existing
+	Ignored bool
+
 	// MinVersion declares the minimal version that should be supported in
 	// type resolution. Everything that is deprecated longer than this version will be ignored.
 	MinVersion string
 
-	Ignored []IgnoreFunc
+	IgnoredDefinitions []IgnoreFunc
 
 	// ManualTypes contains the gir name to a manual type override that will be imported instead of generated
 	ManualTypes []Type
@@ -35,7 +38,7 @@ func (c NamespaceConfig) getEnv(namespace *Namespace) *env {
 
 	return &env{
 		minVersion:     v,
-		ignore:         ignoreOr(c.Ignored...),
+		ignore:         ignoreOr(c.IgnoredDefinitions...),
 		namespace:      namespace,
 		compareParams:  nil,
 		compareReturns: nil,

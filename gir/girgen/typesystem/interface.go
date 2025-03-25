@@ -79,26 +79,27 @@ func DeclareInterface(e *env, v gir.Interface) *Interface {
 		gir:                      v,
 	}
 
-	if v.GLibTypeStruct != "" {
-		typeStructType := e.findTypeByGIRName(v.GLibTypeStruct)
+	return i
+}
+
+func (in *Interface) resolve(e *env) bool {
+	if in.gir.GLibTypeStruct != "" {
+		typeStructType := e.findTypeByGIRName(in.gir.GLibTypeStruct)
 
 		if typeStructType == nil {
-			return nil
+			return false
 		}
 
 		typeStruct, ok := typeStructType.(*Record)
 
 		if !ok {
-			return nil
+			log.Printf("type struct for %s is not a record but instead %T", in.gir.Name, typeStructType)
+			return false
 		}
 
-		i.TypeStruct = typeStruct
+		in.TypeStruct = typeStruct
 	}
 
-	return i
-}
-
-func (in *Interface) resolve(e *env) bool {
 	parent := e.findTypeByGIRName("GObject.Object")
 
 	if parent == nil {

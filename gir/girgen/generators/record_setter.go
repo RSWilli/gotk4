@@ -9,7 +9,7 @@ import (
 )
 
 type RecordFieldSetterGenerator struct {
-	Doc Generator
+	Doc SubGenerator
 
 	ReceiverName string
 
@@ -18,7 +18,7 @@ type RecordFieldSetterGenerator struct {
 
 // Generate implements Generator.
 func (s *RecordFieldSetterGenerator) Generate(w *file.Writer) {
-	s.Doc.Generate(w)
+	s.Doc.Generate(w.Go())
 
 	// TODO: simplify, this is only for legacy compat, can be maybe be simplified:
 

@@ -172,13 +172,13 @@ func GenerateEnum(gen FileGeneratorWriter, enum *gir.Enum) bool {
 }
 
 type EnumMember struct {
-	Doc Generator
+	Doc SubGenerator
 
 	*typesystem.Member
 }
 
 type EnumGenerator struct {
-	Doc Generator
+	Doc SubGenerator
 
 	*typesystem.Enum
 
@@ -190,13 +190,13 @@ type EnumGenerator struct {
 func (g *EnumGenerator) Generate(w *file.Writer) {
 	// TODO: use gencontext Lookup
 
-	g.Doc.Generate(w)
+	g.Doc.Generate(w.Go())
 
 	fmt.Fprintf(w.Go(), "type %s C.int\n\nconst (\n", g.GoType())
 
 	w.Go().Indent()
 	for _, member := range g.Members {
-		member.Doc.Generate(w)
+		member.Doc.Generate(w.Go())
 
 		fmt.Fprintf(w.Go(), "%s %s = %s\n", member.GoIndentifier(), g.GoType(), member.Value)
 	}
