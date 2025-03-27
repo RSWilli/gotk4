@@ -22,7 +22,6 @@ type ClassGenerator struct {
 }
 
 func (g *ClassGenerator) Generate(w *file.Writer) {
-	w.GoImportCoreGlib()
 	w.GoImport("unsafe")
 
 	g.Doc.Generate(w.Go())

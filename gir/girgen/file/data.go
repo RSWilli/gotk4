@@ -36,15 +36,10 @@ func (d *filedata) CInclude(header string) {
 
 var ImportAnonymous = "_"
 
-var coreglibAlias = "coreglib"
 var coreglibPkg = "github.com/diamondburned/gotk4/pkg/core"
 
 func (d *filedata) GoImportCore(pkg string) {
 	d.GoImport(coreglibPkg + "/" + pkg)
-}
-
-func (d *filedata) GoImportCoreGlib() {
-	d.GoImportAliased(coreglibPkg+"/glib", coreglibAlias)
 }
 
 func (d *filedata) GoImport(pkg string) {

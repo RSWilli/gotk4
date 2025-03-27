@@ -24,7 +24,6 @@ type InterfaceGenerator struct {
 }
 
 func (g *InterfaceGenerator) Generate(w *file.Writer) {
-	w.GoImportCoreGlib()
 	w.GoImport("unsafe")
 	w.GoImport("runtime")
 

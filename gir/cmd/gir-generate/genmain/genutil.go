@@ -4,6 +4,7 @@ import (
 	"context"
 	"fmt"
 	"go/format"
+	"io/fs"
 	"log"
 	"os"
 	"path"
@@ -356,6 +357,65 @@ func EnsureDirectory(path string, expects ...[]string) error {
 
 	for name := range wantedFiles {
 		return fmt.Errorf("missing file/folder %q", name)
+	}
+
+	return nil
+}
+
+// CleanGeneratedFiles removes all *.gen.go files from a given directory and then removes empty
+// directories
+func CleanGeneratedFiles(path string) error {
+	abspath, err := filepath.Abs(path)
+
+	if err != nil {
+		return err
+	}
+
+	dirfs := os.DirFS(abspath)
+
+	genfiles, err := fs.Glob(dirfs, "**/*.gen.go")
+
+	if err != nil {
+		return err
+	}
+
+	for _, f := range genfiles {
+		abs := filepath.Join(abspath, f)
+		err := os.Remove(abs)
+
+		if err != nil {
+			return err
+		}
+	}
+
+	entries, err := os.ReadDir(abspath)
+
+	if err != nil {
+		return err
+	}
+
+	for _, entry := range entries {
+		if !entry.IsDir() {
+			continue
+		}
+
+		subdirpath := filepath.Join(abspath, entry.Name())
+
+		subdirEntries, err := os.ReadDir(subdirpath)
+
+		if err != nil {
+			return err
+		}
+
+		if len(subdirEntries) > 0 {
+			continue
+		}
+
+		err = os.Remove(subdirpath)
+
+		if err != nil {
+			return err
+		}
 	}
 
 	return nil

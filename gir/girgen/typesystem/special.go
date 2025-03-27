@@ -1,14 +1,32 @@
 package typesystem
 
-type Error struct {
+type GoStdLibType struct {
 	BaseType
+
+	StdPackages []string
 }
 
-var TypeError = &Error{
+// StdImports implements StdLibType.
+func (g *GoStdLibType) StdImports() []string {
+	return g.StdPackages
+}
+
+var Gpointer = &GoStdLibType{
 	BaseType: BaseType{
-		GirName: "GLib.Error", // this doesn't resolve correctly from the GLib namespace
-		GoTyp:   "error",
-		CGoTyp:  "**C.GError",
-		CTyp:    "GError**",
+		GirName: "gpointer",
+		CTyp:    "gpointer",
+		CGoTyp:  "C.gpointer",
+		GoTyp:   "unsafe.Pointer",
 	},
+	StdPackages: []string{"unsafe"},
+}
+
+func IsGoStdLibType(t Type) bool {
+	switch t.(type) {
+	case *GoStdLibType:
+		return true
+	default:
+		// should we handle pointer types?
+		return false
+	}
 }

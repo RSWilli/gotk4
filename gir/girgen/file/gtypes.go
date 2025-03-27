@@ -1,10 +1,11 @@
 package file
 
 import (
-	"bytes"
 	"fmt"
 	"io"
+	"text/tabwriter"
 
+	"github.com/diamondburned/gotk4/gir/girgen/file/internal"
 	"github.com/diamondburned/gotk4/gir/girgen/typesystem"
 )
 
@@ -19,33 +20,36 @@ func (t gType) name() string {
 }
 
 func (ts gTypes) reader() io.Reader {
-	maxlen := 0
+	var block internal.CodeWriter
+
+	fmt.Fprintln(&block, "// GType values.")
+	fmt.Fprintln(&block, "var (")
+	block.Indent()
+
+	decls := tabwriter.NewWriter(&block, 0, 0, 1, ' ', 0)
+	for _, t := range ts {
+		fmt.Fprintf(decls, "%s\t= glib.Type(C.%s())\n", t.name(), t.GLibGetType())
+	}
+	decls.Flush()
+	block.Unindent()
+
+	fmt.Fprintln(&block, ")")
+
+	fmt.Fprintln(&block)
+	fmt.Fprintln(&block, "func init() {")
+	block.Indent()
+	fmt.Fprintln(&block, "glib.RegisterGValueMarshalers([]glib.TypeMarshaler{")
+	block.Indent()
 
 	for _, t := range ts {
-		maxlen = max(len(t.name()), maxlen)
+		fmt.Fprintf(&block, "glib.TypeMarshaler{T: %s, F: %s},\n", t.name(), t.MarshalFuncName())
 	}
 
-	var buf bytes.Buffer
+	block.Unindent()
 
-	fmt.Fprintln(&buf, "// GType values.")
-	fmt.Fprintln(&buf, "var (")
+	fmt.Fprintln(&block, "})")
+	block.Unindent()
+	fmt.Fprintln(&block, "}")
 
-	for _, t := range ts {
-		fmt.Fprintf(&buf, "\t%-*s = coreglib.Type(C.%s())\n", maxlen, t.name(), t.GLibGetType())
-	}
-
-	fmt.Fprintln(&buf, ")")
-
-	fmt.Fprintln(&buf)
-	fmt.Fprintln(&buf, "func init() {")
-	fmt.Fprintln(&buf, "\tcoreglib.RegisterGValueMarshalers([]coreglib.TypeMarshaler{")
-
-	for _, t := range ts {
-		fmt.Fprintf(&buf, "\t\tcoreglib.TypeMarshaler{T: %s, F: %s},\n", t.name(), t.MarshalFuncName())
-	}
-
-	fmt.Fprintln(&buf, "\t})")
-	fmt.Fprintln(&buf, "}")
-
-	return &buf
+	return &block
 }

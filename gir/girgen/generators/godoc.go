@@ -129,9 +129,9 @@ func paramDocListItem(p *typesystem.Param) string {
 		docStr += " (nullable)"
 	}
 
-	if p.Optional {
-		docStr = " (optional)"
-	}
+	// if p.Optional { // out params may be optional, but we always use them as go returns
+	// 	docStr = " (optional)"
+	// }
 
 	if p.Doc.Doc != "" {
 		docStr += ": "

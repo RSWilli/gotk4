@@ -1,7 +1,6 @@
 package typesystem
 
 import (
-	"fmt"
 	"strings"
 
 	"github.com/diamondburned/gotk4/gir"
@@ -139,33 +138,4 @@ func DeclareConstructor(e *env, parent Type, v gir.Constructor) *CallableSignatu
 		},
 		Parameters: params,
 	}
-}
-
-// GoSignature returns a string of the go function signature.
-func (m *CallableSignature) GoSignature() string {
-	var recv string
-	if m.InstanceParam != nil {
-		recv = fmt.Sprintf(" (%s %s)", m.InstanceParam.GoName, m.InstanceParam.Type.GoType())
-	}
-
-	var ret string
-	if len(m.GoReturns) == 1 {
-		ret = " " + m.GoReturns[0].Type.GoType()
-	} else if len(m.GoReturns) > 1 {
-		ret = "(" + m.GoReturns.GoTypes() + ")"
-	}
-
-	return fmt.Sprintf("func%s %s(%s)%s", recv, m.GoIndentifier(), m.GoParameters.GoDeclarations(), ret)
-}
-
-// GoSignature returns a string of the go function signature.
-func (m *CallableSignature) GoInterfaceDeclaration() string {
-	var ret string
-	if len(m.GoReturns) == 1 {
-		ret = " " + m.GoReturns[0].Type.GoType()
-	} else if len(m.GoReturns) > 1 {
-		ret = "(" + m.GoReturns.GoTypes() + ")"
-	}
-
-	return fmt.Sprintf("%s(%s)%s", m.GoIndentifier(), m.GoParameters.GoTypes(), ret)
 }

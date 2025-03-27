@@ -81,9 +81,9 @@ func cleanCType(ctype string) string {
 	return ctype
 }
 
-// decreasePointers removes one pointer from the ctype of the [gir.AnyType], but doesn't modify the original
+// decreaseAnyTypePointers removes one pointer from the ctype of the [gir.AnyType], but doesn't modify the original
 // value
-func decreasePointers(t gir.AnyType) gir.AnyType {
+func decreaseAnyTypePointers(t gir.AnyType) gir.AnyType {
 	var newType *gir.Type
 	var newArray *gir.Array
 

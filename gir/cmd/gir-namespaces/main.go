@@ -27,9 +27,9 @@ func main() {
 			log.Fatalln("failed to parse repository file", file)
 		}
 
-		fmt.Println(file, "v"+repo.Version)
+		fmt.Println(file, "v"+repo.Version.String())
 		for _, namespace := range repo.Namespaces {
-			fmt.Println(" ", namespace.Name, "v"+namespace.Version)
+			fmt.Println(" ", namespace.Name, "v"+namespace.Version.String())
 		}
 	}
 }

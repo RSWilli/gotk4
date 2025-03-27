@@ -38,11 +38,7 @@ type Namespace struct {
 	Functions []*CallableSignature
 }
 
-func (reg *Registry) newNamespace(cfg NamespaceConfig, ns *namespaceWithIncludes) *Namespace {
-	if cfg.Ignored {
-		log.Printf("ignoring ignored namespace %s", ns.versionedName)
-		return nil
-	}
+func (reg *Registry) newNamespace(cfg Config, ns *namespaceWithIncludes) *Namespace {
 
 	namespace := &Namespace{
 		v:        ns.versionedName,
@@ -70,9 +66,14 @@ func (reg *Registry) newNamespace(cfg NamespaceConfig, ns *namespaceWithIncludes
 		namespace.Packages = append(namespace.Packages, pkg.Name)
 	}
 
-	e := cfg.getEnv(namespace)
+	e := cfg.getNamespaceEnv(namespace)
 
-	for _, t := range cfg.ManualTypes {
+	if e == nil {
+		log.Printf("ignoring ignored namespace %s", ns.versionedName)
+		return nil
+	}
+
+	for _, t := range e.nsCfg.ManualTypes {
 		namespace.Manual = append(namespace.Manual, t)
 	}
 

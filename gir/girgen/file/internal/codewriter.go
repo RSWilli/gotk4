@@ -22,16 +22,11 @@ func (p *CodeWriter) Write(b []byte) (n int, err error) {
 	p.hasWritten = true
 
 	for _, line := range lines {
-		if len(line) == 0 {
-			// don't print trailing tabs, and also keep the value of atLineStart in this
-			// case for the next line that actually matters
-			continue
-		}
-
-		if p.atLineStart && p.indentLevel > 0 {
+		// if the line is shorter than on byte, then it's empty
+		if p.atLineStart && p.indentLevel > 0 && len(line) > 1 {
 			indent := strings.Repeat(tabStr, p.indentLevel)
-			written, err := p.buf.Write([]byte(indent))
-			totalWritten += written
+			// must not count the bytes we write additionally
+			_, err := p.buf.Write([]byte(indent))
 			if err != nil {
 				return totalWritten, err
 			}
@@ -45,7 +40,7 @@ func (p *CodeWriter) Write(b []byte) (n int, err error) {
 			return totalWritten, err
 		}
 
-		p.atLineStart = p.atLineStart || line[len(line)-1] == '\n'
+		p.atLineStart = p.atLineStart || len(line) > 0 && line[len(line)-1] == '\n'
 	}
 
 	return totalWritten, nil

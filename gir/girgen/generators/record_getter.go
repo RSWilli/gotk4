@@ -24,7 +24,7 @@ func (g *RecordFieldGetterGenerator) Generate(w *file.Writer) {
 
 	fmt.Fprintf(w.Go(), "func (%s *%s) %s() %s {\n", g.ReceiverName, g.Parent.GoType(), g.GoGetterName, g.Type.GoType())
 	fmt.Fprintf(w.Go(), "\tvalptr := &%s.native.%s\n", g.ReceiverName, g.CGoIndentifier())
-	fmt.Fprintf(w.Go(), "\tvar _v %s // out\n", g.Type.GoType())
+	fmt.Fprintf(w.Go(), "\tvar _v %s\n", g.Type.GoType())
 	fmt.Fprintf(w.Go(), "\t_v = %s(*valptr)\n", g.Type.GoType())
 	fmt.Fprintf(w.Go(), "\treturn _v\n")
 	fmt.Fprintf(w.Go(), "}\n\n")

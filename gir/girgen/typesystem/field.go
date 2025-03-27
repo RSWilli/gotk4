@@ -57,7 +57,7 @@ func NewField(e *env, parent Type, v gir.Field) *Field {
 
 		if v.Writable {
 			// TODO: check if this setter collides with any method
-			getterName = strcases.SnakeToGo(true, "set_"+v.Name)
+			setterName = strcases.SnakeToGo(true, "set_"+v.Name)
 		}
 	}
 

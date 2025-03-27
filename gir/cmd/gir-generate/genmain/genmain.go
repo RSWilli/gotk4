@@ -164,7 +164,7 @@ func Run(data Data) {
 
 // Generate generates the packages based on the given data.
 func Generate(repos gir.Repositories, data Data) {
-	err := CleanDirectory(Output, data.PkgExceptions)
+	err := CleanGeneratedFiles(Output)
 
 	if err != nil {
 		log.Fatalln("failed to clean output directory:", err)
@@ -182,6 +182,19 @@ func Generate(repos gir.Repositories, data Data) {
 	types.ApplyPreprocessors(repos, data.Preprocessors)
 
 	tsCfg := typesystem.Config{
+		Primitives: []typesystem.Type{
+			&typesystem.ForeignType{
+				SourceNamespace: &typesystem.Namespace{GoName: "glib", Version: gir.Version{Major: 2, Minor: 0, Patch: 0}},
+				Type: &typesystem.Primitive{
+					BaseType: typesystem.BaseType{
+						GirName: "GType",
+						CTyp:    "GType",
+						CGoTyp:  "C.GType",
+						GoTyp:   "Type",
+					},
+				},
+			},
+		},
 		Namespaces: map[string]typesystem.NamespaceConfig{
 			"cairo-1": {
 				Ignored: true, // FIXME: manually implemented
@@ -192,19 +205,25 @@ func Generate(repos gir.Repositories, data Data) {
 			"GLib-2": {
 				MinVersion: "2.80",
 				ManualTypes: []typesystem.Type{
-					&typesystem.ForeignType{
-						SourceNamespace: &typesystem.Namespace{GoName: "gbox"},
-						Type: &typesystem.Callback{
-							BaseType: typesystem.BaseType{
-								GirName:       "DestroyNotify",
-								GoTyp:         "DestroyNotify",
-								CGoTyp:        "C.GDestroyNotify",
-								CTyp:          "GDestroyNotify",
-								GlibGetTypeFn: "",
-							},
-							Parameters:     &typesystem.Parameters{},
-							TrampolineName: "callbackDelete",
+					&typesystem.Callback{
+						BaseType: typesystem.BaseType{
+							GirName:       "DestroyNotify",
+							GoTyp:         "DestroyNotify",
+							CGoTyp:        "C.GDestroyNotify",
+							CTyp:          "GDestroyNotify",
+							GlibGetTypeFn: "",
 						},
+						Parameters:     &typesystem.Parameters{},
+						TrampolineName: "callbackDelete",
+					},
+					&typesystem.Record{
+						BaseType: typesystem.BaseType{
+							GirName: "Error",
+							GoTyp:   "error",
+							CGoTyp:  "C.GError",
+							CTyp:    "GError",
+						},
+						// TODO: add
 					},
 				},
 				// Ignored: []typesystem.IgnoreFunc{
@@ -213,46 +232,38 @@ func Generate(repos gir.Repositories, data Data) {
 			},
 			"GObject-2": {
 				ManualTypes: []typesystem.Type{
-					&typesystem.ForeignType{
-						SourceNamespace: &typesystem.Namespace{GoName: "coreglib"},
-						Type: &typesystem.Class{
-							BaseType: typesystem.BaseType{
-								GirName: "Object",
-								GoTyp:   "Object",
-								CTyp:    "GObject",
-								CGoTyp:  "C.GObject",
-							},
-							GoInterfaceName:              "Objector",
-							Doc:                          typesystem.Doc{},
-							GoUnsafeBorrowFunction:       "TODO",
-							GoUnsafeTransferFullFunction: "AssumeOwnership",
-							GoUnsafeTransferNoneFunction: "Take",
-							GoUnsafeToGlibNoneMethod:     "TODO",
-							GoUnsafeToGlibFullMethod:     "TODO",
+					&typesystem.Class{
+						BaseType: typesystem.BaseType{
+							GirName: "Object",
+							GoTyp:   "Object",
+							CTyp:    "GObject",
+							CGoTyp:  "C.GObject",
+						},
+						GoInterfaceName:              "Objector",
+						Doc:                          typesystem.Doc{},
+						GoUnsafeBorrowFunction:       "TODO",
+						GoUnsafeTransferFullFunction: "AssumeOwnership",
+						GoUnsafeTransferNoneFunction: "Take",
+						GoUnsafeToGlibNoneMethod:     "TODO",
+						GoUnsafeToGlibFullMethod:     "TODO",
+					},
+					&typesystem.Record{
+						BaseType: typesystem.BaseType{
+							GirName: "ObjectClass",
+							GoTyp:   "ObjectClass",
+							CTyp:    "GObjectClass",
+							CGoTyp:  "C.GObjectClass",
 						},
 					},
-					&typesystem.ForeignType{
-						SourceNamespace: &typesystem.Namespace{GoName: "coreglib"},
-						Type: &typesystem.Record{
-							BaseType: typesystem.BaseType{
-								GirName: "ObjectClass",
-								GoTyp:   "ObjectClass",
-								CTyp:    "GObjectClass",
-								CGoTyp:  "C.GObjectClass",
-							},
+					&typesystem.Record{
+						BaseType: typesystem.BaseType{
+							GirName: "Value",
+							GoTyp:   "Value",
+							CTyp:    "GValue",
+							CGoTyp:  "C.GValue",
 						},
 					},
-					&typesystem.ForeignType{
-						SourceNamespace: &typesystem.Namespace{GoName: "coreglib"},
-						Type: &typesystem.Record{
-							BaseType: typesystem.BaseType{
-								GirName: "Value",
-								GoTyp:   "Value",
-								CTyp:    "GValue",
-								CGoTyp:  "C.GValue",
-							},
-						},
-					},
+
 					// &typesystem.ForeignType{
 					// 	SourceNamespace: &typesystem.Namespace{GoName: "coreglib"},
 					// 	Type: &typesystem.Class{

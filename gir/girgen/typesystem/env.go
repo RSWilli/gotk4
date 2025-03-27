@@ -12,6 +12,8 @@ import (
 type ParamCompareFunc func(a, b *Param) int
 
 type env struct {
+	cfg       Config
+	nsCfg     NamespaceConfig
 	namespace *Namespace
 
 	minVersion gir.Version
@@ -152,7 +154,7 @@ func (e *env) findTypeByGIRName(t string) Type {
 	}
 
 	if len(parts) == 1 {
-		primitive := findPrimitiveByName(t)
+		primitive := e.findPrimitiveByName(t)
 
 		if primitive != nil {
 			return primitive
@@ -193,4 +195,14 @@ func (e *env) findTypeByGIRName(t string) Type {
 	log.Printf("type %s not found in namespace %s\n", t, e.namespace.v)
 
 	return nil
+}
+
+func (e *env) findPrimitiveByName(t string) Type {
+	for _, additionalPrimitive := range e.cfg.Primitives {
+		if additionalPrimitive.GIRName() == t {
+			return additionalPrimitive
+		}
+	}
+
+	return findBuiltinPrimitiveByName(t)
 }

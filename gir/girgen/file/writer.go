@@ -60,8 +60,6 @@ func (w *Writer) AddCFlag(flag string) {
 }
 
 func (w *Writer) RegisterGType(t typesystem.Type) {
-	w.GoImportCoreGlib()
-
 	w.registeredTypes = append(w.registeredTypes, gType{t})
 }
 

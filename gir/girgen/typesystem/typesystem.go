@@ -1,8 +1,6 @@
 package typesystem
 
 import (
-	"fmt"
-
 	"github.com/diamondburned/gotk4/gir"
 )
 
@@ -26,9 +24,8 @@ func FromRepositories(cfg Config, repos gir.Repositories) *Registry {
 		}
 
 		for _, nsTmp := range repoTmp.namespaces {
-			nsCfg := cfg.Namespaces[fmt.Sprintf("%s-%d", nsTmp.versionedName.name, nsTmp.versionedName.version.Major)]
 
-			ns := r.newNamespace(nsCfg, nsTmp)
+			ns := r.newNamespace(cfg, nsTmp)
 
 			if ns == nil {
 				continue

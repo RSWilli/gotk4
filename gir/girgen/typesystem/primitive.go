@@ -45,18 +45,16 @@ var (
 	Filename = prim("filename", "gchar*", "*C.gchar", "string")
 	Gintptr  = prim("gintptr", "gintptr", "C.gintptr", "uintptr")
 	Guintptr = prim("guintptr", "guintptr", "C.guintptr", "uintptr")
-	Gpointer = prim("gpointer", "gpointer", "C.gpointer", "unsafe.Pointer")
 	Glong    = prim("glong", "glong", "C.glong", "int32")
 	Gulong   = prim("gulong", "gulong", "C.gulong", "uint32")
 	Time_t   = prim("time_t", "time_t", "C.time_t", "uint64") // TODO: check go type
-	GType    = prim("GType", "GType", "C.GType", "GType")     // TODO: move to coreglib.Type
 	Pid_t    = prim("pid_t", "pid_t", "C.pid_t", "int")       // process ids
 	Ino_t    = prim("ino_t", "ino_t", "C.ino_t", "uint")      // file serial ids
 	Uid_t    = prim("uid_t", "uid_t", "C.uid_t", "uint")      // user ids, may be signed on some platforms
 	Gid_t    = prim("gid_t", "gid_t", "C.gid_t", "uint")      // group ids, may be signed on some platforms
 )
 
-var Primitives = []*Primitive{
+var Primitives = []Type{
 	Guint,
 	Guint8,
 	Guint16,
@@ -95,12 +93,12 @@ var Primitives = []*Primitive{
 
 	Time_t,
 
-	GType,
-
 	Pid_t,
 	Ino_t,
 	Uid_t,
 	Gid_t,
+
+	Void,
 }
 
 type VoidType struct {
@@ -116,11 +114,7 @@ var Void = &VoidType{
 	},
 }
 
-func findPrimitiveByName(girname string) Type {
-	if girname == Void.GIRName() {
-		return Void
-	}
-
+func findBuiltinPrimitiveByName(girname string) Type {
 	for _, p := range Primitives {
 		if p.GIRName() == girname {
 			return p

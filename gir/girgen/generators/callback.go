@@ -8,7 +8,6 @@ import (
 	"github.com/diamondburned/gotk4/gir"
 	"github.com/diamondburned/gotk4/gir/girgen/file"
 	"github.com/diamondburned/gotk4/gir/girgen/generators/callback"
-	"github.com/diamondburned/gotk4/gir/girgen/generators/value"
 	"github.com/diamondburned/gotk4/gir/girgen/gotmpl"
 	"github.com/diamondburned/gotk4/gir/girgen/typesystem"
 )
@@ -54,7 +53,7 @@ type CallbackGenerator struct {
 
 	*typesystem.Callback
 
-	Converters value.ConverterList
+	Converters []callback.Converter
 }
 
 // Generate implements Generator.
@@ -89,7 +88,11 @@ func (c *CallbackGenerator) generateExport(w *file.Writer) {
 		cret = fmt.Sprintf(" (%s %s)", c.CReturn.CName, c.CReturn.Type.CGoType())
 	}
 
-	fmt.Fprintf(w.Exported.Go(), "func %s(%s)%s {\n", c.TrampolineName, c.CParameters.CGoDeclarations(), cret)
+	// TODO: the out params here are missing a pointer because it was stripped in the type resolution
+
+	fmt.Fprintf(w.Exported.Go(), "func %s(%s)%s {\n", c.TrampolineName, c.CParameters().CGoDeclarations(), cret)
+
+	w.Exported.Go().Indent()
 
 	var secInputPre bytes.Buffer
 	var secInputConv bytes.Buffer
@@ -101,12 +104,12 @@ func (c *CallbackGenerator) generateExport(w *file.Writer) {
 	goReturns := c.GoReturns.GoIdentifiers()
 
 	if goReturns == "" {
-		fmt.Fprintf(&secFnCall, "\tfn(%s)\n", c.GoParameters.GoIdentifiers())
+		fmt.Fprintf(&secFnCall, "fn(%s)\n", c.GoParameters.GoIdentifiers())
 	} else {
-		fmt.Fprintf(&secFnCall, "\t%s := fn(%s)\n", goReturns, c.GoParameters.GoIdentifiers())
+		fmt.Fprintf(&secFnCall, "%s := fn(%s)\n", goReturns, c.GoParameters.GoIdentifiers())
 	}
 	if c.CReturn != nil {
-		fmt.Fprintf(&secReturn, "\treturn %s\n", c.CReturn.CName)
+		fmt.Fprintf(&secReturn, "return %s\n", c.CReturn.CName)
 	}
 
 	// generate all value conversions:
@@ -131,6 +134,8 @@ func (c *CallbackGenerator) generateExport(w *file.Writer) {
 	// write the grouped sections:
 	io.Copy(w.Exported.Go(), io.MultiReader(&secInputPre, &secInputConv, &secFnCall, &secOutputPre, &secOutputConv, &secReturn))
 
+	w.Exported.Go().Unindent()
+
 	fmt.Fprintln(w.Exported.Go(), "}")
 	fmt.Fprintln(w.Exported.Go())
 }
@@ -144,7 +149,7 @@ func NewCallbackGenerator(cb *typesystem.Callback) *CallbackGenerator {
 		Doc:      NewTypeGoDocGenerator(cb),
 		Callback: cb,
 
-		Converters: make(value.ConverterList, 0), // TODO: convert
+		Converters: make([]callback.Converter, 0), // TODO: convert
 	}
 
 	return g
