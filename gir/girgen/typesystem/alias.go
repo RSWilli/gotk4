@@ -43,6 +43,8 @@ func DeclareAlias(e *env, v gir.Alias) *Alias {
 }
 
 func (a *Alias) resolve(e *env) bool {
+	e = e.sub("alias", a.gir.Type)
+
 	subtype := e.findType(&a.gir.Type)
 
 	if subtype == nil {

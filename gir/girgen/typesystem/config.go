@@ -2,6 +2,7 @@ package typesystem
 
 import (
 	"fmt"
+	"log/slog"
 
 	"github.com/diamondburned/gotk4/gir"
 )
@@ -57,5 +58,6 @@ func (cfg Config) getNamespaceEnv(namespace *Namespace) *env {
 		namespace:      namespace,
 		compareParams:  nil,
 		compareReturns: nil,
+		logger:         slog.Default().With(slog.String("namespace", namespace.v.String())),
 	}
 }

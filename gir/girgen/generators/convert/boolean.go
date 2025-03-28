@@ -1,0 +1,45 @@
+package convert
+
+import (
+	"fmt"
+
+	"github.com/diamondburned/gotk4/gir/girgen/file"
+	"github.com/diamondburned/gotk4/gir/girgen/typesystem"
+)
+
+type CToGoBooleanConverter struct {
+	Param *typesystem.Param
+}
+
+// Convert implements Converter.
+func (c *CToGoBooleanConverter) Convert(w file.CodeWriter) {
+	fmt.Fprintf(w, "if %s != 0 {\n", c.Param.CName)
+	fmt.Fprintf(w, "\t%s = true\n", c.Param.GoName)
+	fmt.Fprintf(w, "}\n")
+}
+
+// Metadata implements Converter.
+func (c *CToGoBooleanConverter) Metadata() string {
+	return c.Param.Direction
+}
+
+var _ Converter = (*CToGoBooleanConverter)(nil)
+
+// GoToCBooleanConverter is needed because go's true differs from c's true
+type GoToCBooleanConverter struct {
+	Param *typesystem.Param
+}
+
+// Convert implements Converter.
+func (c *GoToCBooleanConverter) Convert(w file.CodeWriter) {
+	fmt.Fprintf(w, "if %s {\n", c.Param.GoName)
+	fmt.Fprintf(w, "\t%s = C.TRUE\n", c.Param.CName)
+	fmt.Fprintf(w, "}\n")
+}
+
+// Metadata implements Converter.
+func (c *GoToCBooleanConverter) Metadata() string {
+	return c.Param.Direction
+}
+
+var _ Converter = (*GoToCBooleanConverter)(nil)

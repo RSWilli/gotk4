@@ -594,9 +594,7 @@ func (g *RecordGenerator) Generate(w *file.Writer) {
 		panic("cannot generate record without an unref method")
 	}
 
-	// Need this for g_value_get_boxed, TODO: where?
-	w.AddPackage("glib-2.0")
-	w.CInclude("glib-object.h")
+	// TODO: import gobject for the marshaler
 
 	w.GoImport("unsafe")
 	w.GoImport("runtime")
@@ -616,13 +614,13 @@ func (g *RecordGenerator) Generate(w *file.Writer) {
 	if g.GenerateMarshaler {
 		w.RegisterGType(g)
 		fmt.Fprintf(w.Go(), "func %s(p uintptr) (interface{}, error) {\n", g.MarshalFuncName())
-		fmt.Fprintf(w.Go(), "\tb := coreglib.ValueFromNative(unsafe.Pointer(p)).Boxed()\n")
-		fmt.Fprintf(w.Go(), "\treturn %s(b), nil\n", g.GoUnsafeBorrowFunction) // TODO: does this need to be a copy?
+		fmt.Fprintf(w.Go(), "\tb := gobject.ValueFromNative(unsafe.Pointer(p)).Boxed()\n")
+		fmt.Fprintf(w.Go(), "\treturn %s(b), nil\n", g.GoUnsafeFromGlibBorrowFunction) // TODO: does this need to be a copy?
 		fmt.Fprintf(w.Go(), "}\n\n")
 	}
 
-	fmt.Fprintf(w.Go(), "// %s is used to convert raw %s pointers to go. This is used by the bindings internally.\n", g.GoUnsafeBorrowFunction, g.CGoType())
-	fmt.Fprintf(w.Go(), "func %s(p unsafe.Pointer) *%s {\n", g.GoUnsafeBorrowFunction, g.GoType())
+	fmt.Fprintf(w.Go(), "// %s is used to convert raw %s pointers to go. This is used by the bindings internally.\n", g.GoUnsafeFromGlibBorrowFunction, g.CGoType())
+	fmt.Fprintf(w.Go(), "func %s(p unsafe.Pointer) *%s {\n", g.GoUnsafeFromGlibBorrowFunction, g.GoType())
 	fmt.Fprintf(w.Go(), "\treturn &%s{&%s{(*%s)(p)}}\n", g.GoType(), g.PrivateGoType, g.CGoType())
 	fmt.Fprintf(w.Go(), "}\n\n")
 
@@ -638,21 +636,51 @@ func (g *RecordGenerator) Generate(w *file.Writer) {
 	}
 
 	if g.CgoRefFunction != "" {
-		fmt.Fprintf(w.Go(), "// %s is used to convert raw %s pointers to go while taking a reference. This is used by the bindings internally.\n", g.GoUnsafeTransferNoneFunction, g.CGoType())
-		fmt.Fprintf(w.Go(), "func %s(p unsafe.Pointer) *%s {\n", g.GoUnsafeTransferNoneFunction, g.GoType())
+		fmt.Fprintf(w.Go(), "// %s is used to convert raw %s pointers to go while taking a reference. This is used by the bindings internally.\n", g.GoUnsafeFromGlibNoneFunction, g.CGoType())
+		fmt.Fprintf(w.Go(), "func %s(p unsafe.Pointer) *%s {\n", g.GoUnsafeFromGlibNoneFunction, g.GoType())
 		fmt.Fprintf(w.Go(), "\t%s(p)\n", g.CgoRefFunction)
-		fmt.Fprintf(w.Go(), "\twrapped := %s(p)\n", g.GoUnsafeTransferNoneFunction)
+		fmt.Fprintf(w.Go(), "\twrapped := %s(p)\n", g.GoUnsafeFromGlibNoneFunction)
 		mkFinalizer()
 		fmt.Fprintf(w.Go(), "\treturn wrapped\n")
 		fmt.Fprintf(w.Go(), "}\n\n")
 	}
 
-	fmt.Fprintf(w.Go(), "// %s is used to convert raw %s pointers to go while taking a reference. This is used by the bindings internally.\n", g.GoUnsafeTransferFullFunction, g.CGoType())
-	fmt.Fprintf(w.Go(), "func %s(p unsafe.Pointer) *%s {\n", g.GoUnsafeTransferFullFunction, g.GoType())
-	fmt.Fprintf(w.Go(), "\twrapped := %s(p)\n", g.GoUnsafeBorrowFunction)
+	fmt.Fprintf(w.Go(), "// %s is used to convert raw %s pointers to go while taking a reference. This is used by the bindings internally.\n", g.GoUnsafeFromGlibFullFunction, g.CGoType())
+	fmt.Fprintf(w.Go(), "func %s(p unsafe.Pointer) *%s {\n", g.GoUnsafeFromGlibFullFunction, g.GoType())
+	fmt.Fprintf(w.Go(), "\twrapped := %s(p)\n", g.GoUnsafeFromGlibBorrowFunction)
 	mkFinalizer()
 	fmt.Fprintf(w.Go(), "\treturn wrapped\n")
 	fmt.Fprintf(w.Go(), "}\n\n")
+
+	if g.CgoRefFunction != "" {
+		fmt.Fprintf(w.Go(), "// %s increases the refcount on the underlying resource. This is used by the bindings internally.\n", g.GoUnsafeRefFunction)
+		fmt.Fprintf(w.Go(), "// \n")
+		fmt.Fprintf(w.Go(), "// When this is called without an associated call to [%s.%s], then [%s] will leak memory.\n", g.GoType(), g.GoUnsafeUnrefFunction, g.GoType())
+		fmt.Fprintf(w.Go(), "func %s(%s *%s) {\n", g.GoUnsafeRefFunction, g.ReceiverName, g.GoType())
+		fmt.Fprintf(w.Go(), "\t%s(%s.native)\n", g.CgoRefFunction, g.ReceiverName)
+		fmt.Fprintf(w.Go(), "}\n\n")
+	}
+
+	fmt.Fprintf(w.Go(), "// %s unrefs/frees the underlying resource. This is used by the bindings internally.\n", g.GoUnsafeUnrefFunction)
+	fmt.Fprintf(w.Go(), "// \n")
+	fmt.Fprintf(w.Go(), "// After this is called, no other method on [%s] is expected to work anymore.\n", g.GoType())
+	fmt.Fprintf(w.Go(), "func %s(%s *%s) {\n", g.GoUnsafeUnrefFunction, g.ReceiverName, g.GoType())
+	fmt.Fprintf(w.Go(), "\t%s(%s.native)\n", g.CgoUnrefFunction, g.ReceiverName)
+	fmt.Fprintf(w.Go(), "}\n\n")
+
+	fmt.Fprintf(w.Go(), "// %s returns the underlying C pointer. This is used by the bindings internally.\n", g.GoUnsafeToGlibNoneFunction)
+	fmt.Fprintf(w.Go(), "func %s(%s *%s) unsafe.Pointer {\n", g.GoUnsafeToGlibNoneFunction, g.ReceiverName, g.GoType())
+	fmt.Fprintf(w.Go(), "\treturn unsafe.Pointer(%s.native)\n", g.ReceiverName)
+	fmt.Fprintf(w.Go(), "}\n\n")
+
+	fmt.Fprintf(w.Go(), "// %s returns the underlying C pointer and gives up ownership.\n", g.GoUnsafeToGlibFullFunction)
+	fmt.Fprintf(w.Go(), "// This is used by the bindings internally.\n")
+	fmt.Fprintf(w.Go(), "func %s(%s *%s) unsafe.Pointer {\n", g.GoUnsafeToGlibFullFunction, g.ReceiverName, g.GoType())
+	fmt.Fprintf(w.Go(), "\truntime.SetFinalizer(%s.%s, nil)\n", g.ReceiverName, g.PrivateGoType)
+	fmt.Fprintf(w.Go(), "\t_p := unsafe.Pointer(%s.native)\n", g.ReceiverName)
+	fmt.Fprintf(w.Go(), "\t%s.native = nil // %s is invalid from here on\n", g.ReceiverName, g.GoType())
+	fmt.Fprintf(w.Go(), "\treturn _p\n")
+	fmt.Fprintf(w.Go(), "}\n")
 
 	GenerateAll(
 		w,
@@ -661,36 +689,6 @@ func (g *RecordGenerator) Generate(w *file.Writer) {
 		g.Setters,
 		g.Methods,
 	)
-
-	if g.CgoRefFunction != "" {
-		fmt.Fprintf(w.Go(), "// %s increases the refcount on the underlying resource. This is used by the bindings internally.\n", g.GoUnsafeRefFunction)
-		fmt.Fprintf(w.Go(), "// \n")
-		fmt.Fprintf(w.Go(), "// When this is called without an associated call to [%s.%s], then [%s] will leak memory.\n", g.GoType(), g.GoUnsafeUnrefFunction, g.GoType())
-		fmt.Fprintf(w.Go(), "func (%s *%s) %s() {\n", g.ReceiverName, g.GoType(), g.GoUnsafeRefFunction)
-		fmt.Fprintf(w.Go(), "\t%s(%s.native)\n", g.CgoRefFunction, g.ReceiverName)
-		fmt.Fprintf(w.Go(), "}\n\n")
-	}
-
-	fmt.Fprintf(w.Go(), "// %s unrefs/frees the underlying resource. This is used by the bindings internally.\n", g.GoUnsafeUnrefFunction)
-	fmt.Fprintf(w.Go(), "// \n")
-	fmt.Fprintf(w.Go(), "// After this is called, no other method on [%s] is expected to work anymore.\n", g.GoType())
-	fmt.Fprintf(w.Go(), "func (%s *%s) %s() {\n", g.ReceiverName, g.GoType(), g.GoUnsafeUnrefFunction)
-	fmt.Fprintf(w.Go(), "\t%s(%s.native)\n", g.CgoUnrefFunction, g.ReceiverName)
-	fmt.Fprintf(w.Go(), "}\n\n")
-
-	fmt.Fprintf(w.Go(), "// %s returns the underlying C pointer. This is used by the bindings internally.\n", g.GoUnsafeToGlibNoneMethod)
-	fmt.Fprintf(w.Go(), "func (%s *%s) %s() unsafe.Pointer {\n", g.ReceiverName, g.GoType(), g.GoUnsafeToGlibNoneMethod)
-	fmt.Fprintf(w.Go(), "\treturn unsafe.Pointer(%s.native)\n", g.ReceiverName)
-	fmt.Fprintf(w.Go(), "}\n\n")
-
-	fmt.Fprintf(w.Go(), "// %s returns the underlying C pointer and gives up ownership.\n", g.GoUnsafeToGlibFullMethod)
-	fmt.Fprintf(w.Go(), "// This is used by the bindings internally.\n")
-	fmt.Fprintf(w.Go(), "func (%s *%s) %s() unsafe.Pointer {\n", g.ReceiverName, g.GoType(), g.GoUnsafeToGlibFullMethod)
-	fmt.Fprintf(w.Go(), "\truntime.SetFinalizer(%s.%s, nil)\n", g.ReceiverName, g.PrivateGoType)
-	fmt.Fprintf(w.Go(), "\t_p := unsafe.Pointer(%s.native)\n", g.ReceiverName)
-	fmt.Fprintf(w.Go(), "\t%s.native = nil // %s is invalid from here on\n", g.ReceiverName, g.GoType())
-	fmt.Fprintf(w.Go(), "\treturn _p\n")
-	fmt.Fprintf(w.Go(), "}\n")
 }
 
 func NewRecordGenerator(r *typesystem.Record) *RecordGenerator {

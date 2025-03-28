@@ -3,7 +3,7 @@ package typesystem
 import (
 	"fmt"
 	"iter"
-	"log"
+	"reflect"
 
 	"github.com/diamondburned/gotk4/gir"
 	"github.com/diamondburned/gotk4/gir/girgen/strcases"
@@ -97,6 +97,8 @@ func DeclareClass(e *env, v gir.Class) *Class {
 }
 
 func (c *Class) resolve(e *env) bool {
+	e = e.sub("class", c.gir.CType)
+
 	if c.gir.GLibTypeStruct != "" {
 		typeStructType := e.findTypeByGIRName(c.gir.GLibTypeStruct)
 
@@ -107,7 +109,7 @@ func (c *Class) resolve(e *env) bool {
 		typeStruct, ok := typeStructType.(*Record)
 
 		if !ok {
-			log.Printf("type struct for %s is not a record but instead %T", c.gir.Name, typeStructType)
+			e.logger.Warn("type struct is not a record", "actual", reflect.TypeOf(typeStructType).String())
 			return false
 		}
 
@@ -121,7 +123,7 @@ func (c *Class) resolve(e *env) bool {
 	}
 
 	if !IsClass(parent) {
-		log.Printf("parent %s of class %s is not a class, but %T instead\n", parent.GIRName(), c.gir.Name, UnderlyingType(parent))
+		e.logger.Warn("parent is not a class", "parent", parent.GIRName(), "actual", reflect.TypeOf(UnderlyingType(parent)).String())
 		return false
 	}
 
@@ -131,7 +133,7 @@ func (c *Class) resolve(e *env) bool {
 		inter := e.findTypeByGIRName(impl.Name)
 
 		if inter == nil {
-			log.Printf("interface %s not found\n", impl.Name)
+			e.logger.Info("implemented interface not found", "interface", impl.Name)
 			continue
 		}
 
@@ -140,7 +142,7 @@ func (c *Class) resolve(e *env) bool {
 		}
 
 		if c.redundantImplements(inter) {
-			log.Printf("skipping redundant interface %s, as it is already implemented by parents\n", impl.Name)
+			e.logger.Debug("skipping redundant interface, as it is already implemented by parents", "interface", impl.Name)
 			continue
 		}
 
@@ -166,6 +168,8 @@ func (c *Class) redundantImplements(inter Type) bool {
 }
 
 func (c *Class) declareNested(e *env) {
+	e = e.sub("class", c.gir.CType)
+
 	for _, v := range c.gir.Functions {
 		if t := DeclareFunction(e, c, v); t != nil {
 			c.Functions = append(c.Functions, t)
@@ -333,7 +337,7 @@ loop:
 			})
 
 		default:
-			log.Panicf("unexpected class parent %T", parent)
+			panic(fmt.Sprintf("unexpected class parent %T", parent))
 		}
 	}
 

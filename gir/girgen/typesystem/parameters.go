@@ -2,7 +2,6 @@ package typesystem
 
 import (
 	"fmt"
-	"log"
 	"strings"
 
 	"github.com/diamondburned/gotk4/gir"
@@ -24,6 +23,7 @@ type TransferOwnership string
 const (
 	TransferNone      TransferOwnership = "none"
 	TransferFull      TransferOwnership = "full"
+	TransferBorrow    TransferOwnership = "borrow"
 	TransferContainer TransferOwnership = "container"
 )
 
@@ -32,7 +32,9 @@ type Param struct {
 
 	CName  string
 	GoName string
-	Type   Type
+
+	// Type is the type of the parameter. It is missing a pointer if this param is an out param that isn't CallerAllocates
+	Type Type
 
 	// Skip signifies that the parameter should be skipped in the go call
 	// this happens with params that are only useful in C.
@@ -52,6 +54,10 @@ type Param struct {
 	// Implicit declares that this param is referenced by another param, either through closure, destroy or
 	// array size. It will be omitted in the go call, because it will get it's value from another source.
 	Implicit bool
+
+	// BorrowFrom is a reference to the (instance) param that this wants to borrow from. In code generation terms this means
+	// that we need to connect this (return) param to the instance param so that the GC wont clean it up early
+	BorrowFrom *Param
 
 	// Closure is a pointer to the implicit param that takes the function pointer that will be called
 	Closure *Param
@@ -101,6 +107,49 @@ type Parameters struct {
 	GoParameters ParamList
 }
 
+func validParamType(t Type) bool {
+	switch t := t.(type) {
+	case *ForeignType:
+		return validParamType(t.Type)
+	case *PointerType:
+		return t.Pointers == 1 && validPointerParamType(t.Base)
+	case *Record, *Class:
+		return false
+	case *Alias:
+		return validParamType(t.AliasedType)
+	default:
+		return true
+	}
+}
+
+func validPointerParamType(t Type) bool {
+	switch t := t.(type) {
+	case *PointerType:
+		panic("pointer to pointer type?")
+	case *ForeignType:
+		return validPointerParamType(t.Type)
+	case *Callback:
+		return false
+	case *Record, *Class:
+		return true
+	case *Alias:
+		return validPointerParamType(t.AliasedType)
+	default:
+		return true
+	}
+}
+
+// validForGoBindings checks some preconditions to determine if we can convert all arguments to
+func (p *Parameters) validForGoBindings() bool {
+	for _, p := range p.CParameters() {
+		if !validParamType(p.Type) {
+			return false
+		}
+	}
+
+	return true
+}
+
 // CParameters returns the param list for the c call, since the instance param is always the first param if set
 func (p *Parameters) CParameters() ParamList {
 	if p.InstanceParam == nil {
@@ -129,28 +178,21 @@ func (p *Parameters) CGoReturn() *Param {
 }
 
 func NewCallableParameters(e *env, v gir.CallableAttrs) *Parameters {
-	params := NewParameters(e, v.Parameters, v.ReturnValue, v.Throws)
-
-	if params != nil {
-		params.Doc = NewDoc(&v.InfoAttrs, &v.InfoElements)
+	params := &Parameters{
+		Doc: NewDoc(&v.InfoAttrs, &v.InfoElements),
 	}
 
-	return params
-}
-
-func NewParameters(e *env, girparams *gir.Parameters, ret *gir.ReturnValue, throws bool) *Parameters {
-	params := &Parameters{}
-
-	if girparams != nil {
-		if girparams.InstanceParameter != nil {
-			t := e.findAnyType(girparams.InstanceParameter.AnyType)
+	if v.Parameters != nil {
+		if v.Parameters.InstanceParameter != nil {
+			t := e.findAnyType(v.Parameters.InstanceParameter.AnyType)
 
 			if t == nil {
+				e.logger.Warn("instance param type not found", "ctype", debugCTypeFromAnytype(v.Parameters.InstanceParameter.AnyType))
 				return nil
 			}
 
 			params.InstanceParam = &Param{
-				Doc: NewParamDoc(girparams.InstanceParameter.ParameterAttrs),
+				Doc: NewParamDoc(v.Parameters.InstanceParameter.ParameterAttrs),
 
 				CName:             "carg0",
 				GoName:            "arg0", // TODO: find a better go name
@@ -168,15 +210,15 @@ func NewParameters(e *env, girparams *gir.Parameters, ret *gir.ReturnValue, thro
 			}
 		}
 
-		for i, p := range girparams.Parameters {
+		for i, p := range v.Parameters.Parameters {
 			if p.Direction == "inout" {
-				log.Println("FIXME: skipping inout param")
+				e.logger.Warn("FIXME: skipping inout param")
 				return nil
 			}
 			paramType := p.AnyType
 
 			if p.Direction == "out" && !p.CallerAllocates && !canBeOutParamType(paramType) {
-				log.Printf("ignoring out param type without enough pointers: %s", debugCTypeFromAnytype(paramType))
+				e.logger.Warn("ignoring out param type without enough pointers", "ctype", debugCTypeFromAnytype(paramType))
 				return nil
 			}
 
@@ -189,6 +231,7 @@ func NewParameters(e *env, girparams *gir.Parameters, ret *gir.ReturnValue, thro
 			t := e.findAnyType(paramType)
 
 			if t == nil {
+				e.logger.Warn("type not found", "ctype", debugCTypeFromAnytype(paramType))
 				return nil
 			}
 
@@ -248,7 +291,7 @@ func NewParameters(e *env, girparams *gir.Parameters, ret *gir.ReturnValue, thro
 
 		// mark the implicit params. The idx is the index in c parameters, with a given instance param
 		// a parameter may have multiple implicit params
-		for i, p := range girparams.Parameters {
+		for i, p := range v.Parameters.Parameters {
 			param := params.parameters[i]
 			if p.Closure != nil {
 				param.Closure = params.parameters[*p.Closure]
@@ -273,27 +316,37 @@ func NewParameters(e *env, girparams *gir.Parameters, ret *gir.ReturnValue, thro
 		}
 	}
 
-	if ret != nil {
-		t := e.findAnyType(ret.AnyType)
+	if v.ReturnValue != nil {
+		t := e.findAnyType(v.ReturnValue.AnyType)
 
 		if t == nil {
+			e.logger.Warn("return type not found", "ctype", debugCTypeFromAnytype(v.ReturnValue.AnyType))
 			return nil
 		}
 
 		// https://gi.readthedocs.io/en/latest/annotations/giannotations.html#default-annotations
-		transfer := TransferOwnership(ret.TransferOwnership.TransferOwnership)
+		transfer := TransferOwnership(v.ReturnValue.TransferOwnership.TransferOwnership)
 
 		if transfer == "" {
 			transfer = TransferFull
 		}
 
 		ret := &Param{
-			Doc:               NewReturnDoc(ret),
+			Doc:               NewReturnDoc(v.ReturnValue),
 			CName:             "cret",
 			GoName:            "ret",
 			Direction:         "return",
 			Type:              t,
 			TransferOwnership: transfer,
+		}
+
+		if transfer == TransferBorrow {
+			if params.InstanceParam == nil {
+				e.logger.Error("can't borrow without an instance param")
+				return nil
+			}
+
+			ret.BorrowFrom = params.InstanceParam
 		}
 
 		params.CReturn = ret
@@ -304,17 +357,17 @@ func NewParameters(e *env, girparams *gir.Parameters, ret *gir.ReturnValue, thro
 
 	}
 
-	if throws {
+	if v.Throws {
 		// if a callable throws then it has a GError** as the last param, which is a nullable
 		// out param
 		throwType := e.findTypeByGIRName("GLib.Error")
 
 		if throwType == nil {
-			log.Println("error type not found, ignoring throwing function")
+			e.logger.Warn("GLib.Error type not found, ignoring throwing function")
 			return nil
 		}
 
-		throwType = IncreasePointers(throwType, 2)
+		throwType = IncreasePointers(throwType, 1)
 
 		throwParam := &Param{
 			Doc: ParamDoc{
@@ -333,6 +386,11 @@ func NewParameters(e *env, girparams *gir.Parameters, ret *gir.ReturnValue, thro
 
 		params.parameters = append(params.parameters, throwParam)
 		params.GoReturns = append(params.GoReturns, throwParam)
+	}
+
+	if !params.validForGoBindings() {
+		e.logger.Warn("parameters not valid for go bindings")
+		return nil
 	}
 
 	e.sortGoParams(params.GoParameters)

@@ -55,10 +55,7 @@ func WithPointers(girType *gir.Type, t Type) Type {
 
 	// log.Printf("adding missing pointers to %s to match %s\n", t.CType(), cleanedCType)
 
-	return &PointerType{
-		Pointers: missing,
-		Base:     t,
-	}
+	return IncreasePointers(t, missing)
 }
 
 type PointerType struct {
@@ -118,7 +115,35 @@ func Pointers(t Type) int {
 	}
 }
 
+func SetPointers(t Type, n int) Type {
+	if n < 0 {
+		panic("negative pointers")
+	}
+
+	switch t := t.(type) {
+	case *PointerType:
+		switch n {
+		case 0:
+			return t.Base
+		default:
+			return &PointerType{
+				Pointers: n,
+				Base:     t.Base,
+			}
+		}
+	default:
+		return &PointerType{
+			Pointers: n,
+			Base:     t,
+		}
+	}
+}
+
 func IncreasePointers(t Type, n int) Type {
+	if n < 0 {
+		panic("negative pointer increase")
+	}
+
 	switch t := t.(type) {
 	case *PointerType:
 		return &PointerType{
@@ -134,6 +159,10 @@ func IncreasePointers(t Type, n int) Type {
 }
 
 func DecreasePointers(t Type, n int) Type {
+	if n < 0 {
+		panic("negative pointer decrease")
+	}
+
 	switch t := t.(type) {
 	case *PointerType:
 		switch t.Pointers {

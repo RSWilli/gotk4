@@ -71,6 +71,9 @@ type CallableGenerator struct {
 	// CCallExpressions contains the call expressions in the order expected by the c function
 	CCallExpressions callable.CallExpressionList
 
+	//ReceiverConverter contains the go->c converters of the go function receiver if there is one
+	ReceiverConverter convert.Converter
+
 	// ParamConverters contains all the go->c converters needed for the c call
 	ParamConverters convert.ConverterList
 
@@ -91,12 +94,18 @@ func (m *CallableGenerator) GenerateInterfaceSignature(w file.CodeWriter) {
 func (m *CallableGenerator) Generate(w *file.Writer) {
 	m.Doc.Generate(w.Go())
 
+	w.GoImport("runtime")
+
 	fmt.Fprintf(w.Go(), "%s {\n", m.GoSignature())
 	w.Go().Indent()
 
 	// TODO imports
 
 	decls := tabwriter.NewWriter(w.Go(), 0, 0, 1, ' ', 0) // this vertically aligns the decls without formatting
+
+	if m.Signature.InstanceParam != nil {
+		fmt.Fprintf(decls, "var\t%s\t%s\t// %s\n", m.Signature.InstanceParam.CName, m.Signature.InstanceParam.Type.CGoType(), m.ReceiverConverter.Metadata())
+	}
 	for i, param := range m.Signature.GoParameters {
 		conv := m.ParamConverters[i]
 		fmt.Fprintf(decls, "var\t%s\t%s\t// %s\n", param.CName, param.Type.CGoType(), conv.Metadata())
@@ -109,6 +118,9 @@ func (m *CallableGenerator) Generate(w *file.Writer) {
 
 	fmt.Fprintln(w.Go())
 
+	if m.ReceiverConverter != nil {
+		m.ReceiverConverter.Convert(w.Go())
+	}
 	for _, c := range m.ParamConverters {
 		c.Convert(w.Go())
 	}
@@ -116,6 +128,18 @@ func (m *CallableGenerator) Generate(w *file.Writer) {
 	fmt.Fprintln(w.Go())
 
 	fmt.Fprintln(w.Go(), m.CGoCall())
+
+	for _, param := range m.Signature.CParameters() {
+		fmt.Fprintf(w.Go(), "runtime.KeepAlive(%s)\n", param.GoName)
+	}
+
+	fmt.Fprintln(w.Go())
+
+	// declare the go counterpart of the c return if there is one
+	for _, ret := range m.Signature.GoReturns {
+		fmt.Fprintf(decls, "var\t%s\t%s\n", ret.GoName, ret.Type.GoType())
+	}
+	decls.Flush()
 
 	fmt.Fprintln(w.Go())
 
@@ -148,6 +172,9 @@ func NewCallableGenerator(f *typesystem.CallableSignature) *CallableGenerator {
 		gen.CCallExpressions = append(gen.CCallExpressions, callable.CallExpression{Param: param})
 	}
 
+	if f.InstanceParam != nil {
+		gen.ReceiverConverter = convert.NewGoToCConverter(f.InstanceParam)
+	}
 	for _, param := range f.GoParameters {
 		gen.ParamConverters = append(gen.ParamConverters, convert.NewGoToCConverter(param))
 	}

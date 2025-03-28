@@ -50,11 +50,6 @@ func (b *ForeignType) GoType() string {
 		return subgotype
 	}
 
-	if IsGoStdLibType(b.Type) {
-		// don't namespace go stdlib types like error
-		return subgotype
-	}
-
 	if slices.Contains(nonNamespacedGoTypes, subgotype) {
 		return subgotype
 	}

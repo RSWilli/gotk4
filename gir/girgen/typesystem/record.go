@@ -20,12 +20,12 @@ type Record struct {
 	PrivateGoType string
 
 	// unsafe constructors names:
-	GoUnsafeBorrowFunction       string
-	GoUnsafeTransferFullFunction string
-	GoUnsafeTransferNoneFunction string
+	GoUnsafeFromGlibBorrowFunction string
+	GoUnsafeFromGlibFullFunction   string
+	GoUnsafeFromGlibNoneFunction   string
 
-	GoUnsafeToGlibNoneMethod string
-	GoUnsafeToGlibFullMethod string
+	GoUnsafeToGlibNoneFunction string
+	GoUnsafeToGlibFullFunction string
 
 	GoUnsafeRefFunction string
 	CgoRefFunction      string
@@ -59,14 +59,14 @@ func DeclareRecord(e *env, v gir.Record) *Record {
 		Doc:           NewDoc(&v.InfoAttrs, &v.InfoElements),
 		PrivateGoType: strcases.UnexportPascal(v.Name),
 
-		GoUnsafeBorrowFunction:       fmt.Sprintf("Unsafe%sFromGlibBorrow", v.Name),
-		GoUnsafeTransferNoneFunction: fmt.Sprintf("Unsafe%sFromGlibNone", v.Name),
-		GoUnsafeTransferFullFunction: fmt.Sprintf("Unsafe%sFromGlibFull", v.Name),
+		GoUnsafeFromGlibBorrowFunction: fmt.Sprintf("Unsafe%sFromGlibBorrow", v.Name),
+		GoUnsafeFromGlibNoneFunction:   fmt.Sprintf("Unsafe%sFromGlibNone", v.Name),
+		GoUnsafeFromGlibFullFunction:   fmt.Sprintf("Unsafe%sFromGlibFull", v.Name),
 
-		GoUnsafeToGlibNoneMethod: fmt.Sprintf("Unsafe%sToGlibNone", v.Name),
-		GoUnsafeToGlibFullMethod: fmt.Sprintf("Unsafe%sToGlibFull", v.Name),
+		GoUnsafeToGlibNoneFunction: fmt.Sprintf("Unsafe%sToGlibNone", v.Name),
+		GoUnsafeToGlibFullFunction: fmt.Sprintf("Unsafe%sToGlibFull", v.Name),
 
-		GoUnsafeUnrefFunction: "UnsafeFree",
+		GoUnsafeUnrefFunction: fmt.Sprintf("Unsafe%sFree", v.Name),
 		CgoUnrefFunction:      "C.free", // replaced below if an unref or custom free method is found
 
 		BaseType: BaseType{
@@ -82,6 +82,9 @@ func DeclareRecord(e *env, v gir.Record) *Record {
 }
 
 func (r *Record) declareNested(e *env) {
+
+	e = e.sub("record", r.gir.Name)
+
 	for _, v := range r.gir.Functions {
 		if t := DeclareFunction(e, r, v); t != nil {
 			r.Functions = append(r.Functions, t)
@@ -98,19 +101,20 @@ func (r *Record) declareNested(e *env) {
 		// see https://github.com/gtk-rs/gir/blob/87cddb70c739f25edd8047e6780e3934af8ff474/src/library.rs#L459-L481
 
 		if v.Name == "ref" {
-			r.GoUnsafeRefFunction = "UnsafeRef"
+			r.GoUnsafeRefFunction = fmt.Sprintf("Unsafe%sRef", v.Name)
 			r.CgoRefFunction = "C." + v.CIdentifier
 			continue
 		}
 
 		if v.Name == "unref" {
-			r.GoUnsafeUnrefFunction = "UnsafeUnref"
+			r.GoUnsafeUnrefFunction = fmt.Sprintf("Unsafe%sUnref", v.Name)
 			r.CgoUnrefFunction = "C." + v.CIdentifier
 			continue
 		}
 
 		if v.Name == "copy" {
-			r.GoUnsafeRefFunction = "UnsafeCopy"
+			// r.GoUnsafeRefFunction = "UnsafeCopy"
+			// TODO: how to handle this? Maybe add a "ref mode" to the struct?
 			continue
 		}
 
@@ -121,13 +125,13 @@ func (r *Record) declareNested(e *env) {
 		}
 
 		if v.Name == "free" {
-			r.GoUnsafeUnrefFunction = "UnsafeUnref"
+			r.GoUnsafeUnrefFunction = fmt.Sprintf("Unsafe%sFree", v.Name)
 			r.CgoUnrefFunction = "C." + v.CIdentifier
 			continue
 		}
 
 		if v.Name == "destroy" {
-			r.GoUnsafeUnrefFunction = "UnsafeDestroy"
+			r.GoUnsafeUnrefFunction = fmt.Sprintf("Unsafe%sDestroy", v.Name)
 			r.CgoUnrefFunction = "C." + v.CIdentifier
 			continue
 		}

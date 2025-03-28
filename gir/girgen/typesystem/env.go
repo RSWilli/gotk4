@@ -2,7 +2,7 @@ package typesystem
 
 import (
 	"fmt"
-	"log"
+	"log/slog"
 	"slices"
 	"strings"
 
@@ -24,6 +24,18 @@ type env struct {
 
 	compareParams  ParamCompareFunc
 	compareReturns ParamCompareFunc
+
+	logger *slog.Logger
+}
+
+// sub returns a sub env that is an exact copy but with the given attrs used in the logger
+func (e *env) sub(attrs ...any) *env {
+	subenv := *e
+
+	logger := subenv.logger.With(attrs...)
+	subenv.logger = logger
+
+	return &subenv
 }
 
 func (e *env) sortGoParams(ps []*Param) {
@@ -57,7 +69,7 @@ func (e *env) skip(parent Type, anygir any) bool {
 
 	for _, m := range e.namespace.Manual {
 		if m.GIRName() == name {
-			log.Printf("skipping %s %s because it is manually implemented", kind, name)
+			e.logger.Info("skipping manually implemented type", "kind", kind, "name", name)
 			return true
 		}
 	}
@@ -90,7 +102,7 @@ func (e *env) ingoreDeprecated(name string, kind GIRKind, anygir any) bool {
 	attrs := gt.GetInfoAttrs()
 
 	if attrs.Deprecated && attrs.DeprecatedVersion.Less(e.minVersion) {
-		log.Printf("skipping %s %s in %s that is deprecated since %s, min allowed version: %s", kind, name, e.namespace.v, attrs.DeprecatedVersion, e.minVersion)
+		e.logger.Info("skipping deprecated", "kind", kind, "name", name, "deprecated-since", attrs.DeprecatedVersion, "min-version", e.minVersion)
 		return true
 	}
 
@@ -163,7 +175,7 @@ func (e *env) findTypeByGIRName(t string) Type {
 		typ := e.namespace.findLocalTypeByGIRName(t)
 
 		if typ == nil {
-			log.Printf("type %s not found in namespace %s\n", t, e.namespace.v)
+			e.logger.Debug("type not found", "type", t)
 			return nil
 		}
 
@@ -182,7 +194,7 @@ func (e *env) findTypeByGIRName(t string) Type {
 	reffedNS, ok := e.namespace.Included[foreignNSName]
 
 	if !ok {
-		log.Printf("type %s referenced unknown namespace %s\n", t, foreignNSName)
+		e.logger.Warn("type referenced unknown namespace", "type", t, "referenced-ns", foreignNSName)
 		return nil
 	}
 
@@ -192,7 +204,7 @@ func (e *env) findTypeByGIRName(t string) Type {
 		return mkForeign(reffedNS, foreign)
 	}
 
-	log.Printf("type %s not found in namespace %s\n", t, e.namespace.v)
+	e.logger.Debug("type not found", "type", t)
 
 	return nil
 }

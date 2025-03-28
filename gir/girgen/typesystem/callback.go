@@ -48,6 +48,8 @@ func DeclareCallback(e *env, v gir.Callback) *Callback {
 }
 
 func (cb *Callback) resolveParameters(e *env) bool {
+	e = e.sub("callback", cb.gir.CType)
+
 	params := NewCallableParameters(e, cb.gir.CallableAttrs)
 
 	if params == nil {

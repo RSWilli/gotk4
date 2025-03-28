@@ -43,6 +43,7 @@ var (
 	Gdouble  = prim("gdouble", "gdouble", "C.gdouble", "float64")
 	Utf8     = prim("utf8", "gchar*", "*C.gchar", "string")
 	Filename = prim("filename", "gchar*", "*C.gchar", "string")
+	Gpointer = prim("gpointer", "gpointer", "C.gpointer", "unsafe.Pointer")
 	Gintptr  = prim("gintptr", "gintptr", "C.gintptr", "uintptr")
 	Guintptr = prim("guintptr", "guintptr", "C.guintptr", "uintptr")
 	Glong    = prim("glong", "glong", "C.glong", "int32")

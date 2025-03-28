@@ -2,7 +2,6 @@ package typesystem
 
 import (
 	"fmt"
-	"log"
 
 	"github.com/diamondburned/gotk4/gir"
 )
@@ -36,7 +35,7 @@ func (a *Array) CGoType() string {
 	if a.cGoTypeOverride != "" {
 		return a.cGoTypeOverride
 	}
-	return fmt.Sprintf("*%s", a.Inner.CGoType())
+	return a.Inner.CGoType()
 }
 
 // CType implements Type.
@@ -44,7 +43,7 @@ func (a *Array) CType() string {
 	if a.cTypeOverride != "" {
 		return a.cTypeOverride
 	}
-	return fmt.Sprintf("%s*", a.Inner.CType())
+	return a.Inner.CType()
 }
 
 // GIRName implements Type.
@@ -67,8 +66,7 @@ func (a *Array) GoType() string {
 func (e *env) getArrayType(arr *gir.Array) *Array {
 	if arr.Length == nil && arr.FixedSize == 0 && !arr.IsZeroTerminated() {
 		// this is an unbounded array, which requires some unsafe preconditions not
-		// documented in GIR, FIXME: can we even handle this?
-		// log.Println("skipping unbounded array type")
+		// documented in GIR, must be handled manually
 		return nil
 	}
 
@@ -103,23 +101,27 @@ func (e *env) getArrayType(arr *gir.Array) *Array {
 	}
 
 	if arr.Type == nil {
-		log.Printf("FIXME: array type is nil, needs special handling for Ctype %s\n", arr.CType)
+		e.logger.Debug("FIXME: array type is nil, needs special handling", "ctype", arr.CType)
 		return nil
 	}
 
 	originalPointers := CountPointers(arr.CType)
 
 	if arr.Type.Name == "utf8" || originalPointers > 1 {
-		// this is a higher dimensional array, and there is no
-		// way in GIR that specifies the length of the inner array
-		// log.Printf("skipping %s high dimensional array type %s\n", arr.Type.Name, arr.CType)
+		// this is a higher dimensional array, which needs to be implemented manually
+		e.logger.Info("skipping high dimensional array type", "name", arr.Type.Name, "ctype", arr.CType)
 		return nil
 	}
 
 	inner := e.findTypeByGIRName(arr.Type.Name)
 	if inner == nil {
-		log.Printf("could not find array inner type %s", arr.Type.Name)
+		e.logger.Warn("could not find array inner type", "name", arr.Type.Name)
 		return nil
+	}
+
+	if _, ok := inner.(*PointerType); !ok {
+		// inner type is always a pointer, because we need to do pointer arithmetics
+		inner = IncreasePointers(inner, 1)
 	}
 
 	array := &Array{
@@ -143,10 +145,6 @@ func (e *env) getArrayType(arr *gir.Array) *Array {
 			Base:     array.Inner,
 		}
 	}
-
-	// if array.CType() != cleanedCtype {
-	// 	log.Printf("array ctype wrong, expected %s got %s", cleanedCtype, array.CType())
-	// }
 
 	return array
 }

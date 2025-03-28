@@ -17,8 +17,10 @@ func DeclareFunction(e *env, parent Type, v gir.Function) *CallableSignature {
 		return nil
 	}
 
+	e = e.sub("function", v.CIdentifier)
+
 	if v.ShadowedBy != "" || v.MovedTo != "" {
-		// log.Printf("skipping shadowed or moved function %s", v.CIdentifier)
+		e.logger.Debug("skipping because shadowed or moved")
 		return nil
 	}
 
@@ -29,7 +31,6 @@ func DeclareFunction(e *env, parent Type, v gir.Function) *CallableSignature {
 	params := NewCallableParameters(e, v.CallableAttrs)
 
 	if params == nil {
-		// log.Printf("could not create parameters for function %s\n", v.CIdentifier)
 		return nil
 	}
 
@@ -48,8 +49,10 @@ func NewMethod(e *env, parent Type, v gir.Method) *CallableSignature {
 		return nil
 	}
 
+	e = e.sub("method", v.CIdentifier)
+
 	if v.ShadowedBy != "" || v.MovedTo != "" {
-		// log.Printf("skipping shadowed or moved function %s", v.CIdentifier)
+		e.logger.Debug("skipping because shadowed or moved")
 		return nil
 	}
 
@@ -60,7 +63,6 @@ func NewMethod(e *env, parent Type, v gir.Method) *CallableSignature {
 	params := NewCallableParameters(e, v.CallableAttrs)
 
 	if params == nil {
-		// log.Printf("could not create parameters for method %s\n", v.CIdentifier)
 		return nil
 	}
 
@@ -114,8 +116,10 @@ func DeclareConstructor(e *env, parent Type, v gir.Constructor) *CallableSignatu
 		return nil
 	}
 
+	e = e.sub("constructor", v.CIdentifier)
+
 	if v.ShadowedBy != "" || v.MovedTo != "" {
-		// log.Printf("skipping shadowed or moved function %s", v.CIdentifier)
+		e.logger.Debug("skipping because shadowed or moved")
 		return nil
 	}
 
@@ -126,7 +130,6 @@ func DeclareConstructor(e *env, parent Type, v gir.Constructor) *CallableSignatu
 	params := NewCallableParameters(e, v.CallableAttrs)
 
 	if params == nil {
-		// log.Printf("could not create parameters for constructor %s\n", v.CIdentifier)
 		return nil
 	}
 

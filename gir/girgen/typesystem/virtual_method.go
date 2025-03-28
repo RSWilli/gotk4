@@ -2,7 +2,6 @@ package typesystem
 
 import (
 	"fmt"
-	"log"
 
 	"github.com/diamondburned/gotk4/gir"
 )
@@ -24,20 +23,21 @@ func NewVirtualMethod(e *env, parent Type, typestruct *Record, v gir.VirtualMeth
 		return nil
 	}
 
+	e = e.sub("virtual method", v.Name)
+
 	// e.g. _gotk4_gtk4_AccessibleText_virtual_get_contents
 	tramp := fmt.Sprintf("%s_%s_virtual_%s", e.trampolinePrefix(), parent.GoType(), v.Name)
 
 	params := NewCallableParameters(e, v.CallableAttrs)
 
 	if params == nil {
-		// log.Printf("could not create parameters for virtual method %s\n", tramp)
 		return nil
 	}
 
 	field := findTypeStructField(v, typestruct)
 
 	if field == nil {
-		log.Printf("could not find type struct field name for %s\n", tramp)
+		e.logger.Warn("could not find type struct field name")
 		return nil
 	}
 

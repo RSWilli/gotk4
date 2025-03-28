@@ -3,7 +3,7 @@ package typesystem
 import (
 	"fmt"
 	"iter"
-	"log"
+	"reflect"
 
 	"github.com/diamondburned/gotk4/gir"
 	"github.com/diamondburned/gotk4/gir/girgen/strcases"
@@ -83,6 +83,8 @@ func DeclareInterface(e *env, v gir.Interface) *Interface {
 }
 
 func (in *Interface) resolve(e *env) bool {
+	e = e.sub("interface", in.gir.CType)
+
 	if in.gir.GLibTypeStruct != "" {
 		typeStructType := e.findTypeByGIRName(in.gir.GLibTypeStruct)
 
@@ -93,7 +95,7 @@ func (in *Interface) resolve(e *env) bool {
 		typeStruct, ok := typeStructType.(*Record)
 
 		if !ok {
-			log.Printf("type struct for %s is not a record but instead %T", in.gir.Name, typeStructType)
+			e.logger.Warn("type struct is not a record", "actual", reflect.TypeOf(typeStructType).String())
 			return false
 		}
 
@@ -103,6 +105,7 @@ func (in *Interface) resolve(e *env) bool {
 	parent := e.findTypeByGIRName("GObject.Object")
 
 	if parent == nil {
+		e.logger.Error("GObject.Object not found")
 		return false
 	}
 
@@ -116,12 +119,12 @@ func (in *Interface) resolve(e *env) bool {
 		inter := e.findTypeByGIRName(prereq.Name)
 
 		if inter == nil {
-			log.Printf("interface %s not found\n", prereq.Name)
+			e.logger.Info("interface prerequesite not found", "interface", prereq.Name)
 			return false
 		}
 
 		if !IsInterface(inter) && !IsClass(inter) {
-			log.Printf("prerequisite %s of interface %s is not class or interface, but %T instead\n", inter.GIRName(), in.gir.Name, UnderlyingType(inter))
+			e.logger.Warn("prerequesite is not a class or an interface", "prerequesite", inter.GIRName(), "actual", reflect.TypeOf(UnderlyingType(parent)).String())
 			return false
 		}
 
@@ -132,6 +135,8 @@ func (in *Interface) resolve(e *env) bool {
 }
 
 func (in *Interface) declareNested(e *env) {
+	e = e.sub("interface", in.gir.CType)
+
 	for _, v := range in.gir.Functions {
 		if t := DeclareFunction(e, in, v); t != nil {
 			in.Functions = append(in.Functions, t)

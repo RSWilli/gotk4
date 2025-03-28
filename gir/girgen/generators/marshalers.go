@@ -18,8 +18,10 @@ type MarshalGenerator struct {
 func (g *MarshalGenerator) Generate(w *file.Writer) {
 	w.GoImport("unsafe")
 
+	// TODO: import gobject
+
 	fmt.Fprintf(w.Go(), "func %s(p uintptr) (interface{}, error) {\n", g.MarshalFuncName())
-	fmt.Fprintf(w.Go(), "\treturn %s(coreglib.ValueFromNative(unsafe.Pointer(p)).%s()), nil\n", g.WrapFunction, g.ValueFunction)
+	fmt.Fprintf(w.Go(), "\treturn %s(gobject.ValueFromNative(unsafe.Pointer(p)).%s()), nil\n", g.WrapFunction, g.ValueFunction)
 	fmt.Fprintf(w.Go(), "}\n")
 }
 
