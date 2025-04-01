@@ -7,6 +7,25 @@ import (
 )
 
 func NewCToGoConverter(p *typesystem.Param) Converter {
+	if p.Nullable {
+		if p.Type == typesystem.Utf8 {
+			return &CToGoNullableStringConverter{
+				Param: p,
+				SubConverter: &CToGoStringConverter{
+					Param: p,
+				},
+			}
+		}
+		return &CToGoNullableConverter{
+			Param:        p,
+			SubConverter: newCToGoBasicConverter(p),
+		}
+	}
+
+	return newCToGoBasicConverter(p)
+}
+
+func newCToGoBasicConverter(p *typesystem.Param) Converter {
 	if _, ok := p.Type.(*typesystem.Primitive); ok {
 		return newCToGoPrimitiveConverter(p)
 	}
@@ -47,7 +66,7 @@ func NewCToGoConverter(p *typesystem.Param) Converter {
 func newCToGoPrimitiveConverter(p *typesystem.Param) Converter {
 	switch p.Type {
 	case typesystem.Utf8:
-		return &UnimplementedConverter{Param: p}
+		return &CToGoStringConverter{Param: p}
 	case typesystem.Gboolean:
 		return &CToGoBooleanConverter{Param: p}
 	default:
@@ -68,6 +87,8 @@ func newCToGoPointerConverter(pointerparam *typesystem.Param) Converter {
 	switch typesystem.UnderlyingType(basetype).(type) {
 	case *typesystem.Record:
 		return &CToGoRecordPointerConverter{Param: pointerparam, Record: basetype}
+	case *typesystem.Class:
+		return &CToGoClassPointerConverter{Param: pointerparam, Class: basetype}
 	}
 
 	return &UnimplementedConverter{

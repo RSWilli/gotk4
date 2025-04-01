@@ -67,7 +67,7 @@ type AliasGenerator struct {
 	*typesystem.Alias
 }
 
-func (g *AliasGenerator) Generate(w *file.Writer) {
+func (g *AliasGenerator) Generate(w *file.Package) {
 	g.Doc.Generate(w.Go())
 
 	// TODO: imports of foreign type namespaces

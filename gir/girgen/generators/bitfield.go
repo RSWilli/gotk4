@@ -186,7 +186,7 @@ type BitfieldGenerator struct {
 	Members []BitfieldMember
 }
 
-func (g *BitfieldGenerator) Generate(w *file.Writer) {
+func (g *BitfieldGenerator) Generate(w *file.Package) {
 	g.Doc.Generate(w.Go())
 
 	fmt.Fprintf(w.Go(), "type %s C.gint\n\n", g.GoType())

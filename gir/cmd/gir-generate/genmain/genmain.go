@@ -223,7 +223,11 @@ func Generate(repos gir.Repositories, data Data) {
 							CGoTyp:  "C.GError",
 							CTyp:    "GError",
 						},
-						// TODO: add
+						GoUnsafeFromGlibBorrowFunction: "UnsafeErrorFromGlibBorrow",
+						GoUnsafeFromGlibFullFunction:   "UnsafeErrorFromGlibFull",
+						GoUnsafeFromGlibNoneFunction:   "UnsafeErrorFromGlibNone",
+						GoUnsafeToGlibNoneFunction:     "UnsafeErrorToGlibNone",
+						GoUnsafeToGlibFullFunction:     "UnsafeErrorToGlibFull",
 					},
 				},
 				// Ignored: []typesystem.IgnoreFunc{
@@ -239,13 +243,13 @@ func Generate(repos gir.Repositories, data Data) {
 							CTyp:    "GObject",
 							CGoTyp:  "C.GObject",
 						},
-						GoInterfaceName:              "Objector",
-						Doc:                          typesystem.Doc{},
-						GoUnsafeBorrowFunction:       "TODO",
-						GoUnsafeTransferFullFunction: "AssumeOwnership",
-						GoUnsafeTransferNoneFunction: "Take",
-						GoUnsafeToGlibNoneMethod:     "TODO",
-						GoUnsafeToGlibFullMethod:     "TODO",
+						GoInterfaceName:                "ObjectLike",
+						Doc:                            typesystem.Doc{},
+						GoUnsafeFromGlibBorrowFunction: "TODOBorrow",
+						GoUnsafeFromGlibFullFunction:   "AssumeOwnership",
+						GoUnsafeFromGlibNoneFunction:   "Take",
+						GoUnsafeToGlibNoneFunction:     "TODOToNone",
+						GoUnsafeToGlibFullFunction:     "TODOToFull",
 					},
 					&typesystem.Record{
 						BaseType: typesystem.BaseType{
@@ -310,7 +314,7 @@ func Generate(repos gir.Repositories, data Data) {
 	// TODO: add a hook stage here, where the user can modify all generators in "gen"
 
 	for _, g := range gen {
-		w := file.NewWriter(Output)
+		w := file.NewPackage(Output)
 
 		g.Generate(w)
 

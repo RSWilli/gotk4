@@ -6,7 +6,6 @@ import (
 	"reflect"
 
 	"github.com/diamondburned/gotk4/gir"
-	"github.com/diamondburned/gotk4/gir/girgen/strcases"
 )
 
 // Interface declares an interface implemented by a GObject.
@@ -60,13 +59,13 @@ func DeclareInterface(e *env, v gir.Interface) *Interface {
 		Doc: NewDoc(&v.InfoAttrs, &v.InfoElements),
 		BaseType: BaseType{
 			GirName: v.Name,
-			GoTyp:   v.Name,
+			GoTyp:   v.Name + "Instance",
 			CGoTyp:  "C." + ctype,
 			CTyp:    ctype,
 
 			GlibGetTypeFn: v.GLibGetType,
 		},
-		GoInterfaceName: strcases.Interfacify(v.Name),
+		GoInterfaceName: v.Name,
 
 		GoWrapBaseClassFunction: fmt.Sprintf("unsafeWrap%s", v.Name),
 
@@ -164,27 +163,14 @@ func (in *Interface) declareNested(e *env) {
 	}
 }
 
-func (in *Interface) ParentGoInterfaceName() string {
-	switch p := in.Parent.(type) {
-	case nil:
-		panic("no parent")
-	case *Class:
-		return p.GoInterfaceName
-	case *ForeignType:
-		return p.AddForeignNamespace(p.Type.(*Class).GoInterfaceName)
-	default:
-		panic("invalid parent")
-	}
-}
-
 func (in *Interface) ParentGoUnsafeBorrowFunction() string {
 	switch p := in.Parent.(type) {
 	case nil:
 		panic("no parent")
 	case *Class:
-		return p.GoUnsafeBorrowFunction
+		return p.GoUnsafeFromGlibBorrowFunction
 	case *ForeignType:
-		return p.AddForeignNamespace(p.Type.(*Class).GoUnsafeBorrowFunction)
+		return p.AddForeignNamespace(p.Type.(*Class).GoUnsafeFromGlibBorrowFunction)
 	default:
 		panic("invalid parent")
 	}
@@ -195,9 +181,9 @@ func (c *Interface) ParentGoUnsafeTransferFullFunction() string {
 	case nil:
 		panic("no parent")
 	case *Class:
-		return p.GoUnsafeTransferFullFunction
+		return p.GoUnsafeFromGlibFullFunction
 	case *ForeignType:
-		return p.AddForeignNamespace(p.Type.(*Class).GoUnsafeTransferFullFunction)
+		return p.AddForeignNamespace(p.Type.(*Class).GoUnsafeFromGlibFullFunction)
 	default:
 		panic("invalid parent")
 	}
@@ -208,9 +194,9 @@ func (c *Interface) ParentGoUnsafeTransferNoneFunction() string {
 	case nil:
 		panic("no parent")
 	case *Class:
-		return p.GoUnsafeTransferNoneFunction
+		return p.GoUnsafeFromGlibNoneFunction
 	case *ForeignType:
-		return p.AddForeignNamespace(p.Type.(*Class).GoUnsafeTransferNoneFunction)
+		return p.AddForeignNamespace(p.Type.(*Class).GoUnsafeFromGlibNoneFunction)
 	default:
 		panic("invalid parent")
 	}
@@ -226,13 +212,13 @@ func (c *Interface) PrerequesiteConstructors() iter.Seq2[string, string] {
 
 			switch i := inter.(type) {
 			case *Class:
-				constructorName = i.GoUnsafeBorrowFunction
+				constructorName = i.GoUnsafeFromGlibBorrowFunction
 			case *Interface:
 				constructorName = i.GoUnsafeBorrowFunction
 			case *ForeignType:
 				switch t := i.Type.(type) {
 				case *Class:
-					constructorName = i.AddForeignNamespace(t.GoUnsafeBorrowFunction)
+					constructorName = i.AddForeignNamespace(t.GoUnsafeFromGlibBorrowFunction)
 				case *Interface:
 					constructorName = i.AddForeignNamespace(t.GoUnsafeBorrowFunction)
 				default:
@@ -249,36 +235,6 @@ func (c *Interface) PrerequesiteConstructors() iter.Seq2[string, string] {
 	}
 }
 
-func (c *Interface) PrerequesitesGoInterfaceNames() iter.Seq[string] {
-	return func(yield func(string) bool) {
-		for _, inter := range c.Prerequesite {
-			var name string
-
-			switch i := inter.(type) {
-			case *Class:
-				name = i.GoInterfaceName
-			case *Interface:
-				name = i.GoInterfaceName
-			case *ForeignType:
-				switch t := i.Type.(type) {
-				case *Class:
-					name = i.AddForeignNamespace(t.GoInterfaceName)
-				case *Interface:
-					name = i.AddForeignNamespace(t.GoInterfaceName)
-				default:
-					panic("invalid interface prerequesite")
-				}
-			default:
-				panic("invalid interface prerequesite")
-			}
-
-			if !yield(name) {
-				return
-			}
-		}
-	}
-}
-
 func IsInterface(t Type) bool {
 	switch p := t.(type) {
 	case *Interface:
@@ -287,5 +243,18 @@ func IsInterface(t Type) bool {
 		return IsInterface(p.Type)
 	default:
 		return false
+	}
+}
+
+func InterfaceGoInterfaceName(t Type) string {
+	switch p := t.(type) {
+	case *PointerType:
+		return InterfaceGoInterfaceName(p.Base)
+	case *Interface:
+		return p.GoInterfaceName
+	case *ForeignType:
+		return p.AddForeignNamespace(InterfaceGoInterfaceName(p.Type))
+	default:
+		panic("invalid type received")
 	}
 }

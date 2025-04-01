@@ -38,7 +38,7 @@ func (docg *GoDocGenerator) Generate(w file.CodeWriter) {
 	scanner = bufio.NewScanner(r) // scan lines
 
 	for scanner.Scan() {
-		w.Write([]byte("//\t"))
+		w.Write([]byte("// "))
 		w.Write(scanner.Bytes())
 		w.Write([]byte("\n"))
 	}
@@ -123,7 +123,7 @@ func NewCallableGoDocGenerator(callable *typesystem.CallableSignature) *GoDocGen
 }
 
 func paramDocListItem(p *typesystem.Param) string {
-	docStr := fmt.Sprintf("%s %s", p.GoName, p.Type.GoType())
+	docStr := fmt.Sprintf("%s %s", p.GoName, p.GoParamType())
 
 	if p.Nullable {
 		docStr += " (nullable)"

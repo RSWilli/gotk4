@@ -589,12 +589,10 @@ type RecordGenerator struct {
 	Methods      GeneratorList
 }
 
-func (g *RecordGenerator) Generate(w *file.Writer) {
+func (g *RecordGenerator) Generate(w *file.Package) {
 	if g.CgoUnrefFunction == "" {
 		panic("cannot generate record without an unref method")
 	}
-
-	// TODO: import gobject for the marshaler
 
 	w.GoImport("unsafe")
 	w.GoImport("runtime")
@@ -629,7 +627,9 @@ func (g *RecordGenerator) Generate(w *file.Writer) {
 		fmt.Fprintf(w.Go(), "runtime.SetFinalizer(\n")
 		fmt.Fprintf(w.Go(), "\twrapped.%s,\n", g.PrivateGoType)
 		fmt.Fprintf(w.Go(), "\tfunc (intern *%s) {\n", g.PrivateGoType)
-		fmt.Fprintf(w.Go(), "\t\t%s(unsafe.Pointer(intern.native))\n", g.CgoUnrefFunction)
+		w.Go().Indent()
+		g.unrefCall(w.Go(), "intern")
+		w.Go().Unindent()
 		fmt.Fprintf(w.Go(), "\t},\n")
 		fmt.Fprintf(w.Go(), ")\n")
 		w.Go().Unindent()
@@ -665,7 +665,7 @@ func (g *RecordGenerator) Generate(w *file.Writer) {
 	fmt.Fprintf(w.Go(), "// \n")
 	fmt.Fprintf(w.Go(), "// After this is called, no other method on [%s] is expected to work anymore.\n", g.GoType())
 	fmt.Fprintf(w.Go(), "func %s(%s *%s) {\n", g.GoUnsafeUnrefFunction, g.ReceiverName, g.GoType())
-	fmt.Fprintf(w.Go(), "\t%s(%s.native)\n", g.CgoUnrefFunction, g.ReceiverName)
+	g.unrefCall(w.Go(), g.ReceiverName)
 	fmt.Fprintf(w.Go(), "}\n\n")
 
 	fmt.Fprintf(w.Go(), "// %s returns the underlying C pointer. This is used by the bindings internally.\n", g.GoUnsafeToGlibNoneFunction)
@@ -689,6 +689,15 @@ func (g *RecordGenerator) Generate(w *file.Writer) {
 		g.Setters,
 		g.Methods,
 	)
+}
+
+func (g *RecordGenerator) unrefCall(w file.CodeWriter, variable string) {
+	if g.CgoUnrefNeedsUnsafeCast {
+		// unsafe already imported above
+		fmt.Fprintf(w, "\t%s(unsafe.Pointer(%s.native))\n", g.CgoUnrefFunction, variable)
+	} else {
+		fmt.Fprintf(w, "\t%s(%s.native)\n", g.CgoUnrefFunction, variable)
+	}
 }
 
 func NewRecordGenerator(r *typesystem.Record) *RecordGenerator {

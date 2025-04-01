@@ -58,7 +58,7 @@ type ConstantGenerator struct {
 	*typesystem.Constant
 }
 
-func (g *ConstantGenerator) Generate(w *file.Writer) {
+func (g *ConstantGenerator) Generate(w *file.Package) {
 	g.Doc.Generate(w.Go())
 
 	fmt.Fprintf(w.Go(), "const %s = %s\n", g.GoIndentifier(), g.GoValue)

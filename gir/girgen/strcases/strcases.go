@@ -162,6 +162,11 @@ func PascalToGo(pascal string) string {
 }
 
 // ReceiverName returns the first letter in lower-case.
+func ParamNameToGo(p string) string {
+	return SnakeToGo(false, p)
+}
+
+// ReceiverName returns the first letter in lower-case.
 func ReceiverName(p string) string {
 	r, sz := utf8.DecodeRuneInString(p)
 	if sz > 0 && r != utf8.RuneError {

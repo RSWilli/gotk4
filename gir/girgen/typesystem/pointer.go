@@ -30,7 +30,12 @@ func WithPointers(girType *gir.Type, t Type) Type {
 	}
 
 	if girType.CType == "" {
-		return t
+		switch t.(type) {
+		case *Bitfield, *Enum:
+			return t
+		default:
+			panic("empty C type in WithPointers")
+		}
 	}
 
 	cleanedCType := cleanCType(girType.CType)

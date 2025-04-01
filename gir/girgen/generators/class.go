@@ -5,6 +5,7 @@ import (
 	"log"
 
 	"github.com/diamondburned/gotk4/gir/girgen/file"
+	"github.com/diamondburned/gotk4/gir/girgen/strcases"
 	"github.com/diamondburned/gotk4/gir/girgen/typesystem"
 )
 
@@ -21,7 +22,7 @@ type ClassGenerator struct {
 	Methods      MethodGeneratorList
 }
 
-func (g *ClassGenerator) Generate(w *file.Writer) {
+func (g *ClassGenerator) Generate(w *file.Package) {
 	w.GoImport("unsafe")
 
 	g.Doc.Generate(w.Go())
@@ -39,12 +40,14 @@ func (g *ClassGenerator) Generate(w *file.Writer) {
 
 	fmt.Fprintf(w.Go(), "var _ %s = (*%s)(nil)\n\n", g.GoInterfaceName, g.GoType())
 
+	fmt.Fprintf(w.Go(), "// %s is the interface that is implemented by all types  extending %s \n", g.GoInterfaceName, g.GoType())
 	fmt.Fprintf(w.Go(), "type %s interface {\n", g.GoInterfaceName)
 	w.Go().Indent()
 	fmt.Fprintln(w.Go(), g.ParentGoInterfaceName())
 	for inter := range g.ImplementedGoInterfaceNames() {
 		fmt.Fprintln(w.Go(), inter)
 	}
+	fmt.Fprintf(w.Go(), "%s() *%s\n", g.GoPrivateUpcastMethod, g.GoType())
 	fmt.Fprintln(w.Go())
 
 	g.Methods.GenerateInterfaceSignatures(w.Go())
@@ -63,20 +66,33 @@ func (g *ClassGenerator) Generate(w *file.Writer) {
 	// TODO: imports
 
 	mkConstructor := func(constructorName, baseConstructorName string) {
-		fmt.Fprintf(w.Go(), "func %s(c unsafe.Pointer) *%s {\n", constructorName, g.GoType())
-		w.Go().Indent()
-		fmt.Fprintf(w.Go(), "base := %s(c)\n", baseConstructorName)
-		fmt.Fprintf(w.Go(), "return %s(base)\n", g.GoWrapBaseClassFunction)
-		w.Go().Unindent()
+		fmt.Fprintf(w.Go(), "func %s(c unsafe.Pointer) %s {\n", constructorName, g.GoInterfaceName)
+		fmt.Fprintf(w.Go(), "\treturn %s(c).(%s)\n", baseConstructorName, g.GoInterfaceName)
 		fmt.Fprintf(w.Go(), "}\n\n")
 	}
 
-	fmt.Fprintf(w.Go(), "// %s is used to convert raw %s pointers to go. This is used by the bindings internally.\n", g.GoUnsafeBorrowFunction, g.CType())
-	mkConstructor(g.GoUnsafeBorrowFunction, g.BaseClassGoUnsafeBorrowFunction())
-	fmt.Fprintf(w.Go(), "// %s is used to convert raw %s pointers to go while taking a reference and attaching a finalizer. This is used by the bindings internally.\n", g.GoUnsafeTransferNoneFunction, g.CType())
-	mkConstructor(g.GoUnsafeTransferNoneFunction, g.BaseClassGoUnsafeTransferNoneFunction())
-	fmt.Fprintf(w.Go(), "// %s is used to convert raw %s pointers to go while attaching a finalizer. This is used by the bindings internally.\n", g.GoUnsafeTransferFullFunction, g.CType())
-	mkConstructor(g.GoUnsafeTransferFullFunction, g.BaseClassGoUnsafeTransferFullFunction())
+	fmt.Fprintf(w.Go(), "// %s is used to convert raw %s pointers to go. This is used by the bindings internally.\n", g.GoUnsafeFromGlibBorrowFunction, g.CType())
+	mkConstructor(g.GoUnsafeFromGlibBorrowFunction, g.BaseClassGoUnsafeFromGlibBorrowFunction())
+	fmt.Fprintf(w.Go(), "// %s is used to convert raw %s pointers to go while taking a reference and attaching a finalizer. This is used by the bindings internally.\n", g.GoUnsafeFromGlibNoneFunction, g.CType())
+	mkConstructor(g.GoUnsafeFromGlibNoneFunction, g.BaseClassGoUnsafeFromGlibNoneFunction())
+	fmt.Fprintf(w.Go(), "// %s is used to convert raw %s pointers to go while attaching a finalizer. This is used by the bindings internally.\n", g.GoUnsafeFromGlibFullFunction, g.CType())
+	mkConstructor(g.GoUnsafeFromGlibFullFunction, g.BaseClassGoUnsafeFromGlibFullFunction())
+
+	fmt.Fprintf(w.Go(), "func (%s *%s) %s() *%s {\n", strcases.ReceiverName(g.GoType()), g.GoType(), g.GoPrivateUpcastMethod, g.GoType())
+	fmt.Fprintf(w.Go(), "\treturn %s\n", strcases.ReceiverName(g.GoType()))
+	fmt.Fprintf(w.Go(), "}\n\n")
+
+	mkTransfer := func(transfername, baseTransferName string) {
+		fmt.Fprintf(w.Go(), "func %s(c %s) unsafe.Pointer {\n", transfername, g.GoInterfaceName)
+		fmt.Fprintf(w.Go(), "\treturn %s(c)\n", baseTransferName)
+		fmt.Fprintf(w.Go(), "}\n\n")
+	}
+
+	fmt.Fprintf(w.Go(), "// %s is used to convert the instance to it's C value %s. This is used by the bindings internally.\n", g.GoUnsafeToGlibNoneFunction, g.CType())
+	mkTransfer(g.GoUnsafeToGlibNoneFunction, g.BaseClassGoUnsafeToGlibNoneFunction())
+
+	fmt.Fprintf(w.Go(), "// %s is used to convert the instance to it's C value %s, while removeing the finalizer. This is used by the bindings internally.\n", g.GoUnsafeToGlibNoneFunction, g.CType())
+	mkTransfer(g.GoUnsafeToGlibNoneFunction, g.BaseClassGoUnsafeToGlibNoneFunction())
 
 	GenerateAll(
 		w,

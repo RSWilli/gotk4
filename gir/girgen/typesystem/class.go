@@ -6,7 +6,6 @@ import (
 	"reflect"
 
 	"github.com/diamondburned/gotk4/gir"
-	"github.com/diamondburned/gotk4/gir/girgen/strcases"
 )
 
 // Class is a type that extends GObject
@@ -23,12 +22,14 @@ type Class struct {
 	GoWrapBaseClassFunction string
 
 	// unsafe constructors names:
-	GoUnsafeBorrowFunction       string
-	GoUnsafeTransferFullFunction string
-	GoUnsafeTransferNoneFunction string
+	GoUnsafeFromGlibBorrowFunction string
+	GoUnsafeFromGlibFullFunction   string
+	GoUnsafeFromGlibNoneFunction   string
 
-	GoUnsafeToGlibNoneMethod string
-	GoUnsafeToGlibFullMethod string
+	GoPrivateUpcastMethod string
+
+	GoUnsafeToGlibNoneFunction string
+	GoUnsafeToGlibFullFunction string
 
 	Abstract bool
 
@@ -72,16 +73,17 @@ func DeclareClass(e *env, v gir.Class) *Class {
 	c := &Class{
 		Doc:             NewDoc(&v.InfoAttrs, &v.InfoElements),
 		Abstract:        v.Abstract,
-		GoInterfaceName: strcases.Interfacify(v.Name),
+		GoInterfaceName: v.Name + "Like",
 
 		GoWrapBaseClassFunction: fmt.Sprintf("unsafeWrap%s", v.Name),
+		GoPrivateUpcastMethod:   fmt.Sprintf("upcastTo%s", v.CType), // use cidentifier to not shadow parent methods
 
-		GoUnsafeBorrowFunction:       fmt.Sprintf("Unsafe%sFromGlibBorrow", v.Name),
-		GoUnsafeTransferNoneFunction: fmt.Sprintf("Unsafe%sFromGlibNone", v.Name),
-		GoUnsafeTransferFullFunction: fmt.Sprintf("Unsafe%sFromGlibFull", v.Name),
+		GoUnsafeFromGlibBorrowFunction: fmt.Sprintf("Unsafe%sFromGlibBorrow", v.Name),
+		GoUnsafeFromGlibNoneFunction:   fmt.Sprintf("Unsafe%sFromGlibNone", v.Name),
+		GoUnsafeFromGlibFullFunction:   fmt.Sprintf("Unsafe%sFromGlibFull", v.Name),
 
-		GoUnsafeToGlibNoneMethod: fmt.Sprintf("Unsafe%sToGlibNone", v.Name),
-		GoUnsafeToGlibFullMethod: fmt.Sprintf("Unsafe%sToGlibFull", v.Name),
+		GoUnsafeToGlibNoneFunction: fmt.Sprintf("Unsafe%sToGlibNone", v.Name),
+		GoUnsafeToGlibFullFunction: fmt.Sprintf("Unsafe%sToGlibFull", v.Name),
 		BaseType: BaseType{
 			GirName: v.Name,
 			GoTyp:   v.Name,
@@ -255,34 +257,56 @@ func (c *Class) ParentGoInterfaceName() string {
 	}
 }
 
-func (c *Class) BaseClassGoUnsafeBorrowFunction() string {
+func (c *Class) BaseClassGoUnsafeFromGlibBorrowFunction() string {
 	switch p := c.BaseClass().(type) {
 	case *Class:
-		return p.GoUnsafeBorrowFunction
+		return p.GoUnsafeFromGlibBorrowFunction
 	case *ForeignType:
-		return p.AddForeignNamespace(p.Type.(*Class).GoUnsafeBorrowFunction)
+		return p.AddForeignNamespace(p.Type.(*Class).GoUnsafeFromGlibBorrowFunction)
 	default:
 		panic("invalid base class")
 	}
 }
 
-func (c *Class) BaseClassGoUnsafeTransferFullFunction() string {
+func (c *Class) BaseClassGoUnsafeFromGlibFullFunction() string {
 	switch p := c.BaseClass().(type) {
 	case *Class:
-		return p.GoUnsafeTransferFullFunction
+		return p.GoUnsafeFromGlibFullFunction
 	case *ForeignType:
-		return p.AddForeignNamespace(p.Type.(*Class).GoUnsafeTransferFullFunction)
+		return p.AddForeignNamespace(p.Type.(*Class).GoUnsafeFromGlibFullFunction)
 	default:
 		panic("invalid base class")
 	}
 }
 
-func (c *Class) BaseClassGoUnsafeTransferNoneFunction() string {
+func (c *Class) BaseClassGoUnsafeFromGlibNoneFunction() string {
 	switch p := c.BaseClass().(type) {
 	case *Class:
-		return p.GoUnsafeTransferNoneFunction
+		return p.GoUnsafeFromGlibNoneFunction
 	case *ForeignType:
-		return p.AddForeignNamespace(p.Type.(*Class).GoUnsafeTransferNoneFunction)
+		return p.AddForeignNamespace(p.Type.(*Class).GoUnsafeFromGlibNoneFunction)
+	default:
+		panic("invalid base class")
+	}
+}
+
+func (c *Class) BaseClassGoUnsafeToGlibFullFunction() string {
+	switch p := c.BaseClass().(type) {
+	case *Class:
+		return p.GoUnsafeToGlibFullFunction
+	case *ForeignType:
+		return p.AddForeignNamespace(p.Type.(*Class).GoUnsafeToGlibFullFunction)
+	default:
+		panic("invalid base class")
+	}
+}
+
+func (c *Class) BaseClassGoUnsafeToGlibNoneFunction() string {
+	switch p := c.BaseClass().(type) {
+	case *Class:
+		return p.GoUnsafeToGlibNoneFunction
+	case *ForeignType:
+		return p.AddForeignNamespace(p.Type.(*Class).GoUnsafeToGlibNoneFunction)
 	default:
 		panic("invalid base class")
 	}
@@ -361,6 +385,19 @@ func GetClassParent(t Type) Type {
 		return p.Parent
 	case *ForeignType:
 		return GetClassParent(p.Type)
+	default:
+		panic("invalid type received")
+	}
+}
+
+func ClassGoInterfaceName(t Type) string {
+	switch p := t.(type) {
+	case *PointerType:
+		return ClassGoInterfaceName(p.Base)
+	case *Class:
+		return p.GoInterfaceName
+	case *ForeignType:
+		return p.AddForeignNamespace(ClassGoInterfaceName(p.Type))
 	default:
 		panic("invalid type received")
 	}

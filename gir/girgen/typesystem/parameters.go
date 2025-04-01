@@ -5,6 +5,7 @@ import (
 	"strings"
 
 	"github.com/diamondburned/gotk4/gir"
+	"github.com/diamondburned/gotk4/gir/girgen/strcases"
 )
 
 type CallbackParamScope string
@@ -13,8 +14,8 @@ const (
 	CallbackParamScopeCall  CallbackParamScope = "call"
 	CallbackParamScopeAsync CallbackParamScope = "async"
 
-	// CallbackParamScopeNofified must be accompanied by a Destroy parameter.
-	CallbackParamScopeNofified CallbackParamScope = "nofified"
+	// CallbackParamScopeNotified must be accompanied by a Destroy parameter.
+	CallbackParamScopeNotified CallbackParamScope = "notified"
 	CallbackParamScopeForever  CallbackParamScope = "forever"
 )
 
@@ -82,6 +83,21 @@ func (p *Param) GoDeclaration() string {
 	return fmt.Sprintf("%s %s", p.GoName, p.Type.GoType())
 }
 
+func (p *Param) GoParamDeclaration() string {
+	return fmt.Sprintf("%s %s", p.GoName, p.GoParamType())
+}
+
+func (p *Param) GoParamType() string {
+	switch UnderlyingType(p.Type).(type) {
+	case *Class:
+		return ClassGoInterfaceName(p.Type)
+	case *Interface:
+		return InterfaceGoInterfaceName(p.Type)
+	default:
+		return p.Type.GoType()
+	}
+}
+
 type Parameters struct {
 	Doc
 
@@ -107,33 +123,40 @@ type Parameters struct {
 	GoParameters ParamList
 }
 
-func validParamType(t Type) bool {
-	switch t := t.(type) {
+func validParam(param *Param, currentType Type) bool {
+	if param.Implicit || param.Skip {
+		return true
+	}
+
+	switch t := currentType.(type) {
 	case *ForeignType:
-		return validParamType(t.Type)
+		return validParam(param, t.Type)
 	case *PointerType:
-		return t.Pointers == 1 && validPointerParamType(t.Base)
+		return t.Pointers == 1 && validPointerParam(param, t.Base)
 	case *Record, *Class:
-		return false
+		return false // needs one pointer
 	case *Alias:
-		return validParamType(t.AliasedType)
+		return validParam(param, t.AliasedType)
+	case *Callback:
+		// closure must exist, and if notified then destroy must exist
+		return param.Closure != nil && (param.Scope != CallbackParamScopeNotified || param.Destroy != nil)
 	default:
 		return true
 	}
 }
 
-func validPointerParamType(t Type) bool {
-	switch t := t.(type) {
+func validPointerParam(param *Param, currentType Type) bool {
+	switch t := currentType.(type) {
 	case *PointerType:
 		panic("pointer to pointer type?")
 	case *ForeignType:
-		return validPointerParamType(t.Type)
+		return validPointerParam(param, t.Type)
 	case *Callback:
 		return false
 	case *Record, *Class:
 		return true
 	case *Alias:
-		return validPointerParamType(t.AliasedType)
+		return validPointerParam(param, t.AliasedType)
 	default:
 		return true
 	}
@@ -142,7 +165,7 @@ func validPointerParamType(t Type) bool {
 // validForGoBindings checks some preconditions to determine if we can convert all arguments to
 func (p *Parameters) validForGoBindings() bool {
 	for _, p := range p.CParameters() {
-		if !validParamType(p.Type) {
+		if !validParam(p, p.Type) {
 			return false
 		}
 	}
@@ -195,7 +218,7 @@ func NewCallableParameters(e *env, v gir.CallableAttrs) *Parameters {
 				Doc: NewParamDoc(v.Parameters.InstanceParameter.ParameterAttrs),
 
 				CName:             "carg0",
-				GoName:            "arg0", // TODO: find a better go name
+				GoName:            strcases.ParamNameToGo(v.Parameters.InstanceParameter.Name),
 				Type:              t,
 				TransferOwnership: TransferNone,
 				Skip:              false,
@@ -265,7 +288,7 @@ func NewCallableParameters(e *env, v gir.CallableAttrs) *Parameters {
 			param := &Param{
 				Doc:               NewParamDoc(p.ParameterAttrs),
 				CName:             fmt.Sprintf("carg%d", i+1),
-				GoName:            fmt.Sprintf("arg%d", i+1),
+				GoName:            strcases.ParamNameToGo(p.Name),
 				Type:              t,
 				TransferOwnership: transfer,
 				Skip:              p.Skip,
@@ -464,6 +487,38 @@ func (pl ParamList) GoTypes() string {
 		}
 
 		decls = append(decls, p.Type.GoType())
+	}
+
+	return strings.Join(decls, ", ")
+}
+
+// GoParamTypes differs from GoTypes in that class and interface params don't return the
+// pointer to the struct type, but instead the go interface name
+func (pl ParamList) GoParamTypes() string {
+	decls := make([]string, 0, len(pl))
+
+	for _, p := range pl {
+		if p.Skip || p.Implicit {
+			continue
+		}
+
+		decls = append(decls, p.GoParamType())
+	}
+
+	return strings.Join(decls, ", ")
+}
+
+// GoParamDeclarations differs from GoDeclarations in that class and interface params don't return the
+// pointer to the struct type, but instead the go interface name
+func (pl ParamList) GoParamDeclarations() string {
+	decls := make([]string, 0, len(pl))
+
+	for _, p := range pl {
+		if p.Skip || p.Implicit {
+			continue
+		}
+
+		decls = append(decls, p.GoParamDeclaration())
 	}
 
 	return strings.Join(decls, ", ")

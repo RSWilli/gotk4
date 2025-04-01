@@ -17,7 +17,7 @@ type RecordFieldGetterGenerator struct {
 }
 
 // Generate implements Generator.
-func (g *RecordFieldGetterGenerator) Generate(w *file.Writer) {
+func (g *RecordFieldGetterGenerator) Generate(w *file.Package) {
 	g.Doc.Generate(w.Go())
 
 	// TODO: simplify, this is only for legacy compat, can be maybe be simplified:

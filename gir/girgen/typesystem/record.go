@@ -30,8 +30,9 @@ type Record struct {
 	GoUnsafeRefFunction string
 	CgoRefFunction      string
 
-	GoUnsafeUnrefFunction string
-	CgoUnrefFunction      string
+	GoUnsafeUnrefFunction   string
+	CgoUnrefFunction        string
+	CgoUnrefNeedsUnsafeCast bool
 
 	Functions    []*CallableSignature
 	Methods      []*CallableSignature
@@ -66,8 +67,9 @@ func DeclareRecord(e *env, v gir.Record) *Record {
 		GoUnsafeToGlibNoneFunction: fmt.Sprintf("Unsafe%sToGlibNone", v.Name),
 		GoUnsafeToGlibFullFunction: fmt.Sprintf("Unsafe%sToGlibFull", v.Name),
 
-		GoUnsafeUnrefFunction: fmt.Sprintf("Unsafe%sFree", v.Name),
-		CgoUnrefFunction:      "C.free", // replaced below if an unref or custom free method is found
+		GoUnsafeUnrefFunction:   fmt.Sprintf("Unsafe%sFree", v.Name),
+		CgoUnrefFunction:        "C.free", // replaced below if an unref or custom free method is found
+		CgoUnrefNeedsUnsafeCast: true,
 
 		BaseType: BaseType{
 			GirName: v.Name,
@@ -101,14 +103,15 @@ func (r *Record) declareNested(e *env) {
 		// see https://github.com/gtk-rs/gir/blob/87cddb70c739f25edd8047e6780e3934af8ff474/src/library.rs#L459-L481
 
 		if v.Name == "ref" {
-			r.GoUnsafeRefFunction = fmt.Sprintf("Unsafe%sRef", v.Name)
+			r.GoUnsafeRefFunction = fmt.Sprintf("Unsafe%sRef", r.GoType())
 			r.CgoRefFunction = "C." + v.CIdentifier
 			continue
 		}
 
 		if v.Name == "unref" {
-			r.GoUnsafeUnrefFunction = fmt.Sprintf("Unsafe%sUnref", v.Name)
+			r.GoUnsafeUnrefFunction = fmt.Sprintf("Unsafe%sUnref", r.GoType())
 			r.CgoUnrefFunction = "C." + v.CIdentifier
+			r.CgoUnrefNeedsUnsafeCast = false
 			continue
 		}
 
@@ -125,14 +128,16 @@ func (r *Record) declareNested(e *env) {
 		}
 
 		if v.Name == "free" {
-			r.GoUnsafeUnrefFunction = fmt.Sprintf("Unsafe%sFree", v.Name)
+			r.GoUnsafeUnrefFunction = fmt.Sprintf("Unsafe%sFree", r.GoType())
 			r.CgoUnrefFunction = "C." + v.CIdentifier
+			r.CgoUnrefNeedsUnsafeCast = false
 			continue
 		}
 
 		if v.Name == "destroy" {
-			r.GoUnsafeUnrefFunction = fmt.Sprintf("Unsafe%sDestroy", v.Name)
+			r.GoUnsafeUnrefFunction = fmt.Sprintf("Unsafe%sDestroy", r.GoType())
 			r.CgoUnrefFunction = "C." + v.CIdentifier
+			r.CgoUnrefNeedsUnsafeCast = false
 			continue
 		}
 

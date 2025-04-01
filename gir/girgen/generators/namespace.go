@@ -22,19 +22,8 @@ type NamespaceGenerator struct {
 }
 
 // Generate implements Generator.
-func (g *NamespaceGenerator) Generate(w *file.Writer) {
-	w.SetGoPackageName(g.ns.GoName, g.ns.Version.Major)
-
-	w.AddCFlag("-Wno-deprecated-declarations")
-
-	for _, cIncl := range g.ns.CIncludes {
-		w.CInclude(cIncl)
-		w.Exported.CInclude(cIncl)
-	}
-
-	for _, pkg := range g.ns.Packages {
-		w.AddPackage(pkg)
-	}
+func (g *NamespaceGenerator) Generate(w *file.Package) {
+	w.SetNamespace(g.ns)
 
 	// run sub generators
 	GenerateAll(

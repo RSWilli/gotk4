@@ -3,7 +3,6 @@ package file
 import (
 	"fmt"
 	"io"
-	"text/tabwriter"
 
 	"github.com/diamondburned/gotk4/gir/girgen/file/internal"
 	"github.com/diamondburned/gotk4/gir/girgen/typesystem"
@@ -26,11 +25,11 @@ func (ts gTypes) reader() io.Reader {
 	fmt.Fprintln(&block, "var (")
 	block.Indent()
 
-	decls := tabwriter.NewWriter(&block, 0, 0, 1, ' ', 0)
+	var decls DeclarationWriter
 	for _, t := range ts {
-		fmt.Fprintf(decls, "%s\t= glib.Type(C.%s())\n", t.name(), t.GLibGetType())
+		fmt.Fprintf(&decls, "%s\t= glib.Type(C.%s())\n", t.name(), t.GLibGetType())
 	}
-	decls.Flush()
+	decls.WriteTo(&block)
 	block.Unindent()
 
 	fmt.Fprintln(&block, ")")

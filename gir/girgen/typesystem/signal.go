@@ -31,6 +31,8 @@ func NewSignal(e *env, parent Type, v gir.Signal) *Signal {
 		return nil
 	}
 
+	return nil
+
 	e = e.sub("signal", v.Name)
 
 	s := &Signal{

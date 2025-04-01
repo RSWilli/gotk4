@@ -11,6 +11,8 @@ type Converter interface {
 	// generated variable declaration
 	Metadata() string
 
+	// Convert writes the conversion to the [file.CodeWriter]. It expects that all needed variables are declared
+	// before this function is called
 	Convert(file.CodeWriter)
 }
 

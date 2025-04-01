@@ -3,7 +3,7 @@ package generators
 import "github.com/diamondburned/gotk4/gir/girgen/file"
 
 type Generator interface {
-	Generate(*file.Writer)
+	Generate(*file.Package)
 }
 
 type SubGenerator interface {
@@ -14,7 +14,7 @@ type GeneratorList []Generator
 
 var _ Generator = GeneratorList{}
 
-func (list GeneratorList) Generate(w *file.Writer) {
+func (list GeneratorList) Generate(w *file.Package) {
 	for _, g := range list {
 		if g == nil {
 			continue
@@ -26,9 +26,9 @@ func (list GeneratorList) Generate(w *file.Writer) {
 
 type NoopGenerator struct{}
 
-func (list NoopGenerator) Generate(w *file.Writer) {}
+func (list NoopGenerator) Generate(w *file.Package) {}
 
-func GenerateAll(w *file.Writer, gens ...Generator) {
+func GenerateAll(w *file.Package, gens ...Generator) {
 	GeneratorList(gens).Generate(w)
 }
 

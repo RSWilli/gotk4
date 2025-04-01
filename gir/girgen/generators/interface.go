@@ -23,7 +23,7 @@ type InterfaceGenerator struct {
 	Methods      MethodGeneratorList
 }
 
-func (g *InterfaceGenerator) Generate(w *file.Writer) {
+func (g *InterfaceGenerator) Generate(w *file.Package) {
 	w.GoImport("unsafe")
 	w.GoImport("runtime")
 
@@ -41,7 +41,7 @@ func (g *InterfaceGenerator) Generate(w *file.Writer) {
 
 	fmt.Fprintf(w.Go(), "type %s interface {\n", g.GoInterfaceName)
 	w.Go().Indent()
-	fmt.Fprintln(w.Go(), g.ParentGoInterfaceName())
+	fmt.Fprintln(w.Go(), g.Parent.GoType())
 	// for inter := range g.PrerequesitesGoInterfaceNames() {
 	// 	fmt.Fprintln(w.Go(), inter)
 	// }

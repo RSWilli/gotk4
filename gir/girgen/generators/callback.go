@@ -57,28 +57,28 @@ type CallbackGenerator struct {
 }
 
 // Generate implements Generator.
-func (c *CallbackGenerator) Generate(w *file.Writer) {
+func (c *CallbackGenerator) Generate(w *file.Package) {
 	c.generateGo(w)
 	c.generateExport(w)
 }
 
-func (c *CallbackGenerator) generateGo(w *file.Writer) {
+func (c *CallbackGenerator) generateGo(w *file.Package) {
 	c.Doc.Generate(w.Go())
 
 	// TODO: the caller must declare the extern C function trampoline, because it can be referenced from another package, see _gotk4_glib2_CompareDataFunc
 
-	ret := c.GoReturns.GoDeclarations()
+	ret := c.GoReturns.GoParamDeclarations()
 
 	if ret != "" {
 		ret = " (" + ret + ")"
 	}
 
-	fmt.Fprintf(w.Go(), "type %s func(%s)%s\n", c.GoType(), c.GoParameters.GoDeclarations(), ret)
+	fmt.Fprintf(w.Go(), "type %s func(%s)%s\n", c.GoType(), c.GoParameters.GoParamDeclarations(), ret)
 
 	fmt.Fprintln(w.Go())
 }
 
-func (c *CallbackGenerator) generateExport(w *file.Writer) {
+func (c *CallbackGenerator) generateExport(w *file.Package) {
 	w.Exported.GoImportCore("gbox")
 
 	fmt.Fprintf(w.Exported.Go(), "//export %s\n", c.TrampolineName)

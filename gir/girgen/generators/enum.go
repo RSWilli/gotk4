@@ -187,7 +187,7 @@ type EnumGenerator struct {
 	Marshaler Generator
 }
 
-func (g *EnumGenerator) Generate(w *file.Writer) {
+func (g *EnumGenerator) Generate(w *file.Package) {
 	// TODO: use gencontext Lookup
 
 	g.Doc.Generate(w.Go())

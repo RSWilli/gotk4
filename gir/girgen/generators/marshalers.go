@@ -15,7 +15,7 @@ type MarshalGenerator struct {
 	ValueFunction string
 }
 
-func (g *MarshalGenerator) Generate(w *file.Writer) {
+func (g *MarshalGenerator) Generate(w *file.Package) {
 	w.GoImport("unsafe")
 
 	// TODO: import gobject

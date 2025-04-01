@@ -13,7 +13,7 @@ type MethodGenerator interface {
 var _ Generator = (MethodGeneratorList)(nil)
 
 // Generate implements Generator.
-func (list MethodGeneratorList) Generate(w *file.Writer) {
+func (list MethodGeneratorList) Generate(w *file.Package) {
 	for _, g := range list {
 		if g == nil {
 			continue

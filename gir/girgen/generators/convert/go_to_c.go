@@ -30,6 +30,25 @@ func NewGoToCConverter(p *typesystem.Param) Converter {
 		}
 	}
 
+	if p.Nullable {
+		if p.Type == typesystem.Utf8 {
+			return &GoToCNullableStringConverter{
+				Param: p,
+				SubConverter: &GoToCStringConverter{
+					Param: p,
+				},
+			}
+		}
+		return &GoToCNullableConverter{
+			Param:        p,
+			SubConverter: newGoToCBasicConverter(p),
+		}
+	}
+
+	return newGoToCBasicConverter(p)
+}
+
+func newGoToCBasicConverter(p *typesystem.Param) Converter {
 	if _, ok := p.Type.(*typesystem.Primitive); ok {
 		return newGoToCPrimitiveConverter(p)
 	}
@@ -48,6 +67,7 @@ func NewGoToCConverter(p *typesystem.Param) Converter {
 	case *typesystem.Bitfield, *typesystem.Enum:
 		return &GoToCCastingConverter{Param: p}
 	case *typesystem.Callback:
+		return &GoToCCallbackConverter{Param: p}
 	case *typesystem.Class:
 	case *typesystem.Container:
 	case *typesystem.Interface:
@@ -71,7 +91,7 @@ func NewGoToCConverter(p *typesystem.Param) Converter {
 func newGoToCPrimitiveConverter(p *typesystem.Param) Converter {
 	switch p.Type {
 	case typesystem.Utf8:
-		return &UnimplementedConverter{Param: p}
+		return &GoToCStringConverter{Param: p}
 	case typesystem.Gboolean:
 		return &GoToCBooleanConverter{Param: p}
 	default:
@@ -93,6 +113,8 @@ func newGoToCPointerConverter(pointerparam *typesystem.Param) Converter {
 	switch typesystem.UnderlyingType(basetype).(type) {
 	case *typesystem.Record:
 		return &GoToCRecordPointerConverter{Param: pointerparam, Record: basetype}
+	case *typesystem.Class:
+		return &GoToCClassPointerConverter{Param: pointerparam, Class: basetype}
 	}
 
 	return &UnimplementedConverter{

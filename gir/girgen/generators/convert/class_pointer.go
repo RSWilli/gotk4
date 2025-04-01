@@ -7,13 +7,13 @@ import (
 	"github.com/diamondburned/gotk4/gir/girgen/typesystem"
 )
 
-type CToGoRecordPointerConverter struct {
-	Param  *typesystem.Param
-	Record typesystem.Type // Foreign Record or Record
+type CToGoClassPointerConverter struct {
+	Param *typesystem.Param
+	Class typesystem.Type // Foreign Record or Record
 }
 
 // Convert implements Converter.
-func (c *CToGoRecordPointerConverter) Convert(w file.CodeWriter) {
+func (c *CToGoClassPointerConverter) Convert(w file.CodeWriter) {
 
 	fmt.Fprintf(w, "%s = %s(unsafe.Pointer(%s))\n", c.Param.GoName, c.conversionFunc(), c.Param.CName)
 
@@ -25,12 +25,12 @@ func (c *CToGoRecordPointerConverter) Convert(w file.CodeWriter) {
 }
 
 // Metadata implements Converter.
-func (c *CToGoRecordPointerConverter) Metadata() string {
+func (c *CToGoClassPointerConverter) Metadata() string {
 	return fmt.Sprintf("%s, %s, record", c.Param.Direction, c.Param.TransferOwnership)
 }
 
-func (c *CToGoRecordPointerConverter) conversionFunc() string {
-	r := typesystem.UnderlyingType(c.Record).(*typesystem.Record)
+func (c *CToGoClassPointerConverter) conversionFunc() string {
+	r := typesystem.UnderlyingType(c.Class).(*typesystem.Class)
 
 	var f string
 
@@ -45,32 +45,32 @@ func (c *CToGoRecordPointerConverter) conversionFunc() string {
 		panic(fmt.Sprintf("unexpected typesystem.TransferOwnership: %#v", c.Param.TransferOwnership))
 	}
 
-	if foreign, ok := c.Record.(*typesystem.ForeignType); ok {
+	if foreign, ok := c.Class.(*typesystem.ForeignType); ok {
 		return foreign.AddForeignNamespace(f)
 	}
 
 	return f
 }
 
-var _ Converter = (*CToGoRecordPointerConverter)(nil)
+var _ Converter = (*CToGoClassPointerConverter)(nil)
 
-type GoToCRecordPointerConverter struct {
-	Param  *typesystem.Param
-	Record typesystem.Type // Foreign Record or Record
+type GoToCClassPointerConverter struct {
+	Param *typesystem.Param
+	Class typesystem.Type // Foreign Record or Record
 }
 
 // Convert implements Converter.
-func (c *GoToCRecordPointerConverter) Convert(w file.CodeWriter) {
+func (c *GoToCClassPointerConverter) Convert(w file.CodeWriter) {
 	fmt.Fprintf(w, "%s = (%s)(%s(%s))\n", c.Param.CName, c.Param.Type.CGoType(), c.conversionFunc(), c.Param.GoName)
 }
 
 // Metadata implements Converter.
-func (c *GoToCRecordPointerConverter) Metadata() string {
+func (c *GoToCClassPointerConverter) Metadata() string {
 	return fmt.Sprintf("%s, %s, record", c.Param.Direction, c.Param.TransferOwnership)
 }
 
-func (c *GoToCRecordPointerConverter) conversionFunc() string {
-	r := typesystem.UnderlyingType(c.Record).(*typesystem.Record)
+func (c *GoToCClassPointerConverter) conversionFunc() string {
+	r := typesystem.UnderlyingType(c.Class).(*typesystem.Class)
 
 	var f string
 
@@ -83,11 +83,11 @@ func (c *GoToCRecordPointerConverter) conversionFunc() string {
 		panic(fmt.Sprintf("unexpected typesystem.TransferOwnership: %#v", c.Param.TransferOwnership))
 	}
 
-	if foreign, ok := c.Record.(*typesystem.ForeignType); ok {
+	if foreign, ok := c.Class.(*typesystem.ForeignType); ok {
 		return foreign.AddForeignNamespace(f)
 	}
 
 	return f
 }
 
-var _ Converter = (*GoToCRecordPointerConverter)(nil)
+var _ Converter = (*GoToCClassPointerConverter)(nil)
