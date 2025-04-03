@@ -14,7 +14,7 @@ type CToGoCastingConverter struct {
 // Convert implements Converter.
 func (c *CToGoCastingConverter) Convert(w file.CodeWriter) {
 
-	fmt.Fprintf(w, "%s = %s(unsafe.Pointer(%s))\n", c.Param.GoName, c.Param.GoType(), c.Param.CName)
+	fmt.Fprintf(w, "%s = %s(%s)\n", c.Param.GoName, c.Param.GoType(), c.Param.CName)
 }
 
 // Metadata implements Converter.
