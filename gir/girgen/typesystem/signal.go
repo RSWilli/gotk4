@@ -1,9 +1,8 @@
 package typesystem
 
 import (
-	"fmt"
-
 	"github.com/diamondburned/gotk4/gir"
+	"github.com/diamondburned/gotk4/gir/girgen/strcases"
 )
 
 type SignalWhen string
@@ -31,8 +30,6 @@ func NewSignal(e *env, parent Type, v gir.Signal) *Signal {
 		return nil
 	}
 
-	return nil
-
 	e = e.sub("signal", v.Name)
 
 	s := &Signal{
@@ -49,17 +46,15 @@ func NewSignal(e *env, parent Type, v gir.Signal) *Signal {
 	// cannot use the normal CallableParameter resolution here
 
 	if v.Parameters != nil {
-		for i, param := range v.Parameters.Parameters {
-			t := e.findAnyType(param.AnyType)
+		for _, param := range v.Parameters.Parameters {
+			ns, t := e.findAnyType(param.AnyType)
 
 			if t == nil {
 				e.logger.Warn("type not found", "type", debugCTypeFromAnytype(param.AnyType))
 				return nil
 			}
 
-			if isPointerMandatory(t) {
-				t = SetPointers(t, 1)
-			}
+			pointers := CountCTypePointers(CTypeFromAnytype(param.AnyType))
 
 			transfer := TransferOwnership(param.TransferOwnership.TransferOwnership)
 
@@ -68,28 +63,17 @@ func NewSignal(e *env, parent Type, v gir.Signal) *Signal {
 			}
 
 			s.Parameters = append(s.Parameters, &Param{
-				Doc:               NewParamDoc(param.ParameterAttrs),
-				GoName:            fmt.Sprintf("arg%d", i),
-				Type:              t,
+				Doc:    NewParamDoc(param.ParameterAttrs),
+				GoName: strcases.SnakeToGo(false, param.Name),
+				Type: CouldBeForeign[Type]{
+					Namespace: ns,
+					Type:      t,
+				},
 				TransferOwnership: transfer,
+				CTypePointers:     pointers,
 			})
 		}
 	}
 
 	return s
-}
-
-// addPointerIfManatory adds a pointer to a type where we don't know from the ctype how many pointers are needed
-// but some types always need a pointer
-func isPointerMandatory(t Type) bool {
-	switch t := t.(type) {
-	case *PointerType:
-		return false // not mandatory, because we already have one
-	case *ForeignType:
-		return isPointerMandatory(t.Type)
-	case *Record, *Class:
-		return true
-	default:
-		return false
-	}
 }

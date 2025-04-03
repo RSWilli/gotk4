@@ -1,17 +1,16 @@
 package typesystem
 
-type Primitive struct {
+type CastablePrimitive struct {
 	BaseType
 }
 
-func IsPrimitive(t Type) bool {
-	_, ok := t.(*Primitive)
-
-	return ok
+// pointersAllowed implements Type.
+func (a *CastablePrimitive) pointersAllowed(_ int) bool {
+	return true
 }
 
-func prim(girName, cType, cGoType, goType string) *Primitive {
-	return &Primitive{
+func prim(girName, cType, cGoType, goType string) *CastablePrimitive {
+	return &CastablePrimitive{
 		BaseType: BaseType{
 			GirName: girName,
 			CTyp:    cType,
@@ -19,6 +18,63 @@ func prim(girName, cType, cGoType, goType string) *Primitive {
 			GoTyp:   goType,
 		},
 	}
+}
+
+// BooleanPrimitive describes a boolean. C booleans differ from go booleans and must be converted differently
+type BooleanPrimitive struct {
+	BaseType
+}
+
+var Gboolean = &BooleanPrimitive{
+	BaseType: BaseType{
+		GirName: "gboolean",
+		CTyp:    "gboolean",
+		CGoTyp:  "C.gboolean",
+		GoTyp:   "bool",
+	},
+}
+
+// pointersAllowed implements Type.
+func (a *BooleanPrimitive) pointersAllowed(pointers int) bool {
+	return pointers == 0
+}
+
+// StringPrimitive describes a string, which is builtin in go but a char array in C
+type StringPrimitive struct {
+	GirName string
+}
+
+var Utf8 = &StringPrimitive{
+	GirName: "utf8",
+}
+
+var Filename = &StringPrimitive{
+	GirName: "filename",
+}
+
+// pointersAllowed implements Type.
+func (a *StringPrimitive) pointersAllowed(pointers int) bool {
+	return pointers == 1 // ctype always has one pointer
+}
+
+// GIRName implements Type.
+func (a *StringPrimitive) GIRName() string {
+	return a.GirName
+}
+
+// GoType implements Type.
+func (a *StringPrimitive) GoType(_ int) string {
+	return "string"
+}
+
+// CGoType implements Type.
+func (a *StringPrimitive) CGoType(_ int) string {
+	return "*C.gchar"
+}
+
+// CType implements Type.
+func (a *StringPrimitive) CType(_ int) string {
+	return "gchar*"
 }
 
 var (
@@ -38,11 +94,8 @@ var (
 	Gssize   = prim("gssize", "gssize", "C.gssize", "int")
 	Gchar    = prim("gchar", "gchar", "C.char", "byte")
 	Gunichar = prim("gunichar", "gunichar", "C.gunichar", "uint32")
-	Gboolean = prim("gboolean", "gboolean", "C.gboolean", "bool")
 	Gfloat   = prim("gfloat", "gfloat", "C.gfloat", "float32")
 	Gdouble  = prim("gdouble", "gdouble", "C.gdouble", "float64")
-	Utf8     = prim("utf8", "gchar*", "*C.gchar", "string")
-	Filename = prim("filename", "gchar*", "*C.gchar", "string")
 	Gpointer = prim("gpointer", "gpointer", "C.gpointer", "unsafe.Pointer")
 	Gintptr  = prim("gintptr", "gintptr", "C.gintptr", "uintptr")
 	Guintptr = prim("guintptr", "guintptr", "C.guintptr", "uintptr")
@@ -104,6 +157,11 @@ var Primitives = []Type{
 
 type VoidType struct {
 	BaseType
+}
+
+// pointersAllowed implements Type.
+func (a *VoidType) pointersAllowed(_ int) bool {
+	return true
 }
 
 var Void = &VoidType{

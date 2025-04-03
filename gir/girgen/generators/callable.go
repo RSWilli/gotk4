@@ -2,7 +2,6 @@ package generators
 
 import (
 	"fmt"
-	"log"
 	"strings"
 
 	"github.com/diamondburned/gotk4/gir"
@@ -100,15 +99,15 @@ func (m *CallableGenerator) Generate(w *file.Package) {
 	var decls file.DeclarationWriter
 
 	if m.Signature.InstanceParam != nil {
-		fmt.Fprintf(&decls, "var\t%s\t%s\t// %s\n", m.Signature.InstanceParam.CName, m.Signature.InstanceParam.Type.CGoType(), m.ReceiverConverter.Metadata())
+		fmt.Fprintf(&decls, "var\t%s\t%s\t// %s\n", m.Signature.InstanceParam.CName, m.Signature.InstanceParam.CGoType(), m.ReceiverConverter.Metadata())
 	}
 	for i, param := range m.Signature.GoParameters {
 		conv := m.ParamConverters[i]
-		fmt.Fprintf(&decls, "var\t%s\t%s\t// %s\n", param.CName, param.Type.CGoType(), conv.Metadata())
+		fmt.Fprintf(&decls, "var\t%s\t%s\t// %s\n", param.CName, param.CGoType(), conv.Metadata())
 	}
 	for i, ret := range m.Signature.GoReturns {
 		conv := m.ReturnConverters[i]
-		fmt.Fprintf(&decls, "var\t%s\t%s\t// %s\n", ret.CName, ret.Type.CGoType(), conv.Metadata())
+		fmt.Fprintf(&decls, "var\t%s\t%s\t// %s\n", ret.CName, ret.CGoType(), conv.Metadata())
 	}
 
 	decls.WriteTo(w.Go())
@@ -140,7 +139,7 @@ func (m *CallableGenerator) Generate(w *file.Package) {
 
 	// declare the go counterpart of the c return if there is one
 	for _, ret := range m.Signature.GoReturns {
-		fmt.Fprintf(&decls, "var\t%s\t%s\n", ret.GoName, ret.GoParamType())
+		fmt.Fprintf(&decls, "var\t%s\t%s\n", ret.GoName, ret.GoType())
 	}
 	decls.WriteTo(w.Go())
 
@@ -161,11 +160,6 @@ func (m *CallableGenerator) Generate(w *file.Package) {
 }
 
 func NewCallableGenerator(f *typesystem.CallableSignature) *CallableGenerator {
-
-	if f.Parameters.InstanceParam != nil && typesystem.IsForeignType(f.Parameters.InstanceParam.Type) {
-		log.Panicf("received callable %s with foreign receiver %s", f.CIndentifier(), f.Parameters.InstanceParam.GoName)
-	}
-
 	gen := &CallableGenerator{
 		Doc:              NewCallableGoDocGenerator(f),
 		Signature:        f,
@@ -191,26 +185,27 @@ func NewCallableGenerator(f *typesystem.CallableSignature) *CallableGenerator {
 func (m *CallableGenerator) GoSignature() string {
 	var recv string
 	if m.Signature.InstanceParam != nil {
-		recv = fmt.Sprintf(" (%s %s)", m.Signature.InstanceParam.GoName, m.Signature.InstanceParam.Type.GoType())
+		// tiny hack: use the namespaced go type with zero pointers to not get the interface name for classes and interfaces
+		recv = fmt.Sprintf(" (%s *%s)", m.Signature.InstanceParam.GoName, m.Signature.InstanceParam.Type.NamespacedGoType(0))
 	}
 
 	var ret string
 	if len(m.Signature.GoReturns) == 1 {
-		ret = " " + m.Signature.GoReturns[0].GoParamType()
+		ret = " " + m.Signature.GoReturns[0].GoType()
 	} else if len(m.Signature.GoReturns) > 1 {
-		ret = " (" + m.Signature.GoReturns.GoParamTypes() + ")"
+		ret = " (" + m.Signature.GoReturns.GoTypes() + ")"
 	}
 
-	return fmt.Sprintf("func%s %s(%s)%s", recv, m.Signature.GoIndentifier(), m.Signature.GoParameters.GoParamDeclarations(), ret)
+	return fmt.Sprintf("func%s %s(%s)%s", recv, m.Signature.GoIndentifier(), m.Signature.GoParameters.GoDeclarations(), ret)
 }
 
 // GoInterfaceDeclaration returns a string of the go function signature needed for an interface declaration.
 func (m *CallableGenerator) GoInterfaceDeclaration() string {
 	var ret string
 	if len(m.Signature.GoReturns) == 1 {
-		ret = " " + m.Signature.GoReturns[0].GoParamType()
+		ret = " " + m.Signature.GoReturns[0].GoType()
 	} else if len(m.Signature.GoReturns) > 1 {
-		ret = " (" + m.Signature.GoReturns.GoParamTypes() + ")"
+		ret = " (" + m.Signature.GoReturns.GoTypes() + ")"
 	}
 
 	return fmt.Sprintf("%s(%s)%s", m.Signature.GoIndentifier(), m.Signature.GoParameters.GoTypes(), ret)

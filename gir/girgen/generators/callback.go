@@ -67,13 +67,13 @@ func (c *CallbackGenerator) generateGo(w *file.Package) {
 
 	// TODO: the caller must declare the extern C function trampoline, because it can be referenced from another package, see _gotk4_glib2_CompareDataFunc
 
-	ret := c.GoReturns.GoParamDeclarations()
+	ret := c.GoReturns.GoDeclarations()
 
 	if ret != "" {
 		ret = " (" + ret + ")"
 	}
 
-	fmt.Fprintf(w.Go(), "type %s func(%s)%s\n", c.GoType(), c.GoParameters.GoParamDeclarations(), ret)
+	fmt.Fprintf(w.Go(), "type %s func(%s)%s\n", c.GoType(0), c.GoParameters.GoDeclarations(), ret)
 
 	fmt.Fprintln(w.Go())
 }
@@ -85,7 +85,7 @@ func (c *CallbackGenerator) generateExport(w *file.Package) {
 
 	cret := ""
 	if c.CReturn != nil {
-		cret = fmt.Sprintf(" (%s %s)", c.CReturn.CName, c.CReturn.Type.CGoType())
+		cret = fmt.Sprintf(" (%s %s)", c.CReturn.CName, c.CReturn.CGoType())
 	}
 
 	// TODO: the out params here are missing a pointer because it was stripped in the type resolution

@@ -7,6 +7,7 @@ import (
 	"github.com/diamondburned/gotk4/gir/girgen/typesystem"
 )
 
+// CToGoBooleanConverter is needed because go's true differs from c's true
 type CToGoBooleanConverter struct {
 	Param *typesystem.Param
 }

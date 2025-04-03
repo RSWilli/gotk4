@@ -19,13 +19,8 @@ type Record struct {
 	// PrivateGoType is the inner struct that contains the C pointer and gets the finalizer attached
 	PrivateGoType string
 
-	// unsafe constructors names:
-	GoUnsafeFromGlibBorrowFunction string
-	GoUnsafeFromGlibFullFunction   string
-	GoUnsafeFromGlibNoneFunction   string
-
-	GoUnsafeToGlibNoneFunction string
-	GoUnsafeToGlibFullFunction string
+	BaseConversions
+	Marshaler
 
 	GoUnsafeRefFunction string
 	CgoRefFunction      string
@@ -60,12 +55,7 @@ func DeclareRecord(e *env, v gir.Record) *Record {
 		Doc:           NewDoc(&v.InfoAttrs, &v.InfoElements),
 		PrivateGoType: strcases.UnexportPascal(v.Name),
 
-		GoUnsafeFromGlibBorrowFunction: fmt.Sprintf("Unsafe%sFromGlibBorrow", v.Name),
-		GoUnsafeFromGlibNoneFunction:   fmt.Sprintf("Unsafe%sFromGlibNone", v.Name),
-		GoUnsafeFromGlibFullFunction:   fmt.Sprintf("Unsafe%sFromGlibFull", v.Name),
-
-		GoUnsafeToGlibNoneFunction: fmt.Sprintf("Unsafe%sToGlibNone", v.Name),
-		GoUnsafeToGlibFullFunction: fmt.Sprintf("Unsafe%sToGlibFull", v.Name),
+		BaseConversions: newDefaultBaseConversions(v.Name),
 
 		GoUnsafeUnrefFunction:   fmt.Sprintf("Unsafe%sFree", v.Name),
 		CgoUnrefFunction:        "C.free", // replaced below if an unref or custom free method is found
@@ -76,9 +66,9 @@ func DeclareRecord(e *env, v gir.Record) *Record {
 			GoTyp:   v.Name,
 			CGoTyp:  "C." + v.CType,
 			CTyp:    v.CType,
-
-			GlibGetTypeFn: v.GLibGetType,
 		},
+		Marshaler: newDefaultMarshaler(v.GLibGetType),
+
 		gir: v,
 	}
 }
@@ -103,13 +93,13 @@ func (r *Record) declareNested(e *env) {
 		// see https://github.com/gtk-rs/gir/blob/87cddb70c739f25edd8047e6780e3934af8ff474/src/library.rs#L459-L481
 
 		if v.Name == "ref" {
-			r.GoUnsafeRefFunction = fmt.Sprintf("Unsafe%sRef", r.GoType())
+			r.GoUnsafeRefFunction = fmt.Sprintf("Unsafe%sRef", r.GoType(0))
 			r.CgoRefFunction = "C." + v.CIdentifier
 			continue
 		}
 
 		if v.Name == "unref" {
-			r.GoUnsafeUnrefFunction = fmt.Sprintf("Unsafe%sUnref", r.GoType())
+			r.GoUnsafeUnrefFunction = fmt.Sprintf("Unsafe%sUnref", r.GoType(0))
 			r.CgoUnrefFunction = "C." + v.CIdentifier
 			r.CgoUnrefNeedsUnsafeCast = false
 			continue
@@ -128,14 +118,14 @@ func (r *Record) declareNested(e *env) {
 		}
 
 		if v.Name == "free" {
-			r.GoUnsafeUnrefFunction = fmt.Sprintf("Unsafe%sFree", r.GoType())
+			r.GoUnsafeUnrefFunction = fmt.Sprintf("Unsafe%sFree", r.GoType(0))
 			r.CgoUnrefFunction = "C." + v.CIdentifier
 			r.CgoUnrefNeedsUnsafeCast = false
 			continue
 		}
 
 		if v.Name == "destroy" {
-			r.GoUnsafeUnrefFunction = fmt.Sprintf("Unsafe%sDestroy", r.GoType())
+			r.GoUnsafeUnrefFunction = fmt.Sprintf("Unsafe%sDestroy", r.GoType(0))
 			r.CgoUnrefFunction = "C." + v.CIdentifier
 			r.CgoUnrefNeedsUnsafeCast = false
 			continue
@@ -160,4 +150,9 @@ func (r *Record) declareNested(e *env) {
 			}
 		}
 	}
+}
+
+// pointersAllowed implements Type.
+func (a *Record) pointersAllowed(pointers int) bool {
+	return pointers == 1
 }

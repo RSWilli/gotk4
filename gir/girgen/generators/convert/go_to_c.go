@@ -1,8 +1,6 @@
 package convert
 
 import (
-	"fmt"
-
 	"github.com/diamondburned/gotk4/gir/girgen/typesystem"
 )
 
@@ -31,7 +29,7 @@ func NewGoToCConverter(p *typesystem.Param) Converter {
 	}
 
 	if p.Nullable {
-		if p.Type == typesystem.Utf8 {
+		if p.Type.Type == typesystem.Utf8 {
 			return &GoToCNullableStringConverter{
 				Param: p,
 				SubConverter: &GoToCStringConverter{
@@ -49,75 +47,54 @@ func NewGoToCConverter(p *typesystem.Param) Converter {
 }
 
 func newGoToCBasicConverter(p *typesystem.Param) Converter {
-	if _, ok := p.Type.(*typesystem.Primitive); ok {
-		return newGoToCPrimitiveConverter(p)
-	}
-
-	if _, ok := p.Type.(*typesystem.PointerType); ok {
-		return newGoToCPointerConverter(p)
-	}
-
-	switch t := typesystem.UnderlyingType(p.Type).(type) {
-	// TODO: handle non pointer cases here for records, aliases, bitflags, enum etc
-
-	case *typesystem.Primitive:
-		// needed for manual primitives like GType:
-		return newGoToCPrimitiveConverter(p)
-	case *typesystem.Array:
-	case *typesystem.Bitfield, *typesystem.Enum:
-		return &GoToCCastingConverter{Param: p}
-	case *typesystem.Callback:
-		return &GoToCCallbackConverter{Param: p}
-	case *typesystem.Class:
-	case *typesystem.Container:
-	case *typesystem.Interface:
-	case *typesystem.PointerType:
-	case *typesystem.Record:
-	case *typesystem.Union:
-	case *typesystem.Alias:
-		// tricky sub cases here, depending on the aliased type
-		return &UnimplementedConverter{Param: p}
-	default:
-		// case typesystem.BaseType:
-		// case *typesystem.ForeignType:
-		panic(fmt.Sprintf("unexpected typesystem.Type: %T %s", t, t.CType()))
-	}
-
-	return &UnimplementedConverter{
-		Param: p,
-	}
-}
-
-func newGoToCPrimitiveConverter(p *typesystem.Param) Converter {
-	switch p.Type {
-	case typesystem.Utf8:
+	switch p.Type.Type {
+	case typesystem.Utf8, typesystem.Filename:
 		return &GoToCStringConverter{Param: p}
 	case typesystem.Gboolean:
 		return &GoToCBooleanConverter{Param: p}
-	default:
-		return &GoToCCastingConverter{Param: p}
 	}
-}
 
-// newGoToCPointerConverter must be called on a PointerType Param.
-func newGoToCPointerConverter(pointerparam *typesystem.Param) Converter {
-	if pointerparam.Type.(*typesystem.PointerType).Pointers != 1 {
-		return &UnimplementedConverter{
-			Param: pointerparam,
+	switch p.Type.Type.(type) {
+	case *typesystem.CastablePrimitive, *typesystem.Bitfield, *typesystem.Enum:
+		return &GoToCCastingConverter{
+			Param: p,
+		}
+	case *typesystem.Callback:
+		return &GoToCCallbackConverter{
+			Param: p,
+		}
+	case *typesystem.Alias:
+		return newGoToCAliasedConverter(p)
+	}
+
+	if conv, ok := p.Type.Type.(typesystem.ConvertToGlibFullType); p.TransferOwnership == typesystem.TransferFull && ok {
+		return &GoToCConvertibleConverter{
+			Param:       p,
+			ConvertFunc: conv.GoUnsafeToGlibFullFunction(),
 		}
 	}
 
-	// basetype may be a foreign type
-	basetype := pointerparam.Type.(*typesystem.PointerType).Base
-
-	switch typesystem.UnderlyingType(basetype).(type) {
-	case *typesystem.Record:
-		return &GoToCRecordPointerConverter{Param: pointerparam, Record: basetype}
-	case *typesystem.Class:
-		return &GoToCClassPointerConverter{Param: pointerparam, Class: basetype}
+	if conv, ok := p.Type.Type.(typesystem.ConvertToGlibNoneType); p.TransferOwnership == typesystem.TransferNone && ok {
+		return &GoToCConvertibleConverter{
+			Param:       p,
+			ConvertFunc: conv.GoUnsafeToGlibNoneFunction(),
+		}
 	}
 
-	return &UnimplementedConverter{
-		Param: pointerparam,
+	return &UnimplementedConverter{Param: p}
+}
+
+// tricky sub cases here, depending on the aliased type
+func newGoToCAliasedConverter(p *typesystem.Param) Converter {
+	subtype := p.Type.Type.(*typesystem.Alias).AliasedType
+
+	if _, ok := subtype.Type.(*typesystem.CastablePrimitive); ok {
+		return &AliasConverter{
+			SubConverter: &GoToCCastingConverter{
+				Param: p,
+			},
+		}
 	}
+
+	return &UnimplementedConverter{Param: p}
 }

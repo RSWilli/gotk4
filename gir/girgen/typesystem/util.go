@@ -2,8 +2,6 @@ package typesystem
 
 import (
 	"fmt"
-	"log"
-	"strconv"
 	"strings"
 	"unicode"
 
@@ -27,93 +25,30 @@ func goPackageName(girPkgName string) string {
 	}, girPkgName)
 }
 
-// parseMajorVersion returns the major version of the GIR namespace in int.
-func parseMajorVersion(version string) int {
-	major := gir.MajorVersion(version)
-
-	v, err := strconv.Atoi(major)
-	if err != nil {
-		log.Panicf("invalid major %q", major)
-	}
-
-	return v
-}
-
 // this is an invalid type indentifier, that can be used for types that do not have a
 // c or go type, e.g. callbacks. This is chosen becaus it will also break go/cgo compilation when used
 const typeInvalid = "// invalid type"
 
-// GoKeywords includes Go keywords. This is primarily to prevent collisions with
-// meaningful Go words.
-var GoKeywords = map[string]string{
-	// Keywords.
-	"break":       "",
-	"default":     "",
-	"func":        "fn",
-	"interface":   "iface",
-	"select":      "sel",
-	"case":        "",
-	"defer":       "",
-	"go":          "",
-	"map":         "",
-	"struct":      "",
-	"chan":        "ch",
-	"else":        "",
-	"goto":        "",
-	"package":     "pkg",
-	"switch":      "",
-	"const":       "",
-	"fallthrough": "",
-	"if":          "",
-	"range":       "",
-	"type":        "typ",
-	"continue":    "",
-	"for":         "",
-	"import":      "",
-	"return":      "ret",
-	"var":         "",
-}
-
 func cleanCType(ctype string) string {
-	ctype = strings.TrimPrefix(ctype, "const ")
-	ctype = strings.TrimPrefix(ctype, "volatile ")
+	// use spaces to prevent valid infix replaces
+
+	ctype = strings.ReplaceAll(ctype, "const ", "")
+	ctype = strings.ReplaceAll(ctype, " const", "")
+
+	ctype = strings.ReplaceAll(ctype, "volatile ", "")
+	ctype = strings.ReplaceAll(ctype, " volatile", "")
 
 	return ctype
 }
 
-// decreaseAnyTypePointers removes one pointer from the ctype of the [gir.AnyType], but doesn't modify the original
-// value
-func decreaseAnyTypePointers(t gir.AnyType) gir.AnyType {
-	var newType *gir.Type
-	var newArray *gir.Array
-
-	if t.Type != nil {
-		newType = &gir.Type{
-			XMLName:        t.Type.XMLName,
-			Name:           t.Type.Name,
-			CType:          strings.TrimSuffix(t.Type.CType, "*"),
-			Introspectable: t.Type.Introspectable,
-			DocElements:    t.Type.DocElements,
-			Types:          t.Type.Types,
-		}
-	}
-
-	if t.Array != nil {
-		newArray = &gir.Array{
-			XMLName:        t.Array.XMLName,
-			Name:           t.Array.Name,
-			CType:          strings.TrimSuffix(t.Array.CType, "*"),
-			Length:         t.Array.Length,
-			ZeroTerminated: t.Array.ZeroTerminated,
-			FixedSize:      t.Array.FixedSize,
-			Introspectable: t.Array.Introspectable,
-			Type:           t.Array.Type,
-		}
-	}
-
-	return gir.AnyType{
-		Type:  newType,
-		Array: newArray,
+func CTypeFromAnytype(t gir.AnyType) string {
+	switch {
+	case t.Array != nil:
+		return t.Array.CType
+	case t.Type != nil:
+		return t.Type.CType
+	default:
+		panic("invalid anytype")
 	}
 }
 

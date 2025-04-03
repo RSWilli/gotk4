@@ -8,7 +8,7 @@ import (
 )
 
 type MarshalGenerator struct {
-	typesystem.Type
+	Type typesystem.Marshalable
 
 	WrapFunction string // may be equal to GoName for Enums and simple conversions
 	// ValueFunction is the method on coregllib.Value to use
@@ -20,28 +20,28 @@ func (g *MarshalGenerator) Generate(w *file.Package) {
 
 	// TODO: import gobject
 
-	fmt.Fprintf(w.Go(), "func %s(p uintptr) (interface{}, error) {\n", g.MarshalFuncName())
+	fmt.Fprintf(w.Go(), "func marshal%s(p uintptr) (interface{}, error) {\n", g.Type.GoType(0))
 	fmt.Fprintf(w.Go(), "\treturn %s(gobject.ValueFromNative(unsafe.Pointer(p)).%s()), nil\n", g.WrapFunction, g.ValueFunction)
 	fmt.Fprintf(w.Go(), "}\n")
 }
 
-func NewMarshalEnumGenerator(typ typesystem.Type) *MarshalGenerator {
+func NewMarshalEnumGenerator(typ typesystem.Marshalable) *MarshalGenerator {
 	return &MarshalGenerator{
 		Type:          typ,
-		WrapFunction:  typ.GoType(),
+		WrapFunction:  typ.GoType(0),
 		ValueFunction: "Enum",
 	}
 }
 
-func NewMarshalBifieldGenerator(typ typesystem.Type) *MarshalGenerator {
+func NewMarshalBifieldGenerator(typ typesystem.Marshalable) *MarshalGenerator {
 	return &MarshalGenerator{
 		Type:          typ,
-		WrapFunction:  typ.GoType(),
+		WrapFunction:  typ.GoType(0),
 		ValueFunction: "Flags",
 	}
 }
 
-func NewMarshalObjectGenerator(typ typesystem.Type, wrapCoreObjectName string) *MarshalGenerator {
+func NewMarshalObjectGenerator(typ typesystem.Marshalable, wrapCoreObjectName string) *MarshalGenerator {
 	return &MarshalGenerator{
 		Type:          typ,
 		WrapFunction:  wrapCoreObjectName,

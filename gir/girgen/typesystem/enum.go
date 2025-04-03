@@ -8,6 +8,7 @@ import (
 type Enum struct {
 	BaseType
 	Doc
+	Marshaler
 
 	Members []*Member
 }
@@ -27,13 +28,17 @@ func DeclareEnum(e *env, v gir.Enum) *Enum {
 			GoTyp:   strcases.PascalToGo(v.Name),
 			CGoTyp:  "C." + v.CType,
 			CTyp:    v.CType,
-
-			GlibGetTypeFn: v.GLibGetType,
 		},
-		Doc: NewDoc(&v.InfoAttrs, &v.InfoElements),
+		Marshaler: newDefaultMarshaler(v.GLibGetType),
+		Doc:       NewDoc(&v.InfoAttrs, &v.InfoElements),
 	}
 
 	enum.Members = GetMembers(e, enum, v.Members)
 
 	return enum
+}
+
+// pointersAllowed implements Type.
+func (a *Enum) pointersAllowed(pointers int) bool {
+	return pointers == 0
 }

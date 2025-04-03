@@ -24,13 +24,14 @@ func DeclareConstant(e *env, v gir.Constant) *Constant {
 	// for some reason the name of the constant is listed under the ctype
 	cIdentifier := v.CType
 
-	underlying := e.findType(&v.Type)
+	ns, underlying := e.findType(&v.Type)
 
-	if underlying == nil {
+	if ns != nil {
+		e.logger.Warn("skipping foreign constant")
 		return nil
 	}
 
-	if Pointers(underlying) > 0 {
+	if underlying == nil {
 		return nil
 	}
 

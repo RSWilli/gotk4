@@ -10,6 +10,8 @@ type Bitfield struct {
 	BaseType
 	Doc
 
+	Marshaler
+
 	Members []*Member
 }
 
@@ -28,13 +30,17 @@ func DeclareBitfield(e *env, v gir.Bitfield) *Bitfield {
 			GoTyp:   strcases.PascalToGo(v.Name),
 			CGoTyp:  "C." + v.CType,
 			CTyp:    v.CType,
-
-			GlibGetTypeFn: v.GLibGetType,
 		},
-		Doc: NewDoc(&v.InfoAttrs, &v.InfoElements),
+		Marshaler: newDefaultMarshaler(v.GLibGetType),
+		Doc:       NewDoc(&v.InfoAttrs, &v.InfoElements),
 	}
 
 	b.Members = GetMembers(e, b, v.Members)
 
 	return b
+}
+
+// pointersAllowed implements Type.
+func (a *Bitfield) pointersAllowed(pointers int) bool {
+	return pointers == 0
 }

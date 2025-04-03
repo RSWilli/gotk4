@@ -182,18 +182,8 @@ func Generate(repos gir.Repositories, data Data) {
 	types.ApplyPreprocessors(repos, data.Preprocessors)
 
 	tsCfg := typesystem.Config{
-		Primitives: []typesystem.Type{
-			&typesystem.ForeignType{
-				SourceNamespace: &typesystem.Namespace{GoName: "glib", Version: gir.Version{Major: 2, Minor: 0, Patch: 0}},
-				Type: &typesystem.Primitive{
-					BaseType: typesystem.BaseType{
-						GirName: "GType",
-						CTyp:    "GType",
-						CGoTyp:  "C.GType",
-						GoTyp:   "Type",
-					},
-				},
-			},
+		GIRReplacements: map[string]string{
+			"GType": "GLib.Type", // manually implemented in glib namespace
 		},
 		Namespaces: map[string]typesystem.NamespaceConfig{
 			"cairo-1": {
@@ -205,13 +195,20 @@ func Generate(repos gir.Repositories, data Data) {
 			"GLib-2": {
 				MinVersion: "2.80",
 				ManualTypes: []typesystem.Type{
+					&typesystem.CastablePrimitive{
+						BaseType: typesystem.BaseType{
+							GirName: "Type", // see GIRReplacements
+							CTyp:    "GType",
+							CGoTyp:  "C.GType",
+							GoTyp:   "Type",
+						},
+					},
 					&typesystem.Callback{
 						BaseType: typesystem.BaseType{
-							GirName:       "DestroyNotify",
-							GoTyp:         "DestroyNotify",
-							CGoTyp:        "C.GDestroyNotify",
-							CTyp:          "GDestroyNotify",
-							GlibGetTypeFn: "",
+							GirName: "DestroyNotify",
+							GoTyp:   "DestroyNotify",
+							CGoTyp:  "C.GDestroyNotify",
+							CTyp:    "GDestroyNotify",
 						},
 						Parameters:     &typesystem.Parameters{},
 						TrampolineName: "callbackDelete",
@@ -219,15 +216,19 @@ func Generate(repos gir.Repositories, data Data) {
 					&typesystem.Record{
 						BaseType: typesystem.BaseType{
 							GirName: "Error",
-							GoTyp:   "error",
 							CGoTyp:  "C.GError",
 							CTyp:    "GError",
+							GoTyp:   "error",
+
+							IsGoBuiltin: true,
 						},
-						GoUnsafeFromGlibBorrowFunction: "UnsafeErrorFromGlibBorrow",
-						GoUnsafeFromGlibFullFunction:   "UnsafeErrorFromGlibFull",
-						GoUnsafeFromGlibNoneFunction:   "UnsafeErrorFromGlibNone",
-						GoUnsafeToGlibNoneFunction:     "UnsafeErrorToGlibNone",
-						GoUnsafeToGlibFullFunction:     "UnsafeErrorToGlibFull",
+						BaseConversions: typesystem.BaseConversions{
+							FromGlibBorrowFunction: "UnsafeErrorFromGlibBorrow",
+							FromGlibFullFunction:   "UnsafeErrorFromGlibFull",
+							FromGlibNoneFunction:   "UnsafeErrorFromGlibNone",
+							ToGlibNoneFunction:     "UnsafeErrorToGlibNone",
+							ToGlibFullFunction:     "UnsafeErrorToGlibFull",
+						},
 					},
 				},
 				// Ignored: []typesystem.IgnoreFunc{
@@ -239,17 +240,19 @@ func Generate(repos gir.Repositories, data Data) {
 					&typesystem.Class{
 						BaseType: typesystem.BaseType{
 							GirName: "Object",
-							GoTyp:   "Object",
+							GoTyp:   "ObjectInstance",
 							CTyp:    "GObject",
 							CGoTyp:  "C.GObject",
 						},
-						GoInterfaceName:                "ObjectLike",
-						Doc:                            typesystem.Doc{},
-						GoUnsafeFromGlibBorrowFunction: "TODOBorrow",
-						GoUnsafeFromGlibFullFunction:   "AssumeOwnership",
-						GoUnsafeFromGlibNoneFunction:   "Take",
-						GoUnsafeToGlibNoneFunction:     "TODOToNone",
-						GoUnsafeToGlibFullFunction:     "TODOToFull",
+						GoInterfaceName: "Object",
+						Doc:             typesystem.Doc{},
+						BaseConversions: typesystem.BaseConversions{
+							FromGlibBorrowFunction: "TODOBorrow",
+							FromGlibFullFunction:   "AssumeOwnership",
+							FromGlibNoneFunction:   "Take",
+							ToGlibNoneFunction:     "TODOToNone",
+							ToGlibFullFunction:     "TODOToFull",
+						},
 					},
 					&typesystem.Record{
 						BaseType: typesystem.BaseType{
@@ -265,6 +268,13 @@ func Generate(repos gir.Repositories, data Data) {
 							GoTyp:   "Value",
 							CTyp:    "GValue",
 							CGoTyp:  "C.GValue",
+						},
+						BaseConversions: typesystem.BaseConversions{
+							FromGlibBorrowFunction: "TODOFromGlibBorrow",
+							FromGlibFullFunction:   "TODOFromGlibFull",
+							FromGlibNoneFunction:   "TODOFromGlibNone",
+							ToGlibNoneFunction:     "TODOToGlibNone",
+							ToGlibFullFunction:     "TODOToGlibFull",
 						},
 					},
 

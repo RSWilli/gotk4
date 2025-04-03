@@ -12,7 +12,8 @@ type Field struct {
 
 	Identifier
 
-	Type Type
+	Type          CouldBeForeign[Type]
+	CTypePointers int
 
 	GoGetterName string
 	GoSetterName string
@@ -36,19 +37,27 @@ func NewField(e *env, parent Type, v gir.Field) *Field {
 		return nil // TODO: what does bits mean?
 	}
 
-	var t Type
+	var t CouldBeForeign[Type]
 	var getterName string
 	var setterName string
+	var pointers int
 
 	// Callback fields are fields for virtual methods that can be overwritten
 	//
 	// this will be done by the bindings and not exposed to the user
 	if v.Callback == nil {
-		t = e.findAnyType(v.AnyType)
+		ns, typ := e.findAnyType(v.AnyType)
 
-		if t == nil {
+		if typ == nil {
 			return nil
 		}
+
+		t = CouldBeForeign[Type]{
+			Namespace: ns,
+			Type:      typ,
+		}
+
+		pointers = CountCTypePointers(CTypeFromAnytype(v.AnyType))
 
 		if v.IsReadable() {
 			// TODO: check if this getter collides with any method
@@ -69,10 +78,11 @@ func NewField(e *env, parent Type, v gir.Field) *Field {
 			cGoIndentifier: strcases.CGoField(v.Name),
 			goIndentifier:  strcases.CGoField(v.Name),
 		},
-		Bits:     v.Bits,
-		Type:     t,
-		Readable: v.IsReadable(),
-		Writable: v.Writable,
+		Bits:          v.Bits,
+		Type:          t,
+		Readable:      v.IsReadable(),
+		Writable:      v.Writable,
+		CTypePointers: pointers,
 
 		GoGetterName: getterName,
 		GoSetterName: setterName,

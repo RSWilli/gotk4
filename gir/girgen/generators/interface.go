@@ -27,25 +27,26 @@ func (g *InterfaceGenerator) Generate(w *file.Package) {
 	w.GoImport("unsafe")
 	w.GoImport("runtime")
 
-	g.Doc.Generate(w.Go())
-
-	fmt.Fprintf(w.Go(), "type %s struct {\n", g.GoType())
+	fmt.Fprintf(w.Go(), "// %s is the instance type used by all types implementing %s. It is used internally by the bindings. Users should use the interface [%s] instead.\n", g.GoType(0), g.CType(0), g.GoInterfaceName)
+	fmt.Fprintf(w.Go(), "type %s struct {\n", g.GoType(0))
 	fmt.Fprintf(w.Go(), "\t_ [0]func() // equal guard\n")
-	fmt.Fprintf(w.Go(), "\t*%s\n", g.Parent.GoType())
+	fmt.Fprintf(w.Go(), "\t*%s\n", g.Parent.NamespacedGoType(0))
 	// for _, inter := range g.Prerequesite {
-	// 	fmt.Fprintf(w.Go(), "\t*%s\n", inter.GoType())
+	// 	fmt.Fprintf(w.Go(), "\t*%s\n", inter.GoType(0))
 	// }
 	fmt.Fprintf(w.Go(), "}\n\n")
 
-	fmt.Fprintf(w.Go(), "var _ %s = (*%s)(nil)\n\n", g.GoInterfaceName, g.GoType())
+	fmt.Fprintf(w.Go(), "var _ %s = (*%s)(nil)\n\n", g.GoInterfaceName, g.GoType(0))
 
+	g.Doc.Generate(w.Go())
 	fmt.Fprintf(w.Go(), "type %s interface {\n", g.GoInterfaceName)
 	w.Go().Indent()
-	fmt.Fprintln(w.Go(), g.Parent.GoType())
+	fmt.Fprintln(w.Go(), g.Parent.WithForeignNamespace(g.Parent.Type.GoInterfaceName))
 	// for inter := range g.PrerequesitesGoInterfaceNames() {
 	// 	fmt.Fprintln(w.Go(), inter)
 	// }
-	// fmt.Fprintln(w.Go())
+
+	w.Go().NewSection()
 
 	g.Methods.GenerateInterfaceSignatures(w.Go())
 
@@ -54,12 +55,12 @@ func (g *InterfaceGenerator) Generate(w *file.Package) {
 
 	baseClassIdentifier := "base"
 
-	fmt.Fprintf(w.Go(), "func %s(%s *%s) *%s {\n", g.GoWrapBaseClassFunction, baseClassIdentifier, g.Parent.GoType(), g.GoType())
+	fmt.Fprintf(w.Go(), "func %s(%s *%s) *%s {\n", g.GoWrapBaseClassFunction, baseClassIdentifier, g.Parent.WithForeignNamespace(g.Parent.Type.GoType(0)), g.GoType(0))
 	w.Go().Indent()
-	fmt.Fprintf(w.Go(), "return &%s{\n", g.GoType())
+	fmt.Fprintf(w.Go(), "return &%s{\n", g.GoType(0))
 	w.Go().Indent()
 
-	fmt.Fprintf(w.Go(), "%s: %s,\n", typesystem.UnderlyingType(g.Parent).GoType(), baseClassIdentifier)
+	fmt.Fprintf(w.Go(), "%s: %s,\n", g.Parent.Type.GoType(0), baseClassIdentifier)
 	w.Go().Unindent()
 
 	fmt.Fprintf(w.Go(), "}\n")
@@ -76,20 +77,31 @@ func (g *InterfaceGenerator) Generate(w *file.Package) {
 	// TODO: imports
 
 	mkConstructor := func(constructorName, parentConstructorName string) {
-		fmt.Fprintf(w.Go(), "func %s(c unsafe.Pointer) *%s {\n", constructorName, g.GoType())
+		fmt.Fprintf(w.Go(), "func %s(c unsafe.Pointer) %s {\n", constructorName, g.GoInterfaceName)
 		w.Go().Indent()
-		fmt.Fprintf(w.Go(), "base := %s(c)\n", parentConstructorName)
-		fmt.Fprintf(w.Go(), "return %s(base)\n", g.GoWrapBaseClassFunction)
+		fmt.Fprintf(w.Go(), "return %s(c).(%s)\n", parentConstructorName, g.GoInterfaceName)
 		w.Go().Unindent()
 		fmt.Fprintf(w.Go(), "}\n\n")
 	}
 
-	fmt.Fprintf(w.Go(), "// %s is used to convert raw %s pointers to go. This is used by the bindings internally.\n", g.GoUnsafeBorrowFunction, g.CType())
-	mkConstructor(g.GoUnsafeBorrowFunction, g.ParentGoUnsafeBorrowFunction())
-	fmt.Fprintf(w.Go(), "// %s is used to convert raw %s pointers to go while taking a reference and attaching a finalizer. This is used by the bindings internally.\n", g.GoUnsafeTransferNoneFunction, g.CType())
-	mkConstructor(g.GoUnsafeTransferNoneFunction, g.ParentGoUnsafeTransferNoneFunction())
-	fmt.Fprintf(w.Go(), "// %s is used to convert raw %s pointers to go while attaching a finalizer. This is used by the bindings internally.\n", g.GoUnsafeTransferFullFunction, g.CType())
-	mkConstructor(g.GoUnsafeTransferFullFunction, g.ParentGoUnsafeTransferFullFunction())
+	fmt.Fprintf(w.Go(), "// %s is used to convert raw %s pointers to go. This is used by the bindings internally.\n", g.GoUnsafeFromGlibBorrowFunction(), g.CType(0))
+	mkConstructor(g.GoUnsafeFromGlibBorrowFunction(), g.Parent.WithForeignNamespace(g.Parent.Type.GoUnsafeFromGlibBorrowFunction()))
+	fmt.Fprintf(w.Go(), "// %s is used to convert raw %s pointers to go while taking a reference and attaching a finalizer. This is used by the bindings internally.\n", g.GoUnsafeFromGlibNoneFunction(), g.CType(0))
+	mkConstructor(g.GoUnsafeFromGlibNoneFunction(), g.Parent.WithForeignNamespace(g.Parent.Type.GoUnsafeFromGlibNoneFunction()))
+	fmt.Fprintf(w.Go(), "// %s is used to convert raw %s pointers to go while attaching a finalizer. This is used by the bindings internally.\n", g.GoUnsafeFromGlibFullFunction(), g.CType(0))
+	mkConstructor(g.GoUnsafeFromGlibFullFunction(), g.Parent.WithForeignNamespace(g.Parent.Type.GoUnsafeFromGlibFullFunction()))
+
+	mkTransfer := func(transfername, baseTransferName string) {
+		fmt.Fprintf(w.Go(), "func %s(c %s) unsafe.Pointer {\n", transfername, g.GoInterfaceName)
+		fmt.Fprintf(w.Go(), "\treturn %s(c)\n", baseTransferName)
+		fmt.Fprintf(w.Go(), "}\n\n")
+	}
+
+	fmt.Fprintf(w.Go(), "// %s is used to convert the instance to it's C value %s. This is used by the bindings internally.\n", g.GoUnsafeToGlibNoneFunction(), g.CType(0))
+	mkTransfer(g.GoUnsafeToGlibNoneFunction(), g.Parent.WithForeignNamespace(g.Parent.Type.GoUnsafeToGlibNoneFunction()))
+
+	fmt.Fprintf(w.Go(), "// %s is used to convert the instance to it's C value %s, while removeing the finalizer. This is used by the bindings internally.\n", g.GoUnsafeToGlibFullFunction(), g.CType(0))
+	mkTransfer(g.GoUnsafeToGlibFullFunction(), g.Parent.WithForeignNamespace(g.Parent.Type.GoUnsafeToGlibFullFunction()))
 
 	GenerateAll(
 		w,
@@ -127,24 +139,13 @@ func NewInterfaceGenerator(c *typesystem.Interface) *InterfaceGenerator {
 	return g
 }
 
-func wrapInterface(w file.CodeWriter, t typesystem.Type, baseClassIdentifier string) {
-	fmt.Fprintf(w, "%s: %s{\n", typesystem.UnderlyingType(t).GoType(), t.GoType())
-
-	var parent typesystem.Type
-
-	switch t := t.(type) {
-	case *typesystem.ForeignType:
-		parent = t.Type.(*typesystem.Interface).Parent
-	case *typesystem.Interface:
-		parent = t.Parent
-	default:
-		panic("invalid type")
-	}
+func wrapInterface(w file.CodeWriter, t typesystem.CouldBeForeign[*typesystem.Interface], baseClassIdentifier string) {
+	fmt.Fprintf(w, "%s: %s{\n", t.Type.GoType(0), t.NamespacedGoType(0))
 
 	w.Indent()
 
 	// parent is always the base class
-	fmt.Fprintf(w, "%s: *%s,\n", typesystem.UnderlyingType(parent).GoType(), baseClassIdentifier)
+	fmt.Fprintf(w, "%s: *%s,\n", t.Type.Parent.Type.GoType(0), baseClassIdentifier)
 
 	w.Unindent()
 

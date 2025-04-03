@@ -4,61 +4,78 @@ import (
 	"github.com/diamondburned/gotk4/gir"
 )
 
+// Container describes a container type, which must be manually implemented.
 type Container struct {
-	Outer Type
-	Inner []Type
-}
+	BaseType
 
-// GLibGetType implements Type.
-func (c *Container) GLibGetType() string {
-	return ""
-}
+	// The conversions need to accept more parameters, one constructor for each generic subtype
+	BaseConversions
 
-// MarshalFuncName implements Type.
-func (c *Container) MarshalFuncName() string {
-	return ""
-}
-
-// CGoType implements Type.
-func (c *Container) CGoType() string {
-	return c.Outer.CGoType()
-}
-
-// CType implements Type.
-func (c *Container) CType() string {
-	return c.Outer.CType()
-}
-
-// GIRName implements Type.
-func (c *Container) GIRName() string {
-	return c.Outer.GIRName()
-}
-
-// GoType implements Type.
-func (c *Container) GoType() string {
-	return c.Outer.GoType()
+	GenericParams int
 }
 
 var _ Type = &Container{}
+
+type ContainerInstance struct {
+	*Container
+
+	InnerTypes []CouldBeForeign[Type]
+}
+
+// GIRName implements Type.
+func (c *ContainerInstance) GIRName() string {
+	return "instance of" + c.Container.GIRName()
+}
+
+// GoType implements Type.
+func (c *ContainerInstance) GoType(pointers int) string {
+	return c.GoType(pointers)
+}
+
+// GoType implements Type.
+func (c *ContainerInstance) pointersAllowed(pointers int) bool {
+	return pointers == 1
+}
+
+var _ Type = &ContainerInstance{}
 
 func (e *env) resolveInnerTypes(outer Type, t *gir.Type) Type {
 	if len(t.Types) == 0 {
 		return outer
 	}
 
-	c := &Container{
-		Outer: outer,
+	c, ok := outer.(*Container)
+	if !ok {
+		e.logger.Warn("skipping type because parent is not generic but has nested types", "outer", outer.GoType(0))
+		return nil
+	}
+
+	if len(t.Types) != c.GenericParams {
+		e.logger.Warn("skipping type it has more nested types than the container can support", "outer", outer.GoType(0))
+		return nil
+	}
+
+	instance := &ContainerInstance{
+		Container: c,
 	}
 
 	for _, inner := range t.Types {
-		innerTyp := e.findTypeByGIRName(inner.Name)
+		ns, innerTyp := e.findTypeByGIRName(inner.Name)
 
 		if innerTyp == nil {
 			return nil
 		}
 
-		c.Inner = append(c.Inner, innerTyp)
+		instance.InnerTypes = append(instance.InnerTypes, CouldBeForeign[Type]{
+			Namespace: ns,
+			Type:      innerTyp,
+		})
 	}
 
-	return c
+	return instance
+}
+
+// pointersAllowed implements Type.
+func (a *Container) pointersAllowed(pointers int) bool {
+	return pointers == 1
 }

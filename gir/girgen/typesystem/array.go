@@ -12,54 +12,41 @@ type Array struct {
 	cGoTypeOverride string
 	goTypeOverride  string
 
-	Inner          Type
+	Inner         CouldBeForeign[Type]
+	InnerPointers int
+
 	Length         *Param // length is filled out by [NewParameters]
 	ZeroTerminated bool
 	FixedSize      int
 }
 
-// GLibGetType implements Type.
-func (a *Array) GLibGetType() string {
-	panic("unimplemented")
-}
-
-// MarshalFuncName implements Type.
-func (a *Array) MarshalFuncName() string {
-	panic("unimplemented")
-}
-
 var _ Type = (*Array)(nil)
 
-// CGoType implements Type.
-func (a *Array) CGoType() string {
-	if a.cGoTypeOverride != "" {
-		return a.cGoTypeOverride
-	}
-	return a.Inner.CGoType()
+func (a *Array) CGoType(pointers int) string {
+	return "array"
 }
 
 // CType implements Type.
-func (a *Array) CType() string {
-	if a.cTypeOverride != "" {
-		return a.cTypeOverride
-	}
-	return a.Inner.CType()
+func (a *Array) CType(pointers int) string {
+	return "array"
+}
+
+// GoType implements Type.
+func (a *Array) GoType(pointers int) string {
+	return "array"
 }
 
 // GIRName implements Type.
 func (a *Array) GIRName() string {
-	if a.Inner == nil {
+	if a.Inner.Type == nil {
 		return "array[unknown]"
 	}
-	return fmt.Sprintf("array[%s]", a.Inner.GIRName())
+	return fmt.Sprintf("array[%s]", a.Inner.Type.GIRName())
 }
 
-// GoType implements Type.
-func (a *Array) GoType() string {
-	if a.goTypeOverride != "" {
-		return a.goTypeOverride
-	}
-	return fmt.Sprintf("[]%s", a.Inner.GoType())
+// pointersAllowed implements Type.
+func (a *Array) pointersAllowed(pointers int) bool {
+	return true //pointers == 0 && (a.Inner.Type == nil || a.Inner.Type.pointersAllowed(a.InnerPointers))
 }
 
 // getArrayType resolves the array type in the current env
@@ -80,9 +67,11 @@ func (e *env) getArrayType(arr *gir.Array) *Array {
 		return &Array{
 			cTypeOverride:   arr.CType,
 			cGoTypeOverride: "C." + arr.CType,
-			Inner:           prim("...", typeInvalid, typeInvalid, "byte"),
-			FixedSize:       arr.FixedSize,
-			ZeroTerminated:  arr.IsZeroTerminated(),
+			Inner: CouldBeForeign[Type]{
+				Type: prim("...", typeInvalid, typeInvalid, "byte"),
+			},
+			FixedSize:      arr.FixedSize,
+			ZeroTerminated: arr.IsZeroTerminated(),
 		}
 	}
 
@@ -94,7 +83,7 @@ func (e *env) getArrayType(arr *gir.Array) *Array {
 			cTypeOverride:   arr.CType, // may contain "const"
 			cGoTypeOverride: "*C.gchar",
 			goTypeOverride:  "string",
-			Inner:           nil,
+			Inner:           CouldBeForeign[Type]{}, // no inner type
 			FixedSize:       arr.FixedSize,
 			ZeroTerminated:  arr.IsZeroTerminated(),
 		}
@@ -105,45 +94,20 @@ func (e *env) getArrayType(arr *gir.Array) *Array {
 		return nil
 	}
 
-	originalPointers := CountPointers(arr.CType)
-
-	if arr.Type.Name == "utf8" || originalPointers > 1 {
-		// this is a higher dimensional array, which needs to be implemented manually
-		e.logger.Info("skipping high dimensional array type", "name", arr.Type.Name, "ctype", arr.CType)
-		return nil
-	}
-
-	inner := e.findTypeByGIRName(arr.Type.Name)
+	ns, inner := e.findTypeByGIRName(arr.Type.Name)
 	if inner == nil {
 		e.logger.Warn("could not find array inner type", "name", arr.Type.Name)
 		return nil
 	}
 
-	if _, ok := inner.(*PointerType); !ok {
-		// inner type is always a pointer, because we need to do pointer arithmetics
-		inner = IncreasePointers(inner, 1)
-	}
-
 	array := &Array{
-		Inner:          inner,
+		Inner: CouldBeForeign[Type]{
+			Namespace: ns,
+			Type:      inner,
+		},
 		Length:         nil, // will be set by params if relevant
 		ZeroTerminated: arr.IsZeroTerminated(),
 		FixedSize:      arr.FixedSize,
-	}
-
-	typePointers := CountPointers(array.CType())
-
-	missingPointers := originalPointers - typePointers
-
-	if missingPointers < 0 {
-		panic("too many pointers on type")
-	}
-
-	if missingPointers > 0 {
-		array.Inner = &PointerType{
-			Pointers: missingPointers,
-			Base:     array.Inner,
-		}
 	}
 
 	return array

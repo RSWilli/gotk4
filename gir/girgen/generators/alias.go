@@ -72,7 +72,7 @@ func (g *AliasGenerator) Generate(w *file.Package) {
 
 	// TODO: imports of foreign type namespaces
 
-	fmt.Fprintf(w.Go(), "type %s = %s\n", g.GoType(), g.AliasedType.GoType())
+	fmt.Fprintf(w.Go(), "type %s = %s\n", g.GoType(0), g.AliasedType.NamespacedGoType(0))
 }
 
 func NewAliasGenerator(alias *typesystem.Alias) *AliasGenerator {

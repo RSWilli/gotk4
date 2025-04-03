@@ -22,10 +22,10 @@ func (g *RecordFieldGetterGenerator) Generate(w *file.Package) {
 
 	// TODO: simplify, this is only for legacy compat, can be maybe be simplified:
 
-	fmt.Fprintf(w.Go(), "func (%s *%s) %s() %s {\n", g.ReceiverName, g.Parent.GoType(), g.GoGetterName, g.Type.GoType())
+	fmt.Fprintf(w.Go(), "func (%s *%s) %s() %s {\n", g.ReceiverName, g.Parent.GoType(0), g.GoGetterName, g.Type.NamespacedGoType(0))
 	fmt.Fprintf(w.Go(), "\tvalptr := &%s.native.%s\n", g.ReceiverName, g.CGoIndentifier())
-	fmt.Fprintf(w.Go(), "\tvar _v %s\n", g.Type.GoType())
-	fmt.Fprintf(w.Go(), "\t_v = %s(*valptr)\n", g.Type.GoType())
+	fmt.Fprintf(w.Go(), "\tvar _v %s\n", g.Type.NamespacedGoType(0))
+	fmt.Fprintf(w.Go(), "\t_v = %s(*valptr)\n", g.Type.NamespacedGoType(0))
 	fmt.Fprintf(w.Go(), "\treturn _v\n")
 	fmt.Fprintf(w.Go(), "}\n\n")
 }
@@ -35,20 +35,18 @@ func NewRecordFieldGetterGenerator(f *typesystem.Field) *RecordFieldGetterGenera
 		return nil
 	}
 
-	if !typesystem.IsPrimitive(f.Type) || typesystem.Pointers(f.Type) > 0 {
-		// TODO: this can be done, but remember that the returned value is only borrowed, so it has to keep the record alive
-		// if we are wrapping a pointer into the record.
+	if _, ok := f.Type.Type.(*typesystem.CastablePrimitive); !ok || f.CTypePointers > 0 {
 		return nil
 	}
 
-	if typesystem.Is(f.Type, typesystem.Utf8) {
+	if f.Type.Type == typesystem.Utf8 {
 		return nil // TODO
 	}
 
 	g := &RecordFieldGetterGenerator{
 		Doc: NewIdentifierGoDocGenerator(f),
 
-		ReceiverName: strcases.ReceiverName(f.Parent.GoType()),
+		ReceiverName: strcases.ReceiverName(f.Parent.GoType(0)),
 
 		Field: f,
 	}

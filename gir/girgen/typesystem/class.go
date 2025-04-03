@@ -21,15 +21,10 @@ type Class struct {
 
 	GoWrapBaseClassFunction string
 
-	// unsafe constructors names:
-	GoUnsafeFromGlibBorrowFunction string
-	GoUnsafeFromGlibFullFunction   string
-	GoUnsafeFromGlibNoneFunction   string
-
 	GoPrivateUpcastMethod string
 
-	GoUnsafeToGlibNoneFunction string
-	GoUnsafeToGlibFullFunction string
+	BaseConversions
+	Marshaler
 
 	Abstract bool
 
@@ -37,9 +32,9 @@ type Class struct {
 	gir gir.Class
 
 	TypeStruct *Record
-	Parent     Type
+	Parent     CouldBeForeign[*Class]
 	// Implements contains the implemented (foreign) interfaces
-	Implements []Type
+	Implements []CouldBeForeign[*Interface]
 
 	Functions      []*CallableSignature
 	Methods        []*CallableSignature
@@ -47,6 +42,20 @@ type Class struct {
 	Constructors   []*CallableSignature
 	Fields         []*Field
 	Signals        []*Signal
+}
+
+// GoType implements Type. Use the interface type if a pointer is needed
+func (in *Class) GoType(pointers int) string {
+	if pointers == 0 {
+		return in.BaseType.GoType(0)
+	}
+
+	return in.GoInterfaceName
+}
+
+// pointersAllowed implements Type.
+func (a *Class) pointersAllowed(pointers int) bool {
+	return pointers == 1
 }
 
 func DeclareClass(e *env, v gir.Class) *Class {
@@ -73,26 +82,21 @@ func DeclareClass(e *env, v gir.Class) *Class {
 	c := &Class{
 		Doc:             NewDoc(&v.InfoAttrs, &v.InfoElements),
 		Abstract:        v.Abstract,
-		GoInterfaceName: v.Name + "Like",
+		GoInterfaceName: v.Name,
 
 		GoWrapBaseClassFunction: fmt.Sprintf("unsafeWrap%s", v.Name),
 		GoPrivateUpcastMethod:   fmt.Sprintf("upcastTo%s", v.CType), // use cidentifier to not shadow parent methods
 
-		GoUnsafeFromGlibBorrowFunction: fmt.Sprintf("Unsafe%sFromGlibBorrow", v.Name),
-		GoUnsafeFromGlibNoneFunction:   fmt.Sprintf("Unsafe%sFromGlibNone", v.Name),
-		GoUnsafeFromGlibFullFunction:   fmt.Sprintf("Unsafe%sFromGlibFull", v.Name),
+		BaseConversions: newDefaultBaseConversions(v.Name),
 
-		GoUnsafeToGlibNoneFunction: fmt.Sprintf("Unsafe%sToGlibNone", v.Name),
-		GoUnsafeToGlibFullFunction: fmt.Sprintf("Unsafe%sToGlibFull", v.Name),
 		BaseType: BaseType{
 			GirName: v.Name,
-			GoTyp:   v.Name,
+			GoTyp:   v.Name + "Instance",
 			CGoTyp:  "C." + ctype,
 			CTyp:    ctype,
-
-			GlibGetTypeFn: v.GLibGetType,
 		},
-		gir: v,
+		Marshaler: newDefaultMarshaler(v.GLibGetType),
+		gir:       v,
 	}
 
 	return c
@@ -102,7 +106,12 @@ func (c *Class) resolve(e *env) bool {
 	e = e.sub("class", c.gir.CType)
 
 	if c.gir.GLibTypeStruct != "" {
-		typeStructType := e.findTypeByGIRName(c.gir.GLibTypeStruct)
+		ns, typeStructType := e.findTypeByGIRName(c.gir.GLibTypeStruct)
+
+		if ns != nil {
+			e.logger.Warn("type struct is foreign", "namespace", ns.Name)
+			return false
+		}
 
 		if typeStructType == nil {
 			return false
@@ -118,28 +127,31 @@ func (c *Class) resolve(e *env) bool {
 		c.TypeStruct = typeStruct
 	}
 
-	parent := e.findTypeByGIRName(c.gir.Parent)
+	ns, parent := e.findTypeByGIRName(c.gir.Parent)
 
 	if parent == nil {
 		return false
 	}
 
-	if !IsClass(parent) {
-		e.logger.Warn("parent is not a class", "parent", parent.GIRName(), "actual", reflect.TypeOf(UnderlyingType(parent)).String())
+	if _, ok := parent.(*Class); !ok {
+		e.logger.Warn("parent is not a class", "parent", parent.GIRName(), "actual", reflect.TypeOf(parent).String())
 		return false
 	}
 
-	c.Parent = parent
+	c.Parent = CouldBeForeign[*Class]{
+		Namespace: ns,
+		Type:      parent.(*Class),
+	}
 
 	for _, impl := range c.gir.Implements {
-		inter := e.findTypeByGIRName(impl.Name)
+		ns, inter := e.findTypeByGIRName(impl.Name)
 
 		if inter == nil {
 			e.logger.Info("implemented interface not found", "interface", impl.Name)
 			continue
 		}
 
-		if !IsInterface(inter) {
+		if _, ok := inter.(*Interface); !ok {
 			return false
 		}
 
@@ -148,7 +160,10 @@ func (c *Class) resolve(e *env) bool {
 			continue
 		}
 
-		c.Implements = append(c.Implements, inter)
+		c.Implements = append(c.Implements, CouldBeForeign[*Interface]{
+			Namespace: ns,
+			Type:      inter.(*Interface),
+		})
 	}
 
 	return true
@@ -156,14 +171,13 @@ func (c *Class) resolve(e *env) bool {
 
 func (c *Class) redundantImplements(inter Type) bool {
 	for _, impl := range c.Implements {
-		if UnderlyingType(impl) == UnderlyingType(inter) {
+		if impl.Type == inter {
 			return true
 		}
 	}
 
-	if c.Parent != nil {
-		parent := UnderlyingType(c.Parent).(*Class)
-		return parent.redundantImplements(inter)
+	if c.Parent.Type != nil {
+		return c.Parent.Type.redundantImplements(inter)
 	}
 
 	return false
@@ -226,18 +240,7 @@ func (c *Class) declareNested(e *env) {
 func (c *Class) ImplementedGoInterfaceNames() iter.Seq[string] {
 	return func(yield func(string) bool) {
 		for _, inter := range c.Implements {
-			var name string
-
-			switch i := inter.(type) {
-			case *Interface:
-				name = i.GoInterfaceName
-			case *ForeignType:
-				name = i.AddForeignNamespace(i.Type.(*Interface).GoInterfaceName)
-			default:
-				panic("invalid implemented interface")
-			}
-
-			if !yield(name) {
+			if !yield(inter.WithForeignNamespace(inter.Type.GoInterfaceName)) {
 				return
 			}
 		}
@@ -245,79 +248,40 @@ func (c *Class) ImplementedGoInterfaceNames() iter.Seq[string] {
 }
 
 func (c *Class) ParentGoInterfaceName() string {
-	switch p := c.Parent.(type) {
-	case nil:
-		panic("no parent")
-	case *Class:
-		return p.GoInterfaceName
-	case *ForeignType:
-		return p.AddForeignNamespace(p.Type.(*Class).GoInterfaceName)
-	default:
-		panic("invalid parent")
-	}
+	return c.Parent.WithForeignNamespace(c.Parent.Type.GoInterfaceName)
 }
 
 func (c *Class) BaseClassGoUnsafeFromGlibBorrowFunction() string {
-	switch p := c.BaseClass().(type) {
-	case *Class:
-		return p.GoUnsafeFromGlibBorrowFunction
-	case *ForeignType:
-		return p.AddForeignNamespace(p.Type.(*Class).GoUnsafeFromGlibBorrowFunction)
-	default:
-		panic("invalid base class")
-	}
+	base := c.BaseClass()
+	return base.WithForeignNamespace(base.Type.GoUnsafeFromGlibBorrowFunction())
 }
 
 func (c *Class) BaseClassGoUnsafeFromGlibFullFunction() string {
-	switch p := c.BaseClass().(type) {
-	case *Class:
-		return p.GoUnsafeFromGlibFullFunction
-	case *ForeignType:
-		return p.AddForeignNamespace(p.Type.(*Class).GoUnsafeFromGlibFullFunction)
-	default:
-		panic("invalid base class")
-	}
+	base := c.BaseClass()
+	return base.WithForeignNamespace(base.Type.GoUnsafeFromGlibFullFunction())
 }
 
 func (c *Class) BaseClassGoUnsafeFromGlibNoneFunction() string {
-	switch p := c.BaseClass().(type) {
-	case *Class:
-		return p.GoUnsafeFromGlibNoneFunction
-	case *ForeignType:
-		return p.AddForeignNamespace(p.Type.(*Class).GoUnsafeFromGlibNoneFunction)
-	default:
-		panic("invalid base class")
-	}
+	base := c.BaseClass()
+	return base.WithForeignNamespace(base.Type.GoUnsafeFromGlibNoneFunction())
 }
 
 func (c *Class) BaseClassGoUnsafeToGlibFullFunction() string {
-	switch p := c.BaseClass().(type) {
-	case *Class:
-		return p.GoUnsafeToGlibFullFunction
-	case *ForeignType:
-		return p.AddForeignNamespace(p.Type.(*Class).GoUnsafeToGlibFullFunction)
-	default:
-		panic("invalid base class")
-	}
+	base := c.BaseClass()
+	return base.WithForeignNamespace(base.Type.GoUnsafeToGlibFullFunction())
 }
 
 func (c *Class) BaseClassGoUnsafeToGlibNoneFunction() string {
-	switch p := c.BaseClass().(type) {
-	case *Class:
-		return p.GoUnsafeToGlibNoneFunction
-	case *ForeignType:
-		return p.AddForeignNamespace(p.Type.(*Class).GoUnsafeToGlibNoneFunction)
-	default:
-		panic("invalid base class")
-	}
+	base := c.BaseClass()
+	return base.WithForeignNamespace(base.Type.GoUnsafeToGlibNoneFunction())
 }
 
 // BaseClass returns the base class from the view of the namespace of c
-func (c *Class) BaseClass() Type {
+func (c *Class) BaseClass() CouldBeForeign[*Class] {
 	parents := c.AllParents()
 
 	if len(parents) == 0 {
-		return c
+		panic("class is already the base class")
 	}
 
 	return parents[len(parents)-1]
@@ -334,71 +298,31 @@ func (c *Class) BaseClass() Type {
 // class so it will be used as a pointer. They will get returned as:
 //
 //	[ForeignA[C2], ForeignA[C3], ForeignB[C4], ForeignB[C5]]
-func (c *Class) AllParents() []Type {
-	parents := make([]Type, 0, 10) // abitrary cap
+func (c *Class) AllParents() []CouldBeForeign[*Class] {
+	parents := make([]CouldBeForeign[*Class], 0, 10) // abitrary cap
 
-	var currentNs *Namespace
-	var currentType = c.Parent
-loop:
+	currentNs := c.Parent.Namespace
+	currentParent := c.Parent.Type
+
 	for {
-		switch parent := currentType.(type) {
-		case nil:
-			break loop
-		case *ForeignType:
-			currentNs = parent.SourceNamespace
-			currentType = parent.Type
-		case *Class:
-			currentType = parent.Parent
+		parents = append(parents, CouldBeForeign[*Class]{
+			Namespace: currentNs,
+			Type:      currentParent,
+		})
 
-			if currentNs == nil {
-				parents = append(parents, parent)
-				continue loop
-			}
+		if currentParent.Parent.Type == nil {
+			break
+		}
 
-			parents = append(parents, &ForeignType{
-				SourceNamespace: currentNs,
-				Type:            parent,
-			})
+		currentParent = currentParent.Parent.Type
 
-		default:
-			panic(fmt.Sprintf("unexpected class parent %T", parent))
+		if currentParent.Parent.Namespace != nil {
+			// only change the current namespace if the type is not local
+			// to the current type. If current type was foreign to c and next type
+			// is local to current, then next will still be foreign to c
+			currentNs = currentParent.Parent.Namespace
 		}
 	}
 
 	return parents
-}
-
-func IsClass(t Type) bool {
-	switch p := t.(type) {
-	case *Class:
-		return true
-	case *ForeignType:
-		return IsClass(p.Type)
-	default:
-		return false
-	}
-}
-
-func GetClassParent(t Type) Type {
-	switch p := t.(type) {
-	case *Class:
-		return p.Parent
-	case *ForeignType:
-		return GetClassParent(p.Type)
-	default:
-		panic("invalid type received")
-	}
-}
-
-func ClassGoInterfaceName(t Type) string {
-	switch p := t.(type) {
-	case *PointerType:
-		return ClassGoInterfaceName(p.Base)
-	case *Class:
-		return p.GoInterfaceName
-	case *ForeignType:
-		return p.AddForeignNamespace(ClassGoInterfaceName(p.Type))
-	default:
-		panic("invalid type received")
-	}
 }

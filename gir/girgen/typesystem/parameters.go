@@ -35,7 +35,10 @@ type Param struct {
 	GoName string
 
 	// Type is the type of the parameter. It is missing a pointer if this param is an out param that isn't CallerAllocates
-	Type Type
+	Type CouldBeForeign[Type]
+	// CTypePointers contains the amount of "*" characters present in the original ctype. it is used to output the correct type,
+	// but only if the Type itself doesn't handle it differently
+	CTypePointers int
 
 	// Skip signifies that the parameter should be skipped in the go call
 	// this happens with params that are only useful in C.
@@ -72,30 +75,27 @@ type Param struct {
 }
 
 func (p *Param) CDeclaration() string {
-	return fmt.Sprintf("%s %s", p.CName, p.Type.CType())
+	return fmt.Sprintf("%s %s", p.CName, p.CType())
 }
 
 func (p *Param) CGoDeclaration() string {
-	return fmt.Sprintf("%s %s", p.CName, p.Type.CGoType())
+	return fmt.Sprintf("%s %s", p.CName, p.CGoType())
 }
 
 func (p *Param) GoDeclaration() string {
-	return fmt.Sprintf("%s %s", p.GoName, p.Type.GoType())
+	return fmt.Sprintf("%s %s", p.GoName, p.GoType())
 }
 
-func (p *Param) GoParamDeclaration() string {
-	return fmt.Sprintf("%s %s", p.GoName, p.GoParamType())
+func (p *Param) CGoType() string {
+	return p.Type.Type.CGoType(p.CTypePointers)
 }
 
-func (p *Param) GoParamType() string {
-	switch UnderlyingType(p.Type).(type) {
-	case *Class:
-		return ClassGoInterfaceName(p.Type)
-	case *Interface:
-		return InterfaceGoInterfaceName(p.Type)
-	default:
-		return p.Type.GoType()
-	}
+func (p *Param) GoType() string {
+	return p.Type.WithForeignNamespace(p.Type.Type.GoType(p.CTypePointers))
+}
+
+func (p *Param) CType() string {
+	return p.Type.Type.CType(p.CTypePointers)
 }
 
 type Parameters struct {
@@ -123,54 +123,17 @@ type Parameters struct {
 	GoParameters ParamList
 }
 
-func validParam(param *Param, currentType Type) bool {
+func (param *Param) valid(e *env) bool {
 	if param.Implicit || param.Skip {
 		return true
 	}
 
-	switch t := currentType.(type) {
-	case *ForeignType:
-		return validParam(param, t.Type)
-	case *PointerType:
-		return t.Pointers == 1 && validPointerParam(param, t.Base)
-	case *Record, *Class:
-		return false // needs one pointer
-	case *Alias:
-		return validParam(param, t.AliasedType)
-	case *Callback:
-		// closure must exist, and if notified then destroy must exist
-		return param.Closure != nil && (param.Scope != CallbackParamScopeNotified || param.Destroy != nil)
+	switch t := param.Type.Type.(type) {
+	case checkedParameterType:
+		return t.allowedTypeForParam(param)
 	default:
-		return true
+		return t.pointersAllowed(param.CTypePointers)
 	}
-}
-
-func validPointerParam(param *Param, currentType Type) bool {
-	switch t := currentType.(type) {
-	case *PointerType:
-		panic("pointer to pointer type?")
-	case *ForeignType:
-		return validPointerParam(param, t.Type)
-	case *Callback:
-		return false
-	case *Record, *Class:
-		return true
-	case *Alias:
-		return validPointerParam(param, t.AliasedType)
-	default:
-		return true
-	}
-}
-
-// validForGoBindings checks some preconditions to determine if we can convert all arguments to
-func (p *Parameters) validForGoBindings() bool {
-	for _, p := range p.CParameters() {
-		if !validParam(p, p.Type) {
-			return false
-		}
-	}
-
-	return true
 }
 
 // CParameters returns the param list for the c call, since the instance param is always the first param if set
@@ -193,7 +156,7 @@ func (p *Parameters) CGoReturn() *Param {
 		return nil
 	}
 
-	if p.CReturn.Type == Void {
+	if p.CReturn.Type.Type == Void {
 		return nil
 	}
 
@@ -207,19 +170,44 @@ func NewCallableParameters(e *env, v gir.CallableAttrs) *Parameters {
 
 	if v.Parameters != nil {
 		if v.Parameters.InstanceParameter != nil {
-			t := e.findAnyType(v.Parameters.InstanceParameter.AnyType)
+			// instance param must not be an array:
+
+			girType := v.Parameters.InstanceParameter.AnyType.Type
+
+			if girType == nil {
+				e.logger.Warn("array instance param", "ctype", debugCTypeFromAnytype(v.Parameters.InstanceParameter.AnyType))
+				return nil
+			}
+
+			ns, t := e.findType(girType)
 
 			if t == nil {
-				e.logger.Warn("instance param type not found", "ctype", debugCTypeFromAnytype(v.Parameters.InstanceParameter.AnyType))
+				e.logger.Warn("instance param type not found", "ctype", girType.CType)
+				return nil
+			}
+
+			if ns != nil {
+				e.logger.Warn("foreign instance param", "ctype", girType.CType)
+				return nil
+			}
+
+			pointers := CountCTypePointers(girType.CType)
+
+			if pointers != 1 {
+				e.logger.Warn("instance param without exactly one pointer", "ctype", girType.CType)
 				return nil
 			}
 
 			params.InstanceParam = &Param{
 				Doc: NewParamDoc(v.Parameters.InstanceParameter.ParameterAttrs),
 
-				CName:             "carg0",
-				GoName:            strcases.ParamNameToGo(v.Parameters.InstanceParameter.Name),
-				Type:              t,
+				CName:  "carg0",
+				GoName: strcases.ParamNameToGo(v.Parameters.InstanceParameter.Name),
+				Type: CouldBeForeign[Type]{
+					Namespace: ns,
+					Type:      t,
+				},
+				CTypePointers:     1,
 				TransferOwnership: TransferNone,
 				Skip:              false,
 				Optional:          false,
@@ -238,23 +226,22 @@ func NewCallableParameters(e *env, v gir.CallableAttrs) *Parameters {
 				e.logger.Warn("FIXME: skipping inout param")
 				return nil
 			}
-			paramType := p.AnyType
 
-			if p.Direction == "out" && !p.CallerAllocates && !canBeOutParamType(paramType) {
-				e.logger.Warn("ignoring out param type without enough pointers", "ctype", debugCTypeFromAnytype(paramType))
+			ns, t := e.findAnyType(p.AnyType)
+
+			if t == nil {
+				e.logger.Warn("type not found", "ctype", debugCTypeFromAnytype(p.AnyType))
 				return nil
 			}
 
-			if p.Direction == "out" && !p.CallerAllocates {
-				// decrease the pointers, the last pointer will be added by the generator
-				// when passing the value to the function
-				paramType = decreaseAnyTypePointers(paramType)
+			ctypePointers := CountCTypePointers(CTypeFromAnytype(p.AnyType))
+
+			if p.Direction == "out" {
+				ctypePointers -= 1 // if the param is still valid will be checked later
 			}
 
-			t := e.findAnyType(paramType)
-
-			if t == nil {
-				e.logger.Warn("type not found", "ctype", debugCTypeFromAnytype(paramType))
+			if ctypePointers < 0 {
+				e.logger.Warn("skipping param not valid for an out direction", "ctype", debugCTypeFromAnytype(p.AnyType))
 				return nil
 			}
 
@@ -286,10 +273,14 @@ func NewCallableParameters(e *env, v gir.CallableAttrs) *Parameters {
 			}
 
 			param := &Param{
-				Doc:               NewParamDoc(p.ParameterAttrs),
-				CName:             fmt.Sprintf("carg%d", i+1),
-				GoName:            strcases.ParamNameToGo(p.Name),
-				Type:              t,
+				Doc:    NewParamDoc(p.ParameterAttrs),
+				CName:  fmt.Sprintf("carg%d", i+1),
+				GoName: strcases.ParamNameToGo(p.Name),
+				Type: CouldBeForeign[Type]{
+					Namespace: ns,
+					Type:      t,
+				},
+				CTypePointers:     ctypePointers,
 				TransferOwnership: transfer,
 				Skip:              p.Skip,
 				Optional:          p.Optional,
@@ -300,15 +291,18 @@ func NewCallableParameters(e *env, v gir.CallableAttrs) *Parameters {
 				Implicit:          false,
 				Closure:           nil,
 				Destroy:           nil,
+				BorrowFrom:        nil,
 			}
 
 			params.parameters = append(params.parameters, param)
 
-			if p.Direction == "out" {
-				// value will be a return, must add to go params still to keep the index intact for skipping
-				params.GoReturns = append(params.GoReturns, param)
-			} else {
-				params.GoParameters = append(params.GoParameters, param)
+			if !param.Skip {
+				if p.Direction == "out" {
+					// value will be a return, must add to go params still to keep the index intact for skipping
+					params.GoReturns = append(params.GoReturns, param)
+				} else {
+					params.GoParameters = append(params.GoParameters, param)
+				}
 			}
 		}
 
@@ -325,14 +319,7 @@ func NewCallableParameters(e *env, v gir.CallableAttrs) *Parameters {
 				param.Destroy.Implicit = true
 			}
 			if p.AnyType.Array != nil && p.AnyType.Array.Length != nil {
-				// type must be an array type here, but can be a pointer to an array:
-
-				switch param.Type.(type) {
-				case *Array:
-					param.Type.(*Array).Length = params.parameters[*p.Array.Length]
-				case *PointerType:
-					param.Type.(*PointerType).Base.(*Array).Length = params.parameters[*p.Array.Length]
-				}
+				param.Type.Type.(*Array).Length = params.parameters[*p.Array.Length]
 
 				params.parameters[*p.Array.Length].Implicit = true
 			}
@@ -340,7 +327,7 @@ func NewCallableParameters(e *env, v gir.CallableAttrs) *Parameters {
 	}
 
 	if v.ReturnValue != nil {
-		t := e.findAnyType(v.ReturnValue.AnyType)
+		ns, t := e.findAnyType(v.ReturnValue.AnyType)
 
 		if t == nil {
 			e.logger.Warn("return type not found", "ctype", debugCTypeFromAnytype(v.ReturnValue.AnyType))
@@ -354,13 +341,19 @@ func NewCallableParameters(e *env, v gir.CallableAttrs) *Parameters {
 			transfer = TransferFull
 		}
 
+		ctypePointers := CountCTypePointers(CTypeFromAnytype(v.ReturnValue.AnyType))
+
 		ret := &Param{
-			Doc:               NewReturnDoc(v.ReturnValue),
-			CName:             "cret",
-			GoName:            "ret",
-			Direction:         "return",
-			Type:              t,
+			Doc:       NewReturnDoc(v.ReturnValue),
+			CName:     "cret",
+			GoName:    "ret",
+			Direction: "return",
+			Type: CouldBeForeign[Type]{
+				Namespace: ns,
+				Type:      t,
+			},
 			TransferOwnership: transfer,
+			CTypePointers:     ctypePointers,
 		}
 
 		if transfer == TransferBorrow {
@@ -383,23 +376,25 @@ func NewCallableParameters(e *env, v gir.CallableAttrs) *Parameters {
 	if v.Throws {
 		// if a callable throws then it has a GError** as the last param, which is a nullable
 		// out param
-		throwType := e.findTypeByGIRName("GLib.Error")
+		ns, throwType := e.findTypeByGIRName("GLib.Error")
 
 		if throwType == nil {
 			e.logger.Warn("GLib.Error type not found, ignoring throwing function")
 			return nil
 		}
 
-		throwType = IncreasePointers(throwType, 1)
-
 		throwParam := &Param{
 			Doc: ParamDoc{
 				Name: "err",
 				Doc:  "an error",
 			},
-			CName:             "_cerr",
-			GoName:            "_goerr",
-			Type:              throwType,
+			CName:  "_cerr",
+			GoName: "_goerr",
+			Type: CouldBeForeign[Type]{
+				Namespace: ns,
+				Type:      throwType,
+			},
+			CTypePointers:     1,
 			Skip:              false,
 			TransferOwnership: TransferFull,
 			Optional:          true,
@@ -411,8 +406,13 @@ func NewCallableParameters(e *env, v gir.CallableAttrs) *Parameters {
 		params.GoReturns = append(params.GoReturns, throwParam)
 	}
 
-	if !params.validForGoBindings() {
-		e.logger.Warn("parameters not valid for go bindings")
+	for _, p := range params.CParameters() {
+		if !p.valid(e) {
+			return nil
+		}
+	}
+
+	if params.CReturn != nil && !params.CReturn.valid(e) {
 		return nil
 	}
 
@@ -420,22 +420,6 @@ func NewCallableParameters(e *env, v gir.CallableAttrs) *Parameters {
 	e.sortGoReturns(params.GoReturns)
 
 	return params
-}
-
-// canBeOutParamType returns true if the AnyType has enough pointers to be an "out" parameter
-//
-// if this is false then it's most likely that the documentation is wrong
-func canBeOutParamType(t gir.AnyType) bool {
-	switch {
-	case t.Array != nil:
-		// needs a pointer to the array, resulting in at least 2 pointers
-		return CountPointers(t.Array.CType) >= 2
-	case t.Type != nil:
-		// needs at least a pointer to the value.
-		return CountPointers(t.Type.CType) >= 1
-	default:
-		panic("invalid anytype")
-	}
 }
 
 type ParamList []*Param
@@ -486,39 +470,7 @@ func (pl ParamList) GoTypes() string {
 			continue
 		}
 
-		decls = append(decls, p.Type.GoType())
-	}
-
-	return strings.Join(decls, ", ")
-}
-
-// GoParamTypes differs from GoTypes in that class and interface params don't return the
-// pointer to the struct type, but instead the go interface name
-func (pl ParamList) GoParamTypes() string {
-	decls := make([]string, 0, len(pl))
-
-	for _, p := range pl {
-		if p.Skip || p.Implicit {
-			continue
-		}
-
-		decls = append(decls, p.GoParamType())
-	}
-
-	return strings.Join(decls, ", ")
-}
-
-// GoParamDeclarations differs from GoDeclarations in that class and interface params don't return the
-// pointer to the struct type, but instead the go interface name
-func (pl ParamList) GoParamDeclarations() string {
-	decls := make([]string, 0, len(pl))
-
-	for _, p := range pl {
-		if p.Skip || p.Implicit {
-			continue
-		}
-
-		decls = append(decls, p.GoParamDeclaration())
+		decls = append(decls, p.GoType())
 	}
 
 	return strings.Join(decls, ", ")

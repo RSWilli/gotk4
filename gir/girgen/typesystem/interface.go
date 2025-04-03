@@ -2,7 +2,6 @@ package typesystem
 
 import (
 	"fmt"
-	"iter"
 	"reflect"
 
 	"github.com/diamondburned/gotk4/gir"
@@ -18,26 +17,35 @@ type Interface struct {
 
 	// Parent is always (foreign) GObject, because at runtime we will receive a GObject pointer
 	// and wrap it. We look it up because we don't know the implementation here.
-	Parent Type
+	Parent CouldBeForeign[*Class]
 
 	GoWrapBaseClassFunction string
 
 	GoInterfaceName string
 
-	// unsafe constructors names:
-	GoUnsafeBorrowFunction       string
-	GoUnsafeTransferFullFunction string
-	GoUnsafeTransferNoneFunction string
+	BaseConversions
+	Marshaler
 
-	GoUnsafeToGlibNoneMethod string
-	GoUnsafeToGlibFullMethod string
-
-	Prerequesite []Type // Class or Interface
+	Prerequesite []CouldBeForeign[Type]
 
 	Functions      []*CallableSignature
 	Methods        []*CallableSignature
 	VirtualMethods []*VirtualMethod
 	Signals        []*Signal
+}
+
+// GoType implements Type. Use the interface type if a pointer is needed
+func (in *Interface) GoType(pointers int) string {
+	if pointers == 0 {
+		return in.BaseType.GoType(0)
+	}
+
+	return in.GoInterfaceName
+}
+
+// pointersAllowed implements Type.
+func (a *Interface) pointersAllowed(pointers int) bool {
+	return pointers == 1
 }
 
 func DeclareInterface(e *env, v gir.Interface) *Interface {
@@ -62,20 +70,15 @@ func DeclareInterface(e *env, v gir.Interface) *Interface {
 			GoTyp:   v.Name + "Instance",
 			CGoTyp:  "C." + ctype,
 			CTyp:    ctype,
-
-			GlibGetTypeFn: v.GLibGetType,
 		},
+		Marshaler:       newDefaultMarshaler(v.GLibGetType),
 		GoInterfaceName: v.Name,
 
 		GoWrapBaseClassFunction: fmt.Sprintf("unsafeWrap%s", v.Name),
 
-		GoUnsafeBorrowFunction:       fmt.Sprintf("Unsafe%sFromGlibBorrow", v.Name),
-		GoUnsafeTransferNoneFunction: fmt.Sprintf("Unsafe%sFromGlibNone", v.Name),
-		GoUnsafeTransferFullFunction: fmt.Sprintf("Unsafe%sFromGlibFull", v.Name),
+		BaseConversions: newDefaultBaseConversions(v.Name),
 
-		GoUnsafeToGlibNoneMethod: fmt.Sprintf("Unsafe%sToGlibNone", v.Name),
-		GoUnsafeToGlibFullMethod: fmt.Sprintf("Unsafe%sToGlibFull", v.Name),
-		gir:                      v,
+		gir: v,
 	}
 
 	return i
@@ -85,7 +88,12 @@ func (in *Interface) resolve(e *env) bool {
 	e = e.sub("interface", in.gir.CType)
 
 	if in.gir.GLibTypeStruct != "" {
-		typeStructType := e.findTypeByGIRName(in.gir.GLibTypeStruct)
+		ns, typeStructType := e.findTypeByGIRName(in.gir.GLibTypeStruct)
+
+		if ns != nil {
+			e.logger.Warn("type struct is foreign", "namespace", ns.Name)
+			return false
+		}
 
 		if typeStructType == nil {
 			return false
@@ -101,33 +109,41 @@ func (in *Interface) resolve(e *env) bool {
 		in.TypeStruct = typeStruct
 	}
 
-	parent := e.findTypeByGIRName("GObject.Object")
+	ns, parent := e.findTypeByGIRName("GObject.Object")
 
 	if parent == nil {
 		e.logger.Error("GObject.Object not found")
 		return false
 	}
 
-	if !IsClass(parent) {
+	if _, ok := parent.(*Class); !ok {
 		return false
 	}
 
-	in.Parent = parent
+	in.Parent = CouldBeForeign[*Class]{
+		Namespace: ns,
+		Type:      parent.(*Class),
+	}
 
 	for _, prereq := range in.gir.Prerequisites {
-		inter := e.findTypeByGIRName(prereq.Name)
+		ns, inter := e.findTypeByGIRName(prereq.Name)
 
 		if inter == nil {
 			e.logger.Info("interface prerequesite not found", "interface", prereq.Name)
 			return false
 		}
 
-		if !IsInterface(inter) && !IsClass(inter) {
-			e.logger.Warn("prerequesite is not a class or an interface", "prerequesite", inter.GIRName(), "actual", reflect.TypeOf(UnderlyingType(parent)).String())
+		switch inter.(type) {
+		case *Class, *Interface:
+		default:
+			e.logger.Warn("prerequesite is not a class or an interface", "prerequesite", inter.GIRName(), "actual", reflect.TypeOf(parent).String())
 			return false
 		}
 
-		in.Prerequesite = append(in.Prerequesite, inter)
+		in.Prerequesite = append(in.Prerequesite, CouldBeForeign[Type]{
+			Namespace: ns,
+			Type:      inter,
+		})
 	}
 
 	return true
@@ -160,101 +176,5 @@ func (in *Interface) declareNested(e *env) {
 				in.VirtualMethods = append(in.VirtualMethods, t)
 			}
 		}
-	}
-}
-
-func (in *Interface) ParentGoUnsafeBorrowFunction() string {
-	switch p := in.Parent.(type) {
-	case nil:
-		panic("no parent")
-	case *Class:
-		return p.GoUnsafeFromGlibBorrowFunction
-	case *ForeignType:
-		return p.AddForeignNamespace(p.Type.(*Class).GoUnsafeFromGlibBorrowFunction)
-	default:
-		panic("invalid parent")
-	}
-}
-
-func (c *Interface) ParentGoUnsafeTransferFullFunction() string {
-	switch p := c.Parent.(type) {
-	case nil:
-		panic("no parent")
-	case *Class:
-		return p.GoUnsafeFromGlibFullFunction
-	case *ForeignType:
-		return p.AddForeignNamespace(p.Type.(*Class).GoUnsafeFromGlibFullFunction)
-	default:
-		panic("invalid parent")
-	}
-}
-
-func (c *Interface) ParentGoUnsafeTransferNoneFunction() string {
-	switch p := c.Parent.(type) {
-	case nil:
-		panic("no parent")
-	case *Class:
-		return p.GoUnsafeFromGlibNoneFunction
-	case *ForeignType:
-		return p.AddForeignNamespace(p.Type.(*Class).GoUnsafeFromGlibNoneFunction)
-	default:
-		panic("invalid parent")
-	}
-}
-
-// PrerequesiteConstructors returns the underlying type names and the borrow constructor name of the
-// interface's prerequesites. We only need to borrow because the class parent constructor is already taking a reference
-func (c *Interface) PrerequesiteConstructors() iter.Seq2[string, string] {
-	return func(yield func(string, string) bool) {
-		for _, inter := range c.Prerequesite {
-			typeName := UnderlyingType(inter).GoType()
-			var constructorName string
-
-			switch i := inter.(type) {
-			case *Class:
-				constructorName = i.GoUnsafeFromGlibBorrowFunction
-			case *Interface:
-				constructorName = i.GoUnsafeBorrowFunction
-			case *ForeignType:
-				switch t := i.Type.(type) {
-				case *Class:
-					constructorName = i.AddForeignNamespace(t.GoUnsafeFromGlibBorrowFunction)
-				case *Interface:
-					constructorName = i.AddForeignNamespace(t.GoUnsafeBorrowFunction)
-				default:
-					panic("invalid interface prerequesite")
-				}
-			default:
-				panic("invalid interface prerequesite")
-			}
-
-			if !yield(typeName, constructorName) {
-				return
-			}
-		}
-	}
-}
-
-func IsInterface(t Type) bool {
-	switch p := t.(type) {
-	case *Interface:
-		return true
-	case *ForeignType:
-		return IsInterface(p.Type)
-	default:
-		return false
-	}
-}
-
-func InterfaceGoInterfaceName(t Type) string {
-	switch p := t.(type) {
-	case *PointerType:
-		return InterfaceGoInterfaceName(p.Base)
-	case *Interface:
-		return p.GoInterfaceName
-	case *ForeignType:
-		return p.AddForeignNamespace(InterfaceGoInterfaceName(p.Type))
-	default:
-		panic("invalid type received")
 	}
 }

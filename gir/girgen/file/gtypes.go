@@ -11,11 +11,11 @@ import (
 type gTypes []gType
 
 type gType struct {
-	typesystem.Type
+	typesystem.Marshalable
 }
 
 func (t gType) name() string {
-	return fmt.Sprintf("GType%s", t.GoType())
+	return fmt.Sprintf("GType%s", t.GoType(0))
 }
 
 func (ts gTypes) reader() io.Reader {
@@ -41,7 +41,7 @@ func (ts gTypes) reader() io.Reader {
 	block.Indent()
 
 	for _, t := range ts {
-		fmt.Fprintf(&block, "glib.TypeMarshaler{T: %s, F: %s},\n", t.name(), t.MarshalFuncName())
+		fmt.Fprintf(&block, "glib.TypeMarshaler{T: %s, F: marshal%s},\n", t.name(), t.GoType(0))
 	}
 
 	block.Unindent()

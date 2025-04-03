@@ -18,6 +18,8 @@ type Callback struct {
 	*Parameters
 }
 
+var _ checkedParameterType = (*Callback)(nil)
+
 // DeclareCallback declares a new callback. This way the type can be resolved by others, but the referenced parameters
 // have to be resolved later, because the callback params could be referencing other record types
 func DeclareCallback(e *env, v gir.Callback) *Callback {
@@ -37,8 +39,6 @@ func DeclareCallback(e *env, v gir.Callback) *Callback {
 			GoTyp:   goType,
 			CGoTyp:  "C." + v.CType,
 			CTyp:    v.CType,
-
-			GlibGetTypeFn: "",
 		},
 		// e.g. _gotk4_gtk4_AssistantPageFunc
 		TrampolineName: fmt.Sprintf("%s_%s", e.trampolinePrefix(), goType),
@@ -59,4 +59,14 @@ func (cb *Callback) resolveParameters(e *env) bool {
 	cb.Parameters = params
 
 	return true
+}
+
+// pointersAllowed implements Type.
+func (a *Callback) pointersAllowed(pointers int) bool {
+	return pointers == 0
+}
+
+// allowedTypeForParam implements allowedParameter.
+func (cb *Callback) allowedTypeForParam(param *Param) bool {
+	return param.CTypePointers == 0 && param.Closure != nil && (param.Scope != CallbackParamScopeNotified || param.Destroy != nil)
 }

@@ -35,7 +35,7 @@ func (w *Package) SetNamespace(namespace *typesystem.Namespace) {
 	w.namespace = namespace
 }
 
-func (p *Package) RegisterGType(t typesystem.Type) {
+func (p *Package) RegisterGType(t typesystem.Marshalable) {
 	p.registeredTypes = append(p.registeredTypes, gType{t})
 }
 

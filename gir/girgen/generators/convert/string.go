@@ -13,7 +13,7 @@ type CToGoStringConverter struct {
 
 // Convert implements Converter.
 func (c *CToGoStringConverter) Convert(w file.CodeWriter) {
-	fmt.Fprintf(w, "%s = C.GoString((%s)(unsafe.Pointer(%s)))\n", c.Param.GoName, c.Param.Type.CGoType(), c.Param.CName)
+	fmt.Fprintf(w, "%s = C.GoString((%s)(unsafe.Pointer(%s)))\n", c.Param.GoName, c.Param.CGoType(), c.Param.CName)
 
 	switch c.Param.TransferOwnership {
 	case typesystem.TransferFull:
@@ -41,7 +41,7 @@ type GoToCStringConverter struct {
 func (c *GoToCStringConverter) Convert(w file.CodeWriter) {
 	// TODO: import unsafe
 
-	fmt.Fprintf(w, "%s = (%s)(unsafe.Pointer(C.CString(%s)))\n", c.Param.CName, c.Param.Type.CGoType(), c.Param.GoName)
+	fmt.Fprintf(w, "%s = (%s)(unsafe.Pointer(C.CString(%s)))\n", c.Param.CName, c.Param.CGoType(), c.Param.GoName)
 
 	switch c.Param.TransferOwnership {
 	case typesystem.TransferFull:

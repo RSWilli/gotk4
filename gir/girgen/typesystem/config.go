@@ -8,9 +8,10 @@ import (
 )
 
 type Config struct {
-	// Primitives contains additional primitives, e.g. GType, which is referenced in the GIRs without a namespace. This allows
-	// for redirecting these types to a go package instead of global names.
-	Primitives []Type
+	// GIRReplacements allows you to rename a GIR type. This may be needed for primitives that are implemented in another namespace.
+	//
+	// make sure that these replacements terminate or the typesystem will crash
+	GIRReplacements map[string]string
 
 	// Namespaces contains the configuration for the given versioned namespace (e.g. GLib-2). If a key is missing in this map,
 	// then the typesystem will resolve everything in that namespace

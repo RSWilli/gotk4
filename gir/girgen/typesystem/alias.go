@@ -12,7 +12,7 @@ type Alias struct {
 	// gir is used to resolve the aliased type after it has been declared
 	gir gir.Alias
 
-	AliasedType Type
+	AliasedType CouldBeForeign[Type]
 }
 
 func DeclareAlias(e *env, v gir.Alias) *Alias {
@@ -30,13 +30,9 @@ func DeclareAlias(e *env, v gir.Alias) *Alias {
 			GoTyp:   strcases.PascalToGo(v.Name),
 			CGoTyp:  "C." + v.CType,
 			CTyp:    v.CType,
-
-			// has no get type, but will be marshaled by calling the subtype marshaler.
-			GlibGetTypeFn: "",
 		},
-		AliasedType: nil, // lazily set
-		Doc:         NewDoc(&v.InfoAttrs, &v.InfoElements),
-		gir:         v,
+		Doc: NewDoc(&v.InfoAttrs, &v.InfoElements),
+		gir: v,
 	}
 
 	return a
@@ -45,13 +41,21 @@ func DeclareAlias(e *env, v gir.Alias) *Alias {
 func (a *Alias) resolve(e *env) bool {
 	e = e.sub("alias", a.gir.Type)
 
-	subtype := e.findType(&a.gir.Type)
+	ns, subtype := e.findType(&a.gir.Type)
 
 	if subtype == nil {
 		return false
 	}
 
-	a.AliasedType = subtype
+	a.AliasedType = CouldBeForeign[Type]{
+		Namespace: ns,
+		Type:      subtype,
+	}
 
 	return true
+}
+
+// pointersAllowed implements Type.
+func (a *Alias) pointersAllowed(pointers int) bool {
+	return pointers == 0 && a.AliasedType.Type.pointersAllowed(0)
 }

@@ -189,13 +189,13 @@ type BitfieldGenerator struct {
 func (g *BitfieldGenerator) Generate(w *file.Package) {
 	g.Doc.Generate(w.Go())
 
-	fmt.Fprintf(w.Go(), "type %s C.gint\n\n", g.GoType())
+	fmt.Fprintf(w.Go(), "type %s C.gint\n\n", g.GoType(0))
 
 	fmt.Fprintln(w.Go(), "const (")
 	w.Go().Indent()
 	for _, m := range g.Members {
 		m.Doc.Generate(w.Go())
-		fmt.Fprintf(w.Go(), "%s %s = %s\n", m.GoIndentifier(), g.GoType(), m.Value)
+		fmt.Fprintf(w.Go(), "%s %s = %s\n", m.GoIndentifier(), g.GoType(0), m.Value)
 	}
 	w.Go().Unindent()
 	fmt.Fprint(w.Go(), ")\n\n")
@@ -206,7 +206,7 @@ func (g *BitfieldGenerator) Generate(w *file.Package) {
 	}
 
 	fmt.Fprintf(w.Go(), "// Has returns true if %s contains other\n", g.MethodReceiver)
-	fmt.Fprintf(w.Go(), "func (%s %s) Has(other %s) bool {\n", g.MethodReceiver, g.GoType(), g.GoType())
+	fmt.Fprintf(w.Go(), "func (%s %s) Has(other %s) bool {\n", g.MethodReceiver, g.GoType(0), g.GoType(0))
 	fmt.Fprintf(w.Go(), "\treturn (%s & other) == other\n", g.MethodReceiver)
 	fmt.Fprintf(w.Go(), "}\n\n")
 }
@@ -233,7 +233,7 @@ func NewBitfieldGenerator(bf *typesystem.Bitfield) *BitfieldGenerator {
 		Bitfield: bf,
 
 		Members:        members,
-		MethodReceiver: strcases.ReceiverName(bf.GoType()),
+		MethodReceiver: strcases.ReceiverName(bf.GoType(0)),
 		Marshaler:      marshalGen,
 	}
 }

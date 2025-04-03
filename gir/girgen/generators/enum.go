@@ -192,13 +192,13 @@ func (g *EnumGenerator) Generate(w *file.Package) {
 
 	g.Doc.Generate(w.Go())
 
-	fmt.Fprintf(w.Go(), "type %s C.int\n\nconst (\n", g.GoType())
+	fmt.Fprintf(w.Go(), "type %s C.int\n\nconst (\n", g.GoType(0))
 
 	w.Go().Indent()
 	for _, member := range g.Members {
 		member.Doc.Generate(w.Go())
 
-		fmt.Fprintf(w.Go(), "%s %s = %s\n", member.GoIndentifier(), g.GoType(), member.Value)
+		fmt.Fprintf(w.Go(), "%s %s = %s\n", member.GoIndentifier(), g.GoType(0), member.Value)
 	}
 	w.Go().Unindent()
 

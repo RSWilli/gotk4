@@ -86,7 +86,7 @@ func NewTypeGoDocGenerator(typ DocumentedType) *GoDocGenerator {
 	// info := GetInfoFields(girWithDoc)
 
 	return &GoDocGenerator{
-		DocString: fmt.Sprintf("%s wraps %s", typ.GoType(), typ.CType()),
+		DocString: fmt.Sprintf("%s wraps %s", typ.GoType(0), typ.CType(0)),
 		GIRDoc:    typ.Documentation(),
 	}
 }
@@ -123,7 +123,7 @@ func NewCallableGoDocGenerator(callable *typesystem.CallableSignature) *GoDocGen
 }
 
 func paramDocListItem(p *typesystem.Param) string {
-	docStr := fmt.Sprintf("%s %s", p.GoName, p.GoParamType())
+	docStr := fmt.Sprintf("%s %s", p.GoName, p.GoType())
 
 	if p.Nullable {
 		docStr += " (nullable)"

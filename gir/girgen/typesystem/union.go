@@ -6,6 +6,7 @@ import (
 
 type Union struct {
 	BaseType
+	Marshaler
 	gir gir.Union
 
 	Doc Doc
@@ -35,10 +36,9 @@ func DeclareUnion(e *env, v gir.Union) *Union {
 			GoTyp:   v.Name,
 			CGoTyp:  "C." + v.CType,
 			CTyp:    v.CType,
-
-			GlibGetTypeFn: v.GLibGetType,
 		},
-		gir: v,
+		Marshaler: newDefaultMarshaler(v.GLibGetType),
+		gir:       v,
 	}
 }
 
@@ -72,4 +72,9 @@ func (u *Union) declareNested(e *env) resolvedState {
 	// }
 
 	return okResolved
+}
+
+// pointersAllowed implements Type.
+func (a *Union) pointersAllowed(pointers int) bool {
+	return pointers == 0 // TODO: is this correct?
 }

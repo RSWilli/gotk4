@@ -1,45 +1,22 @@
 package typesystem
 
-import (
-	"fmt"
-)
-
 type Type interface {
 	GIRName() string
-	GoType() string
-	CGoType() string
-	CType() string
+	GoType(pointers int) string
+	CGoType(pointers int) string
+	CType(pointers int) string
 
-	GLibGetType() string
-	MarshalFuncName() string
+	pointersAllowed(pointers int) bool
 }
 
-var _ Type = (*PointerType)(nil)
-
-func Is(t, other Type) bool {
-	return UnderlyingType(t) == other
-}
-
-// UnderlyingType removes the [ForeignType] or [PointerType] if there is one. This is useful for type assertions
-// on the underlying types, e.g. for parent classes
-func UnderlyingType(t Type) Type {
-	switch v := t.(type) {
-	case *ForeignType:
-		return UnderlyingType(v.Type)
-	case *PointerType:
-		return UnderlyingType(v.Base)
-	default:
-		return t
-	}
-}
-
+// BaseType partially implements the [Type] interface
 type BaseType struct {
 	GirName string
 	GoTyp   string
 	CGoTyp  string
 	CTyp    string
 
-	GlibGetTypeFn string
+	IsGoBuiltin bool
 }
 
 // GIRName implements Type.
@@ -48,26 +25,19 @@ func (b BaseType) GIRName() string {
 }
 
 // CGoType implements Type.
-func (b BaseType) CGoType() string {
-	return b.CGoTyp
+func (b BaseType) CGoType(pointers int) string {
+	return GetPointers(pointers) + b.CGoTyp
 }
 
 // CType implements Type.
-func (b BaseType) CType() string {
-	return b.CTyp
+func (b BaseType) CType(pointers int) string {
+	return b.CTyp + GetPointers(pointers)
 }
 
 // GoType implements Type.
-func (b BaseType) GoType() string {
-	return b.GoTyp
+func (b BaseType) GoType(pointers int) string {
+	if b.IsGoBuiltin {
+		return b.GoTyp
+	}
+	return GetPointers(pointers) + b.GoTyp
 }
-
-func (b BaseType) GLibGetType() string {
-	return b.GlibGetTypeFn
-}
-
-func (b BaseType) MarshalFuncName() string {
-	return fmt.Sprintf("marshal%s", b.GoTyp)
-}
-
-var _ Type = BaseType{}

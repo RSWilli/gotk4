@@ -21,7 +21,7 @@ func (c *GoToCCallbackConverter) Convert(w file.CodeWriter) {
 		panic("destroy closure without destroy param")
 	}
 
-	cb := typesystem.UnderlyingType(c.Param.Type).(*typesystem.Callback)
+	cb := c.Param.Type.Type.(*typesystem.Callback)
 	closure := c.Param.Closure
 	destroy := c.Param.Destroy
 
@@ -34,7 +34,7 @@ func (c *GoToCCallbackConverter) Convert(w file.CodeWriter) {
 	}
 
 	fmt.Fprintf(w, "%s = (*[0]byte)(C.%s)\n", c.Param.CName, cb.TrampolineName)
-	fmt.Fprintf(w, "%s = %s(gbox.%s(%s))\n", closure.CName, closure.Type.CGoType(), assignFunc, c.Param.GoName)
+	fmt.Fprintf(w, "%s = %s(gbox.%s(%s))\n", closure.CName, closure.CGoType(), assignFunc, c.Param.GoName)
 
 	switch c.Param.Scope {
 	case typesystem.CallbackParamScopeAsync, typesystem.CallbackParamScopeForever:
@@ -42,8 +42,8 @@ func (c *GoToCCallbackConverter) Convert(w file.CodeWriter) {
 	case typesystem.CallbackParamScopeCall:
 		fmt.Fprintf(w, "defer gbox.Delete(uintptr(%s))\n", closure.CName)
 	case typesystem.CallbackParamScopeNotified:
-		destroyTrampoline := typesystem.UnderlyingType(destroy.Type).(*typesystem.Callback).TrampolineName
-		fmt.Fprintf(w, "%s = (%s)((*[0]byte)(C.%s))\n", destroy.CName, destroy.Type.CGoType(), destroyTrampoline)
+		destroyTrampoline := destroy.Type.Type.(*typesystem.Callback).TrampolineName
+		fmt.Fprintf(w, "%s = (%s)((*[0]byte)(C.%s))\n", destroy.CName, destroy.CGoType(), destroyTrampoline)
 	default:
 		panic(fmt.Sprintf("unexpected typesystem.CallbackParamScope: %#v", c.Param.Scope))
 	}

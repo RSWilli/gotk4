@@ -109,54 +109,59 @@ func (e *env) ingoreDeprecated(name string, kind GIRKind, anygir any) bool {
 	return false
 }
 
-func (e *env) findAnyType(t gir.AnyType) Type {
+func (e *env) findAnyType(t gir.AnyType) (*Namespace, Type) {
 	if t.Type != nil && t.Array != nil {
 		panic("received invalid anytype")
 	}
 
 	if t.Type != nil {
-		typ := e.findType(t.Type)
+		ns, typ := e.findType(t.Type)
 
 		if typ == nil {
-			return nil
+			return nil, nil
 		}
-		return typ
+		return ns, typ
 	}
 
 	if t.Array != nil {
 		arr := e.getArrayType(t.Array)
 
 		if arr == nil {
-			return nil
+			return nil, nil
 		}
-		return arr
+		return nil, arr
 	}
 
 	// this happens e.g. on vararg params
-	return nil
+	return nil, nil
 }
 
 // findType searches for a declared type in the namespace. It makes sure that the returned type
 // contains the same amount of pointers as the given gir type
-func (e *env) findType(t *gir.Type) Type {
-	typ := e.findTypeByGIRName(t.Name)
+func (e *env) findType(t *gir.Type) (*Namespace, Type) {
+	ns, typ := e.findTypeByGIRName(t.Name)
 
 	if typ == nil {
-		return nil
+		return nil, nil
 	}
 
 	typ = e.resolveInnerTypes(typ, t)
 
 	if typ == nil {
-		return nil
+		return nil, nil
 	}
 
-	return WithPointers(t, typ)
+	return ns, typ
 }
 
-func (e *env) findTypeByGIRName(t string) Type {
+func (e *env) findTypeByGIRName(t string) (*Namespace, Type) {
+	if replaced, ok := e.cfg.GIRReplacements[t]; ok {
+		e.logger.Warn("replacing GIR type name", "type", t, "replaced by", replaced)
+		t = replaced
+	}
+
 	if isIncompatible(t) {
-		return nil
+		return nil, nil
 	}
 
 	parts := strings.Split(t, ".")
@@ -166,20 +171,20 @@ func (e *env) findTypeByGIRName(t string) Type {
 	}
 
 	if len(parts) == 1 {
-		primitive := e.findPrimitiveByName(t)
+		primitive := findBuiltinPrimitiveByName(t)
 
 		if primitive != nil {
-			return primitive
+			return nil, primitive
 		}
 
 		typ := e.namespace.findLocalTypeByGIRName(t)
 
 		if typ == nil {
 			e.logger.Debug("type not found", "type", t)
-			return nil
+			return nil, nil
 		}
 
-		return typ
+		return nil, typ
 	}
 
 	foreignNSName := parts[0]
@@ -195,26 +200,16 @@ func (e *env) findTypeByGIRName(t string) Type {
 
 	if !ok {
 		e.logger.Warn("type referenced unknown namespace", "type", t, "referenced-ns", foreignNSName)
-		return nil
+		return nil, nil
 	}
 
 	foreign := reffedNS.findLocalTypeByGIRName(foreignTypeName)
 
 	if foreign != nil {
-		return mkForeign(reffedNS, foreign)
+		return reffedNS, foreign
 	}
 
 	e.logger.Debug("type not found", "type", t)
 
-	return nil
-}
-
-func (e *env) findPrimitiveByName(t string) Type {
-	for _, additionalPrimitive := range e.cfg.Primitives {
-		if additionalPrimitive.GIRName() == t {
-			return additionalPrimitive
-		}
-	}
-
-	return findBuiltinPrimitiveByName(t)
+	return nil, nil
 }

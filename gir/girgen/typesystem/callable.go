@@ -102,11 +102,13 @@ func (c *constructorIdentifier) GoIndentifier() string {
 
 	noNew, ok := strings.CutPrefix(pascal, "New")
 
+	parentTypeName := c.parent.GoType(0)
+
 	if ok {
-		return "New" + c.parent.GoType() + noNew
+		return "New" + parentTypeName + noNew
 	}
 
-	return c.parent.GoType() + pascal
+	return parentTypeName + pascal
 }
 
 var _ Identifier = &constructorIdentifier{}
