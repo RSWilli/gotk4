@@ -155,7 +155,7 @@ func _gotk4_gtk3_ClipboardReceivedFunc(carg1 *C.GtkClipboard, carg2 *C.GtkSelect
 }
 
 //export _gotk4_gtk3_ClipboardTargetsReceivedFunc
-func _gotk4_gtk3_ClipboardTargetsReceivedFunc(carg1 *C.GtkClipboard, carg2 *C.GdkAtom, carg3 C.int, carg4 C.gpointer) (cret C.void) {
+func _gotk4_gtk3_ClipboardTargetsReceivedFunc(carg1 *C.GtkClipboard, carg2 array, carg3 C.int, carg4 C.gpointer) (cret C.void) {
 
 
 	fn(clipboard, atoms)
@@ -177,7 +177,7 @@ func _gotk4_gtk3_ClipboardTextReceivedFunc(carg1 *C.GtkClipboard, carg2 *C.gchar
 }
 
 //export _gotk4_gtk3_ClipboardURIReceivedFunc
-func _gotk4_gtk3_ClipboardURIReceivedFunc(carg1 *C.GtkClipboard, carg2 **C.gchar, carg3 C.gpointer) (cret C.void) {
+func _gotk4_gtk3_ClipboardURIReceivedFunc(carg1 *C.GtkClipboard, carg2 array, carg3 C.gpointer) (cret C.void) {
 
 
 	fn(clipboard, uris)
@@ -188,7 +188,7 @@ func _gotk4_gtk3_ClipboardURIReceivedFunc(carg1 *C.GtkClipboard, carg2 **C.gchar
 }
 
 //export _gotk4_gtk3_ColorSelectionChangePaletteFunc
-func _gotk4_gtk3_ColorSelectionChangePaletteFunc(carg1 *C.GdkColor, carg2 C.int) (cret C.void) {
+func _gotk4_gtk3_ColorSelectionChangePaletteFunc(carg1 array, carg2 C.int) (cret C.void) {
 
 
 	fn(colors)
@@ -199,7 +199,7 @@ func _gotk4_gtk3_ColorSelectionChangePaletteFunc(carg1 *C.GdkColor, carg2 C.int)
 }
 
 //export _gotk4_gtk3_ColorSelectionChangePaletteWithScreenFunc
-func _gotk4_gtk3_ColorSelectionChangePaletteWithScreenFunc(carg1 *C.GdkScreen, carg2 *C.GdkColor, carg3 C.int) (cret C.void) {
+func _gotk4_gtk3_ColorSelectionChangePaletteWithScreenFunc(carg1 *C.GdkScreen, carg2 array, carg3 C.int) (cret C.void) {
 
 
 	fn(screen, colors)
@@ -231,17 +231,6 @@ func _gotk4_gtk3_FileFilterFunc(carg1 *C.GtkFileFilterInfo, carg2 C.gpointer) (c
 	return cret
 }
 
-//export _gotk4_gtk3_FlowBoxCreateWidgetFunc
-func _gotk4_gtk3_FlowBoxCreateWidgetFunc(carg1 *C.GObject, carg2 C.gpointer) (cret *C.GtkWidget) {
-
-
-	ret := fn(item)
-
-
-
-	return cret
-}
-
 //export _gotk4_gtk3_FontFilterFunc
 func _gotk4_gtk3_FontFilterFunc(carg1 *C.PangoFontFamily, carg2 *C.PangoFontFace, carg3 C.gpointer) (cret C.gboolean) {
 
@@ -264,17 +253,6 @@ func _gotk4_gtk3_KeySnoopFunc(carg1 *C.GtkWidget, carg2 *C.GdkEventKey, carg3 C.
 	return cret
 }
 
-//export _gotk4_gtk3_ListBoxCreateWidgetFunc
-func _gotk4_gtk3_ListBoxCreateWidgetFunc(carg1 *C.GObject, carg2 C.gpointer) (cret *C.GtkWidget) {
-
-
-	ret := fn(item)
-
-
-
-	return cret
-}
-
 //export _gotk4_gtk3_ModuleDisplayInitFunc
 func _gotk4_gtk3_ModuleDisplayInitFunc(carg1 *C.GdkDisplay) (cret C.void) {
 
@@ -287,7 +265,7 @@ func _gotk4_gtk3_ModuleDisplayInitFunc(carg1 *C.GdkDisplay) (cret C.void) {
 }
 
 //export _gotk4_gtk3_ModuleInitFunc
-func _gotk4_gtk3_ModuleInitFunc(carg1 *C.int, carg2 **C.gchar) (cret C.void) {
+func _gotk4_gtk3_ModuleInitFunc(carg1 *C.int, carg2 array) (cret C.void) {
 
 
 	fn(argv)
@@ -353,7 +331,7 @@ func _gotk4_gtk3_StylePropertyParser(carg1 *C.gchar, carg2 *C.GValue, _cerr *C.G
 }
 
 //export _gotk4_gtk3_TextBufferDeserializeFunc
-func _gotk4_gtk3_TextBufferDeserializeFunc(carg1 *C.GtkTextBuffer, carg2 *C.GtkTextBuffer, carg3 *C.GtkTextIter, carg4 *C.guint8, carg5 C.gsize, carg6 C.gboolean, carg7 C.gpointer, _cerr *C.GError) (cret C.gboolean) {
+func _gotk4_gtk3_TextBufferDeserializeFunc(carg1 *C.GtkTextBuffer, carg2 *C.GtkTextBuffer, carg3 *C.GtkTextIter, carg4 array, carg5 C.gsize, carg6 C.gboolean, carg7 C.gpointer, _cerr *C.GError) (cret C.gboolean) {
 
 
 	ret, _goerr := fn(registerBuffer, contentBuffer, iter, data, createTags)
@@ -364,7 +342,7 @@ func _gotk4_gtk3_TextBufferDeserializeFunc(carg1 *C.GtkTextBuffer, carg2 *C.GtkT
 }
 
 //export _gotk4_gtk3_TextBufferSerializeFunc
-func _gotk4_gtk3_TextBufferSerializeFunc(carg1 *C.GtkTextBuffer, carg2 *C.GtkTextBuffer, carg3 *C.GtkTextIter, carg4 *C.GtkTextIter, carg5 C.gsize, carg6 C.gpointer) (cret *C.guint8) {
+func _gotk4_gtk3_TextBufferSerializeFunc(carg1 *C.GtkTextBuffer, carg2 *C.GtkTextBuffer, carg3 *C.GtkTextIter, carg4 *C.GtkTextIter, carg5 C.gsize, carg6 C.gpointer) (cret array) {
 
 
 	length, ret := fn(registerBuffer, contentBuffer, start, end)

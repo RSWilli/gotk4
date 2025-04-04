@@ -7,7 +7,7 @@ type MethodGeneratorList []MethodGenerator
 type MethodGenerator interface {
 	Generator
 
-	GenerateInterfaceSignature(w file.CodeWriter)
+	GenerateInterfaceSignature(w file.File)
 }
 
 var _ Generator = (MethodGeneratorList)(nil)
@@ -24,7 +24,7 @@ func (list MethodGeneratorList) Generate(w *file.Package) {
 }
 
 // GenerateInterfaceSignature implements MethodGenerator.
-func (list MethodGeneratorList) GenerateInterfaceSignatures(w file.CodeWriter) {
+func (list MethodGeneratorList) GenerateInterfaceSignatures(w file.File) {
 	for _, g := range list {
 		if g == nil {
 			continue

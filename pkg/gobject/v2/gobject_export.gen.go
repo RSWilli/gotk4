@@ -9,28 +9,6 @@ import (
 // #include <glib-object.h>
 import "C"
 
-//export _gotk4_gobject2_BaseFinalizeFunc
-func _gotk4_gobject2_BaseFinalizeFunc(carg1 *C.GTypeClass) (cret C.void) {
-
-
-	fn(gClass)
-
-
-
-	return cret
-}
-
-//export _gotk4_gobject2_BaseInitFunc
-func _gotk4_gobject2_BaseInitFunc(carg1 *C.GTypeClass) (cret C.void) {
-
-
-	fn(gClass)
-
-
-
-	return cret
-}
-
 //export _gotk4_gobject2_BindingTransformFunc
 func _gotk4_gobject2_BindingTransformFunc(carg1 *C.GBinding, carg2 *C.GValue, carg3 *C.GValue, carg4 C.gpointer) (cret C.gboolean) {
 
@@ -75,30 +53,8 @@ func _gotk4_gobject2_Callback() (cret C.void) {
 	return cret
 }
 
-//export _gotk4_gobject2_ClassFinalizeFunc
-func _gotk4_gobject2_ClassFinalizeFunc(carg1 *C.GTypeClass, carg2 C.gpointer) (cret C.void) {
-
-
-	fn(gClass, classData)
-
-
-
-	return cret
-}
-
-//export _gotk4_gobject2_ClassInitFunc
-func _gotk4_gobject2_ClassInitFunc(carg1 *C.GTypeClass, carg2 C.gpointer) (cret C.void) {
-
-
-	fn(gClass, classData)
-
-
-
-	return cret
-}
-
 //export _gotk4_gobject2_ClosureMarshal
-func _gotk4_gobject2_ClosureMarshal(carg1 *C.GClosure, carg2 *C.GValue, carg3 C.guint, carg4 *C.GValue, carg5 C.gpointer, carg6 C.gpointer) (cret C.void) {
+func _gotk4_gobject2_ClosureMarshal(carg1 *C.GClosure, carg2 *C.GValue, carg3 C.guint, carg4 array, carg5 C.gpointer, carg6 C.gpointer) (cret C.void) {
 
 
 	fn(closure, returnValue, paramValues, invocationHint, marshalData)
@@ -113,39 +69,6 @@ func _gotk4_gobject2_ClosureNotify(carg1 C.gpointer, carg2 *C.GClosure) (cret C.
 
 
 	fn(data, closure)
-
-
-
-	return cret
-}
-
-//export _gotk4_gobject2_InstanceInitFunc
-func _gotk4_gobject2_InstanceInitFunc(carg1 *C.GTypeInstance, carg2 *C.GTypeClass) (cret C.void) {
-
-
-	fn(instance, gClass)
-
-
-
-	return cret
-}
-
-//export _gotk4_gobject2_InterfaceFinalizeFunc
-func _gotk4_gobject2_InterfaceFinalizeFunc(carg1 *C.GTypeInterface, carg2 C.gpointer) (cret C.void) {
-
-
-	fn(gIface, ifaceData)
-
-
-
-	return cret
-}
-
-//export _gotk4_gobject2_InterfaceInitFunc
-func _gotk4_gobject2_InterfaceInitFunc(carg1 *C.GTypeInterface, carg2 C.gpointer) (cret C.void) {
-
-
-	fn(gIface, ifaceData)
 
 
 
@@ -175,7 +98,7 @@ func _gotk4_gobject2_SignalAccumulator(carg1 *C.GSignalInvocationHint, carg2 *C.
 }
 
 //export _gotk4_gobject2_SignalEmissionHook
-func _gotk4_gobject2_SignalEmissionHook(carg1 *C.GSignalInvocationHint, carg2 C.guint, carg3 *C.GValue, carg4 C.gpointer) (cret C.gboolean) {
+func _gotk4_gobject2_SignalEmissionHook(carg1 *C.GSignalInvocationHint, carg2 C.guint, carg3 array, carg4 C.gpointer) (cret C.gboolean) {
 
 
 	ret := fn(ihint, paramValues, data)
@@ -201,17 +124,6 @@ func _gotk4_gobject2_TypeClassCacheFunc(carg1 C.gpointer, carg2 *C.GTypeClass) (
 
 
 	ret := fn(cacheData, gClass)
-
-
-
-	return cret
-}
-
-//export _gotk4_gobject2_TypeInterfaceCheckFunc
-func _gotk4_gobject2_TypeInterfaceCheckFunc(carg1 C.gpointer, carg2 *C.GTypeInterface) (cret C.void) {
-
-
-	fn(checkData, gIface)
 
 
 
@@ -263,7 +175,7 @@ func _gotk4_gobject2_TypePluginUse(carg1 *C.GTypePlugin) (cret C.void) {
 }
 
 //export _gotk4_gobject2_TypeValueCollectFunc
-func _gotk4_gobject2_TypeValueCollectFunc(carg1 *C.GValue, carg2 C.guint, carg3 *C.GTypeCValue, carg4 C.guint) (cret *C.gchar) {
+func _gotk4_gobject2_TypeValueCollectFunc(carg1 *C.GValue, carg2 C.guint, carg3 array, carg4 C.guint) (cret *C.gchar) {
 
 
 	ret := fn(value, collectValues, collectFlags)
@@ -296,7 +208,7 @@ func _gotk4_gobject2_TypeValueInitFunc(carg1 *C.GValue) (cret C.void) {
 }
 
 //export _gotk4_gobject2_TypeValueLCopyFunc
-func _gotk4_gobject2_TypeValueLCopyFunc(carg1 *C.GValue, carg2 C.guint, carg3 *C.GTypeCValue, carg4 C.guint) (cret *C.gchar) {
+func _gotk4_gobject2_TypeValueLCopyFunc(carg1 *C.GValue, carg2 C.guint, carg3 array, carg4 C.guint) (cret *C.gchar) {
 
 
 	ret := fn(value, collectValues, collectFlags)

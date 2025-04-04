@@ -3,6 +3,7 @@ package typesystem
 import (
 	"fmt"
 	"log/slog"
+	"maps"
 
 	"github.com/diamondburned/gotk4/gir"
 )
@@ -61,4 +62,26 @@ func (cfg Config) getNamespaceEnv(namespace *Namespace) *env {
 		compareReturns: nil,
 		logger:         slog.Default().With(slog.String("namespace", namespace.v.String())),
 	}
+}
+
+// Combine combines both configs, needed for extensions of the base configs. It assumes that this can be done without
+// collosions
+func (cfg Config) Combine(other Config) Config {
+	var newCfg Config
+
+	if len(cfg.GIRReplacements) > 0 || len(other.GIRReplacements) > 0 {
+		newCfg.GIRReplacements = make(map[string]string)
+	}
+
+	maps.Copy(newCfg.GIRReplacements, cfg.GIRReplacements)
+	maps.Copy(newCfg.GIRReplacements, other.GIRReplacements)
+
+	if len(cfg.Namespaces) > 0 || len(other.Namespaces) > 0 {
+		newCfg.Namespaces = make(map[string]NamespaceConfig)
+	}
+
+	maps.Copy(newCfg.Namespaces, cfg.Namespaces)
+	maps.Copy(newCfg.Namespaces, other.Namespaces)
+
+	return newCfg
 }

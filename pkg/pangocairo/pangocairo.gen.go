@@ -5,6 +5,8 @@ package pangocairo
 import (
 	"runtime"
 	"unsafe"
+	"github.com/diamondburned/gotk4/pkg/gobject/v2"
+	"github.com/diamondburned/gotk4/pkg/pango"
 )
 
 // #cgo pkg-config: pangocairo
@@ -39,10 +41,10 @@ func init() {
 // 
 // See [func@PangoCairo.context_set_resolution]
 func ContextGetResolution(context pango.Context) float64 {
-	var carg1 *C.PangoContext // in, none, class
-	var cret  C.gdouble       // return, casted
+	var carg1 *C.PangoContext // in, none, converted
+	var cret  C.gdouble       // return, none, casted
 
-	carg1 = (*C.PangoContext)(pango.UnsafeContextToGlibNone(context))
+	carg1 = (*C.PangoContext)(UnsafeContextToGlibNone(context))
 
 	cret = C.pango_cairo_context_get_resolution(carg1)
 	runtime.KeepAlive(context)
@@ -69,10 +71,10 @@ func ContextGetResolution(context pango.Context) float64 {
 // and Cairo units. The default value is 96, meaning that a 10 point font will
 // be 13 units high. (10 * 96. / 72. = 13.3).
 func ContextSetResolution(context pango.Context, dpi float64) {
-	var carg1 *C.PangoContext // in, none, class
-	var carg2 C.gdouble       // in, casted
+	var carg1 *C.PangoContext // in, none, converted
+	var carg2 C.gdouble       // in, none, casted
 
-	carg1 = (*C.PangoContext)(pango.UnsafeContextToGlibNone(context))
+	carg1 = (*C.PangoContext)(UnsafeContextToGlibNone(context))
 	carg2 = C.gdouble(dpi)
 
 	C.pango_cairo_context_set_resolution(carg1, carg2)
@@ -83,7 +85,7 @@ func ContextSetResolution(context pango.Context, dpi float64) {
 // FontInstance is the instance type used by all types implementing PangoCairoFont. It is used internally by the bindings. Users should use the interface [Font] instead.
 type FontInstance struct {
 	_ [0]func() // equal guard
-	*gobject.Object
+	*gobject.ObjectInstance
 }
 
 var _ Font = (*FontInstance)(nil)
@@ -96,17 +98,17 @@ var _ Font = (*FontInstance)(nil)
 // The actual type of the font will depend on the particular
 // font technology Cairo was compiled to use.
 type Font interface {
-	gobject.ObjectLike
+	gobject.Object
 }
 
-func unsafeWrapFont(base *gobject.Object) *FontInstance {
+func unsafeWrapFont(base *gobject.ObjectInstance) *FontInstance {
 	return &FontInstance{
-		Object: base,
+		ObjectInstance: base,
 	}
 }
 
 func marshalFontInstance(p uintptr) (interface{}, error) {
-	return unsafeWrapFont(gobject.ValueFromNative(unsafe.Pointer(p)).Object()), nil
+	return unsafeWrapFont(gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Object()), nil
 }
 
 // UnsafeFontFromGlibBorrow is used to convert raw PangoCairoFont pointers to go. This is used by the bindings internally.
@@ -137,7 +139,7 @@ func UnsafeFontToGlibFull(c Font) unsafe.Pointer {
 // FontMapInstance is the instance type used by all types implementing PangoCairoFontMap. It is used internally by the bindings. Users should use the interface [FontMap] instead.
 type FontMapInstance struct {
 	_ [0]func() // equal guard
-	*gobject.Object
+	*gobject.ObjectInstance
 }
 
 var _ FontMap = (*FontMapInstance)(nil)
@@ -150,7 +152,7 @@ var _ FontMap = (*FontMapInstance)(nil)
 // The actual type of the font map will depend on the particular
 // font technology Cairo was compiled to use.
 type FontMap interface {
-	gobject.ObjectLike
+	gobject.Object
 
 	// GetResolution wraps pango_cairo_font_map_get_resolution
 	// The function returns the following values:
@@ -195,14 +197,14 @@ type FontMap interface {
 	SetResolution(float64)
 }
 
-func unsafeWrapFontMap(base *gobject.Object) *FontMapInstance {
+func unsafeWrapFontMap(base *gobject.ObjectInstance) *FontMapInstance {
 	return &FontMapInstance{
-		Object: base,
+		ObjectInstance: base,
 	}
 }
 
 func marshalFontMapInstance(p uintptr) (interface{}, error) {
-	return unsafeWrapFontMap(gobject.ValueFromNative(unsafe.Pointer(p)).Object()), nil
+	return unsafeWrapFontMap(gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Object()), nil
 }
 
 // UnsafeFontMapFromGlibBorrow is used to convert raw PangoCairoFontMap pointers to go. This is used by the bindings internally.
@@ -251,13 +253,13 @@ func UnsafeFontMapToGlibFull(c FontMap) unsafe.Pointer {
 // Each thread gets its own default fontmap. In this way, PangoCairo
 // can be used safely from multiple threads.
 func GetDefault() pango.FontMap {
-	var cret *C.PangoFontMap // return, none, class
+	var cret *C.PangoFontMap // return, none, converted
 
 	cret = C.pango_cairo_font_map_get_default()
 
 	var ret pango.FontMap
 
-	ret = pango.UnsafeFontMapFromGlibNone(unsafe.Pointer(cret))
+	ret = UnsafeFontMapFromGlibNone(unsafe.Pointer(cret))
 
 	return ret
 }
@@ -286,13 +288,13 @@ func GetDefault() pango.FontMap {
 // this is only useful for testing, when at least two backends
 // are compiled in.
 func New() pango.FontMap {
-	var cret *C.PangoFontMap // return, full, class
+	var cret *C.PangoFontMap // return, full, converted
 
 	cret = C.pango_cairo_font_map_new()
 
 	var ret pango.FontMap
 
-	ret = pango.UnsafeFontMapFromGlibFull(unsafe.Pointer(cret))
+	ret = UnsafeFontMapFromGlibFull(unsafe.Pointer(cret))
 
 	return ret
 }
@@ -306,8 +308,8 @@ func New() pango.FontMap {
 // 
 // See [method@PangoCairo.FontMap.set_resolution].
 func (fontmap *FontMapInstance) GetResolution() float64 {
-	var carg0 *C.PangoCairoFontMap // in, none, interface
-	var cret  C.gdouble            // return, casted
+	var carg0 *C.PangoCairoFontMap // in, none, converted
+	var cret  C.gdouble            // return, none, casted
 
 	carg0 = (*C.PangoCairoFontMap)(UnsafeFontMapToGlibNone(fontmap))
 
@@ -339,7 +341,7 @@ func (fontmap *FontMapInstance) GetResolution() float64 {
 // font map to be released and a new default font map to be created
 // on demand, using [func@PangoCairo.FontMap.new].
 func (fontmap *FontMapInstance) SetDefault() {
-	var carg0 *C.PangoCairoFontMap // in, none, interface
+	var carg0 *C.PangoCairoFontMap // in, none, converted
 
 	carg0 = (*C.PangoCairoFontMap)(UnsafeFontMapToGlibNone(fontmap))
 
@@ -361,8 +363,8 @@ func (fontmap *FontMapInstance) SetDefault() {
 // default value is 96, meaning that a 10 point font will be 13
 // units high. (10 * 96. / 72. = 13.3).
 func (fontmap *FontMapInstance) SetResolution(dpi float64) {
-	var carg0 *C.PangoCairoFontMap // in, none, interface
-	var carg1 C.gdouble            // in, casted
+	var carg0 *C.PangoCairoFontMap // in, none, converted
+	var carg1 C.gdouble            // in, none, casted
 
 	carg0 = (*C.PangoCairoFontMap)(UnsafeFontMapToGlibNone(fontmap))
 	carg1 = C.gdouble(dpi)

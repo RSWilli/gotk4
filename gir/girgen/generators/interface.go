@@ -27,10 +27,14 @@ func (g *InterfaceGenerator) Generate(w *file.Package) {
 	w.GoImport("unsafe")
 	w.GoImport("runtime")
 
+	w.GoImportNamespace(g.Parent.Namespace)
+
 	fmt.Fprintf(w.Go(), "// %s is the instance type used by all types implementing %s. It is used internally by the bindings. Users should use the interface [%s] instead.\n", g.GoType(0), g.CType(0), g.GoInterfaceName)
 	fmt.Fprintf(w.Go(), "type %s struct {\n", g.GoType(0))
 	fmt.Fprintf(w.Go(), "\t_ [0]func() // equal guard\n")
+
 	fmt.Fprintf(w.Go(), "\t*%s\n", g.Parent.NamespacedGoType(0))
+
 	// for _, inter := range g.Prerequesite {
 	// 	fmt.Fprintf(w.Go(), "\t*%s\n", inter.GoType(0))
 	// }
@@ -41,6 +45,7 @@ func (g *InterfaceGenerator) Generate(w *file.Package) {
 	g.Doc.Generate(w.Go())
 	fmt.Fprintf(w.Go(), "type %s interface {\n", g.GoInterfaceName)
 	w.Go().Indent()
+
 	fmt.Fprintln(w.Go(), g.Parent.WithForeignNamespace(g.Parent.Type.GoInterfaceName))
 	// for inter := range g.PrerequesitesGoInterfaceNames() {
 	// 	fmt.Fprintln(w.Go(), inter)
@@ -48,7 +53,7 @@ func (g *InterfaceGenerator) Generate(w *file.Package) {
 
 	w.Go().NewSection()
 
-	g.Methods.GenerateInterfaceSignatures(w.Go())
+	g.Methods.GenerateInterfaceSignatures(w)
 
 	w.Go().Unindent()
 	fmt.Fprintf(w.Go(), "}\n\n")

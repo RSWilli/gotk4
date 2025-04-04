@@ -255,6 +255,11 @@ const (
 	EulerOrderRZYZ EulerOrder = C.GRAPHENE_EULER_ORDER_RZYZ
 )
 
+
+func (e EulerOrder) SetValue(v *gobject.Value) {
+	panic("TODO")
+}
+
 // RayIntersectionKind wraps graphene_ray_intersection_kind_t
 //
 // The type of intersection.
@@ -277,6 +282,11 @@ const (
 	RayIntersectionKindLeave RayIntersectionKind = C.GRAPHENE_RAY_INTERSECTION_KIND_LEAVE
 )
 
+
+func (e RayIntersectionKind) SetValue(v *gobject.Value) {
+	panic("TODO")
+}
+
 // Box wraps graphene_box_t
 //
 // A 3D box, described as the volume between a minimum and
@@ -291,7 +301,7 @@ type box struct {
 }
 
 func marshalBox(p uintptr) (interface{}, error) {
-	b := gobject.ValueFromNative(unsafe.Pointer(p)).Boxed()
+	b := gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Boxed()
 	return UnsafeBoxFromGlibBorrow(b), nil
 }
 
@@ -335,17 +345,17 @@ func UnsafeBoxToGlibFull(b *Box) unsafe.Pointer {
 // BoxAlloc wraps graphene_box_alloc
 // The function returns the following values:
 // 
-// 	- ret *Box 
+// 	- ret Box 
 //
 // Allocates a new #graphene_box_t.
 // 
 // The contents of the returned structure are undefined.
-func BoxAlloc() *Box {
-	var cret *C.graphene_box_t // return, full, record
+func BoxAlloc() Box {
+	var cret *C.graphene_box_t // return, full, converted
 
 	cret = C.graphene_box_alloc()
 
-	var ret *Box
+	var ret Box
 
 	ret = UnsafeBoxFromGlibFull(unsafe.Pointer(cret))
 
@@ -356,7 +366,7 @@ func BoxAlloc() *Box {
 // 
 // The function takes the following parameters:
 // 
-// 	- b *Box: a #graphene_box_t 
+// 	- b Box: a #graphene_box_t 
 // 
 // The function returns the following values:
 // 
@@ -364,9 +374,9 @@ func BoxAlloc() *Box {
 //
 // Checks whether the #graphene_box_t @a contains the given
 // #graphene_box_t @b.
-func (a *Box) ContainsBox(b *Box) bool {
-	var carg0 *C.graphene_box_t // in, none, record
-	var carg1 *C.graphene_box_t // in, none, record
+func (a *Box) ContainsBox(b Box) bool {
+	var carg0 *C.graphene_box_t // in, none, converted
+	var carg1 *C.graphene_box_t // in, none, converted
 	var cret  C.gboolean        // return
 
 	carg0 = (*C.graphene_box_t)(UnsafeBoxToGlibNone(a))
@@ -389,16 +399,16 @@ func (a *Box) ContainsBox(b *Box) bool {
 // 
 // The function takes the following parameters:
 // 
-// 	- point *Point3D: the coordinates to check 
+// 	- point Point3D: the coordinates to check 
 // 
 // The function returns the following values:
 // 
 // 	- ret bool 
 //
 // Checks whether @box contains the given @point.
-func (box *Box) ContainsPoint(point *Point3D) bool {
-	var carg0 *C.graphene_box_t     // in, none, record
-	var carg1 *C.graphene_point3d_t // in, none, record
+func (box *Box) ContainsPoint(point Point3D) bool {
+	var carg0 *C.graphene_box_t     // in, none, converted
+	var carg1 *C.graphene_point3d_t // in, none, converted
 	var cret  C.gboolean            // return
 
 	carg0 = (*C.graphene_box_t)(UnsafeBoxToGlibNone(box))
@@ -421,16 +431,16 @@ func (box *Box) ContainsPoint(point *Point3D) bool {
 // 
 // The function takes the following parameters:
 // 
-// 	- b *Box: a #graphene_box_t 
+// 	- b Box: a #graphene_box_t 
 // 
 // The function returns the following values:
 // 
 // 	- ret bool 
 //
 // Checks whether the two given boxes are equal.
-func (a *Box) Equal(b *Box) bool {
-	var carg0 *C.graphene_box_t // in, none, record
-	var carg1 *C.graphene_box_t // in, none, record
+func (a *Box) Equal(b Box) bool {
+	var carg0 *C.graphene_box_t // in, none, converted
+	var carg1 *C.graphene_box_t // in, none, converted
 	var cret  C.gboolean        // return
 
 	carg0 = (*C.graphene_box_t)(UnsafeBoxToGlibNone(a))
@@ -456,8 +466,8 @@ func (a *Box) Equal(b *Box) bool {
 //
 // Retrieves the size of the @box on the Z axis.
 func (box *Box) GetDepth() float32 {
-	var carg0 *C.graphene_box_t // in, none, record
-	var cret  C.gfloat          // return, casted
+	var carg0 *C.graphene_box_t // in, none, converted
+	var cret  C.gfloat          // return, none, casted
 
 	carg0 = (*C.graphene_box_t)(UnsafeBoxToGlibNone(box))
 
@@ -478,8 +488,8 @@ func (box *Box) GetDepth() float32 {
 //
 // Retrieves the size of the @box on the Y axis.
 func (box *Box) GetHeight() float32 {
-	var carg0 *C.graphene_box_t // in, none, record
-	var cret  C.gfloat          // return, casted
+	var carg0 *C.graphene_box_t // in, none, converted
+	var cret  C.gfloat          // return, none, casted
 
 	carg0 = (*C.graphene_box_t)(UnsafeBoxToGlibNone(box))
 
@@ -496,22 +506,22 @@ func (box *Box) GetHeight() float32 {
 // GetVertices wraps graphene_box_get_vertices
 // The function returns the following values:
 // 
-// 	- vertices []Vec3: return location for an array
+// 	- vertices array: return location for an array
 //   of 8 #graphene_vec3_t 
 //
 // Computes the vertices of the given #graphene_box_t.
-func (box *Box) GetVertices() []Vec3 {
-	var carg0 *C.graphene_box_t  // in, none, record
-	var carg1 *C.graphene_vec3_t // out, transfer: none, scope: call, implicit: false, skip: false, optional: false, nullable: false, caller-allocates: true, has closure: false, has destroy: false
+func (box *Box) GetVertices() array {
+	var carg0 *C.graphene_box_t // in, none, converted
+	var carg1 array             // out, transfer: none, scope: call, implicit: false, skip: false, optional: false, nullable: false, caller-allocates: true, has closure: false, has destroy: false
 
 	carg0 = (*C.graphene_box_t)(UnsafeBoxToGlibNone(box))
 
 	C.graphene_box_get_vertices(carg0, &carg1)
 	runtime.KeepAlive(box)
 
-	var vertices []Vec3
+	var vertices array
 
-	panic("unimplemented conversion of *typesystem.Array (graphene_vec3_t*)")
+	panic("unimplemented conversion of array (array)")
 
 	return vertices
 }
@@ -523,8 +533,8 @@ func (box *Box) GetVertices() []Vec3 {
 //
 // Retrieves the size of the @box on the X axis.
 func (box *Box) GetWidth() float32 {
-	var carg0 *C.graphene_box_t // in, none, record
-	var cret  C.gfloat          // return, casted
+	var carg0 *C.graphene_box_t // in, none, converted
+	var cret  C.gfloat          // return, none, casted
 
 	carg0 = (*C.graphene_box_t)(UnsafeBoxToGlibNone(box))
 
@@ -542,19 +552,19 @@ func (box *Box) GetWidth() float32 {
 // 
 // The function takes the following parameters:
 // 
-// 	- min *Point3D (nullable): the coordinates of the minimum vertex 
-// 	- max *Point3D (nullable): the coordinates of the maximum vertex 
+// 	- min Point3D (nullable): the coordinates of the minimum vertex 
+// 	- max Point3D (nullable): the coordinates of the maximum vertex 
 // 
 // The function returns the following values:
 // 
-// 	- ret *Box 
+// 	- ret Box 
 //
 // Initializes the given #graphene_box_t with two vertices.
-func (box *Box) Init(min *Point3D, max *Point3D) *Box {
-	var carg0 *C.graphene_box_t     // in, none, record
-	var carg1 *C.graphene_point3d_t // in, none, record, nullable
-	var carg2 *C.graphene_point3d_t // in, none, record, nullable
-	var cret  *C.graphene_box_t     // return, none, record
+func (box *Box) Init(min Point3D, max Point3D) Box {
+	var carg0 *C.graphene_box_t     // in, none, converted
+	var carg1 *C.graphene_point3d_t // in, none, converted, nullable
+	var carg2 *C.graphene_point3d_t // in, none, converted, nullable
+	var cret  *C.graphene_box_t     // return, none, converted
 
 	carg0 = (*C.graphene_box_t)(UnsafeBoxToGlibNone(box))
 	if min != nil {
@@ -569,7 +579,7 @@ func (box *Box) Init(min *Point3D, max *Point3D) *Box {
 	runtime.KeepAlive(min)
 	runtime.KeepAlive(max)
 
-	var ret *Box
+	var ret Box
 
 	ret = UnsafeBoxFromGlibNone(unsafe.Pointer(cret))
 
@@ -580,18 +590,18 @@ func (box *Box) Init(min *Point3D, max *Point3D) *Box {
 // 
 // The function takes the following parameters:
 // 
-// 	- src *Box: a #graphene_box_t 
+// 	- src Box: a #graphene_box_t 
 // 
 // The function returns the following values:
 // 
-// 	- ret *Box 
+// 	- ret Box 
 //
 // Initializes the given #graphene_box_t with the vertices of
 // another #graphene_box_t.
-func (box *Box) InitFromBox(src *Box) *Box {
-	var carg0 *C.graphene_box_t // in, none, record
-	var carg1 *C.graphene_box_t // in, none, record
-	var cret  *C.graphene_box_t // return, none, record
+func (box *Box) InitFromBox(src Box) Box {
+	var carg0 *C.graphene_box_t // in, none, converted
+	var carg1 *C.graphene_box_t // in, none, converted
+	var cret  *C.graphene_box_t // return, none, converted
 
 	carg0 = (*C.graphene_box_t)(UnsafeBoxToGlibNone(box))
 	carg1 = (*C.graphene_box_t)(UnsafeBoxToGlibNone(src))
@@ -600,7 +610,7 @@ func (box *Box) InitFromBox(src *Box) *Box {
 	runtime.KeepAlive(box)
 	runtime.KeepAlive(src)
 
-	var ret *Box
+	var ret Box
 
 	ret = UnsafeBoxFromGlibNone(unsafe.Pointer(cret))
 
@@ -611,31 +621,31 @@ func (box *Box) InitFromBox(src *Box) *Box {
 // 
 // The function takes the following parameters:
 // 
-// 	- points []Point3D: an array of #graphene_point3d_t 
+// 	- points array: an array of #graphene_point3d_t 
 // 
 // The function returns the following values:
 // 
-// 	- ret *Box 
+// 	- ret Box 
 //
 // Initializes the given #graphene_box_t with the given array
 // of vertices.
 // 
 // If @n_points is 0, the returned box is initialized with
 // graphene_box_empty().
-func (box *Box) InitFromPoints(points []Point3D) *Box {
-	var carg0 *C.graphene_box_t     // in, none, record
-	var carg1 C.guint               // implicit
-	var carg2 *C.graphene_point3d_t // in, transfer: none, scope: call, implicit: false, skip: false, optional: false, nullable: false, caller-allocates: false, has closure: false, has destroy: false
-	var cret  *C.graphene_box_t     // return, none, record
+func (box *Box) InitFromPoints(points array) Box {
+	var carg0 *C.graphene_box_t // in, none, converted
+	var carg1 C.guint           // implicit
+	var carg2 array             // in, transfer: none, scope: call, implicit: false, skip: false, optional: false, nullable: false, caller-allocates: false, has closure: false, has destroy: false
+	var cret  *C.graphene_box_t // return, none, converted
 
 	carg0 = (*C.graphene_box_t)(UnsafeBoxToGlibNone(box))
-	panic("unimplemented conversion of *typesystem.Array (graphene_point3d_t*)")
+	panic("unimplemented conversion of array (array)")
 
 	cret = C.graphene_box_init_from_points(carg0, carg1, carg2)
 	runtime.KeepAlive(box)
 	runtime.KeepAlive(points)
 
-	var ret *Box
+	var ret Box
 
 	ret = UnsafeBoxFromGlibNone(unsafe.Pointer(cret))
 
@@ -646,20 +656,20 @@ func (box *Box) InitFromPoints(points []Point3D) *Box {
 // 
 // The function takes the following parameters:
 // 
-// 	- min *Vec3 (nullable): the coordinates of the minimum vertex 
-// 	- max *Vec3 (nullable): the coordinates of the maximum vertex 
+// 	- min Vec3 (nullable): the coordinates of the minimum vertex 
+// 	- max Vec3 (nullable): the coordinates of the maximum vertex 
 // 
 // The function returns the following values:
 // 
-// 	- ret *Box 
+// 	- ret Box 
 //
 // Initializes the given #graphene_box_t with two vertices
 // stored inside #graphene_vec3_t.
-func (box *Box) InitFromVec3(min *Vec3, max *Vec3) *Box {
-	var carg0 *C.graphene_box_t  // in, none, record
-	var carg1 *C.graphene_vec3_t // in, none, record, nullable
-	var carg2 *C.graphene_vec3_t // in, none, record, nullable
-	var cret  *C.graphene_box_t  // return, none, record
+func (box *Box) InitFromVec3(min Vec3, max Vec3) Box {
+	var carg0 *C.graphene_box_t  // in, none, converted
+	var carg1 *C.graphene_vec3_t // in, none, converted, nullable
+	var carg2 *C.graphene_vec3_t // in, none, converted, nullable
+	var cret  *C.graphene_box_t  // return, none, converted
 
 	carg0 = (*C.graphene_box_t)(UnsafeBoxToGlibNone(box))
 	if min != nil {
@@ -674,7 +684,7 @@ func (box *Box) InitFromVec3(min *Vec3, max *Vec3) *Box {
 	runtime.KeepAlive(min)
 	runtime.KeepAlive(max)
 
-	var ret *Box
+	var ret Box
 
 	ret = UnsafeBoxFromGlibNone(unsafe.Pointer(cret))
 
@@ -685,31 +695,31 @@ func (box *Box) InitFromVec3(min *Vec3, max *Vec3) *Box {
 // 
 // The function takes the following parameters:
 // 
-// 	- vectors []Vec3: an array of #graphene_vec3_t 
+// 	- vectors array: an array of #graphene_vec3_t 
 // 
 // The function returns the following values:
 // 
-// 	- ret *Box 
+// 	- ret Box 
 //
 // Initializes the given #graphene_box_t with the given array
 // of vertices.
 // 
 // If @n_vectors is 0, the returned box is initialized with
 // graphene_box_empty().
-func (box *Box) InitFromVectors(vectors []Vec3) *Box {
-	var carg0 *C.graphene_box_t  // in, none, record
-	var carg1 C.guint            // implicit
-	var carg2 *C.graphene_vec3_t // in, transfer: none, scope: call, implicit: false, skip: false, optional: false, nullable: false, caller-allocates: false, has closure: false, has destroy: false
-	var cret  *C.graphene_box_t  // return, none, record
+func (box *Box) InitFromVectors(vectors array) Box {
+	var carg0 *C.graphene_box_t // in, none, converted
+	var carg1 C.guint           // implicit
+	var carg2 array             // in, transfer: none, scope: call, implicit: false, skip: false, optional: false, nullable: false, caller-allocates: false, has closure: false, has destroy: false
+	var cret  *C.graphene_box_t // return, none, converted
 
 	carg0 = (*C.graphene_box_t)(UnsafeBoxToGlibNone(box))
-	panic("unimplemented conversion of *typesystem.Array (graphene_vec3_t*)")
+	panic("unimplemented conversion of array (array)")
 
 	cret = C.graphene_box_init_from_vectors(carg0, carg1, carg2)
 	runtime.KeepAlive(box)
 	runtime.KeepAlive(vectors)
 
-	var ret *Box
+	var ret Box
 
 	ret = UnsafeBoxFromGlibNone(unsafe.Pointer(cret))
 
@@ -732,7 +742,7 @@ type euler struct {
 }
 
 func marshalEuler(p uintptr) (interface{}, error) {
-	b := gobject.ValueFromNative(unsafe.Pointer(p)).Boxed()
+	b := gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Boxed()
 	return UnsafeEulerFromGlibBorrow(b), nil
 }
 
@@ -776,17 +786,17 @@ func UnsafeEulerToGlibFull(e *Euler) unsafe.Pointer {
 // EulerAlloc wraps graphene_euler_alloc
 // The function returns the following values:
 // 
-// 	- ret *Euler 
+// 	- ret Euler 
 //
 // Allocates a new #graphene_euler_t.
 // 
 // The contents of the returned structure are undefined.
-func EulerAlloc() *Euler {
-	var cret *C.graphene_euler_t // return, full, record
+func EulerAlloc() Euler {
+	var cret *C.graphene_euler_t // return, full, converted
 
 	cret = C.graphene_euler_alloc()
 
-	var ret *Euler
+	var ret Euler
 
 	ret = UnsafeEulerFromGlibFull(unsafe.Pointer(cret))
 
@@ -797,16 +807,16 @@ func EulerAlloc() *Euler {
 // 
 // The function takes the following parameters:
 // 
-// 	- b *Euler: a #graphene_euler_t 
+// 	- b Euler: a #graphene_euler_t 
 // 
 // The function returns the following values:
 // 
 // 	- ret bool 
 //
 // Checks if two #graphene_euler_t are equal.
-func (a *Euler) Equal(b *Euler) bool {
-	var carg0 *C.graphene_euler_t // in, none, record
-	var carg1 *C.graphene_euler_t // in, none, record
+func (a *Euler) Equal(b Euler) bool {
+	var carg0 *C.graphene_euler_t // in, none, converted
+	var carg1 *C.graphene_euler_t // in, none, converted
 	var cret  C.gboolean          // return
 
 	carg0 = (*C.graphene_euler_t)(UnsafeEulerToGlibNone(a))
@@ -835,8 +845,8 @@ func (a *Euler) Equal(b *Euler) bool {
 // 
 // See also: graphene_euler_get_x()
 func (e *Euler) GetAlpha() float32 {
-	var carg0 *C.graphene_euler_t // in, none, record
-	var cret  C.gfloat            // return, casted
+	var carg0 *C.graphene_euler_t // in, none, converted
+	var cret  C.gfloat            // return, none, casted
 
 	carg0 = (*C.graphene_euler_t)(UnsafeEulerToGlibNone(e))
 
@@ -860,8 +870,8 @@ func (e *Euler) GetAlpha() float32 {
 // 
 // See also: graphene_euler_get_y()
 func (e *Euler) GetBeta() float32 {
-	var carg0 *C.graphene_euler_t // in, none, record
-	var cret  C.gfloat            // return, casted
+	var carg0 *C.graphene_euler_t // in, none, converted
+	var cret  C.gfloat            // return, none, casted
 
 	carg0 = (*C.graphene_euler_t)(UnsafeEulerToGlibNone(e))
 
@@ -885,8 +895,8 @@ func (e *Euler) GetBeta() float32 {
 // 
 // See also: graphene_euler_get_z()
 func (e *Euler) GetGamma() float32 {
-	var carg0 *C.graphene_euler_t // in, none, record
-	var cret  C.gfloat            // return, casted
+	var carg0 *C.graphene_euler_t // in, none, converted
+	var cret  C.gfloat            // return, none, casted
 
 	carg0 = (*C.graphene_euler_t)(UnsafeEulerToGlibNone(e))
 
@@ -913,8 +923,8 @@ func (e *Euler) GetGamma() float32 {
 // enumeration value; it will return the effective order of rotation
 // instead.
 func (e *Euler) GetOrder() EulerOrder {
-	var carg0 *C.graphene_euler_t      // in, none, record
-	var cret  C.graphene_euler_order_t // return, casted
+	var carg0 *C.graphene_euler_t      // in, none, converted
+	var cret  C.graphene_euler_order_t // return, none, casted
 
 	carg0 = (*C.graphene_euler_t)(UnsafeEulerToGlibNone(e))
 
@@ -935,8 +945,8 @@ func (e *Euler) GetOrder() EulerOrder {
 //
 // Retrieves the rotation angle on the X axis, in degrees.
 func (e *Euler) GetX() float32 {
-	var carg0 *C.graphene_euler_t // in, none, record
-	var cret  C.gfloat            // return, casted
+	var carg0 *C.graphene_euler_t // in, none, converted
+	var cret  C.gfloat            // return, none, casted
 
 	carg0 = (*C.graphene_euler_t)(UnsafeEulerToGlibNone(e))
 
@@ -957,8 +967,8 @@ func (e *Euler) GetX() float32 {
 //
 // Retrieves the rotation angle on the Y axis, in degrees.
 func (e *Euler) GetY() float32 {
-	var carg0 *C.graphene_euler_t // in, none, record
-	var cret  C.gfloat            // return, casted
+	var carg0 *C.graphene_euler_t // in, none, converted
+	var cret  C.gfloat            // return, none, casted
 
 	carg0 = (*C.graphene_euler_t)(UnsafeEulerToGlibNone(e))
 
@@ -979,8 +989,8 @@ func (e *Euler) GetY() float32 {
 //
 // Retrieves the rotation angle on the Z axis, in degrees.
 func (e *Euler) GetZ() float32 {
-	var carg0 *C.graphene_euler_t // in, none, record
-	var cret  C.gfloat            // return, casted
+	var carg0 *C.graphene_euler_t // in, none, converted
+	var cret  C.gfloat            // return, none, casted
 
 	carg0 = (*C.graphene_euler_t)(UnsafeEulerToGlibNone(e))
 
@@ -1004,17 +1014,17 @@ func (e *Euler) GetZ() float32 {
 // 
 // The function returns the following values:
 // 
-// 	- ret *Euler 
+// 	- ret Euler 
 //
 // Initializes a #graphene_euler_t using the given angles.
 // 
 // The order of the rotations is %GRAPHENE_EULER_ORDER_DEFAULT.
-func (e *Euler) Init(x float32, y float32, z float32) *Euler {
-	var carg0 *C.graphene_euler_t // in, none, record
-	var carg1 C.gfloat            // in, casted
-	var carg2 C.gfloat            // in, casted
-	var carg3 C.gfloat            // in, casted
-	var cret  *C.graphene_euler_t // return, none, record
+func (e *Euler) Init(x float32, y float32, z float32) Euler {
+	var carg0 *C.graphene_euler_t // in, none, converted
+	var carg1 C.gfloat            // in, none, casted
+	var carg2 C.gfloat            // in, none, casted
+	var carg3 C.gfloat            // in, none, casted
+	var cret  *C.graphene_euler_t // return, none, converted
 
 	carg0 = (*C.graphene_euler_t)(UnsafeEulerToGlibNone(e))
 	carg1 = C.gfloat(x)
@@ -1027,7 +1037,7 @@ func (e *Euler) Init(x float32, y float32, z float32) *Euler {
 	runtime.KeepAlive(y)
 	runtime.KeepAlive(z)
 
-	var ret *Euler
+	var ret Euler
 
 	ret = UnsafeEulerFromGlibNone(unsafe.Pointer(cret))
 
@@ -1038,21 +1048,21 @@ func (e *Euler) Init(x float32, y float32, z float32) *Euler {
 // 
 // The function takes the following parameters:
 // 
-// 	- src *Euler (nullable): a #graphene_euler_t 
+// 	- src Euler (nullable): a #graphene_euler_t 
 // 
 // The function returns the following values:
 // 
-// 	- ret *Euler 
+// 	- ret Euler 
 //
 // Initializes a #graphene_euler_t using the angles and order of
 // another #graphene_euler_t.
 // 
 // If the #graphene_euler_t @src is %NULL, this function is equivalent
 // to calling graphene_euler_init() with all angles set to 0.
-func (e *Euler) InitFromEuler(src *Euler) *Euler {
-	var carg0 *C.graphene_euler_t // in, none, record
-	var carg1 *C.graphene_euler_t // in, none, record, nullable
-	var cret  *C.graphene_euler_t // return, none, record
+func (e *Euler) InitFromEuler(src Euler) Euler {
+	var carg0 *C.graphene_euler_t // in, none, converted
+	var carg1 *C.graphene_euler_t // in, none, converted, nullable
+	var cret  *C.graphene_euler_t // return, none, converted
 
 	carg0 = (*C.graphene_euler_t)(UnsafeEulerToGlibNone(e))
 	if src != nil {
@@ -1063,7 +1073,7 @@ func (e *Euler) InitFromEuler(src *Euler) *Euler {
 	runtime.KeepAlive(e)
 	runtime.KeepAlive(src)
 
-	var ret *Euler
+	var ret Euler
 
 	ret = UnsafeEulerFromGlibNone(unsafe.Pointer(cret))
 
@@ -1074,22 +1084,22 @@ func (e *Euler) InitFromEuler(src *Euler) *Euler {
 // 
 // The function takes the following parameters:
 // 
-// 	- m *Matrix (nullable): a rotation matrix 
+// 	- m Matrix (nullable): a rotation matrix 
 // 	- order EulerOrder: the order used to apply the rotations 
 // 
 // The function returns the following values:
 // 
-// 	- ret *Euler 
+// 	- ret Euler 
 //
 // Initializes a #graphene_euler_t using the given rotation matrix.
 // 
 // If the #graphene_matrix_t @m is %NULL, the #graphene_euler_t will
 // be initialized with all angles set to 0.
-func (e *Euler) InitFromMatrix(m *Matrix, order EulerOrder) *Euler {
-	var carg0 *C.graphene_euler_t      // in, none, record
-	var carg1 *C.graphene_matrix_t     // in, none, record, nullable
-	var carg2 C.graphene_euler_order_t // in, casted
-	var cret  *C.graphene_euler_t      // return, none, record
+func (e *Euler) InitFromMatrix(m Matrix, order EulerOrder) Euler {
+	var carg0 *C.graphene_euler_t      // in, none, converted
+	var carg1 *C.graphene_matrix_t     // in, none, converted, nullable
+	var carg2 C.graphene_euler_order_t // in, none, casted
+	var cret  *C.graphene_euler_t      // return, none, converted
 
 	carg0 = (*C.graphene_euler_t)(UnsafeEulerToGlibNone(e))
 	if m != nil {
@@ -1102,7 +1112,7 @@ func (e *Euler) InitFromMatrix(m *Matrix, order EulerOrder) *Euler {
 	runtime.KeepAlive(m)
 	runtime.KeepAlive(order)
 
-	var ret *Euler
+	var ret Euler
 
 	ret = UnsafeEulerFromGlibNone(unsafe.Pointer(cret))
 
@@ -1113,22 +1123,22 @@ func (e *Euler) InitFromMatrix(m *Matrix, order EulerOrder) *Euler {
 // 
 // The function takes the following parameters:
 // 
-// 	- q *Quaternion (nullable): a normalized #graphene_quaternion_t 
+// 	- q Quaternion (nullable): a normalized #graphene_quaternion_t 
 // 	- order EulerOrder: the order used to apply the rotations 
 // 
 // The function returns the following values:
 // 
-// 	- ret *Euler 
+// 	- ret Euler 
 //
 // Initializes a #graphene_euler_t using the given normalized quaternion.
 // 
 // If the #graphene_quaternion_t @q is %NULL, the #graphene_euler_t will
 // be initialized with all angles set to 0.
-func (e *Euler) InitFromQuaternion(q *Quaternion, order EulerOrder) *Euler {
-	var carg0 *C.graphene_euler_t      // in, none, record
-	var carg1 *C.graphene_quaternion_t // in, none, record, nullable
-	var carg2 C.graphene_euler_order_t // in, casted
-	var cret  *C.graphene_euler_t      // return, none, record
+func (e *Euler) InitFromQuaternion(q Quaternion, order EulerOrder) Euler {
+	var carg0 *C.graphene_euler_t      // in, none, converted
+	var carg1 *C.graphene_quaternion_t // in, none, converted, nullable
+	var carg2 C.graphene_euler_order_t // in, none, casted
+	var cret  *C.graphene_euler_t      // return, none, converted
 
 	carg0 = (*C.graphene_euler_t)(UnsafeEulerToGlibNone(e))
 	if q != nil {
@@ -1141,7 +1151,7 @@ func (e *Euler) InitFromQuaternion(q *Quaternion, order EulerOrder) *Euler {
 	runtime.KeepAlive(q)
 	runtime.KeepAlive(order)
 
-	var ret *Euler
+	var ret Euler
 
 	ret = UnsafeEulerFromGlibNone(unsafe.Pointer(cret))
 
@@ -1159,17 +1169,17 @@ func (e *Euler) InitFromQuaternion(q *Quaternion, order EulerOrder) *Euler {
 // 
 // The function returns the following values:
 // 
-// 	- ret *Euler 
+// 	- ret Euler 
 //
 // Initializes a #graphene_euler_t using the given angles
 // and order of rotation.
-func (e *Euler) InitFromRadians(x float32, y float32, z float32, order EulerOrder) *Euler {
-	var carg0 *C.graphene_euler_t      // in, none, record
-	var carg1 C.gfloat                 // in, casted
-	var carg2 C.gfloat                 // in, casted
-	var carg3 C.gfloat                 // in, casted
-	var carg4 C.graphene_euler_order_t // in, casted
-	var cret  *C.graphene_euler_t      // return, none, record
+func (e *Euler) InitFromRadians(x float32, y float32, z float32, order EulerOrder) Euler {
+	var carg0 *C.graphene_euler_t      // in, none, converted
+	var carg1 C.gfloat                 // in, none, casted
+	var carg2 C.gfloat                 // in, none, casted
+	var carg3 C.gfloat                 // in, none, casted
+	var carg4 C.graphene_euler_order_t // in, none, casted
+	var cret  *C.graphene_euler_t      // return, none, converted
 
 	carg0 = (*C.graphene_euler_t)(UnsafeEulerToGlibNone(e))
 	carg1 = C.gfloat(x)
@@ -1184,7 +1194,7 @@ func (e *Euler) InitFromRadians(x float32, y float32, z float32, order EulerOrde
 	runtime.KeepAlive(z)
 	runtime.KeepAlive(order)
 
-	var ret *Euler
+	var ret Euler
 
 	ret = UnsafeEulerFromGlibNone(unsafe.Pointer(cret))
 
@@ -1195,24 +1205,24 @@ func (e *Euler) InitFromRadians(x float32, y float32, z float32, order EulerOrde
 // 
 // The function takes the following parameters:
 // 
-// 	- v *Vec3 (nullable): a #graphene_vec3_t containing the rotation
+// 	- v Vec3 (nullable): a #graphene_vec3_t containing the rotation
 //   angles in degrees 
 // 	- order EulerOrder: the order used to apply the rotations 
 // 
 // The function returns the following values:
 // 
-// 	- ret *Euler 
+// 	- ret Euler 
 //
 // Initializes a #graphene_euler_t using the angles contained in a
 // #graphene_vec3_t.
 // 
 // If the #graphene_vec3_t @v is %NULL, the #graphene_euler_t will be
 // initialized with all angles set to 0.
-func (e *Euler) InitFromVec3(v *Vec3, order EulerOrder) *Euler {
-	var carg0 *C.graphene_euler_t      // in, none, record
-	var carg1 *C.graphene_vec3_t       // in, none, record, nullable
-	var carg2 C.graphene_euler_order_t // in, casted
-	var cret  *C.graphene_euler_t      // return, none, record
+func (e *Euler) InitFromVec3(v Vec3, order EulerOrder) Euler {
+	var carg0 *C.graphene_euler_t      // in, none, converted
+	var carg1 *C.graphene_vec3_t       // in, none, converted, nullable
+	var carg2 C.graphene_euler_order_t // in, none, casted
+	var cret  *C.graphene_euler_t      // return, none, converted
 
 	carg0 = (*C.graphene_euler_t)(UnsafeEulerToGlibNone(e))
 	if v != nil {
@@ -1225,7 +1235,7 @@ func (e *Euler) InitFromVec3(v *Vec3, order EulerOrder) *Euler {
 	runtime.KeepAlive(v)
 	runtime.KeepAlive(order)
 
-	var ret *Euler
+	var ret Euler
 
 	ret = UnsafeEulerFromGlibNone(unsafe.Pointer(cret))
 
@@ -1243,16 +1253,16 @@ func (e *Euler) InitFromVec3(v *Vec3, order EulerOrder) *Euler {
 // 
 // The function returns the following values:
 // 
-// 	- ret *Euler 
+// 	- ret Euler 
 //
 // Initializes a #graphene_euler_t with the given angles and @order.
-func (e *Euler) InitWithOrder(x float32, y float32, z float32, order EulerOrder) *Euler {
-	var carg0 *C.graphene_euler_t      // in, none, record
-	var carg1 C.gfloat                 // in, casted
-	var carg2 C.gfloat                 // in, casted
-	var carg3 C.gfloat                 // in, casted
-	var carg4 C.graphene_euler_order_t // in, casted
-	var cret  *C.graphene_euler_t      // return, none, record
+func (e *Euler) InitWithOrder(x float32, y float32, z float32, order EulerOrder) Euler {
+	var carg0 *C.graphene_euler_t      // in, none, converted
+	var carg1 C.gfloat                 // in, none, casted
+	var carg2 C.gfloat                 // in, none, casted
+	var carg3 C.gfloat                 // in, none, casted
+	var carg4 C.graphene_euler_order_t // in, none, casted
+	var cret  *C.graphene_euler_t      // return, none, converted
 
 	carg0 = (*C.graphene_euler_t)(UnsafeEulerToGlibNone(e))
 	carg1 = C.gfloat(x)
@@ -1267,7 +1277,7 @@ func (e *Euler) InitWithOrder(x float32, y float32, z float32, order EulerOrder)
 	runtime.KeepAlive(z)
 	runtime.KeepAlive(order)
 
-	var ret *Euler
+	var ret Euler
 
 	ret = UnsafeEulerFromGlibNone(unsafe.Pointer(cret))
 
@@ -1290,7 +1300,7 @@ type frustum struct {
 }
 
 func marshalFrustum(p uintptr) (interface{}, error) {
-	b := gobject.ValueFromNative(unsafe.Pointer(p)).Boxed()
+	b := gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Boxed()
 	return UnsafeFrustumFromGlibBorrow(b), nil
 }
 
@@ -1334,17 +1344,17 @@ func UnsafeFrustumToGlibFull(f *Frustum) unsafe.Pointer {
 // FrustumAlloc wraps graphene_frustum_alloc
 // The function returns the following values:
 // 
-// 	- ret *Frustum 
+// 	- ret Frustum 
 //
 // Allocates a new #graphene_frustum_t structure.
 // 
 // The contents of the returned structure are undefined.
-func FrustumAlloc() *Frustum {
-	var cret *C.graphene_frustum_t // return, full, record
+func FrustumAlloc() Frustum {
+	var cret *C.graphene_frustum_t // return, full, converted
 
 	cret = C.graphene_frustum_alloc()
 
-	var ret *Frustum
+	var ret Frustum
 
 	ret = UnsafeFrustumFromGlibFull(unsafe.Pointer(cret))
 
@@ -1355,7 +1365,7 @@ func FrustumAlloc() *Frustum {
 // 
 // The function takes the following parameters:
 // 
-// 	- point *Point3D: a #graphene_point3d_t 
+// 	- point Point3D: a #graphene_point3d_t 
 // 
 // The function returns the following values:
 // 
@@ -1363,9 +1373,9 @@ func FrustumAlloc() *Frustum {
 //
 // Checks whether a point is inside the volume defined by the given
 // #graphene_frustum_t.
-func (f *Frustum) ContainsPoint(point *Point3D) bool {
-	var carg0 *C.graphene_frustum_t // in, none, record
-	var carg1 *C.graphene_point3d_t // in, none, record
+func (f *Frustum) ContainsPoint(point Point3D) bool {
+	var carg0 *C.graphene_frustum_t // in, none, converted
+	var carg1 *C.graphene_point3d_t // in, none, converted
 	var cret  C.gboolean            // return
 
 	carg0 = (*C.graphene_frustum_t)(UnsafeFrustumToGlibNone(f))
@@ -1388,16 +1398,16 @@ func (f *Frustum) ContainsPoint(point *Point3D) bool {
 // 
 // The function takes the following parameters:
 // 
-// 	- b *Frustum: a #graphene_frustum_t 
+// 	- b Frustum: a #graphene_frustum_t 
 // 
 // The function returns the following values:
 // 
 // 	- ret bool 
 //
 // Checks whether the two given #graphene_frustum_t are equal.
-func (a *Frustum) Equal(b *Frustum) bool {
-	var carg0 *C.graphene_frustum_t // in, none, record
-	var carg1 *C.graphene_frustum_t // in, none, record
+func (a *Frustum) Equal(b Frustum) bool {
+	var carg0 *C.graphene_frustum_t // in, none, converted
+	var carg1 *C.graphene_frustum_t // in, none, converted
 	var cret  C.gboolean            // return
 
 	carg0 = (*C.graphene_frustum_t)(UnsafeFrustumToGlibNone(a))
@@ -1419,22 +1429,22 @@ func (a *Frustum) Equal(b *Frustum) bool {
 // GetPlanes wraps graphene_frustum_get_planes
 // The function returns the following values:
 // 
-// 	- planes []Plane: return location for an array
+// 	- planes array: return location for an array
 //   of 6 #graphene_plane_t 
 //
 // Retrieves the planes that define the given #graphene_frustum_t.
-func (f *Frustum) GetPlanes() []Plane {
-	var carg0 *C.graphene_frustum_t // in, none, record
-	var carg1 *C.graphene_plane_t   // out, transfer: none, scope: call, implicit: false, skip: false, optional: false, nullable: false, caller-allocates: true, has closure: false, has destroy: false
+func (f *Frustum) GetPlanes() array {
+	var carg0 *C.graphene_frustum_t // in, none, converted
+	var carg1 array                 // out, transfer: none, scope: call, implicit: false, skip: false, optional: false, nullable: false, caller-allocates: true, has closure: false, has destroy: false
 
 	carg0 = (*C.graphene_frustum_t)(UnsafeFrustumToGlibNone(f))
 
 	C.graphene_frustum_get_planes(carg0, &carg1)
 	runtime.KeepAlive(f)
 
-	var planes []Plane
+	var planes array
 
-	panic("unimplemented conversion of *typesystem.Array (graphene_plane_t*)")
+	panic("unimplemented conversion of array (array)")
 
 	return planes
 }
@@ -1443,28 +1453,28 @@ func (f *Frustum) GetPlanes() []Plane {
 // 
 // The function takes the following parameters:
 // 
-// 	- p0 *Plane: a clipping plane 
-// 	- p1 *Plane: a clipping plane 
-// 	- p2 *Plane: a clipping plane 
-// 	- p3 *Plane: a clipping plane 
-// 	- p4 *Plane: a clipping plane 
-// 	- p5 *Plane: a clipping plane 
+// 	- p0 Plane: a clipping plane 
+// 	- p1 Plane: a clipping plane 
+// 	- p2 Plane: a clipping plane 
+// 	- p3 Plane: a clipping plane 
+// 	- p4 Plane: a clipping plane 
+// 	- p5 Plane: a clipping plane 
 // 
 // The function returns the following values:
 // 
-// 	- ret *Frustum 
+// 	- ret Frustum 
 //
 // Initializes the given #graphene_frustum_t using the provided
 // clipping planes.
-func (f *Frustum) Init(p0 *Plane, p1 *Plane, p2 *Plane, p3 *Plane, p4 *Plane, p5 *Plane) *Frustum {
-	var carg0 *C.graphene_frustum_t // in, none, record
-	var carg1 *C.graphene_plane_t   // in, none, record
-	var carg2 *C.graphene_plane_t   // in, none, record
-	var carg3 *C.graphene_plane_t   // in, none, record
-	var carg4 *C.graphene_plane_t   // in, none, record
-	var carg5 *C.graphene_plane_t   // in, none, record
-	var carg6 *C.graphene_plane_t   // in, none, record
-	var cret  *C.graphene_frustum_t // return, none, record
+func (f *Frustum) Init(p0 Plane, p1 Plane, p2 Plane, p3 Plane, p4 Plane, p5 Plane) Frustum {
+	var carg0 *C.graphene_frustum_t // in, none, converted
+	var carg1 *C.graphene_plane_t   // in, none, converted
+	var carg2 *C.graphene_plane_t   // in, none, converted
+	var carg3 *C.graphene_plane_t   // in, none, converted
+	var carg4 *C.graphene_plane_t   // in, none, converted
+	var carg5 *C.graphene_plane_t   // in, none, converted
+	var carg6 *C.graphene_plane_t   // in, none, converted
+	var cret  *C.graphene_frustum_t // return, none, converted
 
 	carg0 = (*C.graphene_frustum_t)(UnsafeFrustumToGlibNone(f))
 	carg1 = (*C.graphene_plane_t)(UnsafePlaneToGlibNone(p0))
@@ -1483,7 +1493,7 @@ func (f *Frustum) Init(p0 *Plane, p1 *Plane, p2 *Plane, p3 *Plane, p4 *Plane, p5
 	runtime.KeepAlive(p4)
 	runtime.KeepAlive(p5)
 
-	var ret *Frustum
+	var ret Frustum
 
 	ret = UnsafeFrustumFromGlibNone(unsafe.Pointer(cret))
 
@@ -1494,18 +1504,18 @@ func (f *Frustum) Init(p0 *Plane, p1 *Plane, p2 *Plane, p3 *Plane, p4 *Plane, p5
 // 
 // The function takes the following parameters:
 // 
-// 	- src *Frustum: a #graphene_frustum_t 
+// 	- src Frustum: a #graphene_frustum_t 
 // 
 // The function returns the following values:
 // 
-// 	- ret *Frustum 
+// 	- ret Frustum 
 //
 // Initializes the given #graphene_frustum_t using the clipping
 // planes of another #graphene_frustum_t.
-func (f *Frustum) InitFromFrustum(src *Frustum) *Frustum {
-	var carg0 *C.graphene_frustum_t // in, none, record
-	var carg1 *C.graphene_frustum_t // in, none, record
-	var cret  *C.graphene_frustum_t // return, none, record
+func (f *Frustum) InitFromFrustum(src Frustum) Frustum {
+	var carg0 *C.graphene_frustum_t // in, none, converted
+	var carg1 *C.graphene_frustum_t // in, none, converted
+	var cret  *C.graphene_frustum_t // return, none, converted
 
 	carg0 = (*C.graphene_frustum_t)(UnsafeFrustumToGlibNone(f))
 	carg1 = (*C.graphene_frustum_t)(UnsafeFrustumToGlibNone(src))
@@ -1514,7 +1524,7 @@ func (f *Frustum) InitFromFrustum(src *Frustum) *Frustum {
 	runtime.KeepAlive(f)
 	runtime.KeepAlive(src)
 
-	var ret *Frustum
+	var ret Frustum
 
 	ret = UnsafeFrustumFromGlibNone(unsafe.Pointer(cret))
 
@@ -1525,17 +1535,17 @@ func (f *Frustum) InitFromFrustum(src *Frustum) *Frustum {
 // 
 // The function takes the following parameters:
 // 
-// 	- matrix *Matrix: a #graphene_matrix_t 
+// 	- matrix Matrix: a #graphene_matrix_t 
 // 
 // The function returns the following values:
 // 
-// 	- ret *Frustum 
+// 	- ret Frustum 
 //
 // Initializes a #graphene_frustum_t using the given @matrix.
-func (f *Frustum) InitFromMatrix(matrix *Matrix) *Frustum {
-	var carg0 *C.graphene_frustum_t // in, none, record
-	var carg1 *C.graphene_matrix_t  // in, none, record
-	var cret  *C.graphene_frustum_t // return, none, record
+func (f *Frustum) InitFromMatrix(matrix Matrix) Frustum {
+	var carg0 *C.graphene_frustum_t // in, none, converted
+	var carg1 *C.graphene_matrix_t  // in, none, converted
+	var cret  *C.graphene_frustum_t // return, none, converted
 
 	carg0 = (*C.graphene_frustum_t)(UnsafeFrustumToGlibNone(f))
 	carg1 = (*C.graphene_matrix_t)(UnsafeMatrixToGlibNone(matrix))
@@ -1544,7 +1554,7 @@ func (f *Frustum) InitFromMatrix(matrix *Matrix) *Frustum {
 	runtime.KeepAlive(f)
 	runtime.KeepAlive(matrix)
 
-	var ret *Frustum
+	var ret Frustum
 
 	ret = UnsafeFrustumFromGlibNone(unsafe.Pointer(cret))
 
@@ -1555,7 +1565,7 @@ func (f *Frustum) InitFromMatrix(matrix *Matrix) *Frustum {
 // 
 // The function takes the following parameters:
 // 
-// 	- box *Box: a #graphene_box_t 
+// 	- box Box: a #graphene_box_t 
 // 
 // The function returns the following values:
 // 
@@ -1563,9 +1573,9 @@ func (f *Frustum) InitFromMatrix(matrix *Matrix) *Frustum {
 //
 // Checks whether the given @box intersects a plane of
 // a #graphene_frustum_t.
-func (f *Frustum) IntersectsBox(box *Box) bool {
-	var carg0 *C.graphene_frustum_t // in, none, record
-	var carg1 *C.graphene_box_t     // in, none, record
+func (f *Frustum) IntersectsBox(box Box) bool {
+	var carg0 *C.graphene_frustum_t // in, none, converted
+	var carg1 *C.graphene_box_t     // in, none, converted
 	var cret  C.gboolean            // return
 
 	carg0 = (*C.graphene_frustum_t)(UnsafeFrustumToGlibNone(f))
@@ -1588,7 +1598,7 @@ func (f *Frustum) IntersectsBox(box *Box) bool {
 // 
 // The function takes the following parameters:
 // 
-// 	- sphere *Sphere: a #graphene_sphere_t 
+// 	- sphere Sphere: a #graphene_sphere_t 
 // 
 // The function returns the following values:
 // 
@@ -1596,9 +1606,9 @@ func (f *Frustum) IntersectsBox(box *Box) bool {
 //
 // Checks whether the given @sphere intersects a plane of
 // a #graphene_frustum_t.
-func (f *Frustum) IntersectsSphere(sphere *Sphere) bool {
-	var carg0 *C.graphene_frustum_t // in, none, record
-	var carg1 *C.graphene_sphere_t  // in, none, record
+func (f *Frustum) IntersectsSphere(sphere Sphere) bool {
+	var carg0 *C.graphene_frustum_t // in, none, converted
+	var carg1 *C.graphene_sphere_t  // in, none, converted
 	var cret  C.gboolean            // return
 
 	carg0 = (*C.graphene_frustum_t)(UnsafeFrustumToGlibNone(f))
@@ -1633,7 +1643,7 @@ type matrix struct {
 }
 
 func marshalMatrix(p uintptr) (interface{}, error) {
-	b := gobject.ValueFromNative(unsafe.Pointer(p)).Boxed()
+	b := gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Boxed()
 	return UnsafeMatrixFromGlibBorrow(b), nil
 }
 
@@ -1677,15 +1687,15 @@ func UnsafeMatrixToGlibFull(m *Matrix) unsafe.Pointer {
 // MatrixAlloc wraps graphene_matrix_alloc
 // The function returns the following values:
 // 
-// 	- ret *Matrix 
+// 	- ret Matrix 
 //
 // Allocates a new #graphene_matrix_t.
-func MatrixAlloc() *Matrix {
-	var cret *C.graphene_matrix_t // return, full, record
+func MatrixAlloc() Matrix {
+	var cret *C.graphene_matrix_t // return, full, converted
 
 	cret = C.graphene_matrix_alloc()
 
-	var ret *Matrix
+	var ret Matrix
 
 	ret = UnsafeMatrixFromGlibFull(unsafe.Pointer(cret))
 
@@ -1699,8 +1709,8 @@ func MatrixAlloc() *Matrix {
 //
 // Computes the determinant of the given matrix.
 func (m *Matrix) Determinant() float32 {
-	var carg0 *C.graphene_matrix_t // in, none, record
-	var cret  C.gfloat             // return, casted
+	var carg0 *C.graphene_matrix_t // in, none, converted
+	var cret  C.gfloat             // return, none, casted
 
 	carg0 = (*C.graphene_matrix_t)(UnsafeMatrixToGlibNone(m))
 
@@ -1718,16 +1728,16 @@ func (m *Matrix) Determinant() float32 {
 // 
 // The function takes the following parameters:
 // 
-// 	- b *Matrix: a #graphene_matrix_t 
+// 	- b Matrix: a #graphene_matrix_t 
 // 
 // The function returns the following values:
 // 
 // 	- ret bool 
 //
 // Checks whether the two given #graphene_matrix_t matrices are equal.
-func (a *Matrix) Equal(b *Matrix) bool {
-	var carg0 *C.graphene_matrix_t // in, none, record
-	var carg1 *C.graphene_matrix_t // in, none, record
+func (a *Matrix) Equal(b Matrix) bool {
+	var carg0 *C.graphene_matrix_t // in, none, converted
+	var carg1 *C.graphene_matrix_t // in, none, converted
 	var cret  C.gboolean           // return
 
 	carg0 = (*C.graphene_matrix_t)(UnsafeMatrixToGlibNone(a))
@@ -1750,7 +1760,7 @@ func (a *Matrix) Equal(b *Matrix) bool {
 // 
 // The function takes the following parameters:
 // 
-// 	- b *Matrix: a #graphene_matrix_t 
+// 	- b Matrix: a #graphene_matrix_t 
 // 
 // The function returns the following values:
 // 
@@ -1779,9 +1789,9 @@ func (a *Matrix) Equal(b *Matrix) bool {
 //         // matrices are not equal
 //     }
 // ]|
-func (a *Matrix) EqualFast(b *Matrix) bool {
-	var carg0 *C.graphene_matrix_t // in, none, record
-	var carg1 *C.graphene_matrix_t // in, none, record
+func (a *Matrix) EqualFast(b Matrix) bool {
+	var carg0 *C.graphene_matrix_t // in, none, converted
+	var carg1 *C.graphene_matrix_t // in, none, converted
 	var cret  C.gboolean           // return
 
 	carg0 = (*C.graphene_matrix_t)(UnsafeMatrixToGlibNone(a))
@@ -1813,10 +1823,10 @@ func (a *Matrix) EqualFast(b *Matrix) bool {
 //
 // Retrieves the value at the given @row and @col index.
 func (m *Matrix) GetValue(row uint, col uint) float32 {
-	var carg0 *C.graphene_matrix_t // in, none, record
-	var carg1 C.guint              // in, casted
-	var carg2 C.guint              // in, casted
-	var cret  C.gfloat             // return, casted
+	var carg0 *C.graphene_matrix_t // in, none, converted
+	var carg1 C.guint              // in, none, casted
+	var carg2 C.guint              // in, none, casted
+	var cret  C.gfloat             // return, none, casted
 
 	carg0 = (*C.graphene_matrix_t)(UnsafeMatrixToGlibNone(m))
 	carg1 = C.guint(row)
@@ -1841,8 +1851,8 @@ func (m *Matrix) GetValue(row uint, col uint) float32 {
 //
 // Retrieves the scaling factor on the X axis in @m.
 func (m *Matrix) GetXScale() float32 {
-	var carg0 *C.graphene_matrix_t // in, none, record
-	var cret  C.gfloat             // return, casted
+	var carg0 *C.graphene_matrix_t // in, none, converted
+	var cret  C.gfloat             // return, none, casted
 
 	carg0 = (*C.graphene_matrix_t)(UnsafeMatrixToGlibNone(m))
 
@@ -1863,8 +1873,8 @@ func (m *Matrix) GetXScale() float32 {
 //
 // Retrieves the translation component on the X axis from @m.
 func (m *Matrix) GetXTranslation() float32 {
-	var carg0 *C.graphene_matrix_t // in, none, record
-	var cret  C.gfloat             // return, casted
+	var carg0 *C.graphene_matrix_t // in, none, converted
+	var cret  C.gfloat             // return, none, casted
 
 	carg0 = (*C.graphene_matrix_t)(UnsafeMatrixToGlibNone(m))
 
@@ -1885,8 +1895,8 @@ func (m *Matrix) GetXTranslation() float32 {
 //
 // Retrieves the scaling factor on the Y axis in @m.
 func (m *Matrix) GetYScale() float32 {
-	var carg0 *C.graphene_matrix_t // in, none, record
-	var cret  C.gfloat             // return, casted
+	var carg0 *C.graphene_matrix_t // in, none, converted
+	var cret  C.gfloat             // return, none, casted
 
 	carg0 = (*C.graphene_matrix_t)(UnsafeMatrixToGlibNone(m))
 
@@ -1907,8 +1917,8 @@ func (m *Matrix) GetYScale() float32 {
 //
 // Retrieves the translation component on the Y axis from @m.
 func (m *Matrix) GetYTranslation() float32 {
-	var carg0 *C.graphene_matrix_t // in, none, record
-	var cret  C.gfloat             // return, casted
+	var carg0 *C.graphene_matrix_t // in, none, converted
+	var cret  C.gfloat             // return, none, casted
 
 	carg0 = (*C.graphene_matrix_t)(UnsafeMatrixToGlibNone(m))
 
@@ -1929,8 +1939,8 @@ func (m *Matrix) GetYTranslation() float32 {
 //
 // Retrieves the scaling factor on the Z axis in @m.
 func (m *Matrix) GetZScale() float32 {
-	var carg0 *C.graphene_matrix_t // in, none, record
-	var cret  C.gfloat             // return, casted
+	var carg0 *C.graphene_matrix_t // in, none, converted
+	var cret  C.gfloat             // return, none, casted
 
 	carg0 = (*C.graphene_matrix_t)(UnsafeMatrixToGlibNone(m))
 
@@ -1951,8 +1961,8 @@ func (m *Matrix) GetZScale() float32 {
 //
 // Retrieves the translation component on the Z axis from @m.
 func (m *Matrix) GetZTranslation() float32 {
-	var carg0 *C.graphene_matrix_t // in, none, record
-	var cret  C.gfloat             // return, casted
+	var carg0 *C.graphene_matrix_t // in, none, converted
+	var cret  C.gfloat             // return, none, casted
 
 	carg0 = (*C.graphene_matrix_t)(UnsafeMatrixToGlibNone(m))
 
@@ -1979,7 +1989,7 @@ func (m *Matrix) GetZTranslation() float32 {
 // 
 // The function returns the following values:
 // 
-// 	- ret *Matrix 
+// 	- ret Matrix 
 //
 // Initializes a #graphene_matrix_t from the values of an affine
 // transformation matrix.
@@ -1994,15 +2004,15 @@ func (m *Matrix) GetZTranslation() float32 {
 // 
 // This function can be used to convert between an affine matrix type
 // from other libraries and a #graphene_matrix_t.
-func (m *Matrix) InitFrom2D(xx float64, yx float64, xy float64, yy float64, x0 float64, y0 float64) *Matrix {
-	var carg0 *C.graphene_matrix_t // in, none, record
-	var carg1 C.gdouble            // in, casted
-	var carg2 C.gdouble            // in, casted
-	var carg3 C.gdouble            // in, casted
-	var carg4 C.gdouble            // in, casted
-	var carg5 C.gdouble            // in, casted
-	var carg6 C.gdouble            // in, casted
-	var cret  *C.graphene_matrix_t // return, none, record
+func (m *Matrix) InitFrom2D(xx float64, yx float64, xy float64, yy float64, x0 float64, y0 float64) Matrix {
+	var carg0 *C.graphene_matrix_t // in, none, converted
+	var carg1 C.gdouble            // in, none, casted
+	var carg2 C.gdouble            // in, none, casted
+	var carg3 C.gdouble            // in, none, casted
+	var carg4 C.gdouble            // in, none, casted
+	var carg5 C.gdouble            // in, none, casted
+	var carg6 C.gdouble            // in, none, casted
+	var cret  *C.graphene_matrix_t // return, none, converted
 
 	carg0 = (*C.graphene_matrix_t)(UnsafeMatrixToGlibNone(m))
 	carg1 = C.gdouble(xx)
@@ -2021,7 +2031,7 @@ func (m *Matrix) InitFrom2D(xx float64, yx float64, xy float64, yy float64, x0 f
 	runtime.KeepAlive(x0)
 	runtime.KeepAlive(y0)
 
-	var ret *Matrix
+	var ret Matrix
 
 	ret = UnsafeMatrixFromGlibNone(unsafe.Pointer(cret))
 
@@ -2032,28 +2042,28 @@ func (m *Matrix) InitFrom2D(xx float64, yx float64, xy float64, yy float64, x0 f
 // 
 // The function takes the following parameters:
 // 
-// 	- v []float32: an array of at least 16 floating
+// 	- v array: an array of at least 16 floating
 //   point values 
 // 
 // The function returns the following values:
 // 
-// 	- ret *Matrix 
+// 	- ret Matrix 
 //
 // Initializes a #graphene_matrix_t with the given array of floating
 // point values.
-func (m *Matrix) InitFromFloat(v []float32) *Matrix {
-	var carg0 *C.graphene_matrix_t // in, none, record
-	var carg1 *C.gfloat            // in, transfer: none, scope: call, implicit: false, skip: false, optional: false, nullable: false, caller-allocates: false, has closure: false, has destroy: false
-	var cret  *C.graphene_matrix_t // return, none, record
+func (m *Matrix) InitFromFloat(v array) Matrix {
+	var carg0 *C.graphene_matrix_t // in, none, converted
+	var carg1 array                // in, transfer: none, scope: call, implicit: false, skip: false, optional: false, nullable: false, caller-allocates: false, has closure: false, has destroy: false
+	var cret  *C.graphene_matrix_t // return, none, converted
 
 	carg0 = (*C.graphene_matrix_t)(UnsafeMatrixToGlibNone(m))
-	panic("unimplemented conversion of *typesystem.Array (gfloat*)")
+	panic("unimplemented conversion of array (array)")
 
 	cret = C.graphene_matrix_init_from_float(carg0, carg1)
 	runtime.KeepAlive(m)
 	runtime.KeepAlive(v)
 
-	var ret *Matrix
+	var ret Matrix
 
 	ret = UnsafeMatrixFromGlibNone(unsafe.Pointer(cret))
 
@@ -2064,18 +2074,18 @@ func (m *Matrix) InitFromFloat(v []float32) *Matrix {
 // 
 // The function takes the following parameters:
 // 
-// 	- src *Matrix: a #graphene_matrix_t 
+// 	- src Matrix: a #graphene_matrix_t 
 // 
 // The function returns the following values:
 // 
-// 	- ret *Matrix 
+// 	- ret Matrix 
 //
 // Initializes a #graphene_matrix_t using the values of the
 // given matrix.
-func (m *Matrix) InitFromMatrix(src *Matrix) *Matrix {
-	var carg0 *C.graphene_matrix_t // in, none, record
-	var carg1 *C.graphene_matrix_t // in, none, record
-	var cret  *C.graphene_matrix_t // return, none, record
+func (m *Matrix) InitFromMatrix(src Matrix) Matrix {
+	var carg0 *C.graphene_matrix_t // in, none, converted
+	var carg1 *C.graphene_matrix_t // in, none, converted
+	var cret  *C.graphene_matrix_t // return, none, converted
 
 	carg0 = (*C.graphene_matrix_t)(UnsafeMatrixToGlibNone(m))
 	carg1 = (*C.graphene_matrix_t)(UnsafeMatrixToGlibNone(src))
@@ -2084,7 +2094,7 @@ func (m *Matrix) InitFromMatrix(src *Matrix) *Matrix {
 	runtime.KeepAlive(m)
 	runtime.KeepAlive(src)
 
-	var ret *Matrix
+	var ret Matrix
 
 	ret = UnsafeMatrixFromGlibNone(unsafe.Pointer(cret))
 
@@ -2095,24 +2105,24 @@ func (m *Matrix) InitFromMatrix(src *Matrix) *Matrix {
 // 
 // The function takes the following parameters:
 // 
-// 	- v0 *Vec4: the first row vector 
-// 	- v1 *Vec4: the second row vector 
-// 	- v2 *Vec4: the third row vector 
-// 	- v3 *Vec4: the fourth row vector 
+// 	- v0 Vec4: the first row vector 
+// 	- v1 Vec4: the second row vector 
+// 	- v2 Vec4: the third row vector 
+// 	- v3 Vec4: the fourth row vector 
 // 
 // The function returns the following values:
 // 
-// 	- ret *Matrix 
+// 	- ret Matrix 
 //
 // Initializes a #graphene_matrix_t with the given four row
 // vectors.
-func (m *Matrix) InitFromVec4(v0 *Vec4, v1 *Vec4, v2 *Vec4, v3 *Vec4) *Matrix {
-	var carg0 *C.graphene_matrix_t // in, none, record
-	var carg1 *C.graphene_vec4_t   // in, none, record
-	var carg2 *C.graphene_vec4_t   // in, none, record
-	var carg3 *C.graphene_vec4_t   // in, none, record
-	var carg4 *C.graphene_vec4_t   // in, none, record
-	var cret  *C.graphene_matrix_t // return, none, record
+func (m *Matrix) InitFromVec4(v0 Vec4, v1 Vec4, v2 Vec4, v3 Vec4) Matrix {
+	var carg0 *C.graphene_matrix_t // in, none, converted
+	var carg1 *C.graphene_vec4_t   // in, none, converted
+	var carg2 *C.graphene_vec4_t   // in, none, converted
+	var carg3 *C.graphene_vec4_t   // in, none, converted
+	var carg4 *C.graphene_vec4_t   // in, none, converted
+	var cret  *C.graphene_matrix_t // return, none, converted
 
 	carg0 = (*C.graphene_matrix_t)(UnsafeMatrixToGlibNone(m))
 	carg1 = (*C.graphene_vec4_t)(UnsafeVec4ToGlibNone(v0))
@@ -2127,7 +2137,7 @@ func (m *Matrix) InitFromVec4(v0 *Vec4, v1 *Vec4, v2 *Vec4, v3 *Vec4) *Matrix {
 	runtime.KeepAlive(v2)
 	runtime.KeepAlive(v3)
 
-	var ret *Matrix
+	var ret Matrix
 
 	ret = UnsafeMatrixFromGlibNone(unsafe.Pointer(cret))
 
@@ -2147,20 +2157,20 @@ func (m *Matrix) InitFromVec4(v0 *Vec4, v1 *Vec4, v2 *Vec4, v3 *Vec4) *Matrix {
 // 
 // The function returns the following values:
 // 
-// 	- ret *Matrix 
+// 	- ret Matrix 
 //
 // Initializes a #graphene_matrix_t compatible with #graphene_frustum_t.
 // 
 // See also: graphene_frustum_init_from_matrix()
-func (m *Matrix) InitFrustum(left float32, right float32, bottom float32, top float32, zNear float32, zFar float32) *Matrix {
-	var carg0 *C.graphene_matrix_t // in, none, record
-	var carg1 C.gfloat             // in, casted
-	var carg2 C.gfloat             // in, casted
-	var carg3 C.gfloat             // in, casted
-	var carg4 C.gfloat             // in, casted
-	var carg5 C.gfloat             // in, casted
-	var carg6 C.gfloat             // in, casted
-	var cret  *C.graphene_matrix_t // return, none, record
+func (m *Matrix) InitFrustum(left float32, right float32, bottom float32, top float32, zNear float32, zFar float32) Matrix {
+	var carg0 *C.graphene_matrix_t // in, none, converted
+	var carg1 C.gfloat             // in, none, casted
+	var carg2 C.gfloat             // in, none, casted
+	var carg3 C.gfloat             // in, none, casted
+	var carg4 C.gfloat             // in, none, casted
+	var carg5 C.gfloat             // in, none, casted
+	var carg6 C.gfloat             // in, none, casted
+	var cret  *C.graphene_matrix_t // return, none, converted
 
 	carg0 = (*C.graphene_matrix_t)(UnsafeMatrixToGlibNone(m))
 	carg1 = C.gfloat(left)
@@ -2179,7 +2189,7 @@ func (m *Matrix) InitFrustum(left float32, right float32, bottom float32, top fl
 	runtime.KeepAlive(zNear)
 	runtime.KeepAlive(zFar)
 
-	var ret *Matrix
+	var ret Matrix
 
 	ret = UnsafeMatrixFromGlibNone(unsafe.Pointer(cret))
 
@@ -2189,19 +2199,19 @@ func (m *Matrix) InitFrustum(left float32, right float32, bottom float32, top fl
 // InitIdentity wraps graphene_matrix_init_identity
 // The function returns the following values:
 // 
-// 	- ret *Matrix 
+// 	- ret Matrix 
 //
 // Initializes a #graphene_matrix_t with the identity matrix.
-func (m *Matrix) InitIdentity() *Matrix {
-	var carg0 *C.graphene_matrix_t // in, none, record
-	var cret  *C.graphene_matrix_t // return, none, record
+func (m *Matrix) InitIdentity() Matrix {
+	var carg0 *C.graphene_matrix_t // in, none, converted
+	var cret  *C.graphene_matrix_t // return, none, converted
 
 	carg0 = (*C.graphene_matrix_t)(UnsafeMatrixToGlibNone(m))
 
 	cret = C.graphene_matrix_init_identity(carg0)
 	runtime.KeepAlive(m)
 
-	var ret *Matrix
+	var ret Matrix
 
 	ret = UnsafeMatrixFromGlibNone(unsafe.Pointer(cret))
 
@@ -2212,14 +2222,14 @@ func (m *Matrix) InitIdentity() *Matrix {
 // 
 // The function takes the following parameters:
 // 
-// 	- eye *Vec3: the vector describing the position to look from 
-// 	- center *Vec3: the vector describing the position to look at 
-// 	- up *Vec3: the vector describing the world's upward direction; usually,
+// 	- eye Vec3: the vector describing the position to look from 
+// 	- center Vec3: the vector describing the position to look at 
+// 	- up Vec3: the vector describing the world's upward direction; usually,
 //   this is the graphene_vec3_y_axis() vector 
 // 
 // The function returns the following values:
 // 
-// 	- ret *Matrix 
+// 	- ret Matrix 
 //
 // Initializes a #graphene_matrix_t so that it positions the "camera"
 // at the given @eye coordinates towards an object at the @center
@@ -2237,12 +2247,12 @@ func (m *Matrix) InitIdentity() *Matrix {
 // coordinates of the camera. Typically you would then apply the
 // camera projection transform to get from view to screen
 // coordinates.
-func (m *Matrix) InitLookAt(eye *Vec3, center *Vec3, up *Vec3) *Matrix {
-	var carg0 *C.graphene_matrix_t // in, none, record
-	var carg1 *C.graphene_vec3_t   // in, none, record
-	var carg2 *C.graphene_vec3_t   // in, none, record
-	var carg3 *C.graphene_vec3_t   // in, none, record
-	var cret  *C.graphene_matrix_t // return, none, record
+func (m *Matrix) InitLookAt(eye Vec3, center Vec3, up Vec3) Matrix {
+	var carg0 *C.graphene_matrix_t // in, none, converted
+	var carg1 *C.graphene_vec3_t   // in, none, converted
+	var carg2 *C.graphene_vec3_t   // in, none, converted
+	var carg3 *C.graphene_vec3_t   // in, none, converted
+	var cret  *C.graphene_matrix_t // return, none, converted
 
 	carg0 = (*C.graphene_matrix_t)(UnsafeMatrixToGlibNone(m))
 	carg1 = (*C.graphene_vec3_t)(UnsafeVec3ToGlibNone(eye))
@@ -2255,7 +2265,7 @@ func (m *Matrix) InitLookAt(eye *Vec3, center *Vec3, up *Vec3) *Matrix {
 	runtime.KeepAlive(center)
 	runtime.KeepAlive(up)
 
-	var ret *Matrix
+	var ret Matrix
 
 	ret = UnsafeMatrixFromGlibNone(unsafe.Pointer(cret))
 
@@ -2275,18 +2285,18 @@ func (m *Matrix) InitLookAt(eye *Vec3, center *Vec3, up *Vec3) *Matrix {
 // 
 // The function returns the following values:
 // 
-// 	- ret *Matrix 
+// 	- ret Matrix 
 //
 // Initializes a #graphene_matrix_t with an orthographic projection.
-func (m *Matrix) InitOrtho(left float32, right float32, top float32, bottom float32, zNear float32, zFar float32) *Matrix {
-	var carg0 *C.graphene_matrix_t // in, none, record
-	var carg1 C.gfloat             // in, casted
-	var carg2 C.gfloat             // in, casted
-	var carg3 C.gfloat             // in, casted
-	var carg4 C.gfloat             // in, casted
-	var carg5 C.gfloat             // in, casted
-	var carg6 C.gfloat             // in, casted
-	var cret  *C.graphene_matrix_t // return, none, record
+func (m *Matrix) InitOrtho(left float32, right float32, top float32, bottom float32, zNear float32, zFar float32) Matrix {
+	var carg0 *C.graphene_matrix_t // in, none, converted
+	var carg1 C.gfloat             // in, none, casted
+	var carg2 C.gfloat             // in, none, casted
+	var carg3 C.gfloat             // in, none, casted
+	var carg4 C.gfloat             // in, none, casted
+	var carg5 C.gfloat             // in, none, casted
+	var carg6 C.gfloat             // in, none, casted
+	var cret  *C.graphene_matrix_t // return, none, converted
 
 	carg0 = (*C.graphene_matrix_t)(UnsafeMatrixToGlibNone(m))
 	carg1 = C.gfloat(left)
@@ -2305,7 +2315,7 @@ func (m *Matrix) InitOrtho(left float32, right float32, top float32, bottom floa
 	runtime.KeepAlive(zNear)
 	runtime.KeepAlive(zFar)
 
-	var ret *Matrix
+	var ret Matrix
 
 	ret = UnsafeMatrixFromGlibNone(unsafe.Pointer(cret))
 
@@ -2323,16 +2333,16 @@ func (m *Matrix) InitOrtho(left float32, right float32, top float32, bottom floa
 // 
 // The function returns the following values:
 // 
-// 	- ret *Matrix 
+// 	- ret Matrix 
 //
 // Initializes a #graphene_matrix_t with a perspective projection.
-func (m *Matrix) InitPerspective(fovy float32, aspect float32, zNear float32, zFar float32) *Matrix {
-	var carg0 *C.graphene_matrix_t // in, none, record
-	var carg1 C.gfloat             // in, casted
-	var carg2 C.gfloat             // in, casted
-	var carg3 C.gfloat             // in, casted
-	var carg4 C.gfloat             // in, casted
-	var cret  *C.graphene_matrix_t // return, none, record
+func (m *Matrix) InitPerspective(fovy float32, aspect float32, zNear float32, zFar float32) Matrix {
+	var carg0 *C.graphene_matrix_t // in, none, converted
+	var carg1 C.gfloat             // in, none, casted
+	var carg2 C.gfloat             // in, none, casted
+	var carg3 C.gfloat             // in, none, casted
+	var carg4 C.gfloat             // in, none, casted
+	var cret  *C.graphene_matrix_t // return, none, converted
 
 	carg0 = (*C.graphene_matrix_t)(UnsafeMatrixToGlibNone(m))
 	carg1 = C.gfloat(fovy)
@@ -2347,7 +2357,7 @@ func (m *Matrix) InitPerspective(fovy float32, aspect float32, zNear float32, zF
 	runtime.KeepAlive(zNear)
 	runtime.KeepAlive(zFar)
 
-	var ret *Matrix
+	var ret Matrix
 
 	ret = UnsafeMatrixFromGlibNone(unsafe.Pointer(cret))
 
@@ -2359,19 +2369,19 @@ func (m *Matrix) InitPerspective(fovy float32, aspect float32, zNear float32, zF
 // The function takes the following parameters:
 // 
 // 	- angle float32: the rotation angle, in degrees 
-// 	- axis *Vec3: the axis vector as a #graphene_vec3_t 
+// 	- axis Vec3: the axis vector as a #graphene_vec3_t 
 // 
 // The function returns the following values:
 // 
-// 	- ret *Matrix 
+// 	- ret Matrix 
 //
 // Initializes @m to represent a rotation of @angle degrees on
 // the axis represented by the @axis vector.
-func (m *Matrix) InitRotate(angle float32, axis *Vec3) *Matrix {
-	var carg0 *C.graphene_matrix_t // in, none, record
-	var carg1 C.gfloat             // in, casted
-	var carg2 *C.graphene_vec3_t   // in, none, record
-	var cret  *C.graphene_matrix_t // return, none, record
+func (m *Matrix) InitRotate(angle float32, axis Vec3) Matrix {
+	var carg0 *C.graphene_matrix_t // in, none, converted
+	var carg1 C.gfloat             // in, none, casted
+	var carg2 *C.graphene_vec3_t   // in, none, converted
+	var cret  *C.graphene_matrix_t // return, none, converted
 
 	carg0 = (*C.graphene_matrix_t)(UnsafeMatrixToGlibNone(m))
 	carg1 = C.gfloat(angle)
@@ -2382,7 +2392,7 @@ func (m *Matrix) InitRotate(angle float32, axis *Vec3) *Matrix {
 	runtime.KeepAlive(angle)
 	runtime.KeepAlive(axis)
 
-	var ret *Matrix
+	var ret Matrix
 
 	ret = UnsafeMatrixFromGlibNone(unsafe.Pointer(cret))
 
@@ -2399,15 +2409,15 @@ func (m *Matrix) InitRotate(angle float32, axis *Vec3) *Matrix {
 // 
 // The function returns the following values:
 // 
-// 	- ret *Matrix 
+// 	- ret Matrix 
 //
 // Initializes a #graphene_matrix_t with the given scaling factors.
-func (m *Matrix) InitScale(x float32, y float32, z float32) *Matrix {
-	var carg0 *C.graphene_matrix_t // in, none, record
-	var carg1 C.gfloat             // in, casted
-	var carg2 C.gfloat             // in, casted
-	var carg3 C.gfloat             // in, casted
-	var cret  *C.graphene_matrix_t // return, none, record
+func (m *Matrix) InitScale(x float32, y float32, z float32) Matrix {
+	var carg0 *C.graphene_matrix_t // in, none, converted
+	var carg1 C.gfloat             // in, none, casted
+	var carg2 C.gfloat             // in, none, casted
+	var carg3 C.gfloat             // in, none, casted
+	var cret  *C.graphene_matrix_t // return, none, converted
 
 	carg0 = (*C.graphene_matrix_t)(UnsafeMatrixToGlibNone(m))
 	carg1 = C.gfloat(x)
@@ -2420,7 +2430,7 @@ func (m *Matrix) InitScale(x float32, y float32, z float32) *Matrix {
 	runtime.KeepAlive(y)
 	runtime.KeepAlive(z)
 
-	var ret *Matrix
+	var ret Matrix
 
 	ret = UnsafeMatrixFromGlibNone(unsafe.Pointer(cret))
 
@@ -2436,15 +2446,15 @@ func (m *Matrix) InitScale(x float32, y float32, z float32) *Matrix {
 // 
 // The function returns the following values:
 // 
-// 	- ret *Matrix 
+// 	- ret Matrix 
 //
 // Initializes a #graphene_matrix_t with a skew transformation
 // with the given factors.
-func (m *Matrix) InitSkew(xSkew float32, ySkew float32) *Matrix {
-	var carg0 *C.graphene_matrix_t // in, none, record
-	var carg1 C.gfloat             // in, casted
-	var carg2 C.gfloat             // in, casted
-	var cret  *C.graphene_matrix_t // return, none, record
+func (m *Matrix) InitSkew(xSkew float32, ySkew float32) Matrix {
+	var carg0 *C.graphene_matrix_t // in, none, converted
+	var carg1 C.gfloat             // in, none, casted
+	var carg2 C.gfloat             // in, none, casted
+	var cret  *C.graphene_matrix_t // return, none, converted
 
 	carg0 = (*C.graphene_matrix_t)(UnsafeMatrixToGlibNone(m))
 	carg1 = C.gfloat(xSkew)
@@ -2455,7 +2465,7 @@ func (m *Matrix) InitSkew(xSkew float32, ySkew float32) *Matrix {
 	runtime.KeepAlive(xSkew)
 	runtime.KeepAlive(ySkew)
 
-	var ret *Matrix
+	var ret Matrix
 
 	ret = UnsafeMatrixFromGlibNone(unsafe.Pointer(cret))
 
@@ -2466,18 +2476,18 @@ func (m *Matrix) InitSkew(xSkew float32, ySkew float32) *Matrix {
 // 
 // The function takes the following parameters:
 // 
-// 	- p *Point3D: the translation coordinates 
+// 	- p Point3D: the translation coordinates 
 // 
 // The function returns the following values:
 // 
-// 	- ret *Matrix 
+// 	- ret Matrix 
 //
 // Initializes a #graphene_matrix_t with a translation to the
 // given coordinates.
-func (m *Matrix) InitTranslate(p *Point3D) *Matrix {
-	var carg0 *C.graphene_matrix_t  // in, none, record
-	var carg1 *C.graphene_point3d_t // in, none, record
-	var cret  *C.graphene_matrix_t  // return, none, record
+func (m *Matrix) InitTranslate(p Point3D) Matrix {
+	var carg0 *C.graphene_matrix_t  // in, none, converted
+	var carg1 *C.graphene_point3d_t // in, none, converted
+	var cret  *C.graphene_matrix_t  // return, none, converted
 
 	carg0 = (*C.graphene_matrix_t)(UnsafeMatrixToGlibNone(m))
 	carg1 = (*C.graphene_point3d_t)(UnsafePoint3DToGlibNone(p))
@@ -2486,7 +2496,7 @@ func (m *Matrix) InitTranslate(p *Point3D) *Matrix {
 	runtime.KeepAlive(m)
 	runtime.KeepAlive(p)
 
-	var ret *Matrix
+	var ret Matrix
 
 	ret = UnsafeMatrixFromGlibNone(unsafe.Pointer(cret))
 
@@ -2501,7 +2511,7 @@ func (m *Matrix) InitTranslate(p *Point3D) *Matrix {
 // Checks whether the given #graphene_matrix_t is compatible with an
 // a 2D affine transformation matrix.
 func (m *Matrix) Is2D() bool {
-	var carg0 *C.graphene_matrix_t // in, none, record
+	var carg0 *C.graphene_matrix_t // in, none, converted
 	var cret  C.gboolean           // return
 
 	carg0 = (*C.graphene_matrix_t)(UnsafeMatrixToGlibNone(m))
@@ -2525,7 +2535,7 @@ func (m *Matrix) Is2D() bool {
 //
 // Checks whether a #graphene_matrix_t has a visible back face.
 func (m *Matrix) IsBackfaceVisible() bool {
-	var carg0 *C.graphene_matrix_t // in, none, record
+	var carg0 *C.graphene_matrix_t // in, none, converted
 	var cret  C.gboolean           // return
 
 	carg0 = (*C.graphene_matrix_t)(UnsafeMatrixToGlibNone(m))
@@ -2549,7 +2559,7 @@ func (m *Matrix) IsBackfaceVisible() bool {
 //
 // Checks whether the given #graphene_matrix_t is the identity matrix.
 func (m *Matrix) IsIdentity() bool {
-	var carg0 *C.graphene_matrix_t // in, none, record
+	var carg0 *C.graphene_matrix_t // in, none, converted
 	var cret  C.gboolean           // return
 
 	carg0 = (*C.graphene_matrix_t)(UnsafeMatrixToGlibNone(m))
@@ -2573,7 +2583,7 @@ func (m *Matrix) IsIdentity() bool {
 //
 // Checks whether a matrix is singular.
 func (m *Matrix) IsSingular() bool {
-	var carg0 *C.graphene_matrix_t // in, none, record
+	var carg0 *C.graphene_matrix_t // in, none, converted
 	var cret  C.gboolean           // return
 
 	carg0 = (*C.graphene_matrix_t)(UnsafeMatrixToGlibNone(m))
@@ -2594,7 +2604,7 @@ func (m *Matrix) IsSingular() bool {
 // 
 // The function takes the following parameters:
 // 
-// 	- b *Matrix: a #graphene_matrix_t 
+// 	- b Matrix: a #graphene_matrix_t 
 // 	- epsilon float32: the threshold between the two matrices 
 // 
 // The function returns the following values:
@@ -2604,10 +2614,10 @@ func (m *Matrix) IsSingular() bool {
 // Compares the two given #graphene_matrix_t matrices and checks
 // whether their values are within the given @epsilon of each
 // other.
-func (a *Matrix) Near(b *Matrix, epsilon float32) bool {
-	var carg0 *C.graphene_matrix_t // in, none, record
-	var carg1 *C.graphene_matrix_t // in, none, record
-	var carg2 C.gfloat             // in, casted
+func (a *Matrix) Near(b Matrix, epsilon float32) bool {
+	var carg0 *C.graphene_matrix_t // in, none, converted
+	var carg1 *C.graphene_matrix_t // in, none, converted
+	var carg2 C.gfloat             // in, none, casted
 	var cret  C.gboolean           // return
 
 	carg0 = (*C.graphene_matrix_t)(UnsafeMatrixToGlibNone(a))
@@ -2635,7 +2645,7 @@ func (a *Matrix) Near(b *Matrix, epsilon float32) bool {
 // This function is only useful for debugging; there are no guarantees
 // made on the format of the output.
 func (m *Matrix) Print() {
-	var carg0 *C.graphene_matrix_t // in, none, record
+	var carg0 *C.graphene_matrix_t // in, none, converted
 
 	carg0 = (*C.graphene_matrix_t)(UnsafeMatrixToGlibNone(m))
 
@@ -2648,17 +2658,17 @@ func (m *Matrix) Print() {
 // The function takes the following parameters:
 // 
 // 	- angle float32: the rotation angle, in degrees 
-// 	- axis *Vec3: the rotation axis, as a #graphene_vec3_t 
+// 	- axis Vec3: the rotation axis, as a #graphene_vec3_t 
 //
 // Adds a rotation transformation to @m, using the given @angle
 // and @axis vector.
 // 
 // This is the equivalent of calling graphene_matrix_init_rotate() and
 // then multiplying the matrix @m with the rotation matrix.
-func (m *Matrix) Rotate(angle float32, axis *Vec3) {
-	var carg0 *C.graphene_matrix_t // in, none, record
-	var carg1 C.gfloat             // in, casted
-	var carg2 *C.graphene_vec3_t   // in, none, record
+func (m *Matrix) Rotate(angle float32, axis Vec3) {
+	var carg0 *C.graphene_matrix_t // in, none, converted
+	var carg1 C.gfloat             // in, none, casted
+	var carg2 *C.graphene_vec3_t   // in, none, converted
 
 	carg0 = (*C.graphene_matrix_t)(UnsafeMatrixToGlibNone(m))
 	carg1 = C.gfloat(angle)
@@ -2674,13 +2684,13 @@ func (m *Matrix) Rotate(angle float32, axis *Vec3) {
 // 
 // The function takes the following parameters:
 // 
-// 	- e *Euler: a rotation described by a #graphene_euler_t 
+// 	- e Euler: a rotation described by a #graphene_euler_t 
 //
 // Adds a rotation transformation to @m, using the given
 // #graphene_euler_t.
-func (m *Matrix) RotateEuler(e *Euler) {
-	var carg0 *C.graphene_matrix_t // in, none, record
-	var carg1 *C.graphene_euler_t  // in, none, record
+func (m *Matrix) RotateEuler(e Euler) {
+	var carg0 *C.graphene_matrix_t // in, none, converted
+	var carg1 *C.graphene_euler_t  // in, none, converted
 
 	carg0 = (*C.graphene_matrix_t)(UnsafeMatrixToGlibNone(m))
 	carg1 = (*C.graphene_euler_t)(UnsafeEulerToGlibNone(e))
@@ -2694,16 +2704,16 @@ func (m *Matrix) RotateEuler(e *Euler) {
 // 
 // The function takes the following parameters:
 // 
-// 	- q *Quaternion: a rotation described by a #graphene_quaternion_t 
+// 	- q Quaternion: a rotation described by a #graphene_quaternion_t 
 //
 // Adds a rotation transformation to @m, using the given
 // #graphene_quaternion_t.
 // 
 // This is the equivalent of calling graphene_quaternion_to_matrix() and
 // then multiplying @m with the rotation matrix.
-func (m *Matrix) RotateQuaternion(q *Quaternion) {
-	var carg0 *C.graphene_matrix_t     // in, none, record
-	var carg1 *C.graphene_quaternion_t // in, none, record
+func (m *Matrix) RotateQuaternion(q Quaternion) {
+	var carg0 *C.graphene_matrix_t     // in, none, converted
+	var carg1 *C.graphene_quaternion_t // in, none, converted
 
 	carg0 = (*C.graphene_matrix_t)(UnsafeMatrixToGlibNone(m))
 	carg1 = (*C.graphene_quaternion_t)(UnsafeQuaternionToGlibNone(q))
@@ -2724,8 +2734,8 @@ func (m *Matrix) RotateQuaternion(q *Quaternion) {
 // 
 // See also: graphene_matrix_rotate()
 func (m *Matrix) RotateX(angle float32) {
-	var carg0 *C.graphene_matrix_t // in, none, record
-	var carg1 C.gfloat             // in, casted
+	var carg0 *C.graphene_matrix_t // in, none, converted
+	var carg1 C.gfloat             // in, none, casted
 
 	carg0 = (*C.graphene_matrix_t)(UnsafeMatrixToGlibNone(m))
 	carg1 = C.gfloat(angle)
@@ -2746,8 +2756,8 @@ func (m *Matrix) RotateX(angle float32) {
 // 
 // See also: graphene_matrix_rotate()
 func (m *Matrix) RotateY(angle float32) {
-	var carg0 *C.graphene_matrix_t // in, none, record
-	var carg1 C.gfloat             // in, casted
+	var carg0 *C.graphene_matrix_t // in, none, converted
+	var carg1 C.gfloat             // in, none, casted
 
 	carg0 = (*C.graphene_matrix_t)(UnsafeMatrixToGlibNone(m))
 	carg1 = C.gfloat(angle)
@@ -2768,8 +2778,8 @@ func (m *Matrix) RotateY(angle float32) {
 // 
 // See also: graphene_matrix_rotate()
 func (m *Matrix) RotateZ(angle float32) {
-	var carg0 *C.graphene_matrix_t // in, none, record
-	var carg1 C.gfloat             // in, casted
+	var carg0 *C.graphene_matrix_t // in, none, converted
+	var carg1 C.gfloat             // in, none, casted
 
 	carg0 = (*C.graphene_matrix_t)(UnsafeMatrixToGlibNone(m))
 	carg1 = C.gfloat(angle)
@@ -2793,10 +2803,10 @@ func (m *Matrix) RotateZ(angle float32) {
 // This is the equivalent of calling graphene_matrix_init_scale() and then
 // multiplying the matrix @m with the scale matrix.
 func (m *Matrix) Scale(factorX float32, factorY float32, factorZ float32) {
-	var carg0 *C.graphene_matrix_t // in, none, record
-	var carg1 C.gfloat             // in, casted
-	var carg2 C.gfloat             // in, casted
-	var carg3 C.gfloat             // in, casted
+	var carg0 *C.graphene_matrix_t // in, none, converted
+	var carg1 C.gfloat             // in, none, casted
+	var carg2 C.gfloat             // in, none, casted
+	var carg3 C.gfloat             // in, none, casted
 
 	carg0 = (*C.graphene_matrix_t)(UnsafeMatrixToGlibNone(m))
 	carg1 = C.gfloat(factorX)
@@ -2818,8 +2828,8 @@ func (m *Matrix) Scale(factorX float32, factorY float32, factorZ float32) {
 //
 // Adds a skew of @factor on the X and Y axis to the given matrix.
 func (m *Matrix) SkewXY(factor float32) {
-	var carg0 *C.graphene_matrix_t // in, none, record
-	var carg1 C.gfloat             // in, casted
+	var carg0 *C.graphene_matrix_t // in, none, converted
+	var carg1 C.gfloat             // in, none, casted
 
 	carg0 = (*C.graphene_matrix_t)(UnsafeMatrixToGlibNone(m))
 	carg1 = C.gfloat(factor)
@@ -2837,8 +2847,8 @@ func (m *Matrix) SkewXY(factor float32) {
 //
 // Adds a skew of @factor on the X and Z axis to the given matrix.
 func (m *Matrix) SkewXZ(factor float32) {
-	var carg0 *C.graphene_matrix_t // in, none, record
-	var carg1 C.gfloat             // in, casted
+	var carg0 *C.graphene_matrix_t // in, none, converted
+	var carg1 C.gfloat             // in, none, casted
 
 	carg0 = (*C.graphene_matrix_t)(UnsafeMatrixToGlibNone(m))
 	carg1 = C.gfloat(factor)
@@ -2856,8 +2866,8 @@ func (m *Matrix) SkewXZ(factor float32) {
 //
 // Adds a skew of @factor on the Y and Z axis to the given matrix.
 func (m *Matrix) SkewYZ(factor float32) {
-	var carg0 *C.graphene_matrix_t // in, none, record
-	var carg1 C.gfloat             // in, casted
+	var carg0 *C.graphene_matrix_t // in, none, converted
+	var carg1 C.gfloat             // in, none, casted
 
 	carg0 = (*C.graphene_matrix_t)(UnsafeMatrixToGlibNone(m))
 	carg1 = C.gfloat(factor)
@@ -2892,13 +2902,13 @@ func (m *Matrix) SkewYZ(factor float32) {
 // This function can be used to convert between a #graphene_matrix_t
 // and an affine matrix type from other libraries.
 func (m *Matrix) To2D() (float64, float64, float64, float64, float64, float64, bool) {
-	var carg0 *C.graphene_matrix_t // in, none, record
-	var carg1 C.gdouble            // out, casted
-	var carg2 C.gdouble            // out, casted
-	var carg3 C.gdouble            // out, casted
-	var carg4 C.gdouble            // out, casted
-	var carg5 C.gdouble            // out, casted
-	var carg6 C.gdouble            // out, casted
+	var carg0 *C.graphene_matrix_t // in, none, converted
+	var carg1 C.gdouble            // out, full, casted
+	var carg2 C.gdouble            // out, full, casted
+	var carg3 C.gdouble            // out, full, casted
+	var carg4 C.gdouble            // out, full, casted
+	var carg5 C.gdouble            // out, full, casted
+	var carg6 C.gdouble            // out, full, casted
 	var cret  C.gboolean           // return
 
 	carg0 = (*C.graphene_matrix_t)(UnsafeMatrixToGlibNone(m))
@@ -2930,24 +2940,24 @@ func (m *Matrix) To2D() (float64, float64, float64, float64, float64, float64, b
 // ToFloat wraps graphene_matrix_to_float
 // The function returns the following values:
 // 
-// 	- v []float32: return location
+// 	- v array: return location
 //   for an array of floating point values. The array must be capable
 //   of holding at least 16 values. 
 //
 // Converts a #graphene_matrix_t to an array of floating point
 // values.
-func (m *Matrix) ToFloat() []float32 {
-	var carg0 *C.graphene_matrix_t // in, none, record
-	var carg1 *C.gfloat            // out, transfer: none, scope: call, implicit: false, skip: false, optional: false, nullable: false, caller-allocates: true, has closure: false, has destroy: false
+func (m *Matrix) ToFloat() array {
+	var carg0 *C.graphene_matrix_t // in, none, converted
+	var carg1 array                // out, transfer: none, scope: call, implicit: false, skip: false, optional: false, nullable: false, caller-allocates: true, has closure: false, has destroy: false
 
 	carg0 = (*C.graphene_matrix_t)(UnsafeMatrixToGlibNone(m))
 
 	C.graphene_matrix_to_float(carg0, &carg1)
 	runtime.KeepAlive(m)
 
-	var v []float32
+	var v array
 
-	panic("unimplemented conversion of *typesystem.Array (gfloat*)")
+	panic("unimplemented conversion of array (array)")
 
 	return v
 }
@@ -2956,16 +2966,16 @@ func (m *Matrix) ToFloat() []float32 {
 // 
 // The function takes the following parameters:
 // 
-// 	- pos *Point3D: a #graphene_point3d_t 
+// 	- pos Point3D: a #graphene_point3d_t 
 //
 // Adds a translation transformation to @m using the coordinates
 // of the given #graphene_point3d_t.
 // 
 // This is the equivalent of calling graphene_matrix_init_translate() and
 // then multiplying @m with the translation matrix.
-func (m *Matrix) Translate(pos *Point3D) {
-	var carg0 *C.graphene_matrix_t  // in, none, record
-	var carg1 *C.graphene_point3d_t // in, none, record
+func (m *Matrix) Translate(pos Point3D) {
+	var carg0 *C.graphene_matrix_t  // in, none, converted
+	var carg1 *C.graphene_point3d_t // in, none, converted
 
 	carg0 = (*C.graphene_matrix_t)(UnsafeMatrixToGlibNone(m))
 	carg1 = (*C.graphene_point3d_t)(UnsafePoint3DToGlibNone(pos))
@@ -2991,7 +3001,7 @@ type plane struct {
 }
 
 func marshalPlane(p uintptr) (interface{}, error) {
-	b := gobject.ValueFromNative(unsafe.Pointer(p)).Boxed()
+	b := gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Boxed()
 	return UnsafePlaneFromGlibBorrow(b), nil
 }
 
@@ -3035,17 +3045,17 @@ func UnsafePlaneToGlibFull(p *Plane) unsafe.Pointer {
 // PlaneAlloc wraps graphene_plane_alloc
 // The function returns the following values:
 // 
-// 	- ret *Plane 
+// 	- ret Plane 
 //
 // Allocates a new #graphene_plane_t structure.
 // 
 // The contents of the returned structure are undefined.
-func PlaneAlloc() *Plane {
-	var cret *C.graphene_plane_t // return, full, record
+func PlaneAlloc() Plane {
+	var cret *C.graphene_plane_t // return, full, converted
 
 	cret = C.graphene_plane_alloc()
 
-	var ret *Plane
+	var ret Plane
 
 	ret = UnsafePlaneFromGlibFull(unsafe.Pointer(cret))
 
@@ -3056,17 +3066,17 @@ func PlaneAlloc() *Plane {
 // 
 // The function takes the following parameters:
 // 
-// 	- point *Point3D: a #graphene_point3d_t 
+// 	- point Point3D: a #graphene_point3d_t 
 // 
 // The function returns the following values:
 // 
 // 	- ret float32 
 //
 // Computes the distance of @point from a #graphene_plane_t.
-func (p *Plane) Distance(point *Point3D) float32 {
-	var carg0 *C.graphene_plane_t   // in, none, record
-	var carg1 *C.graphene_point3d_t // in, none, record
-	var cret  C.gfloat              // return, casted
+func (p *Plane) Distance(point Point3D) float32 {
+	var carg0 *C.graphene_plane_t   // in, none, converted
+	var carg1 *C.graphene_point3d_t // in, none, converted
+	var cret  C.gfloat              // return, none, casted
 
 	carg0 = (*C.graphene_plane_t)(UnsafePlaneToGlibNone(p))
 	carg1 = (*C.graphene_point3d_t)(UnsafePoint3DToGlibNone(point))
@@ -3086,16 +3096,16 @@ func (p *Plane) Distance(point *Point3D) float32 {
 // 
 // The function takes the following parameters:
 // 
-// 	- b *Plane: a #graphene_plane_t 
+// 	- b Plane: a #graphene_plane_t 
 // 
 // The function returns the following values:
 // 
 // 	- ret bool 
 //
 // Checks whether the two given #graphene_plane_t are equal.
-func (a *Plane) Equal(b *Plane) bool {
-	var carg0 *C.graphene_plane_t // in, none, record
-	var carg1 *C.graphene_plane_t // in, none, record
+func (a *Plane) Equal(b Plane) bool {
+	var carg0 *C.graphene_plane_t // in, none, converted
+	var carg1 *C.graphene_plane_t // in, none, converted
 	var cret  C.gboolean          // return
 
 	carg0 = (*C.graphene_plane_t)(UnsafePlaneToGlibNone(a))
@@ -3122,8 +3132,8 @@ func (a *Plane) Equal(b *Plane) bool {
 // Retrieves the distance along the normal vector of the
 // given #graphene_plane_t from the origin.
 func (p *Plane) GetConstant() float32 {
-	var carg0 *C.graphene_plane_t // in, none, record
-	var cret  C.gfloat            // return, casted
+	var carg0 *C.graphene_plane_t // in, none, converted
+	var cret  C.gfloat            // return, none, casted
 
 	carg0 = (*C.graphene_plane_t)(UnsafePlaneToGlibNone(p))
 
@@ -3141,7 +3151,7 @@ func (p *Plane) GetConstant() float32 {
 // 
 // The function takes the following parameters:
 // 
-// 	- normal *Vec3 (nullable): a unit length normal vector defining the plane
+// 	- normal Vec3 (nullable): a unit length normal vector defining the plane
 //   pointing towards the origin; if unset, we use the X axis by default 
 // 	- constant float32: the distance from the origin to the plane along the
 //   normal vector; the sign determines the half-space occupied by the
@@ -3149,15 +3159,15 @@ func (p *Plane) GetConstant() float32 {
 // 
 // The function returns the following values:
 // 
-// 	- ret *Plane 
+// 	- ret Plane 
 //
 // Initializes the given #graphene_plane_t using the given @normal vector
 // and @constant values.
-func (p *Plane) Init(normal *Vec3, constant float32) *Plane {
-	var carg0 *C.graphene_plane_t // in, none, record
-	var carg1 *C.graphene_vec3_t  // in, none, record, nullable
-	var carg2 C.gfloat            // in, casted
-	var cret  *C.graphene_plane_t // return, none, record
+func (p *Plane) Init(normal Vec3, constant float32) Plane {
+	var carg0 *C.graphene_plane_t // in, none, converted
+	var carg1 *C.graphene_vec3_t  // in, none, converted, nullable
+	var carg2 C.gfloat            // in, none, casted
+	var cret  *C.graphene_plane_t // return, none, converted
 
 	carg0 = (*C.graphene_plane_t)(UnsafePlaneToGlibNone(p))
 	if normal != nil {
@@ -3170,7 +3180,7 @@ func (p *Plane) Init(normal *Vec3, constant float32) *Plane {
 	runtime.KeepAlive(normal)
 	runtime.KeepAlive(constant)
 
-	var ret *Plane
+	var ret Plane
 
 	ret = UnsafePlaneFromGlibNone(unsafe.Pointer(cret))
 
@@ -3181,18 +3191,18 @@ func (p *Plane) Init(normal *Vec3, constant float32) *Plane {
 // 
 // The function takes the following parameters:
 // 
-// 	- src *Plane: a #graphene_plane_t 
+// 	- src Plane: a #graphene_plane_t 
 // 
 // The function returns the following values:
 // 
-// 	- ret *Plane 
+// 	- ret Plane 
 //
 // Initializes the given #graphene_plane_t using the normal
 // vector and constant of another #graphene_plane_t.
-func (p *Plane) InitFromPlane(src *Plane) *Plane {
-	var carg0 *C.graphene_plane_t // in, none, record
-	var carg1 *C.graphene_plane_t // in, none, record
-	var cret  *C.graphene_plane_t // return, none, record
+func (p *Plane) InitFromPlane(src Plane) Plane {
+	var carg0 *C.graphene_plane_t // in, none, converted
+	var carg1 *C.graphene_plane_t // in, none, converted
+	var cret  *C.graphene_plane_t // return, none, converted
 
 	carg0 = (*C.graphene_plane_t)(UnsafePlaneToGlibNone(p))
 	carg1 = (*C.graphene_plane_t)(UnsafePlaneToGlibNone(src))
@@ -3201,7 +3211,7 @@ func (p *Plane) InitFromPlane(src *Plane) *Plane {
 	runtime.KeepAlive(p)
 	runtime.KeepAlive(src)
 
-	var ret *Plane
+	var ret Plane
 
 	ret = UnsafePlaneFromGlibNone(unsafe.Pointer(cret))
 
@@ -3212,20 +3222,20 @@ func (p *Plane) InitFromPlane(src *Plane) *Plane {
 // 
 // The function takes the following parameters:
 // 
-// 	- normal *Vec3: a normal vector defining the plane pointing towards the origin 
-// 	- point *Point3D: a #graphene_point3d_t 
+// 	- normal Vec3: a normal vector defining the plane pointing towards the origin 
+// 	- point Point3D: a #graphene_point3d_t 
 // 
 // The function returns the following values:
 // 
-// 	- ret *Plane 
+// 	- ret Plane 
 //
 // Initializes the given #graphene_plane_t using the given normal vector
 // and an arbitrary co-planar point.
-func (p *Plane) InitFromPoint(normal *Vec3, point *Point3D) *Plane {
-	var carg0 *C.graphene_plane_t   // in, none, record
-	var carg1 *C.graphene_vec3_t    // in, none, record
-	var carg2 *C.graphene_point3d_t // in, none, record
-	var cret  *C.graphene_plane_t   // return, none, record
+func (p *Plane) InitFromPoint(normal Vec3, point Point3D) Plane {
+	var carg0 *C.graphene_plane_t   // in, none, converted
+	var carg1 *C.graphene_vec3_t    // in, none, converted
+	var carg2 *C.graphene_point3d_t // in, none, converted
+	var cret  *C.graphene_plane_t   // return, none, converted
 
 	carg0 = (*C.graphene_plane_t)(UnsafePlaneToGlibNone(p))
 	carg1 = (*C.graphene_vec3_t)(UnsafeVec3ToGlibNone(normal))
@@ -3236,7 +3246,7 @@ func (p *Plane) InitFromPoint(normal *Vec3, point *Point3D) *Plane {
 	runtime.KeepAlive(normal)
 	runtime.KeepAlive(point)
 
-	var ret *Plane
+	var ret Plane
 
 	ret = UnsafePlaneFromGlibNone(unsafe.Pointer(cret))
 
@@ -3247,25 +3257,25 @@ func (p *Plane) InitFromPoint(normal *Vec3, point *Point3D) *Plane {
 // 
 // The function takes the following parameters:
 // 
-// 	- a *Point3D: a #graphene_point3d_t 
-// 	- b *Point3D: a #graphene_point3d_t 
-// 	- c *Point3D: a #graphene_point3d_t 
+// 	- a Point3D: a #graphene_point3d_t 
+// 	- b Point3D: a #graphene_point3d_t 
+// 	- c Point3D: a #graphene_point3d_t 
 // 
 // The function returns the following values:
 // 
-// 	- ret *Plane 
+// 	- ret Plane 
 //
 // Initializes the given #graphene_plane_t using the 3 provided co-planar
 // points.
 // 
 // The winding order is counter-clockwise, and determines which direction
 // the normal vector will point.
-func (p *Plane) InitFromPoints(a *Point3D, b *Point3D, c *Point3D) *Plane {
-	var carg0 *C.graphene_plane_t   // in, none, record
-	var carg1 *C.graphene_point3d_t // in, none, record
-	var carg2 *C.graphene_point3d_t // in, none, record
-	var carg3 *C.graphene_point3d_t // in, none, record
-	var cret  *C.graphene_plane_t   // return, none, record
+func (p *Plane) InitFromPoints(a Point3D, b Point3D, c Point3D) Plane {
+	var carg0 *C.graphene_plane_t   // in, none, converted
+	var carg1 *C.graphene_point3d_t // in, none, converted
+	var carg2 *C.graphene_point3d_t // in, none, converted
+	var carg3 *C.graphene_point3d_t // in, none, converted
+	var cret  *C.graphene_plane_t   // return, none, converted
 
 	carg0 = (*C.graphene_plane_t)(UnsafePlaneToGlibNone(p))
 	carg1 = (*C.graphene_point3d_t)(UnsafePoint3DToGlibNone(a))
@@ -3278,7 +3288,7 @@ func (p *Plane) InitFromPoints(a *Point3D, b *Point3D, c *Point3D) *Plane {
 	runtime.KeepAlive(b)
 	runtime.KeepAlive(c)
 
-	var ret *Plane
+	var ret Plane
 
 	ret = UnsafePlaneFromGlibNone(unsafe.Pointer(cret))
 
@@ -3289,19 +3299,19 @@ func (p *Plane) InitFromPoints(a *Point3D, b *Point3D, c *Point3D) *Plane {
 // 
 // The function takes the following parameters:
 // 
-// 	- src *Vec4: a #graphene_vec4_t containing the normal vector in its first
+// 	- src Vec4: a #graphene_vec4_t containing the normal vector in its first
 //   three components, and the distance in its fourth component 
 // 
 // The function returns the following values:
 // 
-// 	- ret *Plane 
+// 	- ret Plane 
 //
 // Initializes the given #graphene_plane_t using the components of
 // the given #graphene_vec4_t vector.
-func (p *Plane) InitFromVec4(src *Vec4) *Plane {
-	var carg0 *C.graphene_plane_t // in, none, record
-	var carg1 *C.graphene_vec4_t  // in, none, record
-	var cret  *C.graphene_plane_t // return, none, record
+func (p *Plane) InitFromVec4(src Vec4) Plane {
+	var carg0 *C.graphene_plane_t // in, none, converted
+	var carg1 *C.graphene_vec4_t  // in, none, converted
+	var cret  *C.graphene_plane_t // return, none, converted
 
 	carg0 = (*C.graphene_plane_t)(UnsafePlaneToGlibNone(p))
 	carg1 = (*C.graphene_vec4_t)(UnsafeVec4ToGlibNone(src))
@@ -3310,7 +3320,7 @@ func (p *Plane) InitFromVec4(src *Vec4) *Plane {
 	runtime.KeepAlive(p)
 	runtime.KeepAlive(src)
 
-	var ret *Plane
+	var ret Plane
 
 	ret = UnsafePlaneFromGlibNone(unsafe.Pointer(cret))
 
@@ -3330,7 +3340,7 @@ type point struct {
 }
 
 func marshalPoint(p uintptr) (interface{}, error) {
-	b := gobject.ValueFromNative(unsafe.Pointer(p)).Boxed()
+	b := gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Boxed()
 	return UnsafePointFromGlibBorrow(b), nil
 }
 
@@ -3374,7 +3384,7 @@ func UnsafePointToGlibFull(p *Point) unsafe.Pointer {
 // PointAlloc wraps graphene_point_alloc
 // The function returns the following values:
 // 
-// 	- ret *Point 
+// 	- ret Point 
 //
 // Allocates a new #graphene_point_t structure.
 // 
@@ -3396,12 +3406,12 @@ func UnsafePointToGlibFull(p *Point) unsafe.Pointer {
 //     return graphene_point_init_from_point (graphene_point_alloc (), p);
 //   }
 // ]|
-func PointAlloc() *Point {
-	var cret *C.graphene_point_t // return, full, record
+func PointAlloc() Point {
+	var cret *C.graphene_point_t // return, full, converted
 
 	cret = C.graphene_point_alloc()
 
-	var ret *Point
+	var ret Point
 
 	ret = UnsafePointFromGlibFull(unsafe.Pointer(cret))
 
@@ -3448,7 +3458,7 @@ func (p *Point) SetY(y float32) {
 // 
 // The function takes the following parameters:
 // 
-// 	- b *Point: a #graphene_point_t 
+// 	- b Point: a #graphene_point_t 
 // 
 // The function returns the following values:
 // 
@@ -3457,12 +3467,12 @@ func (p *Point) SetY(y float32) {
 // 	- ret float32 
 //
 // Computes the distance between @a and @b.
-func (a *Point) Distance(b *Point) (float32, float32, float32) {
-	var carg0 *C.graphene_point_t // in, none, record
-	var carg1 *C.graphene_point_t // in, none, record
-	var carg2 C.gfloat            // out, casted
-	var carg3 C.gfloat            // out, casted
-	var cret  C.gfloat            // return, casted
+func (a *Point) Distance(b Point) (float32, float32, float32) {
+	var carg0 *C.graphene_point_t // in, none, converted
+	var carg1 *C.graphene_point_t // in, none, converted
+	var carg2 C.gfloat            // out, full, casted
+	var carg3 C.gfloat            // out, full, casted
+	var cret  C.gfloat            // return, none, casted
 
 	carg0 = (*C.graphene_point_t)(UnsafePointToGlibNone(a))
 	carg1 = (*C.graphene_point_t)(UnsafePointToGlibNone(b))
@@ -3486,7 +3496,7 @@ func (a *Point) Distance(b *Point) (float32, float32, float32) {
 // 
 // The function takes the following parameters:
 // 
-// 	- b *Point: a #graphene_point_t 
+// 	- b Point: a #graphene_point_t 
 // 
 // The function returns the following values:
 // 
@@ -3498,9 +3508,9 @@ func (a *Point) Distance(b *Point) (float32, float32, float32) {
 // This function accounts for floating point fluctuations; if
 // you want to control the fuzziness of the match, you can use
 // graphene_point_near() instead.
-func (a *Point) Equal(b *Point) bool {
-	var carg0 *C.graphene_point_t // in, none, record
-	var carg1 *C.graphene_point_t // in, none, record
+func (a *Point) Equal(b Point) bool {
+	var carg0 *C.graphene_point_t // in, none, converted
+	var carg1 *C.graphene_point_t // in, none, converted
 	var cret  C.gboolean          // return
 
 	carg0 = (*C.graphene_point_t)(UnsafePointToGlibNone(a))
@@ -3528,16 +3538,16 @@ func (a *Point) Equal(b *Point) bool {
 // 
 // The function returns the following values:
 // 
-// 	- ret *Point 
+// 	- ret Point 
 //
 // Initializes @p to the given @x and @y coordinates.
 // 
 // It's safe to call this function multiple times.
-func (p *Point) Init(x float32, y float32) *Point {
-	var carg0 *C.graphene_point_t // in, none, record
-	var carg1 C.gfloat            // in, casted
-	var carg2 C.gfloat            // in, casted
-	var cret  *C.graphene_point_t // return, none, record
+func (p *Point) Init(x float32, y float32) Point {
+	var carg0 *C.graphene_point_t // in, none, converted
+	var carg1 C.gfloat            // in, none, casted
+	var carg2 C.gfloat            // in, none, casted
+	var cret  *C.graphene_point_t // return, none, converted
 
 	carg0 = (*C.graphene_point_t)(UnsafePointToGlibNone(p))
 	carg1 = C.gfloat(x)
@@ -3548,7 +3558,7 @@ func (p *Point) Init(x float32, y float32) *Point {
 	runtime.KeepAlive(x)
 	runtime.KeepAlive(y)
 
-	var ret *Point
+	var ret Point
 
 	ret = UnsafePointFromGlibNone(unsafe.Pointer(cret))
 
@@ -3559,17 +3569,17 @@ func (p *Point) Init(x float32, y float32) *Point {
 // 
 // The function takes the following parameters:
 // 
-// 	- src *Point: the #graphene_point_t to use 
+// 	- src Point: the #graphene_point_t to use 
 // 
 // The function returns the following values:
 // 
-// 	- ret *Point 
+// 	- ret Point 
 //
 // Initializes @p with the same coordinates of @src.
-func (p *Point) InitFromPoint(src *Point) *Point {
-	var carg0 *C.graphene_point_t // in, none, record
-	var carg1 *C.graphene_point_t // in, none, record
-	var cret  *C.graphene_point_t // return, none, record
+func (p *Point) InitFromPoint(src Point) Point {
+	var carg0 *C.graphene_point_t // in, none, converted
+	var carg1 *C.graphene_point_t // in, none, converted
+	var cret  *C.graphene_point_t // return, none, converted
 
 	carg0 = (*C.graphene_point_t)(UnsafePointToGlibNone(p))
 	carg1 = (*C.graphene_point_t)(UnsafePointToGlibNone(src))
@@ -3578,7 +3588,7 @@ func (p *Point) InitFromPoint(src *Point) *Point {
 	runtime.KeepAlive(p)
 	runtime.KeepAlive(src)
 
-	var ret *Point
+	var ret Point
 
 	ret = UnsafePointFromGlibNone(unsafe.Pointer(cret))
 
@@ -3589,17 +3599,17 @@ func (p *Point) InitFromPoint(src *Point) *Point {
 // 
 // The function takes the following parameters:
 // 
-// 	- src *Vec2: a #graphene_vec2_t 
+// 	- src Vec2: a #graphene_vec2_t 
 // 
 // The function returns the following values:
 // 
-// 	- ret *Point 
+// 	- ret Point 
 //
 // Initializes @p with the coordinates inside the given #graphene_vec2_t.
-func (p *Point) InitFromVec2(src *Vec2) *Point {
-	var carg0 *C.graphene_point_t // in, none, record
-	var carg1 *C.graphene_vec2_t  // in, none, record
-	var cret  *C.graphene_point_t // return, none, record
+func (p *Point) InitFromVec2(src Vec2) Point {
+	var carg0 *C.graphene_point_t // in, none, converted
+	var carg1 *C.graphene_vec2_t  // in, none, converted
+	var cret  *C.graphene_point_t // return, none, converted
 
 	carg0 = (*C.graphene_point_t)(UnsafePointToGlibNone(p))
 	carg1 = (*C.graphene_vec2_t)(UnsafeVec2ToGlibNone(src))
@@ -3608,7 +3618,7 @@ func (p *Point) InitFromVec2(src *Vec2) *Point {
 	runtime.KeepAlive(p)
 	runtime.KeepAlive(src)
 
-	var ret *Point
+	var ret Point
 
 	ret = UnsafePointFromGlibNone(unsafe.Pointer(cret))
 
@@ -3619,7 +3629,7 @@ func (p *Point) InitFromVec2(src *Vec2) *Point {
 // 
 // The function takes the following parameters:
 // 
-// 	- b *Point: a #graphene_point_t 
+// 	- b Point: a #graphene_point_t 
 // 	- epsilon float32: threshold between the two points 
 // 
 // The function returns the following values:
@@ -3628,10 +3638,10 @@ func (p *Point) InitFromVec2(src *Vec2) *Point {
 //
 // Checks whether the two points @a and @b are within
 // the threshold of @epsilon.
-func (a *Point) Near(b *Point, epsilon float32) bool {
-	var carg0 *C.graphene_point_t // in, none, record
-	var carg1 *C.graphene_point_t // in, none, record
-	var carg2 C.gfloat            // in, casted
+func (a *Point) Near(b Point, epsilon float32) bool {
+	var carg0 *C.graphene_point_t // in, none, converted
+	var carg1 *C.graphene_point_t // in, none, converted
+	var carg2 C.gfloat            // in, none, casted
 	var cret  C.gboolean          // return
 
 	carg0 = (*C.graphene_point_t)(UnsafePointToGlibNone(a))
@@ -3665,7 +3675,7 @@ type point3D struct {
 }
 
 func marshalPoint3D(p uintptr) (interface{}, error) {
-	b := gobject.ValueFromNative(unsafe.Pointer(p)).Boxed()
+	b := gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Boxed()
 	return UnsafePoint3DFromGlibBorrow(b), nil
 }
 
@@ -3709,15 +3719,15 @@ func UnsafePoint3DToGlibFull(p *Point3D) unsafe.Pointer {
 // Point3DAlloc wraps graphene_point3d_alloc
 // The function returns the following values:
 // 
-// 	- ret *Point3D 
+// 	- ret Point3D 
 //
 // Allocates a #graphene_point3d_t structure.
-func Point3DAlloc() *Point3D {
-	var cret *C.graphene_point3d_t // return, full, record
+func Point3DAlloc() Point3D {
+	var cret *C.graphene_point3d_t // return, full, converted
 
 	cret = C.graphene_point3d_alloc()
 
-	var ret *Point3D
+	var ret Point3D
 
 	ret = UnsafePoint3DFromGlibFull(unsafe.Pointer(cret))
 
@@ -3782,17 +3792,17 @@ func (p *Point3D) SetZ(z float32) {
 // 
 // The function takes the following parameters:
 // 
-// 	- b *Point3D: a #graphene_point3d_t 
+// 	- b Point3D: a #graphene_point3d_t 
 // 
 // The function returns the following values:
 // 
 // 	- ret float32 
 //
 // Computes the dot product of the two given #graphene_point3d_t.
-func (a *Point3D) Dot(b *Point3D) float32 {
-	var carg0 *C.graphene_point3d_t // in, none, record
-	var carg1 *C.graphene_point3d_t // in, none, record
-	var cret  C.gfloat              // return, casted
+func (a *Point3D) Dot(b Point3D) float32 {
+	var carg0 *C.graphene_point3d_t // in, none, converted
+	var carg1 *C.graphene_point3d_t // in, none, converted
+	var cret  C.gfloat              // return, none, casted
 
 	carg0 = (*C.graphene_point3d_t)(UnsafePoint3DToGlibNone(a))
 	carg1 = (*C.graphene_point3d_t)(UnsafePoint3DToGlibNone(b))
@@ -3812,16 +3822,16 @@ func (a *Point3D) Dot(b *Point3D) float32 {
 // 
 // The function takes the following parameters:
 // 
-// 	- b *Point3D: a #graphene_point3d_t 
+// 	- b Point3D: a #graphene_point3d_t 
 // 
 // The function returns the following values:
 // 
 // 	- ret bool 
 //
 // Checks whether two given points are equal.
-func (a *Point3D) Equal(b *Point3D) bool {
-	var carg0 *C.graphene_point3d_t // in, none, record
-	var carg1 *C.graphene_point3d_t // in, none, record
+func (a *Point3D) Equal(b Point3D) bool {
+	var carg0 *C.graphene_point3d_t // in, none, converted
+	var carg1 *C.graphene_point3d_t // in, none, converted
 	var cret  C.gboolean            // return
 
 	carg0 = (*C.graphene_point3d_t)(UnsafePoint3DToGlibNone(a))
@@ -3850,15 +3860,15 @@ func (a *Point3D) Equal(b *Point3D) bool {
 // 
 // The function returns the following values:
 // 
-// 	- ret *Point3D 
+// 	- ret Point3D 
 //
 // Initializes a #graphene_point3d_t with the given coordinates.
-func (p *Point3D) Init(x float32, y float32, z float32) *Point3D {
-	var carg0 *C.graphene_point3d_t // in, none, record
-	var carg1 C.gfloat              // in, casted
-	var carg2 C.gfloat              // in, casted
-	var carg3 C.gfloat              // in, casted
-	var cret  *C.graphene_point3d_t // return, none, record
+func (p *Point3D) Init(x float32, y float32, z float32) Point3D {
+	var carg0 *C.graphene_point3d_t // in, none, converted
+	var carg1 C.gfloat              // in, none, casted
+	var carg2 C.gfloat              // in, none, casted
+	var carg3 C.gfloat              // in, none, casted
+	var cret  *C.graphene_point3d_t // return, none, converted
 
 	carg0 = (*C.graphene_point3d_t)(UnsafePoint3DToGlibNone(p))
 	carg1 = C.gfloat(x)
@@ -3871,7 +3881,7 @@ func (p *Point3D) Init(x float32, y float32, z float32) *Point3D {
 	runtime.KeepAlive(y)
 	runtime.KeepAlive(z)
 
-	var ret *Point3D
+	var ret Point3D
 
 	ret = UnsafePoint3DFromGlibNone(unsafe.Pointer(cret))
 
@@ -3882,18 +3892,18 @@ func (p *Point3D) Init(x float32, y float32, z float32) *Point3D {
 // 
 // The function takes the following parameters:
 // 
-// 	- src *Point3D: a #graphene_point3d_t 
+// 	- src Point3D: a #graphene_point3d_t 
 // 
 // The function returns the following values:
 // 
-// 	- ret *Point3D 
+// 	- ret Point3D 
 //
 // Initializes a #graphene_point3d_t using the coordinates of
 // another #graphene_point3d_t.
-func (p *Point3D) InitFromPoint(src *Point3D) *Point3D {
-	var carg0 *C.graphene_point3d_t // in, none, record
-	var carg1 *C.graphene_point3d_t // in, none, record
-	var cret  *C.graphene_point3d_t // return, none, record
+func (p *Point3D) InitFromPoint(src Point3D) Point3D {
+	var carg0 *C.graphene_point3d_t // in, none, converted
+	var carg1 *C.graphene_point3d_t // in, none, converted
+	var cret  *C.graphene_point3d_t // return, none, converted
 
 	carg0 = (*C.graphene_point3d_t)(UnsafePoint3DToGlibNone(p))
 	carg1 = (*C.graphene_point3d_t)(UnsafePoint3DToGlibNone(src))
@@ -3902,7 +3912,7 @@ func (p *Point3D) InitFromPoint(src *Point3D) *Point3D {
 	runtime.KeepAlive(p)
 	runtime.KeepAlive(src)
 
-	var ret *Point3D
+	var ret Point3D
 
 	ret = UnsafePoint3DFromGlibNone(unsafe.Pointer(cret))
 
@@ -3913,18 +3923,18 @@ func (p *Point3D) InitFromPoint(src *Point3D) *Point3D {
 // 
 // The function takes the following parameters:
 // 
-// 	- v *Vec3: a #graphene_vec3_t 
+// 	- v Vec3: a #graphene_vec3_t 
 // 
 // The function returns the following values:
 // 
-// 	- ret *Point3D 
+// 	- ret Point3D 
 //
 // Initializes a #graphene_point3d_t using the components
 // of a #graphene_vec3_t.
-func (p *Point3D) InitFromVec3(v *Vec3) *Point3D {
-	var carg0 *C.graphene_point3d_t // in, none, record
-	var carg1 *C.graphene_vec3_t    // in, none, record
-	var cret  *C.graphene_point3d_t // return, none, record
+func (p *Point3D) InitFromVec3(v Vec3) Point3D {
+	var carg0 *C.graphene_point3d_t // in, none, converted
+	var carg1 *C.graphene_vec3_t    // in, none, converted
+	var cret  *C.graphene_point3d_t // return, none, converted
 
 	carg0 = (*C.graphene_point3d_t)(UnsafePoint3DToGlibNone(p))
 	carg1 = (*C.graphene_vec3_t)(UnsafeVec3ToGlibNone(v))
@@ -3933,7 +3943,7 @@ func (p *Point3D) InitFromVec3(v *Vec3) *Point3D {
 	runtime.KeepAlive(p)
 	runtime.KeepAlive(v)
 
-	var ret *Point3D
+	var ret Point3D
 
 	ret = UnsafePoint3DFromGlibNone(unsafe.Pointer(cret))
 
@@ -3948,8 +3958,8 @@ func (p *Point3D) InitFromVec3(v *Vec3) *Point3D {
 // Computes the length of the vector represented by the
 // coordinates of the given #graphene_point3d_t.
 func (p *Point3D) Length() float32 {
-	var carg0 *C.graphene_point3d_t // in, none, record
-	var cret  C.gfloat              // return, casted
+	var carg0 *C.graphene_point3d_t // in, none, converted
+	var cret  C.gfloat              // return, none, casted
 
 	carg0 = (*C.graphene_point3d_t)(UnsafePoint3DToGlibNone(p))
 
@@ -3967,7 +3977,7 @@ func (p *Point3D) Length() float32 {
 // 
 // The function takes the following parameters:
 // 
-// 	- b *Point3D: a #graphene_point3d_t 
+// 	- b Point3D: a #graphene_point3d_t 
 // 	- epsilon float32: fuzzyness factor 
 // 
 // The function returns the following values:
@@ -3976,10 +3986,10 @@ func (p *Point3D) Length() float32 {
 //
 // Checks whether the two points are near each other, within
 // an @epsilon factor.
-func (a *Point3D) Near(b *Point3D, epsilon float32) bool {
-	var carg0 *C.graphene_point3d_t // in, none, record
-	var carg1 *C.graphene_point3d_t // in, none, record
-	var carg2 C.gfloat              // in, casted
+func (a *Point3D) Near(b Point3D, epsilon float32) bool {
+	var carg0 *C.graphene_point3d_t // in, none, converted
+	var carg1 *C.graphene_point3d_t // in, none, converted
+	var carg2 C.gfloat              // in, none, casted
 	var cret  C.gboolean            // return
 
 	carg0 = (*C.graphene_point3d_t)(UnsafePoint3DToGlibNone(a))
@@ -4016,7 +4026,7 @@ type quad struct {
 }
 
 func marshalQuad(p uintptr) (interface{}, error) {
-	b := gobject.ValueFromNative(unsafe.Pointer(p)).Boxed()
+	b := gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Boxed()
 	return UnsafeQuadFromGlibBorrow(b), nil
 }
 
@@ -4060,17 +4070,17 @@ func UnsafeQuadToGlibFull(q *Quad) unsafe.Pointer {
 // QuadAlloc wraps graphene_quad_alloc
 // The function returns the following values:
 // 
-// 	- ret *Quad 
+// 	- ret Quad 
 //
 // Allocates a new #graphene_quad_t instance.
 // 
 // The contents of the returned instance are undefined.
-func QuadAlloc() *Quad {
-	var cret *C.graphene_quad_t // return, full, record
+func QuadAlloc() Quad {
+	var cret *C.graphene_quad_t // return, full, converted
 
 	cret = C.graphene_quad_alloc()
 
-	var ret *Quad
+	var ret Quad
 
 	ret = UnsafeQuadFromGlibFull(unsafe.Pointer(cret))
 
@@ -4081,16 +4091,16 @@ func QuadAlloc() *Quad {
 // 
 // The function takes the following parameters:
 // 
-// 	- p *Point: a #graphene_point_t 
+// 	- p Point: a #graphene_point_t 
 // 
 // The function returns the following values:
 // 
 // 	- ret bool 
 //
 // Checks if the given #graphene_quad_t contains the given #graphene_point_t.
-func (q *Quad) Contains(p *Point) bool {
-	var carg0 *C.graphene_quad_t  // in, none, record
-	var carg1 *C.graphene_point_t // in, none, record
+func (q *Quad) Contains(p Point) bool {
+	var carg0 *C.graphene_quad_t  // in, none, converted
+	var carg1 *C.graphene_point_t // in, none, converted
 	var cret  C.gboolean          // return
 
 	carg0 = (*C.graphene_quad_t)(UnsafeQuadToGlibNone(q))
@@ -4117,13 +4127,13 @@ func (q *Quad) Contains(p *Point) bool {
 // 
 // The function returns the following values:
 // 
-// 	- ret *Point 
+// 	- ret Point 
 //
 // Retrieves the point of a #graphene_quad_t at the given index.
-func (q *Quad) GetPoint(index_ uint) *Point {
-	var carg0 *C.graphene_quad_t  // in, none, record
-	var carg1 C.guint             // in, casted
-	var cret  *C.graphene_point_t // return, none, record
+func (q *Quad) GetPoint(index_ uint) Point {
+	var carg0 *C.graphene_quad_t  // in, none, converted
+	var carg1 C.guint             // in, none, casted
+	var cret  *C.graphene_point_t // return, none, converted
 
 	carg0 = (*C.graphene_quad_t)(UnsafeQuadToGlibNone(q))
 	carg1 = C.guint(index_)
@@ -4132,7 +4142,7 @@ func (q *Quad) GetPoint(index_ uint) *Point {
 	runtime.KeepAlive(q)
 	runtime.KeepAlive(index_)
 
-	var ret *Point
+	var ret Point
 
 	ret = UnsafePointFromGlibNone(unsafe.Pointer(cret))
 
@@ -4143,23 +4153,23 @@ func (q *Quad) GetPoint(index_ uint) *Point {
 // 
 // The function takes the following parameters:
 // 
-// 	- p1 *Point: the first point of the quadrilateral 
-// 	- p2 *Point: the second point of the quadrilateral 
-// 	- p3 *Point: the third point of the quadrilateral 
-// 	- p4 *Point: the fourth point of the quadrilateral 
+// 	- p1 Point: the first point of the quadrilateral 
+// 	- p2 Point: the second point of the quadrilateral 
+// 	- p3 Point: the third point of the quadrilateral 
+// 	- p4 Point: the fourth point of the quadrilateral 
 // 
 // The function returns the following values:
 // 
-// 	- ret *Quad 
+// 	- ret Quad 
 //
 // Initializes a #graphene_quad_t with the given points.
-func (q *Quad) Init(p1 *Point, p2 *Point, p3 *Point, p4 *Point) *Quad {
-	var carg0 *C.graphene_quad_t  // in, none, record
-	var carg1 *C.graphene_point_t // in, none, record
-	var carg2 *C.graphene_point_t // in, none, record
-	var carg3 *C.graphene_point_t // in, none, record
-	var carg4 *C.graphene_point_t // in, none, record
-	var cret  *C.graphene_quad_t  // return, none, record
+func (q *Quad) Init(p1 Point, p2 Point, p3 Point, p4 Point) Quad {
+	var carg0 *C.graphene_quad_t  // in, none, converted
+	var carg1 *C.graphene_point_t // in, none, converted
+	var carg2 *C.graphene_point_t // in, none, converted
+	var carg3 *C.graphene_point_t // in, none, converted
+	var carg4 *C.graphene_point_t // in, none, converted
+	var cret  *C.graphene_quad_t  // return, none, converted
 
 	carg0 = (*C.graphene_quad_t)(UnsafeQuadToGlibNone(q))
 	carg1 = (*C.graphene_point_t)(UnsafePointToGlibNone(p1))
@@ -4174,7 +4184,7 @@ func (q *Quad) Init(p1 *Point, p2 *Point, p3 *Point, p4 *Point) *Quad {
 	runtime.KeepAlive(p3)
 	runtime.KeepAlive(p4)
 
-	var ret *Quad
+	var ret Quad
 
 	ret = UnsafeQuadFromGlibNone(unsafe.Pointer(cret))
 
@@ -4185,26 +4195,26 @@ func (q *Quad) Init(p1 *Point, p2 *Point, p3 *Point, p4 *Point) *Quad {
 // 
 // The function takes the following parameters:
 // 
-// 	- points []Point: an array of 4 #graphene_point_t 
+// 	- points array: an array of 4 #graphene_point_t 
 // 
 // The function returns the following values:
 // 
-// 	- ret *Quad 
+// 	- ret Quad 
 //
 // Initializes a #graphene_quad_t using an array of points.
-func (q *Quad) InitFromPoints(points []Point) *Quad {
-	var carg0 *C.graphene_quad_t  // in, none, record
-	var carg1 *C.graphene_point_t // in, transfer: none, scope: call, implicit: false, skip: false, optional: false, nullable: false, caller-allocates: false, has closure: false, has destroy: false
-	var cret  *C.graphene_quad_t  // return, none, record
+func (q *Quad) InitFromPoints(points array) Quad {
+	var carg0 *C.graphene_quad_t // in, none, converted
+	var carg1 array              // in, transfer: none, scope: call, implicit: false, skip: false, optional: false, nullable: false, caller-allocates: false, has closure: false, has destroy: false
+	var cret  *C.graphene_quad_t // return, none, converted
 
 	carg0 = (*C.graphene_quad_t)(UnsafeQuadToGlibNone(q))
-	panic("unimplemented conversion of *typesystem.Array (graphene_point_t*)")
+	panic("unimplemented conversion of array (array)")
 
 	cret = C.graphene_quad_init_from_points(carg0, carg1)
 	runtime.KeepAlive(q)
 	runtime.KeepAlive(points)
 
-	var ret *Quad
+	var ret Quad
 
 	ret = UnsafeQuadFromGlibNone(unsafe.Pointer(cret))
 
@@ -4215,18 +4225,18 @@ func (q *Quad) InitFromPoints(points []Point) *Quad {
 // 
 // The function takes the following parameters:
 // 
-// 	- r *Rect: a #graphene_rect_t 
+// 	- r Rect: a #graphene_rect_t 
 // 
 // The function returns the following values:
 // 
-// 	- ret *Quad 
+// 	- ret Quad 
 //
 // Initializes a #graphene_quad_t using the four corners of the
 // given #graphene_rect_t.
-func (q *Quad) InitFromRect(r *Rect) *Quad {
-	var carg0 *C.graphene_quad_t // in, none, record
-	var carg1 *C.graphene_rect_t // in, none, record
-	var cret  *C.graphene_quad_t // return, none, record
+func (q *Quad) InitFromRect(r Rect) Quad {
+	var carg0 *C.graphene_quad_t // in, none, converted
+	var carg1 *C.graphene_rect_t // in, none, converted
+	var cret  *C.graphene_quad_t // return, none, converted
 
 	carg0 = (*C.graphene_quad_t)(UnsafeQuadToGlibNone(q))
 	carg1 = (*C.graphene_rect_t)(UnsafeRectToGlibNone(r))
@@ -4235,7 +4245,7 @@ func (q *Quad) InitFromRect(r *Rect) *Quad {
 	runtime.KeepAlive(q)
 	runtime.KeepAlive(r)
 
-	var ret *Quad
+	var ret Quad
 
 	ret = UnsafeQuadFromGlibNone(unsafe.Pointer(cret))
 
@@ -4258,7 +4268,7 @@ type quaternion struct {
 }
 
 func marshalQuaternion(p uintptr) (interface{}, error) {
-	b := gobject.ValueFromNative(unsafe.Pointer(p)).Boxed()
+	b := gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Boxed()
 	return UnsafeQuaternionFromGlibBorrow(b), nil
 }
 
@@ -4302,17 +4312,17 @@ func UnsafeQuaternionToGlibFull(q *Quaternion) unsafe.Pointer {
 // QuaternionAlloc wraps graphene_quaternion_alloc
 // The function returns the following values:
 // 
-// 	- ret *Quaternion 
+// 	- ret Quaternion 
 //
 // Allocates a new #graphene_quaternion_t.
 // 
 // The contents of the returned value are undefined.
-func QuaternionAlloc() *Quaternion {
-	var cret *C.graphene_quaternion_t // return, full, record
+func QuaternionAlloc() Quaternion {
+	var cret *C.graphene_quaternion_t // return, full, converted
 
 	cret = C.graphene_quaternion_alloc()
 
-	var ret *Quaternion
+	var ret Quaternion
 
 	ret = UnsafeQuaternionFromGlibFull(unsafe.Pointer(cret))
 
@@ -4323,17 +4333,17 @@ func QuaternionAlloc() *Quaternion {
 // 
 // The function takes the following parameters:
 // 
-// 	- b *Quaternion: a #graphene_quaternion_t 
+// 	- b Quaternion: a #graphene_quaternion_t 
 // 
 // The function returns the following values:
 // 
 // 	- ret float32 
 //
 // Computes the dot product of two #graphene_quaternion_t.
-func (a *Quaternion) Dot(b *Quaternion) float32 {
-	var carg0 *C.graphene_quaternion_t // in, none, record
-	var carg1 *C.graphene_quaternion_t // in, none, record
-	var cret  C.gfloat                 // return, casted
+func (a *Quaternion) Dot(b Quaternion) float32 {
+	var carg0 *C.graphene_quaternion_t // in, none, converted
+	var carg1 *C.graphene_quaternion_t // in, none, converted
+	var cret  C.gfloat                 // return, none, casted
 
 	carg0 = (*C.graphene_quaternion_t)(UnsafeQuaternionToGlibNone(a))
 	carg1 = (*C.graphene_quaternion_t)(UnsafeQuaternionToGlibNone(b))
@@ -4353,16 +4363,16 @@ func (a *Quaternion) Dot(b *Quaternion) float32 {
 // 
 // The function takes the following parameters:
 // 
-// 	- b *Quaternion: a #graphene_quaternion_t 
+// 	- b Quaternion: a #graphene_quaternion_t 
 // 
 // The function returns the following values:
 // 
 // 	- ret bool 
 //
 // Checks whether the given quaternions are equal.
-func (a *Quaternion) Equal(b *Quaternion) bool {
-	var carg0 *C.graphene_quaternion_t // in, none, record
-	var carg1 *C.graphene_quaternion_t // in, none, record
+func (a *Quaternion) Equal(b Quaternion) bool {
+	var carg0 *C.graphene_quaternion_t // in, none, converted
+	var carg1 *C.graphene_quaternion_t // in, none, converted
 	var cret  C.gboolean               // return
 
 	carg0 = (*C.graphene_quaternion_t)(UnsafeQuaternionToGlibNone(a))
@@ -4392,16 +4402,16 @@ func (a *Quaternion) Equal(b *Quaternion) bool {
 // 
 // The function returns the following values:
 // 
-// 	- ret *Quaternion 
+// 	- ret Quaternion 
 //
 // Initializes a #graphene_quaternion_t using the given four values.
-func (q *Quaternion) Init(x float32, y float32, z float32, w float32) *Quaternion {
-	var carg0 *C.graphene_quaternion_t // in, none, record
-	var carg1 C.gfloat                 // in, casted
-	var carg2 C.gfloat                 // in, casted
-	var carg3 C.gfloat                 // in, casted
-	var carg4 C.gfloat                 // in, casted
-	var cret  *C.graphene_quaternion_t // return, none, record
+func (q *Quaternion) Init(x float32, y float32, z float32, w float32) Quaternion {
+	var carg0 *C.graphene_quaternion_t // in, none, converted
+	var carg1 C.gfloat                 // in, none, casted
+	var carg2 C.gfloat                 // in, none, casted
+	var carg3 C.gfloat                 // in, none, casted
+	var carg4 C.gfloat                 // in, none, casted
+	var cret  *C.graphene_quaternion_t // return, none, converted
 
 	carg0 = (*C.graphene_quaternion_t)(UnsafeQuaternionToGlibNone(q))
 	carg1 = C.gfloat(x)
@@ -4416,7 +4426,7 @@ func (q *Quaternion) Init(x float32, y float32, z float32, w float32) *Quaternio
 	runtime.KeepAlive(z)
 	runtime.KeepAlive(w)
 
-	var ret *Quaternion
+	var ret Quaternion
 
 	ret = UnsafeQuaternionFromGlibNone(unsafe.Pointer(cret))
 
@@ -4428,19 +4438,19 @@ func (q *Quaternion) Init(x float32, y float32, z float32, w float32) *Quaternio
 // The function takes the following parameters:
 // 
 // 	- angle float32: the rotation on a given axis, in degrees 
-// 	- axis *Vec3: the axis of rotation, expressed as a vector 
+// 	- axis Vec3: the axis of rotation, expressed as a vector 
 // 
 // The function returns the following values:
 // 
-// 	- ret *Quaternion 
+// 	- ret Quaternion 
 //
 // Initializes a #graphene_quaternion_t using an @angle on a
 // specific @axis.
-func (q *Quaternion) InitFromAngleVec3(angle float32, axis *Vec3) *Quaternion {
-	var carg0 *C.graphene_quaternion_t // in, none, record
-	var carg1 C.gfloat                 // in, casted
-	var carg2 *C.graphene_vec3_t       // in, none, record
-	var cret  *C.graphene_quaternion_t // return, none, record
+func (q *Quaternion) InitFromAngleVec3(angle float32, axis Vec3) Quaternion {
+	var carg0 *C.graphene_quaternion_t // in, none, converted
+	var carg1 C.gfloat                 // in, none, casted
+	var carg2 *C.graphene_vec3_t       // in, none, converted
+	var cret  *C.graphene_quaternion_t // return, none, converted
 
 	carg0 = (*C.graphene_quaternion_t)(UnsafeQuaternionToGlibNone(q))
 	carg1 = C.gfloat(angle)
@@ -4451,7 +4461,7 @@ func (q *Quaternion) InitFromAngleVec3(angle float32, axis *Vec3) *Quaternion {
 	runtime.KeepAlive(angle)
 	runtime.KeepAlive(axis)
 
-	var ret *Quaternion
+	var ret Quaternion
 
 	ret = UnsafeQuaternionFromGlibNone(unsafe.Pointer(cret))
 
@@ -4468,19 +4478,19 @@ func (q *Quaternion) InitFromAngleVec3(angle float32, axis *Vec3) *Quaternion {
 // 
 // The function returns the following values:
 // 
-// 	- ret *Quaternion 
+// 	- ret Quaternion 
 //
 // Initializes a #graphene_quaternion_t using the values of
 // the [Euler angles](http://en.wikipedia.org/wiki/Euler_angles)
 // on each axis.
 // 
 // See also: graphene_quaternion_init_from_euler()
-func (q *Quaternion) InitFromAngles(degX float32, degY float32, degZ float32) *Quaternion {
-	var carg0 *C.graphene_quaternion_t // in, none, record
-	var carg1 C.gfloat                 // in, casted
-	var carg2 C.gfloat                 // in, casted
-	var carg3 C.gfloat                 // in, casted
-	var cret  *C.graphene_quaternion_t // return, none, record
+func (q *Quaternion) InitFromAngles(degX float32, degY float32, degZ float32) Quaternion {
+	var carg0 *C.graphene_quaternion_t // in, none, converted
+	var carg1 C.gfloat                 // in, none, casted
+	var carg2 C.gfloat                 // in, none, casted
+	var carg3 C.gfloat                 // in, none, casted
+	var cret  *C.graphene_quaternion_t // return, none, converted
 
 	carg0 = (*C.graphene_quaternion_t)(UnsafeQuaternionToGlibNone(q))
 	carg1 = C.gfloat(degX)
@@ -4493,7 +4503,7 @@ func (q *Quaternion) InitFromAngles(degX float32, degY float32, degZ float32) *Q
 	runtime.KeepAlive(degY)
 	runtime.KeepAlive(degZ)
 
-	var ret *Quaternion
+	var ret Quaternion
 
 	ret = UnsafeQuaternionFromGlibNone(unsafe.Pointer(cret))
 
@@ -4504,17 +4514,17 @@ func (q *Quaternion) InitFromAngles(degX float32, degY float32, degZ float32) *Q
 // 
 // The function takes the following parameters:
 // 
-// 	- e *Euler: a #graphene_euler_t 
+// 	- e Euler: a #graphene_euler_t 
 // 
 // The function returns the following values:
 // 
-// 	- ret *Quaternion 
+// 	- ret Quaternion 
 //
 // Initializes a #graphene_quaternion_t using the given #graphene_euler_t.
-func (q *Quaternion) InitFromEuler(e *Euler) *Quaternion {
-	var carg0 *C.graphene_quaternion_t // in, none, record
-	var carg1 *C.graphene_euler_t      // in, none, record
-	var cret  *C.graphene_quaternion_t // return, none, record
+func (q *Quaternion) InitFromEuler(e Euler) Quaternion {
+	var carg0 *C.graphene_quaternion_t // in, none, converted
+	var carg1 *C.graphene_euler_t      // in, none, converted
+	var cret  *C.graphene_quaternion_t // return, none, converted
 
 	carg0 = (*C.graphene_quaternion_t)(UnsafeQuaternionToGlibNone(q))
 	carg1 = (*C.graphene_euler_t)(UnsafeEulerToGlibNone(e))
@@ -4523,7 +4533,7 @@ func (q *Quaternion) InitFromEuler(e *Euler) *Quaternion {
 	runtime.KeepAlive(q)
 	runtime.KeepAlive(e)
 
-	var ret *Quaternion
+	var ret Quaternion
 
 	ret = UnsafeQuaternionFromGlibNone(unsafe.Pointer(cret))
 
@@ -4534,18 +4544,18 @@ func (q *Quaternion) InitFromEuler(e *Euler) *Quaternion {
 // 
 // The function takes the following parameters:
 // 
-// 	- m *Matrix: a #graphene_matrix_t 
+// 	- m Matrix: a #graphene_matrix_t 
 // 
 // The function returns the following values:
 // 
-// 	- ret *Quaternion 
+// 	- ret Quaternion 
 //
 // Initializes a #graphene_quaternion_t using the rotation components
 // of a transformation matrix.
-func (q *Quaternion) InitFromMatrix(m *Matrix) *Quaternion {
-	var carg0 *C.graphene_quaternion_t // in, none, record
-	var carg1 *C.graphene_matrix_t     // in, none, record
-	var cret  *C.graphene_quaternion_t // return, none, record
+func (q *Quaternion) InitFromMatrix(m Matrix) Quaternion {
+	var carg0 *C.graphene_quaternion_t // in, none, converted
+	var carg1 *C.graphene_matrix_t     // in, none, converted
+	var cret  *C.graphene_quaternion_t // return, none, converted
 
 	carg0 = (*C.graphene_quaternion_t)(UnsafeQuaternionToGlibNone(q))
 	carg1 = (*C.graphene_matrix_t)(UnsafeMatrixToGlibNone(m))
@@ -4554,7 +4564,7 @@ func (q *Quaternion) InitFromMatrix(m *Matrix) *Quaternion {
 	runtime.KeepAlive(q)
 	runtime.KeepAlive(m)
 
-	var ret *Quaternion
+	var ret Quaternion
 
 	ret = UnsafeQuaternionFromGlibNone(unsafe.Pointer(cret))
 
@@ -4565,17 +4575,17 @@ func (q *Quaternion) InitFromMatrix(m *Matrix) *Quaternion {
 // 
 // The function takes the following parameters:
 // 
-// 	- src *Quaternion: a #graphene_quaternion_t 
+// 	- src Quaternion: a #graphene_quaternion_t 
 // 
 // The function returns the following values:
 // 
-// 	- ret *Quaternion 
+// 	- ret Quaternion 
 //
 // Initializes a #graphene_quaternion_t with the values from @src.
-func (q *Quaternion) InitFromQuaternion(src *Quaternion) *Quaternion {
-	var carg0 *C.graphene_quaternion_t // in, none, record
-	var carg1 *C.graphene_quaternion_t // in, none, record
-	var cret  *C.graphene_quaternion_t // return, none, record
+func (q *Quaternion) InitFromQuaternion(src Quaternion) Quaternion {
+	var carg0 *C.graphene_quaternion_t // in, none, converted
+	var carg1 *C.graphene_quaternion_t // in, none, converted
+	var cret  *C.graphene_quaternion_t // return, none, converted
 
 	carg0 = (*C.graphene_quaternion_t)(UnsafeQuaternionToGlibNone(q))
 	carg1 = (*C.graphene_quaternion_t)(UnsafeQuaternionToGlibNone(src))
@@ -4584,7 +4594,7 @@ func (q *Quaternion) InitFromQuaternion(src *Quaternion) *Quaternion {
 	runtime.KeepAlive(q)
 	runtime.KeepAlive(src)
 
-	var ret *Quaternion
+	var ret Quaternion
 
 	ret = UnsafeQuaternionFromGlibNone(unsafe.Pointer(cret))
 
@@ -4601,19 +4611,19 @@ func (q *Quaternion) InitFromQuaternion(src *Quaternion) *Quaternion {
 // 
 // The function returns the following values:
 // 
-// 	- ret *Quaternion 
+// 	- ret Quaternion 
 //
 // Initializes a #graphene_quaternion_t using the values of
 // the [Euler angles](http://en.wikipedia.org/wiki/Euler_angles)
 // on each axis.
 // 
 // See also: graphene_quaternion_init_from_euler()
-func (q *Quaternion) InitFromRadians(radX float32, radY float32, radZ float32) *Quaternion {
-	var carg0 *C.graphene_quaternion_t // in, none, record
-	var carg1 C.gfloat                 // in, casted
-	var carg2 C.gfloat                 // in, casted
-	var carg3 C.gfloat                 // in, casted
-	var cret  *C.graphene_quaternion_t // return, none, record
+func (q *Quaternion) InitFromRadians(radX float32, radY float32, radZ float32) Quaternion {
+	var carg0 *C.graphene_quaternion_t // in, none, converted
+	var carg1 C.gfloat                 // in, none, casted
+	var carg2 C.gfloat                 // in, none, casted
+	var carg3 C.gfloat                 // in, none, casted
+	var cret  *C.graphene_quaternion_t // return, none, converted
 
 	carg0 = (*C.graphene_quaternion_t)(UnsafeQuaternionToGlibNone(q))
 	carg1 = C.gfloat(radX)
@@ -4626,7 +4636,7 @@ func (q *Quaternion) InitFromRadians(radX float32, radY float32, radZ float32) *
 	runtime.KeepAlive(radY)
 	runtime.KeepAlive(radZ)
 
-	var ret *Quaternion
+	var ret Quaternion
 
 	ret = UnsafeQuaternionFromGlibNone(unsafe.Pointer(cret))
 
@@ -4637,17 +4647,17 @@ func (q *Quaternion) InitFromRadians(radX float32, radY float32, radZ float32) *
 // 
 // The function takes the following parameters:
 // 
-// 	- src *Vec4: a #graphene_vec4_t 
+// 	- src Vec4: a #graphene_vec4_t 
 // 
 // The function returns the following values:
 // 
-// 	- ret *Quaternion 
+// 	- ret Quaternion 
 //
 // Initializes a #graphene_quaternion_t with the values from @src.
-func (q *Quaternion) InitFromVec4(src *Vec4) *Quaternion {
-	var carg0 *C.graphene_quaternion_t // in, none, record
-	var carg1 *C.graphene_vec4_t       // in, none, record
-	var cret  *C.graphene_quaternion_t // return, none, record
+func (q *Quaternion) InitFromVec4(src Vec4) Quaternion {
+	var carg0 *C.graphene_quaternion_t // in, none, converted
+	var carg1 *C.graphene_vec4_t       // in, none, converted
+	var cret  *C.graphene_quaternion_t // return, none, converted
 
 	carg0 = (*C.graphene_quaternion_t)(UnsafeQuaternionToGlibNone(q))
 	carg1 = (*C.graphene_vec4_t)(UnsafeVec4ToGlibNone(src))
@@ -4656,7 +4666,7 @@ func (q *Quaternion) InitFromVec4(src *Vec4) *Quaternion {
 	runtime.KeepAlive(q)
 	runtime.KeepAlive(src)
 
-	var ret *Quaternion
+	var ret Quaternion
 
 	ret = UnsafeQuaternionFromGlibNone(unsafe.Pointer(cret))
 
@@ -4666,20 +4676,20 @@ func (q *Quaternion) InitFromVec4(src *Vec4) *Quaternion {
 // InitIdentity wraps graphene_quaternion_init_identity
 // The function returns the following values:
 // 
-// 	- ret *Quaternion 
+// 	- ret Quaternion 
 //
 // Initializes a #graphene_quaternion_t using the identity
 // transformation.
-func (q *Quaternion) InitIdentity() *Quaternion {
-	var carg0 *C.graphene_quaternion_t // in, none, record
-	var cret  *C.graphene_quaternion_t // return, none, record
+func (q *Quaternion) InitIdentity() Quaternion {
+	var carg0 *C.graphene_quaternion_t // in, none, converted
+	var cret  *C.graphene_quaternion_t // return, none, converted
 
 	carg0 = (*C.graphene_quaternion_t)(UnsafeQuaternionToGlibNone(q))
 
 	cret = C.graphene_quaternion_init_identity(carg0)
 	runtime.KeepAlive(q)
 
-	var ret *Quaternion
+	var ret Quaternion
 
 	ret = UnsafeQuaternionFromGlibNone(unsafe.Pointer(cret))
 
@@ -4700,10 +4710,10 @@ func (q *Quaternion) InitIdentity() *Quaternion {
 // on the [Euler angles](http://en.wikipedia.org/wiki/Euler_angles)
 // on each axis.
 func (q *Quaternion) ToAngles() (float32, float32, float32) {
-	var carg0 *C.graphene_quaternion_t // in, none, record
-	var carg1 C.gfloat                 // out, casted
-	var carg2 C.gfloat                 // out, casted
-	var carg3 C.gfloat                 // out, casted
+	var carg0 *C.graphene_quaternion_t // in, none, converted
+	var carg1 C.gfloat                 // out, full, casted
+	var carg2 C.gfloat                 // out, full, casted
+	var carg3 C.gfloat                 // out, full, casted
 
 	carg0 = (*C.graphene_quaternion_t)(UnsafeQuaternionToGlibNone(q))
 
@@ -4735,10 +4745,10 @@ func (q *Quaternion) ToAngles() (float32, float32, float32) {
 // on the [Euler angles](http://en.wikipedia.org/wiki/Euler_angles)
 // on each axis.
 func (q *Quaternion) ToRadians() (float32, float32, float32) {
-	var carg0 *C.graphene_quaternion_t // in, none, record
-	var carg1 C.gfloat                 // out, casted
-	var carg2 C.gfloat                 // out, casted
-	var carg3 C.gfloat                 // out, casted
+	var carg0 *C.graphene_quaternion_t // in, none, converted
+	var carg1 C.gfloat                 // out, full, casted
+	var carg2 C.gfloat                 // out, full, casted
+	var carg3 C.gfloat                 // out, full, casted
 
 	carg0 = (*C.graphene_quaternion_t)(UnsafeQuaternionToGlibNone(q))
 
@@ -4772,7 +4782,7 @@ type ray struct {
 }
 
 func marshalRay(p uintptr) (interface{}, error) {
-	b := gobject.ValueFromNative(unsafe.Pointer(p)).Boxed()
+	b := gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Boxed()
 	return UnsafeRayFromGlibBorrow(b), nil
 }
 
@@ -4816,17 +4826,17 @@ func UnsafeRayToGlibFull(r *Ray) unsafe.Pointer {
 // RayAlloc wraps graphene_ray_alloc
 // The function returns the following values:
 // 
-// 	- ret *Ray 
+// 	- ret Ray 
 //
 // Allocates a new #graphene_ray_t structure.
 // 
 // The contents of the returned structure are undefined.
-func RayAlloc() *Ray {
-	var cret *C.graphene_ray_t // return, full, record
+func RayAlloc() Ray {
+	var cret *C.graphene_ray_t // return, full, converted
 
 	cret = C.graphene_ray_alloc()
 
-	var ret *Ray
+	var ret Ray
 
 	ret = UnsafeRayFromGlibFull(unsafe.Pointer(cret))
 
@@ -4837,16 +4847,16 @@ func RayAlloc() *Ray {
 // 
 // The function takes the following parameters:
 // 
-// 	- b *Ray: a #graphene_ray_t 
+// 	- b Ray: a #graphene_ray_t 
 // 
 // The function returns the following values:
 // 
 // 	- ret bool 
 //
 // Checks whether the two given #graphene_ray_t are equal.
-func (a *Ray) Equal(b *Ray) bool {
-	var carg0 *C.graphene_ray_t // in, none, record
-	var carg1 *C.graphene_ray_t // in, none, record
+func (a *Ray) Equal(b Ray) bool {
+	var carg0 *C.graphene_ray_t // in, none, converted
+	var carg1 *C.graphene_ray_t // in, none, converted
 	var cret  C.gboolean        // return
 
 	carg0 = (*C.graphene_ray_t)(UnsafeRayToGlibNone(a))
@@ -4869,7 +4879,7 @@ func (a *Ray) Equal(b *Ray) bool {
 // 
 // The function takes the following parameters:
 // 
-// 	- p *Plane: a #graphene_plane_t 
+// 	- p Plane: a #graphene_plane_t 
 // 
 // The function returns the following values:
 // 
@@ -4879,10 +4889,10 @@ func (a *Ray) Equal(b *Ray) bool {
 // given plane.
 // 
 // If the ray does not intersect the plane, this function returns `INFINITY`.
-func (r *Ray) GetDistanceToPlane(p *Plane) float32 {
-	var carg0 *C.graphene_ray_t   // in, none, record
-	var carg1 *C.graphene_plane_t // in, none, record
-	var cret  C.gfloat            // return, casted
+func (r *Ray) GetDistanceToPlane(p Plane) float32 {
+	var carg0 *C.graphene_ray_t   // in, none, converted
+	var carg1 *C.graphene_plane_t // in, none, converted
+	var cret  C.gfloat            // return, none, casted
 
 	carg0 = (*C.graphene_ray_t)(UnsafeRayToGlibNone(r))
 	carg1 = (*C.graphene_plane_t)(UnsafePlaneToGlibNone(p))
@@ -4902,7 +4912,7 @@ func (r *Ray) GetDistanceToPlane(p *Plane) float32 {
 // 
 // The function takes the following parameters:
 // 
-// 	- p *Point3D: a #graphene_point3d_t 
+// 	- p Point3D: a #graphene_point3d_t 
 // 
 // The function returns the following values:
 // 
@@ -4914,10 +4924,10 @@ func (r *Ray) GetDistanceToPlane(p *Plane) float32 {
 // The closest approach to a ray from a point is the distance
 // between the point and the projection of the point on the
 // ray itself.
-func (r *Ray) GetDistanceToPoint(p *Point3D) float32 {
-	var carg0 *C.graphene_ray_t     // in, none, record
-	var carg1 *C.graphene_point3d_t // in, none, record
-	var cret  C.gfloat              // return, casted
+func (r *Ray) GetDistanceToPoint(p Point3D) float32 {
+	var carg0 *C.graphene_ray_t     // in, none, converted
+	var carg1 *C.graphene_point3d_t // in, none, converted
+	var cret  C.gfloat              // return, none, casted
 
 	carg0 = (*C.graphene_ray_t)(UnsafeRayToGlibNone(r))
 	carg1 = (*C.graphene_point3d_t)(UnsafePoint3DToGlibNone(p))
@@ -4937,20 +4947,20 @@ func (r *Ray) GetDistanceToPoint(p *Point3D) float32 {
 // 
 // The function takes the following parameters:
 // 
-// 	- origin *Point3D (nullable): the origin of the ray 
-// 	- direction *Vec3 (nullable): the direction vector 
+// 	- origin Point3D (nullable): the origin of the ray 
+// 	- direction Vec3 (nullable): the direction vector 
 // 
 // The function returns the following values:
 // 
-// 	- ret *Ray 
+// 	- ret Ray 
 //
 // Initializes the given #graphene_ray_t using the given @origin
 // and @direction values.
-func (r *Ray) Init(origin *Point3D, direction *Vec3) *Ray {
-	var carg0 *C.graphene_ray_t     // in, none, record
-	var carg1 *C.graphene_point3d_t // in, none, record, nullable
-	var carg2 *C.graphene_vec3_t    // in, none, record, nullable
-	var cret  *C.graphene_ray_t     // return, none, record
+func (r *Ray) Init(origin Point3D, direction Vec3) Ray {
+	var carg0 *C.graphene_ray_t     // in, none, converted
+	var carg1 *C.graphene_point3d_t // in, none, converted, nullable
+	var carg2 *C.graphene_vec3_t    // in, none, converted, nullable
+	var cret  *C.graphene_ray_t     // return, none, converted
 
 	carg0 = (*C.graphene_ray_t)(UnsafeRayToGlibNone(r))
 	if origin != nil {
@@ -4965,7 +4975,7 @@ func (r *Ray) Init(origin *Point3D, direction *Vec3) *Ray {
 	runtime.KeepAlive(origin)
 	runtime.KeepAlive(direction)
 
-	var ret *Ray
+	var ret Ray
 
 	ret = UnsafeRayFromGlibNone(unsafe.Pointer(cret))
 
@@ -4976,18 +4986,18 @@ func (r *Ray) Init(origin *Point3D, direction *Vec3) *Ray {
 // 
 // The function takes the following parameters:
 // 
-// 	- src *Ray: a #graphene_ray_t 
+// 	- src Ray: a #graphene_ray_t 
 // 
 // The function returns the following values:
 // 
-// 	- ret *Ray 
+// 	- ret Ray 
 //
 // Initializes the given #graphene_ray_t using the origin and direction
 // values of another #graphene_ray_t.
-func (r *Ray) InitFromRay(src *Ray) *Ray {
-	var carg0 *C.graphene_ray_t // in, none, record
-	var carg1 *C.graphene_ray_t // in, none, record
-	var cret  *C.graphene_ray_t // return, none, record
+func (r *Ray) InitFromRay(src Ray) Ray {
+	var carg0 *C.graphene_ray_t // in, none, converted
+	var carg1 *C.graphene_ray_t // in, none, converted
+	var cret  *C.graphene_ray_t // return, none, converted
 
 	carg0 = (*C.graphene_ray_t)(UnsafeRayToGlibNone(r))
 	carg1 = (*C.graphene_ray_t)(UnsafeRayToGlibNone(src))
@@ -4996,7 +5006,7 @@ func (r *Ray) InitFromRay(src *Ray) *Ray {
 	runtime.KeepAlive(r)
 	runtime.KeepAlive(src)
 
-	var ret *Ray
+	var ret Ray
 
 	ret = UnsafeRayFromGlibNone(unsafe.Pointer(cret))
 
@@ -5007,19 +5017,19 @@ func (r *Ray) InitFromRay(src *Ray) *Ray {
 // 
 // The function takes the following parameters:
 // 
-// 	- origin *Vec3 (nullable): a #graphene_vec3_t 
-// 	- direction *Vec3 (nullable): a #graphene_vec3_t 
+// 	- origin Vec3 (nullable): a #graphene_vec3_t 
+// 	- direction Vec3 (nullable): a #graphene_vec3_t 
 // 
 // The function returns the following values:
 // 
-// 	- ret *Ray 
+// 	- ret Ray 
 //
 // Initializes the given #graphene_ray_t using the given vectors.
-func (r *Ray) InitFromVec3(origin *Vec3, direction *Vec3) *Ray {
-	var carg0 *C.graphene_ray_t  // in, none, record
-	var carg1 *C.graphene_vec3_t // in, none, record, nullable
-	var carg2 *C.graphene_vec3_t // in, none, record, nullable
-	var cret  *C.graphene_ray_t  // return, none, record
+func (r *Ray) InitFromVec3(origin Vec3, direction Vec3) Ray {
+	var carg0 *C.graphene_ray_t  // in, none, converted
+	var carg1 *C.graphene_vec3_t // in, none, converted, nullable
+	var carg2 *C.graphene_vec3_t // in, none, converted, nullable
+	var cret  *C.graphene_ray_t  // return, none, converted
 
 	carg0 = (*C.graphene_ray_t)(UnsafeRayToGlibNone(r))
 	if origin != nil {
@@ -5034,7 +5044,7 @@ func (r *Ray) InitFromVec3(origin *Vec3, direction *Vec3) *Ray {
 	runtime.KeepAlive(origin)
 	runtime.KeepAlive(direction)
 
-	var ret *Ray
+	var ret Ray
 
 	ret = UnsafeRayFromGlibNone(unsafe.Pointer(cret))
 
@@ -5045,7 +5055,7 @@ func (r *Ray) InitFromVec3(origin *Vec3, direction *Vec3) *Ray {
 // 
 // The function takes the following parameters:
 // 
-// 	- b *Box: a #graphene_box_t 
+// 	- b Box: a #graphene_box_t 
 // 
 // The function returns the following values:
 // 
@@ -5054,11 +5064,11 @@ func (r *Ray) InitFromVec3(origin *Vec3, direction *Vec3) *Ray {
 //
 // Intersects the given #graphene_ray_t @r with the given
 // #graphene_box_t @b.
-func (r *Ray) IntersectBox(b *Box) (float32, RayIntersectionKind) {
-	var carg0 *C.graphene_ray_t                  // in, none, record
-	var carg1 *C.graphene_box_t                  // in, none, record
-	var carg2 C.gfloat                           // out, casted
-	var cret  C.graphene_ray_intersection_kind_t // return, casted
+func (r *Ray) IntersectBox(b Box) (float32, RayIntersectionKind) {
+	var carg0 *C.graphene_ray_t                  // in, none, converted
+	var carg1 *C.graphene_box_t                  // in, none, converted
+	var carg2 C.gfloat                           // out, full, casted
+	var cret  C.graphene_ray_intersection_kind_t // return, none, casted
 
 	carg0 = (*C.graphene_ray_t)(UnsafeRayToGlibNone(r))
 	carg1 = (*C.graphene_box_t)(UnsafeBoxToGlibNone(b))
@@ -5080,7 +5090,7 @@ func (r *Ray) IntersectBox(b *Box) (float32, RayIntersectionKind) {
 // 
 // The function takes the following parameters:
 // 
-// 	- s *Sphere: a #graphene_sphere_t 
+// 	- s Sphere: a #graphene_sphere_t 
 // 
 // The function returns the following values:
 // 
@@ -5089,11 +5099,11 @@ func (r *Ray) IntersectBox(b *Box) (float32, RayIntersectionKind) {
 //
 // Intersects the given #graphene_ray_t @r with the given
 // #graphene_sphere_t @s.
-func (r *Ray) IntersectSphere(s *Sphere) (float32, RayIntersectionKind) {
-	var carg0 *C.graphene_ray_t                  // in, none, record
-	var carg1 *C.graphene_sphere_t               // in, none, record
-	var carg2 C.gfloat                           // out, casted
-	var cret  C.graphene_ray_intersection_kind_t // return, casted
+func (r *Ray) IntersectSphere(s Sphere) (float32, RayIntersectionKind) {
+	var carg0 *C.graphene_ray_t                  // in, none, converted
+	var carg1 *C.graphene_sphere_t               // in, none, converted
+	var carg2 C.gfloat                           // out, full, casted
+	var cret  C.graphene_ray_intersection_kind_t // return, none, casted
 
 	carg0 = (*C.graphene_ray_t)(UnsafeRayToGlibNone(r))
 	carg1 = (*C.graphene_sphere_t)(UnsafeSphereToGlibNone(s))
@@ -5115,7 +5125,7 @@ func (r *Ray) IntersectSphere(s *Sphere) (float32, RayIntersectionKind) {
 // 
 // The function takes the following parameters:
 // 
-// 	- t *Triangle: a #graphene_triangle_t 
+// 	- t Triangle: a #graphene_triangle_t 
 // 
 // The function returns the following values:
 // 
@@ -5124,11 +5134,11 @@ func (r *Ray) IntersectSphere(s *Sphere) (float32, RayIntersectionKind) {
 //
 // Intersects the given #graphene_ray_t @r with the given
 // #graphene_triangle_t @t.
-func (r *Ray) IntersectTriangle(t *Triangle) (float32, RayIntersectionKind) {
-	var carg0 *C.graphene_ray_t                  // in, none, record
-	var carg1 *C.graphene_triangle_t             // in, none, record
-	var carg2 C.gfloat                           // out, casted
-	var cret  C.graphene_ray_intersection_kind_t // return, casted
+func (r *Ray) IntersectTriangle(t Triangle) (float32, RayIntersectionKind) {
+	var carg0 *C.graphene_ray_t                  // in, none, converted
+	var carg1 *C.graphene_triangle_t             // in, none, converted
+	var carg2 C.gfloat                           // out, full, casted
+	var cret  C.graphene_ray_intersection_kind_t // return, none, casted
 
 	carg0 = (*C.graphene_ray_t)(UnsafeRayToGlibNone(r))
 	carg1 = (*C.graphene_triangle_t)(UnsafeTriangleToGlibNone(t))
@@ -5150,7 +5160,7 @@ func (r *Ray) IntersectTriangle(t *Triangle) (float32, RayIntersectionKind) {
 // 
 // The function takes the following parameters:
 // 
-// 	- b *Box: a #graphene_box_t 
+// 	- b Box: a #graphene_box_t 
 // 
 // The function returns the following values:
 // 
@@ -5160,9 +5170,9 @@ func (r *Ray) IntersectTriangle(t *Triangle) (float32, RayIntersectionKind) {
 // given #graphene_box_t @b.
 // 
 // See also: graphene_ray_intersect_box()
-func (r *Ray) IntersectsBox(b *Box) bool {
-	var carg0 *C.graphene_ray_t // in, none, record
-	var carg1 *C.graphene_box_t // in, none, record
+func (r *Ray) IntersectsBox(b Box) bool {
+	var carg0 *C.graphene_ray_t // in, none, converted
+	var carg1 *C.graphene_box_t // in, none, converted
 	var cret  C.gboolean        // return
 
 	carg0 = (*C.graphene_ray_t)(UnsafeRayToGlibNone(r))
@@ -5185,7 +5195,7 @@ func (r *Ray) IntersectsBox(b *Box) bool {
 // 
 // The function takes the following parameters:
 // 
-// 	- s *Sphere: a #graphene_sphere_t 
+// 	- s Sphere: a #graphene_sphere_t 
 // 
 // The function returns the following values:
 // 
@@ -5195,9 +5205,9 @@ func (r *Ray) IntersectsBox(b *Box) bool {
 // given #graphene_sphere_t @s.
 // 
 // See also: graphene_ray_intersect_sphere()
-func (r *Ray) IntersectsSphere(s *Sphere) bool {
-	var carg0 *C.graphene_ray_t    // in, none, record
-	var carg1 *C.graphene_sphere_t // in, none, record
+func (r *Ray) IntersectsSphere(s Sphere) bool {
+	var carg0 *C.graphene_ray_t    // in, none, converted
+	var carg1 *C.graphene_sphere_t // in, none, converted
 	var cret  C.gboolean           // return
 
 	carg0 = (*C.graphene_ray_t)(UnsafeRayToGlibNone(r))
@@ -5220,7 +5230,7 @@ func (r *Ray) IntersectsSphere(s *Sphere) bool {
 // 
 // The function takes the following parameters:
 // 
-// 	- t *Triangle: a #graphene_triangle_t 
+// 	- t Triangle: a #graphene_triangle_t 
 // 
 // The function returns the following values:
 // 
@@ -5230,9 +5240,9 @@ func (r *Ray) IntersectsSphere(s *Sphere) bool {
 // given #graphene_triangle_t @b.
 // 
 // See also: graphene_ray_intersect_triangle()
-func (r *Ray) IntersectsTriangle(t *Triangle) bool {
-	var carg0 *C.graphene_ray_t      // in, none, record
-	var carg1 *C.graphene_triangle_t // in, none, record
+func (r *Ray) IntersectsTriangle(t Triangle) bool {
+	var carg0 *C.graphene_ray_t      // in, none, converted
+	var carg1 *C.graphene_triangle_t // in, none, converted
 	var cret  C.gboolean             // return
 
 	carg0 = (*C.graphene_ray_t)(UnsafeRayToGlibNone(r))
@@ -5275,7 +5285,7 @@ type rect struct {
 }
 
 func marshalRect(p uintptr) (interface{}, error) {
-	b := gobject.ValueFromNative(unsafe.Pointer(p)).Boxed()
+	b := gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Boxed()
 	return UnsafeRectFromGlibBorrow(b), nil
 }
 
@@ -5320,16 +5330,16 @@ func UnsafeRectToGlibFull(r *Rect) unsafe.Pointer {
 // 
 // The function takes the following parameters:
 // 
-// 	- p *Point: a #graphene_point_t 
+// 	- p Point: a #graphene_point_t 
 // 
 // The function returns the following values:
 // 
 // 	- ret bool 
 //
 // Checks whether a #graphene_rect_t contains the given coordinates.
-func (r *Rect) ContainsPoint(p *Point) bool {
-	var carg0 *C.graphene_rect_t  // in, none, record
-	var carg1 *C.graphene_point_t // in, none, record
+func (r *Rect) ContainsPoint(p Point) bool {
+	var carg0 *C.graphene_rect_t  // in, none, converted
+	var carg1 *C.graphene_point_t // in, none, converted
 	var cret  C.gboolean          // return
 
 	carg0 = (*C.graphene_rect_t)(UnsafeRectToGlibNone(r))
@@ -5352,7 +5362,7 @@ func (r *Rect) ContainsPoint(p *Point) bool {
 // 
 // The function takes the following parameters:
 // 
-// 	- b *Rect: a #graphene_rect_t 
+// 	- b Rect: a #graphene_rect_t 
 // 
 // The function returns the following values:
 // 
@@ -5360,9 +5370,9 @@ func (r *Rect) ContainsPoint(p *Point) bool {
 //
 // Checks whether a #graphene_rect_t fully contains the given
 // rectangle.
-func (a *Rect) ContainsRect(b *Rect) bool {
-	var carg0 *C.graphene_rect_t // in, none, record
-	var carg1 *C.graphene_rect_t // in, none, record
+func (a *Rect) ContainsRect(b Rect) bool {
+	var carg0 *C.graphene_rect_t // in, none, converted
+	var carg1 *C.graphene_rect_t // in, none, converted
 	var cret  C.gboolean         // return
 
 	carg0 = (*C.graphene_rect_t)(UnsafeRectToGlibNone(a))
@@ -5385,16 +5395,16 @@ func (a *Rect) ContainsRect(b *Rect) bool {
 // 
 // The function takes the following parameters:
 // 
-// 	- b *Rect: a #graphene_rect_t 
+// 	- b Rect: a #graphene_rect_t 
 // 
 // The function returns the following values:
 // 
 // 	- ret bool 
 //
 // Checks whether the two given rectangle are equal.
-func (a *Rect) Equal(b *Rect) bool {
-	var carg0 *C.graphene_rect_t // in, none, record
-	var carg1 *C.graphene_rect_t // in, none, record
+func (a *Rect) Equal(b Rect) bool {
+	var carg0 *C.graphene_rect_t // in, none, converted
+	var carg1 *C.graphene_rect_t // in, none, converted
 	var cret  C.gboolean         // return
 
 	carg0 = (*C.graphene_rect_t)(UnsafeRectToGlibNone(a))
@@ -5420,8 +5430,8 @@ func (a *Rect) Equal(b *Rect) bool {
 //
 // Compute the area of given normalized rectangle.
 func (r *Rect) GetArea() float32 {
-	var carg0 *C.graphene_rect_t // in, none, record
-	var cret  C.gfloat           // return, casted
+	var carg0 *C.graphene_rect_t // in, none, converted
+	var cret  C.gfloat           // return, none, casted
 
 	carg0 = (*C.graphene_rect_t)(UnsafeRectToGlibNone(r))
 
@@ -5442,8 +5452,8 @@ func (r *Rect) GetArea() float32 {
 //
 // Retrieves the normalized height of the given rectangle.
 func (r *Rect) GetHeight() float32 {
-	var carg0 *C.graphene_rect_t // in, none, record
-	var cret  C.gfloat           // return, casted
+	var carg0 *C.graphene_rect_t // in, none, converted
+	var cret  C.gfloat           // return, none, casted
 
 	carg0 = (*C.graphene_rect_t)(UnsafeRectToGlibNone(r))
 
@@ -5460,22 +5470,22 @@ func (r *Rect) GetHeight() float32 {
 // GetVertices wraps graphene_rect_get_vertices
 // The function returns the following values:
 // 
-// 	- vertices []Vec2: return location for an array
+// 	- vertices array: return location for an array
 //  of 4 #graphene_vec2_t 
 //
 // Computes the four vertices of a #graphene_rect_t.
-func (r *Rect) GetVertices() []Vec2 {
-	var carg0 *C.graphene_rect_t // in, none, record
-	var carg1 *C.graphene_vec2_t // out, transfer: none, scope: call, implicit: false, skip: false, optional: false, nullable: false, caller-allocates: true, has closure: false, has destroy: false
+func (r *Rect) GetVertices() array {
+	var carg0 *C.graphene_rect_t // in, none, converted
+	var carg1 array              // out, transfer: none, scope: call, implicit: false, skip: false, optional: false, nullable: false, caller-allocates: true, has closure: false, has destroy: false
 
 	carg0 = (*C.graphene_rect_t)(UnsafeRectToGlibNone(r))
 
 	C.graphene_rect_get_vertices(carg0, &carg1)
 	runtime.KeepAlive(r)
 
-	var vertices []Vec2
+	var vertices array
 
-	panic("unimplemented conversion of *typesystem.Array (graphene_vec2_t*)")
+	panic("unimplemented conversion of array (array)")
 
 	return vertices
 }
@@ -5487,8 +5497,8 @@ func (r *Rect) GetVertices() []Vec2 {
 //
 // Retrieves the normalized width of the given rectangle.
 func (r *Rect) GetWidth() float32 {
-	var carg0 *C.graphene_rect_t // in, none, record
-	var cret  C.gfloat           // return, casted
+	var carg0 *C.graphene_rect_t // in, none, converted
+	var cret  C.gfloat           // return, none, casted
 
 	carg0 = (*C.graphene_rect_t)(UnsafeRectToGlibNone(r))
 
@@ -5510,8 +5520,8 @@ func (r *Rect) GetWidth() float32 {
 // Retrieves the normalized X coordinate of the origin of the given
 // rectangle.
 func (r *Rect) GetX() float32 {
-	var carg0 *C.graphene_rect_t // in, none, record
-	var cret  C.gfloat           // return, casted
+	var carg0 *C.graphene_rect_t // in, none, converted
+	var cret  C.gfloat           // return, none, casted
 
 	carg0 = (*C.graphene_rect_t)(UnsafeRectToGlibNone(r))
 
@@ -5533,8 +5543,8 @@ func (r *Rect) GetX() float32 {
 // Retrieves the normalized Y coordinate of the origin of the given
 // rectangle.
 func (r *Rect) GetY() float32 {
-	var carg0 *C.graphene_rect_t // in, none, record
-	var cret  C.gfloat           // return, casted
+	var carg0 *C.graphene_rect_t // in, none, converted
+	var cret  C.gfloat           // return, none, casted
 
 	carg0 = (*C.graphene_rect_t)(UnsafeRectToGlibNone(r))
 
@@ -5559,19 +5569,19 @@ func (r *Rect) GetY() float32 {
 // 
 // The function returns the following values:
 // 
-// 	- ret *Rect 
+// 	- ret Rect 
 //
 // Initializes the given #graphene_rect_t with the given values.
 // 
 // This function will implicitly normalize the #graphene_rect_t
 // before returning.
-func (r *Rect) Init(x float32, y float32, width float32, height float32) *Rect {
-	var carg0 *C.graphene_rect_t // in, none, record
-	var carg1 C.gfloat           // in, casted
-	var carg2 C.gfloat           // in, casted
-	var carg3 C.gfloat           // in, casted
-	var carg4 C.gfloat           // in, casted
-	var cret  *C.graphene_rect_t // return, none, record
+func (r *Rect) Init(x float32, y float32, width float32, height float32) Rect {
+	var carg0 *C.graphene_rect_t // in, none, converted
+	var carg1 C.gfloat           // in, none, casted
+	var carg2 C.gfloat           // in, none, casted
+	var carg3 C.gfloat           // in, none, casted
+	var carg4 C.gfloat           // in, none, casted
+	var cret  *C.graphene_rect_t // return, none, converted
 
 	carg0 = (*C.graphene_rect_t)(UnsafeRectToGlibNone(r))
 	carg1 = C.gfloat(x)
@@ -5586,7 +5596,7 @@ func (r *Rect) Init(x float32, y float32, width float32, height float32) *Rect {
 	runtime.KeepAlive(width)
 	runtime.KeepAlive(height)
 
-	var ret *Rect
+	var ret Rect
 
 	ret = UnsafeRectFromGlibNone(unsafe.Pointer(cret))
 
@@ -5597,20 +5607,20 @@ func (r *Rect) Init(x float32, y float32, width float32, height float32) *Rect {
 // 
 // The function takes the following parameters:
 // 
-// 	- src *Rect: a #graphene_rect_t 
+// 	- src Rect: a #graphene_rect_t 
 // 
 // The function returns the following values:
 // 
-// 	- ret *Rect 
+// 	- ret Rect 
 //
 // Initializes @r using the given @src rectangle.
 // 
 // This function will implicitly normalize the #graphene_rect_t
 // before returning.
-func (r *Rect) InitFromRect(src *Rect) *Rect {
-	var carg0 *C.graphene_rect_t // in, none, record
-	var carg1 *C.graphene_rect_t // in, none, record
-	var cret  *C.graphene_rect_t // return, none, record
+func (r *Rect) InitFromRect(src Rect) Rect {
+	var carg0 *C.graphene_rect_t // in, none, converted
+	var carg1 *C.graphene_rect_t // in, none, converted
+	var cret  *C.graphene_rect_t // return, none, converted
 
 	carg0 = (*C.graphene_rect_t)(UnsafeRectToGlibNone(r))
 	carg1 = (*C.graphene_rect_t)(UnsafeRectToGlibNone(src))
@@ -5619,7 +5629,7 @@ func (r *Rect) InitFromRect(src *Rect) *Rect {
 	runtime.KeepAlive(r)
 	runtime.KeepAlive(src)
 
-	var ret *Rect
+	var ret Rect
 
 	ret = UnsafeRectFromGlibNone(unsafe.Pointer(cret))
 
@@ -5635,7 +5645,7 @@ func (r *Rect) InitFromRect(src *Rect) *Rect {
 // 
 // The function returns the following values:
 // 
-// 	- ret *Rect 
+// 	- ret Rect 
 //
 // Changes the given rectangle to be smaller, or larger depending on the
 // given inset parameters.
@@ -5651,11 +5661,11 @@ func (r *Rect) InitFromRect(src *Rect) *Rect {
 // 
 // If the size of the resulting inset rectangle has a negative width or
 // height then the size will be set to zero.
-func (r *Rect) Inset(dX float32, dY float32) *Rect {
-	var carg0 *C.graphene_rect_t // in, none, record
-	var carg1 C.gfloat           // in, casted
-	var carg2 C.gfloat           // in, casted
-	var cret  *C.graphene_rect_t // return, none, record
+func (r *Rect) Inset(dX float32, dY float32) Rect {
+	var carg0 *C.graphene_rect_t // in, none, converted
+	var carg1 C.gfloat           // in, none, casted
+	var carg2 C.gfloat           // in, none, casted
+	var cret  *C.graphene_rect_t // return, none, converted
 
 	carg0 = (*C.graphene_rect_t)(UnsafeRectToGlibNone(r))
 	carg1 = C.gfloat(dX)
@@ -5666,7 +5676,7 @@ func (r *Rect) Inset(dX float32, dY float32) *Rect {
 	runtime.KeepAlive(dX)
 	runtime.KeepAlive(dY)
 
-	var ret *Rect
+	var ret Rect
 
 	ret = UnsafeRectFromGlibNone(unsafe.Pointer(cret))
 
@@ -5676,23 +5686,23 @@ func (r *Rect) Inset(dX float32, dY float32) *Rect {
 // Normalize wraps graphene_rect_normalize
 // The function returns the following values:
 // 
-// 	- ret *Rect 
+// 	- ret Rect 
 //
 // Normalizes the passed rectangle.
 // 
 // This function ensures that the size of the rectangle is made of
 // positive values, and that the origin is the top-left corner of
 // the rectangle.
-func (r *Rect) Normalize() *Rect {
-	var carg0 *C.graphene_rect_t // in, none, record
-	var cret  *C.graphene_rect_t // return, none, record
+func (r *Rect) Normalize() Rect {
+	var carg0 *C.graphene_rect_t // in, none, converted
+	var cret  *C.graphene_rect_t // return, none, converted
 
 	carg0 = (*C.graphene_rect_t)(UnsafeRectToGlibNone(r))
 
 	cret = C.graphene_rect_normalize(carg0)
 	runtime.KeepAlive(r)
 
-	var ret *Rect
+	var ret Rect
 
 	ret = UnsafeRectFromGlibNone(unsafe.Pointer(cret))
 
@@ -5708,16 +5718,16 @@ func (r *Rect) Normalize() *Rect {
 // 
 // The function returns the following values:
 // 
-// 	- ret *Rect 
+// 	- ret Rect 
 //
 // Offsets the origin by @d_x and @d_y.
 // 
 // The size of the rectangle is unchanged.
-func (r *Rect) Offset(dX float32, dY float32) *Rect {
-	var carg0 *C.graphene_rect_t // in, none, record
-	var carg1 C.gfloat           // in, casted
-	var carg2 C.gfloat           // in, casted
-	var cret  *C.graphene_rect_t // return, none, record
+func (r *Rect) Offset(dX float32, dY float32) Rect {
+	var carg0 *C.graphene_rect_t // in, none, converted
+	var carg1 C.gfloat           // in, none, casted
+	var carg2 C.gfloat           // in, none, casted
+	var cret  *C.graphene_rect_t // return, none, converted
 
 	carg0 = (*C.graphene_rect_t)(UnsafeRectToGlibNone(r))
 	carg1 = C.gfloat(dX)
@@ -5728,7 +5738,7 @@ func (r *Rect) Offset(dX float32, dY float32) *Rect {
 	runtime.KeepAlive(dX)
 	runtime.KeepAlive(dY)
 
-	var ret *Rect
+	var ret Rect
 
 	ret = UnsafeRectFromGlibNone(unsafe.Pointer(cret))
 
@@ -5738,23 +5748,23 @@ func (r *Rect) Offset(dX float32, dY float32) *Rect {
 // RoundToPixel wraps graphene_rect_round_to_pixel
 // The function returns the following values:
 // 
-// 	- ret *Rect 
+// 	- ret Rect 
 //
 // Rounds the origin and the size of the given rectangle to
 // their nearest integer values; the rounding is guaranteed
 // to be large enough to contain the original rectangle.
 //
 // Deprecated: (since 1.4.0) Use graphene_rect_round() instead
-func (r *Rect) RoundToPixel() *Rect {
-	var carg0 *C.graphene_rect_t // in, none, record
-	var cret  *C.graphene_rect_t // return, none, record
+func (r *Rect) RoundToPixel() Rect {
+	var carg0 *C.graphene_rect_t // in, none, converted
+	var cret  *C.graphene_rect_t // return, none, converted
 
 	carg0 = (*C.graphene_rect_t)(UnsafeRectToGlibNone(r))
 
 	cret = C.graphene_rect_round_to_pixel(carg0)
 	runtime.KeepAlive(r)
 
-	var ret *Rect
+	var ret Rect
 
 	ret = UnsafeRectFromGlibNone(unsafe.Pointer(cret))
 
@@ -5868,7 +5878,7 @@ type size struct {
 }
 
 func marshalSize(p uintptr) (interface{}, error) {
-	b := gobject.ValueFromNative(unsafe.Pointer(p)).Boxed()
+	b := gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Boxed()
 	return UnsafeSizeFromGlibBorrow(b), nil
 }
 
@@ -5912,17 +5922,17 @@ func UnsafeSizeToGlibFull(s *Size) unsafe.Pointer {
 // SizeAlloc wraps graphene_size_alloc
 // The function returns the following values:
 // 
-// 	- ret *Size 
+// 	- ret Size 
 //
 // Allocates a new #graphene_size_t.
 // 
 // The contents of the returned value are undefined.
-func SizeAlloc() *Size {
-	var cret *C.graphene_size_t // return, full, record
+func SizeAlloc() Size {
+	var cret *C.graphene_size_t // return, full, converted
 
 	cret = C.graphene_size_alloc()
 
-	var ret *Size
+	var ret Size
 
 	ret = UnsafeSizeFromGlibFull(unsafe.Pointer(cret))
 
@@ -5969,16 +5979,16 @@ func (s *Size) SetHeight(height float32) {
 // 
 // The function takes the following parameters:
 // 
-// 	- b *Size: a #graphene_size_t 
+// 	- b Size: a #graphene_size_t 
 // 
 // The function returns the following values:
 // 
 // 	- ret bool 
 //
 // Checks whether the two give #graphene_size_t are equal.
-func (a *Size) Equal(b *Size) bool {
-	var carg0 *C.graphene_size_t // in, none, record
-	var carg1 *C.graphene_size_t // in, none, record
+func (a *Size) Equal(b Size) bool {
+	var carg0 *C.graphene_size_t // in, none, converted
+	var carg1 *C.graphene_size_t // in, none, converted
 	var cret  C.gboolean         // return
 
 	carg0 = (*C.graphene_size_t)(UnsafeSizeToGlibNone(a))
@@ -6006,14 +6016,14 @@ func (a *Size) Equal(b *Size) bool {
 // 
 // The function returns the following values:
 // 
-// 	- ret *Size 
+// 	- ret Size 
 //
 // Initializes a #graphene_size_t using the given @width and @height.
-func (s *Size) Init(width float32, height float32) *Size {
-	var carg0 *C.graphene_size_t // in, none, record
-	var carg1 C.gfloat           // in, casted
-	var carg2 C.gfloat           // in, casted
-	var cret  *C.graphene_size_t // return, none, record
+func (s *Size) Init(width float32, height float32) Size {
+	var carg0 *C.graphene_size_t // in, none, converted
+	var carg1 C.gfloat           // in, none, casted
+	var carg2 C.gfloat           // in, none, casted
+	var cret  *C.graphene_size_t // return, none, converted
 
 	carg0 = (*C.graphene_size_t)(UnsafeSizeToGlibNone(s))
 	carg1 = C.gfloat(width)
@@ -6024,7 +6034,7 @@ func (s *Size) Init(width float32, height float32) *Size {
 	runtime.KeepAlive(width)
 	runtime.KeepAlive(height)
 
-	var ret *Size
+	var ret Size
 
 	ret = UnsafeSizeFromGlibNone(unsafe.Pointer(cret))
 
@@ -6035,18 +6045,18 @@ func (s *Size) Init(width float32, height float32) *Size {
 // 
 // The function takes the following parameters:
 // 
-// 	- src *Size: a #graphene_size_t 
+// 	- src Size: a #graphene_size_t 
 // 
 // The function returns the following values:
 // 
-// 	- ret *Size 
+// 	- ret Size 
 //
 // Initializes a #graphene_size_t using the width and height of
 // the given @src.
-func (s *Size) InitFromSize(src *Size) *Size {
-	var carg0 *C.graphene_size_t // in, none, record
-	var carg1 *C.graphene_size_t // in, none, record
-	var cret  *C.graphene_size_t // return, none, record
+func (s *Size) InitFromSize(src Size) Size {
+	var carg0 *C.graphene_size_t // in, none, converted
+	var carg1 *C.graphene_size_t // in, none, converted
+	var cret  *C.graphene_size_t // return, none, converted
 
 	carg0 = (*C.graphene_size_t)(UnsafeSizeToGlibNone(s))
 	carg1 = (*C.graphene_size_t)(UnsafeSizeToGlibNone(src))
@@ -6055,7 +6065,7 @@ func (s *Size) InitFromSize(src *Size) *Size {
 	runtime.KeepAlive(s)
 	runtime.KeepAlive(src)
 
-	var ret *Size
+	var ret Size
 
 	ret = UnsafeSizeFromGlibNone(unsafe.Pointer(cret))
 
@@ -6075,7 +6085,7 @@ type sphere struct {
 }
 
 func marshalSphere(p uintptr) (interface{}, error) {
-	b := gobject.ValueFromNative(unsafe.Pointer(p)).Boxed()
+	b := gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Boxed()
 	return UnsafeSphereFromGlibBorrow(b), nil
 }
 
@@ -6119,17 +6129,17 @@ func UnsafeSphereToGlibFull(s *Sphere) unsafe.Pointer {
 // SphereAlloc wraps graphene_sphere_alloc
 // The function returns the following values:
 // 
-// 	- ret *Sphere 
+// 	- ret Sphere 
 //
 // Allocates a new #graphene_sphere_t.
 // 
 // The contents of the newly allocated structure are undefined.
-func SphereAlloc() *Sphere {
-	var cret *C.graphene_sphere_t // return, full, record
+func SphereAlloc() Sphere {
+	var cret *C.graphene_sphere_t // return, full, converted
 
 	cret = C.graphene_sphere_alloc()
 
-	var ret *Sphere
+	var ret Sphere
 
 	ret = UnsafeSphereFromGlibFull(unsafe.Pointer(cret))
 
@@ -6140,7 +6150,7 @@ func SphereAlloc() *Sphere {
 // 
 // The function takes the following parameters:
 // 
-// 	- point *Point3D: a #graphene_point3d_t 
+// 	- point Point3D: a #graphene_point3d_t 
 // 
 // The function returns the following values:
 // 
@@ -6148,9 +6158,9 @@ func SphereAlloc() *Sphere {
 //
 // Checks whether the given @point is contained in the volume
 // of a #graphene_sphere_t.
-func (s *Sphere) ContainsPoint(point *Point3D) bool {
-	var carg0 *C.graphene_sphere_t  // in, none, record
-	var carg1 *C.graphene_point3d_t // in, none, record
+func (s *Sphere) ContainsPoint(point Point3D) bool {
+	var carg0 *C.graphene_sphere_t  // in, none, converted
+	var carg1 *C.graphene_point3d_t // in, none, converted
 	var cret  C.gboolean            // return
 
 	carg0 = (*C.graphene_sphere_t)(UnsafeSphereToGlibNone(s))
@@ -6173,7 +6183,7 @@ func (s *Sphere) ContainsPoint(point *Point3D) bool {
 // 
 // The function takes the following parameters:
 // 
-// 	- point *Point3D: a #graphene_point3d_t 
+// 	- point Point3D: a #graphene_point3d_t 
 // 
 // The function returns the following values:
 // 
@@ -6181,10 +6191,10 @@ func (s *Sphere) ContainsPoint(point *Point3D) bool {
 //
 // Computes the distance of the given @point from the surface of
 // a #graphene_sphere_t.
-func (s *Sphere) Distance(point *Point3D) float32 {
-	var carg0 *C.graphene_sphere_t  // in, none, record
-	var carg1 *C.graphene_point3d_t // in, none, record
-	var cret  C.gfloat              // return, casted
+func (s *Sphere) Distance(point Point3D) float32 {
+	var carg0 *C.graphene_sphere_t  // in, none, converted
+	var carg1 *C.graphene_point3d_t // in, none, converted
+	var cret  C.gfloat              // return, none, casted
 
 	carg0 = (*C.graphene_sphere_t)(UnsafeSphereToGlibNone(s))
 	carg1 = (*C.graphene_point3d_t)(UnsafePoint3DToGlibNone(point))
@@ -6204,16 +6214,16 @@ func (s *Sphere) Distance(point *Point3D) float32 {
 // 
 // The function takes the following parameters:
 // 
-// 	- b *Sphere: a #graphene_sphere_t 
+// 	- b Sphere: a #graphene_sphere_t 
 // 
 // The function returns the following values:
 // 
 // 	- ret bool 
 //
 // Checks whether two #graphene_sphere_t are equal.
-func (a *Sphere) Equal(b *Sphere) bool {
-	var carg0 *C.graphene_sphere_t // in, none, record
-	var carg1 *C.graphene_sphere_t // in, none, record
+func (a *Sphere) Equal(b Sphere) bool {
+	var carg0 *C.graphene_sphere_t // in, none, converted
+	var carg1 *C.graphene_sphere_t // in, none, converted
 	var cret  C.gboolean           // return
 
 	carg0 = (*C.graphene_sphere_t)(UnsafeSphereToGlibNone(a))
@@ -6239,8 +6249,8 @@ func (a *Sphere) Equal(b *Sphere) bool {
 //
 // Retrieves the radius of a #graphene_sphere_t.
 func (s *Sphere) GetRadius() float32 {
-	var carg0 *C.graphene_sphere_t // in, none, record
-	var cret  C.gfloat             // return, casted
+	var carg0 *C.graphene_sphere_t // in, none, converted
+	var cret  C.gfloat             // return, none, casted
 
 	carg0 = (*C.graphene_sphere_t)(UnsafeSphereToGlibNone(s))
 
@@ -6258,20 +6268,20 @@ func (s *Sphere) GetRadius() float32 {
 // 
 // The function takes the following parameters:
 // 
-// 	- center *Point3D (nullable): the coordinates of the center of the sphere, or %NULL
+// 	- center Point3D (nullable): the coordinates of the center of the sphere, or %NULL
 //   for a center in (0, 0, 0) 
 // 	- radius float32: the radius of the sphere 
 // 
 // The function returns the following values:
 // 
-// 	- ret *Sphere 
+// 	- ret Sphere 
 //
 // Initializes the given #graphene_sphere_t with the given @center and @radius.
-func (s *Sphere) Init(center *Point3D, radius float32) *Sphere {
-	var carg0 *C.graphene_sphere_t  // in, none, record
-	var carg1 *C.graphene_point3d_t // in, none, record, nullable
-	var carg2 C.gfloat              // in, casted
-	var cret  *C.graphene_sphere_t  // return, none, record
+func (s *Sphere) Init(center Point3D, radius float32) Sphere {
+	var carg0 *C.graphene_sphere_t  // in, none, converted
+	var carg1 *C.graphene_point3d_t // in, none, converted, nullable
+	var carg2 C.gfloat              // in, none, casted
+	var cret  *C.graphene_sphere_t  // return, none, converted
 
 	carg0 = (*C.graphene_sphere_t)(UnsafeSphereToGlibNone(s))
 	if center != nil {
@@ -6284,7 +6294,7 @@ func (s *Sphere) Init(center *Point3D, radius float32) *Sphere {
 	runtime.KeepAlive(center)
 	runtime.KeepAlive(radius)
 
-	var ret *Sphere
+	var ret Sphere
 
 	ret = UnsafeSphereFromGlibNone(unsafe.Pointer(cret))
 
@@ -6295,27 +6305,27 @@ func (s *Sphere) Init(center *Point3D, radius float32) *Sphere {
 // 
 // The function takes the following parameters:
 // 
-// 	- points []Point3D: an array of #graphene_point3d_t 
-// 	- center *Point3D (nullable): the center of the sphere 
+// 	- points array: an array of #graphene_point3d_t 
+// 	- center Point3D (nullable): the center of the sphere 
 // 
 // The function returns the following values:
 // 
-// 	- ret *Sphere 
+// 	- ret Sphere 
 //
 // Initializes the given #graphene_sphere_t using the given array
 // of 3D coordinates so that the sphere includes them.
 // 
 // The center of the sphere can either be specified, or will be center
 // of the 3D volume that encompasses all @points.
-func (s *Sphere) InitFromPoints(points []Point3D, center *Point3D) *Sphere {
-	var carg0 *C.graphene_sphere_t  // in, none, record
+func (s *Sphere) InitFromPoints(points array, center Point3D) Sphere {
+	var carg0 *C.graphene_sphere_t  // in, none, converted
 	var carg1 C.guint               // implicit
-	var carg2 *C.graphene_point3d_t // in, transfer: none, scope: call, implicit: false, skip: false, optional: false, nullable: false, caller-allocates: false, has closure: false, has destroy: false
-	var carg3 *C.graphene_point3d_t // in, none, record, nullable
-	var cret  *C.graphene_sphere_t  // return, none, record
+	var carg2 array                 // in, transfer: none, scope: call, implicit: false, skip: false, optional: false, nullable: false, caller-allocates: false, has closure: false, has destroy: false
+	var carg3 *C.graphene_point3d_t // in, none, converted, nullable
+	var cret  *C.graphene_sphere_t  // return, none, converted
 
 	carg0 = (*C.graphene_sphere_t)(UnsafeSphereToGlibNone(s))
-	panic("unimplemented conversion of *typesystem.Array (graphene_point3d_t*)")
+	panic("unimplemented conversion of array (array)")
 	if center != nil {
 		carg3 = (*C.graphene_point3d_t)(UnsafePoint3DToGlibNone(center))
 	}
@@ -6325,7 +6335,7 @@ func (s *Sphere) InitFromPoints(points []Point3D, center *Point3D) *Sphere {
 	runtime.KeepAlive(points)
 	runtime.KeepAlive(center)
 
-	var ret *Sphere
+	var ret Sphere
 
 	ret = UnsafeSphereFromGlibNone(unsafe.Pointer(cret))
 
@@ -6336,27 +6346,27 @@ func (s *Sphere) InitFromPoints(points []Point3D, center *Point3D) *Sphere {
 // 
 // The function takes the following parameters:
 // 
-// 	- vectors []Vec3: an array of #graphene_vec3_t 
-// 	- center *Point3D (nullable): the center of the sphere 
+// 	- vectors array: an array of #graphene_vec3_t 
+// 	- center Point3D (nullable): the center of the sphere 
 // 
 // The function returns the following values:
 // 
-// 	- ret *Sphere 
+// 	- ret Sphere 
 //
 // Initializes the given #graphene_sphere_t using the given array
 // of 3D coordinates so that the sphere includes them.
 // 
 // The center of the sphere can either be specified, or will be center
 // of the 3D volume that encompasses all @vectors.
-func (s *Sphere) InitFromVectors(vectors []Vec3, center *Point3D) *Sphere {
-	var carg0 *C.graphene_sphere_t  // in, none, record
+func (s *Sphere) InitFromVectors(vectors array, center Point3D) Sphere {
+	var carg0 *C.graphene_sphere_t  // in, none, converted
 	var carg1 C.guint               // implicit
-	var carg2 *C.graphene_vec3_t    // in, transfer: none, scope: call, implicit: false, skip: false, optional: false, nullable: false, caller-allocates: false, has closure: false, has destroy: false
-	var carg3 *C.graphene_point3d_t // in, none, record, nullable
-	var cret  *C.graphene_sphere_t  // return, none, record
+	var carg2 array                 // in, transfer: none, scope: call, implicit: false, skip: false, optional: false, nullable: false, caller-allocates: false, has closure: false, has destroy: false
+	var carg3 *C.graphene_point3d_t // in, none, converted, nullable
+	var cret  *C.graphene_sphere_t  // return, none, converted
 
 	carg0 = (*C.graphene_sphere_t)(UnsafeSphereToGlibNone(s))
-	panic("unimplemented conversion of *typesystem.Array (graphene_vec3_t*)")
+	panic("unimplemented conversion of array (array)")
 	if center != nil {
 		carg3 = (*C.graphene_point3d_t)(UnsafePoint3DToGlibNone(center))
 	}
@@ -6366,7 +6376,7 @@ func (s *Sphere) InitFromVectors(vectors []Vec3, center *Point3D) *Sphere {
 	runtime.KeepAlive(vectors)
 	runtime.KeepAlive(center)
 
-	var ret *Sphere
+	var ret Sphere
 
 	ret = UnsafeSphereFromGlibNone(unsafe.Pointer(cret))
 
@@ -6380,7 +6390,7 @@ func (s *Sphere) InitFromVectors(vectors []Vec3, center *Point3D) *Sphere {
 //
 // Checks whether the sphere has a zero radius.
 func (s *Sphere) IsEmpty() bool {
-	var carg0 *C.graphene_sphere_t // in, none, record
+	var carg0 *C.graphene_sphere_t // in, none, converted
 	var cret  C.gboolean           // return
 
 	carg0 = (*C.graphene_sphere_t)(UnsafeSphereToGlibNone(s))
@@ -6410,7 +6420,7 @@ type triangle struct {
 }
 
 func marshalTriangle(p uintptr) (interface{}, error) {
-	b := gobject.ValueFromNative(unsafe.Pointer(p)).Boxed()
+	b := gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Boxed()
 	return UnsafeTriangleFromGlibBorrow(b), nil
 }
 
@@ -6454,17 +6464,17 @@ func UnsafeTriangleToGlibFull(t *Triangle) unsafe.Pointer {
 // TriangleAlloc wraps graphene_triangle_alloc
 // The function returns the following values:
 // 
-// 	- ret *Triangle 
+// 	- ret Triangle 
 //
 // Allocates a new #graphene_triangle_t.
 // 
 // The contents of the returned structure are undefined.
-func TriangleAlloc() *Triangle {
-	var cret *C.graphene_triangle_t // return, full, record
+func TriangleAlloc() Triangle {
+	var cret *C.graphene_triangle_t // return, full, converted
 
 	cret = C.graphene_triangle_alloc()
 
-	var ret *Triangle
+	var ret Triangle
 
 	ret = UnsafeTriangleFromGlibFull(unsafe.Pointer(cret))
 
@@ -6475,16 +6485,16 @@ func TriangleAlloc() *Triangle {
 // 
 // The function takes the following parameters:
 // 
-// 	- p *Point3D: a #graphene_point3d_t 
+// 	- p Point3D: a #graphene_point3d_t 
 // 
 // The function returns the following values:
 // 
 // 	- ret bool 
 //
 // Checks whether the given triangle @t contains the point @p.
-func (t *Triangle) ContainsPoint(p *Point3D) bool {
-	var carg0 *C.graphene_triangle_t // in, none, record
-	var carg1 *C.graphene_point3d_t  // in, none, record
+func (t *Triangle) ContainsPoint(p Point3D) bool {
+	var carg0 *C.graphene_triangle_t // in, none, converted
+	var carg1 *C.graphene_point3d_t  // in, none, converted
 	var cret  C.gboolean             // return
 
 	carg0 = (*C.graphene_triangle_t)(UnsafeTriangleToGlibNone(t))
@@ -6507,16 +6517,16 @@ func (t *Triangle) ContainsPoint(p *Point3D) bool {
 // 
 // The function takes the following parameters:
 // 
-// 	- b *Triangle: a #graphene_triangle_t 
+// 	- b Triangle: a #graphene_triangle_t 
 // 
 // The function returns the following values:
 // 
 // 	- ret bool 
 //
 // Checks whether the two given #graphene_triangle_t are equal.
-func (a *Triangle) Equal(b *Triangle) bool {
-	var carg0 *C.graphene_triangle_t // in, none, record
-	var carg1 *C.graphene_triangle_t // in, none, record
+func (a *Triangle) Equal(b Triangle) bool {
+	var carg0 *C.graphene_triangle_t // in, none, converted
+	var carg1 *C.graphene_triangle_t // in, none, converted
 	var cret  C.gboolean             // return
 
 	carg0 = (*C.graphene_triangle_t)(UnsafeTriangleToGlibNone(a))
@@ -6542,8 +6552,8 @@ func (a *Triangle) Equal(b *Triangle) bool {
 //
 // Computes the area of the given #graphene_triangle_t.
 func (t *Triangle) GetArea() float32 {
-	var carg0 *C.graphene_triangle_t // in, none, record
-	var cret  C.gfloat               // return, casted
+	var carg0 *C.graphene_triangle_t // in, none, converted
+	var cret  C.gfloat               // return, none, casted
 
 	carg0 = (*C.graphene_triangle_t)(UnsafeTriangleToGlibNone(t))
 
@@ -6561,28 +6571,28 @@ func (t *Triangle) GetArea() float32 {
 // 
 // The function takes the following parameters:
 // 
-// 	- a []float32: an array of 3 floating point values 
-// 	- b []float32: an array of 3 floating point values 
-// 	- c []float32: an array of 3 floating point values 
+// 	- a array: an array of 3 floating point values 
+// 	- b array: an array of 3 floating point values 
+// 	- c array: an array of 3 floating point values 
 // 
 // The function returns the following values:
 // 
-// 	- ret *Triangle 
+// 	- ret Triangle 
 //
 // Initializes a #graphene_triangle_t using the three given arrays
 // of floating point values, each representing the coordinates of
 // a point in 3D space.
-func (t *Triangle) InitFromFloat(a []float32, b []float32, c []float32) *Triangle {
-	var carg0 *C.graphene_triangle_t // in, none, record
-	var carg1 *C.gfloat              // in, transfer: none, scope: call, implicit: false, skip: false, optional: false, nullable: false, caller-allocates: false, has closure: false, has destroy: false
-	var carg2 *C.gfloat              // in, transfer: none, scope: call, implicit: false, skip: false, optional: false, nullable: false, caller-allocates: false, has closure: false, has destroy: false
-	var carg3 *C.gfloat              // in, transfer: none, scope: call, implicit: false, skip: false, optional: false, nullable: false, caller-allocates: false, has closure: false, has destroy: false
-	var cret  *C.graphene_triangle_t // return, none, record
+func (t *Triangle) InitFromFloat(a array, b array, c array) Triangle {
+	var carg0 *C.graphene_triangle_t // in, none, converted
+	var carg1 array                  // in, transfer: none, scope: call, implicit: false, skip: false, optional: false, nullable: false, caller-allocates: false, has closure: false, has destroy: false
+	var carg2 array                  // in, transfer: none, scope: call, implicit: false, skip: false, optional: false, nullable: false, caller-allocates: false, has closure: false, has destroy: false
+	var carg3 array                  // in, transfer: none, scope: call, implicit: false, skip: false, optional: false, nullable: false, caller-allocates: false, has closure: false, has destroy: false
+	var cret  *C.graphene_triangle_t // return, none, converted
 
 	carg0 = (*C.graphene_triangle_t)(UnsafeTriangleToGlibNone(t))
-	panic("unimplemented conversion of *typesystem.Array (gfloat*)")
-	panic("unimplemented conversion of *typesystem.Array (gfloat*)")
-	panic("unimplemented conversion of *typesystem.Array (gfloat*)")
+	panic("unimplemented conversion of array (array)")
+	panic("unimplemented conversion of array (array)")
+	panic("unimplemented conversion of array (array)")
 
 	cret = C.graphene_triangle_init_from_float(carg0, carg1, carg2, carg3)
 	runtime.KeepAlive(t)
@@ -6590,7 +6600,7 @@ func (t *Triangle) InitFromFloat(a []float32, b []float32, c []float32) *Triangl
 	runtime.KeepAlive(b)
 	runtime.KeepAlive(c)
 
-	var ret *Triangle
+	var ret Triangle
 
 	ret = UnsafeTriangleFromGlibNone(unsafe.Pointer(cret))
 
@@ -6601,21 +6611,21 @@ func (t *Triangle) InitFromFloat(a []float32, b []float32, c []float32) *Triangl
 // 
 // The function takes the following parameters:
 // 
-// 	- a *Point3D (nullable): a #graphene_point3d_t 
-// 	- b *Point3D (nullable): a #graphene_point3d_t 
-// 	- c *Point3D (nullable): a #graphene_point3d_t 
+// 	- a Point3D (nullable): a #graphene_point3d_t 
+// 	- b Point3D (nullable): a #graphene_point3d_t 
+// 	- c Point3D (nullable): a #graphene_point3d_t 
 // 
 // The function returns the following values:
 // 
-// 	- ret *Triangle 
+// 	- ret Triangle 
 //
 // Initializes a #graphene_triangle_t using the three given 3D points.
-func (t *Triangle) InitFromPoint3D(a *Point3D, b *Point3D, c *Point3D) *Triangle {
-	var carg0 *C.graphene_triangle_t // in, none, record
-	var carg1 *C.graphene_point3d_t  // in, none, record, nullable
-	var carg2 *C.graphene_point3d_t  // in, none, record, nullable
-	var carg3 *C.graphene_point3d_t  // in, none, record, nullable
-	var cret  *C.graphene_triangle_t // return, none, record
+func (t *Triangle) InitFromPoint3D(a Point3D, b Point3D, c Point3D) Triangle {
+	var carg0 *C.graphene_triangle_t // in, none, converted
+	var carg1 *C.graphene_point3d_t  // in, none, converted, nullable
+	var carg2 *C.graphene_point3d_t  // in, none, converted, nullable
+	var carg3 *C.graphene_point3d_t  // in, none, converted, nullable
+	var cret  *C.graphene_triangle_t // return, none, converted
 
 	carg0 = (*C.graphene_triangle_t)(UnsafeTriangleToGlibNone(t))
 	if a != nil {
@@ -6634,7 +6644,7 @@ func (t *Triangle) InitFromPoint3D(a *Point3D, b *Point3D, c *Point3D) *Triangle
 	runtime.KeepAlive(b)
 	runtime.KeepAlive(c)
 
-	var ret *Triangle
+	var ret Triangle
 
 	ret = UnsafeTriangleFromGlibNone(unsafe.Pointer(cret))
 
@@ -6645,21 +6655,21 @@ func (t *Triangle) InitFromPoint3D(a *Point3D, b *Point3D, c *Point3D) *Triangle
 // 
 // The function takes the following parameters:
 // 
-// 	- a *Vec3 (nullable): a #graphene_vec3_t 
-// 	- b *Vec3 (nullable): a #graphene_vec3_t 
-// 	- c *Vec3 (nullable): a #graphene_vec3_t 
+// 	- a Vec3 (nullable): a #graphene_vec3_t 
+// 	- b Vec3 (nullable): a #graphene_vec3_t 
+// 	- c Vec3 (nullable): a #graphene_vec3_t 
 // 
 // The function returns the following values:
 // 
-// 	- ret *Triangle 
+// 	- ret Triangle 
 //
 // Initializes a #graphene_triangle_t using the three given vectors.
-func (t *Triangle) InitFromVec3(a *Vec3, b *Vec3, c *Vec3) *Triangle {
-	var carg0 *C.graphene_triangle_t // in, none, record
-	var carg1 *C.graphene_vec3_t     // in, none, record, nullable
-	var carg2 *C.graphene_vec3_t     // in, none, record, nullable
-	var carg3 *C.graphene_vec3_t     // in, none, record, nullable
-	var cret  *C.graphene_triangle_t // return, none, record
+func (t *Triangle) InitFromVec3(a Vec3, b Vec3, c Vec3) Triangle {
+	var carg0 *C.graphene_triangle_t // in, none, converted
+	var carg1 *C.graphene_vec3_t     // in, none, converted, nullable
+	var carg2 *C.graphene_vec3_t     // in, none, converted, nullable
+	var carg3 *C.graphene_vec3_t     // in, none, converted, nullable
+	var cret  *C.graphene_triangle_t // return, none, converted
 
 	carg0 = (*C.graphene_triangle_t)(UnsafeTriangleToGlibNone(t))
 	if a != nil {
@@ -6678,7 +6688,7 @@ func (t *Triangle) InitFromVec3(a *Vec3, b *Vec3, c *Vec3) *Triangle {
 	runtime.KeepAlive(b)
 	runtime.KeepAlive(c)
 
-	var ret *Triangle
+	var ret Triangle
 
 	ret = UnsafeTriangleFromGlibNone(unsafe.Pointer(cret))
 
@@ -6701,7 +6711,7 @@ type vec2 struct {
 }
 
 func marshalVec2(p uintptr) (interface{}, error) {
-	b := gobject.ValueFromNative(unsafe.Pointer(p)).Boxed()
+	b := gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Boxed()
 	return UnsafeVec2FromGlibBorrow(b), nil
 }
 
@@ -6745,19 +6755,19 @@ func UnsafeVec2ToGlibFull(v *Vec2) unsafe.Pointer {
 // Vec2Alloc wraps graphene_vec2_alloc
 // The function returns the following values:
 // 
-// 	- ret *Vec2 
+// 	- ret Vec2 
 //
 // Allocates a new #graphene_vec2_t structure.
 // 
 // The contents of the returned structure are undefined.
 // 
 // Use graphene_vec2_init() to initialize the vector.
-func Vec2Alloc() *Vec2 {
-	var cret *C.graphene_vec2_t // return, full, record
+func Vec2Alloc() Vec2 {
+	var cret *C.graphene_vec2_t // return, full, converted
 
 	cret = C.graphene_vec2_alloc()
 
-	var ret *Vec2
+	var ret Vec2
 
 	ret = UnsafeVec2FromGlibFull(unsafe.Pointer(cret))
 
@@ -6768,17 +6778,17 @@ func Vec2Alloc() *Vec2 {
 // 
 // The function takes the following parameters:
 // 
-// 	- b *Vec2: a #graphene_vec2_t 
+// 	- b Vec2: a #graphene_vec2_t 
 // 
 // The function returns the following values:
 // 
 // 	- ret float32 
 //
 // Computes the dot product of the two given vectors.
-func (a *Vec2) Dot(b *Vec2) float32 {
-	var carg0 *C.graphene_vec2_t // in, none, record
-	var carg1 *C.graphene_vec2_t // in, none, record
-	var cret  C.gfloat           // return, casted
+func (a *Vec2) Dot(b Vec2) float32 {
+	var carg0 *C.graphene_vec2_t // in, none, converted
+	var carg1 *C.graphene_vec2_t // in, none, converted
+	var cret  C.gfloat           // return, none, casted
 
 	carg0 = (*C.graphene_vec2_t)(UnsafeVec2ToGlibNone(a))
 	carg1 = (*C.graphene_vec2_t)(UnsafeVec2ToGlibNone(b))
@@ -6798,16 +6808,16 @@ func (a *Vec2) Dot(b *Vec2) float32 {
 // 
 // The function takes the following parameters:
 // 
-// 	- v2 *Vec2: a #graphene_vec2_t 
+// 	- v2 Vec2: a #graphene_vec2_t 
 // 
 // The function returns the following values:
 // 
 // 	- ret bool 
 //
 // Checks whether the two given #graphene_vec2_t are equal.
-func (v1 *Vec2) Equal(v2 *Vec2) bool {
-	var carg0 *C.graphene_vec2_t // in, none, record
-	var carg1 *C.graphene_vec2_t // in, none, record
+func (v1 *Vec2) Equal(v2 Vec2) bool {
+	var carg0 *C.graphene_vec2_t // in, none, converted
+	var carg1 *C.graphene_vec2_t // in, none, converted
 	var cret  C.gboolean         // return
 
 	carg0 = (*C.graphene_vec2_t)(UnsafeVec2ToGlibNone(v1))
@@ -6833,8 +6843,8 @@ func (v1 *Vec2) Equal(v2 *Vec2) bool {
 //
 // Retrieves the X component of the #graphene_vec2_t.
 func (v *Vec2) GetX() float32 {
-	var carg0 *C.graphene_vec2_t // in, none, record
-	var cret  C.gfloat           // return, casted
+	var carg0 *C.graphene_vec2_t // in, none, converted
+	var cret  C.gfloat           // return, none, casted
 
 	carg0 = (*C.graphene_vec2_t)(UnsafeVec2ToGlibNone(v))
 
@@ -6855,8 +6865,8 @@ func (v *Vec2) GetX() float32 {
 //
 // Retrieves the Y component of the #graphene_vec2_t.
 func (v *Vec2) GetY() float32 {
-	var carg0 *C.graphene_vec2_t // in, none, record
-	var cret  C.gfloat           // return, casted
+	var carg0 *C.graphene_vec2_t // in, none, converted
+	var cret  C.gfloat           // return, none, casted
 
 	carg0 = (*C.graphene_vec2_t)(UnsafeVec2ToGlibNone(v))
 
@@ -6879,16 +6889,16 @@ func (v *Vec2) GetY() float32 {
 // 
 // The function returns the following values:
 // 
-// 	- ret *Vec2 
+// 	- ret Vec2 
 //
 // Initializes a #graphene_vec2_t using the given values.
 // 
 // This function can be called multiple times.
-func (v *Vec2) Init(x float32, y float32) *Vec2 {
-	var carg0 *C.graphene_vec2_t // in, none, record
-	var carg1 C.gfloat           // in, casted
-	var carg2 C.gfloat           // in, casted
-	var cret  *C.graphene_vec2_t // return, none, record
+func (v *Vec2) Init(x float32, y float32) Vec2 {
+	var carg0 *C.graphene_vec2_t // in, none, converted
+	var carg1 C.gfloat           // in, none, casted
+	var carg2 C.gfloat           // in, none, casted
+	var cret  *C.graphene_vec2_t // return, none, converted
 
 	carg0 = (*C.graphene_vec2_t)(UnsafeVec2ToGlibNone(v))
 	carg1 = C.gfloat(x)
@@ -6899,7 +6909,7 @@ func (v *Vec2) Init(x float32, y float32) *Vec2 {
 	runtime.KeepAlive(x)
 	runtime.KeepAlive(y)
 
-	var ret *Vec2
+	var ret Vec2
 
 	ret = UnsafeVec2FromGlibNone(unsafe.Pointer(cret))
 
@@ -6910,27 +6920,27 @@ func (v *Vec2) Init(x float32, y float32) *Vec2 {
 // 
 // The function takes the following parameters:
 // 
-// 	- src []float32: an array of floating point values
+// 	- src array: an array of floating point values
 //   with at least two elements 
 // 
 // The function returns the following values:
 // 
-// 	- ret *Vec2 
+// 	- ret Vec2 
 //
 // Initializes @v with the contents of the given array.
-func (v *Vec2) InitFromFloat(src []float32) *Vec2 {
-	var carg0 *C.graphene_vec2_t // in, none, record
-	var carg1 *C.gfloat          // in, transfer: none, scope: call, implicit: false, skip: false, optional: false, nullable: false, caller-allocates: false, has closure: false, has destroy: false
-	var cret  *C.graphene_vec2_t // return, none, record
+func (v *Vec2) InitFromFloat(src array) Vec2 {
+	var carg0 *C.graphene_vec2_t // in, none, converted
+	var carg1 array              // in, transfer: none, scope: call, implicit: false, skip: false, optional: false, nullable: false, caller-allocates: false, has closure: false, has destroy: false
+	var cret  *C.graphene_vec2_t // return, none, converted
 
 	carg0 = (*C.graphene_vec2_t)(UnsafeVec2ToGlibNone(v))
-	panic("unimplemented conversion of *typesystem.Array (gfloat*)")
+	panic("unimplemented conversion of array (array)")
 
 	cret = C.graphene_vec2_init_from_float(carg0, carg1)
 	runtime.KeepAlive(v)
 	runtime.KeepAlive(src)
 
-	var ret *Vec2
+	var ret Vec2
 
 	ret = UnsafeVec2FromGlibNone(unsafe.Pointer(cret))
 
@@ -6941,17 +6951,17 @@ func (v *Vec2) InitFromFloat(src []float32) *Vec2 {
 // 
 // The function takes the following parameters:
 // 
-// 	- src *Vec2: a #graphene_vec2_t 
+// 	- src Vec2: a #graphene_vec2_t 
 // 
 // The function returns the following values:
 // 
-// 	- ret *Vec2 
+// 	- ret Vec2 
 //
 // Copies the contents of @src into @v.
-func (v *Vec2) InitFromVec2(src *Vec2) *Vec2 {
-	var carg0 *C.graphene_vec2_t // in, none, record
-	var carg1 *C.graphene_vec2_t // in, none, record
-	var cret  *C.graphene_vec2_t // return, none, record
+func (v *Vec2) InitFromVec2(src Vec2) Vec2 {
+	var carg0 *C.graphene_vec2_t // in, none, converted
+	var carg1 *C.graphene_vec2_t // in, none, converted
+	var cret  *C.graphene_vec2_t // return, none, converted
 
 	carg0 = (*C.graphene_vec2_t)(UnsafeVec2ToGlibNone(v))
 	carg1 = (*C.graphene_vec2_t)(UnsafeVec2ToGlibNone(src))
@@ -6960,7 +6970,7 @@ func (v *Vec2) InitFromVec2(src *Vec2) *Vec2 {
 	runtime.KeepAlive(v)
 	runtime.KeepAlive(src)
 
-	var ret *Vec2
+	var ret Vec2
 
 	ret = UnsafeVec2FromGlibNone(unsafe.Pointer(cret))
 
@@ -6974,8 +6984,8 @@ func (v *Vec2) InitFromVec2(src *Vec2) *Vec2 {
 //
 // Computes the length of the given vector.
 func (v *Vec2) Length() float32 {
-	var carg0 *C.graphene_vec2_t // in, none, record
-	var cret  C.gfloat           // return, casted
+	var carg0 *C.graphene_vec2_t // in, none, converted
+	var cret  C.gfloat           // return, none, casted
 
 	carg0 = (*C.graphene_vec2_t)(UnsafeVec2ToGlibNone(v))
 
@@ -6993,7 +7003,7 @@ func (v *Vec2) Length() float32 {
 // 
 // The function takes the following parameters:
 // 
-// 	- v2 *Vec2: a #graphene_vec2_t 
+// 	- v2 Vec2: a #graphene_vec2_t 
 // 	- epsilon float32: the threshold between the two vectors 
 // 
 // The function returns the following values:
@@ -7002,10 +7012,10 @@ func (v *Vec2) Length() float32 {
 //
 // Compares the two given #graphene_vec2_t vectors and checks
 // whether their values are within the given @epsilon.
-func (v1 *Vec2) Near(v2 *Vec2, epsilon float32) bool {
-	var carg0 *C.graphene_vec2_t // in, none, record
-	var carg1 *C.graphene_vec2_t // in, none, record
-	var carg2 C.gfloat           // in, casted
+func (v1 *Vec2) Near(v2 Vec2, epsilon float32) bool {
+	var carg0 *C.graphene_vec2_t // in, none, converted
+	var carg1 *C.graphene_vec2_t // in, none, converted
+	var carg2 C.gfloat           // in, none, casted
 	var cret  C.gboolean         // return
 
 	carg0 = (*C.graphene_vec2_t)(UnsafeVec2ToGlibNone(v1))
@@ -7029,22 +7039,22 @@ func (v1 *Vec2) Near(v2 *Vec2, epsilon float32) bool {
 // ToFloat wraps graphene_vec2_to_float
 // The function returns the following values:
 // 
-// 	- dest []float32: return location
+// 	- dest array: return location
 //   for an array of floating point values with at least 2 elements 
 //
 // Stores the components of @v into an array.
-func (v *Vec2) ToFloat() []float32 {
-	var carg0 *C.graphene_vec2_t // in, none, record
-	var carg1 *C.gfloat          // out, transfer: none, scope: call, implicit: false, skip: false, optional: false, nullable: false, caller-allocates: true, has closure: false, has destroy: false
+func (v *Vec2) ToFloat() array {
+	var carg0 *C.graphene_vec2_t // in, none, converted
+	var carg1 array              // out, transfer: none, scope: call, implicit: false, skip: false, optional: false, nullable: false, caller-allocates: true, has closure: false, has destroy: false
 
 	carg0 = (*C.graphene_vec2_t)(UnsafeVec2ToGlibNone(v))
 
 	C.graphene_vec2_to_float(carg0, &carg1)
 	runtime.KeepAlive(v)
 
-	var dest []float32
+	var dest array
 
-	panic("unimplemented conversion of *typesystem.Array (gfloat*)")
+	panic("unimplemented conversion of array (array)")
 
 	return dest
 }
@@ -7065,7 +7075,7 @@ type vec3 struct {
 }
 
 func marshalVec3(p uintptr) (interface{}, error) {
-	b := gobject.ValueFromNative(unsafe.Pointer(p)).Boxed()
+	b := gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Boxed()
 	return UnsafeVec3FromGlibBorrow(b), nil
 }
 
@@ -7109,19 +7119,19 @@ func UnsafeVec3ToGlibFull(v *Vec3) unsafe.Pointer {
 // Vec3Alloc wraps graphene_vec3_alloc
 // The function returns the following values:
 // 
-// 	- ret *Vec3 
+// 	- ret Vec3 
 //
 // Allocates a new #graphene_vec3_t structure.
 // 
 // The contents of the returned structure are undefined.
 // 
 // Use graphene_vec3_init() to initialize the vector.
-func Vec3Alloc() *Vec3 {
-	var cret *C.graphene_vec3_t // return, full, record
+func Vec3Alloc() Vec3 {
+	var cret *C.graphene_vec3_t // return, full, converted
 
 	cret = C.graphene_vec3_alloc()
 
-	var ret *Vec3
+	var ret Vec3
 
 	ret = UnsafeVec3FromGlibFull(unsafe.Pointer(cret))
 
@@ -7132,17 +7142,17 @@ func Vec3Alloc() *Vec3 {
 // 
 // The function takes the following parameters:
 // 
-// 	- b *Vec3: a #graphene_vec3_t 
+// 	- b Vec3: a #graphene_vec3_t 
 // 
 // The function returns the following values:
 // 
 // 	- ret float32 
 //
 // Computes the dot product of the two given vectors.
-func (a *Vec3) Dot(b *Vec3) float32 {
-	var carg0 *C.graphene_vec3_t // in, none, record
-	var carg1 *C.graphene_vec3_t // in, none, record
-	var cret  C.gfloat           // return, casted
+func (a *Vec3) Dot(b Vec3) float32 {
+	var carg0 *C.graphene_vec3_t // in, none, converted
+	var carg1 *C.graphene_vec3_t // in, none, converted
+	var cret  C.gfloat           // return, none, casted
 
 	carg0 = (*C.graphene_vec3_t)(UnsafeVec3ToGlibNone(a))
 	carg1 = (*C.graphene_vec3_t)(UnsafeVec3ToGlibNone(b))
@@ -7162,16 +7172,16 @@ func (a *Vec3) Dot(b *Vec3) float32 {
 // 
 // The function takes the following parameters:
 // 
-// 	- v2 *Vec3: a #graphene_vec3_t 
+// 	- v2 Vec3: a #graphene_vec3_t 
 // 
 // The function returns the following values:
 // 
 // 	- ret bool 
 //
 // Checks whether the two given #graphene_vec3_t are equal.
-func (v1 *Vec3) Equal(v2 *Vec3) bool {
-	var carg0 *C.graphene_vec3_t // in, none, record
-	var carg1 *C.graphene_vec3_t // in, none, record
+func (v1 *Vec3) Equal(v2 Vec3) bool {
+	var carg0 *C.graphene_vec3_t // in, none, converted
+	var carg1 *C.graphene_vec3_t // in, none, converted
 	var cret  C.gboolean         // return
 
 	carg0 = (*C.graphene_vec3_t)(UnsafeVec3ToGlibNone(v1))
@@ -7197,8 +7207,8 @@ func (v1 *Vec3) Equal(v2 *Vec3) bool {
 //
 // Retrieves the first component of the given vector @v.
 func (v *Vec3) GetX() float32 {
-	var carg0 *C.graphene_vec3_t // in, none, record
-	var cret  C.gfloat           // return, casted
+	var carg0 *C.graphene_vec3_t // in, none, converted
+	var cret  C.gfloat           // return, none, casted
 
 	carg0 = (*C.graphene_vec3_t)(UnsafeVec3ToGlibNone(v))
 
@@ -7219,8 +7229,8 @@ func (v *Vec3) GetX() float32 {
 //
 // Retrieves the second component of the given vector @v.
 func (v *Vec3) GetY() float32 {
-	var carg0 *C.graphene_vec3_t // in, none, record
-	var cret  C.gfloat           // return, casted
+	var carg0 *C.graphene_vec3_t // in, none, converted
+	var cret  C.gfloat           // return, none, casted
 
 	carg0 = (*C.graphene_vec3_t)(UnsafeVec3ToGlibNone(v))
 
@@ -7241,8 +7251,8 @@ func (v *Vec3) GetY() float32 {
 //
 // Retrieves the third component of the given vector @v.
 func (v *Vec3) GetZ() float32 {
-	var carg0 *C.graphene_vec3_t // in, none, record
-	var cret  C.gfloat           // return, casted
+	var carg0 *C.graphene_vec3_t // in, none, converted
+	var cret  C.gfloat           // return, none, casted
 
 	carg0 = (*C.graphene_vec3_t)(UnsafeVec3ToGlibNone(v))
 
@@ -7266,17 +7276,17 @@ func (v *Vec3) GetZ() float32 {
 // 
 // The function returns the following values:
 // 
-// 	- ret *Vec3 
+// 	- ret Vec3 
 //
 // Initializes a #graphene_vec3_t using the given values.
 // 
 // This function can be called multiple times.
-func (v *Vec3) Init(x float32, y float32, z float32) *Vec3 {
-	var carg0 *C.graphene_vec3_t // in, none, record
-	var carg1 C.gfloat           // in, casted
-	var carg2 C.gfloat           // in, casted
-	var carg3 C.gfloat           // in, casted
-	var cret  *C.graphene_vec3_t // return, none, record
+func (v *Vec3) Init(x float32, y float32, z float32) Vec3 {
+	var carg0 *C.graphene_vec3_t // in, none, converted
+	var carg1 C.gfloat           // in, none, casted
+	var carg2 C.gfloat           // in, none, casted
+	var carg3 C.gfloat           // in, none, casted
+	var cret  *C.graphene_vec3_t // return, none, converted
 
 	carg0 = (*C.graphene_vec3_t)(UnsafeVec3ToGlibNone(v))
 	carg1 = C.gfloat(x)
@@ -7289,7 +7299,7 @@ func (v *Vec3) Init(x float32, y float32, z float32) *Vec3 {
 	runtime.KeepAlive(y)
 	runtime.KeepAlive(z)
 
-	var ret *Vec3
+	var ret Vec3
 
 	ret = UnsafeVec3FromGlibNone(unsafe.Pointer(cret))
 
@@ -7300,26 +7310,26 @@ func (v *Vec3) Init(x float32, y float32, z float32) *Vec3 {
 // 
 // The function takes the following parameters:
 // 
-// 	- src []float32: an array of 3 floating point values 
+// 	- src array: an array of 3 floating point values 
 // 
 // The function returns the following values:
 // 
-// 	- ret *Vec3 
+// 	- ret Vec3 
 //
 // Initializes a #graphene_vec3_t with the values from an array.
-func (v *Vec3) InitFromFloat(src []float32) *Vec3 {
-	var carg0 *C.graphene_vec3_t // in, none, record
-	var carg1 *C.gfloat          // in, transfer: none, scope: call, implicit: false, skip: false, optional: false, nullable: false, caller-allocates: false, has closure: false, has destroy: false
-	var cret  *C.graphene_vec3_t // return, none, record
+func (v *Vec3) InitFromFloat(src array) Vec3 {
+	var carg0 *C.graphene_vec3_t // in, none, converted
+	var carg1 array              // in, transfer: none, scope: call, implicit: false, skip: false, optional: false, nullable: false, caller-allocates: false, has closure: false, has destroy: false
+	var cret  *C.graphene_vec3_t // return, none, converted
 
 	carg0 = (*C.graphene_vec3_t)(UnsafeVec3ToGlibNone(v))
-	panic("unimplemented conversion of *typesystem.Array (gfloat*)")
+	panic("unimplemented conversion of array (array)")
 
 	cret = C.graphene_vec3_init_from_float(carg0, carg1)
 	runtime.KeepAlive(v)
 	runtime.KeepAlive(src)
 
-	var ret *Vec3
+	var ret Vec3
 
 	ret = UnsafeVec3FromGlibNone(unsafe.Pointer(cret))
 
@@ -7330,18 +7340,18 @@ func (v *Vec3) InitFromFloat(src []float32) *Vec3 {
 // 
 // The function takes the following parameters:
 // 
-// 	- src *Vec3: a #graphene_vec3_t 
+// 	- src Vec3: a #graphene_vec3_t 
 // 
 // The function returns the following values:
 // 
-// 	- ret *Vec3 
+// 	- ret Vec3 
 //
 // Initializes a #graphene_vec3_t with the values of another
 // #graphene_vec3_t.
-func (v *Vec3) InitFromVec3(src *Vec3) *Vec3 {
-	var carg0 *C.graphene_vec3_t // in, none, record
-	var carg1 *C.graphene_vec3_t // in, none, record
-	var cret  *C.graphene_vec3_t // return, none, record
+func (v *Vec3) InitFromVec3(src Vec3) Vec3 {
+	var carg0 *C.graphene_vec3_t // in, none, converted
+	var carg1 *C.graphene_vec3_t // in, none, converted
+	var cret  *C.graphene_vec3_t // return, none, converted
 
 	carg0 = (*C.graphene_vec3_t)(UnsafeVec3ToGlibNone(v))
 	carg1 = (*C.graphene_vec3_t)(UnsafeVec3ToGlibNone(src))
@@ -7350,7 +7360,7 @@ func (v *Vec3) InitFromVec3(src *Vec3) *Vec3 {
 	runtime.KeepAlive(v)
 	runtime.KeepAlive(src)
 
-	var ret *Vec3
+	var ret Vec3
 
 	ret = UnsafeVec3FromGlibNone(unsafe.Pointer(cret))
 
@@ -7364,8 +7374,8 @@ func (v *Vec3) InitFromVec3(src *Vec3) *Vec3 {
 //
 // Retrieves the length of the given vector @v.
 func (v *Vec3) Length() float32 {
-	var carg0 *C.graphene_vec3_t // in, none, record
-	var cret  C.gfloat           // return, casted
+	var carg0 *C.graphene_vec3_t // in, none, converted
+	var cret  C.gfloat           // return, none, casted
 
 	carg0 = (*C.graphene_vec3_t)(UnsafeVec3ToGlibNone(v))
 
@@ -7383,7 +7393,7 @@ func (v *Vec3) Length() float32 {
 // 
 // The function takes the following parameters:
 // 
-// 	- v2 *Vec3: a #graphene_vec3_t 
+// 	- v2 Vec3: a #graphene_vec3_t 
 // 	- epsilon float32: the threshold between the two vectors 
 // 
 // The function returns the following values:
@@ -7392,10 +7402,10 @@ func (v *Vec3) Length() float32 {
 //
 // Compares the two given #graphene_vec3_t vectors and checks
 // whether their values are within the given @epsilon.
-func (v1 *Vec3) Near(v2 *Vec3, epsilon float32) bool {
-	var carg0 *C.graphene_vec3_t // in, none, record
-	var carg1 *C.graphene_vec3_t // in, none, record
-	var carg2 C.gfloat           // in, casted
+func (v1 *Vec3) Near(v2 Vec3, epsilon float32) bool {
+	var carg0 *C.graphene_vec3_t // in, none, converted
+	var carg1 *C.graphene_vec3_t // in, none, converted
+	var carg2 C.gfloat           // in, none, casted
 	var cret  C.gboolean         // return
 
 	carg0 = (*C.graphene_vec3_t)(UnsafeVec3ToGlibNone(v1))
@@ -7419,22 +7429,22 @@ func (v1 *Vec3) Near(v2 *Vec3, epsilon float32) bool {
 // ToFloat wraps graphene_vec3_to_float
 // The function returns the following values:
 // 
-// 	- dest []float32: return location for
+// 	- dest array: return location for
 //   an array of floating point values 
 //
 // Copies the components of a #graphene_vec3_t into the given array.
-func (v *Vec3) ToFloat() []float32 {
-	var carg0 *C.graphene_vec3_t // in, none, record
-	var carg1 *C.gfloat          // out, transfer: none, scope: call, implicit: false, skip: false, optional: false, nullable: false, caller-allocates: true, has closure: false, has destroy: false
+func (v *Vec3) ToFloat() array {
+	var carg0 *C.graphene_vec3_t // in, none, converted
+	var carg1 array              // out, transfer: none, scope: call, implicit: false, skip: false, optional: false, nullable: false, caller-allocates: true, has closure: false, has destroy: false
 
 	carg0 = (*C.graphene_vec3_t)(UnsafeVec3ToGlibNone(v))
 
 	C.graphene_vec3_to_float(carg0, &carg1)
 	runtime.KeepAlive(v)
 
-	var dest []float32
+	var dest array
 
-	panic("unimplemented conversion of *typesystem.Array (gfloat*)")
+	panic("unimplemented conversion of array (array)")
 
 	return dest
 }
@@ -7455,7 +7465,7 @@ type vec4 struct {
 }
 
 func marshalVec4(p uintptr) (interface{}, error) {
-	b := gobject.ValueFromNative(unsafe.Pointer(p)).Boxed()
+	b := gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Boxed()
 	return UnsafeVec4FromGlibBorrow(b), nil
 }
 
@@ -7499,19 +7509,19 @@ func UnsafeVec4ToGlibFull(v *Vec4) unsafe.Pointer {
 // Vec4Alloc wraps graphene_vec4_alloc
 // The function returns the following values:
 // 
-// 	- ret *Vec4 
+// 	- ret Vec4 
 //
 // Allocates a new #graphene_vec4_t structure.
 // 
 // The contents of the returned structure are undefined.
 // 
 // Use graphene_vec4_init() to initialize the vector.
-func Vec4Alloc() *Vec4 {
-	var cret *C.graphene_vec4_t // return, full, record
+func Vec4Alloc() Vec4 {
+	var cret *C.graphene_vec4_t // return, full, converted
 
 	cret = C.graphene_vec4_alloc()
 
-	var ret *Vec4
+	var ret Vec4
 
 	ret = UnsafeVec4FromGlibFull(unsafe.Pointer(cret))
 
@@ -7522,17 +7532,17 @@ func Vec4Alloc() *Vec4 {
 // 
 // The function takes the following parameters:
 // 
-// 	- b *Vec4: a #graphene_vec4_t 
+// 	- b Vec4: a #graphene_vec4_t 
 // 
 // The function returns the following values:
 // 
 // 	- ret float32 
 //
 // Computes the dot product of the two given vectors.
-func (a *Vec4) Dot(b *Vec4) float32 {
-	var carg0 *C.graphene_vec4_t // in, none, record
-	var carg1 *C.graphene_vec4_t // in, none, record
-	var cret  C.gfloat           // return, casted
+func (a *Vec4) Dot(b Vec4) float32 {
+	var carg0 *C.graphene_vec4_t // in, none, converted
+	var carg1 *C.graphene_vec4_t // in, none, converted
+	var cret  C.gfloat           // return, none, casted
 
 	carg0 = (*C.graphene_vec4_t)(UnsafeVec4ToGlibNone(a))
 	carg1 = (*C.graphene_vec4_t)(UnsafeVec4ToGlibNone(b))
@@ -7552,16 +7562,16 @@ func (a *Vec4) Dot(b *Vec4) float32 {
 // 
 // The function takes the following parameters:
 // 
-// 	- v2 *Vec4: a #graphene_vec4_t 
+// 	- v2 Vec4: a #graphene_vec4_t 
 // 
 // The function returns the following values:
 // 
 // 	- ret bool 
 //
 // Checks whether the two given #graphene_vec4_t are equal.
-func (v1 *Vec4) Equal(v2 *Vec4) bool {
-	var carg0 *C.graphene_vec4_t // in, none, record
-	var carg1 *C.graphene_vec4_t // in, none, record
+func (v1 *Vec4) Equal(v2 Vec4) bool {
+	var carg0 *C.graphene_vec4_t // in, none, converted
+	var carg1 *C.graphene_vec4_t // in, none, converted
 	var cret  C.gboolean         // return
 
 	carg0 = (*C.graphene_vec4_t)(UnsafeVec4ToGlibNone(v1))
@@ -7587,8 +7597,8 @@ func (v1 *Vec4) Equal(v2 *Vec4) bool {
 //
 // Retrieves the value of the fourth component of the given #graphene_vec4_t.
 func (v *Vec4) GetW() float32 {
-	var carg0 *C.graphene_vec4_t // in, none, record
-	var cret  C.gfloat           // return, casted
+	var carg0 *C.graphene_vec4_t // in, none, converted
+	var cret  C.gfloat           // return, none, casted
 
 	carg0 = (*C.graphene_vec4_t)(UnsafeVec4ToGlibNone(v))
 
@@ -7609,8 +7619,8 @@ func (v *Vec4) GetW() float32 {
 //
 // Retrieves the value of the first component of the given #graphene_vec4_t.
 func (v *Vec4) GetX() float32 {
-	var carg0 *C.graphene_vec4_t // in, none, record
-	var cret  C.gfloat           // return, casted
+	var carg0 *C.graphene_vec4_t // in, none, converted
+	var cret  C.gfloat           // return, none, casted
 
 	carg0 = (*C.graphene_vec4_t)(UnsafeVec4ToGlibNone(v))
 
@@ -7631,8 +7641,8 @@ func (v *Vec4) GetX() float32 {
 //
 // Retrieves the value of the second component of the given #graphene_vec4_t.
 func (v *Vec4) GetY() float32 {
-	var carg0 *C.graphene_vec4_t // in, none, record
-	var cret  C.gfloat           // return, casted
+	var carg0 *C.graphene_vec4_t // in, none, converted
+	var cret  C.gfloat           // return, none, casted
 
 	carg0 = (*C.graphene_vec4_t)(UnsafeVec4ToGlibNone(v))
 
@@ -7653,8 +7663,8 @@ func (v *Vec4) GetY() float32 {
 //
 // Retrieves the value of the third component of the given #graphene_vec4_t.
 func (v *Vec4) GetZ() float32 {
-	var carg0 *C.graphene_vec4_t // in, none, record
-	var cret  C.gfloat           // return, casted
+	var carg0 *C.graphene_vec4_t // in, none, converted
+	var cret  C.gfloat           // return, none, casted
 
 	carg0 = (*C.graphene_vec4_t)(UnsafeVec4ToGlibNone(v))
 
@@ -7679,18 +7689,18 @@ func (v *Vec4) GetZ() float32 {
 // 
 // The function returns the following values:
 // 
-// 	- ret *Vec4 
+// 	- ret Vec4 
 //
 // Initializes a #graphene_vec4_t using the given values.
 // 
 // This function can be called multiple times.
-func (v *Vec4) Init(x float32, y float32, z float32, w float32) *Vec4 {
-	var carg0 *C.graphene_vec4_t // in, none, record
-	var carg1 C.gfloat           // in, casted
-	var carg2 C.gfloat           // in, casted
-	var carg3 C.gfloat           // in, casted
-	var carg4 C.gfloat           // in, casted
-	var cret  *C.graphene_vec4_t // return, none, record
+func (v *Vec4) Init(x float32, y float32, z float32, w float32) Vec4 {
+	var carg0 *C.graphene_vec4_t // in, none, converted
+	var carg1 C.gfloat           // in, none, casted
+	var carg2 C.gfloat           // in, none, casted
+	var carg3 C.gfloat           // in, none, casted
+	var carg4 C.gfloat           // in, none, casted
+	var cret  *C.graphene_vec4_t // return, none, converted
 
 	carg0 = (*C.graphene_vec4_t)(UnsafeVec4ToGlibNone(v))
 	carg1 = C.gfloat(x)
@@ -7705,7 +7715,7 @@ func (v *Vec4) Init(x float32, y float32, z float32, w float32) *Vec4 {
 	runtime.KeepAlive(z)
 	runtime.KeepAlive(w)
 
-	var ret *Vec4
+	var ret Vec4
 
 	ret = UnsafeVec4FromGlibNone(unsafe.Pointer(cret))
 
@@ -7716,26 +7726,26 @@ func (v *Vec4) Init(x float32, y float32, z float32, w float32) *Vec4 {
 // 
 // The function takes the following parameters:
 // 
-// 	- src []float32: an array of four floating point values 
+// 	- src array: an array of four floating point values 
 // 
 // The function returns the following values:
 // 
-// 	- ret *Vec4 
+// 	- ret Vec4 
 //
 // Initializes a #graphene_vec4_t with the values inside the given array.
-func (v *Vec4) InitFromFloat(src []float32) *Vec4 {
-	var carg0 *C.graphene_vec4_t // in, none, record
-	var carg1 *C.gfloat          // in, transfer: none, scope: call, implicit: false, skip: false, optional: false, nullable: false, caller-allocates: false, has closure: false, has destroy: false
-	var cret  *C.graphene_vec4_t // return, none, record
+func (v *Vec4) InitFromFloat(src array) Vec4 {
+	var carg0 *C.graphene_vec4_t // in, none, converted
+	var carg1 array              // in, transfer: none, scope: call, implicit: false, skip: false, optional: false, nullable: false, caller-allocates: false, has closure: false, has destroy: false
+	var cret  *C.graphene_vec4_t // return, none, converted
 
 	carg0 = (*C.graphene_vec4_t)(UnsafeVec4ToGlibNone(v))
-	panic("unimplemented conversion of *typesystem.Array (gfloat*)")
+	panic("unimplemented conversion of array (array)")
 
 	cret = C.graphene_vec4_init_from_float(carg0, carg1)
 	runtime.KeepAlive(v)
 	runtime.KeepAlive(src)
 
-	var ret *Vec4
+	var ret Vec4
 
 	ret = UnsafeVec4FromGlibNone(unsafe.Pointer(cret))
 
@@ -7746,22 +7756,22 @@ func (v *Vec4) InitFromFloat(src []float32) *Vec4 {
 // 
 // The function takes the following parameters:
 // 
-// 	- src *Vec2: a #graphene_vec2_t 
+// 	- src Vec2: a #graphene_vec2_t 
 // 	- z float32: the value for the third component of @v 
 // 	- w float32: the value for the fourth component of @v 
 // 
 // The function returns the following values:
 // 
-// 	- ret *Vec4 
+// 	- ret Vec4 
 //
 // Initializes a #graphene_vec4_t using the components of a
 // #graphene_vec2_t and the values of @z and @w.
-func (v *Vec4) InitFromVec2(src *Vec2, z float32, w float32) *Vec4 {
-	var carg0 *C.graphene_vec4_t // in, none, record
-	var carg1 *C.graphene_vec2_t // in, none, record
-	var carg2 C.gfloat           // in, casted
-	var carg3 C.gfloat           // in, casted
-	var cret  *C.graphene_vec4_t // return, none, record
+func (v *Vec4) InitFromVec2(src Vec2, z float32, w float32) Vec4 {
+	var carg0 *C.graphene_vec4_t // in, none, converted
+	var carg1 *C.graphene_vec2_t // in, none, converted
+	var carg2 C.gfloat           // in, none, casted
+	var carg3 C.gfloat           // in, none, casted
+	var cret  *C.graphene_vec4_t // return, none, converted
 
 	carg0 = (*C.graphene_vec4_t)(UnsafeVec4ToGlibNone(v))
 	carg1 = (*C.graphene_vec2_t)(UnsafeVec2ToGlibNone(src))
@@ -7774,7 +7784,7 @@ func (v *Vec4) InitFromVec2(src *Vec2, z float32, w float32) *Vec4 {
 	runtime.KeepAlive(z)
 	runtime.KeepAlive(w)
 
-	var ret *Vec4
+	var ret Vec4
 
 	ret = UnsafeVec4FromGlibNone(unsafe.Pointer(cret))
 
@@ -7785,20 +7795,20 @@ func (v *Vec4) InitFromVec2(src *Vec2, z float32, w float32) *Vec4 {
 // 
 // The function takes the following parameters:
 // 
-// 	- src *Vec3: a #graphene_vec3_t 
+// 	- src Vec3: a #graphene_vec3_t 
 // 	- w float32: the value for the fourth component of @v 
 // 
 // The function returns the following values:
 // 
-// 	- ret *Vec4 
+// 	- ret Vec4 
 //
 // Initializes a #graphene_vec4_t using the components of a
 // #graphene_vec3_t and the value of @w.
-func (v *Vec4) InitFromVec3(src *Vec3, w float32) *Vec4 {
-	var carg0 *C.graphene_vec4_t // in, none, record
-	var carg1 *C.graphene_vec3_t // in, none, record
-	var carg2 C.gfloat           // in, casted
-	var cret  *C.graphene_vec4_t // return, none, record
+func (v *Vec4) InitFromVec3(src Vec3, w float32) Vec4 {
+	var carg0 *C.graphene_vec4_t // in, none, converted
+	var carg1 *C.graphene_vec3_t // in, none, converted
+	var carg2 C.gfloat           // in, none, casted
+	var cret  *C.graphene_vec4_t // return, none, converted
 
 	carg0 = (*C.graphene_vec4_t)(UnsafeVec4ToGlibNone(v))
 	carg1 = (*C.graphene_vec3_t)(UnsafeVec3ToGlibNone(src))
@@ -7809,7 +7819,7 @@ func (v *Vec4) InitFromVec3(src *Vec3, w float32) *Vec4 {
 	runtime.KeepAlive(src)
 	runtime.KeepAlive(w)
 
-	var ret *Vec4
+	var ret Vec4
 
 	ret = UnsafeVec4FromGlibNone(unsafe.Pointer(cret))
 
@@ -7820,18 +7830,18 @@ func (v *Vec4) InitFromVec3(src *Vec3, w float32) *Vec4 {
 // 
 // The function takes the following parameters:
 // 
-// 	- src *Vec4: a #graphene_vec4_t 
+// 	- src Vec4: a #graphene_vec4_t 
 // 
 // The function returns the following values:
 // 
-// 	- ret *Vec4 
+// 	- ret Vec4 
 //
 // Initializes a #graphene_vec4_t using the components of
 // another #graphene_vec4_t.
-func (v *Vec4) InitFromVec4(src *Vec4) *Vec4 {
-	var carg0 *C.graphene_vec4_t // in, none, record
-	var carg1 *C.graphene_vec4_t // in, none, record
-	var cret  *C.graphene_vec4_t // return, none, record
+func (v *Vec4) InitFromVec4(src Vec4) Vec4 {
+	var carg0 *C.graphene_vec4_t // in, none, converted
+	var carg1 *C.graphene_vec4_t // in, none, converted
+	var cret  *C.graphene_vec4_t // return, none, converted
 
 	carg0 = (*C.graphene_vec4_t)(UnsafeVec4ToGlibNone(v))
 	carg1 = (*C.graphene_vec4_t)(UnsafeVec4ToGlibNone(src))
@@ -7840,7 +7850,7 @@ func (v *Vec4) InitFromVec4(src *Vec4) *Vec4 {
 	runtime.KeepAlive(v)
 	runtime.KeepAlive(src)
 
-	var ret *Vec4
+	var ret Vec4
 
 	ret = UnsafeVec4FromGlibNone(unsafe.Pointer(cret))
 
@@ -7854,8 +7864,8 @@ func (v *Vec4) InitFromVec4(src *Vec4) *Vec4 {
 //
 // Computes the length of the given #graphene_vec4_t.
 func (v *Vec4) Length() float32 {
-	var carg0 *C.graphene_vec4_t // in, none, record
-	var cret  C.gfloat           // return, casted
+	var carg0 *C.graphene_vec4_t // in, none, converted
+	var cret  C.gfloat           // return, none, casted
 
 	carg0 = (*C.graphene_vec4_t)(UnsafeVec4ToGlibNone(v))
 
@@ -7873,7 +7883,7 @@ func (v *Vec4) Length() float32 {
 // 
 // The function takes the following parameters:
 // 
-// 	- v2 *Vec4: a #graphene_vec4_t 
+// 	- v2 Vec4: a #graphene_vec4_t 
 // 	- epsilon float32: the threshold between the two vectors 
 // 
 // The function returns the following values:
@@ -7882,10 +7892,10 @@ func (v *Vec4) Length() float32 {
 //
 // Compares the two given #graphene_vec4_t vectors and checks
 // whether their values are within the given @epsilon.
-func (v1 *Vec4) Near(v2 *Vec4, epsilon float32) bool {
-	var carg0 *C.graphene_vec4_t // in, none, record
-	var carg1 *C.graphene_vec4_t // in, none, record
-	var carg2 C.gfloat           // in, casted
+func (v1 *Vec4) Near(v2 Vec4, epsilon float32) bool {
+	var carg0 *C.graphene_vec4_t // in, none, converted
+	var carg1 *C.graphene_vec4_t // in, none, converted
+	var carg2 C.gfloat           // in, none, casted
 	var cret  C.gboolean         // return
 
 	carg0 = (*C.graphene_vec4_t)(UnsafeVec4ToGlibNone(v1))
@@ -7909,23 +7919,23 @@ func (v1 *Vec4) Near(v2 *Vec4, epsilon float32) bool {
 // ToFloat wraps graphene_vec4_to_float
 // The function returns the following values:
 // 
-// 	- dest []float32: return location for
+// 	- dest array: return location for
 //   an array of floating point values 
 //
 // Stores the components of the given #graphene_vec4_t into an array
 // of floating point values.
-func (v *Vec4) ToFloat() []float32 {
-	var carg0 *C.graphene_vec4_t // in, none, record
-	var carg1 *C.gfloat          // out, transfer: none, scope: call, implicit: false, skip: false, optional: false, nullable: false, caller-allocates: true, has closure: false, has destroy: false
+func (v *Vec4) ToFloat() array {
+	var carg0 *C.graphene_vec4_t // in, none, converted
+	var carg1 array              // out, transfer: none, scope: call, implicit: false, skip: false, optional: false, nullable: false, caller-allocates: true, has closure: false, has destroy: false
 
 	carg0 = (*C.graphene_vec4_t)(UnsafeVec4ToGlibNone(v))
 
 	C.graphene_vec4_to_float(carg0, &carg1)
 	runtime.KeepAlive(v)
 
-	var dest []float32
+	var dest array
 
-	panic("unimplemented conversion of *typesystem.Array (gfloat*)")
+	panic("unimplemented conversion of array (array)")
 
 	return dest
 }

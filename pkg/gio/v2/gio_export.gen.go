@@ -76,7 +76,7 @@ func _gotk4_gio2_BusNameVanishedCallback(carg1 *C.GDBusConnection, carg2 *C.gcha
 }
 
 //export _gotk4_gio2_CancellableSourceFunc
-func _gotk4_gio2_CancellableSourceFunc(carg1 *C.GCancellable, carg2 C.gpointer) (cret C.gboolean) {
+func _gotk4_gio2_CancellableSourceFunc(carg1 *C.Cancellable, carg2 C.gpointer) (cret C.gboolean) {
 
 
 	ret := fn(cancellable, data)
@@ -142,7 +142,7 @@ func _gotk4_gio2_DBusSignalCallback(carg1 *C.GDBusConnection, carg2 *C.gchar, ca
 }
 
 //export _gotk4_gio2_DBusSubtreeDispatchFunc
-func _gotk4_gio2_DBusSubtreeDispatchFunc(carg1 *C.GDBusConnection, carg2 *C.gchar, carg3 *C.gchar, carg4 *C.gchar, carg5 *C.gchar, carg6 C.gpointer, carg7 C.gpointer) (cret *C.GDBusInterfaceVTable) {
+func _gotk4_gio2_DBusSubtreeDispatchFunc(carg1 *C.GDBusConnection, carg2 *C.gchar, carg3 *C.gchar, carg4 *C.gchar, carg5 *C.gchar, carg6 *C.gpointer, carg7 C.gpointer) (cret *C.GDBusInterfaceVTable) {
 
 
 	ret := fn(connection, sender, objectPath, interfaceName, node, outUserData)
@@ -153,7 +153,7 @@ func _gotk4_gio2_DBusSubtreeDispatchFunc(carg1 *C.GDBusConnection, carg2 *C.gcha
 }
 
 //export _gotk4_gio2_DBusSubtreeEnumerateFunc
-func _gotk4_gio2_DBusSubtreeEnumerateFunc(carg1 *C.GDBusConnection, carg2 *C.gchar, carg3 *C.gchar, carg4 C.gpointer) (cret **C.gchar) {
+func _gotk4_gio2_DBusSubtreeEnumerateFunc(carg1 *C.GDBusConnection, carg2 *C.gchar, carg3 *C.gchar, carg4 C.gpointer) (cret array) {
 
 
 	ret := fn(connection, sender, objectPath)
@@ -164,21 +164,10 @@ func _gotk4_gio2_DBusSubtreeEnumerateFunc(carg1 *C.GDBusConnection, carg2 *C.gch
 }
 
 //export _gotk4_gio2_DBusSubtreeIntrospectFunc
-func _gotk4_gio2_DBusSubtreeIntrospectFunc(carg1 *C.GDBusConnection, carg2 *C.gchar, carg3 *C.gchar, carg4 *C.gchar, carg5 C.gpointer) (cret *C.GDBusInterfaceInfo) {
+func _gotk4_gio2_DBusSubtreeIntrospectFunc(carg1 *C.GDBusConnection, carg2 *C.gchar, carg3 *C.gchar, carg4 *C.gchar, carg5 C.gpointer) (cret array) {
 
 
 	ret := fn(connection, sender, objectPath, node)
-
-
-
-	return cret
-}
-
-//export _gotk4_gio2_DatagramBasedSourceFunc
-func _gotk4_gio2_DatagramBasedSourceFunc(carg1 *C.GDatagramBased, carg2 C.GIOCondition, carg3 C.gpointer) (cret C.gboolean) {
-
-
-	ret := fn(datagramBased, condition, data)
 
 
 
@@ -230,7 +219,7 @@ func _gotk4_gio2_FileReadMoreCallback(carg1 *C.gchar, carg2 C.gint64, carg3 C.gp
 }
 
 //export _gotk4_gio2_IOSchedulerJobFunc
-func _gotk4_gio2_IOSchedulerJobFunc(carg1 *C.GIOSchedulerJob, carg2 *C.GCancellable, carg3 C.gpointer) (cret C.gboolean) {
+func _gotk4_gio2_IOSchedulerJobFunc(carg1 *C.GIOSchedulerJob, carg2 *C.Cancellable, carg3 C.gpointer) (cret C.gboolean) {
 
 
 	ret := fn(job, cancellable, data)
@@ -273,17 +262,6 @@ func _gotk4_gio2_SettingsBindGetMapping(carg1 *C.GValue, carg2 *C.GVariant, carg
 	return cret
 }
 
-//export _gotk4_gio2_SettingsBindSetMapping
-func _gotk4_gio2_SettingsBindSetMapping(carg1 *C.GValue, carg2 *C.GVariantType, carg3 C.gpointer) (cret *C.GVariant) {
-
-
-	ret := fn(value, expectedType)
-
-
-
-	return cret
-}
-
 //export _gotk4_gio2_SettingsGetMapping
 func _gotk4_gio2_SettingsGetMapping(carg1 *C.GVariant, carg2 C.gpointer, carg3 C.gpointer) (cret C.gboolean) {
 
@@ -296,32 +274,10 @@ func _gotk4_gio2_SettingsGetMapping(carg1 *C.GVariant, carg2 C.gpointer, carg3 C
 }
 
 //export _gotk4_gio2_SimpleAsyncThreadFunc
-func _gotk4_gio2_SimpleAsyncThreadFunc(carg1 *C.GSimpleAsyncResult, carg2 *C.GObject, carg3 *C.GCancellable) (cret C.void) {
+func _gotk4_gio2_SimpleAsyncThreadFunc(carg1 *C.GSimpleAsyncResult, carg2 *C.GObject, carg3 *C.Cancellable) (cret C.void) {
 
 
 	fn(res, object, cancellable)
-
-
-
-	return cret
-}
-
-//export _gotk4_gio2_SocketSourceFunc
-func _gotk4_gio2_SocketSourceFunc(carg1 *C.GSocket, carg2 C.GIOCondition, carg3 C.gpointer) (cret C.gboolean) {
-
-
-	ret := fn(socket, condition, data)
-
-
-
-	return cret
-}
-
-//export _gotk4_gio2_TaskThreadFunc
-func _gotk4_gio2_TaskThreadFunc(carg1 *C.GTask, carg2 *C.GObject, carg3 C.gpointer, carg4 *C.GCancellable) (cret C.void) {
-
-
-	fn(task, sourceObject, taskData, cancellable)
 
 
 

@@ -1,57 +1,12 @@
 package file
 
 import (
+	"fmt"
 	"io"
 
 	"github.com/diamondburned/gotk4/gir/girgen/file/internal"
+	"github.com/diamondburned/gotk4/gir/girgen/typesystem"
 )
-
-// File contains the shared logic between the file.go and file_export.go
-type File struct {
-	cPreamble internal.CodeWriter
-
-	goContents internal.CodeWriter
-
-	goImports goImports
-}
-
-var ImportAnonymous = "_"
-
-var coreglibPkg = "github.com/diamondburned/gotk4/pkg/core"
-
-func (d *File) GoImportCore(pkg string) {
-	d.GoImport(coreglibPkg + "/" + pkg)
-}
-
-func (d *File) GoImport(pkg string) {
-	d.GoImportAliased(pkg, "")
-}
-
-func (d *File) GoImportAnonymous(pkg string) {
-	d.GoImportAliased(pkg, ImportAnonymous)
-}
-
-func (d *File) GoImportAliased(pkg string, alias string) {
-	if d.goImports == nil {
-		d.goImports = make(goImports)
-	}
-
-	currentImport, ok := d.goImports[pkg]
-
-	if ok && alias == ImportAnonymous {
-		return // keep already imported name
-	}
-
-	if ok && currentImport != alias {
-		panic("tried to import the same module twice with different aliases")
-	}
-
-	if ok {
-		return // already in map with the same name
-	}
-
-	d.goImports[pkg] = alias
-}
 
 type CodeWriter interface {
 	io.Writer
@@ -59,22 +14,80 @@ type CodeWriter interface {
 	Unindent()
 	NewSection()
 }
+type File interface {
+	GoImportCore(pkg string)
+	GoImportNamespace(ns *typesystem.Namespace)
+	GoImport(pkg string)
 
-func (d *File) Go() CodeWriter {
+	Go() CodeWriter
+	C() CodeWriter
+}
+
+// file contains the shared logic between the file.go and file_export.go
+type file struct {
+	cPreamble internal.CodeWriter
+
+	goContents internal.CodeWriter
+
+	currentNs *typesystem.Namespace
+
+	importBaseURIs map[string]string
+
+	goImports goImports
+}
+
+var coreglibPkg = "github.com/diamondburned/gotk4/pkg/core"
+
+func (d *file) GoImportCore(pkg string) {
+	d.GoImport(coreglibPkg + "/" + pkg)
+}
+
+func (d *file) GoImportNamespace(ns *typesystem.Namespace) {
+	if ns == nil {
+		return
+	}
+	if ns == d.currentNs {
+		return
+	}
+
+	base, ok := d.importBaseURIs[fmt.Sprintf("%s-%d", ns.Name, ns.Version.Major)]
+
+	if !ok {
+		panic("tried to import unknown namespace")
+	}
+
+	path := base + "/" + ns.GoName
+
+	if ns.Version.Major > 1 {
+		path = fmt.Sprintf("%s/v%d", path, ns.Version.Major)
+	}
+
+	d.GoImport(path)
+}
+
+func (d *file) GoImport(pkg string) {
+	if d.goImports == nil {
+		d.goImports = make(goImports)
+	}
+
+	d.goImports[pkg] = ""
+}
+
+func (d *file) Go() CodeWriter {
 	return &d.goContents
 }
 
-func (d *File) C() CodeWriter {
+func (d *file) C() CodeWriter {
 	return &d.cPreamble
 }
 
-func (d *File) empty() bool {
+func (d *file) empty() bool {
 	return len(d.goImports) == 0 &&
 		d.cPreamble.Len() == 0 &&
 		d.goContents.Len() == 0
 }
 
-func (d *File) c() io.Reader {
+func (d *file) c() io.Reader {
 	if d.cPreamble.Len() == 0 {
 		return empty
 	}

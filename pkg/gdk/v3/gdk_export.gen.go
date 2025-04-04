@@ -9,17 +9,6 @@ import (
 // #include <gdk/gdk.h>
 import "C"
 
-//export _gotk4_gdk3_EventFunc
-func _gotk4_gdk3_EventFunc(carg1 *C.GdkEvent, carg2 C.gpointer) (cret C.void) {
-
-
-	fn(event)
-
-
-
-	return cret
-}
-
 //export _gotk4_gdk3_SeatGrabPrepareFunc
 func _gotk4_gdk3_SeatGrabPrepareFunc(carg1 *C.GdkSeat, carg2 *C.GdkWindow, carg3 C.gpointer) (cret C.void) {
 
@@ -36,17 +25,6 @@ func _gotk4_gdk3_WindowChildFunc(carg1 *C.GdkWindow, carg2 C.gpointer) (cret C.g
 
 
 	ret := fn(window)
-
-
-
-	return cret
-}
-
-//export _gotk4_gdk3_FilterFunc
-func _gotk4_gdk3_FilterFunc(carg1 *C.GdkXEvent, carg2 *C.GdkEvent, carg3 C.gpointer) (cret C.GdkFilterReturn) {
-
-
-	ret := fn(xevent, event)
 
 
 

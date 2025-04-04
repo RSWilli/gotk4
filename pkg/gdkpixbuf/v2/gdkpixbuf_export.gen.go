@@ -32,7 +32,7 @@ func _gotk4_gdkpixbuf2_PixbufModuleFillVtableFunc(carg1 *C.GdkPixbufModule) (cre
 }
 
 //export _gotk4_gdkpixbuf2_PixbufModuleIncrementLoadFunc
-func _gotk4_gdkpixbuf2_PixbufModuleIncrementLoadFunc(carg1 C.gpointer, carg2 *C.guint8, carg3 C.guint, _cerr *C.GError) (cret C.gboolean) {
+func _gotk4_gdkpixbuf2_PixbufModuleIncrementLoadFunc(carg1 C.gpointer, carg2 array, carg3 C.guint, _cerr *C.GError) (cret C.gboolean) {
 
 
 	ret, _goerr := fn(context, buf)
@@ -43,7 +43,7 @@ func _gotk4_gdkpixbuf2_PixbufModuleIncrementLoadFunc(carg1 C.gpointer, carg2 *C.
 }
 
 //export _gotk4_gdkpixbuf2_PixbufModuleLoadAnimationFunc
-func _gotk4_gdkpixbuf2_PixbufModuleLoadAnimationFunc(carg1 C.gpointer, _cerr *C.GError) (cret *C.GdkPixbufAnimation) {
+func _gotk4_gdkpixbuf2_PixbufModuleLoadAnimationFunc(carg1 *C.gpointer, _cerr *C.GError) (cret *C.GdkPixbufAnimation) {
 
 
 	ret, _goerr := fn(f)
@@ -54,7 +54,7 @@ func _gotk4_gdkpixbuf2_PixbufModuleLoadAnimationFunc(carg1 C.gpointer, _cerr *C.
 }
 
 //export _gotk4_gdkpixbuf2_PixbufModuleLoadFunc
-func _gotk4_gdkpixbuf2_PixbufModuleLoadFunc(carg1 C.gpointer, _cerr *C.GError) (cret *C.GdkPixbuf) {
+func _gotk4_gdkpixbuf2_PixbufModuleLoadFunc(carg1 *C.gpointer, _cerr *C.GError) (cret *C.GdkPixbuf) {
 
 
 	ret, _goerr := fn(f)
@@ -65,7 +65,7 @@ func _gotk4_gdkpixbuf2_PixbufModuleLoadFunc(carg1 C.gpointer, _cerr *C.GError) (
 }
 
 //export _gotk4_gdkpixbuf2_PixbufModuleLoadXPMDataFunc
-func _gotk4_gdkpixbuf2_PixbufModuleLoadXPMDataFunc(carg1 **C.gchar) (cret *C.GdkPixbuf) {
+func _gotk4_gdkpixbuf2_PixbufModuleLoadXPMDataFunc(carg1 array) (cret *C.GdkPixbuf) {
 
 
 	ret := fn(data)
@@ -87,7 +87,7 @@ func _gotk4_gdkpixbuf2_PixbufModulePreparedFunc(carg1 *C.GdkPixbuf, carg2 *C.Gdk
 }
 
 //export _gotk4_gdkpixbuf2_PixbufModuleSaveFunc
-func _gotk4_gdkpixbuf2_PixbufModuleSaveFunc(carg1 C.gpointer, carg2 *C.GdkPixbuf, carg3 **C.gchar, carg4 **C.gchar, _cerr *C.GError) (cret C.gboolean) {
+func _gotk4_gdkpixbuf2_PixbufModuleSaveFunc(carg1 *C.gpointer, carg2 *C.GdkPixbuf, carg3 array, carg4 array, _cerr *C.GError) (cret C.gboolean) {
 
 
 	ret, _goerr := fn(f, pixbuf, paramKeys, paramValues)
@@ -102,6 +102,17 @@ func _gotk4_gdkpixbuf2_PixbufModuleSaveOptionSupportedFunc(carg1 *C.gchar) (cret
 
 
 	ret := fn(optionKey)
+
+
+
+	return cret
+}
+
+//export _gotk4_gdkpixbuf2_PixbufModuleSizeFunc
+func _gotk4_gdkpixbuf2_PixbufModuleSizeFunc(carg1 *C.int, carg2 *C.int, carg3 C.gpointer) (cret C.void) {
+
+
+	fn(width, height)
 
 
 
@@ -131,7 +142,7 @@ func _gotk4_gdkpixbuf2_PixbufModuleUpdatedFunc(carg1 *C.GdkPixbuf, carg2 C.int, 
 }
 
 //export _gotk4_gdkpixbuf2_PixbufSaveFunc
-func _gotk4_gdkpixbuf2_PixbufSaveFunc(carg1 *C.gchar, carg2 C.gsize, carg3 *C.GError, carg4 C.gpointer) (cret C.gboolean) {
+func _gotk4_gdkpixbuf2_PixbufSaveFunc(carg1 array, carg2 C.gsize, carg3 *C.GError, carg4 C.gpointer) (cret C.gboolean) {
 
 
 	err, ret := fn(buf)

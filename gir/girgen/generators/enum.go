@@ -208,6 +208,12 @@ func (g *EnumGenerator) Generate(w *file.Package) {
 		w.RegisterGType(g)
 		g.Marshaler.Generate(w)
 	}
+
+	fmt.Fprint(w.Go(), "\n")
+
+	fmt.Fprintf(w.Go(), "func (e %s) SetValue(v *%s) {\n", g.GoType(0), g.Value().NamespacedGoType(0))
+	fmt.Fprintf(w.Go(), "\tpanic(\"TODO\")\n")
+	fmt.Fprintf(w.Go(), "}\n\n")
 }
 
 func NewEnumGenerator(enum *typesystem.Enum) *EnumGenerator {

@@ -4,7 +4,13 @@ package gdk
 
 import (
 	"unsafe"
+	"github.com/diamondburned/gotk4/pkg/gobject/v2"
 	"runtime"
+	"github.com/diamondburned/gotk4/pkg/core/gbox"
+	"github.com/diamondburned/gotk4/pkg/gdkpixbuf/v2"
+	"github.com/diamondburned/gotk4/pkg/pango"
+	"github.com/diamondburned/gotk4/pkg/gio/v2"
+	"github.com/diamondburned/gotk4/pkg/glib/v2"
 )
 
 // #cgo pkg-config: gtk4
@@ -4868,8 +4874,13 @@ const (
 )
 
 func marshalAxisUse(p uintptr) (interface{}, error) {
-	return AxisUse(gobject.ValueFromNative(unsafe.Pointer(p)).Enum()), nil
+	return AxisUse(gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Enum()), nil
 }
+
+func (e AxisUse) SetValue(v *gobject.Value) {
+	panic("TODO")
+}
+
 // CicpRange wraps GdkCicpRange
 //
 // The values of this enumeration describe whether image data uses
@@ -4892,8 +4903,13 @@ const (
 )
 
 func marshalCicpRange(p uintptr) (interface{}, error) {
-	return CicpRange(gobject.ValueFromNative(unsafe.Pointer(p)).Enum()), nil
+	return CicpRange(gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Enum()), nil
 }
+
+func (e CicpRange) SetValue(v *gobject.Value) {
+	panic("TODO")
+}
+
 // CrossingMode wraps GdkCrossingMode
 //
 // Specifies the crossing mode for enter and leave events.
@@ -4944,8 +4960,13 @@ const (
 )
 
 func marshalCrossingMode(p uintptr) (interface{}, error) {
-	return CrossingMode(gobject.ValueFromNative(unsafe.Pointer(p)).Enum()), nil
+	return CrossingMode(gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Enum()), nil
 }
+
+func (e CrossingMode) SetValue(v *gobject.Value) {
+	panic("TODO")
+}
+
 // DevicePadFeature wraps GdkDevicePadFeature
 //
 // A pad feature.
@@ -4967,8 +4988,13 @@ const (
 )
 
 func marshalDevicePadFeature(p uintptr) (interface{}, error) {
-	return DevicePadFeature(gobject.ValueFromNative(unsafe.Pointer(p)).Enum()), nil
+	return DevicePadFeature(gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Enum()), nil
 }
+
+func (e DevicePadFeature) SetValue(v *gobject.Value) {
+	panic("TODO")
+}
+
 // DeviceToolType wraps GdkDeviceToolType
 //
 // Indicates the specific type of tool being used being a tablet. Such as an
@@ -5011,8 +5037,13 @@ const (
 )
 
 func marshalDeviceToolType(p uintptr) (interface{}, error) {
-	return DeviceToolType(gobject.ValueFromNative(unsafe.Pointer(p)).Enum()), nil
+	return DeviceToolType(gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Enum()), nil
 }
+
+func (e DeviceToolType) SetValue(v *gobject.Value) {
+	panic("TODO")
+}
+
 // DmabufError wraps GdkDmabufError
 //
 // Error enumeration for `GdkDmabufTexture`.
@@ -5036,8 +5067,13 @@ const (
 )
 
 func marshalDmabufError(p uintptr) (interface{}, error) {
-	return DmabufError(gobject.ValueFromNative(unsafe.Pointer(p)).Enum()), nil
+	return DmabufError(gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Enum()), nil
 }
+
+func (e DmabufError) SetValue(v *gobject.Value) {
+	panic("TODO")
+}
+
 // DragCancelReason wraps GdkDragCancelReason
 //
 // Used in `GdkDrag` to the reason of a cancelled DND operation.
@@ -5059,8 +5095,13 @@ const (
 )
 
 func marshalDragCancelReason(p uintptr) (interface{}, error) {
-	return DragCancelReason(gobject.ValueFromNative(unsafe.Pointer(p)).Enum()), nil
+	return DragCancelReason(gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Enum()), nil
 }
+
+func (e DragCancelReason) SetValue(v *gobject.Value) {
+	panic("TODO")
+}
+
 // EventType wraps GdkEventType
 //
 // Specifies the type of the event.
@@ -5198,8 +5239,13 @@ const (
 )
 
 func marshalEventType(p uintptr) (interface{}, error) {
-	return EventType(gobject.ValueFromNative(unsafe.Pointer(p)).Enum()), nil
+	return EventType(gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Enum()), nil
 }
+
+func (e EventType) SetValue(v *gobject.Value) {
+	panic("TODO")
+}
+
 // FullscreenMode wraps GdkFullscreenMode
 //
 // Indicates which monitor a surface should span over when in fullscreen mode.
@@ -5217,8 +5263,13 @@ const (
 )
 
 func marshalFullscreenMode(p uintptr) (interface{}, error) {
-	return FullscreenMode(gobject.ValueFromNative(unsafe.Pointer(p)).Enum()), nil
+	return FullscreenMode(gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Enum()), nil
 }
+
+func (e FullscreenMode) SetValue(v *gobject.Value) {
+	panic("TODO")
+}
+
 // GLError wraps GdkGLError
 //
 // Error enumeration for `GdkGLContext`.
@@ -5248,8 +5299,13 @@ const (
 )
 
 func marshalGLError(p uintptr) (interface{}, error) {
-	return GLError(gobject.ValueFromNative(unsafe.Pointer(p)).Enum()), nil
+	return GLError(gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Enum()), nil
 }
+
+func (e GLError) SetValue(v *gobject.Value) {
+	panic("TODO")
+}
+
 // Gravity wraps GdkGravity
 //
 // Defines the reference point of a surface and is used in `GdkPopupLayout`.
@@ -5300,8 +5356,13 @@ const (
 )
 
 func marshalGravity(p uintptr) (interface{}, error) {
-	return Gravity(gobject.ValueFromNative(unsafe.Pointer(p)).Enum()), nil
+	return Gravity(gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Enum()), nil
 }
+
+func (e Gravity) SetValue(v *gobject.Value) {
+	panic("TODO")
+}
+
 // InputSource wraps GdkInputSource
 //
 // An enumeration describing the type of an input device in general terms.
@@ -5343,8 +5404,13 @@ const (
 )
 
 func marshalInputSource(p uintptr) (interface{}, error) {
-	return InputSource(gobject.ValueFromNative(unsafe.Pointer(p)).Enum()), nil
+	return InputSource(gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Enum()), nil
 }
+
+func (e InputSource) SetValue(v *gobject.Value) {
+	panic("TODO")
+}
+
 // KeyMatch wraps GdkKeyMatch
 //
 // Describes how well an event matches a given keyval and modifiers.
@@ -5369,8 +5435,13 @@ const (
 )
 
 func marshalKeyMatch(p uintptr) (interface{}, error) {
-	return KeyMatch(gobject.ValueFromNative(unsafe.Pointer(p)).Enum()), nil
+	return KeyMatch(gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Enum()), nil
 }
+
+func (e KeyMatch) SetValue(v *gobject.Value) {
+	panic("TODO")
+}
+
 // MemoryFormat wraps GdkMemoryFormat
 //
 // `GdkMemoryFormat` describes formats that image data can have in memory.
@@ -5536,8 +5607,13 @@ const (
 )
 
 func marshalMemoryFormat(p uintptr) (interface{}, error) {
-	return MemoryFormat(gobject.ValueFromNative(unsafe.Pointer(p)).Enum()), nil
+	return MemoryFormat(gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Enum()), nil
 }
+
+func (e MemoryFormat) SetValue(v *gobject.Value) {
+	panic("TODO")
+}
+
 // NotifyType wraps GdkNotifyType
 //
 // Specifies the kind of crossing for enter and leave events.
@@ -5581,8 +5657,13 @@ const (
 )
 
 func marshalNotifyType(p uintptr) (interface{}, error) {
-	return NotifyType(gobject.ValueFromNative(unsafe.Pointer(p)).Enum()), nil
+	return NotifyType(gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Enum()), nil
 }
+
+func (e NotifyType) SetValue(v *gobject.Value) {
+	panic("TODO")
+}
+
 // ScrollDirection wraps GdkScrollDirection
 //
 // Specifies the direction for scroll events.
@@ -5613,8 +5694,13 @@ const (
 )
 
 func marshalScrollDirection(p uintptr) (interface{}, error) {
-	return ScrollDirection(gobject.ValueFromNative(unsafe.Pointer(p)).Enum()), nil
+	return ScrollDirection(gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Enum()), nil
 }
+
+func (e ScrollDirection) SetValue(v *gobject.Value) {
+	panic("TODO")
+}
+
 // ScrollUnit wraps GdkScrollUnit
 //
 // Specifies the unit of scroll deltas.
@@ -5648,8 +5734,13 @@ const (
 )
 
 func marshalScrollUnit(p uintptr) (interface{}, error) {
-	return ScrollUnit(gobject.ValueFromNative(unsafe.Pointer(p)).Enum()), nil
+	return ScrollUnit(gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Enum()), nil
 }
+
+func (e ScrollUnit) SetValue(v *gobject.Value) {
+	panic("TODO")
+}
+
 // SubpixelLayout wraps GdkSubpixelLayout
 //
 // This enumeration describes how the red, green and blue components
@@ -5684,8 +5775,13 @@ const (
 )
 
 func marshalSubpixelLayout(p uintptr) (interface{}, error) {
-	return SubpixelLayout(gobject.ValueFromNative(unsafe.Pointer(p)).Enum()), nil
+	return SubpixelLayout(gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Enum()), nil
 }
+
+func (e SubpixelLayout) SetValue(v *gobject.Value) {
+	panic("TODO")
+}
+
 // SurfaceEdge wraps GdkSurfaceEdge
 //
 // Determines a surface edge or corner.
@@ -5727,8 +5823,13 @@ const (
 )
 
 func marshalSurfaceEdge(p uintptr) (interface{}, error) {
-	return SurfaceEdge(gobject.ValueFromNative(unsafe.Pointer(p)).Enum()), nil
+	return SurfaceEdge(gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Enum()), nil
 }
+
+func (e SurfaceEdge) SetValue(v *gobject.Value) {
+	panic("TODO")
+}
+
 // TextureError wraps GdkTextureError
 //
 // Possible errors that can be returned by `GdkTexture` constructors.
@@ -5755,8 +5856,13 @@ const (
 )
 
 func marshalTextureError(p uintptr) (interface{}, error) {
-	return TextureError(gobject.ValueFromNative(unsafe.Pointer(p)).Enum()), nil
+	return TextureError(gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Enum()), nil
 }
+
+func (e TextureError) SetValue(v *gobject.Value) {
+	panic("TODO")
+}
+
 // TitlebarGesture wraps GdkTitlebarGesture
 //
 // The kind of title bar gesture to emit with
@@ -5779,8 +5885,13 @@ const (
 )
 
 func marshalTitlebarGesture(p uintptr) (interface{}, error) {
-	return TitlebarGesture(gobject.ValueFromNative(unsafe.Pointer(p)).Enum()), nil
+	return TitlebarGesture(gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Enum()), nil
 }
+
+func (e TitlebarGesture) SetValue(v *gobject.Value) {
+	panic("TODO")
+}
+
 // TouchpadGesturePhase wraps GdkTouchpadGesturePhase
 //
 // Specifies the current state of a touchpad gesture.
@@ -5825,8 +5936,13 @@ const (
 )
 
 func marshalTouchpadGesturePhase(p uintptr) (interface{}, error) {
-	return TouchpadGesturePhase(gobject.ValueFromNative(unsafe.Pointer(p)).Enum()), nil
+	return TouchpadGesturePhase(gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Enum()), nil
 }
+
+func (e TouchpadGesturePhase) SetValue(v *gobject.Value) {
+	panic("TODO")
+}
+
 // VulkanError wraps GdkVulkanError
 //
 // Error enumeration for `GdkVulkanContext`.
@@ -5845,8 +5961,13 @@ const (
 )
 
 func marshalVulkanError(p uintptr) (interface{}, error) {
-	return VulkanError(gobject.ValueFromNative(unsafe.Pointer(p)).Enum()), nil
+	return VulkanError(gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Enum()), nil
 }
+
+func (e VulkanError) SetValue(v *gobject.Value) {
+	panic("TODO")
+}
+
 // AnchorHints wraps GdkAnchorHints
 //
 // Positioning hints for aligning a surface relative to a rectangle.
@@ -5906,11 +6027,15 @@ const (
 )
 
 func marshalAnchorHints(p uintptr) (interface{}, error) {
-	return AnchorHints(gobject.ValueFromNative(unsafe.Pointer(p)).Flags()), nil
+	return AnchorHints(gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Flags()), nil
 }
 // Has returns true if a contains other
 func (a AnchorHints) Has(other AnchorHints) bool {
 	return (a & other) == other
+}
+
+func (a AnchorHints) SetValue(v *gobject.Value) {
+	panic("TODO")
 }
 
 // AxisFlags wraps GdkAxisFlags
@@ -5966,11 +6091,15 @@ const (
 )
 
 func marshalAxisFlags(p uintptr) (interface{}, error) {
-	return AxisFlags(gobject.ValueFromNative(unsafe.Pointer(p)).Flags()), nil
+	return AxisFlags(gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Flags()), nil
 }
 // Has returns true if a contains other
 func (a AxisFlags) Has(other AxisFlags) bool {
 	return (a & other) == other
+}
+
+func (a AxisFlags) SetValue(v *gobject.Value) {
+	panic("TODO")
 }
 
 // DragAction wraps GdkDragAction
@@ -6002,11 +6131,15 @@ const (
 )
 
 func marshalDragAction(p uintptr) (interface{}, error) {
-	return DragAction(gobject.ValueFromNative(unsafe.Pointer(p)).Flags()), nil
+	return DragAction(gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Flags()), nil
 }
 // Has returns true if d contains other
 func (d DragAction) Has(other DragAction) bool {
 	return (d & other) == other
+}
+
+func (d DragAction) SetValue(v *gobject.Value) {
+	panic("TODO")
 }
 
 // FrameClockPhase wraps GdkFrameClockPhase
@@ -6052,11 +6185,15 @@ const (
 )
 
 func marshalFrameClockPhase(p uintptr) (interface{}, error) {
-	return FrameClockPhase(gobject.ValueFromNative(unsafe.Pointer(p)).Flags()), nil
+	return FrameClockPhase(gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Flags()), nil
 }
 // Has returns true if f contains other
 func (f FrameClockPhase) Has(other FrameClockPhase) bool {
 	return (f & other) == other
+}
+
+func (f FrameClockPhase) SetValue(v *gobject.Value) {
+	panic("TODO")
 }
 
 // GLAPI wraps GdkGLAPI
@@ -6076,11 +6213,15 @@ const (
 )
 
 func marshalGLAPI(p uintptr) (interface{}, error) {
-	return GLAPI(gobject.ValueFromNative(unsafe.Pointer(p)).Flags()), nil
+	return GLAPI(gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Flags()), nil
 }
 // Has returns true if g contains other
 func (g GLAPI) Has(other GLAPI) bool {
 	return (g & other) == other
+}
+
+func (g GLAPI) SetValue(v *gobject.Value) {
+	panic("TODO")
 }
 
 // ModifierType wraps GdkModifierType
@@ -6155,11 +6296,15 @@ const (
 )
 
 func marshalModifierType(p uintptr) (interface{}, error) {
-	return ModifierType(gobject.ValueFromNative(unsafe.Pointer(p)).Flags()), nil
+	return ModifierType(gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Flags()), nil
 }
 // Has returns true if m contains other
 func (m ModifierType) Has(other ModifierType) bool {
 	return (m & other) == other
+}
+
+func (m ModifierType) SetValue(v *gobject.Value) {
+	panic("TODO")
 }
 
 // PaintableFlags wraps GdkPaintableFlags
@@ -6185,11 +6330,15 @@ const (
 )
 
 func marshalPaintableFlags(p uintptr) (interface{}, error) {
-	return PaintableFlags(gobject.ValueFromNative(unsafe.Pointer(p)).Flags()), nil
+	return PaintableFlags(gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Flags()), nil
 }
 // Has returns true if p contains other
 func (p PaintableFlags) Has(other PaintableFlags) bool {
 	return (p & other) == other
+}
+
+func (p PaintableFlags) SetValue(v *gobject.Value) {
+	panic("TODO")
 }
 
 // SeatCapabilities wraps GdkSeatCapabilities
@@ -6233,11 +6382,15 @@ const (
 )
 
 func marshalSeatCapabilities(p uintptr) (interface{}, error) {
-	return SeatCapabilities(gobject.ValueFromNative(unsafe.Pointer(p)).Flags()), nil
+	return SeatCapabilities(gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Flags()), nil
 }
 // Has returns true if s contains other
 func (s SeatCapabilities) Has(other SeatCapabilities) bool {
 	return (s & other) == other
+}
+
+func (s SeatCapabilities) SetValue(v *gobject.Value) {
+	panic("TODO")
 }
 
 // ToplevelState wraps GdkToplevelState
@@ -6323,11 +6476,15 @@ const (
 )
 
 func marshalToplevelState(p uintptr) (interface{}, error) {
-	return ToplevelState(gobject.ValueFromNative(unsafe.Pointer(p)).Flags()), nil
+	return ToplevelState(gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Flags()), nil
 }
 // Has returns true if t contains other
 func (t ToplevelState) Has(other ToplevelState) bool {
 	return (t & other) == other
+}
+
+func (t ToplevelState) SetValue(v *gobject.Value) {
+	panic("TODO")
 }
 
 // ContentDeserializeFunc wraps GdkContentDeserializeFunc
@@ -6372,29 +6529,29 @@ type CursorGetTextureCallback func(cursor Cursor, cursorSize int, scale float64,
 // 	- mimeType string: the mime type to deserialize from 
 // 	- typ glib.Type: the GType to deserialize from 
 // 	- ioPriority int: the I/O priority of the operation 
-// 	- cancellable gio.Cancellable (nullable): optional `GCancellable` object 
+// 	- cancellable gio. (nullable): optional `GCancellable` object 
 // 	- callback gio.AsyncReadyCallback (nullable): callback to call when the operation is done 
 //
 // Read content from the given input stream and deserialize it, asynchronously.
 // 
 // The default I/O priority is %G_PRIORITY_DEFAULT (i.e. 0), and lower numbers
 // indicate a higher priority.
-func ContentDeserializeAsync(stream gio.InputStream, mimeType string, typ glib.Type, ioPriority int, cancellable gio.Cancellable, callback gio.AsyncReadyCallback) {
-	var carg1 *C.GInputStream       // in, none, class
+func ContentDeserializeAsync(stream gio.InputStream, mimeType string, typ glib.Type, ioPriority int, cancellable gio., callback gio.AsyncReadyCallback) {
+	var carg1 *C.GInputStream       // in, none, converted
 	var carg2 *C.gchar              // in, none, string
-	var carg3 C.GType               // in, casted
-	var carg4 C.int                 // in, casted
-	var carg5 *C.GCancellable       // in, none, class, nullable
+	var carg3 C.GType               // in, none, casted
+	var carg4 C.int                 // in, none, casted
+	var carg5 *C.Cancellable        // in, none, converted, nullable
 	var carg6 C.GAsyncReadyCallback // callback, scope: async, closure: carg7, nullable
 	var carg7 C.gpointer            // implicit
 
-	carg1 = (*C.GInputStream)(gio.UnsafeInputStreamToGlibNone(stream))
+	carg1 = (*C.GInputStream)(UnsafeInputStreamToGlibNone(stream))
 	carg2 = (*C.gchar)(unsafe.Pointer(C.CString(mimeType)))
 	defer C.free(unsafe.Pointer(carg2))
 	carg3 = C.GType(typ)
 	carg4 = C.int(ioPriority)
 	if cancellable != nil {
-		carg5 = (*C.GCancellable)(gio.UnsafeCancellableToGlibNone(cancellable))
+		carg5 = (*C.Cancellable)(UnsafeCancellableToGlibNone(cancellable))
 	}
 	if callback != nil {
 		carg6 = (*[0]byte)(C._gotk4_gio2_AsyncReadyCallback)
@@ -6421,7 +6578,7 @@ func ContentDeserializeAsync(stream gio.InputStream, mimeType string, typ glib.T
 // Registers a function to deserialize object of a given type.
 func ContentRegisterDeserializer(mimeType string, typ glib.Type, deserialize ContentDeserializeFunc) {
 	var carg1 *C.gchar                    // in, none, string
-	var carg2 C.GType                     // in, casted
+	var carg2 C.GType                     // in, none, casted
 	var carg3 C.GdkContentDeserializeFunc // callback, scope: notified, closure: carg4, destroy: carg5
 	var carg4 C.gpointer                  // implicit
 	var carg5 C.GDestroyNotify            // implicit
@@ -6449,7 +6606,7 @@ func ContentRegisterDeserializer(mimeType string, typ glib.Type, deserialize Con
 //
 // Registers a function to serialize objects of a given type.
 func ContentRegisterSerializer(typ glib.Type, mimeType string, serialize ContentSerializeFunc) {
-	var carg1 C.GType                   // in, casted
+	var carg1 C.GType                   // in, none, casted
 	var carg2 *C.gchar                  // in, none, string
 	var carg3 C.GdkContentSerializeFunc // callback, scope: notified, closure: carg4, destroy: carg5
 	var carg4 C.gpointer                // implicit
@@ -6476,29 +6633,29 @@ func ContentRegisterSerializer(typ glib.Type, mimeType string, serialize Content
 // 	- mimeType string: the mime type to serialize to 
 // 	- value *gobject.Value: the content to serialize 
 // 	- ioPriority int: the I/O priority of the operation 
-// 	- cancellable gio.Cancellable (nullable): optional `GCancellable` object 
+// 	- cancellable gio. (nullable): optional `GCancellable` object 
 // 	- callback gio.AsyncReadyCallback (nullable): callback to call when the operation is done 
 //
 // Serialize content and write it to the given output stream, asynchronously.
 // 
 // The default I/O priority is %G_PRIORITY_DEFAULT (i.e. 0), and lower numbers
 // indicate a higher priority.
-func ContentSerializeAsync(stream gio.OutputStream, mimeType string, value *gobject.Value, ioPriority int, cancellable gio.Cancellable, callback gio.AsyncReadyCallback) {
-	var carg1 *C.GOutputStream      // in, none, class
+func ContentSerializeAsync(stream gio.OutputStream, mimeType string, value *gobject.Value, ioPriority int, cancellable gio., callback gio.AsyncReadyCallback) {
+	var carg1 *C.GOutputStream      // in, none, converted
 	var carg2 *C.gchar              // in, none, string
-	var carg3 *C.GValue             // in, none, record
-	var carg4 C.int                 // in, casted
-	var carg5 *C.GCancellable       // in, none, class, nullable
+	var carg3 *C.GValue             // in, none, converted
+	var carg4 C.int                 // in, none, casted
+	var carg5 *C.Cancellable        // in, none, converted, nullable
 	var carg6 C.GAsyncReadyCallback // callback, scope: async, closure: carg7, nullable
 	var carg7 C.gpointer            // implicit
 
-	carg1 = (*C.GOutputStream)(gio.UnsafeOutputStreamToGlibNone(stream))
+	carg1 = (*C.GOutputStream)(UnsafeOutputStreamToGlibNone(stream))
 	carg2 = (*C.gchar)(unsafe.Pointer(C.CString(mimeType)))
 	defer C.free(unsafe.Pointer(carg2))
-	carg3 = (*C.GValue)(gobject.TODOToGlibNone(value))
+	carg3 = (*C.GValue)(TODOToGlibNone(value))
 	carg4 = C.int(ioPriority)
 	if cancellable != nil {
-		carg5 = (*C.GCancellable)(gio.UnsafeCancellableToGlibNone(cancellable))
+		carg5 = (*C.Cancellable)(UnsafeCancellableToGlibNone(cancellable))
 	}
 	if callback != nil {
 		carg6 = (*[0]byte)(C._gotk4_gio2_AsyncReadyCallback)
@@ -6527,11 +6684,11 @@ func ContentSerializeAsync(stream gio.OutputStream, mimeType string, value *gobj
 //
 // Finishes a content serialization operation.
 func ContentSerializeFinish(result gio.AsyncResult) (bool, error) {
-	var carg1 *C.GAsyncResult // in, none, interface
+	var carg1 *C.GAsyncResult // in, none, converted
 	var cret  C.gboolean      // return
-	var _cerr *C.GError       // out, full, record, nullable
+	var _cerr *C.GError       // out, full, converted, nullable
 
-	carg1 = (*C.GAsyncResult)(gio.UnsafeAsyncResultToGlibNone(result))
+	carg1 = (*C.GAsyncResult)(UnsafeAsyncResultToGlibNone(result))
 
 	cret = C.gdk_content_serialize_finish(carg1, &_cerr)
 	runtime.KeepAlive(result)
@@ -6543,7 +6700,7 @@ func ContentSerializeFinish(result gio.AsyncResult) (bool, error) {
 		ret = true
 	}
 	if _cerr != nil {
-		_goerr = glib.UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
+		_goerr = UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
 	}
 
 	return ret, _goerr
@@ -6595,9 +6752,9 @@ func InternMIMEType(str string) string {
 // 
 // Examples of keyvals are `GDK_KEY_a`, `GDK_KEY_Enter`, `GDK_KEY_F1`, etc.
 func KeyvalConvertCase(symbol uint) (uint, uint) {
-	var carg1 C.guint // in, casted
-	var carg2 C.guint // out, casted
-	var carg3 C.guint // out, casted
+	var carg1 C.guint // in, none, casted
+	var carg2 C.guint // out, full, casted
+	var carg3 C.guint // out, full, casted
 
 	carg1 = C.guint(symbol)
 
@@ -6630,7 +6787,7 @@ func KeyvalConvertCase(symbol uint) (uint, uint) {
 // but without the leading “GDK_KEY_”.
 func KeyvalFromName(keyvalName string) uint {
 	var carg1 *C.gchar // in, none, string
-	var cret  C.guint  // return, casted
+	var cret  C.guint  // return, none, casted
 
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(keyvalName)))
 	defer C.free(unsafe.Pointer(carg1))
@@ -6657,7 +6814,7 @@ func KeyvalFromName(keyvalName string) uint {
 //
 // Returns %TRUE if the given key value is in lower case.
 func KeyvalIsLower(keyval uint) bool {
-	var carg1 C.guint    // in, casted
+	var carg1 C.guint    // in, none, casted
 	var cret  C.gboolean // return
 
 	carg1 = C.guint(keyval)
@@ -6686,7 +6843,7 @@ func KeyvalIsLower(keyval uint) bool {
 //
 // Returns %TRUE if the given key value is in upper case.
 func KeyvalIsUpper(keyval uint) bool {
-	var carg1 C.guint    // in, casted
+	var carg1 C.guint    // in, none, casted
 	var cret  C.gboolean // return
 
 	carg1 = C.guint(keyval)
@@ -6719,7 +6876,7 @@ func KeyvalIsUpper(keyval uint) bool {
 // `gdk/gdkkeysyms.h` header file
 // but without the leading “GDK_KEY_”.
 func KeyvalName(keyval uint) string {
-	var carg1 C.guint  // in, casted
+	var carg1 C.guint  // in, none, casted
 	var cret  *C.gchar // return, none, string
 
 	carg1 = C.guint(keyval)
@@ -6746,8 +6903,8 @@ func KeyvalName(keyval uint) string {
 //
 // Converts a key value to lower case, if applicable.
 func KeyvalToLower(keyval uint) uint {
-	var carg1 C.guint // in, casted
-	var cret  C.guint // return, casted
+	var carg1 C.guint // in, none, casted
+	var cret  C.guint // return, none, casted
 
 	carg1 = C.guint(keyval)
 
@@ -6778,8 +6935,8 @@ func KeyvalToLower(keyval uint) uint {
 // into consideration, which might be expected for particular
 // keyvals, such as %GDK_KEY_KP_Decimal.
 func KeyvalToUnicode(keyval uint) uint32 {
-	var carg1 C.guint   // in, casted
-	var cret  C.guint32 // return, casted
+	var carg1 C.guint   // in, none, casted
+	var cret  C.guint32 // return, none, casted
 
 	carg1 = C.guint(keyval)
 
@@ -6805,8 +6962,8 @@ func KeyvalToUnicode(keyval uint) uint32 {
 //
 // Converts a key value to upper case, if applicable.
 func KeyvalToUpper(keyval uint) uint {
-	var carg1 C.guint // in, casted
-	var cret  C.guint // return, casted
+	var carg1 C.guint // in, none, casted
+	var cret  C.guint // return, none, casted
 
 	carg1 = C.guint(keyval)
 
@@ -6839,8 +6996,8 @@ func KeyvalToUpper(keyval uint) uint {
 // Deprecated: (since 4.12.0) Use [class@Gdk.Texture] and subclasses instead
 //   cairo surfaces and pixbufs
 func PixbufGetFromTexture(texture Texture) gdkpixbuf.Pixbuf {
-	var carg1 *C.GdkTexture // in, none, class
-	var cret  *C.GdkPixbuf  // return, full, class
+	var carg1 *C.GdkTexture // in, none, converted
+	var cret  *C.GdkPixbuf  // return, full, converted
 
 	carg1 = (*C.GdkTexture)(UnsafeTextureToGlibNone(texture))
 
@@ -6849,7 +7006,7 @@ func PixbufGetFromTexture(texture Texture) gdkpixbuf.Pixbuf {
 
 	var ret gdkpixbuf.Pixbuf
 
-	ret = gdkpixbuf.UnsafePixbufFromGlibFull(unsafe.Pointer(cret))
+	ret = UnsafePixbufFromGlibFull(unsafe.Pointer(cret))
 
 	return ret
 }
@@ -6915,8 +7072,8 @@ func SetAllowedBackends(backends string) {
 //
 // Convert from a Unicode character to a key symbol.
 func UnicodeToKeyval(wc uint32) uint {
-	var carg1 C.guint32 // in, casted
-	var cret  C.guint   // return, casted
+	var carg1 C.guint32 // in, none, casted
+	var cret  C.guint   // return, none, casted
 
 	carg1 = C.guint32(wc)
 
@@ -6933,7 +7090,7 @@ func UnicodeToKeyval(wc uint32) uint {
 // DevicePadInstance is the instance type used by all types implementing GdkDevicePad. It is used internally by the bindings. Users should use the interface [DevicePad] instead.
 type DevicePadInstance struct {
 	_ [0]func() // equal guard
-	*gobject.Object
+	*gobject.ObjectInstance
 }
 
 var _ DevicePad = (*DevicePadInstance)(nil)
@@ -6958,7 +7115,7 @@ var _ DevicePad = (*DevicePadInstance)(nil)
 // out through [method@Gdk.DevicePad.get_group_n_modes], and the current mode
 // for a given group will be notified through events of type `GDK_PAD_GROUP_MODE`.
 type DevicePad interface {
-	gobject.ObjectLike
+	gobject.Object
 
 	// GetFeatureGroup wraps gdk_device_pad_get_feature_group
 	// 
@@ -7012,14 +7169,14 @@ type DevicePad interface {
 	GetNGroups() int
 }
 
-func unsafeWrapDevicePad(base *gobject.Object) *DevicePadInstance {
+func unsafeWrapDevicePad(base *gobject.ObjectInstance) *DevicePadInstance {
 	return &DevicePadInstance{
-		Object: base,
+		ObjectInstance: base,
 	}
 }
 
 func marshalDevicePadInstance(p uintptr) (interface{}, error) {
-	return unsafeWrapDevicePad(gobject.ValueFromNative(unsafe.Pointer(p)).Object()), nil
+	return unsafeWrapDevicePad(gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Object()), nil
 }
 
 // UnsafeDevicePadFromGlibBorrow is used to convert raw GdkDevicePad pointers to go. This is used by the bindings internally.
@@ -7062,10 +7219,10 @@ func UnsafeDevicePadToGlibFull(c DevicePad) unsafe.Pointer {
 // 
 // f the feature or index do not exist in @pad, -1 is returned.
 func (pad *DevicePadInstance) GetFeatureGroup(feature DevicePadFeature, featureIdx int) int {
-	var carg0 *C.GdkDevicePad       // in, none, interface
-	var carg1 C.GdkDevicePadFeature // in, casted
-	var carg2 C.int                 // in, casted
-	var cret  C.int                 // return, casted
+	var carg0 *C.GdkDevicePad       // in, none, converted
+	var carg1 C.GdkDevicePadFeature // in, none, casted
+	var carg2 C.int                 // in, none, casted
+	var cret  C.int                 // return, none, casted
 
 	carg0 = (*C.GdkDevicePad)(UnsafeDevicePadToGlibNone(pad))
 	carg1 = C.GdkDevicePadFeature(feature)
@@ -7095,9 +7252,9 @@ func (pad *DevicePadInstance) GetFeatureGroup(feature DevicePadFeature, featureI
 //
 // Returns the number of modes that @group may have.
 func (pad *DevicePadInstance) GetGroupNModes(groupIdx int) int {
-	var carg0 *C.GdkDevicePad // in, none, interface
-	var carg1 C.int           // in, casted
-	var cret  C.int           // return, casted
+	var carg0 *C.GdkDevicePad // in, none, converted
+	var carg1 C.int           // in, none, casted
+	var cret  C.int           // return, none, casted
 
 	carg0 = (*C.GdkDevicePad)(UnsafeDevicePadToGlibNone(pad))
 	carg1 = C.int(groupIdx)
@@ -7125,9 +7282,9 @@ func (pad *DevicePadInstance) GetGroupNModes(groupIdx int) int {
 //
 // Returns the number of features a tablet pad has.
 func (pad *DevicePadInstance) GetNFeatures(feature DevicePadFeature) int {
-	var carg0 *C.GdkDevicePad       // in, none, interface
-	var carg1 C.GdkDevicePadFeature // in, casted
-	var cret  C.int                 // return, casted
+	var carg0 *C.GdkDevicePad       // in, none, converted
+	var carg1 C.GdkDevicePadFeature // in, none, casted
+	var cret  C.int                 // return, none, casted
 
 	carg0 = (*C.GdkDevicePad)(UnsafeDevicePadToGlibNone(pad))
 	carg1 = C.GdkDevicePadFeature(feature)
@@ -7154,8 +7311,8 @@ func (pad *DevicePadInstance) GetNFeatures(feature DevicePadFeature) int {
 // buttons/strip/rings that is affected collectively by a same
 // current mode.
 func (pad *DevicePadInstance) GetNGroups() int {
-	var carg0 *C.GdkDevicePad // in, none, interface
-	var cret  C.int           // return, casted
+	var carg0 *C.GdkDevicePad // in, none, converted
+	var cret  C.int           // return, none, casted
 
 	carg0 = (*C.GdkDevicePad)(UnsafeDevicePadToGlibNone(pad))
 
@@ -7172,7 +7329,7 @@ func (pad *DevicePadInstance) GetNGroups() int {
 // DragSurfaceInstance is the instance type used by all types implementing GdkDragSurface. It is used internally by the bindings. Users should use the interface [DragSurface] instead.
 type DragSurfaceInstance struct {
 	_ [0]func() // equal guard
-	*gobject.Object
+	*gobject.ObjectInstance
 }
 
 var _ DragSurface = (*DragSurfaceInstance)(nil)
@@ -7181,7 +7338,7 @@ var _ DragSurface = (*DragSurfaceInstance)(nil)
 //
 // A `GdkDragSurface` is an interface for surfaces used during DND.
 type DragSurface interface {
-	gobject.ObjectLike
+	gobject.Object
 
 	// Present wraps gdk_drag_surface_present
 	// 
@@ -7198,14 +7355,14 @@ type DragSurface interface {
 	Present(int, int) bool
 }
 
-func unsafeWrapDragSurface(base *gobject.Object) *DragSurfaceInstance {
+func unsafeWrapDragSurface(base *gobject.ObjectInstance) *DragSurfaceInstance {
 	return &DragSurfaceInstance{
-		Object: base,
+		ObjectInstance: base,
 	}
 }
 
 func marshalDragSurfaceInstance(p uintptr) (interface{}, error) {
-	return unsafeWrapDragSurface(gobject.ValueFromNative(unsafe.Pointer(p)).Object()), nil
+	return unsafeWrapDragSurface(gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Object()), nil
 }
 
 // UnsafeDragSurfaceFromGlibBorrow is used to convert raw GdkDragSurface pointers to go. This is used by the bindings internally.
@@ -7246,9 +7403,9 @@ func UnsafeDragSurfaceToGlibFull(c DragSurface) unsafe.Pointer {
 //
 // Present @drag_surface.
 func (dragSurface *DragSurfaceInstance) Present(width int, height int) bool {
-	var carg0 *C.GdkDragSurface // in, none, interface
-	var carg1 C.int             // in, casted
-	var carg2 C.int             // in, casted
+	var carg0 *C.GdkDragSurface // in, none, converted
+	var carg1 C.int             // in, none, casted
+	var carg2 C.int             // in, none, casted
 	var cret  C.gboolean        // return
 
 	carg0 = (*C.GdkDragSurface)(UnsafeDragSurfaceToGlibNone(dragSurface))
@@ -7272,7 +7429,7 @@ func (dragSurface *DragSurfaceInstance) Present(width int, height int) bool {
 // PaintableInstance is the instance type used by all types implementing GdkPaintable. It is used internally by the bindings. Users should use the interface [Paintable] instead.
 type PaintableInstance struct {
 	_ [0]func() // equal guard
-	*gobject.Object
+	*gobject.ObjectInstance
 }
 
 var _ Paintable = (*PaintableInstance)(nil)
@@ -7325,7 +7482,7 @@ var _ Paintable = (*PaintableInstance)(nil)
 // [method@Gdk.Paintable.invalidate_size],
 // [func@Gdk.Paintable.new_empty].
 type Paintable interface {
-	gobject.ObjectLike
+	gobject.Object
 
 	// ComputeConcreteSize wraps gdk_paintable_compute_concrete_size
 	// 
@@ -7476,14 +7633,14 @@ type Paintable interface {
 	Snapshot(Snapshot, float64, float64)
 }
 
-func unsafeWrapPaintable(base *gobject.Object) *PaintableInstance {
+func unsafeWrapPaintable(base *gobject.ObjectInstance) *PaintableInstance {
 	return &PaintableInstance{
-		Object: base,
+		ObjectInstance: base,
 	}
 }
 
 func marshalPaintableInstance(p uintptr) (interface{}, error) {
-	return unsafeWrapPaintable(gobject.ValueFromNative(unsafe.Pointer(p)).Object()), nil
+	return unsafeWrapPaintable(gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Object()), nil
 }
 
 // UnsafePaintableFromGlibBorrow is used to convert raw GdkPaintable pointers to go. This is used by the bindings internally.
@@ -7530,9 +7687,9 @@ func UnsafePaintableToGlibFull(c Paintable) unsafe.Pointer {
 // [GtkMediaStream](../gtk4/class.MediaStream.html) before receiving
 // the first frame).
 func NewEmpty(intrinsicWidth int, intrinsicHeight int) Paintable {
-	var carg1 C.int           // in, casted
-	var carg2 C.int           // in, casted
-	var cret  *C.GdkPaintable // return, full, interface
+	var carg1 C.int           // in, none, casted
+	var carg2 C.int           // in, none, casted
+	var cret  *C.GdkPaintable // return, full, converted
 
 	carg1 = C.int(intrinsicWidth)
 	carg2 = C.int(intrinsicHeight)
@@ -7577,13 +7734,13 @@ func NewEmpty(intrinsicWidth int, intrinsicHeight int) Paintable {
 // function in GtkWidget:measure implementations to compute the
 // other dimension when only one dimension is given.
 func (paintable *PaintableInstance) ComputeConcreteSize(specifiedWidth float64, specifiedHeight float64, defaultWidth float64, defaultHeight float64) (float64, float64) {
-	var carg0 *C.GdkPaintable // in, none, interface
-	var carg1 C.gdouble       // in, casted
-	var carg2 C.gdouble       // in, casted
-	var carg3 C.gdouble       // in, casted
-	var carg4 C.gdouble       // in, casted
-	var carg5 C.gdouble       // out, casted
-	var carg6 C.gdouble       // out, casted
+	var carg0 *C.GdkPaintable // in, none, converted
+	var carg1 C.gdouble       // in, none, casted
+	var carg2 C.gdouble       // in, none, casted
+	var carg3 C.gdouble       // in, none, casted
+	var carg4 C.gdouble       // in, none, casted
+	var carg5 C.gdouble       // out, full, casted
+	var carg6 C.gdouble       // out, full, casted
 
 	carg0 = (*C.GdkPaintable)(UnsafePaintableToGlibNone(paintable))
 	carg1 = C.gdouble(specifiedWidth)
@@ -7619,8 +7776,8 @@ func (paintable *PaintableInstance) ComputeConcreteSize(specifiedWidth float64, 
 // 
 // If the @paintable is already immutable, it will return itself.
 func (paintable *PaintableInstance) GetCurrentImage() Paintable {
-	var carg0 *C.GdkPaintable // in, none, interface
-	var cret  *C.GdkPaintable // return, full, interface
+	var carg0 *C.GdkPaintable // in, none, converted
+	var cret  *C.GdkPaintable // return, full, converted
 
 	carg0 = (*C.GdkPaintable)(UnsafePaintableToGlibNone(paintable))
 
@@ -7645,8 +7802,8 @@ func (paintable *PaintableInstance) GetCurrentImage() Paintable {
 // 
 // See [flags@Gdk.PaintableFlags] for the flags and what they mean.
 func (paintable *PaintableInstance) GetFlags() PaintableFlags {
-	var carg0 *C.GdkPaintable     // in, none, interface
-	var cret  C.GdkPaintableFlags // return, casted
+	var carg0 *C.GdkPaintable     // in, none, converted
+	var cret  C.GdkPaintableFlags // return, none, casted
 
 	carg0 = (*C.GdkPaintable)(UnsafePaintableToGlibNone(paintable))
 
@@ -7683,8 +7840,8 @@ func (paintable *PaintableInstance) GetFlags() PaintableFlags {
 // If the @paintable does not have a preferred aspect ratio,
 // it returns 0. Negative values are never returned.
 func (paintable *PaintableInstance) GetIntrinsicAspectRatio() float64 {
-	var carg0 *C.GdkPaintable // in, none, interface
-	var cret  C.gdouble       // return, casted
+	var carg0 *C.GdkPaintable // in, none, converted
+	var cret  C.gdouble       // return, none, casted
 
 	carg0 = (*C.GdkPaintable)(UnsafePaintableToGlibNone(paintable))
 
@@ -7714,8 +7871,8 @@ func (paintable *PaintableInstance) GetIntrinsicAspectRatio() float64 {
 // If the @paintable does not have a preferred height, it returns 0.
 // Negative values are never returned.
 func (paintable *PaintableInstance) GetIntrinsicHeight() int {
-	var carg0 *C.GdkPaintable // in, none, interface
-	var cret  C.int           // return, casted
+	var carg0 *C.GdkPaintable // in, none, converted
+	var cret  C.int           // return, none, casted
 
 	carg0 = (*C.GdkPaintable)(UnsafePaintableToGlibNone(paintable))
 
@@ -7745,8 +7902,8 @@ func (paintable *PaintableInstance) GetIntrinsicHeight() int {
 // If the @paintable does not have a preferred width, it returns 0.
 // Negative values are never returned.
 func (paintable *PaintableInstance) GetIntrinsicWidth() int {
-	var carg0 *C.GdkPaintable // in, none, interface
-	var cret  C.int           // return, casted
+	var carg0 *C.GdkPaintable // in, none, converted
+	var cret  C.int           // return, none, casted
 
 	carg0 = (*C.GdkPaintable)(UnsafePaintableToGlibNone(paintable))
 
@@ -7773,7 +7930,7 @@ func (paintable *PaintableInstance) GetIntrinsicWidth() int {
 // If a @paintable reports the %GDK_PAINTABLE_STATIC_CONTENTS flag,
 // it must not call this function.
 func (paintable *PaintableInstance) InvalidateContents() {
-	var carg0 *C.GdkPaintable // in, none, interface
+	var carg0 *C.GdkPaintable // in, none, converted
 
 	carg0 = (*C.GdkPaintable)(UnsafePaintableToGlibNone(paintable))
 
@@ -7794,7 +7951,7 @@ func (paintable *PaintableInstance) InvalidateContents() {
 // If a @paintable reports the %GDK_PAINTABLE_STATIC_SIZE flag,
 // it must not call this function.
 func (paintable *PaintableInstance) InvalidateSize() {
-	var carg0 *C.GdkPaintable // in, none, interface
+	var carg0 *C.GdkPaintable // in, none, converted
 
 	carg0 = (*C.GdkPaintable)(UnsafePaintableToGlibNone(paintable))
 
@@ -7816,10 +7973,10 @@ func (paintable *PaintableInstance) InvalidateSize() {
 // If @width and @height are not larger than zero, this function will
 // do nothing.
 func (paintable *PaintableInstance) Snapshot(snapshot Snapshot, width float64, height float64) {
-	var carg0 *C.GdkPaintable // in, none, interface
-	var carg1 *C.GdkSnapshot  // in, none, class
-	var carg2 C.gdouble       // in, casted
-	var carg3 C.gdouble       // in, casted
+	var carg0 *C.GdkPaintable // in, none, converted
+	var carg1 *C.GdkSnapshot  // in, none, converted
+	var carg2 C.gdouble       // in, none, casted
+	var carg3 C.gdouble       // in, none, casted
 
 	carg0 = (*C.GdkPaintable)(UnsafePaintableToGlibNone(paintable))
 	carg1 = (*C.GdkSnapshot)(UnsafeSnapshotToGlibNone(snapshot))
@@ -7836,7 +7993,7 @@ func (paintable *PaintableInstance) Snapshot(snapshot Snapshot, width float64, h
 // PopupInstance is the instance type used by all types implementing GdkPopup. It is used internally by the bindings. Users should use the interface [Popup] instead.
 type PopupInstance struct {
 	_ [0]func() // equal guard
-	*gobject.Object
+	*gobject.ObjectInstance
 }
 
 var _ Popup = (*PopupInstance)(nil)
@@ -7851,7 +8008,7 @@ var _ Popup = (*PopupInstance)(nil)
 // They can be modal, which is indicated by the [property@Gdk.Popup:autohide]
 // property.
 type Popup interface {
-	gobject.ObjectLike
+	gobject.Object
 
 	// GetAutohide wraps gdk_popup_get_autohide
 	// The function returns the following values:
@@ -7907,7 +8064,7 @@ type Popup interface {
 	// 
 	// 	- width int: the unconstrained popup width to layout 
 	// 	- height int: the unconstrained popup height to layout 
-	// 	- layout *PopupLayout: the `GdkPopupLayout` object used to layout 
+	// 	- layout PopupLayout: the `GdkPopupLayout` object used to layout 
 	// 
 	// The function returns the following values:
 	// 
@@ -7928,17 +8085,17 @@ type Popup interface {
 	// Presenting may fail, for example if the @popup is set to autohide
 	// and is immediately hidden upon being presented. If presenting failed,
 	// the [signal@Gdk.Surface::layout] signal will not me emitted.
-	Present(int, int, *PopupLayout) bool
+	Present(int, int, PopupLayout) bool
 }
 
-func unsafeWrapPopup(base *gobject.Object) *PopupInstance {
+func unsafeWrapPopup(base *gobject.ObjectInstance) *PopupInstance {
 	return &PopupInstance{
-		Object: base,
+		ObjectInstance: base,
 	}
 }
 
 func marshalPopupInstance(p uintptr) (interface{}, error) {
-	return unsafeWrapPopup(gobject.ValueFromNative(unsafe.Pointer(p)).Object()), nil
+	return unsafeWrapPopup(gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Object()), nil
 }
 
 // UnsafePopupFromGlibBorrow is used to convert raw GdkPopup pointers to go. This is used by the bindings internally.
@@ -7973,7 +8130,7 @@ func UnsafePopupToGlibFull(c Popup) unsafe.Pointer {
 //
 // Returns whether this popup is set to hide on outside clicks.
 func (popup *PopupInstance) GetAutohide() bool {
-	var carg0 *C.GdkPopup // in, none, interface
+	var carg0 *C.GdkPopup // in, none, converted
 	var cret  C.gboolean  // return
 
 	carg0 = (*C.GdkPopup)(UnsafePopupToGlibNone(popup))
@@ -7997,8 +8154,8 @@ func (popup *PopupInstance) GetAutohide() bool {
 //
 // Returns the parent surface of a popup.
 func (popup *PopupInstance) GetParent() Surface {
-	var carg0 *C.GdkPopup   // in, none, interface
-	var cret  *C.GdkSurface // return, none, class
+	var carg0 *C.GdkPopup   // in, none, converted
+	var cret  *C.GdkSurface // return, none, converted
 
 	carg0 = (*C.GdkPopup)(UnsafePopupToGlibNone(popup))
 
@@ -8019,8 +8176,8 @@ func (popup *PopupInstance) GetParent() Surface {
 //
 // Obtains the position of the popup relative to its parent.
 func (popup *PopupInstance) GetPositionX() int {
-	var carg0 *C.GdkPopup // in, none, interface
-	var cret  C.int       // return, casted
+	var carg0 *C.GdkPopup // in, none, converted
+	var cret  C.int       // return, none, casted
 
 	carg0 = (*C.GdkPopup)(UnsafePopupToGlibNone(popup))
 
@@ -8041,8 +8198,8 @@ func (popup *PopupInstance) GetPositionX() int {
 //
 // Obtains the position of the popup relative to its parent.
 func (popup *PopupInstance) GetPositionY() int {
-	var carg0 *C.GdkPopup // in, none, interface
-	var cret  C.int       // return, casted
+	var carg0 *C.GdkPopup // in, none, converted
+	var cret  C.int       // return, none, casted
 
 	carg0 = (*C.GdkPopup)(UnsafePopupToGlibNone(popup))
 
@@ -8066,8 +8223,8 @@ func (popup *PopupInstance) GetPositionY() int {
 // The value returned may change after calling [method@Gdk.Popup.present],
 // or after the [signal@Gdk.Surface::layout] signal is emitted.
 func (popup *PopupInstance) GetRectAnchor() Gravity {
-	var carg0 *C.GdkPopup  // in, none, interface
-	var cret  C.GdkGravity // return, casted
+	var carg0 *C.GdkPopup  // in, none, converted
+	var cret  C.GdkGravity // return, none, casted
 
 	carg0 = (*C.GdkPopup)(UnsafePopupToGlibNone(popup))
 
@@ -8091,8 +8248,8 @@ func (popup *PopupInstance) GetRectAnchor() Gravity {
 // The value returned may change after calling [method@Gdk.Popup.present],
 // or after the [signal@Gdk.Surface::layout] signal is emitted.
 func (popup *PopupInstance) GetSurfaceAnchor() Gravity {
-	var carg0 *C.GdkPopup  // in, none, interface
-	var cret  C.GdkGravity // return, casted
+	var carg0 *C.GdkPopup  // in, none, converted
+	var cret  C.GdkGravity // return, none, casted
 
 	carg0 = (*C.GdkPopup)(UnsafePopupToGlibNone(popup))
 
@@ -8112,7 +8269,7 @@ func (popup *PopupInstance) GetSurfaceAnchor() Gravity {
 // 
 // 	- width int: the unconstrained popup width to layout 
 // 	- height int: the unconstrained popup height to layout 
-// 	- layout *PopupLayout: the `GdkPopupLayout` object used to layout 
+// 	- layout PopupLayout: the `GdkPopupLayout` object used to layout 
 // 
 // The function returns the following values:
 // 
@@ -8133,11 +8290,11 @@ func (popup *PopupInstance) GetSurfaceAnchor() Gravity {
 // Presenting may fail, for example if the @popup is set to autohide
 // and is immediately hidden upon being presented. If presenting failed,
 // the [signal@Gdk.Surface::layout] signal will not me emitted.
-func (popup *PopupInstance) Present(width int, height int, layout *PopupLayout) bool {
-	var carg0 *C.GdkPopup       // in, none, interface
-	var carg1 C.int             // in, casted
-	var carg2 C.int             // in, casted
-	var carg3 *C.GdkPopupLayout // in, none, record
+func (popup *PopupInstance) Present(width int, height int, layout PopupLayout) bool {
+	var carg0 *C.GdkPopup       // in, none, converted
+	var carg1 C.int             // in, none, casted
+	var carg2 C.int             // in, none, casted
+	var carg3 *C.GdkPopupLayout // in, none, converted
 	var cret  C.gboolean        // return
 
 	carg0 = (*C.GdkPopup)(UnsafePopupToGlibNone(popup))
@@ -8163,7 +8320,7 @@ func (popup *PopupInstance) Present(width int, height int, layout *PopupLayout) 
 // ToplevelInstance is the instance type used by all types implementing GdkToplevel. It is used internally by the bindings. Users should use the interface [Toplevel] instead.
 type ToplevelInstance struct {
 	_ [0]func() // equal guard
-	*gobject.Object
+	*gobject.ObjectInstance
 }
 
 var _ Toplevel = (*ToplevelInstance)(nil)
@@ -8176,7 +8333,7 @@ var _ Toplevel = (*ToplevelInstance)(nil)
 // the windowing system, such as controlling maximization and size of the
 // surface, setting icons and transient parents for dialogs.
 type Toplevel interface {
-	gobject.ObjectLike
+	gobject.Object
 
 	// BeginMove wraps gdk_toplevel_begin_move
 	// 
@@ -8251,7 +8408,7 @@ type Toplevel interface {
 	// 
 	// The function takes the following parameters:
 	// 
-	// 	- layout *ToplevelLayout: the `GdkToplevelLayout` object used to layout 
+	// 	- layout ToplevelLayout: the `GdkToplevelLayout` object used to layout 
 	//
 	// Present @toplevel after having processed the `GdkToplevelLayout` rules.
 	// 
@@ -8264,7 +8421,7 @@ type Toplevel interface {
 	// 
 	// Presenting is asynchronous and the specified layout parameters are not
 	// guaranteed to be respected.
-	Present(*ToplevelLayout)
+	Present(ToplevelLayout)
 	// RestoreSystemShortcuts wraps gdk_toplevel_restore_system_shortcuts
 	//
 	// Restore default system keyboard shortcuts which were previously
@@ -8295,23 +8452,6 @@ type Toplevel interface {
 	// Setting @deletable to %TRUE hints the desktop environment
 	// that it should offer the user a way to close the surface.
 	SetDeletable(bool)
-	// SetIconList wraps gdk_toplevel_set_icon_list
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- surfaces *glib.List: 
-	//   A list of textures to use as icon, of different sizes 
-	//
-	// Sets a list of icons for the surface.
-	// 
-	// One of these will be used to represent the surface in iconic form.
-	// The icon may be shown in window lists or task bars. Which icon
-	// size is shown depends on the window manager. The window manager
-	// can scale the icon but setting several size icons can give better
-	// image quality.
-	// 
-	// Note that some platforms don't support surface icons.
-	SetIconList(*glib.List)
 	// SetModal wraps gdk_toplevel_set_modal
 	// 
 	// The function takes the following parameters:
@@ -8389,14 +8529,14 @@ type Toplevel interface {
 	TitlebarGesture(TitlebarGesture) bool
 }
 
-func unsafeWrapToplevel(base *gobject.Object) *ToplevelInstance {
+func unsafeWrapToplevel(base *gobject.ObjectInstance) *ToplevelInstance {
 	return &ToplevelInstance{
-		Object: base,
+		ObjectInstance: base,
 	}
 }
 
 func marshalToplevelInstance(p uintptr) (interface{}, error) {
-	return unsafeWrapToplevel(gobject.ValueFromNative(unsafe.Pointer(p)).Object()), nil
+	return unsafeWrapToplevel(gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Object()), nil
 }
 
 // UnsafeToplevelFromGlibBorrow is used to convert raw GdkToplevel pointers to go. This is used by the bindings internally.
@@ -8439,12 +8579,12 @@ func UnsafeToplevelToGlibFull(c Toplevel) unsafe.Pointer {
 // 
 // You might use this function to implement draggable titlebars.
 func (toplevel *ToplevelInstance) BeginMove(device Device, button int, x float64, y float64, timestamp uint32) {
-	var carg0 *C.GdkToplevel // in, none, interface
-	var carg1 *C.GdkDevice   // in, none, class
-	var carg2 C.int          // in, casted
-	var carg3 C.gdouble      // in, casted
-	var carg4 C.gdouble      // in, casted
-	var carg5 C.guint32      // in, casted
+	var carg0 *C.GdkToplevel // in, none, converted
+	var carg1 *C.GdkDevice   // in, none, converted
+	var carg2 C.int          // in, none, casted
+	var carg3 C.gdouble      // in, none, casted
+	var carg4 C.gdouble      // in, none, casted
+	var carg5 C.guint32      // in, none, casted
 
 	carg0 = (*C.GdkToplevel)(UnsafeToplevelToGlibNone(toplevel))
 	carg1 = (*C.GdkDevice)(UnsafeDeviceToGlibNone(device))
@@ -8478,13 +8618,13 @@ func (toplevel *ToplevelInstance) BeginMove(device Device, button int, x float64
 // 
 // You might use this function to implement a “window resize grip.”
 func (toplevel *ToplevelInstance) BeginResize(edge SurfaceEdge, device Device, button int, x float64, y float64, timestamp uint32) {
-	var carg0 *C.GdkToplevel   // in, none, interface
-	var carg1 C.GdkSurfaceEdge // in, casted
-	var carg2 *C.GdkDevice     // in, none, class, nullable
-	var carg3 C.int            // in, casted
-	var carg4 C.gdouble        // in, casted
-	var carg5 C.gdouble        // in, casted
-	var carg6 C.guint32        // in, casted
+	var carg0 *C.GdkToplevel   // in, none, converted
+	var carg1 C.GdkSurfaceEdge // in, none, casted
+	var carg2 *C.GdkDevice     // in, none, converted, nullable
+	var carg3 C.int            // in, none, casted
+	var carg4 C.gdouble        // in, none, casted
+	var carg5 C.gdouble        // in, none, casted
+	var carg6 C.guint32        // in, none, casted
 
 	carg0 = (*C.GdkToplevel)(UnsafeToplevelToGlibNone(toplevel))
 	carg1 = C.GdkSurfaceEdge(edge)
@@ -8518,8 +8658,8 @@ func (toplevel *ToplevelInstance) BeginResize(edge SurfaceEdge, device Device, b
 // should be used on a [GtkWindow](../gtk4/class.Window.html), rather than
 // calling this function.
 func (toplevel *ToplevelInstance) Focus(timestamp uint32) {
-	var carg0 *C.GdkToplevel // in, none, interface
-	var carg1 C.guint32      // in, casted
+	var carg0 *C.GdkToplevel // in, none, converted
+	var carg1 C.guint32      // in, none, casted
 
 	carg0 = (*C.GdkToplevel)(UnsafeToplevelToGlibNone(toplevel))
 	carg1 = C.guint32(timestamp)
@@ -8537,8 +8677,8 @@ func (toplevel *ToplevelInstance) Focus(timestamp uint32) {
 // Gets the bitwise or of the currently active surface state flags,
 // from the `GdkToplevelState` enumeration.
 func (toplevel *ToplevelInstance) GetState() ToplevelState {
-	var carg0 *C.GdkToplevel     // in, none, interface
-	var cret  C.GdkToplevelState // return, casted
+	var carg0 *C.GdkToplevel     // in, none, converted
+	var cret  C.GdkToplevelState // return, none, casted
 
 	carg0 = (*C.GdkToplevel)(UnsafeToplevelToGlibNone(toplevel))
 
@@ -8561,7 +8701,7 @@ func (toplevel *ToplevelInstance) GetState() ToplevelState {
 // 
 // The windowing system may choose to ignore the request.
 func (toplevel *ToplevelInstance) Lower() bool {
-	var carg0 *C.GdkToplevel // in, none, interface
+	var carg0 *C.GdkToplevel // in, none, converted
 	var cret  C.gboolean     // return
 
 	carg0 = (*C.GdkToplevel)(UnsafeToplevelToGlibNone(toplevel))
@@ -8587,7 +8727,7 @@ func (toplevel *ToplevelInstance) Lower() bool {
 // 
 // The windowing system may choose to ignore the request.
 func (toplevel *ToplevelInstance) Minimize() bool {
-	var carg0 *C.GdkToplevel // in, none, interface
+	var carg0 *C.GdkToplevel // in, none, converted
 	var cret  C.gboolean     // return
 
 	carg0 = (*C.GdkToplevel)(UnsafeToplevelToGlibNone(toplevel))
@@ -8608,7 +8748,7 @@ func (toplevel *ToplevelInstance) Minimize() bool {
 // 
 // The function takes the following parameters:
 // 
-// 	- layout *ToplevelLayout: the `GdkToplevelLayout` object used to layout 
+// 	- layout ToplevelLayout: the `GdkToplevelLayout` object used to layout 
 //
 // Present @toplevel after having processed the `GdkToplevelLayout` rules.
 // 
@@ -8621,9 +8761,9 @@ func (toplevel *ToplevelInstance) Minimize() bool {
 // 
 // Presenting is asynchronous and the specified layout parameters are not
 // guaranteed to be respected.
-func (toplevel *ToplevelInstance) Present(layout *ToplevelLayout) {
-	var carg0 *C.GdkToplevel       // in, none, interface
-	var carg1 *C.GdkToplevelLayout // in, none, record
+func (toplevel *ToplevelInstance) Present(layout ToplevelLayout) {
+	var carg0 *C.GdkToplevel       // in, none, converted
+	var carg1 *C.GdkToplevelLayout // in, none, converted
 
 	carg0 = (*C.GdkToplevel)(UnsafeToplevelToGlibNone(toplevel))
 	carg1 = (*C.GdkToplevelLayout)(UnsafeToplevelLayoutToGlibNone(layout))
@@ -8640,7 +8780,7 @@ func (toplevel *ToplevelInstance) Present(layout *ToplevelLayout) {
 // 
 // This undoes the effect of [method@Gdk.Toplevel.inhibit_system_shortcuts].
 func (toplevel *ToplevelInstance) RestoreSystemShortcuts() {
-	var carg0 *C.GdkToplevel // in, none, interface
+	var carg0 *C.GdkToplevel // in, none, converted
 
 	carg0 = (*C.GdkToplevel)(UnsafeToplevelToGlibNone(toplevel))
 
@@ -8660,7 +8800,7 @@ func (toplevel *ToplevelInstance) RestoreSystemShortcuts() {
 // that the surface has its own, client-side decorations and
 // does not need to have window decorations added.
 func (toplevel *ToplevelInstance) SetDecorated(decorated bool) {
-	var carg0 *C.GdkToplevel // in, none, interface
+	var carg0 *C.GdkToplevel // in, none, converted
 	var carg1 C.gboolean     // in
 
 	carg0 = (*C.GdkToplevel)(UnsafeToplevelToGlibNone(toplevel))
@@ -8684,7 +8824,7 @@ func (toplevel *ToplevelInstance) SetDecorated(decorated bool) {
 // Setting @deletable to %TRUE hints the desktop environment
 // that it should offer the user a way to close the surface.
 func (toplevel *ToplevelInstance) SetDeletable(deletable bool) {
-	var carg0 *C.GdkToplevel // in, none, interface
+	var carg0 *C.GdkToplevel // in, none, converted
 	var carg1 C.gboolean     // in
 
 	carg0 = (*C.GdkToplevel)(UnsafeToplevelToGlibNone(toplevel))
@@ -8695,34 +8835,6 @@ func (toplevel *ToplevelInstance) SetDeletable(deletable bool) {
 	C.gdk_toplevel_set_deletable(carg0, carg1)
 	runtime.KeepAlive(toplevel)
 	runtime.KeepAlive(deletable)
-}
-
-// SetIconList wraps gdk_toplevel_set_icon_list
-// 
-// The function takes the following parameters:
-// 
-// 	- surfaces *glib.List: 
-//   A list of textures to use as icon, of different sizes 
-//
-// Sets a list of icons for the surface.
-// 
-// One of these will be used to represent the surface in iconic form.
-// The icon may be shown in window lists or task bars. Which icon
-// size is shown depends on the window manager. The window manager
-// can scale the icon but setting several size icons can give better
-// image quality.
-// 
-// Note that some platforms don't support surface icons.
-func (toplevel *ToplevelInstance) SetIconList(surfaces *glib.List) {
-	var carg0 *C.GdkToplevel // in, none, interface
-	var carg1 *C.GList       // in, container inner types: (GdkTexture), transfer: none, scope: call, implicit: false, skip: false, optional: false, nullable: false, caller-allocates: false, has closure: false, has destroy: false
-
-	carg0 = (*C.GdkToplevel)(UnsafeToplevelToGlibNone(toplevel))
-	panic("unimplemented conversion of container *typesystem.PointerType (GList*)")
-
-	C.gdk_toplevel_set_icon_list(carg0, carg1)
-	runtime.KeepAlive(toplevel)
-	runtime.KeepAlive(surfaces)
 }
 
 // SetModal wraps gdk_toplevel_set_modal
@@ -8741,7 +8853,7 @@ func (toplevel *ToplevelInstance) SetIconList(surfaces *glib.List) {
 // You should only use this on surfaces for which you have
 // previously called [method@Gdk.Toplevel.set_transient_for].
 func (toplevel *ToplevelInstance) SetModal(modal bool) {
-	var carg0 *C.GdkToplevel // in, none, interface
+	var carg0 *C.GdkToplevel // in, none, converted
 	var carg1 C.gboolean     // in
 
 	carg0 = (*C.GdkToplevel)(UnsafeToplevelToGlibNone(toplevel))
@@ -8766,7 +8878,7 @@ func (toplevel *ToplevelInstance) SetModal(modal bool) {
 // [gtk_window_set_startup_id()](../gtk4/method.Window.set_startup_id.html)
 // instead of this low-level function.
 func (toplevel *ToplevelInstance) SetStartupID(startupId string) {
-	var carg0 *C.GdkToplevel // in, none, interface
+	var carg0 *C.GdkToplevel // in, none, converted
 	var carg1 *C.gchar       // in, none, string
 
 	carg0 = (*C.GdkToplevel)(UnsafeToplevelToGlibNone(toplevel))
@@ -8789,7 +8901,7 @@ func (toplevel *ToplevelInstance) SetStartupID(startupId string) {
 // The title maybe be displayed in the titlebar,
 // in lists of windows, etc.
 func (toplevel *ToplevelInstance) SetTitle(title string) {
-	var carg0 *C.GdkToplevel // in, none, interface
+	var carg0 *C.GdkToplevel // in, none, converted
 	var carg1 *C.gchar       // in, none, string
 
 	carg0 = (*C.GdkToplevel)(UnsafeToplevelToGlibNone(toplevel))
@@ -8817,8 +8929,8 @@ func (toplevel *ToplevelInstance) SetTitle(title string) {
 // See [gtk_window_set_transient_for()](../gtk4/method.Window.set_transient_for.html)
 // if you’re using [GtkWindow](../gtk4/class.Window.html).
 func (toplevel *ToplevelInstance) SetTransientFor(parent Surface) {
-	var carg0 *C.GdkToplevel // in, none, interface
-	var carg1 *C.GdkSurface  // in, none, class
+	var carg0 *C.GdkToplevel // in, none, converted
+	var carg1 *C.GdkSurface  // in, none, converted
 
 	carg0 = (*C.GdkToplevel)(UnsafeToplevelToGlibNone(toplevel))
 	carg1 = (*C.GdkSurface)(UnsafeSurfaceToGlibNone(parent))
@@ -8836,7 +8948,7 @@ func (toplevel *ToplevelInstance) SetTransientFor(parent Surface) {
 // Returns whether the desktop environment supports
 // tiled window states.
 func (toplevel *ToplevelInstance) SupportsEdgeConstraints() bool {
-	var carg0 *C.GdkToplevel // in, none, interface
+	var carg0 *C.GdkToplevel // in, none, converted
 	var cret  C.gboolean     // return
 
 	carg0 = (*C.GdkToplevel)(UnsafeToplevelToGlibNone(toplevel))
@@ -8865,8 +8977,8 @@ func (toplevel *ToplevelInstance) SupportsEdgeConstraints() bool {
 //
 // Performs a title bar gesture.
 func (toplevel *ToplevelInstance) TitlebarGesture(gesture TitlebarGesture) bool {
-	var carg0 *C.GdkToplevel       // in, none, interface
-	var carg1 C.GdkTitlebarGesture // in, casted
+	var carg0 *C.GdkToplevel       // in, none, converted
+	var carg1 C.GdkTitlebarGesture // in, none, casted
 	var cret  C.gboolean           // return
 
 	carg0 = (*C.GdkToplevel)(UnsafeToplevelToGlibNone(toplevel))
@@ -8993,31 +9105,31 @@ type AppLaunchContext interface {
 	SetTimestamp(uint32)
 }
 
-func unsafeWrapAppLaunchContext(base *gobject.Object) *AppLaunchContextInstance {
+func unsafeWrapAppLaunchContext(base *gio.ObjectInstance) *AppLaunchContextInstance {
 	return &AppLaunchContextInstance{
-		AppLaunchContextInstance: gio.AppLaunchContextInstance{
-			Object: *base,
+		ObjectInstance: gobject.ObjectInstance{
+			ObjectInstance: *base,
 		},
 	}
 }
 
 func marshalAppLaunchContextInstance(p uintptr) (interface{}, error) {
-	return unsafeWrapAppLaunchContext(gobject.ValueFromNative(unsafe.Pointer(p)).Object()), nil
+	return unsafeWrapAppLaunchContext(gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Object()), nil
 }
 
 // UnsafeAppLaunchContextFromGlibBorrow is used to convert raw GdkAppLaunchContext pointers to go. This is used by the bindings internally.
 func UnsafeAppLaunchContextFromGlibBorrow(c unsafe.Pointer) AppLaunchContext {
-	return gobject.TODOBorrow(c).(AppLaunchContext)
+	return gio.TODOBorrow(c).(AppLaunchContext)
 }
 
 // UnsafeAppLaunchContextFromGlibNone is used to convert raw GdkAppLaunchContext pointers to go while taking a reference and attaching a finalizer. This is used by the bindings internally.
 func UnsafeAppLaunchContextFromGlibNone(c unsafe.Pointer) AppLaunchContext {
-	return gobject.Take(c).(AppLaunchContext)
+	return gio.Take(c).(AppLaunchContext)
 }
 
 // UnsafeAppLaunchContextFromGlibFull is used to convert raw GdkAppLaunchContext pointers to go while attaching a finalizer. This is used by the bindings internally.
 func UnsafeAppLaunchContextFromGlibFull(c unsafe.Pointer) AppLaunchContext {
-	return gobject.AssumeOwnership(c).(AppLaunchContext)
+	return gio.AssumeOwnership(c).(AppLaunchContext)
 }
 
 func (a *AppLaunchContextInstance) upcastToGdkAppLaunchContext() *AppLaunchContextInstance {
@@ -9026,12 +9138,12 @@ func (a *AppLaunchContextInstance) upcastToGdkAppLaunchContext() *AppLaunchConte
 
 // UnsafeAppLaunchContextToGlibNone is used to convert the instance to it's C value GdkAppLaunchContext. This is used by the bindings internally.
 func UnsafeAppLaunchContextToGlibNone(c AppLaunchContext) unsafe.Pointer {
-	return gobject.TODOToNone(c)
+	return gio.TODOToNone(c)
 }
 
 // UnsafeAppLaunchContextToGlibFull is used to convert the instance to it's C value GdkAppLaunchContext, while removeing the finalizer. This is used by the bindings internally.
 func UnsafeAppLaunchContextToGlibFull(c AppLaunchContext) unsafe.Pointer {
-	return gobject.TODOToFull(c)
+	return gio.TODOToFull(c)
 }
 
 // GetDisplay wraps gdk_app_launch_context_get_display
@@ -9041,8 +9153,8 @@ func UnsafeAppLaunchContextToGlibFull(c AppLaunchContext) unsafe.Pointer {
 //
 // Gets the `GdkDisplay` that @context is for.
 func (context *AppLaunchContextInstance) GetDisplay() Display {
-	var carg0 *C.GdkAppLaunchContext // in, none, class
-	var cret  *C.GdkDisplay          // return, none, class
+	var carg0 *C.GdkAppLaunchContext // in, none, converted
+	var cret  *C.GdkDisplay          // return, none, converted
 
 	carg0 = (*C.GdkAppLaunchContext)(UnsafeAppLaunchContextToGlibNone(context))
 
@@ -9076,8 +9188,8 @@ func (context *AppLaunchContextInstance) GetDisplay() Display {
 // it is up to the window manager to pick one, typically it will
 // be the current workspace.
 func (context *AppLaunchContextInstance) SetDesktop(desktop int) {
-	var carg0 *C.GdkAppLaunchContext // in, none, class
-	var carg1 C.int                  // in, casted
+	var carg0 *C.GdkAppLaunchContext // in, none, converted
+	var carg1 C.int                  // in, none, casted
 
 	carg0 = (*C.GdkAppLaunchContext)(UnsafeAppLaunchContextToGlibNone(context))
 	carg1 = C.int(desktop)
@@ -9101,12 +9213,12 @@ func (context *AppLaunchContextInstance) SetDesktop(desktop int) {
 // 
 // See also [method@Gdk.AppLaunchContext.set_icon_name].
 func (context *AppLaunchContextInstance) SetIcon(icon gio.Icon) {
-	var carg0 *C.GdkAppLaunchContext // in, none, class
-	var carg1 *C.GIcon               // in, none, interface, nullable
+	var carg0 *C.GdkAppLaunchContext // in, none, converted
+	var carg1 *C.GIcon               // in, none, converted, nullable
 
 	carg0 = (*C.GdkAppLaunchContext)(UnsafeAppLaunchContextToGlibNone(context))
 	if icon != nil {
-		carg1 = (*C.GIcon)(gio.UnsafeIconToGlibNone(icon))
+		carg1 = (*C.GIcon)(UnsafeIconToGlibNone(icon))
 	}
 
 	C.gdk_app_launch_context_set_icon(carg0, carg1)
@@ -9130,7 +9242,7 @@ func (context *AppLaunchContextInstance) SetIcon(icon gio.Icon) {
 // the file that is passed to launched application or from the `GAppInfo`
 // for the launched application itself.
 func (context *AppLaunchContextInstance) SetIconName(iconName string) {
-	var carg0 *C.GdkAppLaunchContext // in, none, class
+	var carg0 *C.GdkAppLaunchContext // in, none, converted
 	var carg1 *C.gchar               // in, none, string, nullable
 
 	carg0 = (*C.GdkAppLaunchContext)(UnsafeAppLaunchContextToGlibNone(context))
@@ -9160,8 +9272,8 @@ func (context *AppLaunchContextInstance) SetIconName(iconName string) {
 // typing in another window. This is also known as 'focus stealing
 // prevention'.
 func (context *AppLaunchContextInstance) SetTimestamp(timestamp uint32) {
-	var carg0 *C.GdkAppLaunchContext // in, none, class
-	var carg1 C.guint32              // in, casted
+	var carg0 *C.GdkAppLaunchContext // in, none, converted
+	var carg1 C.guint32              // in, none, casted
 
 	carg0 = (*C.GdkAppLaunchContext)(UnsafeAppLaunchContextToGlibNone(context))
 	carg1 = C.guint32(timestamp)
@@ -9174,7 +9286,7 @@ func (context *AppLaunchContextInstance) SetTimestamp(timestamp uint32) {
 // CicpParamsInstance is the instance type used by all types extending GdkCicpParams. It is used internally by the bindings. Users should use the interface [CicpParams] instead.
 type CicpParamsInstance struct {
 	_ [0]func() // equal guard
-	gobject.Object
+	gobject.ObjectInstance
 }
 
 var _ CicpParams = (*CicpParamsInstance)(nil)
@@ -9200,13 +9312,13 @@ var _ CicpParams = (*CicpParamsInstance)(nil)
 // create a variant of a color state, by changing just one of the cicp
 // parameters, or just to obtain information about the color state.
 type CicpParams interface {
-	gobject.ObjectLike
+	gobject.Object
 	upcastToGdkCicpParams() *CicpParamsInstance
 
 	// BuildColorState wraps gdk_cicp_params_build_color_state
 	// The function returns the following values:
 	// 
-	// 	- ret *ColorState 
+	// 	- ret ColorState 
 	// 	- _goerr error (nullable): an error 
 	//
 	// Creates a new `GdkColorState` object for the cicp parameters in @self.
@@ -9214,7 +9326,7 @@ type CicpParams interface {
 	// Note that this may fail if the cicp parameters in @self are not
 	// supported by GTK. In that case, `NULL` is returned, and @error is set
 	// with an error message that can be presented to the user.
-	BuildColorState() (*ColorState, error)
+	BuildColorState() (ColorState, error)
 	// GetColorPrimaries wraps gdk_cicp_params_get_color_primaries
 	// The function returns the following values:
 	// 
@@ -9279,14 +9391,14 @@ type CicpParams interface {
 	SetTransferFunction(uint)
 }
 
-func unsafeWrapCicpParams(base *gobject.Object) *CicpParamsInstance {
+func unsafeWrapCicpParams(base *gobject.ObjectInstance) *CicpParamsInstance {
 	return &CicpParamsInstance{
-		Object: *base,
+		ObjectInstance: *base,
 	}
 }
 
 func marshalCicpParamsInstance(p uintptr) (interface{}, error) {
-	return unsafeWrapCicpParams(gobject.ValueFromNative(unsafe.Pointer(p)).Object()), nil
+	return unsafeWrapCicpParams(gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Object()), nil
 }
 
 // UnsafeCicpParamsFromGlibBorrow is used to convert raw GdkCicpParams pointers to go. This is used by the bindings internally.
@@ -9328,7 +9440,7 @@ func UnsafeCicpParamsToGlibFull(c CicpParams) unsafe.Pointer {
 // The initial values of the properties are the values for "undefined"
 // and need to be set before a color state object can be built.
 func NewCicpParamsInstance() CicpParams {
-	var cret *C.GdkCicpParams // return, full, class
+	var cret *C.GdkCicpParams // return, full, converted
 
 	cret = C.gdk_cicp_params_new()
 
@@ -9342,7 +9454,7 @@ func NewCicpParamsInstance() CicpParams {
 // BuildColorState wraps gdk_cicp_params_build_color_state
 // The function returns the following values:
 // 
-// 	- ret *ColorState 
+// 	- ret ColorState 
 // 	- _goerr error (nullable): an error 
 //
 // Creates a new `GdkColorState` object for the cicp parameters in @self.
@@ -9350,22 +9462,22 @@ func NewCicpParamsInstance() CicpParams {
 // Note that this may fail if the cicp parameters in @self are not
 // supported by GTK. In that case, `NULL` is returned, and @error is set
 // with an error message that can be presented to the user.
-func (self *CicpParamsInstance) BuildColorState() (*ColorState, error) {
-	var carg0 *C.GdkCicpParams // in, none, class
-	var cret  *C.GdkColorState // return, full, record
-	var _cerr *C.GError        // out, full, record, nullable
+func (self *CicpParamsInstance) BuildColorState() (ColorState, error) {
+	var carg0 *C.GdkCicpParams // in, none, converted
+	var cret  *C.GdkColorState // return, full, converted
+	var _cerr *C.GError        // out, full, converted, nullable
 
 	carg0 = (*C.GdkCicpParams)(UnsafeCicpParamsToGlibNone(self))
 
 	cret = C.gdk_cicp_params_build_color_state(carg0, &_cerr)
 	runtime.KeepAlive(self)
 
-	var ret    *ColorState
+	var ret    ColorState
 	var _goerr error
 
 	ret = UnsafeColorStateFromGlibFull(unsafe.Pointer(cret))
 	if _cerr != nil {
-		_goerr = glib.UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
+		_goerr = UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
 	}
 
 	return ret, _goerr
@@ -9379,8 +9491,8 @@ func (self *CicpParamsInstance) BuildColorState() (*ColorState, error) {
 // Returns the value of the color-primaries property
 // of @self.
 func (self *CicpParamsInstance) GetColorPrimaries() uint {
-	var carg0 *C.GdkCicpParams // in, none, class
-	var cret  C.guint          // return, casted
+	var carg0 *C.GdkCicpParams // in, none, converted
+	var cret  C.guint          // return, none, casted
 
 	carg0 = (*C.GdkCicpParams)(UnsafeCicpParamsToGlibNone(self))
 
@@ -9401,8 +9513,8 @@ func (self *CicpParamsInstance) GetColorPrimaries() uint {
 //
 // Gets the matrix-coefficients property of @self.
 func (self *CicpParamsInstance) GetMatrixCoefficients() uint {
-	var carg0 *C.GdkCicpParams // in, none, class
-	var cret  C.guint          // return, casted
+	var carg0 *C.GdkCicpParams // in, none, converted
+	var cret  C.guint          // return, none, casted
 
 	carg0 = (*C.GdkCicpParams)(UnsafeCicpParamsToGlibNone(self))
 
@@ -9423,8 +9535,8 @@ func (self *CicpParamsInstance) GetMatrixCoefficients() uint {
 //
 // Gets the range property of @self.
 func (self *CicpParamsInstance) GetRange() CicpRange {
-	var carg0 *C.GdkCicpParams // in, none, class
-	var cret  C.GdkCicpRange   // return, casted
+	var carg0 *C.GdkCicpParams // in, none, converted
+	var cret  C.GdkCicpRange   // return, none, casted
 
 	carg0 = (*C.GdkCicpParams)(UnsafeCicpParamsToGlibNone(self))
 
@@ -9445,8 +9557,8 @@ func (self *CicpParamsInstance) GetRange() CicpRange {
 //
 // Gets the transfer-function property of @self.
 func (self *CicpParamsInstance) GetTransferFunction() uint {
-	var carg0 *C.GdkCicpParams // in, none, class
-	var cret  C.guint          // return, casted
+	var carg0 *C.GdkCicpParams // in, none, converted
+	var cret  C.guint          // return, none, casted
 
 	carg0 = (*C.GdkCicpParams)(UnsafeCicpParamsToGlibNone(self))
 
@@ -9468,8 +9580,8 @@ func (self *CicpParamsInstance) GetTransferFunction() uint {
 //
 // Sets the color-primaries property of @self.
 func (self *CicpParamsInstance) SetColorPrimaries(colorPrimaries uint) {
-	var carg0 *C.GdkCicpParams // in, none, class
-	var carg1 C.guint          // in, casted
+	var carg0 *C.GdkCicpParams // in, none, converted
+	var carg1 C.guint          // in, none, casted
 
 	carg0 = (*C.GdkCicpParams)(UnsafeCicpParamsToGlibNone(self))
 	carg1 = C.guint(colorPrimaries)
@@ -9488,8 +9600,8 @@ func (self *CicpParamsInstance) SetColorPrimaries(colorPrimaries uint) {
 // @self a `GdkCicpParams`
 // Sets the matrix-coefficients property of @self.
 func (self *CicpParamsInstance) SetMatrixCoefficients(matrixCoefficients uint) {
-	var carg0 *C.GdkCicpParams // in, none, class
-	var carg1 C.guint          // in, casted
+	var carg0 *C.GdkCicpParams // in, none, converted
+	var carg1 C.guint          // in, none, casted
 
 	carg0 = (*C.GdkCicpParams)(UnsafeCicpParamsToGlibNone(self))
 	carg1 = C.guint(matrixCoefficients)
@@ -9507,8 +9619,8 @@ func (self *CicpParamsInstance) SetMatrixCoefficients(matrixCoefficients uint) {
 //
 // Sets the range property of @self
 func (self *CicpParamsInstance) SetRange(_range CicpRange) {
-	var carg0 *C.GdkCicpParams // in, none, class
-	var carg1 C.GdkCicpRange   // in, casted
+	var carg0 *C.GdkCicpParams // in, none, converted
+	var carg1 C.GdkCicpRange   // in, none, casted
 
 	carg0 = (*C.GdkCicpParams)(UnsafeCicpParamsToGlibNone(self))
 	carg1 = C.GdkCicpRange(_range)
@@ -9526,8 +9638,8 @@ func (self *CicpParamsInstance) SetRange(_range CicpRange) {
 //
 // Sets the transfer-function property of @self.
 func (self *CicpParamsInstance) SetTransferFunction(transferFunction uint) {
-	var carg0 *C.GdkCicpParams // in, none, class
-	var carg1 C.guint          // in, casted
+	var carg0 *C.GdkCicpParams // in, none, converted
+	var carg1 C.guint          // in, none, casted
 
 	carg0 = (*C.GdkCicpParams)(UnsafeCicpParamsToGlibNone(self))
 	carg1 = C.guint(transferFunction)
@@ -9540,7 +9652,7 @@ func (self *CicpParamsInstance) SetTransferFunction(transferFunction uint) {
 // ClipboardInstance is the instance type used by all types extending GdkClipboard. It is used internally by the bindings. Users should use the interface [Clipboard] instead.
 type ClipboardInstance struct {
 	_ [0]func() // equal guard
-	gobject.Object
+	gobject.ObjectInstance
 }
 
 var _ Clipboard = (*ClipboardInstance)(nil)
@@ -9565,7 +9677,7 @@ var _ Clipboard = (*ClipboardInstance)(nil)
 // [method@Gdk.Clipboard.read_texture_async]. For other data, use
 // [method@Gdk.Clipboard.read_async], which provides a `GInputStream` object.
 type Clipboard interface {
-	gobject.ObjectLike
+	gobject.Object
 	upcastToGdkClipboard() *ClipboardInstance
 
 	// GetContent wraps gdk_clipboard_get_content
@@ -9588,10 +9700,10 @@ type Clipboard interface {
 	// GetFormats wraps gdk_clipboard_get_formats
 	// The function returns the following values:
 	// 
-	// 	- ret *ContentFormats 
+	// 	- ret ContentFormats 
 	//
 	// Gets the formats that the clipboard can provide its current contents in.
-	GetFormats() *ContentFormats
+	GetFormats() ContentFormats
 	// IsLocal wraps gdk_clipboard_is_local
 	// The function returns the following values:
 	// 
@@ -9609,9 +9721,9 @@ type Clipboard interface {
 	// 
 	// The function takes the following parameters:
 	// 
-	// 	- mimeTypes []string: a %NULL-terminated array of mime types to choose from 
+	// 	- mimeTypes array: a %NULL-terminated array of mime types to choose from 
 	// 	- ioPriority int: the I/O priority of the request 
-	// 	- cancellable gio.Cancellable (nullable): optional `GCancellable` object 
+	// 	- cancellable gio. (nullable): optional `GCancellable` object 
 	// 	- callback gio.AsyncReadyCallback (nullable): callback to call when the request is satisfied 
 	//
 	// Asynchronously requests an input stream to read the @clipboard's
@@ -9619,7 +9731,7 @@ type Clipboard interface {
 	// 
 	// The clipboard will choose the most suitable mime type from the given list
 	// to fulfill the request, preferring the ones listed first.
-	ReadAsync([]string, int, gio.Cancellable, gio.AsyncReadyCallback)
+	ReadAsync(array, int, gio., gio.AsyncReadyCallback)
 	// ReadFinish wraps gdk_clipboard_read_finish
 	// 
 	// The function takes the following parameters:
@@ -9641,7 +9753,7 @@ type Clipboard interface {
 	// 
 	// The function takes the following parameters:
 	// 
-	// 	- cancellable gio.Cancellable (nullable): optional `GCancellable` object 
+	// 	- cancellable gio. (nullable): optional `GCancellable` object 
 	// 	- callback gio.AsyncReadyCallback (nullable): callback to call when the request is satisfied 
 	//
 	// Asynchronously request the @clipboard contents converted to a string.
@@ -9649,7 +9761,7 @@ type Clipboard interface {
 	// This is a simple wrapper around [method@Gdk.Clipboard.read_value_async].
 	// Use that function or [method@Gdk.Clipboard.read_async] directly if you
 	// need more control over the operation.
-	ReadTextAsync(gio.Cancellable, gio.AsyncReadyCallback)
+	ReadTextAsync(gio., gio.AsyncReadyCallback)
 	// ReadTextFinish wraps gdk_clipboard_read_text_finish
 	// 
 	// The function takes the following parameters:
@@ -9669,7 +9781,7 @@ type Clipboard interface {
 	// 
 	// The function takes the following parameters:
 	// 
-	// 	- cancellable gio.Cancellable (nullable): optional `GCancellable` object, %NULL to ignore. 
+	// 	- cancellable gio. (nullable): optional `GCancellable` object, %NULL to ignore. 
 	// 	- callback gio.AsyncReadyCallback (nullable): callback to call when the request is satisfied 
 	//
 	// Asynchronously request the @clipboard contents converted to a `GdkPixbuf`.
@@ -9677,7 +9789,7 @@ type Clipboard interface {
 	// This is a simple wrapper around [method@Gdk.Clipboard.read_value_async].
 	// Use that function or [method@Gdk.Clipboard.read_async] directly if you
 	// need more control over the operation.
-	ReadTextureAsync(gio.Cancellable, gio.AsyncReadyCallback)
+	ReadTextureAsync(gio., gio.AsyncReadyCallback)
 	// ReadTextureFinish wraps gdk_clipboard_read_texture_finish
 	// 
 	// The function takes the following parameters:
@@ -9699,7 +9811,7 @@ type Clipboard interface {
 	// 
 	// 	- typ glib.Type: a `GType` to read 
 	// 	- ioPriority int: the I/O priority of the request 
-	// 	- cancellable gio.Cancellable (nullable): optional `GCancellable` object 
+	// 	- cancellable gio. (nullable): optional `GCancellable` object 
 	// 	- callback gio.AsyncReadyCallback (nullable): callback to call when the request is satisfied 
 	//
 	// Asynchronously request the @clipboard contents converted to the given
@@ -9708,7 +9820,7 @@ type Clipboard interface {
 	// For local clipboard contents that are available in the given `GType`,
 	// the value will be copied directly. Otherwise, GDK will try to use
 	// [func@content_deserialize_async] to convert the clipboard's data.
-	ReadValueAsync(glib.Type, int, gio.Cancellable, gio.AsyncReadyCallback)
+	ReadValueAsync(glib.Type, int, gio., gio.AsyncReadyCallback)
 	// ReadValueFinish wraps gdk_clipboard_read_value_finish
 	// 
 	// The function takes the following parameters:
@@ -9777,7 +9889,7 @@ type Clipboard interface {
 	// The function takes the following parameters:
 	// 
 	// 	- ioPriority int: the I/O priority of the request 
-	// 	- cancellable gio.Cancellable (nullable): optional `GCancellable` object 
+	// 	- cancellable gio. (nullable): optional `GCancellable` object 
 	// 	- callback gio.AsyncReadyCallback (nullable): callback to call when the request is satisfied 
 	//
 	// Asynchronously instructs the @clipboard to store its contents remotely.
@@ -9792,7 +9904,7 @@ type Clipboard interface {
 	// This function is called automatically when a
 	// [GtkApplication](../gtk4/class.Application.html)
 	// is shut down, so you likely don't need to call it.
-	StoreAsync(int, gio.Cancellable, gio.AsyncReadyCallback)
+	StoreAsync(int, gio., gio.AsyncReadyCallback)
 	// StoreFinish wraps gdk_clipboard_store_finish
 	// 
 	// The function takes the following parameters:
@@ -9810,14 +9922,14 @@ type Clipboard interface {
 	StoreFinish(gio.AsyncResult) (bool, error)
 }
 
-func unsafeWrapClipboard(base *gobject.Object) *ClipboardInstance {
+func unsafeWrapClipboard(base *gobject.ObjectInstance) *ClipboardInstance {
 	return &ClipboardInstance{
-		Object: *base,
+		ObjectInstance: *base,
 	}
 }
 
 func marshalClipboardInstance(p uintptr) (interface{}, error) {
-	return unsafeWrapClipboard(gobject.ValueFromNative(unsafe.Pointer(p)).Object()), nil
+	return unsafeWrapClipboard(gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Object()), nil
 }
 
 // UnsafeClipboardFromGlibBorrow is used to convert raw GdkClipboard pointers to go. This is used by the bindings internally.
@@ -9859,8 +9971,8 @@ func UnsafeClipboardToGlibFull(c Clipboard) unsafe.Pointer {
 // If the @clipboard is empty or its contents are not owned by the
 // current process, %NULL will be returned.
 func (clipboard *ClipboardInstance) GetContent() ContentProvider {
-	var carg0 *C.GdkClipboard       // in, none, class
-	var cret  *C.GdkContentProvider // return, none, class
+	var carg0 *C.GdkClipboard       // in, none, converted
+	var cret  *C.GdkContentProvider // return, none, converted
 
 	carg0 = (*C.GdkClipboard)(UnsafeClipboardToGlibNone(clipboard))
 
@@ -9881,8 +9993,8 @@ func (clipboard *ClipboardInstance) GetContent() ContentProvider {
 //
 // Gets the `GdkDisplay` that the clipboard was created for.
 func (clipboard *ClipboardInstance) GetDisplay() Display {
-	var carg0 *C.GdkClipboard // in, none, class
-	var cret  *C.GdkDisplay   // return, none, class
+	var carg0 *C.GdkClipboard // in, none, converted
+	var cret  *C.GdkDisplay   // return, none, converted
 
 	carg0 = (*C.GdkClipboard)(UnsafeClipboardToGlibNone(clipboard))
 
@@ -9899,19 +10011,19 @@ func (clipboard *ClipboardInstance) GetDisplay() Display {
 // GetFormats wraps gdk_clipboard_get_formats
 // The function returns the following values:
 // 
-// 	- ret *ContentFormats 
+// 	- ret ContentFormats 
 //
 // Gets the formats that the clipboard can provide its current contents in.
-func (clipboard *ClipboardInstance) GetFormats() *ContentFormats {
-	var carg0 *C.GdkClipboard      // in, none, class
-	var cret  *C.GdkContentFormats // return, none, record
+func (clipboard *ClipboardInstance) GetFormats() ContentFormats {
+	var carg0 *C.GdkClipboard      // in, none, converted
+	var cret  *C.GdkContentFormats // return, none, converted
 
 	carg0 = (*C.GdkClipboard)(UnsafeClipboardToGlibNone(clipboard))
 
 	cret = C.gdk_clipboard_get_formats(carg0)
 	runtime.KeepAlive(clipboard)
 
-	var ret *ContentFormats
+	var ret ContentFormats
 
 	ret = UnsafeContentFormatsFromGlibNone(unsafe.Pointer(cret))
 
@@ -9931,7 +10043,7 @@ func (clipboard *ClipboardInstance) GetFormats() *ContentFormats {
 // Note that [method@Gdk.Clipboard.get_content] may return %NULL
 // even on a local clipboard. In this case the clipboard is empty.
 func (clipboard *ClipboardInstance) IsLocal() bool {
-	var carg0 *C.GdkClipboard // in, none, class
+	var carg0 *C.GdkClipboard // in, none, converted
 	var cret  C.gboolean      // return
 
 	carg0 = (*C.GdkClipboard)(UnsafeClipboardToGlibNone(clipboard))
@@ -9952,9 +10064,9 @@ func (clipboard *ClipboardInstance) IsLocal() bool {
 // 
 // The function takes the following parameters:
 // 
-// 	- mimeTypes []string: a %NULL-terminated array of mime types to choose from 
+// 	- mimeTypes array: a %NULL-terminated array of mime types to choose from 
 // 	- ioPriority int: the I/O priority of the request 
-// 	- cancellable gio.Cancellable (nullable): optional `GCancellable` object 
+// 	- cancellable gio. (nullable): optional `GCancellable` object 
 // 	- callback gio.AsyncReadyCallback (nullable): callback to call when the request is satisfied 
 //
 // Asynchronously requests an input stream to read the @clipboard's
@@ -9962,19 +10074,19 @@ func (clipboard *ClipboardInstance) IsLocal() bool {
 // 
 // The clipboard will choose the most suitable mime type from the given list
 // to fulfill the request, preferring the ones listed first.
-func (clipboard *ClipboardInstance) ReadAsync(mimeTypes []string, ioPriority int, cancellable gio.Cancellable, callback gio.AsyncReadyCallback) {
-	var carg0 *C.GdkClipboard       // in, none, class
-	var carg1 **C.gchar             // in, transfer: none, scope: call, implicit: false, skip: false, optional: false, nullable: false, caller-allocates: false, has closure: false, has destroy: false
-	var carg2 C.int                 // in, casted
-	var carg3 *C.GCancellable       // in, none, class, nullable
+func (clipboard *ClipboardInstance) ReadAsync(mimeTypes array, ioPriority int, cancellable gio., callback gio.AsyncReadyCallback) {
+	var carg0 *C.GdkClipboard       // in, none, converted
+	var carg1 array                 // in, transfer: none, scope: call, implicit: false, skip: false, optional: false, nullable: false, caller-allocates: false, has closure: false, has destroy: false
+	var carg2 C.int                 // in, none, casted
+	var carg3 *C.Cancellable        // in, none, converted, nullable
 	var carg4 C.GAsyncReadyCallback // callback, scope: async, closure: carg5, nullable
 	var carg5 C.gpointer            // implicit
 
 	carg0 = (*C.GdkClipboard)(UnsafeClipboardToGlibNone(clipboard))
-	panic("unimplemented conversion of *typesystem.Array (gchar**)")
+	panic("unimplemented conversion of array (array)")
 	carg2 = C.int(ioPriority)
 	if cancellable != nil {
-		carg3 = (*C.GCancellable)(gio.UnsafeCancellableToGlibNone(cancellable))
+		carg3 = (*C.Cancellable)(UnsafeCancellableToGlibNone(cancellable))
 	}
 	if callback != nil {
 		carg4 = (*[0]byte)(C._gotk4_gio2_AsyncReadyCallback)
@@ -10006,14 +10118,14 @@ func (clipboard *ClipboardInstance) ReadAsync(mimeTypes []string, ioPriority int
 // 
 // See [method@Gdk.Clipboard.read_async].
 func (clipboard *ClipboardInstance) ReadFinish(result gio.AsyncResult) (string, gio.InputStream, error) {
-	var carg0 *C.GdkClipboard // in, none, class
-	var carg1 *C.GAsyncResult // in, none, interface
+	var carg0 *C.GdkClipboard // in, none, converted
+	var carg1 *C.GAsyncResult // in, none, converted
 	var carg2 *C.gchar        // out, none, string
-	var cret  *C.GInputStream // return, full, class
-	var _cerr *C.GError       // out, full, record, nullable
+	var cret  *C.GInputStream // return, full, converted
+	var _cerr *C.GError       // out, full, converted, nullable
 
 	carg0 = (*C.GdkClipboard)(UnsafeClipboardToGlibNone(clipboard))
-	carg1 = (*C.GAsyncResult)(gio.UnsafeAsyncResultToGlibNone(result))
+	carg1 = (*C.GAsyncResult)(UnsafeAsyncResultToGlibNone(result))
 
 	cret = C.gdk_clipboard_read_finish(carg0, carg1, &carg2, &_cerr)
 	runtime.KeepAlive(clipboard)
@@ -10024,9 +10136,9 @@ func (clipboard *ClipboardInstance) ReadFinish(result gio.AsyncResult) (string, 
 	var _goerr      error
 
 	outMimeType = C.GoString((*C.gchar)(unsafe.Pointer(carg2)))
-	ret = gio.UnsafeInputStreamFromGlibFull(unsafe.Pointer(cret))
+	ret = UnsafeInputStreamFromGlibFull(unsafe.Pointer(cret))
 	if _cerr != nil {
-		_goerr = glib.UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
+		_goerr = UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
 	}
 
 	return outMimeType, ret, _goerr
@@ -10036,7 +10148,7 @@ func (clipboard *ClipboardInstance) ReadFinish(result gio.AsyncResult) (string, 
 // 
 // The function takes the following parameters:
 // 
-// 	- cancellable gio.Cancellable (nullable): optional `GCancellable` object 
+// 	- cancellable gio. (nullable): optional `GCancellable` object 
 // 	- callback gio.AsyncReadyCallback (nullable): callback to call when the request is satisfied 
 //
 // Asynchronously request the @clipboard contents converted to a string.
@@ -10044,15 +10156,15 @@ func (clipboard *ClipboardInstance) ReadFinish(result gio.AsyncResult) (string, 
 // This is a simple wrapper around [method@Gdk.Clipboard.read_value_async].
 // Use that function or [method@Gdk.Clipboard.read_async] directly if you
 // need more control over the operation.
-func (clipboard *ClipboardInstance) ReadTextAsync(cancellable gio.Cancellable, callback gio.AsyncReadyCallback) {
-	var carg0 *C.GdkClipboard       // in, none, class
-	var carg1 *C.GCancellable       // in, none, class, nullable
+func (clipboard *ClipboardInstance) ReadTextAsync(cancellable gio., callback gio.AsyncReadyCallback) {
+	var carg0 *C.GdkClipboard       // in, none, converted
+	var carg1 *C.Cancellable        // in, none, converted, nullable
 	var carg2 C.GAsyncReadyCallback // callback, scope: async, closure: carg3, nullable
 	var carg3 C.gpointer            // implicit
 
 	carg0 = (*C.GdkClipboard)(UnsafeClipboardToGlibNone(clipboard))
 	if cancellable != nil {
-		carg1 = (*C.GCancellable)(gio.UnsafeCancellableToGlibNone(cancellable))
+		carg1 = (*C.Cancellable)(UnsafeCancellableToGlibNone(cancellable))
 	}
 	if callback != nil {
 		carg2 = (*[0]byte)(C._gotk4_gio2_AsyncReadyCallback)
@@ -10080,13 +10192,13 @@ func (clipboard *ClipboardInstance) ReadTextAsync(cancellable gio.Cancellable, c
 // 
 // See [method@Gdk.Clipboard.read_text_async].
 func (clipboard *ClipboardInstance) ReadTextFinish(result gio.AsyncResult) (string, error) {
-	var carg0 *C.GdkClipboard // in, none, class
-	var carg1 *C.GAsyncResult // in, none, interface
+	var carg0 *C.GdkClipboard // in, none, converted
+	var carg1 *C.GAsyncResult // in, none, converted
 	var cret  *C.gchar        // return, full, string
-	var _cerr *C.GError       // out, full, record, nullable
+	var _cerr *C.GError       // out, full, converted, nullable
 
 	carg0 = (*C.GdkClipboard)(UnsafeClipboardToGlibNone(clipboard))
-	carg1 = (*C.GAsyncResult)(gio.UnsafeAsyncResultToGlibNone(result))
+	carg1 = (*C.GAsyncResult)(UnsafeAsyncResultToGlibNone(result))
 
 	cret = C.gdk_clipboard_read_text_finish(carg0, carg1, &_cerr)
 	runtime.KeepAlive(clipboard)
@@ -10098,7 +10210,7 @@ func (clipboard *ClipboardInstance) ReadTextFinish(result gio.AsyncResult) (stri
 	ret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
 	defer C.free(unsafe.Pointer(cret))
 	if _cerr != nil {
-		_goerr = glib.UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
+		_goerr = UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
 	}
 
 	return ret, _goerr
@@ -10108,7 +10220,7 @@ func (clipboard *ClipboardInstance) ReadTextFinish(result gio.AsyncResult) (stri
 // 
 // The function takes the following parameters:
 // 
-// 	- cancellable gio.Cancellable (nullable): optional `GCancellable` object, %NULL to ignore. 
+// 	- cancellable gio. (nullable): optional `GCancellable` object, %NULL to ignore. 
 // 	- callback gio.AsyncReadyCallback (nullable): callback to call when the request is satisfied 
 //
 // Asynchronously request the @clipboard contents converted to a `GdkPixbuf`.
@@ -10116,15 +10228,15 @@ func (clipboard *ClipboardInstance) ReadTextFinish(result gio.AsyncResult) (stri
 // This is a simple wrapper around [method@Gdk.Clipboard.read_value_async].
 // Use that function or [method@Gdk.Clipboard.read_async] directly if you
 // need more control over the operation.
-func (clipboard *ClipboardInstance) ReadTextureAsync(cancellable gio.Cancellable, callback gio.AsyncReadyCallback) {
-	var carg0 *C.GdkClipboard       // in, none, class
-	var carg1 *C.GCancellable       // in, none, class, nullable
+func (clipboard *ClipboardInstance) ReadTextureAsync(cancellable gio., callback gio.AsyncReadyCallback) {
+	var carg0 *C.GdkClipboard       // in, none, converted
+	var carg1 *C.Cancellable        // in, none, converted, nullable
 	var carg2 C.GAsyncReadyCallback // callback, scope: async, closure: carg3, nullable
 	var carg3 C.gpointer            // implicit
 
 	carg0 = (*C.GdkClipboard)(UnsafeClipboardToGlibNone(clipboard))
 	if cancellable != nil {
-		carg1 = (*C.GCancellable)(gio.UnsafeCancellableToGlibNone(cancellable))
+		carg1 = (*C.Cancellable)(UnsafeCancellableToGlibNone(cancellable))
 	}
 	if callback != nil {
 		carg2 = (*[0]byte)(C._gotk4_gio2_AsyncReadyCallback)
@@ -10152,13 +10264,13 @@ func (clipboard *ClipboardInstance) ReadTextureAsync(cancellable gio.Cancellable
 // 
 // See [method@Gdk.Clipboard.read_texture_async].
 func (clipboard *ClipboardInstance) ReadTextureFinish(result gio.AsyncResult) (Texture, error) {
-	var carg0 *C.GdkClipboard // in, none, class
-	var carg1 *C.GAsyncResult // in, none, interface
-	var cret  *C.GdkTexture   // return, full, class
-	var _cerr *C.GError       // out, full, record, nullable
+	var carg0 *C.GdkClipboard // in, none, converted
+	var carg1 *C.GAsyncResult // in, none, converted
+	var cret  *C.GdkTexture   // return, full, converted
+	var _cerr *C.GError       // out, full, converted, nullable
 
 	carg0 = (*C.GdkClipboard)(UnsafeClipboardToGlibNone(clipboard))
-	carg1 = (*C.GAsyncResult)(gio.UnsafeAsyncResultToGlibNone(result))
+	carg1 = (*C.GAsyncResult)(UnsafeAsyncResultToGlibNone(result))
 
 	cret = C.gdk_clipboard_read_texture_finish(carg0, carg1, &_cerr)
 	runtime.KeepAlive(clipboard)
@@ -10169,7 +10281,7 @@ func (clipboard *ClipboardInstance) ReadTextureFinish(result gio.AsyncResult) (T
 
 	ret = UnsafeTextureFromGlibFull(unsafe.Pointer(cret))
 	if _cerr != nil {
-		_goerr = glib.UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
+		_goerr = UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
 	}
 
 	return ret, _goerr
@@ -10181,7 +10293,7 @@ func (clipboard *ClipboardInstance) ReadTextureFinish(result gio.AsyncResult) (T
 // 
 // 	- typ glib.Type: a `GType` to read 
 // 	- ioPriority int: the I/O priority of the request 
-// 	- cancellable gio.Cancellable (nullable): optional `GCancellable` object 
+// 	- cancellable gio. (nullable): optional `GCancellable` object 
 // 	- callback gio.AsyncReadyCallback (nullable): callback to call when the request is satisfied 
 //
 // Asynchronously request the @clipboard contents converted to the given
@@ -10190,11 +10302,11 @@ func (clipboard *ClipboardInstance) ReadTextureFinish(result gio.AsyncResult) (T
 // For local clipboard contents that are available in the given `GType`,
 // the value will be copied directly. Otherwise, GDK will try to use
 // [func@content_deserialize_async] to convert the clipboard's data.
-func (clipboard *ClipboardInstance) ReadValueAsync(typ glib.Type, ioPriority int, cancellable gio.Cancellable, callback gio.AsyncReadyCallback) {
-	var carg0 *C.GdkClipboard       // in, none, class
-	var carg1 C.GType               // in, casted
-	var carg2 C.int                 // in, casted
-	var carg3 *C.GCancellable       // in, none, class, nullable
+func (clipboard *ClipboardInstance) ReadValueAsync(typ glib.Type, ioPriority int, cancellable gio., callback gio.AsyncReadyCallback) {
+	var carg0 *C.GdkClipboard       // in, none, converted
+	var carg1 C.GType               // in, none, casted
+	var carg2 C.int                 // in, none, casted
+	var carg3 *C.Cancellable        // in, none, converted, nullable
 	var carg4 C.GAsyncReadyCallback // callback, scope: async, closure: carg5, nullable
 	var carg5 C.gpointer            // implicit
 
@@ -10202,7 +10314,7 @@ func (clipboard *ClipboardInstance) ReadValueAsync(typ glib.Type, ioPriority int
 	carg1 = C.GType(typ)
 	carg2 = C.int(ioPriority)
 	if cancellable != nil {
-		carg3 = (*C.GCancellable)(gio.UnsafeCancellableToGlibNone(cancellable))
+		carg3 = (*C.Cancellable)(UnsafeCancellableToGlibNone(cancellable))
 	}
 	if callback != nil {
 		carg4 = (*[0]byte)(C._gotk4_gio2_AsyncReadyCallback)
@@ -10232,13 +10344,13 @@ func (clipboard *ClipboardInstance) ReadValueAsync(typ glib.Type, ioPriority int
 // 
 // See [method@Gdk.Clipboard.read_value_async].
 func (clipboard *ClipboardInstance) ReadValueFinish(result gio.AsyncResult) (*gobject.Value, error) {
-	var carg0 *C.GdkClipboard // in, none, class
-	var carg1 *C.GAsyncResult // in, none, interface
-	var cret  *C.GValue       // return, none, record
-	var _cerr *C.GError       // out, full, record, nullable
+	var carg0 *C.GdkClipboard // in, none, converted
+	var carg1 *C.GAsyncResult // in, none, converted
+	var cret  *C.GValue       // return, none, converted
+	var _cerr *C.GError       // out, full, converted, nullable
 
 	carg0 = (*C.GdkClipboard)(UnsafeClipboardToGlibNone(clipboard))
-	carg1 = (*C.GAsyncResult)(gio.UnsafeAsyncResultToGlibNone(result))
+	carg1 = (*C.GAsyncResult)(UnsafeAsyncResultToGlibNone(result))
 
 	cret = C.gdk_clipboard_read_value_finish(carg0, carg1, &_cerr)
 	runtime.KeepAlive(clipboard)
@@ -10247,9 +10359,9 @@ func (clipboard *ClipboardInstance) ReadValueFinish(result gio.AsyncResult) (*go
 	var ret    *gobject.Value
 	var _goerr error
 
-	ret = gobject.TODOFromGlibNone(unsafe.Pointer(cret))
+	ret = TODOFromGlibNone(unsafe.Pointer(cret))
 	if _cerr != nil {
-		_goerr = glib.UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
+		_goerr = UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
 	}
 
 	return ret, _goerr
@@ -10279,8 +10391,8 @@ func (clipboard *ClipboardInstance) ReadValueFinish(result gio.AsyncResult) (*go
 // @clipboard's read functions, @clipboard will select the best format to
 // transfer the contents and then request that format from @provider.
 func (clipboard *ClipboardInstance) SetContent(provider ContentProvider) bool {
-	var carg0 *C.GdkClipboard       // in, none, class
-	var carg1 *C.GdkContentProvider // in, none, class, nullable
+	var carg0 *C.GdkClipboard       // in, none, converted
+	var carg1 *C.GdkContentProvider // in, none, converted, nullable
 	var cret  C.gboolean            // return
 
 	carg0 = (*C.GdkClipboard)(UnsafeClipboardToGlibNone(clipboard))
@@ -10309,7 +10421,7 @@ func (clipboard *ClipboardInstance) SetContent(provider ContentProvider) bool {
 //
 // Puts the given @text into the clipboard.
 func (clipboard *ClipboardInstance) SetText(text string) {
-	var carg0 *C.GdkClipboard // in, none, class
+	var carg0 *C.GdkClipboard // in, none, converted
 	var carg1 *C.gchar        // in, none, string
 
 	carg0 = (*C.GdkClipboard)(UnsafeClipboardToGlibNone(clipboard))
@@ -10329,8 +10441,8 @@ func (clipboard *ClipboardInstance) SetText(text string) {
 //
 // Puts the given @texture into the clipboard.
 func (clipboard *ClipboardInstance) SetTexture(texture Texture) {
-	var carg0 *C.GdkClipboard // in, none, class
-	var carg1 *C.GdkTexture   // in, none, class
+	var carg0 *C.GdkClipboard // in, none, converted
+	var carg1 *C.GdkTexture   // in, none, converted
 
 	carg0 = (*C.GdkClipboard)(UnsafeClipboardToGlibNone(clipboard))
 	carg1 = (*C.GdkTexture)(UnsafeTextureToGlibNone(texture))
@@ -10348,11 +10460,11 @@ func (clipboard *ClipboardInstance) SetTexture(texture Texture) {
 //
 // Sets the @clipboard to contain the given @value.
 func (clipboard *ClipboardInstance) SetValue(value *gobject.Value) {
-	var carg0 *C.GdkClipboard // in, none, class
-	var carg1 *C.GValue       // in, none, record
+	var carg0 *C.GdkClipboard // in, none, converted
+	var carg1 *C.GValue       // in, none, converted
 
 	carg0 = (*C.GdkClipboard)(UnsafeClipboardToGlibNone(clipboard))
-	carg1 = (*C.GValue)(gobject.TODOToGlibNone(value))
+	carg1 = (*C.GValue)(TODOToGlibNone(value))
 
 	C.gdk_clipboard_set_value(carg0, carg1)
 	runtime.KeepAlive(clipboard)
@@ -10364,7 +10476,7 @@ func (clipboard *ClipboardInstance) SetValue(value *gobject.Value) {
 // The function takes the following parameters:
 // 
 // 	- ioPriority int: the I/O priority of the request 
-// 	- cancellable gio.Cancellable (nullable): optional `GCancellable` object 
+// 	- cancellable gio. (nullable): optional `GCancellable` object 
 // 	- callback gio.AsyncReadyCallback (nullable): callback to call when the request is satisfied 
 //
 // Asynchronously instructs the @clipboard to store its contents remotely.
@@ -10379,17 +10491,17 @@ func (clipboard *ClipboardInstance) SetValue(value *gobject.Value) {
 // This function is called automatically when a
 // [GtkApplication](../gtk4/class.Application.html)
 // is shut down, so you likely don't need to call it.
-func (clipboard *ClipboardInstance) StoreAsync(ioPriority int, cancellable gio.Cancellable, callback gio.AsyncReadyCallback) {
-	var carg0 *C.GdkClipboard       // in, none, class
-	var carg1 C.int                 // in, casted
-	var carg2 *C.GCancellable       // in, none, class, nullable
+func (clipboard *ClipboardInstance) StoreAsync(ioPriority int, cancellable gio., callback gio.AsyncReadyCallback) {
+	var carg0 *C.GdkClipboard       // in, none, converted
+	var carg1 C.int                 // in, none, casted
+	var carg2 *C.Cancellable        // in, none, converted, nullable
 	var carg3 C.GAsyncReadyCallback // callback, scope: async, closure: carg4, nullable
 	var carg4 C.gpointer            // implicit
 
 	carg0 = (*C.GdkClipboard)(UnsafeClipboardToGlibNone(clipboard))
 	carg1 = C.int(ioPriority)
 	if cancellable != nil {
-		carg2 = (*C.GCancellable)(gio.UnsafeCancellableToGlibNone(cancellable))
+		carg2 = (*C.Cancellable)(UnsafeCancellableToGlibNone(cancellable))
 	}
 	if callback != nil {
 		carg3 = (*[0]byte)(C._gotk4_gio2_AsyncReadyCallback)
@@ -10418,13 +10530,13 @@ func (clipboard *ClipboardInstance) StoreAsync(ioPriority int, cancellable gio.C
 // 
 // See [method@Gdk.Clipboard.store_async].
 func (clipboard *ClipboardInstance) StoreFinish(result gio.AsyncResult) (bool, error) {
-	var carg0 *C.GdkClipboard // in, none, class
-	var carg1 *C.GAsyncResult // in, none, interface
+	var carg0 *C.GdkClipboard // in, none, converted
+	var carg1 *C.GAsyncResult // in, none, converted
 	var cret  C.gboolean      // return
-	var _cerr *C.GError       // out, full, record, nullable
+	var _cerr *C.GError       // out, full, converted, nullable
 
 	carg0 = (*C.GdkClipboard)(UnsafeClipboardToGlibNone(clipboard))
-	carg1 = (*C.GAsyncResult)(gio.UnsafeAsyncResultToGlibNone(result))
+	carg1 = (*C.GAsyncResult)(UnsafeAsyncResultToGlibNone(result))
 
 	cret = C.gdk_clipboard_store_finish(carg0, carg1, &_cerr)
 	runtime.KeepAlive(clipboard)
@@ -10437,7 +10549,7 @@ func (clipboard *ClipboardInstance) StoreFinish(result gio.AsyncResult) (bool, e
 		ret = true
 	}
 	if _cerr != nil {
-		_goerr = glib.UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
+		_goerr = UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
 	}
 
 	return ret, _goerr
@@ -10446,9 +10558,9 @@ func (clipboard *ClipboardInstance) StoreFinish(result gio.AsyncResult) (bool, e
 // ContentDeserializerInstance is the instance type used by all types extending GdkContentDeserializer. It is used internally by the bindings. Users should use the interface [ContentDeserializer] instead.
 type ContentDeserializerInstance struct {
 	_ [0]func() // equal guard
-	gobject.Object
+	gobject.ObjectInstance
 	// implemented interfaces:
-	gio.AsyncResultInstance
+gio.AsyncResult
 }
 
 var _ ContentDeserializer = (*ContentDeserializerInstance)(nil)
@@ -10467,19 +10579,19 @@ var _ ContentDeserializer = (*ContentDeserializerInstance)(nil)
 // 
 // Also see [class@Gdk.ContentSerializer].
 type ContentDeserializer interface {
-	gobject.ObjectLike
+	gobject.Object
 	gio.AsyncResult
 	upcastToGdkContentDeserializer() *ContentDeserializerInstance
 
 	// GetCancellable wraps gdk_content_deserializer_get_cancellable
 	// The function returns the following values:
 	// 
-	// 	- ret gio.Cancellable 
+	// 	- ret gio. 
 	//
 	// Gets the cancellable for the current operation.
 	// 
 	// This is the `GCancellable` that was passed to [func@Gdk.content_deserialize_async].
-	GetCancellable() gio.Cancellable
+	GetCancellable() gio.
 	// GetGType wraps gdk_content_deserializer_get_gtype
 	// The function returns the following values:
 	// 
@@ -10551,17 +10663,17 @@ type ContentDeserializer interface {
 	ReturnSuccess()
 }
 
-func unsafeWrapContentDeserializer(base *gobject.Object) *ContentDeserializerInstance {
+func unsafeWrapContentDeserializer(base *gobject.ObjectInstance) *ContentDeserializerInstance {
 	return &ContentDeserializerInstance{
-		Object: *base,
+		ObjectInstance: *base,
 		AsyncResultInstance: gio.AsyncResultInstance{
-			Object: *base,
+			ObjectInstance: *base,
 		},
 	}
 }
 
 func marshalContentDeserializerInstance(p uintptr) (interface{}, error) {
-	return unsafeWrapContentDeserializer(gobject.ValueFromNative(unsafe.Pointer(p)).Object()), nil
+	return unsafeWrapContentDeserializer(gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Object()), nil
 }
 
 // UnsafeContentDeserializerFromGlibBorrow is used to convert raw GdkContentDeserializer pointers to go. This is used by the bindings internally.
@@ -10596,23 +10708,23 @@ func UnsafeContentDeserializerToGlibFull(c ContentDeserializer) unsafe.Pointer {
 // GetCancellable wraps gdk_content_deserializer_get_cancellable
 // The function returns the following values:
 // 
-// 	- ret gio.Cancellable 
+// 	- ret gio. 
 //
 // Gets the cancellable for the current operation.
 // 
 // This is the `GCancellable` that was passed to [func@Gdk.content_deserialize_async].
-func (deserializer *ContentDeserializerInstance) GetCancellable() gio.Cancellable {
-	var carg0 *C.GdkContentDeserializer // in, none, class
-	var cret  *C.GCancellable           // return, none, class
+func (deserializer *ContentDeserializerInstance) GetCancellable() gio. {
+	var carg0 *C.GdkContentDeserializer // in, none, converted
+	var cret  *C.Cancellable            // return, none, converted
 
 	carg0 = (*C.GdkContentDeserializer)(UnsafeContentDeserializerToGlibNone(deserializer))
 
 	cret = C.gdk_content_deserializer_get_cancellable(carg0)
 	runtime.KeepAlive(deserializer)
 
-	var ret gio.Cancellable
+	var ret gio.
 
-	ret = gio.UnsafeCancellableFromGlibNone(unsafe.Pointer(cret))
+	ret = UnsafeCancellableFromGlibNone(unsafe.Pointer(cret))
 
 	return ret
 }
@@ -10624,8 +10736,8 @@ func (deserializer *ContentDeserializerInstance) GetCancellable() gio.Cancellabl
 //
 // Gets the `GType` to create an instance of.
 func (deserializer *ContentDeserializerInstance) GetGType() glib.Type {
-	var carg0 *C.GdkContentDeserializer // in, none, class
-	var cret  C.GType                   // return, casted
+	var carg0 *C.GdkContentDeserializer // in, none, converted
+	var cret  C.GType                   // return, none, casted
 
 	carg0 = (*C.GdkContentDeserializer)(UnsafeContentDeserializerToGlibNone(deserializer))
 
@@ -10648,8 +10760,8 @@ func (deserializer *ContentDeserializerInstance) GetGType() glib.Type {
 // 
 // This is the stream that was passed to [func@Gdk.content_deserialize_async].
 func (deserializer *ContentDeserializerInstance) GetInputStream() gio.InputStream {
-	var carg0 *C.GdkContentDeserializer // in, none, class
-	var cret  *C.GInputStream           // return, none, class
+	var carg0 *C.GdkContentDeserializer // in, none, converted
+	var cret  *C.GInputStream           // return, none, converted
 
 	carg0 = (*C.GdkContentDeserializer)(UnsafeContentDeserializerToGlibNone(deserializer))
 
@@ -10658,7 +10770,7 @@ func (deserializer *ContentDeserializerInstance) GetInputStream() gio.InputStrea
 
 	var ret gio.InputStream
 
-	ret = gio.UnsafeInputStreamFromGlibNone(unsafe.Pointer(cret))
+	ret = UnsafeInputStreamFromGlibNone(unsafe.Pointer(cret))
 
 	return ret
 }
@@ -10670,7 +10782,7 @@ func (deserializer *ContentDeserializerInstance) GetInputStream() gio.InputStrea
 //
 // Gets the mime type to deserialize from.
 func (deserializer *ContentDeserializerInstance) GetMIMEType() string {
-	var carg0 *C.GdkContentDeserializer // in, none, class
+	var carg0 *C.GdkContentDeserializer // in, none, converted
 	var cret  *C.gchar                  // return, none, string
 
 	carg0 = (*C.GdkContentDeserializer)(UnsafeContentDeserializerToGlibNone(deserializer))
@@ -10694,8 +10806,8 @@ func (deserializer *ContentDeserializerInstance) GetMIMEType() string {
 // 
 // This is the priority that was passed to [func@Gdk.content_deserialize_async].
 func (deserializer *ContentDeserializerInstance) GetPriority() int {
-	var carg0 *C.GdkContentDeserializer // in, none, class
-	var cret  C.int                     // return, casted
+	var carg0 *C.GdkContentDeserializer // in, none, converted
+	var cret  C.int                     // return, none, casted
 
 	carg0 = (*C.GdkContentDeserializer)(UnsafeContentDeserializerToGlibNone(deserializer))
 
@@ -10718,8 +10830,8 @@ func (deserializer *ContentDeserializerInstance) GetPriority() int {
 // 
 // See [method@Gdk.ContentDeserializer.set_task_data].
 func (deserializer *ContentDeserializerInstance) GetTaskData() unsafe.Pointer {
-	var carg0 *C.GdkContentDeserializer // in, none, class
-	var cret  C.gpointer                // return, casted
+	var carg0 *C.GdkContentDeserializer // in, none, converted
+	var cret  C.gpointer                // return, none, casted
 
 	carg0 = (*C.GdkContentDeserializer)(UnsafeContentDeserializerToGlibNone(deserializer))
 
@@ -10740,8 +10852,8 @@ func (deserializer *ContentDeserializerInstance) GetTaskData() unsafe.Pointer {
 //
 // Gets the user data that was passed when the deserializer was registered.
 func (deserializer *ContentDeserializerInstance) GetUserData() unsafe.Pointer {
-	var carg0 *C.GdkContentDeserializer // in, none, class
-	var cret  C.gpointer                // return, casted
+	var carg0 *C.GdkContentDeserializer // in, none, converted
+	var cret  C.gpointer                // return, none, casted
 
 	carg0 = (*C.GdkContentDeserializer)(UnsafeContentDeserializerToGlibNone(deserializer))
 
@@ -10762,8 +10874,8 @@ func (deserializer *ContentDeserializerInstance) GetUserData() unsafe.Pointer {
 //
 // Gets the `GValue` to store the deserialized object in.
 func (deserializer *ContentDeserializerInstance) GetValue() *gobject.Value {
-	var carg0 *C.GdkContentDeserializer // in, none, class
-	var cret  *C.GValue                 // return, none, record
+	var carg0 *C.GdkContentDeserializer // in, none, converted
+	var cret  *C.GValue                 // return, none, converted
 
 	carg0 = (*C.GdkContentDeserializer)(UnsafeContentDeserializerToGlibNone(deserializer))
 
@@ -10772,7 +10884,7 @@ func (deserializer *ContentDeserializerInstance) GetValue() *gobject.Value {
 
 	var ret *gobject.Value
 
-	ret = gobject.TODOFromGlibNone(unsafe.Pointer(cret))
+	ret = TODOFromGlibNone(unsafe.Pointer(cret))
 
 	return ret
 }
@@ -10787,11 +10899,11 @@ func (deserializer *ContentDeserializerInstance) GetValue() *gobject.Value {
 // 
 // This function consumes @error.
 func (deserializer *ContentDeserializerInstance) ReturnError(err error) {
-	var carg0 *C.GdkContentDeserializer // in, none, class
-	var carg1 *C.GError                 // in, full, record
+	var carg0 *C.GdkContentDeserializer // in, none, converted
+	var carg1 *C.GError                 // in, full, converted
 
 	carg0 = (*C.GdkContentDeserializer)(UnsafeContentDeserializerToGlibNone(deserializer))
-	carg1 = (*C.GError)(glib.UnsafeErrorToGlibFull(err))
+	carg1 = (*C.GError)(UnsafeErrorToGlibFull(err))
 
 	C.gdk_content_deserializer_return_error(carg0, carg1)
 	runtime.KeepAlive(deserializer)
@@ -10802,7 +10914,7 @@ func (deserializer *ContentDeserializerInstance) ReturnError(err error) {
 //
 // Indicate that the deserialization has been successfully completed.
 func (deserializer *ContentDeserializerInstance) ReturnSuccess() {
-	var carg0 *C.GdkContentDeserializer // in, none, class
+	var carg0 *C.GdkContentDeserializer // in, none, converted
 
 	carg0 = (*C.GdkContentDeserializer)(UnsafeContentDeserializerToGlibNone(deserializer))
 
@@ -10813,7 +10925,7 @@ func (deserializer *ContentDeserializerInstance) ReturnSuccess() {
 // ContentProviderInstance is the instance type used by all types extending GdkContentProvider. It is used internally by the bindings. Users should use the interface [ContentProvider] instead.
 type ContentProviderInstance struct {
 	_ [0]func() // equal guard
-	gobject.Object
+	gobject.ObjectInstance
 }
 
 var _ ContentProvider = (*ContentProviderInstance)(nil)
@@ -10830,7 +10942,7 @@ var _ ContentProvider = (*ContentProviderInstance)(nil)
 // [class@Gdk.ContentSerializer] and [class@Gdk.ContentDeserializer] if you want
 // to add support for application-specific data formats.
 type ContentProvider interface {
-	gobject.ObjectLike
+	gobject.Object
 	upcastToGdkContentProvider() *ContentProviderInstance
 
 	// ContentChanged wraps gdk_content_provider_content_changed
@@ -10840,14 +10952,14 @@ type ContentProvider interface {
 	// RefFormats wraps gdk_content_provider_ref_formats
 	// The function returns the following values:
 	// 
-	// 	- ret *ContentFormats 
+	// 	- ret ContentFormats 
 	//
 	// Gets the formats that the provider can provide its current contents in.
-	RefFormats() *ContentFormats
+	RefFormats() ContentFormats
 	// RefStorableFormats wraps gdk_content_provider_ref_storable_formats
 	// The function returns the following values:
 	// 
-	// 	- ret *ContentFormats 
+	// 	- ret ContentFormats 
 	//
 	// Gets the formats that the provider suggests other applications to store
 	// the data in.
@@ -10855,7 +10967,7 @@ type ContentProvider interface {
 	// An example of such an application would be a clipboard manager.
 	// 
 	// This can be assumed to be a subset of [method@Gdk.ContentProvider.ref_formats].
-	RefStorableFormats() *ContentFormats
+	RefStorableFormats() ContentFormats
 	// WriteMIMETypeAsync wraps gdk_content_provider_write_mime_type_async
 	// 
 	// The function takes the following parameters:
@@ -10863,7 +10975,7 @@ type ContentProvider interface {
 	// 	- mimeType string: the mime type to provide the data in 
 	// 	- stream gio.OutputStream: the `GOutputStream` to write to 
 	// 	- ioPriority int: I/O priority of the request. 
-	// 	- cancellable gio.Cancellable (nullable): optional `GCancellable` object, %NULL to ignore. 
+	// 	- cancellable gio. (nullable): optional `GCancellable` object, %NULL to ignore. 
 	// 	- callback gio.AsyncReadyCallback (nullable): callback to call when the request is satisfied 
 	//
 	// Asynchronously writes the contents of @provider to @stream in the given
@@ -10874,7 +10986,7 @@ type ContentProvider interface {
 	// not supported, `G_IO_ERROR_NOT_SUPPORTED` will be reported.
 	// 
 	// The given @stream will not be closed.
-	WriteMIMETypeAsync(string, gio.OutputStream, int, gio.Cancellable, gio.AsyncReadyCallback)
+	WriteMIMETypeAsync(string, gio.OutputStream, int, gio., gio.AsyncReadyCallback)
 	// WriteMIMETypeFinish wraps gdk_content_provider_write_mime_type_finish
 	// 
 	// The function takes the following parameters:
@@ -10892,14 +11004,14 @@ type ContentProvider interface {
 	WriteMIMETypeFinish(gio.AsyncResult) (bool, error)
 }
 
-func unsafeWrapContentProvider(base *gobject.Object) *ContentProviderInstance {
+func unsafeWrapContentProvider(base *gobject.ObjectInstance) *ContentProviderInstance {
 	return &ContentProviderInstance{
-		Object: *base,
+		ObjectInstance: *base,
 	}
 }
 
 func marshalContentProviderInstance(p uintptr) (interface{}, error) {
-	return unsafeWrapContentProvider(gobject.ValueFromNative(unsafe.Pointer(p)).Object()), nil
+	return unsafeWrapContentProvider(gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Object()), nil
 }
 
 // UnsafeContentProviderFromGlibBorrow is used to convert raw GdkContentProvider pointers to go. This is used by the bindings internally.
@@ -10931,39 +11043,6 @@ func UnsafeContentProviderToGlibFull(c ContentProvider) unsafe.Pointer {
 	return gobject.TODOToFull(c)
 }
 
-// NewContentProviderInstanceForBytes wraps gdk_content_provider_new_for_bytes
-// 
-// The function takes the following parameters:
-// 
-// 	- mimeType string: the mime type 
-// 	- bytes *glib.Bytes: a `GBytes` with the data for @mime_type 
-// 
-// The function returns the following values:
-// 
-// 	- ret ContentProvider 
-//
-// Create a content provider that provides the given @bytes as data for
-// the given @mime_type.
-func NewContentProviderInstanceForBytes(mimeType string, bytes *glib.Bytes) ContentProvider {
-	var carg1 *C.gchar              // in, none, string
-	var carg2 *C.GBytes             // in, none, record
-	var cret  *C.GdkContentProvider // return, full, class
-
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(mimeType)))
-	defer C.free(unsafe.Pointer(carg1))
-	carg2 = (*C.GBytes)(glib.UnsafeBytesToGlibNone(bytes))
-
-	cret = C.gdk_content_provider_new_for_bytes(carg1, carg2)
-	runtime.KeepAlive(mimeType)
-	runtime.KeepAlive(bytes)
-
-	var ret ContentProvider
-
-	ret = UnsafeContentProviderFromGlibFull(unsafe.Pointer(cret))
-
-	return ret
-}
-
 // NewContentProviderInstanceForValue wraps gdk_content_provider_new_for_value
 // 
 // The function takes the following parameters:
@@ -10976,10 +11055,10 @@ func NewContentProviderInstanceForBytes(mimeType string, bytes *glib.Bytes) Cont
 //
 // Create a content provider that provides the given @value.
 func NewContentProviderInstanceForValue(value *gobject.Value) ContentProvider {
-	var carg1 *C.GValue             // in, none, record
-	var cret  *C.GdkContentProvider // return, full, class
+	var carg1 *C.GValue             // in, none, converted
+	var cret  *C.GdkContentProvider // return, full, converted
 
-	carg1 = (*C.GValue)(gobject.TODOToGlibNone(value))
+	carg1 = (*C.GValue)(TODOToGlibNone(value))
 
 	cret = C.gdk_content_provider_new_for_value(carg1)
 	runtime.KeepAlive(value)
@@ -10995,7 +11074,7 @@ func NewContentProviderInstanceForValue(value *gobject.Value) ContentProvider {
 // 
 // The function takes the following parameters:
 // 
-// 	- providers []ContentProviderInstance (nullable): 
+// 	- providers array (nullable): 
 //   The `GdkContentProvider`s to present the union of 
 // 
 // The function returns the following values:
@@ -11017,13 +11096,13 @@ func NewContentProviderInstanceForValue(value *gobject.Value) ContentProvider {
 //                                   gdk_content_provider_new_typed (GDK_TYPE_TEXTURE, texture)
 //                                 }, 2);
 // ```
-func NewContentProviderInstanceUnion(providers []ContentProviderInstance) ContentProvider {
-	var carg1 *C.GdkContentProvider // in, transfer: full, scope: call, implicit: false, skip: false, optional: false, nullable: true, caller-allocates: false, has closure: false, has destroy: false, nullable
+func NewContentProviderInstanceUnion(providers array) ContentProvider {
+	var carg1 array                 // in, transfer: full, scope: call, implicit: false, skip: false, optional: false, nullable: true, caller-allocates: false, has closure: false, has destroy: false, nullable
 	var carg2 C.gsize               // implicit
-	var cret  *C.GdkContentProvider // return, full, class
+	var cret  *C.GdkContentProvider // return, full, converted
 
 	if providers != nil {
-		panic("unimplemented conversion of *typesystem.Array (GdkContentProvider*)")
+		panic("unimplemented conversion of array (array)")
 	}
 
 	cret = C.gdk_content_provider_new_union(carg1, carg2)
@@ -11040,7 +11119,7 @@ func NewContentProviderInstanceUnion(providers []ContentProviderInstance) Conten
 //
 // Emits the ::content-changed signal.
 func (provider *ContentProviderInstance) ContentChanged() {
-	var carg0 *C.GdkContentProvider // in, none, class
+	var carg0 *C.GdkContentProvider // in, none, converted
 
 	carg0 = (*C.GdkContentProvider)(UnsafeContentProviderToGlibNone(provider))
 
@@ -11051,19 +11130,19 @@ func (provider *ContentProviderInstance) ContentChanged() {
 // RefFormats wraps gdk_content_provider_ref_formats
 // The function returns the following values:
 // 
-// 	- ret *ContentFormats 
+// 	- ret ContentFormats 
 //
 // Gets the formats that the provider can provide its current contents in.
-func (provider *ContentProviderInstance) RefFormats() *ContentFormats {
-	var carg0 *C.GdkContentProvider // in, none, class
-	var cret  *C.GdkContentFormats  // return, full, record
+func (provider *ContentProviderInstance) RefFormats() ContentFormats {
+	var carg0 *C.GdkContentProvider // in, none, converted
+	var cret  *C.GdkContentFormats  // return, full, converted
 
 	carg0 = (*C.GdkContentProvider)(UnsafeContentProviderToGlibNone(provider))
 
 	cret = C.gdk_content_provider_ref_formats(carg0)
 	runtime.KeepAlive(provider)
 
-	var ret *ContentFormats
+	var ret ContentFormats
 
 	ret = UnsafeContentFormatsFromGlibFull(unsafe.Pointer(cret))
 
@@ -11073,7 +11152,7 @@ func (provider *ContentProviderInstance) RefFormats() *ContentFormats {
 // RefStorableFormats wraps gdk_content_provider_ref_storable_formats
 // The function returns the following values:
 // 
-// 	- ret *ContentFormats 
+// 	- ret ContentFormats 
 //
 // Gets the formats that the provider suggests other applications to store
 // the data in.
@@ -11081,16 +11160,16 @@ func (provider *ContentProviderInstance) RefFormats() *ContentFormats {
 // An example of such an application would be a clipboard manager.
 // 
 // This can be assumed to be a subset of [method@Gdk.ContentProvider.ref_formats].
-func (provider *ContentProviderInstance) RefStorableFormats() *ContentFormats {
-	var carg0 *C.GdkContentProvider // in, none, class
-	var cret  *C.GdkContentFormats  // return, full, record
+func (provider *ContentProviderInstance) RefStorableFormats() ContentFormats {
+	var carg0 *C.GdkContentProvider // in, none, converted
+	var cret  *C.GdkContentFormats  // return, full, converted
 
 	carg0 = (*C.GdkContentProvider)(UnsafeContentProviderToGlibNone(provider))
 
 	cret = C.gdk_content_provider_ref_storable_formats(carg0)
 	runtime.KeepAlive(provider)
 
-	var ret *ContentFormats
+	var ret ContentFormats
 
 	ret = UnsafeContentFormatsFromGlibFull(unsafe.Pointer(cret))
 
@@ -11104,7 +11183,7 @@ func (provider *ContentProviderInstance) RefStorableFormats() *ContentFormats {
 // 	- mimeType string: the mime type to provide the data in 
 // 	- stream gio.OutputStream: the `GOutputStream` to write to 
 // 	- ioPriority int: I/O priority of the request. 
-// 	- cancellable gio.Cancellable (nullable): optional `GCancellable` object, %NULL to ignore. 
+// 	- cancellable gio. (nullable): optional `GCancellable` object, %NULL to ignore. 
 // 	- callback gio.AsyncReadyCallback (nullable): callback to call when the request is satisfied 
 //
 // Asynchronously writes the contents of @provider to @stream in the given
@@ -11115,22 +11194,22 @@ func (provider *ContentProviderInstance) RefStorableFormats() *ContentFormats {
 // not supported, `G_IO_ERROR_NOT_SUPPORTED` will be reported.
 // 
 // The given @stream will not be closed.
-func (provider *ContentProviderInstance) WriteMIMETypeAsync(mimeType string, stream gio.OutputStream, ioPriority int, cancellable gio.Cancellable, callback gio.AsyncReadyCallback) {
-	var carg0 *C.GdkContentProvider // in, none, class
+func (provider *ContentProviderInstance) WriteMIMETypeAsync(mimeType string, stream gio.OutputStream, ioPriority int, cancellable gio., callback gio.AsyncReadyCallback) {
+	var carg0 *C.GdkContentProvider // in, none, converted
 	var carg1 *C.gchar              // in, none, string
-	var carg2 *C.GOutputStream      // in, none, class
-	var carg3 C.int                 // in, casted
-	var carg4 *C.GCancellable       // in, none, class, nullable
+	var carg2 *C.GOutputStream      // in, none, converted
+	var carg3 C.int                 // in, none, casted
+	var carg4 *C.Cancellable        // in, none, converted, nullable
 	var carg5 C.GAsyncReadyCallback // callback, scope: async, closure: carg6, nullable
 	var carg6 C.gpointer            // implicit
 
 	carg0 = (*C.GdkContentProvider)(UnsafeContentProviderToGlibNone(provider))
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(mimeType)))
 	defer C.free(unsafe.Pointer(carg1))
-	carg2 = (*C.GOutputStream)(gio.UnsafeOutputStreamToGlibNone(stream))
+	carg2 = (*C.GOutputStream)(UnsafeOutputStreamToGlibNone(stream))
 	carg3 = C.int(ioPriority)
 	if cancellable != nil {
-		carg4 = (*C.GCancellable)(gio.UnsafeCancellableToGlibNone(cancellable))
+		carg4 = (*C.Cancellable)(UnsafeCancellableToGlibNone(cancellable))
 	}
 	if callback != nil {
 		carg5 = (*[0]byte)(C._gotk4_gio2_AsyncReadyCallback)
@@ -11161,13 +11240,13 @@ func (provider *ContentProviderInstance) WriteMIMETypeAsync(mimeType string, str
 // 
 // See [method@Gdk.ContentProvider.write_mime_type_async].
 func (provider *ContentProviderInstance) WriteMIMETypeFinish(result gio.AsyncResult) (bool, error) {
-	var carg0 *C.GdkContentProvider // in, none, class
-	var carg1 *C.GAsyncResult       // in, none, interface
+	var carg0 *C.GdkContentProvider // in, none, converted
+	var carg1 *C.GAsyncResult       // in, none, converted
 	var cret  C.gboolean            // return
-	var _cerr *C.GError             // out, full, record, nullable
+	var _cerr *C.GError             // out, full, converted, nullable
 
 	carg0 = (*C.GdkContentProvider)(UnsafeContentProviderToGlibNone(provider))
-	carg1 = (*C.GAsyncResult)(gio.UnsafeAsyncResultToGlibNone(result))
+	carg1 = (*C.GAsyncResult)(UnsafeAsyncResultToGlibNone(result))
 
 	cret = C.gdk_content_provider_write_mime_type_finish(carg0, carg1, &_cerr)
 	runtime.KeepAlive(provider)
@@ -11180,7 +11259,7 @@ func (provider *ContentProviderInstance) WriteMIMETypeFinish(result gio.AsyncRes
 		ret = true
 	}
 	if _cerr != nil {
-		_goerr = glib.UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
+		_goerr = UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
 	}
 
 	return ret, _goerr
@@ -11189,9 +11268,9 @@ func (provider *ContentProviderInstance) WriteMIMETypeFinish(result gio.AsyncRes
 // ContentSerializerInstance is the instance type used by all types extending GdkContentSerializer. It is used internally by the bindings. Users should use the interface [ContentSerializer] instead.
 type ContentSerializerInstance struct {
 	_ [0]func() // equal guard
-	gobject.Object
+	gobject.ObjectInstance
 	// implemented interfaces:
-	gio.AsyncResultInstance
+gio.AsyncResult
 }
 
 var _ ContentSerializer = (*ContentSerializerInstance)(nil)
@@ -11211,19 +11290,19 @@ var _ ContentSerializer = (*ContentSerializerInstance)(nil)
 // 
 // Also see [class@Gdk.ContentDeserializer].
 type ContentSerializer interface {
-	gobject.ObjectLike
+	gobject.Object
 	gio.AsyncResult
 	upcastToGdkContentSerializer() *ContentSerializerInstance
 
 	// GetCancellable wraps gdk_content_serializer_get_cancellable
 	// The function returns the following values:
 	// 
-	// 	- ret gio.Cancellable 
+	// 	- ret gio. 
 	//
 	// Gets the cancellable for the current operation.
 	// 
 	// This is the `GCancellable` that was passed to [func@content_serialize_async].
-	GetCancellable() gio.Cancellable
+	GetCancellable() gio.
 	// GetGType wraps gdk_content_serializer_get_gtype
 	// The function returns the following values:
 	// 
@@ -11295,17 +11374,17 @@ type ContentSerializer interface {
 	ReturnSuccess()
 }
 
-func unsafeWrapContentSerializer(base *gobject.Object) *ContentSerializerInstance {
+func unsafeWrapContentSerializer(base *gobject.ObjectInstance) *ContentSerializerInstance {
 	return &ContentSerializerInstance{
-		Object: *base,
+		ObjectInstance: *base,
 		AsyncResultInstance: gio.AsyncResultInstance{
-			Object: *base,
+			ObjectInstance: *base,
 		},
 	}
 }
 
 func marshalContentSerializerInstance(p uintptr) (interface{}, error) {
-	return unsafeWrapContentSerializer(gobject.ValueFromNative(unsafe.Pointer(p)).Object()), nil
+	return unsafeWrapContentSerializer(gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Object()), nil
 }
 
 // UnsafeContentSerializerFromGlibBorrow is used to convert raw GdkContentSerializer pointers to go. This is used by the bindings internally.
@@ -11340,23 +11419,23 @@ func UnsafeContentSerializerToGlibFull(c ContentSerializer) unsafe.Pointer {
 // GetCancellable wraps gdk_content_serializer_get_cancellable
 // The function returns the following values:
 // 
-// 	- ret gio.Cancellable 
+// 	- ret gio. 
 //
 // Gets the cancellable for the current operation.
 // 
 // This is the `GCancellable` that was passed to [func@content_serialize_async].
-func (serializer *ContentSerializerInstance) GetCancellable() gio.Cancellable {
-	var carg0 *C.GdkContentSerializer // in, none, class
-	var cret  *C.GCancellable         // return, none, class
+func (serializer *ContentSerializerInstance) GetCancellable() gio. {
+	var carg0 *C.GdkContentSerializer // in, none, converted
+	var cret  *C.Cancellable          // return, none, converted
 
 	carg0 = (*C.GdkContentSerializer)(UnsafeContentSerializerToGlibNone(serializer))
 
 	cret = C.gdk_content_serializer_get_cancellable(carg0)
 	runtime.KeepAlive(serializer)
 
-	var ret gio.Cancellable
+	var ret gio.
 
-	ret = gio.UnsafeCancellableFromGlibNone(unsafe.Pointer(cret))
+	ret = UnsafeCancellableFromGlibNone(unsafe.Pointer(cret))
 
 	return ret
 }
@@ -11368,8 +11447,8 @@ func (serializer *ContentSerializerInstance) GetCancellable() gio.Cancellable {
 //
 // Gets the `GType` to of the object to serialize.
 func (serializer *ContentSerializerInstance) GetGType() glib.Type {
-	var carg0 *C.GdkContentSerializer // in, none, class
-	var cret  C.GType                 // return, casted
+	var carg0 *C.GdkContentSerializer // in, none, converted
+	var cret  C.GType                 // return, none, casted
 
 	carg0 = (*C.GdkContentSerializer)(UnsafeContentSerializerToGlibNone(serializer))
 
@@ -11390,7 +11469,7 @@ func (serializer *ContentSerializerInstance) GetGType() glib.Type {
 //
 // Gets the mime type to serialize to.
 func (serializer *ContentSerializerInstance) GetMIMEType() string {
-	var carg0 *C.GdkContentSerializer // in, none, class
+	var carg0 *C.GdkContentSerializer // in, none, converted
 	var cret  *C.gchar                // return, none, string
 
 	carg0 = (*C.GdkContentSerializer)(UnsafeContentSerializerToGlibNone(serializer))
@@ -11414,8 +11493,8 @@ func (serializer *ContentSerializerInstance) GetMIMEType() string {
 // 
 // This is the stream that was passed to [func@content_serialize_async].
 func (serializer *ContentSerializerInstance) GetOutputStream() gio.OutputStream {
-	var carg0 *C.GdkContentSerializer // in, none, class
-	var cret  *C.GOutputStream        // return, none, class
+	var carg0 *C.GdkContentSerializer // in, none, converted
+	var cret  *C.GOutputStream        // return, none, converted
 
 	carg0 = (*C.GdkContentSerializer)(UnsafeContentSerializerToGlibNone(serializer))
 
@@ -11424,7 +11503,7 @@ func (serializer *ContentSerializerInstance) GetOutputStream() gio.OutputStream 
 
 	var ret gio.OutputStream
 
-	ret = gio.UnsafeOutputStreamFromGlibNone(unsafe.Pointer(cret))
+	ret = UnsafeOutputStreamFromGlibNone(unsafe.Pointer(cret))
 
 	return ret
 }
@@ -11438,8 +11517,8 @@ func (serializer *ContentSerializerInstance) GetOutputStream() gio.OutputStream 
 // 
 // This is the priority that was passed to [func@content_serialize_async].
 func (serializer *ContentSerializerInstance) GetPriority() int {
-	var carg0 *C.GdkContentSerializer // in, none, class
-	var cret  C.int                   // return, casted
+	var carg0 *C.GdkContentSerializer // in, none, converted
+	var cret  C.int                   // return, none, casted
 
 	carg0 = (*C.GdkContentSerializer)(UnsafeContentSerializerToGlibNone(serializer))
 
@@ -11462,8 +11541,8 @@ func (serializer *ContentSerializerInstance) GetPriority() int {
 // 
 // See [method@Gdk.ContentSerializer.set_task_data].
 func (serializer *ContentSerializerInstance) GetTaskData() unsafe.Pointer {
-	var carg0 *C.GdkContentSerializer // in, none, class
-	var cret  C.gpointer              // return, casted
+	var carg0 *C.GdkContentSerializer // in, none, converted
+	var cret  C.gpointer              // return, none, casted
 
 	carg0 = (*C.GdkContentSerializer)(UnsafeContentSerializerToGlibNone(serializer))
 
@@ -11484,8 +11563,8 @@ func (serializer *ContentSerializerInstance) GetTaskData() unsafe.Pointer {
 //
 // Gets the user data that was passed when the serializer was registered.
 func (serializer *ContentSerializerInstance) GetUserData() unsafe.Pointer {
-	var carg0 *C.GdkContentSerializer // in, none, class
-	var cret  C.gpointer              // return, casted
+	var carg0 *C.GdkContentSerializer // in, none, converted
+	var cret  C.gpointer              // return, none, casted
 
 	carg0 = (*C.GdkContentSerializer)(UnsafeContentSerializerToGlibNone(serializer))
 
@@ -11506,8 +11585,8 @@ func (serializer *ContentSerializerInstance) GetUserData() unsafe.Pointer {
 //
 // Gets the `GValue` to read the object to serialize from.
 func (serializer *ContentSerializerInstance) GetValue() *gobject.Value {
-	var carg0 *C.GdkContentSerializer // in, none, class
-	var cret  *C.GValue               // return, none, record
+	var carg0 *C.GdkContentSerializer // in, none, converted
+	var cret  *C.GValue               // return, none, converted
 
 	carg0 = (*C.GdkContentSerializer)(UnsafeContentSerializerToGlibNone(serializer))
 
@@ -11516,7 +11595,7 @@ func (serializer *ContentSerializerInstance) GetValue() *gobject.Value {
 
 	var ret *gobject.Value
 
-	ret = gobject.TODOFromGlibNone(unsafe.Pointer(cret))
+	ret = TODOFromGlibNone(unsafe.Pointer(cret))
 
 	return ret
 }
@@ -11531,11 +11610,11 @@ func (serializer *ContentSerializerInstance) GetValue() *gobject.Value {
 // 
 // This function consumes @error.
 func (serializer *ContentSerializerInstance) ReturnError(err error) {
-	var carg0 *C.GdkContentSerializer // in, none, class
-	var carg1 *C.GError               // in, full, record
+	var carg0 *C.GdkContentSerializer // in, none, converted
+	var carg1 *C.GError               // in, full, converted
 
 	carg0 = (*C.GdkContentSerializer)(UnsafeContentSerializerToGlibNone(serializer))
-	carg1 = (*C.GError)(glib.UnsafeErrorToGlibFull(err))
+	carg1 = (*C.GError)(UnsafeErrorToGlibFull(err))
 
 	C.gdk_content_serializer_return_error(carg0, carg1)
 	runtime.KeepAlive(serializer)
@@ -11546,7 +11625,7 @@ func (serializer *ContentSerializerInstance) ReturnError(err error) {
 //
 // Indicate that the serialization has been successfully completed.
 func (serializer *ContentSerializerInstance) ReturnSuccess() {
-	var carg0 *C.GdkContentSerializer // in, none, class
+	var carg0 *C.GdkContentSerializer // in, none, converted
 
 	carg0 = (*C.GdkContentSerializer)(UnsafeContentSerializerToGlibNone(serializer))
 
@@ -11557,7 +11636,7 @@ func (serializer *ContentSerializerInstance) ReturnSuccess() {
 // CursorInstance is the instance type used by all types extending GdkCursor. It is used internally by the bindings. Users should use the interface [Cursor] instead.
 type CursorInstance struct {
 	_ [0]func() // equal guard
-	gobject.Object
+	gobject.ObjectInstance
 }
 
 var _ Cursor = (*CursorInstance)(nil)
@@ -11599,7 +11678,7 @@ var _ Cursor = (*CursorInstance)(nil)
 // easier to support cursors. If none of the provided cursors can be supported,
 // the default cursor will be the ultimate fallback.
 type Cursor interface {
-	gobject.ObjectLike
+	gobject.Object
 	upcastToGdkCursor() *CursorInstance
 
 	// GetFallback wraps gdk_cursor_get_fallback
@@ -11661,14 +11740,14 @@ type Cursor interface {
 	GetTexture() Texture
 }
 
-func unsafeWrapCursor(base *gobject.Object) *CursorInstance {
+func unsafeWrapCursor(base *gobject.ObjectInstance) *CursorInstance {
 	return &CursorInstance{
-		Object: *base,
+		ObjectInstance: *base,
 	}
 }
 
 func marshalCursorInstance(p uintptr) (interface{}, error) {
-	return unsafeWrapCursor(gobject.ValueFromNative(unsafe.Pointer(p)).Object()), nil
+	return unsafeWrapCursor(gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Object()), nil
 }
 
 // UnsafeCursorFromGlibBorrow is used to convert raw GdkCursor pointers to go. This is used by the bindings internally.
@@ -11720,8 +11799,8 @@ func NewCursorInstanceFromCallback(callback CursorGetTextureCallback, fallback C
 	var carg1 C.GdkCursorGetTextureCallback // callback, scope: notified, closure: carg2, destroy: carg3
 	var carg2 C.gpointer                    // implicit
 	var carg3 C.GDestroyNotify              // implicit
-	var carg4 *C.GdkCursor                  // in, none, class, nullable
-	var cret  *C.GdkCursor                  // return, full, class
+	var carg4 *C.GdkCursor                  // in, none, converted, nullable
+	var cret  *C.GdkCursor                  // return, full, converted
 
 	carg1 = (*[0]byte)(C._gotk4_gdk4_CursorGetTextureCallback)
 	carg2 = C.gpointer(gbox.Assign(callback))
@@ -11772,8 +11851,8 @@ func NewCursorInstanceFromCallback(callback CursorGetTextureCallback, fallback C
 // | ![](nwse_resize_cursor.png) "nwse-resize" | ![](zoom_in_cursor.png) "zoom-in" | ![](zoom_out_cursor.png) "zoom-out" | |
 func NewCursorInstanceFromName(name string, fallback Cursor) Cursor {
 	var carg1 *C.gchar     // in, none, string
-	var carg2 *C.GdkCursor // in, none, class, nullable
-	var cret  *C.GdkCursor // return, full, class
+	var carg2 *C.GdkCursor // in, none, converted, nullable
+	var cret  *C.GdkCursor // return, full, converted
 
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(name)))
 	defer C.free(unsafe.Pointer(carg1))
@@ -11808,11 +11887,11 @@ func NewCursorInstanceFromName(name string, fallback Cursor) Cursor {
 //
 // Creates a new cursor from a `GdkTexture`.
 func NewCursorInstanceFromTexture(texture Texture, hotspotX int, hotspotY int, fallback Cursor) Cursor {
-	var carg1 *C.GdkTexture // in, none, class
-	var carg2 C.int         // in, casted
-	var carg3 C.int         // in, casted
-	var carg4 *C.GdkCursor  // in, none, class, nullable
-	var cret  *C.GdkCursor  // return, full, class
+	var carg1 *C.GdkTexture // in, none, converted
+	var carg2 C.int         // in, none, casted
+	var carg3 C.int         // in, none, casted
+	var carg4 *C.GdkCursor  // in, none, converted, nullable
+	var cret  *C.GdkCursor  // return, full, converted
 
 	carg1 = (*C.GdkTexture)(UnsafeTextureToGlibNone(texture))
 	carg2 = C.int(hotspotX)
@@ -11847,8 +11926,8 @@ func NewCursorInstanceFromTexture(texture Texture, hotspotX int, hotspotY int, f
 // this can happen when the texture is too large or when the `GdkDisplay`
 // it is used on does not support textured cursors.
 func (cursor *CursorInstance) GetFallback() Cursor {
-	var carg0 *C.GdkCursor // in, none, class
-	var cret  *C.GdkCursor // return, none, class
+	var carg0 *C.GdkCursor // in, none, converted
+	var cret  *C.GdkCursor // return, none, converted
 
 	carg0 = (*C.GdkCursor)(UnsafeCursorToGlibNone(cursor))
 
@@ -11875,8 +11954,8 @@ func (cursor *CursorInstance) GetFallback() Cursor {
 // will only return the hotspot position for cursors created with
 // [ctor@Gdk.Cursor.new_from_texture].
 func (cursor *CursorInstance) GetHotspotX() int {
-	var carg0 *C.GdkCursor // in, none, class
-	var cret  C.int        // return, casted
+	var carg0 *C.GdkCursor // in, none, converted
+	var cret  C.int        // return, none, casted
 
 	carg0 = (*C.GdkCursor)(UnsafeCursorToGlibNone(cursor))
 
@@ -11903,8 +11982,8 @@ func (cursor *CursorInstance) GetHotspotX() int {
 // will only return the hotspot position for cursors created with
 // [ctor@Gdk.Cursor.new_from_texture].
 func (cursor *CursorInstance) GetHotspotY() int {
-	var carg0 *C.GdkCursor // in, none, class
-	var cret  C.int        // return, casted
+	var carg0 *C.GdkCursor // in, none, converted
+	var cret  C.int        // return, none, casted
 
 	carg0 = (*C.GdkCursor)(UnsafeCursorToGlibNone(cursor))
 
@@ -11927,7 +12006,7 @@ func (cursor *CursorInstance) GetHotspotY() int {
 // 
 // If the cursor is not a named cursor, %NULL will be returned.
 func (cursor *CursorInstance) GetName() string {
-	var carg0 *C.GdkCursor // in, none, class
+	var carg0 *C.GdkCursor // in, none, converted
 	var cret  *C.gchar     // return, none, string
 
 	carg0 = (*C.GdkCursor)(UnsafeCursorToGlibNone(cursor))
@@ -11951,8 +12030,8 @@ func (cursor *CursorInstance) GetName() string {
 // 
 // If the cursor is a named cursor, %NULL will be returned.
 func (cursor *CursorInstance) GetTexture() Texture {
-	var carg0 *C.GdkCursor  // in, none, class
-	var cret  *C.GdkTexture // return, none, class
+	var carg0 *C.GdkCursor  // in, none, converted
+	var cret  *C.GdkTexture // return, none, converted
 
 	carg0 = (*C.GdkCursor)(UnsafeCursorToGlibNone(cursor))
 
@@ -11969,7 +12048,7 @@ func (cursor *CursorInstance) GetTexture() Texture {
 // DeviceInstance is the instance type used by all types extending GdkDevice. It is used internally by the bindings. Users should use the interface [Device] instead.
 type DeviceInstance struct {
 	_ [0]func() // equal guard
-	gobject.Object
+	gobject.ObjectInstance
 }
 
 var _ Device = (*DeviceInstance)(nil)
@@ -11982,7 +12061,7 @@ var _ Device = (*DeviceInstance)(nil)
 // See the [class@Gdk.Seat] documentation for more information
 // about the various kinds of devices, and their relationships.
 type Device interface {
-	gobject.ObjectLike
+	gobject.Object
 	upcastToGdkDevice() *DeviceInstance
 
 	// GetCapsLockState wraps gdk_device_get_caps_lock_state
@@ -12167,14 +12246,14 @@ type Device interface {
 	HasBidiLayouts() bool
 }
 
-func unsafeWrapDevice(base *gobject.Object) *DeviceInstance {
+func unsafeWrapDevice(base *gobject.ObjectInstance) *DeviceInstance {
 	return &DeviceInstance{
-		Object: *base,
+		ObjectInstance: *base,
 	}
 }
 
 func marshalDeviceInstance(p uintptr) (interface{}, error) {
-	return unsafeWrapDevice(gobject.ValueFromNative(unsafe.Pointer(p)).Object()), nil
+	return unsafeWrapDevice(gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Object()), nil
 }
 
 // UnsafeDeviceFromGlibBorrow is used to convert raw GdkDevice pointers to go. This is used by the bindings internally.
@@ -12215,7 +12294,7 @@ func UnsafeDeviceToGlibFull(c Device) unsafe.Pointer {
 // 
 // This is only relevant for keyboard devices.
 func (device *DeviceInstance) GetCapsLockState() bool {
-	var carg0 *C.GdkDevice // in, none, class
+	var carg0 *C.GdkDevice // in, none, converted
 	var cret  C.gboolean   // return
 
 	carg0 = (*C.GdkDevice)(UnsafeDeviceToGlibNone(device))
@@ -12239,8 +12318,8 @@ func (device *DeviceInstance) GetCapsLockState() bool {
 //
 // Retrieves the current tool for @device.
 func (device *DeviceInstance) GetDeviceTool() DeviceTool {
-	var carg0 *C.GdkDevice     // in, none, class
-	var cret  *C.GdkDeviceTool // return, none, class
+	var carg0 *C.GdkDevice     // in, none, converted
+	var cret  *C.GdkDeviceTool // return, none, converted
 
 	carg0 = (*C.GdkDevice)(UnsafeDeviceToGlibNone(device))
 
@@ -12266,8 +12345,8 @@ func (device *DeviceInstance) GetDeviceTool() DeviceTool {
 // The direction of a layout is the direction of the majority
 // of its symbols. See [func@Pango.unichar_direction].
 func (device *DeviceInstance) GetDirection() pango.Direction {
-	var carg0 *C.GdkDevice     // in, none, class
-	var cret  C.PangoDirection // return, casted
+	var carg0 *C.GdkDevice     // in, none, converted
+	var cret  C.PangoDirection // return, none, casted
 
 	carg0 = (*C.GdkDevice)(UnsafeDeviceToGlibNone(device))
 
@@ -12288,8 +12367,8 @@ func (device *DeviceInstance) GetDirection() pango.Direction {
 //
 // Returns the `GdkDisplay` to which @device pertains.
 func (device *DeviceInstance) GetDisplay() Display {
-	var carg0 *C.GdkDevice  // in, none, class
-	var cret  *C.GdkDisplay // return, none, class
+	var carg0 *C.GdkDevice  // in, none, converted
+	var cret  *C.GdkDisplay // return, none, converted
 
 	carg0 = (*C.GdkDevice)(UnsafeDeviceToGlibNone(device))
 
@@ -12313,7 +12392,7 @@ func (device *DeviceInstance) GetDisplay() Display {
 // This is not meaningful for keyboard devices, which
 // don't have a pointer.
 func (device *DeviceInstance) GetHasCursor() bool {
-	var carg0 *C.GdkDevice // in, none, class
+	var carg0 *C.GdkDevice // in, none, converted
 	var cret  C.gboolean   // return
 
 	carg0 = (*C.GdkDevice)(UnsafeDeviceToGlibNone(device))
@@ -12339,8 +12418,8 @@ func (device *DeviceInstance) GetHasCursor() bool {
 // 
 // This is only relevant for keyboard devices.
 func (device *DeviceInstance) GetModifierState() ModifierType {
-	var carg0 *C.GdkDevice      // in, none, class
-	var cret  C.GdkModifierType // return, casted
+	var carg0 *C.GdkDevice      // in, none, converted
+	var cret  C.GdkModifierType // return, none, casted
 
 	carg0 = (*C.GdkDevice)(UnsafeDeviceToGlibNone(device))
 
@@ -12361,7 +12440,7 @@ func (device *DeviceInstance) GetModifierState() ModifierType {
 //
 // The name of the device, suitable for showing in a user interface.
 func (device *DeviceInstance) GetName() string {
-	var carg0 *C.GdkDevice // in, none, class
+	var carg0 *C.GdkDevice // in, none, converted
 	var cret  *C.gchar     // return, none, string
 
 	carg0 = (*C.GdkDevice)(UnsafeDeviceToGlibNone(device))
@@ -12385,7 +12464,7 @@ func (device *DeviceInstance) GetName() string {
 // 
 // This is only relevant for keyboard devices.
 func (device *DeviceInstance) GetNumLockState() bool {
-	var carg0 *C.GdkDevice // in, none, class
+	var carg0 *C.GdkDevice // in, none, converted
 	var cret  C.gboolean   // return
 
 	carg0 = (*C.GdkDevice)(UnsafeDeviceToGlibNone(device))
@@ -12409,8 +12488,8 @@ func (device *DeviceInstance) GetNumLockState() bool {
 //
 // Retrieves the number of touch points associated to @device.
 func (device *DeviceInstance) GetNumTouches() uint {
-	var carg0 *C.GdkDevice // in, none, class
-	var cret  C.guint      // return, casted
+	var carg0 *C.GdkDevice // in, none, converted
+	var cret  C.guint      // return, none, casted
 
 	carg0 = (*C.GdkDevice)(UnsafeDeviceToGlibNone(device))
 
@@ -12434,7 +12513,7 @@ func (device *DeviceInstance) GetNumTouches() uint {
 // This ID is retrieved from the device, and does not change.
 // See [method@Gdk.Device.get_vendor_id] for more information.
 func (device *DeviceInstance) GetProductID() string {
-	var carg0 *C.GdkDevice // in, none, class
+	var carg0 *C.GdkDevice // in, none, converted
 	var cret  *C.gchar     // return, none, string
 
 	carg0 = (*C.GdkDevice)(UnsafeDeviceToGlibNone(device))
@@ -12458,7 +12537,7 @@ func (device *DeviceInstance) GetProductID() string {
 // 
 // This is only relevant for keyboard devices.
 func (device *DeviceInstance) GetScrollLockState() bool {
-	var carg0 *C.GdkDevice // in, none, class
+	var carg0 *C.GdkDevice // in, none, converted
 	var cret  C.gboolean   // return
 
 	carg0 = (*C.GdkDevice)(UnsafeDeviceToGlibNone(device))
@@ -12482,8 +12561,8 @@ func (device *DeviceInstance) GetScrollLockState() bool {
 //
 // Returns the `GdkSeat` the device belongs to.
 func (device *DeviceInstance) GetSeat() Seat {
-	var carg0 *C.GdkDevice // in, none, class
-	var cret  *C.GdkSeat   // return, none, class
+	var carg0 *C.GdkDevice // in, none, converted
+	var cret  *C.GdkSeat   // return, none, converted
 
 	carg0 = (*C.GdkDevice)(UnsafeDeviceToGlibNone(device))
 
@@ -12504,8 +12583,8 @@ func (device *DeviceInstance) GetSeat() Seat {
 //
 // Determines the type of the device.
 func (device *DeviceInstance) GetSource() InputSource {
-	var carg0 *C.GdkDevice     // in, none, class
-	var cret  C.GdkInputSource // return, casted
+	var carg0 *C.GdkDevice     // in, none, converted
+	var cret  C.GdkInputSource // return, none, casted
 
 	carg0 = (*C.GdkDevice)(UnsafeDeviceToGlibNone(device))
 
@@ -12534,10 +12613,10 @@ func (device *DeviceInstance) GetSource() InputSource {
 // Returns %NULL if the surface tree under @device is not known to GDK
 // (for example, belongs to another application).
 func (device *DeviceInstance) GetSurfaceAtPosition() (float64, float64, Surface) {
-	var carg0 *C.GdkDevice  // in, none, class
-	var carg1 C.gdouble     // out, casted
-	var carg2 C.gdouble     // out, casted
-	var cret  *C.GdkSurface // return, none, class
+	var carg0 *C.GdkDevice  // in, none, converted
+	var carg1 C.gdouble     // out, full, casted
+	var carg2 C.gdouble     // out, full, casted
+	var cret  *C.GdkSurface // return, none, converted
 
 	carg0 = (*C.GdkDevice)(UnsafeDeviceToGlibNone(device))
 
@@ -12567,8 +12646,8 @@ func (device *DeviceInstance) GetSurfaceAtPosition() (float64, float64, Surface)
 // events for a device that are not received from the OS, and will not
 // update the timestamp).
 func (device *DeviceInstance) GetTimestamp() uint32 {
-	var carg0 *C.GdkDevice // in, none, class
-	var cret  C.guint32    // return, casted
+	var carg0 *C.GdkDevice // in, none, converted
+	var cret  C.guint32    // return, none, casted
 
 	carg0 = (*C.GdkDevice)(UnsafeDeviceToGlibNone(device))
 
@@ -12615,7 +12694,7 @@ func (device *DeviceInstance) GetTimestamp() uint32 {
 //  }
 // ```
 func (device *DeviceInstance) GetVendorID() string {
-	var carg0 *C.GdkDevice // in, none, class
+	var carg0 *C.GdkDevice // in, none, converted
 	var cret  *C.gchar     // return, none, string
 
 	carg0 = (*C.GdkDevice)(UnsafeDeviceToGlibNone(device))
@@ -12640,7 +12719,7 @@ func (device *DeviceInstance) GetVendorID() string {
 // 
 // This is only relevant for keyboard devices.
 func (device *DeviceInstance) HasBidiLayouts() bool {
-	var carg0 *C.GdkDevice // in, none, class
+	var carg0 *C.GdkDevice // in, none, converted
 	var cret  C.gboolean   // return
 
 	carg0 = (*C.GdkDevice)(UnsafeDeviceToGlibNone(device))
@@ -12660,7 +12739,7 @@ func (device *DeviceInstance) HasBidiLayouts() bool {
 // DeviceToolInstance is the instance type used by all types extending GdkDeviceTool. It is used internally by the bindings. Users should use the interface [DeviceTool] instead.
 type DeviceToolInstance struct {
 	_ [0]func() // equal guard
-	gobject.Object
+	gobject.ObjectInstance
 }
 
 var _ DeviceTool = (*DeviceToolInstance)(nil)
@@ -12669,7 +12748,7 @@ var _ DeviceTool = (*DeviceToolInstance)(nil)
 //
 // A physical tool associated to a `GdkDevice`.
 type DeviceTool interface {
-	gobject.ObjectLike
+	gobject.Object
 	upcastToGdkDeviceTool() *DeviceToolInstance
 
 	// GetAxes wraps gdk_device_tool_get_axes
@@ -12715,14 +12794,14 @@ type DeviceTool interface {
 	GetToolType() DeviceToolType
 }
 
-func unsafeWrapDeviceTool(base *gobject.Object) *DeviceToolInstance {
+func unsafeWrapDeviceTool(base *gobject.ObjectInstance) *DeviceToolInstance {
 	return &DeviceToolInstance{
-		Object: *base,
+		ObjectInstance: *base,
 	}
 }
 
 func marshalDeviceToolInstance(p uintptr) (interface{}, error) {
-	return unsafeWrapDeviceTool(gobject.ValueFromNative(unsafe.Pointer(p)).Object()), nil
+	return unsafeWrapDeviceTool(gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Object()), nil
 }
 
 // UnsafeDeviceToolFromGlibBorrow is used to convert raw GdkDeviceTool pointers to go. This is used by the bindings internally.
@@ -12761,8 +12840,8 @@ func UnsafeDeviceToolToGlibFull(c DeviceTool) unsafe.Pointer {
 //
 // Gets the axes of the tool.
 func (tool *DeviceToolInstance) GetAxes() AxisFlags {
-	var carg0 *C.GdkDeviceTool // in, none, class
-	var cret  C.GdkAxisFlags   // return, casted
+	var carg0 *C.GdkDeviceTool // in, none, converted
+	var cret  C.GdkAxisFlags   // return, none, casted
 
 	carg0 = (*C.GdkDeviceTool)(UnsafeDeviceToolToGlibNone(tool))
 
@@ -12793,8 +12872,8 @@ func (tool *DeviceToolInstance) GetAxes() AxisFlags {
 // as a tablet may support multiple devices with the same
 // `GdkDeviceToolType`, but different hardware identifiers.
 func (tool *DeviceToolInstance) GetHardwareID() uint64 {
-	var carg0 *C.GdkDeviceTool // in, none, class
-	var cret  C.guint64        // return, casted
+	var carg0 *C.GdkDeviceTool // in, none, converted
+	var cret  C.guint64        // return, none, casted
 
 	carg0 = (*C.GdkDeviceTool)(UnsafeDeviceToolToGlibNone(tool))
 
@@ -12818,8 +12897,8 @@ func (tool *DeviceToolInstance) GetHardwareID() uint64 {
 // This value can be used to identify a physical tool
 // (eg. a tablet pen) across program executions.
 func (tool *DeviceToolInstance) GetSerial() uint64 {
-	var carg0 *C.GdkDeviceTool // in, none, class
-	var cret  C.guint64        // return, casted
+	var carg0 *C.GdkDeviceTool // in, none, converted
+	var cret  C.guint64        // return, none, casted
 
 	carg0 = (*C.GdkDeviceTool)(UnsafeDeviceToolToGlibNone(tool))
 
@@ -12840,8 +12919,8 @@ func (tool *DeviceToolInstance) GetSerial() uint64 {
 //
 // Gets the `GdkDeviceToolType` of the tool.
 func (tool *DeviceToolInstance) GetToolType() DeviceToolType {
-	var carg0 *C.GdkDeviceTool    // in, none, class
-	var cret  C.GdkDeviceToolType // return, casted
+	var carg0 *C.GdkDeviceTool    // in, none, converted
+	var cret  C.GdkDeviceToolType // return, none, casted
 
 	carg0 = (*C.GdkDeviceTool)(UnsafeDeviceToolToGlibNone(tool))
 
@@ -12858,7 +12937,7 @@ func (tool *DeviceToolInstance) GetToolType() DeviceToolType {
 // DisplayInstance is the instance type used by all types extending GdkDisplay. It is used internally by the bindings. Users should use the interface [Display] instead.
 type DisplayInstance struct {
 	_ [0]func() // equal guard
-	gobject.Object
+	gobject.ObjectInstance
 }
 
 var _ Display = (*DisplayInstance)(nil)
@@ -12880,7 +12959,7 @@ var _ Display = (*DisplayInstance)(nil)
 // Output devices are represented by [class@Gdk.Monitor] objects, which can
 // be accessed with [method@Gdk.Display.get_monitor_at_surface] and similar APIs.
 type Display interface {
-	gobject.ObjectLike
+	gobject.Object
 	upcastToGdkDisplay() *DisplayInstance
 
 	// Beep wraps gdk_display_beep
@@ -12962,7 +13041,7 @@ type Display interface {
 	// GetDmabufFormats wraps gdk_display_get_dmabuf_formats
 	// The function returns the following values:
 	// 
-	// 	- ret *DmabufFormats 
+	// 	- ret DmabufFormats 
 	//
 	// Returns the dma-buf formats that are supported on this display.
 	// 
@@ -12973,7 +13052,7 @@ type Display interface {
 	// buffer formats with producers such as v4l, pipewire or GStreamer.
 	// 
 	// To learn more about dma-bufs, see [class@Gdk.DmabufTextureBuilder].
-	GetDmabufFormats() *DmabufFormats
+	GetDmabufFormats() DmabufFormats
 	// GetMonitorAtSurface wraps gdk_display_get_monitor_at_surface
 	// 
 	// The function takes the following parameters:
@@ -13081,13 +13160,6 @@ type Display interface {
 	// 
 	// On modern displays, this value is always %TRUE.
 	IsRGBA() bool
-	// ListSeats wraps gdk_display_list_seats
-	// The function returns the following values:
-	// 
-	// 	- ret *glib.List 
-	//
-	// Returns the list of seats known to @display.
-	ListSeats() *glib.List
 	// MapKeycode wraps gdk_display_map_keycode
 	// 
 	// The function takes the following parameters:
@@ -13096,9 +13168,9 @@ type Display interface {
 	// 
 	// The function returns the following values:
 	// 
-	// 	- keys []KeymapKey: return
+	// 	- keys array: return
 	//   location for array of `GdkKeymapKey` 
-	// 	- keyvals []uint: return
+	// 	- keyvals array: return
 	//   location for array of keyvals 
 	// 	- nEntries int: length of @keys and @keyvals 
 	// 	- ret bool 
@@ -13112,7 +13184,7 @@ type Display interface {
 	// keyboard group and level.
 	// 
 	// Free the returned arrays with g_free().
-	MapKeycode(uint) ([]KeymapKey, []uint, bool)
+	MapKeycode(uint) (array, array, bool)
 	// MapKeyval wraps gdk_display_map_keyval
 	// 
 	// The function takes the following parameters:
@@ -13121,7 +13193,7 @@ type Display interface {
 	// 
 	// The function returns the following values:
 	// 
-	// 	- keys []KeymapKey: return location
+	// 	- keys array: return location
 	//   for an array of `GdkKeymapKey` 
 	// 	- nKeys int: return location for number of elements in returned array 
 	// 	- ret bool 
@@ -13141,7 +13213,7 @@ type Display interface {
 	// keyboard group. The level is computed from the modifier mask.
 	// 
 	// The returned array should be freed with g_free().
-	MapKeyval(uint) ([]KeymapKey, bool)
+	MapKeyval(uint) (array, bool)
 	// NotifyStartupComplete wraps gdk_display_notify_startup_complete
 	// 
 	// The function takes the following parameters:
@@ -13254,14 +13326,14 @@ type Display interface {
 	TranslateKey(uint, ModifierType, int) (uint, int, int, ModifierType, bool)
 }
 
-func unsafeWrapDisplay(base *gobject.Object) *DisplayInstance {
+func unsafeWrapDisplay(base *gobject.ObjectInstance) *DisplayInstance {
 	return &DisplayInstance{
-		Object: *base,
+		ObjectInstance: *base,
 	}
 }
 
 func marshalDisplayInstance(p uintptr) (interface{}, error) {
-	return unsafeWrapDisplay(gobject.ValueFromNative(unsafe.Pointer(p)).Object()), nil
+	return unsafeWrapDisplay(gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Object()), nil
 }
 
 // UnsafeDisplayFromGlibBorrow is used to convert raw GdkDisplay pointers to go. This is used by the bindings internally.
@@ -13304,7 +13376,7 @@ func UnsafeDisplayToGlibFull(c Display) unsafe.Pointer {
 // 
 //     gdk_display_manager_get_default_display (gdk_display_manager_get ())
 func GetDefault() Display {
-	var cret *C.GdkDisplay // return, none, class
+	var cret *C.GdkDisplay // return, none, converted
 
 	cret = C.gdk_display_get_default()
 
@@ -13330,7 +13402,7 @@ func GetDefault() Display {
 // If opening the display fails, `NULL` is returned.
 func Open(displayName string) Display {
 	var carg1 *C.gchar      // in, none, string, nullable
-	var cret  *C.GdkDisplay // return, none, class
+	var cret  *C.GdkDisplay // return, none, converted
 
 	if displayName != "" {
 		carg1 = (*C.gchar)(unsafe.Pointer(C.CString(displayName)))
@@ -13351,7 +13423,7 @@ func Open(displayName string) Display {
 //
 // Emits a short beep on @display
 func (display *DisplayInstance) Beep() {
-	var carg0 *C.GdkDisplay // in, none, class
+	var carg0 *C.GdkDisplay // in, none, converted
 
 	carg0 = (*C.GdkDisplay)(UnsafeDisplayToGlibNone(display))
 
@@ -13365,7 +13437,7 @@ func (display *DisplayInstance) Beep() {
 // 
 // This cleans up associated resources.
 func (display *DisplayInstance) Close() {
-	var carg0 *C.GdkDisplay // in, none, class
+	var carg0 *C.GdkDisplay // in, none, converted
 
 	carg0 = (*C.GdkDisplay)(UnsafeDisplayToGlibNone(display))
 
@@ -13389,9 +13461,9 @@ func (display *DisplayInstance) Close() {
 // Before using the returned `GdkGLContext`, you will need to
 // call [method@Gdk.GLContext.make_current] or [method@Gdk.GLContext.realize].
 func (self *DisplayInstance) CreateGLContext() (GLContext, error) {
-	var carg0 *C.GdkDisplay   // in, none, class
-	var cret  *C.GdkGLContext // return, full, class
-	var _cerr *C.GError       // out, full, record, nullable
+	var carg0 *C.GdkDisplay   // in, none, converted
+	var cret  *C.GdkGLContext // return, full, converted
+	var _cerr *C.GError       // out, full, converted, nullable
 
 	carg0 = (*C.GdkDisplay)(UnsafeDisplayToGlibNone(self))
 
@@ -13403,7 +13475,7 @@ func (self *DisplayInstance) CreateGLContext() (GLContext, error) {
 
 	ret = UnsafeGLContextFromGlibFull(unsafe.Pointer(cret))
 	if _cerr != nil {
-		_goerr = glib.UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
+		_goerr = UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
 	}
 
 	return ret, _goerr
@@ -13421,8 +13493,8 @@ func (self *DisplayInstance) CreateGLContext() (GLContext, error) {
 //
 // Returns %TRUE if there is an ongoing grab on @device for @display.
 func (display *DisplayInstance) DeviceIsGrabbed(device Device) bool {
-	var carg0 *C.GdkDisplay // in, none, class
-	var carg1 *C.GdkDevice  // in, none, class
+	var carg0 *C.GdkDisplay // in, none, converted
+	var carg1 *C.GdkDevice  // in, none, converted
 	var cret  C.gboolean    // return
 
 	carg0 = (*C.GdkDisplay)(UnsafeDisplayToGlibNone(display))
@@ -13454,7 +13526,7 @@ func (display *DisplayInstance) DeviceIsGrabbed(device Device) bool {
 // This is most useful for X11. On windowing systems where requests are
 // handled synchronously, this function will do nothing.
 func (display *DisplayInstance) Flush() {
-	var carg0 *C.GdkDisplay // in, none, class
+	var carg0 *C.GdkDisplay // in, none, converted
 
 	carg0 = (*C.GdkDisplay)(UnsafeDisplayToGlibNone(display))
 
@@ -13470,8 +13542,8 @@ func (display *DisplayInstance) Flush() {
 // Returns a `GdkAppLaunchContext` suitable for launching
 // applications on the given display.
 func (display *DisplayInstance) GetAppLaunchContext() AppLaunchContext {
-	var carg0 *C.GdkDisplay          // in, none, class
-	var cret  *C.GdkAppLaunchContext // return, full, class
+	var carg0 *C.GdkDisplay          // in, none, converted
+	var cret  *C.GdkAppLaunchContext // return, full, converted
 
 	carg0 = (*C.GdkDisplay)(UnsafeDisplayToGlibNone(display))
 
@@ -13492,8 +13564,8 @@ func (display *DisplayInstance) GetAppLaunchContext() AppLaunchContext {
 //
 // Gets the clipboard used for copy/paste operations.
 func (display *DisplayInstance) GetClipboard() Clipboard {
-	var carg0 *C.GdkDisplay   // in, none, class
-	var cret  *C.GdkClipboard // return, none, class
+	var carg0 *C.GdkDisplay   // in, none, converted
+	var cret  *C.GdkClipboard // return, none, converted
 
 	carg0 = (*C.GdkDisplay)(UnsafeDisplayToGlibNone(display))
 
@@ -13517,8 +13589,8 @@ func (display *DisplayInstance) GetClipboard() Clipboard {
 // Note that a display may not have a seat. In this case,
 // this function will return %NULL.
 func (display *DisplayInstance) GetDefaultSeat() Seat {
-	var carg0 *C.GdkDisplay // in, none, class
-	var cret  *C.GdkSeat    // return, none, class
+	var carg0 *C.GdkDisplay // in, none, converted
+	var cret  *C.GdkSeat    // return, none, converted
 
 	carg0 = (*C.GdkDisplay)(UnsafeDisplayToGlibNone(display))
 
@@ -13535,7 +13607,7 @@ func (display *DisplayInstance) GetDefaultSeat() Seat {
 // GetDmabufFormats wraps gdk_display_get_dmabuf_formats
 // The function returns the following values:
 // 
-// 	- ret *DmabufFormats 
+// 	- ret DmabufFormats 
 //
 // Returns the dma-buf formats that are supported on this display.
 // 
@@ -13546,16 +13618,16 @@ func (display *DisplayInstance) GetDefaultSeat() Seat {
 // buffer formats with producers such as v4l, pipewire or GStreamer.
 // 
 // To learn more about dma-bufs, see [class@Gdk.DmabufTextureBuilder].
-func (display *DisplayInstance) GetDmabufFormats() *DmabufFormats {
-	var carg0 *C.GdkDisplay       // in, none, class
-	var cret  *C.GdkDmabufFormats // return, none, record
+func (display *DisplayInstance) GetDmabufFormats() DmabufFormats {
+	var carg0 *C.GdkDisplay       // in, none, converted
+	var cret  *C.GdkDmabufFormats // return, none, converted
 
 	carg0 = (*C.GdkDisplay)(UnsafeDisplayToGlibNone(display))
 
 	cret = C.gdk_display_get_dmabuf_formats(carg0)
 	runtime.KeepAlive(display)
 
-	var ret *DmabufFormats
+	var ret DmabufFormats
 
 	ret = UnsafeDmabufFormatsFromGlibNone(unsafe.Pointer(cret))
 
@@ -13575,9 +13647,9 @@ func (display *DisplayInstance) GetDmabufFormats() *DmabufFormats {
 // Gets the monitor in which the largest area of @surface
 // resides.
 func (display *DisplayInstance) GetMonitorAtSurface(surface Surface) Monitor {
-	var carg0 *C.GdkDisplay // in, none, class
-	var carg1 *C.GdkSurface // in, none, class
-	var cret  *C.GdkMonitor // return, none, class
+	var carg0 *C.GdkDisplay // in, none, converted
+	var carg1 *C.GdkSurface // in, none, converted
+	var cret  *C.GdkMonitor // return, none, converted
 
 	carg0 = (*C.GdkDisplay)(UnsafeDisplayToGlibNone(display))
 	carg1 = (*C.GdkSurface)(UnsafeSurfaceToGlibNone(surface))
@@ -13606,8 +13678,8 @@ func (display *DisplayInstance) GetMonitorAtSurface(surface Surface) Monitor {
 // You can listen to the GListModel::items-changed signal on
 // this list to monitor changes to the monitor of this display.
 func (self *DisplayInstance) GetMonitors() gio.ListModel {
-	var carg0 *C.GdkDisplay // in, none, class
-	var cret  *C.GListModel // return, none, interface
+	var carg0 *C.GdkDisplay // in, none, converted
+	var cret  *C.GListModel // return, none, converted
 
 	carg0 = (*C.GdkDisplay)(UnsafeDisplayToGlibNone(self))
 
@@ -13616,7 +13688,7 @@ func (self *DisplayInstance) GetMonitors() gio.ListModel {
 
 	var ret gio.ListModel
 
-	ret = gio.UnsafeListModelFromGlibNone(unsafe.Pointer(cret))
+	ret = UnsafeListModelFromGlibNone(unsafe.Pointer(cret))
 
 	return ret
 }
@@ -13628,7 +13700,7 @@ func (self *DisplayInstance) GetMonitors() gio.ListModel {
 //
 // Gets the name of the display.
 func (display *DisplayInstance) GetName() string {
-	var carg0 *C.GdkDisplay // in, none, class
+	var carg0 *C.GdkDisplay // in, none, converted
 	var cret  *C.gchar      // return, none, string
 
 	carg0 = (*C.GdkDisplay)(UnsafeDisplayToGlibNone(display))
@@ -13653,8 +13725,8 @@ func (display *DisplayInstance) GetName() string {
 // On backends where the primary clipboard is not supported natively,
 // GDK emulates this clipboard locally.
 func (display *DisplayInstance) GetPrimaryClipboard() Clipboard {
-	var carg0 *C.GdkDisplay   // in, none, class
-	var cret  *C.GdkClipboard // return, none, class
+	var carg0 *C.GdkDisplay   // in, none, converted
+	var cret  *C.GdkClipboard // return, none, converted
 
 	carg0 = (*C.GdkDisplay)(UnsafeDisplayToGlibNone(display))
 
@@ -13682,15 +13754,15 @@ func (display *DisplayInstance) GetPrimaryClipboard() Clipboard {
 // Retrieves a desktop-wide setting such as double-click time
 // for the @display.
 func (display *DisplayInstance) GetSetting(name string, value *gobject.Value) bool {
-	var carg0 *C.GdkDisplay // in, none, class
+	var carg0 *C.GdkDisplay // in, none, converted
 	var carg1 *C.gchar      // in, none, string
-	var carg2 *C.GValue     // in, none, record
+	var carg2 *C.GValue     // in, none, converted
 	var cret  C.gboolean    // return
 
 	carg0 = (*C.GdkDisplay)(UnsafeDisplayToGlibNone(display))
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(name)))
 	defer C.free(unsafe.Pointer(carg1))
-	carg2 = (*C.GValue)(gobject.TODOToGlibNone(value))
+	carg2 = (*C.GValue)(TODOToGlibNone(value))
 
 	cret = C.gdk_display_get_setting(carg0, carg1, carg2)
 	runtime.KeepAlive(display)
@@ -13716,7 +13788,7 @@ func (display *DisplayInstance) GetSetting(name string, value *gobject.Value) bo
 //
 // Deprecated: (since 4.10.0) 
 func (display *DisplayInstance) GetStartupNotificationID() string {
-	var carg0 *C.GdkDisplay // in, none, class
+	var carg0 *C.GdkDisplay // in, none, converted
 	var cret  *C.gchar      // return, none, string
 
 	carg0 = (*C.GdkDisplay)(UnsafeDisplayToGlibNone(display))
@@ -13738,7 +13810,7 @@ func (display *DisplayInstance) GetStartupNotificationID() string {
 //
 // Finds out if the display has been closed.
 func (display *DisplayInstance) IsClosed() bool {
-	var carg0 *C.GdkDisplay // in, none, class
+	var carg0 *C.GdkDisplay // in, none, converted
 	var cret  C.gboolean    // return
 
 	carg0 = (*C.GdkDisplay)(UnsafeDisplayToGlibNone(display))
@@ -13771,7 +13843,7 @@ func (display *DisplayInstance) IsClosed() bool {
 // 
 // On modern displays, this value is always %TRUE.
 func (display *DisplayInstance) IsComposited() bool {
-	var carg0 *C.GdkDisplay // in, none, class
+	var carg0 *C.GdkDisplay // in, none, converted
 	var cret  C.gboolean    // return
 
 	carg0 = (*C.GdkDisplay)(UnsafeDisplayToGlibNone(display))
@@ -13805,7 +13877,7 @@ func (display *DisplayInstance) IsComposited() bool {
 // 
 // On modern displays, this value is always %TRUE.
 func (display *DisplayInstance) IsRGBA() bool {
-	var carg0 *C.GdkDisplay // in, none, class
+	var carg0 *C.GdkDisplay // in, none, converted
 	var cret  C.gboolean    // return
 
 	carg0 = (*C.GdkDisplay)(UnsafeDisplayToGlibNone(display))
@@ -13822,28 +13894,6 @@ func (display *DisplayInstance) IsRGBA() bool {
 	return ret
 }
 
-// ListSeats wraps gdk_display_list_seats
-// The function returns the following values:
-// 
-// 	- ret *glib.List 
-//
-// Returns the list of seats known to @display.
-func (display *DisplayInstance) ListSeats() *glib.List {
-	var carg0 *C.GdkDisplay // in, none, class
-	var cret  *C.GList      // return, container inner types: (GdkSeat), transfer: container, scope: , implicit: false, skip: false, optional: false, nullable: false, caller-allocates: false, has closure: false, has destroy: false
-
-	carg0 = (*C.GdkDisplay)(UnsafeDisplayToGlibNone(display))
-
-	cret = C.gdk_display_list_seats(carg0)
-	runtime.KeepAlive(display)
-
-	var ret *glib.List
-
-	panic("unimplemented conversion of container *typesystem.PointerType (GList*)")
-
-	return ret
-}
-
 // MapKeycode wraps gdk_display_map_keycode
 // 
 // The function takes the following parameters:
@@ -13852,9 +13902,9 @@ func (display *DisplayInstance) ListSeats() *glib.List {
 // 
 // The function returns the following values:
 // 
-// 	- keys []KeymapKey: return
+// 	- keys array: return
 //   location for array of `GdkKeymapKey` 
-// 	- keyvals []uint: return
+// 	- keyvals array: return
 //   location for array of keyvals 
 // 	- nEntries int: length of @keys and @keyvals 
 // 	- ret bool 
@@ -13868,13 +13918,13 @@ func (display *DisplayInstance) ListSeats() *glib.List {
 // keyboard group and level.
 // 
 // Free the returned arrays with g_free().
-func (display *DisplayInstance) MapKeycode(keycode uint) ([]KeymapKey, []uint, bool) {
-	var carg0 *C.GdkDisplay   // in, none, class
-	var carg1 C.guint         // in, casted
-	var carg2 *C.GdkKeymapKey // out, transfer: full, scope: call, implicit: false, skip: false, optional: true, nullable: false, caller-allocates: false, has closure: false, has destroy: false
-	var carg3 *C.guint        // out, transfer: full, scope: call, implicit: false, skip: false, optional: true, nullable: false, caller-allocates: false, has closure: false, has destroy: false
-	var carg4 C.int           // out, casted
-	var cret  C.gboolean      // return
+func (display *DisplayInstance) MapKeycode(keycode uint) (array, array, bool) {
+	var carg0 *C.GdkDisplay // in, none, converted
+	var carg1 C.guint       // in, none, casted
+	var carg2 array         // out, transfer: full, scope: call, implicit: false, skip: false, optional: true, nullable: false, caller-allocates: false, has closure: false, has destroy: false
+	var carg3 array         // out, transfer: full, scope: call, implicit: false, skip: false, optional: true, nullable: false, caller-allocates: false, has closure: false, has destroy: false
+	var carg4 C.int         // out, full, casted
+	var cret  C.gboolean    // return
 
 	carg0 = (*C.GdkDisplay)(UnsafeDisplayToGlibNone(display))
 	carg1 = C.guint(keycode)
@@ -13883,13 +13933,13 @@ func (display *DisplayInstance) MapKeycode(keycode uint) ([]KeymapKey, []uint, b
 	runtime.KeepAlive(display)
 	runtime.KeepAlive(keycode)
 
-	var keys     []KeymapKey
-	var keyvals  []uint
+	var keys     array
+	var keyvals  array
 	var nEntries int
 	var ret      bool
 
-	panic("unimplemented conversion of *typesystem.Array (GdkKeymapKey*)")
-	panic("unimplemented conversion of *typesystem.Array (guint*)")
+	panic("unimplemented conversion of array (array)")
+	panic("unimplemented conversion of array (array)")
 	nEntries = int(carg4)
 	if cret != 0 {
 		ret = true
@@ -13906,7 +13956,7 @@ func (display *DisplayInstance) MapKeycode(keycode uint) ([]KeymapKey, []uint, b
 // 
 // The function returns the following values:
 // 
-// 	- keys []KeymapKey: return location
+// 	- keys array: return location
 //   for an array of `GdkKeymapKey` 
 // 	- nKeys int: return location for number of elements in returned array 
 // 	- ret bool 
@@ -13926,12 +13976,12 @@ func (display *DisplayInstance) MapKeycode(keycode uint) ([]KeymapKey, []uint, b
 // keyboard group. The level is computed from the modifier mask.
 // 
 // The returned array should be freed with g_free().
-func (display *DisplayInstance) MapKeyval(keyval uint) ([]KeymapKey, bool) {
-	var carg0 *C.GdkDisplay   // in, none, class
-	var carg1 C.guint         // in, casted
-	var carg2 *C.GdkKeymapKey // out, transfer: full, scope: call, implicit: false, skip: false, optional: false, nullable: false, caller-allocates: false, has closure: false, has destroy: false
-	var carg3 C.int           // out, casted
-	var cret  C.gboolean      // return
+func (display *DisplayInstance) MapKeyval(keyval uint) (array, bool) {
+	var carg0 *C.GdkDisplay // in, none, converted
+	var carg1 C.guint       // in, none, casted
+	var carg2 array         // out, transfer: full, scope: call, implicit: false, skip: false, optional: false, nullable: false, caller-allocates: false, has closure: false, has destroy: false
+	var carg3 C.int         // out, full, casted
+	var cret  C.gboolean    // return
 
 	carg0 = (*C.GdkDisplay)(UnsafeDisplayToGlibNone(display))
 	carg1 = C.guint(keyval)
@@ -13940,11 +13990,11 @@ func (display *DisplayInstance) MapKeyval(keyval uint) ([]KeymapKey, bool) {
 	runtime.KeepAlive(display)
 	runtime.KeepAlive(keyval)
 
-	var keys  []KeymapKey
+	var keys  array
 	var nKeys int
 	var ret   bool
 
-	panic("unimplemented conversion of *typesystem.Array (GdkKeymapKey*)")
+	panic("unimplemented conversion of array (array)")
 	nKeys = int(carg3)
 	if cret != 0 {
 		ret = true
@@ -13970,7 +14020,7 @@ func (display *DisplayInstance) MapKeyval(keyval uint) ([]KeymapKey, bool) {
 //
 // Deprecated: (since 4.10.0) Using [method@Gdk.Toplevel.set_startup_id] is sufficient
 func (display *DisplayInstance) NotifyStartupComplete(startupId string) {
-	var carg0 *C.GdkDisplay // in, none, class
+	var carg0 *C.GdkDisplay // in, none, converted
 	var carg1 *C.gchar      // in, none, string
 
 	carg0 = (*C.GdkDisplay)(UnsafeDisplayToGlibNone(display))
@@ -14003,9 +14053,9 @@ func (display *DisplayInstance) NotifyStartupComplete(startupId string) {
 // as needed. But you can use it as a check when setting up code that
 // might make use of OpenGL.
 func (self *DisplayInstance) PrepareGL() (bool, error) {
-	var carg0 *C.GdkDisplay // in, none, class
+	var carg0 *C.GdkDisplay // in, none, converted
 	var cret  C.gboolean    // return
-	var _cerr *C.GError     // out, full, record, nullable
+	var _cerr *C.GError     // out, full, converted, nullable
 
 	carg0 = (*C.GdkDisplay)(UnsafeDisplayToGlibNone(self))
 
@@ -14019,7 +14069,7 @@ func (self *DisplayInstance) PrepareGL() (bool, error) {
 		ret = true
 	}
 	if _cerr != nil {
-		_goerr = glib.UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
+		_goerr = UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
 	}
 
 	return ret, _goerr
@@ -14037,7 +14087,7 @@ func (self *DisplayInstance) PrepareGL() (bool, error) {
 // 
 // On modern displays, this value is always %TRUE.
 func (display *DisplayInstance) SupportsInputShapes() bool {
-	var carg0 *C.GdkDisplay // in, none, class
+	var carg0 *C.GdkDisplay // in, none, converted
 	var cret  C.gboolean    // return
 
 	carg0 = (*C.GdkDisplay)(UnsafeDisplayToGlibNone(display))
@@ -14064,7 +14114,7 @@ func (display *DisplayInstance) SupportsInputShapes() bool {
 // If %TRUE is returned the application decides if it wants to draw shadows.
 // If %FALSE is returned, the compositor decides if it wants to draw shadows.
 func (display *DisplayInstance) SupportsShadowWidth() bool {
-	var carg0 *C.GdkDisplay // in, none, class
+	var carg0 *C.GdkDisplay // in, none, converted
 	var cret  C.gboolean    // return
 
 	carg0 = (*C.GdkDisplay)(UnsafeDisplayToGlibNone(display))
@@ -14094,7 +14144,7 @@ func (display *DisplayInstance) SupportsShadowWidth() bool {
 // This is most useful for X11. On windowing systems where requests are
 // handled synchronously, this function will do nothing.
 func (display *DisplayInstance) Sync() {
-	var carg0 *C.GdkDisplay // in, none, class
+	var carg0 *C.GdkDisplay // in, none, converted
 
 	carg0 = (*C.GdkDisplay)(UnsafeDisplayToGlibNone(display))
 
@@ -14139,14 +14189,14 @@ func (display *DisplayInstance) Sync() {
 // contains the translated keyval. It is exported for the benefit of
 // virtualized test environments.
 func (display *DisplayInstance) TranslateKey(keycode uint, state ModifierType, group int) (uint, int, int, ModifierType, bool) {
-	var carg0 *C.GdkDisplay     // in, none, class
-	var carg1 C.guint           // in, casted
-	var carg2 C.GdkModifierType // in, casted
-	var carg3 C.int             // in, casted
-	var carg4 C.guint           // out, casted
-	var carg5 C.int             // out, casted
-	var carg6 C.int             // out, casted
-	var carg7 C.GdkModifierType // out, casted
+	var carg0 *C.GdkDisplay     // in, none, converted
+	var carg1 C.guint           // in, none, casted
+	var carg2 C.GdkModifierType // in, none, casted
+	var carg3 C.int             // in, none, casted
+	var carg4 C.guint           // out, full, casted
+	var carg5 C.int             // out, full, casted
+	var carg6 C.int             // out, full, casted
+	var carg7 C.GdkModifierType // out, full, casted
 	var cret  C.gboolean        // return
 
 	carg0 = (*C.GdkDisplay)(UnsafeDisplayToGlibNone(display))
@@ -14180,7 +14230,7 @@ func (display *DisplayInstance) TranslateKey(keycode uint, state ModifierType, g
 // DisplayManagerInstance is the instance type used by all types extending GdkDisplayManager. It is used internally by the bindings. Users should use the interface [DisplayManager] instead.
 type DisplayManagerInstance struct {
 	_ [0]func() // equal guard
-	gobject.Object
+	gobject.ObjectInstance
 }
 
 var _ DisplayManager = (*DisplayManagerInstance)(nil)
@@ -14230,7 +14280,7 @@ var _ DisplayManager = (*DisplayManagerInstance)(nil)
 //   g_error ("Unsupported GDK backend");
 // ```
 type DisplayManager interface {
-	gobject.ObjectLike
+	gobject.Object
 	upcastToGdkDisplayManager() *DisplayManagerInstance
 
 	// GetDefaultDisplay wraps gdk_display_manager_get_default_display
@@ -14240,13 +14290,6 @@ type DisplayManager interface {
 	//
 	// Gets the default `GdkDisplay`.
 	GetDefaultDisplay() Display
-	// ListDisplays wraps gdk_display_manager_list_displays
-	// The function returns the following values:
-	// 
-	// 	- ret *glib.SList 
-	//
-	// List all currently open displays.
-	ListDisplays() *glib.SList
 	// OpenDisplay wraps gdk_display_manager_open_display
 	// 
 	// The function takes the following parameters:
@@ -14269,14 +14312,14 @@ type DisplayManager interface {
 	SetDefaultDisplay(Display)
 }
 
-func unsafeWrapDisplayManager(base *gobject.Object) *DisplayManagerInstance {
+func unsafeWrapDisplayManager(base *gobject.ObjectInstance) *DisplayManagerInstance {
 	return &DisplayManagerInstance{
-		Object: *base,
+		ObjectInstance: *base,
 	}
 }
 
 func marshalDisplayManagerInstance(p uintptr) (interface{}, error) {
-	return unsafeWrapDisplayManager(gobject.ValueFromNative(unsafe.Pointer(p)).Object()), nil
+	return unsafeWrapDisplayManager(gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Object()), nil
 }
 
 // UnsafeDisplayManagerFromGlibBorrow is used to convert raw GdkDisplayManager pointers to go. This is used by the bindings internally.
@@ -14323,7 +14366,7 @@ func UnsafeDisplayManagerToGlibFull(c DisplayManager) unsafe.Pointer {
 // Applications can use [func@set_allowed_backends] to limit what
 // backends will be used.
 func Get() DisplayManager {
-	var cret *C.GdkDisplayManager // return, none, class
+	var cret *C.GdkDisplayManager // return, none, converted
 
 	cret = C.gdk_display_manager_get()
 
@@ -14341,8 +14384,8 @@ func Get() DisplayManager {
 //
 // Gets the default `GdkDisplay`.
 func (manager *DisplayManagerInstance) GetDefaultDisplay() Display {
-	var carg0 *C.GdkDisplayManager // in, none, class
-	var cret  *C.GdkDisplay        // return, none, class
+	var carg0 *C.GdkDisplayManager // in, none, converted
+	var cret  *C.GdkDisplay        // return, none, converted
 
 	carg0 = (*C.GdkDisplayManager)(UnsafeDisplayManagerToGlibNone(manager))
 
@@ -14352,28 +14395,6 @@ func (manager *DisplayManagerInstance) GetDefaultDisplay() Display {
 	var ret Display
 
 	ret = UnsafeDisplayFromGlibNone(unsafe.Pointer(cret))
-
-	return ret
-}
-
-// ListDisplays wraps gdk_display_manager_list_displays
-// The function returns the following values:
-// 
-// 	- ret *glib.SList 
-//
-// List all currently open displays.
-func (manager *DisplayManagerInstance) ListDisplays() *glib.SList {
-	var carg0 *C.GdkDisplayManager // in, none, class
-	var cret  *C.GSList            // return, container inner types: (GdkDisplay), transfer: container, scope: , implicit: false, skip: false, optional: false, nullable: false, caller-allocates: false, has closure: false, has destroy: false
-
-	carg0 = (*C.GdkDisplayManager)(UnsafeDisplayManagerToGlibNone(manager))
-
-	cret = C.gdk_display_manager_list_displays(carg0)
-	runtime.KeepAlive(manager)
-
-	var ret *glib.SList
-
-	panic("unimplemented conversion of container *typesystem.PointerType (GSList*)")
 
 	return ret
 }
@@ -14390,9 +14411,9 @@ func (manager *DisplayManagerInstance) ListDisplays() *glib.SList {
 //
 // Opens a display.
 func (manager *DisplayManagerInstance) OpenDisplay(name string) Display {
-	var carg0 *C.GdkDisplayManager // in, none, class
+	var carg0 *C.GdkDisplayManager // in, none, converted
 	var carg1 *C.gchar             // in, none, string, nullable
-	var cret  *C.GdkDisplay        // return, none, class
+	var cret  *C.GdkDisplay        // return, none, converted
 
 	carg0 = (*C.GdkDisplayManager)(UnsafeDisplayManagerToGlibNone(manager))
 	if name != "" {
@@ -14419,8 +14440,8 @@ func (manager *DisplayManagerInstance) OpenDisplay(name string) Display {
 //
 // Sets @display as the default display.
 func (manager *DisplayManagerInstance) SetDefaultDisplay(display Display) {
-	var carg0 *C.GdkDisplayManager // in, none, class
-	var carg1 *C.GdkDisplay        // in, none, class
+	var carg0 *C.GdkDisplayManager // in, none, converted
+	var carg1 *C.GdkDisplay        // in, none, converted
 
 	carg0 = (*C.GdkDisplayManager)(UnsafeDisplayManagerToGlibNone(manager))
 	carg1 = (*C.GdkDisplay)(UnsafeDisplayToGlibNone(display))
@@ -14433,7 +14454,7 @@ func (manager *DisplayManagerInstance) SetDefaultDisplay(display Display) {
 // DmabufTextureBuilderInstance is the instance type used by all types extending GdkDmabufTextureBuilder. It is used internally by the bindings. Users should use the interface [DmabufTextureBuilder] instead.
 type DmabufTextureBuilderInstance struct {
 	_ [0]func() // equal guard
-	gobject.Object
+	gobject.ObjectInstance
 }
 
 var _ DmabufTextureBuilder = (*DmabufTextureBuilderInstance)(nil)
@@ -14498,16 +14519,16 @@ var _ DmabufTextureBuilder = (*DmabufTextureBuilderInstance)(nil)
 // 
 // * The header file [drm_fourcc.h](https://gitlab.freedesktop.org/mesa/drm/-/blob/main/include/drm/drm_fourcc.h)
 type DmabufTextureBuilder interface {
-	gobject.ObjectLike
+	gobject.Object
 	upcastToGdkDmabufTextureBuilder() *DmabufTextureBuilderInstance
 
 	// GetColorState wraps gdk_dmabuf_texture_builder_get_color_state
 	// The function returns the following values:
 	// 
-	// 	- ret *ColorState 
+	// 	- ret ColorState 
 	//
 	// Gets the color state previously set via gdk_dmabuf_texture_builder_set_color_state().
-	GetColorState() *ColorState
+	GetColorState() ColorState
 	// GetDisplay wraps gdk_dmabuf_texture_builder_get_display
 	// The function returns the following values:
 	// 
@@ -14611,14 +14632,14 @@ type DmabufTextureBuilder interface {
 	// 
 	// The function takes the following parameters:
 	// 
-	// 	- colorState *ColorState (nullable): a `GdkColorState` or `NULL` to unset the colorstate. 
+	// 	- colorState ColorState (nullable): a `GdkColorState` or `NULL` to unset the colorstate. 
 	//
 	// Sets the color state for the texture.
 	// 
 	// By default, the colorstate is `NULL`. In that case, GTK will choose the
 	// correct colorstate based on the format.
 	// If you don't know what colorstates are, this is probably the right thing.
-	SetColorState(*ColorState)
+	SetColorState(ColorState)
 	// SetDisplay wraps gdk_dmabuf_texture_builder_set_display
 	// 
 	// The function takes the following parameters:
@@ -14730,14 +14751,14 @@ type DmabufTextureBuilder interface {
 	SetWidth(uint)
 }
 
-func unsafeWrapDmabufTextureBuilder(base *gobject.Object) *DmabufTextureBuilderInstance {
+func unsafeWrapDmabufTextureBuilder(base *gobject.ObjectInstance) *DmabufTextureBuilderInstance {
 	return &DmabufTextureBuilderInstance{
-		Object: *base,
+		ObjectInstance: *base,
 	}
 }
 
 func marshalDmabufTextureBuilderInstance(p uintptr) (interface{}, error) {
-	return unsafeWrapDmabufTextureBuilder(gobject.ValueFromNative(unsafe.Pointer(p)).Object()), nil
+	return unsafeWrapDmabufTextureBuilder(gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Object()), nil
 }
 
 // UnsafeDmabufTextureBuilderFromGlibBorrow is used to convert raw GdkDmabufTextureBuilder pointers to go. This is used by the bindings internally.
@@ -14776,7 +14797,7 @@ func UnsafeDmabufTextureBuilderToGlibFull(c DmabufTextureBuilder) unsafe.Pointer
 //
 // Creates a new texture builder.
 func NewDmabufTextureBuilderInstance() DmabufTextureBuilder {
-	var cret *C.GdkDmabufTextureBuilder // return, full, class
+	var cret *C.GdkDmabufTextureBuilder // return, full, converted
 
 	cret = C.gdk_dmabuf_texture_builder_new()
 
@@ -14790,19 +14811,19 @@ func NewDmabufTextureBuilderInstance() DmabufTextureBuilder {
 // GetColorState wraps gdk_dmabuf_texture_builder_get_color_state
 // The function returns the following values:
 // 
-// 	- ret *ColorState 
+// 	- ret ColorState 
 //
 // Gets the color state previously set via gdk_dmabuf_texture_builder_set_color_state().
-func (self *DmabufTextureBuilderInstance) GetColorState() *ColorState {
-	var carg0 *C.GdkDmabufTextureBuilder // in, none, class
-	var cret  *C.GdkColorState           // return, full, record
+func (self *DmabufTextureBuilderInstance) GetColorState() ColorState {
+	var carg0 *C.GdkDmabufTextureBuilder // in, none, converted
+	var cret  *C.GdkColorState           // return, full, converted
 
 	carg0 = (*C.GdkDmabufTextureBuilder)(UnsafeDmabufTextureBuilderToGlibNone(self))
 
 	cret = C.gdk_dmabuf_texture_builder_get_color_state(carg0)
 	runtime.KeepAlive(self)
 
-	var ret *ColorState
+	var ret ColorState
 
 	ret = UnsafeColorStateFromGlibFull(unsafe.Pointer(cret))
 
@@ -14817,8 +14838,8 @@ func (self *DmabufTextureBuilderInstance) GetColorState() *ColorState {
 // Returns the display that this texture builder is
 // associated with.
 func (self *DmabufTextureBuilderInstance) GetDisplay() Display {
-	var carg0 *C.GdkDmabufTextureBuilder // in, none, class
-	var cret  *C.GdkDisplay              // return, none, class
+	var carg0 *C.GdkDmabufTextureBuilder // in, none, converted
+	var cret  *C.GdkDisplay              // return, none, converted
 
 	carg0 = (*C.GdkDmabufTextureBuilder)(UnsafeDmabufTextureBuilderToGlibNone(self))
 
@@ -14844,9 +14865,9 @@ func (self *DmabufTextureBuilderInstance) GetDisplay() Display {
 //
 // Gets the file descriptor for a plane.
 func (self *DmabufTextureBuilderInstance) GetFd(plane uint) int {
-	var carg0 *C.GdkDmabufTextureBuilder // in, none, class
-	var carg1 C.guint                    // in, casted
-	var cret  C.int                      // return, casted
+	var carg0 *C.GdkDmabufTextureBuilder // in, none, converted
+	var carg1 C.guint                    // in, none, casted
+	var cret  C.int                      // return, none, casted
 
 	carg0 = (*C.GdkDmabufTextureBuilder)(UnsafeDmabufTextureBuilderToGlibNone(self))
 	carg1 = C.guint(plane)
@@ -14872,8 +14893,8 @@ func (self *DmabufTextureBuilderInstance) GetFd(plane uint) int {
 // 
 // The format is specified as a fourcc code.
 func (self *DmabufTextureBuilderInstance) GetFourcc() uint32 {
-	var carg0 *C.GdkDmabufTextureBuilder // in, none, class
-	var cret  C.guint32                  // return, casted
+	var carg0 *C.GdkDmabufTextureBuilder // in, none, converted
+	var cret  C.guint32                  // return, none, casted
 
 	carg0 = (*C.GdkDmabufTextureBuilder)(UnsafeDmabufTextureBuilderToGlibNone(self))
 
@@ -14895,8 +14916,8 @@ func (self *DmabufTextureBuilderInstance) GetFourcc() uint32 {
 // Gets the height previously set via gdk_dmabuf_texture_builder_set_height() or
 // 0 if the height wasn't set.
 func (self *DmabufTextureBuilderInstance) GetHeight() uint {
-	var carg0 *C.GdkDmabufTextureBuilder // in, none, class
-	var cret  C.guint                    // return, casted
+	var carg0 *C.GdkDmabufTextureBuilder // in, none, converted
+	var cret  C.guint                    // return, none, casted
 
 	carg0 = (*C.GdkDmabufTextureBuilder)(UnsafeDmabufTextureBuilderToGlibNone(self))
 
@@ -14917,8 +14938,8 @@ func (self *DmabufTextureBuilderInstance) GetHeight() uint {
 //
 // Gets the modifier value.
 func (self *DmabufTextureBuilderInstance) GetModifier() uint64 {
-	var carg0 *C.GdkDmabufTextureBuilder // in, none, class
-	var cret  C.guint64                  // return, casted
+	var carg0 *C.GdkDmabufTextureBuilder // in, none, converted
+	var cret  C.guint64                  // return, none, casted
 
 	carg0 = (*C.GdkDmabufTextureBuilder)(UnsafeDmabufTextureBuilderToGlibNone(self))
 
@@ -14939,8 +14960,8 @@ func (self *DmabufTextureBuilderInstance) GetModifier() uint64 {
 //
 // Gets the number of planes.
 func (self *DmabufTextureBuilderInstance) GetNPlanes() uint {
-	var carg0 *C.GdkDmabufTextureBuilder // in, none, class
-	var cret  C.guint                    // return, casted
+	var carg0 *C.GdkDmabufTextureBuilder // in, none, converted
+	var cret  C.guint                    // return, none, casted
 
 	carg0 = (*C.GdkDmabufTextureBuilder)(UnsafeDmabufTextureBuilderToGlibNone(self))
 
@@ -14966,9 +14987,9 @@ func (self *DmabufTextureBuilderInstance) GetNPlanes() uint {
 //
 // Gets the offset value for a plane.
 func (self *DmabufTextureBuilderInstance) GetOffset(plane uint) uint {
-	var carg0 *C.GdkDmabufTextureBuilder // in, none, class
-	var carg1 C.guint                    // in, casted
-	var cret  C.guint                    // return, casted
+	var carg0 *C.GdkDmabufTextureBuilder // in, none, converted
+	var carg1 C.guint                    // in, none, casted
+	var cret  C.guint                    // return, none, casted
 
 	carg0 = (*C.GdkDmabufTextureBuilder)(UnsafeDmabufTextureBuilderToGlibNone(self))
 	carg1 = C.guint(plane)
@@ -14991,7 +15012,7 @@ func (self *DmabufTextureBuilderInstance) GetOffset(plane uint) uint {
 //
 // Whether the data is premultiplied.
 func (self *DmabufTextureBuilderInstance) GetPremultiplied() bool {
-	var carg0 *C.GdkDmabufTextureBuilder // in, none, class
+	var carg0 *C.GdkDmabufTextureBuilder // in, none, converted
 	var cret  C.gboolean                 // return
 
 	carg0 = (*C.GdkDmabufTextureBuilder)(UnsafeDmabufTextureBuilderToGlibNone(self))
@@ -15020,9 +15041,9 @@ func (self *DmabufTextureBuilderInstance) GetPremultiplied() bool {
 //
 // Gets the stride value for a plane.
 func (self *DmabufTextureBuilderInstance) GetStride(plane uint) uint {
-	var carg0 *C.GdkDmabufTextureBuilder // in, none, class
-	var carg1 C.guint                    // in, casted
-	var cret  C.guint                    // return, casted
+	var carg0 *C.GdkDmabufTextureBuilder // in, none, converted
+	var carg1 C.guint                    // in, none, casted
+	var cret  C.guint                    // return, none, casted
 
 	carg0 = (*C.GdkDmabufTextureBuilder)(UnsafeDmabufTextureBuilderToGlibNone(self))
 	carg1 = C.guint(plane)
@@ -15046,8 +15067,8 @@ func (self *DmabufTextureBuilderInstance) GetStride(plane uint) uint {
 // Gets the texture previously set via gdk_dmabuf_texture_builder_set_update_texture() or
 // %NULL if none was set.
 func (self *DmabufTextureBuilderInstance) GetUpdateTexture() Texture {
-	var carg0 *C.GdkDmabufTextureBuilder // in, none, class
-	var cret  *C.GdkTexture              // return, none, class
+	var carg0 *C.GdkDmabufTextureBuilder // in, none, converted
+	var cret  *C.GdkTexture              // return, none, converted
 
 	carg0 = (*C.GdkDmabufTextureBuilder)(UnsafeDmabufTextureBuilderToGlibNone(self))
 
@@ -15069,8 +15090,8 @@ func (self *DmabufTextureBuilderInstance) GetUpdateTexture() Texture {
 // Gets the width previously set via gdk_dmabuf_texture_builder_set_width() or
 // 0 if the width wasn't set.
 func (self *DmabufTextureBuilderInstance) GetWidth() uint {
-	var carg0 *C.GdkDmabufTextureBuilder // in, none, class
-	var cret  C.guint                    // return, casted
+	var carg0 *C.GdkDmabufTextureBuilder // in, none, converted
+	var cret  C.guint                    // return, none, casted
 
 	carg0 = (*C.GdkDmabufTextureBuilder)(UnsafeDmabufTextureBuilderToGlibNone(self))
 
@@ -15088,16 +15109,16 @@ func (self *DmabufTextureBuilderInstance) GetWidth() uint {
 // 
 // The function takes the following parameters:
 // 
-// 	- colorState *ColorState (nullable): a `GdkColorState` or `NULL` to unset the colorstate. 
+// 	- colorState ColorState (nullable): a `GdkColorState` or `NULL` to unset the colorstate. 
 //
 // Sets the color state for the texture.
 // 
 // By default, the colorstate is `NULL`. In that case, GTK will choose the
 // correct colorstate based on the format.
 // If you don't know what colorstates are, this is probably the right thing.
-func (self *DmabufTextureBuilderInstance) SetColorState(colorState *ColorState) {
-	var carg0 *C.GdkDmabufTextureBuilder // in, none, class
-	var carg1 *C.GdkColorState           // in, none, record, nullable
+func (self *DmabufTextureBuilderInstance) SetColorState(colorState ColorState) {
+	var carg0 *C.GdkDmabufTextureBuilder // in, none, converted
+	var carg1 *C.GdkColorState           // in, none, converted, nullable
 
 	carg0 = (*C.GdkDmabufTextureBuilder)(UnsafeDmabufTextureBuilderToGlibNone(self))
 	if colorState != nil {
@@ -15121,8 +15142,8 @@ func (self *DmabufTextureBuilderInstance) SetColorState(colorState *ColorState) 
 // The display is used to determine the supported
 // dma-buf formats.
 func (self *DmabufTextureBuilderInstance) SetDisplay(display Display) {
-	var carg0 *C.GdkDmabufTextureBuilder // in, none, class
-	var carg1 *C.GdkDisplay              // in, none, class
+	var carg0 *C.GdkDmabufTextureBuilder // in, none, converted
+	var carg1 *C.GdkDisplay              // in, none, converted
 
 	carg0 = (*C.GdkDmabufTextureBuilder)(UnsafeDmabufTextureBuilderToGlibNone(self))
 	carg1 = (*C.GdkDisplay)(UnsafeDisplayToGlibNone(display))
@@ -15141,9 +15162,9 @@ func (self *DmabufTextureBuilderInstance) SetDisplay(display Display) {
 //
 // Sets the file descriptor for a plane.
 func (self *DmabufTextureBuilderInstance) SetFd(plane uint, fd int) {
-	var carg0 *C.GdkDmabufTextureBuilder // in, none, class
-	var carg1 C.guint                    // in, casted
-	var carg2 C.int                      // in, casted
+	var carg0 *C.GdkDmabufTextureBuilder // in, none, converted
+	var carg1 C.guint                    // in, none, casted
+	var carg2 C.int                      // in, none, casted
 
 	carg0 = (*C.GdkDmabufTextureBuilder)(UnsafeDmabufTextureBuilderToGlibNone(self))
 	carg1 = C.guint(plane)
@@ -15167,8 +15188,8 @@ func (self *DmabufTextureBuilderInstance) SetFd(plane uint, fd int) {
 // 
 // The format must be set before calling [method@Gdk.DmabufTextureBuilder.build].
 func (self *DmabufTextureBuilderInstance) SetFourcc(fourcc uint32) {
-	var carg0 *C.GdkDmabufTextureBuilder // in, none, class
-	var carg1 C.guint32                  // in, casted
+	var carg0 *C.GdkDmabufTextureBuilder // in, none, converted
+	var carg1 C.guint32                  // in, none, casted
 
 	carg0 = (*C.GdkDmabufTextureBuilder)(UnsafeDmabufTextureBuilderToGlibNone(self))
 	carg1 = C.guint32(fourcc)
@@ -15188,8 +15209,8 @@ func (self *DmabufTextureBuilderInstance) SetFourcc(fourcc uint32) {
 // 
 // The height must be set before calling [method@Gdk.DmabufTextureBuilder.build].
 func (self *DmabufTextureBuilderInstance) SetHeight(height uint) {
-	var carg0 *C.GdkDmabufTextureBuilder // in, none, class
-	var carg1 C.guint                    // in, casted
+	var carg0 *C.GdkDmabufTextureBuilder // in, none, converted
+	var carg1 C.guint                    // in, none, casted
 
 	carg0 = (*C.GdkDmabufTextureBuilder)(UnsafeDmabufTextureBuilderToGlibNone(self))
 	carg1 = C.guint(height)
@@ -15207,8 +15228,8 @@ func (self *DmabufTextureBuilderInstance) SetHeight(height uint) {
 //
 // Sets the modifier.
 func (self *DmabufTextureBuilderInstance) SetModifier(modifier uint64) {
-	var carg0 *C.GdkDmabufTextureBuilder // in, none, class
-	var carg1 C.guint64                  // in, casted
+	var carg0 *C.GdkDmabufTextureBuilder // in, none, converted
+	var carg1 C.guint64                  // in, none, casted
 
 	carg0 = (*C.GdkDmabufTextureBuilder)(UnsafeDmabufTextureBuilderToGlibNone(self))
 	carg1 = C.guint64(modifier)
@@ -15226,8 +15247,8 @@ func (self *DmabufTextureBuilderInstance) SetModifier(modifier uint64) {
 //
 // Sets the number of planes of the texture.
 func (self *DmabufTextureBuilderInstance) SetNPlanes(nPlanes uint) {
-	var carg0 *C.GdkDmabufTextureBuilder // in, none, class
-	var carg1 C.guint                    // in, casted
+	var carg0 *C.GdkDmabufTextureBuilder // in, none, converted
+	var carg1 C.guint                    // in, none, casted
 
 	carg0 = (*C.GdkDmabufTextureBuilder)(UnsafeDmabufTextureBuilderToGlibNone(self))
 	carg1 = C.guint(nPlanes)
@@ -15246,9 +15267,9 @@ func (self *DmabufTextureBuilderInstance) SetNPlanes(nPlanes uint) {
 //
 // Sets the offset for a plane.
 func (self *DmabufTextureBuilderInstance) SetOffset(plane uint, offset uint) {
-	var carg0 *C.GdkDmabufTextureBuilder // in, none, class
-	var carg1 C.guint                    // in, casted
-	var carg2 C.guint                    // in, casted
+	var carg0 *C.GdkDmabufTextureBuilder // in, none, converted
+	var carg1 C.guint                    // in, none, casted
+	var carg2 C.guint                    // in, none, casted
 
 	carg0 = (*C.GdkDmabufTextureBuilder)(UnsafeDmabufTextureBuilderToGlibNone(self))
 	carg1 = C.guint(plane)
@@ -15271,7 +15292,7 @@ func (self *DmabufTextureBuilderInstance) SetOffset(plane uint, offset uint) {
 // Unless otherwise specified, all formats including alpha channels are assumed
 // to be premultiplied.
 func (self *DmabufTextureBuilderInstance) SetPremultiplied(premultiplied bool) {
-	var carg0 *C.GdkDmabufTextureBuilder // in, none, class
+	var carg0 *C.GdkDmabufTextureBuilder // in, none, converted
 	var carg1 C.gboolean                 // in
 
 	carg0 = (*C.GdkDmabufTextureBuilder)(UnsafeDmabufTextureBuilderToGlibNone(self))
@@ -15295,9 +15316,9 @@ func (self *DmabufTextureBuilderInstance) SetPremultiplied(premultiplied bool) {
 // 
 // The stride must be set for all planes before calling [method@Gdk.DmabufTextureBuilder.build].
 func (self *DmabufTextureBuilderInstance) SetStride(plane uint, stride uint) {
-	var carg0 *C.GdkDmabufTextureBuilder // in, none, class
-	var carg1 C.guint                    // in, casted
-	var carg2 C.guint                    // in, casted
+	var carg0 *C.GdkDmabufTextureBuilder // in, none, converted
+	var carg1 C.guint                    // in, none, casted
+	var carg2 C.guint                    // in, none, casted
 
 	carg0 = (*C.GdkDmabufTextureBuilder)(UnsafeDmabufTextureBuilderToGlibNone(self))
 	carg1 = C.guint(plane)
@@ -15318,8 +15339,8 @@ func (self *DmabufTextureBuilderInstance) SetStride(plane uint, stride uint) {
 // Sets the texture to be updated by this texture. See
 // [method@Gdk.DmabufTextureBuilder.set_update_region] for an explanation.
 func (self *DmabufTextureBuilderInstance) SetUpdateTexture(texture Texture) {
-	var carg0 *C.GdkDmabufTextureBuilder // in, none, class
-	var carg1 *C.GdkTexture              // in, none, class, nullable
+	var carg0 *C.GdkDmabufTextureBuilder // in, none, converted
+	var carg1 *C.GdkTexture              // in, none, converted, nullable
 
 	carg0 = (*C.GdkDmabufTextureBuilder)(UnsafeDmabufTextureBuilderToGlibNone(self))
 	if texture != nil {
@@ -15341,8 +15362,8 @@ func (self *DmabufTextureBuilderInstance) SetUpdateTexture(texture Texture) {
 // 
 // The width must be set before calling [method@Gdk.DmabufTextureBuilder.build].
 func (self *DmabufTextureBuilderInstance) SetWidth(width uint) {
-	var carg0 *C.GdkDmabufTextureBuilder // in, none, class
-	var carg1 C.guint                    // in, casted
+	var carg0 *C.GdkDmabufTextureBuilder // in, none, converted
+	var carg1 C.guint                    // in, none, casted
 
 	carg0 = (*C.GdkDmabufTextureBuilder)(UnsafeDmabufTextureBuilderToGlibNone(self))
 	carg1 = C.guint(width)
@@ -15355,7 +15376,7 @@ func (self *DmabufTextureBuilderInstance) SetWidth(width uint) {
 // DragInstance is the instance type used by all types extending GdkDrag. It is used internally by the bindings. Users should use the interface [Drag] instead.
 type DragInstance struct {
 	_ [0]func() // equal guard
-	gobject.Object
+	gobject.ObjectInstance
 }
 
 var _ Drag = (*DragInstance)(nil)
@@ -15373,7 +15394,7 @@ var _ Drag = (*DragInstance)(nil)
 // and so they are not normally needed in GTK applications. See the
 // "Drag and Drop" section of the GTK documentation for more information.
 type Drag interface {
-	gobject.ObjectLike
+	gobject.Object
 	upcastToGdkDrag() *DragInstance
 
 	// DropDone wraps gdk_drag_drop_done
@@ -15438,10 +15459,10 @@ type Drag interface {
 	// GetFormats wraps gdk_drag_get_formats
 	// The function returns the following values:
 	// 
-	// 	- ret *ContentFormats 
+	// 	- ret ContentFormats 
 	//
 	// Retrieves the formats supported by this `GdkDrag` object.
-	GetFormats() *ContentFormats
+	GetFormats() ContentFormats
 	// GetSelectedAction wraps gdk_drag_get_selected_action
 	// The function returns the following values:
 	// 
@@ -15470,14 +15491,14 @@ type Drag interface {
 	SetHotspot(int, int)
 }
 
-func unsafeWrapDrag(base *gobject.Object) *DragInstance {
+func unsafeWrapDrag(base *gobject.ObjectInstance) *DragInstance {
 	return &DragInstance{
-		Object: *base,
+		ObjectInstance: *base,
 	}
 }
 
 func marshalDragInstance(p uintptr) (interface{}, error) {
-	return unsafeWrapDrag(gobject.ValueFromNative(unsafe.Pointer(p)).Object()), nil
+	return unsafeWrapDrag(gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Object()), nil
 }
 
 // UnsafeDragFromGlibBorrow is used to convert raw GdkDrag pointers to go. This is used by the bindings internally.
@@ -15539,13 +15560,13 @@ func UnsafeDragToGlibFull(c Drag) unsafe.Pointer {
 // the source if [method@Gdk.Drag.get_selected_action] returns
 // %GDK_ACTION_MOVE.
 func Begin(surface Surface, device Device, content ContentProvider, actions DragAction, dx float64, dy float64) Drag {
-	var carg1 *C.GdkSurface         // in, none, class
-	var carg2 *C.GdkDevice          // in, none, class
-	var carg3 *C.GdkContentProvider // in, none, class
-	var carg4 C.GdkDragAction       // in, casted
-	var carg5 C.gdouble             // in, casted
-	var carg6 C.gdouble             // in, casted
-	var cret  *C.GdkDrag            // return, full, class
+	var carg1 *C.GdkSurface         // in, none, converted
+	var carg2 *C.GdkDevice          // in, none, converted
+	var carg3 *C.GdkContentProvider // in, none, converted
+	var carg4 C.GdkDragAction       // in, none, casted
+	var carg5 C.gdouble             // in, none, casted
+	var carg6 C.gdouble             // in, none, casted
+	var cret  *C.GdkDrag            // return, full, converted
 
 	carg1 = (*C.GdkSurface)(UnsafeSurfaceToGlibNone(surface))
 	carg2 = (*C.GdkDevice)(UnsafeDeviceToGlibNone(device))
@@ -15587,7 +15608,7 @@ func Begin(surface Surface, device Device, content ContentProvider, actions Drag
 // call as effective, if this function is called multiple times,
 // all subsequent calls will be ignored.
 func (drag *DragInstance) DropDone(success bool) {
-	var carg0 *C.GdkDrag // in, none, class
+	var carg0 *C.GdkDrag // in, none, converted
 	var carg1 C.gboolean // in
 
 	carg0 = (*C.GdkDrag)(UnsafeDragToGlibNone(drag))
@@ -15607,8 +15628,8 @@ func (drag *DragInstance) DropDone(success bool) {
 //
 // Determines the bitmask of possible actions proposed by the source.
 func (drag *DragInstance) GetActions() DragAction {
-	var carg0 *C.GdkDrag      // in, none, class
-	var cret  C.GdkDragAction // return, casted
+	var carg0 *C.GdkDrag      // in, none, converted
+	var cret  C.GdkDragAction // return, none, casted
 
 	carg0 = (*C.GdkDrag)(UnsafeDragToGlibNone(drag))
 
@@ -15629,8 +15650,8 @@ func (drag *DragInstance) GetActions() DragAction {
 //
 // Returns the `GdkContentProvider` associated to the `GdkDrag` object.
 func (drag *DragInstance) GetContent() ContentProvider {
-	var carg0 *C.GdkDrag            // in, none, class
-	var cret  *C.GdkContentProvider // return, none, class
+	var carg0 *C.GdkDrag            // in, none, converted
+	var cret  *C.GdkContentProvider // return, none, converted
 
 	carg0 = (*C.GdkDrag)(UnsafeDragToGlibNone(drag))
 
@@ -15651,8 +15672,8 @@ func (drag *DragInstance) GetContent() ContentProvider {
 //
 // Returns the `GdkDevice` associated to the `GdkDrag` object.
 func (drag *DragInstance) GetDevice() Device {
-	var carg0 *C.GdkDrag   // in, none, class
-	var cret  *C.GdkDevice // return, none, class
+	var carg0 *C.GdkDrag   // in, none, converted
+	var cret  *C.GdkDevice // return, none, converted
 
 	carg0 = (*C.GdkDrag)(UnsafeDragToGlibNone(drag))
 
@@ -15673,8 +15694,8 @@ func (drag *DragInstance) GetDevice() Device {
 //
 // Gets the `GdkDisplay` that the drag object was created for.
 func (drag *DragInstance) GetDisplay() Display {
-	var carg0 *C.GdkDrag    // in, none, class
-	var cret  *C.GdkDisplay // return, none, class
+	var carg0 *C.GdkDrag    // in, none, converted
+	var cret  *C.GdkDisplay // return, none, converted
 
 	carg0 = (*C.GdkDrag)(UnsafeDragToGlibNone(drag))
 
@@ -15701,8 +15722,8 @@ func (drag *DragInstance) GetDisplay() Display {
 // drag operation. The surface is owned by @drag and will be destroyed
 // when the drag operation is over.
 func (drag *DragInstance) GetDragSurface() Surface {
-	var carg0 *C.GdkDrag    // in, none, class
-	var cret  *C.GdkSurface // return, none, class
+	var carg0 *C.GdkDrag    // in, none, converted
+	var cret  *C.GdkSurface // return, none, converted
 
 	carg0 = (*C.GdkDrag)(UnsafeDragToGlibNone(drag))
 
@@ -15719,19 +15740,19 @@ func (drag *DragInstance) GetDragSurface() Surface {
 // GetFormats wraps gdk_drag_get_formats
 // The function returns the following values:
 // 
-// 	- ret *ContentFormats 
+// 	- ret ContentFormats 
 //
 // Retrieves the formats supported by this `GdkDrag` object.
-func (drag *DragInstance) GetFormats() *ContentFormats {
-	var carg0 *C.GdkDrag           // in, none, class
-	var cret  *C.GdkContentFormats // return, none, record
+func (drag *DragInstance) GetFormats() ContentFormats {
+	var carg0 *C.GdkDrag           // in, none, converted
+	var cret  *C.GdkContentFormats // return, none, converted
 
 	carg0 = (*C.GdkDrag)(UnsafeDragToGlibNone(drag))
 
 	cret = C.gdk_drag_get_formats(carg0)
 	runtime.KeepAlive(drag)
 
-	var ret *ContentFormats
+	var ret ContentFormats
 
 	ret = UnsafeContentFormatsFromGlibNone(unsafe.Pointer(cret))
 
@@ -15745,8 +15766,8 @@ func (drag *DragInstance) GetFormats() *ContentFormats {
 //
 // Determines the action chosen by the drag destination.
 func (drag *DragInstance) GetSelectedAction() DragAction {
-	var carg0 *C.GdkDrag      // in, none, class
-	var cret  C.GdkDragAction // return, casted
+	var carg0 *C.GdkDrag      // in, none, converted
+	var cret  C.GdkDragAction // return, none, casted
 
 	carg0 = (*C.GdkDrag)(UnsafeDragToGlibNone(drag))
 
@@ -15767,8 +15788,8 @@ func (drag *DragInstance) GetSelectedAction() DragAction {
 //
 // Returns the `GdkSurface` where the drag originates.
 func (drag *DragInstance) GetSurface() Surface {
-	var carg0 *C.GdkDrag    // in, none, class
-	var cret  *C.GdkSurface // return, none, class
+	var carg0 *C.GdkDrag    // in, none, converted
+	var cret  *C.GdkSurface // return, none, converted
 
 	carg0 = (*C.GdkDrag)(UnsafeDragToGlibNone(drag))
 
@@ -15794,9 +15815,9 @@ func (drag *DragInstance) GetSurface() Surface {
 // 
 // Initially, the hotspot is at the top left corner of the drag surface.
 func (drag *DragInstance) SetHotspot(hotX int, hotY int) {
-	var carg0 *C.GdkDrag // in, none, class
-	var carg1 C.int      // in, casted
-	var carg2 C.int      // in, casted
+	var carg0 *C.GdkDrag // in, none, converted
+	var carg1 C.int      // in, none, casted
+	var carg2 C.int      // in, none, casted
 
 	carg0 = (*C.GdkDrag)(UnsafeDragToGlibNone(drag))
 	carg1 = C.int(hotX)
@@ -15811,7 +15832,7 @@ func (drag *DragInstance) SetHotspot(hotX int, hotY int) {
 // DrawContextInstance is the instance type used by all types extending GdkDrawContext. It is used internally by the bindings. Users should use the interface [DrawContext] instead.
 type DrawContextInstance struct {
 	_ [0]func() // equal guard
-	gobject.Object
+	gobject.ObjectInstance
 }
 
 var _ DrawContext = (*DrawContextInstance)(nil)
@@ -15828,7 +15849,7 @@ var _ DrawContext = (*DrawContextInstance)(nil)
 // 
 // A `GdkDrawContext` is always associated with a single toplevel surface.
 type DrawContext interface {
-	gobject.ObjectLike
+	gobject.Object
 	upcastToGdkDrawContext() *DrawContextInstance
 
 	// EndFrame wraps gdk_draw_context_end_frame
@@ -15875,14 +15896,14 @@ type DrawContext interface {
 	IsInFrame() bool
 }
 
-func unsafeWrapDrawContext(base *gobject.Object) *DrawContextInstance {
+func unsafeWrapDrawContext(base *gobject.ObjectInstance) *DrawContextInstance {
 	return &DrawContextInstance{
-		Object: *base,
+		ObjectInstance: *base,
 	}
 }
 
 func marshalDrawContextInstance(p uintptr) (interface{}, error) {
-	return unsafeWrapDrawContext(gobject.ValueFromNative(unsafe.Pointer(p)).Object()), nil
+	return unsafeWrapDrawContext(gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Object()), nil
 }
 
 // UnsafeDrawContextFromGlibBorrow is used to convert raw GdkDrawContext pointers to go. This is used by the bindings internally.
@@ -15928,7 +15949,7 @@ func UnsafeDrawContextToGlibFull(c DrawContext) unsafe.Pointer {
 // Deprecated: (since 4.16.0) Drawing directly to the surface is no longer recommended.
 //   Use `GskRenderNode` and `GskRenderer`.
 func (context *DrawContextInstance) EndFrame() {
-	var carg0 *C.GdkDrawContext // in, none, class
+	var carg0 *C.GdkDrawContext // in, none, converted
 
 	carg0 = (*C.GdkDrawContext)(UnsafeDrawContextToGlibNone(context))
 
@@ -15943,8 +15964,8 @@ func (context *DrawContextInstance) EndFrame() {
 //
 // Retrieves the `GdkDisplay` the @context is created for
 func (context *DrawContextInstance) GetDisplay() Display {
-	var carg0 *C.GdkDrawContext // in, none, class
-	var cret  *C.GdkDisplay     // return, none, class
+	var carg0 *C.GdkDrawContext // in, none, converted
+	var cret  *C.GdkDisplay     // return, none, converted
 
 	carg0 = (*C.GdkDrawContext)(UnsafeDrawContextToGlibNone(context))
 
@@ -15965,8 +15986,8 @@ func (context *DrawContextInstance) GetDisplay() Display {
 //
 // Retrieves the surface that @context is bound to.
 func (context *DrawContextInstance) GetSurface() Surface {
-	var carg0 *C.GdkDrawContext // in, none, class
-	var cret  *C.GdkSurface     // return, none, class
+	var carg0 *C.GdkDrawContext // in, none, converted
+	var cret  *C.GdkSurface     // return, none, converted
 
 	carg0 = (*C.GdkDrawContext)(UnsafeDrawContextToGlibNone(context))
 
@@ -15994,7 +16015,7 @@ func (context *DrawContextInstance) GetSurface() Surface {
 // Deprecated: (since 4.16.0) Drawing directly to the surface is no longer recommended.
 //   Use `GskRenderNode` and `GskRenderer`.
 func (context *DrawContextInstance) IsInFrame() bool {
-	var carg0 *C.GdkDrawContext // in, none, class
+	var carg0 *C.GdkDrawContext // in, none, converted
 	var cret  C.gboolean        // return
 
 	carg0 = (*C.GdkDrawContext)(UnsafeDrawContextToGlibNone(context))
@@ -16014,7 +16035,7 @@ func (context *DrawContextInstance) IsInFrame() bool {
 // DropInstance is the instance type used by all types extending GdkDrop. It is used internally by the bindings. Users should use the interface [Drop] instead.
 type DropInstance struct {
 	_ [0]func() // equal guard
-	gobject.Object
+	gobject.ObjectInstance
 }
 
 var _ Drop = (*DropInstance)(nil)
@@ -16036,7 +16057,7 @@ var _ Drop = (*DropInstance)(nil)
 // and so they are not normally needed in GTK applications. See the
 // "Drag and Drop" section of the GTK documentation for more information.
 type Drop interface {
-	gobject.ObjectLike
+	gobject.Object
 	upcastToGdkDrop() *DropInstance
 
 	// Finish wraps gdk_drop_finish
@@ -16097,11 +16118,11 @@ type Drop interface {
 	// GetFormats wraps gdk_drop_get_formats
 	// The function returns the following values:
 	// 
-	// 	- ret *ContentFormats 
+	// 	- ret ContentFormats 
 	//
 	// Returns the `GdkContentFormats` that the drop offers the data
 	// to be read in.
-	GetFormats() *ContentFormats
+	GetFormats() ContentFormats
 	// GetSurface wraps gdk_drop_get_surface
 	// The function returns the following values:
 	// 
@@ -16113,16 +16134,16 @@ type Drop interface {
 	// 
 	// The function takes the following parameters:
 	// 
-	// 	- mimeTypes []string: 
+	// 	- mimeTypes array: 
 	//   pointer to an array of mime types 
 	// 	- ioPriority int: the I/O priority for the read operation 
-	// 	- cancellable gio.Cancellable (nullable): optional `GCancellable` object 
+	// 	- cancellable gio. (nullable): optional `GCancellable` object 
 	// 	- callback gio.AsyncReadyCallback (nullable): a `GAsyncReadyCallback` to call when
 	//   the request is satisfied 
 	//
 	// Asynchronously read the dropped data from a `GdkDrop`
 	// in a format that complies with one of the mime types.
-	ReadAsync([]string, int, gio.Cancellable, gio.AsyncReadyCallback)
+	ReadAsync(array, int, gio., gio.AsyncReadyCallback)
 	// ReadFinish wraps gdk_drop_read_finish
 	// 
 	// The function takes the following parameters:
@@ -16150,7 +16171,7 @@ type Drop interface {
 	// 
 	// 	- typ glib.Type: a `GType` to read 
 	// 	- ioPriority int: the I/O priority of the request. 
-	// 	- cancellable gio.Cancellable (nullable): optional `GCancellable` object, %NULL to ignore. 
+	// 	- cancellable gio. (nullable): optional `GCancellable` object, %NULL to ignore. 
 	// 	- callback gio.AsyncReadyCallback (nullable): callback to call when the request is satisfied 
 	//
 	// Asynchronously request the drag operation's contents converted
@@ -16159,7 +16180,7 @@ type Drop interface {
 	// For local drag-and-drop operations that are available in the given
 	// `GType`, the value will be copied directly. Otherwise, GDK will
 	// try to use [func@Gdk.content_deserialize_async] to convert the data.
-	ReadValueAsync(glib.Type, int, gio.Cancellable, gio.AsyncReadyCallback)
+	ReadValueAsync(glib.Type, int, gio., gio.AsyncReadyCallback)
 	// ReadValueFinish wraps gdk_drop_read_value_finish
 	// 
 	// The function takes the following parameters:
@@ -16200,14 +16221,14 @@ type Drop interface {
 	Status(DragAction, DragAction)
 }
 
-func unsafeWrapDrop(base *gobject.Object) *DropInstance {
+func unsafeWrapDrop(base *gobject.ObjectInstance) *DropInstance {
 	return &DropInstance{
-		Object: *base,
+		ObjectInstance: *base,
 	}
 }
 
 func marshalDropInstance(p uintptr) (interface{}, error) {
-	return unsafeWrapDrop(gobject.ValueFromNative(unsafe.Pointer(p)).Object()), nil
+	return unsafeWrapDrop(gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Object()), nil
 }
 
 // UnsafeDropFromGlibBorrow is used to convert raw GdkDrop pointers to go. This is used by the bindings internally.
@@ -16250,8 +16271,8 @@ func UnsafeDropToGlibFull(c Drop) unsafe.Pointer {
 // The @action must be a single action selected from the actions
 // available via [method@Gdk.Drop.get_actions].
 func (self *DropInstance) Finish(action DragAction) {
-	var carg0 *C.GdkDrop      // in, none, class
-	var carg1 C.GdkDragAction // in, casted
+	var carg0 *C.GdkDrop      // in, none, converted
+	var carg1 C.GdkDragAction // in, none, casted
 
 	carg0 = (*C.GdkDrop)(UnsafeDropToGlibNone(self))
 	carg1 = C.GdkDragAction(action)
@@ -16281,8 +16302,8 @@ func (self *DropInstance) Finish(action DragAction) {
 // [method@Gdk.Drop.status] or [method@Gdk.Drop.finish]. The source
 // side will not change this value anymore once a drop has started.
 func (self *DropInstance) GetActions() DragAction {
-	var carg0 *C.GdkDrop      // in, none, class
-	var cret  C.GdkDragAction // return, casted
+	var carg0 *C.GdkDrop      // in, none, converted
+	var cret  C.GdkDragAction // return, none, casted
 
 	carg0 = (*C.GdkDrop)(UnsafeDropToGlibNone(self))
 
@@ -16303,8 +16324,8 @@ func (self *DropInstance) GetActions() DragAction {
 //
 // Returns the `GdkDevice` performing the drop.
 func (self *DropInstance) GetDevice() Device {
-	var carg0 *C.GdkDrop   // in, none, class
-	var cret  *C.GdkDevice // return, none, class
+	var carg0 *C.GdkDrop   // in, none, converted
+	var cret  *C.GdkDevice // return, none, converted
 
 	carg0 = (*C.GdkDrop)(UnsafeDropToGlibNone(self))
 
@@ -16325,8 +16346,8 @@ func (self *DropInstance) GetDevice() Device {
 //
 // Gets the `GdkDisplay` that @self was created for.
 func (self *DropInstance) GetDisplay() Display {
-	var carg0 *C.GdkDrop    // in, none, class
-	var cret  *C.GdkDisplay // return, none, class
+	var carg0 *C.GdkDrop    // in, none, converted
+	var cret  *C.GdkDisplay // return, none, converted
 
 	carg0 = (*C.GdkDrop)(UnsafeDropToGlibNone(self))
 
@@ -16350,8 +16371,8 @@ func (self *DropInstance) GetDisplay() Display {
 // 
 // If it is not, %NULL is returned.
 func (self *DropInstance) GetDrag() Drag {
-	var carg0 *C.GdkDrop // in, none, class
-	var cret  *C.GdkDrag // return, none, class
+	var carg0 *C.GdkDrop // in, none, converted
+	var cret  *C.GdkDrag // return, none, converted
 
 	carg0 = (*C.GdkDrop)(UnsafeDropToGlibNone(self))
 
@@ -16368,20 +16389,20 @@ func (self *DropInstance) GetDrag() Drag {
 // GetFormats wraps gdk_drop_get_formats
 // The function returns the following values:
 // 
-// 	- ret *ContentFormats 
+// 	- ret ContentFormats 
 //
 // Returns the `GdkContentFormats` that the drop offers the data
 // to be read in.
-func (self *DropInstance) GetFormats() *ContentFormats {
-	var carg0 *C.GdkDrop           // in, none, class
-	var cret  *C.GdkContentFormats // return, none, record
+func (self *DropInstance) GetFormats() ContentFormats {
+	var carg0 *C.GdkDrop           // in, none, converted
+	var cret  *C.GdkContentFormats // return, none, converted
 
 	carg0 = (*C.GdkDrop)(UnsafeDropToGlibNone(self))
 
 	cret = C.gdk_drop_get_formats(carg0)
 	runtime.KeepAlive(self)
 
-	var ret *ContentFormats
+	var ret ContentFormats
 
 	ret = UnsafeContentFormatsFromGlibNone(unsafe.Pointer(cret))
 
@@ -16395,8 +16416,8 @@ func (self *DropInstance) GetFormats() *ContentFormats {
 //
 // Returns the `GdkSurface` performing the drop.
 func (self *DropInstance) GetSurface() Surface {
-	var carg0 *C.GdkDrop    // in, none, class
-	var cret  *C.GdkSurface // return, none, class
+	var carg0 *C.GdkDrop    // in, none, converted
+	var cret  *C.GdkSurface // return, none, converted
 
 	carg0 = (*C.GdkDrop)(UnsafeDropToGlibNone(self))
 
@@ -16414,28 +16435,28 @@ func (self *DropInstance) GetSurface() Surface {
 // 
 // The function takes the following parameters:
 // 
-// 	- mimeTypes []string: 
+// 	- mimeTypes array: 
 //   pointer to an array of mime types 
 // 	- ioPriority int: the I/O priority for the read operation 
-// 	- cancellable gio.Cancellable (nullable): optional `GCancellable` object 
+// 	- cancellable gio. (nullable): optional `GCancellable` object 
 // 	- callback gio.AsyncReadyCallback (nullable): a `GAsyncReadyCallback` to call when
 //   the request is satisfied 
 //
 // Asynchronously read the dropped data from a `GdkDrop`
 // in a format that complies with one of the mime types.
-func (self *DropInstance) ReadAsync(mimeTypes []string, ioPriority int, cancellable gio.Cancellable, callback gio.AsyncReadyCallback) {
-	var carg0 *C.GdkDrop            // in, none, class
-	var carg1 **C.gchar             // in, transfer: none, scope: call, implicit: false, skip: false, optional: false, nullable: false, caller-allocates: false, has closure: false, has destroy: false
-	var carg2 C.int                 // in, casted
-	var carg3 *C.GCancellable       // in, none, class, nullable
+func (self *DropInstance) ReadAsync(mimeTypes array, ioPriority int, cancellable gio., callback gio.AsyncReadyCallback) {
+	var carg0 *C.GdkDrop            // in, none, converted
+	var carg1 array                 // in, transfer: none, scope: call, implicit: false, skip: false, optional: false, nullable: false, caller-allocates: false, has closure: false, has destroy: false
+	var carg2 C.int                 // in, none, casted
+	var carg3 *C.Cancellable        // in, none, converted, nullable
 	var carg4 C.GAsyncReadyCallback // callback, scope: async, closure: carg5, nullable
 	var carg5 C.gpointer            // implicit
 
 	carg0 = (*C.GdkDrop)(UnsafeDropToGlibNone(self))
-	panic("unimplemented conversion of *typesystem.Array (gchar**)")
+	panic("unimplemented conversion of array (array)")
 	carg2 = C.int(ioPriority)
 	if cancellable != nil {
-		carg3 = (*C.GCancellable)(gio.UnsafeCancellableToGlibNone(cancellable))
+		carg3 = (*C.Cancellable)(UnsafeCancellableToGlibNone(cancellable))
 	}
 	if callback != nil {
 		carg4 = (*[0]byte)(C._gotk4_gio2_AsyncReadyCallback)
@@ -16471,14 +16492,14 @@ func (self *DropInstance) ReadAsync(mimeTypes []string, ioPriority int, cancella
 // 
 // See [method@Gdk.Drop.read_async].
 func (self *DropInstance) ReadFinish(result gio.AsyncResult) (string, gio.InputStream, error) {
-	var carg0 *C.GdkDrop      // in, none, class
-	var carg1 *C.GAsyncResult // in, none, interface
+	var carg0 *C.GdkDrop      // in, none, converted
+	var carg1 *C.GAsyncResult // in, none, converted
 	var carg2 *C.gchar        // out, none, string
-	var cret  *C.GInputStream // return, full, class
-	var _cerr *C.GError       // out, full, record, nullable
+	var cret  *C.GInputStream // return, full, converted
+	var _cerr *C.GError       // out, full, converted, nullable
 
 	carg0 = (*C.GdkDrop)(UnsafeDropToGlibNone(self))
-	carg1 = (*C.GAsyncResult)(gio.UnsafeAsyncResultToGlibNone(result))
+	carg1 = (*C.GAsyncResult)(UnsafeAsyncResultToGlibNone(result))
 
 	cret = C.gdk_drop_read_finish(carg0, carg1, &carg2, &_cerr)
 	runtime.KeepAlive(self)
@@ -16489,9 +16510,9 @@ func (self *DropInstance) ReadFinish(result gio.AsyncResult) (string, gio.InputS
 	var _goerr      error
 
 	outMimeType = C.GoString((*C.gchar)(unsafe.Pointer(carg2)))
-	ret = gio.UnsafeInputStreamFromGlibFull(unsafe.Pointer(cret))
+	ret = UnsafeInputStreamFromGlibFull(unsafe.Pointer(cret))
 	if _cerr != nil {
-		_goerr = glib.UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
+		_goerr = UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
 	}
 
 	return outMimeType, ret, _goerr
@@ -16503,7 +16524,7 @@ func (self *DropInstance) ReadFinish(result gio.AsyncResult) (string, gio.InputS
 // 
 // 	- typ glib.Type: a `GType` to read 
 // 	- ioPriority int: the I/O priority of the request. 
-// 	- cancellable gio.Cancellable (nullable): optional `GCancellable` object, %NULL to ignore. 
+// 	- cancellable gio. (nullable): optional `GCancellable` object, %NULL to ignore. 
 // 	- callback gio.AsyncReadyCallback (nullable): callback to call when the request is satisfied 
 //
 // Asynchronously request the drag operation's contents converted
@@ -16512,11 +16533,11 @@ func (self *DropInstance) ReadFinish(result gio.AsyncResult) (string, gio.InputS
 // For local drag-and-drop operations that are available in the given
 // `GType`, the value will be copied directly. Otherwise, GDK will
 // try to use [func@Gdk.content_deserialize_async] to convert the data.
-func (self *DropInstance) ReadValueAsync(typ glib.Type, ioPriority int, cancellable gio.Cancellable, callback gio.AsyncReadyCallback) {
-	var carg0 *C.GdkDrop            // in, none, class
-	var carg1 C.GType               // in, casted
-	var carg2 C.int                 // in, casted
-	var carg3 *C.GCancellable       // in, none, class, nullable
+func (self *DropInstance) ReadValueAsync(typ glib.Type, ioPriority int, cancellable gio., callback gio.AsyncReadyCallback) {
+	var carg0 *C.GdkDrop            // in, none, converted
+	var carg1 C.GType               // in, none, casted
+	var carg2 C.int                 // in, none, casted
+	var carg3 *C.Cancellable        // in, none, converted, nullable
 	var carg4 C.GAsyncReadyCallback // callback, scope: async, closure: carg5, nullable
 	var carg5 C.gpointer            // implicit
 
@@ -16524,7 +16545,7 @@ func (self *DropInstance) ReadValueAsync(typ glib.Type, ioPriority int, cancella
 	carg1 = C.GType(typ)
 	carg2 = C.int(ioPriority)
 	if cancellable != nil {
-		carg3 = (*C.GCancellable)(gio.UnsafeCancellableToGlibNone(cancellable))
+		carg3 = (*C.Cancellable)(UnsafeCancellableToGlibNone(cancellable))
 	}
 	if callback != nil {
 		carg4 = (*[0]byte)(C._gotk4_gio2_AsyncReadyCallback)
@@ -16554,13 +16575,13 @@ func (self *DropInstance) ReadValueAsync(typ glib.Type, ioPriority int, cancella
 // 
 // See [method@Gdk.Drop.read_value_async].
 func (self *DropInstance) ReadValueFinish(result gio.AsyncResult) (*gobject.Value, error) {
-	var carg0 *C.GdkDrop      // in, none, class
-	var carg1 *C.GAsyncResult // in, none, interface
-	var cret  *C.GValue       // return, none, record
-	var _cerr *C.GError       // out, full, record, nullable
+	var carg0 *C.GdkDrop      // in, none, converted
+	var carg1 *C.GAsyncResult // in, none, converted
+	var cret  *C.GValue       // return, none, converted
+	var _cerr *C.GError       // out, full, converted, nullable
 
 	carg0 = (*C.GdkDrop)(UnsafeDropToGlibNone(self))
-	carg1 = (*C.GAsyncResult)(gio.UnsafeAsyncResultToGlibNone(result))
+	carg1 = (*C.GAsyncResult)(UnsafeAsyncResultToGlibNone(result))
 
 	cret = C.gdk_drop_read_value_finish(carg0, carg1, &_cerr)
 	runtime.KeepAlive(self)
@@ -16569,9 +16590,9 @@ func (self *DropInstance) ReadValueFinish(result gio.AsyncResult) (*gobject.Valu
 	var ret    *gobject.Value
 	var _goerr error
 
-	ret = gobject.TODOFromGlibNone(unsafe.Pointer(cret))
+	ret = TODOFromGlibNone(unsafe.Pointer(cret))
 	if _cerr != nil {
-		_goerr = glib.UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
+		_goerr = UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
 	}
 
 	return ret, _goerr
@@ -16600,9 +16621,9 @@ func (self *DropInstance) ReadValueFinish(result gio.AsyncResult) (*gobject.Valu
 // not yet know the exact actions it supports, it should set any possible
 // actions first and then later call this function again.
 func (self *DropInstance) Status(actions DragAction, preferred DragAction) {
-	var carg0 *C.GdkDrop      // in, none, class
-	var carg1 C.GdkDragAction // in, casted
-	var carg2 C.GdkDragAction // in, casted
+	var carg0 *C.GdkDrop      // in, none, converted
+	var carg1 C.GdkDragAction // in, none, casted
+	var carg2 C.GdkDragAction // in, none, casted
 
 	carg0 = (*C.GdkDrop)(UnsafeDropToGlibNone(self))
 	carg1 = C.GdkDragAction(actions)
@@ -16617,7 +16638,7 @@ func (self *DropInstance) Status(actions DragAction, preferred DragAction) {
 // FrameClockInstance is the instance type used by all types extending GdkFrameClock. It is used internally by the bindings. Users should use the interface [FrameClock] instead.
 type FrameClockInstance struct {
 	_ [0]func() // equal guard
-	gobject.Object
+	gobject.ObjectInstance
 }
 
 var _ FrameClock = (*FrameClockInstance)(nil)
@@ -16658,7 +16679,7 @@ var _ FrameClock = (*FrameClockInstance)(nil)
 // and the value inside the [signal@Gdk.FrameClock::update] signal of the clock,
 // they will stay exactly synchronized.
 type FrameClock interface {
-	gobject.ObjectLike
+	gobject.Object
 	upcastToGdkFrameClock() *FrameClockInstance
 
 	// BeginUpdating wraps gdk_frame_clock_begin_updating
@@ -16680,10 +16701,10 @@ type FrameClock interface {
 	// GetCurrentTimings wraps gdk_frame_clock_get_current_timings
 	// The function returns the following values:
 	// 
-	// 	- ret *FrameTimings 
+	// 	- ret FrameTimings 
 	//
 	// Gets the frame timings for the current frame.
-	GetCurrentTimings() *FrameTimings
+	GetCurrentTimings() FrameTimings
 	// GetFPS wraps gdk_frame_clock_get_fps
 	// The function returns the following values:
 	// 
@@ -16759,7 +16780,7 @@ type FrameClock interface {
 	// 
 	// The function returns the following values:
 	// 
-	// 	- ret *FrameTimings 
+	// 	- ret FrameTimings 
 	//
 	// Retrieves a `GdkFrameTimings` object holding timing information
 	// for the current frame or a recent frame.
@@ -16767,7 +16788,7 @@ type FrameClock interface {
 	// The `GdkFrameTimings` object may not yet be complete: see
 	// [method@Gdk.FrameTimings.get_complete] and
 	// [method@Gdk.FrameClock.get_history_start].
-	GetTimings(int64) *FrameTimings
+	GetTimings(int64) FrameTimings
 	// RequestPhase wraps gdk_frame_clock_request_phase
 	// 
 	// The function takes the following parameters:
@@ -16788,14 +16809,14 @@ type FrameClock interface {
 	RequestPhase(FrameClockPhase)
 }
 
-func unsafeWrapFrameClock(base *gobject.Object) *FrameClockInstance {
+func unsafeWrapFrameClock(base *gobject.ObjectInstance) *FrameClockInstance {
 	return &FrameClockInstance{
-		Object: *base,
+		ObjectInstance: *base,
 	}
 }
 
 func marshalFrameClockInstance(p uintptr) (interface{}, error) {
-	return unsafeWrapFrameClock(gobject.ValueFromNative(unsafe.Pointer(p)).Object()), nil
+	return unsafeWrapFrameClock(gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Object()), nil
 }
 
 // UnsafeFrameClockFromGlibBorrow is used to convert raw GdkFrameClock pointers to go. This is used by the bindings internally.
@@ -16837,7 +16858,7 @@ func UnsafeFrameClockToGlibFull(c FrameClock) unsafe.Pointer {
 // times and frames will be requested until gdk_frame_clock_end_updating()
 // is called the same number of times.
 func (frameClock *FrameClockInstance) BeginUpdating() {
-	var carg0 *C.GdkFrameClock // in, none, class
+	var carg0 *C.GdkFrameClock // in, none, converted
 
 	carg0 = (*C.GdkFrameClock)(UnsafeFrameClockToGlibNone(frameClock))
 
@@ -16851,7 +16872,7 @@ func (frameClock *FrameClockInstance) BeginUpdating() {
 // 
 // See the documentation for [method@Gdk.FrameClock.begin_updating].
 func (frameClock *FrameClockInstance) EndUpdating() {
-	var carg0 *C.GdkFrameClock // in, none, class
+	var carg0 *C.GdkFrameClock // in, none, converted
 
 	carg0 = (*C.GdkFrameClock)(UnsafeFrameClockToGlibNone(frameClock))
 
@@ -16862,19 +16883,19 @@ func (frameClock *FrameClockInstance) EndUpdating() {
 // GetCurrentTimings wraps gdk_frame_clock_get_current_timings
 // The function returns the following values:
 // 
-// 	- ret *FrameTimings 
+// 	- ret FrameTimings 
 //
 // Gets the frame timings for the current frame.
-func (frameClock *FrameClockInstance) GetCurrentTimings() *FrameTimings {
-	var carg0 *C.GdkFrameClock   // in, none, class
-	var cret  *C.GdkFrameTimings // return, none, record
+func (frameClock *FrameClockInstance) GetCurrentTimings() FrameTimings {
+	var carg0 *C.GdkFrameClock   // in, none, converted
+	var cret  *C.GdkFrameTimings // return, none, converted
 
 	carg0 = (*C.GdkFrameClock)(UnsafeFrameClockToGlibNone(frameClock))
 
 	cret = C.gdk_frame_clock_get_current_timings(carg0)
 	runtime.KeepAlive(frameClock)
 
-	var ret *FrameTimings
+	var ret FrameTimings
 
 	ret = UnsafeFrameTimingsFromGlibNone(unsafe.Pointer(cret))
 
@@ -16889,8 +16910,8 @@ func (frameClock *FrameClockInstance) GetCurrentTimings() *FrameTimings {
 // Calculates the current frames-per-second, based on the
 // frame timings of @frame_clock.
 func (frameClock *FrameClockInstance) GetFPS() float64 {
-	var carg0 *C.GdkFrameClock // in, none, class
-	var cret  C.gdouble        // return, casted
+	var carg0 *C.GdkFrameClock // in, none, converted
+	var cret  C.gdouble        // return, none, casted
 
 	carg0 = (*C.GdkFrameClock)(UnsafeFrameClockToGlibNone(frameClock))
 
@@ -16912,8 +16933,8 @@ func (frameClock *FrameClockInstance) GetFPS() float64 {
 // `GdkFrameClock` maintains a 64-bit counter that increments for
 // each frame drawn.
 func (frameClock *FrameClockInstance) GetFrameCounter() int64 {
-	var carg0 *C.GdkFrameClock // in, none, class
-	var cret  C.gint64         // return, casted
+	var carg0 *C.GdkFrameClock // in, none, converted
+	var cret  C.gint64         // return, none, casted
 
 	carg0 = (*C.GdkFrameClock)(UnsafeFrameClockToGlibNone(frameClock))
 
@@ -16940,8 +16961,8 @@ func (frameClock *FrameClockInstance) GetFrameCounter() int64 {
 // the actual previous frame time, or if that’s too old, an updated
 // time.
 func (frameClock *FrameClockInstance) GetFrameTime() int64 {
-	var carg0 *C.GdkFrameClock // in, none, class
-	var cret  C.gint64         // return, casted
+	var carg0 *C.GdkFrameClock // in, none, converted
+	var cret  C.gint64         // return, none, casted
 
 	carg0 = (*C.GdkFrameClock)(UnsafeFrameClockToGlibNone(frameClock))
 
@@ -16969,8 +16990,8 @@ func (frameClock *FrameClockInstance) GetFrameTime() int64 {
 // [method@Gdk.FrameClock.get_history_start] and
 // [method@Gdk.FrameClock.get_frame_counter], inclusive.
 func (frameClock *FrameClockInstance) GetHistoryStart() int64 {
-	var carg0 *C.GdkFrameClock // in, none, class
-	var cret  C.gint64         // return, casted
+	var carg0 *C.GdkFrameClock // in, none, converted
+	var cret  C.gint64         // return, none, casted
 
 	carg0 = (*C.GdkFrameClock)(UnsafeFrameClockToGlibNone(frameClock))
 
@@ -17007,10 +17028,10 @@ func (frameClock *FrameClockInstance) GetHistoryStart() int64 {
 // predicts a presentation time that is a multiple of the refresh
 // interval after the last presentation time, and later than @base_time.
 func (frameClock *FrameClockInstance) GetRefreshInfo(baseTime int64) (int64, int64) {
-	var carg0 *C.GdkFrameClock // in, none, class
-	var carg1 C.gint64         // in, casted
-	var carg2 C.gint64         // out, casted
-	var carg3 C.gint64         // out, casted
+	var carg0 *C.GdkFrameClock // in, none, converted
+	var carg1 C.gint64         // in, none, casted
+	var carg2 C.gint64         // out, full, casted
+	var carg3 C.gint64         // out, full, casted
 
 	carg0 = (*C.GdkFrameClock)(UnsafeFrameClockToGlibNone(frameClock))
 	carg1 = C.gint64(baseTime)
@@ -17037,7 +17058,7 @@ func (frameClock *FrameClockInstance) GetRefreshInfo(baseTime int64) (int64, int
 // 
 // The function returns the following values:
 // 
-// 	- ret *FrameTimings 
+// 	- ret FrameTimings 
 //
 // Retrieves a `GdkFrameTimings` object holding timing information
 // for the current frame or a recent frame.
@@ -17045,10 +17066,10 @@ func (frameClock *FrameClockInstance) GetRefreshInfo(baseTime int64) (int64, int
 // The `GdkFrameTimings` object may not yet be complete: see
 // [method@Gdk.FrameTimings.get_complete] and
 // [method@Gdk.FrameClock.get_history_start].
-func (frameClock *FrameClockInstance) GetTimings(frameCounter int64) *FrameTimings {
-	var carg0 *C.GdkFrameClock   // in, none, class
-	var carg1 C.gint64           // in, casted
-	var cret  *C.GdkFrameTimings // return, none, record
+func (frameClock *FrameClockInstance) GetTimings(frameCounter int64) FrameTimings {
+	var carg0 *C.GdkFrameClock   // in, none, converted
+	var carg1 C.gint64           // in, none, casted
+	var cret  *C.GdkFrameTimings // return, none, converted
 
 	carg0 = (*C.GdkFrameClock)(UnsafeFrameClockToGlibNone(frameClock))
 	carg1 = C.gint64(frameCounter)
@@ -17057,7 +17078,7 @@ func (frameClock *FrameClockInstance) GetTimings(frameCounter int64) *FrameTimin
 	runtime.KeepAlive(frameClock)
 	runtime.KeepAlive(frameCounter)
 
-	var ret *FrameTimings
+	var ret FrameTimings
 
 	ret = UnsafeFrameTimingsFromGlibNone(unsafe.Pointer(cret))
 
@@ -17082,8 +17103,8 @@ func (frameClock *FrameClockInstance) GetTimings(frameCounter int64) *FrameTimin
 // since this allows GTK to adjust system parameters to get maximally
 // smooth animations.
 func (frameClock *FrameClockInstance) RequestPhase(phase FrameClockPhase) {
-	var carg0 *C.GdkFrameClock     // in, none, class
-	var carg1 C.GdkFrameClockPhase // in, casted
+	var carg0 *C.GdkFrameClock     // in, none, converted
+	var carg1 C.GdkFrameClockPhase // in, none, casted
 
 	carg0 = (*C.GdkFrameClock)(UnsafeFrameClockToGlibNone(frameClock))
 	carg1 = C.GdkFrameClockPhase(phase)
@@ -17390,31 +17411,31 @@ type GLContext interface {
 	SetUseES(int)
 }
 
-func unsafeWrapGLContext(base *gobject.Object) *GLContextInstance {
+func unsafeWrapGLContext(base *ObjectInstance) *GLContextInstance {
 	return &GLContextInstance{
-		DrawContextInstance: DrawContextInstance{
-			Object: *base,
+		ObjectInstance: gobject.ObjectInstance{
+			ObjectInstance: *base,
 		},
 	}
 }
 
 func marshalGLContextInstance(p uintptr) (interface{}, error) {
-	return unsafeWrapGLContext(gobject.ValueFromNative(unsafe.Pointer(p)).Object()), nil
+	return unsafeWrapGLContext(gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Object()), nil
 }
 
 // UnsafeGLContextFromGlibBorrow is used to convert raw GdkGLContext pointers to go. This is used by the bindings internally.
 func UnsafeGLContextFromGlibBorrow(c unsafe.Pointer) GLContext {
-	return gobject.TODOBorrow(c).(GLContext)
+	return TODOBorrow(c).(GLContext)
 }
 
 // UnsafeGLContextFromGlibNone is used to convert raw GdkGLContext pointers to go while taking a reference and attaching a finalizer. This is used by the bindings internally.
 func UnsafeGLContextFromGlibNone(c unsafe.Pointer) GLContext {
-	return gobject.Take(c).(GLContext)
+	return Take(c).(GLContext)
 }
 
 // UnsafeGLContextFromGlibFull is used to convert raw GdkGLContext pointers to go while attaching a finalizer. This is used by the bindings internally.
 func UnsafeGLContextFromGlibFull(c unsafe.Pointer) GLContext {
-	return gobject.AssumeOwnership(c).(GLContext)
+	return AssumeOwnership(c).(GLContext)
 }
 
 func (g *GLContextInstance) upcastToGdkGLContext() *GLContextInstance {
@@ -17423,12 +17444,12 @@ func (g *GLContextInstance) upcastToGdkGLContext() *GLContextInstance {
 
 // UnsafeGLContextToGlibNone is used to convert the instance to it's C value GdkGLContext. This is used by the bindings internally.
 func UnsafeGLContextToGlibNone(c GLContext) unsafe.Pointer {
-	return gobject.TODOToNone(c)
+	return TODOToNone(c)
 }
 
 // UnsafeGLContextToGlibFull is used to convert the instance to it's C value GdkGLContext, while removeing the finalizer. This is used by the bindings internally.
 func UnsafeGLContextToGlibFull(c GLContext) unsafe.Pointer {
-	return gobject.TODOToFull(c)
+	return TODOToFull(c)
 }
 
 // ClearCurrent wraps gdk_gl_context_clear_current
@@ -17449,7 +17470,7 @@ func ClearCurrent() {
 //
 // Retrieves the current `GdkGLContext`.
 func GetCurrent() GLContext {
-	var cret *C.GdkGLContext // return, none, class
+	var cret *C.GdkGLContext // return, none, converted
 
 	cret = C.gdk_gl_context_get_current()
 
@@ -17467,8 +17488,8 @@ func GetCurrent() GLContext {
 //
 // Gets the allowed APIs set via gdk_gl_context_set_allowed_apis().
 func (self *GLContextInstance) GetAllowedApis() GLAPI {
-	var carg0 *C.GdkGLContext // in, none, class
-	var cret  C.GdkGLAPI      // return, casted
+	var carg0 *C.GdkGLContext // in, none, converted
+	var cret  C.GdkGLAPI      // return, none, casted
 
 	carg0 = (*C.GdkGLContext)(UnsafeGLContextToGlibNone(self))
 
@@ -17491,8 +17512,8 @@ func (self *GLContextInstance) GetAllowedApis() GLAPI {
 // 
 // If the renderer has not been realized yet, 0 is returned.
 func (self *GLContextInstance) GetApi() GLAPI {
-	var carg0 *C.GdkGLContext // in, none, class
-	var cret  C.GdkGLAPI      // return, casted
+	var carg0 *C.GdkGLContext // in, none, converted
+	var cret  C.GdkGLAPI      // return, none, casted
 
 	carg0 = (*C.GdkGLContext)(UnsafeGLContextToGlibNone(self))
 
@@ -17515,7 +17536,7 @@ func (self *GLContextInstance) GetApi() GLAPI {
 // 
 // See [method@Gdk.GLContext.set_debug_enabled].
 func (context *GLContextInstance) GetDebugEnabled() bool {
-	var carg0 *C.GdkGLContext // in, none, class
+	var carg0 *C.GdkGLContext // in, none, converted
 	var cret  C.gboolean      // return
 
 	carg0 = (*C.GdkGLContext)(UnsafeGLContextToGlibNone(context))
@@ -17539,8 +17560,8 @@ func (context *GLContextInstance) GetDebugEnabled() bool {
 //
 // Retrieves the display the @context is created for
 func (context *GLContextInstance) GetDisplay() Display {
-	var carg0 *C.GdkGLContext // in, none, class
-	var cret  *C.GdkDisplay   // return, none, class
+	var carg0 *C.GdkGLContext // in, none, converted
+	var cret  *C.GdkDisplay   // return, none, converted
 
 	carg0 = (*C.GdkGLContext)(UnsafeGLContextToGlibNone(context))
 
@@ -17563,7 +17584,7 @@ func (context *GLContextInstance) GetDisplay() Display {
 // 
 // See [method@Gdk.GLContext.set_forward_compatible].
 func (context *GLContextInstance) GetForwardCompatible() bool {
-	var carg0 *C.GdkGLContext // in, none, class
+	var carg0 *C.GdkGLContext // in, none, converted
 	var cret  C.gboolean      // return
 
 	carg0 = (*C.GdkGLContext)(UnsafeGLContextToGlibNone(context))
@@ -17593,9 +17614,9 @@ func (context *GLContextInstance) GetForwardCompatible() bool {
 // 
 // See [method@Gdk.GLContext.set_required_version].
 func (context *GLContextInstance) GetRequiredVersion() (int, int) {
-	var carg0 *C.GdkGLContext // in, none, class
-	var carg1 C.int           // out, casted, nullable
-	var carg2 C.int           // out, casted, nullable
+	var carg0 *C.GdkGLContext // in, none, converted
+	var carg1 C.int           // out, full, casted, nullable
+	var carg2 C.int           // out, full, casted, nullable
 
 	carg0 = (*C.GdkGLContext)(UnsafeGLContextToGlibNone(context))
 
@@ -17628,8 +17649,8 @@ func (context *GLContextInstance) GetRequiredVersion() (int, int) {
 // Deprecated: (since 4.4.0) Use [method@Gdk.GLContext.is_shared] to check if contexts
 //   can be shared.
 func (context *GLContextInstance) GetSharedContext() GLContext {
-	var carg0 *C.GdkGLContext // in, none, class
-	var cret  *C.GdkGLContext // return, none, class
+	var carg0 *C.GdkGLContext // in, none, converted
+	var cret  *C.GdkGLContext // return, none, converted
 
 	carg0 = (*C.GdkGLContext)(UnsafeGLContextToGlibNone(context))
 
@@ -17650,8 +17671,8 @@ func (context *GLContextInstance) GetSharedContext() GLContext {
 //
 // Retrieves the surface used by the @context.
 func (context *GLContextInstance) GetSurface() Surface {
-	var carg0 *C.GdkGLContext // in, none, class
-	var cret  *C.GdkSurface   // return, none, class
+	var carg0 *C.GdkGLContext // in, none, converted
+	var cret  *C.GdkSurface   // return, none, converted
 
 	carg0 = (*C.GdkGLContext)(UnsafeGLContextToGlibNone(context))
 
@@ -17672,7 +17693,7 @@ func (context *GLContextInstance) GetSurface() Surface {
 //
 // Checks whether the @context is using an OpenGL or OpenGL ES profile.
 func (context *GLContextInstance) GetUseES() bool {
-	var carg0 *C.GdkGLContext // in, none, class
+	var carg0 *C.GdkGLContext // in, none, converted
 	var cret  C.gboolean      // return
 
 	carg0 = (*C.GdkGLContext)(UnsafeGLContextToGlibNone(context))
@@ -17699,9 +17720,9 @@ func (context *GLContextInstance) GetUseES() bool {
 // 
 // The @context must be realized prior to calling this function.
 func (context *GLContextInstance) GetVersion() (int, int) {
-	var carg0 *C.GdkGLContext // in, none, class
-	var carg1 C.int           // out, casted
-	var carg2 C.int           // out, casted
+	var carg0 *C.GdkGLContext // in, none, converted
+	var carg1 C.int           // out, full, casted
+	var carg2 C.int           // out, full, casted
 
 	carg0 = (*C.GdkGLContext)(UnsafeGLContextToGlibNone(context))
 
@@ -17739,7 +17760,7 @@ func (context *GLContextInstance) GetVersion() (int, int) {
 // of OpenGL API to use, or whether to do extension discovery, or what
 // kind of shader programs to load.
 func (context *GLContextInstance) IsLegacy() bool {
-	var carg0 *C.GdkGLContext // in, none, class
+	var carg0 *C.GdkGLContext // in, none, converted
 	var cret  C.gboolean      // return
 
 	carg0 = (*C.GdkGLContext)(UnsafeGLContextToGlibNone(context))
@@ -17779,8 +17800,8 @@ func (context *GLContextInstance) IsLegacy() bool {
 // Both contexts must be realized for this check to succeed. If either one
 // is not, this function will return %FALSE.
 func (self *GLContextInstance) IsShared(other GLContext) bool {
-	var carg0 *C.GdkGLContext // in, none, class
-	var carg1 *C.GdkGLContext // in, none, class
+	var carg0 *C.GdkGLContext // in, none, converted
+	var carg1 *C.GdkGLContext // in, none, converted
 	var cret  C.gboolean      // return
 
 	carg0 = (*C.GdkGLContext)(UnsafeGLContextToGlibNone(self))
@@ -17803,7 +17824,7 @@ func (self *GLContextInstance) IsShared(other GLContext) bool {
 //
 // Makes the @context the current one.
 func (context *GLContextInstance) MakeCurrent() {
-	var carg0 *C.GdkGLContext // in, none, class
+	var carg0 *C.GdkGLContext // in, none, converted
 
 	carg0 = (*C.GdkGLContext)(UnsafeGLContextToGlibNone(context))
 
@@ -17821,9 +17842,9 @@ func (context *GLContextInstance) MakeCurrent() {
 // 
 // It is safe to call this function on a realized `GdkGLContext`.
 func (context *GLContextInstance) Realize() (bool, error) {
-	var carg0 *C.GdkGLContext // in, none, class
+	var carg0 *C.GdkGLContext // in, none, converted
 	var cret  C.gboolean      // return
-	var _cerr *C.GError       // out, full, record, nullable
+	var _cerr *C.GError       // out, full, converted, nullable
 
 	carg0 = (*C.GdkGLContext)(UnsafeGLContextToGlibNone(context))
 
@@ -17837,7 +17858,7 @@ func (context *GLContextInstance) Realize() (bool, error) {
 		ret = true
 	}
 	if _cerr != nil {
-		_goerr = glib.UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
+		_goerr = UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
 	}
 
 	return ret, _goerr
@@ -17857,8 +17878,8 @@ func (context *GLContextInstance) Realize() (bool, error) {
 // 
 // By default, all APIs are allowed.
 func (self *GLContextInstance) SetAllowedApis(apis GLAPI) {
-	var carg0 *C.GdkGLContext // in, none, class
-	var carg1 C.GdkGLAPI      // in, casted
+	var carg0 *C.GdkGLContext // in, none, converted
+	var carg1 C.GdkGLAPI      // in, none, casted
 
 	carg0 = (*C.GdkGLContext)(UnsafeGLContextToGlibNone(self))
 	carg1 = C.GdkGLAPI(apis)
@@ -17882,7 +17903,7 @@ func (self *GLContextInstance) SetAllowedApis(apis GLAPI) {
 // The `GdkGLContext` must not be realized or made current prior to
 // calling this function.
 func (context *GLContextInstance) SetDebugEnabled(enabled bool) {
-	var carg0 *C.GdkGLContext // in, none, class
+	var carg0 *C.GdkGLContext // in, none, converted
 	var carg1 C.gboolean      // in
 
 	carg0 = (*C.GdkGLContext)(UnsafeGLContextToGlibNone(context))
@@ -17911,7 +17932,7 @@ func (context *GLContextInstance) SetDebugEnabled(enabled bool) {
 // The `GdkGLContext` must not be realized or made current prior to calling
 // this function.
 func (context *GLContextInstance) SetForwardCompatible(compatible bool) {
-	var carg0 *C.GdkGLContext // in, none, class
+	var carg0 *C.GdkGLContext // in, none, converted
 	var carg1 C.gboolean      // in
 
 	carg0 = (*C.GdkGLContext)(UnsafeGLContextToGlibNone(context))
@@ -17941,9 +17962,9 @@ func (context *GLContextInstance) SetForwardCompatible(compatible bool) {
 // The @context must not be realized or made current prior to calling
 // this function.
 func (context *GLContextInstance) SetRequiredVersion(major int, minor int) {
-	var carg0 *C.GdkGLContext // in, none, class
-	var carg1 C.int           // in, casted
-	var carg2 C.int           // in, casted
+	var carg0 *C.GdkGLContext // in, none, converted
+	var carg1 C.int           // in, none, casted
+	var carg2 C.int           // in, none, casted
 
 	carg0 = (*C.GdkGLContext)(UnsafeGLContextToGlibNone(context))
 	carg1 = C.int(major)
@@ -17976,8 +17997,8 @@ func (context *GLContextInstance) SetRequiredVersion(major int, minor int) {
 // after calling [method@Gdk.GLContext.realize] to decide whether to use
 // the OpenGL or OpenGL ES API, extensions, or shaders.
 func (context *GLContextInstance) SetUseES(useEs int) {
-	var carg0 *C.GdkGLContext // in, none, class
-	var carg1 C.int           // in, casted
+	var carg0 *C.GdkGLContext // in, none, converted
+	var carg1 C.int           // in, none, casted
 
 	carg0 = (*C.GdkGLContext)(UnsafeGLContextToGlibNone(context))
 	carg1 = C.int(useEs)
@@ -17990,7 +18011,7 @@ func (context *GLContextInstance) SetUseES(useEs int) {
 // GLTextureBuilderInstance is the instance type used by all types extending GdkGLTextureBuilder. It is used internally by the bindings. Users should use the interface [GLTextureBuilder] instead.
 type GLTextureBuilderInstance struct {
 	_ [0]func() // equal guard
-	gobject.Object
+	gobject.ObjectInstance
 }
 
 var _ GLTextureBuilder = (*GLTextureBuilderInstance)(nil)
@@ -18009,16 +18030,16 @@ var _ GLTextureBuilder = (*GLTextureBuilderInstance)(nil)
 // `GdkGLTextureBuilder` can be used for quick one-shot construction of
 // textures as well as kept around and reused to construct multiple textures.
 type GLTextureBuilder interface {
-	gobject.ObjectLike
+	gobject.Object
 	upcastToGdkGLTextureBuilder() *GLTextureBuilderInstance
 
 	// GetColorState wraps gdk_gl_texture_builder_get_color_state
 	// The function returns the following values:
 	// 
-	// 	- ret *ColorState 
+	// 	- ret ColorState 
 	//
 	// Gets the color state previously set via gdk_gl_texture_builder_set_color_state().
-	GetColorState() *ColorState
+	GetColorState() ColorState
 	// GetContext wraps gdk_gl_texture_builder_get_context
 	// The function returns the following values:
 	// 
@@ -18084,13 +18105,13 @@ type GLTextureBuilder interface {
 	// 
 	// The function takes the following parameters:
 	// 
-	// 	- colorState *ColorState: a `GdkColorState` 
+	// 	- colorState ColorState: a `GdkColorState` 
 	//
 	// Sets the color state for the texture.
 	// 
 	// By default, the sRGB colorstate is used. If you don't know what
 	// colorstates are, this is probably the right thing.
-	SetColorState(*ColorState)
+	SetColorState(ColorState)
 	// SetContext wraps gdk_gl_texture_builder_set_context
 	// 
 	// The function takes the following parameters:
@@ -18194,14 +18215,14 @@ type GLTextureBuilder interface {
 	SetWidth(int)
 }
 
-func unsafeWrapGLTextureBuilder(base *gobject.Object) *GLTextureBuilderInstance {
+func unsafeWrapGLTextureBuilder(base *gobject.ObjectInstance) *GLTextureBuilderInstance {
 	return &GLTextureBuilderInstance{
-		Object: *base,
+		ObjectInstance: *base,
 	}
 }
 
 func marshalGLTextureBuilderInstance(p uintptr) (interface{}, error) {
-	return unsafeWrapGLTextureBuilder(gobject.ValueFromNative(unsafe.Pointer(p)).Object()), nil
+	return unsafeWrapGLTextureBuilder(gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Object()), nil
 }
 
 // UnsafeGLTextureBuilderFromGlibBorrow is used to convert raw GdkGLTextureBuilder pointers to go. This is used by the bindings internally.
@@ -18240,7 +18261,7 @@ func UnsafeGLTextureBuilderToGlibFull(c GLTextureBuilder) unsafe.Pointer {
 //
 // Creates a new texture builder.
 func NewGLTextureBuilderInstance() GLTextureBuilder {
-	var cret *C.GdkGLTextureBuilder // return, full, class
+	var cret *C.GdkGLTextureBuilder // return, full, converted
 
 	cret = C.gdk_gl_texture_builder_new()
 
@@ -18254,19 +18275,19 @@ func NewGLTextureBuilderInstance() GLTextureBuilder {
 // GetColorState wraps gdk_gl_texture_builder_get_color_state
 // The function returns the following values:
 // 
-// 	- ret *ColorState 
+// 	- ret ColorState 
 //
 // Gets the color state previously set via gdk_gl_texture_builder_set_color_state().
-func (self *GLTextureBuilderInstance) GetColorState() *ColorState {
-	var carg0 *C.GdkGLTextureBuilder // in, none, class
-	var cret  *C.GdkColorState       // return, full, record
+func (self *GLTextureBuilderInstance) GetColorState() ColorState {
+	var carg0 *C.GdkGLTextureBuilder // in, none, converted
+	var cret  *C.GdkColorState       // return, full, converted
 
 	carg0 = (*C.GdkGLTextureBuilder)(UnsafeGLTextureBuilderToGlibNone(self))
 
 	cret = C.gdk_gl_texture_builder_get_color_state(carg0)
 	runtime.KeepAlive(self)
 
-	var ret *ColorState
+	var ret ColorState
 
 	ret = UnsafeColorStateFromGlibFull(unsafe.Pointer(cret))
 
@@ -18281,8 +18302,8 @@ func (self *GLTextureBuilderInstance) GetColorState() *ColorState {
 // Gets the context previously set via gdk_gl_texture_builder_set_context() or
 // %NULL if none was set.
 func (self *GLTextureBuilderInstance) GetContext() GLContext {
-	var carg0 *C.GdkGLTextureBuilder // in, none, class
-	var cret  *C.GdkGLContext        // return, none, class
+	var carg0 *C.GdkGLTextureBuilder // in, none, converted
+	var cret  *C.GdkGLContext        // return, none, converted
 
 	carg0 = (*C.GdkGLTextureBuilder)(UnsafeGLTextureBuilderToGlibNone(self))
 
@@ -18303,8 +18324,8 @@ func (self *GLTextureBuilderInstance) GetContext() GLContext {
 //
 // Gets the format previously set via gdk_gl_texture_builder_set_format().
 func (self *GLTextureBuilderInstance) GetFormat() MemoryFormat {
-	var carg0 *C.GdkGLTextureBuilder // in, none, class
-	var cret  C.GdkMemoryFormat      // return, casted
+	var carg0 *C.GdkGLTextureBuilder // in, none, converted
+	var cret  C.GdkMemoryFormat      // return, none, casted
 
 	carg0 = (*C.GdkGLTextureBuilder)(UnsafeGLTextureBuilderToGlibNone(self))
 
@@ -18325,7 +18346,7 @@ func (self *GLTextureBuilderInstance) GetFormat() MemoryFormat {
 //
 // Gets whether the texture has a mipmap.
 func (self *GLTextureBuilderInstance) GetHasMipmap() bool {
-	var carg0 *C.GdkGLTextureBuilder // in, none, class
+	var carg0 *C.GdkGLTextureBuilder // in, none, converted
 	var cret  C.gboolean             // return
 
 	carg0 = (*C.GdkGLTextureBuilder)(UnsafeGLTextureBuilderToGlibNone(self))
@@ -18350,8 +18371,8 @@ func (self *GLTextureBuilderInstance) GetHasMipmap() bool {
 // Gets the height previously set via gdk_gl_texture_builder_set_height() or
 // 0 if the height wasn't set.
 func (self *GLTextureBuilderInstance) GetHeight() int {
-	var carg0 *C.GdkGLTextureBuilder // in, none, class
-	var cret  C.int                  // return, casted
+	var carg0 *C.GdkGLTextureBuilder // in, none, converted
+	var cret  C.int                  // return, none, casted
 
 	carg0 = (*C.GdkGLTextureBuilder)(UnsafeGLTextureBuilderToGlibNone(self))
 
@@ -18373,8 +18394,8 @@ func (self *GLTextureBuilderInstance) GetHeight() int {
 // Gets the texture id previously set via gdk_gl_texture_builder_set_id() or
 // 0 if the id wasn't set.
 func (self *GLTextureBuilderInstance) GetID() uint {
-	var carg0 *C.GdkGLTextureBuilder // in, none, class
-	var cret  C.guint                // return, casted
+	var carg0 *C.GdkGLTextureBuilder // in, none, converted
+	var cret  C.guint                // return, none, casted
 
 	carg0 = (*C.GdkGLTextureBuilder)(UnsafeGLTextureBuilderToGlibNone(self))
 
@@ -18395,8 +18416,8 @@ func (self *GLTextureBuilderInstance) GetID() uint {
 //
 // Gets the `GLsync` previously set via gdk_gl_texture_builder_set_sync().
 func (self *GLTextureBuilderInstance) GetSync() unsafe.Pointer {
-	var carg0 *C.GdkGLTextureBuilder // in, none, class
-	var cret  C.gpointer             // return, casted
+	var carg0 *C.GdkGLTextureBuilder // in, none, converted
+	var cret  C.gpointer             // return, none, casted
 
 	carg0 = (*C.GdkGLTextureBuilder)(UnsafeGLTextureBuilderToGlibNone(self))
 
@@ -18418,8 +18439,8 @@ func (self *GLTextureBuilderInstance) GetSync() unsafe.Pointer {
 // Gets the texture previously set via gdk_gl_texture_builder_set_update_texture() or
 // %NULL if none was set.
 func (self *GLTextureBuilderInstance) GetUpdateTexture() Texture {
-	var carg0 *C.GdkGLTextureBuilder // in, none, class
-	var cret  *C.GdkTexture          // return, none, class
+	var carg0 *C.GdkGLTextureBuilder // in, none, converted
+	var cret  *C.GdkTexture          // return, none, converted
 
 	carg0 = (*C.GdkGLTextureBuilder)(UnsafeGLTextureBuilderToGlibNone(self))
 
@@ -18441,8 +18462,8 @@ func (self *GLTextureBuilderInstance) GetUpdateTexture() Texture {
 // Gets the width previously set via gdk_gl_texture_builder_set_width() or
 // 0 if the width wasn't set.
 func (self *GLTextureBuilderInstance) GetWidth() int {
-	var carg0 *C.GdkGLTextureBuilder // in, none, class
-	var cret  C.int                  // return, casted
+	var carg0 *C.GdkGLTextureBuilder // in, none, converted
+	var cret  C.int                  // return, none, casted
 
 	carg0 = (*C.GdkGLTextureBuilder)(UnsafeGLTextureBuilderToGlibNone(self))
 
@@ -18460,15 +18481,15 @@ func (self *GLTextureBuilderInstance) GetWidth() int {
 // 
 // The function takes the following parameters:
 // 
-// 	- colorState *ColorState: a `GdkColorState` 
+// 	- colorState ColorState: a `GdkColorState` 
 //
 // Sets the color state for the texture.
 // 
 // By default, the sRGB colorstate is used. If you don't know what
 // colorstates are, this is probably the right thing.
-func (self *GLTextureBuilderInstance) SetColorState(colorState *ColorState) {
-	var carg0 *C.GdkGLTextureBuilder // in, none, class
-	var carg1 *C.GdkColorState       // in, none, record
+func (self *GLTextureBuilderInstance) SetColorState(colorState ColorState) {
+	var carg0 *C.GdkGLTextureBuilder // in, none, converted
+	var carg1 *C.GdkColorState       // in, none, converted
 
 	carg0 = (*C.GdkGLTextureBuilder)(UnsafeGLTextureBuilderToGlibNone(self))
 	carg1 = (*C.GdkColorState)(UnsafeColorStateToGlibNone(colorState))
@@ -18489,8 +18510,8 @@ func (self *GLTextureBuilderInstance) SetColorState(colorState *ColorState) {
 // 
 // The context must be set before calling [method@Gdk.GLTextureBuilder.build].
 func (self *GLTextureBuilderInstance) SetContext(context GLContext) {
-	var carg0 *C.GdkGLTextureBuilder // in, none, class
-	var carg1 *C.GdkGLContext        // in, none, class, nullable
+	var carg0 *C.GdkGLTextureBuilder // in, none, converted
+	var carg1 *C.GdkGLContext        // in, none, converted, nullable
 
 	carg0 = (*C.GdkGLTextureBuilder)(UnsafeGLTextureBuilderToGlibNone(self))
 	if context != nil {
@@ -18525,8 +18546,8 @@ func (self *GLTextureBuilderInstance) SetContext(context GLContext) {
 // Non-RGBA textures need to have swizzling parameters set up properly to be usable
 // in GSK's shaders.
 func (self *GLTextureBuilderInstance) SetFormat(format MemoryFormat) {
-	var carg0 *C.GdkGLTextureBuilder // in, none, class
-	var carg1 C.GdkMemoryFormat      // in, casted
+	var carg0 *C.GdkGLTextureBuilder // in, none, converted
+	var carg1 C.GdkMemoryFormat      // in, none, casted
 
 	carg0 = (*C.GdkGLTextureBuilder)(UnsafeGLTextureBuilderToGlibNone(self))
 	carg1 = C.GdkMemoryFormat(format)
@@ -18547,7 +18568,7 @@ func (self *GLTextureBuilderInstance) SetFormat(format MemoryFormat) {
 // 
 // Typically, the `glGenerateMipmap` function is used to generate a mimap.
 func (self *GLTextureBuilderInstance) SetHasMipmap(hasMipmap bool) {
-	var carg0 *C.GdkGLTextureBuilder // in, none, class
+	var carg0 *C.GdkGLTextureBuilder // in, none, converted
 	var carg1 C.gboolean             // in
 
 	carg0 = (*C.GdkGLTextureBuilder)(UnsafeGLTextureBuilderToGlibNone(self))
@@ -18570,8 +18591,8 @@ func (self *GLTextureBuilderInstance) SetHasMipmap(hasMipmap bool) {
 // 
 // The height must be set before calling [method@Gdk.GLTextureBuilder.build].
 func (self *GLTextureBuilderInstance) SetHeight(height int) {
-	var carg0 *C.GdkGLTextureBuilder // in, none, class
-	var carg1 C.int                  // in, casted
+	var carg0 *C.GdkGLTextureBuilder // in, none, converted
+	var carg1 C.int                  // in, none, casted
 
 	carg0 = (*C.GdkGLTextureBuilder)(UnsafeGLTextureBuilderToGlibNone(self))
 	carg1 = C.int(height)
@@ -18593,8 +18614,8 @@ func (self *GLTextureBuilderInstance) SetHeight(height int) {
 // 
 // The id must be set before calling [method@Gdk.GLTextureBuilder.build].
 func (self *GLTextureBuilderInstance) SetID(id uint) {
-	var carg0 *C.GdkGLTextureBuilder // in, none, class
-	var carg1 C.guint                // in, casted
+	var carg0 *C.GdkGLTextureBuilder // in, none, converted
+	var carg1 C.guint                // in, none, casted
 
 	carg0 = (*C.GdkGLTextureBuilder)(UnsafeGLTextureBuilderToGlibNone(self))
 	carg1 = C.guint(id)
@@ -18619,8 +18640,8 @@ func (self *GLTextureBuilderInstance) SetID(id uint) {
 // The texture builder does not destroy it and it is the callers
 // responsibility to make sure it doesn't leak.
 func (self *GLTextureBuilderInstance) SetSync(sync unsafe.Pointer) {
-	var carg0 *C.GdkGLTextureBuilder // in, none, class
-	var carg1 C.gpointer             // in, casted, nullable
+	var carg0 *C.GdkGLTextureBuilder // in, none, converted
+	var carg1 C.gpointer             // in, none, casted, nullable
 
 	carg0 = (*C.GdkGLTextureBuilder)(UnsafeGLTextureBuilderToGlibNone(self))
 	if sync != nil {
@@ -18641,8 +18662,8 @@ func (self *GLTextureBuilderInstance) SetSync(sync unsafe.Pointer) {
 // Sets the texture to be updated by this texture. See
 // [method@Gdk.GLTextureBuilder.set_update_region] for an explanation.
 func (self *GLTextureBuilderInstance) SetUpdateTexture(texture Texture) {
-	var carg0 *C.GdkGLTextureBuilder // in, none, class
-	var carg1 *C.GdkTexture          // in, none, class, nullable
+	var carg0 *C.GdkGLTextureBuilder // in, none, converted
+	var carg1 *C.GdkTexture          // in, none, converted, nullable
 
 	carg0 = (*C.GdkGLTextureBuilder)(UnsafeGLTextureBuilderToGlibNone(self))
 	if texture != nil {
@@ -18664,8 +18685,8 @@ func (self *GLTextureBuilderInstance) SetUpdateTexture(texture Texture) {
 // 
 // The width must be set before calling [method@Gdk.GLTextureBuilder.build].
 func (self *GLTextureBuilderInstance) SetWidth(width int) {
-	var carg0 *C.GdkGLTextureBuilder // in, none, class
-	var carg1 C.int                  // in, casted
+	var carg0 *C.GdkGLTextureBuilder // in, none, converted
+	var carg1 C.int                  // in, none, casted
 
 	carg0 = (*C.GdkGLTextureBuilder)(UnsafeGLTextureBuilderToGlibNone(self))
 	carg1 = C.int(width)
@@ -18678,7 +18699,7 @@ func (self *GLTextureBuilderInstance) SetWidth(width int) {
 // MemoryTextureBuilderInstance is the instance type used by all types extending GdkMemoryTextureBuilder. It is used internally by the bindings. Users should use the interface [MemoryTextureBuilder] instead.
 type MemoryTextureBuilderInstance struct {
 	_ [0]func() // equal guard
-	gobject.Object
+	gobject.ObjectInstance
 }
 
 var _ MemoryTextureBuilder = (*MemoryTextureBuilderInstance)(nil)
@@ -18697,7 +18718,7 @@ var _ MemoryTextureBuilder = (*MemoryTextureBuilderInstance)(nil)
 // `GdkMemoryTextureBuilder` can be used for quick one-shot construction of
 // textures as well as kept around and reused to construct multiple textures.
 type MemoryTextureBuilder interface {
-	gobject.ObjectLike
+	gobject.Object
 	upcastToGdkMemoryTextureBuilder() *MemoryTextureBuilderInstance
 
 	// Build wraps gdk_memory_texture_builder_build
@@ -18713,21 +18734,13 @@ type MemoryTextureBuilder interface {
 	// It is possible to call this function multiple times to create multiple textures,
 	// possibly with changing properties in between.
 	Build() Texture
-	// GetBytes wraps gdk_memory_texture_builder_get_bytes
-	// The function returns the following values:
-	// 
-	// 	- ret *glib.Bytes 
-	//
-	// Gets the bytes previously set via gdk_memory_texture_builder_set_bytes()
-	// or %NULL if none was set.
-	GetBytes() *glib.Bytes
 	// GetColorState wraps gdk_memory_texture_builder_get_color_state
 	// The function returns the following values:
 	// 
-	// 	- ret *ColorState 
+	// 	- ret ColorState 
 	//
 	// Gets the colorstate previously set via gdk_memory_texture_builder_set_color_state().
-	GetColorState() *ColorState
+	GetColorState() ColorState
 	// GetFormat wraps gdk_memory_texture_builder_get_format
 	// The function returns the following values:
 	// 
@@ -18766,27 +18779,17 @@ type MemoryTextureBuilder interface {
 	// Gets the width previously set via gdk_memory_texture_builder_set_width()
 	// or 0 if the width wasn't set.
 	GetWidth() int
-	// SetBytes wraps gdk_memory_texture_builder_set_bytes
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- bytes *glib.Bytes (nullable): The bytes the texture shows or %NULL to unset 
-	//
-	// Sets the data to be shown but the texture.
-	// 
-	// The bytes must be set before calling [method@Gdk.MemoryTextureBuilder.build].
-	SetBytes(*glib.Bytes)
 	// SetColorState wraps gdk_memory_texture_builder_set_color_state
 	// 
 	// The function takes the following parameters:
 	// 
-	// 	- colorState *ColorState (nullable): The colorstate describing the data 
+	// 	- colorState ColorState (nullable): The colorstate describing the data 
 	//
 	// Sets the colorstate describing the data.
 	// 
 	// By default, the sRGB colorstate is used. If you don't know
 	// what colorstates are, this is probably the right thing.
-	SetColorState(*ColorState)
+	SetColorState(ColorState)
 	// SetFormat wraps gdk_memory_texture_builder_set_format
 	// 
 	// The function takes the following parameters:
@@ -18839,14 +18842,14 @@ type MemoryTextureBuilder interface {
 	SetWidth(int)
 }
 
-func unsafeWrapMemoryTextureBuilder(base *gobject.Object) *MemoryTextureBuilderInstance {
+func unsafeWrapMemoryTextureBuilder(base *gobject.ObjectInstance) *MemoryTextureBuilderInstance {
 	return &MemoryTextureBuilderInstance{
-		Object: *base,
+		ObjectInstance: *base,
 	}
 }
 
 func marshalMemoryTextureBuilderInstance(p uintptr) (interface{}, error) {
-	return unsafeWrapMemoryTextureBuilder(gobject.ValueFromNative(unsafe.Pointer(p)).Object()), nil
+	return unsafeWrapMemoryTextureBuilder(gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Object()), nil
 }
 
 // UnsafeMemoryTextureBuilderFromGlibBorrow is used to convert raw GdkMemoryTextureBuilder pointers to go. This is used by the bindings internally.
@@ -18885,7 +18888,7 @@ func UnsafeMemoryTextureBuilderToGlibFull(c MemoryTextureBuilder) unsafe.Pointer
 //
 // Creates a new texture builder.
 func NewMemoryTextureBuilderInstance() MemoryTextureBuilder {
-	var cret *C.GdkMemoryTextureBuilder // return, full, class
+	var cret *C.GdkMemoryTextureBuilder // return, full, converted
 
 	cret = C.gdk_memory_texture_builder_new()
 
@@ -18909,8 +18912,8 @@ func NewMemoryTextureBuilderInstance() MemoryTextureBuilder {
 // It is possible to call this function multiple times to create multiple textures,
 // possibly with changing properties in between.
 func (self *MemoryTextureBuilderInstance) Build() Texture {
-	var carg0 *C.GdkMemoryTextureBuilder // in, none, class
-	var cret  *C.GdkTexture              // return, full, class
+	var carg0 *C.GdkMemoryTextureBuilder // in, none, converted
+	var cret  *C.GdkTexture              // return, full, converted
 
 	carg0 = (*C.GdkMemoryTextureBuilder)(UnsafeMemoryTextureBuilderToGlibNone(self))
 
@@ -18924,45 +18927,22 @@ func (self *MemoryTextureBuilderInstance) Build() Texture {
 	return ret
 }
 
-// GetBytes wraps gdk_memory_texture_builder_get_bytes
-// The function returns the following values:
-// 
-// 	- ret *glib.Bytes 
-//
-// Gets the bytes previously set via gdk_memory_texture_builder_set_bytes()
-// or %NULL if none was set.
-func (self *MemoryTextureBuilderInstance) GetBytes() *glib.Bytes {
-	var carg0 *C.GdkMemoryTextureBuilder // in, none, class
-	var cret  *C.GBytes                  // return, none, record
-
-	carg0 = (*C.GdkMemoryTextureBuilder)(UnsafeMemoryTextureBuilderToGlibNone(self))
-
-	cret = C.gdk_memory_texture_builder_get_bytes(carg0)
-	runtime.KeepAlive(self)
-
-	var ret *glib.Bytes
-
-	ret = glib.UnsafeBytesFromGlibNone(unsafe.Pointer(cret))
-
-	return ret
-}
-
 // GetColorState wraps gdk_memory_texture_builder_get_color_state
 // The function returns the following values:
 // 
-// 	- ret *ColorState 
+// 	- ret ColorState 
 //
 // Gets the colorstate previously set via gdk_memory_texture_builder_set_color_state().
-func (self *MemoryTextureBuilderInstance) GetColorState() *ColorState {
-	var carg0 *C.GdkMemoryTextureBuilder // in, none, class
-	var cret  *C.GdkColorState           // return, none, record
+func (self *MemoryTextureBuilderInstance) GetColorState() ColorState {
+	var carg0 *C.GdkMemoryTextureBuilder // in, none, converted
+	var cret  *C.GdkColorState           // return, none, converted
 
 	carg0 = (*C.GdkMemoryTextureBuilder)(UnsafeMemoryTextureBuilderToGlibNone(self))
 
 	cret = C.gdk_memory_texture_builder_get_color_state(carg0)
 	runtime.KeepAlive(self)
 
-	var ret *ColorState
+	var ret ColorState
 
 	ret = UnsafeColorStateFromGlibNone(unsafe.Pointer(cret))
 
@@ -18976,8 +18956,8 @@ func (self *MemoryTextureBuilderInstance) GetColorState() *ColorState {
 //
 // Gets the format previously set via gdk_memory_texture_builder_set_format().
 func (self *MemoryTextureBuilderInstance) GetFormat() MemoryFormat {
-	var carg0 *C.GdkMemoryTextureBuilder // in, none, class
-	var cret  C.GdkMemoryFormat          // return, casted
+	var carg0 *C.GdkMemoryTextureBuilder // in, none, converted
+	var cret  C.GdkMemoryFormat          // return, none, casted
 
 	carg0 = (*C.GdkMemoryTextureBuilder)(UnsafeMemoryTextureBuilderToGlibNone(self))
 
@@ -18999,8 +18979,8 @@ func (self *MemoryTextureBuilderInstance) GetFormat() MemoryFormat {
 // Gets the height previously set via gdk_memory_texture_builder_set_height()
 // or 0 if the height wasn't set.
 func (self *MemoryTextureBuilderInstance) GetHeight() int {
-	var carg0 *C.GdkMemoryTextureBuilder // in, none, class
-	var cret  C.int                      // return, casted
+	var carg0 *C.GdkMemoryTextureBuilder // in, none, converted
+	var cret  C.int                      // return, none, casted
 
 	carg0 = (*C.GdkMemoryTextureBuilder)(UnsafeMemoryTextureBuilderToGlibNone(self))
 
@@ -19021,8 +19001,8 @@ func (self *MemoryTextureBuilderInstance) GetHeight() int {
 //
 // Gets the stride previously set via gdk_memory_texture_builder_set_stride().
 func (self *MemoryTextureBuilderInstance) GetStride() uint {
-	var carg0 *C.GdkMemoryTextureBuilder // in, none, class
-	var cret  C.gsize                    // return, casted
+	var carg0 *C.GdkMemoryTextureBuilder // in, none, converted
+	var cret  C.gsize                    // return, none, casted
 
 	carg0 = (*C.GdkMemoryTextureBuilder)(UnsafeMemoryTextureBuilderToGlibNone(self))
 
@@ -19044,8 +19024,8 @@ func (self *MemoryTextureBuilderInstance) GetStride() uint {
 // Gets the texture previously set via gdk_memory_texture_builder_set_update_texture()
 // or %NULL if none was set.
 func (self *MemoryTextureBuilderInstance) GetUpdateTexture() Texture {
-	var carg0 *C.GdkMemoryTextureBuilder // in, none, class
-	var cret  *C.GdkTexture              // return, none, class
+	var carg0 *C.GdkMemoryTextureBuilder // in, none, converted
+	var cret  *C.GdkTexture              // return, none, converted
 
 	carg0 = (*C.GdkMemoryTextureBuilder)(UnsafeMemoryTextureBuilderToGlibNone(self))
 
@@ -19067,8 +19047,8 @@ func (self *MemoryTextureBuilderInstance) GetUpdateTexture() Texture {
 // Gets the width previously set via gdk_memory_texture_builder_set_width()
 // or 0 if the width wasn't set.
 func (self *MemoryTextureBuilderInstance) GetWidth() int {
-	var carg0 *C.GdkMemoryTextureBuilder // in, none, class
-	var cret  C.int                      // return, casted
+	var carg0 *C.GdkMemoryTextureBuilder // in, none, converted
+	var cret  C.int                      // return, none, casted
 
 	carg0 = (*C.GdkMemoryTextureBuilder)(UnsafeMemoryTextureBuilderToGlibNone(self))
 
@@ -19082,42 +19062,19 @@ func (self *MemoryTextureBuilderInstance) GetWidth() int {
 	return ret
 }
 
-// SetBytes wraps gdk_memory_texture_builder_set_bytes
-// 
-// The function takes the following parameters:
-// 
-// 	- bytes *glib.Bytes (nullable): The bytes the texture shows or %NULL to unset 
-//
-// Sets the data to be shown but the texture.
-// 
-// The bytes must be set before calling [method@Gdk.MemoryTextureBuilder.build].
-func (self *MemoryTextureBuilderInstance) SetBytes(bytes *glib.Bytes) {
-	var carg0 *C.GdkMemoryTextureBuilder // in, none, class
-	var carg1 *C.GBytes                  // in, none, record, nullable
-
-	carg0 = (*C.GdkMemoryTextureBuilder)(UnsafeMemoryTextureBuilderToGlibNone(self))
-	if bytes != nil {
-		carg1 = (*C.GBytes)(glib.UnsafeBytesToGlibNone(bytes))
-	}
-
-	C.gdk_memory_texture_builder_set_bytes(carg0, carg1)
-	runtime.KeepAlive(self)
-	runtime.KeepAlive(bytes)
-}
-
 // SetColorState wraps gdk_memory_texture_builder_set_color_state
 // 
 // The function takes the following parameters:
 // 
-// 	- colorState *ColorState (nullable): The colorstate describing the data 
+// 	- colorState ColorState (nullable): The colorstate describing the data 
 //
 // Sets the colorstate describing the data.
 // 
 // By default, the sRGB colorstate is used. If you don't know
 // what colorstates are, this is probably the right thing.
-func (self *MemoryTextureBuilderInstance) SetColorState(colorState *ColorState) {
-	var carg0 *C.GdkMemoryTextureBuilder // in, none, class
-	var carg1 *C.GdkColorState           // in, none, record, nullable
+func (self *MemoryTextureBuilderInstance) SetColorState(colorState ColorState) {
+	var carg0 *C.GdkMemoryTextureBuilder // in, none, converted
+	var carg1 *C.GdkColorState           // in, none, converted, nullable
 
 	carg0 = (*C.GdkMemoryTextureBuilder)(UnsafeMemoryTextureBuilderToGlibNone(self))
 	if colorState != nil {
@@ -19139,8 +19096,8 @@ func (self *MemoryTextureBuilderInstance) SetColorState(colorState *ColorState) 
 // 
 // The default is `GDK_MEMORY_R8G8B8A8_PREMULTIPLIED`.
 func (self *MemoryTextureBuilderInstance) SetFormat(format MemoryFormat) {
-	var carg0 *C.GdkMemoryTextureBuilder // in, none, class
-	var carg1 C.GdkMemoryFormat          // in, casted
+	var carg0 *C.GdkMemoryTextureBuilder // in, none, converted
+	var carg1 C.GdkMemoryFormat          // in, none, casted
 
 	carg0 = (*C.GdkMemoryTextureBuilder)(UnsafeMemoryTextureBuilderToGlibNone(self))
 	carg1 = C.GdkMemoryFormat(format)
@@ -19160,8 +19117,8 @@ func (self *MemoryTextureBuilderInstance) SetFormat(format MemoryFormat) {
 // 
 // The height must be set before calling [method@Gdk.MemoryTextureBuilder.build].
 func (self *MemoryTextureBuilderInstance) SetHeight(height int) {
-	var carg0 *C.GdkMemoryTextureBuilder // in, none, class
-	var carg1 C.int                      // in, casted
+	var carg0 *C.GdkMemoryTextureBuilder // in, none, converted
+	var carg1 C.int                      // in, none, casted
 
 	carg0 = (*C.GdkMemoryTextureBuilder)(UnsafeMemoryTextureBuilderToGlibNone(self))
 	carg1 = C.int(height)
@@ -19181,8 +19138,8 @@ func (self *MemoryTextureBuilderInstance) SetHeight(height int) {
 // 
 // The rowstride must be set before calling [method@Gdk.MemoryTextureBuilder.build].
 func (self *MemoryTextureBuilderInstance) SetStride(stride uint) {
-	var carg0 *C.GdkMemoryTextureBuilder // in, none, class
-	var carg1 C.gsize                    // in, casted
+	var carg0 *C.GdkMemoryTextureBuilder // in, none, converted
+	var carg1 C.gsize                    // in, none, casted
 
 	carg0 = (*C.GdkMemoryTextureBuilder)(UnsafeMemoryTextureBuilderToGlibNone(self))
 	carg1 = C.gsize(stride)
@@ -19202,8 +19159,8 @@ func (self *MemoryTextureBuilderInstance) SetStride(stride uint) {
 // 
 // See [method@Gdk.MemoryTextureBuilder.set_update_region] for an explanation.
 func (self *MemoryTextureBuilderInstance) SetUpdateTexture(texture Texture) {
-	var carg0 *C.GdkMemoryTextureBuilder // in, none, class
-	var carg1 *C.GdkTexture              // in, none, class, nullable
+	var carg0 *C.GdkMemoryTextureBuilder // in, none, converted
+	var carg1 *C.GdkTexture              // in, none, converted, nullable
 
 	carg0 = (*C.GdkMemoryTextureBuilder)(UnsafeMemoryTextureBuilderToGlibNone(self))
 	if texture != nil {
@@ -19225,8 +19182,8 @@ func (self *MemoryTextureBuilderInstance) SetUpdateTexture(texture Texture) {
 // 
 // The width must be set before calling [method@Gdk.MemoryTextureBuilder.build].
 func (self *MemoryTextureBuilderInstance) SetWidth(width int) {
-	var carg0 *C.GdkMemoryTextureBuilder // in, none, class
-	var carg1 C.int                      // in, casted
+	var carg0 *C.GdkMemoryTextureBuilder // in, none, converted
+	var carg1 C.int                      // in, none, casted
 
 	carg0 = (*C.GdkMemoryTextureBuilder)(UnsafeMemoryTextureBuilderToGlibNone(self))
 	carg1 = C.int(width)
@@ -19239,7 +19196,7 @@ func (self *MemoryTextureBuilderInstance) SetWidth(width int) {
 // MonitorInstance is the instance type used by all types extending GdkMonitor. It is used internally by the bindings. Users should use the interface [Monitor] instead.
 type MonitorInstance struct {
 	_ [0]func() // equal guard
-	gobject.Object
+	gobject.ObjectInstance
 }
 
 var _ Monitor = (*MonitorInstance)(nil)
@@ -19254,7 +19211,7 @@ var _ Monitor = (*MonitorInstance)(nil)
 // [method@Gdk.Display.get_monitor_at_surface] to find a particular
 // monitor.
 type Monitor interface {
-	gobject.ObjectLike
+	gobject.Object
 	upcastToGdkMonitor() *MonitorInstance
 
 	// GetConnector wraps gdk_monitor_get_connector
@@ -19376,14 +19333,14 @@ type Monitor interface {
 	IsValid() bool
 }
 
-func unsafeWrapMonitor(base *gobject.Object) *MonitorInstance {
+func unsafeWrapMonitor(base *gobject.ObjectInstance) *MonitorInstance {
 	return &MonitorInstance{
-		Object: *base,
+		ObjectInstance: *base,
 	}
 }
 
 func marshalMonitorInstance(p uintptr) (interface{}, error) {
-	return unsafeWrapMonitor(gobject.ValueFromNative(unsafe.Pointer(p)).Object()), nil
+	return unsafeWrapMonitor(gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Object()), nil
 }
 
 // UnsafeMonitorFromGlibBorrow is used to convert raw GdkMonitor pointers to go. This is used by the bindings internally.
@@ -19426,7 +19383,7 @@ func UnsafeMonitorToGlibFull(c Monitor) unsafe.Pointer {
 // on software and hardware configuration, and should not be
 // relied on as stable identifiers of a specific monitor.
 func (monitor *MonitorInstance) GetConnector() string {
-	var carg0 *C.GdkMonitor // in, none, class
+	var carg0 *C.GdkMonitor // in, none, converted
 	var cret  *C.gchar      // return, none, string
 
 	carg0 = (*C.GdkMonitor)(UnsafeMonitorToGlibNone(monitor))
@@ -19450,7 +19407,7 @@ func (monitor *MonitorInstance) GetConnector() string {
 // 
 // This can be used to identify a monitor in the UI.
 func (monitor *MonitorInstance) GetDescription() string {
-	var carg0 *C.GdkMonitor // in, none, class
+	var carg0 *C.GdkMonitor // in, none, converted
 	var cret  *C.gchar      // return, none, string
 
 	carg0 = (*C.GdkMonitor)(UnsafeMonitorToGlibNone(monitor))
@@ -19472,8 +19429,8 @@ func (monitor *MonitorInstance) GetDescription() string {
 //
 // Gets the display that this monitor belongs to.
 func (monitor *MonitorInstance) GetDisplay() Display {
-	var carg0 *C.GdkMonitor // in, none, class
-	var cret  *C.GdkDisplay // return, none, class
+	var carg0 *C.GdkMonitor // in, none, converted
+	var cret  *C.GdkDisplay // return, none, converted
 
 	carg0 = (*C.GdkMonitor)(UnsafeMonitorToGlibNone(monitor))
 
@@ -19494,8 +19451,8 @@ func (monitor *MonitorInstance) GetDisplay() Display {
 //
 // Gets the height in millimeters of the monitor.
 func (monitor *MonitorInstance) GetHeightMm() int {
-	var carg0 *C.GdkMonitor // in, none, class
-	var cret  C.int         // return, casted
+	var carg0 *C.GdkMonitor // in, none, converted
+	var cret  C.int         // return, none, casted
 
 	carg0 = (*C.GdkMonitor)(UnsafeMonitorToGlibNone(monitor))
 
@@ -19522,7 +19479,7 @@ func (monitor *MonitorInstance) GetHeightMm() int {
 // The PNP ID registry is located at
 // [https://uefi.org/pnp_id_list](https://uefi.org/pnp_id_list).
 func (monitor *MonitorInstance) GetManufacturer() string {
-	var carg0 *C.GdkMonitor // in, none, class
+	var carg0 *C.GdkMonitor // in, none, converted
 	var cret  *C.gchar      // return, none, string
 
 	carg0 = (*C.GdkMonitor)(UnsafeMonitorToGlibNone(monitor))
@@ -19544,7 +19501,7 @@ func (monitor *MonitorInstance) GetManufacturer() string {
 //
 // Gets the string identifying the monitor model, if available.
 func (monitor *MonitorInstance) GetModel() string {
-	var carg0 *C.GdkMonitor // in, none, class
+	var carg0 *C.GdkMonitor // in, none, converted
 	var cret  *C.gchar      // return, none, string
 
 	carg0 = (*C.GdkMonitor)(UnsafeMonitorToGlibNone(monitor))
@@ -19569,8 +19526,8 @@ func (monitor *MonitorInstance) GetModel() string {
 // The value is in milli-Hertz, so a refresh rate of 60Hz
 // is returned as 60000.
 func (monitor *MonitorInstance) GetRefreshRate() int {
-	var carg0 *C.GdkMonitor // in, none, class
-	var cret  C.int         // return, casted
+	var carg0 *C.GdkMonitor // in, none, converted
+	var cret  C.int         // return, none, casted
 
 	carg0 = (*C.GdkMonitor)(UnsafeMonitorToGlibNone(monitor))
 
@@ -19596,8 +19553,8 @@ func (monitor *MonitorInstance) GetRefreshRate() int {
 // particular monitor, but most of the time you’re drawing to a surface
 // where it is better to use [method@Gdk.Surface.get_scale] instead.
 func (monitor *MonitorInstance) GetScale() float64 {
-	var carg0 *C.GdkMonitor // in, none, class
-	var cret  C.gdouble     // return, casted
+	var carg0 *C.GdkMonitor // in, none, converted
+	var cret  C.gdouble     // return, none, casted
 
 	carg0 = (*C.GdkMonitor)(UnsafeMonitorToGlibNone(monitor))
 
@@ -19626,8 +19583,8 @@ func (monitor *MonitorInstance) GetScale() float64 {
 // particular monitor, but most of the time you’re drawing to a surface
 // where it is better to use [method@Gdk.Surface.get_scale_factor] instead.
 func (monitor *MonitorInstance) GetScaleFactor() int {
-	var carg0 *C.GdkMonitor // in, none, class
-	var cret  C.int         // return, casted
+	var carg0 *C.GdkMonitor // in, none, converted
+	var cret  C.int         // return, none, casted
 
 	carg0 = (*C.GdkMonitor)(UnsafeMonitorToGlibNone(monitor))
 
@@ -19649,8 +19606,8 @@ func (monitor *MonitorInstance) GetScaleFactor() int {
 // Gets information about the layout of red, green and blue
 // primaries for pixels.
 func (monitor *MonitorInstance) GetSubpixelLayout() SubpixelLayout {
-	var carg0 *C.GdkMonitor       // in, none, class
-	var cret  C.GdkSubpixelLayout // return, casted
+	var carg0 *C.GdkMonitor       // in, none, converted
+	var cret  C.GdkSubpixelLayout // return, none, casted
 
 	carg0 = (*C.GdkMonitor)(UnsafeMonitorToGlibNone(monitor))
 
@@ -19671,8 +19628,8 @@ func (monitor *MonitorInstance) GetSubpixelLayout() SubpixelLayout {
 //
 // Gets the width in millimeters of the monitor.
 func (monitor *MonitorInstance) GetWidthMm() int {
-	var carg0 *C.GdkMonitor // in, none, class
-	var cret  C.int         // return, casted
+	var carg0 *C.GdkMonitor // in, none, converted
+	var cret  C.int         // return, none, casted
 
 	carg0 = (*C.GdkMonitor)(UnsafeMonitorToGlibNone(monitor))
 
@@ -19697,7 +19654,7 @@ func (monitor *MonitorInstance) GetWidthMm() int {
 // The @monitor becomes invalid when the physical monitor
 // is unplugged or removed.
 func (monitor *MonitorInstance) IsValid() bool {
-	var carg0 *C.GdkMonitor // in, none, class
+	var carg0 *C.GdkMonitor // in, none, converted
 	var cret  C.gboolean    // return
 
 	carg0 = (*C.GdkMonitor)(UnsafeMonitorToGlibNone(monitor))
@@ -19717,7 +19674,7 @@ func (monitor *MonitorInstance) IsValid() bool {
 // SeatInstance is the instance type used by all types extending GdkSeat. It is used internally by the bindings. Users should use the interface [Seat] instead.
 type SeatInstance struct {
 	_ [0]func() // equal guard
-	gobject.Object
+	gobject.ObjectInstance
 }
 
 var _ Seat = (*SeatInstance)(nil)
@@ -19727,7 +19684,7 @@ var _ Seat = (*SeatInstance)(nil)
 // The `GdkSeat` object represents a collection of input devices
 // that belong to a user.
 type Seat interface {
-	gobject.ObjectLike
+	gobject.Object
 	upcastToGdkSeat() *SeatInstance
 
 	// GetCapabilities wraps gdk_seat_get_capabilities
@@ -19737,18 +19694,6 @@ type Seat interface {
 	//
 	// Returns the capabilities this `GdkSeat` currently has.
 	GetCapabilities() SeatCapabilities
-	// GetDevices wraps gdk_seat_get_devices
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- capabilities SeatCapabilities: capabilities to get devices for 
-	// 
-	// The function returns the following values:
-	// 
-	// 	- ret *glib.List 
-	//
-	// Returns the devices that match the given capabilities.
-	GetDevices(SeatCapabilities) *glib.List
 	// GetDisplay wraps gdk_seat_get_display
 	// The function returns the following values:
 	// 
@@ -19770,23 +19715,16 @@ type Seat interface {
 	//
 	// Returns the device that routes pointer events.
 	GetPointer() Device
-	// GetTools wraps gdk_seat_get_tools
-	// The function returns the following values:
-	// 
-	// 	- ret *glib.List 
-	//
-	// Returns all `GdkDeviceTools` that are known to the application.
-	GetTools() *glib.List
 }
 
-func unsafeWrapSeat(base *gobject.Object) *SeatInstance {
+func unsafeWrapSeat(base *gobject.ObjectInstance) *SeatInstance {
 	return &SeatInstance{
-		Object: *base,
+		ObjectInstance: *base,
 	}
 }
 
 func marshalSeatInstance(p uintptr) (interface{}, error) {
-	return unsafeWrapSeat(gobject.ValueFromNative(unsafe.Pointer(p)).Object()), nil
+	return unsafeWrapSeat(gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Object()), nil
 }
 
 // UnsafeSeatFromGlibBorrow is used to convert raw GdkSeat pointers to go. This is used by the bindings internally.
@@ -19825,8 +19763,8 @@ func UnsafeSeatToGlibFull(c Seat) unsafe.Pointer {
 //
 // Returns the capabilities this `GdkSeat` currently has.
 func (seat *SeatInstance) GetCapabilities() SeatCapabilities {
-	var carg0 *C.GdkSeat            // in, none, class
-	var cret  C.GdkSeatCapabilities // return, casted
+	var carg0 *C.GdkSeat            // in, none, converted
+	var cret  C.GdkSeatCapabilities // return, none, casted
 
 	carg0 = (*C.GdkSeat)(UnsafeSeatToGlibNone(seat))
 
@@ -19840,36 +19778,6 @@ func (seat *SeatInstance) GetCapabilities() SeatCapabilities {
 	return ret
 }
 
-// GetDevices wraps gdk_seat_get_devices
-// 
-// The function takes the following parameters:
-// 
-// 	- capabilities SeatCapabilities: capabilities to get devices for 
-// 
-// The function returns the following values:
-// 
-// 	- ret *glib.List 
-//
-// Returns the devices that match the given capabilities.
-func (seat *SeatInstance) GetDevices(capabilities SeatCapabilities) *glib.List {
-	var carg0 *C.GdkSeat            // in, none, class
-	var carg1 C.GdkSeatCapabilities // in, casted
-	var cret  *C.GList              // return, container inner types: (GdkDevice), transfer: container, scope: , implicit: false, skip: false, optional: false, nullable: false, caller-allocates: false, has closure: false, has destroy: false
-
-	carg0 = (*C.GdkSeat)(UnsafeSeatToGlibNone(seat))
-	carg1 = C.GdkSeatCapabilities(capabilities)
-
-	cret = C.gdk_seat_get_devices(carg0, carg1)
-	runtime.KeepAlive(seat)
-	runtime.KeepAlive(capabilities)
-
-	var ret *glib.List
-
-	panic("unimplemented conversion of container *typesystem.PointerType (GList*)")
-
-	return ret
-}
-
 // GetDisplay wraps gdk_seat_get_display
 // The function returns the following values:
 // 
@@ -19877,8 +19785,8 @@ func (seat *SeatInstance) GetDevices(capabilities SeatCapabilities) *glib.List {
 //
 // Returns the `GdkDisplay` this seat belongs to.
 func (seat *SeatInstance) GetDisplay() Display {
-	var carg0 *C.GdkSeat    // in, none, class
-	var cret  *C.GdkDisplay // return, none, class
+	var carg0 *C.GdkSeat    // in, none, converted
+	var cret  *C.GdkDisplay // return, none, converted
 
 	carg0 = (*C.GdkSeat)(UnsafeSeatToGlibNone(seat))
 
@@ -19899,8 +19807,8 @@ func (seat *SeatInstance) GetDisplay() Display {
 //
 // Returns the device that routes keyboard events.
 func (seat *SeatInstance) GetKeyboard() Device {
-	var carg0 *C.GdkSeat   // in, none, class
-	var cret  *C.GdkDevice // return, none, class
+	var carg0 *C.GdkSeat   // in, none, converted
+	var cret  *C.GdkDevice // return, none, converted
 
 	carg0 = (*C.GdkSeat)(UnsafeSeatToGlibNone(seat))
 
@@ -19921,8 +19829,8 @@ func (seat *SeatInstance) GetKeyboard() Device {
 //
 // Returns the device that routes pointer events.
 func (seat *SeatInstance) GetPointer() Device {
-	var carg0 *C.GdkSeat   // in, none, class
-	var cret  *C.GdkDevice // return, none, class
+	var carg0 *C.GdkSeat   // in, none, converted
+	var cret  *C.GdkDevice // return, none, converted
 
 	carg0 = (*C.GdkSeat)(UnsafeSeatToGlibNone(seat))
 
@@ -19936,32 +19844,10 @@ func (seat *SeatInstance) GetPointer() Device {
 	return ret
 }
 
-// GetTools wraps gdk_seat_get_tools
-// The function returns the following values:
-// 
-// 	- ret *glib.List 
-//
-// Returns all `GdkDeviceTools` that are known to the application.
-func (seat *SeatInstance) GetTools() *glib.List {
-	var carg0 *C.GdkSeat // in, none, class
-	var cret  *C.GList   // return, container inner types: (GdkDeviceTool), transfer: container, scope: , implicit: false, skip: false, optional: false, nullable: false, caller-allocates: false, has closure: false, has destroy: false
-
-	carg0 = (*C.GdkSeat)(UnsafeSeatToGlibNone(seat))
-
-	cret = C.gdk_seat_get_tools(carg0)
-	runtime.KeepAlive(seat)
-
-	var ret *glib.List
-
-	panic("unimplemented conversion of container *typesystem.PointerType (GList*)")
-
-	return ret
-}
-
 // SnapshotInstance is the instance type used by all types extending GdkSnapshot. It is used internally by the bindings. Users should use the interface [Snapshot] instead.
 type SnapshotInstance struct {
 	_ [0]func() // equal guard
-	gobject.Object
+	gobject.ObjectInstance
 }
 
 var _ Snapshot = (*SnapshotInstance)(nil)
@@ -19972,19 +19858,19 @@ var _ Snapshot = (*SnapshotInstance)(nil)
 // 
 // The subclass of `GdkSnapshot` used by GTK is [GtkSnapshot](../gtk4/class.Snapshot.html).
 type Snapshot interface {
-	gobject.ObjectLike
+	gobject.Object
 	upcastToGdkSnapshot() *SnapshotInstance
 
 }
 
-func unsafeWrapSnapshot(base *gobject.Object) *SnapshotInstance {
+func unsafeWrapSnapshot(base *gobject.ObjectInstance) *SnapshotInstance {
 	return &SnapshotInstance{
-		Object: *base,
+		ObjectInstance: *base,
 	}
 }
 
 func marshalSnapshotInstance(p uintptr) (interface{}, error) {
-	return unsafeWrapSnapshot(gobject.ValueFromNative(unsafe.Pointer(p)).Object()), nil
+	return unsafeWrapSnapshot(gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Object()), nil
 }
 
 // UnsafeSnapshotFromGlibBorrow is used to convert raw GdkSnapshot pointers to go. This is used by the bindings internally.
@@ -20019,7 +19905,7 @@ func UnsafeSnapshotToGlibFull(c Snapshot) unsafe.Pointer {
 // SurfaceInstance is the instance type used by all types extending GdkSurface. It is used internally by the bindings. Users should use the interface [Surface] instead.
 type SurfaceInstance struct {
 	_ [0]func() // equal guard
-	gobject.Object
+	gobject.ObjectInstance
 }
 
 var _ Surface = (*SurfaceInstance)(nil)
@@ -20036,7 +19922,7 @@ var _ Surface = (*SurfaceInstance)(nil)
 // API to interact with these surfaces. Other, more specialized surface
 // types exist, but you will rarely interact with them directly.
 type Surface interface {
-	gobject.ObjectLike
+	gobject.Object
 	upcastToGdkSurface() *SurfaceInstance
 
 	// Beep wraps gdk_surface_beep
@@ -20281,14 +20167,14 @@ type Surface interface {
 	SetDeviceCursor(Device, Cursor)
 }
 
-func unsafeWrapSurface(base *gobject.Object) *SurfaceInstance {
+func unsafeWrapSurface(base *gobject.ObjectInstance) *SurfaceInstance {
 	return &SurfaceInstance{
-		Object: *base,
+		ObjectInstance: *base,
 	}
 }
 
 func marshalSurfaceInstance(p uintptr) (interface{}, error) {
-	return unsafeWrapSurface(gobject.ValueFromNative(unsafe.Pointer(p)).Object()), nil
+	return unsafeWrapSurface(gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Object()), nil
 }
 
 // UnsafeSurfaceFromGlibBorrow is used to convert raw GdkSurface pointers to go. This is used by the bindings internally.
@@ -20336,9 +20222,9 @@ func UnsafeSurfaceToGlibFull(c Surface) unsafe.Pointer {
 // The surface will be attached to @parent and can be positioned
 // relative to it using [method@Gdk.Popup.present].
 func NewSurfaceInstancePopup(parent Surface, autohide bool) Surface {
-	var carg1 *C.GdkSurface // in, none, class
+	var carg1 *C.GdkSurface // in, none, converted
 	var carg2 C.gboolean    // in
-	var cret  *C.GdkSurface // return, full, class
+	var cret  *C.GdkSurface // return, full, converted
 
 	carg1 = (*C.GdkSurface)(UnsafeSurfaceToGlibNone(parent))
 	if autohide {
@@ -20368,8 +20254,8 @@ func NewSurfaceInstancePopup(parent Surface, autohide bool) Surface {
 //
 // Creates a new toplevel surface.
 func NewSurfaceInstanceToplevel(display Display) Surface {
-	var carg1 *C.GdkDisplay // in, none, class
-	var cret  *C.GdkSurface // return, full, class
+	var carg1 *C.GdkDisplay // in, none, converted
+	var cret  *C.GdkSurface // return, full, converted
 
 	carg1 = (*C.GdkDisplay)(UnsafeDisplayToGlibNone(display))
 
@@ -20390,7 +20276,7 @@ func NewSurfaceInstanceToplevel(display Display) Surface {
 // If the display of @surface does not support per-surface beeps,
 // emits a short beep on the display just as [method@Gdk.Display.beep].
 func (surface *SurfaceInstance) Beep() {
-	var carg0 *C.GdkSurface // in, none, class
+	var carg0 *C.GdkSurface // in, none, converted
 
 	carg0 = (*C.GdkSurface)(UnsafeSurfaceToGlibNone(surface))
 
@@ -20405,8 +20291,8 @@ func (surface *SurfaceInstance) Beep() {
 //
 // Creates a new `GdkCairoContext` for rendering on @surface.
 func (surface *SurfaceInstance) CreateCairoContext() CairoContext {
-	var carg0 *C.GdkSurface      // in, none, class
-	var cret  *C.GdkCairoContext // return, full, class
+	var carg0 *C.GdkSurface      // in, none, converted
+	var cret  *C.GdkCairoContext // return, full, converted
 
 	carg0 = (*C.GdkSurface)(UnsafeSurfaceToGlibNone(surface))
 
@@ -20433,9 +20319,9 @@ func (surface *SurfaceInstance) CreateCairoContext() CairoContext {
 // Before using the returned `GdkGLContext`, you will need to
 // call [method@Gdk.GLContext.make_current] or [method@Gdk.GLContext.realize].
 func (surface *SurfaceInstance) CreateGLContext() (GLContext, error) {
-	var carg0 *C.GdkSurface   // in, none, class
-	var cret  *C.GdkGLContext // return, full, class
-	var _cerr *C.GError       // out, full, record, nullable
+	var carg0 *C.GdkSurface   // in, none, converted
+	var cret  *C.GdkGLContext // return, full, converted
+	var _cerr *C.GError       // out, full, converted, nullable
 
 	carg0 = (*C.GdkSurface)(UnsafeSurfaceToGlibNone(surface))
 
@@ -20447,7 +20333,7 @@ func (surface *SurfaceInstance) CreateGLContext() (GLContext, error) {
 
 	ret = UnsafeGLContextFromGlibFull(unsafe.Pointer(cret))
 	if _cerr != nil {
-		_goerr = glib.UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
+		_goerr = UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
 	}
 
 	return ret, _goerr
@@ -20464,9 +20350,9 @@ func (surface *SurfaceInstance) CreateGLContext() (GLContext, error) {
 // Deprecated: (since 4.14.0) GTK does not expose any Vulkan internals. This
 //   function is a leftover that was accidentally exposed.
 func (surface *SurfaceInstance) CreateVulkanContext() (VulkanContext, error) {
-	var carg0 *C.GdkSurface       // in, none, class
-	var cret  *C.GdkVulkanContext // return, full, class
-	var _cerr *C.GError           // out, full, record, nullable
+	var carg0 *C.GdkSurface       // in, none, converted
+	var cret  *C.GdkVulkanContext // return, full, converted
+	var _cerr *C.GError           // out, full, converted, nullable
 
 	carg0 = (*C.GdkSurface)(UnsafeSurfaceToGlibNone(surface))
 
@@ -20478,7 +20364,7 @@ func (surface *SurfaceInstance) CreateVulkanContext() (VulkanContext, error) {
 
 	ret = UnsafeVulkanContextFromGlibFull(unsafe.Pointer(cret))
 	if _cerr != nil {
-		_goerr = glib.UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
+		_goerr = UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
 	}
 
 	return ret, _goerr
@@ -20496,7 +20382,7 @@ func (surface *SurfaceInstance) CreateVulkanContext() (VulkanContext, error) {
 // reference count reaches zero. You must call this function yourself
 // before that happens.
 func (surface *SurfaceInstance) Destroy() {
-	var carg0 *C.GdkSurface // in, none, class
+	var carg0 *C.GdkSurface // in, none, converted
 
 	carg0 = (*C.GdkSurface)(UnsafeSurfaceToGlibNone(surface))
 
@@ -20517,8 +20403,8 @@ func (surface *SurfaceInstance) Destroy() {
 // 
 // Use [method@Gdk.Surface.set_cursor] to unset the cursor of the surface.
 func (surface *SurfaceInstance) GetCursor() Cursor {
-	var carg0 *C.GdkSurface // in, none, class
-	var cret  *C.GdkCursor  // return, none, class
+	var carg0 *C.GdkSurface // in, none, converted
+	var cret  *C.GdkCursor  // return, none, converted
 
 	carg0 = (*C.GdkSurface)(UnsafeSurfaceToGlibNone(surface))
 
@@ -20550,9 +20436,9 @@ func (surface *SurfaceInstance) GetCursor() Cursor {
 // 
 // Use [method@Gdk.Surface.set_cursor] to unset the cursor of the surface.
 func (surface *SurfaceInstance) GetDeviceCursor(device Device) Cursor {
-	var carg0 *C.GdkSurface // in, none, class
-	var carg1 *C.GdkDevice  // in, none, class
-	var cret  *C.GdkCursor  // return, none, class
+	var carg0 *C.GdkSurface // in, none, converted
+	var carg1 *C.GdkDevice  // in, none, converted
+	var cret  *C.GdkCursor  // return, none, converted
 
 	carg0 = (*C.GdkSurface)(UnsafeSurfaceToGlibNone(surface))
 	carg1 = (*C.GdkDevice)(UnsafeDeviceToGlibNone(device))
@@ -20586,11 +20472,11 @@ func (surface *SurfaceInstance) GetDeviceCursor(device Device) Cursor {
 // The position is given in coordinates relative to the upper
 // left corner of @surface.
 func (surface *SurfaceInstance) GetDevicePosition(device Device) (float64, float64, ModifierType, bool) {
-	var carg0 *C.GdkSurface     // in, none, class
-	var carg1 *C.GdkDevice      // in, none, class
-	var carg2 C.gdouble         // out, casted
-	var carg3 C.gdouble         // out, casted
-	var carg4 C.GdkModifierType // out, casted
+	var carg0 *C.GdkSurface     // in, none, converted
+	var carg1 *C.GdkDevice      // in, none, converted
+	var carg2 C.gdouble         // out, full, casted
+	var carg3 C.gdouble         // out, full, casted
+	var carg4 C.GdkModifierType // out, full, casted
 	var cret  C.gboolean        // return
 
 	carg0 = (*C.GdkSurface)(UnsafeSurfaceToGlibNone(surface))
@@ -20622,8 +20508,8 @@ func (surface *SurfaceInstance) GetDevicePosition(device Device) (float64, float
 //
 // Gets the `GdkDisplay` associated with a `GdkSurface`.
 func (surface *SurfaceInstance) GetDisplay() Display {
-	var carg0 *C.GdkSurface // in, none, class
-	var cret  *C.GdkDisplay // return, none, class
+	var carg0 *C.GdkSurface // in, none, converted
+	var cret  *C.GdkDisplay // return, none, converted
 
 	carg0 = (*C.GdkSurface)(UnsafeSurfaceToGlibNone(surface))
 
@@ -20647,8 +20533,8 @@ func (surface *SurfaceInstance) GetDisplay() Display {
 // The frame clock for a surface never changes unless the surface is
 // reparented to a new toplevel surface.
 func (surface *SurfaceInstance) GetFrameClock() FrameClock {
-	var carg0 *C.GdkSurface    // in, none, class
-	var cret  *C.GdkFrameClock // return, none, class
+	var carg0 *C.GdkSurface    // in, none, converted
+	var cret  *C.GdkFrameClock // return, none, converted
 
 	carg0 = (*C.GdkSurface)(UnsafeSurfaceToGlibNone(surface))
 
@@ -20672,8 +20558,8 @@ func (surface *SurfaceInstance) GetFrameClock() FrameClock {
 // Surface size is reported in ”application pixels”, not
 // ”device pixels” (see [method@Gdk.Surface.get_scale_factor]).
 func (surface *SurfaceInstance) GetHeight() int {
-	var carg0 *C.GdkSurface // in, none, class
-	var cret  C.int         // return, casted
+	var carg0 *C.GdkSurface // in, none, converted
+	var cret  C.int         // return, none, casted
 
 	carg0 = (*C.GdkSurface)(UnsafeSurfaceToGlibNone(surface))
 
@@ -20697,7 +20583,7 @@ func (surface *SurfaceInstance) GetHeight() int {
 // A surface is mapped with [method@Gdk.Toplevel.present]
 // or [method@Gdk.Popup.present].
 func (surface *SurfaceInstance) GetMapped() bool {
-	var carg0 *C.GdkSurface // in, none, class
+	var carg0 *C.GdkSurface // in, none, converted
 	var cret  C.gboolean    // return
 
 	carg0 = (*C.GdkSurface)(UnsafeSurfaceToGlibNone(surface))
@@ -20731,8 +20617,8 @@ func (surface *SurfaceInstance) GetMapped() bool {
 // 
 // The scale may change during the lifetime of the surface.
 func (surface *SurfaceInstance) GetScale() float64 {
-	var carg0 *C.GdkSurface // in, none, class
-	var cret  C.gdouble     // return, casted
+	var carg0 *C.GdkSurface // in, none, converted
+	var cret  C.gdouble     // return, none, casted
 
 	carg0 = (*C.GdkSurface)(UnsafeSurfaceToGlibNone(surface))
 
@@ -20763,8 +20649,8 @@ func (surface *SurfaceInstance) GetScale() float64 {
 // 
 // The scale factor may change during the lifetime of the surface.
 func (surface *SurfaceInstance) GetScaleFactor() int {
-	var carg0 *C.GdkSurface // in, none, class
-	var cret  C.int         // return, casted
+	var carg0 *C.GdkSurface // in, none, converted
+	var cret  C.int         // return, none, casted
 
 	carg0 = (*C.GdkSurface)(UnsafeSurfaceToGlibNone(surface))
 
@@ -20788,8 +20674,8 @@ func (surface *SurfaceInstance) GetScaleFactor() int {
 // Surface size is reported in ”application pixels”, not
 // ”device pixels” (see [method@Gdk.Surface.get_scale_factor]).
 func (surface *SurfaceInstance) GetWidth() int {
-	var carg0 *C.GdkSurface // in, none, class
-	var cret  C.int         // return, casted
+	var carg0 *C.GdkSurface // in, none, converted
+	var cret  C.int         // return, none, casted
 
 	carg0 = (*C.GdkSurface)(UnsafeSurfaceToGlibNone(surface))
 
@@ -20812,7 +20698,7 @@ func (surface *SurfaceInstance) GetWidth() int {
 // they won’t be displayed. Normally done automatically as
 // part of [gtk_widget_hide()](../gtk4/method.Widget.hide.html).
 func (surface *SurfaceInstance) Hide() {
-	var carg0 *C.GdkSurface // in, none, class
+	var carg0 *C.GdkSurface // in, none, converted
 
 	carg0 = (*C.GdkSurface)(UnsafeSurfaceToGlibNone(surface))
 
@@ -20827,7 +20713,7 @@ func (surface *SurfaceInstance) Hide() {
 //
 // Check to see if a surface is destroyed.
 func (surface *SurfaceInstance) IsDestroyed() bool {
-	var carg0 *C.GdkSurface // in, none, class
+	var carg0 *C.GdkSurface // in, none, converted
 	var cret  C.gboolean    // return
 
 	carg0 = (*C.GdkSurface)(UnsafeSurfaceToGlibNone(surface))
@@ -20852,7 +20738,7 @@ func (surface *SurfaceInstance) IsDestroyed() bool {
 // This function is useful for implementations that track invalid
 // regions on their own.
 func (surface *SurfaceInstance) QueueRender() {
-	var carg0 *C.GdkSurface // in, none, class
+	var carg0 *C.GdkSurface // in, none, converted
 
 	carg0 = (*C.GdkSurface)(UnsafeSurfaceToGlibNone(surface))
 
@@ -20866,7 +20752,7 @@ func (surface *SurfaceInstance) QueueRender() {
 // 
 // See [method@Gdk.FrameClock.request_phase].
 func (surface *SurfaceInstance) RequestLayout() {
-	var carg0 *C.GdkSurface // in, none, class
+	var carg0 *C.GdkSurface // in, none, converted
 
 	carg0 = (*C.GdkSurface)(UnsafeSurfaceToGlibNone(surface))
 
@@ -20889,8 +20775,8 @@ func (surface *SurfaceInstance) RequestLayout() {
 // Use [ctor@Gdk.Cursor.new_from_name] or [ctor@Gdk.Cursor.new_from_texture]
 // to create the cursor. To make the cursor invisible, use %GDK_BLANK_CURSOR.
 func (surface *SurfaceInstance) SetCursor(cursor Cursor) {
-	var carg0 *C.GdkSurface // in, none, class
-	var carg1 *C.GdkCursor  // in, none, class, nullable
+	var carg0 *C.GdkSurface // in, none, converted
+	var carg1 *C.GdkCursor  // in, none, converted, nullable
 
 	carg0 = (*C.GdkSurface)(UnsafeSurfaceToGlibNone(surface))
 	if cursor != nil {
@@ -20917,9 +20803,9 @@ func (surface *SurfaceInstance) SetCursor(cursor Cursor) {
 // Use [ctor@Gdk.Cursor.new_from_name] or [ctor@Gdk.Cursor.new_from_texture]
 // to create the cursor. To make the cursor invisible, use %GDK_BLANK_CURSOR.
 func (surface *SurfaceInstance) SetDeviceCursor(device Device, cursor Cursor) {
-	var carg0 *C.GdkSurface // in, none, class
-	var carg1 *C.GdkDevice  // in, none, class
-	var carg2 *C.GdkCursor  // in, none, class
+	var carg0 *C.GdkSurface // in, none, converted
+	var carg1 *C.GdkDevice  // in, none, converted
+	var carg2 *C.GdkCursor  // in, none, converted
 
 	carg0 = (*C.GdkSurface)(UnsafeSurfaceToGlibNone(surface))
 	carg1 = (*C.GdkDevice)(UnsafeDeviceToGlibNone(device))
@@ -20934,10 +20820,10 @@ func (surface *SurfaceInstance) SetDeviceCursor(device Device, cursor Cursor) {
 // TextureInstance is the instance type used by all types extending GdkTexture. It is used internally by the bindings. Users should use the interface [Texture] instead.
 type TextureInstance struct {
 	_ [0]func() // equal guard
-	gobject.Object
+	gobject.ObjectInstance
 	// implemented interfaces:
-	gio.IconInstance
-	gio.LoadableIconInstance
+gio.Icon
+gio.LoadableIcon
 }
 
 var _ Texture = (*TextureInstance)(nil)
@@ -20971,7 +20857,7 @@ var _ Texture = (*TextureInstance)(nil)
 // [glycin](https://lib.rs/crates/glycin), if you need to load untrusted image
 // data.
 type Texture interface {
-	gobject.ObjectLike
+	gobject.Object
 	gio.Icon
 	gio.LoadableIcon
 	upcastToGdkTexture() *TextureInstance
@@ -20979,10 +20865,10 @@ type Texture interface {
 	// GetColorState wraps gdk_texture_get_color_state
 	// The function returns the following values:
 	// 
-	// 	- ret *ColorState 
+	// 	- ret ColorState 
 	//
 	// Returns the color state associated with the texture.
-	GetColorState() *ColorState
+	GetColorState() ColorState
 	// GetFormat wraps gdk_texture_get_format
 	// The function returns the following values:
 	// 
@@ -21030,26 +20916,6 @@ type Texture interface {
 	// use [method@Gdk.Texture.save_to_png_bytes] or look into the
 	// gdk-pixbuf library.
 	SaveToPNG(string) bool
-	// SaveToPNGBytes wraps gdk_texture_save_to_png_bytes
-	// The function returns the following values:
-	// 
-	// 	- ret *glib.Bytes 
-	//
-	// Store the given @texture in memory as a PNG file.
-	// 
-	// Use [ctor@Gdk.Texture.new_from_bytes] to read it back.
-	// 
-	// If you want to serialize a texture, this is a convenient and
-	// portable way to do that.
-	// 
-	// If you need more control over the generated image, such as
-	// attaching metadata, you should look into an image handling
-	// library such as the gdk-pixbuf library.
-	// 
-	// If you are dealing with high dynamic range float data, you
-	// might also want to consider [method@Gdk.Texture.save_to_tiff_bytes]
-	// instead.
-	SaveToPNGBytes() *glib.Bytes
 	// SaveToTIFF wraps gdk_texture_save_to_tiff
 	// 
 	// The function takes the following parameters:
@@ -21064,40 +20930,22 @@ type Texture interface {
 	// 
 	// GTK will attempt to store data without loss.
 	SaveToTIFF(string) bool
-	// SaveToTIFFBytes wraps gdk_texture_save_to_tiff_bytes
-	// The function returns the following values:
-	// 
-	// 	- ret *glib.Bytes 
-	//
-	// Store the given @texture in memory as a TIFF file.
-	// 
-	// Use [ctor@Gdk.Texture.new_from_bytes] to read it back.
-	// 
-	// This function is intended to store a representation of the
-	// texture's data that is as accurate as possible. This is
-	// particularly relevant when working with high dynamic range
-	// images and floating-point texture data.
-	// 
-	// If that is not your concern and you are interested in a
-	// smaller size and a more portable format, you might want to
-	// use [method@Gdk.Texture.save_to_png_bytes].
-	SaveToTIFFBytes() *glib.Bytes
 }
 
-func unsafeWrapTexture(base *gobject.Object) *TextureInstance {
+func unsafeWrapTexture(base *gobject.ObjectInstance) *TextureInstance {
 	return &TextureInstance{
-		Object: *base,
+		ObjectInstance: *base,
 		IconInstance: gio.IconInstance{
-			Object: *base,
+			ObjectInstance: *base,
 		},
 		LoadableIconInstance: gio.LoadableIconInstance{
-			Object: *base,
+			ObjectInstance: *base,
 		},
 	}
 }
 
 func marshalTextureInstance(p uintptr) (interface{}, error) {
-	return unsafeWrapTexture(gobject.ValueFromNative(unsafe.Pointer(p)).Object()), nil
+	return unsafeWrapTexture(gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Object()), nil
 }
 
 // UnsafeTextureFromGlibBorrow is used to convert raw GdkTexture pointers to go. This is used by the bindings internally.
@@ -21145,10 +20993,10 @@ func UnsafeTextureToGlibFull(c Texture) unsafe.Pointer {
 // and [method@Gio.Task.run_in_thread] to avoid blocking the main thread
 // while loading a big image.
 func NewTextureInstanceForPixbuf(pixbuf gdkpixbuf.Pixbuf) Texture {
-	var carg1 *C.GdkPixbuf  // in, none, class
-	var cret  *C.GdkTexture // return, full, class
+	var carg1 *C.GdkPixbuf  // in, none, converted
+	var cret  *C.GdkTexture // return, full, converted
 
-	carg1 = (*C.GdkPixbuf)(gdkpixbuf.UnsafePixbufToGlibNone(pixbuf))
+	carg1 = (*C.GdkPixbuf)(UnsafePixbufToGlibNone(pixbuf))
 
 	cret = C.gdk_texture_new_for_pixbuf(carg1)
 	runtime.KeepAlive(pixbuf)
@@ -21158,48 +21006,6 @@ func NewTextureInstanceForPixbuf(pixbuf gdkpixbuf.Pixbuf) Texture {
 	ret = UnsafeTextureFromGlibFull(unsafe.Pointer(cret))
 
 	return ret
-}
-
-// NewTextureInstanceFromBytes wraps gdk_texture_new_from_bytes
-// 
-// The function takes the following parameters:
-// 
-// 	- bytes *glib.Bytes: a `GBytes` containing the data to load 
-// 
-// The function returns the following values:
-// 
-// 	- ret Texture 
-// 	- _goerr error (nullable): an error 
-//
-// Creates a new texture by loading an image from memory,
-// 
-// The file format is detected automatically. The supported formats
-// are PNG, JPEG and TIFF, though more formats might be available.
-// 
-// If %NULL is returned, then @error will be set.
-// 
-// This function is threadsafe, so that you can e.g. use GTask
-// and [method@Gio.Task.run_in_thread] to avoid blocking the main thread
-// while loading a big image.
-func NewTextureInstanceFromBytes(bytes *glib.Bytes) (Texture, error) {
-	var carg1 *C.GBytes     // in, none, record
-	var cret  *C.GdkTexture // return, full, class
-	var _cerr *C.GError     // out, full, record, nullable
-
-	carg1 = (*C.GBytes)(glib.UnsafeBytesToGlibNone(bytes))
-
-	cret = C.gdk_texture_new_from_bytes(carg1, &_cerr)
-	runtime.KeepAlive(bytes)
-
-	var ret    Texture
-	var _goerr error
-
-	ret = UnsafeTextureFromGlibFull(unsafe.Pointer(cret))
-	if _cerr != nil {
-		_goerr = glib.UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
-	}
-
-	return ret, _goerr
 }
 
 // NewTextureInstanceFromFile wraps gdk_texture_new_from_file
@@ -21224,11 +21030,11 @@ func NewTextureInstanceFromBytes(bytes *glib.Bytes) (Texture, error) {
 // and [method@Gio.Task.run_in_thread] to avoid blocking the main thread
 // while loading a big image.
 func NewTextureInstanceFromFile(file gio.File) (Texture, error) {
-	var carg1 *C.GFile      // in, none, interface
-	var cret  *C.GdkTexture // return, full, class
-	var _cerr *C.GError     // out, full, record, nullable
+	var carg1 *C.GFile      // in, none, converted
+	var cret  *C.GdkTexture // return, full, converted
+	var _cerr *C.GError     // out, full, converted, nullable
 
-	carg1 = (*C.GFile)(gio.UnsafeFileToGlibNone(file))
+	carg1 = (*C.GFile)(UnsafeFileToGlibNone(file))
 
 	cret = C.gdk_texture_new_from_file(carg1, &_cerr)
 	runtime.KeepAlive(file)
@@ -21238,7 +21044,7 @@ func NewTextureInstanceFromFile(file gio.File) (Texture, error) {
 
 	ret = UnsafeTextureFromGlibFull(unsafe.Pointer(cret))
 	if _cerr != nil {
-		_goerr = glib.UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
+		_goerr = UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
 	}
 
 	return ret, _goerr
@@ -21266,11 +21072,12 @@ func NewTextureInstanceFromFile(file gio.File) (Texture, error) {
 // and [method@Gio.Task.run_in_thread] to avoid blocking the main thread
 // while loading a big image.
 func NewTextureInstanceFromFilename(path string) (Texture, error) {
-	var carg1 *C.gchar      // in, casted
-	var cret  *C.GdkTexture // return, full, class
-	var _cerr *C.GError     // out, full, record, nullable
+	var carg1 *C.gchar      // in, none, string
+	var cret  *C.GdkTexture // return, full, converted
+	var _cerr *C.GError     // out, full, converted, nullable
 
-	carg1 = *C.gchar(path)
+	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(path)))
+	defer C.free(unsafe.Pointer(carg1))
 
 	cret = C.gdk_texture_new_from_filename(carg1, &_cerr)
 	runtime.KeepAlive(path)
@@ -21280,7 +21087,7 @@ func NewTextureInstanceFromFilename(path string) (Texture, error) {
 
 	ret = UnsafeTextureFromGlibFull(unsafe.Pointer(cret))
 	if _cerr != nil {
-		_goerr = glib.UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
+		_goerr = UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
 	}
 
 	return ret, _goerr
@@ -21311,7 +21118,7 @@ func NewTextureInstanceFromFilename(path string) (Texture, error) {
 // while loading a big image.
 func NewTextureInstanceFromResource(resourcePath string) Texture {
 	var carg1 *C.gchar      // in, none, string
-	var cret  *C.GdkTexture // return, full, class
+	var cret  *C.GdkTexture // return, full, converted
 
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(resourcePath)))
 	defer C.free(unsafe.Pointer(carg1))
@@ -21329,19 +21136,19 @@ func NewTextureInstanceFromResource(resourcePath string) Texture {
 // GetColorState wraps gdk_texture_get_color_state
 // The function returns the following values:
 // 
-// 	- ret *ColorState 
+// 	- ret ColorState 
 //
 // Returns the color state associated with the texture.
-func (self *TextureInstance) GetColorState() *ColorState {
-	var carg0 *C.GdkTexture    // in, none, class
-	var cret  *C.GdkColorState // return, none, record
+func (self *TextureInstance) GetColorState() ColorState {
+	var carg0 *C.GdkTexture    // in, none, converted
+	var cret  *C.GdkColorState // return, none, converted
 
 	carg0 = (*C.GdkTexture)(UnsafeTextureToGlibNone(self))
 
 	cret = C.gdk_texture_get_color_state(carg0)
 	runtime.KeepAlive(self)
 
-	var ret *ColorState
+	var ret ColorState
 
 	ret = UnsafeColorStateFromGlibNone(unsafe.Pointer(cret))
 
@@ -21363,8 +21170,8 @@ func (self *TextureInstance) GetColorState() *ColorState {
 // of the texture and is useful to determine the best format for
 // downloading the texture.
 func (self *TextureInstance) GetFormat() MemoryFormat {
-	var carg0 *C.GdkTexture     // in, none, class
-	var cret  C.GdkMemoryFormat // return, casted
+	var carg0 *C.GdkTexture     // in, none, converted
+	var cret  C.GdkMemoryFormat // return, none, casted
 
 	carg0 = (*C.GdkTexture)(UnsafeTextureToGlibNone(self))
 
@@ -21385,8 +21192,8 @@ func (self *TextureInstance) GetFormat() MemoryFormat {
 //
 // Returns the height of the @texture, in pixels.
 func (texture *TextureInstance) GetHeight() int {
-	var carg0 *C.GdkTexture // in, none, class
-	var cret  C.int         // return, casted
+	var carg0 *C.GdkTexture // in, none, converted
+	var cret  C.int         // return, none, casted
 
 	carg0 = (*C.GdkTexture)(UnsafeTextureToGlibNone(texture))
 
@@ -21407,8 +21214,8 @@ func (texture *TextureInstance) GetHeight() int {
 //
 // Returns the width of @texture, in pixels.
 func (texture *TextureInstance) GetWidth() int {
-	var carg0 *C.GdkTexture // in, none, class
-	var cret  C.int         // return, casted
+	var carg0 *C.GdkTexture // in, none, converted
+	var cret  C.int         // return, none, casted
 
 	carg0 = (*C.GdkTexture)(UnsafeTextureToGlibNone(texture))
 
@@ -21440,12 +21247,13 @@ func (texture *TextureInstance) GetWidth() int {
 // use [method@Gdk.Texture.save_to_png_bytes] or look into the
 // gdk-pixbuf library.
 func (texture *TextureInstance) SaveToPNG(filename string) bool {
-	var carg0 *C.GdkTexture // in, none, class
-	var carg1 *C.gchar      // in, casted
+	var carg0 *C.GdkTexture // in, none, converted
+	var carg1 *C.gchar      // in, none, string
 	var cret  C.gboolean    // return
 
 	carg0 = (*C.GdkTexture)(UnsafeTextureToGlibNone(texture))
-	carg1 = *C.gchar(filename)
+	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(filename)))
+	defer C.free(unsafe.Pointer(carg1))
 
 	cret = C.gdk_texture_save_to_png(carg0, carg1)
 	runtime.KeepAlive(texture)
@@ -21456,41 +21264,6 @@ func (texture *TextureInstance) SaveToPNG(filename string) bool {
 	if cret != 0 {
 		ret = true
 	}
-
-	return ret
-}
-
-// SaveToPNGBytes wraps gdk_texture_save_to_png_bytes
-// The function returns the following values:
-// 
-// 	- ret *glib.Bytes 
-//
-// Store the given @texture in memory as a PNG file.
-// 
-// Use [ctor@Gdk.Texture.new_from_bytes] to read it back.
-// 
-// If you want to serialize a texture, this is a convenient and
-// portable way to do that.
-// 
-// If you need more control over the generated image, such as
-// attaching metadata, you should look into an image handling
-// library such as the gdk-pixbuf library.
-// 
-// If you are dealing with high dynamic range float data, you
-// might also want to consider [method@Gdk.Texture.save_to_tiff_bytes]
-// instead.
-func (texture *TextureInstance) SaveToPNGBytes() *glib.Bytes {
-	var carg0 *C.GdkTexture // in, none, class
-	var cret  *C.GBytes     // return, full, record
-
-	carg0 = (*C.GdkTexture)(UnsafeTextureToGlibNone(texture))
-
-	cret = C.gdk_texture_save_to_png_bytes(carg0)
-	runtime.KeepAlive(texture)
-
-	var ret *glib.Bytes
-
-	ret = glib.UnsafeBytesFromGlibFull(unsafe.Pointer(cret))
 
 	return ret
 }
@@ -21509,12 +21282,13 @@ func (texture *TextureInstance) SaveToPNGBytes() *glib.Bytes {
 // 
 // GTK will attempt to store data without loss.
 func (texture *TextureInstance) SaveToTIFF(filename string) bool {
-	var carg0 *C.GdkTexture // in, none, class
-	var carg1 *C.gchar      // in, casted
+	var carg0 *C.GdkTexture // in, none, converted
+	var carg1 *C.gchar      // in, none, string
 	var cret  C.gboolean    // return
 
 	carg0 = (*C.GdkTexture)(UnsafeTextureToGlibNone(texture))
-	carg1 = *C.gchar(filename)
+	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(filename)))
+	defer C.free(unsafe.Pointer(carg1))
 
 	cret = C.gdk_texture_save_to_tiff(carg0, carg1)
 	runtime.KeepAlive(texture)
@@ -21529,45 +21303,12 @@ func (texture *TextureInstance) SaveToTIFF(filename string) bool {
 	return ret
 }
 
-// SaveToTIFFBytes wraps gdk_texture_save_to_tiff_bytes
-// The function returns the following values:
-// 
-// 	- ret *glib.Bytes 
-//
-// Store the given @texture in memory as a TIFF file.
-// 
-// Use [ctor@Gdk.Texture.new_from_bytes] to read it back.
-// 
-// This function is intended to store a representation of the
-// texture's data that is as accurate as possible. This is
-// particularly relevant when working with high dynamic range
-// images and floating-point texture data.
-// 
-// If that is not your concern and you are interested in a
-// smaller size and a more portable format, you might want to
-// use [method@Gdk.Texture.save_to_png_bytes].
-func (texture *TextureInstance) SaveToTIFFBytes() *glib.Bytes {
-	var carg0 *C.GdkTexture // in, none, class
-	var cret  *C.GBytes     // return, full, record
-
-	carg0 = (*C.GdkTexture)(UnsafeTextureToGlibNone(texture))
-
-	cret = C.gdk_texture_save_to_tiff_bytes(carg0)
-	runtime.KeepAlive(texture)
-
-	var ret *glib.Bytes
-
-	ret = glib.UnsafeBytesFromGlibFull(unsafe.Pointer(cret))
-
-	return ret
-}
-
 // VulkanContextInstance is the instance type used by all types extending GdkVulkanContext. It is used internally by the bindings. Users should use the interface [VulkanContext] instead.
 type VulkanContextInstance struct {
 	_ [0]func() // equal guard
 	DrawContextInstance
 	// implemented interfaces:
-	gio.InitableInstance
+gio.Initable
 }
 
 var _ VulkanContext = (*VulkanContextInstance)(nil)
@@ -21593,34 +21334,34 @@ type VulkanContext interface {
 
 }
 
-func unsafeWrapVulkanContext(base *gobject.Object) *VulkanContextInstance {
+func unsafeWrapVulkanContext(base *ObjectInstance) *VulkanContextInstance {
 	return &VulkanContextInstance{
-		DrawContextInstance: DrawContextInstance{
-			Object: *base,
+		ObjectInstance: gobject.ObjectInstance{
+			ObjectInstance: *base,
 		},
 		InitableInstance: gio.InitableInstance{
-			Object: *base,
+			ObjectInstance: *base,
 		},
 	}
 }
 
 func marshalVulkanContextInstance(p uintptr) (interface{}, error) {
-	return unsafeWrapVulkanContext(gobject.ValueFromNative(unsafe.Pointer(p)).Object()), nil
+	return unsafeWrapVulkanContext(gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Object()), nil
 }
 
 // UnsafeVulkanContextFromGlibBorrow is used to convert raw GdkVulkanContext pointers to go. This is used by the bindings internally.
 func UnsafeVulkanContextFromGlibBorrow(c unsafe.Pointer) VulkanContext {
-	return gobject.TODOBorrow(c).(VulkanContext)
+	return TODOBorrow(c).(VulkanContext)
 }
 
 // UnsafeVulkanContextFromGlibNone is used to convert raw GdkVulkanContext pointers to go while taking a reference and attaching a finalizer. This is used by the bindings internally.
 func UnsafeVulkanContextFromGlibNone(c unsafe.Pointer) VulkanContext {
-	return gobject.Take(c).(VulkanContext)
+	return Take(c).(VulkanContext)
 }
 
 // UnsafeVulkanContextFromGlibFull is used to convert raw GdkVulkanContext pointers to go while attaching a finalizer. This is used by the bindings internally.
 func UnsafeVulkanContextFromGlibFull(c unsafe.Pointer) VulkanContext {
-	return gobject.AssumeOwnership(c).(VulkanContext)
+	return AssumeOwnership(c).(VulkanContext)
 }
 
 func (v *VulkanContextInstance) upcastToGdkVulkanContext() *VulkanContextInstance {
@@ -21629,12 +21370,12 @@ func (v *VulkanContextInstance) upcastToGdkVulkanContext() *VulkanContextInstanc
 
 // UnsafeVulkanContextToGlibNone is used to convert the instance to it's C value GdkVulkanContext. This is used by the bindings internally.
 func UnsafeVulkanContextToGlibNone(c VulkanContext) unsafe.Pointer {
-	return gobject.TODOToNone(c)
+	return TODOToNone(c)
 }
 
 // UnsafeVulkanContextToGlibFull is used to convert the instance to it's C value GdkVulkanContext, while removeing the finalizer. This is used by the bindings internally.
 func UnsafeVulkanContextToGlibFull(c VulkanContext) unsafe.Pointer {
-	return gobject.TODOToFull(c)
+	return TODOToFull(c)
 }
 
 // CairoContextInstance is the instance type used by all types extending GdkCairoContext. It is used internally by the bindings. Users should use the interface [CairoContext] instead.
@@ -21659,31 +21400,31 @@ type CairoContext interface {
 
 }
 
-func unsafeWrapCairoContext(base *gobject.Object) *CairoContextInstance {
+func unsafeWrapCairoContext(base *ObjectInstance) *CairoContextInstance {
 	return &CairoContextInstance{
-		DrawContextInstance: DrawContextInstance{
-			Object: *base,
+		ObjectInstance: gobject.ObjectInstance{
+			ObjectInstance: *base,
 		},
 	}
 }
 
 func marshalCairoContextInstance(p uintptr) (interface{}, error) {
-	return unsafeWrapCairoContext(gobject.ValueFromNative(unsafe.Pointer(p)).Object()), nil
+	return unsafeWrapCairoContext(gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Object()), nil
 }
 
 // UnsafeCairoContextFromGlibBorrow is used to convert raw GdkCairoContext pointers to go. This is used by the bindings internally.
 func UnsafeCairoContextFromGlibBorrow(c unsafe.Pointer) CairoContext {
-	return gobject.TODOBorrow(c).(CairoContext)
+	return TODOBorrow(c).(CairoContext)
 }
 
 // UnsafeCairoContextFromGlibNone is used to convert raw GdkCairoContext pointers to go while taking a reference and attaching a finalizer. This is used by the bindings internally.
 func UnsafeCairoContextFromGlibNone(c unsafe.Pointer) CairoContext {
-	return gobject.Take(c).(CairoContext)
+	return Take(c).(CairoContext)
 }
 
 // UnsafeCairoContextFromGlibFull is used to convert raw GdkCairoContext pointers to go while attaching a finalizer. This is used by the bindings internally.
 func UnsafeCairoContextFromGlibFull(c unsafe.Pointer) CairoContext {
-	return gobject.AssumeOwnership(c).(CairoContext)
+	return AssumeOwnership(c).(CairoContext)
 }
 
 func (c *CairoContextInstance) upcastToGdkCairoContext() *CairoContextInstance {
@@ -21692,12 +21433,12 @@ func (c *CairoContextInstance) upcastToGdkCairoContext() *CairoContextInstance {
 
 // UnsafeCairoContextToGlibNone is used to convert the instance to it's C value GdkCairoContext. This is used by the bindings internally.
 func UnsafeCairoContextToGlibNone(c CairoContext) unsafe.Pointer {
-	return gobject.TODOToNone(c)
+	return TODOToNone(c)
 }
 
 // UnsafeCairoContextToGlibFull is used to convert the instance to it's C value GdkCairoContext, while removeing the finalizer. This is used by the bindings internally.
 func UnsafeCairoContextToGlibFull(c CairoContext) unsafe.Pointer {
-	return gobject.TODOToFull(c)
+	return TODOToFull(c)
 }
 
 // DmabufTextureInstance is the instance type used by all types extending GdkDmabufTexture. It is used internally by the bindings. Users should use the interface [DmabufTexture] instead.
@@ -21705,7 +21446,7 @@ type DmabufTextureInstance struct {
 	_ [0]func() // equal guard
 	TextureInstance
 	// implemented interfaces:
-	PaintableInstance
+Paintable
 }
 
 var _ DmabufTexture = (*DmabufTextureInstance)(nil)
@@ -21725,40 +21466,40 @@ type DmabufTexture interface {
 
 }
 
-func unsafeWrapDmabufTexture(base *gobject.Object) *DmabufTextureInstance {
+func unsafeWrapDmabufTexture(base *ObjectInstance) *DmabufTextureInstance {
 	return &DmabufTextureInstance{
-		TextureInstance: TextureInstance{
-			Object: *base,
+		ObjectInstance: gobject.ObjectInstance{
+			ObjectInstance: *base,
 			IconInstance: gio.IconInstance{
-				Object: *base,
+				ObjectInstance: *base,
 			},
 			LoadableIconInstance: gio.LoadableIconInstance{
-				Object: *base,
+				ObjectInstance: *base,
 			},
 		},
 		PaintableInstance: PaintableInstance{
-			Object: *base,
+			ObjectInstance: *base,
 		},
 	}
 }
 
 func marshalDmabufTextureInstance(p uintptr) (interface{}, error) {
-	return unsafeWrapDmabufTexture(gobject.ValueFromNative(unsafe.Pointer(p)).Object()), nil
+	return unsafeWrapDmabufTexture(gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Object()), nil
 }
 
 // UnsafeDmabufTextureFromGlibBorrow is used to convert raw GdkDmabufTexture pointers to go. This is used by the bindings internally.
 func UnsafeDmabufTextureFromGlibBorrow(c unsafe.Pointer) DmabufTexture {
-	return gobject.TODOBorrow(c).(DmabufTexture)
+	return TODOBorrow(c).(DmabufTexture)
 }
 
 // UnsafeDmabufTextureFromGlibNone is used to convert raw GdkDmabufTexture pointers to go while taking a reference and attaching a finalizer. This is used by the bindings internally.
 func UnsafeDmabufTextureFromGlibNone(c unsafe.Pointer) DmabufTexture {
-	return gobject.Take(c).(DmabufTexture)
+	return Take(c).(DmabufTexture)
 }
 
 // UnsafeDmabufTextureFromGlibFull is used to convert raw GdkDmabufTexture pointers to go while attaching a finalizer. This is used by the bindings internally.
 func UnsafeDmabufTextureFromGlibFull(c unsafe.Pointer) DmabufTexture {
-	return gobject.AssumeOwnership(c).(DmabufTexture)
+	return AssumeOwnership(c).(DmabufTexture)
 }
 
 func (d *DmabufTextureInstance) upcastToGdkDmabufTexture() *DmabufTextureInstance {
@@ -21767,12 +21508,12 @@ func (d *DmabufTextureInstance) upcastToGdkDmabufTexture() *DmabufTextureInstanc
 
 // UnsafeDmabufTextureToGlibNone is used to convert the instance to it's C value GdkDmabufTexture. This is used by the bindings internally.
 func UnsafeDmabufTextureToGlibNone(c DmabufTexture) unsafe.Pointer {
-	return gobject.TODOToNone(c)
+	return TODOToNone(c)
 }
 
 // UnsafeDmabufTextureToGlibFull is used to convert the instance to it's C value GdkDmabufTexture, while removeing the finalizer. This is used by the bindings internally.
 func UnsafeDmabufTextureToGlibFull(c DmabufTexture) unsafe.Pointer {
-	return gobject.TODOToFull(c)
+	return TODOToFull(c)
 }
 
 // GLTextureInstance is the instance type used by all types extending GdkGLTexture. It is used internally by the bindings. Users should use the interface [GLTexture] instead.
@@ -21780,7 +21521,7 @@ type GLTextureInstance struct {
 	_ [0]func() // equal guard
 	TextureInstance
 	// implemented interfaces:
-	PaintableInstance
+Paintable
 }
 
 var _ GLTexture = (*GLTextureInstance)(nil)
@@ -21803,40 +21544,40 @@ type GLTexture interface {
 	Release()
 }
 
-func unsafeWrapGLTexture(base *gobject.Object) *GLTextureInstance {
+func unsafeWrapGLTexture(base *ObjectInstance) *GLTextureInstance {
 	return &GLTextureInstance{
-		TextureInstance: TextureInstance{
-			Object: *base,
+		ObjectInstance: gobject.ObjectInstance{
+			ObjectInstance: *base,
 			IconInstance: gio.IconInstance{
-				Object: *base,
+				ObjectInstance: *base,
 			},
 			LoadableIconInstance: gio.LoadableIconInstance{
-				Object: *base,
+				ObjectInstance: *base,
 			},
 		},
 		PaintableInstance: PaintableInstance{
-			Object: *base,
+			ObjectInstance: *base,
 		},
 	}
 }
 
 func marshalGLTextureInstance(p uintptr) (interface{}, error) {
-	return unsafeWrapGLTexture(gobject.ValueFromNative(unsafe.Pointer(p)).Object()), nil
+	return unsafeWrapGLTexture(gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Object()), nil
 }
 
 // UnsafeGLTextureFromGlibBorrow is used to convert raw GdkGLTexture pointers to go. This is used by the bindings internally.
 func UnsafeGLTextureFromGlibBorrow(c unsafe.Pointer) GLTexture {
-	return gobject.TODOBorrow(c).(GLTexture)
+	return TODOBorrow(c).(GLTexture)
 }
 
 // UnsafeGLTextureFromGlibNone is used to convert raw GdkGLTexture pointers to go while taking a reference and attaching a finalizer. This is used by the bindings internally.
 func UnsafeGLTextureFromGlibNone(c unsafe.Pointer) GLTexture {
-	return gobject.Take(c).(GLTexture)
+	return Take(c).(GLTexture)
 }
 
 // UnsafeGLTextureFromGlibFull is used to convert raw GdkGLTexture pointers to go while attaching a finalizer. This is used by the bindings internally.
 func UnsafeGLTextureFromGlibFull(c unsafe.Pointer) GLTexture {
-	return gobject.AssumeOwnership(c).(GLTexture)
+	return AssumeOwnership(c).(GLTexture)
 }
 
 func (g *GLTextureInstance) upcastToGdkGLTexture() *GLTextureInstance {
@@ -21845,12 +21586,12 @@ func (g *GLTextureInstance) upcastToGdkGLTexture() *GLTextureInstance {
 
 // UnsafeGLTextureToGlibNone is used to convert the instance to it's C value GdkGLTexture. This is used by the bindings internally.
 func UnsafeGLTextureToGlibNone(c GLTexture) unsafe.Pointer {
-	return gobject.TODOToNone(c)
+	return TODOToNone(c)
 }
 
 // UnsafeGLTextureToGlibFull is used to convert the instance to it's C value GdkGLTexture, while removeing the finalizer. This is used by the bindings internally.
 func UnsafeGLTextureToGlibFull(c GLTexture) unsafe.Pointer {
-	return gobject.TODOToFull(c)
+	return TODOToFull(c)
 }
 
 // Release wraps gdk_gl_texture_release
@@ -21861,7 +21602,7 @@ func UnsafeGLTextureToGlibFull(c GLTexture) unsafe.Pointer {
 // [method@Gdk.Texture.download] function, after this
 // function has been called.
 func (self *GLTextureInstance) Release() {
-	var carg0 *C.GdkGLTexture // in, none, class
+	var carg0 *C.GdkGLTexture // in, none, converted
 
 	carg0 = (*C.GdkGLTexture)(UnsafeGLTextureToGlibNone(self))
 
@@ -21874,7 +21615,7 @@ type MemoryTextureInstance struct {
 	_ [0]func() // equal guard
 	TextureInstance
 	// implemented interfaces:
-	PaintableInstance
+Paintable
 }
 
 var _ MemoryTexture = (*MemoryTextureInstance)(nil)
@@ -21889,40 +21630,40 @@ type MemoryTexture interface {
 
 }
 
-func unsafeWrapMemoryTexture(base *gobject.Object) *MemoryTextureInstance {
+func unsafeWrapMemoryTexture(base *ObjectInstance) *MemoryTextureInstance {
 	return &MemoryTextureInstance{
-		TextureInstance: TextureInstance{
-			Object: *base,
+		ObjectInstance: gobject.ObjectInstance{
+			ObjectInstance: *base,
 			IconInstance: gio.IconInstance{
-				Object: *base,
+				ObjectInstance: *base,
 			},
 			LoadableIconInstance: gio.LoadableIconInstance{
-				Object: *base,
+				ObjectInstance: *base,
 			},
 		},
 		PaintableInstance: PaintableInstance{
-			Object: *base,
+			ObjectInstance: *base,
 		},
 	}
 }
 
 func marshalMemoryTextureInstance(p uintptr) (interface{}, error) {
-	return unsafeWrapMemoryTexture(gobject.ValueFromNative(unsafe.Pointer(p)).Object()), nil
+	return unsafeWrapMemoryTexture(gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Object()), nil
 }
 
 // UnsafeMemoryTextureFromGlibBorrow is used to convert raw GdkMemoryTexture pointers to go. This is used by the bindings internally.
 func UnsafeMemoryTextureFromGlibBorrow(c unsafe.Pointer) MemoryTexture {
-	return gobject.TODOBorrow(c).(MemoryTexture)
+	return TODOBorrow(c).(MemoryTexture)
 }
 
 // UnsafeMemoryTextureFromGlibNone is used to convert raw GdkMemoryTexture pointers to go while taking a reference and attaching a finalizer. This is used by the bindings internally.
 func UnsafeMemoryTextureFromGlibNone(c unsafe.Pointer) MemoryTexture {
-	return gobject.Take(c).(MemoryTexture)
+	return Take(c).(MemoryTexture)
 }
 
 // UnsafeMemoryTextureFromGlibFull is used to convert raw GdkMemoryTexture pointers to go while attaching a finalizer. This is used by the bindings internally.
 func UnsafeMemoryTextureFromGlibFull(c unsafe.Pointer) MemoryTexture {
-	return gobject.AssumeOwnership(c).(MemoryTexture)
+	return AssumeOwnership(c).(MemoryTexture)
 }
 
 func (m *MemoryTextureInstance) upcastToGdkMemoryTexture() *MemoryTextureInstance {
@@ -21931,58 +21672,12 @@ func (m *MemoryTextureInstance) upcastToGdkMemoryTexture() *MemoryTextureInstanc
 
 // UnsafeMemoryTextureToGlibNone is used to convert the instance to it's C value GdkMemoryTexture. This is used by the bindings internally.
 func UnsafeMemoryTextureToGlibNone(c MemoryTexture) unsafe.Pointer {
-	return gobject.TODOToNone(c)
+	return TODOToNone(c)
 }
 
 // UnsafeMemoryTextureToGlibFull is used to convert the instance to it's C value GdkMemoryTexture, while removeing the finalizer. This is used by the bindings internally.
 func UnsafeMemoryTextureToGlibFull(c MemoryTexture) unsafe.Pointer {
-	return gobject.TODOToFull(c)
-}
-
-// NewMemoryTextureInstance wraps gdk_memory_texture_new
-// 
-// The function takes the following parameters:
-// 
-// 	- width int: the width of the texture 
-// 	- height int: the height of the texture 
-// 	- format MemoryFormat: the format of the data 
-// 	- bytes *glib.Bytes: the `GBytes` containing the pixel data 
-// 	- stride uint: rowstride for the data 
-// 
-// The function returns the following values:
-// 
-// 	- ret MemoryTexture 
-//
-// Creates a new texture for a blob of image data.
-// 
-// The `GBytes` must contain @stride × @height pixels
-// in the given format.
-func NewMemoryTextureInstance(width int, height int, format MemoryFormat, bytes *glib.Bytes, stride uint) MemoryTexture {
-	var carg1 C.int               // in, casted
-	var carg2 C.int               // in, casted
-	var carg3 C.GdkMemoryFormat   // in, casted
-	var carg4 *C.GBytes           // in, none, record
-	var carg5 C.gsize             // in, casted
-	var cret  *C.GdkMemoryTexture // return, full, class
-
-	carg1 = C.int(width)
-	carg2 = C.int(height)
-	carg3 = C.GdkMemoryFormat(format)
-	carg4 = (*C.GBytes)(glib.UnsafeBytesToGlibNone(bytes))
-	carg5 = C.gsize(stride)
-
-	cret = C.gdk_memory_texture_new(carg1, carg2, carg3, carg4, carg5)
-	runtime.KeepAlive(width)
-	runtime.KeepAlive(height)
-	runtime.KeepAlive(format)
-	runtime.KeepAlive(bytes)
-	runtime.KeepAlive(stride)
-
-	var ret MemoryTexture
-
-	ret = UnsafeMemoryTextureFromGlibFull(unsafe.Pointer(cret))
-
-	return ret
+	return TODOToFull(c)
 }
 
 // CicpParamsClass wraps GdkCicpParamsClass
@@ -22054,7 +21749,7 @@ type colorState struct {
 }
 
 func marshalColorState(p uintptr) (interface{}, error) {
-	b := gobject.ValueFromNative(unsafe.Pointer(p)).Boxed()
+	b := gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Boxed()
 	return UnsafeColorStateFromGlibBorrow(b), nil
 }
 
@@ -22126,8 +21821,8 @@ func UnsafeColorStateToGlibFull(c *ColorState) unsafe.Pointer {
 // represented with Cicp parameters. If that is the case,
 // this function returns `NULL`.
 func (self *ColorState) CreateCicpParams() CicpParams {
-	var carg0 *C.GdkColorState // in, none, record
-	var cret  *C.GdkCicpParams // return, full, class
+	var carg0 *C.GdkColorState // in, none, converted
+	var cret  *C.GdkCicpParams // return, full, converted
 
 	carg0 = (*C.GdkColorState)(UnsafeColorStateToGlibNone(self))
 
@@ -22145,7 +21840,7 @@ func (self *ColorState) CreateCicpParams() CicpParams {
 // 
 // The function takes the following parameters:
 // 
-// 	- other *ColorState: another `GdkColorStatee` 
+// 	- other ColorState: another `GdkColorStatee` 
 // 
 // The function returns the following values:
 // 
@@ -22156,9 +21851,9 @@ func (self *ColorState) CreateCicpParams() CicpParams {
 // Note that this function is not guaranteed to be perfect and two objects
 // describing the same color state may compare not equal. However, different
 // color states will never compare equal.
-func (self *ColorState) Equal(other *ColorState) bool {
-	var carg0 *C.GdkColorState // in, none, record
-	var carg1 *C.GdkColorState // in, none, record
+func (self *ColorState) Equal(other ColorState) bool {
+	var carg0 *C.GdkColorState // in, none, converted
+	var carg1 *C.GdkColorState // in, none, converted
 	var cret  C.gboolean       // return
 
 	carg0 = (*C.GdkColorState)(UnsafeColorStateToGlibNone(self))
@@ -22221,7 +21916,7 @@ type contentFormats struct {
 }
 
 func marshalContentFormats(p uintptr) (interface{}, error) {
-	b := gobject.ValueFromNative(unsafe.Pointer(p)).Boxed()
+	b := gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Boxed()
 	return UnsafeContentFormatsFromGlibBorrow(b), nil
 }
 
@@ -22286,31 +21981,31 @@ func UnsafeContentFormatsToGlibFull(c *ContentFormats) unsafe.Pointer {
 // 
 // The function takes the following parameters:
 // 
-// 	- mimeTypes []string (nullable): Pointer to an
+// 	- mimeTypes array (nullable): Pointer to an
 //   array of mime types 
 // 
 // The function returns the following values:
 // 
-// 	- ret *ContentFormats 
+// 	- ret ContentFormats 
 //
 // Creates a new `GdkContentFormats` from an array of mime types.
 // 
 // The mime types must be valid and different from each other or the
 // behavior of the return value is undefined. If you cannot guarantee
 // this, use [struct@Gdk.ContentFormatsBuilder] instead.
-func NewContentFormats(mimeTypes []string) *ContentFormats {
-	var carg1 **C.gchar            // in, transfer: none, scope: call, implicit: false, skip: false, optional: false, nullable: true, caller-allocates: false, has closure: false, has destroy: false, nullable
+func NewContentFormats(mimeTypes array) ContentFormats {
+	var carg1 array                // in, transfer: none, scope: call, implicit: false, skip: false, optional: false, nullable: true, caller-allocates: false, has closure: false, has destroy: false, nullable
 	var carg2 C.guint              // implicit
-	var cret  *C.GdkContentFormats // return, full, record
+	var cret  *C.GdkContentFormats // return, full, converted
 
 	if mimeTypes != nil {
-		panic("unimplemented conversion of *typesystem.Array (gchar**)")
+		panic("unimplemented conversion of array (array)")
 	}
 
 	cret = C.gdk_content_formats_new(carg1, carg2)
 	runtime.KeepAlive(mimeTypes)
 
-	var ret *ContentFormats
+	var ret ContentFormats
 
 	ret = UnsafeContentFormatsFromGlibFull(unsafe.Pointer(cret))
 
@@ -22325,19 +22020,19 @@ func NewContentFormats(mimeTypes []string) *ContentFormats {
 // 
 // The function returns the following values:
 // 
-// 	- ret *ContentFormats 
+// 	- ret ContentFormats 
 //
 // Creates a new `GdkContentFormats` for a given `GType`.
-func NewContentFormatsForGType(typ glib.Type) *ContentFormats {
-	var carg1 C.GType              // in, casted
-	var cret  *C.GdkContentFormats // return, full, record
+func NewContentFormatsForGType(typ glib.Type) ContentFormats {
+	var carg1 C.GType              // in, none, casted
+	var cret  *C.GdkContentFormats // return, full, converted
 
 	carg1 = C.GType(typ)
 
 	cret = C.gdk_content_formats_new_for_gtype(carg1)
 	runtime.KeepAlive(typ)
 
-	var ret *ContentFormats
+	var ret ContentFormats
 
 	ret = UnsafeContentFormatsFromGlibFull(unsafe.Pointer(cret))
 
@@ -22356,8 +22051,8 @@ func NewContentFormatsForGType(typ glib.Type) *ContentFormats {
 //
 // Checks if a given `GType` is part of the given @formats.
 func (formats *ContentFormats) ContainGType(typ glib.Type) bool {
-	var carg0 *C.GdkContentFormats // in, none, record
-	var carg1 C.GType              // in, casted
+	var carg0 *C.GdkContentFormats // in, none, converted
+	var carg1 C.GType              // in, none, casted
 	var cret  C.gboolean           // return
 
 	carg0 = (*C.GdkContentFormats)(UnsafeContentFormatsToGlibNone(formats))
@@ -22388,7 +22083,7 @@ func (formats *ContentFormats) ContainGType(typ glib.Type) bool {
 //
 // Checks if a given mime type is part of the given @formats.
 func (formats *ContentFormats) ContainMIMEType(mimeType string) bool {
-	var carg0 *C.GdkContentFormats // in, none, record
+	var carg0 *C.GdkContentFormats // in, none, converted
 	var carg1 *C.gchar             // in, none, string
 	var cret  C.gboolean           // return
 
@@ -22414,16 +22109,16 @@ func (formats *ContentFormats) ContainMIMEType(mimeType string) bool {
 // 
 // 	- nGtypes uint: optional pointer to take the
 //   number of `GType`s contained in the return value 
-// 	- ret []glib.Type 
+// 	- ret array 
 //
 // Gets the `GType`s included in @formats.
 // 
 // Note that @formats may not contain any `GType`s, in particular when
 // they are empty. In that case %NULL will be returned.
-func (formats *ContentFormats) GetGTypes() (uint, []glib.Type) {
-	var carg0 *C.GdkContentFormats // in, none, record
-	var carg1 C.gsize              // out, casted
-	var cret  *C.GType             // return, transfer: none, scope: , implicit: false, skip: false, optional: false, nullable: false, caller-allocates: false, has closure: false, has destroy: false
+func (formats *ContentFormats) GetGTypes() (uint, array) {
+	var carg0 *C.GdkContentFormats // in, none, converted
+	var carg1 C.gsize              // out, full, casted
+	var cret  array                // return, transfer: none, scope: , implicit: false, skip: false, optional: false, nullable: false, caller-allocates: false, has closure: false, has destroy: false
 
 	carg0 = (*C.GdkContentFormats)(UnsafeContentFormatsToGlibNone(formats))
 
@@ -22431,10 +22126,10 @@ func (formats *ContentFormats) GetGTypes() (uint, []glib.Type) {
 	runtime.KeepAlive(formats)
 
 	var nGtypes uint
-	var ret     []glib.Type
+	var ret     array
 
 	nGtypes = uint(carg1)
-	panic("unimplemented conversion of *typesystem.Array (GType*)")
+	panic("unimplemented conversion of array (array)")
 
 	return nGtypes, ret
 }
@@ -22444,16 +22139,16 @@ func (formats *ContentFormats) GetGTypes() (uint, []glib.Type) {
 // 
 // 	- nMimeTypes uint: optional pointer to take the
 //   number of mime types contained in the return value 
-// 	- ret []string 
+// 	- ret array 
 //
 // Gets the mime types included in @formats.
 // 
 // Note that @formats may not contain any mime types, in particular
 // when they are empty. In that case %NULL will be returned.
-func (formats *ContentFormats) GetMIMETypes() (uint, []string) {
-	var carg0 *C.GdkContentFormats // in, none, record
-	var carg1 C.gsize              // out, casted
-	var cret  **C.gchar            // return, transfer: none, scope: , implicit: false, skip: false, optional: false, nullable: false, caller-allocates: false, has closure: false, has destroy: false
+func (formats *ContentFormats) GetMIMETypes() (uint, array) {
+	var carg0 *C.GdkContentFormats // in, none, converted
+	var carg1 C.gsize              // out, full, casted
+	var cret  array                // return, transfer: none, scope: , implicit: false, skip: false, optional: false, nullable: false, caller-allocates: false, has closure: false, has destroy: false
 
 	carg0 = (*C.GdkContentFormats)(UnsafeContentFormatsToGlibNone(formats))
 
@@ -22461,10 +22156,10 @@ func (formats *ContentFormats) GetMIMETypes() (uint, []string) {
 	runtime.KeepAlive(formats)
 
 	var nMimeTypes uint
-	var ret        []string
+	var ret        array
 
 	nMimeTypes = uint(carg1)
-	panic("unimplemented conversion of *typesystem.Array (gchar**)")
+	panic("unimplemented conversion of array (array)")
 
 	return nMimeTypes, ret
 }
@@ -22473,16 +22168,16 @@ func (formats *ContentFormats) GetMIMETypes() (uint, []string) {
 // 
 // The function takes the following parameters:
 // 
-// 	- second *ContentFormats: the `GdkContentFormats` to intersect with 
+// 	- second ContentFormats: the `GdkContentFormats` to intersect with 
 // 
 // The function returns the following values:
 // 
 // 	- ret bool 
 //
 // Checks if @first and @second have any matching formats.
-func (first *ContentFormats) Match(second *ContentFormats) bool {
-	var carg0 *C.GdkContentFormats // in, none, record
-	var carg1 *C.GdkContentFormats // in, none, record
+func (first *ContentFormats) Match(second ContentFormats) bool {
+	var carg0 *C.GdkContentFormats // in, none, converted
+	var carg1 *C.GdkContentFormats // in, none, converted
 	var cret  C.gboolean           // return
 
 	carg0 = (*C.GdkContentFormats)(UnsafeContentFormatsToGlibNone(first))
@@ -22505,7 +22200,7 @@ func (first *ContentFormats) Match(second *ContentFormats) bool {
 // 
 // The function takes the following parameters:
 // 
-// 	- second *ContentFormats: the `GdkContentFormats` to intersect with 
+// 	- second ContentFormats: the `GdkContentFormats` to intersect with 
 // 
 // The function returns the following values:
 // 
@@ -22515,10 +22210,10 @@ func (first *ContentFormats) Match(second *ContentFormats) bool {
 // in @second.
 // 
 // If no matching `GType` is found, %G_TYPE_INVALID is returned.
-func (first *ContentFormats) MatchGType(second *ContentFormats) glib.Type {
-	var carg0 *C.GdkContentFormats // in, none, record
-	var carg1 *C.GdkContentFormats // in, none, record
-	var cret  C.GType              // return, casted
+func (first *ContentFormats) MatchGType(second ContentFormats) glib.Type {
+	var carg0 *C.GdkContentFormats // in, none, converted
+	var carg1 *C.GdkContentFormats // in, none, converted
+	var cret  C.GType              // return, none, casted
 
 	carg0 = (*C.GdkContentFormats)(UnsafeContentFormatsToGlibNone(first))
 	carg1 = (*C.GdkContentFormats)(UnsafeContentFormatsToGlibNone(second))
@@ -22538,7 +22233,7 @@ func (first *ContentFormats) MatchGType(second *ContentFormats) glib.Type {
 // 
 // The function takes the following parameters:
 // 
-// 	- second *ContentFormats: the `GdkContentFormats` to intersect with 
+// 	- second ContentFormats: the `GdkContentFormats` to intersect with 
 // 
 // The function returns the following values:
 // 
@@ -22548,9 +22243,9 @@ func (first *ContentFormats) MatchGType(second *ContentFormats) glib.Type {
 // in @second.
 // 
 // If no matching mime type is found, %NULL is returned.
-func (first *ContentFormats) MatchMIMEType(second *ContentFormats) string {
-	var carg0 *C.GdkContentFormats // in, none, record
-	var carg1 *C.GdkContentFormats // in, none, record
+func (first *ContentFormats) MatchMIMEType(second ContentFormats) string {
+	var carg0 *C.GdkContentFormats // in, none, converted
+	var carg1 *C.GdkContentFormats // in, none, converted
 	var cret  *C.gchar             // return, none, string
 
 	carg0 = (*C.GdkContentFormats)(UnsafeContentFormatsToGlibNone(first))
@@ -22567,28 +22262,6 @@ func (first *ContentFormats) MatchMIMEType(second *ContentFormats) string {
 	return ret
 }
 
-// Print wraps gdk_content_formats_print
-// 
-// The function takes the following parameters:
-// 
-// 	- str *glib.String: a `GString` to print into 
-//
-// Prints the given @formats into a string for human consumption.
-// 
-// The result of this function can later be parsed with
-// [func@Gdk.ContentFormats.parse].
-func (formats *ContentFormats) Print(str *glib.String) {
-	var carg0 *C.GdkContentFormats // in, none, record
-	var carg1 *C.GString           // in, none, record
-
-	carg0 = (*C.GdkContentFormats)(UnsafeContentFormatsToGlibNone(formats))
-	carg1 = (*C.GString)(glib.UnsafeStringToGlibNone(str))
-
-	C.gdk_content_formats_print(carg0, carg1)
-	runtime.KeepAlive(formats)
-	runtime.KeepAlive(str)
-}
-
 // ToString wraps gdk_content_formats_to_string
 // The function returns the following values:
 // 
@@ -22601,7 +22274,7 @@ func (formats *ContentFormats) Print(str *glib.String) {
 // This is a small wrapper around [method@Gdk.ContentFormats.print]
 // to help when debugging.
 func (formats *ContentFormats) ToString() string {
-	var carg0 *C.GdkContentFormats // in, none, record
+	var carg0 *C.GdkContentFormats // in, none, converted
 	var cret  *C.gchar             // return, full, string
 
 	carg0 = (*C.GdkContentFormats)(UnsafeContentFormatsToGlibNone(formats))
@@ -22621,18 +22294,18 @@ func (formats *ContentFormats) ToString() string {
 // 
 // The function takes the following parameters:
 // 
-// 	- second *ContentFormats: the `GdkContentFormats` to merge from 
+// 	- second ContentFormats: the `GdkContentFormats` to merge from 
 // 
 // The function returns the following values:
 // 
-// 	- ret *ContentFormats 
+// 	- ret ContentFormats 
 //
 // Append all missing types from @second to @first, in the order
 // they had in @second.
-func (first *ContentFormats) Union(second *ContentFormats) *ContentFormats {
-	var carg0 *C.GdkContentFormats // in, none, record
-	var carg1 *C.GdkContentFormats // in, none, record
-	var cret  *C.GdkContentFormats // return, full, record
+func (first *ContentFormats) Union(second ContentFormats) ContentFormats {
+	var carg0 *C.GdkContentFormats // in, none, converted
+	var carg1 *C.GdkContentFormats // in, none, converted
+	var cret  *C.GdkContentFormats // return, full, converted
 
 	carg0 = (*C.GdkContentFormats)(UnsafeContentFormatsToGlibNone(first))
 	carg1 = (*C.GdkContentFormats)(UnsafeContentFormatsToGlibNone(second))
@@ -22641,7 +22314,7 @@ func (first *ContentFormats) Union(second *ContentFormats) *ContentFormats {
 	runtime.KeepAlive(first)
 	runtime.KeepAlive(second)
 
-	var ret *ContentFormats
+	var ret ContentFormats
 
 	ret = UnsafeContentFormatsFromGlibFull(unsafe.Pointer(cret))
 
@@ -22651,20 +22324,20 @@ func (first *ContentFormats) Union(second *ContentFormats) *ContentFormats {
 // UnionDeserializeGTypes wraps gdk_content_formats_union_deserialize_gtypes
 // The function returns the following values:
 // 
-// 	- ret *ContentFormats 
+// 	- ret ContentFormats 
 //
 // Add GTypes for mime types in @formats for which deserializers are
 // registered.
-func (formats *ContentFormats) UnionDeserializeGTypes() *ContentFormats {
-	var carg0 *C.GdkContentFormats // in, none, record
-	var cret  *C.GdkContentFormats // return, full, record
+func (formats *ContentFormats) UnionDeserializeGTypes() ContentFormats {
+	var carg0 *C.GdkContentFormats // in, none, converted
+	var cret  *C.GdkContentFormats // return, full, converted
 
 	carg0 = (*C.GdkContentFormats)(UnsafeContentFormatsToGlibNone(formats))
 
 	cret = C.gdk_content_formats_union_deserialize_gtypes(carg0)
 	runtime.KeepAlive(formats)
 
-	var ret *ContentFormats
+	var ret ContentFormats
 
 	ret = UnsafeContentFormatsFromGlibFull(unsafe.Pointer(cret))
 
@@ -22674,20 +22347,20 @@ func (formats *ContentFormats) UnionDeserializeGTypes() *ContentFormats {
 // UnionDeserializeMIMETypes wraps gdk_content_formats_union_deserialize_mime_types
 // The function returns the following values:
 // 
-// 	- ret *ContentFormats 
+// 	- ret ContentFormats 
 //
 // Add mime types for GTypes in @formats for which deserializers are
 // registered.
-func (formats *ContentFormats) UnionDeserializeMIMETypes() *ContentFormats {
-	var carg0 *C.GdkContentFormats // in, none, record
-	var cret  *C.GdkContentFormats // return, full, record
+func (formats *ContentFormats) UnionDeserializeMIMETypes() ContentFormats {
+	var carg0 *C.GdkContentFormats // in, none, converted
+	var cret  *C.GdkContentFormats // return, full, converted
 
 	carg0 = (*C.GdkContentFormats)(UnsafeContentFormatsToGlibNone(formats))
 
 	cret = C.gdk_content_formats_union_deserialize_mime_types(carg0)
 	runtime.KeepAlive(formats)
 
-	var ret *ContentFormats
+	var ret ContentFormats
 
 	ret = UnsafeContentFormatsFromGlibFull(unsafe.Pointer(cret))
 
@@ -22697,20 +22370,20 @@ func (formats *ContentFormats) UnionDeserializeMIMETypes() *ContentFormats {
 // UnionSerializeGTypes wraps gdk_content_formats_union_serialize_gtypes
 // The function returns the following values:
 // 
-// 	- ret *ContentFormats 
+// 	- ret ContentFormats 
 //
 // Add GTypes for the mime types in @formats for which serializers are
 // registered.
-func (formats *ContentFormats) UnionSerializeGTypes() *ContentFormats {
-	var carg0 *C.GdkContentFormats // in, none, record
-	var cret  *C.GdkContentFormats // return, full, record
+func (formats *ContentFormats) UnionSerializeGTypes() ContentFormats {
+	var carg0 *C.GdkContentFormats // in, none, converted
+	var cret  *C.GdkContentFormats // return, full, converted
 
 	carg0 = (*C.GdkContentFormats)(UnsafeContentFormatsToGlibNone(formats))
 
 	cret = C.gdk_content_formats_union_serialize_gtypes(carg0)
 	runtime.KeepAlive(formats)
 
-	var ret *ContentFormats
+	var ret ContentFormats
 
 	ret = UnsafeContentFormatsFromGlibFull(unsafe.Pointer(cret))
 
@@ -22720,20 +22393,20 @@ func (formats *ContentFormats) UnionSerializeGTypes() *ContentFormats {
 // UnionSerializeMIMETypes wraps gdk_content_formats_union_serialize_mime_types
 // The function returns the following values:
 // 
-// 	- ret *ContentFormats 
+// 	- ret ContentFormats 
 //
 // Add mime types for GTypes in @formats for which serializers are
 // registered.
-func (formats *ContentFormats) UnionSerializeMIMETypes() *ContentFormats {
-	var carg0 *C.GdkContentFormats // in, none, record
-	var cret  *C.GdkContentFormats // return, full, record
+func (formats *ContentFormats) UnionSerializeMIMETypes() ContentFormats {
+	var carg0 *C.GdkContentFormats // in, none, converted
+	var cret  *C.GdkContentFormats // return, full, converted
 
 	carg0 = (*C.GdkContentFormats)(UnsafeContentFormatsToGlibNone(formats))
 
 	cret = C.gdk_content_formats_union_serialize_mime_types(carg0)
 	runtime.KeepAlive(formats)
 
-	var ret *ContentFormats
+	var ret ContentFormats
 
 	ret = UnsafeContentFormatsFromGlibFull(unsafe.Pointer(cret))
 
@@ -22754,7 +22427,7 @@ type contentFormatsBuilder struct {
 }
 
 func marshalContentFormatsBuilder(p uintptr) (interface{}, error) {
-	b := gobject.ValueFromNative(unsafe.Pointer(p)).Boxed()
+	b := gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Boxed()
 	return UnsafeContentFormatsBuilderFromGlibBorrow(b), nil
 }
 
@@ -22818,18 +22491,18 @@ func UnsafeContentFormatsBuilderToGlibFull(c *ContentFormatsBuilder) unsafe.Poin
 // NewContentFormatsBuilder wraps gdk_content_formats_builder_new
 // The function returns the following values:
 // 
-// 	- ret *ContentFormatsBuilder 
+// 	- ret ContentFormatsBuilder 
 //
 // Create a new `GdkContentFormatsBuilder` object.
 // 
 // The resulting builder would create an empty `GdkContentFormats`.
 // Use addition functions to add types to it.
-func NewContentFormatsBuilder() *ContentFormatsBuilder {
-	var cret *C.GdkContentFormatsBuilder // return, full, record
+func NewContentFormatsBuilder() ContentFormatsBuilder {
+	var cret *C.GdkContentFormatsBuilder // return, full, converted
 
 	cret = C.gdk_content_formats_builder_new()
 
-	var ret *ContentFormatsBuilder
+	var ret ContentFormatsBuilder
 
 	ret = UnsafeContentFormatsBuilderFromGlibFull(unsafe.Pointer(cret))
 
@@ -22840,13 +22513,13 @@ func NewContentFormatsBuilder() *ContentFormatsBuilder {
 // 
 // The function takes the following parameters:
 // 
-// 	- formats *ContentFormats: the formats to add 
+// 	- formats ContentFormats: the formats to add 
 //
 // Appends all formats from @formats to @builder, skipping those that
 // already exist.
-func (builder *ContentFormatsBuilder) AddFormats(formats *ContentFormats) {
-	var carg0 *C.GdkContentFormatsBuilder // in, none, record
-	var carg1 *C.GdkContentFormats        // in, none, record
+func (builder *ContentFormatsBuilder) AddFormats(formats ContentFormats) {
+	var carg0 *C.GdkContentFormatsBuilder // in, none, converted
+	var carg1 *C.GdkContentFormats        // in, none, converted
 
 	carg0 = (*C.GdkContentFormatsBuilder)(UnsafeContentFormatsBuilderToGlibNone(builder))
 	carg1 = (*C.GdkContentFormats)(UnsafeContentFormatsToGlibNone(formats))
@@ -22864,8 +22537,8 @@ func (builder *ContentFormatsBuilder) AddFormats(formats *ContentFormats) {
 //
 // Appends @type to @builder if it has not already been added.
 func (builder *ContentFormatsBuilder) AddGType(typ glib.Type) {
-	var carg0 *C.GdkContentFormatsBuilder // in, none, record
-	var carg1 C.GType                     // in, casted
+	var carg0 *C.GdkContentFormatsBuilder // in, none, converted
+	var carg1 C.GType                     // in, none, casted
 
 	carg0 = (*C.GdkContentFormatsBuilder)(UnsafeContentFormatsBuilderToGlibNone(builder))
 	carg1 = C.GType(typ)
@@ -22883,7 +22556,7 @@ func (builder *ContentFormatsBuilder) AddGType(typ glib.Type) {
 //
 // Appends @mime_type to @builder if it has not already been added.
 func (builder *ContentFormatsBuilder) AddMIMEType(mimeType string) {
-	var carg0 *C.GdkContentFormatsBuilder // in, none, record
+	var carg0 *C.GdkContentFormatsBuilder // in, none, converted
 	var carg1 *C.gchar                    // in, none, string
 
 	carg0 = (*C.GdkContentFormatsBuilder)(UnsafeContentFormatsBuilderToGlibNone(builder))
@@ -22898,7 +22571,7 @@ func (builder *ContentFormatsBuilder) AddMIMEType(mimeType string) {
 // ToFormats wraps gdk_content_formats_builder_to_formats
 // The function returns the following values:
 // 
-// 	- ret *ContentFormats 
+// 	- ret ContentFormats 
 //
 // Creates a new `GdkContentFormats` from the given @builder.
 // 
@@ -22907,16 +22580,16 @@ func (builder *ContentFormatsBuilder) AddMIMEType(mimeType string) {
 // 
 // This function is intended primarily for bindings. C code should use
 // [method@Gdk.ContentFormatsBuilder.free_to_formats].
-func (builder *ContentFormatsBuilder) ToFormats() *ContentFormats {
-	var carg0 *C.GdkContentFormatsBuilder // in, none, record
-	var cret  *C.GdkContentFormats        // return, full, record
+func (builder *ContentFormatsBuilder) ToFormats() ContentFormats {
+	var carg0 *C.GdkContentFormatsBuilder // in, none, converted
+	var cret  *C.GdkContentFormats        // return, full, converted
 
 	carg0 = (*C.GdkContentFormatsBuilder)(UnsafeContentFormatsBuilderToGlibNone(builder))
 
 	cret = C.gdk_content_formats_builder_to_formats(carg0)
 	runtime.KeepAlive(builder)
 
-	var ret *ContentFormats
+	var ret ContentFormats
 
 	ret = UnsafeContentFormatsFromGlibFull(unsafe.Pointer(cret))
 
@@ -23051,7 +22724,7 @@ type dmabufFormats struct {
 }
 
 func marshalDmabufFormats(p uintptr) (interface{}, error) {
-	b := gobject.ValueFromNative(unsafe.Pointer(p)).Boxed()
+	b := gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Boxed()
 	return UnsafeDmabufFormatsFromGlibBorrow(b), nil
 }
 
@@ -23125,9 +22798,9 @@ func UnsafeDmabufFormatsToGlibFull(d *DmabufFormats) unsafe.Pointer {
 //
 // Returns whether a given format is contained in @formats.
 func (formats *DmabufFormats) Contains(fourcc uint32, modifier uint64) bool {
-	var carg0 *C.GdkDmabufFormats // in, none, record
-	var carg1 C.guint32           // in, casted
-	var carg2 C.guint64           // in, casted
+	var carg0 *C.GdkDmabufFormats // in, none, converted
+	var carg1 C.guint32           // in, none, casted
+	var carg2 C.guint64           // in, none, casted
 	var cret  C.gboolean          // return
 
 	carg0 = (*C.GdkDmabufFormats)(UnsafeDmabufFormatsToGlibNone(formats))
@@ -23152,7 +22825,7 @@ func (formats *DmabufFormats) Contains(fourcc uint32, modifier uint64) bool {
 // 
 // The function takes the following parameters:
 // 
-// 	- formats2 *DmabufFormats (nullable): another `GdkDmabufFormats` 
+// 	- formats2 DmabufFormats (nullable): another `GdkDmabufFormats` 
 // 
 // The function returns the following values:
 // 
@@ -23160,9 +22833,9 @@ func (formats *DmabufFormats) Contains(fourcc uint32, modifier uint64) bool {
 //
 // Returns whether @formats1 and @formats2 contain the
 // same dmabuf formats, in the same order.
-func (formats1 *DmabufFormats) Equal(formats2 *DmabufFormats) bool {
-	var carg0 *C.GdkDmabufFormats // in, none, record
-	var carg1 *C.GdkDmabufFormats // in, none, record, nullable
+func (formats1 *DmabufFormats) Equal(formats2 DmabufFormats) bool {
+	var carg0 *C.GdkDmabufFormats // in, none, converted
+	var carg1 *C.GdkDmabufFormats // in, none, converted, nullable
 	var cret  C.gboolean          // return
 
 	carg0 = (*C.GdkDmabufFormats)(UnsafeDmabufFormatsToGlibNone(formats1))
@@ -23197,10 +22870,10 @@ func (formats1 *DmabufFormats) Equal(formats2 *DmabufFormats) bool {
 // Gets the fourcc code and modifier for a format
 // that is contained in @formats.
 func (formats *DmabufFormats) GetFormat(idx uint) (uint32, uint64) {
-	var carg0 *C.GdkDmabufFormats // in, none, record
-	var carg1 C.gsize             // in, casted
-	var carg2 C.guint32           // out, casted
-	var carg3 C.guint64           // out, casted
+	var carg0 *C.GdkDmabufFormats // in, none, converted
+	var carg1 C.gsize             // in, none, casted
+	var carg2 C.guint32           // out, full, casted
+	var carg3 C.guint64           // out, full, casted
 
 	carg0 = (*C.GdkDmabufFormats)(UnsafeDmabufFormatsToGlibNone(formats))
 	carg1 = C.gsize(idx)
@@ -23230,8 +22903,8 @@ func (formats *DmabufFormats) GetFormat(idx uint) (uint32, uint64) {
 // platforms, [method@Gdk.DmabufFormats.get_n_formats] will
 // always return zero.
 func (formats *DmabufFormats) GetNFormats() uint {
-	var carg0 *C.GdkDmabufFormats // in, none, record
-	var cret  C.gsize             // return, casted
+	var carg0 *C.GdkDmabufFormats // in, none, converted
+	var cret  C.gsize             // return, none, casted
 
 	carg0 = (*C.GdkDmabufFormats)(UnsafeDmabufFormatsToGlibNone(formats))
 
@@ -23402,7 +23075,7 @@ type dragSurfaceSize struct {
 }
 
 func marshalDragSurfaceSize(p uintptr) (interface{}, error) {
-	b := gobject.ValueFromNative(unsafe.Pointer(p)).Boxed()
+	b := gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Boxed()
 	return UnsafeDragSurfaceSizeFromGlibBorrow(b), nil
 }
 
@@ -23452,9 +23125,9 @@ func UnsafeDragSurfaceSizeToGlibFull(d *DragSurfaceSize) unsafe.Pointer {
 //
 // Sets the size the drag surface prefers to be resized to.
 func (size *DragSurfaceSize) SetSize(width int, height int) {
-	var carg0 *C.GdkDragSurfaceSize // in, none, record
-	var carg1 C.int                 // in, casted
-	var carg2 C.int                 // in, casted
+	var carg0 *C.GdkDragSurfaceSize // in, none, converted
+	var carg1 C.int                 // in, none, casted
+	var carg2 C.int                 // in, none, casted
 
 	carg0 = (*C.GdkDragSurfaceSize)(UnsafeDragSurfaceSizeToGlibNone(size))
 	carg1 = C.int(width)
@@ -23480,7 +23153,7 @@ type eventSequence struct {
 }
 
 func marshalEventSequence(p uintptr) (interface{}, error) {
-	b := gobject.ValueFromNative(unsafe.Pointer(p)).Boxed()
+	b := gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Boxed()
 	return UnsafeEventSequenceFromGlibBorrow(b), nil
 }
 
@@ -23534,7 +23207,7 @@ type fileList struct {
 }
 
 func marshalFileList(p uintptr) (interface{}, error) {
-	b := gobject.ValueFromNative(unsafe.Pointer(p)).Boxed()
+	b := gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Boxed()
 	return UnsafeFileListFromGlibBorrow(b), nil
 }
 
@@ -23579,82 +23252,28 @@ func UnsafeFileListToGlibFull(f *FileList) unsafe.Pointer {
 // 
 // The function takes the following parameters:
 // 
-// 	- files []gio.FileInstance: the files to add to the list 
+// 	- files array: the files to add to the list 
 // 
 // The function returns the following values:
 // 
-// 	- ret *FileList 
+// 	- ret FileList 
 //
 // Creates a new `GdkFileList` for the given array of files.
 // 
 // This function is meant to be used by language bindings.
-func NewFileListFromArray(files []gio.FileInstance) *FileList {
-	var carg1 *C.GFile       // in, transfer: none, scope: call, implicit: false, skip: false, optional: false, nullable: false, caller-allocates: false, has closure: false, has destroy: false
+func NewFileListFromArray(files array) FileList {
+	var carg1 array          // in, transfer: none, scope: call, implicit: false, skip: false, optional: false, nullable: false, caller-allocates: false, has closure: false, has destroy: false
 	var carg2 C.gsize        // implicit
-	var cret  *C.GdkFileList // return, full, record
+	var cret  *C.GdkFileList // return, full, converted
 
-	panic("unimplemented conversion of *typesystem.Array (GFile*)")
+	panic("unimplemented conversion of array (array)")
 
 	cret = C.gdk_file_list_new_from_array(carg1, carg2)
 	runtime.KeepAlive(files)
 
-	var ret *FileList
+	var ret FileList
 
 	ret = UnsafeFileListFromGlibFull(unsafe.Pointer(cret))
-
-	return ret
-}
-
-// NewFileListFromList wraps gdk_file_list_new_from_list
-// 
-// The function takes the following parameters:
-// 
-// 	- files *glib.SList: a list of files 
-// 
-// The function returns the following values:
-// 
-// 	- ret *FileList 
-//
-// Creates a new files list container from a singly linked list of
-// `GFile` instances.
-// 
-// This function is meant to be used by language bindings
-func NewFileListFromList(files *glib.SList) *FileList {
-	var carg1 *C.GSList      // in, container inner types: (GFile), transfer: none, scope: call, implicit: false, skip: false, optional: false, nullable: false, caller-allocates: false, has closure: false, has destroy: false
-	var cret  *C.GdkFileList // return, full, record
-
-	panic("unimplemented conversion of container *typesystem.PointerType (GSList*)")
-
-	cret = C.gdk_file_list_new_from_list(carg1)
-	runtime.KeepAlive(files)
-
-	var ret *FileList
-
-	ret = UnsafeFileListFromGlibFull(unsafe.Pointer(cret))
-
-	return ret
-}
-
-// GetFiles wraps gdk_file_list_get_files
-// The function returns the following values:
-// 
-// 	- ret *glib.SList 
-//
-// Retrieves the list of files inside a `GdkFileList`.
-// 
-// This function is meant for language bindings.
-func (fileList *FileList) GetFiles() *glib.SList {
-	var carg0 *C.GdkFileList // in, none, record
-	var cret  *C.GSList      // return, container inner types: (GFile), transfer: container, scope: , implicit: false, skip: false, optional: false, nullable: false, caller-allocates: false, has closure: false, has destroy: false
-
-	carg0 = (*C.GdkFileList)(UnsafeFileListToGlibNone(fileList))
-
-	cret = C.gdk_file_list_get_files(carg0)
-	runtime.KeepAlive(fileList)
-
-	var ret *glib.SList
-
-	panic("unimplemented conversion of container *typesystem.PointerType (GSList*)")
 
 	return ret
 }
@@ -23726,7 +23345,7 @@ type frameTimings struct {
 }
 
 func marshalFrameTimings(p uintptr) (interface{}, error) {
-	b := gobject.ValueFromNative(unsafe.Pointer(p)).Boxed()
+	b := gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Boxed()
 	return UnsafeFrameTimingsFromGlibBorrow(b), nil
 }
 
@@ -23806,7 +23425,7 @@ func UnsafeFrameTimingsToGlibFull(f *FrameTimings) unsafe.Pointer {
 // certain that no further values will become available and be
 // stored in the `GdkFrameTimings`.
 func (timings *FrameTimings) GetComplete() bool {
-	var carg0 *C.GdkFrameTimings // in, none, record
+	var carg0 *C.GdkFrameTimings // in, none, converted
 	var cret  C.gboolean         // return
 
 	carg0 = (*C.GdkFrameTimings)(UnsafeFrameTimingsToGlibNone(timings))
@@ -23831,8 +23450,8 @@ func (timings *FrameTimings) GetComplete() bool {
 // Gets the frame counter value of the `GdkFrameClock` when
 // this frame was drawn.
 func (timings *FrameTimings) GetFrameCounter() int64 {
-	var carg0 *C.GdkFrameTimings // in, none, record
-	var cret  C.gint64           // return, casted
+	var carg0 *C.GdkFrameTimings // in, none, converted
+	var cret  C.gint64           // return, none, casted
 
 	carg0 = (*C.GdkFrameTimings)(UnsafeFrameTimingsToGlibNone(timings))
 
@@ -23856,8 +23475,8 @@ func (timings *FrameTimings) GetFrameCounter() int64 {
 // This is the time value that is typically used to time
 // animations for the frame. See [method@Gdk.FrameClock.get_frame_time].
 func (timings *FrameTimings) GetFrameTime() int64 {
-	var carg0 *C.GdkFrameTimings // in, none, record
-	var cret  C.gint64           // return, casted
+	var carg0 *C.GdkFrameTimings // in, none, converted
+	var cret  C.gint64           // return, none, casted
 
 	carg0 = (*C.GdkFrameTimings)(UnsafeFrameTimingsToGlibNone(timings))
 
@@ -23889,8 +23508,8 @@ func (timings *FrameTimings) GetFrameTime() int64 {
 // over latency. For example, a movie player may want this information
 // for Audio/Video synchronization.
 func (timings *FrameTimings) GetPredictedPresentationTime() int64 {
-	var carg0 *C.GdkFrameTimings // in, none, record
-	var cret  C.gint64           // return, casted
+	var carg0 *C.GdkFrameTimings // in, none, converted
+	var cret  C.gint64           // return, none, casted
 
 	carg0 = (*C.GdkFrameTimings)(UnsafeFrameTimingsToGlibNone(timings))
 
@@ -23913,8 +23532,8 @@ func (timings *FrameTimings) GetPredictedPresentationTime() int64 {
 // 
 // This is the time at which the frame became visible to the user.
 func (timings *FrameTimings) GetPresentationTime() int64 {
-	var carg0 *C.GdkFrameTimings // in, none, record
-	var cret  C.gint64           // return, casted
+	var carg0 *C.GdkFrameTimings // in, none, converted
+	var cret  C.gint64           // return, none, casted
 
 	carg0 = (*C.GdkFrameTimings)(UnsafeFrameTimingsToGlibNone(timings))
 
@@ -23939,8 +23558,8 @@ func (timings *FrameTimings) GetPresentationTime() int64 {
 // Frame presentation usually happens during the “vertical
 // blanking interval”.
 func (timings *FrameTimings) GetRefreshInterval() int64 {
-	var carg0 *C.GdkFrameTimings // in, none, record
-	var cret  C.gint64           // return, casted
+	var carg0 *C.GdkFrameTimings // in, none, converted
+	var cret  C.gint64           // return, none, casted
 
 	carg0 = (*C.GdkFrameTimings)(UnsafeFrameTimingsToGlibNone(timings))
 
@@ -24459,7 +24078,7 @@ type popupLayout struct {
 }
 
 func marshalPopupLayout(p uintptr) (interface{}, error) {
-	b := gobject.ValueFromNative(unsafe.Pointer(p)).Boxed()
+	b := gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Boxed()
 	return UnsafePopupLayoutFromGlibBorrow(b), nil
 }
 
@@ -24524,13 +24143,13 @@ func UnsafePopupLayoutToGlibFull(p *PopupLayout) unsafe.Pointer {
 // 
 // The function takes the following parameters:
 // 
-// 	- anchorRect *Rectangle: the anchor `GdkRectangle` to align @surface with 
+// 	- anchorRect Rectangle: the anchor `GdkRectangle` to align @surface with 
 // 	- rectAnchor Gravity: the point on @anchor_rect to align with @surface's anchor point 
 // 	- surfaceAnchor Gravity: the point on @surface to align with @rect's anchor point 
 // 
 // The function returns the following values:
 // 
-// 	- ret *PopupLayout 
+// 	- ret PopupLayout 
 //
 // Create a popup layout description.
 // 
@@ -24544,11 +24163,11 @@ func UnsafePopupLayoutToGlibFull(p *PopupLayout) unsafe.Pointer {
 // The position of @anchor_rect's anchor point can optionally be offset using
 // [method@Gdk.PopupLayout.set_offset], which is equivalent to offsetting the
 // position of surface.
-func NewPopupLayout(anchorRect *Rectangle, rectAnchor Gravity, surfaceAnchor Gravity) *PopupLayout {
-	var carg1 *C.GdkRectangle   // in, none, record
-	var carg2 C.GdkGravity      // in, casted
-	var carg3 C.GdkGravity      // in, casted
-	var cret  *C.GdkPopupLayout // return, full, record
+func NewPopupLayout(anchorRect Rectangle, rectAnchor Gravity, surfaceAnchor Gravity) PopupLayout {
+	var carg1 *C.GdkRectangle   // in, none, converted
+	var carg2 C.GdkGravity      // in, none, casted
+	var carg3 C.GdkGravity      // in, none, casted
+	var cret  *C.GdkPopupLayout // return, full, converted
 
 	carg1 = (*C.GdkRectangle)(UnsafeRectangleToGlibNone(anchorRect))
 	carg2 = C.GdkGravity(rectAnchor)
@@ -24559,7 +24178,7 @@ func NewPopupLayout(anchorRect *Rectangle, rectAnchor Gravity, surfaceAnchor Gra
 	runtime.KeepAlive(rectAnchor)
 	runtime.KeepAlive(surfaceAnchor)
 
-	var ret *PopupLayout
+	var ret PopupLayout
 
 	ret = UnsafePopupLayoutFromGlibFull(unsafe.Pointer(cret))
 
@@ -24570,16 +24189,16 @@ func NewPopupLayout(anchorRect *Rectangle, rectAnchor Gravity, surfaceAnchor Gra
 // 
 // The function takes the following parameters:
 // 
-// 	- other *PopupLayout: another `GdkPopupLayout` 
+// 	- other PopupLayout: another `GdkPopupLayout` 
 // 
 // The function returns the following values:
 // 
 // 	- ret bool 
 //
 // Check whether @layout and @other has identical layout properties.
-func (layout *PopupLayout) Equal(other *PopupLayout) bool {
-	var carg0 *C.GdkPopupLayout // in, none, record
-	var carg1 *C.GdkPopupLayout // in, none, record
+func (layout *PopupLayout) Equal(other PopupLayout) bool {
+	var carg0 *C.GdkPopupLayout // in, none, converted
+	var carg1 *C.GdkPopupLayout // in, none, converted
 	var cret  C.gboolean        // return
 
 	carg0 = (*C.GdkPopupLayout)(UnsafePopupLayoutToGlibNone(layout))
@@ -24605,8 +24224,8 @@ func (layout *PopupLayout) Equal(other *PopupLayout) bool {
 //
 // Get the `GdkAnchorHints`.
 func (layout *PopupLayout) GetAnchorHints() AnchorHints {
-	var carg0 *C.GdkPopupLayout // in, none, record
-	var cret  C.GdkAnchorHints  // return, casted
+	var carg0 *C.GdkPopupLayout // in, none, converted
+	var cret  C.GdkAnchorHints  // return, none, casted
 
 	carg0 = (*C.GdkPopupLayout)(UnsafePopupLayoutToGlibNone(layout))
 
@@ -24623,19 +24242,19 @@ func (layout *PopupLayout) GetAnchorHints() AnchorHints {
 // GetAnchorRect wraps gdk_popup_layout_get_anchor_rect
 // The function returns the following values:
 // 
-// 	- ret *Rectangle 
+// 	- ret Rectangle 
 //
 // Get the anchor rectangle.
-func (layout *PopupLayout) GetAnchorRect() *Rectangle {
-	var carg0 *C.GdkPopupLayout // in, none, record
-	var cret  *C.GdkRectangle   // return, none, record
+func (layout *PopupLayout) GetAnchorRect() Rectangle {
+	var carg0 *C.GdkPopupLayout // in, none, converted
+	var cret  *C.GdkRectangle   // return, none, converted
 
 	carg0 = (*C.GdkPopupLayout)(UnsafePopupLayoutToGlibNone(layout))
 
 	cret = C.gdk_popup_layout_get_anchor_rect(carg0)
 	runtime.KeepAlive(layout)
 
-	var ret *Rectangle
+	var ret Rectangle
 
 	ret = UnsafeRectangleFromGlibNone(unsafe.Pointer(cret))
 
@@ -24650,9 +24269,9 @@ func (layout *PopupLayout) GetAnchorRect() *Rectangle {
 //
 // Retrieves the offset for the anchor rectangle.
 func (layout *PopupLayout) GetOffset() (int, int) {
-	var carg0 *C.GdkPopupLayout // in, none, record
-	var carg1 C.int             // out, casted
-	var carg2 C.int             // out, casted
+	var carg0 *C.GdkPopupLayout // in, none, converted
+	var carg1 C.int             // out, full, casted
+	var carg2 C.int             // out, full, casted
 
 	carg0 = (*C.GdkPopupLayout)(UnsafePopupLayoutToGlibNone(layout))
 
@@ -24675,8 +24294,8 @@ func (layout *PopupLayout) GetOffset() (int, int) {
 //
 // Returns the anchor position on the anchor rectangle.
 func (layout *PopupLayout) GetRectAnchor() Gravity {
-	var carg0 *C.GdkPopupLayout // in, none, record
-	var cret  C.GdkGravity      // return, casted
+	var carg0 *C.GdkPopupLayout // in, none, converted
+	var cret  C.GdkGravity      // return, none, casted
 
 	carg0 = (*C.GdkPopupLayout)(UnsafePopupLayoutToGlibNone(layout))
 
@@ -24700,11 +24319,11 @@ func (layout *PopupLayout) GetRectAnchor() Gravity {
 //
 // Obtains the shadow widths of this layout.
 func (layout *PopupLayout) GetShadowWidth() (int, int, int, int) {
-	var carg0 *C.GdkPopupLayout // in, none, record
-	var carg1 C.int             // out, casted
-	var carg2 C.int             // out, casted
-	var carg3 C.int             // out, casted
-	var carg4 C.int             // out, casted
+	var carg0 *C.GdkPopupLayout // in, none, converted
+	var carg1 C.int             // out, full, casted
+	var carg2 C.int             // out, full, casted
+	var carg3 C.int             // out, full, casted
+	var carg4 C.int             // out, full, casted
 
 	carg0 = (*C.GdkPopupLayout)(UnsafePopupLayoutToGlibNone(layout))
 
@@ -24731,8 +24350,8 @@ func (layout *PopupLayout) GetShadowWidth() (int, int, int, int) {
 //
 // Returns the anchor position on the popup surface.
 func (layout *PopupLayout) GetSurfaceAnchor() Gravity {
-	var carg0 *C.GdkPopupLayout // in, none, record
-	var cret  C.GdkGravity      // return, casted
+	var carg0 *C.GdkPopupLayout // in, none, converted
+	var cret  C.GdkGravity      // return, none, casted
 
 	carg0 = (*C.GdkPopupLayout)(UnsafePopupLayoutToGlibNone(layout))
 
@@ -24760,8 +24379,8 @@ func (layout *PopupLayout) GetSurfaceAnchor() Gravity {
 // %GDK_GRAVITY_NORTH_EAST and vice versa if @surface extends
 // beyond the left or right edges of the monitor.
 func (layout *PopupLayout) SetAnchorHints(anchorHints AnchorHints) {
-	var carg0 *C.GdkPopupLayout // in, none, record
-	var carg1 C.GdkAnchorHints  // in, casted
+	var carg0 *C.GdkPopupLayout // in, none, converted
+	var carg1 C.GdkAnchorHints  // in, none, casted
 
 	carg0 = (*C.GdkPopupLayout)(UnsafePopupLayoutToGlibNone(layout))
 	carg1 = C.GdkAnchorHints(anchorHints)
@@ -24775,12 +24394,12 @@ func (layout *PopupLayout) SetAnchorHints(anchorHints AnchorHints) {
 // 
 // The function takes the following parameters:
 // 
-// 	- anchorRect *Rectangle: the new anchor rectangle 
+// 	- anchorRect Rectangle: the new anchor rectangle 
 //
 // Set the anchor rectangle.
-func (layout *PopupLayout) SetAnchorRect(anchorRect *Rectangle) {
-	var carg0 *C.GdkPopupLayout // in, none, record
-	var carg1 *C.GdkRectangle   // in, none, record
+func (layout *PopupLayout) SetAnchorRect(anchorRect Rectangle) {
+	var carg0 *C.GdkPopupLayout // in, none, converted
+	var carg1 *C.GdkRectangle   // in, none, converted
 
 	carg0 = (*C.GdkPopupLayout)(UnsafePopupLayoutToGlibNone(layout))
 	carg1 = (*C.GdkRectangle)(UnsafeRectangleToGlibNone(anchorRect))
@@ -24799,9 +24418,9 @@ func (layout *PopupLayout) SetAnchorRect(anchorRect *Rectangle) {
 //
 // Offset the position of the anchor rectangle with the given delta.
 func (layout *PopupLayout) SetOffset(dx int, dy int) {
-	var carg0 *C.GdkPopupLayout // in, none, record
-	var carg1 C.int             // in, casted
-	var carg2 C.int             // in, casted
+	var carg0 *C.GdkPopupLayout // in, none, converted
+	var carg1 C.int             // in, none, casted
+	var carg2 C.int             // in, none, casted
 
 	carg0 = (*C.GdkPopupLayout)(UnsafePopupLayoutToGlibNone(layout))
 	carg1 = C.int(dx)
@@ -24821,8 +24440,8 @@ func (layout *PopupLayout) SetOffset(dx int, dy int) {
 //
 // Set the anchor on the anchor rectangle.
 func (layout *PopupLayout) SetRectAnchor(anchor Gravity) {
-	var carg0 *C.GdkPopupLayout // in, none, record
-	var carg1 C.GdkGravity      // in, casted
+	var carg0 *C.GdkPopupLayout // in, none, converted
+	var carg1 C.GdkGravity      // in, none, casted
 
 	carg0 = (*C.GdkPopupLayout)(UnsafePopupLayoutToGlibNone(layout))
 	carg1 = C.GdkGravity(anchor)
@@ -24847,11 +24466,11 @@ func (layout *PopupLayout) SetRectAnchor(anchor Gravity) {
 // surface size that would consist of the shadow margin
 // surrounding the window, would there be any.
 func (layout *PopupLayout) SetShadowWidth(left int, right int, top int, bottom int) {
-	var carg0 *C.GdkPopupLayout // in, none, record
-	var carg1 C.int             // in, casted
-	var carg2 C.int             // in, casted
-	var carg3 C.int             // in, casted
-	var carg4 C.int             // in, casted
+	var carg0 *C.GdkPopupLayout // in, none, converted
+	var carg1 C.int             // in, none, casted
+	var carg2 C.int             // in, none, casted
+	var carg3 C.int             // in, none, casted
+	var carg4 C.int             // in, none, casted
 
 	carg0 = (*C.GdkPopupLayout)(UnsafePopupLayoutToGlibNone(layout))
 	carg1 = C.int(left)
@@ -24875,8 +24494,8 @@ func (layout *PopupLayout) SetShadowWidth(left int, right int, top int, bottom i
 //
 // Set the anchor on the popup surface.
 func (layout *PopupLayout) SetSurfaceAnchor(anchor Gravity) {
-	var carg0 *C.GdkPopupLayout // in, none, record
-	var carg1 C.GdkGravity      // in, casted
+	var carg0 *C.GdkPopupLayout // in, none, converted
+	var carg1 C.GdkGravity      // in, none, casted
 
 	carg0 = (*C.GdkPopupLayout)(UnsafePopupLayoutToGlibNone(layout))
 	carg1 = C.GdkGravity(anchor)
@@ -24907,7 +24526,7 @@ type rgbA struct {
 }
 
 func marshalRGBA(p uintptr) (interface{}, error) {
-	b := gobject.ValueFromNative(unsafe.Pointer(p)).Boxed()
+	b := gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Boxed()
 	return UnsafeRGBAFromGlibBorrow(b), nil
 }
 
@@ -25022,61 +24641,6 @@ func (r *RGBA) SetAlpha(alpha float32) {
 	*valptr = C.gfloat(alpha)
 }
 
-// Equal wraps gdk_rgba_equal
-// 
-// The function takes the following parameters:
-// 
-// 	- p2 *RGBA: another `GdkRGBA` 
-// 
-// The function returns the following values:
-// 
-// 	- ret bool 
-//
-// Compares two `GdkRGBA` colors.
-func (p1 *RGBA) Equal(p2 *RGBA) bool {
-	var carg0 *C.GdkRGBA // in, none, record
-	var carg1 *C.GdkRGBA // in, none, record
-	var cret  C.gboolean // return
-
-	carg0 = (*C.GdkRGBA)(UnsafeRGBAToGlibNone(p1))
-	carg1 = (*C.GdkRGBA)(UnsafeRGBAToGlibNone(p2))
-
-	cret = C.gdk_rgba_equal(carg0, carg1)
-	runtime.KeepAlive(p1)
-	runtime.KeepAlive(p2)
-
-	var ret bool
-
-	if cret != 0 {
-		ret = true
-	}
-
-	return ret
-}
-
-// Hash wraps gdk_rgba_hash
-// The function returns the following values:
-// 
-// 	- ret uint 
-//
-// A hash function suitable for using for a hash
-// table that stores `GdkRGBA`s.
-func (p *RGBA) Hash() uint {
-	var carg0 *C.GdkRGBA // in, none, record
-	var cret  C.guint    // return, casted
-
-	carg0 = (*C.GdkRGBA)(UnsafeRGBAToGlibNone(p))
-
-	cret = C.gdk_rgba_hash(carg0)
-	runtime.KeepAlive(p)
-
-	var ret uint
-
-	ret = uint(cret)
-
-	return ret
-}
-
 // IsClear wraps gdk_rgba_is_clear
 // The function returns the following values:
 // 
@@ -25086,7 +24650,7 @@ func (p *RGBA) Hash() uint {
 // 
 // That is, drawing with the value would not produce any change.
 func (rgba *RGBA) IsClear() bool {
-	var carg0 *C.GdkRGBA // in, none, record
+	var carg0 *C.GdkRGBA // in, none, converted
 	var cret  C.gboolean // return
 
 	carg0 = (*C.GdkRGBA)(UnsafeRGBAToGlibNone(rgba))
@@ -25113,7 +24677,7 @@ func (rgba *RGBA) IsClear() bool {
 // That is, drawing with the value will not retain any results
 // from previous contents.
 func (rgba *RGBA) IsOpaque() bool {
-	var carg0 *C.GdkRGBA // in, none, record
+	var carg0 *C.GdkRGBA // in, none, converted
 	var cret  C.gboolean // return
 
 	carg0 = (*C.GdkRGBA)(UnsafeRGBAToGlibNone(rgba))
@@ -25161,7 +24725,7 @@ func (rgba *RGBA) IsOpaque() bool {
 // values in the range 0% to 100%, and a is a floating point value
 // in the range 0 to 1.
 func (rgba *RGBA) Parse(spec string) bool {
-	var carg0 *C.GdkRGBA // in, none, record
+	var carg0 *C.GdkRGBA // in, none, converted
 	var carg1 *C.gchar   // in, none, string
 	var cret  C.gboolean // return
 
@@ -25201,7 +24765,7 @@ func (rgba *RGBA) Parse(spec string) bool {
 // since “r”, “g” and “b” are represented as 8-bit integers. If
 // this is a concern, you should use a different representation.
 func (rgba *RGBA) ToString() string {
-	var carg0 *C.GdkRGBA // in, none, record
+	var carg0 *C.GdkRGBA // in, none, converted
 	var cret  *C.gchar   // return, full, string
 
 	carg0 = (*C.GdkRGBA)(UnsafeRGBAToGlibNone(rgba))
@@ -25244,7 +24808,7 @@ type rectangle struct {
 }
 
 func marshalRectangle(p uintptr) (interface{}, error) {
-	b := gobject.ValueFromNative(unsafe.Pointer(p)).Boxed()
+	b := gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Boxed()
 	return UnsafeRectangleFromGlibBorrow(b), nil
 }
 
@@ -25370,9 +24934,9 @@ func (r *Rectangle) SetHeight(height int) {
 //
 // Returns %TRUE if @rect contains the point described by @x and @y.
 func (rect *Rectangle) ContainsPoint(x int, y int) bool {
-	var carg0 *C.GdkRectangle // in, none, record
-	var carg1 C.int           // in, casted
-	var carg2 C.int           // in, casted
+	var carg0 *C.GdkRectangle // in, none, converted
+	var carg1 C.int           // in, none, casted
+	var carg2 C.int           // in, none, casted
 	var cret  C.gboolean      // return
 
 	carg0 = (*C.GdkRectangle)(UnsafeRectangleToGlibNone(rect))
@@ -25397,16 +24961,16 @@ func (rect *Rectangle) ContainsPoint(x int, y int) bool {
 // 
 // The function takes the following parameters:
 // 
-// 	- rect2 *Rectangle: a `GdkRectangle` 
+// 	- rect2 Rectangle: a `GdkRectangle` 
 // 
 // The function returns the following values:
 // 
 // 	- ret bool 
 //
 // Checks if the two given rectangles are equal.
-func (rect1 *Rectangle) Equal(rect2 *Rectangle) bool {
-	var carg0 *C.GdkRectangle // in, none, record
-	var carg1 *C.GdkRectangle // in, none, record
+func (rect1 *Rectangle) Equal(rect2 Rectangle) bool {
+	var carg0 *C.GdkRectangle // in, none, converted
+	var carg1 *C.GdkRectangle // in, none, converted
 	var cret  C.gboolean      // return
 
 	carg0 = (*C.GdkRectangle)(UnsafeRectangleToGlibNone(rect1))
@@ -25588,7 +25152,7 @@ type textureDownloader struct {
 }
 
 func marshalTextureDownloader(p uintptr) (interface{}, error) {
-	b := gobject.ValueFromNative(unsafe.Pointer(p)).Boxed()
+	b := gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Boxed()
 	return UnsafeTextureDownloaderFromGlibBorrow(b), nil
 }
 
@@ -25637,76 +25201,44 @@ func UnsafeTextureDownloaderToGlibFull(t *TextureDownloader) unsafe.Pointer {
 // 
 // The function returns the following values:
 // 
-// 	- ret *TextureDownloader 
+// 	- ret TextureDownloader 
 //
 // Creates a new texture downloader for @texture.
 // 
 // By default, the downloader will convert the data to
 // the default memory format, and to the sRGB color state.
-func NewTextureDownloader(texture Texture) *TextureDownloader {
-	var carg1 *C.GdkTexture           // in, none, class
-	var cret  *C.GdkTextureDownloader // return, full, record
+func NewTextureDownloader(texture Texture) TextureDownloader {
+	var carg1 *C.GdkTexture           // in, none, converted
+	var cret  *C.GdkTextureDownloader // return, full, converted
 
 	carg1 = (*C.GdkTexture)(UnsafeTextureToGlibNone(texture))
 
 	cret = C.gdk_texture_downloader_new(carg1)
 	runtime.KeepAlive(texture)
 
-	var ret *TextureDownloader
+	var ret TextureDownloader
 
 	ret = UnsafeTextureDownloaderFromGlibFull(unsafe.Pointer(cret))
 
 	return ret
 }
 
-// DownloadBytes wraps gdk_texture_downloader_download_bytes
-// The function returns the following values:
-// 
-// 	- outStride uint: The stride of the resulting data in bytes 
-// 	- ret *glib.Bytes 
-//
-// Downloads the given texture pixels into a `GBytes`. The rowstride will
-// be stored in the stride value.
-// 
-// This function will abort if it tries to download a large texture and
-// fails to allocate memory. If you think that may happen, you should handle
-// memory allocation yourself and use [method@Gdk.TextureDownloader.download_into]
-// once allocation succeeded.
-func (self *TextureDownloader) DownloadBytes() (uint, *glib.Bytes) {
-	var carg0 *C.GdkTextureDownloader // in, none, record
-	var carg1 C.gsize                 // out, casted
-	var cret  *C.GBytes               // return, full, record
-
-	carg0 = (*C.GdkTextureDownloader)(UnsafeTextureDownloaderToGlibNone(self))
-
-	cret = C.gdk_texture_downloader_download_bytes(carg0, &carg1)
-	runtime.KeepAlive(self)
-
-	var outStride uint
-	var ret       *glib.Bytes
-
-	outStride = uint(carg1)
-	ret = glib.UnsafeBytesFromGlibFull(unsafe.Pointer(cret))
-
-	return outStride, ret
-}
-
 // GetColorState wraps gdk_texture_downloader_get_color_state
 // The function returns the following values:
 // 
-// 	- ret *ColorState 
+// 	- ret ColorState 
 //
 // Gets the color state that the data will be downloaded in.
-func (self *TextureDownloader) GetColorState() *ColorState {
-	var carg0 *C.GdkTextureDownloader // in, none, record
-	var cret  *C.GdkColorState        // return, full, record
+func (self *TextureDownloader) GetColorState() ColorState {
+	var carg0 *C.GdkTextureDownloader // in, none, converted
+	var cret  *C.GdkColorState        // return, full, converted
 
 	carg0 = (*C.GdkTextureDownloader)(UnsafeTextureDownloaderToGlibNone(self))
 
 	cret = C.gdk_texture_downloader_get_color_state(carg0)
 	runtime.KeepAlive(self)
 
-	var ret *ColorState
+	var ret ColorState
 
 	ret = UnsafeColorStateFromGlibFull(unsafe.Pointer(cret))
 
@@ -25720,8 +25252,8 @@ func (self *TextureDownloader) GetColorState() *ColorState {
 //
 // Gets the format that the data will be downloaded in.
 func (self *TextureDownloader) GetFormat() MemoryFormat {
-	var carg0 *C.GdkTextureDownloader // in, none, record
-	var cret  C.GdkMemoryFormat       // return, casted
+	var carg0 *C.GdkTextureDownloader // in, none, converted
+	var cret  C.GdkMemoryFormat       // return, none, casted
 
 	carg0 = (*C.GdkTextureDownloader)(UnsafeTextureDownloaderToGlibNone(self))
 
@@ -25742,8 +25274,8 @@ func (self *TextureDownloader) GetFormat() MemoryFormat {
 //
 // Gets the texture that the downloader will download.
 func (self *TextureDownloader) GetTexture() Texture {
-	var carg0 *C.GdkTextureDownloader // in, none, record
-	var cret  *C.GdkTexture           // return, none, class
+	var carg0 *C.GdkTextureDownloader // in, none, converted
+	var cret  *C.GdkTexture           // return, none, converted
 
 	carg0 = (*C.GdkTextureDownloader)(UnsafeTextureDownloaderToGlibNone(self))
 
@@ -25761,15 +25293,15 @@ func (self *TextureDownloader) GetTexture() Texture {
 // 
 // The function takes the following parameters:
 // 
-// 	- colorState *ColorState: the color state to use 
+// 	- colorState ColorState: the color state to use 
 //
 // Sets the color state the downloader will convert the data to.
 // 
 // By default, the sRGB colorstate returned by [func@ColorState.get_srgb]
 // is used.
-func (self *TextureDownloader) SetColorState(colorState *ColorState) {
-	var carg0 *C.GdkTextureDownloader // in, none, record
-	var carg1 *C.GdkColorState        // in, none, record
+func (self *TextureDownloader) SetColorState(colorState ColorState) {
+	var carg0 *C.GdkTextureDownloader // in, none, converted
+	var carg1 *C.GdkColorState        // in, none, converted
 
 	carg0 = (*C.GdkTextureDownloader)(UnsafeTextureDownloaderToGlibNone(self))
 	carg1 = (*C.GdkColorState)(UnsafeColorStateToGlibNone(colorState))
@@ -25789,8 +25321,8 @@ func (self *TextureDownloader) SetColorState(colorState *ColorState) {
 // 
 // By default, GDK_MEMORY_DEFAULT is set.
 func (self *TextureDownloader) SetFormat(format MemoryFormat) {
-	var carg0 *C.GdkTextureDownloader // in, none, record
-	var carg1 C.GdkMemoryFormat       // in, casted
+	var carg0 *C.GdkTextureDownloader // in, none, converted
+	var carg1 C.GdkMemoryFormat       // in, none, casted
 
 	carg0 = (*C.GdkTextureDownloader)(UnsafeTextureDownloaderToGlibNone(self))
 	carg1 = C.GdkMemoryFormat(format)
@@ -25808,8 +25340,8 @@ func (self *TextureDownloader) SetFormat(format MemoryFormat) {
 //
 // Changes the texture the downloader will download.
 func (self *TextureDownloader) SetTexture(texture Texture) {
-	var carg0 *C.GdkTextureDownloader // in, none, record
-	var carg1 *C.GdkTexture           // in, none, class
+	var carg0 *C.GdkTextureDownloader // in, none, converted
+	var carg1 *C.GdkTexture           // in, none, converted
 
 	carg0 = (*C.GdkTextureDownloader)(UnsafeTextureDownloaderToGlibNone(self))
 	carg1 = (*C.GdkTexture)(UnsafeTextureToGlibNone(texture))
@@ -25959,7 +25491,7 @@ type toplevelLayout struct {
 }
 
 func marshalToplevelLayout(p uintptr) (interface{}, error) {
-	b := gobject.ValueFromNative(unsafe.Pointer(p)).Boxed()
+	b := gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Boxed()
 	return UnsafeToplevelLayoutFromGlibBorrow(b), nil
 }
 
@@ -26023,7 +25555,7 @@ func UnsafeToplevelLayoutToGlibFull(t *ToplevelLayout) unsafe.Pointer {
 // NewToplevelLayout wraps gdk_toplevel_layout_new
 // The function returns the following values:
 // 
-// 	- ret *ToplevelLayout 
+// 	- ret ToplevelLayout 
 //
 // Create a toplevel layout description.
 // 
@@ -26032,12 +25564,12 @@ func UnsafeToplevelLayoutToGlibFull(t *ToplevelLayout) unsafe.Pointer {
 // 
 // The size is in ”application pixels”, not
 // ”device pixels” (see gdk_surface_get_scale_factor()).
-func NewToplevelLayout() *ToplevelLayout {
-	var cret *C.GdkToplevelLayout // return, full, record
+func NewToplevelLayout() ToplevelLayout {
+	var cret *C.GdkToplevelLayout // return, full, converted
 
 	cret = C.gdk_toplevel_layout_new()
 
-	var ret *ToplevelLayout
+	var ret ToplevelLayout
 
 	ret = UnsafeToplevelLayoutFromGlibFull(unsafe.Pointer(cret))
 
@@ -26048,16 +25580,16 @@ func NewToplevelLayout() *ToplevelLayout {
 // 
 // The function takes the following parameters:
 // 
-// 	- other *ToplevelLayout: another `GdkToplevelLayout` 
+// 	- other ToplevelLayout: another `GdkToplevelLayout` 
 // 
 // The function returns the following values:
 // 
 // 	- ret bool 
 //
 // Check whether @layout and @other has identical layout properties.
-func (layout *ToplevelLayout) Equal(other *ToplevelLayout) bool {
-	var carg0 *C.GdkToplevelLayout // in, none, record
-	var carg1 *C.GdkToplevelLayout // in, none, record
+func (layout *ToplevelLayout) Equal(other ToplevelLayout) bool {
+	var carg0 *C.GdkToplevelLayout // in, none, converted
+	var carg1 *C.GdkToplevelLayout // in, none, converted
 	var cret  C.gboolean           // return
 
 	carg0 = (*C.GdkToplevelLayout)(UnsafeToplevelLayoutToGlibNone(layout))
@@ -26086,7 +25618,7 @@ func (layout *ToplevelLayout) Equal(other *ToplevelLayout) bool {
 // the value pointed to by @fullscreen is set to %TRUE if it should go
 // fullscreen, or %FALSE, if it should go unfullscreen.
 func (layout *ToplevelLayout) GetFullscreen() (bool, bool) {
-	var carg0 *C.GdkToplevelLayout // in, none, record
+	var carg0 *C.GdkToplevelLayout // in, none, converted
 	var carg1 C.gboolean           // out
 	var cret  C.gboolean           // return
 
@@ -26116,8 +25648,8 @@ func (layout *ToplevelLayout) GetFullscreen() (bool, bool) {
 // Returns the monitor that the layout is fullscreening
 // the surface on.
 func (layout *ToplevelLayout) GetFullscreenMonitor() Monitor {
-	var carg0 *C.GdkToplevelLayout // in, none, record
-	var cret  *C.GdkMonitor        // return, none, class
+	var carg0 *C.GdkToplevelLayout // in, none, converted
+	var cret  *C.GdkMonitor        // return, none, converted
 
 	carg0 = (*C.GdkToplevelLayout)(UnsafeToplevelLayoutToGlibNone(layout))
 
@@ -26141,7 +25673,7 @@ func (layout *ToplevelLayout) GetFullscreenMonitor() Monitor {
 // the value pointed to by @maximized is set to %TRUE if it should go
 // fullscreen, or %FALSE, if it should go unmaximized.
 func (layout *ToplevelLayout) GetMaximized() (bool, bool) {
-	var carg0 *C.GdkToplevelLayout // in, none, record
+	var carg0 *C.GdkToplevelLayout // in, none, converted
 	var carg1 C.gboolean           // out
 	var cret  C.gboolean           // return
 
@@ -26171,7 +25703,7 @@ func (layout *ToplevelLayout) GetMaximized() (bool, bool) {
 // Returns whether the layout should allow the user
 // to resize the surface.
 func (layout *ToplevelLayout) GetResizable() bool {
-	var carg0 *C.GdkToplevelLayout // in, none, record
+	var carg0 *C.GdkToplevelLayout // in, none, converted
 	var cret  C.gboolean           // return
 
 	carg0 = (*C.GdkToplevelLayout)(UnsafeToplevelLayoutToGlibNone(layout))
@@ -26198,9 +25730,9 @@ func (layout *ToplevelLayout) GetResizable() bool {
 // Sets whether the layout should cause the surface
 // to be fullscreen when presented.
 func (layout *ToplevelLayout) SetFullscreen(fullscreen bool, monitor Monitor) {
-	var carg0 *C.GdkToplevelLayout // in, none, record
+	var carg0 *C.GdkToplevelLayout // in, none, converted
 	var carg1 C.gboolean           // in
-	var carg2 *C.GdkMonitor        // in, none, class, nullable
+	var carg2 *C.GdkMonitor        // in, none, converted, nullable
 
 	carg0 = (*C.GdkToplevelLayout)(UnsafeToplevelLayoutToGlibNone(layout))
 	if fullscreen {
@@ -26225,7 +25757,7 @@ func (layout *ToplevelLayout) SetFullscreen(fullscreen bool, monitor Monitor) {
 // Sets whether the layout should cause the surface
 // to be maximized when presented.
 func (layout *ToplevelLayout) SetMaximized(maximized bool) {
-	var carg0 *C.GdkToplevelLayout // in, none, record
+	var carg0 *C.GdkToplevelLayout // in, none, converted
 	var carg1 C.gboolean           // in
 
 	carg0 = (*C.GdkToplevelLayout)(UnsafeToplevelLayoutToGlibNone(layout))
@@ -26247,7 +25779,7 @@ func (layout *ToplevelLayout) SetMaximized(maximized bool) {
 // Sets whether the layout should allow the user
 // to resize the surface after it has been presented.
 func (layout *ToplevelLayout) SetResizable(resizable bool) {
-	var carg0 *C.GdkToplevelLayout // in, none, record
+	var carg0 *C.GdkToplevelLayout // in, none, converted
 	var carg1 C.gboolean           // in
 
 	carg0 = (*C.GdkToplevelLayout)(UnsafeToplevelLayoutToGlibNone(layout))
@@ -26274,7 +25806,7 @@ type toplevelSize struct {
 }
 
 func marshalToplevelSize(p uintptr) (interface{}, error) {
-	b := gobject.ValueFromNative(unsafe.Pointer(p)).Boxed()
+	b := gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Boxed()
 	return UnsafeToplevelSizeFromGlibBorrow(b), nil
 }
 
@@ -26329,9 +25861,9 @@ func UnsafeToplevelSizeToGlibFull(t *ToplevelSize) unsafe.Pointer {
 // window is being presented on, or something else that limits the way a
 // toplevel can be presented.
 func (size *ToplevelSize) GetBounds() (int, int) {
-	var carg0 *C.GdkToplevelSize // in, none, record
-	var carg1 C.int              // out, casted
-	var carg2 C.int              // out, casted
+	var carg0 *C.GdkToplevelSize // in, none, converted
+	var carg1 C.int              // out, full, casted
+	var carg2 C.int              // out, full, casted
 
 	carg0 = (*C.GdkToplevelSize)(UnsafeToplevelSizeToGlibNone(size))
 
@@ -26364,9 +25896,9 @@ func (size *ToplevelSize) GetBounds() (int, int) {
 // The minimum size should be within the bounds (see
 // [method@Gdk.ToplevelSize.get_bounds]).
 func (size *ToplevelSize) SetMinSize(minWidth int, minHeight int) {
-	var carg0 *C.GdkToplevelSize // in, none, record
-	var carg1 C.int              // in, casted
-	var carg2 C.int              // in, casted
+	var carg0 *C.GdkToplevelSize // in, none, converted
+	var carg1 C.int              // in, none, casted
+	var carg2 C.int              // in, none, casted
 
 	carg0 = (*C.GdkToplevelSize)(UnsafeToplevelSizeToGlibNone(size))
 	carg1 = C.int(minWidth)
@@ -26396,11 +25928,11 @@ func (size *ToplevelSize) SetMinSize(minWidth int, minHeight int) {
 // Shadow width should only be set if
 // [method@Gtk.Display.supports_shadow_width] is %TRUE.
 func (size *ToplevelSize) SetShadowWidth(left int, right int, top int, bottom int) {
-	var carg0 *C.GdkToplevelSize // in, none, record
-	var carg1 C.int              // in, casted
-	var carg2 C.int              // in, casted
-	var carg3 C.int              // in, casted
-	var carg4 C.int              // in, casted
+	var carg0 *C.GdkToplevelSize // in, none, converted
+	var carg1 C.int              // in, none, casted
+	var carg2 C.int              // in, none, casted
+	var carg3 C.int              // in, none, casted
+	var carg4 C.int              // in, none, casted
 
 	carg0 = (*C.GdkToplevelSize)(UnsafeToplevelSizeToGlibNone(size))
 	carg1 = C.int(left)
@@ -26430,9 +25962,9 @@ func (size *ToplevelSize) SetShadowWidth(left int, right int, top int, bottom in
 // be considered as a hint, and should not be assumed to be
 // respected by the windowing system, or backend.
 func (size *ToplevelSize) SetSize(width int, height int) {
-	var carg0 *C.GdkToplevelSize // in, none, record
-	var carg1 C.int              // in, casted
-	var carg2 C.int              // in, casted
+	var carg0 *C.GdkToplevelSize // in, none, converted
+	var carg1 C.int              // in, none, casted
+	var carg2 C.int              // in, none, casted
 
 	carg0 = (*C.GdkToplevelSize)(UnsafeToplevelSizeToGlibNone(size))
 	carg1 = C.int(width)

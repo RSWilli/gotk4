@@ -41,5 +41,5 @@ func (f CouldBeForeign[T]) NamespacedGoType(pointers int) string {
 var GoBuiltins = []string{
 	"error",
 	"any",
-	"{}interface",
+	"interface{}",
 }

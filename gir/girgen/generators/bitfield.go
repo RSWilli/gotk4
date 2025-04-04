@@ -209,6 +209,10 @@ func (g *BitfieldGenerator) Generate(w *file.Package) {
 	fmt.Fprintf(w.Go(), "func (%s %s) Has(other %s) bool {\n", g.MethodReceiver, g.GoType(0), g.GoType(0))
 	fmt.Fprintf(w.Go(), "\treturn (%s & other) == other\n", g.MethodReceiver)
 	fmt.Fprintf(w.Go(), "}\n\n")
+
+	fmt.Fprintf(w.Go(), "func (%s %s) SetValue(v *%s) {\n", g.MethodReceiver, g.GoType(0), g.Value().NamespacedGoType(0))
+	fmt.Fprintf(w.Go(), "\tpanic(\"TODO\")\n")
+	fmt.Fprintf(w.Go(), "}\n\n")
 }
 
 func NewBitfieldGenerator(bf *typesystem.Bitfield) *BitfieldGenerator {

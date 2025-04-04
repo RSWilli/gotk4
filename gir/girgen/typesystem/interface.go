@@ -63,6 +63,13 @@ func DeclareInterface(e *env, v gir.Interface) *Interface {
 		ctype = v.Name
 	}
 
+	ns, typ := e.findTypeByGIRName("GObject.Value")
+
+	if typ == nil {
+		e.logger.Warn("skipping enum because gvalue was not found", "enum", v.Name)
+		return nil
+	}
+
 	i := &Interface{
 		Doc: NewDoc(&v.InfoAttrs, &v.InfoElements),
 		BaseType: BaseType{
@@ -71,7 +78,10 @@ func DeclareInterface(e *env, v gir.Interface) *Interface {
 			CGoTyp:  "C." + ctype,
 			CTyp:    ctype,
 		},
-		Marshaler:       newDefaultMarshaler(v.GLibGetType),
+		Marshaler: newDefaultMarshaler(v.GLibGetType, CouldBeForeign[*Record]{
+			Namespace: ns,
+			Type:      typ.(*Record),
+		}),
 		GoInterfaceName: v.Name,
 
 		GoWrapBaseClassFunction: fmt.Sprintf("unsafeWrap%s", v.Name),

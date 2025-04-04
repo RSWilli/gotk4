@@ -12,7 +12,7 @@ type AliasConverter struct {
 }
 
 // Convert implements Converter.
-func (a *AliasConverter) Convert(w file.CodeWriter) {
+func (a *AliasConverter) Convert(w file.File) {
 	a.SubConverter.Convert(w)
 }
 

@@ -13,14 +13,15 @@ type CToGoConvertibleConverter struct {
 }
 
 // Convert implements Converter.
-func (c *CToGoConvertibleConverter) Convert(w file.CodeWriter) {
+func (c *CToGoConvertibleConverter) Convert(w file.File) {
+	w.GoImport("unsafe")
 
-	fmt.Fprintf(w, "%s = %s(unsafe.Pointer(%s))\n", c.Param.GoName, c.ConvertFunc, c.Param.CName)
+	fmt.Fprintf(w.Go(), "%s = %s(unsafe.Pointer(%s))\n", c.Param.GoName, c.ConvertFunc, c.Param.CName)
 
 	if c.Param.TransferOwnership == typesystem.TransferBorrow {
-		// TODO import runtime
+		w.GoImport("runtime")
 
-		fmt.Fprintf(w, "runtime.AddCleanup(%s, func(_ *%s) {}, %s)\n", c.Param.GoName, c.Param.BorrowFrom.Type.NamespacedGoType(0), c.Param.BorrowFrom.GoName)
+		fmt.Fprintf(w.Go(), "runtime.AddCleanup(%s, func(_ *%s) {}, %s)\n", c.Param.GoName, c.Param.BorrowFrom.Type.NamespacedGoType(0), c.Param.BorrowFrom.GoName)
 	}
 }
 
@@ -37,8 +38,8 @@ type GoToCConvertibleConverter struct {
 }
 
 // Convert implements Converter.
-func (c *GoToCConvertibleConverter) Convert(w file.CodeWriter) {
-	fmt.Fprintf(w, "%s = (%s)(%s(%s))\n", c.Param.CName, c.Param.CGoType(), c.ConvertFunc, c.Param.GoName)
+func (c *GoToCConvertibleConverter) Convert(w file.File) {
+	fmt.Fprintf(w.Go(), "%s = (%s)(%s(%s))\n", c.Param.CName, c.Param.CGoType(), c.ConvertFunc, c.Param.GoName)
 }
 
 // Metadata implements Converter.

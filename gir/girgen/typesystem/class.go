@@ -59,6 +59,8 @@ func (a *Class) pointersAllowed(pointers int) bool {
 }
 
 func DeclareClass(e *env, v gir.Class) *Class {
+	e = e.sub("class", v.CType)
+
 	if !v.IsIntrospectable() {
 		return nil
 	}
@@ -79,6 +81,13 @@ func DeclareClass(e *env, v gir.Class) *Class {
 		ctype = v.Name
 	}
 
+	ns, typ := e.findTypeByGIRName("GObject.Value")
+
+	if typ == nil {
+		e.logger.Warn("skipping because gvalue was not found")
+		return nil
+	}
+
 	c := &Class{
 		Doc:             NewDoc(&v.InfoAttrs, &v.InfoElements),
 		Abstract:        v.Abstract,
@@ -95,8 +104,11 @@ func DeclareClass(e *env, v gir.Class) *Class {
 			CGoTyp:  "C." + ctype,
 			CTyp:    ctype,
 		},
-		Marshaler: newDefaultMarshaler(v.GLibGetType),
-		gir:       v,
+		Marshaler: newDefaultMarshaler(v.GLibGetType, CouldBeForeign[*Record]{
+			Namespace: ns,
+			Type:      typ.(*Record),
+		}),
+		gir: v,
 	}
 
 	return c

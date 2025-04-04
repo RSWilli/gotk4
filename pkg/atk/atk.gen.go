@@ -3,7 +3,9 @@
 package atk
 
 import (
+	"github.com/diamondburned/gotk4/pkg/glib/v2"
 	"unsafe"
+	"github.com/diamondburned/gotk4/pkg/gobject/v2"
 	"runtime"
 )
 
@@ -158,14 +160,6 @@ const MINORVERSION = C.ATK_MINOR_VERSION
 // %ATK_VERSION_MIN_REQUIRED or earlier will cause warnings (but
 // using functions deprecated in later releases will not).
 const VERSIONMINREQUIRED = C.ATK_VERSION_MIN_REQUIRED
-// AttributeSet wraps AtkAttributeSet
-//
-// This is a singly-linked list (a #GSList) of #AtkAttribute. It is
-// used by atk_text_get_run_attributes(),
-// atk_text_get_default_attributes(),
-// atk_editable_text_set_run_attributes(),
-// atk_document_get_attributes() and atk_object_get_attributes()
-type AttributeSet = glib.SList
 // State wraps AtkState
 //
 // An AtkState describes a single state of an object.
@@ -199,8 +193,13 @@ const (
 )
 
 func marshalCoordType(p uintptr) (interface{}, error) {
-	return CoordType(gobject.ValueFromNative(unsafe.Pointer(p)).Enum()), nil
+	return CoordType(gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Enum()), nil
 }
+
+func (e CoordType) SetValue(v *gobject.Value) {
+	panic("TODO")
+}
+
 // KeyEventType wraps AtkKeyEventType
 //
 // Specifies the type of a keyboard evemt.
@@ -222,8 +221,13 @@ const (
 )
 
 func marshalKeyEventType(p uintptr) (interface{}, error) {
-	return KeyEventType(gobject.ValueFromNative(unsafe.Pointer(p)).Enum()), nil
+	return KeyEventType(gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Enum()), nil
 }
+
+func (e KeyEventType) SetValue(v *gobject.Value) {
+	panic("TODO")
+}
+
 // Layer wraps AtkLayer
 //
 // Describes the layer of a component
@@ -269,8 +273,13 @@ const (
 )
 
 func marshalLayer(p uintptr) (interface{}, error) {
-	return Layer(gobject.ValueFromNative(unsafe.Pointer(p)).Enum()), nil
+	return Layer(gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Enum()), nil
 }
+
+func (e Layer) SetValue(v *gobject.Value) {
+	panic("TODO")
+}
+
 // Live wraps AtkLive
 //
 // Enumeration used to indicate a type of live region and how assertive it
@@ -295,8 +304,13 @@ const (
 )
 
 func marshalLive(p uintptr) (interface{}, error) {
-	return Live(gobject.ValueFromNative(unsafe.Pointer(p)).Enum()), nil
+	return Live(gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Enum()), nil
 }
+
+func (e Live) SetValue(v *gobject.Value) {
+	panic("TODO")
+}
+
 // RelationType wraps AtkRelationType
 //
 // Describes the type of the relation
@@ -423,8 +437,13 @@ const (
 )
 
 func marshalRelationType(p uintptr) (interface{}, error) {
-	return RelationType(gobject.ValueFromNative(unsafe.Pointer(p)).Enum()), nil
+	return RelationType(gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Enum()), nil
 }
+
+func (e RelationType) SetValue(v *gobject.Value) {
+	panic("TODO")
+}
+
 // Role wraps AtkRole
 //
 // Describes the role of an object
@@ -1031,8 +1050,13 @@ const (
 )
 
 func marshalRole(p uintptr) (interface{}, error) {
-	return Role(gobject.ValueFromNative(unsafe.Pointer(p)).Enum()), nil
+	return Role(gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Enum()), nil
 }
+
+func (e Role) SetValue(v *gobject.Value) {
+	panic("TODO")
+}
+
 // ScrollType wraps AtkScrollType
 //
 // Specifies where an object should be placed on the screen when using scroll_to.
@@ -1078,8 +1102,13 @@ const (
 )
 
 func marshalScrollType(p uintptr) (interface{}, error) {
-	return ScrollType(gobject.ValueFromNative(unsafe.Pointer(p)).Enum()), nil
+	return ScrollType(gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Enum()), nil
 }
+
+func (e ScrollType) SetValue(v *gobject.Value) {
+	panic("TODO")
+}
+
 // StateType wraps AtkStateType
 //
 // The possible types of states of an object
@@ -1336,8 +1365,13 @@ const (
 )
 
 func marshalStateType(p uintptr) (interface{}, error) {
-	return StateType(gobject.ValueFromNative(unsafe.Pointer(p)).Enum()), nil
+	return StateType(gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Enum()), nil
 }
+
+func (e StateType) SetValue(v *gobject.Value) {
+	panic("TODO")
+}
+
 // TextAttribute wraps AtkTextAttribute
 //
 // Describes the text attributes supported
@@ -1467,8 +1501,13 @@ const (
 )
 
 func marshalTextAttribute(p uintptr) (interface{}, error) {
-	return TextAttribute(gobject.ValueFromNative(unsafe.Pointer(p)).Enum()), nil
+	return TextAttribute(gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Enum()), nil
 }
+
+func (e TextAttribute) SetValue(v *gobject.Value) {
+	panic("TODO")
+}
+
 // TextBoundary wraps AtkTextBoundary
 //
 // Text boundary types used for specifying boundaries for regions of text.
@@ -1515,8 +1554,13 @@ const (
 )
 
 func marshalTextBoundary(p uintptr) (interface{}, error) {
-	return TextBoundary(gobject.ValueFromNative(unsafe.Pointer(p)).Enum()), nil
+	return TextBoundary(gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Enum()), nil
 }
+
+func (e TextBoundary) SetValue(v *gobject.Value) {
+	panic("TODO")
+}
+
 // TextClipType wraps AtkTextClipType
 //
 // Describes the type of clipping required.
@@ -1542,8 +1586,13 @@ const (
 )
 
 func marshalTextClipType(p uintptr) (interface{}, error) {
-	return TextClipType(gobject.ValueFromNative(unsafe.Pointer(p)).Enum()), nil
+	return TextClipType(gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Enum()), nil
 }
+
+func (e TextClipType) SetValue(v *gobject.Value) {
+	panic("TODO")
+}
+
 // TextGranularity wraps AtkTextGranularity
 //
 // Text granularity types used for specifying the granularity of the region of
@@ -1583,8 +1632,13 @@ const (
 )
 
 func marshalTextGranularity(p uintptr) (interface{}, error) {
-	return TextGranularity(gobject.ValueFromNative(unsafe.Pointer(p)).Enum()), nil
+	return TextGranularity(gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Enum()), nil
 }
+
+func (e TextGranularity) SetValue(v *gobject.Value) {
+	panic("TODO")
+}
+
 // ValueType wraps AtkValueType
 //
 // Default types for a given value. Those are defined in order to
@@ -1628,8 +1682,13 @@ const (
 )
 
 func marshalValueType(p uintptr) (interface{}, error) {
-	return ValueType(gobject.ValueFromNative(unsafe.Pointer(p)).Enum()), nil
+	return ValueType(gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Enum()), nil
 }
+
+func (e ValueType) SetValue(v *gobject.Value) {
+	panic("TODO")
+}
+
 // HyperlinkStateFlags wraps AtkHyperlinkStateFlags
 //
 // Describes the type of link
@@ -1643,11 +1702,15 @@ const (
 )
 
 func marshalHyperlinkStateFlags(p uintptr) (interface{}, error) {
-	return HyperlinkStateFlags(gobject.ValueFromNative(unsafe.Pointer(p)).Flags()), nil
+	return HyperlinkStateFlags(gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Flags()), nil
 }
 // Has returns true if h contains other
 func (h HyperlinkStateFlags) Has(other HyperlinkStateFlags) bool {
 	return (h & other) == other
+}
+
+func (h HyperlinkStateFlags) SetValue(v *gobject.Value) {
+	panic("TODO")
 }
 
 // EventListener wraps AtkEventListener
@@ -1693,7 +1756,7 @@ type Function func() (ret bool)
 // An #AtkKeySnoopFunc is a type of callback which is called whenever a key event occurs,
 // if registered via atk_add_key_event_listener.  It allows for pre-emptive
 // interception of key events via the return code as described below.
-type KeySnoopFunc func(event *KeyEventStruct) (ret int)
+type KeySnoopFunc func(event KeyEventStruct) (ret int)
 
 // PropertyChangeHandler wraps AtkPropertyChangeHandler
 //
@@ -1702,7 +1765,7 @@ type KeySnoopFunc func(event *KeyEventStruct) (ret int)
 // atk_object_connect_property_change_handler().
 //
 // Deprecated: Since 2.12.
-type PropertyChangeHandler func(obj Object, vals *PropertyValues)
+type PropertyChangeHandler func(obj Object, vals PropertyValues)
 
 // FocusTrackerNotify wraps atk_focus_tracker_notify
 // 
@@ -1719,7 +1782,7 @@ type PropertyChangeHandler func(obj Object, vals *PropertyValues)
 // to notify a focus change on your implementation, you can use
 // atk_object_notify_state_change() instead.
 func FocusTrackerNotify(object Object) {
-	var carg1 *C.AtkObject // in, none, class
+	var carg1 *C.AtkObject // in, none, converted
 
 	carg1 = (*C.AtkObject)(UnsafeObjectToGlibNone(object))
 
@@ -1735,7 +1798,7 @@ func FocusTrackerNotify(object Object) {
 // Returns the binary age as passed to libtool when building the ATK
 // library the process is running against.
 func GetBinaryAge() uint {
-	var cret C.guint // return, casted
+	var cret C.guint // return, none, casted
 
 	cret = C.atk_get_binary_age()
 
@@ -1759,7 +1822,7 @@ func GetBinaryAge() uint {
 // to associate an #AtkObjectFactory subclass with the GType of objects
 // for whom accessibility information will be provided.
 func GetDefaultRegistry() Registry {
-	var cret *C.AtkRegistry // return, full, class
+	var cret *C.AtkRegistry // return, full, converted
 
 	cret = C.atk_get_default_registry()
 
@@ -1777,7 +1840,7 @@ func GetDefaultRegistry() Registry {
 //
 // Gets the currently focused object.
 func GetFocusObject() Object {
-	var cret *C.AtkObject // return, none, class
+	var cret *C.AtkObject // return, none, converted
 
 	cret = C.atk_get_focus_object()
 
@@ -1796,7 +1859,7 @@ func GetFocusObject() Object {
 // Returns the interface age as passed to libtool when building the
 // ATK library the process is running against.
 func GetInterfaceAge() uint {
-	var cret C.guint // return, casted
+	var cret C.guint // return, none, casted
 
 	cret = C.atk_get_interface_age()
 
@@ -1820,7 +1883,7 @@ func GetInterfaceAge() uint {
 // macro represents the major version of the ATK headers you have
 // included when compiling your code.
 func GetMajorVersion() uint {
-	var cret C.guint // return, casted
+	var cret C.guint // return, none, casted
 
 	cret = C.atk_get_major_version()
 
@@ -1844,7 +1907,7 @@ func GetMajorVersion() uint {
 // #ATK_MICRO_VERSION macro represents the micro version of the ATK
 // headers you have included when compiling your code.
 func GetMicroVersion() uint {
-	var cret C.guint // return, casted
+	var cret C.guint // return, none, casted
 
 	cret = C.atk_get_micro_version()
 
@@ -1868,7 +1931,7 @@ func GetMicroVersion() uint {
 // #ATK_MINOR_VERSION macro represents the minor version of the ATK
 // headers you have included when compiling your code.
 func GetMinorVersion() uint {
-	var cret C.guint // return, casted
+	var cret C.guint // return, none, casted
 
 	cret = C.atk_get_minor_version()
 
@@ -1886,7 +1949,7 @@ func GetMinorVersion() uint {
 //
 // Gets the root accessible container for the current application.
 func GetRoot() Object {
-	var cret *C.AtkObject // return, none, class
+	var cret *C.AtkObject // return, none, converted
 
 	cret = C.atk_get_root()
 
@@ -1965,7 +2028,7 @@ func GetVersion() string {
 //   implementation, subscribe to the #AtkObject::state-change "focused"
 //   signal.
 func RemoveFocusTracker(trackerId uint) {
-	var carg1 C.guint // in, casted
+	var carg1 C.guint // in, none, casted
 
 	carg1 = C.guint(trackerId)
 
@@ -1991,7 +2054,7 @@ func RemoveFocusTracker(trackerId uint) {
 // 
 // Removes the specified event listener
 func RemoveGlobalEventListener(listenerId uint) {
-	var carg1 C.guint // in, casted
+	var carg1 C.guint // in, none, casted
 
 	carg1 = C.guint(listenerId)
 
@@ -2010,7 +2073,7 @@ func RemoveGlobalEventListener(listenerId uint) {
 // 
 // Removes the specified event listener.
 func RemoveKeyEventListener(listenerId uint) {
-	var carg1 C.guint // in, casted
+	var carg1 C.guint // in, none, casted
 
 	carg1 = C.guint(listenerId)
 
@@ -2021,7 +2084,7 @@ func RemoveKeyEventListener(listenerId uint) {
 // ActionInstance is the instance type used by all types implementing AtkAction. It is used internally by the bindings. Users should use the interface [Action] instead.
 type ActionInstance struct {
 	_ [0]func() // equal guard
-	*gobject.Object
+	*gobject.ObjectInstance
 }
 
 var _ Action = (*ActionInstance)(nil)
@@ -2049,7 +2112,7 @@ var _ Action = (*ActionInstance)(nil)
 // exposing redundant actions if possible.  By convention we have been
 // using "mouse centric" terminology for #AtkAction names.
 type Action interface {
-	gobject.ObjectLike
+	gobject.Object
 
 	// DoAction wraps atk_action_do_action
 	// 
@@ -2169,14 +2232,14 @@ type Action interface {
 	SetDescription(int, string) bool
 }
 
-func unsafeWrapAction(base *gobject.Object) *ActionInstance {
+func unsafeWrapAction(base *gobject.ObjectInstance) *ActionInstance {
 	return &ActionInstance{
-		Object: base,
+		ObjectInstance: base,
 	}
 }
 
 func marshalActionInstance(p uintptr) (interface{}, error) {
-	return unsafeWrapAction(gobject.ValueFromNative(unsafe.Pointer(p)).Object()), nil
+	return unsafeWrapAction(gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Object()), nil
 }
 
 // UnsafeActionFromGlibBorrow is used to convert raw AtkAction pointers to go. This is used by the bindings internally.
@@ -2216,8 +2279,8 @@ func UnsafeActionToGlibFull(c Action) unsafe.Pointer {
 //
 // Perform the specified action on the object.
 func (action *ActionInstance) DoAction(i int) bool {
-	var carg0 *C.AtkAction // in, none, interface
-	var carg1 C.int        // in, casted
+	var carg0 *C.AtkAction // in, none, converted
+	var carg1 C.int        // in, none, casted
 	var cret  C.gboolean   // return
 
 	carg0 = (*C.AtkAction)(UnsafeActionToGlibNone(action))
@@ -2248,8 +2311,8 @@ func (action *ActionInstance) DoAction(i int) bool {
 //
 // Returns a description of the specified action of the object.
 func (action *ActionInstance) GetDescription(i int) string {
-	var carg0 *C.AtkAction // in, none, interface
-	var carg1 C.int        // in, casted
+	var carg0 *C.AtkAction // in, none, converted
+	var carg1 C.int        // in, none, casted
 	var cret  *C.gchar     // return, none, string
 
 	carg0 = (*C.AtkAction)(UnsafeActionToGlibNone(action))
@@ -2299,8 +2362,8 @@ func (action *ActionInstance) GetDescription(i int) string {
 // for the German locale. If, hypothetically, this menu item lacked a mnemonic,
 // it would be represented by ";;Ctrl+N" and ";;Strg+N" respectively.
 func (action *ActionInstance) GetKeybinding(i int) string {
-	var carg0 *C.AtkAction // in, none, interface
-	var carg1 C.int        // in, casted
+	var carg0 *C.AtkAction // in, none, converted
+	var carg1 C.int        // in, none, casted
 	var cret  *C.gchar     // return, none, string
 
 	carg0 = (*C.AtkAction)(UnsafeActionToGlibNone(action))
@@ -2329,8 +2392,8 @@ func (action *ActionInstance) GetKeybinding(i int) string {
 //
 // Returns the localized name of the specified action of the object.
 func (action *ActionInstance) GetLocalizedName(i int) string {
-	var carg0 *C.AtkAction // in, none, interface
-	var carg1 C.int        // in, casted
+	var carg0 *C.AtkAction // in, none, converted
+	var carg1 C.int        // in, none, casted
 	var cret  *C.gchar     // return, none, string
 
 	carg0 = (*C.AtkAction)(UnsafeActionToGlibNone(action))
@@ -2356,8 +2419,8 @@ func (action *ActionInstance) GetLocalizedName(i int) string {
 // If there are more than one, the first one is considered the
 // "default" action of the object.
 func (action *ActionInstance) GetNActions() int {
-	var carg0 *C.AtkAction // in, none, interface
-	var cret  C.int        // return, casted
+	var carg0 *C.AtkAction // in, none, converted
+	var cret  C.int        // return, none, casted
 
 	carg0 = (*C.AtkAction)(UnsafeActionToGlibNone(action))
 
@@ -2396,8 +2459,8 @@ func (action *ActionInstance) GetNActions() int {
 // i.e. the result of some actions via atk_action_do_action() may be
 // NIL.
 func (action *ActionInstance) GetName(i int) string {
-	var carg0 *C.AtkAction // in, none, interface
-	var carg1 C.int        // in, casted
+	var carg0 *C.AtkAction // in, none, converted
+	var carg1 C.int        // in, none, casted
 	var cret  *C.gchar     // return, none, string
 
 	carg0 = (*C.AtkAction)(UnsafeActionToGlibNone(action))
@@ -2427,8 +2490,8 @@ func (action *ActionInstance) GetName(i int) string {
 //
 // Sets a description of the specified action of the object.
 func (action *ActionInstance) SetDescription(i int, desc string) bool {
-	var carg0 *C.AtkAction // in, none, interface
-	var carg1 C.int        // in, casted
+	var carg0 *C.AtkAction // in, none, converted
+	var carg1 C.int        // in, none, casted
 	var carg2 *C.gchar     // in, none, string
 	var cret  C.gboolean   // return
 
@@ -2454,7 +2517,7 @@ func (action *ActionInstance) SetDescription(i int, desc string) bool {
 // ComponentInstance is the instance type used by all types implementing AtkComponent. It is used internally by the bindings. Users should use the interface [Component] instead.
 type ComponentInstance struct {
 	_ [0]func() // equal guard
-	*gobject.Object
+	*gobject.ObjectInstance
 }
 
 var _ Component = (*ComponentInstance)(nil)
@@ -2476,7 +2539,7 @@ var _ Component = (*ComponentInstance)(nil)
 // transparent background, in which case text glyph bounding box
 // information is provided by #AtkText.
 type Component interface {
-	gobject.ObjectLike
+	gobject.Object
 
 	// Contains wraps atk_component_contains
 	// 
@@ -2692,14 +2755,14 @@ type Component interface {
 	SetSize(int, int) bool
 }
 
-func unsafeWrapComponent(base *gobject.Object) *ComponentInstance {
+func unsafeWrapComponent(base *gobject.ObjectInstance) *ComponentInstance {
 	return &ComponentInstance{
-		Object: base,
+		ObjectInstance: base,
 	}
 }
 
 func marshalComponentInstance(p uintptr) (interface{}, error) {
-	return unsafeWrapComponent(gobject.ValueFromNative(unsafe.Pointer(p)).Object()), nil
+	return unsafeWrapComponent(gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Object()), nil
 }
 
 // UnsafeComponentFromGlibBorrow is used to convert raw AtkComponent pointers to go. This is used by the bindings internally.
@@ -2746,10 +2809,10 @@ func UnsafeComponentToGlibFull(c Component) unsafe.Pointer {
 // this virtual method. In general there are little reason to
 // re-implement it.
 func (component *ComponentInstance) Contains(x int, y int, coordType CoordType) bool {
-	var carg0 *C.AtkComponent // in, none, interface
-	var carg1 C.int           // in, casted
-	var carg2 C.int           // in, casted
-	var carg3 C.AtkCoordType  // in, casted
+	var carg0 *C.AtkComponent // in, none, converted
+	var carg1 C.int           // in, none, casted
+	var carg2 C.int           // in, none, casted
+	var carg3 C.AtkCoordType  // in, none, casted
 	var cret  C.gboolean      // return
 
 	carg0 = (*C.AtkComponent)(UnsafeComponentToGlibNone(component))
@@ -2781,8 +2844,8 @@ func (component *ComponentInstance) Contains(x int, y int, coordType CoordType) 
 // @component, on a scale from 0 (fully transparent) to 1.0
 // (fully opaque).
 func (component *ComponentInstance) GetAlpha() float64 {
-	var carg0 *C.AtkComponent // in, none, interface
-	var cret  C.gdouble       // return, casted
+	var carg0 *C.AtkComponent // in, none, converted
+	var cret  C.gdouble       // return, none, casted
 
 	carg0 = (*C.AtkComponent)(UnsafeComponentToGlibNone(component))
 
@@ -2815,12 +2878,12 @@ func (component *ComponentInstance) GetAlpha() float64 {
 // If the extent can not be obtained (e.g. a non-embedded plug or missing
 // support), all of x, y, width, height are set to -1.
 func (component *ComponentInstance) GetExtents(coordType CoordType) (int, int, int, int) {
-	var carg0 *C.AtkComponent // in, none, interface
-	var carg5 C.AtkCoordType  // in, casted
-	var carg1 C.int           // out, casted
-	var carg2 C.int           // out, casted
-	var carg3 C.int           // out, casted
-	var carg4 C.int           // out, casted
+	var carg0 *C.AtkComponent // in, none, converted
+	var carg5 C.AtkCoordType  // in, none, casted
+	var carg1 C.int           // out, full, casted
+	var carg2 C.int           // out, full, casted
+	var carg3 C.int           // out, full, casted
+	var carg4 C.int           // out, full, casted
 
 	carg0 = (*C.AtkComponent)(UnsafeComponentToGlibNone(component))
 	carg5 = C.AtkCoordType(coordType)
@@ -2849,8 +2912,8 @@ func (component *ComponentInstance) GetExtents(coordType CoordType) (int, int, i
 //
 // Gets the layer of the component.
 func (component *ComponentInstance) GetLayer() Layer {
-	var carg0 *C.AtkComponent // in, none, interface
-	var cret  C.AtkLayer      // return, casted
+	var carg0 *C.AtkComponent // in, none, converted
+	var cret  C.AtkLayer      // return, none, casted
 
 	carg0 = (*C.AtkComponent)(UnsafeComponentToGlibNone(component))
 
@@ -2872,8 +2935,8 @@ func (component *ComponentInstance) GetLayer() Layer {
 // Gets the zorder of the component. The value G_MININT will be returned
 // if the layer of the component is not ATK_LAYER_MDI or ATK_LAYER_WINDOW.
 func (component *ComponentInstance) GetMDIZOrder() int {
-	var carg0 *C.AtkComponent // in, none, interface
-	var cret  C.int           // return, casted
+	var carg0 *C.AtkComponent // in, none, converted
+	var cret  C.int           // return, none, casted
 
 	carg0 = (*C.AtkComponent)(UnsafeComponentToGlibNone(component))
 
@@ -2907,10 +2970,10 @@ func (component *ComponentInstance) GetMDIZOrder() int {
 //
 // Deprecated: Since 2.12. Use atk_component_get_extents() instead.
 func (component *ComponentInstance) GetPosition(coordType CoordType) (int, int) {
-	var carg0 *C.AtkComponent // in, none, interface
-	var carg3 C.AtkCoordType  // in, casted
-	var carg1 C.int           // out, casted
-	var carg2 C.int           // out, casted
+	var carg0 *C.AtkComponent // in, none, converted
+	var carg3 C.AtkCoordType  // in, none, casted
+	var carg1 C.int           // out, full, casted
+	var carg2 C.int           // out, full, casted
 
 	carg0 = (*C.AtkComponent)(UnsafeComponentToGlibNone(component))
 	carg3 = C.AtkCoordType(coordType)
@@ -2941,9 +3004,9 @@ func (component *ComponentInstance) GetPosition(coordType CoordType) (int, int) 
 //
 // Deprecated: Since 2.12. Use atk_component_get_extents() instead.
 func (component *ComponentInstance) GetSize() (int, int) {
-	var carg0 *C.AtkComponent // in, none, interface
-	var carg1 C.int           // out, casted
-	var carg2 C.int           // out, casted
+	var carg0 *C.AtkComponent // in, none, converted
+	var carg1 C.int           // out, full, casted
+	var carg2 C.int           // out, full, casted
 
 	carg0 = (*C.AtkComponent)(UnsafeComponentToGlibNone(component))
 
@@ -2966,7 +3029,7 @@ func (component *ComponentInstance) GetSize() (int, int) {
 //
 // Grabs focus for this @component.
 func (component *ComponentInstance) GrabFocus() bool {
-	var carg0 *C.AtkComponent // in, none, interface
+	var carg0 *C.AtkComponent // in, none, converted
 	var cret  C.gboolean      // return
 
 	carg0 = (*C.AtkComponent)(UnsafeComponentToGlibNone(component))
@@ -2999,11 +3062,11 @@ func (component *ComponentInstance) GrabFocus() bool {
 // Gets a reference to the accessible child, if one exists, at the
 // coordinate point specified by @x and @y.
 func (component *ComponentInstance) RefAccessibleAtPoint(x int, y int, coordType CoordType) Object {
-	var carg0 *C.AtkComponent // in, none, interface
-	var carg1 C.int           // in, casted
-	var carg2 C.int           // in, casted
-	var carg3 C.AtkCoordType  // in, casted
-	var cret  *C.AtkObject    // return, full, class
+	var carg0 *C.AtkComponent // in, none, converted
+	var carg1 C.int           // in, none, casted
+	var carg2 C.int           // in, none, casted
+	var carg3 C.AtkCoordType  // in, none, casted
+	var cret  *C.AtkObject    // return, full, converted
 
 	carg0 = (*C.AtkComponent)(UnsafeComponentToGlibNone(component))
 	carg1 = C.int(x)
@@ -3037,8 +3100,8 @@ func (component *ComponentInstance) RefAccessibleAtPoint(x int, y int, coordType
 // Deprecated: (since 2.9.4) If you need to track when an object gains or
 // lose the focus, use the #AtkObject::state-change "focused" notification instead.
 func (component *ComponentInstance) RemoveFocusHandler(handlerId uint) {
-	var carg0 *C.AtkComponent // in, none, interface
-	var carg1 C.guint         // in, casted
+	var carg0 *C.AtkComponent // in, none, converted
+	var carg1 C.guint         // in, none, casted
 
 	carg0 = (*C.AtkComponent)(UnsafeComponentToGlibNone(component))
 	carg1 = C.guint(handlerId)
@@ -3064,8 +3127,8 @@ func (component *ComponentInstance) RemoveFocusHandler(handlerId uint) {
 // @component in its parent, this only makes the parents scroll so that the
 // object shows up on the screen, given its current position within the parents.
 func (component *ComponentInstance) ScrollTo(typ ScrollType) bool {
-	var carg0 *C.AtkComponent // in, none, interface
-	var carg1 C.AtkScrollType // in, casted
+	var carg0 *C.AtkComponent // in, none, converted
+	var carg1 C.AtkScrollType // in, none, casted
 	var cret  C.gboolean      // return
 
 	carg0 = (*C.AtkComponent)(UnsafeComponentToGlibNone(component))
@@ -3100,10 +3163,10 @@ func (component *ComponentInstance) ScrollTo(typ ScrollType) bool {
 // Move the top-left of @component to a given position of the screen by
 // scrolling all necessary parents.
 func (component *ComponentInstance) ScrollToPoint(coords CoordType, x int, y int) bool {
-	var carg0 *C.AtkComponent // in, none, interface
-	var carg1 C.AtkCoordType  // in, casted
-	var carg2 C.int           // in, casted
-	var carg3 C.int           // in, casted
+	var carg0 *C.AtkComponent // in, none, converted
+	var carg1 C.AtkCoordType  // in, none, casted
+	var carg2 C.int           // in, none, casted
+	var carg3 C.int           // in, none, casted
 	var cret  C.gboolean      // return
 
 	carg0 = (*C.AtkComponent)(UnsafeComponentToGlibNone(component))
@@ -3143,12 +3206,12 @@ func (component *ComponentInstance) ScrollToPoint(coords CoordType, x int, y int
 //
 // Sets the extents of @component.
 func (component *ComponentInstance) SetExtents(x int, y int, width int, height int, coordType CoordType) bool {
-	var carg0 *C.AtkComponent // in, none, interface
-	var carg1 C.int           // in, casted
-	var carg2 C.int           // in, casted
-	var carg3 C.int           // in, casted
-	var carg4 C.int           // in, casted
-	var carg5 C.AtkCoordType  // in, casted
+	var carg0 *C.AtkComponent // in, none, converted
+	var carg1 C.int           // in, none, casted
+	var carg2 C.int           // in, none, casted
+	var carg3 C.int           // in, none, casted
+	var carg4 C.int           // in, none, casted
+	var carg5 C.AtkCoordType  // in, none, casted
 	var cret  C.gboolean      // return
 
 	carg0 = (*C.AtkComponent)(UnsafeComponentToGlibNone(component))
@@ -3193,10 +3256,10 @@ func (component *ComponentInstance) SetExtents(x int, y int, width int, height i
 // Contrary to atk_component_scroll_to, this does not trigger any scrolling,
 // this just moves @component in its parent.
 func (component *ComponentInstance) SetPosition(x int, y int, coordType CoordType) bool {
-	var carg0 *C.AtkComponent // in, none, interface
-	var carg1 C.int           // in, casted
-	var carg2 C.int           // in, casted
-	var carg3 C.AtkCoordType  // in, casted
+	var carg0 *C.AtkComponent // in, none, converted
+	var carg1 C.int           // in, none, casted
+	var carg2 C.int           // in, none, casted
+	var carg3 C.AtkCoordType  // in, none, casted
 	var cret  C.gboolean      // return
 
 	carg0 = (*C.AtkComponent)(UnsafeComponentToGlibNone(component))
@@ -3232,9 +3295,9 @@ func (component *ComponentInstance) SetPosition(x int, y int, coordType CoordTyp
 //
 // Set the size of the @component in terms of width and height.
 func (component *ComponentInstance) SetSize(width int, height int) bool {
-	var carg0 *C.AtkComponent // in, none, interface
-	var carg1 C.int           // in, casted
-	var carg2 C.int           // in, casted
+	var carg0 *C.AtkComponent // in, none, converted
+	var carg1 C.int           // in, none, casted
+	var carg2 C.int           // in, none, casted
 	var cret  C.gboolean      // return
 
 	carg0 = (*C.AtkComponent)(UnsafeComponentToGlibNone(component))
@@ -3258,7 +3321,7 @@ func (component *ComponentInstance) SetSize(width int, height int) bool {
 // DocumentInstance is the instance type used by all types implementing AtkDocument. It is used internally by the bindings. Users should use the interface [Document] instead.
 type DocumentInstance struct {
 	_ [0]func() // equal guard
-	*gobject.Object
+	*gobject.ObjectInstance
 }
 
 var _ Document = (*DocumentInstance)(nil)
@@ -3276,7 +3339,7 @@ var _ Document = (*DocumentInstance)(nil)
 // cases where one document contains "embedded content" which can
 // reasonably be considered a document in its own right.
 type Document interface {
-	gobject.ObjectLike
+	gobject.Object
 
 	// GetAttributeValue wraps atk_document_get_attribute_value
 	// 
@@ -3291,14 +3354,6 @@ type Document interface {
 	//
 	// Retrieves the value of the given @attribute_name inside @document.
 	GetAttributeValue(string) string
-	// GetAttributes wraps atk_document_get_attributes
-	// The function returns the following values:
-	// 
-	// 	- ret *AttributeSet 
-	//
-	// Gets an AtkAttributeSet which describes document-wide
-	//          attributes as name-value pairs.
-	GetAttributes() *AttributeSet
 	// GetCurrentPageNumber wraps atk_document_get_current_page_number
 	// The function returns the following values:
 	// 
@@ -3365,14 +3420,14 @@ type Document interface {
 	SetAttributeValue(string, string) bool
 }
 
-func unsafeWrapDocument(base *gobject.Object) *DocumentInstance {
+func unsafeWrapDocument(base *gobject.ObjectInstance) *DocumentInstance {
 	return &DocumentInstance{
-		Object: base,
+		ObjectInstance: base,
 	}
 }
 
 func marshalDocumentInstance(p uintptr) (interface{}, error) {
-	return unsafeWrapDocument(gobject.ValueFromNative(unsafe.Pointer(p)).Object()), nil
+	return unsafeWrapDocument(gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Object()), nil
 }
 
 // UnsafeDocumentFromGlibBorrow is used to convert raw AtkDocument pointers to go. This is used by the bindings internally.
@@ -3413,7 +3468,7 @@ func UnsafeDocumentToGlibFull(c Document) unsafe.Pointer {
 //
 // Retrieves the value of the given @attribute_name inside @document.
 func (document *DocumentInstance) GetAttributeValue(attributeName string) string {
-	var carg0 *C.AtkDocument // in, none, interface
+	var carg0 *C.AtkDocument // in, none, converted
 	var carg1 *C.gchar       // in, none, string
 	var cret  *C.gchar       // return, none, string
 
@@ -3432,29 +3487,6 @@ func (document *DocumentInstance) GetAttributeValue(attributeName string) string
 	return ret
 }
 
-// GetAttributes wraps atk_document_get_attributes
-// The function returns the following values:
-// 
-// 	- ret *AttributeSet 
-//
-// Gets an AtkAttributeSet which describes document-wide
-//          attributes as name-value pairs.
-func (document *DocumentInstance) GetAttributes() *AttributeSet {
-	var carg0 *C.AtkDocument     // in, none, interface
-	var cret  *C.AtkAttributeSet // return, transfer: none, scope: , implicit: false, skip: false, optional: false, nullable: false, caller-allocates: false, has closure: false, has destroy: false
-
-	carg0 = (*C.AtkDocument)(UnsafeDocumentToGlibNone(document))
-
-	cret = C.atk_document_get_attributes(carg0)
-	runtime.KeepAlive(document)
-
-	var ret *AttributeSet
-
-	panic("unimplemented conversion of *typesystem.PointerType (AtkAttributeSet*)")
-
-	return ret
-}
-
 // GetCurrentPageNumber wraps atk_document_get_current_page_number
 // The function returns the following values:
 // 
@@ -3462,8 +3494,8 @@ func (document *DocumentInstance) GetAttributes() *AttributeSet {
 //
 // Retrieves the current page number inside @document.
 func (document *DocumentInstance) GetCurrentPageNumber() int {
-	var carg0 *C.AtkDocument // in, none, interface
-	var cret  C.int          // return, casted
+	var carg0 *C.AtkDocument // in, none, converted
+	var cret  C.int          // return, none, casted
 
 	carg0 = (*C.AtkDocument)(UnsafeDocumentToGlibNone(document))
 
@@ -3490,8 +3522,8 @@ func (document *DocumentInstance) GetCurrentPageNumber() int {
 // the document. Use it directly, or one of its children, as an
 // instance of the DOM.
 func (document *DocumentInstance) GetDocument() unsafe.Pointer {
-	var carg0 *C.AtkDocument // in, none, interface
-	var cret  C.gpointer     // return, casted
+	var carg0 *C.AtkDocument // in, none, converted
+	var cret  C.gpointer     // return, none, casted
 
 	carg0 = (*C.AtkDocument)(UnsafeDocumentToGlibNone(document))
 
@@ -3515,7 +3547,7 @@ func (document *DocumentInstance) GetDocument() unsafe.Pointer {
 // Deprecated: Since 2.12. Please use atk_document_get_attributes() to
 // ask for the document type if it applies.
 func (document *DocumentInstance) GetDocumentType() string {
-	var carg0 *C.AtkDocument // in, none, interface
+	var carg0 *C.AtkDocument // in, none, converted
 	var cret  *C.gchar       // return, none, string
 
 	carg0 = (*C.AtkDocument)(UnsafeDocumentToGlibNone(document))
@@ -3543,7 +3575,7 @@ func (document *DocumentInstance) GetDocumentType() string {
 //
 // Deprecated: (since 2.7.90) Please use atk_object_get_object_locale() instead.
 func (document *DocumentInstance) GetLocale() string {
-	var carg0 *C.AtkDocument // in, none, interface
+	var carg0 *C.AtkDocument // in, none, converted
 	var cret  *C.gchar       // return, none, string
 
 	carg0 = (*C.AtkDocument)(UnsafeDocumentToGlibNone(document))
@@ -3565,8 +3597,8 @@ func (document *DocumentInstance) GetLocale() string {
 //
 // Retrieves the total number of pages inside @document.
 func (document *DocumentInstance) GetPageCount() int {
-	var carg0 *C.AtkDocument // in, none, interface
-	var cret  C.int          // return, casted
+	var carg0 *C.AtkDocument // in, none, converted
+	var cret  C.int          // return, none, casted
 
 	carg0 = (*C.AtkDocument)(UnsafeDocumentToGlibNone(document))
 
@@ -3594,7 +3626,7 @@ func (document *DocumentInstance) GetPageCount() int {
 //
 // Sets the value for the given @attribute_name inside @document.
 func (document *DocumentInstance) SetAttributeValue(attributeName string, attributeValue string) bool {
-	var carg0 *C.AtkDocument // in, none, interface
+	var carg0 *C.AtkDocument // in, none, converted
 	var carg1 *C.gchar       // in, none, string
 	var carg2 *C.gchar       // in, none, string
 	var cret  C.gboolean     // return
@@ -3622,7 +3654,7 @@ func (document *DocumentInstance) SetAttributeValue(attributeName string, attrib
 // EditableTextInstance is the instance type used by all types implementing AtkEditableText. It is used internally by the bindings. Users should use the interface [EditableText] instead.
 type EditableTextInstance struct {
 	_ [0]func() // equal guard
-	*gobject.Object
+	*gobject.ObjectInstance
 }
 
 var _ EditableText = (*EditableTextInstance)(nil)
@@ -3641,7 +3673,7 @@ var _ EditableText = (*EditableTextInstance)(nil)
 // 
 // See [iface@AtkText]
 type EditableText interface {
-	gobject.ObjectLike
+	gobject.Object
 
 	// CopyText wraps atk_editable_text_copy_text
 	// 
@@ -3672,6 +3704,18 @@ type EditableText interface {
 	//
 	// Delete text @start_pos up to, but not including @end_pos.
 	DeleteText(int, int)
+	// InsertText wraps atk_editable_text_insert_text
+	// 
+	// The function takes the following parameters:
+	// 
+	// 	- str string: the text to insert 
+	// 	- length int: the length of text to insert, in bytes 
+	// 	- position int: The caller initializes this to
+	// the position at which to insert the text. After the call it
+	// points at the position after the newly inserted text. 
+	//
+	// Insert text at a given position.
+	InsertText(string, int, int)
 	// PasteText wraps atk_editable_text_paste_text
 	// 
 	// The function takes the following parameters:
@@ -3680,23 +3724,6 @@ type EditableText interface {
 	//
 	// Paste text from clipboard to specified @position.
 	PasteText(int)
-	// SetRunAttributes wraps atk_editable_text_set_run_attributes
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- attribSet *AttributeSet: an #AtkAttributeSet 
-	// 	- startOffset int: start of range in which to set attributes 
-	// 	- endOffset int: end of range in which to set attributes 
-	// 
-	// The function returns the following values:
-	// 
-	// 	- ret bool 
-	//
-	// Sets the attributes for a specified range. See the ATK_ATTRIBUTE
-	// macros (such as #ATK_ATTRIBUTE_LEFT_MARGIN) for examples of attributes
-	// that can be set. Note that other attributes that do not have corresponding
-	// ATK_ATTRIBUTE macros may also be set for certain text widgets.
-	SetRunAttributes(*AttributeSet, int, int) bool
 	// SetTextContents wraps atk_editable_text_set_text_contents
 	// 
 	// The function takes the following parameters:
@@ -3707,14 +3734,14 @@ type EditableText interface {
 	SetTextContents(string)
 }
 
-func unsafeWrapEditableText(base *gobject.Object) *EditableTextInstance {
+func unsafeWrapEditableText(base *gobject.ObjectInstance) *EditableTextInstance {
 	return &EditableTextInstance{
-		Object: base,
+		ObjectInstance: base,
 	}
 }
 
 func marshalEditableTextInstance(p uintptr) (interface{}, error) {
-	return unsafeWrapEditableText(gobject.ValueFromNative(unsafe.Pointer(p)).Object()), nil
+	return unsafeWrapEditableText(gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Object()), nil
 }
 
 // UnsafeEditableTextFromGlibBorrow is used to convert raw AtkEditableText pointers to go. This is used by the bindings internally.
@@ -3752,9 +3779,9 @@ func UnsafeEditableTextToGlibFull(c EditableText) unsafe.Pointer {
 // Copy text from @start_pos up to, but not including @end_pos
 // to the clipboard.
 func (text *EditableTextInstance) CopyText(startPos int, endPos int) {
-	var carg0 *C.AtkEditableText // in, none, interface
-	var carg1 C.int              // in, casted
-	var carg2 C.int              // in, casted
+	var carg0 *C.AtkEditableText // in, none, converted
+	var carg1 C.int              // in, none, casted
+	var carg2 C.int              // in, none, casted
 
 	carg0 = (*C.AtkEditableText)(UnsafeEditableTextToGlibNone(text))
 	carg1 = C.int(startPos)
@@ -3776,9 +3803,9 @@ func (text *EditableTextInstance) CopyText(startPos int, endPos int) {
 // Copy text from @start_pos up to, but not including @end_pos
 // to the clipboard and then delete from the widget.
 func (text *EditableTextInstance) CutText(startPos int, endPos int) {
-	var carg0 *C.AtkEditableText // in, none, interface
-	var carg1 C.int              // in, casted
-	var carg2 C.int              // in, casted
+	var carg0 *C.AtkEditableText // in, none, converted
+	var carg1 C.int              // in, none, casted
+	var carg2 C.int              // in, none, casted
 
 	carg0 = (*C.AtkEditableText)(UnsafeEditableTextToGlibNone(text))
 	carg1 = C.int(startPos)
@@ -3799,9 +3826,9 @@ func (text *EditableTextInstance) CutText(startPos int, endPos int) {
 //
 // Delete text @start_pos up to, but not including @end_pos.
 func (text *EditableTextInstance) DeleteText(startPos int, endPos int) {
-	var carg0 *C.AtkEditableText // in, none, interface
-	var carg1 C.int              // in, casted
-	var carg2 C.int              // in, casted
+	var carg0 *C.AtkEditableText // in, none, converted
+	var carg1 C.int              // in, none, casted
+	var carg2 C.int              // in, none, casted
 
 	carg0 = (*C.AtkEditableText)(UnsafeEditableTextToGlibNone(text))
 	carg1 = C.int(startPos)
@@ -3813,6 +3840,36 @@ func (text *EditableTextInstance) DeleteText(startPos int, endPos int) {
 	runtime.KeepAlive(endPos)
 }
 
+// InsertText wraps atk_editable_text_insert_text
+// 
+// The function takes the following parameters:
+// 
+// 	- str string: the text to insert 
+// 	- length int: the length of text to insert, in bytes 
+// 	- position int: The caller initializes this to
+// the position at which to insert the text. After the call it
+// points at the position after the newly inserted text. 
+//
+// Insert text at a given position.
+func (text *EditableTextInstance) InsertText(str string, length int, position int) {
+	var carg0 *C.AtkEditableText // in, none, converted
+	var carg1 *C.gchar           // in, none, string
+	var carg2 C.int              // in, none, casted
+	var carg3 *C.int             // in, none, casted
+
+	carg0 = (*C.AtkEditableText)(UnsafeEditableTextToGlibNone(text))
+	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(str)))
+	defer C.free(unsafe.Pointer(carg1))
+	carg2 = C.int(length)
+	carg3 = *C.int(position)
+
+	C.atk_editable_text_insert_text(carg0, carg1, carg2, carg3)
+	runtime.KeepAlive(text)
+	runtime.KeepAlive(str)
+	runtime.KeepAlive(length)
+	runtime.KeepAlive(position)
+}
+
 // PasteText wraps atk_editable_text_paste_text
 // 
 // The function takes the following parameters:
@@ -3821,8 +3878,8 @@ func (text *EditableTextInstance) DeleteText(startPos int, endPos int) {
 //
 // Paste text from clipboard to specified @position.
 func (text *EditableTextInstance) PasteText(position int) {
-	var carg0 *C.AtkEditableText // in, none, interface
-	var carg1 C.int              // in, casted
+	var carg0 *C.AtkEditableText // in, none, converted
+	var carg1 C.int              // in, none, casted
 
 	carg0 = (*C.AtkEditableText)(UnsafeEditableTextToGlibNone(text))
 	carg1 = C.int(position)
@@ -3830,49 +3887,6 @@ func (text *EditableTextInstance) PasteText(position int) {
 	C.atk_editable_text_paste_text(carg0, carg1)
 	runtime.KeepAlive(text)
 	runtime.KeepAlive(position)
-}
-
-// SetRunAttributes wraps atk_editable_text_set_run_attributes
-// 
-// The function takes the following parameters:
-// 
-// 	- attribSet *AttributeSet: an #AtkAttributeSet 
-// 	- startOffset int: start of range in which to set attributes 
-// 	- endOffset int: end of range in which to set attributes 
-// 
-// The function returns the following values:
-// 
-// 	- ret bool 
-//
-// Sets the attributes for a specified range. See the ATK_ATTRIBUTE
-// macros (such as #ATK_ATTRIBUTE_LEFT_MARGIN) for examples of attributes
-// that can be set. Note that other attributes that do not have corresponding
-// ATK_ATTRIBUTE macros may also be set for certain text widgets.
-func (text *EditableTextInstance) SetRunAttributes(attribSet *AttributeSet, startOffset int, endOffset int) bool {
-	var carg0 *C.AtkEditableText // in, none, interface
-	var carg1 *C.AtkAttributeSet // in, transfer: none, scope: call, implicit: false, skip: false, optional: false, nullable: false, caller-allocates: false, has closure: false, has destroy: false
-	var carg2 C.int              // in, casted
-	var carg3 C.int              // in, casted
-	var cret  C.gboolean         // return
-
-	carg0 = (*C.AtkEditableText)(UnsafeEditableTextToGlibNone(text))
-	panic("unimplemented conversion of *typesystem.PointerType (AtkAttributeSet*)")
-	carg2 = C.int(startOffset)
-	carg3 = C.int(endOffset)
-
-	cret = C.atk_editable_text_set_run_attributes(carg0, carg1, carg2, carg3)
-	runtime.KeepAlive(text)
-	runtime.KeepAlive(attribSet)
-	runtime.KeepAlive(startOffset)
-	runtime.KeepAlive(endOffset)
-
-	var ret bool
-
-	if cret != 0 {
-		ret = true
-	}
-
-	return ret
 }
 
 // SetTextContents wraps atk_editable_text_set_text_contents
@@ -3883,7 +3897,7 @@ func (text *EditableTextInstance) SetRunAttributes(attribSet *AttributeSet, star
 //
 // Set text contents of @text.
 func (text *EditableTextInstance) SetTextContents(str string) {
-	var carg0 *C.AtkEditableText // in, none, interface
+	var carg0 *C.AtkEditableText // in, none, converted
 	var carg1 *C.gchar           // in, none, string
 
 	carg0 = (*C.AtkEditableText)(UnsafeEditableTextToGlibNone(text))
@@ -3898,7 +3912,7 @@ func (text *EditableTextInstance) SetTextContents(str string) {
 // HyperlinkImplInstance is the instance type used by all types implementing AtkHyperlinkImpl. It is used internally by the bindings. Users should use the interface [HyperlinkImpl] instead.
 type HyperlinkImplInstance struct {
 	_ [0]func() // equal guard
-	*gobject.Object
+	*gobject.ObjectInstance
 }
 
 var _ HyperlinkImpl = (*HyperlinkImplInstance)(nil)
@@ -3911,7 +3925,7 @@ var _ HyperlinkImpl = (*HyperlinkImplInstance)(nil)
 // AtkHyperlink in that AtkHyperlink is an object type, rather than an
 // interface, and thus cannot be directly queried. FTW
 type HyperlinkImpl interface {
-	gobject.ObjectLike
+	gobject.Object
 
 	// GetHyperlink wraps atk_hyperlink_impl_get_hyperlink
 	// The function returns the following values:
@@ -3922,14 +3936,14 @@ type HyperlinkImpl interface {
 	GetHyperlink() Hyperlink
 }
 
-func unsafeWrapHyperlinkImpl(base *gobject.Object) *HyperlinkImplInstance {
+func unsafeWrapHyperlinkImpl(base *gobject.ObjectInstance) *HyperlinkImplInstance {
 	return &HyperlinkImplInstance{
-		Object: base,
+		ObjectInstance: base,
 	}
 }
 
 func marshalHyperlinkImplInstance(p uintptr) (interface{}, error) {
-	return unsafeWrapHyperlinkImpl(gobject.ValueFromNative(unsafe.Pointer(p)).Object()), nil
+	return unsafeWrapHyperlinkImpl(gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Object()), nil
 }
 
 // UnsafeHyperlinkImplFromGlibBorrow is used to convert raw AtkHyperlinkImpl pointers to go. This is used by the bindings internally.
@@ -3964,8 +3978,8 @@ func UnsafeHyperlinkImplToGlibFull(c HyperlinkImpl) unsafe.Pointer {
 //
 // Gets the hyperlink associated with this object.
 func (impl *HyperlinkImplInstance) GetHyperlink() Hyperlink {
-	var carg0 *C.AtkHyperlinkImpl // in, none, interface
-	var cret  *C.AtkHyperlink     // return, full, class
+	var carg0 *C.AtkHyperlinkImpl // in, none, converted
+	var cret  *C.AtkHyperlink     // return, full, converted
 
 	carg0 = (*C.AtkHyperlinkImpl)(UnsafeHyperlinkImplToGlibNone(impl))
 
@@ -3982,7 +3996,7 @@ func (impl *HyperlinkImplInstance) GetHyperlink() Hyperlink {
 // HypertextInstance is the instance type used by all types implementing AtkHypertext. It is used internally by the bindings. Users should use the interface [Hypertext] instead.
 type HypertextInstance struct {
 	_ [0]func() // equal guard
-	*gobject.Object
+	*gobject.ObjectInstance
 }
 
 var _ Hypertext = (*HypertextInstance)(nil)
@@ -4000,7 +4014,7 @@ var _ Hypertext = (*HypertextInstance)(nil)
 // Hypertext instances have textual content; they may implement Image
 // as well, and Hyperlinks need not have non-zero text offsets.
 type Hypertext interface {
-	gobject.ObjectLike
+	gobject.Object
 
 	// GetLink wraps atk_hypertext_get_link
 	// 
@@ -4037,14 +4051,14 @@ type Hypertext interface {
 	GetNLinks() int
 }
 
-func unsafeWrapHypertext(base *gobject.Object) *HypertextInstance {
+func unsafeWrapHypertext(base *gobject.ObjectInstance) *HypertextInstance {
 	return &HypertextInstance{
-		Object: base,
+		ObjectInstance: base,
 	}
 }
 
 func marshalHypertextInstance(p uintptr) (interface{}, error) {
-	return unsafeWrapHypertext(gobject.ValueFromNative(unsafe.Pointer(p)).Object()), nil
+	return unsafeWrapHypertext(gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Object()), nil
 }
 
 // UnsafeHypertextFromGlibBorrow is used to convert raw AtkHypertext pointers to go. This is used by the bindings internally.
@@ -4085,9 +4099,9 @@ func UnsafeHypertextToGlibFull(c Hypertext) unsafe.Pointer {
 // Gets the link in this hypertext document at index
 // @link_index
 func (hypertext *HypertextInstance) GetLink(linkIndex int) Hyperlink {
-	var carg0 *C.AtkHypertext // in, none, interface
-	var carg1 C.int           // in, casted
-	var cret  *C.AtkHyperlink // return, none, class
+	var carg0 *C.AtkHypertext // in, none, converted
+	var carg1 C.int           // in, none, casted
+	var cret  *C.AtkHyperlink // return, none, converted
 
 	carg0 = (*C.AtkHypertext)(UnsafeHypertextToGlibNone(hypertext))
 	carg1 = C.int(linkIndex)
@@ -4116,9 +4130,9 @@ func (hypertext *HypertextInstance) GetLink(linkIndex int) Hyperlink {
 // Gets the index into the array of hyperlinks that is associated with
 // the character specified by @char_index.
 func (hypertext *HypertextInstance) GetLinkIndex(charIndex int) int {
-	var carg0 *C.AtkHypertext // in, none, interface
-	var carg1 C.int           // in, casted
-	var cret  C.int           // return, casted
+	var carg0 *C.AtkHypertext // in, none, converted
+	var carg1 C.int           // in, none, casted
+	var cret  C.int           // return, none, casted
 
 	carg0 = (*C.AtkHypertext)(UnsafeHypertextToGlibNone(hypertext))
 	carg1 = C.int(charIndex)
@@ -4141,8 +4155,8 @@ func (hypertext *HypertextInstance) GetLinkIndex(charIndex int) int {
 //
 // Gets the number of links within this hypertext document.
 func (hypertext *HypertextInstance) GetNLinks() int {
-	var carg0 *C.AtkHypertext // in, none, interface
-	var cret  C.int           // return, casted
+	var carg0 *C.AtkHypertext // in, none, converted
+	var cret  C.int           // return, none, casted
 
 	carg0 = (*C.AtkHypertext)(UnsafeHypertextToGlibNone(hypertext))
 
@@ -4159,7 +4173,7 @@ func (hypertext *HypertextInstance) GetNLinks() int {
 // ImageInstance is the instance type used by all types implementing AtkImage. It is used internally by the bindings. Users should use the interface [Image] instead.
 type ImageInstance struct {
 	_ [0]func() // equal guard
-	*gobject.Object
+	*gobject.ObjectInstance
 }
 
 var _ Image = (*ImageInstance)(nil)
@@ -4183,7 +4197,7 @@ var _ Image = (*ImageInstance)(nil)
 // presentation of the most significant information present in the
 // image.
 type Image interface {
-	gobject.ObjectLike
+	gobject.Object
 
 	// GetImageDescription wraps atk_image_get_image_description
 	// The function returns the following values:
@@ -4244,14 +4258,14 @@ type Image interface {
 	SetImageDescription(string) bool
 }
 
-func unsafeWrapImage(base *gobject.Object) *ImageInstance {
+func unsafeWrapImage(base *gobject.ObjectInstance) *ImageInstance {
 	return &ImageInstance{
-		Object: base,
+		ObjectInstance: base,
 	}
 }
 
 func marshalImageInstance(p uintptr) (interface{}, error) {
-	return unsafeWrapImage(gobject.ValueFromNative(unsafe.Pointer(p)).Object()), nil
+	return unsafeWrapImage(gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Object()), nil
 }
 
 // UnsafeImageFromGlibBorrow is used to convert raw AtkImage pointers to go. This is used by the bindings internally.
@@ -4286,7 +4300,7 @@ func UnsafeImageToGlibFull(c Image) unsafe.Pointer {
 //
 // Get a textual description of this image.
 func (image *ImageInstance) GetImageDescription() string {
-	var carg0 *C.AtkImage // in, none, interface
+	var carg0 *C.AtkImage // in, none, converted
 	var cret  *C.gchar    // return, none, string
 
 	carg0 = (*C.AtkImage)(UnsafeImageToGlibNone(image))
@@ -4308,7 +4322,7 @@ func (image *ImageInstance) GetImageDescription() string {
 //
 // Retrieves the locale identifier associated to the #AtkImage.
 func (image *ImageInstance) GetImageLocale() string {
-	var carg0 *C.AtkImage // in, none, interface
+	var carg0 *C.AtkImage // in, none, converted
 	var cret  *C.gchar    // return, none, string
 
 	carg0 = (*C.AtkImage)(UnsafeImageToGlibNone(image))
@@ -4341,10 +4355,10 @@ func (image *ImageInstance) GetImageLocale() string {
 // If the position can not be obtained (e.g. missing support), x and y are set
 // to -1.
 func (image *ImageInstance) GetImagePosition(coordType CoordType) (int, int) {
-	var carg0 *C.AtkImage    // in, none, interface
-	var carg3 C.AtkCoordType // in, casted
-	var carg1 C.int          // out, casted
-	var carg2 C.int          // out, casted
+	var carg0 *C.AtkImage    // in, none, converted
+	var carg3 C.AtkCoordType // in, none, casted
+	var carg1 C.int          // out, full, casted
+	var carg2 C.int          // out, full, casted
 
 	carg0 = (*C.AtkImage)(UnsafeImageToGlibNone(image))
 	carg3 = C.AtkCoordType(coordType)
@@ -4375,9 +4389,9 @@ func (image *ImageInstance) GetImagePosition(coordType CoordType) (int, int) {
 // If the size can not be obtained (e.g. missing support), x and y are set
 // to -1.
 func (image *ImageInstance) GetImageSize() (int, int) {
-	var carg0 *C.AtkImage // in, none, interface
-	var carg1 C.int       // out, casted
-	var carg2 C.int       // out, casted
+	var carg0 *C.AtkImage // in, none, converted
+	var carg1 C.int       // out, full, casted
+	var carg2 C.int       // out, full, casted
 
 	carg0 = (*C.AtkImage)(UnsafeImageToGlibNone(image))
 
@@ -4405,7 +4419,7 @@ func (image *ImageInstance) GetImageSize() (int, int) {
 //
 // Sets the textual description for this image.
 func (image *ImageInstance) SetImageDescription(description string) bool {
-	var carg0 *C.AtkImage // in, none, interface
+	var carg0 *C.AtkImage // in, none, converted
 	var carg1 *C.gchar    // in, none, string
 	var cret  C.gboolean  // return
 
@@ -4429,7 +4443,7 @@ func (image *ImageInstance) SetImageDescription(description string) bool {
 // ImplementorIfaceInstance is the instance type used by all types implementing AtkImplementorIface. It is used internally by the bindings. Users should use the interface [ImplementorIface] instead.
 type ImplementorIfaceInstance struct {
 	_ [0]func() // equal guard
-	*gobject.Object
+	*gobject.ObjectInstance
 }
 
 var _ ImplementorIface = (*ImplementorIfaceInstance)(nil)
@@ -4440,17 +4454,17 @@ var _ ImplementorIface = (*ImplementorIfaceInstance)(nil)
 // AtkObject peers may be obtained via calls to
 // iface-&gt;(ref_accessible)(implementor);
 type ImplementorIface interface {
-	gobject.ObjectLike
+	gobject.Object
 }
 
-func unsafeWrapImplementorIface(base *gobject.Object) *ImplementorIfaceInstance {
+func unsafeWrapImplementorIface(base *gobject.ObjectInstance) *ImplementorIfaceInstance {
 	return &ImplementorIfaceInstance{
-		Object: base,
+		ObjectInstance: base,
 	}
 }
 
 func marshalImplementorIfaceInstance(p uintptr) (interface{}, error) {
-	return unsafeWrapImplementorIface(gobject.ValueFromNative(unsafe.Pointer(p)).Object()), nil
+	return unsafeWrapImplementorIface(gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Object()), nil
 }
 
 // UnsafeImplementorIfaceFromGlibBorrow is used to convert raw AtkImplementorIface pointers to go. This is used by the bindings internally.
@@ -4481,7 +4495,7 @@ func UnsafeImplementorIfaceToGlibFull(c ImplementorIface) unsafe.Pointer {
 // SelectionInstance is the instance type used by all types implementing AtkSelection. It is used internally by the bindings. Users should use the interface [Selection] instead.
 type SelectionInstance struct {
 	_ [0]func() // equal guard
-	*gobject.Object
+	*gobject.ObjectInstance
 }
 
 var _ Selection = (*SelectionInstance)(nil)
@@ -4501,7 +4515,7 @@ var _ Selection = (*SelectionInstance)(nil)
 // are accomplished a other ATK interfaces - #AtkSelection is limited
 // to the selection/deselection of children.
 type Selection interface {
-	gobject.ObjectLike
+	gobject.Object
 
 	// AddSelection wraps atk_selection_add_selection
 	// 
@@ -4592,14 +4606,14 @@ type Selection interface {
 	SelectAllSelection() bool
 }
 
-func unsafeWrapSelection(base *gobject.Object) *SelectionInstance {
+func unsafeWrapSelection(base *gobject.ObjectInstance) *SelectionInstance {
 	return &SelectionInstance{
-		Object: base,
+		ObjectInstance: base,
 	}
 }
 
 func marshalSelectionInstance(p uintptr) (interface{}, error) {
-	return unsafeWrapSelection(gobject.ValueFromNative(unsafe.Pointer(p)).Object()), nil
+	return unsafeWrapSelection(gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Object()), nil
 }
 
 // UnsafeSelectionFromGlibBorrow is used to convert raw AtkSelection pointers to go. This is used by the bindings internally.
@@ -4640,8 +4654,8 @@ func UnsafeSelectionToGlibFull(c Selection) unsafe.Pointer {
 // Adds the specified accessible child of the object to the
 // object's selection.
 func (selection *SelectionInstance) AddSelection(i int) bool {
-	var carg0 *C.AtkSelection // in, none, interface
-	var carg1 C.int           // in, casted
+	var carg0 *C.AtkSelection // in, none, converted
+	var carg1 C.int           // in, none, casted
 	var cret  C.gboolean      // return
 
 	carg0 = (*C.AtkSelection)(UnsafeSelectionToGlibNone(selection))
@@ -4668,7 +4682,7 @@ func (selection *SelectionInstance) AddSelection(i int) bool {
 // Clears the selection in the object so that no children in the object
 // are selected.
 func (selection *SelectionInstance) ClearSelection() bool {
-	var carg0 *C.AtkSelection // in, none, interface
+	var carg0 *C.AtkSelection // in, none, converted
 	var cret  C.gboolean      // return
 
 	carg0 = (*C.AtkSelection)(UnsafeSelectionToGlibNone(selection))
@@ -4696,8 +4710,8 @@ func (selection *SelectionInstance) ClearSelection() bool {
 // use type checking/interface checking macros or the
 // atk_get_accessible_value() convenience method.
 func (selection *SelectionInstance) GetSelectionCount() int {
-	var carg0 *C.AtkSelection // in, none, interface
-	var cret  C.int           // return, casted
+	var carg0 *C.AtkSelection // in, none, converted
+	var cret  C.int           // return, none, casted
 
 	carg0 = (*C.AtkSelection)(UnsafeSelectionToGlibNone(selection))
 
@@ -4727,8 +4741,8 @@ func (selection *SelectionInstance) GetSelectionCount() int {
 // use type checking/interface checking macros or the
 // atk_get_accessible_value() convenience method.
 func (selection *SelectionInstance) IsChildSelected(i int) bool {
-	var carg0 *C.AtkSelection // in, none, interface
-	var carg1 C.int           // in, casted
+	var carg0 *C.AtkSelection // in, none, converted
+	var carg1 C.int           // in, none, casted
 	var cret  C.gboolean      // return
 
 	carg0 = (*C.AtkSelection)(UnsafeSelectionToGlibNone(selection))
@@ -4765,9 +4779,9 @@ func (selection *SelectionInstance) IsChildSelected(i int) bool {
 // use type checking/interface checking macros or the
 // atk_get_accessible_value() convenience method.
 func (selection *SelectionInstance) RefSelection(i int) Object {
-	var carg0 *C.AtkSelection // in, none, interface
-	var carg1 C.int           // in, casted
-	var cret  *C.AtkObject    // return, full, class
+	var carg0 *C.AtkSelection // in, none, converted
+	var carg1 C.int           // in, none, casted
+	var cret  *C.AtkObject    // return, full, converted
 
 	carg0 = (*C.AtkSelection)(UnsafeSelectionToGlibNone(selection))
 	carg1 = C.int(i)
@@ -4796,8 +4810,8 @@ func (selection *SelectionInstance) RefSelection(i int) Object {
 //
 // Removes the specified child of the object from the object's selection.
 func (selection *SelectionInstance) RemoveSelection(i int) bool {
-	var carg0 *C.AtkSelection // in, none, interface
-	var carg1 C.int           // in, casted
+	var carg0 *C.AtkSelection // in, none, converted
+	var carg1 C.int           // in, none, casted
 	var cret  C.gboolean      // return
 
 	carg0 = (*C.AtkSelection)(UnsafeSelectionToGlibNone(selection))
@@ -4824,7 +4838,7 @@ func (selection *SelectionInstance) RemoveSelection(i int) bool {
 // Causes every child of the object to be selected if the object
 // supports multiple selections.
 func (selection *SelectionInstance) SelectAllSelection() bool {
-	var carg0 *C.AtkSelection // in, none, interface
+	var carg0 *C.AtkSelection // in, none, converted
 	var cret  C.gboolean      // return
 
 	carg0 = (*C.AtkSelection)(UnsafeSelectionToGlibNone(selection))
@@ -4844,7 +4858,7 @@ func (selection *SelectionInstance) SelectAllSelection() bool {
 // StreamableContentInstance is the instance type used by all types implementing AtkStreamableContent. It is used internally by the bindings. Users should use the interface [StreamableContent] instead.
 type StreamableContentInstance struct {
 	_ [0]func() // equal guard
-	*gobject.Object
+	*gobject.ObjectInstance
 }
 
 var _ StreamableContent = (*StreamableContentInstance)(nil)
@@ -4870,7 +4884,7 @@ var _ StreamableContent = (*StreamableContentInstance)(nil)
 // tied to the current user-agent view of the a particular document,
 // but may in some cases give access to the underlying model data.
 type StreamableContent interface {
-	gobject.ObjectLike
+	gobject.Object
 
 	// GetMIMEType wraps atk_streamable_content_get_mime_type
 	// 
@@ -4892,18 +4906,6 @@ type StreamableContent interface {
 	//
 	// Gets the number of mime types supported by this object.
 	GetNMIMETypes() int
-	// GetStream wraps atk_streamable_content_get_stream
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- mimeType string: a gchar* representing the mime type 
-	// 
-	// The function returns the following values:
-	// 
-	// 	- ret *glib.IOChannel 
-	//
-	// Gets the content in the specified mime type.
-	GetStream(string) *glib.IOChannel
 	// GetURI wraps atk_streamable_content_get_uri
 	// 
 	// The function takes the following parameters:
@@ -4926,14 +4928,14 @@ type StreamableContent interface {
 	GetURI(string) string
 }
 
-func unsafeWrapStreamableContent(base *gobject.Object) *StreamableContentInstance {
+func unsafeWrapStreamableContent(base *gobject.ObjectInstance) *StreamableContentInstance {
 	return &StreamableContentInstance{
-		Object: base,
+		ObjectInstance: base,
 	}
 }
 
 func marshalStreamableContentInstance(p uintptr) (interface{}, error) {
-	return unsafeWrapStreamableContent(gobject.ValueFromNative(unsafe.Pointer(p)).Object()), nil
+	return unsafeWrapStreamableContent(gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Object()), nil
 }
 
 // UnsafeStreamableContentFromGlibBorrow is used to convert raw AtkStreamableContent pointers to go. This is used by the bindings internally.
@@ -4974,8 +4976,8 @@ func UnsafeStreamableContentToGlibFull(c StreamableContent) unsafe.Pointer {
 // Gets the character string of the specified mime type. The first mime
 // type is at position 0, the second at position 1, and so on.
 func (streamable *StreamableContentInstance) GetMIMEType(i int) string {
-	var carg0 *C.AtkStreamableContent // in, none, interface
-	var carg1 C.int                   // in, casted
+	var carg0 *C.AtkStreamableContent // in, none, converted
+	var carg1 C.int                   // in, none, casted
 	var cret  *C.gchar                // return, none, string
 
 	carg0 = (*C.AtkStreamableContent)(UnsafeStreamableContentToGlibNone(streamable))
@@ -4999,8 +5001,8 @@ func (streamable *StreamableContentInstance) GetMIMEType(i int) string {
 //
 // Gets the number of mime types supported by this object.
 func (streamable *StreamableContentInstance) GetNMIMETypes() int {
-	var carg0 *C.AtkStreamableContent // in, none, interface
-	var cret  C.int                   // return, casted
+	var carg0 *C.AtkStreamableContent // in, none, converted
+	var cret  C.int                   // return, none, casted
 
 	carg0 = (*C.AtkStreamableContent)(UnsafeStreamableContentToGlibNone(streamable))
 
@@ -5010,37 +5012,6 @@ func (streamable *StreamableContentInstance) GetNMIMETypes() int {
 	var ret int
 
 	ret = int(cret)
-
-	return ret
-}
-
-// GetStream wraps atk_streamable_content_get_stream
-// 
-// The function takes the following parameters:
-// 
-// 	- mimeType string: a gchar* representing the mime type 
-// 
-// The function returns the following values:
-// 
-// 	- ret *glib.IOChannel 
-//
-// Gets the content in the specified mime type.
-func (streamable *StreamableContentInstance) GetStream(mimeType string) *glib.IOChannel {
-	var carg0 *C.AtkStreamableContent // in, none, interface
-	var carg1 *C.gchar                // in, none, string
-	var cret  *C.GIOChannel           // return, full, record
-
-	carg0 = (*C.AtkStreamableContent)(UnsafeStreamableContentToGlibNone(streamable))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(mimeType)))
-	defer C.free(unsafe.Pointer(carg1))
-
-	cret = C.atk_streamable_content_get_stream(carg0, carg1)
-	runtime.KeepAlive(streamable)
-	runtime.KeepAlive(mimeType)
-
-	var ret *glib.IOChannel
-
-	ret = glib.UnsafeIOChannelFromGlibFull(unsafe.Pointer(cret))
 
 	return ret
 }
@@ -5065,7 +5036,7 @@ func (streamable *StreamableContentInstance) GetStream(mimeType string) *glib.IO
 // Note that it is possible for get_uri to return NULL but for
 // get_stream to work nonetheless, since not all GIOChannels connect to URIs.
 func (streamable *StreamableContentInstance) GetURI(mimeType string) string {
-	var carg0 *C.AtkStreamableContent // in, none, interface
+	var carg0 *C.AtkStreamableContent // in, none, converted
 	var carg1 *C.gchar                // in, none, string
 	var cret  *C.gchar                // return, none, string
 
@@ -5087,7 +5058,7 @@ func (streamable *StreamableContentInstance) GetURI(mimeType string) string {
 // TableInstance is the instance type used by all types implementing AtkTable. It is used internally by the bindings. Users should use the interface [Table] instead.
 type TableInstance struct {
 	_ [0]func() // equal guard
-	*gobject.Object
+	*gobject.ObjectInstance
 }
 
 var _ Table = (*TableInstance)(nil)
@@ -5125,7 +5096,7 @@ var _ Table = (*TableInstance)(nil)
 // expose other kind of children, like rows or captions. Right now,
 // index-based methods are deprecated.
 type Table interface {
-	gobject.ObjectLike
+	gobject.Object
 
 	// AddColumnSelection wraps atk_table_add_column_selection
 	// 
@@ -5293,6 +5264,32 @@ type Table interface {
 	//
 	// Gets the row header of a specified row in an accessible table.
 	GetRowHeader(int) Object
+	// GetSelectedColumns wraps atk_table_get_selected_columns
+	// 
+	// The function takes the following parameters:
+	// 
+	// 	- selected int: a #gint** that is to contain the selected columns numbers 
+	// 
+	// The function returns the following values:
+	// 
+	// 	- ret int 
+	//
+	// Gets the selected columns of the table by initializing **selected with
+	// the selected column numbers. This array should be freed by the caller.
+	GetSelectedColumns(int) int
+	// GetSelectedRows wraps atk_table_get_selected_rows
+	// 
+	// The function takes the following parameters:
+	// 
+	// 	- selected int: a #gint** that is to contain the selected row numbers 
+	// 
+	// The function returns the following values:
+	// 
+	// 	- ret int 
+	//
+	// Gets the selected rows of the table by initializing **selected with
+	// the selected row numbers. This array should be freed by the caller.
+	GetSelectedRows(int) int
 	// GetSummary wraps atk_table_get_summary
 	// The function returns the following values:
 	// 
@@ -5435,14 +5432,14 @@ type Table interface {
 	SetSummary(Object)
 }
 
-func unsafeWrapTable(base *gobject.Object) *TableInstance {
+func unsafeWrapTable(base *gobject.ObjectInstance) *TableInstance {
 	return &TableInstance{
-		Object: base,
+		ObjectInstance: base,
 	}
 }
 
 func marshalTableInstance(p uintptr) (interface{}, error) {
-	return unsafeWrapTable(gobject.ValueFromNative(unsafe.Pointer(p)).Object()), nil
+	return unsafeWrapTable(gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Object()), nil
 }
 
 // UnsafeTableFromGlibBorrow is used to convert raw AtkTable pointers to go. This is used by the bindings internally.
@@ -5482,8 +5479,8 @@ func UnsafeTableToGlibFull(c Table) unsafe.Pointer {
 //
 // Adds the specified @column to the selection.
 func (table *TableInstance) AddColumnSelection(column int) bool {
-	var carg0 *C.AtkTable // in, none, interface
-	var carg1 C.int       // in, casted
+	var carg0 *C.AtkTable // in, none, converted
+	var carg1 C.int       // in, none, casted
 	var cret  C.gboolean  // return
 
 	carg0 = (*C.AtkTable)(UnsafeTableToGlibNone(table))
@@ -5514,8 +5511,8 @@ func (table *TableInstance) AddColumnSelection(column int) bool {
 //
 // Adds the specified @row to the selection.
 func (table *TableInstance) AddRowSelection(row int) bool {
-	var carg0 *C.AtkTable // in, none, interface
-	var carg1 C.int       // in, casted
+	var carg0 *C.AtkTable // in, none, converted
+	var carg1 C.int       // in, none, casted
 	var cret  C.gboolean  // return
 
 	carg0 = (*C.AtkTable)(UnsafeTableToGlibNone(table))
@@ -5541,8 +5538,8 @@ func (table *TableInstance) AddRowSelection(row int) bool {
 //
 // Gets the caption for the @table.
 func (table *TableInstance) GetCaption() Object {
-	var carg0 *C.AtkTable  // in, none, interface
-	var cret  *C.AtkObject // return, none, class
+	var carg0 *C.AtkTable  // in, none, converted
+	var cret  *C.AtkObject // return, none, converted
 
 	carg0 = (*C.AtkTable)(UnsafeTableToGlibNone(table))
 
@@ -5570,9 +5567,9 @@ func (table *TableInstance) GetCaption() Object {
 //
 // Deprecated: Since 2.12.
 func (table *TableInstance) GetColumnAtIndex(index_ int) int {
-	var carg0 *C.AtkTable // in, none, interface
-	var carg1 C.int       // in, casted
-	var cret  C.int       // return, casted
+	var carg0 *C.AtkTable // in, none, converted
+	var carg1 C.int       // in, none, casted
+	var cret  C.int       // return, none, casted
 
 	carg0 = (*C.AtkTable)(UnsafeTableToGlibNone(table))
 	carg1 = C.int(index_)
@@ -5600,8 +5597,8 @@ func (table *TableInstance) GetColumnAtIndex(index_ int) int {
 //
 // Gets the description text of the specified @column in the table
 func (table *TableInstance) GetColumnDescription(column int) string {
-	var carg0 *C.AtkTable // in, none, interface
-	var carg1 C.int       // in, casted
+	var carg0 *C.AtkTable // in, none, converted
+	var carg1 C.int       // in, none, casted
 	var cret  *C.gchar    // return, none, string
 
 	carg0 = (*C.AtkTable)(UnsafeTableToGlibNone(table))
@@ -5632,10 +5629,10 @@ func (table *TableInstance) GetColumnDescription(column int) string {
 // Gets the number of columns occupied by the accessible object
 // at the specified @row and @column in the @table.
 func (table *TableInstance) GetColumnExtentAt(row int, column int) int {
-	var carg0 *C.AtkTable // in, none, interface
-	var carg1 C.int       // in, casted
-	var carg2 C.int       // in, casted
-	var cret  C.int       // return, casted
+	var carg0 *C.AtkTable // in, none, converted
+	var carg1 C.int       // in, none, casted
+	var carg2 C.int       // in, none, casted
+	var cret  C.int       // return, none, casted
 
 	carg0 = (*C.AtkTable)(UnsafeTableToGlibNone(table))
 	carg1 = C.int(row)
@@ -5665,9 +5662,9 @@ func (table *TableInstance) GetColumnExtentAt(row int, column int) int {
 //
 // Gets the column header of a specified column in an accessible table.
 func (table *TableInstance) GetColumnHeader(column int) Object {
-	var carg0 *C.AtkTable  // in, none, interface
-	var carg1 C.int        // in, casted
-	var cret  *C.AtkObject // return, none, class
+	var carg0 *C.AtkTable  // in, none, converted
+	var carg1 C.int        // in, none, casted
+	var cret  *C.AtkObject // return, none, converted
 
 	carg0 = (*C.AtkTable)(UnsafeTableToGlibNone(table))
 	carg1 = C.int(column)
@@ -5700,10 +5697,10 @@ func (table *TableInstance) GetColumnHeader(column int) Object {
 // Deprecated: Since 2.12. Use atk_table_ref_at() in order to get the
 // accessible that represents the cell at (@row, @column)
 func (table *TableInstance) GetIndexAt(row int, column int) int {
-	var carg0 *C.AtkTable // in, none, interface
-	var carg1 C.int       // in, casted
-	var carg2 C.int       // in, casted
-	var cret  C.int       // return, casted
+	var carg0 *C.AtkTable // in, none, converted
+	var carg1 C.int       // in, none, casted
+	var carg2 C.int       // in, none, casted
+	var cret  C.int       // return, none, casted
 
 	carg0 = (*C.AtkTable)(UnsafeTableToGlibNone(table))
 	carg1 = C.int(row)
@@ -5728,8 +5725,8 @@ func (table *TableInstance) GetIndexAt(row int, column int) int {
 //
 // Gets the number of columns in the table.
 func (table *TableInstance) GetNColumns() int {
-	var carg0 *C.AtkTable // in, none, interface
-	var cret  C.int       // return, casted
+	var carg0 *C.AtkTable // in, none, converted
+	var cret  C.int       // return, none, casted
 
 	carg0 = (*C.AtkTable)(UnsafeTableToGlibNone(table))
 
@@ -5750,8 +5747,8 @@ func (table *TableInstance) GetNColumns() int {
 //
 // Gets the number of rows in the table.
 func (table *TableInstance) GetNRows() int {
-	var carg0 *C.AtkTable // in, none, interface
-	var cret  C.int       // return, casted
+	var carg0 *C.AtkTable // in, none, converted
+	var cret  C.int       // return, none, casted
 
 	carg0 = (*C.AtkTable)(UnsafeTableToGlibNone(table))
 
@@ -5779,9 +5776,9 @@ func (table *TableInstance) GetNRows() int {
 //
 // Deprecated: since 2.12.
 func (table *TableInstance) GetRowAtIndex(index_ int) int {
-	var carg0 *C.AtkTable // in, none, interface
-	var carg1 C.int       // in, casted
-	var cret  C.int       // return, casted
+	var carg0 *C.AtkTable // in, none, converted
+	var carg1 C.int       // in, none, casted
+	var cret  C.int       // return, none, casted
 
 	carg0 = (*C.AtkTable)(UnsafeTableToGlibNone(table))
 	carg1 = C.int(index_)
@@ -5809,8 +5806,8 @@ func (table *TableInstance) GetRowAtIndex(index_ int) int {
 //
 // Gets the description text of the specified row in the table
 func (table *TableInstance) GetRowDescription(row int) string {
-	var carg0 *C.AtkTable // in, none, interface
-	var carg1 C.int       // in, casted
+	var carg0 *C.AtkTable // in, none, converted
+	var carg1 C.int       // in, none, casted
 	var cret  *C.gchar    // return, none, string
 
 	carg0 = (*C.AtkTable)(UnsafeTableToGlibNone(table))
@@ -5841,10 +5838,10 @@ func (table *TableInstance) GetRowDescription(row int) string {
 // Gets the number of rows occupied by the accessible object
 // at a specified @row and @column in the @table.
 func (table *TableInstance) GetRowExtentAt(row int, column int) int {
-	var carg0 *C.AtkTable // in, none, interface
-	var carg1 C.int       // in, casted
-	var carg2 C.int       // in, casted
-	var cret  C.int       // return, casted
+	var carg0 *C.AtkTable // in, none, converted
+	var carg1 C.int       // in, none, casted
+	var carg2 C.int       // in, none, casted
+	var cret  C.int       // return, none, casted
 
 	carg0 = (*C.AtkTable)(UnsafeTableToGlibNone(table))
 	carg1 = C.int(row)
@@ -5874,9 +5871,9 @@ func (table *TableInstance) GetRowExtentAt(row int, column int) int {
 //
 // Gets the row header of a specified row in an accessible table.
 func (table *TableInstance) GetRowHeader(row int) Object {
-	var carg0 *C.AtkTable  // in, none, interface
-	var carg1 C.int        // in, casted
-	var cret  *C.AtkObject // return, none, class
+	var carg0 *C.AtkTable  // in, none, converted
+	var carg1 C.int        // in, none, casted
+	var cret  *C.AtkObject // return, none, converted
 
 	carg0 = (*C.AtkTable)(UnsafeTableToGlibNone(table))
 	carg1 = C.int(row)
@@ -5892,6 +5889,68 @@ func (table *TableInstance) GetRowHeader(row int) Object {
 	return ret
 }
 
+// GetSelectedColumns wraps atk_table_get_selected_columns
+// 
+// The function takes the following parameters:
+// 
+// 	- selected int: a #gint** that is to contain the selected columns numbers 
+// 
+// The function returns the following values:
+// 
+// 	- ret int 
+//
+// Gets the selected columns of the table by initializing **selected with
+// the selected column numbers. This array should be freed by the caller.
+func (table *TableInstance) GetSelectedColumns(selected int) int {
+	var carg0 *C.AtkTable // in, none, converted
+	var carg1 **C.int     // in, none, casted
+	var cret  C.int       // return, none, casted
+
+	carg0 = (*C.AtkTable)(UnsafeTableToGlibNone(table))
+	carg1 = **C.int(selected)
+
+	cret = C.atk_table_get_selected_columns(carg0, carg1)
+	runtime.KeepAlive(table)
+	runtime.KeepAlive(selected)
+
+	var ret int
+
+	ret = int(cret)
+
+	return ret
+}
+
+// GetSelectedRows wraps atk_table_get_selected_rows
+// 
+// The function takes the following parameters:
+// 
+// 	- selected int: a #gint** that is to contain the selected row numbers 
+// 
+// The function returns the following values:
+// 
+// 	- ret int 
+//
+// Gets the selected rows of the table by initializing **selected with
+// the selected row numbers. This array should be freed by the caller.
+func (table *TableInstance) GetSelectedRows(selected int) int {
+	var carg0 *C.AtkTable // in, none, converted
+	var carg1 **C.int     // in, none, casted
+	var cret  C.int       // return, none, casted
+
+	carg0 = (*C.AtkTable)(UnsafeTableToGlibNone(table))
+	carg1 = **C.int(selected)
+
+	cret = C.atk_table_get_selected_rows(carg0, carg1)
+	runtime.KeepAlive(table)
+	runtime.KeepAlive(selected)
+
+	var ret int
+
+	ret = int(cret)
+
+	return ret
+}
+
 // GetSummary wraps atk_table_get_summary
 // The function returns the following values:
 // 
@@ -5899,8 +5958,8 @@ func (table *TableInstance) GetRowHeader(row int) Object {
 //
 // Gets the summary description of the table.
 func (table *TableInstance) GetSummary() Object {
-	var carg0 *C.AtkTable  // in, none, interface
-	var cret  *C.AtkObject // return, full, class
+	var carg0 *C.AtkTable  // in, none, converted
+	var cret  *C.AtkObject // return, full, converted
 
 	carg0 = (*C.AtkTable)(UnsafeTableToGlibNone(table))
 
@@ -5927,8 +5986,8 @@ func (table *TableInstance) GetSummary() Object {
 // Gets a boolean value indicating whether the specified @column
 // is selected
 func (table *TableInstance) IsColumnSelected(column int) bool {
-	var carg0 *C.AtkTable // in, none, interface
-	var carg1 C.int       // in, casted
+	var carg0 *C.AtkTable // in, none, converted
+	var carg1 C.int       // in, none, casted
 	var cret  C.gboolean  // return
 
 	carg0 = (*C.AtkTable)(UnsafeTableToGlibNone(table))
@@ -5960,8 +6019,8 @@ func (table *TableInstance) IsColumnSelected(column int) bool {
 // Gets a boolean value indicating whether the specified @row
 // is selected
 func (table *TableInstance) IsRowSelected(row int) bool {
-	var carg0 *C.AtkTable // in, none, interface
-	var carg1 C.int       // in, casted
+	var carg0 *C.AtkTable // in, none, converted
+	var carg1 C.int       // in, none, casted
 	var cret  C.gboolean  // return
 
 	carg0 = (*C.AtkTable)(UnsafeTableToGlibNone(table))
@@ -5994,9 +6053,9 @@ func (table *TableInstance) IsRowSelected(row int) bool {
 // Gets a boolean value indicating whether the accessible object
 // at the specified @row and @column is selected
 func (table *TableInstance) IsSelected(row int, column int) bool {
-	var carg0 *C.AtkTable // in, none, interface
-	var carg1 C.int       // in, casted
-	var carg2 C.int       // in, casted
+	var carg0 *C.AtkTable // in, none, converted
+	var carg1 C.int       // in, none, casted
+	var carg2 C.int       // in, none, casted
 	var cret  C.gboolean  // return
 
 	carg0 = (*C.AtkTable)(UnsafeTableToGlibNone(table))
@@ -6031,10 +6090,10 @@ func (table *TableInstance) IsSelected(row int, column int) bool {
 // Get a reference to the table cell at @row, @column. This cell
 // should implement the interface #AtkTableCell
 func (table *TableInstance) RefAt(row int, column int) Object {
-	var carg0 *C.AtkTable  // in, none, interface
-	var carg1 C.int        // in, casted
-	var carg2 C.int        // in, casted
-	var cret  *C.AtkObject // return, full, class
+	var carg0 *C.AtkTable  // in, none, converted
+	var carg1 C.int        // in, none, casted
+	var carg2 C.int        // in, none, casted
+	var cret  *C.AtkObject // return, full, converted
 
 	carg0 = (*C.AtkTable)(UnsafeTableToGlibNone(table))
 	carg1 = C.int(row)
@@ -6064,8 +6123,8 @@ func (table *TableInstance) RefAt(row int, column int) Object {
 //
 // Adds the specified @column to the selection.
 func (table *TableInstance) RemoveColumnSelection(column int) bool {
-	var carg0 *C.AtkTable // in, none, interface
-	var carg1 C.int       // in, casted
+	var carg0 *C.AtkTable // in, none, converted
+	var carg1 C.int       // in, none, casted
 	var cret  C.gboolean  // return
 
 	carg0 = (*C.AtkTable)(UnsafeTableToGlibNone(table))
@@ -6096,8 +6155,8 @@ func (table *TableInstance) RemoveColumnSelection(column int) bool {
 //
 // Removes the specified @row from the selection.
 func (table *TableInstance) RemoveRowSelection(row int) bool {
-	var carg0 *C.AtkTable // in, none, interface
-	var carg1 C.int       // in, casted
+	var carg0 *C.AtkTable // in, none, converted
+	var carg1 C.int       // in, none, casted
 	var cret  C.gboolean  // return
 
 	carg0 = (*C.AtkTable)(UnsafeTableToGlibNone(table))
@@ -6124,8 +6183,8 @@ func (table *TableInstance) RemoveRowSelection(row int) bool {
 //
 // Sets the caption for the table.
 func (table *TableInstance) SetCaption(caption Object) {
-	var carg0 *C.AtkTable  // in, none, interface
-	var carg1 *C.AtkObject // in, none, class
+	var carg0 *C.AtkTable  // in, none, converted
+	var carg1 *C.AtkObject // in, none, converted
 
 	carg0 = (*C.AtkTable)(UnsafeTableToGlibNone(table))
 	carg1 = (*C.AtkObject)(UnsafeObjectToGlibNone(caption))
@@ -6145,8 +6204,8 @@ func (table *TableInstance) SetCaption(caption Object) {
 //
 // Sets the description text for the specified @column of the @table.
 func (table *TableInstance) SetColumnDescription(column int, description string) {
-	var carg0 *C.AtkTable // in, none, interface
-	var carg1 C.int       // in, casted
+	var carg0 *C.AtkTable // in, none, converted
+	var carg1 C.int       // in, none, casted
 	var carg2 *C.gchar    // in, none, string
 
 	carg0 = (*C.AtkTable)(UnsafeTableToGlibNone(table))
@@ -6169,9 +6228,9 @@ func (table *TableInstance) SetColumnDescription(column int, description string)
 //
 // Sets the specified column header to @header.
 func (table *TableInstance) SetColumnHeader(column int, header Object) {
-	var carg0 *C.AtkTable  // in, none, interface
-	var carg1 C.int        // in, casted
-	var carg2 *C.AtkObject // in, none, class
+	var carg0 *C.AtkTable  // in, none, converted
+	var carg1 C.int        // in, none, casted
+	var carg2 *C.AtkObject // in, none, converted
 
 	carg0 = (*C.AtkTable)(UnsafeTableToGlibNone(table))
 	carg1 = C.int(column)
@@ -6193,8 +6252,8 @@ func (table *TableInstance) SetColumnHeader(column int, header Object) {
 //
 // Sets the description text for the specified @row of @table.
 func (table *TableInstance) SetRowDescription(row int, description string) {
-	var carg0 *C.AtkTable // in, none, interface
-	var carg1 C.int       // in, casted
+	var carg0 *C.AtkTable // in, none, converted
+	var carg1 C.int       // in, none, casted
 	var carg2 *C.gchar    // in, none, string
 
 	carg0 = (*C.AtkTable)(UnsafeTableToGlibNone(table))
@@ -6217,9 +6276,9 @@ func (table *TableInstance) SetRowDescription(row int, description string) {
 //
 // Sets the specified row header to @header.
 func (table *TableInstance) SetRowHeader(row int, header Object) {
-	var carg0 *C.AtkTable  // in, none, interface
-	var carg1 C.int        // in, casted
-	var carg2 *C.AtkObject // in, none, class
+	var carg0 *C.AtkTable  // in, none, converted
+	var carg1 C.int        // in, none, casted
+	var carg2 *C.AtkObject // in, none, converted
 
 	carg0 = (*C.AtkTable)(UnsafeTableToGlibNone(table))
 	carg1 = C.int(row)
@@ -6240,8 +6299,8 @@ func (table *TableInstance) SetRowHeader(row int, header Object) {
 //
 // Sets the summary description of the table.
 func (table *TableInstance) SetSummary(accessible Object) {
-	var carg0 *C.AtkTable  // in, none, interface
-	var carg1 *C.AtkObject // in, none, class
+	var carg0 *C.AtkTable  // in, none, converted
+	var carg1 *C.AtkObject // in, none, converted
 
 	carg0 = (*C.AtkTable)(UnsafeTableToGlibNone(table))
 	carg1 = (*C.AtkObject)(UnsafeObjectToGlibNone(accessible))
@@ -6254,7 +6313,7 @@ func (table *TableInstance) SetSummary(accessible Object) {
 // TableCellInstance is the instance type used by all types implementing AtkTableCell. It is used internally by the bindings. Users should use the interface [TableCell] instead.
 type TableCellInstance struct {
 	_ [0]func() // equal guard
-	*gobject.Object
+	*gobject.ObjectInstance
 }
 
 var _ TableCell = (*TableCellInstance)(nil)
@@ -6269,7 +6328,7 @@ var _ TableCell = (*TableCellInstance)(nil)
 // 
 // See [iface@AtkTable]
 type TableCell interface {
-	gobject.ObjectLike
+	gobject.Object
 
 	// GetColumnSpan wraps atk_table_cell_get_column_span
 	// The function returns the following values:
@@ -6318,14 +6377,14 @@ type TableCell interface {
 	GetTable() Object
 }
 
-func unsafeWrapTableCell(base *gobject.Object) *TableCellInstance {
+func unsafeWrapTableCell(base *gobject.ObjectInstance) *TableCellInstance {
 	return &TableCellInstance{
-		Object: base,
+		ObjectInstance: base,
 	}
 }
 
 func marshalTableCellInstance(p uintptr) (interface{}, error) {
-	return unsafeWrapTableCell(gobject.ValueFromNative(unsafe.Pointer(p)).Object()), nil
+	return unsafeWrapTableCell(gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Object()), nil
 }
 
 // UnsafeTableCellFromGlibBorrow is used to convert raw AtkTableCell pointers to go. This is used by the bindings internally.
@@ -6360,8 +6419,8 @@ func UnsafeTableCellToGlibFull(c TableCell) unsafe.Pointer {
 //
 // Returns the number of columns occupied by this cell accessible.
 func (cell *TableCellInstance) GetColumnSpan() int {
-	var carg0 *C.AtkTableCell // in, none, interface
-	var cret  C.int           // return, casted
+	var carg0 *C.AtkTableCell // in, none, converted
+	var cret  C.int           // return, none, casted
 
 	carg0 = (*C.AtkTableCell)(UnsafeTableCellToGlibNone(cell))
 
@@ -6384,9 +6443,9 @@ func (cell *TableCellInstance) GetColumnSpan() int {
 //
 // Retrieves the tabular position of this cell.
 func (cell *TableCellInstance) GetPosition() (int, int, bool) {
-	var carg0 *C.AtkTableCell // in, none, interface
-	var carg1 C.int           // out, casted
-	var carg2 C.int           // out, casted
+	var carg0 *C.AtkTableCell // in, none, converted
+	var carg1 C.int           // out, full, casted
+	var carg2 C.int           // out, full, casted
 	var cret  C.gboolean      // return
 
 	carg0 = (*C.AtkTableCell)(UnsafeTableCellToGlibNone(cell))
@@ -6422,11 +6481,11 @@ func (cell *TableCellInstance) GetPosition() (int, int, bool) {
 // will implement this function by calling get_row_span and get_column_span
 // on the object.
 func (cell *TableCellInstance) GetRowColumnSpan() (int, int, int, int, bool) {
-	var carg0 *C.AtkTableCell // in, none, interface
-	var carg1 C.int           // out, casted
-	var carg2 C.int           // out, casted
-	var carg3 C.int           // out, casted
-	var carg4 C.int           // out, casted
+	var carg0 *C.AtkTableCell // in, none, converted
+	var carg1 C.int           // out, full, casted
+	var carg2 C.int           // out, full, casted
+	var carg3 C.int           // out, full, casted
+	var carg4 C.int           // out, full, casted
 	var cret  C.gboolean      // return
 
 	carg0 = (*C.AtkTableCell)(UnsafeTableCellToGlibNone(cell))
@@ -6458,8 +6517,8 @@ func (cell *TableCellInstance) GetRowColumnSpan() (int, int, int, int, bool) {
 //
 // Returns the number of rows occupied by this cell accessible.
 func (cell *TableCellInstance) GetRowSpan() int {
-	var carg0 *C.AtkTableCell // in, none, interface
-	var cret  C.int           // return, casted
+	var carg0 *C.AtkTableCell // in, none, converted
+	var cret  C.int           // return, none, casted
 
 	carg0 = (*C.AtkTableCell)(UnsafeTableCellToGlibNone(cell))
 
@@ -6480,8 +6539,8 @@ func (cell *TableCellInstance) GetRowSpan() int {
 //
 // Returns a reference to the accessible of the containing table.
 func (cell *TableCellInstance) GetTable() Object {
-	var carg0 *C.AtkTableCell // in, none, interface
-	var cret  *C.AtkObject    // return, full, class
+	var carg0 *C.AtkTableCell // in, none, converted
+	var cret  *C.AtkObject    // return, full, converted
 
 	carg0 = (*C.AtkTableCell)(UnsafeTableCellToGlibNone(cell))
 
@@ -6498,7 +6557,7 @@ func (cell *TableCellInstance) GetTable() Object {
 // TextInstance is the instance type used by all types implementing AtkText. It is used internally by the bindings. Users should use the interface [Text] instead.
 type TextInstance struct {
 	_ [0]func() // equal guard
-	*gobject.Object
+	*gobject.ObjectInstance
 }
 
 var _ Text = (*TextInstance)(nil)
@@ -6527,7 +6586,7 @@ var _ Text = (*TextInstance)(nil)
 // character length; also bounding box glyph-to-offset mapping may be
 // complex for languages which use ligatures.
 type Text interface {
-	gobject.ObjectLike
+	gobject.Object
 
 	// AddSelection wraps atk_text_add_selection
 	// 
@@ -6546,17 +6605,17 @@ type Text interface {
 	// 
 	// The function takes the following parameters:
 	// 
-	// 	- rect *TextRectangle: An AtkTextRectangle giving the dimensions of the bounding box. 
+	// 	- rect TextRectangle: An AtkTextRectangle giving the dimensions of the bounding box. 
 	// 	- coordType CoordType: Specify whether coordinates are relative to the screen or widget window. 
 	// 	- xClipType TextClipType: Specify the horizontal clip type. 
 	// 	- yClipType TextClipType: Specify the vertical clip type. 
 	// 
 	// The function returns the following values:
 	// 
-	// 	- ret []TextRange 
+	// 	- ret array 
 	//
 	// Get the ranges of text in the specified bounding box.
-	GetBoundedRanges(*TextRectangle, CoordType, TextClipType, TextClipType) []TextRange
+	GetBoundedRanges(TextRectangle, CoordType, TextClipType, TextClipType) array
 	// GetCaretOffset wraps atk_text_get_caret_offset
 	// The function returns the following values:
 	// 
@@ -6603,16 +6662,6 @@ type Text interface {
 	// Get the bounding box containing the glyph representing the character at
 	//     a particular text offset.
 	GetCharacterExtents(int, CoordType) (int, int, int, int)
-	// GetDefaultAttributes wraps atk_text_get_default_attributes
-	// The function returns the following values:
-	// 
-	// 	- ret *AttributeSet 
-	//
-	// Creates an #AtkAttributeSet which consists of the default values of
-	// attributes for the text. See the enum AtkTextAttribute for types of text
-	// attributes that can be returned. Note that other attributes may also be
-	// returned.
-	GetDefaultAttributes() *AttributeSet
 	// GetNSelections wraps atk_text_get_n_selections
 	// The function returns the following values:
 	// 
@@ -6637,27 +6686,6 @@ type Text interface {
 	// are interpreted as being relative to the screen or this widget's window
 	// depending on @coords.
 	GetOffsetAtPoint(int, int, CoordType) int
-	// GetRunAttributes wraps atk_text_get_run_attributes
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- offset int: the character offset at which to get the attributes, -1 means the offset of
-	// the character to be inserted at the caret location. 
-	// 
-	// The function returns the following values:
-	// 
-	// 	- startOffset int: the address to put the start offset of the range 
-	// 	- endOffset int: the address to put the end offset of the range 
-	// 	- ret *AttributeSet 
-	//
-	// Creates an #AtkAttributeSet which consists of the attributes explicitly
-	// set at the position @offset in the text. @start_offset and @end_offset are
-	// set to the start and end of the range around @offset where the attributes are
-	// invariant. Note that @end_offset is the offset of the first character
-	// after the range.  See the enum AtkTextAttribute for types of text
-	// attributes that can be returned. Note that other attributes may also be
-	// returned.
-	GetRunAttributes(int) (int, int, *AttributeSet)
 	// GetSelection wraps atk_text_get_selection
 	// 
 	// The function takes the following parameters:
@@ -6911,14 +6939,14 @@ type Text interface {
 	SetSelection(int, int, int) bool
 }
 
-func unsafeWrapText(base *gobject.Object) *TextInstance {
+func unsafeWrapText(base *gobject.ObjectInstance) *TextInstance {
 	return &TextInstance{
-		Object: base,
+		ObjectInstance: base,
 	}
 }
 
 func marshalTextInstance(p uintptr) (interface{}, error) {
-	return unsafeWrapText(gobject.ValueFromNative(unsafe.Pointer(p)).Object()), nil
+	return unsafeWrapText(gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Object()), nil
 }
 
 // UnsafeTextFromGlibBorrow is used to convert raw AtkText pointers to go. This is used by the bindings internally.
@@ -6959,9 +6987,9 @@ func UnsafeTextToGlibFull(c Text) unsafe.Pointer {
 //
 // Adds a selection bounded by the specified offsets.
 func (text *TextInstance) AddSelection(startOffset int, endOffset int) bool {
-	var carg0 *C.AtkText // in, none, interface
-	var carg1 C.int      // in, casted
-	var carg2 C.int      // in, casted
+	var carg0 *C.AtkText // in, none, converted
+	var carg1 C.int      // in, none, casted
+	var carg2 C.int      // in, none, casted
 	var cret  C.gboolean // return
 
 	carg0 = (*C.AtkText)(UnsafeTextToGlibNone(text))
@@ -6986,23 +7014,23 @@ func (text *TextInstance) AddSelection(startOffset int, endOffset int) bool {
 // 
 // The function takes the following parameters:
 // 
-// 	- rect *TextRectangle: An AtkTextRectangle giving the dimensions of the bounding box. 
+// 	- rect TextRectangle: An AtkTextRectangle giving the dimensions of the bounding box. 
 // 	- coordType CoordType: Specify whether coordinates are relative to the screen or widget window. 
 // 	- xClipType TextClipType: Specify the horizontal clip type. 
 // 	- yClipType TextClipType: Specify the vertical clip type. 
 // 
 // The function returns the following values:
 // 
-// 	- ret []TextRange 
+// 	- ret array 
 //
 // Get the ranges of text in the specified bounding box.
-func (text *TextInstance) GetBoundedRanges(rect *TextRectangle, coordType CoordType, xClipType TextClipType, yClipType TextClipType) []TextRange {
-	var carg0 *C.AtkText          // in, none, interface
-	var carg1 *C.AtkTextRectangle // in, none, record
-	var carg2 C.AtkCoordType      // in, casted
-	var carg3 C.AtkTextClipType   // in, casted
-	var carg4 C.AtkTextClipType   // in, casted
-	var cret  *C.AtkTextRange     // return, transfer: full, scope: , implicit: false, skip: false, optional: false, nullable: false, caller-allocates: false, has closure: false, has destroy: false
+func (text *TextInstance) GetBoundedRanges(rect TextRectangle, coordType CoordType, xClipType TextClipType, yClipType TextClipType) array {
+	var carg0 *C.AtkText          // in, none, converted
+	var carg1 *C.AtkTextRectangle // in, none, converted
+	var carg2 C.AtkCoordType      // in, none, casted
+	var carg3 C.AtkTextClipType   // in, none, casted
+	var carg4 C.AtkTextClipType   // in, none, casted
+	var cret  array               // return, transfer: full, scope: , implicit: false, skip: false, optional: false, nullable: false, caller-allocates: false, has closure: false, has destroy: false
 
 	carg0 = (*C.AtkText)(UnsafeTextToGlibNone(text))
 	carg1 = (*C.AtkTextRectangle)(UnsafeTextRectangleToGlibNone(rect))
@@ -7017,9 +7045,9 @@ func (text *TextInstance) GetBoundedRanges(rect *TextRectangle, coordType CoordT
 	runtime.KeepAlive(xClipType)
 	runtime.KeepAlive(yClipType)
 
-	var ret []TextRange
+	var ret array
 
-	panic("unimplemented conversion of *typesystem.Array (AtkTextRange*)")
+	panic("unimplemented conversion of array (array)")
 
 	return ret
 }
@@ -7031,8 +7059,8 @@ func (text *TextInstance) GetBoundedRanges(rect *TextRectangle, coordType CoordT
 //
 // Gets the offset of the position of the caret (cursor).
 func (text *TextInstance) GetCaretOffset() int {
-	var carg0 *C.AtkText // in, none, interface
-	var cret  C.int      // return, casted
+	var carg0 *C.AtkText // in, none, converted
+	var cret  C.int      // return, none, casted
 
 	carg0 = (*C.AtkText)(UnsafeTextToGlibNone(text))
 
@@ -7058,9 +7086,9 @@ func (text *TextInstance) GetCaretOffset() int {
 //
 // Gets the specified text.
 func (text *TextInstance) GetCharacterAtOffset(offset int) uint32 {
-	var carg0 *C.AtkText // in, none, interface
-	var carg1 C.int      // in, casted
-	var cret  C.gunichar // return, casted
+	var carg0 *C.AtkText // in, none, converted
+	var carg1 C.int      // in, none, casted
+	var cret  C.gunichar // return, none, casted
 
 	carg0 = (*C.AtkText)(UnsafeTextToGlibNone(text))
 	carg1 = C.int(offset)
@@ -7083,8 +7111,8 @@ func (text *TextInstance) GetCharacterAtOffset(offset int) uint32 {
 //
 // Gets the character count.
 func (text *TextInstance) GetCharacterCount() int {
-	var carg0 *C.AtkText // in, none, interface
-	var cret  C.int      // return, casted
+	var carg0 *C.AtkText // in, none, converted
+	var cret  C.int      // return, none, casted
 
 	carg0 = (*C.AtkText)(UnsafeTextToGlibNone(text))
 
@@ -7118,13 +7146,13 @@ func (text *TextInstance) GetCharacterCount() int {
 // Get the bounding box containing the glyph representing the character at
 //     a particular text offset.
 func (text *TextInstance) GetCharacterExtents(offset int, coords CoordType) (int, int, int, int) {
-	var carg0 *C.AtkText     // in, none, interface
-	var carg1 C.int          // in, casted
-	var carg6 C.AtkCoordType // in, casted
-	var carg2 C.int          // out, casted
-	var carg3 C.int          // out, casted
-	var carg4 C.int          // out, casted
-	var carg5 C.int          // out, casted
+	var carg0 *C.AtkText     // in, none, converted
+	var carg1 C.int          // in, none, casted
+	var carg6 C.AtkCoordType // in, none, casted
+	var carg2 C.int          // out, full, casted
+	var carg3 C.int          // out, full, casted
+	var carg4 C.int          // out, full, casted
+	var carg5 C.int          // out, full, casted
 
 	carg0 = (*C.AtkText)(UnsafeTextToGlibNone(text))
 	carg1 = C.int(offset)
@@ -7148,31 +7176,6 @@ func (text *TextInstance) GetCharacterExtents(offset int, coords CoordType) (int
 	return x, y, width, height
 }
 
-// GetDefaultAttributes wraps atk_text_get_default_attributes
-// The function returns the following values:
-// 
-// 	- ret *AttributeSet 
-//
-// Creates an #AtkAttributeSet which consists of the default values of
-// attributes for the text. See the enum AtkTextAttribute for types of text
-// attributes that can be returned. Note that other attributes may also be
-// returned.
-func (text *TextInstance) GetDefaultAttributes() *AttributeSet {
-	var carg0 *C.AtkText         // in, none, interface
-	var cret  *C.AtkAttributeSet // return, transfer: full, scope: , implicit: false, skip: false, optional: false, nullable: false, caller-allocates: false, has closure: false, has destroy: false
-
-	carg0 = (*C.AtkText)(UnsafeTextToGlibNone(text))
-
-	cret = C.atk_text_get_default_attributes(carg0)
-	runtime.KeepAlive(text)
-
-	var ret *AttributeSet
-
-	panic("unimplemented conversion of *typesystem.PointerType (AtkAttributeSet*)")
-
-	return ret
-}
-
 // GetNSelections wraps atk_text_get_n_selections
 // The function returns the following values:
 // 
@@ -7180,8 +7183,8 @@ func (text *TextInstance) GetDefaultAttributes() *AttributeSet {
 //
 // Gets the number of selected regions.
 func (text *TextInstance) GetNSelections() int {
-	var carg0 *C.AtkText // in, none, interface
-	var cret  C.int      // return, casted
+	var carg0 *C.AtkText // in, none, converted
+	var cret  C.int      // return, none, casted
 
 	carg0 = (*C.AtkText)(UnsafeTextToGlibNone(text))
 
@@ -7212,11 +7215,11 @@ func (text *TextInstance) GetNSelections() int {
 // are interpreted as being relative to the screen or this widget's window
 // depending on @coords.
 func (text *TextInstance) GetOffsetAtPoint(x int, y int, coords CoordType) int {
-	var carg0 *C.AtkText     // in, none, interface
-	var carg1 C.int          // in, casted
-	var carg2 C.int          // in, casted
-	var carg3 C.AtkCoordType // in, casted
-	var cret  C.int          // return, casted
+	var carg0 *C.AtkText     // in, none, converted
+	var carg1 C.int          // in, none, casted
+	var carg2 C.int          // in, none, casted
+	var carg3 C.AtkCoordType // in, none, casted
+	var cret  C.int          // return, none, casted
 
 	carg0 = (*C.AtkText)(UnsafeTextToGlibNone(text))
 	carg1 = C.int(x)
@@ -7234,51 +7237,6 @@ func (text *TextInstance) GetOffsetAtPoint(x int, y int, coords CoordType) int {
 	ret = int(cret)
 
 	return ret
-}
-
-// GetRunAttributes wraps atk_text_get_run_attributes
-// 
-// The function takes the following parameters:
-// 
-// 	- offset int: the character offset at which to get the attributes, -1 means the offset of
-// the character to be inserted at the caret location. 
-// 
-// The function returns the following values:
-// 
-// 	- startOffset int: the address to put the start offset of the range 
-// 	- endOffset int: the address to put the end offset of the range 
-// 	- ret *AttributeSet 
-//
-// Creates an #AtkAttributeSet which consists of the attributes explicitly
-// set at the position @offset in the text. @start_offset and @end_offset are
-// set to the start and end of the range around @offset where the attributes are
-// invariant. Note that @end_offset is the offset of the first character
-// after the range.  See the enum AtkTextAttribute for types of text
-// attributes that can be returned. Note that other attributes may also be
-// returned.
-func (text *TextInstance) GetRunAttributes(offset int) (int, int, *AttributeSet) {
-	var carg0 *C.AtkText         // in, none, interface
-	var carg1 C.int              // in, casted
-	var carg2 C.int              // out, casted
-	var carg3 C.int              // out, casted
-	var cret  *C.AtkAttributeSet // return, transfer: full, scope: , implicit: false, skip: false, optional: false, nullable: false, caller-allocates: false, has closure: false, has destroy: false
-
-	carg0 = (*C.AtkText)(UnsafeTextToGlibNone(text))
-	carg1 = C.int(offset)
-
-	cret = C.atk_text_get_run_attributes(carg0, carg1, &carg2, &carg3)
-	runtime.KeepAlive(text)
-	runtime.KeepAlive(offset)
-
-	var startOffset int
-	var endOffset   int
-	var ret         *AttributeSet
-
-	startOffset = int(carg2)
-	endOffset = int(carg3)
-	panic("unimplemented conversion of *typesystem.PointerType (AtkAttributeSet*)")
-
-	return startOffset, endOffset, ret
 }
 
 // GetSelection wraps atk_text_get_selection
@@ -7300,10 +7258,10 @@ func (text *TextInstance) GetRunAttributes(offset int) (int, int, *AttributeSet)
 //
 // Gets the text from the specified selection.
 func (text *TextInstance) GetSelection(selectionNum int) (int, int, string) {
-	var carg0 *C.AtkText // in, none, interface
-	var carg1 C.int      // in, casted
-	var carg2 C.int      // out, casted
-	var carg3 C.int      // out, casted
+	var carg0 *C.AtkText // in, none, converted
+	var carg1 C.int      // in, none, casted
+	var carg2 C.int      // out, full, casted
+	var carg3 C.int      // out, full, casted
 	var cret  *C.gchar   // return, full, string
 
 	carg0 = (*C.AtkText)(UnsafeTextToGlibNone(text))
@@ -7371,11 +7329,11 @@ func (text *TextInstance) GetSelection(selectionNum int) (int, int, string) {
 // is from the start of the paragraph at or before the offset to the start
 // of the following paragraph after the offset.
 func (text *TextInstance) GetStringAtOffset(offset int, granularity TextGranularity) (int, int, string) {
-	var carg0 *C.AtkText           // in, none, interface
-	var carg1 C.int                // in, casted
-	var carg2 C.AtkTextGranularity // in, casted
-	var carg3 C.int                // out, casted
-	var carg4 C.int                // out, casted
+	var carg0 *C.AtkText           // in, none, converted
+	var carg1 C.int                // in, none, casted
+	var carg2 C.AtkTextGranularity // in, none, casted
+	var carg3 C.int                // out, full, casted
+	var carg4 C.int                // out, full, casted
 	var cret  *C.gchar             // return, full, string
 
 	carg0 = (*C.AtkText)(UnsafeTextToGlibNone(text))
@@ -7412,9 +7370,9 @@ func (text *TextInstance) GetStringAtOffset(offset int, granularity TextGranular
 //
 // Gets the specified text.
 func (text *TextInstance) GetText(startOffset int, endOffset int) string {
-	var carg0 *C.AtkText // in, none, interface
-	var carg1 C.int      // in, casted
-	var carg2 C.int      // in, casted
+	var carg0 *C.AtkText // in, none, converted
+	var carg1 C.int      // in, none, casted
+	var carg2 C.int      // in, none, casted
 	var cret  *C.gchar   // return, full, string
 
 	carg0 = (*C.AtkText)(UnsafeTextToGlibNone(text))
@@ -7452,11 +7410,11 @@ func (text *TextInstance) GetText(startOffset int, endOffset int) string {
 //
 // Deprecated: (since 2.9.3) Please use atk_text_get_string_at_offset() instead.
 func (text *TextInstance) GetTextAfterOffset(offset int, boundaryType TextBoundary) (int, int, string) {
-	var carg0 *C.AtkText        // in, none, interface
-	var carg1 C.int             // in, casted
-	var carg2 C.AtkTextBoundary // in, casted
-	var carg3 C.int             // out, casted
-	var carg4 C.int             // out, casted
+	var carg0 *C.AtkText        // in, none, converted
+	var carg1 C.int             // in, none, casted
+	var carg2 C.AtkTextBoundary // in, none, casted
+	var carg3 C.int             // out, full, casted
+	var carg4 C.int             // out, full, casted
 	var cret  *C.gchar          // return, full, string
 
 	carg0 = (*C.AtkText)(UnsafeTextToGlibNone(text))
@@ -7522,11 +7480,11 @@ func (text *TextInstance) GetTextAfterOffset(offset int, boundaryType TextBounda
 // Deprecated: This method is deprecated since ATK version
 // 2.9.4. Please use atk_text_get_string_at_offset() instead.
 func (text *TextInstance) GetTextAtOffset(offset int, boundaryType TextBoundary) (int, int, string) {
-	var carg0 *C.AtkText        // in, none, interface
-	var carg1 C.int             // in, casted
-	var carg2 C.AtkTextBoundary // in, casted
-	var carg3 C.int             // out, casted
-	var carg4 C.int             // out, casted
+	var carg0 *C.AtkText        // in, none, converted
+	var carg1 C.int             // in, none, casted
+	var carg2 C.AtkTextBoundary // in, none, casted
+	var carg3 C.int             // out, full, casted
+	var carg4 C.int             // out, full, casted
 	var cret  *C.gchar          // return, full, string
 
 	carg0 = (*C.AtkText)(UnsafeTextToGlibNone(text))
@@ -7568,11 +7526,11 @@ func (text *TextInstance) GetTextAtOffset(offset int, boundaryType TextBoundary)
 //
 // Deprecated: (since 2.9.3) Please use atk_text_get_string_at_offset() instead.
 func (text *TextInstance) GetTextBeforeOffset(offset int, boundaryType TextBoundary) (int, int, string) {
-	var carg0 *C.AtkText        // in, none, interface
-	var carg1 C.int             // in, casted
-	var carg2 C.AtkTextBoundary // in, casted
-	var carg3 C.int             // out, casted
-	var carg4 C.int             // out, casted
+	var carg0 *C.AtkText        // in, none, converted
+	var carg1 C.int             // in, none, casted
+	var carg2 C.AtkTextBoundary // in, none, casted
+	var carg3 C.int             // out, full, casted
+	var carg4 C.int             // out, full, casted
 	var cret  *C.gchar          // return, full, string
 
 	carg0 = (*C.AtkText)(UnsafeTextToGlibNone(text))
@@ -7612,8 +7570,8 @@ func (text *TextInstance) GetTextBeforeOffset(offset int, boundaryType TextBound
 //
 // Removes the specified selection.
 func (text *TextInstance) RemoveSelection(selectionNum int) bool {
-	var carg0 *C.AtkText // in, none, interface
-	var carg1 C.int      // in, casted
+	var carg0 *C.AtkText // in, none, converted
+	var carg1 C.int      // in, none, casted
 	var cret  C.gboolean // return
 
 	carg0 = (*C.AtkText)(UnsafeTextToGlibNone(text))
@@ -7646,10 +7604,10 @@ func (text *TextInstance) RemoveSelection(selectionNum int) bool {
 //
 // Makes a substring of @text visible on the screen by scrolling all necessary parents.
 func (text *TextInstance) ScrollSubstringTo(startOffset int, endOffset int, typ ScrollType) bool {
-	var carg0 *C.AtkText      // in, none, interface
-	var carg1 C.int           // in, casted
-	var carg2 C.int           // in, casted
-	var carg3 C.AtkScrollType // in, casted
+	var carg0 *C.AtkText      // in, none, converted
+	var carg1 C.int           // in, none, casted
+	var carg2 C.int           // in, none, casted
+	var carg3 C.AtkScrollType // in, none, casted
 	var cret  C.gboolean      // return
 
 	carg0 = (*C.AtkText)(UnsafeTextToGlibNone(text))
@@ -7690,12 +7648,12 @@ func (text *TextInstance) ScrollSubstringTo(startOffset int, endOffset int, typ 
 // Move the top-left of a substring of @text to a given position of the screen
 // by scrolling all necessary parents.
 func (text *TextInstance) ScrollSubstringToPoint(startOffset int, endOffset int, coords CoordType, x int, y int) bool {
-	var carg0 *C.AtkText     // in, none, interface
-	var carg1 C.int          // in, casted
-	var carg2 C.int          // in, casted
-	var carg3 C.AtkCoordType // in, casted
-	var carg4 C.int          // in, casted
-	var carg5 C.int          // in, casted
+	var carg0 *C.AtkText     // in, none, converted
+	var carg1 C.int          // in, none, casted
+	var carg2 C.int          // in, none, casted
+	var carg3 C.AtkCoordType // in, none, casted
+	var carg4 C.int          // in, none, casted
+	var carg5 C.int          // in, none, casted
 	var cret  C.gboolean     // return
 
 	carg0 = (*C.AtkText)(UnsafeTextToGlibNone(text))
@@ -7750,8 +7708,8 @@ func (text *TextInstance) ScrollSubstringToPoint(startOffset int, endOffset int,
 // motion or focus navigation operation, this method should try to scroll the new
 // caret position into view while minimizing unnecessary scroll motion.
 func (text *TextInstance) SetCaretOffset(offset int) bool {
-	var carg0 *C.AtkText // in, none, interface
-	var carg1 C.int      // in, casted
+	var carg0 *C.AtkText // in, none, converted
+	var carg1 C.int      // in, none, casted
 	var cret  C.gboolean // return
 
 	carg0 = (*C.AtkText)(UnsafeTextToGlibNone(text))
@@ -7789,10 +7747,10 @@ func (text *TextInstance) SetCaretOffset(offset int) bool {
 //
 // Changes the start and end offset of the specified selection.
 func (text *TextInstance) SetSelection(selectionNum int, startOffset int, endOffset int) bool {
-	var carg0 *C.AtkText // in, none, interface
-	var carg1 C.int      // in, casted
-	var carg2 C.int      // in, casted
-	var carg3 C.int      // in, casted
+	var carg0 *C.AtkText // in, none, converted
+	var carg1 C.int      // in, none, casted
+	var carg2 C.int      // in, none, casted
+	var carg3 C.int      // in, none, casted
 	var cret  C.gboolean // return
 
 	carg0 = (*C.AtkText)(UnsafeTextToGlibNone(text))
@@ -7818,7 +7776,7 @@ func (text *TextInstance) SetSelection(selectionNum int, startOffset int, endOff
 // ValueInstance is the instance type used by all types implementing AtkValue. It is used internally by the bindings. Users should use the interface [Value] instead.
 type ValueInstance struct {
 	_ [0]func() // equal guard
-	*gobject.Object
+	*gobject.ObjectInstance
 }
 
 var _ Value = (*ValueInstance)(nil)
@@ -7968,7 +7926,7 @@ var _ Value = (*ValueInstance)(nil)
 // &lt;/para&gt;
 // &lt;/refsect1&gt;
 type Value interface {
-	gobject.ObjectLike
+	gobject.Object
 
 	// GetIncrement wraps atk_value_get_increment
 	// The function returns the following values:
@@ -7983,18 +7941,10 @@ type Value interface {
 	// GetRange wraps atk_value_get_range
 	// The function returns the following values:
 	// 
-	// 	- ret *Range 
+	// 	- ret Range 
 	//
 	// Gets the range of this object.
-	GetRange() *Range
-	// GetSubRanges wraps atk_value_get_sub_ranges
-	// The function returns the following values:
-	// 
-	// 	- ret *glib.SList 
-	//
-	// Gets the list of subranges defined for this object. See #AtkValue
-	// introduction for examples of subranges and when to expose them.
-	GetSubRanges() *glib.SList
+	GetRange() Range
 	// GetValueAndText wraps atk_value_get_value_and_text
 	// The function returns the following values:
 	// 
@@ -8043,14 +7993,14 @@ type Value interface {
 	SetValue(float64)
 }
 
-func unsafeWrapValue(base *gobject.Object) *ValueInstance {
+func unsafeWrapValue(base *gobject.ObjectInstance) *ValueInstance {
 	return &ValueInstance{
-		Object: base,
+		ObjectInstance: base,
 	}
 }
 
 func marshalValueInstance(p uintptr) (interface{}, error) {
-	return unsafeWrapValue(gobject.ValueFromNative(unsafe.Pointer(p)).Object()), nil
+	return unsafeWrapValue(gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Object()), nil
 }
 
 // UnsafeValueFromGlibBorrow is used to convert raw AtkValue pointers to go. This is used by the bindings internally.
@@ -8088,8 +8038,8 @@ func UnsafeValueToGlibFull(c Value) unsafe.Pointer {
 // mean that it is limited only by the floating point precision of the
 // platform.
 func (obj *ValueInstance) GetIncrement() float64 {
-	var carg0 *C.AtkValue // in, none, interface
-	var cret  C.gdouble   // return, casted
+	var carg0 *C.AtkValue // in, none, converted
+	var cret  C.gdouble   // return, none, casted
 
 	carg0 = (*C.AtkValue)(UnsafeValueToGlibNone(obj))
 
@@ -8106,44 +8056,21 @@ func (obj *ValueInstance) GetIncrement() float64 {
 // GetRange wraps atk_value_get_range
 // The function returns the following values:
 // 
-// 	- ret *Range 
+// 	- ret Range 
 //
 // Gets the range of this object.
-func (obj *ValueInstance) GetRange() *Range {
-	var carg0 *C.AtkValue // in, none, interface
-	var cret  *C.AtkRange // return, full, record
+func (obj *ValueInstance) GetRange() Range {
+	var carg0 *C.AtkValue // in, none, converted
+	var cret  *C.AtkRange // return, full, converted
 
 	carg0 = (*C.AtkValue)(UnsafeValueToGlibNone(obj))
 
 	cret = C.atk_value_get_range(carg0)
 	runtime.KeepAlive(obj)
 
-	var ret *Range
+	var ret Range
 
 	ret = UnsafeRangeFromGlibFull(unsafe.Pointer(cret))
-
-	return ret
-}
-
-// GetSubRanges wraps atk_value_get_sub_ranges
-// The function returns the following values:
-// 
-// 	- ret *glib.SList 
-//
-// Gets the list of subranges defined for this object. See #AtkValue
-// introduction for examples of subranges and when to expose them.
-func (obj *ValueInstance) GetSubRanges() *glib.SList {
-	var carg0 *C.AtkValue // in, none, interface
-	var cret  *C.GSList   // return, container inner types: (AtkRange), transfer: full, scope: , implicit: false, skip: false, optional: false, nullable: false, caller-allocates: false, has closure: false, has destroy: false
-
-	carg0 = (*C.AtkValue)(UnsafeValueToGlibNone(obj))
-
-	cret = C.atk_value_get_sub_ranges(carg0)
-	runtime.KeepAlive(obj)
-
-	var ret *glib.SList
-
-	panic("unimplemented conversion of container *typesystem.PointerType (GSList*)")
 
 	return ret
 }
@@ -8159,8 +8086,8 @@ func (obj *ValueInstance) GetSubRanges() *glib.SList {
 // @obj. @text is a newly created string, that must be freed by the
 // caller. Can be NULL if no descriptor is available.
 func (obj *ValueInstance) GetValueAndText() (float64, string) {
-	var carg0 *C.AtkValue // in, none, interface
-	var carg1 C.gdouble   // out, casted
+	var carg0 *C.AtkValue // in, none, converted
+	var carg1 C.gdouble   // out, full, casted
 	var carg2 *C.gchar    // out, full, string
 
 	carg0 = (*C.AtkValue)(UnsafeValueToGlibNone(obj))
@@ -8192,12 +8119,12 @@ func (obj *ValueInstance) GetValueAndText() (float64, string) {
 //
 // Deprecated: Since 2.12. Use atk_value_set_value() instead.
 func (obj *ValueInstance) SetCurrentValue(value *gobject.Value) bool {
-	var carg0 *C.AtkValue // in, none, interface
-	var carg1 *C.GValue   // in, none, record
+	var carg0 *C.AtkValue // in, none, converted
+	var carg1 *C.GValue   // in, none, converted
 	var cret  C.gboolean  // return
 
 	carg0 = (*C.AtkValue)(UnsafeValueToGlibNone(obj))
-	carg1 = (*C.GValue)(gobject.TODOToGlibNone(value))
+	carg1 = (*C.GValue)(TODOToGlibNone(value))
 
 	cret = C.atk_value_set_current_value(carg0, carg1)
 	runtime.KeepAlive(obj)
@@ -8233,8 +8160,8 @@ func (obj *ValueInstance) SetCurrentValue(value *gobject.Value) bool {
 // required anymore to return if the value was properly assigned or
 // not.
 func (obj *ValueInstance) SetValue(newValue float64) {
-	var carg0 *C.AtkValue // in, none, interface
-	var carg1 C.gdouble   // in, casted
+	var carg0 *C.AtkValue // in, none, converted
+	var carg1 C.gdouble   // in, none, casted
 
 	carg0 = (*C.AtkValue)(UnsafeValueToGlibNone(obj))
 	carg1 = C.gdouble(newValue)
@@ -8247,7 +8174,7 @@ func (obj *ValueInstance) SetValue(newValue float64) {
 // WindowInstance is the instance type used by all types implementing AtkWindow. It is used internally by the bindings. Users should use the interface [Window] instead.
 type WindowInstance struct {
 	_ [0]func() // equal guard
-	*gobject.Object
+	*gobject.ObjectInstance
 }
 
 var _ Window = (*WindowInstance)(nil)
@@ -8262,17 +8189,17 @@ var _ Window = (*WindowInstance)(nil)
 // 
 // See [class@AtkObject]
 type Window interface {
-	gobject.ObjectLike
+	gobject.Object
 }
 
-func unsafeWrapWindow(base *gobject.Object) *WindowInstance {
+func unsafeWrapWindow(base *gobject.ObjectInstance) *WindowInstance {
 	return &WindowInstance{
-		Object: base,
+		ObjectInstance: base,
 	}
 }
 
 func marshalWindowInstance(p uintptr) (interface{}, error) {
-	return unsafeWrapWindow(gobject.ValueFromNative(unsafe.Pointer(p)).Object()), nil
+	return unsafeWrapWindow(gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Object()), nil
 }
 
 // UnsafeWindowFromGlibBorrow is used to convert raw AtkWindow pointers to go. This is used by the bindings internally.
@@ -8303,7 +8230,7 @@ func UnsafeWindowToGlibFull(c Window) unsafe.Pointer {
 // HyperlinkInstance is the instance type used by all types extending AtkHyperlink. It is used internally by the bindings. Users should use the interface [Hyperlink] instead.
 type HyperlinkInstance struct {
 	_ [0]func() // equal guard
-	gobject.Object
+	gobject.ObjectInstance
 }
 
 var _ Hyperlink = (*HyperlinkInstance)(nil)
@@ -8319,7 +8246,7 @@ var _ Hyperlink = (*HyperlinkInstance)(nil)
 // allows specification of a start and end offset within the host
 // AtkHypertext object.
 type Hyperlink interface {
-	gobject.ObjectLike
+	gobject.Object
 	upcastToAtkHyperlink() *HyperlinkInstance
 
 	// GetEndIndex wraps atk_hyperlink_get_end_index
@@ -8406,14 +8333,14 @@ type Hyperlink interface {
 	IsValid() bool
 }
 
-func unsafeWrapHyperlink(base *gobject.Object) *HyperlinkInstance {
+func unsafeWrapHyperlink(base *gobject.ObjectInstance) *HyperlinkInstance {
 	return &HyperlinkInstance{
-		Object: *base,
+		ObjectInstance: *base,
 	}
 }
 
 func marshalHyperlinkInstance(p uintptr) (interface{}, error) {
-	return unsafeWrapHyperlink(gobject.ValueFromNative(unsafe.Pointer(p)).Object()), nil
+	return unsafeWrapHyperlink(gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Object()), nil
 }
 
 // UnsafeHyperlinkFromGlibBorrow is used to convert raw AtkHyperlink pointers to go. This is used by the bindings internally.
@@ -8452,8 +8379,8 @@ func UnsafeHyperlinkToGlibFull(c Hyperlink) unsafe.Pointer {
 //
 // Gets the index with the hypertext document at which this link ends.
 func (link_ *HyperlinkInstance) GetEndIndex() int {
-	var carg0 *C.AtkHyperlink // in, none, class
-	var cret  C.int           // return, casted
+	var carg0 *C.AtkHyperlink // in, none, converted
+	var cret  C.int           // return, none, casted
 
 	carg0 = (*C.AtkHyperlink)(UnsafeHyperlinkToGlibNone(link_))
 
@@ -8474,8 +8401,8 @@ func (link_ *HyperlinkInstance) GetEndIndex() int {
 //
 // Gets the number of anchors associated with this hyperlink.
 func (link_ *HyperlinkInstance) GetNAnchors() int {
-	var carg0 *C.AtkHyperlink // in, none, class
-	var cret  C.int           // return, casted
+	var carg0 *C.AtkHyperlink // in, none, converted
+	var cret  C.int           // return, none, casted
 
 	carg0 = (*C.AtkHyperlink)(UnsafeHyperlinkToGlibNone(link_))
 
@@ -8506,9 +8433,9 @@ func (link_ *HyperlinkInstance) GetNAnchors() int {
 // 
 // Multiple anchors are primarily used by client-side image maps.
 func (link_ *HyperlinkInstance) GetObject(i int) Object {
-	var carg0 *C.AtkHyperlink // in, none, class
-	var carg1 C.int           // in, casted
-	var cret  *C.AtkObject    // return, none, class
+	var carg0 *C.AtkHyperlink // in, none, converted
+	var carg1 C.int           // in, none, casted
+	var cret  *C.AtkObject    // return, none, converted
 
 	carg0 = (*C.AtkHyperlink)(UnsafeHyperlinkToGlibNone(link_))
 	carg1 = C.int(i)
@@ -8531,8 +8458,8 @@ func (link_ *HyperlinkInstance) GetObject(i int) Object {
 //
 // Gets the index with the hypertext document at which this link begins.
 func (link_ *HyperlinkInstance) GetStartIndex() int {
-	var carg0 *C.AtkHyperlink // in, none, class
-	var cret  C.int           // return, casted
+	var carg0 *C.AtkHyperlink // in, none, converted
+	var cret  C.int           // return, none, casted
 
 	carg0 = (*C.AtkHyperlink)(UnsafeHyperlinkToGlibNone(link_))
 
@@ -8561,8 +8488,8 @@ func (link_ *HyperlinkInstance) GetStartIndex() int {
 // 
 // Multiple anchors are primarily used by client-side image maps.
 func (link_ *HyperlinkInstance) GetURI(i int) string {
-	var carg0 *C.AtkHyperlink // in, none, class
-	var carg1 C.int           // in, casted
+	var carg0 *C.AtkHyperlink // in, none, converted
+	var carg1 C.int           // in, none, casted
 	var cret  *C.gchar        // return, full, string
 
 	carg0 = (*C.AtkHyperlink)(UnsafeHyperlinkToGlibNone(link_))
@@ -8590,7 +8517,7 @@ func (link_ *HyperlinkInstance) GetURI(i int) string {
 //           %FALSE, but an inline &amp;lt;src&amp;gt; HTML element will return
 //           %TRUE.
 func (link_ *HyperlinkInstance) IsInline() bool {
-	var carg0 *C.AtkHyperlink // in, none, class
+	var carg0 *C.AtkHyperlink // in, none, converted
 	var cret  C.gboolean      // return
 
 	carg0 = (*C.AtkHyperlink)(UnsafeHyperlinkToGlibNone(link_))
@@ -8617,7 +8544,7 @@ func (link_ *HyperlinkInstance) IsInline() bool {
 // Deprecated: (since 1.8.0) Please use ATK_STATE_FOCUSABLE for all links,
 // and ATK_STATE_FOCUSED for focused links.
 func (link_ *HyperlinkInstance) IsSelectedLink() bool {
-	var carg0 *C.AtkHyperlink // in, none, class
+	var carg0 *C.AtkHyperlink // in, none, converted
 	var cret  C.gboolean      // return
 
 	carg0 = (*C.AtkHyperlink)(UnsafeHyperlinkToGlibNone(link_))
@@ -8643,7 +8570,7 @@ func (link_ *HyperlinkInstance) IsSelectedLink() bool {
 // this method returns %TRUE if the link is still valid (with
 // respect to the document it references) and %FALSE otherwise.
 func (link_ *HyperlinkInstance) IsValid() bool {
-	var carg0 *C.AtkHyperlink // in, none, class
+	var carg0 *C.AtkHyperlink // in, none, converted
 	var cret  C.gboolean      // return
 
 	carg0 = (*C.AtkHyperlink)(UnsafeHyperlinkToGlibNone(link_))
@@ -8663,7 +8590,7 @@ func (link_ *HyperlinkInstance) IsValid() bool {
 // MiscInstance is the instance type used by all types extending AtkMisc. It is used internally by the bindings. Users should use the interface [Misc] instead.
 type MiscInstance struct {
 	_ [0]func() // equal guard
-	gobject.Object
+	gobject.ObjectInstance
 }
 
 var _ Misc = (*MiscInstance)(nil)
@@ -8675,7 +8602,7 @@ var _ Misc = (*MiscInstance)(nil)
 // A set of utility functions for thread locking. This interface and
 // all his related methods are deprecated since 2.12.
 type Misc interface {
-	gobject.ObjectLike
+	gobject.Object
 	upcastToAtkMisc() *MiscInstance
 
 	// ThreadsEnter wraps atk_misc_threads_enter
@@ -8703,14 +8630,14 @@ type Misc interface {
 	ThreadsLeave()
 }
 
-func unsafeWrapMisc(base *gobject.Object) *MiscInstance {
+func unsafeWrapMisc(base *gobject.ObjectInstance) *MiscInstance {
 	return &MiscInstance{
-		Object: *base,
+		ObjectInstance: *base,
 	}
 }
 
 func marshalMiscInstance(p uintptr) (interface{}, error) {
-	return unsafeWrapMisc(gobject.ValueFromNative(unsafe.Pointer(p)).Object()), nil
+	return unsafeWrapMisc(gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Object()), nil
 }
 
 // UnsafeMiscFromGlibBorrow is used to convert raw AtkMisc pointers to go. This is used by the bindings internally.
@@ -8751,7 +8678,7 @@ func UnsafeMiscToGlibFull(c Misc) unsafe.Pointer {
 //
 // Deprecated: Since 2.12.
 func GetInstance() Misc {
-	var cret *C.AtkMisc // return, none, class
+	var cret *C.AtkMisc // return, none, converted
 
 	cret = C.atk_misc_get_instance()
 
@@ -8771,7 +8698,7 @@ func GetInstance() Misc {
 //
 // Deprecated: Since 2.12.
 func (misc *MiscInstance) ThreadsEnter() {
-	var carg0 *C.AtkMisc // in, none, class
+	var carg0 *C.AtkMisc // in, none, converted
 
 	carg0 = (*C.AtkMisc)(UnsafeMiscToGlibNone(misc))
 
@@ -8793,7 +8720,7 @@ func (misc *MiscInstance) ThreadsEnter() {
 //
 // Deprecated: Since 2.12.
 func (misc *MiscInstance) ThreadsLeave() {
-	var carg0 *C.AtkMisc // in, none, class
+	var carg0 *C.AtkMisc // in, none, converted
 
 	carg0 = (*C.AtkMisc)(UnsafeMiscToGlibNone(misc))
 
@@ -8804,7 +8731,7 @@ func (misc *MiscInstance) ThreadsLeave() {
 // ObjectInstance is the instance type used by all types extending AtkObject. It is used internally by the bindings. Users should use the interface [Object] instead.
 type ObjectInstance struct {
 	_ [0]func() // equal guard
-	gobject.Object
+	gobject.ObjectInstance
 }
 
 var _ Object = (*ObjectInstance)(nil)
@@ -8834,7 +8761,7 @@ var _ Object = (*ObjectInstance)(nil)
 // See [class@AtkObjectFactory], [class@AtkRegistry].  (GTK+ users see also
 // #GtkAccessible).
 type Object interface {
-	gobject.ObjectLike
+	gobject.Object
 	upcastToAtkObject() *ObjectInstance
 
 	// AddRelationship wraps atk_object_add_relationship
@@ -8857,16 +8784,6 @@ type Object interface {
 	//
 	// Gets the accessible id of the accessible.
 	GetAccessibleID() string
-	// GetAttributes wraps atk_object_get_attributes
-	// The function returns the following values:
-	// 
-	// 	- ret *AttributeSet 
-	//
-	// Get a list of properties applied to this object as a whole, as an #AtkAttributeSet consisting of
-	// name-value pairs. As such these attributes may be considered weakly-typed properties or annotations,
-	// as distinct from strongly-typed object data available via other get/set methods.
-	// Not all objects have explicit "name-value pair" #AtkAttributeSet properties.
-	GetAttributes() *AttributeSet
 	// GetDescription wraps atk_object_get_description
 	// The function returns the following values:
 	// 
@@ -9103,14 +9020,14 @@ type Object interface {
 	SetRole(Role)
 }
 
-func unsafeWrapObject(base *gobject.Object) *ObjectInstance {
+func unsafeWrapObject(base *gobject.ObjectInstance) *ObjectInstance {
 	return &ObjectInstance{
-		Object: *base,
+		ObjectInstance: *base,
 	}
 }
 
 func marshalObjectInstance(p uintptr) (interface{}, error) {
-	return unsafeWrapObject(gobject.ValueFromNative(unsafe.Pointer(p)).Object()), nil
+	return unsafeWrapObject(gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Object()), nil
 }
 
 // UnsafeObjectFromGlibBorrow is used to convert raw AtkObject pointers to go. This is used by the bindings internally.
@@ -9155,9 +9072,9 @@ func UnsafeObjectToGlibFull(c Object) unsafe.Pointer {
 //
 // Adds a relationship of the specified type with the specified target.
 func (object *ObjectInstance) AddRelationship(relationship RelationType, target Object) bool {
-	var carg0 *C.AtkObject      // in, none, class
-	var carg1 C.AtkRelationType // in, casted
-	var carg2 *C.AtkObject      // in, none, class
+	var carg0 *C.AtkObject      // in, none, converted
+	var carg1 C.AtkRelationType // in, none, casted
+	var carg2 *C.AtkObject      // in, none, converted
 	var cret  C.gboolean        // return
 
 	carg0 = (*C.AtkObject)(UnsafeObjectToGlibNone(object))
@@ -9185,7 +9102,7 @@ func (object *ObjectInstance) AddRelationship(relationship RelationType, target 
 //
 // Gets the accessible id of the accessible.
 func (accessible *ObjectInstance) GetAccessibleID() string {
-	var carg0 *C.AtkObject // in, none, class
+	var carg0 *C.AtkObject // in, none, converted
 	var cret  *C.gchar     // return, none, string
 
 	carg0 = (*C.AtkObject)(UnsafeObjectToGlibNone(accessible))
@@ -9200,31 +9117,6 @@ func (accessible *ObjectInstance) GetAccessibleID() string {
 	return ret
 }
 
-// GetAttributes wraps atk_object_get_attributes
-// The function returns the following values:
-// 
-// 	- ret *AttributeSet 
-//
-// Get a list of properties applied to this object as a whole, as an #AtkAttributeSet consisting of
-// name-value pairs. As such these attributes may be considered weakly-typed properties or annotations,
-// as distinct from strongly-typed object data available via other get/set methods.
-// Not all objects have explicit "name-value pair" #AtkAttributeSet properties.
-func (accessible *ObjectInstance) GetAttributes() *AttributeSet {
-	var carg0 *C.AtkObject       // in, none, class
-	var cret  *C.AtkAttributeSet // return, transfer: full, scope: , implicit: false, skip: false, optional: false, nullable: false, caller-allocates: false, has closure: false, has destroy: false
-
-	carg0 = (*C.AtkObject)(UnsafeObjectToGlibNone(accessible))
-
-	cret = C.atk_object_get_attributes(carg0)
-	runtime.KeepAlive(accessible)
-
-	var ret *AttributeSet
-
-	panic("unimplemented conversion of *typesystem.PointerType (AtkAttributeSet*)")
-
-	return ret
-}
-
 // GetDescription wraps atk_object_get_description
 // The function returns the following values:
 // 
@@ -9232,7 +9124,7 @@ func (accessible *ObjectInstance) GetAttributes() *AttributeSet {
 //
 // Gets the accessible description of the accessible.
 func (accessible *ObjectInstance) GetDescription() string {
-	var carg0 *C.AtkObject // in, none, class
+	var carg0 *C.AtkObject // in, none, converted
 	var cret  *C.gchar     // return, none, string
 
 	carg0 = (*C.AtkObject)(UnsafeObjectToGlibNone(accessible))
@@ -9254,7 +9146,7 @@ func (accessible *ObjectInstance) GetDescription() string {
 //
 // Gets the help text associated with the accessible.
 func (accessible *ObjectInstance) GetHelpText() string {
-	var carg0 *C.AtkObject // in, none, class
+	var carg0 *C.AtkObject // in, none, converted
 	var cret  *C.gchar     // return, none, string
 
 	carg0 = (*C.AtkObject)(UnsafeObjectToGlibNone(accessible))
@@ -9277,8 +9169,8 @@ func (accessible *ObjectInstance) GetHelpText() string {
 // Gets the 0-based index of this accessible in its parent; returns -1 if the
 // accessible does not have an accessible parent.
 func (accessible *ObjectInstance) GetIndexInParent() int {
-	var carg0 *C.AtkObject // in, none, class
-	var cret  C.int        // return, casted
+	var carg0 *C.AtkObject // in, none, converted
+	var cret  C.int        // return, none, casted
 
 	carg0 = (*C.AtkObject)(UnsafeObjectToGlibNone(accessible))
 
@@ -9301,8 +9193,8 @@ func (accessible *ObjectInstance) GetIndexInParent() int {
 //
 // Deprecated: Use atk_component_get_layer instead.
 func (accessible *ObjectInstance) GetLayer() Layer {
-	var carg0 *C.AtkObject // in, none, class
-	var cret  C.AtkLayer   // return, casted
+	var carg0 *C.AtkObject // in, none, converted
+	var cret  C.AtkLayer   // return, none, casted
 
 	carg0 = (*C.AtkObject)(UnsafeObjectToGlibNone(accessible))
 
@@ -9326,8 +9218,8 @@ func (accessible *ObjectInstance) GetLayer() Layer {
 //
 // Deprecated: Use atk_component_get_mdi_zorder instead.
 func (accessible *ObjectInstance) GetMDIZOrder() int {
-	var carg0 *C.AtkObject // in, none, class
-	var cret  C.int        // return, casted
+	var carg0 *C.AtkObject // in, none, converted
+	var cret  C.int        // return, none, casted
 
 	carg0 = (*C.AtkObject)(UnsafeObjectToGlibNone(accessible))
 
@@ -9348,8 +9240,8 @@ func (accessible *ObjectInstance) GetMDIZOrder() int {
 //
 // Gets the number of accessible children of the accessible.
 func (accessible *ObjectInstance) GetNAccessibleChildren() int {
-	var carg0 *C.AtkObject // in, none, class
-	var cret  C.int        // return, casted
+	var carg0 *C.AtkObject // in, none, converted
+	var cret  C.int        // return, none, casted
 
 	carg0 = (*C.AtkObject)(UnsafeObjectToGlibNone(accessible))
 
@@ -9370,7 +9262,7 @@ func (accessible *ObjectInstance) GetNAccessibleChildren() int {
 //
 // Gets the accessible name of the accessible.
 func (accessible *ObjectInstance) GetName() string {
-	var carg0 *C.AtkObject // in, none, class
+	var carg0 *C.AtkObject // in, none, converted
 	var cret  *C.gchar     // return, none, string
 
 	carg0 = (*C.AtkObject)(UnsafeObjectToGlibNone(accessible))
@@ -9393,7 +9285,7 @@ func (accessible *ObjectInstance) GetName() string {
 // Gets a UTF-8 string indicating the POSIX-style LC_MESSAGES locale
 // of @accessible.
 func (accessible *ObjectInstance) GetObjectLocale() string {
-	var carg0 *C.AtkObject // in, none, class
+	var carg0 *C.AtkObject // in, none, converted
 	var cret  *C.gchar     // return, none, string
 
 	carg0 = (*C.AtkObject)(UnsafeObjectToGlibNone(accessible))
@@ -9422,8 +9314,8 @@ func (accessible *ObjectInstance) GetObjectLocale() string {
 // If you are only interested on the parent assigned with
 // atk_object_set_parent(), use atk_object_peek_parent().
 func (accessible *ObjectInstance) GetParent() Object {
-	var carg0 *C.AtkObject // in, none, class
-	var cret  *C.AtkObject // return, none, class
+	var carg0 *C.AtkObject // in, none, converted
+	var cret  *C.AtkObject // return, none, converted
 
 	carg0 = (*C.AtkObject)(UnsafeObjectToGlibNone(accessible))
 
@@ -9444,8 +9336,8 @@ func (accessible *ObjectInstance) GetParent() Object {
 //
 // Gets the role of the accessible.
 func (accessible *ObjectInstance) GetRole() Role {
-	var carg0 *C.AtkObject // in, none, class
-	var cret  C.AtkRole    // return, casted
+	var carg0 *C.AtkObject // in, none, converted
+	var cret  C.AtkRole    // return, none, casted
 
 	carg0 = (*C.AtkObject)(UnsafeObjectToGlibNone(accessible))
 
@@ -9470,8 +9362,8 @@ func (accessible *ObjectInstance) GetRole() Role {
 // that this function should called only in the ..._new() functions used
 // to create an instance of a subclass of #AtkObject
 func (accessible *ObjectInstance) Initialize(data unsafe.Pointer) {
-	var carg0 *C.AtkObject // in, none, class
-	var carg1 C.gpointer   // in, casted, nullable
+	var carg0 *C.AtkObject // in, none, converted
+	var carg1 C.gpointer   // in, none, casted, nullable
 
 	carg0 = (*C.AtkObject)(UnsafeObjectToGlibNone(accessible))
 	if data != nil {
@@ -9495,8 +9387,8 @@ func (accessible *ObjectInstance) Initialize(data unsafe.Pointer) {
 // Note that as a general rule when the state of an existing object changes,
 // emitting a notification is expected.
 func (accessible *ObjectInstance) NotifyStateChange(state State, value bool) {
-	var carg0 *C.AtkObject // in, none, class
-	var carg1 C.AtkState   // in, casted, alias
+	var carg0 *C.AtkObject // in, none, converted
+	var carg1 C.AtkState   // in, none, casted, alias
 	var carg2 C.gboolean   // in
 
 	carg0 = (*C.AtkObject)(UnsafeObjectToGlibNone(accessible))
@@ -9524,8 +9416,8 @@ func (accessible *ObjectInstance) NotifyStateChange(state State, value bool) {
 // to be exposed to accessible tools. See atk_object_get_parent() for
 // further reference.
 func (accessible *ObjectInstance) PeekParent() Object {
-	var carg0 *C.AtkObject // in, none, class
-	var cret  *C.AtkObject // return, none, class
+	var carg0 *C.AtkObject // in, none, converted
+	var cret  *C.AtkObject // return, none, converted
 
 	carg0 = (*C.AtkObject)(UnsafeObjectToGlibNone(accessible))
 
@@ -9553,9 +9445,9 @@ func (accessible *ObjectInstance) PeekParent() Object {
 // The accessible children are 0-based so the first accessible child is
 // at index 0, the second at index 1 and so on.
 func (accessible *ObjectInstance) RefAccessibleChild(i int) Object {
-	var carg0 *C.AtkObject // in, none, class
-	var carg1 C.int        // in, casted
-	var cret  *C.AtkObject // return, full, class
+	var carg0 *C.AtkObject // in, none, converted
+	var carg1 C.int        // in, none, casted
+	var cret  *C.AtkObject // return, full, converted
 
 	carg0 = (*C.AtkObject)(UnsafeObjectToGlibNone(accessible))
 	carg1 = C.int(i)
@@ -9578,8 +9470,8 @@ func (accessible *ObjectInstance) RefAccessibleChild(i int) Object {
 //
 // Gets the #AtkRelationSet associated with the object.
 func (accessible *ObjectInstance) RefRelationSet() RelationSet {
-	var carg0 *C.AtkObject      // in, none, class
-	var cret  *C.AtkRelationSet // return, full, class
+	var carg0 *C.AtkObject      // in, none, converted
+	var cret  *C.AtkRelationSet // return, full, converted
 
 	carg0 = (*C.AtkObject)(UnsafeObjectToGlibNone(accessible))
 
@@ -9601,8 +9493,8 @@ func (accessible *ObjectInstance) RefRelationSet() RelationSet {
 // Gets a reference to the state set of the accessible; the caller must
 // unreference it when it is no longer needed.
 func (accessible *ObjectInstance) RefStateSet() StateSet {
-	var carg0 *C.AtkObject   // in, none, class
-	var cret  *C.AtkStateSet // return, full, class
+	var carg0 *C.AtkObject   // in, none, converted
+	var cret  *C.AtkStateSet // return, full, converted
 
 	carg0 = (*C.AtkObject)(UnsafeObjectToGlibNone(accessible))
 
@@ -9626,8 +9518,8 @@ func (accessible *ObjectInstance) RefStateSet() StateSet {
 //
 // Deprecated: (since 2.12.0) See atk_object_connect_property_change_handler()
 func (accessible *ObjectInstance) RemovePropertyChangeHandler(handlerId uint) {
-	var carg0 *C.AtkObject // in, none, class
-	var carg1 C.guint      // in, casted
+	var carg0 *C.AtkObject // in, none, converted
+	var carg1 C.guint      // in, none, casted
 
 	carg0 = (*C.AtkObject)(UnsafeObjectToGlibNone(accessible))
 	carg1 = C.guint(handlerId)
@@ -9650,9 +9542,9 @@ func (accessible *ObjectInstance) RemovePropertyChangeHandler(handlerId uint) {
 //
 // Removes a relationship of the specified type with the specified target.
 func (object *ObjectInstance) RemoveRelationship(relationship RelationType, target Object) bool {
-	var carg0 *C.AtkObject      // in, none, class
-	var carg1 C.AtkRelationType // in, casted
-	var carg2 *C.AtkObject      // in, none, class
+	var carg0 *C.AtkObject      // in, none, converted
+	var carg1 C.AtkRelationType // in, none, casted
+	var carg2 *C.AtkObject      // in, none, converted
 	var cret  C.gboolean        // return
 
 	carg0 = (*C.AtkObject)(UnsafeObjectToGlibNone(object))
@@ -9685,7 +9577,7 @@ func (object *ObjectInstance) RemoveRelationship(relationship RelationType, targ
 // instance to identify a given well-known accessible object for tailored screen
 // reading, or for automatic regression testing.
 func (accessible *ObjectInstance) SetAccessibleID(id string) {
-	var carg0 *C.AtkObject // in, none, class
+	var carg0 *C.AtkObject // in, none, converted
 	var carg1 *C.gchar     // in, none, string
 
 	carg0 = (*C.AtkObject)(UnsafeObjectToGlibNone(accessible))
@@ -9708,7 +9600,7 @@ func (accessible *ObjectInstance) SetAccessibleID(id string) {
 // this aspect NULL is similar to ATK_ROLE_UNKNOWN. If you want to set
 // the name to a empty value you can use "".
 func (accessible *ObjectInstance) SetDescription(description string) {
-	var carg0 *C.AtkObject // in, none, class
+	var carg0 *C.AtkObject // in, none, converted
 	var carg1 *C.gchar     // in, none, string
 
 	carg0 = (*C.AtkObject)(UnsafeObjectToGlibNone(accessible))
@@ -9732,7 +9624,7 @@ func (accessible *ObjectInstance) SetDescription(description string) {
 // This is reserved for the initial value. If you want to set the name to
 // an empty value, you can use "".
 func (accessible *ObjectInstance) SetHelpText(helpText string) {
-	var carg0 *C.AtkObject // in, none, class
+	var carg0 *C.AtkObject // in, none, converted
 	var carg1 *C.gchar     // in, none, string
 
 	carg0 = (*C.AtkObject)(UnsafeObjectToGlibNone(accessible))
@@ -9755,7 +9647,7 @@ func (accessible *ObjectInstance) SetHelpText(helpText string) {
 // NULL is similar to ATK_ROLE_UNKNOWN. If you want to set the name to
 // a empty value you can use "".
 func (accessible *ObjectInstance) SetName(name string) {
-	var carg0 *C.AtkObject // in, none, class
+	var carg0 *C.AtkObject // in, none, converted
 	var carg1 *C.gchar     // in, none, string
 
 	carg0 = (*C.AtkObject)(UnsafeObjectToGlibNone(accessible))
@@ -9775,8 +9667,8 @@ func (accessible *ObjectInstance) SetName(name string) {
 //
 // Sets the accessible parent of the accessible. @parent can be NULL.
 func (accessible *ObjectInstance) SetParent(parent Object) {
-	var carg0 *C.AtkObject // in, none, class
-	var carg1 *C.AtkObject // in, none, class
+	var carg0 *C.AtkObject // in, none, converted
+	var carg1 *C.AtkObject // in, none, converted
 
 	carg0 = (*C.AtkObject)(UnsafeObjectToGlibNone(accessible))
 	carg1 = (*C.AtkObject)(UnsafeObjectToGlibNone(parent))
@@ -9794,8 +9686,8 @@ func (accessible *ObjectInstance) SetParent(parent Object) {
 //
 // Sets the role of the accessible.
 func (accessible *ObjectInstance) SetRole(role Role) {
-	var carg0 *C.AtkObject // in, none, class
-	var carg1 C.AtkRole    // in, casted
+	var carg0 *C.AtkObject // in, none, converted
+	var carg1 C.AtkRole    // in, none, casted
 
 	carg0 = (*C.AtkObject)(UnsafeObjectToGlibNone(accessible))
 	carg1 = C.AtkRole(role)
@@ -9808,7 +9700,7 @@ func (accessible *ObjectInstance) SetRole(role Role) {
 // ObjectFactoryInstance is the instance type used by all types extending AtkObjectFactory. It is used internally by the bindings. Users should use the interface [ObjectFactory] instead.
 type ObjectFactoryInstance struct {
 	_ [0]func() // equal guard
-	gobject.Object
+	gobject.ObjectInstance
 }
 
 var _ ObjectFactory = (*ObjectFactoryInstance)(nil)
@@ -9824,14 +9716,14 @@ var _ ObjectFactory = (*ObjectFactoryInstance)(nil)
 // registry the factory type to be used to create an accessible of a
 // particular GType.
 type ObjectFactory interface {
-	gobject.ObjectLike
+	gobject.Object
 	upcastToAtkObjectFactory() *ObjectFactoryInstance
 
 	// CreateAccessible wraps atk_object_factory_create_accessible
 	// 
 	// The function takes the following parameters:
 	// 
-	// 	- obj gobject.ObjectLike: a #GObject 
+	// 	- obj gobject.Object: a #GObject 
 	// 
 	// The function returns the following values:
 	// 
@@ -9839,7 +9731,7 @@ type ObjectFactory interface {
 	//
 	// Provides an #AtkObject that implements an accessibility interface
 	// on behalf of @obj
-	CreateAccessible(gobject.ObjectLike) Object
+	CreateAccessible(gobject.Object) Object
 	// GetAccessibleType wraps atk_object_factory_get_accessible_type
 	// The function returns the following values:
 	// 
@@ -9857,14 +9749,14 @@ type ObjectFactory interface {
 	Invalidate()
 }
 
-func unsafeWrapObjectFactory(base *gobject.Object) *ObjectFactoryInstance {
+func unsafeWrapObjectFactory(base *gobject.ObjectInstance) *ObjectFactoryInstance {
 	return &ObjectFactoryInstance{
-		Object: *base,
+		ObjectInstance: *base,
 	}
 }
 
 func marshalObjectFactoryInstance(p uintptr) (interface{}, error) {
-	return unsafeWrapObjectFactory(gobject.ValueFromNative(unsafe.Pointer(p)).Object()), nil
+	return unsafeWrapObjectFactory(gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Object()), nil
 }
 
 // UnsafeObjectFactoryFromGlibBorrow is used to convert raw AtkObjectFactory pointers to go. This is used by the bindings internally.
@@ -9900,7 +9792,7 @@ func UnsafeObjectFactoryToGlibFull(c ObjectFactory) unsafe.Pointer {
 // 
 // The function takes the following parameters:
 // 
-// 	- obj gobject.ObjectLike: a #GObject 
+// 	- obj gobject.Object: a #GObject 
 // 
 // The function returns the following values:
 // 
@@ -9908,13 +9800,13 @@ func UnsafeObjectFactoryToGlibFull(c ObjectFactory) unsafe.Pointer {
 //
 // Provides an #AtkObject that implements an accessibility interface
 // on behalf of @obj
-func (factory *ObjectFactoryInstance) CreateAccessible(obj gobject.ObjectLike) Object {
-	var carg0 *C.AtkObjectFactory // in, none, class
-	var carg1 *C.GObject          // in, none, class
-	var cret  *C.AtkObject        // return, full, class
+func (factory *ObjectFactoryInstance) CreateAccessible(obj gobject.Object) Object {
+	var carg0 *C.AtkObjectFactory // in, none, converted
+	var carg1 *C.GObject          // in, none, converted
+	var cret  *C.AtkObject        // return, full, converted
 
 	carg0 = (*C.AtkObjectFactory)(UnsafeObjectFactoryToGlibNone(factory))
-	carg1 = (*C.GObject)(gobject.TODOToNone(obj))
+	carg1 = (*C.GObject)(TODOToNone(obj))
 
 	cret = C.atk_object_factory_create_accessible(carg0, carg1)
 	runtime.KeepAlive(factory)
@@ -9934,8 +9826,8 @@ func (factory *ObjectFactoryInstance) CreateAccessible(obj gobject.ObjectLike) O
 //
 // Gets the GType of the accessible which is created by the factory.
 func (factory *ObjectFactoryInstance) GetAccessibleType() glib.Type {
-	var carg0 *C.AtkObjectFactory // in, none, class
-	var cret  C.GType             // return, casted
+	var carg0 *C.AtkObjectFactory // in, none, converted
+	var cret  C.GType             // return, none, casted
 
 	carg0 = (*C.AtkObjectFactory)(UnsafeObjectFactoryToGlibNone(factory))
 
@@ -9957,7 +9849,7 @@ func (factory *ObjectFactoryInstance) GetAccessibleType() glib.Type {
 // Note: primarily used for runtime replacement of #AtkObjectFactorys
 // in object registries.
 func (factory *ObjectFactoryInstance) Invalidate() {
-	var carg0 *C.AtkObjectFactory // in, none, class
+	var carg0 *C.AtkObjectFactory // in, none, converted
 
 	carg0 = (*C.AtkObjectFactory)(UnsafeObjectFactoryToGlibNone(factory))
 
@@ -10014,31 +9906,31 @@ type Plug interface {
 	SetChild(Object)
 }
 
-func unsafeWrapPlug(base *gobject.Object) *PlugInstance {
+func unsafeWrapPlug(base *ObjectInstance) *PlugInstance {
 	return &PlugInstance{
-		ObjectInstance: ObjectInstance{
-			Object: *base,
+		ObjectInstance: gobject.ObjectInstance{
+			ObjectInstance: *base,
 		},
 	}
 }
 
 func marshalPlugInstance(p uintptr) (interface{}, error) {
-	return unsafeWrapPlug(gobject.ValueFromNative(unsafe.Pointer(p)).Object()), nil
+	return unsafeWrapPlug(gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Object()), nil
 }
 
 // UnsafePlugFromGlibBorrow is used to convert raw AtkPlug pointers to go. This is used by the bindings internally.
 func UnsafePlugFromGlibBorrow(c unsafe.Pointer) Plug {
-	return gobject.TODOBorrow(c).(Plug)
+	return TODOBorrow(c).(Plug)
 }
 
 // UnsafePlugFromGlibNone is used to convert raw AtkPlug pointers to go while taking a reference and attaching a finalizer. This is used by the bindings internally.
 func UnsafePlugFromGlibNone(c unsafe.Pointer) Plug {
-	return gobject.Take(c).(Plug)
+	return Take(c).(Plug)
 }
 
 // UnsafePlugFromGlibFull is used to convert raw AtkPlug pointers to go while attaching a finalizer. This is used by the bindings internally.
 func UnsafePlugFromGlibFull(c unsafe.Pointer) Plug {
-	return gobject.AssumeOwnership(c).(Plug)
+	return AssumeOwnership(c).(Plug)
 }
 
 func (p *PlugInstance) upcastToAtkPlug() *PlugInstance {
@@ -10047,12 +9939,12 @@ func (p *PlugInstance) upcastToAtkPlug() *PlugInstance {
 
 // UnsafePlugToGlibNone is used to convert the instance to it's C value AtkPlug. This is used by the bindings internally.
 func UnsafePlugToGlibNone(c Plug) unsafe.Pointer {
-	return gobject.TODOToNone(c)
+	return TODOToNone(c)
 }
 
 // UnsafePlugToGlibFull is used to convert the instance to it's C value AtkPlug, while removeing the finalizer. This is used by the bindings internally.
 func UnsafePlugToGlibFull(c Plug) unsafe.Pointer {
-	return gobject.TODOToFull(c)
+	return TODOToFull(c)
 }
 
 // NewPlugInstance wraps atk_plug_new
@@ -10062,7 +9954,7 @@ func UnsafePlugToGlibFull(c Plug) unsafe.Pointer {
 //
 // Creates a new #AtkPlug instance.
 func NewPlugInstance() Object {
-	var cret *C.AtkObject // return, full, class
+	var cret *C.AtkObject // return, full, converted
 
 	cret = C.atk_plug_new()
 
@@ -10087,7 +9979,7 @@ func NewPlugInstance() Object {
 // loaded) and pass the value to the process implementing the
 // #AtkSocket, so it could embed the plug.
 func (plug *PlugInstance) GetID() string {
-	var carg0 *C.AtkPlug // in, none, class
+	var carg0 *C.AtkPlug // in, none, converted
 	var cret  *C.gchar   // return, full, string
 
 	carg0 = (*C.AtkPlug)(UnsafePlugToGlibNone(plug))
@@ -10119,8 +10011,8 @@ func (plug *PlugInstance) GetID() string {
 // accessible object for the toplevel widget, an AtkPlug object, and make the
 // former the child of the latter by calling atk_plug_set_child().
 func (plug *PlugInstance) SetChild(child Object) {
-	var carg0 *C.AtkPlug   // in, none, class
-	var carg1 *C.AtkObject // in, none, class
+	var carg0 *C.AtkPlug   // in, none, converted
+	var carg1 *C.AtkObject // in, none, converted
 
 	carg0 = (*C.AtkPlug)(UnsafePlugToGlibNone(plug))
 	carg1 = (*C.AtkObject)(UnsafeObjectToGlibNone(child))
@@ -10133,7 +10025,7 @@ func (plug *PlugInstance) SetChild(child Object) {
 // RegistryInstance is the instance type used by all types extending AtkRegistry. It is used internally by the bindings. Users should use the interface [Registry] instead.
 type RegistryInstance struct {
 	_ [0]func() // equal guard
-	gobject.Object
+	gobject.ObjectInstance
 }
 
 var _ Registry = (*RegistryInstance)(nil)
@@ -10151,7 +10043,7 @@ var _ Registry = (*RegistryInstance)(nil)
 // atk_registry_set_factory_type call, passing the appropriate GType
 // for application custom widget classes.
 type Registry interface {
-	gobject.ObjectLike
+	gobject.Object
 	upcastToAtkRegistry() *RegistryInstance
 
 	// GetFactory wraps atk_registry_get_factory
@@ -10196,14 +10088,14 @@ type Registry interface {
 	SetFactoryType(glib.Type, glib.Type)
 }
 
-func unsafeWrapRegistry(base *gobject.Object) *RegistryInstance {
+func unsafeWrapRegistry(base *gobject.ObjectInstance) *RegistryInstance {
 	return &RegistryInstance{
-		Object: *base,
+		ObjectInstance: *base,
 	}
 }
 
 func marshalRegistryInstance(p uintptr) (interface{}, error) {
-	return unsafeWrapRegistry(gobject.ValueFromNative(unsafe.Pointer(p)).Object()), nil
+	return unsafeWrapRegistry(gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Object()), nil
 }
 
 // UnsafeRegistryFromGlibBorrow is used to convert raw AtkRegistry pointers to go. This is used by the bindings internally.
@@ -10248,9 +10140,9 @@ func UnsafeRegistryToGlibFull(c Registry) unsafe.Pointer {
 // Gets an #AtkObjectFactory appropriate for creating #AtkObjects
 // appropriate for @type.
 func (registry *RegistryInstance) GetFactory(typ glib.Type) ObjectFactory {
-	var carg0 *C.AtkRegistry      // in, none, class
-	var carg1 C.GType             // in, casted
-	var cret  *C.AtkObjectFactory // return, none, class
+	var carg0 *C.AtkRegistry      // in, none, converted
+	var carg1 C.GType             // in, none, casted
+	var cret  *C.AtkObjectFactory // return, none, converted
 
 	carg0 = (*C.AtkRegistry)(UnsafeRegistryToGlibNone(registry))
 	carg1 = C.GType(typ)
@@ -10280,9 +10172,9 @@ func (registry *RegistryInstance) GetFactory(typ glib.Type) ObjectFactory {
 // Provides a #GType indicating the #AtkObjectFactory subclass
 // associated with @type.
 func (registry *RegistryInstance) GetFactoryType(typ glib.Type) glib.Type {
-	var carg0 *C.AtkRegistry // in, none, class
-	var carg1 C.GType        // in, casted
-	var cret  C.GType        // return, casted
+	var carg0 *C.AtkRegistry // in, none, converted
+	var carg1 C.GType        // in, none, casted
+	var cret  C.GType        // return, none, casted
 
 	carg0 = (*C.AtkRegistry)(UnsafeRegistryToGlibNone(registry))
 	carg1 = C.GType(typ)
@@ -10311,9 +10203,9 @@ func (registry *RegistryInstance) GetFactoryType(typ glib.Type) glib.Type {
 // the creation of new #AtkObject implementations for instances
 // appropriate for @type.
 func (registry *RegistryInstance) SetFactoryType(typ glib.Type, factoryType glib.Type) {
-	var carg0 *C.AtkRegistry // in, none, class
-	var carg1 C.GType        // in, casted
-	var carg2 C.GType        // in, casted
+	var carg0 *C.AtkRegistry // in, none, converted
+	var carg1 C.GType        // in, none, casted
+	var carg2 C.GType        // in, none, casted
 
 	carg0 = (*C.AtkRegistry)(UnsafeRegistryToGlibNone(registry))
 	carg1 = C.GType(typ)
@@ -10328,7 +10220,7 @@ func (registry *RegistryInstance) SetFactoryType(typ glib.Type, factoryType glib
 // RelationInstance is the instance type used by all types extending AtkRelation. It is used internally by the bindings. Users should use the interface [Relation] instead.
 type RelationInstance struct {
 	_ [0]func() // equal guard
-	gobject.Object
+	gobject.ObjectInstance
 }
 
 var _ Relation = (*RelationInstance)(nil)
@@ -10343,7 +10235,7 @@ var _ Relation = (*RelationInstance)(nil)
 // other objects are defined as an AtkRelationSet, which is a set of
 // AtkRelations.
 type Relation interface {
-	gobject.ObjectLike
+	gobject.Object
 	upcastToAtkRelation() *RelationInstance
 
 	// AddTarget wraps atk_relation_add_target
@@ -10376,14 +10268,14 @@ type Relation interface {
 	RemoveTarget(Object) bool
 }
 
-func unsafeWrapRelation(base *gobject.Object) *RelationInstance {
+func unsafeWrapRelation(base *gobject.ObjectInstance) *RelationInstance {
 	return &RelationInstance{
-		Object: *base,
+		ObjectInstance: *base,
 	}
 }
 
 func marshalRelationInstance(p uintptr) (interface{}, error) {
-	return unsafeWrapRelation(gobject.ValueFromNative(unsafe.Pointer(p)).Object()), nil
+	return unsafeWrapRelation(gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Object()), nil
 }
 
 // UnsafeRelationFromGlibBorrow is used to convert raw AtkRelation pointers to go. This is used by the bindings internally.
@@ -10419,7 +10311,7 @@ func UnsafeRelationToGlibFull(c Relation) unsafe.Pointer {
 // 
 // The function takes the following parameters:
 // 
-// 	- targets []ObjectInstance: an array of pointers to
+// 	- targets array: an array of pointers to
 //  #AtkObjects 
 // 	- relationship RelationType: an #AtkRelationType with which to create the new
 //  #AtkRelation 
@@ -10430,13 +10322,13 @@ func UnsafeRelationToGlibFull(c Relation) unsafe.Pointer {
 //
 // Create a new relation for the specified key and the specified list
 // of targets.  See also atk_object_add_relationship().
-func NewRelationInstance(targets []ObjectInstance, relationship RelationType) Relation {
-	var carg1 *C.AtkObject      // in, transfer: none, scope: call, implicit: false, skip: false, optional: false, nullable: false, caller-allocates: false, has closure: false, has destroy: false
+func NewRelationInstance(targets array, relationship RelationType) Relation {
+	var carg1 array             // in, transfer: none, scope: call, implicit: false, skip: false, optional: false, nullable: false, caller-allocates: false, has closure: false, has destroy: false
 	var carg2 C.int             // implicit
-	var carg3 C.AtkRelationType // in, casted
-	var cret  *C.AtkRelation    // return, full, class
+	var carg3 C.AtkRelationType // in, none, casted
+	var cret  *C.AtkRelation    // return, full, converted
 
-	panic("unimplemented conversion of *typesystem.Array (AtkObject*)")
+	panic("unimplemented conversion of array (array)")
 	carg3 = C.AtkRelationType(relationship)
 
 	cret = C.atk_relation_new(carg1, carg2, carg3)
@@ -10459,8 +10351,8 @@ func NewRelationInstance(targets []ObjectInstance, relationship RelationType) Re
 // Adds the specified AtkObject to the target for the relation, if it is
 // not already present.  See also atk_object_add_relationship().
 func (relation *RelationInstance) AddTarget(target Object) {
-	var carg0 *C.AtkRelation // in, none, class
-	var carg1 *C.AtkObject   // in, none, class
+	var carg0 *C.AtkRelation // in, none, converted
+	var carg1 *C.AtkObject   // in, none, converted
 
 	carg0 = (*C.AtkRelation)(UnsafeRelationToGlibNone(relation))
 	carg1 = (*C.AtkObject)(UnsafeObjectToGlibNone(target))
@@ -10477,8 +10369,8 @@ func (relation *RelationInstance) AddTarget(target Object) {
 //
 // Gets the type of @relation
 func (relation *RelationInstance) GetRelationType() RelationType {
-	var carg0 *C.AtkRelation    // in, none, class
-	var cret  C.AtkRelationType // return, casted
+	var carg0 *C.AtkRelation    // in, none, converted
+	var cret  C.AtkRelationType // return, none, casted
 
 	carg0 = (*C.AtkRelation)(UnsafeRelationToGlibNone(relation))
 
@@ -10504,8 +10396,8 @@ func (relation *RelationInstance) GetRelationType() RelationType {
 //
 // Remove the specified AtkObject from the target for the relation.
 func (relation *RelationInstance) RemoveTarget(target Object) bool {
-	var carg0 *C.AtkRelation // in, none, class
-	var carg1 *C.AtkObject   // in, none, class
+	var carg0 *C.AtkRelation // in, none, converted
+	var carg1 *C.AtkObject   // in, none, converted
 	var cret  C.gboolean     // return
 
 	carg0 = (*C.AtkRelation)(UnsafeRelationToGlibNone(relation))
@@ -10527,7 +10419,7 @@ func (relation *RelationInstance) RemoveTarget(target Object) bool {
 // RelationSetInstance is the instance type used by all types extending AtkRelationSet. It is used internally by the bindings. Users should use the interface [RelationSet] instead.
 type RelationSetInstance struct {
 	_ [0]func() // equal guard
-	gobject.Object
+	gobject.ObjectInstance
 }
 
 var _ RelationSet = (*RelationSetInstance)(nil)
@@ -10546,7 +10438,7 @@ var _ RelationSet = (*RelationSetInstance)(nil)
 // content which "flows" between them, among other types of possible
 // relationships.
 type RelationSet interface {
-	gobject.ObjectLike
+	gobject.Object
 	upcastToAtkRelationSet() *RelationSetInstance
 
 	// Add wraps atk_relation_set_add
@@ -10644,14 +10536,14 @@ type RelationSet interface {
 	Remove(Relation)
 }
 
-func unsafeWrapRelationSet(base *gobject.Object) *RelationSetInstance {
+func unsafeWrapRelationSet(base *gobject.ObjectInstance) *RelationSetInstance {
 	return &RelationSetInstance{
-		Object: *base,
+		ObjectInstance: *base,
 	}
 }
 
 func marshalRelationSetInstance(p uintptr) (interface{}, error) {
-	return unsafeWrapRelationSet(gobject.ValueFromNative(unsafe.Pointer(p)).Object()), nil
+	return unsafeWrapRelationSet(gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Object()), nil
 }
 
 // UnsafeRelationSetFromGlibBorrow is used to convert raw AtkRelationSet pointers to go. This is used by the bindings internally.
@@ -10690,7 +10582,7 @@ func UnsafeRelationSetToGlibFull(c RelationSet) unsafe.Pointer {
 //
 // Creates a new empty relation set.
 func NewRelationSetInstance() RelationSet {
-	var cret *C.AtkRelationSet // return, full, class
+	var cret *C.AtkRelationSet // return, full, converted
 
 	cret = C.atk_relation_set_new()
 
@@ -10713,8 +10605,8 @@ func NewRelationSetInstance() RelationSet {
 // should unref it to ensure that it will be destroyed when the AtkRelationSet
 // is destroyed.
 func (set *RelationSetInstance) Add(relation Relation) {
-	var carg0 *C.AtkRelationSet // in, none, class
-	var carg1 *C.AtkRelation    // in, none, class
+	var carg0 *C.AtkRelationSet // in, none, converted
+	var carg1 *C.AtkRelation    // in, none, converted
 
 	carg0 = (*C.AtkRelationSet)(UnsafeRelationSetToGlibNone(set))
 	carg1 = (*C.AtkRelation)(UnsafeRelationToGlibNone(relation))
@@ -10736,9 +10628,9 @@ func (set *RelationSetInstance) Add(relation Relation) {
 // of that type. If it is does contain a relation of that typea the target
 // is added to the relation.
 func (set *RelationSetInstance) AddRelationByType(relationship RelationType, target Object) {
-	var carg0 *C.AtkRelationSet // in, none, class
-	var carg1 C.AtkRelationType // in, casted
-	var carg2 *C.AtkObject      // in, none, class
+	var carg0 *C.AtkRelationSet // in, none, converted
+	var carg1 C.AtkRelationType // in, none, casted
+	var carg2 *C.AtkObject      // in, none, converted
 
 	carg0 = (*C.AtkRelationSet)(UnsafeRelationSetToGlibNone(set))
 	carg1 = C.AtkRelationType(relationship)
@@ -10763,8 +10655,8 @@ func (set *RelationSetInstance) AddRelationByType(relationship RelationType, tar
 // Determines whether the relation set contains a relation that matches the
 // specified type.
 func (set *RelationSetInstance) Contains(relationship RelationType) bool {
-	var carg0 *C.AtkRelationSet // in, none, class
-	var carg1 C.AtkRelationType // in, casted
+	var carg0 *C.AtkRelationSet // in, none, converted
+	var carg1 C.AtkRelationType // in, none, casted
 	var cret  C.gboolean        // return
 
 	carg0 = (*C.AtkRelationSet)(UnsafeRelationSetToGlibNone(set))
@@ -10798,9 +10690,9 @@ func (set *RelationSetInstance) Contains(relationship RelationType) bool {
 // matches the specified pair formed by type @relationship and object
 // @target.
 func (set *RelationSetInstance) ContainsTarget(relationship RelationType, target Object) bool {
-	var carg0 *C.AtkRelationSet // in, none, class
-	var carg1 C.AtkRelationType // in, casted
-	var carg2 *C.AtkObject      // in, none, class
+	var carg0 *C.AtkRelationSet // in, none, converted
+	var carg1 C.AtkRelationType // in, none, casted
+	var carg2 *C.AtkObject      // in, none, converted
 	var cret  C.gboolean        // return
 
 	carg0 = (*C.AtkRelationSet)(UnsafeRelationSetToGlibNone(set))
@@ -10828,8 +10720,8 @@ func (set *RelationSetInstance) ContainsTarget(relationship RelationType, target
 //
 // Determines the number of relations in a relation set.
 func (set *RelationSetInstance) GetNRelations() int {
-	var carg0 *C.AtkRelationSet // in, none, class
-	var cret  C.int             // return, casted
+	var carg0 *C.AtkRelationSet // in, none, converted
+	var cret  C.int             // return, none, casted
 
 	carg0 = (*C.AtkRelationSet)(UnsafeRelationSetToGlibNone(set))
 
@@ -10855,9 +10747,9 @@ func (set *RelationSetInstance) GetNRelations() int {
 //
 // Determines the relation at the specified position in the relation set.
 func (set *RelationSetInstance) GetRelation(i int) Relation {
-	var carg0 *C.AtkRelationSet // in, none, class
-	var carg1 C.int             // in, casted
-	var cret  *C.AtkRelation    // return, none, class
+	var carg0 *C.AtkRelationSet // in, none, converted
+	var carg1 C.int             // in, none, casted
+	var cret  *C.AtkRelation    // return, none, converted
 
 	carg0 = (*C.AtkRelationSet)(UnsafeRelationSetToGlibNone(set))
 	carg1 = C.int(i)
@@ -10885,9 +10777,9 @@ func (set *RelationSetInstance) GetRelation(i int) Relation {
 //
 // Finds a relation that matches the specified type.
 func (set *RelationSetInstance) GetRelationByType(relationship RelationType) Relation {
-	var carg0 *C.AtkRelationSet // in, none, class
-	var carg1 C.AtkRelationType // in, casted
-	var cret  *C.AtkRelation    // return, none, class
+	var carg0 *C.AtkRelationSet // in, none, converted
+	var carg1 C.AtkRelationType // in, none, casted
+	var cret  *C.AtkRelation    // return, none, converted
 
 	carg0 = (*C.AtkRelationSet)(UnsafeRelationSetToGlibNone(set))
 	carg1 = C.AtkRelationType(relationship)
@@ -10913,8 +10805,8 @@ func (set *RelationSetInstance) GetRelationByType(relationship RelationType) Rel
 // This function unref's the #AtkRelation so it will be deleted unless there
 // is another reference to it.
 func (set *RelationSetInstance) Remove(relation Relation) {
-	var carg0 *C.AtkRelationSet // in, none, class
-	var carg1 *C.AtkRelation    // in, none, class
+	var carg0 *C.AtkRelationSet // in, none, converted
+	var carg1 *C.AtkRelation    // in, none, converted
 
 	carg0 = (*C.AtkRelationSet)(UnsafeRelationSetToGlibNone(set))
 	carg1 = (*C.AtkRelation)(UnsafeRelationToGlibNone(relation))
@@ -10990,31 +10882,31 @@ type Socket interface {
 	IsOccupied() bool
 }
 
-func unsafeWrapSocket(base *gobject.Object) *SocketInstance {
+func unsafeWrapSocket(base *ObjectInstance) *SocketInstance {
 	return &SocketInstance{
-		ObjectInstance: ObjectInstance{
-			Object: *base,
+		ObjectInstance: gobject.ObjectInstance{
+			ObjectInstance: *base,
 		},
 	}
 }
 
 func marshalSocketInstance(p uintptr) (interface{}, error) {
-	return unsafeWrapSocket(gobject.ValueFromNative(unsafe.Pointer(p)).Object()), nil
+	return unsafeWrapSocket(gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Object()), nil
 }
 
 // UnsafeSocketFromGlibBorrow is used to convert raw AtkSocket pointers to go. This is used by the bindings internally.
 func UnsafeSocketFromGlibBorrow(c unsafe.Pointer) Socket {
-	return gobject.TODOBorrow(c).(Socket)
+	return TODOBorrow(c).(Socket)
 }
 
 // UnsafeSocketFromGlibNone is used to convert raw AtkSocket pointers to go while taking a reference and attaching a finalizer. This is used by the bindings internally.
 func UnsafeSocketFromGlibNone(c unsafe.Pointer) Socket {
-	return gobject.Take(c).(Socket)
+	return Take(c).(Socket)
 }
 
 // UnsafeSocketFromGlibFull is used to convert raw AtkSocket pointers to go while attaching a finalizer. This is used by the bindings internally.
 func UnsafeSocketFromGlibFull(c unsafe.Pointer) Socket {
-	return gobject.AssumeOwnership(c).(Socket)
+	return AssumeOwnership(c).(Socket)
 }
 
 func (s *SocketInstance) upcastToAtkSocket() *SocketInstance {
@@ -11023,12 +10915,12 @@ func (s *SocketInstance) upcastToAtkSocket() *SocketInstance {
 
 // UnsafeSocketToGlibNone is used to convert the instance to it's C value AtkSocket. This is used by the bindings internally.
 func UnsafeSocketToGlibNone(c Socket) unsafe.Pointer {
-	return gobject.TODOToNone(c)
+	return TODOToNone(c)
 }
 
 // UnsafeSocketToGlibFull is used to convert the instance to it's C value AtkSocket, while removeing the finalizer. This is used by the bindings internally.
 func UnsafeSocketToGlibFull(c Socket) unsafe.Pointer {
-	return gobject.TODOToFull(c)
+	return TODOToFull(c)
 }
 
 // NewSocketInstance wraps atk_socket_new
@@ -11038,7 +10930,7 @@ func UnsafeSocketToGlibFull(c Socket) unsafe.Pointer {
 //
 // Creates a new #AtkSocket.
 func NewSocketInstance() Object {
-	var cret *C.AtkObject // return, full, class
+	var cret *C.AtkObject // return, full, converted
 
 	cret = C.atk_socket_new()
 
@@ -11066,7 +10958,7 @@ func NewSocketInstance() Object {
 // to pass the plug id on to the process implementing the #AtkSocket
 // as needed.
 func (obj *SocketInstance) Embed(plugId string) {
-	var carg0 *C.AtkSocket // in, none, class
+	var carg0 *C.AtkSocket // in, none, converted
 	var carg1 *C.gchar     // in, none, string
 
 	carg0 = (*C.AtkSocket)(UnsafeSocketToGlibNone(obj))
@@ -11085,7 +10977,7 @@ func (obj *SocketInstance) Embed(plugId string) {
 //
 // Determines whether or not the socket has an embedded plug.
 func (obj *SocketInstance) IsOccupied() bool {
-	var carg0 *C.AtkSocket // in, none, class
+	var carg0 *C.AtkSocket // in, none, converted
 	var cret  C.gboolean   // return
 
 	carg0 = (*C.AtkSocket)(UnsafeSocketToGlibNone(obj))
@@ -11105,7 +10997,7 @@ func (obj *SocketInstance) IsOccupied() bool {
 // StateSetInstance is the instance type used by all types extending AtkStateSet. It is used internally by the bindings. Users should use the interface [StateSet] instead.
 type StateSetInstance struct {
 	_ [0]func() // equal guard
-	gobject.Object
+	gobject.ObjectInstance
 }
 
 var _ StateSet = (*StateSetInstance)(nil)
@@ -11118,7 +11010,7 @@ var _ StateSet = (*StateSetInstance)(nil)
 // that apply to an object at a given time. This set is not meant to be
 // modified, but rather created when #atk_object_ref_state_set() is called.
 type StateSet interface {
-	gobject.ObjectLike
+	gobject.Object
 	upcastToAtkStateSet() *StateSetInstance
 
 	// AddState wraps atk_state_set_add_state
@@ -11143,7 +11035,7 @@ type StateSet interface {
 	// 
 	// The function takes the following parameters:
 	// 
-	// 	- types []StateType: an array of #AtkStateType 
+	// 	- types array: an array of #AtkStateType 
 	//
 	// Adds the states of the specified types to the state set.
 	// 
@@ -11151,7 +11043,7 @@ type StateSet interface {
 	// be used to add states to a newly-created set which will then be returned by
 	// #atk_object_ref_state_set. It should not be used to modify the existing state
 	// of an object. See also #atk_object_notify_state_change.
-	AddStates([]StateType)
+	AddStates(array)
 	// AndSets wraps atk_state_set_and_sets
 	// 
 	// The function takes the following parameters:
@@ -11185,7 +11077,7 @@ type StateSet interface {
 	// 
 	// The function takes the following parameters:
 	// 
-	// 	- types []StateType: an array of #AtkStateType 
+	// 	- types array: an array of #AtkStateType 
 	// 
 	// The function returns the following values:
 	// 
@@ -11193,7 +11085,7 @@ type StateSet interface {
 	//
 	// Checks whether the states for all the specified types are in the
 	// specified set.
-	ContainsStates([]StateType) bool
+	ContainsStates(array) bool
 	// IsEmpty wraps atk_state_set_is_empty
 	// The function returns the following values:
 	// 
@@ -11246,14 +11138,14 @@ type StateSet interface {
 	XorSets(StateSet) StateSet
 }
 
-func unsafeWrapStateSet(base *gobject.Object) *StateSetInstance {
+func unsafeWrapStateSet(base *gobject.ObjectInstance) *StateSetInstance {
 	return &StateSetInstance{
-		Object: *base,
+		ObjectInstance: *base,
 	}
 }
 
 func marshalStateSetInstance(p uintptr) (interface{}, error) {
-	return unsafeWrapStateSet(gobject.ValueFromNative(unsafe.Pointer(p)).Object()), nil
+	return unsafeWrapStateSet(gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Object()), nil
 }
 
 // UnsafeStateSetFromGlibBorrow is used to convert raw AtkStateSet pointers to go. This is used by the bindings internally.
@@ -11292,7 +11184,7 @@ func UnsafeStateSetToGlibFull(c StateSet) unsafe.Pointer {
 //
 // Creates a new empty state set.
 func NewStateSetInstance() StateSet {
-	var cret *C.AtkStateSet // return, full, class
+	var cret *C.AtkStateSet // return, full, converted
 
 	cret = C.atk_state_set_new()
 
@@ -11321,8 +11213,8 @@ func NewStateSetInstance() StateSet {
 // #atk_object_ref_state_set. It should not be used to modify the existing state
 // of an object. See also #atk_object_notify_state_change.
 func (set *StateSetInstance) AddState(typ StateType) bool {
-	var carg0 *C.AtkStateSet // in, none, class
-	var carg1 C.AtkStateType // in, casted
+	var carg0 *C.AtkStateSet // in, none, converted
+	var carg1 C.AtkStateType // in, none, casted
 	var cret  C.gboolean     // return
 
 	carg0 = (*C.AtkStateSet)(UnsafeStateSetToGlibNone(set))
@@ -11345,7 +11237,7 @@ func (set *StateSetInstance) AddState(typ StateType) bool {
 // 
 // The function takes the following parameters:
 // 
-// 	- types []StateType: an array of #AtkStateType 
+// 	- types array: an array of #AtkStateType 
 //
 // Adds the states of the specified types to the state set.
 // 
@@ -11353,13 +11245,13 @@ func (set *StateSetInstance) AddState(typ StateType) bool {
 // be used to add states to a newly-created set which will then be returned by
 // #atk_object_ref_state_set. It should not be used to modify the existing state
 // of an object. See also #atk_object_notify_state_change.
-func (set *StateSetInstance) AddStates(types []StateType) {
-	var carg0 *C.AtkStateSet  // in, none, class
-	var carg1 *C.AtkStateType // in, transfer: none, scope: call, implicit: false, skip: false, optional: false, nullable: false, caller-allocates: false, has closure: false, has destroy: false
-	var carg2 C.int           // implicit
+func (set *StateSetInstance) AddStates(types array) {
+	var carg0 *C.AtkStateSet // in, none, converted
+	var carg1 array          // in, transfer: none, scope: call, implicit: false, skip: false, optional: false, nullable: false, caller-allocates: false, has closure: false, has destroy: false
+	var carg2 C.int          // implicit
 
 	carg0 = (*C.AtkStateSet)(UnsafeStateSetToGlibNone(set))
-	panic("unimplemented conversion of *typesystem.Array (AtkStateType*)")
+	panic("unimplemented conversion of array (array)")
 
 	C.atk_state_set_add_states(carg0, carg1, carg2)
 	runtime.KeepAlive(set)
@@ -11379,9 +11271,9 @@ func (set *StateSetInstance) AddStates(types []StateType) {
 // Constructs the intersection of the two sets, returning %NULL if the
 // intersection is empty.
 func (set *StateSetInstance) AndSets(compareSet StateSet) StateSet {
-	var carg0 *C.AtkStateSet // in, none, class
-	var carg1 *C.AtkStateSet // in, none, class
-	var cret  *C.AtkStateSet // return, full, class
+	var carg0 *C.AtkStateSet // in, none, converted
+	var carg1 *C.AtkStateSet // in, none, converted
+	var cret  *C.AtkStateSet // return, full, converted
 
 	carg0 = (*C.AtkStateSet)(UnsafeStateSetToGlibNone(set))
 	carg1 = (*C.AtkStateSet)(UnsafeStateSetToGlibNone(compareSet))
@@ -11401,7 +11293,7 @@ func (set *StateSetInstance) AndSets(compareSet StateSet) StateSet {
 //
 // Removes all states from the state set.
 func (set *StateSetInstance) ClearStates() {
-	var carg0 *C.AtkStateSet // in, none, class
+	var carg0 *C.AtkStateSet // in, none, converted
 
 	carg0 = (*C.AtkStateSet)(UnsafeStateSetToGlibNone(set))
 
@@ -11421,8 +11313,8 @@ func (set *StateSetInstance) ClearStates() {
 //
 // Checks whether the state for the specified type is in the specified set.
 func (set *StateSetInstance) ContainsState(typ StateType) bool {
-	var carg0 *C.AtkStateSet // in, none, class
-	var carg1 C.AtkStateType // in, casted
+	var carg0 *C.AtkStateSet // in, none, converted
+	var carg1 C.AtkStateType // in, none, casted
 	var cret  C.gboolean     // return
 
 	carg0 = (*C.AtkStateSet)(UnsafeStateSetToGlibNone(set))
@@ -11445,7 +11337,7 @@ func (set *StateSetInstance) ContainsState(typ StateType) bool {
 // 
 // The function takes the following parameters:
 // 
-// 	- types []StateType: an array of #AtkStateType 
+// 	- types array: an array of #AtkStateType 
 // 
 // The function returns the following values:
 // 
@@ -11453,14 +11345,14 @@ func (set *StateSetInstance) ContainsState(typ StateType) bool {
 //
 // Checks whether the states for all the specified types are in the
 // specified set.
-func (set *StateSetInstance) ContainsStates(types []StateType) bool {
-	var carg0 *C.AtkStateSet  // in, none, class
-	var carg1 *C.AtkStateType // in, transfer: none, scope: call, implicit: false, skip: false, optional: false, nullable: false, caller-allocates: false, has closure: false, has destroy: false
-	var carg2 C.int           // implicit
-	var cret  C.gboolean      // return
+func (set *StateSetInstance) ContainsStates(types array) bool {
+	var carg0 *C.AtkStateSet // in, none, converted
+	var carg1 array          // in, transfer: none, scope: call, implicit: false, skip: false, optional: false, nullable: false, caller-allocates: false, has closure: false, has destroy: false
+	var carg2 C.int          // implicit
+	var cret  C.gboolean     // return
 
 	carg0 = (*C.AtkStateSet)(UnsafeStateSetToGlibNone(set))
-	panic("unimplemented conversion of *typesystem.Array (AtkStateType*)")
+	panic("unimplemented conversion of array (array)")
 
 	cret = C.atk_state_set_contains_states(carg0, carg1, carg2)
 	runtime.KeepAlive(set)
@@ -11482,7 +11374,7 @@ func (set *StateSetInstance) ContainsStates(types []StateType) bool {
 //
 // Checks whether the state set is empty, i.e. has no states set.
 func (set *StateSetInstance) IsEmpty() bool {
-	var carg0 *C.AtkStateSet // in, none, class
+	var carg0 *C.AtkStateSet // in, none, converted
 	var cret  C.gboolean     // return
 
 	carg0 = (*C.AtkStateSet)(UnsafeStateSetToGlibNone(set))
@@ -11511,9 +11403,9 @@ func (set *StateSetInstance) IsEmpty() bool {
 //
 // Constructs the union of the two sets.
 func (set *StateSetInstance) OrSets(compareSet StateSet) StateSet {
-	var carg0 *C.AtkStateSet // in, none, class
-	var carg1 *C.AtkStateSet // in, none, class
-	var cret  *C.AtkStateSet // return, full, class
+	var carg0 *C.AtkStateSet // in, none, converted
+	var carg1 *C.AtkStateSet // in, none, converted
+	var cret  *C.AtkStateSet // return, full, converted
 
 	carg0 = (*C.AtkStateSet)(UnsafeStateSetToGlibNone(set))
 	carg1 = (*C.AtkStateSet)(UnsafeStateSetToGlibNone(compareSet))
@@ -11546,8 +11438,8 @@ func (set *StateSetInstance) OrSets(compareSet StateSet) StateSet {
 // by #atk_object_ref_state_set. It should not be used to modify the existing
 // state of an object. See also #atk_object_notify_state_change.
 func (set *StateSetInstance) RemoveState(typ StateType) bool {
-	var carg0 *C.AtkStateSet // in, none, class
-	var carg1 C.AtkStateType // in, casted
+	var carg0 *C.AtkStateSet // in, none, converted
+	var carg1 C.AtkStateType // in, none, casted
 	var cret  C.gboolean     // return
 
 	carg0 = (*C.AtkStateSet)(UnsafeStateSetToGlibNone(set))
@@ -11580,9 +11472,9 @@ func (set *StateSetInstance) RemoveState(typ StateType) bool {
 // The set returned by this operation contains the states in exactly
 // one of the two sets.
 func (set *StateSetInstance) XorSets(compareSet StateSet) StateSet {
-	var carg0 *C.AtkStateSet // in, none, class
-	var carg1 *C.AtkStateSet // in, none, class
-	var cret  *C.AtkStateSet // return, full, class
+	var carg0 *C.AtkStateSet // in, none, converted
+	var carg1 *C.AtkStateSet // in, none, converted
+	var cret  *C.AtkStateSet // return, full, converted
 
 	carg0 = (*C.AtkStateSet)(UnsafeStateSetToGlibNone(set))
 	carg1 = (*C.AtkStateSet)(UnsafeStateSetToGlibNone(compareSet))
@@ -11601,7 +11493,7 @@ func (set *StateSetInstance) XorSets(compareSet StateSet) StateSet {
 // UtilInstance is the instance type used by all types extending AtkUtil. It is used internally by the bindings. Users should use the interface [Util] instead.
 type UtilInstance struct {
 	_ [0]func() // equal guard
-	gobject.Object
+	gobject.ObjectInstance
 }
 
 var _ Util = (*UtilInstance)(nil)
@@ -11615,19 +11507,19 @@ var _ Util = (*UtilInstance)(nil)
 // of a process and information about the current ATK implementation
 // and toolkit version.
 type Util interface {
-	gobject.ObjectLike
+	gobject.Object
 	upcastToAtkUtil() *UtilInstance
 
 }
 
-func unsafeWrapUtil(base *gobject.Object) *UtilInstance {
+func unsafeWrapUtil(base *gobject.ObjectInstance) *UtilInstance {
 	return &UtilInstance{
-		Object: *base,
+		ObjectInstance: *base,
 	}
 }
 
 func marshalUtilInstance(p uintptr) (interface{}, error) {
-	return unsafeWrapUtil(gobject.ValueFromNative(unsafe.Pointer(p)).Object()), nil
+	return unsafeWrapUtil(gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Object()), nil
 }
 
 // UnsafeUtilFromGlibBorrow is used to convert raw AtkUtil pointers to go. This is used by the bindings internally.
@@ -11682,37 +11574,37 @@ type GObjectAccessible interface {
 	// GetObject wraps atk_gobject_accessible_get_object
 	// The function returns the following values:
 	// 
-	// 	- ret gobject.ObjectLike 
+	// 	- ret gobject.Object 
 	//
 	// Gets the GObject for which @obj is the accessible object.
-	GetObject() gobject.ObjectLike
+	GetObject() gobject.Object
 }
 
-func unsafeWrapGObjectAccessible(base *gobject.Object) *GObjectAccessibleInstance {
+func unsafeWrapGObjectAccessible(base *ObjectInstance) *GObjectAccessibleInstance {
 	return &GObjectAccessibleInstance{
-		ObjectInstance: ObjectInstance{
-			Object: *base,
+		ObjectInstance: gobject.ObjectInstance{
+			ObjectInstance: *base,
 		},
 	}
 }
 
 func marshalGObjectAccessibleInstance(p uintptr) (interface{}, error) {
-	return unsafeWrapGObjectAccessible(gobject.ValueFromNative(unsafe.Pointer(p)).Object()), nil
+	return unsafeWrapGObjectAccessible(gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Object()), nil
 }
 
 // UnsafeGObjectAccessibleFromGlibBorrow is used to convert raw AtkGObjectAccessible pointers to go. This is used by the bindings internally.
 func UnsafeGObjectAccessibleFromGlibBorrow(c unsafe.Pointer) GObjectAccessible {
-	return gobject.TODOBorrow(c).(GObjectAccessible)
+	return TODOBorrow(c).(GObjectAccessible)
 }
 
 // UnsafeGObjectAccessibleFromGlibNone is used to convert raw AtkGObjectAccessible pointers to go while taking a reference and attaching a finalizer. This is used by the bindings internally.
 func UnsafeGObjectAccessibleFromGlibNone(c unsafe.Pointer) GObjectAccessible {
-	return gobject.Take(c).(GObjectAccessible)
+	return Take(c).(GObjectAccessible)
 }
 
 // UnsafeGObjectAccessibleFromGlibFull is used to convert raw AtkGObjectAccessible pointers to go while attaching a finalizer. This is used by the bindings internally.
 func UnsafeGObjectAccessibleFromGlibFull(c unsafe.Pointer) GObjectAccessible {
-	return gobject.AssumeOwnership(c).(GObjectAccessible)
+	return AssumeOwnership(c).(GObjectAccessible)
 }
 
 func (g *GObjectAccessibleInstance) upcastToAtkGObjectAccessible() *GObjectAccessibleInstance {
@@ -11721,30 +11613,30 @@ func (g *GObjectAccessibleInstance) upcastToAtkGObjectAccessible() *GObjectAcces
 
 // UnsafeGObjectAccessibleToGlibNone is used to convert the instance to it's C value AtkGObjectAccessible. This is used by the bindings internally.
 func UnsafeGObjectAccessibleToGlibNone(c GObjectAccessible) unsafe.Pointer {
-	return gobject.TODOToNone(c)
+	return TODOToNone(c)
 }
 
 // UnsafeGObjectAccessibleToGlibFull is used to convert the instance to it's C value AtkGObjectAccessible, while removeing the finalizer. This is used by the bindings internally.
 func UnsafeGObjectAccessibleToGlibFull(c GObjectAccessible) unsafe.Pointer {
-	return gobject.TODOToFull(c)
+	return TODOToFull(c)
 }
 
 // ForObject wraps atk_gobject_accessible_for_object
 // 
 // The function takes the following parameters:
 // 
-// 	- obj gobject.ObjectLike: a #GObject 
+// 	- obj gobject.Object: a #GObject 
 // 
 // The function returns the following values:
 // 
 // 	- ret Object 
 //
 // Gets the accessible object for the specified @obj.
-func ForObject(obj gobject.ObjectLike) Object {
-	var carg1 *C.GObject   // in, none, class
-	var cret  *C.AtkObject // return, none, class
+func ForObject(obj gobject.Object) Object {
+	var carg1 *C.GObject   // in, none, converted
+	var cret  *C.AtkObject // return, none, converted
 
-	carg1 = (*C.GObject)(gobject.TODOToNone(obj))
+	carg1 = (*C.GObject)(TODOToNone(obj))
 
 	cret = C.atk_gobject_accessible_for_object(carg1)
 	runtime.KeepAlive(obj)
@@ -11759,21 +11651,21 @@ func ForObject(obj gobject.ObjectLike) Object {
 // GetObject wraps atk_gobject_accessible_get_object
 // The function returns the following values:
 // 
-// 	- ret gobject.ObjectLike 
+// 	- ret gobject.Object 
 //
 // Gets the GObject for which @obj is the accessible object.
-func (obj *GObjectAccessibleInstance) GetObject() gobject.ObjectLike {
-	var carg0 *C.AtkGObjectAccessible // in, none, class
-	var cret  *C.GObject              // return, none, class
+func (obj *GObjectAccessibleInstance) GetObject() gobject.Object {
+	var carg0 *C.AtkGObjectAccessible // in, none, converted
+	var cret  *C.GObject              // return, none, converted
 
 	carg0 = (*C.AtkGObjectAccessible)(UnsafeGObjectAccessibleToGlibNone(obj))
 
 	cret = C.atk_gobject_accessible_get_object(carg0)
 	runtime.KeepAlive(obj)
 
-	var ret gobject.ObjectLike
+	var ret gobject.Object
 
-	ret = gobject.Take(unsafe.Pointer(cret))
+	ret = Take(unsafe.Pointer(cret))
 
 	return ret
 }
@@ -11783,18 +11675,18 @@ type NoOpObjectInstance struct {
 	_ [0]func() // equal guard
 	ObjectInstance
 	// implemented interfaces:
-	ActionInstance
-	ComponentInstance
-	DocumentInstance
-	EditableTextInstance
-	HypertextInstance
-	ImageInstance
-	SelectionInstance
-	TableInstance
-	TableCellInstance
-	TextInstance
-	ValueInstance
-	WindowInstance
+Action
+Component
+Document
+EditableText
+Hypertext
+Image
+Selection
+Table
+TableCell
+Text
+Value
+Window
 }
 
 var _ NoOpObject = (*NoOpObjectInstance)(nil)
@@ -11825,67 +11717,67 @@ type NoOpObject interface {
 
 }
 
-func unsafeWrapNoOpObject(base *gobject.Object) *NoOpObjectInstance {
+func unsafeWrapNoOpObject(base *ObjectInstance) *NoOpObjectInstance {
 	return &NoOpObjectInstance{
-		ObjectInstance: ObjectInstance{
-			Object: *base,
+		ObjectInstance: gobject.ObjectInstance{
+			ObjectInstance: *base,
 		},
 		ActionInstance: ActionInstance{
-			Object: *base,
+			ObjectInstance: *base,
 		},
 		ComponentInstance: ComponentInstance{
-			Object: *base,
+			ObjectInstance: *base,
 		},
 		DocumentInstance: DocumentInstance{
-			Object: *base,
+			ObjectInstance: *base,
 		},
 		EditableTextInstance: EditableTextInstance{
-			Object: *base,
+			ObjectInstance: *base,
 		},
 		HypertextInstance: HypertextInstance{
-			Object: *base,
+			ObjectInstance: *base,
 		},
 		ImageInstance: ImageInstance{
-			Object: *base,
+			ObjectInstance: *base,
 		},
 		SelectionInstance: SelectionInstance{
-			Object: *base,
+			ObjectInstance: *base,
 		},
 		TableInstance: TableInstance{
-			Object: *base,
+			ObjectInstance: *base,
 		},
 		TableCellInstance: TableCellInstance{
-			Object: *base,
+			ObjectInstance: *base,
 		},
 		TextInstance: TextInstance{
-			Object: *base,
+			ObjectInstance: *base,
 		},
 		ValueInstance: ValueInstance{
-			Object: *base,
+			ObjectInstance: *base,
 		},
 		WindowInstance: WindowInstance{
-			Object: *base,
+			ObjectInstance: *base,
 		},
 	}
 }
 
 func marshalNoOpObjectInstance(p uintptr) (interface{}, error) {
-	return unsafeWrapNoOpObject(gobject.ValueFromNative(unsafe.Pointer(p)).Object()), nil
+	return unsafeWrapNoOpObject(gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Object()), nil
 }
 
 // UnsafeNoOpObjectFromGlibBorrow is used to convert raw AtkNoOpObject pointers to go. This is used by the bindings internally.
 func UnsafeNoOpObjectFromGlibBorrow(c unsafe.Pointer) NoOpObject {
-	return gobject.TODOBorrow(c).(NoOpObject)
+	return TODOBorrow(c).(NoOpObject)
 }
 
 // UnsafeNoOpObjectFromGlibNone is used to convert raw AtkNoOpObject pointers to go while taking a reference and attaching a finalizer. This is used by the bindings internally.
 func UnsafeNoOpObjectFromGlibNone(c unsafe.Pointer) NoOpObject {
-	return gobject.Take(c).(NoOpObject)
+	return Take(c).(NoOpObject)
 }
 
 // UnsafeNoOpObjectFromGlibFull is used to convert raw AtkNoOpObject pointers to go while attaching a finalizer. This is used by the bindings internally.
 func UnsafeNoOpObjectFromGlibFull(c unsafe.Pointer) NoOpObject {
-	return gobject.AssumeOwnership(c).(NoOpObject)
+	return AssumeOwnership(c).(NoOpObject)
 }
 
 func (n *NoOpObjectInstance) upcastToAtkNoOpObject() *NoOpObjectInstance {
@@ -11894,19 +11786,19 @@ func (n *NoOpObjectInstance) upcastToAtkNoOpObject() *NoOpObjectInstance {
 
 // UnsafeNoOpObjectToGlibNone is used to convert the instance to it's C value AtkNoOpObject. This is used by the bindings internally.
 func UnsafeNoOpObjectToGlibNone(c NoOpObject) unsafe.Pointer {
-	return gobject.TODOToNone(c)
+	return TODOToNone(c)
 }
 
 // UnsafeNoOpObjectToGlibFull is used to convert the instance to it's C value AtkNoOpObject, while removeing the finalizer. This is used by the bindings internally.
 func UnsafeNoOpObjectToGlibFull(c NoOpObject) unsafe.Pointer {
-	return gobject.TODOToFull(c)
+	return TODOToFull(c)
 }
 
 // NewNoOpObjectInstance wraps atk_no_op_object_new
 // 
 // The function takes the following parameters:
 // 
-// 	- obj gobject.ObjectLike: a #GObject 
+// 	- obj gobject.Object: a #GObject 
 // 
 // The function returns the following values:
 // 
@@ -11914,11 +11806,11 @@ func UnsafeNoOpObjectToGlibFull(c NoOpObject) unsafe.Pointer {
 //
 // Provides a default (non-functioning stub) #AtkObject.
 // Application maintainers should not use this method.
-func NewNoOpObjectInstance(obj gobject.ObjectLike) Object {
-	var carg1 *C.GObject   // in, none, class
-	var cret  *C.AtkObject // return, full, class
+func NewNoOpObjectInstance(obj gobject.Object) Object {
+	var carg1 *C.GObject   // in, none, converted
+	var cret  *C.AtkObject // return, full, converted
 
-	carg1 = (*C.GObject)(gobject.TODOToNone(obj))
+	carg1 = (*C.GObject)(TODOToNone(obj))
 
 	cret = C.atk_no_op_object_new(carg1)
 	runtime.KeepAlive(obj)
@@ -11951,31 +11843,31 @@ type NoOpObjectFactory interface {
 
 }
 
-func unsafeWrapNoOpObjectFactory(base *gobject.Object) *NoOpObjectFactoryInstance {
+func unsafeWrapNoOpObjectFactory(base *ObjectInstance) *NoOpObjectFactoryInstance {
 	return &NoOpObjectFactoryInstance{
-		ObjectFactoryInstance: ObjectFactoryInstance{
-			Object: *base,
+		ObjectInstance: gobject.ObjectInstance{
+			ObjectInstance: *base,
 		},
 	}
 }
 
 func marshalNoOpObjectFactoryInstance(p uintptr) (interface{}, error) {
-	return unsafeWrapNoOpObjectFactory(gobject.ValueFromNative(unsafe.Pointer(p)).Object()), nil
+	return unsafeWrapNoOpObjectFactory(gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Object()), nil
 }
 
 // UnsafeNoOpObjectFactoryFromGlibBorrow is used to convert raw AtkNoOpObjectFactory pointers to go. This is used by the bindings internally.
 func UnsafeNoOpObjectFactoryFromGlibBorrow(c unsafe.Pointer) NoOpObjectFactory {
-	return gobject.TODOBorrow(c).(NoOpObjectFactory)
+	return TODOBorrow(c).(NoOpObjectFactory)
 }
 
 // UnsafeNoOpObjectFactoryFromGlibNone is used to convert raw AtkNoOpObjectFactory pointers to go while taking a reference and attaching a finalizer. This is used by the bindings internally.
 func UnsafeNoOpObjectFactoryFromGlibNone(c unsafe.Pointer) NoOpObjectFactory {
-	return gobject.Take(c).(NoOpObjectFactory)
+	return Take(c).(NoOpObjectFactory)
 }
 
 // UnsafeNoOpObjectFactoryFromGlibFull is used to convert raw AtkNoOpObjectFactory pointers to go while attaching a finalizer. This is used by the bindings internally.
 func UnsafeNoOpObjectFactoryFromGlibFull(c unsafe.Pointer) NoOpObjectFactory {
-	return gobject.AssumeOwnership(c).(NoOpObjectFactory)
+	return AssumeOwnership(c).(NoOpObjectFactory)
 }
 
 func (n *NoOpObjectFactoryInstance) upcastToAtkNoOpObjectFactory() *NoOpObjectFactoryInstance {
@@ -11984,12 +11876,12 @@ func (n *NoOpObjectFactoryInstance) upcastToAtkNoOpObjectFactory() *NoOpObjectFa
 
 // UnsafeNoOpObjectFactoryToGlibNone is used to convert the instance to it's C value AtkNoOpObjectFactory. This is used by the bindings internally.
 func UnsafeNoOpObjectFactoryToGlibNone(c NoOpObjectFactory) unsafe.Pointer {
-	return gobject.TODOToNone(c)
+	return TODOToNone(c)
 }
 
 // UnsafeNoOpObjectFactoryToGlibFull is used to convert the instance to it's C value AtkNoOpObjectFactory, while removeing the finalizer. This is used by the bindings internally.
 func UnsafeNoOpObjectFactoryToGlibFull(c NoOpObjectFactory) unsafe.Pointer {
-	return gobject.TODOToFull(c)
+	return TODOToFull(c)
 }
 
 // NewNoOpObjectFactoryInstance wraps atk_no_op_object_factory_new
@@ -12000,7 +11892,7 @@ func UnsafeNoOpObjectFactoryToGlibFull(c NoOpObjectFactory) unsafe.Pointer {
 // Creates an instance of an #AtkObjectFactory which generates primitive
 // (non-functioning) #AtkObjects.
 func NewNoOpObjectFactoryInstance() ObjectFactory {
-	var cret *C.AtkObjectFactory // return, full, class
+	var cret *C.AtkObjectFactory // return, full, converted
 
 	cret = C.atk_no_op_object_factory_new()
 
@@ -12559,8 +12451,8 @@ func UnsafeImplementorToGlibFull(i *Implementor) unsafe.Pointer {
 // Gets a reference to an object's #AtkObject implementation, if
 // the object implements #AtkObjectIface
 func (implementor *Implementor) RefAccessible() Object {
-	var carg0 *C.AtkImplementor // in, none, record
-	var cret  *C.AtkObject      // return, full, class
+	var carg0 *C.AtkImplementor // in, none, converted
+	var cret  *C.AtkObject      // return, full, converted
 
 	carg0 = (*C.AtkImplementor)(UnsafeImplementorToGlibNone(implementor))
 
@@ -13097,7 +12989,7 @@ type _range struct {
 }
 
 func marshalRange(p uintptr) (interface{}, error) {
-	b := gobject.ValueFromNative(unsafe.Pointer(p)).Boxed()
+	b := gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Boxed()
 	return UnsafeRangeFromGlibBorrow(b), nil
 }
 
@@ -13148,14 +13040,14 @@ func UnsafeRangeToGlibFull(r *Range) unsafe.Pointer {
 // 
 // The function returns the following values:
 // 
-// 	- ret *Range 
+// 	- ret Range 
 //
 // Creates a new #AtkRange.
-func NewRange(lowerLimit float64, upperLimit float64, description string) *Range {
-	var carg1 C.gdouble   // in, casted
-	var carg2 C.gdouble   // in, casted
+func NewRange(lowerLimit float64, upperLimit float64, description string) Range {
+	var carg1 C.gdouble   // in, none, casted
+	var carg2 C.gdouble   // in, none, casted
 	var carg3 *C.gchar    // in, none, string
-	var cret  *C.AtkRange // return, full, record
+	var cret  *C.AtkRange // return, full, converted
 
 	carg1 = C.gdouble(lowerLimit)
 	carg2 = C.gdouble(upperLimit)
@@ -13167,7 +13059,7 @@ func NewRange(lowerLimit float64, upperLimit float64, description string) *Range
 	runtime.KeepAlive(upperLimit)
 	runtime.KeepAlive(description)
 
-	var ret *Range
+	var ret Range
 
 	ret = UnsafeRangeFromGlibFull(unsafe.Pointer(cret))
 
@@ -13181,7 +13073,7 @@ func NewRange(lowerLimit float64, upperLimit float64, description string) *Range
 //
 // Returns the human readable description of @range
 func (_range *Range) GetDescription() string {
-	var carg0 *C.AtkRange // in, none, record
+	var carg0 *C.AtkRange // in, none, converted
 	var cret  *C.gchar    // return, none, string
 
 	carg0 = (*C.AtkRange)(UnsafeRangeToGlibNone(_range))
@@ -13203,8 +13095,8 @@ func (_range *Range) GetDescription() string {
 //
 // Returns the lower limit of @range
 func (_range *Range) GetLowerLimit() float64 {
-	var carg0 *C.AtkRange // in, none, record
-	var cret  C.gdouble   // return, casted
+	var carg0 *C.AtkRange // in, none, converted
+	var cret  C.gdouble   // return, none, casted
 
 	carg0 = (*C.AtkRange)(UnsafeRangeToGlibNone(_range))
 
@@ -13225,8 +13117,8 @@ func (_range *Range) GetLowerLimit() float64 {
 //
 // Returns the upper limit of @range
 func (_range *Range) GetUpperLimit() float64 {
-	var carg0 *C.AtkRange // in, none, record
-	var cret  C.gdouble   // return, casted
+	var carg0 *C.AtkRange // in, none, converted
+	var cret  C.gdouble   // return, none, casted
 
 	carg0 = (*C.AtkRange)(UnsafeRangeToGlibNone(_range))
 
@@ -13254,7 +13146,7 @@ type rectangle struct {
 }
 
 func marshalRectangle(p uintptr) (interface{}, error) {
-	b := gobject.ValueFromNative(unsafe.Pointer(p)).Boxed()
+	b := gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Boxed()
 	return UnsafeRectangleFromGlibBorrow(b), nil
 }
 
@@ -13852,7 +13744,7 @@ type textRange struct {
 }
 
 func marshalTextRange(p uintptr) (interface{}, error) {
-	b := gobject.ValueFromNative(unsafe.Pointer(p)).Boxed()
+	b := gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Boxed()
 	return UnsafeTextRangeFromGlibBorrow(b), nil
 }
 
@@ -14138,17 +14030,6 @@ func (t *TextSelection) EndOffset() int {
 	return _v
 }
 
-// start_is_active wraps start_is_active
-//
-// a gboolean indicating whether the start of the selection
-//                  is the active point.
-func (t *TextSelection) StartIsActive() bool {
-	valptr := &t.native.start_is_active
-	var _v bool
-	_v = bool(*valptr)
-	return _v
-}
-
 // start_offset wraps start_offset
 //
 // the text offset of the beginning of the selection within
@@ -14164,15 +14045,6 @@ func (t *TextSelection) SetStartOffset(start_offset int) {
 func (t *TextSelection) SetEndOffset(end_offset int) {
 	valptr := &t.native.end_offset
 	*valptr = C.int(end_offset)
-}
-
-// start_is_active wraps start_is_active
-//
-// a gboolean indicating whether the start of the selection
-//                  is the active point.
-func (t *TextSelection) SetStartIsActive(start_is_active bool) {
-	valptr := &t.native.start_is_active
-	*valptr = C.gboolean(start_is_active)
 }
 
 // UtilClass wraps AtkUtilClass

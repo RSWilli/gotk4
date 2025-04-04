@@ -78,16 +78,30 @@ type CallableGenerator struct {
 	Signature *typesystem.CallableSignature
 }
 
-// GenerateInterfaceSignature implements MethodGenerator.
-func (m *CallableGenerator) GenerateInterfaceSignature(w file.CodeWriter) {
-	m.Doc.Generate(w)
+func (m *CallableGenerator) importReferencedTypes(w file.File) {
+	for _, param := range m.Signature.CParameters() {
+		w.GoImportNamespace(param.Type.Namespace)
+	}
 
-	fmt.Fprintln(w, m.GoInterfaceDeclaration())
+	if m.Signature.CReturn != nil {
+		w.GoImportNamespace(m.Signature.CReturn.Type.Namespace)
+	}
+}
+
+// GenerateInterfaceSignature implements MethodGenerator.
+func (m *CallableGenerator) GenerateInterfaceSignature(w file.File) {
+	m.Doc.Generate(w.Go())
+
+	m.importReferencedTypes(w)
+
+	fmt.Fprintln(w.Go(), m.GoInterfaceDeclaration())
 }
 
 // Generate implements Generator.
 func (m *CallableGenerator) Generate(w *file.Package) {
 	m.Doc.Generate(w.Go())
+
+	m.importReferencedTypes(w)
 
 	w.GoImport("runtime")
 
@@ -115,10 +129,10 @@ func (m *CallableGenerator) Generate(w *file.Package) {
 	w.Go().NewSection()
 
 	if m.ReceiverConverter != nil {
-		m.ReceiverConverter.Convert(w.Go())
+		m.ReceiverConverter.Convert(w)
 	}
 	for _, c := range m.ParamConverters {
-		c.Convert(w.Go())
+		c.Convert(w)
 	}
 
 	w.Go().NewSection()
@@ -146,7 +160,7 @@ func (m *CallableGenerator) Generate(w *file.Package) {
 	w.Go().NewSection()
 
 	for _, c := range m.ReturnConverters {
-		c.Convert(w.Go())
+		c.Convert(w)
 	}
 
 	w.Go().NewSection()

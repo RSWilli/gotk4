@@ -12,9 +12,9 @@ type CToGoCastingConverter struct {
 }
 
 // Convert implements Converter.
-func (c *CToGoCastingConverter) Convert(w file.CodeWriter) {
+func (c *CToGoCastingConverter) Convert(w file.File) {
 
-	fmt.Fprintf(w, "%s = %s(%s)\n", c.Param.GoName, c.Param.GoType(), c.Param.CName)
+	fmt.Fprintf(w.Go(), "%s = %s(%s)\n", c.Param.GoName, c.Param.GoType(), c.Param.CName)
 }
 
 // Metadata implements Converter.
@@ -29,8 +29,8 @@ type GoToCCastingConverter struct {
 }
 
 // Convert implements Converter.
-func (c *GoToCCastingConverter) Convert(w file.CodeWriter) {
-	fmt.Fprintf(w, "%s = %s(%s)\n", c.Param.CName, c.Param.CGoType(), c.Param.GoName)
+func (c *GoToCCastingConverter) Convert(w file.File) {
+	fmt.Fprintf(w.Go(), "%s = %s(%s)\n", c.Param.CName, c.Param.CGoType(), c.Param.GoName)
 }
 
 // Metadata implements Converter.

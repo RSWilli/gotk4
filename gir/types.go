@@ -308,6 +308,10 @@ type InfoElements struct {
 	Annotations []Annotation `xml:"http://www.gtk.org/introspection/core/1.0 attribute"`
 }
 
+func (inf InfoElements) GetInfoElements() InfoElements {
+	return inf
+}
+
 type InstanceParameter struct {
 	XMLName xml.Name `xml:"http://www.gtk.org/introspection/core/1.0 instance-parameter"`
 	ParameterAttrs

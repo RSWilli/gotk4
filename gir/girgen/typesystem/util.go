@@ -63,40 +63,50 @@ func debugCTypeFromAnytype(t gir.AnyType) string {
 	}
 }
 
-func infoFromAnyGir(girAny any) (string, GIRKind) {
+func infoFromAnyGir(girAny any) (string, gir.InfoAttrs, gir.InfoElements) {
+	var attrs gir.InfoAttrs
+	var elements gir.InfoElements
+
+	if t, ok := girAny.(girWithInfoAttrs); ok {
+		attrs = t.GetInfoAttrs()
+	}
+	if t, ok := girAny.(girWithInfoElements); ok {
+		elements = t.GetInfoElements()
+	}
+
 	switch t := girAny.(type) {
 	case gir.Class:
-		return t.Name, GIRKindClass
+		return t.Name, attrs, elements
 	case gir.Interface:
-		return t.Name, GIRKindInterface
+		return t.Name, attrs, elements
 	case gir.Callback:
-		return t.Name, GIRKindCallback
+		return t.Name, attrs, elements
 	case gir.Field:
-		return t.Name, GIRKindField
+		return t.Name, attrs, elements
 	case gir.Enum:
-		return t.Name, GIRKindEnum
+		return t.Name, attrs, elements
 	case gir.Bitfield:
-		return t.Name, GIRKindBitfield
+		return t.Name, attrs, elements
 	case gir.Member:
-		return t.Name(), GIRKindMember
+		return t.Name(), attrs, elements
 	case gir.Record:
-		return t.Name, GIRKindRecord
+		return t.Name, attrs, elements
 	case gir.Constant:
-		return t.Name, GIRKindConstant
+		return t.Name, attrs, elements
 	case gir.Constructor:
-		return t.Name, GIRKindConstructor
+		return t.Name, attrs, elements
 	case gir.Method:
-		return t.Name, GIRKindMethod
+		return t.Name, attrs, elements
 	case gir.VirtualMethod:
-		return t.Name, GIRKindVirtualMethod
+		return t.Name, attrs, elements
 	case gir.Union:
-		return t.Name, GIRKindUnion
+		return t.Name, attrs, elements
 	case gir.Alias:
-		return t.Name, GIRKindAlias
+		return t.Name, attrs, elements
 	case gir.Function:
-		return t.Name, GIRKindFunction
+		return t.Name, attrs, elements
 	case gir.Signal:
-		return t.Name, GIRKindSignal
+		return t.Name, attrs, elements
 	default:
 		panic(fmt.Sprintf("received unhandled type: %T", t))
 	}

@@ -4,7 +4,11 @@ package gdkpixbuf
 
 import (
 	"unsafe"
+	"github.com/diamondburned/gotk4/pkg/gobject/v2"
+	"github.com/diamondburned/gotk4/pkg/gio/v2"
+	"github.com/diamondburned/gotk4/pkg/glib/v2"
 	"runtime"
+	"github.com/diamondburned/gotk4/pkg/core/gbox"
 )
 
 // #cgo pkg-config: gdk-pixbuf-2.0
@@ -78,8 +82,13 @@ const (
 )
 
 func marshalColorspace(p uintptr) (interface{}, error) {
-	return Colorspace(gobject.ValueFromNative(unsafe.Pointer(p)).Enum()), nil
+	return Colorspace(gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Enum()), nil
 }
+
+func (e Colorspace) SetValue(v *gobject.Value) {
+	panic("TODO")
+}
+
 // InterpType wraps GdkInterpType
 //
 // Interpolation modes for scaling functions.
@@ -130,8 +139,13 @@ const (
 )
 
 func marshalInterpType(p uintptr) (interface{}, error) {
-	return InterpType(gobject.ValueFromNative(unsafe.Pointer(p)).Enum()), nil
+	return InterpType(gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Enum()), nil
 }
+
+func (e InterpType) SetValue(v *gobject.Value) {
+	panic("TODO")
+}
+
 // PixbufAlphaMode wraps GdkPixbufAlphaMode
 //
 // Control the alpha channel for drawables.
@@ -168,8 +182,13 @@ const (
 )
 
 func marshalPixbufAlphaMode(p uintptr) (interface{}, error) {
-	return PixbufAlphaMode(gobject.ValueFromNative(unsafe.Pointer(p)).Enum()), nil
+	return PixbufAlphaMode(gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Enum()), nil
 }
+
+func (e PixbufAlphaMode) SetValue(v *gobject.Value) {
+	panic("TODO")
+}
+
 // PixbufError wraps GdkPixbufError
 //
 // An error code in the `GDK_PIXBUF_ERROR` domain.
@@ -211,8 +230,13 @@ const (
 )
 
 func marshalPixbufError(p uintptr) (interface{}, error) {
-	return PixbufError(gobject.ValueFromNative(unsafe.Pointer(p)).Enum()), nil
+	return PixbufError(gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Enum()), nil
 }
+
+func (e PixbufError) SetValue(v *gobject.Value) {
+	panic("TODO")
+}
+
 // PixbufRotation wraps GdkPixbufRotation
 //
 // The possible rotations which can be passed to gdk_pixbuf_rotate_simple().
@@ -240,8 +264,13 @@ const (
 )
 
 func marshalPixbufRotation(p uintptr) (interface{}, error) {
-	return PixbufRotation(gobject.ValueFromNative(unsafe.Pointer(p)).Enum()), nil
+	return PixbufRotation(gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Enum()), nil
 }
+
+func (e PixbufRotation) SetValue(v *gobject.Value) {
+	panic("TODO")
+}
+
 // PixbufFormatFlags wraps GdkPixbufFormatFlags
 //
 // Flags which allow a module to specify further details about the supported
@@ -269,22 +298,26 @@ func (p PixbufFormatFlags) Has(other PixbufFormatFlags) bool {
 	return (p & other) == other
 }
 
+func (p PixbufFormatFlags) SetValue(v *gobject.Value) {
+	panic("TODO")
+}
+
 // PixbufModuleFillInfoFunc wraps GdkPixbufModuleFillInfoFunc
 //
 // Defines the type of the function used to fill a
 // #GdkPixbufFormat structure with information about a module.
-type PixbufModuleFillInfoFunc func(info *PixbufFormat)
+type PixbufModuleFillInfoFunc func(info PixbufFormat)
 
 // PixbufModuleFillVtableFunc wraps GdkPixbufModuleFillVtableFunc
 //
 // Defines the type of the function used to set the vtable of a
 // #GdkPixbufModule when it is loaded.
-type PixbufModuleFillVtableFunc func(module *PixbufModule)
+type PixbufModuleFillVtableFunc func(module PixbufModule)
 
 // PixbufModuleIncrementLoadFunc wraps GdkPixbufModuleIncrementLoadFunc
 //
 // Incrementally loads a buffer into the image data.
-type PixbufModuleIncrementLoadFunc func(context unsafe.Pointer, buf []uint8) (ret bool, _goerr error)
+type PixbufModuleIncrementLoadFunc func(context unsafe.Pointer, buf array) (ret bool, _goerr error)
 
 // PixbufModuleLoadAnimationFunc wraps GdkPixbufModuleLoadAnimationFunc
 //
@@ -303,7 +336,7 @@ type PixbufModuleLoadFunc func(f unsafe.Pointer) (ret Pixbuf, _goerr error)
 // PixbufModuleLoadXPMDataFunc wraps GdkPixbufModuleLoadXpmDataFunc
 //
 // Loads XPM data into a new `GdkPixbuf`.
-type PixbufModuleLoadXPMDataFunc func(data []string) (ret Pixbuf)
+type PixbufModuleLoadXPMDataFunc func(data array) (ret Pixbuf)
 
 // PixbufModulePreparedFunc wraps GdkPixbufModulePreparedFunc
 //
@@ -322,12 +355,29 @@ type PixbufModulePreparedFunc func(pixbuf Pixbuf, anim PixbufAnimation)
 // The optional `param_keys` and `param_values` arrays contain the keys and
 // values (in the same order) for attributes to be saved alongside the image
 // data.
-type PixbufModuleSaveFunc func(f unsafe.Pointer, pixbuf Pixbuf, paramKeys []string, paramValues []string) (ret bool, _goerr error)
+type PixbufModuleSaveFunc func(f unsafe.Pointer, pixbuf Pixbuf, paramKeys array, paramValues array) (ret bool, _goerr error)
 
 // PixbufModuleSaveOptionSupportedFunc wraps GdkPixbufModuleSaveOptionSupportedFunc
 //
 // Checks whether the given `option_key` is supported when saving.
 type PixbufModuleSaveOptionSupportedFunc func(optionKey string) (ret bool)
+
+// PixbufModuleSizeFunc wraps GdkPixbufModuleSizeFunc
+//
+// Defines the type of the function that gets called once the size
+// of the loaded image is known.
+// 
+// The function is expected to set @width and @height to the desired
+// size to which the image should be scaled. If a module has no efficient
+// way to achieve the desired scaling during the loading of the image, it may
+// either ignore the size request, or only approximate it - gdk-pixbuf will
+// then perform the required scaling on the completely loaded image.
+// 
+// If the function sets @width or @height to zero, the module should interpret
+// this as a hint that it will be closed soon and shouldn't allocate further
+// resources. This convention is used to implement gdk_pixbuf_get_file_info()
+// efficiently.
+type PixbufModuleSizeFunc func(width int, height int)
 
 // PixbufModuleStopLoadFunc wraps GdkPixbufModuleStopLoadFunc
 //
@@ -356,15 +406,15 @@ type PixbufModuleUpdatedFunc func(pixbuf Pixbuf, x int, y int, width int, height
 // If successful it should return `TRUE`; if an error occurs it should set
 // `error` and return `FALSE`, in which case `gdk_pixbuf_save_to_callback()`
 // will fail with the same error.
-type PixbufSaveFunc func(buf string) (err error, ret bool)
+type PixbufSaveFunc func(buf array) (err error, ret bool)
 
 // PixbufInstance is the instance type used by all types extending GdkPixbuf. It is used internally by the bindings. Users should use the interface [Pixbuf] instead.
 type PixbufInstance struct {
 	_ [0]func() // equal guard
-	gobject.Object
+	gobject.ObjectInstance
 	// implemented interfaces:
-	gio.IconInstance
-	gio.LoadableIconInstance
+gio.Icon
+gio.LoadableIcon
 }
 
 var _ Pixbuf = (*PixbufInstance)(nil)
@@ -507,7 +557,7 @@ var _ Pixbuf = (*PixbufInstance)(nil)
 // callback on the data, which allows to e.g. write the image
 // to a socket or store it in a database.
 type Pixbuf interface {
-	gobject.ObjectLike
+	gobject.Object
 	gio.Icon
 	gio.LoadableIcon
 	upcastToGdkPixbuf() *PixbufInstance
@@ -781,20 +831,11 @@ type Pixbuf interface {
 	// Since 2.36.6, the JPEG loader sets the "comment" option with the comment
 	// EXIF tag.
 	GetOption(string) string
-	// GetOptions wraps gdk_pixbuf_get_options
-	// The function returns the following values:
-	// 
-	// 	- ret *glib.HashTable 
-	//
-	// Returns a `GHashTable` with a list of all the options that may have been
-	// attached to the `pixbuf` when it was loaded, or that may have been
-	// attached by another function using [method@GdkPixbuf.Pixbuf.set_option].
-	GetOptions() *glib.HashTable
 	// GetPixelsWithLength wraps gdk_pixbuf_get_pixels_with_length
 	// The function returns the following values:
 	// 
 	// 	- length uint: The length of the binary data. 
-	// 	- ret []uint8 
+	// 	- ret array 
 	//
 	// Queries a pointer to the pixel data of a pixbuf.
 	// 
@@ -803,7 +844,7 @@ type Pixbuf interface {
 	// 
 	// Please see the section on [image data](class.Pixbuf.html#image-data) for information
 	// about how the pixel data is stored in memory.
-	GetPixelsWithLength() (uint, []uint8)
+	GetPixelsWithLength() (uint, array)
 	// GetRowstride wraps gdk_pixbuf_get_rowstride
 	// The function returns the following values:
 	// 
@@ -842,27 +883,16 @@ type Pixbuf interface {
 	// Note that if `src_pixbuf` is read-only, this function will force it
 	// to be mutable.
 	NewSubpixbuf(int, int, int, int) Pixbuf
-	// ReadPixelBytes wraps gdk_pixbuf_read_pixel_bytes
-	// The function returns the following values:
-	// 
-	// 	- ret *glib.Bytes 
-	//
-	// Provides a #GBytes buffer containing the raw pixel data; the data
-	// must not be modified.
-	// 
-	// This function allows skipping the implicit copy that must be made
-	// if gdk_pixbuf_get_pixels() is called on a read-only pixbuf.
-	ReadPixelBytes() *glib.Bytes
 	// ReadPixels wraps gdk_pixbuf_read_pixels
 	// The function returns the following values:
 	// 
-	// 	- ret *uint8 
+	// 	- ret uint8 
 	//
 	// Provides a read-only pointer to the raw pixel data.
 	// 
 	// This function allows skipping the implicit copy that must be made
 	// if gdk_pixbuf_get_pixels() is called on a read-only pixbuf.
-	ReadPixels() *uint8
+	ReadPixels() uint8
 	// RemoveOption wraps gdk_pixbuf_remove_option
 	// 
 	// The function takes the following parameters:
@@ -918,12 +948,12 @@ type Pixbuf interface {
 	// The function takes the following parameters:
 	// 
 	// 	- typ string: name of file format. 
-	// 	- optionKeys []string (nullable): name of options to set 
-	// 	- optionValues []string (nullable): values for named options 
+	// 	- optionKeys array (nullable): name of options to set 
+	// 	- optionValues array (nullable): values for named options 
 	// 
 	// The function returns the following values:
 	// 
-	// 	- buffer []uint8: 
+	// 	- buffer array: 
 	//   location to receive a pointer to the new buffer. 
 	// 	- bufferSize uint: location to receive the size of the new buffer. 
 	// 	- ret bool 
@@ -935,7 +965,7 @@ type Pixbuf interface {
 	// "tiff", "png", "ico" or "bmp".
 	// 
 	// See [method@GdkPixbuf.Pixbuf.save_to_buffer] for more details.
-	SaveToBufferv(string, []string, []string) ([]uint8, bool, error)
+	SaveToBufferv(string, array, array) (array, bool, error)
 	// SaveToCallbackv wraps gdk_pixbuf_save_to_callbackv
 	// 
 	// The function takes the following parameters:
@@ -943,8 +973,8 @@ type Pixbuf interface {
 	// 	- saveFunc PixbufSaveFunc: a function that is called to save each block of data that
 	//   the save routine generates. 
 	// 	- typ string: name of file format. 
-	// 	- optionKeys []string (nullable): name of options to set 
-	// 	- optionValues []string (nullable): values for named options 
+	// 	- optionKeys array (nullable): name of options to set 
+	// 	- optionValues array (nullable): values for named options 
 	// 
 	// The function returns the following values:
 	// 
@@ -959,16 +989,16 @@ type Pixbuf interface {
 	// If @error is set, `FALSE` will be returned.
 	// 
 	// See [method@GdkPixbuf.Pixbuf.save_to_callback] for more details.
-	SaveToCallbackv(PixbufSaveFunc, string, []string, []string) (bool, error)
+	SaveToCallbackv(PixbufSaveFunc, string, array, array) (bool, error)
 	// SaveToStreamv wraps gdk_pixbuf_save_to_streamv
 	// 
 	// The function takes the following parameters:
 	// 
 	// 	- stream gio.OutputStream: a `GOutputStream` to save the pixbuf to 
 	// 	- typ string: name of file format 
-	// 	- optionKeys []string (nullable): name of options to set 
-	// 	- optionValues []string (nullable): values for named options 
-	// 	- cancellable gio.Cancellable (nullable): optional `GCancellable` object, `NULL` to ignore 
+	// 	- optionKeys array (nullable): name of options to set 
+	// 	- optionValues array (nullable): values for named options 
+	// 	- cancellable gio. (nullable): optional `GCancellable` object, `NULL` to ignore 
 	// 
 	// The function returns the following values:
 	// 
@@ -981,16 +1011,16 @@ type Pixbuf interface {
 	// "bmp".
 	// 
 	// See [method@GdkPixbuf.Pixbuf.save_to_stream] for more details.
-	SaveToStreamv(gio.OutputStream, string, []string, []string, gio.Cancellable) (bool, error)
+	SaveToStreamv(gio.OutputStream, string, array, array, gio.) (bool, error)
 	// SaveToStreamvAsync wraps gdk_pixbuf_save_to_streamv_async
 	// 
 	// The function takes the following parameters:
 	// 
 	// 	- stream gio.OutputStream: a `GOutputStream` to which to save the pixbuf 
 	// 	- typ string: name of file format 
-	// 	- optionKeys []string (nullable): name of options to set 
-	// 	- optionValues []string (nullable): values for named options 
-	// 	- cancellable gio.Cancellable (nullable): optional `GCancellable` object, `NULL` to ignore 
+	// 	- optionKeys array (nullable): name of options to set 
+	// 	- optionValues array (nullable): values for named options 
+	// 	- cancellable gio. (nullable): optional `GCancellable` object, `NULL` to ignore 
 	// 	- callback gio.AsyncReadyCallback (nullable): a `GAsyncReadyCallback` to call when the pixbuf is saved 
 	//
 	// Saves `pixbuf` to an output stream asynchronously.
@@ -1002,15 +1032,15 @@ type Pixbuf interface {
 	// 
 	// You can then call gdk_pixbuf_save_to_stream_finish() to get the result of
 	// the operation.
-	SaveToStreamvAsync(gio.OutputStream, string, []string, []string, gio.Cancellable, gio.AsyncReadyCallback)
+	SaveToStreamvAsync(gio.OutputStream, string, array, array, gio., gio.AsyncReadyCallback)
 	// Savev wraps gdk_pixbuf_savev
 	// 
 	// The function takes the following parameters:
 	// 
 	// 	- filename string: name of file to save. 
 	// 	- typ string: name of file format. 
-	// 	- optionKeys []string (nullable): name of options to set 
-	// 	- optionValues []string (nullable): values for named options 
+	// 	- optionKeys array (nullable): name of options to set 
+	// 	- optionValues array (nullable): values for named options 
 	// 
 	// The function returns the following values:
 	// 
@@ -1024,7 +1054,7 @@ type Pixbuf interface {
 	// If @error is set, `FALSE` will be returned.
 	// 
 	// See [method@GdkPixbuf.Pixbuf.save] for more details.
-	Savev(string, string, []string, []string) (bool, error)
+	Savev(string, string, array, array) (bool, error)
 	// Scale wraps gdk_pixbuf_scale
 	// 
 	// The function takes the following parameters:
@@ -1103,20 +1133,20 @@ type Pixbuf interface {
 	SetOption(string, string) bool
 }
 
-func unsafeWrapPixbuf(base *gobject.Object) *PixbufInstance {
+func unsafeWrapPixbuf(base *gobject.ObjectInstance) *PixbufInstance {
 	return &PixbufInstance{
-		Object: *base,
+		ObjectInstance: *base,
 		IconInstance: gio.IconInstance{
-			Object: *base,
+			ObjectInstance: *base,
 		},
 		LoadableIconInstance: gio.LoadableIconInstance{
-			Object: *base,
+			ObjectInstance: *base,
 		},
 	}
 }
 
 func marshalPixbufInstance(p uintptr) (interface{}, error) {
-	return unsafeWrapPixbuf(gobject.ValueFromNative(unsafe.Pointer(p)).Object()), nil
+	return unsafeWrapPixbuf(gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Object()), nil
 }
 
 // UnsafePixbufFromGlibBorrow is used to convert raw GdkPixbuf pointers to go. This is used by the bindings internally.
@@ -1169,12 +1199,12 @@ func UnsafePixbufToGlibFull(c Pixbuf) unsafe.Pointer {
 // The buffer has an optimal rowstride. Note that the buffer is not cleared;
 // you will have to fill it completely yourself.
 func NewPixbufInstance(colorspace Colorspace, hasAlpha bool, bitsPerSample int, width int, height int) Pixbuf {
-	var carg1 C.GdkColorspace // in, casted
+	var carg1 C.GdkColorspace // in, none, casted
 	var carg2 C.gboolean      // in
-	var carg3 C.int           // in, casted
-	var carg4 C.int           // in, casted
-	var carg5 C.int           // in, casted
-	var cret  *C.GdkPixbuf    // return, full, class
+	var carg3 C.int           // in, none, casted
+	var carg4 C.int           // in, none, casted
+	var carg5 C.int           // in, none, casted
+	var cret  *C.GdkPixbuf    // return, full, converted
 
 	carg1 = C.GdkColorspace(colorspace)
 	if hasAlpha {
@@ -1190,64 +1220,6 @@ func NewPixbufInstance(colorspace Colorspace, hasAlpha bool, bitsPerSample int, 
 	runtime.KeepAlive(bitsPerSample)
 	runtime.KeepAlive(width)
 	runtime.KeepAlive(height)
-
-	var ret Pixbuf
-
-	ret = UnsafePixbufFromGlibFull(unsafe.Pointer(cret))
-
-	return ret
-}
-
-// NewPixbufInstanceFromBytes wraps gdk_pixbuf_new_from_bytes
-// 
-// The function takes the following parameters:
-// 
-// 	- data *glib.Bytes: Image data in 8-bit/sample packed format inside a #GBytes 
-// 	- colorspace Colorspace: Colorspace for the image data 
-// 	- hasAlpha bool: Whether the data has an opacity channel 
-// 	- bitsPerSample int: Number of bits per sample 
-// 	- width int: Width of the image in pixels, must be &gt; 0 
-// 	- height int: Height of the image in pixels, must be &gt; 0 
-// 	- rowstride int: Distance in bytes between row starts 
-// 
-// The function returns the following values:
-// 
-// 	- ret Pixbuf 
-//
-// Creates a new #GdkPixbuf out of in-memory readonly image data.
-// 
-// Currently only RGB images with 8 bits per sample are supported.
-// 
-// This is the `GBytes` variant of gdk_pixbuf_new_from_data(), useful
-// for language bindings.
-func NewPixbufInstanceFromBytes(data *glib.Bytes, colorspace Colorspace, hasAlpha bool, bitsPerSample int, width int, height int, rowstride int) Pixbuf {
-	var carg1 *C.GBytes       // in, none, record
-	var carg2 C.GdkColorspace // in, casted
-	var carg3 C.gboolean      // in
-	var carg4 C.int           // in, casted
-	var carg5 C.int           // in, casted
-	var carg6 C.int           // in, casted
-	var carg7 C.int           // in, casted
-	var cret  *C.GdkPixbuf    // return, full, class
-
-	carg1 = (*C.GBytes)(glib.UnsafeBytesToGlibNone(data))
-	carg2 = C.GdkColorspace(colorspace)
-	if hasAlpha {
-		carg3 = C.TRUE
-	}
-	carg4 = C.int(bitsPerSample)
-	carg5 = C.int(width)
-	carg6 = C.int(height)
-	carg7 = C.int(rowstride)
-
-	cret = C.gdk_pixbuf_new_from_bytes(carg1, carg2, carg3, carg4, carg5, carg6, carg7)
-	runtime.KeepAlive(data)
-	runtime.KeepAlive(colorspace)
-	runtime.KeepAlive(hasAlpha)
-	runtime.KeepAlive(bitsPerSample)
-	runtime.KeepAlive(width)
-	runtime.KeepAlive(height)
-	runtime.KeepAlive(rowstride)
 
 	var ret Pixbuf
 
@@ -1281,11 +1253,12 @@ func NewPixbufInstanceFromBytes(data *glib.Bytes, colorspace Colorspace, hasAlph
 // 
 // The error domains are `GDK_PIXBUF_ERROR` and `G_FILE_ERROR`.
 func NewPixbufInstanceFromFile(filename string) (Pixbuf, error) {
-	var carg1 *C.gchar     // in, casted
-	var cret  *C.GdkPixbuf // return, full, class
-	var _cerr *C.GError    // out, full, record, nullable
+	var carg1 *C.gchar     // in, none, string
+	var cret  *C.GdkPixbuf // return, full, converted
+	var _cerr *C.GError    // out, full, converted, nullable
 
-	carg1 = *C.gchar(filename)
+	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(filename)))
+	defer C.free(unsafe.Pointer(carg1))
 
 	cret = C.gdk_pixbuf_new_from_file(carg1, &_cerr)
 	runtime.KeepAlive(filename)
@@ -1295,7 +1268,7 @@ func NewPixbufInstanceFromFile(filename string) (Pixbuf, error) {
 
 	ret = UnsafePixbufFromGlibFull(unsafe.Pointer(cret))
 	if _cerr != nil {
-		_goerr = glib.UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
+		_goerr = UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
 	}
 
 	return ret, _goerr
@@ -1339,14 +1312,15 @@ func NewPixbufInstanceFromFile(filename string) (Pixbuf, error) {
 // at all in that dimension. Negative values for `width` and `height` are
 // allowed since 2.8.
 func NewPixbufInstanceFromFileAtScale(filename string, width int, height int, preserveAspectRatio bool) (Pixbuf, error) {
-	var carg1 *C.gchar     // in, casted
-	var carg2 C.int        // in, casted
-	var carg3 C.int        // in, casted
+	var carg1 *C.gchar     // in, none, string
+	var carg2 C.int        // in, none, casted
+	var carg3 C.int        // in, none, casted
 	var carg4 C.gboolean   // in
-	var cret  *C.GdkPixbuf // return, full, class
-	var _cerr *C.GError    // out, full, record, nullable
+	var cret  *C.GdkPixbuf // return, full, converted
+	var _cerr *C.GError    // out, full, converted, nullable
 
-	carg1 = *C.gchar(filename)
+	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(filename)))
+	defer C.free(unsafe.Pointer(carg1))
 	carg2 = C.int(width)
 	carg3 = C.int(height)
 	if preserveAspectRatio {
@@ -1364,7 +1338,7 @@ func NewPixbufInstanceFromFileAtScale(filename string, width int, height int, pr
 
 	ret = UnsafePixbufFromGlibFull(unsafe.Pointer(cret))
 	if _cerr != nil {
-		_goerr = glib.UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
+		_goerr = UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
 	}
 
 	return ret, _goerr
@@ -1403,13 +1377,14 @@ func NewPixbufInstanceFromFileAtScale(filename string, width int, height int, pr
 // and image at the requested size, regardless of aspect ratio, use
 // [ctor@GdkPixbuf.Pixbuf.new_from_file_at_scale].
 func NewPixbufInstanceFromFileAtSize(filename string, width int, height int) (Pixbuf, error) {
-	var carg1 *C.gchar     // in, casted
-	var carg2 C.int        // in, casted
-	var carg3 C.int        // in, casted
-	var cret  *C.GdkPixbuf // return, full, class
-	var _cerr *C.GError    // out, full, record, nullable
+	var carg1 *C.gchar     // in, none, string
+	var carg2 C.int        // in, none, casted
+	var carg3 C.int        // in, none, casted
+	var cret  *C.GdkPixbuf // return, full, converted
+	var _cerr *C.GError    // out, full, converted, nullable
 
-	carg1 = *C.gchar(filename)
+	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(filename)))
+	defer C.free(unsafe.Pointer(carg1))
 	carg2 = C.int(width)
 	carg3 = C.int(height)
 
@@ -1423,7 +1398,7 @@ func NewPixbufInstanceFromFileAtSize(filename string, width int, height int) (Pi
 
 	ret = UnsafePixbufFromGlibFull(unsafe.Pointer(cret))
 	if _cerr != nil {
-		_goerr = glib.UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
+		_goerr = UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
 	}
 
 	return ret, _goerr
@@ -1433,7 +1408,7 @@ func NewPixbufInstanceFromFileAtSize(filename string, width int, height int) (Pi
 // 
 // The function takes the following parameters:
 // 
-// 	- data []uint8: Byte data containing a
+// 	- data array: Byte data containing a
 //   serialized `GdkPixdata` structure 
 // 	- copyPixels bool: Whether to copy the pixel data, or use direct pointers
 //   `data` for the resulting pixbuf 
@@ -1478,14 +1453,14 @@ func NewPixbufInstanceFromFileAtSize(filename string, width int, height int) (Pi
 // addition.
 //
 // Deprecated: (since 2.32.0) Use `GResource` instead.
-func NewPixbufInstanceFromInline(data []uint8, copyPixels bool) (Pixbuf, error) {
+func NewPixbufInstanceFromInline(data array, copyPixels bool) (Pixbuf, error) {
 	var carg1 C.int        // implicit
-	var carg2 *C.guint8    // in, transfer: none, scope: call, implicit: false, skip: false, optional: false, nullable: false, caller-allocates: false, has closure: false, has destroy: false
+	var carg2 array        // in, transfer: none, scope: call, implicit: false, skip: false, optional: false, nullable: false, caller-allocates: false, has closure: false, has destroy: false
 	var carg3 C.gboolean   // in
-	var cret  *C.GdkPixbuf // return, full, class
-	var _cerr *C.GError    // out, full, record, nullable
+	var cret  *C.GdkPixbuf // return, full, converted
+	var _cerr *C.GError    // out, full, converted, nullable
 
-	panic("unimplemented conversion of *typesystem.Array (guint8*)")
+	panic("unimplemented conversion of array (array)")
 	if copyPixels {
 		carg3 = C.TRUE
 	}
@@ -1499,7 +1474,7 @@ func NewPixbufInstanceFromInline(data []uint8, copyPixels bool) (Pixbuf, error) 
 
 	ret = UnsafePixbufFromGlibFull(unsafe.Pointer(cret))
 	if _cerr != nil {
-		_goerr = glib.UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
+		_goerr = UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
 	}
 
 	return ret, _goerr
@@ -1522,8 +1497,8 @@ func NewPixbufInstanceFromInline(data []uint8, copyPixels bool) (Pixbuf, error) 
 // @error will be set.
 func NewPixbufInstanceFromResource(resourcePath string) (Pixbuf, error) {
 	var carg1 *C.gchar     // in, none, string
-	var cret  *C.GdkPixbuf // return, full, class
-	var _cerr *C.GError    // out, full, record, nullable
+	var cret  *C.GdkPixbuf // return, full, converted
+	var _cerr *C.GError    // out, full, converted, nullable
 
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(resourcePath)))
 	defer C.free(unsafe.Pointer(carg1))
@@ -1536,7 +1511,7 @@ func NewPixbufInstanceFromResource(resourcePath string) (Pixbuf, error) {
 
 	ret = UnsafePixbufFromGlibFull(unsafe.Pointer(cret))
 	if _cerr != nil {
-		_goerr = glib.UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
+		_goerr = UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
 	}
 
 	return ret, _goerr
@@ -1571,11 +1546,11 @@ func NewPixbufInstanceFromResource(resourcePath string) (Pixbuf, error) {
 // The stream is not closed.
 func NewPixbufInstanceFromResourceAtScale(resourcePath string, width int, height int, preserveAspectRatio bool) (Pixbuf, error) {
 	var carg1 *C.gchar     // in, none, string
-	var carg2 C.int        // in, casted
-	var carg3 C.int        // in, casted
+	var carg2 C.int        // in, none, casted
+	var carg3 C.int        // in, none, casted
 	var carg4 C.gboolean   // in
-	var cret  *C.GdkPixbuf // return, full, class
-	var _cerr *C.GError    // out, full, record, nullable
+	var cret  *C.GdkPixbuf // return, full, converted
+	var _cerr *C.GError    // out, full, converted, nullable
 
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(resourcePath)))
 	defer C.free(unsafe.Pointer(carg1))
@@ -1596,7 +1571,7 @@ func NewPixbufInstanceFromResourceAtScale(resourcePath string, width int, height
 
 	ret = UnsafePixbufFromGlibFull(unsafe.Pointer(cret))
 	if _cerr != nil {
-		_goerr = glib.UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
+		_goerr = UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
 	}
 
 	return ret, _goerr
@@ -1607,7 +1582,7 @@ func NewPixbufInstanceFromResourceAtScale(resourcePath string, width int, height
 // The function takes the following parameters:
 // 
 // 	- stream gio.InputStream: a `GInputStream` to load the pixbuf from 
-// 	- cancellable gio.Cancellable (nullable): optional `GCancellable` object, `NULL` to ignore 
+// 	- cancellable gio. (nullable): optional `GCancellable` object, `NULL` to ignore 
 // 
 // The function returns the following values:
 // 
@@ -1626,15 +1601,15 @@ func NewPixbufInstanceFromResourceAtScale(resourcePath string, width int, height
 // `G_IO_ERROR` domains.
 // 
 // The stream is not closed.
-func NewPixbufInstanceFromStream(stream gio.InputStream, cancellable gio.Cancellable) (Pixbuf, error) {
-	var carg1 *C.GInputStream // in, none, class
-	var carg2 *C.GCancellable // in, none, class, nullable
-	var cret  *C.GdkPixbuf    // return, full, class
-	var _cerr *C.GError       // out, full, record, nullable
+func NewPixbufInstanceFromStream(stream gio.InputStream, cancellable gio.) (Pixbuf, error) {
+	var carg1 *C.GInputStream // in, none, converted
+	var carg2 *C.Cancellable  // in, none, converted, nullable
+	var cret  *C.GdkPixbuf    // return, full, converted
+	var _cerr *C.GError       // out, full, converted, nullable
 
-	carg1 = (*C.GInputStream)(gio.UnsafeInputStreamToGlibNone(stream))
+	carg1 = (*C.GInputStream)(UnsafeInputStreamToGlibNone(stream))
 	if cancellable != nil {
-		carg2 = (*C.GCancellable)(gio.UnsafeCancellableToGlibNone(cancellable))
+		carg2 = (*C.Cancellable)(UnsafeCancellableToGlibNone(cancellable))
 	}
 
 	cret = C.gdk_pixbuf_new_from_stream(carg1, carg2, &_cerr)
@@ -1646,7 +1621,7 @@ func NewPixbufInstanceFromStream(stream gio.InputStream, cancellable gio.Cancell
 
 	ret = UnsafePixbufFromGlibFull(unsafe.Pointer(cret))
 	if _cerr != nil {
-		_goerr = glib.UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
+		_goerr = UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
 	}
 
 	return ret, _goerr
@@ -1660,7 +1635,7 @@ func NewPixbufInstanceFromStream(stream gio.InputStream, cancellable gio.Cancell
 // 	- width int: The width the image should have or -1 to not constrain the width 
 // 	- height int: The height the image should have or -1 to not constrain the height 
 // 	- preserveAspectRatio bool: `TRUE` to preserve the image's aspect ratio 
-// 	- cancellable gio.Cancellable (nullable): optional `GCancellable` object, `NULL` to ignore 
+// 	- cancellable gio. (nullable): optional `GCancellable` object, `NULL` to ignore 
 // 
 // The function returns the following values:
 // 
@@ -1688,23 +1663,23 @@ func NewPixbufInstanceFromStream(stream gio.InputStream, cancellable gio.Cancell
 // scale the image at all in that dimension.
 // 
 // The stream is not closed.
-func NewPixbufInstanceFromStreamAtScale(stream gio.InputStream, width int, height int, preserveAspectRatio bool, cancellable gio.Cancellable) (Pixbuf, error) {
-	var carg1 *C.GInputStream // in, none, class
-	var carg2 C.int           // in, casted
-	var carg3 C.int           // in, casted
+func NewPixbufInstanceFromStreamAtScale(stream gio.InputStream, width int, height int, preserveAspectRatio bool, cancellable gio.) (Pixbuf, error) {
+	var carg1 *C.GInputStream // in, none, converted
+	var carg2 C.int           // in, none, casted
+	var carg3 C.int           // in, none, casted
 	var carg4 C.gboolean      // in
-	var carg5 *C.GCancellable // in, none, class, nullable
-	var cret  *C.GdkPixbuf    // return, full, class
-	var _cerr *C.GError       // out, full, record, nullable
+	var carg5 *C.Cancellable  // in, none, converted, nullable
+	var cret  *C.GdkPixbuf    // return, full, converted
+	var _cerr *C.GError       // out, full, converted, nullable
 
-	carg1 = (*C.GInputStream)(gio.UnsafeInputStreamToGlibNone(stream))
+	carg1 = (*C.GInputStream)(UnsafeInputStreamToGlibNone(stream))
 	carg2 = C.int(width)
 	carg3 = C.int(height)
 	if preserveAspectRatio {
 		carg4 = C.TRUE
 	}
 	if cancellable != nil {
-		carg5 = (*C.GCancellable)(gio.UnsafeCancellableToGlibNone(cancellable))
+		carg5 = (*C.Cancellable)(UnsafeCancellableToGlibNone(cancellable))
 	}
 
 	cret = C.gdk_pixbuf_new_from_stream_at_scale(carg1, carg2, carg3, carg4, carg5, &_cerr)
@@ -1719,7 +1694,7 @@ func NewPixbufInstanceFromStreamAtScale(stream gio.InputStream, width int, heigh
 
 	ret = UnsafePixbufFromGlibFull(unsafe.Pointer(cret))
 	if _cerr != nil {
-		_goerr = glib.UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
+		_goerr = UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
 	}
 
 	return ret, _goerr
@@ -1739,11 +1714,11 @@ func NewPixbufInstanceFromStreamAtScale(stream gio.InputStream, width int, heigh
 // Finishes an asynchronous pixbuf creation operation started with
 // gdk_pixbuf_new_from_stream_async().
 func NewPixbufInstanceFromStreamFinish(asyncResult gio.AsyncResult) (Pixbuf, error) {
-	var carg1 *C.GAsyncResult // in, none, interface
-	var cret  *C.GdkPixbuf    // return, full, class
-	var _cerr *C.GError       // out, full, record, nullable
+	var carg1 *C.GAsyncResult // in, none, converted
+	var cret  *C.GdkPixbuf    // return, full, converted
+	var _cerr *C.GError       // out, full, converted, nullable
 
-	carg1 = (*C.GAsyncResult)(gio.UnsafeAsyncResultToGlibNone(asyncResult))
+	carg1 = (*C.GAsyncResult)(UnsafeAsyncResultToGlibNone(asyncResult))
 
 	cret = C.gdk_pixbuf_new_from_stream_finish(carg1, &_cerr)
 	runtime.KeepAlive(asyncResult)
@@ -1753,7 +1728,7 @@ func NewPixbufInstanceFromStreamFinish(asyncResult gio.AsyncResult) (Pixbuf, err
 
 	ret = UnsafePixbufFromGlibFull(unsafe.Pointer(cret))
 	if _cerr != nil {
-		_goerr = glib.UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
+		_goerr = UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
 	}
 
 	return ret, _goerr
@@ -1763,7 +1738,7 @@ func NewPixbufInstanceFromStreamFinish(asyncResult gio.AsyncResult) (Pixbuf, err
 // 
 // The function takes the following parameters:
 // 
-// 	- data []string: Pointer to inline XPM data. 
+// 	- data array: Pointer to inline XPM data. 
 // 
 // The function returns the following values:
 // 
@@ -1773,11 +1748,11 @@ func NewPixbufInstanceFromStreamFinish(asyncResult gio.AsyncResult) (Pixbuf, err
 // 
 // This data is commonly the result of including an XPM file into a
 // program's C source.
-func NewPixbufInstanceFromXPMData(data []string) Pixbuf {
-	var carg1 **C.gchar    // in, transfer: none, scope: call, implicit: false, skip: false, optional: false, nullable: false, caller-allocates: false, has closure: false, has destroy: false
-	var cret  *C.GdkPixbuf // return, full, class
+func NewPixbufInstanceFromXPMData(data array) Pixbuf {
+	var carg1 array        // in, transfer: none, scope: call, implicit: false, skip: false, optional: false, nullable: false, caller-allocates: false, has closure: false, has destroy: false
+	var cret  *C.GdkPixbuf // return, full, converted
 
-	panic("unimplemented conversion of *typesystem.Array (gchar**)")
+	panic("unimplemented conversion of array (array)")
 
 	cret = C.gdk_pixbuf_new_from_xpm_data(carg1)
 	runtime.KeepAlive(data)
@@ -1809,12 +1784,12 @@ func NewPixbufInstanceFromXPMData(data []string) Pixbuf {
 // This function is useful for front-ends and backends that want to check
 // image values without needing to create a `GdkPixbuf`.
 func CalculateRowstride(colorspace Colorspace, hasAlpha bool, bitsPerSample int, width int, height int) int {
-	var carg1 C.GdkColorspace // in, casted
+	var carg1 C.GdkColorspace // in, none, casted
 	var carg2 C.gboolean      // in
-	var carg3 C.int           // in, casted
-	var carg4 C.int           // in, casted
-	var carg5 C.int           // in, casted
-	var cret  C.int           // return, casted
+	var carg3 C.int           // in, none, casted
+	var carg4 C.int           // in, none, casted
+	var carg5 C.int           // in, none, casted
+	var cret  C.int           // return, none, casted
 
 	carg1 = C.GdkColorspace(colorspace)
 	if hasAlpha {
@@ -1848,23 +1823,24 @@ func CalculateRowstride(colorspace Colorspace, hasAlpha bool, bitsPerSample int,
 // 
 // 	- width int: Return location for the width of the image 
 // 	- height int: Return location for the height of the image 
-// 	- ret *PixbufFormat 
+// 	- ret PixbufFormat 
 //
 // Parses an image file far enough to determine its format and size.
-func GetFileInfo(filename string) (int, int, *PixbufFormat) {
-	var carg1 *C.gchar           // in, casted
-	var carg2 C.int              // out, casted
-	var carg3 C.int              // out, casted
-	var cret  *C.GdkPixbufFormat // return, none, record
+func GetFileInfo(filename string) (int, int, PixbufFormat) {
+	var carg1 *C.gchar           // in, none, string
+	var carg2 C.int              // out, full, casted
+	var carg3 C.int              // out, full, casted
+	var cret  *C.GdkPixbufFormat // return, none, converted
 
-	carg1 = *C.gchar(filename)
+	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(filename)))
+	defer C.free(unsafe.Pointer(carg1))
 
 	cret = C.gdk_pixbuf_get_file_info(carg1, &carg2, &carg3)
 	runtime.KeepAlive(filename)
 
 	var width  int
 	var height int
-	var ret    *PixbufFormat
+	var ret    PixbufFormat
 
 	width = int(carg2)
 	height = int(carg3)
@@ -1878,7 +1854,7 @@ func GetFileInfo(filename string) (int, int, *PixbufFormat) {
 // The function takes the following parameters:
 // 
 // 	- filename string: The name of the file to identify 
-// 	- cancellable gio.Cancellable (nullable): optional `GCancellable` object, `NULL` to ignore 
+// 	- cancellable gio. (nullable): optional `GCancellable` object, `NULL` to ignore 
 // 	- callback gio.AsyncReadyCallback (nullable): a `GAsyncReadyCallback` to call when the file info is available 
 //
 // Asynchronously parses an image file far enough to determine its
@@ -1890,15 +1866,16 @@ func GetFileInfo(filename string) (int, int, *PixbufFormat) {
 // When the operation is finished, @callback will be called in the
 // main thread. You can then call gdk_pixbuf_get_file_info_finish() to
 // get the result of the operation.
-func GetFileInfoAsync(filename string, cancellable gio.Cancellable, callback gio.AsyncReadyCallback) {
-	var carg1 *C.gchar              // in, casted
-	var carg2 *C.GCancellable       // in, none, class, nullable
+func GetFileInfoAsync(filename string, cancellable gio., callback gio.AsyncReadyCallback) {
+	var carg1 *C.gchar              // in, none, string
+	var carg2 *C.Cancellable        // in, none, converted, nullable
 	var carg3 C.GAsyncReadyCallback // callback, scope: async, closure: carg4, nullable
 	var carg4 C.gpointer            // implicit
 
-	carg1 = *C.gchar(filename)
+	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(filename)))
+	defer C.free(unsafe.Pointer(carg1))
 	if cancellable != nil {
-		carg2 = (*C.GCancellable)(gio.UnsafeCancellableToGlibNone(cancellable))
+		carg2 = (*C.Cancellable)(UnsafeCancellableToGlibNone(cancellable))
 	}
 	if callback != nil {
 		carg3 = (*[0]byte)(C._gotk4_gio2_AsyncReadyCallback)
@@ -1921,55 +1898,36 @@ func GetFileInfoAsync(filename string, cancellable gio.Cancellable, callback gio
 // 
 // 	- width int: Return location for the width of the image, or `NULL` 
 // 	- height int: Return location for the height of the image, or `NULL` 
-// 	- ret *PixbufFormat 
+// 	- ret PixbufFormat 
 // 	- _goerr error (nullable): an error 
 //
 // Finishes an asynchronous pixbuf parsing operation started with
 // gdk_pixbuf_get_file_info_async().
-func GetFileInfoFinish(asyncResult gio.AsyncResult) (int, int, *PixbufFormat, error) {
-	var carg1 *C.GAsyncResult    // in, none, interface
-	var carg2 C.int              // out, casted
-	var carg3 C.int              // out, casted
-	var cret  *C.GdkPixbufFormat // return, none, record
-	var _cerr *C.GError          // out, full, record, nullable
+func GetFileInfoFinish(asyncResult gio.AsyncResult) (int, int, PixbufFormat, error) {
+	var carg1 *C.GAsyncResult    // in, none, converted
+	var carg2 C.int              // out, full, casted
+	var carg3 C.int              // out, full, casted
+	var cret  *C.GdkPixbufFormat // return, none, converted
+	var _cerr *C.GError          // out, full, converted, nullable
 
-	carg1 = (*C.GAsyncResult)(gio.UnsafeAsyncResultToGlibNone(asyncResult))
+	carg1 = (*C.GAsyncResult)(UnsafeAsyncResultToGlibNone(asyncResult))
 
 	cret = C.gdk_pixbuf_get_file_info_finish(carg1, &carg2, &carg3, &_cerr)
 	runtime.KeepAlive(asyncResult)
 
 	var width  int
 	var height int
-	var ret    *PixbufFormat
+	var ret    PixbufFormat
 	var _goerr error
 
 	width = int(carg2)
 	height = int(carg3)
 	ret = UnsafePixbufFormatFromGlibNone(unsafe.Pointer(cret))
 	if _cerr != nil {
-		_goerr = glib.UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
+		_goerr = UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
 	}
 
 	return width, height, ret, _goerr
-}
-
-// GetFormats wraps gdk_pixbuf_get_formats
-// The function returns the following values:
-// 
-// 	- ret *glib.SList 
-//
-// Obtains the available information about the image formats supported
-// by GdkPixbuf.
-func GetFormats() *glib.SList {
-	var cret *C.GSList // return, container inner types: (GdkPixbufFormat), transfer: container, scope: , implicit: false, skip: false, optional: false, nullable: false, caller-allocates: false, has closure: false, has destroy: false
-
-	cret = C.gdk_pixbuf_get_formats()
-
-	var ret *glib.SList
-
-	panic("unimplemented conversion of container *typesystem.PointerType (GSList*)")
-
-	return ret
 }
 
 // InitModules wraps gdk_pixbuf_init_modules
@@ -1999,7 +1957,7 @@ func GetFormats() *glib.SList {
 func InitModules(path string) (bool, error) {
 	var carg1 *C.gchar   // in, none, string
 	var cret  C.gboolean // return
-	var _cerr *C.GError  // out, full, record, nullable
+	var _cerr *C.GError  // out, full, converted, nullable
 
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(path)))
 	defer C.free(unsafe.Pointer(carg1))
@@ -2014,7 +1972,7 @@ func InitModules(path string) (bool, error) {
 		ret = true
 	}
 	if _cerr != nil {
-		_goerr = glib.UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
+		_goerr = UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
 	}
 
 	return ret, _goerr
@@ -2025,7 +1983,7 @@ func InitModules(path string) (bool, error) {
 // The function takes the following parameters:
 // 
 // 	- stream gio.InputStream: a `GInputStream` from which to load the pixbuf 
-// 	- cancellable gio.Cancellable (nullable): optional `GCancellable` object, `NULL` to ignore 
+// 	- cancellable gio. (nullable): optional `GCancellable` object, `NULL` to ignore 
 // 	- callback gio.AsyncReadyCallback (nullable): a `GAsyncReadyCallback` to call when the pixbuf is loaded 
 //
 // Creates a new pixbuf by asynchronously loading an image from an input stream.
@@ -2036,15 +1994,15 @@ func InitModules(path string) (bool, error) {
 // When the operation is finished, @callback will be called in the main thread.
 // You can then call gdk_pixbuf_new_from_stream_finish() to get the result of
 // the operation.
-func NewFromStreamAsync(stream gio.InputStream, cancellable gio.Cancellable, callback gio.AsyncReadyCallback) {
-	var carg1 *C.GInputStream       // in, none, class
-	var carg2 *C.GCancellable       // in, none, class, nullable
+func NewFromStreamAsync(stream gio.InputStream, cancellable gio., callback gio.AsyncReadyCallback) {
+	var carg1 *C.GInputStream       // in, none, converted
+	var carg2 *C.Cancellable        // in, none, converted, nullable
 	var carg3 C.GAsyncReadyCallback // callback, scope: async, closure: carg4, nullable
 	var carg4 C.gpointer            // implicit
 
-	carg1 = (*C.GInputStream)(gio.UnsafeInputStreamToGlibNone(stream))
+	carg1 = (*C.GInputStream)(UnsafeInputStreamToGlibNone(stream))
 	if cancellable != nil {
-		carg2 = (*C.GCancellable)(gio.UnsafeCancellableToGlibNone(cancellable))
+		carg2 = (*C.Cancellable)(UnsafeCancellableToGlibNone(cancellable))
 	}
 	if callback != nil {
 		carg3 = (*[0]byte)(C._gotk4_gio2_AsyncReadyCallback)
@@ -2065,7 +2023,7 @@ func NewFromStreamAsync(stream gio.InputStream, cancellable gio.Cancellable, cal
 // 	- width int: the width the image should have or -1 to not constrain the width 
 // 	- height int: the height the image should have or -1 to not constrain the height 
 // 	- preserveAspectRatio bool: `TRUE` to preserve the image's aspect ratio 
-// 	- cancellable gio.Cancellable (nullable): optional `GCancellable` object, `NULL` to ignore 
+// 	- cancellable gio. (nullable): optional `GCancellable` object, `NULL` to ignore 
 // 	- callback gio.AsyncReadyCallback (nullable): a `GAsyncReadyCallback` to call when the pixbuf is loaded 
 //
 // Creates a new pixbuf by asynchronously loading an image from an input stream.
@@ -2075,23 +2033,23 @@ func NewFromStreamAsync(stream gio.InputStream, cancellable gio.Cancellable, cal
 // 
 // When the operation is finished, @callback will be called in the main thread.
 // You can then call gdk_pixbuf_new_from_stream_finish() to get the result of the operation.
-func NewFromStreamAtScaleAsync(stream gio.InputStream, width int, height int, preserveAspectRatio bool, cancellable gio.Cancellable, callback gio.AsyncReadyCallback) {
-	var carg1 *C.GInputStream       // in, none, class
-	var carg2 C.int                 // in, casted
-	var carg3 C.int                 // in, casted
+func NewFromStreamAtScaleAsync(stream gio.InputStream, width int, height int, preserveAspectRatio bool, cancellable gio., callback gio.AsyncReadyCallback) {
+	var carg1 *C.GInputStream       // in, none, converted
+	var carg2 C.int                 // in, none, casted
+	var carg3 C.int                 // in, none, casted
 	var carg4 C.gboolean            // in
-	var carg5 *C.GCancellable       // in, none, class, nullable
+	var carg5 *C.Cancellable        // in, none, converted, nullable
 	var carg6 C.GAsyncReadyCallback // callback, scope: async, closure: carg7, nullable
 	var carg7 C.gpointer            // implicit
 
-	carg1 = (*C.GInputStream)(gio.UnsafeInputStreamToGlibNone(stream))
+	carg1 = (*C.GInputStream)(UnsafeInputStreamToGlibNone(stream))
 	carg2 = C.int(width)
 	carg3 = C.int(height)
 	if preserveAspectRatio {
 		carg4 = C.TRUE
 	}
 	if cancellable != nil {
-		carg5 = (*C.GCancellable)(gio.UnsafeCancellableToGlibNone(cancellable))
+		carg5 = (*C.Cancellable)(UnsafeCancellableToGlibNone(cancellable))
 	}
 	if callback != nil {
 		carg6 = (*[0]byte)(C._gotk4_gio2_AsyncReadyCallback)
@@ -2121,11 +2079,11 @@ func NewFromStreamAtScaleAsync(stream gio.InputStream, width int, height int, pr
 // Finishes an asynchronous pixbuf save operation started with
 // gdk_pixbuf_save_to_stream_async().
 func SaveToStreamFinish(asyncResult gio.AsyncResult) (bool, error) {
-	var carg1 *C.GAsyncResult // in, none, interface
+	var carg1 *C.GAsyncResult // in, none, converted
 	var cret  C.gboolean      // return
-	var _cerr *C.GError       // out, full, record, nullable
+	var _cerr *C.GError       // out, full, converted, nullable
 
-	carg1 = (*C.GAsyncResult)(gio.UnsafeAsyncResultToGlibNone(asyncResult))
+	carg1 = (*C.GAsyncResult)(UnsafeAsyncResultToGlibNone(asyncResult))
 
 	cret = C.gdk_pixbuf_save_to_stream_finish(carg1, &_cerr)
 	runtime.KeepAlive(asyncResult)
@@ -2137,7 +2095,7 @@ func SaveToStreamFinish(asyncResult gio.AsyncResult) (bool, error) {
 		ret = true
 	}
 	if _cerr != nil {
-		_goerr = glib.UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
+		_goerr = UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
 	}
 
 	return ret, _goerr
@@ -2170,12 +2128,12 @@ func SaveToStreamFinish(asyncResult gio.AsyncResult) (bool, error) {
 // If `substitute_color` is `FALSE`, then the (`r`, `g`, `b`) arguments
 // will be ignored.
 func (pixbuf *PixbufInstance) AddAlpha(substituteColor bool, r uint8, g uint8, b uint8) Pixbuf {
-	var carg0 *C.GdkPixbuf // in, none, class
+	var carg0 *C.GdkPixbuf // in, none, converted
 	var carg1 C.gboolean   // in
-	var carg2 C.guint8     // in, casted
-	var carg3 C.guint8     // in, casted
-	var carg4 C.guint8     // in, casted
-	var cret  *C.GdkPixbuf // return, full, class
+	var carg2 C.guint8     // in, none, casted
+	var carg3 C.guint8     // in, none, casted
+	var carg4 C.guint8     // in, none, casted
+	var cret  *C.GdkPixbuf // return, full, converted
 
 	carg0 = (*C.GdkPixbuf)(UnsafePixbufToGlibNone(pixbuf))
 	if substituteColor {
@@ -2215,8 +2173,8 @@ func (pixbuf *PixbufInstance) AddAlpha(substituteColor bool, r uint8, g uint8, b
 // If an orientation option/tag is present, the appropriate transform
 // will be performed so that the pixbuf is oriented correctly.
 func (src *PixbufInstance) ApplyEmbeddedOrientation() Pixbuf {
-	var carg0 *C.GdkPixbuf // in, none, class
-	var cret  *C.GdkPixbuf // return, full, class
+	var carg0 *C.GdkPixbuf // in, none, converted
+	var cret  *C.GdkPixbuf // return, full, converted
 
 	carg0 = (*C.GdkPixbuf)(UnsafePixbufToGlibNone(src))
 
@@ -2260,18 +2218,18 @@ func (src *PixbufInstance) ApplyEmbeddedOrientation() Pixbuf {
 // 
 // ![](composite.png)
 func (src *PixbufInstance) Composite(dest Pixbuf, destX int, destY int, destWidth int, destHeight int, offsetX float64, offsetY float64, scaleX float64, scaleY float64, interpType InterpType, overallAlpha int) {
-	var carg0  *C.GdkPixbuf    // in, none, class
-	var carg1  *C.GdkPixbuf    // in, none, class
-	var carg2  C.int           // in, casted
-	var carg3  C.int           // in, casted
-	var carg4  C.int           // in, casted
-	var carg5  C.int           // in, casted
-	var carg6  C.gdouble       // in, casted
-	var carg7  C.gdouble       // in, casted
-	var carg8  C.gdouble       // in, casted
-	var carg9  C.gdouble       // in, casted
-	var carg10 C.GdkInterpType // in, casted
-	var carg11 C.int           // in, casted
+	var carg0  *C.GdkPixbuf    // in, none, converted
+	var carg1  *C.GdkPixbuf    // in, none, converted
+	var carg2  C.int           // in, none, casted
+	var carg3  C.int           // in, none, casted
+	var carg4  C.int           // in, none, casted
+	var carg5  C.int           // in, none, casted
+	var carg6  C.gdouble       // in, none, casted
+	var carg7  C.gdouble       // in, none, casted
+	var carg8  C.gdouble       // in, none, casted
+	var carg9  C.gdouble       // in, none, casted
+	var carg10 C.GdkInterpType // in, none, casted
+	var carg11 C.int           // in, none, casted
 
 	carg0 = (*C.GdkPixbuf)(UnsafePixbufToGlibNone(src))
 	carg1 = (*C.GdkPixbuf)(UnsafePixbufToGlibNone(dest))
@@ -2335,23 +2293,23 @@ func (src *PixbufInstance) Composite(dest Pixbuf, destX int, destY int, destWidt
 // See gdk_pixbuf_composite_color_simple() for a simpler variant of this
 // function suitable for many tasks.
 func (src *PixbufInstance) CompositeColor(dest Pixbuf, destX int, destY int, destWidth int, destHeight int, offsetX float64, offsetY float64, scaleX float64, scaleY float64, interpType InterpType, overallAlpha int, checkX int, checkY int, checkSize int, color1 uint32, color2 uint32) {
-	var carg0  *C.GdkPixbuf    // in, none, class
-	var carg1  *C.GdkPixbuf    // in, none, class
-	var carg2  C.int           // in, casted
-	var carg3  C.int           // in, casted
-	var carg4  C.int           // in, casted
-	var carg5  C.int           // in, casted
-	var carg6  C.gdouble       // in, casted
-	var carg7  C.gdouble       // in, casted
-	var carg8  C.gdouble       // in, casted
-	var carg9  C.gdouble       // in, casted
-	var carg10 C.GdkInterpType // in, casted
-	var carg11 C.int           // in, casted
-	var carg12 C.int           // in, casted
-	var carg13 C.int           // in, casted
-	var carg14 C.int           // in, casted
-	var carg15 C.guint32       // in, casted
-	var carg16 C.guint32       // in, casted
+	var carg0  *C.GdkPixbuf    // in, none, converted
+	var carg1  *C.GdkPixbuf    // in, none, converted
+	var carg2  C.int           // in, none, casted
+	var carg3  C.int           // in, none, casted
+	var carg4  C.int           // in, none, casted
+	var carg5  C.int           // in, none, casted
+	var carg6  C.gdouble       // in, none, casted
+	var carg7  C.gdouble       // in, none, casted
+	var carg8  C.gdouble       // in, none, casted
+	var carg9  C.gdouble       // in, none, casted
+	var carg10 C.GdkInterpType // in, none, casted
+	var carg11 C.int           // in, none, casted
+	var carg12 C.int           // in, none, casted
+	var carg13 C.int           // in, none, casted
+	var carg14 C.int           // in, none, casted
+	var carg15 C.guint32       // in, none, casted
+	var carg16 C.guint32       // in, none, casted
 
 	carg0 = (*C.GdkPixbuf)(UnsafePixbufToGlibNone(src))
 	carg1 = (*C.GdkPixbuf)(UnsafePixbufToGlibNone(dest))
@@ -2411,15 +2369,15 @@ func (src *PixbufInstance) CompositeColor(dest Pixbuf, destX int, destY int, des
 // and alpha blending the result with a checkboard of colors `color1`
 // and `color2`.
 func (src *PixbufInstance) CompositeColorSimple(destWidth int, destHeight int, interpType InterpType, overallAlpha int, checkSize int, color1 uint32, color2 uint32) Pixbuf {
-	var carg0 *C.GdkPixbuf    // in, none, class
-	var carg1 C.int           // in, casted
-	var carg2 C.int           // in, casted
-	var carg3 C.GdkInterpType // in, casted
-	var carg4 C.int           // in, casted
-	var carg5 C.int           // in, casted
-	var carg6 C.guint32       // in, casted
-	var carg7 C.guint32       // in, casted
-	var cret  *C.GdkPixbuf    // return, full, class
+	var carg0 *C.GdkPixbuf    // in, none, converted
+	var carg1 C.int           // in, none, casted
+	var carg2 C.int           // in, none, casted
+	var carg3 C.GdkInterpType // in, none, casted
+	var carg4 C.int           // in, none, casted
+	var carg5 C.int           // in, none, casted
+	var carg6 C.guint32       // in, none, casted
+	var carg7 C.guint32       // in, none, casted
+	var cret  *C.GdkPixbuf    // return, full, converted
 
 	carg0 = (*C.GdkPixbuf)(UnsafePixbufToGlibNone(src))
 	carg1 = C.int(destWidth)
@@ -2458,8 +2416,8 @@ func (src *PixbufInstance) CompositeColorSimple(destWidth int, destHeight int, i
 // Note that this does not copy the options set on the original `GdkPixbuf`,
 // use gdk_pixbuf_copy_options() for this.
 func (pixbuf *PixbufInstance) Copy() Pixbuf {
-	var carg0 *C.GdkPixbuf // in, none, class
-	var cret  *C.GdkPixbuf // return, full, class
+	var carg0 *C.GdkPixbuf // in, none, converted
+	var cret  *C.GdkPixbuf // return, full, converted
 
 	carg0 = (*C.GdkPixbuf)(UnsafePixbufToGlibNone(pixbuf))
 
@@ -2493,14 +2451,14 @@ func (pixbuf *PixbufInstance) Copy() Pixbuf {
 // same pixbuf, it will be overwritten during the copy operation.
 // Therefore, you can not use this function to scroll a pixbuf.
 func (srcPixbuf *PixbufInstance) CopyArea(srcX int, srcY int, width int, height int, destPixbuf Pixbuf, destX int, destY int) {
-	var carg0 *C.GdkPixbuf // in, none, class
-	var carg1 C.int        // in, casted
-	var carg2 C.int        // in, casted
-	var carg3 C.int        // in, casted
-	var carg4 C.int        // in, casted
-	var carg5 *C.GdkPixbuf // in, none, class
-	var carg6 C.int        // in, casted
-	var carg7 C.int        // in, casted
+	var carg0 *C.GdkPixbuf // in, none, converted
+	var carg1 C.int        // in, none, casted
+	var carg2 C.int        // in, none, casted
+	var carg3 C.int        // in, none, casted
+	var carg4 C.int        // in, none, casted
+	var carg5 *C.GdkPixbuf // in, none, converted
+	var carg6 C.int        // in, none, casted
+	var carg7 C.int        // in, none, casted
 
 	carg0 = (*C.GdkPixbuf)(UnsafePixbufToGlibNone(srcPixbuf))
 	carg1 = C.int(srcX)
@@ -2539,8 +2497,8 @@ func (srcPixbuf *PixbufInstance) CopyArea(srcX int, srcY int, width int, height 
 // a file. However be careful to remove metadata which you've already
 // applied, such as the "orientation" option after rotating the image.
 func (srcPixbuf *PixbufInstance) CopyOptions(destPixbuf Pixbuf) bool {
-	var carg0 *C.GdkPixbuf // in, none, class
-	var carg1 *C.GdkPixbuf // in, none, class
+	var carg0 *C.GdkPixbuf // in, none, converted
+	var carg1 *C.GdkPixbuf // in, none, converted
 	var cret  C.gboolean   // return
 
 	carg0 = (*C.GdkPixbuf)(UnsafePixbufToGlibNone(srcPixbuf))
@@ -2572,8 +2530,8 @@ func (srcPixbuf *PixbufInstance) CopyOptions(destPixbuf Pixbuf) bool {
 // The alpha component will be ignored if the pixbuf doesn't have an alpha
 // channel.
 func (pixbuf *PixbufInstance) Fill(pixel uint32) {
-	var carg0 *C.GdkPixbuf // in, none, class
-	var carg1 C.guint32    // in, casted
+	var carg0 *C.GdkPixbuf // in, none, converted
+	var carg1 C.guint32    // in, none, casted
 
 	carg0 = (*C.GdkPixbuf)(UnsafePixbufToGlibNone(pixbuf))
 	carg1 = C.guint32(pixel)
@@ -2596,9 +2554,9 @@ func (pixbuf *PixbufInstance) Fill(pixel uint32) {
 // Flips a pixbuf horizontally or vertically and returns the
 // result in a new pixbuf.
 func (src *PixbufInstance) Flip(horizontal bool) Pixbuf {
-	var carg0 *C.GdkPixbuf // in, none, class
+	var carg0 *C.GdkPixbuf // in, none, converted
 	var carg1 C.gboolean   // in
-	var cret  *C.GdkPixbuf // return, full, class
+	var cret  *C.GdkPixbuf // return, full, converted
 
 	carg0 = (*C.GdkPixbuf)(UnsafePixbufToGlibNone(src))
 	if horizontal {
@@ -2623,8 +2581,8 @@ func (src *PixbufInstance) Flip(horizontal bool) Pixbuf {
 //
 // Queries the number of bits per color sample in a pixbuf.
 func (pixbuf *PixbufInstance) GetBitsPerSample() int {
-	var carg0 *C.GdkPixbuf // in, none, class
-	var cret  C.int        // return, casted
+	var carg0 *C.GdkPixbuf // in, none, converted
+	var cret  C.int        // return, none, casted
 
 	carg0 = (*C.GdkPixbuf)(UnsafePixbufToGlibNone(pixbuf))
 
@@ -2645,8 +2603,8 @@ func (pixbuf *PixbufInstance) GetBitsPerSample() int {
 //
 // Returns the length of the pixel data, in bytes.
 func (pixbuf *PixbufInstance) GetByteLength() uint {
-	var carg0 *C.GdkPixbuf // in, none, class
-	var cret  C.gsize      // return, casted
+	var carg0 *C.GdkPixbuf // in, none, converted
+	var cret  C.gsize      // return, none, casted
 
 	carg0 = (*C.GdkPixbuf)(UnsafePixbufToGlibNone(pixbuf))
 
@@ -2667,8 +2625,8 @@ func (pixbuf *PixbufInstance) GetByteLength() uint {
 //
 // Queries the color space of a pixbuf.
 func (pixbuf *PixbufInstance) GetColorspace() Colorspace {
-	var carg0 *C.GdkPixbuf    // in, none, class
-	var cret  C.GdkColorspace // return, casted
+	var carg0 *C.GdkPixbuf    // in, none, converted
+	var cret  C.GdkColorspace // return, none, casted
 
 	carg0 = (*C.GdkPixbuf)(UnsafePixbufToGlibNone(pixbuf))
 
@@ -2689,7 +2647,7 @@ func (pixbuf *PixbufInstance) GetColorspace() Colorspace {
 //
 // Queries whether a pixbuf has an alpha channel (opacity information).
 func (pixbuf *PixbufInstance) GetHasAlpha() bool {
-	var carg0 *C.GdkPixbuf // in, none, class
+	var carg0 *C.GdkPixbuf // in, none, converted
 	var cret  C.gboolean   // return
 
 	carg0 = (*C.GdkPixbuf)(UnsafePixbufToGlibNone(pixbuf))
@@ -2713,8 +2671,8 @@ func (pixbuf *PixbufInstance) GetHasAlpha() bool {
 //
 // Queries the height of a pixbuf.
 func (pixbuf *PixbufInstance) GetHeight() int {
-	var carg0 *C.GdkPixbuf // in, none, class
-	var cret  C.int        // return, casted
+	var carg0 *C.GdkPixbuf // in, none, converted
+	var cret  C.int        // return, none, casted
 
 	carg0 = (*C.GdkPixbuf)(UnsafePixbufToGlibNone(pixbuf))
 
@@ -2735,8 +2693,8 @@ func (pixbuf *PixbufInstance) GetHeight() int {
 //
 // Queries the number of channels of a pixbuf.
 func (pixbuf *PixbufInstance) GetNChannels() int {
-	var carg0 *C.GdkPixbuf // in, none, class
-	var cret  C.int        // return, casted
+	var carg0 *C.GdkPixbuf // in, none, converted
+	var cret  C.int        // return, none, casted
 
 	carg0 = (*C.GdkPixbuf)(UnsafePixbufToGlibNone(pixbuf))
 
@@ -2776,7 +2734,7 @@ func (pixbuf *PixbufInstance) GetNChannels() int {
 // Since 2.36.6, the JPEG loader sets the "comment" option with the comment
 // EXIF tag.
 func (pixbuf *PixbufInstance) GetOption(key string) string {
-	var carg0 *C.GdkPixbuf // in, none, class
+	var carg0 *C.GdkPixbuf // in, none, converted
 	var carg1 *C.gchar     // in, none, string
 	var cret  *C.gchar     // return, none, string
 
@@ -2795,35 +2753,11 @@ func (pixbuf *PixbufInstance) GetOption(key string) string {
 	return ret
 }
 
-// GetOptions wraps gdk_pixbuf_get_options
-// The function returns the following values:
-// 
-// 	- ret *glib.HashTable 
-//
-// Returns a `GHashTable` with a list of all the options that may have been
-// attached to the `pixbuf` when it was loaded, or that may have been
-// attached by another function using [method@GdkPixbuf.Pixbuf.set_option].
-func (pixbuf *PixbufInstance) GetOptions() *glib.HashTable {
-	var carg0 *C.GdkPixbuf  // in, none, class
-	var cret  *C.GHashTable // return, container inner types: (gchar*, gchar*), transfer: container, scope: , implicit: false, skip: false, optional: false, nullable: false, caller-allocates: false, has closure: false, has destroy: false
-
-	carg0 = (*C.GdkPixbuf)(UnsafePixbufToGlibNone(pixbuf))
-
-	cret = C.gdk_pixbuf_get_options(carg0)
-	runtime.KeepAlive(pixbuf)
-
-	var ret *glib.HashTable
-
-	panic("unimplemented conversion of container *typesystem.PointerType (GHashTable*)")
-
-	return ret
-}
-
 // GetPixelsWithLength wraps gdk_pixbuf_get_pixels_with_length
 // The function returns the following values:
 // 
 // 	- length uint: The length of the binary data. 
-// 	- ret []uint8 
+// 	- ret array 
 //
 // Queries a pointer to the pixel data of a pixbuf.
 // 
@@ -2832,10 +2766,10 @@ func (pixbuf *PixbufInstance) GetOptions() *glib.HashTable {
 // 
 // Please see the section on [image data](class.Pixbuf.html#image-data) for information
 // about how the pixel data is stored in memory.
-func (pixbuf *PixbufInstance) GetPixelsWithLength() (uint, []uint8) {
-	var carg0 *C.GdkPixbuf // in, none, class
-	var carg1 C.guint      // out, casted
-	var cret  *C.guint8    // return, transfer: none, scope: , implicit: false, skip: false, optional: false, nullable: false, caller-allocates: false, has closure: false, has destroy: false
+func (pixbuf *PixbufInstance) GetPixelsWithLength() (uint, array) {
+	var carg0 *C.GdkPixbuf // in, none, converted
+	var carg1 C.guint      // out, full, casted
+	var cret  array        // return, transfer: none, scope: , implicit: false, skip: false, optional: false, nullable: false, caller-allocates: false, has closure: false, has destroy: false
 
 	carg0 = (*C.GdkPixbuf)(UnsafePixbufToGlibNone(pixbuf))
 
@@ -2843,10 +2777,10 @@ func (pixbuf *PixbufInstance) GetPixelsWithLength() (uint, []uint8) {
 	runtime.KeepAlive(pixbuf)
 
 	var length uint
-	var ret    []uint8
+	var ret    array
 
 	length = uint(carg1)
-	panic("unimplemented conversion of *typesystem.Array (guint8*)")
+	panic("unimplemented conversion of array (array)")
 
 	return length, ret
 }
@@ -2859,8 +2793,8 @@ func (pixbuf *PixbufInstance) GetPixelsWithLength() (uint, []uint8) {
 // Queries the rowstride of a pixbuf, which is the number of bytes between
 // the start of a row and the start of the next row.
 func (pixbuf *PixbufInstance) GetRowstride() int {
-	var carg0 *C.GdkPixbuf // in, none, class
-	var cret  C.int        // return, casted
+	var carg0 *C.GdkPixbuf // in, none, converted
+	var cret  C.int        // return, none, casted
 
 	carg0 = (*C.GdkPixbuf)(UnsafePixbufToGlibNone(pixbuf))
 
@@ -2881,8 +2815,8 @@ func (pixbuf *PixbufInstance) GetRowstride() int {
 //
 // Queries the width of a pixbuf.
 func (pixbuf *PixbufInstance) GetWidth() int {
-	var carg0 *C.GdkPixbuf // in, none, class
-	var cret  C.int        // return, casted
+	var carg0 *C.GdkPixbuf // in, none, converted
+	var cret  C.int        // return, none, casted
 
 	carg0 = (*C.GdkPixbuf)(UnsafePixbufToGlibNone(pixbuf))
 
@@ -2919,12 +2853,12 @@ func (pixbuf *PixbufInstance) GetWidth() int {
 // Note that if `src_pixbuf` is read-only, this function will force it
 // to be mutable.
 func (srcPixbuf *PixbufInstance) NewSubpixbuf(srcX int, srcY int, width int, height int) Pixbuf {
-	var carg0 *C.GdkPixbuf // in, none, class
-	var carg1 C.int        // in, casted
-	var carg2 C.int        // in, casted
-	var carg3 C.int        // in, casted
-	var carg4 C.int        // in, casted
-	var cret  *C.GdkPixbuf // return, full, class
+	var carg0 *C.GdkPixbuf // in, none, converted
+	var carg1 C.int        // in, none, casted
+	var carg2 C.int        // in, none, casted
+	var carg3 C.int        // in, none, casted
+	var carg4 C.int        // in, none, casted
+	var cret  *C.GdkPixbuf // return, full, converted
 
 	carg0 = (*C.GdkPixbuf)(UnsafePixbufToGlibNone(srcPixbuf))
 	carg1 = C.int(srcX)
@@ -2946,53 +2880,27 @@ func (srcPixbuf *PixbufInstance) NewSubpixbuf(srcX int, srcY int, width int, hei
 	return ret
 }
 
-// ReadPixelBytes wraps gdk_pixbuf_read_pixel_bytes
-// The function returns the following values:
-// 
-// 	- ret *glib.Bytes 
-//
-// Provides a #GBytes buffer containing the raw pixel data; the data
-// must not be modified.
-// 
-// This function allows skipping the implicit copy that must be made
-// if gdk_pixbuf_get_pixels() is called on a read-only pixbuf.
-func (pixbuf *PixbufInstance) ReadPixelBytes() *glib.Bytes {
-	var carg0 *C.GdkPixbuf // in, none, class
-	var cret  *C.GBytes    // return, full, record
-
-	carg0 = (*C.GdkPixbuf)(UnsafePixbufToGlibNone(pixbuf))
-
-	cret = C.gdk_pixbuf_read_pixel_bytes(carg0)
-	runtime.KeepAlive(pixbuf)
-
-	var ret *glib.Bytes
-
-	ret = glib.UnsafeBytesFromGlibFull(unsafe.Pointer(cret))
-
-	return ret
-}
-
 // ReadPixels wraps gdk_pixbuf_read_pixels
 // The function returns the following values:
 // 
-// 	- ret *uint8 
+// 	- ret uint8 
 //
 // Provides a read-only pointer to the raw pixel data.
 // 
 // This function allows skipping the implicit copy that must be made
 // if gdk_pixbuf_get_pixels() is called on a read-only pixbuf.
-func (pixbuf *PixbufInstance) ReadPixels() *uint8 {
-	var carg0 *C.GdkPixbuf // in, none, class
-	var cret  *C.guint8    // return, transfer: none, scope: , implicit: false, skip: false, optional: false, nullable: false, caller-allocates: false, has closure: false, has destroy: false
+func (pixbuf *PixbufInstance) ReadPixels() uint8 {
+	var carg0 *C.GdkPixbuf // in, none, converted
+	var cret  *C.guint8    // return, none, casted
 
 	carg0 = (*C.GdkPixbuf)(UnsafePixbufToGlibNone(pixbuf))
 
 	cret = C.gdk_pixbuf_read_pixels(carg0)
 	runtime.KeepAlive(pixbuf)
 
-	var ret *uint8
+	var ret uint8
 
-	panic("unimplemented conversion of *typesystem.PointerType (guint8*)")
+	ret = uint8(cret)
 
 	return ret
 }
@@ -3009,7 +2917,7 @@ func (pixbuf *PixbufInstance) ReadPixels() *uint8 {
 //
 // Removes the key/value pair option attached to a `GdkPixbuf`.
 func (pixbuf *PixbufInstance) RemoveOption(key string) bool {
-	var carg0 *C.GdkPixbuf // in, none, class
+	var carg0 *C.GdkPixbuf // in, none, converted
 	var carg1 *C.gchar     // in, none, string
 	var cret  C.gboolean   // return
 
@@ -3045,9 +2953,9 @@ func (pixbuf *PixbufInstance) RemoveOption(key string) bool {
 // 
 // If `angle` is 0, this function will return a copy of `src`.
 func (src *PixbufInstance) RotateSimple(angle PixbufRotation) Pixbuf {
-	var carg0 *C.GdkPixbuf        // in, none, class
-	var carg1 C.GdkPixbufRotation // in, casted
-	var cret  *C.GdkPixbuf        // return, full, class
+	var carg0 *C.GdkPixbuf        // in, none, converted
+	var carg1 C.GdkPixbufRotation // in, none, casted
+	var cret  *C.GdkPixbuf        // return, full, converted
 
 	carg0 = (*C.GdkPixbuf)(UnsafePixbufToGlibNone(src))
 	carg1 = C.GdkPixbufRotation(angle)
@@ -3086,9 +2994,9 @@ func (src *PixbufInstance) RotateSimple(angle PixbufRotation) Pixbuf {
 // If `pixelate` is `TRUE`, then pixels are faded in a checkerboard pattern to
 // create a pixelated image.
 func (src *PixbufInstance) SaturateAndPixelate(dest Pixbuf, saturation float32, pixelate bool) {
-	var carg0 *C.GdkPixbuf // in, none, class
-	var carg1 *C.GdkPixbuf // in, none, class
-	var carg2 C.gfloat     // in, casted
+	var carg0 *C.GdkPixbuf // in, none, converted
+	var carg1 *C.GdkPixbuf // in, none, converted
+	var carg2 C.gfloat     // in, none, casted
 	var carg3 C.gboolean   // in
 
 	carg0 = (*C.GdkPixbuf)(UnsafePixbufToGlibNone(src))
@@ -3110,12 +3018,12 @@ func (src *PixbufInstance) SaturateAndPixelate(dest Pixbuf, saturation float32, 
 // The function takes the following parameters:
 // 
 // 	- typ string: name of file format. 
-// 	- optionKeys []string (nullable): name of options to set 
-// 	- optionValues []string (nullable): values for named options 
+// 	- optionKeys array (nullable): name of options to set 
+// 	- optionValues array (nullable): values for named options 
 // 
 // The function returns the following values:
 // 
-// 	- buffer []uint8: 
+// 	- buffer array: 
 //   location to receive a pointer to the new buffer. 
 // 	- bufferSize uint: location to receive the size of the new buffer. 
 // 	- ret bool 
@@ -3127,24 +3035,24 @@ func (src *PixbufInstance) SaturateAndPixelate(dest Pixbuf, saturation float32, 
 // "tiff", "png", "ico" or "bmp".
 // 
 // See [method@GdkPixbuf.Pixbuf.save_to_buffer] for more details.
-func (pixbuf *PixbufInstance) SaveToBufferv(typ string, optionKeys []string, optionValues []string) ([]uint8, bool, error) {
-	var carg0 *C.GdkPixbuf // in, none, class
+func (pixbuf *PixbufInstance) SaveToBufferv(typ string, optionKeys array, optionValues array) (array, bool, error) {
+	var carg0 *C.GdkPixbuf // in, none, converted
 	var carg3 *C.gchar     // in, none, string
-	var carg4 **C.gchar    // in, transfer: none, scope: call, implicit: false, skip: false, optional: false, nullable: true, caller-allocates: false, has closure: false, has destroy: false, nullable
-	var carg5 **C.gchar    // in, transfer: none, scope: call, implicit: false, skip: false, optional: false, nullable: true, caller-allocates: false, has closure: false, has destroy: false, nullable
-	var carg1 *C.guint8    // out, transfer: full, scope: call, implicit: false, skip: false, optional: false, nullable: false, caller-allocates: false, has closure: false, has destroy: false
-	var carg2 C.gsize      // out, casted
+	var carg4 array        // in, transfer: none, scope: call, implicit: false, skip: false, optional: false, nullable: true, caller-allocates: false, has closure: false, has destroy: false, nullable
+	var carg5 array        // in, transfer: none, scope: call, implicit: false, skip: false, optional: false, nullable: true, caller-allocates: false, has closure: false, has destroy: false, nullable
+	var carg1 array        // out, transfer: full, scope: call, implicit: false, skip: false, optional: false, nullable: false, caller-allocates: false, has closure: false, has destroy: false
+	var carg2 C.gsize      // out, full, casted
 	var cret  C.gboolean   // return
-	var _cerr *C.GError    // out, full, record, nullable
+	var _cerr *C.GError    // out, full, converted, nullable
 
 	carg0 = (*C.GdkPixbuf)(UnsafePixbufToGlibNone(pixbuf))
 	carg3 = (*C.gchar)(unsafe.Pointer(C.CString(typ)))
 	defer C.free(unsafe.Pointer(carg3))
 	if optionKeys != nil {
-		panic("unimplemented conversion of *typesystem.Array (gchar**)")
+		panic("unimplemented conversion of array (array)")
 	}
 	if optionValues != nil {
-		panic("unimplemented conversion of *typesystem.Array (gchar**)")
+		panic("unimplemented conversion of array (array)")
 	}
 
 	cret = C.gdk_pixbuf_save_to_bufferv(carg0, &carg1, &carg2, carg3, carg4, carg5, &_cerr)
@@ -3153,18 +3061,18 @@ func (pixbuf *PixbufInstance) SaveToBufferv(typ string, optionKeys []string, opt
 	runtime.KeepAlive(optionKeys)
 	runtime.KeepAlive(optionValues)
 
-	var buffer     []uint8
+	var buffer     array
 	var bufferSize uint
 	var ret        bool
 	var _goerr     error
 
-	panic("unimplemented conversion of *typesystem.Array (guint8*)")
+	panic("unimplemented conversion of array (array)")
 	bufferSize = uint(carg2)
 	if cret != 0 {
 		ret = true
 	}
 	if _cerr != nil {
-		_goerr = glib.UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
+		_goerr = UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
 	}
 
 	return buffer, ret, _goerr
@@ -3177,8 +3085,8 @@ func (pixbuf *PixbufInstance) SaveToBufferv(typ string, optionKeys []string, opt
 // 	- saveFunc PixbufSaveFunc: a function that is called to save each block of data that
 //   the save routine generates. 
 // 	- typ string: name of file format. 
-// 	- optionKeys []string (nullable): name of options to set 
-// 	- optionValues []string (nullable): values for named options 
+// 	- optionKeys array (nullable): name of options to set 
+// 	- optionValues array (nullable): values for named options 
 // 
 // The function returns the following values:
 // 
@@ -3193,15 +3101,15 @@ func (pixbuf *PixbufInstance) SaveToBufferv(typ string, optionKeys []string, opt
 // If @error is set, `FALSE` will be returned.
 // 
 // See [method@GdkPixbuf.Pixbuf.save_to_callback] for more details.
-func (pixbuf *PixbufInstance) SaveToCallbackv(saveFunc PixbufSaveFunc, typ string, optionKeys []string, optionValues []string) (bool, error) {
-	var carg0 *C.GdkPixbuf        // in, none, class
+func (pixbuf *PixbufInstance) SaveToCallbackv(saveFunc PixbufSaveFunc, typ string, optionKeys array, optionValues array) (bool, error) {
+	var carg0 *C.GdkPixbuf        // in, none, converted
 	var carg1 C.GdkPixbufSaveFunc // callback, scope: call, closure: carg2
 	var carg2 C.gpointer          // implicit
 	var carg3 *C.gchar            // in, none, string
-	var carg4 **C.gchar           // in, transfer: none, scope: call, implicit: false, skip: false, optional: false, nullable: true, caller-allocates: false, has closure: false, has destroy: false, nullable
-	var carg5 **C.gchar           // in, transfer: none, scope: call, implicit: false, skip: false, optional: false, nullable: true, caller-allocates: false, has closure: false, has destroy: false, nullable
+	var carg4 array               // in, transfer: none, scope: call, implicit: false, skip: false, optional: false, nullable: true, caller-allocates: false, has closure: false, has destroy: false, nullable
+	var carg5 array               // in, transfer: none, scope: call, implicit: false, skip: false, optional: false, nullable: true, caller-allocates: false, has closure: false, has destroy: false, nullable
 	var cret  C.gboolean          // return
-	var _cerr *C.GError           // out, full, record, nullable
+	var _cerr *C.GError           // out, full, converted, nullable
 
 	carg0 = (*C.GdkPixbuf)(UnsafePixbufToGlibNone(pixbuf))
 	carg1 = (*[0]byte)(C._gotk4_gdkpixbuf2_PixbufSaveFunc)
@@ -3210,10 +3118,10 @@ func (pixbuf *PixbufInstance) SaveToCallbackv(saveFunc PixbufSaveFunc, typ strin
 	carg3 = (*C.gchar)(unsafe.Pointer(C.CString(typ)))
 	defer C.free(unsafe.Pointer(carg3))
 	if optionKeys != nil {
-		panic("unimplemented conversion of *typesystem.Array (gchar**)")
+		panic("unimplemented conversion of array (array)")
 	}
 	if optionValues != nil {
-		panic("unimplemented conversion of *typesystem.Array (gchar**)")
+		panic("unimplemented conversion of array (array)")
 	}
 
 	cret = C.gdk_pixbuf_save_to_callbackv(carg0, carg1, carg2, carg3, carg4, carg5, &_cerr)
@@ -3230,7 +3138,7 @@ func (pixbuf *PixbufInstance) SaveToCallbackv(saveFunc PixbufSaveFunc, typ strin
 		ret = true
 	}
 	if _cerr != nil {
-		_goerr = glib.UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
+		_goerr = UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
 	}
 
 	return ret, _goerr
@@ -3242,9 +3150,9 @@ func (pixbuf *PixbufInstance) SaveToCallbackv(saveFunc PixbufSaveFunc, typ strin
 // 
 // 	- stream gio.OutputStream: a `GOutputStream` to save the pixbuf to 
 // 	- typ string: name of file format 
-// 	- optionKeys []string (nullable): name of options to set 
-// 	- optionValues []string (nullable): values for named options 
-// 	- cancellable gio.Cancellable (nullable): optional `GCancellable` object, `NULL` to ignore 
+// 	- optionKeys array (nullable): name of options to set 
+// 	- optionValues array (nullable): values for named options 
+// 	- cancellable gio. (nullable): optional `GCancellable` object, `NULL` to ignore 
 // 
 // The function returns the following values:
 // 
@@ -3257,28 +3165,28 @@ func (pixbuf *PixbufInstance) SaveToCallbackv(saveFunc PixbufSaveFunc, typ strin
 // "bmp".
 // 
 // See [method@GdkPixbuf.Pixbuf.save_to_stream] for more details.
-func (pixbuf *PixbufInstance) SaveToStreamv(stream gio.OutputStream, typ string, optionKeys []string, optionValues []string, cancellable gio.Cancellable) (bool, error) {
-	var carg0 *C.GdkPixbuf     // in, none, class
-	var carg1 *C.GOutputStream // in, none, class
+func (pixbuf *PixbufInstance) SaveToStreamv(stream gio.OutputStream, typ string, optionKeys array, optionValues array, cancellable gio.) (bool, error) {
+	var carg0 *C.GdkPixbuf     // in, none, converted
+	var carg1 *C.GOutputStream // in, none, converted
 	var carg2 *C.gchar         // in, none, string
-	var carg3 **C.gchar        // in, transfer: none, scope: call, implicit: false, skip: false, optional: false, nullable: true, caller-allocates: false, has closure: false, has destroy: false, nullable
-	var carg4 **C.gchar        // in, transfer: none, scope: call, implicit: false, skip: false, optional: false, nullable: true, caller-allocates: false, has closure: false, has destroy: false, nullable
-	var carg5 *C.GCancellable  // in, none, class, nullable
+	var carg3 array            // in, transfer: none, scope: call, implicit: false, skip: false, optional: false, nullable: true, caller-allocates: false, has closure: false, has destroy: false, nullable
+	var carg4 array            // in, transfer: none, scope: call, implicit: false, skip: false, optional: false, nullable: true, caller-allocates: false, has closure: false, has destroy: false, nullable
+	var carg5 *C.Cancellable   // in, none, converted, nullable
 	var cret  C.gboolean       // return
-	var _cerr *C.GError        // out, full, record, nullable
+	var _cerr *C.GError        // out, full, converted, nullable
 
 	carg0 = (*C.GdkPixbuf)(UnsafePixbufToGlibNone(pixbuf))
-	carg1 = (*C.GOutputStream)(gio.UnsafeOutputStreamToGlibNone(stream))
+	carg1 = (*C.GOutputStream)(UnsafeOutputStreamToGlibNone(stream))
 	carg2 = (*C.gchar)(unsafe.Pointer(C.CString(typ)))
 	defer C.free(unsafe.Pointer(carg2))
 	if optionKeys != nil {
-		panic("unimplemented conversion of *typesystem.Array (gchar**)")
+		panic("unimplemented conversion of array (array)")
 	}
 	if optionValues != nil {
-		panic("unimplemented conversion of *typesystem.Array (gchar**)")
+		panic("unimplemented conversion of array (array)")
 	}
 	if cancellable != nil {
-		carg5 = (*C.GCancellable)(gio.UnsafeCancellableToGlibNone(cancellable))
+		carg5 = (*C.Cancellable)(UnsafeCancellableToGlibNone(cancellable))
 	}
 
 	cret = C.gdk_pixbuf_save_to_streamv(carg0, carg1, carg2, carg3, carg4, carg5, &_cerr)
@@ -3296,7 +3204,7 @@ func (pixbuf *PixbufInstance) SaveToStreamv(stream gio.OutputStream, typ string,
 		ret = true
 	}
 	if _cerr != nil {
-		_goerr = glib.UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
+		_goerr = UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
 	}
 
 	return ret, _goerr
@@ -3308,9 +3216,9 @@ func (pixbuf *PixbufInstance) SaveToStreamv(stream gio.OutputStream, typ string,
 // 
 // 	- stream gio.OutputStream: a `GOutputStream` to which to save the pixbuf 
 // 	- typ string: name of file format 
-// 	- optionKeys []string (nullable): name of options to set 
-// 	- optionValues []string (nullable): values for named options 
-// 	- cancellable gio.Cancellable (nullable): optional `GCancellable` object, `NULL` to ignore 
+// 	- optionKeys array (nullable): name of options to set 
+// 	- optionValues array (nullable): values for named options 
+// 	- cancellable gio. (nullable): optional `GCancellable` object, `NULL` to ignore 
 // 	- callback gio.AsyncReadyCallback (nullable): a `GAsyncReadyCallback` to call when the pixbuf is saved 
 //
 // Saves `pixbuf` to an output stream asynchronously.
@@ -3322,28 +3230,28 @@ func (pixbuf *PixbufInstance) SaveToStreamv(stream gio.OutputStream, typ string,
 // 
 // You can then call gdk_pixbuf_save_to_stream_finish() to get the result of
 // the operation.
-func (pixbuf *PixbufInstance) SaveToStreamvAsync(stream gio.OutputStream, typ string, optionKeys []string, optionValues []string, cancellable gio.Cancellable, callback gio.AsyncReadyCallback) {
-	var carg0 *C.GdkPixbuf          // in, none, class
-	var carg1 *C.GOutputStream      // in, none, class
+func (pixbuf *PixbufInstance) SaveToStreamvAsync(stream gio.OutputStream, typ string, optionKeys array, optionValues array, cancellable gio., callback gio.AsyncReadyCallback) {
+	var carg0 *C.GdkPixbuf          // in, none, converted
+	var carg1 *C.GOutputStream      // in, none, converted
 	var carg2 *C.gchar              // in, none, string
-	var carg3 **C.gchar             // in, transfer: none, scope: call, implicit: false, skip: false, optional: false, nullable: true, caller-allocates: false, has closure: false, has destroy: false, nullable
-	var carg4 **C.gchar             // in, transfer: none, scope: call, implicit: false, skip: false, optional: false, nullable: true, caller-allocates: false, has closure: false, has destroy: false, nullable
-	var carg5 *C.GCancellable       // in, none, class, nullable
+	var carg3 array                 // in, transfer: none, scope: call, implicit: false, skip: false, optional: false, nullable: true, caller-allocates: false, has closure: false, has destroy: false, nullable
+	var carg4 array                 // in, transfer: none, scope: call, implicit: false, skip: false, optional: false, nullable: true, caller-allocates: false, has closure: false, has destroy: false, nullable
+	var carg5 *C.Cancellable        // in, none, converted, nullable
 	var carg6 C.GAsyncReadyCallback // callback, scope: async, closure: carg7, nullable
 	var carg7 C.gpointer            // implicit
 
 	carg0 = (*C.GdkPixbuf)(UnsafePixbufToGlibNone(pixbuf))
-	carg1 = (*C.GOutputStream)(gio.UnsafeOutputStreamToGlibNone(stream))
+	carg1 = (*C.GOutputStream)(UnsafeOutputStreamToGlibNone(stream))
 	carg2 = (*C.gchar)(unsafe.Pointer(C.CString(typ)))
 	defer C.free(unsafe.Pointer(carg2))
 	if optionKeys != nil {
-		panic("unimplemented conversion of *typesystem.Array (gchar**)")
+		panic("unimplemented conversion of array (array)")
 	}
 	if optionValues != nil {
-		panic("unimplemented conversion of *typesystem.Array (gchar**)")
+		panic("unimplemented conversion of array (array)")
 	}
 	if cancellable != nil {
-		carg5 = (*C.GCancellable)(gio.UnsafeCancellableToGlibNone(cancellable))
+		carg5 = (*C.Cancellable)(UnsafeCancellableToGlibNone(cancellable))
 	}
 	if callback != nil {
 		carg6 = (*[0]byte)(C._gotk4_gio2_AsyncReadyCallback)
@@ -3366,8 +3274,8 @@ func (pixbuf *PixbufInstance) SaveToStreamvAsync(stream gio.OutputStream, typ st
 // 
 // 	- filename string: name of file to save. 
 // 	- typ string: name of file format. 
-// 	- optionKeys []string (nullable): name of options to set 
-// 	- optionValues []string (nullable): values for named options 
+// 	- optionKeys array (nullable): name of options to set 
+// 	- optionValues array (nullable): values for named options 
 // 
 // The function returns the following values:
 // 
@@ -3381,24 +3289,25 @@ func (pixbuf *PixbufInstance) SaveToStreamvAsync(stream gio.OutputStream, typ st
 // If @error is set, `FALSE` will be returned.
 // 
 // See [method@GdkPixbuf.Pixbuf.save] for more details.
-func (pixbuf *PixbufInstance) Savev(filename string, typ string, optionKeys []string, optionValues []string) (bool, error) {
-	var carg0 *C.GdkPixbuf // in, none, class
-	var carg1 *C.gchar     // in, casted
+func (pixbuf *PixbufInstance) Savev(filename string, typ string, optionKeys array, optionValues array) (bool, error) {
+	var carg0 *C.GdkPixbuf // in, none, converted
+	var carg1 *C.gchar     // in, none, string
 	var carg2 *C.gchar     // in, none, string
-	var carg3 **C.gchar    // in, transfer: none, scope: call, implicit: false, skip: false, optional: false, nullable: true, caller-allocates: false, has closure: false, has destroy: false, nullable
-	var carg4 **C.gchar    // in, transfer: none, scope: call, implicit: false, skip: false, optional: false, nullable: true, caller-allocates: false, has closure: false, has destroy: false, nullable
+	var carg3 array        // in, transfer: none, scope: call, implicit: false, skip: false, optional: false, nullable: true, caller-allocates: false, has closure: false, has destroy: false, nullable
+	var carg4 array        // in, transfer: none, scope: call, implicit: false, skip: false, optional: false, nullable: true, caller-allocates: false, has closure: false, has destroy: false, nullable
 	var cret  C.gboolean   // return
-	var _cerr *C.GError    // out, full, record, nullable
+	var _cerr *C.GError    // out, full, converted, nullable
 
 	carg0 = (*C.GdkPixbuf)(UnsafePixbufToGlibNone(pixbuf))
-	carg1 = *C.gchar(filename)
+	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(filename)))
+	defer C.free(unsafe.Pointer(carg1))
 	carg2 = (*C.gchar)(unsafe.Pointer(C.CString(typ)))
 	defer C.free(unsafe.Pointer(carg2))
 	if optionKeys != nil {
-		panic("unimplemented conversion of *typesystem.Array (gchar**)")
+		panic("unimplemented conversion of array (array)")
 	}
 	if optionValues != nil {
-		panic("unimplemented conversion of *typesystem.Array (gchar**)")
+		panic("unimplemented conversion of array (array)")
 	}
 
 	cret = C.gdk_pixbuf_savev(carg0, carg1, carg2, carg3, carg4, &_cerr)
@@ -3415,7 +3324,7 @@ func (pixbuf *PixbufInstance) Savev(filename string, typ string, optionKeys []st
 		ret = true
 	}
 	if _cerr != nil {
-		_goerr = glib.UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
+		_goerr = UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
 	}
 
 	return ret, _goerr
@@ -3450,17 +3359,17 @@ func (pixbuf *PixbufInstance) Savev(filename string, typ string, optionKeys []st
 // same pixbuf, it will be overwritten during the scaling which
 // results in rendering artifacts.
 func (src *PixbufInstance) Scale(dest Pixbuf, destX int, destY int, destWidth int, destHeight int, offsetX float64, offsetY float64, scaleX float64, scaleY float64, interpType InterpType) {
-	var carg0  *C.GdkPixbuf    // in, none, class
-	var carg1  *C.GdkPixbuf    // in, none, class
-	var carg2  C.int           // in, casted
-	var carg3  C.int           // in, casted
-	var carg4  C.int           // in, casted
-	var carg5  C.int           // in, casted
-	var carg6  C.gdouble       // in, casted
-	var carg7  C.gdouble       // in, casted
-	var carg8  C.gdouble       // in, casted
-	var carg9  C.gdouble       // in, casted
-	var carg10 C.GdkInterpType // in, casted
+	var carg0  *C.GdkPixbuf    // in, none, converted
+	var carg1  *C.GdkPixbuf    // in, none, converted
+	var carg2  C.int           // in, none, casted
+	var carg3  C.int           // in, none, casted
+	var carg4  C.int           // in, none, casted
+	var carg5  C.int           // in, none, casted
+	var carg6  C.gdouble       // in, none, casted
+	var carg7  C.gdouble       // in, none, casted
+	var carg8  C.gdouble       // in, none, casted
+	var carg9  C.gdouble       // in, none, casted
+	var carg10 C.GdkInterpType // in, none, casted
 
 	carg0 = (*C.GdkPixbuf)(UnsafePixbufToGlibNone(src))
 	carg1 = (*C.GdkPixbuf)(UnsafePixbufToGlibNone(dest))
@@ -3519,11 +3428,11 @@ func (src *PixbufInstance) Scale(dest Pixbuf, destX int, destY int, destWidth in
 // For more complicated scaling/alpha blending see [method@GdkPixbuf.Pixbuf.scale]
 // and [method@GdkPixbuf.Pixbuf.composite].
 func (src *PixbufInstance) ScaleSimple(destWidth int, destHeight int, interpType InterpType) Pixbuf {
-	var carg0 *C.GdkPixbuf    // in, none, class
-	var carg1 C.int           // in, casted
-	var carg2 C.int           // in, casted
-	var carg3 C.GdkInterpType // in, casted
-	var cret  *C.GdkPixbuf    // return, full, class
+	var carg0 *C.GdkPixbuf    // in, none, converted
+	var carg1 C.int           // in, none, casted
+	var carg2 C.int           // in, none, casted
+	var carg3 C.GdkInterpType // in, none, casted
+	var cret  *C.GdkPixbuf    // return, full, converted
 
 	carg0 = (*C.GdkPixbuf)(UnsafePixbufToGlibNone(src))
 	carg1 = C.int(destWidth)
@@ -3559,7 +3468,7 @@ func (src *PixbufInstance) ScaleSimple(destWidth int, destHeight int, interpType
 // If `key` already exists in the list of options attached to the `pixbuf`,
 // the new value is ignored and `FALSE` is returned.
 func (pixbuf *PixbufInstance) SetOption(key string, value string) bool {
-	var carg0 *C.GdkPixbuf // in, none, class
+	var carg0 *C.GdkPixbuf // in, none, converted
 	var carg1 *C.gchar     // in, none, string
 	var carg2 *C.gchar     // in, none, string
 	var cret  C.gboolean   // return
@@ -3587,7 +3496,7 @@ func (pixbuf *PixbufInstance) SetOption(key string, value string) bool {
 // PixbufAnimationInstance is the instance type used by all types extending GdkPixbufAnimation. It is used internally by the bindings. Users should use the interface [PixbufAnimation] instead.
 type PixbufAnimationInstance struct {
 	_ [0]func() // equal guard
-	gobject.Object
+	gobject.ObjectInstance
 }
 
 var _ PixbufAnimation = (*PixbufAnimationInstance)(nil)
@@ -3608,7 +3517,7 @@ var _ PixbufAnimation = (*PixbufAnimationInstance)(nil)
 // representation, however; you just ask `GdkPixbuf` what should
 // be displayed at a given point in time.
 type PixbufAnimation interface {
-	gobject.ObjectLike
+	gobject.Object
 	upcastToGdkPixbufAnimation() *PixbufAnimationInstance
 
 	// GetHeight wraps gdk_pixbuf_animation_get_height
@@ -3656,14 +3565,14 @@ type PixbufAnimation interface {
 	IsStaticImage() bool
 }
 
-func unsafeWrapPixbufAnimation(base *gobject.Object) *PixbufAnimationInstance {
+func unsafeWrapPixbufAnimation(base *gobject.ObjectInstance) *PixbufAnimationInstance {
 	return &PixbufAnimationInstance{
-		Object: *base,
+		ObjectInstance: *base,
 	}
 }
 
 func marshalPixbufAnimationInstance(p uintptr) (interface{}, error) {
-	return unsafeWrapPixbufAnimation(gobject.ValueFromNative(unsafe.Pointer(p)).Object()), nil
+	return unsafeWrapPixbufAnimation(gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Object()), nil
 }
 
 // UnsafePixbufAnimationFromGlibBorrow is used to convert raw GdkPixbufAnimation pointers to go. This is used by the bindings internally.
@@ -3716,11 +3625,12 @@ func UnsafePixbufAnimationToGlibFull(c PixbufAnimation) unsafe.Pointer {
 // 
 // Possible errors are in the `GDK_PIXBUF_ERROR` and `G_FILE_ERROR` domains.
 func NewPixbufAnimationInstanceFromFile(filename string) (PixbufAnimation, error) {
-	var carg1 *C.gchar              // in, casted
-	var cret  *C.GdkPixbufAnimation // return, full, class
-	var _cerr *C.GError             // out, full, record, nullable
+	var carg1 *C.gchar              // in, none, string
+	var cret  *C.GdkPixbufAnimation // return, full, converted
+	var _cerr *C.GError             // out, full, converted, nullable
 
-	carg1 = *C.gchar(filename)
+	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(filename)))
+	defer C.free(unsafe.Pointer(carg1))
 
 	cret = C.gdk_pixbuf_animation_new_from_file(carg1, &_cerr)
 	runtime.KeepAlive(filename)
@@ -3730,7 +3640,7 @@ func NewPixbufAnimationInstanceFromFile(filename string) (PixbufAnimation, error
 
 	ret = UnsafePixbufAnimationFromGlibFull(unsafe.Pointer(cret))
 	if _cerr != nil {
-		_goerr = glib.UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
+		_goerr = UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
 	}
 
 	return ret, _goerr
@@ -3753,8 +3663,8 @@ func NewPixbufAnimationInstanceFromFile(filename string) (PixbufAnimation, error
 // @error will be set.
 func NewPixbufAnimationInstanceFromResource(resourcePath string) (PixbufAnimation, error) {
 	var carg1 *C.gchar              // in, none, string
-	var cret  *C.GdkPixbufAnimation // return, full, class
-	var _cerr *C.GError             // out, full, record, nullable
+	var cret  *C.GdkPixbufAnimation // return, full, converted
+	var _cerr *C.GError             // out, full, converted, nullable
 
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(resourcePath)))
 	defer C.free(unsafe.Pointer(carg1))
@@ -3767,7 +3677,7 @@ func NewPixbufAnimationInstanceFromResource(resourcePath string) (PixbufAnimatio
 
 	ret = UnsafePixbufAnimationFromGlibFull(unsafe.Pointer(cret))
 	if _cerr != nil {
-		_goerr = glib.UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
+		_goerr = UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
 	}
 
 	return ret, _goerr
@@ -3778,7 +3688,7 @@ func NewPixbufAnimationInstanceFromResource(resourcePath string) (PixbufAnimatio
 // The function takes the following parameters:
 // 
 // 	- stream gio.InputStream: a `GInputStream` to load the pixbuf from 
-// 	- cancellable gio.Cancellable (nullable): optional `GCancellable` object 
+// 	- cancellable gio. (nullable): optional `GCancellable` object 
 // 
 // The function returns the following values:
 // 
@@ -3797,15 +3707,15 @@ func NewPixbufAnimationInstanceFromResource(resourcePath string) (PixbufAnimatio
 // `G_IO_ERROR` domains.
 // 
 // The stream is not closed.
-func NewPixbufAnimationInstanceFromStream(stream gio.InputStream, cancellable gio.Cancellable) (PixbufAnimation, error) {
-	var carg1 *C.GInputStream       // in, none, class
-	var carg2 *C.GCancellable       // in, none, class, nullable
-	var cret  *C.GdkPixbufAnimation // return, full, class
-	var _cerr *C.GError             // out, full, record, nullable
+func NewPixbufAnimationInstanceFromStream(stream gio.InputStream, cancellable gio.) (PixbufAnimation, error) {
+	var carg1 *C.GInputStream       // in, none, converted
+	var carg2 *C.Cancellable        // in, none, converted, nullable
+	var cret  *C.GdkPixbufAnimation // return, full, converted
+	var _cerr *C.GError             // out, full, converted, nullable
 
-	carg1 = (*C.GInputStream)(gio.UnsafeInputStreamToGlibNone(stream))
+	carg1 = (*C.GInputStream)(UnsafeInputStreamToGlibNone(stream))
 	if cancellable != nil {
-		carg2 = (*C.GCancellable)(gio.UnsafeCancellableToGlibNone(cancellable))
+		carg2 = (*C.Cancellable)(UnsafeCancellableToGlibNone(cancellable))
 	}
 
 	cret = C.gdk_pixbuf_animation_new_from_stream(carg1, carg2, &_cerr)
@@ -3817,7 +3727,7 @@ func NewPixbufAnimationInstanceFromStream(stream gio.InputStream, cancellable gi
 
 	ret = UnsafePixbufAnimationFromGlibFull(unsafe.Pointer(cret))
 	if _cerr != nil {
-		_goerr = glib.UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
+		_goerr = UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
 	}
 
 	return ret, _goerr
@@ -3837,11 +3747,11 @@ func NewPixbufAnimationInstanceFromStream(stream gio.InputStream, cancellable gi
 // Finishes an asynchronous pixbuf animation creation operation started with
 // [func@GdkPixbuf.PixbufAnimation.new_from_stream_async].
 func NewPixbufAnimationInstanceFromStreamFinish(asyncResult gio.AsyncResult) (PixbufAnimation, error) {
-	var carg1 *C.GAsyncResult       // in, none, interface
-	var cret  *C.GdkPixbufAnimation // return, full, class
-	var _cerr *C.GError             // out, full, record, nullable
+	var carg1 *C.GAsyncResult       // in, none, converted
+	var cret  *C.GdkPixbufAnimation // return, full, converted
+	var _cerr *C.GError             // out, full, converted, nullable
 
-	carg1 = (*C.GAsyncResult)(gio.UnsafeAsyncResultToGlibNone(asyncResult))
+	carg1 = (*C.GAsyncResult)(UnsafeAsyncResultToGlibNone(asyncResult))
 
 	cret = C.gdk_pixbuf_animation_new_from_stream_finish(carg1, &_cerr)
 	runtime.KeepAlive(asyncResult)
@@ -3851,7 +3761,7 @@ func NewPixbufAnimationInstanceFromStreamFinish(asyncResult gio.AsyncResult) (Pi
 
 	ret = UnsafePixbufAnimationFromGlibFull(unsafe.Pointer(cret))
 	if _cerr != nil {
-		_goerr = glib.UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
+		_goerr = UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
 	}
 
 	return ret, _goerr
@@ -3862,7 +3772,7 @@ func NewPixbufAnimationInstanceFromStreamFinish(asyncResult gio.AsyncResult) (Pi
 // The function takes the following parameters:
 // 
 // 	- stream gio.InputStream: a #GInputStream from which to load the animation 
-// 	- cancellable gio.Cancellable (nullable): optional #GCancellable object 
+// 	- cancellable gio. (nullable): optional #GCancellable object 
 // 	- callback gio.AsyncReadyCallback (nullable): a `GAsyncReadyCallback` to call when the pixbuf is loaded 
 //
 // Creates a new animation by asynchronously loading an image from an input stream.
@@ -3873,15 +3783,15 @@ func NewPixbufAnimationInstanceFromStreamFinish(asyncResult gio.AsyncResult) (Pi
 // When the operation is finished, `callback` will be called in the main thread.
 // You can then call gdk_pixbuf_animation_new_from_stream_finish() to get the
 // result of the operation.
-func NewFromStreamAsync(stream gio.InputStream, cancellable gio.Cancellable, callback gio.AsyncReadyCallback) {
-	var carg1 *C.GInputStream       // in, none, class
-	var carg2 *C.GCancellable       // in, none, class, nullable
+func NewFromStreamAsync(stream gio.InputStream, cancellable gio., callback gio.AsyncReadyCallback) {
+	var carg1 *C.GInputStream       // in, none, converted
+	var carg2 *C.Cancellable        // in, none, converted, nullable
 	var carg3 C.GAsyncReadyCallback // callback, scope: async, closure: carg4, nullable
 	var carg4 C.gpointer            // implicit
 
-	carg1 = (*C.GInputStream)(gio.UnsafeInputStreamToGlibNone(stream))
+	carg1 = (*C.GInputStream)(UnsafeInputStreamToGlibNone(stream))
 	if cancellable != nil {
-		carg2 = (*C.GCancellable)(gio.UnsafeCancellableToGlibNone(cancellable))
+		carg2 = (*C.Cancellable)(UnsafeCancellableToGlibNone(cancellable))
 	}
 	if callback != nil {
 		carg3 = (*[0]byte)(C._gotk4_gio2_AsyncReadyCallback)
@@ -3901,8 +3811,8 @@ func NewFromStreamAsync(stream gio.InputStream, cancellable gio.Cancellable, cal
 //
 // Queries the height of the bounding box of a pixbuf animation.
 func (animation *PixbufAnimationInstance) GetHeight() int {
-	var carg0 *C.GdkPixbufAnimation // in, none, class
-	var cret  C.int                 // return, casted
+	var carg0 *C.GdkPixbufAnimation // in, none, converted
+	var cret  C.int                 // return, none, casted
 
 	carg0 = (*C.GdkPixbufAnimation)(UnsafePixbufAnimationToGlibNone(animation))
 
@@ -3933,8 +3843,8 @@ func (animation *PixbufAnimationInstance) GetHeight() int {
 // If an animation hasn't loaded any frames yet, this function will
 // return `NULL`.
 func (animation *PixbufAnimationInstance) GetStaticImage() Pixbuf {
-	var carg0 *C.GdkPixbufAnimation // in, none, class
-	var cret  *C.GdkPixbuf          // return, none, class
+	var carg0 *C.GdkPixbufAnimation // in, none, converted
+	var cret  *C.GdkPixbuf          // return, none, converted
 
 	carg0 = (*C.GdkPixbufAnimation)(UnsafePixbufAnimationToGlibNone(animation))
 
@@ -3955,8 +3865,8 @@ func (animation *PixbufAnimationInstance) GetStaticImage() Pixbuf {
 //
 // Queries the width of the bounding box of a pixbuf animation.
 func (animation *PixbufAnimationInstance) GetWidth() int {
-	var carg0 *C.GdkPixbufAnimation // in, none, class
-	var cret  C.int                 // return, casted
+	var carg0 *C.GdkPixbufAnimation // in, none, converted
+	var cret  C.int                 // return, none, casted
 
 	carg0 = (*C.GdkPixbufAnimation)(UnsafePixbufAnimationToGlibNone(animation))
 
@@ -3982,7 +3892,7 @@ func (animation *PixbufAnimationInstance) GetWidth() int {
 // return `TRUE`. Use gdk_pixbuf_animation_get_static_image() to retrieve
 // the image.
 func (animation *PixbufAnimationInstance) IsStaticImage() bool {
-	var carg0 *C.GdkPixbufAnimation // in, none, class
+	var carg0 *C.GdkPixbufAnimation // in, none, converted
 	var cret  C.gboolean            // return
 
 	carg0 = (*C.GdkPixbufAnimation)(UnsafePixbufAnimationToGlibNone(animation))
@@ -4002,7 +3912,7 @@ func (animation *PixbufAnimationInstance) IsStaticImage() bool {
 // PixbufAnimationIterInstance is the instance type used by all types extending GdkPixbufAnimationIter. It is used internally by the bindings. Users should use the interface [PixbufAnimationIter] instead.
 type PixbufAnimationIterInstance struct {
 	_ [0]func() // equal guard
-	gobject.Object
+	gobject.ObjectInstance
 }
 
 var _ PixbufAnimationIter = (*PixbufAnimationIterInstance)(nil)
@@ -4012,7 +3922,7 @@ var _ PixbufAnimationIter = (*PixbufAnimationIterInstance)(nil)
 // An opaque object representing an iterator which points to a
 // certain position in an animation.
 type PixbufAnimationIter interface {
-	gobject.ObjectLike
+	gobject.Object
 	upcastToGdkPixbufAnimationIter() *PixbufAnimationIterInstance
 
 	// GetDelayTime wraps gdk_pixbuf_animation_iter_get_delay_time
@@ -4065,14 +3975,14 @@ type PixbufAnimationIter interface {
 	OnCurrentlyLoadingFrame() bool
 }
 
-func unsafeWrapPixbufAnimationIter(base *gobject.Object) *PixbufAnimationIterInstance {
+func unsafeWrapPixbufAnimationIter(base *gobject.ObjectInstance) *PixbufAnimationIterInstance {
 	return &PixbufAnimationIterInstance{
-		Object: *base,
+		ObjectInstance: *base,
 	}
 }
 
 func marshalPixbufAnimationIterInstance(p uintptr) (interface{}, error) {
-	return unsafeWrapPixbufAnimationIter(gobject.ValueFromNative(unsafe.Pointer(p)).Object()), nil
+	return unsafeWrapPixbufAnimationIter(gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Object()), nil
 }
 
 // UnsafePixbufAnimationIterFromGlibBorrow is used to convert raw GdkPixbufAnimationIter pointers to go. This is used by the bindings internally.
@@ -4119,8 +4029,8 @@ func UnsafePixbufAnimationIterToGlibFull(c PixbufAnimationIter) unsafe.Pointer {
 // image file to avoid updates that are just too quick. The minimum timeout
 // for GIF images is currently 20 milliseconds.
 func (iter *PixbufAnimationIterInstance) GetDelayTime() int {
-	var carg0 *C.GdkPixbufAnimationIter // in, none, class
-	var cret  C.int                     // return, casted
+	var carg0 *C.GdkPixbufAnimationIter // in, none, converted
+	var cret  C.int                     // return, none, casted
 
 	carg0 = (*C.GdkPixbufAnimationIter)(UnsafePixbufAnimationIterToGlibNone(iter))
 
@@ -4155,8 +4065,8 @@ func (iter *PixbufAnimationIterInstance) GetDelayTime() int {
 // Copy the pixbuf to keep it (don't just add a reference), as it may get
 // recycled as you advance the iterator.
 func (iter *PixbufAnimationIterInstance) GetPixbuf() Pixbuf {
-	var carg0 *C.GdkPixbufAnimationIter // in, none, class
-	var cret  *C.GdkPixbuf              // return, none, class
+	var carg0 *C.GdkPixbufAnimationIter // in, none, converted
+	var cret  *C.GdkPixbuf              // return, none, converted
 
 	carg0 = (*C.GdkPixbufAnimationIter)(UnsafePixbufAnimationIterToGlibNone(iter))
 
@@ -4182,7 +4092,7 @@ func (iter *PixbufAnimationIterInstance) GetPixbuf() Pixbuf {
 // streaming in to the loader. So if you're on the currently loading frame,
 // you will need to redraw the screen for the updated area.
 func (iter *PixbufAnimationIterInstance) OnCurrentlyLoadingFrame() bool {
-	var carg0 *C.GdkPixbufAnimationIter // in, none, class
+	var carg0 *C.GdkPixbufAnimationIter // in, none, converted
 	var cret  C.gboolean                // return
 
 	carg0 = (*C.GdkPixbufAnimationIter)(UnsafePixbufAnimationIterToGlibNone(iter))
@@ -4202,7 +4112,7 @@ func (iter *PixbufAnimationIterInstance) OnCurrentlyLoadingFrame() bool {
 // PixbufLoaderInstance is the instance type used by all types extending GdkPixbufLoader. It is used internally by the bindings. Users should use the interface [PixbufLoader] instead.
 type PixbufLoaderInstance struct {
 	_ [0]func() // equal guard
-	gobject.Object
+	gobject.ObjectInstance
 }
 
 var _ PixbufLoader = (*PixbufLoaderInstance)(nil)
@@ -4255,7 +4165,7 @@ var _ PixbufLoader = (*PixbufLoaderInstance)(nil)
 // [class@GdkPixbuf.PixbufAnimationIter] to retrieve the pixbuf for the
 // desired time stamp.
 type PixbufLoader interface {
-	gobject.ObjectLike
+	gobject.Object
 	upcastToGdkPixbufLoader() *PixbufLoaderInstance
 
 	// Close wraps gdk_pixbuf_loader_close
@@ -4297,11 +4207,11 @@ type PixbufLoader interface {
 	// GetFormat wraps gdk_pixbuf_loader_get_format
 	// The function returns the following values:
 	// 
-	// 	- ret *PixbufFormat 
+	// 	- ret PixbufFormat 
 	//
 	// Obtains the available information about the format of the
 	// currently loading image file.
-	GetFormat() *PixbufFormat
+	GetFormat() PixbufFormat
 	// GetPixbuf wraps gdk_pixbuf_loader_get_pixbuf
 	// The function returns the following values:
 	// 
@@ -4343,7 +4253,7 @@ type PixbufLoader interface {
 	// 
 	// The function takes the following parameters:
 	// 
-	// 	- buf []uint8: Pointer to image data. 
+	// 	- buf array: Pointer to image data. 
 	// 
 	// The function returns the following values:
 	// 
@@ -4351,30 +4261,17 @@ type PixbufLoader interface {
 	// 	- _goerr error (nullable): an error 
 	//
 	// Parses the next `count` bytes in the given image buffer.
-	Write([]uint8) (bool, error)
-	// WriteBytes wraps gdk_pixbuf_loader_write_bytes
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- buffer *glib.Bytes: The image data as a `GBytes` buffer. 
-	// 
-	// The function returns the following values:
-	// 
-	// 	- ret bool 
-	// 	- _goerr error (nullable): an error 
-	//
-	// Parses the next contents of the given image buffer.
-	WriteBytes(*glib.Bytes) (bool, error)
+	Write(array) (bool, error)
 }
 
-func unsafeWrapPixbufLoader(base *gobject.Object) *PixbufLoaderInstance {
+func unsafeWrapPixbufLoader(base *gobject.ObjectInstance) *PixbufLoaderInstance {
 	return &PixbufLoaderInstance{
-		Object: *base,
+		ObjectInstance: *base,
 	}
 }
 
 func marshalPixbufLoaderInstance(p uintptr) (interface{}, error) {
-	return unsafeWrapPixbufLoader(gobject.ValueFromNative(unsafe.Pointer(p)).Object()), nil
+	return unsafeWrapPixbufLoader(gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Object()), nil
 }
 
 // UnsafePixbufLoaderFromGlibBorrow is used to convert raw GdkPixbufLoader pointers to go. This is used by the bindings internally.
@@ -4413,7 +4310,7 @@ func UnsafePixbufLoaderToGlibFull(c PixbufLoader) unsafe.Pointer {
 //
 // Creates a new pixbuf loader object.
 func NewPixbufLoaderInstance() PixbufLoader {
-	var cret *C.GdkPixbufLoader // return, full, class
+	var cret *C.GdkPixbufLoader // return, full, converted
 
 	cret = C.gdk_pixbuf_loader_new()
 
@@ -4452,8 +4349,8 @@ func NewPixbufLoaderInstance() PixbufLoader {
 // structs returned by gdk_pixbuf_get_formats().
 func NewPixbufLoaderInstanceWithMIMEType(mimeType string) (PixbufLoader, error) {
 	var carg1 *C.gchar           // in, none, string
-	var cret  *C.GdkPixbufLoader // return, full, class
-	var _cerr *C.GError          // out, full, record, nullable
+	var cret  *C.GdkPixbufLoader // return, full, converted
+	var _cerr *C.GError          // out, full, converted, nullable
 
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(mimeType)))
 	defer C.free(unsafe.Pointer(carg1))
@@ -4466,7 +4363,7 @@ func NewPixbufLoaderInstanceWithMIMEType(mimeType string) (PixbufLoader, error) 
 
 	ret = UnsafePixbufLoaderFromGlibFull(unsafe.Pointer(cret))
 	if _cerr != nil {
-		_goerr = glib.UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
+		_goerr = UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
 	}
 
 	return ret, _goerr
@@ -4499,8 +4396,8 @@ func NewPixbufLoaderInstanceWithMIMEType(mimeType string) (PixbufLoader, error) 
 // of the #GdkPixbufFormat structs returned by gdk_pixbuf_get_formats().
 func NewPixbufLoaderInstanceWithType(imageType string) (PixbufLoader, error) {
 	var carg1 *C.gchar           // in, none, string
-	var cret  *C.GdkPixbufLoader // return, full, class
-	var _cerr *C.GError          // out, full, record, nullable
+	var cret  *C.GdkPixbufLoader // return, full, converted
+	var _cerr *C.GError          // out, full, converted, nullable
 
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(imageType)))
 	defer C.free(unsafe.Pointer(carg1))
@@ -4513,7 +4410,7 @@ func NewPixbufLoaderInstanceWithType(imageType string) (PixbufLoader, error) {
 
 	ret = UnsafePixbufLoaderFromGlibFull(unsafe.Pointer(cret))
 	if _cerr != nil {
-		_goerr = glib.UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
+		_goerr = UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
 	}
 
 	return ret, _goerr
@@ -4541,9 +4438,9 @@ func NewPixbufLoaderInstanceWithType(imageType string) (PixbufLoader, error) {
 // Remember that this function does not release a reference on the loader, so
 // you will need to explicitly release any reference you hold.
 func (loader *PixbufLoaderInstance) Close() (bool, error) {
-	var carg0 *C.GdkPixbufLoader // in, none, class
+	var carg0 *C.GdkPixbufLoader // in, none, converted
 	var cret  C.gboolean         // return
-	var _cerr *C.GError          // out, full, record, nullable
+	var _cerr *C.GError          // out, full, converted, nullable
 
 	carg0 = (*C.GdkPixbufLoader)(UnsafePixbufLoaderToGlibNone(loader))
 
@@ -4557,7 +4454,7 @@ func (loader *PixbufLoaderInstance) Close() (bool, error) {
 		ret = true
 	}
 	if _cerr != nil {
-		_goerr = glib.UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
+		_goerr = UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
 	}
 
 	return ret, _goerr
@@ -4577,8 +4474,8 @@ func (loader *PixbufLoaderInstance) Close() (bool, error) {
 // If the loader doesn't have enough bytes yet, and hasn't emitted the `area-prepared`
 // signal, this function will return `NULL`.
 func (loader *PixbufLoaderInstance) GetAnimation() PixbufAnimation {
-	var carg0 *C.GdkPixbufLoader    // in, none, class
-	var cret  *C.GdkPixbufAnimation // return, none, class
+	var carg0 *C.GdkPixbufLoader    // in, none, converted
+	var cret  *C.GdkPixbufAnimation // return, none, converted
 
 	carg0 = (*C.GdkPixbufLoader)(UnsafePixbufLoaderToGlibNone(loader))
 
@@ -4595,20 +4492,20 @@ func (loader *PixbufLoaderInstance) GetAnimation() PixbufAnimation {
 // GetFormat wraps gdk_pixbuf_loader_get_format
 // The function returns the following values:
 // 
-// 	- ret *PixbufFormat 
+// 	- ret PixbufFormat 
 //
 // Obtains the available information about the format of the
 // currently loading image file.
-func (loader *PixbufLoaderInstance) GetFormat() *PixbufFormat {
-	var carg0 *C.GdkPixbufLoader // in, none, class
-	var cret  *C.GdkPixbufFormat // return, none, record
+func (loader *PixbufLoaderInstance) GetFormat() PixbufFormat {
+	var carg0 *C.GdkPixbufLoader // in, none, converted
+	var cret  *C.GdkPixbufFormat // return, none, converted
 
 	carg0 = (*C.GdkPixbufLoader)(UnsafePixbufLoaderToGlibNone(loader))
 
 	cret = C.gdk_pixbuf_loader_get_format(carg0)
 	runtime.KeepAlive(loader)
 
-	var ret *PixbufFormat
+	var ret PixbufFormat
 
 	ret = UnsafePixbufFormatFromGlibNone(unsafe.Pointer(cret))
 
@@ -4636,8 +4533,8 @@ func (loader *PixbufLoaderInstance) GetFormat() *PixbufFormat {
 // Additionally, if the loader is an animation, it will return the "static
 // image" of the animation (see gdk_pixbuf_animation_get_static_image()).
 func (loader *PixbufLoaderInstance) GetPixbuf() Pixbuf {
-	var carg0 *C.GdkPixbufLoader // in, none, class
-	var cret  *C.GdkPixbuf       // return, none, class
+	var carg0 *C.GdkPixbufLoader // in, none, converted
+	var cret  *C.GdkPixbuf       // return, none, converted
 
 	carg0 = (*C.GdkPixbufLoader)(UnsafePixbufLoaderToGlibNone(loader))
 
@@ -4667,9 +4564,9 @@ func (loader *PixbufLoaderInstance) GetPixbuf() Pixbuf {
 // Attempts to set the desired image size  are ignored after the
 // emission of the ::size-prepared signal.
 func (loader *PixbufLoaderInstance) SetSize(width int, height int) {
-	var carg0 *C.GdkPixbufLoader // in, none, class
-	var carg1 C.int              // in, casted
-	var carg2 C.int              // in, casted
+	var carg0 *C.GdkPixbufLoader // in, none, converted
+	var carg1 C.int              // in, none, casted
+	var carg2 C.int              // in, none, casted
 
 	carg0 = (*C.GdkPixbufLoader)(UnsafePixbufLoaderToGlibNone(loader))
 	carg1 = C.int(width)
@@ -4685,7 +4582,7 @@ func (loader *PixbufLoaderInstance) SetSize(width int, height int) {
 // 
 // The function takes the following parameters:
 // 
-// 	- buf []uint8: Pointer to image data. 
+// 	- buf array: Pointer to image data. 
 // 
 // The function returns the following values:
 // 
@@ -4693,15 +4590,15 @@ func (loader *PixbufLoaderInstance) SetSize(width int, height int) {
 // 	- _goerr error (nullable): an error 
 //
 // Parses the next `count` bytes in the given image buffer.
-func (loader *PixbufLoaderInstance) Write(buf []uint8) (bool, error) {
-	var carg0 *C.GdkPixbufLoader // in, none, class
-	var carg1 *C.guint8          // in, transfer: none, scope: call, implicit: false, skip: false, optional: false, nullable: false, caller-allocates: false, has closure: false, has destroy: false
+func (loader *PixbufLoaderInstance) Write(buf array) (bool, error) {
+	var carg0 *C.GdkPixbufLoader // in, none, converted
+	var carg1 array              // in, transfer: none, scope: call, implicit: false, skip: false, optional: false, nullable: false, caller-allocates: false, has closure: false, has destroy: false
 	var carg2 C.gsize            // implicit
 	var cret  C.gboolean         // return
-	var _cerr *C.GError          // out, full, record, nullable
+	var _cerr *C.GError          // out, full, converted, nullable
 
 	carg0 = (*C.GdkPixbufLoader)(UnsafePixbufLoaderToGlibNone(loader))
-	panic("unimplemented conversion of *typesystem.Array (guint8*)")
+	panic("unimplemented conversion of array (array)")
 
 	cret = C.gdk_pixbuf_loader_write(carg0, carg1, carg2, &_cerr)
 	runtime.KeepAlive(loader)
@@ -4714,45 +4611,7 @@ func (loader *PixbufLoaderInstance) Write(buf []uint8) (bool, error) {
 		ret = true
 	}
 	if _cerr != nil {
-		_goerr = glib.UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
-	}
-
-	return ret, _goerr
-}
-
-// WriteBytes wraps gdk_pixbuf_loader_write_bytes
-// 
-// The function takes the following parameters:
-// 
-// 	- buffer *glib.Bytes: The image data as a `GBytes` buffer. 
-// 
-// The function returns the following values:
-// 
-// 	- ret bool 
-// 	- _goerr error (nullable): an error 
-//
-// Parses the next contents of the given image buffer.
-func (loader *PixbufLoaderInstance) WriteBytes(buffer *glib.Bytes) (bool, error) {
-	var carg0 *C.GdkPixbufLoader // in, none, class
-	var carg1 *C.GBytes          // in, none, record
-	var cret  C.gboolean         // return
-	var _cerr *C.GError          // out, full, record, nullable
-
-	carg0 = (*C.GdkPixbufLoader)(UnsafePixbufLoaderToGlibNone(loader))
-	carg1 = (*C.GBytes)(glib.UnsafeBytesToGlibNone(buffer))
-
-	cret = C.gdk_pixbuf_loader_write_bytes(carg0, carg1, &_cerr)
-	runtime.KeepAlive(loader)
-	runtime.KeepAlive(buffer)
-
-	var ret    bool
-	var _goerr error
-
-	if cret != 0 {
-		ret = true
-	}
-	if _cerr != nil {
-		_goerr = glib.UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
+		_goerr = UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
 	}
 
 	return ret, _goerr
@@ -4773,31 +4632,31 @@ type PixbufNonAnim interface {
 
 }
 
-func unsafeWrapPixbufNonAnim(base *gobject.Object) *PixbufNonAnimInstance {
+func unsafeWrapPixbufNonAnim(base *ObjectInstance) *PixbufNonAnimInstance {
 	return &PixbufNonAnimInstance{
-		PixbufAnimationInstance: PixbufAnimationInstance{
-			Object: *base,
+		ObjectInstance: gobject.ObjectInstance{
+			ObjectInstance: *base,
 		},
 	}
 }
 
 func marshalPixbufNonAnimInstance(p uintptr) (interface{}, error) {
-	return unsafeWrapPixbufNonAnim(gobject.ValueFromNative(unsafe.Pointer(p)).Object()), nil
+	return unsafeWrapPixbufNonAnim(gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Object()), nil
 }
 
 // UnsafePixbufNonAnimFromGlibBorrow is used to convert raw PixbufNonAnim pointers to go. This is used by the bindings internally.
 func UnsafePixbufNonAnimFromGlibBorrow(c unsafe.Pointer) PixbufNonAnim {
-	return gobject.TODOBorrow(c).(PixbufNonAnim)
+	return TODOBorrow(c).(PixbufNonAnim)
 }
 
 // UnsafePixbufNonAnimFromGlibNone is used to convert raw PixbufNonAnim pointers to go while taking a reference and attaching a finalizer. This is used by the bindings internally.
 func UnsafePixbufNonAnimFromGlibNone(c unsafe.Pointer) PixbufNonAnim {
-	return gobject.Take(c).(PixbufNonAnim)
+	return Take(c).(PixbufNonAnim)
 }
 
 // UnsafePixbufNonAnimFromGlibFull is used to convert raw PixbufNonAnim pointers to go while attaching a finalizer. This is used by the bindings internally.
 func UnsafePixbufNonAnimFromGlibFull(c unsafe.Pointer) PixbufNonAnim {
-	return gobject.AssumeOwnership(c).(PixbufNonAnim)
+	return AssumeOwnership(c).(PixbufNonAnim)
 }
 
 func (p *PixbufNonAnimInstance) upcastTo() *PixbufNonAnimInstance {
@@ -4806,12 +4665,12 @@ func (p *PixbufNonAnimInstance) upcastTo() *PixbufNonAnimInstance {
 
 // UnsafePixbufNonAnimToGlibNone is used to convert the instance to it's C value PixbufNonAnim. This is used by the bindings internally.
 func UnsafePixbufNonAnimToGlibNone(c PixbufNonAnim) unsafe.Pointer {
-	return gobject.TODOToNone(c)
+	return TODOToNone(c)
 }
 
 // UnsafePixbufNonAnimToGlibFull is used to convert the instance to it's C value PixbufNonAnim, while removeing the finalizer. This is used by the bindings internally.
 func UnsafePixbufNonAnimToGlibFull(c PixbufNonAnim) unsafe.Pointer {
-	return gobject.TODOToFull(c)
+	return TODOToFull(c)
 }
 
 // NewPixbufNonAnimInstance wraps gdk_pixbuf_non_anim_new
@@ -4824,8 +4683,8 @@ func UnsafePixbufNonAnimToGlibFull(c PixbufNonAnim) unsafe.Pointer {
 // 
 // 	- ret PixbufAnimation 
 func NewPixbufNonAnimInstance(pixbuf Pixbuf) PixbufAnimation {
-	var carg1 *C.GdkPixbuf          // in, none, class
-	var cret  *C.GdkPixbufAnimation // return, full, class
+	var carg1 *C.GdkPixbuf          // in, none, converted
+	var cret  *C.GdkPixbufAnimation // return, full, converted
 
 	carg1 = (*C.GdkPixbuf)(UnsafePixbufToGlibNone(pixbuf))
 
@@ -4881,31 +4740,31 @@ type PixbufSimpleAnim interface {
 	SetLoop(bool)
 }
 
-func unsafeWrapPixbufSimpleAnim(base *gobject.Object) *PixbufSimpleAnimInstance {
+func unsafeWrapPixbufSimpleAnim(base *ObjectInstance) *PixbufSimpleAnimInstance {
 	return &PixbufSimpleAnimInstance{
-		PixbufAnimationInstance: PixbufAnimationInstance{
-			Object: *base,
+		ObjectInstance: gobject.ObjectInstance{
+			ObjectInstance: *base,
 		},
 	}
 }
 
 func marshalPixbufSimpleAnimInstance(p uintptr) (interface{}, error) {
-	return unsafeWrapPixbufSimpleAnim(gobject.ValueFromNative(unsafe.Pointer(p)).Object()), nil
+	return unsafeWrapPixbufSimpleAnim(gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Object()), nil
 }
 
 // UnsafePixbufSimpleAnimFromGlibBorrow is used to convert raw GdkPixbufSimpleAnim pointers to go. This is used by the bindings internally.
 func UnsafePixbufSimpleAnimFromGlibBorrow(c unsafe.Pointer) PixbufSimpleAnim {
-	return gobject.TODOBorrow(c).(PixbufSimpleAnim)
+	return TODOBorrow(c).(PixbufSimpleAnim)
 }
 
 // UnsafePixbufSimpleAnimFromGlibNone is used to convert raw GdkPixbufSimpleAnim pointers to go while taking a reference and attaching a finalizer. This is used by the bindings internally.
 func UnsafePixbufSimpleAnimFromGlibNone(c unsafe.Pointer) PixbufSimpleAnim {
-	return gobject.Take(c).(PixbufSimpleAnim)
+	return Take(c).(PixbufSimpleAnim)
 }
 
 // UnsafePixbufSimpleAnimFromGlibFull is used to convert raw GdkPixbufSimpleAnim pointers to go while attaching a finalizer. This is used by the bindings internally.
 func UnsafePixbufSimpleAnimFromGlibFull(c unsafe.Pointer) PixbufSimpleAnim {
-	return gobject.AssumeOwnership(c).(PixbufSimpleAnim)
+	return AssumeOwnership(c).(PixbufSimpleAnim)
 }
 
 func (p *PixbufSimpleAnimInstance) upcastToGdkPixbufSimpleAnim() *PixbufSimpleAnimInstance {
@@ -4914,12 +4773,12 @@ func (p *PixbufSimpleAnimInstance) upcastToGdkPixbufSimpleAnim() *PixbufSimpleAn
 
 // UnsafePixbufSimpleAnimToGlibNone is used to convert the instance to it's C value GdkPixbufSimpleAnim. This is used by the bindings internally.
 func UnsafePixbufSimpleAnimToGlibNone(c PixbufSimpleAnim) unsafe.Pointer {
-	return gobject.TODOToNone(c)
+	return TODOToNone(c)
 }
 
 // UnsafePixbufSimpleAnimToGlibFull is used to convert the instance to it's C value GdkPixbufSimpleAnim, while removeing the finalizer. This is used by the bindings internally.
 func UnsafePixbufSimpleAnimToGlibFull(c PixbufSimpleAnim) unsafe.Pointer {
-	return gobject.TODOToFull(c)
+	return TODOToFull(c)
 }
 
 // NewPixbufSimpleAnimInstance wraps gdk_pixbuf_simple_anim_new
@@ -4936,10 +4795,10 @@ func UnsafePixbufSimpleAnimToGlibFull(c PixbufSimpleAnim) unsafe.Pointer {
 //
 // Creates a new, empty animation.
 func NewPixbufSimpleAnimInstance(width int, height int, rate float32) PixbufSimpleAnim {
-	var carg1 C.int                  // in, casted
-	var carg2 C.int                  // in, casted
-	var carg3 C.gfloat               // in, casted
-	var cret  *C.GdkPixbufSimpleAnim // return, full, class
+	var carg1 C.int                  // in, none, casted
+	var carg2 C.int                  // in, none, casted
+	var carg3 C.gfloat               // in, none, casted
+	var cret  *C.GdkPixbufSimpleAnim // return, full, converted
 
 	carg1 = C.int(width)
 	carg2 = C.int(height)
@@ -4967,8 +4826,8 @@ func NewPixbufSimpleAnimInstance(width int, height int, rate float32) PixbufSimp
 // have the dimensions specified when the animation
 // was constructed.
 func (animation *PixbufSimpleAnimInstance) AddFrame(pixbuf Pixbuf) {
-	var carg0 *C.GdkPixbufSimpleAnim // in, none, class
-	var carg1 *C.GdkPixbuf           // in, none, class
+	var carg0 *C.GdkPixbufSimpleAnim // in, none, converted
+	var carg1 *C.GdkPixbuf           // in, none, converted
 
 	carg0 = (*C.GdkPixbufSimpleAnim)(UnsafePixbufSimpleAnimToGlibNone(animation))
 	carg1 = (*C.GdkPixbuf)(UnsafePixbufToGlibNone(pixbuf))
@@ -4985,7 +4844,7 @@ func (animation *PixbufSimpleAnimInstance) AddFrame(pixbuf Pixbuf) {
 //
 // Gets whether @animation should loop indefinitely when it reaches the end.
 func (animation *PixbufSimpleAnimInstance) GetLoop() bool {
-	var carg0 *C.GdkPixbufSimpleAnim // in, none, class
+	var carg0 *C.GdkPixbufSimpleAnim // in, none, converted
 	var cret  C.gboolean             // return
 
 	carg0 = (*C.GdkPixbufSimpleAnim)(UnsafePixbufSimpleAnimToGlibNone(animation))
@@ -5010,7 +4869,7 @@ func (animation *PixbufSimpleAnimInstance) GetLoop() bool {
 //
 // Sets whether @animation should loop indefinitely when it reaches the end.
 func (animation *PixbufSimpleAnimInstance) SetLoop(loop bool) {
-	var carg0 *C.GdkPixbufSimpleAnim // in, none, class
+	var carg0 *C.GdkPixbufSimpleAnim // in, none, converted
 	var carg1 C.gboolean             // in
 
 	carg0 = (*C.GdkPixbufSimpleAnim)(UnsafePixbufSimpleAnimToGlibNone(animation))
@@ -5038,31 +4897,31 @@ type PixbufSimpleAnimIter interface {
 
 }
 
-func unsafeWrapPixbufSimpleAnimIter(base *gobject.Object) *PixbufSimpleAnimIterInstance {
+func unsafeWrapPixbufSimpleAnimIter(base *ObjectInstance) *PixbufSimpleAnimIterInstance {
 	return &PixbufSimpleAnimIterInstance{
-		PixbufAnimationIterInstance: PixbufAnimationIterInstance{
-			Object: *base,
+		ObjectInstance: gobject.ObjectInstance{
+			ObjectInstance: *base,
 		},
 	}
 }
 
 func marshalPixbufSimpleAnimIterInstance(p uintptr) (interface{}, error) {
-	return unsafeWrapPixbufSimpleAnimIter(gobject.ValueFromNative(unsafe.Pointer(p)).Object()), nil
+	return unsafeWrapPixbufSimpleAnimIter(gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Object()), nil
 }
 
 // UnsafePixbufSimpleAnimIterFromGlibBorrow is used to convert raw PixbufSimpleAnimIter pointers to go. This is used by the bindings internally.
 func UnsafePixbufSimpleAnimIterFromGlibBorrow(c unsafe.Pointer) PixbufSimpleAnimIter {
-	return gobject.TODOBorrow(c).(PixbufSimpleAnimIter)
+	return TODOBorrow(c).(PixbufSimpleAnimIter)
 }
 
 // UnsafePixbufSimpleAnimIterFromGlibNone is used to convert raw PixbufSimpleAnimIter pointers to go while taking a reference and attaching a finalizer. This is used by the bindings internally.
 func UnsafePixbufSimpleAnimIterFromGlibNone(c unsafe.Pointer) PixbufSimpleAnimIter {
-	return gobject.Take(c).(PixbufSimpleAnimIter)
+	return Take(c).(PixbufSimpleAnimIter)
 }
 
 // UnsafePixbufSimpleAnimIterFromGlibFull is used to convert raw PixbufSimpleAnimIter pointers to go while attaching a finalizer. This is used by the bindings internally.
 func UnsafePixbufSimpleAnimIterFromGlibFull(c unsafe.Pointer) PixbufSimpleAnimIter {
-	return gobject.AssumeOwnership(c).(PixbufSimpleAnimIter)
+	return AssumeOwnership(c).(PixbufSimpleAnimIter)
 }
 
 func (p *PixbufSimpleAnimIterInstance) upcastTo() *PixbufSimpleAnimIterInstance {
@@ -5071,12 +4930,12 @@ func (p *PixbufSimpleAnimIterInstance) upcastTo() *PixbufSimpleAnimIterInstance 
 
 // UnsafePixbufSimpleAnimIterToGlibNone is used to convert the instance to it's C value PixbufSimpleAnimIter. This is used by the bindings internally.
 func UnsafePixbufSimpleAnimIterToGlibNone(c PixbufSimpleAnimIter) unsafe.Pointer {
-	return gobject.TODOToNone(c)
+	return TODOToNone(c)
 }
 
 // UnsafePixbufSimpleAnimIterToGlibFull is used to convert the instance to it's C value PixbufSimpleAnimIter, while removeing the finalizer. This is used by the bindings internally.
 func UnsafePixbufSimpleAnimIterToGlibFull(c PixbufSimpleAnimIter) unsafe.Pointer {
-	return gobject.TODOToFull(c)
+	return TODOToFull(c)
 }
 
 // PixbufAnimationClass wraps GdkPixbufAnimationClass
@@ -5198,7 +5057,7 @@ type pixbufFormat struct {
 }
 
 func marshalPixbufFormat(p uintptr) (interface{}, error) {
-	b := gobject.ValueFromNative(unsafe.Pointer(p)).Boxed()
+	b := gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Boxed()
 	return UnsafePixbufFormatFromGlibBorrow(b), nil
 }
 
@@ -5249,30 +5108,12 @@ func (p *PixbufFormat) Flags() uint32 {
 	return _v
 }
 
-// disabled wraps disabled
-//
-// a boolean determining whether the loader is disabled`
-func (p *PixbufFormat) Disabled() bool {
-	valptr := &p.native.disabled
-	var _v bool
-	_v = bool(*valptr)
-	return _v
-}
-
 // flags wraps flags
 //
 // a combination of `GdkPixbufFormatFlags`
 func (p *PixbufFormat) SetFlags(flags uint32) {
 	valptr := &p.native.flags
 	*valptr = C.guint32(flags)
-}
-
-// disabled wraps disabled
-//
-// a boolean determining whether the loader is disabled`
-func (p *PixbufFormat) SetDisabled(disabled bool) {
-	valptr := &p.native.disabled
-	*valptr = C.gboolean(disabled)
 }
 
 // GetDescription wraps gdk_pixbuf_format_get_description
@@ -5282,7 +5123,7 @@ func (p *PixbufFormat) SetDisabled(disabled bool) {
 //
 // Returns a description of the format.
 func (format *PixbufFormat) GetDescription() string {
-	var carg0 *C.GdkPixbufFormat // in, none, record
+	var carg0 *C.GdkPixbufFormat // in, none, converted
 	var cret  *C.gchar           // return, full, string
 
 	carg0 = (*C.GdkPixbufFormat)(UnsafePixbufFormatToGlibNone(format))
@@ -5301,22 +5142,22 @@ func (format *PixbufFormat) GetDescription() string {
 // GetExtensions wraps gdk_pixbuf_format_get_extensions
 // The function returns the following values:
 // 
-// 	- ret []string 
+// 	- ret array 
 //
 // Returns the filename extensions typically used for files in the
 // given format.
-func (format *PixbufFormat) GetExtensions() []string {
-	var carg0 *C.GdkPixbufFormat // in, none, record
-	var cret  **C.gchar          // return, transfer: full, scope: , implicit: false, skip: false, optional: false, nullable: false, caller-allocates: false, has closure: false, has destroy: false
+func (format *PixbufFormat) GetExtensions() array {
+	var carg0 *C.GdkPixbufFormat // in, none, converted
+	var cret  array              // return, transfer: full, scope: , implicit: false, skip: false, optional: false, nullable: false, caller-allocates: false, has closure: false, has destroy: false
 
 	carg0 = (*C.GdkPixbufFormat)(UnsafePixbufFormatToGlibNone(format))
 
 	cret = C.gdk_pixbuf_format_get_extensions(carg0)
 	runtime.KeepAlive(format)
 
-	var ret []string
+	var ret array
 
-	panic("unimplemented conversion of *typesystem.Array (gchar**)")
+	panic("unimplemented conversion of array (array)")
 
 	return ret
 }
@@ -5331,7 +5172,7 @@ func (format *PixbufFormat) GetExtensions() []string {
 // The returned string should be a shorthand for a well known license, e.g.
 // "LGPL", "GPL", "QPL", "GPL/QPL", or "other" to indicate some other license.
 func (format *PixbufFormat) GetLicense() string {
-	var carg0 *C.GdkPixbufFormat // in, none, record
+	var carg0 *C.GdkPixbufFormat // in, none, converted
 	var cret  *C.gchar           // return, full, string
 
 	carg0 = (*C.GdkPixbufFormat)(UnsafePixbufFormatToGlibNone(format))
@@ -5350,21 +5191,21 @@ func (format *PixbufFormat) GetLicense() string {
 // GetMIMETypes wraps gdk_pixbuf_format_get_mime_types
 // The function returns the following values:
 // 
-// 	- ret []string 
+// 	- ret array 
 //
 // Returns the mime types supported by the format.
-func (format *PixbufFormat) GetMIMETypes() []string {
-	var carg0 *C.GdkPixbufFormat // in, none, record
-	var cret  **C.gchar          // return, transfer: full, scope: , implicit: false, skip: false, optional: false, nullable: false, caller-allocates: false, has closure: false, has destroy: false
+func (format *PixbufFormat) GetMIMETypes() array {
+	var carg0 *C.GdkPixbufFormat // in, none, converted
+	var cret  array              // return, transfer: full, scope: , implicit: false, skip: false, optional: false, nullable: false, caller-allocates: false, has closure: false, has destroy: false
 
 	carg0 = (*C.GdkPixbufFormat)(UnsafePixbufFormatToGlibNone(format))
 
 	cret = C.gdk_pixbuf_format_get_mime_types(carg0)
 	runtime.KeepAlive(format)
 
-	var ret []string
+	var ret array
 
-	panic("unimplemented conversion of *typesystem.Array (gchar**)")
+	panic("unimplemented conversion of array (array)")
 
 	return ret
 }
@@ -5376,7 +5217,7 @@ func (format *PixbufFormat) GetMIMETypes() []string {
 //
 // Returns the name of the format.
 func (format *PixbufFormat) GetName() string {
-	var carg0 *C.GdkPixbufFormat // in, none, record
+	var carg0 *C.GdkPixbufFormat // in, none, converted
 	var cret  *C.gchar           // return, full, string
 
 	carg0 = (*C.GdkPixbufFormat)(UnsafePixbufFormatToGlibNone(format))
@@ -5401,7 +5242,7 @@ func (format *PixbufFormat) GetName() string {
 // 
 // See gdk_pixbuf_format_set_disabled().
 func (format *PixbufFormat) IsDisabled() bool {
-	var carg0 *C.GdkPixbufFormat // in, none, record
+	var carg0 *C.GdkPixbufFormat // in, none, converted
 	var cret  C.gboolean         // return
 
 	carg0 = (*C.GdkPixbufFormat)(UnsafePixbufFormatToGlibNone(format))
@@ -5433,7 +5274,7 @@ func (format *PixbufFormat) IsDisabled() bool {
 // 
 // See gdk_pixbuf_save() for more information about option keys.
 func (format *PixbufFormat) IsSaveOptionSupported(optionKey string) bool {
-	var carg0 *C.GdkPixbufFormat // in, none, record
+	var carg0 *C.GdkPixbufFormat // in, none, converted
 	var carg1 *C.gchar           // in, none, string
 	var cret  C.gboolean         // return
 
@@ -5465,7 +5306,7 @@ func (format *PixbufFormat) IsSaveOptionSupported(optionKey string) bool {
 // the desired size, rather than loading it at the default size and
 // scaling the resulting pixbuf to the desired size.
 func (format *PixbufFormat) IsScalable() bool {
-	var carg0 *C.GdkPixbufFormat // in, none, record
+	var carg0 *C.GdkPixbufFormat // in, none, converted
 	var cret  C.gboolean         // return
 
 	carg0 = (*C.GdkPixbufFormat)(UnsafePixbufFormatToGlibNone(format))
@@ -5489,7 +5330,7 @@ func (format *PixbufFormat) IsScalable() bool {
 //
 // Returns whether pixbufs can be saved in the given format.
 func (format *PixbufFormat) IsWritable() bool {
-	var carg0 *C.GdkPixbufFormat // in, none, record
+	var carg0 *C.GdkPixbufFormat // in, none, converted
 	var cret  C.gboolean         // return
 
 	carg0 = (*C.GdkPixbufFormat)(UnsafePixbufFormatToGlibNone(format))
@@ -5520,7 +5361,7 @@ func (format *PixbufFormat) IsWritable() bool {
 // Applications can use this to avoid using image loaders with an
 // inappropriate license, see gdk_pixbuf_format_get_license().
 func (format *PixbufFormat) SetDisabled(disabled bool) {
-	var carg0 *C.GdkPixbufFormat // in, none, record
+	var carg0 *C.GdkPixbufFormat // in, none, converted
 	var carg1 C.gboolean         // in
 
 	carg0 = (*C.GdkPixbufFormat)(UnsafePixbufFormatToGlibNone(format))

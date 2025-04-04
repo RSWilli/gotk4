@@ -51,6 +51,13 @@ func DeclareRecord(e *env, v gir.Record) *Record {
 		return nil
 	}
 
+	ns, typ := e.findTypeByGIRName("GObject.Value")
+
+	if typ == nil {
+		e.logger.Warn("skipping enum because gvalue was not found", "enum", v.Name)
+		return nil
+	}
+
 	return &Record{
 		Doc:           NewDoc(&v.InfoAttrs, &v.InfoElements),
 		PrivateGoType: strcases.UnexportPascal(v.Name),
@@ -67,7 +74,10 @@ func DeclareRecord(e *env, v gir.Record) *Record {
 			CGoTyp:  "C." + v.CType,
 			CTyp:    v.CType,
 		},
-		Marshaler: newDefaultMarshaler(v.GLibGetType),
+		Marshaler: newDefaultMarshaler(v.GLibGetType, CouldBeForeign[*Record]{
+			Namespace: ns,
+			Type:      typ.(*Record),
+		}),
 
 		gir: v,
 	}

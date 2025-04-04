@@ -53,17 +53,6 @@ func _gotk4_glib2_CopyFunc(carg1 C.gpointer, carg2 C.gpointer) (cret C.gpointer)
 	return cret
 }
 
-//export _gotk4_glib2_DuplicateFunc
-func _gotk4_glib2_DuplicateFunc(carg1 C.gpointer, carg2 C.gpointer) (cret C.gpointer) {
-
-
-	ret := fn(data)
-
-
-
-	return cret
-}
-
 //export _gotk4_glib2_EqualFunc
 func _gotk4_glib2_EqualFunc(carg1 C.gpointer, carg2 C.gpointer) (cret C.gboolean) {
 
@@ -80,39 +69,6 @@ func _gotk4_glib2_EqualFuncFull(carg1 C.gpointer, carg2 C.gpointer, carg3 C.gpoi
 
 
 	ret := fn(a, b)
-
-
-
-	return cret
-}
-
-//export _gotk4_glib2_ErrorClearFunc
-func _gotk4_glib2_ErrorClearFunc(carg1 *C.GError) (cret C.void) {
-
-
-	fn(err)
-
-
-
-	return cret
-}
-
-//export _gotk4_glib2_ErrorCopyFunc
-func _gotk4_glib2_ErrorCopyFunc(carg1 *C.GError, carg2 *C.GError) (cret C.void) {
-
-
-	fn(srcError, destError)
-
-
-
-	return cret
-}
-
-//export _gotk4_glib2_ErrorInitFunc
-func _gotk4_glib2_ErrorInitFunc(carg1 *C.GError) (cret C.void) {
-
-
-	fn(err)
 
 
 
@@ -174,138 +130,6 @@ func _gotk4_glib2_HashFunc(carg1 C.gpointer) (cret C.guint) {
 	return cret
 }
 
-//export _gotk4_glib2_HookCheckFunc
-func _gotk4_glib2_HookCheckFunc(carg1 C.gpointer) (cret C.gboolean) {
-
-
-	ret := fn(data)
-
-
-
-	return cret
-}
-
-//export _gotk4_glib2_HookCheckMarshaller
-func _gotk4_glib2_HookCheckMarshaller(carg1 *C.GHook, carg2 C.gpointer) (cret C.gboolean) {
-
-
-	ret := fn(hook, marshalData)
-
-
-
-	return cret
-}
-
-//export _gotk4_glib2_HookCompareFunc
-func _gotk4_glib2_HookCompareFunc(carg1 *C.GHook, carg2 *C.GHook) (cret C.int) {
-
-
-	ret := fn(newHook, sibling)
-
-
-
-	return cret
-}
-
-//export _gotk4_glib2_HookFinalizeFunc
-func _gotk4_glib2_HookFinalizeFunc(carg1 *C.GHookList, carg2 *C.GHook) (cret C.void) {
-
-
-	fn(hookList, hook)
-
-
-
-	return cret
-}
-
-//export _gotk4_glib2_HookFindFunc
-func _gotk4_glib2_HookFindFunc(carg1 *C.GHook, carg2 C.gpointer) (cret C.gboolean) {
-
-
-	ret := fn(hook, data)
-
-
-
-	return cret
-}
-
-//export _gotk4_glib2_HookFunc
-func _gotk4_glib2_HookFunc(carg1 C.gpointer) (cret C.void) {
-
-
-	fn(data)
-
-
-
-	return cret
-}
-
-//export _gotk4_glib2_HookMarshaller
-func _gotk4_glib2_HookMarshaller(carg1 *C.GHook, carg2 C.gpointer) (cret C.void) {
-
-
-	fn(hook, marshalData)
-
-
-
-	return cret
-}
-
-//export _gotk4_glib2_IOFunc
-func _gotk4_glib2_IOFunc(carg1 *C.GIOChannel, carg2 C.GIOCondition, carg3 C.gpointer) (cret C.gboolean) {
-
-
-	ret := fn(source, condition, data)
-
-
-
-	return cret
-}
-
-//export _gotk4_glib2_LogFunc
-func _gotk4_glib2_LogFunc(carg1 *C.gchar, carg2 C.GLogLevelFlags, carg3 *C.gchar, carg4 C.gpointer) (cret C.void) {
-
-
-	fn(logDomain, logLevel, message)
-
-
-
-	return cret
-}
-
-//export _gotk4_glib2_LogWriterFunc
-func _gotk4_glib2_LogWriterFunc(carg1 C.GLogLevelFlags, carg2 *C.GLogField, carg3 C.gsize, carg4 C.gpointer) (cret C.GLogWriterOutput) {
-
-
-	ret := fn(logLevel, fields)
-
-
-
-	return cret
-}
-
-//export _gotk4_glib2_NodeForEachFunc
-func _gotk4_glib2_NodeForEachFunc(carg1 *C.GNode, carg2 C.gpointer) (cret C.void) {
-
-
-	fn(node, data)
-
-
-
-	return cret
-}
-
-//export _gotk4_glib2_NodeTraverseFunc
-func _gotk4_glib2_NodeTraverseFunc(carg1 *C.GNode, carg2 C.gpointer) (cret C.gboolean) {
-
-
-	ret := fn(node, data)
-
-
-
-	return cret
-}
-
 //export _gotk4_glib2_OptionArgFunc
 func _gotk4_glib2_OptionArgFunc(carg1 *C.gchar, carg2 *C.gchar, carg3 C.gpointer, _cerr *C.GError) (cret C.gboolean) {
 
@@ -317,88 +141,11 @@ func _gotk4_glib2_OptionArgFunc(carg1 *C.gchar, carg2 *C.gchar, carg3 C.gpointer
 	return cret
 }
 
-//export _gotk4_glib2_OptionErrorFunc
-func _gotk4_glib2_OptionErrorFunc(carg1 *C.GOptionContext, carg2 *C.GOptionGroup, carg3 C.gpointer, _cerr *C.GError) (cret C.void) {
-
-
-	_goerr := fn(context, group, data)
-
-
-
-	return cret
-}
-
-//export _gotk4_glib2_OptionParseFunc
-func _gotk4_glib2_OptionParseFunc(carg1 *C.GOptionContext, carg2 *C.GOptionGroup, carg3 C.gpointer, _cerr *C.GError) (cret C.gboolean) {
-
-
-	ret, _goerr := fn(context, group, data)
-
-
-
-	return cret
-}
-
-//export _gotk4_glib2_PollFunc
-func _gotk4_glib2_PollFunc(carg1 *C.GPollFD, carg2 C.guint, carg3 C.int) (cret C.int) {
-
-
-	ret := fn(ufds, nfsd, timeout_)
-
-
-
-	return cret
-}
-
 //export _gotk4_glib2_PrintFunc
 func _gotk4_glib2_PrintFunc(carg1 *C.gchar) (cret C.void) {
 
 
 	fn(str)
-
-
-
-	return cret
-}
-
-//export _gotk4_glib2_RegexEvalCallback
-func _gotk4_glib2_RegexEvalCallback(carg1 *C.GMatchInfo, carg2 *C.GString, carg3 C.gpointer) (cret C.gboolean) {
-
-
-	ret := fn(matchInfo, result)
-
-
-
-	return cret
-}
-
-//export _gotk4_glib2_ScannerMsgFunc
-func _gotk4_glib2_ScannerMsgFunc(carg1 *C.GScanner, carg2 *C.gchar, carg3 C.gboolean) (cret C.void) {
-
-
-	fn(scanner, message, err)
-
-
-
-	return cret
-}
-
-//export _gotk4_glib2_SequenceIterCompareFunc
-func _gotk4_glib2_SequenceIterCompareFunc(carg1 *C.GSequenceIter, carg2 *C.GSequenceIter, carg3 C.gpointer) (cret C.int) {
-
-
-	ret := fn(a, b, data)
-
-
-
-	return cret
-}
-
-//export _gotk4_glib2_SourceDisposeFunc
-func _gotk4_glib2_SourceDisposeFunc(carg1 *C.GSource) (cret C.void) {
-
-
-	fn(source)
 
 
 
@@ -427,39 +174,6 @@ func _gotk4_glib2_SourceFunc(carg1 C.gpointer) (cret C.gboolean) {
 	return cret
 }
 
-//export _gotk4_glib2_SourceFuncsCheckFunc
-func _gotk4_glib2_SourceFuncsCheckFunc(carg1 *C.GSource) (cret C.gboolean) {
-
-
-	ret := fn(source)
-
-
-
-	return cret
-}
-
-//export _gotk4_glib2_SourceFuncsFinalizeFunc
-func _gotk4_glib2_SourceFuncsFinalizeFunc(carg1 *C.GSource) (cret C.void) {
-
-
-	fn(source)
-
-
-
-	return cret
-}
-
-//export _gotk4_glib2_SourceFuncsPrepareFunc
-func _gotk4_glib2_SourceFuncsPrepareFunc(carg1 *C.GSource, carg2 C.int) (cret C.gboolean) {
-
-
-	timeout_, ret := fn(source)
-
-
-
-	return cret
-}
-
 //export _gotk4_glib2_SourceOnceFunc
 func _gotk4_glib2_SourceOnceFunc(carg1 C.gpointer) (cret C.void) {
 
@@ -476,61 +190,6 @@ func _gotk4_glib2_SpawnChildSetupFunc(carg1 C.gpointer) (cret C.void) {
 
 
 	fn(data)
-
-
-
-	return cret
-}
-
-//export _gotk4_glib2_TestDataFunc
-func _gotk4_glib2_TestDataFunc(carg1 C.gpointer) (cret C.void) {
-
-
-	fn()
-
-
-
-	return cret
-}
-
-//export _gotk4_glib2_TestFixtureFunc
-func _gotk4_glib2_TestFixtureFunc(carg1 C.gpointer, carg2 C.gpointer) (cret C.void) {
-
-
-	fn(fixture)
-
-
-
-	return cret
-}
-
-//export _gotk4_glib2_TestFunc
-func _gotk4_glib2_TestFunc() (cret C.void) {
-
-
-	fn()
-
-
-
-	return cret
-}
-
-//export _gotk4_glib2_TestLogFatalFunc
-func _gotk4_glib2_TestLogFatalFunc(carg1 *C.gchar, carg2 C.GLogLevelFlags, carg3 *C.gchar, carg4 C.gpointer) (cret C.gboolean) {
-
-
-	ret := fn(logDomain, logLevel, message)
-
-
-
-	return cret
-}
-
-//export _gotk4_glib2_ThreadFunc
-func _gotk4_glib2_ThreadFunc(carg1 C.gpointer) (cret C.gpointer) {
-
-
-	ret := fn(data)
 
 
 
@@ -559,28 +218,6 @@ func _gotk4_glib2_TraverseFunc(carg1 C.gpointer, carg2 C.gpointer, carg3 C.gpoin
 	return cret
 }
 
-//export _gotk4_glib2_TraverseNodeFunc
-func _gotk4_glib2_TraverseNodeFunc(carg1 *C.GTreeNode, carg2 C.gpointer) (cret C.gboolean) {
-
-
-	ret := fn(node, data)
-
-
-
-	return cret
-}
-
-//export _gotk4_glib2_UnixFDSourceFunc
-func _gotk4_glib2_UnixFDSourceFunc(carg1 C.int, carg2 C.GIOCondition, carg3 C.gpointer) (cret C.gboolean) {
-
-
-	ret := fn(fd, condition)
-
-
-
-	return cret
-}
-
 //export _gotk4_glib2_VoidFunc
 func _gotk4_glib2_VoidFunc() (cret C.void) {
 
@@ -597,17 +234,6 @@ func _gotk4_glib2_ChildWatchFunc(carg1 C.GPid, carg2 C.int, carg3 C.gpointer) (c
 
 
 	fn(pid, waitStatus)
-
-
-
-	return cret
-}
-
-//export _gotk4_glib2_DataForEachFunc
-func _gotk4_glib2_DataForEachFunc(carg1 C.GQuark, carg2 C.gpointer, carg3 C.gpointer) (cret C.void) {
-
-
-	fn(keyId, data)
 
 
 

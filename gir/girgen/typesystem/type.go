@@ -1,5 +1,7 @@
 package typesystem
 
+import "slices"
+
 type Type interface {
 	GIRName() string
 	GoType(pointers int) string
@@ -15,8 +17,6 @@ type BaseType struct {
 	GoTyp   string
 	CGoTyp  string
 	CTyp    string
-
-	IsGoBuiltin bool
 }
 
 // GIRName implements Type.
@@ -36,7 +36,7 @@ func (b BaseType) CType(pointers int) string {
 
 // GoType implements Type.
 func (b BaseType) GoType(pointers int) string {
-	if b.IsGoBuiltin {
+	if slices.Contains(GoBuiltins, b.GoTyp) {
 		return b.GoTyp
 	}
 	return GetPointers(pointers) + b.GoTyp

@@ -12,13 +12,15 @@ type CToGoStringConverter struct {
 }
 
 // Convert implements Converter.
-func (c *CToGoStringConverter) Convert(w file.CodeWriter) {
-	fmt.Fprintf(w, "%s = C.GoString((%s)(unsafe.Pointer(%s)))\n", c.Param.GoName, c.Param.CGoType(), c.Param.CName)
+func (c *CToGoStringConverter) Convert(w file.File) {
+	w.GoImport("unsafe")
+
+	fmt.Fprintf(w.Go(), "%s = C.GoString((%s)(unsafe.Pointer(%s)))\n", c.Param.GoName, c.Param.CGoType(), c.Param.CName)
 
 	switch c.Param.TransferOwnership {
 	case typesystem.TransferFull:
 		// GoString copies the param, so free it immediately
-		fmt.Fprintf(w, "defer C.free(unsafe.Pointer(%s))\n", c.Param.CName)
+		fmt.Fprintf(w.Go(), "defer C.free(unsafe.Pointer(%s))\n", c.Param.CName)
 	case typesystem.TransferNone:
 		// C will free it
 	default:
@@ -38,16 +40,16 @@ type GoToCStringConverter struct {
 }
 
 // Convert implements Converter.
-func (c *GoToCStringConverter) Convert(w file.CodeWriter) {
-	// TODO: import unsafe
+func (c *GoToCStringConverter) Convert(w file.File) {
+	w.GoImport("unsafe")
 
-	fmt.Fprintf(w, "%s = (%s)(unsafe.Pointer(C.CString(%s)))\n", c.Param.CName, c.Param.CGoType(), c.Param.GoName)
+	fmt.Fprintf(w.Go(), "%s = (%s)(unsafe.Pointer(C.CString(%s)))\n", c.Param.CName, c.Param.CGoType(), c.Param.GoName)
 
 	switch c.Param.TransferOwnership {
 	case typesystem.TransferFull:
 		return // C will free it
 	case typesystem.TransferNone:
-		fmt.Fprintf(w, "defer C.free(unsafe.Pointer(%s))\n", c.Param.CName)
+		fmt.Fprintf(w.Go(), "defer C.free(unsafe.Pointer(%s))\n", c.Param.CName)
 	default:
 		panic(fmt.Sprintf("unexpected typesystem.TransferOwnership: %#v", c.Param.TransferOwnership))
 	}

@@ -2,9 +2,8 @@ package genmain
 
 import (
 	"flag"
+	"fmt"
 	"log"
-
-	"maps"
 
 	"github.com/diamondburned/gotk4/gir"
 	"github.com/diamondburned/gotk4/gir/girgen"
@@ -12,7 +11,6 @@ import (
 	"github.com/diamondburned/gotk4/gir/girgen/generators"
 	"github.com/diamondburned/gotk4/gir/girgen/logger"
 	"github.com/diamondburned/gotk4/gir/girgen/types"
-	"github.com/diamondburned/gotk4/gir/girgen/types/typeconv"
 	"github.com/diamondburned/gotk4/gir/girgen/typesystem"
 )
 
@@ -80,46 +78,15 @@ type Data struct {
 	// KnownPackages is similar to Packages, but no packages in this list will
 	// be used to generate code. This list automatically includes Packages.
 	KnownPackages []Package
-	// ImportOverrides is the list of imports to defer to another library,
-	// usually because it's tedious or impossible to generate.
-	//
-	// Not included: coreglib (gotk3/gotk3/glib).
-	ImportOverrides map[string]string
 	// ExternOverrides adds into ImportOverrides packages that were generated
 	// from the given GIR repositories, with the map key being the Go module
 	// root for those packages. It internally invokes LoadExternOverrides.
 	ExternOverrides map[string]gir.Repositories
-	// PkgExceptions contains a list of file names that won't be deleted off of
-	// pkg/.
-	PkgExceptions []string
-	// GenerateExceptions contains the keys of the underneath ImportOverrides
-	// map.
-	GenerateExceptions []string
-	// PkgGenerated contains a list of file names that are packages generated
-	// using the given Packages list. It is manually updated.
-	PkgGenerated []string
 	// Preprocessors defines a list of preprocessors that the main generator
 	// will use. It's mostly used for renaming colliding types/identifiers.
 	Preprocessors []types.Preprocessor
-	// Postprocessors is a map of versioned namespace names to a list of
-	// functions that are called to modify any file before it is written out.
-	Postprocessors map[string][]girgen.Postprocessor
-	// ExtraGoContents contains the contents of files that are appended into
-	// generated outputs. It is used to add custom implementations of missing
-	// functions. It is a simpler version of Postprocessors.
-	ExtraGoContents map[string]string
-	// Filters defines a list of GIR types to be filtered. The map key is the
-	// namespace, and the values are list of names.
-	Filters []types.FilterMatcher
-	// ProcessConverters is a list of things that can override a type converter.
-	ProcessConverters []typeconv.ConversionProcessor
-	// DynamicLinkNamespaces lists namespaces that should be generated directly
-	// using Cgo. It includes important core packages as well as packages that
-	// are small but performance-sensitive.
-	DynamicLinkNamespaces []string
-	// SingleFile, if true, will make all NamespaceGenerators generate a single
-	// output file per package instead of correlating it to the source file.
-	SingleFile bool
+
+	Config typesystem.Config
 }
 
 // Overlay joins the given list of data into a single Data. The last Data in the
@@ -136,9 +103,7 @@ func Overlay(data ...Data) Data {
 		last.KnownPackages = append(last.KnownPackages, datum.Packages...)
 		last.ExternOverrides[datum.Module] = MustLoadPackages(datum.Packages)
 		last.Preprocessors = append(last.Preprocessors, datum.Preprocessors...)
-		last.Filters = append(last.Filters, datum.Filters...)
-		last.ProcessConverters = append(last.ProcessConverters, datum.ProcessConverters...)
-		last.DynamicLinkNamespaces = append(last.DynamicLinkNamespaces, datum.DynamicLinkNamespaces...)
+		last.Config = last.Config.Combine(datum.Config)
 	}
 
 	return last
@@ -170,135 +135,25 @@ func Generate(repos gir.Repositories, data Data) {
 		log.Fatalln("failed to clean output directory:", err)
 	}
 
-	overrides := data.ImportOverrides
-	if overrides == nil {
-		overrides = map[string]string{}
+	importBaseURIs := map[string]string{}
+
+	for _, r := range repos {
+		for _, ns := range r.Namespaces {
+			importBaseURIs[fmt.Sprintf("%s-%d", ns.Name, ns.Version.Major)] = data.Module
+		}
 	}
 
 	for mod, extern := range data.ExternOverrides {
-		maps.Copy(overrides, LoadExternOverrides(mod, extern))
+		for _, r := range extern {
+			for _, ns := range r.Namespaces {
+				importBaseURIs[fmt.Sprintf("%s-%d", ns.Name, ns.Version.Major)] = mod
+			}
+		}
 	}
 
 	types.ApplyPreprocessors(repos, data.Preprocessors)
 
-	tsCfg := typesystem.Config{
-		GIRReplacements: map[string]string{
-			"GType": "GLib.Type", // manually implemented in glib namespace
-		},
-		Namespaces: map[string]typesystem.NamespaceConfig{
-			"cairo-1": {
-				Ignored: true, // FIXME: manually implemented
-			},
-			"Atspi-2": {
-				Ignored: true, // Missing AtspiDevice
-			},
-			"GLib-2": {
-				MinVersion: "2.80",
-				ManualTypes: []typesystem.Type{
-					&typesystem.CastablePrimitive{
-						BaseType: typesystem.BaseType{
-							GirName: "Type", // see GIRReplacements
-							CTyp:    "GType",
-							CGoTyp:  "C.GType",
-							GoTyp:   "Type",
-						},
-					},
-					&typesystem.Callback{
-						BaseType: typesystem.BaseType{
-							GirName: "DestroyNotify",
-							GoTyp:   "DestroyNotify",
-							CGoTyp:  "C.GDestroyNotify",
-							CTyp:    "GDestroyNotify",
-						},
-						Parameters:     &typesystem.Parameters{},
-						TrampolineName: "callbackDelete",
-					},
-					&typesystem.Record{
-						BaseType: typesystem.BaseType{
-							GirName: "Error",
-							CGoTyp:  "C.GError",
-							CTyp:    "GError",
-							GoTyp:   "error",
-
-							IsGoBuiltin: true,
-						},
-						BaseConversions: typesystem.BaseConversions{
-							FromGlibBorrowFunction: "UnsafeErrorFromGlibBorrow",
-							FromGlibFullFunction:   "UnsafeErrorFromGlibFull",
-							FromGlibNoneFunction:   "UnsafeErrorFromGlibNone",
-							ToGlibNoneFunction:     "UnsafeErrorToGlibNone",
-							ToGlibFullFunction:     "UnsafeErrorToGlibFull",
-						},
-					},
-				},
-				// Ignored: []typesystem.IgnoreFunc{
-				// 	typesystem.IgnoreMatching(typesystem.GIRCallbackPattern("DestroyNotify")),
-				// },
-			},
-			"GObject-2": {
-				ManualTypes: []typesystem.Type{
-					&typesystem.Class{
-						BaseType: typesystem.BaseType{
-							GirName: "Object",
-							GoTyp:   "ObjectInstance",
-							CTyp:    "GObject",
-							CGoTyp:  "C.GObject",
-						},
-						GoInterfaceName: "Object",
-						Doc:             typesystem.Doc{},
-						BaseConversions: typesystem.BaseConversions{
-							FromGlibBorrowFunction: "TODOBorrow",
-							FromGlibFullFunction:   "AssumeOwnership",
-							FromGlibNoneFunction:   "Take",
-							ToGlibNoneFunction:     "TODOToNone",
-							ToGlibFullFunction:     "TODOToFull",
-						},
-					},
-					&typesystem.Record{
-						BaseType: typesystem.BaseType{
-							GirName: "ObjectClass",
-							GoTyp:   "ObjectClass",
-							CTyp:    "GObjectClass",
-							CGoTyp:  "C.GObjectClass",
-						},
-					},
-					&typesystem.Record{
-						BaseType: typesystem.BaseType{
-							GirName: "Value",
-							GoTyp:   "Value",
-							CTyp:    "GValue",
-							CGoTyp:  "C.GValue",
-						},
-						BaseConversions: typesystem.BaseConversions{
-							FromGlibBorrowFunction: "TODOFromGlibBorrow",
-							FromGlibFullFunction:   "TODOFromGlibFull",
-							FromGlibNoneFunction:   "TODOFromGlibNone",
-							ToGlibNoneFunction:     "TODOToGlibNone",
-							ToGlibFullFunction:     "TODOToGlibFull",
-						},
-					},
-
-					// &typesystem.ForeignType{
-					// 	SourceNamespace: &typesystem.Namespace{GoName: "coreglib"},
-					// 	Type: &typesystem.Class{
-					// 		BaseType: typesystem.BaseType{
-					// 			GirName: "ParamSpec",
-					// 			GoTyp:   "ParamSpec",
-					// 			CTyp:    "GParamSpec",
-					// 			CGoTyp:  "C.GParamSpec",
-					// 		},
-					// 	},
-					// },
-				},
-				IgnoredDefinitions: []typesystem.IgnoreFunc{
-					// manually implemented, but hidden from the user
-					typesystem.IgnoreMatching(typesystem.GIRRecordPattern("ParamSpec")),
-				},
-			},
-		},
-	}
-
-	ts := typesystem.FromRepositories(tsCfg, repos)
+	ts := typesystem.FromRepositories(data.Config, repos)
 
 	// TODO: add a hook stage here, where the user can modify the chosen names of the typesystem
 
@@ -324,7 +179,7 @@ func Generate(repos gir.Repositories, data Data) {
 	// TODO: add a hook stage here, where the user can modify all generators in "gen"
 
 	for _, g := range gen {
-		w := file.NewPackage(Output)
+		w := file.NewPackage(Output, importBaseURIs)
 
 		g.Generate(w)
 

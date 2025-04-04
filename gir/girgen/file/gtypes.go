@@ -19,6 +19,10 @@ func (t gType) name() string {
 }
 
 func (ts gTypes) reader() io.Reader {
+	if len(ts) == 0 {
+		return io.MultiReader()
+	}
+
 	var block internal.CodeWriter
 
 	fmt.Fprintln(&block, "// GType values.")

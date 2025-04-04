@@ -610,10 +610,10 @@ func (g *RecordGenerator) Generate(w *file.Package) {
 	fmt.Fprintf(w.Go(), "}\n\n")
 
 	if g.GenerateMarshaler {
-		w.RegisterGType(g)
+		w.RegisterGType(g.Record)
 		fmt.Fprintf(w.Go(), "func marshal%s(p uintptr) (interface{}, error) {\n", g.GoType(0))
-		fmt.Fprintf(w.Go(), "\tb := gobject.ValueFromNative(unsafe.Pointer(p)).Boxed()\n")
-		fmt.Fprintf(w.Go(), "\treturn %s(b), nil\n", g.GoUnsafeFromGlibBorrowFunction()) // TODO: does this need to be a copy?
+		fmt.Fprintf(w.Go(), "\tb := %s(unsafe.Pointer(p)).Boxed()\n", g.Value().WithForeignNamespace(g.Value().Type.FromGlibBorrowFunction))
+		fmt.Fprintf(w.Go(), "\treturn %s(b), nil\n", g.GoUnsafeFromGlibBorrowFunction())
 		fmt.Fprintf(w.Go(), "}\n\n")
 	}
 

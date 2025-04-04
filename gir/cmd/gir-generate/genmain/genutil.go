@@ -75,7 +75,7 @@ func LoadExternOverrides(mod string, repos gir.Repositories) map[string]string {
 
 	for _, repo := range repos {
 		for _, namespace := range repo.Namespaces {
-			externs[gir.VersionedNamespace(&namespace)] = modPath(&namespace)
+			externs[namespace.Name+"-"+namespace.Version.String()] = modPath(&namespace)
 		}
 	}
 

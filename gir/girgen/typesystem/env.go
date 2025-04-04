@@ -61,15 +61,15 @@ func (e *env) trampolinePrefix() string {
 // skip returns true if the gir type/identifier should be skipped. Any optional parent can be passed
 // to handle nested gir identifiers
 func (e *env) skip(parent Type, anygir any) bool {
-	name, kind := infoFromAnyGir(anygir)
+	name, attrs, elements := infoFromAnyGir(anygir)
 
-	if e.ingoreDeprecated(name, kind, anygir) {
+	if e.ingoreDeprecated(name, attrs) {
 		return true
 	}
 
 	for _, m := range e.namespace.Manual {
 		if m.GIRName() == name {
-			e.logger.Info("skipping manually implemented type", "kind", kind, "name", name)
+			e.logger.Info("skipping manually implemented type", "name", name)
 			return true
 		}
 	}
@@ -79,30 +79,20 @@ func (e *env) skip(parent Type, anygir any) bool {
 		parentName = parent.GIRName()
 	}
 
-	id := GIRIdentifier{
-		Parent: parentName,
-		Name:   name,
-		Kind:   kind,
-	}
-
-	return e.ignore(id)
+	return e.ignore(parentName, name, attrs, elements)
 }
 
 type girWithInfoAttrs interface {
 	GetInfoAttrs() gir.InfoAttrs
 }
 
-func (e *env) ingoreDeprecated(name string, kind GIRKind, anygir any) bool {
-	gt, ok := anygir.(girWithInfoAttrs)
+type girWithInfoElements interface {
+	GetInfoElements() gir.InfoElements
+}
 
-	if !ok {
-		return false
-	}
-
-	attrs := gt.GetInfoAttrs()
-
+func (e *env) ingoreDeprecated(name string, attrs gir.InfoAttrs) bool {
 	if attrs.Deprecated && attrs.DeprecatedVersion.Less(e.minVersion) {
-		e.logger.Info("skipping deprecated", "kind", kind, "name", name, "deprecated-since", attrs.DeprecatedVersion, "min-version", e.minVersion)
+		e.logger.Info("skipping deprecated", "name", name, "deprecated-since", attrs.DeprecatedVersion, "min-version", e.minVersion)
 		return true
 	}
 

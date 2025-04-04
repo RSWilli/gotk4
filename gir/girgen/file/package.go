@@ -19,20 +19,30 @@ type Package struct {
 
 	basepath string
 
-	File
-	Exported File
+	file
+	Exported file
 
 	registeredTypes gTypes
+
+	importOverrides map[string]string
 }
 
-func NewPackage(basepath string) *Package {
+func NewPackage(basepath string, importOverrides map[string]string) *Package {
 	return &Package{
 		basepath: basepath,
+		file: file{
+			importBaseURIs: importOverrides,
+		},
+		Exported: file{
+			importBaseURIs: importOverrides,
+		},
 	}
 }
 
 func (w *Package) SetNamespace(namespace *typesystem.Namespace) {
 	w.namespace = namespace
+	w.file.currentNs = namespace
+	w.Exported.currentNs = namespace
 }
 
 func (p *Package) RegisterGType(t typesystem.Marshalable) {
@@ -49,7 +59,7 @@ func (p *Package) Commit() error {
 	if !p.Exported.empty() {
 		exportsFile := path.Join(p.folder(), fmt.Sprintf("%s_export.gen.go", p.namespace.GoName))
 
-		err := p.writeFile(exportsFile, p.exportFile())
+		err := p.writeFile(exportsFile, p.exportFileReader())
 
 		if err != nil {
 			return err
@@ -58,7 +68,7 @@ func (p *Package) Commit() error {
 
 	goFile := path.Join(p.folder(), fmt.Sprintf("%s.gen.go", p.namespace.GoName))
 
-	err = p.writeFile(goFile, p.file())
+	err = p.writeFile(goFile, p.mainFileReader())
 
 	if err != nil {
 		return err
@@ -93,8 +103,8 @@ func (w *Package) folder() string {
 var str = strings.NewReader
 var empty = io.MultiReader() // empty always returns EOF
 
-// file returns a reader that outputs the contents of the file.go file
-func (w *Package) file() io.Reader {
+// mainFileReader returns a reader that outputs the contents of the mainFileReader.go mainFileReader
+func (w *Package) mainFileReader() io.Reader {
 	if w.empty() {
 		panic("unreachable")
 	}
@@ -115,8 +125,8 @@ func (w *Package) file() io.Reader {
 	)
 }
 
-// exportFile returns a reader that outputs the contents of the file_export.go file
-func (w *Package) exportFile() io.Reader {
+// exportFileReader returns a reader that outputs the contents of the file_export.go file
+func (w *Package) exportFileReader() io.Reader {
 	if w.Exported.empty() {
 		panic("unreachable")
 	}

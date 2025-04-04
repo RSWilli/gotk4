@@ -17,7 +17,7 @@ func (i *ImplicitConverter) Metadata() string {
 }
 
 // PostCallConvert implements Converter.
-func (i *ImplicitConverter) Convert(file.CodeWriter) {}
+func (i *ImplicitConverter) Convert(file.File) {}
 
 var _ Converter = (*ImplicitConverter)(nil)
 
@@ -32,6 +32,6 @@ func (i *SkippedConverter) Metadata() string {
 }
 
 // PostCallConvert implements Converter.
-func (i *SkippedConverter) Convert(file.CodeWriter) {}
+func (i *SkippedConverter) Convert(file.File) {}
 
 var _ Converter = (*SkippedConverter)(nil)

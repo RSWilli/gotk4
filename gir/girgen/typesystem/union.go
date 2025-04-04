@@ -28,6 +28,13 @@ func DeclareUnion(e *env, v gir.Union) *Union {
 		return nil
 	}
 
+	ns, typ := e.findTypeByGIRName("GObject.Value")
+
+	if typ == nil {
+		e.logger.Warn("skipping enum because gvalue was not found", "enum", v.Name)
+		return nil
+	}
+
 	return &Union{
 		Doc:     NewDoc(&v.InfoAttrs, &v.InfoElements),
 		GetType: v.GLibGetType,
@@ -37,8 +44,11 @@ func DeclareUnion(e *env, v gir.Union) *Union {
 			CGoTyp:  "C." + v.CType,
 			CTyp:    v.CType,
 		},
-		Marshaler: newDefaultMarshaler(v.GLibGetType),
-		gir:       v,
+		Marshaler: newDefaultMarshaler(v.GLibGetType, CouldBeForeign[*Record]{
+			Namespace: ns,
+			Type:      typ.(*Record),
+		}),
+		gir: v,
 	}
 }
 

@@ -12,7 +12,7 @@ type GoToCCallbackConverter struct {
 }
 
 // Convert implements Converter.
-func (c *GoToCCallbackConverter) Convert(w file.CodeWriter) {
+func (c *GoToCCallbackConverter) Convert(w file.File) {
 	if c.Param.Closure == nil {
 		panic("no closure param")
 	}
@@ -25,25 +25,26 @@ func (c *GoToCCallbackConverter) Convert(w file.CodeWriter) {
 	closure := c.Param.Closure
 	destroy := c.Param.Destroy
 
-	// TODO: import gbox
+	w.GoImportCore("gbox")
 
 	assignFunc := "Assign"
 
 	if c.Param.Scope == typesystem.CallbackParamScopeAsync {
 		assignFunc = "AssignOnce"
 	}
+	// TODO: declare the extern function in the C preamble
 
-	fmt.Fprintf(w, "%s = (*[0]byte)(C.%s)\n", c.Param.CName, cb.TrampolineName)
-	fmt.Fprintf(w, "%s = %s(gbox.%s(%s))\n", closure.CName, closure.CGoType(), assignFunc, c.Param.GoName)
+	fmt.Fprintf(w.Go(), "%s = (*[0]byte)(C.%s)\n", c.Param.CName, cb.TrampolineName)
+	fmt.Fprintf(w.Go(), "%s = %s(gbox.%s(%s))\n", closure.CName, closure.CGoType(), assignFunc, c.Param.GoName)
 
 	switch c.Param.Scope {
 	case typesystem.CallbackParamScopeAsync, typesystem.CallbackParamScopeForever:
 		// nothing
 	case typesystem.CallbackParamScopeCall:
-		fmt.Fprintf(w, "defer gbox.Delete(uintptr(%s))\n", closure.CName)
+		fmt.Fprintf(w.Go(), "defer gbox.Delete(uintptr(%s))\n", closure.CName)
 	case typesystem.CallbackParamScopeNotified:
 		destroyTrampoline := destroy.Type.Type.(*typesystem.Callback).TrampolineName
-		fmt.Fprintf(w, "%s = (%s)((*[0]byte)(C.%s))\n", destroy.CName, destroy.CGoType(), destroyTrampoline)
+		fmt.Fprintf(w.Go(), "%s = (%s)((*[0]byte)(C.%s))\n", destroy.CName, destroy.CGoType(), destroyTrampoline)
 	default:
 		panic(fmt.Sprintf("unexpected typesystem.CallbackParamScope: %#v", c.Param.Scope))
 	}

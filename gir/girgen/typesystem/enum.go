@@ -14,11 +14,20 @@ type Enum struct {
 }
 
 func DeclareEnum(e *env, v gir.Enum) *Enum {
+	e = e.sub("bitfield", v.CType)
+
 	if !v.IsIntrospectable() {
 		return nil
 	}
 
 	if e.skip(nil, v) {
+		return nil
+	}
+
+	ns, typ := e.findTypeByGIRName("GObject.Value")
+
+	if typ == nil {
+		e.logger.Warn("skipping enum because gvalue was not found", "enum", v.Name)
 		return nil
 	}
 
@@ -29,8 +38,11 @@ func DeclareEnum(e *env, v gir.Enum) *Enum {
 			CGoTyp:  "C." + v.CType,
 			CTyp:    v.CType,
 		},
-		Marshaler: newDefaultMarshaler(v.GLibGetType),
-		Doc:       NewDoc(&v.InfoAttrs, &v.InfoElements),
+		Marshaler: newDefaultMarshaler(v.GLibGetType, CouldBeForeign[*Record]{
+			Namespace: ns,
+			Type:      typ.(*Record),
+		}),
+		Doc: NewDoc(&v.InfoAttrs, &v.InfoElements),
 	}
 
 	enum.Members = GetMembers(e, enum, v.Members)

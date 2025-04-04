@@ -13,12 +13,12 @@ type CToGoNullableConverter struct {
 }
 
 // Convert implements Converter.
-func (c *CToGoNullableConverter) Convert(w file.CodeWriter) {
-	fmt.Fprintf(w, "if %s != nil {\n", c.Param.CName)
-	w.Indent()
+func (c *CToGoNullableConverter) Convert(w file.File) {
+	fmt.Fprintf(w.Go(), "if %s != nil {\n", c.Param.CName)
+	w.Go().Indent()
 	c.SubConverter.Convert(w)
-	w.Unindent()
-	fmt.Fprintf(w, "}\n")
+	w.Go().Unindent()
+	fmt.Fprintf(w.Go(), "}\n")
 }
 
 // Metadata implements Converter.
@@ -35,12 +35,12 @@ type GoToCNullableConverter struct {
 }
 
 // Convert implements Converter.
-func (c *GoToCNullableConverter) Convert(w file.CodeWriter) {
-	fmt.Fprintf(w, "if %s != nil {\n", c.Param.GoName)
-	w.Indent()
+func (c *GoToCNullableConverter) Convert(w file.File) {
+	fmt.Fprintf(w.Go(), "if %s != nil {\n", c.Param.GoName)
+	w.Go().Indent()
 	c.SubConverter.Convert(w)
-	w.Unindent()
-	fmt.Fprintf(w, "}\n")
+	w.Go().Unindent()
+	fmt.Fprintf(w.Go(), "}\n")
 }
 
 // Metadata implements Converter.

@@ -16,11 +16,20 @@ type Bitfield struct {
 }
 
 func DeclareBitfield(e *env, v gir.Bitfield) *Bitfield {
+	e = e.sub("bitfield", v.CType)
+
 	if !v.IsIntrospectable() {
 		return nil
 	}
 
 	if e.skip(nil, v) {
+		return nil
+	}
+
+	ns, typ := e.findTypeByGIRName("GObject.Value")
+
+	if typ == nil {
+		e.logger.Warn("skipping because gvalue was not found")
 		return nil
 	}
 
@@ -31,8 +40,11 @@ func DeclareBitfield(e *env, v gir.Bitfield) *Bitfield {
 			CGoTyp:  "C." + v.CType,
 			CTyp:    v.CType,
 		},
-		Marshaler: newDefaultMarshaler(v.GLibGetType),
-		Doc:       NewDoc(&v.InfoAttrs, &v.InfoElements),
+		Marshaler: newDefaultMarshaler(v.GLibGetType, CouldBeForeign[*Record]{
+			Namespace: ns,
+			Type:      typ.(*Record),
+		}),
+		Doc: NewDoc(&v.InfoAttrs, &v.InfoElements),
 	}
 
 	b.Members = GetMembers(e, b, v.Members)

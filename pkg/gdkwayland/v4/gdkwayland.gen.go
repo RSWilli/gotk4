@@ -4,7 +4,11 @@ package gdkwayland
 
 import (
 	"unsafe"
+	"github.com/diamondburned/gotk4/pkg/gdk/v4"
+	"github.com/diamondburned/gotk4/pkg/gobject/v2"
 	"runtime"
+	"github.com/diamondburned/gotk4/pkg/glib/v2"
+	"github.com/diamondburned/gotk4/pkg/core/gbox"
 )
 
 // #cgo pkg-config: gtk4-wayland
@@ -92,31 +96,31 @@ type WaylandDevice interface {
 	GetXkbKeymap() unsafe.Pointer
 }
 
-func unsafeWrapWaylandDevice(base *gobject.Object) *WaylandDeviceInstance {
+func unsafeWrapWaylandDevice(base *gdk.ObjectInstance) *WaylandDeviceInstance {
 	return &WaylandDeviceInstance{
-		DeviceInstance: gdk.DeviceInstance{
-			Object: *base,
+		ObjectInstance: gobject.ObjectInstance{
+			ObjectInstance: *base,
 		},
 	}
 }
 
 func marshalWaylandDeviceInstance(p uintptr) (interface{}, error) {
-	return unsafeWrapWaylandDevice(gobject.ValueFromNative(unsafe.Pointer(p)).Object()), nil
+	return unsafeWrapWaylandDevice(gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Object()), nil
 }
 
 // UnsafeWaylandDeviceFromGlibBorrow is used to convert raw GdkWaylandDevice pointers to go. This is used by the bindings internally.
 func UnsafeWaylandDeviceFromGlibBorrow(c unsafe.Pointer) WaylandDevice {
-	return gobject.TODOBorrow(c).(WaylandDevice)
+	return gdk.TODOBorrow(c).(WaylandDevice)
 }
 
 // UnsafeWaylandDeviceFromGlibNone is used to convert raw GdkWaylandDevice pointers to go while taking a reference and attaching a finalizer. This is used by the bindings internally.
 func UnsafeWaylandDeviceFromGlibNone(c unsafe.Pointer) WaylandDevice {
-	return gobject.Take(c).(WaylandDevice)
+	return gdk.Take(c).(WaylandDevice)
 }
 
 // UnsafeWaylandDeviceFromGlibFull is used to convert raw GdkWaylandDevice pointers to go while attaching a finalizer. This is used by the bindings internally.
 func UnsafeWaylandDeviceFromGlibFull(c unsafe.Pointer) WaylandDevice {
-	return gobject.AssumeOwnership(c).(WaylandDevice)
+	return gdk.AssumeOwnership(c).(WaylandDevice)
 }
 
 func (w *WaylandDeviceInstance) upcastToGdkWaylandDevice() *WaylandDeviceInstance {
@@ -125,12 +129,12 @@ func (w *WaylandDeviceInstance) upcastToGdkWaylandDevice() *WaylandDeviceInstanc
 
 // UnsafeWaylandDeviceToGlibNone is used to convert the instance to it's C value GdkWaylandDevice. This is used by the bindings internally.
 func UnsafeWaylandDeviceToGlibNone(c WaylandDevice) unsafe.Pointer {
-	return gobject.TODOToNone(c)
+	return gdk.TODOToNone(c)
 }
 
 // UnsafeWaylandDeviceToGlibFull is used to convert the instance to it's C value GdkWaylandDevice, while removeing the finalizer. This is used by the bindings internally.
 func UnsafeWaylandDeviceToGlibFull(c WaylandDevice) unsafe.Pointer {
-	return gobject.TODOToFull(c)
+	return gdk.TODOToFull(c)
 }
 
 // GetNodePath wraps gdk_wayland_device_get_node_path
@@ -147,7 +151,7 @@ func UnsafeWaylandDeviceToGlibFull(c WaylandDevice) unsafe.Pointer {
 // This is most notably implemented for devices of type
 // %GDK_SOURCE_PEN, %GDK_SOURCE_TABLET_PAD.
 func (device *WaylandDeviceInstance) GetNodePath() string {
-	var carg0 *C.GdkWaylandDevice // in, none, class
+	var carg0 *C.GdkWaylandDevice // in, none, converted
 	var cret  *C.gchar            // return, none, string
 
 	carg0 = (*C.GdkWaylandDevice)(UnsafeWaylandDeviceToGlibNone(device))
@@ -169,8 +173,8 @@ func (device *WaylandDeviceInstance) GetNodePath() string {
 //
 // Returns the `xkb_keymap` of a `GdkDevice`.
 func (device *WaylandDeviceInstance) GetXkbKeymap() unsafe.Pointer {
-	var carg0 *C.GdkWaylandDevice // in, none, class
-	var cret  C.gpointer          // return, casted
+	var carg0 *C.GdkWaylandDevice // in, none, converted
+	var cret  *C.gpointer         // return, none, casted
 
 	carg0 = (*C.GdkWaylandDevice)(UnsafeWaylandDeviceToGlibNone(device))
 
@@ -269,31 +273,31 @@ type WaylandDisplay interface {
 	SetStartupNotificationID(string)
 }
 
-func unsafeWrapWaylandDisplay(base *gobject.Object) *WaylandDisplayInstance {
+func unsafeWrapWaylandDisplay(base *gdk.ObjectInstance) *WaylandDisplayInstance {
 	return &WaylandDisplayInstance{
-		DisplayInstance: gdk.DisplayInstance{
-			Object: *base,
+		ObjectInstance: gobject.ObjectInstance{
+			ObjectInstance: *base,
 		},
 	}
 }
 
 func marshalWaylandDisplayInstance(p uintptr) (interface{}, error) {
-	return unsafeWrapWaylandDisplay(gobject.ValueFromNative(unsafe.Pointer(p)).Object()), nil
+	return unsafeWrapWaylandDisplay(gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Object()), nil
 }
 
 // UnsafeWaylandDisplayFromGlibBorrow is used to convert raw GdkWaylandDisplay pointers to go. This is used by the bindings internally.
 func UnsafeWaylandDisplayFromGlibBorrow(c unsafe.Pointer) WaylandDisplay {
-	return gobject.TODOBorrow(c).(WaylandDisplay)
+	return gdk.TODOBorrow(c).(WaylandDisplay)
 }
 
 // UnsafeWaylandDisplayFromGlibNone is used to convert raw GdkWaylandDisplay pointers to go while taking a reference and attaching a finalizer. This is used by the bindings internally.
 func UnsafeWaylandDisplayFromGlibNone(c unsafe.Pointer) WaylandDisplay {
-	return gobject.Take(c).(WaylandDisplay)
+	return gdk.Take(c).(WaylandDisplay)
 }
 
 // UnsafeWaylandDisplayFromGlibFull is used to convert raw GdkWaylandDisplay pointers to go while attaching a finalizer. This is used by the bindings internally.
 func UnsafeWaylandDisplayFromGlibFull(c unsafe.Pointer) WaylandDisplay {
-	return gobject.AssumeOwnership(c).(WaylandDisplay)
+	return gdk.AssumeOwnership(c).(WaylandDisplay)
 }
 
 func (w *WaylandDisplayInstance) upcastToGdkWaylandDisplay() *WaylandDisplayInstance {
@@ -302,12 +306,12 @@ func (w *WaylandDisplayInstance) upcastToGdkWaylandDisplay() *WaylandDisplayInst
 
 // UnsafeWaylandDisplayToGlibNone is used to convert the instance to it's C value GdkWaylandDisplay. This is used by the bindings internally.
 func UnsafeWaylandDisplayToGlibNone(c WaylandDisplay) unsafe.Pointer {
-	return gobject.TODOToNone(c)
+	return gdk.TODOToNone(c)
 }
 
 // UnsafeWaylandDisplayToGlibFull is used to convert the instance to it's C value GdkWaylandDisplay, while removeing the finalizer. This is used by the bindings internally.
 func UnsafeWaylandDisplayToGlibFull(c WaylandDisplay) unsafe.Pointer {
-	return gobject.TODOToFull(c)
+	return gdk.TODOToFull(c)
 }
 
 // GetEglDisplay wraps gdk_wayland_display_get_egl_display
@@ -317,8 +321,8 @@ func UnsafeWaylandDisplayToGlibFull(c WaylandDisplay) unsafe.Pointer {
 //
 // Retrieves the EGL display connection object for the given GDK display.
 func (display *WaylandDisplayInstance) GetEglDisplay() unsafe.Pointer {
-	var carg0 *C.GdkWaylandDisplay // in, none, class
-	var cret  C.gpointer           // return, casted
+	var carg0 *C.GdkWaylandDisplay // in, none, converted
+	var cret  C.gpointer           // return, none, casted
 
 	carg0 = (*C.GdkWaylandDisplay)(UnsafeWaylandDisplayToGlibNone(display))
 
@@ -342,7 +346,7 @@ func (display *WaylandDisplayInstance) GetEglDisplay() unsafe.Pointer {
 //
 // Deprecated: (since 4.10.0) 
 func (display *WaylandDisplayInstance) GetStartupNotificationID() string {
-	var carg0 *C.GdkWaylandDisplay // in, none, class
+	var carg0 *C.GdkWaylandDisplay // in, none, converted
 	var cret  *C.gchar             // return, none, string
 
 	carg0 = (*C.GdkWaylandDisplay)(UnsafeWaylandDisplayToGlibNone(display))
@@ -370,7 +374,7 @@ func (display *WaylandDisplayInstance) GetStartupNotificationID() string {
 // Returns %TRUE if the interface was found in the display
 // `wl_registry.global` handler.
 func (display *WaylandDisplayInstance) QueryRegistry(global string) bool {
-	var carg0 *C.GdkWaylandDisplay // in, none, class
+	var carg0 *C.GdkWaylandDisplay // in, none, converted
 	var carg1 *C.gchar             // in, none, string
 	var cret  C.gboolean           // return
 
@@ -403,9 +407,9 @@ func (display *WaylandDisplayInstance) QueryRegistry(global string) bool {
 // Deprecated: (since 4.16.0) Use the cursor-related properties of
 //   [GtkSettings](../gtk4/class.Settings.html) to set the cursor theme
 func (display *WaylandDisplayInstance) SetCursorTheme(name string, size int) {
-	var carg0 *C.GdkWaylandDisplay // in, none, class
+	var carg0 *C.GdkWaylandDisplay // in, none, converted
 	var carg1 *C.gchar             // in, none, string
-	var carg2 C.int                // in, casted
+	var carg2 C.int                // in, none, casted
 
 	carg0 = (*C.GdkWaylandDisplay)(UnsafeWaylandDisplayToGlibNone(display))
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(name)))
@@ -436,7 +440,7 @@ func (display *WaylandDisplayInstance) SetCursorTheme(name string, size int) {
 //
 // Deprecated: (since 4.10.0) Use [method@Gdk.Toplevel.set_startup_id]
 func (display *WaylandDisplayInstance) SetStartupNotificationID(startupId string) {
-	var carg0 *C.GdkWaylandDisplay // in, none, class
+	var carg0 *C.GdkWaylandDisplay // in, none, converted
 	var carg1 *C.gchar             // in, none, string
 
 	carg0 = (*C.GdkWaylandDisplay)(UnsafeWaylandDisplayToGlibNone(display))
@@ -465,18 +469,18 @@ type WaylandGLContext interface {
 
 }
 
-func unsafeWrapWaylandGLContext(base *gobject.Object) *WaylandGLContextInstance {
+func unsafeWrapWaylandGLContext(base *gobject.ObjectInstance) *WaylandGLContextInstance {
 	return &WaylandGLContextInstance{
-		GLContextInstance: gdk.GLContextInstance{
-			DrawContextInstance: gdk.DrawContextInstance{
-				Object: *base,
+		DrawContextInstance: gdk.DrawContextInstance{
+			ObjectInstance: gobject.ObjectInstance{
+				ObjectInstance: *base,
 			},
 		},
 	}
 }
 
 func marshalWaylandGLContextInstance(p uintptr) (interface{}, error) {
-	return unsafeWrapWaylandGLContext(gobject.ValueFromNative(unsafe.Pointer(p)).Object()), nil
+	return unsafeWrapWaylandGLContext(gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Object()), nil
 }
 
 // UnsafeWaylandGLContextFromGlibBorrow is used to convert raw GdkWaylandGLContext pointers to go. This is used by the bindings internally.
@@ -529,31 +533,31 @@ type WaylandMonitor interface {
 
 }
 
-func unsafeWrapWaylandMonitor(base *gobject.Object) *WaylandMonitorInstance {
+func unsafeWrapWaylandMonitor(base *gdk.ObjectInstance) *WaylandMonitorInstance {
 	return &WaylandMonitorInstance{
-		MonitorInstance: gdk.MonitorInstance{
-			Object: *base,
+		ObjectInstance: gobject.ObjectInstance{
+			ObjectInstance: *base,
 		},
 	}
 }
 
 func marshalWaylandMonitorInstance(p uintptr) (interface{}, error) {
-	return unsafeWrapWaylandMonitor(gobject.ValueFromNative(unsafe.Pointer(p)).Object()), nil
+	return unsafeWrapWaylandMonitor(gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Object()), nil
 }
 
 // UnsafeWaylandMonitorFromGlibBorrow is used to convert raw GdkWaylandMonitor pointers to go. This is used by the bindings internally.
 func UnsafeWaylandMonitorFromGlibBorrow(c unsafe.Pointer) WaylandMonitor {
-	return gobject.TODOBorrow(c).(WaylandMonitor)
+	return gdk.TODOBorrow(c).(WaylandMonitor)
 }
 
 // UnsafeWaylandMonitorFromGlibNone is used to convert raw GdkWaylandMonitor pointers to go while taking a reference and attaching a finalizer. This is used by the bindings internally.
 func UnsafeWaylandMonitorFromGlibNone(c unsafe.Pointer) WaylandMonitor {
-	return gobject.Take(c).(WaylandMonitor)
+	return gdk.Take(c).(WaylandMonitor)
 }
 
 // UnsafeWaylandMonitorFromGlibFull is used to convert raw GdkWaylandMonitor pointers to go while attaching a finalizer. This is used by the bindings internally.
 func UnsafeWaylandMonitorFromGlibFull(c unsafe.Pointer) WaylandMonitor {
-	return gobject.AssumeOwnership(c).(WaylandMonitor)
+	return gdk.AssumeOwnership(c).(WaylandMonitor)
 }
 
 func (w *WaylandMonitorInstance) upcastToGdkWaylandMonitor() *WaylandMonitorInstance {
@@ -562,12 +566,12 @@ func (w *WaylandMonitorInstance) upcastToGdkWaylandMonitor() *WaylandMonitorInst
 
 // UnsafeWaylandMonitorToGlibNone is used to convert the instance to it's C value GdkWaylandMonitor. This is used by the bindings internally.
 func UnsafeWaylandMonitorToGlibNone(c WaylandMonitor) unsafe.Pointer {
-	return gobject.TODOToNone(c)
+	return gdk.TODOToNone(c)
 }
 
 // UnsafeWaylandMonitorToGlibFull is used to convert the instance to it's C value GdkWaylandMonitor, while removeing the finalizer. This is used by the bindings internally.
 func UnsafeWaylandMonitorToGlibFull(c WaylandMonitor) unsafe.Pointer {
-	return gobject.TODOToFull(c)
+	return gdk.TODOToFull(c)
 }
 
 // WaylandSeatInstance is the instance type used by all types extending GdkWaylandSeat. It is used internally by the bindings. Users should use the interface [WaylandSeat] instead.
@@ -591,31 +595,31 @@ type WaylandSeat interface {
 
 }
 
-func unsafeWrapWaylandSeat(base *gobject.Object) *WaylandSeatInstance {
+func unsafeWrapWaylandSeat(base *gdk.ObjectInstance) *WaylandSeatInstance {
 	return &WaylandSeatInstance{
-		SeatInstance: gdk.SeatInstance{
-			Object: *base,
+		ObjectInstance: gobject.ObjectInstance{
+			ObjectInstance: *base,
 		},
 	}
 }
 
 func marshalWaylandSeatInstance(p uintptr) (interface{}, error) {
-	return unsafeWrapWaylandSeat(gobject.ValueFromNative(unsafe.Pointer(p)).Object()), nil
+	return unsafeWrapWaylandSeat(gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Object()), nil
 }
 
 // UnsafeWaylandSeatFromGlibBorrow is used to convert raw GdkWaylandSeat pointers to go. This is used by the bindings internally.
 func UnsafeWaylandSeatFromGlibBorrow(c unsafe.Pointer) WaylandSeat {
-	return gobject.TODOBorrow(c).(WaylandSeat)
+	return gdk.TODOBorrow(c).(WaylandSeat)
 }
 
 // UnsafeWaylandSeatFromGlibNone is used to convert raw GdkWaylandSeat pointers to go while taking a reference and attaching a finalizer. This is used by the bindings internally.
 func UnsafeWaylandSeatFromGlibNone(c unsafe.Pointer) WaylandSeat {
-	return gobject.Take(c).(WaylandSeat)
+	return gdk.Take(c).(WaylandSeat)
 }
 
 // UnsafeWaylandSeatFromGlibFull is used to convert raw GdkWaylandSeat pointers to go while attaching a finalizer. This is used by the bindings internally.
 func UnsafeWaylandSeatFromGlibFull(c unsafe.Pointer) WaylandSeat {
-	return gobject.AssumeOwnership(c).(WaylandSeat)
+	return gdk.AssumeOwnership(c).(WaylandSeat)
 }
 
 func (w *WaylandSeatInstance) upcastToGdkWaylandSeat() *WaylandSeatInstance {
@@ -624,12 +628,12 @@ func (w *WaylandSeatInstance) upcastToGdkWaylandSeat() *WaylandSeatInstance {
 
 // UnsafeWaylandSeatToGlibNone is used to convert the instance to it's C value GdkWaylandSeat. This is used by the bindings internally.
 func UnsafeWaylandSeatToGlibNone(c WaylandSeat) unsafe.Pointer {
-	return gobject.TODOToNone(c)
+	return gdk.TODOToNone(c)
 }
 
 // UnsafeWaylandSeatToGlibFull is used to convert the instance to it's C value GdkWaylandSeat, while removeing the finalizer. This is used by the bindings internally.
 func UnsafeWaylandSeatToGlibFull(c WaylandSeat) unsafe.Pointer {
-	return gobject.TODOToFull(c)
+	return gdk.TODOToFull(c)
 }
 
 // WaylandSurfaceInstance is the instance type used by all types extending GdkWaylandSurface. It is used internally by the bindings. Users should use the interface [WaylandSurface] instead.
@@ -653,31 +657,31 @@ type WaylandSurface interface {
 
 }
 
-func unsafeWrapWaylandSurface(base *gobject.Object) *WaylandSurfaceInstance {
+func unsafeWrapWaylandSurface(base *gdk.ObjectInstance) *WaylandSurfaceInstance {
 	return &WaylandSurfaceInstance{
-		SurfaceInstance: gdk.SurfaceInstance{
-			Object: *base,
+		ObjectInstance: gobject.ObjectInstance{
+			ObjectInstance: *base,
 		},
 	}
 }
 
 func marshalWaylandSurfaceInstance(p uintptr) (interface{}, error) {
-	return unsafeWrapWaylandSurface(gobject.ValueFromNative(unsafe.Pointer(p)).Object()), nil
+	return unsafeWrapWaylandSurface(gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Object()), nil
 }
 
 // UnsafeWaylandSurfaceFromGlibBorrow is used to convert raw GdkWaylandSurface pointers to go. This is used by the bindings internally.
 func UnsafeWaylandSurfaceFromGlibBorrow(c unsafe.Pointer) WaylandSurface {
-	return gobject.TODOBorrow(c).(WaylandSurface)
+	return gdk.TODOBorrow(c).(WaylandSurface)
 }
 
 // UnsafeWaylandSurfaceFromGlibNone is used to convert raw GdkWaylandSurface pointers to go while taking a reference and attaching a finalizer. This is used by the bindings internally.
 func UnsafeWaylandSurfaceFromGlibNone(c unsafe.Pointer) WaylandSurface {
-	return gobject.Take(c).(WaylandSurface)
+	return gdk.Take(c).(WaylandSurface)
 }
 
 // UnsafeWaylandSurfaceFromGlibFull is used to convert raw GdkWaylandSurface pointers to go while attaching a finalizer. This is used by the bindings internally.
 func UnsafeWaylandSurfaceFromGlibFull(c unsafe.Pointer) WaylandSurface {
-	return gobject.AssumeOwnership(c).(WaylandSurface)
+	return gdk.AssumeOwnership(c).(WaylandSurface)
 }
 
 func (w *WaylandSurfaceInstance) upcastToGdkWaylandSurface() *WaylandSurfaceInstance {
@@ -686,12 +690,12 @@ func (w *WaylandSurfaceInstance) upcastToGdkWaylandSurface() *WaylandSurfaceInst
 
 // UnsafeWaylandSurfaceToGlibNone is used to convert the instance to it's C value GdkWaylandSurface. This is used by the bindings internally.
 func UnsafeWaylandSurfaceToGlibNone(c WaylandSurface) unsafe.Pointer {
-	return gobject.TODOToNone(c)
+	return gdk.TODOToNone(c)
 }
 
 // UnsafeWaylandSurfaceToGlibFull is used to convert the instance to it's C value GdkWaylandSurface, while removeing the finalizer. This is used by the bindings internally.
 func UnsafeWaylandSurfaceToGlibFull(c WaylandSurface) unsafe.Pointer {
-	return gobject.TODOToFull(c)
+	return gdk.TODOToFull(c)
 }
 
 // WaylandToplevelInstance is the instance type used by all types extending GdkWaylandToplevel. It is used internally by the bindings. Users should use the interface [WaylandToplevel] instead.
@@ -699,7 +703,7 @@ type WaylandToplevelInstance struct {
 	_ [0]func() // equal guard
 	WaylandSurfaceInstance
 	// implemented interfaces:
-	gdk.ToplevelInstance
+gdk.Toplevel
 }
 
 var _ WaylandToplevel = (*WaylandToplevelInstance)(nil)
@@ -809,21 +813,21 @@ type WaylandToplevel interface {
 	UnexportHandle()
 }
 
-func unsafeWrapWaylandToplevel(base *gobject.Object) *WaylandToplevelInstance {
+func unsafeWrapWaylandToplevel(base *gobject.ObjectInstance) *WaylandToplevelInstance {
 	return &WaylandToplevelInstance{
-		WaylandSurfaceInstance: WaylandSurfaceInstance{
-			SurfaceInstance: gdk.SurfaceInstance{
-				Object: *base,
+		SurfaceInstance: gdk.SurfaceInstance{
+			ObjectInstance: gobject.ObjectInstance{
+				ObjectInstance: *base,
 			},
 		},
 		ToplevelInstance: gdk.ToplevelInstance{
-			Object: *base,
+			ObjectInstance: *base,
 		},
 	}
 }
 
 func marshalWaylandToplevelInstance(p uintptr) (interface{}, error) {
-	return unsafeWrapWaylandToplevel(gobject.ValueFromNative(unsafe.Pointer(p)).Object()), nil
+	return unsafeWrapWaylandToplevel(gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Object()), nil
 }
 
 // UnsafeWaylandToplevelFromGlibBorrow is used to convert raw GdkWaylandToplevel pointers to go. This is used by the bindings internally.
@@ -866,7 +870,7 @@ func UnsafeWaylandToplevelToGlibFull(c WaylandToplevel) unsafe.Pointer {
 // Note that this API depends on an unstable Wayland protocol,
 // and thus may require changes in the future.
 func (toplevel *WaylandToplevelInstance) DropExportedHandle(handle string) {
-	var carg0 *C.GdkWaylandToplevel // in, none, class
+	var carg0 *C.GdkWaylandToplevel // in, none, converted
 	var carg1 *C.gchar              // in, none, string
 
 	carg0 = (*C.GdkWaylandToplevel)(UnsafeWaylandToplevelToGlibNone(toplevel))
@@ -912,7 +916,7 @@ func (toplevel *WaylandToplevelInstance) DropExportedHandle(handle string) {
 // Note that this API depends on an unstable Wayland protocol,
 // and thus may require changes in the future.
 func (toplevel *WaylandToplevelInstance) ExportHandle(callback WaylandToplevelExported) bool {
-	var carg0 *C.GdkWaylandToplevel        // in, none, class
+	var carg0 *C.GdkWaylandToplevel        // in, none, converted
 	var carg1 C.GdkWaylandToplevelExported // callback, scope: notified, closure: carg2, destroy: carg3
 	var carg2 C.gpointer                   // implicit
 	var carg3 C.GDestroyNotify             // implicit
@@ -944,7 +948,7 @@ func (toplevel *WaylandToplevelInstance) ExportHandle(callback WaylandToplevelEx
 //
 // Sets the application id on a `GdkToplevel`.
 func (toplevel *WaylandToplevelInstance) SetApplicationID(applicationId string) {
-	var carg0 *C.GdkWaylandToplevel // in, none, class
+	var carg0 *C.GdkWaylandToplevel // in, none, converted
 	var carg1 *C.gchar              // in, none, string
 
 	carg0 = (*C.GdkWaylandToplevel)(UnsafeWaylandToplevelToGlibNone(toplevel))
@@ -975,7 +979,7 @@ func (toplevel *WaylandToplevelInstance) SetApplicationID(applicationId string) 
 // Note that this API depends on an unstable Wayland protocol,
 // and thus may require changes in the future.
 func (toplevel *WaylandToplevelInstance) SetTransientForExported(parentHandleStr string) bool {
-	var carg0 *C.GdkWaylandToplevel // in, none, class
+	var carg0 *C.GdkWaylandToplevel // in, none, converted
 	var carg1 *C.gchar              // in, none, string
 	var cret  C.gboolean            // return
 
@@ -1014,7 +1018,7 @@ func (toplevel *WaylandToplevelInstance) SetTransientForExported(parentHandleStr
 // Deprecated: (since 4.12.0) Use [method@GdkWayland.WaylandToplevel.drop_exported_handle]
 //   instead, this function does nothing
 func (toplevel *WaylandToplevelInstance) UnexportHandle() {
-	var carg0 *C.GdkWaylandToplevel // in, none, class
+	var carg0 *C.GdkWaylandToplevel // in, none, converted
 
 	carg0 = (*C.GdkWaylandToplevel)(UnsafeWaylandToplevelToGlibNone(toplevel))
 
@@ -1027,7 +1031,7 @@ type WaylandPopupInstance struct {
 	_ [0]func() // equal guard
 	WaylandSurfaceInstance
 	// implemented interfaces:
-	gdk.PopupInstance
+gdk.Popup
 }
 
 var _ WaylandPopup = (*WaylandPopupInstance)(nil)
@@ -1042,21 +1046,21 @@ type WaylandPopup interface {
 
 }
 
-func unsafeWrapWaylandPopup(base *gobject.Object) *WaylandPopupInstance {
+func unsafeWrapWaylandPopup(base *gobject.ObjectInstance) *WaylandPopupInstance {
 	return &WaylandPopupInstance{
-		WaylandSurfaceInstance: WaylandSurfaceInstance{
-			SurfaceInstance: gdk.SurfaceInstance{
-				Object: *base,
+		SurfaceInstance: gdk.SurfaceInstance{
+			ObjectInstance: gobject.ObjectInstance{
+				ObjectInstance: *base,
 			},
 		},
 		PopupInstance: gdk.PopupInstance{
-			Object: *base,
+			ObjectInstance: *base,
 		},
 	}
 }
 
 func marshalWaylandPopupInstance(p uintptr) (interface{}, error) {
-	return unsafeWrapWaylandPopup(gobject.ValueFromNative(unsafe.Pointer(p)).Object()), nil
+	return unsafeWrapWaylandPopup(gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Object()), nil
 }
 
 // UnsafeWaylandPopupFromGlibBorrow is used to convert raw GdkWaylandPopup pointers to go. This is used by the bindings internally.

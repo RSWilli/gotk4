@@ -27,11 +27,15 @@ func (g *ClassGenerator) Generate(w *file.Package) {
 	fmt.Fprintf(w.Go(), "// %s is the instance type used by all types extending %s. It is used internally by the bindings. Users should use the interface [%s] instead.\n", g.GoType(0), g.CType(0), g.GoInterfaceName)
 	fmt.Fprintf(w.Go(), "type %s struct {\n", g.GoType(0))
 	fmt.Fprintf(w.Go(), "\t_ [0]func() // equal guard\n")
+
+	w.GoImportNamespace(g.Parent.Namespace)
 	fmt.Fprintf(w.Go(), "\t%s\n", g.Parent.NamespacedGoType(0))
+
 	if len(g.Implements) > 0 {
 		fmt.Fprintf(w.Go(), "\t// implemented interfaces:\n")
 	}
 	for _, inter := range g.Implements {
+		w.GoImportNamespace(inter.Namespace)
 		fmt.Fprintln(w.Go(), inter.WithForeignNamespace(inter.Type.GoInterfaceName))
 	}
 	fmt.Fprintf(w.Go(), "}\n\n")
@@ -48,20 +52,18 @@ func (g *ClassGenerator) Generate(w *file.Package) {
 	fmt.Fprintf(w.Go(), "%s() *%s\n", g.GoPrivateUpcastMethod, g.GoType(0))
 	fmt.Fprintln(w.Go())
 
-	g.Methods.GenerateInterfaceSignatures(w.Go())
+	g.Methods.GenerateInterfaceSignatures(w)
 
 	w.Go().Unindent()
 	fmt.Fprintf(w.Go(), "}\n\n")
 
-	g.generateWrapFunction(w.Go())
+	g.generateWrapFunction(w)
 
 	if g.Marshaler != nil {
 		w.RegisterGType(g)
 		g.Marshaler.Generate(w)
 		fmt.Fprintln(w.Go())
 	}
-
-	// TODO: imports
 
 	mkConstructor := func(constructorName, baseConstructorName string) {
 		fmt.Fprintf(w.Go(), "func %s(c unsafe.Pointer) %s {\n", constructorName, g.GoInterfaceName)
@@ -100,27 +102,29 @@ func (g *ClassGenerator) Generate(w *file.Package) {
 	)
 }
 
-func (g *ClassGenerator) generateWrapFunction(w file.CodeWriter) {
+func (g *ClassGenerator) generateWrapFunction(w file.File) {
 	baseClassIdentifier := "base"
 	baseClass := g.BaseClass()
 
-	fmt.Fprintf(w, "func %s(%s *%s) *%s {\n", g.GoWrapBaseClassFunction, baseClassIdentifier, baseClass.WithForeignNamespace(baseClass.Type.GoType(0)), g.GoType(0))
-	w.Indent()
-	fmt.Fprintf(w, "return &%s{\n", g.GoType(0))
-	w.Indent()
+	w.GoImportNamespace(baseClass.Namespace)
+
+	fmt.Fprintf(w.Go(), "func %s(%s *%s) *%s {\n", g.GoWrapBaseClassFunction, baseClassIdentifier, baseClass.WithForeignNamespace(baseClass.Type.GoType(0)), g.GoType(0))
+	w.Go().Indent()
+	fmt.Fprintf(w.Go(), "return &%s{\n", g.GoType(0))
+	w.Go().Indent()
 
 	wrapClass(w, g.Class.Parent, baseClassIdentifier)
 
-	w.Indent()
+	w.Go().Indent()
 	for _, inter := range g.Implements {
-		wrapInterface(w, inter, baseClassIdentifier)
+		wrapInterface(w.Go(), inter, baseClassIdentifier)
 	}
-	w.Unindent()
+	w.Go().Unindent()
 
-	fmt.Fprintf(w, "}\n")
-	w.Unindent()
+	fmt.Fprintf(w.Go(), "}\n")
+	w.Go().Unindent()
 
-	fmt.Fprintf(w, "}\n\n")
+	fmt.Fprintf(w.Go(), "}\n\n")
 }
 
 func NewClassGenerator(c *typesystem.Class) *ClassGenerator {
@@ -153,14 +157,14 @@ func NewClassGenerator(c *typesystem.Class) *ClassGenerator {
 }
 
 // wrapClass generates the tree like structure needed to construct the whole struct
-func wrapClass(w file.CodeWriter, t typesystem.CouldBeForeign[*typesystem.Class], baseClassIdentifier string) {
+func wrapClass(w file.File, t typesystem.CouldBeForeign[*typesystem.Class], baseClassIdentifier string) {
 	parent := t.Type.Parent
 
 	if parent.Type == nil {
 		// current type is the base class
-		fmt.Fprintf(w, "%s: *%s,\n", t.Type.GoType(0), baseClassIdentifier)
+		fmt.Fprintf(w.Go(), "%s: *%s,\n", t.Type.GoType(0), baseClassIdentifier)
 
-		w.Unindent()
+		w.Go().Unindent()
 		return
 	}
 
@@ -169,18 +173,20 @@ func wrapClass(w file.CodeWriter, t typesystem.CouldBeForeign[*typesystem.Class]
 		parent.Namespace = t.Namespace
 	}
 
-	fmt.Fprintf(w, "%s: %s{\n", parent.Type.GoType(0), parent.NamespacedGoType(0))
+	w.GoImportNamespace(parent.Namespace)
 
-	w.Indent()
-	defer w.Unindent()
+	fmt.Fprintf(w.Go(), "%s: %s{\n", parent.Type.GoType(0), parent.NamespacedGoType(0))
+
+	w.Go().Indent()
+	defer w.Go().Unindent()
 
 	wrapClass(w, parent, baseClassIdentifier)
 
-	w.Indent()
+	w.Go().Indent()
 	for _, inter := range t.Type.Implements {
-		wrapInterface(w, inter, baseClassIdentifier)
+		wrapInterface(w.Go(), inter, baseClassIdentifier)
 	}
-	w.Unindent()
+	w.Go().Unindent()
 
-	fmt.Fprintf(w, "},\n")
+	fmt.Fprintf(w.Go(), "},\n")
 }

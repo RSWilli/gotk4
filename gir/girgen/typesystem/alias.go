@@ -43,7 +43,7 @@ func (a *Alias) resolve(e *env) bool {
 
 	ns, subtype := e.findType(&a.gir.Type)
 
-	if subtype == nil {
+	if subtype == nil || subtype == Void {
 		return false
 	}
 

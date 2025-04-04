@@ -12,7 +12,7 @@ import (
 	"github.com/diamondburned/gotk4/gir/girgen"
 	"github.com/diamondburned/gotk4/gir/girgen/file"
 	. "github.com/diamondburned/gotk4/gir/girgen/types"
-	. "github.com/diamondburned/gotk4/gir/girgen/types/typeconv"
+	"github.com/diamondburned/gotk4/gir/girgen/typesystem"
 	"github.com/diamondburned/gotk4/gir/internal/ptr"
 )
 
@@ -23,62 +23,220 @@ const Module = "github.com/diamondburned/gotk4/pkg"
 // This stays ugly just because it's the main gotk4 package with exposed
 // gendata. Don't actually do this; just make a global genmain.Data instead.
 var Main = genmain.Data{
-	Module:                Module,
-	Packages:              Packages,
-	ImportOverrides:       ImportOverrides,
-	PkgExceptions:         PkgExceptions,
-	GenerateExceptions:    GenerateExceptions,
-	PkgGenerated:          PkgGenerated,
-	Preprocessors:         Preprocessors,
-	Postprocessors:        Postprocessors,
-	ExtraGoContents:       ExtraGoContents,
-	Filters:               Filters,
-	ProcessConverters:     ConversionProcessors,
-	DynamicLinkNamespaces: DynamicLinkNamespaces,
-	SingleFile:            true,
-}
+	Module:        Module,
+	Packages:      Packages,
+	Preprocessors: Preprocessors,
 
-// PkgExceptions contains a list of file names that won't be deleted off of
-// pkg/.
-var PkgExceptions = []string{
-	"core",
-	"cairo",
-	"go.mod",
-	"go.sum",
-	"LICENSE",
-}
+	Config: typesystem.Config{
+		GIRReplacements: map[string]string{
+			"GType": "GLib.Type", // manually implemented in glib namespace
+		},
+		Namespaces: map[string]typesystem.NamespaceConfig{
+			"cairo-1": {
+				Ignored: true, // FIXME: manually implemented
 
-// PkgGenerated contains a list of file names that are packages generated using
-// the given Packages list. It is manually updated.
-var PkgGenerated = []string{
-	"atk",
-	// "atspi",
-	"gdk",
-	"gdkpixbuf",
-	"gdkpixdata",
-	"gdkwayland",
-	"gdkx11",
-	"gio",
-	"glib",
-	"gobject",
-	"graphene",
-	"gsk",
-	"gtk",
-	"pango",
-	"pangocairo",
-}
+				IgnoredDefinitions: []typesystem.IgnoreFunc{
+					// These are not in gotk3/cairo.
+					typesystem.IgnoreMatching("ScaledFont"),
+					typesystem.IgnoreMatching("FontType"),
+				},
+			},
+			"Atspi-2": {
+				Ignored: true, // Missing AtspiDevice
+			},
+			"GLib-2": {
+				MinVersion: "2.80",
+				ManualTypes: []typesystem.Type{
+					&typesystem.CastablePrimitive{
+						BaseType: typesystem.BaseType{
+							GirName: "Type", // see GIRReplacements
+							CTyp:    "GType",
+							CGoTyp:  "C.GType",
+							GoTyp:   "Type",
+						},
+					},
+					&typesystem.Callback{
+						BaseType: typesystem.BaseType{
+							GirName: "DestroyNotify",
+							GoTyp:   "DestroyNotify",
+							CGoTyp:  "C.GDestroyNotify",
+							CTyp:    "GDestroyNotify",
+						},
+						Parameters:     &typesystem.Parameters{},
+						TrampolineName: "callbackDelete",
+					},
+					&typesystem.Record{
+						BaseType: typesystem.BaseType{
+							GirName: "Variant",
+							GoTyp:   "Variant",
+							CGoTyp:  "C.GVariant",
+							CTyp:    "GVariant",
+						},
+						BaseConversions: typesystem.BaseConversions{
+							FromGlibBorrowFunction: "UnsafeVariantFromGlibBorrow",
+							FromGlibFullFunction:   "UnsafeVariantFromGlibFull",
+							FromGlibNoneFunction:   "UnsafeVariantFromGlibNone",
+							ToGlibNoneFunction:     "UnsafeVariantToGlibNone",
+							ToGlibFullFunction:     "UnsafeVariantToGlibFull",
+						},
+					},
+					&typesystem.Record{
+						BaseType: typesystem.BaseType{
+							GirName: "Error",
+							CGoTyp:  "C.GError",
+							CTyp:    "GError",
+							GoTyp:   "error",
+						},
+						BaseConversions: typesystem.BaseConversions{
+							FromGlibBorrowFunction: "UnsafeErrorFromGlibBorrow",
+							FromGlibFullFunction:   "UnsafeErrorFromGlibFull",
+							FromGlibNoneFunction:   "UnsafeErrorFromGlibNone",
+							ToGlibNoneFunction:     "UnsafeErrorToGlibNone",
+							ToGlibFullFunction:     "UnsafeErrorToGlibFull",
+						},
+					},
+				},
+				IgnoredDefinitions: []typesystem.IgnoreFunc{
+					// Nothing "Unix" is going to be available on Windows.
+					typesystem.IgnoreByRegex(".*[Uu]nix.*"),
+					// Useless
+					typesystem.IgnoreMatching("NullifyPointer"),
+					typesystem.IgnoreByRegex("[Aa]tomic.*"),
+					typesystem.IgnoreByRegex("ATOMIC.*"),
+					// Dangerous.
+					typesystem.IgnoreMatching("IOChannel.read"),
+					typesystem.IgnoreMatching("Bytes.new_take"),
+					typesystem.IgnoreMatching("Bytes.new_static"),
+					typesystem.IgnoreMatching("Bytes.unref_to_data"),
+					typesystem.IgnoreMatching("Bytes.unref_to_array"),
 
-// GenerateExceptions contains the keys of the underneath ImportOverrides map.
-var GenerateExceptions = []string{
-	"cairo-1",
-	"Atspi-2", // Missing AtspiDevice
-}
+					typesystem.IgnoreMatching("G_WIN32_MSG_HANDLE"),
+					typesystem.IgnoreMatching("GLIB_VERSION_MIN_REQUIRED"),
 
-// ImportOverrides is the list of imports to defer to another library, usually
-// because it's tedious or impossible to generate.
-//
-// Not included: coreglib (gotk3/gotk3/glib).
-var ImportOverrides = map[string]string{}
+					typesystem.IgnoreMatching("strv_get_type"), // requires gobject
+
+					typesystem.IgnoreByFileNameSubstring("gasyncqueue."),
+					typesystem.IgnoreByFileNameSubstring("gatomic."),
+					typesystem.IgnoreByFileNameSubstring("gbacktrace."),
+					typesystem.IgnoreByFileNameSubstring("gbase64."),
+					typesystem.IgnoreByFileNameSubstring("gbitlock."),
+					typesystem.IgnoreByFileNameSubstring("gdataset."),
+					typesystem.IgnoreByFileNameSubstring("gdate."),
+					typesystem.IgnoreByFileNameSubstring("gerror."), // already handled internally
+					typesystem.IgnoreByFileNameSubstring("ghook."),
+					typesystem.IgnoreByFileNameSubstring("glib-unix."),
+					typesystem.IgnoreByFileNameSubstring("glist."),
+					typesystem.IgnoreByFileNameSubstring("gmacros."),
+					typesystem.IgnoreByFileNameSubstring("gmem."),
+					typesystem.IgnoreByFileNameSubstring("gnetworking."), // needs header
+					typesystem.IgnoreByFileNameSubstring("gprintf."),
+					typesystem.IgnoreByFileNameSubstring("grcbox."),
+					typesystem.IgnoreByFileNameSubstring("grefcount."),
+					typesystem.IgnoreByFileNameSubstring("grefstring."),
+					typesystem.IgnoreByFileNameSubstring("gslice."),
+					typesystem.IgnoreByFileNameSubstring("gslist."),
+					typesystem.IgnoreByFileNameSubstring("gstdio."),
+					typesystem.IgnoreByFileNameSubstring("gstrfuncs."),
+					typesystem.IgnoreByFileNameSubstring("gstringchunk."),
+					typesystem.IgnoreByFileNameSubstring("gstring."),
+					typesystem.IgnoreByFileNameSubstring("gstrvbuilder."),
+					typesystem.IgnoreByFileNameSubstring("gtestutils."),
+					typesystem.IgnoreByFileNameSubstring("gthread."),
+					typesystem.IgnoreByFileNameSubstring("gthreadpool."),
+					typesystem.IgnoreByFileNameSubstring("gtrashstack."),
+				},
+			},
+			"Gio-2": {
+				ManualTypes: []typesystem.Type{
+					&typesystem.Class{
+						BaseType: typesystem.BaseType{
+							GirName: "Cancellable",
+							CGoTyp:  "C.Cancellable",
+							CTyp:    "GCancellable",
+							GoTyp:   "Cancellable",
+						},
+						BaseConversions: typesystem.BaseConversions{
+							FromGlibBorrowFunction: "UnsafeCancellableFromGlibBorrow",
+							FromGlibFullFunction:   "UnsafeCancellableFromGlibFull",
+							FromGlibNoneFunction:   "UnsafeCancellableFromGlibNone",
+							ToGlibNoneFunction:     "UnsafeCancellableToGlibNone",
+							ToGlibFullFunction:     "UnsafeCancellableToGlibFull",
+						},
+					},
+				},
+				IgnoredDefinitions: []typesystem.IgnoreFunc{
+					// Nothing "Unix" is going to be available on Windows.
+					typesystem.IgnoreByRegex(".*[Uu]nix.*"),
+					typesystem.IgnoreByRegex(".*Subprocess.*"),
+
+					typesystem.IgnoreByFileNameSubstring("gsettingsbackend."),
+
+					typesystem.IgnoreMatching("networking_init"),
+				},
+			},
+			"GObject-2": {
+				ManualTypes: []typesystem.Type{
+					&typesystem.Class{
+						BaseType: typesystem.BaseType{
+							GirName: "Object",
+							GoTyp:   "ObjectInstance",
+							CTyp:    "GObject",
+							CGoTyp:  "C.GObject",
+						},
+						GoInterfaceName: "Object",
+						Doc:             typesystem.Doc{},
+						BaseConversions: typesystem.BaseConversions{
+							FromGlibBorrowFunction: "TODOBorrow",
+							FromGlibFullFunction:   "AssumeOwnership",
+							FromGlibNoneFunction:   "Take",
+							ToGlibNoneFunction:     "TODOToNone",
+							ToGlibFullFunction:     "TODOToFull",
+						},
+					},
+					&typesystem.Record{
+						BaseType: typesystem.BaseType{
+							GirName: "ObjectClass",
+							GoTyp:   "ObjectClass",
+							CTyp:    "GObjectClass",
+							CGoTyp:  "C.GObjectClass",
+						},
+					},
+					&typesystem.Record{
+						BaseType: typesystem.BaseType{
+							GirName: "Value",
+							GoTyp:   "Value",
+							CTyp:    "GValue",
+							CGoTyp:  "C.GValue",
+						},
+						BaseConversions: typesystem.BaseConversions{
+							FromGlibBorrowFunction: "TODOFromGlibBorrow",
+							FromGlibFullFunction:   "TODOFromGlibFull",
+							FromGlibNoneFunction:   "TODOFromGlibNone",
+							ToGlibNoneFunction:     "TODOToGlibNone",
+							ToGlibFullFunction:     "TODOToGlibFull",
+						},
+					},
+
+					// &typesystem.ForeignType{
+					// 	SourceNamespace: &typesystem.Namespace{GoName: "coreglib"},
+					// 	Type: &typesystem.Class{
+					// 		BaseType: typesystem.BaseType{
+					// 			GirName: "ParamSpec",
+					// 			GoTyp:   "ParamSpec",
+					// 			CTyp:    "GParamSpec",
+					// 			CGoTyp:  "C.GParamSpec",
+					// 		},
+					// 	},
+					// },
+				},
+				IgnoredDefinitions: []typesystem.IgnoreFunc{
+					// manually implemented, but hidden from the user
+					typesystem.IgnoreMatching("ParamSpec"),
+				},
+			},
+		},
+	},
+}
 
 // Packages lists pkg-config packages and optionally the namespaces to be
 // generated. If the list of namespaces is nil, then everything is generated.
@@ -100,16 +258,6 @@ var Packages = []genmain.Package{
 	}},
 	{Name: "gtk4"},     // includes Gdk
 	{Name: "gtk+-3.0"}, // includes Gdk
-}
-
-// DynamicLinkNamespaces lists namespaces that should be generated directly
-// using Cgo. It includes important core packages as well as packages that are
-// small but performance-sensitive.
-var DynamicLinkNamespaces = []string{
-	"GLib-2",
-	"GObject-2",
-	"Graphene-1",
-	"GdkPixbuf-2",
 }
 
 // Preprocessors defines a list of preprocessors that the main generator will
@@ -230,12 +378,13 @@ var Preprocessors = []Preprocessor{
 	}),
 }
 
-var ConversionProcessors = []ConversionProcessor{
-	ProcessCallback("Gio-2.AsyncReadyCallback", func(conv *Converter) {
-		// Don't include the first parameter in Go.
-		conv.Results[0].Skip = true
-	}),
-}
+// FIXME: override or manually implement this
+// var ConversionProcessors = []ConversionProcessor{
+// 	ProcessCallback("Gio-2.AsyncReadyCallback", func(conv *Converter) {
+// 		// Don't include the first parameter in Go.
+// 		conv.Results[0].Skip = true
+// 	}),
+// }
 
 // Filters defines a list of GIR types to be filtered. The map key is the
 // namespace, and the values are list of names.
@@ -245,10 +394,6 @@ var Filters = []FilterMatcher{
 
 	// This seems to be macro-guarded between x86 and arm64.
 	AbsoluteFilter("GLib.VA_COPY_AS_ARRAY"),
-
-	// These are not in gotk3/cairo.
-	AbsoluteFilter("cairo.ScaledFont"),
-	AbsoluteFilter("cairo.FontType"),
 
 	// Broadway is not included, so we don't generate code for it.
 	FileFilter("gsk/broadway/gskbroadwayrenderer.h"),
@@ -278,12 +423,7 @@ var Filters = []FilterMatcher{
 	// Incomplete GArray implementation
 	AbsoluteFilter("Atk.Document.get_text_selections"),
 	AbsoluteFilter("Atk.Document.set_text_selections"),
-	// Dangerous.
-	AbsoluteFilter("GLib.IOChannel.read"),
-	AbsoluteFilter("GLib.Bytes.new_take"),
-	AbsoluteFilter("GLib.Bytes.new_static"),
-	AbsoluteFilter("GLib.Bytes.unref_to_data"),
-	AbsoluteFilter("GLib.Bytes.unref_to_array"),
+
 	// Not available on Windows.
 	RegexFilter(`GLib.Source\..*unix.*`),
 	RegexFilter(`Gio.Subprocess`),

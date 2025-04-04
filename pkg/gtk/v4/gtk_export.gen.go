@@ -64,17 +64,6 @@ func _gotk4_gtk4_CustomAllocateFunc(carg1 *C.GtkWidget, carg2 C.int, carg3 C.int
 	return cret
 }
 
-//export _gotk4_gtk4_CustomFilterFunc
-func _gotk4_gtk4_CustomFilterFunc(carg1 *C.GObject, carg2 C.gpointer) (cret C.gboolean) {
-
-
-	ret := fn(item)
-
-
-
-	return cret
-}
-
 //export _gotk4_gtk4_CustomMeasureFunc
 func _gotk4_gtk4_CustomMeasureFunc(carg1 *C.GtkWidget, carg2 C.GtkOrientation, carg3 C.int, carg4 C.int, carg5 C.int, carg6 C.int, carg7 C.int) (cret C.void) {
 
@@ -119,44 +108,11 @@ func _gotk4_gtk4_ExpressionNotify(carg1 C.gpointer) (cret C.void) {
 	return cret
 }
 
-//export _gotk4_gtk4_FlowBoxCreateWidgetFunc
-func _gotk4_gtk4_FlowBoxCreateWidgetFunc(carg1 *C.GObject, carg2 C.gpointer) (cret *C.GtkWidget) {
-
-
-	ret := fn(item)
-
-
-
-	return cret
-}
-
 //export _gotk4_gtk4_FontFilterFunc
 func _gotk4_gtk4_FontFilterFunc(carg1 *C.PangoFontFamily, carg2 *C.PangoFontFace, carg3 C.gpointer) (cret C.gboolean) {
 
 
 	ret := fn(family, face)
-
-
-
-	return cret
-}
-
-//export _gotk4_gtk4_ListBoxCreateWidgetFunc
-func _gotk4_gtk4_ListBoxCreateWidgetFunc(carg1 *C.GObject, carg2 C.gpointer) (cret *C.GtkWidget) {
-
-
-	ret := fn(item)
-
-
-
-	return cret
-}
-
-//export _gotk4_gtk4_MapListModelMapFunc
-func _gotk4_gtk4_MapListModelMapFunc(carg1 *C.GObject, carg2 C.gpointer) (cret *C.GObject) {
-
-
-	ret := fn(item)
 
 
 
@@ -278,17 +234,6 @@ func _gotk4_gtk4_TreeIterCompareFunc(carg1 *C.GtkTreeModel, carg2 *C.GtkTreeIter
 
 
 	ret := fn(model, a, b)
-
-
-
-	return cret
-}
-
-//export _gotk4_gtk4_TreeListModelCreateModelFunc
-func _gotk4_gtk4_TreeListModelCreateModelFunc(carg1 *C.GObject, carg2 C.gpointer) (cret *C.GListModel) {
-
-
-	ret := fn(item)
 
 
 

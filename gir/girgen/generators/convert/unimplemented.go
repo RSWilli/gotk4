@@ -32,8 +32,8 @@ func (n *UnimplementedConverter) Metadata() string {
 }
 
 // Convert implements Converter.
-func (n *UnimplementedConverter) Convert(w file.CodeWriter) {
-	fmt.Fprintf(w, "panic(\"unimplemented conversion of %s (%s)\")\n", n.Param.GoType(), n.Param.CType())
+func (n *UnimplementedConverter) Convert(w file.File) {
+	fmt.Fprintf(w.Go(), "panic(\"unimplemented conversion of %s (%s)\")\n", n.Param.GoType(), n.Param.CType())
 }
 
 var _ Converter = (*UnimplementedConverter)(nil)
