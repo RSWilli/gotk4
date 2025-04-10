@@ -16,6 +16,8 @@ type Callback struct {
 	gir gir.Callback
 
 	*Parameters
+
+	UserdataParam *Param
 }
 
 var _ checkedParameterType = (*Callback)(nil)
@@ -47,23 +49,43 @@ func DeclareCallback(e *env, v gir.Callback) *Callback {
 	}
 }
 
-func (cb *Callback) resolveParameters(e *env) bool {
+func (cb *Callback) resolveParameters(e *env) resolvedState {
 	e = e.sub("callback", cb.gir.CType)
 
-	params := NewCallableParameters(e, cb.gir.CallableAttrs)
+	params, state := NewCallableParameters(e, cb.gir.CallableAttrs)
+
+	if state == notResolvable {
+		return notResolvable
+	}
+
+	if state == maybeResolvable {
+		return maybeResolvable
+	}
 
 	if params == nil {
-		return false
+		panic("nil params received even though valid")
+	}
+
+	for _, p := range params.CParameters() {
+		if p.IsUserData {
+			cb.UserdataParam = p
+			break
+		}
+	}
+
+	if cb.UserdataParam == nil {
+		e.logger.Warn("skipping callback without user data closure")
+		return notResolvable
 	}
 
 	cb.Parameters = params
 
-	return true
+	return okResolved
 }
 
-// pointersAllowed implements Type.
-func (a *Callback) pointersAllowed(pointers int) bool {
-	return pointers == 0
+// maxPointersAllowed implements maxPointerConstrainedType.
+func (a *Callback) maxPointersAllowed() int {
+	return 0
 }
 
 // allowedTypeForParam implements allowedParameter.

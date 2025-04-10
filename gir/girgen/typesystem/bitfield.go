@@ -26,13 +26,6 @@ func DeclareBitfield(e *env, v gir.Bitfield) *Bitfield {
 		return nil
 	}
 
-	ns, typ := e.findTypeByGIRName("GObject.Value")
-
-	if typ == nil {
-		e.logger.Warn("skipping because gvalue was not found")
-		return nil
-	}
-
 	b := &Bitfield{
 		BaseType: BaseType{
 			GirName: v.Name,
@@ -40,11 +33,8 @@ func DeclareBitfield(e *env, v gir.Bitfield) *Bitfield {
 			CGoTyp:  "C." + v.CType,
 			CTyp:    v.CType,
 		},
-		Marshaler: newDefaultMarshaler(v.GLibGetType, CouldBeForeign[*Record]{
-			Namespace: ns,
-			Type:      typ.(*Record),
-		}),
-		Doc: NewDoc(&v.InfoAttrs, &v.InfoElements),
+		Marshaler: e.newDefaultMarshaler(v.GLibGetType, v.Name),
+		Doc:       NewDoc(&v.InfoAttrs, &v.InfoElements),
 	}
 
 	b.Members = GetMembers(e, b, v.Members)
@@ -52,7 +42,6 @@ func DeclareBitfield(e *env, v gir.Bitfield) *Bitfield {
 	return b
 }
 
-// pointersAllowed implements Type.
-func (a *Bitfield) pointersAllowed(pointers int) bool {
-	return pointers == 0
+func (a *Bitfield) maxPointersAllowed() int {
+	return 0
 }

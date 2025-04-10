@@ -29,12 +29,17 @@ func (c *ContainerInstance) GIRName() string {
 
 // GoType implements Type.
 func (c *ContainerInstance) GoType(pointers int) string {
-	return c.GoType(pointers)
+	return c.Container.GoType(pointers)
 }
 
-// GoType implements Type.
-func (c *ContainerInstance) pointersAllowed(pointers int) bool {
-	return pointers == 1
+// minPointersRequired implements minPointerConstrainedType.
+func (a *ContainerInstance) minPointersRequired() int {
+	return 1
+}
+
+// maxPointersAllowed implements maxPointerConstrainedType.
+func (a *ContainerInstance) maxPointersAllowed() int {
+	return 1
 }
 
 var _ Type = &ContainerInstance{}
@@ -75,7 +80,12 @@ func (e *env) resolveInnerTypes(outer Type, t *gir.Type) Type {
 	return instance
 }
 
-// pointersAllowed implements Type.
-func (a *Container) pointersAllowed(pointers int) bool {
-	return pointers == 1
+// minPointersRequired implements minPointerConstrainedType.
+func (a *Container) minPointersRequired() int {
+	return 1
+}
+
+// maxPointersAllowed implements maxPointerConstrainedType.
+func (a *Container) maxPointersAllowed() int {
+	return 1
 }

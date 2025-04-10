@@ -28,7 +28,7 @@ func DeclareFunction(e *env, parent Type, v gir.Function) *CallableSignature {
 		return nil
 	}
 
-	params := NewCallableParameters(e, v.CallableAttrs)
+	params, _ := NewCallableParameters(e, v.CallableAttrs)
 
 	if params == nil {
 		return nil
@@ -60,7 +60,7 @@ func NewMethod(e *env, parent Type, v gir.Method) *CallableSignature {
 		return nil
 	}
 
-	params := NewCallableParameters(e, v.CallableAttrs)
+	params, _ := NewCallableParameters(e, v.CallableAttrs)
 
 	if params == nil {
 		return nil
@@ -129,7 +129,7 @@ func DeclareConstructor(e *env, parent Type, v gir.Constructor) *CallableSignatu
 		return nil
 	}
 
-	params := NewCallableParameters(e, v.CallableAttrs)
+	params, _ := NewCallableParameters(e, v.CallableAttrs)
 
 	if params == nil {
 		return nil

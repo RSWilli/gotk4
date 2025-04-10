@@ -8,16 +8,9 @@ import (
 	"github.com/diamondburned/gotk4/gir/girgen/typesystem"
 )
 
-type gTypes []gType
+type gTypes []typesystem.Marshalable
 
-type gType struct {
-	typesystem.Marshalable
-}
-
-func (t gType) name() string {
-	return fmt.Sprintf("GType%s", t.GoType(0))
-}
-
+// TODO: maybe lookup the RegisterGValueMarshalers function directly in the typesystem
 func (ts gTypes) reader() io.Reader {
 	if len(ts) == 0 {
 		return io.MultiReader()
@@ -31,21 +24,25 @@ func (ts gTypes) reader() io.Reader {
 
 	var decls DeclarationWriter
 	for _, t := range ts {
-		fmt.Fprintf(&decls, "%s\t= glib.Type(C.%s())\n", t.name(), t.GLibGetType())
+		fmt.Fprintf(&decls, "%s\t= %s(C.%s())\n", t.GoTypeName(), t.Type().NamespacedGoType(0), t.GLibGetType())
 	}
 	decls.WriteTo(&block)
 	block.Unindent()
 
 	fmt.Fprintln(&block, ")")
 
+	// these functions/types are local when generating gobject
+	registerFn := ts[0].Type().WithForeignNamespace("RegisterGValueMarshalers")
+	marshalerType := ts[0].Type().WithForeignNamespace("TypeMarshaler")
+
 	fmt.Fprintln(&block)
 	fmt.Fprintln(&block, "func init() {")
 	block.Indent()
-	fmt.Fprintln(&block, "glib.RegisterGValueMarshalers([]glib.TypeMarshaler{")
+	fmt.Fprintf(&block, "%s([]%s{\n", registerFn, marshalerType)
 	block.Indent()
 
 	for _, t := range ts {
-		fmt.Fprintf(&block, "glib.TypeMarshaler{T: %s, F: marshal%s},\n", t.name(), t.GoType(0))
+		fmt.Fprintf(&block, "%s{T: %s, F: marshal%s},\n", marshalerType, t.GoTypeName(), t.GoType(0))
 	}
 
 	block.Unindent()

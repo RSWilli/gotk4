@@ -610,10 +610,20 @@ func (g *RecordGenerator) Generate(w *file.Package) {
 	fmt.Fprintf(w.Go(), "}\n\n")
 
 	if g.GenerateMarshaler {
+		// GoValueInitializer assertion:
+		fmt.Fprintf(w.Go(), "var _ %s = (*%s)(nil)\n\n", g.Value().WithForeignNamespace("GoValueInitializer"), g.GoType(0))
+
 		w.RegisterGType(g.Record)
-		fmt.Fprintf(w.Go(), "func marshal%s(p uintptr) (interface{}, error) {\n", g.GoType(0))
-		fmt.Fprintf(w.Go(), "\tb := %s(unsafe.Pointer(p)).Boxed()\n", g.Value().WithForeignNamespace(g.Value().Type.FromGlibBorrowFunction))
+		fmt.Fprintf(w.Go(), "func marshal%s(p unsafe.Pointer) (interface{}, error) {\n", g.GoType(0))
+		fmt.Fprintf(w.Go(), "\tb := %s(p).Boxed()\n", g.Value().WithForeignNamespace(g.Value().Type.FromGlibBorrowFunction))
 		fmt.Fprintf(w.Go(), "\treturn %s(b), nil\n", g.GoUnsafeFromGlibBorrowFunction())
+		fmt.Fprintf(w.Go(), "}\n\n")
+
+		fmt.Fprintf(w.Go(), "func (r *%s) InitGoValue(v *%s) {\n", g.GoType(0), g.Value().NamespacedGoType(0))
+		w.Go().Indent()
+		fmt.Fprintf(w.Go(), "v.Init(%s)\n", g.GoTypeName())
+		fmt.Fprintf(w.Go(), "v.SetBoxed(unsafe.Pointer(r.native))\n")
+		w.Go().Unindent()
 		fmt.Fprintf(w.Go(), "}\n\n")
 	}
 
@@ -635,15 +645,18 @@ func (g *RecordGenerator) Generate(w *file.Package) {
 		w.Go().Unindent()
 	}
 
+	fmt.Fprintf(w.Go(), "// %s is used to convert raw %s pointers to go while taking a reference. This is used by the bindings internally.\n", g.GoUnsafeFromGlibNoneFunction(), g.CGoType(0))
+	fmt.Fprintf(w.Go(), "func %s(p unsafe.Pointer) *%s {\n", g.GoUnsafeFromGlibNoneFunction(), g.GoType(0))
 	if g.CgoRefFunction != "" {
-		fmt.Fprintf(w.Go(), "// %s is used to convert raw %s pointers to go while taking a reference. This is used by the bindings internally.\n", g.GoUnsafeFromGlibNoneFunction(), g.CGoType(0))
-		fmt.Fprintf(w.Go(), "func %s(p unsafe.Pointer) *%s {\n", g.GoUnsafeFromGlibNoneFunction(), g.GoType(0))
-		fmt.Fprintf(w.Go(), "\t%s(p)\n", g.CgoRefFunction)
-		fmt.Fprintf(w.Go(), "\twrapped := %s(p)\n", g.GoUnsafeFromGlibNoneFunction())
-		mkFinalizer()
-		fmt.Fprintf(w.Go(), "\treturn wrapped\n")
-		fmt.Fprintf(w.Go(), "}\n\n")
+		// from none only refs if reffing is possible: TODO: this can produce bugs because we are borrowing otherwise
+		fmt.Fprintf(w.Go(), "\t%s((*%s)(p))\n", g.CgoRefFunction, g.CGoType(0))
+	} else {
+		fmt.Fprintf(w.Go(), "\t// FIXME: this has no ref function, what should we do here?\n")
 	}
+	fmt.Fprintf(w.Go(), "\twrapped := %s(p)\n", g.GoUnsafeFromGlibBorrowFunction())
+	mkFinalizer()
+	fmt.Fprintf(w.Go(), "\treturn wrapped\n")
+	fmt.Fprintf(w.Go(), "}\n\n")
 
 	fmt.Fprintf(w.Go(), "// %s is used to convert raw %s pointers to go while taking a reference. This is used by the bindings internally.\n", g.GoUnsafeFromGlibFullFunction(), g.CGoType(0))
 	fmt.Fprintf(w.Go(), "func %s(p unsafe.Pointer) *%s {\n", g.GoUnsafeFromGlibFullFunction(), g.GoType(0))

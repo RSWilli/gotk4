@@ -24,12 +24,13 @@ type Package struct {
 
 	registeredTypes gTypes
 
-	importOverrides map[string]string
+	externCallbacks externCallbacks
 }
 
 func NewPackage(basepath string, importOverrides map[string]string) *Package {
 	return &Package{
-		basepath: basepath,
+		basepath:        basepath,
+		externCallbacks: make(externCallbacks),
 		file: file{
 			importBaseURIs: importOverrides,
 		},
@@ -45,8 +46,15 @@ func (w *Package) SetNamespace(namespace *typesystem.Namespace) {
 	w.Exported.currentNs = namespace
 }
 
+func (p *Package) RegisterExternCallback(cb *typesystem.Callback) {
+	p.externCallbacks[cb] = struct{}{}
+}
+
 func (p *Package) RegisterGType(t typesystem.Marshalable) {
-	p.registeredTypes = append(p.registeredTypes, gType{t})
+	if !t.CanMarshal() {
+		return
+	}
+	p.registeredTypes = append(p.registeredTypes, t)
 }
 
 func (p *Package) Commit() error {
@@ -66,12 +74,14 @@ func (p *Package) Commit() error {
 		}
 	}
 
-	goFile := path.Join(p.folder(), fmt.Sprintf("%s.gen.go", p.namespace.GoName))
+	if !p.empty() {
+		goFile := path.Join(p.folder(), fmt.Sprintf("%s.gen.go", p.namespace.GoName))
 
-	err = p.writeFile(goFile, p.mainFileReader())
+		err = p.writeFile(goFile, p.mainFileReader())
 
-	if err != nil {
-		return err
+		if err != nil {
+			return err
+		}
 	}
 
 	return nil
@@ -116,6 +126,7 @@ func (w *Package) mainFileReader() io.Reader {
 		w.cPackagesFormatted(),
 		str("// #cgo CFLAGS: -Wno-deprecated-declarations\n"),
 		cIncludesReader(w.namespace.CIncludes),
+		w.externCallbacks.reader(),
 		w.c(),
 		str("import \"C\"\n"),
 		str("\n"),

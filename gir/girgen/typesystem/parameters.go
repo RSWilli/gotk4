@@ -28,6 +28,23 @@ const (
 	TransferContainer TransferOwnership = "container"
 )
 
+// NewManualParam constructs a param for ease of use with manual type declarations.
+func NewManualParam(cname, goname string, typ Type, pointers int) *Param {
+	return &Param{
+		CName:  cname,
+		GoName: goname,
+		Type: CouldBeForeign[Type]{
+			Type: typ,
+		},
+		CTypePointers:     pointers,
+		TransferOwnership: TransferNone,
+		Skip:              false,
+		Optional:          false,
+		Nullable:          false,
+		Direction:         "in",
+	}
+}
+
 type Param struct {
 	Doc ParamDoc
 
@@ -59,11 +76,16 @@ type Param struct {
 	// array size. It will be omitted in the go call, because it will get it's value from another source.
 	Implicit bool
 
+	// IsUserData declares that this param carries the user data for a callback, which will be used to retrieve the go closure from
+	// the closure registry in the trampoline function. This is only true for params in a callback.
+	IsUserData bool
+
 	// BorrowFrom is a reference to the (instance) param that this wants to borrow from. In code generation terms this means
 	// that we need to connect this (return) param to the instance param so that the GC wont clean it up early
 	BorrowFrom *Param
 
-	// Closure is a pointer to the implicit param that takes the function pointer that will be called
+	// Closure is a pointer to the implicit param that takes the go function pointer that will be called from the trampoline function.
+	// If this is non nil then the param is is the callback arg.
 	Closure *Param
 
 	// Destroy is a pointer to the implicit param of the destroy notify callback.
@@ -104,10 +126,10 @@ type Parameters struct {
 	// CReturn contains the param that the c function returns
 	CReturn *Param
 
-	// parameters contains the params that the gir declares. The actual CParameters need the InstanceParam prepended, hence this is private
+	// GIRParameters contains the params that the gir declares. The actual CParameters need the InstanceParam prepended, hence this is private
 	//
 	// the parameter references (destroy, closure and array length) are relative indices in this list
-	parameters ParamList
+	GIRParameters ParamList
 
 	// InstanceParam contains the C instance param, which will be used as a method receiver
 	// for the go function. It is also always the first parameter for the c function call
@@ -132,20 +154,20 @@ func (param *Param) valid(e *env) bool {
 	case checkedParameterType:
 		return t.allowedTypeForParam(param)
 	default:
-		return t.pointersAllowed(param.CTypePointers)
+		return TypePointersAllowed(t, param.CTypePointers)
 	}
 }
 
 // CParameters returns the param list for the c call, since the instance param is always the first param if set
 func (p *Parameters) CParameters() ParamList {
 	if p.InstanceParam == nil {
-		return p.parameters
+		return p.GIRParameters
 	}
 
-	params := make(ParamList, 0, len(p.parameters)+1)
+	params := make(ParamList, 0, len(p.GIRParameters)+1)
 
 	params = append(params, p.InstanceParam)
-	params = append(params, p.parameters...)
+	params = append(params, p.GIRParameters...)
 
 	return params
 }
@@ -163,7 +185,7 @@ func (p *Parameters) CGoReturn() *Param {
 	return p.CReturn
 }
 
-func NewCallableParameters(e *env, v gir.CallableAttrs) *Parameters {
+func NewCallableParameters(e *env, v gir.CallableAttrs) (*Parameters, resolvedState) {
 	params := &Parameters{
 		Doc: NewDoc(&v.InfoAttrs, &v.InfoElements),
 	}
@@ -176,26 +198,26 @@ func NewCallableParameters(e *env, v gir.CallableAttrs) *Parameters {
 
 			if girType == nil {
 				e.logger.Warn("array instance param", "ctype", debugCTypeFromAnytype(v.Parameters.InstanceParameter.AnyType))
-				return nil
+				return nil, notResolvable
 			}
 
 			ns, t := e.findType(girType)
 
 			if t == nil {
 				e.logger.Warn("instance param type not found", "ctype", girType.CType)
-				return nil
+				return nil, notResolvable
 			}
 
 			if ns != nil {
 				e.logger.Warn("foreign instance param", "ctype", girType.CType)
-				return nil
+				return nil, notResolvable
 			}
 
 			pointers := CountCTypePointers(girType.CType)
 
 			if pointers != 1 {
 				e.logger.Warn("instance param without exactly one pointer", "ctype", girType.CType)
-				return nil
+				return nil, notResolvable
 			}
 
 			params.InstanceParam = &Param{
@@ -224,25 +246,35 @@ func NewCallableParameters(e *env, v gir.CallableAttrs) *Parameters {
 		for i, p := range v.Parameters.Parameters {
 			if p.Direction == "inout" {
 				e.logger.Warn("FIXME: skipping inout param")
-				return nil
+				return nil, notResolvable
 			}
 
-			ns, t := e.findAnyType(p.AnyType)
+			paramType := p.AnyType
 
-			if t == nil {
-				e.logger.Warn("type not found", "ctype", debugCTypeFromAnytype(p.AnyType))
-				return nil
-			}
-
-			ctypePointers := CountCTypePointers(CTypeFromAnytype(p.AnyType))
+			ctypePointers := CountCTypePointers(CTypeFromAnytype(paramType))
 
 			if p.Direction == "out" {
-				ctypePointers -= 1 // if the param is still valid will be checked later
+				ctypePointers = ctypePointers - 1
+
+				newType, ok := decreaseAnyTypePointers(paramType)
+				if !ok {
+					e.logger.Warn("skipping param not valid for an out direction", "ctype", debugCTypeFromAnytype(paramType))
+					return nil, notResolvable
+				}
+
+				paramType = newType
 			}
 
 			if ctypePointers < 0 {
-				e.logger.Warn("skipping param not valid for an out direction", "ctype", debugCTypeFromAnytype(p.AnyType))
-				return nil
+				e.logger.Warn("skipping param not valid for an out direction", "ctype", debugCTypeFromAnytype(paramType))
+				return nil, notResolvable
+			}
+
+			ns, t := e.findAnyType(paramType)
+
+			if t == nil {
+				e.logger.Warn("type not found", "ctype", debugCTypeFromAnytype(p.AnyType))
+				return nil, maybeResolvable
 			}
 
 			direction := p.Direction
@@ -294,7 +326,7 @@ func NewCallableParameters(e *env, v gir.CallableAttrs) *Parameters {
 				BorrowFrom:        nil,
 			}
 
-			params.parameters = append(params.parameters, param)
+			params.GIRParameters = append(params.GIRParameters, param)
 
 			if !param.Skip {
 				if p.Direction == "out" {
@@ -309,19 +341,26 @@ func NewCallableParameters(e *env, v gir.CallableAttrs) *Parameters {
 		// mark the implicit params. The idx is the index in c parameters, with a given instance param
 		// a parameter may have multiple implicit params
 		for i, p := range v.Parameters.Parameters {
-			param := params.parameters[i]
-			if p.Closure != nil {
-				param.Closure = params.parameters[*p.Closure]
+			param := params.GIRParameters[i]
+			if p.Closure != nil && *p.Closure != i {
+				// param is the function pointer arg and p.Closure points to the userdata arg
+				param.Closure = params.GIRParameters[*p.Closure]
 				param.Closure.Implicit = true
 			}
+			if p.Closure != nil && *p.Closure == i {
+				// we are in a callback and param is the userdata arg
+				param.IsUserData = true
+				param.Implicit = true
+				param.GoName = "_"
+			}
 			if p.Destroy != nil {
-				param.Destroy = params.parameters[*p.Destroy]
+				param.Destroy = params.GIRParameters[*p.Destroy]
 				param.Destroy.Implicit = true
 			}
 			if p.AnyType.Array != nil && p.AnyType.Array.Length != nil {
-				param.Type.Type.(*Array).Length = params.parameters[*p.Array.Length]
+				param.Type.Type.(*Array).Length = params.GIRParameters[*p.Array.Length]
 
-				params.parameters[*p.Array.Length].Implicit = true
+				params.GIRParameters[*p.Array.Length].Implicit = true
 			}
 		}
 	}
@@ -331,7 +370,7 @@ func NewCallableParameters(e *env, v gir.CallableAttrs) *Parameters {
 
 		if t == nil {
 			e.logger.Warn("return type not found", "ctype", debugCTypeFromAnytype(v.ReturnValue.AnyType))
-			return nil
+			return nil, maybeResolvable
 		}
 
 		// https://gi.readthedocs.io/en/latest/annotations/giannotations.html#default-annotations
@@ -346,7 +385,7 @@ func NewCallableParameters(e *env, v gir.CallableAttrs) *Parameters {
 		ret := &Param{
 			Doc:       NewReturnDoc(v.ReturnValue),
 			CName:     "cret",
-			GoName:    "ret",
+			GoName:    "goret",
 			Direction: "return",
 			Type: CouldBeForeign[Type]{
 				Namespace: ns,
@@ -359,7 +398,7 @@ func NewCallableParameters(e *env, v gir.CallableAttrs) *Parameters {
 		if transfer == TransferBorrow {
 			if params.InstanceParam == nil {
 				e.logger.Error("can't borrow without an instance param")
-				return nil
+				return nil, notResolvable
 			}
 
 			ret.BorrowFrom = params.InstanceParam
@@ -380,7 +419,7 @@ func NewCallableParameters(e *env, v gir.CallableAttrs) *Parameters {
 
 		if throwType == nil {
 			e.logger.Warn("GLib.Error type not found, ignoring throwing function")
-			return nil
+			return nil, notResolvable
 		}
 
 		throwParam := &Param{
@@ -402,24 +441,24 @@ func NewCallableParameters(e *env, v gir.CallableAttrs) *Parameters {
 			Direction:         "out",
 		}
 
-		params.parameters = append(params.parameters, throwParam)
+		params.GIRParameters = append(params.GIRParameters, throwParam)
 		params.GoReturns = append(params.GoReturns, throwParam)
 	}
 
 	for _, p := range params.CParameters() {
 		if !p.valid(e) {
-			return nil
+			return nil, notResolvable
 		}
 	}
 
 	if params.CReturn != nil && !params.CReturn.valid(e) {
-		return nil
+		return nil, notResolvable
 	}
 
 	e.sortGoParams(params.GoParameters)
 	e.sortGoReturns(params.GoReturns)
 
-	return params
+	return params, okResolved
 }
 
 type ParamList []*Param

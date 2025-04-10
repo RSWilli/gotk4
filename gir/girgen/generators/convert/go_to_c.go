@@ -16,20 +16,19 @@ func NewGoToCConverter(p *typesystem.Param) Converter {
 		}
 	}
 
+	if _, ok := p.Type.Type.(*typesystem.Array); ok {
+		return newGoToCArrayConverter(p)
+	}
+
 	if p.CallerAllocates {
 		return &UnimplementedConverter{
 			Param: p,
 		}
 	}
 
-	if p.Direction == "out" {
-		return &UnimplementedConverter{
-			Param: p,
-		}
-	}
-
-	if p.Nullable {
-		if p.Type.Type == typesystem.Utf8 {
+	// out params may be nullable, but we don't care about that
+	if p.Direction != "out" && p.Nullable {
+		if p.Type.Type.GoType(0) == "string" {
 			return &GoToCNullableStringConverter{
 				Param: p,
 				SubConverter: &GoToCStringConverter{
@@ -56,8 +55,10 @@ func newGoToCBasicConverter(p *typesystem.Param) Converter {
 
 	switch p.Type.Type.(type) {
 	case *typesystem.CastablePrimitive, *typesystem.Bitfield, *typesystem.Enum:
-		return &GoToCCastingConverter{
-			Param: p,
+		if p.CTypePointers == 0 {
+			return &GoToCCastingConverter{
+				Param: p,
+			}
 		}
 	case *typesystem.Callback:
 		return &GoToCCallbackConverter{
@@ -67,17 +68,15 @@ func newGoToCBasicConverter(p *typesystem.Param) Converter {
 		return newGoToCAliasedConverter(p)
 	}
 
-	if conv, ok := p.Type.Type.(typesystem.ConvertToGlibFullType); p.TransferOwnership == typesystem.TransferFull && ok {
-		return &GoToCConvertibleConverter{
-			Param:       p,
-			ConvertFunc: conv.GoUnsafeToGlibFullFunction(),
-		}
-	}
+	conv, ok := p.Type.Type.(typesystem.ConvertibleType)
 
-	if conv, ok := p.Type.Type.(typesystem.ConvertToGlibNoneType); p.TransferOwnership == typesystem.TransferNone && ok {
-		return &GoToCConvertibleConverter{
-			Param:       p,
-			ConvertFunc: conv.GoUnsafeToGlibNoneFunction(),
+	if ok && p.CTypePointers == 1 {
+
+		if ok && conv.CanTransferToGlib(p.TransferOwnership) {
+			return &GoToCConvertibleConverter{
+				Param:       p,
+				ConvertFunc: p.Type.WithForeignNamespace(conv.GetTransferToGlibFunction(p.TransferOwnership)),
+			}
 		}
 	}
 
@@ -88,7 +87,7 @@ func newGoToCBasicConverter(p *typesystem.Param) Converter {
 func newGoToCAliasedConverter(p *typesystem.Param) Converter {
 	subtype := p.Type.Type.(*typesystem.Alias).AliasedType
 
-	if _, ok := subtype.Type.(*typesystem.CastablePrimitive); ok {
+	if _, ok := subtype.Type.(*typesystem.CastablePrimitive); ok && p.CTypePointers == 0 {
 		return &AliasConverter{
 			SubConverter: &GoToCCastingConverter{
 				Param: p,
@@ -97,4 +96,12 @@ func newGoToCAliasedConverter(p *typesystem.Param) Converter {
 	}
 
 	return &UnimplementedConverter{Param: p}
+}
+
+func newGoToCArrayConverter(p *typesystem.Param) Converter {
+	// array := p.Type.Type.(*typesystem.Array)
+
+	return &UnimplementedConverter{
+		Param: p,
+	}
 }

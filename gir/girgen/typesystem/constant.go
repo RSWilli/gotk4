@@ -1,6 +1,8 @@
 package typesystem
 
 import (
+	"strings"
+
 	"github.com/diamondburned/gotk4/gir"
 	"github.com/diamondburned/gotk4/gir/girgen/strcases"
 )
@@ -35,17 +37,17 @@ func DeclareConstant(e *env, v gir.Constant) *Constant {
 		return nil
 	}
 
-	if underlying == Utf8 {
+	if _, ok := underlying.(*CastablePrimitive); !ok {
 		return nil
 	}
 
 	return &Constant{
 		Doc: NewDoc(&v.InfoAttrs, &v.InfoElements),
 		Identifier: &baseIdentifier{
-			goIndentifier:  strcases.SnakeToGo(true, v.Name),
+			goIndentifier:  strcases.SnakeToGo(true, strings.ToLower(v.Name)),
 			cIndentifier:   cIdentifier,
 			cGoIndentifier: "C." + cIdentifier,
 		},
-		GoValue: "C." + cIdentifier, // we use the C constant directly as this prevents any of the quoting issues
+		GoValue: v.Value,
 	}
 }

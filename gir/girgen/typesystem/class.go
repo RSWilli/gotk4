@@ -53,9 +53,14 @@ func (in *Class) GoType(pointers int) string {
 	return in.GoInterfaceName
 }
 
-// pointersAllowed implements Type.
-func (a *Class) pointersAllowed(pointers int) bool {
-	return pointers == 1
+// minPointersRequired implements minPointerConstrainedType.
+func (a *Class) minPointersRequired() int {
+	return 1
+}
+
+// maxPointersAllowed implements maxPointerConstrainedType.
+func (a *Class) maxPointersAllowed() int {
+	return 1
 }
 
 func DeclareClass(e *env, v gir.Class) *Class {
@@ -81,13 +86,6 @@ func DeclareClass(e *env, v gir.Class) *Class {
 		ctype = v.Name
 	}
 
-	ns, typ := e.findTypeByGIRName("GObject.Value")
-
-	if typ == nil {
-		e.logger.Warn("skipping because gvalue was not found")
-		return nil
-	}
-
 	c := &Class{
 		Doc:             NewDoc(&v.InfoAttrs, &v.InfoElements),
 		Abstract:        v.Abstract,
@@ -96,7 +94,14 @@ func DeclareClass(e *env, v gir.Class) *Class {
 		GoWrapBaseClassFunction: fmt.Sprintf("unsafeWrap%s", v.Name),
 		GoPrivateUpcastMethod:   fmt.Sprintf("upcastTo%s", v.CType), // use cidentifier to not shadow parent methods
 
-		BaseConversions: newDefaultBaseConversions(v.Name),
+		BaseConversions: BaseConversions{
+			FromGlibBorrowFunction: "", // no borrow function for classes
+			FromGlibNoneFunction:   fmt.Sprintf("Unsafe%sFromGlibNone", v.Name),
+			FromGlibFullFunction:   fmt.Sprintf("Unsafe%sFromGlibFull", v.Name),
+
+			ToGlibNoneFunction: fmt.Sprintf("Unsafe%sToGlibNone", v.Name),
+			ToGlibFullFunction: fmt.Sprintf("Unsafe%sToGlibFull", v.Name),
+		},
 
 		BaseType: BaseType{
 			GirName: v.Name,
@@ -104,11 +109,8 @@ func DeclareClass(e *env, v gir.Class) *Class {
 			CGoTyp:  "C." + ctype,
 			CTyp:    ctype,
 		},
-		Marshaler: newDefaultMarshaler(v.GLibGetType, CouldBeForeign[*Record]{
-			Namespace: ns,
-			Type:      typ.(*Record),
-		}),
-		gir: v,
+		Marshaler: e.newDefaultMarshaler(v.GLibGetType, v.Name),
+		gir:       v,
 	}
 
 	return c
@@ -263,11 +265,6 @@ func (c *Class) ParentGoInterfaceName() string {
 	return c.Parent.WithForeignNamespace(c.Parent.Type.GoInterfaceName)
 }
 
-func (c *Class) BaseClassGoUnsafeFromGlibBorrowFunction() string {
-	base := c.BaseClass()
-	return base.WithForeignNamespace(base.Type.GoUnsafeFromGlibBorrowFunction())
-}
-
 func (c *Class) BaseClassGoUnsafeFromGlibFullFunction() string {
 	base := c.BaseClass()
 	return base.WithForeignNamespace(base.Type.GoUnsafeFromGlibFullFunction())
@@ -326,7 +323,7 @@ func (c *Class) AllParents() []CouldBeForeign[*Class] {
 			break
 		}
 
-		currentParent = currentParent.Parent.Type
+		nextParent := currentParent.Parent.Type
 
 		if currentParent.Parent.Namespace != nil {
 			// only change the current namespace if the type is not local
@@ -334,6 +331,8 @@ func (c *Class) AllParents() []CouldBeForeign[*Class] {
 			// is local to current, then next will still be foreign to c
 			currentNs = currentParent.Parent.Namespace
 		}
+
+		currentParent = nextParent
 	}
 
 	return parents

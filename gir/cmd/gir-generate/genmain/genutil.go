@@ -6,11 +6,13 @@ import (
 	"go/format"
 	"io/fs"
 	"log"
+	"log/slog"
 	"os"
 	"path"
 	"path/filepath"
 	"runtime"
 	"strconv"
+	"strings"
 	"sync"
 
 	"github.com/diamondburned/gotk4/gir"
@@ -373,11 +375,24 @@ func CleanGeneratedFiles(path string) error {
 
 	dirfs := os.DirFS(abspath)
 
-	genfiles, err := fs.Glob(dirfs, "**/*.gen.go")
+	var genfiles []string
 
-	if err != nil {
-		return err
-	}
+	_ = fs.WalkDir(dirfs, ".", func(name string, d fs.DirEntry, err error) error {
+		if err != nil {
+			return nil
+		}
+		if d.IsDir() {
+			return nil
+		}
+
+		filename := filepath.Base(name)
+
+		if strings.HasSuffix(filename, ".gen.go") {
+			genfiles = append(genfiles, name)
+		}
+
+		return nil
+	})
 
 	for _, f := range genfiles {
 		abs := filepath.Join(abspath, f)
@@ -386,6 +401,8 @@ func CleanGeneratedFiles(path string) error {
 		if err != nil {
 			return err
 		}
+
+		slog.Info("removed file", "file", abs)
 	}
 
 	entries, err := os.ReadDir(abspath)

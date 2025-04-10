@@ -38,13 +38,22 @@ func DeclareAlias(e *env, v gir.Alias) *Alias {
 	return a
 }
 
-func (a *Alias) resolve(e *env) bool {
+func (a *Alias) resolve(e *env) resolvedState {
 	e = e.sub("alias", a.gir.Type)
 
 	ns, subtype := e.findType(&a.gir.Type)
 
-	if subtype == nil || subtype == Void {
-		return false
+	if subtype == nil {
+		return maybeResolvable
+	}
+
+	if subtype == Void {
+		return notResolvable
+	}
+
+	if TypeRequiresPointer(subtype) {
+		e.logger.Warn("skipping alias that requires pointers")
+		return notResolvable
 	}
 
 	a.AliasedType = CouldBeForeign[Type]{
@@ -52,10 +61,5 @@ func (a *Alias) resolve(e *env) bool {
 		Type:      subtype,
 	}
 
-	return true
-}
-
-// pointersAllowed implements Type.
-func (a *Alias) pointersAllowed(pointers int) bool {
-	return pointers == 0 && a.AliasedType.Type.pointersAllowed(0)
+	return okResolved
 }

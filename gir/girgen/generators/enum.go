@@ -192,7 +192,9 @@ func (g *EnumGenerator) Generate(w *file.Package) {
 
 	g.Doc.Generate(w.Go())
 
-	fmt.Fprintf(w.Go(), "type %s C.int\n\nconst (\n", g.GoType(0))
+	fmt.Fprintf(w.Go(), "type %s C.int\n\n", g.GoType(0))
+
+	fmt.Fprintf(w.Go(), "const (\n")
 
 	w.Go().Indent()
 	for _, member := range g.Members {
@@ -211,9 +213,17 @@ func (g *EnumGenerator) Generate(w *file.Package) {
 
 	fmt.Fprint(w.Go(), "\n")
 
-	fmt.Fprintf(w.Go(), "func (e %s) SetValue(v *%s) {\n", g.GoType(0), g.Value().NamespacedGoType(0))
-	fmt.Fprintf(w.Go(), "\tpanic(\"TODO\")\n")
-	fmt.Fprintf(w.Go(), "}\n\n")
+	if g.CanMarshal() {
+		// GoValueInitializer assertion:
+		fmt.Fprintf(w.Go(), "var _ %s = %s(0)\n\n", g.Value().WithForeignNamespace("GoValueInitializer"), g.GoType(0))
+
+		fmt.Fprintf(w.Go(), "func (e %s) InitGoValue(v *%s) {\n", g.GoType(0), g.Value().NamespacedGoType(0))
+		w.Go().Indent()
+		fmt.Fprintf(w.Go(), "v.Init(%s)\n", g.GoTypeName())
+		fmt.Fprintf(w.Go(), "v.SetEnum(int(e))\n")
+		w.Go().Unindent()
+		fmt.Fprintf(w.Go(), "}\n\n")
+	}
 }
 
 func NewEnumGenerator(enum *typesystem.Enum) *EnumGenerator {

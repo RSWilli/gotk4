@@ -4,6 +4,7 @@ import (
 	"github.com/diamondburned/gotk4/gir"
 )
 
+// TODO: does union need to implement pointer constraint interfaces?
 type Union struct {
 	BaseType
 	Marshaler
@@ -28,13 +29,6 @@ func DeclareUnion(e *env, v gir.Union) *Union {
 		return nil
 	}
 
-	ns, typ := e.findTypeByGIRName("GObject.Value")
-
-	if typ == nil {
-		e.logger.Warn("skipping enum because gvalue was not found", "enum", v.Name)
-		return nil
-	}
-
 	return &Union{
 		Doc:     NewDoc(&v.InfoAttrs, &v.InfoElements),
 		GetType: v.GLibGetType,
@@ -44,11 +38,8 @@ func DeclareUnion(e *env, v gir.Union) *Union {
 			CGoTyp:  "C." + v.CType,
 			CTyp:    v.CType,
 		},
-		Marshaler: newDefaultMarshaler(v.GLibGetType, CouldBeForeign[*Record]{
-			Namespace: ns,
-			Type:      typ.(*Record),
-		}),
-		gir: v,
+		Marshaler: e.newDefaultMarshaler(v.GLibGetType, v.Name),
+		gir:       v,
 	}
 }
 
@@ -82,9 +73,4 @@ func (u *Union) declareNested(e *env) resolvedState {
 	// }
 
 	return okResolved
-}
-
-// pointersAllowed implements Type.
-func (a *Union) pointersAllowed(pointers int) bool {
-	return pointers == 0 // TODO: is this correct?
 }

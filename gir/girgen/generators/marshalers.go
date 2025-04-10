@@ -20,8 +20,8 @@ func (g *MarshalGenerator) Generate(w *file.Package) {
 
 	w.GoImportNamespace(g.Type.Value().Namespace)
 
-	fmt.Fprintf(w.Go(), "func marshal%s(p uintptr) (interface{}, error) {\n", g.Type.GoType(0))
-	fmt.Fprintf(w.Go(), "\treturn %s(%s(unsafe.Pointer(p)).%s()), nil\n", g.WrapFunction, g.Type.Value().WithForeignNamespace(g.Type.Value().Type.FromGlibBorrowFunction), g.ValueFunction)
+	fmt.Fprintf(w.Go(), "func marshal%s(p unsafe.Pointer) (any, error) {\n", g.Type.GoType(0))
+	fmt.Fprintf(w.Go(), "\treturn %s(%s(p).%s()), nil\n", g.WrapFunction, g.Type.Value().WithForeignNamespace(g.Type.Value().Type.FromGlibBorrowFunction), g.ValueFunction)
 	fmt.Fprintf(w.Go(), "}\n")
 }
 

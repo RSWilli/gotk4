@@ -28,7 +28,7 @@ func NewVirtualMethod(e *env, parent Type, typestruct *Record, v gir.VirtualMeth
 	// e.g. _gotk4_gtk4_AccessibleText_virtual_get_contents
 	tramp := fmt.Sprintf("%s_%s_virtual_%s", e.trampolinePrefix(), parent.GoType(0), v.Name)
 
-	params := NewCallableParameters(e, v.CallableAttrs)
+	params, _ := NewCallableParameters(e, v.CallableAttrs)
 
 	if params == nil {
 		return nil

@@ -53,14 +53,12 @@ func (cfg Config) getNamespaceEnv(namespace *Namespace) *env {
 	}
 
 	return &env{
-		cfg:            cfg,
-		nsCfg:          nsCfg,
-		minVersion:     v,
-		ignore:         ignoreOr(nsCfg.IgnoredDefinitions...),
-		namespace:      namespace,
-		compareParams:  nil,
-		compareReturns: nil,
-		logger:         slog.Default().With(slog.String("namespace", namespace.v.String())),
+		cfg:        cfg,
+		nsCfg:      nsCfg,
+		minVersion: v,
+		ignore:     ignoreOr(nsCfg.IgnoredDefinitions...),
+		namespace:  namespace,
+		logger:     slog.Default().With(slog.String("namespace", namespace.v.String())),
 	}
 }
 

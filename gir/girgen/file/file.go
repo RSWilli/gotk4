@@ -17,6 +17,7 @@ type CodeWriter interface {
 type File interface {
 	GoImportCore(pkg string)
 	GoImportNamespace(ns *typesystem.Namespace)
+	GoImportType(typ typesystem.CouldBeForeign[typesystem.Type])
 	GoImport(pkg string)
 
 	Go() CodeWriter
@@ -42,6 +43,24 @@ func (d *file) GoImportCore(pkg string) {
 	d.GoImport(coreglibPkg + "/" + pkg)
 }
 
+// GoImportType imports either the namespace or the go package contained in the go type: FIXME: how to import nested packages?
+func (d *file) GoImportType(typ typesystem.CouldBeForeign[typesystem.Type]) {
+	if typ.Namespace != nil {
+		d.GoImportNamespace(typ.Namespace)
+	}
+
+	if typ.Type == nil {
+		panic("tried to import nil type")
+	}
+
+	alias, module := typ.Type.GoTypeRequiredImport()
+	if module == "" {
+		return
+	}
+
+	d.GoImportAliased(alias, module)
+}
+
 func (d *file) GoImportNamespace(ns *typesystem.Namespace) {
 	if ns == nil {
 		return
@@ -63,6 +82,14 @@ func (d *file) GoImportNamespace(ns *typesystem.Namespace) {
 	}
 
 	d.GoImport(path)
+}
+
+func (d *file) GoImportAliased(alias, pkg string) {
+	if d.goImports == nil {
+		d.goImports = make(goImports)
+	}
+
+	d.goImports[pkg] = alias
 }
 
 func (d *file) GoImport(pkg string) {

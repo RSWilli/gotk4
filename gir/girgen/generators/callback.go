@@ -1,13 +1,13 @@
 package generators
 
 import (
-	"bytes"
 	"fmt"
-	"io"
+	"strings"
 
 	"github.com/diamondburned/gotk4/gir"
 	"github.com/diamondburned/gotk4/gir/girgen/file"
 	"github.com/diamondburned/gotk4/gir/girgen/generators/callback"
+	"github.com/diamondburned/gotk4/gir/girgen/generators/convert"
 	"github.com/diamondburned/gotk4/gir/girgen/gotmpl"
 	"github.com/diamondburned/gotk4/gir/girgen/typesystem"
 )
@@ -53,7 +53,11 @@ type CallbackGenerator struct {
 
 	*typesystem.Callback
 
-	Converters []callback.Converter
+	// ParamConverters contains all the c->go in param converters needed for the go call
+	ParamConverters convert.ConverterList
+
+	// ReturnConverters contains all the go->c converters needed for the returns and out params
+	ReturnConverters convert.ConverterList
 }
 
 // Generate implements Generator.
@@ -78,66 +82,89 @@ func (c *CallbackGenerator) generateGo(w *file.Package) {
 	fmt.Fprintln(w.Go())
 }
 
-func (c *CallbackGenerator) generateExport(w *file.Package) {
-	w.Exported.GoImportCore("gbox")
+func (c *CallbackGenerator) generateExport(pkg *file.Package) {
+	w := &pkg.Exported
 
-	fmt.Fprintf(w.Exported.Go(), "//export %s\n", c.TrampolineName)
-
-	cret := ""
-	if c.CReturn != nil {
-		cret = fmt.Sprintf(" (%s %s)", c.CReturn.CName, c.CReturn.CGoType())
-	}
+	fmt.Fprintf(w.Go(), "//export %s\n", c.TrampolineName)
 
 	// TODO: the out params here are missing a pointer because it was stripped in the type resolution
 
-	fmt.Fprintf(w.Exported.Go(), "func %s(%s)%s {\n", c.TrampolineName, c.CParameters().CGoDeclarations(), cret)
+	fmt.Fprintf(w.Go(), "%s {\n", c.CGoTrampolineSignature())
 
-	w.Exported.Go().Indent()
+	w.Go().Indent()
 
-	var secInputPre bytes.Buffer
-	var secInputConv bytes.Buffer
-	var secFnCall bytes.Buffer
-	var secOutputPre bytes.Buffer
-	var secOutputConv bytes.Buffer
-	var secReturn bytes.Buffer
+	fmt.Fprintf(w.Go(), "var fn %s\n", c.GoType(0)) // declare fn as the callback itself
+
+	w.GoImportCore("gbox")
+
+	fmt.Fprintf(w.Go(), "{\n")
+	w.Go().Indent()
+	fmt.Fprintf(w.Go(), "v := gbox.Get(uintptr(%s))\n", c.UserdataParam.CName)
+	fmt.Fprintf(w.Go(), "if v == nil {\n")
+	fmt.Fprintf(w.Go(), "\tpanic(`callback not found`)\n")
+	fmt.Fprintf(w.Go(), "}\n")
+	fmt.Fprintf(w.Go(), "fn = v.(%s)\n", c.GoType(0))
+	w.Go().Unindent()
+	fmt.Fprintf(w.Go(), "}\n")
+
+	w.Go().NewSection()
+
+	var decls file.DeclarationWriter
+
+	for i, param := range c.Callback.GoParameters {
+		if param.Implicit || param.Skip {
+			continue
+		}
+		conv := c.ParamConverters[i]
+		fmt.Fprintf(&decls, "var\t%s\t%s\t// %s\n", param.GoName, param.GoType(), conv.Metadata())
+
+		w.GoImportType(param.Type)
+	}
+	for i, ret := range c.Callback.GoReturns {
+		if ret.Implicit || ret.Skip {
+			continue
+		}
+
+		conv := c.ReturnConverters[i]
+		fmt.Fprintf(&decls, "var\t%s\t%s\t// %s\n", ret.GoName, ret.GoType(), conv.Metadata())
+
+		w.GoImportType(ret.Type)
+	}
+
+	decls.WriteTo(w.Go())
+
+	w.Go().NewSection()
+
+	for _, c := range c.ParamConverters {
+		c.Convert(w)
+	}
+
+	w.Go().NewSection()
 
 	goReturns := c.GoReturns.GoIdentifiers()
 
 	if goReturns == "" {
-		fmt.Fprintf(&secFnCall, "fn(%s)\n", c.GoParameters.GoIdentifiers())
+		fmt.Fprintf(w.Go(), "fn(%s)\n", c.GoParameters.GoIdentifiers())
 	} else {
-		fmt.Fprintf(&secFnCall, "%s := fn(%s)\n", goReturns, c.GoParameters.GoIdentifiers())
-	}
-	if c.CReturn != nil {
-		fmt.Fprintf(&secReturn, "return %s\n", c.CReturn.CName)
+		fmt.Fprintf(w.Go(), "%s = fn(%s)\n", goReturns, c.GoParameters.GoIdentifiers())
 	}
 
-	// generate all value conversions:
-	// for _, v := range c.Converters {
-	// v.AddImports(&w.Exported)
-	// if v.ConversionDirection() == value.ConvertCToGo {
-	// 	fmt.Fprintf(&secInputPre, "\tvar %s %s // out\n", v.OutIdentifier(), v.OutType())
-	// 	fmt.Fprint(&secInputConv, v.Conversion())
-	// } else if goReturns != "" {
-	// 	fmt.Fprintf(&secOutputPre, "\tvar _ %s\n", v.InType()) // this is not needed, but here for debugging purposes
-	// 	fmt.Fprint(&secOutputConv, v.Conversion())
-	// }
-	// }
+	w.Go().NewSection()
 
-	// separate the sections with newlines:
-	fmt.Fprintln(&secInputPre)
-	fmt.Fprintln(&secInputConv)
-	fmt.Fprintln(&secFnCall)
-	fmt.Fprintln(&secOutputPre)
-	fmt.Fprintln(&secOutputConv)
+	for _, c := range c.ReturnConverters {
+		c.Convert(w)
+	}
 
-	// write the grouped sections:
-	io.Copy(w.Exported.Go(), io.MultiReader(&secInputPre, &secInputConv, &secFnCall, &secOutputPre, &secOutputConv, &secReturn))
+	w.Go().NewSection()
 
-	w.Exported.Go().Unindent()
+	if c.CReturn != nil && c.CReturn.Type.Type != typesystem.Void {
+		fmt.Fprintf(w.Go(), "return %s\n", c.CReturn.CName)
+	}
 
-	fmt.Fprintln(w.Exported.Go(), "}")
-	fmt.Fprintln(w.Exported.Go())
+	w.Go().Unindent()
+
+	fmt.Fprintln(w.Go(), "}")
+	fmt.Fprintln(w.Go())
 }
 
 func NewCallbackGenerator(cb *typesystem.Callback) *CallbackGenerator {
@@ -148,9 +175,43 @@ func NewCallbackGenerator(cb *typesystem.Callback) *CallbackGenerator {
 	g := &CallbackGenerator{
 		Doc:      NewTypeGoDocGenerator(cb),
 		Callback: cb,
+	}
 
-		Converters: make([]callback.Converter, 0), // TODO: convert
+	if cb.InstanceParam != nil {
+		panic("callback with instance param")
+	}
+
+	for _, param := range cb.GoParameters {
+		g.ParamConverters = append(g.ParamConverters, convert.NewCToGoConverter(param))
+	}
+
+	for _, param := range cb.GoReturns {
+		g.ReturnConverters = append(g.ReturnConverters, convert.NewGoToCConverter(param))
 	}
 
 	return g
+}
+
+// GoSignature returns a string of the go function signature.
+func (m *CallbackGenerator) CGoTrampolineSignature() string {
+	var ret string
+	if m.Callback.CReturn != nil && m.Callback.CReturn.Type.Type != typesystem.Void {
+		ret = fmt.Sprintf(" (%s %s)", m.Callback.CReturn.CName, m.Callback.CReturn.CGoType())
+	}
+
+	paramDecls := make([]string, 0, len(m.Callback.CParameters()))
+
+	for _, p := range m.Callback.CParameters() {
+		additionalPointer := ""
+		if p.Direction == "out" {
+			additionalPointer = "*"
+		}
+
+		paramDecls = append(
+			paramDecls,
+			fmt.Sprintf("%s %s%s", p.CName, additionalPointer, p.CGoType()),
+		)
+	}
+
+	return fmt.Sprintf("func %s(%s)%s", m.Callback.TrampolineName, strings.Join(paramDecls, ", "), ret)
 }

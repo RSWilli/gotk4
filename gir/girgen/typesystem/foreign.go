@@ -18,14 +18,15 @@ func (f CouldBeForeign[T]) WithForeignNamespace(goidentifier string) string {
 		return goidentifier
 	}
 
+	if f.Namespace == nil {
+		return goidentifier
+	}
+
 	pointers := strings.LastIndex(goidentifier, "*")
 
 	ptrStr := goidentifier[0 : pointers+1]
 	goidentifier = goidentifier[pointers+1:]
 
-	if f.Namespace == nil {
-		return goidentifier
-	}
 	return fmt.Sprintf("%s%s.%s", ptrStr, f.Namespace.GoName, goidentifier)
 }
 

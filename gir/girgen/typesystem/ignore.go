@@ -41,7 +41,7 @@ func IgnoreByRegex(pattern string) IgnoreFunc {
 	re := regexp.MustCompile(pattern)
 	return func(parent, self string, attrs gir.InfoAttrs, elements gir.InfoElements) bool {
 		if parent == "" {
-			return re.Match([]byte(parent))
+			return re.Match([]byte(self))
 		}
 
 		return re.Match([]byte(parent + "." + self))

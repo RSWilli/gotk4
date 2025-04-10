@@ -182,26 +182,38 @@ func (n *Namespace) resolveAll(e *env, unresolvedClasses []*Class, unresolvedInt
 		}
 
 		for _, v := range unresolvedInterfaces {
-			if v.resolve(e) {
-				n.Interfaces = append(n.Interfaces, v)
-			} else {
+			switch v.resolve(e) {
+			case notResolvable:
+			case maybeResolvable:
 				stillUnresolvedInterfaces = append(stillUnresolvedInterfaces, v)
+			case okResolved:
+				n.Interfaces = append(n.Interfaces, v)
+			default:
+				panic("unexpected typesystem.resolvedState")
 			}
 		}
 
 		for _, v := range unresolvedCallbacks {
-			if v.resolveParameters(e) {
-				n.Callbacks = append(n.Callbacks, v)
-			} else {
+			switch v.resolveParameters(e) {
+			case notResolvable:
+			case maybeResolvable:
 				stillUnresolvedCallbacks = append(stillUnresolvedCallbacks, v)
+			case okResolved:
+				n.Callbacks = append(n.Callbacks, v)
+			default:
+				panic("unexpected typesystem.resolvedState")
 			}
 		}
 
 		for _, v := range unresolvedAliases {
-			if v.resolve(e) {
-				n.Aliases = append(n.Aliases, v)
-			} else {
+			switch v.resolve(e) {
+			case notResolvable:
+			case maybeResolvable:
 				stillUnresolvedAliases = append(stillUnresolvedAliases, v)
+			case okResolved:
+				n.Aliases = append(n.Aliases, v)
+			default:
+				panic("unexpected typesystem.resolvedState")
 			}
 		}
 
@@ -235,6 +247,13 @@ func (n *Namespace) resolveAll(e *env, unresolvedClasses []*Class, unresolvedInt
 func (n *Namespace) findLocalTypeByGIRName(girname string) Type {
 	return n.findLocalTypeWith(func(t Type) bool {
 		return t.GIRName() == girname
+	})
+}
+
+// findLocalTypeByCType returns the [Type] for the named type
+func (n *Namespace) findLocalTypeByCType(ctype string) Type {
+	return n.findLocalTypeWith(func(t Type) bool {
+		return t.CType(0) == ctype
 	})
 }
 

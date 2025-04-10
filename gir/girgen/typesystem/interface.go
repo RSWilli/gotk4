@@ -21,6 +21,8 @@ type Interface struct {
 
 	GoWrapBaseClassFunction string
 
+	GoPrivateUpcastMethod string
+
 	GoInterfaceName string
 
 	BaseConversions
@@ -43,9 +45,14 @@ func (in *Interface) GoType(pointers int) string {
 	return in.GoInterfaceName
 }
 
-// pointersAllowed implements Type.
-func (a *Interface) pointersAllowed(pointers int) bool {
-	return pointers == 1
+// minPointersRequired implements minPointerConstrainedType.
+func (a *Interface) minPointersRequired() int {
+	return 1
+}
+
+// maxPointersAllowed implements maxPointerConstrainedType.
+func (a *Interface) maxPointersAllowed() int {
+	return 1
 }
 
 func DeclareInterface(e *env, v gir.Interface) *Interface {
@@ -63,13 +70,6 @@ func DeclareInterface(e *env, v gir.Interface) *Interface {
 		ctype = v.Name
 	}
 
-	ns, typ := e.findTypeByGIRName("GObject.Value")
-
-	if typ == nil {
-		e.logger.Warn("skipping enum because gvalue was not found", "enum", v.Name)
-		return nil
-	}
-
 	i := &Interface{
 		Doc: NewDoc(&v.InfoAttrs, &v.InfoElements),
 		BaseType: BaseType{
@@ -78,15 +78,21 @@ func DeclareInterface(e *env, v gir.Interface) *Interface {
 			CGoTyp:  "C." + ctype,
 			CTyp:    ctype,
 		},
-		Marshaler: newDefaultMarshaler(v.GLibGetType, CouldBeForeign[*Record]{
-			Namespace: ns,
-			Type:      typ.(*Record),
-		}),
+		Marshaler:       e.newDefaultMarshaler(v.GLibGetType, v.Name),
 		GoInterfaceName: v.Name,
 
 		GoWrapBaseClassFunction: fmt.Sprintf("unsafeWrap%s", v.Name),
 
-		BaseConversions: newDefaultBaseConversions(v.Name),
+		GoPrivateUpcastMethod: fmt.Sprintf("upcastTo%s", v.CType), // use cidentifier to not shadow parent methods
+
+		BaseConversions: BaseConversions{
+			FromGlibBorrowFunction: "", // no borrow function for interfaces
+			FromGlibNoneFunction:   fmt.Sprintf("Unsafe%sFromGlibNone", v.Name),
+			FromGlibFullFunction:   fmt.Sprintf("Unsafe%sFromGlibFull", v.Name),
+
+			ToGlibNoneFunction: fmt.Sprintf("Unsafe%sToGlibNone", v.Name),
+			ToGlibFullFunction: fmt.Sprintf("Unsafe%sToGlibFull", v.Name),
+		},
 
 		gir: v,
 	}
@@ -94,7 +100,7 @@ func DeclareInterface(e *env, v gir.Interface) *Interface {
 	return i
 }
 
-func (in *Interface) resolve(e *env) bool {
+func (in *Interface) resolve(e *env) resolvedState {
 	e = e.sub("interface", in.gir.CType)
 
 	if in.gir.GLibTypeStruct != "" {
@@ -102,18 +108,18 @@ func (in *Interface) resolve(e *env) bool {
 
 		if ns != nil {
 			e.logger.Warn("type struct is foreign", "namespace", ns.Name)
-			return false
+			return notResolvable
 		}
 
 		if typeStructType == nil {
-			return false
+			return notResolvable
 		}
 
 		typeStruct, ok := typeStructType.(*Record)
 
 		if !ok {
 			e.logger.Warn("type struct is not a record", "actual", reflect.TypeOf(typeStructType).String())
-			return false
+			return notResolvable
 		}
 
 		in.TypeStruct = typeStruct
@@ -123,11 +129,11 @@ func (in *Interface) resolve(e *env) bool {
 
 	if parent == nil {
 		e.logger.Error("GObject.Object not found")
-		return false
+		return notResolvable
 	}
 
 	if _, ok := parent.(*Class); !ok {
-		return false
+		return notResolvable
 	}
 
 	in.Parent = CouldBeForeign[*Class]{
@@ -140,14 +146,14 @@ func (in *Interface) resolve(e *env) bool {
 
 		if inter == nil {
 			e.logger.Info("interface prerequesite not found", "interface", prereq.Name)
-			return false
+			return maybeResolvable
 		}
 
 		switch inter.(type) {
 		case *Class, *Interface:
 		default:
 			e.logger.Warn("prerequesite is not a class or an interface", "prerequesite", inter.GIRName(), "actual", reflect.TypeOf(parent).String())
-			return false
+			return notResolvable
 		}
 
 		in.Prerequesite = append(in.Prerequesite, CouldBeForeign[Type]{
@@ -156,7 +162,7 @@ func (in *Interface) resolve(e *env) bool {
 		})
 	}
 
-	return true
+	return okResolved
 }
 
 func (in *Interface) declareNested(e *env) {

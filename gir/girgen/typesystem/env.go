@@ -22,9 +22,6 @@ type env struct {
 
 	ignore IgnoreFunc
 
-	compareParams  ParamCompareFunc
-	compareReturns ParamCompareFunc
-
 	logger *slog.Logger
 }
 
@@ -38,20 +35,41 @@ func (e *env) sub(attrs ...any) *env {
 	return &subenv
 }
 
+// sortGoParams moves the params according to go conventions:
+// 1. context.Context is always first
+// 2. error is always last
+// 3. all other params don't get reordered
 func (e *env) sortGoParams(ps []*Param) {
-	if e.compareParams == nil {
-		return
-	}
-
-	slices.SortFunc(ps, e.compareParams)
+	slices.SortFunc(ps, func(a, b *Param) int {
+		if a.GoType() == "context.Context" {
+			return -1
+		}
+		if b.GoType() == "context.Context" {
+			return 1
+		}
+		if a.GoType() == "error" {
+			return 1
+		}
+		if b.GoType() == "error" {
+			return -1
+		}
+		return 0
+	})
 }
 
+// sortGoReturns moves the return values according to go conventions:
+// 1. error is always last
+// 2. all other return values don't get reordered
 func (e *env) sortGoReturns(ps []*Param) {
-	if e.compareReturns == nil {
-		return
-	}
-
-	slices.SortFunc(ps, e.compareReturns)
+	slices.SortFunc(ps, func(a, b *Param) int {
+		if a.GoType() == "error" {
+			return 1
+		}
+		if b.GoType() == "error" {
+			return -1
+		}
+		return 0
+	})
 }
 
 func (e *env) trampolinePrefix() string {
@@ -126,10 +144,22 @@ func (e *env) findAnyType(t gir.AnyType) (*Namespace, Type) {
 	return nil, nil
 }
 
-// findType searches for a declared type in the namespace. It makes sure that the returned type
-// contains the same amount of pointers as the given gir type
+// findType searches for a declared type in the namespace
 func (e *env) findType(t *gir.Type) (*Namespace, Type) {
-	ns, typ := e.findTypeByGIRName(t.Name)
+	var ns *Namespace
+	var typ Type
+	if t.CType != "" {
+		// Ctype resolving is often more reliable than GIR name resolving, so we try it first
+
+		ctype := cleanCType(t.CType)
+
+		ns, typ = e.findTypeByCType(ctype)
+	}
+
+	if typ == nil {
+		// try GIR name resolving as fallback
+		ns, typ = e.findTypeByGIRName(t.Name)
+	}
 
 	if typ == nil {
 		return nil, nil
@@ -144,13 +174,46 @@ func (e *env) findType(t *gir.Type) (*Namespace, Type) {
 	return ns, typ
 }
 
+func (e *env) findTypeByCType(t string) (*Namespace, Type) {
+	if ctypeIsIncompatible(t) {
+		return nil, nil
+	}
+
+	primitive := findBuiltinPrimitiveByCType(t)
+
+	if primitive != nil {
+		return nil, primitive
+	}
+
+	typ := e.namespace.findLocalTypeByCType(t)
+
+	if typ != nil {
+		return nil, typ
+	}
+
+	// the referenced type is not in the current namespace, so we need to find it
+	// in the included namespaces. We need to try all included namespaces, because
+	// we have no idea which one is the right one. FIXME: we can know this by looking at the ctype prefix
+
+	for _, reffedNS := range e.namespace.Included {
+		typ := reffedNS.findLocalTypeByCType(t)
+
+		if typ != nil {
+			return reffedNS, typ
+		}
+	}
+
+	e.logger.Debug("type not found", "type", t)
+	return nil, nil
+}
+
 func (e *env) findTypeByGIRName(t string) (*Namespace, Type) {
 	if replaced, ok := e.cfg.GIRReplacements[t]; ok {
 		e.logger.Warn("replacing GIR type name", "type", t, "replaced by", replaced)
 		t = replaced
 	}
 
-	if isIncompatible(t) {
+	if ctypeIsIncompatible(t) {
 		return nil, nil
 	}
 
@@ -161,7 +224,7 @@ func (e *env) findTypeByGIRName(t string) (*Namespace, Type) {
 	}
 
 	if len(parts) == 1 {
-		primitive := findBuiltinPrimitiveByName(t)
+		primitive := findBuiltinPrimitiveByGIRName(t)
 
 		if primitive != nil {
 			return nil, primitive

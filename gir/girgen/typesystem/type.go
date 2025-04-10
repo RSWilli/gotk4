@@ -5,10 +5,9 @@ import "slices"
 type Type interface {
 	GIRName() string
 	GoType(pointers int) string
+	GoTypeRequiredImport() (alias string, module string)
 	CGoType(pointers int) string
 	CType(pointers int) string
-
-	pointersAllowed(pointers int) bool
 }
 
 // BaseType partially implements the [Type] interface
@@ -17,6 +16,9 @@ type BaseType struct {
 	GoTyp   string
 	CGoTyp  string
 	CTyp    string
+
+	GoImportAlias string
+	GoImport      string
 }
 
 // GIRName implements Type.
@@ -40,4 +42,9 @@ func (b BaseType) GoType(pointers int) string {
 		return b.GoTyp
 	}
 	return GetPointers(pointers) + b.GoTyp
+}
+
+// GoType implements Type.
+func (b BaseType) GoTypeRequiredImport() (string, string) {
+	return b.GoImportAlias, b.GoImport
 }

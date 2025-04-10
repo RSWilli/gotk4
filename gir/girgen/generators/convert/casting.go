@@ -30,7 +30,13 @@ type GoToCCastingConverter struct {
 
 // Convert implements Converter.
 func (c *GoToCCastingConverter) Convert(w file.File) {
-	fmt.Fprintf(w.Go(), "%s = %s(%s)\n", c.Param.CName, c.Param.CGoType(), c.Param.GoName)
+	cname := c.Param.CName
+
+	if c.Param.Direction == "out" {
+		cname = "*" + cname
+	}
+
+	fmt.Fprintf(w.Go(), "%s = %s(%s)\n", cname, c.Param.CGoType(), c.Param.GoName)
 }
 
 // Metadata implements Converter.

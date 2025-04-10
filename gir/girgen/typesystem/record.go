@@ -51,13 +51,6 @@ func DeclareRecord(e *env, v gir.Record) *Record {
 		return nil
 	}
 
-	ns, typ := e.findTypeByGIRName("GObject.Value")
-
-	if typ == nil {
-		e.logger.Warn("skipping enum because gvalue was not found", "enum", v.Name)
-		return nil
-	}
-
 	return &Record{
 		Doc:           NewDoc(&v.InfoAttrs, &v.InfoElements),
 		PrivateGoType: strcases.UnexportPascal(v.Name),
@@ -74,10 +67,7 @@ func DeclareRecord(e *env, v gir.Record) *Record {
 			CGoTyp:  "C." + v.CType,
 			CTyp:    v.CType,
 		},
-		Marshaler: newDefaultMarshaler(v.GLibGetType, CouldBeForeign[*Record]{
-			Namespace: ns,
-			Type:      typ.(*Record),
-		}),
+		Marshaler: e.newDefaultMarshaler(v.GLibGetType, v.Name),
 
 		gir: v,
 	}
@@ -115,18 +105,6 @@ func (r *Record) declareNested(e *env) {
 			continue
 		}
 
-		if v.Name == "copy" {
-			// r.GoUnsafeRefFunction = "UnsafeCopy"
-			// TODO: how to handle this? Maybe add a "ref mode" to the struct?
-			continue
-		}
-
-		if v.Name == "copy_into" {
-			// TODO: how to handle this? It sounds like we need to allocate a copy struct before
-			// beeing able to copy into it
-			continue
-		}
-
 		if v.Name == "free" {
 			r.GoUnsafeUnrefFunction = fmt.Sprintf("Unsafe%sFree", r.GoType(0))
 			r.CgoUnrefFunction = "C." + v.CIdentifier
@@ -139,6 +117,18 @@ func (r *Record) declareNested(e *env) {
 			r.CgoUnrefFunction = "C." + v.CIdentifier
 			r.CgoUnrefNeedsUnsafeCast = false
 			continue
+		}
+
+		if v.Name == "copy" {
+			// r.GoUnsafeRefFunction = "UnsafeCopy"
+			// TODO: how to handle this? Maybe add a "ref mode" to the struct?
+			// continue
+		}
+
+		if v.Name == "copy_into" {
+			// TODO: how to handle this? It sounds like we need to allocate a copy struct before
+			// beeing able to copy into it
+			// continue
 		}
 
 		if t := NewMethod(e, r, v); t != nil {
@@ -162,7 +152,16 @@ func (r *Record) declareNested(e *env) {
 	}
 }
 
-// pointersAllowed implements Type.
-func (a *Record) pointersAllowed(pointers int) bool {
-	return pointers == 1
+// minPointersRequired implements Type.
+func (a *Record) minPointersRequired() int {
+	if a.gir.Foreign || a.gir.Disguised {
+		return 1
+	}
+
+	return 0
+}
+
+// maxPointersAllowed implements maxPointerConstrainedType.
+func (a *Record) maxPointersAllowed() int {
+	return 1
 }

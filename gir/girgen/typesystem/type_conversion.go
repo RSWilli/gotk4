@@ -2,32 +2,19 @@ package typesystem
 
 import "fmt"
 
-type ConvertFromGlibFullType interface {
+type ConvertibleType interface {
+	CanTransferToGlib(transfer TransferOwnership) bool
+	CanTransferFromGlib(transfer TransferOwnership) bool
+
+	GetTransferToGlibFunction(transfer TransferOwnership) string
+	GetTransferFromGlibFunction(transfer TransferOwnership) string
+
 	GoUnsafeFromGlibFullFunction() string
-}
-
-type ConvertFromGlibNoneType interface {
 	GoUnsafeFromGlibNoneFunction() string
-}
-
-type ConvertFromGlibBorrowType interface {
 	GoUnsafeFromGlibBorrowFunction() string
-}
 
-type ConvertToGlibFullType interface {
 	GoUnsafeToGlibFullFunction() string
-}
-
-type ConvertToGlibNoneType interface {
 	GoUnsafeToGlibNoneFunction() string
-}
-
-type allConversionsType interface {
-	ConvertFromGlibFullType
-	ConvertFromGlibNoneType
-	ConvertFromGlibBorrowType
-	ConvertToGlibFullType
-	ConvertToGlibNoneType
 }
 
 type BaseConversions struct {
@@ -36,6 +23,58 @@ type BaseConversions struct {
 	FromGlibNoneFunction   string
 	ToGlibNoneFunction     string
 	ToGlibFullFunction     string
+}
+
+// CanTransferFromGlib implements ConvertibleType.
+func (b BaseConversions) CanTransferFromGlib(transfer TransferOwnership) bool {
+	switch transfer {
+	case TransferNone:
+		return b.FromGlibNoneFunction != ""
+	case TransferFull:
+		return b.FromGlibFullFunction != ""
+	case TransferBorrow:
+		return b.FromGlibBorrowFunction != ""
+	default:
+		return false
+	}
+}
+
+// CanTransferToGlib implements ConvertibleType.
+func (b BaseConversions) CanTransferToGlib(transfer TransferOwnership) bool {
+	switch transfer {
+	case TransferNone:
+		return b.ToGlibNoneFunction != ""
+	case TransferFull:
+		return b.ToGlibFullFunction != ""
+	default:
+		return false
+	}
+}
+
+// GetTransferFromGlibFunction implements ConvertibleType.
+func (b BaseConversions) GetTransferFromGlibFunction(transfer TransferOwnership) string {
+	switch transfer {
+	case TransferNone:
+		return b.FromGlibNoneFunction
+	case TransferFull:
+		return b.FromGlibFullFunction
+	case TransferBorrow:
+		return b.FromGlibBorrowFunction
+	default:
+		return ""
+	}
+}
+
+// GetTransferToGlibFunction implements ConvertibleType.
+func (b BaseConversions) GetTransferToGlibFunction(transfer TransferOwnership) string {
+	switch transfer {
+	case TransferNone:
+		return b.ToGlibNoneFunction
+	case TransferFull:
+		return b.ToGlibFullFunction
+	default:
+		return ""
+	}
 }
 
 func newDefaultBaseConversions(name string) BaseConversions {
@@ -74,4 +113,4 @@ func (b BaseConversions) GoUnsafeToGlibNoneFunction() string {
 	return b.ToGlibNoneFunction
 }
 
-var _ allConversionsType = BaseConversions{}
+var _ ConvertibleType = BaseConversions{}

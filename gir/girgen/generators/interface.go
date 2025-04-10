@@ -4,6 +4,7 @@ import (
 	"fmt"
 
 	"github.com/diamondburned/gotk4/gir/girgen/file"
+	"github.com/diamondburned/gotk4/gir/girgen/strcases"
 	"github.com/diamondburned/gotk4/gir/girgen/typesystem"
 )
 
@@ -33,7 +34,7 @@ func (g *InterfaceGenerator) Generate(w *file.Package) {
 	fmt.Fprintf(w.Go(), "type %s struct {\n", g.GoType(0))
 	fmt.Fprintf(w.Go(), "\t_ [0]func() // equal guard\n")
 
-	fmt.Fprintf(w.Go(), "\t*%s\n", g.Parent.NamespacedGoType(0))
+	fmt.Fprintf(w.Go(), "\tInstance %s\n", g.Parent.NamespacedGoType(0))
 
 	// for _, inter := range g.Prerequesite {
 	// 	fmt.Fprintf(w.Go(), "\t*%s\n", inter.GoType(0))
@@ -46,7 +47,8 @@ func (g *InterfaceGenerator) Generate(w *file.Package) {
 	fmt.Fprintf(w.Go(), "type %s interface {\n", g.GoInterfaceName)
 	w.Go().Indent()
 
-	fmt.Fprintln(w.Go(), g.Parent.WithForeignNamespace(g.Parent.Type.GoInterfaceName))
+	fmt.Fprintf(w.Go(), "%s() *%s\n", g.GoPrivateUpcastMethod, g.GoType(0))
+	// fmt.Fprintln(w.Go(), g.Parent.WithForeignNamespace(g.Parent.Type.GoInterfaceName))
 	// for inter := range g.PrerequesitesGoInterfaceNames() {
 	// 	fmt.Fprintln(w.Go(), inter)
 	// }
@@ -58,6 +60,8 @@ func (g *InterfaceGenerator) Generate(w *file.Package) {
 	w.Go().Unindent()
 	fmt.Fprintf(w.Go(), "}\n\n")
 
+	fmt.Fprintf(w.Go(), "var _ %s = (*%s)(nil)\n\n", g.GoInterfaceName, g.GoType(0))
+
 	baseClassIdentifier := "base"
 
 	fmt.Fprintf(w.Go(), "func %s(%s *%s) *%s {\n", g.GoWrapBaseClassFunction, baseClassIdentifier, g.Parent.WithForeignNamespace(g.Parent.Type.GoType(0)), g.GoType(0))
@@ -65,7 +69,7 @@ func (g *InterfaceGenerator) Generate(w *file.Package) {
 	fmt.Fprintf(w.Go(), "return &%s{\n", g.GoType(0))
 	w.Go().Indent()
 
-	fmt.Fprintf(w.Go(), "%s: %s,\n", g.Parent.Type.GoType(0), baseClassIdentifier)
+	fmt.Fprintf(w.Go(), "Instance: *%s,\n", baseClassIdentifier)
 	w.Go().Unindent()
 
 	fmt.Fprintf(w.Go(), "}\n")
@@ -79,8 +83,6 @@ func (g *InterfaceGenerator) Generate(w *file.Package) {
 		fmt.Fprintln(w.Go())
 	}
 
-	// TODO: imports
-
 	mkConstructor := func(constructorName, parentConstructorName string) {
 		fmt.Fprintf(w.Go(), "func %s(c unsafe.Pointer) %s {\n", constructorName, g.GoInterfaceName)
 		w.Go().Indent()
@@ -89,8 +91,10 @@ func (g *InterfaceGenerator) Generate(w *file.Package) {
 		fmt.Fprintf(w.Go(), "}\n\n")
 	}
 
-	fmt.Fprintf(w.Go(), "// %s is used to convert raw %s pointers to go. This is used by the bindings internally.\n", g.GoUnsafeFromGlibBorrowFunction(), g.CType(0))
-	mkConstructor(g.GoUnsafeFromGlibBorrowFunction(), g.Parent.WithForeignNamespace(g.Parent.Type.GoUnsafeFromGlibBorrowFunction()))
+	fmt.Fprintf(w.Go(), "func (%s *%s) %s() *%s {\n", strcases.ReceiverName(g.GoType(0)), g.GoType(0), g.GoPrivateUpcastMethod, g.GoType(0))
+	fmt.Fprintf(w.Go(), "\treturn %s\n", strcases.ReceiverName(g.GoType(0)))
+	fmt.Fprintf(w.Go(), "}\n\n")
+
 	fmt.Fprintf(w.Go(), "// %s is used to convert raw %s pointers to go while taking a reference and attaching a finalizer. This is used by the bindings internally.\n", g.GoUnsafeFromGlibNoneFunction(), g.CType(0))
 	mkConstructor(g.GoUnsafeFromGlibNoneFunction(), g.Parent.WithForeignNamespace(g.Parent.Type.GoUnsafeFromGlibNoneFunction()))
 	fmt.Fprintf(w.Go(), "// %s is used to convert raw %s pointers to go while attaching a finalizer. This is used by the bindings internally.\n", g.GoUnsafeFromGlibFullFunction(), g.CType(0))
@@ -98,7 +102,8 @@ func (g *InterfaceGenerator) Generate(w *file.Package) {
 
 	mkTransfer := func(transfername, baseTransferName string) {
 		fmt.Fprintf(w.Go(), "func %s(c %s) unsafe.Pointer {\n", transfername, g.GoInterfaceName)
-		fmt.Fprintf(w.Go(), "\treturn %s(c)\n", baseTransferName)
+		fmt.Fprintf(w.Go(), "\ti := c.%s()\n", g.GoPrivateUpcastMethod)
+		fmt.Fprintf(w.Go(), "\treturn %s(&i.Instance)\n", baseTransferName)
 		fmt.Fprintf(w.Go(), "}\n\n")
 	}
 
@@ -149,8 +154,7 @@ func wrapInterface(w file.CodeWriter, t typesystem.CouldBeForeign[*typesystem.In
 
 	w.Indent()
 
-	// parent is always the base class
-	fmt.Fprintf(w, "%s: *%s,\n", t.Type.Parent.Type.GoType(0), baseClassIdentifier)
+	fmt.Fprintf(w, "Instance: *%s,\n", baseClassIdentifier)
 
 	w.Unindent()
 

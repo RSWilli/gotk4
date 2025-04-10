@@ -5,10 +5,30 @@ import (
 )
 
 func NewCToGoConverter(p *typesystem.Param) Converter {
+	if p.Implicit {
+		return &ImplicitConverter{
+			Param: p,
+		}
+	}
+	if p.Skip {
+		return &SkippedConverter{
+			Param: p,
+		}
+	}
 	if p.CallerAllocates {
 		return &UnimplementedConverter{
 			Param: p,
 		}
+	}
+
+	if p.IsUserData {
+		return &CToGoCallbackConverter{
+			Param: p,
+		}
+	}
+
+	if _, ok := p.Type.Type.(*typesystem.Array); ok {
+		return newCToGoArrayConverter(p)
 	}
 
 	if p.Nullable {
@@ -39,31 +59,24 @@ func newCToGoBasicConverter(p *typesystem.Param) Converter {
 
 	switch p.Type.Type.(type) {
 	case *typesystem.CastablePrimitive, *typesystem.Bitfield, *typesystem.Enum:
-		return &CToGoCastingConverter{
-			Param: p,
+		if p.CTypePointers == 0 {
+			return &CToGoCastingConverter{
+				Param: p,
+			}
 		}
 	case *typesystem.Alias:
 		return newCToGoAliasedConverter(p)
 	}
 
-	if conv, ok := p.Type.Type.(typesystem.ConvertFromGlibFullType); p.TransferOwnership == typesystem.TransferFull && ok {
-		return &CToGoConvertibleConverter{
-			Param:       p,
-			ConvertFunc: conv.GoUnsafeFromGlibFullFunction(),
-		}
-	}
+	conv, ok := p.Type.Type.(typesystem.ConvertibleType)
 
-	if conv, ok := p.Type.Type.(typesystem.ConvertFromGlibNoneType); p.TransferOwnership == typesystem.TransferNone && ok {
-		return &CToGoConvertibleConverter{
-			Param:       p,
-			ConvertFunc: conv.GoUnsafeFromGlibNoneFunction(),
-		}
-	}
+	if ok && p.CTypePointers == 1 {
 
-	if conv, ok := p.Type.Type.(typesystem.ConvertFromGlibBorrowType); p.TransferOwnership == typesystem.TransferBorrow && ok {
-		return &CToGoConvertibleConverter{
-			Param:       p,
-			ConvertFunc: conv.GoUnsafeFromGlibBorrowFunction(),
+		if ok && conv.CanTransferFromGlib(p.TransferOwnership) {
+			return &CToGoConvertibleConverter{
+				Param:       p,
+				ConvertFunc: p.Type.WithForeignNamespace(conv.GetTransferFromGlibFunction(p.TransferOwnership)),
+			}
 		}
 	}
 
@@ -74,7 +87,7 @@ func newCToGoBasicConverter(p *typesystem.Param) Converter {
 func newCToGoAliasedConverter(p *typesystem.Param) Converter {
 	subtype := p.Type.Type.(*typesystem.Alias).AliasedType
 
-	if _, ok := subtype.Type.(*typesystem.CastablePrimitive); ok {
+	if _, ok := subtype.Type.(*typesystem.CastablePrimitive); ok && p.CTypePointers == 0 {
 		return &AliasConverter{
 			SubConverter: &CToGoCastingConverter{
 				Param: p,
@@ -83,4 +96,12 @@ func newCToGoAliasedConverter(p *typesystem.Param) Converter {
 	}
 
 	return &UnimplementedConverter{Param: p}
+}
+
+func newCToGoArrayConverter(p *typesystem.Param) Converter {
+	// array := p.Type.Type.(*typesystem.Array)
+
+	return &UnimplementedConverter{
+		Param: p,
+	}
 }

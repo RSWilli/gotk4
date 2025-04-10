@@ -23,7 +23,7 @@ func (c *CToGoNullableStringConverter) Convert(w file.File) {
 
 // Metadata implements Converter.
 func (c *CToGoNullableStringConverter) Metadata() string {
-	return fmt.Sprintf("%s, nullable", c.SubConverter.Metadata())
+	return fmt.Sprintf("%s, nullable-string", c.SubConverter.Metadata())
 }
 
 var _ Converter = (*CToGoNullableStringConverter)(nil)
@@ -44,7 +44,7 @@ func (c *GoToCNullableStringConverter) Convert(w file.File) {
 
 // Metadata implements Converter.
 func (c *GoToCNullableStringConverter) Metadata() string {
-	return fmt.Sprintf("%s, nullable", c.SubConverter.Metadata())
+	return fmt.Sprintf("%s, nullable-string", c.SubConverter.Metadata())
 }
 
 var _ Converter = (*GoToCNullableStringConverter)(nil)

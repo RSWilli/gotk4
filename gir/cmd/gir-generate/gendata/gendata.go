@@ -29,7 +29,7 @@ var Main = genmain.Data{
 
 	Config: typesystem.Config{
 		GIRReplacements: map[string]string{
-			"GType": "GLib.Type", // manually implemented in glib namespace
+			"GType": "GObject.Type", // GType is often referred to as a global type instead of GObject scoped
 		},
 		Namespaces: map[string]typesystem.NamespaceConfig{
 			"cairo-1": {
@@ -47,14 +47,6 @@ var Main = genmain.Data{
 			"GLib-2": {
 				MinVersion: "2.80",
 				ManualTypes: []typesystem.Type{
-					&typesystem.CastablePrimitive{
-						BaseType: typesystem.BaseType{
-							GirName: "Type", // see GIRReplacements
-							CTyp:    "GType",
-							CGoTyp:  "C.GType",
-							GoTyp:   "Type",
-						},
-					},
 					&typesystem.Callback{
 						BaseType: typesystem.BaseType{
 							GirName: "DestroyNotify",
@@ -62,24 +54,29 @@ var Main = genmain.Data{
 							CGoTyp:  "C.GDestroyNotify",
 							CTyp:    "GDestroyNotify",
 						},
-						Parameters:     &typesystem.Parameters{},
+						Parameters: &typesystem.Parameters{
+							CReturn: typesystem.NewManualParam("cret", "goret", typesystem.Void, 0),
+							GIRParameters: typesystem.ParamList{
+								typesystem.NewManualParam("arg0", "goarg0", typesystem.Guintptr, 0),
+							},
+						},
 						TrampolineName: "callbackDelete",
 					},
-					&typesystem.Record{
-						BaseType: typesystem.BaseType{
-							GirName: "Variant",
-							GoTyp:   "Variant",
-							CGoTyp:  "C.GVariant",
-							CTyp:    "GVariant",
-						},
-						BaseConversions: typesystem.BaseConversions{
-							FromGlibBorrowFunction: "UnsafeVariantFromGlibBorrow",
-							FromGlibFullFunction:   "UnsafeVariantFromGlibFull",
-							FromGlibNoneFunction:   "UnsafeVariantFromGlibNone",
-							ToGlibNoneFunction:     "UnsafeVariantToGlibNone",
-							ToGlibFullFunction:     "UnsafeVariantToGlibFull",
-						},
-					},
+					// &typesystem.Record{
+					// 	BaseType: typesystem.BaseType{
+					// 		GirName: "Variant",
+					// 		GoTyp:   "Variant",
+					// 		CGoTyp:  "C.GVariant",
+					// 		CTyp:    "GVariant",
+					// 	},
+					// 	BaseConversions: typesystem.BaseConversions{
+					// 		FromGlibBorrowFunction: "UnsafeVariantFromGlibBorrow",
+					// 		FromGlibFullFunction:   "UnsafeVariantFromGlibFull",
+					// 		FromGlibNoneFunction:   "UnsafeVariantFromGlibNone",
+					// 		ToGlibNoneFunction:     "UnsafeVariantToGlibNone",
+					// 		ToGlibFullFunction:     "UnsafeVariantToGlibFull",
+					// 	},
+					// },
 					&typesystem.Record{
 						BaseType: typesystem.BaseType{
 							GirName: "Error",
@@ -97,6 +94,11 @@ var Main = genmain.Data{
 					},
 				},
 				IgnoredDefinitions: []typesystem.IgnoreFunc{
+					typesystem.IgnoreMatching("Variant"),           // TODO: implement manually
+					typesystem.IgnoreMatching("variant_get_gtype"), // implemented with gvalue in gobject
+
+					typesystem.IgnoreMatching("ucs4_to_utf16"), // returns a pointer instead of an array
+
 					// Nothing "Unix" is going to be available on Windows.
 					typesystem.IgnoreByRegex(".*[Uu]nix.*"),
 					// Useless
@@ -115,6 +117,7 @@ var Main = genmain.Data{
 
 					typesystem.IgnoreMatching("strv_get_type"), // requires gobject
 
+					typesystem.IgnoreByFileNameSubstring("gallocator."),
 					typesystem.IgnoreByFileNameSubstring("gasyncqueue."),
 					typesystem.IgnoreByFileNameSubstring("gatomic."),
 					typesystem.IgnoreByFileNameSubstring("gbacktrace."),
@@ -175,7 +178,20 @@ var Main = genmain.Data{
 				},
 			},
 			"GObject-2": {
+				MinVersion: "2.80",
 				ManualTypes: []typesystem.Type{
+					&typesystem.Alias{
+						BaseType: typesystem.BaseType{
+							GirName: "Type",
+							CTyp:    "GType",
+							CGoTyp:  "C.GType",
+							GoTyp:   "Type",
+						},
+						AliasedType: typesystem.CouldBeForeign[typesystem.Type]{
+							Namespace: nil,
+							Type:      typesystem.Guint64,
+						},
+					},
 					&typesystem.Class{
 						BaseType: typesystem.BaseType{
 							GirName: "Object",
@@ -186,13 +202,14 @@ var Main = genmain.Data{
 						GoInterfaceName: "Object",
 						Doc:             typesystem.Doc{},
 						BaseConversions: typesystem.BaseConversions{
-							FromGlibBorrowFunction: "TODOBorrow",
-							FromGlibFullFunction:   "AssumeOwnership",
-							FromGlibNoneFunction:   "Take",
-							ToGlibNoneFunction:     "TODOToNone",
-							ToGlibFullFunction:     "TODOToFull",
+							FromGlibBorrowFunction: "", // borrow is not needed
+							FromGlibFullFunction:   "UnsafeObjectFromGlibFull",
+							FromGlibNoneFunction:   "UnsafeObjectFromGlibNone",
+							ToGlibNoneFunction:     "UnsafeObjectToGlibNone",
+							ToGlibFullFunction:     "UnsafeObjectToGlibFull",
 						},
 					},
+					// this is needed so that the type structs can be looked up:
 					&typesystem.Record{
 						BaseType: typesystem.BaseType{
 							GirName: "ObjectClass",
@@ -209,10 +226,10 @@ var Main = genmain.Data{
 							CGoTyp:  "C.GValue",
 						},
 						BaseConversions: typesystem.BaseConversions{
-							FromGlibBorrowFunction: "TODOFromGlibBorrow",
+							FromGlibBorrowFunction: "ValueFromNative",
 							FromGlibFullFunction:   "TODOFromGlibFull",
 							FromGlibNoneFunction:   "TODOFromGlibNone",
-							ToGlibNoneFunction:     "TODOToGlibNone",
+							ToGlibNoneFunction:     "UnsafeValueToGlibNone",
 							ToGlibFullFunction:     "TODOToGlibFull",
 						},
 					},
@@ -232,7 +249,30 @@ var Main = genmain.Data{
 				IgnoredDefinitions: []typesystem.IgnoreFunc{
 					// manually implemented, but hidden from the user
 					typesystem.IgnoreMatching("ParamSpec"),
+					typesystem.IgnoreMatching("Closure"),
+					typesystem.IgnoreMatching("SignalQuery"),
+					typesystem.IgnoreMatching("TypeQuery"),
+
+					typesystem.IgnoreMatching("Binding"), // is this needed?
+
+					// signal handler accumulators, maybe implement them manually?
+					typesystem.IgnoreMatching("signal_accumulator_first_wins"),
+					typesystem.IgnoreMatching("signal_accumulator_true_handled"),
+
+					// type registration is implemented manually but hidden from the user
+					typesystem.IgnoreMatching("type_register_fundamental"),
+					typesystem.IgnoreMatching("type_register_static"),
+
+					typesystem.IgnoreMatching("type_check_value_holds"),
+					typesystem.IgnoreMatching("type_check_value"),
+					typesystem.IgnoreMatching("strdup_value_contents"),
+
+					typesystem.IgnoreMatching("TypeInterface"), // base struct for interfaces, not needed
+					typesystem.IgnoreMatching("TypeClass"),     // base struct for classes, not needed
 				},
+			},
+			"Atk-1": {
+				MinVersion: "2.50",
 			},
 		},
 	},
@@ -376,6 +416,13 @@ var Preprocessors = []Preprocessor{
 		userData := &callback.Parameters.Parameters[userDataIx]
 		userData.Closure = ptr.To(userDataIx)
 	}),
+
+	// Collisions on NoOpObject due to interface implementations:
+	RenameCallable("Atk-1.Action.get_name", "get_action_name"),
+	RenameCallable("Atk-1.Action.get_description", "get_action_description"),
+	RenameCallable("Atk-1.Action.set_description", "set_action_description"),
+	RenameCallable("Atk-1.Text.add_selection", "add_text_selection"),
+	RenameCallable("Atk-1.Text.remove_selection", "remove_text_selection"),
 }
 
 // FIXME: override or manually implement this

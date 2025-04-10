@@ -25,6 +25,8 @@ type Field struct {
 }
 
 func NewField(e *env, parent Type, v gir.Field) *Field {
+	e = e.sub("field", v.Name)
+
 	if e.skip(parent, v) {
 		return nil
 	}

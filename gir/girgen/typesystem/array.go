@@ -8,9 +8,10 @@ import (
 
 // Array is the type for array params. It has an inner type and may reference another [Param] for its length.
 type Array struct {
-	cTypeOverride   string
-	cGoTypeOverride string
-	goTypeOverride  string
+	GirName         string
+	CTypeOverride   string
+	CGoTypeOverride string
+	GoTypeOverride  string
 
 	Inner         CouldBeForeign[Type]
 	InnerPointers int
@@ -20,58 +21,98 @@ type Array struct {
 	FixedSize      int
 }
 
+// GoTypeRequiredImport implements Type.
+func (a *Array) GoTypeRequiredImport() (alias string, module string) {
+	if a.Inner.Type == nil {
+		return "", ""
+	}
+	return a.Inner.Type.GoTypeRequiredImport()
+}
+
 var _ Type = (*Array)(nil)
+var _ minPointerConstrainedType = (*Array)(nil)
+var _ maxPointerConstrainedType = (*Array)(nil)
+
+// maxPointersAllowed implements maxPointerConstrainedType.
+func (a *Array) maxPointersAllowed() int {
+	return a.InnerPointers + 1
+}
+
+// minPointersRequired implements minPointerConstrainedType.
+func (a *Array) minPointersRequired() int {
+	return a.InnerPointers + 1
+}
 
 func (a *Array) CGoType(pointers int) string {
-	return "array"
+	if a.CGoTypeOverride != "" {
+		return a.CGoTypeOverride
+	}
+	return "*" + a.Inner.Type.CGoType(a.InnerPointers)
 }
 
 // CType implements Type.
 func (a *Array) CType(pointers int) string {
-	return "array"
+	if a.CTypeOverride != "" {
+		return a.CTypeOverride
+	}
+	return a.Inner.Type.CType(a.InnerPointers) + "*"
 }
 
 // GoType implements Type.
 func (a *Array) GoType(pointers int) string {
-	return "array"
+	if a.GoTypeOverride != "" {
+		return a.GoTypeOverride
+	}
+	inner := a.Inner.NamespacedGoType(a.InnerPointers)
+
+	if a.FixedSize > 0 {
+		return fmt.Sprintf("[%d]%s", a.FixedSize, inner)
+	}
+	return fmt.Sprintf("[]%s", inner)
 }
 
 // GIRName implements Type.
 func (a *Array) GIRName() string {
+	if a.GirName != "" {
+		return a.GirName
+	}
 	if a.Inner.Type == nil {
 		return "array[unknown]"
 	}
 	return fmt.Sprintf("array[%s]", a.Inner.Type.GIRName())
 }
 
-// pointersAllowed implements Type.
-func (a *Array) pointersAllowed(pointers int) bool {
-	return true //pointers == 0 && (a.Inner.Type == nil || a.Inner.Type.pointersAllowed(a.InnerPointers))
-}
-
 // getArrayType resolves the array type in the current env
 func (e *env) getArrayType(arr *gir.Array) *Array {
+	if arr.Type == nil {
+		e.logger.Warn("array type is nil", "ctype", arr.CType)
+		return nil
+	}
+
 	if arr.Length == nil && arr.FixedSize == 0 && !arr.IsZeroTerminated() {
 		// this is an unbounded array, which requires some unsafe preconditions not
 		// documented in GIR, must be handled manually
+		e.logger.Warn("unbounded array, not supported", "name", arr.Name)
 		return nil
 	}
 
 	if arr.CType == "" {
 		// this is true for some dummy fields, we just ignore them
+		e.logger.Warn("ignoring array with empty ctype")
 		return nil
 	}
 
 	if arr.CType == "gpointer" || arr.CType == "gconstpointer" || arr.CType == "void*" {
 		// this represents a bytes array, e.g. for g_bytes_get_data
 		return &Array{
-			cTypeOverride:   arr.CType,
-			cGoTypeOverride: "C." + arr.CType,
-			Inner: CouldBeForeign[Type]{
-				Type: prim("...", typeInvalid, typeInvalid, "byte"),
-			},
-			FixedSize:      arr.FixedSize,
-			ZeroTerminated: arr.IsZeroTerminated(),
+			GirName:         arr.Name,
+			CTypeOverride:   arr.CType,
+			CGoTypeOverride: "C." + arr.CType,
+			GoTypeOverride:  "[]byte",
+			FixedSize:       arr.FixedSize,
+			ZeroTerminated:  arr.IsZeroTerminated(),
+
+			Inner: CouldBeForeign[Type]{}, // no inner type
 		}
 	}
 
@@ -80,27 +121,49 @@ func (e *env) getArrayType(arr *gir.Array) *Array {
 	if cleanedCtype == "gchar*" {
 		// this is a string where the length is somehow given
 		return &Array{
-			cTypeOverride:   arr.CType, // may contain "const"
-			cGoTypeOverride: "*C.gchar",
-			goTypeOverride:  "string",
-			Inner:           CouldBeForeign[Type]{}, // no inner type
+			GirName:         arr.Name,
+			CTypeOverride:   arr.CType, // may contain "const"
+			CGoTypeOverride: "*C.gchar",
+			GoTypeOverride:  "string",
 			FixedSize:       arr.FixedSize,
 			ZeroTerminated:  arr.IsZeroTerminated(),
+
+			Inner: CouldBeForeign[Type]{}, // no inner type
 		}
 	}
 
-	if arr.Type == nil {
-		e.logger.Debug("FIXME: array type is nil, needs special handling", "ctype", arr.CType)
-		return nil
+	var ns *Namespace
+	var inner Type
+	var innerpointers int
+
+	if arr.Type.CType != "" {
+		ctype := trimCTypePointers(cleanCType(arr.Type.CType))
+		// try to resolve the type by ctype first
+		ns, inner = e.findTypeByCType(ctype)
+
+		innerpointers = CountCTypePointers(arr.Type.CType)
+	} else {
+		// fallback to GIR name
+		ns, inner = e.findTypeByGIRName(arr.Type.Name)
+
+		if constrained, ok := inner.(minPointerConstrainedType); ok {
+			innerpointers = constrained.minPointersRequired()
+		}
 	}
 
-	ns, inner := e.findTypeByGIRName(arr.Type.Name)
 	if inner == nil {
 		e.logger.Warn("could not find array inner type", "name", arr.Type.Name)
 		return nil
 	}
 
+	// if innerpointers+1 != CountCTypePointers(arr.CType) {
+	// 	e.logger.Warn("array pointer count does not match inner type", "name", arr.Type.Name, "ctype", arr.CType)
+	// }
+
 	array := &Array{
+		GirName:       arr.Name,
+		CTypeOverride: arr.CType,
+		InnerPointers: innerpointers,
 		Inner: CouldBeForeign[Type]{
 			Namespace: ns,
 			Type:      inner,
