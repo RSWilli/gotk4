@@ -12657,21 +12657,6 @@ type Display interface {
 	// Applications should not set this, it is a global
 	// user-configured setting.
 	SetDoubleClickTime(uint)
-	// StoreClipboard wraps gdk_display_store_clipboard
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- clipboardWindow Window: a #GdkWindow belonging to the clipboard owner 
-	// 	- time_ uint32: a timestamp 
-	// 	- targets []Atom (nullable): an array of targets
-	//                    that should be saved, or %NULL
-	//                    if all available targets should be saved. 
-	//
-	// Issues a request to the clipboard manager to store the
-	// clipboard data. On X11, this is a special program that works
-	// according to the
-	// [FreeDesktop Clipboard Specification](http://www.freedesktop.org/Standards/clipboard-manager-spec).
-	StoreClipboard(Window, uint32, []Atom)
 	// SupportsClipboardPersistence wraps gdk_display_supports_clipboard_persistence
 	// The function returns the following values:
 	// 
@@ -13686,42 +13671,6 @@ func (display *DisplayInstance) SetDoubleClickTime(msec uint) {
 	C.gdk_display_set_double_click_time(carg0, carg1)
 	runtime.KeepAlive(display)
 	runtime.KeepAlive(msec)
-}
-
-// StoreClipboard wraps gdk_display_store_clipboard
-// 
-// The function takes the following parameters:
-// 
-// 	- clipboardWindow Window: a #GdkWindow belonging to the clipboard owner 
-// 	- time_ uint32: a timestamp 
-// 	- targets []Atom (nullable): an array of targets
-//                    that should be saved, or %NULL
-//                    if all available targets should be saved. 
-//
-// Issues a request to the clipboard manager to store the
-// clipboard data. On X11, this is a special program that works
-// according to the
-// [FreeDesktop Clipboard Specification](http://www.freedesktop.org/Standards/clipboard-manager-spec).
-func (display *DisplayInstance) StoreClipboard(clipboardWindow Window, time_ uint32, targets []Atom) {
-	var carg0 *C.GdkDisplay // in, none, converted
-	var carg1 *C.GdkWindow  // in, none, converted
-	var carg2 C.guint32     // in, none, casted
-	var carg3 *C.GdkAtom    // in, transfer: none, C Pointers: 1, Name: array[Atom], nullable, array (inner: *typesystem.Record, length-by: carg4)
-	var carg4 C.int         // implicit
-
-	carg0 = (*C.GdkDisplay)(UnsafeDisplayToGlibNone(display))
-	carg1 = (*C.GdkWindow)(UnsafeWindowToGlibNone(clipboardWindow))
-	carg2 = C.guint32(time_)
-	_ = targets
-	_ = carg3
-	_ = carg4
-	panic("unimplemented conversion of []Atom (const GdkAtom*)")
-
-	C.gdk_display_store_clipboard(carg0, carg1, carg2, carg3, carg4)
-	runtime.KeepAlive(display)
-	runtime.KeepAlive(clipboardWindow)
-	runtime.KeepAlive(time_)
-	runtime.KeepAlive(targets)
 }
 
 // SupportsClipboardPersistence wraps gdk_display_supports_clipboard_persistence

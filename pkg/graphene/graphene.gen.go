@@ -2586,6 +2586,40 @@ func (m *Matrix) InitFrom2D(xx float64, yx float64, xy float64, yy float64, x0 f
 	return goret
 }
 
+// InitFromFloat wraps graphene_matrix_init_from_float
+// 
+// The function takes the following parameters:
+// 
+// 	- v [16]float32: an array of at least 16 floating
+//   point values 
+// 
+// The function returns the following values:
+// 
+// 	- goret *Matrix 
+//
+// Initializes a #graphene_matrix_t with the given array of floating
+// point values.
+func (m *Matrix) InitFromFloat(v [16]float32) *Matrix {
+	var carg0 *C.graphene_matrix_t // in, none, converted
+	var carg1 *C.float             // in, transfer: none, C Pointers: 1, Name: array[gfloat], array (inner: *typesystem.CastablePrimitive, fixed-size: 16)
+	var cret  *C.graphene_matrix_t // return, none, converted
+
+	carg0 = (*C.graphene_matrix_t)(UnsafeMatrixToGlibNone(m))
+	_ = v
+	_ = carg1
+	panic("unimplemented conversion of [16]float32 (const float*)")
+
+	cret = C.graphene_matrix_init_from_float(carg0, carg1)
+	runtime.KeepAlive(m)
+	runtime.KeepAlive(v)
+
+	var goret *Matrix
+
+	goret = UnsafeMatrixFromGlibNone(unsafe.Pointer(cret))
+
+	return goret
+}
+
 // InitFromMatrix wraps graphene_matrix_init_from_matrix
 // 
 // The function takes the following parameters:
@@ -9793,6 +9827,52 @@ func (t *Triangle) GetVertices() (Vec3, Vec3, Vec3) {
 	return a, b, c
 }
 
+// InitFromFloat wraps graphene_triangle_init_from_float
+// 
+// The function takes the following parameters:
+// 
+// 	- a [3]float32: an array of 3 floating point values 
+// 	- b [3]float32: an array of 3 floating point values 
+// 	- c [3]float32: an array of 3 floating point values 
+// 
+// The function returns the following values:
+// 
+// 	- goret *Triangle 
+//
+// Initializes a #graphene_triangle_t using the three given arrays
+// of floating point values, each representing the coordinates of
+// a point in 3D space.
+func (t *Triangle) InitFromFloat(a [3]float32, b [3]float32, c [3]float32) *Triangle {
+	var carg0 *C.graphene_triangle_t // in, none, converted
+	var carg1 *C.float               // in, transfer: none, C Pointers: 1, Name: array[gfloat], array (inner: *typesystem.CastablePrimitive, fixed-size: 3)
+	var carg2 *C.float               // in, transfer: none, C Pointers: 1, Name: array[gfloat], array (inner: *typesystem.CastablePrimitive, fixed-size: 3)
+	var carg3 *C.float               // in, transfer: none, C Pointers: 1, Name: array[gfloat], array (inner: *typesystem.CastablePrimitive, fixed-size: 3)
+	var cret  *C.graphene_triangle_t // return, none, converted
+
+	carg0 = (*C.graphene_triangle_t)(UnsafeTriangleToGlibNone(t))
+	_ = a
+	_ = carg1
+	panic("unimplemented conversion of [3]float32 (const float*)")
+	_ = b
+	_ = carg2
+	panic("unimplemented conversion of [3]float32 (const float*)")
+	_ = c
+	_ = carg3
+	panic("unimplemented conversion of [3]float32 (const float*)")
+
+	cret = C.graphene_triangle_init_from_float(carg0, carg1, carg2, carg3)
+	runtime.KeepAlive(t)
+	runtime.KeepAlive(a)
+	runtime.KeepAlive(b)
+	runtime.KeepAlive(c)
+
+	var goret *Triangle
+
+	goret = UnsafeTriangleFromGlibNone(unsafe.Pointer(cret))
+
+	return goret
+}
+
 // InitFromPoint3D wraps graphene_triangle_init_from_point3d
 // 
 // The function takes the following parameters:
@@ -10181,6 +10261,39 @@ func (v *Vec2) Init(x float32, y float32) *Vec2 {
 	runtime.KeepAlive(v)
 	runtime.KeepAlive(x)
 	runtime.KeepAlive(y)
+
+	var goret *Vec2
+
+	goret = UnsafeVec2FromGlibNone(unsafe.Pointer(cret))
+
+	return goret
+}
+
+// InitFromFloat wraps graphene_vec2_init_from_float
+// 
+// The function takes the following parameters:
+// 
+// 	- src [2]float32: an array of floating point values
+//   with at least two elements 
+// 
+// The function returns the following values:
+// 
+// 	- goret *Vec2 
+//
+// Initializes @v with the contents of the given array.
+func (v *Vec2) InitFromFloat(src [2]float32) *Vec2 {
+	var carg0 *C.graphene_vec2_t // in, none, converted
+	var carg1 *C.float           // in, transfer: none, C Pointers: 1, Name: array[gfloat], array (inner: *typesystem.CastablePrimitive, fixed-size: 2)
+	var cret  *C.graphene_vec2_t // return, none, converted
+
+	carg0 = (*C.graphene_vec2_t)(UnsafeVec2ToGlibNone(v))
+	_ = src
+	_ = carg1
+	panic("unimplemented conversion of [2]float32 (const float*)")
+
+	cret = C.graphene_vec2_init_from_float(carg0, carg1)
+	runtime.KeepAlive(v)
+	runtime.KeepAlive(src)
 
 	var goret *Vec2
 
@@ -11026,6 +11139,38 @@ func (v *Vec3) Init(x float32, y float32, z float32) *Vec3 {
 	return goret
 }
 
+// InitFromFloat wraps graphene_vec3_init_from_float
+// 
+// The function takes the following parameters:
+// 
+// 	- src [3]float32: an array of 3 floating point values 
+// 
+// The function returns the following values:
+// 
+// 	- goret *Vec3 
+//
+// Initializes a #graphene_vec3_t with the values from an array.
+func (v *Vec3) InitFromFloat(src [3]float32) *Vec3 {
+	var carg0 *C.graphene_vec3_t // in, none, converted
+	var carg1 *C.float           // in, transfer: none, C Pointers: 1, Name: array[gfloat], array (inner: *typesystem.CastablePrimitive, fixed-size: 3)
+	var cret  *C.graphene_vec3_t // return, none, converted
+
+	carg0 = (*C.graphene_vec3_t)(UnsafeVec3ToGlibNone(v))
+	_ = src
+	_ = carg1
+	panic("unimplemented conversion of [3]float32 (const float*)")
+
+	cret = C.graphene_vec3_init_from_float(carg0, carg1)
+	runtime.KeepAlive(v)
+	runtime.KeepAlive(src)
+
+	var goret *Vec3
+
+	goret = UnsafeVec3FromGlibNone(unsafe.Pointer(cret))
+
+	return goret
+}
+
 // InitFromVec3 wraps graphene_vec3_init_from_vec3
 // 
 // The function takes the following parameters:
@@ -11765,6 +11910,38 @@ func (v *Vec4) Init(x float32, y float32, z float32, w float32) *Vec4 {
 	runtime.KeepAlive(y)
 	runtime.KeepAlive(z)
 	runtime.KeepAlive(w)
+
+	var goret *Vec4
+
+	goret = UnsafeVec4FromGlibNone(unsafe.Pointer(cret))
+
+	return goret
+}
+
+// InitFromFloat wraps graphene_vec4_init_from_float
+// 
+// The function takes the following parameters:
+// 
+// 	- src [4]float32: an array of four floating point values 
+// 
+// The function returns the following values:
+// 
+// 	- goret *Vec4 
+//
+// Initializes a #graphene_vec4_t with the values inside the given array.
+func (v *Vec4) InitFromFloat(src [4]float32) *Vec4 {
+	var carg0 *C.graphene_vec4_t // in, none, converted
+	var carg1 *C.float           // in, transfer: none, C Pointers: 1, Name: array[gfloat], array (inner: *typesystem.CastablePrimitive, fixed-size: 4)
+	var cret  *C.graphene_vec4_t // return, none, converted
+
+	carg0 = (*C.graphene_vec4_t)(UnsafeVec4ToGlibNone(v))
+	_ = src
+	_ = carg1
+	panic("unimplemented conversion of [4]float32 (const float*)")
+
+	cret = C.graphene_vec4_init_from_float(carg0, carg1)
+	runtime.KeepAlive(v)
+	runtime.KeepAlive(src)
 
 	var goret *Vec4
 

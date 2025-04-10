@@ -271,7 +271,7 @@ func FontMapInstanceGetDefault() pango.FontMap {
 	return goret
 }
 
-// NewFontMapInstanceFontMap wraps pango_cairo_font_map_new
+// NewFontMapInstance wraps pango_cairo_font_map_new
 // The function returns the following values:
 // 
 // 	- goret pango.FontMap 
@@ -294,7 +294,7 @@ func FontMapInstanceGetDefault() pango.FontMap {
 // If requested type is not available, NULL is returned. Ie.
 // this is only useful for testing, when at least two backends
 // are compiled in.
-func NewFontMapInstanceFontMap() pango.FontMap {
+func NewFontMapInstance() pango.FontMap {
 	var cret *C.PangoFontMap // return, full, converted
 
 	cret = C.pango_cairo_font_map_new()

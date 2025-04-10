@@ -52,7 +52,6 @@ import (
 // extern void _gotk4_gtk3_Callback(GtkWidget*, gpointer);
 // extern void _gotk4_gtk3_CellLayoutDataFunc(GtkCellLayout*, GtkCellRenderer*, GtkTreeModel*, GtkTreeIter*, gpointer);
 // extern void _gotk4_gtk3_ClipboardImageReceivedFunc(GtkClipboard*, GdkPixbuf*, gpointer);
-// extern void _gotk4_gtk3_ClipboardTargetsReceivedFunc(GtkClipboard*, GdkAtom*, gint, gpointer);
 // extern void _gotk4_gtk3_ClipboardTextReceivedFunc(GtkClipboard*, gchar*, gpointer);
 // extern void _gotk4_gtk3_ClipboardURIReceivedFunc(GtkClipboard*, gchar**, gpointer);
 // extern void _gotk4_gtk3_FlowBoxForEachFunc(GtkFlowBox*, GtkFlowBoxChild*, gpointer);
@@ -6516,12 +6515,6 @@ type ClipboardImageReceivedFunc func(clipboard Clipboard, pixbuf gdkpixbuf.Pixbu
 // are received, or when the request fails.
 type ClipboardReceivedFunc func(clipboard Clipboard, selectionData *SelectionData)
 
-// ClipboardTargetsReceivedFunc wraps GtkClipboardTargetsReceivedFunc
-//
-// A function to be called when the results of gtk_clipboard_request_targets()
-// are received, or when the request fails.
-type ClipboardTargetsReceivedFunc func(clipboard Clipboard, atoms []gdk.Atom)
-
 // ClipboardTextReceivedFunc wraps GtkClipboardTextReceivedFunc
 //
 // A function to be called when the results of gtk_clipboard_request_text()
@@ -6533,7 +6526,7 @@ type ClipboardTextReceivedFunc func(clipboard Clipboard, text string)
 // A function to be called when the results of
 // gtk_clipboard_request_uris() are received, or when the request
 // fails.
-type ClipboardURIReceivedFunc func(clipboard Clipboard, uris []*byte)
+type ClipboardURIReceivedFunc func(clipboard Clipboard, uris []string)
 
 // EntryCompletionMatchFunc wraps GtkEntryCompletionMatchFunc
 //
@@ -9012,7 +9005,7 @@ func RenderBackgroundGetClip(context StyleContext, x float64, y float64, width f
 // 
 // 	- context StyleContext: a #GtkStyleContext 
 // 	- source *IconSource: the #GtkIconSource specifying the icon to render 
-// 	- size IconSize: the size (#GtkIconSize) to render the icon at.
+// 	- size int: the size (#GtkIconSize) to render the icon at.
 //        A size of `(GtkIconSize) -1` means render at the size of the source
 //        and don’t scale. 
 // 
@@ -9024,15 +9017,15 @@ func RenderBackgroundGetClip(context StyleContext, x float64, y float64, width f
 // in a pixbuf.
 //
 // Deprecated: (since 3.10.0) Use gtk_icon_theme_load_icon() instead.
-func RenderIconPixbuf(context StyleContext, source *IconSource, size IconSize) gdkpixbuf.Pixbuf {
+func RenderIconPixbuf(context StyleContext, source *IconSource, size int) gdkpixbuf.Pixbuf {
 	var carg1 *C.GtkStyleContext // in, none, converted
 	var carg2 *C.GtkIconSource   // in, none, converted
-	var carg3 C.GtkIconSize      // in, none, casted
+	var carg3 C.int              // in, none, casted
 	var cret  *C.GdkPixbuf       // return, full, converted
 
 	carg1 = (*C.GtkStyleContext)(UnsafeStyleContextToGlibNone(context))
 	carg2 = (*C.GtkIconSource)(UnsafeIconSourceToGlibNone(source))
-	carg3 = C.GtkIconSize(size)
+	carg3 = C.int(size)
 
 	cret = C.gtk_render_icon_pixbuf(carg1, carg2, carg3)
 	runtime.KeepAlive(context)
@@ -9446,153 +9439,6 @@ func TargetTableNewFromList(list *TargetList) (int, []TargetEntry) {
 	panic("unimplemented conversion of []TargetEntry (GtkTargetEntry*)")
 
 	return nTargets, goret
-}
-
-// TargetsIncludeImage wraps gtk_targets_include_image
-// 
-// The function takes the following parameters:
-// 
-// 	- targets []gdk.Atom: an array of #GdkAtoms 
-// 	- writable bool: whether to accept only targets for which GTK+ knows
-//   how to convert a pixbuf into the format 
-// 
-// The function returns the following values:
-// 
-// 	- goret bool 
-//
-// Determines if any of the targets in @targets can be used to
-// provide a #GdkPixbuf.
-func TargetsIncludeImage(targets []gdk.Atom, writable bool) bool {
-	var carg1 *C.GdkAtom // in, transfer: none, C Pointers: 1, Name: array[Atom], array (inner: *typesystem.Record, length-by: carg2)
-	var carg2 C.int      // implicit
-	var carg3 C.gboolean // in
-	var cret  C.gboolean // return
-
-	_ = targets
-	_ = carg1
-	_ = carg2
-	panic("unimplemented conversion of []gdk.Atom (GdkAtom*)")
-	if writable {
-		carg3 = C.TRUE
-	}
-
-	cret = C.gtk_targets_include_image(carg1, carg2, carg3)
-	runtime.KeepAlive(targets)
-	runtime.KeepAlive(writable)
-
-	var goret bool
-
-	if cret != 0 {
-		goret = true
-	}
-
-	return goret
-}
-
-// TargetsIncludeRichText wraps gtk_targets_include_rich_text
-// 
-// The function takes the following parameters:
-// 
-// 	- targets []gdk.Atom: an array of #GdkAtoms 
-// 	- buffer TextBuffer: a #GtkTextBuffer 
-// 
-// The function returns the following values:
-// 
-// 	- goret bool 
-//
-// Determines if any of the targets in @targets can be used to
-// provide rich text.
-func TargetsIncludeRichText(targets []gdk.Atom, buffer TextBuffer) bool {
-	var carg1 *C.GdkAtom       // in, transfer: none, C Pointers: 1, Name: array[Atom], array (inner: *typesystem.Record, length-by: carg2)
-	var carg2 C.int            // implicit
-	var carg3 *C.GtkTextBuffer // in, none, converted
-	var cret  C.gboolean       // return
-
-	_ = targets
-	_ = carg1
-	_ = carg2
-	panic("unimplemented conversion of []gdk.Atom (GdkAtom*)")
-	carg3 = (*C.GtkTextBuffer)(UnsafeTextBufferToGlibNone(buffer))
-
-	cret = C.gtk_targets_include_rich_text(carg1, carg2, carg3)
-	runtime.KeepAlive(targets)
-	runtime.KeepAlive(buffer)
-
-	var goret bool
-
-	if cret != 0 {
-		goret = true
-	}
-
-	return goret
-}
-
-// TargetsIncludeText wraps gtk_targets_include_text
-// 
-// The function takes the following parameters:
-// 
-// 	- targets []gdk.Atom: an array of #GdkAtoms 
-// 
-// The function returns the following values:
-// 
-// 	- goret bool 
-//
-// Determines if any of the targets in @targets can be used to
-// provide text.
-func TargetsIncludeText(targets []gdk.Atom) bool {
-	var carg1 *C.GdkAtom // in, transfer: none, C Pointers: 1, Name: array[Atom], array (inner: *typesystem.Record, length-by: carg2)
-	var carg2 C.int      // implicit
-	var cret  C.gboolean // return
-
-	_ = targets
-	_ = carg1
-	_ = carg2
-	panic("unimplemented conversion of []gdk.Atom (GdkAtom*)")
-
-	cret = C.gtk_targets_include_text(carg1, carg2)
-	runtime.KeepAlive(targets)
-
-	var goret bool
-
-	if cret != 0 {
-		goret = true
-	}
-
-	return goret
-}
-
-// TargetsIncludeURI wraps gtk_targets_include_uri
-// 
-// The function takes the following parameters:
-// 
-// 	- targets []gdk.Atom: an array of #GdkAtoms 
-// 
-// The function returns the following values:
-// 
-// 	- goret bool 
-//
-// Determines if any of the targets in @targets can be used to
-// provide an uri list.
-func TargetsIncludeURI(targets []gdk.Atom) bool {
-	var carg1 *C.GdkAtom // in, transfer: none, C Pointers: 1, Name: array[Atom], array (inner: *typesystem.Record, length-by: carg2)
-	var carg2 C.int      // implicit
-	var cret  C.gboolean // return
-
-	_ = targets
-	_ = carg1
-	_ = carg2
-	panic("unimplemented conversion of []gdk.Atom (GdkAtom*)")
-
-	cret = C.gtk_targets_include_uri(carg1, carg2)
-	runtime.KeepAlive(targets)
-
-	var goret bool
-
-	if cret != 0 {
-		goret = true
-	}
-
-	return goret
 }
 
 // TestCreateSimpleWindow wraps gtk_test_create_simple_window
@@ -13486,6 +13332,23 @@ var _ FileChooser = (*FileChooserInstance)(nil)
 type FileChooser interface {
 	upcastToGtkFileChooser() *FileChooserInstance
 
+	// AddChoice wraps gtk_file_chooser_add_choice
+	// 
+	// The function takes the following parameters:
+	// 
+	// 	- id string: id for the added choice 
+	// 	- label string: user-visible label for the added choice 
+	// 	- options []string (nullable): ids for the options of the choice, or %NULL for a boolean choice 
+	// 	- optionLabels []string (nullable): user-visible labels for the options, must be the same length as @options 
+	//
+	// Adds a 'choice' to the file chooser. This is typically implemented
+	// as a combobox or, for boolean choices, as a checkbutton. You can select
+	// a value using gtk_file_chooser_set_choice() before the dialog is shown,
+	// and you can obtain the user-selected value in the ::response signal handler
+	// using gtk_file_chooser_get_choice().
+	// 
+	// Compare gtk_file_chooser_set_extra_widget().
+	AddChoice(string, string, []string, []string)
 	// AddFilter wraps gtk_file_chooser_add_filter
 	// 
 	// The function takes the following parameters:
@@ -14258,6 +14121,49 @@ func UnsafeFileChooserToGlibNone(c FileChooser) unsafe.Pointer {
 func UnsafeFileChooserToGlibFull(c FileChooser) unsafe.Pointer {
 	i := c.upcastToGtkFileChooser()
 	return gobject.UnsafeObjectToGlibFull(&i.Instance)
+}
+
+// AddChoice wraps gtk_file_chooser_add_choice
+// 
+// The function takes the following parameters:
+// 
+// 	- id string: id for the added choice 
+// 	- label string: user-visible label for the added choice 
+// 	- options []string (nullable): ids for the options of the choice, or %NULL for a boolean choice 
+// 	- optionLabels []string (nullable): user-visible labels for the options, must be the same length as @options 
+//
+// Adds a 'choice' to the file chooser. This is typically implemented
+// as a combobox or, for boolean choices, as a checkbutton. You can select
+// a value using gtk_file_chooser_set_choice() before the dialog is shown,
+// and you can obtain the user-selected value in the ::response signal handler
+// using gtk_file_chooser_get_choice().
+// 
+// Compare gtk_file_chooser_set_extra_widget().
+func (chooser *FileChooserInstance) AddChoice(id string, label string, options []string, optionLabels []string) {
+	var carg0 *C.GtkFileChooser // in, none, converted
+	var carg1 *C.gchar          // in, none, string
+	var carg2 *C.gchar          // in, none, string
+	var carg3 **C.char          // in, transfer: none, C Pointers: 2, Name: array[utf8], nullable, array (inner: *typesystem.StringPrimitive, zero-terminated)
+	var carg4 **C.char          // in, transfer: none, C Pointers: 2, Name: array[utf8], nullable, array (inner: *typesystem.StringPrimitive, zero-terminated)
+
+	carg0 = (*C.GtkFileChooser)(UnsafeFileChooserToGlibNone(chooser))
+	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(id)))
+	defer C.free(unsafe.Pointer(carg1))
+	carg2 = (*C.gchar)(unsafe.Pointer(C.CString(label)))
+	defer C.free(unsafe.Pointer(carg2))
+	_ = options
+	_ = carg3
+	panic("unimplemented conversion of []string (const char**)")
+	_ = optionLabels
+	_ = carg4
+	panic("unimplemented conversion of []string (const char**)")
+
+	C.gtk_file_chooser_add_choice(carg0, carg1, carg2, carg3, carg4)
+	runtime.KeepAlive(chooser)
+	runtime.KeepAlive(id)
+	runtime.KeepAlive(label)
+	runtime.KeepAlive(options)
+	runtime.KeepAlive(optionLabels)
 }
 
 // AddFilter wraps gtk_file_chooser_add_filter
@@ -18431,11 +18337,11 @@ type ToolShell interface {
 	// GetIconSize wraps gtk_tool_shell_get_icon_size
 	// The function returns the following values:
 	// 
-	// 	- goret IconSize 
+	// 	- goret int 
 	//
 	// Retrieves the icon size for the tool shell. Tool items must not call this
 	// function directly, but rely on gtk_tool_item_get_icon_size() instead.
-	GetIconSize() IconSize
+	GetIconSize() int
 	// GetOrientation wraps gtk_tool_shell_get_orientation
 	// The function returns the following values:
 	// 
@@ -18565,22 +18471,22 @@ func (shell *ToolShellInstance) GetEllipsizeMode() pango.EllipsizeMode {
 // GetIconSize wraps gtk_tool_shell_get_icon_size
 // The function returns the following values:
 // 
-// 	- goret IconSize 
+// 	- goret int 
 //
 // Retrieves the icon size for the tool shell. Tool items must not call this
 // function directly, but rely on gtk_tool_item_get_icon_size() instead.
-func (shell *ToolShellInstance) GetIconSize() IconSize {
+func (shell *ToolShellInstance) GetIconSize() int {
 	var carg0 *C.GtkToolShell // in, none, converted
-	var cret  C.GtkIconSize   // return, none, casted
+	var cret  C.int           // return, none, casted
 
 	carg0 = (*C.GtkToolShell)(UnsafeToolShellToGlibNone(shell))
 
 	cret = C.gtk_tool_shell_get_icon_size(carg0)
 	runtime.KeepAlive(shell)
 
-	var goret IconSize
+	var goret int
 
-	goret = IconSize(cret)
+	goret = int(cret)
 
 	return goret
 }
@@ -21890,7 +21796,7 @@ type Action interface {
 	// 
 	// The function takes the following parameters:
 	// 
-	// 	- iconSize IconSize: the size of the icon (#GtkIconSize) that should
+	// 	- iconSize int: the size of the icon (#GtkIconSize) that should
 	//      be created. 
 	// 
 	// The function returns the following values:
@@ -21902,7 +21808,7 @@ type Action interface {
 	//
 	// Deprecated: (since 3.10.0) Use g_menu_item_set_icon() to set an icon on a #GMenuItem,
 	// or gtk_container_add() to add a #GtkImage to a #GtkButton
-	CreateIcon(IconSize) Widget
+	CreateIcon(int) Widget
 	// CreateMenu wraps gtk_action_create_menu
 	// The function returns the following values:
 	// 
@@ -22450,7 +22356,7 @@ func (action *ActionInstance) ConnectAccelerator() {
 // 
 // The function takes the following parameters:
 // 
-// 	- iconSize IconSize: the size of the icon (#GtkIconSize) that should
+// 	- iconSize int: the size of the icon (#GtkIconSize) that should
 //      be created. 
 // 
 // The function returns the following values:
@@ -22462,13 +22368,13 @@ func (action *ActionInstance) ConnectAccelerator() {
 //
 // Deprecated: (since 3.10.0) Use g_menu_item_set_icon() to set an icon on a #GMenuItem,
 // or gtk_container_add() to add a #GtkImage to a #GtkButton
-func (action *ActionInstance) CreateIcon(iconSize IconSize) Widget {
-	var carg0 *C.GtkAction  // in, none, converted
-	var carg1 C.GtkIconSize // in, none, casted
-	var cret  *C.GtkWidget  // return, none, converted
+func (action *ActionInstance) CreateIcon(iconSize int) Widget {
+	var carg0 *C.GtkAction // in, none, converted
+	var carg1 C.int        // in, none, casted
+	var cret  *C.GtkWidget // return, none, converted
 
 	carg0 = (*C.GtkAction)(UnsafeActionToGlibNone(action))
-	carg1 = C.GtkIconSize(iconSize)
+	carg1 = C.int(iconSize)
 
 	cret = C.gtk_action_create_icon(carg0, carg1)
 	runtime.KeepAlive(action)
@@ -25089,7 +24995,7 @@ type Application interface {
 	// 
 	// 	- detailedActionName string: a detailed action name, specifying an action
 	//     and target to associate accelerators with 
-	// 	- accels []*byte: a list of accelerators in the format
+	// 	- accels []string: a list of accelerators in the format
 	//     understood by gtk_accelerator_parse() 
 	//
 	// Sets zero or more keyboard accelerators that will trigger the
@@ -25101,7 +25007,7 @@ type Application interface {
 	// 
 	// For the @detailed_action_name, see g_action_parse_detailed_name() and
 	// g_action_print_detailed_name().
-	SetAccelsForAction(string, []*byte)
+	SetAccelsForAction(string, []string)
 	// SetAppMenu wraps gtk_application_set_app_menu
 	// 
 	// The function takes the following parameters:
@@ -25729,7 +25635,7 @@ func (application *ApplicationInstance) RemoveWindow(window Window) {
 // 
 // 	- detailedActionName string: a detailed action name, specifying an action
 //     and target to associate accelerators with 
-// 	- accels []*byte: a list of accelerators in the format
+// 	- accels []string: a list of accelerators in the format
 //     understood by gtk_accelerator_parse() 
 //
 // Sets zero or more keyboard accelerators that will trigger the
@@ -25741,17 +25647,17 @@ func (application *ApplicationInstance) RemoveWindow(window Window) {
 // 
 // For the @detailed_action_name, see g_action_parse_detailed_name() and
 // g_action_print_detailed_name().
-func (application *ApplicationInstance) SetAccelsForAction(detailedActionName string, accels []*byte) {
+func (application *ApplicationInstance) SetAccelsForAction(detailedActionName string, accels []string) {
 	var carg0 *C.GtkApplication // in, none, converted
 	var carg1 *C.gchar          // in, none, string
-	var carg2 **C.gchar         // in, transfer: none, C Pointers: 2, Name: array[gchar], array (inner: *typesystem.CastablePrimitive, zero-terminated)
+	var carg2 **C.gchar         // in, transfer: none, C Pointers: 2, Name: array[utf8], array (inner: *typesystem.StringPrimitive, zero-terminated)
 
 	carg0 = (*C.GtkApplication)(UnsafeApplicationToGlibNone(application))
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(detailedActionName)))
 	defer C.free(unsafe.Pointer(carg1))
 	_ = accels
 	_ = carg2
-	panic("unimplemented conversion of []*byte (const gchar* const*)")
+	panic("unimplemented conversion of []string (const gchar* const*)")
 
 	C.gtk_application_set_accels_for_action(carg0, carg1, carg2)
 	runtime.KeepAlive(application)
@@ -32131,20 +32037,6 @@ type Clipboard interface {
 	// was empty or if the contents of the clipboard could not be
 	// converted into an image.
 	RequestImage(ClipboardImageReceivedFunc)
-	// RequestTargets wraps gtk_clipboard_request_targets
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- callback ClipboardTargetsReceivedFunc: a function to call when the targets are
-	//     received, or the retrieval fails. (It will always be called
-	//     one way or the other.) 
-	//
-	// Requests the contents of the clipboard as list of supported targets.
-	// When the list is later received, @callback will be called.
-	// 
-	// The @targets parameter to @callback will contain the resulting targets if
-	// the request succeeded, or %NULL if it failed.
-	RequestTargets(ClipboardTargetsReceivedFunc)
 	// RequestText wraps gtk_clipboard_request_text
 	// 
 	// The function takes the following parameters:
@@ -32467,33 +32359,6 @@ func (clipboard *ClipboardInstance) RequestImage(callback ClipboardImageReceived
 	carg2 = C.gpointer(gbox.AssignOnce(callback))
 
 	C.gtk_clipboard_request_image(carg0, carg1, carg2)
-	runtime.KeepAlive(clipboard)
-	runtime.KeepAlive(callback)
-}
-
-// RequestTargets wraps gtk_clipboard_request_targets
-// 
-// The function takes the following parameters:
-// 
-// 	- callback ClipboardTargetsReceivedFunc: a function to call when the targets are
-//     received, or the retrieval fails. (It will always be called
-//     one way or the other.) 
-//
-// Requests the contents of the clipboard as list of supported targets.
-// When the list is later received, @callback will be called.
-// 
-// The @targets parameter to @callback will contain the resulting targets if
-// the request succeeded, or %NULL if it failed.
-func (clipboard *ClipboardInstance) RequestTargets(callback ClipboardTargetsReceivedFunc) {
-	var carg0 *C.GtkClipboard                   // in, none, converted
-	var carg1 C.GtkClipboardTargetsReceivedFunc // callback, scope: async, closure: carg2
-	var carg2 C.gpointer                        // implicit
-
-	carg0 = (*C.GtkClipboard)(UnsafeClipboardToGlibNone(clipboard))
-	carg1 = (*[0]byte)(C._gotk4_gtk3_ClipboardTargetsReceivedFunc)
-	carg2 = C.gpointer(gbox.AssignOnce(callback))
-
-	C.gtk_clipboard_request_targets(carg0, carg1, carg2)
 	runtime.KeepAlive(clipboard)
 	runtime.KeepAlive(callback)
 }
@@ -40203,7 +40068,7 @@ type IconTheme interface {
 	// 
 	// The function takes the following parameters:
 	// 
-	// 	- iconNames []*byte: %NULL-terminated array of
+	// 	- iconNames []string: %NULL-terminated array of
 	//     icon names to lookup 
 	// 	- size int: desired icon size 
 	// 	- flags IconLookupFlags: flags modifying the behavior of the icon lookup 
@@ -40221,12 +40086,12 @@ type IconTheme interface {
 	// If @icon_names contains more than one name, this function
 	// tries them all in the given order before falling back to
 	// inherited icon themes.
-	ChooseIcon([]*byte, int, IconLookupFlags) IconInfo
+	ChooseIcon([]string, int, IconLookupFlags) IconInfo
 	// ChooseIconForScale wraps gtk_icon_theme_choose_icon_for_scale
 	// 
 	// The function takes the following parameters:
 	// 
-	// 	- iconNames []*byte: %NULL-terminated
+	// 	- iconNames []string: %NULL-terminated
 	//     array of icon names to lookup 
 	// 	- size int: desired icon size 
 	// 	- scale int: desired scale 
@@ -40245,7 +40110,7 @@ type IconTheme interface {
 	// If @icon_names contains more than one name, this function
 	// tries them all in the given order before falling back to
 	// inherited icon themes.
-	ChooseIconForScale([]*byte, int, int, IconLookupFlags) IconInfo
+	ChooseIconForScale([]string, int, int, IconLookupFlags) IconInfo
 	// GetExampleIconName wraps gtk_icon_theme_get_example_icon_name
 	// The function returns the following values:
 	// 
@@ -40700,7 +40565,7 @@ func (iconTheme *IconThemeInstance) AppendSearchPath(path string) {
 // 
 // The function takes the following parameters:
 // 
-// 	- iconNames []*byte: %NULL-terminated array of
+// 	- iconNames []string: %NULL-terminated array of
 //     icon names to lookup 
 // 	- size int: desired icon size 
 // 	- flags IconLookupFlags: flags modifying the behavior of the icon lookup 
@@ -40718,9 +40583,9 @@ func (iconTheme *IconThemeInstance) AppendSearchPath(path string) {
 // If @icon_names contains more than one name, this function
 // tries them all in the given order before falling back to
 // inherited icon themes.
-func (iconTheme *IconThemeInstance) ChooseIcon(iconNames []*byte, size int, flags IconLookupFlags) IconInfo {
+func (iconTheme *IconThemeInstance) ChooseIcon(iconNames []string, size int, flags IconLookupFlags) IconInfo {
 	var carg0 *C.GtkIconTheme      // in, none, converted
-	var carg1 **C.gchar            // in, transfer: none, C Pointers: 2, Name: array[gchar], array (inner: *typesystem.CastablePrimitive, zero-terminated)
+	var carg1 **C.gchar            // in, transfer: none, C Pointers: 2, Name: array[utf8], array (inner: *typesystem.StringPrimitive, zero-terminated)
 	var carg2 C.int                // in, none, casted
 	var carg3 C.GtkIconLookupFlags // in, none, casted
 	var cret  *C.GtkIconInfo       // return, full, converted
@@ -40728,7 +40593,7 @@ func (iconTheme *IconThemeInstance) ChooseIcon(iconNames []*byte, size int, flag
 	carg0 = (*C.GtkIconTheme)(UnsafeIconThemeToGlibNone(iconTheme))
 	_ = iconNames
 	_ = carg1
-	panic("unimplemented conversion of []*byte (const gchar**)")
+	panic("unimplemented conversion of []string (const gchar**)")
 	carg2 = C.int(size)
 	carg3 = C.GtkIconLookupFlags(flags)
 
@@ -40749,7 +40614,7 @@ func (iconTheme *IconThemeInstance) ChooseIcon(iconNames []*byte, size int, flag
 // 
 // The function takes the following parameters:
 // 
-// 	- iconNames []*byte: %NULL-terminated
+// 	- iconNames []string: %NULL-terminated
 //     array of icon names to lookup 
 // 	- size int: desired icon size 
 // 	- scale int: desired scale 
@@ -40768,9 +40633,9 @@ func (iconTheme *IconThemeInstance) ChooseIcon(iconNames []*byte, size int, flag
 // If @icon_names contains more than one name, this function
 // tries them all in the given order before falling back to
 // inherited icon themes.
-func (iconTheme *IconThemeInstance) ChooseIconForScale(iconNames []*byte, size int, scale int, flags IconLookupFlags) IconInfo {
+func (iconTheme *IconThemeInstance) ChooseIconForScale(iconNames []string, size int, scale int, flags IconLookupFlags) IconInfo {
 	var carg0 *C.GtkIconTheme      // in, none, converted
-	var carg1 **C.gchar            // in, transfer: none, C Pointers: 2, Name: array[gchar], array (inner: *typesystem.CastablePrimitive, zero-terminated)
+	var carg1 **C.gchar            // in, transfer: none, C Pointers: 2, Name: array[utf8], array (inner: *typesystem.StringPrimitive, zero-terminated)
 	var carg2 C.int                // in, none, casted
 	var carg3 C.int                // in, none, casted
 	var carg4 C.GtkIconLookupFlags // in, none, casted
@@ -40779,7 +40644,7 @@ func (iconTheme *IconThemeInstance) ChooseIconForScale(iconNames []*byte, size i
 	carg0 = (*C.GtkIconTheme)(UnsafeIconThemeToGlibNone(iconTheme))
 	_ = iconNames
 	_ = carg1
-	panic("unimplemented conversion of []*byte (const gchar**)")
+	panic("unimplemented conversion of []string (const gchar**)")
 	carg2 = C.int(size)
 	carg3 = C.int(scale)
 	carg4 = C.GtkIconLookupFlags(flags)
@@ -43256,7 +43121,7 @@ func UnsafeNumerableIconToGlibFull(c NumerableIcon) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewNumerableIconInstanceNumerableIcon wraps gtk_numerable_icon_new
+// NewNumerableIconInstance wraps gtk_numerable_icon_new
 // 
 // The function takes the following parameters:
 // 
@@ -43269,7 +43134,7 @@ func UnsafeNumerableIconToGlibFull(c NumerableIcon) unsafe.Pointer {
 // Creates a new unthemed #GtkNumerableIcon.
 //
 // Deprecated: (since 3.14.0) 
-func NewNumerableIconInstanceNumerableIcon(baseIcon gio.Icon) gio.Icon {
+func NewNumerableIconInstance(baseIcon gio.Icon) gio.Icon {
 	var carg1 *C.GIcon // in, none, converted
 	var cret  *C.GIcon // return, full, converted
 
@@ -52901,7 +52766,7 @@ type Style interface {
 	// 	- source *IconSource: the #GtkIconSource specifying the icon to render 
 	// 	- direction TextDirection: a text direction 
 	// 	- state StateType: a state 
-	// 	- size IconSize: the size to render the icon at (#GtkIconSize). A size of
+	// 	- size int: the size to render the icon at (#GtkIconSize). A size of
 	//     `(GtkIconSize)-1` means render at the size of the source and
 	//     don’t scale. 
 	// 	- widget Widget (nullable): the widget 
@@ -52916,7 +52781,7 @@ type Style interface {
 	// pixbuf.
 	//
 	// Deprecated: (since 3.0.0) Use gtk_render_icon_pixbuf() instead
-	RenderIcon(*IconSource, TextDirection, StateType, IconSize, Widget, string) gdkpixbuf.Pixbuf
+	RenderIcon(*IconSource, TextDirection, StateType, int, Widget, string) gdkpixbuf.Pixbuf
 	// SetBackground wraps gtk_style_set_background
 	// 
 	// The function takes the following parameters:
@@ -53174,7 +53039,7 @@ func (style *StyleInstance) LookupIconSet(stockId string) *IconSet {
 // 	- source *IconSource: the #GtkIconSource specifying the icon to render 
 // 	- direction TextDirection: a text direction 
 // 	- state StateType: a state 
-// 	- size IconSize: the size to render the icon at (#GtkIconSize). A size of
+// 	- size int: the size to render the icon at (#GtkIconSize). A size of
 //     `(GtkIconSize)-1` means render at the size of the source and
 //     don’t scale. 
 // 	- widget Widget (nullable): the widget 
@@ -53189,12 +53054,12 @@ func (style *StyleInstance) LookupIconSet(stockId string) *IconSet {
 // pixbuf.
 //
 // Deprecated: (since 3.0.0) Use gtk_render_icon_pixbuf() instead
-func (style *StyleInstance) RenderIcon(source *IconSource, direction TextDirection, state StateType, size IconSize, widget Widget, detail string) gdkpixbuf.Pixbuf {
+func (style *StyleInstance) RenderIcon(source *IconSource, direction TextDirection, state StateType, size int, widget Widget, detail string) gdkpixbuf.Pixbuf {
 	var carg0 *C.GtkStyle        // in, none, converted
 	var carg1 *C.GtkIconSource   // in, none, converted
 	var carg2 C.GtkTextDirection // in, none, casted
 	var carg3 C.GtkStateType     // in, none, casted
-	var carg4 C.GtkIconSize      // in, none, casted
+	var carg4 C.int              // in, none, casted
 	var carg5 *C.GtkWidget       // in, none, converted, nullable
 	var carg6 *C.gchar           // in, none, string, nullable-string
 	var cret  *C.GdkPixbuf       // return, full, converted
@@ -53203,7 +53068,7 @@ func (style *StyleInstance) RenderIcon(source *IconSource, direction TextDirecti
 	carg1 = (*C.GtkIconSource)(UnsafeIconSourceToGlibNone(source))
 	carg2 = C.GtkTextDirection(direction)
 	carg3 = C.GtkStateType(state)
-	carg4 = C.GtkIconSize(size)
+	carg4 = C.int(size)
 	if widget != nil {
 		carg5 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(widget))
 	}
@@ -56240,16 +56105,6 @@ type TextBuffer interface {
 	// using gtk_target_list_add_rich_text_targets() and
 	// gtk_target_list_add_text_targets().
 	GetCopyTargetList() *TargetList
-	// GetDeserializeFormats wraps gtk_text_buffer_get_deserialize_formats
-	// The function returns the following values:
-	// 
-	// 	- nFormats int: return location for the number of formats 
-	// 	- goret []gdk.Atom 
-	//
-	// This function returns the rich text deserialize formats registered
-	// with @buffer using gtk_text_buffer_register_deserialize_format() or
-	// gtk_text_buffer_register_deserialize_tagset()
-	GetDeserializeFormats() (int, []gdk.Atom)
 	// GetEndIter wraps gtk_text_buffer_get_end_iter
 	// The function returns the following values:
 	// 
@@ -56445,16 +56300,6 @@ type TextBuffer interface {
 	// NULL, then they are not filled in, but the return value still indicates
 	// whether text is selected.
 	GetSelectionBounds() (TextIter, TextIter, bool)
-	// GetSerializeFormats wraps gtk_text_buffer_get_serialize_formats
-	// The function returns the following values:
-	// 
-	// 	- nFormats int: return location for the number of formats 
-	// 	- goret []gdk.Atom 
-	//
-	// This function returns the rich text serialize formats registered
-	// with @buffer using gtk_text_buffer_register_serialize_format() or
-	// gtk_text_buffer_register_serialize_tagset()
-	GetSerializeFormats() (int, []gdk.Atom)
 	// GetSlice wraps gtk_text_buffer_get_slice
 	// 
 	// The function takes the following parameters:
@@ -57451,36 +57296,6 @@ func (buffer *TextBufferInstance) GetCopyTargetList() *TargetList {
 	return goret
 }
 
-// GetDeserializeFormats wraps gtk_text_buffer_get_deserialize_formats
-// The function returns the following values:
-// 
-// 	- nFormats int: return location for the number of formats 
-// 	- goret []gdk.Atom 
-//
-// This function returns the rich text deserialize formats registered
-// with @buffer using gtk_text_buffer_register_deserialize_format() or
-// gtk_text_buffer_register_deserialize_tagset()
-func (buffer *TextBufferInstance) GetDeserializeFormats() (int, []gdk.Atom) {
-	var carg0 *C.GtkTextBuffer // in, none, converted
-	var carg1 C.int            // out, full, casted
-	var cret  *C.GdkAtom       // return, transfer: container, C Pointers: 1, Name: array[Atom], scope: , array (inner: *typesystem.Record)
-
-	carg0 = (*C.GtkTextBuffer)(UnsafeTextBufferToGlibNone(buffer))
-
-	cret = C.gtk_text_buffer_get_deserialize_formats(carg0, &carg1)
-	runtime.KeepAlive(buffer)
-
-	var nFormats int
-	var goret    []gdk.Atom
-
-	nFormats = int(carg1)
-	_ = goret
-	_ = cret
-	panic("unimplemented conversion of []gdk.Atom (GdkAtom*)")
-
-	return nFormats, goret
-}
-
 // GetEndIter wraps gtk_text_buffer_get_end_iter
 // The function returns the following values:
 // 
@@ -57957,36 +57772,6 @@ func (buffer *TextBufferInstance) GetSelectionBounds() (TextIter, TextIter, bool
 	}
 
 	return start, end, goret
-}
-
-// GetSerializeFormats wraps gtk_text_buffer_get_serialize_formats
-// The function returns the following values:
-// 
-// 	- nFormats int: return location for the number of formats 
-// 	- goret []gdk.Atom 
-//
-// This function returns the rich text serialize formats registered
-// with @buffer using gtk_text_buffer_register_serialize_format() or
-// gtk_text_buffer_register_serialize_tagset()
-func (buffer *TextBufferInstance) GetSerializeFormats() (int, []gdk.Atom) {
-	var carg0 *C.GtkTextBuffer // in, none, converted
-	var carg1 C.int            // out, full, casted
-	var cret  *C.GdkAtom       // return, transfer: container, C Pointers: 1, Name: array[Atom], scope: , array (inner: *typesystem.Record)
-
-	carg0 = (*C.GtkTextBuffer)(UnsafeTextBufferToGlibNone(buffer))
-
-	cret = C.gtk_text_buffer_get_serialize_formats(carg0, &carg1)
-	runtime.KeepAlive(buffer)
-
-	var nFormats int
-	var goret    []gdk.Atom
-
-	nFormats = int(carg1)
-	_ = goret
-	_ = cret
-	panic("unimplemented conversion of []gdk.Atom (GdkAtom*)")
-
-	return nFormats, goret
 }
 
 // GetSlice wraps gtk_text_buffer_get_slice
@@ -61098,36 +60883,36 @@ type Tooltip interface {
 	// The function takes the following parameters:
 	// 
 	// 	- gicon gio.Icon (nullable): a #GIcon representing the icon, or %NULL 
-	// 	- size IconSize: a stock icon size (#GtkIconSize) 
+	// 	- size int: a stock icon size (#GtkIconSize) 
 	//
 	// Sets the icon of the tooltip (which is in front of the text)
 	// to be the icon indicated by @gicon with the size indicated
 	// by @size. If @gicon is %NULL, the image will be hidden.
-	SetIconFromGIcon(gio.Icon, IconSize)
+	SetIconFromGIcon(gio.Icon, int)
 	// SetIconFromIconName wraps gtk_tooltip_set_icon_from_icon_name
 	// 
 	// The function takes the following parameters:
 	// 
 	// 	- iconName string (nullable): an icon name, or %NULL 
-	// 	- size IconSize: a stock icon size (#GtkIconSize) 
+	// 	- size int: a stock icon size (#GtkIconSize) 
 	//
 	// Sets the icon of the tooltip (which is in front of the text) to be
 	// the icon indicated by @icon_name with the size indicated
 	// by @size.  If @icon_name is %NULL, the image will be hidden.
-	SetIconFromIconName(string, IconSize)
+	SetIconFromIconName(string, int)
 	// SetIconFromStock wraps gtk_tooltip_set_icon_from_stock
 	// 
 	// The function takes the following parameters:
 	// 
 	// 	- stockId string (nullable): a stock id, or %NULL 
-	// 	- size IconSize: a stock icon size (#GtkIconSize) 
+	// 	- size int: a stock icon size (#GtkIconSize) 
 	//
 	// Sets the icon of the tooltip (which is in front of the text) to be
 	// the stock item indicated by @stock_id with the size indicated
 	// by @size.  If @stock_id is %NULL, the image will be hidden.
 	//
 	// Deprecated: (since 3.10.0) Use gtk_tooltip_set_icon_from_icon_name() instead.
-	SetIconFromStock(string, IconSize)
+	SetIconFromStock(string, int)
 	// SetMarkup wraps gtk_tooltip_set_markup
 	// 
 	// The function takes the following parameters:
@@ -61270,21 +61055,21 @@ func (tooltip *TooltipInstance) SetIcon(pixbuf gdkpixbuf.Pixbuf) {
 // The function takes the following parameters:
 // 
 // 	- gicon gio.Icon (nullable): a #GIcon representing the icon, or %NULL 
-// 	- size IconSize: a stock icon size (#GtkIconSize) 
+// 	- size int: a stock icon size (#GtkIconSize) 
 //
 // Sets the icon of the tooltip (which is in front of the text)
 // to be the icon indicated by @gicon with the size indicated
 // by @size. If @gicon is %NULL, the image will be hidden.
-func (tooltip *TooltipInstance) SetIconFromGIcon(gicon gio.Icon, size IconSize) {
+func (tooltip *TooltipInstance) SetIconFromGIcon(gicon gio.Icon, size int) {
 	var carg0 *C.GtkTooltip // in, none, converted
 	var carg1 *C.GIcon      // in, none, converted, nullable
-	var carg2 C.GtkIconSize // in, none, casted
+	var carg2 C.int         // in, none, casted
 
 	carg0 = (*C.GtkTooltip)(UnsafeTooltipToGlibNone(tooltip))
 	if gicon != nil {
 		carg1 = (*C.GIcon)(gio.UnsafeIconToGlibNone(gicon))
 	}
-	carg2 = C.GtkIconSize(size)
+	carg2 = C.int(size)
 
 	C.gtk_tooltip_set_icon_from_gicon(carg0, carg1, carg2)
 	runtime.KeepAlive(tooltip)
@@ -61297,22 +61082,22 @@ func (tooltip *TooltipInstance) SetIconFromGIcon(gicon gio.Icon, size IconSize) 
 // The function takes the following parameters:
 // 
 // 	- iconName string (nullable): an icon name, or %NULL 
-// 	- size IconSize: a stock icon size (#GtkIconSize) 
+// 	- size int: a stock icon size (#GtkIconSize) 
 //
 // Sets the icon of the tooltip (which is in front of the text) to be
 // the icon indicated by @icon_name with the size indicated
 // by @size.  If @icon_name is %NULL, the image will be hidden.
-func (tooltip *TooltipInstance) SetIconFromIconName(iconName string, size IconSize) {
+func (tooltip *TooltipInstance) SetIconFromIconName(iconName string, size int) {
 	var carg0 *C.GtkTooltip // in, none, converted
 	var carg1 *C.gchar      // in, none, string, nullable-string
-	var carg2 C.GtkIconSize // in, none, casted
+	var carg2 C.int         // in, none, casted
 
 	carg0 = (*C.GtkTooltip)(UnsafeTooltipToGlibNone(tooltip))
 	if iconName != "" {
 		carg1 = (*C.gchar)(unsafe.Pointer(C.CString(iconName)))
 		defer C.free(unsafe.Pointer(carg1))
 	}
-	carg2 = C.GtkIconSize(size)
+	carg2 = C.int(size)
 
 	C.gtk_tooltip_set_icon_from_icon_name(carg0, carg1, carg2)
 	runtime.KeepAlive(tooltip)
@@ -61325,24 +61110,24 @@ func (tooltip *TooltipInstance) SetIconFromIconName(iconName string, size IconSi
 // The function takes the following parameters:
 // 
 // 	- stockId string (nullable): a stock id, or %NULL 
-// 	- size IconSize: a stock icon size (#GtkIconSize) 
+// 	- size int: a stock icon size (#GtkIconSize) 
 //
 // Sets the icon of the tooltip (which is in front of the text) to be
 // the stock item indicated by @stock_id with the size indicated
 // by @size.  If @stock_id is %NULL, the image will be hidden.
 //
 // Deprecated: (since 3.10.0) Use gtk_tooltip_set_icon_from_icon_name() instead.
-func (tooltip *TooltipInstance) SetIconFromStock(stockId string, size IconSize) {
+func (tooltip *TooltipInstance) SetIconFromStock(stockId string, size int) {
 	var carg0 *C.GtkTooltip // in, none, converted
 	var carg1 *C.gchar      // in, none, string, nullable-string
-	var carg2 C.GtkIconSize // in, none, casted
+	var carg2 C.int         // in, none, casted
 
 	carg0 = (*C.GtkTooltip)(UnsafeTooltipToGlibNone(tooltip))
 	if stockId != "" {
 		carg1 = (*C.gchar)(unsafe.Pointer(C.CString(stockId)))
 		defer C.free(unsafe.Pointer(carg1))
 	}
-	carg2 = C.GtkIconSize(size)
+	carg2 = C.int(size)
 
 	C.gtk_tooltip_set_icon_from_stock(carg0, carg1, carg2)
 	runtime.KeepAlive(tooltip)
@@ -69659,7 +69444,7 @@ type Widget interface {
 	// The function takes the following parameters:
 	// 
 	// 	- stockId string: a stock ID 
-	// 	- size IconSize: a stock size (#GtkIconSize). A size of `(GtkIconSize)-1`
+	// 	- size int: a stock size (#GtkIconSize). A size of `(GtkIconSize)-1`
 	//     means render at the size of the source and don’t scale (if there are
 	//     multiple source sizes, GTK+ picks one of the available sizes). 
 	// 	- detail string (nullable): render detail to pass to theme engine 
@@ -69681,13 +69466,13 @@ type Widget interface {
 	// freed after use with g_object_unref().
 	//
 	// Deprecated: (since 3.0.0) Use gtk_widget_render_icon_pixbuf() instead.
-	RenderIcon(string, IconSize, string) gdkpixbuf.Pixbuf
+	RenderIcon(string, int, string) gdkpixbuf.Pixbuf
 	// RenderIconPixbuf wraps gtk_widget_render_icon_pixbuf
 	// 
 	// The function takes the following parameters:
 	// 
 	// 	- stockId string: a stock ID 
-	// 	- size IconSize: a stock size (#GtkIconSize). A size of `(GtkIconSize)-1`
+	// 	- size int: a stock size (#GtkIconSize). A size of `(GtkIconSize)-1`
 	//     means render at the size of the source and don’t scale (if there are
 	//     multiple source sizes, GTK+ picks one of the available sizes). 
 	// 
@@ -69706,7 +69491,7 @@ type Widget interface {
 	// after use with g_object_unref().
 	//
 	// Deprecated: (since 3.10.0) Use gtk_icon_theme_load_icon() instead.
-	RenderIconPixbuf(string, IconSize) gdkpixbuf.Pixbuf
+	RenderIconPixbuf(string, int) gdkpixbuf.Pixbuf
 	// Reparent wraps gtk_widget_reparent
 	// 
 	// The function takes the following parameters:
@@ -75985,7 +75770,7 @@ func (widget *WidgetInstance) RemoveTickCallback(id uint) {
 // The function takes the following parameters:
 // 
 // 	- stockId string: a stock ID 
-// 	- size IconSize: a stock size (#GtkIconSize). A size of `(GtkIconSize)-1`
+// 	- size int: a stock size (#GtkIconSize). A size of `(GtkIconSize)-1`
 //     means render at the size of the source and don’t scale (if there are
 //     multiple source sizes, GTK+ picks one of the available sizes). 
 // 	- detail string (nullable): render detail to pass to theme engine 
@@ -76007,17 +75792,17 @@ func (widget *WidgetInstance) RemoveTickCallback(id uint) {
 // freed after use with g_object_unref().
 //
 // Deprecated: (since 3.0.0) Use gtk_widget_render_icon_pixbuf() instead.
-func (widget *WidgetInstance) RenderIcon(stockId string, size IconSize, detail string) gdkpixbuf.Pixbuf {
-	var carg0 *C.GtkWidget  // in, none, converted
-	var carg1 *C.gchar      // in, none, string
-	var carg2 C.GtkIconSize // in, none, casted
-	var carg3 *C.gchar      // in, none, string, nullable-string
-	var cret  *C.GdkPixbuf  // return, full, converted
+func (widget *WidgetInstance) RenderIcon(stockId string, size int, detail string) gdkpixbuf.Pixbuf {
+	var carg0 *C.GtkWidget // in, none, converted
+	var carg1 *C.gchar     // in, none, string
+	var carg2 C.int        // in, none, casted
+	var carg3 *C.gchar     // in, none, string, nullable-string
+	var cret  *C.GdkPixbuf // return, full, converted
 
 	carg0 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(widget))
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(stockId)))
 	defer C.free(unsafe.Pointer(carg1))
-	carg2 = C.GtkIconSize(size)
+	carg2 = C.int(size)
 	if detail != "" {
 		carg3 = (*C.gchar)(unsafe.Pointer(C.CString(detail)))
 		defer C.free(unsafe.Pointer(carg3))
@@ -76041,7 +75826,7 @@ func (widget *WidgetInstance) RenderIcon(stockId string, size IconSize, detail s
 // The function takes the following parameters:
 // 
 // 	- stockId string: a stock ID 
-// 	- size IconSize: a stock size (#GtkIconSize). A size of `(GtkIconSize)-1`
+// 	- size int: a stock size (#GtkIconSize). A size of `(GtkIconSize)-1`
 //     means render at the size of the source and don’t scale (if there are
 //     multiple source sizes, GTK+ picks one of the available sizes). 
 // 
@@ -76060,16 +75845,16 @@ func (widget *WidgetInstance) RenderIcon(stockId string, size IconSize, detail s
 // after use with g_object_unref().
 //
 // Deprecated: (since 3.10.0) Use gtk_icon_theme_load_icon() instead.
-func (widget *WidgetInstance) RenderIconPixbuf(stockId string, size IconSize) gdkpixbuf.Pixbuf {
-	var carg0 *C.GtkWidget  // in, none, converted
-	var carg1 *C.gchar      // in, none, string
-	var carg2 C.GtkIconSize // in, none, casted
-	var cret  *C.GdkPixbuf  // return, full, converted
+func (widget *WidgetInstance) RenderIconPixbuf(stockId string, size int) gdkpixbuf.Pixbuf {
+	var carg0 *C.GtkWidget // in, none, converted
+	var carg1 *C.gchar     // in, none, string
+	var carg2 C.int        // in, none, casted
+	var cret  *C.GdkPixbuf // return, full, converted
 
 	carg0 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(widget))
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(stockId)))
 	defer C.free(unsafe.Pointer(carg1))
-	carg2 = C.GtkIconSize(size)
+	carg2 = C.int(size)
 
 	cret = C.gtk_widget_render_icon_pixbuf(carg0, carg1, carg2)
 	runtime.KeepAlive(widget)
@@ -108847,11 +108632,11 @@ type ToolPalette interface {
 	// GetIconSize wraps gtk_tool_palette_get_icon_size
 	// The function returns the following values:
 	// 
-	// 	- goret IconSize 
+	// 	- goret int 
 	//
 	// Gets the size of icons in the tool palette.
 	// See gtk_tool_palette_set_icon_size().
-	GetIconSize() IconSize
+	GetIconSize() int
 	// GetStyle wraps gtk_tool_palette_get_style
 	// The function returns the following values:
 	// 
@@ -108914,11 +108699,11 @@ type ToolPalette interface {
 	// 
 	// The function takes the following parameters:
 	// 
-	// 	- iconSize IconSize: the #GtkIconSize that icons in the tool
+	// 	- iconSize int: the #GtkIconSize that icons in the tool
 	//     palette shall have 
 	//
 	// Sets the size of icons in the tool palette.
-	SetIconSize(IconSize)
+	SetIconSize(int)
 	// SetStyle wraps gtk_tool_palette_set_style
 	// 
 	// The function takes the following parameters:
@@ -109304,22 +109089,22 @@ func (palette *ToolPaletteInstance) GetHAdjustment() Adjustment {
 // GetIconSize wraps gtk_tool_palette_get_icon_size
 // The function returns the following values:
 // 
-// 	- goret IconSize 
+// 	- goret int 
 //
 // Gets the size of icons in the tool palette.
 // See gtk_tool_palette_set_icon_size().
-func (palette *ToolPaletteInstance) GetIconSize() IconSize {
+func (palette *ToolPaletteInstance) GetIconSize() int {
 	var carg0 *C.GtkToolPalette // in, none, converted
-	var cret  C.GtkIconSize     // return, none, casted
+	var cret  C.int             // return, none, casted
 
 	carg0 = (*C.GtkToolPalette)(UnsafeToolPaletteToGlibNone(palette))
 
 	cret = C.gtk_tool_palette_get_icon_size(carg0)
 	runtime.KeepAlive(palette)
 
-	var goret IconSize
+	var goret int
 
-	goret = IconSize(cret)
+	goret = int(cret)
 
 	return goret
 }
@@ -109473,16 +109258,16 @@ func (palette *ToolPaletteInstance) SetGroupPosition(group ToolItemGroup, positi
 // 
 // The function takes the following parameters:
 // 
-// 	- iconSize IconSize: the #GtkIconSize that icons in the tool
+// 	- iconSize int: the #GtkIconSize that icons in the tool
 //     palette shall have 
 //
 // Sets the size of icons in the tool palette.
-func (palette *ToolPaletteInstance) SetIconSize(iconSize IconSize) {
+func (palette *ToolPaletteInstance) SetIconSize(iconSize int) {
 	var carg0 *C.GtkToolPalette // in, none, converted
-	var carg1 C.GtkIconSize     // in, none, casted
+	var carg1 C.int             // in, none, casted
 
 	carg0 = (*C.GtkToolPalette)(UnsafeToolPaletteToGlibNone(palette))
-	carg1 = C.GtkIconSize(iconSize)
+	carg1 = C.int(iconSize)
 
 	C.gtk_tool_palette_set_icon_size(carg0, carg1)
 	runtime.KeepAlive(palette)
@@ -116042,7 +115827,7 @@ func NewButtonInstance() Widget {
 // The function takes the following parameters:
 // 
 // 	- iconName string (nullable): an icon name or %NULL 
-// 	- size IconSize: an icon size (#GtkIconSize) 
+// 	- size int: an icon size (#GtkIconSize) 
 // 
 // The function returns the following values:
 // 
@@ -116056,16 +115841,16 @@ func NewButtonInstance() Widget {
 // 
 // This function is a convenience wrapper around gtk_button_new() and
 // gtk_button_set_image().
-func NewButtonInstanceFromIconName(iconName string, size IconSize) Widget {
-	var carg1 *C.gchar      // in, none, string, nullable-string
-	var carg2 C.GtkIconSize // in, none, casted
-	var cret  *C.GtkWidget  // return, none, converted
+func NewButtonInstanceFromIconName(iconName string, size int) Widget {
+	var carg1 *C.gchar     // in, none, string, nullable-string
+	var carg2 C.int        // in, none, casted
+	var cret  *C.GtkWidget // return, none, converted
 
 	if iconName != "" {
 		carg1 = (*C.gchar)(unsafe.Pointer(C.CString(iconName)))
 		defer C.free(unsafe.Pointer(carg1))
 	}
-	carg2 = C.GtkIconSize(size)
+	carg2 = C.int(size)
 
 	cret = C.gtk_button_new_from_icon_name(carg1, carg2)
 	runtime.KeepAlive(iconName)
@@ -124774,7 +124559,7 @@ type Image interface {
 	// 
 	// 	- gicon gio.Icon: place to store a
 	//     #GIcon, or %NULL 
-	// 	- size IconSize: place to store an icon size
+	// 	- size int: place to store an icon size
 	//     (#GtkIconSize), or %NULL 
 	//
 	// Gets the #GIcon and size being displayed by the #GtkImage.
@@ -124782,13 +124567,13 @@ type Image interface {
 	// %GTK_IMAGE_GICON (see gtk_image_get_storage_type()).
 	// The caller of this function does not own a reference to the
 	// returned #GIcon.
-	GetGIcon() (gio.Icon, IconSize)
+	GetGIcon() (gio.Icon, int)
 	// GetIconName wraps gtk_image_get_icon_name
 	// The function returns the following values:
 	// 
 	// 	- iconName string: place to store an
 	//     icon name, or %NULL 
-	// 	- size IconSize: place to store an icon size
+	// 	- size int: place to store an icon size
 	//     (#GtkIconSize), or %NULL 
 	//
 	// Gets the icon name and size being displayed by the #GtkImage.
@@ -124796,13 +124581,13 @@ type Image interface {
 	// %GTK_IMAGE_ICON_NAME (see gtk_image_get_storage_type()).
 	// The returned string is owned by the #GtkImage and should not
 	// be freed.
-	GetIconName() (string, IconSize)
+	GetIconName() (string, int)
 	// GetIconSet wraps gtk_image_get_icon_set
 	// The function returns the following values:
 	// 
 	// 	- iconSet *IconSet: location to store a
 	//     #GtkIconSet, or %NULL 
-	// 	- size IconSize: location to store a stock
+	// 	- size int: location to store a stock
 	//     icon size (#GtkIconSize), or %NULL 
 	//
 	// Gets the icon set and size being displayed by the #GtkImage.
@@ -124810,7 +124595,7 @@ type Image interface {
 	// %GTK_IMAGE_ICON_SET (see gtk_image_get_storage_type()).
 	//
 	// Deprecated: (since 3.10.0) Use gtk_image_get_icon_name() instead.
-	GetIconSet() (*IconSet, IconSize)
+	GetIconSet() (*IconSet, int)
 	// GetPixbuf wraps gtk_image_get_pixbuf
 	// The function returns the following values:
 	// 
@@ -124834,7 +124619,7 @@ type Image interface {
 	// 
 	// 	- stockId string: place to store a
 	//     stock icon name, or %NULL 
-	// 	- size IconSize: place to store a stock icon
+	// 	- size int: place to store a stock icon
 	//     size (#GtkIconSize), or %NULL 
 	//
 	// Gets the stock icon name and size being displayed by the #GtkImage.
@@ -124844,7 +124629,7 @@ type Image interface {
 	// be freed.
 	//
 	// Deprecated: (since 3.10.0) Use gtk_image_get_icon_name() instead.
-	GetStock() (string, IconSize)
+	GetStock() (string, int)
 	// GetStorageType wraps gtk_image_get_storage_type
 	// The function returns the following values:
 	// 
@@ -124867,30 +124652,30 @@ type Image interface {
 	// The function takes the following parameters:
 	// 
 	// 	- icon gio.Icon: an icon 
-	// 	- size IconSize: an icon size (#GtkIconSize) 
+	// 	- size int: an icon size (#GtkIconSize) 
 	//
 	// See gtk_image_new_from_gicon() for details.
-	SetFromGIcon(gio.Icon, IconSize)
+	SetFromGIcon(gio.Icon, int)
 	// SetFromIconName wraps gtk_image_set_from_icon_name
 	// 
 	// The function takes the following parameters:
 	// 
 	// 	- iconName string (nullable): an icon name or %NULL 
-	// 	- size IconSize: an icon size (#GtkIconSize) 
+	// 	- size int: an icon size (#GtkIconSize) 
 	//
 	// See gtk_image_new_from_icon_name() for details.
-	SetFromIconName(string, IconSize)
+	SetFromIconName(string, int)
 	// SetFromIconSet wraps gtk_image_set_from_icon_set
 	// 
 	// The function takes the following parameters:
 	// 
 	// 	- iconSet *IconSet: a #GtkIconSet 
-	// 	- size IconSize: a stock icon size (#GtkIconSize) 
+	// 	- size int: a stock icon size (#GtkIconSize) 
 	//
 	// See gtk_image_new_from_icon_set() for details.
 	//
 	// Deprecated: (since 3.10.0) Use gtk_image_set_from_icon_name() instead.
-	SetFromIconSet(*IconSet, IconSize)
+	SetFromIconSet(*IconSet, int)
 	// SetFromPixbuf wraps gtk_image_set_from_pixbuf
 	// 
 	// The function takes the following parameters:
@@ -124912,12 +124697,12 @@ type Image interface {
 	// The function takes the following parameters:
 	// 
 	// 	- stockId string: a stock icon name 
-	// 	- size IconSize: a stock icon size (#GtkIconSize) 
+	// 	- size int: a stock icon size (#GtkIconSize) 
 	//
 	// See gtk_image_new_from_stock() for details.
 	//
 	// Deprecated: (since 3.10.0) Use gtk_image_set_from_icon_name() instead.
-	SetFromStock(string, IconSize)
+	SetFromStock(string, int)
 	// SetPixelSize wraps gtk_image_set_pixel_size
 	// 
 	// The function takes the following parameters:
@@ -125042,7 +124827,7 @@ func NewImageInstanceFromFile(filename string) Widget {
 // The function takes the following parameters:
 // 
 // 	- icon gio.Icon: an icon 
-// 	- size IconSize: a stock icon size (#GtkIconSize) 
+// 	- size int: a stock icon size (#GtkIconSize) 
 // 
 // The function returns the following values:
 // 
@@ -125052,13 +124837,13 @@ func NewImageInstanceFromFile(filename string) Widget {
 // If the icon name isn’t known, a “broken image” icon will be
 // displayed instead.  If the current icon theme is changed, the icon
 // will be updated appropriately.
-func NewImageInstanceFromGIcon(icon gio.Icon, size IconSize) Widget {
-	var carg1 *C.GIcon      // in, none, converted
-	var carg2 C.GtkIconSize // in, none, casted
-	var cret  *C.GtkWidget  // return, none, converted
+func NewImageInstanceFromGIcon(icon gio.Icon, size int) Widget {
+	var carg1 *C.GIcon     // in, none, converted
+	var carg2 C.int        // in, none, casted
+	var cret  *C.GtkWidget // return, none, converted
 
 	carg1 = (*C.GIcon)(gio.UnsafeIconToGlibNone(icon))
-	carg2 = C.GtkIconSize(size)
+	carg2 = C.int(size)
 
 	cret = C.gtk_image_new_from_gicon(carg1, carg2)
 	runtime.KeepAlive(icon)
@@ -125076,7 +124861,7 @@ func NewImageInstanceFromGIcon(icon gio.Icon, size IconSize) Widget {
 // The function takes the following parameters:
 // 
 // 	- iconName string (nullable): an icon name or %NULL 
-// 	- size IconSize: a stock icon size (#GtkIconSize) 
+// 	- size int: a stock icon size (#GtkIconSize) 
 // 
 // The function returns the following values:
 // 
@@ -125086,16 +124871,16 @@ func NewImageInstanceFromGIcon(icon gio.Icon, size IconSize) Widget {
 // If the icon name isn’t known, a “broken image” icon will be
 // displayed instead.  If the current icon theme is changed, the icon
 // will be updated appropriately.
-func NewImageInstanceFromIconName(iconName string, size IconSize) Widget {
-	var carg1 *C.gchar      // in, none, string, nullable-string
-	var carg2 C.GtkIconSize // in, none, casted
-	var cret  *C.GtkWidget  // return, none, converted
+func NewImageInstanceFromIconName(iconName string, size int) Widget {
+	var carg1 *C.gchar     // in, none, string, nullable-string
+	var carg2 C.int        // in, none, casted
+	var cret  *C.GtkWidget // return, none, converted
 
 	if iconName != "" {
 		carg1 = (*C.gchar)(unsafe.Pointer(C.CString(iconName)))
 		defer C.free(unsafe.Pointer(carg1))
 	}
-	carg2 = C.GtkIconSize(size)
+	carg2 = C.int(size)
 
 	cret = C.gtk_image_new_from_icon_name(carg1, carg2)
 	runtime.KeepAlive(iconName)
@@ -125113,7 +124898,7 @@ func NewImageInstanceFromIconName(iconName string, size IconSize) Widget {
 // The function takes the following parameters:
 // 
 // 	- iconSet *IconSet: a #GtkIconSet 
-// 	- size IconSize: a stock icon size (#GtkIconSize) 
+// 	- size int: a stock icon size (#GtkIconSize) 
 // 
 // The function returns the following values:
 // 
@@ -125132,13 +124917,13 @@ func NewImageInstanceFromIconName(iconName string, size IconSize) Widget {
 // #GtkImage will add its own reference rather than adopting yours.
 //
 // Deprecated: (since 3.10.0) Use gtk_image_new_from_icon_name() instead.
-func NewImageInstanceFromIconSet(iconSet *IconSet, size IconSize) Widget {
+func NewImageInstanceFromIconSet(iconSet *IconSet, size int) Widget {
 	var carg1 *C.GtkIconSet // in, none, converted
-	var carg2 C.GtkIconSize // in, none, casted
+	var carg2 C.int         // in, none, casted
 	var cret  *C.GtkWidget  // return, none, converted
 
 	carg1 = (*C.GtkIconSet)(UnsafeIconSetToGlibNone(iconSet))
-	carg2 = C.GtkIconSize(size)
+	carg2 = C.int(size)
 
 	cret = C.gtk_image_new_from_icon_set(carg1, carg2)
 	runtime.KeepAlive(iconSet)
@@ -125235,7 +125020,7 @@ func NewImageInstanceFromResource(resourcePath string) Widget {
 // The function takes the following parameters:
 // 
 // 	- stockId string: a stock icon name 
-// 	- size IconSize: a stock icon size (#GtkIconSize) 
+// 	- size int: a stock icon size (#GtkIconSize) 
 // 
 // The function returns the following values:
 // 
@@ -125249,14 +125034,14 @@ func NewImageInstanceFromResource(resourcePath string) Widget {
 // gtk_icon_factory_add_default() and gtk_icon_factory_add().
 //
 // Deprecated: (since 3.10.0) Use gtk_image_new_from_icon_name() instead.
-func NewImageInstanceFromStock(stockId string, size IconSize) Widget {
-	var carg1 *C.gchar      // in, none, string
-	var carg2 C.GtkIconSize // in, none, casted
-	var cret  *C.GtkWidget  // return, none, converted
+func NewImageInstanceFromStock(stockId string, size int) Widget {
+	var carg1 *C.gchar     // in, none, string
+	var carg2 C.int        // in, none, casted
+	var cret  *C.GtkWidget // return, none, converted
 
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(stockId)))
 	defer C.free(unsafe.Pointer(carg1))
-	carg2 = C.GtkIconSize(size)
+	carg2 = C.int(size)
 
 	cret = C.gtk_image_new_from_stock(carg1, carg2)
 	runtime.KeepAlive(stockId)
@@ -125286,7 +125071,7 @@ func (image *ImageInstance) Clear() {
 // 
 // 	- gicon gio.Icon: place to store a
 //     #GIcon, or %NULL 
-// 	- size IconSize: place to store an icon size
+// 	- size int: place to store an icon size
 //     (#GtkIconSize), or %NULL 
 //
 // Gets the #GIcon and size being displayed by the #GtkImage.
@@ -125294,10 +125079,10 @@ func (image *ImageInstance) Clear() {
 // %GTK_IMAGE_GICON (see gtk_image_get_storage_type()).
 // The caller of this function does not own a reference to the
 // returned #GIcon.
-func (image *ImageInstance) GetGIcon() (gio.Icon, IconSize) {
-	var carg0 *C.GtkImage   // in, none, converted
-	var carg1 *C.GIcon      // out, none, converted
-	var carg2 C.GtkIconSize // out, full, casted
+func (image *ImageInstance) GetGIcon() (gio.Icon, int) {
+	var carg0 *C.GtkImage // in, none, converted
+	var carg1 *C.GIcon    // out, none, converted
+	var carg2 C.int       // out, full, casted
 
 	carg0 = (*C.GtkImage)(UnsafeImageToGlibNone(image))
 
@@ -125305,10 +125090,10 @@ func (image *ImageInstance) GetGIcon() (gio.Icon, IconSize) {
 	runtime.KeepAlive(image)
 
 	var gicon gio.Icon
-	var size  IconSize
+	var size  int
 
 	gicon = gio.UnsafeIconFromGlibNone(unsafe.Pointer(carg1))
-	size = IconSize(carg2)
+	size = int(carg2)
 
 	return gicon, size
 }
@@ -125318,7 +125103,7 @@ func (image *ImageInstance) GetGIcon() (gio.Icon, IconSize) {
 // 
 // 	- iconName string: place to store an
 //     icon name, or %NULL 
-// 	- size IconSize: place to store an icon size
+// 	- size int: place to store an icon size
 //     (#GtkIconSize), or %NULL 
 //
 // Gets the icon name and size being displayed by the #GtkImage.
@@ -125326,10 +125111,10 @@ func (image *ImageInstance) GetGIcon() (gio.Icon, IconSize) {
 // %GTK_IMAGE_ICON_NAME (see gtk_image_get_storage_type()).
 // The returned string is owned by the #GtkImage and should not
 // be freed.
-func (image *ImageInstance) GetIconName() (string, IconSize) {
-	var carg0 *C.GtkImage   // in, none, converted
-	var carg1 *C.gchar      // out, none, string
-	var carg2 C.GtkIconSize // out, full, casted
+func (image *ImageInstance) GetIconName() (string, int) {
+	var carg0 *C.GtkImage // in, none, converted
+	var carg1 *C.gchar    // out, none, string
+	var carg2 C.int       // out, full, casted
 
 	carg0 = (*C.GtkImage)(UnsafeImageToGlibNone(image))
 
@@ -125337,10 +125122,10 @@ func (image *ImageInstance) GetIconName() (string, IconSize) {
 	runtime.KeepAlive(image)
 
 	var iconName string
-	var size     IconSize
+	var size     int
 
 	iconName = C.GoString((*C.gchar)(unsafe.Pointer(carg1)))
-	size = IconSize(carg2)
+	size = int(carg2)
 
 	return iconName, size
 }
@@ -125350,7 +125135,7 @@ func (image *ImageInstance) GetIconName() (string, IconSize) {
 // 
 // 	- iconSet *IconSet: location to store a
 //     #GtkIconSet, or %NULL 
-// 	- size IconSize: location to store a stock
+// 	- size int: location to store a stock
 //     icon size (#GtkIconSize), or %NULL 
 //
 // Gets the icon set and size being displayed by the #GtkImage.
@@ -125358,10 +125143,10 @@ func (image *ImageInstance) GetIconName() (string, IconSize) {
 // %GTK_IMAGE_ICON_SET (see gtk_image_get_storage_type()).
 //
 // Deprecated: (since 3.10.0) Use gtk_image_get_icon_name() instead.
-func (image *ImageInstance) GetIconSet() (*IconSet, IconSize) {
+func (image *ImageInstance) GetIconSet() (*IconSet, int) {
 	var carg0 *C.GtkImage   // in, none, converted
 	var carg1 *C.GtkIconSet // out, none, converted
-	var carg2 C.GtkIconSize // out, full, casted
+	var carg2 C.int         // out, full, casted
 
 	carg0 = (*C.GtkImage)(UnsafeImageToGlibNone(image))
 
@@ -125369,10 +125154,10 @@ func (image *ImageInstance) GetIconSet() (*IconSet, IconSize) {
 	runtime.KeepAlive(image)
 
 	var iconSet *IconSet
-	var size    IconSize
+	var size    int
 
 	iconSet = UnsafeIconSetFromGlibNone(unsafe.Pointer(carg1))
-	size = IconSize(carg2)
+	size = int(carg2)
 
 	return iconSet, size
 }
@@ -125430,7 +125215,7 @@ func (image *ImageInstance) GetPixelSize() int {
 // 
 // 	- stockId string: place to store a
 //     stock icon name, or %NULL 
-// 	- size IconSize: place to store a stock icon
+// 	- size int: place to store a stock icon
 //     size (#GtkIconSize), or %NULL 
 //
 // Gets the stock icon name and size being displayed by the #GtkImage.
@@ -125440,10 +125225,10 @@ func (image *ImageInstance) GetPixelSize() int {
 // be freed.
 //
 // Deprecated: (since 3.10.0) Use gtk_image_get_icon_name() instead.
-func (image *ImageInstance) GetStock() (string, IconSize) {
-	var carg0 *C.GtkImage   // in, none, converted
-	var carg1 *C.gchar      // out, none, string
-	var carg2 C.GtkIconSize // out, full, casted
+func (image *ImageInstance) GetStock() (string, int) {
+	var carg0 *C.GtkImage // in, none, converted
+	var carg1 *C.gchar    // out, none, string
+	var carg2 C.int       // out, full, casted
 
 	carg0 = (*C.GtkImage)(UnsafeImageToGlibNone(image))
 
@@ -125451,10 +125236,10 @@ func (image *ImageInstance) GetStock() (string, IconSize) {
 	runtime.KeepAlive(image)
 
 	var stockId string
-	var size    IconSize
+	var size    int
 
 	stockId = C.GoString((*C.gchar)(unsafe.Pointer(carg1)))
-	size = IconSize(carg2)
+	size = int(carg2)
 
 	return stockId, size
 }
@@ -125510,17 +125295,17 @@ func (image *ImageInstance) SetFromFile(filename string) {
 // The function takes the following parameters:
 // 
 // 	- icon gio.Icon: an icon 
-// 	- size IconSize: an icon size (#GtkIconSize) 
+// 	- size int: an icon size (#GtkIconSize) 
 //
 // See gtk_image_new_from_gicon() for details.
-func (image *ImageInstance) SetFromGIcon(icon gio.Icon, size IconSize) {
-	var carg0 *C.GtkImage   // in, none, converted
-	var carg1 *C.GIcon      // in, none, converted
-	var carg2 C.GtkIconSize // in, none, casted
+func (image *ImageInstance) SetFromGIcon(icon gio.Icon, size int) {
+	var carg0 *C.GtkImage // in, none, converted
+	var carg1 *C.GIcon    // in, none, converted
+	var carg2 C.int       // in, none, casted
 
 	carg0 = (*C.GtkImage)(UnsafeImageToGlibNone(image))
 	carg1 = (*C.GIcon)(gio.UnsafeIconToGlibNone(icon))
-	carg2 = C.GtkIconSize(size)
+	carg2 = C.int(size)
 
 	C.gtk_image_set_from_gicon(carg0, carg1, carg2)
 	runtime.KeepAlive(image)
@@ -125533,20 +125318,20 @@ func (image *ImageInstance) SetFromGIcon(icon gio.Icon, size IconSize) {
 // The function takes the following parameters:
 // 
 // 	- iconName string (nullable): an icon name or %NULL 
-// 	- size IconSize: an icon size (#GtkIconSize) 
+// 	- size int: an icon size (#GtkIconSize) 
 //
 // See gtk_image_new_from_icon_name() for details.
-func (image *ImageInstance) SetFromIconName(iconName string, size IconSize) {
-	var carg0 *C.GtkImage   // in, none, converted
-	var carg1 *C.gchar      // in, none, string, nullable-string
-	var carg2 C.GtkIconSize // in, none, casted
+func (image *ImageInstance) SetFromIconName(iconName string, size int) {
+	var carg0 *C.GtkImage // in, none, converted
+	var carg1 *C.gchar    // in, none, string, nullable-string
+	var carg2 C.int       // in, none, casted
 
 	carg0 = (*C.GtkImage)(UnsafeImageToGlibNone(image))
 	if iconName != "" {
 		carg1 = (*C.gchar)(unsafe.Pointer(C.CString(iconName)))
 		defer C.free(unsafe.Pointer(carg1))
 	}
-	carg2 = C.GtkIconSize(size)
+	carg2 = C.int(size)
 
 	C.gtk_image_set_from_icon_name(carg0, carg1, carg2)
 	runtime.KeepAlive(image)
@@ -125559,19 +125344,19 @@ func (image *ImageInstance) SetFromIconName(iconName string, size IconSize) {
 // The function takes the following parameters:
 // 
 // 	- iconSet *IconSet: a #GtkIconSet 
-// 	- size IconSize: a stock icon size (#GtkIconSize) 
+// 	- size int: a stock icon size (#GtkIconSize) 
 //
 // See gtk_image_new_from_icon_set() for details.
 //
 // Deprecated: (since 3.10.0) Use gtk_image_set_from_icon_name() instead.
-func (image *ImageInstance) SetFromIconSet(iconSet *IconSet, size IconSize) {
+func (image *ImageInstance) SetFromIconSet(iconSet *IconSet, size int) {
 	var carg0 *C.GtkImage   // in, none, converted
 	var carg1 *C.GtkIconSet // in, none, converted
-	var carg2 C.GtkIconSize // in, none, casted
+	var carg2 C.int         // in, none, casted
 
 	carg0 = (*C.GtkImage)(UnsafeImageToGlibNone(image))
 	carg1 = (*C.GtkIconSet)(UnsafeIconSetToGlibNone(iconSet))
-	carg2 = C.GtkIconSize(size)
+	carg2 = C.int(size)
 
 	C.gtk_image_set_from_icon_set(carg0, carg1, carg2)
 	runtime.KeepAlive(image)
@@ -125627,20 +125412,20 @@ func (image *ImageInstance) SetFromResource(resourcePath string) {
 // The function takes the following parameters:
 // 
 // 	- stockId string: a stock icon name 
-// 	- size IconSize: a stock icon size (#GtkIconSize) 
+// 	- size int: a stock icon size (#GtkIconSize) 
 //
 // See gtk_image_new_from_stock() for details.
 //
 // Deprecated: (since 3.10.0) Use gtk_image_set_from_icon_name() instead.
-func (image *ImageInstance) SetFromStock(stockId string, size IconSize) {
-	var carg0 *C.GtkImage   // in, none, converted
-	var carg1 *C.gchar      // in, none, string
-	var carg2 C.GtkIconSize // in, none, casted
+func (image *ImageInstance) SetFromStock(stockId string, size int) {
+	var carg0 *C.GtkImage // in, none, converted
+	var carg1 *C.gchar    // in, none, string
+	var carg2 C.int       // in, none, casted
 
 	carg0 = (*C.GtkImage)(UnsafeImageToGlibNone(image))
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(stockId)))
 	defer C.free(unsafe.Pointer(carg1))
-	carg2 = C.GtkIconSize(size)
+	carg2 = C.int(size)
 
 	C.gtk_image_set_from_stock(carg0, carg1, carg2)
 	runtime.KeepAlive(image)
@@ -133848,11 +133633,11 @@ type ScaleButton interface {
 	// 
 	// The function takes the following parameters:
 	// 
-	// 	- icons []*byte: a %NULL-terminated array of icon names 
+	// 	- icons []string: a %NULL-terminated array of icon names 
 	//
 	// Sets the icons to be used by the scale button.
 	// For details, see the #GtkScaleButton:icons property.
-	SetIcons([]*byte)
+	SetIcons([]string)
 	// SetValue wraps gtk_scale_button_set_value
 	// 
 	// The function takes the following parameters:
@@ -133929,12 +133714,12 @@ func UnsafeScaleButtonToGlibFull(c ScaleButton) unsafe.Pointer {
 // 
 // The function takes the following parameters:
 // 
-// 	- size IconSize: a stock icon size (#GtkIconSize) 
+// 	- size int: a stock icon size (#GtkIconSize) 
 // 	- min float64: the minimum value of the scale (usually 0) 
 // 	- max float64: the maximum value of the scale (usually 100) 
 // 	- step float64: the stepping of value when a scroll-wheel event,
 //        or up/down arrow event occurs (usually 2) 
-// 	- icons []*byte (nullable): a %NULL-terminated
+// 	- icons []string (nullable): a %NULL-terminated
 //         array of icon names, or %NULL if you want to set the list
 //         later with gtk_scale_button_set_icons() 
 // 
@@ -133944,21 +133729,21 @@ func UnsafeScaleButtonToGlibFull(c ScaleButton) unsafe.Pointer {
 //
 // Creates a #GtkScaleButton, with a range between @min and @max, with
 // a stepping of @step.
-func NewScaleButtonInstance(size IconSize, min float64, max float64, step float64, icons []*byte) Widget {
-	var carg1 C.GtkIconSize // in, none, casted
-	var carg2 C.gdouble     // in, none, casted
-	var carg3 C.gdouble     // in, none, casted
-	var carg4 C.gdouble     // in, none, casted
-	var carg5 **C.gchar     // in, transfer: none, C Pointers: 2, Name: array[gchar], nullable, array (inner: *typesystem.CastablePrimitive, zero-terminated)
-	var cret  *C.GtkWidget  // return, none, converted
+func NewScaleButtonInstance(size int, min float64, max float64, step float64, icons []string) Widget {
+	var carg1 C.int        // in, none, casted
+	var carg2 C.gdouble    // in, none, casted
+	var carg3 C.gdouble    // in, none, casted
+	var carg4 C.gdouble    // in, none, casted
+	var carg5 **C.gchar    // in, transfer: none, C Pointers: 2, Name: array[utf8], nullable, array (inner: *typesystem.StringPrimitive, zero-terminated)
+	var cret  *C.GtkWidget // return, none, converted
 
-	carg1 = C.GtkIconSize(size)
+	carg1 = C.int(size)
 	carg2 = C.gdouble(min)
 	carg3 = C.gdouble(max)
 	carg4 = C.gdouble(step)
 	_ = icons
 	_ = carg5
-	panic("unimplemented conversion of []*byte (const gchar**)")
+	panic("unimplemented conversion of []string (const gchar**)")
 
 	cret = C.gtk_scale_button_new(carg1, carg2, carg3, carg4, carg5)
 	runtime.KeepAlive(size)
@@ -134110,18 +133895,18 @@ func (button *ScaleButtonInstance) SetAdjustment(adjustment Adjustment) {
 // 
 // The function takes the following parameters:
 // 
-// 	- icons []*byte: a %NULL-terminated array of icon names 
+// 	- icons []string: a %NULL-terminated array of icon names 
 //
 // Sets the icons to be used by the scale button.
 // For details, see the #GtkScaleButton:icons property.
-func (button *ScaleButtonInstance) SetIcons(icons []*byte) {
+func (button *ScaleButtonInstance) SetIcons(icons []string) {
 	var carg0 *C.GtkScaleButton // in, none, converted
-	var carg1 **C.gchar         // in, transfer: none, C Pointers: 2, Name: array[gchar], array (inner: *typesystem.CastablePrimitive, zero-terminated)
+	var carg1 **C.gchar         // in, transfer: none, C Pointers: 2, Name: array[utf8], array (inner: *typesystem.StringPrimitive, zero-terminated)
 
 	carg0 = (*C.GtkScaleButton)(UnsafeScaleButtonToGlibNone(button))
 	_ = icons
 	_ = carg1
-	panic("unimplemented conversion of []*byte (const gchar**)")
+	panic("unimplemented conversion of []string (const gchar**)")
 
 	C.gtk_scale_button_set_icons(carg0, carg1)
 	runtime.KeepAlive(button)
@@ -137759,12 +137544,12 @@ type ToolItem interface {
 	// GetIconSize wraps gtk_tool_item_get_icon_size
 	// The function returns the following values:
 	// 
-	// 	- goret IconSize 
+	// 	- goret int 
 	//
 	// Returns the icon size used for @tool_item. Custom subclasses of
 	// #GtkToolItem should call this function to find out what size icons
 	// they should use.
-	GetIconSize() IconSize
+	GetIconSize() int
 	// GetIsImportant wraps gtk_tool_item_get_is_important
 	// The function returns the following values:
 	// 
@@ -138147,23 +137932,23 @@ func (toolItem *ToolItemInstance) GetHomogeneous() bool {
 // GetIconSize wraps gtk_tool_item_get_icon_size
 // The function returns the following values:
 // 
-// 	- goret IconSize 
+// 	- goret int 
 //
 // Returns the icon size used for @tool_item. Custom subclasses of
 // #GtkToolItem should call this function to find out what size icons
 // they should use.
-func (toolItem *ToolItemInstance) GetIconSize() IconSize {
+func (toolItem *ToolItemInstance) GetIconSize() int {
 	var carg0 *C.GtkToolItem // in, none, converted
-	var cret  C.GtkIconSize  // return, none, casted
+	var cret  C.int          // return, none, casted
 
 	carg0 = (*C.GtkToolItem)(UnsafeToolItemToGlibNone(toolItem))
 
 	cret = C.gtk_tool_item_get_icon_size(carg0)
 	runtime.KeepAlive(toolItem)
 
-	var goret IconSize
+	var goret int
 
-	goret = IconSize(cret)
+	goret = int(cret)
 
 	return goret
 }
@@ -154294,10 +154079,10 @@ type AboutDialog interface {
 	// The function takes the following parameters:
 	// 
 	// 	- sectionName string: The name of the section 
-	// 	- people []*byte: The people who belong to that section 
+	// 	- people []string: The people who belong to that section 
 	//
 	// Creates a new section in the Credits page.
-	AddCreditSection(string, []*byte)
+	AddCreditSection(string, []string)
 	// GetArtists wraps gtk_about_dialog_get_artists
 	// The function returns the following values:
 	// 
@@ -154412,20 +154197,20 @@ type AboutDialog interface {
 	// 
 	// The function takes the following parameters:
 	// 
-	// 	- artists []*byte: a %NULL-terminated array of strings 
+	// 	- artists []string: a %NULL-terminated array of strings 
 	//
 	// Sets the strings which are displayed in the artists tab
 	// of the secondary credits dialog.
-	SetArtists([]*byte)
+	SetArtists([]string)
 	// SetAuthors wraps gtk_about_dialog_set_authors
 	// 
 	// The function takes the following parameters:
 	// 
-	// 	- authors []*byte: a %NULL-terminated array of strings 
+	// 	- authors []string: a %NULL-terminated array of strings 
 	//
 	// Sets the strings which are displayed in the authors tab
 	// of the secondary credits dialog.
-	SetAuthors([]*byte)
+	SetAuthors([]string)
 	// SetComments wraps gtk_about_dialog_set_comments
 	// 
 	// The function takes the following parameters:
@@ -154448,11 +154233,11 @@ type AboutDialog interface {
 	// 
 	// The function takes the following parameters:
 	// 
-	// 	- documenters []*byte: a %NULL-terminated array of strings 
+	// 	- documenters []string: a %NULL-terminated array of strings 
 	//
 	// Sets the strings which are displayed in the documenters tab
 	// of the secondary credits dialog.
-	SetDocumenters([]*byte)
+	SetDocumenters([]string)
 	// SetLicense wraps gtk_about_dialog_set_license
 	// 
 	// The function takes the following parameters:
@@ -154637,20 +154422,20 @@ func NewAboutDialogInstance() Widget {
 // The function takes the following parameters:
 // 
 // 	- sectionName string: The name of the section 
-// 	- people []*byte: The people who belong to that section 
+// 	- people []string: The people who belong to that section 
 //
 // Creates a new section in the Credits page.
-func (about *AboutDialogInstance) AddCreditSection(sectionName string, people []*byte) {
+func (about *AboutDialogInstance) AddCreditSection(sectionName string, people []string) {
 	var carg0 *C.GtkAboutDialog // in, none, converted
 	var carg1 *C.gchar          // in, none, string
-	var carg2 **C.gchar         // in, transfer: none, C Pointers: 2, Name: array[gchar], array (inner: *typesystem.CastablePrimitive, zero-terminated)
+	var carg2 **C.gchar         // in, transfer: none, C Pointers: 2, Name: array[utf8], array (inner: *typesystem.StringPrimitive, zero-terminated)
 
 	carg0 = (*C.GtkAboutDialog)(UnsafeAboutDialogToGlibNone(about))
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(sectionName)))
 	defer C.free(unsafe.Pointer(carg1))
 	_ = people
 	_ = carg2
-	panic("unimplemented conversion of []*byte (const gchar**)")
+	panic("unimplemented conversion of []string (const gchar**)")
 
 	C.gtk_about_dialog_add_credit_section(carg0, carg1, carg2)
 	runtime.KeepAlive(about)
@@ -155005,18 +154790,18 @@ func (about *AboutDialogInstance) GetWrapLicense() bool {
 // 
 // The function takes the following parameters:
 // 
-// 	- artists []*byte: a %NULL-terminated array of strings 
+// 	- artists []string: a %NULL-terminated array of strings 
 //
 // Sets the strings which are displayed in the artists tab
 // of the secondary credits dialog.
-func (about *AboutDialogInstance) SetArtists(artists []*byte) {
+func (about *AboutDialogInstance) SetArtists(artists []string) {
 	var carg0 *C.GtkAboutDialog // in, none, converted
-	var carg1 **C.gchar         // in, transfer: none, C Pointers: 2, Name: array[gchar], array (inner: *typesystem.CastablePrimitive, zero-terminated)
+	var carg1 **C.gchar         // in, transfer: none, C Pointers: 2, Name: array[utf8], array (inner: *typesystem.StringPrimitive, zero-terminated)
 
 	carg0 = (*C.GtkAboutDialog)(UnsafeAboutDialogToGlibNone(about))
 	_ = artists
 	_ = carg1
-	panic("unimplemented conversion of []*byte (const gchar**)")
+	panic("unimplemented conversion of []string (const gchar**)")
 
 	C.gtk_about_dialog_set_artists(carg0, carg1)
 	runtime.KeepAlive(about)
@@ -155027,18 +154812,18 @@ func (about *AboutDialogInstance) SetArtists(artists []*byte) {
 // 
 // The function takes the following parameters:
 // 
-// 	- authors []*byte: a %NULL-terminated array of strings 
+// 	- authors []string: a %NULL-terminated array of strings 
 //
 // Sets the strings which are displayed in the authors tab
 // of the secondary credits dialog.
-func (about *AboutDialogInstance) SetAuthors(authors []*byte) {
+func (about *AboutDialogInstance) SetAuthors(authors []string) {
 	var carg0 *C.GtkAboutDialog // in, none, converted
-	var carg1 **C.gchar         // in, transfer: none, C Pointers: 2, Name: array[gchar], array (inner: *typesystem.CastablePrimitive, zero-terminated)
+	var carg1 **C.gchar         // in, transfer: none, C Pointers: 2, Name: array[utf8], array (inner: *typesystem.StringPrimitive, zero-terminated)
 
 	carg0 = (*C.GtkAboutDialog)(UnsafeAboutDialogToGlibNone(about))
 	_ = authors
 	_ = carg1
-	panic("unimplemented conversion of []*byte (const gchar**)")
+	panic("unimplemented conversion of []string (const gchar**)")
 
 	C.gtk_about_dialog_set_authors(carg0, carg1)
 	runtime.KeepAlive(about)
@@ -155095,18 +154880,18 @@ func (about *AboutDialogInstance) SetCopyright(copyright string) {
 // 
 // The function takes the following parameters:
 // 
-// 	- documenters []*byte: a %NULL-terminated array of strings 
+// 	- documenters []string: a %NULL-terminated array of strings 
 //
 // Sets the strings which are displayed in the documenters tab
 // of the secondary credits dialog.
-func (about *AboutDialogInstance) SetDocumenters(documenters []*byte) {
+func (about *AboutDialogInstance) SetDocumenters(documenters []string) {
 	var carg0 *C.GtkAboutDialog // in, none, converted
-	var carg1 **C.gchar         // in, transfer: none, C Pointers: 2, Name: array[gchar], array (inner: *typesystem.CastablePrimitive, zero-terminated)
+	var carg1 **C.gchar         // in, transfer: none, C Pointers: 2, Name: array[utf8], array (inner: *typesystem.StringPrimitive, zero-terminated)
 
 	carg0 = (*C.GtkAboutDialog)(UnsafeAboutDialogToGlibNone(about))
 	_ = documenters
 	_ = carg1
-	panic("unimplemented conversion of []*byte (const gchar**)")
+	panic("unimplemented conversion of []string (const gchar**)")
 
 	C.gtk_about_dialog_set_documenters(carg0, carg1)
 	runtime.KeepAlive(about)
@@ -165568,7 +165353,7 @@ func (iconSet *IconSet) Copy() *IconSet {
 // 	- style Style (nullable): a #GtkStyle associated with @widget, or %NULL 
 // 	- direction TextDirection: text direction 
 // 	- state StateType: widget state 
-// 	- size IconSize: icon size (#GtkIconSize). A size of `(GtkIconSize)-1`
+// 	- size int: icon size (#GtkIconSize). A size of `(GtkIconSize)-1`
 //        means render at the size of the source and don’t scale. 
 // 	- widget Widget (nullable): widget that will display the icon, or %NULL.
 //          The only use that is typically made of this
@@ -165589,12 +165374,12 @@ func (iconSet *IconSet) Copy() *IconSet {
 // image" icon will be returned instead.
 //
 // Deprecated: (since 3.0.0) Use gtk_icon_set_render_icon_pixbuf() instead
-func (iconSet *IconSet) RenderIcon(style Style, direction TextDirection, state StateType, size IconSize, widget Widget, detail string) gdkpixbuf.Pixbuf {
+func (iconSet *IconSet) RenderIcon(style Style, direction TextDirection, state StateType, size int, widget Widget, detail string) gdkpixbuf.Pixbuf {
 	var carg0 *C.GtkIconSet      // in, none, converted
 	var carg1 *C.GtkStyle        // in, none, converted, nullable
 	var carg2 C.GtkTextDirection // in, none, casted
 	var carg3 C.GtkStateType     // in, none, casted
-	var carg4 C.GtkIconSize      // in, none, casted
+	var carg4 C.int              // in, none, casted
 	var carg5 *C.GtkWidget       // in, none, converted, nullable
 	var carg6 *C.gchar           // in, none, string, nullable-string
 	var cret  *C.GdkPixbuf       // return, full, converted
@@ -165605,7 +165390,7 @@ func (iconSet *IconSet) RenderIcon(style Style, direction TextDirection, state S
 	}
 	carg2 = C.GtkTextDirection(direction)
 	carg3 = C.GtkStateType(state)
-	carg4 = C.GtkIconSize(size)
+	carg4 = C.int(size)
 	if widget != nil {
 		carg5 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(widget))
 	}
@@ -165635,7 +165420,7 @@ func (iconSet *IconSet) RenderIcon(style Style, direction TextDirection, state S
 // The function takes the following parameters:
 // 
 // 	- context StyleContext: a #GtkStyleContext 
-// 	- size IconSize: icon size (#GtkIconSize). A size of `(GtkIconSize)-1`
+// 	- size int: icon size (#GtkIconSize). A size of `(GtkIconSize)-1`
 //        means render at the size of the source and don’t scale. 
 // 
 // The function returns the following values:
@@ -165650,15 +165435,15 @@ func (iconSet *IconSet) RenderIcon(style Style, direction TextDirection, state S
 // image" icon will be returned instead.
 //
 // Deprecated: (since 3.10.0) Use #GtkIconTheme instead.
-func (iconSet *IconSet) RenderIconPixbuf(context StyleContext, size IconSize) gdkpixbuf.Pixbuf {
+func (iconSet *IconSet) RenderIconPixbuf(context StyleContext, size int) gdkpixbuf.Pixbuf {
 	var carg0 *C.GtkIconSet      // in, none, converted
 	var carg1 *C.GtkStyleContext // in, none, converted
-	var carg2 C.GtkIconSize      // in, none, casted
+	var carg2 C.int              // in, none, casted
 	var cret  *C.GdkPixbuf       // return, full, converted
 
 	carg0 = (*C.GtkIconSet)(UnsafeIconSetToGlibNone(iconSet))
 	carg1 = (*C.GtkStyleContext)(UnsafeStyleContextToGlibNone(context))
-	carg2 = C.GtkIconSize(size)
+	carg2 = C.int(size)
 
 	cret = C.gtk_icon_set_render_icon_pixbuf(carg0, carg1, carg2)
 	runtime.KeepAlive(iconSet)
@@ -165952,24 +165737,24 @@ func (source *IconSource) GetPixbuf() gdkpixbuf.Pixbuf {
 // GetSize wraps gtk_icon_source_get_size
 // The function returns the following values:
 // 
-// 	- goret IconSize 
+// 	- goret int 
 //
 // Obtains the icon size this source applies to. The return value
 // is only useful/meaningful if the icon size is not wildcarded.
 //
 // Deprecated: (since 3.10.0) Use #GtkIconTheme instead.
-func (source *IconSource) GetSize() IconSize {
+func (source *IconSource) GetSize() int {
 	var carg0 *C.GtkIconSource // in, none, converted
-	var cret  C.GtkIconSize    // return, none, casted
+	var cret  C.int            // return, none, casted
 
 	carg0 = (*C.GtkIconSource)(UnsafeIconSourceToGlibNone(source))
 
 	cret = C.gtk_icon_source_get_size(carg0)
 	runtime.KeepAlive(source)
 
-	var goret IconSize
+	var goret int
 
-	goret = IconSize(cret)
+	goret = int(cret)
 
 	return goret
 }
@@ -166184,7 +165969,7 @@ func (source *IconSource) SetPixbuf(pixbuf gdkpixbuf.Pixbuf) {
 // 
 // The function takes the following parameters:
 // 
-// 	- size IconSize: icon size (#GtkIconSize) this source applies to 
+// 	- size int: icon size (#GtkIconSize) this source applies to 
 //
 // Sets the icon size this icon source is intended to be used
 // with.
@@ -166195,12 +165980,12 @@ func (source *IconSource) SetPixbuf(pixbuf gdkpixbuf.Pixbuf) {
 // in addition to calling this function.
 //
 // Deprecated: (since 3.10.0) Use #GtkIconTheme instead.
-func (source *IconSource) SetSize(size IconSize) {
+func (source *IconSource) SetSize(size int) {
 	var carg0 *C.GtkIconSource // in, none, converted
-	var carg1 C.GtkIconSize    // in, none, casted
+	var carg1 C.int            // in, none, casted
 
 	carg0 = (*C.GtkIconSource)(UnsafeIconSourceToGlibNone(source))
-	carg1 = C.GtkIconSize(size)
+	carg1 = C.int(size)
 
 	C.gtk_icon_source_set_size(carg0, carg1)
 	runtime.KeepAlive(source)
@@ -173972,7 +173757,7 @@ func (selectionData *SelectionData) SetText(str string, len int) bool {
 // 
 // The function takes the following parameters:
 // 
-// 	- uris []*byte: a %NULL-terminated array of
+// 	- uris []string: a %NULL-terminated array of
 //     strings holding URIs 
 // 
 // The function returns the following values:
@@ -173985,15 +173770,15 @@ func (selectionData *SelectionData) SetText(str string, len int) bool {
 // 
 // Since 3.24.37, this may involve using the FileTransfer
 // portal to send files between sandboxed apps.
-func (selectionData *SelectionData) SetURIs(uris []*byte) bool {
+func (selectionData *SelectionData) SetURIs(uris []string) bool {
 	var carg0 *C.GtkSelectionData // in, none, converted
-	var carg1 **C.gchar           // in, transfer: none, C Pointers: 2, Name: array[gchar], array (inner: *typesystem.CastablePrimitive, zero-terminated)
+	var carg1 **C.gchar           // in, transfer: none, C Pointers: 2, Name: array[utf8], array (inner: *typesystem.StringPrimitive, zero-terminated)
 	var cret  C.gboolean          // return
 
 	carg0 = (*C.GtkSelectionData)(UnsafeSelectionDataToGlibNone(selectionData))
 	_ = uris
 	_ = carg1
-	panic("unimplemented conversion of []*byte (gchar**)")
+	panic("unimplemented conversion of []string (gchar**)")
 
 	cret = C.gtk_selection_data_set_uris(carg0, carg1)
 	runtime.KeepAlive(selectionData)

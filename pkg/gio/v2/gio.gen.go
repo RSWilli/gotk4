@@ -5002,7 +5002,7 @@ func ContentTypeIsUnknown(typ string) bool {
 // 
 // The function takes the following parameters:
 // 
-// 	- dirs []*byte (nullable): %NULL-terminated list of
+// 	- dirs []string (nullable): %NULL-terminated list of
 //    directories to load MIME data from, including any `mime/` subdirectory,
 //    and with the first directory to try listed first 
 //
@@ -5029,12 +5029,12 @@ func ContentTypeIsUnknown(typ string) bool {
 // 
 //   return g_test_run ();
 // ]|
-func ContentTypeSetMIMEDirs(dirs []*byte) {
-	var carg1 **C.gchar // in, transfer: none, C Pointers: 2, Name: array[gchar], nullable, array (inner: *typesystem.CastablePrimitive, zero-terminated)
+func ContentTypeSetMIMEDirs(dirs []string) {
+	var carg1 **C.gchar // in, transfer: none, C Pointers: 2, Name: array[utf8], nullable, array (inner: *typesystem.StringPrimitive, zero-terminated)
 
 	_ = dirs
 	_ = carg1
-	panic("unimplemented conversion of []*byte (const gchar* const*)")
+	panic("unimplemented conversion of []string (const gchar* const*)")
 
 	C.g_content_type_set_mime_dirs(carg1)
 	runtime.KeepAlive(dirs)
@@ -12511,7 +12511,7 @@ type DtlsConnection interface {
 	// 
 	// The function takes the following parameters:
 	// 
-	// 	- protocols []*byte (nullable): a %NULL-terminated
+	// 	- protocols []string (nullable): a %NULL-terminated
 	//   array of ALPN protocol names (eg, "http/1.1", "h2"), or %NULL 
 	//
 	// Sets the list of application-layer protocols to advertise that the
@@ -12524,7 +12524,7 @@ type DtlsConnection interface {
 	// 
 	// See [IANA TLS ALPN Protocol IDs](https://www.iana.org/assignments/tls-extensiontype-values/tls-extensiontype-values.xhtml#alpn-protocol-ids)
 	// for a list of registered protocol IDs.
-	SetAdvertisedProtocols([]*byte)
+	SetAdvertisedProtocols([]string)
 	// SetCertificate wraps g_dtls_connection_set_certificate
 	// 
 	// The function takes the following parameters:
@@ -13289,7 +13289,7 @@ func (conn *DtlsConnectionInstance) HandshakeFinish(result AsyncResult) (bool, e
 // 
 // The function takes the following parameters:
 // 
-// 	- protocols []*byte (nullable): a %NULL-terminated
+// 	- protocols []string (nullable): a %NULL-terminated
 //   array of ALPN protocol names (eg, "http/1.1", "h2"), or %NULL 
 //
 // Sets the list of application-layer protocols to advertise that the
@@ -13302,14 +13302,14 @@ func (conn *DtlsConnectionInstance) HandshakeFinish(result AsyncResult) (bool, e
 // 
 // See [IANA TLS ALPN Protocol IDs](https://www.iana.org/assignments/tls-extensiontype-values/tls-extensiontype-values.xhtml#alpn-protocol-ids)
 // for a list of registered protocol IDs.
-func (conn *DtlsConnectionInstance) SetAdvertisedProtocols(protocols []*byte) {
+func (conn *DtlsConnectionInstance) SetAdvertisedProtocols(protocols []string) {
 	var carg0 *C.GDtlsConnection // in, none, converted
-	var carg1 **C.gchar          // in, transfer: none, C Pointers: 2, Name: array[gchar], nullable, array (inner: *typesystem.CastablePrimitive, zero-terminated)
+	var carg1 **C.gchar          // in, transfer: none, C Pointers: 2, Name: array[utf8], nullable, array (inner: *typesystem.StringPrimitive, zero-terminated)
 
 	carg0 = (*C.GDtlsConnection)(UnsafeDtlsConnectionToGlibNone(conn))
 	_ = protocols
 	_ = carg1
-	panic("unimplemented conversion of []*byte (const gchar* const*)")
+	panic("unimplemented conversion of []string (const gchar* const*)")
 
 	C.g_dtls_connection_set_advertised_protocols(carg0, carg1)
 	runtime.KeepAlive(conn)
@@ -13686,7 +13686,7 @@ func UnsafeDtlsServerConnectionToGlibFull(c DtlsServerConnection) unsafe.Pointer
 	return gobject.UnsafeObjectToGlibFull(&i.Instance)
 }
 
-// NewDtlsServerConnectionInstanceDTLSServerConnection wraps g_dtls_server_connection_new
+// NewDtlsServerConnectionInstance wraps g_dtls_server_connection_new
 // 
 // The function takes the following parameters:
 // 
@@ -13699,7 +13699,7 @@ func UnsafeDtlsServerConnectionToGlibFull(c DtlsServerConnection) unsafe.Pointer
 // 	- _goerr error (nullable): an error 
 //
 // Creates a new #GDtlsServerConnection wrapping @base_socket.
-func NewDtlsServerConnectionInstanceDTLSServerConnection(baseSocket DatagramBased, certificate TlsCertificate) (DtlsServerConnection, error) {
+func NewDtlsServerConnectionInstance(baseSocket DatagramBased, certificate TlsCertificate) (DtlsServerConnection, error) {
 	var carg1 *C.GDatagramBased  // in, none, converted
 	var carg2 *C.GTlsCertificate // in, none, converted, nullable
 	var cret  *C.GDatagramBased  // return, full, converted, returned interface
@@ -27838,7 +27838,7 @@ func UnsafeTlsClientConnectionToGlibFull(c TlsClientConnection) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(&i.Instance)
 }
 
-// NewTlsClientConnectionInstanceTLSClientConnection wraps g_tls_client_connection_new
+// NewTlsClientConnectionInstance wraps g_tls_client_connection_new
 // 
 // The function takes the following parameters:
 // 
@@ -27857,7 +27857,7 @@ func UnsafeTlsClientConnectionToGlibFull(c TlsClientConnection) unsafe.Pointer {
 // See the documentation for #GTlsConnection:base-io-stream for restrictions
 // on when application code can run operations on the @base_io_stream after
 // this function has returned.
-func NewTlsClientConnectionInstanceTLSClientConnection(baseIoStream IOStream, serverIdentity SocketConnectable) (TlsClientConnection, error) {
+func NewTlsClientConnectionInstance(baseIoStream IOStream, serverIdentity SocketConnectable) (TlsClientConnection, error) {
 	var carg1 *C.GIOStream          // in, none, converted
 	var carg2 *C.GSocketConnectable // in, none, converted, nullable
 	var cret  *C.GIOStream          // return, full, converted, returned interface
@@ -28142,7 +28142,7 @@ func UnsafeTlsFileDatabaseToGlibFull(c TlsFileDatabase) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(&i.Instance)
 }
 
-// NewTlsFileDatabaseInstanceTLSFileDatabase wraps g_tls_file_database_new
+// NewTlsFileDatabaseInstance wraps g_tls_file_database_new
 // 
 // The function takes the following parameters:
 // 
@@ -28157,7 +28157,7 @@ func UnsafeTlsFileDatabaseToGlibFull(c TlsFileDatabase) unsafe.Pointer {
 // in @anchors to verify certificate chains.
 // 
 // The certificates in @anchors must be PEM encoded.
-func NewTlsFileDatabaseInstanceTLSFileDatabase(anchors string) (TlsFileDatabase, error) {
+func NewTlsFileDatabaseInstance(anchors string) (TlsFileDatabase, error) {
 	var carg1 *C.gchar        // in, none, string
 	var cret  *C.GTlsDatabase // return, full, converted, returned interface
 	var _cerr *C.GError       // out, full, converted, nullable
@@ -28233,7 +28233,7 @@ func UnsafeTlsServerConnectionToGlibFull(c TlsServerConnection) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(&i.Instance)
 }
 
-// NewTlsServerConnectionInstanceTLSServerConnection wraps g_tls_server_connection_new
+// NewTlsServerConnectionInstance wraps g_tls_server_connection_new
 // 
 // The function takes the following parameters:
 // 
@@ -28251,7 +28251,7 @@ func UnsafeTlsServerConnectionToGlibFull(c TlsServerConnection) unsafe.Pointer {
 // See the documentation for #GTlsConnection:base-io-stream for restrictions
 // on when application code can run operations on the @base_io_stream after
 // this function has returned.
-func NewTlsServerConnectionInstanceTLSServerConnection(baseIoStream IOStream, certificate TlsCertificate) (TlsServerConnection, error) {
+func NewTlsServerConnectionInstance(baseIoStream IOStream, certificate TlsCertificate) (TlsServerConnection, error) {
 	var carg1 *C.GIOStream       // in, none, converted
 	var carg2 *C.GTlsCertificate // in, none, converted, nullable
 	var cret  *C.GIOStream       // return, full, converted, returned interface
@@ -29406,7 +29406,7 @@ func UnsafeDtlsClientConnectionToGlibFull(c DtlsClientConnection) unsafe.Pointer
 	return gobject.UnsafeObjectToGlibFull(&i.Instance)
 }
 
-// NewDtlsClientConnectionInstanceDTLSClientConnection wraps g_dtls_client_connection_new
+// NewDtlsClientConnectionInstance wraps g_dtls_client_connection_new
 // 
 // The function takes the following parameters:
 // 
@@ -29420,7 +29420,7 @@ func UnsafeDtlsClientConnectionToGlibFull(c DtlsClientConnection) unsafe.Pointer
 //
 // Creates a new #GDtlsClientConnection wrapping @base_socket which is
 // assumed to communicate with the server identified by @server_identity.
-func NewDtlsClientConnectionInstanceDTLSClientConnection(baseSocket DatagramBased, serverIdentity SocketConnectable) (DtlsClientConnection, error) {
+func NewDtlsClientConnectionInstance(baseSocket DatagramBased, serverIdentity SocketConnectable) (DtlsClientConnection, error) {
 	var carg1 *C.GDatagramBased     // in, none, converted
 	var carg2 *C.GSocketConnectable // in, none, converted, nullable
 	var cret  *C.GDatagramBased     // return, full, converted, returned interface
@@ -34656,7 +34656,7 @@ func NewDBusConnectionInstanceSync(cancellable context.Context, stream IOStream,
 	return goret, _goerr
 }
 
-// NewDBusConnectionInstanceDBusConnection wraps g_dbus_connection_new
+// NewDBusConnectionInstance wraps g_dbus_connection_new
 // 
 // The function takes the following parameters:
 // 
@@ -34687,7 +34687,7 @@ func NewDBusConnectionInstanceSync(cancellable context.Context, stream IOStream,
 // This is an asynchronous failable constructor. See
 // g_dbus_connection_new_sync() for the synchronous
 // version.
-func NewDBusConnectionInstanceDBusConnection(cancellable context.Context, stream IOStream, guid string, flags DBusConnectionFlags, observer DBusAuthObserver, callback AsyncReadyCallback) {
+func NewDBusConnectionInstance(cancellable context.Context, stream IOStream, guid string, flags DBusConnectionFlags, observer DBusAuthObserver, callback AsyncReadyCallback) {
 	var carg5 *C.GCancellable        // in, none, converted, nullable
 	var carg1 *C.GIOStream           // in, none, converted
 	var carg2 *C.gchar               // in, none, string, nullable-string
@@ -39684,7 +39684,7 @@ func NewDBusProxyInstanceSync(cancellable context.Context, connection DBusConnec
 	return goret, _goerr
 }
 
-// NewDBusProxyInstanceDBusProxy wraps g_dbus_proxy_new
+// NewDBusProxyInstance wraps g_dbus_proxy_new
 // 
 // The function takes the following parameters:
 // 
@@ -39724,7 +39724,7 @@ func NewDBusProxyInstanceSync(cancellable context.Context, connection DBusConnec
 // See g_dbus_proxy_new_sync() and for a synchronous version of this constructor.
 // 
 // #GDBusProxy is used in this [example][gdbus-wellknown-proxy].
-func NewDBusProxyInstanceDBusProxy(cancellable context.Context, connection DBusConnection, flags DBusProxyFlags, info *DBusInterfaceInfo, name string, objectPath string, interfaceName string, callback AsyncReadyCallback) {
+func NewDBusProxyInstance(cancellable context.Context, connection DBusConnection, flags DBusProxyFlags, info *DBusInterfaceInfo, name string, objectPath string, interfaceName string, callback AsyncReadyCallback) {
 	var carg7 *C.GCancellable       // in, none, converted, nullable
 	var carg1 *C.GDBusConnection    // in, none, converted
 	var carg2 C.GDBusProxyFlags     // in, none, casted
@@ -48155,6 +48155,28 @@ type ListStore interface {
 	//
 	// Sort the items in @store according to @compare_func.
 	Sort(glib.CompareDataFunc)
+	// Splice wraps g_list_store_splice
+	// 
+	// The function takes the following parameters:
+	// 
+	// 	- position uint: the position at which to make the change 
+	// 	- nRemovals uint: the number of items to remove 
+	// 	- additions []gobject._Value__data__union: the items to add 
+	//
+	// Changes @store by removing @n_removals items and adding @n_additions
+	// items to it. @additions must contain @n_additions items of type
+	// #GListStore:item-type.  %NULL is not permitted.
+	// 
+	// This function is more efficient than g_list_store_insert() and
+	// g_list_store_remove(), because it only emits
+	// #GListModel::items-changed once for the change.
+	// 
+	// This function takes a ref on each item in @additions.
+	// 
+	// The parameters @position and @n_removals must be correct (ie:
+	// @position + @n_removals must be less than or equal to the length of
+	// the list at the time this function is called).
+	Splice(uint, uint, []gobject._Value__data__union)
 }
 
 func unsafeWrapListStore(base *gobject.ObjectInstance) *ListStoreInstance {
@@ -48463,6 +48485,49 @@ func (store *ListStoreInstance) Sort(compareFunc glib.CompareDataFunc) {
 	C.g_list_store_sort(carg0, carg1, carg2)
 	runtime.KeepAlive(store)
 	runtime.KeepAlive(compareFunc)
+}
+
+// Splice wraps g_list_store_splice
+// 
+// The function takes the following parameters:
+// 
+// 	- position uint: the position at which to make the change 
+// 	- nRemovals uint: the number of items to remove 
+// 	- additions []gobject._Value__data__union: the items to add 
+//
+// Changes @store by removing @n_removals items and adding @n_additions
+// items to it. @additions must contain @n_additions items of type
+// #GListStore:item-type.  %NULL is not permitted.
+// 
+// This function is more efficient than g_list_store_insert() and
+// g_list_store_remove(), because it only emits
+// #GListModel::items-changed once for the change.
+// 
+// This function takes a ref on each item in @additions.
+// 
+// The parameters @position and @n_removals must be correct (ie:
+// @position + @n_removals must be less than or equal to the length of
+// the list at the time this function is called).
+func (store *ListStoreInstance) Splice(position uint, nRemovals uint, additions []gobject._Value__data__union) {
+	var carg0 *C.GListStore // in, none, converted
+	var carg1 C.guint       // in, none, casted
+	var carg2 C.guint       // in, none, casted
+	var carg3 *C.gpointer   // in, transfer: none, C Pointers: 1, Name: array[_Value__data__union], array (inner: *typesystem.Union, length-by: carg4)
+	var carg4 C.guint       // implicit
+
+	carg0 = (*C.GListStore)(UnsafeListStoreToGlibNone(store))
+	carg1 = C.guint(position)
+	carg2 = C.guint(nRemovals)
+	_ = additions
+	_ = carg3
+	_ = carg4
+	panic("unimplemented conversion of []gobject._Value__data__union (gpointer*)")
+
+	C.g_list_store_splice(carg0, carg1, carg2, carg3, carg4)
+	runtime.KeepAlive(store)
+	runtime.KeepAlive(position)
+	runtime.KeepAlive(nRemovals)
+	runtime.KeepAlive(additions)
 }
 
 // MemoryInputStreamInstance is the instance type used by all types extending GMemoryInputStream. It is used internally by the bindings. Users should use the interface [MemoryInputStream] instead.
@@ -55829,7 +55894,7 @@ type Settings interface {
 	// The function takes the following parameters:
 	// 
 	// 	- key string: the name of the key to set 
-	// 	- value []*byte (nullable): the value to set it to, or %NULL 
+	// 	- value []string (nullable): the value to set it to, or %NULL 
 	// 
 	// The function returns the following values:
 	// 
@@ -55842,7 +55907,7 @@ type Settings interface {
 	// 
 	// It is a programmer error to give a @key that isn't specified as
 	// having an array of strings type in the schema for @settings.
-	SetStrv(string, []*byte) bool
+	SetStrv(string, []string) bool
 	// SetUint wraps g_settings_set_uint
 	// 
 	// The function takes the following parameters:
@@ -57160,7 +57225,7 @@ func (settings *SettingsInstance) SetString(key string, value string) bool {
 // The function takes the following parameters:
 // 
 // 	- key string: the name of the key to set 
-// 	- value []*byte (nullable): the value to set it to, or %NULL 
+// 	- value []string (nullable): the value to set it to, or %NULL 
 // 
 // The function returns the following values:
 // 
@@ -57173,10 +57238,10 @@ func (settings *SettingsInstance) SetString(key string, value string) bool {
 // 
 // It is a programmer error to give a @key that isn't specified as
 // having an array of strings type in the schema for @settings.
-func (settings *SettingsInstance) SetStrv(key string, value []*byte) bool {
+func (settings *SettingsInstance) SetStrv(key string, value []string) bool {
 	var carg0 *C.GSettings // in, none, converted
 	var carg1 *C.gchar     // in, none, string
-	var carg2 **C.gchar    // in, transfer: none, C Pointers: 2, Name: array[gchar], nullable, array (inner: *typesystem.CastablePrimitive, zero-terminated)
+	var carg2 **C.gchar    // in, transfer: none, C Pointers: 2, Name: array[utf8], nullable, array (inner: *typesystem.StringPrimitive, zero-terminated)
 	var cret  C.gboolean   // return
 
 	carg0 = (*C.GSettings)(UnsafeSettingsToGlibNone(settings))
@@ -57184,7 +57249,7 @@ func (settings *SettingsInstance) SetStrv(key string, value []*byte) bool {
 	defer C.free(unsafe.Pointer(carg1))
 	_ = value
 	_ = carg2
-	panic("unimplemented conversion of []*byte (const gchar* const*)")
+	panic("unimplemented conversion of []string (const gchar* const*)")
 
 	cret = C.g_settings_set_strv(carg0, carg1, carg2)
 	runtime.KeepAlive(settings)
@@ -58633,14 +58698,14 @@ type SimpleProxyResolver interface {
 	// 
 	// The function takes the following parameters:
 	// 
-	// 	- ignoreHosts []*byte: %NULL-terminated list of hosts/IP addresses
+	// 	- ignoreHosts []string: %NULL-terminated list of hosts/IP addresses
 	//     to not use a proxy for 
 	//
 	// Sets the list of ignored hosts.
 	// 
 	// See #GSimpleProxyResolver:ignore-hosts for more details on how the
 	// @ignore_hosts argument is interpreted.
-	SetIgnoreHosts([]*byte)
+	SetIgnoreHosts([]string)
 	// SetURIProxy wraps g_simple_proxy_resolver_set_uri_proxy
 	// 
 	// The function takes the following parameters:
@@ -58693,13 +58758,13 @@ func UnsafeSimpleProxyResolverToGlibFull(c SimpleProxyResolver) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewSimpleProxyResolverInstanceSimpleProxyResolver wraps g_simple_proxy_resolver_new
+// NewSimpleProxyResolverInstance wraps g_simple_proxy_resolver_new
 // 
 // The function takes the following parameters:
 // 
 // 	- defaultProxy string (nullable): the default proxy to use, eg
 //     "socks://192.168.1.1" 
-// 	- ignoreHosts []*byte (nullable): an optional list of hosts/IP addresses
+// 	- ignoreHosts []string (nullable): an optional list of hosts/IP addresses
 //     to not use a proxy for. 
 // 
 // The function returns the following values:
@@ -58710,9 +58775,9 @@ func UnsafeSimpleProxyResolverToGlibFull(c SimpleProxyResolver) unsafe.Pointer {
 // #GSimpleProxyResolver:default-proxy and
 // #GSimpleProxyResolver:ignore-hosts for more details on how the
 // arguments are interpreted.
-func NewSimpleProxyResolverInstanceSimpleProxyResolver(defaultProxy string, ignoreHosts []*byte) ProxyResolver {
+func NewSimpleProxyResolverInstance(defaultProxy string, ignoreHosts []string) ProxyResolver {
 	var carg1 *C.gchar          // in, none, string, nullable-string
-	var carg2 **C.gchar         // in, transfer: none, C Pointers: 2, Name: array[gchar], nullable, array (inner: *typesystem.CastablePrimitive, zero-terminated)
+	var carg2 **C.gchar         // in, transfer: none, C Pointers: 2, Name: array[utf8], nullable, array (inner: *typesystem.StringPrimitive, zero-terminated)
 	var cret  *C.GProxyResolver // return, full, converted
 
 	if defaultProxy != "" {
@@ -58721,7 +58786,7 @@ func NewSimpleProxyResolverInstanceSimpleProxyResolver(defaultProxy string, igno
 	}
 	_ = ignoreHosts
 	_ = carg2
-	panic("unimplemented conversion of []*byte (gchar**)")
+	panic("unimplemented conversion of []string (gchar**)")
 
 	cret = C.g_simple_proxy_resolver_new(carg1, carg2)
 	runtime.KeepAlive(defaultProxy)
@@ -58766,21 +58831,21 @@ func (resolver *SimpleProxyResolverInstance) SetDefaultProxy(defaultProxy string
 // 
 // The function takes the following parameters:
 // 
-// 	- ignoreHosts []*byte: %NULL-terminated list of hosts/IP addresses
+// 	- ignoreHosts []string: %NULL-terminated list of hosts/IP addresses
 //     to not use a proxy for 
 //
 // Sets the list of ignored hosts.
 // 
 // See #GSimpleProxyResolver:ignore-hosts for more details on how the
 // @ignore_hosts argument is interpreted.
-func (resolver *SimpleProxyResolverInstance) SetIgnoreHosts(ignoreHosts []*byte) {
+func (resolver *SimpleProxyResolverInstance) SetIgnoreHosts(ignoreHosts []string) {
 	var carg0 *C.GSimpleProxyResolver // in, none, converted
-	var carg1 **C.gchar               // in, transfer: none, C Pointers: 2, Name: array[gchar], array (inner: *typesystem.CastablePrimitive, zero-terminated)
+	var carg1 **C.gchar               // in, transfer: none, C Pointers: 2, Name: array[utf8], array (inner: *typesystem.StringPrimitive, zero-terminated)
 
 	carg0 = (*C.GSimpleProxyResolver)(UnsafeSimpleProxyResolverToGlibNone(resolver))
 	_ = ignoreHosts
 	_ = carg1
-	panic("unimplemented conversion of []*byte (gchar**)")
+	panic("unimplemented conversion of []string (gchar**)")
 
 	C.g_simple_proxy_resolver_set_ignore_hosts(carg0, carg1)
 	runtime.KeepAlive(resolver)
@@ -69045,6 +69110,37 @@ func NewThemedIconInstance(iconname string) ThemedIcon {
 	return goret
 }
 
+// NewThemedIconInstanceFromNames wraps g_themed_icon_new_from_names
+// 
+// The function takes the following parameters:
+// 
+// 	- iconnames []string: an array of strings containing icon names. 
+// 
+// The function returns the following values:
+// 
+// 	- goret ThemedIcon 
+//
+// Creates a new themed icon for @iconnames.
+func NewThemedIconInstanceFromNames(iconnames []string) ThemedIcon {
+	var carg1 **C.char // in, transfer: none, C Pointers: 2, Name: array[utf8], array (inner: *typesystem.StringPrimitive, length-by: carg2)
+	var carg2 C.int    // implicit
+	var cret  *C.GIcon // return, full, converted, returned class
+
+	_ = iconnames
+	_ = carg1
+	_ = carg2
+	panic("unimplemented conversion of []string (char**)")
+
+	cret = C.g_themed_icon_new_from_names(carg1, carg2)
+	runtime.KeepAlive(iconnames)
+
+	var goret ThemedIcon
+
+	goret = UnsafeThemedIconFromGlibFull(unsafe.Pointer(cret))
+
+	return goret
+}
+
 // NewThemedIconInstanceWithDefaultFallbacks wraps g_themed_icon_new_with_default_fallbacks
 // 
 // The function takes the following parameters:
@@ -70161,7 +70257,7 @@ type TlsConnection interface {
 	// 
 	// The function takes the following parameters:
 	// 
-	// 	- protocols []*byte (nullable): a %NULL-terminated
+	// 	- protocols []string (nullable): a %NULL-terminated
 	//   array of ALPN protocol names (eg, "http/1.1", "h2"), or %NULL 
 	//
 	// Sets the list of application-layer protocols to advertise that the
@@ -70174,7 +70270,7 @@ type TlsConnection interface {
 	// 
 	// See [IANA TLS ALPN Protocol IDs](https://www.iana.org/assignments/tls-extensiontype-values/tls-extensiontype-values.xhtml#alpn-protocol-ids)
 	// for a list of registered protocol IDs.
-	SetAdvertisedProtocols([]*byte)
+	SetAdvertisedProtocols([]string)
 	// SetCertificate wraps g_tls_connection_set_certificate
 	// 
 	// The function takes the following parameters:
@@ -70801,7 +70897,7 @@ func (conn *TlsConnectionInstance) HandshakeFinish(result AsyncResult) (bool, er
 // 
 // The function takes the following parameters:
 // 
-// 	- protocols []*byte (nullable): a %NULL-terminated
+// 	- protocols []string (nullable): a %NULL-terminated
 //   array of ALPN protocol names (eg, "http/1.1", "h2"), or %NULL 
 //
 // Sets the list of application-layer protocols to advertise that the
@@ -70814,14 +70910,14 @@ func (conn *TlsConnectionInstance) HandshakeFinish(result AsyncResult) (bool, er
 // 
 // See [IANA TLS ALPN Protocol IDs](https://www.iana.org/assignments/tls-extensiontype-values/tls-extensiontype-values.xhtml#alpn-protocol-ids)
 // for a list of registered protocol IDs.
-func (conn *TlsConnectionInstance) SetAdvertisedProtocols(protocols []*byte) {
+func (conn *TlsConnectionInstance) SetAdvertisedProtocols(protocols []string) {
 	var carg0 *C.GTlsConnection // in, none, converted
-	var carg1 **C.gchar         // in, transfer: none, C Pointers: 2, Name: array[gchar], nullable, array (inner: *typesystem.CastablePrimitive, zero-terminated)
+	var carg1 **C.gchar         // in, transfer: none, C Pointers: 2, Name: array[utf8], nullable, array (inner: *typesystem.StringPrimitive, zero-terminated)
 
 	carg0 = (*C.GTlsConnection)(UnsafeTlsConnectionToGlibNone(conn))
 	_ = protocols
 	_ = carg1
-	panic("unimplemented conversion of []*byte (const gchar* const*)")
+	panic("unimplemented conversion of []string (const gchar* const*)")
 
 	C.g_tls_connection_set_advertised_protocols(carg0, carg1)
 	runtime.KeepAlive(conn)

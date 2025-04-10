@@ -78,13 +78,6 @@ func (r *Record) declareNested(e *env) {
 	e = e.sub("record", r.gir.Name)
 
 	for _, v := range r.gir.Functions {
-		if v.Name == "new" {
-			// some packages (e.g. gio) misplace the constructor in the functions list
-			e.logger.Info("name will likely collide, changing to avoid collision", "name", v.Name, "cidentifier", v.CIdentifier)
-
-			v.Name = v.Name + "_" + r.gir.Name
-		}
-
 		if t := DeclarePrefixedFunction(e, r, v.CallableAttrs); t != nil {
 			r.Functions = append(r.Functions, t)
 		}

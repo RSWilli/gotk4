@@ -144,72 +144,96 @@ func (e *env) findAnyType(t gir.AnyType) (*Namespace, Type) {
 	return nil, nil
 }
 
-// findType searches for a declared type in the namespace
-func (e *env) findType(t *gir.Type) (*Namespace, Type) {
-	var ns *Namespace
-	var typ Type
-	if t.CType != "" {
-		// Ctype resolving is often more reliable than GIR name resolving, so we try it first
+// referencedNamespace returns the namespace of the type
+// it has a fallback for the own namespace, and signifies this with
+// the foreign boolean
+func (e *env) referencedNamespace(t string) (foreign bool, ns *Namespace, localtype string) {
+	parts := strings.Split(t, ".")
 
-		ctype := cleanCType(t.CType)
-
-		ns, typ = e.findTypeByCType(ctype)
+	if len(parts) > 2 {
+		panic("invalid type name received")
 	}
 
-	if typ == nil {
-		// try GIR name resolving as fallback
-		ns, typ = e.findTypeByGIRName(t.Name)
+	if len(parts) == 1 {
+		return false, e.namespace, t
 	}
 
-	if typ == nil {
-		return nil, nil
+	// fallback because sometimes the type references the own namespace
+	if parts[0] == e.namespace.Name {
+		return false, e.namespace, parts[1]
 	}
 
-	typ = e.resolveInnerTypes(typ, t)
+	reffedNS := e.namespace.Included[parts[0]]
 
-	if typ == nil {
-		return nil, nil
+	if reffedNS == nil {
+		e.logger.Warn("type referenced unknown namespace", "type", t, "referenced-ns", parts[0])
+		return false, nil, ""
 	}
 
-	return ns, typ
+	return true, reffedNS, parts[1]
 }
 
-func (e *env) findTypeByCType(t string) (*Namespace, Type) {
-	if ctypeIsIncompatible(t) {
+// findType searches for a declared type in the namespace
+func (e *env) findType(t *gir.Type) (*Namespace, Type) {
+	// Ctype resolving is often more reliable than GIR name resolving, so we try it first
+
+	typename := t.Name
+	ctype := cleanCType(t.CType)
+
+	if ctypeIsIncompatible(ctype) {
 		return nil, nil
 	}
 
-	primitive := findBuiltinPrimitiveByCType(t)
-
-	if primitive != nil {
-		return nil, primitive
+	if replaced, ok := e.cfg.GIRReplacements[typename]; ok {
+		e.logger.Info("replacing GIR type name", "type", t.Name, "replaced by", replaced)
+		typename = replaced
 	}
 
-	typ := e.namespace.findLocalTypeByCType(t)
+	isForeign, ns, girName := e.referencedNamespace(typename)
+
+	if ns == nil {
+		return nil, nil
+	}
+
+	typ := findBuiltinPrimitiveByCType(t.CType)
 
 	if typ != nil {
 		return nil, typ
 	}
 
-	// the referenced type is not in the current namespace, so we need to find it
-	// in the included namespaces. We need to try all included namespaces, because
-	// we have no idea which one is the right one. FIXME: we can know this by looking at the ctype prefix
+	typ = findBuiltinPrimitiveByGIRName(girName)
 
-	for _, reffedNS := range e.namespace.Included {
-		typ := reffedNS.findLocalTypeByCType(t)
-
-		if typ != nil {
-			return reffedNS, typ
-		}
+	if typ != nil {
+		return nil, typ
 	}
 
-	e.logger.Debug("type not found", "type", t)
+	// foreign namespace is only non nil if the type is
+	// found in another namespace
+	var foreignNS *Namespace
+	if isForeign {
+		foreignNS = ns
+	}
+
+	typ = ns.findLocalTypeByCType(ctype)
+
+	if typ != nil {
+		return foreignNS, typ
+	}
+
+	typ = ns.findLocalTypeByGIRName(girName)
+
+	if typ != nil {
+		return foreignNS, typ
+	}
+
+	e.logger.Warn("type not found", "type", t.Name, "ctype", t.CType)
+
 	return nil, nil
 }
 
 func (e *env) findTypeByGIRName(t string) (*Namespace, Type) {
 	if replaced, ok := e.cfg.GIRReplacements[t]; ok {
-		e.logger.Warn("replacing GIR type name", "type", t, "replaced by", replaced)
+		e.logger.Info("replacing GIR type name", "type", t, "replaced by", replaced)
 		t = replaced
 	}
 
@@ -217,52 +241,31 @@ func (e *env) findTypeByGIRName(t string) (*Namespace, Type) {
 		return nil, nil
 	}
 
-	parts := strings.Split(t, ".")
+	isForeign, ns, girName := e.referencedNamespace(t)
 
-	if len(parts) > 2 {
-		panic("received invalid type name")
+	if ns == nil {
+		return nil, nil
 	}
+	typ := findBuiltinPrimitiveByGIRName(girName)
 
-	if len(parts) == 1 {
-		primitive := findBuiltinPrimitiveByGIRName(t)
-
-		if primitive != nil {
-			return nil, primitive
-		}
-
-		typ := e.namespace.findLocalTypeByGIRName(t)
-
-		if typ == nil {
-			e.logger.Debug("type not found", "type", t)
-			return nil, nil
-		}
-
+	if typ != nil {
 		return nil, typ
 	}
 
-	foreignNSName := parts[0]
-	foreignTypeName := parts[1]
-
-	if foreignNSName == e.namespace.v.name {
-		// some glib types are always referenced with glib prefix, e.g. HashTable
-		// even in glib namespace.
-		return e.findTypeByGIRName(foreignTypeName)
+	// foreign namespace is only non nil if the type is
+	// found in another namespace
+	var foreignNS *Namespace
+	if isForeign {
+		foreignNS = ns
 	}
 
-	reffedNS, ok := e.namespace.Included[foreignNSName]
+	typ = ns.findLocalTypeByGIRName(girName)
 
-	if !ok {
-		e.logger.Warn("type referenced unknown namespace", "type", t, "referenced-ns", foreignNSName)
-		return nil, nil
+	if typ != nil {
+		return foreignNS, typ
 	}
 
-	foreign := reffedNS.findLocalTypeByGIRName(foreignTypeName)
-
-	if foreign != nil {
-		return reffedNS, foreign
-	}
-
-	e.logger.Debug("type not found", "type", t)
+	e.logger.Warn("type not found by GIR name", "type", t)
 
 	return nil, nil
 }

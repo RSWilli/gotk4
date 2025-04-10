@@ -11453,6 +11453,26 @@ var _ FileChooser = (*FileChooserInstance)(nil)
 type FileChooser interface {
 	upcastToGtkFileChooser() *FileChooserInstance
 
+	// AddChoice wraps gtk_file_chooser_add_choice
+	// 
+	// The function takes the following parameters:
+	// 
+	// 	- id string: id for the added choice 
+	// 	- label string: user-visible label for the added choice 
+	// 	- options []string (nullable): ids for the options of the choice, or %NULL for a boolean choice 
+	// 	- optionLabels []string (nullable): user-visible labels for the options, must be the same length as @options 
+	//
+	// Adds a 'choice' to the file chooser.
+	// 
+	// This is typically implemented as a combobox or, for boolean choices,
+	// as a checkbutton. You can select a value using
+	// [method@Gtk.FileChooser.set_choice] before the dialog is shown,
+	// and you can obtain the user-selected value in the
+	// [signal@Gtk.Dialog::response] signal handler using
+	// [method@Gtk.FileChooser.get_choice].
+	//
+	// Deprecated: (since 4.10.0) Use [class@Gtk.FileDialog] instead
+	AddChoice(string, string, []string, []string)
 	// AddFilter wraps gtk_file_chooser_add_filter
 	// 
 	// The function takes the following parameters:
@@ -11851,6 +11871,52 @@ func UnsafeFileChooserToGlibNone(c FileChooser) unsafe.Pointer {
 func UnsafeFileChooserToGlibFull(c FileChooser) unsafe.Pointer {
 	i := c.upcastToGtkFileChooser()
 	return gobject.UnsafeObjectToGlibFull(&i.Instance)
+}
+
+// AddChoice wraps gtk_file_chooser_add_choice
+// 
+// The function takes the following parameters:
+// 
+// 	- id string: id for the added choice 
+// 	- label string: user-visible label for the added choice 
+// 	- options []string (nullable): ids for the options of the choice, or %NULL for a boolean choice 
+// 	- optionLabels []string (nullable): user-visible labels for the options, must be the same length as @options 
+//
+// Adds a 'choice' to the file chooser.
+// 
+// This is typically implemented as a combobox or, for boolean choices,
+// as a checkbutton. You can select a value using
+// [method@Gtk.FileChooser.set_choice] before the dialog is shown,
+// and you can obtain the user-selected value in the
+// [signal@Gtk.Dialog::response] signal handler using
+// [method@Gtk.FileChooser.get_choice].
+//
+// Deprecated: (since 4.10.0) Use [class@Gtk.FileDialog] instead
+func (chooser *FileChooserInstance) AddChoice(id string, label string, options []string, optionLabels []string) {
+	var carg0 *C.GtkFileChooser // in, none, converted
+	var carg1 *C.gchar          // in, none, string
+	var carg2 *C.gchar          // in, none, string
+	var carg3 **C.char          // in, transfer: none, C Pointers: 2, Name: array[utf8], nullable, array (inner: *typesystem.StringPrimitive, zero-terminated)
+	var carg4 **C.char          // in, transfer: none, C Pointers: 2, Name: array[utf8], nullable, array (inner: *typesystem.StringPrimitive, zero-terminated)
+
+	carg0 = (*C.GtkFileChooser)(UnsafeFileChooserToGlibNone(chooser))
+	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(id)))
+	defer C.free(unsafe.Pointer(carg1))
+	carg2 = (*C.gchar)(unsafe.Pointer(C.CString(label)))
+	defer C.free(unsafe.Pointer(carg2))
+	_ = options
+	_ = carg3
+	panic("unimplemented conversion of []string (const char**)")
+	_ = optionLabels
+	_ = carg4
+	panic("unimplemented conversion of []string (const char**)")
+
+	C.gtk_file_chooser_add_choice(carg0, carg1, carg2, carg3, carg4)
+	runtime.KeepAlive(chooser)
+	runtime.KeepAlive(id)
+	runtime.KeepAlive(label)
+	runtime.KeepAlive(options)
+	runtime.KeepAlive(optionLabels)
 }
 
 // AddFilter wraps gtk_file_chooser_add_filter
@@ -16235,6 +16301,29 @@ type TreeModel interface {
 	//
 	// Deprecated: (since 4.10.0) 
 	RowInserted(*TreePath, *TreeIter)
+	// RowsReorderedWithLength wraps gtk_tree_model_rows_reordered_with_length
+	// 
+	// The function takes the following parameters:
+	// 
+	// 	- path *TreePath: a `GtkTreePath` pointing to the tree node whose children
+	//   have been reordered 
+	// 	- iter *TreeIter (nullable): a valid `GtkTreeIter` pointing to the node
+	//   whose children have been reordered, or %NULL if the depth
+	//   of @path is 0 
+	// 	- newOrder []int: an array of integers
+	//   mapping the current position of each child to its old
+	//   position before the re-ordering,
+	//   i.e. @new_order`[newpos] = oldpos` 
+	//
+	// Emits the ::rows-reordered signal on @tree_model.
+	// 
+	// See [signal@Gtk.TreeModel::rows-reordered].
+	// 
+	// This should be called by models when their rows have been
+	// reordered.
+	//
+	// Deprecated: (since 4.10.0) 
+	RowsReorderedWithLength(*TreePath, *TreeIter, []int)
 	// UnrefNode wraps gtk_tree_model_unref_node
 	// 
 	// The function takes the following parameters:
@@ -17116,6 +17205,52 @@ func (treeModel *TreeModelInstance) RowInserted(path *TreePath, iter *TreeIter) 
 	runtime.KeepAlive(treeModel)
 	runtime.KeepAlive(path)
 	runtime.KeepAlive(iter)
+}
+
+// RowsReorderedWithLength wraps gtk_tree_model_rows_reordered_with_length
+// 
+// The function takes the following parameters:
+// 
+// 	- path *TreePath: a `GtkTreePath` pointing to the tree node whose children
+//   have been reordered 
+// 	- iter *TreeIter (nullable): a valid `GtkTreeIter` pointing to the node
+//   whose children have been reordered, or %NULL if the depth
+//   of @path is 0 
+// 	- newOrder []int: an array of integers
+//   mapping the current position of each child to its old
+//   position before the re-ordering,
+//   i.e. @new_order`[newpos] = oldpos` 
+//
+// Emits the ::rows-reordered signal on @tree_model.
+// 
+// See [signal@Gtk.TreeModel::rows-reordered].
+// 
+// This should be called by models when their rows have been
+// reordered.
+//
+// Deprecated: (since 4.10.0) 
+func (treeModel *TreeModelInstance) RowsReorderedWithLength(path *TreePath, iter *TreeIter, newOrder []int) {
+	var carg0 *C.GtkTreeModel // in, none, converted
+	var carg1 *C.GtkTreePath  // in, none, converted
+	var carg2 *C.GtkTreeIter  // in, none, converted, nullable
+	var carg3 *C.int          // in, transfer: none, C Pointers: 1, Name: array[gint], array (inner: *typesystem.CastablePrimitive, length-by: carg4)
+	var carg4 C.int           // implicit
+
+	carg0 = (*C.GtkTreeModel)(UnsafeTreeModelToGlibNone(treeModel))
+	carg1 = (*C.GtkTreePath)(UnsafeTreePathToGlibNone(path))
+	if iter != nil {
+		carg2 = (*C.GtkTreeIter)(UnsafeTreeIterToGlibNone(iter))
+	}
+	_ = newOrder
+	_ = carg3
+	_ = carg4
+	panic("unimplemented conversion of []int (int*)")
+
+	C.gtk_tree_model_rows_reordered_with_length(carg0, carg1, carg2, carg3, carg4)
+	runtime.KeepAlive(treeModel)
+	runtime.KeepAlive(path)
+	runtime.KeepAlive(iter)
+	runtime.KeepAlive(newOrder)
 }
 
 // UnrefNode wraps gtk_tree_model_unref_node
@@ -18376,6 +18511,14 @@ type AlertDialog interface {
 	// Returns whether the alert blocks interaction
 	// with the parent window while it is presented.
 	GetModal() bool
+	// SetButtons wraps gtk_alert_dialog_set_buttons
+	// 
+	// The function takes the following parameters:
+	// 
+	// 	- labels []string: the new button labels 
+	//
+	// Sets the button labels for the alert.
+	SetButtons([]string)
 	// SetCancelButton wraps gtk_alert_dialog_set_cancel_button
 	// 
 	// The function takes the following parameters:
@@ -18685,6 +18828,27 @@ func (self *AlertDialogInstance) GetModal() bool {
 	}
 
 	return goret
+}
+
+// SetButtons wraps gtk_alert_dialog_set_buttons
+// 
+// The function takes the following parameters:
+// 
+// 	- labels []string: the new button labels 
+//
+// Sets the button labels for the alert.
+func (self *AlertDialogInstance) SetButtons(labels []string) {
+	var carg0 *C.GtkAlertDialog // in, none, converted
+	var carg1 **C.char          // in, transfer: none, C Pointers: 2, Name: array[utf8], array (inner: *typesystem.StringPrimitive, zero-terminated)
+
+	carg0 = (*C.GtkAlertDialog)(UnsafeAlertDialogToGlibNone(self))
+	_ = labels
+	_ = carg1
+	panic("unimplemented conversion of []string (const char* const*)")
+
+	C.gtk_alert_dialog_set_buttons(carg0, carg1)
+	runtime.KeepAlive(self)
+	runtime.KeepAlive(labels)
 }
 
 // SetCancelButton wraps gtk_alert_dialog_set_cancel_button
@@ -19085,6 +19249,27 @@ type Application interface {
 	// The application may stop running as a result of a call to this
 	// function, if `window` was the last window of the `application`.
 	RemoveWindow(Window)
+	// SetAccelsForAction wraps gtk_application_set_accels_for_action
+	// 
+	// The function takes the following parameters:
+	// 
+	// 	- detailedActionName string: a detailed action name, specifying an action
+	//   and target to associate accelerators with 
+	// 	- accels []string: a list of accelerators in the format
+	//   understood by [func@Gtk.accelerator_parse] 
+	//
+	// Sets zero or more keyboard accelerators that will trigger the
+	// given action.
+	// 
+	// The first item in `accels` will be the primary accelerator, which may be
+	// displayed in the UI.
+	// 
+	// To remove all accelerators for an action, use an empty, zero-terminated
+	// array for `accels`.
+	// 
+	// For the `detailed_action_name`, see `g_action_parse_detailed_name()` and
+	// `g_action_print_detailed_name()`.
+	SetAccelsForAction(string, []string)
 	// SetMenubar wraps gtk_application_set_menubar
 	// 
 	// The function takes the following parameters:
@@ -19567,6 +19752,44 @@ func (application *ApplicationInstance) RemoveWindow(window Window) {
 	C.gtk_application_remove_window(carg0, carg1)
 	runtime.KeepAlive(application)
 	runtime.KeepAlive(window)
+}
+
+// SetAccelsForAction wraps gtk_application_set_accels_for_action
+// 
+// The function takes the following parameters:
+// 
+// 	- detailedActionName string: a detailed action name, specifying an action
+//   and target to associate accelerators with 
+// 	- accels []string: a list of accelerators in the format
+//   understood by [func@Gtk.accelerator_parse] 
+//
+// Sets zero or more keyboard accelerators that will trigger the
+// given action.
+// 
+// The first item in `accels` will be the primary accelerator, which may be
+// displayed in the UI.
+// 
+// To remove all accelerators for an action, use an empty, zero-terminated
+// array for `accels`.
+// 
+// For the `detailed_action_name`, see `g_action_parse_detailed_name()` and
+// `g_action_print_detailed_name()`.
+func (application *ApplicationInstance) SetAccelsForAction(detailedActionName string, accels []string) {
+	var carg0 *C.GtkApplication // in, none, converted
+	var carg1 *C.gchar          // in, none, string
+	var carg2 **C.char          // in, transfer: none, C Pointers: 2, Name: array[utf8], array (inner: *typesystem.StringPrimitive, zero-terminated)
+
+	carg0 = (*C.GtkApplication)(UnsafeApplicationToGlibNone(application))
+	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(detailedActionName)))
+	defer C.free(unsafe.Pointer(carg1))
+	_ = accels
+	_ = carg2
+	panic("unimplemented conversion of []string (const char* const*)")
+
+	C.gtk_application_set_accels_for_action(carg0, carg1, carg2)
+	runtime.KeepAlive(application)
+	runtime.KeepAlive(detailedActionName)
+	runtime.KeepAlive(accels)
 }
 
 // SetMenubar wraps gtk_application_set_menubar
@@ -39143,6 +39366,22 @@ type IconTheme interface {
 	//
 	// Lists the names of icons in the current icon theme.
 	GetIconNames() []string
+	// GetIconSizes wraps gtk_icon_theme_get_icon_sizes
+	// 
+	// The function takes the following parameters:
+	// 
+	// 	- iconName string: the name of an icon 
+	// 
+	// The function returns the following values:
+	// 
+	// 	- goret []int 
+	//
+	// Returns an array of integers describing the sizes at which
+	// the icon is available without scaling.
+	// 
+	// A size of -1 means that the icon is available in a scalable
+	// format. The array is zero-terminated.
+	GetIconSizes(string) []int
 	// GetResourcePath wraps gtk_icon_theme_get_resource_path
 	// The function returns the following values:
 	// 
@@ -39213,6 +39452,38 @@ type IconTheme interface {
 	// The icon can then be rendered by using it as a `GdkPaintable`,
 	// or you can get information such as the filename and size.
 	LookupByGIcon(gio.Icon, int, int, TextDirection, IconLookupFlags) IconPaintable
+	// LookupIcon wraps gtk_icon_theme_lookup_icon
+	// 
+	// The function takes the following parameters:
+	// 
+	// 	- iconName string: the name of the icon to lookup 
+	// 	- fallbacks []string (nullable): fallback names 
+	// 	- size int: desired icon size, in application pixels 
+	// 	- scale int: the window scale this will be displayed on 
+	// 	- direction TextDirection: text direction the icon will be displayed in 
+	// 	- flags IconLookupFlags: flags modifying the behavior of the icon lookup 
+	// 
+	// The function returns the following values:
+	// 
+	// 	- goret IconPaintable 
+	//
+	// Looks up a named icon for a desired size and window scale,
+	// returning a `GtkIconPaintable`.
+	// 
+	// The icon can then be rendered by using it as a `GdkPaintable`,
+	// or you can get information such as the filename and size.
+	// 
+	// If the available @icon_name is not available and @fallbacks are
+	// provided, they will be tried in order.
+	// 
+	// If no matching icon is found, then a paintable that renders the
+	// "missing icon" icon is returned. If you need to do something else
+	// for missing icons you need to use [method@Gtk.IconTheme.has_icon].
+	// 
+	// Note that you probably want to listen for icon theme changes and
+	// update the icon. This is usually done by overriding the
+	// GtkWidgetClass.css-changed() function.
+	LookupIcon(string, []string, int, int, TextDirection, IconLookupFlags) IconPaintable
 	// SetResourcePath wraps gtk_icon_theme_set_resource_path
 	// 
 	// The function takes the following parameters:
@@ -39457,6 +39728,43 @@ func (self *IconThemeInstance) GetIconNames() []string {
 	return goret
 }
 
+// GetIconSizes wraps gtk_icon_theme_get_icon_sizes
+// 
+// The function takes the following parameters:
+// 
+// 	- iconName string: the name of an icon 
+// 
+// The function returns the following values:
+// 
+// 	- goret []int 
+//
+// Returns an array of integers describing the sizes at which
+// the icon is available without scaling.
+// 
+// A size of -1 means that the icon is available in a scalable
+// format. The array is zero-terminated.
+func (self *IconThemeInstance) GetIconSizes(iconName string) []int {
+	var carg0 *C.GtkIconTheme // in, none, converted
+	var carg1 *C.gchar        // in, none, string
+	var cret  *C.int          // return, transfer: full, C Pointers: 1, Name: array[gint], scope: , array (inner: *typesystem.CastablePrimitive, zero-terminated)
+
+	carg0 = (*C.GtkIconTheme)(UnsafeIconThemeToGlibNone(self))
+	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(iconName)))
+	defer C.free(unsafe.Pointer(carg1))
+
+	cret = C.gtk_icon_theme_get_icon_sizes(carg0, carg1)
+	runtime.KeepAlive(self)
+	runtime.KeepAlive(iconName)
+
+	var goret []int
+
+	_ = goret
+	_ = cret
+	panic("unimplemented conversion of []int (int*)")
+
+	return goret
+}
+
 // GetResourcePath wraps gtk_icon_theme_get_resource_path
 // The function returns the following values:
 // 
@@ -39636,6 +39944,74 @@ func (self *IconThemeInstance) LookupByGIcon(icon gio.Icon, size int, scale int,
 	cret = C.gtk_icon_theme_lookup_by_gicon(carg0, carg1, carg2, carg3, carg4, carg5)
 	runtime.KeepAlive(self)
 	runtime.KeepAlive(icon)
+	runtime.KeepAlive(size)
+	runtime.KeepAlive(scale)
+	runtime.KeepAlive(direction)
+	runtime.KeepAlive(flags)
+
+	var goret IconPaintable
+
+	goret = UnsafeIconPaintableFromGlibFull(unsafe.Pointer(cret))
+
+	return goret
+}
+
+// LookupIcon wraps gtk_icon_theme_lookup_icon
+// 
+// The function takes the following parameters:
+// 
+// 	- iconName string: the name of the icon to lookup 
+// 	- fallbacks []string (nullable): fallback names 
+// 	- size int: desired icon size, in application pixels 
+// 	- scale int: the window scale this will be displayed on 
+// 	- direction TextDirection: text direction the icon will be displayed in 
+// 	- flags IconLookupFlags: flags modifying the behavior of the icon lookup 
+// 
+// The function returns the following values:
+// 
+// 	- goret IconPaintable 
+//
+// Looks up a named icon for a desired size and window scale,
+// returning a `GtkIconPaintable`.
+// 
+// The icon can then be rendered by using it as a `GdkPaintable`,
+// or you can get information such as the filename and size.
+// 
+// If the available @icon_name is not available and @fallbacks are
+// provided, they will be tried in order.
+// 
+// If no matching icon is found, then a paintable that renders the
+// "missing icon" icon is returned. If you need to do something else
+// for missing icons you need to use [method@Gtk.IconTheme.has_icon].
+// 
+// Note that you probably want to listen for icon theme changes and
+// update the icon. This is usually done by overriding the
+// GtkWidgetClass.css-changed() function.
+func (self *IconThemeInstance) LookupIcon(iconName string, fallbacks []string, size int, scale int, direction TextDirection, flags IconLookupFlags) IconPaintable {
+	var carg0 *C.GtkIconTheme      // in, none, converted
+	var carg1 *C.gchar             // in, none, string
+	var carg2 **C.char             // in, transfer: none, C Pointers: 2, Name: array[utf8], nullable, array (inner: *typesystem.StringPrimitive, zero-terminated)
+	var carg3 C.int                // in, none, casted
+	var carg4 C.int                // in, none, casted
+	var carg5 C.GtkTextDirection   // in, none, casted
+	var carg6 C.GtkIconLookupFlags // in, none, casted
+	var cret  *C.GtkIconPaintable  // return, full, converted
+
+	carg0 = (*C.GtkIconTheme)(UnsafeIconThemeToGlibNone(self))
+	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(iconName)))
+	defer C.free(unsafe.Pointer(carg1))
+	_ = fallbacks
+	_ = carg2
+	panic("unimplemented conversion of []string (const char**)")
+	carg3 = C.int(size)
+	carg4 = C.int(scale)
+	carg5 = C.GtkTextDirection(direction)
+	carg6 = C.GtkIconLookupFlags(flags)
+
+	cret = C.gtk_icon_theme_lookup_icon(carg0, carg1, carg2, carg3, carg4, carg5, carg6)
+	runtime.KeepAlive(self)
+	runtime.KeepAlive(iconName)
+	runtime.KeepAlive(fallbacks)
 	runtime.KeepAlive(size)
 	runtime.KeepAlive(scale)
 	runtime.KeepAlive(direction)
@@ -41423,6 +41799,26 @@ type ListStore interface {
 	//
 	// Deprecated: (since 4.10.0) Use list models
 	InsertBefore(*TreeIter) TreeIter
+	// InsertWithValuesv wraps gtk_list_store_insert_with_valuesv
+	// 
+	// The function takes the following parameters:
+	// 
+	// 	- position int: position to insert the new row, or -1 for last 
+	// 	- columns []int: an array of column numbers 
+	// 	- values []gobject.Value: an array of GValues 
+	// 
+	// The function returns the following values:
+	// 
+	// 	- iter TreeIter: An unset `GtkTreeIter` to set to the new row 
+	//
+	// A variant of gtk_list_store_insert_with_values() which
+	// takes the columns and values as two arrays, instead of
+	// varargs.
+	// 
+	// This function is mainly intended for language-bindings.
+	//
+	// Deprecated: (since 4.10.0) Use list models
+	InsertWithValuesv(int, []int, []gobject.Value) TreeIter
 	// IterIsValid wraps gtk_list_store_iter_is_valid
 	// 
 	// The function takes the following parameters:
@@ -41493,6 +41889,20 @@ type ListStore interface {
 	//
 	// Deprecated: (since 4.10.0) Use list models
 	Remove(*TreeIter) bool
+	// Reorder wraps gtk_list_store_reorder
+	// 
+	// The function takes the following parameters:
+	// 
+	// 	- newOrder []int: an array of integers mapping the new
+	//   position of each child to its old position before the re-ordering,
+	//   i.e. @new_order`[newpos] = oldpos`. It must have
+	//   exactly as many items as the list store’s length. 
+	//
+	// Reorders @store to follow the order indicated by @new_order. Note that
+	// this function only works with unsorted stores.
+	//
+	// Deprecated: (since 4.10.0) Use list models
+	Reorder([]int)
 	// SetColumnTypes wraps gtk_list_store_set_column_types
 	// 
 	// The function takes the following parameters:
@@ -41524,6 +41934,22 @@ type ListStore interface {
 	//
 	// Deprecated: (since 4.10.0) Use list models
 	SetValue(*TreeIter, int, *gobject.Value)
+	// SetValuesv wraps gtk_list_store_set_valuesv
+	// 
+	// The function takes the following parameters:
+	// 
+	// 	- iter *TreeIter: A valid `GtkTreeIter` for the row being modified 
+	// 	- columns []int: an array of column numbers 
+	// 	- values []gobject.Value: an array of GValues 
+	//
+	// A variant of gtk_list_store_set_valist() which
+	// takes the columns and values as two arrays, instead of
+	// varargs. This function is mainly intended for
+	// language-bindings and in case the number of columns to
+	// change is not known until run-time.
+	//
+	// Deprecated: (since 4.10.0) Use list models
+	SetValuesv(*TreeIter, []int, []gobject.Value)
 	// Swap wraps gtk_list_store_swap
 	// 
 	// The function takes the following parameters:
@@ -41765,6 +42191,59 @@ func (listStore *ListStoreInstance) InsertBefore(sibling *TreeIter) TreeIter {
 	return iter
 }
 
+// InsertWithValuesv wraps gtk_list_store_insert_with_valuesv
+// 
+// The function takes the following parameters:
+// 
+// 	- position int: position to insert the new row, or -1 for last 
+// 	- columns []int: an array of column numbers 
+// 	- values []gobject.Value: an array of GValues 
+// 
+// The function returns the following values:
+// 
+// 	- iter TreeIter: An unset `GtkTreeIter` to set to the new row 
+//
+// A variant of gtk_list_store_insert_with_values() which
+// takes the columns and values as two arrays, instead of
+// varargs.
+// 
+// This function is mainly intended for language-bindings.
+//
+// Deprecated: (since 4.10.0) Use list models
+func (listStore *ListStoreInstance) InsertWithValuesv(position int, columns []int, values []gobject.Value) TreeIter {
+	var carg0 *C.GtkListStore // in, none, converted
+	var carg2 C.int           // in, none, casted
+	var carg3 *C.int          // in, transfer: none, C Pointers: 1, Name: array[gint], array (inner: *typesystem.CastablePrimitive, length-by: carg5)
+	var carg4 *C.GValue       // in, transfer: none, C Pointers: 1, Name: array[Value], array (inner: *typesystem.Record, length-by: carg5)
+	var carg5 C.int           // implicit
+	var carg1 C.GtkTreeIter   // out, transfer: none, C Pointers: 0, Name: TreeIter, optional, caller-allocates
+
+	carg0 = (*C.GtkListStore)(UnsafeListStoreToGlibNone(listStore))
+	carg2 = C.int(position)
+	_ = columns
+	_ = carg3
+	_ = carg5
+	panic("unimplemented conversion of []int (int*)")
+	_ = values
+	_ = carg4
+	_ = carg5
+	panic("unimplemented conversion of []gobject.Value (GValue*)")
+
+	C.gtk_list_store_insert_with_valuesv(carg0, &carg1, carg2, carg3, carg4, carg5)
+	runtime.KeepAlive(listStore)
+	runtime.KeepAlive(position)
+	runtime.KeepAlive(columns)
+	runtime.KeepAlive(values)
+
+	var iter TreeIter
+
+	_ = iter
+	_ = carg1
+	panic("unimplemented conversion of TreeIter (GtkTreeIter)")
+
+	return iter
+}
+
 // IterIsValid wraps gtk_list_store_iter_is_valid
 // 
 // The function takes the following parameters:
@@ -41924,6 +42403,33 @@ func (listStore *ListStoreInstance) Remove(iter *TreeIter) bool {
 	return goret
 }
 
+// Reorder wraps gtk_list_store_reorder
+// 
+// The function takes the following parameters:
+// 
+// 	- newOrder []int: an array of integers mapping the new
+//   position of each child to its old position before the re-ordering,
+//   i.e. @new_order`[newpos] = oldpos`. It must have
+//   exactly as many items as the list store’s length. 
+//
+// Reorders @store to follow the order indicated by @new_order. Note that
+// this function only works with unsorted stores.
+//
+// Deprecated: (since 4.10.0) Use list models
+func (store *ListStoreInstance) Reorder(newOrder []int) {
+	var carg0 *C.GtkListStore // in, none, converted
+	var carg1 *C.int          // in, transfer: none, C Pointers: 1, Name: array[gint], array (inner: *typesystem.CastablePrimitive, zero-terminated)
+
+	carg0 = (*C.GtkListStore)(UnsafeListStoreToGlibNone(store))
+	_ = newOrder
+	_ = carg1
+	panic("unimplemented conversion of []int (int*)")
+
+	C.gtk_list_store_reorder(carg0, carg1)
+	runtime.KeepAlive(store)
+	runtime.KeepAlive(newOrder)
+}
+
 // SetColumnTypes wraps gtk_list_store_set_column_types
 // 
 // The function takes the following parameters:
@@ -41985,6 +42491,46 @@ func (listStore *ListStoreInstance) SetValue(iter *TreeIter, column int, value *
 	runtime.KeepAlive(iter)
 	runtime.KeepAlive(column)
 	runtime.KeepAlive(value)
+}
+
+// SetValuesv wraps gtk_list_store_set_valuesv
+// 
+// The function takes the following parameters:
+// 
+// 	- iter *TreeIter: A valid `GtkTreeIter` for the row being modified 
+// 	- columns []int: an array of column numbers 
+// 	- values []gobject.Value: an array of GValues 
+//
+// A variant of gtk_list_store_set_valist() which
+// takes the columns and values as two arrays, instead of
+// varargs. This function is mainly intended for
+// language-bindings and in case the number of columns to
+// change is not known until run-time.
+//
+// Deprecated: (since 4.10.0) Use list models
+func (listStore *ListStoreInstance) SetValuesv(iter *TreeIter, columns []int, values []gobject.Value) {
+	var carg0 *C.GtkListStore // in, none, converted
+	var carg1 *C.GtkTreeIter  // in, none, converted
+	var carg2 *C.int          // in, transfer: none, C Pointers: 1, Name: array[gint], array (inner: *typesystem.CastablePrimitive, length-by: carg4)
+	var carg3 *C.GValue       // in, transfer: none, C Pointers: 1, Name: array[Value], array (inner: *typesystem.Record, length-by: carg4)
+	var carg4 C.int           // implicit
+
+	carg0 = (*C.GtkListStore)(UnsafeListStoreToGlibNone(listStore))
+	carg1 = (*C.GtkTreeIter)(UnsafeTreeIterToGlibNone(iter))
+	_ = columns
+	_ = carg2
+	_ = carg4
+	panic("unimplemented conversion of []int (int*)")
+	_ = values
+	_ = carg3
+	_ = carg4
+	panic("unimplemented conversion of []gobject.Value (GValue*)")
+
+	C.gtk_list_store_set_valuesv(carg0, carg1, carg2, carg3, carg4)
+	runtime.KeepAlive(listStore)
+	runtime.KeepAlive(iter)
+	runtime.KeepAlive(columns)
+	runtime.KeepAlive(values)
 }
 
 // Swap wraps gtk_list_store_swap
@@ -56199,6 +56745,20 @@ type Snapshot interface {
 	gdk.Snapshot
 	upcastTo() *SnapshotInstance
 
+	// AppendBorder wraps gtk_snapshot_append_border
+	// 
+	// The function takes the following parameters:
+	// 
+	// 	- outline *gsk.RoundedRect: the outline of the border 
+	// 	- borderWidth [4]float32: the stroke width of the border on
+	//   the top, right, bottom and left side respectively. 
+	// 	- borderColor [4]gdk.RGBA: the color used on the top, right,
+	//   bottom and left side. 
+	//
+	// Appends a stroked border rectangle inside the given @outline.
+	// 
+	// The four sides of the border can have different widths and colors.
+	AppendBorder(*gsk.RoundedRect, [4]float32, [4]gdk.RGBA)
 	// AppendColor wraps gtk_snapshot_append_color
 	// 
 	// The function takes the following parameters:
@@ -56859,6 +57419,41 @@ func NewSnapshotInstance() Snapshot {
 	goret = UnsafeSnapshotFromGlibFull(unsafe.Pointer(cret))
 
 	return goret
+}
+
+// AppendBorder wraps gtk_snapshot_append_border
+// 
+// The function takes the following parameters:
+// 
+// 	- outline *gsk.RoundedRect: the outline of the border 
+// 	- borderWidth [4]float32: the stroke width of the border on
+//   the top, right, bottom and left side respectively. 
+// 	- borderColor [4]gdk.RGBA: the color used on the top, right,
+//   bottom and left side. 
+//
+// Appends a stroked border rectangle inside the given @outline.
+// 
+// The four sides of the border can have different widths and colors.
+func (snapshot *SnapshotInstance) AppendBorder(outline *gsk.RoundedRect, borderWidth [4]float32, borderColor [4]gdk.RGBA) {
+	var carg0 *C.Snapshot       // in, none, converted
+	var carg1 *C.GskRoundedRect // in, none, converted
+	var carg2 *C.float          // in, transfer: none, C Pointers: 1, Name: array[gfloat], array (inner: *typesystem.CastablePrimitive, fixed-size: 4)
+	var carg3 *C.GdkRGBA        // in, transfer: none, C Pointers: 1, Name: array[RGBA], array (inner: *typesystem.Record, fixed-size: 4)
+
+	carg0 = (*C.Snapshot)(UnsafeSnapshotToGlibNone(snapshot))
+	carg1 = (*C.GskRoundedRect)(gsk.UnsafeRoundedRectToGlibNone(outline))
+	_ = borderWidth
+	_ = carg2
+	panic("unimplemented conversion of [4]float32 (const float*)")
+	_ = borderColor
+	_ = carg3
+	panic("unimplemented conversion of [4]gdk.RGBA (const GdkRGBA*)")
+
+	C.gtk_snapshot_append_border(carg0, carg1, carg2, carg3)
+	runtime.KeepAlive(snapshot)
+	runtime.KeepAlive(outline)
+	runtime.KeepAlive(borderWidth)
+	runtime.KeepAlive(borderColor)
 }
 
 // AppendColor wraps gtk_snapshot_append_color
@@ -59638,6 +60233,27 @@ type StringList interface {
 	// @position must be smaller than the current
 	// length of the list.
 	Remove(uint)
+	// Splice wraps gtk_string_list_splice
+	// 
+	// The function takes the following parameters:
+	// 
+	// 	- position uint: the position at which to make the change 
+	// 	- nRemovals uint: the number of strings to remove 
+	// 	- additions []string (nullable): The strings to add 
+	//
+	// Changes @self by removing @n_removals strings and adding @additions
+	// to it.
+	// 
+	// This function is more efficient than [method@Gtk.StringList.append]
+	// and [method@Gtk.StringList.remove], because it only emits the
+	// ::items-changed signal once for the change.
+	// 
+	// This function copies the strings in @additions.
+	// 
+	// The parameters @position and @n_removals must be correct (ie:
+	// @position + @n_removals must be less than or equal to the length
+	// of the list at the time this function is called).
+	Splice(uint, uint, []string)
 	// Take wraps gtk_string_list_take
 	// 
 	// The function takes the following parameters:
@@ -59691,6 +60307,35 @@ func UnsafeStringListToGlibNone(c StringList) unsafe.Pointer {
 // UnsafeStringListToGlibFull is used to convert the instance to it's C value GtkStringList, while removeing the finalizer. This is used by the bindings internally.
 func UnsafeStringListToGlibFull(c StringList) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
+}
+
+// NewStringListInstance wraps gtk_string_list_new
+// 
+// The function takes the following parameters:
+// 
+// 	- strings []string (nullable): The strings to put in the model 
+// 
+// The function returns the following values:
+// 
+// 	- goret StringList 
+//
+// Creates a new `GtkStringList` with the given @strings.
+func NewStringListInstance(strings []string) StringList {
+	var carg1 **C.char         // in, transfer: none, C Pointers: 2, Name: array[utf8], nullable, array (inner: *typesystem.StringPrimitive, zero-terminated)
+	var cret  *C.GtkStringList // return, full, converted
+
+	_ = strings
+	_ = carg1
+	panic("unimplemented conversion of []string (const char* const*)")
+
+	cret = C.gtk_string_list_new(carg1)
+	runtime.KeepAlive(strings)
+
+	var goret StringList
+
+	goret = UnsafeStringListFromGlibFull(unsafe.Pointer(cret))
+
+	return goret
 }
 
 // Append wraps gtk_string_list_append
@@ -59771,6 +60416,46 @@ func (self *StringListInstance) Remove(position uint) {
 	C.gtk_string_list_remove(carg0, carg1)
 	runtime.KeepAlive(self)
 	runtime.KeepAlive(position)
+}
+
+// Splice wraps gtk_string_list_splice
+// 
+// The function takes the following parameters:
+// 
+// 	- position uint: the position at which to make the change 
+// 	- nRemovals uint: the number of strings to remove 
+// 	- additions []string (nullable): The strings to add 
+//
+// Changes @self by removing @n_removals strings and adding @additions
+// to it.
+// 
+// This function is more efficient than [method@Gtk.StringList.append]
+// and [method@Gtk.StringList.remove], because it only emits the
+// ::items-changed signal once for the change.
+// 
+// This function copies the strings in @additions.
+// 
+// The parameters @position and @n_removals must be correct (ie:
+// @position + @n_removals must be less than or equal to the length
+// of the list at the time this function is called).
+func (self *StringListInstance) Splice(position uint, nRemovals uint, additions []string) {
+	var carg0 *C.GtkStringList // in, none, converted
+	var carg1 C.guint          // in, none, casted
+	var carg2 C.guint          // in, none, casted
+	var carg3 **C.char         // in, transfer: none, C Pointers: 2, Name: array[utf8], nullable, array (inner: *typesystem.StringPrimitive, zero-terminated)
+
+	carg0 = (*C.GtkStringList)(UnsafeStringListToGlibNone(self))
+	carg1 = C.guint(position)
+	carg2 = C.guint(nRemovals)
+	_ = additions
+	_ = carg3
+	panic("unimplemented conversion of []string (const char* const*)")
+
+	C.gtk_string_list_splice(carg0, carg1, carg2, carg3)
+	runtime.KeepAlive(self)
+	runtime.KeepAlive(position)
+	runtime.KeepAlive(nRemovals)
+	runtime.KeepAlive(additions)
 }
 
 // Take wraps gtk_string_list_take
@@ -68667,6 +69352,26 @@ type TreeStore interface {
 	//
 	// Deprecated: (since 4.10.0) Use [class@Gtk.TreeListModel] instead
 	InsertBefore(*TreeIter, *TreeIter) TreeIter
+	// InsertWithValuesv wraps gtk_tree_store_insert_with_valuesv
+	// 
+	// The function takes the following parameters:
+	// 
+	// 	- parent *TreeIter (nullable): A valid `GtkTreeIter` 
+	// 	- position int: position to insert the new row, or -1 for last 
+	// 	- columns []int: an array of column numbers 
+	// 	- values []gobject.Value: an array of GValues 
+	// 
+	// The function returns the following values:
+	// 
+	// 	- iter TreeIter: An unset `GtkTreeIter` to set the new row 
+	//
+	// A variant of gtk_tree_store_insert_with_values() which takes
+	// the columns and values as two arrays, instead of varargs.
+	// 
+	// This function is mainly intended for language bindings.
+	//
+	// Deprecated: (since 4.10.0) Use [class@Gtk.TreeListModel] instead
+	InsertWithValuesv(*TreeIter, int, []int, []gobject.Value) TreeIter
 	// IsAncestor wraps gtk_tree_store_is_ancestor
 	// 
 	// The function takes the following parameters:
@@ -68820,6 +69525,23 @@ type TreeStore interface {
 	//
 	// Deprecated: (since 4.10.0) Use [class@Gtk.TreeListModel] instead
 	SetValue(*TreeIter, int, *gobject.Value)
+	// SetValuesv wraps gtk_tree_store_set_valuesv
+	// 
+	// The function takes the following parameters:
+	// 
+	// 	- iter *TreeIter: A valid `GtkTreeIter` for the row being modified 
+	// 	- columns []int: an array of column numbers 
+	// 	- values []gobject.Value: an array of GValues 
+	//
+	// A variant of gtk_tree_store_set_valist() which takes
+	// the columns and values as two arrays, instead of using variadic
+	// arguments.
+	// 
+	// This function is mainly intended for language bindings or in case
+	// the number of columns to change is not known until run-time.
+	//
+	// Deprecated: (since 4.10.0) Use [class@Gtk.TreeListModel] instead
+	SetValuesv(*TreeIter, []int, []gobject.Value)
 	// Swap wraps gtk_tree_store_swap
 	// 
 	// The function takes the following parameters:
@@ -69109,6 +69831,64 @@ func (treeStore *TreeStoreInstance) InsertBefore(parent *TreeIter, sibling *Tree
 	runtime.KeepAlive(treeStore)
 	runtime.KeepAlive(parent)
 	runtime.KeepAlive(sibling)
+
+	var iter TreeIter
+
+	_ = iter
+	_ = carg1
+	panic("unimplemented conversion of TreeIter (GtkTreeIter)")
+
+	return iter
+}
+
+// InsertWithValuesv wraps gtk_tree_store_insert_with_valuesv
+// 
+// The function takes the following parameters:
+// 
+// 	- parent *TreeIter (nullable): A valid `GtkTreeIter` 
+// 	- position int: position to insert the new row, or -1 for last 
+// 	- columns []int: an array of column numbers 
+// 	- values []gobject.Value: an array of GValues 
+// 
+// The function returns the following values:
+// 
+// 	- iter TreeIter: An unset `GtkTreeIter` to set the new row 
+//
+// A variant of gtk_tree_store_insert_with_values() which takes
+// the columns and values as two arrays, instead of varargs.
+// 
+// This function is mainly intended for language bindings.
+//
+// Deprecated: (since 4.10.0) Use [class@Gtk.TreeListModel] instead
+func (treeStore *TreeStoreInstance) InsertWithValuesv(parent *TreeIter, position int, columns []int, values []gobject.Value) TreeIter {
+	var carg0 *C.GtkTreeStore // in, none, converted
+	var carg2 *C.GtkTreeIter  // in, none, converted, nullable
+	var carg3 C.int           // in, none, casted
+	var carg4 *C.int          // in, transfer: none, C Pointers: 1, Name: array[gint], array (inner: *typesystem.CastablePrimitive, length-by: carg6)
+	var carg5 *C.GValue       // in, transfer: none, C Pointers: 1, Name: array[Value], array (inner: *typesystem.Record, length-by: carg6)
+	var carg6 C.int           // implicit
+	var carg1 C.GtkTreeIter   // out, transfer: none, C Pointers: 0, Name: TreeIter, optional, caller-allocates
+
+	carg0 = (*C.GtkTreeStore)(UnsafeTreeStoreToGlibNone(treeStore))
+	if parent != nil {
+		carg2 = (*C.GtkTreeIter)(UnsafeTreeIterToGlibNone(parent))
+	}
+	carg3 = C.int(position)
+	_ = columns
+	_ = carg4
+	_ = carg6
+	panic("unimplemented conversion of []int (int*)")
+	_ = values
+	_ = carg5
+	_ = carg6
+	panic("unimplemented conversion of []gobject.Value (GValue*)")
+
+	C.gtk_tree_store_insert_with_valuesv(carg0, &carg1, carg2, carg3, carg4, carg5, carg6)
+	runtime.KeepAlive(treeStore)
+	runtime.KeepAlive(parent)
+	runtime.KeepAlive(position)
+	runtime.KeepAlive(columns)
+	runtime.KeepAlive(values)
 
 	var iter TreeIter
 
@@ -69437,6 +70217,47 @@ func (treeStore *TreeStoreInstance) SetValue(iter *TreeIter, column int, value *
 	runtime.KeepAlive(iter)
 	runtime.KeepAlive(column)
 	runtime.KeepAlive(value)
+}
+
+// SetValuesv wraps gtk_tree_store_set_valuesv
+// 
+// The function takes the following parameters:
+// 
+// 	- iter *TreeIter: A valid `GtkTreeIter` for the row being modified 
+// 	- columns []int: an array of column numbers 
+// 	- values []gobject.Value: an array of GValues 
+//
+// A variant of gtk_tree_store_set_valist() which takes
+// the columns and values as two arrays, instead of using variadic
+// arguments.
+// 
+// This function is mainly intended for language bindings or in case
+// the number of columns to change is not known until run-time.
+//
+// Deprecated: (since 4.10.0) Use [class@Gtk.TreeListModel] instead
+func (treeStore *TreeStoreInstance) SetValuesv(iter *TreeIter, columns []int, values []gobject.Value) {
+	var carg0 *C.GtkTreeStore // in, none, converted
+	var carg1 *C.GtkTreeIter  // in, none, converted
+	var carg2 *C.int          // in, transfer: none, C Pointers: 1, Name: array[gint], array (inner: *typesystem.CastablePrimitive, length-by: carg4)
+	var carg3 *C.GValue       // in, transfer: none, C Pointers: 1, Name: array[Value], array (inner: *typesystem.Record, length-by: carg4)
+	var carg4 C.int           // implicit
+
+	carg0 = (*C.GtkTreeStore)(UnsafeTreeStoreToGlibNone(treeStore))
+	carg1 = (*C.GtkTreeIter)(UnsafeTreeIterToGlibNone(iter))
+	_ = columns
+	_ = carg2
+	_ = carg4
+	panic("unimplemented conversion of []int (int*)")
+	_ = values
+	_ = carg3
+	_ = carg4
+	panic("unimplemented conversion of []gobject.Value (GValue*)")
+
+	C.gtk_tree_store_set_valuesv(carg0, carg1, carg2, carg3, carg4)
+	runtime.KeepAlive(treeStore)
+	runtime.KeepAlive(iter)
+	runtime.KeepAlive(columns)
+	runtime.KeepAlive(values)
 }
 
 // Swap wraps gtk_tree_store_swap
@@ -73682,6 +74503,16 @@ type Widget interface {
 	// This function is only useful for container implementations
 	// and should never be called by an application.
 	SetChildVisible(bool)
+	// SetCSSClasses wraps gtk_widget_set_css_classes
+	// 
+	// The function takes the following parameters:
+	// 
+	// 	- classes []string: 
+	//   %NULL-terminated list of style classes to apply to @widget. 
+	//
+	// Clear all style classes applied to @widget
+	// and replace them with @classes.
+	SetCSSClasses([]string)
 	// SetCursor wraps gtk_widget_set_cursor
 	// 
 	// The function takes the following parameters:
@@ -77773,6 +78604,29 @@ func (widget *WidgetInstance) SetChildVisible(childVisible bool) {
 	C.gtk_widget_set_child_visible(carg0, carg1)
 	runtime.KeepAlive(widget)
 	runtime.KeepAlive(childVisible)
+}
+
+// SetCSSClasses wraps gtk_widget_set_css_classes
+// 
+// The function takes the following parameters:
+// 
+// 	- classes []string: 
+//   %NULL-terminated list of style classes to apply to @widget. 
+//
+// Clear all style classes applied to @widget
+// and replace them with @classes.
+func (widget *WidgetInstance) SetCSSClasses(classes []string) {
+	var carg0 *C.GtkWidget // in, none, converted
+	var carg1 **C.char     // in, transfer: none, C Pointers: 2, Name: array[utf8], array (inner: *typesystem.StringPrimitive, zero-terminated)
+
+	carg0 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(widget))
+	_ = classes
+	_ = carg1
+	panic("unimplemented conversion of []string (const char**)")
+
+	C.gtk_widget_set_css_classes(carg0, carg1)
+	runtime.KeepAlive(widget)
+	runtime.KeepAlive(classes)
 }
 
 // SetCursor wraps gtk_widget_set_cursor
@@ -82047,6 +82901,15 @@ type AboutDialog interface {
 	ShortcutManager
 	upcastToGtkAboutDialog() *AboutDialogInstance
 
+	// AddCreditSection wraps gtk_about_dialog_add_credit_section
+	// 
+	// The function takes the following parameters:
+	// 
+	// 	- sectionName string: The name of the section 
+	// 	- people []string: The people who belong to that section 
+	//
+	// Creates a new section in the "Credits" page.
+	AddCreditSection(string, []string)
 	// GetArtists wraps gtk_about_dialog_get_artists
 	// The function returns the following values:
 	// 
@@ -82164,6 +83027,25 @@ type AboutDialog interface {
 	// Returns whether the license text in the about dialog is
 	// automatically wrapped.
 	GetWrapLicense() bool
+	// SetArtists wraps gtk_about_dialog_set_artists
+	// 
+	// The function takes the following parameters:
+	// 
+	// 	- artists []string: the authors of the artwork
+	//   of the application 
+	//
+	// Sets the names of the artists to be displayed
+	// in the "Credits" page.
+	SetArtists([]string)
+	// SetAuthors wraps gtk_about_dialog_set_authors
+	// 
+	// The function takes the following parameters:
+	// 
+	// 	- authors []string: the authors of the application 
+	//
+	// Sets the names of the authors which are displayed
+	// in the "Credits" page of the about dialog.
+	SetAuthors([]string)
 	// SetComments wraps gtk_about_dialog_set_comments
 	// 
 	// The function takes the following parameters:
@@ -82184,6 +83066,16 @@ type AboutDialog interface {
 	// 
 	// This should be a short string of one or two lines.
 	SetCopyright(string)
+	// SetDocumenters wraps gtk_about_dialog_set_documenters
+	// 
+	// The function takes the following parameters:
+	// 
+	// 	- documenters []string: the authors of the documentation
+	//   of the application 
+	//
+	// Sets the names of the documenters which are displayed
+	// in the "Credits" page.
+	SetDocumenters([]string)
 	// SetLicense wraps gtk_about_dialog_set_license
 	// 
 	// The function takes the following parameters:
@@ -82376,6 +83268,32 @@ func NewAboutDialogInstance() Widget {
 	goret = UnsafeWidgetFromGlibNone(unsafe.Pointer(cret))
 
 	return goret
+}
+
+// AddCreditSection wraps gtk_about_dialog_add_credit_section
+// 
+// The function takes the following parameters:
+// 
+// 	- sectionName string: The name of the section 
+// 	- people []string: The people who belong to that section 
+//
+// Creates a new section in the "Credits" page.
+func (about *AboutDialogInstance) AddCreditSection(sectionName string, people []string) {
+	var carg0 *C.GtkAboutDialog // in, none, converted
+	var carg1 *C.gchar          // in, none, string
+	var carg2 **C.char          // in, transfer: none, C Pointers: 2, Name: array[utf8], array (inner: *typesystem.StringPrimitive, zero-terminated)
+
+	carg0 = (*C.GtkAboutDialog)(UnsafeAboutDialogToGlibNone(about))
+	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(sectionName)))
+	defer C.free(unsafe.Pointer(carg1))
+	_ = people
+	_ = carg2
+	panic("unimplemented conversion of []string (const char**)")
+
+	C.gtk_about_dialog_add_credit_section(carg0, carg1, carg2)
+	runtime.KeepAlive(about)
+	runtime.KeepAlive(sectionName)
+	runtime.KeepAlive(people)
 }
 
 // GetArtists wraps gtk_about_dialog_get_artists
@@ -82743,6 +83661,51 @@ func (about *AboutDialogInstance) GetWrapLicense() bool {
 	return goret
 }
 
+// SetArtists wraps gtk_about_dialog_set_artists
+// 
+// The function takes the following parameters:
+// 
+// 	- artists []string: the authors of the artwork
+//   of the application 
+//
+// Sets the names of the artists to be displayed
+// in the "Credits" page.
+func (about *AboutDialogInstance) SetArtists(artists []string) {
+	var carg0 *C.GtkAboutDialog // in, none, converted
+	var carg1 **C.char          // in, transfer: none, C Pointers: 2, Name: array[utf8], array (inner: *typesystem.StringPrimitive, zero-terminated)
+
+	carg0 = (*C.GtkAboutDialog)(UnsafeAboutDialogToGlibNone(about))
+	_ = artists
+	_ = carg1
+	panic("unimplemented conversion of []string (const char**)")
+
+	C.gtk_about_dialog_set_artists(carg0, carg1)
+	runtime.KeepAlive(about)
+	runtime.KeepAlive(artists)
+}
+
+// SetAuthors wraps gtk_about_dialog_set_authors
+// 
+// The function takes the following parameters:
+// 
+// 	- authors []string: the authors of the application 
+//
+// Sets the names of the authors which are displayed
+// in the "Credits" page of the about dialog.
+func (about *AboutDialogInstance) SetAuthors(authors []string) {
+	var carg0 *C.GtkAboutDialog // in, none, converted
+	var carg1 **C.char          // in, transfer: none, C Pointers: 2, Name: array[utf8], array (inner: *typesystem.StringPrimitive, zero-terminated)
+
+	carg0 = (*C.GtkAboutDialog)(UnsafeAboutDialogToGlibNone(about))
+	_ = authors
+	_ = carg1
+	panic("unimplemented conversion of []string (const char**)")
+
+	C.gtk_about_dialog_set_authors(carg0, carg1)
+	runtime.KeepAlive(about)
+	runtime.KeepAlive(authors)
+}
+
 // SetComments wraps gtk_about_dialog_set_comments
 // 
 // The function takes the following parameters:
@@ -82789,6 +83752,29 @@ func (about *AboutDialogInstance) SetCopyright(copyright string) {
 	C.gtk_about_dialog_set_copyright(carg0, carg1)
 	runtime.KeepAlive(about)
 	runtime.KeepAlive(copyright)
+}
+
+// SetDocumenters wraps gtk_about_dialog_set_documenters
+// 
+// The function takes the following parameters:
+// 
+// 	- documenters []string: the authors of the documentation
+//   of the application 
+//
+// Sets the names of the documenters which are displayed
+// in the "Credits" page.
+func (about *AboutDialogInstance) SetDocumenters(documenters []string) {
+	var carg0 *C.GtkAboutDialog // in, none, converted
+	var carg1 **C.char          // in, transfer: none, C Pointers: 2, Name: array[utf8], array (inner: *typesystem.StringPrimitive, zero-terminated)
+
+	carg0 = (*C.GtkAboutDialog)(UnsafeAboutDialogToGlibNone(about))
+	_ = documenters
+	_ = carg1
+	panic("unimplemented conversion of []string (const char**)")
+
+	C.gtk_about_dialog_set_documenters(carg0, carg1)
+	runtime.KeepAlive(about)
+	runtime.KeepAlive(documenters)
 }
 
 // SetLicense wraps gtk_about_dialog_set_license
@@ -98618,6 +99604,36 @@ func UnsafeDropDownToGlibNone(c DropDown) unsafe.Pointer {
 // UnsafeDropDownToGlibFull is used to convert the instance to it's C value GtkDropDown, while removeing the finalizer. This is used by the bindings internally.
 func UnsafeDropDownToGlibFull(c DropDown) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
+}
+
+// NewDropDownInstanceFromStrings wraps gtk_drop_down_new_from_strings
+// 
+// The function takes the following parameters:
+// 
+// 	- strings []string: The strings to put in the dropdown 
+// 
+// The function returns the following values:
+// 
+// 	- goret Widget 
+//
+// Creates a new `GtkDropDown` that is populated with
+// the strings.
+func NewDropDownInstanceFromStrings(strings []string) Widget {
+	var carg1 **C.char     // in, transfer: none, C Pointers: 2, Name: array[utf8], array (inner: *typesystem.StringPrimitive, zero-terminated)
+	var cret  *C.GtkWidget // return, none, converted
+
+	_ = strings
+	_ = carg1
+	panic("unimplemented conversion of []string (const char* const*)")
+
+	cret = C.gtk_drop_down_new_from_strings(carg1)
+	runtime.KeepAlive(strings)
+
+	var goret Widget
+
+	goret = UnsafeWidgetFromGlibNone(unsafe.Pointer(cret))
+
+	return goret
 }
 
 // GetEnableSearch wraps gtk_drop_down_get_enable_search
@@ -135101,6 +136117,14 @@ type ScaleButton interface {
 	//
 	// Sets the style of the button.
 	SetHasFrame(bool)
+	// SetIcons wraps gtk_scale_button_set_icons
+	// 
+	// The function takes the following parameters:
+	// 
+	// 	- icons []string: a %NULL-terminated array of icon names 
+	//
+	// Sets the icons to be used by the scale button.
+	SetIcons([]string)
 	// SetValue wraps gtk_scale_button_set_value
 	// 
 	// The function takes the following parameters:
@@ -135168,6 +136192,53 @@ func UnsafeScaleButtonToGlibNone(c ScaleButton) unsafe.Pointer {
 // UnsafeScaleButtonToGlibFull is used to convert the instance to it's C value GtkScaleButton, while removeing the finalizer. This is used by the bindings internally.
 func UnsafeScaleButtonToGlibFull(c ScaleButton) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
+}
+
+// NewScaleButtonInstance wraps gtk_scale_button_new
+// 
+// The function takes the following parameters:
+// 
+// 	- min float64: the minimum value of the scale (usually 0) 
+// 	- max float64: the maximum value of the scale (usually 100) 
+// 	- step float64: the stepping of value when a scroll-wheel event,
+//   or up/down arrow event occurs (usually 2) 
+// 	- icons []string (nullable): a %NULL-terminated
+//   array of icon names, or %NULL if you want to set the list
+//   later with gtk_scale_button_set_icons() 
+// 
+// The function returns the following values:
+// 
+// 	- goret Widget 
+//
+// Creates a `GtkScaleButton`.
+// 
+// The new scale button has a range between @min and @max,
+// with a stepping of @step.
+func NewScaleButtonInstance(min float64, max float64, step float64, icons []string) Widget {
+	var carg1 C.gdouble    // in, none, casted
+	var carg2 C.gdouble    // in, none, casted
+	var carg3 C.gdouble    // in, none, casted
+	var carg4 **C.char     // in, transfer: none, C Pointers: 2, Name: array[utf8], nullable, array (inner: *typesystem.StringPrimitive, zero-terminated)
+	var cret  *C.GtkWidget // return, none, converted
+
+	carg1 = C.gdouble(min)
+	carg2 = C.gdouble(max)
+	carg3 = C.gdouble(step)
+	_ = icons
+	_ = carg4
+	panic("unimplemented conversion of []string (const char**)")
+
+	cret = C.gtk_scale_button_new(carg1, carg2, carg3, carg4)
+	runtime.KeepAlive(min)
+	runtime.KeepAlive(max)
+	runtime.KeepAlive(step)
+	runtime.KeepAlive(icons)
+
+	var goret Widget
+
+	goret = UnsafeWidgetFromGlibNone(unsafe.Pointer(cret))
+
+	return goret
 }
 
 // GetActive wraps gtk_scale_button_get_active
@@ -135374,6 +136445,27 @@ func (button *ScaleButtonInstance) SetHasFrame(hasFrame bool) {
 	C.gtk_scale_button_set_has_frame(carg0, carg1)
 	runtime.KeepAlive(button)
 	runtime.KeepAlive(hasFrame)
+}
+
+// SetIcons wraps gtk_scale_button_set_icons
+// 
+// The function takes the following parameters:
+// 
+// 	- icons []string: a %NULL-terminated array of icon names 
+//
+// Sets the icons to be used by the scale button.
+func (button *ScaleButtonInstance) SetIcons(icons []string) {
+	var carg0 *C.GtkScaleButton // in, none, converted
+	var carg1 **C.char          // in, transfer: none, C Pointers: 2, Name: array[utf8], array (inner: *typesystem.StringPrimitive, zero-terminated)
+
+	carg0 = (*C.GtkScaleButton)(UnsafeScaleButtonToGlibNone(button))
+	_ = icons
+	_ = carg1
+	panic("unimplemented conversion of []string (const char**)")
+
+	C.gtk_scale_button_set_icons(carg0, carg1)
+	runtime.KeepAlive(button)
+	runtime.KeepAlive(icons)
 }
 
 // SetValue wraps gtk_scale_button_set_value
@@ -172649,6 +173741,39 @@ func NewTreePathFirst() *TreePath {
 	return goret
 }
 
+// NewTreePathFromIndicesv wraps gtk_tree_path_new_from_indicesv
+// 
+// The function takes the following parameters:
+// 
+// 	- indices []int: array of indices 
+// 
+// The function returns the following values:
+// 
+// 	- goret *TreePath 
+//
+// Creates a new path with the given @indices array of @length.
+//
+// Deprecated: (since 4.10.0) 
+func NewTreePathFromIndicesv(indices []int) *TreePath {
+	var carg1 *C.int         // in, transfer: none, C Pointers: 1, Name: array[gint], array (inner: *typesystem.CastablePrimitive, length-by: carg2)
+	var carg2 C.gsize        // implicit
+	var cret  *C.GtkTreePath // return, full, converted
+
+	_ = indices
+	_ = carg1
+	_ = carg2
+	panic("unimplemented conversion of []int (int*)")
+
+	cret = C.gtk_tree_path_new_from_indicesv(carg1, carg2)
+	runtime.KeepAlive(indices)
+
+	var goret *TreePath
+
+	goret = UnsafeTreePathFromGlibFull(unsafe.Pointer(cret))
+
+	return goret
+}
+
 // NewTreePathFromString wraps gtk_tree_path_new_from_string
 // 
 // The function takes the following parameters:
@@ -172804,6 +173929,41 @@ func (path *TreePath) GetDepth() int {
 	goret = int(cret)
 
 	return goret
+}
+
+// GetIndicesWithDepth wraps gtk_tree_path_get_indices_with_depth
+// The function returns the following values:
+// 
+// 	- depth int: return location for number of elements
+//   returned in the integer array 
+// 	- goret []int 
+//
+// Returns the current indices of @path.
+// 
+// This is an array of integers, each representing a node in a tree.
+// It also returns the number of elements in the array.
+// The array should not be freed.
+//
+// Deprecated: (since 4.10.0) 
+func (path *TreePath) GetIndicesWithDepth() (int, []int) {
+	var carg0 *C.GtkTreePath // in, none, converted
+	var carg1 C.int          // out, full, casted
+	var cret  *C.int         // return, transfer: none, C Pointers: 1, Name: array[gint], scope: , array (inner: *typesystem.CastablePrimitive)
+
+	carg0 = (*C.GtkTreePath)(UnsafeTreePathToGlibNone(path))
+
+	cret = C.gtk_tree_path_get_indices_with_depth(carg0, &carg1)
+	runtime.KeepAlive(path)
+
+	var depth int
+	var goret []int
+
+	depth = int(carg1)
+	_ = goret
+	_ = cret
+	panic("unimplemented conversion of []int (int*)")
+
+	return depth, goret
 }
 
 // IsAncestor wraps gtk_tree_path_is_ancestor

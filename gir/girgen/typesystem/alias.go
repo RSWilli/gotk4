@@ -39,7 +39,7 @@ func DeclareAlias(e *env, v gir.Alias) *Alias {
 }
 
 func (a *Alias) resolve(e *env) resolvedState {
-	e = e.sub("alias", a.gir.Type)
+	e = e.sub("alias", a.gir.Name)
 
 	ns, subtype := e.findType(&a.gir.Type)
 

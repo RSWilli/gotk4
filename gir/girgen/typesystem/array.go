@@ -158,24 +158,16 @@ func (e *env) getArrayType(arr *gir.Array) *Array {
 			Inner: CouldBeForeign[Type]{}, // no inner type
 		}
 	}
+	
+	ns, inner := e.findType(arr.Type)
+	
+	innerpointers := CountCTypePointers(arr.Type.CType)
+	
 
-	var ns *Namespace
-	var inner Type
-	var innerpointers int
-
-	if arr.Type.CType != "" {
-		ctype := trimCTypePointers(cleanCType(arr.Type.CType))
-		// try to resolve the type by ctype first
-		ns, inner = e.findTypeByCType(ctype)
-
-		innerpointers = CountCTypePointers(arr.Type.CType)
-	} else {
-		// fallback to GIR name
-		ns, inner = e.findTypeByGIRName(arr.Type.Name)
-
-		if constrained, ok := inner.(minPointerConstrainedType); ok {
-			innerpointers = constrained.minPointersRequired()
-		}
+	// if the ctype did not provide any pointers then we override it with the min
+	// required pointers of the inner type
+	if constrained, ok := inner.(minPointerConstrainedType); ok && innerpointers == 0 {
+		innerpointers = constrained.minPointersRequired()
 	}
 
 	if inner == nil {

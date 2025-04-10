@@ -207,29 +207,6 @@ func _gotk4_gtk3_ClipboardReceivedFunc(carg1 *C.GtkClipboard, carg2 *C.GtkSelect
 	fn(clipboard, selectionData)
 }
 
-//export _gotk4_gtk3_ClipboardTargetsReceivedFunc
-func _gotk4_gtk3_ClipboardTargetsReceivedFunc(carg1 *C.GtkClipboard, carg2 *C.GdkAtom, carg3 C.int, carg4 C.gpointer) {
-	var fn ClipboardTargetsReceivedFunc
-	{
-		v := gbox.Get(uintptr(carg4))
-		if v == nil {
-			panic(`callback not found`)
-		}
-		fn = v.(ClipboardTargetsReceivedFunc)
-	}
-
-	var clipboard Clipboard  // in, none, converted
-	var atoms     []gdk.Atom // in, transfer: none, C Pointers: 1, Name: array[Atom], nullable, array (inner: *typesystem.Record, length-by: carg3)
-
-	clipboard = UnsafeClipboardFromGlibNone(unsafe.Pointer(carg1))
-	_ = atoms
-	_ = carg2
-	_ = carg3
-	panic("unimplemented conversion of []gdk.Atom (GdkAtom*)")
-
-	fn(clipboard, atoms)
-}
-
 //export _gotk4_gtk3_ClipboardTextReceivedFunc
 func _gotk4_gtk3_ClipboardTextReceivedFunc(carg1 *C.GtkClipboard, carg2 *C.gchar, carg3 C.gpointer) {
 	var fn ClipboardTextReceivedFunc
@@ -264,12 +241,12 @@ func _gotk4_gtk3_ClipboardURIReceivedFunc(carg1 *C.GtkClipboard, carg2 **C.gchar
 	}
 
 	var clipboard Clipboard // in, none, converted
-	var uris      []*byte   // in, transfer: none, C Pointers: 2, Name: array[gchar], array (inner: *typesystem.CastablePrimitive, zero-terminated)
+	var uris      []string  // in, transfer: none, C Pointers: 2, Name: array[utf8], array (inner: *typesystem.StringPrimitive, zero-terminated)
 
 	clipboard = UnsafeClipboardFromGlibNone(unsafe.Pointer(carg1))
 	_ = uris
 	_ = carg2
-	panic("unimplemented conversion of []*byte (gchar**)")
+	panic("unimplemented conversion of []string (gchar**)")
 
 	fn(clipboard, uris)
 }

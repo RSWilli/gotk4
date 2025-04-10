@@ -22095,6 +22095,42 @@ func UnsafeContentFormatsToGlibFull(c *ContentFormats) unsafe.Pointer {
 	c.native = nil // ContentFormats is invalid from here on
 	return _p
 }
+// NewContentFormats wraps gdk_content_formats_new
+// 
+// The function takes the following parameters:
+// 
+// 	- mimeTypes []string (nullable): Pointer to an
+//   array of mime types 
+// 
+// The function returns the following values:
+// 
+// 	- goret *ContentFormats 
+//
+// Creates a new `GdkContentFormats` from an array of mime types.
+// 
+// The mime types must be valid and different from each other or the
+// behavior of the return value is undefined. If you cannot guarantee
+// this, use [struct@Gdk.ContentFormatsBuilder] instead.
+func NewContentFormats(mimeTypes []string) *ContentFormats {
+	var carg1 **C.char             // in, transfer: none, C Pointers: 2, Name: array[utf8], nullable, array (inner: *typesystem.StringPrimitive, length-by: carg2)
+	var carg2 C.guint              // implicit
+	var cret  *C.GdkContentFormats // return, full, converted
+
+	_ = mimeTypes
+	_ = carg1
+	_ = carg2
+	panic("unimplemented conversion of []string (const char**)")
+
+	cret = C.gdk_content_formats_new(carg1, carg2)
+	runtime.KeepAlive(mimeTypes)
+
+	var goret *ContentFormats
+
+	goret = UnsafeContentFormatsFromGlibFull(unsafe.Pointer(cret))
+
+	return goret
+}
+
 // NewContentFormatsForGType wraps gdk_content_formats_new_for_gtype
 // 
 // The function takes the following parameters:

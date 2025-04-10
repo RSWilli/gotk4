@@ -769,6 +769,15 @@ type Pixbuf interface {
 	// Since 2.36.6, the JPEG loader sets the "comment" option with the comment
 	// EXIF tag.
 	GetOption(string) string
+	// GetOptions wraps gdk_pixbuf_get_options
+	// The function returns the following values:
+	// 
+	// 	- goret *glib.HashTable 
+	//
+	// Returns a `GHashTable` with a list of all the options that may have been
+	// attached to the `pixbuf` when it was loaded, or that may have been
+	// attached by another function using [method@GdkPixbuf.Pixbuf.set_option].
+	GetOptions() *glib.HashTable
 	// GetPixelsWithLength wraps gdk_pixbuf_get_pixels_with_length
 	// The function returns the following values:
 	// 
@@ -1737,6 +1746,38 @@ func NewPixbufInstanceFromStreamFinish(asyncResult gio.AsyncResult) (Pixbuf, err
 	}
 
 	return goret, _goerr
+}
+
+// NewPixbufInstanceFromXPMData wraps gdk_pixbuf_new_from_xpm_data
+// 
+// The function takes the following parameters:
+// 
+// 	- data []string: Pointer to inline XPM data. 
+// 
+// The function returns the following values:
+// 
+// 	- goret Pixbuf 
+//
+// Creates a new pixbuf by parsing XPM data in memory.
+// 
+// This data is commonly the result of including an XPM file into a
+// program's C source.
+func NewPixbufInstanceFromXPMData(data []string) Pixbuf {
+	var carg1 **C.char     // in, transfer: none, C Pointers: 2, Name: array[utf8], array (inner: *typesystem.StringPrimitive, zero-terminated)
+	var cret  *C.GdkPixbuf // return, full, converted
+
+	_ = data
+	_ = carg1
+	panic("unimplemented conversion of []string (const char**)")
+
+	cret = C.gdk_pixbuf_new_from_xpm_data(carg1)
+	runtime.KeepAlive(data)
+
+	var goret Pixbuf
+
+	goret = UnsafePixbufFromGlibFull(unsafe.Pointer(cret))
+
+	return goret
 }
 
 // PixbufInstanceCalculateRowstride wraps gdk_pixbuf_calculate_rowstride
@@ -2724,6 +2765,32 @@ func (pixbuf *PixbufInstance) GetOption(key string) string {
 	var goret string
 
 	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+
+	return goret
+}
+
+// GetOptions wraps gdk_pixbuf_get_options
+// The function returns the following values:
+// 
+// 	- goret *glib.HashTable 
+//
+// Returns a `GHashTable` with a list of all the options that may have been
+// attached to the `pixbuf` when it was loaded, or that may have been
+// attached by another function using [method@GdkPixbuf.Pixbuf.set_option].
+func (pixbuf *PixbufInstance) GetOptions() *glib.HashTable {
+	var carg0 *C.GdkPixbuf  // in, none, converted
+	var cret  *C.GHashTable // return, transfer: container, C Pointers: 1, Name: HashTable, scope: 
+
+	carg0 = (*C.GdkPixbuf)(UnsafePixbufToGlibNone(pixbuf))
+
+	cret = C.gdk_pixbuf_get_options(carg0)
+	runtime.KeepAlive(pixbuf)
+
+	var goret *glib.HashTable
+
+	_ = goret
+	_ = cret
+	panic("unimplemented conversion of *glib.HashTable (GHashTable*)")
 
 	return goret
 }

@@ -6355,6 +6355,34 @@ func (other *Stroke) Copy() *Stroke {
 	return goret
 }
 
+// GetDash wraps gsk_stroke_get_dash
+// The function returns the following values:
+// 
+// 	- nDash uint: number of elements in the array returned 
+// 	- goret []float32 
+//
+// Gets the dash array in use or `NULL` if dashing is disabled.
+func (self *Stroke) GetDash() (uint, []float32) {
+	var carg0 *C.GskStroke // in, none, converted
+	var carg1 C.gsize      // out, full, casted
+	var cret  *C.float     // return, transfer: none, C Pointers: 1, Name: array[gfloat], scope: , array (inner: *typesystem.CastablePrimitive)
+
+	carg0 = (*C.GskStroke)(UnsafeStrokeToGlibNone(self))
+
+	cret = C.gsk_stroke_get_dash(carg0, &carg1)
+	runtime.KeepAlive(self)
+
+	var nDash uint
+	var goret []float32
+
+	nDash = uint(carg1)
+	_ = goret
+	_ = cret
+	panic("unimplemented conversion of []float32 (const float*)")
+
+	return nDash, goret
+}
+
 // GetDashOffset wraps gsk_stroke_get_dash_offset
 // The function returns the following values:
 // 
@@ -6467,6 +6495,52 @@ func (self *Stroke) GetMiterLimit() float32 {
 	goret = float32(cret)
 
 	return goret
+}
+
+// SetDash wraps gsk_stroke_set_dash
+// 
+// The function takes the following parameters:
+// 
+// 	- dash []float32 (nullable): 
+//   the array of dashes 
+//
+// Sets the dash pattern to use by this stroke.
+// 
+// A dash pattern is specified by an array of alternating non-negative
+// values. Each value provides the length of alternate "on" and "off"
+// portions of the stroke.
+// 
+// Each "on" segment will have caps applied as if the segment were a
+// separate contour. In particular, it is valid to use an "on" length
+// of 0 with `GSK_LINE_CAP_ROUND` or `GSK_LINE_CAP_SQUARE` to draw dots
+// or squares along a path.
+// 
+// If @n_dash is 0, if all elements in @dash are 0, or if there are
+// negative values in @dash, then dashing is disabled.
+// 
+// If @n_dash is 1, an alternating "on" and "off" pattern with the
+// single dash length provided is assumed.
+// 
+// If @n_dash is uneven, the dash array will be used with the first
+// element in @dash defining an "on" or "off" in alternating passes
+// through the array.
+// 
+// You can specify a starting offset into the dash with
+// [method@Gsk.Stroke.set_dash_offset].
+func (self *Stroke) SetDash(dash []float32) {
+	var carg0 *C.GskStroke // in, none, converted
+	var carg1 *C.float     // in, transfer: none, C Pointers: 1, Name: array[gfloat], nullable, array (inner: *typesystem.CastablePrimitive, length-by: carg2)
+	var carg2 C.gsize      // implicit
+
+	carg0 = (*C.GskStroke)(UnsafeStrokeToGlibNone(self))
+	_ = dash
+	_ = carg1
+	_ = carg2
+	panic("unimplemented conversion of []float32 (const float*)")
+
+	C.gsk_stroke_set_dash(carg0, carg1, carg2)
+	runtime.KeepAlive(self)
+	runtime.KeepAlive(dash)
 }
 
 // SetDashOffset wraps gsk_stroke_set_dash_offset

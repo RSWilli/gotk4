@@ -17180,6 +17180,63 @@ func UnsafeHashTableIterToGlibFull(h *HashTableIter) unsafe.Pointer {
 	h.native = nil // HashTableIter is invalid from here on
 	return _p
 }
+// GetHashTable wraps g_hash_table_iter_get_hash_table
+// The function returns the following values:
+// 
+// 	- goret *HashTable 
+//
+// Returns the #GHashTable associated with @iter.
+func (iter *HashTableIter) GetHashTable() *HashTable {
+	var carg0 *C.GHashTableIter // in, none, converted
+	var cret  *C.GHashTable     // return, none, converted
+
+	carg0 = (*C.GHashTableIter)(UnsafeHashTableIterToGlibNone(iter))
+
+	cret = C.g_hash_table_iter_get_hash_table(carg0)
+	runtime.KeepAlive(iter)
+
+	var goret *HashTable
+
+	goret = UnsafeHashTableFromGlibNone(unsafe.Pointer(cret))
+
+	return goret
+}
+
+// Init wraps g_hash_table_iter_init
+// 
+// The function takes the following parameters:
+// 
+// 	- hashTable *HashTable: a #GHashTable 
+//
+// Initializes a key/value pair iterator and associates it with
+// @hash_table. Modifying the hash table after calling this function
+// invalidates the returned iterator.
+// 
+// The iteration order of a #GHashTableIter over the keys/values in a hash
+// table is not defined.
+// 
+// |[&lt;!-- language="C" --&gt;
+// GHashTableIter iter;
+// gpointer key, value;
+// 
+// g_hash_table_iter_init (&amp;iter, hash_table);
+// while (g_hash_table_iter_next (&amp;iter, &amp;key, &amp;value))
+//   {
+//     // do something with key and value
+//   }
+// ]|
+func (iter *HashTableIter) Init(hashTable *HashTable) {
+	var carg0 *C.GHashTableIter // in, none, converted
+	var carg1 *C.GHashTable     // in, none, converted
+
+	carg0 = (*C.GHashTableIter)(UnsafeHashTableIterToGlibNone(iter))
+	carg1 = (*C.GHashTable)(UnsafeHashTableToGlibNone(hashTable))
+
+	C.g_hash_table_iter_init(carg0, carg1)
+	runtime.KeepAlive(iter)
+	runtime.KeepAlive(hashTable)
+}
+
 // Next wraps g_hash_table_iter_next
 // The function returns the following values:
 // 
@@ -20323,17 +20380,17 @@ func (keyFile *KeyFile) SetLocaleString(groupName string, key string, locale str
 // 	- groupName string: a group name 
 // 	- key string: a key 
 // 	- locale string: a locale identifier 
-// 	- list []*byte: a %NULL-terminated array of locale string values 
+// 	- list []string: a %NULL-terminated array of locale string values 
 //
 // Associates a list of string values for @key and @locale under
 // @group_name.  If the translation for @key cannot be found then
 // it is created.
-func (keyFile *KeyFile) SetLocaleStringList(groupName string, key string, locale string, list []*byte) {
+func (keyFile *KeyFile) SetLocaleStringList(groupName string, key string, locale string, list []string) {
 	var carg0 *C.GKeyFile // in, none, converted
 	var carg1 *C.gchar    // in, none, string
 	var carg2 *C.gchar    // in, none, string
 	var carg3 *C.gchar    // in, none, string
-	var carg4 **C.gchar   // in, transfer: none, C Pointers: 2, Name: array[gchar], array (inner: *typesystem.CastablePrimitive, zero-terminated, length-by: carg5)
+	var carg4 **C.gchar   // in, transfer: none, C Pointers: 2, Name: array[utf8], array (inner: *typesystem.StringPrimitive, zero-terminated, length-by: carg5)
 	var carg5 C.gsize     // implicit
 
 	carg0 = (*C.GKeyFile)(UnsafeKeyFileToGlibNone(keyFile))
@@ -20346,7 +20403,7 @@ func (keyFile *KeyFile) SetLocaleStringList(groupName string, key string, locale
 	_ = list
 	_ = carg4
 	_ = carg5
-	panic("unimplemented conversion of []*byte (const gchar* const*)")
+	panic("unimplemented conversion of []string (const gchar* const*)")
 
 	C.g_key_file_set_locale_string_list(carg0, carg1, carg2, carg3, carg4, carg5)
 	runtime.KeepAlive(keyFile)
