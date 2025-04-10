@@ -349,37 +349,37 @@ const (
 	// BookmarkFileErrorInvalidURI wraps G_BOOKMARK_FILE_ERROR_INVALID_URI
 	//
 	// URI was ill-formed
-	BookmarkFileErrorInvalidURI BookmarkFileError = C.G_BOOKMARK_FILE_ERROR_INVALID_URI
+	BookmarkFileErrorInvalidURI BookmarkFileError = 0
 	// BookmarkFileErrorInvalidValue wraps G_BOOKMARK_FILE_ERROR_INVALID_VALUE
 	//
 	// a requested field was not found
-	BookmarkFileErrorInvalidValue BookmarkFileError = C.G_BOOKMARK_FILE_ERROR_INVALID_VALUE
+	BookmarkFileErrorInvalidValue BookmarkFileError = 1
 	// BookmarkFileErrorAppNotRegistered wraps G_BOOKMARK_FILE_ERROR_APP_NOT_REGISTERED
 	//
 	// a requested application did
 	//     not register a bookmark
-	BookmarkFileErrorAppNotRegistered BookmarkFileError = C.G_BOOKMARK_FILE_ERROR_APP_NOT_REGISTERED
+	BookmarkFileErrorAppNotRegistered BookmarkFileError = 2
 	// BookmarkFileErrorURINotFound wraps G_BOOKMARK_FILE_ERROR_URI_NOT_FOUND
 	//
 	// a requested URI was not found
-	BookmarkFileErrorURINotFound BookmarkFileError = C.G_BOOKMARK_FILE_ERROR_URI_NOT_FOUND
+	BookmarkFileErrorURINotFound BookmarkFileError = 3
 	// BookmarkFileErrorRead wraps G_BOOKMARK_FILE_ERROR_READ
 	//
 	// document was ill formed
-	BookmarkFileErrorRead BookmarkFileError = C.G_BOOKMARK_FILE_ERROR_READ
+	BookmarkFileErrorRead BookmarkFileError = 4
 	// BookmarkFileErrorUnknownEncoding wraps G_BOOKMARK_FILE_ERROR_UNKNOWN_ENCODING
 	//
 	// the text being parsed was
 	//     in an unknown encoding
-	BookmarkFileErrorUnknownEncoding BookmarkFileError = C.G_BOOKMARK_FILE_ERROR_UNKNOWN_ENCODING
+	BookmarkFileErrorUnknownEncoding BookmarkFileError = 5
 	// BookmarkFileErrorWrite wraps G_BOOKMARK_FILE_ERROR_WRITE
 	//
 	// an error occurred while writing
-	BookmarkFileErrorWrite BookmarkFileError = C.G_BOOKMARK_FILE_ERROR_WRITE
+	BookmarkFileErrorWrite BookmarkFileError = 6
 	// BookmarkFileErrorFileNotFound wraps G_BOOKMARK_FILE_ERROR_FILE_NOT_FOUND
 	//
 	// requested file was not found
-	BookmarkFileErrorFileNotFound BookmarkFileError = C.G_BOOKMARK_FILE_ERROR_FILE_NOT_FOUND
+	BookmarkFileErrorFileNotFound BookmarkFileError = 7
 )
 
 
@@ -396,23 +396,23 @@ const (
 	// ChecksumMD5 wraps G_CHECKSUM_MD5
 	//
 	// Use the MD5 hashing algorithm
-	ChecksumMD5 ChecksumType = C.G_CHECKSUM_MD5
+	ChecksumMD5 ChecksumType = 0
 	// ChecksumSHA1 wraps G_CHECKSUM_SHA1
 	//
 	// Use the SHA-1 hashing algorithm
-	ChecksumSHA1 ChecksumType = C.G_CHECKSUM_SHA1
+	ChecksumSHA1 ChecksumType = 1
 	// ChecksumSHA256 wraps G_CHECKSUM_SHA256
 	//
 	// Use the SHA-256 hashing algorithm
-	ChecksumSHA256 ChecksumType = C.G_CHECKSUM_SHA256
+	ChecksumSHA256 ChecksumType = 2
 	// ChecksumSHA512 wraps G_CHECKSUM_SHA512
 	//
 	// Use the SHA-512 hashing algorithm (Since: 2.36)
-	ChecksumSHA512 ChecksumType = C.G_CHECKSUM_SHA512
+	ChecksumSHA512 ChecksumType = 3
 	// ChecksumSHA384 wraps G_CHECKSUM_SHA384
 	//
 	// Use the SHA-384 hashing algorithm (Since: 2.51)
-	ChecksumSHA384 ChecksumType = C.G_CHECKSUM_SHA384
+	ChecksumSHA384 ChecksumType = 4
 )
 
 
@@ -426,39 +426,39 @@ const (
 	//
 	// Conversion between the requested character
 	//     sets is not supported.
-	ConvertErrorNoConversion ConvertError = C.G_CONVERT_ERROR_NO_CONVERSION
+	ConvertErrorNoConversion ConvertError = 0
 	// ConvertErrorIllegalSequence wraps G_CONVERT_ERROR_ILLEGAL_SEQUENCE
 	//
 	// Invalid byte sequence in conversion input;
 	//    or the character sequence could not be represented in the target
 	//    character set.
-	ConvertErrorIllegalSequence ConvertError = C.G_CONVERT_ERROR_ILLEGAL_SEQUENCE
+	ConvertErrorIllegalSequence ConvertError = 1
 	// ConvertErrorFailed wraps G_CONVERT_ERROR_FAILED
 	//
 	// Conversion failed for some reason.
-	ConvertErrorFailed ConvertError = C.G_CONVERT_ERROR_FAILED
+	ConvertErrorFailed ConvertError = 2
 	// ConvertErrorPartialInput wraps G_CONVERT_ERROR_PARTIAL_INPUT
 	//
 	// Partial character sequence at end of input.
-	ConvertErrorPartialInput ConvertError = C.G_CONVERT_ERROR_PARTIAL_INPUT
+	ConvertErrorPartialInput ConvertError = 3
 	// ConvertErrorBadURI wraps G_CONVERT_ERROR_BAD_URI
 	//
 	// URI is invalid.
-	ConvertErrorBadURI ConvertError = C.G_CONVERT_ERROR_BAD_URI
+	ConvertErrorBadURI ConvertError = 4
 	// ConvertErrorNotAbsolutePath wraps G_CONVERT_ERROR_NOT_ABSOLUTE_PATH
 	//
 	// Pathname is not an absolute path.
-	ConvertErrorNotAbsolutePath ConvertError = C.G_CONVERT_ERROR_NOT_ABSOLUTE_PATH
+	ConvertErrorNotAbsolutePath ConvertError = 5
 	// ConvertErrorNoMemory wraps G_CONVERT_ERROR_NO_MEMORY
 	//
 	// No memory available. Since: 2.40
-	ConvertErrorNoMemory ConvertError = C.G_CONVERT_ERROR_NO_MEMORY
+	ConvertErrorNoMemory ConvertError = 6
 	// ConvertErrorEmbeddedNUL wraps G_CONVERT_ERROR_EMBEDDED_NUL
 	//
 	// An embedded NUL character is present in
 	//     conversion output where a NUL-terminated string is expected.
 	//     Since: 2.56
-	ConvertErrorEmbeddedNUL ConvertError = C.G_CONVERT_ERROR_EMBEDDED_NUL
+	ConvertErrorEmbeddedNUL ConvertError = 7
 )
 
 
@@ -472,35 +472,35 @@ const (
 	// ErrUnknown wraps G_ERR_UNKNOWN
 	//
 	// unknown error
-	ErrUnknown ErrorType = C.G_ERR_UNKNOWN
+	ErrUnknown ErrorType = 0
 	// ErrUnexpEOF wraps G_ERR_UNEXP_EOF
 	//
 	// unexpected end of file
-	ErrUnexpEOF ErrorType = C.G_ERR_UNEXP_EOF
+	ErrUnexpEOF ErrorType = 1
 	// ErrUnexpEOFInString wraps G_ERR_UNEXP_EOF_IN_STRING
 	//
 	// unterminated string constant
-	ErrUnexpEOFInString ErrorType = C.G_ERR_UNEXP_EOF_IN_STRING
+	ErrUnexpEOFInString ErrorType = 2
 	// ErrUnexpEOFInComment wraps G_ERR_UNEXP_EOF_IN_COMMENT
 	//
 	// unterminated comment
-	ErrUnexpEOFInComment ErrorType = C.G_ERR_UNEXP_EOF_IN_COMMENT
+	ErrUnexpEOFInComment ErrorType = 3
 	// ErrNonDigitInConst wraps G_ERR_NON_DIGIT_IN_CONST
 	//
 	// non-digit character in a number
-	ErrNonDigitInConst ErrorType = C.G_ERR_NON_DIGIT_IN_CONST
+	ErrNonDigitInConst ErrorType = 4
 	// ErrDigitRadix wraps G_ERR_DIGIT_RADIX
 	//
 	// digit beyond radix in a number
-	ErrDigitRadix ErrorType = C.G_ERR_DIGIT_RADIX
+	ErrDigitRadix ErrorType = 5
 	// ErrFloatRadix wraps G_ERR_FLOAT_RADIX
 	//
 	// non-decimal floating point number
-	ErrFloatRadix ErrorType = C.G_ERR_FLOAT_RADIX
+	ErrFloatRadix ErrorType = 6
 	// ErrFloatMalformed wraps G_ERR_FLOAT_MALFORMED
 	//
 	// malformed floating point number
-	ErrFloatMalformed ErrorType = C.G_ERR_FLOAT_MALFORMED
+	ErrFloatMalformed ErrorType = 7
 )
 
 
@@ -526,32 +526,32 @@ const (
 	// Operation not permitted; only the owner of
 	//     the file (or other resource) or processes with special privileges
 	//     can perform the operation.
-	FileErrorExist FileError = C.G_FILE_ERROR_EXIST
+	FileErrorExist FileError = 0
 	// FileErrorIsdir wraps G_FILE_ERROR_ISDIR
 	//
 	// File is a directory; you cannot open a directory
 	//     for writing, or create or remove hard links to it.
-	FileErrorIsdir FileError = C.G_FILE_ERROR_ISDIR
+	FileErrorIsdir FileError = 1
 	// FileErrorAcces wraps G_FILE_ERROR_ACCES
 	//
 	// Permission denied; the file permissions do not
 	//     allow the attempted operation.
-	FileErrorAcces FileError = C.G_FILE_ERROR_ACCES
+	FileErrorAcces FileError = 2
 	// FileErrorNametoolong wraps G_FILE_ERROR_NAMETOOLONG
 	//
 	// Filename too long.
-	FileErrorNametoolong FileError = C.G_FILE_ERROR_NAMETOOLONG
+	FileErrorNametoolong FileError = 3
 	// FileErrorNoent wraps G_FILE_ERROR_NOENT
 	//
 	// No such file or directory. This is a "file
 	//     doesn't exist" error for ordinary files that are referenced in
 	//     contexts where they are expected to already exist.
-	FileErrorNoent FileError = C.G_FILE_ERROR_NOENT
+	FileErrorNoent FileError = 4
 	// FileErrorNotdir wraps G_FILE_ERROR_NOTDIR
 	//
 	// A file that isn't a directory was specified when
 	//     a directory is required.
-	FileErrorNotdir FileError = C.G_FILE_ERROR_NOTDIR
+	FileErrorNotdir FileError = 5
 	// FileErrorNxio wraps G_FILE_ERROR_NXIO
 	//
 	// No such device or address. The system tried to
@@ -559,66 +559,66 @@ const (
 	//     couldn't find the device. This can mean that the device file was
 	//     installed incorrectly, or that the physical device is missing or
 	//     not correctly attached to the computer.
-	FileErrorNxio FileError = C.G_FILE_ERROR_NXIO
+	FileErrorNxio FileError = 6
 	// FileErrorNodev wraps G_FILE_ERROR_NODEV
 	//
 	// The underlying file system of the specified file
 	//     does not support memory mapping.
-	FileErrorNodev FileError = C.G_FILE_ERROR_NODEV
+	FileErrorNodev FileError = 7
 	// FileErrorRofs wraps G_FILE_ERROR_ROFS
 	//
 	// The directory containing the new link can't be
 	//     modified because it's on a read-only file system.
-	FileErrorRofs FileError = C.G_FILE_ERROR_ROFS
+	FileErrorRofs FileError = 8
 	// FileErrorTxtbsy wraps G_FILE_ERROR_TXTBSY
 	//
 	// Text file busy.
-	FileErrorTxtbsy FileError = C.G_FILE_ERROR_TXTBSY
+	FileErrorTxtbsy FileError = 9
 	// FileErrorFault wraps G_FILE_ERROR_FAULT
 	//
 	// You passed in a pointer to bad memory.
 	//     (GLib won't reliably return this, don't pass in pointers to bad
 	//     memory.)
-	FileErrorFault FileError = C.G_FILE_ERROR_FAULT
+	FileErrorFault FileError = 10
 	// FileErrorLoop wraps G_FILE_ERROR_LOOP
 	//
 	// Too many levels of symbolic links were encountered
 	//     in looking up a file name. This often indicates a cycle of symbolic
 	//     links.
-	FileErrorLoop FileError = C.G_FILE_ERROR_LOOP
+	FileErrorLoop FileError = 11
 	// FileErrorNospc wraps G_FILE_ERROR_NOSPC
 	//
 	// No space left on device; write operation on a
 	//     file failed because the disk is full.
-	FileErrorNospc FileError = C.G_FILE_ERROR_NOSPC
+	FileErrorNospc FileError = 12
 	// FileErrorNOMEM wraps G_FILE_ERROR_NOMEM
 	//
 	// No memory available. The system cannot allocate
 	//     more virtual memory because its capacity is full.
-	FileErrorNOMEM FileError = C.G_FILE_ERROR_NOMEM
+	FileErrorNOMEM FileError = 13
 	// FileErrorMfile wraps G_FILE_ERROR_MFILE
 	//
 	// The current process has too many files open and
 	//     can't open any more. Duplicate descriptors do count toward this
 	//     limit.
-	FileErrorMfile FileError = C.G_FILE_ERROR_MFILE
+	FileErrorMfile FileError = 14
 	// FileErrorNfile wraps G_FILE_ERROR_NFILE
 	//
 	// There are too many distinct file openings in the
 	//     entire system.
-	FileErrorNfile FileError = C.G_FILE_ERROR_NFILE
+	FileErrorNfile FileError = 15
 	// FileErrorBadf wraps G_FILE_ERROR_BADF
 	//
 	// Bad file descriptor; for example, I/O on a
 	//     descriptor that has been closed or reading from a descriptor open
 	//     only for writing (or vice versa).
-	FileErrorBadf FileError = C.G_FILE_ERROR_BADF
+	FileErrorBadf FileError = 16
 	// FileErrorInval wraps G_FILE_ERROR_INVAL
 	//
 	// Invalid argument. This is used to indicate
 	//     various kinds of problems with passing the wrong argument to a
 	//     library function.
-	FileErrorInval FileError = C.G_FILE_ERROR_INVAL
+	FileErrorInval FileError = 17
 	// FileErrorPipe wraps G_FILE_ERROR_PIPE
 	//
 	// Broken pipe; there is no process reading from the
@@ -627,42 +627,42 @@ const (
 	//     terminates the program if not handled or blocked. Thus, your
 	//     program will never actually see this code unless it has handled
 	//     or blocked 'SIGPIPE'.
-	FileErrorPipe FileError = C.G_FILE_ERROR_PIPE
+	FileErrorPipe FileError = 18
 	// FileErrorAgain wraps G_FILE_ERROR_AGAIN
 	//
 	// Resource temporarily unavailable; the call might
 	//     work if you try again later.
-	FileErrorAgain FileError = C.G_FILE_ERROR_AGAIN
+	FileErrorAgain FileError = 19
 	// FileErrorIntr wraps G_FILE_ERROR_INTR
 	//
 	// Interrupted function call; an asynchronous signal
 	//     occurred and prevented completion of the call. When this
 	//     happens, you should try the call again.
-	FileErrorIntr FileError = C.G_FILE_ERROR_INTR
+	FileErrorIntr FileError = 20
 	// FileErrorIO wraps G_FILE_ERROR_IO
 	//
 	// Input/output error; usually used for physical read
 	//    or write errors. i.e. the disk or other physical device hardware
 	//    is returning errors.
-	FileErrorIO FileError = C.G_FILE_ERROR_IO
+	FileErrorIO FileError = 21
 	// FileErrorPerm wraps G_FILE_ERROR_PERM
 	//
 	// Operation not permitted; only the owner of the
 	//    file (or other resource) or processes with special privileges can
 	//    perform the operation.
-	FileErrorPerm FileError = C.G_FILE_ERROR_PERM
+	FileErrorPerm FileError = 22
 	// FileErrorNosys wraps G_FILE_ERROR_NOSYS
 	//
 	// Function not implemented; this indicates that
 	//    the system is missing some functionality.
-	FileErrorNosys FileError = C.G_FILE_ERROR_NOSYS
+	FileErrorNosys FileError = 23
 	// FileErrorFailed wraps G_FILE_ERROR_FAILED
 	//
 	// Does not correspond to a UNIX error code; this
 	//    is the standard "failed for unspecified reason" error code present
 	//    in all #GError error code enumerations. Returned if no specific
 	//    code applies.
-	FileErrorFailed FileError = C.G_FILE_ERROR_FAILED
+	FileErrorFailed FileError = 24
 )
 
 
@@ -675,39 +675,39 @@ const (
 	// IOChannelErrorFbig wraps G_IO_CHANNEL_ERROR_FBIG
 	//
 	// File too large.
-	IOChannelErrorFbig IOChannelError = C.G_IO_CHANNEL_ERROR_FBIG
+	IOChannelErrorFbig IOChannelError = 0
 	// IOChannelErrorInval wraps G_IO_CHANNEL_ERROR_INVAL
 	//
 	// Invalid argument.
-	IOChannelErrorInval IOChannelError = C.G_IO_CHANNEL_ERROR_INVAL
+	IOChannelErrorInval IOChannelError = 1
 	// IOChannelErrorIO wraps G_IO_CHANNEL_ERROR_IO
 	//
 	// IO error.
-	IOChannelErrorIO IOChannelError = C.G_IO_CHANNEL_ERROR_IO
+	IOChannelErrorIO IOChannelError = 2
 	// IOChannelErrorIsdir wraps G_IO_CHANNEL_ERROR_ISDIR
 	//
 	// File is a directory.
-	IOChannelErrorIsdir IOChannelError = C.G_IO_CHANNEL_ERROR_ISDIR
+	IOChannelErrorIsdir IOChannelError = 3
 	// IOChannelErrorNospc wraps G_IO_CHANNEL_ERROR_NOSPC
 	//
 	// No space left on device.
-	IOChannelErrorNospc IOChannelError = C.G_IO_CHANNEL_ERROR_NOSPC
+	IOChannelErrorNospc IOChannelError = 4
 	// IOChannelErrorNxio wraps G_IO_CHANNEL_ERROR_NXIO
 	//
 	// No such device or address.
-	IOChannelErrorNxio IOChannelError = C.G_IO_CHANNEL_ERROR_NXIO
+	IOChannelErrorNxio IOChannelError = 5
 	// IOChannelErrorOverflow wraps G_IO_CHANNEL_ERROR_OVERFLOW
 	//
 	// Value too large for defined datatype.
-	IOChannelErrorOverflow IOChannelError = C.G_IO_CHANNEL_ERROR_OVERFLOW
+	IOChannelErrorOverflow IOChannelError = 6
 	// IOChannelErrorPipe wraps G_IO_CHANNEL_ERROR_PIPE
 	//
 	// Broken pipe.
-	IOChannelErrorPipe IOChannelError = C.G_IO_CHANNEL_ERROR_PIPE
+	IOChannelErrorPipe IOChannelError = 7
 	// IOChannelErrorFailed wraps G_IO_CHANNEL_ERROR_FAILED
 	//
 	// Some other error.
-	IOChannelErrorFailed IOChannelError = C.G_IO_CHANNEL_ERROR_FAILED
+	IOChannelErrorFailed IOChannelError = 8
 )
 
 
@@ -721,19 +721,19 @@ const (
 	// IOErrorNone wraps G_IO_ERROR_NONE
 	//
 	// no error
-	IOErrorNone IOError = C.G_IO_ERROR_NONE
+	IOErrorNone IOError = 0
 	// IOErrorAgain wraps G_IO_ERROR_AGAIN
 	//
 	// an EAGAIN error occurred
-	IOErrorAgain IOError = C.G_IO_ERROR_AGAIN
+	IOErrorAgain IOError = 1
 	// IOErrorInval wraps G_IO_ERROR_INVAL
 	//
 	// an EINVAL error occurred
-	IOErrorInval IOError = C.G_IO_ERROR_INVAL
+	IOErrorInval IOError = 2
 	// IOErrorUnknown wraps G_IO_ERROR_UNKNOWN
 	//
 	// another error occurred
-	IOErrorUnknown IOError = C.G_IO_ERROR_UNKNOWN
+	IOErrorUnknown IOError = 3
 )
 
 
@@ -746,19 +746,19 @@ const (
 	// IOStatusError wraps G_IO_STATUS_ERROR
 	//
 	// An error occurred.
-	IOStatusError IOStatus = C.G_IO_STATUS_ERROR
+	IOStatusError IOStatus = 0
 	// IOStatusNormal wraps G_IO_STATUS_NORMAL
 	//
 	// Success.
-	IOStatusNormal IOStatus = C.G_IO_STATUS_NORMAL
+	IOStatusNormal IOStatus = 1
 	// IOStatusEOF wraps G_IO_STATUS_EOF
 	//
 	// End of file.
-	IOStatusEOF IOStatus = C.G_IO_STATUS_EOF
+	IOStatusEOF IOStatus = 2
 	// IOStatusAgain wraps G_IO_STATUS_AGAIN
 	//
 	// Resource temporarily unavailable.
-	IOStatusAgain IOStatus = C.G_IO_STATUS_AGAIN
+	IOStatusAgain IOStatus = 3
 )
 
 
@@ -772,27 +772,27 @@ const (
 	//
 	// the text being parsed was in
 	//   an unknown encoding
-	KeyFileErrorUnknownEncoding KeyFileError = C.G_KEY_FILE_ERROR_UNKNOWN_ENCODING
+	KeyFileErrorUnknownEncoding KeyFileError = 0
 	// KeyFileErrorParse wraps G_KEY_FILE_ERROR_PARSE
 	//
 	// document was ill-formed
-	KeyFileErrorParse KeyFileError = C.G_KEY_FILE_ERROR_PARSE
+	KeyFileErrorParse KeyFileError = 1
 	// KeyFileErrorNotFound wraps G_KEY_FILE_ERROR_NOT_FOUND
 	//
 	// the file was not found
-	KeyFileErrorNotFound KeyFileError = C.G_KEY_FILE_ERROR_NOT_FOUND
+	KeyFileErrorNotFound KeyFileError = 2
 	// KeyFileErrorKeyNotFound wraps G_KEY_FILE_ERROR_KEY_NOT_FOUND
 	//
 	// a requested key was not found
-	KeyFileErrorKeyNotFound KeyFileError = C.G_KEY_FILE_ERROR_KEY_NOT_FOUND
+	KeyFileErrorKeyNotFound KeyFileError = 3
 	// KeyFileErrorGroupNotFound wraps G_KEY_FILE_ERROR_GROUP_NOT_FOUND
 	//
 	// a requested group was not found
-	KeyFileErrorGroupNotFound KeyFileError = C.G_KEY_FILE_ERROR_GROUP_NOT_FOUND
+	KeyFileErrorGroupNotFound KeyFileError = 4
 	// KeyFileErrorInvalidValue wraps G_KEY_FILE_ERROR_INVALID_VALUE
 	//
 	// a value could not be parsed
-	KeyFileErrorInvalidValue KeyFileError = C.G_KEY_FILE_ERROR_INVALID_VALUE
+	KeyFileErrorInvalidValue KeyFileError = 5
 )
 
 
@@ -810,11 +810,11 @@ const (
 	// LogWriterHandled wraps G_LOG_WRITER_HANDLED
 	//
 	// Log writer has handled the log entry.
-	LogWriterHandled LogWriterOutput = C.G_LOG_WRITER_HANDLED
+	LogWriterHandled LogWriterOutput = 1
 	// LogWriterUnhandled wraps G_LOG_WRITER_UNHANDLED
 	//
 	// Log writer could not handle the log entry.
-	LogWriterUnhandled LogWriterOutput = C.G_LOG_WRITER_UNHANDLED
+	LogWriterUnhandled LogWriterOutput = 0
 )
 
 
@@ -827,35 +827,35 @@ const (
 	// MarkupErrorBadUTF8 wraps G_MARKUP_ERROR_BAD_UTF8
 	//
 	// text being parsed was not valid UTF-8
-	MarkupErrorBadUTF8 MarkupError = C.G_MARKUP_ERROR_BAD_UTF8
+	MarkupErrorBadUTF8 MarkupError = 0
 	// MarkupErrorEmpty wraps G_MARKUP_ERROR_EMPTY
 	//
 	// document contained nothing, or only whitespace
-	MarkupErrorEmpty MarkupError = C.G_MARKUP_ERROR_EMPTY
+	MarkupErrorEmpty MarkupError = 1
 	// MarkupErrorParse wraps G_MARKUP_ERROR_PARSE
 	//
 	// document was ill-formed
-	MarkupErrorParse MarkupError = C.G_MARKUP_ERROR_PARSE
+	MarkupErrorParse MarkupError = 2
 	// MarkupErrorUnknownElement wraps G_MARKUP_ERROR_UNKNOWN_ELEMENT
 	//
 	// error should be set by #GMarkupParser
 	//     functions; element wasn't known
-	MarkupErrorUnknownElement MarkupError = C.G_MARKUP_ERROR_UNKNOWN_ELEMENT
+	MarkupErrorUnknownElement MarkupError = 3
 	// MarkupErrorUnknownAttribute wraps G_MARKUP_ERROR_UNKNOWN_ATTRIBUTE
 	//
 	// error should be set by #GMarkupParser
 	//     functions; attribute wasn't known
-	MarkupErrorUnknownAttribute MarkupError = C.G_MARKUP_ERROR_UNKNOWN_ATTRIBUTE
+	MarkupErrorUnknownAttribute MarkupError = 4
 	// MarkupErrorInvalidContent wraps G_MARKUP_ERROR_INVALID_CONTENT
 	//
 	// error should be set by #GMarkupParser
 	//     functions; content was invalid
-	MarkupErrorInvalidContent MarkupError = C.G_MARKUP_ERROR_INVALID_CONTENT
+	MarkupErrorInvalidContent MarkupError = 5
 	// MarkupErrorMissingAttribute wraps G_MARKUP_ERROR_MISSING_ATTRIBUTE
 	//
 	// error should be set by #GMarkupParser
 	//     functions; a required attribute was missing
-	MarkupErrorMissingAttribute MarkupError = C.G_MARKUP_ERROR_MISSING_ATTRIBUTE
+	MarkupErrorMissingAttribute MarkupError = 6
 )
 
 
@@ -873,20 +873,20 @@ const (
 	//
 	// standardize differences that do not affect the
 	//     text content, such as the above-mentioned accent representation
-	NormalizeDefault NormalizeMode = C.G_NORMALIZE_DEFAULT
+	NormalizeDefault NormalizeMode = 0
 	// NormalizeNFD wraps G_NORMALIZE_NFD
 	//
 	// another name for %G_NORMALIZE_DEFAULT
-	NormalizeNFD NormalizeMode = C.G_NORMALIZE_NFD
+	NormalizeNFD NormalizeMode = 0
 	// NormalizeDefaultCompose wraps G_NORMALIZE_DEFAULT_COMPOSE
 	//
 	// like %G_NORMALIZE_DEFAULT, but with
 	//     composed forms rather than a maximally decomposed form
-	NormalizeDefaultCompose NormalizeMode = C.G_NORMALIZE_DEFAULT_COMPOSE
+	NormalizeDefaultCompose NormalizeMode = 1
 	// NormalizeNFC wraps G_NORMALIZE_NFC
 	//
 	// another name for %G_NORMALIZE_DEFAULT_COMPOSE
-	NormalizeNFC NormalizeMode = C.G_NORMALIZE_NFC
+	NormalizeNFC NormalizeMode = 1
 	// NormalizeAll wraps G_NORMALIZE_ALL
 	//
 	// beyond %G_NORMALIZE_DEFAULT also standardize the
@@ -894,20 +894,20 @@ const (
 	//     to the standard forms (in this case DIGIT THREE). Formatting
 	//     information may be lost but for most text operations such
 	//     characters should be considered the same
-	NormalizeAll NormalizeMode = C.G_NORMALIZE_ALL
+	NormalizeAll NormalizeMode = 2
 	// NormalizeNFKD wraps G_NORMALIZE_NFKD
 	//
 	// another name for %G_NORMALIZE_ALL
-	NormalizeNFKD NormalizeMode = C.G_NORMALIZE_NFKD
+	NormalizeNFKD NormalizeMode = 2
 	// NormalizeAllCompose wraps G_NORMALIZE_ALL_COMPOSE
 	//
 	// like %G_NORMALIZE_ALL, but with composed
 	//     forms rather than a maximally decomposed form
-	NormalizeAllCompose NormalizeMode = C.G_NORMALIZE_ALL_COMPOSE
+	NormalizeAllCompose NormalizeMode = 3
 	// NormalizeNFKC wraps G_NORMALIZE_NFKC
 	//
 	// another name for %G_NORMALIZE_ALL_COMPOSE
-	NormalizeNFKC NormalizeMode = C.G_NORMALIZE_NFKC
+	NormalizeNFKC NormalizeMode = 3
 )
 
 
@@ -923,48 +923,48 @@ const (
 	// OptionArgNone wraps G_OPTION_ARG_NONE
 	//
 	// No extra argument. This is useful for simple flags or booleans.
-	OptionArgNone OptionArg = C.G_OPTION_ARG_NONE
+	OptionArgNone OptionArg = 0
 	// OptionArgString wraps G_OPTION_ARG_STRING
 	//
 	// The option takes a UTF-8 string argument.
-	OptionArgString OptionArg = C.G_OPTION_ARG_STRING
+	OptionArgString OptionArg = 1
 	// OptionArgInt wraps G_OPTION_ARG_INT
 	//
 	// The option takes an integer argument.
-	OptionArgInt OptionArg = C.G_OPTION_ARG_INT
+	OptionArgInt OptionArg = 2
 	// OptionArgCallback wraps G_OPTION_ARG_CALLBACK
 	//
 	// The option provides a callback (of type
 	//     #GOptionArgFunc) to parse the extra argument.
-	OptionArgCallback OptionArg = C.G_OPTION_ARG_CALLBACK
+	OptionArgCallback OptionArg = 3
 	// OptionArgFilename wraps G_OPTION_ARG_FILENAME
 	//
 	// The option takes a filename as argument, which will
 	//        be in the GLib filename encoding rather than UTF-8.
-	OptionArgFilename OptionArg = C.G_OPTION_ARG_FILENAME
+	OptionArgFilename OptionArg = 4
 	// OptionArgStringArray wraps G_OPTION_ARG_STRING_ARRAY
 	//
 	// The option takes a string argument, multiple
 	//     uses of the option are collected into an array of strings.
-	OptionArgStringArray OptionArg = C.G_OPTION_ARG_STRING_ARRAY
+	OptionArgStringArray OptionArg = 5
 	// OptionArgFilenameArray wraps G_OPTION_ARG_FILENAME_ARRAY
 	//
 	// The option takes a filename as argument,
 	//     multiple uses of the option are collected into an array of strings.
-	OptionArgFilenameArray OptionArg = C.G_OPTION_ARG_FILENAME_ARRAY
+	OptionArgFilenameArray OptionArg = 6
 	// OptionArgDouble wraps G_OPTION_ARG_DOUBLE
 	//
 	// The option takes a double argument. The argument
 	//     can be formatted either for the user's locale or for the "C" locale.
 	//     Since 2.12
-	OptionArgDouble OptionArg = C.G_OPTION_ARG_DOUBLE
+	OptionArgDouble OptionArg = 7
 	// OptionArgInt64 wraps G_OPTION_ARG_INT64
 	//
 	// The option takes a 64-bit integer. Like
 	//     %G_OPTION_ARG_INT but for larger numbers. The number can be in
 	//     decimal base, or in hexadecimal (when prefixed with `0x`, for
 	//     example, `0xffffffff`). Since 2.12
-	OptionArgInt64 OptionArg = C.G_OPTION_ARG_INT64
+	OptionArgInt64 OptionArg = 8
 )
 
 
@@ -979,15 +979,15 @@ const (
 	// An option was not known to the parser.
 	//  This error will only be reported, if the parser hasn't been instructed
 	//  to ignore unknown options, see g_option_context_set_ignore_unknown_options().
-	OptionErrorUnknownOption OptionError = C.G_OPTION_ERROR_UNKNOWN_OPTION
+	OptionErrorUnknownOption OptionError = 0
 	// OptionErrorBadValue wraps G_OPTION_ERROR_BAD_VALUE
 	//
 	// A value couldn't be parsed.
-	OptionErrorBadValue OptionError = C.G_OPTION_ERROR_BAD_VALUE
+	OptionErrorBadValue OptionError = 1
 	// OptionErrorFailed wraps G_OPTION_ERROR_FAILED
 	//
 	// A #GOptionArgFunc callback failed.
-	OptionErrorFailed OptionError = C.G_OPTION_ERROR_FAILED
+	OptionErrorFailed OptionError = 2
 )
 
 
@@ -1000,274 +1000,274 @@ const (
 	// RegexErrorCompile wraps G_REGEX_ERROR_COMPILE
 	//
 	// Compilation of the regular expression failed.
-	RegexErrorCompile RegexError = C.G_REGEX_ERROR_COMPILE
+	RegexErrorCompile RegexError = 0
 	// RegexErrorOptimize wraps G_REGEX_ERROR_OPTIMIZE
 	//
 	// Optimization of the regular expression failed.
-	RegexErrorOptimize RegexError = C.G_REGEX_ERROR_OPTIMIZE
+	RegexErrorOptimize RegexError = 1
 	// RegexErrorReplace wraps G_REGEX_ERROR_REPLACE
 	//
 	// Replacement failed due to an ill-formed replacement
 	//     string.
-	RegexErrorReplace RegexError = C.G_REGEX_ERROR_REPLACE
+	RegexErrorReplace RegexError = 2
 	// RegexErrorMatch wraps G_REGEX_ERROR_MATCH
 	//
 	// The match process failed.
-	RegexErrorMatch RegexError = C.G_REGEX_ERROR_MATCH
+	RegexErrorMatch RegexError = 3
 	// RegexErrorInternal wraps G_REGEX_ERROR_INTERNAL
 	//
 	// Internal error of the regular expression engine.
 	//     Since 2.16
-	RegexErrorInternal RegexError = C.G_REGEX_ERROR_INTERNAL
+	RegexErrorInternal RegexError = 4
 	// RegexErrorStrayBackslash wraps G_REGEX_ERROR_STRAY_BACKSLASH
 	//
 	// "\\" at end of pattern. Since 2.16
-	RegexErrorStrayBackslash RegexError = C.G_REGEX_ERROR_STRAY_BACKSLASH
+	RegexErrorStrayBackslash RegexError = 101
 	// RegexErrorMissingControlChar wraps G_REGEX_ERROR_MISSING_CONTROL_CHAR
 	//
 	// "\\c" at end of pattern. Since 2.16
-	RegexErrorMissingControlChar RegexError = C.G_REGEX_ERROR_MISSING_CONTROL_CHAR
+	RegexErrorMissingControlChar RegexError = 102
 	// RegexErrorUnrecognizedEscape wraps G_REGEX_ERROR_UNRECOGNIZED_ESCAPE
 	//
 	// Unrecognized character follows "\\".
 	//     Since 2.16
-	RegexErrorUnrecognizedEscape RegexError = C.G_REGEX_ERROR_UNRECOGNIZED_ESCAPE
+	RegexErrorUnrecognizedEscape RegexError = 103
 	// RegexErrorQuantifiersOutOfOrder wraps G_REGEX_ERROR_QUANTIFIERS_OUT_OF_ORDER
 	//
 	// Numbers out of order in "{}"
 	//     quantifier. Since 2.16
-	RegexErrorQuantifiersOutOfOrder RegexError = C.G_REGEX_ERROR_QUANTIFIERS_OUT_OF_ORDER
+	RegexErrorQuantifiersOutOfOrder RegexError = 104
 	// RegexErrorQuantifierTooBig wraps G_REGEX_ERROR_QUANTIFIER_TOO_BIG
 	//
 	// Number too big in "{}" quantifier.
 	//     Since 2.16
-	RegexErrorQuantifierTooBig RegexError = C.G_REGEX_ERROR_QUANTIFIER_TOO_BIG
+	RegexErrorQuantifierTooBig RegexError = 105
 	// RegexErrorUnterminatedCharacterClass wraps G_REGEX_ERROR_UNTERMINATED_CHARACTER_CLASS
 	//
 	// Missing terminating "]" for
 	//     character class. Since 2.16
-	RegexErrorUnterminatedCharacterClass RegexError = C.G_REGEX_ERROR_UNTERMINATED_CHARACTER_CLASS
+	RegexErrorUnterminatedCharacterClass RegexError = 106
 	// RegexErrorInvalidEscapeInCharacterClass wraps G_REGEX_ERROR_INVALID_ESCAPE_IN_CHARACTER_CLASS
 	//
 	// Invalid escape sequence
 	//     in character class. Since 2.16
-	RegexErrorInvalidEscapeInCharacterClass RegexError = C.G_REGEX_ERROR_INVALID_ESCAPE_IN_CHARACTER_CLASS
+	RegexErrorInvalidEscapeInCharacterClass RegexError = 107
 	// RegexErrorRangeOutOfOrder wraps G_REGEX_ERROR_RANGE_OUT_OF_ORDER
 	//
 	// Range out of order in character class.
 	//     Since 2.16
-	RegexErrorRangeOutOfOrder RegexError = C.G_REGEX_ERROR_RANGE_OUT_OF_ORDER
+	RegexErrorRangeOutOfOrder RegexError = 108
 	// RegexErrorNothingToRepeat wraps G_REGEX_ERROR_NOTHING_TO_REPEAT
 	//
 	// Nothing to repeat. Since 2.16
-	RegexErrorNothingToRepeat RegexError = C.G_REGEX_ERROR_NOTHING_TO_REPEAT
+	RegexErrorNothingToRepeat RegexError = 109
 	// RegexErrorUnrecognizedCharacter wraps G_REGEX_ERROR_UNRECOGNIZED_CHARACTER
 	//
 	// Unrecognized character after "(?",
 	//     "(?&lt;" or "(?P". Since 2.16
-	RegexErrorUnrecognizedCharacter RegexError = C.G_REGEX_ERROR_UNRECOGNIZED_CHARACTER
+	RegexErrorUnrecognizedCharacter RegexError = 112
 	// RegexErrorPosixNamedClassOutsideClass wraps G_REGEX_ERROR_POSIX_NAMED_CLASS_OUTSIDE_CLASS
 	//
 	// POSIX named classes are
 	//     supported only within a class. Since 2.16
-	RegexErrorPosixNamedClassOutsideClass RegexError = C.G_REGEX_ERROR_POSIX_NAMED_CLASS_OUTSIDE_CLASS
+	RegexErrorPosixNamedClassOutsideClass RegexError = 113
 	// RegexErrorUnmatchedParenthesis wraps G_REGEX_ERROR_UNMATCHED_PARENTHESIS
 	//
 	// Missing terminating ")" or ")"
 	//     without opening "(". Since 2.16
-	RegexErrorUnmatchedParenthesis RegexError = C.G_REGEX_ERROR_UNMATCHED_PARENTHESIS
+	RegexErrorUnmatchedParenthesis RegexError = 114
 	// RegexErrorInexistentSubpatternReference wraps G_REGEX_ERROR_INEXISTENT_SUBPATTERN_REFERENCE
 	//
 	// Reference to non-existent
 	//     subpattern. Since 2.16
-	RegexErrorInexistentSubpatternReference RegexError = C.G_REGEX_ERROR_INEXISTENT_SUBPATTERN_REFERENCE
+	RegexErrorInexistentSubpatternReference RegexError = 115
 	// RegexErrorUnterminatedComment wraps G_REGEX_ERROR_UNTERMINATED_COMMENT
 	//
 	// Missing terminating ")" after comment.
 	//     Since 2.16
-	RegexErrorUnterminatedComment RegexError = C.G_REGEX_ERROR_UNTERMINATED_COMMENT
+	RegexErrorUnterminatedComment RegexError = 118
 	// RegexErrorExpressionTooLarge wraps G_REGEX_ERROR_EXPRESSION_TOO_LARGE
 	//
 	// Regular expression too large.
 	//     Since 2.16
-	RegexErrorExpressionTooLarge RegexError = C.G_REGEX_ERROR_EXPRESSION_TOO_LARGE
+	RegexErrorExpressionTooLarge RegexError = 120
 	// RegexErrorMemoryError wraps G_REGEX_ERROR_MEMORY_ERROR
 	//
 	// Failed to get memory. Since 2.16
-	RegexErrorMemoryError RegexError = C.G_REGEX_ERROR_MEMORY_ERROR
+	RegexErrorMemoryError RegexError = 121
 	// RegexErrorVariableLengthLookbehind wraps G_REGEX_ERROR_VARIABLE_LENGTH_LOOKBEHIND
 	//
 	// Lookbehind assertion is not
 	//     fixed length. Since 2.16
-	RegexErrorVariableLengthLookbehind RegexError = C.G_REGEX_ERROR_VARIABLE_LENGTH_LOOKBEHIND
+	RegexErrorVariableLengthLookbehind RegexError = 125
 	// RegexErrorMalformedCondition wraps G_REGEX_ERROR_MALFORMED_CONDITION
 	//
 	// Malformed number or name after "(?(".
 	//     Since 2.16
-	RegexErrorMalformedCondition RegexError = C.G_REGEX_ERROR_MALFORMED_CONDITION
+	RegexErrorMalformedCondition RegexError = 126
 	// RegexErrorTooManyConditionalBranches wraps G_REGEX_ERROR_TOO_MANY_CONDITIONAL_BRANCHES
 	//
 	// Conditional group contains
 	//     more than two branches. Since 2.16
-	RegexErrorTooManyConditionalBranches RegexError = C.G_REGEX_ERROR_TOO_MANY_CONDITIONAL_BRANCHES
+	RegexErrorTooManyConditionalBranches RegexError = 127
 	// RegexErrorAssertionExpected wraps G_REGEX_ERROR_ASSERTION_EXPECTED
 	//
 	// Assertion expected after "(?(".
 	//     Since 2.16
-	RegexErrorAssertionExpected RegexError = C.G_REGEX_ERROR_ASSERTION_EXPECTED
+	RegexErrorAssertionExpected RegexError = 128
 	// RegexErrorUnknownPosixClassName wraps G_REGEX_ERROR_UNKNOWN_POSIX_CLASS_NAME
 	//
 	// Unknown POSIX class name.
 	//     Since 2.16
-	RegexErrorUnknownPosixClassName RegexError = C.G_REGEX_ERROR_UNKNOWN_POSIX_CLASS_NAME
+	RegexErrorUnknownPosixClassName RegexError = 130
 	// RegexErrorPosixCollatingElementsNotSupported wraps G_REGEX_ERROR_POSIX_COLLATING_ELEMENTS_NOT_SUPPORTED
 	//
 	// POSIX collating
 	//     elements are not supported. Since 2.16
-	RegexErrorPosixCollatingElementsNotSupported RegexError = C.G_REGEX_ERROR_POSIX_COLLATING_ELEMENTS_NOT_SUPPORTED
+	RegexErrorPosixCollatingElementsNotSupported RegexError = 131
 	// RegexErrorHexCodeTooLarge wraps G_REGEX_ERROR_HEX_CODE_TOO_LARGE
 	//
 	// Character value in "\\x{...}" sequence
 	//     is too large. Since 2.16
-	RegexErrorHexCodeTooLarge RegexError = C.G_REGEX_ERROR_HEX_CODE_TOO_LARGE
+	RegexErrorHexCodeTooLarge RegexError = 134
 	// RegexErrorInvalidCondition wraps G_REGEX_ERROR_INVALID_CONDITION
 	//
 	// Invalid condition "(?(0)". Since 2.16
-	RegexErrorInvalidCondition RegexError = C.G_REGEX_ERROR_INVALID_CONDITION
+	RegexErrorInvalidCondition RegexError = 135
 	// RegexErrorSingleByteMatchInLookbehind wraps G_REGEX_ERROR_SINGLE_BYTE_MATCH_IN_LOOKBEHIND
 	//
 	// \\C not allowed in
 	//     lookbehind assertion. Since 2.16
-	RegexErrorSingleByteMatchInLookbehind RegexError = C.G_REGEX_ERROR_SINGLE_BYTE_MATCH_IN_LOOKBEHIND
+	RegexErrorSingleByteMatchInLookbehind RegexError = 136
 	// RegexErrorInfiniteLoop wraps G_REGEX_ERROR_INFINITE_LOOP
 	//
 	// Recursive call could loop indefinitely.
 	//     Since 2.16
-	RegexErrorInfiniteLoop RegexError = C.G_REGEX_ERROR_INFINITE_LOOP
+	RegexErrorInfiniteLoop RegexError = 140
 	// RegexErrorMissingSubpatternNameTerminator wraps G_REGEX_ERROR_MISSING_SUBPATTERN_NAME_TERMINATOR
 	//
 	// Missing terminator
 	//     in subpattern name. Since 2.16
-	RegexErrorMissingSubpatternNameTerminator RegexError = C.G_REGEX_ERROR_MISSING_SUBPATTERN_NAME_TERMINATOR
+	RegexErrorMissingSubpatternNameTerminator RegexError = 142
 	// RegexErrorDuplicateSubpatternName wraps G_REGEX_ERROR_DUPLICATE_SUBPATTERN_NAME
 	//
 	// Two named subpatterns have
 	//     the same name. Since 2.16
-	RegexErrorDuplicateSubpatternName RegexError = C.G_REGEX_ERROR_DUPLICATE_SUBPATTERN_NAME
+	RegexErrorDuplicateSubpatternName RegexError = 143
 	// RegexErrorMalformedProperty wraps G_REGEX_ERROR_MALFORMED_PROPERTY
 	//
 	// Malformed "\\P" or "\\p" sequence.
 	//     Since 2.16
-	RegexErrorMalformedProperty RegexError = C.G_REGEX_ERROR_MALFORMED_PROPERTY
+	RegexErrorMalformedProperty RegexError = 146
 	// RegexErrorUnknownProperty wraps G_REGEX_ERROR_UNKNOWN_PROPERTY
 	//
 	// Unknown property name after "\\P" or
 	//     "\\p". Since 2.16
-	RegexErrorUnknownProperty RegexError = C.G_REGEX_ERROR_UNKNOWN_PROPERTY
+	RegexErrorUnknownProperty RegexError = 147
 	// RegexErrorSubpatternNameTooLong wraps G_REGEX_ERROR_SUBPATTERN_NAME_TOO_LONG
 	//
 	// Subpattern name is too long
 	//     (maximum 32 characters). Since 2.16
-	RegexErrorSubpatternNameTooLong RegexError = C.G_REGEX_ERROR_SUBPATTERN_NAME_TOO_LONG
+	RegexErrorSubpatternNameTooLong RegexError = 148
 	// RegexErrorTooManySubpatterns wraps G_REGEX_ERROR_TOO_MANY_SUBPATTERNS
 	//
 	// Too many named subpatterns (maximum
 	//     10,000). Since 2.16
-	RegexErrorTooManySubpatterns RegexError = C.G_REGEX_ERROR_TOO_MANY_SUBPATTERNS
+	RegexErrorTooManySubpatterns RegexError = 149
 	// RegexErrorInvalidOctalValue wraps G_REGEX_ERROR_INVALID_OCTAL_VALUE
 	//
 	// Octal value is greater than "\\377".
 	//     Since 2.16
-	RegexErrorInvalidOctalValue RegexError = C.G_REGEX_ERROR_INVALID_OCTAL_VALUE
+	RegexErrorInvalidOctalValue RegexError = 151
 	// RegexErrorTooManyBranchesInDefine wraps G_REGEX_ERROR_TOO_MANY_BRANCHES_IN_DEFINE
 	//
 	// "DEFINE" group contains more
 	//     than one branch. Since 2.16
-	RegexErrorTooManyBranchesInDefine RegexError = C.G_REGEX_ERROR_TOO_MANY_BRANCHES_IN_DEFINE
+	RegexErrorTooManyBranchesInDefine RegexError = 154
 	// RegexErrorDefineRepetion wraps G_REGEX_ERROR_DEFINE_REPETION
 	//
 	// Repeating a "DEFINE" group is not allowed.
 	//     This error is never raised. Since: 2.16 Deprecated: 2.34
-	RegexErrorDefineRepetion RegexError = C.G_REGEX_ERROR_DEFINE_REPETION
+	RegexErrorDefineRepetion RegexError = 155
 	// RegexErrorInconsistentNewlineOptions wraps G_REGEX_ERROR_INCONSISTENT_NEWLINE_OPTIONS
 	//
 	// Inconsistent newline options.
 	//     Since 2.16
-	RegexErrorInconsistentNewlineOptions RegexError = C.G_REGEX_ERROR_INCONSISTENT_NEWLINE_OPTIONS
+	RegexErrorInconsistentNewlineOptions RegexError = 156
 	// RegexErrorMissingBackReference wraps G_REGEX_ERROR_MISSING_BACK_REFERENCE
 	//
 	// "\\g" is not followed by a braced,
 	//      angle-bracketed, or quoted name or number, or by a plain number. Since: 2.16
-	RegexErrorMissingBackReference RegexError = C.G_REGEX_ERROR_MISSING_BACK_REFERENCE
+	RegexErrorMissingBackReference RegexError = 157
 	// RegexErrorInvalidRelativeReference wraps G_REGEX_ERROR_INVALID_RELATIVE_REFERENCE
 	//
 	// relative reference must not be zero. Since: 2.34
-	RegexErrorInvalidRelativeReference RegexError = C.G_REGEX_ERROR_INVALID_RELATIVE_REFERENCE
+	RegexErrorInvalidRelativeReference RegexError = 158
 	// RegexErrorBacktrackingControlVerbArgumentForbidden wraps G_REGEX_ERROR_BACKTRACKING_CONTROL_VERB_ARGUMENT_FORBIDDEN
 	//
 	// the backtracing
 	//     control verb used does not allow an argument. Since: 2.34
-	RegexErrorBacktrackingControlVerbArgumentForbidden RegexError = C.G_REGEX_ERROR_BACKTRACKING_CONTROL_VERB_ARGUMENT_FORBIDDEN
+	RegexErrorBacktrackingControlVerbArgumentForbidden RegexError = 159
 	// RegexErrorUnknownBacktrackingControlVerb wraps G_REGEX_ERROR_UNKNOWN_BACKTRACKING_CONTROL_VERB
 	//
 	// unknown backtracing
 	//     control verb. Since: 2.34
-	RegexErrorUnknownBacktrackingControlVerb RegexError = C.G_REGEX_ERROR_UNKNOWN_BACKTRACKING_CONTROL_VERB
+	RegexErrorUnknownBacktrackingControlVerb RegexError = 160
 	// RegexErrorNumberTooBig wraps G_REGEX_ERROR_NUMBER_TOO_BIG
 	//
 	// number is too big in escape sequence. Since: 2.34
-	RegexErrorNumberTooBig RegexError = C.G_REGEX_ERROR_NUMBER_TOO_BIG
+	RegexErrorNumberTooBig RegexError = 161
 	// RegexErrorMissingSubpatternName wraps G_REGEX_ERROR_MISSING_SUBPATTERN_NAME
 	//
 	// Missing subpattern name. Since: 2.34
-	RegexErrorMissingSubpatternName RegexError = C.G_REGEX_ERROR_MISSING_SUBPATTERN_NAME
+	RegexErrorMissingSubpatternName RegexError = 162
 	// RegexErrorMissingDigit wraps G_REGEX_ERROR_MISSING_DIGIT
 	//
 	// Missing digit. Since 2.34
-	RegexErrorMissingDigit RegexError = C.G_REGEX_ERROR_MISSING_DIGIT
+	RegexErrorMissingDigit RegexError = 163
 	// RegexErrorInvalidDataCharacter wraps G_REGEX_ERROR_INVALID_DATA_CHARACTER
 	//
 	// In JavaScript compatibility mode,
 	//     "[" is an invalid data character. Since: 2.34
-	RegexErrorInvalidDataCharacter RegexError = C.G_REGEX_ERROR_INVALID_DATA_CHARACTER
+	RegexErrorInvalidDataCharacter RegexError = 164
 	// RegexErrorExtraSubpatternName wraps G_REGEX_ERROR_EXTRA_SUBPATTERN_NAME
 	//
 	// different names for subpatterns of the
 	//     same number are not allowed. Since: 2.34
-	RegexErrorExtraSubpatternName RegexError = C.G_REGEX_ERROR_EXTRA_SUBPATTERN_NAME
+	RegexErrorExtraSubpatternName RegexError = 165
 	// RegexErrorBacktrackingControlVerbArgumentRequired wraps G_REGEX_ERROR_BACKTRACKING_CONTROL_VERB_ARGUMENT_REQUIRED
 	//
 	// the backtracing control
 	//     verb requires an argument. Since: 2.34
-	RegexErrorBacktrackingControlVerbArgumentRequired RegexError = C.G_REGEX_ERROR_BACKTRACKING_CONTROL_VERB_ARGUMENT_REQUIRED
+	RegexErrorBacktrackingControlVerbArgumentRequired RegexError = 166
 	// RegexErrorInvalidControlChar wraps G_REGEX_ERROR_INVALID_CONTROL_CHAR
 	//
 	// "\\c" must be followed by an ASCII
 	//     character. Since: 2.34
-	RegexErrorInvalidControlChar RegexError = C.G_REGEX_ERROR_INVALID_CONTROL_CHAR
+	RegexErrorInvalidControlChar RegexError = 168
 	// RegexErrorMissingName wraps G_REGEX_ERROR_MISSING_NAME
 	//
 	// "\\k" is not followed by a braced, angle-bracketed, or
 	//     quoted name. Since: 2.34
-	RegexErrorMissingName RegexError = C.G_REGEX_ERROR_MISSING_NAME
+	RegexErrorMissingName RegexError = 169
 	// RegexErrorNotSupportedInClass wraps G_REGEX_ERROR_NOT_SUPPORTED_IN_CLASS
 	//
 	// "\\N" is not supported in a class. Since: 2.34
-	RegexErrorNotSupportedInClass RegexError = C.G_REGEX_ERROR_NOT_SUPPORTED_IN_CLASS
+	RegexErrorNotSupportedInClass RegexError = 171
 	// RegexErrorTooManyForwardReferences wraps G_REGEX_ERROR_TOO_MANY_FORWARD_REFERENCES
 	//
 	// too many forward references. Since: 2.34
-	RegexErrorTooManyForwardReferences RegexError = C.G_REGEX_ERROR_TOO_MANY_FORWARD_REFERENCES
+	RegexErrorTooManyForwardReferences RegexError = 172
 	// RegexErrorNameTooLong wraps G_REGEX_ERROR_NAME_TOO_LONG
 	//
 	// the name is too long in "(*MARK)", "(*PRUNE)",
 	//     "(*SKIP)", or "(*THEN)". Since: 2.34
-	RegexErrorNameTooLong RegexError = C.G_REGEX_ERROR_NAME_TOO_LONG
+	RegexErrorNameTooLong RegexError = 175
 	// RegexErrorCharacterValueTooLarge wraps G_REGEX_ERROR_CHARACTER_VALUE_TOO_LARGE
 	//
 	// the character value in the \\u sequence is
 	//     too large. Since: 2.34
-	RegexErrorCharacterValueTooLarge RegexError = C.G_REGEX_ERROR_CHARACTER_VALUE_TOO_LARGE
+	RegexErrorCharacterValueTooLarge RegexError = 176
 )
 
 
@@ -1281,15 +1281,15 @@ const (
 	// SeekCur wraps G_SEEK_CUR
 	//
 	// the current position in the file.
-	SeekCur SeekType = C.G_SEEK_CUR
+	SeekCur SeekType = 0
 	// SeekSet wraps G_SEEK_SET
 	//
 	// the start of the file.
-	SeekSet SeekType = C.G_SEEK_SET
+	SeekSet SeekType = 1
 	// SeekEnd wraps G_SEEK_END
 	//
 	// the end of the file.
-	SeekEnd SeekType = C.G_SEEK_END
+	SeekEnd SeekType = 2
 )
 
 
@@ -1302,15 +1302,15 @@ const (
 	// ShellErrorBadQuoting wraps G_SHELL_ERROR_BAD_QUOTING
 	//
 	// Mismatched or otherwise mangled quoting.
-	ShellErrorBadQuoting ShellError = C.G_SHELL_ERROR_BAD_QUOTING
+	ShellErrorBadQuoting ShellError = 0
 	// ShellErrorEmptyString wraps G_SHELL_ERROR_EMPTY_STRING
 	//
 	// String to be parsed was empty.
-	ShellErrorEmptyString ShellError = C.G_SHELL_ERROR_EMPTY_STRING
+	ShellErrorEmptyString ShellError = 1
 	// ShellErrorFailed wraps G_SHELL_ERROR_FAILED
 	//
 	// Some other error.
-	ShellErrorFailed ShellError = C.G_SHELL_ERROR_FAILED
+	ShellErrorFailed ShellError = 2
 )
 
 
@@ -1323,88 +1323,88 @@ const (
 	// SpawnErrorFork wraps G_SPAWN_ERROR_FORK
 	//
 	// Fork failed due to lack of memory.
-	SpawnErrorFork SpawnError = C.G_SPAWN_ERROR_FORK
+	SpawnErrorFork SpawnError = 0
 	// SpawnErrorRead wraps G_SPAWN_ERROR_READ
 	//
 	// Read or select on pipes failed.
-	SpawnErrorRead SpawnError = C.G_SPAWN_ERROR_READ
+	SpawnErrorRead SpawnError = 1
 	// SpawnErrorChdir wraps G_SPAWN_ERROR_CHDIR
 	//
 	// Changing to working directory failed.
-	SpawnErrorChdir SpawnError = C.G_SPAWN_ERROR_CHDIR
+	SpawnErrorChdir SpawnError = 2
 	// SpawnErrorAcces wraps G_SPAWN_ERROR_ACCES
 	//
 	// execv() returned `EACCES`
-	SpawnErrorAcces SpawnError = C.G_SPAWN_ERROR_ACCES
+	SpawnErrorAcces SpawnError = 3
 	// SpawnErrorPerm wraps G_SPAWN_ERROR_PERM
 	//
 	// execv() returned `EPERM`
-	SpawnErrorPerm SpawnError = C.G_SPAWN_ERROR_PERM
+	SpawnErrorPerm SpawnError = 4
 	// SpawnErrorTooBig wraps G_SPAWN_ERROR_TOO_BIG
 	//
 	// execv() returned `E2BIG`
-	SpawnErrorTooBig SpawnError = C.G_SPAWN_ERROR_TOO_BIG
+	SpawnErrorTooBig SpawnError = 5
 	// SpawnError2Big wraps G_SPAWN_ERROR_2BIG
 	//
 	// deprecated alias for %G_SPAWN_ERROR_TOO_BIG (deprecated since GLib 2.32)
-	SpawnError2Big SpawnError = C.G_SPAWN_ERROR_2BIG
+	SpawnError2Big SpawnError = 5
 	// SpawnErrorNoexec wraps G_SPAWN_ERROR_NOEXEC
 	//
 	// execv() returned `ENOEXEC`
-	SpawnErrorNoexec SpawnError = C.G_SPAWN_ERROR_NOEXEC
+	SpawnErrorNoexec SpawnError = 6
 	// SpawnErrorNametoolong wraps G_SPAWN_ERROR_NAMETOOLONG
 	//
 	// execv() returned `ENAMETOOLONG`
-	SpawnErrorNametoolong SpawnError = C.G_SPAWN_ERROR_NAMETOOLONG
+	SpawnErrorNametoolong SpawnError = 7
 	// SpawnErrorNoent wraps G_SPAWN_ERROR_NOENT
 	//
 	// execv() returned `ENOENT`
-	SpawnErrorNoent SpawnError = C.G_SPAWN_ERROR_NOENT
+	SpawnErrorNoent SpawnError = 8
 	// SpawnErrorNOMEM wraps G_SPAWN_ERROR_NOMEM
 	//
 	// execv() returned `ENOMEM`
-	SpawnErrorNOMEM SpawnError = C.G_SPAWN_ERROR_NOMEM
+	SpawnErrorNOMEM SpawnError = 9
 	// SpawnErrorNotdir wraps G_SPAWN_ERROR_NOTDIR
 	//
 	// execv() returned `ENOTDIR`
-	SpawnErrorNotdir SpawnError = C.G_SPAWN_ERROR_NOTDIR
+	SpawnErrorNotdir SpawnError = 10
 	// SpawnErrorLoop wraps G_SPAWN_ERROR_LOOP
 	//
 	// execv() returned `ELOOP`
-	SpawnErrorLoop SpawnError = C.G_SPAWN_ERROR_LOOP
+	SpawnErrorLoop SpawnError = 11
 	// SpawnErrorTxtbusy wraps G_SPAWN_ERROR_TXTBUSY
 	//
 	// execv() returned `ETXTBUSY`
-	SpawnErrorTxtbusy SpawnError = C.G_SPAWN_ERROR_TXTBUSY
+	SpawnErrorTxtbusy SpawnError = 12
 	// SpawnErrorIO wraps G_SPAWN_ERROR_IO
 	//
 	// execv() returned `EIO`
-	SpawnErrorIO SpawnError = C.G_SPAWN_ERROR_IO
+	SpawnErrorIO SpawnError = 13
 	// SpawnErrorNfile wraps G_SPAWN_ERROR_NFILE
 	//
 	// execv() returned `ENFILE`
-	SpawnErrorNfile SpawnError = C.G_SPAWN_ERROR_NFILE
+	SpawnErrorNfile SpawnError = 14
 	// SpawnErrorMfile wraps G_SPAWN_ERROR_MFILE
 	//
 	// execv() returned `EMFILE`
-	SpawnErrorMfile SpawnError = C.G_SPAWN_ERROR_MFILE
+	SpawnErrorMfile SpawnError = 15
 	// SpawnErrorInval wraps G_SPAWN_ERROR_INVAL
 	//
 	// execv() returned `EINVAL`
-	SpawnErrorInval SpawnError = C.G_SPAWN_ERROR_INVAL
+	SpawnErrorInval SpawnError = 16
 	// SpawnErrorIsdir wraps G_SPAWN_ERROR_ISDIR
 	//
 	// execv() returned `EISDIR`
-	SpawnErrorIsdir SpawnError = C.G_SPAWN_ERROR_ISDIR
+	SpawnErrorIsdir SpawnError = 17
 	// SpawnErrorLibbad wraps G_SPAWN_ERROR_LIBBAD
 	//
 	// execv() returned `ELIBBAD`
-	SpawnErrorLibbad SpawnError = C.G_SPAWN_ERROR_LIBBAD
+	SpawnErrorLibbad SpawnError = 18
 	// SpawnErrorFailed wraps G_SPAWN_ERROR_FAILED
 	//
 	// Some other fatal failure,
 	//   `error-&gt;message` should explain.
-	SpawnErrorFailed SpawnError = C.G_SPAWN_ERROR_FAILED
+	SpawnErrorFailed SpawnError = 19
 )
 
 
@@ -1424,15 +1424,15 @@ const (
 	// TimeTypeStandard wraps G_TIME_TYPE_STANDARD
 	//
 	// the time is in local standard time
-	TimeTypeStandard TimeType = C.G_TIME_TYPE_STANDARD
+	TimeTypeStandard TimeType = 0
 	// TimeTypeDaylight wraps G_TIME_TYPE_DAYLIGHT
 	//
 	// the time is in local daylight time
-	TimeTypeDaylight TimeType = C.G_TIME_TYPE_DAYLIGHT
+	TimeTypeDaylight TimeType = 1
 	// TimeTypeUniversal wraps G_TIME_TYPE_UNIVERSAL
 	//
 	// the time is in UTC
-	TimeTypeUniversal TimeType = C.G_TIME_TYPE_UNIVERSAL
+	TimeTypeUniversal TimeType = 2
 )
 
 
@@ -1446,95 +1446,95 @@ const (
 	// TokenEOF wraps G_TOKEN_EOF
 	//
 	// the end of the file
-	TokenEOF TokenType = C.G_TOKEN_EOF
+	TokenEOF TokenType = 0
 	// TokenLeftParen wraps G_TOKEN_LEFT_PAREN
 	//
 	// a '(' character
-	TokenLeftParen TokenType = C.G_TOKEN_LEFT_PAREN
+	TokenLeftParen TokenType = 40
 	// TokenRightParen wraps G_TOKEN_RIGHT_PAREN
 	//
 	// a ')' character
-	TokenRightParen TokenType = C.G_TOKEN_RIGHT_PAREN
+	TokenRightParen TokenType = 41
 	// TokenLeftCurly wraps G_TOKEN_LEFT_CURLY
 	//
 	// a '{' character
-	TokenLeftCurly TokenType = C.G_TOKEN_LEFT_CURLY
+	TokenLeftCurly TokenType = 123
 	// TokenRightCurly wraps G_TOKEN_RIGHT_CURLY
 	//
 	// a '}' character
-	TokenRightCurly TokenType = C.G_TOKEN_RIGHT_CURLY
+	TokenRightCurly TokenType = 125
 	// TokenLeftBrace wraps G_TOKEN_LEFT_BRACE
 	//
 	// a '[' character
-	TokenLeftBrace TokenType = C.G_TOKEN_LEFT_BRACE
+	TokenLeftBrace TokenType = 91
 	// TokenRightBrace wraps G_TOKEN_RIGHT_BRACE
 	//
 	// a ']' character
-	TokenRightBrace TokenType = C.G_TOKEN_RIGHT_BRACE
+	TokenRightBrace TokenType = 93
 	// TokenEqualSign wraps G_TOKEN_EQUAL_SIGN
 	//
 	// a '=' character
-	TokenEqualSign TokenType = C.G_TOKEN_EQUAL_SIGN
+	TokenEqualSign TokenType = 61
 	// TokenComma wraps G_TOKEN_COMMA
 	//
 	// a ',' character
-	TokenComma TokenType = C.G_TOKEN_COMMA
+	TokenComma TokenType = 44
 	// TokenNone wraps G_TOKEN_NONE
 	//
 	// not a token
-	TokenNone TokenType = C.G_TOKEN_NONE
+	TokenNone TokenType = 256
 	// TokenError wraps G_TOKEN_ERROR
 	//
 	// an error occurred
-	TokenError TokenType = C.G_TOKEN_ERROR
+	TokenError TokenType = 257
 	// TokenChar wraps G_TOKEN_CHAR
 	//
 	// a character
-	TokenChar TokenType = C.G_TOKEN_CHAR
+	TokenChar TokenType = 258
 	// TokenBinary wraps G_TOKEN_BINARY
 	//
 	// a binary integer
-	TokenBinary TokenType = C.G_TOKEN_BINARY
+	TokenBinary TokenType = 259
 	// TokenOctal wraps G_TOKEN_OCTAL
 	//
 	// an octal integer
-	TokenOctal TokenType = C.G_TOKEN_OCTAL
+	TokenOctal TokenType = 260
 	// TokenInt wraps G_TOKEN_INT
 	//
 	// an integer
-	TokenInt TokenType = C.G_TOKEN_INT
+	TokenInt TokenType = 261
 	// TokenHex wraps G_TOKEN_HEX
 	//
 	// a hex integer
-	TokenHex TokenType = C.G_TOKEN_HEX
+	TokenHex TokenType = 262
 	// TokenFloat wraps G_TOKEN_FLOAT
 	//
 	// a floating point number
-	TokenFloat TokenType = C.G_TOKEN_FLOAT
+	TokenFloat TokenType = 263
 	// TokenString wraps G_TOKEN_STRING
 	//
 	// a string
-	TokenString TokenType = C.G_TOKEN_STRING
+	TokenString TokenType = 264
 	// TokenSymbol wraps G_TOKEN_SYMBOL
 	//
 	// a symbol
-	TokenSymbol TokenType = C.G_TOKEN_SYMBOL
+	TokenSymbol TokenType = 265
 	// TokenIdentifier wraps G_TOKEN_IDENTIFIER
 	//
 	// an identifier
-	TokenIdentifier TokenType = C.G_TOKEN_IDENTIFIER
+	TokenIdentifier TokenType = 266
 	// TokenIdentifierNull wraps G_TOKEN_IDENTIFIER_NULL
 	//
 	// a null identifier
-	TokenIdentifierNull TokenType = C.G_TOKEN_IDENTIFIER_NULL
+	TokenIdentifierNull TokenType = 267
 	// TokenCommentSingle wraps G_TOKEN_COMMENT_SINGLE
 	//
 	// one line comment
-	TokenCommentSingle TokenType = C.G_TOKEN_COMMENT_SINGLE
+	TokenCommentSingle TokenType = 268
 	// TokenCommentMulti wraps G_TOKEN_COMMENT_MULTI
 	//
 	// multi line comment
-	TokenCommentMulti TokenType = C.G_TOKEN_COMMENT_MULTI
+	TokenCommentMulti TokenType = 269
 )
 
 
@@ -1582,15 +1582,15 @@ const (
 	//              then its right child. This is the one to use if you
 	//              want the output sorted according to the compare
 	//              function.
-	InOrder TraverseType = C.G_IN_ORDER
+	InOrder TraverseType = 0
 	// PreOrder wraps G_PRE_ORDER
 	//
 	// visits a node, then its children.
-	PreOrder TraverseType = C.G_PRE_ORDER
+	PreOrder TraverseType = 1
 	// PostOrder wraps G_POST_ORDER
 	//
 	// visits the node's children, then the node itself.
-	PostOrder TraverseType = C.G_POST_ORDER
+	PostOrder TraverseType = 2
 	// LevelOrder wraps G_LEVEL_ORDER
 	//
 	// is not implemented for
@@ -1599,7 +1599,7 @@ const (
 	//              vists the root node first, then its children, then
 	//              its grandchildren, and so on. Note that this is less
 	//              efficient than the other orders.
-	LevelOrder TraverseType = C.G_LEVEL_ORDER
+	LevelOrder TraverseType = 3
 )
 
 
@@ -1617,179 +1617,179 @@ const (
 	// UnicodeBreakMandatory wraps G_UNICODE_BREAK_MANDATORY
 	//
 	// Mandatory Break (BK)
-	UnicodeBreakMandatory UnicodeBreakType = C.G_UNICODE_BREAK_MANDATORY
+	UnicodeBreakMandatory UnicodeBreakType = 0
 	// UnicodeBreakCarriageReturn wraps G_UNICODE_BREAK_CARRIAGE_RETURN
 	//
 	// Carriage Return (CR)
-	UnicodeBreakCarriageReturn UnicodeBreakType = C.G_UNICODE_BREAK_CARRIAGE_RETURN
+	UnicodeBreakCarriageReturn UnicodeBreakType = 1
 	// UnicodeBreakLineFeed wraps G_UNICODE_BREAK_LINE_FEED
 	//
 	// Line Feed (LF)
-	UnicodeBreakLineFeed UnicodeBreakType = C.G_UNICODE_BREAK_LINE_FEED
+	UnicodeBreakLineFeed UnicodeBreakType = 2
 	// UnicodeBreakCombiningMark wraps G_UNICODE_BREAK_COMBINING_MARK
 	//
 	// Attached Characters and Combining Marks (CM)
-	UnicodeBreakCombiningMark UnicodeBreakType = C.G_UNICODE_BREAK_COMBINING_MARK
+	UnicodeBreakCombiningMark UnicodeBreakType = 3
 	// UnicodeBreakSurrogate wraps G_UNICODE_BREAK_SURROGATE
 	//
 	// Surrogates (SG)
-	UnicodeBreakSurrogate UnicodeBreakType = C.G_UNICODE_BREAK_SURROGATE
+	UnicodeBreakSurrogate UnicodeBreakType = 4
 	// UnicodeBreakZeroWidthSpace wraps G_UNICODE_BREAK_ZERO_WIDTH_SPACE
 	//
 	// Zero Width Space (ZW)
-	UnicodeBreakZeroWidthSpace UnicodeBreakType = C.G_UNICODE_BREAK_ZERO_WIDTH_SPACE
+	UnicodeBreakZeroWidthSpace UnicodeBreakType = 5
 	// UnicodeBreakInseparable wraps G_UNICODE_BREAK_INSEPARABLE
 	//
 	// Inseparable (IN)
-	UnicodeBreakInseparable UnicodeBreakType = C.G_UNICODE_BREAK_INSEPARABLE
+	UnicodeBreakInseparable UnicodeBreakType = 6
 	// UnicodeBreakNonBreakingGlue wraps G_UNICODE_BREAK_NON_BREAKING_GLUE
 	//
 	// Non-breaking ("Glue") (GL)
-	UnicodeBreakNonBreakingGlue UnicodeBreakType = C.G_UNICODE_BREAK_NON_BREAKING_GLUE
+	UnicodeBreakNonBreakingGlue UnicodeBreakType = 7
 	// UnicodeBreakContingent wraps G_UNICODE_BREAK_CONTINGENT
 	//
 	// Contingent Break Opportunity (CB)
-	UnicodeBreakContingent UnicodeBreakType = C.G_UNICODE_BREAK_CONTINGENT
+	UnicodeBreakContingent UnicodeBreakType = 8
 	// UnicodeBreakSpace wraps G_UNICODE_BREAK_SPACE
 	//
 	// Space (SP)
-	UnicodeBreakSpace UnicodeBreakType = C.G_UNICODE_BREAK_SPACE
+	UnicodeBreakSpace UnicodeBreakType = 9
 	// UnicodeBreakAfter wraps G_UNICODE_BREAK_AFTER
 	//
 	// Break Opportunity After (BA)
-	UnicodeBreakAfter UnicodeBreakType = C.G_UNICODE_BREAK_AFTER
+	UnicodeBreakAfter UnicodeBreakType = 10
 	// UnicodeBreakBefore wraps G_UNICODE_BREAK_BEFORE
 	//
 	// Break Opportunity Before (BB)
-	UnicodeBreakBefore UnicodeBreakType = C.G_UNICODE_BREAK_BEFORE
+	UnicodeBreakBefore UnicodeBreakType = 11
 	// UnicodeBreakBeforeAndAfter wraps G_UNICODE_BREAK_BEFORE_AND_AFTER
 	//
 	// Break Opportunity Before and After (B2)
-	UnicodeBreakBeforeAndAfter UnicodeBreakType = C.G_UNICODE_BREAK_BEFORE_AND_AFTER
+	UnicodeBreakBeforeAndAfter UnicodeBreakType = 12
 	// UnicodeBreakHyphen wraps G_UNICODE_BREAK_HYPHEN
 	//
 	// Hyphen (HY)
-	UnicodeBreakHyphen UnicodeBreakType = C.G_UNICODE_BREAK_HYPHEN
+	UnicodeBreakHyphen UnicodeBreakType = 13
 	// UnicodeBreakNonStarter wraps G_UNICODE_BREAK_NON_STARTER
 	//
 	// Nonstarter (NS)
-	UnicodeBreakNonStarter UnicodeBreakType = C.G_UNICODE_BREAK_NON_STARTER
+	UnicodeBreakNonStarter UnicodeBreakType = 14
 	// UnicodeBreakOpenPunctuation wraps G_UNICODE_BREAK_OPEN_PUNCTUATION
 	//
 	// Opening Punctuation (OP)
-	UnicodeBreakOpenPunctuation UnicodeBreakType = C.G_UNICODE_BREAK_OPEN_PUNCTUATION
+	UnicodeBreakOpenPunctuation UnicodeBreakType = 15
 	// UnicodeBreakClosePunctuation wraps G_UNICODE_BREAK_CLOSE_PUNCTUATION
 	//
 	// Closing Punctuation (CL)
-	UnicodeBreakClosePunctuation UnicodeBreakType = C.G_UNICODE_BREAK_CLOSE_PUNCTUATION
+	UnicodeBreakClosePunctuation UnicodeBreakType = 16
 	// UnicodeBreakQuotation wraps G_UNICODE_BREAK_QUOTATION
 	//
 	// Ambiguous Quotation (QU)
-	UnicodeBreakQuotation UnicodeBreakType = C.G_UNICODE_BREAK_QUOTATION
+	UnicodeBreakQuotation UnicodeBreakType = 17
 	// UnicodeBreakExclamation wraps G_UNICODE_BREAK_EXCLAMATION
 	//
 	// Exclamation/Interrogation (EX)
-	UnicodeBreakExclamation UnicodeBreakType = C.G_UNICODE_BREAK_EXCLAMATION
+	UnicodeBreakExclamation UnicodeBreakType = 18
 	// UnicodeBreakIdeographic wraps G_UNICODE_BREAK_IDEOGRAPHIC
 	//
 	// Ideographic (ID)
-	UnicodeBreakIdeographic UnicodeBreakType = C.G_UNICODE_BREAK_IDEOGRAPHIC
+	UnicodeBreakIdeographic UnicodeBreakType = 19
 	// UnicodeBreakNumeric wraps G_UNICODE_BREAK_NUMERIC
 	//
 	// Numeric (NU)
-	UnicodeBreakNumeric UnicodeBreakType = C.G_UNICODE_BREAK_NUMERIC
+	UnicodeBreakNumeric UnicodeBreakType = 20
 	// UnicodeBreakInfixSeparator wraps G_UNICODE_BREAK_INFIX_SEPARATOR
 	//
 	// Infix Separator (Numeric) (IS)
-	UnicodeBreakInfixSeparator UnicodeBreakType = C.G_UNICODE_BREAK_INFIX_SEPARATOR
+	UnicodeBreakInfixSeparator UnicodeBreakType = 21
 	// UnicodeBreakSymbol wraps G_UNICODE_BREAK_SYMBOL
 	//
 	// Symbols Allowing Break After (SY)
-	UnicodeBreakSymbol UnicodeBreakType = C.G_UNICODE_BREAK_SYMBOL
+	UnicodeBreakSymbol UnicodeBreakType = 22
 	// UnicodeBreakAlphabetic wraps G_UNICODE_BREAK_ALPHABETIC
 	//
 	// Ordinary Alphabetic and Symbol Characters (AL)
-	UnicodeBreakAlphabetic UnicodeBreakType = C.G_UNICODE_BREAK_ALPHABETIC
+	UnicodeBreakAlphabetic UnicodeBreakType = 23
 	// UnicodeBreakPrefix wraps G_UNICODE_BREAK_PREFIX
 	//
 	// Prefix (Numeric) (PR)
-	UnicodeBreakPrefix UnicodeBreakType = C.G_UNICODE_BREAK_PREFIX
+	UnicodeBreakPrefix UnicodeBreakType = 24
 	// UnicodeBreakPostfix wraps G_UNICODE_BREAK_POSTFIX
 	//
 	// Postfix (Numeric) (PO)
-	UnicodeBreakPostfix UnicodeBreakType = C.G_UNICODE_BREAK_POSTFIX
+	UnicodeBreakPostfix UnicodeBreakType = 25
 	// UnicodeBreakComplexContext wraps G_UNICODE_BREAK_COMPLEX_CONTEXT
 	//
 	// Complex Content Dependent (South East Asian) (SA)
-	UnicodeBreakComplexContext UnicodeBreakType = C.G_UNICODE_BREAK_COMPLEX_CONTEXT
+	UnicodeBreakComplexContext UnicodeBreakType = 26
 	// UnicodeBreakAmbiguous wraps G_UNICODE_BREAK_AMBIGUOUS
 	//
 	// Ambiguous (Alphabetic or Ideographic) (AI)
-	UnicodeBreakAmbiguous UnicodeBreakType = C.G_UNICODE_BREAK_AMBIGUOUS
+	UnicodeBreakAmbiguous UnicodeBreakType = 27
 	// UnicodeBreakUnknown wraps G_UNICODE_BREAK_UNKNOWN
 	//
 	// Unknown (XX)
-	UnicodeBreakUnknown UnicodeBreakType = C.G_UNICODE_BREAK_UNKNOWN
+	UnicodeBreakUnknown UnicodeBreakType = 28
 	// UnicodeBreakNextLine wraps G_UNICODE_BREAK_NEXT_LINE
 	//
 	// Next Line (NL)
-	UnicodeBreakNextLine UnicodeBreakType = C.G_UNICODE_BREAK_NEXT_LINE
+	UnicodeBreakNextLine UnicodeBreakType = 29
 	// UnicodeBreakWordJoiner wraps G_UNICODE_BREAK_WORD_JOINER
 	//
 	// Word Joiner (WJ)
-	UnicodeBreakWordJoiner UnicodeBreakType = C.G_UNICODE_BREAK_WORD_JOINER
+	UnicodeBreakWordJoiner UnicodeBreakType = 30
 	// UnicodeBreakHangulLJamo wraps G_UNICODE_BREAK_HANGUL_L_JAMO
 	//
 	// Hangul L Jamo (JL)
-	UnicodeBreakHangulLJamo UnicodeBreakType = C.G_UNICODE_BREAK_HANGUL_L_JAMO
+	UnicodeBreakHangulLJamo UnicodeBreakType = 31
 	// UnicodeBreakHangulVJamo wraps G_UNICODE_BREAK_HANGUL_V_JAMO
 	//
 	// Hangul V Jamo (JV)
-	UnicodeBreakHangulVJamo UnicodeBreakType = C.G_UNICODE_BREAK_HANGUL_V_JAMO
+	UnicodeBreakHangulVJamo UnicodeBreakType = 32
 	// UnicodeBreakHangulTJamo wraps G_UNICODE_BREAK_HANGUL_T_JAMO
 	//
 	// Hangul T Jamo (JT)
-	UnicodeBreakHangulTJamo UnicodeBreakType = C.G_UNICODE_BREAK_HANGUL_T_JAMO
+	UnicodeBreakHangulTJamo UnicodeBreakType = 33
 	// UnicodeBreakHangulLvSyllable wraps G_UNICODE_BREAK_HANGUL_LV_SYLLABLE
 	//
 	// Hangul LV Syllable (H2)
-	UnicodeBreakHangulLvSyllable UnicodeBreakType = C.G_UNICODE_BREAK_HANGUL_LV_SYLLABLE
+	UnicodeBreakHangulLvSyllable UnicodeBreakType = 34
 	// UnicodeBreakHangulLvtSyllable wraps G_UNICODE_BREAK_HANGUL_LVT_SYLLABLE
 	//
 	// Hangul LVT Syllable (H3)
-	UnicodeBreakHangulLvtSyllable UnicodeBreakType = C.G_UNICODE_BREAK_HANGUL_LVT_SYLLABLE
+	UnicodeBreakHangulLvtSyllable UnicodeBreakType = 35
 	// UnicodeBreakCloseParanthesis wraps G_UNICODE_BREAK_CLOSE_PARANTHESIS
 	//
 	// Closing Parenthesis (CP). Since 2.28. Deprecated: 2.70: Use %G_UNICODE_BREAK_CLOSE_PARENTHESIS instead.
-	UnicodeBreakCloseParanthesis UnicodeBreakType = C.G_UNICODE_BREAK_CLOSE_PARANTHESIS
+	UnicodeBreakCloseParanthesis UnicodeBreakType = 36
 	// UnicodeBreakCloseParenthesis wraps G_UNICODE_BREAK_CLOSE_PARENTHESIS
 	//
 	// Closing Parenthesis (CP). Since 2.70
-	UnicodeBreakCloseParenthesis UnicodeBreakType = C.G_UNICODE_BREAK_CLOSE_PARENTHESIS
+	UnicodeBreakCloseParenthesis UnicodeBreakType = 36
 	// UnicodeBreakConditionalJapaneseStarter wraps G_UNICODE_BREAK_CONDITIONAL_JAPANESE_STARTER
 	//
 	// Conditional Japanese Starter (CJ). Since: 2.32
-	UnicodeBreakConditionalJapaneseStarter UnicodeBreakType = C.G_UNICODE_BREAK_CONDITIONAL_JAPANESE_STARTER
+	UnicodeBreakConditionalJapaneseStarter UnicodeBreakType = 37
 	// UnicodeBreakHebrewLetter wraps G_UNICODE_BREAK_HEBREW_LETTER
 	//
 	// Hebrew Letter (HL). Since: 2.32
-	UnicodeBreakHebrewLetter UnicodeBreakType = C.G_UNICODE_BREAK_HEBREW_LETTER
+	UnicodeBreakHebrewLetter UnicodeBreakType = 38
 	// UnicodeBreakRegionalIndicator wraps G_UNICODE_BREAK_REGIONAL_INDICATOR
 	//
 	// Regional Indicator (RI). Since: 2.36
-	UnicodeBreakRegionalIndicator UnicodeBreakType = C.G_UNICODE_BREAK_REGIONAL_INDICATOR
+	UnicodeBreakRegionalIndicator UnicodeBreakType = 39
 	// UnicodeBreakEmojiBase wraps G_UNICODE_BREAK_EMOJI_BASE
 	//
 	// Emoji Base (EB). Since: 2.50
-	UnicodeBreakEmojiBase UnicodeBreakType = C.G_UNICODE_BREAK_EMOJI_BASE
+	UnicodeBreakEmojiBase UnicodeBreakType = 40
 	// UnicodeBreakEmojiModifier wraps G_UNICODE_BREAK_EMOJI_MODIFIER
 	//
 	// Emoji Modifier (EM). Since: 2.50
-	UnicodeBreakEmojiModifier UnicodeBreakType = C.G_UNICODE_BREAK_EMOJI_MODIFIER
+	UnicodeBreakEmojiModifier UnicodeBreakType = 41
 	// UnicodeBreakZeroWidthJoiner wraps G_UNICODE_BREAK_ZERO_WIDTH_JOINER
 	//
 	// Zero Width Joiner (ZWJ). Since: 2.50
-	UnicodeBreakZeroWidthJoiner UnicodeBreakType = C.G_UNICODE_BREAK_ZERO_WIDTH_JOINER
+	UnicodeBreakZeroWidthJoiner UnicodeBreakType = 42
 	// UnicodeBreakAksara wraps G_UNICODE_BREAK_AKSARA
 	//
 	// Aksara (AK). Since: 2.80
@@ -1797,15 +1797,15 @@ const (
 	// @G_UNICODE_BREAK_AKSARA_START (AS). Since: 2.80
 	// @G_UNICODE_BREAK_VIRAMA_FINAL (VF). Since: 2.80
 	// @G_UNICODE_BREAK_VIRAMA (VI). Since: 2.80
-	UnicodeBreakAksara UnicodeBreakType = C.G_UNICODE_BREAK_AKSARA
+	UnicodeBreakAksara UnicodeBreakType = 43
 	// UnicodeBreakAksaraPreBase wraps G_UNICODE_BREAK_AKSARA_PRE_BASE
-	UnicodeBreakAksaraPreBase UnicodeBreakType = C.G_UNICODE_BREAK_AKSARA_PRE_BASE
+	UnicodeBreakAksaraPreBase UnicodeBreakType = 44
 	// UnicodeBreakAksaraStart wraps G_UNICODE_BREAK_AKSARA_START
-	UnicodeBreakAksaraStart UnicodeBreakType = C.G_UNICODE_BREAK_AKSARA_START
+	UnicodeBreakAksaraStart UnicodeBreakType = 45
 	// UnicodeBreakViramaFinal wraps G_UNICODE_BREAK_VIRAMA_FINAL
-	UnicodeBreakViramaFinal UnicodeBreakType = C.G_UNICODE_BREAK_VIRAMA_FINAL
+	UnicodeBreakViramaFinal UnicodeBreakType = 46
 	// UnicodeBreakVirama wraps G_UNICODE_BREAK_VIRAMA
-	UnicodeBreakVirama UnicodeBreakType = C.G_UNICODE_BREAK_VIRAMA
+	UnicodeBreakVirama UnicodeBreakType = 47
 )
 
 
@@ -1825,668 +1825,668 @@ const (
 	// UnicodeScriptInvalidCode wraps G_UNICODE_SCRIPT_INVALID_CODE
 	//
 	// a value never returned from g_unichar_get_script()
-	UnicodeScriptInvalidCode UnicodeScript = C.G_UNICODE_SCRIPT_INVALID_CODE
+	UnicodeScriptInvalidCode UnicodeScript = -1
 	// UnicodeScriptCommon wraps G_UNICODE_SCRIPT_COMMON
 	//
 	// a character used by multiple different scripts
-	UnicodeScriptCommon UnicodeScript = C.G_UNICODE_SCRIPT_COMMON
+	UnicodeScriptCommon UnicodeScript = 0
 	// UnicodeScriptInherited wraps G_UNICODE_SCRIPT_INHERITED
 	//
 	// a mark glyph that takes its script from the
 	//                               base glyph to which it is attached
-	UnicodeScriptInherited UnicodeScript = C.G_UNICODE_SCRIPT_INHERITED
+	UnicodeScriptInherited UnicodeScript = 1
 	// UnicodeScriptArabic wraps G_UNICODE_SCRIPT_ARABIC
 	//
 	// Arabic
-	UnicodeScriptArabic UnicodeScript = C.G_UNICODE_SCRIPT_ARABIC
+	UnicodeScriptArabic UnicodeScript = 2
 	// UnicodeScriptArmenian wraps G_UNICODE_SCRIPT_ARMENIAN
 	//
 	// Armenian
-	UnicodeScriptArmenian UnicodeScript = C.G_UNICODE_SCRIPT_ARMENIAN
+	UnicodeScriptArmenian UnicodeScript = 3
 	// UnicodeScriptBengali wraps G_UNICODE_SCRIPT_BENGALI
 	//
 	// Bengali
-	UnicodeScriptBengali UnicodeScript = C.G_UNICODE_SCRIPT_BENGALI
+	UnicodeScriptBengali UnicodeScript = 4
 	// UnicodeScriptBopomofo wraps G_UNICODE_SCRIPT_BOPOMOFO
 	//
 	// Bopomofo
-	UnicodeScriptBopomofo UnicodeScript = C.G_UNICODE_SCRIPT_BOPOMOFO
+	UnicodeScriptBopomofo UnicodeScript = 5
 	// UnicodeScriptCherokee wraps G_UNICODE_SCRIPT_CHEROKEE
 	//
 	// Cherokee
-	UnicodeScriptCherokee UnicodeScript = C.G_UNICODE_SCRIPT_CHEROKEE
+	UnicodeScriptCherokee UnicodeScript = 6
 	// UnicodeScriptCoptic wraps G_UNICODE_SCRIPT_COPTIC
 	//
 	// Coptic
-	UnicodeScriptCoptic UnicodeScript = C.G_UNICODE_SCRIPT_COPTIC
+	UnicodeScriptCoptic UnicodeScript = 7
 	// UnicodeScriptCyrillic wraps G_UNICODE_SCRIPT_CYRILLIC
 	//
 	// Cyrillic
-	UnicodeScriptCyrillic UnicodeScript = C.G_UNICODE_SCRIPT_CYRILLIC
+	UnicodeScriptCyrillic UnicodeScript = 8
 	// UnicodeScriptDeseret wraps G_UNICODE_SCRIPT_DESERET
 	//
 	// Deseret
-	UnicodeScriptDeseret UnicodeScript = C.G_UNICODE_SCRIPT_DESERET
+	UnicodeScriptDeseret UnicodeScript = 9
 	// UnicodeScriptDevanagari wraps G_UNICODE_SCRIPT_DEVANAGARI
 	//
 	// Devanagari
-	UnicodeScriptDevanagari UnicodeScript = C.G_UNICODE_SCRIPT_DEVANAGARI
+	UnicodeScriptDevanagari UnicodeScript = 10
 	// UnicodeScriptEthiopic wraps G_UNICODE_SCRIPT_ETHIOPIC
 	//
 	// Ethiopic
-	UnicodeScriptEthiopic UnicodeScript = C.G_UNICODE_SCRIPT_ETHIOPIC
+	UnicodeScriptEthiopic UnicodeScript = 11
 	// UnicodeScriptGeorgian wraps G_UNICODE_SCRIPT_GEORGIAN
 	//
 	// Georgian
-	UnicodeScriptGeorgian UnicodeScript = C.G_UNICODE_SCRIPT_GEORGIAN
+	UnicodeScriptGeorgian UnicodeScript = 12
 	// UnicodeScriptGothic wraps G_UNICODE_SCRIPT_GOTHIC
 	//
 	// Gothic
-	UnicodeScriptGothic UnicodeScript = C.G_UNICODE_SCRIPT_GOTHIC
+	UnicodeScriptGothic UnicodeScript = 13
 	// UnicodeScriptGreek wraps G_UNICODE_SCRIPT_GREEK
 	//
 	// Greek
-	UnicodeScriptGreek UnicodeScript = C.G_UNICODE_SCRIPT_GREEK
+	UnicodeScriptGreek UnicodeScript = 14
 	// UnicodeScriptGujarati wraps G_UNICODE_SCRIPT_GUJARATI
 	//
 	// Gujarati
-	UnicodeScriptGujarati UnicodeScript = C.G_UNICODE_SCRIPT_GUJARATI
+	UnicodeScriptGujarati UnicodeScript = 15
 	// UnicodeScriptGurmukhi wraps G_UNICODE_SCRIPT_GURMUKHI
 	//
 	// Gurmukhi
-	UnicodeScriptGurmukhi UnicodeScript = C.G_UNICODE_SCRIPT_GURMUKHI
+	UnicodeScriptGurmukhi UnicodeScript = 16
 	// UnicodeScriptHan wraps G_UNICODE_SCRIPT_HAN
 	//
 	// Han
-	UnicodeScriptHan UnicodeScript = C.G_UNICODE_SCRIPT_HAN
+	UnicodeScriptHan UnicodeScript = 17
 	// UnicodeScriptHangul wraps G_UNICODE_SCRIPT_HANGUL
 	//
 	// Hangul
-	UnicodeScriptHangul UnicodeScript = C.G_UNICODE_SCRIPT_HANGUL
+	UnicodeScriptHangul UnicodeScript = 18
 	// UnicodeScriptHebrew wraps G_UNICODE_SCRIPT_HEBREW
 	//
 	// Hebrew
-	UnicodeScriptHebrew UnicodeScript = C.G_UNICODE_SCRIPT_HEBREW
+	UnicodeScriptHebrew UnicodeScript = 19
 	// UnicodeScriptHiragana wraps G_UNICODE_SCRIPT_HIRAGANA
 	//
 	// Hiragana
-	UnicodeScriptHiragana UnicodeScript = C.G_UNICODE_SCRIPT_HIRAGANA
+	UnicodeScriptHiragana UnicodeScript = 20
 	// UnicodeScriptKannada wraps G_UNICODE_SCRIPT_KANNADA
 	//
 	// Kannada
-	UnicodeScriptKannada UnicodeScript = C.G_UNICODE_SCRIPT_KANNADA
+	UnicodeScriptKannada UnicodeScript = 21
 	// UnicodeScriptKatakana wraps G_UNICODE_SCRIPT_KATAKANA
 	//
 	// Katakana
-	UnicodeScriptKatakana UnicodeScript = C.G_UNICODE_SCRIPT_KATAKANA
+	UnicodeScriptKatakana UnicodeScript = 22
 	// UnicodeScriptKhmer wraps G_UNICODE_SCRIPT_KHMER
 	//
 	// Khmer
-	UnicodeScriptKhmer UnicodeScript = C.G_UNICODE_SCRIPT_KHMER
+	UnicodeScriptKhmer UnicodeScript = 23
 	// UnicodeScriptLao wraps G_UNICODE_SCRIPT_LAO
 	//
 	// Lao
-	UnicodeScriptLao UnicodeScript = C.G_UNICODE_SCRIPT_LAO
+	UnicodeScriptLao UnicodeScript = 24
 	// UnicodeScriptLatin wraps G_UNICODE_SCRIPT_LATIN
 	//
 	// Latin
-	UnicodeScriptLatin UnicodeScript = C.G_UNICODE_SCRIPT_LATIN
+	UnicodeScriptLatin UnicodeScript = 25
 	// UnicodeScriptMalayalam wraps G_UNICODE_SCRIPT_MALAYALAM
 	//
 	// Malayalam
-	UnicodeScriptMalayalam UnicodeScript = C.G_UNICODE_SCRIPT_MALAYALAM
+	UnicodeScriptMalayalam UnicodeScript = 26
 	// UnicodeScriptMongolian wraps G_UNICODE_SCRIPT_MONGOLIAN
 	//
 	// Mongolian
-	UnicodeScriptMongolian UnicodeScript = C.G_UNICODE_SCRIPT_MONGOLIAN
+	UnicodeScriptMongolian UnicodeScript = 27
 	// UnicodeScriptMyanmar wraps G_UNICODE_SCRIPT_MYANMAR
 	//
 	// Myanmar
-	UnicodeScriptMyanmar UnicodeScript = C.G_UNICODE_SCRIPT_MYANMAR
+	UnicodeScriptMyanmar UnicodeScript = 28
 	// UnicodeScriptOgham wraps G_UNICODE_SCRIPT_OGHAM
 	//
 	// Ogham
-	UnicodeScriptOgham UnicodeScript = C.G_UNICODE_SCRIPT_OGHAM
+	UnicodeScriptOgham UnicodeScript = 29
 	// UnicodeScriptOldItalic wraps G_UNICODE_SCRIPT_OLD_ITALIC
 	//
 	// Old Italic
-	UnicodeScriptOldItalic UnicodeScript = C.G_UNICODE_SCRIPT_OLD_ITALIC
+	UnicodeScriptOldItalic UnicodeScript = 30
 	// UnicodeScriptOriya wraps G_UNICODE_SCRIPT_ORIYA
 	//
 	// Oriya
-	UnicodeScriptOriya UnicodeScript = C.G_UNICODE_SCRIPT_ORIYA
+	UnicodeScriptOriya UnicodeScript = 31
 	// UnicodeScriptRunic wraps G_UNICODE_SCRIPT_RUNIC
 	//
 	// Runic
-	UnicodeScriptRunic UnicodeScript = C.G_UNICODE_SCRIPT_RUNIC
+	UnicodeScriptRunic UnicodeScript = 32
 	// UnicodeScriptSinhala wraps G_UNICODE_SCRIPT_SINHALA
 	//
 	// Sinhala
-	UnicodeScriptSinhala UnicodeScript = C.G_UNICODE_SCRIPT_SINHALA
+	UnicodeScriptSinhala UnicodeScript = 33
 	// UnicodeScriptSyriac wraps G_UNICODE_SCRIPT_SYRIAC
 	//
 	// Syriac
-	UnicodeScriptSyriac UnicodeScript = C.G_UNICODE_SCRIPT_SYRIAC
+	UnicodeScriptSyriac UnicodeScript = 34
 	// UnicodeScriptTamil wraps G_UNICODE_SCRIPT_TAMIL
 	//
 	// Tamil
-	UnicodeScriptTamil UnicodeScript = C.G_UNICODE_SCRIPT_TAMIL
+	UnicodeScriptTamil UnicodeScript = 35
 	// UnicodeScriptTelugu wraps G_UNICODE_SCRIPT_TELUGU
 	//
 	// Telugu
-	UnicodeScriptTelugu UnicodeScript = C.G_UNICODE_SCRIPT_TELUGU
+	UnicodeScriptTelugu UnicodeScript = 36
 	// UnicodeScriptThaana wraps G_UNICODE_SCRIPT_THAANA
 	//
 	// Thaana
-	UnicodeScriptThaana UnicodeScript = C.G_UNICODE_SCRIPT_THAANA
+	UnicodeScriptThaana UnicodeScript = 37
 	// UnicodeScriptThai wraps G_UNICODE_SCRIPT_THAI
 	//
 	// Thai
-	UnicodeScriptThai UnicodeScript = C.G_UNICODE_SCRIPT_THAI
+	UnicodeScriptThai UnicodeScript = 38
 	// UnicodeScriptTibetan wraps G_UNICODE_SCRIPT_TIBETAN
 	//
 	// Tibetan
-	UnicodeScriptTibetan UnicodeScript = C.G_UNICODE_SCRIPT_TIBETAN
+	UnicodeScriptTibetan UnicodeScript = 39
 	// UnicodeScriptCanadianAboriginal wraps G_UNICODE_SCRIPT_CANADIAN_ABORIGINAL
 	//
 	// Canadian Aboriginal
-	UnicodeScriptCanadianAboriginal UnicodeScript = C.G_UNICODE_SCRIPT_CANADIAN_ABORIGINAL
+	UnicodeScriptCanadianAboriginal UnicodeScript = 40
 	// UnicodeScriptYi wraps G_UNICODE_SCRIPT_YI
 	//
 	// Yi
-	UnicodeScriptYi UnicodeScript = C.G_UNICODE_SCRIPT_YI
+	UnicodeScriptYi UnicodeScript = 41
 	// UnicodeScriptTagalog wraps G_UNICODE_SCRIPT_TAGALOG
 	//
 	// Tagalog
-	UnicodeScriptTagalog UnicodeScript = C.G_UNICODE_SCRIPT_TAGALOG
+	UnicodeScriptTagalog UnicodeScript = 42
 	// UnicodeScriptHanunoo wraps G_UNICODE_SCRIPT_HANUNOO
 	//
 	// Hanunoo
-	UnicodeScriptHanunoo UnicodeScript = C.G_UNICODE_SCRIPT_HANUNOO
+	UnicodeScriptHanunoo UnicodeScript = 43
 	// UnicodeScriptBuhid wraps G_UNICODE_SCRIPT_BUHID
 	//
 	// Buhid
-	UnicodeScriptBuhid UnicodeScript = C.G_UNICODE_SCRIPT_BUHID
+	UnicodeScriptBuhid UnicodeScript = 44
 	// UnicodeScriptTagbanwa wraps G_UNICODE_SCRIPT_TAGBANWA
 	//
 	// Tagbanwa
-	UnicodeScriptTagbanwa UnicodeScript = C.G_UNICODE_SCRIPT_TAGBANWA
+	UnicodeScriptTagbanwa UnicodeScript = 45
 	// UnicodeScriptBraille wraps G_UNICODE_SCRIPT_BRAILLE
 	//
 	// Braille
-	UnicodeScriptBraille UnicodeScript = C.G_UNICODE_SCRIPT_BRAILLE
+	UnicodeScriptBraille UnicodeScript = 46
 	// UnicodeScriptCypriot wraps G_UNICODE_SCRIPT_CYPRIOT
 	//
 	// Cypriot
-	UnicodeScriptCypriot UnicodeScript = C.G_UNICODE_SCRIPT_CYPRIOT
+	UnicodeScriptCypriot UnicodeScript = 47
 	// UnicodeScriptLimbu wraps G_UNICODE_SCRIPT_LIMBU
 	//
 	// Limbu
-	UnicodeScriptLimbu UnicodeScript = C.G_UNICODE_SCRIPT_LIMBU
+	UnicodeScriptLimbu UnicodeScript = 48
 	// UnicodeScriptOsmanya wraps G_UNICODE_SCRIPT_OSMANYA
 	//
 	// Osmanya
-	UnicodeScriptOsmanya UnicodeScript = C.G_UNICODE_SCRIPT_OSMANYA
+	UnicodeScriptOsmanya UnicodeScript = 49
 	// UnicodeScriptShavian wraps G_UNICODE_SCRIPT_SHAVIAN
 	//
 	// Shavian
-	UnicodeScriptShavian UnicodeScript = C.G_UNICODE_SCRIPT_SHAVIAN
+	UnicodeScriptShavian UnicodeScript = 50
 	// UnicodeScriptLinearB wraps G_UNICODE_SCRIPT_LINEAR_B
 	//
 	// Linear B
-	UnicodeScriptLinearB UnicodeScript = C.G_UNICODE_SCRIPT_LINEAR_B
+	UnicodeScriptLinearB UnicodeScript = 51
 	// UnicodeScriptTaiLe wraps G_UNICODE_SCRIPT_TAI_LE
 	//
 	// Tai Le
-	UnicodeScriptTaiLe UnicodeScript = C.G_UNICODE_SCRIPT_TAI_LE
+	UnicodeScriptTaiLe UnicodeScript = 52
 	// UnicodeScriptUgaritic wraps G_UNICODE_SCRIPT_UGARITIC
 	//
 	// Ugaritic
-	UnicodeScriptUgaritic UnicodeScript = C.G_UNICODE_SCRIPT_UGARITIC
+	UnicodeScriptUgaritic UnicodeScript = 53
 	// UnicodeScriptNewTaiLue wraps G_UNICODE_SCRIPT_NEW_TAI_LUE
 	//
 	// New Tai Lue
-	UnicodeScriptNewTaiLue UnicodeScript = C.G_UNICODE_SCRIPT_NEW_TAI_LUE
+	UnicodeScriptNewTaiLue UnicodeScript = 54
 	// UnicodeScriptBuginese wraps G_UNICODE_SCRIPT_BUGINESE
 	//
 	// Buginese
-	UnicodeScriptBuginese UnicodeScript = C.G_UNICODE_SCRIPT_BUGINESE
+	UnicodeScriptBuginese UnicodeScript = 55
 	// UnicodeScriptGlagolitic wraps G_UNICODE_SCRIPT_GLAGOLITIC
 	//
 	// Glagolitic
-	UnicodeScriptGlagolitic UnicodeScript = C.G_UNICODE_SCRIPT_GLAGOLITIC
+	UnicodeScriptGlagolitic UnicodeScript = 56
 	// UnicodeScriptTifinagh wraps G_UNICODE_SCRIPT_TIFINAGH
 	//
 	// Tifinagh
-	UnicodeScriptTifinagh UnicodeScript = C.G_UNICODE_SCRIPT_TIFINAGH
+	UnicodeScriptTifinagh UnicodeScript = 57
 	// UnicodeScriptSylotiNagri wraps G_UNICODE_SCRIPT_SYLOTI_NAGRI
 	//
 	// Syloti Nagri
-	UnicodeScriptSylotiNagri UnicodeScript = C.G_UNICODE_SCRIPT_SYLOTI_NAGRI
+	UnicodeScriptSylotiNagri UnicodeScript = 58
 	// UnicodeScriptOldPersian wraps G_UNICODE_SCRIPT_OLD_PERSIAN
 	//
 	// Old Persian
-	UnicodeScriptOldPersian UnicodeScript = C.G_UNICODE_SCRIPT_OLD_PERSIAN
+	UnicodeScriptOldPersian UnicodeScript = 59
 	// UnicodeScriptKharoshthi wraps G_UNICODE_SCRIPT_KHAROSHTHI
 	//
 	// Kharoshthi
-	UnicodeScriptKharoshthi UnicodeScript = C.G_UNICODE_SCRIPT_KHAROSHTHI
+	UnicodeScriptKharoshthi UnicodeScript = 60
 	// UnicodeScriptUnknown wraps G_UNICODE_SCRIPT_UNKNOWN
 	//
 	// an unassigned code point
-	UnicodeScriptUnknown UnicodeScript = C.G_UNICODE_SCRIPT_UNKNOWN
+	UnicodeScriptUnknown UnicodeScript = 61
 	// UnicodeScriptBalinese wraps G_UNICODE_SCRIPT_BALINESE
 	//
 	// Balinese
-	UnicodeScriptBalinese UnicodeScript = C.G_UNICODE_SCRIPT_BALINESE
+	UnicodeScriptBalinese UnicodeScript = 62
 	// UnicodeScriptCuneiform wraps G_UNICODE_SCRIPT_CUNEIFORM
 	//
 	// Cuneiform
-	UnicodeScriptCuneiform UnicodeScript = C.G_UNICODE_SCRIPT_CUNEIFORM
+	UnicodeScriptCuneiform UnicodeScript = 63
 	// UnicodeScriptPhoenician wraps G_UNICODE_SCRIPT_PHOENICIAN
 	//
 	// Phoenician
-	UnicodeScriptPhoenician UnicodeScript = C.G_UNICODE_SCRIPT_PHOENICIAN
+	UnicodeScriptPhoenician UnicodeScript = 64
 	// UnicodeScriptPhagsPa wraps G_UNICODE_SCRIPT_PHAGS_PA
 	//
 	// Phags-pa
-	UnicodeScriptPhagsPa UnicodeScript = C.G_UNICODE_SCRIPT_PHAGS_PA
+	UnicodeScriptPhagsPa UnicodeScript = 65
 	// UnicodeScriptNko wraps G_UNICODE_SCRIPT_NKO
 	//
 	// N'Ko
-	UnicodeScriptNko UnicodeScript = C.G_UNICODE_SCRIPT_NKO
+	UnicodeScriptNko UnicodeScript = 66
 	// UnicodeScriptKayahLi wraps G_UNICODE_SCRIPT_KAYAH_LI
 	//
 	// Kayah Li. Since 2.16.3
-	UnicodeScriptKayahLi UnicodeScript = C.G_UNICODE_SCRIPT_KAYAH_LI
+	UnicodeScriptKayahLi UnicodeScript = 67
 	// UnicodeScriptLepcha wraps G_UNICODE_SCRIPT_LEPCHA
 	//
 	// Lepcha. Since 2.16.3
-	UnicodeScriptLepcha UnicodeScript = C.G_UNICODE_SCRIPT_LEPCHA
+	UnicodeScriptLepcha UnicodeScript = 68
 	// UnicodeScriptRejang wraps G_UNICODE_SCRIPT_REJANG
 	//
 	// Rejang. Since 2.16.3
-	UnicodeScriptRejang UnicodeScript = C.G_UNICODE_SCRIPT_REJANG
+	UnicodeScriptRejang UnicodeScript = 69
 	// UnicodeScriptSundanese wraps G_UNICODE_SCRIPT_SUNDANESE
 	//
 	// Sundanese. Since 2.16.3
-	UnicodeScriptSundanese UnicodeScript = C.G_UNICODE_SCRIPT_SUNDANESE
+	UnicodeScriptSundanese UnicodeScript = 70
 	// UnicodeScriptSaurashtra wraps G_UNICODE_SCRIPT_SAURASHTRA
 	//
 	// Saurashtra. Since 2.16.3
-	UnicodeScriptSaurashtra UnicodeScript = C.G_UNICODE_SCRIPT_SAURASHTRA
+	UnicodeScriptSaurashtra UnicodeScript = 71
 	// UnicodeScriptCham wraps G_UNICODE_SCRIPT_CHAM
 	//
 	// Cham. Since 2.16.3
-	UnicodeScriptCham UnicodeScript = C.G_UNICODE_SCRIPT_CHAM
+	UnicodeScriptCham UnicodeScript = 72
 	// UnicodeScriptOlChiki wraps G_UNICODE_SCRIPT_OL_CHIKI
 	//
 	// Ol Chiki. Since 2.16.3
-	UnicodeScriptOlChiki UnicodeScript = C.G_UNICODE_SCRIPT_OL_CHIKI
+	UnicodeScriptOlChiki UnicodeScript = 73
 	// UnicodeScriptVai wraps G_UNICODE_SCRIPT_VAI
 	//
 	// Vai. Since 2.16.3
-	UnicodeScriptVai UnicodeScript = C.G_UNICODE_SCRIPT_VAI
+	UnicodeScriptVai UnicodeScript = 74
 	// UnicodeScriptCarian wraps G_UNICODE_SCRIPT_CARIAN
 	//
 	// Carian. Since 2.16.3
-	UnicodeScriptCarian UnicodeScript = C.G_UNICODE_SCRIPT_CARIAN
+	UnicodeScriptCarian UnicodeScript = 75
 	// UnicodeScriptLycian wraps G_UNICODE_SCRIPT_LYCIAN
 	//
 	// Lycian. Since 2.16.3
-	UnicodeScriptLycian UnicodeScript = C.G_UNICODE_SCRIPT_LYCIAN
+	UnicodeScriptLycian UnicodeScript = 76
 	// UnicodeScriptLydian wraps G_UNICODE_SCRIPT_LYDIAN
 	//
 	// Lydian. Since 2.16.3
-	UnicodeScriptLydian UnicodeScript = C.G_UNICODE_SCRIPT_LYDIAN
+	UnicodeScriptLydian UnicodeScript = 77
 	// UnicodeScriptAvestan wraps G_UNICODE_SCRIPT_AVESTAN
 	//
 	// Avestan. Since 2.26
-	UnicodeScriptAvestan UnicodeScript = C.G_UNICODE_SCRIPT_AVESTAN
+	UnicodeScriptAvestan UnicodeScript = 78
 	// UnicodeScriptBamum wraps G_UNICODE_SCRIPT_BAMUM
 	//
 	// Bamum. Since 2.26
-	UnicodeScriptBamum UnicodeScript = C.G_UNICODE_SCRIPT_BAMUM
+	UnicodeScriptBamum UnicodeScript = 79
 	// UnicodeScriptEgyptianHieroglyphs wraps G_UNICODE_SCRIPT_EGYPTIAN_HIEROGLYPHS
 	//
 	// Egyptian Hieroglpyhs. Since 2.26
-	UnicodeScriptEgyptianHieroglyphs UnicodeScript = C.G_UNICODE_SCRIPT_EGYPTIAN_HIEROGLYPHS
+	UnicodeScriptEgyptianHieroglyphs UnicodeScript = 80
 	// UnicodeScriptImperialAramaic wraps G_UNICODE_SCRIPT_IMPERIAL_ARAMAIC
 	//
 	// Imperial Aramaic. Since 2.26
-	UnicodeScriptImperialAramaic UnicodeScript = C.G_UNICODE_SCRIPT_IMPERIAL_ARAMAIC
+	UnicodeScriptImperialAramaic UnicodeScript = 81
 	// UnicodeScriptInscriptionalPahlavi wraps G_UNICODE_SCRIPT_INSCRIPTIONAL_PAHLAVI
 	//
 	// Inscriptional Pahlavi. Since 2.26
-	UnicodeScriptInscriptionalPahlavi UnicodeScript = C.G_UNICODE_SCRIPT_INSCRIPTIONAL_PAHLAVI
+	UnicodeScriptInscriptionalPahlavi UnicodeScript = 82
 	// UnicodeScriptInscriptionalParthian wraps G_UNICODE_SCRIPT_INSCRIPTIONAL_PARTHIAN
 	//
 	// Inscriptional Parthian. Since 2.26
-	UnicodeScriptInscriptionalParthian UnicodeScript = C.G_UNICODE_SCRIPT_INSCRIPTIONAL_PARTHIAN
+	UnicodeScriptInscriptionalParthian UnicodeScript = 83
 	// UnicodeScriptJavanese wraps G_UNICODE_SCRIPT_JAVANESE
 	//
 	// Javanese. Since 2.26
-	UnicodeScriptJavanese UnicodeScript = C.G_UNICODE_SCRIPT_JAVANESE
+	UnicodeScriptJavanese UnicodeScript = 84
 	// UnicodeScriptKaithi wraps G_UNICODE_SCRIPT_KAITHI
 	//
 	// Kaithi. Since 2.26
-	UnicodeScriptKaithi UnicodeScript = C.G_UNICODE_SCRIPT_KAITHI
+	UnicodeScriptKaithi UnicodeScript = 85
 	// UnicodeScriptLisu wraps G_UNICODE_SCRIPT_LISU
 	//
 	// Lisu. Since 2.26
-	UnicodeScriptLisu UnicodeScript = C.G_UNICODE_SCRIPT_LISU
+	UnicodeScriptLisu UnicodeScript = 86
 	// UnicodeScriptMeeteiMayek wraps G_UNICODE_SCRIPT_MEETEI_MAYEK
 	//
 	// Meetei Mayek. Since 2.26
-	UnicodeScriptMeeteiMayek UnicodeScript = C.G_UNICODE_SCRIPT_MEETEI_MAYEK
+	UnicodeScriptMeeteiMayek UnicodeScript = 87
 	// UnicodeScriptOldSouthArabian wraps G_UNICODE_SCRIPT_OLD_SOUTH_ARABIAN
 	//
 	// Old South Arabian. Since 2.26
-	UnicodeScriptOldSouthArabian UnicodeScript = C.G_UNICODE_SCRIPT_OLD_SOUTH_ARABIAN
+	UnicodeScriptOldSouthArabian UnicodeScript = 88
 	// UnicodeScriptOldTurkic wraps G_UNICODE_SCRIPT_OLD_TURKIC
 	//
 	// Old Turkic. Since 2.28
-	UnicodeScriptOldTurkic UnicodeScript = C.G_UNICODE_SCRIPT_OLD_TURKIC
+	UnicodeScriptOldTurkic UnicodeScript = 89
 	// UnicodeScriptSamaritan wraps G_UNICODE_SCRIPT_SAMARITAN
 	//
 	// Samaritan. Since 2.26
-	UnicodeScriptSamaritan UnicodeScript = C.G_UNICODE_SCRIPT_SAMARITAN
+	UnicodeScriptSamaritan UnicodeScript = 90
 	// UnicodeScriptTaiTham wraps G_UNICODE_SCRIPT_TAI_THAM
 	//
 	// Tai Tham. Since 2.26
-	UnicodeScriptTaiTham UnicodeScript = C.G_UNICODE_SCRIPT_TAI_THAM
+	UnicodeScriptTaiTham UnicodeScript = 91
 	// UnicodeScriptTaiViet wraps G_UNICODE_SCRIPT_TAI_VIET
 	//
 	// Tai Viet. Since 2.26
-	UnicodeScriptTaiViet UnicodeScript = C.G_UNICODE_SCRIPT_TAI_VIET
+	UnicodeScriptTaiViet UnicodeScript = 92
 	// UnicodeScriptBatak wraps G_UNICODE_SCRIPT_BATAK
 	//
 	// Batak. Since 2.28
-	UnicodeScriptBatak UnicodeScript = C.G_UNICODE_SCRIPT_BATAK
+	UnicodeScriptBatak UnicodeScript = 93
 	// UnicodeScriptBrahmi wraps G_UNICODE_SCRIPT_BRAHMI
 	//
 	// Brahmi. Since 2.28
-	UnicodeScriptBrahmi UnicodeScript = C.G_UNICODE_SCRIPT_BRAHMI
+	UnicodeScriptBrahmi UnicodeScript = 94
 	// UnicodeScriptMandaic wraps G_UNICODE_SCRIPT_MANDAIC
 	//
 	// Mandaic. Since 2.28
-	UnicodeScriptMandaic UnicodeScript = C.G_UNICODE_SCRIPT_MANDAIC
+	UnicodeScriptMandaic UnicodeScript = 95
 	// UnicodeScriptChakma wraps G_UNICODE_SCRIPT_CHAKMA
 	//
 	// Chakma. Since: 2.32
-	UnicodeScriptChakma UnicodeScript = C.G_UNICODE_SCRIPT_CHAKMA
+	UnicodeScriptChakma UnicodeScript = 96
 	// UnicodeScriptMeroiticCursive wraps G_UNICODE_SCRIPT_MEROITIC_CURSIVE
 	//
 	// Meroitic Cursive. Since: 2.32
-	UnicodeScriptMeroiticCursive UnicodeScript = C.G_UNICODE_SCRIPT_MEROITIC_CURSIVE
+	UnicodeScriptMeroiticCursive UnicodeScript = 97
 	// UnicodeScriptMeroiticHieroglyphs wraps G_UNICODE_SCRIPT_MEROITIC_HIEROGLYPHS
 	//
 	// Meroitic Hieroglyphs. Since: 2.32
-	UnicodeScriptMeroiticHieroglyphs UnicodeScript = C.G_UNICODE_SCRIPT_MEROITIC_HIEROGLYPHS
+	UnicodeScriptMeroiticHieroglyphs UnicodeScript = 98
 	// UnicodeScriptMiao wraps G_UNICODE_SCRIPT_MIAO
 	//
 	// Miao. Since: 2.32
-	UnicodeScriptMiao UnicodeScript = C.G_UNICODE_SCRIPT_MIAO
+	UnicodeScriptMiao UnicodeScript = 99
 	// UnicodeScriptSharada wraps G_UNICODE_SCRIPT_SHARADA
 	//
 	// Sharada. Since: 2.32
-	UnicodeScriptSharada UnicodeScript = C.G_UNICODE_SCRIPT_SHARADA
+	UnicodeScriptSharada UnicodeScript = 100
 	// UnicodeScriptSoraSompeng wraps G_UNICODE_SCRIPT_SORA_SOMPENG
 	//
 	// Sora Sompeng. Since: 2.32
-	UnicodeScriptSoraSompeng UnicodeScript = C.G_UNICODE_SCRIPT_SORA_SOMPENG
+	UnicodeScriptSoraSompeng UnicodeScript = 101
 	// UnicodeScriptTakri wraps G_UNICODE_SCRIPT_TAKRI
 	//
 	// Takri. Since: 2.32
-	UnicodeScriptTakri UnicodeScript = C.G_UNICODE_SCRIPT_TAKRI
+	UnicodeScriptTakri UnicodeScript = 102
 	// UnicodeScriptBassaVah wraps G_UNICODE_SCRIPT_BASSA_VAH
 	//
 	// Bassa. Since: 2.42
-	UnicodeScriptBassaVah UnicodeScript = C.G_UNICODE_SCRIPT_BASSA_VAH
+	UnicodeScriptBassaVah UnicodeScript = 103
 	// UnicodeScriptCaucasianAlbanian wraps G_UNICODE_SCRIPT_CAUCASIAN_ALBANIAN
 	//
 	// Caucasian Albanian. Since: 2.42
-	UnicodeScriptCaucasianAlbanian UnicodeScript = C.G_UNICODE_SCRIPT_CAUCASIAN_ALBANIAN
+	UnicodeScriptCaucasianAlbanian UnicodeScript = 104
 	// UnicodeScriptDuployan wraps G_UNICODE_SCRIPT_DUPLOYAN
 	//
 	// Duployan. Since: 2.42
-	UnicodeScriptDuployan UnicodeScript = C.G_UNICODE_SCRIPT_DUPLOYAN
+	UnicodeScriptDuployan UnicodeScript = 105
 	// UnicodeScriptElbasan wraps G_UNICODE_SCRIPT_ELBASAN
 	//
 	// Elbasan. Since: 2.42
-	UnicodeScriptElbasan UnicodeScript = C.G_UNICODE_SCRIPT_ELBASAN
+	UnicodeScriptElbasan UnicodeScript = 106
 	// UnicodeScriptGrantha wraps G_UNICODE_SCRIPT_GRANTHA
 	//
 	// Grantha. Since: 2.42
-	UnicodeScriptGrantha UnicodeScript = C.G_UNICODE_SCRIPT_GRANTHA
+	UnicodeScriptGrantha UnicodeScript = 107
 	// UnicodeScriptKhojki wraps G_UNICODE_SCRIPT_KHOJKI
 	//
 	// Kjohki. Since: 2.42
-	UnicodeScriptKhojki UnicodeScript = C.G_UNICODE_SCRIPT_KHOJKI
+	UnicodeScriptKhojki UnicodeScript = 108
 	// UnicodeScriptKhudawadi wraps G_UNICODE_SCRIPT_KHUDAWADI
 	//
 	// Khudawadi, Sindhi. Since: 2.42
-	UnicodeScriptKhudawadi UnicodeScript = C.G_UNICODE_SCRIPT_KHUDAWADI
+	UnicodeScriptKhudawadi UnicodeScript = 109
 	// UnicodeScriptLinearA wraps G_UNICODE_SCRIPT_LINEAR_A
 	//
 	// Linear A. Since: 2.42
-	UnicodeScriptLinearA UnicodeScript = C.G_UNICODE_SCRIPT_LINEAR_A
+	UnicodeScriptLinearA UnicodeScript = 110
 	// UnicodeScriptMahajani wraps G_UNICODE_SCRIPT_MAHAJANI
 	//
 	// Mahajani. Since: 2.42
-	UnicodeScriptMahajani UnicodeScript = C.G_UNICODE_SCRIPT_MAHAJANI
+	UnicodeScriptMahajani UnicodeScript = 111
 	// UnicodeScriptManichaean wraps G_UNICODE_SCRIPT_MANICHAEAN
 	//
 	// Manichaean. Since: 2.42
-	UnicodeScriptManichaean UnicodeScript = C.G_UNICODE_SCRIPT_MANICHAEAN
+	UnicodeScriptManichaean UnicodeScript = 112
 	// UnicodeScriptMendeKikakui wraps G_UNICODE_SCRIPT_MENDE_KIKAKUI
 	//
 	// Mende Kikakui. Since: 2.42
-	UnicodeScriptMendeKikakui UnicodeScript = C.G_UNICODE_SCRIPT_MENDE_KIKAKUI
+	UnicodeScriptMendeKikakui UnicodeScript = 113
 	// UnicodeScriptModi wraps G_UNICODE_SCRIPT_MODI
 	//
 	// Modi. Since: 2.42
-	UnicodeScriptModi UnicodeScript = C.G_UNICODE_SCRIPT_MODI
+	UnicodeScriptModi UnicodeScript = 114
 	// UnicodeScriptMro wraps G_UNICODE_SCRIPT_MRO
 	//
 	// Mro. Since: 2.42
-	UnicodeScriptMro UnicodeScript = C.G_UNICODE_SCRIPT_MRO
+	UnicodeScriptMro UnicodeScript = 115
 	// UnicodeScriptNabataean wraps G_UNICODE_SCRIPT_NABATAEAN
 	//
 	// Nabataean. Since: 2.42
-	UnicodeScriptNabataean UnicodeScript = C.G_UNICODE_SCRIPT_NABATAEAN
+	UnicodeScriptNabataean UnicodeScript = 116
 	// UnicodeScriptOldNorthArabian wraps G_UNICODE_SCRIPT_OLD_NORTH_ARABIAN
 	//
 	// Old North Arabian. Since: 2.42
-	UnicodeScriptOldNorthArabian UnicodeScript = C.G_UNICODE_SCRIPT_OLD_NORTH_ARABIAN
+	UnicodeScriptOldNorthArabian UnicodeScript = 117
 	// UnicodeScriptOldPermic wraps G_UNICODE_SCRIPT_OLD_PERMIC
 	//
 	// Old Permic. Since: 2.42
-	UnicodeScriptOldPermic UnicodeScript = C.G_UNICODE_SCRIPT_OLD_PERMIC
+	UnicodeScriptOldPermic UnicodeScript = 118
 	// UnicodeScriptPahawhHmong wraps G_UNICODE_SCRIPT_PAHAWH_HMONG
 	//
 	// Pahawh Hmong. Since: 2.42
-	UnicodeScriptPahawhHmong UnicodeScript = C.G_UNICODE_SCRIPT_PAHAWH_HMONG
+	UnicodeScriptPahawhHmong UnicodeScript = 119
 	// UnicodeScriptPalmyrene wraps G_UNICODE_SCRIPT_PALMYRENE
 	//
 	// Palmyrene. Since: 2.42
-	UnicodeScriptPalmyrene UnicodeScript = C.G_UNICODE_SCRIPT_PALMYRENE
+	UnicodeScriptPalmyrene UnicodeScript = 120
 	// UnicodeScriptPauCinHau wraps G_UNICODE_SCRIPT_PAU_CIN_HAU
 	//
 	// Pau Cin Hau. Since: 2.42
-	UnicodeScriptPauCinHau UnicodeScript = C.G_UNICODE_SCRIPT_PAU_CIN_HAU
+	UnicodeScriptPauCinHau UnicodeScript = 121
 	// UnicodeScriptPsalterPahlavi wraps G_UNICODE_SCRIPT_PSALTER_PAHLAVI
 	//
 	// Psalter Pahlavi. Since: 2.42
-	UnicodeScriptPsalterPahlavi UnicodeScript = C.G_UNICODE_SCRIPT_PSALTER_PAHLAVI
+	UnicodeScriptPsalterPahlavi UnicodeScript = 122
 	// UnicodeScriptSiddham wraps G_UNICODE_SCRIPT_SIDDHAM
 	//
 	// Siddham. Since: 2.42
-	UnicodeScriptSiddham UnicodeScript = C.G_UNICODE_SCRIPT_SIDDHAM
+	UnicodeScriptSiddham UnicodeScript = 123
 	// UnicodeScriptTirhuta wraps G_UNICODE_SCRIPT_TIRHUTA
 	//
 	// Tirhuta. Since: 2.42
-	UnicodeScriptTirhuta UnicodeScript = C.G_UNICODE_SCRIPT_TIRHUTA
+	UnicodeScriptTirhuta UnicodeScript = 124
 	// UnicodeScriptWarangCiti wraps G_UNICODE_SCRIPT_WARANG_CITI
 	//
 	// Warang Citi. Since: 2.42
-	UnicodeScriptWarangCiti UnicodeScript = C.G_UNICODE_SCRIPT_WARANG_CITI
+	UnicodeScriptWarangCiti UnicodeScript = 125
 	// UnicodeScriptAhom wraps G_UNICODE_SCRIPT_AHOM
 	//
 	// Ahom. Since: 2.48
-	UnicodeScriptAhom UnicodeScript = C.G_UNICODE_SCRIPT_AHOM
+	UnicodeScriptAhom UnicodeScript = 126
 	// UnicodeScriptAnatolianHieroglyphs wraps G_UNICODE_SCRIPT_ANATOLIAN_HIEROGLYPHS
 	//
 	// Anatolian Hieroglyphs. Since: 2.48
-	UnicodeScriptAnatolianHieroglyphs UnicodeScript = C.G_UNICODE_SCRIPT_ANATOLIAN_HIEROGLYPHS
+	UnicodeScriptAnatolianHieroglyphs UnicodeScript = 127
 	// UnicodeScriptHatran wraps G_UNICODE_SCRIPT_HATRAN
 	//
 	// Hatran. Since: 2.48
-	UnicodeScriptHatran UnicodeScript = C.G_UNICODE_SCRIPT_HATRAN
+	UnicodeScriptHatran UnicodeScript = 128
 	// UnicodeScriptMultani wraps G_UNICODE_SCRIPT_MULTANI
 	//
 	// Multani. Since: 2.48
-	UnicodeScriptMultani UnicodeScript = C.G_UNICODE_SCRIPT_MULTANI
+	UnicodeScriptMultani UnicodeScript = 129
 	// UnicodeScriptOldHungarian wraps G_UNICODE_SCRIPT_OLD_HUNGARIAN
 	//
 	// Old Hungarian. Since: 2.48
-	UnicodeScriptOldHungarian UnicodeScript = C.G_UNICODE_SCRIPT_OLD_HUNGARIAN
+	UnicodeScriptOldHungarian UnicodeScript = 130
 	// UnicodeScriptSignwriting wraps G_UNICODE_SCRIPT_SIGNWRITING
 	//
 	// Signwriting. Since: 2.48
-	UnicodeScriptSignwriting UnicodeScript = C.G_UNICODE_SCRIPT_SIGNWRITING
+	UnicodeScriptSignwriting UnicodeScript = 131
 	// UnicodeScriptAdlam wraps G_UNICODE_SCRIPT_ADLAM
 	//
 	// Adlam. Since: 2.50
-	UnicodeScriptAdlam UnicodeScript = C.G_UNICODE_SCRIPT_ADLAM
+	UnicodeScriptAdlam UnicodeScript = 132
 	// UnicodeScriptBhaiksuki wraps G_UNICODE_SCRIPT_BHAIKSUKI
 	//
 	// Bhaiksuki. Since: 2.50
-	UnicodeScriptBhaiksuki UnicodeScript = C.G_UNICODE_SCRIPT_BHAIKSUKI
+	UnicodeScriptBhaiksuki UnicodeScript = 133
 	// UnicodeScriptMarchen wraps G_UNICODE_SCRIPT_MARCHEN
 	//
 	// Marchen. Since: 2.50
-	UnicodeScriptMarchen UnicodeScript = C.G_UNICODE_SCRIPT_MARCHEN
+	UnicodeScriptMarchen UnicodeScript = 134
 	// UnicodeScriptNewa wraps G_UNICODE_SCRIPT_NEWA
 	//
 	// Newa. Since: 2.50
-	UnicodeScriptNewa UnicodeScript = C.G_UNICODE_SCRIPT_NEWA
+	UnicodeScriptNewa UnicodeScript = 135
 	// UnicodeScriptOsage wraps G_UNICODE_SCRIPT_OSAGE
 	//
 	// Osage. Since: 2.50
-	UnicodeScriptOsage UnicodeScript = C.G_UNICODE_SCRIPT_OSAGE
+	UnicodeScriptOsage UnicodeScript = 136
 	// UnicodeScriptTangut wraps G_UNICODE_SCRIPT_TANGUT
 	//
 	// Tangut. Since: 2.50
-	UnicodeScriptTangut UnicodeScript = C.G_UNICODE_SCRIPT_TANGUT
+	UnicodeScriptTangut UnicodeScript = 137
 	// UnicodeScriptMasaramGondi wraps G_UNICODE_SCRIPT_MASARAM_GONDI
 	//
 	// Masaram Gondi. Since: 2.54
-	UnicodeScriptMasaramGondi UnicodeScript = C.G_UNICODE_SCRIPT_MASARAM_GONDI
+	UnicodeScriptMasaramGondi UnicodeScript = 138
 	// UnicodeScriptNushu wraps G_UNICODE_SCRIPT_NUSHU
 	//
 	// Nushu. Since: 2.54
-	UnicodeScriptNushu UnicodeScript = C.G_UNICODE_SCRIPT_NUSHU
+	UnicodeScriptNushu UnicodeScript = 139
 	// UnicodeScriptSoyombo wraps G_UNICODE_SCRIPT_SOYOMBO
 	//
 	// Soyombo. Since: 2.54
-	UnicodeScriptSoyombo UnicodeScript = C.G_UNICODE_SCRIPT_SOYOMBO
+	UnicodeScriptSoyombo UnicodeScript = 140
 	// UnicodeScriptZanabazarSquare wraps G_UNICODE_SCRIPT_ZANABAZAR_SQUARE
 	//
 	// Zanabazar Square. Since: 2.54
-	UnicodeScriptZanabazarSquare UnicodeScript = C.G_UNICODE_SCRIPT_ZANABAZAR_SQUARE
+	UnicodeScriptZanabazarSquare UnicodeScript = 141
 	// UnicodeScriptDogra wraps G_UNICODE_SCRIPT_DOGRA
 	//
 	// Dogra. Since: 2.58
-	UnicodeScriptDogra UnicodeScript = C.G_UNICODE_SCRIPT_DOGRA
+	UnicodeScriptDogra UnicodeScript = 142
 	// UnicodeScriptGunjalaGondi wraps G_UNICODE_SCRIPT_GUNJALA_GONDI
 	//
 	// Gunjala Gondi. Since: 2.58
-	UnicodeScriptGunjalaGondi UnicodeScript = C.G_UNICODE_SCRIPT_GUNJALA_GONDI
+	UnicodeScriptGunjalaGondi UnicodeScript = 143
 	// UnicodeScriptHanifiRohingya wraps G_UNICODE_SCRIPT_HANIFI_ROHINGYA
 	//
 	// Hanifi Rohingya. Since: 2.58
-	UnicodeScriptHanifiRohingya UnicodeScript = C.G_UNICODE_SCRIPT_HANIFI_ROHINGYA
+	UnicodeScriptHanifiRohingya UnicodeScript = 144
 	// UnicodeScriptMakasar wraps G_UNICODE_SCRIPT_MAKASAR
 	//
 	// Makasar. Since: 2.58
-	UnicodeScriptMakasar UnicodeScript = C.G_UNICODE_SCRIPT_MAKASAR
+	UnicodeScriptMakasar UnicodeScript = 145
 	// UnicodeScriptMedefaidrin wraps G_UNICODE_SCRIPT_MEDEFAIDRIN
 	//
 	// Medefaidrin. Since: 2.58
-	UnicodeScriptMedefaidrin UnicodeScript = C.G_UNICODE_SCRIPT_MEDEFAIDRIN
+	UnicodeScriptMedefaidrin UnicodeScript = 146
 	// UnicodeScriptOldSogdian wraps G_UNICODE_SCRIPT_OLD_SOGDIAN
 	//
 	// Old Sogdian. Since: 2.58
-	UnicodeScriptOldSogdian UnicodeScript = C.G_UNICODE_SCRIPT_OLD_SOGDIAN
+	UnicodeScriptOldSogdian UnicodeScript = 147
 	// UnicodeScriptSogdian wraps G_UNICODE_SCRIPT_SOGDIAN
 	//
 	// Sogdian. Since: 2.58
-	UnicodeScriptSogdian UnicodeScript = C.G_UNICODE_SCRIPT_SOGDIAN
+	UnicodeScriptSogdian UnicodeScript = 148
 	// UnicodeScriptElymaic wraps G_UNICODE_SCRIPT_ELYMAIC
 	//
 	// Elym. Since: 2.62
-	UnicodeScriptElymaic UnicodeScript = C.G_UNICODE_SCRIPT_ELYMAIC
+	UnicodeScriptElymaic UnicodeScript = 149
 	// UnicodeScriptNandinagari wraps G_UNICODE_SCRIPT_NANDINAGARI
 	//
 	// Nand. Since: 2.62
-	UnicodeScriptNandinagari UnicodeScript = C.G_UNICODE_SCRIPT_NANDINAGARI
+	UnicodeScriptNandinagari UnicodeScript = 150
 	// UnicodeScriptNyiakengPuachueHmong wraps G_UNICODE_SCRIPT_NYIAKENG_PUACHUE_HMONG
 	//
 	// Rohg. Since: 2.62
-	UnicodeScriptNyiakengPuachueHmong UnicodeScript = C.G_UNICODE_SCRIPT_NYIAKENG_PUACHUE_HMONG
+	UnicodeScriptNyiakengPuachueHmong UnicodeScript = 151
 	// UnicodeScriptWancho wraps G_UNICODE_SCRIPT_WANCHO
 	//
 	// Wcho. Since: 2.62
-	UnicodeScriptWancho UnicodeScript = C.G_UNICODE_SCRIPT_WANCHO
+	UnicodeScriptWancho UnicodeScript = 152
 	// UnicodeScriptChorasmian wraps G_UNICODE_SCRIPT_CHORASMIAN
 	//
 	// Chorasmian. Since: 2.66
-	UnicodeScriptChorasmian UnicodeScript = C.G_UNICODE_SCRIPT_CHORASMIAN
+	UnicodeScriptChorasmian UnicodeScript = 153
 	// UnicodeScriptDivesAkuru wraps G_UNICODE_SCRIPT_DIVES_AKURU
 	//
 	// Dives Akuru. Since: 2.66
-	UnicodeScriptDivesAkuru UnicodeScript = C.G_UNICODE_SCRIPT_DIVES_AKURU
+	UnicodeScriptDivesAkuru UnicodeScript = 154
 	// UnicodeScriptKhitanSmallScript wraps G_UNICODE_SCRIPT_KHITAN_SMALL_SCRIPT
 	//
 	// Khitan small script. Since: 2.66
-	UnicodeScriptKhitanSmallScript UnicodeScript = C.G_UNICODE_SCRIPT_KHITAN_SMALL_SCRIPT
+	UnicodeScriptKhitanSmallScript UnicodeScript = 155
 	// UnicodeScriptYezidi wraps G_UNICODE_SCRIPT_YEZIDI
 	//
 	// Yezidi. Since: 2.66
-	UnicodeScriptYezidi UnicodeScript = C.G_UNICODE_SCRIPT_YEZIDI
+	UnicodeScriptYezidi UnicodeScript = 156
 	// UnicodeScriptCyproMinoan wraps G_UNICODE_SCRIPT_CYPRO_MINOAN
 	//
 	// Cypro-Minoan. Since: 2.72
-	UnicodeScriptCyproMinoan UnicodeScript = C.G_UNICODE_SCRIPT_CYPRO_MINOAN
+	UnicodeScriptCyproMinoan UnicodeScript = 157
 	// UnicodeScriptOldUyghur wraps G_UNICODE_SCRIPT_OLD_UYGHUR
 	//
 	// Old Uyghur. Since: 2.72
-	UnicodeScriptOldUyghur UnicodeScript = C.G_UNICODE_SCRIPT_OLD_UYGHUR
+	UnicodeScriptOldUyghur UnicodeScript = 158
 	// UnicodeScriptTangsa wraps G_UNICODE_SCRIPT_TANGSA
 	//
 	// Tangsa. Since: 2.72
-	UnicodeScriptTangsa UnicodeScript = C.G_UNICODE_SCRIPT_TANGSA
+	UnicodeScriptTangsa UnicodeScript = 159
 	// UnicodeScriptToto wraps G_UNICODE_SCRIPT_TOTO
 	//
 	// Toto. Since: 2.72
-	UnicodeScriptToto UnicodeScript = C.G_UNICODE_SCRIPT_TOTO
+	UnicodeScriptToto UnicodeScript = 160
 	// UnicodeScriptVithkuqi wraps G_UNICODE_SCRIPT_VITHKUQI
 	//
 	// Vithkuqi. Since: 2.72
-	UnicodeScriptVithkuqi UnicodeScript = C.G_UNICODE_SCRIPT_VITHKUQI
+	UnicodeScriptVithkuqi UnicodeScript = 161
 	// UnicodeScriptMath wraps G_UNICODE_SCRIPT_MATH
 	//
 	// Mathematical notation. Since: 2.72
-	UnicodeScriptMath UnicodeScript = C.G_UNICODE_SCRIPT_MATH
+	UnicodeScriptMath UnicodeScript = 162
 	// UnicodeScriptKawi wraps G_UNICODE_SCRIPT_KAWI
 	//
 	// Kawi. Since 2.74
-	UnicodeScriptKawi UnicodeScript = C.G_UNICODE_SCRIPT_KAWI
+	UnicodeScriptKawi UnicodeScript = 163
 	// UnicodeScriptNagMundari wraps G_UNICODE_SCRIPT_NAG_MUNDARI
 	//
 	// Nag Mundari. Since 2.74
-	UnicodeScriptNagMundari UnicodeScript = C.G_UNICODE_SCRIPT_NAG_MUNDARI
+	UnicodeScriptNagMundari UnicodeScript = 164
 )
 
 
@@ -2501,123 +2501,123 @@ const (
 	// UnicodeControl wraps G_UNICODE_CONTROL
 	//
 	// General category "Other, Control" (Cc)
-	UnicodeControl UnicodeType = C.G_UNICODE_CONTROL
+	UnicodeControl UnicodeType = 0
 	// UnicodeFormat wraps G_UNICODE_FORMAT
 	//
 	// General category "Other, Format" (Cf)
-	UnicodeFormat UnicodeType = C.G_UNICODE_FORMAT
+	UnicodeFormat UnicodeType = 1
 	// UnicodeUnassigned wraps G_UNICODE_UNASSIGNED
 	//
 	// General category "Other, Not Assigned" (Cn)
-	UnicodeUnassigned UnicodeType = C.G_UNICODE_UNASSIGNED
+	UnicodeUnassigned UnicodeType = 2
 	// UnicodePrivateUse wraps G_UNICODE_PRIVATE_USE
 	//
 	// General category "Other, Private Use" (Co)
-	UnicodePrivateUse UnicodeType = C.G_UNICODE_PRIVATE_USE
+	UnicodePrivateUse UnicodeType = 3
 	// UnicodeSurrogate wraps G_UNICODE_SURROGATE
 	//
 	// General category "Other, Surrogate" (Cs)
-	UnicodeSurrogate UnicodeType = C.G_UNICODE_SURROGATE
+	UnicodeSurrogate UnicodeType = 4
 	// UnicodeLowercaseLetter wraps G_UNICODE_LOWERCASE_LETTER
 	//
 	// General category "Letter, Lowercase" (Ll)
-	UnicodeLowercaseLetter UnicodeType = C.G_UNICODE_LOWERCASE_LETTER
+	UnicodeLowercaseLetter UnicodeType = 5
 	// UnicodeModifierLetter wraps G_UNICODE_MODIFIER_LETTER
 	//
 	// General category "Letter, Modifier" (Lm)
-	UnicodeModifierLetter UnicodeType = C.G_UNICODE_MODIFIER_LETTER
+	UnicodeModifierLetter UnicodeType = 6
 	// UnicodeOtherLetter wraps G_UNICODE_OTHER_LETTER
 	//
 	// General category "Letter, Other" (Lo)
-	UnicodeOtherLetter UnicodeType = C.G_UNICODE_OTHER_LETTER
+	UnicodeOtherLetter UnicodeType = 7
 	// UnicodeTitlecaseLetter wraps G_UNICODE_TITLECASE_LETTER
 	//
 	// General category "Letter, Titlecase" (Lt)
-	UnicodeTitlecaseLetter UnicodeType = C.G_UNICODE_TITLECASE_LETTER
+	UnicodeTitlecaseLetter UnicodeType = 8
 	// UnicodeUppercaseLetter wraps G_UNICODE_UPPERCASE_LETTER
 	//
 	// General category "Letter, Uppercase" (Lu)
-	UnicodeUppercaseLetter UnicodeType = C.G_UNICODE_UPPERCASE_LETTER
+	UnicodeUppercaseLetter UnicodeType = 9
 	// UnicodeSpacingMark wraps G_UNICODE_SPACING_MARK
 	//
 	// General category "Mark, Spacing" (Mc)
-	UnicodeSpacingMark UnicodeType = C.G_UNICODE_SPACING_MARK
+	UnicodeSpacingMark UnicodeType = 10
 	// UnicodeEnclosingMark wraps G_UNICODE_ENCLOSING_MARK
 	//
 	// General category "Mark, Enclosing" (Me)
-	UnicodeEnclosingMark UnicodeType = C.G_UNICODE_ENCLOSING_MARK
+	UnicodeEnclosingMark UnicodeType = 11
 	// UnicodeNonSpacingMark wraps G_UNICODE_NON_SPACING_MARK
 	//
 	// General category "Mark, Nonspacing" (Mn)
-	UnicodeNonSpacingMark UnicodeType = C.G_UNICODE_NON_SPACING_MARK
+	UnicodeNonSpacingMark UnicodeType = 12
 	// UnicodeDecimalNumber wraps G_UNICODE_DECIMAL_NUMBER
 	//
 	// General category "Number, Decimal Digit" (Nd)
-	UnicodeDecimalNumber UnicodeType = C.G_UNICODE_DECIMAL_NUMBER
+	UnicodeDecimalNumber UnicodeType = 13
 	// UnicodeLetterNumber wraps G_UNICODE_LETTER_NUMBER
 	//
 	// General category "Number, Letter" (Nl)
-	UnicodeLetterNumber UnicodeType = C.G_UNICODE_LETTER_NUMBER
+	UnicodeLetterNumber UnicodeType = 14
 	// UnicodeOtherNumber wraps G_UNICODE_OTHER_NUMBER
 	//
 	// General category "Number, Other" (No)
-	UnicodeOtherNumber UnicodeType = C.G_UNICODE_OTHER_NUMBER
+	UnicodeOtherNumber UnicodeType = 15
 	// UnicodeConnectPunctuation wraps G_UNICODE_CONNECT_PUNCTUATION
 	//
 	// General category "Punctuation, Connector" (Pc)
-	UnicodeConnectPunctuation UnicodeType = C.G_UNICODE_CONNECT_PUNCTUATION
+	UnicodeConnectPunctuation UnicodeType = 16
 	// UnicodeDashPunctuation wraps G_UNICODE_DASH_PUNCTUATION
 	//
 	// General category "Punctuation, Dash" (Pd)
-	UnicodeDashPunctuation UnicodeType = C.G_UNICODE_DASH_PUNCTUATION
+	UnicodeDashPunctuation UnicodeType = 17
 	// UnicodeClosePunctuation wraps G_UNICODE_CLOSE_PUNCTUATION
 	//
 	// General category "Punctuation, Close" (Pe)
-	UnicodeClosePunctuation UnicodeType = C.G_UNICODE_CLOSE_PUNCTUATION
+	UnicodeClosePunctuation UnicodeType = 18
 	// UnicodeFinalPunctuation wraps G_UNICODE_FINAL_PUNCTUATION
 	//
 	// General category "Punctuation, Final quote" (Pf)
-	UnicodeFinalPunctuation UnicodeType = C.G_UNICODE_FINAL_PUNCTUATION
+	UnicodeFinalPunctuation UnicodeType = 19
 	// UnicodeInitialPunctuation wraps G_UNICODE_INITIAL_PUNCTUATION
 	//
 	// General category "Punctuation, Initial quote" (Pi)
-	UnicodeInitialPunctuation UnicodeType = C.G_UNICODE_INITIAL_PUNCTUATION
+	UnicodeInitialPunctuation UnicodeType = 20
 	// UnicodeOtherPunctuation wraps G_UNICODE_OTHER_PUNCTUATION
 	//
 	// General category "Punctuation, Other" (Po)
-	UnicodeOtherPunctuation UnicodeType = C.G_UNICODE_OTHER_PUNCTUATION
+	UnicodeOtherPunctuation UnicodeType = 21
 	// UnicodeOpenPunctuation wraps G_UNICODE_OPEN_PUNCTUATION
 	//
 	// General category "Punctuation, Open" (Ps)
-	UnicodeOpenPunctuation UnicodeType = C.G_UNICODE_OPEN_PUNCTUATION
+	UnicodeOpenPunctuation UnicodeType = 22
 	// UnicodeCurrencySymbol wraps G_UNICODE_CURRENCY_SYMBOL
 	//
 	// General category "Symbol, Currency" (Sc)
-	UnicodeCurrencySymbol UnicodeType = C.G_UNICODE_CURRENCY_SYMBOL
+	UnicodeCurrencySymbol UnicodeType = 23
 	// UnicodeModifierSymbol wraps G_UNICODE_MODIFIER_SYMBOL
 	//
 	// General category "Symbol, Modifier" (Sk)
-	UnicodeModifierSymbol UnicodeType = C.G_UNICODE_MODIFIER_SYMBOL
+	UnicodeModifierSymbol UnicodeType = 24
 	// UnicodeMathSymbol wraps G_UNICODE_MATH_SYMBOL
 	//
 	// General category "Symbol, Math" (Sm)
-	UnicodeMathSymbol UnicodeType = C.G_UNICODE_MATH_SYMBOL
+	UnicodeMathSymbol UnicodeType = 25
 	// UnicodeOtherSymbol wraps G_UNICODE_OTHER_SYMBOL
 	//
 	// General category "Symbol, Other" (So)
-	UnicodeOtherSymbol UnicodeType = C.G_UNICODE_OTHER_SYMBOL
+	UnicodeOtherSymbol UnicodeType = 26
 	// UnicodeLineSeparator wraps G_UNICODE_LINE_SEPARATOR
 	//
 	// General category "Separator, Line" (Zl)
-	UnicodeLineSeparator UnicodeType = C.G_UNICODE_LINE_SEPARATOR
+	UnicodeLineSeparator UnicodeType = 27
 	// UnicodeParagraphSeparator wraps G_UNICODE_PARAGRAPH_SEPARATOR
 	//
 	// General category "Separator, Paragraph" (Zp)
-	UnicodeParagraphSeparator UnicodeType = C.G_UNICODE_PARAGRAPH_SEPARATOR
+	UnicodeParagraphSeparator UnicodeType = 28
 	// UnicodeSpaceSeparator wraps G_UNICODE_SPACE_SEPARATOR
 	//
 	// General category "Separator, Space" (Zs)
-	UnicodeSpaceSeparator UnicodeType = C.G_UNICODE_SPACE_SEPARATOR
+	UnicodeSpaceSeparator UnicodeType = 29
 )
 
 
@@ -2631,43 +2631,43 @@ const (
 	//
 	// Generic error if no more specific error is available.
 	//     See the error message for details.
-	URIErrorFailed URIError = C.G_URI_ERROR_FAILED
+	URIErrorFailed URIError = 0
 	// URIErrorBadScheme wraps G_URI_ERROR_BAD_SCHEME
 	//
 	// The scheme of a URI could not be parsed.
-	URIErrorBadScheme URIError = C.G_URI_ERROR_BAD_SCHEME
+	URIErrorBadScheme URIError = 1
 	// URIErrorBadUser wraps G_URI_ERROR_BAD_USER
 	//
 	// The user/userinfo of a URI could not be parsed.
-	URIErrorBadUser URIError = C.G_URI_ERROR_BAD_USER
+	URIErrorBadUser URIError = 2
 	// URIErrorBadPassword wraps G_URI_ERROR_BAD_PASSWORD
 	//
 	// The password of a URI could not be parsed.
-	URIErrorBadPassword URIError = C.G_URI_ERROR_BAD_PASSWORD
+	URIErrorBadPassword URIError = 3
 	// URIErrorBadAuthParams wraps G_URI_ERROR_BAD_AUTH_PARAMS
 	//
 	// The authentication parameters of a URI could not be parsed.
-	URIErrorBadAuthParams URIError = C.G_URI_ERROR_BAD_AUTH_PARAMS
+	URIErrorBadAuthParams URIError = 4
 	// URIErrorBadHost wraps G_URI_ERROR_BAD_HOST
 	//
 	// The host of a URI could not be parsed.
-	URIErrorBadHost URIError = C.G_URI_ERROR_BAD_HOST
+	URIErrorBadHost URIError = 5
 	// URIErrorBadPort wraps G_URI_ERROR_BAD_PORT
 	//
 	// The port of a URI could not be parsed.
-	URIErrorBadPort URIError = C.G_URI_ERROR_BAD_PORT
+	URIErrorBadPort URIError = 6
 	// URIErrorBadPath wraps G_URI_ERROR_BAD_PATH
 	//
 	// The path of a URI could not be parsed.
-	URIErrorBadPath URIError = C.G_URI_ERROR_BAD_PATH
+	URIErrorBadPath URIError = 7
 	// URIErrorBadQuery wraps G_URI_ERROR_BAD_QUERY
 	//
 	// The query of a URI could not be parsed.
-	URIErrorBadQuery URIError = C.G_URI_ERROR_BAD_QUERY
+	URIErrorBadQuery URIError = 8
 	// URIErrorBadFragment wraps G_URI_ERROR_BAD_FRAGMENT
 	//
 	// The fragment of a URI could not be parsed.
-	URIErrorBadFragment URIError = C.G_URI_ERROR_BAD_FRAGMENT
+	URIErrorBadFragment URIError = 9
 )
 
 
@@ -2686,39 +2686,39 @@ const (
 	// UserDirectoryDesktop wraps G_USER_DIRECTORY_DESKTOP
 	//
 	// the user's Desktop directory
-	UserDirectoryDesktop UserDirectory = C.G_USER_DIRECTORY_DESKTOP
+	UserDirectoryDesktop UserDirectory = 0
 	// UserDirectoryDocuments wraps G_USER_DIRECTORY_DOCUMENTS
 	//
 	// the user's Documents directory
-	UserDirectoryDocuments UserDirectory = C.G_USER_DIRECTORY_DOCUMENTS
+	UserDirectoryDocuments UserDirectory = 1
 	// UserDirectoryDownload wraps G_USER_DIRECTORY_DOWNLOAD
 	//
 	// the user's Downloads directory
-	UserDirectoryDownload UserDirectory = C.G_USER_DIRECTORY_DOWNLOAD
+	UserDirectoryDownload UserDirectory = 2
 	// UserDirectoryMusic wraps G_USER_DIRECTORY_MUSIC
 	//
 	// the user's Music directory
-	UserDirectoryMusic UserDirectory = C.G_USER_DIRECTORY_MUSIC
+	UserDirectoryMusic UserDirectory = 3
 	// UserDirectoryPictures wraps G_USER_DIRECTORY_PICTURES
 	//
 	// the user's Pictures directory
-	UserDirectoryPictures UserDirectory = C.G_USER_DIRECTORY_PICTURES
+	UserDirectoryPictures UserDirectory = 4
 	// UserDirectoryPublicShare wraps G_USER_DIRECTORY_PUBLIC_SHARE
 	//
 	// the user's shared directory
-	UserDirectoryPublicShare UserDirectory = C.G_USER_DIRECTORY_PUBLIC_SHARE
+	UserDirectoryPublicShare UserDirectory = 5
 	// UserDirectoryTemplates wraps G_USER_DIRECTORY_TEMPLATES
 	//
 	// the user's Templates directory
-	UserDirectoryTemplates UserDirectory = C.G_USER_DIRECTORY_TEMPLATES
+	UserDirectoryTemplates UserDirectory = 6
 	// UserDirectoryVideos wraps G_USER_DIRECTORY_VIDEOS
 	//
 	// the user's Movies directory
-	UserDirectoryVideos UserDirectory = C.G_USER_DIRECTORY_VIDEOS
+	UserDirectoryVideos UserDirectory = 7
 	// UserNDirectories wraps G_USER_N_DIRECTORIES
 	//
 	// the number of enum values
-	UserNDirectories UserDirectory = C.G_USER_N_DIRECTORIES
+	UserNDirectories UserDirectory = 8
 )
 
 
@@ -2731,77 +2731,77 @@ const (
 	// VariantClassBoolean wraps G_VARIANT_CLASS_BOOLEAN
 	//
 	// The #GVariant is a boolean.
-	VariantClassBoolean VariantClass = C.G_VARIANT_CLASS_BOOLEAN
+	VariantClassBoolean VariantClass = 98
 	// VariantClassByte wraps G_VARIANT_CLASS_BYTE
 	//
 	// The #GVariant is a byte.
-	VariantClassByte VariantClass = C.G_VARIANT_CLASS_BYTE
+	VariantClassByte VariantClass = 121
 	// VariantClassInt16 wraps G_VARIANT_CLASS_INT16
 	//
 	// The #GVariant is a signed 16 bit integer.
-	VariantClassInt16 VariantClass = C.G_VARIANT_CLASS_INT16
+	VariantClassInt16 VariantClass = 110
 	// VariantClassUint16 wraps G_VARIANT_CLASS_UINT16
 	//
 	// The #GVariant is an unsigned 16 bit integer.
-	VariantClassUint16 VariantClass = C.G_VARIANT_CLASS_UINT16
+	VariantClassUint16 VariantClass = 113
 	// VariantClassInt32 wraps G_VARIANT_CLASS_INT32
 	//
 	// The #GVariant is a signed 32 bit integer.
-	VariantClassInt32 VariantClass = C.G_VARIANT_CLASS_INT32
+	VariantClassInt32 VariantClass = 105
 	// VariantClassUint32 wraps G_VARIANT_CLASS_UINT32
 	//
 	// The #GVariant is an unsigned 32 bit integer.
-	VariantClassUint32 VariantClass = C.G_VARIANT_CLASS_UINT32
+	VariantClassUint32 VariantClass = 117
 	// VariantClassInt64 wraps G_VARIANT_CLASS_INT64
 	//
 	// The #GVariant is a signed 64 bit integer.
-	VariantClassInt64 VariantClass = C.G_VARIANT_CLASS_INT64
+	VariantClassInt64 VariantClass = 120
 	// VariantClassUint64 wraps G_VARIANT_CLASS_UINT64
 	//
 	// The #GVariant is an unsigned 64 bit integer.
-	VariantClassUint64 VariantClass = C.G_VARIANT_CLASS_UINT64
+	VariantClassUint64 VariantClass = 116
 	// VariantClassHandle wraps G_VARIANT_CLASS_HANDLE
 	//
 	// The #GVariant is a file handle index.
-	VariantClassHandle VariantClass = C.G_VARIANT_CLASS_HANDLE
+	VariantClassHandle VariantClass = 104
 	// VariantClassDouble wraps G_VARIANT_CLASS_DOUBLE
 	//
 	// The #GVariant is a double precision floating
 	//                          point value.
-	VariantClassDouble VariantClass = C.G_VARIANT_CLASS_DOUBLE
+	VariantClassDouble VariantClass = 100
 	// VariantClassString wraps G_VARIANT_CLASS_STRING
 	//
 	// The #GVariant is a normal string.
-	VariantClassString VariantClass = C.G_VARIANT_CLASS_STRING
+	VariantClassString VariantClass = 115
 	// VariantClassObjectPath wraps G_VARIANT_CLASS_OBJECT_PATH
 	//
 	// The #GVariant is a D-Bus object path
 	//                               string.
-	VariantClassObjectPath VariantClass = C.G_VARIANT_CLASS_OBJECT_PATH
+	VariantClassObjectPath VariantClass = 111
 	// VariantClassSignature wraps G_VARIANT_CLASS_SIGNATURE
 	//
 	// The #GVariant is a D-Bus signature string.
-	VariantClassSignature VariantClass = C.G_VARIANT_CLASS_SIGNATURE
+	VariantClassSignature VariantClass = 103
 	// VariantClassVariant wraps G_VARIANT_CLASS_VARIANT
 	//
 	// The #GVariant is a variant.
-	VariantClassVariant VariantClass = C.G_VARIANT_CLASS_VARIANT
+	VariantClassVariant VariantClass = 118
 	// VariantClassMaybe wraps G_VARIANT_CLASS_MAYBE
 	//
 	// The #GVariant is a maybe-typed value.
-	VariantClassMaybe VariantClass = C.G_VARIANT_CLASS_MAYBE
+	VariantClassMaybe VariantClass = 109
 	// VariantClassArray wraps G_VARIANT_CLASS_ARRAY
 	//
 	// The #GVariant is an array.
-	VariantClassArray VariantClass = C.G_VARIANT_CLASS_ARRAY
+	VariantClassArray VariantClass = 97
 	// VariantClassTuple wraps G_VARIANT_CLASS_TUPLE
 	//
 	// The #GVariant is a tuple.
-	VariantClassTuple VariantClass = C.G_VARIANT_CLASS_TUPLE
+	VariantClassTuple VariantClass = 40
 	// VariantClassDictEntry wraps G_VARIANT_CLASS_DICT_ENTRY
 	//
 	// The #GVariant is a dictionary entry.
-	VariantClassDictEntry VariantClass = C.G_VARIANT_CLASS_DICT_ENTRY
+	VariantClassDictEntry VariantClass = 123
 )
 
 
@@ -2814,79 +2814,79 @@ const (
 	// VariantParseErrorFailed wraps G_VARIANT_PARSE_ERROR_FAILED
 	//
 	// generic error (unused)
-	VariantParseErrorFailed VariantParseError = C.G_VARIANT_PARSE_ERROR_FAILED
+	VariantParseErrorFailed VariantParseError = 0
 	// VariantParseErrorBasicTypeExpected wraps G_VARIANT_PARSE_ERROR_BASIC_TYPE_EXPECTED
 	//
 	// a non-basic #GVariantType was given where a basic type was expected
-	VariantParseErrorBasicTypeExpected VariantParseError = C.G_VARIANT_PARSE_ERROR_BASIC_TYPE_EXPECTED
+	VariantParseErrorBasicTypeExpected VariantParseError = 1
 	// VariantParseErrorCannotInferType wraps G_VARIANT_PARSE_ERROR_CANNOT_INFER_TYPE
 	//
 	// cannot infer the #GVariantType
-	VariantParseErrorCannotInferType VariantParseError = C.G_VARIANT_PARSE_ERROR_CANNOT_INFER_TYPE
+	VariantParseErrorCannotInferType VariantParseError = 2
 	// VariantParseErrorDefiniteTypeExpected wraps G_VARIANT_PARSE_ERROR_DEFINITE_TYPE_EXPECTED
 	//
 	// an indefinite #GVariantType was given where a definite type was expected
-	VariantParseErrorDefiniteTypeExpected VariantParseError = C.G_VARIANT_PARSE_ERROR_DEFINITE_TYPE_EXPECTED
+	VariantParseErrorDefiniteTypeExpected VariantParseError = 3
 	// VariantParseErrorInputNotAtEnd wraps G_VARIANT_PARSE_ERROR_INPUT_NOT_AT_END
 	//
 	// extra data after parsing finished
-	VariantParseErrorInputNotAtEnd VariantParseError = C.G_VARIANT_PARSE_ERROR_INPUT_NOT_AT_END
+	VariantParseErrorInputNotAtEnd VariantParseError = 4
 	// VariantParseErrorInvalidCharacter wraps G_VARIANT_PARSE_ERROR_INVALID_CHARACTER
 	//
 	// invalid character in number or unicode escape
-	VariantParseErrorInvalidCharacter VariantParseError = C.G_VARIANT_PARSE_ERROR_INVALID_CHARACTER
+	VariantParseErrorInvalidCharacter VariantParseError = 5
 	// VariantParseErrorInvalidFormatString wraps G_VARIANT_PARSE_ERROR_INVALID_FORMAT_STRING
 	//
 	// not a valid #GVariant format string
-	VariantParseErrorInvalidFormatString VariantParseError = C.G_VARIANT_PARSE_ERROR_INVALID_FORMAT_STRING
+	VariantParseErrorInvalidFormatString VariantParseError = 6
 	// VariantParseErrorInvalidObjectPath wraps G_VARIANT_PARSE_ERROR_INVALID_OBJECT_PATH
 	//
 	// not a valid object path
-	VariantParseErrorInvalidObjectPath VariantParseError = C.G_VARIANT_PARSE_ERROR_INVALID_OBJECT_PATH
+	VariantParseErrorInvalidObjectPath VariantParseError = 7
 	// VariantParseErrorInvalidSignature wraps G_VARIANT_PARSE_ERROR_INVALID_SIGNATURE
 	//
 	// not a valid type signature
-	VariantParseErrorInvalidSignature VariantParseError = C.G_VARIANT_PARSE_ERROR_INVALID_SIGNATURE
+	VariantParseErrorInvalidSignature VariantParseError = 8
 	// VariantParseErrorInvalidTypeString wraps G_VARIANT_PARSE_ERROR_INVALID_TYPE_STRING
 	//
 	// not a valid #GVariant type string
-	VariantParseErrorInvalidTypeString VariantParseError = C.G_VARIANT_PARSE_ERROR_INVALID_TYPE_STRING
+	VariantParseErrorInvalidTypeString VariantParseError = 9
 	// VariantParseErrorNoCommonType wraps G_VARIANT_PARSE_ERROR_NO_COMMON_TYPE
 	//
 	// could not find a common type for array entries
-	VariantParseErrorNoCommonType VariantParseError = C.G_VARIANT_PARSE_ERROR_NO_COMMON_TYPE
+	VariantParseErrorNoCommonType VariantParseError = 10
 	// VariantParseErrorNumberOutOfRange wraps G_VARIANT_PARSE_ERROR_NUMBER_OUT_OF_RANGE
 	//
 	// the numerical value is out of range of the given type
-	VariantParseErrorNumberOutOfRange VariantParseError = C.G_VARIANT_PARSE_ERROR_NUMBER_OUT_OF_RANGE
+	VariantParseErrorNumberOutOfRange VariantParseError = 11
 	// VariantParseErrorNumberTooBig wraps G_VARIANT_PARSE_ERROR_NUMBER_TOO_BIG
 	//
 	// the numerical value is out of range for any type
-	VariantParseErrorNumberTooBig VariantParseError = C.G_VARIANT_PARSE_ERROR_NUMBER_TOO_BIG
+	VariantParseErrorNumberTooBig VariantParseError = 12
 	// VariantParseErrorTypeError wraps G_VARIANT_PARSE_ERROR_TYPE_ERROR
 	//
 	// cannot parse as variant of the specified type
-	VariantParseErrorTypeError VariantParseError = C.G_VARIANT_PARSE_ERROR_TYPE_ERROR
+	VariantParseErrorTypeError VariantParseError = 13
 	// VariantParseErrorUnexpectedToken wraps G_VARIANT_PARSE_ERROR_UNEXPECTED_TOKEN
 	//
 	// an unexpected token was encountered
-	VariantParseErrorUnexpectedToken VariantParseError = C.G_VARIANT_PARSE_ERROR_UNEXPECTED_TOKEN
+	VariantParseErrorUnexpectedToken VariantParseError = 14
 	// VariantParseErrorUnknownKeyword wraps G_VARIANT_PARSE_ERROR_UNKNOWN_KEYWORD
 	//
 	// an unknown keyword was encountered
-	VariantParseErrorUnknownKeyword VariantParseError = C.G_VARIANT_PARSE_ERROR_UNKNOWN_KEYWORD
+	VariantParseErrorUnknownKeyword VariantParseError = 15
 	// VariantParseErrorUnterminatedStringConstant wraps G_VARIANT_PARSE_ERROR_UNTERMINATED_STRING_CONSTANT
 	//
 	// unterminated string constant
-	VariantParseErrorUnterminatedStringConstant VariantParseError = C.G_VARIANT_PARSE_ERROR_UNTERMINATED_STRING_CONSTANT
+	VariantParseErrorUnterminatedStringConstant VariantParseError = 16
 	// VariantParseErrorValueExpected wraps G_VARIANT_PARSE_ERROR_VALUE_EXPECTED
 	//
 	// no value given
-	VariantParseErrorValueExpected VariantParseError = C.G_VARIANT_PARSE_ERROR_VALUE_EXPECTED
+	VariantParseErrorValueExpected VariantParseError = 17
 	// VariantParseErrorRecursion wraps G_VARIANT_PARSE_ERROR_RECURSION
 	//
 	// variant was too deeply nested; #GVariant is only guaranteed to handle nesting up to 64 levels (Since: 2.64)
-	VariantParseErrorRecursion VariantParseError = C.G_VARIANT_PARSE_ERROR_RECURSION
+	VariantParseErrorRecursion VariantParseError = 18
 )
 
 
@@ -2901,7 +2901,7 @@ const (
 	//
 	// No guarantees about file consistency or durability.
 	//   The most dangerous setting, which is slightly faster than other settings.
-	FileSetContentsNone FileSetContentsFlags = C.G_FILE_SET_CONTENTS_NONE
+	FileSetContentsNone FileSetContentsFlags = 0
 	// FileSetContentsConsistent wraps G_FILE_SET_CONTENTS_CONSISTENT
 	//
 	// Guarantee file consistency: after a crash,
@@ -2909,7 +2909,7 @@ const (
 	//   available, but not a mixture. On Unix systems this equates to an `fsync()`
 	//   on the file and use of an atomic `rename()` of the new version of the file
 	//   over the old.
-	FileSetContentsConsistent FileSetContentsFlags = C.G_FILE_SET_CONTENTS_CONSISTENT
+	FileSetContentsConsistent FileSetContentsFlags = 1
 	// FileSetContentsDurable wraps G_FILE_SET_CONTENTS_DURABLE
 	//
 	// Guarantee file durability: after a crash, the
@@ -2917,14 +2917,14 @@ const (
 	//   an `fsync()` on the file (if %G_FILE_SET_CONTENTS_CONSISTENT is unset), or
 	//   the effects of %G_FILE_SET_CONTENTS_CONSISTENT plus an `fsync()` on the
 	//   directory containing the file after calling `rename()`.
-	FileSetContentsDurable FileSetContentsFlags = C.G_FILE_SET_CONTENTS_DURABLE
+	FileSetContentsDurable FileSetContentsFlags = 2
 	// FileSetContentsOnlyExisting wraps G_FILE_SET_CONTENTS_ONLY_EXISTING
 	//
 	// Only apply consistency and durability
 	//   guarantees if the file already exists. This may speed up file operations
 	//   if the file doesn’t currently exist, but may result in a corrupted version
 	//   of the new file if the system crashes while writing it.
-	FileSetContentsOnlyExisting FileSetContentsFlags = C.G_FILE_SET_CONTENTS_ONLY_EXISTING
+	FileSetContentsOnlyExisting FileSetContentsFlags = 4
 )
 
 // Has returns true if f contains other
@@ -2943,24 +2943,24 @@ const (
 	// %TRUE if the file is a regular file
 	//     (not a directory). Note that this test will also return %TRUE
 	//     if the tested file is a symlink to a regular file.
-	FileTestIsRegular FileTest = C.G_FILE_TEST_IS_REGULAR
+	FileTestIsRegular FileTest = 1
 	// FileTestIsSymlink wraps G_FILE_TEST_IS_SYMLINK
 	//
 	// %TRUE if the file is a symlink.
-	FileTestIsSymlink FileTest = C.G_FILE_TEST_IS_SYMLINK
+	FileTestIsSymlink FileTest = 2
 	// FileTestIsDir wraps G_FILE_TEST_IS_DIR
 	//
 	// %TRUE if the file is a directory.
-	FileTestIsDir FileTest = C.G_FILE_TEST_IS_DIR
+	FileTestIsDir FileTest = 4
 	// FileTestIsExecutable wraps G_FILE_TEST_IS_EXECUTABLE
 	//
 	// %TRUE if the file is executable.
-	FileTestIsExecutable FileTest = C.G_FILE_TEST_IS_EXECUTABLE
+	FileTestIsExecutable FileTest = 8
 	// FileTestExists wraps G_FILE_TEST_EXISTS
 	//
 	// %TRUE if the file exists. It may or may not
 	//     be a regular file.
-	FileTestExists FileTest = C.G_FILE_TEST_EXISTS
+	FileTestExists FileTest = 16
 )
 
 // Has returns true if f contains other
@@ -2977,36 +2977,36 @@ const (
 	// FormatSizeDefault wraps G_FORMAT_SIZE_DEFAULT
 	//
 	// behave the same as g_format_size()
-	FormatSizeDefault FormatSizeFlags = C.G_FORMAT_SIZE_DEFAULT
+	FormatSizeDefault FormatSizeFlags = 0
 	// FormatSizeLongFormat wraps G_FORMAT_SIZE_LONG_FORMAT
 	//
 	// include the exact number of bytes as part
 	//     of the returned string.  For example, "45.6 kB (45,612 bytes)".
-	FormatSizeLongFormat FormatSizeFlags = C.G_FORMAT_SIZE_LONG_FORMAT
+	FormatSizeLongFormat FormatSizeFlags = 1
 	// FormatSizeIecUnits wraps G_FORMAT_SIZE_IEC_UNITS
 	//
 	// use IEC (base 1024) units with "KiB"-style
 	//     suffixes. IEC units should only be used for reporting things with
 	//     a strong "power of 2" basis, like RAM sizes or RAID stripe sizes.
 	//     Network and storage sizes should be reported in the normal SI units.
-	FormatSizeIecUnits FormatSizeFlags = C.G_FORMAT_SIZE_IEC_UNITS
+	FormatSizeIecUnits FormatSizeFlags = 2
 	// FormatSizeBits wraps G_FORMAT_SIZE_BITS
 	//
 	// set the size as a quantity in bits, rather than
 	//     bytes, and return units in bits. For example, ‘Mbit’ rather than ‘MB’.
-	FormatSizeBits FormatSizeFlags = C.G_FORMAT_SIZE_BITS
+	FormatSizeBits FormatSizeFlags = 4
 	// FormatSizeOnlyValue wraps G_FORMAT_SIZE_ONLY_VALUE
 	//
 	// return only value, without unit; this should
 	//     not be used together with @G_FORMAT_SIZE_LONG_FORMAT
 	//     nor @G_FORMAT_SIZE_ONLY_UNIT. Since: 2.74
-	FormatSizeOnlyValue FormatSizeFlags = C.G_FORMAT_SIZE_ONLY_VALUE
+	FormatSizeOnlyValue FormatSizeFlags = 8
 	// FormatSizeOnlyUnit wraps G_FORMAT_SIZE_ONLY_UNIT
 	//
 	// return only unit, without value; this should
 	//     not be used together with @G_FORMAT_SIZE_LONG_FORMAT
 	//     nor @G_FORMAT_SIZE_ONLY_VALUE. Since: 2.74
-	FormatSizeOnlyUnit FormatSizeFlags = C.G_FORMAT_SIZE_ONLY_UNIT
+	FormatSizeOnlyUnit FormatSizeFlags = 16
 )
 
 // Has returns true if f contains other
@@ -3024,28 +3024,28 @@ const (
 	// IOIn wraps G_IO_IN
 	//
 	// There is data to read.
-	IOIn IOCondition = C.G_IO_IN
+	IOIn IOCondition = 1
 	// IOOut wraps G_IO_OUT
 	//
 	// Data can be written (without blocking).
-	IOOut IOCondition = C.G_IO_OUT
+	IOOut IOCondition = 4
 	// IOPri wraps G_IO_PRI
 	//
 	// There is urgent data to read.
-	IOPri IOCondition = C.G_IO_PRI
+	IOPri IOCondition = 2
 	// IOErr wraps G_IO_ERR
 	//
 	// Error condition.
-	IOErr IOCondition = C.G_IO_ERR
+	IOErr IOCondition = 8
 	// IOHup wraps G_IO_HUP
 	//
 	// Hung up (the connection has been broken, usually for
 	//            pipes and sockets).
-	IOHup IOCondition = C.G_IO_HUP
+	IOHup IOCondition = 16
 	// IONval wraps G_IO_NVAL
 	//
 	// Invalid request. The file descriptor is not open.
-	IONval IOCondition = C.G_IO_NVAL
+	IONval IOCondition = 32
 )
 
 // Has returns true if i contains other
@@ -3064,54 +3064,54 @@ const (
 	// IOFlagNone wraps G_IO_FLAG_NONE
 	//
 	// no special flags set. Since: 2.74
-	IOFlagNone IOFlags = C.G_IO_FLAG_NONE
+	IOFlagNone IOFlags = 0
 	// IOFlagAppend wraps G_IO_FLAG_APPEND
 	//
 	// turns on append mode, corresponds to %O_APPEND
 	//     (see the documentation of the UNIX open() syscall)
-	IOFlagAppend IOFlags = C.G_IO_FLAG_APPEND
+	IOFlagAppend IOFlags = 1
 	// IOFlagNonblock wraps G_IO_FLAG_NONBLOCK
 	//
 	// turns on nonblocking mode, corresponds to
 	//     %O_NONBLOCK/%O_NDELAY (see the documentation of the UNIX open()
 	//     syscall)
-	IOFlagNonblock IOFlags = C.G_IO_FLAG_NONBLOCK
+	IOFlagNonblock IOFlags = 2
 	// IOFlagIsReadable wraps G_IO_FLAG_IS_READABLE
 	//
 	// indicates that the io channel is readable.
 	//     This flag cannot be changed.
-	IOFlagIsReadable IOFlags = C.G_IO_FLAG_IS_READABLE
+	IOFlagIsReadable IOFlags = 4
 	// IOFlagIsWritable wraps G_IO_FLAG_IS_WRITABLE
 	//
 	// indicates that the io channel is writable.
 	//     This flag cannot be changed.
-	IOFlagIsWritable IOFlags = C.G_IO_FLAG_IS_WRITABLE
+	IOFlagIsWritable IOFlags = 8
 	// IOFlagIsWriteable wraps G_IO_FLAG_IS_WRITEABLE
 	//
 	// a misspelled version of @G_IO_FLAG_IS_WRITABLE
 	//     that existed before the spelling was fixed in GLib 2.30. It is kept
 	//     here for compatibility reasons. Deprecated since 2.30
-	IOFlagIsWriteable IOFlags = C.G_IO_FLAG_IS_WRITEABLE
+	IOFlagIsWriteable IOFlags = 8
 	// IOFlagIsSeekable wraps G_IO_FLAG_IS_SEEKABLE
 	//
 	// indicates that the io channel is seekable,
 	//     i.e. that g_io_channel_seek_position() can be used on it.
 	//     This flag cannot be changed.
-	IOFlagIsSeekable IOFlags = C.G_IO_FLAG_IS_SEEKABLE
+	IOFlagIsSeekable IOFlags = 16
 	// IOFlagMask wraps G_IO_FLAG_MASK
 	//
 	// the mask that specifies all the valid flags.
-	IOFlagMask IOFlags = C.G_IO_FLAG_MASK
+	IOFlagMask IOFlags = 31
 	// IOFlagGetMask wraps G_IO_FLAG_GET_MASK
 	//
 	// the mask of the flags that are returned from
 	//     g_io_channel_get_flags()
-	IOFlagGetMask IOFlags = C.G_IO_FLAG_GET_MASK
+	IOFlagGetMask IOFlags = 31
 	// IOFlagSetMask wraps G_IO_FLAG_SET_MASK
 	//
 	// the mask of the flags that the user can modify
 	//     with g_io_channel_set_flags()
-	IOFlagSetMask IOFlags = C.G_IO_FLAG_SET_MASK
+	IOFlagSetMask IOFlags = 3
 )
 
 // Has returns true if i contains other
@@ -3128,21 +3128,21 @@ const (
 	// KeyFileNone wraps G_KEY_FILE_NONE
 	//
 	// No flags, default behaviour
-	KeyFileNone KeyFileFlags = C.G_KEY_FILE_NONE
+	KeyFileNone KeyFileFlags = 0
 	// KeyFileKeepComments wraps G_KEY_FILE_KEEP_COMMENTS
 	//
 	// Use this flag if you plan to write the
 	//   (possibly modified) contents of the key file back to a file;
 	//   otherwise all comments will be lost when the key file is
 	//   written back.
-	KeyFileKeepComments KeyFileFlags = C.G_KEY_FILE_KEEP_COMMENTS
+	KeyFileKeepComments KeyFileFlags = 1
 	// KeyFileKeepTranslations wraps G_KEY_FILE_KEEP_TRANSLATIONS
 	//
 	// Use this flag if you plan to write the
 	//   (possibly modified) contents of the key file back to a file;
 	//   otherwise only the translations for the current language will be
 	//   written back.
-	KeyFileKeepTranslations KeyFileFlags = C.G_KEY_FILE_KEEP_TRANSLATIONS
+	KeyFileKeepTranslations KeyFileFlags = 2
 )
 
 // Has returns true if k contains other
@@ -3162,42 +3162,42 @@ const (
 	// LogFlagRecursion wraps G_LOG_FLAG_RECURSION
 	//
 	// internal flag
-	LogFlagRecursion LogLevelFlags = C.G_LOG_FLAG_RECURSION
+	LogFlagRecursion LogLevelFlags = 1
 	// LogFlagFatal wraps G_LOG_FLAG_FATAL
 	//
 	// internal flag
-	LogFlagFatal LogLevelFlags = C.G_LOG_FLAG_FATAL
+	LogFlagFatal LogLevelFlags = 2
 	// LogLevelError wraps G_LOG_LEVEL_ERROR
 	//
 	// log level for errors, see [func@GLib.error].
 	//   This level is also used for messages produced by [func@GLib.assert].
-	LogLevelError LogLevelFlags = C.G_LOG_LEVEL_ERROR
+	LogLevelError LogLevelFlags = 4
 	// LogLevelCritical wraps G_LOG_LEVEL_CRITICAL
 	//
 	// log level for critical warning messages, see
 	//   [func@GLib.critical]. This level is also used for messages produced by
 	//   [func@GLib.return_if_fail] and [func@GLib.return_val_if_fail].
-	LogLevelCritical LogLevelFlags = C.G_LOG_LEVEL_CRITICAL
+	LogLevelCritical LogLevelFlags = 8
 	// LogLevelWarning wraps G_LOG_LEVEL_WARNING
 	//
 	// log level for warnings, see [func@GLib.warning]
-	LogLevelWarning LogLevelFlags = C.G_LOG_LEVEL_WARNING
+	LogLevelWarning LogLevelFlags = 16
 	// LogLevelMessage wraps G_LOG_LEVEL_MESSAGE
 	//
 	// log level for messages, see [func@GLib.message]
-	LogLevelMessage LogLevelFlags = C.G_LOG_LEVEL_MESSAGE
+	LogLevelMessage LogLevelFlags = 32
 	// LogLevelInfo wraps G_LOG_LEVEL_INFO
 	//
 	// log level for informational messages, see [func@GLib.info]
-	LogLevelInfo LogLevelFlags = C.G_LOG_LEVEL_INFO
+	LogLevelInfo LogLevelFlags = 64
 	// LogLevelDebug wraps G_LOG_LEVEL_DEBUG
 	//
 	// log level for debug messages, see [func@GLib.debug]
-	LogLevelDebug LogLevelFlags = C.G_LOG_LEVEL_DEBUG
+	LogLevelDebug LogLevelFlags = 128
 	// LogLevelMask wraps G_LOG_LEVEL_MASK
 	//
 	// a mask including all log levels
-	LogLevelMask LogLevelFlags = C.G_LOG_LEVEL_MASK
+	LogLevelMask LogLevelFlags = -4
 )
 
 // Has returns true if l contains other
@@ -3215,14 +3215,14 @@ const (
 	// MainContextFlagsNone wraps G_MAIN_CONTEXT_FLAGS_NONE
 	//
 	// Default behaviour.
-	MainContextFlagsNone MainContextFlags = C.G_MAIN_CONTEXT_FLAGS_NONE
+	MainContextFlagsNone MainContextFlags = 0
 	// MainContextFlagsOwnerlessPolling wraps G_MAIN_CONTEXT_FLAGS_OWNERLESS_POLLING
 	//
 	// Assume that polling for events will
 	// free the thread to process other jobs. That's useful if you're using
 	// `g_main_context_{prepare,query,check,dispatch}` to integrate GMainContext in
 	// other event loops.
-	MainContextFlagsOwnerlessPolling MainContextFlags = C.G_MAIN_CONTEXT_FLAGS_OWNERLESS_POLLING
+	MainContextFlagsOwnerlessPolling MainContextFlags = 1
 )
 
 // Has returns true if m contains other
@@ -3245,20 +3245,20 @@ const (
 	//
 	// used to terminate the list of attributes
 	//     to collect
-	MarkupCollectInvalid MarkupCollectType = C.G_MARKUP_COLLECT_INVALID
+	MarkupCollectInvalid MarkupCollectType = 0
 	// MarkupCollectString wraps G_MARKUP_COLLECT_STRING
 	//
 	// collect the string pointer directly from
 	//     the attribute_values[] array. Expects a parameter of type (const
 	//     char **). If %G_MARKUP_COLLECT_OPTIONAL is specified and the
 	//     attribute isn't present then the pointer will be set to %NULL
-	MarkupCollectString MarkupCollectType = C.G_MARKUP_COLLECT_STRING
+	MarkupCollectString MarkupCollectType = 1
 	// MarkupCollectStrdup wraps G_MARKUP_COLLECT_STRDUP
 	//
 	// as with %G_MARKUP_COLLECT_STRING, but
 	//     expects a parameter of type (char **) and g_strdup()s the
 	//     returned pointer. The pointer must be freed with g_free()
-	MarkupCollectStrdup MarkupCollectType = C.G_MARKUP_COLLECT_STRDUP
+	MarkupCollectStrdup MarkupCollectType = 2
 	// MarkupCollectBoolean wraps G_MARKUP_COLLECT_BOOLEAN
 	//
 	// expects a parameter of type (gboolean *)
@@ -3266,20 +3266,20 @@ const (
 	//     attribute isn't present. Valid boolean values consist of
 	//     (case-insensitive) "false", "f", "no", "n", "0" and "true", "t",
 	//     "yes", "y", "1"
-	MarkupCollectBoolean MarkupCollectType = C.G_MARKUP_COLLECT_BOOLEAN
+	MarkupCollectBoolean MarkupCollectType = 3
 	// MarkupCollectTristate wraps G_MARKUP_COLLECT_TRISTATE
 	//
 	// as with %G_MARKUP_COLLECT_BOOLEAN, but
 	//     in the case of a missing attribute a value is set that compares
 	//     equal to neither %FALSE nor %TRUE G_MARKUP_COLLECT_OPTIONAL is
 	//     implied
-	MarkupCollectTristate MarkupCollectType = C.G_MARKUP_COLLECT_TRISTATE
+	MarkupCollectTristate MarkupCollectType = 4
 	// MarkupCollectOptional wraps G_MARKUP_COLLECT_OPTIONAL
 	//
 	// can be bitwise ORed with the other fields.
 	//     If present, allows the attribute not to appear. A default value
 	//     is set depending on what value type is used
-	MarkupCollectOptional MarkupCollectType = C.G_MARKUP_COLLECT_OPTIONAL
+	MarkupCollectOptional MarkupCollectType = 65536
 )
 
 // Has returns true if m contains other
@@ -3296,11 +3296,11 @@ const (
 	// MarkupDefaultFlags wraps G_MARKUP_DEFAULT_FLAGS
 	//
 	// No special behaviour. Since: 2.74
-	MarkupDefaultFlags MarkupParseFlags = C.G_MARKUP_DEFAULT_FLAGS
+	MarkupDefaultFlags MarkupParseFlags = 0
 	// MarkupDoNotUseThisUnsupportedFlag wraps G_MARKUP_DO_NOT_USE_THIS_UNSUPPORTED_FLAG
 	//
 	// flag you should not use
-	MarkupDoNotUseThisUnsupportedFlag MarkupParseFlags = C.G_MARKUP_DO_NOT_USE_THIS_UNSUPPORTED_FLAG
+	MarkupDoNotUseThisUnsupportedFlag MarkupParseFlags = 1
 	// MarkupTreatCdataAsText wraps G_MARKUP_TREAT_CDATA_AS_TEXT
 	//
 	// When this flag is set, CDATA marked
@@ -3308,7 +3308,7 @@ const (
 	//     the parser. Instead, the content of the section (without the
 	//     `&lt;![CDATA[` and `]]&gt;`) is
 	//     passed to the @text function. This flag was added in GLib 2.12
-	MarkupTreatCdataAsText MarkupParseFlags = C.G_MARKUP_TREAT_CDATA_AS_TEXT
+	MarkupTreatCdataAsText MarkupParseFlags = 2
 	// MarkupPrefixErrorPosition wraps G_MARKUP_PREFIX_ERROR_POSITION
 	//
 	// Normally errors caught by GMarkup
@@ -3316,14 +3316,14 @@ const (
 	//     caller know the location of the error. When this flag is set the
 	//     location information is also prefixed to errors generated by the
 	//     #GMarkupParser implementation functions
-	MarkupPrefixErrorPosition MarkupParseFlags = C.G_MARKUP_PREFIX_ERROR_POSITION
+	MarkupPrefixErrorPosition MarkupParseFlags = 4
 	// MarkupIgnoreQualified wraps G_MARKUP_IGNORE_QUALIFIED
 	//
 	// Ignore (don't report) qualified
 	//     attributes and tags, along with their contents.  A qualified
 	//     attribute or tag is one that contains ':' in its name (ie: is in
 	//     another namespace).  Since: 2.40.
-	MarkupIgnoreQualified MarkupParseFlags = C.G_MARKUP_IGNORE_QUALIFIED
+	MarkupIgnoreQualified MarkupParseFlags = 8
 )
 
 // Has returns true if m contains other
@@ -3340,41 +3340,41 @@ const (
 	// OptionFlagNone wraps G_OPTION_FLAG_NONE
 	//
 	// No flags. Since: 2.42.
-	OptionFlagNone OptionFlags = C.G_OPTION_FLAG_NONE
+	OptionFlagNone OptionFlags = 0
 	// OptionFlagHidden wraps G_OPTION_FLAG_HIDDEN
 	//
 	// The option doesn't appear in `--help` output.
-	OptionFlagHidden OptionFlags = C.G_OPTION_FLAG_HIDDEN
+	OptionFlagHidden OptionFlags = 1
 	// OptionFlagInMain wraps G_OPTION_FLAG_IN_MAIN
 	//
 	// The option appears in the main section of the
 	//     `--help` output, even if it is defined in a group.
-	OptionFlagInMain OptionFlags = C.G_OPTION_FLAG_IN_MAIN
+	OptionFlagInMain OptionFlags = 2
 	// OptionFlagReverse wraps G_OPTION_FLAG_REVERSE
 	//
 	// For options of the %G_OPTION_ARG_NONE kind, this
 	//     flag indicates that the sense of the option is reversed. i.e. %FALSE will
 	//     be stored into the argument rather than %TRUE.
-	OptionFlagReverse OptionFlags = C.G_OPTION_FLAG_REVERSE
+	OptionFlagReverse OptionFlags = 4
 	// OptionFlagNoArg wraps G_OPTION_FLAG_NO_ARG
 	//
 	// For options of the %G_OPTION_ARG_CALLBACK kind,
 	//     this flag indicates that the callback does not take any argument
 	//     (like a %G_OPTION_ARG_NONE option). Since 2.8
-	OptionFlagNoArg OptionFlags = C.G_OPTION_FLAG_NO_ARG
+	OptionFlagNoArg OptionFlags = 8
 	// OptionFlagFilename wraps G_OPTION_FLAG_FILENAME
 	//
 	// For options of the %G_OPTION_ARG_CALLBACK
 	//     kind, this flag indicates that the argument should be passed to the
 	//     callback in the GLib filename encoding rather than UTF-8. Since 2.8
-	OptionFlagFilename OptionFlags = C.G_OPTION_FLAG_FILENAME
+	OptionFlagFilename OptionFlags = 16
 	// OptionFlagOptionalArg wraps G_OPTION_FLAG_OPTIONAL_ARG
 	//
 	// For options of the %G_OPTION_ARG_CALLBACK
 	//     kind, this flag indicates that the argument supply is optional.
 	//     If no argument is given then data of %GOptionParseFunc will be
 	//     set to NULL. Since 2.8
-	OptionFlagOptionalArg OptionFlags = C.G_OPTION_FLAG_OPTIONAL_ARG
+	OptionFlagOptionalArg OptionFlags = 32
 	// OptionFlagNoalias wraps G_OPTION_FLAG_NOALIAS
 	//
 	// This flag turns off the automatic conflict
@@ -3383,7 +3383,7 @@ const (
 	//     where aliasing is necessary to model some legacy commandline interface.
 	//     It is not safe to use this option, unless all option groups are under
 	//     your direct control. Since 2.8.
-	OptionFlagNoalias OptionFlags = C.G_OPTION_FLAG_NOALIAS
+	OptionFlagNoalias OptionFlags = 64
 )
 
 // Has returns true if o contains other
@@ -3400,13 +3400,13 @@ const (
 	// RegexDefault wraps G_REGEX_DEFAULT
 	//
 	// No special options set. Since: 2.74
-	RegexDefault RegexCompileFlags = C.G_REGEX_DEFAULT
+	RegexDefault RegexCompileFlags = 0
 	// RegexCaseless wraps G_REGEX_CASELESS
 	//
 	// Letters in the pattern match both upper- and
 	//     lowercase letters. This option can be changed within a pattern
 	//     by a "(?i)" option setting.
-	RegexCaseless RegexCompileFlags = C.G_REGEX_CASELESS
+	RegexCaseless RegexCompileFlags = 1
 	// RegexMultiline wraps G_REGEX_MULTILINE
 	//
 	// By default, GRegex treats the strings as consisting
@@ -3420,13 +3420,13 @@ const (
 	//     newline in the string, respectively, as well as at the very start
 	//     and end. This can be changed within a pattern by a "(?m)" option
 	//     setting.
-	RegexMultiline RegexCompileFlags = C.G_REGEX_MULTILINE
+	RegexMultiline RegexCompileFlags = 2
 	// RegexDotall wraps G_REGEX_DOTALL
 	//
 	// A dot metacharacter (".") in the pattern matches all
 	//     characters, including newlines. Without it, newlines are excluded.
 	//     This option can be changed within a pattern by a ("?s") option setting.
-	RegexDotall RegexCompileFlags = C.G_REGEX_DOTALL
+	RegexDotall RegexCompileFlags = 4
 	// RegexExtended wraps G_REGEX_EXTENDED
 	//
 	// Whitespace data characters in the pattern are
@@ -3435,7 +3435,7 @@ const (
 	//     characters between an unescaped "#" outside a character class and
 	//     the next newline character, inclusive, are also ignored. This can
 	//     be changed within a pattern by a "(?x)" option setting.
-	RegexExtended RegexCompileFlags = C.G_REGEX_EXTENDED
+	RegexExtended RegexCompileFlags = 8
 	// RegexAnchored wraps G_REGEX_ANCHORED
 	//
 	// The pattern is forced to be "anchored", that is,
@@ -3443,7 +3443,7 @@ const (
 	//     string that is being searched. This effect can also be achieved by
 	//     appropriate constructs in the pattern itself such as the "^"
 	//     metacharacter.
-	RegexAnchored RegexCompileFlags = C.G_REGEX_ANCHORED
+	RegexAnchored RegexCompileFlags = 16
 	// RegexDollarEndonly wraps G_REGEX_DOLLAR_ENDONLY
 	//
 	// A dollar metacharacter ("$") in the pattern
@@ -3451,18 +3451,18 @@ const (
 	//     dollar also matches immediately before the final character if
 	//     it is a newline (but not before any other newlines). This option
 	//     is ignored if %G_REGEX_MULTILINE is set.
-	RegexDollarEndonly RegexCompileFlags = C.G_REGEX_DOLLAR_ENDONLY
+	RegexDollarEndonly RegexCompileFlags = 32
 	// RegexUngreedy wraps G_REGEX_UNGREEDY
 	//
 	// Inverts the "greediness" of the quantifiers so that
 	//     they are not greedy by default, but become greedy if followed by "?".
 	//     It can also be set by a "(?U)" option setting within the pattern.
-	RegexUngreedy RegexCompileFlags = C.G_REGEX_UNGREEDY
+	RegexUngreedy RegexCompileFlags = 512
 	// RegexRaw wraps G_REGEX_RAW
 	//
 	// Usually strings must be valid UTF-8 strings, using this
 	//     flag they are considered as a raw sequence of bytes.
-	RegexRaw RegexCompileFlags = C.G_REGEX_RAW
+	RegexRaw RegexCompileFlags = 2048
 	// RegexNoAutoCapture wraps G_REGEX_NO_AUTO_CAPTURE
 	//
 	// Disables the use of numbered capturing
@@ -3470,7 +3470,7 @@ const (
 	//     followed by "?" behaves as if it were followed by "?:" but named
 	//     parentheses can still be used for capturing (and they acquire numbers
 	//     in the usual way).
-	RegexNoAutoCapture RegexCompileFlags = C.G_REGEX_NO_AUTO_CAPTURE
+	RegexNoAutoCapture RegexCompileFlags = 4096
 	// RegexOptimize wraps G_REGEX_OPTIMIZE
 	//
 	// Since 2.74 and the port to pcre2, requests JIT
@@ -3480,55 +3480,55 @@ const (
 	//     match is performed, so it is most beneficial to use this when the same
 	//     compiled pattern is used for matching many times. Before 2.74 this
 	//     option used the built-in non-JIT optimizations in pcre1.
-	RegexOptimize RegexCompileFlags = C.G_REGEX_OPTIMIZE
+	RegexOptimize RegexCompileFlags = 8192
 	// RegexFirstline wraps G_REGEX_FIRSTLINE
 	//
 	// Limits an unanchored pattern to match before (or at) the
 	//     first newline. Since: 2.34
-	RegexFirstline RegexCompileFlags = C.G_REGEX_FIRSTLINE
+	RegexFirstline RegexCompileFlags = 262144
 	// RegexDupnames wraps G_REGEX_DUPNAMES
 	//
 	// Names used to identify capturing subpatterns need not
 	//     be unique. This can be helpful for certain types of pattern when it
 	//     is known that only one instance of the named subpattern can ever be
 	//     matched.
-	RegexDupnames RegexCompileFlags = C.G_REGEX_DUPNAMES
+	RegexDupnames RegexCompileFlags = 524288
 	// RegexNewlineCr wraps G_REGEX_NEWLINE_CR
 	//
 	// Usually any newline character or character sequence is
 	//     recognized. If this option is set, the only recognized newline character
 	//     is '\r'.
-	RegexNewlineCr RegexCompileFlags = C.G_REGEX_NEWLINE_CR
+	RegexNewlineCr RegexCompileFlags = 1048576
 	// RegexNewlineLf wraps G_REGEX_NEWLINE_LF
 	//
 	// Usually any newline character or character sequence is
 	//     recognized. If this option is set, the only recognized newline character
 	//     is '\n'.
-	RegexNewlineLf RegexCompileFlags = C.G_REGEX_NEWLINE_LF
+	RegexNewlineLf RegexCompileFlags = 2097152
 	// RegexNewlineCrlf wraps G_REGEX_NEWLINE_CRLF
 	//
 	// Usually any newline character or character sequence is
 	//     recognized. If this option is set, the only recognized newline character
 	//     sequence is '\r\n'.
-	RegexNewlineCrlf RegexCompileFlags = C.G_REGEX_NEWLINE_CRLF
+	RegexNewlineCrlf RegexCompileFlags = 3145728
 	// RegexNewlineAnycrlf wraps G_REGEX_NEWLINE_ANYCRLF
 	//
 	// Usually any newline character or character sequence
 	//     is recognized. If this option is set, the only recognized newline character
 	//     sequences are '\r', '\n', and '\r\n'. Since: 2.34
-	RegexNewlineAnycrlf RegexCompileFlags = C.G_REGEX_NEWLINE_ANYCRLF
+	RegexNewlineAnycrlf RegexCompileFlags = 5242880
 	// RegexBsrAnycrlf wraps G_REGEX_BSR_ANYCRLF
 	//
 	// Usually any newline character or character sequence
 	//     is recognised. If this option is set, then "\R" only recognizes the newline
 	//    characters '\r', '\n' and '\r\n'. Since: 2.34
-	RegexBsrAnycrlf RegexCompileFlags = C.G_REGEX_BSR_ANYCRLF
+	RegexBsrAnycrlf RegexCompileFlags = 8388608
 	// RegexJavascriptCompat wraps G_REGEX_JAVASCRIPT_COMPAT
 	//
 	// Changes behaviour so that it is compatible with
 	//     JavaScript rather than PCRE. Since GLib 2.74 this is no longer supported,
 	//     as libpcre2 does not support it. Since: 2.34 Deprecated: 2.74
-	RegexJavascriptCompat RegexCompileFlags = C.G_REGEX_JAVASCRIPT_COMPAT
+	RegexJavascriptCompat RegexCompileFlags = 33554432
 )
 
 // Has returns true if r contains other
@@ -3545,7 +3545,7 @@ const (
 	// RegexMatchDefault wraps G_REGEX_MATCH_DEFAULT
 	//
 	// No special options set. Since: 2.74
-	RegexMatchDefault RegexMatchFlags = C.G_REGEX_MATCH_DEFAULT
+	RegexMatchDefault RegexMatchFlags = 0
 	// RegexMatchAnchored wraps G_REGEX_MATCH_ANCHORED
 	//
 	// The pattern is forced to be "anchored", that is,
@@ -3553,7 +3553,7 @@ const (
 	//     string that is being searched. This effect can also be achieved by
 	//     appropriate constructs in the pattern itself such as the "^"
 	//     metacharacter.
-	RegexMatchAnchored RegexMatchFlags = C.G_REGEX_MATCH_ANCHORED
+	RegexMatchAnchored RegexMatchFlags = 16
 	// RegexMatchNotbol wraps G_REGEX_MATCH_NOTBOL
 	//
 	// Specifies that first character of the string is
@@ -3562,7 +3562,7 @@ const (
 	//     compile time) causes circumflex never to match. This option affects
 	//     only the behaviour of the circumflex metacharacter, it does not
 	//     affect "\A".
-	RegexMatchNotbol RegexMatchFlags = C.G_REGEX_MATCH_NOTBOL
+	RegexMatchNotbol RegexMatchFlags = 128
 	// RegexMatchNoteol wraps G_REGEX_MATCH_NOTEOL
 	//
 	// Specifies that the end of the subject string is
@@ -3571,7 +3571,7 @@ const (
 	//     Setting this without %G_REGEX_MULTILINE (at compile time) causes
 	//     dollar never to match. This option affects only the behaviour of
 	//     the dollar metacharacter, it does not affect "\Z" or "\z".
-	RegexMatchNoteol RegexMatchFlags = C.G_REGEX_MATCH_NOTEOL
+	RegexMatchNoteol RegexMatchFlags = 256
 	// RegexMatchNotempty wraps G_REGEX_MATCH_NOTEMPTY
 	//
 	// An empty string is not considered to be a valid
@@ -3582,27 +3582,27 @@ const (
 	//     at the start of the string. With this flag set, this match is not
 	//     valid, so GRegex searches further into the string for occurrences
 	//     of "a" or "b".
-	RegexMatchNotempty RegexMatchFlags = C.G_REGEX_MATCH_NOTEMPTY
+	RegexMatchNotempty RegexMatchFlags = 1024
 	// RegexMatchPartial wraps G_REGEX_MATCH_PARTIAL
 	//
 	// Turns on the partial matching feature, for more
 	//     documentation on partial matching see g_match_info_is_partial_match().
-	RegexMatchPartial RegexMatchFlags = C.G_REGEX_MATCH_PARTIAL
+	RegexMatchPartial RegexMatchFlags = 32768
 	// RegexMatchNewlineCr wraps G_REGEX_MATCH_NEWLINE_CR
 	//
 	// Overrides the newline definition set when
 	//     creating a new #GRegex, setting the '\r' character as line terminator.
-	RegexMatchNewlineCr RegexMatchFlags = C.G_REGEX_MATCH_NEWLINE_CR
+	RegexMatchNewlineCr RegexMatchFlags = 1048576
 	// RegexMatchNewlineLf wraps G_REGEX_MATCH_NEWLINE_LF
 	//
 	// Overrides the newline definition set when
 	//     creating a new #GRegex, setting the '\n' character as line terminator.
-	RegexMatchNewlineLf RegexMatchFlags = C.G_REGEX_MATCH_NEWLINE_LF
+	RegexMatchNewlineLf RegexMatchFlags = 2097152
 	// RegexMatchNewlineCrlf wraps G_REGEX_MATCH_NEWLINE_CRLF
 	//
 	// Overrides the newline definition set when
 	//     creating a new #GRegex, setting the '\r\n' characters sequence as line terminator.
-	RegexMatchNewlineCrlf RegexMatchFlags = C.G_REGEX_MATCH_NEWLINE_CRLF
+	RegexMatchNewlineCrlf RegexMatchFlags = 3145728
 	// RegexMatchNewlineAny wraps G_REGEX_MATCH_NEWLINE_ANY
 	//
 	// Overrides the newline definition set when
@@ -3611,19 +3611,19 @@ const (
 	//     single characters U+000B LINE TABULATION, U+000C FORM FEED (FF),
 	//     U+0085 NEXT LINE (NEL), U+2028 LINE SEPARATOR and
 	//     U+2029 PARAGRAPH SEPARATOR.
-	RegexMatchNewlineAny RegexMatchFlags = C.G_REGEX_MATCH_NEWLINE_ANY
+	RegexMatchNewlineAny RegexMatchFlags = 4194304
 	// RegexMatchNewlineAnycrlf wraps G_REGEX_MATCH_NEWLINE_ANYCRLF
 	//
 	// Overrides the newline definition set when
 	//     creating a new #GRegex; any '\r', '\n', or '\r\n' character sequence
 	//     is recognized as a newline. Since: 2.34
-	RegexMatchNewlineAnycrlf RegexMatchFlags = C.G_REGEX_MATCH_NEWLINE_ANYCRLF
+	RegexMatchNewlineAnycrlf RegexMatchFlags = 5242880
 	// RegexMatchBsrAnycrlf wraps G_REGEX_MATCH_BSR_ANYCRLF
 	//
 	// Overrides the newline definition for "\R" set when
 	//     creating a new #GRegex; only '\r', '\n', or '\r\n' character sequences
 	//     are recognized as a newline by "\R". Since: 2.34
-	RegexMatchBsrAnycrlf RegexMatchFlags = C.G_REGEX_MATCH_BSR_ANYCRLF
+	RegexMatchBsrAnycrlf RegexMatchFlags = 8388608
 	// RegexMatchBsrAny wraps G_REGEX_MATCH_BSR_ANY
 	//
 	// Overrides the newline definition for "\R" set when
@@ -3632,24 +3632,24 @@ const (
 	//     single characters U+000B LINE TABULATION, U+000C FORM FEED (FF),
 	//     U+0085 NEXT LINE (NEL), U+2028 LINE SEPARATOR and
 	//     U+2029 PARAGRAPH SEPARATOR. Since: 2.34
-	RegexMatchBsrAny RegexMatchFlags = C.G_REGEX_MATCH_BSR_ANY
+	RegexMatchBsrAny RegexMatchFlags = 16777216
 	// RegexMatchPartialSoft wraps G_REGEX_MATCH_PARTIAL_SOFT
 	//
 	// An alias for %G_REGEX_MATCH_PARTIAL. Since: 2.34
-	RegexMatchPartialSoft RegexMatchFlags = C.G_REGEX_MATCH_PARTIAL_SOFT
+	RegexMatchPartialSoft RegexMatchFlags = 32768
 	// RegexMatchPartialHard wraps G_REGEX_MATCH_PARTIAL_HARD
 	//
 	// Turns on the partial matching feature. In contrast to
 	//     to %G_REGEX_MATCH_PARTIAL_SOFT, this stops matching as soon as a partial match
 	//     is found, without continuing to search for a possible complete match. See
 	//     g_match_info_is_partial_match() for more information. Since: 2.34
-	RegexMatchPartialHard RegexMatchFlags = C.G_REGEX_MATCH_PARTIAL_HARD
+	RegexMatchPartialHard RegexMatchFlags = 134217728
 	// RegexMatchNotemptyAtstart wraps G_REGEX_MATCH_NOTEMPTY_ATSTART
 	//
 	// Like %G_REGEX_MATCH_NOTEMPTY, but only applied to
 	//     the start of the matched string. For anchored
 	//     patterns this can only happen for pattern containing "\K". Since: 2.34
-	RegexMatchNotemptyAtstart RegexMatchFlags = C.G_REGEX_MATCH_NOTEMPTY_ATSTART
+	RegexMatchNotemptyAtstart RegexMatchFlags = 268435456
 )
 
 // Has returns true if r contains other
@@ -3666,68 +3666,68 @@ const (
 	// SpawnDefault wraps G_SPAWN_DEFAULT
 	//
 	// no flags, default behaviour
-	SpawnDefault SpawnFlags = C.G_SPAWN_DEFAULT
+	SpawnDefault SpawnFlags = 0
 	// SpawnLeaveDescriptorsOpen wraps G_SPAWN_LEAVE_DESCRIPTORS_OPEN
 	//
 	// the parent's open file descriptors will
 	//     be inherited by the child; otherwise all descriptors except stdin,
 	//     stdout and stderr will be closed before calling exec() in the child.
-	SpawnLeaveDescriptorsOpen SpawnFlags = C.G_SPAWN_LEAVE_DESCRIPTORS_OPEN
+	SpawnLeaveDescriptorsOpen SpawnFlags = 1
 	// SpawnDoNotReapChild wraps G_SPAWN_DO_NOT_REAP_CHILD
 	//
 	// the child will not be automatically reaped;
 	//     you must use g_child_watch_add() yourself (or call waitpid() or handle
 	//     `SIGCHLD` yourself), or the child will become a zombie.
-	SpawnDoNotReapChild SpawnFlags = C.G_SPAWN_DO_NOT_REAP_CHILD
+	SpawnDoNotReapChild SpawnFlags = 2
 	// SpawnSearchPath wraps G_SPAWN_SEARCH_PATH
 	//
 	// `argv[0]` need not be an absolute path, it will be
 	//     looked for in the user's `PATH`.
-	SpawnSearchPath SpawnFlags = C.G_SPAWN_SEARCH_PATH
+	SpawnSearchPath SpawnFlags = 4
 	// SpawnStdoutToDevNull wraps G_SPAWN_STDOUT_TO_DEV_NULL
 	//
 	// the child's standard output will be discarded,
 	//     instead of going to the same location as the parent's standard output.
-	SpawnStdoutToDevNull SpawnFlags = C.G_SPAWN_STDOUT_TO_DEV_NULL
+	SpawnStdoutToDevNull SpawnFlags = 8
 	// SpawnStderrToDevNull wraps G_SPAWN_STDERR_TO_DEV_NULL
 	//
 	// the child's standard error will be discarded.
-	SpawnStderrToDevNull SpawnFlags = C.G_SPAWN_STDERR_TO_DEV_NULL
+	SpawnStderrToDevNull SpawnFlags = 16
 	// SpawnChildInheritsStdin wraps G_SPAWN_CHILD_INHERITS_STDIN
 	//
 	// the child will inherit the parent's standard
 	//     input (by default, the child's standard input is attached to `/dev/null`).
-	SpawnChildInheritsStdin SpawnFlags = C.G_SPAWN_CHILD_INHERITS_STDIN
+	SpawnChildInheritsStdin SpawnFlags = 32
 	// SpawnFileAndArgvZero wraps G_SPAWN_FILE_AND_ARGV_ZERO
 	//
 	// the first element of `argv` is the file to
 	//     execute, while the remaining elements are the actual argument vector
 	//     to pass to the file. Normally g_spawn_async_with_pipes() uses `argv[0]`
 	//     as the file to execute, and passes all of `argv` to the child.
-	SpawnFileAndArgvZero SpawnFlags = C.G_SPAWN_FILE_AND_ARGV_ZERO
+	SpawnFileAndArgvZero SpawnFlags = 64
 	// SpawnSearchPathFromEnvp wraps G_SPAWN_SEARCH_PATH_FROM_ENVP
 	//
 	// if `argv[0]` is not an absolute path,
 	//     it will be looked for in the `PATH` from the passed child environment.
 	//     Since: 2.34
-	SpawnSearchPathFromEnvp SpawnFlags = C.G_SPAWN_SEARCH_PATH_FROM_ENVP
+	SpawnSearchPathFromEnvp SpawnFlags = 128
 	// SpawnCloexecPipes wraps G_SPAWN_CLOEXEC_PIPES
 	//
 	// create all pipes with the `O_CLOEXEC` flag set.
 	//     Since: 2.40
-	SpawnCloexecPipes SpawnFlags = C.G_SPAWN_CLOEXEC_PIPES
+	SpawnCloexecPipes SpawnFlags = 256
 	// SpawnChildInheritsStdout wraps G_SPAWN_CHILD_INHERITS_STDOUT
 	//
 	// The child will inherit the parent's standard output.
-	SpawnChildInheritsStdout SpawnFlags = C.G_SPAWN_CHILD_INHERITS_STDOUT
+	SpawnChildInheritsStdout SpawnFlags = 512
 	// SpawnChildInheritsStderr wraps G_SPAWN_CHILD_INHERITS_STDERR
 	//
 	// The child will inherit the parent's standard error.
-	SpawnChildInheritsStderr SpawnFlags = C.G_SPAWN_CHILD_INHERITS_STDERR
+	SpawnChildInheritsStderr SpawnFlags = 1024
 	// SpawnStdinFromDevNull wraps G_SPAWN_STDIN_FROM_DEV_NULL
 	//
 	// The child's standard input is attached to `/dev/null`.
-	SpawnStdinFromDevNull SpawnFlags = C.G_SPAWN_STDIN_FROM_DEV_NULL
+	SpawnStdinFromDevNull SpawnFlags = 2048
 )
 
 // Has returns true if s contains other
@@ -3747,29 +3747,29 @@ const (
 	// only leaf nodes should be visited. This name has
 	//                     been introduced in 2.6, for older version use
 	//                     %G_TRAVERSE_LEAFS.
-	TraverseLeaves TraverseFlags = C.G_TRAVERSE_LEAVES
+	TraverseLeaves TraverseFlags = 1
 	// TraverseNonLeaves wraps G_TRAVERSE_NON_LEAVES
 	//
 	// only non-leaf nodes should be visited. This
 	//                         name has been introduced in 2.6, for older
 	//                         version use %G_TRAVERSE_NON_LEAFS.
-	TraverseNonLeaves TraverseFlags = C.G_TRAVERSE_NON_LEAVES
+	TraverseNonLeaves TraverseFlags = 2
 	// TraverseAll wraps G_TRAVERSE_ALL
 	//
 	// all nodes should be visited.
-	TraverseAll TraverseFlags = C.G_TRAVERSE_ALL
+	TraverseAll TraverseFlags = 3
 	// TraverseMask wraps G_TRAVERSE_MASK
 	//
 	// a mask of all traverse flags.
-	TraverseMask TraverseFlags = C.G_TRAVERSE_MASK
+	TraverseMask TraverseFlags = 3
 	// TraverseLeafs wraps G_TRAVERSE_LEAFS
 	//
 	// identical to %G_TRAVERSE_LEAVES.
-	TraverseLeafs TraverseFlags = C.G_TRAVERSE_LEAFS
+	TraverseLeafs TraverseFlags = 1
 	// TraverseNonLeafs wraps G_TRAVERSE_NON_LEAFS
 	//
 	// identical to %G_TRAVERSE_NON_LEAVES.
-	TraverseNonLeafs TraverseFlags = C.G_TRAVERSE_NON_LEAFS
+	TraverseNonLeafs TraverseFlags = 2
 )
 
 // Has returns true if t contains other
@@ -3791,7 +3791,7 @@ const (
 	// URIFlagsNone wraps G_URI_FLAGS_NONE
 	//
 	// No flags set.
-	URIFlagsNone URIFlags = C.G_URI_FLAGS_NONE
+	URIFlagsNone URIFlags = 0
 	// URIFlagsParseRelaxed wraps G_URI_FLAGS_PARSE_RELAXED
 	//
 	// Parse the URI more relaxedly than the
@@ -3799,18 +3799,18 @@ const (
 	//     fixing up or ignoring common mistakes in URIs coming from external
 	//     sources. This is also needed for some obscure URI schemes where `;`
 	//     separates the host from the path. Don’t use this flag unless you need to.
-	URIFlagsParseRelaxed URIFlags = C.G_URI_FLAGS_PARSE_RELAXED
+	URIFlagsParseRelaxed URIFlags = 1
 	// URIFlagsHasPassword wraps G_URI_FLAGS_HAS_PASSWORD
 	//
 	// The userinfo field may contain a password,
 	//     which will be separated from the username by `:`.
-	URIFlagsHasPassword URIFlags = C.G_URI_FLAGS_HAS_PASSWORD
+	URIFlagsHasPassword URIFlags = 2
 	// URIFlagsHasAuthParams wraps G_URI_FLAGS_HAS_AUTH_PARAMS
 	//
 	// The userinfo may contain additional
 	//     authentication-related parameters, which will be separated from
 	//     the username and/or password by `;`.
-	URIFlagsHasAuthParams URIFlags = C.G_URI_FLAGS_HAS_AUTH_PARAMS
+	URIFlagsHasAuthParams URIFlags = 4
 	// URIFlagsEncoded wraps G_URI_FLAGS_ENCODED
 	//
 	// When parsing a URI, this indicates that `%`-encoded
@@ -3819,34 +3819,34 @@ const (
 	//     %G_URI_FLAGS_NON_DNS is also set.) When building a URI, it indicates
 	//     that you have already `%`-encoded the components, and so #GUri
 	//     should not do any encoding itself.
-	URIFlagsEncoded URIFlags = C.G_URI_FLAGS_ENCODED
+	URIFlagsEncoded URIFlags = 8
 	// URIFlagsNonDns wraps G_URI_FLAGS_NON_DNS
 	//
 	// The host component should not be assumed to be a
 	//     DNS hostname or IP address (for example, for `smb` URIs with NetBIOS
 	//     hostnames).
-	URIFlagsNonDns URIFlags = C.G_URI_FLAGS_NON_DNS
+	URIFlagsNonDns URIFlags = 16
 	// URIFlagsEncodedQuery wraps G_URI_FLAGS_ENCODED_QUERY
 	//
 	// Same as %G_URI_FLAGS_ENCODED, for the query
 	//     field only.
-	URIFlagsEncodedQuery URIFlags = C.G_URI_FLAGS_ENCODED_QUERY
+	URIFlagsEncodedQuery URIFlags = 32
 	// URIFlagsEncodedPath wraps G_URI_FLAGS_ENCODED_PATH
 	//
 	// Same as %G_URI_FLAGS_ENCODED, for the path only.
-	URIFlagsEncodedPath URIFlags = C.G_URI_FLAGS_ENCODED_PATH
+	URIFlagsEncodedPath URIFlags = 64
 	// URIFlagsEncodedFragment wraps G_URI_FLAGS_ENCODED_FRAGMENT
 	//
 	// Same as %G_URI_FLAGS_ENCODED, for the
 	//     fragment only.
-	URIFlagsEncodedFragment URIFlags = C.G_URI_FLAGS_ENCODED_FRAGMENT
+	URIFlagsEncodedFragment URIFlags = 128
 	// URIFlagsSchemeNormalize wraps G_URI_FLAGS_SCHEME_NORMALIZE
 	//
 	// A scheme-based normalization will be applied.
 	//     For example, when parsing an HTTP URI changing omitted path to `/` and
 	//     omitted port to `80`; and when building a URI, changing empty path to `/`
 	//     and default port `80`). This only supports a subset of known schemes. (Since: 2.68)
-	URIFlagsSchemeNormalize URIFlags = C.G_URI_FLAGS_SCHEME_NORMALIZE
+	URIFlagsSchemeNormalize URIFlags = 256
 )
 
 // Has returns true if u contains other
@@ -3866,27 +3866,27 @@ const (
 	// URIHideNone wraps G_URI_HIDE_NONE
 	//
 	// No flags set.
-	URIHideNone URIHideFlags = C.G_URI_HIDE_NONE
+	URIHideNone URIHideFlags = 0
 	// URIHideUserinfo wraps G_URI_HIDE_USERINFO
 	//
 	// Hide the userinfo.
-	URIHideUserinfo URIHideFlags = C.G_URI_HIDE_USERINFO
+	URIHideUserinfo URIHideFlags = 1
 	// URIHidePassword wraps G_URI_HIDE_PASSWORD
 	//
 	// Hide the password.
-	URIHidePassword URIHideFlags = C.G_URI_HIDE_PASSWORD
+	URIHidePassword URIHideFlags = 2
 	// URIHideAuthParams wraps G_URI_HIDE_AUTH_PARAMS
 	//
 	// Hide the auth_params.
-	URIHideAuthParams URIHideFlags = C.G_URI_HIDE_AUTH_PARAMS
+	URIHideAuthParams URIHideFlags = 4
 	// URIHideQuery wraps G_URI_HIDE_QUERY
 	//
 	// Hide the query.
-	URIHideQuery URIHideFlags = C.G_URI_HIDE_QUERY
+	URIHideQuery URIHideFlags = 8
 	// URIHideFragment wraps G_URI_HIDE_FRAGMENT
 	//
 	// Hide the fragment.
-	URIHideFragment URIHideFlags = C.G_URI_HIDE_FRAGMENT
+	URIHideFragment URIHideFlags = 16
 )
 
 // Has returns true if u contains other
@@ -3904,20 +3904,20 @@ const (
 	// URIParamsNone wraps G_URI_PARAMS_NONE
 	//
 	// No flags set.
-	URIParamsNone URIParamsFlags = C.G_URI_PARAMS_NONE
+	URIParamsNone URIParamsFlags = 0
 	// URIParamsCaseInsensitive wraps G_URI_PARAMS_CASE_INSENSITIVE
 	//
 	// Parameter names are case insensitive.
-	URIParamsCaseInsensitive URIParamsFlags = C.G_URI_PARAMS_CASE_INSENSITIVE
+	URIParamsCaseInsensitive URIParamsFlags = 1
 	// URIParamsWwwForm wraps G_URI_PARAMS_WWW_FORM
 	//
 	// Replace `+` with space character. Only useful for
 	//     URLs on the web, using the `https` or `http` schemas.
-	URIParamsWwwForm URIParamsFlags = C.G_URI_PARAMS_WWW_FORM
+	URIParamsWwwForm URIParamsFlags = 2
 	// URIParamsParseRelaxed wraps G_URI_PARAMS_PARSE_RELAXED
 	//
 	// See %G_URI_FLAGS_PARSE_RELAXED.
-	URIParamsParseRelaxed URIParamsFlags = C.G_URI_PARAMS_PARSE_RELAXED
+	URIParamsParseRelaxed URIParamsFlags = 4
 )
 
 // Has returns true if u contains other

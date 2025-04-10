@@ -48,11 +48,11 @@ type X11DeviceType C.int
 
 const (
 	// X11DeviceTypeLogical wraps GDK_X11_DEVICE_TYPE_LOGICAL
-	X11DeviceTypeLogical X11DeviceType = C.GDK_X11_DEVICE_TYPE_LOGICAL
+	X11DeviceTypeLogical X11DeviceType = 0
 	// X11DeviceTypePhysical wraps GDK_X11_DEVICE_TYPE_PHYSICAL
-	X11DeviceTypePhysical X11DeviceType = C.GDK_X11_DEVICE_TYPE_PHYSICAL
+	X11DeviceTypePhysical X11DeviceType = 1
 	// X11DeviceTypeFloating wraps GDK_X11_DEVICE_TYPE_FLOATING
-	X11DeviceTypeFloating X11DeviceType = C.GDK_X11_DEVICE_TYPE_FLOATING
+	X11DeviceTypeFloating X11DeviceType = 2
 )
 
 

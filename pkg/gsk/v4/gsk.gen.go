@@ -100,70 +100,70 @@ const (
 	// BlendModeDefault wraps GSK_BLEND_MODE_DEFAULT
 	//
 	// The default blend mode, which specifies no blending
-	BlendModeDefault BlendMode = C.GSK_BLEND_MODE_DEFAULT
+	BlendModeDefault BlendMode = 0
 	// BlendModeMultiply wraps GSK_BLEND_MODE_MULTIPLY
 	//
 	// The source color is multiplied by the destination
 	//   and replaces the destination
-	BlendModeMultiply BlendMode = C.GSK_BLEND_MODE_MULTIPLY
+	BlendModeMultiply BlendMode = 1
 	// BlendModeScreen wraps GSK_BLEND_MODE_SCREEN
 	//
 	// Multiplies the complements of the destination and source
 	//   color values, then complements the result.
-	BlendModeScreen BlendMode = C.GSK_BLEND_MODE_SCREEN
+	BlendModeScreen BlendMode = 2
 	// BlendModeOverlay wraps GSK_BLEND_MODE_OVERLAY
 	//
 	// Multiplies or screens the colors, depending on the
 	//   destination color value. This is the inverse of hard-list
-	BlendModeOverlay BlendMode = C.GSK_BLEND_MODE_OVERLAY
+	BlendModeOverlay BlendMode = 3
 	// BlendModeDarken wraps GSK_BLEND_MODE_DARKEN
 	//
 	// Selects the darker of the destination and source colors
-	BlendModeDarken BlendMode = C.GSK_BLEND_MODE_DARKEN
+	BlendModeDarken BlendMode = 4
 	// BlendModeLighten wraps GSK_BLEND_MODE_LIGHTEN
 	//
 	// Selects the lighter of the destination and source colors
-	BlendModeLighten BlendMode = C.GSK_BLEND_MODE_LIGHTEN
+	BlendModeLighten BlendMode = 5
 	// BlendModeColorDodge wraps GSK_BLEND_MODE_COLOR_DODGE
 	//
 	// Brightens the destination color to reflect the source color
-	BlendModeColorDodge BlendMode = C.GSK_BLEND_MODE_COLOR_DODGE
+	BlendModeColorDodge BlendMode = 6
 	// BlendModeColorBurn wraps GSK_BLEND_MODE_COLOR_BURN
 	//
 	// Darkens the destination color to reflect the source color
-	BlendModeColorBurn BlendMode = C.GSK_BLEND_MODE_COLOR_BURN
+	BlendModeColorBurn BlendMode = 7
 	// BlendModeHardLight wraps GSK_BLEND_MODE_HARD_LIGHT
 	//
 	// Multiplies or screens the colors, depending on the source color value
-	BlendModeHardLight BlendMode = C.GSK_BLEND_MODE_HARD_LIGHT
+	BlendModeHardLight BlendMode = 8
 	// BlendModeSoftLight wraps GSK_BLEND_MODE_SOFT_LIGHT
 	//
 	// Darkens or lightens the colors, depending on the source color value
-	BlendModeSoftLight BlendMode = C.GSK_BLEND_MODE_SOFT_LIGHT
+	BlendModeSoftLight BlendMode = 9
 	// BlendModeDifference wraps GSK_BLEND_MODE_DIFFERENCE
 	//
 	// Subtracts the darker of the two constituent colors from the lighter color
-	BlendModeDifference BlendMode = C.GSK_BLEND_MODE_DIFFERENCE
+	BlendModeDifference BlendMode = 10
 	// BlendModeExclusion wraps GSK_BLEND_MODE_EXCLUSION
 	//
 	// Produces an effect similar to that of the difference mode but lower in contrast
-	BlendModeExclusion BlendMode = C.GSK_BLEND_MODE_EXCLUSION
+	BlendModeExclusion BlendMode = 11
 	// BlendModeColor wraps GSK_BLEND_MODE_COLOR
 	//
 	// Creates a color with the hue and saturation of the source color and the luminosity of the destination color
-	BlendModeColor BlendMode = C.GSK_BLEND_MODE_COLOR
+	BlendModeColor BlendMode = 12
 	// BlendModeHue wraps GSK_BLEND_MODE_HUE
 	//
 	// Creates a color with the hue of the source color and the saturation and luminosity of the destination color
-	BlendModeHue BlendMode = C.GSK_BLEND_MODE_HUE
+	BlendModeHue BlendMode = 13
 	// BlendModeSaturation wraps GSK_BLEND_MODE_SATURATION
 	//
 	// Creates a color with the saturation of the source color and the hue and luminosity of the destination color
-	BlendModeSaturation BlendMode = C.GSK_BLEND_MODE_SATURATION
+	BlendModeSaturation BlendMode = 14
 	// BlendModeLuminosity wraps GSK_BLEND_MODE_LUMINOSITY
 	//
 	// Creates a color with the luminosity of the source color and the hue and saturation of the destination color
-	BlendModeLuminosity BlendMode = C.GSK_BLEND_MODE_LUMINOSITY
+	BlendModeLuminosity BlendMode = 15
 )
 
 func marshalBlendMode(p unsafe.Pointer) (any, error) {
@@ -186,19 +186,19 @@ const (
 	// CornerTopLeft wraps GSK_CORNER_TOP_LEFT
 	//
 	// The top left corner
-	CornerTopLeft Corner = C.GSK_CORNER_TOP_LEFT
+	CornerTopLeft Corner = 0
 	// CornerTopRight wraps GSK_CORNER_TOP_RIGHT
 	//
 	// The top right corner
-	CornerTopRight Corner = C.GSK_CORNER_TOP_RIGHT
+	CornerTopRight Corner = 1
 	// CornerBottomRight wraps GSK_CORNER_BOTTOM_RIGHT
 	//
 	// The bottom right corner
-	CornerBottomRight Corner = C.GSK_CORNER_BOTTOM_RIGHT
+	CornerBottomRight Corner = 2
 	// CornerBottomLeft wraps GSK_CORNER_BOTTOM_LEFT
 	//
 	// The bottom left corner
-	CornerBottomLeft Corner = C.GSK_CORNER_BOTTOM_LEFT
+	CornerBottomLeft Corner = 3
 )
 
 func marshalCorner(p unsafe.Pointer) (any, error) {
@@ -236,14 +236,14 @@ const (
 	//   from right to left, counts -1. (Left and right are determined
 	//   from the perspective of looking along the ray from the starting
 	//   point.) If the total count is non-zero, the point will be filled.
-	FillRuleWinding FillRule = C.GSK_FILL_RULE_WINDING
+	FillRuleWinding FillRule = 0
 	// FillRuleEvenOdd wraps GSK_FILL_RULE_EVEN_ODD
 	//
 	// Counts the total number of
 	//   intersections, without regard to the orientation of the contour. If
 	//   the total number of intersections is odd, the point will be
 	//   filled.
-	FillRuleEvenOdd FillRule = C.GSK_FILL_RULE_EVEN_ODD
+	FillRuleEvenOdd FillRule = 1
 )
 
 func marshalFillRule(p unsafe.Pointer) (any, error) {
@@ -270,35 +270,35 @@ const (
 	// GLUniformTypeNone wraps GSK_GL_UNIFORM_TYPE_NONE
 	//
 	// No type, used for uninitialized or unspecified values.
-	GLUniformTypeNone GLUniformType = C.GSK_GL_UNIFORM_TYPE_NONE
+	GLUniformTypeNone GLUniformType = 0
 	// GLUniformTypeFloat wraps GSK_GL_UNIFORM_TYPE_FLOAT
 	//
 	// A float uniform
-	GLUniformTypeFloat GLUniformType = C.GSK_GL_UNIFORM_TYPE_FLOAT
+	GLUniformTypeFloat GLUniformType = 1
 	// GLUniformTypeInt wraps GSK_GL_UNIFORM_TYPE_INT
 	//
 	// A GLSL int / gint32 uniform
-	GLUniformTypeInt GLUniformType = C.GSK_GL_UNIFORM_TYPE_INT
+	GLUniformTypeInt GLUniformType = 2
 	// GLUniformTypeUint wraps GSK_GL_UNIFORM_TYPE_UINT
 	//
 	// A GLSL uint / guint32 uniform
-	GLUniformTypeUint GLUniformType = C.GSK_GL_UNIFORM_TYPE_UINT
+	GLUniformTypeUint GLUniformType = 3
 	// GLUniformTypeBool wraps GSK_GL_UNIFORM_TYPE_BOOL
 	//
 	// A GLSL bool / gboolean uniform
-	GLUniformTypeBool GLUniformType = C.GSK_GL_UNIFORM_TYPE_BOOL
+	GLUniformTypeBool GLUniformType = 4
 	// GLUniformTypeVec2 wraps GSK_GL_UNIFORM_TYPE_VEC2
 	//
 	// A GLSL vec2 / graphene_vec2_t uniform
-	GLUniformTypeVec2 GLUniformType = C.GSK_GL_UNIFORM_TYPE_VEC2
+	GLUniformTypeVec2 GLUniformType = 5
 	// GLUniformTypeVec3 wraps GSK_GL_UNIFORM_TYPE_VEC3
 	//
 	// A GLSL vec3 / graphene_vec3_t uniform
-	GLUniformTypeVec3 GLUniformType = C.GSK_GL_UNIFORM_TYPE_VEC3
+	GLUniformTypeVec3 GLUniformType = 6
 	// GLUniformTypeVec4 wraps GSK_GL_UNIFORM_TYPE_VEC4
 	//
 	// A GLSL vec4 / graphene_vec4_t uniform
-	GLUniformTypeVec4 GLUniformType = C.GSK_GL_UNIFORM_TYPE_VEC4
+	GLUniformTypeVec4 GLUniformType = 7
 )
 
 func marshalGLUniformType(p unsafe.Pointer) (any, error) {
@@ -335,17 +335,17 @@ const (
 	//
 	// Start and stop the line exactly at the start
 	//   and end point
-	LineCapButt LineCap = C.GSK_LINE_CAP_BUTT
+	LineCapButt LineCap = 0
 	// LineCapRound wraps GSK_LINE_CAP_ROUND
 	//
 	// Use a round ending, the center of the circle
 	//   is the start or end point
-	LineCapRound LineCap = C.GSK_LINE_CAP_ROUND
+	LineCapRound LineCap = 1
 	// LineCapSquare wraps GSK_LINE_CAP_SQUARE
 	//
 	// use squared ending, the center of the square
 	//   is the start or end point
-	LineCapSquare LineCap = C.GSK_LINE_CAP_SQUARE
+	LineCapSquare LineCap = 2
 )
 
 func marshalLineCap(p unsafe.Pointer) (any, error) {
@@ -380,17 +380,17 @@ const (
 	// LineJoinMiter wraps GSK_LINE_JOIN_MITER
 	//
 	// Use a sharp angled corner
-	LineJoinMiter LineJoin = C.GSK_LINE_JOIN_MITER
+	LineJoinMiter LineJoin = 0
 	// LineJoinRound wraps GSK_LINE_JOIN_ROUND
 	//
 	// Use a round join, the center of the circle is
 	//   the join point
-	LineJoinRound LineJoin = C.GSK_LINE_JOIN_ROUND
+	LineJoinRound LineJoin = 1
 	// LineJoinBevel wraps GSK_LINE_JOIN_BEVEL
 	//
 	// use a cut-off join, the join is cut off at half
 	//   the line width from the joint point
-	LineJoinBevel LineJoin = C.GSK_LINE_JOIN_BEVEL
+	LineJoinBevel LineJoin = 2
 )
 
 func marshalLineJoin(p unsafe.Pointer) (any, error) {
@@ -413,21 +413,21 @@ const (
 	// MaskModeAlpha wraps GSK_MASK_MODE_ALPHA
 	//
 	// Use the alpha channel of the mask
-	MaskModeAlpha MaskMode = C.GSK_MASK_MODE_ALPHA
+	MaskModeAlpha MaskMode = 0
 	// MaskModeInvertedAlpha wraps GSK_MASK_MODE_INVERTED_ALPHA
 	//
 	// Use the inverted alpha channel of the mask
-	MaskModeInvertedAlpha MaskMode = C.GSK_MASK_MODE_INVERTED_ALPHA
+	MaskModeInvertedAlpha MaskMode = 1
 	// MaskModeLuminance wraps GSK_MASK_MODE_LUMINANCE
 	//
 	// Use the luminance of the mask,
 	//     multiplied by mask alpha
-	MaskModeLuminance MaskMode = C.GSK_MASK_MODE_LUMINANCE
+	MaskModeLuminance MaskMode = 2
 	// MaskModeInvertedLuminance wraps GSK_MASK_MODE_INVERTED_LUMINANCE
 	//
 	// Use the inverted luminance of the mask,
 	//     multiplied by mask alpha
-	MaskModeInvertedLuminance MaskMode = C.GSK_MASK_MODE_INVERTED_LUMINANCE
+	MaskModeInvertedLuminance MaskMode = 3
 )
 
 func marshalMaskMode(p unsafe.Pointer) (any, error) {
@@ -461,22 +461,22 @@ const (
 	//
 	// The tangent in path direction of the incoming side
 	//   of the path
-	PathFromStart PathDirection = C.GSK_PATH_FROM_START
+	PathFromStart PathDirection = 0
 	// PathToStart wraps GSK_PATH_TO_START
 	//
 	// The tangent against path direction of the incoming side
 	//   of the path
-	PathToStart PathDirection = C.GSK_PATH_TO_START
+	PathToStart PathDirection = 1
 	// PathToEnd wraps GSK_PATH_TO_END
 	//
 	// The tangent in path direction of the outgoing side
 	//   of the path
-	PathToEnd PathDirection = C.GSK_PATH_TO_END
+	PathToEnd PathDirection = 2
 	// PathFromEnd wraps GSK_PATH_FROM_END
 	//
 	// The tangent against path direction of the outgoing
 	//   side of the path
-	PathFromEnd PathDirection = C.GSK_PATH_FROM_END
+	PathFromEnd PathDirection = 3
 )
 
 func marshalPathDirection(p unsafe.Pointer) (any, error) {
@@ -501,35 +501,35 @@ const (
 	// PathMove wraps GSK_PATH_MOVE
 	//
 	// A move-to operation, with 1 point describing the target point.
-	PathMove PathOperation = C.GSK_PATH_MOVE
+	PathMove PathOperation = 0
 	// PathClose wraps GSK_PATH_CLOSE
 	//
 	// A close operation ending the current contour with a line back
 	//   to the starting point. Two points describe the start and end of the line.
-	PathClose PathOperation = C.GSK_PATH_CLOSE
+	PathClose PathOperation = 1
 	// PathLine wraps GSK_PATH_LINE
 	//
 	// A line-to operation, with 2 points describing the start and
 	//   end point of a straight line.
-	PathLine PathOperation = C.GSK_PATH_LINE
+	PathLine PathOperation = 2
 	// PathQuad wraps GSK_PATH_QUAD
 	//
 	// A curve-to operation describing a quadratic Bézier curve
 	//   with 3 points describing the start point, the control point and the end
 	//   point of the curve.
-	PathQuad PathOperation = C.GSK_PATH_QUAD
+	PathQuad PathOperation = 3
 	// PathCubic wraps GSK_PATH_CUBIC
 	//
 	// A curve-to operation describing a cubic Bézier curve with 4
 	//   points describing the start point, the two control points and the end point
 	//   of the curve.
-	PathCubic PathOperation = C.GSK_PATH_CUBIC
+	PathCubic PathOperation = 4
 	// PathConic wraps GSK_PATH_CONIC
 	//
 	// A rational quadratic Bézier curve with 3 points describing
 	//   the start point, control point and end point of the curve. A weight for the
 	//   curve will be passed, too.
-	PathConic PathOperation = C.GSK_PATH_CONIC
+	PathConic PathOperation = 5
 )
 
 func marshalPathOperation(p unsafe.Pointer) (any, error) {
@@ -552,127 +552,127 @@ const (
 	// NotARenderNodeType wraps GSK_NOT_A_RENDER_NODE_TYPE
 	//
 	// Error type. No node will ever have this type.
-	NotARenderNodeType RenderNodeType = C.GSK_NOT_A_RENDER_NODE_TYPE
+	NotARenderNodeType RenderNodeType = 0
 	// ContainerNodeType wraps GSK_CONTAINER_NODE_TYPE
 	//
 	// A node containing a stack of children
-	ContainerNodeType RenderNodeType = C.GSK_CONTAINER_NODE_TYPE
+	ContainerNodeType RenderNodeType = 1
 	// CairoNodeType wraps GSK_CAIRO_NODE_TYPE
 	//
 	// A node drawing a `cairo_surface_t`
-	CairoNodeType RenderNodeType = C.GSK_CAIRO_NODE_TYPE
+	CairoNodeType RenderNodeType = 2
 	// ColorNodeType wraps GSK_COLOR_NODE_TYPE
 	//
 	// A node drawing a single color rectangle
-	ColorNodeType RenderNodeType = C.GSK_COLOR_NODE_TYPE
+	ColorNodeType RenderNodeType = 3
 	// LinearGradientNodeType wraps GSK_LINEAR_GRADIENT_NODE_TYPE
 	//
 	// A node drawing a linear gradient
-	LinearGradientNodeType RenderNodeType = C.GSK_LINEAR_GRADIENT_NODE_TYPE
+	LinearGradientNodeType RenderNodeType = 4
 	// RepeatingLinearGradientNodeType wraps GSK_REPEATING_LINEAR_GRADIENT_NODE_TYPE
 	//
 	// A node drawing a repeating linear gradient
-	RepeatingLinearGradientNodeType RenderNodeType = C.GSK_REPEATING_LINEAR_GRADIENT_NODE_TYPE
+	RepeatingLinearGradientNodeType RenderNodeType = 5
 	// RadialGradientNodeType wraps GSK_RADIAL_GRADIENT_NODE_TYPE
 	//
 	// A node drawing a radial gradient
-	RadialGradientNodeType RenderNodeType = C.GSK_RADIAL_GRADIENT_NODE_TYPE
+	RadialGradientNodeType RenderNodeType = 6
 	// RepeatingRadialGradientNodeType wraps GSK_REPEATING_RADIAL_GRADIENT_NODE_TYPE
 	//
 	// A node drawing a repeating radial gradient
-	RepeatingRadialGradientNodeType RenderNodeType = C.GSK_REPEATING_RADIAL_GRADIENT_NODE_TYPE
+	RepeatingRadialGradientNodeType RenderNodeType = 7
 	// ConicGradientNodeType wraps GSK_CONIC_GRADIENT_NODE_TYPE
 	//
 	// A node drawing a conic gradient
-	ConicGradientNodeType RenderNodeType = C.GSK_CONIC_GRADIENT_NODE_TYPE
+	ConicGradientNodeType RenderNodeType = 8
 	// BorderNodeType wraps GSK_BORDER_NODE_TYPE
 	//
 	// A node stroking a border around an area
-	BorderNodeType RenderNodeType = C.GSK_BORDER_NODE_TYPE
+	BorderNodeType RenderNodeType = 9
 	// TextureNodeType wraps GSK_TEXTURE_NODE_TYPE
 	//
 	// A node drawing a `GdkTexture`
-	TextureNodeType RenderNodeType = C.GSK_TEXTURE_NODE_TYPE
+	TextureNodeType RenderNodeType = 10
 	// InsetShadowNodeType wraps GSK_INSET_SHADOW_NODE_TYPE
 	//
 	// A node drawing an inset shadow
-	InsetShadowNodeType RenderNodeType = C.GSK_INSET_SHADOW_NODE_TYPE
+	InsetShadowNodeType RenderNodeType = 11
 	// OutsetShadowNodeType wraps GSK_OUTSET_SHADOW_NODE_TYPE
 	//
 	// A node drawing an outset shadow
-	OutsetShadowNodeType RenderNodeType = C.GSK_OUTSET_SHADOW_NODE_TYPE
+	OutsetShadowNodeType RenderNodeType = 12
 	// TransformNodeType wraps GSK_TRANSFORM_NODE_TYPE
 	//
 	// A node that renders its child after applying a matrix transform
-	TransformNodeType RenderNodeType = C.GSK_TRANSFORM_NODE_TYPE
+	TransformNodeType RenderNodeType = 13
 	// OpacityNodeType wraps GSK_OPACITY_NODE_TYPE
 	//
 	// A node that changes the opacity of its child
-	OpacityNodeType RenderNodeType = C.GSK_OPACITY_NODE_TYPE
+	OpacityNodeType RenderNodeType = 14
 	// ColorMatrixNodeType wraps GSK_COLOR_MATRIX_NODE_TYPE
 	//
 	// A node that applies a color matrix to every pixel
-	ColorMatrixNodeType RenderNodeType = C.GSK_COLOR_MATRIX_NODE_TYPE
+	ColorMatrixNodeType RenderNodeType = 15
 	// RepeatNodeType wraps GSK_REPEAT_NODE_TYPE
 	//
 	// A node that repeats the child's contents
-	RepeatNodeType RenderNodeType = C.GSK_REPEAT_NODE_TYPE
+	RepeatNodeType RenderNodeType = 16
 	// ClipNodeType wraps GSK_CLIP_NODE_TYPE
 	//
 	// A node that clips its child to a rectangular area
-	ClipNodeType RenderNodeType = C.GSK_CLIP_NODE_TYPE
+	ClipNodeType RenderNodeType = 17
 	// RoundedClipNodeType wraps GSK_ROUNDED_CLIP_NODE_TYPE
 	//
 	// A node that clips its child to a rounded rectangle
-	RoundedClipNodeType RenderNodeType = C.GSK_ROUNDED_CLIP_NODE_TYPE
+	RoundedClipNodeType RenderNodeType = 18
 	// ShadowNodeType wraps GSK_SHADOW_NODE_TYPE
 	//
 	// A node that draws a shadow below its child
-	ShadowNodeType RenderNodeType = C.GSK_SHADOW_NODE_TYPE
+	ShadowNodeType RenderNodeType = 19
 	// BlendNodeType wraps GSK_BLEND_NODE_TYPE
 	//
 	// A node that blends two children together
-	BlendNodeType RenderNodeType = C.GSK_BLEND_NODE_TYPE
+	BlendNodeType RenderNodeType = 20
 	// CrossFadeNodeType wraps GSK_CROSS_FADE_NODE_TYPE
 	//
 	// A node that cross-fades between two children
-	CrossFadeNodeType RenderNodeType = C.GSK_CROSS_FADE_NODE_TYPE
+	CrossFadeNodeType RenderNodeType = 21
 	// TextNodeType wraps GSK_TEXT_NODE_TYPE
 	//
 	// A node containing a glyph string
-	TextNodeType RenderNodeType = C.GSK_TEXT_NODE_TYPE
+	TextNodeType RenderNodeType = 22
 	// BlurNodeType wraps GSK_BLUR_NODE_TYPE
 	//
 	// A node that applies a blur
-	BlurNodeType RenderNodeType = C.GSK_BLUR_NODE_TYPE
+	BlurNodeType RenderNodeType = 23
 	// DebugNodeType wraps GSK_DEBUG_NODE_TYPE
 	//
 	// Debug information that does not affect the rendering
-	DebugNodeType RenderNodeType = C.GSK_DEBUG_NODE_TYPE
+	DebugNodeType RenderNodeType = 24
 	// GLShaderNodeType wraps GSK_GL_SHADER_NODE_TYPE
 	//
 	// A node that uses OpenGL fragment shaders to render
-	GLShaderNodeType RenderNodeType = C.GSK_GL_SHADER_NODE_TYPE
+	GLShaderNodeType RenderNodeType = 25
 	// TextureScaleNodeType wraps GSK_TEXTURE_SCALE_NODE_TYPE
 	//
 	// A node drawing a `GdkTexture` scaled and filtered.
-	TextureScaleNodeType RenderNodeType = C.GSK_TEXTURE_SCALE_NODE_TYPE
+	TextureScaleNodeType RenderNodeType = 26
 	// MaskNodeType wraps GSK_MASK_NODE_TYPE
 	//
 	// A node that masks one child with another.
-	MaskNodeType RenderNodeType = C.GSK_MASK_NODE_TYPE
+	MaskNodeType RenderNodeType = 27
 	// FillNodeType wraps GSK_FILL_NODE_TYPE
 	//
 	// A node that fills a path.
-	FillNodeType RenderNodeType = C.GSK_FILL_NODE_TYPE
+	FillNodeType RenderNodeType = 28
 	// StrokeNodeType wraps GSK_STROKE_NODE_TYPE
 	//
 	// A node that strokes a path.
-	StrokeNodeType RenderNodeType = C.GSK_STROKE_NODE_TYPE
+	StrokeNodeType RenderNodeType = 29
 	// SubsurfaceNodeType wraps GSK_SUBSURFACE_NODE_TYPE
 	//
 	// A node that possibly redirects part of the scene graph to a subsurface.
-	SubsurfaceNodeType RenderNodeType = C.GSK_SUBSURFACE_NODE_TYPE
+	SubsurfaceNodeType RenderNodeType = 30
 )
 
 func marshalRenderNodeType(p unsafe.Pointer) (any, error) {
@@ -698,17 +698,17 @@ const (
 	// ScalingFilterLinear wraps GSK_SCALING_FILTER_LINEAR
 	//
 	// linear interpolation filter
-	ScalingFilterLinear ScalingFilter = C.GSK_SCALING_FILTER_LINEAR
+	ScalingFilterLinear ScalingFilter = 0
 	// ScalingFilterNearest wraps GSK_SCALING_FILTER_NEAREST
 	//
 	// nearest neighbor interpolation filter
-	ScalingFilterNearest ScalingFilter = C.GSK_SCALING_FILTER_NEAREST
+	ScalingFilterNearest ScalingFilter = 1
 	// ScalingFilterTrilinear wraps GSK_SCALING_FILTER_TRILINEAR
 	//
 	// linear interpolation along each axis,
 	//   plus mipmap generation, with linear interpolation along the mipmap
 	//   levels
-	ScalingFilterTrilinear ScalingFilter = C.GSK_SCALING_FILTER_TRILINEAR
+	ScalingFilterTrilinear ScalingFilter = 2
 )
 
 func marshalScalingFilter(p unsafe.Pointer) (any, error) {
@@ -731,17 +731,17 @@ const (
 	// SerializationUnsupportedFormat wraps GSK_SERIALIZATION_UNSUPPORTED_FORMAT
 	//
 	// The format can not be identified
-	SerializationUnsupportedFormat SerializationError = C.GSK_SERIALIZATION_UNSUPPORTED_FORMAT
+	SerializationUnsupportedFormat SerializationError = 0
 	// SerializationUnsupportedVersion wraps GSK_SERIALIZATION_UNSUPPORTED_VERSION
 	//
 	// The version of the data is not
 	//   understood
-	SerializationUnsupportedVersion SerializationError = C.GSK_SERIALIZATION_UNSUPPORTED_VERSION
+	SerializationUnsupportedVersion SerializationError = 1
 	// SerializationInvalidData wraps GSK_SERIALIZATION_INVALID_DATA
 	//
 	// The given data may not exist in
 	//   a proper serialization
-	SerializationInvalidData SerializationError = C.GSK_SERIALIZATION_INVALID_DATA
+	SerializationInvalidData SerializationError = 2
 )
 
 func marshalSerializationError(p unsafe.Pointer) (any, error) {
@@ -774,37 +774,37 @@ const (
 	//
 	// The category of the matrix has not been
 	//   determined.
-	TransformCategoryUnknown TransformCategory = C.GSK_TRANSFORM_CATEGORY_UNKNOWN
+	TransformCategoryUnknown TransformCategory = 0
 	// TransformCategoryAny wraps GSK_TRANSFORM_CATEGORY_ANY
 	//
 	// Analyzing the matrix concluded that it does
 	//   not fit in any other category.
-	TransformCategoryAny TransformCategory = C.GSK_TRANSFORM_CATEGORY_ANY
+	TransformCategoryAny TransformCategory = 1
 	// TransformCategory3D wraps GSK_TRANSFORM_CATEGORY_3D
 	//
 	// The matrix is a 3D matrix. This means that
 	//   the w column (the last column) has the values (0, 0, 0, 1).
-	TransformCategory3D TransformCategory = C.GSK_TRANSFORM_CATEGORY_3D
+	TransformCategory3D TransformCategory = 2
 	// TransformCategory2D wraps GSK_TRANSFORM_CATEGORY_2D
 	//
 	// The matrix is a 2D matrix. This is equivalent
 	//   to graphene_matrix_is_2d() returning %TRUE. In particular, this
 	//   means that Cairo can deal with the matrix.
-	TransformCategory2D TransformCategory = C.GSK_TRANSFORM_CATEGORY_2D
+	TransformCategory2D TransformCategory = 3
 	// TransformCategory2DAffine wraps GSK_TRANSFORM_CATEGORY_2D_AFFINE
 	//
 	// The matrix is a combination of 2D scale
 	//   and 2D translation operations. In particular, this means that any
 	//   rectangle can be transformed exactly using this matrix.
-	TransformCategory2DAffine TransformCategory = C.GSK_TRANSFORM_CATEGORY_2D_AFFINE
+	TransformCategory2DAffine TransformCategory = 4
 	// TransformCategory2DTranslate wraps GSK_TRANSFORM_CATEGORY_2D_TRANSLATE
 	//
 	// The matrix is a 2D translation.
-	TransformCategory2DTranslate TransformCategory = C.GSK_TRANSFORM_CATEGORY_2D_TRANSLATE
+	TransformCategory2DTranslate TransformCategory = 5
 	// TransformCategoryIdentity wraps GSK_TRANSFORM_CATEGORY_IDENTITY
 	//
 	// The matrix is the identity matrix.
-	TransformCategoryIdentity TransformCategory = C.GSK_TRANSFORM_CATEGORY_IDENTITY
+	TransformCategoryIdentity TransformCategory = 6
 )
 
 func marshalTransformCategory(p unsafe.Pointer) (any, error) {
@@ -833,19 +833,19 @@ const (
 	// PathForEachAllowOnlyLines wraps GSK_PATH_FOREACH_ALLOW_ONLY_LINES
 	//
 	// The default behavior, only allow lines.
-	PathForEachAllowOnlyLines PathForEachFlags = C.GSK_PATH_FOREACH_ALLOW_ONLY_LINES
+	PathForEachAllowOnlyLines PathForEachFlags = 0
 	// PathForEachAllowQuad wraps GSK_PATH_FOREACH_ALLOW_QUAD
 	//
 	// Allow emission of `GSK_PATH_QUAD` operations
-	PathForEachAllowQuad PathForEachFlags = C.GSK_PATH_FOREACH_ALLOW_QUAD
+	PathForEachAllowQuad PathForEachFlags = 1
 	// PathForEachAllowCubic wraps GSK_PATH_FOREACH_ALLOW_CUBIC
 	//
 	// Allow emission of `GSK_PATH_CUBIC` operations.
-	PathForEachAllowCubic PathForEachFlags = C.GSK_PATH_FOREACH_ALLOW_CUBIC
+	PathForEachAllowCubic PathForEachFlags = 2
 	// PathForEachAllowConic wraps GSK_PATH_FOREACH_ALLOW_CONIC
 	//
 	// Allow emission of `GSK_PATH_CONIC` operations.
-	PathForEachAllowConic PathForEachFlags = C.GSK_PATH_FOREACH_ALLOW_CONIC
+	PathForEachAllowConic PathForEachFlags = 4
 )
 
 func marshalPathForEachFlags(p unsafe.Pointer) (any, error) {

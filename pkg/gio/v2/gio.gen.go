@@ -501,19 +501,19 @@ const (
 	// BusTypeStarter wraps G_BUS_TYPE_STARTER
 	//
 	// An alias for the message bus that activated the process, if any.
-	BusTypeStarter BusType = C.G_BUS_TYPE_STARTER
+	BusTypeStarter BusType = -1
 	// BusTypeNone wraps G_BUS_TYPE_NONE
 	//
 	// Not a message bus.
-	BusTypeNone BusType = C.G_BUS_TYPE_NONE
+	BusTypeNone BusType = 0
 	// BusTypeSystem wraps G_BUS_TYPE_SYSTEM
 	//
 	// The system-wide message bus.
-	BusTypeSystem BusType = C.G_BUS_TYPE_SYSTEM
+	BusTypeSystem BusType = 1
 	// BusTypeSession wraps G_BUS_TYPE_SESSION
 	//
 	// The login session message bus.
-	BusTypeSession BusType = C.G_BUS_TYPE_SESSION
+	BusTypeSession BusType = 2
 )
 
 func marshalBusType(p unsafe.Pointer) (any, error) {
@@ -536,19 +536,19 @@ const (
 	// ConverterError wraps G_CONVERTER_ERROR
 	//
 	// There was an error during conversion.
-	ConverterError ConverterResult = C.G_CONVERTER_ERROR
+	ConverterError ConverterResult = 0
 	// ConverterConverted wraps G_CONVERTER_CONVERTED
 	//
 	// Some data was consumed or produced
-	ConverterConverted ConverterResult = C.G_CONVERTER_CONVERTED
+	ConverterConverted ConverterResult = 1
 	// ConverterFinished wraps G_CONVERTER_FINISHED
 	//
 	// The conversion is finished
-	ConverterFinished ConverterResult = C.G_CONVERTER_FINISHED
+	ConverterFinished ConverterResult = 2
 	// ConverterFlushed wraps G_CONVERTER_FLUSHED
 	//
 	// Flushing is finished
-	ConverterFlushed ConverterResult = C.G_CONVERTER_FLUSHED
+	ConverterFlushed ConverterResult = 3
 )
 
 func marshalConverterResult(p unsafe.Pointer) (any, error) {
@@ -571,35 +571,35 @@ const (
 	// CredentialsTypeInvalid wraps G_CREDENTIALS_TYPE_INVALID
 	//
 	// Indicates an invalid native credential type.
-	CredentialsTypeInvalid CredentialsType = C.G_CREDENTIALS_TYPE_INVALID
+	CredentialsTypeInvalid CredentialsType = 0
 	// CredentialsTypeLinuxUcred wraps G_CREDENTIALS_TYPE_LINUX_UCRED
 	//
 	// The native credentials type is a `struct ucred`.
-	CredentialsTypeLinuxUcred CredentialsType = C.G_CREDENTIALS_TYPE_LINUX_UCRED
+	CredentialsTypeLinuxUcred CredentialsType = 1
 	// CredentialsTypeFreebsdCmsgcred wraps G_CREDENTIALS_TYPE_FREEBSD_CMSGCRED
 	//
 	// The native credentials type is a `struct cmsgcred`.
-	CredentialsTypeFreebsdCmsgcred CredentialsType = C.G_CREDENTIALS_TYPE_FREEBSD_CMSGCRED
+	CredentialsTypeFreebsdCmsgcred CredentialsType = 2
 	// CredentialsTypeOpenbsdSockpeercred wraps G_CREDENTIALS_TYPE_OPENBSD_SOCKPEERCRED
 	//
 	// The native credentials type is a `struct sockpeercred`. Added in 2.30.
-	CredentialsTypeOpenbsdSockpeercred CredentialsType = C.G_CREDENTIALS_TYPE_OPENBSD_SOCKPEERCRED
+	CredentialsTypeOpenbsdSockpeercred CredentialsType = 3
 	// CredentialsTypeSolarisUcred wraps G_CREDENTIALS_TYPE_SOLARIS_UCRED
 	//
 	// The native credentials type is a `ucred_t`. Added in 2.40.
-	CredentialsTypeSolarisUcred CredentialsType = C.G_CREDENTIALS_TYPE_SOLARIS_UCRED
+	CredentialsTypeSolarisUcred CredentialsType = 4
 	// CredentialsTypeNetbsdUnpcbid wraps G_CREDENTIALS_TYPE_NETBSD_UNPCBID
 	//
 	// The native credentials type is a `struct unpcbid`. Added in 2.42.
-	CredentialsTypeNetbsdUnpcbid CredentialsType = C.G_CREDENTIALS_TYPE_NETBSD_UNPCBID
+	CredentialsTypeNetbsdUnpcbid CredentialsType = 5
 	// CredentialsTypeAppleXucred wraps G_CREDENTIALS_TYPE_APPLE_XUCRED
 	//
 	// The native credentials type is a `struct xucred`. Added in 2.66.
-	CredentialsTypeAppleXucred CredentialsType = C.G_CREDENTIALS_TYPE_APPLE_XUCRED
+	CredentialsTypeAppleXucred CredentialsType = 6
 	// CredentialsTypeWin32Pid wraps G_CREDENTIALS_TYPE_WIN32_PID
 	//
 	// The native credentials type is a PID `DWORD`. Added in 2.72.
-	CredentialsTypeWin32Pid CredentialsType = C.G_CREDENTIALS_TYPE_WIN32_PID
+	CredentialsTypeWin32Pid CredentialsType = 7
 )
 
 func marshalCredentialsType(p unsafe.Pointer) (any, error) {
@@ -623,54 +623,54 @@ const (
 	//
 	// A generic error; "something went wrong" - see the error message for
 	// more.
-	DBusErrorFailed DBusError = C.G_DBUS_ERROR_FAILED
+	DBusErrorFailed DBusError = 0
 	// DBusErrorNoMemory wraps G_DBUS_ERROR_NO_MEMORY
 	//
 	// There was not enough memory to complete an operation.
-	DBusErrorNoMemory DBusError = C.G_DBUS_ERROR_NO_MEMORY
+	DBusErrorNoMemory DBusError = 1
 	// DBusErrorServiceUnknown wraps G_DBUS_ERROR_SERVICE_UNKNOWN
 	//
 	// The bus doesn't know how to launch a service to supply the bus name
 	// you wanted.
-	DBusErrorServiceUnknown DBusError = C.G_DBUS_ERROR_SERVICE_UNKNOWN
+	DBusErrorServiceUnknown DBusError = 2
 	// DBusErrorNameHasNoOwner wraps G_DBUS_ERROR_NAME_HAS_NO_OWNER
 	//
 	// The bus name you referenced doesn't exist (i.e. no application owns
 	// it).
-	DBusErrorNameHasNoOwner DBusError = C.G_DBUS_ERROR_NAME_HAS_NO_OWNER
+	DBusErrorNameHasNoOwner DBusError = 3
 	// DBusErrorNoReply wraps G_DBUS_ERROR_NO_REPLY
 	//
 	// No reply to a message expecting one, usually means a timeout occurred.
-	DBusErrorNoReply DBusError = C.G_DBUS_ERROR_NO_REPLY
+	DBusErrorNoReply DBusError = 4
 	// DBusErrorIOError wraps G_DBUS_ERROR_IO_ERROR
 	//
 	// Something went wrong reading or writing to a socket, for example.
-	DBusErrorIOError DBusError = C.G_DBUS_ERROR_IO_ERROR
+	DBusErrorIOError DBusError = 5
 	// DBusErrorBadAddress wraps G_DBUS_ERROR_BAD_ADDRESS
 	//
 	// A D-Bus bus address was malformed.
-	DBusErrorBadAddress DBusError = C.G_DBUS_ERROR_BAD_ADDRESS
+	DBusErrorBadAddress DBusError = 6
 	// DBusErrorNotSupported wraps G_DBUS_ERROR_NOT_SUPPORTED
 	//
 	// Requested operation isn't supported (like ENOSYS on UNIX).
-	DBusErrorNotSupported DBusError = C.G_DBUS_ERROR_NOT_SUPPORTED
+	DBusErrorNotSupported DBusError = 7
 	// DBusErrorLimitsExceeded wraps G_DBUS_ERROR_LIMITS_EXCEEDED
 	//
 	// Some limited resource is exhausted.
-	DBusErrorLimitsExceeded DBusError = C.G_DBUS_ERROR_LIMITS_EXCEEDED
+	DBusErrorLimitsExceeded DBusError = 8
 	// DBusErrorAccessDenied wraps G_DBUS_ERROR_ACCESS_DENIED
 	//
 	// Security restrictions don't allow doing what you're trying to do.
-	DBusErrorAccessDenied DBusError = C.G_DBUS_ERROR_ACCESS_DENIED
+	DBusErrorAccessDenied DBusError = 9
 	// DBusErrorAuthFailed wraps G_DBUS_ERROR_AUTH_FAILED
 	//
 	// Authentication didn't work.
-	DBusErrorAuthFailed DBusError = C.G_DBUS_ERROR_AUTH_FAILED
+	DBusErrorAuthFailed DBusError = 10
 	// DBusErrorNoServer wraps G_DBUS_ERROR_NO_SERVER
 	//
 	// Unable to connect to server (probably caused by ECONNREFUSED on a
 	// socket).
-	DBusErrorNoServer DBusError = C.G_DBUS_ERROR_NO_SERVER
+	DBusErrorNoServer DBusError = 11
 	// DBusErrorTimeout wraps G_DBUS_ERROR_TIMEOUT
 	//
 	// Certain timeout errors, possibly ETIMEDOUT on a socket.  Note that
@@ -678,133 +678,133 @@ const (
 	// this is confusingly-named given that %G_DBUS_ERROR_TIMED_OUT also
 	// exists. We can't fix it for compatibility reasons so just be
 	// careful.
-	DBusErrorTimeout DBusError = C.G_DBUS_ERROR_TIMEOUT
+	DBusErrorTimeout DBusError = 12
 	// DBusErrorNoNetwork wraps G_DBUS_ERROR_NO_NETWORK
 	//
 	// No network access (probably ENETUNREACH on a socket).
-	DBusErrorNoNetwork DBusError = C.G_DBUS_ERROR_NO_NETWORK
+	DBusErrorNoNetwork DBusError = 13
 	// DBusErrorAddressInUse wraps G_DBUS_ERROR_ADDRESS_IN_USE
 	//
 	// Can't bind a socket since its address is in use (i.e. EADDRINUSE).
-	DBusErrorAddressInUse DBusError = C.G_DBUS_ERROR_ADDRESS_IN_USE
+	DBusErrorAddressInUse DBusError = 14
 	// DBusErrorDisconnected wraps G_DBUS_ERROR_DISCONNECTED
 	//
 	// The connection is disconnected and you're trying to use it.
-	DBusErrorDisconnected DBusError = C.G_DBUS_ERROR_DISCONNECTED
+	DBusErrorDisconnected DBusError = 15
 	// DBusErrorInvalidArgs wraps G_DBUS_ERROR_INVALID_ARGS
 	//
 	// Invalid arguments passed to a method call.
-	DBusErrorInvalidArgs DBusError = C.G_DBUS_ERROR_INVALID_ARGS
+	DBusErrorInvalidArgs DBusError = 16
 	// DBusErrorFileNotFound wraps G_DBUS_ERROR_FILE_NOT_FOUND
 	//
 	// Missing file.
-	DBusErrorFileNotFound DBusError = C.G_DBUS_ERROR_FILE_NOT_FOUND
+	DBusErrorFileNotFound DBusError = 17
 	// DBusErrorFileExists wraps G_DBUS_ERROR_FILE_EXISTS
 	//
 	// Existing file and the operation you're using does not silently overwrite.
-	DBusErrorFileExists DBusError = C.G_DBUS_ERROR_FILE_EXISTS
+	DBusErrorFileExists DBusError = 18
 	// DBusErrorUnknownMethod wraps G_DBUS_ERROR_UNKNOWN_METHOD
 	//
 	// Method name you invoked isn't known by the object you invoked it on.
-	DBusErrorUnknownMethod DBusError = C.G_DBUS_ERROR_UNKNOWN_METHOD
+	DBusErrorUnknownMethod DBusError = 19
 	// DBusErrorTimedOut wraps G_DBUS_ERROR_TIMED_OUT
 	//
 	// Certain timeout errors, e.g. while starting a service. Warning: this is
 	// confusingly-named given that %G_DBUS_ERROR_TIMEOUT also exists. We
 	// can't fix it for compatibility reasons so just be careful.
-	DBusErrorTimedOut DBusError = C.G_DBUS_ERROR_TIMED_OUT
+	DBusErrorTimedOut DBusError = 20
 	// DBusErrorMatchRuleNotFound wraps G_DBUS_ERROR_MATCH_RULE_NOT_FOUND
 	//
 	// Tried to remove or modify a match rule that didn't exist.
-	DBusErrorMatchRuleNotFound DBusError = C.G_DBUS_ERROR_MATCH_RULE_NOT_FOUND
+	DBusErrorMatchRuleNotFound DBusError = 21
 	// DBusErrorMatchRuleInvalid wraps G_DBUS_ERROR_MATCH_RULE_INVALID
 	//
 	// The match rule isn't syntactically valid.
-	DBusErrorMatchRuleInvalid DBusError = C.G_DBUS_ERROR_MATCH_RULE_INVALID
+	DBusErrorMatchRuleInvalid DBusError = 22
 	// DBusErrorSpawnExecFailed wraps G_DBUS_ERROR_SPAWN_EXEC_FAILED
 	//
 	// While starting a new process, the exec() call failed.
-	DBusErrorSpawnExecFailed DBusError = C.G_DBUS_ERROR_SPAWN_EXEC_FAILED
+	DBusErrorSpawnExecFailed DBusError = 23
 	// DBusErrorSpawnForkFailed wraps G_DBUS_ERROR_SPAWN_FORK_FAILED
 	//
 	// While starting a new process, the fork() call failed.
-	DBusErrorSpawnForkFailed DBusError = C.G_DBUS_ERROR_SPAWN_FORK_FAILED
+	DBusErrorSpawnForkFailed DBusError = 24
 	// DBusErrorSpawnChildExited wraps G_DBUS_ERROR_SPAWN_CHILD_EXITED
 	//
 	// While starting a new process, the child exited with a status code.
-	DBusErrorSpawnChildExited DBusError = C.G_DBUS_ERROR_SPAWN_CHILD_EXITED
+	DBusErrorSpawnChildExited DBusError = 25
 	// DBusErrorSpawnChildSignaled wraps G_DBUS_ERROR_SPAWN_CHILD_SIGNALED
 	//
 	// While starting a new process, the child exited on a signal.
-	DBusErrorSpawnChildSignaled DBusError = C.G_DBUS_ERROR_SPAWN_CHILD_SIGNALED
+	DBusErrorSpawnChildSignaled DBusError = 26
 	// DBusErrorSpawnFailed wraps G_DBUS_ERROR_SPAWN_FAILED
 	//
 	// While starting a new process, something went wrong.
-	DBusErrorSpawnFailed DBusError = C.G_DBUS_ERROR_SPAWN_FAILED
+	DBusErrorSpawnFailed DBusError = 27
 	// DBusErrorSpawnSetupFailed wraps G_DBUS_ERROR_SPAWN_SETUP_FAILED
 	//
 	// We failed to setup the environment correctly.
-	DBusErrorSpawnSetupFailed DBusError = C.G_DBUS_ERROR_SPAWN_SETUP_FAILED
+	DBusErrorSpawnSetupFailed DBusError = 28
 	// DBusErrorSpawnConfigInvalid wraps G_DBUS_ERROR_SPAWN_CONFIG_INVALID
 	//
 	// We failed to setup the config parser correctly.
-	DBusErrorSpawnConfigInvalid DBusError = C.G_DBUS_ERROR_SPAWN_CONFIG_INVALID
+	DBusErrorSpawnConfigInvalid DBusError = 29
 	// DBusErrorSpawnServiceInvalid wraps G_DBUS_ERROR_SPAWN_SERVICE_INVALID
 	//
 	// Bus name was not valid.
-	DBusErrorSpawnServiceInvalid DBusError = C.G_DBUS_ERROR_SPAWN_SERVICE_INVALID
+	DBusErrorSpawnServiceInvalid DBusError = 30
 	// DBusErrorSpawnServiceNotFound wraps G_DBUS_ERROR_SPAWN_SERVICE_NOT_FOUND
 	//
 	// Service file not found in system-services directory.
-	DBusErrorSpawnServiceNotFound DBusError = C.G_DBUS_ERROR_SPAWN_SERVICE_NOT_FOUND
+	DBusErrorSpawnServiceNotFound DBusError = 31
 	// DBusErrorSpawnPermissionsInvalid wraps G_DBUS_ERROR_SPAWN_PERMISSIONS_INVALID
 	//
 	// Permissions are incorrect on the setuid helper.
-	DBusErrorSpawnPermissionsInvalid DBusError = C.G_DBUS_ERROR_SPAWN_PERMISSIONS_INVALID
+	DBusErrorSpawnPermissionsInvalid DBusError = 32
 	// DBusErrorSpawnFileInvalid wraps G_DBUS_ERROR_SPAWN_FILE_INVALID
 	//
 	// Service file invalid (Name, User or Exec missing).
-	DBusErrorSpawnFileInvalid DBusError = C.G_DBUS_ERROR_SPAWN_FILE_INVALID
+	DBusErrorSpawnFileInvalid DBusError = 33
 	// DBusErrorSpawnNoMemory wraps G_DBUS_ERROR_SPAWN_NO_MEMORY
 	//
 	// Tried to get a UNIX process ID and it wasn't available.
-	DBusErrorSpawnNoMemory DBusError = C.G_DBUS_ERROR_SPAWN_NO_MEMORY
+	DBusErrorSpawnNoMemory DBusError = 34
 	// DBusErrorInvalidSignature wraps G_DBUS_ERROR_INVALID_SIGNATURE
 	//
 	// A type signature is not valid.
-	DBusErrorInvalidSignature DBusError = C.G_DBUS_ERROR_INVALID_SIGNATURE
+	DBusErrorInvalidSignature DBusError = 36
 	// DBusErrorInvalidFileContent wraps G_DBUS_ERROR_INVALID_FILE_CONTENT
 	//
 	// A file contains invalid syntax or is otherwise broken.
-	DBusErrorInvalidFileContent DBusError = C.G_DBUS_ERROR_INVALID_FILE_CONTENT
+	DBusErrorInvalidFileContent DBusError = 37
 	// DBusErrorSelinuxSecurityContextUnknown wraps G_DBUS_ERROR_SELINUX_SECURITY_CONTEXT_UNKNOWN
 	//
 	// Asked for SELinux security context and it wasn't available.
-	DBusErrorSelinuxSecurityContextUnknown DBusError = C.G_DBUS_ERROR_SELINUX_SECURITY_CONTEXT_UNKNOWN
+	DBusErrorSelinuxSecurityContextUnknown DBusError = 38
 	// DBusErrorAdtAuditDataUnknown wraps G_DBUS_ERROR_ADT_AUDIT_DATA_UNKNOWN
 	//
 	// Asked for ADT audit data and it wasn't available.
-	DBusErrorAdtAuditDataUnknown DBusError = C.G_DBUS_ERROR_ADT_AUDIT_DATA_UNKNOWN
+	DBusErrorAdtAuditDataUnknown DBusError = 39
 	// DBusErrorObjectPathInUse wraps G_DBUS_ERROR_OBJECT_PATH_IN_USE
 	//
 	// There's already an object with the requested object path.
-	DBusErrorObjectPathInUse DBusError = C.G_DBUS_ERROR_OBJECT_PATH_IN_USE
+	DBusErrorObjectPathInUse DBusError = 40
 	// DBusErrorUnknownObject wraps G_DBUS_ERROR_UNKNOWN_OBJECT
 	//
 	// Object you invoked a method on isn't known. Since 2.42
-	DBusErrorUnknownObject DBusError = C.G_DBUS_ERROR_UNKNOWN_OBJECT
+	DBusErrorUnknownObject DBusError = 41
 	// DBusErrorUnknownInterface wraps G_DBUS_ERROR_UNKNOWN_INTERFACE
 	//
 	// Interface you invoked a method on isn't known by the object. Since 2.42
-	DBusErrorUnknownInterface DBusError = C.G_DBUS_ERROR_UNKNOWN_INTERFACE
+	DBusErrorUnknownInterface DBusError = 42
 	// DBusErrorUnknownProperty wraps G_DBUS_ERROR_UNKNOWN_PROPERTY
 	//
 	// Property you tried to access isn't known by the object. Since 2.42
-	DBusErrorUnknownProperty DBusError = C.G_DBUS_ERROR_UNKNOWN_PROPERTY
+	DBusErrorUnknownProperty DBusError = 43
 	// DBusErrorPropertyReadOnly wraps G_DBUS_ERROR_PROPERTY_READ_ONLY
 	//
 	// Property you tried to set is read-only. Since 2.42
-	DBusErrorPropertyReadOnly DBusError = C.G_DBUS_ERROR_PROPERTY_READ_ONLY
+	DBusErrorPropertyReadOnly DBusError = 44
 )
 
 func marshalDBusError(p unsafe.Pointer) (any, error) {
@@ -827,11 +827,11 @@ const (
 	// DBusMessageByteOrderBigEndian wraps G_DBUS_MESSAGE_BYTE_ORDER_BIG_ENDIAN
 	//
 	// The byte order is big endian.
-	DBusMessageByteOrderBigEndian DBusMessageByteOrder = C.G_DBUS_MESSAGE_BYTE_ORDER_BIG_ENDIAN
+	DBusMessageByteOrderBigEndian DBusMessageByteOrder = 66
 	// DBusMessageByteOrderLittleEndian wraps G_DBUS_MESSAGE_BYTE_ORDER_LITTLE_ENDIAN
 	//
 	// The byte order is little endian.
-	DBusMessageByteOrderLittleEndian DBusMessageByteOrder = C.G_DBUS_MESSAGE_BYTE_ORDER_LITTLE_ENDIAN
+	DBusMessageByteOrderLittleEndian DBusMessageByteOrder = 108
 )
 
 func marshalDBusMessageByteOrder(p unsafe.Pointer) (any, error) {
@@ -854,39 +854,39 @@ const (
 	// DBusMessageHeaderFieldInvalid wraps G_DBUS_MESSAGE_HEADER_FIELD_INVALID
 	//
 	// Not a valid header field.
-	DBusMessageHeaderFieldInvalid DBusMessageHeaderField = C.G_DBUS_MESSAGE_HEADER_FIELD_INVALID
+	DBusMessageHeaderFieldInvalid DBusMessageHeaderField = 0
 	// DBusMessageHeaderFieldPath wraps G_DBUS_MESSAGE_HEADER_FIELD_PATH
 	//
 	// The object path.
-	DBusMessageHeaderFieldPath DBusMessageHeaderField = C.G_DBUS_MESSAGE_HEADER_FIELD_PATH
+	DBusMessageHeaderFieldPath DBusMessageHeaderField = 1
 	// DBusMessageHeaderFieldInterface wraps G_DBUS_MESSAGE_HEADER_FIELD_INTERFACE
 	//
 	// The interface name.
-	DBusMessageHeaderFieldInterface DBusMessageHeaderField = C.G_DBUS_MESSAGE_HEADER_FIELD_INTERFACE
+	DBusMessageHeaderFieldInterface DBusMessageHeaderField = 2
 	// DBusMessageHeaderFieldMember wraps G_DBUS_MESSAGE_HEADER_FIELD_MEMBER
 	//
 	// The method or signal name.
-	DBusMessageHeaderFieldMember DBusMessageHeaderField = C.G_DBUS_MESSAGE_HEADER_FIELD_MEMBER
+	DBusMessageHeaderFieldMember DBusMessageHeaderField = 3
 	// DBusMessageHeaderFieldErrorName wraps G_DBUS_MESSAGE_HEADER_FIELD_ERROR_NAME
 	//
 	// The name of the error that occurred.
-	DBusMessageHeaderFieldErrorName DBusMessageHeaderField = C.G_DBUS_MESSAGE_HEADER_FIELD_ERROR_NAME
+	DBusMessageHeaderFieldErrorName DBusMessageHeaderField = 4
 	// DBusMessageHeaderFieldReplySerial wraps G_DBUS_MESSAGE_HEADER_FIELD_REPLY_SERIAL
 	//
 	// The serial number the message is a reply to.
-	DBusMessageHeaderFieldReplySerial DBusMessageHeaderField = C.G_DBUS_MESSAGE_HEADER_FIELD_REPLY_SERIAL
+	DBusMessageHeaderFieldReplySerial DBusMessageHeaderField = 5
 	// DBusMessageHeaderFieldDestination wraps G_DBUS_MESSAGE_HEADER_FIELD_DESTINATION
 	//
 	// The name the message is intended for.
-	DBusMessageHeaderFieldDestination DBusMessageHeaderField = C.G_DBUS_MESSAGE_HEADER_FIELD_DESTINATION
+	DBusMessageHeaderFieldDestination DBusMessageHeaderField = 6
 	// DBusMessageHeaderFieldSender wraps G_DBUS_MESSAGE_HEADER_FIELD_SENDER
 	//
 	// Unique name of the sender of the message (filled in by the bus).
-	DBusMessageHeaderFieldSender DBusMessageHeaderField = C.G_DBUS_MESSAGE_HEADER_FIELD_SENDER
+	DBusMessageHeaderFieldSender DBusMessageHeaderField = 7
 	// DBusMessageHeaderFieldSignature wraps G_DBUS_MESSAGE_HEADER_FIELD_SIGNATURE
 	//
 	// The signature of the message body.
-	DBusMessageHeaderFieldSignature DBusMessageHeaderField = C.G_DBUS_MESSAGE_HEADER_FIELD_SIGNATURE
+	DBusMessageHeaderFieldSignature DBusMessageHeaderField = 8
 )
 
 func marshalDBusMessageHeaderField(p unsafe.Pointer) (any, error) {
@@ -909,23 +909,23 @@ const (
 	// DBusMessageTypeInvalid wraps G_DBUS_MESSAGE_TYPE_INVALID
 	//
 	// Message is of invalid type.
-	DBusMessageTypeInvalid DBusMessageType = C.G_DBUS_MESSAGE_TYPE_INVALID
+	DBusMessageTypeInvalid DBusMessageType = 0
 	// DBusMessageTypeMethodCall wraps G_DBUS_MESSAGE_TYPE_METHOD_CALL
 	//
 	// Method call.
-	DBusMessageTypeMethodCall DBusMessageType = C.G_DBUS_MESSAGE_TYPE_METHOD_CALL
+	DBusMessageTypeMethodCall DBusMessageType = 1
 	// DBusMessageTypeMethodReturn wraps G_DBUS_MESSAGE_TYPE_METHOD_RETURN
 	//
 	// Method reply.
-	DBusMessageTypeMethodReturn DBusMessageType = C.G_DBUS_MESSAGE_TYPE_METHOD_RETURN
+	DBusMessageTypeMethodReturn DBusMessageType = 2
 	// DBusMessageTypeError wraps G_DBUS_MESSAGE_TYPE_ERROR
 	//
 	// Error reply.
-	DBusMessageTypeError DBusMessageType = C.G_DBUS_MESSAGE_TYPE_ERROR
+	DBusMessageTypeError DBusMessageType = 3
 	// DBusMessageTypeSignal wraps G_DBUS_MESSAGE_TYPE_SIGNAL
 	//
 	// Signal emission.
-	DBusMessageTypeSignal DBusMessageType = C.G_DBUS_MESSAGE_TYPE_SIGNAL
+	DBusMessageTypeSignal DBusMessageType = 4
 )
 
 func marshalDBusMessageType(p unsafe.Pointer) (any, error) {
@@ -949,15 +949,15 @@ const (
 	// DataStreamByteOrderBigEndian wraps G_DATA_STREAM_BYTE_ORDER_BIG_ENDIAN
 	//
 	// Selects Big Endian byte order.
-	DataStreamByteOrderBigEndian DataStreamByteOrder = C.G_DATA_STREAM_BYTE_ORDER_BIG_ENDIAN
+	DataStreamByteOrderBigEndian DataStreamByteOrder = 0
 	// DataStreamByteOrderLittleEndian wraps G_DATA_STREAM_BYTE_ORDER_LITTLE_ENDIAN
 	//
 	// Selects Little Endian byte order.
-	DataStreamByteOrderLittleEndian DataStreamByteOrder = C.G_DATA_STREAM_BYTE_ORDER_LITTLE_ENDIAN
+	DataStreamByteOrderLittleEndian DataStreamByteOrder = 1
 	// DataStreamByteOrderHostEndian wraps G_DATA_STREAM_BYTE_ORDER_HOST_ENDIAN
 	//
 	// Selects endianness based on host machine's architecture.
-	DataStreamByteOrderHostEndian DataStreamByteOrder = C.G_DATA_STREAM_BYTE_ORDER_HOST_ENDIAN
+	DataStreamByteOrderHostEndian DataStreamByteOrder = 2
 )
 
 func marshalDataStreamByteOrder(p unsafe.Pointer) (any, error) {
@@ -980,19 +980,19 @@ const (
 	// DataStreamNewlineTypeLf wraps G_DATA_STREAM_NEWLINE_TYPE_LF
 	//
 	// Selects "LF" line endings, common on most modern UNIX platforms.
-	DataStreamNewlineTypeLf DataStreamNewlineType = C.G_DATA_STREAM_NEWLINE_TYPE_LF
+	DataStreamNewlineTypeLf DataStreamNewlineType = 0
 	// DataStreamNewlineTypeCr wraps G_DATA_STREAM_NEWLINE_TYPE_CR
 	//
 	// Selects "CR" line endings.
-	DataStreamNewlineTypeCr DataStreamNewlineType = C.G_DATA_STREAM_NEWLINE_TYPE_CR
+	DataStreamNewlineTypeCr DataStreamNewlineType = 1
 	// DataStreamNewlineTypeCrLf wraps G_DATA_STREAM_NEWLINE_TYPE_CR_LF
 	//
 	// Selects "CR, LF" line ending, common on Microsoft Windows.
-	DataStreamNewlineTypeCrLf DataStreamNewlineType = C.G_DATA_STREAM_NEWLINE_TYPE_CR_LF
+	DataStreamNewlineTypeCrLf DataStreamNewlineType = 2
 	// DataStreamNewlineTypeAny wraps G_DATA_STREAM_NEWLINE_TYPE_ANY
 	//
 	// Automatically try to handle any line ending type.
-	DataStreamNewlineTypeAny DataStreamNewlineType = C.G_DATA_STREAM_NEWLINE_TYPE_ANY
+	DataStreamNewlineTypeAny DataStreamNewlineType = 3
 )
 
 func marshalDataStreamNewlineType(p unsafe.Pointer) (any, error) {
@@ -1016,30 +1016,30 @@ const (
 	//
 	// Unknown or drive doesn't support
 	//    start/stop.
-	DriveStartStopTypeUnknown DriveStartStopType = C.G_DRIVE_START_STOP_TYPE_UNKNOWN
+	DriveStartStopTypeUnknown DriveStartStopType = 0
 	// DriveStartStopTypeShutdown wraps G_DRIVE_START_STOP_TYPE_SHUTDOWN
 	//
 	// The stop method will physically
 	//    shut down the drive and e.g. power down the port the drive is
 	//    attached to.
-	DriveStartStopTypeShutdown DriveStartStopType = C.G_DRIVE_START_STOP_TYPE_SHUTDOWN
+	DriveStartStopTypeShutdown DriveStartStopType = 1
 	// DriveStartStopTypeNetwork wraps G_DRIVE_START_STOP_TYPE_NETWORK
 	//
 	// The start/stop methods are used
 	//    for connecting/disconnect to the drive over the network.
-	DriveStartStopTypeNetwork DriveStartStopType = C.G_DRIVE_START_STOP_TYPE_NETWORK
+	DriveStartStopTypeNetwork DriveStartStopType = 2
 	// DriveStartStopTypeMultidisk wraps G_DRIVE_START_STOP_TYPE_MULTIDISK
 	//
 	// The start/stop methods will
 	//    assemble/disassemble a virtual drive from several physical
 	//    drives.
-	DriveStartStopTypeMultidisk DriveStartStopType = C.G_DRIVE_START_STOP_TYPE_MULTIDISK
+	DriveStartStopTypeMultidisk DriveStartStopType = 3
 	// DriveStartStopTypePassword wraps G_DRIVE_START_STOP_TYPE_PASSWORD
 	//
 	// The start/stop methods will
 	//    unlock/lock the disk (for example using the ATA `SECURITY UNLOCK
 	//    DEVICE` command)
-	DriveStartStopTypePassword DriveStartStopType = C.G_DRIVE_START_STOP_TYPE_PASSWORD
+	DriveStartStopTypePassword DriveStartStopType = 4
 )
 
 func marshalDriveStartStopType(p unsafe.Pointer) (any, error) {
@@ -1063,19 +1063,19 @@ const (
 	// EmblemOriginUnknown wraps G_EMBLEM_ORIGIN_UNKNOWN
 	//
 	// Emblem of unknown origin
-	EmblemOriginUnknown EmblemOrigin = C.G_EMBLEM_ORIGIN_UNKNOWN
+	EmblemOriginUnknown EmblemOrigin = 0
 	// EmblemOriginDevice wraps G_EMBLEM_ORIGIN_DEVICE
 	//
 	// Emblem adds device-specific information
-	EmblemOriginDevice EmblemOrigin = C.G_EMBLEM_ORIGIN_DEVICE
+	EmblemOriginDevice EmblemOrigin = 1
 	// EmblemOriginLivemetadata wraps G_EMBLEM_ORIGIN_LIVEMETADATA
 	//
 	// Emblem depicts live metadata, such as "readonly"
-	EmblemOriginLivemetadata EmblemOrigin = C.G_EMBLEM_ORIGIN_LIVEMETADATA
+	EmblemOriginLivemetadata EmblemOrigin = 2
 	// EmblemOriginTag wraps G_EMBLEM_ORIGIN_TAG
 	//
 	// Emblem comes from a user-defined tag, e.g. set by nautilus (in the future)
-	EmblemOriginTag EmblemOrigin = C.G_EMBLEM_ORIGIN_TAG
+	EmblemOriginTag EmblemOrigin = 3
 )
 
 func marshalEmblemOrigin(p unsafe.Pointer) (any, error) {
@@ -1098,15 +1098,15 @@ const (
 	// FileAttributeStatusUnset wraps G_FILE_ATTRIBUTE_STATUS_UNSET
 	//
 	// Attribute value is unset (empty).
-	FileAttributeStatusUnset FileAttributeStatus = C.G_FILE_ATTRIBUTE_STATUS_UNSET
+	FileAttributeStatusUnset FileAttributeStatus = 0
 	// FileAttributeStatusSet wraps G_FILE_ATTRIBUTE_STATUS_SET
 	//
 	// Attribute value is set.
-	FileAttributeStatusSet FileAttributeStatus = C.G_FILE_ATTRIBUTE_STATUS_SET
+	FileAttributeStatusSet FileAttributeStatus = 1
 	// FileAttributeStatusErrorSetting wraps G_FILE_ATTRIBUTE_STATUS_ERROR_SETTING
 	//
 	// Indicates an error in setting the value.
-	FileAttributeStatusErrorSetting FileAttributeStatus = C.G_FILE_ATTRIBUTE_STATUS_ERROR_SETTING
+	FileAttributeStatusErrorSetting FileAttributeStatus = 2
 )
 
 func marshalFileAttributeStatus(p unsafe.Pointer) (any, error) {
@@ -1129,43 +1129,43 @@ const (
 	// FileAttributeTypeInvalid wraps G_FILE_ATTRIBUTE_TYPE_INVALID
 	//
 	// indicates an invalid or uninitialized type.
-	FileAttributeTypeInvalid FileAttributeType = C.G_FILE_ATTRIBUTE_TYPE_INVALID
+	FileAttributeTypeInvalid FileAttributeType = 0
 	// FileAttributeTypeString wraps G_FILE_ATTRIBUTE_TYPE_STRING
 	//
 	// a null terminated UTF8 string.
-	FileAttributeTypeString FileAttributeType = C.G_FILE_ATTRIBUTE_TYPE_STRING
+	FileAttributeTypeString FileAttributeType = 1
 	// FileAttributeTypeByteString wraps G_FILE_ATTRIBUTE_TYPE_BYTE_STRING
 	//
 	// a zero terminated string of non-zero bytes.
-	FileAttributeTypeByteString FileAttributeType = C.G_FILE_ATTRIBUTE_TYPE_BYTE_STRING
+	FileAttributeTypeByteString FileAttributeType = 2
 	// FileAttributeTypeBoolean wraps G_FILE_ATTRIBUTE_TYPE_BOOLEAN
 	//
 	// a boolean value.
-	FileAttributeTypeBoolean FileAttributeType = C.G_FILE_ATTRIBUTE_TYPE_BOOLEAN
+	FileAttributeTypeBoolean FileAttributeType = 3
 	// FileAttributeTypeUint32 wraps G_FILE_ATTRIBUTE_TYPE_UINT32
 	//
 	// an unsigned 4-byte/32-bit integer.
-	FileAttributeTypeUint32 FileAttributeType = C.G_FILE_ATTRIBUTE_TYPE_UINT32
+	FileAttributeTypeUint32 FileAttributeType = 4
 	// FileAttributeTypeInt32 wraps G_FILE_ATTRIBUTE_TYPE_INT32
 	//
 	// a signed 4-byte/32-bit integer.
-	FileAttributeTypeInt32 FileAttributeType = C.G_FILE_ATTRIBUTE_TYPE_INT32
+	FileAttributeTypeInt32 FileAttributeType = 5
 	// FileAttributeTypeUint64 wraps G_FILE_ATTRIBUTE_TYPE_UINT64
 	//
 	// an unsigned 8-byte/64-bit integer.
-	FileAttributeTypeUint64 FileAttributeType = C.G_FILE_ATTRIBUTE_TYPE_UINT64
+	FileAttributeTypeUint64 FileAttributeType = 6
 	// FileAttributeTypeInt64 wraps G_FILE_ATTRIBUTE_TYPE_INT64
 	//
 	// a signed 8-byte/64-bit integer.
-	FileAttributeTypeInt64 FileAttributeType = C.G_FILE_ATTRIBUTE_TYPE_INT64
+	FileAttributeTypeInt64 FileAttributeType = 7
 	// FileAttributeTypeObject wraps G_FILE_ATTRIBUTE_TYPE_OBJECT
 	//
 	// a #GObject.
-	FileAttributeTypeObject FileAttributeType = C.G_FILE_ATTRIBUTE_TYPE_OBJECT
+	FileAttributeTypeObject FileAttributeType = 8
 	// FileAttributeTypeStringv wraps G_FILE_ATTRIBUTE_TYPE_STRINGV
 	//
 	// a %NULL terminated char **. Since 2.22
-	FileAttributeTypeStringv FileAttributeType = C.G_FILE_ATTRIBUTE_TYPE_STRINGV
+	FileAttributeTypeStringv FileAttributeType = 9
 )
 
 func marshalFileAttributeType(p unsafe.Pointer) (any, error) {
@@ -1188,54 +1188,54 @@ const (
 	// FileMonitorEventChanged wraps G_FILE_MONITOR_EVENT_CHANGED
 	//
 	// a file changed.
-	FileMonitorEventChanged FileMonitorEvent = C.G_FILE_MONITOR_EVENT_CHANGED
+	FileMonitorEventChanged FileMonitorEvent = 0
 	// FileMonitorEventChangesDoneHint wraps G_FILE_MONITOR_EVENT_CHANGES_DONE_HINT
 	//
 	// a hint that this was probably the last change in a set of changes.
-	FileMonitorEventChangesDoneHint FileMonitorEvent = C.G_FILE_MONITOR_EVENT_CHANGES_DONE_HINT
+	FileMonitorEventChangesDoneHint FileMonitorEvent = 1
 	// FileMonitorEventDeleted wraps G_FILE_MONITOR_EVENT_DELETED
 	//
 	// a file was deleted.
-	FileMonitorEventDeleted FileMonitorEvent = C.G_FILE_MONITOR_EVENT_DELETED
+	FileMonitorEventDeleted FileMonitorEvent = 2
 	// FileMonitorEventCreated wraps G_FILE_MONITOR_EVENT_CREATED
 	//
 	// a file was created.
-	FileMonitorEventCreated FileMonitorEvent = C.G_FILE_MONITOR_EVENT_CREATED
+	FileMonitorEventCreated FileMonitorEvent = 3
 	// FileMonitorEventAttributeChanged wraps G_FILE_MONITOR_EVENT_ATTRIBUTE_CHANGED
 	//
 	// a file attribute was changed.
-	FileMonitorEventAttributeChanged FileMonitorEvent = C.G_FILE_MONITOR_EVENT_ATTRIBUTE_CHANGED
+	FileMonitorEventAttributeChanged FileMonitorEvent = 4
 	// FileMonitorEventPreUnmount wraps G_FILE_MONITOR_EVENT_PRE_UNMOUNT
 	//
 	// the file location will soon be unmounted.
-	FileMonitorEventPreUnmount FileMonitorEvent = C.G_FILE_MONITOR_EVENT_PRE_UNMOUNT
+	FileMonitorEventPreUnmount FileMonitorEvent = 5
 	// FileMonitorEventUnmounted wraps G_FILE_MONITOR_EVENT_UNMOUNTED
 	//
 	// the file location was unmounted.
-	FileMonitorEventUnmounted FileMonitorEvent = C.G_FILE_MONITOR_EVENT_UNMOUNTED
+	FileMonitorEventUnmounted FileMonitorEvent = 6
 	// FileMonitorEventMoved wraps G_FILE_MONITOR_EVENT_MOVED
 	//
 	// the file was moved -- only sent if the
 	//   (deprecated) %G_FILE_MONITOR_SEND_MOVED flag is set
-	FileMonitorEventMoved FileMonitorEvent = C.G_FILE_MONITOR_EVENT_MOVED
+	FileMonitorEventMoved FileMonitorEvent = 7
 	// FileMonitorEventRenamed wraps G_FILE_MONITOR_EVENT_RENAMED
 	//
 	// the file was renamed within the
 	//   current directory -- only sent if the %G_FILE_MONITOR_WATCH_MOVES
 	//   flag is set.  Since: 2.46.
-	FileMonitorEventRenamed FileMonitorEvent = C.G_FILE_MONITOR_EVENT_RENAMED
+	FileMonitorEventRenamed FileMonitorEvent = 8
 	// FileMonitorEventMovedIn wraps G_FILE_MONITOR_EVENT_MOVED_IN
 	//
 	// the file was moved into the
 	//   monitored directory from another location -- only sent if the
 	//   %G_FILE_MONITOR_WATCH_MOVES flag is set.  Since: 2.46.
-	FileMonitorEventMovedIn FileMonitorEvent = C.G_FILE_MONITOR_EVENT_MOVED_IN
+	FileMonitorEventMovedIn FileMonitorEvent = 9
 	// FileMonitorEventMovedOut wraps G_FILE_MONITOR_EVENT_MOVED_OUT
 	//
 	// the file was moved out of the
 	//   monitored directory to another location -- only sent if the
 	//   %G_FILE_MONITOR_WATCH_MOVES flag is set.  Since: 2.46
-	FileMonitorEventMovedOut FileMonitorEvent = C.G_FILE_MONITOR_EVENT_MOVED_OUT
+	FileMonitorEventMovedOut FileMonitorEvent = 10
 )
 
 func marshalFileMonitorEvent(p unsafe.Pointer) (any, error) {
@@ -1267,33 +1267,33 @@ const (
 	// FileTypeUnknown wraps G_FILE_TYPE_UNKNOWN
 	//
 	// File's type is unknown.
-	FileTypeUnknown FileType = C.G_FILE_TYPE_UNKNOWN
+	FileTypeUnknown FileType = 0
 	// FileTypeRegular wraps G_FILE_TYPE_REGULAR
 	//
 	// File handle represents a regular file.
-	FileTypeRegular FileType = C.G_FILE_TYPE_REGULAR
+	FileTypeRegular FileType = 1
 	// FileTypeDirectory wraps G_FILE_TYPE_DIRECTORY
 	//
 	// File handle represents a directory.
-	FileTypeDirectory FileType = C.G_FILE_TYPE_DIRECTORY
+	FileTypeDirectory FileType = 2
 	// FileTypeSymbolicLink wraps G_FILE_TYPE_SYMBOLIC_LINK
 	//
 	// File handle represents a symbolic link
 	//    (Unix systems).
-	FileTypeSymbolicLink FileType = C.G_FILE_TYPE_SYMBOLIC_LINK
+	FileTypeSymbolicLink FileType = 3
 	// FileTypeSpecial wraps G_FILE_TYPE_SPECIAL
 	//
 	// File is a "special" file, such as a socket, fifo,
 	//    block device, or character device.
-	FileTypeSpecial FileType = C.G_FILE_TYPE_SPECIAL
+	FileTypeSpecial FileType = 4
 	// FileTypeShortcut wraps G_FILE_TYPE_SHORTCUT
 	//
 	// File is a shortcut (Windows systems).
-	FileTypeShortcut FileType = C.G_FILE_TYPE_SHORTCUT
+	FileTypeShortcut FileType = 5
 	// FileTypeMountable wraps G_FILE_TYPE_MOUNTABLE
 	//
 	// File is a mountable location.
-	FileTypeMountable FileType = C.G_FILE_TYPE_MOUNTABLE
+	FileTypeMountable FileType = 6
 )
 
 func marshalFileType(p unsafe.Pointer) (any, error) {
@@ -1318,15 +1318,15 @@ const (
 	// FilesystemPreviewTypeIfAlways wraps G_FILESYSTEM_PREVIEW_TYPE_IF_ALWAYS
 	//
 	// Only preview files if user has explicitly requested it.
-	FilesystemPreviewTypeIfAlways FilesystemPreviewType = C.G_FILESYSTEM_PREVIEW_TYPE_IF_ALWAYS
+	FilesystemPreviewTypeIfAlways FilesystemPreviewType = 0
 	// FilesystemPreviewTypeIfLocal wraps G_FILESYSTEM_PREVIEW_TYPE_IF_LOCAL
 	//
 	// Preview files if user has requested preview of "local" files.
-	FilesystemPreviewTypeIfLocal FilesystemPreviewType = C.G_FILESYSTEM_PREVIEW_TYPE_IF_LOCAL
+	FilesystemPreviewTypeIfLocal FilesystemPreviewType = 1
 	// FilesystemPreviewTypeNever wraps G_FILESYSTEM_PREVIEW_TYPE_NEVER
 	//
 	// Never preview files.
-	FilesystemPreviewTypeNever FilesystemPreviewType = C.G_FILESYSTEM_PREVIEW_TYPE_NEVER
+	FilesystemPreviewTypeNever FilesystemPreviewType = 2
 )
 
 func marshalFilesystemPreviewType(p unsafe.Pointer) (any, error) {
@@ -1367,150 +1367,150 @@ const (
 	//
 	// Generic error condition for when an operation fails
 	//     and no more specific #GIOErrorEnum value is defined.
-	IOErrorFailed IOErrorEnum = C.G_IO_ERROR_FAILED
+	IOErrorFailed IOErrorEnum = 0
 	// IOErrorNotFound wraps G_IO_ERROR_NOT_FOUND
 	//
 	// File not found.
-	IOErrorNotFound IOErrorEnum = C.G_IO_ERROR_NOT_FOUND
+	IOErrorNotFound IOErrorEnum = 1
 	// IOErrorExists wraps G_IO_ERROR_EXISTS
 	//
 	// File already exists.
-	IOErrorExists IOErrorEnum = C.G_IO_ERROR_EXISTS
+	IOErrorExists IOErrorEnum = 2
 	// IOErrorIsDirectory wraps G_IO_ERROR_IS_DIRECTORY
 	//
 	// File is a directory.
-	IOErrorIsDirectory IOErrorEnum = C.G_IO_ERROR_IS_DIRECTORY
+	IOErrorIsDirectory IOErrorEnum = 3
 	// IOErrorNotDirectory wraps G_IO_ERROR_NOT_DIRECTORY
 	//
 	// File is not a directory.
-	IOErrorNotDirectory IOErrorEnum = C.G_IO_ERROR_NOT_DIRECTORY
+	IOErrorNotDirectory IOErrorEnum = 4
 	// IOErrorNotEmpty wraps G_IO_ERROR_NOT_EMPTY
 	//
 	// File is a directory that isn't empty.
-	IOErrorNotEmpty IOErrorEnum = C.G_IO_ERROR_NOT_EMPTY
+	IOErrorNotEmpty IOErrorEnum = 5
 	// IOErrorNotRegularFile wraps G_IO_ERROR_NOT_REGULAR_FILE
 	//
 	// File is not a regular file.
-	IOErrorNotRegularFile IOErrorEnum = C.G_IO_ERROR_NOT_REGULAR_FILE
+	IOErrorNotRegularFile IOErrorEnum = 6
 	// IOErrorNotSymbolicLink wraps G_IO_ERROR_NOT_SYMBOLIC_LINK
 	//
 	// File is not a symbolic link.
-	IOErrorNotSymbolicLink IOErrorEnum = C.G_IO_ERROR_NOT_SYMBOLIC_LINK
+	IOErrorNotSymbolicLink IOErrorEnum = 7
 	// IOErrorNotMountableFile wraps G_IO_ERROR_NOT_MOUNTABLE_FILE
 	//
 	// File cannot be mounted.
-	IOErrorNotMountableFile IOErrorEnum = C.G_IO_ERROR_NOT_MOUNTABLE_FILE
+	IOErrorNotMountableFile IOErrorEnum = 8
 	// IOErrorFilenameTooLong wraps G_IO_ERROR_FILENAME_TOO_LONG
 	//
 	// Filename is too many characters.
-	IOErrorFilenameTooLong IOErrorEnum = C.G_IO_ERROR_FILENAME_TOO_LONG
+	IOErrorFilenameTooLong IOErrorEnum = 9
 	// IOErrorInvalidFilename wraps G_IO_ERROR_INVALID_FILENAME
 	//
 	// Filename is invalid or contains invalid characters.
-	IOErrorInvalidFilename IOErrorEnum = C.G_IO_ERROR_INVALID_FILENAME
+	IOErrorInvalidFilename IOErrorEnum = 10
 	// IOErrorTooManyLinks wraps G_IO_ERROR_TOO_MANY_LINKS
 	//
 	// File contains too many symbolic links.
-	IOErrorTooManyLinks IOErrorEnum = C.G_IO_ERROR_TOO_MANY_LINKS
+	IOErrorTooManyLinks IOErrorEnum = 11
 	// IOErrorNoSpace wraps G_IO_ERROR_NO_SPACE
 	//
 	// No space left on drive.
-	IOErrorNoSpace IOErrorEnum = C.G_IO_ERROR_NO_SPACE
+	IOErrorNoSpace IOErrorEnum = 12
 	// IOErrorInvalidArgument wraps G_IO_ERROR_INVALID_ARGUMENT
 	//
 	// Invalid argument.
-	IOErrorInvalidArgument IOErrorEnum = C.G_IO_ERROR_INVALID_ARGUMENT
+	IOErrorInvalidArgument IOErrorEnum = 13
 	// IOErrorPermissionDenied wraps G_IO_ERROR_PERMISSION_DENIED
 	//
 	// Permission denied.
-	IOErrorPermissionDenied IOErrorEnum = C.G_IO_ERROR_PERMISSION_DENIED
+	IOErrorPermissionDenied IOErrorEnum = 14
 	// IOErrorNotSupported wraps G_IO_ERROR_NOT_SUPPORTED
 	//
 	// Operation (or one of its parameters) not supported
-	IOErrorNotSupported IOErrorEnum = C.G_IO_ERROR_NOT_SUPPORTED
+	IOErrorNotSupported IOErrorEnum = 15
 	// IOErrorNotMounted wraps G_IO_ERROR_NOT_MOUNTED
 	//
 	// File isn't mounted.
-	IOErrorNotMounted IOErrorEnum = C.G_IO_ERROR_NOT_MOUNTED
+	IOErrorNotMounted IOErrorEnum = 16
 	// IOErrorAlreadyMounted wraps G_IO_ERROR_ALREADY_MOUNTED
 	//
 	// File is already mounted.
-	IOErrorAlreadyMounted IOErrorEnum = C.G_IO_ERROR_ALREADY_MOUNTED
+	IOErrorAlreadyMounted IOErrorEnum = 17
 	// IOErrorClosed wraps G_IO_ERROR_CLOSED
 	//
 	// File was closed.
-	IOErrorClosed IOErrorEnum = C.G_IO_ERROR_CLOSED
+	IOErrorClosed IOErrorEnum = 18
 	// IOErrorCancelled wraps G_IO_ERROR_CANCELLED
 	//
 	// Operation was cancelled. See #GCancellable.
-	IOErrorCancelled IOErrorEnum = C.G_IO_ERROR_CANCELLED
+	IOErrorCancelled IOErrorEnum = 19
 	// IOErrorPending wraps G_IO_ERROR_PENDING
 	//
 	// Operations are still pending.
-	IOErrorPending IOErrorEnum = C.G_IO_ERROR_PENDING
+	IOErrorPending IOErrorEnum = 20
 	// IOErrorReadOnly wraps G_IO_ERROR_READ_ONLY
 	//
 	// File is read only.
-	IOErrorReadOnly IOErrorEnum = C.G_IO_ERROR_READ_ONLY
+	IOErrorReadOnly IOErrorEnum = 21
 	// IOErrorCantCreateBackup wraps G_IO_ERROR_CANT_CREATE_BACKUP
 	//
 	// Backup couldn't be created.
-	IOErrorCantCreateBackup IOErrorEnum = C.G_IO_ERROR_CANT_CREATE_BACKUP
+	IOErrorCantCreateBackup IOErrorEnum = 22
 	// IOErrorWrongETag wraps G_IO_ERROR_WRONG_ETAG
 	//
 	// File's Entity Tag was incorrect.
-	IOErrorWrongETag IOErrorEnum = C.G_IO_ERROR_WRONG_ETAG
+	IOErrorWrongETag IOErrorEnum = 23
 	// IOErrorTimedOut wraps G_IO_ERROR_TIMED_OUT
 	//
 	// Operation timed out.
-	IOErrorTimedOut IOErrorEnum = C.G_IO_ERROR_TIMED_OUT
+	IOErrorTimedOut IOErrorEnum = 24
 	// IOErrorWouldRecurse wraps G_IO_ERROR_WOULD_RECURSE
 	//
 	// Operation would be recursive.
-	IOErrorWouldRecurse IOErrorEnum = C.G_IO_ERROR_WOULD_RECURSE
+	IOErrorWouldRecurse IOErrorEnum = 25
 	// IOErrorBusy wraps G_IO_ERROR_BUSY
 	//
 	// File is busy.
-	IOErrorBusy IOErrorEnum = C.G_IO_ERROR_BUSY
+	IOErrorBusy IOErrorEnum = 26
 	// IOErrorWouldBlock wraps G_IO_ERROR_WOULD_BLOCK
 	//
 	// Operation would block.
-	IOErrorWouldBlock IOErrorEnum = C.G_IO_ERROR_WOULD_BLOCK
+	IOErrorWouldBlock IOErrorEnum = 27
 	// IOErrorHostNotFound wraps G_IO_ERROR_HOST_NOT_FOUND
 	//
 	// Host couldn't be found (remote operations).
-	IOErrorHostNotFound IOErrorEnum = C.G_IO_ERROR_HOST_NOT_FOUND
+	IOErrorHostNotFound IOErrorEnum = 28
 	// IOErrorWouldMerge wraps G_IO_ERROR_WOULD_MERGE
 	//
 	// Operation would merge files.
-	IOErrorWouldMerge IOErrorEnum = C.G_IO_ERROR_WOULD_MERGE
+	IOErrorWouldMerge IOErrorEnum = 29
 	// IOErrorFailedHandled wraps G_IO_ERROR_FAILED_HANDLED
 	//
 	// Operation failed and a helper program has
 	//     already interacted with the user. Do not display any error dialog.
-	IOErrorFailedHandled IOErrorEnum = C.G_IO_ERROR_FAILED_HANDLED
+	IOErrorFailedHandled IOErrorEnum = 30
 	// IOErrorTooManyOpenFiles wraps G_IO_ERROR_TOO_MANY_OPEN_FILES
 	//
 	// The current process has too many files
 	//     open and can't open any more. Duplicate descriptors do count toward
 	//     this limit. Since 2.20
-	IOErrorTooManyOpenFiles IOErrorEnum = C.G_IO_ERROR_TOO_MANY_OPEN_FILES
+	IOErrorTooManyOpenFiles IOErrorEnum = 31
 	// IOErrorNotInitialized wraps G_IO_ERROR_NOT_INITIALIZED
 	//
 	// The object has not been initialized. Since 2.22
-	IOErrorNotInitialized IOErrorEnum = C.G_IO_ERROR_NOT_INITIALIZED
+	IOErrorNotInitialized IOErrorEnum = 32
 	// IOErrorAddressInUse wraps G_IO_ERROR_ADDRESS_IN_USE
 	//
 	// The requested address is already in use. Since 2.22
-	IOErrorAddressInUse IOErrorEnum = C.G_IO_ERROR_ADDRESS_IN_USE
+	IOErrorAddressInUse IOErrorEnum = 33
 	// IOErrorPartialInput wraps G_IO_ERROR_PARTIAL_INPUT
 	//
 	// Need more input to finish operation. Since 2.24
-	IOErrorPartialInput IOErrorEnum = C.G_IO_ERROR_PARTIAL_INPUT
+	IOErrorPartialInput IOErrorEnum = 34
 	// IOErrorInvalidData wraps G_IO_ERROR_INVALID_DATA
 	//
 	// The input data was invalid. Since 2.24
-	IOErrorInvalidData IOErrorEnum = C.G_IO_ERROR_INVALID_DATA
+	IOErrorInvalidData IOErrorEnum = 35
 	// IOErrorDBusError wraps G_IO_ERROR_DBUS_ERROR
 	//
 	// A remote object generated an error that
@@ -1518,40 +1518,40 @@ const (
 	//     domain. Use g_dbus_error_get_remote_error() to extract the D-Bus
 	//     error name and g_dbus_error_strip_remote_error() to fix up the
 	//     message so it matches what was received on the wire. Since 2.26.
-	IOErrorDBusError IOErrorEnum = C.G_IO_ERROR_DBUS_ERROR
+	IOErrorDBusError IOErrorEnum = 36
 	// IOErrorHostUnreachable wraps G_IO_ERROR_HOST_UNREACHABLE
 	//
 	// Host unreachable. Since 2.26
-	IOErrorHostUnreachable IOErrorEnum = C.G_IO_ERROR_HOST_UNREACHABLE
+	IOErrorHostUnreachable IOErrorEnum = 37
 	// IOErrorNetworkUnreachable wraps G_IO_ERROR_NETWORK_UNREACHABLE
 	//
 	// Network unreachable. Since 2.26
-	IOErrorNetworkUnreachable IOErrorEnum = C.G_IO_ERROR_NETWORK_UNREACHABLE
+	IOErrorNetworkUnreachable IOErrorEnum = 38
 	// IOErrorConnectionRefused wraps G_IO_ERROR_CONNECTION_REFUSED
 	//
 	// Connection refused. Since 2.26
-	IOErrorConnectionRefused IOErrorEnum = C.G_IO_ERROR_CONNECTION_REFUSED
+	IOErrorConnectionRefused IOErrorEnum = 39
 	// IOErrorProxyFailed wraps G_IO_ERROR_PROXY_FAILED
 	//
 	// Connection to proxy server failed. Since 2.26
-	IOErrorProxyFailed IOErrorEnum = C.G_IO_ERROR_PROXY_FAILED
+	IOErrorProxyFailed IOErrorEnum = 40
 	// IOErrorProxyAuthFailed wraps G_IO_ERROR_PROXY_AUTH_FAILED
 	//
 	// Proxy authentication failed. Since 2.26
-	IOErrorProxyAuthFailed IOErrorEnum = C.G_IO_ERROR_PROXY_AUTH_FAILED
+	IOErrorProxyAuthFailed IOErrorEnum = 41
 	// IOErrorProxyNeedAuth wraps G_IO_ERROR_PROXY_NEED_AUTH
 	//
 	// Proxy server needs authentication. Since 2.26
-	IOErrorProxyNeedAuth IOErrorEnum = C.G_IO_ERROR_PROXY_NEED_AUTH
+	IOErrorProxyNeedAuth IOErrorEnum = 42
 	// IOErrorProxyNotAllowed wraps G_IO_ERROR_PROXY_NOT_ALLOWED
 	//
 	// Proxy connection is not allowed by ruleset.
 	//     Since 2.26
-	IOErrorProxyNotAllowed IOErrorEnum = C.G_IO_ERROR_PROXY_NOT_ALLOWED
+	IOErrorProxyNotAllowed IOErrorEnum = 43
 	// IOErrorBrokenPipe wraps G_IO_ERROR_BROKEN_PIPE
 	//
 	// Broken pipe. Since 2.36
-	IOErrorBrokenPipe IOErrorEnum = C.G_IO_ERROR_BROKEN_PIPE
+	IOErrorBrokenPipe IOErrorEnum = 44
 	// IOErrorConnectionClosed wraps G_IO_ERROR_CONNECTION_CLOSED
 	//
 	// Connection closed by peer. Note that this
@@ -1559,23 +1559,23 @@ const (
 	//     "connection closed" errors returned %G_IO_ERROR_BROKEN_PIPE, but others
 	//     returned %G_IO_ERROR_FAILED. Now they should all return the same
 	//     value, which has this more logical name. Since 2.44.
-	IOErrorConnectionClosed IOErrorEnum = C.G_IO_ERROR_CONNECTION_CLOSED
+	IOErrorConnectionClosed IOErrorEnum = 44
 	// IOErrorNotConnected wraps G_IO_ERROR_NOT_CONNECTED
 	//
 	// Transport endpoint is not connected. Since 2.44
-	IOErrorNotConnected IOErrorEnum = C.G_IO_ERROR_NOT_CONNECTED
+	IOErrorNotConnected IOErrorEnum = 45
 	// IOErrorMessageTooLarge wraps G_IO_ERROR_MESSAGE_TOO_LARGE
 	//
 	// Message too large. Since 2.48.
-	IOErrorMessageTooLarge IOErrorEnum = C.G_IO_ERROR_MESSAGE_TOO_LARGE
+	IOErrorMessageTooLarge IOErrorEnum = 46
 	// IOErrorNoSuchDevice wraps G_IO_ERROR_NO_SUCH_DEVICE
 	//
 	// No such device found. Since 2.74
-	IOErrorNoSuchDevice IOErrorEnum = C.G_IO_ERROR_NO_SUCH_DEVICE
+	IOErrorNoSuchDevice IOErrorEnum = 47
 	// IOErrorDestinationUnset wraps G_IO_ERROR_DESTINATION_UNSET
 	//
 	// Destination address unset. Since 2.80
-	IOErrorDestinationUnset IOErrorEnum = C.G_IO_ERROR_DESTINATION_UNSET
+	IOErrorDestinationUnset IOErrorEnum = 48
 )
 
 func marshalIOErrorEnum(p unsafe.Pointer) (any, error) {
@@ -1598,13 +1598,13 @@ const (
 	// IOModuleScopeNone wraps G_IO_MODULE_SCOPE_NONE
 	//
 	// No module scan flags
-	IOModuleScopeNone IOModuleScopeFlags = C.G_IO_MODULE_SCOPE_NONE
+	IOModuleScopeNone IOModuleScopeFlags = 0
 	// IOModuleScopeBlockDuplicates wraps G_IO_MODULE_SCOPE_BLOCK_DUPLICATES
 	//
 	// When using this scope to load or
 	//     scan modules, automatically block a modules which has the same base
 	//     basename as previously loaded module.
-	IOModuleScopeBlockDuplicates IOModuleScopeFlags = C.G_IO_MODULE_SCOPE_BLOCK_DUPLICATES
+	IOModuleScopeBlockDuplicates IOModuleScopeFlags = 1
 )
 
 func marshalIOModuleScopeFlags(p unsafe.Pointer) (any, error) {
@@ -1636,19 +1636,19 @@ const (
 	// Memory on the device is low, processes
 	//   should free up unneeded resources (for example, in-memory caches) so they can
 	//   be used elsewhere.
-	MemoryMonitorWarningLevelLow MemoryMonitorWarningLevel = C.G_MEMORY_MONITOR_WARNING_LEVEL_LOW
+	MemoryMonitorWarningLevelLow MemoryMonitorWarningLevel = 50
 	// MemoryMonitorWarningLevelMedium wraps G_MEMORY_MONITOR_WARNING_LEVEL_MEDIUM
 	//
 	// Same as @G_MEMORY_MONITOR_WARNING_LEVEL_LOW
 	//   but the device has even less free memory, so processes should try harder to free
 	//   up unneeded resources. If your process does not need to stay running, it is a
 	//   good time for it to quit.
-	MemoryMonitorWarningLevelMedium MemoryMonitorWarningLevel = C.G_MEMORY_MONITOR_WARNING_LEVEL_MEDIUM
+	MemoryMonitorWarningLevelMedium MemoryMonitorWarningLevel = 100
 	// MemoryMonitorWarningLevelCritical wraps G_MEMORY_MONITOR_WARNING_LEVEL_CRITICAL
 	//
 	// The system will soon start terminating
 	//   processes to reclaim memory, including background processes.
-	MemoryMonitorWarningLevelCritical MemoryMonitorWarningLevel = C.G_MEMORY_MONITOR_WARNING_LEVEL_CRITICAL
+	MemoryMonitorWarningLevelCritical MemoryMonitorWarningLevel = 255
 )
 
 func marshalMemoryMonitorWarningLevel(p unsafe.Pointer) (any, error) {
@@ -1673,17 +1673,17 @@ const (
 	//
 	// The request was fulfilled and the
 	//     user specified data is now available
-	MountOperationHandled MountOperationResult = C.G_MOUNT_OPERATION_HANDLED
+	MountOperationHandled MountOperationResult = 0
 	// MountOperationAborted wraps G_MOUNT_OPERATION_ABORTED
 	//
 	// The user requested the mount operation
 	//     to be aborted
-	MountOperationAborted MountOperationResult = C.G_MOUNT_OPERATION_ABORTED
+	MountOperationAborted MountOperationResult = 1
 	// MountOperationUnhandled wraps G_MOUNT_OPERATION_UNHANDLED
 	//
 	// The request was unhandled (i.e. not
 	//     implemented)
-	MountOperationUnhandled MountOperationResult = C.G_MOUNT_OPERATION_UNHANDLED
+	MountOperationUnhandled MountOperationResult = 2
 )
 
 func marshalMountOperationResult(p unsafe.Pointer) (any, error) {
@@ -1708,23 +1708,23 @@ const (
 	// The host is not configured with a
 	//   route to the Internet; it may or may not be connected to a local
 	//   network.
-	NetworkConnectivityLocal NetworkConnectivity = C.G_NETWORK_CONNECTIVITY_LOCAL
+	NetworkConnectivityLocal NetworkConnectivity = 1
 	// NetworkConnectivityLimited wraps G_NETWORK_CONNECTIVITY_LIMITED
 	//
 	// The host is connected to a network, but
 	//   does not appear to be able to reach the full Internet, perhaps
 	//   due to upstream network problems.
-	NetworkConnectivityLimited NetworkConnectivity = C.G_NETWORK_CONNECTIVITY_LIMITED
+	NetworkConnectivityLimited NetworkConnectivity = 2
 	// NetworkConnectivityPortal wraps G_NETWORK_CONNECTIVITY_PORTAL
 	//
 	// The host is behind a captive portal and
 	//   cannot reach the full Internet.
-	NetworkConnectivityPortal NetworkConnectivity = C.G_NETWORK_CONNECTIVITY_PORTAL
+	NetworkConnectivityPortal NetworkConnectivity = 3
 	// NetworkConnectivityFull wraps G_NETWORK_CONNECTIVITY_FULL
 	//
 	// The host is connected to a network, and
 	//   appears to be able to reach the full Internet.
-	NetworkConnectivityFull NetworkConnectivity = C.G_NETWORK_CONNECTIVITY_FULL
+	NetworkConnectivityFull NetworkConnectivity = 4
 )
 
 func marshalNetworkConnectivity(p unsafe.Pointer) (any, error) {
@@ -1749,25 +1749,25 @@ const (
 	// the default priority, to be used for the
 	//   majority of notifications (for example email messages, software updates,
 	//   completed download/sync operations)
-	NotificationPriorityNormal NotificationPriority = C.G_NOTIFICATION_PRIORITY_NORMAL
+	NotificationPriorityNormal NotificationPriority = 0
 	// NotificationPriorityLow wraps G_NOTIFICATION_PRIORITY_LOW
 	//
 	// for notifications that do not require
 	//   immediate attention - typically used for contextual background
 	//   information, such as contact birthdays or local weather
-	NotificationPriorityLow NotificationPriority = C.G_NOTIFICATION_PRIORITY_LOW
+	NotificationPriorityLow NotificationPriority = 1
 	// NotificationPriorityHigh wraps G_NOTIFICATION_PRIORITY_HIGH
 	//
 	// for events that require more attention,
 	//   usually because responses are time-sensitive (for example chat and SMS
 	//   messages or alarms)
-	NotificationPriorityHigh NotificationPriority = C.G_NOTIFICATION_PRIORITY_HIGH
+	NotificationPriorityHigh NotificationPriority = 2
 	// NotificationPriorityUrgent wraps G_NOTIFICATION_PRIORITY_URGENT
 	//
 	// for urgent notifications, or notifications
 	//   that require a response in a short space of time (for example phone calls
 	//   or emergency warnings)
-	NotificationPriorityUrgent NotificationPriority = C.G_NOTIFICATION_PRIORITY_URGENT
+	NotificationPriorityUrgent NotificationPriority = 3
 )
 
 func marshalNotificationPriority(p unsafe.Pointer) (any, error) {
@@ -1793,15 +1793,15 @@ const (
 	// PasswordSaveNever wraps G_PASSWORD_SAVE_NEVER
 	//
 	// never save a password.
-	PasswordSaveNever PasswordSave = C.G_PASSWORD_SAVE_NEVER
+	PasswordSaveNever PasswordSave = 0
 	// PasswordSaveForSession wraps G_PASSWORD_SAVE_FOR_SESSION
 	//
 	// save a password for the session.
-	PasswordSaveForSession PasswordSave = C.G_PASSWORD_SAVE_FOR_SESSION
+	PasswordSaveForSession PasswordSave = 1
 	// PasswordSavePermanently wraps G_PASSWORD_SAVE_PERMANENTLY
 	//
 	// save a password permanently.
-	PasswordSavePermanently PasswordSave = C.G_PASSWORD_SAVE_PERMANENTLY
+	PasswordSavePermanently PasswordSave = 2
 )
 
 func marshalPasswordSave(p unsafe.Pointer) (any, error) {
@@ -1832,15 +1832,15 @@ const (
 	// PollableReturnFailed wraps G_POLLABLE_RETURN_FAILED
 	//
 	// Generic error condition for when an operation fails.
-	PollableReturnFailed PollableReturn = C.G_POLLABLE_RETURN_FAILED
+	PollableReturnFailed PollableReturn = 0
 	// PollableReturnOK wraps G_POLLABLE_RETURN_OK
 	//
 	// The operation was successfully finished.
-	PollableReturnOK PollableReturn = C.G_POLLABLE_RETURN_OK
+	PollableReturnOK PollableReturn = 1
 	// PollableReturnWouldBlock wraps G_POLLABLE_RETURN_WOULD_BLOCK
 	//
 	// The operation would block.
-	PollableReturnWouldBlock PollableReturn = C.G_POLLABLE_RETURN_WOULD_BLOCK
+	PollableReturnWouldBlock PollableReturn = -27
 )
 
 func marshalPollableReturn(p unsafe.Pointer) (any, error) {
@@ -1865,16 +1865,16 @@ const (
 	//
 	// the requested name/address/service was not
 	//     found
-	ResolverErrorNotFound ResolverError = C.G_RESOLVER_ERROR_NOT_FOUND
+	ResolverErrorNotFound ResolverError = 0
 	// ResolverErrorTemporaryFailure wraps G_RESOLVER_ERROR_TEMPORARY_FAILURE
 	//
 	// the requested information could not
 	//     be looked up due to a network error or similar problem
-	ResolverErrorTemporaryFailure ResolverError = C.G_RESOLVER_ERROR_TEMPORARY_FAILURE
+	ResolverErrorTemporaryFailure ResolverError = 1
 	// ResolverErrorInternal wraps G_RESOLVER_ERROR_INTERNAL
 	//
 	// unknown error
-	ResolverErrorInternal ResolverError = C.G_RESOLVER_ERROR_INTERNAL
+	ResolverErrorInternal ResolverError = 2
 )
 
 func marshalResolverError(p unsafe.Pointer) (any, error) {
@@ -1926,23 +1926,23 @@ const (
 	// ResolverRecordSrv wraps G_RESOLVER_RECORD_SRV
 	//
 	// look up DNS SRV records for a domain
-	ResolverRecordSrv ResolverRecordType = C.G_RESOLVER_RECORD_SRV
+	ResolverRecordSrv ResolverRecordType = 1
 	// ResolverRecordMx wraps G_RESOLVER_RECORD_MX
 	//
 	// look up DNS MX records for a domain
-	ResolverRecordMx ResolverRecordType = C.G_RESOLVER_RECORD_MX
+	ResolverRecordMx ResolverRecordType = 2
 	// ResolverRecordTxt wraps G_RESOLVER_RECORD_TXT
 	//
 	// look up DNS TXT records for a name
-	ResolverRecordTxt ResolverRecordType = C.G_RESOLVER_RECORD_TXT
+	ResolverRecordTxt ResolverRecordType = 3
 	// ResolverRecordSoa wraps G_RESOLVER_RECORD_SOA
 	//
 	// look up DNS SOA records for a zone
-	ResolverRecordSoa ResolverRecordType = C.G_RESOLVER_RECORD_SOA
+	ResolverRecordSoa ResolverRecordType = 4
 	// ResolverRecordNs wraps G_RESOLVER_RECORD_NS
 	//
 	// look up DNS NS records for a domain
-	ResolverRecordNs ResolverRecordType = C.G_RESOLVER_RECORD_NS
+	ResolverRecordNs ResolverRecordType = 5
 )
 
 func marshalResolverRecordType(p unsafe.Pointer) (any, error) {
@@ -1966,11 +1966,11 @@ const (
 	// ResourceErrorNotFound wraps G_RESOURCE_ERROR_NOT_FOUND
 	//
 	// no file was found at the requested path
-	ResourceErrorNotFound ResourceError = C.G_RESOURCE_ERROR_NOT_FOUND
+	ResourceErrorNotFound ResourceError = 0
 	// ResourceErrorInternal wraps G_RESOURCE_ERROR_INTERNAL
 	//
 	// unknown error
-	ResourceErrorInternal ResourceError = C.G_RESOURCE_ERROR_INTERNAL
+	ResourceErrorInternal ResourceError = 1
 )
 
 func marshalResourceError(p unsafe.Pointer) (any, error) {
@@ -1996,46 +1996,46 @@ const (
 	// SocketClientResolving wraps G_SOCKET_CLIENT_RESOLVING
 	//
 	// The client is doing a DNS lookup.
-	SocketClientResolving SocketClientEvent = C.G_SOCKET_CLIENT_RESOLVING
+	SocketClientResolving SocketClientEvent = 0
 	// SocketClientResolved wraps G_SOCKET_CLIENT_RESOLVED
 	//
 	// The client has completed a DNS lookup.
-	SocketClientResolved SocketClientEvent = C.G_SOCKET_CLIENT_RESOLVED
+	SocketClientResolved SocketClientEvent = 1
 	// SocketClientConnecting wraps G_SOCKET_CLIENT_CONNECTING
 	//
 	// The client is connecting to a remote
 	//   host (either a proxy or the destination server).
-	SocketClientConnecting SocketClientEvent = C.G_SOCKET_CLIENT_CONNECTING
+	SocketClientConnecting SocketClientEvent = 2
 	// SocketClientConnected wraps G_SOCKET_CLIENT_CONNECTED
 	//
 	// The client has connected to a remote
 	//   host.
-	SocketClientConnected SocketClientEvent = C.G_SOCKET_CLIENT_CONNECTED
+	SocketClientConnected SocketClientEvent = 3
 	// SocketClientProxyNegotiating wraps G_SOCKET_CLIENT_PROXY_NEGOTIATING
 	//
 	// The client is negotiating
 	//   with a proxy to connect to the destination server.
-	SocketClientProxyNegotiating SocketClientEvent = C.G_SOCKET_CLIENT_PROXY_NEGOTIATING
+	SocketClientProxyNegotiating SocketClientEvent = 4
 	// SocketClientProxyNegotiated wraps G_SOCKET_CLIENT_PROXY_NEGOTIATED
 	//
 	// The client has negotiated
 	//   with the proxy server.
-	SocketClientProxyNegotiated SocketClientEvent = C.G_SOCKET_CLIENT_PROXY_NEGOTIATED
+	SocketClientProxyNegotiated SocketClientEvent = 5
 	// SocketClientTLSHandshaking wraps G_SOCKET_CLIENT_TLS_HANDSHAKING
 	//
 	// The client is performing a
 	//   TLS handshake.
-	SocketClientTLSHandshaking SocketClientEvent = C.G_SOCKET_CLIENT_TLS_HANDSHAKING
+	SocketClientTLSHandshaking SocketClientEvent = 6
 	// SocketClientTLSHandshaked wraps G_SOCKET_CLIENT_TLS_HANDSHAKED
 	//
 	// The client has performed a
 	//   TLS handshake.
-	SocketClientTLSHandshaked SocketClientEvent = C.G_SOCKET_CLIENT_TLS_HANDSHAKED
+	SocketClientTLSHandshaked SocketClientEvent = 7
 	// SocketClientComplete wraps G_SOCKET_CLIENT_COMPLETE
 	//
 	// The client is done with a particular
 	//   #GSocketConnectable.
-	SocketClientComplete SocketClientEvent = C.G_SOCKET_CLIENT_COMPLETE
+	SocketClientComplete SocketClientEvent = 8
 )
 
 func marshalSocketClientEvent(p unsafe.Pointer) (any, error) {
@@ -2060,15 +2060,15 @@ const (
 	// SocketFamilyInvalid wraps G_SOCKET_FAMILY_INVALID
 	//
 	// no address family
-	SocketFamilyInvalid SocketFamily = C.G_SOCKET_FAMILY_INVALID
+	SocketFamilyInvalid SocketFamily = 0
 	// SocketFamilyIPv4 wraps G_SOCKET_FAMILY_IPV4
 	//
 	// the IPv4 family
-	SocketFamilyIPv4 SocketFamily = C.G_SOCKET_FAMILY_IPV4
+	SocketFamilyIPv4 SocketFamily = 2
 	// SocketFamilyIPv6 wraps G_SOCKET_FAMILY_IPV6
 	//
 	// the IPv6 family
-	SocketFamilyIPv6 SocketFamily = C.G_SOCKET_FAMILY_IPV6
+	SocketFamilyIPv6 SocketFamily = 10
 )
 
 func marshalSocketFamily(p unsafe.Pointer) (any, error) {
@@ -2094,21 +2094,21 @@ const (
 	// SocketListenerBinding wraps G_SOCKET_LISTENER_BINDING
 	//
 	// The listener is about to bind a socket.
-	SocketListenerBinding SocketListenerEvent = C.G_SOCKET_LISTENER_BINDING
+	SocketListenerBinding SocketListenerEvent = 0
 	// SocketListenerBound wraps G_SOCKET_LISTENER_BOUND
 	//
 	// The listener has bound a socket.
-	SocketListenerBound SocketListenerEvent = C.G_SOCKET_LISTENER_BOUND
+	SocketListenerBound SocketListenerEvent = 1
 	// SocketListenerListening wraps G_SOCKET_LISTENER_LISTENING
 	//
 	// The listener is about to start
 	//    listening on this socket.
-	SocketListenerListening SocketListenerEvent = C.G_SOCKET_LISTENER_LISTENING
+	SocketListenerListening SocketListenerEvent = 2
 	// SocketListenerListened wraps G_SOCKET_LISTENER_LISTENED
 	//
 	// The listener is now listening on
 	//   this socket.
-	SocketListenerListened SocketListenerEvent = C.G_SOCKET_LISTENER_LISTENED
+	SocketListenerListened SocketListenerEvent = 3
 )
 
 func marshalSocketListenerEvent(p unsafe.Pointer) (any, error) {
@@ -2137,23 +2137,23 @@ const (
 	// SocketProtocolUnknown wraps G_SOCKET_PROTOCOL_UNKNOWN
 	//
 	// The protocol type is unknown
-	SocketProtocolUnknown SocketProtocol = C.G_SOCKET_PROTOCOL_UNKNOWN
+	SocketProtocolUnknown SocketProtocol = -1
 	// SocketProtocolDefault wraps G_SOCKET_PROTOCOL_DEFAULT
 	//
 	// The default protocol for the family/type
-	SocketProtocolDefault SocketProtocol = C.G_SOCKET_PROTOCOL_DEFAULT
+	SocketProtocolDefault SocketProtocol = 0
 	// SocketProtocolTCP wraps G_SOCKET_PROTOCOL_TCP
 	//
 	// TCP over IP
-	SocketProtocolTCP SocketProtocol = C.G_SOCKET_PROTOCOL_TCP
+	SocketProtocolTCP SocketProtocol = 6
 	// SocketProtocolUDP wraps G_SOCKET_PROTOCOL_UDP
 	//
 	// UDP over IP
-	SocketProtocolUDP SocketProtocol = C.G_SOCKET_PROTOCOL_UDP
+	SocketProtocolUDP SocketProtocol = 17
 	// SocketProtocolSCTP wraps G_SOCKET_PROTOCOL_SCTP
 	//
 	// SCTP over IP
-	SocketProtocolSCTP SocketProtocol = C.G_SOCKET_PROTOCOL_SCTP
+	SocketProtocolSCTP SocketProtocol = 132
 )
 
 func marshalSocketProtocol(p unsafe.Pointer) (any, error) {
@@ -2177,21 +2177,21 @@ const (
 	// SocketTypeInvalid wraps G_SOCKET_TYPE_INVALID
 	//
 	// Type unknown or wrong
-	SocketTypeInvalid SocketType = C.G_SOCKET_TYPE_INVALID
+	SocketTypeInvalid SocketType = 0
 	// SocketTypeStream wraps G_SOCKET_TYPE_STREAM
 	//
 	// Reliable connection-based byte streams (e.g. TCP).
-	SocketTypeStream SocketType = C.G_SOCKET_TYPE_STREAM
+	SocketTypeStream SocketType = 1
 	// SocketTypeDatagram wraps G_SOCKET_TYPE_DATAGRAM
 	//
 	// Connectionless, unreliable datagram passing.
 	//     (e.g. UDP)
-	SocketTypeDatagram SocketType = C.G_SOCKET_TYPE_DATAGRAM
+	SocketTypeDatagram SocketType = 2
 	// SocketTypeSeqpacket wraps G_SOCKET_TYPE_SEQPACKET
 	//
 	// Reliable connection-based passing of datagrams
 	//     of fixed maximum length (e.g. SCTP).
-	SocketTypeSeqpacket SocketType = C.G_SOCKET_TYPE_SEQPACKET
+	SocketTypeSeqpacket SocketType = 3
 )
 
 func marshalSocketType(p unsafe.Pointer) (any, error) {
@@ -2214,15 +2214,15 @@ const (
 	// TLSAuthenticationNone wraps G_TLS_AUTHENTICATION_NONE
 	//
 	// client authentication not required
-	TLSAuthenticationNone TLSAuthenticationMode = C.G_TLS_AUTHENTICATION_NONE
+	TLSAuthenticationNone TLSAuthenticationMode = 0
 	// TLSAuthenticationRequested wraps G_TLS_AUTHENTICATION_REQUESTED
 	//
 	// client authentication is requested
-	TLSAuthenticationRequested TLSAuthenticationMode = C.G_TLS_AUTHENTICATION_REQUESTED
+	TLSAuthenticationRequested TLSAuthenticationMode = 1
 	// TLSAuthenticationRequired wraps G_TLS_AUTHENTICATION_REQUIRED
 	//
 	// client authentication is required
-	TLSAuthenticationRequired TLSAuthenticationMode = C.G_TLS_AUTHENTICATION_REQUIRED
+	TLSAuthenticationRequired TLSAuthenticationMode = 2
 )
 
 func marshalTLSAuthenticationMode(p unsafe.Pointer) (any, error) {
@@ -2247,7 +2247,7 @@ const (
 	// TLSCertificateRequestNone wraps G_TLS_CERTIFICATE_REQUEST_NONE
 	//
 	// No flags
-	TLSCertificateRequestNone TLSCertificateRequestFlags = C.G_TLS_CERTIFICATE_REQUEST_NONE
+	TLSCertificateRequestNone TLSCertificateRequestFlags = 0
 )
 
 func marshalTLSCertificateRequestFlags(p unsafe.Pointer) (any, error) {
@@ -2273,32 +2273,32 @@ const (
 	// Either entire binding
 	//    retrieval facility or specific binding type is not implemented in the
 	//    TLS backend.
-	TLSChannelBindingErrorNotImplemented TLSChannelBindingError = C.G_TLS_CHANNEL_BINDING_ERROR_NOT_IMPLEMENTED
+	TLSChannelBindingErrorNotImplemented TLSChannelBindingError = 0
 	// TLSChannelBindingErrorInvalidState wraps G_TLS_CHANNEL_BINDING_ERROR_INVALID_STATE
 	//
 	// The handshake is not yet
 	//    complete on the connection which is a strong requirement for any existing
 	//    binding type.
-	TLSChannelBindingErrorInvalidState TLSChannelBindingError = C.G_TLS_CHANNEL_BINDING_ERROR_INVALID_STATE
+	TLSChannelBindingErrorInvalidState TLSChannelBindingError = 1
 	// TLSChannelBindingErrorNotAvailable wraps G_TLS_CHANNEL_BINDING_ERROR_NOT_AVAILABLE
 	//
 	// Handshake is complete but
 	//    binding data is not available. That normally indicates the TLS
 	//    implementation failed to provide the binding data. For example, some
 	//    implementations do not provide a peer certificate for resumed connections.
-	TLSChannelBindingErrorNotAvailable TLSChannelBindingError = C.G_TLS_CHANNEL_BINDING_ERROR_NOT_AVAILABLE
+	TLSChannelBindingErrorNotAvailable TLSChannelBindingError = 2
 	// TLSChannelBindingErrorNotSupported wraps G_TLS_CHANNEL_BINDING_ERROR_NOT_SUPPORTED
 	//
 	// Binding type is not supported
 	//    on the current connection. This error could be triggered when requesting
 	//    `tls-server-end-point` binding data for a certificate which has no hash
 	//    function or uses multiple hash functions.
-	TLSChannelBindingErrorNotSupported TLSChannelBindingError = C.G_TLS_CHANNEL_BINDING_ERROR_NOT_SUPPORTED
+	TLSChannelBindingErrorNotSupported TLSChannelBindingError = 3
 	// TLSChannelBindingErrorGeneralError wraps G_TLS_CHANNEL_BINDING_ERROR_GENERAL_ERROR
 	//
 	// Any other backend error
 	//    preventing binding data retrieval.
-	TLSChannelBindingErrorGeneralError TLSChannelBindingError = C.G_TLS_CHANNEL_BINDING_ERROR_GENERAL_ERROR
+	TLSChannelBindingErrorGeneralError TLSChannelBindingError = 4
 )
 
 func marshalTLSChannelBindingError(p unsafe.Pointer) (any, error) {
@@ -2325,17 +2325,17 @@ const (
 	//
 	// [`tls-unique`](https://tools.ietf.org/html/rfc5929#section-3) binding
 	//    type
-	TLSChannelBindingTLSUnique TLSChannelBindingType = C.G_TLS_CHANNEL_BINDING_TLS_UNIQUE
+	TLSChannelBindingTLSUnique TLSChannelBindingType = 0
 	// TLSChannelBindingTLSServerEndPoint wraps G_TLS_CHANNEL_BINDING_TLS_SERVER_END_POINT
 	//
 	// [`tls-server-end-point`](https://tools.ietf.org/html/rfc5929#section-4)
 	//    binding type
-	TLSChannelBindingTLSServerEndPoint TLSChannelBindingType = C.G_TLS_CHANNEL_BINDING_TLS_SERVER_END_POINT
+	TLSChannelBindingTLSServerEndPoint TLSChannelBindingType = 1
 	// TLSChannelBindingTLSExporter wraps G_TLS_CHANNEL_BINDING_TLS_EXPORTER
 	//
 	// [`tls-exporter`](https://www.rfc-editor.org/rfc/rfc9266.html) binding
 	//    type. Since: 2.74
-	TLSChannelBindingTLSExporter TLSChannelBindingType = C.G_TLS_CHANNEL_BINDING_TLS_EXPORTER
+	TLSChannelBindingTLSExporter TLSChannelBindingType = 2
 )
 
 func marshalTLSChannelBindingType(p unsafe.Pointer) (any, error) {
@@ -2360,12 +2360,12 @@ const (
 	// TLSDatabaseLookupNone wraps G_TLS_DATABASE_LOOKUP_NONE
 	//
 	// No lookup flags
-	TLSDatabaseLookupNone TLSDatabaseLookupFlags = C.G_TLS_DATABASE_LOOKUP_NONE
+	TLSDatabaseLookupNone TLSDatabaseLookupFlags = 0
 	// TLSDatabaseLookupKeypair wraps G_TLS_DATABASE_LOOKUP_KEYPAIR
 	//
 	// Restrict lookup to certificates that have
 	//     a private key.
-	TLSDatabaseLookupKeypair TLSDatabaseLookupFlags = C.G_TLS_DATABASE_LOOKUP_KEYPAIR
+	TLSDatabaseLookupKeypair TLSDatabaseLookupFlags = 1
 )
 
 func marshalTLSDatabaseLookupFlags(p unsafe.Pointer) (any, error) {
@@ -2389,49 +2389,49 @@ const (
 	// TLSErrorUnavailable wraps G_TLS_ERROR_UNAVAILABLE
 	//
 	// No TLS provider is available
-	TLSErrorUnavailable TLSError = C.G_TLS_ERROR_UNAVAILABLE
+	TLSErrorUnavailable TLSError = 0
 	// TLSErrorMisc wraps G_TLS_ERROR_MISC
 	//
 	// Miscellaneous TLS error
-	TLSErrorMisc TLSError = C.G_TLS_ERROR_MISC
+	TLSErrorMisc TLSError = 1
 	// TLSErrorBadCertificate wraps G_TLS_ERROR_BAD_CERTIFICATE
 	//
 	// The certificate presented could not
 	//   be parsed or failed validation.
-	TLSErrorBadCertificate TLSError = C.G_TLS_ERROR_BAD_CERTIFICATE
+	TLSErrorBadCertificate TLSError = 2
 	// TLSErrorNotTLS wraps G_TLS_ERROR_NOT_TLS
 	//
 	// The TLS handshake failed because the
 	//   peer does not seem to be a TLS server.
-	TLSErrorNotTLS TLSError = C.G_TLS_ERROR_NOT_TLS
+	TLSErrorNotTLS TLSError = 3
 	// TLSErrorHandshake wraps G_TLS_ERROR_HANDSHAKE
 	//
 	// The TLS handshake failed because the
 	//   peer's certificate was not acceptable.
-	TLSErrorHandshake TLSError = C.G_TLS_ERROR_HANDSHAKE
+	TLSErrorHandshake TLSError = 4
 	// TLSErrorCertificateRequired wraps G_TLS_ERROR_CERTIFICATE_REQUIRED
 	//
 	// The TLS handshake failed because
 	//   the server requested a client-side certificate, but none was
 	//   provided. See g_tls_connection_set_certificate().
-	TLSErrorCertificateRequired TLSError = C.G_TLS_ERROR_CERTIFICATE_REQUIRED
+	TLSErrorCertificateRequired TLSError = 5
 	// TLSErrorEOF wraps G_TLS_ERROR_EOF
 	//
 	// The TLS connection was closed without proper
 	//   notice, which may indicate an attack. See
 	//   g_tls_connection_set_require_close_notify().
-	TLSErrorEOF TLSError = C.G_TLS_ERROR_EOF
+	TLSErrorEOF TLSError = 6
 	// TLSErrorInappropriateFallback wraps G_TLS_ERROR_INAPPROPRIATE_FALLBACK
 	//
 	// The TLS handshake failed
 	//   because the client sent the fallback SCSV, indicating a protocol
 	//   downgrade attack. Since: 2.60
-	TLSErrorInappropriateFallback TLSError = C.G_TLS_ERROR_INAPPROPRIATE_FALLBACK
+	TLSErrorInappropriateFallback TLSError = 7
 	// TLSErrorBadCertificatePassword wraps G_TLS_ERROR_BAD_CERTIFICATE_PASSWORD
 	//
 	// The certificate failed
 	//   to load because a password was incorrect. Since: 2.72
-	TLSErrorBadCertificatePassword TLSError = C.G_TLS_ERROR_BAD_CERTIFICATE_PASSWORD
+	TLSErrorBadCertificatePassword TLSError = 8
 )
 
 func marshalTLSError(p unsafe.Pointer) (any, error) {
@@ -2456,17 +2456,17 @@ const (
 	//
 	// The interaction was unhandled (i.e. not
 	//     implemented).
-	TLSInteractionUnhandled TLSInteractionResult = C.G_TLS_INTERACTION_UNHANDLED
+	TLSInteractionUnhandled TLSInteractionResult = 0
 	// TLSInteractionHandled wraps G_TLS_INTERACTION_HANDLED
 	//
 	// The interaction completed, and resulting data
 	//     is available.
-	TLSInteractionHandled TLSInteractionResult = C.G_TLS_INTERACTION_HANDLED
+	TLSInteractionHandled TLSInteractionResult = 1
 	// TLSInteractionFailed wraps G_TLS_INTERACTION_FAILED
 	//
 	// The interaction has failed, or was cancelled.
 	//     and the operation should be aborted.
-	TLSInteractionFailed TLSInteractionResult = C.G_TLS_INTERACTION_FAILED
+	TLSInteractionFailed TLSInteractionResult = 2
 )
 
 func marshalTLSInteractionResult(p unsafe.Pointer) (any, error) {
@@ -2497,35 +2497,35 @@ const (
 	// TLSProtocolVersionUnknown wraps G_TLS_PROTOCOL_VERSION_UNKNOWN
 	//
 	// No protocol version or unknown protocol version
-	TLSProtocolVersionUnknown TLSProtocolVersion = C.G_TLS_PROTOCOL_VERSION_UNKNOWN
+	TLSProtocolVersionUnknown TLSProtocolVersion = 0
 	// TLSProtocolVersionSSL30 wraps G_TLS_PROTOCOL_VERSION_SSL_3_0
 	//
 	// SSL 3.0, which is insecure and should not be used
-	TLSProtocolVersionSSL30 TLSProtocolVersion = C.G_TLS_PROTOCOL_VERSION_SSL_3_0
+	TLSProtocolVersionSSL30 TLSProtocolVersion = 1
 	// TLSProtocolVersionTLS10 wraps G_TLS_PROTOCOL_VERSION_TLS_1_0
 	//
 	// TLS 1.0, which is insecure and should not be used
-	TLSProtocolVersionTLS10 TLSProtocolVersion = C.G_TLS_PROTOCOL_VERSION_TLS_1_0
+	TLSProtocolVersionTLS10 TLSProtocolVersion = 2
 	// TLSProtocolVersionTLS11 wraps G_TLS_PROTOCOL_VERSION_TLS_1_1
 	//
 	// TLS 1.1, which is insecure and should not be used
-	TLSProtocolVersionTLS11 TLSProtocolVersion = C.G_TLS_PROTOCOL_VERSION_TLS_1_1
+	TLSProtocolVersionTLS11 TLSProtocolVersion = 3
 	// TLSProtocolVersionTLS12 wraps G_TLS_PROTOCOL_VERSION_TLS_1_2
 	//
 	// TLS 1.2, defined by [RFC 5246](https://datatracker.ietf.org/doc/html/rfc5246)
-	TLSProtocolVersionTLS12 TLSProtocolVersion = C.G_TLS_PROTOCOL_VERSION_TLS_1_2
+	TLSProtocolVersionTLS12 TLSProtocolVersion = 4
 	// TLSProtocolVersionTLS13 wraps G_TLS_PROTOCOL_VERSION_TLS_1_3
 	//
 	// TLS 1.3, defined by [RFC 8446](https://datatracker.ietf.org/doc/html/rfc8446)
-	TLSProtocolVersionTLS13 TLSProtocolVersion = C.G_TLS_PROTOCOL_VERSION_TLS_1_3
+	TLSProtocolVersionTLS13 TLSProtocolVersion = 5
 	// TLSProtocolVersionDTLS10 wraps G_TLS_PROTOCOL_VERSION_DTLS_1_0
 	//
 	// DTLS 1.0, which is insecure and should not be used
-	TLSProtocolVersionDTLS10 TLSProtocolVersion = C.G_TLS_PROTOCOL_VERSION_DTLS_1_0
+	TLSProtocolVersionDTLS10 TLSProtocolVersion = 201
 	// TLSProtocolVersionDTLS12 wraps G_TLS_PROTOCOL_VERSION_DTLS_1_2
 	//
 	// DTLS 1.2, defined by [RFC 6347](https://datatracker.ietf.org/doc/html/rfc6347)
-	TLSProtocolVersionDTLS12 TLSProtocolVersion = C.G_TLS_PROTOCOL_VERSION_DTLS_1_2
+	TLSProtocolVersionDTLS12 TLSProtocolVersion = 202
 )
 
 func marshalTLSProtocolVersion(p unsafe.Pointer) (any, error) {
@@ -2553,15 +2553,15 @@ const (
 	// TLSRehandshakeNever wraps G_TLS_REHANDSHAKE_NEVER
 	//
 	// Never allow rehandshaking
-	TLSRehandshakeNever TLSRehandshakeMode = C.G_TLS_REHANDSHAKE_NEVER
+	TLSRehandshakeNever TLSRehandshakeMode = 0
 	// TLSRehandshakeSafely wraps G_TLS_REHANDSHAKE_SAFELY
 	//
 	// Allow safe rehandshaking only
-	TLSRehandshakeSafely TLSRehandshakeMode = C.G_TLS_REHANDSHAKE_SAFELY
+	TLSRehandshakeSafely TLSRehandshakeMode = 1
 	// TLSRehandshakeUnsafely wraps G_TLS_REHANDSHAKE_UNSAFELY
 	//
 	// Allow unsafe rehandshaking
-	TLSRehandshakeUnsafely TLSRehandshakeMode = C.G_TLS_REHANDSHAKE_UNSAFELY
+	TLSRehandshakeUnsafely TLSRehandshakeMode = 2
 )
 
 func marshalTLSRehandshakeMode(p unsafe.Pointer) (any, error) {
@@ -2585,15 +2585,15 @@ const (
 	// ZlibCompressorFormatZlib wraps G_ZLIB_COMPRESSOR_FORMAT_ZLIB
 	//
 	// deflate compression with zlib header
-	ZlibCompressorFormatZlib ZlibCompressorFormat = C.G_ZLIB_COMPRESSOR_FORMAT_ZLIB
+	ZlibCompressorFormatZlib ZlibCompressorFormat = 0
 	// ZlibCompressorFormatGzip wraps G_ZLIB_COMPRESSOR_FORMAT_GZIP
 	//
 	// gzip file format
-	ZlibCompressorFormatGzip ZlibCompressorFormat = C.G_ZLIB_COMPRESSOR_FORMAT_GZIP
+	ZlibCompressorFormatGzip ZlibCompressorFormat = 1
 	// ZlibCompressorFormatRaw wraps G_ZLIB_COMPRESSOR_FORMAT_RAW
 	//
 	// deflate compression with no header
-	ZlibCompressorFormatRaw ZlibCompressorFormat = C.G_ZLIB_COMPRESSOR_FORMAT_RAW
+	ZlibCompressorFormatRaw ZlibCompressorFormat = 2
 )
 
 func marshalZlibCompressorFormat(p unsafe.Pointer) (any, error) {
@@ -2616,19 +2616,19 @@ const (
 	// AppInfoCreateNone wraps G_APP_INFO_CREATE_NONE
 	//
 	// No flags.
-	AppInfoCreateNone AppInfoCreateFlags = C.G_APP_INFO_CREATE_NONE
+	AppInfoCreateNone AppInfoCreateFlags = 0
 	// AppInfoCreateNeedsTerminal wraps G_APP_INFO_CREATE_NEEDS_TERMINAL
 	//
 	// Application opens in a terminal window.
-	AppInfoCreateNeedsTerminal AppInfoCreateFlags = C.G_APP_INFO_CREATE_NEEDS_TERMINAL
+	AppInfoCreateNeedsTerminal AppInfoCreateFlags = 1
 	// AppInfoCreateSupportsURIs wraps G_APP_INFO_CREATE_SUPPORTS_URIS
 	//
 	// Application supports URI arguments.
-	AppInfoCreateSupportsURIs AppInfoCreateFlags = C.G_APP_INFO_CREATE_SUPPORTS_URIS
+	AppInfoCreateSupportsURIs AppInfoCreateFlags = 2
 	// AppInfoCreateSupportsStartupNotification wraps G_APP_INFO_CREATE_SUPPORTS_STARTUP_NOTIFICATION
 	//
 	// Application supports startup notification. Since 2.26
-	AppInfoCreateSupportsStartupNotification AppInfoCreateFlags = C.G_APP_INFO_CREATE_SUPPORTS_STARTUP_NOTIFICATION
+	AppInfoCreateSupportsStartupNotification AppInfoCreateFlags = 4
 )
 
 func marshalAppInfoCreateFlags(p unsafe.Pointer) (any, error) {
@@ -2656,22 +2656,22 @@ const (
 	//
 	// Default. Deprecated in 2.74, use
 	//   %G_APPLICATION_DEFAULT_FLAGS instead
-	ApplicationFlagsNone ApplicationFlags = C.G_APPLICATION_FLAGS_NONE
+	ApplicationFlagsNone ApplicationFlags = 0
 	// ApplicationDefaultFlags wraps G_APPLICATION_DEFAULT_FLAGS
 	//
 	// Default flags. Since: 2.74
-	ApplicationDefaultFlags ApplicationFlags = C.G_APPLICATION_DEFAULT_FLAGS
+	ApplicationDefaultFlags ApplicationFlags = 0
 	// ApplicationIsService wraps G_APPLICATION_IS_SERVICE
 	//
 	// Run as a service. In this mode, registration
 	//      fails if the service is already running, and the application
 	//      will initially wait up to 10 seconds for an initial activation
 	//      message to arrive.
-	ApplicationIsService ApplicationFlags = C.G_APPLICATION_IS_SERVICE
+	ApplicationIsService ApplicationFlags = 1
 	// ApplicationIsLauncher wraps G_APPLICATION_IS_LAUNCHER
 	//
 	// Don't try to become the primary instance.
-	ApplicationIsLauncher ApplicationFlags = C.G_APPLICATION_IS_LAUNCHER
+	ApplicationIsLauncher ApplicationFlags = 2
 	// ApplicationHandlesOpen wraps G_APPLICATION_HANDLES_OPEN
 	//
 	// This application handles opening files (in
@@ -2679,14 +2679,14 @@ const (
 	//     implementation of local_command_line(), and has no effect if
 	//     %G_APPLICATION_HANDLES_COMMAND_LINE is given.
 	//     See g_application_run() for details.
-	ApplicationHandlesOpen ApplicationFlags = C.G_APPLICATION_HANDLES_OPEN
+	ApplicationHandlesOpen ApplicationFlags = 4
 	// ApplicationHandlesCommandLine wraps G_APPLICATION_HANDLES_COMMAND_LINE
 	//
 	// This application handles command line
 	//     arguments (in the primary instance). Note that this flag only affect
 	//     the default implementation of local_command_line().
 	//     See g_application_run() for details.
-	ApplicationHandlesCommandLine ApplicationFlags = C.G_APPLICATION_HANDLES_COMMAND_LINE
+	ApplicationHandlesCommandLine ApplicationFlags = 8
 	// ApplicationSendEnvironment wraps G_APPLICATION_SEND_ENVIRONMENT
 	//
 	// Send the environment of the
@@ -2697,7 +2697,7 @@ const (
 	//     when editing a git commit message. The environment is available
 	//     to the #GApplication::command-line signal handler, via
 	//     g_application_command_line_getenv().
-	ApplicationSendEnvironment ApplicationFlags = C.G_APPLICATION_SEND_ENVIRONMENT
+	ApplicationSendEnvironment ApplicationFlags = 16
 	// ApplicationNonUnique wraps G_APPLICATION_NON_UNIQUE
 	//
 	// Make no attempts to do any of the typical
@@ -2706,24 +2706,24 @@ const (
 	//     owner of the application ID nor does it check if an existing
 	//     owner already exists.  Everything occurs in the local process.
 	//     Since: 2.30.
-	ApplicationNonUnique ApplicationFlags = C.G_APPLICATION_NON_UNIQUE
+	ApplicationNonUnique ApplicationFlags = 32
 	// ApplicationCanOverrideAppID wraps G_APPLICATION_CAN_OVERRIDE_APP_ID
 	//
 	// Allow users to override the
 	//     application ID from the command line with `--gapplication-app-id`.
 	//     Since: 2.48
-	ApplicationCanOverrideAppID ApplicationFlags = C.G_APPLICATION_CAN_OVERRIDE_APP_ID
+	ApplicationCanOverrideAppID ApplicationFlags = 64
 	// ApplicationAllowReplacement wraps G_APPLICATION_ALLOW_REPLACEMENT
 	//
 	// Allow another instance to take over
 	//     the bus name. Since: 2.60
-	ApplicationAllowReplacement ApplicationFlags = C.G_APPLICATION_ALLOW_REPLACEMENT
+	ApplicationAllowReplacement ApplicationFlags = 128
 	// ApplicationReplace wraps G_APPLICATION_REPLACE
 	//
 	// Take over from another instance. This flag is
 	//     usually set by passing `--gapplication-replace` on the commandline.
 	//     Since: 2.60
-	ApplicationReplace ApplicationFlags = C.G_APPLICATION_REPLACE
+	ApplicationReplace ApplicationFlags = 256
 )
 
 func marshalApplicationFlags(p unsafe.Pointer) (any, error) {
@@ -2752,27 +2752,27 @@ const (
 	// AskPasswordNeedPassword wraps G_ASK_PASSWORD_NEED_PASSWORD
 	//
 	// operation requires a password.
-	AskPasswordNeedPassword AskPasswordFlags = C.G_ASK_PASSWORD_NEED_PASSWORD
+	AskPasswordNeedPassword AskPasswordFlags = 1
 	// AskPasswordNeedUsername wraps G_ASK_PASSWORD_NEED_USERNAME
 	//
 	// operation requires a username.
-	AskPasswordNeedUsername AskPasswordFlags = C.G_ASK_PASSWORD_NEED_USERNAME
+	AskPasswordNeedUsername AskPasswordFlags = 2
 	// AskPasswordNeedDomain wraps G_ASK_PASSWORD_NEED_DOMAIN
 	//
 	// operation requires a domain.
-	AskPasswordNeedDomain AskPasswordFlags = C.G_ASK_PASSWORD_NEED_DOMAIN
+	AskPasswordNeedDomain AskPasswordFlags = 4
 	// AskPasswordSavingSupported wraps G_ASK_PASSWORD_SAVING_SUPPORTED
 	//
 	// operation supports saving settings.
-	AskPasswordSavingSupported AskPasswordFlags = C.G_ASK_PASSWORD_SAVING_SUPPORTED
+	AskPasswordSavingSupported AskPasswordFlags = 8
 	// AskPasswordAnonymousSupported wraps G_ASK_PASSWORD_ANONYMOUS_SUPPORTED
 	//
 	// operation supports anonymous users.
-	AskPasswordAnonymousSupported AskPasswordFlags = C.G_ASK_PASSWORD_ANONYMOUS_SUPPORTED
+	AskPasswordAnonymousSupported AskPasswordFlags = 16
 	// AskPasswordTcrypt wraps G_ASK_PASSWORD_TCRYPT
 	//
 	// operation takes TCRYPT parameters (Since: 2.58)
-	AskPasswordTcrypt AskPasswordFlags = C.G_ASK_PASSWORD_TCRYPT
+	AskPasswordTcrypt AskPasswordFlags = 32
 )
 
 func marshalAskPasswordFlags(p unsafe.Pointer) (any, error) {
@@ -2799,21 +2799,21 @@ const (
 	// BusNameOwnerFlagsNone wraps G_BUS_NAME_OWNER_FLAGS_NONE
 	//
 	// No flags set.
-	BusNameOwnerFlagsNone BusNameOwnerFlags = C.G_BUS_NAME_OWNER_FLAGS_NONE
+	BusNameOwnerFlagsNone BusNameOwnerFlags = 0
 	// BusNameOwnerFlagsAllowReplacement wraps G_BUS_NAME_OWNER_FLAGS_ALLOW_REPLACEMENT
 	//
 	// Allow another message bus connection to claim the name.
-	BusNameOwnerFlagsAllowReplacement BusNameOwnerFlags = C.G_BUS_NAME_OWNER_FLAGS_ALLOW_REPLACEMENT
+	BusNameOwnerFlagsAllowReplacement BusNameOwnerFlags = 1
 	// BusNameOwnerFlagsReplace wraps G_BUS_NAME_OWNER_FLAGS_REPLACE
 	//
 	// If another message bus connection owns the name and have
 	// specified %G_BUS_NAME_OWNER_FLAGS_ALLOW_REPLACEMENT, then take the name from the other connection.
-	BusNameOwnerFlagsReplace BusNameOwnerFlags = C.G_BUS_NAME_OWNER_FLAGS_REPLACE
+	BusNameOwnerFlagsReplace BusNameOwnerFlags = 2
 	// BusNameOwnerFlagsDoNotQueue wraps G_BUS_NAME_OWNER_FLAGS_DO_NOT_QUEUE
 	//
 	// If another message bus connection owns the name, immediately
 	// return an error from g_bus_own_name() rather than entering the waiting queue for that name. (Since 2.54)
-	BusNameOwnerFlagsDoNotQueue BusNameOwnerFlags = C.G_BUS_NAME_OWNER_FLAGS_DO_NOT_QUEUE
+	BusNameOwnerFlagsDoNotQueue BusNameOwnerFlags = 4
 )
 
 func marshalBusNameOwnerFlags(p unsafe.Pointer) (any, error) {
@@ -2840,13 +2840,13 @@ const (
 	// BusNameWatcherFlagsNone wraps G_BUS_NAME_WATCHER_FLAGS_NONE
 	//
 	// No flags set.
-	BusNameWatcherFlagsNone BusNameWatcherFlags = C.G_BUS_NAME_WATCHER_FLAGS_NONE
+	BusNameWatcherFlagsNone BusNameWatcherFlags = 0
 	// BusNameWatcherFlagsAutoStart wraps G_BUS_NAME_WATCHER_FLAGS_AUTO_START
 	//
 	// If no-one owns the name when
 	// beginning to watch the name, ask the bus to launch an owner for the
 	// name.
-	BusNameWatcherFlagsAutoStart BusNameWatcherFlags = C.G_BUS_NAME_WATCHER_FLAGS_AUTO_START
+	BusNameWatcherFlagsAutoStart BusNameWatcherFlags = 1
 )
 
 func marshalBusNameWatcherFlags(p unsafe.Pointer) (any, error) {
@@ -2873,15 +2873,15 @@ const (
 	// ConverterNoFlags wraps G_CONVERTER_NO_FLAGS
 	//
 	// No flags.
-	ConverterNoFlags ConverterFlags = C.G_CONVERTER_NO_FLAGS
+	ConverterNoFlags ConverterFlags = 0
 	// ConverterInputAtEnd wraps G_CONVERTER_INPUT_AT_END
 	//
 	// At end of input data
-	ConverterInputAtEnd ConverterFlags = C.G_CONVERTER_INPUT_AT_END
+	ConverterInputAtEnd ConverterFlags = 1
 	// ConverterFlush wraps G_CONVERTER_FLUSH
 	//
 	// Flush data
-	ConverterFlush ConverterFlags = C.G_CONVERTER_FLUSH
+	ConverterFlush ConverterFlags = 2
 )
 
 func marshalConverterFlags(p unsafe.Pointer) (any, error) {
@@ -2908,18 +2908,18 @@ const (
 	// DBusCallFlagsNone wraps G_DBUS_CALL_FLAGS_NONE
 	//
 	// No flags set.
-	DBusCallFlagsNone DBusCallFlags = C.G_DBUS_CALL_FLAGS_NONE
+	DBusCallFlagsNone DBusCallFlags = 0
 	// DBusCallFlagsNoAutoStart wraps G_DBUS_CALL_FLAGS_NO_AUTO_START
 	//
 	// The bus must not launch
 	// an owner for the destination name in response to this method
 	// invocation.
-	DBusCallFlagsNoAutoStart DBusCallFlags = C.G_DBUS_CALL_FLAGS_NO_AUTO_START
+	DBusCallFlagsNoAutoStart DBusCallFlags = 1
 	// DBusCallFlagsAllowInteractiveAuthorization wraps G_DBUS_CALL_FLAGS_ALLOW_INTERACTIVE_AUTHORIZATION
 	//
 	// the caller is prepared to
 	// wait for interactive authorization. Since 2.46.
-	DBusCallFlagsAllowInteractiveAuthorization DBusCallFlags = C.G_DBUS_CALL_FLAGS_ALLOW_INTERACTIVE_AUTHORIZATION
+	DBusCallFlagsAllowInteractiveAuthorization DBusCallFlags = 2
 )
 
 func marshalDBusCallFlags(p unsafe.Pointer) (any, error) {
@@ -2946,7 +2946,7 @@ const (
 	// DBusCapabilityFlagsNone wraps G_DBUS_CAPABILITY_FLAGS_NONE
 	//
 	// No flags set.
-	DBusCapabilityFlagsNone DBusCapabilityFlags = C.G_DBUS_CAPABILITY_FLAGS_NONE
+	DBusCapabilityFlagsNone DBusCapabilityFlags = 0
 )
 
 func marshalDBusCapabilityFlags(p unsafe.Pointer) (any, error) {
@@ -2973,36 +2973,36 @@ const (
 	// DBusConnectionFlagsNone wraps G_DBUS_CONNECTION_FLAGS_NONE
 	//
 	// No flags set.
-	DBusConnectionFlagsNone DBusConnectionFlags = C.G_DBUS_CONNECTION_FLAGS_NONE
+	DBusConnectionFlagsNone DBusConnectionFlags = 0
 	// DBusConnectionFlagsAuthenticationClient wraps G_DBUS_CONNECTION_FLAGS_AUTHENTICATION_CLIENT
 	//
 	// Perform authentication against server.
-	DBusConnectionFlagsAuthenticationClient DBusConnectionFlags = C.G_DBUS_CONNECTION_FLAGS_AUTHENTICATION_CLIENT
+	DBusConnectionFlagsAuthenticationClient DBusConnectionFlags = 1
 	// DBusConnectionFlagsAuthenticationServer wraps G_DBUS_CONNECTION_FLAGS_AUTHENTICATION_SERVER
 	//
 	// Perform authentication against client.
-	DBusConnectionFlagsAuthenticationServer DBusConnectionFlags = C.G_DBUS_CONNECTION_FLAGS_AUTHENTICATION_SERVER
+	DBusConnectionFlagsAuthenticationServer DBusConnectionFlags = 2
 	// DBusConnectionFlagsAuthenticationAllowAnonymous wraps G_DBUS_CONNECTION_FLAGS_AUTHENTICATION_ALLOW_ANONYMOUS
 	//
 	// When
 	// authenticating as a server, allow the anonymous authentication
 	// method.
-	DBusConnectionFlagsAuthenticationAllowAnonymous DBusConnectionFlags = C.G_DBUS_CONNECTION_FLAGS_AUTHENTICATION_ALLOW_ANONYMOUS
+	DBusConnectionFlagsAuthenticationAllowAnonymous DBusConnectionFlags = 4
 	// DBusConnectionFlagsMessageBusConnection wraps G_DBUS_CONNECTION_FLAGS_MESSAGE_BUS_CONNECTION
 	//
 	// Pass this flag if connecting to a peer that is a
 	// message bus. This means that the Hello() method will be invoked as part of the connection setup.
-	DBusConnectionFlagsMessageBusConnection DBusConnectionFlags = C.G_DBUS_CONNECTION_FLAGS_MESSAGE_BUS_CONNECTION
+	DBusConnectionFlagsMessageBusConnection DBusConnectionFlags = 8
 	// DBusConnectionFlagsDelayMessageProcessing wraps G_DBUS_CONNECTION_FLAGS_DELAY_MESSAGE_PROCESSING
 	//
 	// If set, processing of D-Bus messages is
 	// delayed until g_dbus_connection_start_message_processing() is called.
-	DBusConnectionFlagsDelayMessageProcessing DBusConnectionFlags = C.G_DBUS_CONNECTION_FLAGS_DELAY_MESSAGE_PROCESSING
+	DBusConnectionFlagsDelayMessageProcessing DBusConnectionFlags = 16
 	// DBusConnectionFlagsAuthenticationRequireSameUser wraps G_DBUS_CONNECTION_FLAGS_AUTHENTICATION_REQUIRE_SAME_USER
 	//
 	// When authenticating
 	// as a server, require the UID of the peer to be the same as the UID of the server. (Since: 2.68)
-	DBusConnectionFlagsAuthenticationRequireSameUser DBusConnectionFlags = C.G_DBUS_CONNECTION_FLAGS_AUTHENTICATION_REQUIRE_SAME_USER
+	DBusConnectionFlagsAuthenticationRequireSameUser DBusConnectionFlags = 32
 	// DBusConnectionFlagsCrossNamespace wraps G_DBUS_CONNECTION_FLAGS_CROSS_NAMESPACE
 	//
 	// When authenticating, try to use
@@ -3011,7 +3011,7 @@ const (
 	//  affects client-side `EXTERNAL` authentication, for which this flag makes
 	//  connections to a server in another user namespace succeed, but causes
 	//  a deadlock when connecting to a GDBus server older than 2.73.3. Since: 2.74
-	DBusConnectionFlagsCrossNamespace DBusConnectionFlags = C.G_DBUS_CONNECTION_FLAGS_CROSS_NAMESPACE
+	DBusConnectionFlagsCrossNamespace DBusConnectionFlags = 64
 )
 
 func marshalDBusConnectionFlags(p unsafe.Pointer) (any, error) {
@@ -3038,14 +3038,14 @@ const (
 	// DBusInterfaceSkeletonFlagsNone wraps G_DBUS_INTERFACE_SKELETON_FLAGS_NONE
 	//
 	// No flags set.
-	DBusInterfaceSkeletonFlagsNone DBusInterfaceSkeletonFlags = C.G_DBUS_INTERFACE_SKELETON_FLAGS_NONE
+	DBusInterfaceSkeletonFlagsNone DBusInterfaceSkeletonFlags = 0
 	// DBusInterfaceSkeletonFlagsHandleMethodInvocationsInThread wraps G_DBUS_INTERFACE_SKELETON_FLAGS_HANDLE_METHOD_INVOCATIONS_IN_THREAD
 	//
 	// Each method invocation is handled in
 	//   a thread dedicated to the invocation. This means that the method implementation can use blocking IO
 	//   without blocking any other part of the process. It also means that the method implementation must
 	//   use locking to access data structures used by other threads.
-	DBusInterfaceSkeletonFlagsHandleMethodInvocationsInThread DBusInterfaceSkeletonFlags = C.G_DBUS_INTERFACE_SKELETON_FLAGS_HANDLE_METHOD_INVOCATIONS_IN_THREAD
+	DBusInterfaceSkeletonFlagsHandleMethodInvocationsInThread DBusInterfaceSkeletonFlags = 1
 )
 
 func marshalDBusInterfaceSkeletonFlags(p unsafe.Pointer) (any, error) {
@@ -3072,22 +3072,22 @@ const (
 	// DBusMessageFlagsNone wraps G_DBUS_MESSAGE_FLAGS_NONE
 	//
 	// No flags set.
-	DBusMessageFlagsNone DBusMessageFlags = C.G_DBUS_MESSAGE_FLAGS_NONE
+	DBusMessageFlagsNone DBusMessageFlags = 0
 	// DBusMessageFlagsNoReplyExpected wraps G_DBUS_MESSAGE_FLAGS_NO_REPLY_EXPECTED
 	//
 	// A reply is not expected.
-	DBusMessageFlagsNoReplyExpected DBusMessageFlags = C.G_DBUS_MESSAGE_FLAGS_NO_REPLY_EXPECTED
+	DBusMessageFlagsNoReplyExpected DBusMessageFlags = 1
 	// DBusMessageFlagsNoAutoStart wraps G_DBUS_MESSAGE_FLAGS_NO_AUTO_START
 	//
 	// The bus must not launch an
 	// owner for the destination name in response to this message.
-	DBusMessageFlagsNoAutoStart DBusMessageFlags = C.G_DBUS_MESSAGE_FLAGS_NO_AUTO_START
+	DBusMessageFlagsNoAutoStart DBusMessageFlags = 2
 	// DBusMessageFlagsAllowInteractiveAuthorization wraps G_DBUS_MESSAGE_FLAGS_ALLOW_INTERACTIVE_AUTHORIZATION
 	//
 	// If set on a method
 	// call, this flag means that the caller is prepared to wait for interactive
 	// authorization. Since 2.46.
-	DBusMessageFlagsAllowInteractiveAuthorization DBusMessageFlags = C.G_DBUS_MESSAGE_FLAGS_ALLOW_INTERACTIVE_AUTHORIZATION
+	DBusMessageFlagsAllowInteractiveAuthorization DBusMessageFlags = 4
 )
 
 func marshalDBusMessageFlags(p unsafe.Pointer) (any, error) {
@@ -3114,14 +3114,14 @@ const (
 	// DBusObjectManagerClientFlagsNone wraps G_DBUS_OBJECT_MANAGER_CLIENT_FLAGS_NONE
 	//
 	// No flags set.
-	DBusObjectManagerClientFlagsNone DBusObjectManagerClientFlags = C.G_DBUS_OBJECT_MANAGER_CLIENT_FLAGS_NONE
+	DBusObjectManagerClientFlagsNone DBusObjectManagerClientFlags = 0
 	// DBusObjectManagerClientFlagsDoNotAutoStart wraps G_DBUS_OBJECT_MANAGER_CLIENT_FLAGS_DO_NOT_AUTO_START
 	//
 	// If not set and the
 	//   manager is for a well-known name, then request the bus to launch
 	//   an owner for the name if no-one owns the name. This flag can only
 	//   be used in managers for well-known names.
-	DBusObjectManagerClientFlagsDoNotAutoStart DBusObjectManagerClientFlags = C.G_DBUS_OBJECT_MANAGER_CLIENT_FLAGS_DO_NOT_AUTO_START
+	DBusObjectManagerClientFlagsDoNotAutoStart DBusObjectManagerClientFlags = 1
 )
 
 func marshalDBusObjectManagerClientFlags(p unsafe.Pointer) (any, error) {
@@ -3148,15 +3148,15 @@ const (
 	// DBusPropertyInfoFlagsNone wraps G_DBUS_PROPERTY_INFO_FLAGS_NONE
 	//
 	// No flags set.
-	DBusPropertyInfoFlagsNone DBusPropertyInfoFlags = C.G_DBUS_PROPERTY_INFO_FLAGS_NONE
+	DBusPropertyInfoFlagsNone DBusPropertyInfoFlags = 0
 	// DBusPropertyInfoFlagsReadable wraps G_DBUS_PROPERTY_INFO_FLAGS_READABLE
 	//
 	// Property is readable.
-	DBusPropertyInfoFlagsReadable DBusPropertyInfoFlags = C.G_DBUS_PROPERTY_INFO_FLAGS_READABLE
+	DBusPropertyInfoFlagsReadable DBusPropertyInfoFlags = 1
 	// DBusPropertyInfoFlagsWritable wraps G_DBUS_PROPERTY_INFO_FLAGS_WRITABLE
 	//
 	// Property is writable.
-	DBusPropertyInfoFlagsWritable DBusPropertyInfoFlags = C.G_DBUS_PROPERTY_INFO_FLAGS_WRITABLE
+	DBusPropertyInfoFlagsWritable DBusPropertyInfoFlags = 2
 )
 
 func marshalDBusPropertyInfoFlags(p unsafe.Pointer) (any, error) {
@@ -3183,38 +3183,38 @@ const (
 	// DBusProxyFlagsNone wraps G_DBUS_PROXY_FLAGS_NONE
 	//
 	// No flags set.
-	DBusProxyFlagsNone DBusProxyFlags = C.G_DBUS_PROXY_FLAGS_NONE
+	DBusProxyFlagsNone DBusProxyFlags = 0
 	// DBusProxyFlagsDoNotLoadProperties wraps G_DBUS_PROXY_FLAGS_DO_NOT_LOAD_PROPERTIES
 	//
 	// Don't load properties.
-	DBusProxyFlagsDoNotLoadProperties DBusProxyFlags = C.G_DBUS_PROXY_FLAGS_DO_NOT_LOAD_PROPERTIES
+	DBusProxyFlagsDoNotLoadProperties DBusProxyFlags = 1
 	// DBusProxyFlagsDoNotConnectSignals wraps G_DBUS_PROXY_FLAGS_DO_NOT_CONNECT_SIGNALS
 	//
 	// Don't connect to signals on the remote object.
-	DBusProxyFlagsDoNotConnectSignals DBusProxyFlags = C.G_DBUS_PROXY_FLAGS_DO_NOT_CONNECT_SIGNALS
+	DBusProxyFlagsDoNotConnectSignals DBusProxyFlags = 2
 	// DBusProxyFlagsDoNotAutoStart wraps G_DBUS_PROXY_FLAGS_DO_NOT_AUTO_START
 	//
 	// If the proxy is for a well-known name,
 	// do not ask the bus to launch an owner during proxy initialization or a method call.
 	// This flag is only meaningful in proxies for well-known names.
-	DBusProxyFlagsDoNotAutoStart DBusProxyFlags = C.G_DBUS_PROXY_FLAGS_DO_NOT_AUTO_START
+	DBusProxyFlagsDoNotAutoStart DBusProxyFlags = 4
 	// DBusProxyFlagsGetInvalidatedProperties wraps G_DBUS_PROXY_FLAGS_GET_INVALIDATED_PROPERTIES
 	//
 	// If set, the property value for any __invalidated property__ will be (asynchronously) retrieved upon receiving the [`PropertiesChanged`](http://dbus.freedesktop.org/doc/dbus-specification.html#standard-interfaces-properties) D-Bus signal and the property will not cause emission of the #GDBusProxy::g-properties-changed signal. When the value is received the #GDBusProxy::g-properties-changed signal is emitted for the property along with the retrieved value. Since 2.32.
-	DBusProxyFlagsGetInvalidatedProperties DBusProxyFlags = C.G_DBUS_PROXY_FLAGS_GET_INVALIDATED_PROPERTIES
+	DBusProxyFlagsGetInvalidatedProperties DBusProxyFlags = 8
 	// DBusProxyFlagsDoNotAutoStartAtConstruction wraps G_DBUS_PROXY_FLAGS_DO_NOT_AUTO_START_AT_CONSTRUCTION
 	//
 	// If the proxy is for a well-known name,
 	// do not ask the bus to launch an owner during proxy initialization, but allow it to be
 	// autostarted by a method call. This flag is only meaningful in proxies for well-known names,
 	// and only if %G_DBUS_PROXY_FLAGS_DO_NOT_AUTO_START is not also specified.
-	DBusProxyFlagsDoNotAutoStartAtConstruction DBusProxyFlags = C.G_DBUS_PROXY_FLAGS_DO_NOT_AUTO_START_AT_CONSTRUCTION
+	DBusProxyFlagsDoNotAutoStartAtConstruction DBusProxyFlags = 16
 	// DBusProxyFlagsNoMatchRule wraps G_DBUS_PROXY_FLAGS_NO_MATCH_RULE
 	//
 	// Don't actually send the AddMatch D-Bus
 	//    call for this signal subscription. This gives you more control
 	//    over which match rules you add (but you must add them manually). (Since: 2.72)
-	DBusProxyFlagsNoMatchRule DBusProxyFlags = C.G_DBUS_PROXY_FLAGS_NO_MATCH_RULE
+	DBusProxyFlagsNoMatchRule DBusProxyFlags = 32
 )
 
 func marshalDBusProxyFlags(p unsafe.Pointer) (any, error) {
@@ -3241,13 +3241,13 @@ const (
 	// DBusSendMessageFlagsNone wraps G_DBUS_SEND_MESSAGE_FLAGS_NONE
 	//
 	// No flags set.
-	DBusSendMessageFlagsNone DBusSendMessageFlags = C.G_DBUS_SEND_MESSAGE_FLAGS_NONE
+	DBusSendMessageFlagsNone DBusSendMessageFlags = 0
 	// DBusSendMessageFlagsPreserveSerial wraps G_DBUS_SEND_MESSAGE_FLAGS_PRESERVE_SERIAL
 	//
 	// Do not automatically
 	// assign a serial number from the #GDBusConnection object when
 	// sending a message.
-	DBusSendMessageFlagsPreserveSerial DBusSendMessageFlags = C.G_DBUS_SEND_MESSAGE_FLAGS_PRESERVE_SERIAL
+	DBusSendMessageFlagsPreserveSerial DBusSendMessageFlags = 1
 )
 
 func marshalDBusSendMessageFlags(p unsafe.Pointer) (any, error) {
@@ -3274,23 +3274,23 @@ const (
 	// DBusServerFlagsNone wraps G_DBUS_SERVER_FLAGS_NONE
 	//
 	// No flags set.
-	DBusServerFlagsNone DBusServerFlags = C.G_DBUS_SERVER_FLAGS_NONE
+	DBusServerFlagsNone DBusServerFlags = 0
 	// DBusServerFlagsRunInThread wraps G_DBUS_SERVER_FLAGS_RUN_IN_THREAD
 	//
 	// All #GDBusServer::new-connection
 	// signals will run in separated dedicated threads (see signal for
 	// details).
-	DBusServerFlagsRunInThread DBusServerFlags = C.G_DBUS_SERVER_FLAGS_RUN_IN_THREAD
+	DBusServerFlagsRunInThread DBusServerFlags = 1
 	// DBusServerFlagsAuthenticationAllowAnonymous wraps G_DBUS_SERVER_FLAGS_AUTHENTICATION_ALLOW_ANONYMOUS
 	//
 	// Allow the anonymous
 	// authentication method.
-	DBusServerFlagsAuthenticationAllowAnonymous DBusServerFlags = C.G_DBUS_SERVER_FLAGS_AUTHENTICATION_ALLOW_ANONYMOUS
+	DBusServerFlagsAuthenticationAllowAnonymous DBusServerFlags = 2
 	// DBusServerFlagsAuthenticationRequireSameUser wraps G_DBUS_SERVER_FLAGS_AUTHENTICATION_REQUIRE_SAME_USER
 	//
 	// Require the UID of the
 	// peer to be the same as the UID of the server when authenticating. (Since: 2.68)
-	DBusServerFlagsAuthenticationRequireSameUser DBusServerFlags = C.G_DBUS_SERVER_FLAGS_AUTHENTICATION_REQUIRE_SAME_USER
+	DBusServerFlagsAuthenticationRequireSameUser DBusServerFlags = 4
 )
 
 func marshalDBusServerFlags(p unsafe.Pointer) (any, error) {
@@ -3317,24 +3317,24 @@ const (
 	// DBusSignalFlagsNone wraps G_DBUS_SIGNAL_FLAGS_NONE
 	//
 	// No flags set.
-	DBusSignalFlagsNone DBusSignalFlags = C.G_DBUS_SIGNAL_FLAGS_NONE
+	DBusSignalFlagsNone DBusSignalFlags = 0
 	// DBusSignalFlagsNoMatchRule wraps G_DBUS_SIGNAL_FLAGS_NO_MATCH_RULE
 	//
 	// Don't actually send the AddMatch
 	// D-Bus call for this signal subscription.  This gives you more control
 	// over which match rules you add (but you must add them manually).
-	DBusSignalFlagsNoMatchRule DBusSignalFlags = C.G_DBUS_SIGNAL_FLAGS_NO_MATCH_RULE
+	DBusSignalFlagsNoMatchRule DBusSignalFlags = 1
 	// DBusSignalFlagsMatchArg0Namespace wraps G_DBUS_SIGNAL_FLAGS_MATCH_ARG0_NAMESPACE
 	//
 	// Match first arguments that
 	// contain a bus or interface name with the given namespace.
-	DBusSignalFlagsMatchArg0Namespace DBusSignalFlags = C.G_DBUS_SIGNAL_FLAGS_MATCH_ARG0_NAMESPACE
+	DBusSignalFlagsMatchArg0Namespace DBusSignalFlags = 2
 	// DBusSignalFlagsMatchArg0Path wraps G_DBUS_SIGNAL_FLAGS_MATCH_ARG0_PATH
 	//
 	// Match first arguments that
 	// contain an object path that is either equivalent to the given path,
 	// or one of the paths is a subpath of the other.
-	DBusSignalFlagsMatchArg0Path DBusSignalFlags = C.G_DBUS_SIGNAL_FLAGS_MATCH_ARG0_PATH
+	DBusSignalFlagsMatchArg0Path DBusSignalFlags = 4
 )
 
 func marshalDBusSignalFlags(p unsafe.Pointer) (any, error) {
@@ -3361,13 +3361,13 @@ const (
 	// DBusSubtreeFlagsNone wraps G_DBUS_SUBTREE_FLAGS_NONE
 	//
 	// No flags set.
-	DBusSubtreeFlagsNone DBusSubtreeFlags = C.G_DBUS_SUBTREE_FLAGS_NONE
+	DBusSubtreeFlagsNone DBusSubtreeFlags = 0
 	// DBusSubtreeFlagsDispatchToUnenumeratedNodes wraps G_DBUS_SUBTREE_FLAGS_DISPATCH_TO_UNENUMERATED_NODES
 	//
 	// Method calls to objects not in the enumerated range
 	//                                                       will still be dispatched. This is useful if you want
 	//                                                       to dynamically spawn objects in the subtree.
-	DBusSubtreeFlagsDispatchToUnenumeratedNodes DBusSubtreeFlags = C.G_DBUS_SUBTREE_FLAGS_DISPATCH_TO_UNENUMERATED_NODES
+	DBusSubtreeFlagsDispatchToUnenumeratedNodes DBusSubtreeFlags = 1
 )
 
 func marshalDBusSubtreeFlags(p unsafe.Pointer) (any, error) {
@@ -3394,7 +3394,7 @@ const (
 	// DriveStartNone wraps G_DRIVE_START_NONE
 	//
 	// No flags set.
-	DriveStartNone DriveStartFlags = C.G_DRIVE_START_NONE
+	DriveStartNone DriveStartFlags = 0
 )
 
 func marshalDriveStartFlags(p unsafe.Pointer) (any, error) {
@@ -3421,15 +3421,15 @@ const (
 	// FileAttributeInfoNone wraps G_FILE_ATTRIBUTE_INFO_NONE
 	//
 	// no flags set.
-	FileAttributeInfoNone FileAttributeInfoFlags = C.G_FILE_ATTRIBUTE_INFO_NONE
+	FileAttributeInfoNone FileAttributeInfoFlags = 0
 	// FileAttributeInfoCopyWithFile wraps G_FILE_ATTRIBUTE_INFO_COPY_WITH_FILE
 	//
 	// copy the attribute values when the file is copied.
-	FileAttributeInfoCopyWithFile FileAttributeInfoFlags = C.G_FILE_ATTRIBUTE_INFO_COPY_WITH_FILE
+	FileAttributeInfoCopyWithFile FileAttributeInfoFlags = 1
 	// FileAttributeInfoCopyWhenMoved wraps G_FILE_ATTRIBUTE_INFO_COPY_WHEN_MOVED
 	//
 	// copy the attribute values when the file is moved.
-	FileAttributeInfoCopyWhenMoved FileAttributeInfoFlags = C.G_FILE_ATTRIBUTE_INFO_COPY_WHEN_MOVED
+	FileAttributeInfoCopyWhenMoved FileAttributeInfoFlags = 2
 )
 
 func marshalFileAttributeInfoFlags(p unsafe.Pointer) (any, error) {
@@ -3456,36 +3456,36 @@ const (
 	// FileCopyNone wraps G_FILE_COPY_NONE
 	//
 	// No flags set.
-	FileCopyNone FileCopyFlags = C.G_FILE_COPY_NONE
+	FileCopyNone FileCopyFlags = 0
 	// FileCopyOverwrite wraps G_FILE_COPY_OVERWRITE
 	//
 	// Overwrite any existing files
-	FileCopyOverwrite FileCopyFlags = C.G_FILE_COPY_OVERWRITE
+	FileCopyOverwrite FileCopyFlags = 1
 	// FileCopyBackup wraps G_FILE_COPY_BACKUP
 	//
 	// Make a backup of any existing files.
-	FileCopyBackup FileCopyFlags = C.G_FILE_COPY_BACKUP
+	FileCopyBackup FileCopyFlags = 2
 	// FileCopyNofollowSymlinks wraps G_FILE_COPY_NOFOLLOW_SYMLINKS
 	//
 	// Don't follow symlinks.
-	FileCopyNofollowSymlinks FileCopyFlags = C.G_FILE_COPY_NOFOLLOW_SYMLINKS
+	FileCopyNofollowSymlinks FileCopyFlags = 4
 	// FileCopyAllMetadata wraps G_FILE_COPY_ALL_METADATA
 	//
 	// Copy all file metadata instead of just default set used for copy (see #GFileInfo).
-	FileCopyAllMetadata FileCopyFlags = C.G_FILE_COPY_ALL_METADATA
+	FileCopyAllMetadata FileCopyFlags = 8
 	// FileCopyNoFallbackForMove wraps G_FILE_COPY_NO_FALLBACK_FOR_MOVE
 	//
 	// Don't use copy and delete fallback if native move not supported.
-	FileCopyNoFallbackForMove FileCopyFlags = C.G_FILE_COPY_NO_FALLBACK_FOR_MOVE
+	FileCopyNoFallbackForMove FileCopyFlags = 16
 	// FileCopyTargetDefaultPerms wraps G_FILE_COPY_TARGET_DEFAULT_PERMS
 	//
 	// Leaves target file with default perms, instead of setting the source file perms.
-	FileCopyTargetDefaultPerms FileCopyFlags = C.G_FILE_COPY_TARGET_DEFAULT_PERMS
+	FileCopyTargetDefaultPerms FileCopyFlags = 32
 	// FileCopyTargetDefaultModifiedTime wraps G_FILE_COPY_TARGET_DEFAULT_MODIFIED_TIME
 	//
 	// Use default modification
 	//     timestamps instead of copying them from the source file. Since 2.80
-	FileCopyTargetDefaultModifiedTime FileCopyFlags = C.G_FILE_COPY_TARGET_DEFAULT_MODIFIED_TIME
+	FileCopyTargetDefaultModifiedTime FileCopyFlags = 64
 )
 
 func marshalFileCopyFlags(p unsafe.Pointer) (any, error) {
@@ -3512,12 +3512,12 @@ const (
 	// FileCreateNone wraps G_FILE_CREATE_NONE
 	//
 	// No flags set.
-	FileCreateNone FileCreateFlags = C.G_FILE_CREATE_NONE
+	FileCreateNone FileCreateFlags = 0
 	// FileCreatePrivate wraps G_FILE_CREATE_PRIVATE
 	//
 	// Create a file that can only be
 	//    accessed by the current user.
-	FileCreatePrivate FileCreateFlags = C.G_FILE_CREATE_PRIVATE
+	FileCreatePrivate FileCreateFlags = 1
 	// FileCreateReplaceDestination wraps G_FILE_CREATE_REPLACE_DESTINATION
 	//
 	// Replace the destination
@@ -3530,7 +3530,7 @@ const (
 	//    be exactly like that. This flag can only be used with
 	//    g_file_replace() and its variants, including g_file_replace_contents().
 	//    Since 2.20
-	FileCreateReplaceDestination FileCreateFlags = C.G_FILE_CREATE_REPLACE_DESTINATION
+	FileCreateReplaceDestination FileCreateFlags = 2
 )
 
 func marshalFileCreateFlags(p unsafe.Pointer) (any, error) {
@@ -3557,13 +3557,13 @@ const (
 	// FileMeasureNone wraps G_FILE_MEASURE_NONE
 	//
 	// No flags set.
-	FileMeasureNone FileMeasureFlags = C.G_FILE_MEASURE_NONE
+	FileMeasureNone FileMeasureFlags = 0
 	// FileMeasureReportAnyError wraps G_FILE_MEASURE_REPORT_ANY_ERROR
 	//
 	// Report any error encountered
 	//   while traversing the directory tree.  Normally errors are only
 	//   reported for the toplevel file.
-	FileMeasureReportAnyError FileMeasureFlags = C.G_FILE_MEASURE_REPORT_ANY_ERROR
+	FileMeasureReportAnyError FileMeasureFlags = 2
 	// FileMeasureApparentSize wraps G_FILE_MEASURE_APPARENT_SIZE
 	//
 	// Tally usage based on apparent file
@@ -3573,12 +3573,12 @@ const (
 	//   Since GLib 2.78. and similarly to `du` since GNU Coreutils 9.2, this will
 	//   ignore the sizes of file types other than regular files and links, as the
 	//   sizes of other file types are not specified in a standard way.
-	FileMeasureApparentSize FileMeasureFlags = C.G_FILE_MEASURE_APPARENT_SIZE
+	FileMeasureApparentSize FileMeasureFlags = 4
 	// FileMeasureNoXdev wraps G_FILE_MEASURE_NO_XDEV
 	//
 	// Do not cross mount point boundaries.
 	//   Compare with `du -x`.
-	FileMeasureNoXdev FileMeasureFlags = C.G_FILE_MEASURE_NO_XDEV
+	FileMeasureNoXdev FileMeasureFlags = 8
 )
 
 func marshalFileMeasureFlags(p unsafe.Pointer) (any, error) {
@@ -3605,11 +3605,11 @@ const (
 	// FileMonitorNone wraps G_FILE_MONITOR_NONE
 	//
 	// No flags set.
-	FileMonitorNone FileMonitorFlags = C.G_FILE_MONITOR_NONE
+	FileMonitorNone FileMonitorFlags = 0
 	// FileMonitorWatchMounts wraps G_FILE_MONITOR_WATCH_MOUNTS
 	//
 	// Watch for mount events.
-	FileMonitorWatchMounts FileMonitorFlags = C.G_FILE_MONITOR_WATCH_MOUNTS
+	FileMonitorWatchMounts FileMonitorFlags = 1
 	// FileMonitorSendMoved wraps G_FILE_MONITOR_SEND_MOVED
 	//
 	// Pair DELETED and CREATED events caused
@@ -3618,19 +3618,19 @@ const (
 	//   behaviour -without specifying this flag- is to send single DELETED
 	//   and CREATED events).  Deprecated since 2.46: use
 	//   %G_FILE_MONITOR_WATCH_MOVES instead.
-	FileMonitorSendMoved FileMonitorFlags = C.G_FILE_MONITOR_SEND_MOVED
+	FileMonitorSendMoved FileMonitorFlags = 2
 	// FileMonitorWatchHardLinks wraps G_FILE_MONITOR_WATCH_HARD_LINKS
 	//
 	// Watch for changes to the file made
 	//   via another hard link. Since 2.36.
-	FileMonitorWatchHardLinks FileMonitorFlags = C.G_FILE_MONITOR_WATCH_HARD_LINKS
+	FileMonitorWatchHardLinks FileMonitorFlags = 4
 	// FileMonitorWatchMoves wraps G_FILE_MONITOR_WATCH_MOVES
 	//
 	// Watch for rename operations on a
 	//   monitored directory.  This causes %G_FILE_MONITOR_EVENT_RENAMED,
 	//   %G_FILE_MONITOR_EVENT_MOVED_IN and %G_FILE_MONITOR_EVENT_MOVED_OUT
 	//   events to be emitted when possible.  Since: 2.46.
-	FileMonitorWatchMoves FileMonitorFlags = C.G_FILE_MONITOR_WATCH_MOVES
+	FileMonitorWatchMoves FileMonitorFlags = 8
 )
 
 func marshalFileMonitorFlags(p unsafe.Pointer) (any, error) {
@@ -3657,11 +3657,11 @@ const (
 	// FileQueryInfoNone wraps G_FILE_QUERY_INFO_NONE
 	//
 	// No flags set.
-	FileQueryInfoNone FileQueryInfoFlags = C.G_FILE_QUERY_INFO_NONE
+	FileQueryInfoNone FileQueryInfoFlags = 0
 	// FileQueryInfoNofollowSymlinks wraps G_FILE_QUERY_INFO_NOFOLLOW_SYMLINKS
 	//
 	// Don't follow symlinks.
-	FileQueryInfoNofollowSymlinks FileQueryInfoFlags = C.G_FILE_QUERY_INFO_NOFOLLOW_SYMLINKS
+	FileQueryInfoNofollowSymlinks FileQueryInfoFlags = 1
 )
 
 func marshalFileQueryInfoFlags(p unsafe.Pointer) (any, error) {
@@ -3688,22 +3688,22 @@ const (
 	// IOStreamSpliceNone wraps G_IO_STREAM_SPLICE_NONE
 	//
 	// Do not close either stream.
-	IOStreamSpliceNone IOStreamSpliceFlags = C.G_IO_STREAM_SPLICE_NONE
+	IOStreamSpliceNone IOStreamSpliceFlags = 0
 	// IOStreamSpliceCloseStream1 wraps G_IO_STREAM_SPLICE_CLOSE_STREAM1
 	//
 	// Close the first stream after
 	//     the splice.
-	IOStreamSpliceCloseStream1 IOStreamSpliceFlags = C.G_IO_STREAM_SPLICE_CLOSE_STREAM1
+	IOStreamSpliceCloseStream1 IOStreamSpliceFlags = 1
 	// IOStreamSpliceCloseStream2 wraps G_IO_STREAM_SPLICE_CLOSE_STREAM2
 	//
 	// Close the second stream after
 	//     the splice.
-	IOStreamSpliceCloseStream2 IOStreamSpliceFlags = C.G_IO_STREAM_SPLICE_CLOSE_STREAM2
+	IOStreamSpliceCloseStream2 IOStreamSpliceFlags = 2
 	// IOStreamSpliceWaitForBoth wraps G_IO_STREAM_SPLICE_WAIT_FOR_BOTH
 	//
 	// Wait for both splice operations to finish
 	//     before calling the callback.
-	IOStreamSpliceWaitForBoth IOStreamSpliceFlags = C.G_IO_STREAM_SPLICE_WAIT_FOR_BOTH
+	IOStreamSpliceWaitForBoth IOStreamSpliceFlags = 4
 )
 
 func marshalIOStreamSpliceFlags(p unsafe.Pointer) (any, error) {
@@ -3730,7 +3730,7 @@ const (
 	// MountMountNone wraps G_MOUNT_MOUNT_NONE
 	//
 	// No flags set.
-	MountMountNone MountMountFlags = C.G_MOUNT_MOUNT_NONE
+	MountMountNone MountMountFlags = 0
 )
 
 func marshalMountMountFlags(p unsafe.Pointer) (any, error) {
@@ -3757,12 +3757,12 @@ const (
 	// MountUnmountNone wraps G_MOUNT_UNMOUNT_NONE
 	//
 	// No flags set.
-	MountUnmountNone MountUnmountFlags = C.G_MOUNT_UNMOUNT_NONE
+	MountUnmountNone MountUnmountFlags = 0
 	// MountUnmountForce wraps G_MOUNT_UNMOUNT_FORCE
 	//
 	// Unmount even if there are outstanding
 	//  file operations on the mount.
-	MountUnmountForce MountUnmountFlags = C.G_MOUNT_UNMOUNT_FORCE
+	MountUnmountForce MountUnmountFlags = 1
 )
 
 func marshalMountUnmountFlags(p unsafe.Pointer) (any, error) {
@@ -3789,17 +3789,17 @@ const (
 	// OutputStreamSpliceNone wraps G_OUTPUT_STREAM_SPLICE_NONE
 	//
 	// Do not close either stream.
-	OutputStreamSpliceNone OutputStreamSpliceFlags = C.G_OUTPUT_STREAM_SPLICE_NONE
+	OutputStreamSpliceNone OutputStreamSpliceFlags = 0
 	// OutputStreamSpliceCloseSource wraps G_OUTPUT_STREAM_SPLICE_CLOSE_SOURCE
 	//
 	// Close the source stream after
 	//     the splice.
-	OutputStreamSpliceCloseSource OutputStreamSpliceFlags = C.G_OUTPUT_STREAM_SPLICE_CLOSE_SOURCE
+	OutputStreamSpliceCloseSource OutputStreamSpliceFlags = 1
 	// OutputStreamSpliceCloseTarget wraps G_OUTPUT_STREAM_SPLICE_CLOSE_TARGET
 	//
 	// Close the target stream after
 	//     the splice.
-	OutputStreamSpliceCloseTarget OutputStreamSpliceFlags = C.G_OUTPUT_STREAM_SPLICE_CLOSE_TARGET
+	OutputStreamSpliceCloseTarget OutputStreamSpliceFlags = 2
 )
 
 func marshalOutputStreamSpliceFlags(p unsafe.Pointer) (any, error) {
@@ -3826,15 +3826,15 @@ const (
 	// ResolverNameLookupFlagsDefault wraps G_RESOLVER_NAME_LOOKUP_FLAGS_DEFAULT
 	//
 	// default behavior (same as g_resolver_lookup_by_name())
-	ResolverNameLookupFlagsDefault ResolverNameLookupFlags = C.G_RESOLVER_NAME_LOOKUP_FLAGS_DEFAULT
+	ResolverNameLookupFlagsDefault ResolverNameLookupFlags = 0
 	// ResolverNameLookupFlagsIPv4Only wraps G_RESOLVER_NAME_LOOKUP_FLAGS_IPV4_ONLY
 	//
 	// only resolve ipv4 addresses
-	ResolverNameLookupFlagsIPv4Only ResolverNameLookupFlags = C.G_RESOLVER_NAME_LOOKUP_FLAGS_IPV4_ONLY
+	ResolverNameLookupFlagsIPv4Only ResolverNameLookupFlags = 1
 	// ResolverNameLookupFlagsIPv6Only wraps G_RESOLVER_NAME_LOOKUP_FLAGS_IPV6_ONLY
 	//
 	// only resolve ipv6 addresses
-	ResolverNameLookupFlagsIPv6Only ResolverNameLookupFlags = C.G_RESOLVER_NAME_LOOKUP_FLAGS_IPV6_ONLY
+	ResolverNameLookupFlagsIPv6Only ResolverNameLookupFlags = 2
 )
 
 func marshalResolverNameLookupFlags(p unsafe.Pointer) (any, error) {
@@ -3862,11 +3862,11 @@ const (
 	// ResourceFlagsNone wraps G_RESOURCE_FLAGS_NONE
 	//
 	// No flags set.
-	ResourceFlagsNone ResourceFlags = C.G_RESOURCE_FLAGS_NONE
+	ResourceFlagsNone ResourceFlags = 0
 	// ResourceFlagsCompressed wraps G_RESOURCE_FLAGS_COMPRESSED
 	//
 	// The file is compressed.
-	ResourceFlagsCompressed ResourceFlags = C.G_RESOURCE_FLAGS_COMPRESSED
+	ResourceFlagsCompressed ResourceFlags = 1
 )
 
 func marshalResourceFlags(p unsafe.Pointer) (any, error) {
@@ -3893,7 +3893,7 @@ const (
 	// ResourceLookupFlagsNone wraps G_RESOURCE_LOOKUP_FLAGS_NONE
 	//
 	// No flags set.
-	ResourceLookupFlagsNone ResourceLookupFlags = C.G_RESOURCE_LOOKUP_FLAGS_NONE
+	ResourceLookupFlagsNone ResourceLookupFlags = 0
 )
 
 func marshalResourceLookupFlags(p unsafe.Pointer) (any, error) {
@@ -3922,32 +3922,32 @@ const (
 	// SettingsBindDefault wraps G_SETTINGS_BIND_DEFAULT
 	//
 	// Equivalent to `G_SETTINGS_BIND_GET|G_SETTINGS_BIND_SET`
-	SettingsBindDefault SettingsBindFlags = C.G_SETTINGS_BIND_DEFAULT
+	SettingsBindDefault SettingsBindFlags = 0
 	// SettingsBindGet wraps G_SETTINGS_BIND_GET
 	//
 	// Update the #GObject property when the setting changes.
 	//     It is an error to use this flag if the property is not writable.
-	SettingsBindGet SettingsBindFlags = C.G_SETTINGS_BIND_GET
+	SettingsBindGet SettingsBindFlags = 1
 	// SettingsBindSet wraps G_SETTINGS_BIND_SET
 	//
 	// Update the setting when the #GObject property changes.
 	//     It is an error to use this flag if the property is not readable.
-	SettingsBindSet SettingsBindFlags = C.G_SETTINGS_BIND_SET
+	SettingsBindSet SettingsBindFlags = 2
 	// SettingsBindNoSensitivity wraps G_SETTINGS_BIND_NO_SENSITIVITY
 	//
 	// Do not try to bind a "sensitivity" property to the writability of the setting
-	SettingsBindNoSensitivity SettingsBindFlags = C.G_SETTINGS_BIND_NO_SENSITIVITY
+	SettingsBindNoSensitivity SettingsBindFlags = 4
 	// SettingsBindGetNoChanges wraps G_SETTINGS_BIND_GET_NO_CHANGES
 	//
 	// When set in addition to %G_SETTINGS_BIND_GET, set the #GObject property
 	//     value initially from the setting, but do not listen for changes of the setting
-	SettingsBindGetNoChanges SettingsBindFlags = C.G_SETTINGS_BIND_GET_NO_CHANGES
+	SettingsBindGetNoChanges SettingsBindFlags = 8
 	// SettingsBindInvertBoolean wraps G_SETTINGS_BIND_INVERT_BOOLEAN
 	//
 	// When passed to g_settings_bind(), uses a pair of mapping functions that invert
 	//     the boolean value when mapping between the setting and the property.  The setting and property must both
 	//     be booleans.  You cannot pass this flag to g_settings_bind_with_mapping().
-	SettingsBindInvertBoolean SettingsBindFlags = C.G_SETTINGS_BIND_INVERT_BOOLEAN
+	SettingsBindInvertBoolean SettingsBindFlags = 16
 )
 
 func marshalSettingsBindFlags(p unsafe.Pointer) (any, error) {
@@ -3978,21 +3978,21 @@ const (
 	// SocketMsgNone wraps G_SOCKET_MSG_NONE
 	//
 	// No flags.
-	SocketMsgNone SocketMsgFlags = C.G_SOCKET_MSG_NONE
+	SocketMsgNone SocketMsgFlags = 0
 	// SocketMsgOob wraps G_SOCKET_MSG_OOB
 	//
 	// Request to send/receive out of band data.
-	SocketMsgOob SocketMsgFlags = C.G_SOCKET_MSG_OOB
+	SocketMsgOob SocketMsgFlags = 1
 	// SocketMsgPeek wraps G_SOCKET_MSG_PEEK
 	//
 	// Read data from the socket without removing it from
 	//     the queue.
-	SocketMsgPeek SocketMsgFlags = C.G_SOCKET_MSG_PEEK
+	SocketMsgPeek SocketMsgFlags = 2
 	// SocketMsgDontroute wraps G_SOCKET_MSG_DONTROUTE
 	//
 	// Don't use a gateway to send out the packet,
 	//     only send to hosts on directly connected networks.
-	SocketMsgDontroute SocketMsgFlags = C.G_SOCKET_MSG_DONTROUTE
+	SocketMsgDontroute SocketMsgFlags = 4
 )
 
 func marshalSocketMsgFlags(p unsafe.Pointer) (any, error) {
@@ -4019,7 +4019,7 @@ const (
 	// TestDBusNone wraps G_TEST_DBUS_NONE
 	//
 	// No flags.
-	TestDBusNone TestDBusFlags = C.G_TEST_DBUS_NONE
+	TestDBusNone TestDBusFlags = 0
 )
 
 func marshalTestDBusFlags(p unsafe.Pointer) (any, error) {
@@ -4056,46 +4056,46 @@ const (
 	// TLSCertificateNoFlags wraps G_TLS_CERTIFICATE_NO_FLAGS
 	//
 	// No flags set. Since: 2.74
-	TLSCertificateNoFlags TLSCertificateFlags = C.G_TLS_CERTIFICATE_NO_FLAGS
+	TLSCertificateNoFlags TLSCertificateFlags = 0
 	// TLSCertificateUnknownCa wraps G_TLS_CERTIFICATE_UNKNOWN_CA
 	//
 	// The signing certificate authority is
 	//   not known.
-	TLSCertificateUnknownCa TLSCertificateFlags = C.G_TLS_CERTIFICATE_UNKNOWN_CA
+	TLSCertificateUnknownCa TLSCertificateFlags = 1
 	// TLSCertificateBadIdentity wraps G_TLS_CERTIFICATE_BAD_IDENTITY
 	//
 	// The certificate does not match the
 	//   expected identity of the site that it was retrieved from.
-	TLSCertificateBadIdentity TLSCertificateFlags = C.G_TLS_CERTIFICATE_BAD_IDENTITY
+	TLSCertificateBadIdentity TLSCertificateFlags = 2
 	// TLSCertificateNotActivated wraps G_TLS_CERTIFICATE_NOT_ACTIVATED
 	//
 	// The certificate's activation time
 	//   is still in the future
-	TLSCertificateNotActivated TLSCertificateFlags = C.G_TLS_CERTIFICATE_NOT_ACTIVATED
+	TLSCertificateNotActivated TLSCertificateFlags = 4
 	// TLSCertificateExpired wraps G_TLS_CERTIFICATE_EXPIRED
 	//
 	// The certificate has expired
-	TLSCertificateExpired TLSCertificateFlags = C.G_TLS_CERTIFICATE_EXPIRED
+	TLSCertificateExpired TLSCertificateFlags = 8
 	// TLSCertificateRevoked wraps G_TLS_CERTIFICATE_REVOKED
 	//
 	// The certificate has been revoked
 	//   according to the #GTlsConnection's certificate revocation list.
-	TLSCertificateRevoked TLSCertificateFlags = C.G_TLS_CERTIFICATE_REVOKED
+	TLSCertificateRevoked TLSCertificateFlags = 16
 	// TLSCertificateInsecure wraps G_TLS_CERTIFICATE_INSECURE
 	//
 	// The certificate's algorithm is
 	//   considered insecure.
-	TLSCertificateInsecure TLSCertificateFlags = C.G_TLS_CERTIFICATE_INSECURE
+	TLSCertificateInsecure TLSCertificateFlags = 32
 	// TLSCertificateGenericError wraps G_TLS_CERTIFICATE_GENERIC_ERROR
 	//
 	// Some other error occurred validating
 	//   the certificate
-	TLSCertificateGenericError TLSCertificateFlags = C.G_TLS_CERTIFICATE_GENERIC_ERROR
+	TLSCertificateGenericError TLSCertificateFlags = 64
 	// TLSCertificateValidateAll wraps G_TLS_CERTIFICATE_VALIDATE_ALL
 	//
 	// the combination of all of the above
 	//   flags
-	TLSCertificateValidateAll TLSCertificateFlags = C.G_TLS_CERTIFICATE_VALIDATE_ALL
+	TLSCertificateValidateAll TLSCertificateFlags = 127
 )
 
 func marshalTLSCertificateFlags(p unsafe.Pointer) (any, error) {
@@ -4122,7 +4122,7 @@ const (
 	// TLSDatabaseVerifyNone wraps G_TLS_DATABASE_VERIFY_NONE
 	//
 	// No verification flags
-	TLSDatabaseVerifyNone TLSDatabaseVerifyFlags = C.G_TLS_DATABASE_VERIFY_NONE
+	TLSDatabaseVerifyNone TLSDatabaseVerifyFlags = 0
 )
 
 func marshalTLSDatabaseVerifyFlags(p unsafe.Pointer) (any, error) {
@@ -4149,36 +4149,36 @@ const (
 	// TLSPasswordNone wraps G_TLS_PASSWORD_NONE
 	//
 	// No flags
-	TLSPasswordNone TLSPasswordFlags = C.G_TLS_PASSWORD_NONE
+	TLSPasswordNone TLSPasswordFlags = 0
 	// TLSPasswordRetry wraps G_TLS_PASSWORD_RETRY
 	//
 	// The password was wrong, and the user should retry.
-	TLSPasswordRetry TLSPasswordFlags = C.G_TLS_PASSWORD_RETRY
+	TLSPasswordRetry TLSPasswordFlags = 2
 	// TLSPasswordManyTries wraps G_TLS_PASSWORD_MANY_TRIES
 	//
 	// Hint to the user that the password has been
 	//    wrong many times, and the user may not have many chances left.
-	TLSPasswordManyTries TLSPasswordFlags = C.G_TLS_PASSWORD_MANY_TRIES
+	TLSPasswordManyTries TLSPasswordFlags = 4
 	// TLSPasswordFinalTry wraps G_TLS_PASSWORD_FINAL_TRY
 	//
 	// Hint to the user that this is the last try to get
 	//    this password right.
-	TLSPasswordFinalTry TLSPasswordFlags = C.G_TLS_PASSWORD_FINAL_TRY
+	TLSPasswordFinalTry TLSPasswordFlags = 8
 	// TLSPasswordPKCS11User wraps G_TLS_PASSWORD_PKCS11_USER
 	//
 	// For PKCS #11, the user PIN is required.
 	//    Since: 2.70.
-	TLSPasswordPKCS11User TLSPasswordFlags = C.G_TLS_PASSWORD_PKCS11_USER
+	TLSPasswordPKCS11User TLSPasswordFlags = 16
 	// TLSPasswordPKCS11SecurityOfficer wraps G_TLS_PASSWORD_PKCS11_SECURITY_OFFICER
 	//
 	// For PKCS #11, the security officer
 	//    PIN is required. Since: 2.70.
-	TLSPasswordPKCS11SecurityOfficer TLSPasswordFlags = C.G_TLS_PASSWORD_PKCS11_SECURITY_OFFICER
+	TLSPasswordPKCS11SecurityOfficer TLSPasswordFlags = 32
 	// TLSPasswordPKCS11ContextSpecific wraps G_TLS_PASSWORD_PKCS11_CONTEXT_SPECIFIC
 	//
 	// For PKCS #11, the context-specific
 	//    PIN is required. Since: 2.70.
-	TLSPasswordPKCS11ContextSpecific TLSPasswordFlags = C.G_TLS_PASSWORD_PKCS11_CONTEXT_SPECIFIC
+	TLSPasswordPKCS11ContextSpecific TLSPasswordFlags = 64
 )
 
 func marshalTLSPasswordFlags(p unsafe.Pointer) (any, error) {
@@ -10505,7 +10505,7 @@ type DatagramBased interface {
 	// The function takes the following parameters:
 	// 
 	// 	- cancellable context.Context (nullable): a #GCancellable 
-	// 	- condition glib.IOCondition: a #GIOCondition mask to wait for 
+	// 	- condition gobject.IOCondition: a #GIOCondition mask to wait for 
 	// 	- timeout int64: the maximum time (in microseconds) to wait, 0 to not block, or -1
 	//   to block indefinitely 
 	// 
@@ -10520,7 +10520,7 @@ type DatagramBased interface {
 	// If @cancellable is cancelled before the condition is met, or if @timeout is
 	// reached before the condition is met, then %FALSE is returned and @error is
 	// set appropriately (%G_IO_ERROR_CANCELLED or %G_IO_ERROR_TIMED_OUT).
-	ConditionWait(context.Context, glib.IOCondition, int64) (bool, error)
+	ConditionWait(context.Context, gobject.IOCondition, int64) (bool, error)
 	// CreateSource wraps g_datagram_based_create_source
 	// 
 	// The function takes the following parameters:
@@ -10780,7 +10780,7 @@ func (datagramBased *DatagramBasedInstance) ConditionCheck(condition glib.IOCond
 // The function takes the following parameters:
 // 
 // 	- cancellable context.Context (nullable): a #GCancellable 
-// 	- condition glib.IOCondition: a #GIOCondition mask to wait for 
+// 	- condition gobject.IOCondition: a #GIOCondition mask to wait for 
 // 	- timeout int64: the maximum time (in microseconds) to wait, 0 to not block, or -1
 //   to block indefinitely 
 // 
@@ -10795,7 +10795,7 @@ func (datagramBased *DatagramBasedInstance) ConditionCheck(condition glib.IOCond
 // If @cancellable is cancelled before the condition is met, or if @timeout is
 // reached before the condition is met, then %FALSE is returned and @error is
 // set appropriately (%G_IO_ERROR_CANCELLED or %G_IO_ERROR_TIMED_OUT).
-func (datagramBased *DatagramBasedInstance) ConditionWait(cancellable context.Context, condition glib.IOCondition, timeout int64) (bool, error) {
+func (datagramBased *DatagramBasedInstance) ConditionWait(cancellable context.Context, condition gobject.IOCondition, timeout int64) (bool, error) {
 	var carg0 *C.GDatagramBased // in, none, converted
 	var carg3 *C.GCancellable   // in, none, converted, nullable
 	var carg1 C.GIOCondition    // in, none, casted

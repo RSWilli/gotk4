@@ -128,19 +128,19 @@ const (
 	//
 	// The default binding; if the source property
 	//   changes, the target property is updated with its value.
-	BindingDefault BindingFlags = C.G_BINDING_DEFAULT
+	BindingDefault BindingFlags = 0
 	// BindingBidirectional wraps G_BINDING_BIDIRECTIONAL
 	//
 	// Bidirectional binding; if either the
 	//   property of the source or the property of the target changes,
 	//   the other is updated.
-	BindingBidirectional BindingFlags = C.G_BINDING_BIDIRECTIONAL
+	BindingBidirectional BindingFlags = 1
 	// BindingSyncCreate wraps G_BINDING_SYNC_CREATE
 	//
 	// Synchronize the values of the source and
 	//   target properties when creating the binding; the direction of
 	//   the synchronization is always from the source to the target.
-	BindingSyncCreate BindingFlags = C.G_BINDING_SYNC_CREATE
+	BindingSyncCreate BindingFlags = 2
 	// BindingInvertBoolean wraps G_BINDING_INVERT_BOOLEAN
 	//
 	// If the two properties being bound are
@@ -148,7 +148,7 @@ const (
 	//   set to %FALSE and vice versa. This flag will only work for
 	//   boolean properties, and cannot be used when passing custom
 	//   transformation functions to g_object_bind_property_full().
-	BindingInvertBoolean BindingFlags = C.G_BINDING_INVERT_BOOLEAN
+	BindingInvertBoolean BindingFlags = 4
 )
 
 func marshalBindingFlags(p unsafe.Pointer) (any, error) {
@@ -176,18 +176,18 @@ const (
 	// ConnectDefault wraps G_CONNECT_DEFAULT
 	//
 	// Default behaviour (no special flags). Since: 2.74
-	ConnectDefault ConnectFlags = C.G_CONNECT_DEFAULT
+	ConnectDefault ConnectFlags = 0
 	// ConnectAfter wraps G_CONNECT_AFTER
 	//
 	// If set, the handler should be called after the
 	//  default handler of the signal. Normally, the handler is called before
 	//  the default handler.
-	ConnectAfter ConnectFlags = C.G_CONNECT_AFTER
+	ConnectAfter ConnectFlags = 1
 	// ConnectSwapped wraps G_CONNECT_SWAPPED
 	//
 	// If set, the instance and data should be swapped when
 	//  calling the handler; see g_signal_connect_swapped() for an example.
-	ConnectSwapped ConnectFlags = C.G_CONNECT_SWAPPED
+	ConnectSwapped ConnectFlags = 2
 )
 
 // Has returns true if c contains other
@@ -200,17 +200,17 @@ type IOCondition C.gint
 
 const (
 	// IOIn wraps G_IO_IN
-	IOIn IOCondition = C.G_IO_IN
+	IOIn IOCondition = 1
 	// IOOut wraps G_IO_OUT
-	IOOut IOCondition = C.G_IO_OUT
+	IOOut IOCondition = 4
 	// IOPri wraps G_IO_PRI
-	IOPri IOCondition = C.G_IO_PRI
+	IOPri IOCondition = 2
 	// IOErr wraps G_IO_ERR
-	IOErr IOCondition = C.G_IO_ERR
+	IOErr IOCondition = 8
 	// IOHup wraps G_IO_HUP
-	IOHup IOCondition = C.G_IO_HUP
+	IOHup IOCondition = 16
 	// IONval wraps G_IO_NVAL
-	IONval IOCondition = C.G_IO_NVAL
+	IONval IOCondition = 32
 )
 
 func marshalIOCondition(p unsafe.Pointer) (any, error) {
@@ -240,67 +240,67 @@ const (
 	// ParamReadable wraps G_PARAM_READABLE
 	//
 	// the parameter is readable
-	ParamReadable ParamFlags = C.G_PARAM_READABLE
+	ParamReadable ParamFlags = 1
 	// ParamWritable wraps G_PARAM_WRITABLE
 	//
 	// the parameter is writable
-	ParamWritable ParamFlags = C.G_PARAM_WRITABLE
+	ParamWritable ParamFlags = 2
 	// ParamReadwrite wraps G_PARAM_READWRITE
 	//
 	// alias for %G_PARAM_READABLE | %G_PARAM_WRITABLE
-	ParamReadwrite ParamFlags = C.G_PARAM_READWRITE
+	ParamReadwrite ParamFlags = 3
 	// ParamConstruct wraps G_PARAM_CONSTRUCT
 	//
 	// the parameter will be set upon object construction
-	ParamConstruct ParamFlags = C.G_PARAM_CONSTRUCT
+	ParamConstruct ParamFlags = 4
 	// ParamConstructOnly wraps G_PARAM_CONSTRUCT_ONLY
 	//
 	// the parameter can only be set upon object construction
-	ParamConstructOnly ParamFlags = C.G_PARAM_CONSTRUCT_ONLY
+	ParamConstructOnly ParamFlags = 8
 	// ParamLaxValidation wraps G_PARAM_LAX_VALIDATION
 	//
 	// upon parameter conversion (see g_param_value_convert())
 	//  strict validation is not required
-	ParamLaxValidation ParamFlags = C.G_PARAM_LAX_VALIDATION
+	ParamLaxValidation ParamFlags = 16
 	// ParamStaticName wraps G_PARAM_STATIC_NAME
 	//
 	// the string used as name when constructing the
 	//  parameter is guaranteed to remain valid and
 	//  unmodified for the lifetime of the parameter.
 	//  Since 2.8
-	ParamStaticName ParamFlags = C.G_PARAM_STATIC_NAME
+	ParamStaticName ParamFlags = 32
 	// ParamPrivate wraps G_PARAM_PRIVATE
 	//
 	// internal
-	ParamPrivate ParamFlags = C.G_PARAM_PRIVATE
+	ParamPrivate ParamFlags = 32
 	// ParamStaticNick wraps G_PARAM_STATIC_NICK
 	//
 	// the string used as nick when constructing the
 	//  parameter is guaranteed to remain valid and
 	//  unmmodified for the lifetime of the parameter.
 	//  Since 2.8
-	ParamStaticNick ParamFlags = C.G_PARAM_STATIC_NICK
+	ParamStaticNick ParamFlags = 64
 	// ParamStaticBlurb wraps G_PARAM_STATIC_BLURB
 	//
 	// the string used as blurb when constructing the
 	//  parameter is guaranteed to remain valid and
 	//  unmodified for the lifetime of the parameter.
 	//  Since 2.8
-	ParamStaticBlurb ParamFlags = C.G_PARAM_STATIC_BLURB
+	ParamStaticBlurb ParamFlags = 128
 	// ParamExplicitNotify wraps G_PARAM_EXPLICIT_NOTIFY
 	//
 	// calls to g_object_set_property() for this
 	//   property will not automatically result in a "notify" signal being
 	//   emitted: the implementation must call g_object_notify() themselves
 	//   in case the property actually changes.  Since: 2.42.
-	ParamExplicitNotify ParamFlags = C.G_PARAM_EXPLICIT_NOTIFY
+	ParamExplicitNotify ParamFlags = 1073741824
 	// ParamDeprecated wraps G_PARAM_DEPRECATED
 	//
 	// the parameter is deprecated and will be removed
 	//  in a future version. A warning will be generated if it is used
 	//  while running with G_ENABLE_DIAGNOSTIC=1.
 	//  Since 2.26
-	ParamDeprecated ParamFlags = C.G_PARAM_DEPRECATED
+	ParamDeprecated ParamFlags = 2147483648
 )
 
 // Has returns true if p contains other
@@ -317,26 +317,26 @@ const (
 	// SignalRunFirst wraps G_SIGNAL_RUN_FIRST
 	//
 	// Invoke the object method handler in the first emission stage.
-	SignalRunFirst SignalFlags = C.G_SIGNAL_RUN_FIRST
+	SignalRunFirst SignalFlags = 1
 	// SignalRunLast wraps G_SIGNAL_RUN_LAST
 	//
 	// Invoke the object method handler in the third emission stage.
-	SignalRunLast SignalFlags = C.G_SIGNAL_RUN_LAST
+	SignalRunLast SignalFlags = 2
 	// SignalRunCleanup wraps G_SIGNAL_RUN_CLEANUP
 	//
 	// Invoke the object method handler in the last emission stage.
-	SignalRunCleanup SignalFlags = C.G_SIGNAL_RUN_CLEANUP
+	SignalRunCleanup SignalFlags = 4
 	// SignalNoRecurse wraps G_SIGNAL_NO_RECURSE
 	//
 	// Signals being emitted for an object while currently being in
 	//  emission for this very object will not be emitted recursively,
 	//  but instead cause the first emission to be restarted.
-	SignalNoRecurse SignalFlags = C.G_SIGNAL_NO_RECURSE
+	SignalNoRecurse SignalFlags = 8
 	// SignalDetailed wraps G_SIGNAL_DETAILED
 	//
 	// This signal supports "::detail" appendices to the signal name
 	//  upon handler connections and emissions.
-	SignalDetailed SignalFlags = C.G_SIGNAL_DETAILED
+	SignalDetailed SignalFlags = 16
 	// SignalAction wraps G_SIGNAL_ACTION
 	//
 	// Action signals are signals that may freely be emitted on alive
@@ -345,28 +345,28 @@ const (
 	//  post emission adjustments on the object. They can also be thought
 	//  of as object methods which can be called generically by
 	//  third-party code.
-	SignalAction SignalFlags = C.G_SIGNAL_ACTION
+	SignalAction SignalFlags = 32
 	// SignalNoHooks wraps G_SIGNAL_NO_HOOKS
 	//
 	// No emissions hooks are supported for this signal.
-	SignalNoHooks SignalFlags = C.G_SIGNAL_NO_HOOKS
+	SignalNoHooks SignalFlags = 64
 	// SignalMustCollect wraps G_SIGNAL_MUST_COLLECT
 	//
 	// Varargs signal emission will always collect the
 	//   arguments, even if there are no signal handlers connected.  Since 2.30.
-	SignalMustCollect SignalFlags = C.G_SIGNAL_MUST_COLLECT
+	SignalMustCollect SignalFlags = 128
 	// SignalDeprecated wraps G_SIGNAL_DEPRECATED
 	//
 	// The signal is deprecated and will be removed
 	//   in a future version. A warning will be generated if it is connected while
 	//   running with G_ENABLE_DIAGNOSTIC=1.  Since 2.32.
-	SignalDeprecated SignalFlags = C.G_SIGNAL_DEPRECATED
+	SignalDeprecated SignalFlags = 256
 	// SignalAccumulatorFirstRun wraps G_SIGNAL_ACCUMULATOR_FIRST_RUN
 	//
 	// Only used in #GSignalAccumulator accumulator
 	//   functions for the #GSignalInvocationHint::run_type field to mark the first
 	//   call to the accumulator function for a signal emission.  Since 2.68.
-	SignalAccumulatorFirstRun SignalFlags = C.G_SIGNAL_ACCUMULATOR_FIRST_RUN
+	SignalAccumulatorFirstRun SignalFlags = 131072
 )
 
 // Has returns true if s contains other
@@ -385,27 +385,27 @@ const (
 	// SignalMatchID wraps G_SIGNAL_MATCH_ID
 	//
 	// The signal id must be equal.
-	SignalMatchID SignalMatchType = C.G_SIGNAL_MATCH_ID
+	SignalMatchID SignalMatchType = 1
 	// SignalMatchDetail wraps G_SIGNAL_MATCH_DETAIL
 	//
 	// The signal detail must be equal.
-	SignalMatchDetail SignalMatchType = C.G_SIGNAL_MATCH_DETAIL
+	SignalMatchDetail SignalMatchType = 2
 	// SignalMatchClosure wraps G_SIGNAL_MATCH_CLOSURE
 	//
 	// The closure must be the same.
-	SignalMatchClosure SignalMatchType = C.G_SIGNAL_MATCH_CLOSURE
+	SignalMatchClosure SignalMatchType = 4
 	// SignalMatchFunc wraps G_SIGNAL_MATCH_FUNC
 	//
 	// The C closure callback must be the same.
-	SignalMatchFunc SignalMatchType = C.G_SIGNAL_MATCH_FUNC
+	SignalMatchFunc SignalMatchType = 8
 	// SignalMatchData wraps G_SIGNAL_MATCH_DATA
 	//
 	// The closure data must be the same.
-	SignalMatchData SignalMatchType = C.G_SIGNAL_MATCH_DATA
+	SignalMatchData SignalMatchType = 16
 	// SignalMatchUnblocked wraps G_SIGNAL_MATCH_UNBLOCKED
 	//
 	// Only unblocked signals may be matched.
-	SignalMatchUnblocked SignalMatchType = C.G_SIGNAL_MATCH_UNBLOCKED
+	SignalMatchUnblocked SignalMatchType = 32
 )
 
 // Has returns true if s contains other
@@ -422,29 +422,29 @@ const (
 	// TypeFlagNone wraps G_TYPE_FLAG_NONE
 	//
 	// No special flags. Since: 2.74
-	TypeFlagNone TypeFlags = C.G_TYPE_FLAG_NONE
+	TypeFlagNone TypeFlags = 0
 	// TypeFlagAbstract wraps G_TYPE_FLAG_ABSTRACT
 	//
 	// Indicates an abstract type. No instances can be
 	//  created for an abstract type
-	TypeFlagAbstract TypeFlags = C.G_TYPE_FLAG_ABSTRACT
+	TypeFlagAbstract TypeFlags = 16
 	// TypeFlagValueAbstract wraps G_TYPE_FLAG_VALUE_ABSTRACT
 	//
 	// Indicates an abstract value type, i.e. a type
 	//  that introduces a value table, but can't be used for
 	//  g_value_init()
-	TypeFlagValueAbstract TypeFlags = C.G_TYPE_FLAG_VALUE_ABSTRACT
+	TypeFlagValueAbstract TypeFlags = 32
 	// TypeFlagFinal wraps G_TYPE_FLAG_FINAL
 	//
 	// Indicates a final type. A final type is a non-derivable
 	//  leaf node in a deep derivable type hierarchy tree. Since: 2.70
-	TypeFlagFinal TypeFlags = C.G_TYPE_FLAG_FINAL
+	TypeFlagFinal TypeFlags = 64
 	// TypeFlagDeprecated wraps G_TYPE_FLAG_DEPRECATED
 	//
 	// The type is deprecated and may be removed in a
 	//  future version. A warning will be emitted if it is instantiated while
 	//  running with `G_ENABLE_DIAGNOSTIC=1`. Since 2.76
-	TypeFlagDeprecated TypeFlags = C.G_TYPE_FLAG_DEPRECATED
+	TypeFlagDeprecated TypeFlags = 128
 )
 
 // Has returns true if t contains other
@@ -462,19 +462,19 @@ const (
 	// TypeFlagClassed wraps G_TYPE_FLAG_CLASSED
 	//
 	// Indicates a classed type
-	TypeFlagClassed TypeFundamentalFlags = C.G_TYPE_FLAG_CLASSED
+	TypeFlagClassed TypeFundamentalFlags = 1
 	// TypeFlagInstantiatable wraps G_TYPE_FLAG_INSTANTIATABLE
 	//
 	// Indicates an instantiatable type (implies classed)
-	TypeFlagInstantiatable TypeFundamentalFlags = C.G_TYPE_FLAG_INSTANTIATABLE
+	TypeFlagInstantiatable TypeFundamentalFlags = 2
 	// TypeFlagDerivable wraps G_TYPE_FLAG_DERIVABLE
 	//
 	// Indicates a flat derivable type
-	TypeFlagDerivable TypeFundamentalFlags = C.G_TYPE_FLAG_DERIVABLE
+	TypeFlagDerivable TypeFundamentalFlags = 4
 	// TypeFlagDeepDerivable wraps G_TYPE_FLAG_DEEP_DERIVABLE
 	//
 	// Indicates a deep derivable type (implies derivable)
-	TypeFlagDeepDerivable TypeFundamentalFlags = C.G_TYPE_FLAG_DEEP_DERIVABLE
+	TypeFlagDeepDerivable TypeFundamentalFlags = 8
 )
 
 // Has returns true if t contains other

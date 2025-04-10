@@ -4815,55 +4815,55 @@ const (
 	// AxisIgnore wraps GDK_AXIS_IGNORE
 	//
 	// the axis is ignored.
-	AxisIgnore AxisUse = C.GDK_AXIS_IGNORE
+	AxisIgnore AxisUse = 0
 	// AxisX wraps GDK_AXIS_X
 	//
 	// the axis is used as the x axis.
-	AxisX AxisUse = C.GDK_AXIS_X
+	AxisX AxisUse = 1
 	// AxisY wraps GDK_AXIS_Y
 	//
 	// the axis is used as the y axis.
-	AxisY AxisUse = C.GDK_AXIS_Y
+	AxisY AxisUse = 2
 	// AxisDeltaX wraps GDK_AXIS_DELTA_X
 	//
 	// the axis is used as the scroll x delta
-	AxisDeltaX AxisUse = C.GDK_AXIS_DELTA_X
+	AxisDeltaX AxisUse = 3
 	// AxisDeltaY wraps GDK_AXIS_DELTA_Y
 	//
 	// the axis is used as the scroll y delta
-	AxisDeltaY AxisUse = C.GDK_AXIS_DELTA_Y
+	AxisDeltaY AxisUse = 4
 	// AxisPressure wraps GDK_AXIS_PRESSURE
 	//
 	// the axis is used for pressure information.
-	AxisPressure AxisUse = C.GDK_AXIS_PRESSURE
+	AxisPressure AxisUse = 5
 	// AxisXtilt wraps GDK_AXIS_XTILT
 	//
 	// the axis is used for x tilt information.
-	AxisXtilt AxisUse = C.GDK_AXIS_XTILT
+	AxisXtilt AxisUse = 6
 	// AxisYtilt wraps GDK_AXIS_YTILT
 	//
 	// the axis is used for y tilt information.
-	AxisYtilt AxisUse = C.GDK_AXIS_YTILT
+	AxisYtilt AxisUse = 7
 	// AxisWheel wraps GDK_AXIS_WHEEL
 	//
 	// the axis is used for wheel information.
-	AxisWheel AxisUse = C.GDK_AXIS_WHEEL
+	AxisWheel AxisUse = 8
 	// AxisDistance wraps GDK_AXIS_DISTANCE
 	//
 	// the axis is used for pen/tablet distance information
-	AxisDistance AxisUse = C.GDK_AXIS_DISTANCE
+	AxisDistance AxisUse = 9
 	// AxisRotation wraps GDK_AXIS_ROTATION
 	//
 	// the axis is used for pen rotation information
-	AxisRotation AxisUse = C.GDK_AXIS_ROTATION
+	AxisRotation AxisUse = 10
 	// AxisSlider wraps GDK_AXIS_SLIDER
 	//
 	// the axis is used for pen slider information
-	AxisSlider AxisUse = C.GDK_AXIS_SLIDER
+	AxisSlider AxisUse = 11
 	// AxisLast wraps GDK_AXIS_LAST
 	//
 	// a constant equal to the numerically highest axis value.
-	AxisLast AxisUse = C.GDK_AXIS_LAST
+	AxisLast AxisUse = 12
 )
 
 func marshalAxisUse(p unsafe.Pointer) (any, error) {
@@ -4891,11 +4891,11 @@ const (
 	// CicpRangeNarrow wraps GDK_CICP_RANGE_NARROW
 	//
 	// The values use the range of 16-235 (for Y) and 16-240 for u and v.
-	CicpRangeNarrow CicpRange = C.GDK_CICP_RANGE_NARROW
+	CicpRangeNarrow CicpRange = 0
 	// CicpRangeFull wraps GDK_CICP_RANGE_FULL
 	//
 	// The values use the full range.
-	CicpRangeFull CicpRange = C.GDK_CICP_RANGE_FULL
+	CicpRangeFull CicpRange = 1
 )
 
 func marshalCicpRange(p unsafe.Pointer) (any, error) {
@@ -4918,44 +4918,44 @@ const (
 	// CrossingNormal wraps GDK_CROSSING_NORMAL
 	//
 	// crossing because of pointer motion.
-	CrossingNormal CrossingMode = C.GDK_CROSSING_NORMAL
+	CrossingNormal CrossingMode = 0
 	// CrossingGrab wraps GDK_CROSSING_GRAB
 	//
 	// crossing because a grab is activated.
-	CrossingGrab CrossingMode = C.GDK_CROSSING_GRAB
+	CrossingGrab CrossingMode = 1
 	// CrossingUngrab wraps GDK_CROSSING_UNGRAB
 	//
 	// crossing because a grab is deactivated.
-	CrossingUngrab CrossingMode = C.GDK_CROSSING_UNGRAB
+	CrossingUngrab CrossingMode = 2
 	// CrossingGTKGrab wraps GDK_CROSSING_GTK_GRAB
 	//
 	// crossing because a GTK grab is activated.
-	CrossingGTKGrab CrossingMode = C.GDK_CROSSING_GTK_GRAB
+	CrossingGTKGrab CrossingMode = 3
 	// CrossingGTKUngrab wraps GDK_CROSSING_GTK_UNGRAB
 	//
 	// crossing because a GTK grab is deactivated.
-	CrossingGTKUngrab CrossingMode = C.GDK_CROSSING_GTK_UNGRAB
+	CrossingGTKUngrab CrossingMode = 4
 	// CrossingStateChanged wraps GDK_CROSSING_STATE_CHANGED
 	//
 	// crossing because a GTK widget changed
 	//   state (e.g. sensitivity).
-	CrossingStateChanged CrossingMode = C.GDK_CROSSING_STATE_CHANGED
+	CrossingStateChanged CrossingMode = 5
 	// CrossingTouchBegin wraps GDK_CROSSING_TOUCH_BEGIN
 	//
 	// crossing because a touch sequence has begun,
 	//   this event is synthetic as the pointer might have not left the surface.
-	CrossingTouchBegin CrossingMode = C.GDK_CROSSING_TOUCH_BEGIN
+	CrossingTouchBegin CrossingMode = 6
 	// CrossingTouchEnd wraps GDK_CROSSING_TOUCH_END
 	//
 	// crossing because a touch sequence has ended,
 	//   this event is synthetic as the pointer might have not left the surface.
-	CrossingTouchEnd CrossingMode = C.GDK_CROSSING_TOUCH_END
+	CrossingTouchEnd CrossingMode = 7
 	// CrossingDeviceSwitch wraps GDK_CROSSING_DEVICE_SWITCH
 	//
 	// crossing because of a device switch (i.e.
 	//   a mouse taking control of the pointer after a touch device), this event
 	//   is synthetic as the pointer didn’t leave the surface.
-	CrossingDeviceSwitch CrossingMode = C.GDK_CROSSING_DEVICE_SWITCH
+	CrossingDeviceSwitch CrossingMode = 8
 )
 
 func marshalCrossingMode(p unsafe.Pointer) (any, error) {
@@ -4978,15 +4978,15 @@ const (
 	// DevicePadFeatureButton wraps GDK_DEVICE_PAD_FEATURE_BUTTON
 	//
 	// a button
-	DevicePadFeatureButton DevicePadFeature = C.GDK_DEVICE_PAD_FEATURE_BUTTON
+	DevicePadFeatureButton DevicePadFeature = 0
 	// DevicePadFeatureRing wraps GDK_DEVICE_PAD_FEATURE_RING
 	//
 	// a ring-shaped interactive area
-	DevicePadFeatureRing DevicePadFeature = C.GDK_DEVICE_PAD_FEATURE_RING
+	DevicePadFeatureRing DevicePadFeature = 1
 	// DevicePadFeatureStrip wraps GDK_DEVICE_PAD_FEATURE_STRIP
 	//
 	// a straight interactive area
-	DevicePadFeatureStrip DevicePadFeature = C.GDK_DEVICE_PAD_FEATURE_STRIP
+	DevicePadFeatureStrip DevicePadFeature = 2
 )
 
 func marshalDevicePadFeature(p unsafe.Pointer) (any, error) {
@@ -5010,35 +5010,35 @@ const (
 	// DeviceToolTypeUnknown wraps GDK_DEVICE_TOOL_TYPE_UNKNOWN
 	//
 	// Tool is of an unknown type.
-	DeviceToolTypeUnknown DeviceToolType = C.GDK_DEVICE_TOOL_TYPE_UNKNOWN
+	DeviceToolTypeUnknown DeviceToolType = 0
 	// DeviceToolTypePen wraps GDK_DEVICE_TOOL_TYPE_PEN
 	//
 	// Tool is a standard tablet stylus.
-	DeviceToolTypePen DeviceToolType = C.GDK_DEVICE_TOOL_TYPE_PEN
+	DeviceToolTypePen DeviceToolType = 1
 	// DeviceToolTypeEraser wraps GDK_DEVICE_TOOL_TYPE_ERASER
 	//
 	// Tool is standard tablet eraser.
-	DeviceToolTypeEraser DeviceToolType = C.GDK_DEVICE_TOOL_TYPE_ERASER
+	DeviceToolTypeEraser DeviceToolType = 2
 	// DeviceToolTypeBrush wraps GDK_DEVICE_TOOL_TYPE_BRUSH
 	//
 	// Tool is a brush stylus.
-	DeviceToolTypeBrush DeviceToolType = C.GDK_DEVICE_TOOL_TYPE_BRUSH
+	DeviceToolTypeBrush DeviceToolType = 3
 	// DeviceToolTypePencil wraps GDK_DEVICE_TOOL_TYPE_PENCIL
 	//
 	// Tool is a pencil stylus.
-	DeviceToolTypePencil DeviceToolType = C.GDK_DEVICE_TOOL_TYPE_PENCIL
+	DeviceToolTypePencil DeviceToolType = 4
 	// DeviceToolTypeAirbrush wraps GDK_DEVICE_TOOL_TYPE_AIRBRUSH
 	//
 	// Tool is an airbrush stylus.
-	DeviceToolTypeAirbrush DeviceToolType = C.GDK_DEVICE_TOOL_TYPE_AIRBRUSH
+	DeviceToolTypeAirbrush DeviceToolType = 5
 	// DeviceToolTypeMouse wraps GDK_DEVICE_TOOL_TYPE_MOUSE
 	//
 	// Tool is a mouse.
-	DeviceToolTypeMouse DeviceToolType = C.GDK_DEVICE_TOOL_TYPE_MOUSE
+	DeviceToolTypeMouse DeviceToolType = 6
 	// DeviceToolTypeLens wraps GDK_DEVICE_TOOL_TYPE_LENS
 	//
 	// Tool is a lens cursor.
-	DeviceToolTypeLens DeviceToolType = C.GDK_DEVICE_TOOL_TYPE_LENS
+	DeviceToolTypeLens DeviceToolType = 7
 )
 
 func marshalDeviceToolType(p unsafe.Pointer) (any, error) {
@@ -5062,16 +5062,16 @@ const (
 	//
 	// Dmabuf support is not available, because the OS
 	//   is not Linux, or it was explicitly disabled at compile- or runtime
-	DmabufErrorNotAvailable DmabufError = C.GDK_DMABUF_ERROR_NOT_AVAILABLE
+	DmabufErrorNotAvailable DmabufError = 0
 	// DmabufErrorUnsupportedFormat wraps GDK_DMABUF_ERROR_UNSUPPORTED_FORMAT
 	//
 	// The requested format is not supported
-	DmabufErrorUnsupportedFormat DmabufError = C.GDK_DMABUF_ERROR_UNSUPPORTED_FORMAT
+	DmabufErrorUnsupportedFormat DmabufError = 1
 	// DmabufErrorCreationFailed wraps GDK_DMABUF_ERROR_CREATION_FAILED
 	//
 	// GTK failed to create the resource for other
 	//   reasons
-	DmabufErrorCreationFailed DmabufError = C.GDK_DMABUF_ERROR_CREATION_FAILED
+	DmabufErrorCreationFailed DmabufError = 2
 )
 
 func marshalDmabufError(p unsafe.Pointer) (any, error) {
@@ -5094,15 +5094,15 @@ const (
 	// DragCancelNoTarget wraps GDK_DRAG_CANCEL_NO_TARGET
 	//
 	// There is no suitable drop target.
-	DragCancelNoTarget DragCancelReason = C.GDK_DRAG_CANCEL_NO_TARGET
+	DragCancelNoTarget DragCancelReason = 0
 	// DragCancelUserCancelled wraps GDK_DRAG_CANCEL_USER_CANCELLED
 	//
 	// Drag cancelled by the user
-	DragCancelUserCancelled DragCancelReason = C.GDK_DRAG_CANCEL_USER_CANCELLED
+	DragCancelUserCancelled DragCancelReason = 1
 	// DragCancelError wraps GDK_DRAG_CANCEL_ERROR
 	//
 	// Unspecified error.
-	DragCancelError DragCancelReason = C.GDK_DRAG_CANCEL_ERROR
+	DragCancelError DragCancelReason = 2
 )
 
 func marshalDragCancelReason(p unsafe.Pointer) (any, error) {
@@ -5127,129 +5127,129 @@ const (
 	// the window manager has requested that the toplevel surface be
 	//   hidden or destroyed, usually when the user clicks on a special icon in the
 	//   title bar.
-	Delete EventType = C.GDK_DELETE
+	Delete EventType = 0
 	// MotionNotify wraps GDK_MOTION_NOTIFY
 	//
 	// the pointer (usually a mouse) has moved.
-	MotionNotify EventType = C.GDK_MOTION_NOTIFY
+	MotionNotify EventType = 1
 	// ButtonPress wraps GDK_BUTTON_PRESS
 	//
 	// a mouse button has been pressed.
-	ButtonPress EventType = C.GDK_BUTTON_PRESS
+	ButtonPress EventType = 2
 	// ButtonRelease wraps GDK_BUTTON_RELEASE
 	//
 	// a mouse button has been released.
-	ButtonRelease EventType = C.GDK_BUTTON_RELEASE
+	ButtonRelease EventType = 3
 	// KeyPress wraps GDK_KEY_PRESS
 	//
 	// a key has been pressed.
-	KeyPress EventType = C.GDK_KEY_PRESS
+	KeyPress EventType = 4
 	// KeyRelease wraps GDK_KEY_RELEASE
 	//
 	// a key has been released.
-	KeyRelease EventType = C.GDK_KEY_RELEASE
+	KeyRelease EventType = 5
 	// EnterNotify wraps GDK_ENTER_NOTIFY
 	//
 	// the pointer has entered the surface.
-	EnterNotify EventType = C.GDK_ENTER_NOTIFY
+	EnterNotify EventType = 6
 	// LeaveNotify wraps GDK_LEAVE_NOTIFY
 	//
 	// the pointer has left the surface.
-	LeaveNotify EventType = C.GDK_LEAVE_NOTIFY
+	LeaveNotify EventType = 7
 	// FocusChange wraps GDK_FOCUS_CHANGE
 	//
 	// the keyboard focus has entered or left the surface.
-	FocusChange EventType = C.GDK_FOCUS_CHANGE
+	FocusChange EventType = 8
 	// ProximityIn wraps GDK_PROXIMITY_IN
 	//
 	// an input device has moved into contact with a sensing
 	//   surface (e.g. a touchscreen or graphics tablet).
-	ProximityIn EventType = C.GDK_PROXIMITY_IN
+	ProximityIn EventType = 9
 	// ProximityOut wraps GDK_PROXIMITY_OUT
 	//
 	// an input device has moved out of contact with a sensing
 	//   surface.
-	ProximityOut EventType = C.GDK_PROXIMITY_OUT
+	ProximityOut EventType = 10
 	// DragEnter wraps GDK_DRAG_ENTER
 	//
 	// the mouse has entered the surface while a drag is in progress.
-	DragEnter EventType = C.GDK_DRAG_ENTER
+	DragEnter EventType = 11
 	// DragLeave wraps GDK_DRAG_LEAVE
 	//
 	// the mouse has left the surface while a drag is in progress.
-	DragLeave EventType = C.GDK_DRAG_LEAVE
+	DragLeave EventType = 12
 	// DragMotion wraps GDK_DRAG_MOTION
 	//
 	// the mouse has moved in the surface while a drag is in
 	//   progress.
-	DragMotion EventType = C.GDK_DRAG_MOTION
+	DragMotion EventType = 13
 	// DropStart wraps GDK_DROP_START
 	//
 	// a drop operation onto the surface has started.
-	DropStart EventType = C.GDK_DROP_START
+	DropStart EventType = 14
 	// Scroll wraps GDK_SCROLL
 	//
 	// the scroll wheel was turned
-	Scroll EventType = C.GDK_SCROLL
+	Scroll EventType = 15
 	// GrabBroken wraps GDK_GRAB_BROKEN
 	//
 	// a pointer or keyboard grab was broken.
-	GrabBroken EventType = C.GDK_GRAB_BROKEN
+	GrabBroken EventType = 16
 	// TouchBegin wraps GDK_TOUCH_BEGIN
 	//
 	// A new touch event sequence has just started.
-	TouchBegin EventType = C.GDK_TOUCH_BEGIN
+	TouchBegin EventType = 17
 	// TouchUpdate wraps GDK_TOUCH_UPDATE
 	//
 	// A touch event sequence has been updated.
-	TouchUpdate EventType = C.GDK_TOUCH_UPDATE
+	TouchUpdate EventType = 18
 	// TouchEnd wraps GDK_TOUCH_END
 	//
 	// A touch event sequence has finished.
-	TouchEnd EventType = C.GDK_TOUCH_END
+	TouchEnd EventType = 19
 	// TouchCancel wraps GDK_TOUCH_CANCEL
 	//
 	// A touch event sequence has been canceled.
-	TouchCancel EventType = C.GDK_TOUCH_CANCEL
+	TouchCancel EventType = 20
 	// TouchpadSwipe wraps GDK_TOUCHPAD_SWIPE
 	//
 	// A touchpad swipe gesture event, the current state
 	//   is determined by its phase field.
-	TouchpadSwipe EventType = C.GDK_TOUCHPAD_SWIPE
+	TouchpadSwipe EventType = 21
 	// TouchpadPinch wraps GDK_TOUCHPAD_PINCH
 	//
 	// A touchpad pinch gesture event, the current state
 	//   is determined by its phase field.
-	TouchpadPinch EventType = C.GDK_TOUCHPAD_PINCH
+	TouchpadPinch EventType = 22
 	// PadButtonPress wraps GDK_PAD_BUTTON_PRESS
 	//
 	// A tablet pad button press event.
-	PadButtonPress EventType = C.GDK_PAD_BUTTON_PRESS
+	PadButtonPress EventType = 23
 	// PadButtonRelease wraps GDK_PAD_BUTTON_RELEASE
 	//
 	// A tablet pad button release event.
-	PadButtonRelease EventType = C.GDK_PAD_BUTTON_RELEASE
+	PadButtonRelease EventType = 24
 	// PadRing wraps GDK_PAD_RING
 	//
 	// A tablet pad axis event from a "ring".
-	PadRing EventType = C.GDK_PAD_RING
+	PadRing EventType = 25
 	// PadStrip wraps GDK_PAD_STRIP
 	//
 	// A tablet pad axis event from a "strip".
-	PadStrip EventType = C.GDK_PAD_STRIP
+	PadStrip EventType = 26
 	// PadGroupMode wraps GDK_PAD_GROUP_MODE
 	//
 	// A tablet pad group mode change.
-	PadGroupMode EventType = C.GDK_PAD_GROUP_MODE
+	PadGroupMode EventType = 27
 	// TouchpadHold wraps GDK_TOUCHPAD_HOLD
 	//
 	// A touchpad hold gesture event, the current state is determined by its phase
 	// field.
-	TouchpadHold EventType = C.GDK_TOUCHPAD_HOLD
+	TouchpadHold EventType = 28
 	// EventLast wraps GDK_EVENT_LAST
 	//
 	// marks the end of the GdkEventType enumeration.
-	EventLast EventType = C.GDK_EVENT_LAST
+	EventLast EventType = 29
 )
 
 func marshalEventType(p unsafe.Pointer) (any, error) {
@@ -5272,11 +5272,11 @@ const (
 	// FullscreenOnCurrentMonitor wraps GDK_FULLSCREEN_ON_CURRENT_MONITOR
 	//
 	// Fullscreen on current monitor only.
-	FullscreenOnCurrentMonitor FullscreenMode = C.GDK_FULLSCREEN_ON_CURRENT_MONITOR
+	FullscreenOnCurrentMonitor FullscreenMode = 0
 	// FullscreenOnAllMonitors wraps GDK_FULLSCREEN_ON_ALL_MONITORS
 	//
 	// Span across all monitors when fullscreen.
-	FullscreenOnAllMonitors FullscreenMode = C.GDK_FULLSCREEN_ON_ALL_MONITORS
+	FullscreenOnAllMonitors FullscreenMode = 1
 )
 
 func marshalFullscreenMode(p unsafe.Pointer) (any, error) {
@@ -5299,23 +5299,23 @@ const (
 	// GLErrorNotAvailable wraps GDK_GL_ERROR_NOT_AVAILABLE
 	//
 	// OpenGL support is not available
-	GLErrorNotAvailable GLError = C.GDK_GL_ERROR_NOT_AVAILABLE
+	GLErrorNotAvailable GLError = 0
 	// GLErrorUnsupportedFormat wraps GDK_GL_ERROR_UNSUPPORTED_FORMAT
 	//
 	// The requested visual format is not supported
-	GLErrorUnsupportedFormat GLError = C.GDK_GL_ERROR_UNSUPPORTED_FORMAT
+	GLErrorUnsupportedFormat GLError = 1
 	// GLErrorUnsupportedProfile wraps GDK_GL_ERROR_UNSUPPORTED_PROFILE
 	//
 	// The requested profile is not supported
-	GLErrorUnsupportedProfile GLError = C.GDK_GL_ERROR_UNSUPPORTED_PROFILE
+	GLErrorUnsupportedProfile GLError = 2
 	// GLErrorCompilationFailed wraps GDK_GL_ERROR_COMPILATION_FAILED
 	//
 	// The shader compilation failed
-	GLErrorCompilationFailed GLError = C.GDK_GL_ERROR_COMPILATION_FAILED
+	GLErrorCompilationFailed GLError = 3
 	// GLErrorLinkFailed wraps GDK_GL_ERROR_LINK_FAILED
 	//
 	// The shader linking failed
-	GLErrorLinkFailed GLError = C.GDK_GL_ERROR_LINK_FAILED
+	GLErrorLinkFailed GLError = 4
 )
 
 func marshalGLError(p unsafe.Pointer) (any, error) {
@@ -5338,44 +5338,44 @@ const (
 	// GravityNorthWest wraps GDK_GRAVITY_NORTH_WEST
 	//
 	// the reference point is at the top left corner.
-	GravityNorthWest Gravity = C.GDK_GRAVITY_NORTH_WEST
+	GravityNorthWest Gravity = 1
 	// GravityNorth wraps GDK_GRAVITY_NORTH
 	//
 	// the reference point is in the middle of the top edge.
-	GravityNorth Gravity = C.GDK_GRAVITY_NORTH
+	GravityNorth Gravity = 2
 	// GravityNorthEast wraps GDK_GRAVITY_NORTH_EAST
 	//
 	// the reference point is at the top right corner.
-	GravityNorthEast Gravity = C.GDK_GRAVITY_NORTH_EAST
+	GravityNorthEast Gravity = 3
 	// GravityWest wraps GDK_GRAVITY_WEST
 	//
 	// the reference point is at the middle of the left edge.
-	GravityWest Gravity = C.GDK_GRAVITY_WEST
+	GravityWest Gravity = 4
 	// GravityCenter wraps GDK_GRAVITY_CENTER
 	//
 	// the reference point is at the center of the surface.
-	GravityCenter Gravity = C.GDK_GRAVITY_CENTER
+	GravityCenter Gravity = 5
 	// GravityEast wraps GDK_GRAVITY_EAST
 	//
 	// the reference point is at the middle of the right edge.
-	GravityEast Gravity = C.GDK_GRAVITY_EAST
+	GravityEast Gravity = 6
 	// GravitySouthWest wraps GDK_GRAVITY_SOUTH_WEST
 	//
 	// the reference point is at the lower left corner.
-	GravitySouthWest Gravity = C.GDK_GRAVITY_SOUTH_WEST
+	GravitySouthWest Gravity = 7
 	// GravitySouth wraps GDK_GRAVITY_SOUTH
 	//
 	// the reference point is at the middle of the lower edge.
-	GravitySouth Gravity = C.GDK_GRAVITY_SOUTH
+	GravitySouth Gravity = 8
 	// GravitySouthEast wraps GDK_GRAVITY_SOUTH_EAST
 	//
 	// the reference point is at the lower right corner.
-	GravitySouthEast Gravity = C.GDK_GRAVITY_SOUTH_EAST
+	GravitySouthEast Gravity = 9
 	// GravityStatic wraps GDK_GRAVITY_STATIC
 	//
 	// the reference point is at the top left corner of the
 	//  surface itself, ignoring window manager decorations.
-	GravityStatic Gravity = C.GDK_GRAVITY_STATIC
+	GravityStatic Gravity = 10
 )
 
 func marshalGravity(p unsafe.Pointer) (any, error) {
@@ -5399,34 +5399,34 @@ const (
 	//
 	// the device is a mouse. (This will be reported for the core
 	//   pointer, even if it is something else, such as a trackball.)
-	SourceMouse InputSource = C.GDK_SOURCE_MOUSE
+	SourceMouse InputSource = 0
 	// SourcePen wraps GDK_SOURCE_PEN
 	//
 	// the device is a stylus of a graphics tablet or similar device.
-	SourcePen InputSource = C.GDK_SOURCE_PEN
+	SourcePen InputSource = 1
 	// SourceKeyboard wraps GDK_SOURCE_KEYBOARD
 	//
 	// the device is a keyboard.
-	SourceKeyboard InputSource = C.GDK_SOURCE_KEYBOARD
+	SourceKeyboard InputSource = 2
 	// SourceTouchscreen wraps GDK_SOURCE_TOUCHSCREEN
 	//
 	// the device is a direct-input touch device, such
 	//   as a touchscreen or tablet
-	SourceTouchscreen InputSource = C.GDK_SOURCE_TOUCHSCREEN
+	SourceTouchscreen InputSource = 3
 	// SourceTouchpad wraps GDK_SOURCE_TOUCHPAD
 	//
 	// the device is an indirect touch device, such
 	//   as a touchpad
-	SourceTouchpad InputSource = C.GDK_SOURCE_TOUCHPAD
+	SourceTouchpad InputSource = 4
 	// SourceTrackpoint wraps GDK_SOURCE_TRACKPOINT
 	//
 	// the device is a trackpoint
-	SourceTrackpoint InputSource = C.GDK_SOURCE_TRACKPOINT
+	SourceTrackpoint InputSource = 5
 	// SourceTabletPad wraps GDK_SOURCE_TABLET_PAD
 	//
 	// the device is a "pad", a collection of buttons,
 	//   rings and strips found in drawing tablets
-	SourceTabletPad InputSource = C.GDK_SOURCE_TABLET_PAD
+	SourceTabletPad InputSource = 6
 )
 
 func marshalInputSource(p unsafe.Pointer) (any, error) {
@@ -5451,16 +5451,16 @@ const (
 	// KeyMatchNone wraps GDK_KEY_MATCH_NONE
 	//
 	// The key event does not match
-	KeyMatchNone KeyMatch = C.GDK_KEY_MATCH_NONE
+	KeyMatchNone KeyMatch = 0
 	// KeyMatchPartial wraps GDK_KEY_MATCH_PARTIAL
 	//
 	// The key event matches if keyboard state
 	//   (specifically, the currently active group) is ignored
-	KeyMatchPartial KeyMatch = C.GDK_KEY_MATCH_PARTIAL
+	KeyMatchPartial KeyMatch = 1
 	// KeyMatchExact wraps GDK_KEY_MATCH_EXACT
 	//
 	// The key event matches
-	KeyMatchExact KeyMatch = C.GDK_KEY_MATCH_EXACT
+	KeyMatchExact KeyMatch = 2
 )
 
 func marshalKeyMatch(p unsafe.Pointer) (any, error) {
@@ -5494,148 +5494,148 @@ const (
 	//
 	// 4 bytes; for blue, green, red, alpha.
 	//   The color values are premultiplied with the alpha value.
-	MemoryB8G8R8A8Premultiplied MemoryFormat = C.GDK_MEMORY_B8G8R8A8_PREMULTIPLIED
+	MemoryB8G8R8A8Premultiplied MemoryFormat = 0
 	// MemoryA8R8G8B8Premultiplied wraps GDK_MEMORY_A8R8G8B8_PREMULTIPLIED
 	//
 	// 4 bytes; for alpha, red, green, blue.
 	//   The color values are premultiplied with the alpha value.
-	MemoryA8R8G8B8Premultiplied MemoryFormat = C.GDK_MEMORY_A8R8G8B8_PREMULTIPLIED
+	MemoryA8R8G8B8Premultiplied MemoryFormat = 1
 	// MemoryR8G8B8A8Premultiplied wraps GDK_MEMORY_R8G8B8A8_PREMULTIPLIED
 	//
 	// 4 bytes; for red, green, blue, alpha
 	//   The color values are premultiplied with the alpha value.
-	MemoryR8G8B8A8Premultiplied MemoryFormat = C.GDK_MEMORY_R8G8B8A8_PREMULTIPLIED
+	MemoryR8G8B8A8Premultiplied MemoryFormat = 2
 	// MemoryB8G8R8A8 wraps GDK_MEMORY_B8G8R8A8
 	//
 	// 4 bytes; for blue, green, red, alpha.
-	MemoryB8G8R8A8 MemoryFormat = C.GDK_MEMORY_B8G8R8A8
+	MemoryB8G8R8A8 MemoryFormat = 3
 	// MemoryA8R8G8B8 wraps GDK_MEMORY_A8R8G8B8
 	//
 	// 4 bytes; for alpha, red, green, blue.
-	MemoryA8R8G8B8 MemoryFormat = C.GDK_MEMORY_A8R8G8B8
+	MemoryA8R8G8B8 MemoryFormat = 4
 	// MemoryR8G8B8A8 wraps GDK_MEMORY_R8G8B8A8
 	//
 	// 4 bytes; for red, green, blue, alpha.
-	MemoryR8G8B8A8 MemoryFormat = C.GDK_MEMORY_R8G8B8A8
+	MemoryR8G8B8A8 MemoryFormat = 5
 	// MemoryA8B8G8R8 wraps GDK_MEMORY_A8B8G8R8
 	//
 	// 4 bytes; for alpha, blue, green, red.
-	MemoryA8B8G8R8 MemoryFormat = C.GDK_MEMORY_A8B8G8R8
+	MemoryA8B8G8R8 MemoryFormat = 6
 	// MemoryR8G8B8 wraps GDK_MEMORY_R8G8B8
 	//
 	// 3 bytes; for red, green, blue. The data is opaque.
-	MemoryR8G8B8 MemoryFormat = C.GDK_MEMORY_R8G8B8
+	MemoryR8G8B8 MemoryFormat = 7
 	// MemoryB8G8R8 wraps GDK_MEMORY_B8G8R8
 	//
 	// 3 bytes; for blue, green, red. The data is opaque.
-	MemoryB8G8R8 MemoryFormat = C.GDK_MEMORY_B8G8R8
+	MemoryB8G8R8 MemoryFormat = 8
 	// MemoryR16G16B16 wraps GDK_MEMORY_R16G16B16
 	//
 	// 3 guint16 values; for red, green, blue.
-	MemoryR16G16B16 MemoryFormat = C.GDK_MEMORY_R16G16B16
+	MemoryR16G16B16 MemoryFormat = 9
 	// MemoryR16G16B16A16Premultiplied wraps GDK_MEMORY_R16G16B16A16_PREMULTIPLIED
 	//
 	// 4 guint16 values; for red, green, blue, alpha. The color values are
 	// premultiplied with the alpha value.
-	MemoryR16G16B16A16Premultiplied MemoryFormat = C.GDK_MEMORY_R16G16B16A16_PREMULTIPLIED
+	MemoryR16G16B16A16Premultiplied MemoryFormat = 10
 	// MemoryR16G16B16A16 wraps GDK_MEMORY_R16G16B16A16
 	//
 	// 4 guint16 values; for red, green, blue, alpha.
-	MemoryR16G16B16A16 MemoryFormat = C.GDK_MEMORY_R16G16B16A16
+	MemoryR16G16B16A16 MemoryFormat = 11
 	// MemoryR16G16B16Float wraps GDK_MEMORY_R16G16B16_FLOAT
 	//
 	// 3 half-float values; for red, green, blue. The data is opaque.
-	MemoryR16G16B16Float MemoryFormat = C.GDK_MEMORY_R16G16B16_FLOAT
+	MemoryR16G16B16Float MemoryFormat = 12
 	// MemoryR16G16B16A16FloatPremultiplied wraps GDK_MEMORY_R16G16B16A16_FLOAT_PREMULTIPLIED
 	//
 	// 4 half-float values; for red, green, blue and alpha. The color values are
 	// premultiplied with the alpha value.
-	MemoryR16G16B16A16FloatPremultiplied MemoryFormat = C.GDK_MEMORY_R16G16B16A16_FLOAT_PREMULTIPLIED
+	MemoryR16G16B16A16FloatPremultiplied MemoryFormat = 13
 	// MemoryR16G16B16A16Float wraps GDK_MEMORY_R16G16B16A16_FLOAT
 	//
 	// 4 half-float values; for red, green, blue and alpha.
-	MemoryR16G16B16A16Float MemoryFormat = C.GDK_MEMORY_R16G16B16A16_FLOAT
+	MemoryR16G16B16A16Float MemoryFormat = 14
 	// MemoryR32G32B32Float wraps GDK_MEMORY_R32G32B32_FLOAT
 	//
 	// 3 float values; for red, green, blue.
-	MemoryR32G32B32Float MemoryFormat = C.GDK_MEMORY_R32G32B32_FLOAT
+	MemoryR32G32B32Float MemoryFormat = 15
 	// MemoryR32G32B32A32FloatPremultiplied wraps GDK_MEMORY_R32G32B32A32_FLOAT_PREMULTIPLIED
 	//
 	// 4 float values; for red, green, blue and alpha. The color values are
 	// premultiplied with the alpha value.
-	MemoryR32G32B32A32FloatPremultiplied MemoryFormat = C.GDK_MEMORY_R32G32B32A32_FLOAT_PREMULTIPLIED
+	MemoryR32G32B32A32FloatPremultiplied MemoryFormat = 16
 	// MemoryR32G32B32A32Float wraps GDK_MEMORY_R32G32B32A32_FLOAT
 	//
 	// 4 float values; for red, green, blue and alpha.
-	MemoryR32G32B32A32Float MemoryFormat = C.GDK_MEMORY_R32G32B32A32_FLOAT
+	MemoryR32G32B32A32Float MemoryFormat = 17
 	// MemoryG8A8Premultiplied wraps GDK_MEMORY_G8A8_PREMULTIPLIED
 	//
 	// 2 bytes; for grayscale, alpha. The color values are premultiplied with the
 	// alpha value.
-	MemoryG8A8Premultiplied MemoryFormat = C.GDK_MEMORY_G8A8_PREMULTIPLIED
+	MemoryG8A8Premultiplied MemoryFormat = 18
 	// MemoryG8A8 wraps GDK_MEMORY_G8A8
 	//
 	// 2 bytes; for grayscale, alpha.
-	MemoryG8A8 MemoryFormat = C.GDK_MEMORY_G8A8
+	MemoryG8A8 MemoryFormat = 19
 	// MemoryG8 wraps GDK_MEMORY_G8
 	//
 	// One byte; for grayscale. The data is opaque.
-	MemoryG8 MemoryFormat = C.GDK_MEMORY_G8
+	MemoryG8 MemoryFormat = 20
 	// MemoryG16A16Premultiplied wraps GDK_MEMORY_G16A16_PREMULTIPLIED
 	//
 	// 2 guint16 values; for grayscale, alpha. The color values are premultiplied
 	// with the alpha value.
-	MemoryG16A16Premultiplied MemoryFormat = C.GDK_MEMORY_G16A16_PREMULTIPLIED
+	MemoryG16A16Premultiplied MemoryFormat = 21
 	// MemoryG16A16 wraps GDK_MEMORY_G16A16
 	//
 	// 2 guint16 values; for grayscale, alpha.
-	MemoryG16A16 MemoryFormat = C.GDK_MEMORY_G16A16
+	MemoryG16A16 MemoryFormat = 22
 	// MemoryG16 wraps GDK_MEMORY_G16
 	//
 	// One guint16 value; for grayscale. The data is opaque.
-	MemoryG16 MemoryFormat = C.GDK_MEMORY_G16
+	MemoryG16 MemoryFormat = 23
 	// MemoryA8 wraps GDK_MEMORY_A8
 	//
 	// One byte; for alpha.
-	MemoryA8 MemoryFormat = C.GDK_MEMORY_A8
+	MemoryA8 MemoryFormat = 24
 	// MemoryA16 wraps GDK_MEMORY_A16
 	//
 	// One guint16 value; for alpha.
-	MemoryA16 MemoryFormat = C.GDK_MEMORY_A16
+	MemoryA16 MemoryFormat = 25
 	// MemoryA16Float wraps GDK_MEMORY_A16_FLOAT
 	//
 	// One half-float value; for alpha.
-	MemoryA16Float MemoryFormat = C.GDK_MEMORY_A16_FLOAT
+	MemoryA16Float MemoryFormat = 26
 	// MemoryA32Float wraps GDK_MEMORY_A32_FLOAT
 	//
 	// One float value; for alpha.
-	MemoryA32Float MemoryFormat = C.GDK_MEMORY_A32_FLOAT
+	MemoryA32Float MemoryFormat = 27
 	// MemoryA8B8G8R8Premultiplied wraps GDK_MEMORY_A8B8G8R8_PREMULTIPLIED
 	//
 	// 4 bytes; for alpha, blue, green, red, The color values are premultiplied with
 	// the alpha value.
-	MemoryA8B8G8R8Premultiplied MemoryFormat = C.GDK_MEMORY_A8B8G8R8_PREMULTIPLIED
+	MemoryA8B8G8R8Premultiplied MemoryFormat = 28
 	// MemoryB8G8R8X8 wraps GDK_MEMORY_B8G8R8X8
 	//
 	// 4 bytes; for blue, green, red, unused.
-	MemoryB8G8R8X8 MemoryFormat = C.GDK_MEMORY_B8G8R8X8
+	MemoryB8G8R8X8 MemoryFormat = 29
 	// MemorYX8R8G8B8 wraps GDK_MEMORY_X8R8G8B8
 	//
 	// 4 bytes; for unused, red, green, blue.
-	MemorYX8R8G8B8 MemoryFormat = C.GDK_MEMORY_X8R8G8B8
+	MemorYX8R8G8B8 MemoryFormat = 30
 	// MemoryR8G8B8X8 wraps GDK_MEMORY_R8G8B8X8
 	//
 	// 4 bytes; for red, green, blue, unused.
-	MemoryR8G8B8X8 MemoryFormat = C.GDK_MEMORY_R8G8B8X8
+	MemoryR8G8B8X8 MemoryFormat = 31
 	// MemorYX8B8G8R8 wraps GDK_MEMORY_X8B8G8R8
 	//
 	// 4 bytes; for unused, blue, green, red.
-	MemorYX8B8G8R8 MemoryFormat = C.GDK_MEMORY_X8B8G8R8
+	MemorYX8B8G8R8 MemoryFormat = 32
 	// MemoryNFormats wraps GDK_MEMORY_N_FORMATS
 	//
 	// The number of formats. This value will change as
 	//   more formats get added, so do not rely on its concrete integer.
-	MemoryNFormats MemoryFormat = C.GDK_MEMORY_N_FORMATS
+	MemoryNFormats MemoryFormat = 33
 )
 
 func marshalMemoryFormat(p unsafe.Pointer) (any, error) {
@@ -5662,33 +5662,33 @@ const (
 	//
 	// the surface is entered from an ancestor or
 	//   left towards an ancestor.
-	NotifyAncestor NotifyType = C.GDK_NOTIFY_ANCESTOR
+	NotifyAncestor NotifyType = 0
 	// NotifyVirtual wraps GDK_NOTIFY_VIRTUAL
 	//
 	// the pointer moves between an ancestor and an
 	//   inferior of the surface.
-	NotifyVirtual NotifyType = C.GDK_NOTIFY_VIRTUAL
+	NotifyVirtual NotifyType = 1
 	// NotifyInferior wraps GDK_NOTIFY_INFERIOR
 	//
 	// the surface is entered from an inferior or
 	//   left towards an inferior.
-	NotifyInferior NotifyType = C.GDK_NOTIFY_INFERIOR
+	NotifyInferior NotifyType = 2
 	// NotifyNonlinear wraps GDK_NOTIFY_NONLINEAR
 	//
 	// the surface is entered from or left towards
 	//   a surface which is neither an ancestor nor an inferior.
-	NotifyNonlinear NotifyType = C.GDK_NOTIFY_NONLINEAR
+	NotifyNonlinear NotifyType = 3
 	// NotifyNonlinearVirtual wraps GDK_NOTIFY_NONLINEAR_VIRTUAL
 	//
 	// the pointer moves between two surfaces
 	//   which are not ancestors of each other and the surface is part of
 	//   the ancestor chain between one of these surfaces and their least
 	//   common ancestor.
-	NotifyNonlinearVirtual NotifyType = C.GDK_NOTIFY_NONLINEAR_VIRTUAL
+	NotifyNonlinearVirtual NotifyType = 4
 	// NotifyUnknown wraps GDK_NOTIFY_UNKNOWN
 	//
 	// an unknown type of enter/leave event occurred.
-	NotifyUnknown NotifyType = C.GDK_NOTIFY_UNKNOWN
+	NotifyUnknown NotifyType = 5
 )
 
 func marshalNotifyType(p unsafe.Pointer) (any, error) {
@@ -5711,24 +5711,24 @@ const (
 	// ScrollUp wraps GDK_SCROLL_UP
 	//
 	// the surface is scrolled up.
-	ScrollUp ScrollDirection = C.GDK_SCROLL_UP
+	ScrollUp ScrollDirection = 0
 	// ScrollDown wraps GDK_SCROLL_DOWN
 	//
 	// the surface is scrolled down.
-	ScrollDown ScrollDirection = C.GDK_SCROLL_DOWN
+	ScrollDown ScrollDirection = 1
 	// ScrollLeft wraps GDK_SCROLL_LEFT
 	//
 	// the surface is scrolled to the left.
-	ScrollLeft ScrollDirection = C.GDK_SCROLL_LEFT
+	ScrollLeft ScrollDirection = 2
 	// ScrollRight wraps GDK_SCROLL_RIGHT
 	//
 	// the surface is scrolled to the right.
-	ScrollRight ScrollDirection = C.GDK_SCROLL_RIGHT
+	ScrollRight ScrollDirection = 3
 	// ScrollSmooth wraps GDK_SCROLL_SMOOTH
 	//
 	// the scrolling is determined by the delta values
 	//   in scroll events. See gdk_scroll_event_get_deltas()
-	ScrollSmooth ScrollDirection = C.GDK_SCROLL_SMOOTH
+	ScrollSmooth ScrollDirection = 4
 )
 
 func marshalScrollDirection(p unsafe.Pointer) (any, error) {
@@ -5766,12 +5766,12 @@ const (
 	// ScrollUnitWheel wraps GDK_SCROLL_UNIT_WHEEL
 	//
 	// The delta is in number of wheel clicks.
-	ScrollUnitWheel ScrollUnit = C.GDK_SCROLL_UNIT_WHEEL
+	ScrollUnitWheel ScrollUnit = 0
 	// ScrollUnitSurface wraps GDK_SCROLL_UNIT_SURFACE
 	//
 	// The delta is in surface pixels to scroll directly
 	//   on screen.
-	ScrollUnitSurface ScrollUnit = C.GDK_SCROLL_UNIT_SURFACE
+	ScrollUnitSurface ScrollUnit = 1
 )
 
 func marshalScrollUnit(p unsafe.Pointer) (any, error) {
@@ -5795,27 +5795,27 @@ const (
 	// SubpixelLayoutUnknown wraps GDK_SUBPIXEL_LAYOUT_UNKNOWN
 	//
 	// The layout is not known
-	SubpixelLayoutUnknown SubpixelLayout = C.GDK_SUBPIXEL_LAYOUT_UNKNOWN
+	SubpixelLayoutUnknown SubpixelLayout = 0
 	// SubpixelLayoutNone wraps GDK_SUBPIXEL_LAYOUT_NONE
 	//
 	// Not organized in this way
-	SubpixelLayoutNone SubpixelLayout = C.GDK_SUBPIXEL_LAYOUT_NONE
+	SubpixelLayoutNone SubpixelLayout = 1
 	// SubpixelLayoutHorizontalRGB wraps GDK_SUBPIXEL_LAYOUT_HORIZONTAL_RGB
 	//
 	// The layout is horizontal, the order is RGB
-	SubpixelLayoutHorizontalRGB SubpixelLayout = C.GDK_SUBPIXEL_LAYOUT_HORIZONTAL_RGB
+	SubpixelLayoutHorizontalRGB SubpixelLayout = 2
 	// SubpixelLayoutHorizontalBGR wraps GDK_SUBPIXEL_LAYOUT_HORIZONTAL_BGR
 	//
 	// The layout is horizontal, the order is BGR
-	SubpixelLayoutHorizontalBGR SubpixelLayout = C.GDK_SUBPIXEL_LAYOUT_HORIZONTAL_BGR
+	SubpixelLayoutHorizontalBGR SubpixelLayout = 3
 	// SubpixelLayoutVerticalRGB wraps GDK_SUBPIXEL_LAYOUT_VERTICAL_RGB
 	//
 	// The layout is vertical, the order is RGB
-	SubpixelLayoutVerticalRGB SubpixelLayout = C.GDK_SUBPIXEL_LAYOUT_VERTICAL_RGB
+	SubpixelLayoutVerticalRGB SubpixelLayout = 4
 	// SubpixelLayoutVerticalBGR wraps GDK_SUBPIXEL_LAYOUT_VERTICAL_BGR
 	//
 	// The layout is vertical, the order is BGR
-	SubpixelLayoutVerticalBGR SubpixelLayout = C.GDK_SUBPIXEL_LAYOUT_VERTICAL_BGR
+	SubpixelLayoutVerticalBGR SubpixelLayout = 5
 )
 
 func marshalSubpixelLayout(p unsafe.Pointer) (any, error) {
@@ -5838,35 +5838,35 @@ const (
 	// SurfaceEdgeNorthWest wraps GDK_SURFACE_EDGE_NORTH_WEST
 	//
 	// the top left corner.
-	SurfaceEdgeNorthWest SurfaceEdge = C.GDK_SURFACE_EDGE_NORTH_WEST
+	SurfaceEdgeNorthWest SurfaceEdge = 0
 	// SurfaceEdgeNorth wraps GDK_SURFACE_EDGE_NORTH
 	//
 	// the top edge.
-	SurfaceEdgeNorth SurfaceEdge = C.GDK_SURFACE_EDGE_NORTH
+	SurfaceEdgeNorth SurfaceEdge = 1
 	// SurfaceEdgeNorthEast wraps GDK_SURFACE_EDGE_NORTH_EAST
 	//
 	// the top right corner.
-	SurfaceEdgeNorthEast SurfaceEdge = C.GDK_SURFACE_EDGE_NORTH_EAST
+	SurfaceEdgeNorthEast SurfaceEdge = 2
 	// SurfaceEdgeWest wraps GDK_SURFACE_EDGE_WEST
 	//
 	// the left edge.
-	SurfaceEdgeWest SurfaceEdge = C.GDK_SURFACE_EDGE_WEST
+	SurfaceEdgeWest SurfaceEdge = 3
 	// SurfaceEdgeEast wraps GDK_SURFACE_EDGE_EAST
 	//
 	// the right edge.
-	SurfaceEdgeEast SurfaceEdge = C.GDK_SURFACE_EDGE_EAST
+	SurfaceEdgeEast SurfaceEdge = 4
 	// SurfaceEdgeSouthWest wraps GDK_SURFACE_EDGE_SOUTH_WEST
 	//
 	// the lower left corner.
-	SurfaceEdgeSouthWest SurfaceEdge = C.GDK_SURFACE_EDGE_SOUTH_WEST
+	SurfaceEdgeSouthWest SurfaceEdge = 5
 	// SurfaceEdgeSouth wraps GDK_SURFACE_EDGE_SOUTH
 	//
 	// the lower edge.
-	SurfaceEdgeSouth SurfaceEdge = C.GDK_SURFACE_EDGE_SOUTH
+	SurfaceEdgeSouth SurfaceEdge = 6
 	// SurfaceEdgeSouthEast wraps GDK_SURFACE_EDGE_SOUTH_EAST
 	//
 	// the lower right corner.
-	SurfaceEdgeSouthEast SurfaceEdge = C.GDK_SURFACE_EDGE_SOUTH_EAST
+	SurfaceEdgeSouthEast SurfaceEdge = 7
 )
 
 func marshalSurfaceEdge(p unsafe.Pointer) (any, error) {
@@ -5889,20 +5889,20 @@ const (
 	// TextureErrorTooLarge wraps GDK_TEXTURE_ERROR_TOO_LARGE
 	//
 	// Not enough memory to handle this image
-	TextureErrorTooLarge TextureError = C.GDK_TEXTURE_ERROR_TOO_LARGE
+	TextureErrorTooLarge TextureError = 0
 	// TextureErrorCorruptImage wraps GDK_TEXTURE_ERROR_CORRUPT_IMAGE
 	//
 	// The image data appears corrupted
-	TextureErrorCorruptImage TextureError = C.GDK_TEXTURE_ERROR_CORRUPT_IMAGE
+	TextureErrorCorruptImage TextureError = 1
 	// TextureErrorUnsupportedContent wraps GDK_TEXTURE_ERROR_UNSUPPORTED_CONTENT
 	//
 	// The image contains features
 	//   that cannot be loaded
-	TextureErrorUnsupportedContent TextureError = C.GDK_TEXTURE_ERROR_UNSUPPORTED_CONTENT
+	TextureErrorUnsupportedContent TextureError = 2
 	// TextureErrorUnsupportedFormat wraps GDK_TEXTURE_ERROR_UNSUPPORTED_FORMAT
 	//
 	// The image format is not supported
-	TextureErrorUnsupportedFormat TextureError = C.GDK_TEXTURE_ERROR_UNSUPPORTED_FORMAT
+	TextureErrorUnsupportedFormat TextureError = 3
 )
 
 func marshalTextureError(p unsafe.Pointer) (any, error) {
@@ -5926,15 +5926,15 @@ const (
 	// TitlebarGestureDoubleClick wraps GDK_TITLEBAR_GESTURE_DOUBLE_CLICK
 	//
 	// double click gesture
-	TitlebarGestureDoubleClick TitlebarGesture = C.GDK_TITLEBAR_GESTURE_DOUBLE_CLICK
+	TitlebarGestureDoubleClick TitlebarGesture = 1
 	// TitlebarGestureRightClick wraps GDK_TITLEBAR_GESTURE_RIGHT_CLICK
 	//
 	// right click gesture
-	TitlebarGestureRightClick TitlebarGesture = C.GDK_TITLEBAR_GESTURE_RIGHT_CLICK
+	TitlebarGestureRightClick TitlebarGesture = 2
 	// TitlebarGestureMiddleClick wraps GDK_TITLEBAR_GESTURE_MIDDLE_CLICK
 	//
 	// middle click gesture
-	TitlebarGestureMiddleClick TitlebarGesture = C.GDK_TITLEBAR_GESTURE_MIDDLE_CLICK
+	TitlebarGestureMiddleClick TitlebarGesture = 3
 )
 
 func marshalTitlebarGesture(p unsafe.Pointer) (any, error) {
@@ -5974,21 +5974,21 @@ const (
 	// TouchpadGesturePhaseBegin wraps GDK_TOUCHPAD_GESTURE_PHASE_BEGIN
 	//
 	// The gesture has begun.
-	TouchpadGesturePhaseBegin TouchpadGesturePhase = C.GDK_TOUCHPAD_GESTURE_PHASE_BEGIN
+	TouchpadGesturePhaseBegin TouchpadGesturePhase = 0
 	// TouchpadGesturePhaseUpdate wraps GDK_TOUCHPAD_GESTURE_PHASE_UPDATE
 	//
 	// The gesture has been updated.
-	TouchpadGesturePhaseUpdate TouchpadGesturePhase = C.GDK_TOUCHPAD_GESTURE_PHASE_UPDATE
+	TouchpadGesturePhaseUpdate TouchpadGesturePhase = 1
 	// TouchpadGesturePhaseEnd wraps GDK_TOUCHPAD_GESTURE_PHASE_END
 	//
 	// The gesture was finished, changes
 	//   should be permanently applied.
-	TouchpadGesturePhaseEnd TouchpadGesturePhase = C.GDK_TOUCHPAD_GESTURE_PHASE_END
+	TouchpadGesturePhaseEnd TouchpadGesturePhase = 2
 	// TouchpadGesturePhaseCancel wraps GDK_TOUCHPAD_GESTURE_PHASE_CANCEL
 	//
 	// The gesture was cancelled, all
 	//   changes should be undone.
-	TouchpadGesturePhaseCancel TouchpadGesturePhase = C.GDK_TOUCHPAD_GESTURE_PHASE_CANCEL
+	TouchpadGesturePhaseCancel TouchpadGesturePhase = 3
 )
 
 func marshalTouchpadGesturePhase(p unsafe.Pointer) (any, error) {
@@ -6012,11 +6012,11 @@ const (
 	//
 	// Vulkan is not supported on this backend or has not been
 	//   compiled in.
-	VulkanErrorUnsupported VulkanError = C.GDK_VULKAN_ERROR_UNSUPPORTED
+	VulkanErrorUnsupported VulkanError = 0
 	// VulkanErrorNotAvailable wraps GDK_VULKAN_ERROR_NOT_AVAILABLE
 	//
 	// Vulkan support is not available on this Surface
-	VulkanErrorNotAvailable VulkanError = C.GDK_VULKAN_ERROR_NOT_AVAILABLE
+	VulkanErrorNotAvailable VulkanError = 1
 )
 
 func marshalVulkanError(p unsafe.Pointer) (any, error) {
@@ -6053,39 +6053,39 @@ const (
 	// AnchorFlipX wraps GDK_ANCHOR_FLIP_X
 	//
 	// allow flipping anchors horizontally
-	AnchorFlipX AnchorHints = C.GDK_ANCHOR_FLIP_X
+	AnchorFlipX AnchorHints = 1
 	// AnchorFlipY wraps GDK_ANCHOR_FLIP_Y
 	//
 	// allow flipping anchors vertically
-	AnchorFlipY AnchorHints = C.GDK_ANCHOR_FLIP_Y
+	AnchorFlipY AnchorHints = 2
 	// AnchorSlideX wraps GDK_ANCHOR_SLIDE_X
 	//
 	// allow sliding surface horizontally
-	AnchorSlideX AnchorHints = C.GDK_ANCHOR_SLIDE_X
+	AnchorSlideX AnchorHints = 4
 	// AnchorSlideY wraps GDK_ANCHOR_SLIDE_Y
 	//
 	// allow sliding surface vertically
-	AnchorSlideY AnchorHints = C.GDK_ANCHOR_SLIDE_Y
+	AnchorSlideY AnchorHints = 8
 	// AnchorResizeX wraps GDK_ANCHOR_RESIZE_X
 	//
 	// allow resizing surface horizontally
-	AnchorResizeX AnchorHints = C.GDK_ANCHOR_RESIZE_X
+	AnchorResizeX AnchorHints = 16
 	// AnchorResizeY wraps GDK_ANCHOR_RESIZE_Y
 	//
 	// allow resizing surface vertically
-	AnchorResizeY AnchorHints = C.GDK_ANCHOR_RESIZE_Y
+	AnchorResizeY AnchorHints = 32
 	// AnchorFlip wraps GDK_ANCHOR_FLIP
 	//
 	// allow flipping anchors on both axes
-	AnchorFlip AnchorHints = C.GDK_ANCHOR_FLIP
+	AnchorFlip AnchorHints = 3
 	// AnchorSlide wraps GDK_ANCHOR_SLIDE
 	//
 	// allow sliding surface on both axes
-	AnchorSlide AnchorHints = C.GDK_ANCHOR_SLIDE
+	AnchorSlide AnchorHints = 12
 	// AnchorResize wraps GDK_ANCHOR_RESIZE
 	//
 	// allow resizing surface on both axes
-	AnchorResize AnchorHints = C.GDK_ANCHOR_RESIZE
+	AnchorResize AnchorHints = 48
 )
 
 func marshalAnchorHints(p unsafe.Pointer) (any, error) {
@@ -6112,47 +6112,47 @@ const (
 	// AxisFlagX wraps GDK_AXIS_FLAG_X
 	//
 	// X axis is present
-	AxisFlagX AxisFlags = C.GDK_AXIS_FLAG_X
+	AxisFlagX AxisFlags = 2
 	// AxisFlagY wraps GDK_AXIS_FLAG_Y
 	//
 	// Y axis is present
-	AxisFlagY AxisFlags = C.GDK_AXIS_FLAG_Y
+	AxisFlagY AxisFlags = 4
 	// AxisFlagDeltaX wraps GDK_AXIS_FLAG_DELTA_X
 	//
 	// Scroll X delta axis is present
-	AxisFlagDeltaX AxisFlags = C.GDK_AXIS_FLAG_DELTA_X
+	AxisFlagDeltaX AxisFlags = 8
 	// AxisFlagDeltaY wraps GDK_AXIS_FLAG_DELTA_Y
 	//
 	// Scroll Y delta axis is present
-	AxisFlagDeltaY AxisFlags = C.GDK_AXIS_FLAG_DELTA_Y
+	AxisFlagDeltaY AxisFlags = 16
 	// AxisFlagPressure wraps GDK_AXIS_FLAG_PRESSURE
 	//
 	// Pressure axis is present
-	AxisFlagPressure AxisFlags = C.GDK_AXIS_FLAG_PRESSURE
+	AxisFlagPressure AxisFlags = 32
 	// AxisFlagXtilt wraps GDK_AXIS_FLAG_XTILT
 	//
 	// X tilt axis is present
-	AxisFlagXtilt AxisFlags = C.GDK_AXIS_FLAG_XTILT
+	AxisFlagXtilt AxisFlags = 64
 	// AxisFlagYtilt wraps GDK_AXIS_FLAG_YTILT
 	//
 	// Y tilt axis is present
-	AxisFlagYtilt AxisFlags = C.GDK_AXIS_FLAG_YTILT
+	AxisFlagYtilt AxisFlags = 128
 	// AxisFlagWheel wraps GDK_AXIS_FLAG_WHEEL
 	//
 	// Wheel axis is present
-	AxisFlagWheel AxisFlags = C.GDK_AXIS_FLAG_WHEEL
+	AxisFlagWheel AxisFlags = 256
 	// AxisFlagDistance wraps GDK_AXIS_FLAG_DISTANCE
 	//
 	// Distance axis is present
-	AxisFlagDistance AxisFlags = C.GDK_AXIS_FLAG_DISTANCE
+	AxisFlagDistance AxisFlags = 512
 	// AxisFlagRotation wraps GDK_AXIS_FLAG_ROTATION
 	//
 	// Z-axis rotation is present
-	AxisFlagRotation AxisFlags = C.GDK_AXIS_FLAG_ROTATION
+	AxisFlagRotation AxisFlags = 1024
 	// AxisFlagSlider wraps GDK_AXIS_FLAG_SLIDER
 	//
 	// Slider axis is present
-	AxisFlagSlider AxisFlags = C.GDK_AXIS_FLAG_SLIDER
+	AxisFlagSlider AxisFlags = 2048
 )
 
 func marshalAxisFlags(p unsafe.Pointer) (any, error) {
@@ -6180,22 +6180,22 @@ const (
 	// ActionCopy wraps GDK_ACTION_COPY
 	//
 	// Copy the data.
-	ActionCopy DragAction = C.GDK_ACTION_COPY
+	ActionCopy DragAction = 1
 	// ActionMove wraps GDK_ACTION_MOVE
 	//
 	// Move the data, i.e. first copy it, then delete
 	//   it from the source using the DELETE target of the X selection protocol.
-	ActionMove DragAction = C.GDK_ACTION_MOVE
+	ActionMove DragAction = 2
 	// ActionLink wraps GDK_ACTION_LINK
 	//
 	// Add a link to the data. Note that this is only
 	//   useful if source and destination agree on what it means, and is not
 	//   supported on all platforms.
-	ActionLink DragAction = C.GDK_ACTION_LINK
+	ActionLink DragAction = 4
 	// ActionAsk wraps GDK_ACTION_ASK
 	//
 	// Ask the user what to do with the data.
-	ActionAsk DragAction = C.GDK_ACTION_ASK
+	ActionAsk DragAction = 8
 )
 
 func marshalDragAction(p unsafe.Pointer) (any, error) {
@@ -6224,35 +6224,35 @@ const (
 	// FrameClockPhaseNone wraps GDK_FRAME_CLOCK_PHASE_NONE
 	//
 	// no phase
-	FrameClockPhaseNone FrameClockPhase = C.GDK_FRAME_CLOCK_PHASE_NONE
+	FrameClockPhaseNone FrameClockPhase = 0
 	// FrameClockPhaseFlushEvents wraps GDK_FRAME_CLOCK_PHASE_FLUSH_EVENTS
 	//
 	// corresponds to GdkFrameClock::flush-events. Should not be handled by applications.
-	FrameClockPhaseFlushEvents FrameClockPhase = C.GDK_FRAME_CLOCK_PHASE_FLUSH_EVENTS
+	FrameClockPhaseFlushEvents FrameClockPhase = 1
 	// FrameClockPhaseBeforePaint wraps GDK_FRAME_CLOCK_PHASE_BEFORE_PAINT
 	//
 	// corresponds to GdkFrameClock::before-paint. Should not be handled by applications.
-	FrameClockPhaseBeforePaint FrameClockPhase = C.GDK_FRAME_CLOCK_PHASE_BEFORE_PAINT
+	FrameClockPhaseBeforePaint FrameClockPhase = 2
 	// FrameClockPhaseUpdate wraps GDK_FRAME_CLOCK_PHASE_UPDATE
 	//
 	// corresponds to GdkFrameClock::update.
-	FrameClockPhaseUpdate FrameClockPhase = C.GDK_FRAME_CLOCK_PHASE_UPDATE
+	FrameClockPhaseUpdate FrameClockPhase = 4
 	// FrameClockPhaseLayout wraps GDK_FRAME_CLOCK_PHASE_LAYOUT
 	//
 	// corresponds to GdkFrameClock::layout. Should not be handled by applications.
-	FrameClockPhaseLayout FrameClockPhase = C.GDK_FRAME_CLOCK_PHASE_LAYOUT
+	FrameClockPhaseLayout FrameClockPhase = 8
 	// FrameClockPhasePaint wraps GDK_FRAME_CLOCK_PHASE_PAINT
 	//
 	// corresponds to GdkFrameClock::paint.
-	FrameClockPhasePaint FrameClockPhase = C.GDK_FRAME_CLOCK_PHASE_PAINT
+	FrameClockPhasePaint FrameClockPhase = 16
 	// FrameClockPhaseResumeEvents wraps GDK_FRAME_CLOCK_PHASE_RESUME_EVENTS
 	//
 	// corresponds to GdkFrameClock::resume-events. Should not be handled by applications.
-	FrameClockPhaseResumeEvents FrameClockPhase = C.GDK_FRAME_CLOCK_PHASE_RESUME_EVENTS
+	FrameClockPhaseResumeEvents FrameClockPhase = 32
 	// FrameClockPhaseAfterPaint wraps GDK_FRAME_CLOCK_PHASE_AFTER_PAINT
 	//
 	// corresponds to GdkFrameClock::after-paint. Should not be handled by applications.
-	FrameClockPhaseAfterPaint FrameClockPhase = C.GDK_FRAME_CLOCK_PHASE_AFTER_PAINT
+	FrameClockPhaseAfterPaint FrameClockPhase = 64
 )
 
 func marshalFrameClockPhase(p unsafe.Pointer) (any, error) {
@@ -6279,11 +6279,11 @@ const (
 	// GLApiGL wraps GDK_GL_API_GL
 	//
 	// The OpenGL API
-	GLApiGL GLAPI = C.GDK_GL_API_GL
+	GLApiGL GLAPI = 1
 	// GLApiGles wraps GDK_GL_API_GLES
 	//
 	// The OpenGL ES API
-	GLApiGles GLAPI = C.GDK_GL_API_GLES
+	GLApiGles GLAPI = 2
 )
 
 func marshalGLAPI(p unsafe.Pointer) (any, error) {
@@ -6318,58 +6318,58 @@ const (
 	// NoModifierMask wraps GDK_NO_MODIFIER_MASK
 	//
 	// No modifier.
-	NoModifierMask ModifierType = C.GDK_NO_MODIFIER_MASK
+	NoModifierMask ModifierType = 0
 	// ShiftMask wraps GDK_SHIFT_MASK
 	//
 	// the Shift key.
-	ShiftMask ModifierType = C.GDK_SHIFT_MASK
+	ShiftMask ModifierType = 1
 	// LockMask wraps GDK_LOCK_MASK
 	//
 	// a Lock key (depending on the Windowing System configuration,
 	//    this may either be &lt;kbd&gt;CapsLock&lt;/kbd&gt; or &lt;kbd&gt;ShiftLock&lt;/kbd&gt;).
-	LockMask ModifierType = C.GDK_LOCK_MASK
+	LockMask ModifierType = 2
 	// ControlMask wraps GDK_CONTROL_MASK
 	//
 	// the Control key.
-	ControlMask ModifierType = C.GDK_CONTROL_MASK
+	ControlMask ModifierType = 4
 	// AltMask wraps GDK_ALT_MASK
 	//
 	// the fourth modifier key (it depends on the Windowing System
 	//    configuration which key is interpreted as this modifier, but normally it
 	//    is the &lt;kbd&gt;Alt&lt;/kbd&gt; key).
-	AltMask ModifierType = C.GDK_ALT_MASK
+	AltMask ModifierType = 8
 	// Button1Mask wraps GDK_BUTTON1_MASK
 	//
 	// the first mouse button.
-	Button1Mask ModifierType = C.GDK_BUTTON1_MASK
+	Button1Mask ModifierType = 256
 	// Button2Mask wraps GDK_BUTTON2_MASK
 	//
 	// the second mouse button.
-	Button2Mask ModifierType = C.GDK_BUTTON2_MASK
+	Button2Mask ModifierType = 512
 	// Button3Mask wraps GDK_BUTTON3_MASK
 	//
 	// the third mouse button.
-	Button3Mask ModifierType = C.GDK_BUTTON3_MASK
+	Button3Mask ModifierType = 1024
 	// Button4Mask wraps GDK_BUTTON4_MASK
 	//
 	// the fourth mouse button.
-	Button4Mask ModifierType = C.GDK_BUTTON4_MASK
+	Button4Mask ModifierType = 2048
 	// Button5Mask wraps GDK_BUTTON5_MASK
 	//
 	// the fifth mouse button.
-	Button5Mask ModifierType = C.GDK_BUTTON5_MASK
+	Button5Mask ModifierType = 4096
 	// SuperMask wraps GDK_SUPER_MASK
 	//
 	// the Super modifier.
-	SuperMask ModifierType = C.GDK_SUPER_MASK
+	SuperMask ModifierType = 67108864
 	// HyperMask wraps GDK_HYPER_MASK
 	//
 	// the Hyper modifier.
-	HyperMask ModifierType = C.GDK_HYPER_MASK
+	HyperMask ModifierType = 134217728
 	// MetaMask wraps GDK_META_MASK
 	//
 	// the Meta modifier. Maps to Command on macOS.
-	MetaMask ModifierType = C.GDK_META_MASK
+	MetaMask ModifierType = 268435456
 )
 
 func marshalModifierType(p unsafe.Pointer) (any, error) {
@@ -6400,13 +6400,13 @@ const (
 	// The size is immutable.
 	//   The [signal@Gdk.Paintable::invalidate-size] signal will never be
 	//   emitted.
-	PaintableStaticSize PaintableFlags = C.GDK_PAINTABLE_STATIC_SIZE
+	PaintableStaticSize PaintableFlags = 1
 	// PaintableStaticContents wraps GDK_PAINTABLE_STATIC_CONTENTS
 	//
 	// The content is immutable.
 	//   The [signal@Gdk.Paintable::invalidate-contents] signal will never be
 	//   emitted.
-	PaintableStaticContents PaintableFlags = C.GDK_PAINTABLE_STATIC_CONTENTS
+	PaintableStaticContents PaintableFlags = 2
 )
 
 func marshalPaintableFlags(p unsafe.Pointer) (any, error) {
@@ -6433,35 +6433,35 @@ const (
 	// SeatCapabilityNone wraps GDK_SEAT_CAPABILITY_NONE
 	//
 	// No input capabilities
-	SeatCapabilityNone SeatCapabilities = C.GDK_SEAT_CAPABILITY_NONE
+	SeatCapabilityNone SeatCapabilities = 0
 	// SeatCapabilityPointer wraps GDK_SEAT_CAPABILITY_POINTER
 	//
 	// The seat has a pointer (e.g. mouse)
-	SeatCapabilityPointer SeatCapabilities = C.GDK_SEAT_CAPABILITY_POINTER
+	SeatCapabilityPointer SeatCapabilities = 1
 	// SeatCapabilityTouch wraps GDK_SEAT_CAPABILITY_TOUCH
 	//
 	// The seat has touchscreen(s) attached
-	SeatCapabilityTouch SeatCapabilities = C.GDK_SEAT_CAPABILITY_TOUCH
+	SeatCapabilityTouch SeatCapabilities = 2
 	// SeatCapabilityTabletStylus wraps GDK_SEAT_CAPABILITY_TABLET_STYLUS
 	//
 	// The seat has drawing tablet(s) attached
-	SeatCapabilityTabletStylus SeatCapabilities = C.GDK_SEAT_CAPABILITY_TABLET_STYLUS
+	SeatCapabilityTabletStylus SeatCapabilities = 4
 	// SeatCapabilityKeyboard wraps GDK_SEAT_CAPABILITY_KEYBOARD
 	//
 	// The seat has keyboard(s) attached
-	SeatCapabilityKeyboard SeatCapabilities = C.GDK_SEAT_CAPABILITY_KEYBOARD
+	SeatCapabilityKeyboard SeatCapabilities = 8
 	// SeatCapabilityTabletPad wraps GDK_SEAT_CAPABILITY_TABLET_PAD
 	//
 	// The seat has drawing tablet pad(s) attached
-	SeatCapabilityTabletPad SeatCapabilities = C.GDK_SEAT_CAPABILITY_TABLET_PAD
+	SeatCapabilityTabletPad SeatCapabilities = 16
 	// SeatCapabilityAllPointing wraps GDK_SEAT_CAPABILITY_ALL_POINTING
 	//
 	// The union of all pointing capabilities
-	SeatCapabilityAllPointing SeatCapabilities = C.GDK_SEAT_CAPABILITY_ALL_POINTING
+	SeatCapabilityAllPointing SeatCapabilities = 7
 	// SeatCapabilityAll wraps GDK_SEAT_CAPABILITY_ALL
 	//
 	// The union of all capabilities
-	SeatCapabilityAll SeatCapabilities = C.GDK_SEAT_CAPABILITY_ALL
+	SeatCapabilityAll SeatCapabilities = 31
 )
 
 func marshalSeatCapabilities(p unsafe.Pointer) (any, error) {
@@ -6494,71 +6494,71 @@ const (
 	// ToplevelStateMinimized wraps GDK_TOPLEVEL_STATE_MINIMIZED
 	//
 	// the surface is minimized
-	ToplevelStateMinimized ToplevelState = C.GDK_TOPLEVEL_STATE_MINIMIZED
+	ToplevelStateMinimized ToplevelState = 1
 	// ToplevelStateMaximized wraps GDK_TOPLEVEL_STATE_MAXIMIZED
 	//
 	// the surface is maximized
-	ToplevelStateMaximized ToplevelState = C.GDK_TOPLEVEL_STATE_MAXIMIZED
+	ToplevelStateMaximized ToplevelState = 2
 	// ToplevelStateSticky wraps GDK_TOPLEVEL_STATE_STICKY
 	//
 	// the surface is sticky
-	ToplevelStateSticky ToplevelState = C.GDK_TOPLEVEL_STATE_STICKY
+	ToplevelStateSticky ToplevelState = 4
 	// ToplevelStateFullscreen wraps GDK_TOPLEVEL_STATE_FULLSCREEN
 	//
 	// the surface is maximized without decorations
-	ToplevelStateFullscreen ToplevelState = C.GDK_TOPLEVEL_STATE_FULLSCREEN
+	ToplevelStateFullscreen ToplevelState = 8
 	// ToplevelStateAbove wraps GDK_TOPLEVEL_STATE_ABOVE
 	//
 	// the surface is kept above other surfaces
-	ToplevelStateAbove ToplevelState = C.GDK_TOPLEVEL_STATE_ABOVE
+	ToplevelStateAbove ToplevelState = 16
 	// ToplevelStateBelow wraps GDK_TOPLEVEL_STATE_BELOW
 	//
 	// the surface is kept below other surfaces
-	ToplevelStateBelow ToplevelState = C.GDK_TOPLEVEL_STATE_BELOW
+	ToplevelStateBelow ToplevelState = 32
 	// ToplevelStateFocused wraps GDK_TOPLEVEL_STATE_FOCUSED
 	//
 	// the surface is presented as focused (with active decorations)
-	ToplevelStateFocused ToplevelState = C.GDK_TOPLEVEL_STATE_FOCUSED
+	ToplevelStateFocused ToplevelState = 64
 	// ToplevelStateTiled wraps GDK_TOPLEVEL_STATE_TILED
 	//
 	// the surface is in a tiled state
-	ToplevelStateTiled ToplevelState = C.GDK_TOPLEVEL_STATE_TILED
+	ToplevelStateTiled ToplevelState = 128
 	// ToplevelStateTopTiled wraps GDK_TOPLEVEL_STATE_TOP_TILED
 	//
 	// whether the top edge is tiled
-	ToplevelStateTopTiled ToplevelState = C.GDK_TOPLEVEL_STATE_TOP_TILED
+	ToplevelStateTopTiled ToplevelState = 256
 	// ToplevelStateTopResizable wraps GDK_TOPLEVEL_STATE_TOP_RESIZABLE
 	//
 	// whether the top edge is resizable
-	ToplevelStateTopResizable ToplevelState = C.GDK_TOPLEVEL_STATE_TOP_RESIZABLE
+	ToplevelStateTopResizable ToplevelState = 512
 	// ToplevelStateRightTiled wraps GDK_TOPLEVEL_STATE_RIGHT_TILED
 	//
 	// whether the right edge is tiled
-	ToplevelStateRightTiled ToplevelState = C.GDK_TOPLEVEL_STATE_RIGHT_TILED
+	ToplevelStateRightTiled ToplevelState = 1024
 	// ToplevelStateRightResizable wraps GDK_TOPLEVEL_STATE_RIGHT_RESIZABLE
 	//
 	// whether the right edge is resizable
-	ToplevelStateRightResizable ToplevelState = C.GDK_TOPLEVEL_STATE_RIGHT_RESIZABLE
+	ToplevelStateRightResizable ToplevelState = 2048
 	// ToplevelStateBottomTiled wraps GDK_TOPLEVEL_STATE_BOTTOM_TILED
 	//
 	// whether the bottom edge is tiled
-	ToplevelStateBottomTiled ToplevelState = C.GDK_TOPLEVEL_STATE_BOTTOM_TILED
+	ToplevelStateBottomTiled ToplevelState = 4096
 	// ToplevelStateBottomResizable wraps GDK_TOPLEVEL_STATE_BOTTOM_RESIZABLE
 	//
 	// whether the bottom edge is resizable
-	ToplevelStateBottomResizable ToplevelState = C.GDK_TOPLEVEL_STATE_BOTTOM_RESIZABLE
+	ToplevelStateBottomResizable ToplevelState = 8192
 	// ToplevelStateLeftTiled wraps GDK_TOPLEVEL_STATE_LEFT_TILED
 	//
 	// whether the left edge is tiled
-	ToplevelStateLeftTiled ToplevelState = C.GDK_TOPLEVEL_STATE_LEFT_TILED
+	ToplevelStateLeftTiled ToplevelState = 16384
 	// ToplevelStateLeftResizable wraps GDK_TOPLEVEL_STATE_LEFT_RESIZABLE
 	//
 	// whether the left edge is resizable
-	ToplevelStateLeftResizable ToplevelState = C.GDK_TOPLEVEL_STATE_LEFT_RESIZABLE
+	ToplevelStateLeftResizable ToplevelState = 32768
 	// ToplevelStateSuspended wraps GDK_TOPLEVEL_STATE_SUSPENDED
 	//
 	// The surface is not visible to the user.
-	ToplevelStateSuspended ToplevelState = C.GDK_TOPLEVEL_STATE_SUSPENDED
+	ToplevelStateSuspended ToplevelState = 65536
 )
 
 func marshalToplevelState(p unsafe.Pointer) (any, error) {

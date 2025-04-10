@@ -1058,13 +1058,13 @@ const (
 	//
 	// The announcement is low priority,
 	//   and might be read only on the user's request.
-	AccessibleAnnouncementPriorityLow AccessibleAnnouncementPriority = C.GTK_ACCESSIBLE_ANNOUNCEMENT_PRIORITY_LOW
+	AccessibleAnnouncementPriorityLow AccessibleAnnouncementPriority = 0
 	// AccessibleAnnouncementPriorityMedium wraps GTK_ACCESSIBLE_ANNOUNCEMENT_PRIORITY_MEDIUM
 	//
 	// The announcement is of medium
 	//   priority, and is usually spoken at the next opportunity, such as at the
 	//   end of speaking the current sentence or when the user pauses typing.
-	AccessibleAnnouncementPriorityMedium AccessibleAnnouncementPriority = C.GTK_ACCESSIBLE_ANNOUNCEMENT_PRIORITY_MEDIUM
+	AccessibleAnnouncementPriorityMedium AccessibleAnnouncementPriority = 1
 	// AccessibleAnnouncementPriorityHigh wraps GTK_ACCESSIBLE_ANNOUNCEMENT_PRIORITY_HIGH
 	//
 	// The announcement is of high
@@ -1073,7 +1073,7 @@ const (
 	//   authors SHOULD NOT use high priority announcements unless the
 	//   interruption is imperative. An example would be a notification about a
 	//   critical battery power level.
-	AccessibleAnnouncementPriorityHigh AccessibleAnnouncementPriority = C.GTK_ACCESSIBLE_ANNOUNCEMENT_PRIORITY_HIGH
+	AccessibleAnnouncementPriorityHigh AccessibleAnnouncementPriority = 2
 )
 
 func marshalAccessibleAnnouncementPriority(p unsafe.Pointer) (any, error) {
@@ -1097,19 +1097,19 @@ const (
 	// AccessibleAutocompleteNone wraps GTK_ACCESSIBLE_AUTOCOMPLETE_NONE
 	//
 	// Automatic suggestions are not displayed.
-	AccessibleAutocompleteNone AccessibleAutocomplete = C.GTK_ACCESSIBLE_AUTOCOMPLETE_NONE
+	AccessibleAutocompleteNone AccessibleAutocomplete = 0
 	// AccessibleAutocompleteInline wraps GTK_ACCESSIBLE_AUTOCOMPLETE_INLINE
 	//
 	// When a user is providing input, text
 	//    suggesting one way to complete the provided input may be dynamically
 	//    inserted after the caret.
-	AccessibleAutocompleteInline AccessibleAutocomplete = C.GTK_ACCESSIBLE_AUTOCOMPLETE_INLINE
+	AccessibleAutocompleteInline AccessibleAutocomplete = 1
 	// AccessibleAutocompleteList wraps GTK_ACCESSIBLE_AUTOCOMPLETE_LIST
 	//
 	// When a user is providing input, an element
 	//    containing a collection of values that could complete the provided input
 	//    may be displayed.
-	AccessibleAutocompleteList AccessibleAutocomplete = C.GTK_ACCESSIBLE_AUTOCOMPLETE_LIST
+	AccessibleAutocompleteList AccessibleAutocomplete = 2
 	// AccessibleAutocompleteBoth wraps GTK_ACCESSIBLE_AUTOCOMPLETE_BOTH
 	//
 	// When a user is providing input, an element
@@ -1117,7 +1117,7 @@ const (
 	//    may be displayed. If displayed, one value in the collection is automatically
 	//    selected, and the text needed to complete the automatically selected value
 	//    appears after the caret in the input.
-	AccessibleAutocompleteBoth AccessibleAutocomplete = C.GTK_ACCESSIBLE_AUTOCOMPLETE_BOTH
+	AccessibleAutocompleteBoth AccessibleAutocomplete = 3
 )
 
 func marshalAccessibleAutocomplete(p unsafe.Pointer) (any, error) {
@@ -1145,19 +1145,19 @@ const (
 	// AccessibleInvalidFalse wraps GTK_ACCESSIBLE_INVALID_FALSE
 	//
 	// There are no detected errors in the value
-	AccessibleInvalidFalse AccessibleInvalidState = C.GTK_ACCESSIBLE_INVALID_FALSE
+	AccessibleInvalidFalse AccessibleInvalidState = 0
 	// AccessibleInvalidTrue wraps GTK_ACCESSIBLE_INVALID_TRUE
 	//
 	// The value entered by the user has failed validation
-	AccessibleInvalidTrue AccessibleInvalidState = C.GTK_ACCESSIBLE_INVALID_TRUE
+	AccessibleInvalidTrue AccessibleInvalidState = 1
 	// AccessibleInvalidGrammar wraps GTK_ACCESSIBLE_INVALID_GRAMMAR
 	//
 	// A grammatical error was detected
-	AccessibleInvalidGrammar AccessibleInvalidState = C.GTK_ACCESSIBLE_INVALID_GRAMMAR
+	AccessibleInvalidGrammar AccessibleInvalidState = 2
 	// AccessibleInvalidSpelling wraps GTK_ACCESSIBLE_INVALID_SPELLING
 	//
 	// A spelling error was detected
-	AccessibleInvalidSpelling AccessibleInvalidState = C.GTK_ACCESSIBLE_INVALID_SPELLING
+	AccessibleInvalidSpelling AccessibleInvalidState = 3
 )
 
 func marshalAccessibleInvalidState(p unsafe.Pointer) (any, error) {
@@ -1181,15 +1181,15 @@ const (
 	// AccessiblePlatformStateFocusable wraps GTK_ACCESSIBLE_PLATFORM_STATE_FOCUSABLE
 	//
 	// whether the accessible can be focused
-	AccessiblePlatformStateFocusable AccessiblePlatformState = C.GTK_ACCESSIBLE_PLATFORM_STATE_FOCUSABLE
+	AccessiblePlatformStateFocusable AccessiblePlatformState = 0
 	// AccessiblePlatformStateFocused wraps GTK_ACCESSIBLE_PLATFORM_STATE_FOCUSED
 	//
 	// whether the accessible has focus
-	AccessiblePlatformStateFocused AccessiblePlatformState = C.GTK_ACCESSIBLE_PLATFORM_STATE_FOCUSED
+	AccessiblePlatformStateFocused AccessiblePlatformState = 1
 	// AccessiblePlatformStateActive wraps GTK_ACCESSIBLE_PLATFORM_STATE_ACTIVE
 	//
 	// whether the accessible is active
-	AccessiblePlatformStateActive AccessiblePlatformState = C.GTK_ACCESSIBLE_PLATFORM_STATE_ACTIVE
+	AccessiblePlatformStateActive AccessiblePlatformState = 2
 )
 
 func marshalAccessiblePlatformState(p unsafe.Pointer) (any, error) {
@@ -1215,108 +1215,108 @@ const (
 	//    could trigger display of one or more predictions of the user's intended
 	//    value for a combobox, searchbox, or textbox and specifies how predictions
 	//    would be presented if they were made. Value type: [enum@AccessibleAutocomplete]
-	AccessiblePropertyAutocomplete AccessibleProperty = C.GTK_ACCESSIBLE_PROPERTY_AUTOCOMPLETE
+	AccessiblePropertyAutocomplete AccessibleProperty = 0
 	// AccessiblePropertyDescription wraps GTK_ACCESSIBLE_PROPERTY_DESCRIPTION
 	//
 	// Defines a string value that describes
 	//    or annotates the current element. Value type: string
-	AccessiblePropertyDescription AccessibleProperty = C.GTK_ACCESSIBLE_PROPERTY_DESCRIPTION
+	AccessiblePropertyDescription AccessibleProperty = 1
 	// AccessiblePropertyHasPopup wraps GTK_ACCESSIBLE_PROPERTY_HAS_POPUP
 	//
 	// Indicates the availability and type of
 	//    interactive popup element, such as menu or dialog, that can be triggered
 	//    by an element.
-	AccessiblePropertyHasPopup AccessibleProperty = C.GTK_ACCESSIBLE_PROPERTY_HAS_POPUP
+	AccessiblePropertyHasPopup AccessibleProperty = 2
 	// AccessiblePropertyKeyShortcuts wraps GTK_ACCESSIBLE_PROPERTY_KEY_SHORTCUTS
 	//
 	// Indicates keyboard shortcuts that an
 	//    author has implemented to activate or give focus to an element. Value type:
 	//    string
-	AccessiblePropertyKeyShortcuts AccessibleProperty = C.GTK_ACCESSIBLE_PROPERTY_KEY_SHORTCUTS
+	AccessiblePropertyKeyShortcuts AccessibleProperty = 3
 	// AccessiblePropertyLabel wraps GTK_ACCESSIBLE_PROPERTY_LABEL
 	//
 	// Defines a string value that labels the current
 	//    element. Value type: string
-	AccessiblePropertyLabel AccessibleProperty = C.GTK_ACCESSIBLE_PROPERTY_LABEL
+	AccessiblePropertyLabel AccessibleProperty = 4
 	// AccessiblePropertyLevel wraps GTK_ACCESSIBLE_PROPERTY_LEVEL
 	//
 	// Defines the hierarchical level of an element
 	//    within a structure. Value type: integer
-	AccessiblePropertyLevel AccessibleProperty = C.GTK_ACCESSIBLE_PROPERTY_LEVEL
+	AccessiblePropertyLevel AccessibleProperty = 5
 	// AccessiblePropertyModal wraps GTK_ACCESSIBLE_PROPERTY_MODAL
 	//
 	// Indicates whether an element is modal when
 	//    displayed. Value type: boolean
-	AccessiblePropertyModal AccessibleProperty = C.GTK_ACCESSIBLE_PROPERTY_MODAL
+	AccessiblePropertyModal AccessibleProperty = 6
 	// AccessiblePropertyMultiLine wraps GTK_ACCESSIBLE_PROPERTY_MULTI_LINE
 	//
 	// Indicates whether a text box accepts
 	//    multiple lines of input or only a single line. Value type: boolean
-	AccessiblePropertyMultiLine AccessibleProperty = C.GTK_ACCESSIBLE_PROPERTY_MULTI_LINE
+	AccessiblePropertyMultiLine AccessibleProperty = 7
 	// AccessiblePropertyMultiSelectable wraps GTK_ACCESSIBLE_PROPERTY_MULTI_SELECTABLE
 	//
 	// Indicates that the user may select
 	//    more than one item from the current selectable descendants. Value type:
 	//    boolean
-	AccessiblePropertyMultiSelectable AccessibleProperty = C.GTK_ACCESSIBLE_PROPERTY_MULTI_SELECTABLE
+	AccessiblePropertyMultiSelectable AccessibleProperty = 8
 	// AccessiblePropertyOrientation wraps GTK_ACCESSIBLE_PROPERTY_ORIENTATION
 	//
 	// Indicates whether the element's
 	//    orientation is horizontal, vertical, or unknown/ambiguous. Value type:
 	//    [enum@Orientation]
-	AccessiblePropertyOrientation AccessibleProperty = C.GTK_ACCESSIBLE_PROPERTY_ORIENTATION
+	AccessiblePropertyOrientation AccessibleProperty = 9
 	// AccessiblePropertyPlaceholder wraps GTK_ACCESSIBLE_PROPERTY_PLACEHOLDER
 	//
 	// Defines a short hint (a word or short
 	//    phrase) intended to aid the user with data entry when the control has no
 	//    value. A hint could be a sample value or a brief description of the expected
 	//    format. Value type: string
-	AccessiblePropertyPlaceholder AccessibleProperty = C.GTK_ACCESSIBLE_PROPERTY_PLACEHOLDER
+	AccessiblePropertyPlaceholder AccessibleProperty = 10
 	// AccessiblePropertyReadOnly wraps GTK_ACCESSIBLE_PROPERTY_READ_ONLY
 	//
 	// Indicates that the element is not editable,
 	//    but is otherwise operable. Value type: boolean
-	AccessiblePropertyReadOnly AccessibleProperty = C.GTK_ACCESSIBLE_PROPERTY_READ_ONLY
+	AccessiblePropertyReadOnly AccessibleProperty = 11
 	// AccessiblePropertyRequired wraps GTK_ACCESSIBLE_PROPERTY_REQUIRED
 	//
 	// Indicates that user input is required on
 	//    the element before a form may be submitted. Value type: boolean
-	AccessiblePropertyRequired AccessibleProperty = C.GTK_ACCESSIBLE_PROPERTY_REQUIRED
+	AccessiblePropertyRequired AccessibleProperty = 12
 	// AccessiblePropertyRoleDescription wraps GTK_ACCESSIBLE_PROPERTY_ROLE_DESCRIPTION
 	//
 	// Defines a human-readable,
 	//    author-localized description for the role of an element. Value type: string
-	AccessiblePropertyRoleDescription AccessibleProperty = C.GTK_ACCESSIBLE_PROPERTY_ROLE_DESCRIPTION
+	AccessiblePropertyRoleDescription AccessibleProperty = 13
 	// AccessiblePropertySort wraps GTK_ACCESSIBLE_PROPERTY_SORT
 	//
 	// Indicates if items in a table or grid are
 	//    sorted in ascending or descending order. Value type: [enum@AccessibleSort]
-	AccessiblePropertySort AccessibleProperty = C.GTK_ACCESSIBLE_PROPERTY_SORT
+	AccessiblePropertySort AccessibleProperty = 14
 	// AccessiblePropertyValueMax wraps GTK_ACCESSIBLE_PROPERTY_VALUE_MAX
 	//
 	// Defines the maximum allowed value for a
 	//    range widget. Value type: double
-	AccessiblePropertyValueMax AccessibleProperty = C.GTK_ACCESSIBLE_PROPERTY_VALUE_MAX
+	AccessiblePropertyValueMax AccessibleProperty = 15
 	// AccessiblePropertyValueMin wraps GTK_ACCESSIBLE_PROPERTY_VALUE_MIN
 	//
 	// Defines the minimum allowed value for a
 	//    range widget. Value type: double
-	AccessiblePropertyValueMin AccessibleProperty = C.GTK_ACCESSIBLE_PROPERTY_VALUE_MIN
+	AccessiblePropertyValueMin AccessibleProperty = 16
 	// AccessiblePropertyValueNow wraps GTK_ACCESSIBLE_PROPERTY_VALUE_NOW
 	//
 	// Defines the current value for a range widget.
 	//    Value type: double
-	AccessiblePropertyValueNow AccessibleProperty = C.GTK_ACCESSIBLE_PROPERTY_VALUE_NOW
+	AccessiblePropertyValueNow AccessibleProperty = 17
 	// AccessiblePropertyValueText wraps GTK_ACCESSIBLE_PROPERTY_VALUE_TEXT
 	//
 	// Defines the human readable text alternative
 	//    of aria-valuenow for a range widget. Value type: string
-	AccessiblePropertyValueText AccessibleProperty = C.GTK_ACCESSIBLE_PROPERTY_VALUE_TEXT
+	AccessiblePropertyValueText AccessibleProperty = 18
 	// AccessiblePropertyHelpText wraps GTK_ACCESSIBLE_PROPERTY_HELP_TEXT
 	//
 	// Defines a string value that provides a description of non-standard keyboard
 	// interactions of the current element. Value type: string
-	AccessiblePropertyHelpText AccessibleProperty = C.GTK_ACCESSIBLE_PROPERTY_HELP_TEXT
+	AccessiblePropertyHelpText AccessibleProperty = 19
 )
 
 func marshalAccessibleProperty(p unsafe.Pointer) (any, error) {
@@ -1344,98 +1344,98 @@ const (
 	// Identifies the currently active
 	//    element when focus is on a composite widget, combobox, textbox, group,
 	//    or application. Value type: reference
-	AccessibleRelationActiveDescendant AccessibleRelation = C.GTK_ACCESSIBLE_RELATION_ACTIVE_DESCENDANT
+	AccessibleRelationActiveDescendant AccessibleRelation = 0
 	// AccessibleRelationColCount wraps GTK_ACCESSIBLE_RELATION_COL_COUNT
 	//
 	// Defines the total number of columns
 	//    in a table, grid, or treegrid. Value type: integer
-	AccessibleRelationColCount AccessibleRelation = C.GTK_ACCESSIBLE_RELATION_COL_COUNT
+	AccessibleRelationColCount AccessibleRelation = 1
 	// AccessibleRelationColIndex wraps GTK_ACCESSIBLE_RELATION_COL_INDEX
 	//
 	// Defines an element's column index or
 	//    position with respect to the total number of columns within a table,
 	//    grid, or treegrid. Value type: integer
-	AccessibleRelationColIndex AccessibleRelation = C.GTK_ACCESSIBLE_RELATION_COL_INDEX
+	AccessibleRelationColIndex AccessibleRelation = 2
 	// AccessibleRelationColIndexText wraps GTK_ACCESSIBLE_RELATION_COL_INDEX_TEXT
 	//
 	// Defines a human readable text
 	//   alternative of %GTK_ACCESSIBLE_RELATION_COL_INDEX. Value type: string
-	AccessibleRelationColIndexText AccessibleRelation = C.GTK_ACCESSIBLE_RELATION_COL_INDEX_TEXT
+	AccessibleRelationColIndexText AccessibleRelation = 3
 	// AccessibleRelationColSpan wraps GTK_ACCESSIBLE_RELATION_COL_SPAN
 	//
 	// Defines the number of columns spanned
 	//   by a cell or gridcell within a table, grid, or treegrid. Value type: integer
-	AccessibleRelationColSpan AccessibleRelation = C.GTK_ACCESSIBLE_RELATION_COL_SPAN
+	AccessibleRelationColSpan AccessibleRelation = 4
 	// AccessibleRelationControls wraps GTK_ACCESSIBLE_RELATION_CONTROLS
 	//
 	// Identifies the element (or elements) whose
 	//    contents or presence are controlled by the current element. Value type: reference
-	AccessibleRelationControls AccessibleRelation = C.GTK_ACCESSIBLE_RELATION_CONTROLS
+	AccessibleRelationControls AccessibleRelation = 5
 	// AccessibleRelationDescribedBy wraps GTK_ACCESSIBLE_RELATION_DESCRIBED_BY
 	//
 	// Identifies the element (or elements)
 	//    that describes the object. Value type: reference
-	AccessibleRelationDescribedBy AccessibleRelation = C.GTK_ACCESSIBLE_RELATION_DESCRIBED_BY
+	AccessibleRelationDescribedBy AccessibleRelation = 6
 	// AccessibleRelationDetails wraps GTK_ACCESSIBLE_RELATION_DETAILS
 	//
 	// Identifies the element (or elements) that
 	//    provide additional information related to the object. Value type: reference
-	AccessibleRelationDetails AccessibleRelation = C.GTK_ACCESSIBLE_RELATION_DETAILS
+	AccessibleRelationDetails AccessibleRelation = 7
 	// AccessibleRelationErrorMessage wraps GTK_ACCESSIBLE_RELATION_ERROR_MESSAGE
 	//
 	// Identifies the element (or elements) that
 	//    provide an error message for an object. Value type: reference
-	AccessibleRelationErrorMessage AccessibleRelation = C.GTK_ACCESSIBLE_RELATION_ERROR_MESSAGE
+	AccessibleRelationErrorMessage AccessibleRelation = 8
 	// AccessibleRelationFlowTo wraps GTK_ACCESSIBLE_RELATION_FLOW_TO
 	//
 	// Identifies the next element (or elements)
 	//    in an alternate reading order of content which, at the user's discretion,
 	//    allows assistive technology to override the general default of reading in
 	//    document source order. Value type: reference
-	AccessibleRelationFlowTo AccessibleRelation = C.GTK_ACCESSIBLE_RELATION_FLOW_TO
+	AccessibleRelationFlowTo AccessibleRelation = 9
 	// AccessibleRelationLabelledBy wraps GTK_ACCESSIBLE_RELATION_LABELLED_BY
 	//
 	// Identifies the element (or elements)
 	//    that labels the current element. Value type: reference
-	AccessibleRelationLabelledBy AccessibleRelation = C.GTK_ACCESSIBLE_RELATION_LABELLED_BY
+	AccessibleRelationLabelledBy AccessibleRelation = 10
 	// AccessibleRelationOwns wraps GTK_ACCESSIBLE_RELATION_OWNS
 	//
 	// Identifies an element (or elements) in order
 	//    to define a visual, functional, or contextual parent/child relationship
 	//    between elements where the widget hierarchy cannot be used to represent
 	//    the relationship. Value type: reference
-	AccessibleRelationOwns AccessibleRelation = C.GTK_ACCESSIBLE_RELATION_OWNS
+	AccessibleRelationOwns AccessibleRelation = 11
 	// AccessibleRelationPosInSet wraps GTK_ACCESSIBLE_RELATION_POS_IN_SET
 	//
 	// Defines an element's number or position
 	//    in the current set of listitems or treeitems. Value type: integer
-	AccessibleRelationPosInSet AccessibleRelation = C.GTK_ACCESSIBLE_RELATION_POS_IN_SET
+	AccessibleRelationPosInSet AccessibleRelation = 12
 	// AccessibleRelationRowCount wraps GTK_ACCESSIBLE_RELATION_ROW_COUNT
 	//
 	// Defines the total number of rows in a table,
 	//    grid, or treegrid. Value type: integer
-	AccessibleRelationRowCount AccessibleRelation = C.GTK_ACCESSIBLE_RELATION_ROW_COUNT
+	AccessibleRelationRowCount AccessibleRelation = 13
 	// AccessibleRelationRowIndex wraps GTK_ACCESSIBLE_RELATION_ROW_INDEX
 	//
 	// Defines an element's row index or position
 	//    with respect to the total number of rows within a table, grid, or treegrid.
 	//    Value type: integer
-	AccessibleRelationRowIndex AccessibleRelation = C.GTK_ACCESSIBLE_RELATION_ROW_INDEX
+	AccessibleRelationRowIndex AccessibleRelation = 14
 	// AccessibleRelationRowIndexText wraps GTK_ACCESSIBLE_RELATION_ROW_INDEX_TEXT
 	//
 	// Defines a human readable text
 	//    alternative of aria-rowindex. Value type: string
-	AccessibleRelationRowIndexText AccessibleRelation = C.GTK_ACCESSIBLE_RELATION_ROW_INDEX_TEXT
+	AccessibleRelationRowIndexText AccessibleRelation = 15
 	// AccessibleRelationRowSpan wraps GTK_ACCESSIBLE_RELATION_ROW_SPAN
 	//
 	// Defines the number of rows spanned by a
 	//    cell or gridcell within a table, grid, or treegrid. Value type: integer
-	AccessibleRelationRowSpan AccessibleRelation = C.GTK_ACCESSIBLE_RELATION_ROW_SPAN
+	AccessibleRelationRowSpan AccessibleRelation = 16
 	// AccessibleRelationSetSize wraps GTK_ACCESSIBLE_RELATION_SET_SIZE
 	//
 	// Defines the number of items in the current
 	//    set of listitems or treeitems. Value type: integer
-	AccessibleRelationSetSize AccessibleRelation = C.GTK_ACCESSIBLE_RELATION_SET_SIZE
+	AccessibleRelationSetSize AccessibleRelation = 17
 )
 
 func marshalAccessibleRelation(p unsafe.Pointer) (any, error) {
@@ -1462,370 +1462,370 @@ const (
 	//
 	// An element with important, and usually
 	//   time-sensitive, information
-	AccessibleRoleAlert AccessibleRole = C.GTK_ACCESSIBLE_ROLE_ALERT
+	AccessibleRoleAlert AccessibleRole = 0
 	// AccessibleRoleAlertDialog wraps GTK_ACCESSIBLE_ROLE_ALERT_DIALOG
 	//
 	// A type of dialog that contains an
 	//   alert message
-	AccessibleRoleAlertDialog AccessibleRole = C.GTK_ACCESSIBLE_ROLE_ALERT_DIALOG
+	AccessibleRoleAlertDialog AccessibleRole = 1
 	// AccessibleRoleBanner wraps GTK_ACCESSIBLE_ROLE_BANNER
 	//
 	// Unused
-	AccessibleRoleBanner AccessibleRole = C.GTK_ACCESSIBLE_ROLE_BANNER
+	AccessibleRoleBanner AccessibleRole = 2
 	// AccessibleRoleButton wraps GTK_ACCESSIBLE_ROLE_BUTTON
 	//
 	// An input element that allows for
 	//   user-triggered actions when clicked or pressed
-	AccessibleRoleButton AccessibleRole = C.GTK_ACCESSIBLE_ROLE_BUTTON
+	AccessibleRoleButton AccessibleRole = 3
 	// AccessibleRoleCaption wraps GTK_ACCESSIBLE_ROLE_CAPTION
 	//
 	// Unused
-	AccessibleRoleCaption AccessibleRole = C.GTK_ACCESSIBLE_ROLE_CAPTION
+	AccessibleRoleCaption AccessibleRole = 4
 	// AccessibleRoleCell wraps GTK_ACCESSIBLE_ROLE_CELL
 	//
 	// Unused
-	AccessibleRoleCell AccessibleRole = C.GTK_ACCESSIBLE_ROLE_CELL
+	AccessibleRoleCell AccessibleRole = 5
 	// AccessibleRoleCheckbox wraps GTK_ACCESSIBLE_ROLE_CHECKBOX
 	//
 	// A checkable input element that has
 	//   three possible values: `true`, `false`, or `mixed`
-	AccessibleRoleCheckbox AccessibleRole = C.GTK_ACCESSIBLE_ROLE_CHECKBOX
+	AccessibleRoleCheckbox AccessibleRole = 6
 	// AccessibleRoleColumnHeader wraps GTK_ACCESSIBLE_ROLE_COLUMN_HEADER
 	//
 	// A header in a columned list.
-	AccessibleRoleColumnHeader AccessibleRole = C.GTK_ACCESSIBLE_ROLE_COLUMN_HEADER
+	AccessibleRoleColumnHeader AccessibleRole = 7
 	// AccessibleRoleComboBox wraps GTK_ACCESSIBLE_ROLE_COMBO_BOX
 	//
 	// An input that controls another element,
 	//   such as a list or a grid, that can dynamically pop up to help the user
 	//   set the value of the input
-	AccessibleRoleComboBox AccessibleRole = C.GTK_ACCESSIBLE_ROLE_COMBO_BOX
+	AccessibleRoleComboBox AccessibleRole = 8
 	// AccessibleRoleCommand wraps GTK_ACCESSIBLE_ROLE_COMMAND
 	//
 	// Abstract role.
-	AccessibleRoleCommand AccessibleRole = C.GTK_ACCESSIBLE_ROLE_COMMAND
+	AccessibleRoleCommand AccessibleRole = 9
 	// AccessibleRoleComposite wraps GTK_ACCESSIBLE_ROLE_COMPOSITE
 	//
 	// Abstract role.
-	AccessibleRoleComposite AccessibleRole = C.GTK_ACCESSIBLE_ROLE_COMPOSITE
+	AccessibleRoleComposite AccessibleRole = 10
 	// AccessibleRoleDialog wraps GTK_ACCESSIBLE_ROLE_DIALOG
 	//
 	// A dialog is a window that is designed to interrupt
 	//   the current processing of an application in order to prompt the user to enter
 	//   information or require a response.
-	AccessibleRoleDialog AccessibleRole = C.GTK_ACCESSIBLE_ROLE_DIALOG
+	AccessibleRoleDialog AccessibleRole = 11
 	// AccessibleRoleDocument wraps GTK_ACCESSIBLE_ROLE_DOCUMENT
 	//
 	// Content that assistive technology users may want to
 	//   browse in a reading mode.
-	AccessibleRoleDocument AccessibleRole = C.GTK_ACCESSIBLE_ROLE_DOCUMENT
+	AccessibleRoleDocument AccessibleRole = 12
 	// AccessibleRoleFeed wraps GTK_ACCESSIBLE_ROLE_FEED
 	//
 	// Unused
-	AccessibleRoleFeed AccessibleRole = C.GTK_ACCESSIBLE_ROLE_FEED
+	AccessibleRoleFeed AccessibleRole = 13
 	// AccessibleRoleForm wraps GTK_ACCESSIBLE_ROLE_FORM
 	//
 	// Unused
-	AccessibleRoleForm AccessibleRole = C.GTK_ACCESSIBLE_ROLE_FORM
+	AccessibleRoleForm AccessibleRole = 14
 	// AccessibleRoleGeneric wraps GTK_ACCESSIBLE_ROLE_GENERIC
 	//
 	// A nameless container that has no semantic meaning
 	//   of its own. This is the role that GTK uses by default for widgets.
-	AccessibleRoleGeneric AccessibleRole = C.GTK_ACCESSIBLE_ROLE_GENERIC
+	AccessibleRoleGeneric AccessibleRole = 15
 	// AccessibleRoleGrid wraps GTK_ACCESSIBLE_ROLE_GRID
 	//
 	// A grid of items.
-	AccessibleRoleGrid AccessibleRole = C.GTK_ACCESSIBLE_ROLE_GRID
+	AccessibleRoleGrid AccessibleRole = 16
 	// AccessibleRoleGridCell wraps GTK_ACCESSIBLE_ROLE_GRID_CELL
 	//
 	// An item in a grid or tree grid.
-	AccessibleRoleGridCell AccessibleRole = C.GTK_ACCESSIBLE_ROLE_GRID_CELL
+	AccessibleRoleGridCell AccessibleRole = 17
 	// AccessibleRoleGroup wraps GTK_ACCESSIBLE_ROLE_GROUP
 	//
 	// An element that groups multiple related widgets. GTK uses
 	//   this role for various containers, like [class@Gtk.HeaderBar] or [class@Gtk.Notebook].
-	AccessibleRoleGroup AccessibleRole = C.GTK_ACCESSIBLE_ROLE_GROUP
+	AccessibleRoleGroup AccessibleRole = 18
 	// AccessibleRoleHeading wraps GTK_ACCESSIBLE_ROLE_HEADING
 	//
 	// Unused
-	AccessibleRoleHeading AccessibleRole = C.GTK_ACCESSIBLE_ROLE_HEADING
+	AccessibleRoleHeading AccessibleRole = 19
 	// AccessibleRoleImg wraps GTK_ACCESSIBLE_ROLE_IMG
 	//
 	// An image.
-	AccessibleRoleImg AccessibleRole = C.GTK_ACCESSIBLE_ROLE_IMG
+	AccessibleRoleImg AccessibleRole = 20
 	// AccessibleRoleInput wraps GTK_ACCESSIBLE_ROLE_INPUT
 	//
 	// Abstract role.
-	AccessibleRoleInput AccessibleRole = C.GTK_ACCESSIBLE_ROLE_INPUT
+	AccessibleRoleInput AccessibleRole = 21
 	// AccessibleRoleLabel wraps GTK_ACCESSIBLE_ROLE_LABEL
 	//
 	// A visible name or caption for a user interface component.
-	AccessibleRoleLabel AccessibleRole = C.GTK_ACCESSIBLE_ROLE_LABEL
+	AccessibleRoleLabel AccessibleRole = 22
 	// AccessibleRoleLandmark wraps GTK_ACCESSIBLE_ROLE_LANDMARK
 	//
 	// Abstract role.
-	AccessibleRoleLandmark AccessibleRole = C.GTK_ACCESSIBLE_ROLE_LANDMARK
+	AccessibleRoleLandmark AccessibleRole = 23
 	// AccessibleRoleLegend wraps GTK_ACCESSIBLE_ROLE_LEGEND
 	//
 	// Unused
-	AccessibleRoleLegend AccessibleRole = C.GTK_ACCESSIBLE_ROLE_LEGEND
+	AccessibleRoleLegend AccessibleRole = 24
 	// AccessibleRoleLink wraps GTK_ACCESSIBLE_ROLE_LINK
 	//
 	// A clickable link.
-	AccessibleRoleLink AccessibleRole = C.GTK_ACCESSIBLE_ROLE_LINK
+	AccessibleRoleLink AccessibleRole = 25
 	// AccessibleRoleList wraps GTK_ACCESSIBLE_ROLE_LIST
 	//
 	// A list of items.
-	AccessibleRoleList AccessibleRole = C.GTK_ACCESSIBLE_ROLE_LIST
+	AccessibleRoleList AccessibleRole = 26
 	// AccessibleRoleListBox wraps GTK_ACCESSIBLE_ROLE_LIST_BOX
 	//
 	// Unused.
-	AccessibleRoleListBox AccessibleRole = C.GTK_ACCESSIBLE_ROLE_LIST_BOX
+	AccessibleRoleListBox AccessibleRole = 27
 	// AccessibleRoleListItem wraps GTK_ACCESSIBLE_ROLE_LIST_ITEM
 	//
 	// An item in a list.
-	AccessibleRoleListItem AccessibleRole = C.GTK_ACCESSIBLE_ROLE_LIST_ITEM
+	AccessibleRoleListItem AccessibleRole = 28
 	// AccessibleRoleLog wraps GTK_ACCESSIBLE_ROLE_LOG
 	//
 	// Unused
-	AccessibleRoleLog AccessibleRole = C.GTK_ACCESSIBLE_ROLE_LOG
+	AccessibleRoleLog AccessibleRole = 29
 	// AccessibleRoleMain wraps GTK_ACCESSIBLE_ROLE_MAIN
 	//
 	// Unused
-	AccessibleRoleMain AccessibleRole = C.GTK_ACCESSIBLE_ROLE_MAIN
+	AccessibleRoleMain AccessibleRole = 30
 	// AccessibleRoleMarquee wraps GTK_ACCESSIBLE_ROLE_MARQUEE
 	//
 	// Unused
-	AccessibleRoleMarquee AccessibleRole = C.GTK_ACCESSIBLE_ROLE_MARQUEE
+	AccessibleRoleMarquee AccessibleRole = 31
 	// AccessibleRoleMath wraps GTK_ACCESSIBLE_ROLE_MATH
 	//
 	// Unused
-	AccessibleRoleMath AccessibleRole = C.GTK_ACCESSIBLE_ROLE_MATH
+	AccessibleRoleMath AccessibleRole = 32
 	// AccessibleRoleMeter wraps GTK_ACCESSIBLE_ROLE_METER
 	//
 	// An element that represents a value within a known range.
-	AccessibleRoleMeter AccessibleRole = C.GTK_ACCESSIBLE_ROLE_METER
+	AccessibleRoleMeter AccessibleRole = 33
 	// AccessibleRoleMenu wraps GTK_ACCESSIBLE_ROLE_MENU
 	//
 	// A menu.
-	AccessibleRoleMenu AccessibleRole = C.GTK_ACCESSIBLE_ROLE_MENU
+	AccessibleRoleMenu AccessibleRole = 34
 	// AccessibleRoleMenuBar wraps GTK_ACCESSIBLE_ROLE_MENU_BAR
 	//
 	// A menubar.
-	AccessibleRoleMenuBar AccessibleRole = C.GTK_ACCESSIBLE_ROLE_MENU_BAR
+	AccessibleRoleMenuBar AccessibleRole = 35
 	// AccessibleRoleMenuItem wraps GTK_ACCESSIBLE_ROLE_MENU_ITEM
 	//
 	// An item in a menu.
-	AccessibleRoleMenuItem AccessibleRole = C.GTK_ACCESSIBLE_ROLE_MENU_ITEM
+	AccessibleRoleMenuItem AccessibleRole = 36
 	// AccessibleRoleMenuItemCheckbox wraps GTK_ACCESSIBLE_ROLE_MENU_ITEM_CHECKBOX
 	//
 	// A check item in a menu.
-	AccessibleRoleMenuItemCheckbox AccessibleRole = C.GTK_ACCESSIBLE_ROLE_MENU_ITEM_CHECKBOX
+	AccessibleRoleMenuItemCheckbox AccessibleRole = 37
 	// AccessibleRoleMenuItemRadio wraps GTK_ACCESSIBLE_ROLE_MENU_ITEM_RADIO
 	//
 	// A radio item in a menu.
-	AccessibleRoleMenuItemRadio AccessibleRole = C.GTK_ACCESSIBLE_ROLE_MENU_ITEM_RADIO
+	AccessibleRoleMenuItemRadio AccessibleRole = 38
 	// AccessibleRoleNavigation wraps GTK_ACCESSIBLE_ROLE_NAVIGATION
 	//
 	// Unused
-	AccessibleRoleNavigation AccessibleRole = C.GTK_ACCESSIBLE_ROLE_NAVIGATION
+	AccessibleRoleNavigation AccessibleRole = 39
 	// AccessibleRoleNone wraps GTK_ACCESSIBLE_ROLE_NONE
 	//
 	// An element that is not represented to accessibility technologies.
 	//   This role is synonymous to @GTK_ACCESSIBLE_ROLE_PRESENTATION.
-	AccessibleRoleNone AccessibleRole = C.GTK_ACCESSIBLE_ROLE_NONE
+	AccessibleRoleNone AccessibleRole = 40
 	// AccessibleRoleNote wraps GTK_ACCESSIBLE_ROLE_NOTE
 	//
 	// Unused
-	AccessibleRoleNote AccessibleRole = C.GTK_ACCESSIBLE_ROLE_NOTE
+	AccessibleRoleNote AccessibleRole = 41
 	// AccessibleRoleOption wraps GTK_ACCESSIBLE_ROLE_OPTION
 	//
 	// Unused
-	AccessibleRoleOption AccessibleRole = C.GTK_ACCESSIBLE_ROLE_OPTION
+	AccessibleRoleOption AccessibleRole = 42
 	// AccessibleRolePresentation wraps GTK_ACCESSIBLE_ROLE_PRESENTATION
 	//
 	// An element that is not represented to accessibility technologies.
 	//   This role is synonymous to @GTK_ACCESSIBLE_ROLE_NONE.
-	AccessibleRolePresentation AccessibleRole = C.GTK_ACCESSIBLE_ROLE_PRESENTATION
+	AccessibleRolePresentation AccessibleRole = 43
 	// AccessibleRoleProgressBar wraps GTK_ACCESSIBLE_ROLE_PROGRESS_BAR
 	//
 	// An element that displays the progress
 	//   status for tasks that take a long time.
-	AccessibleRoleProgressBar AccessibleRole = C.GTK_ACCESSIBLE_ROLE_PROGRESS_BAR
+	AccessibleRoleProgressBar AccessibleRole = 44
 	// AccessibleRoleRadio wraps GTK_ACCESSIBLE_ROLE_RADIO
 	//
 	// A checkable input in a group of radio roles,
 	//   only one of which can be checked at a time.
-	AccessibleRoleRadio AccessibleRole = C.GTK_ACCESSIBLE_ROLE_RADIO
+	AccessibleRoleRadio AccessibleRole = 45
 	// AccessibleRoleRadioGroup wraps GTK_ACCESSIBLE_ROLE_RADIO_GROUP
 	//
 	// Unused
-	AccessibleRoleRadioGroup AccessibleRole = C.GTK_ACCESSIBLE_ROLE_RADIO_GROUP
+	AccessibleRoleRadioGroup AccessibleRole = 46
 	// AccessibleRoleRange wraps GTK_ACCESSIBLE_ROLE_RANGE
 	//
 	// Abstract role.
-	AccessibleRoleRange AccessibleRole = C.GTK_ACCESSIBLE_ROLE_RANGE
+	AccessibleRoleRange AccessibleRole = 47
 	// AccessibleRoleRegion wraps GTK_ACCESSIBLE_ROLE_REGION
 	//
 	// Unused
-	AccessibleRoleRegion AccessibleRole = C.GTK_ACCESSIBLE_ROLE_REGION
+	AccessibleRoleRegion AccessibleRole = 48
 	// AccessibleRoleRow wraps GTK_ACCESSIBLE_ROLE_ROW
 	//
 	// A row in a columned list.
-	AccessibleRoleRow AccessibleRole = C.GTK_ACCESSIBLE_ROLE_ROW
+	AccessibleRoleRow AccessibleRole = 49
 	// AccessibleRoleRowGroup wraps GTK_ACCESSIBLE_ROLE_ROW_GROUP
 	//
 	// Unused
-	AccessibleRoleRowGroup AccessibleRole = C.GTK_ACCESSIBLE_ROLE_ROW_GROUP
+	AccessibleRoleRowGroup AccessibleRole = 50
 	// AccessibleRoleRowHeader wraps GTK_ACCESSIBLE_ROLE_ROW_HEADER
 	//
 	// Unused
-	AccessibleRoleRowHeader AccessibleRole = C.GTK_ACCESSIBLE_ROLE_ROW_HEADER
+	AccessibleRoleRowHeader AccessibleRole = 51
 	// AccessibleRoleScrollbar wraps GTK_ACCESSIBLE_ROLE_SCROLLBAR
 	//
 	// A graphical object that controls the scrolling
 	//   of content within a viewing area, regardless of whether the content is fully
 	//   displayed within the viewing area.
-	AccessibleRoleScrollbar AccessibleRole = C.GTK_ACCESSIBLE_ROLE_SCROLLBAR
+	AccessibleRoleScrollbar AccessibleRole = 52
 	// AccessibleRoleSearch wraps GTK_ACCESSIBLE_ROLE_SEARCH
 	//
 	// Unused
-	AccessibleRoleSearch AccessibleRole = C.GTK_ACCESSIBLE_ROLE_SEARCH
+	AccessibleRoleSearch AccessibleRole = 53
 	// AccessibleRoleSearchBox wraps GTK_ACCESSIBLE_ROLE_SEARCH_BOX
 	//
 	// A type of textbox intended for specifying
 	//   search criteria.
-	AccessibleRoleSearchBox AccessibleRole = C.GTK_ACCESSIBLE_ROLE_SEARCH_BOX
+	AccessibleRoleSearchBox AccessibleRole = 54
 	// AccessibleRoleSection wraps GTK_ACCESSIBLE_ROLE_SECTION
 	//
 	// Abstract role.
-	AccessibleRoleSection AccessibleRole = C.GTK_ACCESSIBLE_ROLE_SECTION
+	AccessibleRoleSection AccessibleRole = 55
 	// AccessibleRoleSectionHead wraps GTK_ACCESSIBLE_ROLE_SECTION_HEAD
 	//
 	// Abstract role.
-	AccessibleRoleSectionHead AccessibleRole = C.GTK_ACCESSIBLE_ROLE_SECTION_HEAD
+	AccessibleRoleSectionHead AccessibleRole = 56
 	// AccessibleRoleSelect wraps GTK_ACCESSIBLE_ROLE_SELECT
 	//
 	// Abstract role.
-	AccessibleRoleSelect AccessibleRole = C.GTK_ACCESSIBLE_ROLE_SELECT
+	AccessibleRoleSelect AccessibleRole = 57
 	// AccessibleRoleSeparator wraps GTK_ACCESSIBLE_ROLE_SEPARATOR
 	//
 	// A divider that separates and distinguishes
 	//   sections of content or groups of menuitems.
-	AccessibleRoleSeparator AccessibleRole = C.GTK_ACCESSIBLE_ROLE_SEPARATOR
+	AccessibleRoleSeparator AccessibleRole = 58
 	// AccessibleRoleSlider wraps GTK_ACCESSIBLE_ROLE_SLIDER
 	//
 	// A user input where the user selects a value
 	//   from within a given range.
-	AccessibleRoleSlider AccessibleRole = C.GTK_ACCESSIBLE_ROLE_SLIDER
+	AccessibleRoleSlider AccessibleRole = 59
 	// AccessibleRoleSpinButton wraps GTK_ACCESSIBLE_ROLE_SPIN_BUTTON
 	//
 	// A form of range that expects the user to
 	//   select from among discrete choices.
-	AccessibleRoleSpinButton AccessibleRole = C.GTK_ACCESSIBLE_ROLE_SPIN_BUTTON
+	AccessibleRoleSpinButton AccessibleRole = 60
 	// AccessibleRoleStatus wraps GTK_ACCESSIBLE_ROLE_STATUS
 	//
 	// Unused
-	AccessibleRoleStatus AccessibleRole = C.GTK_ACCESSIBLE_ROLE_STATUS
+	AccessibleRoleStatus AccessibleRole = 61
 	// AccessibleRoleStructure wraps GTK_ACCESSIBLE_ROLE_STRUCTURE
 	//
 	// Abstract role.
-	AccessibleRoleStructure AccessibleRole = C.GTK_ACCESSIBLE_ROLE_STRUCTURE
+	AccessibleRoleStructure AccessibleRole = 62
 	// AccessibleRoleSwitch wraps GTK_ACCESSIBLE_ROLE_SWITCH
 	//
 	// A type of checkbox that represents on/off values,
 	//   as opposed to checked/unchecked values.
-	AccessibleRoleSwitch AccessibleRole = C.GTK_ACCESSIBLE_ROLE_SWITCH
+	AccessibleRoleSwitch AccessibleRole = 63
 	// AccessibleRoleTab wraps GTK_ACCESSIBLE_ROLE_TAB
 	//
 	// An item in a list of tab used for switching pages.
-	AccessibleRoleTab AccessibleRole = C.GTK_ACCESSIBLE_ROLE_TAB
+	AccessibleRoleTab AccessibleRole = 64
 	// AccessibleRoleTable wraps GTK_ACCESSIBLE_ROLE_TABLE
 	//
 	// Unused
-	AccessibleRoleTable AccessibleRole = C.GTK_ACCESSIBLE_ROLE_TABLE
+	AccessibleRoleTable AccessibleRole = 65
 	// AccessibleRoleTabList wraps GTK_ACCESSIBLE_ROLE_TAB_LIST
 	//
 	// A list of tabs for switching pages.
-	AccessibleRoleTabList AccessibleRole = C.GTK_ACCESSIBLE_ROLE_TAB_LIST
+	AccessibleRoleTabList AccessibleRole = 66
 	// AccessibleRoleTabPanel wraps GTK_ACCESSIBLE_ROLE_TAB_PANEL
 	//
 	// A page in a notebook or stack.
-	AccessibleRoleTabPanel AccessibleRole = C.GTK_ACCESSIBLE_ROLE_TAB_PANEL
+	AccessibleRoleTabPanel AccessibleRole = 67
 	// AccessibleRoleTextBox wraps GTK_ACCESSIBLE_ROLE_TEXT_BOX
 	//
 	// A type of input that allows free-form text
 	//   as its value.
-	AccessibleRoleTextBox AccessibleRole = C.GTK_ACCESSIBLE_ROLE_TEXT_BOX
+	AccessibleRoleTextBox AccessibleRole = 68
 	// AccessibleRoleTime wraps GTK_ACCESSIBLE_ROLE_TIME
 	//
 	// Unused
-	AccessibleRoleTime AccessibleRole = C.GTK_ACCESSIBLE_ROLE_TIME
+	AccessibleRoleTime AccessibleRole = 69
 	// AccessibleRoleTimer wraps GTK_ACCESSIBLE_ROLE_TIMER
 	//
 	// Unused
-	AccessibleRoleTimer AccessibleRole = C.GTK_ACCESSIBLE_ROLE_TIMER
+	AccessibleRoleTimer AccessibleRole = 70
 	// AccessibleRoleToolbar wraps GTK_ACCESSIBLE_ROLE_TOOLBAR
 	//
 	// Unused
-	AccessibleRoleToolbar AccessibleRole = C.GTK_ACCESSIBLE_ROLE_TOOLBAR
+	AccessibleRoleToolbar AccessibleRole = 71
 	// AccessibleRoleTooltip wraps GTK_ACCESSIBLE_ROLE_TOOLTIP
 	//
 	// Unused
-	AccessibleRoleTooltip AccessibleRole = C.GTK_ACCESSIBLE_ROLE_TOOLTIP
+	AccessibleRoleTooltip AccessibleRole = 72
 	// AccessibleRoleTree wraps GTK_ACCESSIBLE_ROLE_TREE
 	//
 	// Unused
-	AccessibleRoleTree AccessibleRole = C.GTK_ACCESSIBLE_ROLE_TREE
+	AccessibleRoleTree AccessibleRole = 73
 	// AccessibleRoleTreeGrid wraps GTK_ACCESSIBLE_ROLE_TREE_GRID
 	//
 	// A treeview-like, columned list.
-	AccessibleRoleTreeGrid AccessibleRole = C.GTK_ACCESSIBLE_ROLE_TREE_GRID
+	AccessibleRoleTreeGrid AccessibleRole = 74
 	// AccessibleRoleTreeItem wraps GTK_ACCESSIBLE_ROLE_TREE_ITEM
 	//
 	// Unused
-	AccessibleRoleTreeItem AccessibleRole = C.GTK_ACCESSIBLE_ROLE_TREE_ITEM
+	AccessibleRoleTreeItem AccessibleRole = 75
 	// AccessibleRoleWidget wraps GTK_ACCESSIBLE_ROLE_WIDGET
 	//
 	// Abstract role for interactive components of a
 	//   graphical user interface
-	AccessibleRoleWidget AccessibleRole = C.GTK_ACCESSIBLE_ROLE_WIDGET
+	AccessibleRoleWidget AccessibleRole = 76
 	// AccessibleRoleWindow wraps GTK_ACCESSIBLE_ROLE_WINDOW
 	//
 	// Abstract role for windows.
-	AccessibleRoleWindow AccessibleRole = C.GTK_ACCESSIBLE_ROLE_WINDOW
+	AccessibleRoleWindow AccessibleRole = 77
 	// AccessibleRoleToggleButton wraps GTK_ACCESSIBLE_ROLE_TOGGLE_BUTTON
 	//
 	// A type of push button which stays pressed until depressed by a second
 	// activation.
-	AccessibleRoleToggleButton AccessibleRole = C.GTK_ACCESSIBLE_ROLE_TOGGLE_BUTTON
+	AccessibleRoleToggleButton AccessibleRole = 78
 	// AccessibleRoleApplication wraps GTK_ACCESSIBLE_ROLE_APPLICATION
 	//
 	// A toplevel element of a graphical user interface.
 	// 
 	// This is the role that GTK uses by default for windows.
-	AccessibleRoleApplication AccessibleRole = C.GTK_ACCESSIBLE_ROLE_APPLICATION
+	AccessibleRoleApplication AccessibleRole = 79
 	// AccessibleRoleParagraph wraps GTK_ACCESSIBLE_ROLE_PARAGRAPH
 	//
 	// A paragraph of content.
-	AccessibleRoleParagraph AccessibleRole = C.GTK_ACCESSIBLE_ROLE_PARAGRAPH
+	AccessibleRoleParagraph AccessibleRole = 80
 	// AccessibleRoleBlockQuote wraps GTK_ACCESSIBLE_ROLE_BLOCK_QUOTE
 	//
 	// A section of content that is quoted from another source.
-	AccessibleRoleBlockQuote AccessibleRole = C.GTK_ACCESSIBLE_ROLE_BLOCK_QUOTE
+	AccessibleRoleBlockQuote AccessibleRole = 81
 	// AccessibleRoleArticle wraps GTK_ACCESSIBLE_ROLE_ARTICLE
 	//
 	// A section of a page that consists of a composition that forms an independent
 	// part of a document, page, or site.
-	AccessibleRoleArticle AccessibleRole = C.GTK_ACCESSIBLE_ROLE_ARTICLE
+	AccessibleRoleArticle AccessibleRole = 82
 	// AccessibleRoleComment wraps GTK_ACCESSIBLE_ROLE_COMMENT
 	//
 	// A comment contains content expressing reaction to other content.
-	AccessibleRoleComment AccessibleRole = C.GTK_ACCESSIBLE_ROLE_COMMENT
+	AccessibleRoleComment AccessibleRole = 83
 	// AccessibleRoleTerminal wraps GTK_ACCESSIBLE_ROLE_TERMINAL
 	//
 	// A virtual terminal.
-	AccessibleRoleTerminal AccessibleRole = C.GTK_ACCESSIBLE_ROLE_TERMINAL
+	AccessibleRoleTerminal AccessibleRole = 84
 )
 
 func marshalAccessibleRole(p unsafe.Pointer) (any, error) {
@@ -1849,20 +1849,20 @@ const (
 	// AccessibleSortNone wraps GTK_ACCESSIBLE_SORT_NONE
 	//
 	// There is no defined sort applied to the column.
-	AccessibleSortNone AccessibleSort = C.GTK_ACCESSIBLE_SORT_NONE
+	AccessibleSortNone AccessibleSort = 0
 	// AccessibleSortAscending wraps GTK_ACCESSIBLE_SORT_ASCENDING
 	//
 	// Items are sorted in ascending order by this column.
-	AccessibleSortAscending AccessibleSort = C.GTK_ACCESSIBLE_SORT_ASCENDING
+	AccessibleSortAscending AccessibleSort = 1
 	// AccessibleSortDescending wraps GTK_ACCESSIBLE_SORT_DESCENDING
 	//
 	// Items are sorted in descending order by this column.
-	AccessibleSortDescending AccessibleSort = C.GTK_ACCESSIBLE_SORT_DESCENDING
+	AccessibleSortDescending AccessibleSort = 2
 	// AccessibleSortOther wraps GTK_ACCESSIBLE_SORT_OTHER
 	//
 	// A sort algorithm other than ascending or
 	//    descending has been applied.
-	AccessibleSortOther AccessibleSort = C.GTK_ACCESSIBLE_SORT_OTHER
+	AccessibleSortOther AccessibleSort = 3
 )
 
 func marshalAccessibleSort(p unsafe.Pointer) (any, error) {
@@ -1885,24 +1885,24 @@ const (
 	// AccessibleStateBusy wraps GTK_ACCESSIBLE_STATE_BUSY
 	//
 	// A “busy” state. This state has boolean values
-	AccessibleStateBusy AccessibleState = C.GTK_ACCESSIBLE_STATE_BUSY
+	AccessibleStateBusy AccessibleState = 0
 	// AccessibleStateChecked wraps GTK_ACCESSIBLE_STATE_CHECKED
 	//
 	// A “checked” state; indicates the current
 	//   state of a [class@CheckButton]. Value type: [enum@AccessibleTristate]
-	AccessibleStateChecked AccessibleState = C.GTK_ACCESSIBLE_STATE_CHECKED
+	AccessibleStateChecked AccessibleState = 1
 	// AccessibleStateDisabled wraps GTK_ACCESSIBLE_STATE_DISABLED
 	//
 	// A “disabled” state; corresponds to the
 	//   [property@Widget:sensitive] property. It indicates a UI element
 	//   that is perceivable, but not editable or operable. Value type: boolean
-	AccessibleStateDisabled AccessibleState = C.GTK_ACCESSIBLE_STATE_DISABLED
+	AccessibleStateDisabled AccessibleState = 2
 	// AccessibleStateExpanded wraps GTK_ACCESSIBLE_STATE_EXPANDED
 	//
 	// An “expanded” state; corresponds to the
 	//   [property@Expander:expanded] property. Value type: boolean
 	//   or undefined
-	AccessibleStateExpanded AccessibleState = C.GTK_ACCESSIBLE_STATE_EXPANDED
+	AccessibleStateExpanded AccessibleState = 3
 	// AccessibleStateHidden wraps GTK_ACCESSIBLE_STATE_HIDDEN
 	//
 	// A “hidden” state; corresponds to the
@@ -1910,28 +1910,28 @@ const (
 	//   explicitly on UI elements that should not be exposed to an assistive
 	//   technology. Value type: boolean
 	//   See also: %GTK_ACCESSIBLE_STATE_DISABLED
-	AccessibleStateHidden AccessibleState = C.GTK_ACCESSIBLE_STATE_HIDDEN
+	AccessibleStateHidden AccessibleState = 4
 	// AccessibleStateInvalid wraps GTK_ACCESSIBLE_STATE_INVALID
 	//
 	// An “invalid” state; set when a widget
 	//   is showing an error. Value type: [enum@AccessibleInvalidState]
-	AccessibleStateInvalid AccessibleState = C.GTK_ACCESSIBLE_STATE_INVALID
+	AccessibleStateInvalid AccessibleState = 5
 	// AccessibleStatePressed wraps GTK_ACCESSIBLE_STATE_PRESSED
 	//
 	// A “pressed” state; indicates the current
 	//   state of a [class@ToggleButton]. Value type: [enum@AccessibleTristate]
 	//   enumeration
-	AccessibleStatePressed AccessibleState = C.GTK_ACCESSIBLE_STATE_PRESSED
+	AccessibleStatePressed AccessibleState = 6
 	// AccessibleStateSelected wraps GTK_ACCESSIBLE_STATE_SELECTED
 	//
 	// A “selected” state; set when a widget
 	//   is selected. Value type: boolean or undefined
-	AccessibleStateSelected AccessibleState = C.GTK_ACCESSIBLE_STATE_SELECTED
+	AccessibleStateSelected AccessibleState = 7
 	// AccessibleStateVisited wraps GTK_ACCESSIBLE_STATE_VISITED
 	//
 	// Indicates that a widget with the GTK_ACCESSIBLE_ROLE_LINK has been visited.
 	// Value type: boolean.
-	AccessibleStateVisited AccessibleState = C.GTK_ACCESSIBLE_STATE_VISITED
+	AccessibleStateVisited AccessibleState = 8
 )
 
 func marshalAccessibleState(p unsafe.Pointer) (any, error) {
@@ -1955,12 +1955,12 @@ const (
 	//
 	// contents change as the result of
 	//   an insert operation
-	AccessibleTextContentChangeInsert AccessibleTextContentChange = C.GTK_ACCESSIBLE_TEXT_CONTENT_CHANGE_INSERT
+	AccessibleTextContentChangeInsert AccessibleTextContentChange = 0
 	// AccessibleTextContentChangeRemove wraps GTK_ACCESSIBLE_TEXT_CONTENT_CHANGE_REMOVE
 	//
 	// contents change as the result of
 	//   a remove operation
-	AccessibleTextContentChangeRemove AccessibleTextContentChange = C.GTK_ACCESSIBLE_TEXT_CONTENT_CHANGE_REMOVE
+	AccessibleTextContentChangeRemove AccessibleTextContentChange = 1
 )
 
 func marshalAccessibleTextContentChange(p unsafe.Pointer) (any, error) {
@@ -1985,31 +1985,31 @@ const (
 	//
 	// Use the boundary between
 	//   characters (including non-printing characters)
-	AccessibleTextGranularityCharacter AccessibleTextGranularity = C.GTK_ACCESSIBLE_TEXT_GRANULARITY_CHARACTER
+	AccessibleTextGranularityCharacter AccessibleTextGranularity = 0
 	// AccessibleTextGranularityWord wraps GTK_ACCESSIBLE_TEXT_GRANULARITY_WORD
 	//
 	// Use the boundary between words,
 	//   starting from the beginning of the current word and ending at the
 	//   beginning of the next word
-	AccessibleTextGranularityWord AccessibleTextGranularity = C.GTK_ACCESSIBLE_TEXT_GRANULARITY_WORD
+	AccessibleTextGranularityWord AccessibleTextGranularity = 1
 	// AccessibleTextGranularitySentence wraps GTK_ACCESSIBLE_TEXT_GRANULARITY_SENTENCE
 	//
 	// Use the boundary between
 	//   sentences, starting from the beginning of the current sentence and
 	//   ending at the beginning of the next sentence
-	AccessibleTextGranularitySentence AccessibleTextGranularity = C.GTK_ACCESSIBLE_TEXT_GRANULARITY_SENTENCE
+	AccessibleTextGranularitySentence AccessibleTextGranularity = 2
 	// AccessibleTextGranularityLine wraps GTK_ACCESSIBLE_TEXT_GRANULARITY_LINE
 	//
 	// Use the boundary between lines,
 	//   starting from the beginning of the current line and ending at the
 	//   beginning of the next line
-	AccessibleTextGranularityLine AccessibleTextGranularity = C.GTK_ACCESSIBLE_TEXT_GRANULARITY_LINE
+	AccessibleTextGranularityLine AccessibleTextGranularity = 3
 	// AccessibleTextGranularityParagraph wraps GTK_ACCESSIBLE_TEXT_GRANULARITY_PARAGRAPH
 	//
 	// Use the boundary between
 	//   paragraphs, starting from the beginning of the current paragraph and
 	//   ending at the beginning of the next paragraph
-	AccessibleTextGranularityParagraph AccessibleTextGranularity = C.GTK_ACCESSIBLE_TEXT_GRANULARITY_PARAGRAPH
+	AccessibleTextGranularityParagraph AccessibleTextGranularity = 4
 )
 
 func marshalAccessibleTextGranularity(p unsafe.Pointer) (any, error) {
@@ -2037,15 +2037,15 @@ const (
 	// AccessibleTristateFalse wraps GTK_ACCESSIBLE_TRISTATE_FALSE
 	//
 	// The state is `false`
-	AccessibleTristateFalse AccessibleTristate = C.GTK_ACCESSIBLE_TRISTATE_FALSE
+	AccessibleTristateFalse AccessibleTristate = 0
 	// AccessibleTristateTrue wraps GTK_ACCESSIBLE_TRISTATE_TRUE
 	//
 	// The state is `true`
-	AccessibleTristateTrue AccessibleTristate = C.GTK_ACCESSIBLE_TRISTATE_TRUE
+	AccessibleTristateTrue AccessibleTristate = 1
 	// AccessibleTristateMixed wraps GTK_ACCESSIBLE_TRISTATE_MIXED
 	//
 	// The state is `mixed`
-	AccessibleTristateMixed AccessibleTristate = C.GTK_ACCESSIBLE_TRISTATE_MIXED
+	AccessibleTristateMixed AccessibleTristate = 2
 )
 
 func marshalAccessibleTristate(p unsafe.Pointer) (any, error) {
@@ -2084,31 +2084,31 @@ const (
 	//
 	// stretch to fill all space if possible, center if
 	//   no meaningful way to stretch
-	AlignFill Align = C.GTK_ALIGN_FILL
+	AlignFill Align = 0
 	// AlignStart wraps GTK_ALIGN_START
 	//
 	// snap to left or top side, leaving space on right or bottom
-	AlignStart Align = C.GTK_ALIGN_START
+	AlignStart Align = 1
 	// AlignEnd wraps GTK_ALIGN_END
 	//
 	// snap to right or bottom side, leaving space on left or top
-	AlignEnd Align = C.GTK_ALIGN_END
+	AlignEnd Align = 2
 	// AlignCenter wraps GTK_ALIGN_CENTER
 	//
 	// center natural width of widget inside the allocation
-	AlignCenter Align = C.GTK_ALIGN_CENTER
+	AlignCenter Align = 3
 	// AlignBaselineFill wraps GTK_ALIGN_BASELINE_FILL
 	//
 	// a different name for `GTK_ALIGN_BASELINE`.
-	AlignBaselineFill Align = C.GTK_ALIGN_BASELINE_FILL
+	AlignBaselineFill Align = 4
 	// AlignBaseline wraps GTK_ALIGN_BASELINE
 	//
 	// align the widget according to the baseline.
-	AlignBaseline Align = C.GTK_ALIGN_BASELINE
+	AlignBaseline Align = 4
 	// AlignBaselineCenter wraps GTK_ALIGN_BASELINE_CENTER
 	//
 	// stretch to fill all space, but align the baseline.
-	AlignBaselineCenter Align = C.GTK_ALIGN_BASELINE_CENTER
+	AlignBaselineCenter Align = 5
 )
 
 func marshalAlign(p unsafe.Pointer) (any, error) {
@@ -2131,23 +2131,23 @@ const (
 	// ArrowUp wraps GTK_ARROW_UP
 	//
 	// Represents an upward pointing arrow.
-	ArrowUp ArrowType = C.GTK_ARROW_UP
+	ArrowUp ArrowType = 0
 	// ArrowDown wraps GTK_ARROW_DOWN
 	//
 	// Represents a downward pointing arrow.
-	ArrowDown ArrowType = C.GTK_ARROW_DOWN
+	ArrowDown ArrowType = 1
 	// ArrowLeft wraps GTK_ARROW_LEFT
 	//
 	// Represents a left pointing arrow.
-	ArrowLeft ArrowType = C.GTK_ARROW_LEFT
+	ArrowLeft ArrowType = 2
 	// ArrowRight wraps GTK_ARROW_RIGHT
 	//
 	// Represents a right pointing arrow.
-	ArrowRight ArrowType = C.GTK_ARROW_RIGHT
+	ArrowRight ArrowType = 3
 	// ArrowNone wraps GTK_ARROW_NONE
 	//
 	// No arrow.
-	ArrowNone ArrowType = C.GTK_ARROW_NONE
+	ArrowNone ArrowType = 4
 )
 
 func marshalArrowType(p unsafe.Pointer) (any, error) {
@@ -2180,35 +2180,35 @@ const (
 	//
 	// The page has regular contents. Both the
 	//  Back and forward buttons will be shown.
-	AssistantPageContent AssistantPageType = C.GTK_ASSISTANT_PAGE_CONTENT
+	AssistantPageContent AssistantPageType = 0
 	// AssistantPageIntro wraps GTK_ASSISTANT_PAGE_INTRO
 	//
 	// The page contains an introduction to the
 	//  assistant task. Only the Forward button will be shown if there is a
 	//   next page.
-	AssistantPageIntro AssistantPageType = C.GTK_ASSISTANT_PAGE_INTRO
+	AssistantPageIntro AssistantPageType = 1
 	// AssistantPageConfirm wraps GTK_ASSISTANT_PAGE_CONFIRM
 	//
 	// The page lets the user confirm or deny the
 	//  changes. The Back and Apply buttons will be shown.
-	AssistantPageConfirm AssistantPageType = C.GTK_ASSISTANT_PAGE_CONFIRM
+	AssistantPageConfirm AssistantPageType = 2
 	// AssistantPageSummary wraps GTK_ASSISTANT_PAGE_SUMMARY
 	//
 	// The page informs the user of the changes
 	//  done. Only the Close button will be shown.
-	AssistantPageSummary AssistantPageType = C.GTK_ASSISTANT_PAGE_SUMMARY
+	AssistantPageSummary AssistantPageType = 3
 	// AssistantPageProgress wraps GTK_ASSISTANT_PAGE_PROGRESS
 	//
 	// Used for tasks that take a long time to
 	//  complete, blocks the assistant until the page is marked as complete.
 	//   Only the back button will be shown.
-	AssistantPageProgress AssistantPageType = C.GTK_ASSISTANT_PAGE_PROGRESS
+	AssistantPageProgress AssistantPageType = 4
 	// AssistantPageCustom wraps GTK_ASSISTANT_PAGE_CUSTOM
 	//
 	// Used for when other page types are not
 	//  appropriate. No buttons will be shown, and the application must
 	//  add its own buttons through gtk_assistant_add_action_widget().
-	AssistantPageCustom AssistantPageType = C.GTK_ASSISTANT_PAGE_CUSTOM
+	AssistantPageCustom AssistantPageType = 5
 )
 
 func marshalAssistantPageType(p unsafe.Pointer) (any, error) {
@@ -2238,15 +2238,15 @@ const (
 	// BaselinePositionTop wraps GTK_BASELINE_POSITION_TOP
 	//
 	// Align the baseline at the top
-	BaselinePositionTop BaselinePosition = C.GTK_BASELINE_POSITION_TOP
+	BaselinePositionTop BaselinePosition = 0
 	// BaselinePositionCenter wraps GTK_BASELINE_POSITION_CENTER
 	//
 	// Center the baseline
-	BaselinePositionCenter BaselinePosition = C.GTK_BASELINE_POSITION_CENTER
+	BaselinePositionCenter BaselinePosition = 1
 	// BaselinePositionBottom wraps GTK_BASELINE_POSITION_BOTTOM
 	//
 	// Align the baseline at the bottom
-	BaselinePositionBottom BaselinePosition = C.GTK_BASELINE_POSITION_BOTTOM
+	BaselinePositionBottom BaselinePosition = 2
 )
 
 func marshalBaselinePosition(p unsafe.Pointer) (any, error) {
@@ -2269,43 +2269,43 @@ const (
 	// BorderStyleNone wraps GTK_BORDER_STYLE_NONE
 	//
 	// No visible border
-	BorderStyleNone BorderStyle = C.GTK_BORDER_STYLE_NONE
+	BorderStyleNone BorderStyle = 0
 	// BorderStyleHidden wraps GTK_BORDER_STYLE_HIDDEN
 	//
 	// Same as %GTK_BORDER_STYLE_NONE
-	BorderStyleHidden BorderStyle = C.GTK_BORDER_STYLE_HIDDEN
+	BorderStyleHidden BorderStyle = 1
 	// BorderStyleSolid wraps GTK_BORDER_STYLE_SOLID
 	//
 	// A single line segment
-	BorderStyleSolid BorderStyle = C.GTK_BORDER_STYLE_SOLID
+	BorderStyleSolid BorderStyle = 2
 	// BorderStyleInset wraps GTK_BORDER_STYLE_INSET
 	//
 	// Looks as if the content is sunken into the canvas
-	BorderStyleInset BorderStyle = C.GTK_BORDER_STYLE_INSET
+	BorderStyleInset BorderStyle = 3
 	// BorderStyleOutset wraps GTK_BORDER_STYLE_OUTSET
 	//
 	// Looks as if the content is coming out of the canvas
-	BorderStyleOutset BorderStyle = C.GTK_BORDER_STYLE_OUTSET
+	BorderStyleOutset BorderStyle = 4
 	// BorderStyleDotted wraps GTK_BORDER_STYLE_DOTTED
 	//
 	// A series of round dots
-	BorderStyleDotted BorderStyle = C.GTK_BORDER_STYLE_DOTTED
+	BorderStyleDotted BorderStyle = 5
 	// BorderStyleDashed wraps GTK_BORDER_STYLE_DASHED
 	//
 	// A series of square-ended dashes
-	BorderStyleDashed BorderStyle = C.GTK_BORDER_STYLE_DASHED
+	BorderStyleDashed BorderStyle = 6
 	// BorderStyleDouble wraps GTK_BORDER_STYLE_DOUBLE
 	//
 	// Two parallel lines with some space between them
-	BorderStyleDouble BorderStyle = C.GTK_BORDER_STYLE_DOUBLE
+	BorderStyleDouble BorderStyle = 7
 	// BorderStyleGroove wraps GTK_BORDER_STYLE_GROOVE
 	//
 	// Looks as if it were carved in the canvas
-	BorderStyleGroove BorderStyle = C.GTK_BORDER_STYLE_GROOVE
+	BorderStyleGroove BorderStyle = 8
 	// BorderStyleRidge wraps GTK_BORDER_STYLE_RIDGE
 	//
 	// Looks as if it were coming out of the canvas
-	BorderStyleRidge BorderStyle = C.GTK_BORDER_STYLE_RIDGE
+	BorderStyleRidge BorderStyle = 9
 )
 
 func marshalBorderStyle(p unsafe.Pointer) (any, error) {
@@ -2330,73 +2330,73 @@ const (
 	//
 	// A type-func attribute didn’t name
 	//  a function that returns a `GType`.
-	BuilderErrorInvalidTypeFunction BuilderError = C.GTK_BUILDER_ERROR_INVALID_TYPE_FUNCTION
+	BuilderErrorInvalidTypeFunction BuilderError = 0
 	// BuilderErrorUnhandledTag wraps GTK_BUILDER_ERROR_UNHANDLED_TAG
 	//
 	// The input contained a tag that `GtkBuilder`
 	//  can’t handle.
-	BuilderErrorUnhandledTag BuilderError = C.GTK_BUILDER_ERROR_UNHANDLED_TAG
+	BuilderErrorUnhandledTag BuilderError = 1
 	// BuilderErrorMissingAttribute wraps GTK_BUILDER_ERROR_MISSING_ATTRIBUTE
 	//
 	// An attribute that is required by
 	//  `GtkBuilder` was missing.
-	BuilderErrorMissingAttribute BuilderError = C.GTK_BUILDER_ERROR_MISSING_ATTRIBUTE
+	BuilderErrorMissingAttribute BuilderError = 2
 	// BuilderErrorInvalidAttribute wraps GTK_BUILDER_ERROR_INVALID_ATTRIBUTE
 	//
 	// `GtkBuilder` found an attribute that
 	//  it doesn’t understand.
-	BuilderErrorInvalidAttribute BuilderError = C.GTK_BUILDER_ERROR_INVALID_ATTRIBUTE
+	BuilderErrorInvalidAttribute BuilderError = 3
 	// BuilderErrorInvalidTag wraps GTK_BUILDER_ERROR_INVALID_TAG
 	//
 	// `GtkBuilder` found a tag that
 	//  it doesn’t understand.
-	BuilderErrorInvalidTag BuilderError = C.GTK_BUILDER_ERROR_INVALID_TAG
+	BuilderErrorInvalidTag BuilderError = 4
 	// BuilderErrorMissingPropertyValue wraps GTK_BUILDER_ERROR_MISSING_PROPERTY_VALUE
 	//
 	// A required property value was
 	//  missing.
-	BuilderErrorMissingPropertyValue BuilderError = C.GTK_BUILDER_ERROR_MISSING_PROPERTY_VALUE
+	BuilderErrorMissingPropertyValue BuilderError = 5
 	// BuilderErrorInvalidValue wraps GTK_BUILDER_ERROR_INVALID_VALUE
 	//
 	// `GtkBuilder` couldn’t parse
 	//  some attribute value.
-	BuilderErrorInvalidValue BuilderError = C.GTK_BUILDER_ERROR_INVALID_VALUE
+	BuilderErrorInvalidValue BuilderError = 6
 	// BuilderErrorVersionMismatch wraps GTK_BUILDER_ERROR_VERSION_MISMATCH
 	//
 	// The input file requires a newer version
 	//  of GTK.
-	BuilderErrorVersionMismatch BuilderError = C.GTK_BUILDER_ERROR_VERSION_MISMATCH
+	BuilderErrorVersionMismatch BuilderError = 7
 	// BuilderErrorDuplicateID wraps GTK_BUILDER_ERROR_DUPLICATE_ID
 	//
 	// An object id occurred twice.
-	BuilderErrorDuplicateID BuilderError = C.GTK_BUILDER_ERROR_DUPLICATE_ID
+	BuilderErrorDuplicateID BuilderError = 8
 	// BuilderErrorObjectTypeRefused wraps GTK_BUILDER_ERROR_OBJECT_TYPE_REFUSED
 	//
 	// A specified object type is of the same type or
 	//  derived from the type of the composite class being extended with builder XML.
-	BuilderErrorObjectTypeRefused BuilderError = C.GTK_BUILDER_ERROR_OBJECT_TYPE_REFUSED
+	BuilderErrorObjectTypeRefused BuilderError = 9
 	// BuilderErrorTemplateMismatch wraps GTK_BUILDER_ERROR_TEMPLATE_MISMATCH
 	//
 	// The wrong type was specified in a composite class’s template XML
-	BuilderErrorTemplateMismatch BuilderError = C.GTK_BUILDER_ERROR_TEMPLATE_MISMATCH
+	BuilderErrorTemplateMismatch BuilderError = 10
 	// BuilderErrorInvalidProperty wraps GTK_BUILDER_ERROR_INVALID_PROPERTY
 	//
 	// The specified property is unknown for the object class.
-	BuilderErrorInvalidProperty BuilderError = C.GTK_BUILDER_ERROR_INVALID_PROPERTY
+	BuilderErrorInvalidProperty BuilderError = 11
 	// BuilderErrorInvalidSignal wraps GTK_BUILDER_ERROR_INVALID_SIGNAL
 	//
 	// The specified signal is unknown for the object class.
-	BuilderErrorInvalidSignal BuilderError = C.GTK_BUILDER_ERROR_INVALID_SIGNAL
+	BuilderErrorInvalidSignal BuilderError = 12
 	// BuilderErrorInvalidID wraps GTK_BUILDER_ERROR_INVALID_ID
 	//
 	// An object id is unknown.
-	BuilderErrorInvalidID BuilderError = C.GTK_BUILDER_ERROR_INVALID_ID
+	BuilderErrorInvalidID BuilderError = 13
 	// BuilderErrorInvalidFunction wraps GTK_BUILDER_ERROR_INVALID_FUNCTION
 	//
 	// A function could not be found. This often happens
 	//   when symbols are set to be kept private. Compiling code with -rdynamic or using the
 	//   `gmodule-export-2.0` pkgconfig module can fix this problem.
-	BuilderErrorInvalidFunction BuilderError = C.GTK_BUILDER_ERROR_INVALID_FUNCTION
+	BuilderErrorInvalidFunction BuilderError = 14
 )
 
 func marshalBuilderError(p unsafe.Pointer) (any, error) {
@@ -2426,27 +2426,27 @@ const (
 	// ButtonsNone wraps GTK_BUTTONS_NONE
 	//
 	// no buttons at all
-	ButtonsNone ButtonsType = C.GTK_BUTTONS_NONE
+	ButtonsNone ButtonsType = 0
 	// ButtonsOK wraps GTK_BUTTONS_OK
 	//
 	// an OK button
-	ButtonsOK ButtonsType = C.GTK_BUTTONS_OK
+	ButtonsOK ButtonsType = 1
 	// ButtonsClose wraps GTK_BUTTONS_CLOSE
 	//
 	// a Close button
-	ButtonsClose ButtonsType = C.GTK_BUTTONS_CLOSE
+	ButtonsClose ButtonsType = 2
 	// ButtonsCancel wraps GTK_BUTTONS_CANCEL
 	//
 	// a Cancel button
-	ButtonsCancel ButtonsType = C.GTK_BUTTONS_CANCEL
+	ButtonsCancel ButtonsType = 3
 	// ButtonsYesNo wraps GTK_BUTTONS_YES_NO
 	//
 	// Yes and No buttons
-	ButtonsYesNo ButtonsType = C.GTK_BUTTONS_YES_NO
+	ButtonsYesNo ButtonsType = 4
 	// ButtonsOKCancel wraps GTK_BUTTONS_OK_CANCEL
 	//
 	// OK and Cancel buttons
-	ButtonsOKCancel ButtonsType = C.GTK_BUTTONS_OK_CANCEL
+	ButtonsOKCancel ButtonsType = 5
 )
 
 func marshalButtonsType(p unsafe.Pointer) (any, error) {
@@ -2469,11 +2469,11 @@ const (
 	// CellRendererAccelModeGTK wraps GTK_CELL_RENDERER_ACCEL_MODE_GTK
 	//
 	// GTK accelerators mode
-	CellRendererAccelModeGTK CellRendererAccelMode = C.GTK_CELL_RENDERER_ACCEL_MODE_GTK
+	CellRendererAccelModeGTK CellRendererAccelMode = 0
 	// CellRendererAccelModeOther wraps GTK_CELL_RENDERER_ACCEL_MODE_OTHER
 	//
 	// Other accelerator mode
-	CellRendererAccelModeOther CellRendererAccelMode = C.GTK_CELL_RENDERER_ACCEL_MODE_OTHER
+	CellRendererAccelModeOther CellRendererAccelMode = 1
 )
 
 func marshalCellRendererAccelMode(p unsafe.Pointer) (any, error) {
@@ -2499,15 +2499,15 @@ const (
 	//  and cannot be interacted with.  Note that this doesn’t mean that eg. the
 	//  row being drawn can’t be selected -- just that a particular element of
 	//  it cannot be individually modified.
-	CellRendererModeInert CellRendererMode = C.GTK_CELL_RENDERER_MODE_INERT
+	CellRendererModeInert CellRendererMode = 0
 	// CellRendererModeActivatable wraps GTK_CELL_RENDERER_MODE_ACTIVATABLE
 	//
 	// The cell can be clicked.
-	CellRendererModeActivatable CellRendererMode = C.GTK_CELL_RENDERER_MODE_ACTIVATABLE
+	CellRendererModeActivatable CellRendererMode = 1
 	// CellRendererModeEditable wraps GTK_CELL_RENDERER_MODE_EDITABLE
 	//
 	// The cell can be edited or otherwise modified.
-	CellRendererModeEditable CellRendererMode = C.GTK_CELL_RENDERER_MODE_EDITABLE
+	CellRendererModeEditable CellRendererMode = 2
 )
 
 func marshalCellRendererMode(p unsafe.Pointer) (any, error) {
@@ -2534,15 +2534,15 @@ const (
 	// CollationNone wraps GTK_COLLATION_NONE
 	//
 	// Don't do any collation
-	CollationNone Collation = C.GTK_COLLATION_NONE
+	CollationNone Collation = 0
 	// CollationUnicode wraps GTK_COLLATION_UNICODE
 	//
 	// Use [func@GLib.utf8_collate_key]
-	CollationUnicode Collation = C.GTK_COLLATION_UNICODE
+	CollationUnicode Collation = 1
 	// CollationFilename wraps GTK_COLLATION_FILENAME
 	//
 	// Use [func@GLib.utf8_collate_key_for_filename]
-	CollationFilename Collation = C.GTK_COLLATION_FILENAME
+	CollationFilename Collation = 2
 )
 
 func marshalCollation(p unsafe.Pointer) (any, error) {
@@ -2566,59 +2566,59 @@ const (
 	//
 	// No attribute, used for constant
 	//   relations
-	ConstraintAttributeNone ConstraintAttribute = C.GTK_CONSTRAINT_ATTRIBUTE_NONE
+	ConstraintAttributeNone ConstraintAttribute = 0
 	// ConstraintAttributeLeft wraps GTK_CONSTRAINT_ATTRIBUTE_LEFT
 	//
 	// The left edge of a widget, regardless of
 	//   text direction
-	ConstraintAttributeLeft ConstraintAttribute = C.GTK_CONSTRAINT_ATTRIBUTE_LEFT
+	ConstraintAttributeLeft ConstraintAttribute = 1
 	// ConstraintAttributeRight wraps GTK_CONSTRAINT_ATTRIBUTE_RIGHT
 	//
 	// The right edge of a widget, regardless
 	//   of text direction
-	ConstraintAttributeRight ConstraintAttribute = C.GTK_CONSTRAINT_ATTRIBUTE_RIGHT
+	ConstraintAttributeRight ConstraintAttribute = 2
 	// ConstraintAttributeTop wraps GTK_CONSTRAINT_ATTRIBUTE_TOP
 	//
 	// The top edge of a widget
-	ConstraintAttributeTop ConstraintAttribute = C.GTK_CONSTRAINT_ATTRIBUTE_TOP
+	ConstraintAttributeTop ConstraintAttribute = 3
 	// ConstraintAttributeBottom wraps GTK_CONSTRAINT_ATTRIBUTE_BOTTOM
 	//
 	// The bottom edge of a widget
-	ConstraintAttributeBottom ConstraintAttribute = C.GTK_CONSTRAINT_ATTRIBUTE_BOTTOM
+	ConstraintAttributeBottom ConstraintAttribute = 4
 	// ConstraintAttributeStart wraps GTK_CONSTRAINT_ATTRIBUTE_START
 	//
 	// The leading edge of a widget, depending
 	//   on text direction; equivalent to %GTK_CONSTRAINT_ATTRIBUTE_LEFT for LTR
 	//   languages, and %GTK_CONSTRAINT_ATTRIBUTE_RIGHT for RTL ones
-	ConstraintAttributeStart ConstraintAttribute = C.GTK_CONSTRAINT_ATTRIBUTE_START
+	ConstraintAttributeStart ConstraintAttribute = 5
 	// ConstraintAttributeEnd wraps GTK_CONSTRAINT_ATTRIBUTE_END
 	//
 	// The trailing edge of a widget, depending
 	//   on text direction; equivalent to %GTK_CONSTRAINT_ATTRIBUTE_RIGHT for LTR
 	//   languages, and %GTK_CONSTRAINT_ATTRIBUTE_LEFT for RTL ones
-	ConstraintAttributeEnd ConstraintAttribute = C.GTK_CONSTRAINT_ATTRIBUTE_END
+	ConstraintAttributeEnd ConstraintAttribute = 6
 	// ConstraintAttributeWidth wraps GTK_CONSTRAINT_ATTRIBUTE_WIDTH
 	//
 	// The width of a widget
-	ConstraintAttributeWidth ConstraintAttribute = C.GTK_CONSTRAINT_ATTRIBUTE_WIDTH
+	ConstraintAttributeWidth ConstraintAttribute = 7
 	// ConstraintAttributeHeight wraps GTK_CONSTRAINT_ATTRIBUTE_HEIGHT
 	//
 	// The height of a widget
-	ConstraintAttributeHeight ConstraintAttribute = C.GTK_CONSTRAINT_ATTRIBUTE_HEIGHT
+	ConstraintAttributeHeight ConstraintAttribute = 8
 	// ConstraintAttributeCenterX wraps GTK_CONSTRAINT_ATTRIBUTE_CENTER_X
 	//
 	// The center of a widget, on the
 	//   horizontal axis
-	ConstraintAttributeCenterX ConstraintAttribute = C.GTK_CONSTRAINT_ATTRIBUTE_CENTER_X
+	ConstraintAttributeCenterX ConstraintAttribute = 9
 	// ConstraintAttributeCenterY wraps GTK_CONSTRAINT_ATTRIBUTE_CENTER_Y
 	//
 	// The center of a widget, on the
 	//   vertical axis
-	ConstraintAttributeCenterY ConstraintAttribute = C.GTK_CONSTRAINT_ATTRIBUTE_CENTER_Y
+	ConstraintAttributeCenterY ConstraintAttribute = 10
 	// ConstraintAttributeBaseline wraps GTK_CONSTRAINT_ATTRIBUTE_BASELINE
 	//
 	// The baseline of a widget
-	ConstraintAttributeBaseline ConstraintAttribute = C.GTK_CONSTRAINT_ATTRIBUTE_BASELINE
+	ConstraintAttributeBaseline ConstraintAttribute = 11
 )
 
 func marshalConstraintAttribute(p unsafe.Pointer) (any, error) {
@@ -2641,15 +2641,15 @@ const (
 	// ConstraintRelationLE wraps GTK_CONSTRAINT_RELATION_LE
 	//
 	// Less than, or equal
-	ConstraintRelationLE ConstraintRelation = C.GTK_CONSTRAINT_RELATION_LE
+	ConstraintRelationLE ConstraintRelation = -1
 	// ConstraintRelationEq wraps GTK_CONSTRAINT_RELATION_EQ
 	//
 	// Equal
-	ConstraintRelationEq ConstraintRelation = C.GTK_CONSTRAINT_RELATION_EQ
+	ConstraintRelationEq ConstraintRelation = 0
 	// ConstraintRelationGE wraps GTK_CONSTRAINT_RELATION_GE
 	//
 	// Greater than, or equal
-	ConstraintRelationGE ConstraintRelation = C.GTK_CONSTRAINT_RELATION_GE
+	ConstraintRelationGE ConstraintRelation = 1
 )
 
 func marshalConstraintRelation(p unsafe.Pointer) (any, error) {
@@ -2675,19 +2675,19 @@ const (
 	// ConstraintStrengthRequired wraps GTK_CONSTRAINT_STRENGTH_REQUIRED
 	//
 	// The constraint is required towards solving the layout
-	ConstraintStrengthRequired ConstraintStrength = C.GTK_CONSTRAINT_STRENGTH_REQUIRED
+	ConstraintStrengthRequired ConstraintStrength = 1001001000
 	// ConstraintStrengthStrong wraps GTK_CONSTRAINT_STRENGTH_STRONG
 	//
 	// A strong constraint
-	ConstraintStrengthStrong ConstraintStrength = C.GTK_CONSTRAINT_STRENGTH_STRONG
+	ConstraintStrengthStrong ConstraintStrength = 1000000000
 	// ConstraintStrengthMedium wraps GTK_CONSTRAINT_STRENGTH_MEDIUM
 	//
 	// A medium constraint
-	ConstraintStrengthMedium ConstraintStrength = C.GTK_CONSTRAINT_STRENGTH_MEDIUM
+	ConstraintStrengthMedium ConstraintStrength = 1000
 	// ConstraintStrengthWeak wraps GTK_CONSTRAINT_STRENGTH_WEAK
 	//
 	// A weak constraint
-	ConstraintStrengthWeak ConstraintStrength = C.GTK_CONSTRAINT_STRENGTH_WEAK
+	ConstraintStrengthWeak ConstraintStrength = 1
 )
 
 func marshalConstraintStrength(p unsafe.Pointer) (any, error) {
@@ -2710,27 +2710,27 @@ const (
 	// ConstraintVflParserErrorInvalidSymbol wraps GTK_CONSTRAINT_VFL_PARSER_ERROR_INVALID_SYMBOL
 	//
 	// Invalid or unknown symbol
-	ConstraintVflParserErrorInvalidSymbol ConstraintVflParserError = C.GTK_CONSTRAINT_VFL_PARSER_ERROR_INVALID_SYMBOL
+	ConstraintVflParserErrorInvalidSymbol ConstraintVflParserError = 0
 	// ConstraintVflParserErrorInvalidAttribute wraps GTK_CONSTRAINT_VFL_PARSER_ERROR_INVALID_ATTRIBUTE
 	//
 	// Invalid or unknown attribute
-	ConstraintVflParserErrorInvalidAttribute ConstraintVflParserError = C.GTK_CONSTRAINT_VFL_PARSER_ERROR_INVALID_ATTRIBUTE
+	ConstraintVflParserErrorInvalidAttribute ConstraintVflParserError = 1
 	// ConstraintVflParserErrorInvalidView wraps GTK_CONSTRAINT_VFL_PARSER_ERROR_INVALID_VIEW
 	//
 	// Invalid or unknown view
-	ConstraintVflParserErrorInvalidView ConstraintVflParserError = C.GTK_CONSTRAINT_VFL_PARSER_ERROR_INVALID_VIEW
+	ConstraintVflParserErrorInvalidView ConstraintVflParserError = 2
 	// ConstraintVflParserErrorInvalidMetric wraps GTK_CONSTRAINT_VFL_PARSER_ERROR_INVALID_METRIC
 	//
 	// Invalid or unknown metric
-	ConstraintVflParserErrorInvalidMetric ConstraintVflParserError = C.GTK_CONSTRAINT_VFL_PARSER_ERROR_INVALID_METRIC
+	ConstraintVflParserErrorInvalidMetric ConstraintVflParserError = 3
 	// ConstraintVflParserErrorInvalidPriority wraps GTK_CONSTRAINT_VFL_PARSER_ERROR_INVALID_PRIORITY
 	//
 	// Invalid or unknown priority
-	ConstraintVflParserErrorInvalidPriority ConstraintVflParserError = C.GTK_CONSTRAINT_VFL_PARSER_ERROR_INVALID_PRIORITY
+	ConstraintVflParserErrorInvalidPriority ConstraintVflParserError = 4
 	// ConstraintVflParserErrorInvalidRelation wraps GTK_CONSTRAINT_VFL_PARSER_ERROR_INVALID_RELATION
 	//
 	// Invalid or unknown relation
-	ConstraintVflParserErrorInvalidRelation ConstraintVflParserError = C.GTK_CONSTRAINT_VFL_PARSER_ERROR_INVALID_RELATION
+	ConstraintVflParserErrorInvalidRelation ConstraintVflParserError = 5
 )
 
 func marshalConstraintVflParserError(p unsafe.Pointer) (any, error) {
@@ -2756,26 +2756,26 @@ const (
 	//   without taking its aspect ratio in consideration. The resulting
 	//   content will appear as stretched if its aspect ratio is different
 	//   from the allocation aspect ratio.
-	ContentFitFill ContentFit = C.GTK_CONTENT_FIT_FILL
+	ContentFitFill ContentFit = 0
 	// ContentFitContain wraps GTK_CONTENT_FIT_CONTAIN
 	//
 	// Scale the content to fit the allocation,
 	//   while taking its aspect ratio in consideration. The resulting
 	//   content will appear as letterboxed if its aspect ratio is different
 	//   from the allocation aspect ratio.
-	ContentFitContain ContentFit = C.GTK_CONTENT_FIT_CONTAIN
+	ContentFitContain ContentFit = 1
 	// ContentFitCover wraps GTK_CONTENT_FIT_COVER
 	//
 	// Cover the entire allocation, while taking
 	//   the content aspect ratio in consideration. The resulting content
 	//   will appear as clipped if its aspect ratio is different from the
 	//   allocation aspect ratio.
-	ContentFitCover ContentFit = C.GTK_CONTENT_FIT_COVER
+	ContentFitCover ContentFit = 2
 	// ContentFitScaleDown wraps GTK_CONTENT_FIT_SCALE_DOWN
 	//
 	// The content is scaled down to fit the
 	//   allocation, if needed, otherwise its original size is used.
-	ContentFitScaleDown ContentFit = C.GTK_CONTENT_FIT_SCALE_DOWN
+	ContentFitScaleDown ContentFit = 3
 )
 
 func marshalContentFit(p unsafe.Pointer) (any, error) {
@@ -2802,22 +2802,22 @@ const (
 	//
 	// Place the scrollbars on the right and bottom of the
 	//   widget (default behaviour).
-	CornerTopLeft CornerType = C.GTK_CORNER_TOP_LEFT
+	CornerTopLeft CornerType = 0
 	// CornerBottomLeft wraps GTK_CORNER_BOTTOM_LEFT
 	//
 	// Place the scrollbars on the top and right of the
 	//   widget.
-	CornerBottomLeft CornerType = C.GTK_CORNER_BOTTOM_LEFT
+	CornerBottomLeft CornerType = 1
 	// CornerTopRight wraps GTK_CORNER_TOP_RIGHT
 	//
 	// Place the scrollbars on the left and bottom of the
 	//   widget.
-	CornerTopRight CornerType = C.GTK_CORNER_TOP_RIGHT
+	CornerTopRight CornerType = 2
 	// CornerBottomRight wraps GTK_CORNER_BOTTOM_RIGHT
 	//
 	// Place the scrollbars on the top and left of the
 	//   widget.
-	CornerBottomRight CornerType = C.GTK_CORNER_BOTTOM_RIGHT
+	CornerBottomRight CornerType = 3
 )
 
 func marshalCornerType(p unsafe.Pointer) (any, error) {
@@ -2843,23 +2843,23 @@ const (
 	// CSSParserErrorFailed wraps GTK_CSS_PARSER_ERROR_FAILED
 	//
 	// Unknown failure.
-	CSSParserErrorFailed CSSParserError = C.GTK_CSS_PARSER_ERROR_FAILED
+	CSSParserErrorFailed CSSParserError = 0
 	// CSSParserErrorSyntax wraps GTK_CSS_PARSER_ERROR_SYNTAX
 	//
 	// The given text does not form valid syntax
-	CSSParserErrorSyntax CSSParserError = C.GTK_CSS_PARSER_ERROR_SYNTAX
+	CSSParserErrorSyntax CSSParserError = 1
 	// CSSParserErrorImport wraps GTK_CSS_PARSER_ERROR_IMPORT
 	//
 	// Failed to import a resource
-	CSSParserErrorImport CSSParserError = C.GTK_CSS_PARSER_ERROR_IMPORT
+	CSSParserErrorImport CSSParserError = 2
 	// CSSParserErrorName wraps GTK_CSS_PARSER_ERROR_NAME
 	//
 	// The given name has not been defined
-	CSSParserErrorName CSSParserError = C.GTK_CSS_PARSER_ERROR_NAME
+	CSSParserErrorName CSSParserError = 3
 	// CSSParserErrorUnknownValue wraps GTK_CSS_PARSER_ERROR_UNKNOWN_VALUE
 	//
 	// The given value is not correct
-	CSSParserErrorUnknownValue CSSParserError = C.GTK_CSS_PARSER_ERROR_UNKNOWN_VALUE
+	CSSParserErrorUnknownValue CSSParserError = 4
 )
 
 
@@ -2876,16 +2876,16 @@ const (
 	//
 	// The given construct is
 	//   deprecated and will be removed in a future version
-	CSSParserWarningDeprecated CSSParserWarning = C.GTK_CSS_PARSER_WARNING_DEPRECATED
+	CSSParserWarningDeprecated CSSParserWarning = 0
 	// CSSParserWarningSyntax wraps GTK_CSS_PARSER_WARNING_SYNTAX
 	//
 	// A syntax construct was used
 	//   that should be avoided
-	CSSParserWarningSyntax CSSParserWarning = C.GTK_CSS_PARSER_WARNING_SYNTAX
+	CSSParserWarningSyntax CSSParserWarning = 1
 	// CSSParserWarningUnimplemented wraps GTK_CSS_PARSER_WARNING_UNIMPLEMENTED
 	//
 	// A feature is not implemented
-	CSSParserWarningUnimplemented CSSParserWarning = C.GTK_CSS_PARSER_WARNING_UNIMPLEMENTED
+	CSSParserWarningUnimplemented CSSParserWarning = 2
 )
 
 
@@ -2898,41 +2898,41 @@ const (
 	// DeleteChars wraps GTK_DELETE_CHARS
 	//
 	// Delete characters.
-	DeleteChars DeleteType = C.GTK_DELETE_CHARS
+	DeleteChars DeleteType = 0
 	// DeleteWordEnds wraps GTK_DELETE_WORD_ENDS
 	//
 	// Delete only the portion of the word to the
 	//   left/right of cursor if we’re in the middle of a word.
-	DeleteWordEnds DeleteType = C.GTK_DELETE_WORD_ENDS
+	DeleteWordEnds DeleteType = 1
 	// DeleteWords wraps GTK_DELETE_WORDS
 	//
 	// Delete words.
-	DeleteWords DeleteType = C.GTK_DELETE_WORDS
+	DeleteWords DeleteType = 2
 	// DeleteDisplayLines wraps GTK_DELETE_DISPLAY_LINES
 	//
 	// Delete display-lines. Display-lines
 	//   refers to the visible lines, with respect to the current line
 	//   breaks. As opposed to paragraphs, which are defined by line
 	//   breaks in the input.
-	DeleteDisplayLines DeleteType = C.GTK_DELETE_DISPLAY_LINES
+	DeleteDisplayLines DeleteType = 3
 	// DeleteDisplayLineEnds wraps GTK_DELETE_DISPLAY_LINE_ENDS
 	//
 	// Delete only the portion of the
 	//   display-line to the left/right of cursor.
-	DeleteDisplayLineEnds DeleteType = C.GTK_DELETE_DISPLAY_LINE_ENDS
+	DeleteDisplayLineEnds DeleteType = 4
 	// DeleteParagraphEnds wraps GTK_DELETE_PARAGRAPH_ENDS
 	//
 	// Delete to the end of the
 	//   paragraph. Like C-k in Emacs (or its reverse).
-	DeleteParagraphEnds DeleteType = C.GTK_DELETE_PARAGRAPH_ENDS
+	DeleteParagraphEnds DeleteType = 5
 	// DeleteParagraphs wraps GTK_DELETE_PARAGRAPHS
 	//
 	// Delete entire line. Like C-k in pico.
-	DeleteParagraphs DeleteType = C.GTK_DELETE_PARAGRAPHS
+	DeleteParagraphs DeleteType = 6
 	// DeleteWhitespace wraps GTK_DELETE_WHITESPACE
 	//
 	// Delete only whitespace. Like M-\ in Emacs.
-	DeleteWhitespace DeleteType = C.GTK_DELETE_WHITESPACE
+	DeleteWhitespace DeleteType = 7
 )
 
 func marshalDeleteType(p unsafe.Pointer) (any, error) {
@@ -2957,17 +2957,17 @@ const (
 	//
 	// Generic error condition for when
 	//   an operation fails and no more specific code is applicable
-	DialogErrorFailed DialogError = C.GTK_DIALOG_ERROR_FAILED
+	DialogErrorFailed DialogError = 0
 	// DialogErrorCancelled wraps GTK_DIALOG_ERROR_CANCELLED
 	//
 	// The async function call was cancelled
 	//   via its `GCancellable`
-	DialogErrorCancelled DialogError = C.GTK_DIALOG_ERROR_CANCELLED
+	DialogErrorCancelled DialogError = 1
 	// DialogErrorDismissed wraps GTK_DIALOG_ERROR_DISMISSED
 	//
 	// The operation was cancelled
 	//   by the user (via a Cancel or Close button)
-	DialogErrorDismissed DialogError = C.GTK_DIALOG_ERROR_DISMISSED
+	DialogErrorDismissed DialogError = 2
 )
 
 func marshalDialogError(p unsafe.Pointer) (any, error) {
@@ -2990,27 +2990,27 @@ const (
 	// DirTabForward wraps GTK_DIR_TAB_FORWARD
 	//
 	// Move forward.
-	DirTabForward DirectionType = C.GTK_DIR_TAB_FORWARD
+	DirTabForward DirectionType = 0
 	// DirTabBackward wraps GTK_DIR_TAB_BACKWARD
 	//
 	// Move backward.
-	DirTabBackward DirectionType = C.GTK_DIR_TAB_BACKWARD
+	DirTabBackward DirectionType = 1
 	// DirUp wraps GTK_DIR_UP
 	//
 	// Move up.
-	DirUp DirectionType = C.GTK_DIR_UP
+	DirUp DirectionType = 2
 	// DirDown wraps GTK_DIR_DOWN
 	//
 	// Move down.
-	DirDown DirectionType = C.GTK_DIR_DOWN
+	DirDown DirectionType = 3
 	// DirLeft wraps GTK_DIR_LEFT
 	//
 	// Move left.
-	DirLeft DirectionType = C.GTK_DIR_LEFT
+	DirLeft DirectionType = 4
 	// DirRight wraps GTK_DIR_RIGHT
 	//
 	// Move right.
-	DirRight DirectionType = C.GTK_DIR_RIGHT
+	DirRight DirectionType = 5
 )
 
 func marshalDirectionType(p unsafe.Pointer) (any, error) {
@@ -3036,39 +3036,39 @@ const (
 	// EditablePropText wraps GTK_EDITABLE_PROP_TEXT
 	//
 	// the property id for [property@Gtk.Editable:text]
-	EditablePropText EditableProperties = C.GTK_EDITABLE_PROP_TEXT
+	EditablePropText EditableProperties = 0
 	// EditablePropCursorPosition wraps GTK_EDITABLE_PROP_CURSOR_POSITION
 	//
 	// the property id for [property@Gtk.Editable:cursor-position]
-	EditablePropCursorPosition EditableProperties = C.GTK_EDITABLE_PROP_CURSOR_POSITION
+	EditablePropCursorPosition EditableProperties = 1
 	// EditablePropSelectionBound wraps GTK_EDITABLE_PROP_SELECTION_BOUND
 	//
 	// the property id for [property@Gtk.Editable:selection-bound]
-	EditablePropSelectionBound EditableProperties = C.GTK_EDITABLE_PROP_SELECTION_BOUND
+	EditablePropSelectionBound EditableProperties = 2
 	// EditablePropEditable wraps GTK_EDITABLE_PROP_EDITABLE
 	//
 	// the property id for [property@Gtk.Editable:editable]
-	EditablePropEditable EditableProperties = C.GTK_EDITABLE_PROP_EDITABLE
+	EditablePropEditable EditableProperties = 3
 	// EditablePropWidthChars wraps GTK_EDITABLE_PROP_WIDTH_CHARS
 	//
 	// the property id for [property@Gtk.Editable:width-chars]
-	EditablePropWidthChars EditableProperties = C.GTK_EDITABLE_PROP_WIDTH_CHARS
+	EditablePropWidthChars EditableProperties = 4
 	// EditablePropMaxWidthChars wraps GTK_EDITABLE_PROP_MAX_WIDTH_CHARS
 	//
 	// the property id for [property@Gtk.Editable:max-width-chars]
-	EditablePropMaxWidthChars EditableProperties = C.GTK_EDITABLE_PROP_MAX_WIDTH_CHARS
+	EditablePropMaxWidthChars EditableProperties = 5
 	// EditablePropXAlign wraps GTK_EDITABLE_PROP_XALIGN
 	//
 	// the property id for [property@Gtk.Editable:xalign]
-	EditablePropXAlign EditableProperties = C.GTK_EDITABLE_PROP_XALIGN
+	EditablePropXAlign EditableProperties = 6
 	// EditablePropEnableUndo wraps GTK_EDITABLE_PROP_ENABLE_UNDO
 	//
 	// the property id for [property@Gtk.Editable:enable-undo]
-	EditablePropEnableUndo EditableProperties = C.GTK_EDITABLE_PROP_ENABLE_UNDO
+	EditablePropEnableUndo EditableProperties = 7
 	// EditableNumProperties wraps GTK_EDITABLE_NUM_PROPERTIES
 	//
 	// the number of properties
-	EditableNumProperties EditableProperties = C.GTK_EDITABLE_NUM_PROPERTIES
+	EditableNumProperties EditableProperties = 8
 )
 
 func marshalEditableProperties(p unsafe.Pointer) (any, error) {
@@ -3091,11 +3091,11 @@ const (
 	// EntryIconPrimary wraps GTK_ENTRY_ICON_PRIMARY
 	//
 	// At the beginning of the entry (depending on the text direction).
-	EntryIconPrimary EntryIconPosition = C.GTK_ENTRY_ICON_PRIMARY
+	EntryIconPrimary EntryIconPosition = 0
 	// EntryIconSecondary wraps GTK_ENTRY_ICON_SECONDARY
 	//
 	// At the end of the entry (depending on the text direction).
-	EntryIconSecondary EntryIconPosition = C.GTK_ENTRY_ICON_SECONDARY
+	EntryIconSecondary EntryIconPosition = 1
 )
 
 func marshalEntryIconPosition(p unsafe.Pointer) (any, error) {
@@ -3118,15 +3118,15 @@ const (
 	// EventSequenceNone wraps GTK_EVENT_SEQUENCE_NONE
 	//
 	// The sequence is handled, but not grabbed.
-	EventSequenceNone EventSequenceState = C.GTK_EVENT_SEQUENCE_NONE
+	EventSequenceNone EventSequenceState = 0
 	// EventSequenceClaimed wraps GTK_EVENT_SEQUENCE_CLAIMED
 	//
 	// The sequence is handled and grabbed.
-	EventSequenceClaimed EventSequenceState = C.GTK_EVENT_SEQUENCE_CLAIMED
+	EventSequenceClaimed EventSequenceState = 1
 	// EventSequenceDenied wraps GTK_EVENT_SEQUENCE_DENIED
 	//
 	// The sequence is denied.
-	EventSequenceDenied EventSequenceState = C.GTK_EVENT_SEQUENCE_DENIED
+	EventSequenceDenied EventSequenceState = 2
 )
 
 func marshalEventSequenceState(p unsafe.Pointer) (any, error) {
@@ -3151,19 +3151,19 @@ const (
 	//
 	// Indicates open mode.  The file chooser
 	//  will only let the user pick an existing file.
-	FileChooserActionOpen FileChooserAction = C.GTK_FILE_CHOOSER_ACTION_OPEN
+	FileChooserActionOpen FileChooserAction = 0
 	// FileChooserActionSave wraps GTK_FILE_CHOOSER_ACTION_SAVE
 	//
 	// Indicates save mode.  The file chooser
 	//  will let the user pick an existing file, or type in a new
 	//  filename.
-	FileChooserActionSave FileChooserAction = C.GTK_FILE_CHOOSER_ACTION_SAVE
+	FileChooserActionSave FileChooserAction = 1
 	// FileChooserActionSelectFolder wraps GTK_FILE_CHOOSER_ACTION_SELECT_FOLDER
 	//
 	// Indicates an Open mode for
 	//  selecting folders.  The file chooser will let the user pick an
 	//  existing folder.
-	FileChooserActionSelectFolder FileChooserAction = C.GTK_FILE_CHOOSER_ACTION_SELECT_FOLDER
+	FileChooserActionSelectFolder FileChooserAction = 2
 )
 
 func marshalFileChooserAction(p unsafe.Pointer) (any, error) {
@@ -3187,21 +3187,21 @@ const (
 	// FileChooserErrorNonexistent wraps GTK_FILE_CHOOSER_ERROR_NONEXISTENT
 	//
 	// Indicates that a file does not exist.
-	FileChooserErrorNonexistent FileChooserError = C.GTK_FILE_CHOOSER_ERROR_NONEXISTENT
+	FileChooserErrorNonexistent FileChooserError = 0
 	// FileChooserErrorBadFilename wraps GTK_FILE_CHOOSER_ERROR_BAD_FILENAME
 	//
 	// Indicates a malformed filename.
-	FileChooserErrorBadFilename FileChooserError = C.GTK_FILE_CHOOSER_ERROR_BAD_FILENAME
+	FileChooserErrorBadFilename FileChooserError = 1
 	// FileChooserErrorAlreadyExists wraps GTK_FILE_CHOOSER_ERROR_ALREADY_EXISTS
 	//
 	// Indicates a duplicate path (e.g. when
 	//  adding a bookmark).
-	FileChooserErrorAlreadyExists FileChooserError = C.GTK_FILE_CHOOSER_ERROR_ALREADY_EXISTS
+	FileChooserErrorAlreadyExists FileChooserError = 2
 	// FileChooserErrorIncompleteHostname wraps GTK_FILE_CHOOSER_ERROR_INCOMPLETE_HOSTNAME
 	//
 	// Indicates an incomplete hostname
 	//  (e.g. "http://foo" without a slash after that).
-	FileChooserErrorIncompleteHostname FileChooserError = C.GTK_FILE_CHOOSER_ERROR_INCOMPLETE_HOSTNAME
+	FileChooserErrorIncompleteHostname FileChooserError = 3
 )
 
 func marshalFileChooserError(p unsafe.Pointer) (any, error) {
@@ -3230,19 +3230,19 @@ const (
 	//
 	// The filter change cannot be
 	//   described with any of the other enumeration values.
-	FilterChangeDifferent FilterChange = C.GTK_FILTER_CHANGE_DIFFERENT
+	FilterChangeDifferent FilterChange = 0
 	// FilterChangeLessStrict wraps GTK_FILTER_CHANGE_LESS_STRICT
 	//
 	// The filter is less strict than
 	//   it was before: All items that it used to return %TRUE for
 	//   still return %TRUE, others now may, too.
-	FilterChangeLessStrict FilterChange = C.GTK_FILTER_CHANGE_LESS_STRICT
+	FilterChangeLessStrict FilterChange = 1
 	// FilterChangeMoreStrict wraps GTK_FILTER_CHANGE_MORE_STRICT
 	//
 	// The filter is more strict than
 	//   it was before: All items that it used to return %FALSE for
 	//   still return %FALSE, others now may, too.
-	FilterChangeMoreStrict FilterChange = C.GTK_FILTER_CHANGE_MORE_STRICT
+	FilterChangeMoreStrict FilterChange = 2
 )
 
 func marshalFilterChange(p unsafe.Pointer) (any, error) {
@@ -3270,17 +3270,17 @@ const (
 	//
 	// The filter matches some items,
 	//   gtk_filter_match() may return %TRUE or %FALSE
-	FilterMatchSome FilterMatch = C.GTK_FILTER_MATCH_SOME
+	FilterMatchSome FilterMatch = 0
 	// FilterMatchNone wraps GTK_FILTER_MATCH_NONE
 	//
 	// The filter does not match any item,
 	//   gtk_filter_match() will always return %FALSE.
-	FilterMatchNone FilterMatch = C.GTK_FILTER_MATCH_NONE
+	FilterMatchNone FilterMatch = 1
 	// FilterMatchAll wraps GTK_FILTER_MATCH_ALL
 	//
 	// The filter matches all items,
 	//   gtk_filter_match() will alays return %TRUE.
-	FilterMatchAll FilterMatch = C.GTK_FILTER_MATCH_ALL
+	FilterMatchAll FilterMatch = 2
 )
 
 func marshalFilterMatch(p unsafe.Pointer) (any, error) {
@@ -3307,19 +3307,19 @@ const (
 	// FontLevelFamily wraps GTK_FONT_LEVEL_FAMILY
 	//
 	// Select a font family
-	FontLevelFamily FontLevel = C.GTK_FONT_LEVEL_FAMILY
+	FontLevelFamily FontLevel = 0
 	// FontLevelFace wraps GTK_FONT_LEVEL_FACE
 	//
 	// Select a font face (i.e. a family and a style)
-	FontLevelFace FontLevel = C.GTK_FONT_LEVEL_FACE
+	FontLevelFace FontLevel = 1
 	// FontLevelFont wraps GTK_FONT_LEVEL_FONT
 	//
 	// Select a font (i.e. a face with a size, and possibly font variations)
-	FontLevelFont FontLevel = C.GTK_FONT_LEVEL_FONT
+	FontLevelFont FontLevel = 2
 	// FontLevelFeatures wraps GTK_FONT_LEVEL_FEATURES
 	//
 	// Select a font and font features
-	FontLevelFeatures FontLevel = C.GTK_FONT_LEVEL_FEATURES
+	FontLevelFeatures FontLevel = 3
 )
 
 func marshalFontLevel(p unsafe.Pointer) (any, error) {
@@ -3344,12 +3344,12 @@ const (
 	//
 	// Set up font rendering automatically,
 	//   taking factors like screen resolution and scale into account
-	FontRenderingAutomatic FontRendering = C.GTK_FONT_RENDERING_AUTOMATIC
+	FontRenderingAutomatic FontRendering = 0
 	// FontRenderingManual wraps GTK_FONT_RENDERING_MANUAL
 	//
 	// Follow low-level font-related settings
 	//   when configuring font rendering
-	FontRenderingManual FontRendering = C.GTK_FONT_RENDERING_MANUAL
+	FontRenderingManual FontRendering = 1
 )
 
 func marshalFontRendering(p unsafe.Pointer) (any, error) {
@@ -3372,11 +3372,11 @@ const (
 	// GraphicsOffloadEnabledType wraps GTK_GRAPHICS_OFFLOAD_ENABLED_TYPE
 	//
 	// Graphics offloading is enabled.
-	GraphicsOffloadEnabledType GraphicsOffloadEnabled = C.GTK_GRAPHICS_OFFLOAD_ENABLED_TYPE
+	GraphicsOffloadEnabledType GraphicsOffloadEnabled = 0
 	// GraphicsOffloadDisabledType wraps GTK_GRAPHICS_OFFLOAD_DISABLED_TYPE
 	//
 	// Graphics offloading is disabled.
-	GraphicsOffloadDisabledType GraphicsOffloadEnabled = C.GTK_GRAPHICS_OFFLOAD_DISABLED_TYPE
+	GraphicsOffloadDisabledType GraphicsOffloadEnabled = 1
 )
 
 func marshalGraphicsOffloadEnabled(p unsafe.Pointer) (any, error) {
@@ -3407,15 +3407,15 @@ const (
 	// IconSizeInherit wraps GTK_ICON_SIZE_INHERIT
 	//
 	// Keep the size of the parent element
-	IconSizeInherit IconSize = C.GTK_ICON_SIZE_INHERIT
+	IconSizeInherit IconSize = 0
 	// IconSizeNormal wraps GTK_ICON_SIZE_NORMAL
 	//
 	// Size similar to text size
-	IconSizeNormal IconSize = C.GTK_ICON_SIZE_NORMAL
+	IconSizeNormal IconSize = 1
 	// IconSizeLarge wraps GTK_ICON_SIZE_LARGE
 	//
 	// Large size, for example in an icon view
-	IconSizeLarge IconSize = C.GTK_ICON_SIZE_LARGE
+	IconSizeLarge IconSize = 2
 )
 
 func marshalIconSize(p unsafe.Pointer) (any, error) {
@@ -3438,11 +3438,11 @@ const (
 	// IconThemeNotFound wraps GTK_ICON_THEME_NOT_FOUND
 	//
 	// The icon specified does not exist in the theme
-	IconThemeNotFound IconThemeError = C.GTK_ICON_THEME_NOT_FOUND
+	IconThemeNotFound IconThemeError = 0
 	// IconThemeFailed wraps GTK_ICON_THEME_FAILED
 	//
 	// An unspecified error occurred.
-	IconThemeFailed IconThemeError = C.GTK_ICON_THEME_FAILED
+	IconThemeFailed IconThemeError = 1
 )
 
 func marshalIconThemeError(p unsafe.Pointer) (any, error) {
@@ -3465,27 +3465,27 @@ const (
 	// IconViewNoDrop wraps GTK_ICON_VIEW_NO_DROP
 	//
 	// no drop possible
-	IconViewNoDrop IconViewDropPosition = C.GTK_ICON_VIEW_NO_DROP
+	IconViewNoDrop IconViewDropPosition = 0
 	// IconViewDropInto wraps GTK_ICON_VIEW_DROP_INTO
 	//
 	// dropped item replaces the item
-	IconViewDropInto IconViewDropPosition = C.GTK_ICON_VIEW_DROP_INTO
+	IconViewDropInto IconViewDropPosition = 1
 	// IconViewDropLeft wraps GTK_ICON_VIEW_DROP_LEFT
 	//
 	// dropped item is inserted to the left
-	IconViewDropLeft IconViewDropPosition = C.GTK_ICON_VIEW_DROP_LEFT
+	IconViewDropLeft IconViewDropPosition = 2
 	// IconViewDropRight wraps GTK_ICON_VIEW_DROP_RIGHT
 	//
 	// dropped item is inserted to the right
-	IconViewDropRight IconViewDropPosition = C.GTK_ICON_VIEW_DROP_RIGHT
+	IconViewDropRight IconViewDropPosition = 3
 	// IconViewDropAbove wraps GTK_ICON_VIEW_DROP_ABOVE
 	//
 	// dropped item is inserted above
-	IconViewDropAbove IconViewDropPosition = C.GTK_ICON_VIEW_DROP_ABOVE
+	IconViewDropAbove IconViewDropPosition = 4
 	// IconViewDropBelow wraps GTK_ICON_VIEW_DROP_BELOW
 	//
 	// dropped item is inserted below
-	IconViewDropBelow IconViewDropPosition = C.GTK_ICON_VIEW_DROP_BELOW
+	IconViewDropBelow IconViewDropPosition = 5
 )
 
 func marshalIconViewDropPosition(p unsafe.Pointer) (any, error) {
@@ -3515,19 +3515,19 @@ const (
 	// ImageEmpty wraps GTK_IMAGE_EMPTY
 	//
 	// there is no image displayed by the widget
-	ImageEmpty ImageType = C.GTK_IMAGE_EMPTY
+	ImageEmpty ImageType = 0
 	// ImageIconName wraps GTK_IMAGE_ICON_NAME
 	//
 	// the widget contains a named icon
-	ImageIconName ImageType = C.GTK_IMAGE_ICON_NAME
+	ImageIconName ImageType = 1
 	// ImageGIcon wraps GTK_IMAGE_GICON
 	//
 	// the widget contains a `GIcon`
-	ImageGIcon ImageType = C.GTK_IMAGE_GICON
+	ImageGIcon ImageType = 2
 	// ImagePaintable wraps GTK_IMAGE_PAINTABLE
 	//
 	// the widget contains a `GdkPaintable`
-	ImagePaintable ImageType = C.GTK_IMAGE_PAINTABLE
+	ImagePaintable ImageType = 3
 )
 
 func marshalImageType(p unsafe.Pointer) (any, error) {
@@ -3568,47 +3568,47 @@ const (
 	// InputPurposeFreeForm wraps GTK_INPUT_PURPOSE_FREE_FORM
 	//
 	// Allow any character
-	InputPurposeFreeForm InputPurpose = C.GTK_INPUT_PURPOSE_FREE_FORM
+	InputPurposeFreeForm InputPurpose = 0
 	// InputPurposeAlpha wraps GTK_INPUT_PURPOSE_ALPHA
 	//
 	// Allow only alphabetic characters
-	InputPurposeAlpha InputPurpose = C.GTK_INPUT_PURPOSE_ALPHA
+	InputPurposeAlpha InputPurpose = 1
 	// InputPurposeDigits wraps GTK_INPUT_PURPOSE_DIGITS
 	//
 	// Allow only digits
-	InputPurposeDigits InputPurpose = C.GTK_INPUT_PURPOSE_DIGITS
+	InputPurposeDigits InputPurpose = 2
 	// InputPurposeNumber wraps GTK_INPUT_PURPOSE_NUMBER
 	//
 	// Edited field expects numbers
-	InputPurposeNumber InputPurpose = C.GTK_INPUT_PURPOSE_NUMBER
+	InputPurposeNumber InputPurpose = 3
 	// InputPurposePhone wraps GTK_INPUT_PURPOSE_PHONE
 	//
 	// Edited field expects phone number
-	InputPurposePhone InputPurpose = C.GTK_INPUT_PURPOSE_PHONE
+	InputPurposePhone InputPurpose = 4
 	// InputPurposeURL wraps GTK_INPUT_PURPOSE_URL
 	//
 	// Edited field expects URL
-	InputPurposeURL InputPurpose = C.GTK_INPUT_PURPOSE_URL
+	InputPurposeURL InputPurpose = 5
 	// InputPurposeEmail wraps GTK_INPUT_PURPOSE_EMAIL
 	//
 	// Edited field expects email address
-	InputPurposeEmail InputPurpose = C.GTK_INPUT_PURPOSE_EMAIL
+	InputPurposeEmail InputPurpose = 6
 	// InputPurposeName wraps GTK_INPUT_PURPOSE_NAME
 	//
 	// Edited field expects the name of a person
-	InputPurposeName InputPurpose = C.GTK_INPUT_PURPOSE_NAME
+	InputPurposeName InputPurpose = 7
 	// InputPurposePassword wraps GTK_INPUT_PURPOSE_PASSWORD
 	//
 	// Like %GTK_INPUT_PURPOSE_FREE_FORM, but characters are hidden
-	InputPurposePassword InputPurpose = C.GTK_INPUT_PURPOSE_PASSWORD
+	InputPurposePassword InputPurpose = 8
 	// InputPurposePIN wraps GTK_INPUT_PURPOSE_PIN
 	//
 	// Like %GTK_INPUT_PURPOSE_DIGITS, but characters are hidden
-	InputPurposePIN InputPurpose = C.GTK_INPUT_PURPOSE_PIN
+	InputPurposePIN InputPurpose = 9
 	// InputPurposeTerminal wraps GTK_INPUT_PURPOSE_TERMINAL
 	//
 	// Allow any character, in addition to control codes
-	InputPurposeTerminal InputPurpose = C.GTK_INPUT_PURPOSE_TERMINAL
+	InputPurposeTerminal InputPurpose = 10
 )
 
 func marshalInputPurpose(p unsafe.Pointer) (any, error) {
@@ -3632,19 +3632,19 @@ const (
 	// InscriptionOverflowClip wraps GTK_INSCRIPTION_OVERFLOW_CLIP
 	//
 	// Clip the remaining text
-	InscriptionOverflowClip InscriptionOverflow = C.GTK_INSCRIPTION_OVERFLOW_CLIP
+	InscriptionOverflowClip InscriptionOverflow = 0
 	// InscriptionOverflowEllipsizeStart wraps GTK_INSCRIPTION_OVERFLOW_ELLIPSIZE_START
 	//
 	// Omit characters at the start of the text
-	InscriptionOverflowEllipsizeStart InscriptionOverflow = C.GTK_INSCRIPTION_OVERFLOW_ELLIPSIZE_START
+	InscriptionOverflowEllipsizeStart InscriptionOverflow = 1
 	// InscriptionOverflowEllipsizeMiddle wraps GTK_INSCRIPTION_OVERFLOW_ELLIPSIZE_MIDDLE
 	//
 	// Omit characters at the middle of the text
-	InscriptionOverflowEllipsizeMiddle InscriptionOverflow = C.GTK_INSCRIPTION_OVERFLOW_ELLIPSIZE_MIDDLE
+	InscriptionOverflowEllipsizeMiddle InscriptionOverflow = 2
 	// InscriptionOverflowEllipsizeEnd wraps GTK_INSCRIPTION_OVERFLOW_ELLIPSIZE_END
 	//
 	// Omit characters at the end of the text
-	InscriptionOverflowEllipsizeEnd InscriptionOverflow = C.GTK_INSCRIPTION_OVERFLOW_ELLIPSIZE_END
+	InscriptionOverflowEllipsizeEnd InscriptionOverflow = 3
 )
 
 func marshalInscriptionOverflow(p unsafe.Pointer) (any, error) {
@@ -3667,19 +3667,19 @@ const (
 	// JustifyLeft wraps GTK_JUSTIFY_LEFT
 	//
 	// The text is placed at the left edge of the label.
-	JustifyLeft Justification = C.GTK_JUSTIFY_LEFT
+	JustifyLeft Justification = 0
 	// JustifyRight wraps GTK_JUSTIFY_RIGHT
 	//
 	// The text is placed at the right edge of the label.
-	JustifyRight Justification = C.GTK_JUSTIFY_RIGHT
+	JustifyRight Justification = 1
 	// JustifyCenter wraps GTK_JUSTIFY_CENTER
 	//
 	// The text is placed in the center of the label.
-	JustifyCenter Justification = C.GTK_JUSTIFY_CENTER
+	JustifyCenter Justification = 2
 	// JustifyFill wraps GTK_JUSTIFY_FILL
 	//
 	// The text is placed is distributed across the label.
-	JustifyFill Justification = C.GTK_JUSTIFY_FILL
+	JustifyFill Justification = 3
 )
 
 func marshalJustification(p unsafe.Pointer) (any, error) {
@@ -3705,11 +3705,11 @@ const (
 	// LevelBarModeContinuous wraps GTK_LEVEL_BAR_MODE_CONTINUOUS
 	//
 	// the bar has a continuous mode
-	LevelBarModeContinuous LevelBarMode = C.GTK_LEVEL_BAR_MODE_CONTINUOUS
+	LevelBarModeContinuous LevelBarMode = 0
 	// LevelBarModeDiscrete wraps GTK_LEVEL_BAR_MODE_DISCRETE
 	//
 	// the bar has a discrete mode
-	LevelBarModeDiscrete LevelBarMode = C.GTK_LEVEL_BAR_MODE_DISCRETE
+	LevelBarModeDiscrete LevelBarMode = 1
 )
 
 func marshalLevelBarMode(p unsafe.Pointer) (any, error) {
@@ -3734,80 +3734,80 @@ const (
 	// LicenseUnknown wraps GTK_LICENSE_UNKNOWN
 	//
 	// No license specified
-	LicenseUnknown License = C.GTK_LICENSE_UNKNOWN
+	LicenseUnknown License = 0
 	// LicenseCustom wraps GTK_LICENSE_CUSTOM
 	//
 	// A license text is going to be specified by the
 	//   developer
-	LicenseCustom License = C.GTK_LICENSE_CUSTOM
+	LicenseCustom License = 1
 	// LicenseGPL20 wraps GTK_LICENSE_GPL_2_0
 	//
 	// The GNU General Public License, version 2.0 or later
-	LicenseGPL20 License = C.GTK_LICENSE_GPL_2_0
+	LicenseGPL20 License = 2
 	// LicenseGPL30 wraps GTK_LICENSE_GPL_3_0
 	//
 	// The GNU General Public License, version 3.0 or later
-	LicenseGPL30 License = C.GTK_LICENSE_GPL_3_0
+	LicenseGPL30 License = 3
 	// LicenseLGPL21 wraps GTK_LICENSE_LGPL_2_1
 	//
 	// The GNU Lesser General Public License, version 2.1 or later
-	LicenseLGPL21 License = C.GTK_LICENSE_LGPL_2_1
+	LicenseLGPL21 License = 4
 	// LicenseLGPL30 wraps GTK_LICENSE_LGPL_3_0
 	//
 	// The GNU Lesser General Public License, version 3.0 or later
-	LicenseLGPL30 License = C.GTK_LICENSE_LGPL_3_0
+	LicenseLGPL30 License = 5
 	// LicenseBSD wraps GTK_LICENSE_BSD
 	//
 	// The BSD standard license
-	LicenseBSD License = C.GTK_LICENSE_BSD
+	LicenseBSD License = 6
 	// LicenseMITX11 wraps GTK_LICENSE_MIT_X11
 	//
 	// The MIT/X11 standard license
-	LicenseMITX11 License = C.GTK_LICENSE_MIT_X11
+	LicenseMITX11 License = 7
 	// LicenseArtistic wraps GTK_LICENSE_ARTISTIC
 	//
 	// The Artistic License, version 2.0
-	LicenseArtistic License = C.GTK_LICENSE_ARTISTIC
+	LicenseArtistic License = 8
 	// LicenseGPL20_Only wraps GTK_LICENSE_GPL_2_0_ONLY
 	//
 	// The GNU General Public License, version 2.0 only
-	LicenseGPL20_Only License = C.GTK_LICENSE_GPL_2_0_ONLY
+	LicenseGPL20_Only License = 9
 	// LicenseGPL30_Only wraps GTK_LICENSE_GPL_3_0_ONLY
 	//
 	// The GNU General Public License, version 3.0 only
-	LicenseGPL30_Only License = C.GTK_LICENSE_GPL_3_0_ONLY
+	LicenseGPL30_Only License = 10
 	// LicenseLGPL21_Only wraps GTK_LICENSE_LGPL_2_1_ONLY
 	//
 	// The GNU Lesser General Public License, version 2.1 only
-	LicenseLGPL21_Only License = C.GTK_LICENSE_LGPL_2_1_ONLY
+	LicenseLGPL21_Only License = 11
 	// LicenseLGPL30_Only wraps GTK_LICENSE_LGPL_3_0_ONLY
 	//
 	// The GNU Lesser General Public License, version 3.0 only
-	LicenseLGPL30_Only License = C.GTK_LICENSE_LGPL_3_0_ONLY
+	LicenseLGPL30_Only License = 12
 	// LicenseAGPL30 wraps GTK_LICENSE_AGPL_3_0
 	//
 	// The GNU Affero General Public License, version 3.0 or later
-	LicenseAGPL30 License = C.GTK_LICENSE_AGPL_3_0
+	LicenseAGPL30 License = 13
 	// LicenseAGPL30_Only wraps GTK_LICENSE_AGPL_3_0_ONLY
 	//
 	// The GNU Affero General Public License, version 3.0 only
-	LicenseAGPL30_Only License = C.GTK_LICENSE_AGPL_3_0_ONLY
+	LicenseAGPL30_Only License = 14
 	// LicenseBSD3 wraps GTK_LICENSE_BSD_3
 	//
 	// The 3-clause BSD licence
-	LicenseBSD3 License = C.GTK_LICENSE_BSD_3
+	LicenseBSD3 License = 15
 	// LicenseApache20 wraps GTK_LICENSE_APACHE_2_0
 	//
 	// The Apache License, version 2.0
-	LicenseApache20 License = C.GTK_LICENSE_APACHE_2_0
+	LicenseApache20 License = 16
 	// LicenseMPL20 wraps GTK_LICENSE_MPL_2_0
 	//
 	// The Mozilla Public License, version 2.0
-	LicenseMPL20 License = C.GTK_LICENSE_MPL_2_0
+	LicenseMPL20 License = 17
 	// License0BSD wraps GTK_LICENSE_0BSD
 	//
 	// Zero-Clause BSD license
-	License0BSD License = C.GTK_LICENSE_0BSD
+	License0BSD License = 18
 )
 
 func marshalLicense(p unsafe.Pointer) (any, error) {
@@ -3832,13 +3832,13 @@ const (
 	// ListTabAll wraps GTK_LIST_TAB_ALL
 	//
 	// Cycle through all focusable items of the list
-	ListTabAll ListTabBehavior = C.GTK_LIST_TAB_ALL
+	ListTabAll ListTabBehavior = 0
 	// ListTabItem wraps GTK_LIST_TAB_ITEM
 	//
 	// Cycle through a single list element, then move
 	//   focus out of the list. Moving focus between items needs to be
 	//   done with the arrow keys.
-	ListTabItem ListTabBehavior = C.GTK_LIST_TAB_ITEM
+	ListTabItem ListTabBehavior = 1
 	// ListTabCell wraps GTK_LIST_TAB_CELL
 	//
 	// Cycle only through a single cell, then
@@ -3846,7 +3846,7 @@ const (
 	//   be done with the arrow keys. This is only relevant for
 	//   cell-based widgets like #GtkColumnView, otherwise it behaves
 	//   like `GTK_LIST_TAB_ITEM`.
-	ListTabCell ListTabBehavior = C.GTK_LIST_TAB_CELL
+	ListTabCell ListTabBehavior = 2
 )
 
 func marshalListTabBehavior(p unsafe.Pointer) (any, error) {
@@ -3869,23 +3869,23 @@ const (
 	// MessageInfo wraps GTK_MESSAGE_INFO
 	//
 	// Informational message
-	MessageInfo MessageType = C.GTK_MESSAGE_INFO
+	MessageInfo MessageType = 0
 	// MessageWarning wraps GTK_MESSAGE_WARNING
 	//
 	// Non-fatal warning message
-	MessageWarning MessageType = C.GTK_MESSAGE_WARNING
+	MessageWarning MessageType = 1
 	// MessageQuestion wraps GTK_MESSAGE_QUESTION
 	//
 	// Question requiring a choice
-	MessageQuestion MessageType = C.GTK_MESSAGE_QUESTION
+	MessageQuestion MessageType = 2
 	// MessageError wraps GTK_MESSAGE_ERROR
 	//
 	// Fatal error message
-	MessageError MessageType = C.GTK_MESSAGE_ERROR
+	MessageError MessageType = 3
 	// MessageOther wraps GTK_MESSAGE_OTHER
 	//
 	// None of the above
-	MessageOther MessageType = C.GTK_MESSAGE_OTHER
+	MessageOther MessageType = 4
 )
 
 func marshalMessageType(p unsafe.Pointer) (any, error) {
@@ -3909,43 +3909,43 @@ const (
 	// MovementLogicalPositions wraps GTK_MOVEMENT_LOGICAL_POSITIONS
 	//
 	// Move forward or back by graphemes
-	MovementLogicalPositions MovementStep = C.GTK_MOVEMENT_LOGICAL_POSITIONS
+	MovementLogicalPositions MovementStep = 0
 	// MovementVisualPositions wraps GTK_MOVEMENT_VISUAL_POSITIONS
 	//
 	// Move left or right by graphemes
-	MovementVisualPositions MovementStep = C.GTK_MOVEMENT_VISUAL_POSITIONS
+	MovementVisualPositions MovementStep = 1
 	// MovementWords wraps GTK_MOVEMENT_WORDS
 	//
 	// Move forward or back by words
-	MovementWords MovementStep = C.GTK_MOVEMENT_WORDS
+	MovementWords MovementStep = 2
 	// MovementDisplayLines wraps GTK_MOVEMENT_DISPLAY_LINES
 	//
 	// Move up or down lines (wrapped lines)
-	MovementDisplayLines MovementStep = C.GTK_MOVEMENT_DISPLAY_LINES
+	MovementDisplayLines MovementStep = 3
 	// MovementDisplayLineEnds wraps GTK_MOVEMENT_DISPLAY_LINE_ENDS
 	//
 	// Move to either end of a line
-	MovementDisplayLineEnds MovementStep = C.GTK_MOVEMENT_DISPLAY_LINE_ENDS
+	MovementDisplayLineEnds MovementStep = 4
 	// MovementParagraphs wraps GTK_MOVEMENT_PARAGRAPHS
 	//
 	// Move up or down paragraphs (newline-ended lines)
-	MovementParagraphs MovementStep = C.GTK_MOVEMENT_PARAGRAPHS
+	MovementParagraphs MovementStep = 5
 	// MovementParagraphEnds wraps GTK_MOVEMENT_PARAGRAPH_ENDS
 	//
 	// Move to either end of a paragraph
-	MovementParagraphEnds MovementStep = C.GTK_MOVEMENT_PARAGRAPH_ENDS
+	MovementParagraphEnds MovementStep = 6
 	// MovementPages wraps GTK_MOVEMENT_PAGES
 	//
 	// Move by pages
-	MovementPages MovementStep = C.GTK_MOVEMENT_PAGES
+	MovementPages MovementStep = 7
 	// MovementBufferEnds wraps GTK_MOVEMENT_BUFFER_ENDS
 	//
 	// Move to ends of the buffer
-	MovementBufferEnds MovementStep = C.GTK_MOVEMENT_BUFFER_ENDS
+	MovementBufferEnds MovementStep = 8
 	// MovementHorizontalPages wraps GTK_MOVEMENT_HORIZONTAL_PAGES
 	//
 	// Move horizontally by pages
-	MovementHorizontalPages MovementStep = C.GTK_MOVEMENT_HORIZONTAL_PAGES
+	MovementHorizontalPages MovementStep = 9
 )
 
 func marshalMovementStep(p unsafe.Pointer) (any, error) {
@@ -3972,19 +3972,19 @@ const (
 	//
 	// Inherit the minimum size request.
 	//   In particular, this should be used with %PANGO_WRAP_CHAR.
-	NaturalWrapInherit NaturalWrapMode = C.GTK_NATURAL_WRAP_INHERIT
+	NaturalWrapInherit NaturalWrapMode = 0
 	// NaturalWrapNone wraps GTK_NATURAL_WRAP_NONE
 	//
 	// Try not to wrap the text. This mode is the
 	//   closest to GTK3's behavior but can lead to a wide label leaving
 	//   lots of empty space below the text.
-	NaturalWrapNone NaturalWrapMode = C.GTK_NATURAL_WRAP_NONE
+	NaturalWrapNone NaturalWrapMode = 1
 	// NaturalWrapWord wraps GTK_NATURAL_WRAP_WORD
 	//
 	// Attempt to wrap at word boundaries. This
 	//   is useful in particular when using %PANGO_WRAP_WORD_CHAR as the
 	//   wrap mode.
-	NaturalWrapWord NaturalWrapMode = C.GTK_NATURAL_WRAP_WORD
+	NaturalWrapWord NaturalWrapMode = 2
 )
 
 func marshalNaturalWrapMode(p unsafe.Pointer) (any, error) {
@@ -4007,11 +4007,11 @@ const (
 	// NotebookTabFirst wraps GTK_NOTEBOOK_TAB_FIRST
 	//
 	// the first tab in the notebook
-	NotebookTabFirst NotebookTab = C.GTK_NOTEBOOK_TAB_FIRST
+	NotebookTabFirst NotebookTab = 0
 	// NotebookTabLast wraps GTK_NOTEBOOK_TAB_LAST
 	//
 	// the last tab in the notebook
-	NotebookTabLast NotebookTab = C.GTK_NOTEBOOK_TAB_LAST
+	NotebookTabLast NotebookTab = 1
 )
 
 func marshalNotebookTab(p unsafe.Pointer) (any, error) {
@@ -4035,35 +4035,35 @@ const (
 	// NumberUpLayoutLeftToRightTopToBottom wraps GTK_NUMBER_UP_LAYOUT_LEFT_TO_RIGHT_TOP_TO_BOTTOM
 	//
 	// ![](layout-lrtb.png)
-	NumberUpLayoutLeftToRightTopToBottom NumberUpLayout = C.GTK_NUMBER_UP_LAYOUT_LEFT_TO_RIGHT_TOP_TO_BOTTOM
+	NumberUpLayoutLeftToRightTopToBottom NumberUpLayout = 0
 	// NumberUpLayoutLeftToRightBottomToTop wraps GTK_NUMBER_UP_LAYOUT_LEFT_TO_RIGHT_BOTTOM_TO_TOP
 	//
 	// ![](layout-lrbt.png)
-	NumberUpLayoutLeftToRightBottomToTop NumberUpLayout = C.GTK_NUMBER_UP_LAYOUT_LEFT_TO_RIGHT_BOTTOM_TO_TOP
+	NumberUpLayoutLeftToRightBottomToTop NumberUpLayout = 1
 	// NumberUpLayoutRightToLeftTopToBottom wraps GTK_NUMBER_UP_LAYOUT_RIGHT_TO_LEFT_TOP_TO_BOTTOM
 	//
 	// ![](layout-rltb.png)
-	NumberUpLayoutRightToLeftTopToBottom NumberUpLayout = C.GTK_NUMBER_UP_LAYOUT_RIGHT_TO_LEFT_TOP_TO_BOTTOM
+	NumberUpLayoutRightToLeftTopToBottom NumberUpLayout = 2
 	// NumberUpLayoutRightToLeftBottomToTop wraps GTK_NUMBER_UP_LAYOUT_RIGHT_TO_LEFT_BOTTOM_TO_TOP
 	//
 	// ![](layout-rlbt.png)
-	NumberUpLayoutRightToLeftBottomToTop NumberUpLayout = C.GTK_NUMBER_UP_LAYOUT_RIGHT_TO_LEFT_BOTTOM_TO_TOP
+	NumberUpLayoutRightToLeftBottomToTop NumberUpLayout = 3
 	// NumberUpLayoutTopToBottomLeftToRight wraps GTK_NUMBER_UP_LAYOUT_TOP_TO_BOTTOM_LEFT_TO_RIGHT
 	//
 	// ![](layout-tblr.png)
-	NumberUpLayoutTopToBottomLeftToRight NumberUpLayout = C.GTK_NUMBER_UP_LAYOUT_TOP_TO_BOTTOM_LEFT_TO_RIGHT
+	NumberUpLayoutTopToBottomLeftToRight NumberUpLayout = 4
 	// NumberUpLayoutTopToBottomRightToLeft wraps GTK_NUMBER_UP_LAYOUT_TOP_TO_BOTTOM_RIGHT_TO_LEFT
 	//
 	// ![](layout-tbrl.png)
-	NumberUpLayoutTopToBottomRightToLeft NumberUpLayout = C.GTK_NUMBER_UP_LAYOUT_TOP_TO_BOTTOM_RIGHT_TO_LEFT
+	NumberUpLayoutTopToBottomRightToLeft NumberUpLayout = 5
 	// NumberUpLayoutBottomToTopLeftToRight wraps GTK_NUMBER_UP_LAYOUT_BOTTOM_TO_TOP_LEFT_TO_RIGHT
 	//
 	// ![](layout-btlr.png)
-	NumberUpLayoutBottomToTopLeftToRight NumberUpLayout = C.GTK_NUMBER_UP_LAYOUT_BOTTOM_TO_TOP_LEFT_TO_RIGHT
+	NumberUpLayoutBottomToTopLeftToRight NumberUpLayout = 6
 	// NumberUpLayoutBottomToTopRightToLeft wraps GTK_NUMBER_UP_LAYOUT_BOTTOM_TO_TOP_RIGHT_TO_LEFT
 	//
 	// ![](layout-btrl.png)
-	NumberUpLayoutBottomToTopRightToLeft NumberUpLayout = C.GTK_NUMBER_UP_LAYOUT_BOTTOM_TO_TOP_RIGHT_TO_LEFT
+	NumberUpLayoutBottomToTopRightToLeft NumberUpLayout = 7
 )
 
 func marshalNumberUpLayout(p unsafe.Pointer) (any, error) {
@@ -4091,15 +4091,15 @@ const (
 	// OrderingSmaller wraps GTK_ORDERING_SMALLER
 	//
 	// the first value is smaller than the second
-	OrderingSmaller Ordering = C.GTK_ORDERING_SMALLER
+	OrderingSmaller Ordering = -1
 	// OrderingEqual wraps GTK_ORDERING_EQUAL
 	//
 	// the two values are equal
-	OrderingEqual Ordering = C.GTK_ORDERING_EQUAL
+	OrderingEqual Ordering = 0
 	// OrderingLarger wraps GTK_ORDERING_LARGER
 	//
 	// the first value is larger than the second
-	OrderingLarger Ordering = C.GTK_ORDERING_LARGER
+	OrderingLarger Ordering = 1
 )
 
 func marshalOrdering(p unsafe.Pointer) (any, error) {
@@ -4124,11 +4124,11 @@ const (
 	// OrientationHorizontal wraps GTK_ORIENTATION_HORIZONTAL
 	//
 	// The element is in horizontal orientation.
-	OrientationHorizontal Orientation = C.GTK_ORIENTATION_HORIZONTAL
+	OrientationHorizontal Orientation = 0
 	// OrientationVertical wraps GTK_ORIENTATION_VERTICAL
 	//
 	// The element is in vertical orientation.
-	OrientationVertical Orientation = C.GTK_ORIENTATION_VERTICAL
+	OrientationVertical Orientation = 1
 )
 
 func marshalOrientation(p unsafe.Pointer) (any, error) {
@@ -4156,12 +4156,12 @@ const (
 	//
 	// No change is applied. Content is drawn at the specified
 	//   position.
-	OverflowVisible Overflow = C.GTK_OVERFLOW_VISIBLE
+	OverflowVisible Overflow = 0
 	// OverflowHidden wraps GTK_OVERFLOW_HIDDEN
 	//
 	// Content is clipped to the bounds of the area. Content
 	//   outside the area is not drawn and cannot be interacted with.
-	OverflowHidden Overflow = C.GTK_OVERFLOW_HIDDEN
+	OverflowHidden Overflow = 1
 )
 
 func marshalOverflow(p unsafe.Pointer) (any, error) {
@@ -4186,11 +4186,11 @@ const (
 	// PackStart wraps GTK_PACK_START
 	//
 	// The child is packed into the start of the widget
-	PackStart PackType = C.GTK_PACK_START
+	PackStart PackType = 0
 	// PackEnd wraps GTK_PACK_END
 	//
 	// The child is packed into the end of the widget
-	PackEnd PackType = C.GTK_PACK_END
+	PackEnd PackType = 1
 )
 
 func marshalPackType(p unsafe.Pointer) (any, error) {
@@ -4213,15 +4213,15 @@ const (
 	// PadActionButton wraps GTK_PAD_ACTION_BUTTON
 	//
 	// Action is triggered by a pad button
-	PadActionButton PadActionType = C.GTK_PAD_ACTION_BUTTON
+	PadActionButton PadActionType = 0
 	// PadActionRing wraps GTK_PAD_ACTION_RING
 	//
 	// Action is triggered by a pad ring
-	PadActionRing PadActionType = C.GTK_PAD_ACTION_RING
+	PadActionRing PadActionType = 1
 	// PadActionStrip wraps GTK_PAD_ACTION_STRIP
 	//
 	// Action is triggered by a pad strip
-	PadActionStrip PadActionType = C.GTK_PAD_ACTION_STRIP
+	PadActionStrip PadActionType = 2
 )
 
 func marshalPadActionType(p unsafe.Pointer) (any, error) {
@@ -4244,19 +4244,19 @@ const (
 	// PageOrientationPortrait wraps GTK_PAGE_ORIENTATION_PORTRAIT
 	//
 	// Portrait mode.
-	PageOrientationPortrait PageOrientation = C.GTK_PAGE_ORIENTATION_PORTRAIT
+	PageOrientationPortrait PageOrientation = 0
 	// PageOrientationLandscape wraps GTK_PAGE_ORIENTATION_LANDSCAPE
 	//
 	// Landscape mode.
-	PageOrientationLandscape PageOrientation = C.GTK_PAGE_ORIENTATION_LANDSCAPE
+	PageOrientationLandscape PageOrientation = 1
 	// PageOrientationReversePortrait wraps GTK_PAGE_ORIENTATION_REVERSE_PORTRAIT
 	//
 	// Reverse portrait mode.
-	PageOrientationReversePortrait PageOrientation = C.GTK_PAGE_ORIENTATION_REVERSE_PORTRAIT
+	PageOrientationReversePortrait PageOrientation = 2
 	// PageOrientationReverseLandscape wraps GTK_PAGE_ORIENTATION_REVERSE_LANDSCAPE
 	//
 	// Reverse landscape mode.
-	PageOrientationReverseLandscape PageOrientation = C.GTK_PAGE_ORIENTATION_REVERSE_LANDSCAPE
+	PageOrientationReverseLandscape PageOrientation = 3
 )
 
 func marshalPageOrientation(p unsafe.Pointer) (any, error) {
@@ -4279,15 +4279,15 @@ const (
 	// PageSetAll wraps GTK_PAGE_SET_ALL
 	//
 	// All pages.
-	PageSetAll PageSet = C.GTK_PAGE_SET_ALL
+	PageSetAll PageSet = 0
 	// PageSetEven wraps GTK_PAGE_SET_EVEN
 	//
 	// Even pages.
-	PageSetEven PageSet = C.GTK_PAGE_SET_EVEN
+	PageSetEven PageSet = 1
 	// PageSetOdd wraps GTK_PAGE_SET_ODD
 	//
 	// Odd pages.
-	PageSetOdd PageSet = C.GTK_PAGE_SET_ODD
+	PageSetOdd PageSet = 2
 )
 
 func marshalPageSet(p unsafe.Pointer) (any, error) {
@@ -4310,19 +4310,19 @@ const (
 	// PanDirectionLeft wraps GTK_PAN_DIRECTION_LEFT
 	//
 	// panned towards the left
-	PanDirectionLeft PanDirection = C.GTK_PAN_DIRECTION_LEFT
+	PanDirectionLeft PanDirection = 0
 	// PanDirectionRight wraps GTK_PAN_DIRECTION_RIGHT
 	//
 	// panned towards the right
-	PanDirectionRight PanDirection = C.GTK_PAN_DIRECTION_RIGHT
+	PanDirectionRight PanDirection = 1
 	// PanDirectionUp wraps GTK_PAN_DIRECTION_UP
 	//
 	// panned upwards
-	PanDirectionUp PanDirection = C.GTK_PAN_DIRECTION_UP
+	PanDirectionUp PanDirection = 2
 	// PanDirectionDown wraps GTK_PAN_DIRECTION_DOWN
 	//
 	// panned downwards
-	PanDirectionDown PanDirection = C.GTK_PAN_DIRECTION_DOWN
+	PanDirectionDown PanDirection = 3
 )
 
 func marshalPanDirection(p unsafe.Pointer) (any, error) {
@@ -4347,23 +4347,23 @@ const (
 	//
 	// The scrollbar is always visible. The view size is
 	//   independent of the content.
-	PolicyAlways PolicyType = C.GTK_POLICY_ALWAYS
+	PolicyAlways PolicyType = 0
 	// PolicyAutomatic wraps GTK_POLICY_AUTOMATIC
 	//
 	// The scrollbar will appear and disappear as necessary.
 	//   For example, when all of a `GtkTreeView` can not be seen.
-	PolicyAutomatic PolicyType = C.GTK_POLICY_AUTOMATIC
+	PolicyAutomatic PolicyType = 1
 	// PolicyNever wraps GTK_POLICY_NEVER
 	//
 	// The scrollbar should never appear. In this mode the
 	//   content determines the size.
-	PolicyNever PolicyType = C.GTK_POLICY_NEVER
+	PolicyNever PolicyType = 2
 	// PolicyExternal wraps GTK_POLICY_EXTERNAL
 	//
 	// Don't show a scrollbar, but don't force the
 	//   size to follow the content. This can be used e.g. to make multiple
 	//   scrolled windows share a scrollbar.
-	PolicyExternal PolicyType = C.GTK_POLICY_EXTERNAL
+	PolicyExternal PolicyType = 3
 )
 
 func marshalPolicyType(p unsafe.Pointer) (any, error) {
@@ -4389,19 +4389,19 @@ const (
 	// PosLeft wraps GTK_POS_LEFT
 	//
 	// The feature is at the left edge.
-	PosLeft PositionType = C.GTK_POS_LEFT
+	PosLeft PositionType = 0
 	// PosRight wraps GTK_POS_RIGHT
 	//
 	// The feature is at the right edge.
-	PosRight PositionType = C.GTK_POS_RIGHT
+	PosRight PositionType = 1
 	// PosTop wraps GTK_POS_TOP
 	//
 	// The feature is at the top edge.
-	PosTop PositionType = C.GTK_POS_TOP
+	PosTop PositionType = 2
 	// PosBottom wraps GTK_POS_BOTTOM
 	//
 	// The feature is at the bottom edge.
-	PosBottom PositionType = C.GTK_POS_BOTTOM
+	PosBottom PositionType = 3
 )
 
 func marshalPositionType(p unsafe.Pointer) (any, error) {
@@ -4424,15 +4424,15 @@ const (
 	// PrintDuplexSimplex wraps GTK_PRINT_DUPLEX_SIMPLEX
 	//
 	// No duplex.
-	PrintDuplexSimplex PrintDuplex = C.GTK_PRINT_DUPLEX_SIMPLEX
+	PrintDuplexSimplex PrintDuplex = 0
 	// PrintDuplexHorizontal wraps GTK_PRINT_DUPLEX_HORIZONTAL
 	//
 	// Horizontal duplex.
-	PrintDuplexHorizontal PrintDuplex = C.GTK_PRINT_DUPLEX_HORIZONTAL
+	PrintDuplexHorizontal PrintDuplex = 1
 	// PrintDuplexVertical wraps GTK_PRINT_DUPLEX_VERTICAL
 	//
 	// Vertical duplex.
-	PrintDuplexVertical PrintDuplex = C.GTK_PRINT_DUPLEX_VERTICAL
+	PrintDuplexVertical PrintDuplex = 2
 )
 
 func marshalPrintDuplex(p unsafe.Pointer) (any, error) {
@@ -4456,20 +4456,20 @@ const (
 	// PrintErrorGeneral wraps GTK_PRINT_ERROR_GENERAL
 	//
 	// An unspecified error occurred.
-	PrintErrorGeneral PrintError = C.GTK_PRINT_ERROR_GENERAL
+	PrintErrorGeneral PrintError = 0
 	// PrintErrorInternalError wraps GTK_PRINT_ERROR_INTERNAL_ERROR
 	//
 	// An internal error occurred.
-	PrintErrorInternalError PrintError = C.GTK_PRINT_ERROR_INTERNAL_ERROR
+	PrintErrorInternalError PrintError = 1
 	// PrintErrorNOMEM wraps GTK_PRINT_ERROR_NOMEM
 	//
 	// A memory allocation failed.
-	PrintErrorNOMEM PrintError = C.GTK_PRINT_ERROR_NOMEM
+	PrintErrorNOMEM PrintError = 2
 	// PrintErrorInvalidFile wraps GTK_PRINT_ERROR_INVALID_FILE
 	//
 	// An error occurred while loading a page setup
 	//   or paper size from a key file.
-	PrintErrorInvalidFile PrintError = C.GTK_PRINT_ERROR_INVALID_FILE
+	PrintErrorInvalidFile PrintError = 3
 )
 
 func marshalPrintError(p unsafe.Pointer) (any, error) {
@@ -4494,21 +4494,21 @@ const (
 	// PrintOperationActionPrintDialog wraps GTK_PRINT_OPERATION_ACTION_PRINT_DIALOG
 	//
 	// Show the print dialog.
-	PrintOperationActionPrintDialog PrintOperationAction = C.GTK_PRINT_OPERATION_ACTION_PRINT_DIALOG
+	PrintOperationActionPrintDialog PrintOperationAction = 0
 	// PrintOperationActionPrint wraps GTK_PRINT_OPERATION_ACTION_PRINT
 	//
 	// Start to print without showing
 	//   the print dialog, based on the current print settings.
-	PrintOperationActionPrint PrintOperationAction = C.GTK_PRINT_OPERATION_ACTION_PRINT
+	PrintOperationActionPrint PrintOperationAction = 1
 	// PrintOperationActionPreview wraps GTK_PRINT_OPERATION_ACTION_PREVIEW
 	//
 	// Show the print preview.
-	PrintOperationActionPreview PrintOperationAction = C.GTK_PRINT_OPERATION_ACTION_PREVIEW
+	PrintOperationActionPreview PrintOperationAction = 2
 	// PrintOperationActionExport wraps GTK_PRINT_OPERATION_ACTION_EXPORT
 	//
 	// Export to a file. This requires
 	//   the export-filename property to be set.
-	PrintOperationActionExport PrintOperationAction = C.GTK_PRINT_OPERATION_ACTION_EXPORT
+	PrintOperationActionExport PrintOperationAction = 3
 )
 
 func marshalPrintOperationAction(p unsafe.Pointer) (any, error) {
@@ -4533,21 +4533,21 @@ const (
 	// PrintOperationResultError wraps GTK_PRINT_OPERATION_RESULT_ERROR
 	//
 	// An error has occurred.
-	PrintOperationResultError PrintOperationResult = C.GTK_PRINT_OPERATION_RESULT_ERROR
+	PrintOperationResultError PrintOperationResult = 0
 	// PrintOperationResultApply wraps GTK_PRINT_OPERATION_RESULT_APPLY
 	//
 	// The print settings should be stored.
-	PrintOperationResultApply PrintOperationResult = C.GTK_PRINT_OPERATION_RESULT_APPLY
+	PrintOperationResultApply PrintOperationResult = 1
 	// PrintOperationResultCancel wraps GTK_PRINT_OPERATION_RESULT_CANCEL
 	//
 	// The print operation has been canceled,
 	//   the print settings should not be stored.
-	PrintOperationResultCancel PrintOperationResult = C.GTK_PRINT_OPERATION_RESULT_CANCEL
+	PrintOperationResultCancel PrintOperationResult = 2
 	// PrintOperationResultInProgress wraps GTK_PRINT_OPERATION_RESULT_IN_PROGRESS
 	//
 	// The print operation is not complete
 	//   yet. This value will only be returned when running asynchronously.
-	PrintOperationResultInProgress PrintOperationResult = C.GTK_PRINT_OPERATION_RESULT_IN_PROGRESS
+	PrintOperationResultInProgress PrintOperationResult = 3
 )
 
 func marshalPrintOperationResult(p unsafe.Pointer) (any, error) {
@@ -4570,19 +4570,19 @@ const (
 	// PrintPagesAll wraps GTK_PRINT_PAGES_ALL
 	//
 	// All pages.
-	PrintPagesAll PrintPages = C.GTK_PRINT_PAGES_ALL
+	PrintPagesAll PrintPages = 0
 	// PrintPagesCurrent wraps GTK_PRINT_PAGES_CURRENT
 	//
 	// Current page.
-	PrintPagesCurrent PrintPages = C.GTK_PRINT_PAGES_CURRENT
+	PrintPagesCurrent PrintPages = 1
 	// PrintPagesRanges wraps GTK_PRINT_PAGES_RANGES
 	//
 	// Range of pages.
-	PrintPagesRanges PrintPages = C.GTK_PRINT_PAGES_RANGES
+	PrintPagesRanges PrintPages = 2
 	// PrintPagesSelection wraps GTK_PRINT_PAGES_SELECTION
 	//
 	// Selected pages.
-	PrintPagesSelection PrintPages = C.GTK_PRINT_PAGES_SELECTION
+	PrintPagesSelection PrintPages = 3
 )
 
 func marshalPrintPages(p unsafe.Pointer) (any, error) {
@@ -4605,19 +4605,19 @@ const (
 	// PrintQualityLow wraps GTK_PRINT_QUALITY_LOW
 	//
 	// Low quality.
-	PrintQualityLow PrintQuality = C.GTK_PRINT_QUALITY_LOW
+	PrintQualityLow PrintQuality = 0
 	// PrintQualityNormal wraps GTK_PRINT_QUALITY_NORMAL
 	//
 	// Normal quality.
-	PrintQualityNormal PrintQuality = C.GTK_PRINT_QUALITY_NORMAL
+	PrintQualityNormal PrintQuality = 1
 	// PrintQualityHigh wraps GTK_PRINT_QUALITY_HIGH
 	//
 	// High quality.
-	PrintQualityHigh PrintQuality = C.GTK_PRINT_QUALITY_HIGH
+	PrintQualityHigh PrintQuality = 2
 	// PrintQualityDraft wraps GTK_PRINT_QUALITY_DRAFT
 	//
 	// Draft quality.
-	PrintQualityDraft PrintQuality = C.GTK_PRINT_QUALITY_DRAFT
+	PrintQualityDraft PrintQuality = 3
 )
 
 func marshalPrintQuality(p unsafe.Pointer) (any, error) {
@@ -4642,44 +4642,44 @@ const (
 	//
 	// The printing has not started yet; this
 	//   status is set initially, and while the print dialog is shown.
-	PrintStatusInitial PrintStatus = C.GTK_PRINT_STATUS_INITIAL
+	PrintStatusInitial PrintStatus = 0
 	// PrintStatusPreparing wraps GTK_PRINT_STATUS_PREPARING
 	//
 	// This status is set while the begin-print
 	//   signal is emitted and during pagination.
-	PrintStatusPreparing PrintStatus = C.GTK_PRINT_STATUS_PREPARING
+	PrintStatusPreparing PrintStatus = 1
 	// PrintStatusGeneratingData wraps GTK_PRINT_STATUS_GENERATING_DATA
 	//
 	// This status is set while the
 	//   pages are being rendered.
-	PrintStatusGeneratingData PrintStatus = C.GTK_PRINT_STATUS_GENERATING_DATA
+	PrintStatusGeneratingData PrintStatus = 2
 	// PrintStatusSendingData wraps GTK_PRINT_STATUS_SENDING_DATA
 	//
 	// The print job is being sent off to the
 	//   printer.
-	PrintStatusSendingData PrintStatus = C.GTK_PRINT_STATUS_SENDING_DATA
+	PrintStatusSendingData PrintStatus = 3
 	// PrintStatusPending wraps GTK_PRINT_STATUS_PENDING
 	//
 	// The print job has been sent to the printer,
 	//   but is not printed for some reason, e.g. the printer may be stopped.
-	PrintStatusPending PrintStatus = C.GTK_PRINT_STATUS_PENDING
+	PrintStatusPending PrintStatus = 4
 	// PrintStatusPendingIssue wraps GTK_PRINT_STATUS_PENDING_ISSUE
 	//
 	// Some problem has occurred during
 	//   printing, e.g. a paper jam.
-	PrintStatusPendingIssue PrintStatus = C.GTK_PRINT_STATUS_PENDING_ISSUE
+	PrintStatusPendingIssue PrintStatus = 5
 	// PrintStatusPrinting wraps GTK_PRINT_STATUS_PRINTING
 	//
 	// The printer is processing the print job.
-	PrintStatusPrinting PrintStatus = C.GTK_PRINT_STATUS_PRINTING
+	PrintStatusPrinting PrintStatus = 6
 	// PrintStatusFinished wraps GTK_PRINT_STATUS_FINISHED
 	//
 	// The printing has been completed successfully.
-	PrintStatusFinished PrintStatus = C.GTK_PRINT_STATUS_FINISHED
+	PrintStatusFinished PrintStatus = 7
 	// PrintStatusFinishedAborted wraps GTK_PRINT_STATUS_FINISHED_ABORTED
 	//
 	// The printing has been aborted.
-	PrintStatusFinishedAborted PrintStatus = C.GTK_PRINT_STATUS_FINISHED_ABORTED
+	PrintStatusFinishedAborted PrintStatus = 8
 )
 
 func marshalPrintStatus(p unsafe.Pointer) (any, error) {
@@ -4704,13 +4704,13 @@ const (
 	//
 	// Events are handled regardless of what their
 	//   target is.
-	LimitNone PropagationLimit = C.GTK_LIMIT_NONE
+	LimitNone PropagationLimit = 0
 	// LimitSameNative wraps GTK_LIMIT_SAME_NATIVE
 	//
 	// Events are only handled if their target
 	//   is in the same [iface@Native] as the event controllers widget. Note
 	//   that some event types have two targets (origin and destination).
-	LimitSameNative PropagationLimit = C.GTK_LIMIT_SAME_NATIVE
+	LimitSameNative PropagationLimit = 1
 )
 
 func marshalPropagationLimit(p unsafe.Pointer) (any, error) {
@@ -4733,26 +4733,26 @@ const (
 	// PhaseNone wraps GTK_PHASE_NONE
 	//
 	// Events are not delivered.
-	PhaseNone PropagationPhase = C.GTK_PHASE_NONE
+	PhaseNone PropagationPhase = 0
 	// PhaseCapture wraps GTK_PHASE_CAPTURE
 	//
 	// Events are delivered in the capture phase. The
 	//   capture phase happens before the bubble phase, runs from the toplevel down
 	//   to the event widget. This option should only be used on containers that
 	//   might possibly handle events before their children do.
-	PhaseCapture PropagationPhase = C.GTK_PHASE_CAPTURE
+	PhaseCapture PropagationPhase = 1
 	// PhaseBubble wraps GTK_PHASE_BUBBLE
 	//
 	// Events are delivered in the bubble phase. The bubble
 	//   phase happens after the capture phase, and before the default handlers
 	//   are run. This phase runs from the event widget, up to the toplevel.
-	PhaseBubble PropagationPhase = C.GTK_PHASE_BUBBLE
+	PhaseBubble PropagationPhase = 2
 	// PhaseTarget wraps GTK_PHASE_TARGET
 	//
 	// Events are delivered in the default widget event handlers,
 	//   note that widget implementations must chain up on button, motion, touch and
 	//   grab broken handlers for controllers in this phase to be run.
-	PhaseTarget PropagationPhase = C.GTK_PHASE_TARGET
+	PhaseTarget PropagationPhase = 3
 )
 
 func marshalPropagationPhase(p unsafe.Pointer) (any, error) {
@@ -4776,35 +4776,35 @@ const (
 	//
 	// the URI specified does not exists in
 	//   the recently used resources list.
-	RecentManagerErrorNotFound RecentManagerError = C.GTK_RECENT_MANAGER_ERROR_NOT_FOUND
+	RecentManagerErrorNotFound RecentManagerError = 0
 	// RecentManagerErrorInvalidURI wraps GTK_RECENT_MANAGER_ERROR_INVALID_URI
 	//
 	// the URI specified is not valid.
-	RecentManagerErrorInvalidURI RecentManagerError = C.GTK_RECENT_MANAGER_ERROR_INVALID_URI
+	RecentManagerErrorInvalidURI RecentManagerError = 1
 	// RecentManagerErrorInvalidEncoding wraps GTK_RECENT_MANAGER_ERROR_INVALID_ENCODING
 	//
 	// the supplied string is not
 	//   UTF-8 encoded.
-	RecentManagerErrorInvalidEncoding RecentManagerError = C.GTK_RECENT_MANAGER_ERROR_INVALID_ENCODING
+	RecentManagerErrorInvalidEncoding RecentManagerError = 2
 	// RecentManagerErrorNotRegistered wraps GTK_RECENT_MANAGER_ERROR_NOT_REGISTERED
 	//
 	// no application has registered
 	//   the specified item.
-	RecentManagerErrorNotRegistered RecentManagerError = C.GTK_RECENT_MANAGER_ERROR_NOT_REGISTERED
+	RecentManagerErrorNotRegistered RecentManagerError = 3
 	// RecentManagerErrorRead wraps GTK_RECENT_MANAGER_ERROR_READ
 	//
 	// failure while reading the recently used
 	//   resources file.
-	RecentManagerErrorRead RecentManagerError = C.GTK_RECENT_MANAGER_ERROR_READ
+	RecentManagerErrorRead RecentManagerError = 4
 	// RecentManagerErrorWrite wraps GTK_RECENT_MANAGER_ERROR_WRITE
 	//
 	// failure while writing the recently used
 	//   resources file.
-	RecentManagerErrorWrite RecentManagerError = C.GTK_RECENT_MANAGER_ERROR_WRITE
+	RecentManagerErrorWrite RecentManagerError = 5
 	// RecentManagerErrorUnknown wraps GTK_RECENT_MANAGER_ERROR_UNKNOWN
 	//
 	// unspecified error.
-	RecentManagerErrorUnknown RecentManagerError = C.GTK_RECENT_MANAGER_ERROR_UNKNOWN
+	RecentManagerErrorUnknown RecentManagerError = 6
 )
 
 func marshalRecentManagerError(p unsafe.Pointer) (any, error) {
@@ -4831,47 +4831,47 @@ const (
 	//
 	// Returned if an action widget has no response id,
 	//   or if the dialog gets programmatically hidden or destroyed
-	ResponseNone ResponseType = C.GTK_RESPONSE_NONE
+	ResponseNone ResponseType = -1
 	// ResponseReject wraps GTK_RESPONSE_REJECT
 	//
 	// Generic response id, not used by GTK dialogs
-	ResponseReject ResponseType = C.GTK_RESPONSE_REJECT
+	ResponseReject ResponseType = -2
 	// ResponseAccept wraps GTK_RESPONSE_ACCEPT
 	//
 	// Generic response id, not used by GTK dialogs
-	ResponseAccept ResponseType = C.GTK_RESPONSE_ACCEPT
+	ResponseAccept ResponseType = -3
 	// ResponseDeleteEvent wraps GTK_RESPONSE_DELETE_EVENT
 	//
 	// Returned if the dialog is deleted
-	ResponseDeleteEvent ResponseType = C.GTK_RESPONSE_DELETE_EVENT
+	ResponseDeleteEvent ResponseType = -4
 	// ResponseOK wraps GTK_RESPONSE_OK
 	//
 	// Returned by OK buttons in GTK dialogs
-	ResponseOK ResponseType = C.GTK_RESPONSE_OK
+	ResponseOK ResponseType = -5
 	// ResponseCancel wraps GTK_RESPONSE_CANCEL
 	//
 	// Returned by Cancel buttons in GTK dialogs
-	ResponseCancel ResponseType = C.GTK_RESPONSE_CANCEL
+	ResponseCancel ResponseType = -6
 	// ResponseClose wraps GTK_RESPONSE_CLOSE
 	//
 	// Returned by Close buttons in GTK dialogs
-	ResponseClose ResponseType = C.GTK_RESPONSE_CLOSE
+	ResponseClose ResponseType = -7
 	// ResponseYes wraps GTK_RESPONSE_YES
 	//
 	// Returned by Yes buttons in GTK dialogs
-	ResponseYes ResponseType = C.GTK_RESPONSE_YES
+	ResponseYes ResponseType = -8
 	// ResponseNo wraps GTK_RESPONSE_NO
 	//
 	// Returned by No buttons in GTK dialogs
-	ResponseNo ResponseType = C.GTK_RESPONSE_NO
+	ResponseNo ResponseType = -9
 	// ResponseApply wraps GTK_RESPONSE_APPLY
 	//
 	// Returned by Apply buttons in GTK dialogs
-	ResponseApply ResponseType = C.GTK_RESPONSE_APPLY
+	ResponseApply ResponseType = -10
 	// ResponseHelp wraps GTK_RESPONSE_HELP
 	//
 	// Returned by Help buttons in GTK dialogs
-	ResponseHelp ResponseType = C.GTK_RESPONSE_HELP
+	ResponseHelp ResponseType = -11
 )
 
 func marshalResponseType(p unsafe.Pointer) (any, error) {
@@ -4895,43 +4895,43 @@ const (
 	// RevealerTransitionTypeNone wraps GTK_REVEALER_TRANSITION_TYPE_NONE
 	//
 	// No transition
-	RevealerTransitionTypeNone RevealerTransitionType = C.GTK_REVEALER_TRANSITION_TYPE_NONE
+	RevealerTransitionTypeNone RevealerTransitionType = 0
 	// RevealerTransitionTypeCrossfade wraps GTK_REVEALER_TRANSITION_TYPE_CROSSFADE
 	//
 	// Fade in
-	RevealerTransitionTypeCrossfade RevealerTransitionType = C.GTK_REVEALER_TRANSITION_TYPE_CROSSFADE
+	RevealerTransitionTypeCrossfade RevealerTransitionType = 1
 	// RevealerTransitionTypeSlideRight wraps GTK_REVEALER_TRANSITION_TYPE_SLIDE_RIGHT
 	//
 	// Slide in from the left
-	RevealerTransitionTypeSlideRight RevealerTransitionType = C.GTK_REVEALER_TRANSITION_TYPE_SLIDE_RIGHT
+	RevealerTransitionTypeSlideRight RevealerTransitionType = 2
 	// RevealerTransitionTypeSlideLeft wraps GTK_REVEALER_TRANSITION_TYPE_SLIDE_LEFT
 	//
 	// Slide in from the right
-	RevealerTransitionTypeSlideLeft RevealerTransitionType = C.GTK_REVEALER_TRANSITION_TYPE_SLIDE_LEFT
+	RevealerTransitionTypeSlideLeft RevealerTransitionType = 3
 	// RevealerTransitionTypeSlideUp wraps GTK_REVEALER_TRANSITION_TYPE_SLIDE_UP
 	//
 	// Slide in from the bottom
-	RevealerTransitionTypeSlideUp RevealerTransitionType = C.GTK_REVEALER_TRANSITION_TYPE_SLIDE_UP
+	RevealerTransitionTypeSlideUp RevealerTransitionType = 4
 	// RevealerTransitionTypeSlideDown wraps GTK_REVEALER_TRANSITION_TYPE_SLIDE_DOWN
 	//
 	// Slide in from the top
-	RevealerTransitionTypeSlideDown RevealerTransitionType = C.GTK_REVEALER_TRANSITION_TYPE_SLIDE_DOWN
+	RevealerTransitionTypeSlideDown RevealerTransitionType = 5
 	// RevealerTransitionTypeSwingRight wraps GTK_REVEALER_TRANSITION_TYPE_SWING_RIGHT
 	//
 	// Floop in from the left
-	RevealerTransitionTypeSwingRight RevealerTransitionType = C.GTK_REVEALER_TRANSITION_TYPE_SWING_RIGHT
+	RevealerTransitionTypeSwingRight RevealerTransitionType = 6
 	// RevealerTransitionTypeSwingLeft wraps GTK_REVEALER_TRANSITION_TYPE_SWING_LEFT
 	//
 	// Floop in from the right
-	RevealerTransitionTypeSwingLeft RevealerTransitionType = C.GTK_REVEALER_TRANSITION_TYPE_SWING_LEFT
+	RevealerTransitionTypeSwingLeft RevealerTransitionType = 7
 	// RevealerTransitionTypeSwingUp wraps GTK_REVEALER_TRANSITION_TYPE_SWING_UP
 	//
 	// Floop in from the bottom
-	RevealerTransitionTypeSwingUp RevealerTransitionType = C.GTK_REVEALER_TRANSITION_TYPE_SWING_UP
+	RevealerTransitionTypeSwingUp RevealerTransitionType = 8
 	// RevealerTransitionTypeSwingDown wraps GTK_REVEALER_TRANSITION_TYPE_SWING_DOWN
 	//
 	// Floop in from the top
-	RevealerTransitionTypeSwingDown RevealerTransitionType = C.GTK_REVEALER_TRANSITION_TYPE_SWING_DOWN
+	RevealerTransitionTypeSwingDown RevealerTransitionType = 9
 )
 
 func marshalRevealerTransitionType(p unsafe.Pointer) (any, error) {
@@ -4954,27 +4954,27 @@ const (
 	// ScrollSteps wraps GTK_SCROLL_STEPS
 	//
 	// Scroll in steps.
-	ScrollSteps ScrollStep = C.GTK_SCROLL_STEPS
+	ScrollSteps ScrollStep = 0
 	// ScrollPages wraps GTK_SCROLL_PAGES
 	//
 	// Scroll by pages.
-	ScrollPages ScrollStep = C.GTK_SCROLL_PAGES
+	ScrollPages ScrollStep = 1
 	// ScrollEnds wraps GTK_SCROLL_ENDS
 	//
 	// Scroll to ends.
-	ScrollEnds ScrollStep = C.GTK_SCROLL_ENDS
+	ScrollEnds ScrollStep = 2
 	// ScrollHorizontalSteps wraps GTK_SCROLL_HORIZONTAL_STEPS
 	//
 	// Scroll in horizontal steps.
-	ScrollHorizontalSteps ScrollStep = C.GTK_SCROLL_HORIZONTAL_STEPS
+	ScrollHorizontalSteps ScrollStep = 3
 	// ScrollHorizontalPages wraps GTK_SCROLL_HORIZONTAL_PAGES
 	//
 	// Scroll by horizontal pages.
-	ScrollHorizontalPages ScrollStep = C.GTK_SCROLL_HORIZONTAL_PAGES
+	ScrollHorizontalPages ScrollStep = 4
 	// ScrollHorizontalEnds wraps GTK_SCROLL_HORIZONTAL_ENDS
 	//
 	// Scroll to the horizontal ends.
-	ScrollHorizontalEnds ScrollStep = C.GTK_SCROLL_HORIZONTAL_ENDS
+	ScrollHorizontalEnds ScrollStep = 5
 )
 
 func marshalScrollStep(p unsafe.Pointer) (any, error) {
@@ -4997,67 +4997,67 @@ const (
 	// ScrollNone wraps GTK_SCROLL_NONE
 	//
 	// No scrolling.
-	ScrollNone ScrollType = C.GTK_SCROLL_NONE
+	ScrollNone ScrollType = 0
 	// ScrollJump wraps GTK_SCROLL_JUMP
 	//
 	// Jump to new location.
-	ScrollJump ScrollType = C.GTK_SCROLL_JUMP
+	ScrollJump ScrollType = 1
 	// ScrollStepBackward wraps GTK_SCROLL_STEP_BACKWARD
 	//
 	// Step backward.
-	ScrollStepBackward ScrollType = C.GTK_SCROLL_STEP_BACKWARD
+	ScrollStepBackward ScrollType = 2
 	// ScrollStepForward wraps GTK_SCROLL_STEP_FORWARD
 	//
 	// Step forward.
-	ScrollStepForward ScrollType = C.GTK_SCROLL_STEP_FORWARD
+	ScrollStepForward ScrollType = 3
 	// ScrollPageBackward wraps GTK_SCROLL_PAGE_BACKWARD
 	//
 	// Page backward.
-	ScrollPageBackward ScrollType = C.GTK_SCROLL_PAGE_BACKWARD
+	ScrollPageBackward ScrollType = 4
 	// ScrollPageForward wraps GTK_SCROLL_PAGE_FORWARD
 	//
 	// Page forward.
-	ScrollPageForward ScrollType = C.GTK_SCROLL_PAGE_FORWARD
+	ScrollPageForward ScrollType = 5
 	// ScrollStepUp wraps GTK_SCROLL_STEP_UP
 	//
 	// Step up.
-	ScrollStepUp ScrollType = C.GTK_SCROLL_STEP_UP
+	ScrollStepUp ScrollType = 6
 	// ScrollStepDown wraps GTK_SCROLL_STEP_DOWN
 	//
 	// Step down.
-	ScrollStepDown ScrollType = C.GTK_SCROLL_STEP_DOWN
+	ScrollStepDown ScrollType = 7
 	// ScrollPageUp wraps GTK_SCROLL_PAGE_UP
 	//
 	// Page up.
-	ScrollPageUp ScrollType = C.GTK_SCROLL_PAGE_UP
+	ScrollPageUp ScrollType = 8
 	// ScrollPageDown wraps GTK_SCROLL_PAGE_DOWN
 	//
 	// Page down.
-	ScrollPageDown ScrollType = C.GTK_SCROLL_PAGE_DOWN
+	ScrollPageDown ScrollType = 9
 	// ScrollStepLeft wraps GTK_SCROLL_STEP_LEFT
 	//
 	// Step to the left.
-	ScrollStepLeft ScrollType = C.GTK_SCROLL_STEP_LEFT
+	ScrollStepLeft ScrollType = 10
 	// ScrollStepRight wraps GTK_SCROLL_STEP_RIGHT
 	//
 	// Step to the right.
-	ScrollStepRight ScrollType = C.GTK_SCROLL_STEP_RIGHT
+	ScrollStepRight ScrollType = 11
 	// ScrollPageLeft wraps GTK_SCROLL_PAGE_LEFT
 	//
 	// Page to the left.
-	ScrollPageLeft ScrollType = C.GTK_SCROLL_PAGE_LEFT
+	ScrollPageLeft ScrollType = 12
 	// ScrollPageRight wraps GTK_SCROLL_PAGE_RIGHT
 	//
 	// Page to the right.
-	ScrollPageRight ScrollType = C.GTK_SCROLL_PAGE_RIGHT
+	ScrollPageRight ScrollType = 13
 	// ScrollStart wraps GTK_SCROLL_START
 	//
 	// Scroll to start.
-	ScrollStart ScrollType = C.GTK_SCROLL_START
+	ScrollStart ScrollType = 14
 	// ScrollEnd wraps GTK_SCROLL_END
 	//
 	// Scroll to end.
-	ScrollEnd ScrollType = C.GTK_SCROLL_END
+	ScrollEnd ScrollType = 15
 )
 
 func marshalScrollType(p unsafe.Pointer) (any, error) {
@@ -5081,11 +5081,11 @@ const (
 	// ScrollMinimum wraps GTK_SCROLL_MINIMUM
 	//
 	// Scrollable adjustments are based on the minimum size
-	ScrollMinimum ScrollablePolicy = C.GTK_SCROLL_MINIMUM
+	ScrollMinimum ScrollablePolicy = 0
 	// ScrollNatural wraps GTK_SCROLL_NATURAL
 	//
 	// Scrollable adjustments are based on the natural size
-	ScrollNatural ScrollablePolicy = C.GTK_SCROLL_NATURAL
+	ScrollNatural ScrollablePolicy = 1
 )
 
 func marshalScrollablePolicy(p unsafe.Pointer) (any, error) {
@@ -5108,11 +5108,11 @@ const (
 	// SelectionNone wraps GTK_SELECTION_NONE
 	//
 	// No selection is possible.
-	SelectionNone SelectionMode = C.GTK_SELECTION_NONE
+	SelectionNone SelectionMode = 0
 	// SelectionSingle wraps GTK_SELECTION_SINGLE
 	//
 	// Zero or one element may be selected.
-	SelectionSingle SelectionMode = C.GTK_SELECTION_SINGLE
+	SelectionSingle SelectionMode = 1
 	// SelectionBrowse wraps GTK_SELECTION_BROWSE
 	//
 	// Exactly one element is selected.
@@ -5121,14 +5121,14 @@ const (
 	//   %GTK_SELECTION_BROWSE. What is really enforced is that the user
 	//   can’t deselect a currently selected element except by selecting
 	//   another element.
-	SelectionBrowse SelectionMode = C.GTK_SELECTION_BROWSE
+	SelectionBrowse SelectionMode = 2
 	// SelectionMultiple wraps GTK_SELECTION_MULTIPLE
 	//
 	// Any number of elements may be selected.
 	//   The Ctrl key may be used to enlarge the selection, and Shift
 	//   key to select between the focus and the child pointed to.
 	//   Some widgets may also allow Click-drag to select a range of elements.
-	SelectionMultiple SelectionMode = C.GTK_SELECTION_MULTIPLE
+	SelectionMultiple SelectionMode = 3
 )
 
 func marshalSelectionMode(p unsafe.Pointer) (any, error) {
@@ -5153,15 +5153,15 @@ const (
 	//
 	// The control is made insensitive if no
 	//   action can be triggered
-	SensitivityAuto SensitivityType = C.GTK_SENSITIVITY_AUTO
+	SensitivityAuto SensitivityType = 0
 	// SensitivityOn wraps GTK_SENSITIVITY_ON
 	//
 	// The control is always sensitive
-	SensitivityOn SensitivityType = C.GTK_SENSITIVITY_ON
+	SensitivityOn SensitivityType = 1
 	// SensitivityOff wraps GTK_SENSITIVITY_OFF
 	//
 	// The control is always insensitive
-	SensitivityOff SensitivityType = C.GTK_SENSITIVITY_OFF
+	SensitivityOff SensitivityType = 2
 )
 
 func marshalSensitivityType(p unsafe.Pointer) (any, error) {
@@ -5186,17 +5186,17 @@ const (
 	//
 	// Shortcuts are handled inside
 	//   the widget the controller belongs to.
-	ShortcutScopeLocal ShortcutScope = C.GTK_SHORTCUT_SCOPE_LOCAL
+	ShortcutScopeLocal ShortcutScope = 0
 	// ShortcutScopeManaged wraps GTK_SHORTCUT_SCOPE_MANAGED
 	//
 	// Shortcuts are handled by
 	//   the first ancestor that is a [iface@ShortcutManager]
-	ShortcutScopeManaged ShortcutScope = C.GTK_SHORTCUT_SCOPE_MANAGED
+	ShortcutScopeManaged ShortcutScope = 1
 	// ShortcutScopeGlobal wraps GTK_SHORTCUT_SCOPE_GLOBAL
 	//
 	// Shortcuts are handled by
 	//   the root widget.
-	ShortcutScopeGlobal ShortcutScope = C.GTK_SHORTCUT_SCOPE_GLOBAL
+	ShortcutScopeGlobal ShortcutScope = 2
 )
 
 func marshalShortcutScope(p unsafe.Pointer) (any, error) {
@@ -5222,44 +5222,44 @@ const (
 	//
 	// The shortcut is a keyboard accelerator. The GtkShortcutsShortcut:accelerator
 	//   property will be used.
-	ShortcutAccelerator ShortcutType = C.GTK_SHORTCUT_ACCELERATOR
+	ShortcutAccelerator ShortcutType = 0
 	// ShortcutGesturePinch wraps GTK_SHORTCUT_GESTURE_PINCH
 	//
 	// The shortcut is a pinch gesture. GTK provides an icon and subtitle.
-	ShortcutGesturePinch ShortcutType = C.GTK_SHORTCUT_GESTURE_PINCH
+	ShortcutGesturePinch ShortcutType = 1
 	// ShortcutGestureStretch wraps GTK_SHORTCUT_GESTURE_STRETCH
 	//
 	// The shortcut is a stretch gesture. GTK provides an icon and subtitle.
-	ShortcutGestureStretch ShortcutType = C.GTK_SHORTCUT_GESTURE_STRETCH
+	ShortcutGestureStretch ShortcutType = 2
 	// ShortcutGestureRotateClockwise wraps GTK_SHORTCUT_GESTURE_ROTATE_CLOCKWISE
 	//
 	// The shortcut is a clockwise rotation gesture. GTK provides an icon and subtitle.
-	ShortcutGestureRotateClockwise ShortcutType = C.GTK_SHORTCUT_GESTURE_ROTATE_CLOCKWISE
+	ShortcutGestureRotateClockwise ShortcutType = 3
 	// ShortcutGestureRotateCounterclockwise wraps GTK_SHORTCUT_GESTURE_ROTATE_COUNTERCLOCKWISE
 	//
 	// The shortcut is a counterclockwise rotation gesture. GTK provides an icon and subtitle.
-	ShortcutGestureRotateCounterclockwise ShortcutType = C.GTK_SHORTCUT_GESTURE_ROTATE_COUNTERCLOCKWISE
+	ShortcutGestureRotateCounterclockwise ShortcutType = 4
 	// ShortcutGestureTwoFingerSwipeLeft wraps GTK_SHORTCUT_GESTURE_TWO_FINGER_SWIPE_LEFT
 	//
 	// The shortcut is a two-finger swipe gesture. GTK provides an icon and subtitle.
-	ShortcutGestureTwoFingerSwipeLeft ShortcutType = C.GTK_SHORTCUT_GESTURE_TWO_FINGER_SWIPE_LEFT
+	ShortcutGestureTwoFingerSwipeLeft ShortcutType = 5
 	// ShortcutGestureTwoFingerSwipeRight wraps GTK_SHORTCUT_GESTURE_TWO_FINGER_SWIPE_RIGHT
 	//
 	// The shortcut is a two-finger swipe gesture. GTK provides an icon and subtitle.
-	ShortcutGestureTwoFingerSwipeRight ShortcutType = C.GTK_SHORTCUT_GESTURE_TWO_FINGER_SWIPE_RIGHT
+	ShortcutGestureTwoFingerSwipeRight ShortcutType = 6
 	// ShortcutGesture wraps GTK_SHORTCUT_GESTURE
 	//
 	// The shortcut is a gesture. The GtkShortcutsShortcut:icon property will be
 	//   used.
-	ShortcutGesture ShortcutType = C.GTK_SHORTCUT_GESTURE
+	ShortcutGesture ShortcutType = 7
 	// ShortcutGestureSwipeLeft wraps GTK_SHORTCUT_GESTURE_SWIPE_LEFT
 	//
 	// The shortcut is a swipe gesture. GTK provides an icon and subtitle.
-	ShortcutGestureSwipeLeft ShortcutType = C.GTK_SHORTCUT_GESTURE_SWIPE_LEFT
+	ShortcutGestureSwipeLeft ShortcutType = 8
 	// ShortcutGestureSwipeRight wraps GTK_SHORTCUT_GESTURE_SWIPE_RIGHT
 	//
 	// The shortcut is a swipe gesture. GTK provides an icon and subtitle.
-	ShortcutGestureSwipeRight ShortcutType = C.GTK_SHORTCUT_GESTURE_SWIPE_RIGHT
+	ShortcutGestureSwipeRight ShortcutType = 9
 )
 
 func marshalShortcutType(p unsafe.Pointer) (any, error) {
@@ -5283,19 +5283,19 @@ const (
 	// SizeGroupNone wraps GTK_SIZE_GROUP_NONE
 	//
 	// group has no effect
-	SizeGroupNone SizeGroupMode = C.GTK_SIZE_GROUP_NONE
+	SizeGroupNone SizeGroupMode = 0
 	// SizeGroupHorizontal wraps GTK_SIZE_GROUP_HORIZONTAL
 	//
 	// group affects horizontal requisition
-	SizeGroupHorizontal SizeGroupMode = C.GTK_SIZE_GROUP_HORIZONTAL
+	SizeGroupHorizontal SizeGroupMode = 1
 	// SizeGroupVertical wraps GTK_SIZE_GROUP_VERTICAL
 	//
 	// group affects vertical requisition
-	SizeGroupVertical SizeGroupMode = C.GTK_SIZE_GROUP_VERTICAL
+	SizeGroupVertical SizeGroupMode = 2
 	// SizeGroupBoth wraps GTK_SIZE_GROUP_BOTH
 	//
 	// group affects both horizontal and vertical requisition
-	SizeGroupBoth SizeGroupMode = C.GTK_SIZE_GROUP_BOTH
+	SizeGroupBoth SizeGroupMode = 3
 )
 
 func marshalSizeGroupMode(p unsafe.Pointer) (any, error) {
@@ -5319,15 +5319,15 @@ const (
 	// SizeRequestHeightForWidth wraps GTK_SIZE_REQUEST_HEIGHT_FOR_WIDTH
 	//
 	// Prefer height-for-width geometry management
-	SizeRequestHeightForWidth SizeRequestMode = C.GTK_SIZE_REQUEST_HEIGHT_FOR_WIDTH
+	SizeRequestHeightForWidth SizeRequestMode = 0
 	// SizeRequestWidthForHeight wraps GTK_SIZE_REQUEST_WIDTH_FOR_HEIGHT
 	//
 	// Prefer width-for-height geometry management
-	SizeRequestWidthForHeight SizeRequestMode = C.GTK_SIZE_REQUEST_WIDTH_FOR_HEIGHT
+	SizeRequestWidthForHeight SizeRequestMode = 1
 	// SizeRequestConstantSize wraps GTK_SIZE_REQUEST_CONSTANT_SIZE
 	//
 	// Don’t trade height-for-width or width-for-height
-	SizeRequestConstantSize SizeRequestMode = C.GTK_SIZE_REQUEST_CONSTANT_SIZE
+	SizeRequestConstantSize SizeRequestMode = 2
 )
 
 func marshalSizeRequestMode(p unsafe.Pointer) (any, error) {
@@ -5350,11 +5350,11 @@ const (
 	// SortAscending wraps GTK_SORT_ASCENDING
 	//
 	// Sorting is in ascending order.
-	SortAscending SortType = C.GTK_SORT_ASCENDING
+	SortAscending SortType = 0
 	// SortDescending wraps GTK_SORT_DESCENDING
 	//
 	// Sorting is in descending order.
-	SortDescending SortType = C.GTK_SORT_DESCENDING
+	SortDescending SortType = 1
 )
 
 func marshalSortType(p unsafe.Pointer) (any, error) {
@@ -5379,23 +5379,23 @@ const (
 	//
 	// The sorter change cannot be described
 	//   by any of the other enumeration values
-	SorterChangeDifferent SorterChange = C.GTK_SORTER_CHANGE_DIFFERENT
+	SorterChangeDifferent SorterChange = 0
 	// SorterChangeInverted wraps GTK_SORTER_CHANGE_INVERTED
 	//
 	// The sort order was inverted. Comparisons
 	//   that returned %GTK_ORDERING_SMALLER now return %GTK_ORDERING_LARGER
 	//   and vice versa. Other comparisons return the same values as before.
-	SorterChangeInverted SorterChange = C.GTK_SORTER_CHANGE_INVERTED
+	SorterChangeInverted SorterChange = 1
 	// SorterChangeLessStrict wraps GTK_SORTER_CHANGE_LESS_STRICT
 	//
 	// The sorter is less strict: Comparisons
 	//   may now return %GTK_ORDERING_EQUAL that did not do so before.
-	SorterChangeLessStrict SorterChange = C.GTK_SORTER_CHANGE_LESS_STRICT
+	SorterChangeLessStrict SorterChange = 2
 	// SorterChangeMoreStrict wraps GTK_SORTER_CHANGE_MORE_STRICT
 	//
 	// The sorter is more strict: Comparisons
 	//   that did return %GTK_ORDERING_EQUAL may not do so anymore.
-	SorterChangeMoreStrict SorterChange = C.GTK_SORTER_CHANGE_MORE_STRICT
+	SorterChangeMoreStrict SorterChange = 3
 )
 
 func marshalSorterChange(p unsafe.Pointer) (any, error) {
@@ -5418,18 +5418,18 @@ const (
 	// SorterOrderPartial wraps GTK_SORTER_ORDER_PARTIAL
 	//
 	// A partial order. Any `GtkOrdering` is possible.
-	SorterOrderPartial SorterOrder = C.GTK_SORTER_ORDER_PARTIAL
+	SorterOrderPartial SorterOrder = 0
 	// SorterOrderNone wraps GTK_SORTER_ORDER_NONE
 	//
 	// No order, all elements are considered equal.
 	//   gtk_sorter_compare() will only return %GTK_ORDERING_EQUAL.
-	SorterOrderNone SorterOrder = C.GTK_SORTER_ORDER_NONE
+	SorterOrderNone SorterOrder = 1
 	// SorterOrderTotal wraps GTK_SORTER_ORDER_TOTAL
 	//
 	// A total order. gtk_sorter_compare() will only
 	//   return %GTK_ORDERING_EQUAL if an item is compared with itself. Two
 	//   different items will never cause this value to be returned.
-	SorterOrderTotal SorterOrder = C.GTK_SORTER_ORDER_TOTAL
+	SorterOrderTotal SorterOrder = 2
 )
 
 func marshalSorterOrder(p unsafe.Pointer) (any, error) {
@@ -5456,13 +5456,13 @@ const (
 	//
 	// When refreshing your `GtkSpinButton`, the value is
 	//   always displayed
-	UpdateAlways SpinButtonUpdatePolicy = C.GTK_UPDATE_ALWAYS
+	UpdateAlways SpinButtonUpdatePolicy = 0
 	// UpdateIfValid wraps GTK_UPDATE_IF_VALID
 	//
 	// When refreshing your `GtkSpinButton`, the value is
 	//   only displayed if it is valid within the bounds of the spin button's
 	//   adjustment
-	UpdateIfValid SpinButtonUpdatePolicy = C.GTK_UPDATE_IF_VALID
+	UpdateIfValid SpinButtonUpdatePolicy = 1
 )
 
 func marshalSpinButtonUpdatePolicy(p unsafe.Pointer) (any, error) {
@@ -5486,31 +5486,31 @@ const (
 	// SpinStepForward wraps GTK_SPIN_STEP_FORWARD
 	//
 	// Increment by the adjustments step increment.
-	SpinStepForward SpinType = C.GTK_SPIN_STEP_FORWARD
+	SpinStepForward SpinType = 0
 	// SpinStepBackward wraps GTK_SPIN_STEP_BACKWARD
 	//
 	// Decrement by the adjustments step increment.
-	SpinStepBackward SpinType = C.GTK_SPIN_STEP_BACKWARD
+	SpinStepBackward SpinType = 1
 	// SpinPageForward wraps GTK_SPIN_PAGE_FORWARD
 	//
 	// Increment by the adjustments page increment.
-	SpinPageForward SpinType = C.GTK_SPIN_PAGE_FORWARD
+	SpinPageForward SpinType = 2
 	// SpinPageBackward wraps GTK_SPIN_PAGE_BACKWARD
 	//
 	// Decrement by the adjustments page increment.
-	SpinPageBackward SpinType = C.GTK_SPIN_PAGE_BACKWARD
+	SpinPageBackward SpinType = 3
 	// SpinHome wraps GTK_SPIN_HOME
 	//
 	// Go to the adjustments lower bound.
-	SpinHome SpinType = C.GTK_SPIN_HOME
+	SpinHome SpinType = 4
 	// SpinEnd wraps GTK_SPIN_END
 	//
 	// Go to the adjustments upper bound.
-	SpinEnd SpinType = C.GTK_SPIN_END
+	SpinEnd SpinType = 5
 	// SpinUserDefined wraps GTK_SPIN_USER_DEFINED
 	//
 	// Change by a specified amount.
-	SpinUserDefined SpinType = C.GTK_SPIN_USER_DEFINED
+	SpinUserDefined SpinType = 6
 )
 
 func marshalSpinType(p unsafe.Pointer) (any, error) {
@@ -5535,95 +5535,95 @@ const (
 	// StackTransitionTypeNone wraps GTK_STACK_TRANSITION_TYPE_NONE
 	//
 	// No transition
-	StackTransitionTypeNone StackTransitionType = C.GTK_STACK_TRANSITION_TYPE_NONE
+	StackTransitionTypeNone StackTransitionType = 0
 	// StackTransitionTypeCrossfade wraps GTK_STACK_TRANSITION_TYPE_CROSSFADE
 	//
 	// A cross-fade
-	StackTransitionTypeCrossfade StackTransitionType = C.GTK_STACK_TRANSITION_TYPE_CROSSFADE
+	StackTransitionTypeCrossfade StackTransitionType = 1
 	// StackTransitionTypeSlideRight wraps GTK_STACK_TRANSITION_TYPE_SLIDE_RIGHT
 	//
 	// Slide from left to right
-	StackTransitionTypeSlideRight StackTransitionType = C.GTK_STACK_TRANSITION_TYPE_SLIDE_RIGHT
+	StackTransitionTypeSlideRight StackTransitionType = 2
 	// StackTransitionTypeSlideLeft wraps GTK_STACK_TRANSITION_TYPE_SLIDE_LEFT
 	//
 	// Slide from right to left
-	StackTransitionTypeSlideLeft StackTransitionType = C.GTK_STACK_TRANSITION_TYPE_SLIDE_LEFT
+	StackTransitionTypeSlideLeft StackTransitionType = 3
 	// StackTransitionTypeSlideUp wraps GTK_STACK_TRANSITION_TYPE_SLIDE_UP
 	//
 	// Slide from bottom up
-	StackTransitionTypeSlideUp StackTransitionType = C.GTK_STACK_TRANSITION_TYPE_SLIDE_UP
+	StackTransitionTypeSlideUp StackTransitionType = 4
 	// StackTransitionTypeSlideDown wraps GTK_STACK_TRANSITION_TYPE_SLIDE_DOWN
 	//
 	// Slide from top down
-	StackTransitionTypeSlideDown StackTransitionType = C.GTK_STACK_TRANSITION_TYPE_SLIDE_DOWN
+	StackTransitionTypeSlideDown StackTransitionType = 5
 	// StackTransitionTypeSlideLeftRight wraps GTK_STACK_TRANSITION_TYPE_SLIDE_LEFT_RIGHT
 	//
 	// Slide from left or right according to the children order
-	StackTransitionTypeSlideLeftRight StackTransitionType = C.GTK_STACK_TRANSITION_TYPE_SLIDE_LEFT_RIGHT
+	StackTransitionTypeSlideLeftRight StackTransitionType = 6
 	// StackTransitionTypeSlideUpDown wraps GTK_STACK_TRANSITION_TYPE_SLIDE_UP_DOWN
 	//
 	// Slide from top down or bottom up according to the order
-	StackTransitionTypeSlideUpDown StackTransitionType = C.GTK_STACK_TRANSITION_TYPE_SLIDE_UP_DOWN
+	StackTransitionTypeSlideUpDown StackTransitionType = 7
 	// StackTransitionTypeOverUp wraps GTK_STACK_TRANSITION_TYPE_OVER_UP
 	//
 	// Cover the old page by sliding up
-	StackTransitionTypeOverUp StackTransitionType = C.GTK_STACK_TRANSITION_TYPE_OVER_UP
+	StackTransitionTypeOverUp StackTransitionType = 8
 	// StackTransitionTypeOverDown wraps GTK_STACK_TRANSITION_TYPE_OVER_DOWN
 	//
 	// Cover the old page by sliding down
-	StackTransitionTypeOverDown StackTransitionType = C.GTK_STACK_TRANSITION_TYPE_OVER_DOWN
+	StackTransitionTypeOverDown StackTransitionType = 9
 	// StackTransitionTypeOverLeft wraps GTK_STACK_TRANSITION_TYPE_OVER_LEFT
 	//
 	// Cover the old page by sliding to the left
-	StackTransitionTypeOverLeft StackTransitionType = C.GTK_STACK_TRANSITION_TYPE_OVER_LEFT
+	StackTransitionTypeOverLeft StackTransitionType = 10
 	// StackTransitionTypeOverRight wraps GTK_STACK_TRANSITION_TYPE_OVER_RIGHT
 	//
 	// Cover the old page by sliding to the right
-	StackTransitionTypeOverRight StackTransitionType = C.GTK_STACK_TRANSITION_TYPE_OVER_RIGHT
+	StackTransitionTypeOverRight StackTransitionType = 11
 	// StackTransitionTypeUnderUp wraps GTK_STACK_TRANSITION_TYPE_UNDER_UP
 	//
 	// Uncover the new page by sliding up
-	StackTransitionTypeUnderUp StackTransitionType = C.GTK_STACK_TRANSITION_TYPE_UNDER_UP
+	StackTransitionTypeUnderUp StackTransitionType = 12
 	// StackTransitionTypeUnderDown wraps GTK_STACK_TRANSITION_TYPE_UNDER_DOWN
 	//
 	// Uncover the new page by sliding down
-	StackTransitionTypeUnderDown StackTransitionType = C.GTK_STACK_TRANSITION_TYPE_UNDER_DOWN
+	StackTransitionTypeUnderDown StackTransitionType = 13
 	// StackTransitionTypeUnderLeft wraps GTK_STACK_TRANSITION_TYPE_UNDER_LEFT
 	//
 	// Uncover the new page by sliding to the left
-	StackTransitionTypeUnderLeft StackTransitionType = C.GTK_STACK_TRANSITION_TYPE_UNDER_LEFT
+	StackTransitionTypeUnderLeft StackTransitionType = 14
 	// StackTransitionTypeUnderRight wraps GTK_STACK_TRANSITION_TYPE_UNDER_RIGHT
 	//
 	// Uncover the new page by sliding to the right
-	StackTransitionTypeUnderRight StackTransitionType = C.GTK_STACK_TRANSITION_TYPE_UNDER_RIGHT
+	StackTransitionTypeUnderRight StackTransitionType = 15
 	// StackTransitionTypeOverUpDown wraps GTK_STACK_TRANSITION_TYPE_OVER_UP_DOWN
 	//
 	// Cover the old page sliding up or uncover the new page sliding down, according to order
-	StackTransitionTypeOverUpDown StackTransitionType = C.GTK_STACK_TRANSITION_TYPE_OVER_UP_DOWN
+	StackTransitionTypeOverUpDown StackTransitionType = 16
 	// StackTransitionTypeOverDownUp wraps GTK_STACK_TRANSITION_TYPE_OVER_DOWN_UP
 	//
 	// Cover the old page sliding down or uncover the new page sliding up, according to order
-	StackTransitionTypeOverDownUp StackTransitionType = C.GTK_STACK_TRANSITION_TYPE_OVER_DOWN_UP
+	StackTransitionTypeOverDownUp StackTransitionType = 17
 	// StackTransitionTypeOverLeftRight wraps GTK_STACK_TRANSITION_TYPE_OVER_LEFT_RIGHT
 	//
 	// Cover the old page sliding left or uncover the new page sliding right, according to order
-	StackTransitionTypeOverLeftRight StackTransitionType = C.GTK_STACK_TRANSITION_TYPE_OVER_LEFT_RIGHT
+	StackTransitionTypeOverLeftRight StackTransitionType = 18
 	// StackTransitionTypeOverRightLeft wraps GTK_STACK_TRANSITION_TYPE_OVER_RIGHT_LEFT
 	//
 	// Cover the old page sliding right or uncover the new page sliding left, according to order
-	StackTransitionTypeOverRightLeft StackTransitionType = C.GTK_STACK_TRANSITION_TYPE_OVER_RIGHT_LEFT
+	StackTransitionTypeOverRightLeft StackTransitionType = 19
 	// StackTransitionTypeRotateLeft wraps GTK_STACK_TRANSITION_TYPE_ROTATE_LEFT
 	//
 	// Pretend the pages are sides of a cube and rotate that cube to the left
-	StackTransitionTypeRotateLeft StackTransitionType = C.GTK_STACK_TRANSITION_TYPE_ROTATE_LEFT
+	StackTransitionTypeRotateLeft StackTransitionType = 20
 	// StackTransitionTypeRotateRight wraps GTK_STACK_TRANSITION_TYPE_ROTATE_RIGHT
 	//
 	// Pretend the pages are sides of a cube and rotate that cube to the right
-	StackTransitionTypeRotateRight StackTransitionType = C.GTK_STACK_TRANSITION_TYPE_ROTATE_RIGHT
+	StackTransitionTypeRotateRight StackTransitionType = 21
 	// StackTransitionTypeRotateLeftRight wraps GTK_STACK_TRANSITION_TYPE_ROTATE_LEFT_RIGHT
 	//
 	// Pretend the pages are sides of a cube and rotate that cube to the left or right according to the children order
-	StackTransitionTypeRotateLeftRight StackTransitionType = C.GTK_STACK_TRANSITION_TYPE_ROTATE_LEFT_RIGHT
+	StackTransitionTypeRotateLeftRight StackTransitionType = 22
 )
 
 func marshalStackTransitionType(p unsafe.Pointer) (any, error) {
@@ -5647,17 +5647,17 @@ const (
 	//
 	// The search string and
 	//   text must match exactly.
-	StringFilterMatchModeExact StringFilterMatchMode = C.GTK_STRING_FILTER_MATCH_MODE_EXACT
+	StringFilterMatchModeExact StringFilterMatchMode = 0
 	// StringFilterMatchModeSubstring wraps GTK_STRING_FILTER_MATCH_MODE_SUBSTRING
 	//
 	// The search string
 	//   must be contained as a substring inside the text.
-	StringFilterMatchModeSubstring StringFilterMatchMode = C.GTK_STRING_FILTER_MATCH_MODE_SUBSTRING
+	StringFilterMatchModeSubstring StringFilterMatchMode = 1
 	// StringFilterMatchModePrefix wraps GTK_STRING_FILTER_MATCH_MODE_PREFIX
 	//
 	// The text must begin
 	//   with the search string.
-	StringFilterMatchModePrefix StringFilterMatchMode = C.GTK_STRING_FILTER_MATCH_MODE_PREFIX
+	StringFilterMatchModePrefix StringFilterMatchMode = 2
 )
 
 func marshalStringFilterMatchMode(p unsafe.Pointer) (any, error) {
@@ -5683,19 +5683,19 @@ const (
 	// SymbolicColorForeground wraps GTK_SYMBOLIC_COLOR_FOREGROUND
 	//
 	// The default foreground color
-	SymbolicColorForeground SymbolicColor = C.GTK_SYMBOLIC_COLOR_FOREGROUND
+	SymbolicColorForeground SymbolicColor = 0
 	// SymbolicColorError wraps GTK_SYMBOLIC_COLOR_ERROR
 	//
 	// Indication color for errors
-	SymbolicColorError SymbolicColor = C.GTK_SYMBOLIC_COLOR_ERROR
+	SymbolicColorError SymbolicColor = 1
 	// SymbolicColorWarning wraps GTK_SYMBOLIC_COLOR_WARNING
 	//
 	// Indication color for warnings
-	SymbolicColorWarning SymbolicColor = C.GTK_SYMBOLIC_COLOR_WARNING
+	SymbolicColorWarning SymbolicColor = 2
 	// SymbolicColorSuccess wraps GTK_SYMBOLIC_COLOR_SUCCESS
 	//
 	// Indication color for success
-	SymbolicColorSuccess SymbolicColor = C.GTK_SYMBOLIC_COLOR_SUCCESS
+	SymbolicColorSuccess SymbolicColor = 3
 )
 
 func marshalSymbolicColor(p unsafe.Pointer) (any, error) {
@@ -5726,11 +5726,11 @@ const (
 	// SystemSettingDPI wraps GTK_SYSTEM_SETTING_DPI
 	//
 	// the [property@Gtk.Settings:gtk-xft-dpi] setting has changed
-	SystemSettingDPI SystemSetting = C.GTK_SYSTEM_SETTING_DPI
+	SystemSettingDPI SystemSetting = 0
 	// SystemSettingFontName wraps GTK_SYSTEM_SETTING_FONT_NAME
 	//
 	// The [property@Gtk.Settings:gtk-font-name] setting has changed
-	SystemSettingFontName SystemSetting = C.GTK_SYSTEM_SETTING_FONT_NAME
+	SystemSettingFontName SystemSetting = 1
 	// SystemSettingFontConfig wraps GTK_SYSTEM_SETTING_FONT_CONFIG
 	//
 	// The font configuration has changed in a way that
@@ -5740,16 +5740,16 @@ const (
 	//   [property@Gtk.Settings:gtk-xft-hintstyle],
 	//   [property@Gtk.Settings:gtk-xft-rgba] or
 	//   [property@Gtk.Settings:gtk-fontconfig-timestamp] settings
-	SystemSettingFontConfig SystemSetting = C.GTK_SYSTEM_SETTING_FONT_CONFIG
+	SystemSettingFontConfig SystemSetting = 2
 	// SystemSettingDisplay wraps GTK_SYSTEM_SETTING_DISPLAY
 	//
 	// The display has changed
-	SystemSettingDisplay SystemSetting = C.GTK_SYSTEM_SETTING_DISPLAY
+	SystemSettingDisplay SystemSetting = 3
 	// SystemSettingIconTheme wraps GTK_SYSTEM_SETTING_ICON_THEME
 	//
 	// The icon theme has changed in a way that requires
 	//   icons to be looked up again
-	SystemSettingIconTheme SystemSetting = C.GTK_SYSTEM_SETTING_ICON_THEME
+	SystemSettingIconTheme SystemSetting = 4
 )
 
 func marshalSystemSetting(p unsafe.Pointer) (any, error) {
@@ -5772,15 +5772,15 @@ const (
 	// TextDirNone wraps GTK_TEXT_DIR_NONE
 	//
 	// No direction.
-	TextDirNone TextDirection = C.GTK_TEXT_DIR_NONE
+	TextDirNone TextDirection = 0
 	// TextDirLTR wraps GTK_TEXT_DIR_LTR
 	//
 	// Left to right text direction.
-	TextDirLTR TextDirection = C.GTK_TEXT_DIR_LTR
+	TextDirLTR TextDirection = 1
 	// TextDirRTL wraps GTK_TEXT_DIR_RTL
 	//
 	// Right to left text direction.
-	TextDirRTL TextDirection = C.GTK_TEXT_DIR_RTL
+	TextDirRTL TextDirection = 2
 )
 
 func marshalTextDirection(p unsafe.Pointer) (any, error) {
@@ -5805,12 +5805,12 @@ const (
 	//
 	// Selects the current word. It is triggered by
 	//   a double-click for example.
-	TextExtendSelectionWord TextExtendSelection = C.GTK_TEXT_EXTEND_SELECTION_WORD
+	TextExtendSelectionWord TextExtendSelection = 0
 	// TextExtendSelectionLine wraps GTK_TEXT_EXTEND_SELECTION_LINE
 	//
 	// Selects the current line. It is triggered by
 	//   a triple-click for example.
-	TextExtendSelectionLine TextExtendSelection = C.GTK_TEXT_EXTEND_SELECTION_LINE
+	TextExtendSelectionLine TextExtendSelection = 1
 )
 
 func marshalTextExtendSelection(p unsafe.Pointer) (any, error) {
@@ -5834,11 +5834,11 @@ const (
 	// TextViewLayerBelowText wraps GTK_TEXT_VIEW_LAYER_BELOW_TEXT
 	//
 	// The layer rendered below the text (but above the background).
-	TextViewLayerBelowText TextViewLayer = C.GTK_TEXT_VIEW_LAYER_BELOW_TEXT
+	TextViewLayerBelowText TextViewLayer = 0
 	// TextViewLayerAboveText wraps GTK_TEXT_VIEW_LAYER_ABOVE_TEXT
 	//
 	// The layer rendered above the text.
-	TextViewLayerAboveText TextViewLayer = C.GTK_TEXT_VIEW_LAYER_ABOVE_TEXT
+	TextViewLayerAboveText TextViewLayer = 1
 )
 
 func marshalTextViewLayer(p unsafe.Pointer) (any, error) {
@@ -5861,27 +5861,27 @@ const (
 	// TextWindowWidget wraps GTK_TEXT_WINDOW_WIDGET
 	//
 	// Window that floats over scrolling areas.
-	TextWindowWidget TextWindowType = C.GTK_TEXT_WINDOW_WIDGET
+	TextWindowWidget TextWindowType = 1
 	// TextWindowText wraps GTK_TEXT_WINDOW_TEXT
 	//
 	// Scrollable text window.
-	TextWindowText TextWindowType = C.GTK_TEXT_WINDOW_TEXT
+	TextWindowText TextWindowType = 2
 	// TextWindowLeft wraps GTK_TEXT_WINDOW_LEFT
 	//
 	// Left side border window.
-	TextWindowLeft TextWindowType = C.GTK_TEXT_WINDOW_LEFT
+	TextWindowLeft TextWindowType = 3
 	// TextWindowRight wraps GTK_TEXT_WINDOW_RIGHT
 	//
 	// Right side border window.
-	TextWindowRight TextWindowType = C.GTK_TEXT_WINDOW_RIGHT
+	TextWindowRight TextWindowType = 4
 	// TextWindowTop wraps GTK_TEXT_WINDOW_TOP
 	//
 	// Top border window.
-	TextWindowTop TextWindowType = C.GTK_TEXT_WINDOW_TOP
+	TextWindowTop TextWindowType = 5
 	// TextWindowBottom wraps GTK_TEXT_WINDOW_BOTTOM
 	//
 	// Bottom border window.
-	TextWindowBottom TextWindowType = C.GTK_TEXT_WINDOW_BOTTOM
+	TextWindowBottom TextWindowType = 6
 )
 
 func marshalTextWindowType(p unsafe.Pointer) (any, error) {
@@ -5906,15 +5906,15 @@ const (
 	// TreeViewColumnGrowOnly wraps GTK_TREE_VIEW_COLUMN_GROW_ONLY
 	//
 	// Columns only get bigger in reaction to changes in the model
-	TreeViewColumnGrowOnly TreeViewColumnSizing = C.GTK_TREE_VIEW_COLUMN_GROW_ONLY
+	TreeViewColumnGrowOnly TreeViewColumnSizing = 0
 	// TreeViewColumnAutosize wraps GTK_TREE_VIEW_COLUMN_AUTOSIZE
 	//
 	// Columns resize to be the optimal size every time the model changes.
-	TreeViewColumnAutosize TreeViewColumnSizing = C.GTK_TREE_VIEW_COLUMN_AUTOSIZE
+	TreeViewColumnAutosize TreeViewColumnSizing = 1
 	// TreeViewColumnFixed wraps GTK_TREE_VIEW_COLUMN_FIXED
 	//
 	// Columns are a fixed numbers of pixels wide.
-	TreeViewColumnFixed TreeViewColumnSizing = C.GTK_TREE_VIEW_COLUMN_FIXED
+	TreeViewColumnFixed TreeViewColumnSizing = 2
 )
 
 func marshalTreeViewColumnSizing(p unsafe.Pointer) (any, error) {
@@ -5937,19 +5937,19 @@ const (
 	// TreeViewDropBefore wraps GTK_TREE_VIEW_DROP_BEFORE
 	//
 	// dropped row is inserted before
-	TreeViewDropBefore TreeViewDropPosition = C.GTK_TREE_VIEW_DROP_BEFORE
+	TreeViewDropBefore TreeViewDropPosition = 0
 	// TreeViewDropAfter wraps GTK_TREE_VIEW_DROP_AFTER
 	//
 	// dropped row is inserted after
-	TreeViewDropAfter TreeViewDropPosition = C.GTK_TREE_VIEW_DROP_AFTER
+	TreeViewDropAfter TreeViewDropPosition = 1
 	// TreeViewDropIntoOrBefore wraps GTK_TREE_VIEW_DROP_INTO_OR_BEFORE
 	//
 	// dropped row becomes a child or is inserted before
-	TreeViewDropIntoOrBefore TreeViewDropPosition = C.GTK_TREE_VIEW_DROP_INTO_OR_BEFORE
+	TreeViewDropIntoOrBefore TreeViewDropPosition = 2
 	// TreeViewDropIntoOrAfter wraps GTK_TREE_VIEW_DROP_INTO_OR_AFTER
 	//
 	// dropped row becomes a child or is inserted after
-	TreeViewDropIntoOrAfter TreeViewDropPosition = C.GTK_TREE_VIEW_DROP_INTO_OR_AFTER
+	TreeViewDropIntoOrAfter TreeViewDropPosition = 3
 )
 
 func marshalTreeViewDropPosition(p unsafe.Pointer) (any, error) {
@@ -5972,19 +5972,19 @@ const (
 	// TreeViewGridLinesNone wraps GTK_TREE_VIEW_GRID_LINES_NONE
 	//
 	// No grid lines.
-	TreeViewGridLinesNone TreeViewGridLines = C.GTK_TREE_VIEW_GRID_LINES_NONE
+	TreeViewGridLinesNone TreeViewGridLines = 0
 	// TreeViewGridLinesHorizontal wraps GTK_TREE_VIEW_GRID_LINES_HORIZONTAL
 	//
 	// Horizontal grid lines.
-	TreeViewGridLinesHorizontal TreeViewGridLines = C.GTK_TREE_VIEW_GRID_LINES_HORIZONTAL
+	TreeViewGridLinesHorizontal TreeViewGridLines = 1
 	// TreeViewGridLinesVertical wraps GTK_TREE_VIEW_GRID_LINES_VERTICAL
 	//
 	// Vertical grid lines.
-	TreeViewGridLinesVertical TreeViewGridLines = C.GTK_TREE_VIEW_GRID_LINES_VERTICAL
+	TreeViewGridLinesVertical TreeViewGridLines = 2
 	// TreeViewGridLinesBoth wraps GTK_TREE_VIEW_GRID_LINES_BOTH
 	//
 	// Horizontal and vertical grid lines.
-	TreeViewGridLinesBoth TreeViewGridLines = C.GTK_TREE_VIEW_GRID_LINES_BOTH
+	TreeViewGridLinesBoth TreeViewGridLines = 3
 )
 
 func marshalTreeViewGridLines(p unsafe.Pointer) (any, error) {
@@ -6007,19 +6007,19 @@ const (
 	// UnitNone wraps GTK_UNIT_NONE
 	//
 	// No units.
-	UnitNone Unit = C.GTK_UNIT_NONE
+	UnitNone Unit = 0
 	// UnitPoints wraps GTK_UNIT_POINTS
 	//
 	// Dimensions in points.
-	UnitPoints Unit = C.GTK_UNIT_POINTS
+	UnitPoints Unit = 1
 	// UnitInch wraps GTK_UNIT_INCH
 	//
 	// Dimensions in inches.
-	UnitInch Unit = C.GTK_UNIT_INCH
+	UnitInch Unit = 2
 	// UnitMm wraps GTK_UNIT_MM
 	//
 	// Dimensions in millimeters
-	UnitMm Unit = C.GTK_UNIT_MM
+	UnitMm Unit = 3
 )
 
 func marshalUnit(p unsafe.Pointer) (any, error) {
@@ -6042,22 +6042,22 @@ const (
 	// WrapNone wraps GTK_WRAP_NONE
 	//
 	// do not wrap lines; just make the text area wider
-	WrapNone WrapMode = C.GTK_WRAP_NONE
+	WrapNone WrapMode = 0
 	// WrapChar wraps GTK_WRAP_CHAR
 	//
 	// wrap text, breaking lines anywhere the cursor can
 	//   appear (between characters, usually - if you want to be technical,
 	//   between graphemes, see pango_get_log_attrs())
-	WrapChar WrapMode = C.GTK_WRAP_CHAR
+	WrapChar WrapMode = 1
 	// WrapWord wraps GTK_WRAP_WORD
 	//
 	// wrap text, breaking lines in between words
-	WrapWord WrapMode = C.GTK_WRAP_WORD
+	WrapWord WrapMode = 2
 	// WrapWordChar wraps GTK_WRAP_WORD_CHAR
 	//
 	// wrap text, breaking lines in between words, or if
 	//   that is not enough, also between graphemes
-	WrapWordChar WrapMode = C.GTK_WRAP_WORD_CHAR
+	WrapWordChar WrapMode = 3
 )
 
 func marshalWrapMode(p unsafe.Pointer) (any, error) {
@@ -6083,21 +6083,21 @@ const (
 	//
 	// Inhibit ending the user session
 	//   by logging out or by shutting down the computer
-	ApplicationInhibitLogout ApplicationInhibitFlags = C.GTK_APPLICATION_INHIBIT_LOGOUT
+	ApplicationInhibitLogout ApplicationInhibitFlags = 1
 	// ApplicationInhibitSwitch wraps GTK_APPLICATION_INHIBIT_SWITCH
 	//
 	// Inhibit user switching
-	ApplicationInhibitSwitch ApplicationInhibitFlags = C.GTK_APPLICATION_INHIBIT_SWITCH
+	ApplicationInhibitSwitch ApplicationInhibitFlags = 2
 	// ApplicationInhibitSuspend wraps GTK_APPLICATION_INHIBIT_SUSPEND
 	//
 	// Inhibit suspending the
 	//   session or computer
-	ApplicationInhibitSuspend ApplicationInhibitFlags = C.GTK_APPLICATION_INHIBIT_SUSPEND
+	ApplicationInhibitSuspend ApplicationInhibitFlags = 4
 	// ApplicationInhibitIdle wraps GTK_APPLICATION_INHIBIT_IDLE
 	//
 	// Inhibit the session being
 	//   marked as idle (and possibly locked)
-	ApplicationInhibitIdle ApplicationInhibitFlags = C.GTK_APPLICATION_INHIBIT_IDLE
+	ApplicationInhibitIdle ApplicationInhibitFlags = 8
 )
 
 func marshalApplicationInhibitFlags(p unsafe.Pointer) (any, error) {
@@ -6130,7 +6130,7 @@ const (
 	//
 	// The closure should be created swapped. See
 	//   g_cclosure_new_swap() for details.
-	BuilderClosureSwapped BuilderClosureFlags = C.GTK_BUILDER_CLOSURE_SWAPPED
+	BuilderClosureSwapped BuilderClosureFlags = 1
 )
 
 func marshalBuilderClosureFlags(p unsafe.Pointer) (any, error) {
@@ -6158,31 +6158,31 @@ const (
 	//
 	// The cell is currently selected, and
 	//  probably has a selection colored background to render to.
-	CellRendererSelected CellRendererState = C.GTK_CELL_RENDERER_SELECTED
+	CellRendererSelected CellRendererState = 1
 	// CellRendererPrelit wraps GTK_CELL_RENDERER_PRELIT
 	//
 	// The mouse is hovering over the cell.
-	CellRendererPrelit CellRendererState = C.GTK_CELL_RENDERER_PRELIT
+	CellRendererPrelit CellRendererState = 2
 	// CellRendererInsensitive wraps GTK_CELL_RENDERER_INSENSITIVE
 	//
 	// The cell is drawn in an insensitive manner
-	CellRendererInsensitive CellRendererState = C.GTK_CELL_RENDERER_INSENSITIVE
+	CellRendererInsensitive CellRendererState = 4
 	// CellRendererSorted wraps GTK_CELL_RENDERER_SORTED
 	//
 	// The cell is in a sorted row
-	CellRendererSorted CellRendererState = C.GTK_CELL_RENDERER_SORTED
+	CellRendererSorted CellRendererState = 8
 	// CellRendererFocused wraps GTK_CELL_RENDERER_FOCUSED
 	//
 	// The cell is in the focus row.
-	CellRendererFocused CellRendererState = C.GTK_CELL_RENDERER_FOCUSED
+	CellRendererFocused CellRendererState = 16
 	// CellRendererExpandable wraps GTK_CELL_RENDERER_EXPANDABLE
 	//
 	// The cell is in a row that can be expanded
-	CellRendererExpandable CellRendererState = C.GTK_CELL_RENDERER_EXPANDABLE
+	CellRendererExpandable CellRendererState = 32
 	// CellRendererExpanded wraps GTK_CELL_RENDERER_EXPANDED
 	//
 	// The cell is in a row that is expanded
-	CellRendererExpanded CellRendererState = C.GTK_CELL_RENDERER_EXPANDED
+	CellRendererExpanded CellRendererState = 64
 )
 
 func marshalCellRendererState(p unsafe.Pointer) (any, error) {
@@ -6213,83 +6213,83 @@ const (
 	// DebugText wraps GTK_DEBUG_TEXT
 	//
 	// Information about GtkTextView
-	DebugText DebugFlags = C.GTK_DEBUG_TEXT
+	DebugText DebugFlags = 1
 	// DebugTree wraps GTK_DEBUG_TREE
 	//
 	// Information about GtkTreeView
-	DebugTree DebugFlags = C.GTK_DEBUG_TREE
+	DebugTree DebugFlags = 2
 	// DebugKeybindings wraps GTK_DEBUG_KEYBINDINGS
 	//
 	// Information about keyboard shortcuts
-	DebugKeybindings DebugFlags = C.GTK_DEBUG_KEYBINDINGS
+	DebugKeybindings DebugFlags = 4
 	// DebugModules wraps GTK_DEBUG_MODULES
 	//
 	// Information about modules and extensions
-	DebugModules DebugFlags = C.GTK_DEBUG_MODULES
+	DebugModules DebugFlags = 8
 	// DebugGeometry wraps GTK_DEBUG_GEOMETRY
 	//
 	// Information about size allocation
-	DebugGeometry DebugFlags = C.GTK_DEBUG_GEOMETRY
+	DebugGeometry DebugFlags = 16
 	// DebugIcontheme wraps GTK_DEBUG_ICONTHEME
 	//
 	// Information about icon themes
-	DebugIcontheme DebugFlags = C.GTK_DEBUG_ICONTHEME
+	DebugIcontheme DebugFlags = 32
 	// DebugPrinting wraps GTK_DEBUG_PRINTING
 	//
 	// Information about printing
-	DebugPrinting DebugFlags = C.GTK_DEBUG_PRINTING
+	DebugPrinting DebugFlags = 64
 	// DebugBuilder wraps GTK_DEBUG_BUILDER
 	//
 	// Trace GtkBuilder operation
-	DebugBuilder DebugFlags = C.GTK_DEBUG_BUILDER
+	DebugBuilder DebugFlags = 128
 	// DebugSizeRequest wraps GTK_DEBUG_SIZE_REQUEST
 	//
 	// Information about size requests
-	DebugSizeRequest DebugFlags = C.GTK_DEBUG_SIZE_REQUEST
+	DebugSizeRequest DebugFlags = 256
 	// DebugNoCSSCache wraps GTK_DEBUG_NO_CSS_CACHE
 	//
 	// Disable the style property cache
-	DebugNoCSSCache DebugFlags = C.GTK_DEBUG_NO_CSS_CACHE
+	DebugNoCSSCache DebugFlags = 512
 	// DebugInteractive wraps GTK_DEBUG_INTERACTIVE
 	//
 	// Open the GTK inspector
-	DebugInteractive DebugFlags = C.GTK_DEBUG_INTERACTIVE
+	DebugInteractive DebugFlags = 1024
 	// DebugActions wraps GTK_DEBUG_ACTIONS
 	//
 	// Information about actions and menu models
-	DebugActions DebugFlags = C.GTK_DEBUG_ACTIONS
+	DebugActions DebugFlags = 4096
 	// DebugLayout wraps GTK_DEBUG_LAYOUT
 	//
 	// Information from layout managers
-	DebugLayout DebugFlags = C.GTK_DEBUG_LAYOUT
+	DebugLayout DebugFlags = 8192
 	// DebugSnapshot wraps GTK_DEBUG_SNAPSHOT
 	//
 	// Include debug render nodes in the generated snapshots
-	DebugSnapshot DebugFlags = C.GTK_DEBUG_SNAPSHOT
+	DebugSnapshot DebugFlags = 16384
 	// DebugConstraints wraps GTK_DEBUG_CONSTRAINTS
 	//
 	// Information from the constraints solver
-	DebugConstraints DebugFlags = C.GTK_DEBUG_CONSTRAINTS
+	DebugConstraints DebugFlags = 32768
 	// DebugBuilderObjects wraps GTK_DEBUG_BUILDER_OBJECTS
 	//
 	// Log unused GtkBuilder objects
-	DebugBuilderObjects DebugFlags = C.GTK_DEBUG_BUILDER_OBJECTS
+	DebugBuilderObjects DebugFlags = 65536
 	// DebugA11Y wraps GTK_DEBUG_A11Y
 	//
 	// Information about accessibility state changes
-	DebugA11Y DebugFlags = C.GTK_DEBUG_A11Y
+	DebugA11Y DebugFlags = 131072
 	// DebugIconfallback wraps GTK_DEBUG_ICONFALLBACK
 	//
 	// Information about icon fallback.
-	DebugIconfallback DebugFlags = C.GTK_DEBUG_ICONFALLBACK
+	DebugIconfallback DebugFlags = 262144
 	// DebugInvertTextDir wraps GTK_DEBUG_INVERT_TEXT_DIR
 	//
 	// Inverts the default text-direction.
-	DebugInvertTextDir DebugFlags = C.GTK_DEBUG_INVERT_TEXT_DIR
+	DebugInvertTextDir DebugFlags = 524288
 	// DebugCSS wraps GTK_DEBUG_CSS
 	//
 	// Information about deprecated CSS features.
-	DebugCSS DebugFlags = C.GTK_DEBUG_CSS
+	DebugCSS DebugFlags = 1048576
 )
 
 func marshalDebugFlags(p unsafe.Pointer) (any, error) {
@@ -6316,16 +6316,16 @@ const (
 	// DialogModal wraps GTK_DIALOG_MODAL
 	//
 	// Make the constructed dialog modal
-	DialogModal DialogFlags = C.GTK_DIALOG_MODAL
+	DialogModal DialogFlags = 1
 	// DialogDestroyWithParent wraps GTK_DIALOG_DESTROY_WITH_PARENT
 	//
 	// Destroy the dialog when its parent is destroyed
-	DialogDestroyWithParent DialogFlags = C.GTK_DIALOG_DESTROY_WITH_PARENT
+	DialogDestroyWithParent DialogFlags = 2
 	// DialogUseHeaderBar wraps GTK_DIALOG_USE_HEADER_BAR
 	//
 	// Create dialog with actions in header
 	//   bar instead of action area
-	DialogUseHeaderBar DialogFlags = C.GTK_DIALOG_USE_HEADER_BAR
+	DialogUseHeaderBar DialogFlags = 4
 )
 
 func marshalDialogFlags(p unsafe.Pointer) (any, error) {
@@ -6352,27 +6352,27 @@ const (
 	// EventControllerScrollNone wraps GTK_EVENT_CONTROLLER_SCROLL_NONE
 	//
 	// Don't emit scroll.
-	EventControllerScrollNone EventControllerScrollFlags = C.GTK_EVENT_CONTROLLER_SCROLL_NONE
+	EventControllerScrollNone EventControllerScrollFlags = 0
 	// EventControllerScrollVertical wraps GTK_EVENT_CONTROLLER_SCROLL_VERTICAL
 	//
 	// Emit scroll with vertical deltas.
-	EventControllerScrollVertical EventControllerScrollFlags = C.GTK_EVENT_CONTROLLER_SCROLL_VERTICAL
+	EventControllerScrollVertical EventControllerScrollFlags = 1
 	// EventControllerScrollHorizontal wraps GTK_EVENT_CONTROLLER_SCROLL_HORIZONTAL
 	//
 	// Emit scroll with horizontal deltas.
-	EventControllerScrollHorizontal EventControllerScrollFlags = C.GTK_EVENT_CONTROLLER_SCROLL_HORIZONTAL
+	EventControllerScrollHorizontal EventControllerScrollFlags = 2
 	// EventControllerScrollDiscrete wraps GTK_EVENT_CONTROLLER_SCROLL_DISCRETE
 	//
 	// Only emit deltas that are multiples of 1.
-	EventControllerScrollDiscrete EventControllerScrollFlags = C.GTK_EVENT_CONTROLLER_SCROLL_DISCRETE
+	EventControllerScrollDiscrete EventControllerScrollFlags = 4
 	// EventControllerScrollKinetic wraps GTK_EVENT_CONTROLLER_SCROLL_KINETIC
 	//
 	// Emit ::decelerate after continuous scroll finishes.
-	EventControllerScrollKinetic EventControllerScrollFlags = C.GTK_EVENT_CONTROLLER_SCROLL_KINETIC
+	EventControllerScrollKinetic EventControllerScrollFlags = 8
 	// EventControllerScrollBothAxes wraps GTK_EVENT_CONTROLLER_SCROLL_BOTH_AXES
 	//
 	// Emit scroll on both axes.
-	EventControllerScrollBothAxes EventControllerScrollFlags = C.GTK_EVENT_CONTROLLER_SCROLL_BOTH_AXES
+	EventControllerScrollBothAxes EventControllerScrollFlags = 3
 )
 
 func marshalEventControllerScrollFlags(p unsafe.Pointer) (any, error) {
@@ -6403,23 +6403,23 @@ const (
 	// FontChooserLevelFamily wraps GTK_FONT_CHOOSER_LEVEL_FAMILY
 	//
 	// Allow selecting a font family
-	FontChooserLevelFamily FontChooserLevel = C.GTK_FONT_CHOOSER_LEVEL_FAMILY
+	FontChooserLevelFamily FontChooserLevel = 0
 	// FontChooserLevelStyle wraps GTK_FONT_CHOOSER_LEVEL_STYLE
 	//
 	// Allow selecting a specific font face
-	FontChooserLevelStyle FontChooserLevel = C.GTK_FONT_CHOOSER_LEVEL_STYLE
+	FontChooserLevelStyle FontChooserLevel = 1
 	// FontChooserLevelSize wraps GTK_FONT_CHOOSER_LEVEL_SIZE
 	//
 	// Allow selecting a specific font size
-	FontChooserLevelSize FontChooserLevel = C.GTK_FONT_CHOOSER_LEVEL_SIZE
+	FontChooserLevelSize FontChooserLevel = 2
 	// FontChooserLevelVariations wraps GTK_FONT_CHOOSER_LEVEL_VARIATIONS
 	//
 	// Allow changing OpenType font variation axes
-	FontChooserLevelVariations FontChooserLevel = C.GTK_FONT_CHOOSER_LEVEL_VARIATIONS
+	FontChooserLevelVariations FontChooserLevel = 4
 	// FontChooserLevelFeatures wraps GTK_FONT_CHOOSER_LEVEL_FEATURES
 	//
 	// Allow selecting specific OpenType font features
-	FontChooserLevelFeatures FontChooserLevel = C.GTK_FONT_CHOOSER_LEVEL_FEATURES
+	FontChooserLevelFeatures FontChooserLevel = 8
 )
 
 func marshalFontChooserLevel(p unsafe.Pointer) (any, error) {
@@ -6447,17 +6447,17 @@ const (
 	//
 	// Try to always load regular icons, even
 	//   when symbolic icon names are given
-	IconLookupForceRegular IconLookupFlags = C.GTK_ICON_LOOKUP_FORCE_REGULAR
+	IconLookupForceRegular IconLookupFlags = 1
 	// IconLookupForceSymbolic wraps GTK_ICON_LOOKUP_FORCE_SYMBOLIC
 	//
 	// Try to always load symbolic icons, even
 	//   when regular icon names are given
-	IconLookupForceSymbolic IconLookupFlags = C.GTK_ICON_LOOKUP_FORCE_SYMBOLIC
+	IconLookupForceSymbolic IconLookupFlags = 2
 	// IconLookupPreload wraps GTK_ICON_LOOKUP_PRELOAD
 	//
 	// Starts loading the texture in the background
 	//   so it is ready when later needed.
-	IconLookupPreload IconLookupFlags = C.GTK_ICON_LOOKUP_PRELOAD
+	IconLookupPreload IconLookupFlags = 4
 )
 
 func marshalIconLookupFlags(p unsafe.Pointer) (any, error) {
@@ -6494,59 +6494,59 @@ const (
 	// InputHintNone wraps GTK_INPUT_HINT_NONE
 	//
 	// No special behaviour suggested
-	InputHintNone InputHints = C.GTK_INPUT_HINT_NONE
+	InputHintNone InputHints = 0
 	// InputHintSpellcheck wraps GTK_INPUT_HINT_SPELLCHECK
 	//
 	// Suggest checking for typos
-	InputHintSpellcheck InputHints = C.GTK_INPUT_HINT_SPELLCHECK
+	InputHintSpellcheck InputHints = 1
 	// InputHintNoSpellcheck wraps GTK_INPUT_HINT_NO_SPELLCHECK
 	//
 	// Suggest not checking for typos
-	InputHintNoSpellcheck InputHints = C.GTK_INPUT_HINT_NO_SPELLCHECK
+	InputHintNoSpellcheck InputHints = 2
 	// InputHintWordCompletion wraps GTK_INPUT_HINT_WORD_COMPLETION
 	//
 	// Suggest word completion
-	InputHintWordCompletion InputHints = C.GTK_INPUT_HINT_WORD_COMPLETION
+	InputHintWordCompletion InputHints = 4
 	// InputHintLowercase wraps GTK_INPUT_HINT_LOWERCASE
 	//
 	// Suggest to convert all text to lowercase
-	InputHintLowercase InputHints = C.GTK_INPUT_HINT_LOWERCASE
+	InputHintLowercase InputHints = 8
 	// InputHintUppercaseChars wraps GTK_INPUT_HINT_UPPERCASE_CHARS
 	//
 	// Suggest to capitalize all text
-	InputHintUppercaseChars InputHints = C.GTK_INPUT_HINT_UPPERCASE_CHARS
+	InputHintUppercaseChars InputHints = 16
 	// InputHintUppercaseWords wraps GTK_INPUT_HINT_UPPERCASE_WORDS
 	//
 	// Suggest to capitalize the first
 	//   character of each word
-	InputHintUppercaseWords InputHints = C.GTK_INPUT_HINT_UPPERCASE_WORDS
+	InputHintUppercaseWords InputHints = 32
 	// InputHintUppercaseSentences wraps GTK_INPUT_HINT_UPPERCASE_SENTENCES
 	//
 	// Suggest to capitalize the
 	//   first word of each sentence
-	InputHintUppercaseSentences InputHints = C.GTK_INPUT_HINT_UPPERCASE_SENTENCES
+	InputHintUppercaseSentences InputHints = 64
 	// InputHintInhibitOSK wraps GTK_INPUT_HINT_INHIBIT_OSK
 	//
 	// Suggest to not show an onscreen keyboard
 	//   (e.g for a calculator that already has all the keys).
-	InputHintInhibitOSK InputHints = C.GTK_INPUT_HINT_INHIBIT_OSK
+	InputHintInhibitOSK InputHints = 128
 	// InputHintVerticalWriting wraps GTK_INPUT_HINT_VERTICAL_WRITING
 	//
 	// The text is vertical
-	InputHintVerticalWriting InputHints = C.GTK_INPUT_HINT_VERTICAL_WRITING
+	InputHintVerticalWriting InputHints = 256
 	// InputHintEmoji wraps GTK_INPUT_HINT_EMOJI
 	//
 	// Suggest offering Emoji support
-	InputHintEmoji InputHints = C.GTK_INPUT_HINT_EMOJI
+	InputHintEmoji InputHints = 512
 	// InputHintNoEmoji wraps GTK_INPUT_HINT_NO_EMOJI
 	//
 	// Suggest not offering Emoji support
-	InputHintNoEmoji InputHints = C.GTK_INPUT_HINT_NO_EMOJI
+	InputHintNoEmoji InputHints = 1024
 	// InputHintPrivate wraps GTK_INPUT_HINT_PRIVATE
 	//
 	// Request that the input method should not
 	//    update personalized data (like typing history)
-	InputHintPrivate InputHints = C.GTK_INPUT_HINT_PRIVATE
+	InputHintPrivate InputHints = 2048
 )
 
 func marshalInputHints(p unsafe.Pointer) (any, error) {
@@ -6574,16 +6574,16 @@ const (
 	// ListScrollNone wraps GTK_LIST_SCROLL_NONE
 	//
 	// Don't do anything extra
-	ListScrollNone ListScrollFlags = C.GTK_LIST_SCROLL_NONE
+	ListScrollNone ListScrollFlags = 0
 	// ListScrollFocus wraps GTK_LIST_SCROLL_FOCUS
 	//
 	// Focus the target item
-	ListScrollFocus ListScrollFlags = C.GTK_LIST_SCROLL_FOCUS
+	ListScrollFocus ListScrollFlags = 1
 	// ListScrollSelect wraps GTK_LIST_SCROLL_SELECT
 	//
 	// Select the target item and
 	//   unselect all other items.
-	ListScrollSelect ListScrollFlags = C.GTK_LIST_SCROLL_SELECT
+	ListScrollSelect ListScrollFlags = 2
 )
 
 func marshalListScrollFlags(p unsafe.Pointer) (any, error) {
@@ -6610,15 +6610,15 @@ const (
 	// PickDefault wraps GTK_PICK_DEFAULT
 	//
 	// The default behavior, include widgets that are receiving events
-	PickDefault PickFlags = C.GTK_PICK_DEFAULT
+	PickDefault PickFlags = 0
 	// PickInsensitive wraps GTK_PICK_INSENSITIVE
 	//
 	// Include widgets that are insensitive
-	PickInsensitive PickFlags = C.GTK_PICK_INSENSITIVE
+	PickInsensitive PickFlags = 1
 	// PickNonTargetable wraps GTK_PICK_NON_TARGETABLE
 	//
 	// Include widgets that are marked as non-targetable. See [property@Widget:can-target]
-	PickNonTargetable PickFlags = C.GTK_PICK_NON_TARGETABLE
+	PickNonTargetable PickFlags = 2
 )
 
 func marshalPickFlags(p unsafe.Pointer) (any, error) {
@@ -6646,12 +6646,12 @@ const (
 	// PopoverMenuSliding wraps GTK_POPOVER_MENU_SLIDING
 	//
 	// Submenus are presented as sliding submenus that replace the main menu.
-	PopoverMenuSliding PopoverMenuFlags = C.GTK_POPOVER_MENU_SLIDING
+	PopoverMenuSliding PopoverMenuFlags = 0
 	// PopoverMenuNested wraps GTK_POPOVER_MENU_NESTED
 	//
 	// Submenus are presented as traditional, nested
 	//   popovers.
-	PopoverMenuNested PopoverMenuFlags = C.GTK_POPOVER_MENU_NESTED
+	PopoverMenuNested PopoverMenuFlags = 1
 )
 
 func marshalPopoverMenuFlags(p unsafe.Pointer) (any, error) {
@@ -6682,47 +6682,47 @@ const (
 	// PrintCapabilityPageSet wraps GTK_PRINT_CAPABILITY_PAGE_SET
 	//
 	// Print dialog will offer printing even/odd pages.
-	PrintCapabilityPageSet PrintCapabilities = C.GTK_PRINT_CAPABILITY_PAGE_SET
+	PrintCapabilityPageSet PrintCapabilities = 1
 	// PrintCapabilityCopies wraps GTK_PRINT_CAPABILITY_COPIES
 	//
 	// Print dialog will allow to print multiple copies.
-	PrintCapabilityCopies PrintCapabilities = C.GTK_PRINT_CAPABILITY_COPIES
+	PrintCapabilityCopies PrintCapabilities = 2
 	// PrintCapabilityCollate wraps GTK_PRINT_CAPABILITY_COLLATE
 	//
 	// Print dialog will allow to collate multiple copies.
-	PrintCapabilityCollate PrintCapabilities = C.GTK_PRINT_CAPABILITY_COLLATE
+	PrintCapabilityCollate PrintCapabilities = 4
 	// PrintCapabilityReverse wraps GTK_PRINT_CAPABILITY_REVERSE
 	//
 	// Print dialog will allow to print pages in reverse order.
-	PrintCapabilityReverse PrintCapabilities = C.GTK_PRINT_CAPABILITY_REVERSE
+	PrintCapabilityReverse PrintCapabilities = 8
 	// PrintCapabilityScale wraps GTK_PRINT_CAPABILITY_SCALE
 	//
 	// Print dialog will allow to scale the output.
-	PrintCapabilityScale PrintCapabilities = C.GTK_PRINT_CAPABILITY_SCALE
+	PrintCapabilityScale PrintCapabilities = 16
 	// PrintCapabilityGeneratePDF wraps GTK_PRINT_CAPABILITY_GENERATE_PDF
 	//
 	// The program will send the document to
 	//   the printer in PDF format
-	PrintCapabilityGeneratePDF PrintCapabilities = C.GTK_PRINT_CAPABILITY_GENERATE_PDF
+	PrintCapabilityGeneratePDF PrintCapabilities = 32
 	// PrintCapabilityGeneratePS wraps GTK_PRINT_CAPABILITY_GENERATE_PS
 	//
 	// The program will send the document to
 	//   the printer in Postscript format
-	PrintCapabilityGeneratePS PrintCapabilities = C.GTK_PRINT_CAPABILITY_GENERATE_PS
+	PrintCapabilityGeneratePS PrintCapabilities = 64
 	// PrintCapabilityPreview wraps GTK_PRINT_CAPABILITY_PREVIEW
 	//
 	// Print dialog will offer a preview
-	PrintCapabilityPreview PrintCapabilities = C.GTK_PRINT_CAPABILITY_PREVIEW
+	PrintCapabilityPreview PrintCapabilities = 128
 	// PrintCapabilityNumberUp wraps GTK_PRINT_CAPABILITY_NUMBER_UP
 	//
 	// Print dialog will offer printing multiple
 	//   pages per sheet
-	PrintCapabilityNumberUp PrintCapabilities = C.GTK_PRINT_CAPABILITY_NUMBER_UP
+	PrintCapabilityNumberUp PrintCapabilities = 256
 	// PrintCapabilityNumberUpLayout wraps GTK_PRINT_CAPABILITY_NUMBER_UP_LAYOUT
 	//
 	// Print dialog will allow to rearrange
 	//   pages when printing multiple pages per sheet
-	PrintCapabilityNumberUpLayout PrintCapabilities = C.GTK_PRINT_CAPABILITY_NUMBER_UP_LAYOUT
+	PrintCapabilityNumberUpLayout PrintCapabilities = 512
 )
 
 func marshalPrintCapabilities(p unsafe.Pointer) (any, error) {
@@ -6753,7 +6753,7 @@ const (
 	// The action is the only
 	//   action that can be activated. If this flag is not set,
 	//   a future activation may select a different action.
-	ShortcutActionExclusive ShortcutActionFlags = C.GTK_SHORTCUT_ACTION_EXCLUSIVE
+	ShortcutActionExclusive ShortcutActionFlags = 1
 )
 
 func marshalShortcutActionFlags(p unsafe.Pointer) (any, error) {
@@ -6784,67 +6784,67 @@ const (
 	// StateFlagNormal wraps GTK_STATE_FLAG_NORMAL
 	//
 	// State during normal operation
-	StateFlagNormal StateFlags = C.GTK_STATE_FLAG_NORMAL
+	StateFlagNormal StateFlags = 0
 	// StateFlagActive wraps GTK_STATE_FLAG_ACTIVE
 	//
 	// Widget is active
-	StateFlagActive StateFlags = C.GTK_STATE_FLAG_ACTIVE
+	StateFlagActive StateFlags = 1
 	// StateFlagPrelight wraps GTK_STATE_FLAG_PRELIGHT
 	//
 	// Widget has a mouse pointer over it
-	StateFlagPrelight StateFlags = C.GTK_STATE_FLAG_PRELIGHT
+	StateFlagPrelight StateFlags = 2
 	// StateFlagSelected wraps GTK_STATE_FLAG_SELECTED
 	//
 	// Widget is selected
-	StateFlagSelected StateFlags = C.GTK_STATE_FLAG_SELECTED
+	StateFlagSelected StateFlags = 4
 	// StateFlagInsensitive wraps GTK_STATE_FLAG_INSENSITIVE
 	//
 	// Widget is insensitive
-	StateFlagInsensitive StateFlags = C.GTK_STATE_FLAG_INSENSITIVE
+	StateFlagInsensitive StateFlags = 8
 	// StateFlagInconsistent wraps GTK_STATE_FLAG_INCONSISTENT
 	//
 	// Widget is inconsistent
-	StateFlagInconsistent StateFlags = C.GTK_STATE_FLAG_INCONSISTENT
+	StateFlagInconsistent StateFlags = 16
 	// StateFlagFocused wraps GTK_STATE_FLAG_FOCUSED
 	//
 	// Widget has the keyboard focus
-	StateFlagFocused StateFlags = C.GTK_STATE_FLAG_FOCUSED
+	StateFlagFocused StateFlags = 32
 	// StateFlagBackdrop wraps GTK_STATE_FLAG_BACKDROP
 	//
 	// Widget is in a background toplevel window
-	StateFlagBackdrop StateFlags = C.GTK_STATE_FLAG_BACKDROP
+	StateFlagBackdrop StateFlags = 64
 	// StateFlagDirLTR wraps GTK_STATE_FLAG_DIR_LTR
 	//
 	// Widget is in left-to-right text direction
-	StateFlagDirLTR StateFlags = C.GTK_STATE_FLAG_DIR_LTR
+	StateFlagDirLTR StateFlags = 128
 	// StateFlagDirRTL wraps GTK_STATE_FLAG_DIR_RTL
 	//
 	// Widget is in right-to-left text direction
-	StateFlagDirRTL StateFlags = C.GTK_STATE_FLAG_DIR_RTL
+	StateFlagDirRTL StateFlags = 256
 	// StateFlagLink wraps GTK_STATE_FLAG_LINK
 	//
 	// Widget is a link
-	StateFlagLink StateFlags = C.GTK_STATE_FLAG_LINK
+	StateFlagLink StateFlags = 512
 	// StateFlagVisited wraps GTK_STATE_FLAG_VISITED
 	//
 	// The location the widget points to has already been visited
-	StateFlagVisited StateFlags = C.GTK_STATE_FLAG_VISITED
+	StateFlagVisited StateFlags = 1024
 	// StateFlagChecked wraps GTK_STATE_FLAG_CHECKED
 	//
 	// Widget is checked
-	StateFlagChecked StateFlags = C.GTK_STATE_FLAG_CHECKED
+	StateFlagChecked StateFlags = 2048
 	// StateFlagDropActive wraps GTK_STATE_FLAG_DROP_ACTIVE
 	//
 	// Widget is highlighted as a drop target for DND
-	StateFlagDropActive StateFlags = C.GTK_STATE_FLAG_DROP_ACTIVE
+	StateFlagDropActive StateFlags = 4096
 	// StateFlagFocusVisible wraps GTK_STATE_FLAG_FOCUS_VISIBLE
 	//
 	// Widget has the visible focus
-	StateFlagFocusVisible StateFlags = C.GTK_STATE_FLAG_FOCUS_VISIBLE
+	StateFlagFocusVisible StateFlags = 8192
 	// StateFlagFocusWithin wraps GTK_STATE_FLAG_FOCUS_WITHIN
 	//
 	// Widget contains the keyboard focus
-	StateFlagFocusWithin StateFlags = C.GTK_STATE_FLAG_FOCUS_WITHIN
+	StateFlagFocusWithin StateFlags = 16384
 )
 
 func marshalStateFlags(p unsafe.Pointer) (any, error) {
@@ -6873,22 +6873,22 @@ const (
 	// StyleContextPrintNone wraps GTK_STYLE_CONTEXT_PRINT_NONE
 	//
 	// Default value.
-	StyleContextPrintNone StyleContextPrintFlags = C.GTK_STYLE_CONTEXT_PRINT_NONE
+	StyleContextPrintNone StyleContextPrintFlags = 0
 	// StyleContextPrintRecurse wraps GTK_STYLE_CONTEXT_PRINT_RECURSE
 	//
 	// Print the entire tree of
 	//   CSS nodes starting at the style context's node
-	StyleContextPrintRecurse StyleContextPrintFlags = C.GTK_STYLE_CONTEXT_PRINT_RECURSE
+	StyleContextPrintRecurse StyleContextPrintFlags = 1
 	// StyleContextPrintShowStyle wraps GTK_STYLE_CONTEXT_PRINT_SHOW_STYLE
 	//
 	// Show the values of the
 	//   CSS properties for each node
-	StyleContextPrintShowStyle StyleContextPrintFlags = C.GTK_STYLE_CONTEXT_PRINT_SHOW_STYLE
+	StyleContextPrintShowStyle StyleContextPrintFlags = 2
 	// StyleContextPrintShowChange wraps GTK_STYLE_CONTEXT_PRINT_SHOW_CHANGE
 	//
 	// Show information about
 	//   what changes affect the styles
-	StyleContextPrintShowChange StyleContextPrintFlags = C.GTK_STYLE_CONTEXT_PRINT_SHOW_CHANGE
+	StyleContextPrintShowChange StyleContextPrintFlags = 4
 )
 
 func marshalStyleContextPrintFlags(p unsafe.Pointer) (any, error) {
@@ -6917,22 +6917,22 @@ const (
 	//
 	// Be notified before text
 	//   is inserted into the underlying buffer.
-	TextBufferNotifyBeforeInsert TextBufferNotifyFlags = C.GTK_TEXT_BUFFER_NOTIFY_BEFORE_INSERT
+	TextBufferNotifyBeforeInsert TextBufferNotifyFlags = 1
 	// TextBufferNotifyAfterInsert wraps GTK_TEXT_BUFFER_NOTIFY_AFTER_INSERT
 	//
 	// Be notified after text
 	//   has been inserted into the underlying buffer.
-	TextBufferNotifyAfterInsert TextBufferNotifyFlags = C.GTK_TEXT_BUFFER_NOTIFY_AFTER_INSERT
+	TextBufferNotifyAfterInsert TextBufferNotifyFlags = 2
 	// TextBufferNotifyBeforeDelete wraps GTK_TEXT_BUFFER_NOTIFY_BEFORE_DELETE
 	//
 	// Be notified before text
 	//   is deleted from the underlying buffer.
-	TextBufferNotifyBeforeDelete TextBufferNotifyFlags = C.GTK_TEXT_BUFFER_NOTIFY_BEFORE_DELETE
+	TextBufferNotifyBeforeDelete TextBufferNotifyFlags = 4
 	// TextBufferNotifyAfterDelete wraps GTK_TEXT_BUFFER_NOTIFY_AFTER_DELETE
 	//
 	// Be notified after text
 	//   has been deleted from the underlying buffer.
-	TextBufferNotifyAfterDelete TextBufferNotifyFlags = C.GTK_TEXT_BUFFER_NOTIFY_AFTER_DELETE
+	TextBufferNotifyAfterDelete TextBufferNotifyFlags = 8
 )
 
 func marshalTextBufferNotifyFlags(p unsafe.Pointer) (any, error) {
@@ -6964,17 +6964,17 @@ const (
 	//
 	// Search only visible data. A search match may
 	// have invisible text interspersed.
-	TextSearchVisibleOnly TextSearchFlags = C.GTK_TEXT_SEARCH_VISIBLE_ONLY
+	TextSearchVisibleOnly TextSearchFlags = 1
 	// TextSearchTextOnly wraps GTK_TEXT_SEARCH_TEXT_ONLY
 	//
 	// Search only text. A match may have paintables or
 	// child widgets mixed inside the matched range.
-	TextSearchTextOnly TextSearchFlags = C.GTK_TEXT_SEARCH_TEXT_ONLY
+	TextSearchTextOnly TextSearchFlags = 2
 	// TextSearchCaseInsensitive wraps GTK_TEXT_SEARCH_CASE_INSENSITIVE
 	//
 	// The text will be matched regardless of
 	// what case it is in.
-	TextSearchCaseInsensitive TextSearchFlags = C.GTK_TEXT_SEARCH_CASE_INSENSITIVE
+	TextSearchCaseInsensitive TextSearchFlags = 4
 )
 
 func marshalTextSearchFlags(p unsafe.Pointer) (any, error) {
@@ -7009,12 +7009,12 @@ const (
 	//
 	// iterators survive all signals
 	//   emitted by the tree
-	TreeModelItersPersist TreeModelFlags = C.GTK_TREE_MODEL_ITERS_PERSIST
+	TreeModelItersPersist TreeModelFlags = 1
 	// TreeModelListOnly wraps GTK_TREE_MODEL_LIST_ONLY
 	//
 	// the model is a list only, and never
 	//   has children
-	TreeModelListOnly TreeModelFlags = C.GTK_TREE_MODEL_LIST_ONLY
+	TreeModelListOnly TreeModelFlags = 2
 )
 
 func marshalTreeModelFlags(p unsafe.Pointer) (any, error) {

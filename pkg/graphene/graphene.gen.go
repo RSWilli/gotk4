@@ -126,133 +126,133 @@ const (
 	//
 	// Rotate in the default order; the
 	//   default order is one of the following enumeration values
-	EulerOrderDefault EulerOrder = C.GRAPHENE_EULER_ORDER_DEFAULT
+	EulerOrderDefault EulerOrder = -1
 	// EulerOrderXYZ wraps GRAPHENE_EULER_ORDER_XYZ
 	//
 	// Rotate in the X, Y, and Z order. Deprecated in
 	//   Graphene 1.10, it's an alias for %GRAPHENE_EULER_ORDER_SXYZ
-	EulerOrderXYZ EulerOrder = C.GRAPHENE_EULER_ORDER_XYZ
+	EulerOrderXYZ EulerOrder = 0
 	// EulerOrderYZX wraps GRAPHENE_EULER_ORDER_YZX
 	//
 	// Rotate in the Y, Z, and X order. Deprecated in
 	//   Graphene 1.10, it's an alias for %GRAPHENE_EULER_ORDER_SYZX
-	EulerOrderYZX EulerOrder = C.GRAPHENE_EULER_ORDER_YZX
+	EulerOrderYZX EulerOrder = 1
 	// EulerOrderZXY wraps GRAPHENE_EULER_ORDER_ZXY
 	//
 	// Rotate in the Z, X, and Y order. Deprecated in
 	//   Graphene 1.10, it's an alias for %GRAPHENE_EULER_ORDER_SZXY
-	EulerOrderZXY EulerOrder = C.GRAPHENE_EULER_ORDER_ZXY
+	EulerOrderZXY EulerOrder = 2
 	// EulerOrderXZY wraps GRAPHENE_EULER_ORDER_XZY
 	//
 	// Rotate in the X, Z, and Y order. Deprecated in
 	//   Graphene 1.10, it's an alias for %GRAPHENE_EULER_ORDER_SXZY
-	EulerOrderXZY EulerOrder = C.GRAPHENE_EULER_ORDER_XZY
+	EulerOrderXZY EulerOrder = 3
 	// EulerOrderYXZ wraps GRAPHENE_EULER_ORDER_YXZ
 	//
 	// Rotate in the Y, X, and Z order. Deprecated in
 	//   Graphene 1.10, it's an alias for %GRAPHENE_EULER_ORDER_SYXZ
-	EulerOrderYXZ EulerOrder = C.GRAPHENE_EULER_ORDER_YXZ
+	EulerOrderYXZ EulerOrder = 4
 	// EulerOrderZYX wraps GRAPHENE_EULER_ORDER_ZYX
 	//
 	// Rotate in the Z, Y, and X order. Deprecated in
 	//   Graphene 1.10, it's an alias for %GRAPHENE_EULER_ORDER_SZYX
-	EulerOrderZYX EulerOrder = C.GRAPHENE_EULER_ORDER_ZYX
+	EulerOrderZYX EulerOrder = 5
 	// EulerOrderSXYZ wraps GRAPHENE_EULER_ORDER_SXYZ
 	//
 	// Defines a static rotation along the X, Y, and Z axes (Since: 1.10)
-	EulerOrderSXYZ EulerOrder = C.GRAPHENE_EULER_ORDER_SXYZ
+	EulerOrderSXYZ EulerOrder = 6
 	// EulerOrderSXYX wraps GRAPHENE_EULER_ORDER_SXYX
 	//
 	// Defines a static rotation along the X, Y, and X axes (Since: 1.10)
-	EulerOrderSXYX EulerOrder = C.GRAPHENE_EULER_ORDER_SXYX
+	EulerOrderSXYX EulerOrder = 7
 	// EulerOrderSXZY wraps GRAPHENE_EULER_ORDER_SXZY
 	//
 	// Defines a static rotation along the X, Z, and Y axes (Since: 1.10)
-	EulerOrderSXZY EulerOrder = C.GRAPHENE_EULER_ORDER_SXZY
+	EulerOrderSXZY EulerOrder = 8
 	// EulerOrderSXZX wraps GRAPHENE_EULER_ORDER_SXZX
 	//
 	// Defines a static rotation along the X, Z, and X axes (Since: 1.10)
-	EulerOrderSXZX EulerOrder = C.GRAPHENE_EULER_ORDER_SXZX
+	EulerOrderSXZX EulerOrder = 9
 	// EulerOrderSYZX wraps GRAPHENE_EULER_ORDER_SYZX
 	//
 	// Defines a static rotation along the Y, Z, and X axes (Since: 1.10)
-	EulerOrderSYZX EulerOrder = C.GRAPHENE_EULER_ORDER_SYZX
+	EulerOrderSYZX EulerOrder = 10
 	// EulerOrderSYZY wraps GRAPHENE_EULER_ORDER_SYZY
 	//
 	// Defines a static rotation along the Y, Z, and Y axes (Since: 1.10)
-	EulerOrderSYZY EulerOrder = C.GRAPHENE_EULER_ORDER_SYZY
+	EulerOrderSYZY EulerOrder = 11
 	// EulerOrderSYXZ wraps GRAPHENE_EULER_ORDER_SYXZ
 	//
 	// Defines a static rotation along the Y, X, and Z axes (Since: 1.10)
-	EulerOrderSYXZ EulerOrder = C.GRAPHENE_EULER_ORDER_SYXZ
+	EulerOrderSYXZ EulerOrder = 12
 	// EulerOrderSYXY wraps GRAPHENE_EULER_ORDER_SYXY
 	//
 	// Defines a static rotation along the Y, X, and Y axes (Since: 1.10)
-	EulerOrderSYXY EulerOrder = C.GRAPHENE_EULER_ORDER_SYXY
+	EulerOrderSYXY EulerOrder = 13
 	// EulerOrderSZXY wraps GRAPHENE_EULER_ORDER_SZXY
 	//
 	// Defines a static rotation along the Z, X, and Y axes (Since: 1.10)
-	EulerOrderSZXY EulerOrder = C.GRAPHENE_EULER_ORDER_SZXY
+	EulerOrderSZXY EulerOrder = 14
 	// EulerOrderSZXZ wraps GRAPHENE_EULER_ORDER_SZXZ
 	//
 	// Defines a static rotation along the Z, X, and Z axes (Since: 1.10)
-	EulerOrderSZXZ EulerOrder = C.GRAPHENE_EULER_ORDER_SZXZ
+	EulerOrderSZXZ EulerOrder = 15
 	// EulerOrderSZYX wraps GRAPHENE_EULER_ORDER_SZYX
 	//
 	// Defines a static rotation along the Z, Y, and X axes (Since: 1.10)
-	EulerOrderSZYX EulerOrder = C.GRAPHENE_EULER_ORDER_SZYX
+	EulerOrderSZYX EulerOrder = 16
 	// EulerOrderSZYZ wraps GRAPHENE_EULER_ORDER_SZYZ
 	//
 	// Defines a static rotation along the Z, Y, and Z axes (Since: 1.10)
-	EulerOrderSZYZ EulerOrder = C.GRAPHENE_EULER_ORDER_SZYZ
+	EulerOrderSZYZ EulerOrder = 17
 	// EulerOrderRZYX wraps GRAPHENE_EULER_ORDER_RZYX
 	//
 	// Defines a relative rotation along the Z, Y, and X axes (Since: 1.10)
-	EulerOrderRZYX EulerOrder = C.GRAPHENE_EULER_ORDER_RZYX
+	EulerOrderRZYX EulerOrder = 18
 	// EulerOrderRXYX wraps GRAPHENE_EULER_ORDER_RXYX
 	//
 	// Defines a relative rotation along the X, Y, and X axes (Since: 1.10)
-	EulerOrderRXYX EulerOrder = C.GRAPHENE_EULER_ORDER_RXYX
+	EulerOrderRXYX EulerOrder = 19
 	// EulerOrderRYZX wraps GRAPHENE_EULER_ORDER_RYZX
 	//
 	// Defines a relative rotation along the Y, Z, and X axes (Since: 1.10)
-	EulerOrderRYZX EulerOrder = C.GRAPHENE_EULER_ORDER_RYZX
+	EulerOrderRYZX EulerOrder = 20
 	// EulerOrderRXZX wraps GRAPHENE_EULER_ORDER_RXZX
 	//
 	// Defines a relative rotation along the X, Z, and X axes (Since: 1.10)
-	EulerOrderRXZX EulerOrder = C.GRAPHENE_EULER_ORDER_RXZX
+	EulerOrderRXZX EulerOrder = 21
 	// EulerOrderRXZY wraps GRAPHENE_EULER_ORDER_RXZY
 	//
 	// Defines a relative rotation along the X, Z, and Y axes (Since: 1.10)
-	EulerOrderRXZY EulerOrder = C.GRAPHENE_EULER_ORDER_RXZY
+	EulerOrderRXZY EulerOrder = 22
 	// EulerOrderRYZY wraps GRAPHENE_EULER_ORDER_RYZY
 	//
 	// Defines a relative rotation along the Y, Z, and Y axes (Since: 1.10)
-	EulerOrderRYZY EulerOrder = C.GRAPHENE_EULER_ORDER_RYZY
+	EulerOrderRYZY EulerOrder = 23
 	// EulerOrderRZXY wraps GRAPHENE_EULER_ORDER_RZXY
 	//
 	// Defines a relative rotation along the Z, X, and Y axes (Since: 1.10)
-	EulerOrderRZXY EulerOrder = C.GRAPHENE_EULER_ORDER_RZXY
+	EulerOrderRZXY EulerOrder = 24
 	// EulerOrderRYXY wraps GRAPHENE_EULER_ORDER_RYXY
 	//
 	// Defines a relative rotation along the Y, X, and Y axes (Since: 1.10)
-	EulerOrderRYXY EulerOrder = C.GRAPHENE_EULER_ORDER_RYXY
+	EulerOrderRYXY EulerOrder = 25
 	// EulerOrderRYXZ wraps GRAPHENE_EULER_ORDER_RYXZ
 	//
 	// Defines a relative rotation along the Y, X, and Z axes (Since: 1.10)
-	EulerOrderRYXZ EulerOrder = C.GRAPHENE_EULER_ORDER_RYXZ
+	EulerOrderRYXZ EulerOrder = 26
 	// EulerOrderRZXZ wraps GRAPHENE_EULER_ORDER_RZXZ
 	//
 	// Defines a relative rotation along the Z, X, and Z axes (Since: 1.10)
-	EulerOrderRZXZ EulerOrder = C.GRAPHENE_EULER_ORDER_RZXZ
+	EulerOrderRZXZ EulerOrder = 27
 	// EulerOrderRXYZ wraps GRAPHENE_EULER_ORDER_RXYZ
 	//
 	// Defines a relative rotation along the X, Y, and Z axes (Since: 1.10)
-	EulerOrderRXYZ EulerOrder = C.GRAPHENE_EULER_ORDER_RXYZ
+	EulerOrderRXYZ EulerOrder = 28
 	// EulerOrderRZYZ wraps GRAPHENE_EULER_ORDER_RZYZ
 	//
 	// Defines a relative rotation along the Z, Y, and Z axes (Since: 1.10)
-	EulerOrderRZYZ EulerOrder = C.GRAPHENE_EULER_ORDER_RZYZ
+	EulerOrderRZYZ EulerOrder = 29
 )
 
 
@@ -265,17 +265,17 @@ const (
 	// RayIntersectionKindNone wraps GRAPHENE_RAY_INTERSECTION_KIND_NONE
 	//
 	// No intersection
-	RayIntersectionKindNone RayIntersectionKind = C.GRAPHENE_RAY_INTERSECTION_KIND_NONE
+	RayIntersectionKindNone RayIntersectionKind = 0
 	// RayIntersectionKindEnter wraps GRAPHENE_RAY_INTERSECTION_KIND_ENTER
 	//
 	// The ray is entering the intersected
 	//   object
-	RayIntersectionKindEnter RayIntersectionKind = C.GRAPHENE_RAY_INTERSECTION_KIND_ENTER
+	RayIntersectionKindEnter RayIntersectionKind = 1
 	// RayIntersectionKindLeave wraps GRAPHENE_RAY_INTERSECTION_KIND_LEAVE
 	//
 	// The ray is leaving the intersected
 	//   object
-	RayIntersectionKindLeave RayIntersectionKind = C.GRAPHENE_RAY_INTERSECTION_KIND_LEAVE
+	RayIntersectionKindLeave RayIntersectionKind = 2
 )
 
 

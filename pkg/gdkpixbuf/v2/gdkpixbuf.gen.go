@@ -72,7 +72,7 @@ const (
 	// ColorspaceRGB wraps GDK_COLORSPACE_RGB
 	//
 	// Indicates a red/green/blue additive color space.
-	ColorspaceRGB Colorspace = C.GDK_COLORSPACE_RGB
+	ColorspaceRGB Colorspace = 0
 )
 
 func marshalColorspace(p unsafe.Pointer) (any, error) {
@@ -105,7 +105,7 @@ const (
 	// Nearest neighbor sampling; this is the fastest
 	//  and lowest quality mode. Quality is normally unacceptable when scaling
 	//  down, but may be OK when scaling up.
-	InterpNearest InterpType = C.GDK_INTERP_NEAREST
+	InterpNearest InterpType = 0
 	// InterpTiles wraps GDK_INTERP_TILES
 	//
 	// This is an accurate simulation of the PostScript
@@ -113,7 +113,7 @@ const (
 	//  rendered as a tiny parallelogram of solid color, the edges of which
 	//  are implemented with antialiasing.  It resembles nearest neighbor for
 	//  enlargement, and bilinear for reduction.
-	InterpTiles InterpType = C.GDK_INTERP_TILES
+	InterpTiles InterpType = 1
 	// InterpBilinear wraps GDK_INTERP_BILINEAR
 	//
 	// Best quality/speed balance; use this mode by
@@ -121,7 +121,7 @@ const (
 	//  equivalent to point-sampling the ideal bilinear-interpolated image.
 	//  For reduction, it is equivalent to laying down small tiles and
 	//  integrating over the coverage area.
-	InterpBilinear InterpType = C.GDK_INTERP_BILINEAR
+	InterpBilinear InterpType = 2
 	// InterpHyper wraps GDK_INTERP_HYPER
 	//
 	// This is the slowest and highest quality
@@ -132,7 +132,7 @@ const (
 	//  **Deprecated**: this interpolation filter is deprecated, as in reality
 	//  it has a lower quality than the @GDK_INTERP_BILINEAR filter
 	//  (Since: 2.38)
-	InterpHyper InterpType = C.GDK_INTERP_HYPER
+	InterpHyper InterpType = 3
 )
 
 func marshalInterpType(p unsafe.Pointer) (any, error) {
@@ -173,12 +173,12 @@ const (
 	//  will be created and used to draw the image.  Pixels below 0.5 opacity
 	//  will be considered fully transparent, and all others will be
 	//  considered fully opaque.
-	PixbufAlphaBilevel PixbufAlphaMode = C.GDK_PIXBUF_ALPHA_BILEVEL
+	PixbufAlphaBilevel PixbufAlphaMode = 0
 	// PixbufAlphaFull wraps GDK_PIXBUF_ALPHA_FULL
 	//
 	// For now falls back to #GDK_PIXBUF_ALPHA_BILEVEL.
 	//  In the future it will do full alpha compositing.
-	PixbufAlphaFull PixbufAlphaMode = C.GDK_PIXBUF_ALPHA_FULL
+	PixbufAlphaFull PixbufAlphaMode = 1
 )
 
 func marshalPixbufAlphaMode(p unsafe.Pointer) (any, error) {
@@ -204,32 +204,32 @@ const (
 	// PixbufErrorCorruptImage wraps GDK_PIXBUF_ERROR_CORRUPT_IMAGE
 	//
 	// An image file was broken somehow.
-	PixbufErrorCorruptImage PixbufError = C.GDK_PIXBUF_ERROR_CORRUPT_IMAGE
+	PixbufErrorCorruptImage PixbufError = 0
 	// PixbufErrorInsufficientMemory wraps GDK_PIXBUF_ERROR_INSUFFICIENT_MEMORY
 	//
 	// Not enough memory.
-	PixbufErrorInsufficientMemory PixbufError = C.GDK_PIXBUF_ERROR_INSUFFICIENT_MEMORY
+	PixbufErrorInsufficientMemory PixbufError = 1
 	// PixbufErrorBadOption wraps GDK_PIXBUF_ERROR_BAD_OPTION
 	//
 	// A bad option was passed to a pixbuf save module.
-	PixbufErrorBadOption PixbufError = C.GDK_PIXBUF_ERROR_BAD_OPTION
+	PixbufErrorBadOption PixbufError = 2
 	// PixbufErrorUnknownType wraps GDK_PIXBUF_ERROR_UNKNOWN_TYPE
 	//
 	// Unknown image type.
-	PixbufErrorUnknownType PixbufError = C.GDK_PIXBUF_ERROR_UNKNOWN_TYPE
+	PixbufErrorUnknownType PixbufError = 3
 	// PixbufErrorUnsupportedOperation wraps GDK_PIXBUF_ERROR_UNSUPPORTED_OPERATION
 	//
 	// Don't know how to perform the
 	//  given operation on the type of image at hand.
-	PixbufErrorUnsupportedOperation PixbufError = C.GDK_PIXBUF_ERROR_UNSUPPORTED_OPERATION
+	PixbufErrorUnsupportedOperation PixbufError = 4
 	// PixbufErrorFailed wraps GDK_PIXBUF_ERROR_FAILED
 	//
 	// Generic failure code, something went wrong.
-	PixbufErrorFailed PixbufError = C.GDK_PIXBUF_ERROR_FAILED
+	PixbufErrorFailed PixbufError = 5
 	// PixbufErrorIncompleteAnimation wraps GDK_PIXBUF_ERROR_INCOMPLETE_ANIMATION
 	//
 	// Only part of the animation was loaded.
-	PixbufErrorIncompleteAnimation PixbufError = C.GDK_PIXBUF_ERROR_INCOMPLETE_ANIMATION
+	PixbufErrorIncompleteAnimation PixbufError = 6
 )
 
 func marshalPixbufError(p unsafe.Pointer) (any, error) {
@@ -254,19 +254,19 @@ const (
 	// PixbufRotateNone wraps GDK_PIXBUF_ROTATE_NONE
 	//
 	// No rotation.
-	PixbufRotateNone PixbufRotation = C.GDK_PIXBUF_ROTATE_NONE
+	PixbufRotateNone PixbufRotation = 0
 	// PixbufRotateCounterclockwise wraps GDK_PIXBUF_ROTATE_COUNTERCLOCKWISE
 	//
 	// Rotate by 90 degrees.
-	PixbufRotateCounterclockwise PixbufRotation = C.GDK_PIXBUF_ROTATE_COUNTERCLOCKWISE
+	PixbufRotateCounterclockwise PixbufRotation = 90
 	// PixbufRotateUpsidedown wraps GDK_PIXBUF_ROTATE_UPSIDEDOWN
 	//
 	// Rotate by 180 degrees.
-	PixbufRotateUpsidedown PixbufRotation = C.GDK_PIXBUF_ROTATE_UPSIDEDOWN
+	PixbufRotateUpsidedown PixbufRotation = 180
 	// PixbufRotateClockwise wraps GDK_PIXBUF_ROTATE_CLOCKWISE
 	//
 	// Rotate by 270 degrees.
-	PixbufRotateClockwise PixbufRotation = C.GDK_PIXBUF_ROTATE_CLOCKWISE
+	PixbufRotateClockwise PixbufRotation = 270
 )
 
 func marshalPixbufRotation(p unsafe.Pointer) (any, error) {
@@ -290,16 +290,16 @@ const (
 	// PixbufFormatWritable wraps GDK_PIXBUF_FORMAT_WRITABLE
 	//
 	// the module can write out images in the format.
-	PixbufFormatWritable PixbufFormatFlags = C.GDK_PIXBUF_FORMAT_WRITABLE
+	PixbufFormatWritable PixbufFormatFlags = 1
 	// PixbufFormatScalable wraps GDK_PIXBUF_FORMAT_SCALABLE
 	//
 	// the image format is scalable
-	PixbufFormatScalable PixbufFormatFlags = C.GDK_PIXBUF_FORMAT_SCALABLE
+	PixbufFormatScalable PixbufFormatFlags = 2
 	// PixbufFormatThreadsafe wraps GDK_PIXBUF_FORMAT_THREADSAFE
 	//
 	// the module is threadsafe. gdk-pixbuf
 	//     ignores modules that are not marked as threadsafe. (Since 2.28).
-	PixbufFormatThreadsafe PixbufFormatFlags = C.GDK_PIXBUF_FORMAT_THREADSAFE
+	PixbufFormatThreadsafe PixbufFormatFlags = 4
 )
 
 // Has returns true if p contains other

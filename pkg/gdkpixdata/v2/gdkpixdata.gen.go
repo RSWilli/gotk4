@@ -44,12 +44,12 @@ const (
 	// Generate pixbuf data stream (a single
 	//    string containing a serialized #GdkPixdata structure in network byte
 	//    order).
-	PixdataDumpPixdataStream PixdataDumpType = C.GDK_PIXDATA_DUMP_PIXDATA_STREAM
+	PixdataDumpPixdataStream PixdataDumpType = 0
 	// PixdataDumpPixdataStruct wraps GDK_PIXDATA_DUMP_PIXDATA_STRUCT
 	//
 	// Generate #GdkPixdata structure (needs
 	//    the #GdkPixdata structure definition from gdk-pixdata.h).
-	PixdataDumpPixdataStruct PixdataDumpType = C.GDK_PIXDATA_DUMP_PIXDATA_STRUCT
+	PixdataDumpPixdataStruct PixdataDumpType = 1
 	// PixdataDumpMacros wraps GDK_PIXDATA_DUMP_MACROS
 	//
 	// Generate &lt;function&gt;*_ROWSTRIDE&lt;/function&gt;,
@@ -57,30 +57,30 @@ const (
 	//    &lt;function&gt;*_BYTES_PER_PIXEL&lt;/function&gt; and
 	//    &lt;function&gt;*_RLE_PIXEL_DATA&lt;/function&gt; or &lt;function&gt;*_PIXEL_DATA&lt;/function&gt;
 	//    macro definitions for the image.
-	PixdataDumpMacros PixdataDumpType = C.GDK_PIXDATA_DUMP_MACROS
+	PixdataDumpMacros PixdataDumpType = 2
 	// PixdataDumpGTypes wraps GDK_PIXDATA_DUMP_GTYPES
 	//
 	// Generate GLib data types instead of
 	//    standard C data types.
-	PixdataDumpGTypes PixdataDumpType = C.GDK_PIXDATA_DUMP_GTYPES
+	PixdataDumpGTypes PixdataDumpType = 0
 	// PixdataDumpCtypes wraps GDK_PIXDATA_DUMP_CTYPES
 	//
 	// Generate standard C data types instead of
 	//    GLib data types.
-	PixdataDumpCtypes PixdataDumpType = C.GDK_PIXDATA_DUMP_CTYPES
+	PixdataDumpCtypes PixdataDumpType = 256
 	// PixdataDumpStatic wraps GDK_PIXDATA_DUMP_STATIC
 	//
 	// Generate static symbols.
-	PixdataDumpStatic PixdataDumpType = C.GDK_PIXDATA_DUMP_STATIC
+	PixdataDumpStatic PixdataDumpType = 512
 	// PixdataDumpConst wraps GDK_PIXDATA_DUMP_CONST
 	//
 	// Generate const symbols.
-	PixdataDumpConst PixdataDumpType = C.GDK_PIXDATA_DUMP_CONST
+	PixdataDumpConst PixdataDumpType = 1024
 	// PixdataDumpRLEDecoder wraps GDK_PIXDATA_DUMP_RLE_DECODER
 	//
 	// Provide a &lt;function&gt;*_RUN_LENGTH_DECODE(image_buf, rle_data, size, bpp)&lt;/function&gt;
 	//    macro definition  to  decode  run-length encoded image data.
-	PixdataDumpRLEDecoder PixdataDumpType = C.GDK_PIXDATA_DUMP_RLE_DECODER
+	PixdataDumpRLEDecoder PixdataDumpType = 65536
 )
 
 // Has returns true if p contains other
@@ -101,28 +101,28 @@ const (
 	// PixdataColorTypeRGB wraps GDK_PIXDATA_COLOR_TYPE_RGB
 	//
 	// each pixel has red, green and blue samples.
-	PixdataColorTypeRGB PixdataType = C.GDK_PIXDATA_COLOR_TYPE_RGB
+	PixdataColorTypeRGB PixdataType = 1
 	// PixdataColorTypeRGBA wraps GDK_PIXDATA_COLOR_TYPE_RGBA
 	//
 	// each pixel has red, green and blue samples
 	//    and an alpha value.
-	PixdataColorTypeRGBA PixdataType = C.GDK_PIXDATA_COLOR_TYPE_RGBA
+	PixdataColorTypeRGBA PixdataType = 2
 	// PixdataColorTypeMask wraps GDK_PIXDATA_COLOR_TYPE_MASK
 	//
 	// mask for the colortype flags of the enum.
-	PixdataColorTypeMask PixdataType = C.GDK_PIXDATA_COLOR_TYPE_MASK
+	PixdataColorTypeMask PixdataType = 255
 	// PixdataSampleWidth8 wraps GDK_PIXDATA_SAMPLE_WIDTH_8
 	//
 	// each sample has 8 bits.
-	PixdataSampleWidth8 PixdataType = C.GDK_PIXDATA_SAMPLE_WIDTH_8
+	PixdataSampleWidth8 PixdataType = 65536
 	// PixdataSampleWidthMask wraps GDK_PIXDATA_SAMPLE_WIDTH_MASK
 	//
 	// mask for the sample width flags of the enum.
-	PixdataSampleWidthMask PixdataType = C.GDK_PIXDATA_SAMPLE_WIDTH_MASK
+	PixdataSampleWidthMask PixdataType = 983040
 	// PixdataEncodingRaw wraps GDK_PIXDATA_ENCODING_RAW
 	//
 	// the pixel data is in raw form.
-	PixdataEncodingRaw PixdataType = C.GDK_PIXDATA_ENCODING_RAW
+	PixdataEncodingRaw PixdataType = 16777216
 	// PixdataEncodingRLE wraps GDK_PIXDATA_ENCODING_RLE
 	//
 	// the pixel data is run-length encoded. Runs may
@@ -130,11 +130,11 @@ const (
 	//    preceding the pixel data for the run. If a run is constant, its length
 	//    byte has the high bit set and the pixel data consists of a single pixel
 	//    which must be repeated.
-	PixdataEncodingRLE PixdataType = C.GDK_PIXDATA_ENCODING_RLE
+	PixdataEncodingRLE PixdataType = 33554432
 	// PixdataEncodingMask wraps GDK_PIXDATA_ENCODING_MASK
 	//
 	// mask for the encoding flags of the enum.
-	PixdataEncodingMask PixdataType = C.GDK_PIXDATA_ENCODING_MASK
+	PixdataEncodingMask PixdataType = 251658240
 )
 
 // Has returns true if p contains other

@@ -4777,47 +4777,47 @@ const (
 	// AxisIgnore wraps GDK_AXIS_IGNORE
 	//
 	// the axis is ignored.
-	AxisIgnore AxisUse = C.GDK_AXIS_IGNORE
+	AxisIgnore AxisUse = 0
 	// AxisX wraps GDK_AXIS_X
 	//
 	// the axis is used as the x axis.
-	AxisX AxisUse = C.GDK_AXIS_X
+	AxisX AxisUse = 1
 	// AxisY wraps GDK_AXIS_Y
 	//
 	// the axis is used as the y axis.
-	AxisY AxisUse = C.GDK_AXIS_Y
+	AxisY AxisUse = 2
 	// AxisPressure wraps GDK_AXIS_PRESSURE
 	//
 	// the axis is used for pressure information.
-	AxisPressure AxisUse = C.GDK_AXIS_PRESSURE
+	AxisPressure AxisUse = 3
 	// AxisXtilt wraps GDK_AXIS_XTILT
 	//
 	// the axis is used for x tilt information.
-	AxisXtilt AxisUse = C.GDK_AXIS_XTILT
+	AxisXtilt AxisUse = 4
 	// AxisYtilt wraps GDK_AXIS_YTILT
 	//
 	// the axis is used for y tilt information.
-	AxisYtilt AxisUse = C.GDK_AXIS_YTILT
+	AxisYtilt AxisUse = 5
 	// AxisWheel wraps GDK_AXIS_WHEEL
 	//
 	// the axis is used for wheel information.
-	AxisWheel AxisUse = C.GDK_AXIS_WHEEL
+	AxisWheel AxisUse = 6
 	// AxisDistance wraps GDK_AXIS_DISTANCE
 	//
 	// the axis is used for pen/tablet distance information. (Since: 3.22)
-	AxisDistance AxisUse = C.GDK_AXIS_DISTANCE
+	AxisDistance AxisUse = 7
 	// AxisRotation wraps GDK_AXIS_ROTATION
 	//
 	// the axis is used for pen rotation information. (Since: 3.22)
-	AxisRotation AxisUse = C.GDK_AXIS_ROTATION
+	AxisRotation AxisUse = 8
 	// AxisSlider wraps GDK_AXIS_SLIDER
 	//
 	// the axis is used for pen slider information. (Since: 3.22)
-	AxisSlider AxisUse = C.GDK_AXIS_SLIDER
+	AxisSlider AxisUse = 9
 	// AxisLast wraps GDK_AXIS_LAST
 	//
 	// a constant equal to the numerically highest axis value.
-	AxisLast AxisUse = C.GDK_AXIS_LAST
+	AxisLast AxisUse = 10
 )
 
 func marshalAxisUse(p unsafe.Pointer) (any, error) {
@@ -4843,13 +4843,13 @@ const (
 	// The values are stored with the least-significant byte
 	//   first. For instance, the 32-bit value 0xffeecc would be stored
 	//   in memory as 0xcc, 0xee, 0xff, 0x00.
-	LsbFirst ByteOrder = C.GDK_LSB_FIRST
+	LsbFirst ByteOrder = 0
 	// MsbFirst wraps GDK_MSB_FIRST
 	//
 	// The values are stored with the most-significant byte
 	//   first. For instance, the 32-bit value 0xffeecc would be stored
 	//   in memory as 0x00, 0xff, 0xee, 0xcc.
-	MsbFirst ByteOrder = C.GDK_MSB_FIRST
+	MsbFirst ByteOrder = 1
 )
 
 func marshalByteOrder(p unsafe.Pointer) (any, error) {
@@ -4872,44 +4872,44 @@ const (
 	// CrossingNormal wraps GDK_CROSSING_NORMAL
 	//
 	// crossing because of pointer motion.
-	CrossingNormal CrossingMode = C.GDK_CROSSING_NORMAL
+	CrossingNormal CrossingMode = 0
 	// CrossingGrab wraps GDK_CROSSING_GRAB
 	//
 	// crossing because a grab is activated.
-	CrossingGrab CrossingMode = C.GDK_CROSSING_GRAB
+	CrossingGrab CrossingMode = 1
 	// CrossingUngrab wraps GDK_CROSSING_UNGRAB
 	//
 	// crossing because a grab is deactivated.
-	CrossingUngrab CrossingMode = C.GDK_CROSSING_UNGRAB
+	CrossingUngrab CrossingMode = 2
 	// CrossingGTKGrab wraps GDK_CROSSING_GTK_GRAB
 	//
 	// crossing because a GTK+ grab is activated.
-	CrossingGTKGrab CrossingMode = C.GDK_CROSSING_GTK_GRAB
+	CrossingGTKGrab CrossingMode = 3
 	// CrossingGTKUngrab wraps GDK_CROSSING_GTK_UNGRAB
 	//
 	// crossing because a GTK+ grab is deactivated.
-	CrossingGTKUngrab CrossingMode = C.GDK_CROSSING_GTK_UNGRAB
+	CrossingGTKUngrab CrossingMode = 4
 	// CrossingStateChanged wraps GDK_CROSSING_STATE_CHANGED
 	//
 	// crossing because a GTK+ widget changed
 	//   state (e.g. sensitivity).
-	CrossingStateChanged CrossingMode = C.GDK_CROSSING_STATE_CHANGED
+	CrossingStateChanged CrossingMode = 5
 	// CrossingTouchBegin wraps GDK_CROSSING_TOUCH_BEGIN
 	//
 	// crossing because a touch sequence has begun,
 	//   this event is synthetic as the pointer might have not left the window.
-	CrossingTouchBegin CrossingMode = C.GDK_CROSSING_TOUCH_BEGIN
+	CrossingTouchBegin CrossingMode = 6
 	// CrossingTouchEnd wraps GDK_CROSSING_TOUCH_END
 	//
 	// crossing because a touch sequence has ended,
 	//   this event is synthetic as the pointer might have not left the window.
-	CrossingTouchEnd CrossingMode = C.GDK_CROSSING_TOUCH_END
+	CrossingTouchEnd CrossingMode = 7
 	// CrossingDeviceSwitch wraps GDK_CROSSING_DEVICE_SWITCH
 	//
 	// crossing because of a device switch (i.e.
 	//   a mouse taking control of the pointer after a touch device), this event
 	//   is synthetic as the pointer didn’t leave the window.
-	CrossingDeviceSwitch CrossingMode = C.GDK_CROSSING_DEVICE_SWITCH
+	CrossingDeviceSwitch CrossingMode = 8
 )
 
 func marshalCrossingMode(p unsafe.Pointer) (any, error) {
@@ -4937,324 +4937,324 @@ const (
 	// XCursor wraps GDK_X_CURSOR
 	//
 	// ![](X_cursor.png)
-	XCursor CursorType = C.GDK_X_CURSOR
+	XCursor CursorType = 0
 	// Arrow wraps GDK_ARROW
 	//
 	// ![](arrow.png)
-	Arrow CursorType = C.GDK_ARROW
+	Arrow CursorType = 2
 	// BasedArrowDown wraps GDK_BASED_ARROW_DOWN
 	//
 	// ![](based_arrow_down.png)
-	BasedArrowDown CursorType = C.GDK_BASED_ARROW_DOWN
+	BasedArrowDown CursorType = 4
 	// BasedArrowUp wraps GDK_BASED_ARROW_UP
 	//
 	// ![](based_arrow_up.png)
-	BasedArrowUp CursorType = C.GDK_BASED_ARROW_UP
+	BasedArrowUp CursorType = 6
 	// Boat wraps GDK_BOAT
 	//
 	// ![](boat.png)
-	Boat CursorType = C.GDK_BOAT
+	Boat CursorType = 8
 	// Bogosity wraps GDK_BOGOSITY
 	//
 	// ![](bogosity.png)
-	Bogosity CursorType = C.GDK_BOGOSITY
+	Bogosity CursorType = 10
 	// BottomLeftCorner wraps GDK_BOTTOM_LEFT_CORNER
 	//
 	// ![](bottom_left_corner.png)
-	BottomLeftCorner CursorType = C.GDK_BOTTOM_LEFT_CORNER
+	BottomLeftCorner CursorType = 12
 	// BottomRightCorner wraps GDK_BOTTOM_RIGHT_CORNER
 	//
 	// ![](bottom_right_corner.png)
-	BottomRightCorner CursorType = C.GDK_BOTTOM_RIGHT_CORNER
+	BottomRightCorner CursorType = 14
 	// BottomSide wraps GDK_BOTTOM_SIDE
 	//
 	// ![](bottom_side.png)
-	BottomSide CursorType = C.GDK_BOTTOM_SIDE
+	BottomSide CursorType = 16
 	// BottomTee wraps GDK_BOTTOM_TEE
 	//
 	// ![](bottom_tee.png)
-	BottomTee CursorType = C.GDK_BOTTOM_TEE
+	BottomTee CursorType = 18
 	// BoxSpiral wraps GDK_BOX_SPIRAL
 	//
 	// ![](box_spiral.png)
-	BoxSpiral CursorType = C.GDK_BOX_SPIRAL
+	BoxSpiral CursorType = 20
 	// CenterPtr wraps GDK_CENTER_PTR
 	//
 	// ![](center_ptr.png)
-	CenterPtr CursorType = C.GDK_CENTER_PTR
+	CenterPtr CursorType = 22
 	// Circle wraps GDK_CIRCLE
 	//
 	// ![](circle.png)
-	Circle CursorType = C.GDK_CIRCLE
+	Circle CursorType = 24
 	// Clock wraps GDK_CLOCK
 	//
 	// ![](clock.png)
-	Clock CursorType = C.GDK_CLOCK
+	Clock CursorType = 26
 	// CoffeeMug wraps GDK_COFFEE_MUG
 	//
 	// ![](coffee_mug.png)
-	CoffeeMug CursorType = C.GDK_COFFEE_MUG
+	CoffeeMug CursorType = 28
 	// Cross wraps GDK_CROSS
 	//
 	// ![](cross.png)
-	Cross CursorType = C.GDK_CROSS
+	Cross CursorType = 30
 	// CrossReverse wraps GDK_CROSS_REVERSE
 	//
 	// ![](cross_reverse.png)
-	CrossReverse CursorType = C.GDK_CROSS_REVERSE
+	CrossReverse CursorType = 32
 	// Crosshair wraps GDK_CROSSHAIR
 	//
 	// ![](crosshair.png)
-	Crosshair CursorType = C.GDK_CROSSHAIR
+	Crosshair CursorType = 34
 	// DiamondCross wraps GDK_DIAMOND_CROSS
 	//
 	// ![](diamond_cross.png)
-	DiamondCross CursorType = C.GDK_DIAMOND_CROSS
+	DiamondCross CursorType = 36
 	// Dot wraps GDK_DOT
 	//
 	// ![](dot.png)
-	Dot CursorType = C.GDK_DOT
+	Dot CursorType = 38
 	// Dotbox wraps GDK_DOTBOX
 	//
 	// ![](dotbox.png)
-	Dotbox CursorType = C.GDK_DOTBOX
+	Dotbox CursorType = 40
 	// DoubleArrow wraps GDK_DOUBLE_ARROW
 	//
 	// ![](double_arrow.png)
-	DoubleArrow CursorType = C.GDK_DOUBLE_ARROW
+	DoubleArrow CursorType = 42
 	// DraftLarge wraps GDK_DRAFT_LARGE
 	//
 	// ![](draft_large.png)
-	DraftLarge CursorType = C.GDK_DRAFT_LARGE
+	DraftLarge CursorType = 44
 	// DraftSmall wraps GDK_DRAFT_SMALL
 	//
 	// ![](draft_small.png)
-	DraftSmall CursorType = C.GDK_DRAFT_SMALL
+	DraftSmall CursorType = 46
 	// DrapedBox wraps GDK_DRAPED_BOX
 	//
 	// ![](draped_box.png)
-	DrapedBox CursorType = C.GDK_DRAPED_BOX
+	DrapedBox CursorType = 48
 	// Exchange wraps GDK_EXCHANGE
 	//
 	// ![](exchange.png)
-	Exchange CursorType = C.GDK_EXCHANGE
+	Exchange CursorType = 50
 	// Fleur wraps GDK_FLEUR
 	//
 	// ![](fleur.png)
-	Fleur CursorType = C.GDK_FLEUR
+	Fleur CursorType = 52
 	// Gobbler wraps GDK_GOBBLER
 	//
 	// ![](gobbler.png)
-	Gobbler CursorType = C.GDK_GOBBLER
+	Gobbler CursorType = 54
 	// Gumby wraps GDK_GUMBY
 	//
 	// ![](gumby.png)
-	Gumby CursorType = C.GDK_GUMBY
+	Gumby CursorType = 56
 	// Hand1 wraps GDK_HAND1
 	//
 	// ![](hand1.png)
-	Hand1 CursorType = C.GDK_HAND1
+	Hand1 CursorType = 58
 	// Hand2 wraps GDK_HAND2
 	//
 	// ![](hand2.png)
-	Hand2 CursorType = C.GDK_HAND2
+	Hand2 CursorType = 60
 	// Heart wraps GDK_HEART
 	//
 	// ![](heart.png)
-	Heart CursorType = C.GDK_HEART
+	Heart CursorType = 62
 	// Icon wraps GDK_ICON
 	//
 	// ![](icon.png)
-	Icon CursorType = C.GDK_ICON
+	Icon CursorType = 64
 	// IronCross wraps GDK_IRON_CROSS
 	//
 	// ![](iron_cross.png)
-	IronCross CursorType = C.GDK_IRON_CROSS
+	IronCross CursorType = 66
 	// LeftPtr wraps GDK_LEFT_PTR
 	//
 	// ![](left_ptr.png)
-	LeftPtr CursorType = C.GDK_LEFT_PTR
+	LeftPtr CursorType = 68
 	// LeftSide wraps GDK_LEFT_SIDE
 	//
 	// ![](left_side.png)
-	LeftSide CursorType = C.GDK_LEFT_SIDE
+	LeftSide CursorType = 70
 	// LeftTee wraps GDK_LEFT_TEE
 	//
 	// ![](left_tee.png)
-	LeftTee CursorType = C.GDK_LEFT_TEE
+	LeftTee CursorType = 72
 	// Leftbutton wraps GDK_LEFTBUTTON
 	//
 	// ![](leftbutton.png)
-	Leftbutton CursorType = C.GDK_LEFTBUTTON
+	Leftbutton CursorType = 74
 	// LlAngle wraps GDK_LL_ANGLE
 	//
 	// ![](ll_angle.png)
-	LlAngle CursorType = C.GDK_LL_ANGLE
+	LlAngle CursorType = 76
 	// LrAngle wraps GDK_LR_ANGLE
 	//
 	// ![](lr_angle.png)
-	LrAngle CursorType = C.GDK_LR_ANGLE
+	LrAngle CursorType = 78
 	// Man wraps GDK_MAN
 	//
 	// ![](man.png)
-	Man CursorType = C.GDK_MAN
+	Man CursorType = 80
 	// Middlebutton wraps GDK_MIDDLEBUTTON
 	//
 	// ![](middlebutton.png)
-	Middlebutton CursorType = C.GDK_MIDDLEBUTTON
+	Middlebutton CursorType = 82
 	// Mouse wraps GDK_MOUSE
 	//
 	// ![](mouse.png)
-	Mouse CursorType = C.GDK_MOUSE
+	Mouse CursorType = 84
 	// Pencil wraps GDK_PENCIL
 	//
 	// ![](pencil.png)
-	Pencil CursorType = C.GDK_PENCIL
+	Pencil CursorType = 86
 	// Pirate wraps GDK_PIRATE
 	//
 	// ![](pirate.png)
-	Pirate CursorType = C.GDK_PIRATE
+	Pirate CursorType = 88
 	// Plus wraps GDK_PLUS
 	//
 	// ![](plus.png)
-	Plus CursorType = C.GDK_PLUS
+	Plus CursorType = 90
 	// QuestionArrow wraps GDK_QUESTION_ARROW
 	//
 	// ![](question_arrow.png)
-	QuestionArrow CursorType = C.GDK_QUESTION_ARROW
+	QuestionArrow CursorType = 92
 	// RightPtr wraps GDK_RIGHT_PTR
 	//
 	// ![](right_ptr.png)
-	RightPtr CursorType = C.GDK_RIGHT_PTR
+	RightPtr CursorType = 94
 	// RightSide wraps GDK_RIGHT_SIDE
 	//
 	// ![](right_side.png)
-	RightSide CursorType = C.GDK_RIGHT_SIDE
+	RightSide CursorType = 96
 	// RightTee wraps GDK_RIGHT_TEE
 	//
 	// ![](right_tee.png)
-	RightTee CursorType = C.GDK_RIGHT_TEE
+	RightTee CursorType = 98
 	// Rightbutton wraps GDK_RIGHTBUTTON
 	//
 	// ![](rightbutton.png)
-	Rightbutton CursorType = C.GDK_RIGHTBUTTON
+	Rightbutton CursorType = 100
 	// RTLLogo wraps GDK_RTL_LOGO
 	//
 	// ![](rtl_logo.png)
-	RTLLogo CursorType = C.GDK_RTL_LOGO
+	RTLLogo CursorType = 102
 	// Sailboat wraps GDK_SAILBOAT
 	//
 	// ![](sailboat.png)
-	Sailboat CursorType = C.GDK_SAILBOAT
+	Sailboat CursorType = 104
 	// SbDownArrow wraps GDK_SB_DOWN_ARROW
 	//
 	// ![](sb_down_arrow.png)
-	SbDownArrow CursorType = C.GDK_SB_DOWN_ARROW
+	SbDownArrow CursorType = 106
 	// SbHDoubleArrow wraps GDK_SB_H_DOUBLE_ARROW
 	//
 	// ![](sb_h_double_arrow.png)
-	SbHDoubleArrow CursorType = C.GDK_SB_H_DOUBLE_ARROW
+	SbHDoubleArrow CursorType = 108
 	// SbLeftArrow wraps GDK_SB_LEFT_ARROW
 	//
 	// ![](sb_left_arrow.png)
-	SbLeftArrow CursorType = C.GDK_SB_LEFT_ARROW
+	SbLeftArrow CursorType = 110
 	// SbRightArrow wraps GDK_SB_RIGHT_ARROW
 	//
 	// ![](sb_right_arrow.png)
-	SbRightArrow CursorType = C.GDK_SB_RIGHT_ARROW
+	SbRightArrow CursorType = 112
 	// SbUpArrow wraps GDK_SB_UP_ARROW
 	//
 	// ![](sb_up_arrow.png)
-	SbUpArrow CursorType = C.GDK_SB_UP_ARROW
+	SbUpArrow CursorType = 114
 	// SbVDoubleArrow wraps GDK_SB_V_DOUBLE_ARROW
 	//
 	// ![](sb_v_double_arrow.png)
-	SbVDoubleArrow CursorType = C.GDK_SB_V_DOUBLE_ARROW
+	SbVDoubleArrow CursorType = 116
 	// Shuttle wraps GDK_SHUTTLE
 	//
 	// ![](shuttle.png)
-	Shuttle CursorType = C.GDK_SHUTTLE
+	Shuttle CursorType = 118
 	// Sizing wraps GDK_SIZING
 	//
 	// ![](sizing.png)
-	Sizing CursorType = C.GDK_SIZING
+	Sizing CursorType = 120
 	// Spider wraps GDK_SPIDER
 	//
 	// ![](spider.png)
-	Spider CursorType = C.GDK_SPIDER
+	Spider CursorType = 122
 	// Spraycan wraps GDK_SPRAYCAN
 	//
 	// ![](spraycan.png)
-	Spraycan CursorType = C.GDK_SPRAYCAN
+	Spraycan CursorType = 124
 	// Star wraps GDK_STAR
 	//
 	// ![](star.png)
-	Star CursorType = C.GDK_STAR
+	Star CursorType = 126
 	// Target wraps GDK_TARGET
 	//
 	// ![](target.png)
-	Target CursorType = C.GDK_TARGET
+	Target CursorType = 128
 	// Tcross wraps GDK_TCROSS
 	//
 	// ![](tcross.png)
-	Tcross CursorType = C.GDK_TCROSS
+	Tcross CursorType = 130
 	// TopLeftArrow wraps GDK_TOP_LEFT_ARROW
 	//
 	// ![](top_left_arrow.png)
-	TopLeftArrow CursorType = C.GDK_TOP_LEFT_ARROW
+	TopLeftArrow CursorType = 132
 	// TopLeftCorner wraps GDK_TOP_LEFT_CORNER
 	//
 	// ![](top_left_corner.png)
-	TopLeftCorner CursorType = C.GDK_TOP_LEFT_CORNER
+	TopLeftCorner CursorType = 134
 	// TopRightCorner wraps GDK_TOP_RIGHT_CORNER
 	//
 	// ![](top_right_corner.png)
-	TopRightCorner CursorType = C.GDK_TOP_RIGHT_CORNER
+	TopRightCorner CursorType = 136
 	// TopSide wraps GDK_TOP_SIDE
 	//
 	// ![](top_side.png)
-	TopSide CursorType = C.GDK_TOP_SIDE
+	TopSide CursorType = 138
 	// TopTee wraps GDK_TOP_TEE
 	//
 	// ![](top_tee.png)
-	TopTee CursorType = C.GDK_TOP_TEE
+	TopTee CursorType = 140
 	// Trek wraps GDK_TREK
 	//
 	// ![](trek.png)
-	Trek CursorType = C.GDK_TREK
+	Trek CursorType = 142
 	// UlAngle wraps GDK_UL_ANGLE
 	//
 	// ![](ul_angle.png)
-	UlAngle CursorType = C.GDK_UL_ANGLE
+	UlAngle CursorType = 144
 	// Umbrella wraps GDK_UMBRELLA
 	//
 	// ![](umbrella.png)
-	Umbrella CursorType = C.GDK_UMBRELLA
+	Umbrella CursorType = 146
 	// UrAngle wraps GDK_UR_ANGLE
 	//
 	// ![](ur_angle.png)
-	UrAngle CursorType = C.GDK_UR_ANGLE
+	UrAngle CursorType = 148
 	// Watch wraps GDK_WATCH
 	//
 	// ![](watch.png)
-	Watch CursorType = C.GDK_WATCH
+	Watch CursorType = 150
 	// Xterm wraps GDK_XTERM
 	//
 	// ![](xterm.png)
-	Xterm CursorType = C.GDK_XTERM
+	Xterm CursorType = 152
 	// LastCursor wraps GDK_LAST_CURSOR
 	//
 	// last cursor type
-	LastCursor CursorType = C.GDK_LAST_CURSOR
+	LastCursor CursorType = 153
 	// BlankCursor wraps GDK_BLANK_CURSOR
 	//
 	// Blank cursor. Since 2.16
-	BlankCursor CursorType = C.GDK_BLANK_CURSOR
+	BlankCursor CursorType = -2
 	// CursorIsPixmap wraps GDK_CURSOR_IS_PIXMAP
 	//
 	// type of cursors constructed with
 	//   gdk_cursor_new_from_pixbuf()
-	CursorIsPixmap CursorType = C.GDK_CURSOR_IS_PIXMAP
+	CursorIsPixmap CursorType = -1
 )
 
 func marshalCursorType(p unsafe.Pointer) (any, error) {
@@ -5277,15 +5277,15 @@ const (
 	// DevicePadFeatureButton wraps GDK_DEVICE_PAD_FEATURE_BUTTON
 	//
 	// a button
-	DevicePadFeatureButton DevicePadFeature = C.GDK_DEVICE_PAD_FEATURE_BUTTON
+	DevicePadFeatureButton DevicePadFeature = 0
 	// DevicePadFeatureRing wraps GDK_DEVICE_PAD_FEATURE_RING
 	//
 	// a ring-shaped interactive area
-	DevicePadFeatureRing DevicePadFeature = C.GDK_DEVICE_PAD_FEATURE_RING
+	DevicePadFeatureRing DevicePadFeature = 1
 	// DevicePadFeatureStrip wraps GDK_DEVICE_PAD_FEATURE_STRIP
 	//
 	// a straight interactive area
-	DevicePadFeatureStrip DevicePadFeature = C.GDK_DEVICE_PAD_FEATURE_STRIP
+	DevicePadFeatureStrip DevicePadFeature = 2
 )
 
 func marshalDevicePadFeature(p unsafe.Pointer) (any, error) {
@@ -5309,35 +5309,35 @@ const (
 	// DeviceToolTypeUnknown wraps GDK_DEVICE_TOOL_TYPE_UNKNOWN
 	//
 	// Tool is of an unknown type.
-	DeviceToolTypeUnknown DeviceToolType = C.GDK_DEVICE_TOOL_TYPE_UNKNOWN
+	DeviceToolTypeUnknown DeviceToolType = 0
 	// DeviceToolTypePen wraps GDK_DEVICE_TOOL_TYPE_PEN
 	//
 	// Tool is a standard tablet stylus.
-	DeviceToolTypePen DeviceToolType = C.GDK_DEVICE_TOOL_TYPE_PEN
+	DeviceToolTypePen DeviceToolType = 1
 	// DeviceToolTypeEraser wraps GDK_DEVICE_TOOL_TYPE_ERASER
 	//
 	// Tool is standard tablet eraser.
-	DeviceToolTypeEraser DeviceToolType = C.GDK_DEVICE_TOOL_TYPE_ERASER
+	DeviceToolTypeEraser DeviceToolType = 2
 	// DeviceToolTypeBrush wraps GDK_DEVICE_TOOL_TYPE_BRUSH
 	//
 	// Tool is a brush stylus.
-	DeviceToolTypeBrush DeviceToolType = C.GDK_DEVICE_TOOL_TYPE_BRUSH
+	DeviceToolTypeBrush DeviceToolType = 3
 	// DeviceToolTypePencil wraps GDK_DEVICE_TOOL_TYPE_PENCIL
 	//
 	// Tool is a pencil stylus.
-	DeviceToolTypePencil DeviceToolType = C.GDK_DEVICE_TOOL_TYPE_PENCIL
+	DeviceToolTypePencil DeviceToolType = 4
 	// DeviceToolTypeAirbrush wraps GDK_DEVICE_TOOL_TYPE_AIRBRUSH
 	//
 	// Tool is an airbrush stylus.
-	DeviceToolTypeAirbrush DeviceToolType = C.GDK_DEVICE_TOOL_TYPE_AIRBRUSH
+	DeviceToolTypeAirbrush DeviceToolType = 5
 	// DeviceToolTypeMouse wraps GDK_DEVICE_TOOL_TYPE_MOUSE
 	//
 	// Tool is a mouse.
-	DeviceToolTypeMouse DeviceToolType = C.GDK_DEVICE_TOOL_TYPE_MOUSE
+	DeviceToolTypeMouse DeviceToolType = 6
 	// DeviceToolTypeLens wraps GDK_DEVICE_TOOL_TYPE_LENS
 	//
 	// Tool is a lens cursor.
-	DeviceToolTypeLens DeviceToolType = C.GDK_DEVICE_TOOL_TYPE_LENS
+	DeviceToolTypeLens DeviceToolType = 7
 )
 
 func marshalDeviceToolType(p unsafe.Pointer) (any, error) {
@@ -5362,16 +5362,16 @@ const (
 	//
 	// Device is a master (or virtual) device. There will
 	//                          be an associated focus indicator on the screen.
-	DeviceTypeMaster DeviceType = C.GDK_DEVICE_TYPE_MASTER
+	DeviceTypeMaster DeviceType = 0
 	// DeviceTypeSlave wraps GDK_DEVICE_TYPE_SLAVE
 	//
 	// Device is a slave (or physical) device.
-	DeviceTypeSlave DeviceType = C.GDK_DEVICE_TYPE_SLAVE
+	DeviceTypeSlave DeviceType = 1
 	// DeviceTypeFloating wraps GDK_DEVICE_TYPE_FLOATING
 	//
 	// Device is a physical device, currently not attached to
 	//                            any virtual device.
-	DeviceTypeFloating DeviceType = C.GDK_DEVICE_TYPE_FLOATING
+	DeviceTypeFloating DeviceType = 2
 )
 
 func marshalDeviceType(p unsafe.Pointer) (any, error) {
@@ -5394,15 +5394,15 @@ const (
 	// DragCancelNoTarget wraps GDK_DRAG_CANCEL_NO_TARGET
 	//
 	// There is no suitable drop target.
-	DragCancelNoTarget DragCancelReason = C.GDK_DRAG_CANCEL_NO_TARGET
+	DragCancelNoTarget DragCancelReason = 0
 	// DragCancelUserCancelled wraps GDK_DRAG_CANCEL_USER_CANCELLED
 	//
 	// Drag cancelled by the user
-	DragCancelUserCancelled DragCancelReason = C.GDK_DRAG_CANCEL_USER_CANCELLED
+	DragCancelUserCancelled DragCancelReason = 1
 	// DragCancelError wraps GDK_DRAG_CANCEL_ERROR
 	//
 	// Unspecified error.
-	DragCancelError DragCancelReason = C.GDK_DRAG_CANCEL_ERROR
+	DragCancelError DragCancelReason = 2
 )
 
 func marshalDragCancelReason(p unsafe.Pointer) (any, error) {
@@ -5426,36 +5426,36 @@ const (
 	// DragProtoNone wraps GDK_DRAG_PROTO_NONE
 	//
 	// no protocol.
-	DragProtoNone DragProtocol = C.GDK_DRAG_PROTO_NONE
+	DragProtoNone DragProtocol = 0
 	// DragProtoMotif wraps GDK_DRAG_PROTO_MOTIF
 	//
 	// The Motif DND protocol. No longer supported
-	DragProtoMotif DragProtocol = C.GDK_DRAG_PROTO_MOTIF
+	DragProtoMotif DragProtocol = 1
 	// DragProtoXdnd wraps GDK_DRAG_PROTO_XDND
 	//
 	// The Xdnd protocol.
-	DragProtoXdnd DragProtocol = C.GDK_DRAG_PROTO_XDND
+	DragProtoXdnd DragProtocol = 2
 	// DragProtoRootwin wraps GDK_DRAG_PROTO_ROOTWIN
 	//
 	// An extension to the Xdnd protocol for
 	//  unclaimed root window drops.
-	DragProtoRootwin DragProtocol = C.GDK_DRAG_PROTO_ROOTWIN
+	DragProtoRootwin DragProtocol = 3
 	// DragProtoWin32Dropfiles wraps GDK_DRAG_PROTO_WIN32_DROPFILES
 	//
 	// The simple WM_DROPFILES protocol.
-	DragProtoWin32Dropfiles DragProtocol = C.GDK_DRAG_PROTO_WIN32_DROPFILES
+	DragProtoWin32Dropfiles DragProtocol = 4
 	// DragProtoOle2 wraps GDK_DRAG_PROTO_OLE2
 	//
 	// The complex OLE2 DND protocol (not implemented).
-	DragProtoOle2 DragProtocol = C.GDK_DRAG_PROTO_OLE2
+	DragProtoOle2 DragProtocol = 5
 	// DragProtoLocal wraps GDK_DRAG_PROTO_LOCAL
 	//
 	// Intra-application DND.
-	DragProtoLocal DragProtocol = C.GDK_DRAG_PROTO_LOCAL
+	DragProtoLocal DragProtocol = 6
 	// DragProtoWayland wraps GDK_DRAG_PROTO_WAYLAND
 	//
 	// Wayland DND protocol.
-	DragProtoWayland DragProtocol = C.GDK_DRAG_PROTO_WAYLAND
+	DragProtoWayland DragProtocol = 7
 )
 
 func marshalDragProtocol(p unsafe.Pointer) (any, error) {
@@ -5489,233 +5489,233 @@ const (
 	// NothingType wraps GDK_NOTHING_TYPE
 	//
 	// a special code to indicate a null event.
-	NothingType EventType = C.GDK_NOTHING_TYPE
+	NothingType EventType = -1
 	// DeleteType wraps GDK_DELETE_TYPE
 	//
 	// the window manager has requested that the toplevel window be
 	//   hidden or destroyed, usually when the user clicks on a special icon in the
 	//   title bar.
-	DeleteType EventType = C.GDK_DELETE_TYPE
+	DeleteType EventType = 0
 	// DestroyType wraps GDK_DESTROY_TYPE
 	//
 	// the window has been destroyed.
-	DestroyType EventType = C.GDK_DESTROY_TYPE
+	DestroyType EventType = 1
 	// ExposeType wraps GDK_EXPOSE_TYPE
 	//
 	// all or part of the window has become visible and needs to be
 	//   redrawn.
-	ExposeType EventType = C.GDK_EXPOSE_TYPE
+	ExposeType EventType = 2
 	// MotionNotifyType wraps GDK_MOTION_NOTIFY_TYPE
 	//
 	// the pointer (usually a mouse) has moved.
-	MotionNotifyType EventType = C.GDK_MOTION_NOTIFY_TYPE
+	MotionNotifyType EventType = 3
 	// ButtonPressType wraps GDK_BUTTON_PRESS_TYPE
 	//
 	// a mouse button has been pressed.
-	ButtonPressType EventType = C.GDK_BUTTON_PRESS_TYPE
+	ButtonPressType EventType = 4
 	// TwoButtonPressType wraps GDK_2BUTTON_PRESS_TYPE
 	//
 	// a mouse button has been double-clicked (clicked twice
 	//   within a short period of time). Note that each click also generates a
 	//   %GDK_BUTTON_PRESS event.
-	TwoButtonPressType EventType = C.GDK_2BUTTON_PRESS_TYPE
+	TwoButtonPressType EventType = 5
 	// DoubleButtonPressType wraps GDK_DOUBLE_BUTTON_PRESS_TYPE
 	//
 	// alias for %GDK_2BUTTON_PRESS, added in 3.6.
-	DoubleButtonPressType EventType = C.GDK_DOUBLE_BUTTON_PRESS_TYPE
+	DoubleButtonPressType EventType = 5
 	// ThreeButtonPressType wraps GDK_3BUTTON_PRESS_TYPE
 	//
 	// a mouse button has been clicked 3 times in a short period
 	//   of time. Note that each click also generates a %GDK_BUTTON_PRESS event.
-	ThreeButtonPressType EventType = C.GDK_3BUTTON_PRESS_TYPE
+	ThreeButtonPressType EventType = 6
 	// TripleButtonPressType wraps GDK_TRIPLE_BUTTON_PRESS_TYPE
 	//
 	// alias for %GDK_3BUTTON_PRESS, added in 3.6.
-	TripleButtonPressType EventType = C.GDK_TRIPLE_BUTTON_PRESS_TYPE
+	TripleButtonPressType EventType = 6
 	// ButtonReleaseType wraps GDK_BUTTON_RELEASE_TYPE
 	//
 	// a mouse button has been released.
-	ButtonReleaseType EventType = C.GDK_BUTTON_RELEASE_TYPE
+	ButtonReleaseType EventType = 7
 	// KeyPressType wraps GDK_KEY_PRESS_TYPE
 	//
 	// a key has been pressed.
-	KeyPressType EventType = C.GDK_KEY_PRESS_TYPE
+	KeyPressType EventType = 8
 	// KeyReleaseType wraps GDK_KEY_RELEASE_TYPE
 	//
 	// a key has been released.
-	KeyReleaseType EventType = C.GDK_KEY_RELEASE_TYPE
+	KeyReleaseType EventType = 9
 	// EnterNotifyType wraps GDK_ENTER_NOTIFY_TYPE
 	//
 	// the pointer has entered the window.
-	EnterNotifyType EventType = C.GDK_ENTER_NOTIFY_TYPE
+	EnterNotifyType EventType = 10
 	// LeaveNotifyType wraps GDK_LEAVE_NOTIFY_TYPE
 	//
 	// the pointer has left the window.
-	LeaveNotifyType EventType = C.GDK_LEAVE_NOTIFY_TYPE
+	LeaveNotifyType EventType = 11
 	// FocusChangeType wraps GDK_FOCUS_CHANGE_TYPE
 	//
 	// the keyboard focus has entered or left the window.
-	FocusChangeType EventType = C.GDK_FOCUS_CHANGE_TYPE
+	FocusChangeType EventType = 12
 	// ConfigureType wraps GDK_CONFIGURE_TYPE
 	//
 	// the size, position or stacking order of the window has changed.
 	//   Note that GTK+ discards these events for %GDK_WINDOW_CHILD windows.
-	ConfigureType EventType = C.GDK_CONFIGURE_TYPE
+	ConfigureType EventType = 13
 	// MapType wraps GDK_MAP_TYPE
 	//
 	// the window has been mapped.
-	MapType EventType = C.GDK_MAP_TYPE
+	MapType EventType = 14
 	// UnmapType wraps GDK_UNMAP_TYPE
 	//
 	// the window has been unmapped.
-	UnmapType EventType = C.GDK_UNMAP_TYPE
+	UnmapType EventType = 15
 	// PropertyNotifyType wraps GDK_PROPERTY_NOTIFY_TYPE
 	//
 	// a property on the window has been changed or deleted.
-	PropertyNotifyType EventType = C.GDK_PROPERTY_NOTIFY_TYPE
+	PropertyNotifyType EventType = 16
 	// SelectionClearType wraps GDK_SELECTION_CLEAR_TYPE
 	//
 	// the application has lost ownership of a selection.
-	SelectionClearType EventType = C.GDK_SELECTION_CLEAR_TYPE
+	SelectionClearType EventType = 17
 	// SelectionRequestType wraps GDK_SELECTION_REQUEST_TYPE
 	//
 	// another application has requested a selection.
-	SelectionRequestType EventType = C.GDK_SELECTION_REQUEST_TYPE
+	SelectionRequestType EventType = 18
 	// SelectionNotifyType wraps GDK_SELECTION_NOTIFY_TYPE
 	//
 	// a selection has been received.
-	SelectionNotifyType EventType = C.GDK_SELECTION_NOTIFY_TYPE
+	SelectionNotifyType EventType = 19
 	// ProximityInType wraps GDK_PROXIMITY_IN_TYPE
 	//
 	// an input device has moved into contact with a sensing
 	//   surface (e.g. a touchscreen or graphics tablet).
-	ProximityInType EventType = C.GDK_PROXIMITY_IN_TYPE
+	ProximityInType EventType = 20
 	// ProximityOutType wraps GDK_PROXIMITY_OUT_TYPE
 	//
 	// an input device has moved out of contact with a sensing
 	//   surface.
-	ProximityOutType EventType = C.GDK_PROXIMITY_OUT_TYPE
+	ProximityOutType EventType = 21
 	// DragEnterType wraps GDK_DRAG_ENTER_TYPE
 	//
 	// the mouse has entered the window while a drag is in progress.
-	DragEnterType EventType = C.GDK_DRAG_ENTER_TYPE
+	DragEnterType EventType = 22
 	// DragLeaveType wraps GDK_DRAG_LEAVE_TYPE
 	//
 	// the mouse has left the window while a drag is in progress.
-	DragLeaveType EventType = C.GDK_DRAG_LEAVE_TYPE
+	DragLeaveType EventType = 23
 	// DragMotionType wraps GDK_DRAG_MOTION_TYPE
 	//
 	// the mouse has moved in the window while a drag is in
 	//   progress.
-	DragMotionType EventType = C.GDK_DRAG_MOTION_TYPE
+	DragMotionType EventType = 24
 	// DragStatusType wraps GDK_DRAG_STATUS_TYPE
 	//
 	// the status of the drag operation initiated by the window
 	//   has changed.
-	DragStatusType EventType = C.GDK_DRAG_STATUS_TYPE
+	DragStatusType EventType = 25
 	// DropStartType wraps GDK_DROP_START_TYPE
 	//
 	// a drop operation onto the window has started.
-	DropStartType EventType = C.GDK_DROP_START_TYPE
+	DropStartType EventType = 26
 	// DropFinishedType wraps GDK_DROP_FINISHED_TYPE
 	//
 	// the drop operation initiated by the window has completed.
-	DropFinishedType EventType = C.GDK_DROP_FINISHED_TYPE
+	DropFinishedType EventType = 27
 	// ClientEventType wraps GDK_CLIENT_EVENT_TYPE
 	//
 	// a message has been received from another application.
-	ClientEventType EventType = C.GDK_CLIENT_EVENT_TYPE
+	ClientEventType EventType = 28
 	// VisibilityNotifyType wraps GDK_VISIBILITY_NOTIFY_TYPE
 	//
 	// the window visibility status has changed.
-	VisibilityNotifyType EventType = C.GDK_VISIBILITY_NOTIFY_TYPE
+	VisibilityNotifyType EventType = 29
 	// ScrollType wraps GDK_SCROLL_TYPE
 	//
 	// the scroll wheel was turned
-	ScrollType EventType = C.GDK_SCROLL_TYPE
+	ScrollType EventType = 31
 	// WindowStateType wraps GDK_WINDOW_STATE_TYPE
 	//
 	// the state of a window has changed. See #GdkWindowState
 	//   for the possible window states
-	WindowStateType EventType = C.GDK_WINDOW_STATE_TYPE
+	WindowStateType EventType = 32
 	// SettingType wraps GDK_SETTING_TYPE
 	//
 	// a setting has been modified.
-	SettingType EventType = C.GDK_SETTING_TYPE
+	SettingType EventType = 33
 	// OwnerChangeType wraps GDK_OWNER_CHANGE_TYPE
 	//
 	// the owner of a selection has changed. This event type
 	//   was added in 2.6
-	OwnerChangeType EventType = C.GDK_OWNER_CHANGE_TYPE
+	OwnerChangeType EventType = 34
 	// GrabBrokenType wraps GDK_GRAB_BROKEN_TYPE
 	//
 	// a pointer or keyboard grab was broken. This event type
 	//   was added in 2.8.
-	GrabBrokenType EventType = C.GDK_GRAB_BROKEN_TYPE
+	GrabBrokenType EventType = 35
 	// DamageType wraps GDK_DAMAGE_TYPE
 	//
 	// the content of the window has been changed. This event type
 	//   was added in 2.14.
-	DamageType EventType = C.GDK_DAMAGE_TYPE
+	DamageType EventType = 36
 	// TouchBeginType wraps GDK_TOUCH_BEGIN_TYPE
 	//
 	// A new touch event sequence has just started. This event
 	//   type was added in 3.4.
-	TouchBeginType EventType = C.GDK_TOUCH_BEGIN_TYPE
+	TouchBeginType EventType = 37
 	// TouchUpdateType wraps GDK_TOUCH_UPDATE_TYPE
 	//
 	// A touch event sequence has been updated. This event type
 	//   was added in 3.4.
-	TouchUpdateType EventType = C.GDK_TOUCH_UPDATE_TYPE
+	TouchUpdateType EventType = 38
 	// TouchEndType wraps GDK_TOUCH_END_TYPE
 	//
 	// A touch event sequence has finished. This event type
 	//   was added in 3.4.
-	TouchEndType EventType = C.GDK_TOUCH_END_TYPE
+	TouchEndType EventType = 39
 	// TouchCancelType wraps GDK_TOUCH_CANCEL_TYPE
 	//
 	// A touch event sequence has been canceled. This event type
 	//   was added in 3.4.
-	TouchCancelType EventType = C.GDK_TOUCH_CANCEL_TYPE
+	TouchCancelType EventType = 40
 	// TouchpadSwipeType wraps GDK_TOUCHPAD_SWIPE_TYPE
 	//
 	// A touchpad swipe gesture event, the current state
 	//   is determined by its phase field. This event type was added in 3.18.
-	TouchpadSwipeType EventType = C.GDK_TOUCHPAD_SWIPE_TYPE
+	TouchpadSwipeType EventType = 41
 	// TouchpadPinchType wraps GDK_TOUCHPAD_PINCH_TYPE
 	//
 	// A touchpad pinch gesture event, the current state
 	//   is determined by its phase field. This event type was added in 3.18.
-	TouchpadPinchType EventType = C.GDK_TOUCHPAD_PINCH_TYPE
+	TouchpadPinchType EventType = 42
 	// PadButtonPressType wraps GDK_PAD_BUTTON_PRESS_TYPE
 	//
 	// A tablet pad button press event. This event type
 	//   was added in 3.22.
-	PadButtonPressType EventType = C.GDK_PAD_BUTTON_PRESS_TYPE
+	PadButtonPressType EventType = 43
 	// PadButtonReleaseType wraps GDK_PAD_BUTTON_RELEASE_TYPE
 	//
 	// A tablet pad button release event. This event type
 	//   was added in 3.22.
-	PadButtonReleaseType EventType = C.GDK_PAD_BUTTON_RELEASE_TYPE
+	PadButtonReleaseType EventType = 44
 	// PadRingType wraps GDK_PAD_RING_TYPE
 	//
 	// A tablet pad axis event from a "ring". This event type was
 	//   added in 3.22.
-	PadRingType EventType = C.GDK_PAD_RING_TYPE
+	PadRingType EventType = 45
 	// PadStripType wraps GDK_PAD_STRIP_TYPE
 	//
 	// A tablet pad axis event from a "strip". This event type was
 	//   added in 3.22.
-	PadStripType EventType = C.GDK_PAD_STRIP_TYPE
+	PadStripType EventType = 46
 	// PadGroupModeType wraps GDK_PAD_GROUP_MODE_TYPE
 	//
 	// A tablet pad group mode change. This event type was
 	//   added in 3.22.
-	PadGroupModeType EventType = C.GDK_PAD_GROUP_MODE_TYPE
+	PadGroupModeType EventType = 47
 	// EventLastType wraps GDK_EVENT_LAST_TYPE
 	//
 	// marks the end of the GdkEventType enumeration. Added in 2.18
-	EventLastType EventType = C.GDK_EVENT_LAST_TYPE
+	EventLastType EventType = 48
 )
 
 func marshalEventType(p unsafe.Pointer) (any, error) {
@@ -5738,16 +5738,16 @@ const (
 	// FilterContinue wraps GDK_FILTER_CONTINUE
 	//
 	// event not handled, continue processing.
-	FilterContinue FilterReturn = C.GDK_FILTER_CONTINUE
+	FilterContinue FilterReturn = 0
 	// FilterTranslate wraps GDK_FILTER_TRANSLATE
 	//
 	// native event translated into a GDK event and stored
 	//  in the `event` structure that was passed in.
-	FilterTranslate FilterReturn = C.GDK_FILTER_TRANSLATE
+	FilterTranslate FilterReturn = 1
 	// FilterRemove wraps GDK_FILTER_REMOVE
 	//
 	// event handled, terminate processing.
-	FilterRemove FilterReturn = C.GDK_FILTER_REMOVE
+	FilterRemove FilterReturn = 2
 )
 
 func marshalFilterReturn(p unsafe.Pointer) (any, error) {
@@ -5771,11 +5771,11 @@ const (
 	// FullscreenOnCurrentMonitor wraps GDK_FULLSCREEN_ON_CURRENT_MONITOR
 	//
 	// Fullscreen on current monitor only.
-	FullscreenOnCurrentMonitor FullscreenMode = C.GDK_FULLSCREEN_ON_CURRENT_MONITOR
+	FullscreenOnCurrentMonitor FullscreenMode = 0
 	// FullscreenOnAllMonitors wraps GDK_FULLSCREEN_ON_ALL_MONITORS
 	//
 	// Span across all monitors when fullscreen.
-	FullscreenOnAllMonitors FullscreenMode = C.GDK_FULLSCREEN_ON_ALL_MONITORS
+	FullscreenOnAllMonitors FullscreenMode = 1
 )
 
 func marshalFullscreenMode(p unsafe.Pointer) (any, error) {
@@ -5798,15 +5798,15 @@ const (
 	// GLErrorNotAvailable wraps GDK_GL_ERROR_NOT_AVAILABLE
 	//
 	// OpenGL support is not available
-	GLErrorNotAvailable GLError = C.GDK_GL_ERROR_NOT_AVAILABLE
+	GLErrorNotAvailable GLError = 0
 	// GLErrorUnsupportedFormat wraps GDK_GL_ERROR_UNSUPPORTED_FORMAT
 	//
 	// The requested visual format is not supported
-	GLErrorUnsupportedFormat GLError = C.GDK_GL_ERROR_UNSUPPORTED_FORMAT
+	GLErrorUnsupportedFormat GLError = 1
 	// GLErrorUnsupportedProfile wraps GDK_GL_ERROR_UNSUPPORTED_PROFILE
 	//
 	// The requested profile is not supported
-	GLErrorUnsupportedProfile GLError = C.GDK_GL_ERROR_UNSUPPORTED_PROFILE
+	GLErrorUnsupportedProfile GLError = 2
 )
 
 func marshalGLError(p unsafe.Pointer) (any, error) {
@@ -5829,15 +5829,15 @@ const (
 	// OwnershipNone wraps GDK_OWNERSHIP_NONE
 	//
 	// All other devices’ events are allowed.
-	OwnershipNone GrabOwnership = C.GDK_OWNERSHIP_NONE
+	OwnershipNone GrabOwnership = 0
 	// OwnershipWindow wraps GDK_OWNERSHIP_WINDOW
 	//
 	// Other devices’ events are blocked for the grab window.
-	OwnershipWindow GrabOwnership = C.GDK_OWNERSHIP_WINDOW
+	OwnershipWindow GrabOwnership = 1
 	// OwnershipApplication wraps GDK_OWNERSHIP_APPLICATION
 	//
 	// Other devices’ events are blocked for the whole application.
-	OwnershipApplication GrabOwnership = C.GDK_OWNERSHIP_APPLICATION
+	OwnershipApplication GrabOwnership = 2
 )
 
 func marshalGrabOwnership(p unsafe.Pointer) (any, error) {
@@ -5861,29 +5861,29 @@ const (
 	// GrabSuccess wraps GDK_GRAB_SUCCESS
 	//
 	// the resource was successfully grabbed.
-	GrabSuccess GrabStatus = C.GDK_GRAB_SUCCESS
+	GrabSuccess GrabStatus = 0
 	// GrabAlreadyGrabbed wraps GDK_GRAB_ALREADY_GRABBED
 	//
 	// the resource is actively grabbed by another client.
-	GrabAlreadyGrabbed GrabStatus = C.GDK_GRAB_ALREADY_GRABBED
+	GrabAlreadyGrabbed GrabStatus = 1
 	// GrabInvalidTime wraps GDK_GRAB_INVALID_TIME
 	//
 	// the resource was grabbed more recently than the
 	//  specified time.
-	GrabInvalidTime GrabStatus = C.GDK_GRAB_INVALID_TIME
+	GrabInvalidTime GrabStatus = 2
 	// GrabNotViewable wraps GDK_GRAB_NOT_VIEWABLE
 	//
 	// the grab window or the @confine_to window are not
 	//  viewable.
-	GrabNotViewable GrabStatus = C.GDK_GRAB_NOT_VIEWABLE
+	GrabNotViewable GrabStatus = 3
 	// GrabFrozen wraps GDK_GRAB_FROZEN
 	//
 	// the resource is frozen by an active grab of another client.
-	GrabFrozen GrabStatus = C.GDK_GRAB_FROZEN
+	GrabFrozen GrabStatus = 4
 	// GrabFailed wraps GDK_GRAB_FAILED
 	//
 	// the grab failed for some other reason. Since 3.16
-	GrabFailed GrabStatus = C.GDK_GRAB_FAILED
+	GrabFailed GrabStatus = 5
 )
 
 func marshalGrabStatus(p unsafe.Pointer) (any, error) {
@@ -5910,44 +5910,44 @@ const (
 	// GravityNorthWest wraps GDK_GRAVITY_NORTH_WEST
 	//
 	// the reference point is at the top left corner.
-	GravityNorthWest Gravity = C.GDK_GRAVITY_NORTH_WEST
+	GravityNorthWest Gravity = 1
 	// GravityNorth wraps GDK_GRAVITY_NORTH
 	//
 	// the reference point is in the middle of the top edge.
-	GravityNorth Gravity = C.GDK_GRAVITY_NORTH
+	GravityNorth Gravity = 2
 	// GravityNorthEast wraps GDK_GRAVITY_NORTH_EAST
 	//
 	// the reference point is at the top right corner.
-	GravityNorthEast Gravity = C.GDK_GRAVITY_NORTH_EAST
+	GravityNorthEast Gravity = 3
 	// GravityWest wraps GDK_GRAVITY_WEST
 	//
 	// the reference point is at the middle of the left edge.
-	GravityWest Gravity = C.GDK_GRAVITY_WEST
+	GravityWest Gravity = 4
 	// GravityCenter wraps GDK_GRAVITY_CENTER
 	//
 	// the reference point is at the center of the window.
-	GravityCenter Gravity = C.GDK_GRAVITY_CENTER
+	GravityCenter Gravity = 5
 	// GravityEast wraps GDK_GRAVITY_EAST
 	//
 	// the reference point is at the middle of the right edge.
-	GravityEast Gravity = C.GDK_GRAVITY_EAST
+	GravityEast Gravity = 6
 	// GravitySouthWest wraps GDK_GRAVITY_SOUTH_WEST
 	//
 	// the reference point is at the lower left corner.
-	GravitySouthWest Gravity = C.GDK_GRAVITY_SOUTH_WEST
+	GravitySouthWest Gravity = 7
 	// GravitySouth wraps GDK_GRAVITY_SOUTH
 	//
 	// the reference point is at the middle of the lower edge.
-	GravitySouth Gravity = C.GDK_GRAVITY_SOUTH
+	GravitySouth Gravity = 8
 	// GravitySouthEast wraps GDK_GRAVITY_SOUTH_EAST
 	//
 	// the reference point is at the lower right corner.
-	GravitySouthEast Gravity = C.GDK_GRAVITY_SOUTH_EAST
+	GravitySouthEast Gravity = 9
 	// GravityStatic wraps GDK_GRAVITY_STATIC
 	//
 	// the reference point is at the top left corner of the
 	//  window itself, ignoring window manager decorations.
-	GravityStatic Gravity = C.GDK_GRAVITY_STATIC
+	GravityStatic Gravity = 10
 )
 
 func marshalGravity(p unsafe.Pointer) (any, error) {
@@ -5970,19 +5970,19 @@ const (
 	// ModeDisabled wraps GDK_MODE_DISABLED
 	//
 	// the device is disabled and will not report any events.
-	ModeDisabled InputMode = C.GDK_MODE_DISABLED
+	ModeDisabled InputMode = 0
 	// ModeScreen wraps GDK_MODE_SCREEN
 	//
 	// the device is enabled. The device’s coordinate space
 	//                   maps to the entire screen.
-	ModeScreen InputMode = C.GDK_MODE_SCREEN
+	ModeScreen InputMode = 1
 	// ModeWindow wraps GDK_MODE_WINDOW
 	//
 	// the device is enabled. The device’s coordinate space
 	//                   is mapped to a single window. The manner in which this window
 	//                   is chosen is undefined, but it will typically be the same
 	//                   way in which the focus window for key events is determined.
-	ModeWindow InputMode = C.GDK_MODE_WINDOW
+	ModeWindow InputMode = 2
 )
 
 func marshalInputMode(p unsafe.Pointer) (any, error) {
@@ -6006,45 +6006,45 @@ const (
 	//
 	// the device is a mouse. (This will be reported for the core
 	//                    pointer, even if it is something else, such as a trackball.)
-	SourceMouse InputSource = C.GDK_SOURCE_MOUSE
+	SourceMouse InputSource = 0
 	// SourcePen wraps GDK_SOURCE_PEN
 	//
 	// the device is a stylus of a graphics tablet or similar device.
-	SourcePen InputSource = C.GDK_SOURCE_PEN
+	SourcePen InputSource = 1
 	// SourceEraser wraps GDK_SOURCE_ERASER
 	//
 	// the device is an eraser. Typically, this would be the other end
 	//                     of a stylus on a graphics tablet.
-	SourceEraser InputSource = C.GDK_SOURCE_ERASER
+	SourceEraser InputSource = 2
 	// SourceCursor wraps GDK_SOURCE_CURSOR
 	//
 	// the device is a graphics tablet “puck” or similar device.
-	SourceCursor InputSource = C.GDK_SOURCE_CURSOR
+	SourceCursor InputSource = 3
 	// SourceKeyboard wraps GDK_SOURCE_KEYBOARD
 	//
 	// the device is a keyboard.
-	SourceKeyboard InputSource = C.GDK_SOURCE_KEYBOARD
+	SourceKeyboard InputSource = 4
 	// SourceTouchscreen wraps GDK_SOURCE_TOUCHSCREEN
 	//
 	// the device is a direct-input touch device, such
 	//     as a touchscreen or tablet. This device type has been added in 3.4.
-	SourceTouchscreen InputSource = C.GDK_SOURCE_TOUCHSCREEN
+	SourceTouchscreen InputSource = 5
 	// SourceTouchpad wraps GDK_SOURCE_TOUCHPAD
 	//
 	// the device is an indirect touch device, such
 	//     as a touchpad. This device type has been added in 3.4.
-	SourceTouchpad InputSource = C.GDK_SOURCE_TOUCHPAD
+	SourceTouchpad InputSource = 6
 	// SourceTrackpoint wraps GDK_SOURCE_TRACKPOINT
 	//
 	// the device is a trackpoint. This device type has been
 	//     added in 3.22
-	SourceTrackpoint InputSource = C.GDK_SOURCE_TRACKPOINT
+	SourceTrackpoint InputSource = 7
 	// SourceTabletPad wraps GDK_SOURCE_TABLET_PAD
 	//
 	// the device is a "pad", a collection of buttons,
 	//     rings and strips found in drawing tablets. This device type has been
 	//     added in 3.22.
-	SourceTabletPad InputSource = C.GDK_SOURCE_TABLET_PAD
+	SourceTabletPad InputSource = 8
 )
 
 func marshalInputSource(p unsafe.Pointer) (any, error) {
@@ -6074,34 +6074,34 @@ const (
 	//
 	// the primary modifier used to invoke
 	//  menu accelerators.
-	ModifierIntentPrimaryAccelerator ModifierIntent = C.GDK_MODIFIER_INTENT_PRIMARY_ACCELERATOR
+	ModifierIntentPrimaryAccelerator ModifierIntent = 0
 	// ModifierIntentContextMenu wraps GDK_MODIFIER_INTENT_CONTEXT_MENU
 	//
 	// the modifier used to invoke context menus.
 	//  Note that mouse button 3 always triggers context menus. When this modifier
 	//  is not 0, it additionally triggers context menus when used with mouse button 1.
-	ModifierIntentContextMenu ModifierIntent = C.GDK_MODIFIER_INTENT_CONTEXT_MENU
+	ModifierIntentContextMenu ModifierIntent = 1
 	// ModifierIntentExtendSelection wraps GDK_MODIFIER_INTENT_EXTEND_SELECTION
 	//
 	// the modifier used to extend selections
 	//  using `modifier`-click or `modifier`-cursor-key
-	ModifierIntentExtendSelection ModifierIntent = C.GDK_MODIFIER_INTENT_EXTEND_SELECTION
+	ModifierIntentExtendSelection ModifierIntent = 2
 	// ModifierIntentModifySelection wraps GDK_MODIFIER_INTENT_MODIFY_SELECTION
 	//
 	// the modifier used to modify selections,
 	//  which in most cases means toggling the clicked item into or out of the selection.
-	ModifierIntentModifySelection ModifierIntent = C.GDK_MODIFIER_INTENT_MODIFY_SELECTION
+	ModifierIntentModifySelection ModifierIntent = 3
 	// ModifierIntentNoTextInput wraps GDK_MODIFIER_INTENT_NO_TEXT_INPUT
 	//
 	// when any of these modifiers is pressed, the
 	//  key event cannot produce a symbol directly. This is meant to be used for
 	//  input methods, and for use cases like typeahead search.
-	ModifierIntentNoTextInput ModifierIntent = C.GDK_MODIFIER_INTENT_NO_TEXT_INPUT
+	ModifierIntentNoTextInput ModifierIntent = 4
 	// ModifierIntentShiftGroup wraps GDK_MODIFIER_INTENT_SHIFT_GROUP
 	//
 	// the modifier that switches between keyboard
 	//  groups (AltGr on X11/Windows and Option/Alt on OS X).
-	ModifierIntentShiftGroup ModifierIntent = C.GDK_MODIFIER_INTENT_SHIFT_GROUP
+	ModifierIntentShiftGroup ModifierIntent = 5
 	// ModifierIntentDefaultModMask wraps GDK_MODIFIER_INTENT_DEFAULT_MOD_MASK
 	//
 	// The set of modifier masks accepted
@@ -6109,7 +6109,7 @@ const (
 	// OSX, which is widely used, but on X11 MOD2 is NumLock and using that for a
 	// mod key is problematic at best.
 	// Ref: https://bugzilla.gnome.org/show_bug.cgi?id=736125.
-	ModifierIntentDefaultModMask ModifierIntent = C.GDK_MODIFIER_INTENT_DEFAULT_MOD_MASK
+	ModifierIntentDefaultModMask ModifierIntent = 6
 )
 
 func marshalModifierIntent(p unsafe.Pointer) (any, error) {
@@ -6136,33 +6136,33 @@ const (
 	//
 	// the window is entered from an ancestor or
 	//   left towards an ancestor.
-	NotifyAncestor NotifyType = C.GDK_NOTIFY_ANCESTOR
+	NotifyAncestor NotifyType = 0
 	// NotifyVirtual wraps GDK_NOTIFY_VIRTUAL
 	//
 	// the pointer moves between an ancestor and an
 	//   inferior of the window.
-	NotifyVirtual NotifyType = C.GDK_NOTIFY_VIRTUAL
+	NotifyVirtual NotifyType = 1
 	// NotifyInferior wraps GDK_NOTIFY_INFERIOR
 	//
 	// the window is entered from an inferior or
 	//   left towards an inferior.
-	NotifyInferior NotifyType = C.GDK_NOTIFY_INFERIOR
+	NotifyInferior NotifyType = 2
 	// NotifyNonlinear wraps GDK_NOTIFY_NONLINEAR
 	//
 	// the window is entered from or left towards
 	//   a window which is neither an ancestor nor an inferior.
-	NotifyNonlinear NotifyType = C.GDK_NOTIFY_NONLINEAR
+	NotifyNonlinear NotifyType = 3
 	// NotifyNonlinearVirtual wraps GDK_NOTIFY_NONLINEAR_VIRTUAL
 	//
 	// the pointer moves between two windows
 	//   which are not ancestors of each other and the window is part of
 	//   the ancestor chain between one of these windows and their least
 	//   common ancestor.
-	NotifyNonlinearVirtual NotifyType = C.GDK_NOTIFY_NONLINEAR_VIRTUAL
+	NotifyNonlinearVirtual NotifyType = 4
 	// NotifyUnknown wraps GDK_NOTIFY_UNKNOWN
 	//
 	// an unknown type of enter/leave event occurred.
-	NotifyUnknown NotifyType = C.GDK_NOTIFY_UNKNOWN
+	NotifyUnknown NotifyType = 5
 )
 
 func marshalNotifyType(p unsafe.Pointer) (any, error) {
@@ -6185,15 +6185,15 @@ const (
 	// OwnerChangeNewOwner wraps GDK_OWNER_CHANGE_NEW_OWNER
 	//
 	// some other app claimed the ownership
-	OwnerChangeNewOwner OwnerChange = C.GDK_OWNER_CHANGE_NEW_OWNER
+	OwnerChangeNewOwner OwnerChange = 0
 	// OwnerChangeDestroy wraps GDK_OWNER_CHANGE_DESTROY
 	//
 	// the window was destroyed
-	OwnerChangeDestroy OwnerChange = C.GDK_OWNER_CHANGE_DESTROY
+	OwnerChangeDestroy OwnerChange = 1
 	// OwnerChangeClose wraps GDK_OWNER_CHANGE_CLOSE
 	//
 	// the client was closed
-	OwnerChangeClose OwnerChange = C.GDK_OWNER_CHANGE_CLOSE
+	OwnerChangeClose OwnerChange = 2
 )
 
 func marshalOwnerChange(p unsafe.Pointer) (any, error) {
@@ -6217,15 +6217,15 @@ const (
 	// PropModeReplace wraps GDK_PROP_MODE_REPLACE
 	//
 	// the new data replaces the existing data.
-	PropModeReplace PropMode = C.GDK_PROP_MODE_REPLACE
+	PropModeReplace PropMode = 0
 	// PropModePrepend wraps GDK_PROP_MODE_PREPEND
 	//
 	// the new data is prepended to the existing data.
-	PropModePrepend PropMode = C.GDK_PROP_MODE_PREPEND
+	PropModePrepend PropMode = 1
 	// PropModeAppend wraps GDK_PROP_MODE_APPEND
 	//
 	// the new data is appended to the existing data.
-	PropModeAppend PropMode = C.GDK_PROP_MODE_APPEND
+	PropModeAppend PropMode = 2
 )
 
 func marshalPropMode(p unsafe.Pointer) (any, error) {
@@ -6248,11 +6248,11 @@ const (
 	// PropertyNewValue wraps GDK_PROPERTY_NEW_VALUE
 	//
 	// the property value was changed.
-	PropertyNewValue PropertyState = C.GDK_PROPERTY_NEW_VALUE
+	PropertyNewValue PropertyState = 0
 	// PropertyDelete wraps GDK_PROPERTY_DELETE
 	//
 	// the property was deleted.
-	PropertyDelete PropertyState = C.GDK_PROPERTY_DELETE
+	PropertyDelete PropertyState = 1
 )
 
 func marshalPropertyState(p unsafe.Pointer) (any, error) {
@@ -6275,24 +6275,24 @@ const (
 	// ScrollUp wraps GDK_SCROLL_UP
 	//
 	// the window is scrolled up.
-	ScrollUp ScrollDirection = C.GDK_SCROLL_UP
+	ScrollUp ScrollDirection = 0
 	// ScrollDown wraps GDK_SCROLL_DOWN
 	//
 	// the window is scrolled down.
-	ScrollDown ScrollDirection = C.GDK_SCROLL_DOWN
+	ScrollDown ScrollDirection = 1
 	// ScrollLeft wraps GDK_SCROLL_LEFT
 	//
 	// the window is scrolled to the left.
-	ScrollLeft ScrollDirection = C.GDK_SCROLL_LEFT
+	ScrollLeft ScrollDirection = 2
 	// ScrollRight wraps GDK_SCROLL_RIGHT
 	//
 	// the window is scrolled to the right.
-	ScrollRight ScrollDirection = C.GDK_SCROLL_RIGHT
+	ScrollRight ScrollDirection = 3
 	// ScrollSmooth wraps GDK_SCROLL_SMOOTH
 	//
 	// the scrolling is determined by the delta values
 	//   in #GdkEventScroll. See gdk_event_get_scroll_deltas(). Since: 3.4
-	ScrollSmooth ScrollDirection = C.GDK_SCROLL_SMOOTH
+	ScrollSmooth ScrollDirection = 4
 )
 
 func marshalScrollDirection(p unsafe.Pointer) (any, error) {
@@ -6316,15 +6316,15 @@ const (
 	// NewSettingAction wraps GDK_SETTING_ACTION_NEW
 	//
 	// a setting was added.
-	NewSettingAction SettingAction = C.GDK_SETTING_ACTION_NEW
+	NewSettingAction SettingAction = 0
 	// SettingActionChanged wraps GDK_SETTING_ACTION_CHANGED
 	//
 	// a setting was changed.
-	SettingActionChanged SettingAction = C.GDK_SETTING_ACTION_CHANGED
+	SettingActionChanged SettingAction = 1
 	// SettingActionDeleted wraps GDK_SETTING_ACTION_DELETED
 	//
 	// a setting was deleted.
-	SettingActionDeleted SettingAction = C.GDK_SETTING_ACTION_DELETED
+	SettingActionDeleted SettingAction = 2
 )
 
 func marshalSettingAction(p unsafe.Pointer) (any, error) {
@@ -6343,15 +6343,15 @@ type Status C.int
 
 const (
 	// OK wraps GDK_OK
-	OK Status = C.GDK_OK
+	OK Status = 0
 	// Error wraps GDK_ERROR
-	Error Status = C.GDK_ERROR
+	Error Status = -1
 	// ErrorParam wraps GDK_ERROR_PARAM
-	ErrorParam Status = C.GDK_ERROR_PARAM
+	ErrorParam Status = -2
 	// ErrorFile wraps GDK_ERROR_FILE
-	ErrorFile Status = C.GDK_ERROR_FILE
+	ErrorFile Status = -3
 	// ErrorMem wraps GDK_ERROR_MEM
-	ErrorMem Status = C.GDK_ERROR_MEM
+	ErrorMem Status = -4
 )
 
 func marshalStatus(p unsafe.Pointer) (any, error) {
@@ -6375,27 +6375,27 @@ const (
 	// SubpixelLayoutUnknown wraps GDK_SUBPIXEL_LAYOUT_UNKNOWN
 	//
 	// The layout is not known
-	SubpixelLayoutUnknown SubpixelLayout = C.GDK_SUBPIXEL_LAYOUT_UNKNOWN
+	SubpixelLayoutUnknown SubpixelLayout = 0
 	// SubpixelLayoutNone wraps GDK_SUBPIXEL_LAYOUT_NONE
 	//
 	// Not organized in this way
-	SubpixelLayoutNone SubpixelLayout = C.GDK_SUBPIXEL_LAYOUT_NONE
+	SubpixelLayoutNone SubpixelLayout = 1
 	// SubpixelLayoutHorizontalRGB wraps GDK_SUBPIXEL_LAYOUT_HORIZONTAL_RGB
 	//
 	// The layout is horizontal, the order is RGB
-	SubpixelLayoutHorizontalRGB SubpixelLayout = C.GDK_SUBPIXEL_LAYOUT_HORIZONTAL_RGB
+	SubpixelLayoutHorizontalRGB SubpixelLayout = 2
 	// SubpixelLayoutHorizontalBGR wraps GDK_SUBPIXEL_LAYOUT_HORIZONTAL_BGR
 	//
 	// The layout is horizontal, the order is BGR
-	SubpixelLayoutHorizontalBGR SubpixelLayout = C.GDK_SUBPIXEL_LAYOUT_HORIZONTAL_BGR
+	SubpixelLayoutHorizontalBGR SubpixelLayout = 3
 	// SubpixelLayoutVerticalRGB wraps GDK_SUBPIXEL_LAYOUT_VERTICAL_RGB
 	//
 	// The layout is vertical, the order is RGB
-	SubpixelLayoutVerticalRGB SubpixelLayout = C.GDK_SUBPIXEL_LAYOUT_VERTICAL_RGB
+	SubpixelLayoutVerticalRGB SubpixelLayout = 4
 	// SubpixelLayoutVerticalBGR wraps GDK_SUBPIXEL_LAYOUT_VERTICAL_BGR
 	//
 	// The layout is vertical, the order is BGR
-	SubpixelLayoutVerticalBGR SubpixelLayout = C.GDK_SUBPIXEL_LAYOUT_VERTICAL_BGR
+	SubpixelLayoutVerticalBGR SubpixelLayout = 5
 )
 
 func marshalSubpixelLayout(p unsafe.Pointer) (any, error) {
@@ -6435,21 +6435,21 @@ const (
 	// TouchpadGesturePhaseBegin wraps GDK_TOUCHPAD_GESTURE_PHASE_BEGIN
 	//
 	// The gesture has begun.
-	TouchpadGesturePhaseBegin TouchpadGesturePhase = C.GDK_TOUCHPAD_GESTURE_PHASE_BEGIN
+	TouchpadGesturePhaseBegin TouchpadGesturePhase = 0
 	// TouchpadGesturePhaseUpdate wraps GDK_TOUCHPAD_GESTURE_PHASE_UPDATE
 	//
 	// The gesture has been updated.
-	TouchpadGesturePhaseUpdate TouchpadGesturePhase = C.GDK_TOUCHPAD_GESTURE_PHASE_UPDATE
+	TouchpadGesturePhaseUpdate TouchpadGesturePhase = 1
 	// TouchpadGesturePhaseEnd wraps GDK_TOUCHPAD_GESTURE_PHASE_END
 	//
 	// The gesture was finished, changes
 	//   should be permanently applied.
-	TouchpadGesturePhaseEnd TouchpadGesturePhase = C.GDK_TOUCHPAD_GESTURE_PHASE_END
+	TouchpadGesturePhaseEnd TouchpadGesturePhase = 2
 	// TouchpadGesturePhaseCancel wraps GDK_TOUCHPAD_GESTURE_PHASE_CANCEL
 	//
 	// The gesture was cancelled, all
 	//   changes should be undone.
-	TouchpadGesturePhaseCancel TouchpadGesturePhase = C.GDK_TOUCHPAD_GESTURE_PHASE_CANCEL
+	TouchpadGesturePhaseCancel TouchpadGesturePhase = 3
 )
 
 func marshalTouchpadGesturePhase(p unsafe.Pointer) (any, error) {
@@ -6472,15 +6472,15 @@ const (
 	// VisibilityUnobscured wraps GDK_VISIBILITY_UNOBSCURED
 	//
 	// the window is completely visible.
-	VisibilityUnobscured VisibilityState = C.GDK_VISIBILITY_UNOBSCURED
+	VisibilityUnobscured VisibilityState = 0
 	// VisibilityPartial wraps GDK_VISIBILITY_PARTIAL
 	//
 	// the window is partially visible.
-	VisibilityPartial VisibilityState = C.GDK_VISIBILITY_PARTIAL
+	VisibilityPartial VisibilityState = 1
 	// VisibilityFullyObscured wraps GDK_VISIBILITY_FULLY_OBSCURED
 	//
 	// the window is not visible at all.
-	VisibilityFullyObscured VisibilityState = C.GDK_VISIBILITY_FULLY_OBSCURED
+	VisibilityFullyObscured VisibilityState = 2
 )
 
 func marshalVisibilityState(p unsafe.Pointer) (any, error) {
@@ -6505,38 +6505,38 @@ const (
 	//
 	// Each pixel value indexes a grayscale value
 	//     directly.
-	VisualStaticGray VisualType = C.GDK_VISUAL_STATIC_GRAY
+	VisualStaticGray VisualType = 0
 	// VisualGrayscale wraps GDK_VISUAL_GRAYSCALE
 	//
 	// Each pixel is an index into a color map that
 	//     maps pixel values into grayscale values. The color map can be
 	//     changed by an application.
-	VisualGrayscale VisualType = C.GDK_VISUAL_GRAYSCALE
+	VisualGrayscale VisualType = 1
 	// VisualStaticColor wraps GDK_VISUAL_STATIC_COLOR
 	//
 	// Each pixel value is an index into a predefined,
 	//     unmodifiable color map that maps pixel values into RGB values.
-	VisualStaticColor VisualType = C.GDK_VISUAL_STATIC_COLOR
+	VisualStaticColor VisualType = 2
 	// VisualPseudoColor wraps GDK_VISUAL_PSEUDO_COLOR
 	//
 	// Each pixel is an index into a color map that
 	//     maps pixel values into rgb values. The color map can be changed by
 	//     an application.
-	VisualPseudoColor VisualType = C.GDK_VISUAL_PSEUDO_COLOR
+	VisualPseudoColor VisualType = 3
 	// VisualTrueColor wraps GDK_VISUAL_TRUE_COLOR
 	//
 	// Each pixel value directly contains red, green,
 	//     and blue components. Use gdk_visual_get_red_pixel_details(), etc,
 	//     to obtain information about how the components are assembled into
 	//     a pixel value.
-	VisualTrueColor VisualType = C.GDK_VISUAL_TRUE_COLOR
+	VisualTrueColor VisualType = 4
 	// VisualDirectColor wraps GDK_VISUAL_DIRECT_COLOR
 	//
 	// Each pixel value contains red, green, and blue
 	//     components as for %GDK_VISUAL_TRUE_COLOR, but the components are
 	//     mapped via a color table into the final output table instead of
 	//     being converted directly.
-	VisualDirectColor VisualType = C.GDK_VISUAL_DIRECT_COLOR
+	VisualDirectColor VisualType = 5
 )
 
 func marshalVisualType(p unsafe.Pointer) (any, error) {
@@ -6559,35 +6559,35 @@ const (
 	// WindowEdgeNorthWest wraps GDK_WINDOW_EDGE_NORTH_WEST
 	//
 	// the top left corner.
-	WindowEdgeNorthWest WindowEdge = C.GDK_WINDOW_EDGE_NORTH_WEST
+	WindowEdgeNorthWest WindowEdge = 0
 	// WindowEdgeNorth wraps GDK_WINDOW_EDGE_NORTH
 	//
 	// the top edge.
-	WindowEdgeNorth WindowEdge = C.GDK_WINDOW_EDGE_NORTH
+	WindowEdgeNorth WindowEdge = 1
 	// WindowEdgeNorthEast wraps GDK_WINDOW_EDGE_NORTH_EAST
 	//
 	// the top right corner.
-	WindowEdgeNorthEast WindowEdge = C.GDK_WINDOW_EDGE_NORTH_EAST
+	WindowEdgeNorthEast WindowEdge = 2
 	// WindowEdgeWest wraps GDK_WINDOW_EDGE_WEST
 	//
 	// the left edge.
-	WindowEdgeWest WindowEdge = C.GDK_WINDOW_EDGE_WEST
+	WindowEdgeWest WindowEdge = 3
 	// WindowEdgeEast wraps GDK_WINDOW_EDGE_EAST
 	//
 	// the right edge.
-	WindowEdgeEast WindowEdge = C.GDK_WINDOW_EDGE_EAST
+	WindowEdgeEast WindowEdge = 4
 	// WindowEdgeSouthWest wraps GDK_WINDOW_EDGE_SOUTH_WEST
 	//
 	// the lower left corner.
-	WindowEdgeSouthWest WindowEdge = C.GDK_WINDOW_EDGE_SOUTH_WEST
+	WindowEdgeSouthWest WindowEdge = 5
 	// WindowEdgeSouth wraps GDK_WINDOW_EDGE_SOUTH
 	//
 	// the lower edge.
-	WindowEdgeSouth WindowEdge = C.GDK_WINDOW_EDGE_SOUTH
+	WindowEdgeSouth WindowEdge = 6
 	// WindowEdgeSouthEast wraps GDK_WINDOW_EDGE_SOUTH_EAST
 	//
 	// the lower right corner.
-	WindowEdgeSouthEast WindowEdge = C.GDK_WINDOW_EDGE_SOUTH_EAST
+	WindowEdgeSouthEast WindowEdge = 7
 )
 
 func marshalWindowEdge(p unsafe.Pointer) (any, error) {
@@ -6611,35 +6611,35 @@ const (
 	//
 	// root window; this window has no parent, covers the entire
 	//  screen, and is created by the window system
-	WindowRoot WindowType = C.GDK_WINDOW_ROOT
+	WindowRoot WindowType = 0
 	// WindowToplevel wraps GDK_WINDOW_TOPLEVEL
 	//
 	// toplevel window (used to implement #GtkWindow)
-	WindowToplevel WindowType = C.GDK_WINDOW_TOPLEVEL
+	WindowToplevel WindowType = 1
 	// WindowChild wraps GDK_WINDOW_CHILD
 	//
 	// child window (used to implement e.g. #GtkEntry)
-	WindowChild WindowType = C.GDK_WINDOW_CHILD
+	WindowChild WindowType = 2
 	// WindowTemp wraps GDK_WINDOW_TEMP
 	//
 	// override redirect temporary window (used to implement
 	//  #GtkMenu)
-	WindowTemp WindowType = C.GDK_WINDOW_TEMP
+	WindowTemp WindowType = 3
 	// WindowForeign wraps GDK_WINDOW_FOREIGN
 	//
 	// foreign window (see gdk_window_foreign_new())
-	WindowForeign WindowType = C.GDK_WINDOW_FOREIGN
+	WindowForeign WindowType = 4
 	// WindowOffscreen wraps GDK_WINDOW_OFFSCREEN
 	//
 	// offscreen window (see
 	//  [Offscreen Windows][OFFSCREEN-WINDOWS]). Since 2.18
-	WindowOffscreen WindowType = C.GDK_WINDOW_OFFSCREEN
+	WindowOffscreen WindowType = 5
 	// WindowSubsurface wraps GDK_WINDOW_SUBSURFACE
 	//
 	// subsurface-based window; This window is visually
 	//  tied to a toplevel, and is moved/stacked with it. Currently this window
 	//  type is only implemented in Wayland. Since 3.14
-	WindowSubsurface WindowType = C.GDK_WINDOW_SUBSURFACE
+	WindowSubsurface WindowType = 6
 )
 
 func marshalWindowType(p unsafe.Pointer) (any, error) {
@@ -6667,65 +6667,65 @@ const (
 	// WindowTypeHintNormal wraps GDK_WINDOW_TYPE_HINT_NORMAL
 	//
 	// Normal toplevel window.
-	WindowTypeHintNormal WindowTypeHint = C.GDK_WINDOW_TYPE_HINT_NORMAL
+	WindowTypeHintNormal WindowTypeHint = 0
 	// WindowTypeHintDialog wraps GDK_WINDOW_TYPE_HINT_DIALOG
 	//
 	// Dialog window.
-	WindowTypeHintDialog WindowTypeHint = C.GDK_WINDOW_TYPE_HINT_DIALOG
+	WindowTypeHintDialog WindowTypeHint = 1
 	// WindowTypeHintMenu wraps GDK_WINDOW_TYPE_HINT_MENU
 	//
 	// Window used to implement a menu; GTK+ uses
 	//  this hint only for torn-off menus, see #GtkTearoffMenuItem.
-	WindowTypeHintMenu WindowTypeHint = C.GDK_WINDOW_TYPE_HINT_MENU
+	WindowTypeHintMenu WindowTypeHint = 2
 	// WindowTypeHintToolbar wraps GDK_WINDOW_TYPE_HINT_TOOLBAR
 	//
 	// Window used to implement toolbars.
-	WindowTypeHintToolbar WindowTypeHint = C.GDK_WINDOW_TYPE_HINT_TOOLBAR
+	WindowTypeHintToolbar WindowTypeHint = 3
 	// WindowTypeHintSplashscreen wraps GDK_WINDOW_TYPE_HINT_SPLASHSCREEN
 	//
 	// Window used to display a splash
 	//  screen during application startup.
-	WindowTypeHintSplashscreen WindowTypeHint = C.GDK_WINDOW_TYPE_HINT_SPLASHSCREEN
+	WindowTypeHintSplashscreen WindowTypeHint = 4
 	// WindowTypeHintUtility wraps GDK_WINDOW_TYPE_HINT_UTILITY
 	//
 	// Utility windows which are not detached
 	//  toolbars or dialogs.
-	WindowTypeHintUtility WindowTypeHint = C.GDK_WINDOW_TYPE_HINT_UTILITY
+	WindowTypeHintUtility WindowTypeHint = 5
 	// WindowTypeHintDock wraps GDK_WINDOW_TYPE_HINT_DOCK
 	//
 	// Used for creating dock or panel windows.
-	WindowTypeHintDock WindowTypeHint = C.GDK_WINDOW_TYPE_HINT_DOCK
+	WindowTypeHintDock WindowTypeHint = 6
 	// WindowTypeHintDesktop wraps GDK_WINDOW_TYPE_HINT_DESKTOP
 	//
 	// Used for creating the desktop background
 	//  window.
-	WindowTypeHintDesktop WindowTypeHint = C.GDK_WINDOW_TYPE_HINT_DESKTOP
+	WindowTypeHintDesktop WindowTypeHint = 7
 	// WindowTypeHintDropdownMenu wraps GDK_WINDOW_TYPE_HINT_DROPDOWN_MENU
 	//
 	// A menu that belongs to a menubar.
-	WindowTypeHintDropdownMenu WindowTypeHint = C.GDK_WINDOW_TYPE_HINT_DROPDOWN_MENU
+	WindowTypeHintDropdownMenu WindowTypeHint = 8
 	// WindowTypeHintPopupMenu wraps GDK_WINDOW_TYPE_HINT_POPUP_MENU
 	//
 	// A menu that does not belong to a menubar,
 	//  e.g. a context menu.
-	WindowTypeHintPopupMenu WindowTypeHint = C.GDK_WINDOW_TYPE_HINT_POPUP_MENU
+	WindowTypeHintPopupMenu WindowTypeHint = 9
 	// WindowTypeHintTooltip wraps GDK_WINDOW_TYPE_HINT_TOOLTIP
 	//
 	// A tooltip.
-	WindowTypeHintTooltip WindowTypeHint = C.GDK_WINDOW_TYPE_HINT_TOOLTIP
+	WindowTypeHintTooltip WindowTypeHint = 10
 	// WindowTypeHintNotification wraps GDK_WINDOW_TYPE_HINT_NOTIFICATION
 	//
 	// A notification - typically a “bubble”
 	//  that belongs to a status icon.
-	WindowTypeHintNotification WindowTypeHint = C.GDK_WINDOW_TYPE_HINT_NOTIFICATION
+	WindowTypeHintNotification WindowTypeHint = 11
 	// WindowTypeHintCombo wraps GDK_WINDOW_TYPE_HINT_COMBO
 	//
 	// A popup from a combo box.
-	WindowTypeHintCombo WindowTypeHint = C.GDK_WINDOW_TYPE_HINT_COMBO
+	WindowTypeHintCombo WindowTypeHint = 12
 	// WindowTypeHintDND wraps GDK_WINDOW_TYPE_HINT_DND
 	//
 	// A window that is used to implement a DND cursor.
-	WindowTypeHintDND WindowTypeHint = C.GDK_WINDOW_TYPE_HINT_DND
+	WindowTypeHintDND WindowTypeHint = 13
 )
 
 func marshalWindowTypeHint(p unsafe.Pointer) (any, error) {
@@ -6752,11 +6752,11 @@ const (
 	// InputOutput wraps GDK_INPUT_OUTPUT
 	//
 	// window for graphics and events
-	InputOutput WindowWindowClass = C.GDK_INPUT_OUTPUT
+	InputOutput WindowWindowClass = 0
 	// InputOnly wraps GDK_INPUT_ONLY
 	//
 	// window for events only
-	InputOnly WindowWindowClass = C.GDK_INPUT_ONLY
+	InputOnly WindowWindowClass = 1
 )
 
 func marshalWindowWindowClass(p unsafe.Pointer) (any, error) {
@@ -6793,39 +6793,39 @@ const (
 	// AnchorFlipX wraps GDK_ANCHOR_FLIP_X
 	//
 	// allow flipping anchors horizontally
-	AnchorFlipX AnchorHints = C.GDK_ANCHOR_FLIP_X
+	AnchorFlipX AnchorHints = 1
 	// AnchorFlipY wraps GDK_ANCHOR_FLIP_Y
 	//
 	// allow flipping anchors vertically
-	AnchorFlipY AnchorHints = C.GDK_ANCHOR_FLIP_Y
+	AnchorFlipY AnchorHints = 2
 	// AnchorSlideX wraps GDK_ANCHOR_SLIDE_X
 	//
 	// allow sliding window horizontally
-	AnchorSlideX AnchorHints = C.GDK_ANCHOR_SLIDE_X
+	AnchorSlideX AnchorHints = 4
 	// AnchorSlideY wraps GDK_ANCHOR_SLIDE_Y
 	//
 	// allow sliding window vertically
-	AnchorSlideY AnchorHints = C.GDK_ANCHOR_SLIDE_Y
+	AnchorSlideY AnchorHints = 8
 	// AnchorResizeX wraps GDK_ANCHOR_RESIZE_X
 	//
 	// allow resizing window horizontally
-	AnchorResizeX AnchorHints = C.GDK_ANCHOR_RESIZE_X
+	AnchorResizeX AnchorHints = 16
 	// AnchorResizeY wraps GDK_ANCHOR_RESIZE_Y
 	//
 	// allow resizing window vertically
-	AnchorResizeY AnchorHints = C.GDK_ANCHOR_RESIZE_Y
+	AnchorResizeY AnchorHints = 32
 	// AnchorFlip wraps GDK_ANCHOR_FLIP
 	//
 	// allow flipping anchors on both axes
-	AnchorFlip AnchorHints = C.GDK_ANCHOR_FLIP
+	AnchorFlip AnchorHints = 3
 	// AnchorSlide wraps GDK_ANCHOR_SLIDE
 	//
 	// allow sliding window on both axes
-	AnchorSlide AnchorHints = C.GDK_ANCHOR_SLIDE
+	AnchorSlide AnchorHints = 12
 	// AnchorResize wraps GDK_ANCHOR_RESIZE
 	//
 	// allow resizing window on both axes
-	AnchorResize AnchorHints = C.GDK_ANCHOR_RESIZE
+	AnchorResize AnchorHints = 48
 )
 
 func marshalAnchorHints(p unsafe.Pointer) (any, error) {
@@ -6852,39 +6852,39 @@ const (
 	// AxisFlagX wraps GDK_AXIS_FLAG_X
 	//
 	// X axis is present
-	AxisFlagX AxisFlags = C.GDK_AXIS_FLAG_X
+	AxisFlagX AxisFlags = 2
 	// AxisFlagY wraps GDK_AXIS_FLAG_Y
 	//
 	// Y axis is present
-	AxisFlagY AxisFlags = C.GDK_AXIS_FLAG_Y
+	AxisFlagY AxisFlags = 4
 	// AxisFlagPressure wraps GDK_AXIS_FLAG_PRESSURE
 	//
 	// Pressure axis is present
-	AxisFlagPressure AxisFlags = C.GDK_AXIS_FLAG_PRESSURE
+	AxisFlagPressure AxisFlags = 8
 	// AxisFlagXtilt wraps GDK_AXIS_FLAG_XTILT
 	//
 	// X tilt axis is present
-	AxisFlagXtilt AxisFlags = C.GDK_AXIS_FLAG_XTILT
+	AxisFlagXtilt AxisFlags = 16
 	// AxisFlagYtilt wraps GDK_AXIS_FLAG_YTILT
 	//
 	// Y tilt axis is present
-	AxisFlagYtilt AxisFlags = C.GDK_AXIS_FLAG_YTILT
+	AxisFlagYtilt AxisFlags = 32
 	// AxisFlagWheel wraps GDK_AXIS_FLAG_WHEEL
 	//
 	// Wheel axis is present
-	AxisFlagWheel AxisFlags = C.GDK_AXIS_FLAG_WHEEL
+	AxisFlagWheel AxisFlags = 64
 	// AxisFlagDistance wraps GDK_AXIS_FLAG_DISTANCE
 	//
 	// Distance axis is present
-	AxisFlagDistance AxisFlags = C.GDK_AXIS_FLAG_DISTANCE
+	AxisFlagDistance AxisFlags = 128
 	// AxisFlagRotation wraps GDK_AXIS_FLAG_ROTATION
 	//
 	// Z-axis rotation is present
-	AxisFlagRotation AxisFlags = C.GDK_AXIS_FLAG_ROTATION
+	AxisFlagRotation AxisFlags = 256
 	// AxisFlagSlider wraps GDK_AXIS_FLAG_SLIDER
 	//
 	// Slider axis is present
-	AxisFlagSlider AxisFlags = C.GDK_AXIS_FLAG_SLIDER
+	AxisFlagSlider AxisFlags = 512
 )
 
 func marshalAxisFlags(p unsafe.Pointer) (any, error) {
@@ -6912,30 +6912,30 @@ const (
 	// ActionDefault wraps GDK_ACTION_DEFAULT
 	//
 	// Means nothing, and should not be used.
-	ActionDefault DragAction = C.GDK_ACTION_DEFAULT
+	ActionDefault DragAction = 1
 	// ActionCopy wraps GDK_ACTION_COPY
 	//
 	// Copy the data.
-	ActionCopy DragAction = C.GDK_ACTION_COPY
+	ActionCopy DragAction = 2
 	// ActionMove wraps GDK_ACTION_MOVE
 	//
 	// Move the data, i.e. first copy it, then delete
 	//  it from the source using the DELETE target of the X selection protocol.
-	ActionMove DragAction = C.GDK_ACTION_MOVE
+	ActionMove DragAction = 4
 	// ActionLink wraps GDK_ACTION_LINK
 	//
 	// Add a link to the data. Note that this is only
 	//  useful if source and destination agree on what it means.
-	ActionLink DragAction = C.GDK_ACTION_LINK
+	ActionLink DragAction = 8
 	// ActionPrivate wraps GDK_ACTION_PRIVATE
 	//
 	// Special action which tells the source that the
 	//  destination will do something that the source doesn’t understand.
-	ActionPrivate DragAction = C.GDK_ACTION_PRIVATE
+	ActionPrivate DragAction = 16
 	// ActionAsk wraps GDK_ACTION_ASK
 	//
 	// Ask the user what to do with the data.
-	ActionAsk DragAction = C.GDK_ACTION_ASK
+	ActionAsk DragAction = 32
 )
 
 func marshalDragAction(p unsafe.Pointer) (any, error) {
@@ -6987,108 +6987,108 @@ const (
 	// ExposureMask wraps GDK_EXPOSURE_MASK
 	//
 	// receive expose events
-	ExposureMask EventMask = C.GDK_EXPOSURE_MASK
+	ExposureMask EventMask = 2
 	// PointerMotionMask wraps GDK_POINTER_MOTION_MASK
 	//
 	// receive all pointer motion events
-	PointerMotionMask EventMask = C.GDK_POINTER_MOTION_MASK
+	PointerMotionMask EventMask = 4
 	// PointerMotionHintMask wraps GDK_POINTER_MOTION_HINT_MASK
 	//
 	// deprecated. see the explanation above
-	PointerMotionHintMask EventMask = C.GDK_POINTER_MOTION_HINT_MASK
+	PointerMotionHintMask EventMask = 8
 	// ButtonMotionMask wraps GDK_BUTTON_MOTION_MASK
 	//
 	// receive pointer motion events while any button is pressed
-	ButtonMotionMask EventMask = C.GDK_BUTTON_MOTION_MASK
+	ButtonMotionMask EventMask = 16
 	// Button1MotionMask wraps GDK_BUTTON1_MOTION_MASK
 	//
 	// receive pointer motion events while 1 button is pressed
-	Button1MotionMask EventMask = C.GDK_BUTTON1_MOTION_MASK
+	Button1MotionMask EventMask = 32
 	// Button2MotionMask wraps GDK_BUTTON2_MOTION_MASK
 	//
 	// receive pointer motion events while 2 button is pressed
-	Button2MotionMask EventMask = C.GDK_BUTTON2_MOTION_MASK
+	Button2MotionMask EventMask = 64
 	// Button3MotionMask wraps GDK_BUTTON3_MOTION_MASK
 	//
 	// receive pointer motion events while 3 button is pressed
-	Button3MotionMask EventMask = C.GDK_BUTTON3_MOTION_MASK
+	Button3MotionMask EventMask = 128
 	// ButtonPressMask wraps GDK_BUTTON_PRESS_MASK
 	//
 	// receive button press events
-	ButtonPressMask EventMask = C.GDK_BUTTON_PRESS_MASK
+	ButtonPressMask EventMask = 256
 	// ButtonReleaseMask wraps GDK_BUTTON_RELEASE_MASK
 	//
 	// receive button release events
-	ButtonReleaseMask EventMask = C.GDK_BUTTON_RELEASE_MASK
+	ButtonReleaseMask EventMask = 512
 	// KeyPressMask wraps GDK_KEY_PRESS_MASK
 	//
 	// receive key press events
-	KeyPressMask EventMask = C.GDK_KEY_PRESS_MASK
+	KeyPressMask EventMask = 1024
 	// KeyReleaseMask wraps GDK_KEY_RELEASE_MASK
 	//
 	// receive key release events
-	KeyReleaseMask EventMask = C.GDK_KEY_RELEASE_MASK
+	KeyReleaseMask EventMask = 2048
 	// EnterNotifyMask wraps GDK_ENTER_NOTIFY_MASK
 	//
 	// receive window enter events
-	EnterNotifyMask EventMask = C.GDK_ENTER_NOTIFY_MASK
+	EnterNotifyMask EventMask = 4096
 	// LeaveNotifyMask wraps GDK_LEAVE_NOTIFY_MASK
 	//
 	// receive window leave events
-	LeaveNotifyMask EventMask = C.GDK_LEAVE_NOTIFY_MASK
+	LeaveNotifyMask EventMask = 8192
 	// FocusChangeMask wraps GDK_FOCUS_CHANGE_MASK
 	//
 	// receive focus change events
-	FocusChangeMask EventMask = C.GDK_FOCUS_CHANGE_MASK
+	FocusChangeMask EventMask = 16384
 	// StructureMask wraps GDK_STRUCTURE_MASK
 	//
 	// receive events about window configuration change
-	StructureMask EventMask = C.GDK_STRUCTURE_MASK
+	StructureMask EventMask = 32768
 	// PropertyChangeMask wraps GDK_PROPERTY_CHANGE_MASK
 	//
 	// receive property change events
-	PropertyChangeMask EventMask = C.GDK_PROPERTY_CHANGE_MASK
+	PropertyChangeMask EventMask = 65536
 	// VisibilityNotifyMask wraps GDK_VISIBILITY_NOTIFY_MASK
 	//
 	// receive visibility change events
-	VisibilityNotifyMask EventMask = C.GDK_VISIBILITY_NOTIFY_MASK
+	VisibilityNotifyMask EventMask = 131072
 	// ProximityInMask wraps GDK_PROXIMITY_IN_MASK
 	//
 	// receive proximity in events
-	ProximityInMask EventMask = C.GDK_PROXIMITY_IN_MASK
+	ProximityInMask EventMask = 262144
 	// ProximityOutMask wraps GDK_PROXIMITY_OUT_MASK
 	//
 	// receive proximity out events
-	ProximityOutMask EventMask = C.GDK_PROXIMITY_OUT_MASK
+	ProximityOutMask EventMask = 524288
 	// SubstructureMask wraps GDK_SUBSTRUCTURE_MASK
 	//
 	// receive events about window configuration changes of
 	//   child windows
-	SubstructureMask EventMask = C.GDK_SUBSTRUCTURE_MASK
+	SubstructureMask EventMask = 1048576
 	// ScrollMask wraps GDK_SCROLL_MASK
 	//
 	// receive scroll events
-	ScrollMask EventMask = C.GDK_SCROLL_MASK
+	ScrollMask EventMask = 2097152
 	// TouchMask wraps GDK_TOUCH_MASK
 	//
 	// receive touch events. Since 3.4
-	TouchMask EventMask = C.GDK_TOUCH_MASK
+	TouchMask EventMask = 4194304
 	// SmoothScrollMask wraps GDK_SMOOTH_SCROLL_MASK
 	//
 	// receive smooth scrolling events. Since 3.4
-	SmoothScrollMask EventMask = C.GDK_SMOOTH_SCROLL_MASK
+	SmoothScrollMask EventMask = 8388608
 	// TouchpadGestureMask wraps GDK_TOUCHPAD_GESTURE_MASK
 	//
 	// receive touchpad gesture events. Since 3.18
-	TouchpadGestureMask EventMask = C.GDK_TOUCHPAD_GESTURE_MASK
+	TouchpadGestureMask EventMask = 16777216
 	// TabletPadMask wraps GDK_TABLET_PAD_MASK
 	//
 	// receive tablet pad events. Since 3.22
-	TabletPadMask EventMask = C.GDK_TABLET_PAD_MASK
+	TabletPadMask EventMask = 33554432
 	// AllEventsMask wraps GDK_ALL_EVENTS_MASK
 	//
 	// the combination of all the above event masks.
-	AllEventsMask EventMask = C.GDK_ALL_EVENTS_MASK
+	AllEventsMask EventMask = 67108862
 )
 
 func marshalEventMask(p unsafe.Pointer) (any, error) {
@@ -7117,35 +7117,35 @@ const (
 	// FrameClockPhaseNone wraps GDK_FRAME_CLOCK_PHASE_NONE
 	//
 	// no phase
-	FrameClockPhaseNone FrameClockPhase = C.GDK_FRAME_CLOCK_PHASE_NONE
+	FrameClockPhaseNone FrameClockPhase = 0
 	// FrameClockPhaseFlushEvents wraps GDK_FRAME_CLOCK_PHASE_FLUSH_EVENTS
 	//
 	// corresponds to GdkFrameClock::flush-events. Should not be handled by applications.
-	FrameClockPhaseFlushEvents FrameClockPhase = C.GDK_FRAME_CLOCK_PHASE_FLUSH_EVENTS
+	FrameClockPhaseFlushEvents FrameClockPhase = 1
 	// FrameClockPhaseBeforePaint wraps GDK_FRAME_CLOCK_PHASE_BEFORE_PAINT
 	//
 	// corresponds to GdkFrameClock::before-paint. Should not be handled by applications.
-	FrameClockPhaseBeforePaint FrameClockPhase = C.GDK_FRAME_CLOCK_PHASE_BEFORE_PAINT
+	FrameClockPhaseBeforePaint FrameClockPhase = 2
 	// FrameClockPhaseUpdate wraps GDK_FRAME_CLOCK_PHASE_UPDATE
 	//
 	// corresponds to GdkFrameClock::update.
-	FrameClockPhaseUpdate FrameClockPhase = C.GDK_FRAME_CLOCK_PHASE_UPDATE
+	FrameClockPhaseUpdate FrameClockPhase = 4
 	// FrameClockPhaseLayout wraps GDK_FRAME_CLOCK_PHASE_LAYOUT
 	//
 	// corresponds to GdkFrameClock::layout.
-	FrameClockPhaseLayout FrameClockPhase = C.GDK_FRAME_CLOCK_PHASE_LAYOUT
+	FrameClockPhaseLayout FrameClockPhase = 8
 	// FrameClockPhasePaint wraps GDK_FRAME_CLOCK_PHASE_PAINT
 	//
 	// corresponds to GdkFrameClock::paint.
-	FrameClockPhasePaint FrameClockPhase = C.GDK_FRAME_CLOCK_PHASE_PAINT
+	FrameClockPhasePaint FrameClockPhase = 16
 	// FrameClockPhaseResumeEvents wraps GDK_FRAME_CLOCK_PHASE_RESUME_EVENTS
 	//
 	// corresponds to GdkFrameClock::resume-events. Should not be handled by applications.
-	FrameClockPhaseResumeEvents FrameClockPhase = C.GDK_FRAME_CLOCK_PHASE_RESUME_EVENTS
+	FrameClockPhaseResumeEvents FrameClockPhase = 32
 	// FrameClockPhaseAfterPaint wraps GDK_FRAME_CLOCK_PHASE_AFTER_PAINT
 	//
 	// corresponds to GdkFrameClock::after-paint. Should not be handled by applications.
-	FrameClockPhaseAfterPaint FrameClockPhase = C.GDK_FRAME_CLOCK_PHASE_AFTER_PAINT
+	FrameClockPhaseAfterPaint FrameClockPhase = 64
 )
 
 func marshalFrameClockPhase(p unsafe.Pointer) (any, error) {
@@ -7189,139 +7189,139 @@ const (
 	// ShiftMask wraps GDK_SHIFT_MASK
 	//
 	// the Shift key.
-	ShiftMask ModifierType = C.GDK_SHIFT_MASK
+	ShiftMask ModifierType = 1
 	// LockMask wraps GDK_LOCK_MASK
 	//
 	// a Lock key (depending on the modifier mapping of the
 	//  X server this may either be CapsLock or ShiftLock).
-	LockMask ModifierType = C.GDK_LOCK_MASK
+	LockMask ModifierType = 2
 	// ControlMask wraps GDK_CONTROL_MASK
 	//
 	// the Control key.
-	ControlMask ModifierType = C.GDK_CONTROL_MASK
+	ControlMask ModifierType = 4
 	// Mod1Mask wraps GDK_MOD1_MASK
 	//
 	// the fourth modifier key (it depends on the modifier
 	//  mapping of the X server which key is interpreted as this modifier, but
 	//  normally it is the Alt key).
-	Mod1Mask ModifierType = C.GDK_MOD1_MASK
+	Mod1Mask ModifierType = 8
 	// Mod2Mask wraps GDK_MOD2_MASK
 	//
 	// the fifth modifier key (it depends on the modifier
 	//  mapping of the X server which key is interpreted as this modifier).
-	Mod2Mask ModifierType = C.GDK_MOD2_MASK
+	Mod2Mask ModifierType = 16
 	// Mod3Mask wraps GDK_MOD3_MASK
 	//
 	// the sixth modifier key (it depends on the modifier
 	//  mapping of the X server which key is interpreted as this modifier).
-	Mod3Mask ModifierType = C.GDK_MOD3_MASK
+	Mod3Mask ModifierType = 32
 	// Mod4Mask wraps GDK_MOD4_MASK
 	//
 	// the seventh modifier key (it depends on the modifier
 	//  mapping of the X server which key is interpreted as this modifier).
-	Mod4Mask ModifierType = C.GDK_MOD4_MASK
+	Mod4Mask ModifierType = 64
 	// Mod5Mask wraps GDK_MOD5_MASK
 	//
 	// the eighth modifier key (it depends on the modifier
 	//  mapping of the X server which key is interpreted as this modifier).
-	Mod5Mask ModifierType = C.GDK_MOD5_MASK
+	Mod5Mask ModifierType = 128
 	// Button1Mask wraps GDK_BUTTON1_MASK
 	//
 	// the first mouse button.
-	Button1Mask ModifierType = C.GDK_BUTTON1_MASK
+	Button1Mask ModifierType = 256
 	// Button2Mask wraps GDK_BUTTON2_MASK
 	//
 	// the second mouse button.
-	Button2Mask ModifierType = C.GDK_BUTTON2_MASK
+	Button2Mask ModifierType = 512
 	// Button3Mask wraps GDK_BUTTON3_MASK
 	//
 	// the third mouse button.
-	Button3Mask ModifierType = C.GDK_BUTTON3_MASK
+	Button3Mask ModifierType = 1024
 	// Button4Mask wraps GDK_BUTTON4_MASK
 	//
 	// the fourth mouse button.
-	Button4Mask ModifierType = C.GDK_BUTTON4_MASK
+	Button4Mask ModifierType = 2048
 	// Button5Mask wraps GDK_BUTTON5_MASK
 	//
 	// the fifth mouse button.
-	Button5Mask ModifierType = C.GDK_BUTTON5_MASK
+	Button5Mask ModifierType = 4096
 	// ModifierReserved13Mask wraps GDK_MODIFIER_RESERVED_13_MASK
 	//
 	// A reserved bit flag; do not use in your own code
-	ModifierReserved13Mask ModifierType = C.GDK_MODIFIER_RESERVED_13_MASK
+	ModifierReserved13Mask ModifierType = 8192
 	// ModifierReserved14Mask wraps GDK_MODIFIER_RESERVED_14_MASK
 	//
 	// A reserved bit flag; do not use in your own code
-	ModifierReserved14Mask ModifierType = C.GDK_MODIFIER_RESERVED_14_MASK
+	ModifierReserved14Mask ModifierType = 16384
 	// ModifierReserved15Mask wraps GDK_MODIFIER_RESERVED_15_MASK
 	//
 	// A reserved bit flag; do not use in your own code
-	ModifierReserved15Mask ModifierType = C.GDK_MODIFIER_RESERVED_15_MASK
+	ModifierReserved15Mask ModifierType = 32768
 	// ModifierReserved16Mask wraps GDK_MODIFIER_RESERVED_16_MASK
 	//
 	// A reserved bit flag; do not use in your own code
-	ModifierReserved16Mask ModifierType = C.GDK_MODIFIER_RESERVED_16_MASK
+	ModifierReserved16Mask ModifierType = 65536
 	// ModifierReserved17Mask wraps GDK_MODIFIER_RESERVED_17_MASK
 	//
 	// A reserved bit flag; do not use in your own code
-	ModifierReserved17Mask ModifierType = C.GDK_MODIFIER_RESERVED_17_MASK
+	ModifierReserved17Mask ModifierType = 131072
 	// ModifierReserved18Mask wraps GDK_MODIFIER_RESERVED_18_MASK
 	//
 	// A reserved bit flag; do not use in your own code
-	ModifierReserved18Mask ModifierType = C.GDK_MODIFIER_RESERVED_18_MASK
+	ModifierReserved18Mask ModifierType = 262144
 	// ModifierReserved19Mask wraps GDK_MODIFIER_RESERVED_19_MASK
 	//
 	// A reserved bit flag; do not use in your own code
-	ModifierReserved19Mask ModifierType = C.GDK_MODIFIER_RESERVED_19_MASK
+	ModifierReserved19Mask ModifierType = 524288
 	// ModifierReserved20Mask wraps GDK_MODIFIER_RESERVED_20_MASK
 	//
 	// A reserved bit flag; do not use in your own code
-	ModifierReserved20Mask ModifierType = C.GDK_MODIFIER_RESERVED_20_MASK
+	ModifierReserved20Mask ModifierType = 1048576
 	// ModifierReserved21Mask wraps GDK_MODIFIER_RESERVED_21_MASK
 	//
 	// A reserved bit flag; do not use in your own code
-	ModifierReserved21Mask ModifierType = C.GDK_MODIFIER_RESERVED_21_MASK
+	ModifierReserved21Mask ModifierType = 2097152
 	// ModifierReserved22Mask wraps GDK_MODIFIER_RESERVED_22_MASK
 	//
 	// A reserved bit flag; do not use in your own code
-	ModifierReserved22Mask ModifierType = C.GDK_MODIFIER_RESERVED_22_MASK
+	ModifierReserved22Mask ModifierType = 4194304
 	// ModifierReserved23Mask wraps GDK_MODIFIER_RESERVED_23_MASK
 	//
 	// A reserved bit flag; do not use in your own code
-	ModifierReserved23Mask ModifierType = C.GDK_MODIFIER_RESERVED_23_MASK
+	ModifierReserved23Mask ModifierType = 8388608
 	// ModifierReserved24Mask wraps GDK_MODIFIER_RESERVED_24_MASK
 	//
 	// A reserved bit flag; do not use in your own code
-	ModifierReserved24Mask ModifierType = C.GDK_MODIFIER_RESERVED_24_MASK
+	ModifierReserved24Mask ModifierType = 16777216
 	// ModifierReserved25Mask wraps GDK_MODIFIER_RESERVED_25_MASK
 	//
 	// A reserved bit flag; do not use in your own code
-	ModifierReserved25Mask ModifierType = C.GDK_MODIFIER_RESERVED_25_MASK
+	ModifierReserved25Mask ModifierType = 33554432
 	// SuperMask wraps GDK_SUPER_MASK
 	//
 	// the Super modifier. Since 2.10
-	SuperMask ModifierType = C.GDK_SUPER_MASK
+	SuperMask ModifierType = 67108864
 	// HyperMask wraps GDK_HYPER_MASK
 	//
 	// the Hyper modifier. Since 2.10
-	HyperMask ModifierType = C.GDK_HYPER_MASK
+	HyperMask ModifierType = 134217728
 	// MetaMask wraps GDK_META_MASK
 	//
 	// the Meta modifier. Since 2.10
-	MetaMask ModifierType = C.GDK_META_MASK
+	MetaMask ModifierType = 268435456
 	// ModifierReserved29Mask wraps GDK_MODIFIER_RESERVED_29_MASK
 	//
 	// A reserved bit flag; do not use in your own code
-	ModifierReserved29Mask ModifierType = C.GDK_MODIFIER_RESERVED_29_MASK
+	ModifierReserved29Mask ModifierType = 536870912
 	// ReleaseMask wraps GDK_RELEASE_MASK
 	//
 	// not used in GDK itself. GTK+ uses it to differentiate
 	//  between (keyval, modifiers) pairs from key press and release events.
-	ReleaseMask ModifierType = C.GDK_RELEASE_MASK
+	ReleaseMask ModifierType = 1073741824
 	// ModifierMask wraps GDK_MODIFIER_MASK
 	//
 	// a mask covering all modifier types.
-	ModifierMask ModifierType = C.GDK_MODIFIER_MASK
+	ModifierMask ModifierType = 1543512063
 )
 
 func marshalModifierType(p unsafe.Pointer) (any, error) {
@@ -7348,31 +7348,31 @@ const (
 	// SeatCapabilityNone wraps GDK_SEAT_CAPABILITY_NONE
 	//
 	// No input capabilities
-	SeatCapabilityNone SeatCapabilities = C.GDK_SEAT_CAPABILITY_NONE
+	SeatCapabilityNone SeatCapabilities = 0
 	// SeatCapabilityPointer wraps GDK_SEAT_CAPABILITY_POINTER
 	//
 	// The seat has a pointer (e.g. mouse)
-	SeatCapabilityPointer SeatCapabilities = C.GDK_SEAT_CAPABILITY_POINTER
+	SeatCapabilityPointer SeatCapabilities = 1
 	// SeatCapabilityTouch wraps GDK_SEAT_CAPABILITY_TOUCH
 	//
 	// The seat has touchscreen(s) attached
-	SeatCapabilityTouch SeatCapabilities = C.GDK_SEAT_CAPABILITY_TOUCH
+	SeatCapabilityTouch SeatCapabilities = 2
 	// SeatCapabilityTabletStylus wraps GDK_SEAT_CAPABILITY_TABLET_STYLUS
 	//
 	// The seat has drawing tablet(s) attached
-	SeatCapabilityTabletStylus SeatCapabilities = C.GDK_SEAT_CAPABILITY_TABLET_STYLUS
+	SeatCapabilityTabletStylus SeatCapabilities = 4
 	// SeatCapabilityKeyboard wraps GDK_SEAT_CAPABILITY_KEYBOARD
 	//
 	// The seat has keyboard(s) attached
-	SeatCapabilityKeyboard SeatCapabilities = C.GDK_SEAT_CAPABILITY_KEYBOARD
+	SeatCapabilityKeyboard SeatCapabilities = 8
 	// SeatCapabilityAllPointing wraps GDK_SEAT_CAPABILITY_ALL_POINTING
 	//
 	// The union of all pointing capabilities
-	SeatCapabilityAllPointing SeatCapabilities = C.GDK_SEAT_CAPABILITY_ALL_POINTING
+	SeatCapabilityAllPointing SeatCapabilities = 7
 	// SeatCapabilityAll wraps GDK_SEAT_CAPABILITY_ALL
 	//
 	// The union of all capabilities
-	SeatCapabilityAll SeatCapabilities = C.GDK_SEAT_CAPABILITY_ALL
+	SeatCapabilityAll SeatCapabilities = 15
 )
 
 func marshalSeatCapabilities(p unsafe.Pointer) (any, error) {
@@ -7401,31 +7401,31 @@ const (
 	// DecorAll wraps GDK_DECOR_ALL
 	//
 	// all decorations should be applied.
-	DecorAll WMDecoration = C.GDK_DECOR_ALL
+	DecorAll WMDecoration = 1
 	// DecorBorder wraps GDK_DECOR_BORDER
 	//
 	// a frame should be drawn around the window.
-	DecorBorder WMDecoration = C.GDK_DECOR_BORDER
+	DecorBorder WMDecoration = 2
 	// DecorResizeh wraps GDK_DECOR_RESIZEH
 	//
 	// the frame should have resize handles.
-	DecorResizeh WMDecoration = C.GDK_DECOR_RESIZEH
+	DecorResizeh WMDecoration = 4
 	// DecorTitle wraps GDK_DECOR_TITLE
 	//
 	// a titlebar should be placed above the window.
-	DecorTitle WMDecoration = C.GDK_DECOR_TITLE
+	DecorTitle WMDecoration = 8
 	// DecorMenu wraps GDK_DECOR_MENU
 	//
 	// a button for opening a menu should be included.
-	DecorMenu WMDecoration = C.GDK_DECOR_MENU
+	DecorMenu WMDecoration = 16
 	// DecorMinimize wraps GDK_DECOR_MINIMIZE
 	//
 	// a minimize button should be included.
-	DecorMinimize WMDecoration = C.GDK_DECOR_MINIMIZE
+	DecorMinimize WMDecoration = 32
 	// DecorMaximize wraps GDK_DECOR_MAXIMIZE
 	//
 	// a maximize button should be included.
-	DecorMaximize WMDecoration = C.GDK_DECOR_MAXIMIZE
+	DecorMaximize WMDecoration = 64
 )
 
 func marshalWMDecoration(p unsafe.Pointer) (any, error) {
@@ -7454,27 +7454,27 @@ const (
 	// FuncAll wraps GDK_FUNC_ALL
 	//
 	// all functions should be offered.
-	FuncAll WMFunction = C.GDK_FUNC_ALL
+	FuncAll WMFunction = 1
 	// FuncResize wraps GDK_FUNC_RESIZE
 	//
 	// the window should be resizable.
-	FuncResize WMFunction = C.GDK_FUNC_RESIZE
+	FuncResize WMFunction = 2
 	// FuncMove wraps GDK_FUNC_MOVE
 	//
 	// the window should be movable.
-	FuncMove WMFunction = C.GDK_FUNC_MOVE
+	FuncMove WMFunction = 4
 	// FuncMinimize wraps GDK_FUNC_MINIMIZE
 	//
 	// the window should be minimizable.
-	FuncMinimize WMFunction = C.GDK_FUNC_MINIMIZE
+	FuncMinimize WMFunction = 8
 	// FuncMaximize wraps GDK_FUNC_MAXIMIZE
 	//
 	// the window should be maximizable.
-	FuncMaximize WMFunction = C.GDK_FUNC_MAXIMIZE
+	FuncMaximize WMFunction = 16
 	// FuncClose wraps GDK_FUNC_CLOSE
 	//
 	// the window should be closable.
-	FuncClose WMFunction = C.GDK_FUNC_CLOSE
+	FuncClose WMFunction = 32
 )
 
 func marshalWMFunction(p unsafe.Pointer) (any, error) {
@@ -7506,35 +7506,35 @@ const (
 	// WaTitle wraps GDK_WA_TITLE
 	//
 	// Honor the title field
-	WaTitle WindowAttributesType = C.GDK_WA_TITLE
+	WaTitle WindowAttributesType = 2
 	// WaX wraps GDK_WA_X
 	//
 	// Honor the X coordinate field
-	WaX WindowAttributesType = C.GDK_WA_X
+	WaX WindowAttributesType = 4
 	// WaY wraps GDK_WA_Y
 	//
 	// Honor the Y coordinate field
-	WaY WindowAttributesType = C.GDK_WA_Y
+	WaY WindowAttributesType = 8
 	// WaCursor wraps GDK_WA_CURSOR
 	//
 	// Honor the cursor field
-	WaCursor WindowAttributesType = C.GDK_WA_CURSOR
+	WaCursor WindowAttributesType = 16
 	// WaVisual wraps GDK_WA_VISUAL
 	//
 	// Honor the visual field
-	WaVisual WindowAttributesType = C.GDK_WA_VISUAL
+	WaVisual WindowAttributesType = 32
 	// WaWmclass wraps GDK_WA_WMCLASS
 	//
 	// Honor the wmclass_class and wmclass_name fields
-	WaWmclass WindowAttributesType = C.GDK_WA_WMCLASS
+	WaWmclass WindowAttributesType = 64
 	// WaNoredir wraps GDK_WA_NOREDIR
 	//
 	// Honor the override_redirect field
-	WaNoredir WindowAttributesType = C.GDK_WA_NOREDIR
+	WaNoredir WindowAttributesType = 128
 	// WaTypeHint wraps GDK_WA_TYPE_HINT
 	//
 	// Honor the type_hint field
-	WaTypeHint WindowAttributesType = C.GDK_WA_TYPE_HINT
+	WaTypeHint WindowAttributesType = 256
 )
 
 func marshalWindowAttributesType(p unsafe.Pointer) (any, error) {
@@ -7568,41 +7568,41 @@ const (
 	// HintPos wraps GDK_HINT_POS
 	//
 	// indicates that the program has positioned the window
-	HintPos WindowHints = C.GDK_HINT_POS
+	HintPos WindowHints = 1
 	// HintMinSize wraps GDK_HINT_MIN_SIZE
 	//
 	// min size fields are set
-	HintMinSize WindowHints = C.GDK_HINT_MIN_SIZE
+	HintMinSize WindowHints = 2
 	// HintMaxSize wraps GDK_HINT_MAX_SIZE
 	//
 	// max size fields are set
-	HintMaxSize WindowHints = C.GDK_HINT_MAX_SIZE
+	HintMaxSize WindowHints = 4
 	// HintBaseSize wraps GDK_HINT_BASE_SIZE
 	//
 	// base size fields are set
-	HintBaseSize WindowHints = C.GDK_HINT_BASE_SIZE
+	HintBaseSize WindowHints = 8
 	// HintAspect wraps GDK_HINT_ASPECT
 	//
 	// aspect ratio fields are set
-	HintAspect WindowHints = C.GDK_HINT_ASPECT
+	HintAspect WindowHints = 16
 	// HintResizeInc wraps GDK_HINT_RESIZE_INC
 	//
 	// resize increment fields are set
-	HintResizeInc WindowHints = C.GDK_HINT_RESIZE_INC
+	HintResizeInc WindowHints = 32
 	// HintWinGravity wraps GDK_HINT_WIN_GRAVITY
 	//
 	// window gravity field is set
-	HintWinGravity WindowHints = C.GDK_HINT_WIN_GRAVITY
+	HintWinGravity WindowHints = 64
 	// HintUserPos wraps GDK_HINT_USER_POS
 	//
 	// indicates that the window’s position was explicitly set
 	//  by the user
-	HintUserPos WindowHints = C.GDK_HINT_USER_POS
+	HintUserPos WindowHints = 128
 	// HintUserSize wraps GDK_HINT_USER_SIZE
 	//
 	// indicates that the window’s size was explicitly set by
 	//  the user
-	HintUserSize WindowHints = C.GDK_HINT_USER_SIZE
+	HintUserSize WindowHints = 256
 )
 
 func marshalWindowHints(p unsafe.Pointer) (any, error) {
@@ -7629,73 +7629,73 @@ const (
 	// WindowStateWithdrawn wraps GDK_WINDOW_STATE_WITHDRAWN
 	//
 	// the window is not shown.
-	WindowStateWithdrawn WindowState = C.GDK_WINDOW_STATE_WITHDRAWN
+	WindowStateWithdrawn WindowState = 1
 	// WindowStateIconified wraps GDK_WINDOW_STATE_ICONIFIED
 	//
 	// the window is minimized.
-	WindowStateIconified WindowState = C.GDK_WINDOW_STATE_ICONIFIED
+	WindowStateIconified WindowState = 2
 	// WindowStateMaximized wraps GDK_WINDOW_STATE_MAXIMIZED
 	//
 	// the window is maximized.
-	WindowStateMaximized WindowState = C.GDK_WINDOW_STATE_MAXIMIZED
+	WindowStateMaximized WindowState = 4
 	// WindowStateSticky wraps GDK_WINDOW_STATE_STICKY
 	//
 	// the window is sticky.
-	WindowStateSticky WindowState = C.GDK_WINDOW_STATE_STICKY
+	WindowStateSticky WindowState = 8
 	// WindowStateFullscreen wraps GDK_WINDOW_STATE_FULLSCREEN
 	//
 	// the window is maximized without
 	//   decorations.
-	WindowStateFullscreen WindowState = C.GDK_WINDOW_STATE_FULLSCREEN
+	WindowStateFullscreen WindowState = 16
 	// WindowStateAbove wraps GDK_WINDOW_STATE_ABOVE
 	//
 	// the window is kept above other windows.
-	WindowStateAbove WindowState = C.GDK_WINDOW_STATE_ABOVE
+	WindowStateAbove WindowState = 32
 	// WindowStateBelow wraps GDK_WINDOW_STATE_BELOW
 	//
 	// the window is kept below other windows.
-	WindowStateBelow WindowState = C.GDK_WINDOW_STATE_BELOW
+	WindowStateBelow WindowState = 64
 	// WindowStateFocused wraps GDK_WINDOW_STATE_FOCUSED
 	//
 	// the window is presented as focused (with active decorations).
-	WindowStateFocused WindowState = C.GDK_WINDOW_STATE_FOCUSED
+	WindowStateFocused WindowState = 128
 	// WindowStateTiled wraps GDK_WINDOW_STATE_TILED
 	//
 	// the window is in a tiled state, Since 3.10. Since 3.22.23, this
 	//                          is deprecated in favor of per-edge information.
-	WindowStateTiled WindowState = C.GDK_WINDOW_STATE_TILED
+	WindowStateTiled WindowState = 256
 	// WindowStateTopTiled wraps GDK_WINDOW_STATE_TOP_TILED
 	//
 	// whether the top edge is tiled, Since 3.22.23
-	WindowStateTopTiled WindowState = C.GDK_WINDOW_STATE_TOP_TILED
+	WindowStateTopTiled WindowState = 512
 	// WindowStateTopResizable wraps GDK_WINDOW_STATE_TOP_RESIZABLE
 	//
 	// whether the top edge is resizable, Since 3.22.23
-	WindowStateTopResizable WindowState = C.GDK_WINDOW_STATE_TOP_RESIZABLE
+	WindowStateTopResizable WindowState = 1024
 	// WindowStateRightTiled wraps GDK_WINDOW_STATE_RIGHT_TILED
 	//
 	// whether the right edge is tiled, Since 3.22.23
-	WindowStateRightTiled WindowState = C.GDK_WINDOW_STATE_RIGHT_TILED
+	WindowStateRightTiled WindowState = 2048
 	// WindowStateRightResizable wraps GDK_WINDOW_STATE_RIGHT_RESIZABLE
 	//
 	// whether the right edge is resizable, Since 3.22.23
-	WindowStateRightResizable WindowState = C.GDK_WINDOW_STATE_RIGHT_RESIZABLE
+	WindowStateRightResizable WindowState = 4096
 	// WindowStateBottomTiled wraps GDK_WINDOW_STATE_BOTTOM_TILED
 	//
 	// whether the bottom edge is tiled, Since 3.22.23
-	WindowStateBottomTiled WindowState = C.GDK_WINDOW_STATE_BOTTOM_TILED
+	WindowStateBottomTiled WindowState = 8192
 	// WindowStateBottomResizable wraps GDK_WINDOW_STATE_BOTTOM_RESIZABLE
 	//
 	// whether the bottom edge is resizable, Since 3.22.23
-	WindowStateBottomResizable WindowState = C.GDK_WINDOW_STATE_BOTTOM_RESIZABLE
+	WindowStateBottomResizable WindowState = 16384
 	// WindowStateLeftTiled wraps GDK_WINDOW_STATE_LEFT_TILED
 	//
 	// whether the left edge is tiled, Since 3.22.23
-	WindowStateLeftTiled WindowState = C.GDK_WINDOW_STATE_LEFT_TILED
+	WindowStateLeftTiled WindowState = 32768
 	// WindowStateLeftResizable wraps GDK_WINDOW_STATE_LEFT_RESIZABLE
 	//
 	// whether the left edge is resizable, Since 3.22.23
-	WindowStateLeftResizable WindowState = C.GDK_WINDOW_STATE_LEFT_RESIZABLE
+	WindowStateLeftResizable WindowState = 65536
 )
 
 func marshalWindowState(p unsafe.Pointer) (any, error) {

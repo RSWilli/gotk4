@@ -222,15 +222,15 @@ const (
 	// AlignLeft wraps PANGO_ALIGN_LEFT
 	//
 	// Put all available space on the right
-	AlignLeft Alignment = C.PANGO_ALIGN_LEFT
+	AlignLeft Alignment = 0
 	// AlignCenter wraps PANGO_ALIGN_CENTER
 	//
 	// Center the line within the available space
-	AlignCenter Alignment = C.PANGO_ALIGN_CENTER
+	AlignCenter Alignment = 1
 	// AlignRight wraps PANGO_ALIGN_RIGHT
 	//
 	// Put all available space on the left
-	AlignRight Alignment = C.PANGO_ALIGN_RIGHT
+	AlignRight Alignment = 2
 )
 
 func marshalAlignment(p unsafe.Pointer) (any, error) {
@@ -258,153 +258,153 @@ const (
 	// AttrTypeInvalid wraps PANGO_ATTR_TYPE_INVALID
 	//
 	// does not happen
-	AttrTypeInvalid AttrType = C.PANGO_ATTR_TYPE_INVALID
+	AttrTypeInvalid AttrType = 0
 	// AttrTypeLanguage wraps PANGO_ATTR_TYPE_LANGUAGE
 	//
 	// language ([struct@Pango.AttrLanguage])
-	AttrTypeLanguage AttrType = C.PANGO_ATTR_TYPE_LANGUAGE
+	AttrTypeLanguage AttrType = 1
 	// AttrTypeFamily wraps PANGO_ATTR_TYPE_FAMILY
 	//
 	// font family name list ([struct@Pango.AttrString])
-	AttrTypeFamily AttrType = C.PANGO_ATTR_TYPE_FAMILY
+	AttrTypeFamily AttrType = 2
 	// AttrTypeStyle wraps PANGO_ATTR_TYPE_STYLE
 	//
 	// font slant style ([struct@Pango.AttrInt])
-	AttrTypeStyle AttrType = C.PANGO_ATTR_TYPE_STYLE
+	AttrTypeStyle AttrType = 3
 	// AttrTypeWeight wraps PANGO_ATTR_TYPE_WEIGHT
 	//
 	// font weight ([struct@Pango.AttrInt])
-	AttrTypeWeight AttrType = C.PANGO_ATTR_TYPE_WEIGHT
+	AttrTypeWeight AttrType = 4
 	// AttrTypeVariant wraps PANGO_ATTR_TYPE_VARIANT
 	//
 	// font variant (normal or small caps) ([struct@Pango.AttrInt])
-	AttrTypeVariant AttrType = C.PANGO_ATTR_TYPE_VARIANT
+	AttrTypeVariant AttrType = 5
 	// AttrTypeStretch wraps PANGO_ATTR_TYPE_STRETCH
 	//
 	// font stretch ([struct@Pango.AttrInt])
-	AttrTypeStretch AttrType = C.PANGO_ATTR_TYPE_STRETCH
+	AttrTypeStretch AttrType = 6
 	// AttrTypeSize wraps PANGO_ATTR_TYPE_SIZE
 	//
 	// font size in points scaled by %PANGO_SCALE ([struct@Pango.AttrInt])
-	AttrTypeSize AttrType = C.PANGO_ATTR_TYPE_SIZE
+	AttrTypeSize AttrType = 7
 	// AttrTypeFontDesc wraps PANGO_ATTR_TYPE_FONT_DESC
 	//
 	// font description ([struct@Pango.AttrFontDesc])
-	AttrTypeFontDesc AttrType = C.PANGO_ATTR_TYPE_FONT_DESC
+	AttrTypeFontDesc AttrType = 8
 	// AttrTypeForeground wraps PANGO_ATTR_TYPE_FOREGROUND
 	//
 	// foreground color ([struct@Pango.AttrColor])
-	AttrTypeForeground AttrType = C.PANGO_ATTR_TYPE_FOREGROUND
+	AttrTypeForeground AttrType = 9
 	// AttrTypeBackground wraps PANGO_ATTR_TYPE_BACKGROUND
 	//
 	// background color ([struct@Pango.AttrColor])
-	AttrTypeBackground AttrType = C.PANGO_ATTR_TYPE_BACKGROUND
+	AttrTypeBackground AttrType = 10
 	// AttrTypeUnderline wraps PANGO_ATTR_TYPE_UNDERLINE
 	//
 	// whether the text has an underline ([struct@Pango.AttrInt])
-	AttrTypeUnderline AttrType = C.PANGO_ATTR_TYPE_UNDERLINE
+	AttrTypeUnderline AttrType = 11
 	// AttrTypeStrikethrough wraps PANGO_ATTR_TYPE_STRIKETHROUGH
 	//
 	// whether the text is struck-through ([struct@Pango.AttrInt])
-	AttrTypeStrikethrough AttrType = C.PANGO_ATTR_TYPE_STRIKETHROUGH
+	AttrTypeStrikethrough AttrType = 12
 	// AttrTypeRise wraps PANGO_ATTR_TYPE_RISE
 	//
 	// baseline displacement ([struct@Pango.AttrInt])
-	AttrTypeRise AttrType = C.PANGO_ATTR_TYPE_RISE
+	AttrTypeRise AttrType = 13
 	// AttrTypeShape wraps PANGO_ATTR_TYPE_SHAPE
 	//
 	// shape ([struct@Pango.AttrShape])
-	AttrTypeShape AttrType = C.PANGO_ATTR_TYPE_SHAPE
+	AttrTypeShape AttrType = 14
 	// AttrTypeScale wraps PANGO_ATTR_TYPE_SCALE
 	//
 	// font size scale factor ([struct@Pango.AttrFloat])
-	AttrTypeScale AttrType = C.PANGO_ATTR_TYPE_SCALE
+	AttrTypeScale AttrType = 15
 	// AttrTypeFallback wraps PANGO_ATTR_TYPE_FALLBACK
 	//
 	// whether fallback is enabled ([struct@Pango.AttrInt])
-	AttrTypeFallback AttrType = C.PANGO_ATTR_TYPE_FALLBACK
+	AttrTypeFallback AttrType = 16
 	// AttrTypeLetterSpacing wraps PANGO_ATTR_TYPE_LETTER_SPACING
 	//
 	// letter spacing ([struct@PangoAttrInt])
-	AttrTypeLetterSpacing AttrType = C.PANGO_ATTR_TYPE_LETTER_SPACING
+	AttrTypeLetterSpacing AttrType = 17
 	// AttrTypeUnderlineColor wraps PANGO_ATTR_TYPE_UNDERLINE_COLOR
 	//
 	// underline color ([struct@Pango.AttrColor])
-	AttrTypeUnderlineColor AttrType = C.PANGO_ATTR_TYPE_UNDERLINE_COLOR
+	AttrTypeUnderlineColor AttrType = 18
 	// AttrTypeStrikethroughColor wraps PANGO_ATTR_TYPE_STRIKETHROUGH_COLOR
 	//
 	// strikethrough color ([struct@Pango.AttrColor])
-	AttrTypeStrikethroughColor AttrType = C.PANGO_ATTR_TYPE_STRIKETHROUGH_COLOR
+	AttrTypeStrikethroughColor AttrType = 19
 	// AttrTypeAbsoluteSize wraps PANGO_ATTR_TYPE_ABSOLUTE_SIZE
 	//
 	// font size in pixels scaled by %PANGO_SCALE ([struct@Pango.AttrInt])
-	AttrTypeAbsoluteSize AttrType = C.PANGO_ATTR_TYPE_ABSOLUTE_SIZE
+	AttrTypeAbsoluteSize AttrType = 20
 	// AttrTypeGravity wraps PANGO_ATTR_TYPE_GRAVITY
 	//
 	// base text gravity ([struct@Pango.AttrInt])
-	AttrTypeGravity AttrType = C.PANGO_ATTR_TYPE_GRAVITY
+	AttrTypeGravity AttrType = 21
 	// AttrTypeGravityHint wraps PANGO_ATTR_TYPE_GRAVITY_HINT
 	//
 	// gravity hint ([struct@Pango.AttrInt])
-	AttrTypeGravityHint AttrType = C.PANGO_ATTR_TYPE_GRAVITY_HINT
+	AttrTypeGravityHint AttrType = 22
 	// AttrTypeFontFeatures wraps PANGO_ATTR_TYPE_FONT_FEATURES
 	//
 	// OpenType font features ([struct@Pango.AttrFontFeatures]). Since 1.38
-	AttrTypeFontFeatures AttrType = C.PANGO_ATTR_TYPE_FONT_FEATURES
+	AttrTypeFontFeatures AttrType = 23
 	// AttrTypeForegroundAlpha wraps PANGO_ATTR_TYPE_FOREGROUND_ALPHA
 	//
 	// foreground alpha ([struct@Pango.AttrInt]). Since 1.38
-	AttrTypeForegroundAlpha AttrType = C.PANGO_ATTR_TYPE_FOREGROUND_ALPHA
+	AttrTypeForegroundAlpha AttrType = 24
 	// AttrTypeBackgroundAlpha wraps PANGO_ATTR_TYPE_BACKGROUND_ALPHA
 	//
 	// background alpha ([struct@Pango.AttrInt]). Since 1.38
-	AttrTypeBackgroundAlpha AttrType = C.PANGO_ATTR_TYPE_BACKGROUND_ALPHA
+	AttrTypeBackgroundAlpha AttrType = 25
 	// AttrTypeAllowBreaks wraps PANGO_ATTR_TYPE_ALLOW_BREAKS
 	//
 	// whether breaks are allowed ([struct@Pango.AttrInt]). Since 1.44
-	AttrTypeAllowBreaks AttrType = C.PANGO_ATTR_TYPE_ALLOW_BREAKS
+	AttrTypeAllowBreaks AttrType = 26
 	// AttrTypeShow wraps PANGO_ATTR_TYPE_SHOW
 	//
 	// how to render invisible characters ([struct@Pango.AttrInt]). Since 1.44
-	AttrTypeShow AttrType = C.PANGO_ATTR_TYPE_SHOW
+	AttrTypeShow AttrType = 27
 	// AttrTypeInsertHyphens wraps PANGO_ATTR_TYPE_INSERT_HYPHENS
 	//
 	// whether to insert hyphens at intra-word line breaks ([struct@Pango.AttrInt]). Since 1.44
-	AttrTypeInsertHyphens AttrType = C.PANGO_ATTR_TYPE_INSERT_HYPHENS
+	AttrTypeInsertHyphens AttrType = 28
 	// AttrTypeOverline wraps PANGO_ATTR_TYPE_OVERLINE
 	//
 	// whether the text has an overline ([struct@Pango.AttrInt]). Since 1.46
-	AttrTypeOverline AttrType = C.PANGO_ATTR_TYPE_OVERLINE
+	AttrTypeOverline AttrType = 29
 	// AttrTypeOverlineColor wraps PANGO_ATTR_TYPE_OVERLINE_COLOR
 	//
 	// overline color ([struct@Pango.AttrColor]). Since 1.46
-	AttrTypeOverlineColor AttrType = C.PANGO_ATTR_TYPE_OVERLINE_COLOR
+	AttrTypeOverlineColor AttrType = 30
 	// AttrTypeLineHeight wraps PANGO_ATTR_TYPE_LINE_HEIGHT
 	//
 	// line height factor ([struct@Pango.AttrFloat]). Since: 1.50
-	AttrTypeLineHeight AttrType = C.PANGO_ATTR_TYPE_LINE_HEIGHT
+	AttrTypeLineHeight AttrType = 31
 	// AttrTypeAbsoluteLineHeight wraps PANGO_ATTR_TYPE_ABSOLUTE_LINE_HEIGHT
 	//
 	// line height ([struct@Pango.AttrInt]). Since: 1.50
-	AttrTypeAbsoluteLineHeight AttrType = C.PANGO_ATTR_TYPE_ABSOLUTE_LINE_HEIGHT
+	AttrTypeAbsoluteLineHeight AttrType = 32
 	// AttrTypeTextTransform wraps PANGO_ATTR_TYPE_TEXT_TRANSFORM
-	AttrTypeTextTransform AttrType = C.PANGO_ATTR_TYPE_TEXT_TRANSFORM
+	AttrTypeTextTransform AttrType = 33
 	// AttrTypeWord wraps PANGO_ATTR_TYPE_WORD
 	//
 	// override segmentation to classify the range of the attribute as a single word ([struct@Pango.AttrInt]). Since 1.50
-	AttrTypeWord AttrType = C.PANGO_ATTR_TYPE_WORD
+	AttrTypeWord AttrType = 34
 	// AttrTypeSentence wraps PANGO_ATTR_TYPE_SENTENCE
 	//
 	// override segmentation to classify the range of the attribute as a single sentence ([struct@Pango.AttrInt]). Since 1.50
-	AttrTypeSentence AttrType = C.PANGO_ATTR_TYPE_SENTENCE
+	AttrTypeSentence AttrType = 35
 	// AttrTypeBaselineShift wraps PANGO_ATTR_TYPE_BASELINE_SHIFT
 	//
 	// baseline displacement ([struct@Pango.AttrInt]). Since 1.50
-	AttrTypeBaselineShift AttrType = C.PANGO_ATTR_TYPE_BASELINE_SHIFT
+	AttrTypeBaselineShift AttrType = 36
 	// AttrTypeFontScale wraps PANGO_ATTR_TYPE_FONT_SCALE
 	//
 	// font-relative size change ([struct@Pango.AttrInt]). Since 1.50
-	AttrTypeFontScale AttrType = C.PANGO_ATTR_TYPE_FONT_SCALE
+	AttrTypeFontScale AttrType = 37
 )
 
 func marshalAttrType(p unsafe.Pointer) (any, error) {
@@ -427,17 +427,17 @@ const (
 	// BaselineShiftNone wraps PANGO_BASELINE_SHIFT_NONE
 	//
 	// Leave the baseline unchanged
-	BaselineShiftNone BaselineShift = C.PANGO_BASELINE_SHIFT_NONE
+	BaselineShiftNone BaselineShift = 0
 	// BaselineShiftSuperscript wraps PANGO_BASELINE_SHIFT_SUPERSCRIPT
 	//
 	// Shift the baseline to the superscript position,
 	//   relative to the previous run
-	BaselineShiftSuperscript BaselineShift = C.PANGO_BASELINE_SHIFT_SUPERSCRIPT
+	BaselineShiftSuperscript BaselineShift = 1
 	// BaselineShiftSubscript wraps PANGO_BASELINE_SHIFT_SUBSCRIPT
 	//
 	// Shift the baseline to the subscript position,
 	//   relative to the previous run
-	BaselineShiftSubscript BaselineShift = C.PANGO_BASELINE_SHIFT_SUBSCRIPT
+	BaselineShiftSubscript BaselineShift = 2
 )
 
 func marshalBaselineShift(p unsafe.Pointer) (any, error) {
@@ -466,95 +466,95 @@ const (
 	// BidiTypeL wraps PANGO_BIDI_TYPE_L
 	//
 	// Left-to-Right
-	BidiTypeL BidiType = C.PANGO_BIDI_TYPE_L
+	BidiTypeL BidiType = 0
 	// BidiTypeLre wraps PANGO_BIDI_TYPE_LRE
 	//
 	// Left-to-Right Embedding
-	BidiTypeLre BidiType = C.PANGO_BIDI_TYPE_LRE
+	BidiTypeLre BidiType = 1
 	// BidiTypeLro wraps PANGO_BIDI_TYPE_LRO
 	//
 	// Left-to-Right Override
-	BidiTypeLro BidiType = C.PANGO_BIDI_TYPE_LRO
+	BidiTypeLro BidiType = 2
 	// BidiTypeR wraps PANGO_BIDI_TYPE_R
 	//
 	// Right-to-Left
-	BidiTypeR BidiType = C.PANGO_BIDI_TYPE_R
+	BidiTypeR BidiType = 3
 	// BidiTypeAl wraps PANGO_BIDI_TYPE_AL
 	//
 	// Right-to-Left Arabic
-	BidiTypeAl BidiType = C.PANGO_BIDI_TYPE_AL
+	BidiTypeAl BidiType = 4
 	// BidiTypeRLE wraps PANGO_BIDI_TYPE_RLE
 	//
 	// Right-to-Left Embedding
-	BidiTypeRLE BidiType = C.PANGO_BIDI_TYPE_RLE
+	BidiTypeRLE BidiType = 5
 	// BidiTypeRlo wraps PANGO_BIDI_TYPE_RLO
 	//
 	// Right-to-Left Override
-	BidiTypeRlo BidiType = C.PANGO_BIDI_TYPE_RLO
+	BidiTypeRlo BidiType = 6
 	// BidiTypePDF wraps PANGO_BIDI_TYPE_PDF
 	//
 	// Pop Directional Format
-	BidiTypePDF BidiType = C.PANGO_BIDI_TYPE_PDF
+	BidiTypePDF BidiType = 7
 	// BidiTypeEn wraps PANGO_BIDI_TYPE_EN
 	//
 	// European Number
-	BidiTypeEn BidiType = C.PANGO_BIDI_TYPE_EN
+	BidiTypeEn BidiType = 8
 	// BidiTypeES wraps PANGO_BIDI_TYPE_ES
 	//
 	// European Number Separator
-	BidiTypeES BidiType = C.PANGO_BIDI_TYPE_ES
+	BidiTypeES BidiType = 9
 	// BidiTypeEt wraps PANGO_BIDI_TYPE_ET
 	//
 	// European Number Terminator
-	BidiTypeEt BidiType = C.PANGO_BIDI_TYPE_ET
+	BidiTypeEt BidiType = 10
 	// BidiTypeAn wraps PANGO_BIDI_TYPE_AN
 	//
 	// Arabic Number
-	BidiTypeAn BidiType = C.PANGO_BIDI_TYPE_AN
+	BidiTypeAn BidiType = 11
 	// BidiTypeCs wraps PANGO_BIDI_TYPE_CS
 	//
 	// Common Number Separator
-	BidiTypeCs BidiType = C.PANGO_BIDI_TYPE_CS
+	BidiTypeCs BidiType = 12
 	// BidiTypeNsm wraps PANGO_BIDI_TYPE_NSM
 	//
 	// Nonspacing Mark
-	BidiTypeNsm BidiType = C.PANGO_BIDI_TYPE_NSM
+	BidiTypeNsm BidiType = 13
 	// BidiTypeBn wraps PANGO_BIDI_TYPE_BN
 	//
 	// Boundary Neutral
-	BidiTypeBn BidiType = C.PANGO_BIDI_TYPE_BN
+	BidiTypeBn BidiType = 14
 	// BidiTypeB wraps PANGO_BIDI_TYPE_B
 	//
 	// Paragraph Separator
-	BidiTypeB BidiType = C.PANGO_BIDI_TYPE_B
+	BidiTypeB BidiType = 15
 	// BidiTypeS wraps PANGO_BIDI_TYPE_S
 	//
 	// Segment Separator
-	BidiTypeS BidiType = C.PANGO_BIDI_TYPE_S
+	BidiTypeS BidiType = 16
 	// BidiTypeWs wraps PANGO_BIDI_TYPE_WS
 	//
 	// Whitespace
-	BidiTypeWs BidiType = C.PANGO_BIDI_TYPE_WS
+	BidiTypeWs BidiType = 17
 	// BidiTypeOn wraps PANGO_BIDI_TYPE_ON
 	//
 	// Other Neutrals
-	BidiTypeOn BidiType = C.PANGO_BIDI_TYPE_ON
+	BidiTypeOn BidiType = 18
 	// BidiTypeLri wraps PANGO_BIDI_TYPE_LRI
 	//
 	// Left-to-Right isolate. Since 1.48.6
-	BidiTypeLri BidiType = C.PANGO_BIDI_TYPE_LRI
+	BidiTypeLri BidiType = 19
 	// BidiTypeRli wraps PANGO_BIDI_TYPE_RLI
 	//
 	// Right-to-Left isolate. Since 1.48.6
-	BidiTypeRli BidiType = C.PANGO_BIDI_TYPE_RLI
+	BidiTypeRli BidiType = 20
 	// BidiTypeFsi wraps PANGO_BIDI_TYPE_FSI
 	//
 	// First strong isolate. Since 1.48.6
-	BidiTypeFsi BidiType = C.PANGO_BIDI_TYPE_FSI
+	BidiTypeFsi BidiType = 21
 	// BidiTypePdi wraps PANGO_BIDI_TYPE_PDI
 	//
 	// Pop directional isolate. Since 1.48.6
-	BidiTypePdi BidiType = C.PANGO_BIDI_TYPE_PDI
+	BidiTypePdi BidiType = 22
 )
 
 func marshalBidiType(p unsafe.Pointer) (any, error) {
@@ -582,7 +582,7 @@ const (
 	//
 	// The character is not representable with
 	//   the font.
-	CoverageNone CoverageLevel = C.PANGO_COVERAGE_NONE
+	CoverageNone CoverageLevel = 0
 	// CoverageFallback wraps PANGO_COVERAGE_FALLBACK
 	//
 	// The character is represented in a
@@ -590,18 +590,18 @@ const (
 	//   graphical form. For instance, a Hangul character represented
 	//   as a a sequence of Jamos, or a Latin transliteration of a
 	//   Cyrillic word.
-	CoverageFallback CoverageLevel = C.PANGO_COVERAGE_FALLBACK
+	CoverageFallback CoverageLevel = 1
 	// CoverageApproximate wraps PANGO_COVERAGE_APPROXIMATE
 	//
 	// The character is represented as
 	//   basically the correct graphical form, but with a stylistic
 	//   variant inappropriate for the current script.
-	CoverageApproximate CoverageLevel = C.PANGO_COVERAGE_APPROXIMATE
+	CoverageApproximate CoverageLevel = 2
 	// CoverageExact wraps PANGO_COVERAGE_EXACT
 	//
 	// The character is represented as the
 	//   correct graphical form.
-	CoverageExact CoverageLevel = C.PANGO_COVERAGE_EXACT
+	CoverageExact CoverageLevel = 3
 )
 
 func marshalCoverageLevel(p unsafe.Pointer) (any, error) {
@@ -641,33 +641,33 @@ const (
 	// DirectionLTR wraps PANGO_DIRECTION_LTR
 	//
 	// A strong left-to-right direction
-	DirectionLTR Direction = C.PANGO_DIRECTION_LTR
+	DirectionLTR Direction = 0
 	// DirectionRTL wraps PANGO_DIRECTION_RTL
 	//
 	// A strong right-to-left direction
-	DirectionRTL Direction = C.PANGO_DIRECTION_RTL
+	DirectionRTL Direction = 1
 	// DirectionTtbLTR wraps PANGO_DIRECTION_TTB_LTR
 	//
 	// Deprecated value; treated the
 	//   same as `PANGO_DIRECTION_RTL`.
-	DirectionTtbLTR Direction = C.PANGO_DIRECTION_TTB_LTR
+	DirectionTtbLTR Direction = 2
 	// DirectionTtbRTL wraps PANGO_DIRECTION_TTB_RTL
 	//
 	// Deprecated value; treated the
 	//   same as `PANGO_DIRECTION_LTR`
-	DirectionTtbRTL Direction = C.PANGO_DIRECTION_TTB_RTL
+	DirectionTtbRTL Direction = 3
 	// DirectionWeakLTR wraps PANGO_DIRECTION_WEAK_LTR
 	//
 	// A weak left-to-right direction
-	DirectionWeakLTR Direction = C.PANGO_DIRECTION_WEAK_LTR
+	DirectionWeakLTR Direction = 4
 	// DirectionWeakRTL wraps PANGO_DIRECTION_WEAK_RTL
 	//
 	// A weak right-to-left direction
-	DirectionWeakRTL Direction = C.PANGO_DIRECTION_WEAK_RTL
+	DirectionWeakRTL Direction = 5
 	// DirectionNeutral wraps PANGO_DIRECTION_NEUTRAL
 	//
 	// No direction specified
-	DirectionNeutral Direction = C.PANGO_DIRECTION_NEUTRAL
+	DirectionNeutral Direction = 6
 )
 
 func marshalDirection(p unsafe.Pointer) (any, error) {
@@ -695,19 +695,19 @@ const (
 	// EllipsizeNone wraps PANGO_ELLIPSIZE_NONE
 	//
 	// No ellipsization
-	EllipsizeNone EllipsizeMode = C.PANGO_ELLIPSIZE_NONE
+	EllipsizeNone EllipsizeMode = 0
 	// EllipsizeStart wraps PANGO_ELLIPSIZE_START
 	//
 	// Omit characters at the start of the text
-	EllipsizeStart EllipsizeMode = C.PANGO_ELLIPSIZE_START
+	EllipsizeStart EllipsizeMode = 1
 	// EllipsizeMiddle wraps PANGO_ELLIPSIZE_MIDDLE
 	//
 	// Omit characters in the middle of the text
-	EllipsizeMiddle EllipsizeMode = C.PANGO_ELLIPSIZE_MIDDLE
+	EllipsizeMiddle EllipsizeMode = 2
 	// EllipsizeEnd wraps PANGO_ELLIPSIZE_END
 	//
 	// Omit characters at the end of the text
-	EllipsizeEnd EllipsizeMode = C.PANGO_ELLIPSIZE_END
+	EllipsizeEnd EllipsizeMode = 3
 )
 
 func marshalEllipsizeMode(p unsafe.Pointer) (any, error) {
@@ -731,19 +731,19 @@ const (
 	// FontScaleNone wraps PANGO_FONT_SCALE_NONE
 	//
 	// Leave the font size unchanged
-	FontScaleNone FontScale = C.PANGO_FONT_SCALE_NONE
+	FontScaleNone FontScale = 0
 	// FontScaleSuperscript wraps PANGO_FONT_SCALE_SUPERSCRIPT
 	//
 	// Change the font to a size suitable for superscripts
-	FontScaleSuperscript FontScale = C.PANGO_FONT_SCALE_SUPERSCRIPT
+	FontScaleSuperscript FontScale = 1
 	// FontScaleSubscript wraps PANGO_FONT_SCALE_SUBSCRIPT
 	//
 	// Change the font to a size suitable for subscripts
-	FontScaleSubscript FontScale = C.PANGO_FONT_SCALE_SUBSCRIPT
+	FontScaleSubscript FontScale = 2
 	// FontScaleSmallCaps wraps PANGO_FONT_SCALE_SMALL_CAPS
 	//
 	// Change the font to a size suitable for Small Caps
-	FontScaleSmallCaps FontScale = C.PANGO_FONT_SCALE_SMALL_CAPS
+	FontScaleSmallCaps FontScale = 3
 )
 
 func marshalFontScale(p unsafe.Pointer) (any, error) {
@@ -778,23 +778,23 @@ const (
 	// GravitySouth wraps PANGO_GRAVITY_SOUTH
 	//
 	// Glyphs stand upright (default) &lt;img align="right" valign="center" src="m-south.png"&gt;
-	GravitySouth Gravity = C.PANGO_GRAVITY_SOUTH
+	GravitySouth Gravity = 0
 	// GravityEast wraps PANGO_GRAVITY_EAST
 	//
 	// Glyphs are rotated 90 degrees counter-clockwise. &lt;img align="right" valign="center" src="m-east.png"&gt;
-	GravityEast Gravity = C.PANGO_GRAVITY_EAST
+	GravityEast Gravity = 1
 	// GravityNorth wraps PANGO_GRAVITY_NORTH
 	//
 	// Glyphs are upside-down. &lt;img align="right" valign="cener" src="m-north.png"&gt;
-	GravityNorth Gravity = C.PANGO_GRAVITY_NORTH
+	GravityNorth Gravity = 2
 	// GravityWest wraps PANGO_GRAVITY_WEST
 	//
 	// Glyphs are rotated 90 degrees clockwise. &lt;img align="right" valign="center" src="m-west.png"&gt;
-	GravityWest Gravity = C.PANGO_GRAVITY_WEST
+	GravityWest Gravity = 3
 	// GravityAuto wraps PANGO_GRAVITY_AUTO
 	//
 	// Gravity is resolved from the context matrix
-	GravityAuto Gravity = C.PANGO_GRAVITY_AUTO
+	GravityAuto Gravity = 4
 )
 
 func marshalGravity(p unsafe.Pointer) (any, error) {
@@ -823,19 +823,19 @@ const (
 	//
 	// scripts will take their natural gravity based
 	//   on the base gravity and the script.  This is the default.
-	GravityHintNatural GravityHint = C.PANGO_GRAVITY_HINT_NATURAL
+	GravityHintNatural GravityHint = 0
 	// GravityHintStrong wraps PANGO_GRAVITY_HINT_STRONG
 	//
 	// always use the base gravity set, regardless of
 	//   the script.
-	GravityHintStrong GravityHint = C.PANGO_GRAVITY_HINT_STRONG
+	GravityHintStrong GravityHint = 1
 	// GravityHintLine wraps PANGO_GRAVITY_HINT_LINE
 	//
 	// for scripts not in their natural direction (eg.
 	//   Latin in East gravity), choose per-script gravity such that every script
 	//   respects the line progression. This means, Latin and Arabic will take
 	//   opposite gravities and both flow top-to-bottom for example.
-	GravityHintLine GravityHint = C.PANGO_GRAVITY_HINT_LINE
+	GravityHintLine GravityHint = 2
 )
 
 func marshalGravityHint(p unsafe.Pointer) (any, error) {
@@ -858,17 +858,17 @@ const (
 	// LayoutDeserializeInvalid wraps PANGO_LAYOUT_DESERIALIZE_INVALID
 	//
 	// Unspecified error
-	LayoutDeserializeInvalid LayoutDeserializeError = C.PANGO_LAYOUT_DESERIALIZE_INVALID
+	LayoutDeserializeInvalid LayoutDeserializeError = 0
 	// LayoutDeserializeInvalidValue wraps PANGO_LAYOUT_DESERIALIZE_INVALID_VALUE
 	//
 	// A JSon value could not be
 	//   interpreted
-	LayoutDeserializeInvalidValue LayoutDeserializeError = C.PANGO_LAYOUT_DESERIALIZE_INVALID_VALUE
+	LayoutDeserializeInvalidValue LayoutDeserializeError = 1
 	// LayoutDeserializeMissingValue wraps PANGO_LAYOUT_DESERIALIZE_MISSING_VALUE
 	//
 	// A required JSon member was
 	//   not found
-	LayoutDeserializeMissingValue LayoutDeserializeError = C.PANGO_LAYOUT_DESERIALIZE_MISSING_VALUE
+	LayoutDeserializeMissingValue LayoutDeserializeError = 2
 )
 
 func marshalLayoutDeserializeError(p unsafe.Pointer) (any, error) {
@@ -892,12 +892,12 @@ const (
 	// OverlineNone wraps PANGO_OVERLINE_NONE
 	//
 	// no overline should be drawn
-	OverlineNone Overline = C.PANGO_OVERLINE_NONE
+	OverlineNone Overline = 0
 	// OverlineSingle wraps PANGO_OVERLINE_SINGLE
 	//
 	// Draw a single line above the ink
 	//   extents of the text being underlined.
-	OverlineSingle Overline = C.PANGO_OVERLINE_SINGLE
+	OverlineSingle Overline = 1
 )
 
 func marshalOverline(p unsafe.Pointer) (any, error) {
@@ -921,23 +921,23 @@ const (
 	// RenderPartForeground wraps PANGO_RENDER_PART_FOREGROUND
 	//
 	// the text itself
-	RenderPartForeground RenderPart = C.PANGO_RENDER_PART_FOREGROUND
+	RenderPartForeground RenderPart = 0
 	// RenderPartBackground wraps PANGO_RENDER_PART_BACKGROUND
 	//
 	// the area behind the text
-	RenderPartBackground RenderPart = C.PANGO_RENDER_PART_BACKGROUND
+	RenderPartBackground RenderPart = 1
 	// RenderPartUnderline wraps PANGO_RENDER_PART_UNDERLINE
 	//
 	// underlines
-	RenderPartUnderline RenderPart = C.PANGO_RENDER_PART_UNDERLINE
+	RenderPartUnderline RenderPart = 2
 	// RenderPartStrikethrough wraps PANGO_RENDER_PART_STRIKETHROUGH
 	//
 	// strikethrough lines
-	RenderPartStrikethrough RenderPart = C.PANGO_RENDER_PART_STRIKETHROUGH
+	RenderPartStrikethrough RenderPart = 3
 	// RenderPartOverline wraps PANGO_RENDER_PART_OVERLINE
 	//
 	// overlines
-	RenderPartOverline RenderPart = C.PANGO_RENDER_PART_OVERLINE
+	RenderPartOverline RenderPart = 4
 )
 
 func marshalRenderPart(p unsafe.Pointer) (any, error) {
@@ -969,476 +969,476 @@ const (
 	// ScriptInvalidCode wraps PANGO_SCRIPT_INVALID_CODE
 	//
 	// a value never returned from pango_script_for_unichar()
-	ScriptInvalidCode Script = C.PANGO_SCRIPT_INVALID_CODE
+	ScriptInvalidCode Script = -1
 	// ScriptCommon wraps PANGO_SCRIPT_COMMON
 	//
 	// a character used by multiple different scripts
-	ScriptCommon Script = C.PANGO_SCRIPT_COMMON
+	ScriptCommon Script = 0
 	// ScriptInherited wraps PANGO_SCRIPT_INHERITED
 	//
 	// a mark glyph that takes its script from the
 	// base glyph to which it is attached
-	ScriptInherited Script = C.PANGO_SCRIPT_INHERITED
+	ScriptInherited Script = 1
 	// ScriptArabic wraps PANGO_SCRIPT_ARABIC
 	//
 	// Arabic
-	ScriptArabic Script = C.PANGO_SCRIPT_ARABIC
+	ScriptArabic Script = 2
 	// ScriptArmenian wraps PANGO_SCRIPT_ARMENIAN
 	//
 	// Armenian
-	ScriptArmenian Script = C.PANGO_SCRIPT_ARMENIAN
+	ScriptArmenian Script = 3
 	// ScriptBengali wraps PANGO_SCRIPT_BENGALI
 	//
 	// Bengali
-	ScriptBengali Script = C.PANGO_SCRIPT_BENGALI
+	ScriptBengali Script = 4
 	// ScriptBopomofo wraps PANGO_SCRIPT_BOPOMOFO
 	//
 	// Bopomofo
-	ScriptBopomofo Script = C.PANGO_SCRIPT_BOPOMOFO
+	ScriptBopomofo Script = 5
 	// ScriptCherokee wraps PANGO_SCRIPT_CHEROKEE
 	//
 	// Cherokee
-	ScriptCherokee Script = C.PANGO_SCRIPT_CHEROKEE
+	ScriptCherokee Script = 6
 	// ScriptCoptic wraps PANGO_SCRIPT_COPTIC
 	//
 	// Coptic
-	ScriptCoptic Script = C.PANGO_SCRIPT_COPTIC
+	ScriptCoptic Script = 7
 	// ScriptCyrillic wraps PANGO_SCRIPT_CYRILLIC
 	//
 	// Cyrillic
-	ScriptCyrillic Script = C.PANGO_SCRIPT_CYRILLIC
+	ScriptCyrillic Script = 8
 	// ScriptDeseret wraps PANGO_SCRIPT_DESERET
 	//
 	// Deseret
-	ScriptDeseret Script = C.PANGO_SCRIPT_DESERET
+	ScriptDeseret Script = 9
 	// ScriptDevanagari wraps PANGO_SCRIPT_DEVANAGARI
 	//
 	// Devanagari
-	ScriptDevanagari Script = C.PANGO_SCRIPT_DEVANAGARI
+	ScriptDevanagari Script = 10
 	// ScriptEthiopic wraps PANGO_SCRIPT_ETHIOPIC
 	//
 	// Ethiopic
-	ScriptEthiopic Script = C.PANGO_SCRIPT_ETHIOPIC
+	ScriptEthiopic Script = 11
 	// ScriptGeorgian wraps PANGO_SCRIPT_GEORGIAN
 	//
 	// Georgian
-	ScriptGeorgian Script = C.PANGO_SCRIPT_GEORGIAN
+	ScriptGeorgian Script = 12
 	// ScriptGothic wraps PANGO_SCRIPT_GOTHIC
 	//
 	// Gothic
-	ScriptGothic Script = C.PANGO_SCRIPT_GOTHIC
+	ScriptGothic Script = 13
 	// ScriptGreek wraps PANGO_SCRIPT_GREEK
 	//
 	// Greek
-	ScriptGreek Script = C.PANGO_SCRIPT_GREEK
+	ScriptGreek Script = 14
 	// ScriptGujarati wraps PANGO_SCRIPT_GUJARATI
 	//
 	// Gujarati
-	ScriptGujarati Script = C.PANGO_SCRIPT_GUJARATI
+	ScriptGujarati Script = 15
 	// ScriptGurmukhi wraps PANGO_SCRIPT_GURMUKHI
 	//
 	// Gurmukhi
-	ScriptGurmukhi Script = C.PANGO_SCRIPT_GURMUKHI
+	ScriptGurmukhi Script = 16
 	// ScriptHan wraps PANGO_SCRIPT_HAN
 	//
 	// Han
-	ScriptHan Script = C.PANGO_SCRIPT_HAN
+	ScriptHan Script = 17
 	// ScriptHangul wraps PANGO_SCRIPT_HANGUL
 	//
 	// Hangul
-	ScriptHangul Script = C.PANGO_SCRIPT_HANGUL
+	ScriptHangul Script = 18
 	// ScriptHebrew wraps PANGO_SCRIPT_HEBREW
 	//
 	// Hebrew
-	ScriptHebrew Script = C.PANGO_SCRIPT_HEBREW
+	ScriptHebrew Script = 19
 	// ScriptHiragana wraps PANGO_SCRIPT_HIRAGANA
 	//
 	// Hiragana
-	ScriptHiragana Script = C.PANGO_SCRIPT_HIRAGANA
+	ScriptHiragana Script = 20
 	// ScriptKannada wraps PANGO_SCRIPT_KANNADA
 	//
 	// Kannada
-	ScriptKannada Script = C.PANGO_SCRIPT_KANNADA
+	ScriptKannada Script = 21
 	// ScriptKatakana wraps PANGO_SCRIPT_KATAKANA
 	//
 	// Katakana
-	ScriptKatakana Script = C.PANGO_SCRIPT_KATAKANA
+	ScriptKatakana Script = 22
 	// ScriptKhmer wraps PANGO_SCRIPT_KHMER
 	//
 	// Khmer
-	ScriptKhmer Script = C.PANGO_SCRIPT_KHMER
+	ScriptKhmer Script = 23
 	// ScriptLao wraps PANGO_SCRIPT_LAO
 	//
 	// Lao
-	ScriptLao Script = C.PANGO_SCRIPT_LAO
+	ScriptLao Script = 24
 	// ScriptLatin wraps PANGO_SCRIPT_LATIN
 	//
 	// Latin
-	ScriptLatin Script = C.PANGO_SCRIPT_LATIN
+	ScriptLatin Script = 25
 	// ScriptMalayalam wraps PANGO_SCRIPT_MALAYALAM
 	//
 	// Malayalam
-	ScriptMalayalam Script = C.PANGO_SCRIPT_MALAYALAM
+	ScriptMalayalam Script = 26
 	// ScriptMongolian wraps PANGO_SCRIPT_MONGOLIAN
 	//
 	// Mongolian
-	ScriptMongolian Script = C.PANGO_SCRIPT_MONGOLIAN
+	ScriptMongolian Script = 27
 	// ScriptMyanmar wraps PANGO_SCRIPT_MYANMAR
 	//
 	// Myanmar
-	ScriptMyanmar Script = C.PANGO_SCRIPT_MYANMAR
+	ScriptMyanmar Script = 28
 	// ScriptOgham wraps PANGO_SCRIPT_OGHAM
 	//
 	// Ogham
-	ScriptOgham Script = C.PANGO_SCRIPT_OGHAM
+	ScriptOgham Script = 29
 	// ScriptOldItalic wraps PANGO_SCRIPT_OLD_ITALIC
 	//
 	// Old Italic
-	ScriptOldItalic Script = C.PANGO_SCRIPT_OLD_ITALIC
+	ScriptOldItalic Script = 30
 	// ScriptOriya wraps PANGO_SCRIPT_ORIYA
 	//
 	// Oriya
-	ScriptOriya Script = C.PANGO_SCRIPT_ORIYA
+	ScriptOriya Script = 31
 	// ScriptRunic wraps PANGO_SCRIPT_RUNIC
 	//
 	// Runic
-	ScriptRunic Script = C.PANGO_SCRIPT_RUNIC
+	ScriptRunic Script = 32
 	// ScriptSinhala wraps PANGO_SCRIPT_SINHALA
 	//
 	// Sinhala
-	ScriptSinhala Script = C.PANGO_SCRIPT_SINHALA
+	ScriptSinhala Script = 33
 	// ScriptSyriac wraps PANGO_SCRIPT_SYRIAC
 	//
 	// Syriac
-	ScriptSyriac Script = C.PANGO_SCRIPT_SYRIAC
+	ScriptSyriac Script = 34
 	// ScriptTamil wraps PANGO_SCRIPT_TAMIL
 	//
 	// Tamil
-	ScriptTamil Script = C.PANGO_SCRIPT_TAMIL
+	ScriptTamil Script = 35
 	// ScriptTelugu wraps PANGO_SCRIPT_TELUGU
 	//
 	// Telugu
-	ScriptTelugu Script = C.PANGO_SCRIPT_TELUGU
+	ScriptTelugu Script = 36
 	// ScriptThaana wraps PANGO_SCRIPT_THAANA
 	//
 	// Thaana
-	ScriptThaana Script = C.PANGO_SCRIPT_THAANA
+	ScriptThaana Script = 37
 	// ScriptThai wraps PANGO_SCRIPT_THAI
 	//
 	// Thai
-	ScriptThai Script = C.PANGO_SCRIPT_THAI
+	ScriptThai Script = 38
 	// ScriptTibetan wraps PANGO_SCRIPT_TIBETAN
 	//
 	// Tibetan
-	ScriptTibetan Script = C.PANGO_SCRIPT_TIBETAN
+	ScriptTibetan Script = 39
 	// ScriptCanadianAboriginal wraps PANGO_SCRIPT_CANADIAN_ABORIGINAL
 	//
 	// Canadian Aboriginal
-	ScriptCanadianAboriginal Script = C.PANGO_SCRIPT_CANADIAN_ABORIGINAL
+	ScriptCanadianAboriginal Script = 40
 	// ScriptYi wraps PANGO_SCRIPT_YI
 	//
 	// Yi
-	ScriptYi Script = C.PANGO_SCRIPT_YI
+	ScriptYi Script = 41
 	// ScriptTagalog wraps PANGO_SCRIPT_TAGALOG
 	//
 	// Tagalog
-	ScriptTagalog Script = C.PANGO_SCRIPT_TAGALOG
+	ScriptTagalog Script = 42
 	// ScriptHanunoo wraps PANGO_SCRIPT_HANUNOO
 	//
 	// Hanunoo
-	ScriptHanunoo Script = C.PANGO_SCRIPT_HANUNOO
+	ScriptHanunoo Script = 43
 	// ScriptBuhid wraps PANGO_SCRIPT_BUHID
 	//
 	// Buhid
-	ScriptBuhid Script = C.PANGO_SCRIPT_BUHID
+	ScriptBuhid Script = 44
 	// ScriptTagbanwa wraps PANGO_SCRIPT_TAGBANWA
 	//
 	// Tagbanwa
-	ScriptTagbanwa Script = C.PANGO_SCRIPT_TAGBANWA
+	ScriptTagbanwa Script = 45
 	// ScriptBraille wraps PANGO_SCRIPT_BRAILLE
 	//
 	// Braille
-	ScriptBraille Script = C.PANGO_SCRIPT_BRAILLE
+	ScriptBraille Script = 46
 	// ScriptCypriot wraps PANGO_SCRIPT_CYPRIOT
 	//
 	// Cypriot
-	ScriptCypriot Script = C.PANGO_SCRIPT_CYPRIOT
+	ScriptCypriot Script = 47
 	// ScriptLimbu wraps PANGO_SCRIPT_LIMBU
 	//
 	// Limbu
-	ScriptLimbu Script = C.PANGO_SCRIPT_LIMBU
+	ScriptLimbu Script = 48
 	// ScriptOsmanya wraps PANGO_SCRIPT_OSMANYA
 	//
 	// Osmanya
-	ScriptOsmanya Script = C.PANGO_SCRIPT_OSMANYA
+	ScriptOsmanya Script = 49
 	// ScriptShavian wraps PANGO_SCRIPT_SHAVIAN
 	//
 	// Shavian
-	ScriptShavian Script = C.PANGO_SCRIPT_SHAVIAN
+	ScriptShavian Script = 50
 	// ScriptLinearB wraps PANGO_SCRIPT_LINEAR_B
 	//
 	// Linear B
-	ScriptLinearB Script = C.PANGO_SCRIPT_LINEAR_B
+	ScriptLinearB Script = 51
 	// ScriptTaiLe wraps PANGO_SCRIPT_TAI_LE
 	//
 	// Tai Le
-	ScriptTaiLe Script = C.PANGO_SCRIPT_TAI_LE
+	ScriptTaiLe Script = 52
 	// ScriptUgaritic wraps PANGO_SCRIPT_UGARITIC
 	//
 	// Ugaritic
-	ScriptUgaritic Script = C.PANGO_SCRIPT_UGARITIC
+	ScriptUgaritic Script = 53
 	// ScriptNewTaiLue wraps PANGO_SCRIPT_NEW_TAI_LUE
 	//
 	// New Tai Lue. Since 1.10
-	ScriptNewTaiLue Script = C.PANGO_SCRIPT_NEW_TAI_LUE
+	ScriptNewTaiLue Script = 54
 	// ScriptBuginese wraps PANGO_SCRIPT_BUGINESE
 	//
 	// Buginese. Since 1.10
-	ScriptBuginese Script = C.PANGO_SCRIPT_BUGINESE
+	ScriptBuginese Script = 55
 	// ScriptGlagolitic wraps PANGO_SCRIPT_GLAGOLITIC
 	//
 	// Glagolitic. Since 1.10
-	ScriptGlagolitic Script = C.PANGO_SCRIPT_GLAGOLITIC
+	ScriptGlagolitic Script = 56
 	// ScriptTifinagh wraps PANGO_SCRIPT_TIFINAGH
 	//
 	// Tifinagh. Since 1.10
-	ScriptTifinagh Script = C.PANGO_SCRIPT_TIFINAGH
+	ScriptTifinagh Script = 57
 	// ScriptSylotiNagri wraps PANGO_SCRIPT_SYLOTI_NAGRI
 	//
 	// Syloti Nagri. Since 1.10
-	ScriptSylotiNagri Script = C.PANGO_SCRIPT_SYLOTI_NAGRI
+	ScriptSylotiNagri Script = 58
 	// ScriptOldPersian wraps PANGO_SCRIPT_OLD_PERSIAN
 	//
 	// Old Persian. Since 1.10
-	ScriptOldPersian Script = C.PANGO_SCRIPT_OLD_PERSIAN
+	ScriptOldPersian Script = 59
 	// ScriptKharoshthi wraps PANGO_SCRIPT_KHAROSHTHI
 	//
 	// Kharoshthi. Since 1.10
-	ScriptKharoshthi Script = C.PANGO_SCRIPT_KHAROSHTHI
+	ScriptKharoshthi Script = 60
 	// ScriptUnknown wraps PANGO_SCRIPT_UNKNOWN
 	//
 	// an unassigned code point. Since 1.14
-	ScriptUnknown Script = C.PANGO_SCRIPT_UNKNOWN
+	ScriptUnknown Script = 61
 	// ScriptBalinese wraps PANGO_SCRIPT_BALINESE
 	//
 	// Balinese. Since 1.14
-	ScriptBalinese Script = C.PANGO_SCRIPT_BALINESE
+	ScriptBalinese Script = 62
 	// ScriptCuneiform wraps PANGO_SCRIPT_CUNEIFORM
 	//
 	// Cuneiform. Since 1.14
-	ScriptCuneiform Script = C.PANGO_SCRIPT_CUNEIFORM
+	ScriptCuneiform Script = 63
 	// ScriptPhoenician wraps PANGO_SCRIPT_PHOENICIAN
 	//
 	// Phoenician. Since 1.14
-	ScriptPhoenician Script = C.PANGO_SCRIPT_PHOENICIAN
+	ScriptPhoenician Script = 64
 	// ScriptPhagsPa wraps PANGO_SCRIPT_PHAGS_PA
 	//
 	// Phags-pa. Since 1.14
-	ScriptPhagsPa Script = C.PANGO_SCRIPT_PHAGS_PA
+	ScriptPhagsPa Script = 65
 	// ScriptNko wraps PANGO_SCRIPT_NKO
 	//
 	// N'Ko. Since 1.14
-	ScriptNko Script = C.PANGO_SCRIPT_NKO
+	ScriptNko Script = 66
 	// ScriptKayahLi wraps PANGO_SCRIPT_KAYAH_LI
 	//
 	// Kayah Li. Since 1.20.1
-	ScriptKayahLi Script = C.PANGO_SCRIPT_KAYAH_LI
+	ScriptKayahLi Script = 67
 	// ScriptLepcha wraps PANGO_SCRIPT_LEPCHA
 	//
 	// Lepcha. Since 1.20.1
-	ScriptLepcha Script = C.PANGO_SCRIPT_LEPCHA
+	ScriptLepcha Script = 68
 	// ScriptRejang wraps PANGO_SCRIPT_REJANG
 	//
 	// Rejang. Since 1.20.1
-	ScriptRejang Script = C.PANGO_SCRIPT_REJANG
+	ScriptRejang Script = 69
 	// ScriptSundanese wraps PANGO_SCRIPT_SUNDANESE
 	//
 	// Sundanese. Since 1.20.1
-	ScriptSundanese Script = C.PANGO_SCRIPT_SUNDANESE
+	ScriptSundanese Script = 70
 	// ScriptSaurashtra wraps PANGO_SCRIPT_SAURASHTRA
 	//
 	// Saurashtra. Since 1.20.1
-	ScriptSaurashtra Script = C.PANGO_SCRIPT_SAURASHTRA
+	ScriptSaurashtra Script = 71
 	// ScriptCham wraps PANGO_SCRIPT_CHAM
 	//
 	// Cham. Since 1.20.1
-	ScriptCham Script = C.PANGO_SCRIPT_CHAM
+	ScriptCham Script = 72
 	// ScriptOlChiki wraps PANGO_SCRIPT_OL_CHIKI
 	//
 	// Ol Chiki. Since 1.20.1
-	ScriptOlChiki Script = C.PANGO_SCRIPT_OL_CHIKI
+	ScriptOlChiki Script = 73
 	// ScriptVai wraps PANGO_SCRIPT_VAI
 	//
 	// Vai. Since 1.20.1
-	ScriptVai Script = C.PANGO_SCRIPT_VAI
+	ScriptVai Script = 74
 	// ScriptCarian wraps PANGO_SCRIPT_CARIAN
 	//
 	// Carian. Since 1.20.1
-	ScriptCarian Script = C.PANGO_SCRIPT_CARIAN
+	ScriptCarian Script = 75
 	// ScriptLycian wraps PANGO_SCRIPT_LYCIAN
 	//
 	// Lycian. Since 1.20.1
-	ScriptLycian Script = C.PANGO_SCRIPT_LYCIAN
+	ScriptLycian Script = 76
 	// ScriptLydian wraps PANGO_SCRIPT_LYDIAN
 	//
 	// Lydian. Since 1.20.1
-	ScriptLydian Script = C.PANGO_SCRIPT_LYDIAN
+	ScriptLydian Script = 77
 	// ScriptBatak wraps PANGO_SCRIPT_BATAK
 	//
 	// Batak. Since 1.32
-	ScriptBatak Script = C.PANGO_SCRIPT_BATAK
+	ScriptBatak Script = 78
 	// ScriptBrahmi wraps PANGO_SCRIPT_BRAHMI
 	//
 	// Brahmi. Since 1.32
-	ScriptBrahmi Script = C.PANGO_SCRIPT_BRAHMI
+	ScriptBrahmi Script = 79
 	// ScriptMandaic wraps PANGO_SCRIPT_MANDAIC
 	//
 	// Mandaic. Since 1.32
-	ScriptMandaic Script = C.PANGO_SCRIPT_MANDAIC
+	ScriptMandaic Script = 80
 	// ScriptChakma wraps PANGO_SCRIPT_CHAKMA
 	//
 	// Chakma. Since: 1.32
-	ScriptChakma Script = C.PANGO_SCRIPT_CHAKMA
+	ScriptChakma Script = 81
 	// ScriptMeroiticCursive wraps PANGO_SCRIPT_MEROITIC_CURSIVE
 	//
 	// Meroitic Cursive. Since: 1.32
-	ScriptMeroiticCursive Script = C.PANGO_SCRIPT_MEROITIC_CURSIVE
+	ScriptMeroiticCursive Script = 82
 	// ScriptMeroiticHieroglyphs wraps PANGO_SCRIPT_MEROITIC_HIEROGLYPHS
 	//
 	// Meroitic Hieroglyphs. Since: 1.32
-	ScriptMeroiticHieroglyphs Script = C.PANGO_SCRIPT_MEROITIC_HIEROGLYPHS
+	ScriptMeroiticHieroglyphs Script = 83
 	// ScriptMiao wraps PANGO_SCRIPT_MIAO
 	//
 	// Miao. Since: 1.32
-	ScriptMiao Script = C.PANGO_SCRIPT_MIAO
+	ScriptMiao Script = 84
 	// ScriptSharada wraps PANGO_SCRIPT_SHARADA
 	//
 	// Sharada. Since: 1.32
-	ScriptSharada Script = C.PANGO_SCRIPT_SHARADA
+	ScriptSharada Script = 85
 	// ScriptSoraSompeng wraps PANGO_SCRIPT_SORA_SOMPENG
 	//
 	// Sora Sompeng. Since: 1.32
-	ScriptSoraSompeng Script = C.PANGO_SCRIPT_SORA_SOMPENG
+	ScriptSoraSompeng Script = 86
 	// ScriptTakri wraps PANGO_SCRIPT_TAKRI
 	//
 	// Takri. Since: 1.32
-	ScriptTakri Script = C.PANGO_SCRIPT_TAKRI
+	ScriptTakri Script = 87
 	// ScriptBassaVah wraps PANGO_SCRIPT_BASSA_VAH
 	//
 	// Bassa. Since: 1.40
-	ScriptBassaVah Script = C.PANGO_SCRIPT_BASSA_VAH
+	ScriptBassaVah Script = 88
 	// ScriptCaucasianAlbanian wraps PANGO_SCRIPT_CAUCASIAN_ALBANIAN
 	//
 	// Caucasian Albanian. Since: 1.40
-	ScriptCaucasianAlbanian Script = C.PANGO_SCRIPT_CAUCASIAN_ALBANIAN
+	ScriptCaucasianAlbanian Script = 89
 	// ScriptDuployan wraps PANGO_SCRIPT_DUPLOYAN
 	//
 	// Duployan. Since: 1.40
-	ScriptDuployan Script = C.PANGO_SCRIPT_DUPLOYAN
+	ScriptDuployan Script = 90
 	// ScriptElbasan wraps PANGO_SCRIPT_ELBASAN
 	//
 	// Elbasan. Since: 1.40
-	ScriptElbasan Script = C.PANGO_SCRIPT_ELBASAN
+	ScriptElbasan Script = 91
 	// ScriptGrantha wraps PANGO_SCRIPT_GRANTHA
 	//
 	// Grantha. Since: 1.40
-	ScriptGrantha Script = C.PANGO_SCRIPT_GRANTHA
+	ScriptGrantha Script = 92
 	// ScriptKhojki wraps PANGO_SCRIPT_KHOJKI
 	//
 	// Kjohki. Since: 1.40
-	ScriptKhojki Script = C.PANGO_SCRIPT_KHOJKI
+	ScriptKhojki Script = 93
 	// ScriptKhudawadi wraps PANGO_SCRIPT_KHUDAWADI
 	//
 	// Khudawadi, Sindhi. Since: 1.40
-	ScriptKhudawadi Script = C.PANGO_SCRIPT_KHUDAWADI
+	ScriptKhudawadi Script = 94
 	// ScriptLinearA wraps PANGO_SCRIPT_LINEAR_A
 	//
 	// Linear A. Since: 1.40
-	ScriptLinearA Script = C.PANGO_SCRIPT_LINEAR_A
+	ScriptLinearA Script = 95
 	// ScriptMahajani wraps PANGO_SCRIPT_MAHAJANI
 	//
 	// Mahajani. Since: 1.40
-	ScriptMahajani Script = C.PANGO_SCRIPT_MAHAJANI
+	ScriptMahajani Script = 96
 	// ScriptManichaean wraps PANGO_SCRIPT_MANICHAEAN
 	//
 	// Manichaean. Since: 1.40
-	ScriptManichaean Script = C.PANGO_SCRIPT_MANICHAEAN
+	ScriptManichaean Script = 97
 	// ScriptMendeKikakui wraps PANGO_SCRIPT_MENDE_KIKAKUI
 	//
 	// Mende Kikakui. Since: 1.40
-	ScriptMendeKikakui Script = C.PANGO_SCRIPT_MENDE_KIKAKUI
+	ScriptMendeKikakui Script = 98
 	// ScriptModi wraps PANGO_SCRIPT_MODI
 	//
 	// Modi. Since: 1.40
-	ScriptModi Script = C.PANGO_SCRIPT_MODI
+	ScriptModi Script = 99
 	// ScriptMro wraps PANGO_SCRIPT_MRO
 	//
 	// Mro. Since: 1.40
-	ScriptMro Script = C.PANGO_SCRIPT_MRO
+	ScriptMro Script = 100
 	// ScriptNabataean wraps PANGO_SCRIPT_NABATAEAN
 	//
 	// Nabataean. Since: 1.40
-	ScriptNabataean Script = C.PANGO_SCRIPT_NABATAEAN
+	ScriptNabataean Script = 101
 	// ScriptOldNorthArabian wraps PANGO_SCRIPT_OLD_NORTH_ARABIAN
 	//
 	// Old North Arabian. Since: 1.40
-	ScriptOldNorthArabian Script = C.PANGO_SCRIPT_OLD_NORTH_ARABIAN
+	ScriptOldNorthArabian Script = 102
 	// ScriptOldPermic wraps PANGO_SCRIPT_OLD_PERMIC
 	//
 	// Old Permic. Since: 1.40
-	ScriptOldPermic Script = C.PANGO_SCRIPT_OLD_PERMIC
+	ScriptOldPermic Script = 103
 	// ScriptPahawhHmong wraps PANGO_SCRIPT_PAHAWH_HMONG
 	//
 	// Pahawh Hmong. Since: 1.40
-	ScriptPahawhHmong Script = C.PANGO_SCRIPT_PAHAWH_HMONG
+	ScriptPahawhHmong Script = 104
 	// ScriptPalmyrene wraps PANGO_SCRIPT_PALMYRENE
 	//
 	// Palmyrene. Since: 1.40
-	ScriptPalmyrene Script = C.PANGO_SCRIPT_PALMYRENE
+	ScriptPalmyrene Script = 105
 	// ScriptPauCinHau wraps PANGO_SCRIPT_PAU_CIN_HAU
 	//
 	// Pau Cin Hau. Since: 1.40
-	ScriptPauCinHau Script = C.PANGO_SCRIPT_PAU_CIN_HAU
+	ScriptPauCinHau Script = 106
 	// ScriptPsalterPahlavi wraps PANGO_SCRIPT_PSALTER_PAHLAVI
 	//
 	// Psalter Pahlavi. Since: 1.40
-	ScriptPsalterPahlavi Script = C.PANGO_SCRIPT_PSALTER_PAHLAVI
+	ScriptPsalterPahlavi Script = 107
 	// ScriptSiddham wraps PANGO_SCRIPT_SIDDHAM
 	//
 	// Siddham. Since: 1.40
-	ScriptSiddham Script = C.PANGO_SCRIPT_SIDDHAM
+	ScriptSiddham Script = 108
 	// ScriptTirhuta wraps PANGO_SCRIPT_TIRHUTA
 	//
 	// Tirhuta. Since: 1.40
-	ScriptTirhuta Script = C.PANGO_SCRIPT_TIRHUTA
+	ScriptTirhuta Script = 109
 	// ScriptWarangCiti wraps PANGO_SCRIPT_WARANG_CITI
 	//
 	// Warang Citi. Since: 1.40
-	ScriptWarangCiti Script = C.PANGO_SCRIPT_WARANG_CITI
+	ScriptWarangCiti Script = 110
 	// ScriptAhom wraps PANGO_SCRIPT_AHOM
 	//
 	// Ahom. Since: 1.40
-	ScriptAhom Script = C.PANGO_SCRIPT_AHOM
+	ScriptAhom Script = 111
 	// ScriptAnatolianHieroglyphs wraps PANGO_SCRIPT_ANATOLIAN_HIEROGLYPHS
 	//
 	// Anatolian Hieroglyphs. Since: 1.40
-	ScriptAnatolianHieroglyphs Script = C.PANGO_SCRIPT_ANATOLIAN_HIEROGLYPHS
+	ScriptAnatolianHieroglyphs Script = 112
 	// ScriptHatran wraps PANGO_SCRIPT_HATRAN
 	//
 	// Hatran. Since: 1.40
-	ScriptHatran Script = C.PANGO_SCRIPT_HATRAN
+	ScriptHatran Script = 113
 	// ScriptMultani wraps PANGO_SCRIPT_MULTANI
 	//
 	// Multani. Since: 1.40
-	ScriptMultani Script = C.PANGO_SCRIPT_MULTANI
+	ScriptMultani Script = 114
 	// ScriptOldHungarian wraps PANGO_SCRIPT_OLD_HUNGARIAN
 	//
 	// Old Hungarian. Since: 1.40
-	ScriptOldHungarian Script = C.PANGO_SCRIPT_OLD_HUNGARIAN
+	ScriptOldHungarian Script = 115
 	// ScriptSignwriting wraps PANGO_SCRIPT_SIGNWRITING
 	//
 	// Signwriting. Since: 1.40
-	ScriptSignwriting Script = C.PANGO_SCRIPT_SIGNWRITING
+	ScriptSignwriting Script = 116
 )
 
 func marshalScript(p unsafe.Pointer) (any, error) {
@@ -1462,39 +1462,39 @@ const (
 	// StretchUltraCondensed wraps PANGO_STRETCH_ULTRA_CONDENSED
 	//
 	// ultra condensed width
-	StretchUltraCondensed Stretch = C.PANGO_STRETCH_ULTRA_CONDENSED
+	StretchUltraCondensed Stretch = 0
 	// StretchExtraCondensed wraps PANGO_STRETCH_EXTRA_CONDENSED
 	//
 	// extra condensed width
-	StretchExtraCondensed Stretch = C.PANGO_STRETCH_EXTRA_CONDENSED
+	StretchExtraCondensed Stretch = 1
 	// StretchCondensed wraps PANGO_STRETCH_CONDENSED
 	//
 	// condensed width
-	StretchCondensed Stretch = C.PANGO_STRETCH_CONDENSED
+	StretchCondensed Stretch = 2
 	// StretchSemiCondensed wraps PANGO_STRETCH_SEMI_CONDENSED
 	//
 	// semi condensed width
-	StretchSemiCondensed Stretch = C.PANGO_STRETCH_SEMI_CONDENSED
+	StretchSemiCondensed Stretch = 3
 	// StretchNormal wraps PANGO_STRETCH_NORMAL
 	//
 	// the normal width
-	StretchNormal Stretch = C.PANGO_STRETCH_NORMAL
+	StretchNormal Stretch = 4
 	// StretchSemiExpanded wraps PANGO_STRETCH_SEMI_EXPANDED
 	//
 	// semi expanded width
-	StretchSemiExpanded Stretch = C.PANGO_STRETCH_SEMI_EXPANDED
+	StretchSemiExpanded Stretch = 5
 	// StretchExpanded wraps PANGO_STRETCH_EXPANDED
 	//
 	// expanded width
-	StretchExpanded Stretch = C.PANGO_STRETCH_EXPANDED
+	StretchExpanded Stretch = 6
 	// StretchExtraExpanded wraps PANGO_STRETCH_EXTRA_EXPANDED
 	//
 	// extra expanded width
-	StretchExtraExpanded Stretch = C.PANGO_STRETCH_EXTRA_EXPANDED
+	StretchExtraExpanded Stretch = 7
 	// StretchUltraExpanded wraps PANGO_STRETCH_ULTRA_EXPANDED
 	//
 	// ultra expanded width
-	StretchUltraExpanded Stretch = C.PANGO_STRETCH_ULTRA_EXPANDED
+	StretchUltraExpanded Stretch = 8
 )
 
 func marshalStretch(p unsafe.Pointer) (any, error) {
@@ -1517,15 +1517,15 @@ const (
 	// StyleNormal wraps PANGO_STYLE_NORMAL
 	//
 	// the font is upright.
-	StyleNormal Style = C.PANGO_STYLE_NORMAL
+	StyleNormal Style = 0
 	// StyleOblique wraps PANGO_STYLE_OBLIQUE
 	//
 	// the font is slanted, but in a roman style.
-	StyleOblique Style = C.PANGO_STYLE_OBLIQUE
+	StyleOblique Style = 1
 	// StyleItalic wraps PANGO_STYLE_ITALIC
 	//
 	// the font is slanted in an italic style.
-	StyleItalic Style = C.PANGO_STYLE_ITALIC
+	StyleItalic Style = 2
 )
 
 func marshalStyle(p unsafe.Pointer) (any, error) {
@@ -1549,23 +1549,23 @@ const (
 	// TabLeft wraps PANGO_TAB_LEFT
 	//
 	// the text appears to the right of the tab stop position
-	TabLeft TabAlign = C.PANGO_TAB_LEFT
+	TabLeft TabAlign = 0
 	// TabRight wraps PANGO_TAB_RIGHT
 	//
 	// the text appears to the left of the tab stop position
 	//   until the available space is filled. Since: 1.50
-	TabRight TabAlign = C.PANGO_TAB_RIGHT
+	TabRight TabAlign = 1
 	// TabCenter wraps PANGO_TAB_CENTER
 	//
 	// the text is centered at the tab stop position
 	//   until the available space is filled. Since: 1.50
-	TabCenter TabAlign = C.PANGO_TAB_CENTER
+	TabCenter TabAlign = 2
 	// TabDecimal wraps PANGO_TAB_DECIMAL
 	//
 	// text before the first occurrence of the decimal point
 	//   character appears to the left of the tab stop position (until the available
 	//   space is filled), the rest to the right. Since: 1.50
-	TabDecimal TabAlign = C.PANGO_TAB_DECIMAL
+	TabDecimal TabAlign = 3
 )
 
 func marshalTabAlign(p unsafe.Pointer) (any, error) {
@@ -1588,20 +1588,20 @@ const (
 	// TextTransformNone wraps PANGO_TEXT_TRANSFORM_NONE
 	//
 	// Leave text unchanged
-	TextTransformNone TextTransform = C.PANGO_TEXT_TRANSFORM_NONE
+	TextTransformNone TextTransform = 0
 	// TextTransformLowercase wraps PANGO_TEXT_TRANSFORM_LOWERCASE
 	//
 	// Display letters and numbers as lowercase
-	TextTransformLowercase TextTransform = C.PANGO_TEXT_TRANSFORM_LOWERCASE
+	TextTransformLowercase TextTransform = 1
 	// TextTransformUppercase wraps PANGO_TEXT_TRANSFORM_UPPERCASE
 	//
 	// Display letters and numbers as uppercase
-	TextTransformUppercase TextTransform = C.PANGO_TEXT_TRANSFORM_UPPERCASE
+	TextTransformUppercase TextTransform = 2
 	// TextTransformCapitalize wraps PANGO_TEXT_TRANSFORM_CAPITALIZE
 	//
 	// Display the first character of a word
 	//   in titlecase
-	TextTransformCapitalize TextTransform = C.PANGO_TEXT_TRANSFORM_CAPITALIZE
+	TextTransformCapitalize TextTransform = 3
 )
 
 func marshalTextTransform(p unsafe.Pointer) (any, error) {
@@ -1625,15 +1625,15 @@ const (
 	// UnderlineNone wraps PANGO_UNDERLINE_NONE
 	//
 	// no underline should be drawn
-	UnderlineNone Underline = C.PANGO_UNDERLINE_NONE
+	UnderlineNone Underline = 0
 	// UnderlineSingle wraps PANGO_UNDERLINE_SINGLE
 	//
 	// a single underline should be drawn
-	UnderlineSingle Underline = C.PANGO_UNDERLINE_SINGLE
+	UnderlineSingle Underline = 1
 	// UnderlineDouble wraps PANGO_UNDERLINE_DOUBLE
 	//
 	// a double underline should be drawn
-	UnderlineDouble Underline = C.PANGO_UNDERLINE_DOUBLE
+	UnderlineDouble Underline = 2
 	// UnderlineLow wraps PANGO_UNDERLINE_LOW
 	//
 	// a single underline should be drawn at a
@@ -1642,7 +1642,7 @@ const (
 	//   single characters, such as for keyboard accelerators.
 	//   %PANGO_UNDERLINE_SINGLE should be used for extended
 	//   portions of text.
-	UnderlineLow Underline = C.PANGO_UNDERLINE_LOW
+	UnderlineLow Underline = 3
 	// UnderlineError wraps PANGO_UNDERLINE_ERROR
 	//
 	// an underline indicating an error should
@@ -1653,25 +1653,25 @@ const (
 	//   as a possible mispelling; in some cases a contrasting color
 	//   may automatically be used. This type of underlining is
 	//   available since Pango 1.4.
-	UnderlineError Underline = C.PANGO_UNDERLINE_ERROR
+	UnderlineError Underline = 4
 	// UnderlineSingleLine wraps PANGO_UNDERLINE_SINGLE_LINE
 	//
 	// Like @PANGO_UNDERLINE_SINGLE, but
 	//   drawn continuously across multiple runs. This type
 	//   of underlining is available since Pango 1.46.
-	UnderlineSingleLine Underline = C.PANGO_UNDERLINE_SINGLE_LINE
+	UnderlineSingleLine Underline = 5
 	// UnderlineDoubleLine wraps PANGO_UNDERLINE_DOUBLE_LINE
 	//
 	// Like @PANGO_UNDERLINE_DOUBLE, but
 	//   drawn continuously across multiple runs. This type
 	//   of underlining is available since Pango 1.46.
-	UnderlineDoubleLine Underline = C.PANGO_UNDERLINE_DOUBLE_LINE
+	UnderlineDoubleLine Underline = 6
 	// UnderlineErrorLine wraps PANGO_UNDERLINE_ERROR_LINE
 	//
 	// Like @PANGO_UNDERLINE_ERROR, but
 	//   drawn continuously across multiple runs. This type
 	//   of underlining is available since Pango 1.46.
-	UnderlineErrorLine Underline = C.PANGO_UNDERLINE_ERROR_LINE
+	UnderlineErrorLine Underline = 7
 )
 
 func marshalUnderline(p unsafe.Pointer) (any, error) {
@@ -1694,39 +1694,39 @@ const (
 	// VariantNormal wraps PANGO_VARIANT_NORMAL
 	//
 	// A normal font.
-	VariantNormal Variant = C.PANGO_VARIANT_NORMAL
+	VariantNormal Variant = 0
 	// VariantSmallCaps wraps PANGO_VARIANT_SMALL_CAPS
 	//
 	// A font with the lower case characters
 	//   replaced by smaller variants of the capital characters.
-	VariantSmallCaps Variant = C.PANGO_VARIANT_SMALL_CAPS
+	VariantSmallCaps Variant = 1
 	// VariantAllSmallCaps wraps PANGO_VARIANT_ALL_SMALL_CAPS
 	//
 	// A font with all characters
 	//   replaced by smaller variants of the capital characters. Since: 1.50
-	VariantAllSmallCaps Variant = C.PANGO_VARIANT_ALL_SMALL_CAPS
+	VariantAllSmallCaps Variant = 2
 	// VariantPetiteCaps wraps PANGO_VARIANT_PETITE_CAPS
 	//
 	// A font with the lower case characters
 	//   replaced by smaller variants of the capital characters.
 	//   Petite Caps can be even smaller than Small Caps. Since: 1.50
-	VariantPetiteCaps Variant = C.PANGO_VARIANT_PETITE_CAPS
+	VariantPetiteCaps Variant = 3
 	// VariantAllPetiteCaps wraps PANGO_VARIANT_ALL_PETITE_CAPS
 	//
 	// A font with all characters
 	//   replaced by smaller variants of the capital characters.
 	//   Petite Caps can be even smaller than Small Caps. Since: 1.50
-	VariantAllPetiteCaps Variant = C.PANGO_VARIANT_ALL_PETITE_CAPS
+	VariantAllPetiteCaps Variant = 4
 	// VariantUnicase wraps PANGO_VARIANT_UNICASE
 	//
 	// A font with the upper case characters
 	//   replaced by smaller variants of the capital letters. Since: 1.50
-	VariantUnicase Variant = C.PANGO_VARIANT_UNICASE
+	VariantUnicase Variant = 5
 	// VariantTitleCaps wraps PANGO_VARIANT_TITLE_CAPS
 	//
 	// A font with capital letters that
 	//   are more suitable for all-uppercase titles. Since: 1.50
-	VariantTitleCaps Variant = C.PANGO_VARIANT_TITLE_CAPS
+	VariantTitleCaps Variant = 6
 )
 
 func marshalVariant(p unsafe.Pointer) (any, error) {
@@ -1752,51 +1752,51 @@ const (
 	// WeightThin wraps PANGO_WEIGHT_THIN
 	//
 	// the thin weight (= 100) Since: 1.24
-	WeightThin Weight = C.PANGO_WEIGHT_THIN
+	WeightThin Weight = 100
 	// WeightUltralight wraps PANGO_WEIGHT_ULTRALIGHT
 	//
 	// the ultralight weight (= 200)
-	WeightUltralight Weight = C.PANGO_WEIGHT_ULTRALIGHT
+	WeightUltralight Weight = 200
 	// WeightLight wraps PANGO_WEIGHT_LIGHT
 	//
 	// the light weight (= 300)
-	WeightLight Weight = C.PANGO_WEIGHT_LIGHT
+	WeightLight Weight = 300
 	// WeightSemilight wraps PANGO_WEIGHT_SEMILIGHT
 	//
 	// the semilight weight (= 350) Since: 1.36.7
-	WeightSemilight Weight = C.PANGO_WEIGHT_SEMILIGHT
+	WeightSemilight Weight = 350
 	// WeightBook wraps PANGO_WEIGHT_BOOK
 	//
 	// the book weight (= 380) Since: 1.24)
-	WeightBook Weight = C.PANGO_WEIGHT_BOOK
+	WeightBook Weight = 380
 	// WeightNormal wraps PANGO_WEIGHT_NORMAL
 	//
 	// the default weight (= 400)
-	WeightNormal Weight = C.PANGO_WEIGHT_NORMAL
+	WeightNormal Weight = 400
 	// WeightMedium wraps PANGO_WEIGHT_MEDIUM
 	//
 	// the medium weight (= 500) Since: 1.24
-	WeightMedium Weight = C.PANGO_WEIGHT_MEDIUM
+	WeightMedium Weight = 500
 	// WeightSemibold wraps PANGO_WEIGHT_SEMIBOLD
 	//
 	// the semibold weight (= 600)
-	WeightSemibold Weight = C.PANGO_WEIGHT_SEMIBOLD
+	WeightSemibold Weight = 600
 	// WeightBold wraps PANGO_WEIGHT_BOLD
 	//
 	// the bold weight (= 700)
-	WeightBold Weight = C.PANGO_WEIGHT_BOLD
+	WeightBold Weight = 700
 	// WeightUltrabold wraps PANGO_WEIGHT_ULTRABOLD
 	//
 	// the ultrabold weight (= 800)
-	WeightUltrabold Weight = C.PANGO_WEIGHT_ULTRABOLD
+	WeightUltrabold Weight = 800
 	// WeightHeavy wraps PANGO_WEIGHT_HEAVY
 	//
 	// the heavy weight (= 900)
-	WeightHeavy Weight = C.PANGO_WEIGHT_HEAVY
+	WeightHeavy Weight = 900
 	// WeightUltraheavy wraps PANGO_WEIGHT_ULTRAHEAVY
 	//
 	// the ultraheavy weight (= 1000) Since: 1.24
-	WeightUltraheavy Weight = C.PANGO_WEIGHT_ULTRAHEAVY
+	WeightUltraheavy Weight = 1000
 )
 
 func marshalWeight(p unsafe.Pointer) (any, error) {
@@ -1825,20 +1825,20 @@ const (
 	// WrapWord wraps PANGO_WRAP_WORD
 	//
 	// wrap lines at word boundaries.
-	WrapWord WrapMode = C.PANGO_WRAP_WORD
+	WrapWord WrapMode = 0
 	// WrapChar wraps PANGO_WRAP_CHAR
 	//
 	// wrap lines at character boundaries.
-	WrapChar WrapMode = C.PANGO_WRAP_CHAR
+	WrapChar WrapMode = 1
 	// WrapWordChar wraps PANGO_WRAP_WORD_CHAR
 	//
 	// wrap lines at word boundaries, but fall back to
 	//   character boundaries if there is not enough space for a full word.
-	WrapWordChar WrapMode = C.PANGO_WRAP_WORD_CHAR
+	WrapWordChar WrapMode = 2
 	// WrapNone wraps PANGO_WRAP_NONE
 	//
 	// do not wrap.
-	WrapNone WrapMode = C.PANGO_WRAP_NONE
+	WrapNone WrapMode = 3
 )
 
 func marshalWrapMode(p unsafe.Pointer) (any, error) {
@@ -1862,39 +1862,39 @@ const (
 	// FontMaskFamily wraps PANGO_FONT_MASK_FAMILY
 	//
 	// the font family is specified.
-	FontMaskFamily FontMask = C.PANGO_FONT_MASK_FAMILY
+	FontMaskFamily FontMask = 1
 	// FontMaskStyle wraps PANGO_FONT_MASK_STYLE
 	//
 	// the font style is specified.
-	FontMaskStyle FontMask = C.PANGO_FONT_MASK_STYLE
+	FontMaskStyle FontMask = 2
 	// FontMaskVariant wraps PANGO_FONT_MASK_VARIANT
 	//
 	// the font variant is specified.
-	FontMaskVariant FontMask = C.PANGO_FONT_MASK_VARIANT
+	FontMaskVariant FontMask = 4
 	// FontMaskWeight wraps PANGO_FONT_MASK_WEIGHT
 	//
 	// the font weight is specified.
-	FontMaskWeight FontMask = C.PANGO_FONT_MASK_WEIGHT
+	FontMaskWeight FontMask = 8
 	// FontMaskStretch wraps PANGO_FONT_MASK_STRETCH
 	//
 	// the font stretch is specified.
-	FontMaskStretch FontMask = C.PANGO_FONT_MASK_STRETCH
+	FontMaskStretch FontMask = 16
 	// FontMaskSize wraps PANGO_FONT_MASK_SIZE
 	//
 	// the font size is specified.
-	FontMaskSize FontMask = C.PANGO_FONT_MASK_SIZE
+	FontMaskSize FontMask = 32
 	// FontMaskGravity wraps PANGO_FONT_MASK_GRAVITY
 	//
 	// The font gravity is specified.
-	FontMaskGravity FontMask = C.PANGO_FONT_MASK_GRAVITY
+	FontMaskGravity FontMask = 64
 	// FontMaskVariations wraps PANGO_FONT_MASK_VARIATIONS
 	//
 	// OpenType font variations are specified.
-	FontMaskVariations FontMask = C.PANGO_FONT_MASK_VARIATIONS
+	FontMaskVariations FontMask = 128
 	// FontMaskFeatures wraps PANGO_FONT_MASK_FEATURES
 	//
 	// OpenType font features are specified.
-	FontMaskFeatures FontMask = C.PANGO_FONT_MASK_FEATURES
+	FontMaskFeatures FontMask = 256
 )
 
 func marshalFontMask(p unsafe.Pointer) (any, error) {
@@ -1923,12 +1923,12 @@ const (
 	// LayoutDeserializeDefault wraps PANGO_LAYOUT_DESERIALIZE_DEFAULT
 	//
 	// Default behavior
-	LayoutDeserializeDefault LayoutDeserializeFlags = C.PANGO_LAYOUT_DESERIALIZE_DEFAULT
+	LayoutDeserializeDefault LayoutDeserializeFlags = 0
 	// LayoutDeserializeContext wraps PANGO_LAYOUT_DESERIALIZE_CONTEXT
 	//
 	// Apply context information
 	//   from the serialization to the `PangoContext`
-	LayoutDeserializeContext LayoutDeserializeFlags = C.PANGO_LAYOUT_DESERIALIZE_CONTEXT
+	LayoutDeserializeContext LayoutDeserializeFlags = 1
 )
 
 func marshalLayoutDeserializeFlags(p unsafe.Pointer) (any, error) {
@@ -1957,15 +1957,15 @@ const (
 	// LayoutSerializeDefault wraps PANGO_LAYOUT_SERIALIZE_DEFAULT
 	//
 	// Default behavior
-	LayoutSerializeDefault LayoutSerializeFlags = C.PANGO_LAYOUT_SERIALIZE_DEFAULT
+	LayoutSerializeDefault LayoutSerializeFlags = 0
 	// LayoutSerializeContext wraps PANGO_LAYOUT_SERIALIZE_CONTEXT
 	//
 	// Include context information
-	LayoutSerializeContext LayoutSerializeFlags = C.PANGO_LAYOUT_SERIALIZE_CONTEXT
+	LayoutSerializeContext LayoutSerializeFlags = 1
 	// LayoutSerializeOutput wraps PANGO_LAYOUT_SERIALIZE_OUTPUT
 	//
 	// Include information about the formatted output
-	LayoutSerializeOutput LayoutSerializeFlags = C.PANGO_LAYOUT_SERIALIZE_OUTPUT
+	LayoutSerializeOutput LayoutSerializeFlags = 2
 )
 
 func marshalLayoutSerializeFlags(p unsafe.Pointer) (any, error) {
@@ -1994,12 +1994,12 @@ const (
 	// ShapeNone wraps PANGO_SHAPE_NONE
 	//
 	// Default value
-	ShapeNone ShapeFlags = C.PANGO_SHAPE_NONE
+	ShapeNone ShapeFlags = 0
 	// ShapeRoundPositions wraps PANGO_SHAPE_ROUND_POSITIONS
 	//
 	// Round glyph positions and widths to whole device units
 	//   This option should be set if the target renderer can't do subpixel positioning of glyphs
-	ShapeRoundPositions ShapeFlags = C.PANGO_SHAPE_ROUND_POSITIONS
+	ShapeRoundPositions ShapeFlags = 1
 )
 
 func marshalShapeFlags(p unsafe.Pointer) (any, error) {
@@ -2027,20 +2027,20 @@ const (
 	// ShowNone wraps PANGO_SHOW_NONE
 	//
 	// No special treatment for invisible characters
-	ShowNone ShowFlags = C.PANGO_SHOW_NONE
+	ShowNone ShowFlags = 0
 	// ShowSpaces wraps PANGO_SHOW_SPACES
 	//
 	// Render spaces, tabs and newlines visibly
-	ShowSpaces ShowFlags = C.PANGO_SHOW_SPACES
+	ShowSpaces ShowFlags = 1
 	// ShowLineBreaks wraps PANGO_SHOW_LINE_BREAKS
 	//
 	// Render line breaks visibly
-	ShowLineBreaks ShowFlags = C.PANGO_SHOW_LINE_BREAKS
+	ShowLineBreaks ShowFlags = 2
 	// ShowIgnorables wraps PANGO_SHOW_IGNORABLES
 	//
 	// Render default-ignorable Unicode
 	//   characters visibly
-	ShowIgnorables ShowFlags = C.PANGO_SHOW_IGNORABLES
+	ShowIgnorables ShowFlags = 4
 )
 
 func marshalShowFlags(p unsafe.Pointer) (any, error) {

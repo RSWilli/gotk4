@@ -180,17 +180,17 @@ const (
 	// XYScreen wraps ATK_XY_SCREEN
 	//
 	// specifies xy coordinates relative to the screen
-	XYScreen CoordType = C.ATK_XY_SCREEN
+	XYScreen CoordType = 0
 	// XYWindow wraps ATK_XY_WINDOW
 	//
 	// specifies xy coordinates relative to the widget's
 	// top-level window
-	XYWindow CoordType = C.ATK_XY_WINDOW
+	XYWindow CoordType = 1
 	// XYParent wraps ATK_XY_PARENT
 	//
 	// specifies xy coordinates relative to the widget's
 	// immediate parent. Since: 2.30
-	XYParent CoordType = C.ATK_XY_PARENT
+	XYParent CoordType = 2
 )
 
 func marshalCoordType(p unsafe.Pointer) (any, error) {
@@ -213,15 +213,15 @@ const (
 	// KeyEventPress wraps ATK_KEY_EVENT_PRESS
 	//
 	// specifies a key press event
-	KeyEventPress KeyEventType = C.ATK_KEY_EVENT_PRESS
+	KeyEventPress KeyEventType = 0
 	// KeyEventRelease wraps ATK_KEY_EVENT_RELEASE
 	//
 	// specifies a key release event
-	KeyEventRelease KeyEventType = C.ATK_KEY_EVENT_RELEASE
+	KeyEventRelease KeyEventType = 1
 	// KeyEventLastDefined wraps ATK_KEY_EVENT_LAST_DEFINED
 	//
 	// Not a valid value; specifies end of enumeration
-	KeyEventLastDefined KeyEventType = C.ATK_KEY_EVENT_LAST_DEFINED
+	KeyEventLastDefined KeyEventType = 2
 )
 
 func marshalKeyEventType(p unsafe.Pointer) (any, error) {
@@ -248,35 +248,35 @@ const (
 	// LayerInvalid wraps ATK_LAYER_INVALID
 	//
 	// The object does not have a layer
-	LayerInvalid Layer = C.ATK_LAYER_INVALID
+	LayerInvalid Layer = 0
 	// LayerBackground wraps ATK_LAYER_BACKGROUND
 	//
 	// This layer is reserved for the desktop background
-	LayerBackground Layer = C.ATK_LAYER_BACKGROUND
+	LayerBackground Layer = 1
 	// LayerCanvas wraps ATK_LAYER_CANVAS
 	//
 	// This layer is used for Canvas components
-	LayerCanvas Layer = C.ATK_LAYER_CANVAS
+	LayerCanvas Layer = 2
 	// LayerWidget wraps ATK_LAYER_WIDGET
 	//
 	// This layer is normally used for components
-	LayerWidget Layer = C.ATK_LAYER_WIDGET
+	LayerWidget Layer = 3
 	// LayerMDI wraps ATK_LAYER_MDI
 	//
 	// This layer is used for layered components
-	LayerMDI Layer = C.ATK_LAYER_MDI
+	LayerMDI Layer = 4
 	// LayerPopup wraps ATK_LAYER_POPUP
 	//
 	// This layer is used for popup components, such as menus
-	LayerPopup Layer = C.ATK_LAYER_POPUP
+	LayerPopup Layer = 5
 	// LayerOverlay wraps ATK_LAYER_OVERLAY
 	//
 	// This layer is reserved for future use.
-	LayerOverlay Layer = C.ATK_LAYER_OVERLAY
+	LayerOverlay Layer = 6
 	// LayerWindow wraps ATK_LAYER_WINDOW
 	//
 	// This layer is used for toplevel windows.
-	LayerWindow Layer = C.ATK_LAYER_WINDOW
+	LayerWindow Layer = 7
 )
 
 func marshalLayer(p unsafe.Pointer) (any, error) {
@@ -302,15 +302,15 @@ const (
 	// LiveNone wraps ATK_LIVE_NONE
 	//
 	// No live region.
-	LiveNone Live = C.ATK_LIVE_NONE
+	LiveNone Live = 0
 	// LivePolite wraps ATK_LIVE_POLITE
 	//
 	// This live region should be considered polite.
-	LivePolite Live = C.ATK_LIVE_POLITE
+	LivePolite Live = 1
 	// LiveAssertive wraps ATK_LIVE_ASSERTIVE
 	//
 	// This live region should be considered assertive.
-	LiveAssertive Live = C.ATK_LIVE_ASSERTIVE
+	LiveAssertive Live = 2
 )
 
 func marshalLive(p unsafe.Pointer) (any, error) {
@@ -333,64 +333,64 @@ const (
 	// RelationNull wraps ATK_RELATION_NULL
 	//
 	// Not used, represens "no relationship" or an error condition.
-	RelationNull RelationType = C.ATK_RELATION_NULL
+	RelationNull RelationType = 0
 	// RelationControlledBy wraps ATK_RELATION_CONTROLLED_BY
 	//
 	// Indicates an object controlled by one or more target objects.
-	RelationControlledBy RelationType = C.ATK_RELATION_CONTROLLED_BY
+	RelationControlledBy RelationType = 1
 	// RelationControllerFor wraps ATK_RELATION_CONTROLLER_FOR
 	//
 	// Indicates an object is an controller for one or more target objects.
-	RelationControllerFor RelationType = C.ATK_RELATION_CONTROLLER_FOR
+	RelationControllerFor RelationType = 2
 	// RelationLabelFor wraps ATK_RELATION_LABEL_FOR
 	//
 	// Indicates an object is a label for one or more target objects.
-	RelationLabelFor RelationType = C.ATK_RELATION_LABEL_FOR
+	RelationLabelFor RelationType = 3
 	// RelationLabelledBy wraps ATK_RELATION_LABELLED_BY
 	//
 	// Indicates an object is labelled by one or more target objects.
-	RelationLabelledBy RelationType = C.ATK_RELATION_LABELLED_BY
+	RelationLabelledBy RelationType = 4
 	// RelationMemberOf wraps ATK_RELATION_MEMBER_OF
 	//
 	// Indicates an object is a member of a group of one or more target objects.
-	RelationMemberOf RelationType = C.ATK_RELATION_MEMBER_OF
+	RelationMemberOf RelationType = 5
 	// RelationNodeChildOf wraps ATK_RELATION_NODE_CHILD_OF
 	//
 	// Indicates an object is a cell in a treetable which is displayed because a cell in the same column is expanded and identifies that cell.
-	RelationNodeChildOf RelationType = C.ATK_RELATION_NODE_CHILD_OF
+	RelationNodeChildOf RelationType = 6
 	// RelationFlowsTo wraps ATK_RELATION_FLOWS_TO
 	//
 	// Indicates that the object has content that flows logically to another
 	//  AtkObject in a sequential way, (for instance text-flow).
-	RelationFlowsTo RelationType = C.ATK_RELATION_FLOWS_TO
+	RelationFlowsTo RelationType = 7
 	// RelationFlowsFrom wraps ATK_RELATION_FLOWS_FROM
 	//
 	// Indicates that the object has content that flows logically from
 	//  another AtkObject in a sequential way, (for instance text-flow).
-	RelationFlowsFrom RelationType = C.ATK_RELATION_FLOWS_FROM
+	RelationFlowsFrom RelationType = 8
 	// RelationSubwindowOf wraps ATK_RELATION_SUBWINDOW_OF
 	//
 	// Indicates a subwindow attached to a component but otherwise has no connection in  the UI heirarchy to that component.
-	RelationSubwindowOf RelationType = C.ATK_RELATION_SUBWINDOW_OF
+	RelationSubwindowOf RelationType = 9
 	// RelationEmbeds wraps ATK_RELATION_EMBEDS
 	//
 	// Indicates that the object visually embeds
 	//  another object's content, i.e. this object's content flows around
 	//  another's content.
-	RelationEmbeds RelationType = C.ATK_RELATION_EMBEDS
+	RelationEmbeds RelationType = 10
 	// RelationEmbeddedBy wraps ATK_RELATION_EMBEDDED_BY
 	//
 	// Reciprocal of %ATK_RELATION_EMBEDS, indicates that
 	//  this object's content is visualy embedded in another object.
-	RelationEmbeddedBy RelationType = C.ATK_RELATION_EMBEDDED_BY
+	RelationEmbeddedBy RelationType = 11
 	// RelationPopupFor wraps ATK_RELATION_POPUP_FOR
 	//
 	// Indicates that an object is a popup for another object.
-	RelationPopupFor RelationType = C.ATK_RELATION_POPUP_FOR
+	RelationPopupFor RelationType = 12
 	// RelationParentWindowOf wraps ATK_RELATION_PARENT_WINDOW_OF
 	//
 	// Indicates that an object is a parent window of another object.
-	RelationParentWindowOf RelationType = C.ATK_RELATION_PARENT_WINDOW_OF
+	RelationParentWindowOf RelationType = 13
 	// RelationDescribedBy wraps ATK_RELATION_DESCRIBED_BY
 	//
 	// Reciprocal of %ATK_RELATION_DESCRIPTION_FOR. Indicates that one
@@ -403,17 +403,17 @@ const (
 	// an on-screen object, consider using %ATK_RELATION_DETAILS as assistive technologies may
 	// provide a means for the user to navigate to objects containing detailed descriptions so
 	// that their content can be more closely reviewed.
-	RelationDescribedBy RelationType = C.ATK_RELATION_DESCRIBED_BY
+	RelationDescribedBy RelationType = 14
 	// RelationDescriptionFor wraps ATK_RELATION_DESCRIPTION_FOR
 	//
 	// Reciprocal of %ATK_RELATION_DESCRIBED_BY. Indicates that this
 	// object provides descriptive information about the target object(s). See also
 	// %ATK_RELATION_DETAILS_FOR and %ATK_RELATION_ERROR_FOR.
-	RelationDescriptionFor RelationType = C.ATK_RELATION_DESCRIPTION_FOR
+	RelationDescriptionFor RelationType = 15
 	// RelationNodeParentOf wraps ATK_RELATION_NODE_PARENT_OF
 	//
 	// Indicates an object is a cell in a treetable and is expanded to display other cells in the same column.
-	RelationNodeParentOf RelationType = C.ATK_RELATION_NODE_PARENT_OF
+	RelationNodeParentOf RelationType = 16
 	// RelationDetails wraps ATK_RELATION_DETAILS
 	//
 	// Reciprocal of %ATK_RELATION_DETAILS_FOR. Indicates that this object
@@ -423,30 +423,30 @@ const (
 	// verbose information suitable for announcement only, see %ATK_RELATION_DESCRIBED_BY. If
 	// the detailed information describes an error condition, %ATK_RELATION_ERROR_FOR should be
 	// used instead. @Since: ATK-2.26.
-	RelationDetails RelationType = C.ATK_RELATION_DETAILS
+	RelationDetails RelationType = 17
 	// RelationDetailsFor wraps ATK_RELATION_DETAILS_FOR
 	//
 	// Reciprocal of %ATK_RELATION_DETAILS. Indicates that this object
 	// provides a detailed or extended description about the target object(s). See also
 	// %ATK_RELATION_DESCRIPTION_FOR and %ATK_RELATION_ERROR_FOR. @Since: ATK-2.26.
-	RelationDetailsFor RelationType = C.ATK_RELATION_DETAILS_FOR
+	RelationDetailsFor RelationType = 18
 	// RelationErrorMessage wraps ATK_RELATION_ERROR_MESSAGE
 	//
 	// Reciprocal of %ATK_RELATION_ERROR_FOR. Indicates that this object
 	// has one or more errors, the nature of which is described in the contents of the target
 	// object(s). Objects that have this relation type should also contain %ATK_STATE_INVALID_ENTRY
 	// in their #AtkStateSet. @Since: ATK-2.26.
-	RelationErrorMessage RelationType = C.ATK_RELATION_ERROR_MESSAGE
+	RelationErrorMessage RelationType = 19
 	// RelationErrorFor wraps ATK_RELATION_ERROR_FOR
 	//
 	// Reciprocal of %ATK_RELATION_ERROR_MESSAGE. Indicates that this object
 	// contains an error message describing an invalid condition in the target object(s). @Since:
 	// ATK_2.26.
-	RelationErrorFor RelationType = C.ATK_RELATION_ERROR_FOR
+	RelationErrorFor RelationType = 20
 	// RelationLastDefined wraps ATK_RELATION_LAST_DEFINED
 	//
 	// Not used, this value indicates the end of the enumeration.
-	RelationLastDefined RelationType = C.ATK_RELATION_LAST_DEFINED
+	RelationLastDefined RelationType = 21
 )
 
 func marshalRelationType(p unsafe.Pointer) (any, error) {
@@ -473,243 +473,243 @@ const (
 	// RoleInvalid wraps ATK_ROLE_INVALID
 	//
 	// Invalid role
-	RoleInvalid Role = C.ATK_ROLE_INVALID
+	RoleInvalid Role = 0
 	// RoleAccelLabel wraps ATK_ROLE_ACCEL_LABEL
 	//
 	// A label which represents an accelerator
-	RoleAccelLabel Role = C.ATK_ROLE_ACCEL_LABEL
+	RoleAccelLabel Role = 1
 	// RoleAlert wraps ATK_ROLE_ALERT
 	//
 	// An object which is an alert to the user. Assistive Technologies typically respond to ATK_ROLE_ALERT by reading the entire onscreen contents of containers advertising this role.  Should be used for warning dialogs, etc.
-	RoleAlert Role = C.ATK_ROLE_ALERT
+	RoleAlert Role = 2
 	// RoleAnimation wraps ATK_ROLE_ANIMATION
 	//
 	// An object which is an animated image
-	RoleAnimation Role = C.ATK_ROLE_ANIMATION
+	RoleAnimation Role = 3
 	// RoleArrow wraps ATK_ROLE_ARROW
 	//
 	// An arrow in one of the four cardinal directions
-	RoleArrow Role = C.ATK_ROLE_ARROW
+	RoleArrow Role = 4
 	// RoleCalendar wraps ATK_ROLE_CALENDAR
 	//
 	// An object that displays a calendar and allows the user to select a date
-	RoleCalendar Role = C.ATK_ROLE_CALENDAR
+	RoleCalendar Role = 5
 	// RoleCanvas wraps ATK_ROLE_CANVAS
 	//
 	// An object that can be drawn into and is used to trap events
-	RoleCanvas Role = C.ATK_ROLE_CANVAS
+	RoleCanvas Role = 6
 	// RoleCheckBox wraps ATK_ROLE_CHECK_BOX
 	//
 	// A choice that can be checked or unchecked and provides a separate indicator for the current state
-	RoleCheckBox Role = C.ATK_ROLE_CHECK_BOX
+	RoleCheckBox Role = 7
 	// RoleCheckMenuItem wraps ATK_ROLE_CHECK_MENU_ITEM
 	//
 	// A menu item with a check box
-	RoleCheckMenuItem Role = C.ATK_ROLE_CHECK_MENU_ITEM
+	RoleCheckMenuItem Role = 8
 	// RoleColorChooser wraps ATK_ROLE_COLOR_CHOOSER
 	//
 	// A specialized dialog that lets the user choose a color
-	RoleColorChooser Role = C.ATK_ROLE_COLOR_CHOOSER
+	RoleColorChooser Role = 9
 	// RoleColumnHeader wraps ATK_ROLE_COLUMN_HEADER
 	//
 	// The header for a column of data
-	RoleColumnHeader Role = C.ATK_ROLE_COLUMN_HEADER
+	RoleColumnHeader Role = 10
 	// RoleComboBox wraps ATK_ROLE_COMBO_BOX
 	//
 	// A collapsible list of choices the user can select from
-	RoleComboBox Role = C.ATK_ROLE_COMBO_BOX
+	RoleComboBox Role = 11
 	// RoleDateEditor wraps ATK_ROLE_DATE_EDITOR
 	//
 	// An object whose purpose is to allow a user to edit a date
-	RoleDateEditor Role = C.ATK_ROLE_DATE_EDITOR
+	RoleDateEditor Role = 12
 	// RoleDesktopIcon wraps ATK_ROLE_DESKTOP_ICON
 	//
 	// An inconifed internal frame within a DESKTOP_PANE
-	RoleDesktopIcon Role = C.ATK_ROLE_DESKTOP_ICON
+	RoleDesktopIcon Role = 13
 	// RoleDesktopFrame wraps ATK_ROLE_DESKTOP_FRAME
 	//
 	// A pane that supports internal frames and iconified versions of those internal frames
-	RoleDesktopFrame Role = C.ATK_ROLE_DESKTOP_FRAME
+	RoleDesktopFrame Role = 14
 	// RoleDial wraps ATK_ROLE_DIAL
 	//
 	// An object whose purpose is to allow a user to set a value
-	RoleDial Role = C.ATK_ROLE_DIAL
+	RoleDial Role = 15
 	// RoleDialog wraps ATK_ROLE_DIALOG
 	//
 	// A top level window with title bar and a border
-	RoleDialog Role = C.ATK_ROLE_DIALOG
+	RoleDialog Role = 16
 	// RoleDirectoryPane wraps ATK_ROLE_DIRECTORY_PANE
 	//
 	// A pane that allows the user to navigate through and select the contents of a directory
-	RoleDirectoryPane Role = C.ATK_ROLE_DIRECTORY_PANE
+	RoleDirectoryPane Role = 17
 	// RoleDrawingArea wraps ATK_ROLE_DRAWING_AREA
 	//
 	// An object used for drawing custom user interface elements
-	RoleDrawingArea Role = C.ATK_ROLE_DRAWING_AREA
+	RoleDrawingArea Role = 18
 	// RoleFileChooser wraps ATK_ROLE_FILE_CHOOSER
 	//
 	// A specialized dialog that lets the user choose a file
-	RoleFileChooser Role = C.ATK_ROLE_FILE_CHOOSER
+	RoleFileChooser Role = 19
 	// RoleFiller wraps ATK_ROLE_FILLER
 	//
 	// A object that fills up space in a user interface
-	RoleFiller Role = C.ATK_ROLE_FILLER
+	RoleFiller Role = 20
 	// RoleFontChooser wraps ATK_ROLE_FONT_CHOOSER
 	//
 	// A specialized dialog that lets the user choose a font
-	RoleFontChooser Role = C.ATK_ROLE_FONT_CHOOSER
+	RoleFontChooser Role = 21
 	// RoleFrame wraps ATK_ROLE_FRAME
 	//
 	// A top level window with a title bar, border, menubar, etc.
-	RoleFrame Role = C.ATK_ROLE_FRAME
+	RoleFrame Role = 22
 	// RoleGlassPane wraps ATK_ROLE_GLASS_PANE
 	//
 	// A pane that is guaranteed to be painted on top of all panes beneath it
-	RoleGlassPane Role = C.ATK_ROLE_GLASS_PANE
+	RoleGlassPane Role = 23
 	// RoleHtmlContainer wraps ATK_ROLE_HTML_CONTAINER
 	//
 	// A document container for HTML, whose children represent the document content
-	RoleHtmlContainer Role = C.ATK_ROLE_HTML_CONTAINER
+	RoleHtmlContainer Role = 24
 	// RoleIcon wraps ATK_ROLE_ICON
 	//
 	// A small fixed size picture, typically used to decorate components
-	RoleIcon Role = C.ATK_ROLE_ICON
+	RoleIcon Role = 25
 	// RoleImage wraps ATK_ROLE_IMAGE
 	//
 	// An object whose primary purpose is to display an image
-	RoleImage Role = C.ATK_ROLE_IMAGE
+	RoleImage Role = 26
 	// RoleInternalFrame wraps ATK_ROLE_INTERNAL_FRAME
 	//
 	// A frame-like object that is clipped by a desktop pane
-	RoleInternalFrame Role = C.ATK_ROLE_INTERNAL_FRAME
+	RoleInternalFrame Role = 27
 	// RoleLabel wraps ATK_ROLE_LABEL
 	//
 	// An object used to present an icon or short string in an interface
-	RoleLabel Role = C.ATK_ROLE_LABEL
+	RoleLabel Role = 28
 	// RoleLayeredPane wraps ATK_ROLE_LAYERED_PANE
 	//
 	// A specialized pane that allows its children to be drawn in layers, providing a form of stacking order
-	RoleLayeredPane Role = C.ATK_ROLE_LAYERED_PANE
+	RoleLayeredPane Role = 29
 	// RoleList wraps ATK_ROLE_LIST
 	//
 	// An object that presents a list of objects to the user and allows the user to select one or more of them
-	RoleList Role = C.ATK_ROLE_LIST
+	RoleList Role = 30
 	// RoleListItem wraps ATK_ROLE_LIST_ITEM
 	//
 	// An object that represents an element of a list
-	RoleListItem Role = C.ATK_ROLE_LIST_ITEM
+	RoleListItem Role = 31
 	// RoleMenu wraps ATK_ROLE_MENU
 	//
 	// An object usually found inside a menu bar that contains a list of actions the user can choose from
-	RoleMenu Role = C.ATK_ROLE_MENU
+	RoleMenu Role = 32
 	// RoleMenuBar wraps ATK_ROLE_MENU_BAR
 	//
 	// An object usually drawn at the top of the primary dialog box of an application that contains a list of menus the user can choose from
-	RoleMenuBar Role = C.ATK_ROLE_MENU_BAR
+	RoleMenuBar Role = 33
 	// RoleMenuItem wraps ATK_ROLE_MENU_ITEM
 	//
 	// An object usually contained in a menu that presents an action the user can choose
-	RoleMenuItem Role = C.ATK_ROLE_MENU_ITEM
+	RoleMenuItem Role = 34
 	// RoleOptionPane wraps ATK_ROLE_OPTION_PANE
 	//
 	// A specialized pane whose primary use is inside a DIALOG
-	RoleOptionPane Role = C.ATK_ROLE_OPTION_PANE
+	RoleOptionPane Role = 35
 	// RolePageTab wraps ATK_ROLE_PAGE_TAB
 	//
 	// An object that is a child of a page tab list
-	RolePageTab Role = C.ATK_ROLE_PAGE_TAB
+	RolePageTab Role = 36
 	// RolePageTabList wraps ATK_ROLE_PAGE_TAB_LIST
 	//
 	// An object that presents a series of panels (or page tabs), one at a time, through some mechanism provided by the object
-	RolePageTabList Role = C.ATK_ROLE_PAGE_TAB_LIST
+	RolePageTabList Role = 37
 	// RolePanel wraps ATK_ROLE_PANEL
 	//
 	// A generic container that is often used to group objects
-	RolePanel Role = C.ATK_ROLE_PANEL
+	RolePanel Role = 38
 	// RolePasswordText wraps ATK_ROLE_PASSWORD_TEXT
 	//
 	// A text object uses for passwords, or other places where the text content is not shown visibly to the user
-	RolePasswordText Role = C.ATK_ROLE_PASSWORD_TEXT
+	RolePasswordText Role = 39
 	// RolePopupMenu wraps ATK_ROLE_POPUP_MENU
 	//
 	// A temporary window that is usually used to offer the user a list of choices, and then hides when the user selects one of those choices
-	RolePopupMenu Role = C.ATK_ROLE_POPUP_MENU
+	RolePopupMenu Role = 40
 	// RoleProgressBar wraps ATK_ROLE_PROGRESS_BAR
 	//
 	// An object used to indicate how much of a task has been completed
-	RoleProgressBar Role = C.ATK_ROLE_PROGRESS_BAR
+	RoleProgressBar Role = 41
 	// RoleButton wraps ATK_ROLE_BUTTON
 	//
 	// An object the user can manipulate to tell the application to do something
-	RoleButton Role = C.ATK_ROLE_BUTTON
+	RoleButton Role = 42
 	// RoleRadioButton wraps ATK_ROLE_RADIO_BUTTON
 	//
 	// A specialized check box that will cause other radio buttons in the same group to become unchecked when this one is checked
-	RoleRadioButton Role = C.ATK_ROLE_RADIO_BUTTON
+	RoleRadioButton Role = 43
 	// RoleRadioMenuItem wraps ATK_ROLE_RADIO_MENU_ITEM
 	//
 	// A check menu item which belongs to a group. At each instant exactly one of the radio menu items from a group is selected
-	RoleRadioMenuItem Role = C.ATK_ROLE_RADIO_MENU_ITEM
+	RoleRadioMenuItem Role = 44
 	// RoleRootPane wraps ATK_ROLE_ROOT_PANE
 	//
 	// A specialized pane that has a glass pane and a layered pane as its children
-	RoleRootPane Role = C.ATK_ROLE_ROOT_PANE
+	RoleRootPane Role = 45
 	// RoleRowHeader wraps ATK_ROLE_ROW_HEADER
 	//
 	// The header for a row of data
-	RoleRowHeader Role = C.ATK_ROLE_ROW_HEADER
+	RoleRowHeader Role = 46
 	// RoleScrollBar wraps ATK_ROLE_SCROLL_BAR
 	//
 	// An object usually used to allow a user to incrementally view a large amount of data.
-	RoleScrollBar Role = C.ATK_ROLE_SCROLL_BAR
+	RoleScrollBar Role = 47
 	// RoleScrollPane wraps ATK_ROLE_SCROLL_PANE
 	//
 	// An object that allows a user to incrementally view a large amount of information
-	RoleScrollPane Role = C.ATK_ROLE_SCROLL_PANE
+	RoleScrollPane Role = 48
 	// RoleSeparator wraps ATK_ROLE_SEPARATOR
 	//
 	// An object usually contained in a menu to provide a visible and logical separation of the contents in a menu
-	RoleSeparator Role = C.ATK_ROLE_SEPARATOR
+	RoleSeparator Role = 49
 	// RoleSlider wraps ATK_ROLE_SLIDER
 	//
 	// An object that allows the user to select from a bounded range
-	RoleSlider Role = C.ATK_ROLE_SLIDER
+	RoleSlider Role = 50
 	// RoleSplitPane wraps ATK_ROLE_SPLIT_PANE
 	//
 	// A specialized panel that presents two other panels at the same time
-	RoleSplitPane Role = C.ATK_ROLE_SPLIT_PANE
+	RoleSplitPane Role = 51
 	// RoleSpinButton wraps ATK_ROLE_SPIN_BUTTON
 	//
 	// An object used to get an integer or floating point number from the user
-	RoleSpinButton Role = C.ATK_ROLE_SPIN_BUTTON
+	RoleSpinButton Role = 52
 	// RoleStatusbar wraps ATK_ROLE_STATUSBAR
 	//
 	// An object which reports messages of minor importance to the user
-	RoleStatusbar Role = C.ATK_ROLE_STATUSBAR
+	RoleStatusbar Role = 53
 	// RoleTable wraps ATK_ROLE_TABLE
 	//
 	// An object used to represent information in terms of rows and columns
-	RoleTable Role = C.ATK_ROLE_TABLE
+	RoleTable Role = 54
 	// RoleTableCell wraps ATK_ROLE_TABLE_CELL
 	//
 	// A cell in a table
-	RoleTableCell Role = C.ATK_ROLE_TABLE_CELL
+	RoleTableCell Role = 55
 	// RoleTableColumnHeader wraps ATK_ROLE_TABLE_COLUMN_HEADER
 	//
 	// The header for a column of a table
-	RoleTableColumnHeader Role = C.ATK_ROLE_TABLE_COLUMN_HEADER
+	RoleTableColumnHeader Role = 56
 	// RoleTableRowHeader wraps ATK_ROLE_TABLE_ROW_HEADER
 	//
 	// The header for a row of a table
-	RoleTableRowHeader Role = C.ATK_ROLE_TABLE_ROW_HEADER
+	RoleTableRowHeader Role = 57
 	// RoleTearOffMenuItem wraps ATK_ROLE_TEAR_OFF_MENU_ITEM
 	//
 	// A menu item used to tear off and reattach its menu
-	RoleTearOffMenuItem Role = C.ATK_ROLE_TEAR_OFF_MENU_ITEM
+	RoleTearOffMenuItem Role = 58
 	// RoleTerminal wraps ATK_ROLE_TERMINAL
 	//
 	// An object that represents an accessible terminal.  (Since: 0.6)
-	RoleTerminal Role = C.ATK_ROLE_TERMINAL
+	RoleTerminal Role = 59
 	// RoleText wraps ATK_ROLE_TEXT
 	//
 	// An interactive widget that supports multiple lines of text and
@@ -719,110 +719,110 @@ const (
 	// whose purpose is to solicit input from the user, see ATK_ROLE_ENTRY and
 	// ATK_ROLE_PASSWORD_TEXT. For generic objects which display a brief amount of
 	// textual information, see ATK_ROLE_STATIC.
-	RoleText Role = C.ATK_ROLE_TEXT
+	RoleText Role = 60
 	// RoleToggleButton wraps ATK_ROLE_TOGGLE_BUTTON
 	//
 	// A specialized push button that can be checked or unchecked, but does not provide a separate indicator for the current state
-	RoleToggleButton Role = C.ATK_ROLE_TOGGLE_BUTTON
+	RoleToggleButton Role = 61
 	// RoleToolBar wraps ATK_ROLE_TOOL_BAR
 	//
 	// A bar or palette usually composed of push buttons or toggle buttons
-	RoleToolBar Role = C.ATK_ROLE_TOOL_BAR
+	RoleToolBar Role = 62
 	// RoleToolTip wraps ATK_ROLE_TOOL_TIP
 	//
 	// An object that provides information about another object
-	RoleToolTip Role = C.ATK_ROLE_TOOL_TIP
+	RoleToolTip Role = 63
 	// RoleTree wraps ATK_ROLE_TREE
 	//
 	// An object used to represent hierarchical information to the user
-	RoleTree Role = C.ATK_ROLE_TREE
+	RoleTree Role = 64
 	// RoleTreeTable wraps ATK_ROLE_TREE_TABLE
 	//
 	// An object capable of expanding and collapsing rows as well as showing multiple columns of data.   (Since: 0.7)
-	RoleTreeTable Role = C.ATK_ROLE_TREE_TABLE
+	RoleTreeTable Role = 65
 	// RoleUnknown wraps ATK_ROLE_UNKNOWN
 	//
 	// The object contains some Accessible information, but its role is not known
-	RoleUnknown Role = C.ATK_ROLE_UNKNOWN
+	RoleUnknown Role = 66
 	// RoleViewport wraps ATK_ROLE_VIEWPORT
 	//
 	// An object usually used in a scroll pane
-	RoleViewport Role = C.ATK_ROLE_VIEWPORT
+	RoleViewport Role = 67
 	// RoleWindow wraps ATK_ROLE_WINDOW
 	//
 	// A top level window with no title or border.
-	RoleWindow Role = C.ATK_ROLE_WINDOW
+	RoleWindow Role = 68
 	// RoleHeader wraps ATK_ROLE_HEADER
 	//
 	// An object that serves as a document header. (Since: 1.1.1)
-	RoleHeader Role = C.ATK_ROLE_HEADER
+	RoleHeader Role = 69
 	// RoleFooter wraps ATK_ROLE_FOOTER
 	//
 	// An object that serves as a document footer.  (Since: 1.1.1)
-	RoleFooter Role = C.ATK_ROLE_FOOTER
+	RoleFooter Role = 70
 	// RoleParagraph wraps ATK_ROLE_PARAGRAPH
 	//
 	// An object which is contains a paragraph of text content.   (Since: 1.1.1)
-	RoleParagraph Role = C.ATK_ROLE_PARAGRAPH
+	RoleParagraph Role = 71
 	// RoleRuler wraps ATK_ROLE_RULER
 	//
 	// An object which describes margins and tab stops, etc. for text objects which it controls (should have CONTROLLER_FOR relation to such).   (Since: 1.1.1)
-	RoleRuler Role = C.ATK_ROLE_RULER
+	RoleRuler Role = 72
 	// RoleApplication wraps ATK_ROLE_APPLICATION
 	//
 	// The object is an application object, which may contain @ATK_ROLE_FRAME objects or other types of accessibles.  The root accessible of any application's ATK hierarchy should have ATK_ROLE_APPLICATION.   (Since: 1.1.4)
-	RoleApplication Role = C.ATK_ROLE_APPLICATION
+	RoleApplication Role = 73
 	// RoleAutocomplete wraps ATK_ROLE_AUTOCOMPLETE
 	//
 	// The object is a dialog or list containing items for insertion into an entry widget, for instance a list of words for completion of a text entry.   (Since: 1.3)
-	RoleAutocomplete Role = C.ATK_ROLE_AUTOCOMPLETE
+	RoleAutocomplete Role = 74
 	// RoleEditbar wraps ATK_ROLE_EDITBAR
 	//
 	// The object is an editable text object in a toolbar.  (Since: 1.5)
-	RoleEditbar Role = C.ATK_ROLE_EDITBAR
+	RoleEditbar Role = 75
 	// RoleEmbedded wraps ATK_ROLE_EMBEDDED
 	//
 	// The object is an embedded container within a document or panel.  This role is a grouping "hint" indicating that the contained objects share a context.  (Since: 1.7.2)
-	RoleEmbedded Role = C.ATK_ROLE_EMBEDDED
+	RoleEmbedded Role = 76
 	// RoleEntry wraps ATK_ROLE_ENTRY
 	//
 	// The object is a component whose textual content may be entered or modified by the user, provided @ATK_STATE_EDITABLE is present.   (Since: 1.11)
-	RoleEntry Role = C.ATK_ROLE_ENTRY
+	RoleEntry Role = 77
 	// RoleChart wraps ATK_ROLE_CHART
 	//
 	// The object is a graphical depiction of quantitative data. It may contain multiple subelements whose attributes and/or description may be queried to obtain both the quantitative data and information about how the data is being presented. The LABELLED_BY relation is particularly important in interpreting objects of this type, as is the accessible-description property.  (Since: 1.11)
-	RoleChart Role = C.ATK_ROLE_CHART
+	RoleChart Role = 78
 	// RoleCaption wraps ATK_ROLE_CAPTION
 	//
 	// The object contains descriptive information, usually textual, about another user interface element such as a table, chart, or image.  (Since: 1.11)
-	RoleCaption Role = C.ATK_ROLE_CAPTION
+	RoleCaption Role = 79
 	// RoleDocumentFrame wraps ATK_ROLE_DOCUMENT_FRAME
 	//
 	// The object is a visual frame or container which contains a view of document content. Document frames may occur within another Document instance, in which case the second document may be said to be embedded in the containing instance. HTML frames are often ROLE_DOCUMENT_FRAME. Either this object, or a singleton descendant, should implement the Document interface.  (Since: 1.11)
-	RoleDocumentFrame Role = C.ATK_ROLE_DOCUMENT_FRAME
+	RoleDocumentFrame Role = 80
 	// RoleHeading wraps ATK_ROLE_HEADING
 	//
 	// The object serves as a heading for content which follows it in a document. The 'heading level' of the heading, if availabe, may be obtained by querying the object's attributes.
-	RoleHeading Role = C.ATK_ROLE_HEADING
+	RoleHeading Role = 81
 	// RolePage wraps ATK_ROLE_PAGE
 	//
 	// The object is a containing instance which encapsulates a page of information. @ATK_ROLE_PAGE is used in documents and content which support a paginated navigation model.  (Since: 1.11)
-	RolePage Role = C.ATK_ROLE_PAGE
+	RolePage Role = 82
 	// RoleSection wraps ATK_ROLE_SECTION
 	//
 	// The object is a containing instance of document content which constitutes a particular 'logical' section of the document. The type of content within a section, and the nature of the section division itself, may be obtained by querying the object's attributes. Sections may be nested. (Since: 1.11)
-	RoleSection Role = C.ATK_ROLE_SECTION
+	RoleSection Role = 83
 	// RoleRedundantObject wraps ATK_ROLE_REDUNDANT_OBJECT
 	//
 	// The object is redundant with another object in the hierarchy, and is exposed for purely technical reasons.  Objects of this role should normally be ignored by clients. (Since: 1.11)
-	RoleRedundantObject Role = C.ATK_ROLE_REDUNDANT_OBJECT
+	RoleRedundantObject Role = 84
 	// RoleForm wraps ATK_ROLE_FORM
 	//
 	// The object is a container for form controls, for instance as part of a
 	// web form or user-input form within a document.  This role is primarily a tag/convenience for
 	// clients when navigating complex documents, it is not expected that ordinary GUI containers will
 	// always have ATK_ROLE_FORM. (Since: 1.12.0)
-	RoleForm Role = C.ATK_ROLE_FORM
+	RoleForm Role = 85
 	// RoleLink wraps ATK_ROLE_LINK
 	//
 	// The object is a hypertext anchor, i.e. a "link" in a
@@ -830,104 +830,104 @@ const (
 	// content which may also use the Hypertext/Hyperlink interfaces
 	// to indicate the range/location within a text object where
 	// an inline or embedded object lies.  (Since: 1.12.1)
-	RoleLink Role = C.ATK_ROLE_LINK
+	RoleLink Role = 86
 	// RoleInputMethodWindow wraps ATK_ROLE_INPUT_METHOD_WINDOW
 	//
 	// The object is a window or similar viewport
 	// which is used to allow composition or input of a 'complex character',
 	// in other words it is an "input method window." (Since: 1.12.1)
-	RoleInputMethodWindow Role = C.ATK_ROLE_INPUT_METHOD_WINDOW
+	RoleInputMethodWindow Role = 87
 	// RoleTableRow wraps ATK_ROLE_TABLE_ROW
 	//
 	// A row in a table.  (Since: 2.1.0)
-	RoleTableRow Role = C.ATK_ROLE_TABLE_ROW
+	RoleTableRow Role = 88
 	// RoleTreeItem wraps ATK_ROLE_TREE_ITEM
 	//
 	// An object that represents an element of a tree.  (Since: 2.1.0)
-	RoleTreeItem Role = C.ATK_ROLE_TREE_ITEM
+	RoleTreeItem Role = 89
 	// RoleDocumentSpreadsheet wraps ATK_ROLE_DOCUMENT_SPREADSHEET
 	//
 	// A document frame which contains a spreadsheet.  (Since: 2.1.0)
-	RoleDocumentSpreadsheet Role = C.ATK_ROLE_DOCUMENT_SPREADSHEET
+	RoleDocumentSpreadsheet Role = 90
 	// RoleDocumentPresentation wraps ATK_ROLE_DOCUMENT_PRESENTATION
 	//
 	// A document frame which contains a presentation or slide content.  (Since: 2.1.0)
-	RoleDocumentPresentation Role = C.ATK_ROLE_DOCUMENT_PRESENTATION
+	RoleDocumentPresentation Role = 91
 	// RoleDocumentText wraps ATK_ROLE_DOCUMENT_TEXT
 	//
 	// A document frame which contains textual content, such as found in a word processing application.  (Since: 2.1.0)
-	RoleDocumentText Role = C.ATK_ROLE_DOCUMENT_TEXT
+	RoleDocumentText Role = 92
 	// RoleDocumentWeb wraps ATK_ROLE_DOCUMENT_WEB
 	//
 	// A document frame which contains HTML or other markup suitable for display in a web browser.  (Since: 2.1.0)
-	RoleDocumentWeb Role = C.ATK_ROLE_DOCUMENT_WEB
+	RoleDocumentWeb Role = 93
 	// RoleDocumentEmail wraps ATK_ROLE_DOCUMENT_EMAIL
 	//
 	// A document frame which contains email content to be displayed or composed either in plain text or HTML.  (Since: 2.1.0)
-	RoleDocumentEmail Role = C.ATK_ROLE_DOCUMENT_EMAIL
+	RoleDocumentEmail Role = 94
 	// RoleComment wraps ATK_ROLE_COMMENT
 	//
 	// An object found within a document and designed to present a comment, note, or other annotation. In some cases, this object might not be visible until activated.  (Since: 2.1.0)
-	RoleComment Role = C.ATK_ROLE_COMMENT
+	RoleComment Role = 95
 	// RoleListBox wraps ATK_ROLE_LIST_BOX
 	//
 	// A non-collapsible list of choices the user can select from. (Since: 2.1.0)
-	RoleListBox Role = C.ATK_ROLE_LIST_BOX
+	RoleListBox Role = 96
 	// RoleGrouping wraps ATK_ROLE_GROUPING
 	//
 	// A group of related widgets. This group typically has a label. (Since: 2.1.0)
-	RoleGrouping Role = C.ATK_ROLE_GROUPING
+	RoleGrouping Role = 97
 	// RoleImageMap wraps ATK_ROLE_IMAGE_MAP
 	//
 	// An image map object. Usually a graphic with multiple hotspots, where each hotspot can be activated resulting in the loading of another document or section of a document. (Since: 2.1.0)
-	RoleImageMap Role = C.ATK_ROLE_IMAGE_MAP
+	RoleImageMap Role = 98
 	// RoleNotification wraps ATK_ROLE_NOTIFICATION
 	//
 	// A transitory object designed to present a message to the user, typically at the desktop level rather than inside a particular application.  (Since: 2.1.0)
-	RoleNotification Role = C.ATK_ROLE_NOTIFICATION
+	RoleNotification Role = 99
 	// RoleInfoBar wraps ATK_ROLE_INFO_BAR
 	//
 	// An object designed to present a message to the user within an existing window. (Since: 2.1.0)
-	RoleInfoBar Role = C.ATK_ROLE_INFO_BAR
+	RoleInfoBar Role = 100
 	// RoleLevelBar wraps ATK_ROLE_LEVEL_BAR
 	//
 	// A bar that serves as a level indicator to, for instance, show the strength of a password or the state of a battery.  (Since: 2.7.3)
-	RoleLevelBar Role = C.ATK_ROLE_LEVEL_BAR
+	RoleLevelBar Role = 101
 	// RoleTitleBar wraps ATK_ROLE_TITLE_BAR
 	//
 	// A bar that serves as the title of a window or a
 	// dialog. (Since: 2.12)
-	RoleTitleBar Role = C.ATK_ROLE_TITLE_BAR
+	RoleTitleBar Role = 102
 	// RoleBlockQuote wraps ATK_ROLE_BLOCK_QUOTE
 	//
 	// An object which contains a text section
 	// that is quoted from another source. (Since: 2.12)
-	RoleBlockQuote Role = C.ATK_ROLE_BLOCK_QUOTE
+	RoleBlockQuote Role = 103
 	// RoleAudio wraps ATK_ROLE_AUDIO
 	//
 	// An object which represents an audio element. (Since: 2.12)
-	RoleAudio Role = C.ATK_ROLE_AUDIO
+	RoleAudio Role = 104
 	// RoleVideo wraps ATK_ROLE_VIDEO
 	//
 	// An object which represents a video element. (Since: 2.12)
-	RoleVideo Role = C.ATK_ROLE_VIDEO
+	RoleVideo Role = 105
 	// RoleDefinition wraps ATK_ROLE_DEFINITION
 	//
 	// A definition of a term or concept. (Since: 2.12)
-	RoleDefinition Role = C.ATK_ROLE_DEFINITION
+	RoleDefinition Role = 106
 	// RoleArticle wraps ATK_ROLE_ARTICLE
 	//
 	// A section of a page that consists of a
 	// composition that forms an independent part of a document, page, or
 	// site. Examples: A blog entry, a news story, a forum post. (Since: 2.12)
-	RoleArticle Role = C.ATK_ROLE_ARTICLE
+	RoleArticle Role = 107
 	// RoleLandmark wraps ATK_ROLE_LANDMARK
 	//
 	// A region of a web page intended as a
 	// navigational landmark. This is designed to allow Assistive
 	// Technologies to provide quick navigation among key regions within a
 	// document. (Since: 2.12)
-	RoleLandmark Role = C.ATK_ROLE_LANDMARK
+	RoleLandmark Role = 108
 	// RoleLog wraps ATK_ROLE_LOG
 	//
 	// A text widget or container holding log content, such
@@ -936,7 +936,7 @@ const (
 	// reading order. The log contains a meaningful sequence and new
 	// information is added only to the end of the log, not at arbitrary
 	// points. (Since: 2.12)
-	RoleLog Role = C.ATK_ROLE_LOG
+	RoleLog Role = 109
 	// RoleMarquee wraps ATK_ROLE_MARQUEE
 	//
 	// A container where non-essential information
@@ -944,25 +944,25 @@ const (
 	// and ad banners. The primary difference between a marquee and a log
 	// is that logs usually have a meaningful order or sequence of
 	// important content changes. (Since: 2.12)
-	RoleMarquee Role = C.ATK_ROLE_MARQUEE
+	RoleMarquee Role = 110
 	// RoleMath wraps ATK_ROLE_MATH
 	//
 	// A text widget or container that holds a mathematical
 	// expression. (Since: 2.12)
-	RoleMath Role = C.ATK_ROLE_MATH
+	RoleMath Role = 111
 	// RoleRating wraps ATK_ROLE_RATING
 	//
 	// A widget whose purpose is to display a rating,
 	// such as the number of stars associated with a song in a media
 	// player. Objects of this role should also implement
 	// AtkValue. (Since: 2.12)
-	RoleRating Role = C.ATK_ROLE_RATING
+	RoleRating Role = 112
 	// RoleTimer wraps ATK_ROLE_TIMER
 	//
 	// An object containing a numerical counter which
 	// indicates an amount of elapsed time from a start point, or the time
 	// remaining until an end point. (Since: 2.12)
-	RoleTimer Role = C.ATK_ROLE_TIMER
+	RoleTimer Role = 113
 	// RoleDescriptionList wraps ATK_ROLE_DESCRIPTION_LIST
 	//
 	// An object that represents a list of
@@ -971,17 +971,17 @@ const (
 	// (ATK_ROLE_DESCRIPTION_TERM) followed by one or more values
 	// (ATK_ROLE_DESCRIPTION_VALUE). For each list, there should not be
 	// more than one group with the same term name. (Since: 2.12)
-	RoleDescriptionList Role = C.ATK_ROLE_DESCRIPTION_LIST
+	RoleDescriptionList Role = 114
 	// RoleDescriptionTerm wraps ATK_ROLE_DESCRIPTION_TERM
 	//
 	// An object that represents a term or phrase
 	// with a corresponding definition. (Since: 2.12)
-	RoleDescriptionTerm Role = C.ATK_ROLE_DESCRIPTION_TERM
+	RoleDescriptionTerm Role = 115
 	// RoleDescriptionValue wraps ATK_ROLE_DESCRIPTION_VALUE
 	//
 	// An object that represents the
 	// description, definition or value of a term. (Since: 2.12)
-	RoleDescriptionValue Role = C.ATK_ROLE_DESCRIPTION_VALUE
+	RoleDescriptionValue Role = 116
 	// RoleStatic wraps ATK_ROLE_STATIC
 	//
 	// A generic non-container object whose purpose is to display a
@@ -997,43 +997,43 @@ const (
 	// labels which describe another widget, see %ATK_ROLE_LABEL. For text views, see
 	// %ATK_ROLE_TEXT. For generic containers, see %ATK_ROLE_PANEL. For objects whose
 	// role is not known by the implementor, see %ATK_ROLE_UNKNOWN. (Since: 2.16)
-	RoleStatic Role = C.ATK_ROLE_STATIC
+	RoleStatic Role = 117
 	// RoleMathFraction wraps ATK_ROLE_MATH_FRACTION
 	//
 	// An object that represents a mathematical fraction.
 	// (Since: 2.16)
-	RoleMathFraction Role = C.ATK_ROLE_MATH_FRACTION
+	RoleMathFraction Role = 118
 	// RoleMathRoot wraps ATK_ROLE_MATH_ROOT
 	//
 	// An object that represents a mathematical expression
 	// displayed with a radical. (Since: 2.16)
-	RoleMathRoot Role = C.ATK_ROLE_MATH_ROOT
+	RoleMathRoot Role = 119
 	// RoleSubscript wraps ATK_ROLE_SUBSCRIPT
 	//
 	// An object that contains text that is displayed as a
 	// subscript. (Since: 2.16)
-	RoleSubscript Role = C.ATK_ROLE_SUBSCRIPT
+	RoleSubscript Role = 120
 	// RoleSuperscript wraps ATK_ROLE_SUPERSCRIPT
 	//
 	// An object that contains text that is displayed as a
 	// superscript. (Since: 2.16)
-	RoleSuperscript Role = C.ATK_ROLE_SUPERSCRIPT
+	RoleSuperscript Role = 121
 	// RoleFootnote wraps ATK_ROLE_FOOTNOTE
 	//
 	// An object that contains the text of a footnote. (Since: 2.26)
-	RoleFootnote Role = C.ATK_ROLE_FOOTNOTE
+	RoleFootnote Role = 122
 	// RoleContentDeletion wraps ATK_ROLE_CONTENT_DELETION
 	//
 	// Content previously deleted or proposed to be
 	// deleted, e.g. in revision history or a content view providing suggestions
 	// from reviewers. (Since: 2.34)
-	RoleContentDeletion Role = C.ATK_ROLE_CONTENT_DELETION
+	RoleContentDeletion Role = 123
 	// RoleContentInsertion wraps ATK_ROLE_CONTENT_INSERTION
 	//
 	// Content previously inserted or proposed to be
 	// inserted, e.g. in revision history or a content view providing suggestions
 	// from reviewers. (Since: 2.34)
-	RoleContentInsertion Role = C.ATK_ROLE_CONTENT_INSERTION
+	RoleContentInsertion Role = 124
 	// RoleMark wraps ATK_ROLE_MARK
 	//
 	// A run of content that is marked or highlighted, such as for
@@ -1043,7 +1043,7 @@ const (
 	// to point to that associated section. In addition, the reciprocal relation
 	// %ATK_RELATION_DETAILS_FOR should be used on the associated content section
 	// to point back to the mark. (Since: 2.36)
-	RoleMark Role = C.ATK_ROLE_MARK
+	RoleMark Role = 125
 	// RoleSuggestion wraps ATK_ROLE_SUGGESTION
 	//
 	// A container for content that is called out as a proposed
@@ -1051,18 +1051,18 @@ const (
 	// content. This role should include either %ATK_ROLE_CONTENT_DELETION and/or
 	// %ATK_ROLE_CONTENT_INSERTION children, in any order, to indicate what the
 	// actual change is. (Since: 2.36)
-	RoleSuggestion Role = C.ATK_ROLE_SUGGESTION
+	RoleSuggestion Role = 126
 	// RolePushButtonMenu wraps ATK_ROLE_PUSH_BUTTON_MENU
 	//
 	// A specialized push button to open a menu.
 	// (Since: 2.46)
-	RolePushButtonMenu Role = C.ATK_ROLE_PUSH_BUTTON_MENU
+	RolePushButtonMenu Role = 127
 	// RoleLastDefined wraps ATK_ROLE_LAST_DEFINED
 	//
 	// not a valid role, used for finding end of the enumeration
-	RoleLastDefined Role = C.ATK_ROLE_LAST_DEFINED
+	RoleLastDefined Role = 128
 	// RolePushButton wraps ATK_ROLE_PUSH_BUTTON
-	RolePushButton Role = C.ATK_ROLE_PUSH_BUTTON
+	RolePushButton Role = 42
 )
 
 func marshalRole(p unsafe.Pointer) (any, error) {
@@ -1086,38 +1086,38 @@ const (
 	//
 	// Scroll the object vertically and horizontally to bring
 	//   its top left corner to the top left corner of the window.
-	ScrollTopLeft ScrollType = C.ATK_SCROLL_TOP_LEFT
+	ScrollTopLeft ScrollType = 0
 	// ScrollBottomRight wraps ATK_SCROLL_BOTTOM_RIGHT
 	//
 	// Scroll the object vertically and horizontally to
 	//   bring its bottom right corner to the bottom right corner of the window.
-	ScrollBottomRight ScrollType = C.ATK_SCROLL_BOTTOM_RIGHT
+	ScrollBottomRight ScrollType = 1
 	// ScrollTopEdge wraps ATK_SCROLL_TOP_EDGE
 	//
 	// Scroll the object vertically to bring its top edge to
 	//   the top edge of the window.
-	ScrollTopEdge ScrollType = C.ATK_SCROLL_TOP_EDGE
+	ScrollTopEdge ScrollType = 2
 	// ScrollBottomEdge wraps ATK_SCROLL_BOTTOM_EDGE
 	//
 	// Scroll the object vertically to bring its bottom
 	//   edge to the bottom edge of the window.
-	ScrollBottomEdge ScrollType = C.ATK_SCROLL_BOTTOM_EDGE
+	ScrollBottomEdge ScrollType = 3
 	// ScrollLeftEdge wraps ATK_SCROLL_LEFT_EDGE
 	//
 	// Scroll the object vertically and horizontally to bring
 	//   its left edge to the left edge of the window.
-	ScrollLeftEdge ScrollType = C.ATK_SCROLL_LEFT_EDGE
+	ScrollLeftEdge ScrollType = 4
 	// ScrollRightEdge wraps ATK_SCROLL_RIGHT_EDGE
 	//
 	// Scroll the object vertically and horizontally to
 	//   bring its right edge to the right edge of the window.
-	ScrollRightEdge ScrollType = C.ATK_SCROLL_RIGHT_EDGE
+	ScrollRightEdge ScrollType = 5
 	// ScrollAnywhere wraps ATK_SCROLL_ANYWHERE
 	//
 	// Scroll the object vertically and horizontally so that
 	//   as much as possible of the object becomes visible. The exact placement is
 	//   determined by the application.
-	ScrollAnywhere ScrollType = C.ATK_SCROLL_ANYWHERE
+	ScrollAnywhere ScrollType = 6
 )
 
 func marshalScrollType(p unsafe.Pointer) (any, error) {
@@ -1140,27 +1140,27 @@ const (
 	// StateInvalid wraps ATK_STATE_INVALID
 	//
 	// Indicates an invalid state - probably an error condition.
-	StateInvalid StateType = C.ATK_STATE_INVALID
+	StateInvalid StateType = 0
 	// StateActive wraps ATK_STATE_ACTIVE
 	//
 	// Indicates a window is currently the active window, or an object is the active subelement within a container or table. ATK_STATE_ACTIVE should not be used for objects which have ATK_STATE_FOCUSABLE or ATK_STATE_SELECTABLE: Those objects should use ATK_STATE_FOCUSED and ATK_STATE_SELECTED respectively. ATK_STATE_ACTIVE is a means to indicate that an object which is not focusable and not selectable is the currently-active item within its parent container.
-	StateActive StateType = C.ATK_STATE_ACTIVE
+	StateActive StateType = 1
 	// StateArmed wraps ATK_STATE_ARMED
 	//
 	// Indicates that the object is 'armed', i.e. will be activated by if a pointer button-release event occurs within its bounds.  Buttons often enter this state when a pointer click occurs within their bounds, as a precursor to activation. ATK_STATE_ARMED has been deprecated since ATK-2.16 and should not be used in newly-written code.
-	StateArmed StateType = C.ATK_STATE_ARMED
+	StateArmed StateType = 2
 	// StateBusy wraps ATK_STATE_BUSY
 	//
 	// Indicates the current object is busy, i.e. onscreen representation is in the process of changing, or the object is temporarily unavailable for interaction due to activity already in progress.  This state may be used by implementors of Document to indicate that content loading is underway.  It also may indicate other 'pending' conditions; clients may wish to interrogate this object when the ATK_STATE_BUSY flag is removed.
-	StateBusy StateType = C.ATK_STATE_BUSY
+	StateBusy StateType = 3
 	// StateChecked wraps ATK_STATE_CHECKED
 	//
 	// Indicates this object is currently checked, for instance a checkbox is 'non-empty'.
-	StateChecked StateType = C.ATK_STATE_CHECKED
+	StateChecked StateType = 4
 	// StateDefunct wraps ATK_STATE_DEFUNCT
 	//
 	// Indicates that this object no longer has a valid backing widget (for instance, if its peer object has been destroyed)
-	StateDefunct StateType = C.ATK_STATE_DEFUNCT
+	StateDefunct StateType = 5
 	// StateEditable wraps ATK_STATE_EDITABLE
 	//
 	// Indicates that this object can contain text, and that the
@@ -1169,67 +1169,67 @@ const (
 	// which cannot be edited due to the application or platform preventing the user
 	// from doing so, that object's #AtkStateSet should lack ATK_STATE_EDITABLE and
 	// should contain ATK_STATE_READ_ONLY.
-	StateEditable StateType = C.ATK_STATE_EDITABLE
+	StateEditable StateType = 6
 	// StateEnabled wraps ATK_STATE_ENABLED
 	//
 	// Indicates that this object is enabled, i.e. that it currently reflects some application state. Objects that are "greyed out" may lack this state, and may lack the STATE_SENSITIVE if direct user interaction cannot cause them to acquire STATE_ENABLED. See also: ATK_STATE_SENSITIVE
-	StateEnabled StateType = C.ATK_STATE_ENABLED
+	StateEnabled StateType = 7
 	// StateExpandable wraps ATK_STATE_EXPANDABLE
 	//
 	// Indicates this object allows progressive disclosure of its children
-	StateExpandable StateType = C.ATK_STATE_EXPANDABLE
+	StateExpandable StateType = 8
 	// StateExpanded wraps ATK_STATE_EXPANDED
 	//
 	// Indicates this object its expanded - see ATK_STATE_EXPANDABLE above
-	StateExpanded StateType = C.ATK_STATE_EXPANDED
+	StateExpanded StateType = 9
 	// StateFocusable wraps ATK_STATE_FOCUSABLE
 	//
 	// Indicates this object can accept keyboard focus, which means all events resulting from typing on the keyboard will normally be passed to it when it has focus
-	StateFocusable StateType = C.ATK_STATE_FOCUSABLE
+	StateFocusable StateType = 10
 	// StateFocused wraps ATK_STATE_FOCUSED
 	//
 	// Indicates this object currently has the keyboard focus
-	StateFocused StateType = C.ATK_STATE_FOCUSED
+	StateFocused StateType = 11
 	// StateHorizontal wraps ATK_STATE_HORIZONTAL
 	//
 	// Indicates the orientation of this object is horizontal; used, for instance, by objects of ATK_ROLE_SCROLL_BAR.  For objects where vertical/horizontal orientation is especially meaningful.
-	StateHorizontal StateType = C.ATK_STATE_HORIZONTAL
+	StateHorizontal StateType = 12
 	// StateIconified wraps ATK_STATE_ICONIFIED
 	//
 	// Indicates this object is minimized and is represented only by an icon
-	StateIconified StateType = C.ATK_STATE_ICONIFIED
+	StateIconified StateType = 13
 	// StateModal wraps ATK_STATE_MODAL
 	//
 	// Indicates something must be done with this object before the user can interact with an object in a different window
-	StateModal StateType = C.ATK_STATE_MODAL
+	StateModal StateType = 14
 	// StateMultiLine wraps ATK_STATE_MULTI_LINE
 	//
 	// Indicates this (text) object can contain multiple lines of text
-	StateMultiLine StateType = C.ATK_STATE_MULTI_LINE
+	StateMultiLine StateType = 15
 	// StateMultiselectable wraps ATK_STATE_MULTISELECTABLE
 	//
 	// Indicates this object allows more than one of its children to be selected at the same time, or in the case of text objects, that the object supports non-contiguous text selections.
-	StateMultiselectable StateType = C.ATK_STATE_MULTISELECTABLE
+	StateMultiselectable StateType = 16
 	// StateOpaque wraps ATK_STATE_OPAQUE
 	//
 	// Indicates this object paints every pixel within its rectangular region.
-	StateOpaque StateType = C.ATK_STATE_OPAQUE
+	StateOpaque StateType = 17
 	// StatePressed wraps ATK_STATE_PRESSED
 	//
 	// Indicates this object is currently pressed.
-	StatePressed StateType = C.ATK_STATE_PRESSED
+	StatePressed StateType = 18
 	// StateResizable wraps ATK_STATE_RESIZABLE
 	//
 	// Indicates the size of this object is not fixed
-	StateResizable StateType = C.ATK_STATE_RESIZABLE
+	StateResizable StateType = 19
 	// StateSelectable wraps ATK_STATE_SELECTABLE
 	//
 	// Indicates this object is the child of an object that allows its children to be selected and that this child is one of those children that can be selected
-	StateSelectable StateType = C.ATK_STATE_SELECTABLE
+	StateSelectable StateType = 20
 	// StateSelected wraps ATK_STATE_SELECTED
 	//
 	// Indicates this object is the child of an object that allows its children to be selected and that this child is one of those children that has been selected
-	StateSelected StateType = C.ATK_STATE_SELECTED
+	StateSelected StateType = 21
 	// StateSensitive wraps ATK_STATE_SENSITIVE
 	//
 	// Indicates this object is sensitive, e.g. to user interaction.
@@ -1239,17 +1239,17 @@ const (
 	// can often result in the object gaining STATE_SENSITIVE, for instance if a user makes
 	// an explicit selection using an object whose current state is ambiguous or undefined.
 	// @see STATE_ENABLED, STATE_INDETERMINATE.
-	StateSensitive StateType = C.ATK_STATE_SENSITIVE
+	StateSensitive StateType = 22
 	// StateShowing wraps ATK_STATE_SHOWING
 	//
 	// Indicates this object, the object's parent, the object's parent's parent, and so on,
 	// are all 'shown' to the end-user, i.e. subject to "exposure" if blocking or obscuring objects do not interpose
 	// between this object and the top of the window stack.
-	StateShowing StateType = C.ATK_STATE_SHOWING
+	StateShowing StateType = 23
 	// StateSingleLine wraps ATK_STATE_SINGLE_LINE
 	//
 	// Indicates this (text) object can contain only a single line of text
-	StateSingleLine StateType = C.ATK_STATE_SINGLE_LINE
+	StateSingleLine StateType = 24
 	// StateStale wraps ATK_STATE_STALE
 	//
 	// Indicates that the information returned for this object may no longer be
@@ -1257,17 +1257,17 @@ const (
 	// and can also occur towards the end of the object peer's lifecycle. It can also be used to indicate that
 	// the index associated with this object has changed since the user accessed the object (in lieu of
 	// "index-in-parent-changed" events).
-	StateStale StateType = C.ATK_STATE_STALE
+	StateStale StateType = 25
 	// StateTransient wraps ATK_STATE_TRANSIENT
 	//
 	// Indicates this object is transient, i.e. a snapshot which may not emit events when its
 	// state changes.  Data from objects with ATK_STATE_TRANSIENT should not be cached, since there may be no
 	// notification given when the cached data becomes obsolete.
-	StateTransient StateType = C.ATK_STATE_TRANSIENT
+	StateTransient StateType = 26
 	// StateVertical wraps ATK_STATE_VERTICAL
 	//
 	// Indicates the orientation of this object is vertical
-	StateVertical StateType = C.ATK_STATE_VERTICAL
+	StateVertical StateType = 27
 	// StateVisible wraps ATK_STATE_VISIBLE
 	//
 	// Indicates this object is visible, e.g. has been explicitly marked for exposure to the user.
@@ -1281,7 +1281,7 @@ const (
 	// contents are clipped, e.g. a truncated spreadsheet cell or
 	// an image within a scrolling viewport.  Mostly useful for screen-review and magnification
 	// algorithms.
-	StateVisible StateType = C.ATK_STATE_VISIBLE
+	StateVisible StateType = 28
 	// StateManagesDescendants wraps ATK_STATE_MANAGES_DESCENDANTS
 	//
 	// Indicates that "active-descendant-changed" event
@@ -1293,7 +1293,7 @@ const (
 	// notifications to listening clients, for instance notifications of visibility
 	// changes and activation of their contained child objects, without the client
 	// having previously requested references to those children.
-	StateManagesDescendants StateType = C.ATK_STATE_MANAGES_DESCENDANTS
+	StateManagesDescendants StateType = 29
 	// StateIndeterminate wraps ATK_STATE_INDETERMINATE
 	//
 	// Indicates that the value, or some other quantifiable
@@ -1303,19 +1303,19 @@ const (
 	// with this state. In the case of a check box, this state should be used to
 	// indicate that the check box is a tri-state check box which is currently
 	// neither checked nor unchecked.
-	StateIndeterminate StateType = C.ATK_STATE_INDETERMINATE
+	StateIndeterminate StateType = 30
 	// StateTruncated wraps ATK_STATE_TRUNCATED
 	//
 	// Indicates that an object is truncated, e.g. a text value in a speradsheet cell.
-	StateTruncated StateType = C.ATK_STATE_TRUNCATED
+	StateTruncated StateType = 31
 	// StateRequired wraps ATK_STATE_REQUIRED
 	//
 	// Indicates that explicit user interaction with an object is required by the user interface, e.g. a required field in a "web-form" interface.
-	StateRequired StateType = C.ATK_STATE_REQUIRED
+	StateRequired StateType = 32
 	// StateInvalidEntry wraps ATK_STATE_INVALID_ENTRY
 	//
 	// Indicates that the object has encountered an error condition due to failure of input validation. For instance, a form control may acquire this state in response to invalid or malformed user input.
-	StateInvalidEntry StateType = C.ATK_STATE_INVALID_ENTRY
+	StateInvalidEntry StateType = 33
 	// StateSupportsAutocompletion wraps ATK_STATE_SUPPORTS_AUTOCOMPLETION
 	//
 	// Indicates that the object in question implements some form of ¨typeahead¨ or
@@ -1326,15 +1326,15 @@ const (
 	// In some cases the typeahead behavior may result in full or partial ¨completion¨ of
 	// the data in the input field, in which case these input events may trigger text-changed
 	// events from the AtkText interface.  This state supplants @ATK_ROLE_AUTOCOMPLETE.
-	StateSupportsAutocompletion StateType = C.ATK_STATE_SUPPORTS_AUTOCOMPLETION
+	StateSupportsAutocompletion StateType = 34
 	// StateSelectableText wraps ATK_STATE_SELECTABLE_TEXT
 	//
 	// Indicates that the object in question supports text selection. It should only be exposed on objects which implement the Text interface, in order to distinguish this state from @ATK_STATE_SELECTABLE, which infers that the object in question is a selectable child of an object which implements Selection. While similar, text selection and subelement selection are distinct operations.
-	StateSelectableText StateType = C.ATK_STATE_SELECTABLE_TEXT
+	StateSelectableText StateType = 35
 	// StateDefault wraps ATK_STATE_DEFAULT
 	//
 	// Indicates that the object is the "default" active component, i.e. the object which is activated by an end-user press of the "Enter" or "Return" key.  Typically a "close" or "submit" button.
-	StateDefault StateType = C.ATK_STATE_DEFAULT
+	StateDefault StateType = 36
 	// StateAnimated wraps ATK_STATE_ANIMATED
 	//
 	// Indicates that the object changes its appearance dynamically as an inherent part of its presentation.  This state may come and go if an object is only temporarily animated on the way to a 'final' onscreen presentation.
@@ -1342,28 +1342,28 @@ const (
 	// all kinds of animated content.  Therefore the absence of this state should not
 	// be taken as definitive evidence that the object's visual representation is
 	// static; this state is advisory.
-	StateAnimated StateType = C.ATK_STATE_ANIMATED
+	StateAnimated StateType = 37
 	// StateVisited wraps ATK_STATE_VISITED
 	//
 	// Indicates that the object (typically a hyperlink) has already been 'activated', and/or its backing data has already been downloaded, rendered, or otherwise "visited".
-	StateVisited StateType = C.ATK_STATE_VISITED
+	StateVisited StateType = 38
 	// StateCheckable wraps ATK_STATE_CHECKABLE
 	//
 	// Indicates this object has the potential to be
 	//  checked, such as a checkbox or toggle-able table cell. @Since:
 	//  ATK-2.12
-	StateCheckable StateType = C.ATK_STATE_CHECKABLE
+	StateCheckable StateType = 39
 	// StateHasPopup wraps ATK_STATE_HAS_POPUP
 	//
 	// Indicates that the object has a popup context
 	// menu or sub-level menu which may or may not be showing. This means
 	// that activation renders conditional content.  Note that ordinary
 	// tooltips are not considered popups in this context. @Since: ATK-2.12
-	StateHasPopup StateType = C.ATK_STATE_HAS_POPUP
+	StateHasPopup StateType = 40
 	// StateHasTooltip wraps ATK_STATE_HAS_TOOLTIP
 	//
 	// Indicates this object has a tooltip. @Since: ATK-2.16
-	StateHasTooltip StateType = C.ATK_STATE_HAS_TOOLTIP
+	StateHasTooltip StateType = 41
 	// StateReadOnly wraps ATK_STATE_READ_ONLY
 	//
 	// Indicates that a widget which is ENABLED and SENSITIVE
@@ -1375,15 +1375,15 @@ const (
 	// widget does not include modification by the user, as is the case with
 	// labels and containers, ATK_STATE_READ_ONLY should not be applied. See also
 	// ATK_STATE_EDITABLE. @Since: ATK-2-16
-	StateReadOnly StateType = C.ATK_STATE_READ_ONLY
+	StateReadOnly StateType = 42
 	// StateCollapsed wraps ATK_STATE_COLLAPSED
 	//
 	// Indicates this object is collapsed. @Since: ATK-2.38
-	StateCollapsed StateType = C.ATK_STATE_COLLAPSED
+	StateCollapsed StateType = 43
 	// StateLastDefined wraps ATK_STATE_LAST_DEFINED
 	//
 	// Not a valid state, used for finding end of enumeration
-	StateLastDefined StateType = C.ATK_STATE_LAST_DEFINED
+	StateLastDefined StateType = 44
 )
 
 func marshalStateType(p unsafe.Pointer) (any, error) {
@@ -1406,123 +1406,123 @@ const (
 	// TextAttrInvalid wraps ATK_TEXT_ATTR_INVALID
 	//
 	// Invalid attribute, like bad spelling or grammar.
-	TextAttrInvalid TextAttribute = C.ATK_TEXT_ATTR_INVALID
+	TextAttrInvalid TextAttribute = 0
 	// TextAttrLeftMargin wraps ATK_TEXT_ATTR_LEFT_MARGIN
 	//
 	// The pixel width of the left margin
-	TextAttrLeftMargin TextAttribute = C.ATK_TEXT_ATTR_LEFT_MARGIN
+	TextAttrLeftMargin TextAttribute = 1
 	// TextAttrRightMargin wraps ATK_TEXT_ATTR_RIGHT_MARGIN
 	//
 	// The pixel width of the right margin
-	TextAttrRightMargin TextAttribute = C.ATK_TEXT_ATTR_RIGHT_MARGIN
+	TextAttrRightMargin TextAttribute = 2
 	// TextAttrIndent wraps ATK_TEXT_ATTR_INDENT
 	//
 	// The number of pixels that the text is indented
-	TextAttrIndent TextAttribute = C.ATK_TEXT_ATTR_INDENT
+	TextAttrIndent TextAttribute = 3
 	// TextAttrInvisible wraps ATK_TEXT_ATTR_INVISIBLE
 	//
 	// Either "true" or "false" indicating whether text is visible or not
-	TextAttrInvisible TextAttribute = C.ATK_TEXT_ATTR_INVISIBLE
+	TextAttrInvisible TextAttribute = 4
 	// TextAttrEditable wraps ATK_TEXT_ATTR_EDITABLE
 	//
 	// Either "true" or "false" indicating whether text is editable or not
-	TextAttrEditable TextAttribute = C.ATK_TEXT_ATTR_EDITABLE
+	TextAttrEditable TextAttribute = 5
 	// TextAttrPixelsAboveLines wraps ATK_TEXT_ATTR_PIXELS_ABOVE_LINES
 	//
 	// Pixels of blank space to leave above each newline-terminated line.
-	TextAttrPixelsAboveLines TextAttribute = C.ATK_TEXT_ATTR_PIXELS_ABOVE_LINES
+	TextAttrPixelsAboveLines TextAttribute = 6
 	// TextAttrPixelsBelowLines wraps ATK_TEXT_ATTR_PIXELS_BELOW_LINES
 	//
 	// Pixels of blank space to leave below each newline-terminated line.
-	TextAttrPixelsBelowLines TextAttribute = C.ATK_TEXT_ATTR_PIXELS_BELOW_LINES
+	TextAttrPixelsBelowLines TextAttribute = 7
 	// TextAttrPixelsInsideWrap wraps ATK_TEXT_ATTR_PIXELS_INSIDE_WRAP
 	//
 	// Pixels of blank space to leave between wrapped lines inside the same newline-terminated line (paragraph).
-	TextAttrPixelsInsideWrap TextAttribute = C.ATK_TEXT_ATTR_PIXELS_INSIDE_WRAP
+	TextAttrPixelsInsideWrap TextAttribute = 8
 	// TextAttrBgFullHeight wraps ATK_TEXT_ATTR_BG_FULL_HEIGHT
 	//
 	// "true" or "false" whether to make the background color for each character the height of the highest font used on the current line, or the height of the font used for the current character.
-	TextAttrBgFullHeight TextAttribute = C.ATK_TEXT_ATTR_BG_FULL_HEIGHT
+	TextAttrBgFullHeight TextAttribute = 9
 	// TextAttrRise wraps ATK_TEXT_ATTR_RISE
 	//
 	// Number of pixels that the characters are risen above the baseline. See also ATK_TEXT_ATTR_TEXT_POSITION.
-	TextAttrRise TextAttribute = C.ATK_TEXT_ATTR_RISE
+	TextAttrRise TextAttribute = 10
 	// TextAttrUnderline wraps ATK_TEXT_ATTR_UNDERLINE
 	//
 	// "none", "single", "double", "low", or "error"
-	TextAttrUnderline TextAttribute = C.ATK_TEXT_ATTR_UNDERLINE
+	TextAttrUnderline TextAttribute = 11
 	// TextAttrStrikethrough wraps ATK_TEXT_ATTR_STRIKETHROUGH
 	//
 	// "true" or "false" whether the text is strikethrough
-	TextAttrStrikethrough TextAttribute = C.ATK_TEXT_ATTR_STRIKETHROUGH
+	TextAttrStrikethrough TextAttribute = 12
 	// TextAttrSize wraps ATK_TEXT_ATTR_SIZE
 	//
 	// The size of the characters in points. eg: 10
-	TextAttrSize TextAttribute = C.ATK_TEXT_ATTR_SIZE
+	TextAttrSize TextAttribute = 13
 	// TextAttrScale wraps ATK_TEXT_ATTR_SCALE
 	//
 	// The scale of the characters. The value is a string representation of a double
-	TextAttrScale TextAttribute = C.ATK_TEXT_ATTR_SCALE
+	TextAttrScale TextAttribute = 14
 	// TextAttrWeight wraps ATK_TEXT_ATTR_WEIGHT
 	//
 	// The weight of the characters.
-	TextAttrWeight TextAttribute = C.ATK_TEXT_ATTR_WEIGHT
+	TextAttrWeight TextAttribute = 15
 	// TextAttrLanguage wraps ATK_TEXT_ATTR_LANGUAGE
 	//
 	// The language used
-	TextAttrLanguage TextAttribute = C.ATK_TEXT_ATTR_LANGUAGE
+	TextAttrLanguage TextAttribute = 16
 	// TextAttrFamilyName wraps ATK_TEXT_ATTR_FAMILY_NAME
 	//
 	// The font family name
-	TextAttrFamilyName TextAttribute = C.ATK_TEXT_ATTR_FAMILY_NAME
+	TextAttrFamilyName TextAttribute = 17
 	// TextAttrBgColor wraps ATK_TEXT_ATTR_BG_COLOR
 	//
 	// The background color. The value is an RGB value of the format "%u,%u,%u"
-	TextAttrBgColor TextAttribute = C.ATK_TEXT_ATTR_BG_COLOR
+	TextAttrBgColor TextAttribute = 18
 	// TextAttrFgColor wraps ATK_TEXT_ATTR_FG_COLOR
 	//
 	// The foreground color. The value is an RGB value of the format "%u,%u,%u"
-	TextAttrFgColor TextAttribute = C.ATK_TEXT_ATTR_FG_COLOR
+	TextAttrFgColor TextAttribute = 19
 	// TextAttrBgStipple wraps ATK_TEXT_ATTR_BG_STIPPLE
 	//
 	// "true" if a #GdkBitmap is set for stippling the background color.
-	TextAttrBgStipple TextAttribute = C.ATK_TEXT_ATTR_BG_STIPPLE
+	TextAttrBgStipple TextAttribute = 20
 	// TextAttrFgStipple wraps ATK_TEXT_ATTR_FG_STIPPLE
 	//
 	// "true" if a #GdkBitmap is set for stippling the foreground color.
-	TextAttrFgStipple TextAttribute = C.ATK_TEXT_ATTR_FG_STIPPLE
+	TextAttrFgStipple TextAttribute = 21
 	// TextAttrWrapMode wraps ATK_TEXT_ATTR_WRAP_MODE
 	//
 	// The wrap mode of the text, if any. Values are "none", "char", "word", or "word_char".
-	TextAttrWrapMode TextAttribute = C.ATK_TEXT_ATTR_WRAP_MODE
+	TextAttrWrapMode TextAttribute = 22
 	// TextAttrDirection wraps ATK_TEXT_ATTR_DIRECTION
 	//
 	// The direction of the text, if set. Values are "none", "ltr" or "rtl"
-	TextAttrDirection TextAttribute = C.ATK_TEXT_ATTR_DIRECTION
+	TextAttrDirection TextAttribute = 23
 	// TextAttrJustification wraps ATK_TEXT_ATTR_JUSTIFICATION
 	//
 	// The justification of the text, if set. Values are "left", "right", "center" or "fill"
-	TextAttrJustification TextAttribute = C.ATK_TEXT_ATTR_JUSTIFICATION
+	TextAttrJustification TextAttribute = 24
 	// TextAttrStretch wraps ATK_TEXT_ATTR_STRETCH
 	//
 	// The stretch of the text, if set. Values are "ultra_condensed", "extra_condensed", "condensed", "semi_condensed", "normal", "semi_expanded", "expanded", "extra_expanded" or "ultra_expanded"
-	TextAttrStretch TextAttribute = C.ATK_TEXT_ATTR_STRETCH
+	TextAttrStretch TextAttribute = 25
 	// TextAttrVariant wraps ATK_TEXT_ATTR_VARIANT
 	//
 	// The capitalization variant of the text, if set. Values are "normal" or "small_caps"
-	TextAttrVariant TextAttribute = C.ATK_TEXT_ATTR_VARIANT
+	TextAttrVariant TextAttribute = 26
 	// TextAttrStyle wraps ATK_TEXT_ATTR_STYLE
 	//
 	// The slant style of the text, if set. Values are "normal", "oblique" or "italic"
-	TextAttrStyle TextAttribute = C.ATK_TEXT_ATTR_STYLE
+	TextAttrStyle TextAttribute = 27
 	// TextAttrTextPosition wraps ATK_TEXT_ATTR_TEXT_POSITION
 	//
 	// The vertical position with respect to the baseline. Values are "baseline", "super", or "sub". Note that a super or sub text attribute refers to position with respect to the baseline of the prior character.
-	TextAttrTextPosition TextAttribute = C.ATK_TEXT_ATTR_TEXT_POSITION
+	TextAttrTextPosition TextAttribute = 28
 	// TextAttrLastDefined wraps ATK_TEXT_ATTR_LAST_DEFINED
 	//
 	// not a valid text attribute, used for finding end of enumeration
-	TextAttrLastDefined TextAttribute = C.ATK_TEXT_ATTR_LAST_DEFINED
+	TextAttrLastDefined TextAttribute = 29
 )
 
 func marshalTextAttribute(p unsafe.Pointer) (any, error) {
@@ -1548,37 +1548,37 @@ const (
 	//
 	// Boundary is the boundary between characters
 	// (including non-printing characters)
-	TextBoundaryChar TextBoundary = C.ATK_TEXT_BOUNDARY_CHAR
+	TextBoundaryChar TextBoundary = 0
 	// TextBoundaryWordStart wraps ATK_TEXT_BOUNDARY_WORD_START
 	//
 	// Boundary is the start (i.e. first character) of a word.
-	TextBoundaryWordStart TextBoundary = C.ATK_TEXT_BOUNDARY_WORD_START
+	TextBoundaryWordStart TextBoundary = 1
 	// TextBoundaryWordEnd wraps ATK_TEXT_BOUNDARY_WORD_END
 	//
 	// Boundary is the end (i.e. last
 	// character) of a word.
-	TextBoundaryWordEnd TextBoundary = C.ATK_TEXT_BOUNDARY_WORD_END
+	TextBoundaryWordEnd TextBoundary = 2
 	// TextBoundarySentenceStart wraps ATK_TEXT_BOUNDARY_SENTENCE_START
 	//
 	// Boundary is the first character in a sentence.
-	TextBoundarySentenceStart TextBoundary = C.ATK_TEXT_BOUNDARY_SENTENCE_START
+	TextBoundarySentenceStart TextBoundary = 3
 	// TextBoundarySentenceEnd wraps ATK_TEXT_BOUNDARY_SENTENCE_END
 	//
 	// Boundary is the last (terminal)
 	// character in a sentence; in languages which use "sentence stop"
 	// punctuation such as English, the boundary is thus the '.', '?', or
 	// similar terminal punctuation character.
-	TextBoundarySentenceEnd TextBoundary = C.ATK_TEXT_BOUNDARY_SENTENCE_END
+	TextBoundarySentenceEnd TextBoundary = 4
 	// TextBoundaryLineStart wraps ATK_TEXT_BOUNDARY_LINE_START
 	//
 	// Boundary is the initial character of the content or a
 	// character immediately following a newline, linefeed, or return character.
-	TextBoundaryLineStart TextBoundary = C.ATK_TEXT_BOUNDARY_LINE_START
+	TextBoundaryLineStart TextBoundary = 5
 	// TextBoundaryLineEnd wraps ATK_TEXT_BOUNDARY_LINE_END
 	//
 	// Boundary is the linefeed, or return
 	// character.
-	TextBoundaryLineEnd TextBoundary = C.ATK_TEXT_BOUNDARY_LINE_END
+	TextBoundaryLineEnd TextBoundary = 6
 )
 
 func marshalTextBoundary(p unsafe.Pointer) (any, error) {
@@ -1601,19 +1601,19 @@ const (
 	// TextClipNone wraps ATK_TEXT_CLIP_NONE
 	//
 	// No clipping to be done
-	TextClipNone TextClipType = C.ATK_TEXT_CLIP_NONE
+	TextClipNone TextClipType = 0
 	// TextClipMin wraps ATK_TEXT_CLIP_MIN
 	//
 	// Text clipped by min coordinate is omitted
-	TextClipMin TextClipType = C.ATK_TEXT_CLIP_MIN
+	TextClipMin TextClipType = 1
 	// TextClipMax wraps ATK_TEXT_CLIP_MAX
 	//
 	// Text clipped by max coordinate is omitted
-	TextClipMax TextClipType = C.ATK_TEXT_CLIP_MAX
+	TextClipMax TextClipType = 2
 	// TextClipBoth wraps ATK_TEXT_CLIP_BOTH
 	//
 	// Only text fully within mix/max bound is retained
-	TextClipBoth TextClipType = C.ATK_TEXT_CLIP_BOTH
+	TextClipBoth TextClipType = 3
 )
 
 func marshalTextClipType(p unsafe.Pointer) (any, error) {
@@ -1638,31 +1638,31 @@ const (
 	//
 	// Granularity is defined by the boundaries between characters
 	// (including non-printing characters)
-	TextGranularityChar TextGranularity = C.ATK_TEXT_GRANULARITY_CHAR
+	TextGranularityChar TextGranularity = 0
 	// TextGranularityWord wraps ATK_TEXT_GRANULARITY_WORD
 	//
 	// Granularity is defined by the boundaries of a word,
 	// starting at the beginning of the current word and finishing at the beginning of
 	// the following one, if present.
-	TextGranularityWord TextGranularity = C.ATK_TEXT_GRANULARITY_WORD
+	TextGranularityWord TextGranularity = 1
 	// TextGranularitySentence wraps ATK_TEXT_GRANULARITY_SENTENCE
 	//
 	// Granularity is defined by the boundaries of a sentence,
 	// starting at the beginning of the current sentence and finishing at the beginning of
 	// the following one, if present.
-	TextGranularitySentence TextGranularity = C.ATK_TEXT_GRANULARITY_SENTENCE
+	TextGranularitySentence TextGranularity = 2
 	// TextGranularityLine wraps ATK_TEXT_GRANULARITY_LINE
 	//
 	// Granularity is defined by the boundaries of a line,
 	// starting at the beginning of the current line and finishing at the beginning of
 	// the following one, if present.
-	TextGranularityLine TextGranularity = C.ATK_TEXT_GRANULARITY_LINE
+	TextGranularityLine TextGranularity = 3
 	// TextGranularityParagraph wraps ATK_TEXT_GRANULARITY_PARAGRAPH
 	//
 	// Granularity is defined by the boundaries of a paragraph,
 	// starting at the beginning of the current paragraph and finishing at the beginning of
 	// the following one, if present.
-	TextGranularityParagraph TextGranularity = C.ATK_TEXT_GRANULARITY_PARAGRAPH
+	TextGranularityParagraph TextGranularity = 4
 )
 
 func marshalTextGranularity(p unsafe.Pointer) (any, error) {
@@ -1685,37 +1685,37 @@ type ValueType C.int
 
 const (
 	// ValueVeryWeak wraps ATK_VALUE_VERY_WEAK
-	ValueVeryWeak ValueType = C.ATK_VALUE_VERY_WEAK
+	ValueVeryWeak ValueType = 0
 	// ValueWeak wraps ATK_VALUE_WEAK
-	ValueWeak ValueType = C.ATK_VALUE_WEAK
+	ValueWeak ValueType = 1
 	// ValueAcceptable wraps ATK_VALUE_ACCEPTABLE
-	ValueAcceptable ValueType = C.ATK_VALUE_ACCEPTABLE
+	ValueAcceptable ValueType = 2
 	// ValueStrong wraps ATK_VALUE_STRONG
-	ValueStrong ValueType = C.ATK_VALUE_STRONG
+	ValueStrong ValueType = 3
 	// ValueVeryStrong wraps ATK_VALUE_VERY_STRONG
-	ValueVeryStrong ValueType = C.ATK_VALUE_VERY_STRONG
+	ValueVeryStrong ValueType = 4
 	// ValueVeryLow wraps ATK_VALUE_VERY_LOW
-	ValueVeryLow ValueType = C.ATK_VALUE_VERY_LOW
+	ValueVeryLow ValueType = 5
 	// ValueLow wraps ATK_VALUE_LOW
-	ValueLow ValueType = C.ATK_VALUE_LOW
+	ValueLow ValueType = 6
 	// ValueMedium wraps ATK_VALUE_MEDIUM
-	ValueMedium ValueType = C.ATK_VALUE_MEDIUM
+	ValueMedium ValueType = 7
 	// ValueHigh wraps ATK_VALUE_HIGH
-	ValueHigh ValueType = C.ATK_VALUE_HIGH
+	ValueHigh ValueType = 8
 	// ValueVeryHigh wraps ATK_VALUE_VERY_HIGH
-	ValueVeryHigh ValueType = C.ATK_VALUE_VERY_HIGH
+	ValueVeryHigh ValueType = 9
 	// ValueVeryBad wraps ATK_VALUE_VERY_BAD
-	ValueVeryBad ValueType = C.ATK_VALUE_VERY_BAD
+	ValueVeryBad ValueType = 10
 	// ValueBad wraps ATK_VALUE_BAD
-	ValueBad ValueType = C.ATK_VALUE_BAD
+	ValueBad ValueType = 11
 	// ValueGood wraps ATK_VALUE_GOOD
-	ValueGood ValueType = C.ATK_VALUE_GOOD
+	ValueGood ValueType = 12
 	// ValueVeryGood wraps ATK_VALUE_VERY_GOOD
-	ValueVeryGood ValueType = C.ATK_VALUE_VERY_GOOD
+	ValueVeryGood ValueType = 13
 	// ValueBest wraps ATK_VALUE_BEST
-	ValueBest ValueType = C.ATK_VALUE_BEST
+	ValueBest ValueType = 14
 	// ValueLastDefined wraps ATK_VALUE_LAST_DEFINED
-	ValueLastDefined ValueType = C.ATK_VALUE_LAST_DEFINED
+	ValueLastDefined ValueType = 15
 )
 
 func marshalValueType(p unsafe.Pointer) (any, error) {
@@ -1738,7 +1738,7 @@ const (
 	// HyperlinkIsInline wraps ATK_HYPERLINK_IS_INLINE
 	//
 	// Link is inline
-	HyperlinkIsInline HyperlinkStateFlags = C.ATK_HYPERLINK_IS_INLINE
+	HyperlinkIsInline HyperlinkStateFlags = 1
 )
 
 func marshalHyperlinkStateFlags(p unsafe.Pointer) (any, error) {

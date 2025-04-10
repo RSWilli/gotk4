@@ -43,7 +43,7 @@ func NewMember(e *env, parent Type, m gir.Member) *Member {
 			goIndentifier:  formatMember(m),
 			cGoIndentifier: "C." + m.CIdentifier,
 		},
-		Value: "C." + m.CIdentifier, // using the C identifier directly to avoid string quoting issues etc.
+		Value: m.Value,
 	}
 }
 
