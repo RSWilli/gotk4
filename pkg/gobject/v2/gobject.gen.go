@@ -228,86 +228,6 @@ func (f IOCondition) InitGoValue(v *Value) {
 	v.SetFlags(int(f))
 }
 
-// ParamFlags wraps GParamFlags
-//
-// Through the #GParamFlags flag values, certain aspects of parameters
-// can be configured.
-// 
-// See also: %G_PARAM_STATIC_STRINGS
-type ParamFlags C.gint
-
-const (
-	// ParamReadable wraps G_PARAM_READABLE
-	//
-	// the parameter is readable
-	ParamReadable ParamFlags = 1
-	// ParamWritable wraps G_PARAM_WRITABLE
-	//
-	// the parameter is writable
-	ParamWritable ParamFlags = 2
-	// ParamReadwrite wraps G_PARAM_READWRITE
-	//
-	// alias for %G_PARAM_READABLE | %G_PARAM_WRITABLE
-	ParamReadwrite ParamFlags = 3
-	// ParamConstruct wraps G_PARAM_CONSTRUCT
-	//
-	// the parameter will be set upon object construction
-	ParamConstruct ParamFlags = 4
-	// ParamConstructOnly wraps G_PARAM_CONSTRUCT_ONLY
-	//
-	// the parameter can only be set upon object construction
-	ParamConstructOnly ParamFlags = 8
-	// ParamLaxValidation wraps G_PARAM_LAX_VALIDATION
-	//
-	// upon parameter conversion (see g_param_value_convert())
-	//  strict validation is not required
-	ParamLaxValidation ParamFlags = 16
-	// ParamStaticName wraps G_PARAM_STATIC_NAME
-	//
-	// the string used as name when constructing the
-	//  parameter is guaranteed to remain valid and
-	//  unmodified for the lifetime of the parameter.
-	//  Since 2.8
-	ParamStaticName ParamFlags = 32
-	// ParamPrivate wraps G_PARAM_PRIVATE
-	//
-	// internal
-	ParamPrivate ParamFlags = 32
-	// ParamStaticNick wraps G_PARAM_STATIC_NICK
-	//
-	// the string used as nick when constructing the
-	//  parameter is guaranteed to remain valid and
-	//  unmmodified for the lifetime of the parameter.
-	//  Since 2.8
-	ParamStaticNick ParamFlags = 64
-	// ParamStaticBlurb wraps G_PARAM_STATIC_BLURB
-	//
-	// the string used as blurb when constructing the
-	//  parameter is guaranteed to remain valid and
-	//  unmodified for the lifetime of the parameter.
-	//  Since 2.8
-	ParamStaticBlurb ParamFlags = 128
-	// ParamExplicitNotify wraps G_PARAM_EXPLICIT_NOTIFY
-	//
-	// calls to g_object_set_property() for this
-	//   property will not automatically result in a "notify" signal being
-	//   emitted: the implementation must call g_object_notify() themselves
-	//   in case the property actually changes.  Since: 2.42.
-	ParamExplicitNotify ParamFlags = 1073741824
-	// ParamDeprecated wraps G_PARAM_DEPRECATED
-	//
-	// the parameter is deprecated and will be removed
-	//  in a future version. A warning will be generated if it is used
-	//  while running with G_ENABLE_DIAGNOSTIC=1.
-	//  Since 2.26
-	ParamDeprecated ParamFlags = 2147483648
-)
-
-// Has returns true if p contains other
-func (p ParamFlags) Has(other ParamFlags) bool {
-	return (p & other) == other
-}
-
 // SignalFlags wraps GSignalFlags
 //
 // The signal flags are used to specify a signal's behaviour.
@@ -3714,24 +3634,6 @@ func UnsafeCClosureToGlibFull(c *CClosure) unsafe.Pointer {
 	c.native = nil // CClosure is invalid from here on
 	return _p
 }
-// callback wraps callback
-//
-// the callback function
-func (c *CClosure) Callback() unsafe.Pointer {
-	valptr := &c.native.callback
-	var _v unsafe.Pointer
-	_v = unsafe.Pointer(*valptr)
-	return _v
-}
-
-// callback wraps callback
-//
-// the callback function
-func (c *CClosure) SetCallback(callback unsafe.Pointer) {
-	valptr := &c.native.callback
-	*valptr = C.gpointer(callback)
-}
-
 // ClosureNotifyData wraps GClosureNotifyData
 type ClosureNotifyData struct {
 	*closureNotifyData
@@ -3792,20 +3694,6 @@ func UnsafeClosureNotifyDataToGlibFull(c *ClosureNotifyData) unsafe.Pointer {
 	c.native = nil // ClosureNotifyData is invalid from here on
 	return _p
 }
-// data wraps data
-func (c *ClosureNotifyData) Data() unsafe.Pointer {
-	valptr := &c.native.data
-	var _v unsafe.Pointer
-	_v = unsafe.Pointer(*valptr)
-	return _v
-}
-
-// data wraps data
-func (c *ClosureNotifyData) SetData(data unsafe.Pointer) {
-	valptr := &c.native.data
-	*valptr = C.gpointer(data)
-}
-
 // EnumClass wraps GEnumClass
 //
 // The class of an enumeration type holds information about its
@@ -4309,24 +4197,6 @@ func UnsafeInterfaceInfoToGlibFull(i *InterfaceInfo) unsafe.Pointer {
 	i.native = nil // InterfaceInfo is invalid from here on
 	return _p
 }
-// interface_data wraps interface_data
-//
-// user-supplied data passed to the interface init/finalize functions
-func (i *InterfaceInfo) InterfaceData() unsafe.Pointer {
-	valptr := &i.native.interface_data
-	var _v unsafe.Pointer
-	_v = unsafe.Pointer(*valptr)
-	return _v
-}
-
-// interface_data wraps interface_data
-//
-// user-supplied data passed to the interface init/finalize functions
-func (i *InterfaceInfo) SetInterfaceData(interface_data unsafe.Pointer) {
-	valptr := &i.native.interface_data
-	*valptr = C.gpointer(interface_data)
-}
-
 // ObjectConstructParam wraps GObjectConstructParam
 //
 // The GObjectConstructParam struct is an auxiliary structure used to hand

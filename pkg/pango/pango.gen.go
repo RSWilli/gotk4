@@ -11241,26 +11241,6 @@ func UnsafeAnalysisToGlibFull(a *Analysis) unsafe.Pointer {
 	a.native = nil // Analysis is invalid from here on
 	return _p
 }
-// shape_engine wraps shape_engine
-//
-// unused, reserved
-func (a *Analysis) ShapeEngine() unsafe.Pointer {
-	valptr := &a.native.shape_engine
-	var _v unsafe.Pointer
-	_v = unsafe.Pointer(*valptr)
-	return _v
-}
-
-// lang_engine wraps lang_engine
-//
-// unused, reserved
-func (a *Analysis) LangEngine() unsafe.Pointer {
-	valptr := &a.native.lang_engine
-	var _v unsafe.Pointer
-	_v = unsafe.Pointer(*valptr)
-	return _v
-}
-
 // level wraps level
 //
 // the bidirectional level for this segment.
@@ -11299,22 +11279,6 @@ func (a *Analysis) Script() uint8 {
 	var _v uint8
 	_v = uint8(*valptr)
 	return _v
-}
-
-// shape_engine wraps shape_engine
-//
-// unused, reserved
-func (a *Analysis) SetShapeEngine(shape_engine unsafe.Pointer) {
-	valptr := &a.native.shape_engine
-	*valptr = C.gpointer(shape_engine)
-}
-
-// lang_engine wraps lang_engine
-//
-// unused, reserved
-func (a *Analysis) SetLangEngine(lang_engine unsafe.Pointer) {
-	valptr := &a.native.lang_engine
-	*valptr = C.gpointer(lang_engine)
 }
 
 // level wraps level
@@ -12529,24 +12493,6 @@ func UnsafeAttrShapeToGlibFull(a *AttrShape) unsafe.Pointer {
 	a.native = nil // AttrShape is invalid from here on
 	return _p
 }
-// data wraps data
-//
-// user data set (see [func@Pango.AttrShape.new_with_data])
-func (a *AttrShape) Data() unsafe.Pointer {
-	valptr := &a.native.data
-	var _v unsafe.Pointer
-	_v = unsafe.Pointer(*valptr)
-	return _v
-}
-
-// data wraps data
-//
-// user data set (see [func@Pango.AttrShape.new_with_data])
-func (a *AttrShape) SetData(data unsafe.Pointer) {
-	valptr := &a.native.data
-	*valptr = C.gpointer(data)
-}
-
 // AttrSize wraps PangoAttrSize
 //
 // The `PangoAttrSize` structure is used to represent attributes which

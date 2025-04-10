@@ -39,6 +39,10 @@ func NewRecordFieldGetterGenerator(f *typesystem.Field) *RecordFieldGetterGenera
 		return nil
 	}
 
+	if f.Type.Type == typesystem.Gpointer {
+		return nil
+	}
+
 	if f.Type.Type == typesystem.Utf8 {
 		return nil // TODO
 	}

@@ -10505,7 +10505,7 @@ type DatagramBased interface {
 	// The function takes the following parameters:
 	// 
 	// 	- cancellable context.Context (nullable): a #GCancellable 
-	// 	- condition gobject.IOCondition: a #GIOCondition mask to wait for 
+	// 	- condition glib.IOCondition: a #GIOCondition mask to wait for 
 	// 	- timeout int64: the maximum time (in microseconds) to wait, 0 to not block, or -1
 	//   to block indefinitely 
 	// 
@@ -10520,7 +10520,7 @@ type DatagramBased interface {
 	// If @cancellable is cancelled before the condition is met, or if @timeout is
 	// reached before the condition is met, then %FALSE is returned and @error is
 	// set appropriately (%G_IO_ERROR_CANCELLED or %G_IO_ERROR_TIMED_OUT).
-	ConditionWait(context.Context, gobject.IOCondition, int64) (bool, error)
+	ConditionWait(context.Context, glib.IOCondition, int64) (bool, error)
 	// CreateSource wraps g_datagram_based_create_source
 	// 
 	// The function takes the following parameters:
@@ -10780,7 +10780,7 @@ func (datagramBased *DatagramBasedInstance) ConditionCheck(condition glib.IOCond
 // The function takes the following parameters:
 // 
 // 	- cancellable context.Context (nullable): a #GCancellable 
-// 	- condition gobject.IOCondition: a #GIOCondition mask to wait for 
+// 	- condition glib.IOCondition: a #GIOCondition mask to wait for 
 // 	- timeout int64: the maximum time (in microseconds) to wait, 0 to not block, or -1
 //   to block indefinitely 
 // 
@@ -10795,7 +10795,7 @@ func (datagramBased *DatagramBasedInstance) ConditionCheck(condition glib.IOCond
 // If @cancellable is cancelled before the condition is met, or if @timeout is
 // reached before the condition is met, then %FALSE is returned and @error is
 // set appropriately (%G_IO_ERROR_CANCELLED or %G_IO_ERROR_TIMED_OUT).
-func (datagramBased *DatagramBasedInstance) ConditionWait(cancellable context.Context, condition gobject.IOCondition, timeout int64) (bool, error) {
+func (datagramBased *DatagramBasedInstance) ConditionWait(cancellable context.Context, condition glib.IOCondition, timeout int64) (bool, error) {
 	var carg0 *C.GDatagramBased // in, none, converted
 	var carg3 *C.GCancellable   // in, none, converted, nullable
 	var carg1 C.GIOCondition    // in, none, casted
@@ -86018,16 +86018,6 @@ func UnsafeInputVectorToGlibFull(i *InputVector) unsafe.Pointer {
 	i.native = nil // InputVector is invalid from here on
 	return _p
 }
-// buffer wraps buffer
-//
-// Pointer to a buffer where data will be written.
-func (i *InputVector) Buffer() unsafe.Pointer {
-	valptr := &i.native.buffer
-	var _v unsafe.Pointer
-	_v = unsafe.Pointer(*valptr)
-	return _v
-}
-
 // size wraps size
 //
 // the available size in @buffer.
@@ -86036,14 +86026,6 @@ func (i *InputVector) Size() uint {
 	var _v uint
 	_v = uint(*valptr)
 	return _v
-}
-
-// buffer wraps buffer
-//
-// Pointer to a buffer where data will be written.
-func (i *InputVector) SetBuffer(buffer unsafe.Pointer) {
-	valptr := &i.native.buffer
-	*valptr = C.gpointer(buffer)
 }
 
 // size wraps size

@@ -43,6 +43,7 @@ func NewMember(e *env, parent Type, m gir.Member) *Member {
 			goIndentifier:  formatMember(m),
 			cGoIndentifier: "C." + m.CIdentifier,
 		},
+		// FIXME: go doesn't like it when the value overflows int32
 		Value: m.Value,
 	}
 }

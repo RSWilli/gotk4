@@ -22780,24 +22780,6 @@ func UnsafeNodeToGlibFull(n *Node) unsafe.Pointer {
 	n.native = nil // Node is invalid from here on
 	return _p
 }
-// data wraps data
-//
-// contains the actual data of the node.
-func (n *Node) Data() unsafe.Pointer {
-	valptr := &n.native.data
-	var _v unsafe.Pointer
-	_v = unsafe.Pointer(*valptr)
-	return _v
-}
-
-// data wraps data
-//
-// contains the actual data of the node.
-func (n *Node) SetData(data unsafe.Pointer) {
-	valptr := &n.native.data
-	*valptr = C.gpointer(data)
-}
-
 // ChildIndex wraps g_node_child_index
 // 
 // The function takes the following parameters:
@@ -23610,32 +23592,6 @@ func (o *OptionEntry) Flags() int {
 	return _v
 }
 
-// arg_data wraps arg_data
-//
-// If the @arg type is %G_OPTION_ARG_CALLBACK, then @arg_data
-//     must point to a #GOptionArgFunc callback function, which will be
-//     called to handle the extra argument. Otherwise, @arg_data is a
-//     pointer to a location to store the value, the required type of
-//     the location depends on the @arg type:
-//      - %G_OPTION_ARG_NONE: %gboolean
-//      - %G_OPTION_ARG_STRING: %gchar*
-//      - %G_OPTION_ARG_INT: %gint
-//      - %G_OPTION_ARG_FILENAME: %gchar*
-//      - %G_OPTION_ARG_STRING_ARRAY: %gchar**
-//      - %G_OPTION_ARG_FILENAME_ARRAY: %gchar**
-//      - %G_OPTION_ARG_DOUBLE: %gdouble
-//     If @arg type is %G_OPTION_ARG_STRING or %G_OPTION_ARG_FILENAME,
-//     the location will contain a newly allocated string if the option
-//     was given. That string needs to be freed by the callee using g_free().
-//     Likewise if @arg type is %G_OPTION_ARG_STRING_ARRAY or
-//     %G_OPTION_ARG_FILENAME_ARRAY, the data should be freed using g_strfreev().
-func (o *OptionEntry) ArgData() unsafe.Pointer {
-	valptr := &o.native.arg_data
-	var _v unsafe.Pointer
-	_v = unsafe.Pointer(*valptr)
-	return _v
-}
-
 // short_name wraps short_name
 //
 // If an option has a short name, it can be specified
@@ -23653,30 +23609,6 @@ func (o *OptionEntry) SetShortName(short_name byte) {
 func (o *OptionEntry) SetFlags(flags int) {
 	valptr := &o.native.flags
 	*valptr = C.int(flags)
-}
-
-// arg_data wraps arg_data
-//
-// If the @arg type is %G_OPTION_ARG_CALLBACK, then @arg_data
-//     must point to a #GOptionArgFunc callback function, which will be
-//     called to handle the extra argument. Otherwise, @arg_data is a
-//     pointer to a location to store the value, the required type of
-//     the location depends on the @arg type:
-//      - %G_OPTION_ARG_NONE: %gboolean
-//      - %G_OPTION_ARG_STRING: %gchar*
-//      - %G_OPTION_ARG_INT: %gint
-//      - %G_OPTION_ARG_FILENAME: %gchar*
-//      - %G_OPTION_ARG_STRING_ARRAY: %gchar**
-//      - %G_OPTION_ARG_FILENAME_ARRAY: %gchar**
-//      - %G_OPTION_ARG_DOUBLE: %gdouble
-//     If @arg type is %G_OPTION_ARG_STRING or %G_OPTION_ARG_FILENAME,
-//     the location will contain a newly allocated string if the option
-//     was given. That string needs to be freed by the callee using g_free().
-//     Likewise if @arg type is %G_OPTION_ARG_STRING_ARRAY or
-//     %G_OPTION_ARG_FILENAME_ARRAY, the data should be freed using g_strfreev().
-func (o *OptionEntry) SetArgData(arg_data unsafe.Pointer) {
-	valptr := &o.native.arg_data
-	*valptr = C.gpointer(arg_data)
 }
 
 // OptionGroup wraps GOptionGroup
@@ -26646,16 +26578,6 @@ func UnsafeScannerToGlibFull(s *Scanner) unsafe.Pointer {
 	s.native = nil // Scanner is invalid from here on
 	return _p
 }
-// user_data wraps user_data
-//
-// unused
-func (s *Scanner) UserData() unsafe.Pointer {
-	valptr := &s.native.user_data
-	var _v unsafe.Pointer
-	_v = unsafe.Pointer(*valptr)
-	return _v
-}
-
 // max_parse_errors wraps max_parse_errors
 //
 // unused
@@ -26714,14 +26636,6 @@ func (s *Scanner) NextPosition() uint {
 	var _v uint
 	_v = uint(*valptr)
 	return _v
-}
-
-// user_data wraps user_data
-//
-// unused
-func (s *Scanner) SetUserData(user_data unsafe.Pointer) {
-	valptr := &s.native.user_data
-	*valptr = C.gpointer(user_data)
 }
 
 // max_parse_errors wraps max_parse_errors

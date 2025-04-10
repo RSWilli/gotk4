@@ -166520,16 +166520,6 @@ func UnsafeRequestedSizeToGlibFull(r *RequestedSize) unsafe.Pointer {
 	r.native = nil // RequestedSize is invalid from here on
 	return _p
 }
-// data wraps data
-//
-// A client pointer
-func (r *RequestedSize) Data() unsafe.Pointer {
-	valptr := &r.native.data
-	var _v unsafe.Pointer
-	_v = unsafe.Pointer(*valptr)
-	return _v
-}
-
 // minimum_size wraps minimum_size
 //
 // The minimum size needed for allocation in a given orientation
@@ -166548,14 +166538,6 @@ func (r *RequestedSize) NaturalSize() int {
 	var _v int
 	_v = int(*valptr)
 	return _v
-}
-
-// data wraps data
-//
-// A client pointer
-func (r *RequestedSize) SetData(data unsafe.Pointer) {
-	valptr := &r.native.data
-	*valptr = C.gpointer(data)
 }
 
 // minimum_size wraps minimum_size
@@ -172151,66 +172133,12 @@ func (t *TreeIter) Stamp() int {
 	return _v
 }
 
-// user_data wraps user_data
-//
-// model-specific data
-func (t *TreeIter) UserData() unsafe.Pointer {
-	valptr := &t.native.user_data
-	var _v unsafe.Pointer
-	_v = unsafe.Pointer(*valptr)
-	return _v
-}
-
-// user_data2 wraps user_data2
-//
-// model-specific data
-func (t *TreeIter) UserData2() unsafe.Pointer {
-	valptr := &t.native.user_data2
-	var _v unsafe.Pointer
-	_v = unsafe.Pointer(*valptr)
-	return _v
-}
-
-// user_data3 wraps user_data3
-//
-// model-specific data
-func (t *TreeIter) UserData3() unsafe.Pointer {
-	valptr := &t.native.user_data3
-	var _v unsafe.Pointer
-	_v = unsafe.Pointer(*valptr)
-	return _v
-}
-
 // stamp wraps stamp
 //
 // a unique stamp to catch invalid iterators
 func (t *TreeIter) SetStamp(stamp int) {
 	valptr := &t.native.stamp
 	*valptr = C.int(stamp)
-}
-
-// user_data wraps user_data
-//
-// model-specific data
-func (t *TreeIter) SetUserData(user_data unsafe.Pointer) {
-	valptr := &t.native.user_data
-	*valptr = C.gpointer(user_data)
-}
-
-// user_data2 wraps user_data2
-//
-// model-specific data
-func (t *TreeIter) SetUserData2(user_data2 unsafe.Pointer) {
-	valptr := &t.native.user_data2
-	*valptr = C.gpointer(user_data2)
-}
-
-// user_data3 wraps user_data3
-//
-// model-specific data
-func (t *TreeIter) SetUserData3(user_data3 unsafe.Pointer) {
-	valptr := &t.native.user_data3
-	*valptr = C.gpointer(user_data3)
 }
 
 // Copy wraps gtk_tree_iter_copy

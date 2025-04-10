@@ -257,6 +257,7 @@ var Main = genmain.Data{
 				IgnoredDefinitions: []typesystem.IgnoreFunc{
 					// manually implemented, but hidden from the user
 					typesystem.IgnoreMatching("ParamSpec"),
+					typesystem.IgnoreMatching("ParamFlags"),
 					typesystem.IgnoreMatching("Closure"),
 					typesystem.IgnoreMatching("SignalQuery"),
 					typesystem.IgnoreMatching("TypeQuery"),
