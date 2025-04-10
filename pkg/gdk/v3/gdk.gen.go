@@ -18,7 +18,6 @@ import (
 // #cgo CFLAGS: -Wno-deprecated-declarations
 // #include <gdk/gdk.h>
 // extern gboolean _gotk4_glib2_SourceFunc(gpointer);
-// extern void _gotk4_gdk3_SeatGrabPrepareFunc(GdkSeat*, GdkWindow*, gpointer);
 // extern void callbackDelete(guintptr);
 import "C"
 
@@ -7713,12 +7712,6 @@ func (f WindowState) InitGoValue(v *gobject.Value) {
 	v.SetFlags(int(f))
 }
 
-// EventFunc wraps GdkEventFunc
-//
-// Specifies the type of function passed to gdk_event_handler_set() to
-// handle all GDK events.
-type EventFunc func(event *Event)
-
 // SeatGrabPrepareFunc wraps GdkSeatGrabPrepareFunc
 //
 // Type of the callback used to set up @window so it can be
@@ -8162,138 +8155,6 @@ func ErrorTrapPopIgnored() {
 func ErrorTrapPush() {
 
 	C.gdk_error_trap_push()
-}
-
-// EventsGetAngle wraps gdk_events_get_angle
-// 
-// The function takes the following parameters:
-// 
-// 	- event1 *Event: first #GdkEvent 
-// 	- event2 *Event: second #GdkEvent 
-// 
-// The function returns the following values:
-// 
-// 	- angle float64: return location for the relative angle between both events 
-// 	- goret bool 
-//
-// If both events contain X/Y information, this function will return %TRUE
-// and return in @angle the relative angle from @event1 to @event2. The rotation
-// direction for positive angles is from the positive X axis towards the positive
-// Y axis.
-func EventsGetAngle(event1 *Event, event2 *Event) (float64, bool) {
-	var carg1 *C.GdkEvent // in, transfer: none, C Pointers: 1, Name: Event
-	var carg2 *C.GdkEvent // in, transfer: none, C Pointers: 1, Name: Event
-	var carg3 C.gdouble   // out, full, casted
-	var cret  C.gboolean  // return
-
-	_ = event1
-	_ = carg1
-	panic("unimplemented conversion of *Event (GdkEvent*)")
-	_ = event2
-	_ = carg2
-	panic("unimplemented conversion of *Event (GdkEvent*)")
-
-	cret = C.gdk_events_get_angle(carg1, carg2, &carg3)
-	runtime.KeepAlive(event1)
-	runtime.KeepAlive(event2)
-
-	var angle float64
-	var goret bool
-
-	angle = float64(carg3)
-	if cret != 0 {
-		goret = true
-	}
-
-	return angle, goret
-}
-
-// EventsGetCenter wraps gdk_events_get_center
-// 
-// The function takes the following parameters:
-// 
-// 	- event1 *Event: first #GdkEvent 
-// 	- event2 *Event: second #GdkEvent 
-// 
-// The function returns the following values:
-// 
-// 	- x float64: return location for the X coordinate of the center 
-// 	- y float64: return location for the Y coordinate of the center 
-// 	- goret bool 
-//
-// If both events contain X/Y information, the center of both coordinates
-// will be returned in @x and @y.
-func EventsGetCenter(event1 *Event, event2 *Event) (float64, float64, bool) {
-	var carg1 *C.GdkEvent // in, transfer: none, C Pointers: 1, Name: Event
-	var carg2 *C.GdkEvent // in, transfer: none, C Pointers: 1, Name: Event
-	var carg3 C.gdouble   // out, full, casted
-	var carg4 C.gdouble   // out, full, casted
-	var cret  C.gboolean  // return
-
-	_ = event1
-	_ = carg1
-	panic("unimplemented conversion of *Event (GdkEvent*)")
-	_ = event2
-	_ = carg2
-	panic("unimplemented conversion of *Event (GdkEvent*)")
-
-	cret = C.gdk_events_get_center(carg1, carg2, &carg3, &carg4)
-	runtime.KeepAlive(event1)
-	runtime.KeepAlive(event2)
-
-	var x     float64
-	var y     float64
-	var goret bool
-
-	x = float64(carg3)
-	y = float64(carg4)
-	if cret != 0 {
-		goret = true
-	}
-
-	return x, y, goret
-}
-
-// EventsGetDistance wraps gdk_events_get_distance
-// 
-// The function takes the following parameters:
-// 
-// 	- event1 *Event: first #GdkEvent 
-// 	- event2 *Event: second #GdkEvent 
-// 
-// The function returns the following values:
-// 
-// 	- distance float64: return location for the distance 
-// 	- goret bool 
-//
-// If both events have X/Y information, the distance between both coordinates
-// (as in a straight line going from @event1 to @event2) will be returned.
-func EventsGetDistance(event1 *Event, event2 *Event) (float64, bool) {
-	var carg1 *C.GdkEvent // in, transfer: none, C Pointers: 1, Name: Event
-	var carg2 *C.GdkEvent // in, transfer: none, C Pointers: 1, Name: Event
-	var carg3 C.gdouble   // out, full, casted
-	var cret  C.gboolean  // return
-
-	_ = event1
-	_ = carg1
-	panic("unimplemented conversion of *Event (GdkEvent*)")
-	_ = event2
-	_ = carg2
-	panic("unimplemented conversion of *Event (GdkEvent*)")
-
-	cret = C.gdk_events_get_distance(carg1, carg2, &carg3)
-	runtime.KeepAlive(event1)
-	runtime.KeepAlive(event2)
-
-	var distance float64
-	var goret    bool
-
-	distance = float64(carg3)
-	if cret != 0 {
-		goret = true
-	}
-
-	return distance, goret
 }
 
 // EventsPending wraps gdk_events_pending
@@ -12416,14 +12277,6 @@ type Display interface {
 	//
 	// Deprecated: (since 3.20.0) Use gdk_display_get_default_seat() and #GdkSeat operations.
 	GetDeviceManager() DeviceManager
-	// GetEvent wraps gdk_display_get_event
-	// The function returns the following values:
-	// 
-	// 	- goret *Event 
-	//
-	// Gets the next #GdkEvent to be processed for @display, fetching events from the
-	// windowing system if necessary.
-	GetEvent() *Event
 	// GetMaximalCursorSize wraps gdk_display_get_maximal_cursor_size
 	// The function returns the following values:
 	// 
@@ -12595,16 +12448,6 @@ type Display interface {
 	// gtk_window_set_auto_startup_notification() is called to
 	// disable that feature.
 	NotifyStartupComplete(string)
-	// PeekEvent wraps gdk_display_peek_event
-	// The function returns the following values:
-	// 
-	// 	- goret *Event 
-	//
-	// Gets a copy of the first #GdkEvent in the @display’s event queue, without
-	// removing the event from the queue.  (Note that this function will
-	// not get more events from the windowing system.  It only checks the events
-	// that have already been moved to the GDK event queue.)
-	PeekEvent() *Event
 	// PointerIsGrabbed wraps gdk_display_pointer_is_grabbed
 	// The function returns the following values:
 	// 
@@ -12625,15 +12468,6 @@ type Display interface {
 	// Deprecated: (since 3.0.0) Use gdk_device_ungrab(), together with gdk_device_grab()
 	//             instead.
 	PointerUngrab(uint32)
-	// PutEvent wraps gdk_display_put_event
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- event *Event: a #GdkEvent. 
-	//
-	// Appends a copy of the given event onto the front of the event
-	// queue for @display.
-	PutEvent(*Event)
 	// SetDoubleClickDistance wraps gdk_display_set_double_click_distance
 	// 
 	// The function takes the following parameters:
@@ -13080,31 +12914,6 @@ func (display *DisplayInstance) GetDeviceManager() DeviceManager {
 	return goret
 }
 
-// GetEvent wraps gdk_display_get_event
-// The function returns the following values:
-// 
-// 	- goret *Event 
-//
-// Gets the next #GdkEvent to be processed for @display, fetching events from the
-// windowing system if necessary.
-func (display *DisplayInstance) GetEvent() *Event {
-	var carg0 *C.GdkDisplay // in, none, converted
-	var cret  *C.GdkEvent   // return, transfer: full, C Pointers: 1, Name: Event, scope: 
-
-	carg0 = (*C.GdkDisplay)(UnsafeDisplayToGlibNone(display))
-
-	cret = C.gdk_display_get_event(carg0)
-	runtime.KeepAlive(display)
-
-	var goret *Event
-
-	_ = goret
-	_ = cret
-	panic("unimplemented conversion of *Event (GdkEvent*)")
-
-	return goret
-}
-
 // GetMaximalCursorSize wraps gdk_display_get_maximal_cursor_size
 // The function returns the following values:
 // 
@@ -13531,33 +13340,6 @@ func (display *DisplayInstance) NotifyStartupComplete(startupId string) {
 	runtime.KeepAlive(startupId)
 }
 
-// PeekEvent wraps gdk_display_peek_event
-// The function returns the following values:
-// 
-// 	- goret *Event 
-//
-// Gets a copy of the first #GdkEvent in the @display’s event queue, without
-// removing the event from the queue.  (Note that this function will
-// not get more events from the windowing system.  It only checks the events
-// that have already been moved to the GDK event queue.)
-func (display *DisplayInstance) PeekEvent() *Event {
-	var carg0 *C.GdkDisplay // in, none, converted
-	var cret  *C.GdkEvent   // return, transfer: full, C Pointers: 1, Name: Event, scope: 
-
-	carg0 = (*C.GdkDisplay)(UnsafeDisplayToGlibNone(display))
-
-	cret = C.gdk_display_peek_event(carg0)
-	runtime.KeepAlive(display)
-
-	var goret *Event
-
-	_ = goret
-	_ = cret
-	panic("unimplemented conversion of *Event (GdkEvent*)")
-
-	return goret
-}
-
 // PointerIsGrabbed wraps gdk_display_pointer_is_grabbed
 // The function returns the following values:
 // 
@@ -13604,28 +13386,6 @@ func (display *DisplayInstance) PointerUngrab(time_ uint32) {
 	C.gdk_display_pointer_ungrab(carg0, carg1)
 	runtime.KeepAlive(display)
 	runtime.KeepAlive(time_)
-}
-
-// PutEvent wraps gdk_display_put_event
-// 
-// The function takes the following parameters:
-// 
-// 	- event *Event: a #GdkEvent. 
-//
-// Appends a copy of the given event onto the front of the event
-// queue for @display.
-func (display *DisplayInstance) PutEvent(event *Event) {
-	var carg0 *C.GdkDisplay // in, none, converted
-	var carg1 *C.GdkEvent   // in, transfer: none, C Pointers: 1, Name: Event
-
-	carg0 = (*C.GdkDisplay)(UnsafeDisplayToGlibNone(display))
-	_ = event
-	_ = carg1
-	panic("unimplemented conversion of *Event (GdkEvent*)")
-
-	C.gdk_display_put_event(carg0, carg1)
-	runtime.KeepAlive(display)
-	runtime.KeepAlive(event)
 }
 
 // SetDoubleClickDistance wraps gdk_display_set_double_click_distance
@@ -18130,57 +17890,6 @@ type Seat interface {
 	//
 	// Returns the master device that routes pointer events.
 	GetPointer() Device
-	// Grab wraps gdk_seat_grab
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- window Window: the #GdkWindow which will own the grab 
-	// 	- capabilities SeatCapabilities: capabilities that will be grabbed 
-	// 	- ownerEvents bool: if %FALSE then all device events are reported with respect to
-	//                @window and are only reported if selected by @event_mask. If
-	//                %TRUE then pointer events for this application are reported
-	//                as normal, but pointer events outside this application are
-	//                reported with respect to @window and only if selected by
-	//                @event_mask. In either mode, unreported events are discarded. 
-	// 	- cursor Cursor (nullable): the cursor to display while the grab is active. If
-	//          this is %NULL then the normal cursors are used for
-	//          @window and its descendants, and the cursor for @window is used
-	//          elsewhere. 
-	// 	- event *Event (nullable): the event that is triggering the grab, or %NULL if none
-	//         is available. 
-	// 	- prepareFunc SeatGrabPrepareFunc (nullable): function to
-	//                prepare the window to be grabbed, it can be %NULL if @window is
-	//                visible before this call. 
-	// 
-	// The function returns the following values:
-	// 
-	// 	- goret GrabStatus 
-	//
-	// Grabs the seat so that all events corresponding to the given @capabilities
-	// are passed to this application until the seat is ungrabbed with gdk_seat_ungrab(),
-	// or the window becomes hidden. This overrides any previous grab on the
-	// seat by this client.
-	// 
-	// As a rule of thumb, if a grab is desired over %GDK_SEAT_CAPABILITY_POINTER,
-	// all other "pointing" capabilities (eg. %GDK_SEAT_CAPABILITY_TOUCH) should
-	// be grabbed too, so the user is able to interact with all of those while
-	// the grab holds, you should thus use %GDK_SEAT_CAPABILITY_ALL_POINTING most
-	// commonly.
-	// 
-	// Grabs are used for operations which need complete control over the
-	// events corresponding to the given capabilities. For example in GTK+ this
-	// is used for Drag and Drop operations, popup menus and such.
-	// 
-	// Note that if the event mask of a #GdkWindow has selected both button press
-	// and button release events, or touch begin and touch end, then a press event
-	// will cause an automatic grab until the button is released, equivalent to a
-	// grab on the window with @owner_events set to %TRUE. This is done because most
-	// applications expect to receive paired press and release events.
-	// 
-	// If you set up anything at the time you take the grab that needs to be
-	// cleaned up when the grab ends, you should handle the #GdkEventGrabBroken
-	// events that are emitted when the grab ends unvoluntarily.
-	Grab(Window, SeatCapabilities, bool, Cursor, *Event, SeatGrabPrepareFunc) GrabStatus
 	// Ungrab wraps gdk_seat_ungrab
 	//
 	// Releases a grab added through gdk_seat_grab().
@@ -18305,103 +18014,6 @@ func (seat *SeatInstance) GetPointer() Device {
 	var goret Device
 
 	goret = UnsafeDeviceFromGlibNone(unsafe.Pointer(cret))
-
-	return goret
-}
-
-// Grab wraps gdk_seat_grab
-// 
-// The function takes the following parameters:
-// 
-// 	- window Window: the #GdkWindow which will own the grab 
-// 	- capabilities SeatCapabilities: capabilities that will be grabbed 
-// 	- ownerEvents bool: if %FALSE then all device events are reported with respect to
-//                @window and are only reported if selected by @event_mask. If
-//                %TRUE then pointer events for this application are reported
-//                as normal, but pointer events outside this application are
-//                reported with respect to @window and only if selected by
-//                @event_mask. In either mode, unreported events are discarded. 
-// 	- cursor Cursor (nullable): the cursor to display while the grab is active. If
-//          this is %NULL then the normal cursors are used for
-//          @window and its descendants, and the cursor for @window is used
-//          elsewhere. 
-// 	- event *Event (nullable): the event that is triggering the grab, or %NULL if none
-//         is available. 
-// 	- prepareFunc SeatGrabPrepareFunc (nullable): function to
-//                prepare the window to be grabbed, it can be %NULL if @window is
-//                visible before this call. 
-// 
-// The function returns the following values:
-// 
-// 	- goret GrabStatus 
-//
-// Grabs the seat so that all events corresponding to the given @capabilities
-// are passed to this application until the seat is ungrabbed with gdk_seat_ungrab(),
-// or the window becomes hidden. This overrides any previous grab on the
-// seat by this client.
-// 
-// As a rule of thumb, if a grab is desired over %GDK_SEAT_CAPABILITY_POINTER,
-// all other "pointing" capabilities (eg. %GDK_SEAT_CAPABILITY_TOUCH) should
-// be grabbed too, so the user is able to interact with all of those while
-// the grab holds, you should thus use %GDK_SEAT_CAPABILITY_ALL_POINTING most
-// commonly.
-// 
-// Grabs are used for operations which need complete control over the
-// events corresponding to the given capabilities. For example in GTK+ this
-// is used for Drag and Drop operations, popup menus and such.
-// 
-// Note that if the event mask of a #GdkWindow has selected both button press
-// and button release events, or touch begin and touch end, then a press event
-// will cause an automatic grab until the button is released, equivalent to a
-// grab on the window with @owner_events set to %TRUE. This is done because most
-// applications expect to receive paired press and release events.
-// 
-// If you set up anything at the time you take the grab that needs to be
-// cleaned up when the grab ends, you should handle the #GdkEventGrabBroken
-// events that are emitted when the grab ends unvoluntarily.
-func (seat *SeatInstance) Grab(window Window, capabilities SeatCapabilities, ownerEvents bool, cursor Cursor, event *Event, prepareFunc SeatGrabPrepareFunc) GrabStatus {
-	var carg0 *C.GdkSeat               // in, none, converted
-	var carg1 *C.GdkWindow             // in, none, converted
-	var carg2 C.GdkSeatCapabilities    // in, none, casted
-	var carg3 C.gboolean               // in
-	var carg4 *C.GdkCursor             // in, none, converted, nullable
-	var carg5 *C.GdkEvent              // in, transfer: none, C Pointers: 1, Name: Event, nullable, nullable
-	var carg6 C.GdkSeatGrabPrepareFunc // callback, scope: call, closure: carg7, nullable
-	var carg7 C.gpointer               // implicit
-	var cret  C.GdkGrabStatus          // return, none, casted
-
-	carg0 = (*C.GdkSeat)(UnsafeSeatToGlibNone(seat))
-	carg1 = (*C.GdkWindow)(UnsafeWindowToGlibNone(window))
-	carg2 = C.GdkSeatCapabilities(capabilities)
-	if ownerEvents {
-		carg3 = C.TRUE
-	}
-	if cursor != nil {
-		carg4 = (*C.GdkCursor)(UnsafeCursorToGlibNone(cursor))
-	}
-	if event != nil {
-		_ = event
-		_ = carg5
-		panic("unimplemented conversion of *Event (GdkEvent*)")
-	}
-	if prepareFunc != nil {
-		carg6 = (*[0]byte)(C._gotk4_gdk3_SeatGrabPrepareFunc)
-		carg7 = C.gpointer(gbox.Assign(prepareFunc))
-		defer gbox.Delete(uintptr(carg7))
-	}
-
-	cret = C.gdk_seat_grab(carg0, carg1, carg2, carg3, carg4, carg5, carg6, carg7)
-	runtime.KeepAlive(seat)
-	runtime.KeepAlive(window)
-	runtime.KeepAlive(capabilities)
-	runtime.KeepAlive(ownerEvents)
-	runtime.KeepAlive(cursor)
-	runtime.KeepAlive(event)
-	runtime.KeepAlive(prepareFunc)
-
-	var goret GrabStatus
-
-	goret = GrabStatus(cret)
 
 	return goret
 }
@@ -20660,22 +20272,6 @@ type Window interface {
 	// XMapWindow() (it also updates some internal GDK state, which means
 	// that you can’t really use XMapWindow() directly on a GDK window).
 	ShowUnraised()
-	// ShowWindowMenu wraps gdk_window_show_window_menu
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- event *Event: a #GdkEvent to show the menu for 
-	// 
-	// The function returns the following values:
-	// 
-	// 	- goret bool 
-	//
-	// Asks the windowing system to show the window menu. The window menu
-	// is the menu shown when right-clicking the titlebar on traditional
-	// windows managed by the window manager. This is useful for windows
-	// using client-side decorations, activating it with a right-click
-	// on the window decorations.
-	ShowWindowMenu(*Event) bool
 	// Stick wraps gdk_window_stick
 	//
 	// “Pins” a window such that it’s on all workspaces and does not scroll
@@ -24407,44 +24003,6 @@ func (window *WindowInstance) ShowUnraised() {
 
 	C.gdk_window_show_unraised(carg0)
 	runtime.KeepAlive(window)
-}
-
-// ShowWindowMenu wraps gdk_window_show_window_menu
-// 
-// The function takes the following parameters:
-// 
-// 	- event *Event: a #GdkEvent to show the menu for 
-// 
-// The function returns the following values:
-// 
-// 	- goret bool 
-//
-// Asks the windowing system to show the window menu. The window menu
-// is the menu shown when right-clicking the titlebar on traditional
-// windows managed by the window manager. This is useful for windows
-// using client-side decorations, activating it with a right-click
-// on the window decorations.
-func (window *WindowInstance) ShowWindowMenu(event *Event) bool {
-	var carg0 *C.GdkWindow // in, none, converted
-	var carg1 *C.GdkEvent  // in, transfer: none, C Pointers: 1, Name: Event
-	var cret  C.gboolean   // return
-
-	carg0 = (*C.GdkWindow)(UnsafeWindowToGlibNone(window))
-	_ = event
-	_ = carg1
-	panic("unimplemented conversion of *Event (GdkEvent*)")
-
-	cret = C.gdk_window_show_window_menu(carg0, carg1)
-	runtime.KeepAlive(window)
-	runtime.KeepAlive(event)
-
-	var goret bool
-
-	if cret != 0 {
-		goret = true
-	}
-
-	return goret
 }
 
 // Stick wraps gdk_window_stick

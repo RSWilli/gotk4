@@ -300,11 +300,11 @@ func (n *Namespace) findLocalTypeWith(pred func(t Type) bool) Type {
 		}
 	}
 
-	for _, c := range n.Unions {
-		if pred(c) {
-			return c
-		}
-	}
+	// for _, c := range n.Unions {
+	// 	if pred(c) {
+	// 		return c
+	// 	}
+	// }
 
 	for _, c := range n.Bitfields {
 		if pred(c) {

@@ -11,26 +11,6 @@ import (
 // #include <gdk/gdk.h>
 import "C"
 
-//export _gotk4_gdk3_EventFunc
-func _gotk4_gdk3_EventFunc(carg1 *C.GdkEvent, carg2 C.gpointer) {
-	var fn EventFunc
-	{
-		v := gbox.Get(uintptr(carg2))
-		if v == nil {
-			panic(`callback not found`)
-		}
-		fn = v.(EventFunc)
-	}
-
-	var event *Event // in, transfer: none, C Pointers: 1, Name: Event
-
-	_ = event
-	_ = carg1
-	panic("unimplemented conversion of *Event (GdkEvent*)")
-
-	fn(event)
-}
-
 //export _gotk4_gdk3_SeatGrabPrepareFunc
 func _gotk4_gdk3_SeatGrabPrepareFunc(carg1 *C.GdkSeat, carg2 *C.GdkWindow, carg3 C.gpointer) {
 	var fn SeatGrabPrepareFunc

@@ -7732,30 +7732,6 @@ func GetBinaryAge() uint {
 	return goret
 }
 
-// GetCurrentEvent wraps gtk_get_current_event
-// The function returns the following values:
-// 
-// 	- goret *gdk.Event 
-//
-// Obtains a copy of the event currently being processed by GTK+.
-// 
-// For example, if you are handling a #GtkButton::clicked signal,
-// the current event will be the #GdkEventButton that triggered
-// the ::clicked signal.
-func GetCurrentEvent() *gdk.Event {
-	var cret *C.GdkEvent // return, transfer: full, C Pointers: 1, Name: Event, scope: 
-
-	cret = C.gtk_get_current_event()
-
-	var goret *gdk.Event
-
-	_ = goret
-	_ = cret
-	panic("unimplemented conversion of *gdk.Event (GdkEvent*)")
-
-	return goret
-}
-
 // GetCurrentEventDevice wraps gtk_get_current_event_device
 // The function returns the following values:
 // 
@@ -7862,37 +7838,6 @@ func GetDefaultLanguage() *pango.Language {
 	var goret *pango.Language
 
 	goret = pango.UnsafeLanguageFromGlibNone(unsafe.Pointer(cret))
-
-	return goret
-}
-
-// GetEventWidget wraps gtk_get_event_widget
-// 
-// The function takes the following parameters:
-// 
-// 	- event *gdk.Event: a #GdkEvent 
-// 
-// The function returns the following values:
-// 
-// 	- goret Widget 
-//
-// If @event is %NULL or the event was not associated with any widget,
-// returns %NULL, otherwise returns the widget that received the event
-// originally.
-func GetEventWidget(event *gdk.Event) Widget {
-	var carg1 *C.GdkEvent  // in, transfer: none, C Pointers: 1, Name: Event
-	var cret  *C.GtkWidget // return, none, converted
-
-	_ = event
-	_ = carg1
-	panic("unimplemented conversion of *gdk.Event (GdkEvent*)")
-
-	cret = C.gtk_get_event_widget(carg1)
-	runtime.KeepAlive(event)
-
-	var goret Widget
-
-	goret = UnsafeWidgetFromGlibNone(unsafe.Pointer(cret))
 
 	return goret
 }
@@ -8111,59 +8056,6 @@ func Main() {
 	C.gtk_main()
 }
 
-// MainDoEvent wraps gtk_main_do_event
-// 
-// The function takes the following parameters:
-// 
-// 	- event *gdk.Event: An event to process (normally passed by GDK) 
-//
-// Processes a single GDK event.
-// 
-// This is public only to allow filtering of events between GDK and GTK+.
-// You will not usually need to call this function directly.
-// 
-// While you should not call this function directly, you might want to
-// know how exactly events are handled. So here is what this function
-// does with the event:
-// 
-// 1. Compress enter/leave notify events. If the event passed build an
-//    enter/leave pair together with the next event (peeked from GDK), both
-//    events are thrown away. This is to avoid a backlog of (de-)highlighting
-//    widgets crossed by the pointer.
-// 
-// 2. Find the widget which got the event. If the widget can’t be determined
-//    the event is thrown away unless it belongs to a INCR transaction.
-// 
-// 3. Then the event is pushed onto a stack so you can query the currently
-//    handled event with gtk_get_current_event().
-// 
-// 4. The event is sent to a widget. If a grab is active all events for widgets
-//    that are not in the contained in the grab widget are sent to the latter
-//    with a few exceptions:
-//    - Deletion and destruction events are still sent to the event widget for
-//      obvious reasons.
-//    - Events which directly relate to the visual representation of the event
-//      widget.
-//    - Leave events are delivered to the event widget if there was an enter
-//      event delivered to it before without the paired leave event.
-//    - Drag events are not redirected because it is unclear what the semantics
-//      of that would be.
-//    Another point of interest might be that all key events are first passed
-//    through the key snooper functions if there are any. Read the description
-//    of gtk_key_snooper_install() if you need this feature.
-// 
-// 5. After finishing the delivery the event is popped from the event stack.
-func MainDoEvent(event *gdk.Event) {
-	var carg1 *C.GdkEvent // in, transfer: none, C Pointers: 1, Name: Event
-
-	_ = event
-	_ = carg1
-	panic("unimplemented conversion of *gdk.Event (GdkEvent*)")
-
-	C.gtk_main_do_event(carg1)
-	runtime.KeepAlive(event)
-}
-
 // MainIteration wraps gtk_main_iteration
 // The function returns the following values:
 // 
@@ -8332,45 +8224,6 @@ func PrintRunPageSetupDialogAsync(parent Window, pageSetup PageSetup, settings P
 	runtime.KeepAlive(pageSetup)
 	runtime.KeepAlive(settings)
 	runtime.KeepAlive(doneCb)
-}
-
-// PropagateEvent wraps gtk_propagate_event
-// 
-// The function takes the following parameters:
-// 
-// 	- widget Widget: a #GtkWidget 
-// 	- event *gdk.Event: an event 
-//
-// Sends an event to a widget, propagating the event to parent widgets
-// if the event remains unhandled.
-// 
-// Events received by GTK+ from GDK normally begin in gtk_main_do_event().
-// Depending on the type of event, existence of modal dialogs, grabs, etc.,
-// the event may be propagated; if so, this function is used.
-// 
-// gtk_propagate_event() calls gtk_widget_event() on each widget it
-// decides to send the event to. So gtk_widget_event() is the lowest-level
-// function; it simply emits the #GtkWidget::event and possibly an
-// event-specific signal on a widget. gtk_propagate_event() is a bit
-// higher-level, and gtk_main_do_event() is the highest level.
-// 
-// All that said, you most likely don’t want to use any of these
-// functions; synthesizing events is rarely needed. There are almost
-// certainly better ways to achieve your goals. For example, use
-// gdk_window_invalidate_rect() or gtk_widget_queue_draw() instead
-// of making up expose events.
-func PropagateEvent(widget Widget, event *gdk.Event) {
-	var carg1 *C.GtkWidget // in, none, converted
-	var carg2 *C.GdkEvent  // in, transfer: none, C Pointers: 1, Name: Event
-
-	carg1 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(widget))
-	_ = event
-	_ = carg2
-	panic("unimplemented conversion of *gdk.Event (GdkEvent*)")
-
-	C.gtk_propagate_event(carg1, carg2)
-	runtime.KeepAlive(widget)
-	runtime.KeepAlive(event)
 }
 
 // RCAddDefaultFile wraps gtk_rc_add_default_file
@@ -11878,24 +11731,6 @@ type CellEditable interface {
 	//
 	// Emits the #GtkCellEditable::remove-widget signal.
 	RemoveWidget()
-	// StartEditing wraps gtk_cell_editable_start_editing
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- event *gdk.Event (nullable): The #GdkEvent that began the editing process, or
-	//   %NULL if editing was initiated programmatically 
-	//
-	// Begins editing on a @cell_editable.
-	// 
-	// The #GtkCellRenderer for the cell creates and returns a #GtkCellEditable from
-	// gtk_cell_renderer_start_editing(), configured for the #GtkCellRenderer type.
-	// 
-	// gtk_cell_editable_start_editing() can then set up @cell_editable suitably for
-	// editing a cell, e.g. making the Esc key emit #GtkCellEditable::editing-done.
-	// 
-	// Note that the @cell_editable is created on-demand for the current edit; its
-	// lifetime is temporary and does not persist across other edits and/or cells.
-	StartEditing(*gdk.Event)
 }
 
 var _ CellEditable = (*CellEditableInstance)(nil)
@@ -11958,39 +11793,6 @@ func (cellEditable *CellEditableInstance) RemoveWidget() {
 
 	C.gtk_cell_editable_remove_widget(carg0)
 	runtime.KeepAlive(cellEditable)
-}
-
-// StartEditing wraps gtk_cell_editable_start_editing
-// 
-// The function takes the following parameters:
-// 
-// 	- event *gdk.Event (nullable): The #GdkEvent that began the editing process, or
-//   %NULL if editing was initiated programmatically 
-//
-// Begins editing on a @cell_editable.
-// 
-// The #GtkCellRenderer for the cell creates and returns a #GtkCellEditable from
-// gtk_cell_renderer_start_editing(), configured for the #GtkCellRenderer type.
-// 
-// gtk_cell_editable_start_editing() can then set up @cell_editable suitably for
-// editing a cell, e.g. making the Esc key emit #GtkCellEditable::editing-done.
-// 
-// Note that the @cell_editable is created on-demand for the current edit; its
-// lifetime is temporary and does not persist across other edits and/or cells.
-func (cellEditable *CellEditableInstance) StartEditing(event *gdk.Event) {
-	var carg0 *C.GtkCellEditable // in, none, converted
-	var carg1 *C.GdkEvent        // in, transfer: none, C Pointers: 1, Name: Event, nullable, nullable
-
-	carg0 = (*C.GtkCellEditable)(UnsafeCellEditableToGlibNone(cellEditable))
-	if event != nil {
-		_ = event
-		_ = carg1
-		panic("unimplemented conversion of *gdk.Event (GdkEvent*)")
-	}
-
-	C.gtk_cell_editable_start_editing(carg0, carg1)
-	runtime.KeepAlive(cellEditable)
-	runtime.KeepAlive(event)
 }
 
 // CellLayoutInstance is the instance type used by all types implementing GtkCellLayout. It is used internally by the bindings. Users should use the interface [CellLayout] instead.
@@ -27514,26 +27316,6 @@ type CellArea interface {
 	// cell, however some subclasses which embed widgets in the area
 	// can also activate a widget if it currently has the focus.
 	Activate(CellAreaContext, Widget, *gdk.Rectangle, CellRendererState, bool) bool
-	// ActivateCell wraps gtk_cell_area_activate_cell
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- widget Widget: the #GtkWidget that @area is rendering onto 
-	// 	- renderer CellRenderer: the #GtkCellRenderer in @area to activate 
-	// 	- event *gdk.Event: the #GdkEvent for which cell activation should occur 
-	// 	- cellArea *gdk.Rectangle: the #GdkRectangle in @widget relative coordinates
-	//             of @renderer for the current row. 
-	// 	- flags CellRendererState: the #GtkCellRendererState for @renderer 
-	// 
-	// The function returns the following values:
-	// 
-	// 	- goret bool 
-	//
-	// This is used by #GtkCellArea subclasses when handling events
-	// to activate cells, the base #GtkCellArea class activates cells
-	// for keyboard events for free in its own GtkCellArea-&gt;activate()
-	// implementation.
-	ActivateCell(Widget, CellRenderer, *gdk.Event, *gdk.Rectangle, CellRendererState) bool
 	// Add wraps gtk_cell_area_add
 	// 
 	// The function takes the following parameters:
@@ -27659,22 +27441,6 @@ type CellArea interface {
 	// one should render and handle events with the same #GtkCellAreaContext
 	// which was used to request the size of those rows of data).
 	CreateContext() CellAreaContext
-	// Event wraps gtk_cell_area_event
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- context CellAreaContext: the #GtkCellAreaContext for this row of data. 
-	// 	- widget Widget: the #GtkWidget that @area is rendering to 
-	// 	- event *gdk.Event: the #GdkEvent to handle 
-	// 	- cellArea *gdk.Rectangle: the @widget relative coordinates for @area 
-	// 	- flags CellRendererState: the #GtkCellRendererState for @area in this row. 
-	// 
-	// The function returns the following values:
-	// 
-	// 	- goret int 
-	//
-	// Delegates event handling to a #GtkCellArea.
-	Event(CellAreaContext, Widget, *gdk.Event, *gdk.Rectangle, CellRendererState) int
 	// Focus wraps gtk_cell_area_focus
 	// 
 	// The function takes the following parameters:
@@ -28115,60 +27881,6 @@ func (area *CellAreaInstance) Activate(context CellAreaContext, widget Widget, c
 	return goret
 }
 
-// ActivateCell wraps gtk_cell_area_activate_cell
-// 
-// The function takes the following parameters:
-// 
-// 	- widget Widget: the #GtkWidget that @area is rendering onto 
-// 	- renderer CellRenderer: the #GtkCellRenderer in @area to activate 
-// 	- event *gdk.Event: the #GdkEvent for which cell activation should occur 
-// 	- cellArea *gdk.Rectangle: the #GdkRectangle in @widget relative coordinates
-//             of @renderer for the current row. 
-// 	- flags CellRendererState: the #GtkCellRendererState for @renderer 
-// 
-// The function returns the following values:
-// 
-// 	- goret bool 
-//
-// This is used by #GtkCellArea subclasses when handling events
-// to activate cells, the base #GtkCellArea class activates cells
-// for keyboard events for free in its own GtkCellArea-&gt;activate()
-// implementation.
-func (area *CellAreaInstance) ActivateCell(widget Widget, renderer CellRenderer, event *gdk.Event, cellArea *gdk.Rectangle, flags CellRendererState) bool {
-	var carg0 *C.GtkCellArea         // in, none, converted
-	var carg1 *C.GtkWidget           // in, none, converted
-	var carg2 *C.GtkCellRenderer     // in, none, converted
-	var carg3 *C.GdkEvent            // in, transfer: none, C Pointers: 1, Name: Event
-	var carg4 *C.GdkRectangle        // in, none, converted
-	var carg5 C.GtkCellRendererState // in, none, casted
-	var cret  C.gboolean             // return
-
-	carg0 = (*C.GtkCellArea)(UnsafeCellAreaToGlibNone(area))
-	carg1 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(widget))
-	carg2 = (*C.GtkCellRenderer)(UnsafeCellRendererToGlibNone(renderer))
-	_ = event
-	_ = carg3
-	panic("unimplemented conversion of *gdk.Event (GdkEvent*)")
-	carg4 = (*C.GdkRectangle)(gdk.UnsafeRectangleToGlibNone(cellArea))
-	carg5 = C.GtkCellRendererState(flags)
-
-	cret = C.gtk_cell_area_activate_cell(carg0, carg1, carg2, carg3, carg4, carg5)
-	runtime.KeepAlive(area)
-	runtime.KeepAlive(widget)
-	runtime.KeepAlive(renderer)
-	runtime.KeepAlive(event)
-	runtime.KeepAlive(cellArea)
-	runtime.KeepAlive(flags)
-
-	var goret bool
-
-	if cret != 0 {
-		goret = true
-	}
-
-	return goret
-}
-
 // Add wraps gtk_cell_area_add
 // 
 // The function takes the following parameters:
@@ -28463,54 +28175,6 @@ func (area *CellAreaInstance) CreateContext() CellAreaContext {
 	var goret CellAreaContext
 
 	goret = UnsafeCellAreaContextFromGlibFull(unsafe.Pointer(cret))
-
-	return goret
-}
-
-// Event wraps gtk_cell_area_event
-// 
-// The function takes the following parameters:
-// 
-// 	- context CellAreaContext: the #GtkCellAreaContext for this row of data. 
-// 	- widget Widget: the #GtkWidget that @area is rendering to 
-// 	- event *gdk.Event: the #GdkEvent to handle 
-// 	- cellArea *gdk.Rectangle: the @widget relative coordinates for @area 
-// 	- flags CellRendererState: the #GtkCellRendererState for @area in this row. 
-// 
-// The function returns the following values:
-// 
-// 	- goret int 
-//
-// Delegates event handling to a #GtkCellArea.
-func (area *CellAreaInstance) Event(context CellAreaContext, widget Widget, event *gdk.Event, cellArea *gdk.Rectangle, flags CellRendererState) int {
-	var carg0 *C.GtkCellArea         // in, none, converted
-	var carg1 *C.GtkCellAreaContext  // in, none, converted
-	var carg2 *C.GtkWidget           // in, none, converted
-	var carg3 *C.GdkEvent            // in, transfer: none, C Pointers: 1, Name: Event
-	var carg4 *C.GdkRectangle        // in, none, converted
-	var carg5 C.GtkCellRendererState // in, none, casted
-	var cret  C.int                  // return, none, casted
-
-	carg0 = (*C.GtkCellArea)(UnsafeCellAreaToGlibNone(area))
-	carg1 = (*C.GtkCellAreaContext)(UnsafeCellAreaContextToGlibNone(context))
-	carg2 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(widget))
-	_ = event
-	_ = carg3
-	panic("unimplemented conversion of *gdk.Event (GdkEvent*)")
-	carg4 = (*C.GdkRectangle)(gdk.UnsafeRectangleToGlibNone(cellArea))
-	carg5 = C.GtkCellRendererState(flags)
-
-	cret = C.gtk_cell_area_event(carg0, carg1, carg2, carg3, carg4, carg5)
-	runtime.KeepAlive(area)
-	runtime.KeepAlive(context)
-	runtime.KeepAlive(widget)
-	runtime.KeepAlive(event)
-	runtime.KeepAlive(cellArea)
-	runtime.KeepAlive(flags)
-
-	var goret int
-
-	goret = int(cret)
 
 	return goret
 }
@@ -30218,26 +29882,6 @@ type CellRenderer interface {
 	gobject.InitiallyUnowned
 	upcastToGtkCellRenderer() *CellRendererInstance
 
-	// Activate wraps gtk_cell_renderer_activate
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- event *gdk.Event: a #GdkEvent 
-	// 	- widget Widget: widget that received the event 
-	// 	- path string: widget-dependent string representation of the event location;
-	//    e.g. for #GtkTreeView, a string representation of #GtkTreePath 
-	// 	- backgroundArea *gdk.Rectangle: background area as passed to gtk_cell_renderer_render() 
-	// 	- cellArea *gdk.Rectangle: cell area as passed to gtk_cell_renderer_render() 
-	// 	- flags CellRendererState: render flags 
-	// 
-	// The function returns the following values:
-	// 
-	// 	- goret bool 
-	//
-	// Passes an activate event to the cell renderer for possible processing.
-	// Some cell renderers may use events; for example, #GtkCellRendererToggle
-	// toggles when it gets a mouse click.
-	Activate(*gdk.Event, Widget, string, *gdk.Rectangle, *gdk.Rectangle, CellRendererState) bool
 	// GetAlignedArea wraps gtk_cell_renderer_get_aligned_area
 	// 
 	// The function takes the following parameters:
@@ -30459,25 +30103,6 @@ type CellRenderer interface {
 	//
 	// Sets the cell renderer’s visibility.
 	SetVisible(bool)
-	// StartEditing wraps gtk_cell_renderer_start_editing
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- event *gdk.Event (nullable): a #GdkEvent 
-	// 	- widget Widget: widget that received the event 
-	// 	- path string: widget-dependent string representation of the event location;
-	//    e.g. for #GtkTreeView, a string representation of #GtkTreePath 
-	// 	- backgroundArea *gdk.Rectangle: background area as passed to gtk_cell_renderer_render() 
-	// 	- cellArea *gdk.Rectangle: cell area as passed to gtk_cell_renderer_render() 
-	// 	- flags CellRendererState: render flags 
-	// 
-	// The function returns the following values:
-	// 
-	// 	- goret CellEditable 
-	//
-	// Starts editing the contents of this @cell, through a new #GtkCellEditable
-	// widget created by the #GtkCellRendererClass.start_editing virtual function.
-	StartEditing(*gdk.Event, Widget, string, *gdk.Rectangle, *gdk.Rectangle, CellRendererState) CellEditable
 	// StopEditing wraps gtk_cell_renderer_stop_editing
 	// 
 	// The function takes the following parameters:
@@ -30528,64 +30153,6 @@ func UnsafeCellRendererToGlibNone(c CellRenderer) unsafe.Pointer {
 // UnsafeCellRendererToGlibFull is used to convert the instance to it's C value GtkCellRenderer, while removeing the finalizer. This is used by the bindings internally.
 func UnsafeCellRendererToGlibFull(c CellRenderer) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
-}
-
-// Activate wraps gtk_cell_renderer_activate
-// 
-// The function takes the following parameters:
-// 
-// 	- event *gdk.Event: a #GdkEvent 
-// 	- widget Widget: widget that received the event 
-// 	- path string: widget-dependent string representation of the event location;
-//    e.g. for #GtkTreeView, a string representation of #GtkTreePath 
-// 	- backgroundArea *gdk.Rectangle: background area as passed to gtk_cell_renderer_render() 
-// 	- cellArea *gdk.Rectangle: cell area as passed to gtk_cell_renderer_render() 
-// 	- flags CellRendererState: render flags 
-// 
-// The function returns the following values:
-// 
-// 	- goret bool 
-//
-// Passes an activate event to the cell renderer for possible processing.
-// Some cell renderers may use events; for example, #GtkCellRendererToggle
-// toggles when it gets a mouse click.
-func (cell *CellRendererInstance) Activate(event *gdk.Event, widget Widget, path string, backgroundArea *gdk.Rectangle, cellArea *gdk.Rectangle, flags CellRendererState) bool {
-	var carg0 *C.GtkCellRenderer     // in, none, converted
-	var carg1 *C.GdkEvent            // in, transfer: none, C Pointers: 1, Name: Event
-	var carg2 *C.GtkWidget           // in, none, converted
-	var carg3 *C.gchar               // in, none, string
-	var carg4 *C.GdkRectangle        // in, none, converted
-	var carg5 *C.GdkRectangle        // in, none, converted
-	var carg6 C.GtkCellRendererState // in, none, casted
-	var cret  C.gboolean             // return
-
-	carg0 = (*C.GtkCellRenderer)(UnsafeCellRendererToGlibNone(cell))
-	_ = event
-	_ = carg1
-	panic("unimplemented conversion of *gdk.Event (GdkEvent*)")
-	carg2 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(widget))
-	carg3 = (*C.gchar)(unsafe.Pointer(C.CString(path)))
-	defer C.free(unsafe.Pointer(carg3))
-	carg4 = (*C.GdkRectangle)(gdk.UnsafeRectangleToGlibNone(backgroundArea))
-	carg5 = (*C.GdkRectangle)(gdk.UnsafeRectangleToGlibNone(cellArea))
-	carg6 = C.GtkCellRendererState(flags)
-
-	cret = C.gtk_cell_renderer_activate(carg0, carg1, carg2, carg3, carg4, carg5, carg6)
-	runtime.KeepAlive(cell)
-	runtime.KeepAlive(event)
-	runtime.KeepAlive(widget)
-	runtime.KeepAlive(path)
-	runtime.KeepAlive(backgroundArea)
-	runtime.KeepAlive(cellArea)
-	runtime.KeepAlive(flags)
-
-	var goret bool
-
-	if cret != 0 {
-		goret = true
-	}
-
-	return goret
 }
 
 // GetAlignedArea wraps gtk_cell_renderer_get_aligned_area
@@ -31191,63 +30758,6 @@ func (cell *CellRendererInstance) SetVisible(visible bool) {
 	C.gtk_cell_renderer_set_visible(carg0, carg1)
 	runtime.KeepAlive(cell)
 	runtime.KeepAlive(visible)
-}
-
-// StartEditing wraps gtk_cell_renderer_start_editing
-// 
-// The function takes the following parameters:
-// 
-// 	- event *gdk.Event (nullable): a #GdkEvent 
-// 	- widget Widget: widget that received the event 
-// 	- path string: widget-dependent string representation of the event location;
-//    e.g. for #GtkTreeView, a string representation of #GtkTreePath 
-// 	- backgroundArea *gdk.Rectangle: background area as passed to gtk_cell_renderer_render() 
-// 	- cellArea *gdk.Rectangle: cell area as passed to gtk_cell_renderer_render() 
-// 	- flags CellRendererState: render flags 
-// 
-// The function returns the following values:
-// 
-// 	- goret CellEditable 
-//
-// Starts editing the contents of this @cell, through a new #GtkCellEditable
-// widget created by the #GtkCellRendererClass.start_editing virtual function.
-func (cell *CellRendererInstance) StartEditing(event *gdk.Event, widget Widget, path string, backgroundArea *gdk.Rectangle, cellArea *gdk.Rectangle, flags CellRendererState) CellEditable {
-	var carg0 *C.GtkCellRenderer     // in, none, converted
-	var carg1 *C.GdkEvent            // in, transfer: none, C Pointers: 1, Name: Event, nullable, nullable
-	var carg2 *C.GtkWidget           // in, none, converted
-	var carg3 *C.gchar               // in, none, string
-	var carg4 *C.GdkRectangle        // in, none, converted
-	var carg5 *C.GdkRectangle        // in, none, converted
-	var carg6 C.GtkCellRendererState // in, none, casted
-	var cret  *C.GtkCellEditable     // return, none, converted
-
-	carg0 = (*C.GtkCellRenderer)(UnsafeCellRendererToGlibNone(cell))
-	if event != nil {
-		_ = event
-		_ = carg1
-		panic("unimplemented conversion of *gdk.Event (GdkEvent*)")
-	}
-	carg2 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(widget))
-	carg3 = (*C.gchar)(unsafe.Pointer(C.CString(path)))
-	defer C.free(unsafe.Pointer(carg3))
-	carg4 = (*C.GdkRectangle)(gdk.UnsafeRectangleToGlibNone(backgroundArea))
-	carg5 = (*C.GdkRectangle)(gdk.UnsafeRectangleToGlibNone(cellArea))
-	carg6 = C.GtkCellRendererState(flags)
-
-	cret = C.gtk_cell_renderer_start_editing(carg0, carg1, carg2, carg3, carg4, carg5, carg6)
-	runtime.KeepAlive(cell)
-	runtime.KeepAlive(event)
-	runtime.KeepAlive(widget)
-	runtime.KeepAlive(path)
-	runtime.KeepAlive(backgroundArea)
-	runtime.KeepAlive(cellArea)
-	runtime.KeepAlive(flags)
-
-	var goret CellEditable
-
-	goret = UnsafeCellEditableFromGlibNone(unsafe.Pointer(cret))
-
-	return goret
 }
 
 // StopEditing wraps gtk_cell_renderer_stop_editing
@@ -34780,19 +34290,6 @@ type EventController interface {
 	//
 	// Returns the #GtkWidget this controller relates to.
 	GetWidget() Widget
-	// HandleEvent wraps gtk_event_controller_handle_event
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- event *gdk.Event: a #GdkEvent 
-	// 
-	// The function returns the following values:
-	// 
-	// 	- goret bool 
-	//
-	// Feeds an events into @controller, so it can be interpreted
-	// and the controller actions triggered.
-	HandleEvent(*gdk.Event) bool
 	// Reset wraps gtk_event_controller_reset
 	//
 	// Resets the @controller to a clean state. Every interaction
@@ -34887,41 +34384,6 @@ func (controller *EventControllerInstance) GetWidget() Widget {
 	var goret Widget
 
 	goret = UnsafeWidgetFromGlibNone(unsafe.Pointer(cret))
-
-	return goret
-}
-
-// HandleEvent wraps gtk_event_controller_handle_event
-// 
-// The function takes the following parameters:
-// 
-// 	- event *gdk.Event: a #GdkEvent 
-// 
-// The function returns the following values:
-// 
-// 	- goret bool 
-//
-// Feeds an events into @controller, so it can be interpreted
-// and the controller actions triggered.
-func (controller *EventControllerInstance) HandleEvent(event *gdk.Event) bool {
-	var carg0 *C.GtkEventController // in, none, converted
-	var carg1 *C.GdkEvent           // in, transfer: none, C Pointers: 1, Name: Event
-	var cret  C.gboolean            // return
-
-	carg0 = (*C.GtkEventController)(UnsafeEventControllerToGlibNone(controller))
-	_ = event
-	_ = carg1
-	panic("unimplemented conversion of *gdk.Event (GdkEvent*)")
-
-	cret = C.gtk_event_controller_handle_event(carg0, carg1)
-	runtime.KeepAlive(controller)
-	runtime.KeepAlive(event)
-
-	var goret bool
-
-	if cret != 0 {
-		goret = true
-	}
 
 	return goret
 }
@@ -35960,22 +35422,6 @@ type Gesture interface {
 	// Returns the master #GdkDevice that is currently operating
 	// on @gesture, or %NULL if the gesture is not being interacted.
 	GetDevice() gdk.Device
-	// GetLastEvent wraps gtk_gesture_get_last_event
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- sequence *gdk.EventSequence (nullable): a #GdkEventSequence 
-	// 
-	// The function returns the following values:
-	// 
-	// 	- goret *gdk.Event 
-	//
-	// Returns the last event that was processed for @sequence.
-	// 
-	// Note that the returned pointer is only valid as long as the @sequence
-	// is still interpreted by the @gesture. If in doubt, you should make
-	// a copy of the event.
-	GetLastEvent(*gdk.EventSequence) *gdk.Event
 	// GetLastUpdatedSequence wraps gtk_gesture_get_last_updated_sequence
 	// The function returns the following values:
 	// 
@@ -36296,44 +35742,6 @@ func (gesture *GestureInstance) GetDevice() gdk.Device {
 	var goret gdk.Device
 
 	goret = gdk.UnsafeDeviceFromGlibNone(unsafe.Pointer(cret))
-
-	return goret
-}
-
-// GetLastEvent wraps gtk_gesture_get_last_event
-// 
-// The function takes the following parameters:
-// 
-// 	- sequence *gdk.EventSequence (nullable): a #GdkEventSequence 
-// 
-// The function returns the following values:
-// 
-// 	- goret *gdk.Event 
-//
-// Returns the last event that was processed for @sequence.
-// 
-// Note that the returned pointer is only valid as long as the @sequence
-// is still interpreted by the @gesture. If in doubt, you should make
-// a copy of the event.
-func (gesture *GestureInstance) GetLastEvent(sequence *gdk.EventSequence) *gdk.Event {
-	var carg0 *C.GtkGesture       // in, none, converted
-	var carg1 *C.GdkEventSequence // in, none, converted, nullable
-	var cret  *C.GdkEvent         // return, transfer: none, C Pointers: 1, Name: Event, scope: 
-
-	carg0 = (*C.GtkGesture)(UnsafeGestureToGlibNone(gesture))
-	if sequence != nil {
-		carg1 = (*C.GdkEventSequence)(gdk.UnsafeEventSequenceToGlibNone(sequence))
-	}
-
-	cret = C.gtk_gesture_get_last_event(carg0, carg1)
-	runtime.KeepAlive(gesture)
-	runtime.KeepAlive(sequence)
-
-	var goret *gdk.Event
-
-	_ = goret
-	_ = cret
-	panic("unimplemented conversion of *gdk.Event (GdkEvent*)")
 
 	return goret
 }
@@ -59101,20 +58509,6 @@ type TextTag interface {
 	// The signal is already emitted when setting a #GtkTextTag property. This
 	// function is useful for a #GtkTextTag subclass.
 	Changed(bool)
-	// Event wraps gtk_text_tag_event
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- eventObject gobject.Object: object that received the event, such as a widget 
-	// 	- event *gdk.Event: the event 
-	// 	- iter *TextIter: location where the event was received 
-	// 
-	// The function returns the following values:
-	// 
-	// 	- goret bool 
-	//
-	// Emits the “event” signal on the #GtkTextTag.
-	Event(gobject.Object, *gdk.Event, *TextIter) bool
 	// GetPriority wraps gtk_text_tag_get_priority
 	// The function returns the following values:
 	// 
@@ -59230,48 +58624,6 @@ func (tag *TextTagInstance) Changed(sizeChanged bool) {
 	C.gtk_text_tag_changed(carg0, carg1)
 	runtime.KeepAlive(tag)
 	runtime.KeepAlive(sizeChanged)
-}
-
-// Event wraps gtk_text_tag_event
-// 
-// The function takes the following parameters:
-// 
-// 	- eventObject gobject.Object: object that received the event, such as a widget 
-// 	- event *gdk.Event: the event 
-// 	- iter *TextIter: location where the event was received 
-// 
-// The function returns the following values:
-// 
-// 	- goret bool 
-//
-// Emits the “event” signal on the #GtkTextTag.
-func (tag *TextTagInstance) Event(eventObject gobject.Object, event *gdk.Event, iter *TextIter) bool {
-	var carg0 *C.GtkTextTag  // in, none, converted
-	var carg1 *C.GObject     // in, none, converted
-	var carg2 *C.GdkEvent    // in, transfer: none, C Pointers: 1, Name: Event
-	var carg3 *C.GtkTextIter // in, none, converted
-	var cret  C.gboolean     // return
-
-	carg0 = (*C.GtkTextTag)(UnsafeTextTagToGlibNone(tag))
-	carg1 = (*C.GObject)(gobject.UnsafeObjectToGlibNone(eventObject))
-	_ = event
-	_ = carg2
-	panic("unimplemented conversion of *gdk.Event (GdkEvent*)")
-	carg3 = (*C.GtkTextIter)(UnsafeTextIterToGlibNone(iter))
-
-	cret = C.gtk_text_tag_event(carg0, carg1, carg2, carg3)
-	runtime.KeepAlive(tag)
-	runtime.KeepAlive(eventObject)
-	runtime.KeepAlive(event)
-	runtime.KeepAlive(iter)
-
-	var goret bool
-
-	if cret != 0 {
-		goret = true
-	}
-
-	return goret
 }
 
 // GetPriority wraps gtk_text_tag_get_priority
@@ -67333,73 +66685,6 @@ type Widget interface {
 	// #GtkWidget::grab-notify signal to check for specific
 	// devices. See gtk_device_grab_add().
 	DeviceIsShadowed(gdk.Device) bool
-	// DragBegin wraps gtk_drag_begin
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- targets *TargetList: The targets (data formats) in which the
-	//    source can provide the data 
-	// 	- actions gdk.DragAction: A bitmask of the allowed drag actions for this drag 
-	// 	- button int: The button the user clicked to start the drag 
-	// 	- event *gdk.Event (nullable): The event that triggered the start of the drag,
-	//    or %NULL if none can be obtained. 
-	// 
-	// The function returns the following values:
-	// 
-	// 	- goret gdk.DragContext 
-	//
-	// This function is equivalent to gtk_drag_begin_with_coordinates(),
-	// passing -1, -1 as coordinates.
-	//
-	// Deprecated: (since 3.10.0) Use gtk_drag_begin_with_coordinates() instead
-	DragBegin(*TargetList, gdk.DragAction, int, *gdk.Event) gdk.DragContext
-	// DragBeginWithCoordinates wraps gtk_drag_begin_with_coordinates
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- targets *TargetList: The targets (data formats) in which the
-	//    source can provide the data 
-	// 	- actions gdk.DragAction: A bitmask of the allowed drag actions for this drag 
-	// 	- button int: The button the user clicked to start the drag 
-	// 	- event *gdk.Event (nullable): The event that triggered the start of the drag,
-	//    or %NULL if none can be obtained. 
-	// 	- x int: The initial x coordinate to start dragging from, in the coordinate space
-	//    of @widget. If -1 is passed, the coordinates are retrieved from @event or
-	//    the current pointer position 
-	// 	- y int: The initial y coordinate to start dragging from, in the coordinate space
-	//    of @widget. If -1 is passed, the coordinates are retrieved from @event or
-	//    the current pointer position 
-	// 
-	// The function returns the following values:
-	// 
-	// 	- goret gdk.DragContext 
-	//
-	// Initiates a drag on the source side. The function only needs to be used
-	// when the application is starting drags itself, and is not needed when
-	// gtk_drag_source_set() is used.
-	// 
-	// The @event is used to retrieve the timestamp that will be used internally to
-	// grab the pointer.  If @event is %NULL, then %GDK_CURRENT_TIME will be used.
-	// However, you should try to pass a real event in all cases, since that can be
-	// used to get information about the drag.
-	// 
-	// Generally there are three cases when you want to start a drag by hand by
-	// calling this function:
-	// 
-	// 1. During a #GtkWidget::button-press-event handler, if you want to start a drag
-	// immediately when the user presses the mouse button.  Pass the @event
-	// that you have in your #GtkWidget::button-press-event handler.
-	// 
-	// 2. During a #GtkWidget::motion-notify-event handler, if you want to start a drag
-	// when the mouse moves past a certain threshold distance after a button-press.
-	// Pass the @event that you have in your #GtkWidget::motion-notify-event handler.
-	// 
-	// 3. During a timeout handler, if you want to start a drag after the mouse
-	// button is held down for some time.  Try to save the last event that you got
-	// from the mouse, using gdk_event_copy(), and pass it to this function
-	// (remember to free the event with gdk_event_free() when you are done).
-	// If you really cannot pass a real event, pass %NULL instead.
-	DragBeginWithCoordinates(*TargetList, gdk.DragAction, int, *gdk.Event, int, int) gdk.DragContext
 	// DragCheckThreshold wraps gtk_drag_check_threshold
 	// 
 	// The function takes the following parameters:
@@ -67680,25 +66965,6 @@ type Widget interface {
 	// ways, depending on the windowing backend and the desktop environment
 	// or window manager that is used.
 	ErrorBell()
-	// Event wraps gtk_widget_event
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- event *gdk.Event: a #GdkEvent 
-	// 
-	// The function returns the following values:
-	// 
-	// 	- goret bool 
-	//
-	// Rarely-used function. This function is used to emit
-	// the event signals on a widget (those signals should never
-	// be emitted without using this function to do so).
-	// If you want to synthesize an event though, don’t use this function;
-	// instead, use gtk_main_do_event() so the event will behave as if
-	// it were in the event queue. Don’t synthesize expose events; instead,
-	// use gdk_window_invalidate_rect() to invalidate a region of the
-	// window.
-	Event(*gdk.Event) bool
 	// FreezeChildNotify wraps gtk_widget_freeze_child_notify
 	//
 	// Stops emission of #GtkWidget::child-notify signals on @widget. The
@@ -69520,66 +68786,6 @@ type Widget interface {
 	// to use this on a child when reordering it in a way that a different
 	// style might apply to it. See also gtk_container_get_path_for_child().
 	ResetStyle()
-	// SendExpose wraps gtk_widget_send_expose
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- event *gdk.Event: a expose #GdkEvent 
-	// 
-	// The function returns the following values:
-	// 
-	// 	- goret int 
-	//
-	// Very rarely-used function. This function is used to emit
-	// an expose event on a widget. This function is not normally used
-	// directly. The only time it is used is when propagating an expose
-	// event to a windowless child widget (gtk_widget_get_has_window() is %FALSE),
-	// and that is normally done using gtk_container_propagate_draw().
-	// 
-	// If you want to force an area of a window to be redrawn,
-	// use gdk_window_invalidate_rect() or gdk_window_invalidate_region().
-	// To cause the redraw to be done immediately, follow that call
-	// with a call to gdk_window_process_updates().
-	//
-	// Deprecated: (since 3.22.0) Application and widget code should not handle
-	//   expose events directly; invalidation should use the #GtkWidget
-	//   API, and drawing should only happen inside #GtkWidget::draw
-	//   implementations
-	SendExpose(*gdk.Event) int
-	// SendFocusChange wraps gtk_widget_send_focus_change
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- event *gdk.Event: a #GdkEvent of type GDK_FOCUS_CHANGE 
-	// 
-	// The function returns the following values:
-	// 
-	// 	- goret bool 
-	//
-	// Sends the focus change @event to @widget
-	// 
-	// This function is not meant to be used by applications. The only time it
-	// should be used is when it is necessary for a #GtkWidget to assign focus
-	// to a widget that is semantically owned by the first widget even though
-	// it’s not a direct child - for instance, a search entry in a floating
-	// window similar to the quick search in #GtkTreeView.
-	// 
-	// An example of its usage is:
-	// 
-	// |[&lt;!-- language="C" --&gt;
-	//   GdkEvent *fevent = gdk_event_new (GDK_FOCUS_CHANGE);
-	// 
-	//   fevent-&gt;focus_change.type = GDK_FOCUS_CHANGE;
-	//   fevent-&gt;focus_change.in = TRUE;
-	//   fevent-&gt;focus_change.window = _gtk_widget_get_window (widget);
-	//   if (fevent-&gt;focus_change.window != NULL)
-	//     g_object_ref (fevent-&gt;focus_change.window);
-	// 
-	//   gtk_widget_send_focus_change (widget, fevent);
-	// 
-	//   gdk_event_free (event);
-	// ]|
-	SendFocusChange(*gdk.Event) bool
 	// SetAccelPath wraps gtk_widget_set_accel_path
 	// 
 	// The function takes the following parameters:
@@ -71185,141 +70391,6 @@ func (widget *WidgetInstance) DeviceIsShadowed(device gdk.Device) bool {
 	return goret
 }
 
-// DragBegin wraps gtk_drag_begin
-// 
-// The function takes the following parameters:
-// 
-// 	- targets *TargetList: The targets (data formats) in which the
-//    source can provide the data 
-// 	- actions gdk.DragAction: A bitmask of the allowed drag actions for this drag 
-// 	- button int: The button the user clicked to start the drag 
-// 	- event *gdk.Event (nullable): The event that triggered the start of the drag,
-//    or %NULL if none can be obtained. 
-// 
-// The function returns the following values:
-// 
-// 	- goret gdk.DragContext 
-//
-// This function is equivalent to gtk_drag_begin_with_coordinates(),
-// passing -1, -1 as coordinates.
-//
-// Deprecated: (since 3.10.0) Use gtk_drag_begin_with_coordinates() instead
-func (widget *WidgetInstance) DragBegin(targets *TargetList, actions gdk.DragAction, button int, event *gdk.Event) gdk.DragContext {
-	var carg0 *C.GtkWidget      // in, none, converted
-	var carg1 *C.GtkTargetList  // in, none, converted
-	var carg2 C.GdkDragAction   // in, none, casted
-	var carg3 C.int             // in, none, casted
-	var carg4 *C.GdkEvent       // in, transfer: none, C Pointers: 1, Name: Event, nullable, nullable
-	var cret  *C.GdkDragContext // return, none, converted
-
-	carg0 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(widget))
-	carg1 = (*C.GtkTargetList)(UnsafeTargetListToGlibNone(targets))
-	carg2 = C.GdkDragAction(actions)
-	carg3 = C.int(button)
-	if event != nil {
-		_ = event
-		_ = carg4
-		panic("unimplemented conversion of *gdk.Event (GdkEvent*)")
-	}
-
-	cret = C.gtk_drag_begin(carg0, carg1, carg2, carg3, carg4)
-	runtime.KeepAlive(widget)
-	runtime.KeepAlive(targets)
-	runtime.KeepAlive(actions)
-	runtime.KeepAlive(button)
-	runtime.KeepAlive(event)
-
-	var goret gdk.DragContext
-
-	goret = gdk.UnsafeDragContextFromGlibNone(unsafe.Pointer(cret))
-
-	return goret
-}
-
-// DragBeginWithCoordinates wraps gtk_drag_begin_with_coordinates
-// 
-// The function takes the following parameters:
-// 
-// 	- targets *TargetList: The targets (data formats) in which the
-//    source can provide the data 
-// 	- actions gdk.DragAction: A bitmask of the allowed drag actions for this drag 
-// 	- button int: The button the user clicked to start the drag 
-// 	- event *gdk.Event (nullable): The event that triggered the start of the drag,
-//    or %NULL if none can be obtained. 
-// 	- x int: The initial x coordinate to start dragging from, in the coordinate space
-//    of @widget. If -1 is passed, the coordinates are retrieved from @event or
-//    the current pointer position 
-// 	- y int: The initial y coordinate to start dragging from, in the coordinate space
-//    of @widget. If -1 is passed, the coordinates are retrieved from @event or
-//    the current pointer position 
-// 
-// The function returns the following values:
-// 
-// 	- goret gdk.DragContext 
-//
-// Initiates a drag on the source side. The function only needs to be used
-// when the application is starting drags itself, and is not needed when
-// gtk_drag_source_set() is used.
-// 
-// The @event is used to retrieve the timestamp that will be used internally to
-// grab the pointer.  If @event is %NULL, then %GDK_CURRENT_TIME will be used.
-// However, you should try to pass a real event in all cases, since that can be
-// used to get information about the drag.
-// 
-// Generally there are three cases when you want to start a drag by hand by
-// calling this function:
-// 
-// 1. During a #GtkWidget::button-press-event handler, if you want to start a drag
-// immediately when the user presses the mouse button.  Pass the @event
-// that you have in your #GtkWidget::button-press-event handler.
-// 
-// 2. During a #GtkWidget::motion-notify-event handler, if you want to start a drag
-// when the mouse moves past a certain threshold distance after a button-press.
-// Pass the @event that you have in your #GtkWidget::motion-notify-event handler.
-// 
-// 3. During a timeout handler, if you want to start a drag after the mouse
-// button is held down for some time.  Try to save the last event that you got
-// from the mouse, using gdk_event_copy(), and pass it to this function
-// (remember to free the event with gdk_event_free() when you are done).
-// If you really cannot pass a real event, pass %NULL instead.
-func (widget *WidgetInstance) DragBeginWithCoordinates(targets *TargetList, actions gdk.DragAction, button int, event *gdk.Event, x int, y int) gdk.DragContext {
-	var carg0 *C.GtkWidget      // in, none, converted
-	var carg1 *C.GtkTargetList  // in, none, converted
-	var carg2 C.GdkDragAction   // in, none, casted
-	var carg3 C.int             // in, none, casted
-	var carg4 *C.GdkEvent       // in, transfer: none, C Pointers: 1, Name: Event, nullable, nullable
-	var carg5 C.int             // in, none, casted
-	var carg6 C.int             // in, none, casted
-	var cret  *C.GdkDragContext // return, none, converted
-
-	carg0 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(widget))
-	carg1 = (*C.GtkTargetList)(UnsafeTargetListToGlibNone(targets))
-	carg2 = C.GdkDragAction(actions)
-	carg3 = C.int(button)
-	if event != nil {
-		_ = event
-		_ = carg4
-		panic("unimplemented conversion of *gdk.Event (GdkEvent*)")
-	}
-	carg5 = C.int(x)
-	carg6 = C.int(y)
-
-	cret = C.gtk_drag_begin_with_coordinates(carg0, carg1, carg2, carg3, carg4, carg5, carg6)
-	runtime.KeepAlive(widget)
-	runtime.KeepAlive(targets)
-	runtime.KeepAlive(actions)
-	runtime.KeepAlive(button)
-	runtime.KeepAlive(event)
-	runtime.KeepAlive(x)
-	runtime.KeepAlive(y)
-
-	var goret gdk.DragContext
-
-	goret = gdk.UnsafeDragContextFromGlibNone(unsafe.Pointer(cret))
-
-	return goret
-}
-
 // DragCheckThreshold wraps gtk_drag_check_threshold
 // 
 // The function takes the following parameters:
@@ -71916,47 +70987,6 @@ func (widget *WidgetInstance) ErrorBell() {
 
 	C.gtk_widget_error_bell(carg0)
 	runtime.KeepAlive(widget)
-}
-
-// Event wraps gtk_widget_event
-// 
-// The function takes the following parameters:
-// 
-// 	- event *gdk.Event: a #GdkEvent 
-// 
-// The function returns the following values:
-// 
-// 	- goret bool 
-//
-// Rarely-used function. This function is used to emit
-// the event signals on a widget (those signals should never
-// be emitted without using this function to do so).
-// If you want to synthesize an event though, don’t use this function;
-// instead, use gtk_main_do_event() so the event will behave as if
-// it were in the event queue. Don’t synthesize expose events; instead,
-// use gdk_window_invalidate_rect() to invalidate a region of the
-// window.
-func (widget *WidgetInstance) Event(event *gdk.Event) bool {
-	var carg0 *C.GtkWidget // in, none, converted
-	var carg1 *C.GdkEvent  // in, transfer: none, C Pointers: 1, Name: Event
-	var cret  C.gboolean   // return
-
-	carg0 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(widget))
-	_ = event
-	_ = carg1
-	panic("unimplemented conversion of *gdk.Event (GdkEvent*)")
-
-	cret = C.gtk_widget_event(carg0, carg1)
-	runtime.KeepAlive(widget)
-	runtime.KeepAlive(event)
-
-	var goret bool
-
-	if cret != 0 {
-		goret = true
-	}
-
-	return goret
 }
 
 // FreezeChildNotify wraps gtk_widget_freeze_child_notify
@@ -75921,108 +74951,6 @@ func (widget *WidgetInstance) ResetStyle() {
 
 	C.gtk_widget_reset_style(carg0)
 	runtime.KeepAlive(widget)
-}
-
-// SendExpose wraps gtk_widget_send_expose
-// 
-// The function takes the following parameters:
-// 
-// 	- event *gdk.Event: a expose #GdkEvent 
-// 
-// The function returns the following values:
-// 
-// 	- goret int 
-//
-// Very rarely-used function. This function is used to emit
-// an expose event on a widget. This function is not normally used
-// directly. The only time it is used is when propagating an expose
-// event to a windowless child widget (gtk_widget_get_has_window() is %FALSE),
-// and that is normally done using gtk_container_propagate_draw().
-// 
-// If you want to force an area of a window to be redrawn,
-// use gdk_window_invalidate_rect() or gdk_window_invalidate_region().
-// To cause the redraw to be done immediately, follow that call
-// with a call to gdk_window_process_updates().
-//
-// Deprecated: (since 3.22.0) Application and widget code should not handle
-//   expose events directly; invalidation should use the #GtkWidget
-//   API, and drawing should only happen inside #GtkWidget::draw
-//   implementations
-func (widget *WidgetInstance) SendExpose(event *gdk.Event) int {
-	var carg0 *C.GtkWidget // in, none, converted
-	var carg1 *C.GdkEvent  // in, transfer: none, C Pointers: 1, Name: Event
-	var cret  C.int        // return, none, casted
-
-	carg0 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(widget))
-	_ = event
-	_ = carg1
-	panic("unimplemented conversion of *gdk.Event (GdkEvent*)")
-
-	cret = C.gtk_widget_send_expose(carg0, carg1)
-	runtime.KeepAlive(widget)
-	runtime.KeepAlive(event)
-
-	var goret int
-
-	goret = int(cret)
-
-	return goret
-}
-
-// SendFocusChange wraps gtk_widget_send_focus_change
-// 
-// The function takes the following parameters:
-// 
-// 	- event *gdk.Event: a #GdkEvent of type GDK_FOCUS_CHANGE 
-// 
-// The function returns the following values:
-// 
-// 	- goret bool 
-//
-// Sends the focus change @event to @widget
-// 
-// This function is not meant to be used by applications. The only time it
-// should be used is when it is necessary for a #GtkWidget to assign focus
-// to a widget that is semantically owned by the first widget even though
-// it’s not a direct child - for instance, a search entry in a floating
-// window similar to the quick search in #GtkTreeView.
-// 
-// An example of its usage is:
-// 
-// |[&lt;!-- language="C" --&gt;
-//   GdkEvent *fevent = gdk_event_new (GDK_FOCUS_CHANGE);
-// 
-//   fevent-&gt;focus_change.type = GDK_FOCUS_CHANGE;
-//   fevent-&gt;focus_change.in = TRUE;
-//   fevent-&gt;focus_change.window = _gtk_widget_get_window (widget);
-//   if (fevent-&gt;focus_change.window != NULL)
-//     g_object_ref (fevent-&gt;focus_change.window);
-// 
-//   gtk_widget_send_focus_change (widget, fevent);
-// 
-//   gdk_event_free (event);
-// ]|
-func (widget *WidgetInstance) SendFocusChange(event *gdk.Event) bool {
-	var carg0 *C.GtkWidget // in, none, converted
-	var carg1 *C.GdkEvent  // in, transfer: none, C Pointers: 1, Name: Event
-	var cret  C.gboolean   // return
-
-	carg0 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(widget))
-	_ = event
-	_ = carg1
-	panic("unimplemented conversion of *gdk.Event (GdkEvent*)")
-
-	cret = C.gtk_widget_send_focus_change(carg0, carg1)
-	runtime.KeepAlive(widget)
-	runtime.KeepAlive(event)
-
-	var goret bool
-
-	if cret != 0 {
-		goret = true
-	}
-
-	return goret
 }
 
 // SetAccelPath wraps gtk_widget_set_accel_path
@@ -100863,29 +99791,6 @@ var _ SearchEntry = (*SearchEntryInstance)(nil)
 type SearchEntry interface {
 	Entry
 	upcastToGtkSearchEntry() *SearchEntryInstance
-
-	// HandleEvent wraps gtk_search_entry_handle_event
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- event *gdk.Event: a key event 
-	// 
-	// The function returns the following values:
-	// 
-	// 	- goret bool 
-	//
-	// This function should be called when the top-level window
-	// which contains the search entry received a key event. If
-	// the entry is part of a #GtkSearchBar, it is preferable
-	// to call gtk_search_bar_handle_event() instead, which will
-	// reveal the entry in addition to passing the event to this
-	// function.
-	// 
-	// If the key event is handled by the search entry and starts
-	// or continues a search, %GDK_EVENT_STOP will be returned.
-	// The caller should ensure that the entry is shown in this
-	// case, and not propagate the event further.
-	HandleEvent(*gdk.Event) bool
 }
 
 func unsafeWrapSearchEntry(base *gobject.ObjectInstance) *SearchEntryInstance {
@@ -100955,50 +99860,6 @@ func NewSearchEntryInstance() Widget {
 	var goret Widget
 
 	goret = UnsafeWidgetFromGlibNone(unsafe.Pointer(cret))
-
-	return goret
-}
-
-// HandleEvent wraps gtk_search_entry_handle_event
-// 
-// The function takes the following parameters:
-// 
-// 	- event *gdk.Event: a key event 
-// 
-// The function returns the following values:
-// 
-// 	- goret bool 
-//
-// This function should be called when the top-level window
-// which contains the search entry received a key event. If
-// the entry is part of a #GtkSearchBar, it is preferable
-// to call gtk_search_bar_handle_event() instead, which will
-// reveal the entry in addition to passing the event to this
-// function.
-// 
-// If the key event is handled by the search entry and starts
-// or continues a search, %GDK_EVENT_STOP will be returned.
-// The caller should ensure that the entry is shown in this
-// case, and not propagate the event further.
-func (entry *SearchEntryInstance) HandleEvent(event *gdk.Event) bool {
-	var carg0 *C.GtkSearchEntry // in, none, converted
-	var carg1 *C.GdkEvent       // in, transfer: none, C Pointers: 1, Name: Event
-	var cret  C.gboolean        // return
-
-	carg0 = (*C.GtkSearchEntry)(UnsafeSearchEntryToGlibNone(entry))
-	_ = event
-	_ = carg1
-	panic("unimplemented conversion of *gdk.Event (GdkEvent*)")
-
-	cret = C.gtk_search_entry_handle_event(carg0, carg1)
-	runtime.KeepAlive(entry)
-	runtime.KeepAlive(event)
-
-	var goret bool
-
-	if cret != 0 {
-		goret = true
-	}
 
 	return goret
 }
@@ -129235,87 +128096,6 @@ type Menu interface {
 	//
 	// Removes the menu from the screen.
 	Popdown()
-	// PopupAtPointer wraps gtk_menu_popup_at_pointer
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- triggerEvent *gdk.Event (nullable): the #GdkEvent that initiated this request or
-	//                 %NULL if it's the current event 
-	//
-	// Displays @menu and makes it available for selection.
-	// 
-	// See gtk_menu_popup_at_widget () to pop up a menu at a widget.
-	// gtk_menu_popup_at_rect () also allows you to position a menu at an arbitrary
-	// rectangle.
-	// 
-	// @menu will be positioned at the pointer associated with @trigger_event.
-	// 
-	// Properties that influence the behaviour of this function are
-	// #GtkMenu:anchor-hints, #GtkMenu:rect-anchor-dx, #GtkMenu:rect-anchor-dy, and
-	// #GtkMenu:menu-type-hint. Connect to the #GtkMenu::popped-up signal to find
-	// out how it was actually positioned.
-	PopupAtPointer(*gdk.Event)
-	// PopupAtRect wraps gtk_menu_popup_at_rect
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- rectWindow gdk.Window: the #GdkWindow @rect is relative to 
-	// 	- rect *gdk.Rectangle: the #GdkRectangle to align @menu with 
-	// 	- rectAnchor gdk.Gravity: the point on @rect to align with @menu's anchor point 
-	// 	- menuAnchor gdk.Gravity: the point on @menu to align with @rect's anchor point 
-	// 	- triggerEvent *gdk.Event (nullable): the #GdkEvent that initiated this request or
-	//                 %NULL if it's the current event 
-	//
-	// Displays @menu and makes it available for selection.
-	// 
-	// See gtk_menu_popup_at_widget () and gtk_menu_popup_at_pointer (), which
-	// handle more common cases for popping up menus.
-	// 
-	// @menu will be positioned at @rect, aligning their anchor points. @rect is
-	// relative to the top-left corner of @rect_window. @rect_anchor and
-	// @menu_anchor determine anchor points on @rect and @menu to pin together.
-	// @menu can optionally be offset by #GtkMenu:rect-anchor-dx and
-	// #GtkMenu:rect-anchor-dy.
-	// 
-	// Anchors should be specified under the assumption that the text direction is
-	// left-to-right; they will be flipped horizontally automatically if the text
-	// direction is right-to-left.
-	// 
-	// Other properties that influence the behaviour of this function are
-	// #GtkMenu:anchor-hints and #GtkMenu:menu-type-hint. Connect to the
-	// #GtkMenu::popped-up signal to find out how it was actually positioned.
-	PopupAtRect(gdk.Window, *gdk.Rectangle, gdk.Gravity, gdk.Gravity, *gdk.Event)
-	// PopupAtWidget wraps gtk_menu_popup_at_widget
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- widget Widget: the #GtkWidget to align @menu with 
-	// 	- widgetAnchor gdk.Gravity: the point on @widget to align with @menu's anchor point 
-	// 	- menuAnchor gdk.Gravity: the point on @menu to align with @widget's anchor point 
-	// 	- triggerEvent *gdk.Event (nullable): the #GdkEvent that initiated this request or
-	//                 %NULL if it's the current event 
-	//
-	// Displays @menu and makes it available for selection.
-	// 
-	// See gtk_menu_popup_at_pointer () to pop up a menu at the master pointer.
-	// gtk_menu_popup_at_rect () also allows you to position a menu at an arbitrary
-	// rectangle.
-	// 
-	// ![](popup-anchors.png)
-	// 
-	// @menu will be positioned at @widget, aligning their anchor points.
-	// @widget_anchor and @menu_anchor determine anchor points on @widget and @menu
-	// to pin together. @menu can optionally be offset by #GtkMenu:rect-anchor-dx
-	// and #GtkMenu:rect-anchor-dy.
-	// 
-	// Anchors should be specified under the assumption that the text direction is
-	// left-to-right; they will be flipped horizontally automatically if the text
-	// direction is right-to-left.
-	// 
-	// Other properties that influence the behaviour of this function are
-	// #GtkMenu:anchor-hints and #GtkMenu:menu-type-hint. Connect to the
-	// #GtkMenu::popped-up signal to find out how it was actually positioned.
-	PopupAtWidget(Widget, gdk.Gravity, gdk.Gravity, *gdk.Event)
 	// ReorderChild wraps gtk_menu_reorder_child
 	// 
 	// The function takes the following parameters:
@@ -129822,153 +128602,6 @@ func (menu *MenuInstance) Popdown() {
 
 	C.gtk_menu_popdown(carg0)
 	runtime.KeepAlive(menu)
-}
-
-// PopupAtPointer wraps gtk_menu_popup_at_pointer
-// 
-// The function takes the following parameters:
-// 
-// 	- triggerEvent *gdk.Event (nullable): the #GdkEvent that initiated this request or
-//                 %NULL if it's the current event 
-//
-// Displays @menu and makes it available for selection.
-// 
-// See gtk_menu_popup_at_widget () to pop up a menu at a widget.
-// gtk_menu_popup_at_rect () also allows you to position a menu at an arbitrary
-// rectangle.
-// 
-// @menu will be positioned at the pointer associated with @trigger_event.
-// 
-// Properties that influence the behaviour of this function are
-// #GtkMenu:anchor-hints, #GtkMenu:rect-anchor-dx, #GtkMenu:rect-anchor-dy, and
-// #GtkMenu:menu-type-hint. Connect to the #GtkMenu::popped-up signal to find
-// out how it was actually positioned.
-func (menu *MenuInstance) PopupAtPointer(triggerEvent *gdk.Event) {
-	var carg0 *C.GtkMenu  // in, none, converted
-	var carg1 *C.GdkEvent // in, transfer: none, C Pointers: 1, Name: Event, nullable, nullable
-
-	carg0 = (*C.GtkMenu)(UnsafeMenuToGlibNone(menu))
-	if triggerEvent != nil {
-		_ = triggerEvent
-		_ = carg1
-		panic("unimplemented conversion of *gdk.Event (GdkEvent*)")
-	}
-
-	C.gtk_menu_popup_at_pointer(carg0, carg1)
-	runtime.KeepAlive(menu)
-	runtime.KeepAlive(triggerEvent)
-}
-
-// PopupAtRect wraps gtk_menu_popup_at_rect
-// 
-// The function takes the following parameters:
-// 
-// 	- rectWindow gdk.Window: the #GdkWindow @rect is relative to 
-// 	- rect *gdk.Rectangle: the #GdkRectangle to align @menu with 
-// 	- rectAnchor gdk.Gravity: the point on @rect to align with @menu's anchor point 
-// 	- menuAnchor gdk.Gravity: the point on @menu to align with @rect's anchor point 
-// 	- triggerEvent *gdk.Event (nullable): the #GdkEvent that initiated this request or
-//                 %NULL if it's the current event 
-//
-// Displays @menu and makes it available for selection.
-// 
-// See gtk_menu_popup_at_widget () and gtk_menu_popup_at_pointer (), which
-// handle more common cases for popping up menus.
-// 
-// @menu will be positioned at @rect, aligning their anchor points. @rect is
-// relative to the top-left corner of @rect_window. @rect_anchor and
-// @menu_anchor determine anchor points on @rect and @menu to pin together.
-// @menu can optionally be offset by #GtkMenu:rect-anchor-dx and
-// #GtkMenu:rect-anchor-dy.
-// 
-// Anchors should be specified under the assumption that the text direction is
-// left-to-right; they will be flipped horizontally automatically if the text
-// direction is right-to-left.
-// 
-// Other properties that influence the behaviour of this function are
-// #GtkMenu:anchor-hints and #GtkMenu:menu-type-hint. Connect to the
-// #GtkMenu::popped-up signal to find out how it was actually positioned.
-func (menu *MenuInstance) PopupAtRect(rectWindow gdk.Window, rect *gdk.Rectangle, rectAnchor gdk.Gravity, menuAnchor gdk.Gravity, triggerEvent *gdk.Event) {
-	var carg0 *C.GtkMenu      // in, none, converted
-	var carg1 *C.GdkWindow    // in, none, converted
-	var carg2 *C.GdkRectangle // in, none, converted
-	var carg3 C.GdkGravity    // in, none, casted
-	var carg4 C.GdkGravity    // in, none, casted
-	var carg5 *C.GdkEvent     // in, transfer: none, C Pointers: 1, Name: Event, nullable, nullable
-
-	carg0 = (*C.GtkMenu)(UnsafeMenuToGlibNone(menu))
-	carg1 = (*C.GdkWindow)(gdk.UnsafeWindowToGlibNone(rectWindow))
-	carg2 = (*C.GdkRectangle)(gdk.UnsafeRectangleToGlibNone(rect))
-	carg3 = C.GdkGravity(rectAnchor)
-	carg4 = C.GdkGravity(menuAnchor)
-	if triggerEvent != nil {
-		_ = triggerEvent
-		_ = carg5
-		panic("unimplemented conversion of *gdk.Event (GdkEvent*)")
-	}
-
-	C.gtk_menu_popup_at_rect(carg0, carg1, carg2, carg3, carg4, carg5)
-	runtime.KeepAlive(menu)
-	runtime.KeepAlive(rectWindow)
-	runtime.KeepAlive(rect)
-	runtime.KeepAlive(rectAnchor)
-	runtime.KeepAlive(menuAnchor)
-	runtime.KeepAlive(triggerEvent)
-}
-
-// PopupAtWidget wraps gtk_menu_popup_at_widget
-// 
-// The function takes the following parameters:
-// 
-// 	- widget Widget: the #GtkWidget to align @menu with 
-// 	- widgetAnchor gdk.Gravity: the point on @widget to align with @menu's anchor point 
-// 	- menuAnchor gdk.Gravity: the point on @menu to align with @widget's anchor point 
-// 	- triggerEvent *gdk.Event (nullable): the #GdkEvent that initiated this request or
-//                 %NULL if it's the current event 
-//
-// Displays @menu and makes it available for selection.
-// 
-// See gtk_menu_popup_at_pointer () to pop up a menu at the master pointer.
-// gtk_menu_popup_at_rect () also allows you to position a menu at an arbitrary
-// rectangle.
-// 
-// ![](popup-anchors.png)
-// 
-// @menu will be positioned at @widget, aligning their anchor points.
-// @widget_anchor and @menu_anchor determine anchor points on @widget and @menu
-// to pin together. @menu can optionally be offset by #GtkMenu:rect-anchor-dx
-// and #GtkMenu:rect-anchor-dy.
-// 
-// Anchors should be specified under the assumption that the text direction is
-// left-to-right; they will be flipped horizontally automatically if the text
-// direction is right-to-left.
-// 
-// Other properties that influence the behaviour of this function are
-// #GtkMenu:anchor-hints and #GtkMenu:menu-type-hint. Connect to the
-// #GtkMenu::popped-up signal to find out how it was actually positioned.
-func (menu *MenuInstance) PopupAtWidget(widget Widget, widgetAnchor gdk.Gravity, menuAnchor gdk.Gravity, triggerEvent *gdk.Event) {
-	var carg0 *C.GtkMenu   // in, none, converted
-	var carg1 *C.GtkWidget // in, none, converted
-	var carg2 C.GdkGravity // in, none, casted
-	var carg3 C.GdkGravity // in, none, casted
-	var carg4 *C.GdkEvent  // in, transfer: none, C Pointers: 1, Name: Event, nullable, nullable
-
-	carg0 = (*C.GtkMenu)(UnsafeMenuToGlibNone(menu))
-	carg1 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(widget))
-	carg2 = C.GdkGravity(widgetAnchor)
-	carg3 = C.GdkGravity(menuAnchor)
-	if triggerEvent != nil {
-		_ = triggerEvent
-		_ = carg4
-		panic("unimplemented conversion of *gdk.Event (GdkEvent*)")
-	}
-
-	C.gtk_menu_popup_at_widget(carg0, carg1, carg2, carg3, carg4)
-	runtime.KeepAlive(menu)
-	runtime.KeepAlive(widget)
-	runtime.KeepAlive(widgetAnchor)
-	runtime.KeepAlive(menuAnchor)
-	runtime.KeepAlive(triggerEvent)
 }
 
 // ReorderChild wraps gtk_menu_reorder_child
@@ -135340,55 +133973,6 @@ type SearchBar interface {
 	//
 	// Returns whether the close button is shown.
 	GetShowCloseButton() bool
-	// HandleEvent wraps gtk_search_bar_handle_event
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- event *gdk.Event: a #GdkEvent containing key press events 
-	// 
-	// The function returns the following values:
-	// 
-	// 	- goret bool 
-	//
-	// This function should be called when the top-level
-	// window which contains the search bar received a key event.
-	// 
-	// If the key event is handled by the search bar, the bar will
-	// be shown, the entry populated with the entered text and %GDK_EVENT_STOP
-	// will be returned. The caller should ensure that events are
-	// not propagated further.
-	// 
-	// If no entry has been connected to the search bar, using
-	// gtk_search_bar_connect_entry(), this function will return
-	// immediately with a warning.
-	// 
-	// ## Showing the search bar on key presses
-	// 
-	// |[&lt;!-- language="C" --&gt;
-	// static gboolean
-	// on_key_press_event (GtkWidget *widget,
-	//                     GdkEvent  *event,
-	//                     gpointer   user_data)
-	// {
-	//   GtkSearchBar *bar = GTK_SEARCH_BAR (user_data);
-	//   return gtk_search_bar_handle_event (bar, event);
-	// }
-	// 
-	// static void
-	// create_toplevel (void)
-	// {
-	//   GtkWidget *window = gtk_window_new (GTK_WINDOW_TOPLEVEL);
-	//   GtkWindow *search_bar = gtk_search_bar_new ();
-	// 
-	//  // Add more widgets to the window...
-	// 
-	//   g_signal_connect (window,
-	//                    "key-press-event",
-	//                     G_CALLBACK (on_key_press_event),
-	//                     search_bar);
-	// }
-	// ]|
-	HandleEvent(*gdk.Event) bool
 	// SetSearchMode wraps gtk_search_bar_set_search_mode
 	// 
 	// The function takes the following parameters:
@@ -135538,77 +134122,6 @@ func (bar *SearchBarInstance) GetShowCloseButton() bool {
 
 	cret = C.gtk_search_bar_get_show_close_button(carg0)
 	runtime.KeepAlive(bar)
-
-	var goret bool
-
-	if cret != 0 {
-		goret = true
-	}
-
-	return goret
-}
-
-// HandleEvent wraps gtk_search_bar_handle_event
-// 
-// The function takes the following parameters:
-// 
-// 	- event *gdk.Event: a #GdkEvent containing key press events 
-// 
-// The function returns the following values:
-// 
-// 	- goret bool 
-//
-// This function should be called when the top-level
-// window which contains the search bar received a key event.
-// 
-// If the key event is handled by the search bar, the bar will
-// be shown, the entry populated with the entered text and %GDK_EVENT_STOP
-// will be returned. The caller should ensure that events are
-// not propagated further.
-// 
-// If no entry has been connected to the search bar, using
-// gtk_search_bar_connect_entry(), this function will return
-// immediately with a warning.
-// 
-// ## Showing the search bar on key presses
-// 
-// |[&lt;!-- language="C" --&gt;
-// static gboolean
-// on_key_press_event (GtkWidget *widget,
-//                     GdkEvent  *event,
-//                     gpointer   user_data)
-// {
-//   GtkSearchBar *bar = GTK_SEARCH_BAR (user_data);
-//   return gtk_search_bar_handle_event (bar, event);
-// }
-// 
-// static void
-// create_toplevel (void)
-// {
-//   GtkWidget *window = gtk_window_new (GTK_WINDOW_TOPLEVEL);
-//   GtkWindow *search_bar = gtk_search_bar_new ();
-// 
-//  // Add more widgets to the window...
-// 
-//   g_signal_connect (window,
-//                    "key-press-event",
-//                     G_CALLBACK (on_key_press_event),
-//                     search_bar);
-// }
-// ]|
-func (bar *SearchBarInstance) HandleEvent(event *gdk.Event) bool {
-	var carg0 *C.GtkSearchBar // in, none, converted
-	var carg1 *C.GdkEvent     // in, transfer: none, C Pointers: 1, Name: Event
-	var cret  C.gboolean      // return
-
-	carg0 = (*C.GtkSearchBar)(UnsafeSearchBarToGlibNone(bar))
-	_ = event
-	_ = carg1
-	panic("unimplemented conversion of *gdk.Event (GdkEvent*)")
-
-	cret = C.gtk_search_bar_handle_event(carg0, carg1)
-	runtime.KeepAlive(bar)
-	runtime.KeepAlive(event)
 
 	var goret bool
 

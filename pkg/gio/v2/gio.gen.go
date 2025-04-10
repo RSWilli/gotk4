@@ -48155,28 +48155,6 @@ type ListStore interface {
 	//
 	// Sort the items in @store according to @compare_func.
 	Sort(glib.CompareDataFunc)
-	// Splice wraps g_list_store_splice
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- position uint: the position at which to make the change 
-	// 	- nRemovals uint: the number of items to remove 
-	// 	- additions []gobject._Value__data__union: the items to add 
-	//
-	// Changes @store by removing @n_removals items and adding @n_additions
-	// items to it. @additions must contain @n_additions items of type
-	// #GListStore:item-type.  %NULL is not permitted.
-	// 
-	// This function is more efficient than g_list_store_insert() and
-	// g_list_store_remove(), because it only emits
-	// #GListModel::items-changed once for the change.
-	// 
-	// This function takes a ref on each item in @additions.
-	// 
-	// The parameters @position and @n_removals must be correct (ie:
-	// @position + @n_removals must be less than or equal to the length of
-	// the list at the time this function is called).
-	Splice(uint, uint, []gobject._Value__data__union)
 }
 
 func unsafeWrapListStore(base *gobject.ObjectInstance) *ListStoreInstance {
@@ -48485,49 +48463,6 @@ func (store *ListStoreInstance) Sort(compareFunc glib.CompareDataFunc) {
 	C.g_list_store_sort(carg0, carg1, carg2)
 	runtime.KeepAlive(store)
 	runtime.KeepAlive(compareFunc)
-}
-
-// Splice wraps g_list_store_splice
-// 
-// The function takes the following parameters:
-// 
-// 	- position uint: the position at which to make the change 
-// 	- nRemovals uint: the number of items to remove 
-// 	- additions []gobject._Value__data__union: the items to add 
-//
-// Changes @store by removing @n_removals items and adding @n_additions
-// items to it. @additions must contain @n_additions items of type
-// #GListStore:item-type.  %NULL is not permitted.
-// 
-// This function is more efficient than g_list_store_insert() and
-// g_list_store_remove(), because it only emits
-// #GListModel::items-changed once for the change.
-// 
-// This function takes a ref on each item in @additions.
-// 
-// The parameters @position and @n_removals must be correct (ie:
-// @position + @n_removals must be less than or equal to the length of
-// the list at the time this function is called).
-func (store *ListStoreInstance) Splice(position uint, nRemovals uint, additions []gobject._Value__data__union) {
-	var carg0 *C.GListStore // in, none, converted
-	var carg1 C.guint       // in, none, casted
-	var carg2 C.guint       // in, none, casted
-	var carg3 *C.gpointer   // in, transfer: none, C Pointers: 1, Name: array[_Value__data__union], array (inner: *typesystem.Union, length-by: carg4)
-	var carg4 C.guint       // implicit
-
-	carg0 = (*C.GListStore)(UnsafeListStoreToGlibNone(store))
-	carg1 = C.guint(position)
-	carg2 = C.guint(nRemovals)
-	_ = additions
-	_ = carg3
-	_ = carg4
-	panic("unimplemented conversion of []gobject._Value__data__union (gpointer*)")
-
-	C.g_list_store_splice(carg0, carg1, carg2, carg3, carg4)
-	runtime.KeepAlive(store)
-	runtime.KeepAlive(position)
-	runtime.KeepAlive(nRemovals)
-	runtime.KeepAlive(additions)
 }
 
 // MemoryInputStreamInstance is the instance type used by all types extending GMemoryInputStream. It is used internally by the bindings. Users should use the interface [MemoryInputStream] instead.
