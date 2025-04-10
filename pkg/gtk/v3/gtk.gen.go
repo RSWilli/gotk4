@@ -3,17 +3,18 @@
 package gtk
 
 import (
-	"github.com/diamondburned/gotk4/pkg/atk"
-	"unsafe"
-	"runtime"
-	"github.com/diamondburned/gotk4/pkg/gio/v2"
 	"context"
-	"github.com/diamondburned/gotk4/pkg/gobject/v2"
+	"runtime"
+	"unsafe"
+
+	"github.com/diamondburned/gotk4/pkg/atk"
+	"github.com/diamondburned/gotk4/pkg/core/gbox"
 	"github.com/diamondburned/gotk4/pkg/gdk/v3"
 	"github.com/diamondburned/gotk4/pkg/gdkpixbuf/v2"
-	"github.com/diamondburned/gotk4/pkg/pango"
+	"github.com/diamondburned/gotk4/pkg/gio/v2"
 	"github.com/diamondburned/gotk4/pkg/glib/v2"
-	"github.com/diamondburned/gotk4/pkg/core/gbox"
+	"github.com/diamondburned/gotk4/pkg/gobject/v2"
+	"github.com/diamondburned/gotk4/pkg/pango"
 )
 
 // #cgo pkg-config: gtk+-3.0
@@ -21,53 +22,53 @@ import (
 // #include <gtk/gtk-a11y.h>
 // #include <gtk/gtk.h>
 // #include <gtk/gtkx.h>
-// extern void _gotk4_gtk3_TreeSelectionForEachFunc(GtkTreeModel*, GtkTreePath*, GtkTreeIter*, gpointer);
-// extern gboolean _gotk4_gtk3_TreeSelectionFunc(GtkTreeSelection*, GtkTreeModel*, GtkTreePath*, gboolean, gpointer);
-// extern void _gotk4_gtk3_ClipboardTargetsReceivedFunc(GtkClipboard*, GdkAtom*, gint, gpointer);
-// extern gboolean _gotk4_gtk3_EntryCompletionMatchFunc(GtkEntryCompletion*, gchar*, GtkTreeIter*, gpointer);
 // extern GtkWidget* _gotk4_gtk3_FlowBoxCreateWidgetFunc(gpointer, gpointer);
-// extern void _gotk4_gtk3_FlowBoxForEachFunc(GtkFlowBox*, GtkFlowBoxChild*, gpointer);
-// extern gboolean _gotk4_gtk3_ListBoxFilterFunc(GtkListBoxRow*, gpointer);
-// extern void _gotk4_gtk3_TreeDestroyCountFunc(GtkTreeView*, GtkTreePath*, gint, gpointer);
-// extern void _gotk4_gtk3_TreeViewSearchPositionFunc(GtkTreeView*, GtkWidget*, gpointer);
-// extern gboolean _gotk4_gtk3_FontFilterFunc(PangoFontFamily*, PangoFontFace*, gpointer);
-// extern gint _gotk4_gtk3_RecentSortFunc(GtkRecentInfo*, GtkRecentInfo*, gpointer);
-// extern void _gotk4_gtk3_ClipboardImageReceivedFunc(GtkClipboard*, GdkPixbuf*, gpointer);
-// extern void _gotk4_gtk3_TreeCellDataFunc(GtkTreeViewColumn*, GtkCellRenderer*, GtkTreeModel*, GtkTreeIter*, gpointer);
-// extern void _gotk4_gtk3_Callback(GtkWidget*, gpointer);
-// extern void _gotk4_gtk3_ListBoxUpdateHeaderFunc(GtkListBoxRow*, GtkListBoxRow*, gpointer);
-// extern void _gotk4_gtk3_TreeViewMappingFunc(GtkTreeView*, GtkTreePath*, gpointer);
-// extern gboolean _gotk4_gtk3_CellCallback(GtkCellRenderer*, gpointer);
-// extern void _gotk4_gtk3_ClipboardURIReceivedFunc(GtkClipboard*, gchar**, gpointer);
 // extern GtkWidget* _gotk4_gtk3_ListBoxCreateWidgetFunc(gpointer, gpointer);
-// extern gboolean _gotk4_gtk3_TreeViewColumnDropFunc(GtkTreeView*, GtkTreeViewColumn*, GtkTreeViewColumn*, GtkTreeViewColumn*, gpointer);
-// extern gint _gotk4_gtk3_AssistantPageFunc(gint, gpointer);
-// extern void _gotk4_gtk3_PageSetupDoneFunc(GtkPageSetup*, gpointer);
-// extern void callbackDelete(guintptr);
-// extern void _gotk4_gtk3_CellLayoutDataFunc(GtkCellLayout*, GtkCellRenderer*, GtkTreeModel*, GtkTreeIter*, gpointer);
+// extern gboolean _gotk4_gtk3_CellAllocCallback(GtkCellRenderer*, GdkRectangle*, GdkRectangle*, gpointer);
+// extern gboolean _gotk4_gtk3_CellCallback(GtkCellRenderer*, gpointer);
+// extern gboolean _gotk4_gtk3_EntryCompletionMatchFunc(GtkEntryCompletion*, gchar*, GtkTreeIter*, gpointer);
 // extern gboolean _gotk4_gtk3_FileFilterFunc(GtkFileFilterInfo*, gpointer);
 // extern gboolean _gotk4_gtk3_FlowBoxFilterFunc(GtkFlowBoxChild*, gpointer);
+// extern gboolean _gotk4_gtk3_FontFilterFunc(PangoFontFamily*, PangoFontFace*, gpointer);
+// extern gboolean _gotk4_gtk3_ListBoxFilterFunc(GtkListBoxRow*, gpointer);
+// extern gboolean _gotk4_gtk3_RecentFilterFunc(GtkRecentFilterInfo*, gpointer);
+// extern gboolean _gotk4_gtk3_TextCharPredicate(gunichar, gpointer);
+// extern gboolean _gotk4_gtk3_TickCallback(GtkWidget*, GdkFrameClock*, gpointer);
+// extern gboolean _gotk4_gtk3_TreeModelFilterVisibleFunc(GtkTreeModel*, GtkTreeIter*, gpointer);
+// extern gboolean _gotk4_gtk3_TreeModelForEachFunc(GtkTreeModel*, GtkTreePath*, GtkTreeIter*, gpointer);
+// extern gboolean _gotk4_gtk3_TreeSelectionFunc(GtkTreeSelection*, GtkTreeModel*, GtkTreePath*, gboolean, gpointer);
+// extern gboolean _gotk4_gtk3_TreeViewColumnDropFunc(GtkTreeView*, GtkTreeViewColumn*, GtkTreeViewColumn*, GtkTreeViewColumn*, gpointer);
+// extern gboolean _gotk4_gtk3_TreeViewRowSeparatorFunc(GtkTreeModel*, GtkTreeIter*, gpointer);
+// extern gboolean _gotk4_gtk3_TreeViewSearchEqualFunc(GtkTreeModel*, gint, gchar*, GtkTreeIter*, gpointer);
+// extern gchar* _gotk4_gtk3_CalendarDetailFunc(GtkCalendar*, guint, guint, guint, gpointer);
+// extern gchar* _gotk4_gtk3_TranslateFunc(gchar*, gpointer);
+// extern gint _gotk4_gtk3_AssistantPageFunc(gint, gpointer);
 // extern gint _gotk4_gtk3_FlowBoxSortFunc(GtkFlowBoxChild*, GtkFlowBoxChild*, gpointer);
 // extern gint _gotk4_gtk3_ListBoxSortFunc(GtkListBoxRow*, GtkListBoxRow*, gpointer);
-// extern gboolean _gotk4_gtk3_TreeViewRowSeparatorFunc(GtkTreeModel*, GtkTreeIter*, gpointer);
+// extern gint _gotk4_gtk3_RecentSortFunc(GtkRecentInfo*, GtkRecentInfo*, gpointer);
 // extern gint _gotk4_gtk3_TreeIterCompareFunc(GtkTreeModel*, GtkTreeIter*, GtkTreeIter*, gpointer);
-// extern void _gotk4_gtk3_BuilderConnectFunc(GtkBuilder*, GObject*, gchar*, gchar*, GObject*, GConnectFlags, gpointer);
-// extern gboolean _gotk4_gtk3_CellAllocCallback(GtkCellRenderer*, GdkRectangle*, GdkRectangle*, gpointer);
 // extern void _gotk4_gio2_AsyncReadyCallback(GObject*, GAsyncResult*, gpointer);
-// extern void _gotk4_gtk3_IconViewForEachFunc(GtkIconView*, GtkTreePath*, gpointer);
-// extern gboolean _gotk4_gtk3_TreeViewSearchEqualFunc(GtkTreeModel*, gint, gchar*, GtkTreeIter*, gpointer);
-// extern gboolean _gotk4_gtk3_TextCharPredicate(gunichar, gpointer);
-// extern gboolean _gotk4_gtk3_TreeModelForEachFunc(GtkTreeModel*, GtkTreePath*, GtkTreeIter*, gpointer);
-// extern void _gotk4_gtk3_TreeModelFilterModifyFunc(GtkTreeModel*, GtkTreeIter*, GValue, gint, gpointer);
-// extern gboolean _gotk4_gtk3_TreeModelFilterVisibleFunc(GtkTreeModel*, GtkTreeIter*, gpointer);
-// extern void _gotk4_gtk3_ListBoxForEachFunc(GtkListBox*, GtkListBoxRow*, gpointer);
-// extern gchar* _gotk4_gtk3_TranslateFunc(gchar*, gpointer);
-// extern gboolean _gotk4_gtk3_TickCallback(GtkWidget*, GdkFrameClock*, gpointer);
-// extern gchar* _gotk4_gtk3_CalendarDetailFunc(GtkCalendar*, guint, guint, guint, gpointer);
+// extern void _gotk4_gtk3_BuilderConnectFunc(GtkBuilder*, GObject*, gchar*, gchar*, GObject*, GConnectFlags, gpointer);
+// extern void _gotk4_gtk3_Callback(GtkWidget*, gpointer);
+// extern void _gotk4_gtk3_CellLayoutDataFunc(GtkCellLayout*, GtkCellRenderer*, GtkTreeModel*, GtkTreeIter*, gpointer);
+// extern void _gotk4_gtk3_ClipboardImageReceivedFunc(GtkClipboard*, GdkPixbuf*, gpointer);
+// extern void _gotk4_gtk3_ClipboardTargetsReceivedFunc(GtkClipboard*, GdkAtom*, gint, gpointer);
 // extern void _gotk4_gtk3_ClipboardTextReceivedFunc(GtkClipboard*, gchar*, gpointer);
+// extern void _gotk4_gtk3_ClipboardURIReceivedFunc(GtkClipboard*, gchar**, gpointer);
+// extern void _gotk4_gtk3_FlowBoxForEachFunc(GtkFlowBox*, GtkFlowBoxChild*, gpointer);
+// extern void _gotk4_gtk3_IconViewForEachFunc(GtkIconView*, GtkTreePath*, gpointer);
+// extern void _gotk4_gtk3_ListBoxForEachFunc(GtkListBox*, GtkListBoxRow*, gpointer);
+// extern void _gotk4_gtk3_ListBoxUpdateHeaderFunc(GtkListBoxRow*, GtkListBoxRow*, gpointer);
+// extern void _gotk4_gtk3_PageSetupDoneFunc(GtkPageSetup*, gpointer);
 // extern void _gotk4_gtk3_PrintSettingsFunc(gchar*, gchar*, gpointer);
-// extern gboolean _gotk4_gtk3_RecentFilterFunc(GtkRecentFilterInfo*, gpointer);
 // extern void _gotk4_gtk3_TextTagTableForEach(GtkTextTag*, gpointer);
+// extern void _gotk4_gtk3_TreeCellDataFunc(GtkTreeViewColumn*, GtkCellRenderer*, GtkTreeModel*, GtkTreeIter*, gpointer);
+// extern void _gotk4_gtk3_TreeDestroyCountFunc(GtkTreeView*, GtkTreePath*, gint, gpointer);
+// extern void _gotk4_gtk3_TreeModelFilterModifyFunc(GtkTreeModel*, GtkTreeIter*, GValue, gint, gpointer);
+// extern void _gotk4_gtk3_TreeSelectionForEachFunc(GtkTreeModel*, GtkTreePath*, GtkTreeIter*, gpointer);
+// extern void _gotk4_gtk3_TreeViewMappingFunc(GtkTreeView*, GtkTreePath*, gpointer);
+// extern void _gotk4_gtk3_TreeViewSearchPositionFunc(GtkTreeView*, GtkWidget*, gpointer);
+// extern void callbackDelete(guintptr);
 import "C"
 
 // GType values.
@@ -124768,17 +124769,6 @@ type Image interface {
 	//
 	// Resets the image to be empty.
 	Clear()
-	// GetAnimation wraps gtk_image_get_animation
-	// The function returns the following values:
-	// 
-	// 	- goret gdkpixbuf.PixbufAnimation 
-	//
-	// Gets the #GdkPixbufAnimation being displayed by the #GtkImage.
-	// The storage type of the image must be %GTK_IMAGE_EMPTY or
-	// %GTK_IMAGE_ANIMATION (see gtk_image_get_storage_type()).
-	// The caller of this function does not own a reference to the
-	// returned animation.
-	GetAnimation() gdkpixbuf.PixbufAnimation
 	// GetGIcon wraps gtk_image_get_gicon
 	// The function returns the following values:
 	// 
@@ -124864,15 +124854,6 @@ type Image interface {
 	// to store image data. If the #GtkImage has no image data,
 	// the return value will be %GTK_IMAGE_EMPTY.
 	GetStorageType() ImageType
-	// SetFromAnimation wraps gtk_image_set_from_animation
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- animation gdkpixbuf.PixbufAnimation: the #GdkPixbufAnimation 
-	//
-	// Causes the #GtkImage to display the given animation (or display
-	// nothing, if you set the animation to %NULL).
-	SetFromAnimation(gdkpixbuf.PixbufAnimation)
 	// SetFromFile wraps gtk_image_set_from_file
 	// 
 	// The function takes the following parameters:
@@ -125005,41 +124986,6 @@ func NewImageInstance() Widget {
 	var cret *C.GtkWidget // return, none, converted
 
 	cret = C.gtk_image_new()
-
-	var goret Widget
-
-	goret = UnsafeWidgetFromGlibNone(unsafe.Pointer(cret))
-
-	return goret
-}
-
-// NewImageInstanceFromAnimation wraps gtk_image_new_from_animation
-// 
-// The function takes the following parameters:
-// 
-// 	- animation gdkpixbuf.PixbufAnimation: an animation 
-// 
-// The function returns the following values:
-// 
-// 	- goret Widget 
-//
-// Creates a #GtkImage displaying the given animation.
-// The #GtkImage does not assume a reference to the
-// animation; you still need to unref it if you own references.
-// #GtkImage will add its own reference rather than adopting yours.
-// 
-// Note that the animation frames are shown using a timeout with
-// #G_PRIORITY_DEFAULT. When using animations to indicate busyness,
-// keep in mind that the animation will only be shown if the main loop
-// is not busy with something that has a higher priority.
-func NewImageInstanceFromAnimation(animation gdkpixbuf.PixbufAnimation) Widget {
-	var carg1 *C.GdkPixbufAnimation // in, none, converted
-	var cret  *C.GtkWidget          // return, none, converted
-
-	carg1 = (*C.GdkPixbufAnimation)(gdkpixbuf.UnsafePixbufAnimationToGlibNone(animation))
-
-	cret = C.gtk_image_new_from_animation(carg1)
-	runtime.KeepAlive(animation)
 
 	var goret Widget
 
@@ -125335,32 +125281,6 @@ func (image *ImageInstance) Clear() {
 	runtime.KeepAlive(image)
 }
 
-// GetAnimation wraps gtk_image_get_animation
-// The function returns the following values:
-// 
-// 	- goret gdkpixbuf.PixbufAnimation 
-//
-// Gets the #GdkPixbufAnimation being displayed by the #GtkImage.
-// The storage type of the image must be %GTK_IMAGE_EMPTY or
-// %GTK_IMAGE_ANIMATION (see gtk_image_get_storage_type()).
-// The caller of this function does not own a reference to the
-// returned animation.
-func (image *ImageInstance) GetAnimation() gdkpixbuf.PixbufAnimation {
-	var carg0 *C.GtkImage           // in, none, converted
-	var cret  *C.GdkPixbufAnimation // return, none, converted
-
-	carg0 = (*C.GtkImage)(UnsafeImageToGlibNone(image))
-
-	cret = C.gtk_image_get_animation(carg0)
-	runtime.KeepAlive(image)
-
-	var goret gdkpixbuf.PixbufAnimation
-
-	goret = gdkpixbuf.UnsafePixbufAnimationFromGlibNone(unsafe.Pointer(cret))
-
-	return goret
-}
-
 // GetGIcon wraps gtk_image_get_gicon
 // The function returns the following values:
 // 
@@ -125561,26 +125481,6 @@ func (image *ImageInstance) GetStorageType() ImageType {
 	goret = ImageType(cret)
 
 	return goret
-}
-
-// SetFromAnimation wraps gtk_image_set_from_animation
-// 
-// The function takes the following parameters:
-// 
-// 	- animation gdkpixbuf.PixbufAnimation: the #GdkPixbufAnimation 
-//
-// Causes the #GtkImage to display the given animation (or display
-// nothing, if you set the animation to %NULL).
-func (image *ImageInstance) SetFromAnimation(animation gdkpixbuf.PixbufAnimation) {
-	var carg0 *C.GtkImage           // in, none, converted
-	var carg1 *C.GdkPixbufAnimation // in, none, converted
-
-	carg0 = (*C.GtkImage)(UnsafeImageToGlibNone(image))
-	carg1 = (*C.GdkPixbufAnimation)(gdkpixbuf.UnsafePixbufAnimationToGlibNone(animation))
-
-	C.gtk_image_set_from_animation(carg0, carg1)
-	runtime.KeepAlive(image)
-	runtime.KeepAlive(animation)
 }
 
 // SetFromFile wraps gtk_image_set_from_file

@@ -3,66 +3,67 @@
 package gtk
 
 import (
-	"runtime"
-	"github.com/diamondburned/gotk4/pkg/gsk/v4"
-	"github.com/diamondburned/gotk4/pkg/gdkpixbuf/v2"
-	"unsafe"
-	"github.com/diamondburned/gotk4/pkg/gdk/v4"
-	"github.com/diamondburned/gotk4/pkg/glib/v2"
-	"github.com/diamondburned/gotk4/pkg/core/gbox"
-	"github.com/diamondburned/gotk4/pkg/pango"
-	"github.com/diamondburned/gotk4/pkg/gio/v2"
 	"context"
-	"github.com/diamondburned/gotk4/pkg/graphene"
+	"runtime"
+	"unsafe"
+
+	"github.com/diamondburned/gotk4/pkg/core/gbox"
+	"github.com/diamondburned/gotk4/pkg/gdk/v4"
+	"github.com/diamondburned/gotk4/pkg/gdkpixbuf/v2"
+	"github.com/diamondburned/gotk4/pkg/gio/v2"
+	"github.com/diamondburned/gotk4/pkg/glib/v2"
 	"github.com/diamondburned/gotk4/pkg/gobject/v2"
+	"github.com/diamondburned/gotk4/pkg/graphene"
+	"github.com/diamondburned/gotk4/pkg/gsk/v4"
+	"github.com/diamondburned/gotk4/pkg/pango"
 )
 
 // #cgo pkg-config: gtk4
 // #cgo CFLAGS: -Wno-deprecated-declarations
 // #include <gtk/gtk.h>
-// extern void _gotk4_gtk4_PrintJobCompleteFunc(GtkPrintJob*, gpointer, GError*);
-// extern void _gotk4_gtk4_TreeSelectionForEachFunc(GtkTreeModel*, GtkTreePath*, GtkTreeIter*, gpointer);
-// extern gboolean _gotk4_gtk4_TreeSelectionFunc(GtkTreeSelection*, GtkTreeModel*, GtkTreePath*, gboolean, gpointer);
-// extern gboolean _gotk4_gtk4_TreeViewRowSeparatorFunc(GtkTreeModel*, GtkTreeIter*, gpointer);
-// extern void _gotk4_gtk4_CellLayoutDataFunc(GtkCellLayout*, GtkCellRenderer*, GtkTreeModel*, GtkTreeIter*, gpointer);
-// extern gboolean _gotk4_gtk4_FontFilterFunc(PangoFontFamily*, PangoFontFace*, gpointer);
-// extern void _gotk4_gtk4_TextBufferCommitNotify(GtkTextBuffer*, GtkTextBufferNotifyFlags, guint, guint, gpointer);
-// extern gint _gotk4_gtk4_AssistantPageFunc(gint, gpointer);
-// extern gboolean _gotk4_gtk4_CustomFilterFunc(gpointer, gpointer);
-// extern gint _gotk4_gtk4_FlowBoxSortFunc(GtkFlowBoxChild*, GtkFlowBoxChild*, gpointer);
-// extern gboolean _gotk4_gtk4_ListBoxFilterFunc(GtkListBoxRow*, gpointer);
-// extern gint _gotk4_gtk4_ListBoxSortFunc(GtkListBoxRow*, GtkListBoxRow*, gpointer);
-// extern gboolean _gotk4_gtk4_PrinterFunc(GtkPrinter*, gpointer);
-// extern gint _gotk4_gtk4_TreeIterCompareFunc(GtkTreeModel*, GtkTreeIter*, GtkTreeIter*, gpointer);
-// extern gboolean _gotk4_gtk4_TreeModelFilterVisibleFunc(GtkTreeModel*, GtkTreeIter*, gpointer);
-// extern gboolean _gotk4_gtk4_TickCallback(GtkWidget*, GdkFrameClock*, gpointer);
-// extern gboolean _gotk4_gtk4_FlowBoxFilterFunc(GtkFlowBoxChild*, gpointer);
-// extern void _gotk4_gtk4_IconViewForEachFunc(GtkIconView*, GtkTreePath*, gpointer);
-// extern void _gotk4_gtk4_MenuButtonCreatePopupFunc(GtkMenuButton*, gpointer);
-// extern gboolean _gotk4_gtk4_TreeViewColumnDropFunc(GtkTreeView*, GtkTreeViewColumn*, GtkTreeViewColumn*, GtkTreeViewColumn*, gpointer);
-// extern void callbackDelete(guintptr);
-// extern gboolean _gotk4_gtk4_CellAllocCallback(GtkCellRenderer*, GdkRectangle*, GdkRectangle*, gpointer);
-// extern void _gotk4_gtk4_PrintSettingsFunc(gchar*, gchar*, gpointer);
-// extern gint _gotk4_glib2_CompareDataFunc(gconstpointer, gconstpointer, gpointer);
-// extern GtkWidget* _gotk4_gtk4_FlowBoxCreateWidgetFunc(gpointer, gpointer);
-// extern void _gotk4_gtk4_FlowBoxForEachFunc(GtkFlowBox*, GtkFlowBoxChild*, gpointer);
-// extern void _gotk4_gtk4_ListBoxUpdateHeaderFunc(GtkListBoxRow*, GtkListBoxRow*, gpointer);
-// extern gchar* _gotk4_gtk4_ScaleFormatValueFunc(GtkScale*, gdouble, gpointer);
-// extern gpointer _gotk4_gtk4_MapListModelMapFunc(gpointer, gpointer);
-// extern void _gotk4_gtk4_TextTagTableForEach(GtkTextTag*, gpointer);
-// extern void _gotk4_gtk4_TreeModelFilterModifyFunc(GtkTreeModel*, GtkTreeIter*, GValue, gint, gpointer);
-// extern void _gotk4_gtk4_TreeCellDataFunc(GtkTreeViewColumn*, GtkCellRenderer*, GtkTreeModel*, GtkTreeIter*, gpointer);
-// extern gboolean _gotk4_gtk4_TreeViewSearchEqualFunc(GtkTreeModel*, gint, gchar*, GtkTreeIter*, gpointer);
-// extern gboolean _gotk4_gtk4_TextCharPredicate(gunichar, gpointer);
-// extern void _gotk4_gtk4_PageSetupDoneFunc(GtkPageSetup*, gpointer);
 // extern GListModel* _gotk4_gtk4_TreeListModelCreateModelFunc(gpointer, gpointer);
+// extern GtkWidget* _gotk4_gtk4_FlowBoxCreateWidgetFunc(gpointer, gpointer);
 // extern GtkWidget* _gotk4_gtk4_ListBoxCreateWidgetFunc(gpointer, gpointer);
-// extern void _gotk4_gtk4_ListBoxForEachFunc(GtkListBox*, GtkListBoxRow*, gpointer);
-// extern void _gotk4_gtk4_TreeViewMappingFunc(GtkTreeView*, GtkTreePath*, gpointer);
-// extern void _gotk4_gio2_AsyncReadyCallback(GObject*, GAsyncResult*, gpointer);
+// extern gboolean _gotk4_gtk4_CellAllocCallback(GtkCellRenderer*, GdkRectangle*, GdkRectangle*, gpointer);
 // extern gboolean _gotk4_gtk4_CellCallback(GtkCellRenderer*, gpointer);
+// extern gboolean _gotk4_gtk4_CustomFilterFunc(gpointer, gpointer);
 // extern gboolean _gotk4_gtk4_EntryCompletionMatchFunc(GtkEntryCompletion*, gchar*, GtkTreeIter*, gpointer);
+// extern gboolean _gotk4_gtk4_FlowBoxFilterFunc(GtkFlowBoxChild*, gpointer);
+// extern gboolean _gotk4_gtk4_FontFilterFunc(PangoFontFamily*, PangoFontFace*, gpointer);
+// extern gboolean _gotk4_gtk4_ListBoxFilterFunc(GtkListBoxRow*, gpointer);
+// extern gboolean _gotk4_gtk4_PrinterFunc(GtkPrinter*, gpointer);
+// extern gboolean _gotk4_gtk4_TextCharPredicate(gunichar, gpointer);
+// extern gboolean _gotk4_gtk4_TickCallback(GtkWidget*, GdkFrameClock*, gpointer);
+// extern gboolean _gotk4_gtk4_TreeModelFilterVisibleFunc(GtkTreeModel*, GtkTreeIter*, gpointer);
 // extern gboolean _gotk4_gtk4_TreeModelForEachFunc(GtkTreeModel*, GtkTreePath*, GtkTreeIter*, gpointer);
+// extern gboolean _gotk4_gtk4_TreeSelectionFunc(GtkTreeSelection*, GtkTreeModel*, GtkTreePath*, gboolean, gpointer);
+// extern gboolean _gotk4_gtk4_TreeViewColumnDropFunc(GtkTreeView*, GtkTreeViewColumn*, GtkTreeViewColumn*, GtkTreeViewColumn*, gpointer);
+// extern gboolean _gotk4_gtk4_TreeViewRowSeparatorFunc(GtkTreeModel*, GtkTreeIter*, gpointer);
+// extern gboolean _gotk4_gtk4_TreeViewSearchEqualFunc(GtkTreeModel*, gint, gchar*, GtkTreeIter*, gpointer);
+// extern gchar* _gotk4_gtk4_ScaleFormatValueFunc(GtkScale*, gdouble, gpointer);
+// extern gint _gotk4_glib2_CompareDataFunc(gconstpointer, gconstpointer, gpointer);
+// extern gint _gotk4_gtk4_AssistantPageFunc(gint, gpointer);
+// extern gint _gotk4_gtk4_FlowBoxSortFunc(GtkFlowBoxChild*, GtkFlowBoxChild*, gpointer);
+// extern gint _gotk4_gtk4_ListBoxSortFunc(GtkListBoxRow*, GtkListBoxRow*, gpointer);
+// extern gint _gotk4_gtk4_TreeIterCompareFunc(GtkTreeModel*, GtkTreeIter*, GtkTreeIter*, gpointer);
+// extern gpointer _gotk4_gtk4_MapListModelMapFunc(gpointer, gpointer);
+// extern void _gotk4_gio2_AsyncReadyCallback(GObject*, GAsyncResult*, gpointer);
+// extern void _gotk4_gtk4_CellLayoutDataFunc(GtkCellLayout*, GtkCellRenderer*, GtkTreeModel*, GtkTreeIter*, gpointer);
+// extern void _gotk4_gtk4_FlowBoxForEachFunc(GtkFlowBox*, GtkFlowBoxChild*, gpointer);
+// extern void _gotk4_gtk4_IconViewForEachFunc(GtkIconView*, GtkTreePath*, gpointer);
+// extern void _gotk4_gtk4_ListBoxForEachFunc(GtkListBox*, GtkListBoxRow*, gpointer);
+// extern void _gotk4_gtk4_ListBoxUpdateHeaderFunc(GtkListBoxRow*, GtkListBoxRow*, gpointer);
+// extern void _gotk4_gtk4_MenuButtonCreatePopupFunc(GtkMenuButton*, gpointer);
+// extern void _gotk4_gtk4_PageSetupDoneFunc(GtkPageSetup*, gpointer);
+// extern void _gotk4_gtk4_PrintJobCompleteFunc(GtkPrintJob*, gpointer, GError*);
+// extern void _gotk4_gtk4_PrintSettingsFunc(gchar*, gchar*, gpointer);
+// extern void _gotk4_gtk4_TextBufferCommitNotify(GtkTextBuffer*, GtkTextBufferNotifyFlags, guint, guint, gpointer);
+// extern void _gotk4_gtk4_TextTagTableForEach(GtkTextTag*, gpointer);
+// extern void _gotk4_gtk4_TreeCellDataFunc(GtkTreeViewColumn*, GtkCellRenderer*, GtkTreeModel*, GtkTreeIter*, gpointer);
+// extern void _gotk4_gtk4_TreeModelFilterModifyFunc(GtkTreeModel*, GtkTreeIter*, GValue, gint, gpointer);
+// extern void _gotk4_gtk4_TreeSelectionForEachFunc(GtkTreeModel*, GtkTreePath*, GtkTreeIter*, gpointer);
+// extern void _gotk4_gtk4_TreeViewMappingFunc(GtkTreeView*, GtkTreePath*, gpointer);
+// extern void callbackDelete(guintptr);
 import "C"
 
 // GType values.

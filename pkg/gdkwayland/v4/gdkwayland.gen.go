@@ -3,12 +3,13 @@
 package gdkwayland
 
 import (
-	"github.com/diamondburned/gotk4/pkg/gdk/v4"
-	"github.com/diamondburned/gotk4/pkg/gobject/v2"
 	"runtime"
-	"github.com/diamondburned/gotk4/pkg/glib/v2"
-	"github.com/diamondburned/gotk4/pkg/core/gbox"
 	"unsafe"
+
+	"github.com/diamondburned/gotk4/pkg/core/gbox"
+	"github.com/diamondburned/gotk4/pkg/gdk/v4"
+	"github.com/diamondburned/gotk4/pkg/glib/v2"
+	"github.com/diamondburned/gotk4/pkg/gobject/v2"
 )
 
 // #cgo pkg-config: gtk4-wayland

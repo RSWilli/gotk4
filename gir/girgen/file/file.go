@@ -40,11 +40,19 @@ type file struct {
 var coreglibPkg = "github.com/diamondburned/gotk4/pkg/core"
 
 func (d *file) GoImportCore(pkg string) {
-	d.GoImport(coreglibPkg + "/" + pkg)
+	if d.goImports == nil {
+		d.goImports = make(goImports)
+	}
+
+	d.goImports.add(coreglibPkg+"/"+pkg, "", false)
 }
 
 // GoImportType imports either the namespace or the go package contained in the go type: FIXME: how to import nested packages?
 func (d *file) GoImportType(typ typesystem.CouldBeForeign[typesystem.Type]) {
+	if d.goImports == nil {
+		d.goImports = make(goImports)
+	}
+
 	if typ.Namespace != nil {
 		d.GoImportNamespace(typ.Namespace)
 	}
@@ -58,10 +66,14 @@ func (d *file) GoImportType(typ typesystem.CouldBeForeign[typesystem.Type]) {
 		return
 	}
 
-	d.GoImportAliased(alias, module)
+	d.goImports.add(module, alias, true)
 }
 
 func (d *file) GoImportNamespace(ns *typesystem.Namespace) {
+	if d.goImports == nil {
+		d.goImports = make(goImports)
+	}
+
 	if ns == nil {
 		return
 	}
@@ -81,15 +93,7 @@ func (d *file) GoImportNamespace(ns *typesystem.Namespace) {
 		path = fmt.Sprintf("%s/v%d", path, ns.Version.Major)
 	}
 
-	d.GoImport(path)
-}
-
-func (d *file) GoImportAliased(alias, pkg string) {
-	if d.goImports == nil {
-		d.goImports = make(goImports)
-	}
-
-	d.goImports[pkg] = alias
+	d.goImports.add(path, "", false)
 }
 
 func (d *file) GoImport(pkg string) {
@@ -97,7 +101,7 @@ func (d *file) GoImport(pkg string) {
 		d.goImports = make(goImports)
 	}
 
-	d.goImports[pkg] = ""
+	d.goImports.add(pkg, "", true)
 }
 
 func (d *file) Go() CodeWriter {

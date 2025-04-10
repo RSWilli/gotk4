@@ -181,7 +181,7 @@ var Main = genmain.Data{
 					typesystem.IgnoreByFileNameSubstring("gthreadedresolver."),
 
 					typesystem.IgnoreMatching("networking_init"),
-					
+
 					typesystem.IgnoreMatching("DataInputStream.read_byte"), // collides with BufferedInputStream.read_byte
 				},
 			},
@@ -281,6 +281,20 @@ var Main = genmain.Data{
 			},
 			"Atk-1": {
 				MinVersion: "2.50",
+			},
+			"GdkPixbuf-2": {
+				// MinVersion: "2.50",
+				IgnoredDefinitions: []typesystem.IgnoreFunc{
+					// these are not found:
+					typesystem.IgnoreMatching("PixbufModule"),
+					typesystem.IgnoreMatching("PixbufNonAnim"),
+					typesystem.IgnoreMatching("PixbufModulePattern"),
+					typesystem.IgnoreMatching("PixbufFormat.domain"),
+					typesystem.IgnoreMatching("PixbufFormat.flags"),
+					typesystem.IgnoreMatching("PixbufFormat.disabled"),
+					typesystem.IgnoreMatching("PixbufAnimationClass"),
+					typesystem.IgnoreMatching("PixbufAnimationIterClass"),
+				},
 			},
 		},
 	},

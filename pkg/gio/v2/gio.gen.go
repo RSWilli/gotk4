@@ -3,24 +3,25 @@
 package gio
 
 import (
-	"github.com/diamondburned/gotk4/pkg/core/gbox"
-	"github.com/diamondburned/gotk4/pkg/glib/v2"
-	"unsafe"
-	"github.com/diamondburned/gotk4/pkg/gobject/v2"
 	"context"
 	"runtime"
+	"unsafe"
+
+	"github.com/diamondburned/gotk4/pkg/core/gbox"
+	"github.com/diamondburned/gotk4/pkg/glib/v2"
+	"github.com/diamondburned/gotk4/pkg/gobject/v2"
 )
 
 // #cgo pkg-config: gio-2.0
 // #cgo CFLAGS: -Wno-deprecated-declarations
 // #include <gio/gio.h>
-// extern gint _gotk4_glib2_CompareDataFunc(gconstpointer, gconstpointer, gpointer);
-// extern GFile* _gotk4_gio2_VFSFileLookupFunc(GVfs*, gchar*, gpointer);
-// extern gboolean _gotk4_glib2_SourceFunc(gpointer);
-// extern void _gotk4_gio2_AsyncReadyCallback(GObject*, GAsyncResult*, gpointer);
 // extern GDBusMessage* _gotk4_gio2_DBusMessageFilterFunction(GDBusConnection*, GDBusMessage*, gboolean, gpointer);
-// extern void callbackDelete(guintptr);
+// extern GFile* _gotk4_gio2_VFSFileLookupFunc(GVfs*, gchar*, gpointer);
 // extern gboolean _gotk4_glib2_EqualFuncFull(gconstpointer, gconstpointer, gpointer);
+// extern gboolean _gotk4_glib2_SourceFunc(gpointer);
+// extern gint _gotk4_glib2_CompareDataFunc(gconstpointer, gconstpointer, gpointer);
+// extern void _gotk4_gio2_AsyncReadyCallback(GObject*, GAsyncResult*, gpointer);
+// extern void callbackDelete(guintptr);
 import "C"
 
 // GType values.
@@ -10456,11 +10457,11 @@ type DatagramBased interface {
 	// 
 	// The function takes the following parameters:
 	// 
-	// 	- condition gobject.IOCondition: a #GIOCondition mask to check 
+	// 	- condition glib.IOCondition: a #GIOCondition mask to check 
 	// 
 	// The function returns the following values:
 	// 
-	// 	- goret gobject.IOCondition 
+	// 	- goret glib.IOCondition 
 	//
 	// Checks on the readiness of @datagram_based to perform operations. The
 	// operations specified in @condition are checked for and masked against the
@@ -10498,7 +10499,7 @@ type DatagramBased interface {
 	// these flags, the output is guaranteed to be masked by @condition.
 	// 
 	// This call never blocks.
-	ConditionCheck(gobject.IOCondition) gobject.IOCondition
+	ConditionCheck(glib.IOCondition) glib.IOCondition
 	// ConditionWait wraps g_datagram_based_condition_wait
 	// 
 	// The function takes the following parameters:
@@ -10713,11 +10714,11 @@ func UnsafeDatagramBasedToGlibFull(c DatagramBased) unsafe.Pointer {
 // 
 // The function takes the following parameters:
 // 
-// 	- condition gobject.IOCondition: a #GIOCondition mask to check 
+// 	- condition glib.IOCondition: a #GIOCondition mask to check 
 // 
 // The function returns the following values:
 // 
-// 	- goret gobject.IOCondition 
+// 	- goret glib.IOCondition 
 //
 // Checks on the readiness of @datagram_based to perform operations. The
 // operations specified in @condition are checked for and masked against the
@@ -10755,7 +10756,7 @@ func UnsafeDatagramBasedToGlibFull(c DatagramBased) unsafe.Pointer {
 // these flags, the output is guaranteed to be masked by @condition.
 // 
 // This call never blocks.
-func (datagramBased *DatagramBasedInstance) ConditionCheck(condition gobject.IOCondition) gobject.IOCondition {
+func (datagramBased *DatagramBasedInstance) ConditionCheck(condition glib.IOCondition) glib.IOCondition {
 	var carg0 *C.GDatagramBased // in, none, converted
 	var carg1 C.GIOCondition    // in, none, casted
 	var cret  C.GIOCondition    // return, none, casted
@@ -10767,9 +10768,9 @@ func (datagramBased *DatagramBasedInstance) ConditionCheck(condition gobject.IOC
 	runtime.KeepAlive(datagramBased)
 	runtime.KeepAlive(condition)
 
-	var goret gobject.IOCondition
+	var goret glib.IOCondition
 
-	goret = gobject.IOCondition(cret)
+	goret = glib.IOCondition(cret)
 
 	return goret
 }
@@ -59039,7 +59040,7 @@ type Socket interface {
 	// The function takes the following parameters:
 	// 
 	// 	- cancellable context.Context (nullable): a #GCancellable, or %NULL 
-	// 	- condition gobject.IOCondition: a #GIOCondition mask to wait for 
+	// 	- condition glib.IOCondition: a #GIOCondition mask to wait for 
 	// 	- timeoutUs int64: the maximum time (in microseconds) to wait, or -1 
 	// 
 	// The function returns the following values:
@@ -59063,7 +59064,7 @@ type Socket interface {
 	// other GLib APIs, this function actually only has millisecond
 	// resolution, and the behavior is undefined if @timeout_us is not an
 	// exact number of milliseconds.
-	ConditionTimedWait(context.Context, gobject.IOCondition, int64) (bool, error)
+	ConditionTimedWait(context.Context, glib.IOCondition, int64) (bool, error)
 	// ConditionWait wraps g_socket_condition_wait
 	// 
 	// The function takes the following parameters:
@@ -60421,7 +60422,7 @@ func (socket *SocketInstance) ConditionCheck(condition glib.IOCondition) glib.IO
 // The function takes the following parameters:
 // 
 // 	- cancellable context.Context (nullable): a #GCancellable, or %NULL 
-// 	- condition gobject.IOCondition: a #GIOCondition mask to wait for 
+// 	- condition glib.IOCondition: a #GIOCondition mask to wait for 
 // 	- timeoutUs int64: the maximum time (in microseconds) to wait, or -1 
 // 
 // The function returns the following values:
@@ -60445,7 +60446,7 @@ func (socket *SocketInstance) ConditionCheck(condition glib.IOCondition) glib.IO
 // other GLib APIs, this function actually only has millisecond
 // resolution, and the behavior is undefined if @timeout_us is not an
 // exact number of milliseconds.
-func (socket *SocketInstance) ConditionTimedWait(cancellable context.Context, condition gobject.IOCondition, timeoutUs int64) (bool, error) {
+func (socket *SocketInstance) ConditionTimedWait(cancellable context.Context, condition glib.IOCondition, timeoutUs int64) (bool, error) {
 	var carg0 *C.GSocket      // in, none, converted
 	var carg3 *C.GCancellable // in, none, converted, nullable
 	var carg1 C.GIOCondition  // in, none, casted

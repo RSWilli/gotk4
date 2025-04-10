@@ -3,9 +3,10 @@
 package gio
 
 import (
+	"unsafe"
+
 	"github.com/diamondburned/gotk4/pkg/core/gbox"
 	"github.com/diamondburned/gotk4/pkg/gobject/v2"
-	"unsafe"
 )
 
 // #include <gio/gio.h>

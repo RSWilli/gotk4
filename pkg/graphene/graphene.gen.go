@@ -3,8 +3,8 @@
 package graphene
 
 import (
-	"unsafe"
 	"runtime"
+	"unsafe"
 )
 
 // #cgo pkg-config: graphene-gobject-1.0

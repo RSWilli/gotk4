@@ -5,9 +5,10 @@ package gdkx11
 import (
 	"runtime"
 	"unsafe"
+
 	"github.com/diamondburned/gotk4/pkg/gdk/v4"
-	"github.com/diamondburned/gotk4/pkg/gobject/v2"
 	"github.com/diamondburned/gotk4/pkg/gio/v2"
+	"github.com/diamondburned/gotk4/pkg/gobject/v2"
 )
 
 // #cgo pkg-config: gtk4-x11

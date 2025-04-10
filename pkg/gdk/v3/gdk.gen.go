@@ -3,22 +3,23 @@
 package gdk
 
 import (
-	"github.com/diamondburned/gotk4/pkg/gdkpixbuf/v2"
-	"github.com/diamondburned/gotk4/pkg/core/gbox"
-	"unsafe"
-	"github.com/diamondburned/gotk4/pkg/gobject/v2"
 	"runtime"
-	"github.com/diamondburned/gotk4/pkg/pango"
+	"unsafe"
+
+	"github.com/diamondburned/gotk4/pkg/core/gbox"
+	"github.com/diamondburned/gotk4/pkg/gdkpixbuf/v2"
 	"github.com/diamondburned/gotk4/pkg/gio/v2"
 	"github.com/diamondburned/gotk4/pkg/glib/v2"
+	"github.com/diamondburned/gotk4/pkg/gobject/v2"
+	"github.com/diamondburned/gotk4/pkg/pango"
 )
 
 // #cgo pkg-config: gdk-3.0
 // #cgo CFLAGS: -Wno-deprecated-declarations
 // #include <gdk/gdk.h>
-// extern void callbackDelete(guintptr);
-// extern void _gotk4_gdk3_SeatGrabPrepareFunc(GdkSeat*, GdkWindow*, gpointer);
 // extern gboolean _gotk4_glib2_SourceFunc(gpointer);
+// extern void _gotk4_gdk3_SeatGrabPrepareFunc(GdkSeat*, GdkWindow*, gpointer);
+// extern void callbackDelete(guintptr);
 import "C"
 
 // GType values.

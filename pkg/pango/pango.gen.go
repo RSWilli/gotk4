@@ -3,12 +3,13 @@
 package pango
 
 import (
-	"github.com/diamondburned/gotk4/pkg/gio/v2"
-	"github.com/diamondburned/gotk4/pkg/core/gbox"
-	"unsafe"
-	"github.com/diamondburned/gotk4/pkg/gobject/v2"
 	"runtime"
+	"unsafe"
+
+	"github.com/diamondburned/gotk4/pkg/core/gbox"
+	"github.com/diamondburned/gotk4/pkg/gio/v2"
 	"github.com/diamondburned/gotk4/pkg/glib/v2"
+	"github.com/diamondburned/gotk4/pkg/gobject/v2"
 )
 
 // #cgo pkg-config: pango

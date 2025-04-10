@@ -3,11 +3,12 @@
 package gdkx11
 
 import (
-	"github.com/diamondburned/gotk4/pkg/gdk/v3"
-	"github.com/diamondburned/gotk4/pkg/gobject/v2"
-	"github.com/diamondburned/gotk4/pkg/gio/v2"
 	"runtime"
 	"unsafe"
+
+	"github.com/diamondburned/gotk4/pkg/gdk/v3"
+	"github.com/diamondburned/gotk4/pkg/gio/v2"
+	"github.com/diamondburned/gotk4/pkg/gobject/v2"
 )
 
 // #cgo pkg-config: gdk-x11-3.0

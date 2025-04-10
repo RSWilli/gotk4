@@ -3,6 +3,7 @@ package file
 import (
 	"fmt"
 	"io"
+	"slices"
 	"strings"
 
 	"github.com/diamondburned/gotk4/gir/girgen/file/internal"
@@ -19,7 +20,7 @@ func (cbs externCallbacks) reader() io.Reader {
 		return io.MultiReader()
 	}
 
-	var block internal.CodeWriter
+	var declarations []string
 
 	for cb := range cbs {
 		var params []string
@@ -27,8 +28,16 @@ func (cbs externCallbacks) reader() io.Reader {
 		for _, p := range cb.CParameters() {
 			params = append(params, p.CType())
 		}
+		
+		declarations = append(declarations, fmt.Sprintf("// extern %s %s(%s);\n", cb.CReturn.CType(), cb.TrampolineName, strings.Join(params, ", ")))
+	}
 
-		fmt.Fprintf(&block, "// extern %s %s(%s);\n", cb.CReturn.CType(), cb.TrampolineName, strings.Join(params, ", "))
+	slices.Sort(declarations)
+
+	var block internal.CodeWriter
+
+	for _, decl := range declarations {
+		block.Write([]byte(decl))
 	}
 
 	return &block

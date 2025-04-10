@@ -3,10 +3,11 @@
 package atk
 
 import (
-	"unsafe"
-	"github.com/diamondburned/gotk4/pkg/gobject/v2"
 	"runtime"
+	"unsafe"
+
 	"github.com/diamondburned/gotk4/pkg/glib/v2"
+	"github.com/diamondburned/gotk4/pkg/gobject/v2"
 )
 
 // #cgo pkg-config: atk

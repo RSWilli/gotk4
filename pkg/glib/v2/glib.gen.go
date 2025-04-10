@@ -5,20 +5,21 @@ package glib
 import (
 	"runtime"
 	"unsafe"
+
 	"github.com/diamondburned/gotk4/pkg/core/gbox"
 )
 
 // #cgo pkg-config: glib-2.0
 // #cgo CFLAGS: -Wno-deprecated-declarations
 // #include <glib.h>
-// extern gint _gotk4_glib2_CompareDataFunc(gconstpointer, gconstpointer, gpointer);
-// extern void _gotk4_glib2_Func(gpointer, gpointer);
-// extern void _gotk4_glib2_ChildWatchFunc(GPid, gint, gpointer);
-// extern void callbackDelete(guintptr);
-// extern gboolean _gotk4_glib2_SourceFunc(gpointer);
 // extern GLogWriterOutput _gotk4_glib2_LogWriterFunc(GLogLevelFlags, const GLogField*, gsize, gpointer);
+// extern gboolean _gotk4_glib2_SourceFunc(gpointer);
+// extern gint _gotk4_glib2_CompareDataFunc(gconstpointer, gconstpointer, gpointer);
+// extern void _gotk4_glib2_ChildWatchFunc(GPid, gint, gpointer);
+// extern void _gotk4_glib2_Func(gpointer, gpointer);
 // extern void _gotk4_glib2_HFunc(gpointer, gpointer, gpointer);
 // extern void _gotk4_glib2_LogFunc(gchar*, GLogLevelFlags, gchar*, gpointer);
+// extern void callbackDelete(guintptr);
 import "C"
 
 

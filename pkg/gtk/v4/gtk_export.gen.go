@@ -3,13 +3,14 @@
 package gtk
 
 import (
+	"unsafe"
+
 	"github.com/diamondburned/gotk4/pkg/core/gbox"
 	"github.com/diamondburned/gotk4/pkg/gdk/v4"
-	"unsafe"
-	"github.com/diamondburned/gotk4/pkg/pango"
-	"github.com/diamondburned/gotk4/pkg/glib/v2"
 	"github.com/diamondburned/gotk4/pkg/gio/v2"
+	"github.com/diamondburned/gotk4/pkg/glib/v2"
 	"github.com/diamondburned/gotk4/pkg/gobject/v2"
+	"github.com/diamondburned/gotk4/pkg/pango"
 )
 
 // #include <gtk/gtk.h>

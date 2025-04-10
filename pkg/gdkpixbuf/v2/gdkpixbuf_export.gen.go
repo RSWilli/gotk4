@@ -3,33 +3,14 @@
 package gdkpixbuf
 
 import (
-	"github.com/diamondburned/gotk4/pkg/core/gbox"
 	"unsafe"
+
+	"github.com/diamondburned/gotk4/pkg/core/gbox"
 	"github.com/diamondburned/gotk4/pkg/glib/v2"
 )
 
 // #include <gdk-pixbuf/gdk-pixbuf.h>
 import "C"
-
-//export _gotk4_gdkpixbuf2_PixbufModulePreparedFunc
-func _gotk4_gdkpixbuf2_PixbufModulePreparedFunc(carg1 *C.GdkPixbuf, carg2 *C.GdkPixbufAnimation, carg3 C.gpointer) {
-	var fn PixbufModulePreparedFunc
-	{
-		v := gbox.Get(uintptr(carg3))
-		if v == nil {
-			panic(`callback not found`)
-		}
-		fn = v.(PixbufModulePreparedFunc)
-	}
-
-	var pixbuf Pixbuf          // in, none, converted
-	var anim   PixbufAnimation // in, none, converted
-
-	pixbuf = UnsafePixbufFromGlibNone(unsafe.Pointer(carg1))
-	anim = UnsafePixbufAnimationFromGlibNone(unsafe.Pointer(carg2))
-
-	fn(pixbuf, anim)
-}
 
 //export _gotk4_gdkpixbuf2_PixbufModuleSizeFunc
 func _gotk4_gdkpixbuf2_PixbufModuleSizeFunc(carg1 *C.int, carg2 *C.int, carg3 C.gpointer) {

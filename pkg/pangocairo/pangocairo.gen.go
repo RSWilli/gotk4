@@ -5,6 +5,7 @@ package pangocairo
 import (
 	"runtime"
 	"unsafe"
+
 	"github.com/diamondburned/gotk4/pkg/gobject/v2"
 	"github.com/diamondburned/gotk4/pkg/pango"
 )

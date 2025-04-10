@@ -3,9 +3,10 @@
 package gsk
 
 import (
+	"unsafe"
+
 	"github.com/diamondburned/gotk4/pkg/core/gbox"
 	"github.com/diamondburned/gotk4/pkg/glib/v2"
-	"unsafe"
 	"github.com/diamondburned/gotk4/pkg/graphene"
 )
 

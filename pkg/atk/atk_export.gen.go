@@ -3,8 +3,9 @@
 package atk
 
 import (
-	"github.com/diamondburned/gotk4/pkg/core/gbox"
 	"unsafe"
+
+	"github.com/diamondburned/gotk4/pkg/core/gbox"
 )
 
 // #include <atk/atk.h>

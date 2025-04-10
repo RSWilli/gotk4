@@ -3,10 +3,11 @@
 package gdkpixdata
 
 import (
-	"unsafe"
-	"github.com/diamondburned/gotk4/pkg/glib/v2"
-	"github.com/diamondburned/gotk4/pkg/gdkpixbuf/v2"
 	"runtime"
+	"unsafe"
+
+	"github.com/diamondburned/gotk4/pkg/gdkpixbuf/v2"
+	"github.com/diamondburned/gotk4/pkg/glib/v2"
 )
 
 // #cgo pkg-config: gdk-pixbuf-2.0
