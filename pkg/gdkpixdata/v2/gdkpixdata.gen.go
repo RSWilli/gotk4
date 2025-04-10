@@ -3,10 +3,10 @@
 package gdkpixdata
 
 import (
-	"github.com/diamondburned/gotk4/pkg/gdkpixbuf/v2"
-	"runtime"
 	"unsafe"
 	"github.com/diamondburned/gotk4/pkg/glib/v2"
+	"github.com/diamondburned/gotk4/pkg/gdkpixbuf/v2"
+	"runtime"
 )
 
 // #cgo pkg-config: gdk-pixbuf-2.0
@@ -15,16 +15,16 @@ import (
 import "C"
 
 
-// PIXBUFMAGICNUMBER wraps GDK_PIXBUF_MAGIC_NUMBER
+// PixbufMagicNumber wraps GDK_PIXBUF_MAGIC_NUMBER
 //
 // Magic number for #GdkPixdata structures.
-const PIXBUFMAGICNUMBER = C.GDK_PIXBUF_MAGIC_NUMBER
-// PIXDATAHEADERLENGTH wraps GDK_PIXDATA_HEADER_LENGTH
+const PixbufMagicNumber = 1197763408
+// PixdataHeaderLength wraps GDK_PIXDATA_HEADER_LENGTH
 //
 // The length of a #GdkPixdata structure without the @pixel_data pointer.
 //
 // Deprecated: (since 2.32.0) 
-const PIXDATAHEADERLENGTH = C.GDK_PIXDATA_HEADER_LENGTH
+const PixdataHeaderLength = 24
 // PixdataDumpType wraps GdkPixdataDumpType
 //
 // An enumeration which is used by gdk_pixdata_to_csource() to
@@ -87,10 +87,6 @@ func (p PixdataDumpType) Has(other PixdataDumpType) bool {
 	return (p & other) == other
 }
 
-func (p PixdataDumpType) SetValue(v *gobject.Value) {
-	panic("TODO")
-}
-
 // PixdataType wraps GdkPixdataType
 //
 // An enumeration containing three sets of flags for a #GdkPixdata struct:
@@ -145,21 +141,17 @@ func (p PixdataType) Has(other PixdataType) bool {
 	return (p & other) == other
 }
 
-func (p PixdataType) SetValue(v *gobject.Value) {
-	panic("TODO")
-}
-
 // PixbufFromPixdata wraps gdk_pixbuf_from_pixdata
 // 
 // The function takes the following parameters:
 // 
-// 	- pixdata Pixdata: a #GdkPixdata to convert into a `GdkPixbuf`. 
+// 	- pixdata *Pixdata: a #GdkPixdata to convert into a `GdkPixbuf`. 
 // 	- copyPixels bool: whether to copy raw pixel data; run-length encoded
 //   pixel data is always copied. 
 // 
 // The function returns the following values:
 // 
-// 	- ret gdkpixbuf.Pixbuf 
+// 	- goret gdkpixbuf.Pixbuf 
 // 	- _goerr error (nullable): an error 
 //
 // Converts a `GdkPixdata` to a `GdkPixbuf`.
@@ -169,7 +161,7 @@ func (p PixdataType) SetValue(v *gobject.Value) {
 // reused.
 //
 // Deprecated: (since 2.32.0) Use `GResource` instead.
-func PixbufFromPixdata(pixdata Pixdata, copyPixels bool) (gdkpixbuf.Pixbuf, error) {
+func PixbufFromPixdata(pixdata *Pixdata, copyPixels bool) (gdkpixbuf.Pixbuf, error) {
 	var carg1 *C.GdkPixdata // in, none, converted
 	var carg2 C.gboolean    // in
 	var cret  *C.GdkPixbuf  // return, full, converted
@@ -184,15 +176,15 @@ func PixbufFromPixdata(pixdata Pixdata, copyPixels bool) (gdkpixbuf.Pixbuf, erro
 	runtime.KeepAlive(pixdata)
 	runtime.KeepAlive(copyPixels)
 
-	var ret    gdkpixbuf.Pixbuf
+	var goret  gdkpixbuf.Pixbuf
 	var _goerr error
 
-	ret = UnsafePixbufFromGlibFull(unsafe.Pointer(cret))
+	goret = gdkpixbuf.UnsafePixbufFromGlibFull(unsafe.Pointer(cret))
 	if _cerr != nil {
-		_goerr = UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
+		_goerr = glib.UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
 	}
 
-	return ret, _goerr
+	return goret, _goerr
 }
 
 // Pixdata wraps GdkPixdata
@@ -222,6 +214,19 @@ type pixdata struct {
 // UnsafePixdataFromGlibBorrow is used to convert raw C.GdkPixdata pointers to go. This is used by the bindings internally.
 func UnsafePixdataFromGlibBorrow(p unsafe.Pointer) *Pixdata {
 	return &Pixdata{&pixdata{(*C.GdkPixdata)(p)}}
+}
+
+// UnsafePixdataFromGlibNone is used to convert raw C.GdkPixdata pointers to go while taking a reference. This is used by the bindings internally.
+func UnsafePixdataFromGlibNone(p unsafe.Pointer) *Pixdata {
+	// FIXME: this has no ref function, what should we do here?
+	wrapped := UnsafePixdataFromGlibBorrow(p)
+	runtime.SetFinalizer(
+		wrapped.pixdata,
+		func (intern *pixdata) {
+			C.free(unsafe.Pointer(intern.native))
+		},
+	)
+	return wrapped
 }
 
 // UnsafePixdataFromGlibFull is used to convert raw C.GdkPixdata pointers to go while taking a reference. This is used by the bindings internally.
@@ -374,12 +379,12 @@ func (p *Pixdata) SetHeight(height uint32) {
 // 
 // The function takes the following parameters:
 // 
-// 	- stream array: stream of bytes containing a
+// 	- stream []uint8: stream of bytes containing a
 //   serialized #GdkPixdata structure. 
 // 
 // The function returns the following values:
 // 
-// 	- ret bool 
+// 	- goret bool 
 // 	- _goerr error (nullable): an error 
 //
 // Deserializes (reconstruct) a #GdkPixdata structure from a byte stream.
@@ -395,38 +400,41 @@ func (p *Pixdata) SetHeight(height uint32) {
 // or `GDK_PIXBUF_ERROR_UNKNOWN_TYPE`.
 //
 // Deprecated: (since 2.32.0) Use `GResource` instead.
-func (pixdata *Pixdata) Deserialize(stream array) (bool, error) {
+func (pixdata *Pixdata) Deserialize(stream []uint8) (bool, error) {
 	var carg0 *C.GdkPixdata // in, none, converted
 	var carg1 C.guint       // implicit
-	var carg2 array         // in, transfer: none, scope: call, implicit: false, skip: false, optional: false, nullable: false, caller-allocates: false, has closure: false, has destroy: false
+	var carg2 *C.guint8     // in, transfer: none, C Pointers: 1, Name: array[guint8], array (inner: *typesystem.CastablePrimitive, length-by: carg1)
 	var cret  C.gboolean    // return
 	var _cerr *C.GError     // out, full, converted, nullable
 
 	carg0 = (*C.GdkPixdata)(UnsafePixdataToGlibNone(pixdata))
-	panic("unimplemented conversion of array (array)")
+	_ = stream
+	_ = carg2
+	_ = carg1
+	panic("unimplemented conversion of []uint8 (const guint8*)")
 
 	cret = C.gdk_pixdata_deserialize(carg0, carg1, carg2, &_cerr)
 	runtime.KeepAlive(pixdata)
 	runtime.KeepAlive(stream)
 
-	var ret    bool
+	var goret  bool
 	var _goerr error
 
 	if cret != 0 {
-		ret = true
+		goret = true
 	}
 	if _cerr != nil {
-		_goerr = UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
+		_goerr = glib.UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
 	}
 
-	return ret, _goerr
+	return goret, _goerr
 }
 
 // Serialize wraps gdk_pixdata_serialize
 // The function returns the following values:
 // 
 // 	- streamLengthP uint: location to store the resulting stream length in. 
-// 	- ret array 
+// 	- goret []uint8 
 //
 // Serializes a #GdkPixdata structure into a byte stream.
 // The byte stream consists of a straightforward writeout of the
@@ -434,10 +442,10 @@ func (pixdata *Pixdata) Deserialize(stream array) (bool, error) {
 // bytes the structure points to.
 //
 // Deprecated: (since 2.32.0) Use #GResource instead.
-func (pixdata *Pixdata) Serialize() (uint, array) {
+func (pixdata *Pixdata) Serialize() (uint, []uint8) {
 	var carg0 *C.GdkPixdata // in, none, converted
 	var carg1 C.guint       // out, full, casted
-	var cret  array         // return, transfer: full, scope: , implicit: false, skip: false, optional: false, nullable: false, caller-allocates: false, has closure: false, has destroy: false
+	var cret  *C.guint8     // return, transfer: full, C Pointers: 1, Name: array[guint8], scope: , array (inner: *typesystem.CastablePrimitive)
 
 	carg0 = (*C.GdkPixdata)(UnsafePixdataToGlibNone(pixdata))
 
@@ -445,11 +453,13 @@ func (pixdata *Pixdata) Serialize() (uint, array) {
 	runtime.KeepAlive(pixdata)
 
 	var streamLengthP uint
-	var ret           array
+	var goret         []uint8
 
 	streamLengthP = uint(carg1)
-	panic("unimplemented conversion of array (array)")
+	_ = goret
+	_ = cret
+	panic("unimplemented conversion of []uint8 (guint8*)")
 
-	return streamLengthP, ret
+	return streamLengthP, goret
 }
 

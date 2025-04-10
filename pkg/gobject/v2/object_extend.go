@@ -1,4 +1,4 @@
-package glib
+package gobject
 
 // // #include <glib.h>
 // // #include <glib-object.h>

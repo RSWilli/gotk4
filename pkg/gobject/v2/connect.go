@@ -1,15 +1,23 @@
 package gobject
 
-// #include <glib.h>
-// #include <glib-object.h>
-// #include "connect.go.h"
-import "C"
 import (
-	"runtime"
 	"unsafe"
 
 	"github.com/diamondburned/gotk4/pkg/core/closure"
 )
+
+// #include <glib.h>
+// #include <glib-object.h>
+// extern void _gotk4_removeClosure(GObject*, GClosure*);
+// extern void _gotk4_goMarshal(GClosure*, GValue*, guint, GValue*, gpointer, gpointer);
+import "C"
+
+// SignalHandle is the identifier for a connected glib signal on a specific object. It is
+// returned when connecting a signal and can be used to disconnect the signal.
+//
+// Important: This is only unique per object. Different objects can return the same SignalHandle
+// for different signals.
+type SignalHandle uint
 
 // Connect is a wrapper around g_signal_connect_closure(). f must be a function
 // with at least one parameter matching the type it is connected to.
@@ -20,53 +28,53 @@ import (
 // matching Go equivalent type for the C callback, or an interface type which
 // the value may be packed in. If the type is not suitable, a runtime panic will
 // occur when the signal is emitted.
-func (v *Object) Connect(detailedSignal string, f interface{}) SignalHandle {
+func (v *ObjectInstance) Connect(detailedSignal string, f interface{}) SignalHandle {
 	return v.connectClosure(false, detailedSignal, f)
 }
 
 // ConnectAfter is a wrapper around g_signal_connect_closure(). The difference
 // between Connect and ConnectAfter is that the latter will be invoked after the
 // default handler, not before. For more information, refer to Connect.
-func (v *Object) ConnectAfter(detailedSignal string, f interface{}) SignalHandle {
+func (v *ObjectInstance) ConnectAfter(detailedSignal string, f interface{}) SignalHandle {
 	return v.connectClosure(true, detailedSignal, f)
 }
 
-func (v *Object) connectClosure(after bool, detailedSignal string, f interface{}) SignalHandle {
+func (v *ObjectInstance) connectClosure(after bool, detailedSignal string, f interface{}) SignalHandle {
+	// TODO: check if the signal is valid and if the function signature is valid for the signal handler
+
 	fs := closure.NewFuncStack(f, 2)
 
 	cstr := C.CString(detailedSignal)
 	defer C.free(unsafe.Pointer(cstr))
 
-	gclosure := closureNew(v, fs)
-	c := C.g_signal_connect_closure(C.gpointer(v.Native()), (*C.gchar)(cstr), gclosure, gbool(after))
+	gclosure := closureNew()
+	defer C.g_closure_unref(gclosure)
 
-	runtime.KeepAlive(v)
+	closure.Register(unsafe.Pointer(gclosure), fs)
+
+	c := C.g_signal_connect_closure(C.gpointer(v.unsafe()), (*C.gchar)(cstr), gclosure, gbool(after))
 
 	return SignalHandle(c)
 }
 
-// NewClosure creates a new closure for the given object.
-func NewClosure(v *Object, f interface{}) unsafe.Pointer {
-	return unsafe.Pointer(closureNew(v, f))
-}
-
-// closureNew creates a new GClosure that's bound to the current object and adds
-// its callback function to the internal registry. It's exported for visibility
-// to other gotk3 packages and should not be used in a regular application.
-func closureNew(v *Object, f interface{}) *C.GClosure {
-	fs, ok := f.(*closure.FuncStack)
-	if !ok {
-		fs = closure.NewFuncStack(f, 2)
-	}
-
+// closureNew constructs a new GClosure object that gets the correct marshaller
+// and finalizer set. The returned GClosure is owned by the caller and must be
+// unref'd when no longer needed.
+func closureNew() *C.GClosure {
 	gclosure := C.g_closure_new_simple(C.sizeof_GClosure, nil)
 
-	closures := v.box.Closures()
-	closures.Register(unsafe.Pointer(gclosure), fs)
+	C.g_closure_set_meta_marshal(gclosure, nil, (*[0]byte)(C._gotk4_goMarshal))
+	C.g_closure_add_finalize_notifier(gclosure, nil, (*[0]byte)(C._gotk4_removeClosure))
 
-	C.g_object_watch_closure(v.native(), gclosure)
-	C.g_closure_set_meta_marshal(gclosure, C.gpointer(v.Native()), (*[0]byte)(C._gotk4_goMarshal))
-	C.g_closure_add_finalize_notifier(gclosure, C.gpointer(v.Native()), (*[0]byte)(C._gotk4_removeClosure))
+	C.g_closure_ref(gclosure)
+	C.g_closure_sink(gclosure)
 
 	return gclosure
+}
+
+func gbool(b bool) C.gboolean {
+	if b {
+		return 1
+	}
+	return 0
 }

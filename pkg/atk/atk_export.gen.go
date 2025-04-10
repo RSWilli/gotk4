@@ -4,73 +4,53 @@ package atk
 
 import (
 	"github.com/diamondburned/gotk4/pkg/core/gbox"
+	"unsafe"
 )
 
 // #include <atk/atk.h>
 import "C"
 
-//export _gotk4_atk1_EventListener
-func _gotk4_atk1_EventListener(carg1 *C.AtkObject) (cret C.void) {
-
-
-	fn(obj)
-
-
-
-	return cret
-}
-
-//export _gotk4_atk1_EventListenerInit
-func _gotk4_atk1_EventListenerInit() (cret C.void) {
-
-
-	fn()
-
-
-
-	return cret
-}
-
-//export _gotk4_atk1_FocusHandler
-func _gotk4_atk1_FocusHandler(carg1 *C.AtkObject, carg2 C.gboolean) (cret C.void) {
-
-
-	fn(object, focusIn)
-
-
-
-	return cret
-}
-
 //export _gotk4_atk1_Function
 func _gotk4_atk1_Function(carg1 C.gpointer) (cret C.gboolean) {
+	var fn Function
+	{
+		v := gbox.Get(uintptr(carg1))
+		if v == nil {
+			panic(`callback not found`)
+		}
+		fn = v.(Function)
+	}
 
+	var goret bool // return
 
-	ret := fn()
+	goret = fn()
 
-
+	if goret {
+		cret = C.TRUE
+	}
 
 	return cret
 }
 
 //export _gotk4_atk1_KeySnoopFunc
 func _gotk4_atk1_KeySnoopFunc(carg1 *C.AtkKeyEventStruct, carg2 C.gpointer) (cret C.int) {
+	var fn KeySnoopFunc
+	{
+		v := gbox.Get(uintptr(carg2))
+		if v == nil {
+			panic(`callback not found`)
+		}
+		fn = v.(KeySnoopFunc)
+	}
 
+	var event *KeyEventStruct // in, none, converted
+	var goret int             // return, none, casted
 
-	ret := fn(event)
+	event = UnsafeKeyEventStructFromGlibNone(unsafe.Pointer(carg1))
 
+	goret = fn(event)
 
-
-	return cret
-}
-
-//export _gotk4_atk1_PropertyChangeHandler
-func _gotk4_atk1_PropertyChangeHandler(carg1 *C.AtkObject, carg2 *C.AtkPropertyValues) (cret C.void) {
-
-
-	fn(obj, vals)
-
-
+	cret = C.int(goret)
 
 	return cret
 }

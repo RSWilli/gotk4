@@ -169,13 +169,20 @@ func (in *Interface) declareNested(e *env) {
 	e = e.sub("interface", in.gir.CType)
 
 	for _, v := range in.gir.Functions {
-		if t := DeclareFunction(e, in, v); t != nil {
+		if v.Name == "new" {
+			// some packages (e.g. gio) misplace the constructor in the functions list
+			e.logger.Info("name will likely collide, changing to avoid collision", "name", v.Name, "cidentifier", v.CIdentifier)
+
+			v.Name = v.Name + "_" + in.gir.Name
+		}
+
+		if t := DeclarePrefixedFunction(e, in, v.CallableAttrs); t != nil {
 			in.Functions = append(in.Functions, t)
 		}
 	}
 
 	for _, v := range in.gir.Methods {
-		if t := NewMethod(e, in, v); t != nil {
+		if t := DeclareMethod(e, in, v); t != nil {
 			in.Methods = append(in.Methods, t)
 		}
 	}

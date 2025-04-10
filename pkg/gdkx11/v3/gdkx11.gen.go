@@ -3,11 +3,11 @@
 package gdkx11
 
 import (
-	"unsafe"
 	"github.com/diamondburned/gotk4/pkg/gdk/v3"
 	"github.com/diamondburned/gotk4/pkg/gobject/v2"
 	"github.com/diamondburned/gotk4/pkg/gio/v2"
 	"runtime"
+	"unsafe"
 )
 
 // #cgo pkg-config: gdk-x11-3.0
@@ -17,40 +17,40 @@ import "C"
 
 // GType values.
 var (
-	GTypeX11AppLaunchContextInstance  = glib.Type(C.gdk_x11_app_launch_context_get_type())
-	GTypeX11CursorInstance            = glib.Type(C.gdk_x11_cursor_get_type())
-	GTypeX11DeviceCoreInstance        = glib.Type(C.gdk_x11_device_core_get_type())
-	GTypeX11DeviceManagerCoreInstance = glib.Type(C.gdk_x11_device_manager_core_get_type())
-	GTypeX11DeviceManagerXI2Instance  = glib.Type(C.gdk_x11_device_manager_xi2_get_type())
-	GTypeX11DeviceXI2Instance         = glib.Type(C.gdk_x11_device_xi2_get_type())
-	GTypeX11DisplayInstance           = glib.Type(C.gdk_x11_display_get_type())
-	GTypeX11DisplayManagerInstance    = glib.Type(C.gdk_x11_display_manager_get_type())
-	GTypeX11DragContextInstance       = glib.Type(C.gdk_x11_drag_context_get_type())
-	GTypeX11GLContextInstance         = glib.Type(C.gdk_x11_gl_context_get_type())
-	GTypeX11KeymapInstance            = glib.Type(C.gdk_x11_keymap_get_type())
-	GTypeX11MonitorInstance           = glib.Type(C.gdk_x11_monitor_get_type())
-	GTypeX11ScreenInstance            = glib.Type(C.gdk_x11_screen_get_type())
-	GTypeX11VisualInstance            = glib.Type(C.gdk_x11_visual_get_type())
-	GTypeX11WindowInstance            = glib.Type(C.gdk_x11_window_get_type())
+	TypeX11AppLaunchContext  = gobject.Type(C.gdk_x11_app_launch_context_get_type())
+	TypeX11Cursor            = gobject.Type(C.gdk_x11_cursor_get_type())
+	TypeX11DeviceCore        = gobject.Type(C.gdk_x11_device_core_get_type())
+	TypeX11DeviceManagerCore = gobject.Type(C.gdk_x11_device_manager_core_get_type())
+	TypeX11DeviceManagerXI2  = gobject.Type(C.gdk_x11_device_manager_xi2_get_type())
+	TypeX11DeviceXI2         = gobject.Type(C.gdk_x11_device_xi2_get_type())
+	TypeX11Display           = gobject.Type(C.gdk_x11_display_get_type())
+	TypeX11DisplayManager    = gobject.Type(C.gdk_x11_display_manager_get_type())
+	TypeX11DragContext       = gobject.Type(C.gdk_x11_drag_context_get_type())
+	TypeX11GLContext         = gobject.Type(C.gdk_x11_gl_context_get_type())
+	TypeX11Keymap            = gobject.Type(C.gdk_x11_keymap_get_type())
+	TypeX11Monitor           = gobject.Type(C.gdk_x11_monitor_get_type())
+	TypeX11Screen            = gobject.Type(C.gdk_x11_screen_get_type())
+	TypeX11Visual            = gobject.Type(C.gdk_x11_visual_get_type())
+	TypeX11Window            = gobject.Type(C.gdk_x11_window_get_type())
 )
 
 func init() {
-	glib.RegisterGValueMarshalers([]glib.TypeMarshaler{
-		glib.TypeMarshaler{T: GTypeX11AppLaunchContextInstance, F: marshalX11AppLaunchContextInstance},
-		glib.TypeMarshaler{T: GTypeX11CursorInstance, F: marshalX11CursorInstance},
-		glib.TypeMarshaler{T: GTypeX11DeviceCoreInstance, F: marshalX11DeviceCoreInstance},
-		glib.TypeMarshaler{T: GTypeX11DeviceManagerCoreInstance, F: marshalX11DeviceManagerCoreInstance},
-		glib.TypeMarshaler{T: GTypeX11DeviceManagerXI2Instance, F: marshalX11DeviceManagerXI2Instance},
-		glib.TypeMarshaler{T: GTypeX11DeviceXI2Instance, F: marshalX11DeviceXI2Instance},
-		glib.TypeMarshaler{T: GTypeX11DisplayInstance, F: marshalX11DisplayInstance},
-		glib.TypeMarshaler{T: GTypeX11DisplayManagerInstance, F: marshalX11DisplayManagerInstance},
-		glib.TypeMarshaler{T: GTypeX11DragContextInstance, F: marshalX11DragContextInstance},
-		glib.TypeMarshaler{T: GTypeX11GLContextInstance, F: marshalX11GLContextInstance},
-		glib.TypeMarshaler{T: GTypeX11KeymapInstance, F: marshalX11KeymapInstance},
-		glib.TypeMarshaler{T: GTypeX11MonitorInstance, F: marshalX11MonitorInstance},
-		glib.TypeMarshaler{T: GTypeX11ScreenInstance, F: marshalX11ScreenInstance},
-		glib.TypeMarshaler{T: GTypeX11VisualInstance, F: marshalX11VisualInstance},
-		glib.TypeMarshaler{T: GTypeX11WindowInstance, F: marshalX11WindowInstance},
+	gobject.RegisterGValueMarshalers([]gobject.TypeMarshaler{
+		gobject.TypeMarshaler{T: TypeX11AppLaunchContext, F: marshalX11AppLaunchContextInstance},
+		gobject.TypeMarshaler{T: TypeX11Cursor, F: marshalX11CursorInstance},
+		gobject.TypeMarshaler{T: TypeX11DeviceCore, F: marshalX11DeviceCoreInstance},
+		gobject.TypeMarshaler{T: TypeX11DeviceManagerCore, F: marshalX11DeviceManagerCoreInstance},
+		gobject.TypeMarshaler{T: TypeX11DeviceManagerXI2, F: marshalX11DeviceManagerXI2Instance},
+		gobject.TypeMarshaler{T: TypeX11DeviceXI2, F: marshalX11DeviceXI2Instance},
+		gobject.TypeMarshaler{T: TypeX11Display, F: marshalX11DisplayInstance},
+		gobject.TypeMarshaler{T: TypeX11DisplayManager, F: marshalX11DisplayManagerInstance},
+		gobject.TypeMarshaler{T: TypeX11DragContext, F: marshalX11DragContextInstance},
+		gobject.TypeMarshaler{T: TypeX11GLContext, F: marshalX11GLContextInstance},
+		gobject.TypeMarshaler{T: TypeX11Keymap, F: marshalX11KeymapInstance},
+		gobject.TypeMarshaler{T: TypeX11Monitor, F: marshalX11MonitorInstance},
+		gobject.TypeMarshaler{T: TypeX11Screen, F: marshalX11ScreenInstance},
+		gobject.TypeMarshaler{T: TypeX11Visual, F: marshalX11VisualInstance},
+		gobject.TypeMarshaler{T: TypeX11Window, F: marshalX11WindowInstance},
 	})
 }
 
@@ -62,7 +62,7 @@ func init() {
 // 
 // The function returns the following values:
 // 
-// 	- ret int 
+// 	- goret int 
 //
 // Returns the device ID as seen by XInput2.
 // 
@@ -80,11 +80,11 @@ func X11DeviceGetID(device X11DeviceCore) int {
 	cret = C.gdk_x11_device_get_id(carg1)
 	runtime.KeepAlive(device)
 
-	var ret int
+	var goret int
 
-	ret = int(cret)
+	goret = int(cret)
 
-	return ret
+	return goret
 }
 
 // X11DeviceManagerLookup wraps gdk_x11_device_manager_lookup
@@ -96,13 +96,13 @@ func X11DeviceGetID(device X11DeviceCore) int {
 // 
 // The function returns the following values:
 // 
-// 	- ret X11DeviceCore 
+// 	- goret X11DeviceCore 
 //
 // Returns the #GdkDevice that wraps the given device ID.
 func X11DeviceManagerLookup(deviceManager X11DeviceManagerCore, deviceId int) X11DeviceCore {
 	var carg1 *C.GdkX11DeviceManagerCore // in, none, converted
 	var carg2 C.int                      // in, none, casted
-	var cret  *C.GdkX11DeviceCore        // return, none, converted
+	var cret  *C.GdkDevice               // return, none, converted, returned class
 
 	carg1 = (*C.GdkX11DeviceManagerCore)(UnsafeX11DeviceManagerCoreToGlibNone(deviceManager))
 	carg2 = C.int(deviceId)
@@ -111,25 +111,27 @@ func X11DeviceManagerLookup(deviceManager X11DeviceManagerCore, deviceId int) X1
 	runtime.KeepAlive(deviceManager)
 	runtime.KeepAlive(deviceId)
 
-	var ret X11DeviceCore
+	var goret X11DeviceCore
 
-	ret = UnsafeX11DeviceCoreFromGlibNone(unsafe.Pointer(cret))
+	goret = UnsafeX11DeviceCoreFromGlibNone(unsafe.Pointer(cret))
 
-	return ret
+	return goret
 }
 
 // X11FreeCompoundText wraps gdk_x11_free_compound_text
 // 
 // The function takes the following parameters:
 // 
-// 	- ctext uint8: The pointer stored in @ctext from a call to
+// 	- ctext *uint8: The pointer stored in @ctext from a call to
 //   gdk_x11_display_string_to_compound_text(). 
 //
 // Frees the data returned from gdk_x11_display_string_to_compound_text().
-func X11FreeCompoundText(ctext uint8) {
-	var carg1 *C.guint8 // in, none, casted
+func X11FreeCompoundText(ctext *uint8) {
+	var carg1 *C.guint8 // in, transfer: none, C Pointers: 1, Name: guint8
 
-	carg1 = *C.guint8(ctext)
+	_ = ctext
+	_ = carg1
+	panic("unimplemented conversion of *uint8 (guint8*)")
 
 	C.gdk_x11_free_compound_text(carg1)
 	runtime.KeepAlive(ctext)
@@ -138,7 +140,7 @@ func X11FreeCompoundText(ctext uint8) {
 // X11GetDefaultScreen wraps gdk_x11_get_default_screen
 // The function returns the following values:
 // 
-// 	- ret int 
+// 	- goret int 
 //
 // Gets the default GTK+ screen number.
 func X11GetDefaultScreen() int {
@@ -146,11 +148,11 @@ func X11GetDefaultScreen() int {
 
 	cret = C.gdk_x11_get_default_screen()
 
-	var ret int
+	var goret int
 
-	ret = int(cret)
+	goret = int(cret)
 
-	return ret
+	return goret
 }
 
 // X11GetServerTime wraps gdk_x11_get_server_time
@@ -164,7 +166,7 @@ func X11GetDefaultScreen() int {
 // 
 // The function returns the following values:
 // 
-// 	- ret uint32 
+// 	- goret uint32 
 //
 // Routine to get the current X server time stamp.
 func X11GetServerTime(window X11Window) uint32 {
@@ -176,11 +178,11 @@ func X11GetServerTime(window X11Window) uint32 {
 	cret = C.gdk_x11_get_server_time(carg1)
 	runtime.KeepAlive(window)
 
-	var ret uint32
+	var goret uint32
 
-	ret = uint32(cret)
+	goret = uint32(cret)
 
-	return ret
+	return goret
 }
 
 // X11GrabServer wraps gdk_x11_grab_server
@@ -243,7 +245,7 @@ func X11RegisterStandardEventType(display X11Display, eventBase int, nEvents int
 // See the X Session Management Library documentation for more information on
 // session management and the Inter-Client Communication Conventions Manual
 func X11SetSmClientID(smClientId string) {
-	var carg1 *C.gchar // in, none, string, nullable
+	var carg1 *C.gchar // in, none, string, nullable-string
 
 	if smClientId != "" {
 		carg1 = (*C.gchar)(unsafe.Pointer(C.CString(smClientId)))
@@ -275,36 +277,30 @@ var _ X11AppLaunchContext = (*X11AppLaunchContextInstance)(nil)
 type X11AppLaunchContext interface {
 	gdk.AppLaunchContext
 	upcastToGdkX11AppLaunchContext() *X11AppLaunchContextInstance
-
 }
 
 func unsafeWrapX11AppLaunchContext(base *gobject.ObjectInstance) *X11AppLaunchContextInstance {
 	return &X11AppLaunchContextInstance{
-		AppLaunchContextInstance: gio.AppLaunchContextInstance{
-			ObjectInstance: gobject.ObjectInstance{
+		AppLaunchContextInstance: gdk.AppLaunchContextInstance{
+			AppLaunchContextInstance: gio.AppLaunchContextInstance{
 				ObjectInstance: *base,
 			},
 		},
 	}
 }
 
-func marshalX11AppLaunchContextInstance(p uintptr) (interface{}, error) {
-	return unsafeWrapX11AppLaunchContext(gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Object()), nil
-}
-
-// UnsafeX11AppLaunchContextFromGlibBorrow is used to convert raw GdkX11AppLaunchContext pointers to go. This is used by the bindings internally.
-func UnsafeX11AppLaunchContextFromGlibBorrow(c unsafe.Pointer) X11AppLaunchContext {
-	return gobject.TODOBorrow(c).(X11AppLaunchContext)
+func marshalX11AppLaunchContextInstance(p unsafe.Pointer) (any, error) {
+	return unsafeWrapX11AppLaunchContext(gobject.ValueFromNative(p).Object()), nil
 }
 
 // UnsafeX11AppLaunchContextFromGlibNone is used to convert raw GdkX11AppLaunchContext pointers to go while taking a reference and attaching a finalizer. This is used by the bindings internally.
 func UnsafeX11AppLaunchContextFromGlibNone(c unsafe.Pointer) X11AppLaunchContext {
-	return gobject.Take(c).(X11AppLaunchContext)
+	return gobject.UnsafeObjectFromGlibNone(c).(X11AppLaunchContext)
 }
 
 // UnsafeX11AppLaunchContextFromGlibFull is used to convert raw GdkX11AppLaunchContext pointers to go while attaching a finalizer. This is used by the bindings internally.
 func UnsafeX11AppLaunchContextFromGlibFull(c unsafe.Pointer) X11AppLaunchContext {
-	return gobject.AssumeOwnership(c).(X11AppLaunchContext)
+	return gobject.UnsafeObjectFromGlibFull(c).(X11AppLaunchContext)
 }
 
 func (x *X11AppLaunchContextInstance) upcastToGdkX11AppLaunchContext() *X11AppLaunchContextInstance {
@@ -313,12 +309,12 @@ func (x *X11AppLaunchContextInstance) upcastToGdkX11AppLaunchContext() *X11AppLa
 
 // UnsafeX11AppLaunchContextToGlibNone is used to convert the instance to it's C value GdkX11AppLaunchContext. This is used by the bindings internally.
 func UnsafeX11AppLaunchContextToGlibNone(c X11AppLaunchContext) unsafe.Pointer {
-	return gobject.TODOToNone(c)
+	return gobject.UnsafeObjectToGlibNone(c)
 }
 
 // UnsafeX11AppLaunchContextToGlibFull is used to convert the instance to it's C value GdkX11AppLaunchContext, while removeing the finalizer. This is used by the bindings internally.
 func UnsafeX11AppLaunchContextToGlibFull(c X11AppLaunchContext) unsafe.Pointer {
-	return gobject.TODOToFull(c)
+	return gobject.UnsafeObjectToGlibFull(c)
 }
 
 // X11CursorInstance is the instance type used by all types extending GdkX11Cursor. It is used internally by the bindings. Users should use the interface [X11Cursor] instead.
@@ -333,34 +329,28 @@ var _ X11Cursor = (*X11CursorInstance)(nil)
 type X11Cursor interface {
 	gdk.Cursor
 	upcastToGdkX11Cursor() *X11CursorInstance
-
 }
 
-func unsafeWrapX11Cursor(base *gdk.ObjectInstance) *X11CursorInstance {
+func unsafeWrapX11Cursor(base *gobject.ObjectInstance) *X11CursorInstance {
 	return &X11CursorInstance{
-		ObjectInstance: gobject.ObjectInstance{
+		CursorInstance: gdk.CursorInstance{
 			ObjectInstance: *base,
 		},
 	}
 }
 
-func marshalX11CursorInstance(p uintptr) (interface{}, error) {
-	return unsafeWrapX11Cursor(gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Object()), nil
-}
-
-// UnsafeX11CursorFromGlibBorrow is used to convert raw GdkX11Cursor pointers to go. This is used by the bindings internally.
-func UnsafeX11CursorFromGlibBorrow(c unsafe.Pointer) X11Cursor {
-	return gdk.TODOBorrow(c).(X11Cursor)
+func marshalX11CursorInstance(p unsafe.Pointer) (any, error) {
+	return unsafeWrapX11Cursor(gobject.ValueFromNative(p).Object()), nil
 }
 
 // UnsafeX11CursorFromGlibNone is used to convert raw GdkX11Cursor pointers to go while taking a reference and attaching a finalizer. This is used by the bindings internally.
 func UnsafeX11CursorFromGlibNone(c unsafe.Pointer) X11Cursor {
-	return gdk.Take(c).(X11Cursor)
+	return gobject.UnsafeObjectFromGlibNone(c).(X11Cursor)
 }
 
 // UnsafeX11CursorFromGlibFull is used to convert raw GdkX11Cursor pointers to go while attaching a finalizer. This is used by the bindings internally.
 func UnsafeX11CursorFromGlibFull(c unsafe.Pointer) X11Cursor {
-	return gdk.AssumeOwnership(c).(X11Cursor)
+	return gobject.UnsafeObjectFromGlibFull(c).(X11Cursor)
 }
 
 func (x *X11CursorInstance) upcastToGdkX11Cursor() *X11CursorInstance {
@@ -369,12 +359,12 @@ func (x *X11CursorInstance) upcastToGdkX11Cursor() *X11CursorInstance {
 
 // UnsafeX11CursorToGlibNone is used to convert the instance to it's C value GdkX11Cursor. This is used by the bindings internally.
 func UnsafeX11CursorToGlibNone(c X11Cursor) unsafe.Pointer {
-	return gdk.TODOToNone(c)
+	return gobject.UnsafeObjectToGlibNone(c)
 }
 
 // UnsafeX11CursorToGlibFull is used to convert the instance to it's C value GdkX11Cursor, while removeing the finalizer. This is used by the bindings internally.
 func UnsafeX11CursorToGlibFull(c X11Cursor) unsafe.Pointer {
-	return gdk.TODOToFull(c)
+	return gobject.UnsafeObjectToGlibFull(c)
 }
 
 // X11DeviceCoreInstance is the instance type used by all types extending GdkX11DeviceCore. It is used internally by the bindings. Users should use the interface [X11DeviceCore] instead.
@@ -389,34 +379,28 @@ var _ X11DeviceCore = (*X11DeviceCoreInstance)(nil)
 type X11DeviceCore interface {
 	gdk.Device
 	upcastToGdkX11DeviceCore() *X11DeviceCoreInstance
-
 }
 
-func unsafeWrapX11DeviceCore(base *gdk.ObjectInstance) *X11DeviceCoreInstance {
+func unsafeWrapX11DeviceCore(base *gobject.ObjectInstance) *X11DeviceCoreInstance {
 	return &X11DeviceCoreInstance{
-		ObjectInstance: gobject.ObjectInstance{
+		DeviceInstance: gdk.DeviceInstance{
 			ObjectInstance: *base,
 		},
 	}
 }
 
-func marshalX11DeviceCoreInstance(p uintptr) (interface{}, error) {
-	return unsafeWrapX11DeviceCore(gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Object()), nil
-}
-
-// UnsafeX11DeviceCoreFromGlibBorrow is used to convert raw GdkX11DeviceCore pointers to go. This is used by the bindings internally.
-func UnsafeX11DeviceCoreFromGlibBorrow(c unsafe.Pointer) X11DeviceCore {
-	return gdk.TODOBorrow(c).(X11DeviceCore)
+func marshalX11DeviceCoreInstance(p unsafe.Pointer) (any, error) {
+	return unsafeWrapX11DeviceCore(gobject.ValueFromNative(p).Object()), nil
 }
 
 // UnsafeX11DeviceCoreFromGlibNone is used to convert raw GdkX11DeviceCore pointers to go while taking a reference and attaching a finalizer. This is used by the bindings internally.
 func UnsafeX11DeviceCoreFromGlibNone(c unsafe.Pointer) X11DeviceCore {
-	return gdk.Take(c).(X11DeviceCore)
+	return gobject.UnsafeObjectFromGlibNone(c).(X11DeviceCore)
 }
 
 // UnsafeX11DeviceCoreFromGlibFull is used to convert raw GdkX11DeviceCore pointers to go while attaching a finalizer. This is used by the bindings internally.
 func UnsafeX11DeviceCoreFromGlibFull(c unsafe.Pointer) X11DeviceCore {
-	return gdk.AssumeOwnership(c).(X11DeviceCore)
+	return gobject.UnsafeObjectFromGlibFull(c).(X11DeviceCore)
 }
 
 func (x *X11DeviceCoreInstance) upcastToGdkX11DeviceCore() *X11DeviceCoreInstance {
@@ -425,12 +409,12 @@ func (x *X11DeviceCoreInstance) upcastToGdkX11DeviceCore() *X11DeviceCoreInstanc
 
 // UnsafeX11DeviceCoreToGlibNone is used to convert the instance to it's C value GdkX11DeviceCore. This is used by the bindings internally.
 func UnsafeX11DeviceCoreToGlibNone(c X11DeviceCore) unsafe.Pointer {
-	return gdk.TODOToNone(c)
+	return gobject.UnsafeObjectToGlibNone(c)
 }
 
 // UnsafeX11DeviceCoreToGlibFull is used to convert the instance to it's C value GdkX11DeviceCore, while removeing the finalizer. This is used by the bindings internally.
 func UnsafeX11DeviceCoreToGlibFull(c X11DeviceCore) unsafe.Pointer {
-	return gdk.TODOToFull(c)
+	return gobject.UnsafeObjectToGlibFull(c)
 }
 
 // X11DeviceManagerCoreInstance is the instance type used by all types extending GdkX11DeviceManagerCore. It is used internally by the bindings. Users should use the interface [X11DeviceManagerCore] instead.
@@ -445,34 +429,28 @@ var _ X11DeviceManagerCore = (*X11DeviceManagerCoreInstance)(nil)
 type X11DeviceManagerCore interface {
 	gdk.DeviceManager
 	upcastToGdkX11DeviceManagerCore() *X11DeviceManagerCoreInstance
-
 }
 
-func unsafeWrapX11DeviceManagerCore(base *gdk.ObjectInstance) *X11DeviceManagerCoreInstance {
+func unsafeWrapX11DeviceManagerCore(base *gobject.ObjectInstance) *X11DeviceManagerCoreInstance {
 	return &X11DeviceManagerCoreInstance{
-		ObjectInstance: gobject.ObjectInstance{
+		DeviceManagerInstance: gdk.DeviceManagerInstance{
 			ObjectInstance: *base,
 		},
 	}
 }
 
-func marshalX11DeviceManagerCoreInstance(p uintptr) (interface{}, error) {
-	return unsafeWrapX11DeviceManagerCore(gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Object()), nil
-}
-
-// UnsafeX11DeviceManagerCoreFromGlibBorrow is used to convert raw GdkX11DeviceManagerCore pointers to go. This is used by the bindings internally.
-func UnsafeX11DeviceManagerCoreFromGlibBorrow(c unsafe.Pointer) X11DeviceManagerCore {
-	return gdk.TODOBorrow(c).(X11DeviceManagerCore)
+func marshalX11DeviceManagerCoreInstance(p unsafe.Pointer) (any, error) {
+	return unsafeWrapX11DeviceManagerCore(gobject.ValueFromNative(p).Object()), nil
 }
 
 // UnsafeX11DeviceManagerCoreFromGlibNone is used to convert raw GdkX11DeviceManagerCore pointers to go while taking a reference and attaching a finalizer. This is used by the bindings internally.
 func UnsafeX11DeviceManagerCoreFromGlibNone(c unsafe.Pointer) X11DeviceManagerCore {
-	return gdk.Take(c).(X11DeviceManagerCore)
+	return gobject.UnsafeObjectFromGlibNone(c).(X11DeviceManagerCore)
 }
 
 // UnsafeX11DeviceManagerCoreFromGlibFull is used to convert raw GdkX11DeviceManagerCore pointers to go while attaching a finalizer. This is used by the bindings internally.
 func UnsafeX11DeviceManagerCoreFromGlibFull(c unsafe.Pointer) X11DeviceManagerCore {
-	return gdk.AssumeOwnership(c).(X11DeviceManagerCore)
+	return gobject.UnsafeObjectFromGlibFull(c).(X11DeviceManagerCore)
 }
 
 func (x *X11DeviceManagerCoreInstance) upcastToGdkX11DeviceManagerCore() *X11DeviceManagerCoreInstance {
@@ -481,12 +459,12 @@ func (x *X11DeviceManagerCoreInstance) upcastToGdkX11DeviceManagerCore() *X11Dev
 
 // UnsafeX11DeviceManagerCoreToGlibNone is used to convert the instance to it's C value GdkX11DeviceManagerCore. This is used by the bindings internally.
 func UnsafeX11DeviceManagerCoreToGlibNone(c X11DeviceManagerCore) unsafe.Pointer {
-	return gdk.TODOToNone(c)
+	return gobject.UnsafeObjectToGlibNone(c)
 }
 
 // UnsafeX11DeviceManagerCoreToGlibFull is used to convert the instance to it's C value GdkX11DeviceManagerCore, while removeing the finalizer. This is used by the bindings internally.
 func UnsafeX11DeviceManagerCoreToGlibFull(c X11DeviceManagerCore) unsafe.Pointer {
-	return gdk.TODOToFull(c)
+	return gobject.UnsafeObjectToGlibFull(c)
 }
 
 // X11DeviceManagerXI2Instance is the instance type used by all types extending GdkX11DeviceManagerXI2. It is used internally by the bindings. Users should use the interface [X11DeviceManagerXI2] instead.
@@ -501,36 +479,30 @@ var _ X11DeviceManagerXI2 = (*X11DeviceManagerXI2Instance)(nil)
 type X11DeviceManagerXI2 interface {
 	X11DeviceManagerCore
 	upcastToGdkX11DeviceManagerXI2() *X11DeviceManagerXI2Instance
-
 }
 
 func unsafeWrapX11DeviceManagerXI2(base *gobject.ObjectInstance) *X11DeviceManagerXI2Instance {
 	return &X11DeviceManagerXI2Instance{
-		DeviceManagerInstance: gdk.DeviceManagerInstance{
-			ObjectInstance: gobject.ObjectInstance{
+		X11DeviceManagerCoreInstance: X11DeviceManagerCoreInstance{
+			DeviceManagerInstance: gdk.DeviceManagerInstance{
 				ObjectInstance: *base,
 			},
 		},
 	}
 }
 
-func marshalX11DeviceManagerXI2Instance(p uintptr) (interface{}, error) {
-	return unsafeWrapX11DeviceManagerXI2(gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Object()), nil
-}
-
-// UnsafeX11DeviceManagerXI2FromGlibBorrow is used to convert raw GdkX11DeviceManagerXI2 pointers to go. This is used by the bindings internally.
-func UnsafeX11DeviceManagerXI2FromGlibBorrow(c unsafe.Pointer) X11DeviceManagerXI2 {
-	return gobject.TODOBorrow(c).(X11DeviceManagerXI2)
+func marshalX11DeviceManagerXI2Instance(p unsafe.Pointer) (any, error) {
+	return unsafeWrapX11DeviceManagerXI2(gobject.ValueFromNative(p).Object()), nil
 }
 
 // UnsafeX11DeviceManagerXI2FromGlibNone is used to convert raw GdkX11DeviceManagerXI2 pointers to go while taking a reference and attaching a finalizer. This is used by the bindings internally.
 func UnsafeX11DeviceManagerXI2FromGlibNone(c unsafe.Pointer) X11DeviceManagerXI2 {
-	return gobject.Take(c).(X11DeviceManagerXI2)
+	return gobject.UnsafeObjectFromGlibNone(c).(X11DeviceManagerXI2)
 }
 
 // UnsafeX11DeviceManagerXI2FromGlibFull is used to convert raw GdkX11DeviceManagerXI2 pointers to go while attaching a finalizer. This is used by the bindings internally.
 func UnsafeX11DeviceManagerXI2FromGlibFull(c unsafe.Pointer) X11DeviceManagerXI2 {
-	return gobject.AssumeOwnership(c).(X11DeviceManagerXI2)
+	return gobject.UnsafeObjectFromGlibFull(c).(X11DeviceManagerXI2)
 }
 
 func (x *X11DeviceManagerXI2Instance) upcastToGdkX11DeviceManagerXI2() *X11DeviceManagerXI2Instance {
@@ -539,12 +511,12 @@ func (x *X11DeviceManagerXI2Instance) upcastToGdkX11DeviceManagerXI2() *X11Devic
 
 // UnsafeX11DeviceManagerXI2ToGlibNone is used to convert the instance to it's C value GdkX11DeviceManagerXI2. This is used by the bindings internally.
 func UnsafeX11DeviceManagerXI2ToGlibNone(c X11DeviceManagerXI2) unsafe.Pointer {
-	return gobject.TODOToNone(c)
+	return gobject.UnsafeObjectToGlibNone(c)
 }
 
 // UnsafeX11DeviceManagerXI2ToGlibFull is used to convert the instance to it's C value GdkX11DeviceManagerXI2, while removeing the finalizer. This is used by the bindings internally.
 func UnsafeX11DeviceManagerXI2ToGlibFull(c X11DeviceManagerXI2) unsafe.Pointer {
-	return gobject.TODOToFull(c)
+	return gobject.UnsafeObjectToGlibFull(c)
 }
 
 // X11DeviceXI2Instance is the instance type used by all types extending GdkX11DeviceXI2. It is used internally by the bindings. Users should use the interface [X11DeviceXI2] instead.
@@ -559,34 +531,28 @@ var _ X11DeviceXI2 = (*X11DeviceXI2Instance)(nil)
 type X11DeviceXI2 interface {
 	gdk.Device
 	upcastToGdkX11DeviceXI2() *X11DeviceXI2Instance
-
 }
 
-func unsafeWrapX11DeviceXI2(base *gdk.ObjectInstance) *X11DeviceXI2Instance {
+func unsafeWrapX11DeviceXI2(base *gobject.ObjectInstance) *X11DeviceXI2Instance {
 	return &X11DeviceXI2Instance{
-		ObjectInstance: gobject.ObjectInstance{
+		DeviceInstance: gdk.DeviceInstance{
 			ObjectInstance: *base,
 		},
 	}
 }
 
-func marshalX11DeviceXI2Instance(p uintptr) (interface{}, error) {
-	return unsafeWrapX11DeviceXI2(gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Object()), nil
-}
-
-// UnsafeX11DeviceXI2FromGlibBorrow is used to convert raw GdkX11DeviceXI2 pointers to go. This is used by the bindings internally.
-func UnsafeX11DeviceXI2FromGlibBorrow(c unsafe.Pointer) X11DeviceXI2 {
-	return gdk.TODOBorrow(c).(X11DeviceXI2)
+func marshalX11DeviceXI2Instance(p unsafe.Pointer) (any, error) {
+	return unsafeWrapX11DeviceXI2(gobject.ValueFromNative(p).Object()), nil
 }
 
 // UnsafeX11DeviceXI2FromGlibNone is used to convert raw GdkX11DeviceXI2 pointers to go while taking a reference and attaching a finalizer. This is used by the bindings internally.
 func UnsafeX11DeviceXI2FromGlibNone(c unsafe.Pointer) X11DeviceXI2 {
-	return gdk.Take(c).(X11DeviceXI2)
+	return gobject.UnsafeObjectFromGlibNone(c).(X11DeviceXI2)
 }
 
 // UnsafeX11DeviceXI2FromGlibFull is used to convert raw GdkX11DeviceXI2 pointers to go while attaching a finalizer. This is used by the bindings internally.
 func UnsafeX11DeviceXI2FromGlibFull(c unsafe.Pointer) X11DeviceXI2 {
-	return gdk.AssumeOwnership(c).(X11DeviceXI2)
+	return gobject.UnsafeObjectFromGlibFull(c).(X11DeviceXI2)
 }
 
 func (x *X11DeviceXI2Instance) upcastToGdkX11DeviceXI2() *X11DeviceXI2Instance {
@@ -595,12 +561,12 @@ func (x *X11DeviceXI2Instance) upcastToGdkX11DeviceXI2() *X11DeviceXI2Instance {
 
 // UnsafeX11DeviceXI2ToGlibNone is used to convert the instance to it's C value GdkX11DeviceXI2. This is used by the bindings internally.
 func UnsafeX11DeviceXI2ToGlibNone(c X11DeviceXI2) unsafe.Pointer {
-	return gdk.TODOToNone(c)
+	return gobject.UnsafeObjectToGlibNone(c)
 }
 
 // UnsafeX11DeviceXI2ToGlibFull is used to convert the instance to it's C value GdkX11DeviceXI2, while removeing the finalizer. This is used by the bindings internally.
 func UnsafeX11DeviceXI2ToGlibFull(c X11DeviceXI2) unsafe.Pointer {
-	return gdk.TODOToFull(c)
+	return gobject.UnsafeObjectToGlibFull(c)
 }
 
 // X11DisplayInstance is the instance type used by all types extending GdkX11Display. It is used internally by the bindings. Users should use the interface [X11Display] instead.
@@ -619,7 +585,7 @@ type X11Display interface {
 	// ErrorTrapPop wraps gdk_x11_display_error_trap_pop
 	// The function returns the following values:
 	// 
-	// 	- ret int 
+	// 	- goret int 
 	//
 	// Pops the error trap pushed by gdk_x11_display_error_trap_push().
 	// Will XSync() if necessary and will always block until
@@ -655,14 +621,14 @@ type X11Display interface {
 	// GetStartupNotificationID wraps gdk_x11_display_get_startup_notification_id
 	// The function returns the following values:
 	// 
-	// 	- ret string 
+	// 	- goret string 
 	//
 	// Gets the startup notification ID for a display.
 	GetStartupNotificationID() string
 	// GetUserTime wraps gdk_x11_display_get_user_time
 	// The function returns the following values:
 	// 
-	// 	- ret uint32 
+	// 	- goret uint32 
 	//
 	// Returns the timestamp of the last user interaction on
 	// @display. The timestamp is taken from events caused
@@ -738,31 +704,26 @@ type X11Display interface {
 	Ungrab()
 }
 
-func unsafeWrapX11Display(base *gdk.ObjectInstance) *X11DisplayInstance {
+func unsafeWrapX11Display(base *gobject.ObjectInstance) *X11DisplayInstance {
 	return &X11DisplayInstance{
-		ObjectInstance: gobject.ObjectInstance{
+		DisplayInstance: gdk.DisplayInstance{
 			ObjectInstance: *base,
 		},
 	}
 }
 
-func marshalX11DisplayInstance(p uintptr) (interface{}, error) {
-	return unsafeWrapX11Display(gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Object()), nil
-}
-
-// UnsafeX11DisplayFromGlibBorrow is used to convert raw GdkX11Display pointers to go. This is used by the bindings internally.
-func UnsafeX11DisplayFromGlibBorrow(c unsafe.Pointer) X11Display {
-	return gdk.TODOBorrow(c).(X11Display)
+func marshalX11DisplayInstance(p unsafe.Pointer) (any, error) {
+	return unsafeWrapX11Display(gobject.ValueFromNative(p).Object()), nil
 }
 
 // UnsafeX11DisplayFromGlibNone is used to convert raw GdkX11Display pointers to go while taking a reference and attaching a finalizer. This is used by the bindings internally.
 func UnsafeX11DisplayFromGlibNone(c unsafe.Pointer) X11Display {
-	return gdk.Take(c).(X11Display)
+	return gobject.UnsafeObjectFromGlibNone(c).(X11Display)
 }
 
 // UnsafeX11DisplayFromGlibFull is used to convert raw GdkX11Display pointers to go while attaching a finalizer. This is used by the bindings internally.
 func UnsafeX11DisplayFromGlibFull(c unsafe.Pointer) X11Display {
-	return gdk.AssumeOwnership(c).(X11Display)
+	return gobject.UnsafeObjectFromGlibFull(c).(X11Display)
 }
 
 func (x *X11DisplayInstance) upcastToGdkX11Display() *X11DisplayInstance {
@@ -771,15 +732,15 @@ func (x *X11DisplayInstance) upcastToGdkX11Display() *X11DisplayInstance {
 
 // UnsafeX11DisplayToGlibNone is used to convert the instance to it's C value GdkX11Display. This is used by the bindings internally.
 func UnsafeX11DisplayToGlibNone(c X11Display) unsafe.Pointer {
-	return gdk.TODOToNone(c)
+	return gobject.UnsafeObjectToGlibNone(c)
 }
 
 // UnsafeX11DisplayToGlibFull is used to convert the instance to it's C value GdkX11Display, while removeing the finalizer. This is used by the bindings internally.
 func UnsafeX11DisplayToGlibFull(c X11Display) unsafe.Pointer {
-	return gdk.TODOToFull(c)
+	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// GetGLXVersion wraps gdk_x11_display_get_glx_version
+// X11DisplayInstanceGetGLXVersion wraps gdk_x11_display_get_glx_version
 // 
 // The function takes the following parameters:
 // 
@@ -789,37 +750,37 @@ func UnsafeX11DisplayToGlibFull(c X11Display) unsafe.Pointer {
 // 
 // 	- major int: return location for the GLX major version 
 // 	- minor int: return location for the GLX minor version 
-// 	- ret bool 
+// 	- goret bool 
 //
 // Retrieves the version of the GLX implementation.
-func GetGLXVersion(display gdk.Display) (int, int, bool) {
+func X11DisplayInstanceGetGLXVersion(display gdk.Display) (int, int, bool) {
 	var carg1 *C.GdkDisplay // in, none, converted
 	var carg2 C.int         // out, full, casted
 	var carg3 C.int         // out, full, casted
 	var cret  C.gboolean    // return
 
-	carg1 = (*C.GdkDisplay)(UnsafeDisplayToGlibNone(display))
+	carg1 = (*C.GdkDisplay)(gdk.UnsafeDisplayToGlibNone(display))
 
 	cret = C.gdk_x11_display_get_glx_version(carg1, &carg2, &carg3)
 	runtime.KeepAlive(display)
 
 	var major int
 	var minor int
-	var ret   bool
+	var goret bool
 
 	major = int(carg2)
 	minor = int(carg3)
 	if cret != 0 {
-		ret = true
+		goret = true
 	}
 
-	return major, minor, ret
+	return major, minor, goret
 }
 
 // ErrorTrapPop wraps gdk_x11_display_error_trap_pop
 // The function returns the following values:
 // 
-// 	- ret int 
+// 	- goret int 
 //
 // Pops the error trap pushed by gdk_x11_display_error_trap_push().
 // Will XSync() if necessary and will always block until
@@ -840,11 +801,11 @@ func (display *X11DisplayInstance) ErrorTrapPop() int {
 	cret = C.gdk_x11_display_error_trap_pop(carg0)
 	runtime.KeepAlive(display)
 
-	var ret int
+	var goret int
 
-	ret = int(cret)
+	goret = int(cret)
 
-	return ret
+	return goret
 }
 
 // ErrorTrapPopIgnored wraps gdk_x11_display_error_trap_pop_ignored
@@ -886,7 +847,7 @@ func (display *X11DisplayInstance) ErrorTrapPush() {
 // GetStartupNotificationID wraps gdk_x11_display_get_startup_notification_id
 // The function returns the following values:
 // 
-// 	- ret string 
+// 	- goret string 
 //
 // Gets the startup notification ID for a display.
 func (display *X11DisplayInstance) GetStartupNotificationID() string {
@@ -898,17 +859,17 @@ func (display *X11DisplayInstance) GetStartupNotificationID() string {
 	cret = C.gdk_x11_display_get_startup_notification_id(carg0)
 	runtime.KeepAlive(display)
 
-	var ret string
+	var goret string
 
-	ret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
 
-	return ret
+	return goret
 }
 
 // GetUserTime wraps gdk_x11_display_get_user_time
 // The function returns the following values:
 // 
-// 	- ret uint32 
+// 	- goret uint32 
 //
 // Returns the timestamp of the last user interaction on
 // @display. The timestamp is taken from events caused
@@ -923,11 +884,11 @@ func (display *X11DisplayInstance) GetUserTime() uint32 {
 	cret = C.gdk_x11_display_get_user_time(carg0)
 	runtime.KeepAlive(display)
 
-	var ret uint32
+	var goret uint32
 
-	ret = uint32(cret)
+	goret = uint32(cret)
 
-	return ret
+	return goret
 }
 
 // Grab wraps gdk_x11_display_grab
@@ -966,7 +927,7 @@ func (display *X11DisplayInstance) Grab() {
 // for the corresponding #GtkSetting).
 func (display *X11DisplayInstance) SetCursorTheme(theme string, size int) {
 	var carg0 *C.GdkX11Display // in, none, converted
-	var carg1 *C.gchar         // in, none, string, nullable
+	var carg1 *C.gchar         // in, none, string, nullable-string
 	var carg2 C.int            // in, none, casted
 
 	carg0 = (*C.GdkX11Display)(UnsafeX11DisplayToGlibNone(display))
@@ -1065,34 +1026,28 @@ var _ X11DisplayManager = (*X11DisplayManagerInstance)(nil)
 type X11DisplayManager interface {
 	gdk.DisplayManager
 	upcastToGdkX11DisplayManager() *X11DisplayManagerInstance
-
 }
 
-func unsafeWrapX11DisplayManager(base *gdk.ObjectInstance) *X11DisplayManagerInstance {
+func unsafeWrapX11DisplayManager(base *gobject.ObjectInstance) *X11DisplayManagerInstance {
 	return &X11DisplayManagerInstance{
-		ObjectInstance: gobject.ObjectInstance{
+		DisplayManagerInstance: gdk.DisplayManagerInstance{
 			ObjectInstance: *base,
 		},
 	}
 }
 
-func marshalX11DisplayManagerInstance(p uintptr) (interface{}, error) {
-	return unsafeWrapX11DisplayManager(gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Object()), nil
-}
-
-// UnsafeX11DisplayManagerFromGlibBorrow is used to convert raw GdkX11DisplayManager pointers to go. This is used by the bindings internally.
-func UnsafeX11DisplayManagerFromGlibBorrow(c unsafe.Pointer) X11DisplayManager {
-	return gdk.TODOBorrow(c).(X11DisplayManager)
+func marshalX11DisplayManagerInstance(p unsafe.Pointer) (any, error) {
+	return unsafeWrapX11DisplayManager(gobject.ValueFromNative(p).Object()), nil
 }
 
 // UnsafeX11DisplayManagerFromGlibNone is used to convert raw GdkX11DisplayManager pointers to go while taking a reference and attaching a finalizer. This is used by the bindings internally.
 func UnsafeX11DisplayManagerFromGlibNone(c unsafe.Pointer) X11DisplayManager {
-	return gdk.Take(c).(X11DisplayManager)
+	return gobject.UnsafeObjectFromGlibNone(c).(X11DisplayManager)
 }
 
 // UnsafeX11DisplayManagerFromGlibFull is used to convert raw GdkX11DisplayManager pointers to go while attaching a finalizer. This is used by the bindings internally.
 func UnsafeX11DisplayManagerFromGlibFull(c unsafe.Pointer) X11DisplayManager {
-	return gdk.AssumeOwnership(c).(X11DisplayManager)
+	return gobject.UnsafeObjectFromGlibFull(c).(X11DisplayManager)
 }
 
 func (x *X11DisplayManagerInstance) upcastToGdkX11DisplayManager() *X11DisplayManagerInstance {
@@ -1101,12 +1056,12 @@ func (x *X11DisplayManagerInstance) upcastToGdkX11DisplayManager() *X11DisplayMa
 
 // UnsafeX11DisplayManagerToGlibNone is used to convert the instance to it's C value GdkX11DisplayManager. This is used by the bindings internally.
 func UnsafeX11DisplayManagerToGlibNone(c X11DisplayManager) unsafe.Pointer {
-	return gdk.TODOToNone(c)
+	return gobject.UnsafeObjectToGlibNone(c)
 }
 
 // UnsafeX11DisplayManagerToGlibFull is used to convert the instance to it's C value GdkX11DisplayManager, while removeing the finalizer. This is used by the bindings internally.
 func UnsafeX11DisplayManagerToGlibFull(c X11DisplayManager) unsafe.Pointer {
-	return gdk.TODOToFull(c)
+	return gobject.UnsafeObjectToGlibFull(c)
 }
 
 // X11DragContextInstance is the instance type used by all types extending GdkX11DragContext. It is used internally by the bindings. Users should use the interface [X11DragContext] instead.
@@ -1121,34 +1076,28 @@ var _ X11DragContext = (*X11DragContextInstance)(nil)
 type X11DragContext interface {
 	gdk.DragContext
 	upcastToGdkX11DragContext() *X11DragContextInstance
-
 }
 
-func unsafeWrapX11DragContext(base *gdk.ObjectInstance) *X11DragContextInstance {
+func unsafeWrapX11DragContext(base *gobject.ObjectInstance) *X11DragContextInstance {
 	return &X11DragContextInstance{
-		ObjectInstance: gobject.ObjectInstance{
+		DragContextInstance: gdk.DragContextInstance{
 			ObjectInstance: *base,
 		},
 	}
 }
 
-func marshalX11DragContextInstance(p uintptr) (interface{}, error) {
-	return unsafeWrapX11DragContext(gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Object()), nil
-}
-
-// UnsafeX11DragContextFromGlibBorrow is used to convert raw GdkX11DragContext pointers to go. This is used by the bindings internally.
-func UnsafeX11DragContextFromGlibBorrow(c unsafe.Pointer) X11DragContext {
-	return gdk.TODOBorrow(c).(X11DragContext)
+func marshalX11DragContextInstance(p unsafe.Pointer) (any, error) {
+	return unsafeWrapX11DragContext(gobject.ValueFromNative(p).Object()), nil
 }
 
 // UnsafeX11DragContextFromGlibNone is used to convert raw GdkX11DragContext pointers to go while taking a reference and attaching a finalizer. This is used by the bindings internally.
 func UnsafeX11DragContextFromGlibNone(c unsafe.Pointer) X11DragContext {
-	return gdk.Take(c).(X11DragContext)
+	return gobject.UnsafeObjectFromGlibNone(c).(X11DragContext)
 }
 
 // UnsafeX11DragContextFromGlibFull is used to convert raw GdkX11DragContext pointers to go while attaching a finalizer. This is used by the bindings internally.
 func UnsafeX11DragContextFromGlibFull(c unsafe.Pointer) X11DragContext {
-	return gdk.AssumeOwnership(c).(X11DragContext)
+	return gobject.UnsafeObjectFromGlibFull(c).(X11DragContext)
 }
 
 func (x *X11DragContextInstance) upcastToGdkX11DragContext() *X11DragContextInstance {
@@ -1157,12 +1106,12 @@ func (x *X11DragContextInstance) upcastToGdkX11DragContext() *X11DragContextInst
 
 // UnsafeX11DragContextToGlibNone is used to convert the instance to it's C value GdkX11DragContext. This is used by the bindings internally.
 func UnsafeX11DragContextToGlibNone(c X11DragContext) unsafe.Pointer {
-	return gdk.TODOToNone(c)
+	return gobject.UnsafeObjectToGlibNone(c)
 }
 
 // UnsafeX11DragContextToGlibFull is used to convert the instance to it's C value GdkX11DragContext, while removeing the finalizer. This is used by the bindings internally.
 func UnsafeX11DragContextToGlibFull(c X11DragContext) unsafe.Pointer {
-	return gdk.TODOToFull(c)
+	return gobject.UnsafeObjectToGlibFull(c)
 }
 
 // X11GLContextInstance is the instance type used by all types extending GdkX11GLContext. It is used internally by the bindings. Users should use the interface [X11GLContext] instead.
@@ -1177,34 +1126,28 @@ var _ X11GLContext = (*X11GLContextInstance)(nil)
 type X11GLContext interface {
 	gdk.GLContext
 	upcastToGdkX11GLContext() *X11GLContextInstance
-
 }
 
-func unsafeWrapX11GLContext(base *gdk.ObjectInstance) *X11GLContextInstance {
+func unsafeWrapX11GLContext(base *gobject.ObjectInstance) *X11GLContextInstance {
 	return &X11GLContextInstance{
-		ObjectInstance: gobject.ObjectInstance{
+		GLContextInstance: gdk.GLContextInstance{
 			ObjectInstance: *base,
 		},
 	}
 }
 
-func marshalX11GLContextInstance(p uintptr) (interface{}, error) {
-	return unsafeWrapX11GLContext(gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Object()), nil
-}
-
-// UnsafeX11GLContextFromGlibBorrow is used to convert raw GdkX11GLContext pointers to go. This is used by the bindings internally.
-func UnsafeX11GLContextFromGlibBorrow(c unsafe.Pointer) X11GLContext {
-	return gdk.TODOBorrow(c).(X11GLContext)
+func marshalX11GLContextInstance(p unsafe.Pointer) (any, error) {
+	return unsafeWrapX11GLContext(gobject.ValueFromNative(p).Object()), nil
 }
 
 // UnsafeX11GLContextFromGlibNone is used to convert raw GdkX11GLContext pointers to go while taking a reference and attaching a finalizer. This is used by the bindings internally.
 func UnsafeX11GLContextFromGlibNone(c unsafe.Pointer) X11GLContext {
-	return gdk.Take(c).(X11GLContext)
+	return gobject.UnsafeObjectFromGlibNone(c).(X11GLContext)
 }
 
 // UnsafeX11GLContextFromGlibFull is used to convert raw GdkX11GLContext pointers to go while attaching a finalizer. This is used by the bindings internally.
 func UnsafeX11GLContextFromGlibFull(c unsafe.Pointer) X11GLContext {
-	return gdk.AssumeOwnership(c).(X11GLContext)
+	return gobject.UnsafeObjectFromGlibFull(c).(X11GLContext)
 }
 
 func (x *X11GLContextInstance) upcastToGdkX11GLContext() *X11GLContextInstance {
@@ -1213,12 +1156,12 @@ func (x *X11GLContextInstance) upcastToGdkX11GLContext() *X11GLContextInstance {
 
 // UnsafeX11GLContextToGlibNone is used to convert the instance to it's C value GdkX11GLContext. This is used by the bindings internally.
 func UnsafeX11GLContextToGlibNone(c X11GLContext) unsafe.Pointer {
-	return gdk.TODOToNone(c)
+	return gobject.UnsafeObjectToGlibNone(c)
 }
 
 // UnsafeX11GLContextToGlibFull is used to convert the instance to it's C value GdkX11GLContext, while removeing the finalizer. This is used by the bindings internally.
 func UnsafeX11GLContextToGlibFull(c X11GLContext) unsafe.Pointer {
-	return gdk.TODOToFull(c)
+	return gobject.UnsafeObjectToGlibFull(c)
 }
 
 // X11KeymapInstance is the instance type used by all types extending GdkX11Keymap. It is used internally by the bindings. Users should use the interface [X11Keymap] instead.
@@ -1242,7 +1185,7 @@ type X11Keymap interface {
 	// 
 	// The function returns the following values:
 	// 
-	// 	- ret int 
+	// 	- goret int 
 	//
 	// Extracts the group from the state field sent in an X Key event.
 	// This is only needed for code processing raw X events, since #GdkEventKey
@@ -1256,7 +1199,7 @@ type X11Keymap interface {
 	// 
 	// The function returns the following values:
 	// 
-	// 	- ret bool 
+	// 	- goret bool 
 	//
 	// Determines whether a particular key code represents a key that
 	// is a modifier. That is, it’s a key that normally just affects
@@ -1267,31 +1210,26 @@ type X11Keymap interface {
 	KeyIsModifier(uint) bool
 }
 
-func unsafeWrapX11Keymap(base *gdk.ObjectInstance) *X11KeymapInstance {
+func unsafeWrapX11Keymap(base *gobject.ObjectInstance) *X11KeymapInstance {
 	return &X11KeymapInstance{
-		ObjectInstance: gobject.ObjectInstance{
+		KeymapInstance: gdk.KeymapInstance{
 			ObjectInstance: *base,
 		},
 	}
 }
 
-func marshalX11KeymapInstance(p uintptr) (interface{}, error) {
-	return unsafeWrapX11Keymap(gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Object()), nil
-}
-
-// UnsafeX11KeymapFromGlibBorrow is used to convert raw GdkX11Keymap pointers to go. This is used by the bindings internally.
-func UnsafeX11KeymapFromGlibBorrow(c unsafe.Pointer) X11Keymap {
-	return gdk.TODOBorrow(c).(X11Keymap)
+func marshalX11KeymapInstance(p unsafe.Pointer) (any, error) {
+	return unsafeWrapX11Keymap(gobject.ValueFromNative(p).Object()), nil
 }
 
 // UnsafeX11KeymapFromGlibNone is used to convert raw GdkX11Keymap pointers to go while taking a reference and attaching a finalizer. This is used by the bindings internally.
 func UnsafeX11KeymapFromGlibNone(c unsafe.Pointer) X11Keymap {
-	return gdk.Take(c).(X11Keymap)
+	return gobject.UnsafeObjectFromGlibNone(c).(X11Keymap)
 }
 
 // UnsafeX11KeymapFromGlibFull is used to convert raw GdkX11Keymap pointers to go while attaching a finalizer. This is used by the bindings internally.
 func UnsafeX11KeymapFromGlibFull(c unsafe.Pointer) X11Keymap {
-	return gdk.AssumeOwnership(c).(X11Keymap)
+	return gobject.UnsafeObjectFromGlibFull(c).(X11Keymap)
 }
 
 func (x *X11KeymapInstance) upcastToGdkX11Keymap() *X11KeymapInstance {
@@ -1300,12 +1238,12 @@ func (x *X11KeymapInstance) upcastToGdkX11Keymap() *X11KeymapInstance {
 
 // UnsafeX11KeymapToGlibNone is used to convert the instance to it's C value GdkX11Keymap. This is used by the bindings internally.
 func UnsafeX11KeymapToGlibNone(c X11Keymap) unsafe.Pointer {
-	return gdk.TODOToNone(c)
+	return gobject.UnsafeObjectToGlibNone(c)
 }
 
 // UnsafeX11KeymapToGlibFull is used to convert the instance to it's C value GdkX11Keymap, while removeing the finalizer. This is used by the bindings internally.
 func UnsafeX11KeymapToGlibFull(c X11Keymap) unsafe.Pointer {
-	return gdk.TODOToFull(c)
+	return gobject.UnsafeObjectToGlibFull(c)
 }
 
 // GetGroupForState wraps gdk_x11_keymap_get_group_for_state
@@ -1316,7 +1254,7 @@ func UnsafeX11KeymapToGlibFull(c X11Keymap) unsafe.Pointer {
 // 
 // The function returns the following values:
 // 
-// 	- ret int 
+// 	- goret int 
 //
 // Extracts the group from the state field sent in an X Key event.
 // This is only needed for code processing raw X events, since #GdkEventKey
@@ -1333,11 +1271,11 @@ func (keymap *X11KeymapInstance) GetGroupForState(state uint) int {
 	runtime.KeepAlive(keymap)
 	runtime.KeepAlive(state)
 
-	var ret int
+	var goret int
 
-	ret = int(cret)
+	goret = int(cret)
 
-	return ret
+	return goret
 }
 
 // KeyIsModifier wraps gdk_x11_keymap_key_is_modifier
@@ -1348,7 +1286,7 @@ func (keymap *X11KeymapInstance) GetGroupForState(state uint) int {
 // 
 // The function returns the following values:
 // 
-// 	- ret bool 
+// 	- goret bool 
 //
 // Determines whether a particular key code represents a key that
 // is a modifier. That is, it’s a key that normally just affects
@@ -1368,13 +1306,13 @@ func (keymap *X11KeymapInstance) KeyIsModifier(keycode uint) bool {
 	runtime.KeepAlive(keymap)
 	runtime.KeepAlive(keycode)
 
-	var ret bool
+	var goret bool
 
 	if cret != 0 {
-		ret = true
+		goret = true
 	}
 
-	return ret
+	return goret
 }
 
 // X11MonitorInstance is the instance type used by all types extending GdkX11Monitor. It is used internally by the bindings. Users should use the interface [X11Monitor] instead.
@@ -1389,34 +1327,28 @@ var _ X11Monitor = (*X11MonitorInstance)(nil)
 type X11Monitor interface {
 	gdk.Monitor
 	upcastToGdkX11Monitor() *X11MonitorInstance
-
 }
 
-func unsafeWrapX11Monitor(base *gdk.ObjectInstance) *X11MonitorInstance {
+func unsafeWrapX11Monitor(base *gobject.ObjectInstance) *X11MonitorInstance {
 	return &X11MonitorInstance{
-		ObjectInstance: gobject.ObjectInstance{
+		MonitorInstance: gdk.MonitorInstance{
 			ObjectInstance: *base,
 		},
 	}
 }
 
-func marshalX11MonitorInstance(p uintptr) (interface{}, error) {
-	return unsafeWrapX11Monitor(gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Object()), nil
-}
-
-// UnsafeX11MonitorFromGlibBorrow is used to convert raw GdkX11Monitor pointers to go. This is used by the bindings internally.
-func UnsafeX11MonitorFromGlibBorrow(c unsafe.Pointer) X11Monitor {
-	return gdk.TODOBorrow(c).(X11Monitor)
+func marshalX11MonitorInstance(p unsafe.Pointer) (any, error) {
+	return unsafeWrapX11Monitor(gobject.ValueFromNative(p).Object()), nil
 }
 
 // UnsafeX11MonitorFromGlibNone is used to convert raw GdkX11Monitor pointers to go while taking a reference and attaching a finalizer. This is used by the bindings internally.
 func UnsafeX11MonitorFromGlibNone(c unsafe.Pointer) X11Monitor {
-	return gdk.Take(c).(X11Monitor)
+	return gobject.UnsafeObjectFromGlibNone(c).(X11Monitor)
 }
 
 // UnsafeX11MonitorFromGlibFull is used to convert raw GdkX11Monitor pointers to go while attaching a finalizer. This is used by the bindings internally.
 func UnsafeX11MonitorFromGlibFull(c unsafe.Pointer) X11Monitor {
-	return gdk.AssumeOwnership(c).(X11Monitor)
+	return gobject.UnsafeObjectFromGlibFull(c).(X11Monitor)
 }
 
 func (x *X11MonitorInstance) upcastToGdkX11Monitor() *X11MonitorInstance {
@@ -1425,12 +1357,12 @@ func (x *X11MonitorInstance) upcastToGdkX11Monitor() *X11MonitorInstance {
 
 // UnsafeX11MonitorToGlibNone is used to convert the instance to it's C value GdkX11Monitor. This is used by the bindings internally.
 func UnsafeX11MonitorToGlibNone(c X11Monitor) unsafe.Pointer {
-	return gdk.TODOToNone(c)
+	return gobject.UnsafeObjectToGlibNone(c)
 }
 
 // UnsafeX11MonitorToGlibFull is used to convert the instance to it's C value GdkX11Monitor, while removeing the finalizer. This is used by the bindings internally.
 func UnsafeX11MonitorToGlibFull(c X11Monitor) unsafe.Pointer {
-	return gdk.TODOToFull(c)
+	return gobject.UnsafeObjectToGlibFull(c)
 }
 
 // X11ScreenInstance is the instance type used by all types extending GdkX11Screen. It is used internally by the bindings. Users should use the interface [X11Screen] instead.
@@ -1449,7 +1381,7 @@ type X11Screen interface {
 	// GetCurrentDesktop wraps gdk_x11_screen_get_current_desktop
 	// The function returns the following values:
 	// 
-	// 	- ret uint32 
+	// 	- goret uint32 
 	//
 	// Returns the current workspace for @screen when running under a
 	// window manager that supports multiple workspaces, as described
@@ -1459,7 +1391,7 @@ type X11Screen interface {
 	// GetNumberOfDesktops wraps gdk_x11_screen_get_number_of_desktops
 	// The function returns the following values:
 	// 
-	// 	- ret uint32 
+	// 	- goret uint32 
 	//
 	// Returns the number of workspaces for @screen when running under a
 	// window manager that supports multiple workspaces, as described
@@ -1469,44 +1401,39 @@ type X11Screen interface {
 	// GetScreenNumber wraps gdk_x11_screen_get_screen_number
 	// The function returns the following values:
 	// 
-	// 	- ret int 
+	// 	- goret int 
 	//
 	// Returns the index of a #GdkScreen.
 	GetScreenNumber() int
 	// GetWindowManagerName wraps gdk_x11_screen_get_window_manager_name
 	// The function returns the following values:
 	// 
-	// 	- ret string 
+	// 	- goret string 
 	//
 	// Returns the name of the window manager for @screen.
 	GetWindowManagerName() string
 }
 
-func unsafeWrapX11Screen(base *gdk.ObjectInstance) *X11ScreenInstance {
+func unsafeWrapX11Screen(base *gobject.ObjectInstance) *X11ScreenInstance {
 	return &X11ScreenInstance{
-		ObjectInstance: gobject.ObjectInstance{
+		ScreenInstance: gdk.ScreenInstance{
 			ObjectInstance: *base,
 		},
 	}
 }
 
-func marshalX11ScreenInstance(p uintptr) (interface{}, error) {
-	return unsafeWrapX11Screen(gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Object()), nil
-}
-
-// UnsafeX11ScreenFromGlibBorrow is used to convert raw GdkX11Screen pointers to go. This is used by the bindings internally.
-func UnsafeX11ScreenFromGlibBorrow(c unsafe.Pointer) X11Screen {
-	return gdk.TODOBorrow(c).(X11Screen)
+func marshalX11ScreenInstance(p unsafe.Pointer) (any, error) {
+	return unsafeWrapX11Screen(gobject.ValueFromNative(p).Object()), nil
 }
 
 // UnsafeX11ScreenFromGlibNone is used to convert raw GdkX11Screen pointers to go while taking a reference and attaching a finalizer. This is used by the bindings internally.
 func UnsafeX11ScreenFromGlibNone(c unsafe.Pointer) X11Screen {
-	return gdk.Take(c).(X11Screen)
+	return gobject.UnsafeObjectFromGlibNone(c).(X11Screen)
 }
 
 // UnsafeX11ScreenFromGlibFull is used to convert raw GdkX11Screen pointers to go while attaching a finalizer. This is used by the bindings internally.
 func UnsafeX11ScreenFromGlibFull(c unsafe.Pointer) X11Screen {
-	return gdk.AssumeOwnership(c).(X11Screen)
+	return gobject.UnsafeObjectFromGlibFull(c).(X11Screen)
 }
 
 func (x *X11ScreenInstance) upcastToGdkX11Screen() *X11ScreenInstance {
@@ -1515,18 +1442,18 @@ func (x *X11ScreenInstance) upcastToGdkX11Screen() *X11ScreenInstance {
 
 // UnsafeX11ScreenToGlibNone is used to convert the instance to it's C value GdkX11Screen. This is used by the bindings internally.
 func UnsafeX11ScreenToGlibNone(c X11Screen) unsafe.Pointer {
-	return gdk.TODOToNone(c)
+	return gobject.UnsafeObjectToGlibNone(c)
 }
 
 // UnsafeX11ScreenToGlibFull is used to convert the instance to it's C value GdkX11Screen, while removeing the finalizer. This is used by the bindings internally.
 func UnsafeX11ScreenToGlibFull(c X11Screen) unsafe.Pointer {
-	return gdk.TODOToFull(c)
+	return gobject.UnsafeObjectToGlibFull(c)
 }
 
 // GetCurrentDesktop wraps gdk_x11_screen_get_current_desktop
 // The function returns the following values:
 // 
-// 	- ret uint32 
+// 	- goret uint32 
 //
 // Returns the current workspace for @screen when running under a
 // window manager that supports multiple workspaces, as described
@@ -1541,17 +1468,17 @@ func (screen *X11ScreenInstance) GetCurrentDesktop() uint32 {
 	cret = C.gdk_x11_screen_get_current_desktop(carg0)
 	runtime.KeepAlive(screen)
 
-	var ret uint32
+	var goret uint32
 
-	ret = uint32(cret)
+	goret = uint32(cret)
 
-	return ret
+	return goret
 }
 
 // GetNumberOfDesktops wraps gdk_x11_screen_get_number_of_desktops
 // The function returns the following values:
 // 
-// 	- ret uint32 
+// 	- goret uint32 
 //
 // Returns the number of workspaces for @screen when running under a
 // window manager that supports multiple workspaces, as described
@@ -1566,17 +1493,17 @@ func (screen *X11ScreenInstance) GetNumberOfDesktops() uint32 {
 	cret = C.gdk_x11_screen_get_number_of_desktops(carg0)
 	runtime.KeepAlive(screen)
 
-	var ret uint32
+	var goret uint32
 
-	ret = uint32(cret)
+	goret = uint32(cret)
 
-	return ret
+	return goret
 }
 
 // GetScreenNumber wraps gdk_x11_screen_get_screen_number
 // The function returns the following values:
 // 
-// 	- ret int 
+// 	- goret int 
 //
 // Returns the index of a #GdkScreen.
 func (screen *X11ScreenInstance) GetScreenNumber() int {
@@ -1588,17 +1515,17 @@ func (screen *X11ScreenInstance) GetScreenNumber() int {
 	cret = C.gdk_x11_screen_get_screen_number(carg0)
 	runtime.KeepAlive(screen)
 
-	var ret int
+	var goret int
 
-	ret = int(cret)
+	goret = int(cret)
 
-	return ret
+	return goret
 }
 
 // GetWindowManagerName wraps gdk_x11_screen_get_window_manager_name
 // The function returns the following values:
 // 
-// 	- ret string 
+// 	- goret string 
 //
 // Returns the name of the window manager for @screen.
 func (screen *X11ScreenInstance) GetWindowManagerName() string {
@@ -1610,11 +1537,11 @@ func (screen *X11ScreenInstance) GetWindowManagerName() string {
 	cret = C.gdk_x11_screen_get_window_manager_name(carg0)
 	runtime.KeepAlive(screen)
 
-	var ret string
+	var goret string
 
-	ret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
 
-	return ret
+	return goret
 }
 
 // X11VisualInstance is the instance type used by all types extending GdkX11Visual. It is used internally by the bindings. Users should use the interface [X11Visual] instead.
@@ -1629,34 +1556,28 @@ var _ X11Visual = (*X11VisualInstance)(nil)
 type X11Visual interface {
 	gdk.Visual
 	upcastToGdkX11Visual() *X11VisualInstance
-
 }
 
-func unsafeWrapX11Visual(base *gdk.ObjectInstance) *X11VisualInstance {
+func unsafeWrapX11Visual(base *gobject.ObjectInstance) *X11VisualInstance {
 	return &X11VisualInstance{
-		ObjectInstance: gobject.ObjectInstance{
+		VisualInstance: gdk.VisualInstance{
 			ObjectInstance: *base,
 		},
 	}
 }
 
-func marshalX11VisualInstance(p uintptr) (interface{}, error) {
-	return unsafeWrapX11Visual(gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Object()), nil
-}
-
-// UnsafeX11VisualFromGlibBorrow is used to convert raw GdkX11Visual pointers to go. This is used by the bindings internally.
-func UnsafeX11VisualFromGlibBorrow(c unsafe.Pointer) X11Visual {
-	return gdk.TODOBorrow(c).(X11Visual)
+func marshalX11VisualInstance(p unsafe.Pointer) (any, error) {
+	return unsafeWrapX11Visual(gobject.ValueFromNative(p).Object()), nil
 }
 
 // UnsafeX11VisualFromGlibNone is used to convert raw GdkX11Visual pointers to go while taking a reference and attaching a finalizer. This is used by the bindings internally.
 func UnsafeX11VisualFromGlibNone(c unsafe.Pointer) X11Visual {
-	return gdk.Take(c).(X11Visual)
+	return gobject.UnsafeObjectFromGlibNone(c).(X11Visual)
 }
 
 // UnsafeX11VisualFromGlibFull is used to convert raw GdkX11Visual pointers to go while attaching a finalizer. This is used by the bindings internally.
 func UnsafeX11VisualFromGlibFull(c unsafe.Pointer) X11Visual {
-	return gdk.AssumeOwnership(c).(X11Visual)
+	return gobject.UnsafeObjectFromGlibFull(c).(X11Visual)
 }
 
 func (x *X11VisualInstance) upcastToGdkX11Visual() *X11VisualInstance {
@@ -1665,12 +1586,12 @@ func (x *X11VisualInstance) upcastToGdkX11Visual() *X11VisualInstance {
 
 // UnsafeX11VisualToGlibNone is used to convert the instance to it's C value GdkX11Visual. This is used by the bindings internally.
 func UnsafeX11VisualToGlibNone(c X11Visual) unsafe.Pointer {
-	return gdk.TODOToNone(c)
+	return gobject.UnsafeObjectToGlibNone(c)
 }
 
 // UnsafeX11VisualToGlibFull is used to convert the instance to it's C value GdkX11Visual, while removeing the finalizer. This is used by the bindings internally.
 func UnsafeX11VisualToGlibFull(c X11Visual) unsafe.Pointer {
-	return gdk.TODOToFull(c)
+	return gobject.UnsafeObjectToGlibFull(c)
 }
 
 // X11WindowInstance is the instance type used by all types extending GdkX11Window. It is used internally by the bindings. Users should use the interface [X11Window] instead.
@@ -1689,7 +1610,7 @@ type X11Window interface {
 	// GetDesktop wraps gdk_x11_window_get_desktop
 	// The function returns the following values:
 	// 
-	// 	- ret uint32 
+	// 	- goret uint32 
 	//
 	// Gets the number of the workspace @window is on.
 	GetDesktop() uint32
@@ -1799,31 +1720,26 @@ type X11Window interface {
 	SetUTF8Property(string, string)
 }
 
-func unsafeWrapX11Window(base *gdk.ObjectInstance) *X11WindowInstance {
+func unsafeWrapX11Window(base *gobject.ObjectInstance) *X11WindowInstance {
 	return &X11WindowInstance{
-		ObjectInstance: gobject.ObjectInstance{
+		WindowInstance: gdk.WindowInstance{
 			ObjectInstance: *base,
 		},
 	}
 }
 
-func marshalX11WindowInstance(p uintptr) (interface{}, error) {
-	return unsafeWrapX11Window(gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Object()), nil
-}
-
-// UnsafeX11WindowFromGlibBorrow is used to convert raw GdkX11Window pointers to go. This is used by the bindings internally.
-func UnsafeX11WindowFromGlibBorrow(c unsafe.Pointer) X11Window {
-	return gdk.TODOBorrow(c).(X11Window)
+func marshalX11WindowInstance(p unsafe.Pointer) (any, error) {
+	return unsafeWrapX11Window(gobject.ValueFromNative(p).Object()), nil
 }
 
 // UnsafeX11WindowFromGlibNone is used to convert raw GdkX11Window pointers to go while taking a reference and attaching a finalizer. This is used by the bindings internally.
 func UnsafeX11WindowFromGlibNone(c unsafe.Pointer) X11Window {
-	return gdk.Take(c).(X11Window)
+	return gobject.UnsafeObjectFromGlibNone(c).(X11Window)
 }
 
 // UnsafeX11WindowFromGlibFull is used to convert raw GdkX11Window pointers to go while attaching a finalizer. This is used by the bindings internally.
 func UnsafeX11WindowFromGlibFull(c unsafe.Pointer) X11Window {
-	return gdk.AssumeOwnership(c).(X11Window)
+	return gobject.UnsafeObjectFromGlibFull(c).(X11Window)
 }
 
 func (x *X11WindowInstance) upcastToGdkX11Window() *X11WindowInstance {
@@ -1832,18 +1748,18 @@ func (x *X11WindowInstance) upcastToGdkX11Window() *X11WindowInstance {
 
 // UnsafeX11WindowToGlibNone is used to convert the instance to it's C value GdkX11Window. This is used by the bindings internally.
 func UnsafeX11WindowToGlibNone(c X11Window) unsafe.Pointer {
-	return gdk.TODOToNone(c)
+	return gobject.UnsafeObjectToGlibNone(c)
 }
 
 // UnsafeX11WindowToGlibFull is used to convert the instance to it's C value GdkX11Window, while removeing the finalizer. This is used by the bindings internally.
 func UnsafeX11WindowToGlibFull(c X11Window) unsafe.Pointer {
-	return gdk.TODOToFull(c)
+	return gobject.UnsafeObjectToGlibFull(c)
 }
 
 // GetDesktop wraps gdk_x11_window_get_desktop
 // The function returns the following values:
 // 
-// 	- ret uint32 
+// 	- goret uint32 
 //
 // Gets the number of the workspace @window is on.
 func (window *X11WindowInstance) GetDesktop() uint32 {
@@ -1855,11 +1771,11 @@ func (window *X11WindowInstance) GetDesktop() uint32 {
 	cret = C.gdk_x11_window_get_desktop(carg0)
 	runtime.KeepAlive(window)
 
-	var ret uint32
+	var goret uint32
 
-	ret = uint32(cret)
+	goret = uint32(cret)
 
-	return ret
+	return goret
 }
 
 // MoveToCurrentDesktop wraps gdk_x11_window_move_to_current_desktop
@@ -2056,7 +1972,7 @@ func (window *X11WindowInstance) SetUserTime(timestamp uint32) {
 func (window *X11WindowInstance) SetUTF8Property(name string, value string) {
 	var carg0 *C.GdkX11Window // in, none, converted
 	var carg1 *C.gchar        // in, none, string
-	var carg2 *C.gchar        // in, none, string, nullable
+	var carg2 *C.gchar        // in, none, string, nullable-string
 
 	carg0 = (*C.GdkX11Window)(UnsafeX11WindowToGlibNone(window))
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(name)))
@@ -2085,6 +2001,19 @@ type x11AppLaunchContextClass struct {
 // UnsafeX11AppLaunchContextClassFromGlibBorrow is used to convert raw C.GdkX11AppLaunchContextClass pointers to go. This is used by the bindings internally.
 func UnsafeX11AppLaunchContextClassFromGlibBorrow(p unsafe.Pointer) *X11AppLaunchContextClass {
 	return &X11AppLaunchContextClass{&x11AppLaunchContextClass{(*C.GdkX11AppLaunchContextClass)(p)}}
+}
+
+// UnsafeX11AppLaunchContextClassFromGlibNone is used to convert raw C.GdkX11AppLaunchContextClass pointers to go while taking a reference. This is used by the bindings internally.
+func UnsafeX11AppLaunchContextClassFromGlibNone(p unsafe.Pointer) *X11AppLaunchContextClass {
+	// FIXME: this has no ref function, what should we do here?
+	wrapped := UnsafeX11AppLaunchContextClassFromGlibBorrow(p)
+	runtime.SetFinalizer(
+		wrapped.x11AppLaunchContextClass,
+		func (intern *x11AppLaunchContextClass) {
+			C.free(unsafe.Pointer(intern.native))
+		},
+	)
+	return wrapped
 }
 
 // UnsafeX11AppLaunchContextClassFromGlibFull is used to convert raw C.GdkX11AppLaunchContextClass pointers to go while taking a reference. This is used by the bindings internally.
@@ -2134,6 +2063,19 @@ func UnsafeX11CursorClassFromGlibBorrow(p unsafe.Pointer) *X11CursorClass {
 	return &X11CursorClass{&x11CursorClass{(*C.GdkX11CursorClass)(p)}}
 }
 
+// UnsafeX11CursorClassFromGlibNone is used to convert raw C.GdkX11CursorClass pointers to go while taking a reference. This is used by the bindings internally.
+func UnsafeX11CursorClassFromGlibNone(p unsafe.Pointer) *X11CursorClass {
+	// FIXME: this has no ref function, what should we do here?
+	wrapped := UnsafeX11CursorClassFromGlibBorrow(p)
+	runtime.SetFinalizer(
+		wrapped.x11CursorClass,
+		func (intern *x11CursorClass) {
+			C.free(unsafe.Pointer(intern.native))
+		},
+	)
+	return wrapped
+}
+
 // UnsafeX11CursorClassFromGlibFull is used to convert raw C.GdkX11CursorClass pointers to go while taking a reference. This is used by the bindings internally.
 func UnsafeX11CursorClassFromGlibFull(p unsafe.Pointer) *X11CursorClass {
 	wrapped := UnsafeX11CursorClassFromGlibBorrow(p)
@@ -2179,6 +2121,19 @@ type x11DeviceCoreClass struct {
 // UnsafeX11DeviceCoreClassFromGlibBorrow is used to convert raw C.GdkX11DeviceCoreClass pointers to go. This is used by the bindings internally.
 func UnsafeX11DeviceCoreClassFromGlibBorrow(p unsafe.Pointer) *X11DeviceCoreClass {
 	return &X11DeviceCoreClass{&x11DeviceCoreClass{(*C.GdkX11DeviceCoreClass)(p)}}
+}
+
+// UnsafeX11DeviceCoreClassFromGlibNone is used to convert raw C.GdkX11DeviceCoreClass pointers to go while taking a reference. This is used by the bindings internally.
+func UnsafeX11DeviceCoreClassFromGlibNone(p unsafe.Pointer) *X11DeviceCoreClass {
+	// FIXME: this has no ref function, what should we do here?
+	wrapped := UnsafeX11DeviceCoreClassFromGlibBorrow(p)
+	runtime.SetFinalizer(
+		wrapped.x11DeviceCoreClass,
+		func (intern *x11DeviceCoreClass) {
+			C.free(unsafe.Pointer(intern.native))
+		},
+	)
+	return wrapped
 }
 
 // UnsafeX11DeviceCoreClassFromGlibFull is used to convert raw C.GdkX11DeviceCoreClass pointers to go while taking a reference. This is used by the bindings internally.
@@ -2228,6 +2183,19 @@ func UnsafeX11DeviceManagerCoreClassFromGlibBorrow(p unsafe.Pointer) *X11DeviceM
 	return &X11DeviceManagerCoreClass{&x11DeviceManagerCoreClass{(*C.GdkX11DeviceManagerCoreClass)(p)}}
 }
 
+// UnsafeX11DeviceManagerCoreClassFromGlibNone is used to convert raw C.GdkX11DeviceManagerCoreClass pointers to go while taking a reference. This is used by the bindings internally.
+func UnsafeX11DeviceManagerCoreClassFromGlibNone(p unsafe.Pointer) *X11DeviceManagerCoreClass {
+	// FIXME: this has no ref function, what should we do here?
+	wrapped := UnsafeX11DeviceManagerCoreClassFromGlibBorrow(p)
+	runtime.SetFinalizer(
+		wrapped.x11DeviceManagerCoreClass,
+		func (intern *x11DeviceManagerCoreClass) {
+			C.free(unsafe.Pointer(intern.native))
+		},
+	)
+	return wrapped
+}
+
 // UnsafeX11DeviceManagerCoreClassFromGlibFull is used to convert raw C.GdkX11DeviceManagerCoreClass pointers to go while taking a reference. This is used by the bindings internally.
 func UnsafeX11DeviceManagerCoreClassFromGlibFull(p unsafe.Pointer) *X11DeviceManagerCoreClass {
 	wrapped := UnsafeX11DeviceManagerCoreClassFromGlibBorrow(p)
@@ -2273,6 +2241,19 @@ type x11DeviceManagerXI2Class struct {
 // UnsafeX11DeviceManagerXI2ClassFromGlibBorrow is used to convert raw C.GdkX11DeviceManagerXI2Class pointers to go. This is used by the bindings internally.
 func UnsafeX11DeviceManagerXI2ClassFromGlibBorrow(p unsafe.Pointer) *X11DeviceManagerXI2Class {
 	return &X11DeviceManagerXI2Class{&x11DeviceManagerXI2Class{(*C.GdkX11DeviceManagerXI2Class)(p)}}
+}
+
+// UnsafeX11DeviceManagerXI2ClassFromGlibNone is used to convert raw C.GdkX11DeviceManagerXI2Class pointers to go while taking a reference. This is used by the bindings internally.
+func UnsafeX11DeviceManagerXI2ClassFromGlibNone(p unsafe.Pointer) *X11DeviceManagerXI2Class {
+	// FIXME: this has no ref function, what should we do here?
+	wrapped := UnsafeX11DeviceManagerXI2ClassFromGlibBorrow(p)
+	runtime.SetFinalizer(
+		wrapped.x11DeviceManagerXI2Class,
+		func (intern *x11DeviceManagerXI2Class) {
+			C.free(unsafe.Pointer(intern.native))
+		},
+	)
+	return wrapped
 }
 
 // UnsafeX11DeviceManagerXI2ClassFromGlibFull is used to convert raw C.GdkX11DeviceManagerXI2Class pointers to go while taking a reference. This is used by the bindings internally.
@@ -2322,6 +2303,19 @@ func UnsafeX11DeviceXI2ClassFromGlibBorrow(p unsafe.Pointer) *X11DeviceXI2Class 
 	return &X11DeviceXI2Class{&x11DeviceXI2Class{(*C.GdkX11DeviceXI2Class)(p)}}
 }
 
+// UnsafeX11DeviceXI2ClassFromGlibNone is used to convert raw C.GdkX11DeviceXI2Class pointers to go while taking a reference. This is used by the bindings internally.
+func UnsafeX11DeviceXI2ClassFromGlibNone(p unsafe.Pointer) *X11DeviceXI2Class {
+	// FIXME: this has no ref function, what should we do here?
+	wrapped := UnsafeX11DeviceXI2ClassFromGlibBorrow(p)
+	runtime.SetFinalizer(
+		wrapped.x11DeviceXI2Class,
+		func (intern *x11DeviceXI2Class) {
+			C.free(unsafe.Pointer(intern.native))
+		},
+	)
+	return wrapped
+}
+
 // UnsafeX11DeviceXI2ClassFromGlibFull is used to convert raw C.GdkX11DeviceXI2Class pointers to go while taking a reference. This is used by the bindings internally.
 func UnsafeX11DeviceXI2ClassFromGlibFull(p unsafe.Pointer) *X11DeviceXI2Class {
 	wrapped := UnsafeX11DeviceXI2ClassFromGlibBorrow(p)
@@ -2367,6 +2361,19 @@ type x11DisplayClass struct {
 // UnsafeX11DisplayClassFromGlibBorrow is used to convert raw C.GdkX11DisplayClass pointers to go. This is used by the bindings internally.
 func UnsafeX11DisplayClassFromGlibBorrow(p unsafe.Pointer) *X11DisplayClass {
 	return &X11DisplayClass{&x11DisplayClass{(*C.GdkX11DisplayClass)(p)}}
+}
+
+// UnsafeX11DisplayClassFromGlibNone is used to convert raw C.GdkX11DisplayClass pointers to go while taking a reference. This is used by the bindings internally.
+func UnsafeX11DisplayClassFromGlibNone(p unsafe.Pointer) *X11DisplayClass {
+	// FIXME: this has no ref function, what should we do here?
+	wrapped := UnsafeX11DisplayClassFromGlibBorrow(p)
+	runtime.SetFinalizer(
+		wrapped.x11DisplayClass,
+		func (intern *x11DisplayClass) {
+			C.free(unsafe.Pointer(intern.native))
+		},
+	)
+	return wrapped
 }
 
 // UnsafeX11DisplayClassFromGlibFull is used to convert raw C.GdkX11DisplayClass pointers to go while taking a reference. This is used by the bindings internally.
@@ -2416,6 +2423,19 @@ func UnsafeX11DisplayManagerClassFromGlibBorrow(p unsafe.Pointer) *X11DisplayMan
 	return &X11DisplayManagerClass{&x11DisplayManagerClass{(*C.GdkX11DisplayManagerClass)(p)}}
 }
 
+// UnsafeX11DisplayManagerClassFromGlibNone is used to convert raw C.GdkX11DisplayManagerClass pointers to go while taking a reference. This is used by the bindings internally.
+func UnsafeX11DisplayManagerClassFromGlibNone(p unsafe.Pointer) *X11DisplayManagerClass {
+	// FIXME: this has no ref function, what should we do here?
+	wrapped := UnsafeX11DisplayManagerClassFromGlibBorrow(p)
+	runtime.SetFinalizer(
+		wrapped.x11DisplayManagerClass,
+		func (intern *x11DisplayManagerClass) {
+			C.free(unsafe.Pointer(intern.native))
+		},
+	)
+	return wrapped
+}
+
 // UnsafeX11DisplayManagerClassFromGlibFull is used to convert raw C.GdkX11DisplayManagerClass pointers to go while taking a reference. This is used by the bindings internally.
 func UnsafeX11DisplayManagerClassFromGlibFull(p unsafe.Pointer) *X11DisplayManagerClass {
 	wrapped := UnsafeX11DisplayManagerClassFromGlibBorrow(p)
@@ -2461,6 +2481,19 @@ type x11DragContextClass struct {
 // UnsafeX11DragContextClassFromGlibBorrow is used to convert raw C.GdkX11DragContextClass pointers to go. This is used by the bindings internally.
 func UnsafeX11DragContextClassFromGlibBorrow(p unsafe.Pointer) *X11DragContextClass {
 	return &X11DragContextClass{&x11DragContextClass{(*C.GdkX11DragContextClass)(p)}}
+}
+
+// UnsafeX11DragContextClassFromGlibNone is used to convert raw C.GdkX11DragContextClass pointers to go while taking a reference. This is used by the bindings internally.
+func UnsafeX11DragContextClassFromGlibNone(p unsafe.Pointer) *X11DragContextClass {
+	// FIXME: this has no ref function, what should we do here?
+	wrapped := UnsafeX11DragContextClassFromGlibBorrow(p)
+	runtime.SetFinalizer(
+		wrapped.x11DragContextClass,
+		func (intern *x11DragContextClass) {
+			C.free(unsafe.Pointer(intern.native))
+		},
+	)
+	return wrapped
 }
 
 // UnsafeX11DragContextClassFromGlibFull is used to convert raw C.GdkX11DragContextClass pointers to go while taking a reference. This is used by the bindings internally.
@@ -2510,6 +2543,19 @@ func UnsafeX11GLContextClassFromGlibBorrow(p unsafe.Pointer) *X11GLContextClass 
 	return &X11GLContextClass{&x11GLContextClass{(*C.GdkX11GLContextClass)(p)}}
 }
 
+// UnsafeX11GLContextClassFromGlibNone is used to convert raw C.GdkX11GLContextClass pointers to go while taking a reference. This is used by the bindings internally.
+func UnsafeX11GLContextClassFromGlibNone(p unsafe.Pointer) *X11GLContextClass {
+	// FIXME: this has no ref function, what should we do here?
+	wrapped := UnsafeX11GLContextClassFromGlibBorrow(p)
+	runtime.SetFinalizer(
+		wrapped.x11GLContextClass,
+		func (intern *x11GLContextClass) {
+			C.free(unsafe.Pointer(intern.native))
+		},
+	)
+	return wrapped
+}
+
 // UnsafeX11GLContextClassFromGlibFull is used to convert raw C.GdkX11GLContextClass pointers to go while taking a reference. This is used by the bindings internally.
 func UnsafeX11GLContextClassFromGlibFull(p unsafe.Pointer) *X11GLContextClass {
 	wrapped := UnsafeX11GLContextClassFromGlibBorrow(p)
@@ -2555,6 +2601,19 @@ type x11KeymapClass struct {
 // UnsafeX11KeymapClassFromGlibBorrow is used to convert raw C.GdkX11KeymapClass pointers to go. This is used by the bindings internally.
 func UnsafeX11KeymapClassFromGlibBorrow(p unsafe.Pointer) *X11KeymapClass {
 	return &X11KeymapClass{&x11KeymapClass{(*C.GdkX11KeymapClass)(p)}}
+}
+
+// UnsafeX11KeymapClassFromGlibNone is used to convert raw C.GdkX11KeymapClass pointers to go while taking a reference. This is used by the bindings internally.
+func UnsafeX11KeymapClassFromGlibNone(p unsafe.Pointer) *X11KeymapClass {
+	// FIXME: this has no ref function, what should we do here?
+	wrapped := UnsafeX11KeymapClassFromGlibBorrow(p)
+	runtime.SetFinalizer(
+		wrapped.x11KeymapClass,
+		func (intern *x11KeymapClass) {
+			C.free(unsafe.Pointer(intern.native))
+		},
+	)
+	return wrapped
 }
 
 // UnsafeX11KeymapClassFromGlibFull is used to convert raw C.GdkX11KeymapClass pointers to go while taking a reference. This is used by the bindings internally.
@@ -2604,6 +2663,19 @@ func UnsafeX11MonitorClassFromGlibBorrow(p unsafe.Pointer) *X11MonitorClass {
 	return &X11MonitorClass{&x11MonitorClass{(*C.GdkX11MonitorClass)(p)}}
 }
 
+// UnsafeX11MonitorClassFromGlibNone is used to convert raw C.GdkX11MonitorClass pointers to go while taking a reference. This is used by the bindings internally.
+func UnsafeX11MonitorClassFromGlibNone(p unsafe.Pointer) *X11MonitorClass {
+	// FIXME: this has no ref function, what should we do here?
+	wrapped := UnsafeX11MonitorClassFromGlibBorrow(p)
+	runtime.SetFinalizer(
+		wrapped.x11MonitorClass,
+		func (intern *x11MonitorClass) {
+			C.free(unsafe.Pointer(intern.native))
+		},
+	)
+	return wrapped
+}
+
 // UnsafeX11MonitorClassFromGlibFull is used to convert raw C.GdkX11MonitorClass pointers to go while taking a reference. This is used by the bindings internally.
 func UnsafeX11MonitorClassFromGlibFull(p unsafe.Pointer) *X11MonitorClass {
 	wrapped := UnsafeX11MonitorClassFromGlibBorrow(p)
@@ -2649,6 +2721,19 @@ type x11ScreenClass struct {
 // UnsafeX11ScreenClassFromGlibBorrow is used to convert raw C.GdkX11ScreenClass pointers to go. This is used by the bindings internally.
 func UnsafeX11ScreenClassFromGlibBorrow(p unsafe.Pointer) *X11ScreenClass {
 	return &X11ScreenClass{&x11ScreenClass{(*C.GdkX11ScreenClass)(p)}}
+}
+
+// UnsafeX11ScreenClassFromGlibNone is used to convert raw C.GdkX11ScreenClass pointers to go while taking a reference. This is used by the bindings internally.
+func UnsafeX11ScreenClassFromGlibNone(p unsafe.Pointer) *X11ScreenClass {
+	// FIXME: this has no ref function, what should we do here?
+	wrapped := UnsafeX11ScreenClassFromGlibBorrow(p)
+	runtime.SetFinalizer(
+		wrapped.x11ScreenClass,
+		func (intern *x11ScreenClass) {
+			C.free(unsafe.Pointer(intern.native))
+		},
+	)
+	return wrapped
 }
 
 // UnsafeX11ScreenClassFromGlibFull is used to convert raw C.GdkX11ScreenClass pointers to go while taking a reference. This is used by the bindings internally.
@@ -2698,6 +2783,19 @@ func UnsafeX11VisualClassFromGlibBorrow(p unsafe.Pointer) *X11VisualClass {
 	return &X11VisualClass{&x11VisualClass{(*C.GdkX11VisualClass)(p)}}
 }
 
+// UnsafeX11VisualClassFromGlibNone is used to convert raw C.GdkX11VisualClass pointers to go while taking a reference. This is used by the bindings internally.
+func UnsafeX11VisualClassFromGlibNone(p unsafe.Pointer) *X11VisualClass {
+	// FIXME: this has no ref function, what should we do here?
+	wrapped := UnsafeX11VisualClassFromGlibBorrow(p)
+	runtime.SetFinalizer(
+		wrapped.x11VisualClass,
+		func (intern *x11VisualClass) {
+			C.free(unsafe.Pointer(intern.native))
+		},
+	)
+	return wrapped
+}
+
 // UnsafeX11VisualClassFromGlibFull is used to convert raw C.GdkX11VisualClass pointers to go while taking a reference. This is used by the bindings internally.
 func UnsafeX11VisualClassFromGlibFull(p unsafe.Pointer) *X11VisualClass {
 	wrapped := UnsafeX11VisualClassFromGlibBorrow(p)
@@ -2743,6 +2841,19 @@ type x11WindowClass struct {
 // UnsafeX11WindowClassFromGlibBorrow is used to convert raw C.GdkX11WindowClass pointers to go. This is used by the bindings internally.
 func UnsafeX11WindowClassFromGlibBorrow(p unsafe.Pointer) *X11WindowClass {
 	return &X11WindowClass{&x11WindowClass{(*C.GdkX11WindowClass)(p)}}
+}
+
+// UnsafeX11WindowClassFromGlibNone is used to convert raw C.GdkX11WindowClass pointers to go while taking a reference. This is used by the bindings internally.
+func UnsafeX11WindowClassFromGlibNone(p unsafe.Pointer) *X11WindowClass {
+	// FIXME: this has no ref function, what should we do here?
+	wrapped := UnsafeX11WindowClassFromGlibBorrow(p)
+	runtime.SetFinalizer(
+		wrapped.x11WindowClass,
+		func (intern *x11WindowClass) {
+			C.free(unsafe.Pointer(intern.native))
+		},
+	)
+	return wrapped
 }
 
 // UnsafeX11WindowClassFromGlibFull is used to convert raw C.GdkX11WindowClass pointers to go while taking a reference. This is used by the bindings internally.

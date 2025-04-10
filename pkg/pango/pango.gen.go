@@ -14,172 +14,150 @@ import (
 // #cgo pkg-config: pango
 // #cgo CFLAGS: -Wno-deprecated-declarations
 // #include <pango/pango.h>
+// extern gboolean _gotk4_pango1_AttrFilterFunc(PangoAttribute*, gpointer);
+// extern gboolean _gotk4_pango1_FontsetForEachFunc(PangoFontset*, PangoFont*, gpointer);
 import "C"
 
 // GType values.
 var (
-	GTypeAlignment              = glib.Type(C.pango_alignment_get_type())
-	GTypeAttrType               = glib.Type(C.pango_attr_type_get_type())
-	GTypeBaselineShift          = glib.Type(C.pango_baseline_shift_get_type())
-	GTypeBidiType               = glib.Type(C.pango_bidi_type_get_type())
-	GTypeCoverageLevel          = glib.Type(C.pango_coverage_level_get_type())
-	GTypeDirection              = glib.Type(C.pango_direction_get_type())
-	GTypeEllipsizeMode          = glib.Type(C.pango_ellipsize_mode_get_type())
-	GTypeFontScale              = glib.Type(C.pango_font_scale_get_type())
-	GTypeGravity                = glib.Type(C.pango_gravity_get_type())
-	GTypeGravityHint            = glib.Type(C.pango_gravity_hint_get_type())
-	GTypeLayoutDeserializeError = glib.Type(C.pango_layout_deserialize_error_get_type())
-	GTypeOverline               = glib.Type(C.pango_overline_get_type())
-	GTypeRenderPart             = glib.Type(C.pango_render_part_get_type())
-	GTypeScript                 = glib.Type(C.pango_script_get_type())
-	GTypeStretch                = glib.Type(C.pango_stretch_get_type())
-	GTypeStyle                  = glib.Type(C.pango_style_get_type())
-	GTypeTabAlign               = glib.Type(C.pango_tab_align_get_type())
-	GTypeTextTransform          = glib.Type(C.pango_text_transform_get_type())
-	GTypeUnderline              = glib.Type(C.pango_underline_get_type())
-	GTypeVariant                = glib.Type(C.pango_variant_get_type())
-	GTypeWeight                 = glib.Type(C.pango_weight_get_type())
-	GTypeWrapMode               = glib.Type(C.pango_wrap_mode_get_type())
-	GTypeFontMask               = glib.Type(C.pango_font_mask_get_type())
-	GTypeLayoutDeserializeFlags = glib.Type(C.pango_layout_deserialize_flags_get_type())
-	GTypeLayoutSerializeFlags   = glib.Type(C.pango_layout_serialize_flags_get_type())
-	GTypeShapeFlags             = glib.Type(C.pango_shape_flags_get_type())
-	GTypeShowFlags              = glib.Type(C.pango_show_flags_get_type())
-	GTypeContextInstance        = glib.Type(C.pango_context_get_type())
-	GTypeCoverageInstance       = glib.Type(C.pango_coverage_get_type())
-	GTypeFontInstance           = glib.Type(C.pango_font_get_type())
-	GTypeFontFaceInstance       = glib.Type(C.pango_font_face_get_type())
-	GTypeFontFamilyInstance     = glib.Type(C.pango_font_family_get_type())
-	GTypeFontMapInstance        = glib.Type(C.pango_font_map_get_type())
-	GTypeFontsetInstance        = glib.Type(C.pango_fontset_get_type())
-	GTypeFontsetSimpleInstance  = glib.Type(C.pango_fontset_simple_get_type())
-	GTypeLayoutInstance         = glib.Type(C.pango_layout_get_type())
-	GTypeRendererInstance       = glib.Type(C.pango_renderer_get_type())
-	GTypeAttrIterator           = glib.Type(C.pango_attr_iterator_get_type())
-	GTypeAttrList               = glib.Type(C.pango_attr_list_get_type())
-	GTypeAttribute              = glib.Type(C.pango_attribute_get_type())
-	GTypeColor                  = glib.Type(C.pango_color_get_type())
-	GTypeFontDescription        = glib.Type(C.pango_font_description_get_type())
-	GTypeFontMetrics            = glib.Type(C.pango_font_metrics_get_type())
-	GTypeGlyphItem              = glib.Type(C.pango_glyph_item_get_type())
-	GTypeGlyphItemIter          = glib.Type(C.pango_glyph_item_iter_get_type())
-	GTypeGlyphString            = glib.Type(C.pango_glyph_string_get_type())
-	GTypeItem                   = glib.Type(C.pango_item_get_type())
-	GTypeLanguage               = glib.Type(C.pango_language_get_type())
-	GTypeLayoutIter             = glib.Type(C.pango_layout_iter_get_type())
-	GTypeLayoutLine             = glib.Type(C.pango_layout_line_get_type())
-	GTypeMatrix                 = glib.Type(C.pango_matrix_get_type())
-	GTypeScriptIter             = glib.Type(C.pango_script_iter_get_type())
-	GTypeTabArray               = glib.Type(C.pango_tab_array_get_type())
+	TypeAlignment              = gobject.Type(C.pango_alignment_get_type())
+	TypeAttrType               = gobject.Type(C.pango_attr_type_get_type())
+	TypeBaselineShift          = gobject.Type(C.pango_baseline_shift_get_type())
+	TypeBidiType               = gobject.Type(C.pango_bidi_type_get_type())
+	TypeCoverageLevel          = gobject.Type(C.pango_coverage_level_get_type())
+	TypeDirection              = gobject.Type(C.pango_direction_get_type())
+	TypeEllipsizeMode          = gobject.Type(C.pango_ellipsize_mode_get_type())
+	TypeFontScale              = gobject.Type(C.pango_font_scale_get_type())
+	TypeGravity                = gobject.Type(C.pango_gravity_get_type())
+	TypeGravityHint            = gobject.Type(C.pango_gravity_hint_get_type())
+	TypeLayoutDeserializeError = gobject.Type(C.pango_layout_deserialize_error_get_type())
+	TypeOverline               = gobject.Type(C.pango_overline_get_type())
+	TypeRenderPart             = gobject.Type(C.pango_render_part_get_type())
+	TypeScript                 = gobject.Type(C.pango_script_get_type())
+	TypeStretch                = gobject.Type(C.pango_stretch_get_type())
+	TypeStyle                  = gobject.Type(C.pango_style_get_type())
+	TypeTabAlign               = gobject.Type(C.pango_tab_align_get_type())
+	TypeTextTransform          = gobject.Type(C.pango_text_transform_get_type())
+	TypeUnderline              = gobject.Type(C.pango_underline_get_type())
+	TypeVariant                = gobject.Type(C.pango_variant_get_type())
+	TypeWeight                 = gobject.Type(C.pango_weight_get_type())
+	TypeWrapMode               = gobject.Type(C.pango_wrap_mode_get_type())
+	TypeFontMask               = gobject.Type(C.pango_font_mask_get_type())
+	TypeLayoutDeserializeFlags = gobject.Type(C.pango_layout_deserialize_flags_get_type())
+	TypeLayoutSerializeFlags   = gobject.Type(C.pango_layout_serialize_flags_get_type())
+	TypeShapeFlags             = gobject.Type(C.pango_shape_flags_get_type())
+	TypeShowFlags              = gobject.Type(C.pango_show_flags_get_type())
+	TypeContext                = gobject.Type(C.pango_context_get_type())
+	TypeCoverage               = gobject.Type(C.pango_coverage_get_type())
+	TypeFont                   = gobject.Type(C.pango_font_get_type())
+	TypeFontFace               = gobject.Type(C.pango_font_face_get_type())
+	TypeFontFamily             = gobject.Type(C.pango_font_family_get_type())
+	TypeFontMap                = gobject.Type(C.pango_font_map_get_type())
+	TypeFontset                = gobject.Type(C.pango_fontset_get_type())
+	TypeFontsetSimple          = gobject.Type(C.pango_fontset_simple_get_type())
+	TypeLayout                 = gobject.Type(C.pango_layout_get_type())
+	TypeRenderer               = gobject.Type(C.pango_renderer_get_type())
+	TypeAttrIterator           = gobject.Type(C.pango_attr_iterator_get_type())
+	TypeAttrList               = gobject.Type(C.pango_attr_list_get_type())
+	TypeAttribute              = gobject.Type(C.pango_attribute_get_type())
+	TypeColor                  = gobject.Type(C.pango_color_get_type())
+	TypeFontDescription        = gobject.Type(C.pango_font_description_get_type())
+	TypeFontMetrics            = gobject.Type(C.pango_font_metrics_get_type())
+	TypeGlyphItem              = gobject.Type(C.pango_glyph_item_get_type())
+	TypeGlyphItemIter          = gobject.Type(C.pango_glyph_item_iter_get_type())
+	TypeGlyphString            = gobject.Type(C.pango_glyph_string_get_type())
+	TypeItem                   = gobject.Type(C.pango_item_get_type())
+	TypeLanguage               = gobject.Type(C.pango_language_get_type())
+	TypeLayoutIter             = gobject.Type(C.pango_layout_iter_get_type())
+	TypeLayoutLine             = gobject.Type(C.pango_layout_line_get_type())
+	TypeMatrix                 = gobject.Type(C.pango_matrix_get_type())
+	TypeScriptIter             = gobject.Type(C.pango_script_iter_get_type())
+	TypeTabArray               = gobject.Type(C.pango_tab_array_get_type())
 )
 
 func init() {
-	glib.RegisterGValueMarshalers([]glib.TypeMarshaler{
-		glib.TypeMarshaler{T: GTypeAlignment, F: marshalAlignment},
-		glib.TypeMarshaler{T: GTypeAttrType, F: marshalAttrType},
-		glib.TypeMarshaler{T: GTypeBaselineShift, F: marshalBaselineShift},
-		glib.TypeMarshaler{T: GTypeBidiType, F: marshalBidiType},
-		glib.TypeMarshaler{T: GTypeCoverageLevel, F: marshalCoverageLevel},
-		glib.TypeMarshaler{T: GTypeDirection, F: marshalDirection},
-		glib.TypeMarshaler{T: GTypeEllipsizeMode, F: marshalEllipsizeMode},
-		glib.TypeMarshaler{T: GTypeFontScale, F: marshalFontScale},
-		glib.TypeMarshaler{T: GTypeGravity, F: marshalGravity},
-		glib.TypeMarshaler{T: GTypeGravityHint, F: marshalGravityHint},
-		glib.TypeMarshaler{T: GTypeLayoutDeserializeError, F: marshalLayoutDeserializeError},
-		glib.TypeMarshaler{T: GTypeOverline, F: marshalOverline},
-		glib.TypeMarshaler{T: GTypeRenderPart, F: marshalRenderPart},
-		glib.TypeMarshaler{T: GTypeScript, F: marshalScript},
-		glib.TypeMarshaler{T: GTypeStretch, F: marshalStretch},
-		glib.TypeMarshaler{T: GTypeStyle, F: marshalStyle},
-		glib.TypeMarshaler{T: GTypeTabAlign, F: marshalTabAlign},
-		glib.TypeMarshaler{T: GTypeTextTransform, F: marshalTextTransform},
-		glib.TypeMarshaler{T: GTypeUnderline, F: marshalUnderline},
-		glib.TypeMarshaler{T: GTypeVariant, F: marshalVariant},
-		glib.TypeMarshaler{T: GTypeWeight, F: marshalWeight},
-		glib.TypeMarshaler{T: GTypeWrapMode, F: marshalWrapMode},
-		glib.TypeMarshaler{T: GTypeFontMask, F: marshalFontMask},
-		glib.TypeMarshaler{T: GTypeLayoutDeserializeFlags, F: marshalLayoutDeserializeFlags},
-		glib.TypeMarshaler{T: GTypeLayoutSerializeFlags, F: marshalLayoutSerializeFlags},
-		glib.TypeMarshaler{T: GTypeShapeFlags, F: marshalShapeFlags},
-		glib.TypeMarshaler{T: GTypeShowFlags, F: marshalShowFlags},
-		glib.TypeMarshaler{T: GTypeContextInstance, F: marshalContextInstance},
-		glib.TypeMarshaler{T: GTypeCoverageInstance, F: marshalCoverageInstance},
-		glib.TypeMarshaler{T: GTypeFontInstance, F: marshalFontInstance},
-		glib.TypeMarshaler{T: GTypeFontFaceInstance, F: marshalFontFaceInstance},
-		glib.TypeMarshaler{T: GTypeFontFamilyInstance, F: marshalFontFamilyInstance},
-		glib.TypeMarshaler{T: GTypeFontMapInstance, F: marshalFontMapInstance},
-		glib.TypeMarshaler{T: GTypeFontsetInstance, F: marshalFontsetInstance},
-		glib.TypeMarshaler{T: GTypeFontsetSimpleInstance, F: marshalFontsetSimpleInstance},
-		glib.TypeMarshaler{T: GTypeLayoutInstance, F: marshalLayoutInstance},
-		glib.TypeMarshaler{T: GTypeRendererInstance, F: marshalRendererInstance},
-		glib.TypeMarshaler{T: GTypeAttrIterator, F: marshalAttrIterator},
-		glib.TypeMarshaler{T: GTypeAttrList, F: marshalAttrList},
-		glib.TypeMarshaler{T: GTypeAttribute, F: marshalAttribute},
-		glib.TypeMarshaler{T: GTypeColor, F: marshalColor},
-		glib.TypeMarshaler{T: GTypeFontDescription, F: marshalFontDescription},
-		glib.TypeMarshaler{T: GTypeFontMetrics, F: marshalFontMetrics},
-		glib.TypeMarshaler{T: GTypeGlyphItem, F: marshalGlyphItem},
-		glib.TypeMarshaler{T: GTypeGlyphItemIter, F: marshalGlyphItemIter},
-		glib.TypeMarshaler{T: GTypeGlyphString, F: marshalGlyphString},
-		glib.TypeMarshaler{T: GTypeItem, F: marshalItem},
-		glib.TypeMarshaler{T: GTypeLanguage, F: marshalLanguage},
-		glib.TypeMarshaler{T: GTypeLayoutIter, F: marshalLayoutIter},
-		glib.TypeMarshaler{T: GTypeLayoutLine, F: marshalLayoutLine},
-		glib.TypeMarshaler{T: GTypeMatrix, F: marshalMatrix},
-		glib.TypeMarshaler{T: GTypeScriptIter, F: marshalScriptIter},
-		glib.TypeMarshaler{T: GTypeTabArray, F: marshalTabArray},
+	gobject.RegisterGValueMarshalers([]gobject.TypeMarshaler{
+		gobject.TypeMarshaler{T: TypeAlignment, F: marshalAlignment},
+		gobject.TypeMarshaler{T: TypeAttrType, F: marshalAttrType},
+		gobject.TypeMarshaler{T: TypeBaselineShift, F: marshalBaselineShift},
+		gobject.TypeMarshaler{T: TypeBidiType, F: marshalBidiType},
+		gobject.TypeMarshaler{T: TypeCoverageLevel, F: marshalCoverageLevel},
+		gobject.TypeMarshaler{T: TypeDirection, F: marshalDirection},
+		gobject.TypeMarshaler{T: TypeEllipsizeMode, F: marshalEllipsizeMode},
+		gobject.TypeMarshaler{T: TypeFontScale, F: marshalFontScale},
+		gobject.TypeMarshaler{T: TypeGravity, F: marshalGravity},
+		gobject.TypeMarshaler{T: TypeGravityHint, F: marshalGravityHint},
+		gobject.TypeMarshaler{T: TypeLayoutDeserializeError, F: marshalLayoutDeserializeError},
+		gobject.TypeMarshaler{T: TypeOverline, F: marshalOverline},
+		gobject.TypeMarshaler{T: TypeRenderPart, F: marshalRenderPart},
+		gobject.TypeMarshaler{T: TypeScript, F: marshalScript},
+		gobject.TypeMarshaler{T: TypeStretch, F: marshalStretch},
+		gobject.TypeMarshaler{T: TypeStyle, F: marshalStyle},
+		gobject.TypeMarshaler{T: TypeTabAlign, F: marshalTabAlign},
+		gobject.TypeMarshaler{T: TypeTextTransform, F: marshalTextTransform},
+		gobject.TypeMarshaler{T: TypeUnderline, F: marshalUnderline},
+		gobject.TypeMarshaler{T: TypeVariant, F: marshalVariant},
+		gobject.TypeMarshaler{T: TypeWeight, F: marshalWeight},
+		gobject.TypeMarshaler{T: TypeWrapMode, F: marshalWrapMode},
+		gobject.TypeMarshaler{T: TypeFontMask, F: marshalFontMask},
+		gobject.TypeMarshaler{T: TypeLayoutDeserializeFlags, F: marshalLayoutDeserializeFlags},
+		gobject.TypeMarshaler{T: TypeLayoutSerializeFlags, F: marshalLayoutSerializeFlags},
+		gobject.TypeMarshaler{T: TypeShapeFlags, F: marshalShapeFlags},
+		gobject.TypeMarshaler{T: TypeShowFlags, F: marshalShowFlags},
+		gobject.TypeMarshaler{T: TypeContext, F: marshalContextInstance},
+		gobject.TypeMarshaler{T: TypeCoverage, F: marshalCoverageInstance},
+		gobject.TypeMarshaler{T: TypeFont, F: marshalFontInstance},
+		gobject.TypeMarshaler{T: TypeFontFace, F: marshalFontFaceInstance},
+		gobject.TypeMarshaler{T: TypeFontFamily, F: marshalFontFamilyInstance},
+		gobject.TypeMarshaler{T: TypeFontMap, F: marshalFontMapInstance},
+		gobject.TypeMarshaler{T: TypeFontset, F: marshalFontsetInstance},
+		gobject.TypeMarshaler{T: TypeFontsetSimple, F: marshalFontsetSimpleInstance},
+		gobject.TypeMarshaler{T: TypeLayout, F: marshalLayoutInstance},
+		gobject.TypeMarshaler{T: TypeRenderer, F: marshalRendererInstance},
+		gobject.TypeMarshaler{T: TypeAttrIterator, F: marshalAttrIterator},
+		gobject.TypeMarshaler{T: TypeAttrList, F: marshalAttrList},
+		gobject.TypeMarshaler{T: TypeAttribute, F: marshalAttribute},
+		gobject.TypeMarshaler{T: TypeColor, F: marshalColor},
+		gobject.TypeMarshaler{T: TypeFontDescription, F: marshalFontDescription},
+		gobject.TypeMarshaler{T: TypeFontMetrics, F: marshalFontMetrics},
+		gobject.TypeMarshaler{T: TypeGlyphItem, F: marshalGlyphItem},
+		gobject.TypeMarshaler{T: TypeGlyphItemIter, F: marshalGlyphItemIter},
+		gobject.TypeMarshaler{T: TypeGlyphString, F: marshalGlyphString},
+		gobject.TypeMarshaler{T: TypeItem, F: marshalItem},
+		gobject.TypeMarshaler{T: TypeLanguage, F: marshalLanguage},
+		gobject.TypeMarshaler{T: TypeLayoutIter, F: marshalLayoutIter},
+		gobject.TypeMarshaler{T: TypeLayoutLine, F: marshalLayoutLine},
+		gobject.TypeMarshaler{T: TypeMatrix, F: marshalMatrix},
+		gobject.TypeMarshaler{T: TypeScriptIter, F: marshalScriptIter},
+		gobject.TypeMarshaler{T: TypeTabArray, F: marshalTabArray},
 	})
 }
 
-// ANALYSISFLAGCENTEREDBASELINE wraps PANGO_ANALYSIS_FLAG_CENTERED_BASELINE
+// AnalysisFlagCenteredBaseline wraps PANGO_ANALYSIS_FLAG_CENTERED_BASELINE
 //
 // Whether the segment should be shifted to center around the baseline.
 // 
 // This is mainly used in vertical writing directions.
-const ANALYSISFLAGCENTEREDBASELINE = C.PANGO_ANALYSIS_FLAG_CENTERED_BASELINE
-// ANALYSISFLAGISELLIPSIS wraps PANGO_ANALYSIS_FLAG_IS_ELLIPSIS
+const AnalysisFlagCenteredBaseline = 1
+// AnalysisFlagIsEllipsis wraps PANGO_ANALYSIS_FLAG_IS_ELLIPSIS
 //
 // Whether this run holds ellipsized text.
-const ANALYSISFLAGISELLIPSIS = C.PANGO_ANALYSIS_FLAG_IS_ELLIPSIS
-// ANALYSISFLAGNEEDHYPHEN wraps PANGO_ANALYSIS_FLAG_NEED_HYPHEN
+const AnalysisFlagIsEllipsis = 2
+// AnalysisFlagNeedHyphen wraps PANGO_ANALYSIS_FLAG_NEED_HYPHEN
 //
 // Whether to add a hyphen at the end of the run during shaping.
-const ANALYSISFLAGNEEDHYPHEN = C.PANGO_ANALYSIS_FLAG_NEED_HYPHEN
-// ATTRINDEXFROMTEXTBEGINNING wraps PANGO_ATTR_INDEX_FROM_TEXT_BEGINNING
+const AnalysisFlagNeedHyphen = 4
+// AttrIndexFromTextBeginning wraps PANGO_ATTR_INDEX_FROM_TEXT_BEGINNING
 //
 // Value for @start_index in `PangoAttribute` that indicates
 // the beginning of the text.
-const ATTRINDEXFROMTEXTBEGINNING = C.PANGO_ATTR_INDEX_FROM_TEXT_BEGINNING
-// ATTRINDEXTOTEXTEND wraps PANGO_ATTR_INDEX_TO_TEXT_END
+const AttrIndexFromTextBeginning = 0
+// AttrIndexToTextEnd wraps PANGO_ATTR_INDEX_TO_TEXT_END
 //
 // Value for @end_index in `PangoAttribute` that indicates
 // the end of the text.
-const ATTRINDEXTOTEXTEND = C.PANGO_ATTR_INDEX_TO_TEXT_END
-// GLYPHEMPTY wraps PANGO_GLYPH_EMPTY
-//
-// A `PangoGlyph` value that indicates a zero-width empty glpyh.
-// 
-// This is useful for example in shaper modules, to use as the glyph for
-// various zero-width Unicode characters (those passing [func@is_zero_width]).
-const GLYPHEMPTY = C.PANGO_GLYPH_EMPTY
-// GLYPHINVALIDINPUT wraps PANGO_GLYPH_INVALID_INPUT
-//
-// A `PangoGlyph` value for invalid input.
-// 
-// `PangoLayout` produces one such glyph per invalid input UTF-8 byte and such
-// a glyph is rendered as a crossed box.
-// 
-// Note that this value is defined such that it has the %PANGO_GLYPH_UNKNOWN_FLAG
-// set.
-const GLYPHINVALIDINPUT = C.PANGO_GLYPH_INVALID_INPUT
-// GLYPHUNKNOWNFLAG wraps PANGO_GLYPH_UNKNOWN_FLAG
-//
-// Flag used in `PangoGlyph` to turn a `gunichar` value of a valid Unicode
-// character into an unknown-character glyph for that `gunichar`.
-// 
-// Such unknown-character glyphs may be rendered as a 'hex box'.
-const GLYPHUNKNOWNFLAG = C.PANGO_GLYPH_UNKNOWN_FLAG
-// SCALE wraps PANGO_SCALE
+const AttrIndexToTextEnd = 4294967295
+// Scale wraps PANGO_SCALE
 //
 // The scale between dimensions used for Pango distances and device units.
 // 
@@ -189,19 +167,19 @@ const GLYPHUNKNOWNFLAG = C.PANGO_GLYPH_UNKNOWN_FLAG
 // 
 // When setting font sizes, device units are always considered to be
 // points (as in "12 point font"), rather than pixels.
-const SCALE = C.PANGO_SCALE
-// VERSIONMAJOR wraps PANGO_VERSION_MAJOR
+const Scale = 1024
+// VersionMajor wraps PANGO_VERSION_MAJOR
 //
 // The major component of the version of Pango available at compile-time.
-const VERSIONMAJOR = C.PANGO_VERSION_MAJOR
-// VERSIONMICRO wraps PANGO_VERSION_MICRO
+const VersionMajor = 1
+// VersionMicro wraps PANGO_VERSION_MICRO
 //
 // The micro component of the version of Pango available at compile-time.
-const VERSIONMICRO = C.PANGO_VERSION_MICRO
-// VERSIONMINOR wraps PANGO_VERSION_MINOR
+const VersionMicro = 1
+// VersionMinor wraps PANGO_VERSION_MINOR
 //
 // The minor component of the version of Pango available at compile-time.
-const VERSIONMINOR = C.PANGO_VERSION_MINOR
+const VersionMinor = 56
 // Glyph wraps PangoGlyph
 //
 // A `PangoGlyph` represents a single glyph in the output form of a string.
@@ -254,12 +232,15 @@ const (
 	AlignRight Alignment = C.PANGO_ALIGN_RIGHT
 )
 
-func marshalAlignment(p uintptr) (interface{}, error) {
-	return Alignment(gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Enum()), nil
+func marshalAlignment(p unsafe.Pointer) (any, error) {
+	return Alignment(gobject.ValueFromNative(p).Enum()), nil
 }
 
-func (e Alignment) SetValue(v *gobject.Value) {
-	panic("TODO")
+var _ gobject.GoValueInitializer = Alignment(0)
+
+func (e Alignment) InitGoValue(v *gobject.Value) {
+	v.Init(TypeAlignment)
+	v.SetEnum(int(e))
 }
 
 // AttrType wraps PangoAttrType
@@ -425,12 +406,15 @@ const (
 	AttrTypeFontScale AttrType = C.PANGO_ATTR_TYPE_FONT_SCALE
 )
 
-func marshalAttrType(p uintptr) (interface{}, error) {
-	return AttrType(gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Enum()), nil
+func marshalAttrType(p unsafe.Pointer) (any, error) {
+	return AttrType(gobject.ValueFromNative(p).Enum()), nil
 }
 
-func (e AttrType) SetValue(v *gobject.Value) {
-	panic("TODO")
+var _ gobject.GoValueInitializer = AttrType(0)
+
+func (e AttrType) InitGoValue(v *gobject.Value) {
+	v.Init(TypeAttrType)
+	v.SetEnum(int(e))
 }
 
 // BaselineShift wraps PangoBaselineShift
@@ -455,12 +439,15 @@ const (
 	BaselineShiftSubscript BaselineShift = C.PANGO_BASELINE_SHIFT_SUBSCRIPT
 )
 
-func marshalBaselineShift(p uintptr) (interface{}, error) {
-	return BaselineShift(gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Enum()), nil
+func marshalBaselineShift(p unsafe.Pointer) (any, error) {
+	return BaselineShift(gobject.ValueFromNative(p).Enum()), nil
 }
 
-func (e BaselineShift) SetValue(v *gobject.Value) {
-	panic("TODO")
+var _ gobject.GoValueInitializer = BaselineShift(0)
+
+func (e BaselineShift) InitGoValue(v *gobject.Value) {
+	v.Init(TypeBaselineShift)
+	v.SetEnum(int(e))
 }
 
 // BidiType wraps PangoBidiType
@@ -569,12 +556,15 @@ const (
 	BidiTypePdi BidiType = C.PANGO_BIDI_TYPE_PDI
 )
 
-func marshalBidiType(p uintptr) (interface{}, error) {
-	return BidiType(gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Enum()), nil
+func marshalBidiType(p unsafe.Pointer) (any, error) {
+	return BidiType(gobject.ValueFromNative(p).Enum()), nil
 }
 
-func (e BidiType) SetValue(v *gobject.Value) {
-	panic("TODO")
+var _ gobject.GoValueInitializer = BidiType(0)
+
+func (e BidiType) InitGoValue(v *gobject.Value) {
+	v.Init(TypeBidiType)
+	v.SetEnum(int(e))
 }
 
 // CoverageLevel wraps PangoCoverageLevel
@@ -613,12 +603,15 @@ const (
 	CoverageExact CoverageLevel = C.PANGO_COVERAGE_EXACT
 )
 
-func marshalCoverageLevel(p uintptr) (interface{}, error) {
-	return CoverageLevel(gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Enum()), nil
+func marshalCoverageLevel(p unsafe.Pointer) (any, error) {
+	return CoverageLevel(gobject.ValueFromNative(p).Enum()), nil
 }
 
-func (e CoverageLevel) SetValue(v *gobject.Value) {
-	panic("TODO")
+var _ gobject.GoValueInitializer = CoverageLevel(0)
+
+func (e CoverageLevel) InitGoValue(v *gobject.Value) {
+	v.Init(TypeCoverageLevel)
+	v.SetEnum(int(e))
 }
 
 // Direction wraps PangoDirection
@@ -676,12 +669,15 @@ const (
 	DirectionNeutral Direction = C.PANGO_DIRECTION_NEUTRAL
 )
 
-func marshalDirection(p uintptr) (interface{}, error) {
-	return Direction(gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Enum()), nil
+func marshalDirection(p unsafe.Pointer) (any, error) {
+	return Direction(gobject.ValueFromNative(p).Enum()), nil
 }
 
-func (e Direction) SetValue(v *gobject.Value) {
-	panic("TODO")
+var _ gobject.GoValueInitializer = Direction(0)
+
+func (e Direction) InitGoValue(v *gobject.Value) {
+	v.Init(TypeDirection)
+	v.SetEnum(int(e))
 }
 
 // EllipsizeMode wraps PangoEllipsizeMode
@@ -713,12 +709,15 @@ const (
 	EllipsizeEnd EllipsizeMode = C.PANGO_ELLIPSIZE_END
 )
 
-func marshalEllipsizeMode(p uintptr) (interface{}, error) {
-	return EllipsizeMode(gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Enum()), nil
+func marshalEllipsizeMode(p unsafe.Pointer) (any, error) {
+	return EllipsizeMode(gobject.ValueFromNative(p).Enum()), nil
 }
 
-func (e EllipsizeMode) SetValue(v *gobject.Value) {
-	panic("TODO")
+var _ gobject.GoValueInitializer = EllipsizeMode(0)
+
+func (e EllipsizeMode) InitGoValue(v *gobject.Value) {
+	v.Init(TypeEllipsizeMode)
+	v.SetEnum(int(e))
 }
 
 // FontScale wraps PangoFontScale
@@ -746,12 +745,15 @@ const (
 	FontScaleSmallCaps FontScale = C.PANGO_FONT_SCALE_SMALL_CAPS
 )
 
-func marshalFontScale(p uintptr) (interface{}, error) {
-	return FontScale(gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Enum()), nil
+func marshalFontScale(p unsafe.Pointer) (any, error) {
+	return FontScale(gobject.ValueFromNative(p).Enum()), nil
 }
 
-func (e FontScale) SetValue(v *gobject.Value) {
-	panic("TODO")
+var _ gobject.GoValueInitializer = FontScale(0)
+
+func (e FontScale) InitGoValue(v *gobject.Value) {
+	v.Init(TypeFontScale)
+	v.SetEnum(int(e))
 }
 
 // Gravity wraps PangoGravity
@@ -794,12 +796,15 @@ const (
 	GravityAuto Gravity = C.PANGO_GRAVITY_AUTO
 )
 
-func marshalGravity(p uintptr) (interface{}, error) {
-	return Gravity(gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Enum()), nil
+func marshalGravity(p unsafe.Pointer) (any, error) {
+	return Gravity(gobject.ValueFromNative(p).Enum()), nil
 }
 
-func (e Gravity) SetValue(v *gobject.Value) {
-	panic("TODO")
+var _ gobject.GoValueInitializer = Gravity(0)
+
+func (e Gravity) InitGoValue(v *gobject.Value) {
+	v.Init(TypeGravity)
+	v.SetEnum(int(e))
 }
 
 // GravityHint wraps PangoGravityHint
@@ -832,12 +837,15 @@ const (
 	GravityHintLine GravityHint = C.PANGO_GRAVITY_HINT_LINE
 )
 
-func marshalGravityHint(p uintptr) (interface{}, error) {
-	return GravityHint(gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Enum()), nil
+func marshalGravityHint(p unsafe.Pointer) (any, error) {
+	return GravityHint(gobject.ValueFromNative(p).Enum()), nil
 }
 
-func (e GravityHint) SetValue(v *gobject.Value) {
-	panic("TODO")
+var _ gobject.GoValueInitializer = GravityHint(0)
+
+func (e GravityHint) InitGoValue(v *gobject.Value) {
+	v.Init(TypeGravityHint)
+	v.SetEnum(int(e))
 }
 
 // LayoutDeserializeError wraps PangoLayoutDeserializeError
@@ -862,12 +870,15 @@ const (
 	LayoutDeserializeMissingValue LayoutDeserializeError = C.PANGO_LAYOUT_DESERIALIZE_MISSING_VALUE
 )
 
-func marshalLayoutDeserializeError(p uintptr) (interface{}, error) {
-	return LayoutDeserializeError(gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Enum()), nil
+func marshalLayoutDeserializeError(p unsafe.Pointer) (any, error) {
+	return LayoutDeserializeError(gobject.ValueFromNative(p).Enum()), nil
 }
 
-func (e LayoutDeserializeError) SetValue(v *gobject.Value) {
-	panic("TODO")
+var _ gobject.GoValueInitializer = LayoutDeserializeError(0)
+
+func (e LayoutDeserializeError) InitGoValue(v *gobject.Value) {
+	v.Init(TypeLayoutDeserializeError)
+	v.SetEnum(int(e))
 }
 
 // Overline wraps PangoOverline
@@ -888,12 +899,15 @@ const (
 	OverlineSingle Overline = C.PANGO_OVERLINE_SINGLE
 )
 
-func marshalOverline(p uintptr) (interface{}, error) {
-	return Overline(gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Enum()), nil
+func marshalOverline(p unsafe.Pointer) (any, error) {
+	return Overline(gobject.ValueFromNative(p).Enum()), nil
 }
 
-func (e Overline) SetValue(v *gobject.Value) {
-	panic("TODO")
+var _ gobject.GoValueInitializer = Overline(0)
+
+func (e Overline) InitGoValue(v *gobject.Value) {
+	v.Init(TypeOverline)
+	v.SetEnum(int(e))
 }
 
 // RenderPart wraps PangoRenderPart
@@ -925,12 +939,15 @@ const (
 	RenderPartOverline RenderPart = C.PANGO_RENDER_PART_OVERLINE
 )
 
-func marshalRenderPart(p uintptr) (interface{}, error) {
-	return RenderPart(gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Enum()), nil
+func marshalRenderPart(p unsafe.Pointer) (any, error) {
+	return RenderPart(gobject.ValueFromNative(p).Enum()), nil
 }
 
-func (e RenderPart) SetValue(v *gobject.Value) {
-	panic("TODO")
+var _ gobject.GoValueInitializer = RenderPart(0)
+
+func (e RenderPart) InitGoValue(v *gobject.Value) {
+	v.Init(TypeRenderPart)
+	v.SetEnum(int(e))
 }
 
 // Script wraps PangoScript
@@ -1423,12 +1440,15 @@ const (
 	ScriptSignwriting Script = C.PANGO_SCRIPT_SIGNWRITING
 )
 
-func marshalScript(p uintptr) (interface{}, error) {
-	return Script(gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Enum()), nil
+func marshalScript(p unsafe.Pointer) (any, error) {
+	return Script(gobject.ValueFromNative(p).Enum()), nil
 }
 
-func (e Script) SetValue(v *gobject.Value) {
-	panic("TODO")
+var _ gobject.GoValueInitializer = Script(0)
+
+func (e Script) InitGoValue(v *gobject.Value) {
+	v.Init(TypeScript)
+	v.SetEnum(int(e))
 }
 
 // Stretch wraps PangoStretch
@@ -1476,12 +1496,15 @@ const (
 	StretchUltraExpanded Stretch = C.PANGO_STRETCH_ULTRA_EXPANDED
 )
 
-func marshalStretch(p uintptr) (interface{}, error) {
-	return Stretch(gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Enum()), nil
+func marshalStretch(p unsafe.Pointer) (any, error) {
+	return Stretch(gobject.ValueFromNative(p).Enum()), nil
 }
 
-func (e Stretch) SetValue(v *gobject.Value) {
-	panic("TODO")
+var _ gobject.GoValueInitializer = Stretch(0)
+
+func (e Stretch) InitGoValue(v *gobject.Value) {
+	v.Init(TypeStretch)
+	v.SetEnum(int(e))
 }
 
 // Style wraps PangoStyle
@@ -1504,12 +1527,15 @@ const (
 	StyleItalic Style = C.PANGO_STYLE_ITALIC
 )
 
-func marshalStyle(p uintptr) (interface{}, error) {
-	return Style(gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Enum()), nil
+func marshalStyle(p unsafe.Pointer) (any, error) {
+	return Style(gobject.ValueFromNative(p).Enum()), nil
 }
 
-func (e Style) SetValue(v *gobject.Value) {
-	panic("TODO")
+var _ gobject.GoValueInitializer = Style(0)
+
+func (e Style) InitGoValue(v *gobject.Value) {
+	v.Init(TypeStyle)
+	v.SetEnum(int(e))
 }
 
 // TabAlign wraps PangoTabAlign
@@ -1541,12 +1567,15 @@ const (
 	TabDecimal TabAlign = C.PANGO_TAB_DECIMAL
 )
 
-func marshalTabAlign(p uintptr) (interface{}, error) {
-	return TabAlign(gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Enum()), nil
+func marshalTabAlign(p unsafe.Pointer) (any, error) {
+	return TabAlign(gobject.ValueFromNative(p).Enum()), nil
 }
 
-func (e TabAlign) SetValue(v *gobject.Value) {
-	panic("TODO")
+var _ gobject.GoValueInitializer = TabAlign(0)
+
+func (e TabAlign) InitGoValue(v *gobject.Value) {
+	v.Init(TypeTabAlign)
+	v.SetEnum(int(e))
 }
 
 // TextTransform wraps PangoTextTransform
@@ -1574,12 +1603,15 @@ const (
 	TextTransformCapitalize TextTransform = C.PANGO_TEXT_TRANSFORM_CAPITALIZE
 )
 
-func marshalTextTransform(p uintptr) (interface{}, error) {
-	return TextTransform(gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Enum()), nil
+func marshalTextTransform(p unsafe.Pointer) (any, error) {
+	return TextTransform(gobject.ValueFromNative(p).Enum()), nil
 }
 
-func (e TextTransform) SetValue(v *gobject.Value) {
-	panic("TODO")
+var _ gobject.GoValueInitializer = TextTransform(0)
+
+func (e TextTransform) InitGoValue(v *gobject.Value) {
+	v.Init(TypeTextTransform)
+	v.SetEnum(int(e))
 }
 
 // Underline wraps PangoUnderline
@@ -1641,12 +1673,15 @@ const (
 	UnderlineErrorLine Underline = C.PANGO_UNDERLINE_ERROR_LINE
 )
 
-func marshalUnderline(p uintptr) (interface{}, error) {
-	return Underline(gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Enum()), nil
+func marshalUnderline(p unsafe.Pointer) (any, error) {
+	return Underline(gobject.ValueFromNative(p).Enum()), nil
 }
 
-func (e Underline) SetValue(v *gobject.Value) {
-	panic("TODO")
+var _ gobject.GoValueInitializer = Underline(0)
+
+func (e Underline) InitGoValue(v *gobject.Value) {
+	v.Init(TypeUnderline)
+	v.SetEnum(int(e))
 }
 
 // Variant wraps PangoVariant
@@ -1693,12 +1728,15 @@ const (
 	VariantTitleCaps Variant = C.PANGO_VARIANT_TITLE_CAPS
 )
 
-func marshalVariant(p uintptr) (interface{}, error) {
-	return Variant(gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Enum()), nil
+func marshalVariant(p unsafe.Pointer) (any, error) {
+	return Variant(gobject.ValueFromNative(p).Enum()), nil
 }
 
-func (e Variant) SetValue(v *gobject.Value) {
-	panic("TODO")
+var _ gobject.GoValueInitializer = Variant(0)
+
+func (e Variant) InitGoValue(v *gobject.Value) {
+	v.Init(TypeVariant)
+	v.SetEnum(int(e))
 }
 
 // Weight wraps PangoWeight
@@ -1760,12 +1798,15 @@ const (
 	WeightUltraheavy Weight = C.PANGO_WEIGHT_ULTRAHEAVY
 )
 
-func marshalWeight(p uintptr) (interface{}, error) {
-	return Weight(gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Enum()), nil
+func marshalWeight(p unsafe.Pointer) (any, error) {
+	return Weight(gobject.ValueFromNative(p).Enum()), nil
 }
 
-func (e Weight) SetValue(v *gobject.Value) {
-	panic("TODO")
+var _ gobject.GoValueInitializer = Weight(0)
+
+func (e Weight) InitGoValue(v *gobject.Value) {
+	v.Init(TypeWeight)
+	v.SetEnum(int(e))
 }
 
 // WrapMode wraps PangoWrapMode
@@ -1799,12 +1840,15 @@ const (
 	WrapNone WrapMode = C.PANGO_WRAP_NONE
 )
 
-func marshalWrapMode(p uintptr) (interface{}, error) {
-	return WrapMode(gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Enum()), nil
+func marshalWrapMode(p unsafe.Pointer) (any, error) {
+	return WrapMode(gobject.ValueFromNative(p).Enum()), nil
 }
 
-func (e WrapMode) SetValue(v *gobject.Value) {
-	panic("TODO")
+var _ gobject.GoValueInitializer = WrapMode(0)
+
+func (e WrapMode) InitGoValue(v *gobject.Value) {
+	v.Init(TypeWrapMode)
+	v.SetEnum(int(e))
 }
 
 // FontMask wraps PangoFontMask
@@ -1852,16 +1896,19 @@ const (
 	FontMaskFeatures FontMask = C.PANGO_FONT_MASK_FEATURES
 )
 
-func marshalFontMask(p uintptr) (interface{}, error) {
-	return FontMask(gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Flags()), nil
+func marshalFontMask(p unsafe.Pointer) (any, error) {
+	return FontMask(gobject.ValueFromNative(p).Flags()), nil
 }
 // Has returns true if f contains other
 func (f FontMask) Has(other FontMask) bool {
 	return (f & other) == other
 }
 
-func (f FontMask) SetValue(v *gobject.Value) {
-	panic("TODO")
+var _ gobject.GoValueInitializer = FontMask(0)
+
+func (f FontMask) InitGoValue(v *gobject.Value) {
+	v.Init(TypeFontMask)
+	v.SetFlags(int(f))
 }
 
 // LayoutDeserializeFlags wraps PangoLayoutDeserializeFlags
@@ -1883,16 +1930,19 @@ const (
 	LayoutDeserializeContext LayoutDeserializeFlags = C.PANGO_LAYOUT_DESERIALIZE_CONTEXT
 )
 
-func marshalLayoutDeserializeFlags(p uintptr) (interface{}, error) {
-	return LayoutDeserializeFlags(gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Flags()), nil
+func marshalLayoutDeserializeFlags(p unsafe.Pointer) (any, error) {
+	return LayoutDeserializeFlags(gobject.ValueFromNative(p).Flags()), nil
 }
 // Has returns true if l contains other
 func (l LayoutDeserializeFlags) Has(other LayoutDeserializeFlags) bool {
 	return (l & other) == other
 }
 
-func (l LayoutDeserializeFlags) SetValue(v *gobject.Value) {
-	panic("TODO")
+var _ gobject.GoValueInitializer = LayoutDeserializeFlags(0)
+
+func (f LayoutDeserializeFlags) InitGoValue(v *gobject.Value) {
+	v.Init(TypeLayoutDeserializeFlags)
+	v.SetFlags(int(f))
 }
 
 // LayoutSerializeFlags wraps PangoLayoutSerializeFlags
@@ -1917,16 +1967,19 @@ const (
 	LayoutSerializeOutput LayoutSerializeFlags = C.PANGO_LAYOUT_SERIALIZE_OUTPUT
 )
 
-func marshalLayoutSerializeFlags(p uintptr) (interface{}, error) {
-	return LayoutSerializeFlags(gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Flags()), nil
+func marshalLayoutSerializeFlags(p unsafe.Pointer) (any, error) {
+	return LayoutSerializeFlags(gobject.ValueFromNative(p).Flags()), nil
 }
 // Has returns true if l contains other
 func (l LayoutSerializeFlags) Has(other LayoutSerializeFlags) bool {
 	return (l & other) == other
 }
 
-func (l LayoutSerializeFlags) SetValue(v *gobject.Value) {
-	panic("TODO")
+var _ gobject.GoValueInitializer = LayoutSerializeFlags(0)
+
+func (f LayoutSerializeFlags) InitGoValue(v *gobject.Value) {
+	v.Init(TypeLayoutSerializeFlags)
+	v.SetFlags(int(f))
 }
 
 // ShapeFlags wraps PangoShapeFlags
@@ -1948,16 +2001,19 @@ const (
 	ShapeRoundPositions ShapeFlags = C.PANGO_SHAPE_ROUND_POSITIONS
 )
 
-func marshalShapeFlags(p uintptr) (interface{}, error) {
-	return ShapeFlags(gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Flags()), nil
+func marshalShapeFlags(p unsafe.Pointer) (any, error) {
+	return ShapeFlags(gobject.ValueFromNative(p).Flags()), nil
 }
 // Has returns true if s contains other
 func (s ShapeFlags) Has(other ShapeFlags) bool {
 	return (s & other) == other
 }
 
-func (s ShapeFlags) SetValue(v *gobject.Value) {
-	panic("TODO")
+var _ gobject.GoValueInitializer = ShapeFlags(0)
+
+func (f ShapeFlags) InitGoValue(v *gobject.Value) {
+	v.Init(TypeShapeFlags)
+	v.SetFlags(int(f))
 }
 
 // ShowFlags wraps PangoShowFlags
@@ -1986,34 +2042,37 @@ const (
 	ShowIgnorables ShowFlags = C.PANGO_SHOW_IGNORABLES
 )
 
-func marshalShowFlags(p uintptr) (interface{}, error) {
-	return ShowFlags(gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Flags()), nil
+func marshalShowFlags(p unsafe.Pointer) (any, error) {
+	return ShowFlags(gobject.ValueFromNative(p).Flags()), nil
 }
 // Has returns true if s contains other
 func (s ShowFlags) Has(other ShowFlags) bool {
 	return (s & other) == other
 }
 
-func (s ShowFlags) SetValue(v *gobject.Value) {
-	panic("TODO")
+var _ gobject.GoValueInitializer = ShowFlags(0)
+
+func (f ShowFlags) InitGoValue(v *gobject.Value) {
+	v.Init(TypeShowFlags)
+	v.SetFlags(int(f))
 }
 
 // AttrDataCopyFunc wraps PangoAttrDataCopyFunc
 //
 // Type of a function that can duplicate user data for an attribute.
-type AttrDataCopyFunc func() (ret unsafe.Pointer)
+type AttrDataCopyFunc func() (goret unsafe.Pointer)
 
 // AttrFilterFunc wraps PangoAttrFilterFunc
 //
 // Type of a function filtering a list of attributes.
-type AttrFilterFunc func(attribute Attribute) (ret bool)
+type AttrFilterFunc func(attribute *Attribute) (goret bool)
 
 // FontsetForEachFunc wraps PangoFontsetForeachFunc
 //
 // Callback used when enumerating fonts in a fontset.
 // 
 // See [method@Pango.Fontset.foreach].
-type FontsetForEachFunc func(fontset Fontset, font Font) (ret bool)
+type FontsetForEachFunc func(fontset Fontset, font Font) (goret bool)
 
 // NewAttrAllowBreaks wraps pango_attr_allow_breaks_new
 // 
@@ -2023,13 +2082,13 @@ type FontsetForEachFunc func(fontset Fontset, font Font) (ret bool)
 // 
 // The function returns the following values:
 // 
-// 	- ret Attribute 
+// 	- goret *Attribute 
 //
 // Create a new allow-breaks attribute.
 // 
 // If breaks are disabled, the range will be kept in a
 // single run, as far as possible.
-func NewAttrAllowBreaks(allowBreaks bool) Attribute {
+func NewAttrAllowBreaks(allowBreaks bool) *Attribute {
 	var carg1 C.gboolean        // in
 	var cret  *C.PangoAttribute // return, full, converted
 
@@ -2040,11 +2099,11 @@ func NewAttrAllowBreaks(allowBreaks bool) Attribute {
 	cret = C.pango_attr_allow_breaks_new(carg1)
 	runtime.KeepAlive(allowBreaks)
 
-	var ret Attribute
+	var goret *Attribute
 
-	ret = UnsafeAttributeFromGlibFull(unsafe.Pointer(cret))
+	goret = UnsafeAttributeFromGlibFull(unsafe.Pointer(cret))
 
-	return ret
+	return goret
 }
 
 // NewAttrBackgroundAlpha wraps pango_attr_background_alpha_new
@@ -2055,10 +2114,10 @@ func NewAttrAllowBreaks(allowBreaks bool) Attribute {
 // 
 // The function returns the following values:
 // 
-// 	- ret Attribute 
+// 	- goret *Attribute 
 //
 // Create a new background alpha attribute.
-func NewAttrBackgroundAlpha(alpha uint16) Attribute {
+func NewAttrBackgroundAlpha(alpha uint16) *Attribute {
 	var carg1 C.guint16         // in, none, casted
 	var cret  *C.PangoAttribute // return, full, converted
 
@@ -2067,11 +2126,11 @@ func NewAttrBackgroundAlpha(alpha uint16) Attribute {
 	cret = C.pango_attr_background_alpha_new(carg1)
 	runtime.KeepAlive(alpha)
 
-	var ret Attribute
+	var goret *Attribute
 
-	ret = UnsafeAttributeFromGlibFull(unsafe.Pointer(cret))
+	goret = UnsafeAttributeFromGlibFull(unsafe.Pointer(cret))
 
-	return ret
+	return goret
 }
 
 // NewAttrBackground wraps pango_attr_background_new
@@ -2084,10 +2143,10 @@ func NewAttrBackgroundAlpha(alpha uint16) Attribute {
 // 
 // The function returns the following values:
 // 
-// 	- ret Attribute 
+// 	- goret *Attribute 
 //
 // Create a new background color attribute.
-func NewAttrBackground(red uint16, green uint16, blue uint16) Attribute {
+func NewAttrBackground(red uint16, green uint16, blue uint16) *Attribute {
 	var carg1 C.guint16         // in, none, casted
 	var carg2 C.guint16         // in, none, casted
 	var carg3 C.guint16         // in, none, casted
@@ -2102,11 +2161,11 @@ func NewAttrBackground(red uint16, green uint16, blue uint16) Attribute {
 	runtime.KeepAlive(green)
 	runtime.KeepAlive(blue)
 
-	var ret Attribute
+	var goret *Attribute
 
-	ret = UnsafeAttributeFromGlibFull(unsafe.Pointer(cret))
+	goret = UnsafeAttributeFromGlibFull(unsafe.Pointer(cret))
 
-	return ret
+	return goret
 }
 
 // NewAttrBaselineShift wraps pango_attr_baseline_shift_new
@@ -2119,7 +2178,7 @@ func NewAttrBackground(red uint16, green uint16, blue uint16) Attribute {
 // 
 // The function returns the following values:
 // 
-// 	- ret Attribute 
+// 	- goret *Attribute 
 //
 // Create a new baseline displacement attribute.
 // 
@@ -2130,7 +2189,7 @@ func NewAttrBackground(red uint16, green uint16, blue uint16) Attribute {
 //   &lt;source srcset="baseline-shift-dark.png" media="(prefers-color-scheme: dark)"&gt;
 //   &lt;img alt="Baseline Shift" src="baseline-shift-light.png"&gt;
 // &lt;/picture&gt;
-func NewAttrBaselineShift(shift int) Attribute {
+func NewAttrBaselineShift(shift int) *Attribute {
 	var carg1 C.int             // in, none, casted
 	var cret  *C.PangoAttribute // return, full, converted
 
@@ -2139,11 +2198,11 @@ func NewAttrBaselineShift(shift int) Attribute {
 	cret = C.pango_attr_baseline_shift_new(carg1)
 	runtime.KeepAlive(shift)
 
-	var ret Attribute
+	var goret *Attribute
 
-	ret = UnsafeAttributeFromGlibFull(unsafe.Pointer(cret))
+	goret = UnsafeAttributeFromGlibFull(unsafe.Pointer(cret))
 
-	return ret
+	return goret
 }
 
 // AttrBreak wraps pango_attr_break
@@ -2152,21 +2211,21 @@ func NewAttrBaselineShift(shift int) Attribute {
 // 
 // 	- text string: text to break. Must be valid UTF-8 
 // 	- length int: length of text in bytes (may be -1 if @text is nul-terminated) 
-// 	- attrList AttrList: `PangoAttrList` to apply 
+// 	- attrList *AttrList: `PangoAttrList` to apply 
 // 	- offset int: Byte offset of @text from the beginning of the paragraph 
-// 	- attrs array: array with one `PangoLogAttr`
+// 	- attrs []LogAttr: array with one `PangoLogAttr`
 //   per character in @text, plus one extra, to be filled in 
 //
 // Apply customization from attributes to the breaks in @attrs.
 // 
 // The line breaks are assumed to have been produced
 // by [func@Pango.default_break] and [func@Pango.tailor_break].
-func AttrBreak(text string, length int, attrList AttrList, offset int, attrs array) {
+func AttrBreak(text string, length int, attrList *AttrList, offset int, attrs []LogAttr) {
 	var carg1 *C.gchar         // in, none, string
 	var carg2 C.int            // in, none, casted
 	var carg3 *C.PangoAttrList // in, none, converted
 	var carg4 C.int            // in, none, casted
-	var carg5 array            // in, transfer: none, scope: call, implicit: false, skip: false, optional: false, nullable: false, caller-allocates: false, has closure: false, has destroy: false
+	var carg5 *C.PangoLogAttr  // in, transfer: none, C Pointers: 1, Name: array[LogAttr], array (inner: *typesystem.Record, length-by: carg6)
 	var carg6 C.int            // implicit
 
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(text)))
@@ -2174,7 +2233,10 @@ func AttrBreak(text string, length int, attrList AttrList, offset int, attrs arr
 	carg2 = C.int(length)
 	carg3 = (*C.PangoAttrList)(UnsafeAttrListToGlibNone(attrList))
 	carg4 = C.int(offset)
-	panic("unimplemented conversion of array (array)")
+	_ = attrs
+	_ = carg5
+	_ = carg6
+	panic("unimplemented conversion of []LogAttr (PangoLogAttr*)")
 
 	C.pango_attr_break(carg1, carg2, carg3, carg4, carg5, carg6)
 	runtime.KeepAlive(text)
@@ -2193,7 +2255,7 @@ func AttrBreak(text string, length int, attrList AttrList, offset int, attrs arr
 // 
 // The function returns the following values:
 // 
-// 	- ret Attribute 
+// 	- goret *Attribute 
 //
 // Create a new font fallback attribute.
 // 
@@ -2201,7 +2263,7 @@ func AttrBreak(text string, length int, attrList AttrList, offset int, attrs arr
 // used from the closest matching font on the system.
 // No fallback will be done to other fonts on the system
 // that might contain the characters in the text.
-func NewAttrFallback(enableFallback bool) Attribute {
+func NewAttrFallback(enableFallback bool) *Attribute {
 	var carg1 C.gboolean        // in
 	var cret  *C.PangoAttribute // return, full, converted
 
@@ -2212,11 +2274,11 @@ func NewAttrFallback(enableFallback bool) Attribute {
 	cret = C.pango_attr_fallback_new(carg1)
 	runtime.KeepAlive(enableFallback)
 
-	var ret Attribute
+	var goret *Attribute
 
-	ret = UnsafeAttributeFromGlibFull(unsafe.Pointer(cret))
+	goret = UnsafeAttributeFromGlibFull(unsafe.Pointer(cret))
 
-	return ret
+	return goret
 }
 
 // NewAttrFamily wraps pango_attr_family_new
@@ -2227,10 +2289,10 @@ func NewAttrFallback(enableFallback bool) Attribute {
 // 
 // The function returns the following values:
 // 
-// 	- ret Attribute 
+// 	- goret *Attribute 
 //
 // Create a new font family attribute.
-func NewAttrFamily(family string) Attribute {
+func NewAttrFamily(family string) *Attribute {
 	var carg1 *C.gchar          // in, none, string
 	var cret  *C.PangoAttribute // return, full, converted
 
@@ -2240,11 +2302,11 @@ func NewAttrFamily(family string) Attribute {
 	cret = C.pango_attr_family_new(carg1)
 	runtime.KeepAlive(family)
 
-	var ret Attribute
+	var goret *Attribute
 
-	ret = UnsafeAttributeFromGlibFull(unsafe.Pointer(cret))
+	goret = UnsafeAttributeFromGlibFull(unsafe.Pointer(cret))
 
-	return ret
+	return goret
 }
 
 // NewAttrFontScale wraps pango_attr_font_scale_new
@@ -2256,13 +2318,13 @@ func NewAttrFamily(family string) Attribute {
 // 
 // The function returns the following values:
 // 
-// 	- ret Attribute 
+// 	- goret *Attribute 
 //
 // Create a new font scale attribute.
 // 
 // The effect of this attribute is to change the font size of a run,
 // relative to the size of preceding run.
-func NewAttrFontScale(scale FontScale) Attribute {
+func NewAttrFontScale(scale FontScale) *Attribute {
 	var carg1 C.PangoFontScale  // in, none, casted
 	var cret  *C.PangoAttribute // return, full, converted
 
@@ -2271,11 +2333,11 @@ func NewAttrFontScale(scale FontScale) Attribute {
 	cret = C.pango_attr_font_scale_new(carg1)
 	runtime.KeepAlive(scale)
 
-	var ret Attribute
+	var goret *Attribute
 
-	ret = UnsafeAttributeFromGlibFull(unsafe.Pointer(cret))
+	goret = UnsafeAttributeFromGlibFull(unsafe.Pointer(cret))
 
-	return ret
+	return goret
 }
 
 // NewAttrForegroundAlpha wraps pango_attr_foreground_alpha_new
@@ -2286,10 +2348,10 @@ func NewAttrFontScale(scale FontScale) Attribute {
 // 
 // The function returns the following values:
 // 
-// 	- ret Attribute 
+// 	- goret *Attribute 
 //
 // Create a new foreground alpha attribute.
-func NewAttrForegroundAlpha(alpha uint16) Attribute {
+func NewAttrForegroundAlpha(alpha uint16) *Attribute {
 	var carg1 C.guint16         // in, none, casted
 	var cret  *C.PangoAttribute // return, full, converted
 
@@ -2298,11 +2360,11 @@ func NewAttrForegroundAlpha(alpha uint16) Attribute {
 	cret = C.pango_attr_foreground_alpha_new(carg1)
 	runtime.KeepAlive(alpha)
 
-	var ret Attribute
+	var goret *Attribute
 
-	ret = UnsafeAttributeFromGlibFull(unsafe.Pointer(cret))
+	goret = UnsafeAttributeFromGlibFull(unsafe.Pointer(cret))
 
-	return ret
+	return goret
 }
 
 // NewAttrForeground wraps pango_attr_foreground_new
@@ -2315,10 +2377,10 @@ func NewAttrForegroundAlpha(alpha uint16) Attribute {
 // 
 // The function returns the following values:
 // 
-// 	- ret Attribute 
+// 	- goret *Attribute 
 //
 // Create a new foreground color attribute.
-func NewAttrForeground(red uint16, green uint16, blue uint16) Attribute {
+func NewAttrForeground(red uint16, green uint16, blue uint16) *Attribute {
 	var carg1 C.guint16         // in, none, casted
 	var carg2 C.guint16         // in, none, casted
 	var carg3 C.guint16         // in, none, casted
@@ -2333,11 +2395,11 @@ func NewAttrForeground(red uint16, green uint16, blue uint16) Attribute {
 	runtime.KeepAlive(green)
 	runtime.KeepAlive(blue)
 
-	var ret Attribute
+	var goret *Attribute
 
-	ret = UnsafeAttributeFromGlibFull(unsafe.Pointer(cret))
+	goret = UnsafeAttributeFromGlibFull(unsafe.Pointer(cret))
 
-	return ret
+	return goret
 }
 
 // NewAttrGravityHint wraps pango_attr_gravity_hint_new
@@ -2348,10 +2410,10 @@ func NewAttrForeground(red uint16, green uint16, blue uint16) Attribute {
 // 
 // The function returns the following values:
 // 
-// 	- ret Attribute 
+// 	- goret *Attribute 
 //
 // Create a new gravity hint attribute.
-func NewAttrGravityHint(hint GravityHint) Attribute {
+func NewAttrGravityHint(hint GravityHint) *Attribute {
 	var carg1 C.PangoGravityHint // in, none, casted
 	var cret  *C.PangoAttribute  // return, full, converted
 
@@ -2360,11 +2422,11 @@ func NewAttrGravityHint(hint GravityHint) Attribute {
 	cret = C.pango_attr_gravity_hint_new(carg1)
 	runtime.KeepAlive(hint)
 
-	var ret Attribute
+	var goret *Attribute
 
-	ret = UnsafeAttributeFromGlibFull(unsafe.Pointer(cret))
+	goret = UnsafeAttributeFromGlibFull(unsafe.Pointer(cret))
 
-	return ret
+	return goret
 }
 
 // NewAttrGravity wraps pango_attr_gravity_new
@@ -2375,10 +2437,10 @@ func NewAttrGravityHint(hint GravityHint) Attribute {
 // 
 // The function returns the following values:
 // 
-// 	- ret Attribute 
+// 	- goret *Attribute 
 //
 // Create a new gravity attribute.
-func NewAttrGravity(gravity Gravity) Attribute {
+func NewAttrGravity(gravity Gravity) *Attribute {
 	var carg1 C.PangoGravity    // in, none, casted
 	var cret  *C.PangoAttribute // return, full, converted
 
@@ -2387,11 +2449,11 @@ func NewAttrGravity(gravity Gravity) Attribute {
 	cret = C.pango_attr_gravity_new(carg1)
 	runtime.KeepAlive(gravity)
 
-	var ret Attribute
+	var goret *Attribute
 
-	ret = UnsafeAttributeFromGlibFull(unsafe.Pointer(cret))
+	goret = UnsafeAttributeFromGlibFull(unsafe.Pointer(cret))
 
-	return ret
+	return goret
 }
 
 // NewAttrInsertHyphens wraps pango_attr_insert_hyphens_new
@@ -2402,14 +2464,14 @@ func NewAttrGravity(gravity Gravity) Attribute {
 // 
 // The function returns the following values:
 // 
-// 	- ret Attribute 
+// 	- goret *Attribute 
 //
 // Create a new insert-hyphens attribute.
 // 
 // Pango will insert hyphens when breaking lines in
 // the middle of a word. This attribute can be used
 // to suppress the hyphen.
-func NewAttrInsertHyphens(insertHyphens bool) Attribute {
+func NewAttrInsertHyphens(insertHyphens bool) *Attribute {
 	var carg1 C.gboolean        // in
 	var cret  *C.PangoAttribute // return, full, converted
 
@@ -2420,11 +2482,11 @@ func NewAttrInsertHyphens(insertHyphens bool) Attribute {
 	cret = C.pango_attr_insert_hyphens_new(carg1)
 	runtime.KeepAlive(insertHyphens)
 
-	var ret Attribute
+	var goret *Attribute
 
-	ret = UnsafeAttributeFromGlibFull(unsafe.Pointer(cret))
+	goret = UnsafeAttributeFromGlibFull(unsafe.Pointer(cret))
 
-	return ret
+	return goret
 }
 
 // NewAttrLetterSpacing wraps pango_attr_letter_spacing_new
@@ -2436,10 +2498,10 @@ func NewAttrInsertHyphens(insertHyphens bool) Attribute {
 // 
 // The function returns the following values:
 // 
-// 	- ret Attribute 
+// 	- goret *Attribute 
 //
 // Create a new letter-spacing attribute.
-func NewAttrLetterSpacing(letterSpacing int) Attribute {
+func NewAttrLetterSpacing(letterSpacing int) *Attribute {
 	var carg1 C.int             // in, none, casted
 	var cret  *C.PangoAttribute // return, full, converted
 
@@ -2448,11 +2510,11 @@ func NewAttrLetterSpacing(letterSpacing int) Attribute {
 	cret = C.pango_attr_letter_spacing_new(carg1)
 	runtime.KeepAlive(letterSpacing)
 
-	var ret Attribute
+	var goret *Attribute
 
-	ret = UnsafeAttributeFromGlibFull(unsafe.Pointer(cret))
+	goret = UnsafeAttributeFromGlibFull(unsafe.Pointer(cret))
 
-	return ret
+	return goret
 }
 
 // NewAttrLineHeight wraps pango_attr_line_height_new
@@ -2463,7 +2525,7 @@ func NewAttrLetterSpacing(letterSpacing int) Attribute {
 // 
 // The function returns the following values:
 // 
-// 	- ret Attribute 
+// 	- goret *Attribute 
 //
 // Modify the height of logical line extents by a factor.
 // 
@@ -2471,7 +2533,7 @@ func NewAttrLetterSpacing(letterSpacing int) Attribute {
 // [method@Pango.LayoutLine.get_extents],
 // [method@Pango.LayoutLine.get_pixel_extents] and
 // [method@Pango.LayoutIter.get_line_extents].
-func NewAttrLineHeight(factor float64) Attribute {
+func NewAttrLineHeight(factor float64) *Attribute {
 	var carg1 C.gdouble         // in, none, casted
 	var cret  *C.PangoAttribute // return, full, converted
 
@@ -2480,11 +2542,11 @@ func NewAttrLineHeight(factor float64) Attribute {
 	cret = C.pango_attr_line_height_new(carg1)
 	runtime.KeepAlive(factor)
 
-	var ret Attribute
+	var goret *Attribute
 
-	ret = UnsafeAttributeFromGlibFull(unsafe.Pointer(cret))
+	goret = UnsafeAttributeFromGlibFull(unsafe.Pointer(cret))
 
-	return ret
+	return goret
 }
 
 // AttrLineHeightNewAbsolute wraps pango_attr_line_height_new_absolute
@@ -2495,7 +2557,7 @@ func NewAttrLineHeight(factor float64) Attribute {
 // 
 // The function returns the following values:
 // 
-// 	- ret Attribute 
+// 	- goret *Attribute 
 //
 // Override the height of logical line extents to be @height.
 // 
@@ -2503,7 +2565,7 @@ func NewAttrLineHeight(factor float64) Attribute {
 // [method@Pango.LayoutLine.get_extents],
 // [method@Pango.LayoutLine.get_pixel_extents] and
 // [method@Pango.LayoutIter.get_line_extents].
-func AttrLineHeightNewAbsolute(height int) Attribute {
+func AttrLineHeightNewAbsolute(height int) *Attribute {
 	var carg1 C.int             // in, none, casted
 	var cret  *C.PangoAttribute // return, full, converted
 
@@ -2512,11 +2574,11 @@ func AttrLineHeightNewAbsolute(height int) Attribute {
 	cret = C.pango_attr_line_height_new_absolute(carg1)
 	runtime.KeepAlive(height)
 
-	var ret Attribute
+	var goret *Attribute
 
-	ret = UnsafeAttributeFromGlibFull(unsafe.Pointer(cret))
+	goret = UnsafeAttributeFromGlibFull(unsafe.Pointer(cret))
 
-	return ret
+	return goret
 }
 
 // NewAttrOverlineColor wraps pango_attr_overline_color_new
@@ -2529,13 +2591,13 @@ func AttrLineHeightNewAbsolute(height int) Attribute {
 // 
 // The function returns the following values:
 // 
-// 	- ret Attribute 
+// 	- goret *Attribute 
 //
 // Create a new overline color attribute.
 // 
 // This attribute modifies the color of overlines.
 // If not set, overlines will use the foreground color.
-func NewAttrOverlineColor(red uint16, green uint16, blue uint16) Attribute {
+func NewAttrOverlineColor(red uint16, green uint16, blue uint16) *Attribute {
 	var carg1 C.guint16         // in, none, casted
 	var carg2 C.guint16         // in, none, casted
 	var carg3 C.guint16         // in, none, casted
@@ -2550,11 +2612,11 @@ func NewAttrOverlineColor(red uint16, green uint16, blue uint16) Attribute {
 	runtime.KeepAlive(green)
 	runtime.KeepAlive(blue)
 
-	var ret Attribute
+	var goret *Attribute
 
-	ret = UnsafeAttributeFromGlibFull(unsafe.Pointer(cret))
+	goret = UnsafeAttributeFromGlibFull(unsafe.Pointer(cret))
 
-	return ret
+	return goret
 }
 
 // NewAttrOverline wraps pango_attr_overline_new
@@ -2565,10 +2627,10 @@ func NewAttrOverlineColor(red uint16, green uint16, blue uint16) Attribute {
 // 
 // The function returns the following values:
 // 
-// 	- ret Attribute 
+// 	- goret *Attribute 
 //
 // Create a new overline-style attribute.
-func NewAttrOverline(overline Overline) Attribute {
+func NewAttrOverline(overline Overline) *Attribute {
 	var carg1 C.PangoOverline   // in, none, casted
 	var cret  *C.PangoAttribute // return, full, converted
 
@@ -2577,11 +2639,11 @@ func NewAttrOverline(overline Overline) Attribute {
 	cret = C.pango_attr_overline_new(carg1)
 	runtime.KeepAlive(overline)
 
-	var ret Attribute
+	var goret *Attribute
 
-	ret = UnsafeAttributeFromGlibFull(unsafe.Pointer(cret))
+	goret = UnsafeAttributeFromGlibFull(unsafe.Pointer(cret))
 
-	return ret
+	return goret
 }
 
 // NewAttrRise wraps pango_attr_rise_new
@@ -2593,10 +2655,10 @@ func NewAttrOverline(overline Overline) Attribute {
 // 
 // The function returns the following values:
 // 
-// 	- ret Attribute 
+// 	- goret *Attribute 
 //
 // Create a new baseline displacement attribute.
-func NewAttrRise(rise int) Attribute {
+func NewAttrRise(rise int) *Attribute {
 	var carg1 C.int             // in, none, casted
 	var cret  *C.PangoAttribute // return, full, converted
 
@@ -2605,11 +2667,11 @@ func NewAttrRise(rise int) Attribute {
 	cret = C.pango_attr_rise_new(carg1)
 	runtime.KeepAlive(rise)
 
-	var ret Attribute
+	var goret *Attribute
 
-	ret = UnsafeAttributeFromGlibFull(unsafe.Pointer(cret))
+	goret = UnsafeAttributeFromGlibFull(unsafe.Pointer(cret))
 
-	return ret
+	return goret
 }
 
 // NewAttrScale wraps pango_attr_scale_new
@@ -2620,13 +2682,13 @@ func NewAttrRise(rise int) Attribute {
 // 
 // The function returns the following values:
 // 
-// 	- ret Attribute 
+// 	- goret *Attribute 
 //
 // Create a new font size scale attribute.
 // 
 // The base font for the affected text will have
 // its size multiplied by @scale_factor.
-func NewAttrScale(scaleFactor float64) Attribute {
+func NewAttrScale(scaleFactor float64) *Attribute {
 	var carg1 C.gdouble         // in, none, casted
 	var cret  *C.PangoAttribute // return, full, converted
 
@@ -2635,32 +2697,32 @@ func NewAttrScale(scaleFactor float64) Attribute {
 	cret = C.pango_attr_scale_new(carg1)
 	runtime.KeepAlive(scaleFactor)
 
-	var ret Attribute
+	var goret *Attribute
 
-	ret = UnsafeAttributeFromGlibFull(unsafe.Pointer(cret))
+	goret = UnsafeAttributeFromGlibFull(unsafe.Pointer(cret))
 
-	return ret
+	return goret
 }
 
 // NewAttrSentence wraps pango_attr_sentence_new
 // The function returns the following values:
 // 
-// 	- ret Attribute 
+// 	- goret *Attribute 
 //
 // Marks the range of the attribute as a single sentence.
 // 
 // Note that this may require adjustments to word and
 // sentence classification around the range.
-func NewAttrSentence() Attribute {
+func NewAttrSentence() *Attribute {
 	var cret *C.PangoAttribute // return, full, converted
 
 	cret = C.pango_attr_sentence_new()
 
-	var ret Attribute
+	var goret *Attribute
 
-	ret = UnsafeAttributeFromGlibFull(unsafe.Pointer(cret))
+	goret = UnsafeAttributeFromGlibFull(unsafe.Pointer(cret))
 
-	return ret
+	return goret
 }
 
 // NewAttrShow wraps pango_attr_show_new
@@ -2671,11 +2733,11 @@ func NewAttrSentence() Attribute {
 // 
 // The function returns the following values:
 // 
-// 	- ret Attribute 
+// 	- goret *Attribute 
 //
 // Create a new attribute that influences how invisible
 // characters are rendered.
-func NewAttrShow(flags ShowFlags) Attribute {
+func NewAttrShow(flags ShowFlags) *Attribute {
 	var carg1 C.PangoShowFlags  // in, none, casted
 	var cret  *C.PangoAttribute // return, full, converted
 
@@ -2684,11 +2746,11 @@ func NewAttrShow(flags ShowFlags) Attribute {
 	cret = C.pango_attr_show_new(carg1)
 	runtime.KeepAlive(flags)
 
-	var ret Attribute
+	var goret *Attribute
 
-	ret = UnsafeAttributeFromGlibFull(unsafe.Pointer(cret))
+	goret = UnsafeAttributeFromGlibFull(unsafe.Pointer(cret))
 
-	return ret
+	return goret
 }
 
 // NewAttrStretch wraps pango_attr_stretch_new
@@ -2699,10 +2761,10 @@ func NewAttrShow(flags ShowFlags) Attribute {
 // 
 // The function returns the following values:
 // 
-// 	- ret Attribute 
+// 	- goret *Attribute 
 //
 // Create a new font stretch attribute.
-func NewAttrStretch(stretch Stretch) Attribute {
+func NewAttrStretch(stretch Stretch) *Attribute {
 	var carg1 C.PangoStretch    // in, none, casted
 	var cret  *C.PangoAttribute // return, full, converted
 
@@ -2711,11 +2773,11 @@ func NewAttrStretch(stretch Stretch) Attribute {
 	cret = C.pango_attr_stretch_new(carg1)
 	runtime.KeepAlive(stretch)
 
-	var ret Attribute
+	var goret *Attribute
 
-	ret = UnsafeAttributeFromGlibFull(unsafe.Pointer(cret))
+	goret = UnsafeAttributeFromGlibFull(unsafe.Pointer(cret))
 
-	return ret
+	return goret
 }
 
 // NewAttrStrikethroughColor wraps pango_attr_strikethrough_color_new
@@ -2728,13 +2790,13 @@ func NewAttrStretch(stretch Stretch) Attribute {
 // 
 // The function returns the following values:
 // 
-// 	- ret Attribute 
+// 	- goret *Attribute 
 //
 // Create a new strikethrough color attribute.
 // 
 // This attribute modifies the color of strikethrough lines.
 // If not set, strikethrough lines will use the foreground color.
-func NewAttrStrikethroughColor(red uint16, green uint16, blue uint16) Attribute {
+func NewAttrStrikethroughColor(red uint16, green uint16, blue uint16) *Attribute {
 	var carg1 C.guint16         // in, none, casted
 	var carg2 C.guint16         // in, none, casted
 	var carg3 C.guint16         // in, none, casted
@@ -2749,11 +2811,11 @@ func NewAttrStrikethroughColor(red uint16, green uint16, blue uint16) Attribute 
 	runtime.KeepAlive(green)
 	runtime.KeepAlive(blue)
 
-	var ret Attribute
+	var goret *Attribute
 
-	ret = UnsafeAttributeFromGlibFull(unsafe.Pointer(cret))
+	goret = UnsafeAttributeFromGlibFull(unsafe.Pointer(cret))
 
-	return ret
+	return goret
 }
 
 // NewAttrStrikethrough wraps pango_attr_strikethrough_new
@@ -2764,10 +2826,10 @@ func NewAttrStrikethroughColor(red uint16, green uint16, blue uint16) Attribute 
 // 
 // The function returns the following values:
 // 
-// 	- ret Attribute 
+// 	- goret *Attribute 
 //
 // Create a new strike-through attribute.
-func NewAttrStrikethrough(strikethrough bool) Attribute {
+func NewAttrStrikethrough(strikethrough bool) *Attribute {
 	var carg1 C.gboolean        // in
 	var cret  *C.PangoAttribute // return, full, converted
 
@@ -2778,11 +2840,11 @@ func NewAttrStrikethrough(strikethrough bool) Attribute {
 	cret = C.pango_attr_strikethrough_new(carg1)
 	runtime.KeepAlive(strikethrough)
 
-	var ret Attribute
+	var goret *Attribute
 
-	ret = UnsafeAttributeFromGlibFull(unsafe.Pointer(cret))
+	goret = UnsafeAttributeFromGlibFull(unsafe.Pointer(cret))
 
-	return ret
+	return goret
 }
 
 // NewAttrStyle wraps pango_attr_style_new
@@ -2793,10 +2855,10 @@ func NewAttrStrikethrough(strikethrough bool) Attribute {
 // 
 // The function returns the following values:
 // 
-// 	- ret Attribute 
+// 	- goret *Attribute 
 //
 // Create a new font slant style attribute.
-func NewAttrStyle(style Style) Attribute {
+func NewAttrStyle(style Style) *Attribute {
 	var carg1 C.PangoStyle      // in, none, casted
 	var cret  *C.PangoAttribute // return, full, converted
 
@@ -2805,11 +2867,11 @@ func NewAttrStyle(style Style) Attribute {
 	cret = C.pango_attr_style_new(carg1)
 	runtime.KeepAlive(style)
 
-	var ret Attribute
+	var goret *Attribute
 
-	ret = UnsafeAttributeFromGlibFull(unsafe.Pointer(cret))
+	goret = UnsafeAttributeFromGlibFull(unsafe.Pointer(cret))
 
-	return ret
+	return goret
 }
 
 // NewAttrTextTransform wraps pango_attr_text_transform_new
@@ -2820,11 +2882,11 @@ func NewAttrStyle(style Style) Attribute {
 // 
 // The function returns the following values:
 // 
-// 	- ret Attribute 
+// 	- goret *Attribute 
 //
 // Create a new attribute that influences how characters
 // are transformed during shaping.
-func NewAttrTextTransform(transform TextTransform) Attribute {
+func NewAttrTextTransform(transform TextTransform) *Attribute {
 	var carg1 C.PangoTextTransform // in, none, casted
 	var cret  *C.PangoAttribute    // return, full, converted
 
@@ -2833,11 +2895,11 @@ func NewAttrTextTransform(transform TextTransform) Attribute {
 	cret = C.pango_attr_text_transform_new(carg1)
 	runtime.KeepAlive(transform)
 
-	var ret Attribute
+	var goret *Attribute
 
-	ret = UnsafeAttributeFromGlibFull(unsafe.Pointer(cret))
+	goret = UnsafeAttributeFromGlibFull(unsafe.Pointer(cret))
 
-	return ret
+	return goret
 }
 
 // NewAttrUnderlineColor wraps pango_attr_underline_color_new
@@ -2850,13 +2912,13 @@ func NewAttrTextTransform(transform TextTransform) Attribute {
 // 
 // The function returns the following values:
 // 
-// 	- ret Attribute 
+// 	- goret *Attribute 
 //
 // Create a new underline color attribute.
 // 
 // This attribute modifies the color of underlines.
 // If not set, underlines will use the foreground color.
-func NewAttrUnderlineColor(red uint16, green uint16, blue uint16) Attribute {
+func NewAttrUnderlineColor(red uint16, green uint16, blue uint16) *Attribute {
 	var carg1 C.guint16         // in, none, casted
 	var carg2 C.guint16         // in, none, casted
 	var carg3 C.guint16         // in, none, casted
@@ -2871,11 +2933,11 @@ func NewAttrUnderlineColor(red uint16, green uint16, blue uint16) Attribute {
 	runtime.KeepAlive(green)
 	runtime.KeepAlive(blue)
 
-	var ret Attribute
+	var goret *Attribute
 
-	ret = UnsafeAttributeFromGlibFull(unsafe.Pointer(cret))
+	goret = UnsafeAttributeFromGlibFull(unsafe.Pointer(cret))
 
-	return ret
+	return goret
 }
 
 // NewAttrUnderline wraps pango_attr_underline_new
@@ -2886,10 +2948,10 @@ func NewAttrUnderlineColor(red uint16, green uint16, blue uint16) Attribute {
 // 
 // The function returns the following values:
 // 
-// 	- ret Attribute 
+// 	- goret *Attribute 
 //
 // Create a new underline-style attribute.
-func NewAttrUnderline(underline Underline) Attribute {
+func NewAttrUnderline(underline Underline) *Attribute {
 	var carg1 C.PangoUnderline  // in, none, casted
 	var cret  *C.PangoAttribute // return, full, converted
 
@@ -2898,11 +2960,11 @@ func NewAttrUnderline(underline Underline) Attribute {
 	cret = C.pango_attr_underline_new(carg1)
 	runtime.KeepAlive(underline)
 
-	var ret Attribute
+	var goret *Attribute
 
-	ret = UnsafeAttributeFromGlibFull(unsafe.Pointer(cret))
+	goret = UnsafeAttributeFromGlibFull(unsafe.Pointer(cret))
 
-	return ret
+	return goret
 }
 
 // NewAttrVariant wraps pango_attr_variant_new
@@ -2913,10 +2975,10 @@ func NewAttrUnderline(underline Underline) Attribute {
 // 
 // The function returns the following values:
 // 
-// 	- ret Attribute 
+// 	- goret *Attribute 
 //
 // Create a new font variant attribute (normal or small caps).
-func NewAttrVariant(variant Variant) Attribute {
+func NewAttrVariant(variant Variant) *Attribute {
 	var carg1 C.PangoVariant    // in, none, casted
 	var cret  *C.PangoAttribute // return, full, converted
 
@@ -2925,11 +2987,11 @@ func NewAttrVariant(variant Variant) Attribute {
 	cret = C.pango_attr_variant_new(carg1)
 	runtime.KeepAlive(variant)
 
-	var ret Attribute
+	var goret *Attribute
 
-	ret = UnsafeAttributeFromGlibFull(unsafe.Pointer(cret))
+	goret = UnsafeAttributeFromGlibFull(unsafe.Pointer(cret))
 
-	return ret
+	return goret
 }
 
 // NewAttrWeight wraps pango_attr_weight_new
@@ -2940,10 +3002,10 @@ func NewAttrVariant(variant Variant) Attribute {
 // 
 // The function returns the following values:
 // 
-// 	- ret Attribute 
+// 	- goret *Attribute 
 //
 // Create a new font weight attribute.
-func NewAttrWeight(weight Weight) Attribute {
+func NewAttrWeight(weight Weight) *Attribute {
 	var carg1 C.PangoWeight     // in, none, casted
 	var cret  *C.PangoAttribute // return, full, converted
 
@@ -2952,32 +3014,32 @@ func NewAttrWeight(weight Weight) Attribute {
 	cret = C.pango_attr_weight_new(carg1)
 	runtime.KeepAlive(weight)
 
-	var ret Attribute
+	var goret *Attribute
 
-	ret = UnsafeAttributeFromGlibFull(unsafe.Pointer(cret))
+	goret = UnsafeAttributeFromGlibFull(unsafe.Pointer(cret))
 
-	return ret
+	return goret
 }
 
 // NewAttrWord wraps pango_attr_word_new
 // The function returns the following values:
 // 
-// 	- ret Attribute 
+// 	- goret *Attribute 
 //
 // Marks the range of the attribute as a single word.
 // 
 // Note that this may require adjustments to word and
 // sentence classification around the range.
-func NewAttrWord() Attribute {
+func NewAttrWord() *Attribute {
 	var cret *C.PangoAttribute // return, full, converted
 
 	cret = C.pango_attr_word_new()
 
-	var ret Attribute
+	var goret *Attribute
 
-	ret = UnsafeAttributeFromGlibFull(unsafe.Pointer(cret))
+	goret = UnsafeAttributeFromGlibFull(unsafe.Pointer(cret))
 
-	return ret
+	return goret
 }
 
 // Break wraps pango_break
@@ -2986,8 +3048,8 @@ func NewAttrWord() Attribute {
 // 
 // 	- text string: the text to process. Must be valid UTF-8 
 // 	- length int: length of @text in bytes (may be -1 if @text is nul-terminated) 
-// 	- analysis Analysis: `PangoAnalysis` structure for @text 
-// 	- attrs array: an array to store character information in 
+// 	- analysis *Analysis: `PangoAnalysis` structure for @text 
+// 	- attrs []LogAttr: an array to store character information in 
 //
 // Determines possible line, word, and character breaks
 // for a string of Unicode text with a single analysis.
@@ -2996,18 +3058,21 @@ func NewAttrWord() Attribute {
 //
 // Deprecated: (since 1.44.0) Use [func@Pango.default_break],
 //   [func@Pango.tailor_break] and [func@Pango.attr_break].
-func Break(text string, length int, analysis Analysis, attrs array) {
+func Break(text string, length int, analysis *Analysis, attrs []LogAttr) {
 	var carg1 *C.gchar         // in, none, string
 	var carg2 C.int            // in, none, casted
 	var carg3 *C.PangoAnalysis // in, none, converted
-	var carg4 array            // in, transfer: none, scope: call, implicit: false, skip: false, optional: false, nullable: false, caller-allocates: false, has closure: false, has destroy: false
+	var carg4 *C.PangoLogAttr  // in, transfer: none, C Pointers: 1, Name: array[LogAttr], array (inner: *typesystem.Record, length-by: carg5)
 	var carg5 C.int            // implicit
 
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(text)))
 	defer C.free(unsafe.Pointer(carg1))
 	carg2 = C.int(length)
 	carg3 = (*C.PangoAnalysis)(UnsafeAnalysisToGlibNone(analysis))
-	panic("unimplemented conversion of array (array)")
+	_ = attrs
+	_ = carg4
+	_ = carg5
+	panic("unimplemented conversion of []LogAttr (PangoLogAttr*)")
 
 	C.pango_break(carg1, carg2, carg3, carg4, carg5)
 	runtime.KeepAlive(text)
@@ -3022,8 +3087,8 @@ func Break(text string, length int, analysis Analysis, attrs array) {
 // 
 // 	- text string: text to break. Must be valid UTF-8 
 // 	- length int: length of text in bytes (may be -1 if @text is nul-terminated) 
-// 	- analysis Analysis (nullable): a `PangoAnalysis` structure for the @text 
-// 	- attrs LogAttr: logical attributes to fill in 
+// 	- analysis *Analysis (nullable): a `PangoAnalysis` structure for the @text 
+// 	- attrs *LogAttr: logical attributes to fill in 
 // 	- attrsLen int: size of the array passed as @attrs 
 //
 // This is the default break algorithm.
@@ -3035,7 +3100,7 @@ func Break(text string, length int, analysis Analysis, attrs array) {
 // See [func@Pango.tailor_break] for language-specific breaks.
 // 
 // See [func@Pango.attr_break] for attribute-based customization.
-func DefaultBreak(text string, length int, analysis Analysis, attrs LogAttr, attrsLen int) {
+func DefaultBreak(text string, length int, analysis *Analysis, attrs *LogAttr, attrsLen int) {
 	var carg1 *C.gchar         // in, none, string
 	var carg2 C.int            // in, none, casted
 	var carg3 *C.PangoAnalysis // in, none, converted, nullable
@@ -3063,8 +3128,8 @@ func DefaultBreak(text string, length int, analysis Analysis, attrs LogAttr, att
 // 
 // The function takes the following parameters:
 // 
-// 	- inclusive Rectangle (nullable): rectangle to round to pixels inclusively 
-// 	- nearest Rectangle (nullable): rectangle to round to nearest pixels 
+// 	- inclusive *Rectangle (nullable): rectangle to round to pixels inclusively 
+// 	- nearest *Rectangle (nullable): rectangle to round to nearest pixels 
 //
 // Converts extents from Pango units to device units.
 // 
@@ -3083,7 +3148,7 @@ func DefaultBreak(text string, length int, analysis Analysis, attrs LogAttr, att
 // @inclusive. If you want two touching-but-not-overlapping rectangles stay
 // touching-but-not-overlapping after rounding to device units, pass them in
 // as @nearest.
-func ExtentsToPixels(inclusive Rectangle, nearest Rectangle) {
+func ExtentsToPixels(inclusive *Rectangle, nearest *Rectangle) {
 	var carg1 *C.PangoRectangle // in, none, converted, nullable
 	var carg2 *C.PangoRectangle // in, none, converted, nullable
 
@@ -3108,7 +3173,7 @@ func ExtentsToPixels(inclusive Rectangle, nearest Rectangle) {
 // 
 // The function returns the following values:
 // 
-// 	- ret Direction 
+// 	- goret Direction 
 //
 // Searches a string the first character that has a strong
 // direction, according to the Unicode bidirectional algorithm.
@@ -3125,11 +3190,11 @@ func FindBaseDir(text string, length int) Direction {
 	runtime.KeepAlive(text)
 	runtime.KeepAlive(length)
 
-	var ret Direction
+	var goret Direction
 
-	ret = Direction(cret)
+	goret = Direction(cret)
 
-	return ret
+	return goret
 }
 
 // FindParagraphBoundary wraps pango_find_paragraph_boundary
@@ -3190,8 +3255,8 @@ func FindParagraphBoundary(text string, length int) (int, int) {
 // 	- text string: text to process. Must be valid UTF-8 
 // 	- length int: length in bytes of @text 
 // 	- level int: embedding level, or -1 if unknown 
-// 	- language Language: language tag 
-// 	- attrs array: array with one `PangoLogAttr`
+// 	- language *Language: language tag 
+// 	- attrs []LogAttr: array with one `PangoLogAttr`
 //   per character in @text, plus one extra, to be filled in 
 //
 // Computes a `PangoLogAttr` for each character in @text.
@@ -3203,12 +3268,12 @@ func FindParagraphBoundary(text string, length int) (int, int) {
 // logical attributes can't be computed without context
 // (for example you need to see spaces on either side of
 // a word to know the word is a word).
-func GetLogAttrs(text string, length int, level int, language Language, attrs array) {
+func GetLogAttrs(text string, length int, level int, language *Language, attrs []LogAttr) {
 	var carg1 *C.gchar         // in, none, string
 	var carg2 C.int            // in, none, casted
 	var carg3 C.int            // in, none, casted
 	var carg4 *C.PangoLanguage // in, none, converted
-	var carg5 array            // in, transfer: none, scope: call, implicit: false, skip: false, optional: false, nullable: false, caller-allocates: false, has closure: false, has destroy: false
+	var carg5 *C.PangoLogAttr  // in, transfer: none, C Pointers: 1, Name: array[LogAttr], array (inner: *typesystem.Record, length-by: carg6)
 	var carg6 C.int            // implicit
 
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(text)))
@@ -3216,7 +3281,10 @@ func GetLogAttrs(text string, length int, level int, language Language, attrs ar
 	carg2 = C.int(length)
 	carg3 = C.int(level)
 	carg4 = (*C.PangoLanguage)(UnsafeLanguageToGlibNone(language))
-	panic("unimplemented conversion of array (array)")
+	_ = attrs
+	_ = carg5
+	_ = carg6
+	panic("unimplemented conversion of []LogAttr (PangoLogAttr*)")
 
 	C.pango_get_log_attrs(carg1, carg2, carg3, carg4, carg5, carg6)
 	runtime.KeepAlive(text)
@@ -3231,11 +3299,11 @@ func GetLogAttrs(text string, length int, level int, language Language, attrs ar
 // The function takes the following parameters:
 // 
 // 	- ch uint32: a Unicode character 
-// 	- mirroredCh uint32: location to store the mirrored character 
+// 	- mirroredCh *uint32: location to store the mirrored character 
 // 
 // The function returns the following values:
 // 
-// 	- ret bool 
+// 	- goret bool 
 //
 // Returns the mirrored character of a Unicode character.
 // 
@@ -3243,25 +3311,27 @@ func GetLogAttrs(text string, length int, level int, language Language, attrs ar
 //
 // Deprecated: (since 1.30.0) Use [func@GLib.unichar_get_mirror_char] instead;
 //   the docs for that function provide full details.
-func GetMirrorChar(ch uint32, mirroredCh uint32) bool {
+func GetMirrorChar(ch uint32, mirroredCh *uint32) bool {
 	var carg1 C.gunichar  // in, none, casted
-	var carg2 *C.gunichar // in, none, casted
+	var carg2 *C.gunichar // in, transfer: none, C Pointers: 1, Name: gunichar
 	var cret  C.gboolean  // return
 
 	carg1 = C.gunichar(ch)
-	carg2 = *C.gunichar(mirroredCh)
+	_ = mirroredCh
+	_ = carg2
+	panic("unimplemented conversion of *uint32 (gunichar*)")
 
 	cret = C.pango_get_mirror_char(carg1, carg2)
 	runtime.KeepAlive(ch)
 	runtime.KeepAlive(mirroredCh)
 
-	var ret bool
+	var goret bool
 
 	if cret != 0 {
-		ret = true
+		goret = true
 	}
 
-	return ret
+	return goret
 }
 
 // IsZeroWidth wraps pango_is_zero_width
@@ -3272,7 +3342,7 @@ func GetMirrorChar(ch uint32, mirroredCh uint32) bool {
 // 
 // The function returns the following values:
 // 
-// 	- ret bool 
+// 	- goret bool 
 //
 // Checks if a character that should not be normally rendered.
 // 
@@ -3289,20 +3359,121 @@ func IsZeroWidth(ch uint32) bool {
 	cret = C.pango_is_zero_width(carg1)
 	runtime.KeepAlive(ch)
 
-	var ret bool
+	var goret bool
 
 	if cret != 0 {
-		ret = true
+		goret = true
 	}
 
-	return ret
+	return goret
+}
+
+// MarkupParserFinish wraps pango_markup_parser_finish
+// 
+// The function takes the following parameters:
+// 
+// 	- context *glib.MarkupParseContext: A valid parse context that was returned from [func@markup_parser_new] 
+// 
+// The function returns the following values:
+// 
+// 	- attrList *AttrList: address of return location for a `PangoAttrList` 
+// 	- text string: address of return location for text with tags stripped 
+// 	- accelChar uint32: address of return location for accelerator char 
+// 	- goret bool 
+// 	- _goerr error (nullable): an error 
+//
+// Finishes parsing markup.
+// 
+// After feeding a Pango markup parser some data with [method@GLib.MarkupParseContext.parse],
+// use this function to get the list of attributes and text out of the
+// markup. This function will not free @context, use [method@GLib.MarkupParseContext.free]
+// to do so.
+func MarkupParserFinish(context *glib.MarkupParseContext) (*AttrList, string, uint32, bool, error) {
+	var carg1 *C.GMarkupParseContext // in, none, converted
+	var carg2 *C.PangoAttrList       // out, full, converted
+	var carg3 *C.gchar               // out, full, string
+	var carg4 C.gunichar             // out, full, casted
+	var cret  C.gboolean             // return
+	var _cerr *C.GError              // out, full, converted, nullable
+
+	carg1 = (*C.GMarkupParseContext)(glib.UnsafeMarkupParseContextToGlibNone(context))
+
+	cret = C.pango_markup_parser_finish(carg1, &carg2, &carg3, &carg4, &_cerr)
+	runtime.KeepAlive(context)
+
+	var attrList  *AttrList
+	var text      string
+	var accelChar uint32
+	var goret     bool
+	var _goerr    error
+
+	attrList = UnsafeAttrListFromGlibFull(unsafe.Pointer(carg2))
+	text = C.GoString((*C.gchar)(unsafe.Pointer(carg3)))
+	defer C.free(unsafe.Pointer(carg3))
+	accelChar = uint32(carg4)
+	if cret != 0 {
+		goret = true
+	}
+	if _cerr != nil {
+		_goerr = glib.UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
+	}
+
+	return attrList, text, accelChar, goret, _goerr
+}
+
+// NewMarkupParser wraps pango_markup_parser_new
+// 
+// The function takes the following parameters:
+// 
+// 	- accelMarker uint32: character that precedes an accelerator, or 0 for none 
+// 
+// The function returns the following values:
+// 
+// 	- goret *glib.MarkupParseContext 
+//
+// Incrementally parses marked-up text to create a plain-text string
+// and an attribute list.
+// 
+// See the [Pango Markup](pango_markup.html) docs for details about the
+// supported markup.
+// 
+// If @accel_marker is nonzero, the given character will mark the
+// character following it as an accelerator. For example, @accel_marker
+// might be an ampersand or underscore. All characters marked
+// as an accelerator will receive a %PANGO_UNDERLINE_LOW attribute,
+// and the first character so marked will be returned in @accel_char,
+// when calling [func@markup_parser_finish]. Two @accel_marker characters
+// following each other produce a single literal @accel_marker character.
+// 
+// To feed markup to the parser, use [method@GLib.MarkupParseContext.parse]
+// on the returned [struct@GLib.MarkupParseContext]. When done with feeding markup
+// to the parser, use [func@markup_parser_finish] to get the data out
+// of it, and then use [method@GLib.MarkupParseContext.free] to free it.
+// 
+// This function is designed for applications that read Pango markup
+// from streams. To simply parse a string containing Pango markup,
+// the [func@Pango.parse_markup] API is recommended instead.
+func NewMarkupParser(accelMarker uint32) *glib.MarkupParseContext {
+	var carg1 C.gunichar             // in, none, casted
+	var cret  *C.GMarkupParseContext // return, none, converted
+
+	carg1 = C.gunichar(accelMarker)
+
+	cret = C.pango_markup_parser_new(carg1)
+	runtime.KeepAlive(accelMarker)
+
+	var goret *glib.MarkupParseContext
+
+	goret = glib.UnsafeMarkupParseContextFromGlibNone(unsafe.Pointer(cret))
+
+	return goret
 }
 
 // ParseEnum wraps pango_parse_enum
 // 
 // The function takes the following parameters:
 // 
-// 	- typ glib.Type: enum type to parse, eg. %PANGO_TYPE_ELLIPSIZE_MODE 
+// 	- typ gobject.Type: enum type to parse, eg. %PANGO_TYPE_ELLIPSIZE_MODE 
 // 	- str string (nullable): string to parse 
 // 	- warn bool: if %TRUE, issue a g_warning() on bad input 
 // 
@@ -3311,7 +3482,7 @@ func IsZeroWidth(ch uint32) bool {
 // 	- value int: integer to store the result in 
 // 	- possibleValues string: place to store list of possible
 //   values on failure 
-// 	- ret bool 
+// 	- goret bool 
 //
 // Parses an enum type and stores the result in @value.
 // 
@@ -3325,9 +3496,9 @@ func IsZeroWidth(ch uint32) bool {
 // be freed using g_free().
 //
 // Deprecated: (since 1.38.0) 
-func ParseEnum(typ glib.Type, str string, warn bool) (int, string, bool) {
-	var carg1 C.GType    // in, none, casted
-	var carg2 *C.gchar   // in, none, string, nullable
+func ParseEnum(typ gobject.Type, str string, warn bool) (int, string, bool) {
+	var carg1 C.GType    // in, none, casted, alias
+	var carg2 *C.gchar   // in, none, string, nullable-string
 	var carg4 C.gboolean // in
 	var carg3 C.int      // out, full, casted
 	var carg5 *C.gchar   // out, full, string
@@ -3349,16 +3520,16 @@ func ParseEnum(typ glib.Type, str string, warn bool) (int, string, bool) {
 
 	var value          int
 	var possibleValues string
-	var ret            bool
+	var goret          bool
 
 	value = int(carg3)
 	possibleValues = C.GoString((*C.gchar)(unsafe.Pointer(carg5)))
 	defer C.free(unsafe.Pointer(carg5))
 	if cret != 0 {
-		ret = true
+		goret = true
 	}
 
-	return value, possibleValues, ret
+	return value, possibleValues, goret
 }
 
 // ParseMarkup wraps pango_parse_markup
@@ -3371,10 +3542,10 @@ func ParseEnum(typ glib.Type, str string, warn bool) (int, string, bool) {
 // 
 // The function returns the following values:
 // 
-// 	- attrList AttrList: address of return location for a `PangoAttrList` 
+// 	- attrList *AttrList: address of return location for a `PangoAttrList` 
 // 	- text string: address of return location for text with tags stripped 
 // 	- accelChar uint32: address of return location for accelerator char 
-// 	- ret bool 
+// 	- goret bool 
 // 	- _goerr error (nullable): an error 
 //
 // Parses marked-up text to create a plain-text string and an attribute list.
@@ -3394,7 +3565,7 @@ func ParseEnum(typ glib.Type, str string, warn bool) (int, string, bool) {
 // 
 // If any error happens, none of the output arguments are touched except
 // for @error.
-func ParseMarkup(markupText string, length int, accelMarker uint32) (AttrList, string, uint32, bool, error) {
+func ParseMarkup(markupText string, length int, accelMarker uint32) (*AttrList, string, uint32, bool, error) {
 	var carg1 *C.gchar         // in, none, string
 	var carg2 C.int            // in, none, casted
 	var carg3 C.gunichar       // in, none, casted
@@ -3414,10 +3585,10 @@ func ParseMarkup(markupText string, length int, accelMarker uint32) (AttrList, s
 	runtime.KeepAlive(length)
 	runtime.KeepAlive(accelMarker)
 
-	var attrList  AttrList
+	var attrList  *AttrList
 	var text      string
 	var accelChar uint32
-	var ret       bool
+	var goret     bool
 	var _goerr    error
 
 	attrList = UnsafeAttrListFromGlibFull(unsafe.Pointer(carg4))
@@ -3425,13 +3596,13 @@ func ParseMarkup(markupText string, length int, accelMarker uint32) (AttrList, s
 	defer C.free(unsafe.Pointer(carg5))
 	accelChar = uint32(carg6)
 	if cret != 0 {
-		ret = true
+		goret = true
 	}
 	if _cerr != nil {
-		_goerr = UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
+		_goerr = glib.UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
 	}
 
-	return attrList, text, accelChar, ret, _goerr
+	return attrList, text, accelChar, goret, _goerr
 }
 
 // ParseStretch wraps pango_parse_stretch
@@ -3444,7 +3615,7 @@ func ParseMarkup(markupText string, length int, accelMarker uint32) (AttrList, s
 // The function returns the following values:
 // 
 // 	- stretch Stretch: a `PangoStretch` to store the result in. 
-// 	- ret bool 
+// 	- goret bool 
 //
 // Parses a font stretch.
 // 
@@ -3470,14 +3641,14 @@ func ParseStretch(str string, warn bool) (Stretch, bool) {
 	runtime.KeepAlive(warn)
 
 	var stretch Stretch
-	var ret     bool
+	var goret   bool
 
 	stretch = Stretch(carg2)
 	if cret != 0 {
-		ret = true
+		goret = true
 	}
 
-	return stretch, ret
+	return stretch, goret
 }
 
 // ParseStyle wraps pango_parse_style
@@ -3490,7 +3661,7 @@ func ParseStretch(str string, warn bool) (Stretch, bool) {
 // The function returns the following values:
 // 
 // 	- style Style: a `PangoStyle` to store the result in. 
-// 	- ret bool 
+// 	- goret bool 
 //
 // Parses a font style.
 // 
@@ -3514,14 +3685,14 @@ func ParseStyle(str string, warn bool) (Style, bool) {
 	runtime.KeepAlive(warn)
 
 	var style Style
-	var ret   bool
+	var goret bool
 
 	style = Style(carg2)
 	if cret != 0 {
-		ret = true
+		goret = true
 	}
 
-	return style, ret
+	return style, goret
 }
 
 // ParseVariant wraps pango_parse_variant
@@ -3534,7 +3705,7 @@ func ParseStyle(str string, warn bool) (Style, bool) {
 // The function returns the following values:
 // 
 // 	- variant Variant: a `PangoVariant` to store the result in. 
-// 	- ret bool 
+// 	- goret bool 
 //
 // Parses a font variant.
 // 
@@ -3558,14 +3729,14 @@ func ParseVariant(str string, warn bool) (Variant, bool) {
 	runtime.KeepAlive(warn)
 
 	var variant Variant
-	var ret     bool
+	var goret   bool
 
 	variant = Variant(carg2)
 	if cret != 0 {
-		ret = true
+		goret = true
 	}
 
-	return variant, ret
+	return variant, goret
 }
 
 // ParseWeight wraps pango_parse_weight
@@ -3578,7 +3749,7 @@ func ParseVariant(str string, warn bool) (Variant, bool) {
 // The function returns the following values:
 // 
 // 	- weight Weight: a `PangoWeight` to store the result in. 
-// 	- ret bool 
+// 	- goret bool 
 //
 // Parses a font weight.
 // 
@@ -3602,14 +3773,14 @@ func ParseWeight(str string, warn bool) (Weight, bool) {
 	runtime.KeepAlive(warn)
 
 	var weight Weight
-	var ret    bool
+	var goret  bool
 
 	weight = Weight(carg2)
 	if cret != 0 {
-		ret = true
+		goret = true
 	}
 
-	return weight, ret
+	return weight, goret
 }
 
 // Shape wraps pango_shape
@@ -3618,8 +3789,8 @@ func ParseWeight(str string, warn bool) (Weight, bool) {
 // 
 // 	- text string: the text to process 
 // 	- length int: the length (in bytes) of @text 
-// 	- analysis Analysis: `PangoAnalysis` structure from [func@Pango.itemize] 
-// 	- glyphs GlyphString: glyph string in which to store results 
+// 	- analysis *Analysis: `PangoAnalysis` structure from [func@Pango.itemize] 
+// 	- glyphs *GlyphString: glyph string in which to store results 
 //
 // Convert the characters in @text into glyphs.
 // 
@@ -3639,7 +3810,7 @@ func ParseWeight(str string, warn bool) (Weight, bool) {
 // [func@Pango.itemize] have indices that are relative to the entire paragraph,
 // so you need to subtract the item offset from their indices before
 // calling [func@Pango.shape].
-func Shape(text string, length int, analysis Analysis, glyphs GlyphString) {
+func Shape(text string, length int, analysis *Analysis, glyphs *GlyphString) {
 	var carg1 *C.gchar            // in, none, string
 	var carg2 C.int               // in, none, casted
 	var carg3 *C.PangoAnalysis    // in, none, converted
@@ -3666,8 +3837,8 @@ func Shape(text string, length int, analysis Analysis, glyphs GlyphString) {
 // 	- itemLength int: the length (in bytes) of @item_text. -1 means nul-terminated text. 
 // 	- paragraphText string (nullable): text of the paragraph (see details). 
 // 	- paragraphLength int: the length (in bytes) of @paragraph_text. -1 means nul-terminated text. 
-// 	- analysis Analysis: `PangoAnalysis` structure from [func@Pango.itemize]. 
-// 	- glyphs GlyphString: glyph string in which to store results. 
+// 	- analysis *Analysis: `PangoAnalysis` structure from [func@Pango.itemize]. 
+// 	- glyphs *GlyphString: glyph string in which to store results. 
 //
 // Convert the characters in @text into glyphs.
 // 
@@ -3690,10 +3861,10 @@ func Shape(text string, length int, analysis Analysis, glyphs GlyphString) {
 // so you do not pass the full paragraph text as @paragraph_text, you need
 // to subtract the item offset from their indices before calling
 // [func@Pango.shape_full].
-func ShapeFull(itemText string, itemLength int, paragraphText string, paragraphLength int, analysis Analysis, glyphs GlyphString) {
+func ShapeFull(itemText string, itemLength int, paragraphText string, paragraphLength int, analysis *Analysis, glyphs *GlyphString) {
 	var carg1 *C.gchar            // in, none, string
 	var carg2 C.int               // in, none, casted
-	var carg3 *C.gchar            // in, none, string, nullable
+	var carg3 *C.gchar            // in, none, string, nullable-string
 	var carg4 C.int               // in, none, casted
 	var carg5 *C.PangoAnalysis    // in, none, converted
 	var carg6 *C.PangoGlyphString // in, none, converted
@@ -3722,12 +3893,12 @@ func ShapeFull(itemText string, itemLength int, paragraphText string, paragraphL
 // 
 // The function takes the following parameters:
 // 
-// 	- item Item: `PangoItem` to shape 
+// 	- item *Item: `PangoItem` to shape 
 // 	- paragraphText string (nullable): text of the paragraph (see details). 
 // 	- paragraphLength int: the length (in bytes) of @paragraph_text.
 //     -1 means nul-terminated text. 
-// 	- logAttrs LogAttr (nullable): array of `PangoLogAttr` for @item 
-// 	- glyphs GlyphString: glyph string in which to store results 
+// 	- logAttrs *LogAttr (nullable): array of `PangoLogAttr` for @item 
+// 	- glyphs *GlyphString: glyph string in which to store results 
 // 	- flags ShapeFlags: flags influencing the shaping process 
 //
 // Convert the characters in @item into glyphs.
@@ -3743,9 +3914,9 @@ func ShapeFull(itemText string, itemLength int, paragraphText string, paragraphL
 // so you do not pass the full paragraph text as @paragraph_text, you need
 // to subtract the item offset from their indices before calling
 // [func@Pango.shape_with_flags].
-func ShapeItem(item Item, paragraphText string, paragraphLength int, logAttrs LogAttr, glyphs GlyphString, flags ShapeFlags) {
+func ShapeItem(item *Item, paragraphText string, paragraphLength int, logAttrs *LogAttr, glyphs *GlyphString, flags ShapeFlags) {
 	var carg1 *C.PangoItem        // in, none, converted
-	var carg2 *C.gchar            // in, none, string, nullable
+	var carg2 *C.gchar            // in, none, string, nullable-string
 	var carg3 C.int               // in, none, casted
 	var carg4 *C.PangoLogAttr     // in, none, converted, nullable
 	var carg5 *C.PangoGlyphString // in, none, converted
@@ -3782,8 +3953,8 @@ func ShapeItem(item Item, paragraphText string, paragraphLength int, logAttrs Lo
 // 	- paragraphText string (nullable): text of the paragraph (see details). 
 // 	- paragraphLength int: the length (in bytes) of @paragraph_text.
 //     -1 means nul-terminated text. 
-// 	- analysis Analysis: `PangoAnalysis` structure from [func@Pango.itemize] 
-// 	- glyphs GlyphString: glyph string in which to store results 
+// 	- analysis *Analysis: `PangoAnalysis` structure from [func@Pango.itemize] 
+// 	- glyphs *GlyphString: glyph string in which to store results 
 // 	- flags ShapeFlags: flags influencing the shaping process 
 //
 // Convert the characters in @text into glyphs.
@@ -3804,10 +3975,10 @@ func ShapeItem(item Item, paragraphText string, paragraphLength int, logAttrs Lo
 // so you do not pass the full paragraph text as @paragraph_text, you need
 // to subtract the item offset from their indices before calling
 // [func@Pango.shape_with_flags].
-func ShapeWithFlags(itemText string, itemLength int, paragraphText string, paragraphLength int, analysis Analysis, glyphs GlyphString, flags ShapeFlags) {
+func ShapeWithFlags(itemText string, itemLength int, paragraphText string, paragraphLength int, analysis *Analysis, glyphs *GlyphString, flags ShapeFlags) {
 	var carg1 *C.gchar            // in, none, string
 	var carg2 C.int               // in, none, casted
-	var carg3 *C.gchar            // in, none, string, nullable
+	var carg3 *C.gchar            // in, none, string, nullable-string
 	var carg4 C.int               // in, none, casted
 	var carg5 *C.PangoAnalysis    // in, none, converted
 	var carg6 *C.PangoGlyphString // in, none, converted
@@ -3843,15 +4014,15 @@ func ShapeWithFlags(itemText string, itemLength int, paragraphText string, parag
 // 
 // The function returns the following values:
 // 
-// 	- ret array 
+// 	- goret []string 
 //
 // Splits a %G_SEARCHPATH_SEPARATOR-separated list of files, stripping
 // white space and substituting ~/ with $HOME/.
 //
 // Deprecated: (since 1.38.0) 
-func SplitFileList(str string) array {
+func SplitFileList(str string) []string {
 	var carg1 *C.gchar // in, none, string
-	var cret  array    // return, transfer: full, scope: , implicit: false, skip: false, optional: false, nullable: false, caller-allocates: false, has closure: false, has destroy: false
+	var cret  **C.char // return, transfer: full, C Pointers: 2, Name: array[utf8], scope: , array (inner: *typesystem.StringPrimitive, zero-terminated)
 
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(str)))
 	defer C.free(unsafe.Pointer(carg1))
@@ -3859,11 +4030,13 @@ func SplitFileList(str string) array {
 	cret = C.pango_split_file_list(carg1)
 	runtime.KeepAlive(str)
 
-	var ret array
+	var goret []string
 
-	panic("unimplemented conversion of array (array)")
+	_ = goret
+	_ = cret
+	panic("unimplemented conversion of []string (char**)")
 
-	return ret
+	return goret
 }
 
 // TailorBreak wraps pango_tailor_break
@@ -3872,10 +4045,10 @@ func SplitFileList(str string) array {
 // 
 // 	- text string: text to process. Must be valid UTF-8 
 // 	- length int: length in bytes of @text 
-// 	- analysis Analysis: `PangoAnalysis` for @text 
+// 	- analysis *Analysis: `PangoAnalysis` for @text 
 // 	- offset int: Byte offset of @text from the beginning of the
 //   paragraph, or -1 to ignore attributes from @analysis 
-// 	- attrs array: array with one `PangoLogAttr`
+// 	- attrs []LogAttr: array with one `PangoLogAttr`
 //   per character in @text, plus one extra, to be filled in 
 //
 // Apply language-specific tailoring to the breaks in @attrs.
@@ -3887,12 +4060,12 @@ func SplitFileList(str string) array {
 // 
 // Note that it is better to pass -1 for @offset and use [func@Pango.attr_break]
 // to apply attributes to the whole paragraph.
-func TailorBreak(text string, length int, analysis Analysis, offset int, attrs array) {
+func TailorBreak(text string, length int, analysis *Analysis, offset int, attrs []LogAttr) {
 	var carg1 *C.gchar         // in, none, string
 	var carg2 C.int            // in, none, casted
 	var carg3 *C.PangoAnalysis // in, none, converted
 	var carg4 C.int            // in, none, casted
-	var carg5 array            // in, transfer: none, scope: call, implicit: false, skip: false, optional: false, nullable: false, caller-allocates: false, has closure: false, has destroy: false
+	var carg5 *C.PangoLogAttr  // in, transfer: none, C Pointers: 1, Name: array[LogAttr], array (inner: *typesystem.Record, length-by: carg6)
 	var carg6 C.int            // implicit
 
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(text)))
@@ -3900,7 +4073,10 @@ func TailorBreak(text string, length int, analysis Analysis, offset int, attrs a
 	carg2 = C.int(length)
 	carg3 = (*C.PangoAnalysis)(UnsafeAnalysisToGlibNone(analysis))
 	carg4 = C.int(offset)
-	panic("unimplemented conversion of array (array)")
+	_ = attrs
+	_ = carg5
+	_ = carg6
+	panic("unimplemented conversion of []LogAttr (PangoLogAttr*)")
 
 	C.pango_tailor_break(carg1, carg2, carg3, carg4, carg5, carg6)
 	runtime.KeepAlive(text)
@@ -3918,7 +4094,7 @@ func TailorBreak(text string, length int, analysis Analysis, offset int, attrs a
 // 
 // The function returns the following values:
 // 
-// 	- ret string 
+// 	- goret string 
 //
 // Trims leading and trailing whitespace from a string.
 //
@@ -3933,12 +4109,12 @@ func TrimString(str string) string {
 	cret = C.pango_trim_string(carg1)
 	runtime.KeepAlive(str)
 
-	var ret string
+	var goret string
 
-	ret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
 	defer C.free(unsafe.Pointer(cret))
 
-	return ret
+	return goret
 }
 
 // UnicharDirection wraps pango_unichar_direction
@@ -3949,7 +4125,7 @@ func TrimString(str string) string {
 // 
 // The function returns the following values:
 // 
-// 	- ret Direction 
+// 	- goret Direction 
 //
 // Determines the inherent direction of a character.
 // 
@@ -3969,11 +4145,11 @@ func UnicharDirection(ch uint32) Direction {
 	cret = C.pango_unichar_direction(carg1)
 	runtime.KeepAlive(ch)
 
-	var ret Direction
+	var goret Direction
 
-	ret = Direction(cret)
+	goret = Direction(cret)
 
-	return ret
+	return goret
 }
 
 // UnitsFromDouble wraps pango_units_from_double
@@ -3984,7 +4160,7 @@ func UnicharDirection(ch uint32) Direction {
 // 
 // The function returns the following values:
 // 
-// 	- ret int 
+// 	- goret int 
 //
 // Converts a floating-point number to Pango units.
 // 
@@ -3999,11 +4175,11 @@ func UnitsFromDouble(d float64) int {
 	cret = C.pango_units_from_double(carg1)
 	runtime.KeepAlive(d)
 
-	var ret int
+	var goret int
 
-	ret = int(cret)
+	goret = int(cret)
 
-	return ret
+	return goret
 }
 
 // UnitsToDouble wraps pango_units_to_double
@@ -4014,7 +4190,7 @@ func UnitsFromDouble(d float64) int {
 // 
 // The function returns the following values:
 // 
-// 	- ret float64 
+// 	- goret float64 
 //
 // Converts a number in Pango units to floating-point.
 // 
@@ -4028,17 +4204,17 @@ func UnitsToDouble(i int) float64 {
 	cret = C.pango_units_to_double(carg1)
 	runtime.KeepAlive(i)
 
-	var ret float64
+	var goret float64
 
-	ret = float64(cret)
+	goret = float64(cret)
 
-	return ret
+	return goret
 }
 
 // Version wraps pango_version
 // The function returns the following values:
 // 
-// 	- ret int 
+// 	- goret int 
 //
 // Returns the encoded version of Pango available at run-time.
 // 
@@ -4050,11 +4226,11 @@ func Version() int {
 
 	cret = C.pango_version()
 
-	var ret int
+	var goret int
 
-	ret = int(cret)
+	goret = int(cret)
 
-	return ret
+	return goret
 }
 
 // VersionCheck wraps pango_version_check
@@ -4067,7 +4243,7 @@ func Version() int {
 // 
 // The function returns the following values:
 // 
-// 	- ret string 
+// 	- goret string 
 //
 // Checks that the Pango library in use is compatible with the
 // given version.
@@ -4101,17 +4277,17 @@ func VersionCheck(requiredMajor int, requiredMinor int, requiredMicro int) strin
 	runtime.KeepAlive(requiredMinor)
 	runtime.KeepAlive(requiredMicro)
 
-	var ret string
+	var goret string
 
-	ret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
 
-	return ret
+	return goret
 }
 
 // VersionString wraps pango_version_string
 // The function returns the following values:
 // 
-// 	- ret string 
+// 	- goret string 
 //
 // Returns the version of Pango available at run-time.
 // 
@@ -4122,11 +4298,11 @@ func VersionString() string {
 
 	cret = C.pango_version_string()
 
-	var ret string
+	var goret string
 
-	ret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
 
-	return ret
+	return goret
 }
 
 // ContextInstance is the instance type used by all types extending PangoContext. It is used internally by the bindings. Users should use the interface [Context] instead.
@@ -4164,7 +4340,7 @@ type Context interface {
 	// GetBaseDir wraps pango_context_get_base_dir
 	// The function returns the following values:
 	// 
-	// 	- ret Direction 
+	// 	- goret Direction 
 	//
 	// Retrieves the base direction for the context.
 	// 
@@ -4173,7 +4349,7 @@ type Context interface {
 	// GetBaseGravity wraps pango_context_get_base_gravity
 	// The function returns the following values:
 	// 
-	// 	- ret Gravity 
+	// 	- goret Gravity 
 	//
 	// Retrieves the base gravity for the context.
 	// 
@@ -4182,21 +4358,21 @@ type Context interface {
 	// GetFontDescription wraps pango_context_get_font_description
 	// The function returns the following values:
 	// 
-	// 	- ret FontDescription 
+	// 	- goret *FontDescription 
 	//
 	// Retrieve the default font description for the context.
-	GetFontDescription() FontDescription
+	GetFontDescription() *FontDescription
 	// GetFontMap wraps pango_context_get_font_map
 	// The function returns the following values:
 	// 
-	// 	- ret FontMap 
+	// 	- goret FontMap 
 	//
 	// Gets the `PangoFontMap` used to look up fonts for this context.
 	GetFontMap() FontMap
 	// GetGravity wraps pango_context_get_gravity
 	// The function returns the following values:
 	// 
-	// 	- ret Gravity 
+	// 	- goret Gravity 
 	//
 	// Retrieves the gravity for the context.
 	// 
@@ -4208,7 +4384,7 @@ type Context interface {
 	// GetGravityHint wraps pango_context_get_gravity_hint
 	// The function returns the following values:
 	// 
-	// 	- ret GravityHint 
+	// 	- goret GravityHint 
 	//
 	// Retrieves the gravity hint for the context.
 	// 
@@ -4217,27 +4393,27 @@ type Context interface {
 	// GetLanguage wraps pango_context_get_language
 	// The function returns the following values:
 	// 
-	// 	- ret Language 
+	// 	- goret *Language 
 	//
 	// Retrieves the global language tag for the context.
-	GetLanguage() Language
+	GetLanguage() *Language
 	// GetMatrix wraps pango_context_get_matrix
 	// The function returns the following values:
 	// 
-	// 	- ret Matrix 
+	// 	- goret *Matrix 
 	//
 	// Gets the transformation matrix that will be applied when
 	// rendering with this context.
 	// 
 	// See [method@Pango.Context.set_matrix].
-	GetMatrix() Matrix
+	GetMatrix() *Matrix
 	// GetMetrics wraps pango_context_get_metrics
 	// 
 	// The function takes the following parameters:
 	// 
-	// 	- desc FontDescription (nullable): a `PangoFontDescription` structure. %NULL means that the
+	// 	- desc *FontDescription (nullable): a `PangoFontDescription` structure. %NULL means that the
 	//   font description from the context will be used. 
-	// 	- language Language (nullable): language tag used to determine which script to get
+	// 	- language *Language (nullable): language tag used to determine which script to get
 	//   the metrics for. %NULL means that the language tag from the context
 	//   will be used. If no language tag is set on the context, metrics
 	//   for the default language (as determined by [func@Pango.Language.get_default]
@@ -4245,7 +4421,7 @@ type Context interface {
 	// 
 	// The function returns the following values:
 	// 
-	// 	- ret FontMetrics 
+	// 	- goret *FontMetrics 
 	//
 	// Get overall metric information for a particular font description.
 	// 
@@ -4258,11 +4434,11 @@ type Context interface {
 	// from multiple of these families would be used to render the string, then
 	// the returned fonts would be a composite of the metrics for the fonts loaded
 	// for the individual families.
-	GetMetrics(FontDescription, Language) FontMetrics
+	GetMetrics(*FontDescription, *Language) *FontMetrics
 	// GetRoundGlyphPositions wraps pango_context_get_round_glyph_positions
 	// The function returns the following values:
 	// 
-	// 	- ret bool 
+	// 	- goret bool 
 	//
 	// Returns whether font rendering with this context should
 	// round glyph positions and widths.
@@ -4270,7 +4446,7 @@ type Context interface {
 	// GetSerial wraps pango_context_get_serial
 	// The function returns the following values:
 	// 
-	// 	- ret uint 
+	// 	- goret uint 
 	//
 	// Returns the current serial number of @context.
 	// 
@@ -4285,43 +4461,33 @@ type Context interface {
 	// and is only useful when implementing objects that need update when their
 	// `PangoContext` changes, like `PangoLayout`.
 	GetSerial() uint
-	// ListFamilies wraps pango_context_list_families
-	// The function returns the following values:
-	// 
-	// 	- families array: location
-	//   to store a pointer to an array of `PangoFontFamily`. This array should
-	//   be freed with g_free(). 
-	// 	- nFamilies int: location to store the number of elements in @descs 
-	//
-	// List all families for a context.
-	ListFamilies() (array)
 	// LoadFont wraps pango_context_load_font
 	// 
 	// The function takes the following parameters:
 	// 
-	// 	- desc FontDescription: a `PangoFontDescription` describing the font to load 
+	// 	- desc *FontDescription: a `PangoFontDescription` describing the font to load 
 	// 
 	// The function returns the following values:
 	// 
-	// 	- ret Font 
+	// 	- goret Font 
 	//
 	// Loads the font in one of the fontmaps in the context
 	// that is the closest match for @desc.
-	LoadFont(FontDescription) Font
+	LoadFont(*FontDescription) Font
 	// LoadFontset wraps pango_context_load_fontset
 	// 
 	// The function takes the following parameters:
 	// 
-	// 	- desc FontDescription: a `PangoFontDescription` describing the fonts to load 
-	// 	- language Language: a `PangoLanguage` the fonts will be used for 
+	// 	- desc *FontDescription: a `PangoFontDescription` describing the fonts to load 
+	// 	- language *Language: a `PangoLanguage` the fonts will be used for 
 	// 
 	// The function returns the following values:
 	// 
-	// 	- ret Fontset 
+	// 	- goret Fontset 
 	//
 	// Load a set of fonts in the context that can be used to render
 	// a font matching @desc.
-	LoadFontset(FontDescription, Language) Fontset
+	LoadFontset(*FontDescription, *Language) Fontset
 	// SetBaseDir wraps pango_context_set_base_dir
 	// 
 	// The function takes the following parameters:
@@ -4351,10 +4517,10 @@ type Context interface {
 	// 
 	// The function takes the following parameters:
 	// 
-	// 	- desc FontDescription (nullable): the new pango font description 
+	// 	- desc *FontDescription (nullable): the new pango font description 
 	//
 	// Set the default font description for the context
-	SetFontDescription(FontDescription)
+	SetFontDescription(*FontDescription)
 	// SetFontMap wraps pango_context_set_font_map
 	// 
 	// The function takes the following parameters:
@@ -4385,18 +4551,18 @@ type Context interface {
 	// 
 	// The function takes the following parameters:
 	// 
-	// 	- language Language (nullable): the new language tag. 
+	// 	- language *Language (nullable): the new language tag. 
 	//
 	// Sets the global language tag for the context.
 	// 
 	// The default language for the locale of the running process
 	// can be found using [func@Pango.Language.get_default].
-	SetLanguage(Language)
+	SetLanguage(*Language)
 	// SetMatrix wraps pango_context_set_matrix
 	// 
 	// The function takes the following parameters:
 	// 
-	// 	- matrix Matrix (nullable): a `PangoMatrix`, or %NULL to unset any existing
+	// 	- matrix *Matrix (nullable): a `PangoMatrix`, or %NULL to unset any existing
 	// matrix. (No matrix set is the same as setting the identity matrix.) 
 	//
 	// Sets the transformation matrix that will be applied when rendering
@@ -4407,7 +4573,7 @@ type Context interface {
 	// application of the matrix. So, they don't scale with the matrix, though
 	// they may change slightly for different matrices, depending on how the
 	// text is fit to the pixel grid.
-	SetMatrix(Matrix)
+	SetMatrix(*Matrix)
 	// SetRoundGlyphPositions wraps pango_context_set_round_glyph_positions
 	// 
 	// The function takes the following parameters:
@@ -4432,23 +4598,18 @@ func unsafeWrapContext(base *gobject.ObjectInstance) *ContextInstance {
 	}
 }
 
-func marshalContextInstance(p uintptr) (interface{}, error) {
-	return unsafeWrapContext(gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Object()), nil
-}
-
-// UnsafeContextFromGlibBorrow is used to convert raw PangoContext pointers to go. This is used by the bindings internally.
-func UnsafeContextFromGlibBorrow(c unsafe.Pointer) Context {
-	return gobject.TODOBorrow(c).(Context)
+func marshalContextInstance(p unsafe.Pointer) (any, error) {
+	return unsafeWrapContext(gobject.ValueFromNative(p).Object()), nil
 }
 
 // UnsafeContextFromGlibNone is used to convert raw PangoContext pointers to go while taking a reference and attaching a finalizer. This is used by the bindings internally.
 func UnsafeContextFromGlibNone(c unsafe.Pointer) Context {
-	return gobject.Take(c).(Context)
+	return gobject.UnsafeObjectFromGlibNone(c).(Context)
 }
 
 // UnsafeContextFromGlibFull is used to convert raw PangoContext pointers to go while attaching a finalizer. This is used by the bindings internally.
 func UnsafeContextFromGlibFull(c unsafe.Pointer) Context {
-	return gobject.AssumeOwnership(c).(Context)
+	return gobject.UnsafeObjectFromGlibFull(c).(Context)
 }
 
 func (c *ContextInstance) upcastToPangoContext() *ContextInstance {
@@ -4457,18 +4618,18 @@ func (c *ContextInstance) upcastToPangoContext() *ContextInstance {
 
 // UnsafeContextToGlibNone is used to convert the instance to it's C value PangoContext. This is used by the bindings internally.
 func UnsafeContextToGlibNone(c Context) unsafe.Pointer {
-	return gobject.TODOToNone(c)
+	return gobject.UnsafeObjectToGlibNone(c)
 }
 
 // UnsafeContextToGlibFull is used to convert the instance to it's C value PangoContext, while removeing the finalizer. This is used by the bindings internally.
 func UnsafeContextToGlibFull(c Context) unsafe.Pointer {
-	return gobject.TODOToFull(c)
+	return gobject.UnsafeObjectToGlibFull(c)
 }
 
 // NewContextInstance wraps pango_context_new
 // The function returns the following values:
 // 
-// 	- ret Context 
+// 	- goret Context 
 //
 // Creates a new `PangoContext` initialized to default values.
 // 
@@ -4486,11 +4647,11 @@ func NewContextInstance() Context {
 
 	cret = C.pango_context_new()
 
-	var ret Context
+	var goret Context
 
-	ret = UnsafeContextFromGlibFull(unsafe.Pointer(cret))
+	goret = UnsafeContextFromGlibFull(unsafe.Pointer(cret))
 
-	return ret
+	return goret
 }
 
 // Changed wraps pango_context_changed
@@ -4514,7 +4675,7 @@ func (context *ContextInstance) Changed() {
 // GetBaseDir wraps pango_context_get_base_dir
 // The function returns the following values:
 // 
-// 	- ret Direction 
+// 	- goret Direction 
 //
 // Retrieves the base direction for the context.
 // 
@@ -4528,17 +4689,17 @@ func (context *ContextInstance) GetBaseDir() Direction {
 	cret = C.pango_context_get_base_dir(carg0)
 	runtime.KeepAlive(context)
 
-	var ret Direction
+	var goret Direction
 
-	ret = Direction(cret)
+	goret = Direction(cret)
 
-	return ret
+	return goret
 }
 
 // GetBaseGravity wraps pango_context_get_base_gravity
 // The function returns the following values:
 // 
-// 	- ret Gravity 
+// 	- goret Gravity 
 //
 // Retrieves the base gravity for the context.
 // 
@@ -4552,20 +4713,20 @@ func (context *ContextInstance) GetBaseGravity() Gravity {
 	cret = C.pango_context_get_base_gravity(carg0)
 	runtime.KeepAlive(context)
 
-	var ret Gravity
+	var goret Gravity
 
-	ret = Gravity(cret)
+	goret = Gravity(cret)
 
-	return ret
+	return goret
 }
 
 // GetFontDescription wraps pango_context_get_font_description
 // The function returns the following values:
 // 
-// 	- ret FontDescription 
+// 	- goret *FontDescription 
 //
 // Retrieve the default font description for the context.
-func (context *ContextInstance) GetFontDescription() FontDescription {
+func (context *ContextInstance) GetFontDescription() *FontDescription {
 	var carg0 *C.PangoContext         // in, none, converted
 	var cret  *C.PangoFontDescription // return, none, converted
 
@@ -4574,17 +4735,17 @@ func (context *ContextInstance) GetFontDescription() FontDescription {
 	cret = C.pango_context_get_font_description(carg0)
 	runtime.KeepAlive(context)
 
-	var ret FontDescription
+	var goret *FontDescription
 
-	ret = UnsafeFontDescriptionFromGlibNone(unsafe.Pointer(cret))
+	goret = UnsafeFontDescriptionFromGlibNone(unsafe.Pointer(cret))
 
-	return ret
+	return goret
 }
 
 // GetFontMap wraps pango_context_get_font_map
 // The function returns the following values:
 // 
-// 	- ret FontMap 
+// 	- goret FontMap 
 //
 // Gets the `PangoFontMap` used to look up fonts for this context.
 func (context *ContextInstance) GetFontMap() FontMap {
@@ -4596,17 +4757,17 @@ func (context *ContextInstance) GetFontMap() FontMap {
 	cret = C.pango_context_get_font_map(carg0)
 	runtime.KeepAlive(context)
 
-	var ret FontMap
+	var goret FontMap
 
-	ret = UnsafeFontMapFromGlibNone(unsafe.Pointer(cret))
+	goret = UnsafeFontMapFromGlibNone(unsafe.Pointer(cret))
 
-	return ret
+	return goret
 }
 
 // GetGravity wraps pango_context_get_gravity
 // The function returns the following values:
 // 
-// 	- ret Gravity 
+// 	- goret Gravity 
 //
 // Retrieves the gravity for the context.
 // 
@@ -4623,17 +4784,17 @@ func (context *ContextInstance) GetGravity() Gravity {
 	cret = C.pango_context_get_gravity(carg0)
 	runtime.KeepAlive(context)
 
-	var ret Gravity
+	var goret Gravity
 
-	ret = Gravity(cret)
+	goret = Gravity(cret)
 
-	return ret
+	return goret
 }
 
 // GetGravityHint wraps pango_context_get_gravity_hint
 // The function returns the following values:
 // 
-// 	- ret GravityHint 
+// 	- goret GravityHint 
 //
 // Retrieves the gravity hint for the context.
 // 
@@ -4647,20 +4808,20 @@ func (context *ContextInstance) GetGravityHint() GravityHint {
 	cret = C.pango_context_get_gravity_hint(carg0)
 	runtime.KeepAlive(context)
 
-	var ret GravityHint
+	var goret GravityHint
 
-	ret = GravityHint(cret)
+	goret = GravityHint(cret)
 
-	return ret
+	return goret
 }
 
 // GetLanguage wraps pango_context_get_language
 // The function returns the following values:
 // 
-// 	- ret Language 
+// 	- goret *Language 
 //
 // Retrieves the global language tag for the context.
-func (context *ContextInstance) GetLanguage() Language {
+func (context *ContextInstance) GetLanguage() *Language {
 	var carg0 *C.PangoContext  // in, none, converted
 	var cret  *C.PangoLanguage // return, none, converted
 
@@ -4669,23 +4830,23 @@ func (context *ContextInstance) GetLanguage() Language {
 	cret = C.pango_context_get_language(carg0)
 	runtime.KeepAlive(context)
 
-	var ret Language
+	var goret *Language
 
-	ret = UnsafeLanguageFromGlibNone(unsafe.Pointer(cret))
+	goret = UnsafeLanguageFromGlibNone(unsafe.Pointer(cret))
 
-	return ret
+	return goret
 }
 
 // GetMatrix wraps pango_context_get_matrix
 // The function returns the following values:
 // 
-// 	- ret Matrix 
+// 	- goret *Matrix 
 //
 // Gets the transformation matrix that will be applied when
 // rendering with this context.
 // 
 // See [method@Pango.Context.set_matrix].
-func (context *ContextInstance) GetMatrix() Matrix {
+func (context *ContextInstance) GetMatrix() *Matrix {
 	var carg0 *C.PangoContext // in, none, converted
 	var cret  *C.PangoMatrix  // return, none, converted
 
@@ -4694,20 +4855,20 @@ func (context *ContextInstance) GetMatrix() Matrix {
 	cret = C.pango_context_get_matrix(carg0)
 	runtime.KeepAlive(context)
 
-	var ret Matrix
+	var goret *Matrix
 
-	ret = UnsafeMatrixFromGlibNone(unsafe.Pointer(cret))
+	goret = UnsafeMatrixFromGlibNone(unsafe.Pointer(cret))
 
-	return ret
+	return goret
 }
 
 // GetMetrics wraps pango_context_get_metrics
 // 
 // The function takes the following parameters:
 // 
-// 	- desc FontDescription (nullable): a `PangoFontDescription` structure. %NULL means that the
+// 	- desc *FontDescription (nullable): a `PangoFontDescription` structure. %NULL means that the
 //   font description from the context will be used. 
-// 	- language Language (nullable): language tag used to determine which script to get
+// 	- language *Language (nullable): language tag used to determine which script to get
 //   the metrics for. %NULL means that the language tag from the context
 //   will be used. If no language tag is set on the context, metrics
 //   for the default language (as determined by [func@Pango.Language.get_default]
@@ -4715,7 +4876,7 @@ func (context *ContextInstance) GetMatrix() Matrix {
 // 
 // The function returns the following values:
 // 
-// 	- ret FontMetrics 
+// 	- goret *FontMetrics 
 //
 // Get overall metric information for a particular font description.
 // 
@@ -4728,7 +4889,7 @@ func (context *ContextInstance) GetMatrix() Matrix {
 // from multiple of these families would be used to render the string, then
 // the returned fonts would be a composite of the metrics for the fonts loaded
 // for the individual families.
-func (context *ContextInstance) GetMetrics(desc FontDescription, language Language) FontMetrics {
+func (context *ContextInstance) GetMetrics(desc *FontDescription, language *Language) *FontMetrics {
 	var carg0 *C.PangoContext         // in, none, converted
 	var carg1 *C.PangoFontDescription // in, none, converted, nullable
 	var carg2 *C.PangoLanguage        // in, none, converted, nullable
@@ -4747,17 +4908,17 @@ func (context *ContextInstance) GetMetrics(desc FontDescription, language Langua
 	runtime.KeepAlive(desc)
 	runtime.KeepAlive(language)
 
-	var ret FontMetrics
+	var goret *FontMetrics
 
-	ret = UnsafeFontMetricsFromGlibFull(unsafe.Pointer(cret))
+	goret = UnsafeFontMetricsFromGlibFull(unsafe.Pointer(cret))
 
-	return ret
+	return goret
 }
 
 // GetRoundGlyphPositions wraps pango_context_get_round_glyph_positions
 // The function returns the following values:
 // 
-// 	- ret bool 
+// 	- goret bool 
 //
 // Returns whether font rendering with this context should
 // round glyph positions and widths.
@@ -4770,19 +4931,19 @@ func (context *ContextInstance) GetRoundGlyphPositions() bool {
 	cret = C.pango_context_get_round_glyph_positions(carg0)
 	runtime.KeepAlive(context)
 
-	var ret bool
+	var goret bool
 
 	if cret != 0 {
-		ret = true
+		goret = true
 	}
 
-	return ret
+	return goret
 }
 
 // GetSerial wraps pango_context_get_serial
 // The function returns the following values:
 // 
-// 	- ret uint 
+// 	- goret uint 
 //
 // Returns the current serial number of @context.
 // 
@@ -4805,54 +4966,26 @@ func (context *ContextInstance) GetSerial() uint {
 	cret = C.pango_context_get_serial(carg0)
 	runtime.KeepAlive(context)
 
-	var ret uint
+	var goret uint
 
-	ret = uint(cret)
+	goret = uint(cret)
 
-	return ret
-}
-
-// ListFamilies wraps pango_context_list_families
-// The function returns the following values:
-// 
-// 	- families array: location
-//   to store a pointer to an array of `PangoFontFamily`. This array should
-//   be freed with g_free(). 
-// 	- nFamilies int: location to store the number of elements in @descs 
-//
-// List all families for a context.
-func (context *ContextInstance) ListFamilies() (array) {
-	var carg0 *C.PangoContext // in, none, converted
-	var carg1 array           // out, transfer: container, scope: call, implicit: false, skip: false, optional: false, nullable: false, caller-allocates: false, has closure: false, has destroy: false
-	var carg2 C.int           // out, full, casted
-
-	carg0 = (*C.PangoContext)(UnsafeContextToGlibNone(context))
-
-	C.pango_context_list_families(carg0, &carg1, &carg2)
-	runtime.KeepAlive(context)
-
-	var families  array
-	var nFamilies int
-
-	panic("unimplemented conversion of array (array)")
-	nFamilies = int(carg2)
-
-	return families
+	return goret
 }
 
 // LoadFont wraps pango_context_load_font
 // 
 // The function takes the following parameters:
 // 
-// 	- desc FontDescription: a `PangoFontDescription` describing the font to load 
+// 	- desc *FontDescription: a `PangoFontDescription` describing the font to load 
 // 
 // The function returns the following values:
 // 
-// 	- ret Font 
+// 	- goret Font 
 //
 // Loads the font in one of the fontmaps in the context
 // that is the closest match for @desc.
-func (context *ContextInstance) LoadFont(desc FontDescription) Font {
+func (context *ContextInstance) LoadFont(desc *FontDescription) Font {
 	var carg0 *C.PangoContext         // in, none, converted
 	var carg1 *C.PangoFontDescription // in, none, converted
 	var cret  *C.PangoFont            // return, full, converted
@@ -4864,27 +4997,27 @@ func (context *ContextInstance) LoadFont(desc FontDescription) Font {
 	runtime.KeepAlive(context)
 	runtime.KeepAlive(desc)
 
-	var ret Font
+	var goret Font
 
-	ret = UnsafeFontFromGlibFull(unsafe.Pointer(cret))
+	goret = UnsafeFontFromGlibFull(unsafe.Pointer(cret))
 
-	return ret
+	return goret
 }
 
 // LoadFontset wraps pango_context_load_fontset
 // 
 // The function takes the following parameters:
 // 
-// 	- desc FontDescription: a `PangoFontDescription` describing the fonts to load 
-// 	- language Language: a `PangoLanguage` the fonts will be used for 
+// 	- desc *FontDescription: a `PangoFontDescription` describing the fonts to load 
+// 	- language *Language: a `PangoLanguage` the fonts will be used for 
 // 
 // The function returns the following values:
 // 
-// 	- ret Fontset 
+// 	- goret Fontset 
 //
 // Load a set of fonts in the context that can be used to render
 // a font matching @desc.
-func (context *ContextInstance) LoadFontset(desc FontDescription, language Language) Fontset {
+func (context *ContextInstance) LoadFontset(desc *FontDescription, language *Language) Fontset {
 	var carg0 *C.PangoContext         // in, none, converted
 	var carg1 *C.PangoFontDescription // in, none, converted
 	var carg2 *C.PangoLanguage        // in, none, converted
@@ -4899,11 +5032,11 @@ func (context *ContextInstance) LoadFontset(desc FontDescription, language Langu
 	runtime.KeepAlive(desc)
 	runtime.KeepAlive(language)
 
-	var ret Fontset
+	var goret Fontset
 
-	ret = UnsafeFontsetFromGlibFull(unsafe.Pointer(cret))
+	goret = UnsafeFontsetFromGlibFull(unsafe.Pointer(cret))
 
-	return ret
+	return goret
 }
 
 // SetBaseDir wraps pango_context_set_base_dir
@@ -4957,10 +5090,10 @@ func (context *ContextInstance) SetBaseGravity(gravity Gravity) {
 // 
 // The function takes the following parameters:
 // 
-// 	- desc FontDescription (nullable): the new pango font description 
+// 	- desc *FontDescription (nullable): the new pango font description 
 //
 // Set the default font description for the context
-func (context *ContextInstance) SetFontDescription(desc FontDescription) {
+func (context *ContextInstance) SetFontDescription(desc *FontDescription) {
 	var carg0 *C.PangoContext         // in, none, converted
 	var carg1 *C.PangoFontDescription // in, none, converted, nullable
 
@@ -5028,13 +5161,13 @@ func (context *ContextInstance) SetGravityHint(hint GravityHint) {
 // 
 // The function takes the following parameters:
 // 
-// 	- language Language (nullable): the new language tag. 
+// 	- language *Language (nullable): the new language tag. 
 //
 // Sets the global language tag for the context.
 // 
 // The default language for the locale of the running process
 // can be found using [func@Pango.Language.get_default].
-func (context *ContextInstance) SetLanguage(language Language) {
+func (context *ContextInstance) SetLanguage(language *Language) {
 	var carg0 *C.PangoContext  // in, none, converted
 	var carg1 *C.PangoLanguage // in, none, converted, nullable
 
@@ -5052,7 +5185,7 @@ func (context *ContextInstance) SetLanguage(language Language) {
 // 
 // The function takes the following parameters:
 // 
-// 	- matrix Matrix (nullable): a `PangoMatrix`, or %NULL to unset any existing
+// 	- matrix *Matrix (nullable): a `PangoMatrix`, or %NULL to unset any existing
 // matrix. (No matrix set is the same as setting the identity matrix.) 
 //
 // Sets the transformation matrix that will be applied when rendering
@@ -5063,7 +5196,7 @@ func (context *ContextInstance) SetLanguage(language Language) {
 // application of the matrix. So, they don't scale with the matrix, though
 // they may change slightly for different matrices, depending on how the
 // text is fit to the pixel grid.
-func (context *ContextInstance) SetMatrix(matrix Matrix) {
+func (context *ContextInstance) SetMatrix(matrix *Matrix) {
 	var carg0 *C.PangoContext // in, none, converted
 	var carg1 *C.PangoMatrix  // in, none, converted, nullable
 
@@ -5131,7 +5264,7 @@ type Coverage interface {
 	// Copy wraps pango_coverage_copy
 	// The function returns the following values:
 	// 
-	// 	- ret Coverage 
+	// 	- goret Coverage 
 	//
 	// Copy an existing `PangoCoverage`.
 	Copy() Coverage
@@ -5143,7 +5276,7 @@ type Coverage interface {
 	// 
 	// The function returns the following values:
 	// 
-	// 	- ret CoverageLevel 
+	// 	- goret CoverageLevel 
 	//
 	// Determine whether a particular index is covered by @coverage.
 	Get(int) CoverageLevel
@@ -5171,14 +5304,14 @@ type Coverage interface {
 	// ToBytes wraps pango_coverage_to_bytes
 	// The function returns the following values:
 	// 
-	// 	- bytes array: 
+	// 	- bytes []uint8: 
 	//   location to store result (must be freed with g_free()) 
 	// 	- nBytes int: location to store size of result 
 	//
 	// Convert a `PangoCoverage` structure into a flat binary format.
 	//
 	// Deprecated: (since 1.44.0) This returns %NULL
-	ToBytes() (array)
+	ToBytes() ([]uint8)
 }
 
 func unsafeWrapCoverage(base *gobject.ObjectInstance) *CoverageInstance {
@@ -5187,23 +5320,18 @@ func unsafeWrapCoverage(base *gobject.ObjectInstance) *CoverageInstance {
 	}
 }
 
-func marshalCoverageInstance(p uintptr) (interface{}, error) {
-	return unsafeWrapCoverage(gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Object()), nil
-}
-
-// UnsafeCoverageFromGlibBorrow is used to convert raw PangoCoverage pointers to go. This is used by the bindings internally.
-func UnsafeCoverageFromGlibBorrow(c unsafe.Pointer) Coverage {
-	return gobject.TODOBorrow(c).(Coverage)
+func marshalCoverageInstance(p unsafe.Pointer) (any, error) {
+	return unsafeWrapCoverage(gobject.ValueFromNative(p).Object()), nil
 }
 
 // UnsafeCoverageFromGlibNone is used to convert raw PangoCoverage pointers to go while taking a reference and attaching a finalizer. This is used by the bindings internally.
 func UnsafeCoverageFromGlibNone(c unsafe.Pointer) Coverage {
-	return gobject.Take(c).(Coverage)
+	return gobject.UnsafeObjectFromGlibNone(c).(Coverage)
 }
 
 // UnsafeCoverageFromGlibFull is used to convert raw PangoCoverage pointers to go while attaching a finalizer. This is used by the bindings internally.
 func UnsafeCoverageFromGlibFull(c unsafe.Pointer) Coverage {
-	return gobject.AssumeOwnership(c).(Coverage)
+	return gobject.UnsafeObjectFromGlibFull(c).(Coverage)
 }
 
 func (c *CoverageInstance) upcastToPangoCoverage() *CoverageInstance {
@@ -5212,18 +5340,18 @@ func (c *CoverageInstance) upcastToPangoCoverage() *CoverageInstance {
 
 // UnsafeCoverageToGlibNone is used to convert the instance to it's C value PangoCoverage. This is used by the bindings internally.
 func UnsafeCoverageToGlibNone(c Coverage) unsafe.Pointer {
-	return gobject.TODOToNone(c)
+	return gobject.UnsafeObjectToGlibNone(c)
 }
 
 // UnsafeCoverageToGlibFull is used to convert the instance to it's C value PangoCoverage, while removeing the finalizer. This is used by the bindings internally.
 func UnsafeCoverageToGlibFull(c Coverage) unsafe.Pointer {
-	return gobject.TODOToFull(c)
+	return gobject.UnsafeObjectToGlibFull(c)
 }
 
 // NewCoverageInstance wraps pango_coverage_new
 // The function returns the following values:
 // 
-// 	- ret Coverage 
+// 	- goret Coverage 
 //
 // Create a new `PangoCoverage`
 func NewCoverageInstance() Coverage {
@@ -5231,49 +5359,52 @@ func NewCoverageInstance() Coverage {
 
 	cret = C.pango_coverage_new()
 
-	var ret Coverage
+	var goret Coverage
 
-	ret = UnsafeCoverageFromGlibFull(unsafe.Pointer(cret))
+	goret = UnsafeCoverageFromGlibFull(unsafe.Pointer(cret))
 
-	return ret
+	return goret
 }
 
-// FromBytes wraps pango_coverage_from_bytes
+// CoverageInstanceFromBytes wraps pango_coverage_from_bytes
 // 
 // The function takes the following parameters:
 // 
-// 	- bytes array: binary data
+// 	- bytes []uint8: binary data
 //   representing a `PangoCoverage` 
 // 
 // The function returns the following values:
 // 
-// 	- ret Coverage 
+// 	- goret Coverage 
 //
 // Convert data generated from [method@Pango.Coverage.to_bytes]
 // back to a `PangoCoverage`.
 //
 // Deprecated: (since 1.44.0) This returns %NULL
-func FromBytes(bytes array) Coverage {
-	var carg1 array            // in, transfer: none, scope: call, implicit: false, skip: false, optional: false, nullable: false, caller-allocates: false, has closure: false, has destroy: false
+func CoverageInstanceFromBytes(bytes []uint8) Coverage {
+	var carg1 *C.guchar        // in, transfer: none, C Pointers: 1, Name: array[guint8], array (inner: *typesystem.CastablePrimitive, length-by: carg2)
 	var carg2 C.int            // implicit
 	var cret  *C.PangoCoverage // return, full, converted
 
-	panic("unimplemented conversion of array (array)")
+	_ = bytes
+	_ = carg1
+	_ = carg2
+	panic("unimplemented conversion of []uint8 (guchar*)")
 
 	cret = C.pango_coverage_from_bytes(carg1, carg2)
 	runtime.KeepAlive(bytes)
 
-	var ret Coverage
+	var goret Coverage
 
-	ret = UnsafeCoverageFromGlibFull(unsafe.Pointer(cret))
+	goret = UnsafeCoverageFromGlibFull(unsafe.Pointer(cret))
 
-	return ret
+	return goret
 }
 
 // Copy wraps pango_coverage_copy
 // The function returns the following values:
 // 
-// 	- ret Coverage 
+// 	- goret Coverage 
 //
 // Copy an existing `PangoCoverage`.
 func (coverage *CoverageInstance) Copy() Coverage {
@@ -5285,11 +5416,11 @@ func (coverage *CoverageInstance) Copy() Coverage {
 	cret = C.pango_coverage_copy(carg0)
 	runtime.KeepAlive(coverage)
 
-	var ret Coverage
+	var goret Coverage
 
-	ret = UnsafeCoverageFromGlibFull(unsafe.Pointer(cret))
+	goret = UnsafeCoverageFromGlibFull(unsafe.Pointer(cret))
 
-	return ret
+	return goret
 }
 
 // Get wraps pango_coverage_get
@@ -5300,7 +5431,7 @@ func (coverage *CoverageInstance) Copy() Coverage {
 // 
 // The function returns the following values:
 // 
-// 	- ret CoverageLevel 
+// 	- goret CoverageLevel 
 //
 // Determine whether a particular index is covered by @coverage.
 func (coverage *CoverageInstance) Get(index_ int) CoverageLevel {
@@ -5315,11 +5446,11 @@ func (coverage *CoverageInstance) Get(index_ int) CoverageLevel {
 	runtime.KeepAlive(coverage)
 	runtime.KeepAlive(index_)
 
-	var ret CoverageLevel
+	var goret CoverageLevel
 
-	ret = CoverageLevel(cret)
+	goret = CoverageLevel(cret)
 
-	return ret
+	return goret
 }
 
 // Max wraps pango_coverage_max
@@ -5371,28 +5502,29 @@ func (coverage *CoverageInstance) Set(index_ int, level CoverageLevel) {
 // ToBytes wraps pango_coverage_to_bytes
 // The function returns the following values:
 // 
-// 	- bytes array: 
+// 	- bytes []uint8: 
 //   location to store result (must be freed with g_free()) 
 // 	- nBytes int: location to store size of result 
 //
 // Convert a `PangoCoverage` structure into a flat binary format.
 //
 // Deprecated: (since 1.44.0) This returns %NULL
-func (coverage *CoverageInstance) ToBytes() (array) {
+func (coverage *CoverageInstance) ToBytes() ([]uint8) {
 	var carg0 *C.PangoCoverage // in, none, converted
-	var carg1 array            // out, transfer: full, scope: call, implicit: false, skip: false, optional: false, nullable: false, caller-allocates: false, has closure: false, has destroy: false
-	var carg2 C.int            // out, full, casted
+	var carg1 *C.guchar        // out, transfer: full, C Pointers: 1, Name: array[guint8], array (inner: *typesystem.CastablePrimitive, length-by: carg2)
+	var carg2 C.int            // implicit
 
 	carg0 = (*C.PangoCoverage)(UnsafeCoverageToGlibNone(coverage))
 
 	C.pango_coverage_to_bytes(carg0, &carg1, &carg2)
 	runtime.KeepAlive(coverage)
 
-	var bytes  array
-	var nBytes int
+	var bytes []uint8
 
-	panic("unimplemented conversion of array (array)")
-	nBytes = int(carg2)
+	_ = bytes
+	_ = carg1
+	_ = carg2
+	panic("unimplemented conversion of []uint8 (guchar*)")
 
 	return bytes
 }
@@ -5416,46 +5548,46 @@ type Font interface {
 	// Describe wraps pango_font_describe
 	// The function returns the following values:
 	// 
-	// 	- ret FontDescription 
+	// 	- goret *FontDescription 
 	//
 	// Returns a description of the font, with font size set in points.
 	// 
 	// Use [method@Pango.Font.describe_with_absolute_size] if you want
 	// the font size in device units.
-	Describe() FontDescription
+	Describe() *FontDescription
 	// DescribeWithAbsoluteSize wraps pango_font_describe_with_absolute_size
 	// The function returns the following values:
 	// 
-	// 	- ret FontDescription 
+	// 	- goret *FontDescription 
 	//
 	// Returns a description of the font, with absolute font size set
 	// in device units.
 	// 
 	// Use [method@Pango.Font.describe] if you want the font size in points.
-	DescribeWithAbsoluteSize() FontDescription
+	DescribeWithAbsoluteSize() *FontDescription
 	// GetCoverage wraps pango_font_get_coverage
 	// 
 	// The function takes the following parameters:
 	// 
-	// 	- language Language: the language tag 
+	// 	- language *Language: the language tag 
 	// 
 	// The function returns the following values:
 	// 
-	// 	- ret Coverage 
+	// 	- goret Coverage 
 	//
 	// Computes the coverage map for a given font and language tag.
-	GetCoverage(Language) Coverage
+	GetCoverage(*Language) Coverage
 	// GetFace wraps pango_font_get_face
 	// The function returns the following values:
 	// 
-	// 	- ret FontFace 
+	// 	- goret FontFace 
 	//
 	// Gets the `PangoFontFace` to which @font belongs.
 	GetFace() FontFace
 	// GetFontMap wraps pango_font_get_font_map
 	// The function returns the following values:
 	// 
-	// 	- ret FontMap 
+	// 	- goret FontMap 
 	//
 	// Gets the font map for which the font was created.
 	// 
@@ -5469,31 +5601,40 @@ type Font interface {
 	// font map is kept alive. In most uses this is not an issue
 	// as a `PangoContext` holds a reference to the font map.
 	GetFontMap() FontMap
-	// GetLanguages wraps pango_font_get_languages
+	// GetGlyphExtents wraps pango_font_get_glyph_extents
+	// 
+	// The function takes the following parameters:
+	// 
+	// 	- glyph Glyph: the glyph index 
+	// 
 	// The function returns the following values:
 	// 
-	// 	- ret array 
+	// 	- inkRect Rectangle: rectangle used to store the extents of the glyph as drawn 
+	// 	- logicalRect Rectangle: rectangle used to store the logical extents of the glyph 
 	//
-	// Returns the languages that are supported by @font.
+	// Gets the logical and ink extents of a glyph within a font.
 	// 
-	// If the font backend does not provide this information,
-	// %NULL is returned. For the fontconfig backend, this
-	// corresponds to the FC_LANG member of the FcPattern.
+	// The coordinate system for each rectangle has its origin at the
+	// base line and horizontal origin of the character with increasing
+	// coordinates extending to the right and down. The macros PANGO_ASCENT(),
+	// PANGO_DESCENT(), PANGO_LBEARING(), and PANGO_RBEARING() can be used to convert
+	// from the extents rectangle to more traditional font metrics. The units
+	// of the rectangles are in 1/PANGO_SCALE of a device unit.
 	// 
-	// The returned array is only valid as long as the font
-	// and its fontmap are valid.
-	GetLanguages() array
+	// If @font is %NULL, this function gracefully sets some sane values in the
+	// output variables and returns.
+	GetGlyphExtents(Glyph) (Rectangle, Rectangle)
 	// GetMetrics wraps pango_font_get_metrics
 	// 
 	// The function takes the following parameters:
 	// 
-	// 	- language Language (nullable): language tag used to determine which script
+	// 	- language *Language (nullable): language tag used to determine which script
 	//   to get the metrics for, or %NULL to indicate to get the metrics for
 	//   the entire font. 
 	// 
 	// The function returns the following values:
 	// 
-	// 	- ret FontMetrics 
+	// 	- goret *FontMetrics 
 	//
 	// Gets overall metric information for a font.
 	// 
@@ -5503,7 +5644,7 @@ type Font interface {
 	// 
 	// If @font is %NULL, this function gracefully sets some sane values in the
 	// output variables and returns.
-	GetMetrics(Language) FontMetrics
+	GetMetrics(*Language) *FontMetrics
 	// HasChar wraps pango_font_has_char
 	// 
 	// The function takes the following parameters:
@@ -5512,10 +5653,25 @@ type Font interface {
 	// 
 	// The function returns the following values:
 	// 
-	// 	- ret bool 
+	// 	- goret bool 
 	//
 	// Returns whether the font provides a glyph for this character.
 	HasChar(uint32) bool
+	// Serialize wraps pango_font_serialize
+	// The function returns the following values:
+	// 
+	// 	- goret *glib.Bytes 
+	//
+	// Serializes the @font in a way that can be uniquely identified.
+	// 
+	// There are no guarantees about the format of the output across different
+	// versions of Pango.
+	// 
+	// The intended use of this function is testing, benchmarking and debugging.
+	// The format is not meant as a permanent storage format.
+	// 
+	// To recreate a font from its serialized form, use [func@Pango.Font.deserialize].
+	Serialize() *glib.Bytes
 }
 
 func unsafeWrapFont(base *gobject.ObjectInstance) *FontInstance {
@@ -5524,23 +5680,18 @@ func unsafeWrapFont(base *gobject.ObjectInstance) *FontInstance {
 	}
 }
 
-func marshalFontInstance(p uintptr) (interface{}, error) {
-	return unsafeWrapFont(gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Object()), nil
-}
-
-// UnsafeFontFromGlibBorrow is used to convert raw PangoFont pointers to go. This is used by the bindings internally.
-func UnsafeFontFromGlibBorrow(c unsafe.Pointer) Font {
-	return gobject.TODOBorrow(c).(Font)
+func marshalFontInstance(p unsafe.Pointer) (any, error) {
+	return unsafeWrapFont(gobject.ValueFromNative(p).Object()), nil
 }
 
 // UnsafeFontFromGlibNone is used to convert raw PangoFont pointers to go while taking a reference and attaching a finalizer. This is used by the bindings internally.
 func UnsafeFontFromGlibNone(c unsafe.Pointer) Font {
-	return gobject.Take(c).(Font)
+	return gobject.UnsafeObjectFromGlibNone(c).(Font)
 }
 
 // UnsafeFontFromGlibFull is used to convert raw PangoFont pointers to go while attaching a finalizer. This is used by the bindings internally.
 func UnsafeFontFromGlibFull(c unsafe.Pointer) Font {
-	return gobject.AssumeOwnership(c).(Font)
+	return gobject.UnsafeObjectFromGlibFull(c).(Font)
 }
 
 func (f *FontInstance) upcastToPangoFont() *FontInstance {
@@ -5549,44 +5700,88 @@ func (f *FontInstance) upcastToPangoFont() *FontInstance {
 
 // UnsafeFontToGlibNone is used to convert the instance to it's C value PangoFont. This is used by the bindings internally.
 func UnsafeFontToGlibNone(c Font) unsafe.Pointer {
-	return gobject.TODOToNone(c)
+	return gobject.UnsafeObjectToGlibNone(c)
 }
 
 // UnsafeFontToGlibFull is used to convert the instance to it's C value PangoFont, while removeing the finalizer. This is used by the bindings internally.
 func UnsafeFontToGlibFull(c Font) unsafe.Pointer {
-	return gobject.TODOToFull(c)
+	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// DescriptionsFree wraps pango_font_descriptions_free
+// FontInstanceDescriptionsFree wraps pango_font_descriptions_free
 // 
 // The function takes the following parameters:
 // 
-// 	- descs array (nullable): a pointer
+// 	- descs []*FontDescription (nullable): a pointer
 //   to an array of `PangoFontDescription`, may be %NULL 
 //
 // Frees an array of font descriptions.
-func DescriptionsFree(descs array) {
-	var carg1 array // in, transfer: full, scope: call, implicit: false, skip: false, optional: false, nullable: true, caller-allocates: false, has closure: false, has destroy: false, nullable
-	var carg2 C.int // implicit
+func FontInstanceDescriptionsFree(descs []*FontDescription) {
+	var carg1 **C.PangoFontDescription // in, transfer: full, C Pointers: 2, Name: array[FontDescription], nullable, array (inner: *typesystem.Record, length-by: carg2)
+	var carg2 C.int                    // implicit
 
-	if descs != nil {
-		panic("unimplemented conversion of array (array)")
-	}
+	_ = descs
+	_ = carg1
+	_ = carg2
+	panic("unimplemented conversion of []*FontDescription (PangoFontDescription**)")
 
 	C.pango_font_descriptions_free(carg1, carg2)
 	runtime.KeepAlive(descs)
 }
 
+// FontInstanceDeserialize wraps pango_font_deserialize
+// 
+// The function takes the following parameters:
+// 
+// 	- context Context: a `PangoContext` 
+// 	- bytes *glib.Bytes: the bytes containing the data 
+// 
+// The function returns the following values:
+// 
+// 	- goret Font 
+// 	- _goerr error (nullable): an error 
+//
+// Loads data previously created via [method@Pango.Font.serialize].
+// 
+// For a discussion of the supported format, see that function.
+// 
+// Note: to verify that the returned font is identical to
+// the one that was serialized, you can compare @bytes to the
+// result of serializing the font again.
+func FontInstanceDeserialize(context Context, bytes *glib.Bytes) (Font, error) {
+	var carg1 *C.PangoContext // in, none, converted
+	var carg2 *C.GBytes       // in, none, converted
+	var cret  *C.PangoFont    // return, full, converted
+	var _cerr *C.GError       // out, full, converted, nullable
+
+	carg1 = (*C.PangoContext)(UnsafeContextToGlibNone(context))
+	carg2 = (*C.GBytes)(glib.UnsafeBytesToGlibNone(bytes))
+
+	cret = C.pango_font_deserialize(carg1, carg2, &_cerr)
+	runtime.KeepAlive(context)
+	runtime.KeepAlive(bytes)
+
+	var goret  Font
+	var _goerr error
+
+	goret = UnsafeFontFromGlibFull(unsafe.Pointer(cret))
+	if _cerr != nil {
+		_goerr = glib.UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
+	}
+
+	return goret, _goerr
+}
+
 // Describe wraps pango_font_describe
 // The function returns the following values:
 // 
-// 	- ret FontDescription 
+// 	- goret *FontDescription 
 //
 // Returns a description of the font, with font size set in points.
 // 
 // Use [method@Pango.Font.describe_with_absolute_size] if you want
 // the font size in device units.
-func (font *FontInstance) Describe() FontDescription {
+func (font *FontInstance) Describe() *FontDescription {
 	var carg0 *C.PangoFont            // in, none, converted
 	var cret  *C.PangoFontDescription // return, full, converted
 
@@ -5595,23 +5790,23 @@ func (font *FontInstance) Describe() FontDescription {
 	cret = C.pango_font_describe(carg0)
 	runtime.KeepAlive(font)
 
-	var ret FontDescription
+	var goret *FontDescription
 
-	ret = UnsafeFontDescriptionFromGlibFull(unsafe.Pointer(cret))
+	goret = UnsafeFontDescriptionFromGlibFull(unsafe.Pointer(cret))
 
-	return ret
+	return goret
 }
 
 // DescribeWithAbsoluteSize wraps pango_font_describe_with_absolute_size
 // The function returns the following values:
 // 
-// 	- ret FontDescription 
+// 	- goret *FontDescription 
 //
 // Returns a description of the font, with absolute font size set
 // in device units.
 // 
 // Use [method@Pango.Font.describe] if you want the font size in points.
-func (font *FontInstance) DescribeWithAbsoluteSize() FontDescription {
+func (font *FontInstance) DescribeWithAbsoluteSize() *FontDescription {
 	var carg0 *C.PangoFont            // in, none, converted
 	var cret  *C.PangoFontDescription // return, full, converted
 
@@ -5620,25 +5815,25 @@ func (font *FontInstance) DescribeWithAbsoluteSize() FontDescription {
 	cret = C.pango_font_describe_with_absolute_size(carg0)
 	runtime.KeepAlive(font)
 
-	var ret FontDescription
+	var goret *FontDescription
 
-	ret = UnsafeFontDescriptionFromGlibFull(unsafe.Pointer(cret))
+	goret = UnsafeFontDescriptionFromGlibFull(unsafe.Pointer(cret))
 
-	return ret
+	return goret
 }
 
 // GetCoverage wraps pango_font_get_coverage
 // 
 // The function takes the following parameters:
 // 
-// 	- language Language: the language tag 
+// 	- language *Language: the language tag 
 // 
 // The function returns the following values:
 // 
-// 	- ret Coverage 
+// 	- goret Coverage 
 //
 // Computes the coverage map for a given font and language tag.
-func (font *FontInstance) GetCoverage(language Language) Coverage {
+func (font *FontInstance) GetCoverage(language *Language) Coverage {
 	var carg0 *C.PangoFont     // in, none, converted
 	var carg1 *C.PangoLanguage // in, none, converted
 	var cret  *C.PangoCoverage // return, full, converted
@@ -5650,17 +5845,17 @@ func (font *FontInstance) GetCoverage(language Language) Coverage {
 	runtime.KeepAlive(font)
 	runtime.KeepAlive(language)
 
-	var ret Coverage
+	var goret Coverage
 
-	ret = UnsafeCoverageFromGlibFull(unsafe.Pointer(cret))
+	goret = UnsafeCoverageFromGlibFull(unsafe.Pointer(cret))
 
-	return ret
+	return goret
 }
 
 // GetFace wraps pango_font_get_face
 // The function returns the following values:
 // 
-// 	- ret FontFace 
+// 	- goret FontFace 
 //
 // Gets the `PangoFontFace` to which @font belongs.
 func (font *FontInstance) GetFace() FontFace {
@@ -5672,17 +5867,17 @@ func (font *FontInstance) GetFace() FontFace {
 	cret = C.pango_font_get_face(carg0)
 	runtime.KeepAlive(font)
 
-	var ret FontFace
+	var goret FontFace
 
-	ret = UnsafeFontFaceFromGlibNone(unsafe.Pointer(cret))
+	goret = UnsafeFontFaceFromGlibNone(unsafe.Pointer(cret))
 
-	return ret
+	return goret
 }
 
 // GetFontMap wraps pango_font_get_font_map
 // The function returns the following values:
 // 
-// 	- ret FontMap 
+// 	- goret FontMap 
 //
 // Gets the font map for which the font was created.
 // 
@@ -5704,53 +5899,72 @@ func (font *FontInstance) GetFontMap() FontMap {
 	cret = C.pango_font_get_font_map(carg0)
 	runtime.KeepAlive(font)
 
-	var ret FontMap
+	var goret FontMap
 
-	ret = UnsafeFontMapFromGlibNone(unsafe.Pointer(cret))
+	goret = UnsafeFontMapFromGlibNone(unsafe.Pointer(cret))
 
-	return ret
+	return goret
 }
 
-// GetLanguages wraps pango_font_get_languages
+// GetGlyphExtents wraps pango_font_get_glyph_extents
+// 
+// The function takes the following parameters:
+// 
+// 	- glyph Glyph: the glyph index 
+// 
 // The function returns the following values:
 // 
-// 	- ret array 
+// 	- inkRect Rectangle: rectangle used to store the extents of the glyph as drawn 
+// 	- logicalRect Rectangle: rectangle used to store the logical extents of the glyph 
 //
-// Returns the languages that are supported by @font.
+// Gets the logical and ink extents of a glyph within a font.
 // 
-// If the font backend does not provide this information,
-// %NULL is returned. For the fontconfig backend, this
-// corresponds to the FC_LANG member of the FcPattern.
+// The coordinate system for each rectangle has its origin at the
+// base line and horizontal origin of the character with increasing
+// coordinates extending to the right and down. The macros PANGO_ASCENT(),
+// PANGO_DESCENT(), PANGO_LBEARING(), and PANGO_RBEARING() can be used to convert
+// from the extents rectangle to more traditional font metrics. The units
+// of the rectangles are in 1/PANGO_SCALE of a device unit.
 // 
-// The returned array is only valid as long as the font
-// and its fontmap are valid.
-func (font *FontInstance) GetLanguages() array {
-	var carg0 *C.PangoFont // in, none, converted
-	var cret  array        // return, transfer: none, scope: , implicit: false, skip: false, optional: false, nullable: false, caller-allocates: false, has closure: false, has destroy: false
+// If @font is %NULL, this function gracefully sets some sane values in the
+// output variables and returns.
+func (font *FontInstance) GetGlyphExtents(glyph Glyph) (Rectangle, Rectangle) {
+	var carg0 *C.PangoFont     // in, none, converted
+	var carg1 C.PangoGlyph     // in, none, casted, alias
+	var carg2 C.PangoRectangle // out, transfer: none, C Pointers: 0, Name: Rectangle, optional, caller-allocates
+	var carg3 C.PangoRectangle // out, transfer: none, C Pointers: 0, Name: Rectangle, optional, caller-allocates
 
 	carg0 = (*C.PangoFont)(UnsafeFontToGlibNone(font))
+	carg1 = C.PangoGlyph(glyph)
 
-	cret = C.pango_font_get_languages(carg0)
+	C.pango_font_get_glyph_extents(carg0, carg1, &carg2, &carg3)
 	runtime.KeepAlive(font)
+	runtime.KeepAlive(glyph)
 
-	var ret array
+	var inkRect     Rectangle
+	var logicalRect Rectangle
 
-	panic("unimplemented conversion of array (array)")
+	_ = inkRect
+	_ = carg2
+	panic("unimplemented conversion of Rectangle (PangoRectangle)")
+	_ = logicalRect
+	_ = carg3
+	panic("unimplemented conversion of Rectangle (PangoRectangle)")
 
-	return ret
+	return inkRect, logicalRect
 }
 
 // GetMetrics wraps pango_font_get_metrics
 // 
 // The function takes the following parameters:
 // 
-// 	- language Language (nullable): language tag used to determine which script
+// 	- language *Language (nullable): language tag used to determine which script
 //   to get the metrics for, or %NULL to indicate to get the metrics for
 //   the entire font. 
 // 
 // The function returns the following values:
 // 
-// 	- ret FontMetrics 
+// 	- goret *FontMetrics 
 //
 // Gets overall metric information for a font.
 // 
@@ -5760,7 +5974,7 @@ func (font *FontInstance) GetLanguages() array {
 // 
 // If @font is %NULL, this function gracefully sets some sane values in the
 // output variables and returns.
-func (font *FontInstance) GetMetrics(language Language) FontMetrics {
+func (font *FontInstance) GetMetrics(language *Language) *FontMetrics {
 	var carg0 *C.PangoFont        // in, none, converted
 	var carg1 *C.PangoLanguage    // in, none, converted, nullable
 	var cret  *C.PangoFontMetrics // return, full, converted
@@ -5774,11 +5988,11 @@ func (font *FontInstance) GetMetrics(language Language) FontMetrics {
 	runtime.KeepAlive(font)
 	runtime.KeepAlive(language)
 
-	var ret FontMetrics
+	var goret *FontMetrics
 
-	ret = UnsafeFontMetricsFromGlibFull(unsafe.Pointer(cret))
+	goret = UnsafeFontMetricsFromGlibFull(unsafe.Pointer(cret))
 
-	return ret
+	return goret
 }
 
 // HasChar wraps pango_font_has_char
@@ -5789,7 +6003,7 @@ func (font *FontInstance) GetMetrics(language Language) FontMetrics {
 // 
 // The function returns the following values:
 // 
-// 	- ret bool 
+// 	- goret bool 
 //
 // Returns whether the font provides a glyph for this character.
 func (font *FontInstance) HasChar(wc uint32) bool {
@@ -5804,13 +6018,43 @@ func (font *FontInstance) HasChar(wc uint32) bool {
 	runtime.KeepAlive(font)
 	runtime.KeepAlive(wc)
 
-	var ret bool
+	var goret bool
 
 	if cret != 0 {
-		ret = true
+		goret = true
 	}
 
-	return ret
+	return goret
+}
+
+// Serialize wraps pango_font_serialize
+// The function returns the following values:
+// 
+// 	- goret *glib.Bytes 
+//
+// Serializes the @font in a way that can be uniquely identified.
+// 
+// There are no guarantees about the format of the output across different
+// versions of Pango.
+// 
+// The intended use of this function is testing, benchmarking and debugging.
+// The format is not meant as a permanent storage format.
+// 
+// To recreate a font from its serialized form, use [func@Pango.Font.deserialize].
+func (font *FontInstance) Serialize() *glib.Bytes {
+	var carg0 *C.PangoFont // in, none, converted
+	var cret  *C.GBytes    // return, full, converted
+
+	carg0 = (*C.PangoFont)(UnsafeFontToGlibNone(font))
+
+	cret = C.pango_font_serialize(carg0)
+	runtime.KeepAlive(font)
+
+	var goret *glib.Bytes
+
+	goret = glib.UnsafeBytesFromGlibFull(unsafe.Pointer(cret))
+
+	return goret
 }
 
 // FontFaceInstance is the instance type used by all types extending PangoFontFace. It is used internally by the bindings. Users should use the interface [FontFace] instead.
@@ -5832,18 +6076,18 @@ type FontFace interface {
 	// Describe wraps pango_font_face_describe
 	// The function returns the following values:
 	// 
-	// 	- ret FontDescription 
+	// 	- goret *FontDescription 
 	//
 	// Returns a font description that matches the face.
 	// 
 	// The resulting font description will have the family, style,
 	// variant, weight and stretch of the face, but its size field
 	// will be unset.
-	Describe() FontDescription
+	Describe() *FontDescription
 	// GetFaceName wraps pango_font_face_get_face_name
 	// The function returns the following values:
 	// 
-	// 	- ret string 
+	// 	- goret string 
 	//
 	// Gets a name representing the style of this face.
 	// 
@@ -5854,14 +6098,14 @@ type FontFace interface {
 	// GetFamily wraps pango_font_face_get_family
 	// The function returns the following values:
 	// 
-	// 	- ret FontFamily 
+	// 	- goret FontFamily 
 	//
 	// Gets the `PangoFontFamily` that @face belongs to.
 	GetFamily() FontFamily
 	// IsSynthesized wraps pango_font_face_is_synthesized
 	// The function returns the following values:
 	// 
-	// 	- ret bool 
+	// 	- goret bool 
 	//
 	// Returns whether a `PangoFontFace` is synthesized.
 	// 
@@ -5869,21 +6113,6 @@ type FontFace interface {
 	// creates this face from another face, by shearing, emboldening,
 	// lightening or modifying it in some other way.
 	IsSynthesized() bool
-	// ListSizes wraps pango_font_face_list_sizes
-	// The function returns the following values:
-	// 
-	// 	- sizes array (nullable): 
-	//   location to store a pointer to an array of int. This array
-	//   should be freed with g_free(). 
-	// 	- nSizes int: location to store the number of elements in @sizes 
-	//
-	// List the available sizes for a font.
-	// 
-	// This is only applicable to bitmap fonts. For scalable fonts, stores
-	// %NULL at the location pointed to by @sizes and 0 at the location pointed
-	// to by @n_sizes. The sizes returned are in Pango units and are sorted
-	// in ascending order.
-	ListSizes() (array)
 }
 
 func unsafeWrapFontFace(base *gobject.ObjectInstance) *FontFaceInstance {
@@ -5892,23 +6121,18 @@ func unsafeWrapFontFace(base *gobject.ObjectInstance) *FontFaceInstance {
 	}
 }
 
-func marshalFontFaceInstance(p uintptr) (interface{}, error) {
-	return unsafeWrapFontFace(gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Object()), nil
-}
-
-// UnsafeFontFaceFromGlibBorrow is used to convert raw PangoFontFace pointers to go. This is used by the bindings internally.
-func UnsafeFontFaceFromGlibBorrow(c unsafe.Pointer) FontFace {
-	return gobject.TODOBorrow(c).(FontFace)
+func marshalFontFaceInstance(p unsafe.Pointer) (any, error) {
+	return unsafeWrapFontFace(gobject.ValueFromNative(p).Object()), nil
 }
 
 // UnsafeFontFaceFromGlibNone is used to convert raw PangoFontFace pointers to go while taking a reference and attaching a finalizer. This is used by the bindings internally.
 func UnsafeFontFaceFromGlibNone(c unsafe.Pointer) FontFace {
-	return gobject.Take(c).(FontFace)
+	return gobject.UnsafeObjectFromGlibNone(c).(FontFace)
 }
 
 // UnsafeFontFaceFromGlibFull is used to convert raw PangoFontFace pointers to go while attaching a finalizer. This is used by the bindings internally.
 func UnsafeFontFaceFromGlibFull(c unsafe.Pointer) FontFace {
-	return gobject.AssumeOwnership(c).(FontFace)
+	return gobject.UnsafeObjectFromGlibFull(c).(FontFace)
 }
 
 func (f *FontFaceInstance) upcastToPangoFontFace() *FontFaceInstance {
@@ -5917,25 +6141,25 @@ func (f *FontFaceInstance) upcastToPangoFontFace() *FontFaceInstance {
 
 // UnsafeFontFaceToGlibNone is used to convert the instance to it's C value PangoFontFace. This is used by the bindings internally.
 func UnsafeFontFaceToGlibNone(c FontFace) unsafe.Pointer {
-	return gobject.TODOToNone(c)
+	return gobject.UnsafeObjectToGlibNone(c)
 }
 
 // UnsafeFontFaceToGlibFull is used to convert the instance to it's C value PangoFontFace, while removeing the finalizer. This is used by the bindings internally.
 func UnsafeFontFaceToGlibFull(c FontFace) unsafe.Pointer {
-	return gobject.TODOToFull(c)
+	return gobject.UnsafeObjectToGlibFull(c)
 }
 
 // Describe wraps pango_font_face_describe
 // The function returns the following values:
 // 
-// 	- ret FontDescription 
+// 	- goret *FontDescription 
 //
 // Returns a font description that matches the face.
 // 
 // The resulting font description will have the family, style,
 // variant, weight and stretch of the face, but its size field
 // will be unset.
-func (face *FontFaceInstance) Describe() FontDescription {
+func (face *FontFaceInstance) Describe() *FontDescription {
 	var carg0 *C.PangoFontFace        // in, none, converted
 	var cret  *C.PangoFontDescription // return, full, converted
 
@@ -5944,17 +6168,17 @@ func (face *FontFaceInstance) Describe() FontDescription {
 	cret = C.pango_font_face_describe(carg0)
 	runtime.KeepAlive(face)
 
-	var ret FontDescription
+	var goret *FontDescription
 
-	ret = UnsafeFontDescriptionFromGlibFull(unsafe.Pointer(cret))
+	goret = UnsafeFontDescriptionFromGlibFull(unsafe.Pointer(cret))
 
-	return ret
+	return goret
 }
 
 // GetFaceName wraps pango_font_face_get_face_name
 // The function returns the following values:
 // 
-// 	- ret string 
+// 	- goret string 
 //
 // Gets a name representing the style of this face.
 // 
@@ -5970,17 +6194,17 @@ func (face *FontFaceInstance) GetFaceName() string {
 	cret = C.pango_font_face_get_face_name(carg0)
 	runtime.KeepAlive(face)
 
-	var ret string
+	var goret string
 
-	ret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
 
-	return ret
+	return goret
 }
 
 // GetFamily wraps pango_font_face_get_family
 // The function returns the following values:
 // 
-// 	- ret FontFamily 
+// 	- goret FontFamily 
 //
 // Gets the `PangoFontFamily` that @face belongs to.
 func (face *FontFaceInstance) GetFamily() FontFamily {
@@ -5992,17 +6216,17 @@ func (face *FontFaceInstance) GetFamily() FontFamily {
 	cret = C.pango_font_face_get_family(carg0)
 	runtime.KeepAlive(face)
 
-	var ret FontFamily
+	var goret FontFamily
 
-	ret = UnsafeFontFamilyFromGlibNone(unsafe.Pointer(cret))
+	goret = UnsafeFontFamilyFromGlibNone(unsafe.Pointer(cret))
 
-	return ret
+	return goret
 }
 
 // IsSynthesized wraps pango_font_face_is_synthesized
 // The function returns the following values:
 // 
-// 	- ret bool 
+// 	- goret bool 
 //
 // Returns whether a `PangoFontFace` is synthesized.
 // 
@@ -6018,48 +6242,13 @@ func (face *FontFaceInstance) IsSynthesized() bool {
 	cret = C.pango_font_face_is_synthesized(carg0)
 	runtime.KeepAlive(face)
 
-	var ret bool
+	var goret bool
 
 	if cret != 0 {
-		ret = true
+		goret = true
 	}
 
-	return ret
-}
-
-// ListSizes wraps pango_font_face_list_sizes
-// The function returns the following values:
-// 
-// 	- sizes array (nullable): 
-//   location to store a pointer to an array of int. This array
-//   should be freed with g_free(). 
-// 	- nSizes int: location to store the number of elements in @sizes 
-//
-// List the available sizes for a font.
-// 
-// This is only applicable to bitmap fonts. For scalable fonts, stores
-// %NULL at the location pointed to by @sizes and 0 at the location pointed
-// to by @n_sizes. The sizes returned are in Pango units and are sorted
-// in ascending order.
-func (face *FontFaceInstance) ListSizes() (array) {
-	var carg0 *C.PangoFontFace // in, none, converted
-	var carg1 array            // out, transfer: full, scope: call, implicit: false, skip: false, optional: true, nullable: true, caller-allocates: false, has closure: false, has destroy: false, nullable
-	var carg2 C.int            // out, full, casted
-
-	carg0 = (*C.PangoFontFace)(UnsafeFontFaceToGlibNone(face))
-
-	C.pango_font_face_list_sizes(carg0, &carg1, &carg2)
-	runtime.KeepAlive(face)
-
-	var sizes  array
-	var nSizes int
-
-	if carg1 != nil {
-		panic("unimplemented conversion of array (array)")
-	}
-	nSizes = int(carg2)
-
-	return sizes
+	return goret
 }
 
 // FontFamilyInstance is the instance type used by all types extending PangoFontFamily. It is used internally by the bindings. Users should use the interface [FontFamily] instead.
@@ -6067,7 +6256,7 @@ type FontFamilyInstance struct {
 	_ [0]func() // equal guard
 	gobject.ObjectInstance
 	// implemented interfaces:
-gio.ListModel
+	gio.ListModelInstance
 }
 
 var _ FontFamily = (*FontFamilyInstance)(nil)
@@ -6094,14 +6283,14 @@ type FontFamily interface {
 	// 
 	// The function returns the following values:
 	// 
-	// 	- ret FontFace 
+	// 	- goret FontFace 
 	//
 	// Gets the `PangoFontFace` of @family with the given name.
 	GetFace(string) FontFace
 	// GetName wraps pango_font_family_get_name
 	// The function returns the following values:
 	// 
-	// 	- ret string 
+	// 	- goret string 
 	//
 	// Gets the name of the family.
 	// 
@@ -6112,7 +6301,7 @@ type FontFamily interface {
 	// IsMonospace wraps pango_font_family_is_monospace
 	// The function returns the following values:
 	// 
-	// 	- ret bool 
+	// 	- goret bool 
 	//
 	// A monospace font is a font designed for text display where the the
 	// characters form a regular grid.
@@ -6132,7 +6321,7 @@ type FontFamily interface {
 	// IsVariable wraps pango_font_family_is_variable
 	// The function returns the following values:
 	// 
-	// 	- ret bool 
+	// 	- goret bool 
 	//
 	// A variable font is a font which has axes that can be modified to
 	// produce different faces.
@@ -6140,54 +6329,29 @@ type FontFamily interface {
 	// Such axes are also known as _variations_; see
 	// [method@Pango.FontDescription.set_variations] for more information.
 	IsVariable() bool
-	// ListFaces wraps pango_font_family_list_faces
-	// The function returns the following values:
-	// 
-	// 	- faces array: 
-	//   location to store an array of pointers to `PangoFontFace` objects,
-	//   or %NULL. This array should be freed with g_free() when it is no
-	//   longer needed. 
-	// 	- nFaces int: location to store number of elements in @faces. 
-	//
-	// Lists the different font faces that make up @family.
-	// 
-	// The faces in a family share a common design, but differ in slant, weight,
-	// width and other aspects.
-	// 
-	// Note that the returned faces are not in any particular order, and
-	// multiple faces may have the same name or characteristics.
-	// 
-	// `PangoFontFamily` also implemented the [iface@Gio.ListModel] interface
-	// for enumerating faces.
-	ListFaces() (array)
 }
 
 func unsafeWrapFontFamily(base *gobject.ObjectInstance) *FontFamilyInstance {
 	return &FontFamilyInstance{
 		ObjectInstance: *base,
 		ListModelInstance: gio.ListModelInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 	}
 }
 
-func marshalFontFamilyInstance(p uintptr) (interface{}, error) {
-	return unsafeWrapFontFamily(gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Object()), nil
-}
-
-// UnsafeFontFamilyFromGlibBorrow is used to convert raw PangoFontFamily pointers to go. This is used by the bindings internally.
-func UnsafeFontFamilyFromGlibBorrow(c unsafe.Pointer) FontFamily {
-	return gobject.TODOBorrow(c).(FontFamily)
+func marshalFontFamilyInstance(p unsafe.Pointer) (any, error) {
+	return unsafeWrapFontFamily(gobject.ValueFromNative(p).Object()), nil
 }
 
 // UnsafeFontFamilyFromGlibNone is used to convert raw PangoFontFamily pointers to go while taking a reference and attaching a finalizer. This is used by the bindings internally.
 func UnsafeFontFamilyFromGlibNone(c unsafe.Pointer) FontFamily {
-	return gobject.Take(c).(FontFamily)
+	return gobject.UnsafeObjectFromGlibNone(c).(FontFamily)
 }
 
 // UnsafeFontFamilyFromGlibFull is used to convert raw PangoFontFamily pointers to go while attaching a finalizer. This is used by the bindings internally.
 func UnsafeFontFamilyFromGlibFull(c unsafe.Pointer) FontFamily {
-	return gobject.AssumeOwnership(c).(FontFamily)
+	return gobject.UnsafeObjectFromGlibFull(c).(FontFamily)
 }
 
 func (f *FontFamilyInstance) upcastToPangoFontFamily() *FontFamilyInstance {
@@ -6196,12 +6360,12 @@ func (f *FontFamilyInstance) upcastToPangoFontFamily() *FontFamilyInstance {
 
 // UnsafeFontFamilyToGlibNone is used to convert the instance to it's C value PangoFontFamily. This is used by the bindings internally.
 func UnsafeFontFamilyToGlibNone(c FontFamily) unsafe.Pointer {
-	return gobject.TODOToNone(c)
+	return gobject.UnsafeObjectToGlibNone(c)
 }
 
 // UnsafeFontFamilyToGlibFull is used to convert the instance to it's C value PangoFontFamily, while removeing the finalizer. This is used by the bindings internally.
 func UnsafeFontFamilyToGlibFull(c FontFamily) unsafe.Pointer {
-	return gobject.TODOToFull(c)
+	return gobject.UnsafeObjectToGlibFull(c)
 }
 
 // GetFace wraps pango_font_family_get_face
@@ -6214,12 +6378,12 @@ func UnsafeFontFamilyToGlibFull(c FontFamily) unsafe.Pointer {
 // 
 // The function returns the following values:
 // 
-// 	- ret FontFace 
+// 	- goret FontFace 
 //
 // Gets the `PangoFontFace` of @family with the given name.
 func (family *FontFamilyInstance) GetFace(name string) FontFace {
 	var carg0 *C.PangoFontFamily // in, none, converted
-	var carg1 *C.gchar           // in, none, string, nullable
+	var carg1 *C.gchar           // in, none, string, nullable-string
 	var cret  *C.PangoFontFace   // return, none, converted
 
 	carg0 = (*C.PangoFontFamily)(UnsafeFontFamilyToGlibNone(family))
@@ -6232,17 +6396,17 @@ func (family *FontFamilyInstance) GetFace(name string) FontFace {
 	runtime.KeepAlive(family)
 	runtime.KeepAlive(name)
 
-	var ret FontFace
+	var goret FontFace
 
-	ret = UnsafeFontFaceFromGlibNone(unsafe.Pointer(cret))
+	goret = UnsafeFontFaceFromGlibNone(unsafe.Pointer(cret))
 
-	return ret
+	return goret
 }
 
 // GetName wraps pango_font_family_get_name
 // The function returns the following values:
 // 
-// 	- ret string 
+// 	- goret string 
 //
 // Gets the name of the family.
 // 
@@ -6258,17 +6422,17 @@ func (family *FontFamilyInstance) GetName() string {
 	cret = C.pango_font_family_get_name(carg0)
 	runtime.KeepAlive(family)
 
-	var ret string
+	var goret string
 
-	ret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
 
-	return ret
+	return goret
 }
 
 // IsMonospace wraps pango_font_family_is_monospace
 // The function returns the following values:
 // 
-// 	- ret bool 
+// 	- goret bool 
 //
 // A monospace font is a font designed for text display where the the
 // characters form a regular grid.
@@ -6293,19 +6457,19 @@ func (family *FontFamilyInstance) IsMonospace() bool {
 	cret = C.pango_font_family_is_monospace(carg0)
 	runtime.KeepAlive(family)
 
-	var ret bool
+	var goret bool
 
 	if cret != 0 {
-		ret = true
+		goret = true
 	}
 
-	return ret
+	return goret
 }
 
 // IsVariable wraps pango_font_family_is_variable
 // The function returns the following values:
 // 
-// 	- ret bool 
+// 	- goret bool 
 //
 // A variable font is a font which has axes that can be modified to
 // produce different faces.
@@ -6321,51 +6485,13 @@ func (family *FontFamilyInstance) IsVariable() bool {
 	cret = C.pango_font_family_is_variable(carg0)
 	runtime.KeepAlive(family)
 
-	var ret bool
+	var goret bool
 
 	if cret != 0 {
-		ret = true
+		goret = true
 	}
 
-	return ret
-}
-
-// ListFaces wraps pango_font_family_list_faces
-// The function returns the following values:
-// 
-// 	- faces array: 
-//   location to store an array of pointers to `PangoFontFace` objects,
-//   or %NULL. This array should be freed with g_free() when it is no
-//   longer needed. 
-// 	- nFaces int: location to store number of elements in @faces. 
-//
-// Lists the different font faces that make up @family.
-// 
-// The faces in a family share a common design, but differ in slant, weight,
-// width and other aspects.
-// 
-// Note that the returned faces are not in any particular order, and
-// multiple faces may have the same name or characteristics.
-// 
-// `PangoFontFamily` also implemented the [iface@Gio.ListModel] interface
-// for enumerating faces.
-func (family *FontFamilyInstance) ListFaces() (array) {
-	var carg0 *C.PangoFontFamily // in, none, converted
-	var carg1 array              // out, transfer: container, scope: call, implicit: false, skip: false, optional: true, nullable: false, caller-allocates: false, has closure: false, has destroy: false
-	var carg2 C.int              // out, full, casted
-
-	carg0 = (*C.PangoFontFamily)(UnsafeFontFamilyToGlibNone(family))
-
-	C.pango_font_family_list_faces(carg0, &carg1, &carg2)
-	runtime.KeepAlive(family)
-
-	var faces  array
-	var nFaces int
-
-	panic("unimplemented conversion of array (array)")
-	nFaces = int(carg2)
-
-	return faces
+	return goret
 }
 
 // FontMapInstance is the instance type used by all types extending PangoFontMap. It is used internally by the bindings. Users should use the interface [FontMap] instead.
@@ -6373,7 +6499,7 @@ type FontMapInstance struct {
 	_ [0]func() // equal guard
 	gobject.ObjectInstance
 	// implemented interfaces:
-gio.ListModel
+	gio.ListModelInstance
 }
 
 var _ FontMap = (*FontMapInstance)(nil)
@@ -6398,7 +6524,7 @@ type FontMap interface {
 	// 
 	// The function returns the following values:
 	// 
-	// 	- ret bool 
+	// 	- goret bool 
 	// 	- _goerr error (nullable): an error 
 	//
 	// Loads a font file with one or more fonts into the `PangoFontMap`.
@@ -6419,7 +6545,7 @@ type FontMap interface {
 	// CreateContext wraps pango_font_map_create_context
 	// The function returns the following values:
 	// 
-	// 	- ret Context 
+	// 	- goret Context 
 	//
 	// Creates a `PangoContext` connected to @fontmap.
 	// 
@@ -6439,14 +6565,14 @@ type FontMap interface {
 	// 
 	// The function returns the following values:
 	// 
-	// 	- ret FontFamily 
+	// 	- goret FontFamily 
 	//
 	// Gets a font family by name.
 	GetFamily(string) FontFamily
 	// GetSerial wraps pango_font_map_get_serial
 	// The function returns the following values:
 	// 
-	// 	- ret uint 
+	// 	- goret uint 
 	//
 	// Returns the current serial number of @fontmap.
 	// 
@@ -6461,49 +6587,34 @@ type FontMap interface {
 	// This can be used to automatically detect changes to a `PangoFontMap`,
 	// like in `PangoContext`.
 	GetSerial() uint
-	// ListFamilies wraps pango_font_map_list_families
-	// The function returns the following values:
-	// 
-	// 	- families array: location to
-	//   store a pointer to an array of `PangoFontFamily` *.
-	//   This array should be freed with g_free(). 
-	// 	- nFamilies int: location to store the number of elements in @families 
-	//
-	// List all families for a fontmap.
-	// 
-	// Note that the returned families are not in any particular order.
-	// 
-	// `PangoFontMap` also implemented the [iface@Gio.ListModel] interface
-	// for enumerating families.
-	ListFamilies() (array)
 	// LoadFont wraps pango_font_map_load_font
 	// 
 	// The function takes the following parameters:
 	// 
 	// 	- context Context: the `PangoContext` the font will be used with 
-	// 	- desc FontDescription: a `PangoFontDescription` describing the font to load 
+	// 	- desc *FontDescription: a `PangoFontDescription` describing the font to load 
 	// 
 	// The function returns the following values:
 	// 
-	// 	- ret Font 
+	// 	- goret Font 
 	//
 	// Load the font in the fontmap that is the closest match for @desc.
-	LoadFont(Context, FontDescription) Font
+	LoadFont(Context, *FontDescription) Font
 	// LoadFontset wraps pango_font_map_load_fontset
 	// 
 	// The function takes the following parameters:
 	// 
 	// 	- context Context: the `PangoContext` the font will be used with 
-	// 	- desc FontDescription: a `PangoFontDescription` describing the font to load 
-	// 	- language Language: a `PangoLanguage` the fonts will be used for 
+	// 	- desc *FontDescription: a `PangoFontDescription` describing the font to load 
+	// 	- language *Language: a `PangoLanguage` the fonts will be used for 
 	// 
 	// The function returns the following values:
 	// 
-	// 	- ret Fontset 
+	// 	- goret Fontset 
 	//
 	// Load a set of fonts in the fontmap that can be used to render
 	// a font matching @desc.
-	LoadFontset(Context, FontDescription, Language) Fontset
+	LoadFontset(Context, *FontDescription, *Language) Fontset
 	// ReloadFont wraps pango_font_map_reload_font
 	// 
 	// The function takes the following parameters:
@@ -6515,7 +6626,7 @@ type FontMap interface {
 	// 
 	// The function returns the following values:
 	// 
-	// 	- ret Font 
+	// 	- goret Font 
 	//
 	// Returns a new font that is like @font, except that its size
 	// is multiplied by @scale, its backend-dependent configuration
@@ -6528,28 +6639,23 @@ func unsafeWrapFontMap(base *gobject.ObjectInstance) *FontMapInstance {
 	return &FontMapInstance{
 		ObjectInstance: *base,
 		ListModelInstance: gio.ListModelInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 	}
 }
 
-func marshalFontMapInstance(p uintptr) (interface{}, error) {
-	return unsafeWrapFontMap(gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Object()), nil
-}
-
-// UnsafeFontMapFromGlibBorrow is used to convert raw PangoFontMap pointers to go. This is used by the bindings internally.
-func UnsafeFontMapFromGlibBorrow(c unsafe.Pointer) FontMap {
-	return gobject.TODOBorrow(c).(FontMap)
+func marshalFontMapInstance(p unsafe.Pointer) (any, error) {
+	return unsafeWrapFontMap(gobject.ValueFromNative(p).Object()), nil
 }
 
 // UnsafeFontMapFromGlibNone is used to convert raw PangoFontMap pointers to go while taking a reference and attaching a finalizer. This is used by the bindings internally.
 func UnsafeFontMapFromGlibNone(c unsafe.Pointer) FontMap {
-	return gobject.Take(c).(FontMap)
+	return gobject.UnsafeObjectFromGlibNone(c).(FontMap)
 }
 
 // UnsafeFontMapFromGlibFull is used to convert raw PangoFontMap pointers to go while attaching a finalizer. This is used by the bindings internally.
 func UnsafeFontMapFromGlibFull(c unsafe.Pointer) FontMap {
-	return gobject.AssumeOwnership(c).(FontMap)
+	return gobject.UnsafeObjectFromGlibFull(c).(FontMap)
 }
 
 func (f *FontMapInstance) upcastToPangoFontMap() *FontMapInstance {
@@ -6558,12 +6664,12 @@ func (f *FontMapInstance) upcastToPangoFontMap() *FontMapInstance {
 
 // UnsafeFontMapToGlibNone is used to convert the instance to it's C value PangoFontMap. This is used by the bindings internally.
 func UnsafeFontMapToGlibNone(c FontMap) unsafe.Pointer {
-	return gobject.TODOToNone(c)
+	return gobject.UnsafeObjectToGlibNone(c)
 }
 
 // UnsafeFontMapToGlibFull is used to convert the instance to it's C value PangoFontMap, while removeing the finalizer. This is used by the bindings internally.
 func UnsafeFontMapToGlibFull(c FontMap) unsafe.Pointer {
-	return gobject.TODOToFull(c)
+	return gobject.UnsafeObjectToGlibFull(c)
 }
 
 // AddFontFile wraps pango_font_map_add_font_file
@@ -6574,7 +6680,7 @@ func UnsafeFontMapToGlibFull(c FontMap) unsafe.Pointer {
 // 
 // The function returns the following values:
 // 
-// 	- ret bool 
+// 	- goret bool 
 // 	- _goerr error (nullable): an error 
 //
 // Loads a font file with one or more fonts into the `PangoFontMap`.
@@ -6595,17 +6701,17 @@ func (fontmap *FontMapInstance) AddFontFile(filename string) (bool, error) {
 	runtime.KeepAlive(fontmap)
 	runtime.KeepAlive(filename)
 
-	var ret    bool
+	var goret  bool
 	var _goerr error
 
 	if cret != 0 {
-		ret = true
+		goret = true
 	}
 	if _cerr != nil {
-		_goerr = UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
+		_goerr = glib.UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
 	}
 
-	return ret, _goerr
+	return goret, _goerr
 }
 
 // Changed wraps pango_font_map_changed
@@ -6629,7 +6735,7 @@ func (fontmap *FontMapInstance) Changed() {
 // CreateContext wraps pango_font_map_create_context
 // The function returns the following values:
 // 
-// 	- ret Context 
+// 	- goret Context 
 //
 // Creates a `PangoContext` connected to @fontmap.
 // 
@@ -6649,11 +6755,11 @@ func (fontmap *FontMapInstance) CreateContext() Context {
 	cret = C.pango_font_map_create_context(carg0)
 	runtime.KeepAlive(fontmap)
 
-	var ret Context
+	var goret Context
 
-	ret = UnsafeContextFromGlibFull(unsafe.Pointer(cret))
+	goret = UnsafeContextFromGlibFull(unsafe.Pointer(cret))
 
-	return ret
+	return goret
 }
 
 // GetFamily wraps pango_font_map_get_family
@@ -6664,7 +6770,7 @@ func (fontmap *FontMapInstance) CreateContext() Context {
 // 
 // The function returns the following values:
 // 
-// 	- ret FontFamily 
+// 	- goret FontFamily 
 //
 // Gets a font family by name.
 func (fontmap *FontMapInstance) GetFamily(name string) FontFamily {
@@ -6680,17 +6786,17 @@ func (fontmap *FontMapInstance) GetFamily(name string) FontFamily {
 	runtime.KeepAlive(fontmap)
 	runtime.KeepAlive(name)
 
-	var ret FontFamily
+	var goret FontFamily
 
-	ret = UnsafeFontFamilyFromGlibNone(unsafe.Pointer(cret))
+	goret = UnsafeFontFamilyFromGlibNone(unsafe.Pointer(cret))
 
-	return ret
+	return goret
 }
 
 // GetSerial wraps pango_font_map_get_serial
 // The function returns the following values:
 // 
-// 	- ret uint 
+// 	- goret uint 
 //
 // Returns the current serial number of @fontmap.
 // 
@@ -6713,44 +6819,11 @@ func (fontmap *FontMapInstance) GetSerial() uint {
 	cret = C.pango_font_map_get_serial(carg0)
 	runtime.KeepAlive(fontmap)
 
-	var ret uint
+	var goret uint
 
-	ret = uint(cret)
+	goret = uint(cret)
 
-	return ret
-}
-
-// ListFamilies wraps pango_font_map_list_families
-// The function returns the following values:
-// 
-// 	- families array: location to
-//   store a pointer to an array of `PangoFontFamily` *.
-//   This array should be freed with g_free(). 
-// 	- nFamilies int: location to store the number of elements in @families 
-//
-// List all families for a fontmap.
-// 
-// Note that the returned families are not in any particular order.
-// 
-// `PangoFontMap` also implemented the [iface@Gio.ListModel] interface
-// for enumerating families.
-func (fontmap *FontMapInstance) ListFamilies() (array) {
-	var carg0 *C.PangoFontMap // in, none, converted
-	var carg1 array           // out, transfer: container, scope: call, implicit: false, skip: false, optional: false, nullable: false, caller-allocates: false, has closure: false, has destroy: false
-	var carg2 C.int           // out, full, casted
-
-	carg0 = (*C.PangoFontMap)(UnsafeFontMapToGlibNone(fontmap))
-
-	C.pango_font_map_list_families(carg0, &carg1, &carg2)
-	runtime.KeepAlive(fontmap)
-
-	var families  array
-	var nFamilies int
-
-	panic("unimplemented conversion of array (array)")
-	nFamilies = int(carg2)
-
-	return families
+	return goret
 }
 
 // LoadFont wraps pango_font_map_load_font
@@ -6758,14 +6831,14 @@ func (fontmap *FontMapInstance) ListFamilies() (array) {
 // The function takes the following parameters:
 // 
 // 	- context Context: the `PangoContext` the font will be used with 
-// 	- desc FontDescription: a `PangoFontDescription` describing the font to load 
+// 	- desc *FontDescription: a `PangoFontDescription` describing the font to load 
 // 
 // The function returns the following values:
 // 
-// 	- ret Font 
+// 	- goret Font 
 //
 // Load the font in the fontmap that is the closest match for @desc.
-func (fontmap *FontMapInstance) LoadFont(context Context, desc FontDescription) Font {
+func (fontmap *FontMapInstance) LoadFont(context Context, desc *FontDescription) Font {
 	var carg0 *C.PangoFontMap         // in, none, converted
 	var carg1 *C.PangoContext         // in, none, converted
 	var carg2 *C.PangoFontDescription // in, none, converted
@@ -6780,11 +6853,11 @@ func (fontmap *FontMapInstance) LoadFont(context Context, desc FontDescription) 
 	runtime.KeepAlive(context)
 	runtime.KeepAlive(desc)
 
-	var ret Font
+	var goret Font
 
-	ret = UnsafeFontFromGlibFull(unsafe.Pointer(cret))
+	goret = UnsafeFontFromGlibFull(unsafe.Pointer(cret))
 
-	return ret
+	return goret
 }
 
 // LoadFontset wraps pango_font_map_load_fontset
@@ -6792,16 +6865,16 @@ func (fontmap *FontMapInstance) LoadFont(context Context, desc FontDescription) 
 // The function takes the following parameters:
 // 
 // 	- context Context: the `PangoContext` the font will be used with 
-// 	- desc FontDescription: a `PangoFontDescription` describing the font to load 
-// 	- language Language: a `PangoLanguage` the fonts will be used for 
+// 	- desc *FontDescription: a `PangoFontDescription` describing the font to load 
+// 	- language *Language: a `PangoLanguage` the fonts will be used for 
 // 
 // The function returns the following values:
 // 
-// 	- ret Fontset 
+// 	- goret Fontset 
 //
 // Load a set of fonts in the fontmap that can be used to render
 // a font matching @desc.
-func (fontmap *FontMapInstance) LoadFontset(context Context, desc FontDescription, language Language) Fontset {
+func (fontmap *FontMapInstance) LoadFontset(context Context, desc *FontDescription, language *Language) Fontset {
 	var carg0 *C.PangoFontMap         // in, none, converted
 	var carg1 *C.PangoContext         // in, none, converted
 	var carg2 *C.PangoFontDescription // in, none, converted
@@ -6819,11 +6892,11 @@ func (fontmap *FontMapInstance) LoadFontset(context Context, desc FontDescriptio
 	runtime.KeepAlive(desc)
 	runtime.KeepAlive(language)
 
-	var ret Fontset
+	var goret Fontset
 
-	ret = UnsafeFontsetFromGlibFull(unsafe.Pointer(cret))
+	goret = UnsafeFontsetFromGlibFull(unsafe.Pointer(cret))
 
-	return ret
+	return goret
 }
 
 // ReloadFont wraps pango_font_map_reload_font
@@ -6837,7 +6910,7 @@ func (fontmap *FontMapInstance) LoadFontset(context Context, desc FontDescriptio
 // 
 // The function returns the following values:
 // 
-// 	- ret Font 
+// 	- goret Font 
 //
 // Returns a new font that is like @font, except that its size
 // is multiplied by @scale, its backend-dependent configuration
@@ -6848,7 +6921,7 @@ func (fontmap *FontMapInstance) ReloadFont(font Font, scale float64, context Con
 	var carg1 *C.PangoFont    // in, none, converted
 	var carg2 C.gdouble       // in, none, casted
 	var carg3 *C.PangoContext // in, none, converted, nullable
-	var carg4 *C.gchar        // in, none, string, nullable
+	var carg4 *C.gchar        // in, none, string, nullable-string
 	var cret  *C.PangoFont    // return, full, converted
 
 	carg0 = (*C.PangoFontMap)(UnsafeFontMapToGlibNone(fontmap))
@@ -6869,11 +6942,11 @@ func (fontmap *FontMapInstance) ReloadFont(font Font, scale float64, context Con
 	runtime.KeepAlive(context)
 	runtime.KeepAlive(variations)
 
-	var ret Font
+	var goret Font
 
-	ret = UnsafeFontFromGlibFull(unsafe.Pointer(cret))
+	goret = UnsafeFontFromGlibFull(unsafe.Pointer(cret))
 
-	return ret
+	return goret
 }
 
 // FontsetInstance is the instance type used by all types extending PangoFontset. It is used internally by the bindings. Users should use the interface [Fontset] instead.
@@ -6915,7 +6988,7 @@ type Fontset interface {
 	// 
 	// The function returns the following values:
 	// 
-	// 	- ret Font 
+	// 	- goret Font 
 	//
 	// Returns the font in the fontset that contains the best
 	// glyph for a Unicode character.
@@ -6923,10 +6996,10 @@ type Fontset interface {
 	// GetMetrics wraps pango_fontset_get_metrics
 	// The function returns the following values:
 	// 
-	// 	- ret FontMetrics 
+	// 	- goret *FontMetrics 
 	//
 	// Get overall metric information for the fonts in the fontset.
-	GetMetrics() FontMetrics
+	GetMetrics() *FontMetrics
 }
 
 func unsafeWrapFontset(base *gobject.ObjectInstance) *FontsetInstance {
@@ -6935,23 +7008,18 @@ func unsafeWrapFontset(base *gobject.ObjectInstance) *FontsetInstance {
 	}
 }
 
-func marshalFontsetInstance(p uintptr) (interface{}, error) {
-	return unsafeWrapFontset(gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Object()), nil
-}
-
-// UnsafeFontsetFromGlibBorrow is used to convert raw PangoFontset pointers to go. This is used by the bindings internally.
-func UnsafeFontsetFromGlibBorrow(c unsafe.Pointer) Fontset {
-	return gobject.TODOBorrow(c).(Fontset)
+func marshalFontsetInstance(p unsafe.Pointer) (any, error) {
+	return unsafeWrapFontset(gobject.ValueFromNative(p).Object()), nil
 }
 
 // UnsafeFontsetFromGlibNone is used to convert raw PangoFontset pointers to go while taking a reference and attaching a finalizer. This is used by the bindings internally.
 func UnsafeFontsetFromGlibNone(c unsafe.Pointer) Fontset {
-	return gobject.Take(c).(Fontset)
+	return gobject.UnsafeObjectFromGlibNone(c).(Fontset)
 }
 
 // UnsafeFontsetFromGlibFull is used to convert raw PangoFontset pointers to go while attaching a finalizer. This is used by the bindings internally.
 func UnsafeFontsetFromGlibFull(c unsafe.Pointer) Fontset {
-	return gobject.AssumeOwnership(c).(Fontset)
+	return gobject.UnsafeObjectFromGlibFull(c).(Fontset)
 }
 
 func (f *FontsetInstance) upcastToPangoFontset() *FontsetInstance {
@@ -6960,12 +7028,12 @@ func (f *FontsetInstance) upcastToPangoFontset() *FontsetInstance {
 
 // UnsafeFontsetToGlibNone is used to convert the instance to it's C value PangoFontset. This is used by the bindings internally.
 func UnsafeFontsetToGlibNone(c Fontset) unsafe.Pointer {
-	return gobject.TODOToNone(c)
+	return gobject.UnsafeObjectToGlibNone(c)
 }
 
 // UnsafeFontsetToGlibFull is used to convert the instance to it's C value PangoFontset, while removeing the finalizer. This is used by the bindings internally.
 func UnsafeFontsetToGlibFull(c Fontset) unsafe.Pointer {
-	return gobject.TODOToFull(c)
+	return gobject.UnsafeObjectToGlibFull(c)
 }
 
 // ForEach wraps pango_fontset_foreach
@@ -7001,7 +7069,7 @@ func (fontset *FontsetInstance) ForEach(fn FontsetForEachFunc) {
 // 
 // The function returns the following values:
 // 
-// 	- ret Font 
+// 	- goret Font 
 //
 // Returns the font in the fontset that contains the best
 // glyph for a Unicode character.
@@ -7017,20 +7085,20 @@ func (fontset *FontsetInstance) GetFont(wc uint) Font {
 	runtime.KeepAlive(fontset)
 	runtime.KeepAlive(wc)
 
-	var ret Font
+	var goret Font
 
-	ret = UnsafeFontFromGlibFull(unsafe.Pointer(cret))
+	goret = UnsafeFontFromGlibFull(unsafe.Pointer(cret))
 
-	return ret
+	return goret
 }
 
 // GetMetrics wraps pango_fontset_get_metrics
 // The function returns the following values:
 // 
-// 	- ret FontMetrics 
+// 	- goret *FontMetrics 
 //
 // Get overall metric information for the fonts in the fontset.
-func (fontset *FontsetInstance) GetMetrics() FontMetrics {
+func (fontset *FontsetInstance) GetMetrics() *FontMetrics {
 	var carg0 *C.PangoFontset     // in, none, converted
 	var cret  *C.PangoFontMetrics // return, full, converted
 
@@ -7039,11 +7107,11 @@ func (fontset *FontsetInstance) GetMetrics() FontMetrics {
 	cret = C.pango_fontset_get_metrics(carg0)
 	runtime.KeepAlive(fontset)
 
-	var ret FontMetrics
+	var goret *FontMetrics
 
-	ret = UnsafeFontMetricsFromGlibFull(unsafe.Pointer(cret))
+	goret = UnsafeFontMetricsFromGlibFull(unsafe.Pointer(cret))
 
-	return ret
+	return goret
 }
 
 // FontsetSimpleInstance is the instance type used by all types extending PangoFontsetSimple. It is used internally by the bindings. Users should use the interface [FontsetSimple] instead.
@@ -7078,37 +7146,32 @@ type FontsetSimple interface {
 	// Size wraps pango_fontset_simple_size
 	// The function returns the following values:
 	// 
-	// 	- ret int 
+	// 	- goret int 
 	//
 	// Returns the number of fonts in the fontset.
 	Size() int
 }
 
-func unsafeWrapFontsetSimple(base *ObjectInstance) *FontsetSimpleInstance {
+func unsafeWrapFontsetSimple(base *gobject.ObjectInstance) *FontsetSimpleInstance {
 	return &FontsetSimpleInstance{
-		ObjectInstance: gobject.ObjectInstance{
+		FontsetInstance: FontsetInstance{
 			ObjectInstance: *base,
 		},
 	}
 }
 
-func marshalFontsetSimpleInstance(p uintptr) (interface{}, error) {
-	return unsafeWrapFontsetSimple(gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Object()), nil
-}
-
-// UnsafeFontsetSimpleFromGlibBorrow is used to convert raw PangoFontsetSimple pointers to go. This is used by the bindings internally.
-func UnsafeFontsetSimpleFromGlibBorrow(c unsafe.Pointer) FontsetSimple {
-	return TODOBorrow(c).(FontsetSimple)
+func marshalFontsetSimpleInstance(p unsafe.Pointer) (any, error) {
+	return unsafeWrapFontsetSimple(gobject.ValueFromNative(p).Object()), nil
 }
 
 // UnsafeFontsetSimpleFromGlibNone is used to convert raw PangoFontsetSimple pointers to go while taking a reference and attaching a finalizer. This is used by the bindings internally.
 func UnsafeFontsetSimpleFromGlibNone(c unsafe.Pointer) FontsetSimple {
-	return Take(c).(FontsetSimple)
+	return gobject.UnsafeObjectFromGlibNone(c).(FontsetSimple)
 }
 
 // UnsafeFontsetSimpleFromGlibFull is used to convert raw PangoFontsetSimple pointers to go while attaching a finalizer. This is used by the bindings internally.
 func UnsafeFontsetSimpleFromGlibFull(c unsafe.Pointer) FontsetSimple {
-	return AssumeOwnership(c).(FontsetSimple)
+	return gobject.UnsafeObjectFromGlibFull(c).(FontsetSimple)
 }
 
 func (f *FontsetSimpleInstance) upcastToPangoFontsetSimple() *FontsetSimpleInstance {
@@ -7117,26 +7180,26 @@ func (f *FontsetSimpleInstance) upcastToPangoFontsetSimple() *FontsetSimpleInsta
 
 // UnsafeFontsetSimpleToGlibNone is used to convert the instance to it's C value PangoFontsetSimple. This is used by the bindings internally.
 func UnsafeFontsetSimpleToGlibNone(c FontsetSimple) unsafe.Pointer {
-	return TODOToNone(c)
+	return gobject.UnsafeObjectToGlibNone(c)
 }
 
 // UnsafeFontsetSimpleToGlibFull is used to convert the instance to it's C value PangoFontsetSimple, while removeing the finalizer. This is used by the bindings internally.
 func UnsafeFontsetSimpleToGlibFull(c FontsetSimple) unsafe.Pointer {
-	return TODOToFull(c)
+	return gobject.UnsafeObjectToGlibFull(c)
 }
 
 // NewFontsetSimpleInstance wraps pango_fontset_simple_new
 // 
 // The function takes the following parameters:
 // 
-// 	- language Language: a `PangoLanguage` tag 
+// 	- language *Language: a `PangoLanguage` tag 
 // 
 // The function returns the following values:
 // 
-// 	- ret FontsetSimple 
+// 	- goret FontsetSimple 
 //
 // Creates a new `PangoFontsetSimple` for the given language.
-func NewFontsetSimpleInstance(language Language) FontsetSimple {
+func NewFontsetSimpleInstance(language *Language) FontsetSimple {
 	var carg1 *C.PangoLanguage      // in, none, converted
 	var cret  *C.PangoFontsetSimple // return, full, converted
 
@@ -7145,11 +7208,11 @@ func NewFontsetSimpleInstance(language Language) FontsetSimple {
 	cret = C.pango_fontset_simple_new(carg1)
 	runtime.KeepAlive(language)
 
-	var ret FontsetSimple
+	var goret FontsetSimple
 
-	ret = UnsafeFontsetSimpleFromGlibFull(unsafe.Pointer(cret))
+	goret = UnsafeFontsetSimpleFromGlibFull(unsafe.Pointer(cret))
 
-	return ret
+	return goret
 }
 
 // Append wraps pango_fontset_simple_append
@@ -7176,7 +7239,7 @@ func (fontset *FontsetSimpleInstance) Append(font Font) {
 // Size wraps pango_fontset_simple_size
 // The function returns the following values:
 // 
-// 	- ret int 
+// 	- goret int 
 //
 // Returns the number of fonts in the fontset.
 func (fontset *FontsetSimpleInstance) Size() int {
@@ -7188,11 +7251,11 @@ func (fontset *FontsetSimpleInstance) Size() int {
 	cret = C.pango_fontset_simple_size(carg0)
 	runtime.KeepAlive(fontset)
 
-	var ret int
+	var goret int
 
-	ret = int(cret)
+	goret = int(cret)
 
-	return ret
+	return goret
 }
 
 // LayoutInstance is the instance type used by all types extending PangoLayout. It is used internally by the bindings. Users should use the interface [Layout] instead.
@@ -7258,7 +7321,7 @@ type Layout interface {
 	// Copy wraps pango_layout_copy
 	// The function returns the following values:
 	// 
-	// 	- ret Layout 
+	// 	- goret Layout 
 	//
 	// Creates a deep copy-by-value of the layout.
 	// 
@@ -7268,7 +7331,7 @@ type Layout interface {
 	// GetAlignment wraps pango_layout_get_alignment
 	// The function returns the following values:
 	// 
-	// 	- ret Alignment 
+	// 	- goret Alignment 
 	//
 	// Gets the alignment for the layout: how partial lines are
 	// positioned within the horizontal space available.
@@ -7276,14 +7339,14 @@ type Layout interface {
 	// GetAttributes wraps pango_layout_get_attributes
 	// The function returns the following values:
 	// 
-	// 	- ret AttrList 
+	// 	- goret *AttrList 
 	//
 	// Gets the attribute list for the layout, if any.
-	GetAttributes() AttrList
+	GetAttributes() *AttrList
 	// GetAutoDir wraps pango_layout_get_auto_dir
 	// The function returns the following values:
 	// 
-	// 	- ret bool 
+	// 	- goret bool 
 	//
 	// Gets whether to calculate the base direction for the layout
 	// according to its contents.
@@ -7293,14 +7356,37 @@ type Layout interface {
 	// GetBaseline wraps pango_layout_get_baseline
 	// The function returns the following values:
 	// 
-	// 	- ret int 
+	// 	- goret int 
 	//
 	// Gets the Y position of baseline of the first line in @layout.
 	GetBaseline() int
+	// GetCaretPos wraps pango_layout_get_caret_pos
+	// 
+	// The function takes the following parameters:
+	// 
+	// 	- index_ int: the byte index of the cursor 
+	// 
+	// The function returns the following values:
+	// 
+	// 	- strongPos Rectangle: location to store the strong cursor position 
+	// 	- weakPos Rectangle: location to store the weak cursor position 
+	//
+	// Given an index within a layout, determines the positions that of the
+	// strong and weak cursors if the insertion point is at that index.
+	// 
+	// This is a variant of [method@Pango.Layout.get_cursor_pos] that applies
+	// font metric information about caret slope and offset to the positions
+	// it returns.
+	// 
+	// &lt;picture&gt;
+	//   &lt;source srcset="caret-metrics-dark.png" media="(prefers-color-scheme: dark)"&gt;
+	//   &lt;img alt="Caret metrics" src="caret-metrics-light.png"&gt;
+	// &lt;/picture&gt;
+	GetCaretPos(int) (Rectangle, Rectangle)
 	// GetCharacterCount wraps pango_layout_get_character_count
 	// The function returns the following values:
 	// 
-	// 	- ret int 
+	// 	- goret int 
 	//
 	// Returns the number of Unicode characters in the
 	// the text of @layout.
@@ -7308,10 +7394,49 @@ type Layout interface {
 	// GetContext wraps pango_layout_get_context
 	// The function returns the following values:
 	// 
-	// 	- ret Context 
+	// 	- goret Context 
 	//
 	// Retrieves the `PangoContext` used for this layout.
 	GetContext() Context
+	// GetCursorPos wraps pango_layout_get_cursor_pos
+	// 
+	// The function takes the following parameters:
+	// 
+	// 	- index_ int: the byte index of the cursor 
+	// 
+	// The function returns the following values:
+	// 
+	// 	- strongPos Rectangle: location to store the strong cursor position 
+	// 	- weakPos Rectangle: location to store the weak cursor position 
+	//
+	// Given an index within a layout, determines the positions that of the
+	// strong and weak cursors if the insertion point is at that index.
+	// 
+	// The position of each cursor is stored as a zero-width rectangle
+	// with the height of the run extents.
+	// 
+	// &lt;picture&gt;
+	//   &lt;source srcset="cursor-positions-dark.png" media="(prefers-color-scheme: dark)"&gt;
+	//   &lt;img alt="Cursor positions" src="cursor-positions-light.png"&gt;
+	// &lt;/picture&gt;
+	// 
+	// The strong cursor location is the location where characters of the
+	// directionality equal to the base direction of the layout are inserted.
+	// The weak cursor location is the location where characters of the
+	// directionality opposite to the base direction of the layout are inserted.
+	// 
+	// The following example shows text with both a strong and a weak cursor.
+	// 
+	// &lt;picture&gt;
+	//   &lt;source srcset="split-cursor-dark.png" media="(prefers-color-scheme: dark)"&gt;
+	//   &lt;img alt="Strong and weak cursors" src="split-cursor-light.png"&gt;
+	// &lt;/picture&gt;
+	// 
+	// The strong cursor has a little arrow pointing to the right, the weak
+	// cursor to the left. Typing a 'c' in this situation will insert the
+	// character after the 'b', and typing another Hebrew character, like 'ג',
+	// will insert it at the end.
+	GetCursorPos(int) (Rectangle, Rectangle)
 	// GetDirection wraps pango_layout_get_direction
 	// 
 	// The function takes the following parameters:
@@ -7320,14 +7445,14 @@ type Layout interface {
 	// 
 	// The function returns the following values:
 	// 
-	// 	- ret Direction 
+	// 	- goret Direction 
 	//
 	// Gets the text direction at the given character position in @layout.
 	GetDirection(int) Direction
 	// GetEllipsize wraps pango_layout_get_ellipsize
 	// The function returns the following values:
 	// 
-	// 	- ret EllipsizeMode 
+	// 	- goret EllipsizeMode 
 	//
 	// Gets the type of ellipsization being performed for @layout.
 	// 
@@ -7336,17 +7461,36 @@ type Layout interface {
 	// Use [method@Pango.Layout.is_ellipsized] to query whether any
 	// paragraphs were actually ellipsized.
 	GetEllipsize() EllipsizeMode
+	// GetExtents wraps pango_layout_get_extents
+	// The function returns the following values:
+	// 
+	// 	- inkRect Rectangle: rectangle used to store the extents of the
+	//   layout as drawn 
+	// 	- logicalRect Rectangle: rectangle used to store the logical
+	//   extents of the layout 
+	//
+	// Computes the logical and ink extents of @layout.
+	// 
+	// Logical extents are usually what you want for positioning things. Note
+	// that both extents may have non-zero x and y. You may want to use those
+	// to offset where you render the layout. Not doing that is a very typical
+	// bug that shows up as right-to-left layouts not being correctly positioned
+	// in a layout with a set width.
+	// 
+	// The extents are given in layout coordinates and in Pango units; layout
+	// coordinates begin at the top left corner of the layout.
+	GetExtents() (Rectangle, Rectangle)
 	// GetFontDescription wraps pango_layout_get_font_description
 	// The function returns the following values:
 	// 
-	// 	- ret FontDescription 
+	// 	- goret *FontDescription 
 	//
 	// Gets the font description for the layout, if any.
-	GetFontDescription() FontDescription
+	GetFontDescription() *FontDescription
 	// GetHeight wraps pango_layout_get_height
 	// The function returns the following values:
 	// 
-	// 	- ret int 
+	// 	- goret int 
 	//
 	// Gets the height of layout used for ellipsization.
 	// 
@@ -7355,7 +7499,7 @@ type Layout interface {
 	// GetIndent wraps pango_layout_get_indent
 	// The function returns the following values:
 	// 
-	// 	- ret int 
+	// 	- goret int 
 	//
 	// Gets the paragraph indent width in Pango units.
 	// 
@@ -7364,14 +7508,14 @@ type Layout interface {
 	// GetIter wraps pango_layout_get_iter
 	// The function returns the following values:
 	// 
-	// 	- ret LayoutIter 
+	// 	- goret *LayoutIter 
 	//
 	// Returns an iterator to iterate over the visual extents of the layout.
-	GetIter() LayoutIter
+	GetIter() *LayoutIter
 	// GetJustify wraps pango_layout_get_justify
 	// The function returns the following values:
 	// 
-	// 	- ret bool 
+	// 	- goret bool 
 	//
 	// Gets whether each complete line should be stretched to fill the entire
 	// width of the layout.
@@ -7379,7 +7523,7 @@ type Layout interface {
 	// GetJustifyLastLine wraps pango_layout_get_justify_last_line
 	// The function returns the following values:
 	// 
-	// 	- ret bool 
+	// 	- goret bool 
 	//
 	// Gets whether the last line should be stretched
 	// to fill the entire width of the layout.
@@ -7393,17 +7537,17 @@ type Layout interface {
 	// 
 	// The function returns the following values:
 	// 
-	// 	- ret LayoutLine 
+	// 	- goret *LayoutLine 
 	//
 	// Retrieves a particular line from a `PangoLayout`.
 	// 
 	// Use the faster [method@Pango.Layout.get_line_readonly] if you do not
 	// plan to modify the contents of the line (glyphs, glyph widths, etc.).
-	GetLine(int) LayoutLine
+	GetLine(int) *LayoutLine
 	// GetLineCount wraps pango_layout_get_line_count
 	// The function returns the following values:
 	// 
-	// 	- ret int 
+	// 	- goret int 
 	//
 	// Retrieves the count of lines for the @layout.
 	GetLineCount() int
@@ -7416,44 +7560,29 @@ type Layout interface {
 	// 
 	// The function returns the following values:
 	// 
-	// 	- ret LayoutLine 
+	// 	- goret *LayoutLine 
 	//
 	// Retrieves a particular line from a `PangoLayout`.
 	// 
 	// This is a faster alternative to [method@Pango.Layout.get_line],
 	// but the user is not expected to modify the contents of the line
 	// (glyphs, glyph widths, etc.).
-	GetLineReadonly(int) LayoutLine
+	GetLineReadonly(int) *LayoutLine
 	// GetLineSpacing wraps pango_layout_get_line_spacing
 	// The function returns the following values:
 	// 
-	// 	- ret float32 
+	// 	- goret float32 
 	//
 	// Gets the line spacing factor of @layout.
 	// 
 	// See [method@Pango.Layout.set_line_spacing].
 	GetLineSpacing() float32
-	// GetLogAttrs wraps pango_layout_get_log_attrs
-	// The function returns the following values:
-	// 
-	// 	- attrs array: 
-	//   location to store a pointer to an array of logical attributes.
-	//   This value must be freed with g_free(). 
-	// 	- nAttrs int: location to store the number of the attributes in the
-	//   array. (The stored value will be one more than the total number
-	//   of characters in the layout, since there need to be attributes
-	//   corresponding to both the position before the first character
-	//   and the position after the last character.) 
-	//
-	// Retrieves an array of logical attributes for each character in
-	// the @layout.
-	GetLogAttrs() (array)
 	// GetLogAttrsReadonly wraps pango_layout_get_log_attrs_readonly
 	// The function returns the following values:
 	// 
 	// 	- nAttrs int: location to store the number of the attributes in
 	//   the array 
-	// 	- ret array 
+	// 	- goret []LogAttr 
 	//
 	// Retrieves an array of logical attributes for each character in
 	// the @layout.
@@ -7466,7 +7595,22 @@ type Layout interface {
 	// than the total number of characters in the layout, since there
 	// need to be attributes corresponding to both the position before
 	// the first character and the position after the last character.
-	GetLogAttrsReadonly() (int, array)
+	GetLogAttrsReadonly() (int, []LogAttr)
+	// GetPixelExtents wraps pango_layout_get_pixel_extents
+	// The function returns the following values:
+	// 
+	// 	- inkRect Rectangle: rectangle used to store the extents of the
+	//   layout as drawn 
+	// 	- logicalRect Rectangle: rectangle used to store the logical
+	//   extents of the layout 
+	//
+	// Computes the logical and ink extents of @layout in device units.
+	// 
+	// This function just calls [method@Pango.Layout.get_extents] followed by
+	// two [func@extents_to_pixels] calls, rounding @ink_rect and @logical_rect
+	// such that the rounded rectangles fully contain the unrounded one (that is,
+	// passes them as first argument to [func@Pango.extents_to_pixels]).
+	GetPixelExtents() (Rectangle, Rectangle)
 	// GetPixelSize wraps pango_layout_get_pixel_size
 	// The function returns the following values:
 	// 
@@ -7483,7 +7627,7 @@ type Layout interface {
 	// GetSerial wraps pango_layout_get_serial
 	// The function returns the following values:
 	// 
-	// 	- ret uint 
+	// 	- goret uint 
 	//
 	// Returns the current serial number of @layout.
 	// 
@@ -7501,7 +7645,7 @@ type Layout interface {
 	// GetSingleParagraphMode wraps pango_layout_get_single_paragraph_mode
 	// The function returns the following values:
 	// 
-	// 	- ret bool 
+	// 	- goret bool 
 	//
 	// Obtains whether @layout is in single paragraph mode.
 	// 
@@ -7521,14 +7665,14 @@ type Layout interface {
 	// GetSpacing wraps pango_layout_get_spacing
 	// The function returns the following values:
 	// 
-	// 	- ret int 
+	// 	- goret int 
 	//
 	// Gets the amount of spacing between the lines of the layout.
 	GetSpacing() int
 	// GetTabs wraps pango_layout_get_tabs
 	// The function returns the following values:
 	// 
-	// 	- ret TabArray 
+	// 	- goret *TabArray 
 	//
 	// Gets the current `PangoTabArray` used by this layout.
 	// 
@@ -7536,11 +7680,11 @@ type Layout interface {
 	// in use and %NULL is returned. Default tabs are every 8 spaces.
 	// 
 	// The return value should be freed with [method@Pango.TabArray.free].
-	GetTabs() TabArray
+	GetTabs() *TabArray
 	// GetText wraps pango_layout_get_text
 	// The function returns the following values:
 	// 
-	// 	- ret string 
+	// 	- goret string 
 	//
 	// Gets the text in the layout.
 	// 
@@ -7549,7 +7693,7 @@ type Layout interface {
 	// GetUnknownGlyphsCount wraps pango_layout_get_unknown_glyphs_count
 	// The function returns the following values:
 	// 
-	// 	- ret int 
+	// 	- goret int 
 	//
 	// Counts the number of unknown glyphs in @layout.
 	// 
@@ -7561,14 +7705,14 @@ type Layout interface {
 	// GetWidth wraps pango_layout_get_width
 	// The function returns the following values:
 	// 
-	// 	- ret int 
+	// 	- goret int 
 	//
 	// Gets the width to which the lines of the `PangoLayout` should wrap.
 	GetWidth() int
 	// GetWrap wraps pango_layout_get_wrap
 	// The function returns the following values:
 	// 
-	// 	- ret WrapMode 
+	// 	- goret WrapMode 
 	//
 	// Gets the wrap mode for the layout.
 	// 
@@ -7595,10 +7739,28 @@ type Layout interface {
 	// 
 	// The X position is measured from the left edge of the line.
 	IndexToLineX(int, bool) (int, int)
+	// IndexToPos wraps pango_layout_index_to_pos
+	// 
+	// The function takes the following parameters:
+	// 
+	// 	- index_ int: byte index within @layout 
+	// 
+	// The function returns the following values:
+	// 
+	// 	- pos Rectangle: rectangle in which to store the position of the grapheme 
+	//
+	// Converts from an index within a `PangoLayout` to the onscreen position
+	// corresponding to the grapheme at that index.
+	// 
+	// The returns is represented as rectangle. Note that `pos-&gt;x` is
+	// always the leading edge of the grapheme and `pos-&gt;x + pos-&gt;width` the
+	// trailing edge of the grapheme. If the directionality of the grapheme
+	// is right-to-left, then `pos-&gt;width` will be negative.
+	IndexToPos(int) Rectangle
 	// IsEllipsized wraps pango_layout_is_ellipsized
 	// The function returns the following values:
 	// 
-	// 	- ret bool 
+	// 	- goret bool 
 	//
 	// Queries whether the layout had to ellipsize any paragraphs.
 	// 
@@ -7610,7 +7772,7 @@ type Layout interface {
 	// IsWrapped wraps pango_layout_is_wrapped
 	// The function returns the following values:
 	// 
-	// 	- ret bool 
+	// 	- goret bool 
 	//
 	// Queries whether the layout had to wrap any paragraphs.
 	// 
@@ -7661,6 +7823,25 @@ type Layout interface {
 	// call to this function may move the cursor over multiple characters
 	// when multiple characters combine to form a single grapheme.
 	MoveCursorVisually(bool, int, int, int) (int, int)
+	// Serialize wraps pango_layout_serialize
+	// 
+	// The function takes the following parameters:
+	// 
+	// 	- flags LayoutSerializeFlags: `PangoLayoutSerializeFlags` 
+	// 
+	// The function returns the following values:
+	// 
+	// 	- goret *glib.Bytes 
+	//
+	// Serializes the @layout for later deserialization via [func@Pango.Layout.deserialize].
+	// 
+	// There are no guarantees about the format of the output across different
+	// versions of Pango and [func@Pango.Layout.deserialize] will reject data
+	// that it cannot parse.
+	// 
+	// The intended use of this function is testing, benchmarking and debugging.
+	// The format is not meant as a permanent storage format.
+	Serialize(LayoutSerializeFlags) *glib.Bytes
 	// SetAlignment wraps pango_layout_set_alignment
 	// 
 	// The function takes the following parameters:
@@ -7676,12 +7857,12 @@ type Layout interface {
 	// 
 	// The function takes the following parameters:
 	// 
-	// 	- attrs AttrList (nullable): a `PangoAttrList` 
+	// 	- attrs *AttrList (nullable): a `PangoAttrList` 
 	//
 	// Sets the text attributes for a layout object.
 	// 
 	// References @attrs, so the caller can unref its reference.
-	SetAttributes(AttrList)
+	SetAttributes(*AttrList)
 	// SetAutoDir wraps pango_layout_set_auto_dir
 	// 
 	// The function takes the following parameters:
@@ -7732,14 +7913,14 @@ type Layout interface {
 	// 
 	// The function takes the following parameters:
 	// 
-	// 	- desc FontDescription (nullable): the new `PangoFontDescription`
+	// 	- desc *FontDescription (nullable): the new `PangoFontDescription`
 	//   to unset the current font description 
 	//
 	// Sets the default font description for the layout.
 	// 
 	// If no font description is set on the layout, the
 	// font description from the layout's context is used.
-	SetFontDescription(FontDescription)
+	SetFontDescription(*FontDescription)
 	// SetHeight wraps pango_layout_set_height
 	// 
 	// The function takes the following parameters:
@@ -7938,7 +8119,7 @@ type Layout interface {
 	// 
 	// The function takes the following parameters:
 	// 
-	// 	- tabs TabArray (nullable): a `PangoTabArray` 
+	// 	- tabs *TabArray (nullable): a `PangoTabArray` 
 	//
 	// Sets the tabs to use for @layout, overriding the default tabs.
 	// 
@@ -7953,7 +8134,7 @@ type Layout interface {
 	// Justification will move content away from its tab-aligned
 	// positions. The same is true for alignments other than
 	// %PANGO_ALIGN_LEFT.
-	SetTabs(TabArray)
+	SetTabs(*TabArray)
 	// SetText wraps pango_layout_set_text
 	// 
 	// The function takes the following parameters:
@@ -8010,7 +8191,7 @@ type Layout interface {
 	// 
 	// The function returns the following values:
 	// 
-	// 	- ret bool 
+	// 	- goret bool 
 	// 	- _goerr error (nullable): an error 
 	//
 	// A convenience method to serialize a layout to a file.
@@ -8037,7 +8218,7 @@ type Layout interface {
 	//   in the grapheme the user clicked. It will either be zero, or the
 	//   number of characters in the grapheme. 0 represents the leading edge
 	//   of the grapheme. 
-	// 	- ret bool 
+	// 	- goret bool 
 	//
 	// Converts from X and Y position within a layout to the byte index to the
 	// character at that logical position.
@@ -8057,23 +8238,18 @@ func unsafeWrapLayout(base *gobject.ObjectInstance) *LayoutInstance {
 	}
 }
 
-func marshalLayoutInstance(p uintptr) (interface{}, error) {
-	return unsafeWrapLayout(gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Object()), nil
-}
-
-// UnsafeLayoutFromGlibBorrow is used to convert raw PangoLayout pointers to go. This is used by the bindings internally.
-func UnsafeLayoutFromGlibBorrow(c unsafe.Pointer) Layout {
-	return gobject.TODOBorrow(c).(Layout)
+func marshalLayoutInstance(p unsafe.Pointer) (any, error) {
+	return unsafeWrapLayout(gobject.ValueFromNative(p).Object()), nil
 }
 
 // UnsafeLayoutFromGlibNone is used to convert raw PangoLayout pointers to go while taking a reference and attaching a finalizer. This is used by the bindings internally.
 func UnsafeLayoutFromGlibNone(c unsafe.Pointer) Layout {
-	return gobject.Take(c).(Layout)
+	return gobject.UnsafeObjectFromGlibNone(c).(Layout)
 }
 
 // UnsafeLayoutFromGlibFull is used to convert raw PangoLayout pointers to go while attaching a finalizer. This is used by the bindings internally.
 func UnsafeLayoutFromGlibFull(c unsafe.Pointer) Layout {
-	return gobject.AssumeOwnership(c).(Layout)
+	return gobject.UnsafeObjectFromGlibFull(c).(Layout)
 }
 
 func (l *LayoutInstance) upcastToPangoLayout() *LayoutInstance {
@@ -8082,12 +8258,12 @@ func (l *LayoutInstance) upcastToPangoLayout() *LayoutInstance {
 
 // UnsafeLayoutToGlibNone is used to convert the instance to it's C value PangoLayout. This is used by the bindings internally.
 func UnsafeLayoutToGlibNone(c Layout) unsafe.Pointer {
-	return gobject.TODOToNone(c)
+	return gobject.UnsafeObjectToGlibNone(c)
 }
 
 // UnsafeLayoutToGlibFull is used to convert the instance to it's C value PangoLayout, while removeing the finalizer. This is used by the bindings internally.
 func UnsafeLayoutToGlibFull(c Layout) unsafe.Pointer {
-	return gobject.TODOToFull(c)
+	return gobject.UnsafeObjectToGlibFull(c)
 }
 
 // NewLayoutInstance wraps pango_layout_new
@@ -8098,7 +8274,7 @@ func UnsafeLayoutToGlibFull(c Layout) unsafe.Pointer {
 // 
 // The function returns the following values:
 // 
-// 	- ret Layout 
+// 	- goret Layout 
 //
 // Create a new `PangoLayout` object with attributes initialized to
 // default values for a particular `PangoContext`.
@@ -8111,11 +8287,58 @@ func NewLayoutInstance(context Context) Layout {
 	cret = C.pango_layout_new(carg1)
 	runtime.KeepAlive(context)
 
-	var ret Layout
+	var goret Layout
 
-	ret = UnsafeLayoutFromGlibFull(unsafe.Pointer(cret))
+	goret = UnsafeLayoutFromGlibFull(unsafe.Pointer(cret))
 
-	return ret
+	return goret
+}
+
+// LayoutInstanceDeserialize wraps pango_layout_deserialize
+// 
+// The function takes the following parameters:
+// 
+// 	- context Context: a `PangoContext` 
+// 	- bytes *glib.Bytes: the bytes containing the data 
+// 	- flags LayoutDeserializeFlags: `PangoLayoutDeserializeFlags` 
+// 
+// The function returns the following values:
+// 
+// 	- goret Layout 
+// 	- _goerr error (nullable): an error 
+//
+// Loads data previously created via [method@Pango.Layout.serialize].
+// 
+// For a discussion of the supported format, see that function.
+// 
+// Note: to verify that the returned layout is identical to
+// the one that was serialized, you can compare @bytes to the
+// result of serializing the layout again.
+func LayoutInstanceDeserialize(context Context, bytes *glib.Bytes, flags LayoutDeserializeFlags) (Layout, error) {
+	var carg1 *C.PangoContext               // in, none, converted
+	var carg2 *C.GBytes                     // in, none, converted
+	var carg3 C.PangoLayoutDeserializeFlags // in, none, casted
+	var cret  *C.PangoLayout                // return, full, converted
+	var _cerr *C.GError                     // out, full, converted, nullable
+
+	carg1 = (*C.PangoContext)(UnsafeContextToGlibNone(context))
+	carg2 = (*C.GBytes)(glib.UnsafeBytesToGlibNone(bytes))
+	carg3 = C.PangoLayoutDeserializeFlags(flags)
+
+	cret = C.pango_layout_deserialize(carg1, carg2, carg3, &_cerr)
+	runtime.KeepAlive(context)
+	runtime.KeepAlive(bytes)
+	runtime.KeepAlive(flags)
+
+	var goret  Layout
+	var _goerr error
+
+	goret = UnsafeLayoutFromGlibFull(unsafe.Pointer(cret))
+	if _cerr != nil {
+		_goerr = glib.UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
+	}
+
+	return goret, _goerr
 }
 
 // ContextChanged wraps pango_layout_context_changed
@@ -8137,7 +8360,7 @@ func (layout *LayoutInstance) ContextChanged() {
 // Copy wraps pango_layout_copy
 // The function returns the following values:
 // 
-// 	- ret Layout 
+// 	- goret Layout 
 //
 // Creates a deep copy-by-value of the layout.
 // 
@@ -8152,17 +8375,17 @@ func (src *LayoutInstance) Copy() Layout {
 	cret = C.pango_layout_copy(carg0)
 	runtime.KeepAlive(src)
 
-	var ret Layout
+	var goret Layout
 
-	ret = UnsafeLayoutFromGlibFull(unsafe.Pointer(cret))
+	goret = UnsafeLayoutFromGlibFull(unsafe.Pointer(cret))
 
-	return ret
+	return goret
 }
 
 // GetAlignment wraps pango_layout_get_alignment
 // The function returns the following values:
 // 
-// 	- ret Alignment 
+// 	- goret Alignment 
 //
 // Gets the alignment for the layout: how partial lines are
 // positioned within the horizontal space available.
@@ -8175,20 +8398,20 @@ func (layout *LayoutInstance) GetAlignment() Alignment {
 	cret = C.pango_layout_get_alignment(carg0)
 	runtime.KeepAlive(layout)
 
-	var ret Alignment
+	var goret Alignment
 
-	ret = Alignment(cret)
+	goret = Alignment(cret)
 
-	return ret
+	return goret
 }
 
 // GetAttributes wraps pango_layout_get_attributes
 // The function returns the following values:
 // 
-// 	- ret AttrList 
+// 	- goret *AttrList 
 //
 // Gets the attribute list for the layout, if any.
-func (layout *LayoutInstance) GetAttributes() AttrList {
+func (layout *LayoutInstance) GetAttributes() *AttrList {
 	var carg0 *C.PangoLayout   // in, none, converted
 	var cret  *C.PangoAttrList // return, none, converted
 
@@ -8197,17 +8420,17 @@ func (layout *LayoutInstance) GetAttributes() AttrList {
 	cret = C.pango_layout_get_attributes(carg0)
 	runtime.KeepAlive(layout)
 
-	var ret AttrList
+	var goret *AttrList
 
-	ret = UnsafeAttrListFromGlibNone(unsafe.Pointer(cret))
+	goret = UnsafeAttrListFromGlibNone(unsafe.Pointer(cret))
 
-	return ret
+	return goret
 }
 
 // GetAutoDir wraps pango_layout_get_auto_dir
 // The function returns the following values:
 // 
-// 	- ret bool 
+// 	- goret bool 
 //
 // Gets whether to calculate the base direction for the layout
 // according to its contents.
@@ -8222,19 +8445,19 @@ func (layout *LayoutInstance) GetAutoDir() bool {
 	cret = C.pango_layout_get_auto_dir(carg0)
 	runtime.KeepAlive(layout)
 
-	var ret bool
+	var goret bool
 
 	if cret != 0 {
-		ret = true
+		goret = true
 	}
 
-	return ret
+	return goret
 }
 
 // GetBaseline wraps pango_layout_get_baseline
 // The function returns the following values:
 // 
-// 	- ret int 
+// 	- goret int 
 //
 // Gets the Y position of baseline of the first line in @layout.
 func (layout *LayoutInstance) GetBaseline() int {
@@ -8246,17 +8469,65 @@ func (layout *LayoutInstance) GetBaseline() int {
 	cret = C.pango_layout_get_baseline(carg0)
 	runtime.KeepAlive(layout)
 
-	var ret int
+	var goret int
 
-	ret = int(cret)
+	goret = int(cret)
 
-	return ret
+	return goret
+}
+
+// GetCaretPos wraps pango_layout_get_caret_pos
+// 
+// The function takes the following parameters:
+// 
+// 	- index_ int: the byte index of the cursor 
+// 
+// The function returns the following values:
+// 
+// 	- strongPos Rectangle: location to store the strong cursor position 
+// 	- weakPos Rectangle: location to store the weak cursor position 
+//
+// Given an index within a layout, determines the positions that of the
+// strong and weak cursors if the insertion point is at that index.
+// 
+// This is a variant of [method@Pango.Layout.get_cursor_pos] that applies
+// font metric information about caret slope and offset to the positions
+// it returns.
+// 
+// &lt;picture&gt;
+//   &lt;source srcset="caret-metrics-dark.png" media="(prefers-color-scheme: dark)"&gt;
+//   &lt;img alt="Caret metrics" src="caret-metrics-light.png"&gt;
+// &lt;/picture&gt;
+func (layout *LayoutInstance) GetCaretPos(index_ int) (Rectangle, Rectangle) {
+	var carg0 *C.PangoLayout   // in, none, converted
+	var carg1 C.int            // in, none, casted
+	var carg2 C.PangoRectangle // out, transfer: none, C Pointers: 0, Name: Rectangle, optional, caller-allocates
+	var carg3 C.PangoRectangle // out, transfer: none, C Pointers: 0, Name: Rectangle, optional, caller-allocates
+
+	carg0 = (*C.PangoLayout)(UnsafeLayoutToGlibNone(layout))
+	carg1 = C.int(index_)
+
+	C.pango_layout_get_caret_pos(carg0, carg1, &carg2, &carg3)
+	runtime.KeepAlive(layout)
+	runtime.KeepAlive(index_)
+
+	var strongPos Rectangle
+	var weakPos   Rectangle
+
+	_ = strongPos
+	_ = carg2
+	panic("unimplemented conversion of Rectangle (PangoRectangle)")
+	_ = weakPos
+	_ = carg3
+	panic("unimplemented conversion of Rectangle (PangoRectangle)")
+
+	return strongPos, weakPos
 }
 
 // GetCharacterCount wraps pango_layout_get_character_count
 // The function returns the following values:
 // 
-// 	- ret int 
+// 	- goret int 
 //
 // Returns the number of Unicode characters in the
 // the text of @layout.
@@ -8269,17 +8540,17 @@ func (layout *LayoutInstance) GetCharacterCount() int {
 	cret = C.pango_layout_get_character_count(carg0)
 	runtime.KeepAlive(layout)
 
-	var ret int
+	var goret int
 
-	ret = int(cret)
+	goret = int(cret)
 
-	return ret
+	return goret
 }
 
 // GetContext wraps pango_layout_get_context
 // The function returns the following values:
 // 
-// 	- ret Context 
+// 	- goret Context 
 //
 // Retrieves the `PangoContext` used for this layout.
 func (layout *LayoutInstance) GetContext() Context {
@@ -8291,11 +8562,75 @@ func (layout *LayoutInstance) GetContext() Context {
 	cret = C.pango_layout_get_context(carg0)
 	runtime.KeepAlive(layout)
 
-	var ret Context
+	var goret Context
 
-	ret = UnsafeContextFromGlibNone(unsafe.Pointer(cret))
+	goret = UnsafeContextFromGlibNone(unsafe.Pointer(cret))
 
-	return ret
+	return goret
+}
+
+// GetCursorPos wraps pango_layout_get_cursor_pos
+// 
+// The function takes the following parameters:
+// 
+// 	- index_ int: the byte index of the cursor 
+// 
+// The function returns the following values:
+// 
+// 	- strongPos Rectangle: location to store the strong cursor position 
+// 	- weakPos Rectangle: location to store the weak cursor position 
+//
+// Given an index within a layout, determines the positions that of the
+// strong and weak cursors if the insertion point is at that index.
+// 
+// The position of each cursor is stored as a zero-width rectangle
+// with the height of the run extents.
+// 
+// &lt;picture&gt;
+//   &lt;source srcset="cursor-positions-dark.png" media="(prefers-color-scheme: dark)"&gt;
+//   &lt;img alt="Cursor positions" src="cursor-positions-light.png"&gt;
+// &lt;/picture&gt;
+// 
+// The strong cursor location is the location where characters of the
+// directionality equal to the base direction of the layout are inserted.
+// The weak cursor location is the location where characters of the
+// directionality opposite to the base direction of the layout are inserted.
+// 
+// The following example shows text with both a strong and a weak cursor.
+// 
+// &lt;picture&gt;
+//   &lt;source srcset="split-cursor-dark.png" media="(prefers-color-scheme: dark)"&gt;
+//   &lt;img alt="Strong and weak cursors" src="split-cursor-light.png"&gt;
+// &lt;/picture&gt;
+// 
+// The strong cursor has a little arrow pointing to the right, the weak
+// cursor to the left. Typing a 'c' in this situation will insert the
+// character after the 'b', and typing another Hebrew character, like 'ג',
+// will insert it at the end.
+func (layout *LayoutInstance) GetCursorPos(index_ int) (Rectangle, Rectangle) {
+	var carg0 *C.PangoLayout   // in, none, converted
+	var carg1 C.int            // in, none, casted
+	var carg2 C.PangoRectangle // out, transfer: none, C Pointers: 0, Name: Rectangle, optional, caller-allocates
+	var carg3 C.PangoRectangle // out, transfer: none, C Pointers: 0, Name: Rectangle, optional, caller-allocates
+
+	carg0 = (*C.PangoLayout)(UnsafeLayoutToGlibNone(layout))
+	carg1 = C.int(index_)
+
+	C.pango_layout_get_cursor_pos(carg0, carg1, &carg2, &carg3)
+	runtime.KeepAlive(layout)
+	runtime.KeepAlive(index_)
+
+	var strongPos Rectangle
+	var weakPos   Rectangle
+
+	_ = strongPos
+	_ = carg2
+	panic("unimplemented conversion of Rectangle (PangoRectangle)")
+	_ = weakPos
+	_ = carg3
+	panic("unimplemented conversion of Rectangle (PangoRectangle)")
+
+	return strongPos, weakPos
 }
 
 // GetDirection wraps pango_layout_get_direction
@@ -8306,7 +8641,7 @@ func (layout *LayoutInstance) GetContext() Context {
 // 
 // The function returns the following values:
 // 
-// 	- ret Direction 
+// 	- goret Direction 
 //
 // Gets the text direction at the given character position in @layout.
 func (layout *LayoutInstance) GetDirection(index int) Direction {
@@ -8321,17 +8656,17 @@ func (layout *LayoutInstance) GetDirection(index int) Direction {
 	runtime.KeepAlive(layout)
 	runtime.KeepAlive(index)
 
-	var ret Direction
+	var goret Direction
 
-	ret = Direction(cret)
+	goret = Direction(cret)
 
-	return ret
+	return goret
 }
 
 // GetEllipsize wraps pango_layout_get_ellipsize
 // The function returns the following values:
 // 
-// 	- ret EllipsizeMode 
+// 	- goret EllipsizeMode 
 //
 // Gets the type of ellipsization being performed for @layout.
 // 
@@ -8348,20 +8683,61 @@ func (layout *LayoutInstance) GetEllipsize() EllipsizeMode {
 	cret = C.pango_layout_get_ellipsize(carg0)
 	runtime.KeepAlive(layout)
 
-	var ret EllipsizeMode
+	var goret EllipsizeMode
 
-	ret = EllipsizeMode(cret)
+	goret = EllipsizeMode(cret)
 
-	return ret
+	return goret
+}
+
+// GetExtents wraps pango_layout_get_extents
+// The function returns the following values:
+// 
+// 	- inkRect Rectangle: rectangle used to store the extents of the
+//   layout as drawn 
+// 	- logicalRect Rectangle: rectangle used to store the logical
+//   extents of the layout 
+//
+// Computes the logical and ink extents of @layout.
+// 
+// Logical extents are usually what you want for positioning things. Note
+// that both extents may have non-zero x and y. You may want to use those
+// to offset where you render the layout. Not doing that is a very typical
+// bug that shows up as right-to-left layouts not being correctly positioned
+// in a layout with a set width.
+// 
+// The extents are given in layout coordinates and in Pango units; layout
+// coordinates begin at the top left corner of the layout.
+func (layout *LayoutInstance) GetExtents() (Rectangle, Rectangle) {
+	var carg0 *C.PangoLayout   // in, none, converted
+	var carg1 C.PangoRectangle // out, transfer: none, C Pointers: 0, Name: Rectangle, optional, caller-allocates
+	var carg2 C.PangoRectangle // out, transfer: none, C Pointers: 0, Name: Rectangle, optional, caller-allocates
+
+	carg0 = (*C.PangoLayout)(UnsafeLayoutToGlibNone(layout))
+
+	C.pango_layout_get_extents(carg0, &carg1, &carg2)
+	runtime.KeepAlive(layout)
+
+	var inkRect     Rectangle
+	var logicalRect Rectangle
+
+	_ = inkRect
+	_ = carg1
+	panic("unimplemented conversion of Rectangle (PangoRectangle)")
+	_ = logicalRect
+	_ = carg2
+	panic("unimplemented conversion of Rectangle (PangoRectangle)")
+
+	return inkRect, logicalRect
 }
 
 // GetFontDescription wraps pango_layout_get_font_description
 // The function returns the following values:
 // 
-// 	- ret FontDescription 
+// 	- goret *FontDescription 
 //
 // Gets the font description for the layout, if any.
-func (layout *LayoutInstance) GetFontDescription() FontDescription {
+func (layout *LayoutInstance) GetFontDescription() *FontDescription {
 	var carg0 *C.PangoLayout          // in, none, converted
 	var cret  *C.PangoFontDescription // return, none, converted
 
@@ -8370,17 +8746,17 @@ func (layout *LayoutInstance) GetFontDescription() FontDescription {
 	cret = C.pango_layout_get_font_description(carg0)
 	runtime.KeepAlive(layout)
 
-	var ret FontDescription
+	var goret *FontDescription
 
-	ret = UnsafeFontDescriptionFromGlibNone(unsafe.Pointer(cret))
+	goret = UnsafeFontDescriptionFromGlibNone(unsafe.Pointer(cret))
 
-	return ret
+	return goret
 }
 
 // GetHeight wraps pango_layout_get_height
 // The function returns the following values:
 // 
-// 	- ret int 
+// 	- goret int 
 //
 // Gets the height of layout used for ellipsization.
 // 
@@ -8394,17 +8770,17 @@ func (layout *LayoutInstance) GetHeight() int {
 	cret = C.pango_layout_get_height(carg0)
 	runtime.KeepAlive(layout)
 
-	var ret int
+	var goret int
 
-	ret = int(cret)
+	goret = int(cret)
 
-	return ret
+	return goret
 }
 
 // GetIndent wraps pango_layout_get_indent
 // The function returns the following values:
 // 
-// 	- ret int 
+// 	- goret int 
 //
 // Gets the paragraph indent width in Pango units.
 // 
@@ -8418,20 +8794,20 @@ func (layout *LayoutInstance) GetIndent() int {
 	cret = C.pango_layout_get_indent(carg0)
 	runtime.KeepAlive(layout)
 
-	var ret int
+	var goret int
 
-	ret = int(cret)
+	goret = int(cret)
 
-	return ret
+	return goret
 }
 
 // GetIter wraps pango_layout_get_iter
 // The function returns the following values:
 // 
-// 	- ret LayoutIter 
+// 	- goret *LayoutIter 
 //
 // Returns an iterator to iterate over the visual extents of the layout.
-func (layout *LayoutInstance) GetIter() LayoutIter {
+func (layout *LayoutInstance) GetIter() *LayoutIter {
 	var carg0 *C.PangoLayout     // in, none, converted
 	var cret  *C.PangoLayoutIter // return, full, converted
 
@@ -8440,17 +8816,17 @@ func (layout *LayoutInstance) GetIter() LayoutIter {
 	cret = C.pango_layout_get_iter(carg0)
 	runtime.KeepAlive(layout)
 
-	var ret LayoutIter
+	var goret *LayoutIter
 
-	ret = UnsafeLayoutIterFromGlibFull(unsafe.Pointer(cret))
+	goret = UnsafeLayoutIterFromGlibFull(unsafe.Pointer(cret))
 
-	return ret
+	return goret
 }
 
 // GetJustify wraps pango_layout_get_justify
 // The function returns the following values:
 // 
-// 	- ret bool 
+// 	- goret bool 
 //
 // Gets whether each complete line should be stretched to fill the entire
 // width of the layout.
@@ -8463,19 +8839,19 @@ func (layout *LayoutInstance) GetJustify() bool {
 	cret = C.pango_layout_get_justify(carg0)
 	runtime.KeepAlive(layout)
 
-	var ret bool
+	var goret bool
 
 	if cret != 0 {
-		ret = true
+		goret = true
 	}
 
-	return ret
+	return goret
 }
 
 // GetJustifyLastLine wraps pango_layout_get_justify_last_line
 // The function returns the following values:
 // 
-// 	- ret bool 
+// 	- goret bool 
 //
 // Gets whether the last line should be stretched
 // to fill the entire width of the layout.
@@ -8488,13 +8864,13 @@ func (layout *LayoutInstance) GetJustifyLastLine() bool {
 	cret = C.pango_layout_get_justify_last_line(carg0)
 	runtime.KeepAlive(layout)
 
-	var ret bool
+	var goret bool
 
 	if cret != 0 {
-		ret = true
+		goret = true
 	}
 
-	return ret
+	return goret
 }
 
 // GetLine wraps pango_layout_get_line
@@ -8506,13 +8882,13 @@ func (layout *LayoutInstance) GetJustifyLastLine() bool {
 // 
 // The function returns the following values:
 // 
-// 	- ret LayoutLine 
+// 	- goret *LayoutLine 
 //
 // Retrieves a particular line from a `PangoLayout`.
 // 
 // Use the faster [method@Pango.Layout.get_line_readonly] if you do not
 // plan to modify the contents of the line (glyphs, glyph widths, etc.).
-func (layout *LayoutInstance) GetLine(line int) LayoutLine {
+func (layout *LayoutInstance) GetLine(line int) *LayoutLine {
 	var carg0 *C.PangoLayout     // in, none, converted
 	var carg1 C.int              // in, none, casted
 	var cret  *C.PangoLayoutLine // return, none, converted
@@ -8524,17 +8900,17 @@ func (layout *LayoutInstance) GetLine(line int) LayoutLine {
 	runtime.KeepAlive(layout)
 	runtime.KeepAlive(line)
 
-	var ret LayoutLine
+	var goret *LayoutLine
 
-	ret = UnsafeLayoutLineFromGlibNone(unsafe.Pointer(cret))
+	goret = UnsafeLayoutLineFromGlibNone(unsafe.Pointer(cret))
 
-	return ret
+	return goret
 }
 
 // GetLineCount wraps pango_layout_get_line_count
 // The function returns the following values:
 // 
-// 	- ret int 
+// 	- goret int 
 //
 // Retrieves the count of lines for the @layout.
 func (layout *LayoutInstance) GetLineCount() int {
@@ -8546,11 +8922,11 @@ func (layout *LayoutInstance) GetLineCount() int {
 	cret = C.pango_layout_get_line_count(carg0)
 	runtime.KeepAlive(layout)
 
-	var ret int
+	var goret int
 
-	ret = int(cret)
+	goret = int(cret)
 
-	return ret
+	return goret
 }
 
 // GetLineReadonly wraps pango_layout_get_line_readonly
@@ -8562,14 +8938,14 @@ func (layout *LayoutInstance) GetLineCount() int {
 // 
 // The function returns the following values:
 // 
-// 	- ret LayoutLine 
+// 	- goret *LayoutLine 
 //
 // Retrieves a particular line from a `PangoLayout`.
 // 
 // This is a faster alternative to [method@Pango.Layout.get_line],
 // but the user is not expected to modify the contents of the line
 // (glyphs, glyph widths, etc.).
-func (layout *LayoutInstance) GetLineReadonly(line int) LayoutLine {
+func (layout *LayoutInstance) GetLineReadonly(line int) *LayoutLine {
 	var carg0 *C.PangoLayout     // in, none, converted
 	var carg1 C.int              // in, none, casted
 	var cret  *C.PangoLayoutLine // return, none, converted
@@ -8581,17 +8957,17 @@ func (layout *LayoutInstance) GetLineReadonly(line int) LayoutLine {
 	runtime.KeepAlive(layout)
 	runtime.KeepAlive(line)
 
-	var ret LayoutLine
+	var goret *LayoutLine
 
-	ret = UnsafeLayoutLineFromGlibNone(unsafe.Pointer(cret))
+	goret = UnsafeLayoutLineFromGlibNone(unsafe.Pointer(cret))
 
-	return ret
+	return goret
 }
 
 // GetLineSpacing wraps pango_layout_get_line_spacing
 // The function returns the following values:
 // 
-// 	- ret float32 
+// 	- goret float32 
 //
 // Gets the line spacing factor of @layout.
 // 
@@ -8605,44 +8981,11 @@ func (layout *LayoutInstance) GetLineSpacing() float32 {
 	cret = C.pango_layout_get_line_spacing(carg0)
 	runtime.KeepAlive(layout)
 
-	var ret float32
+	var goret float32
 
-	ret = float32(cret)
+	goret = float32(cret)
 
-	return ret
-}
-
-// GetLogAttrs wraps pango_layout_get_log_attrs
-// The function returns the following values:
-// 
-// 	- attrs array: 
-//   location to store a pointer to an array of logical attributes.
-//   This value must be freed with g_free(). 
-// 	- nAttrs int: location to store the number of the attributes in the
-//   array. (The stored value will be one more than the total number
-//   of characters in the layout, since there need to be attributes
-//   corresponding to both the position before the first character
-//   and the position after the last character.) 
-//
-// Retrieves an array of logical attributes for each character in
-// the @layout.
-func (layout *LayoutInstance) GetLogAttrs() (array) {
-	var carg0 *C.PangoLayout // in, none, converted
-	var carg1 array          // out, transfer: container, scope: call, implicit: false, skip: false, optional: false, nullable: false, caller-allocates: false, has closure: false, has destroy: false
-	var carg2 C.int          // out, full, casted
-
-	carg0 = (*C.PangoLayout)(UnsafeLayoutToGlibNone(layout))
-
-	C.pango_layout_get_log_attrs(carg0, &carg1, &carg2)
-	runtime.KeepAlive(layout)
-
-	var attrs  array
-	var nAttrs int
-
-	panic("unimplemented conversion of array (array)")
-	nAttrs = int(carg2)
-
-	return attrs
+	return goret
 }
 
 // GetLogAttrsReadonly wraps pango_layout_get_log_attrs_readonly
@@ -8650,7 +8993,7 @@ func (layout *LayoutInstance) GetLogAttrs() (array) {
 // 
 // 	- nAttrs int: location to store the number of the attributes in
 //   the array 
-// 	- ret array 
+// 	- goret []LogAttr 
 //
 // Retrieves an array of logical attributes for each character in
 // the @layout.
@@ -8663,10 +9006,10 @@ func (layout *LayoutInstance) GetLogAttrs() (array) {
 // than the total number of characters in the layout, since there
 // need to be attributes corresponding to both the position before
 // the first character and the position after the last character.
-func (layout *LayoutInstance) GetLogAttrsReadonly() (int, array) {
-	var carg0 *C.PangoLayout // in, none, converted
-	var carg1 C.int          // out, full, casted
-	var cret  array          // return, transfer: none, scope: , implicit: false, skip: false, optional: false, nullable: false, caller-allocates: false, has closure: false, has destroy: false
+func (layout *LayoutInstance) GetLogAttrsReadonly() (int, []LogAttr) {
+	var carg0 *C.PangoLayout  // in, none, converted
+	var carg1 C.int           // out, full, casted
+	var cret  *C.PangoLogAttr // return, transfer: none, C Pointers: 1, Name: array[LogAttr], scope: , array (inner: *typesystem.Record)
 
 	carg0 = (*C.PangoLayout)(UnsafeLayoutToGlibNone(layout))
 
@@ -8674,12 +9017,51 @@ func (layout *LayoutInstance) GetLogAttrsReadonly() (int, array) {
 	runtime.KeepAlive(layout)
 
 	var nAttrs int
-	var ret    array
+	var goret  []LogAttr
 
 	nAttrs = int(carg1)
-	panic("unimplemented conversion of array (array)")
+	_ = goret
+	_ = cret
+	panic("unimplemented conversion of []LogAttr (const PangoLogAttr*)")
 
-	return nAttrs, ret
+	return nAttrs, goret
+}
+
+// GetPixelExtents wraps pango_layout_get_pixel_extents
+// The function returns the following values:
+// 
+// 	- inkRect Rectangle: rectangle used to store the extents of the
+//   layout as drawn 
+// 	- logicalRect Rectangle: rectangle used to store the logical
+//   extents of the layout 
+//
+// Computes the logical and ink extents of @layout in device units.
+// 
+// This function just calls [method@Pango.Layout.get_extents] followed by
+// two [func@extents_to_pixels] calls, rounding @ink_rect and @logical_rect
+// such that the rounded rectangles fully contain the unrounded one (that is,
+// passes them as first argument to [func@Pango.extents_to_pixels]).
+func (layout *LayoutInstance) GetPixelExtents() (Rectangle, Rectangle) {
+	var carg0 *C.PangoLayout   // in, none, converted
+	var carg1 C.PangoRectangle // out, transfer: none, C Pointers: 0, Name: Rectangle, optional, caller-allocates
+	var carg2 C.PangoRectangle // out, transfer: none, C Pointers: 0, Name: Rectangle, optional, caller-allocates
+
+	carg0 = (*C.PangoLayout)(UnsafeLayoutToGlibNone(layout))
+
+	C.pango_layout_get_pixel_extents(carg0, &carg1, &carg2)
+	runtime.KeepAlive(layout)
+
+	var inkRect     Rectangle
+	var logicalRect Rectangle
+
+	_ = inkRect
+	_ = carg1
+	panic("unimplemented conversion of Rectangle (PangoRectangle)")
+	_ = logicalRect
+	_ = carg2
+	panic("unimplemented conversion of Rectangle (PangoRectangle)")
+
+	return inkRect, logicalRect
 }
 
 // GetPixelSize wraps pango_layout_get_pixel_size
@@ -8716,7 +9098,7 @@ func (layout *LayoutInstance) GetPixelSize() (int, int) {
 // GetSerial wraps pango_layout_get_serial
 // The function returns the following values:
 // 
-// 	- ret uint 
+// 	- goret uint 
 //
 // Returns the current serial number of @layout.
 // 
@@ -8739,17 +9121,17 @@ func (layout *LayoutInstance) GetSerial() uint {
 	cret = C.pango_layout_get_serial(carg0)
 	runtime.KeepAlive(layout)
 
-	var ret uint
+	var goret uint
 
-	ret = uint(cret)
+	goret = uint(cret)
 
-	return ret
+	return goret
 }
 
 // GetSingleParagraphMode wraps pango_layout_get_single_paragraph_mode
 // The function returns the following values:
 // 
-// 	- ret bool 
+// 	- goret bool 
 //
 // Obtains whether @layout is in single paragraph mode.
 // 
@@ -8763,13 +9145,13 @@ func (layout *LayoutInstance) GetSingleParagraphMode() bool {
 	cret = C.pango_layout_get_single_paragraph_mode(carg0)
 	runtime.KeepAlive(layout)
 
-	var ret bool
+	var goret bool
 
 	if cret != 0 {
-		ret = true
+		goret = true
 	}
 
-	return ret
+	return goret
 }
 
 // GetSize wraps pango_layout_get_size
@@ -8804,7 +9186,7 @@ func (layout *LayoutInstance) GetSize() (int, int) {
 // GetSpacing wraps pango_layout_get_spacing
 // The function returns the following values:
 // 
-// 	- ret int 
+// 	- goret int 
 //
 // Gets the amount of spacing between the lines of the layout.
 func (layout *LayoutInstance) GetSpacing() int {
@@ -8816,17 +9198,17 @@ func (layout *LayoutInstance) GetSpacing() int {
 	cret = C.pango_layout_get_spacing(carg0)
 	runtime.KeepAlive(layout)
 
-	var ret int
+	var goret int
 
-	ret = int(cret)
+	goret = int(cret)
 
-	return ret
+	return goret
 }
 
 // GetTabs wraps pango_layout_get_tabs
 // The function returns the following values:
 // 
-// 	- ret TabArray 
+// 	- goret *TabArray 
 //
 // Gets the current `PangoTabArray` used by this layout.
 // 
@@ -8834,7 +9216,7 @@ func (layout *LayoutInstance) GetSpacing() int {
 // in use and %NULL is returned. Default tabs are every 8 spaces.
 // 
 // The return value should be freed with [method@Pango.TabArray.free].
-func (layout *LayoutInstance) GetTabs() TabArray {
+func (layout *LayoutInstance) GetTabs() *TabArray {
 	var carg0 *C.PangoLayout   // in, none, converted
 	var cret  *C.PangoTabArray // return, full, converted
 
@@ -8843,17 +9225,17 @@ func (layout *LayoutInstance) GetTabs() TabArray {
 	cret = C.pango_layout_get_tabs(carg0)
 	runtime.KeepAlive(layout)
 
-	var ret TabArray
+	var goret *TabArray
 
-	ret = UnsafeTabArrayFromGlibFull(unsafe.Pointer(cret))
+	goret = UnsafeTabArrayFromGlibFull(unsafe.Pointer(cret))
 
-	return ret
+	return goret
 }
 
 // GetText wraps pango_layout_get_text
 // The function returns the following values:
 // 
-// 	- ret string 
+// 	- goret string 
 //
 // Gets the text in the layout.
 // 
@@ -8867,17 +9249,17 @@ func (layout *LayoutInstance) GetText() string {
 	cret = C.pango_layout_get_text(carg0)
 	runtime.KeepAlive(layout)
 
-	var ret string
+	var goret string
 
-	ret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
 
-	return ret
+	return goret
 }
 
 // GetUnknownGlyphsCount wraps pango_layout_get_unknown_glyphs_count
 // The function returns the following values:
 // 
-// 	- ret int 
+// 	- goret int 
 //
 // Counts the number of unknown glyphs in @layout.
 // 
@@ -8894,17 +9276,17 @@ func (layout *LayoutInstance) GetUnknownGlyphsCount() int {
 	cret = C.pango_layout_get_unknown_glyphs_count(carg0)
 	runtime.KeepAlive(layout)
 
-	var ret int
+	var goret int
 
-	ret = int(cret)
+	goret = int(cret)
 
-	return ret
+	return goret
 }
 
 // GetWidth wraps pango_layout_get_width
 // The function returns the following values:
 // 
-// 	- ret int 
+// 	- goret int 
 //
 // Gets the width to which the lines of the `PangoLayout` should wrap.
 func (layout *LayoutInstance) GetWidth() int {
@@ -8916,17 +9298,17 @@ func (layout *LayoutInstance) GetWidth() int {
 	cret = C.pango_layout_get_width(carg0)
 	runtime.KeepAlive(layout)
 
-	var ret int
+	var goret int
 
-	ret = int(cret)
+	goret = int(cret)
 
-	return ret
+	return goret
 }
 
 // GetWrap wraps pango_layout_get_wrap
 // The function returns the following values:
 // 
-// 	- ret WrapMode 
+// 	- goret WrapMode 
 //
 // Gets the wrap mode for the layout.
 // 
@@ -8941,11 +9323,11 @@ func (layout *LayoutInstance) GetWrap() WrapMode {
 	cret = C.pango_layout_get_wrap(carg0)
 	runtime.KeepAlive(layout)
 
-	var ret WrapMode
+	var goret WrapMode
 
-	ret = WrapMode(cret)
+	goret = WrapMode(cret)
 
-	return ret
+	return goret
 }
 
 // IndexToLineX wraps pango_layout_index_to_line_x
@@ -8994,10 +9376,48 @@ func (layout *LayoutInstance) IndexToLineX(index_ int, trailing bool) (int, int)
 	return line, xPos
 }
 
+// IndexToPos wraps pango_layout_index_to_pos
+// 
+// The function takes the following parameters:
+// 
+// 	- index_ int: byte index within @layout 
+// 
+// The function returns the following values:
+// 
+// 	- pos Rectangle: rectangle in which to store the position of the grapheme 
+//
+// Converts from an index within a `PangoLayout` to the onscreen position
+// corresponding to the grapheme at that index.
+// 
+// The returns is represented as rectangle. Note that `pos-&gt;x` is
+// always the leading edge of the grapheme and `pos-&gt;x + pos-&gt;width` the
+// trailing edge of the grapheme. If the directionality of the grapheme
+// is right-to-left, then `pos-&gt;width` will be negative.
+func (layout *LayoutInstance) IndexToPos(index_ int) Rectangle {
+	var carg0 *C.PangoLayout   // in, none, converted
+	var carg1 C.int            // in, none, casted
+	var carg2 C.PangoRectangle // out, transfer: none, C Pointers: 0, Name: Rectangle, caller-allocates
+
+	carg0 = (*C.PangoLayout)(UnsafeLayoutToGlibNone(layout))
+	carg1 = C.int(index_)
+
+	C.pango_layout_index_to_pos(carg0, carg1, &carg2)
+	runtime.KeepAlive(layout)
+	runtime.KeepAlive(index_)
+
+	var pos Rectangle
+
+	_ = pos
+	_ = carg2
+	panic("unimplemented conversion of Rectangle (PangoRectangle)")
+
+	return pos
+}
+
 // IsEllipsized wraps pango_layout_is_ellipsized
 // The function returns the following values:
 // 
-// 	- ret bool 
+// 	- goret bool 
 //
 // Queries whether the layout had to ellipsize any paragraphs.
 // 
@@ -9014,19 +9434,19 @@ func (layout *LayoutInstance) IsEllipsized() bool {
 	cret = C.pango_layout_is_ellipsized(carg0)
 	runtime.KeepAlive(layout)
 
-	var ret bool
+	var goret bool
 
 	if cret != 0 {
-		ret = true
+		goret = true
 	}
 
-	return ret
+	return goret
 }
 
 // IsWrapped wraps pango_layout_is_wrapped
 // The function returns the following values:
 // 
-// 	- ret bool 
+// 	- goret bool 
 //
 // Queries whether the layout had to wrap any paragraphs.
 // 
@@ -9042,13 +9462,13 @@ func (layout *LayoutInstance) IsWrapped() bool {
 	cret = C.pango_layout_is_wrapped(carg0)
 	runtime.KeepAlive(layout)
 
-	var ret bool
+	var goret bool
 
 	if cret != 0 {
-		ret = true
+		goret = true
 	}
 
-	return ret
+	return goret
 }
 
 // MoveCursorVisually wraps pango_layout_move_cursor_visually
@@ -9126,6 +9546,43 @@ func (layout *LayoutInstance) MoveCursorVisually(strong bool, oldIndex int, oldT
 	return newIndex, newTrailing
 }
 
+// Serialize wraps pango_layout_serialize
+// 
+// The function takes the following parameters:
+// 
+// 	- flags LayoutSerializeFlags: `PangoLayoutSerializeFlags` 
+// 
+// The function returns the following values:
+// 
+// 	- goret *glib.Bytes 
+//
+// Serializes the @layout for later deserialization via [func@Pango.Layout.deserialize].
+// 
+// There are no guarantees about the format of the output across different
+// versions of Pango and [func@Pango.Layout.deserialize] will reject data
+// that it cannot parse.
+// 
+// The intended use of this function is testing, benchmarking and debugging.
+// The format is not meant as a permanent storage format.
+func (layout *LayoutInstance) Serialize(flags LayoutSerializeFlags) *glib.Bytes {
+	var carg0 *C.PangoLayout              // in, none, converted
+	var carg1 C.PangoLayoutSerializeFlags // in, none, casted
+	var cret  *C.GBytes                   // return, full, converted
+
+	carg0 = (*C.PangoLayout)(UnsafeLayoutToGlibNone(layout))
+	carg1 = C.PangoLayoutSerializeFlags(flags)
+
+	cret = C.pango_layout_serialize(carg0, carg1)
+	runtime.KeepAlive(layout)
+	runtime.KeepAlive(flags)
+
+	var goret *glib.Bytes
+
+	goret = glib.UnsafeBytesFromGlibFull(unsafe.Pointer(cret))
+
+	return goret
+}
+
 // SetAlignment wraps pango_layout_set_alignment
 // 
 // The function takes the following parameters:
@@ -9152,12 +9609,12 @@ func (layout *LayoutInstance) SetAlignment(alignment Alignment) {
 // 
 // The function takes the following parameters:
 // 
-// 	- attrs AttrList (nullable): a `PangoAttrList` 
+// 	- attrs *AttrList (nullable): a `PangoAttrList` 
 //
 // Sets the text attributes for a layout object.
 // 
 // References @attrs, so the caller can unref its reference.
-func (layout *LayoutInstance) SetAttributes(attrs AttrList) {
+func (layout *LayoutInstance) SetAttributes(attrs *AttrList) {
 	var carg0 *C.PangoLayout   // in, none, converted
 	var carg1 *C.PangoAttrList // in, none, converted, nullable
 
@@ -9245,14 +9702,14 @@ func (layout *LayoutInstance) SetEllipsize(ellipsize EllipsizeMode) {
 // 
 // The function takes the following parameters:
 // 
-// 	- desc FontDescription (nullable): the new `PangoFontDescription`
+// 	- desc *FontDescription (nullable): the new `PangoFontDescription`
 //   to unset the current font description 
 //
 // Sets the default font description for the layout.
 // 
 // If no font description is set on the layout, the
 // font description from the layout's context is used.
-func (layout *LayoutInstance) SetFontDescription(desc FontDescription) {
+func (layout *LayoutInstance) SetFontDescription(desc *FontDescription) {
 	var carg0 *C.PangoLayout          // in, none, converted
 	var carg1 *C.PangoFontDescription // in, none, converted, nullable
 
@@ -9587,7 +10044,7 @@ func (layout *LayoutInstance) SetSpacing(spacing int) {
 // 
 // The function takes the following parameters:
 // 
-// 	- tabs TabArray (nullable): a `PangoTabArray` 
+// 	- tabs *TabArray (nullable): a `PangoTabArray` 
 //
 // Sets the tabs to use for @layout, overriding the default tabs.
 // 
@@ -9602,7 +10059,7 @@ func (layout *LayoutInstance) SetSpacing(spacing int) {
 // Justification will move content away from its tab-aligned
 // positions. The same is true for alignments other than
 // %PANGO_ALIGN_LEFT.
-func (layout *LayoutInstance) SetTabs(tabs TabArray) {
+func (layout *LayoutInstance) SetTabs(tabs *TabArray) {
 	var carg0 *C.PangoLayout   // in, none, converted
 	var carg1 *C.PangoTabArray // in, none, converted, nullable
 
@@ -9709,7 +10166,7 @@ func (layout *LayoutInstance) SetWrap(wrap WrapMode) {
 // 
 // The function returns the following values:
 // 
-// 	- ret bool 
+// 	- goret bool 
 // 	- _goerr error (nullable): an error 
 //
 // A convenience method to serialize a layout to a file.
@@ -9738,17 +10195,17 @@ func (layout *LayoutInstance) WriteToFile(flags LayoutSerializeFlags, filename s
 	runtime.KeepAlive(flags)
 	runtime.KeepAlive(filename)
 
-	var ret    bool
+	var goret  bool
 	var _goerr error
 
 	if cret != 0 {
-		ret = true
+		goret = true
 	}
 	if _cerr != nil {
-		_goerr = UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
+		_goerr = glib.UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
 	}
 
-	return ret, _goerr
+	return goret, _goerr
 }
 
 // XYToIndex wraps pango_layout_xy_to_index
@@ -9765,7 +10222,7 @@ func (layout *LayoutInstance) WriteToFile(flags LayoutSerializeFlags, filename s
 //   in the grapheme the user clicked. It will either be zero, or the
 //   number of characters in the grapheme. 0 represents the leading edge
 //   of the grapheme. 
-// 	- ret bool 
+// 	- goret bool 
 //
 // Converts from X and Y position within a layout to the byte index to the
 // character at that logical position.
@@ -9795,15 +10252,15 @@ func (layout *LayoutInstance) XYToIndex(x int, y int) (int, int, bool) {
 
 	var index_   int
 	var trailing int
-	var ret      bool
+	var goret    bool
 
 	index_ = int(carg3)
 	trailing = int(carg4)
 	if cret != 0 {
-		ret = true
+		goret = true
 	}
 
-	return index_, trailing, ret
+	return index_, trailing, goret
 }
 
 // RendererInstance is the instance type used by all types extending PangoRenderer. It is used internally by the bindings. Users should use the interface [Renderer] instead.
@@ -9879,7 +10336,7 @@ type Renderer interface {
 	// The function takes the following parameters:
 	// 
 	// 	- text string (nullable): the UTF-8 text that @glyph_item refers to 
-	// 	- glyphItem GlyphItem: a `PangoGlyphItem` 
+	// 	- glyphItem *GlyphItem: a `PangoGlyphItem` 
 	// 	- x int: X position of left edge of baseline, in user space coordinates
 	//   in Pango units 
 	// 	- y int: Y position of left edge of baseline, in user space coordinates
@@ -9903,20 +10360,20 @@ type Renderer interface {
 	// 
 	// The default implementation of this method simply falls back to
 	// [method@Pango.Renderer.draw_glyphs].
-	DrawGlyphItem(string, GlyphItem, int, int)
+	DrawGlyphItem(string, *GlyphItem, int, int)
 	// DrawGlyphs wraps pango_renderer_draw_glyphs
 	// 
 	// The function takes the following parameters:
 	// 
 	// 	- font Font: a `PangoFont` 
-	// 	- glyphs GlyphString: a `PangoGlyphString` 
+	// 	- glyphs *GlyphString: a `PangoGlyphString` 
 	// 	- x int: X position of left edge of baseline, in user space coordinates
 	//   in Pango units. 
 	// 	- y int: Y position of left edge of baseline, in user space coordinates
 	//   in Pango units. 
 	//
 	// Draws the glyphs in @glyphs with the specified `PangoRenderer`.
-	DrawGlyphs(Font, GlyphString, int, int)
+	DrawGlyphs(Font, *GlyphString, int, int)
 	// DrawLayout wraps pango_renderer_draw_layout
 	// 
 	// The function takes the following parameters:
@@ -9936,7 +10393,7 @@ type Renderer interface {
 	// 
 	// The function takes the following parameters:
 	// 
-	// 	- line LayoutLine: a `PangoLayoutLine` 
+	// 	- line *LayoutLine: a `PangoLayoutLine` 
 	// 	- x int: X position of left edge of baseline, in user space coordinates
 	//   in Pango units. 
 	// 	- y int: Y position of left edge of baseline, in user space coordinates
@@ -9947,7 +10404,7 @@ type Renderer interface {
 	// This draws the glyph items that make up the line, as well as
 	// shapes, backgrounds and lines that are specified by the attributes
 	// of those items.
-	DrawLayoutLine(LayoutLine, int, int)
+	DrawLayoutLine(*LayoutLine, int, int)
 	// DrawRectangle wraps pango_renderer_draw_rectangle
 	// 
 	// The function takes the following parameters:
@@ -9989,7 +10446,7 @@ type Renderer interface {
 	// 
 	// The function returns the following values:
 	// 
-	// 	- ret uint16 
+	// 	- goret uint16 
 	//
 	// Gets the current alpha for the specified part.
 	GetAlpha(RenderPart) uint16
@@ -10001,14 +10458,14 @@ type Renderer interface {
 	// 
 	// The function returns the following values:
 	// 
-	// 	- ret Color 
+	// 	- goret *Color 
 	//
 	// Gets the current rendering color for the specified part.
-	GetColor(RenderPart) Color
+	GetColor(RenderPart) *Color
 	// GetLayout wraps pango_renderer_get_layout
 	// The function returns the following values:
 	// 
-	// 	- ret Layout 
+	// 	- goret Layout 
 	//
 	// Gets the layout currently being rendered using @renderer.
 	// 
@@ -10021,7 +10478,7 @@ type Renderer interface {
 	// GetLayoutLine wraps pango_renderer_get_layout_line
 	// The function returns the following values:
 	// 
-	// 	- ret LayoutLine 
+	// 	- goret *LayoutLine 
 	//
 	// Gets the layout line currently being rendered using @renderer.
 	// 
@@ -10030,17 +10487,17 @@ type Renderer interface {
 	// 
 	// The returned layout line should not be modified while still being
 	// rendered.
-	GetLayoutLine() LayoutLine
+	GetLayoutLine() *LayoutLine
 	// GetMatrix wraps pango_renderer_get_matrix
 	// The function returns the following values:
 	// 
-	// 	- ret Matrix 
+	// 	- goret *Matrix 
 	//
 	// Gets the transformation matrix that will be applied when
 	// rendering.
 	// 
 	// See [method@Pango.Renderer.set_matrix].
-	GetMatrix() Matrix
+	GetMatrix() *Matrix
 	// PartChanged wraps pango_renderer_part_changed
 	// 
 	// The function takes the following parameters:
@@ -10080,21 +10537,21 @@ type Renderer interface {
 	// The function takes the following parameters:
 	// 
 	// 	- part RenderPart: the part to change the color of 
-	// 	- color Color (nullable): the new color or %NULL to unset the current color 
+	// 	- color *Color (nullable): the new color or %NULL to unset the current color 
 	//
 	// Sets the color for part of the rendering.
 	// 
 	// Also see [method@Pango.Renderer.set_alpha].
-	SetColor(RenderPart, Color)
+	SetColor(RenderPart, *Color)
 	// SetMatrix wraps pango_renderer_set_matrix
 	// 
 	// The function takes the following parameters:
 	// 
-	// 	- matrix Matrix (nullable): a `PangoMatrix`, or %NULL to unset any existing matrix
+	// 	- matrix *Matrix (nullable): a `PangoMatrix`, or %NULL to unset any existing matrix
 	//  (No matrix set is the same as setting the identity matrix.) 
 	//
 	// Sets the transformation matrix that will be applied when rendering.
-	SetMatrix(Matrix)
+	SetMatrix(*Matrix)
 }
 
 func unsafeWrapRenderer(base *gobject.ObjectInstance) *RendererInstance {
@@ -10103,23 +10560,18 @@ func unsafeWrapRenderer(base *gobject.ObjectInstance) *RendererInstance {
 	}
 }
 
-func marshalRendererInstance(p uintptr) (interface{}, error) {
-	return unsafeWrapRenderer(gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Object()), nil
-}
-
-// UnsafeRendererFromGlibBorrow is used to convert raw PangoRenderer pointers to go. This is used by the bindings internally.
-func UnsafeRendererFromGlibBorrow(c unsafe.Pointer) Renderer {
-	return gobject.TODOBorrow(c).(Renderer)
+func marshalRendererInstance(p unsafe.Pointer) (any, error) {
+	return unsafeWrapRenderer(gobject.ValueFromNative(p).Object()), nil
 }
 
 // UnsafeRendererFromGlibNone is used to convert raw PangoRenderer pointers to go while taking a reference and attaching a finalizer. This is used by the bindings internally.
 func UnsafeRendererFromGlibNone(c unsafe.Pointer) Renderer {
-	return gobject.Take(c).(Renderer)
+	return gobject.UnsafeObjectFromGlibNone(c).(Renderer)
 }
 
 // UnsafeRendererFromGlibFull is used to convert raw PangoRenderer pointers to go while attaching a finalizer. This is used by the bindings internally.
 func UnsafeRendererFromGlibFull(c unsafe.Pointer) Renderer {
-	return gobject.AssumeOwnership(c).(Renderer)
+	return gobject.UnsafeObjectFromGlibFull(c).(Renderer)
 }
 
 func (r *RendererInstance) upcastToPangoRenderer() *RendererInstance {
@@ -10128,12 +10580,12 @@ func (r *RendererInstance) upcastToPangoRenderer() *RendererInstance {
 
 // UnsafeRendererToGlibNone is used to convert the instance to it's C value PangoRenderer. This is used by the bindings internally.
 func UnsafeRendererToGlibNone(c Renderer) unsafe.Pointer {
-	return gobject.TODOToNone(c)
+	return gobject.UnsafeObjectToGlibNone(c)
 }
 
 // UnsafeRendererToGlibFull is used to convert the instance to it's C value PangoRenderer, while removeing the finalizer. This is used by the bindings internally.
 func UnsafeRendererToGlibFull(c Renderer) unsafe.Pointer {
-	return gobject.TODOToFull(c)
+	return gobject.UnsafeObjectToGlibFull(c)
 }
 
 // Activate wraps pango_renderer_activate
@@ -10245,7 +10697,7 @@ func (renderer *RendererInstance) DrawGlyph(font Font, glyph Glyph, x float64, y
 // The function takes the following parameters:
 // 
 // 	- text string (nullable): the UTF-8 text that @glyph_item refers to 
-// 	- glyphItem GlyphItem: a `PangoGlyphItem` 
+// 	- glyphItem *GlyphItem: a `PangoGlyphItem` 
 // 	- x int: X position of left edge of baseline, in user space coordinates
 //   in Pango units 
 // 	- y int: Y position of left edge of baseline, in user space coordinates
@@ -10269,9 +10721,9 @@ func (renderer *RendererInstance) DrawGlyph(font Font, glyph Glyph, x float64, y
 // 
 // The default implementation of this method simply falls back to
 // [method@Pango.Renderer.draw_glyphs].
-func (renderer *RendererInstance) DrawGlyphItem(text string, glyphItem GlyphItem, x int, y int) {
+func (renderer *RendererInstance) DrawGlyphItem(text string, glyphItem *GlyphItem, x int, y int) {
 	var carg0 *C.PangoRenderer  // in, none, converted
-	var carg1 *C.gchar          // in, none, string, nullable
+	var carg1 *C.gchar          // in, none, string, nullable-string
 	var carg2 *C.PangoGlyphItem // in, none, converted
 	var carg3 C.int             // in, none, casted
 	var carg4 C.int             // in, none, casted
@@ -10298,14 +10750,14 @@ func (renderer *RendererInstance) DrawGlyphItem(text string, glyphItem GlyphItem
 // The function takes the following parameters:
 // 
 // 	- font Font: a `PangoFont` 
-// 	- glyphs GlyphString: a `PangoGlyphString` 
+// 	- glyphs *GlyphString: a `PangoGlyphString` 
 // 	- x int: X position of left edge of baseline, in user space coordinates
 //   in Pango units. 
 // 	- y int: Y position of left edge of baseline, in user space coordinates
 //   in Pango units. 
 //
 // Draws the glyphs in @glyphs with the specified `PangoRenderer`.
-func (renderer *RendererInstance) DrawGlyphs(font Font, glyphs GlyphString, x int, y int) {
+func (renderer *RendererInstance) DrawGlyphs(font Font, glyphs *GlyphString, x int, y int) {
 	var carg0 *C.PangoRenderer    // in, none, converted
 	var carg1 *C.PangoFont        // in, none, converted
 	var carg2 *C.PangoGlyphString // in, none, converted
@@ -10362,7 +10814,7 @@ func (renderer *RendererInstance) DrawLayout(layout Layout, x int, y int) {
 // 
 // The function takes the following parameters:
 // 
-// 	- line LayoutLine: a `PangoLayoutLine` 
+// 	- line *LayoutLine: a `PangoLayoutLine` 
 // 	- x int: X position of left edge of baseline, in user space coordinates
 //   in Pango units. 
 // 	- y int: Y position of left edge of baseline, in user space coordinates
@@ -10373,7 +10825,7 @@ func (renderer *RendererInstance) DrawLayout(layout Layout, x int, y int) {
 // This draws the glyph items that make up the line, as well as
 // shapes, backgrounds and lines that are specified by the attributes
 // of those items.
-func (renderer *RendererInstance) DrawLayoutLine(line LayoutLine, x int, y int) {
+func (renderer *RendererInstance) DrawLayoutLine(line *LayoutLine, x int, y int) {
 	var carg0 *C.PangoRenderer   // in, none, converted
 	var carg1 *C.PangoLayoutLine // in, none, converted
 	var carg2 C.int              // in, none, casted
@@ -10484,7 +10936,7 @@ func (renderer *RendererInstance) DrawTrapezoid(part RenderPart, y1 float64, x11
 // 
 // The function returns the following values:
 // 
-// 	- ret uint16 
+// 	- goret uint16 
 //
 // Gets the current alpha for the specified part.
 func (renderer *RendererInstance) GetAlpha(part RenderPart) uint16 {
@@ -10499,11 +10951,11 @@ func (renderer *RendererInstance) GetAlpha(part RenderPart) uint16 {
 	runtime.KeepAlive(renderer)
 	runtime.KeepAlive(part)
 
-	var ret uint16
+	var goret uint16
 
-	ret = uint16(cret)
+	goret = uint16(cret)
 
-	return ret
+	return goret
 }
 
 // GetColor wraps pango_renderer_get_color
@@ -10514,10 +10966,10 @@ func (renderer *RendererInstance) GetAlpha(part RenderPart) uint16 {
 // 
 // The function returns the following values:
 // 
-// 	- ret Color 
+// 	- goret *Color 
 //
 // Gets the current rendering color for the specified part.
-func (renderer *RendererInstance) GetColor(part RenderPart) Color {
+func (renderer *RendererInstance) GetColor(part RenderPart) *Color {
 	var carg0 *C.PangoRenderer  // in, none, converted
 	var carg1 C.PangoRenderPart // in, none, casted
 	var cret  *C.PangoColor     // return, none, converted
@@ -10529,17 +10981,17 @@ func (renderer *RendererInstance) GetColor(part RenderPart) Color {
 	runtime.KeepAlive(renderer)
 	runtime.KeepAlive(part)
 
-	var ret Color
+	var goret *Color
 
-	ret = UnsafeColorFromGlibNone(unsafe.Pointer(cret))
+	goret = UnsafeColorFromGlibNone(unsafe.Pointer(cret))
 
-	return ret
+	return goret
 }
 
 // GetLayout wraps pango_renderer_get_layout
 // The function returns the following values:
 // 
-// 	- ret Layout 
+// 	- goret Layout 
 //
 // Gets the layout currently being rendered using @renderer.
 // 
@@ -10557,17 +11009,17 @@ func (renderer *RendererInstance) GetLayout() Layout {
 	cret = C.pango_renderer_get_layout(carg0)
 	runtime.KeepAlive(renderer)
 
-	var ret Layout
+	var goret Layout
 
-	ret = UnsafeLayoutFromGlibNone(unsafe.Pointer(cret))
+	goret = UnsafeLayoutFromGlibNone(unsafe.Pointer(cret))
 
-	return ret
+	return goret
 }
 
 // GetLayoutLine wraps pango_renderer_get_layout_line
 // The function returns the following values:
 // 
-// 	- ret LayoutLine 
+// 	- goret *LayoutLine 
 //
 // Gets the layout line currently being rendered using @renderer.
 // 
@@ -10576,7 +11028,7 @@ func (renderer *RendererInstance) GetLayout() Layout {
 // 
 // The returned layout line should not be modified while still being
 // rendered.
-func (renderer *RendererInstance) GetLayoutLine() LayoutLine {
+func (renderer *RendererInstance) GetLayoutLine() *LayoutLine {
 	var carg0 *C.PangoRenderer   // in, none, converted
 	var cret  *C.PangoLayoutLine // return, none, converted
 
@@ -10585,23 +11037,23 @@ func (renderer *RendererInstance) GetLayoutLine() LayoutLine {
 	cret = C.pango_renderer_get_layout_line(carg0)
 	runtime.KeepAlive(renderer)
 
-	var ret LayoutLine
+	var goret *LayoutLine
 
-	ret = UnsafeLayoutLineFromGlibNone(unsafe.Pointer(cret))
+	goret = UnsafeLayoutLineFromGlibNone(unsafe.Pointer(cret))
 
-	return ret
+	return goret
 }
 
 // GetMatrix wraps pango_renderer_get_matrix
 // The function returns the following values:
 // 
-// 	- ret Matrix 
+// 	- goret *Matrix 
 //
 // Gets the transformation matrix that will be applied when
 // rendering.
 // 
 // See [method@Pango.Renderer.set_matrix].
-func (renderer *RendererInstance) GetMatrix() Matrix {
+func (renderer *RendererInstance) GetMatrix() *Matrix {
 	var carg0 *C.PangoRenderer // in, none, converted
 	var cret  *C.PangoMatrix   // return, none, converted
 
@@ -10610,11 +11062,11 @@ func (renderer *RendererInstance) GetMatrix() Matrix {
 	cret = C.pango_renderer_get_matrix(carg0)
 	runtime.KeepAlive(renderer)
 
-	var ret Matrix
+	var goret *Matrix
 
-	ret = UnsafeMatrixFromGlibNone(unsafe.Pointer(cret))
+	goret = UnsafeMatrixFromGlibNone(unsafe.Pointer(cret))
 
-	return ret
+	return goret
 }
 
 // PartChanged wraps pango_renderer_part_changed
@@ -10681,12 +11133,12 @@ func (renderer *RendererInstance) SetAlpha(part RenderPart, alpha uint16) {
 // The function takes the following parameters:
 // 
 // 	- part RenderPart: the part to change the color of 
-// 	- color Color (nullable): the new color or %NULL to unset the current color 
+// 	- color *Color (nullable): the new color or %NULL to unset the current color 
 //
 // Sets the color for part of the rendering.
 // 
 // Also see [method@Pango.Renderer.set_alpha].
-func (renderer *RendererInstance) SetColor(part RenderPart, color Color) {
+func (renderer *RendererInstance) SetColor(part RenderPart, color *Color) {
 	var carg0 *C.PangoRenderer  // in, none, converted
 	var carg1 C.PangoRenderPart // in, none, casted
 	var carg2 *C.PangoColor     // in, none, converted, nullable
@@ -10707,11 +11159,11 @@ func (renderer *RendererInstance) SetColor(part RenderPart, color Color) {
 // 
 // The function takes the following parameters:
 // 
-// 	- matrix Matrix (nullable): a `PangoMatrix`, or %NULL to unset any existing matrix
+// 	- matrix *Matrix (nullable): a `PangoMatrix`, or %NULL to unset any existing matrix
 //  (No matrix set is the same as setting the identity matrix.) 
 //
 // Sets the transformation matrix that will be applied when rendering.
-func (renderer *RendererInstance) SetMatrix(matrix Matrix) {
+func (renderer *RendererInstance) SetMatrix(matrix *Matrix) {
 	var carg0 *C.PangoRenderer // in, none, converted
 	var carg1 *C.PangoMatrix   // in, none, converted, nullable
 
@@ -10741,6 +11193,19 @@ type analysis struct {
 // UnsafeAnalysisFromGlibBorrow is used to convert raw C.PangoAnalysis pointers to go. This is used by the bindings internally.
 func UnsafeAnalysisFromGlibBorrow(p unsafe.Pointer) *Analysis {
 	return &Analysis{&analysis{(*C.PangoAnalysis)(p)}}
+}
+
+// UnsafeAnalysisFromGlibNone is used to convert raw C.PangoAnalysis pointers to go while taking a reference. This is used by the bindings internally.
+func UnsafeAnalysisFromGlibNone(p unsafe.Pointer) *Analysis {
+	// FIXME: this has no ref function, what should we do here?
+	wrapped := UnsafeAnalysisFromGlibBorrow(p)
+	runtime.SetFinalizer(
+		wrapped.analysis,
+		func (intern *analysis) {
+			C.free(unsafe.Pointer(intern.native))
+		},
+	)
+	return wrapped
 }
 
 // UnsafeAnalysisFromGlibFull is used to convert raw C.PangoAnalysis pointers to go while taking a reference. This is used by the bindings internally.
@@ -10904,6 +11369,19 @@ func UnsafeAttrClassFromGlibBorrow(p unsafe.Pointer) *AttrClass {
 	return &AttrClass{&attrClass{(*C.PangoAttrClass)(p)}}
 }
 
+// UnsafeAttrClassFromGlibNone is used to convert raw C.PangoAttrClass pointers to go while taking a reference. This is used by the bindings internally.
+func UnsafeAttrClassFromGlibNone(p unsafe.Pointer) *AttrClass {
+	// FIXME: this has no ref function, what should we do here?
+	wrapped := UnsafeAttrClassFromGlibBorrow(p)
+	runtime.SetFinalizer(
+		wrapped.attrClass,
+		func (intern *attrClass) {
+			C.free(unsafe.Pointer(intern.native))
+		},
+	)
+	return wrapped
+}
+
 // UnsafeAttrClassFromGlibFull is used to convert raw C.PangoAttrClass pointers to go while taking a reference. This is used by the bindings internally.
 func UnsafeAttrClassFromGlibFull(p unsafe.Pointer) *AttrClass {
 	wrapped := UnsafeAttrClassFromGlibBorrow(p)
@@ -10954,6 +11432,19 @@ func UnsafeAttrColorFromGlibBorrow(p unsafe.Pointer) *AttrColor {
 	return &AttrColor{&attrColor{(*C.PangoAttrColor)(p)}}
 }
 
+// UnsafeAttrColorFromGlibNone is used to convert raw C.PangoAttrColor pointers to go while taking a reference. This is used by the bindings internally.
+func UnsafeAttrColorFromGlibNone(p unsafe.Pointer) *AttrColor {
+	// FIXME: this has no ref function, what should we do here?
+	wrapped := UnsafeAttrColorFromGlibBorrow(p)
+	runtime.SetFinalizer(
+		wrapped.attrColor,
+		func (intern *attrColor) {
+			C.free(unsafe.Pointer(intern.native))
+		},
+	)
+	return wrapped
+}
+
 // UnsafeAttrColorFromGlibFull is used to convert raw C.PangoAttrColor pointers to go while taking a reference. This is used by the bindings internally.
 func UnsafeAttrColorFromGlibFull(p unsafe.Pointer) *AttrColor {
 	wrapped := UnsafeAttrColorFromGlibBorrow(p)
@@ -11002,6 +11493,19 @@ type attrFloat struct {
 // UnsafeAttrFloatFromGlibBorrow is used to convert raw C.PangoAttrFloat pointers to go. This is used by the bindings internally.
 func UnsafeAttrFloatFromGlibBorrow(p unsafe.Pointer) *AttrFloat {
 	return &AttrFloat{&attrFloat{(*C.PangoAttrFloat)(p)}}
+}
+
+// UnsafeAttrFloatFromGlibNone is used to convert raw C.PangoAttrFloat pointers to go while taking a reference. This is used by the bindings internally.
+func UnsafeAttrFloatFromGlibNone(p unsafe.Pointer) *AttrFloat {
+	// FIXME: this has no ref function, what should we do here?
+	wrapped := UnsafeAttrFloatFromGlibBorrow(p)
+	runtime.SetFinalizer(
+		wrapped.attrFloat,
+		func (intern *attrFloat) {
+			C.free(unsafe.Pointer(intern.native))
+		},
+	)
+	return wrapped
 }
 
 // UnsafeAttrFloatFromGlibFull is used to convert raw C.PangoAttrFloat pointers to go while taking a reference. This is used by the bindings internally.
@@ -11072,6 +11576,19 @@ func UnsafeAttrFontDescFromGlibBorrow(p unsafe.Pointer) *AttrFontDesc {
 	return &AttrFontDesc{&attrFontDesc{(*C.PangoAttrFontDesc)(p)}}
 }
 
+// UnsafeAttrFontDescFromGlibNone is used to convert raw C.PangoAttrFontDesc pointers to go while taking a reference. This is used by the bindings internally.
+func UnsafeAttrFontDescFromGlibNone(p unsafe.Pointer) *AttrFontDesc {
+	// FIXME: this has no ref function, what should we do here?
+	wrapped := UnsafeAttrFontDescFromGlibBorrow(p)
+	runtime.SetFinalizer(
+		wrapped.attrFontDesc,
+		func (intern *attrFontDesc) {
+			C.free(unsafe.Pointer(intern.native))
+		},
+	)
+	return wrapped
+}
+
 // UnsafeAttrFontDescFromGlibFull is used to convert raw C.PangoAttrFontDesc pointers to go while taking a reference. This is used by the bindings internally.
 func UnsafeAttrFontDescFromGlibFull(p unsafe.Pointer) *AttrFontDesc {
 	wrapped := UnsafeAttrFontDescFromGlibBorrow(p)
@@ -11122,6 +11639,19 @@ func UnsafeAttrFontFeaturesFromGlibBorrow(p unsafe.Pointer) *AttrFontFeatures {
 	return &AttrFontFeatures{&attrFontFeatures{(*C.PangoAttrFontFeatures)(p)}}
 }
 
+// UnsafeAttrFontFeaturesFromGlibNone is used to convert raw C.PangoAttrFontFeatures pointers to go while taking a reference. This is used by the bindings internally.
+func UnsafeAttrFontFeaturesFromGlibNone(p unsafe.Pointer) *AttrFontFeatures {
+	// FIXME: this has no ref function, what should we do here?
+	wrapped := UnsafeAttrFontFeaturesFromGlibBorrow(p)
+	runtime.SetFinalizer(
+		wrapped.attrFontFeatures,
+		func (intern *attrFontFeatures) {
+			C.free(unsafe.Pointer(intern.native))
+		},
+	)
+	return wrapped
+}
+
 // UnsafeAttrFontFeaturesFromGlibFull is used to convert raw C.PangoAttrFontFeatures pointers to go while taking a reference. This is used by the bindings internally.
 func UnsafeAttrFontFeaturesFromGlibFull(p unsafe.Pointer) *AttrFontFeatures {
 	wrapped := UnsafeAttrFontFeaturesFromGlibBorrow(p)
@@ -11170,6 +11700,19 @@ type attrInt struct {
 // UnsafeAttrIntFromGlibBorrow is used to convert raw C.PangoAttrInt pointers to go. This is used by the bindings internally.
 func UnsafeAttrIntFromGlibBorrow(p unsafe.Pointer) *AttrInt {
 	return &AttrInt{&attrInt{(*C.PangoAttrInt)(p)}}
+}
+
+// UnsafeAttrIntFromGlibNone is used to convert raw C.PangoAttrInt pointers to go while taking a reference. This is used by the bindings internally.
+func UnsafeAttrIntFromGlibNone(p unsafe.Pointer) *AttrInt {
+	// FIXME: this has no ref function, what should we do here?
+	wrapped := UnsafeAttrIntFromGlibBorrow(p)
+	runtime.SetFinalizer(
+		wrapped.attrInt,
+		func (intern *attrInt) {
+			C.free(unsafe.Pointer(intern.native))
+		},
+	)
+	return wrapped
 }
 
 // UnsafeAttrIntFromGlibFull is used to convert raw C.PangoAttrInt pointers to go while taking a reference. This is used by the bindings internally.
@@ -11240,14 +11783,34 @@ type attrIterator struct {
 	native *C.PangoAttrIterator
 }
 
-func marshalAttrIterator(p uintptr) (interface{}, error) {
-	b := gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Boxed()
+var _ gobject.GoValueInitializer = (*AttrIterator)(nil)
+
+func marshalAttrIterator(p unsafe.Pointer) (interface{}, error) {
+	b := gobject.ValueFromNative(p).Boxed()
 	return UnsafeAttrIteratorFromGlibBorrow(b), nil
+}
+
+func (r *AttrIterator) InitGoValue(v *gobject.Value) {
+	v.Init(TypeAttrIterator)
+	v.SetBoxed(unsafe.Pointer(r.native))
 }
 
 // UnsafeAttrIteratorFromGlibBorrow is used to convert raw C.PangoAttrIterator pointers to go. This is used by the bindings internally.
 func UnsafeAttrIteratorFromGlibBorrow(p unsafe.Pointer) *AttrIterator {
 	return &AttrIterator{&attrIterator{(*C.PangoAttrIterator)(p)}}
+}
+
+// UnsafeAttrIteratorFromGlibNone is used to convert raw C.PangoAttrIterator pointers to go while taking a reference. This is used by the bindings internally.
+func UnsafeAttrIteratorFromGlibNone(p unsafe.Pointer) *AttrIterator {
+	// FIXME: this has no ref function, what should we do here?
+	wrapped := UnsafeAttrIteratorFromGlibBorrow(p)
+	runtime.SetFinalizer(
+		wrapped.attrIterator,
+		func (intern *attrIterator) {
+			C.pango_attr_iterator_destroy(intern.native)
+		},
+	)
+	return wrapped
 }
 
 // UnsafeAttrIteratorFromGlibFull is used to convert raw C.PangoAttrIterator pointers to go while taking a reference. This is used by the bindings internally.
@@ -11282,6 +11845,28 @@ func UnsafeAttrIteratorToGlibFull(a *AttrIterator) unsafe.Pointer {
 	a.native = nil // AttrIterator is invalid from here on
 	return _p
 }
+// Copy wraps pango_attr_iterator_copy
+// The function returns the following values:
+// 
+// 	- goret *AttrIterator 
+//
+// Copy a `PangoAttrIterator`.
+func (iterator *AttrIterator) Copy() *AttrIterator {
+	var carg0 *C.PangoAttrIterator // in, none, converted
+	var cret  *C.PangoAttrIterator // return, full, converted
+
+	carg0 = (*C.PangoAttrIterator)(UnsafeAttrIteratorToGlibNone(iterator))
+
+	cret = C.pango_attr_iterator_copy(carg0)
+	runtime.KeepAlive(iterator)
+
+	var goret *AttrIterator
+
+	goret = UnsafeAttrIteratorFromGlibFull(unsafe.Pointer(cret))
+
+	return goret
+}
+
 // Get wraps pango_attr_iterator_get
 // 
 // The function takes the following parameters:
@@ -11290,7 +11875,7 @@ func UnsafeAttrIteratorToGlibFull(a *AttrIterator) unsafe.Pointer {
 // 
 // The function returns the following values:
 // 
-// 	- ret Attribute 
+// 	- goret *Attribute 
 //
 // Find the current attribute of a particular type
 // at the iterator location.
@@ -11298,7 +11883,7 @@ func UnsafeAttrIteratorToGlibFull(a *AttrIterator) unsafe.Pointer {
 // When multiple attributes of the same type overlap,
 // the attribute whose range starts closest to the
 // current location is used.
-func (iterator *AttrIterator) Get(typ AttrType) Attribute {
+func (iterator *AttrIterator) Get(typ AttrType) *Attribute {
 	var carg0 *C.PangoAttrIterator // in, none, converted
 	var carg1 C.PangoAttrType      // in, none, casted
 	var cret  *C.PangoAttribute    // return, none, converted
@@ -11310,17 +11895,17 @@ func (iterator *AttrIterator) Get(typ AttrType) Attribute {
 	runtime.KeepAlive(iterator)
 	runtime.KeepAlive(typ)
 
-	var ret Attribute
+	var goret *Attribute
 
-	ret = UnsafeAttributeFromGlibNone(unsafe.Pointer(cret))
+	goret = UnsafeAttributeFromGlibNone(unsafe.Pointer(cret))
 
-	return ret
+	return goret
 }
 
 // Next wraps pango_attr_iterator_next
 // The function returns the following values:
 // 
-// 	- ret bool 
+// 	- goret bool 
 //
 // Advance the iterator until the next change of style.
 func (iterator *AttrIterator) Next() bool {
@@ -11332,13 +11917,13 @@ func (iterator *AttrIterator) Next() bool {
 	cret = C.pango_attr_iterator_next(carg0)
 	runtime.KeepAlive(iterator)
 
-	var ret bool
+	var goret bool
 
 	if cret != 0 {
-		ret = true
+		goret = true
 	}
 
-	return ret
+	return goret
 }
 
 // Range wraps pango_attr_iterator_range
@@ -11388,6 +11973,19 @@ type attrLanguage struct {
 // UnsafeAttrLanguageFromGlibBorrow is used to convert raw C.PangoAttrLanguage pointers to go. This is used by the bindings internally.
 func UnsafeAttrLanguageFromGlibBorrow(p unsafe.Pointer) *AttrLanguage {
 	return &AttrLanguage{&attrLanguage{(*C.PangoAttrLanguage)(p)}}
+}
+
+// UnsafeAttrLanguageFromGlibNone is used to convert raw C.PangoAttrLanguage pointers to go while taking a reference. This is used by the bindings internally.
+func UnsafeAttrLanguageFromGlibNone(p unsafe.Pointer) *AttrLanguage {
+	// FIXME: this has no ref function, what should we do here?
+	wrapped := UnsafeAttrLanguageFromGlibBorrow(p)
+	runtime.SetFinalizer(
+		wrapped.attrLanguage,
+		func (intern *attrLanguage) {
+			C.free(unsafe.Pointer(intern.native))
+		},
+	)
+	return wrapped
 }
 
 // UnsafeAttrLanguageFromGlibFull is used to convert raw C.PangoAttrLanguage pointers to go while taking a reference. This is used by the bindings internally.
@@ -11444,9 +12042,16 @@ type attrList struct {
 	native *C.PangoAttrList
 }
 
-func marshalAttrList(p uintptr) (interface{}, error) {
-	b := gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Boxed()
+var _ gobject.GoValueInitializer = (*AttrList)(nil)
+
+func marshalAttrList(p unsafe.Pointer) (interface{}, error) {
+	b := gobject.ValueFromNative(p).Boxed()
 	return UnsafeAttrListFromGlibBorrow(b), nil
+}
+
+func (r *AttrList) InitGoValue(v *gobject.Value) {
+	v.Init(TypeAttrList)
+	v.SetBoxed(unsafe.Pointer(r.native))
 }
 
 // UnsafeAttrListFromGlibBorrow is used to convert raw C.PangoAttrList pointers to go. This is used by the bindings internally.
@@ -11456,8 +12061,8 @@ func UnsafeAttrListFromGlibBorrow(p unsafe.Pointer) *AttrList {
 
 // UnsafeAttrListFromGlibNone is used to convert raw C.PangoAttrList pointers to go while taking a reference. This is used by the bindings internally.
 func UnsafeAttrListFromGlibNone(p unsafe.Pointer) *AttrList {
-	C.pango_attr_list_ref(p)
-	wrapped := UnsafeAttrListFromGlibNone(p)
+	C.pango_attr_list_ref((*C.PangoAttrList)(p))
+	wrapped := UnsafeAttrListFromGlibBorrow(p)
 	runtime.SetFinalizer(
 		wrapped.attrList,
 		func (intern *attrList) {
@@ -11509,27 +12114,27 @@ func UnsafeAttrListToGlibFull(a *AttrList) unsafe.Pointer {
 // NewAttrList wraps pango_attr_list_new
 // The function returns the following values:
 // 
-// 	- ret AttrList 
+// 	- goret *AttrList 
 //
 // Create a new empty attribute list with a reference
 // count of one.
-func NewAttrList() AttrList {
+func NewAttrList() *AttrList {
 	var cret *C.PangoAttrList // return, full, converted
 
 	cret = C.pango_attr_list_new()
 
-	var ret AttrList
+	var goret *AttrList
 
-	ret = UnsafeAttrListFromGlibFull(unsafe.Pointer(cret))
+	goret = UnsafeAttrListFromGlibFull(unsafe.Pointer(cret))
 
-	return ret
+	return goret
 }
 
 // Change wraps pango_attr_list_change
 // 
 // The function takes the following parameters:
 // 
-// 	- attr Attribute: the attribute to insert 
+// 	- attr *Attribute: the attribute to insert 
 //
 // Insert the given attribute into the `PangoAttrList`.
 // 
@@ -11543,7 +12148,7 @@ func NewAttrList() AttrList {
 // [method@Pango.AttrList.insert] is not suitable for
 // continually changing a set of attributes since it
 // never removes or combines existing attributes.
-func (list *AttrList) Change(attr Attribute) {
+func (list *AttrList) Change(attr *Attribute) {
 	var carg0 *C.PangoAttrList  // in, none, converted
 	var carg1 *C.PangoAttribute // in, full, converted
 
@@ -11555,15 +12160,37 @@ func (list *AttrList) Change(attr Attribute) {
 	runtime.KeepAlive(attr)
 }
 
+// Copy wraps pango_attr_list_copy
+// The function returns the following values:
+// 
+// 	- goret *AttrList 
+//
+// Copy @list and return an identical new list.
+func (list *AttrList) Copy() *AttrList {
+	var carg0 *C.PangoAttrList // in, none, converted
+	var cret  *C.PangoAttrList // return, full, converted
+
+	carg0 = (*C.PangoAttrList)(UnsafeAttrListToGlibNone(list))
+
+	cret = C.pango_attr_list_copy(carg0)
+	runtime.KeepAlive(list)
+
+	var goret *AttrList
+
+	goret = UnsafeAttrListFromGlibFull(unsafe.Pointer(cret))
+
+	return goret
+}
+
 // Equal wraps pango_attr_list_equal
 // 
 // The function takes the following parameters:
 // 
-// 	- otherList AttrList: the other `PangoAttrList` 
+// 	- otherList *AttrList: the other `PangoAttrList` 
 // 
 // The function returns the following values:
 // 
-// 	- ret bool 
+// 	- goret bool 
 //
 // Checks whether @list and @other_list contain the same
 // attributes and whether those attributes apply to the
@@ -11571,7 +12198,7 @@ func (list *AttrList) Change(attr Attribute) {
 // 
 // Beware that this will return wrong values if any list
 // contains duplicates.
-func (list *AttrList) Equal(otherList AttrList) bool {
+func (list *AttrList) Equal(otherList *AttrList) bool {
 	var carg0 *C.PangoAttrList // in, none, converted
 	var carg1 *C.PangoAttrList // in, none, converted
 	var cret  C.gboolean       // return
@@ -11583,13 +12210,13 @@ func (list *AttrList) Equal(otherList AttrList) bool {
 	runtime.KeepAlive(list)
 	runtime.KeepAlive(otherList)
 
-	var ret bool
+	var goret bool
 
 	if cret != 0 {
-		ret = true
+		goret = true
 	}
 
-	return ret
+	return goret
 }
 
 // Filter wraps pango_attr_list_filter
@@ -11601,12 +12228,12 @@ func (list *AttrList) Equal(otherList AttrList) bool {
 // 
 // The function returns the following values:
 // 
-// 	- ret AttrList 
+// 	- goret *AttrList 
 //
 // Given a `PangoAttrList` and callback function, removes
 // any elements of @list for which @func returns %TRUE and
 // inserts them into a new list.
-func (list *AttrList) Filter(fn AttrFilterFunc) AttrList {
+func (list *AttrList) Filter(fn AttrFilterFunc) *AttrList {
 	var carg0 *C.PangoAttrList      // in, none, converted
 	var carg1 C.PangoAttrFilterFunc // callback, scope: call, closure: carg2
 	var carg2 C.gpointer            // implicit
@@ -11621,22 +12248,22 @@ func (list *AttrList) Filter(fn AttrFilterFunc) AttrList {
 	runtime.KeepAlive(list)
 	runtime.KeepAlive(fn)
 
-	var ret AttrList
+	var goret *AttrList
 
-	ret = UnsafeAttrListFromGlibFull(unsafe.Pointer(cret))
+	goret = UnsafeAttrListFromGlibFull(unsafe.Pointer(cret))
 
-	return ret
+	return goret
 }
 
 // GetIterator wraps pango_attr_list_get_iterator
 // The function returns the following values:
 // 
-// 	- ret AttrIterator 
+// 	- goret *AttrIterator 
 //
 // Create a iterator initialized to the beginning of the list.
 // 
 // @list must not be modified until this iterator is freed.
-func (list *AttrList) GetIterator() AttrIterator {
+func (list *AttrList) GetIterator() *AttrIterator {
 	var carg0 *C.PangoAttrList     // in, none, converted
 	var cret  *C.PangoAttrIterator // return, full, converted
 
@@ -11645,24 +12272,24 @@ func (list *AttrList) GetIterator() AttrIterator {
 	cret = C.pango_attr_list_get_iterator(carg0)
 	runtime.KeepAlive(list)
 
-	var ret AttrIterator
+	var goret *AttrIterator
 
-	ret = UnsafeAttrIteratorFromGlibFull(unsafe.Pointer(cret))
+	goret = UnsafeAttrIteratorFromGlibFull(unsafe.Pointer(cret))
 
-	return ret
+	return goret
 }
 
 // Insert wraps pango_attr_list_insert
 // 
 // The function takes the following parameters:
 // 
-// 	- attr Attribute: the attribute to insert 
+// 	- attr *Attribute: the attribute to insert 
 //
 // Insert the given attribute into the `PangoAttrList`.
 // 
 // It will be inserted after all other attributes with a
 // matching @start_index.
-func (list *AttrList) Insert(attr Attribute) {
+func (list *AttrList) Insert(attr *Attribute) {
 	var carg0 *C.PangoAttrList  // in, none, converted
 	var carg1 *C.PangoAttribute // in, full, converted
 
@@ -11678,13 +12305,13 @@ func (list *AttrList) Insert(attr Attribute) {
 // 
 // The function takes the following parameters:
 // 
-// 	- attr Attribute: the attribute to insert 
+// 	- attr *Attribute: the attribute to insert 
 //
 // Insert the given attribute into the `PangoAttrList`.
 // 
 // It will be inserted before all other attributes with a
 // matching @start_index.
-func (list *AttrList) InsertBefore(attr Attribute) {
+func (list *AttrList) InsertBefore(attr *Attribute) {
 	var carg0 *C.PangoAttrList  // in, none, converted
 	var carg1 *C.PangoAttribute // in, full, converted
 
@@ -11700,7 +12327,7 @@ func (list *AttrList) InsertBefore(attr Attribute) {
 // 
 // The function takes the following parameters:
 // 
-// 	- other AttrList: another `PangoAttrList` 
+// 	- other *AttrList: another `PangoAttrList` 
 // 	- pos int: the position in @list at which to insert @other 
 // 	- len int: the length of the spliced segment. (Note that this
 //   must be specified since the attributes in @other may only
@@ -11724,7 +12351,7 @@ func (list *AttrList) InsertBefore(attr Attribute) {
 // not imited to @len, and are just overlayed on top of @list.
 // 
 // This mode is useful for merging two lists of attributes together.
-func (list *AttrList) Splice(other AttrList, pos int, len int) {
+func (list *AttrList) Splice(other *AttrList, pos int, len int) {
 	var carg0 *C.PangoAttrList // in, none, converted
 	var carg1 *C.PangoAttrList // in, none, converted
 	var carg2 C.int            // in, none, casted
@@ -11745,7 +12372,7 @@ func (list *AttrList) Splice(other AttrList, pos int, len int) {
 // ToString wraps pango_attr_list_to_string
 // The function returns the following values:
 // 
-// 	- ret string 
+// 	- goret string 
 //
 // Serializes a `PangoAttrList` to a string.
 // 
@@ -11790,12 +12417,12 @@ func (list *AttrList) ToString() string {
 	cret = C.pango_attr_list_to_string(carg0)
 	runtime.KeepAlive(list)
 
-	var ret string
+	var goret string
 
-	ret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
 	defer C.free(unsafe.Pointer(cret))
 
-	return ret
+	return goret
 }
 
 // Update wraps pango_attr_list_update
@@ -11854,6 +12481,19 @@ type attrShape struct {
 // UnsafeAttrShapeFromGlibBorrow is used to convert raw C.PangoAttrShape pointers to go. This is used by the bindings internally.
 func UnsafeAttrShapeFromGlibBorrow(p unsafe.Pointer) *AttrShape {
 	return &AttrShape{&attrShape{(*C.PangoAttrShape)(p)}}
+}
+
+// UnsafeAttrShapeFromGlibNone is used to convert raw C.PangoAttrShape pointers to go while taking a reference. This is used by the bindings internally.
+func UnsafeAttrShapeFromGlibNone(p unsafe.Pointer) *AttrShape {
+	// FIXME: this has no ref function, what should we do here?
+	wrapped := UnsafeAttrShapeFromGlibBorrow(p)
+	runtime.SetFinalizer(
+		wrapped.attrShape,
+		func (intern *attrShape) {
+			C.free(unsafe.Pointer(intern.native))
+		},
+	)
+	return wrapped
 }
 
 // UnsafeAttrShapeFromGlibFull is used to convert raw C.PangoAttrShape pointers to go while taking a reference. This is used by the bindings internally.
@@ -11922,6 +12562,19 @@ type attrSize struct {
 // UnsafeAttrSizeFromGlibBorrow is used to convert raw C.PangoAttrSize pointers to go. This is used by the bindings internally.
 func UnsafeAttrSizeFromGlibBorrow(p unsafe.Pointer) *AttrSize {
 	return &AttrSize{&attrSize{(*C.PangoAttrSize)(p)}}
+}
+
+// UnsafeAttrSizeFromGlibNone is used to convert raw C.PangoAttrSize pointers to go while taking a reference. This is used by the bindings internally.
+func UnsafeAttrSizeFromGlibNone(p unsafe.Pointer) *AttrSize {
+	// FIXME: this has no ref function, what should we do here?
+	wrapped := UnsafeAttrSizeFromGlibBorrow(p)
+	runtime.SetFinalizer(
+		wrapped.attrSize,
+		func (intern *attrSize) {
+			C.free(unsafe.Pointer(intern.native))
+		},
+	)
+	return wrapped
 }
 
 // UnsafeAttrSizeFromGlibFull is used to convert raw C.PangoAttrSize pointers to go while taking a reference. This is used by the bindings internally.
@@ -11994,6 +12647,19 @@ func UnsafeAttrStringFromGlibBorrow(p unsafe.Pointer) *AttrString {
 	return &AttrString{&attrString{(*C.PangoAttrString)(p)}}
 }
 
+// UnsafeAttrStringFromGlibNone is used to convert raw C.PangoAttrString pointers to go while taking a reference. This is used by the bindings internally.
+func UnsafeAttrStringFromGlibNone(p unsafe.Pointer) *AttrString {
+	// FIXME: this has no ref function, what should we do here?
+	wrapped := UnsafeAttrStringFromGlibBorrow(p)
+	runtime.SetFinalizer(
+		wrapped.attrString,
+		func (intern *attrString) {
+			C.free(unsafe.Pointer(intern.native))
+		},
+	)
+	return wrapped
+}
+
 // UnsafeAttrStringFromGlibFull is used to convert raw C.PangoAttrString pointers to go while taking a reference. This is used by the bindings internally.
 func UnsafeAttrStringFromGlibFull(p unsafe.Pointer) *AttrString {
 	wrapped := UnsafeAttrStringFromGlibBorrow(p)
@@ -12045,14 +12711,34 @@ type attribute struct {
 	native *C.PangoAttribute
 }
 
-func marshalAttribute(p uintptr) (interface{}, error) {
-	b := gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Boxed()
+var _ gobject.GoValueInitializer = (*Attribute)(nil)
+
+func marshalAttribute(p unsafe.Pointer) (interface{}, error) {
+	b := gobject.ValueFromNative(p).Boxed()
 	return UnsafeAttributeFromGlibBorrow(b), nil
+}
+
+func (r *Attribute) InitGoValue(v *gobject.Value) {
+	v.Init(TypeAttribute)
+	v.SetBoxed(unsafe.Pointer(r.native))
 }
 
 // UnsafeAttributeFromGlibBorrow is used to convert raw C.PangoAttribute pointers to go. This is used by the bindings internally.
 func UnsafeAttributeFromGlibBorrow(p unsafe.Pointer) *Attribute {
 	return &Attribute{&attribute{(*C.PangoAttribute)(p)}}
+}
+
+// UnsafeAttributeFromGlibNone is used to convert raw C.PangoAttribute pointers to go while taking a reference. This is used by the bindings internally.
+func UnsafeAttributeFromGlibNone(p unsafe.Pointer) *Attribute {
+	// FIXME: this has no ref function, what should we do here?
+	wrapped := UnsafeAttributeFromGlibBorrow(p)
+	runtime.SetFinalizer(
+		wrapped.attribute,
+		func (intern *attribute) {
+			C.pango_attribute_destroy(intern.native)
+		},
+	)
+	return wrapped
 }
 
 // UnsafeAttributeFromGlibFull is used to convert raw C.PangoAttribute pointers to go while taking a reference. This is used by the bindings internally.
@@ -12128,12 +12814,12 @@ func (a *Attribute) SetEndIndex(end_index uint) {
 // AsColor wraps pango_attribute_as_color
 // The function returns the following values:
 // 
-// 	- ret AttrColor 
+// 	- goret *AttrColor 
 //
 // Returns the attribute cast to `PangoAttrColor`.
 // 
 // This is mainly useful for language bindings.
-func (attr *Attribute) AsColor() AttrColor {
+func (attr *Attribute) AsColor() *AttrColor {
 	var carg0 *C.PangoAttribute // in, none, converted
 	var cret  *C.PangoAttrColor // return, none, converted
 
@@ -12142,22 +12828,22 @@ func (attr *Attribute) AsColor() AttrColor {
 	cret = C.pango_attribute_as_color(carg0)
 	runtime.KeepAlive(attr)
 
-	var ret AttrColor
+	var goret *AttrColor
 
-	ret = UnsafeAttrColorFromGlibNone(unsafe.Pointer(cret))
+	goret = UnsafeAttrColorFromGlibNone(unsafe.Pointer(cret))
 
-	return ret
+	return goret
 }
 
 // AsFloat wraps pango_attribute_as_float
 // The function returns the following values:
 // 
-// 	- ret AttrFloat 
+// 	- goret *AttrFloat 
 //
 // Returns the attribute cast to `PangoAttrFloat`.
 // 
 // This is mainly useful for language bindings.
-func (attr *Attribute) AsFloat() AttrFloat {
+func (attr *Attribute) AsFloat() *AttrFloat {
 	var carg0 *C.PangoAttribute // in, none, converted
 	var cret  *C.PangoAttrFloat // return, none, converted
 
@@ -12166,22 +12852,22 @@ func (attr *Attribute) AsFloat() AttrFloat {
 	cret = C.pango_attribute_as_float(carg0)
 	runtime.KeepAlive(attr)
 
-	var ret AttrFloat
+	var goret *AttrFloat
 
-	ret = UnsafeAttrFloatFromGlibNone(unsafe.Pointer(cret))
+	goret = UnsafeAttrFloatFromGlibNone(unsafe.Pointer(cret))
 
-	return ret
+	return goret
 }
 
 // AsFontDesc wraps pango_attribute_as_font_desc
 // The function returns the following values:
 // 
-// 	- ret AttrFontDesc 
+// 	- goret *AttrFontDesc 
 //
 // Returns the attribute cast to `PangoAttrFontDesc`.
 // 
 // This is mainly useful for language bindings.
-func (attr *Attribute) AsFontDesc() AttrFontDesc {
+func (attr *Attribute) AsFontDesc() *AttrFontDesc {
 	var carg0 *C.PangoAttribute    // in, none, converted
 	var cret  *C.PangoAttrFontDesc // return, none, converted
 
@@ -12190,22 +12876,22 @@ func (attr *Attribute) AsFontDesc() AttrFontDesc {
 	cret = C.pango_attribute_as_font_desc(carg0)
 	runtime.KeepAlive(attr)
 
-	var ret AttrFontDesc
+	var goret *AttrFontDesc
 
-	ret = UnsafeAttrFontDescFromGlibNone(unsafe.Pointer(cret))
+	goret = UnsafeAttrFontDescFromGlibNone(unsafe.Pointer(cret))
 
-	return ret
+	return goret
 }
 
 // AsFontFeatures wraps pango_attribute_as_font_features
 // The function returns the following values:
 // 
-// 	- ret AttrFontFeatures 
+// 	- goret *AttrFontFeatures 
 //
 // Returns the attribute cast to `PangoAttrFontFeatures`.
 // 
 // This is mainly useful for language bindings.
-func (attr *Attribute) AsFontFeatures() AttrFontFeatures {
+func (attr *Attribute) AsFontFeatures() *AttrFontFeatures {
 	var carg0 *C.PangoAttribute        // in, none, converted
 	var cret  *C.PangoAttrFontFeatures // return, none, converted
 
@@ -12214,22 +12900,22 @@ func (attr *Attribute) AsFontFeatures() AttrFontFeatures {
 	cret = C.pango_attribute_as_font_features(carg0)
 	runtime.KeepAlive(attr)
 
-	var ret AttrFontFeatures
+	var goret *AttrFontFeatures
 
-	ret = UnsafeAttrFontFeaturesFromGlibNone(unsafe.Pointer(cret))
+	goret = UnsafeAttrFontFeaturesFromGlibNone(unsafe.Pointer(cret))
 
-	return ret
+	return goret
 }
 
 // AsInt wraps pango_attribute_as_int
 // The function returns the following values:
 // 
-// 	- ret AttrInt 
+// 	- goret *AttrInt 
 //
 // Returns the attribute cast to `PangoAttrInt`.
 // 
 // This is mainly useful for language bindings.
-func (attr *Attribute) AsInt() AttrInt {
+func (attr *Attribute) AsInt() *AttrInt {
 	var carg0 *C.PangoAttribute // in, none, converted
 	var cret  *C.PangoAttrInt   // return, none, converted
 
@@ -12238,22 +12924,22 @@ func (attr *Attribute) AsInt() AttrInt {
 	cret = C.pango_attribute_as_int(carg0)
 	runtime.KeepAlive(attr)
 
-	var ret AttrInt
+	var goret *AttrInt
 
-	ret = UnsafeAttrIntFromGlibNone(unsafe.Pointer(cret))
+	goret = UnsafeAttrIntFromGlibNone(unsafe.Pointer(cret))
 
-	return ret
+	return goret
 }
 
 // AsLanguage wraps pango_attribute_as_language
 // The function returns the following values:
 // 
-// 	- ret AttrLanguage 
+// 	- goret *AttrLanguage 
 //
 // Returns the attribute cast to `PangoAttrLanguage`.
 // 
 // This is mainly useful for language bindings.
-func (attr *Attribute) AsLanguage() AttrLanguage {
+func (attr *Attribute) AsLanguage() *AttrLanguage {
 	var carg0 *C.PangoAttribute    // in, none, converted
 	var cret  *C.PangoAttrLanguage // return, none, converted
 
@@ -12262,22 +12948,22 @@ func (attr *Attribute) AsLanguage() AttrLanguage {
 	cret = C.pango_attribute_as_language(carg0)
 	runtime.KeepAlive(attr)
 
-	var ret AttrLanguage
+	var goret *AttrLanguage
 
-	ret = UnsafeAttrLanguageFromGlibNone(unsafe.Pointer(cret))
+	goret = UnsafeAttrLanguageFromGlibNone(unsafe.Pointer(cret))
 
-	return ret
+	return goret
 }
 
 // AsShape wraps pango_attribute_as_shape
 // The function returns the following values:
 // 
-// 	- ret AttrShape 
+// 	- goret *AttrShape 
 //
 // Returns the attribute cast to `PangoAttrShape`.
 // 
 // This is mainly useful for language bindings.
-func (attr *Attribute) AsShape() AttrShape {
+func (attr *Attribute) AsShape() *AttrShape {
 	var carg0 *C.PangoAttribute // in, none, converted
 	var cret  *C.PangoAttrShape // return, none, converted
 
@@ -12286,22 +12972,22 @@ func (attr *Attribute) AsShape() AttrShape {
 	cret = C.pango_attribute_as_shape(carg0)
 	runtime.KeepAlive(attr)
 
-	var ret AttrShape
+	var goret *AttrShape
 
-	ret = UnsafeAttrShapeFromGlibNone(unsafe.Pointer(cret))
+	goret = UnsafeAttrShapeFromGlibNone(unsafe.Pointer(cret))
 
-	return ret
+	return goret
 }
 
 // AsSize wraps pango_attribute_as_size
 // The function returns the following values:
 // 
-// 	- ret AttrSize 
+// 	- goret *AttrSize 
 //
 // Returns the attribute cast to `PangoAttrSize`.
 // 
 // This is mainly useful for language bindings.
-func (attr *Attribute) AsSize() AttrSize {
+func (attr *Attribute) AsSize() *AttrSize {
 	var carg0 *C.PangoAttribute // in, none, converted
 	var cret  *C.PangoAttrSize  // return, none, converted
 
@@ -12310,22 +12996,22 @@ func (attr *Attribute) AsSize() AttrSize {
 	cret = C.pango_attribute_as_size(carg0)
 	runtime.KeepAlive(attr)
 
-	var ret AttrSize
+	var goret *AttrSize
 
-	ret = UnsafeAttrSizeFromGlibNone(unsafe.Pointer(cret))
+	goret = UnsafeAttrSizeFromGlibNone(unsafe.Pointer(cret))
 
-	return ret
+	return goret
 }
 
 // AsString wraps pango_attribute_as_string
 // The function returns the following values:
 // 
-// 	- ret AttrString 
+// 	- goret *AttrString 
 //
 // Returns the attribute cast to `PangoAttrString`.
 // 
 // This is mainly useful for language bindings.
-func (attr *Attribute) AsString() AttrString {
+func (attr *Attribute) AsString() *AttrString {
 	var carg0 *C.PangoAttribute  // in, none, converted
 	var cret  *C.PangoAttrString // return, none, converted
 
@@ -12334,29 +13020,51 @@ func (attr *Attribute) AsString() AttrString {
 	cret = C.pango_attribute_as_string(carg0)
 	runtime.KeepAlive(attr)
 
-	var ret AttrString
+	var goret *AttrString
 
-	ret = UnsafeAttrStringFromGlibNone(unsafe.Pointer(cret))
+	goret = UnsafeAttrStringFromGlibNone(unsafe.Pointer(cret))
 
-	return ret
+	return goret
+}
+
+// Copy wraps pango_attribute_copy
+// The function returns the following values:
+// 
+// 	- goret *Attribute 
+//
+// Make a copy of an attribute.
+func (attr *Attribute) Copy() *Attribute {
+	var carg0 *C.PangoAttribute // in, none, converted
+	var cret  *C.PangoAttribute // return, full, converted
+
+	carg0 = (*C.PangoAttribute)(UnsafeAttributeToGlibNone(attr))
+
+	cret = C.pango_attribute_copy(carg0)
+	runtime.KeepAlive(attr)
+
+	var goret *Attribute
+
+	goret = UnsafeAttributeFromGlibFull(unsafe.Pointer(cret))
+
+	return goret
 }
 
 // Equal wraps pango_attribute_equal
 // 
 // The function takes the following parameters:
 // 
-// 	- attr2 Attribute: another `PangoAttribute` 
+// 	- attr2 *Attribute: another `PangoAttribute` 
 // 
 // The function returns the following values:
 // 
-// 	- ret bool 
+// 	- goret bool 
 //
 // Compare two attributes for equality.
 // 
 // This compares only the actual value of the two
 // attributes and not the ranges that the attributes
 // apply to.
-func (attr1 *Attribute) Equal(attr2 Attribute) bool {
+func (attr1 *Attribute) Equal(attr2 *Attribute) bool {
 	var carg0 *C.PangoAttribute // in, none, converted
 	var carg1 *C.PangoAttribute // in, none, converted
 	var cret  C.gboolean        // return
@@ -12368,26 +13076,26 @@ func (attr1 *Attribute) Equal(attr2 Attribute) bool {
 	runtime.KeepAlive(attr1)
 	runtime.KeepAlive(attr2)
 
-	var ret bool
+	var goret bool
 
 	if cret != 0 {
-		ret = true
+		goret = true
 	}
 
-	return ret
+	return goret
 }
 
 // Init wraps pango_attribute_init
 // 
 // The function takes the following parameters:
 // 
-// 	- klass AttrClass: a `PangoAttrClass` 
+// 	- klass *AttrClass: a `PangoAttrClass` 
 //
 // Initializes @attr's klass to @klass, it's start_index to
 // %PANGO_ATTR_INDEX_FROM_TEXT_BEGINNING and end_index to
 // %PANGO_ATTR_INDEX_TO_TEXT_END such that the attribute applies
 // to the entire text by default.
-func (attr *Attribute) Init(klass AttrClass) {
+func (attr *Attribute) Init(klass *AttrClass) {
 	var carg0 *C.PangoAttribute // in, none, converted
 	var carg1 *C.PangoAttrClass // in, none, converted
 
@@ -12412,14 +13120,34 @@ type color struct {
 	native *C.PangoColor
 }
 
-func marshalColor(p uintptr) (interface{}, error) {
-	b := gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Boxed()
+var _ gobject.GoValueInitializer = (*Color)(nil)
+
+func marshalColor(p unsafe.Pointer) (interface{}, error) {
+	b := gobject.ValueFromNative(p).Boxed()
 	return UnsafeColorFromGlibBorrow(b), nil
+}
+
+func (r *Color) InitGoValue(v *gobject.Value) {
+	v.Init(TypeColor)
+	v.SetBoxed(unsafe.Pointer(r.native))
 }
 
 // UnsafeColorFromGlibBorrow is used to convert raw C.PangoColor pointers to go. This is used by the bindings internally.
 func UnsafeColorFromGlibBorrow(p unsafe.Pointer) *Color {
 	return &Color{&color{(*C.PangoColor)(p)}}
+}
+
+// UnsafeColorFromGlibNone is used to convert raw C.PangoColor pointers to go while taking a reference. This is used by the bindings internally.
+func UnsafeColorFromGlibNone(p unsafe.Pointer) *Color {
+	// FIXME: this has no ref function, what should we do here?
+	wrapped := UnsafeColorFromGlibBorrow(p)
+	runtime.SetFinalizer(
+		wrapped.color,
+		func (intern *color) {
+			C.pango_color_free(intern.native)
+		},
+	)
+	return wrapped
 }
 
 // UnsafeColorFromGlibFull is used to convert raw C.PangoColor pointers to go while taking a reference. This is used by the bindings internally.
@@ -12508,6 +13236,33 @@ func (c *Color) SetBlue(blue uint16) {
 	*valptr = C.guint16(blue)
 }
 
+// Copy wraps pango_color_copy
+// The function returns the following values:
+// 
+// 	- goret *Color 
+//
+// Creates a copy of @src.
+// 
+// The copy should be freed with [method@Pango.Color.free].
+// Primarily used by language bindings, not that useful
+// otherwise (since colors can just be copied by assignment
+// in C).
+func (src *Color) Copy() *Color {
+	var carg0 *C.PangoColor // in, none, converted
+	var cret  *C.PangoColor // return, full, converted
+
+	carg0 = (*C.PangoColor)(UnsafeColorToGlibNone(src))
+
+	cret = C.pango_color_copy(carg0)
+	runtime.KeepAlive(src)
+
+	var goret *Color
+
+	goret = UnsafeColorFromGlibFull(unsafe.Pointer(cret))
+
+	return goret
+}
+
 // Parse wraps pango_color_parse
 // 
 // The function takes the following parameters:
@@ -12516,7 +13271,7 @@ func (c *Color) SetBlue(blue uint16) {
 // 
 // The function returns the following values:
 // 
-// 	- ret bool 
+// 	- goret bool 
 //
 // Fill in the fields of a color from a string specification.
 // 
@@ -12540,13 +13295,13 @@ func (color *Color) Parse(spec string) bool {
 	runtime.KeepAlive(color)
 	runtime.KeepAlive(spec)
 
-	var ret bool
+	var goret bool
 
 	if cret != 0 {
-		ret = true
+		goret = true
 	}
 
-	return ret
+	return goret
 }
 
 // ParseWithAlpha wraps pango_color_parse_with_alpha
@@ -12558,7 +13313,7 @@ func (color *Color) Parse(spec string) bool {
 // The function returns the following values:
 // 
 // 	- alpha uint16: return location for alpha 
-// 	- ret bool 
+// 	- goret bool 
 //
 // Fill in the fields of a color from a string specification.
 // 
@@ -12590,20 +13345,20 @@ func (color *Color) ParseWithAlpha(spec string) (uint16, bool) {
 	runtime.KeepAlive(spec)
 
 	var alpha uint16
-	var ret   bool
+	var goret bool
 
 	alpha = uint16(carg1)
 	if cret != 0 {
-		ret = true
+		goret = true
 	}
 
-	return alpha, ret
+	return alpha, goret
 }
 
 // ToString wraps pango_color_to_string
 // The function returns the following values:
 // 
-// 	- ret string 
+// 	- goret string 
 //
 // Returns a textual specification of @color.
 // 
@@ -12619,12 +13374,12 @@ func (color *Color) ToString() string {
 	cret = C.pango_color_to_string(carg0)
 	runtime.KeepAlive(color)
 
-	var ret string
+	var goret string
 
-	ret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
 	defer C.free(unsafe.Pointer(cret))
 
-	return ret
+	return goret
 }
 
 // ContextClass wraps PangoContextClass
@@ -12640,6 +13395,19 @@ type contextClass struct {
 // UnsafeContextClassFromGlibBorrow is used to convert raw C.PangoContextClass pointers to go. This is used by the bindings internally.
 func UnsafeContextClassFromGlibBorrow(p unsafe.Pointer) *ContextClass {
 	return &ContextClass{&contextClass{(*C.PangoContextClass)(p)}}
+}
+
+// UnsafeContextClassFromGlibNone is used to convert raw C.PangoContextClass pointers to go while taking a reference. This is used by the bindings internally.
+func UnsafeContextClassFromGlibNone(p unsafe.Pointer) *ContextClass {
+	// FIXME: this has no ref function, what should we do here?
+	wrapped := UnsafeContextClassFromGlibBorrow(p)
+	runtime.SetFinalizer(
+		wrapped.contextClass,
+		func (intern *contextClass) {
+			C.free(unsafe.Pointer(intern.native))
+		},
+	)
+	return wrapped
 }
 
 // UnsafeContextClassFromGlibFull is used to convert raw C.PangoContextClass pointers to go while taking a reference. This is used by the bindings internally.
@@ -12687,6 +13455,19 @@ type fontClass struct {
 // UnsafeFontClassFromGlibBorrow is used to convert raw C.PangoFontClass pointers to go. This is used by the bindings internally.
 func UnsafeFontClassFromGlibBorrow(p unsafe.Pointer) *FontClass {
 	return &FontClass{&fontClass{(*C.PangoFontClass)(p)}}
+}
+
+// UnsafeFontClassFromGlibNone is used to convert raw C.PangoFontClass pointers to go while taking a reference. This is used by the bindings internally.
+func UnsafeFontClassFromGlibNone(p unsafe.Pointer) *FontClass {
+	// FIXME: this has no ref function, what should we do here?
+	wrapped := UnsafeFontClassFromGlibBorrow(p)
+	runtime.SetFinalizer(
+		wrapped.fontClass,
+		func (intern *fontClass) {
+			C.free(unsafe.Pointer(intern.native))
+		},
+	)
+	return wrapped
 }
 
 // UnsafeFontClassFromGlibFull is used to convert raw C.PangoFontClass pointers to go while taking a reference. This is used by the bindings internally.
@@ -12738,14 +13519,34 @@ type fontDescription struct {
 	native *C.PangoFontDescription
 }
 
-func marshalFontDescription(p uintptr) (interface{}, error) {
-	b := gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Boxed()
+var _ gobject.GoValueInitializer = (*FontDescription)(nil)
+
+func marshalFontDescription(p unsafe.Pointer) (interface{}, error) {
+	b := gobject.ValueFromNative(p).Boxed()
 	return UnsafeFontDescriptionFromGlibBorrow(b), nil
+}
+
+func (r *FontDescription) InitGoValue(v *gobject.Value) {
+	v.Init(TypeFontDescription)
+	v.SetBoxed(unsafe.Pointer(r.native))
 }
 
 // UnsafeFontDescriptionFromGlibBorrow is used to convert raw C.PangoFontDescription pointers to go. This is used by the bindings internally.
 func UnsafeFontDescriptionFromGlibBorrow(p unsafe.Pointer) *FontDescription {
 	return &FontDescription{&fontDescription{(*C.PangoFontDescription)(p)}}
+}
+
+// UnsafeFontDescriptionFromGlibNone is used to convert raw C.PangoFontDescription pointers to go while taking a reference. This is used by the bindings internally.
+func UnsafeFontDescriptionFromGlibNone(p unsafe.Pointer) *FontDescription {
+	// FIXME: this has no ref function, what should we do here?
+	wrapped := UnsafeFontDescriptionFromGlibBorrow(p)
+	runtime.SetFinalizer(
+		wrapped.fontDescription,
+		func (intern *fontDescription) {
+			C.pango_font_description_free(intern.native)
+		},
+	)
+	return wrapped
 }
 
 // UnsafeFontDescriptionFromGlibFull is used to convert raw C.PangoFontDescription pointers to go while taking a reference. This is used by the bindings internally.
@@ -12783,31 +13584,31 @@ func UnsafeFontDescriptionToGlibFull(f *FontDescription) unsafe.Pointer {
 // NewFontDescription wraps pango_font_description_new
 // The function returns the following values:
 // 
-// 	- ret FontDescription 
+// 	- goret *FontDescription 
 //
 // Creates a new font description structure with all fields unset.
-func NewFontDescription() FontDescription {
+func NewFontDescription() *FontDescription {
 	var cret *C.PangoFontDescription // return, full, converted
 
 	cret = C.pango_font_description_new()
 
-	var ret FontDescription
+	var goret *FontDescription
 
-	ret = UnsafeFontDescriptionFromGlibFull(unsafe.Pointer(cret))
+	goret = UnsafeFontDescriptionFromGlibFull(unsafe.Pointer(cret))
 
-	return ret
+	return goret
 }
 
 // BetterMatch wraps pango_font_description_better_match
 // 
 // The function takes the following parameters:
 // 
-// 	- oldMatch FontDescription (nullable): a `PangoFontDescription`, or %NULL 
-// 	- newMatch FontDescription: a `PangoFontDescription` 
+// 	- oldMatch *FontDescription (nullable): a `PangoFontDescription`, or %NULL 
+// 	- newMatch *FontDescription: a `PangoFontDescription` 
 // 
 // The function returns the following values:
 // 
-// 	- ret bool 
+// 	- goret bool 
 //
 // Determines if the style attributes of @new_match are a closer match
 // for @desc than those of @old_match are, or if @old_match is %NULL,
@@ -12820,7 +13621,7 @@ func NewFontDescription() FontDescription {
 // a match as when the styles are equal.
 // 
 // Note that @old_match must match @desc.
-func (desc *FontDescription) BetterMatch(oldMatch FontDescription, newMatch FontDescription) bool {
+func (desc *FontDescription) BetterMatch(oldMatch *FontDescription, newMatch *FontDescription) bool {
 	var carg0 *C.PangoFontDescription // in, none, converted
 	var carg1 *C.PangoFontDescription // in, none, converted, nullable
 	var carg2 *C.PangoFontDescription // in, none, converted
@@ -12837,19 +13638,41 @@ func (desc *FontDescription) BetterMatch(oldMatch FontDescription, newMatch Font
 	runtime.KeepAlive(oldMatch)
 	runtime.KeepAlive(newMatch)
 
-	var ret bool
+	var goret bool
 
 	if cret != 0 {
-		ret = true
+		goret = true
 	}
 
-	return ret
+	return goret
+}
+
+// Copy wraps pango_font_description_copy
+// The function returns the following values:
+// 
+// 	- goret *FontDescription 
+//
+// Make a copy of a `PangoFontDescription`.
+func (desc *FontDescription) Copy() *FontDescription {
+	var carg0 *C.PangoFontDescription // in, none, converted
+	var cret  *C.PangoFontDescription // return, full, converted
+
+	carg0 = (*C.PangoFontDescription)(UnsafeFontDescriptionToGlibNone(desc))
+
+	cret = C.pango_font_description_copy(carg0)
+	runtime.KeepAlive(desc)
+
+	var goret *FontDescription
+
+	goret = UnsafeFontDescriptionFromGlibFull(unsafe.Pointer(cret))
+
+	return goret
 }
 
 // CopyStatic wraps pango_font_description_copy_static
 // The function returns the following values:
 // 
-// 	- ret FontDescription 
+// 	- goret *FontDescription 
 //
 // Make a copy of a `PangoFontDescription`, but don't duplicate
 // allocated fields.
@@ -12858,7 +13681,7 @@ func (desc *FontDescription) BetterMatch(oldMatch FontDescription, newMatch Font
 // copy is made of the family name and other allocated fields. The result
 // can only be used until @desc is modified or freed. This is meant
 // to be used when the copy is only needed temporarily.
-func (desc *FontDescription) CopyStatic() FontDescription {
+func (desc *FontDescription) CopyStatic() *FontDescription {
 	var carg0 *C.PangoFontDescription // in, none, converted
 	var cret  *C.PangoFontDescription // return, full, converted
 
@@ -12867,22 +13690,22 @@ func (desc *FontDescription) CopyStatic() FontDescription {
 	cret = C.pango_font_description_copy_static(carg0)
 	runtime.KeepAlive(desc)
 
-	var ret FontDescription
+	var goret *FontDescription
 
-	ret = UnsafeFontDescriptionFromGlibFull(unsafe.Pointer(cret))
+	goret = UnsafeFontDescriptionFromGlibFull(unsafe.Pointer(cret))
 
-	return ret
+	return goret
 }
 
 // Equal wraps pango_font_description_equal
 // 
 // The function takes the following parameters:
 // 
-// 	- desc2 FontDescription: another `PangoFontDescription` 
+// 	- desc2 *FontDescription: another `PangoFontDescription` 
 // 
 // The function returns the following values:
 // 
-// 	- ret bool 
+// 	- goret bool 
 //
 // Compares two font descriptions for equality.
 // 
@@ -12890,7 +13713,7 @@ func (desc *FontDescription) CopyStatic() FontDescription {
 // are provably identical. This means that their masks do not have to match,
 // as long as other fields are all the same. (Two font descriptions may
 // result in identical fonts being loaded, but still compare %FALSE.)
-func (desc1 *FontDescription) Equal(desc2 FontDescription) bool {
+func (desc1 *FontDescription) Equal(desc2 *FontDescription) bool {
 	var carg0 *C.PangoFontDescription // in, none, converted
 	var carg1 *C.PangoFontDescription // in, none, converted
 	var cret  C.gboolean              // return
@@ -12902,19 +13725,19 @@ func (desc1 *FontDescription) Equal(desc2 FontDescription) bool {
 	runtime.KeepAlive(desc1)
 	runtime.KeepAlive(desc2)
 
-	var ret bool
+	var goret bool
 
 	if cret != 0 {
-		ret = true
+		goret = true
 	}
 
-	return ret
+	return goret
 }
 
 // GetFamily wraps pango_font_description_get_family
 // The function returns the following values:
 // 
-// 	- ret string 
+// 	- goret string 
 //
 // Gets the family name field of a font description.
 // 
@@ -12928,17 +13751,17 @@ func (desc *FontDescription) GetFamily() string {
 	cret = C.pango_font_description_get_family(carg0)
 	runtime.KeepAlive(desc)
 
-	var ret string
+	var goret string
 
-	ret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
 
-	return ret
+	return goret
 }
 
 // GetFeatures wraps pango_font_description_get_features
 // The function returns the following values:
 // 
-// 	- ret string 
+// 	- goret string 
 //
 // Gets the features field of a font description.
 // 
@@ -12952,17 +13775,17 @@ func (desc *FontDescription) GetFeatures() string {
 	cret = C.pango_font_description_get_features(carg0)
 	runtime.KeepAlive(desc)
 
-	var ret string
+	var goret string
 
-	ret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
 
-	return ret
+	return goret
 }
 
 // GetGravity wraps pango_font_description_get_gravity
 // The function returns the following values:
 // 
-// 	- ret Gravity 
+// 	- goret Gravity 
 //
 // Gets the gravity field of a font description.
 // 
@@ -12976,17 +13799,17 @@ func (desc *FontDescription) GetGravity() Gravity {
 	cret = C.pango_font_description_get_gravity(carg0)
 	runtime.KeepAlive(desc)
 
-	var ret Gravity
+	var goret Gravity
 
-	ret = Gravity(cret)
+	goret = Gravity(cret)
 
-	return ret
+	return goret
 }
 
 // GetSetFields wraps pango_font_description_get_set_fields
 // The function returns the following values:
 // 
-// 	- ret FontMask 
+// 	- goret FontMask 
 //
 // Determines which fields in a font description have been set.
 func (desc *FontDescription) GetSetFields() FontMask {
@@ -12998,17 +13821,17 @@ func (desc *FontDescription) GetSetFields() FontMask {
 	cret = C.pango_font_description_get_set_fields(carg0)
 	runtime.KeepAlive(desc)
 
-	var ret FontMask
+	var goret FontMask
 
-	ret = FontMask(cret)
+	goret = FontMask(cret)
 
-	return ret
+	return goret
 }
 
 // GetSize wraps pango_font_description_get_size
 // The function returns the following values:
 // 
-// 	- ret int 
+// 	- goret int 
 //
 // Gets the size field of a font description.
 // 
@@ -13022,17 +13845,17 @@ func (desc *FontDescription) GetSize() int {
 	cret = C.pango_font_description_get_size(carg0)
 	runtime.KeepAlive(desc)
 
-	var ret int
+	var goret int
 
-	ret = int(cret)
+	goret = int(cret)
 
-	return ret
+	return goret
 }
 
 // GetSizeIsAbsolute wraps pango_font_description_get_size_is_absolute
 // The function returns the following values:
 // 
-// 	- ret bool 
+// 	- goret bool 
 //
 // Determines whether the size of the font is in points (not absolute)
 // or device units (absolute).
@@ -13048,19 +13871,19 @@ func (desc *FontDescription) GetSizeIsAbsolute() bool {
 	cret = C.pango_font_description_get_size_is_absolute(carg0)
 	runtime.KeepAlive(desc)
 
-	var ret bool
+	var goret bool
 
 	if cret != 0 {
-		ret = true
+		goret = true
 	}
 
-	return ret
+	return goret
 }
 
 // GetStretch wraps pango_font_description_get_stretch
 // The function returns the following values:
 // 
-// 	- ret Stretch 
+// 	- goret Stretch 
 //
 // Gets the stretch field of a font description.
 // 
@@ -13074,17 +13897,17 @@ func (desc *FontDescription) GetStretch() Stretch {
 	cret = C.pango_font_description_get_stretch(carg0)
 	runtime.KeepAlive(desc)
 
-	var ret Stretch
+	var goret Stretch
 
-	ret = Stretch(cret)
+	goret = Stretch(cret)
 
-	return ret
+	return goret
 }
 
 // GetStyle wraps pango_font_description_get_style
 // The function returns the following values:
 // 
-// 	- ret Style 
+// 	- goret Style 
 //
 // Gets the style field of a `PangoFontDescription`.
 // 
@@ -13098,17 +13921,17 @@ func (desc *FontDescription) GetStyle() Style {
 	cret = C.pango_font_description_get_style(carg0)
 	runtime.KeepAlive(desc)
 
-	var ret Style
+	var goret Style
 
-	ret = Style(cret)
+	goret = Style(cret)
 
-	return ret
+	return goret
 }
 
 // GetVariant wraps pango_font_description_get_variant
 // The function returns the following values:
 // 
-// 	- ret Variant 
+// 	- goret Variant 
 //
 // Gets the variant field of a `PangoFontDescription`.
 // 
@@ -13122,17 +13945,17 @@ func (desc *FontDescription) GetVariant() Variant {
 	cret = C.pango_font_description_get_variant(carg0)
 	runtime.KeepAlive(desc)
 
-	var ret Variant
+	var goret Variant
 
-	ret = Variant(cret)
+	goret = Variant(cret)
 
-	return ret
+	return goret
 }
 
 // GetVariations wraps pango_font_description_get_variations
 // The function returns the following values:
 // 
-// 	- ret string 
+// 	- goret string 
 //
 // Gets the variations field of a font description.
 // 
@@ -13146,17 +13969,17 @@ func (desc *FontDescription) GetVariations() string {
 	cret = C.pango_font_description_get_variations(carg0)
 	runtime.KeepAlive(desc)
 
-	var ret string
+	var goret string
 
-	ret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
 
-	return ret
+	return goret
 }
 
 // GetWeight wraps pango_font_description_get_weight
 // The function returns the following values:
 // 
-// 	- ret Weight 
+// 	- goret Weight 
 //
 // Gets the weight field of a font description.
 // 
@@ -13170,17 +13993,17 @@ func (desc *FontDescription) GetWeight() Weight {
 	cret = C.pango_font_description_get_weight(carg0)
 	runtime.KeepAlive(desc)
 
-	var ret Weight
+	var goret Weight
 
-	ret = Weight(cret)
+	goret = Weight(cret)
 
-	return ret
+	return goret
 }
 
 // Hash wraps pango_font_description_hash
 // The function returns the following values:
 // 
-// 	- ret uint 
+// 	- goret uint 
 //
 // Computes a hash of a `PangoFontDescription` structure.
 // 
@@ -13195,18 +14018,18 @@ func (desc *FontDescription) Hash() uint {
 	cret = C.pango_font_description_hash(carg0)
 	runtime.KeepAlive(desc)
 
-	var ret uint
+	var goret uint
 
-	ret = uint(cret)
+	goret = uint(cret)
 
-	return ret
+	return goret
 }
 
 // Merge wraps pango_font_description_merge
 // 
 // The function takes the following parameters:
 // 
-// 	- descToMerge FontDescription (nullable): the `PangoFontDescription` to merge from,
+// 	- descToMerge *FontDescription (nullable): the `PangoFontDescription` to merge from,
 //   or %NULL 
 // 	- replaceExisting bool: if %TRUE, replace fields in @desc with the
 //   corresponding values from @desc_to_merge, even if they
@@ -13220,7 +14043,7 @@ func (desc *FontDescription) Hash() uint {
 // already set will be replaced as well.
 // 
 // If @desc_to_merge is %NULL, this function performs nothing.
-func (desc *FontDescription) Merge(descToMerge FontDescription, replaceExisting bool) {
+func (desc *FontDescription) Merge(descToMerge *FontDescription, replaceExisting bool) {
 	var carg0 *C.PangoFontDescription // in, none, converted
 	var carg1 *C.PangoFontDescription // in, none, converted, nullable
 	var carg2 C.gboolean              // in
@@ -13243,7 +14066,7 @@ func (desc *FontDescription) Merge(descToMerge FontDescription, replaceExisting 
 // 
 // The function takes the following parameters:
 // 
-// 	- descToMerge FontDescription: the `PangoFontDescription` to merge from 
+// 	- descToMerge *FontDescription: the `PangoFontDescription` to merge from 
 // 	- replaceExisting bool: if %TRUE, replace fields in @desc with the
 //   corresponding values from @desc_to_merge, even if they
 //   are already exist. 
@@ -13255,7 +14078,7 @@ func (desc *FontDescription) Merge(descToMerge FontDescription, replaceExisting 
 // is made of the family name and other allocated fields. @desc can only
 // be used until @desc_to_merge is modified or freed. This is meant to
 // be used when the merged font description is only needed temporarily.
-func (desc *FontDescription) MergeStatic(descToMerge FontDescription, replaceExisting bool) {
+func (desc *FontDescription) MergeStatic(descToMerge *FontDescription, replaceExisting bool) {
 	var carg0 *C.PangoFontDescription // in, none, converted
 	var carg1 *C.PangoFontDescription // in, none, converted
 	var carg2 C.gboolean              // in
@@ -13380,7 +14203,7 @@ func (desc *FontDescription) SetFamilyStatic(family string) {
 // Features that are not supported by the font are silently ignored.
 func (desc *FontDescription) SetFeatures(features string) {
 	var carg0 *C.PangoFontDescription // in, none, converted
-	var carg1 *C.gchar                // in, none, string, nullable
+	var carg1 *C.gchar                // in, none, string, nullable-string
 
 	carg0 = (*C.PangoFontDescription)(UnsafeFontDescriptionToGlibNone(desc))
 	if features != "" {
@@ -13572,7 +14395,7 @@ func (desc *FontDescription) SetVariant(variant Variant) {
 // for example [hb_ot_var_get_axis_infos](https://harfbuzz.github.io/harfbuzz-hb-ot-var.html#hb-ot-var-get-axis-infos).
 func (desc *FontDescription) SetVariations(variations string) {
 	var carg0 *C.PangoFontDescription // in, none, converted
-	var carg1 *C.gchar                // in, none, string, nullable
+	var carg1 *C.gchar                // in, none, string, nullable-string
 
 	carg0 = (*C.PangoFontDescription)(UnsafeFontDescriptionToGlibNone(desc))
 	if variations != "" {
@@ -13639,7 +14462,7 @@ func (desc *FontDescription) SetWeight(weight Weight) {
 // ToFilename wraps pango_font_description_to_filename
 // The function returns the following values:
 // 
-// 	- ret string 
+// 	- goret string 
 //
 // Creates a filename representation of a font description.
 // 
@@ -13656,18 +14479,18 @@ func (desc *FontDescription) ToFilename() string {
 	cret = C.pango_font_description_to_filename(carg0)
 	runtime.KeepAlive(desc)
 
-	var ret string
+	var goret string
 
-	ret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
 	defer C.free(unsafe.Pointer(cret))
 
-	return ret
+	return goret
 }
 
 // ToString wraps pango_font_description_to_string
 // The function returns the following values:
 // 
-// 	- ret string 
+// 	- goret string 
 //
 // Creates a string representation of a font description.
 // 
@@ -13684,12 +14507,12 @@ func (desc *FontDescription) ToString() string {
 	cret = C.pango_font_description_to_string(carg0)
 	runtime.KeepAlive(desc)
 
-	var ret string
+	var goret string
 
-	ret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
 	defer C.free(unsafe.Pointer(cret))
 
-	return ret
+	return goret
 }
 
 // UnsetFields wraps pango_font_description_unset_fields
@@ -13726,6 +14549,19 @@ type fontFaceClass struct {
 // UnsafeFontFaceClassFromGlibBorrow is used to convert raw C.PangoFontFaceClass pointers to go. This is used by the bindings internally.
 func UnsafeFontFaceClassFromGlibBorrow(p unsafe.Pointer) *FontFaceClass {
 	return &FontFaceClass{&fontFaceClass{(*C.PangoFontFaceClass)(p)}}
+}
+
+// UnsafeFontFaceClassFromGlibNone is used to convert raw C.PangoFontFaceClass pointers to go while taking a reference. This is used by the bindings internally.
+func UnsafeFontFaceClassFromGlibNone(p unsafe.Pointer) *FontFaceClass {
+	// FIXME: this has no ref function, what should we do here?
+	wrapped := UnsafeFontFaceClassFromGlibBorrow(p)
+	runtime.SetFinalizer(
+		wrapped.fontFaceClass,
+		func (intern *fontFaceClass) {
+			C.free(unsafe.Pointer(intern.native))
+		},
+	)
+	return wrapped
 }
 
 // UnsafeFontFaceClassFromGlibFull is used to convert raw C.PangoFontFaceClass pointers to go while taking a reference. This is used by the bindings internally.
@@ -13773,6 +14609,19 @@ type fontFamilyClass struct {
 // UnsafeFontFamilyClassFromGlibBorrow is used to convert raw C.PangoFontFamilyClass pointers to go. This is used by the bindings internally.
 func UnsafeFontFamilyClassFromGlibBorrow(p unsafe.Pointer) *FontFamilyClass {
 	return &FontFamilyClass{&fontFamilyClass{(*C.PangoFontFamilyClass)(p)}}
+}
+
+// UnsafeFontFamilyClassFromGlibNone is used to convert raw C.PangoFontFamilyClass pointers to go while taking a reference. This is used by the bindings internally.
+func UnsafeFontFamilyClassFromGlibNone(p unsafe.Pointer) *FontFamilyClass {
+	// FIXME: this has no ref function, what should we do here?
+	wrapped := UnsafeFontFamilyClassFromGlibBorrow(p)
+	runtime.SetFinalizer(
+		wrapped.fontFamilyClass,
+		func (intern *fontFamilyClass) {
+			C.free(unsafe.Pointer(intern.native))
+		},
+	)
+	return wrapped
 }
 
 // UnsafeFontFamilyClassFromGlibFull is used to convert raw C.PangoFontFamilyClass pointers to go while taking a reference. This is used by the bindings internally.
@@ -13823,6 +14672,19 @@ type fontMapClass struct {
 // UnsafeFontMapClassFromGlibBorrow is used to convert raw C.PangoFontMapClass pointers to go. This is used by the bindings internally.
 func UnsafeFontMapClassFromGlibBorrow(p unsafe.Pointer) *FontMapClass {
 	return &FontMapClass{&fontMapClass{(*C.PangoFontMapClass)(p)}}
+}
+
+// UnsafeFontMapClassFromGlibNone is used to convert raw C.PangoFontMapClass pointers to go while taking a reference. This is used by the bindings internally.
+func UnsafeFontMapClassFromGlibNone(p unsafe.Pointer) *FontMapClass {
+	// FIXME: this has no ref function, what should we do here?
+	wrapped := UnsafeFontMapClassFromGlibBorrow(p)
+	runtime.SetFinalizer(
+		wrapped.fontMapClass,
+		func (intern *fontMapClass) {
+			C.free(unsafe.Pointer(intern.native))
+		},
+	)
+	return wrapped
 }
 
 // UnsafeFontMapClassFromGlibFull is used to convert raw C.PangoFontMapClass pointers to go while taking a reference. This is used by the bindings internally.
@@ -13882,9 +14744,16 @@ type fontMetrics struct {
 	native *C.PangoFontMetrics
 }
 
-func marshalFontMetrics(p uintptr) (interface{}, error) {
-	b := gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Boxed()
+var _ gobject.GoValueInitializer = (*FontMetrics)(nil)
+
+func marshalFontMetrics(p unsafe.Pointer) (interface{}, error) {
+	b := gobject.ValueFromNative(p).Boxed()
 	return UnsafeFontMetricsFromGlibBorrow(b), nil
+}
+
+func (r *FontMetrics) InitGoValue(v *gobject.Value) {
+	v.Init(TypeFontMetrics)
+	v.SetBoxed(unsafe.Pointer(r.native))
 }
 
 // UnsafeFontMetricsFromGlibBorrow is used to convert raw C.PangoFontMetrics pointers to go. This is used by the bindings internally.
@@ -13894,8 +14763,8 @@ func UnsafeFontMetricsFromGlibBorrow(p unsafe.Pointer) *FontMetrics {
 
 // UnsafeFontMetricsFromGlibNone is used to convert raw C.PangoFontMetrics pointers to go while taking a reference. This is used by the bindings internally.
 func UnsafeFontMetricsFromGlibNone(p unsafe.Pointer) *FontMetrics {
-	C.pango_font_metrics_ref(p)
-	wrapped := UnsafeFontMetricsFromGlibNone(p)
+	C.pango_font_metrics_ref((*C.PangoFontMetrics)(p))
+	wrapped := UnsafeFontMetricsFromGlibBorrow(p)
 	runtime.SetFinalizer(
 		wrapped.fontMetrics,
 		func (intern *fontMetrics) {
@@ -13947,7 +14816,7 @@ func UnsafeFontMetricsToGlibFull(f *FontMetrics) unsafe.Pointer {
 // GetApproximateCharWidth wraps pango_font_metrics_get_approximate_char_width
 // The function returns the following values:
 // 
-// 	- ret int 
+// 	- goret int 
 //
 // Gets the approximate character width for a font metrics structure.
 // 
@@ -13963,17 +14832,17 @@ func (metrics *FontMetrics) GetApproximateCharWidth() int {
 	cret = C.pango_font_metrics_get_approximate_char_width(carg0)
 	runtime.KeepAlive(metrics)
 
-	var ret int
+	var goret int
 
-	ret = int(cret)
+	goret = int(cret)
 
-	return ret
+	return goret
 }
 
 // GetApproximateDigitWidth wraps pango_font_metrics_get_approximate_digit_width
 // The function returns the following values:
 // 
-// 	- ret int 
+// 	- goret int 
 //
 // Gets the approximate digit width for a font metrics structure.
 // 
@@ -13991,17 +14860,17 @@ func (metrics *FontMetrics) GetApproximateDigitWidth() int {
 	cret = C.pango_font_metrics_get_approximate_digit_width(carg0)
 	runtime.KeepAlive(metrics)
 
-	var ret int
+	var goret int
 
-	ret = int(cret)
+	goret = int(cret)
 
-	return ret
+	return goret
 }
 
 // GetAscent wraps pango_font_metrics_get_ascent
 // The function returns the following values:
 // 
-// 	- ret int 
+// 	- goret int 
 //
 // Gets the ascent from a font metrics structure.
 // 
@@ -14018,17 +14887,17 @@ func (metrics *FontMetrics) GetAscent() int {
 	cret = C.pango_font_metrics_get_ascent(carg0)
 	runtime.KeepAlive(metrics)
 
-	var ret int
+	var goret int
 
-	ret = int(cret)
+	goret = int(cret)
 
-	return ret
+	return goret
 }
 
 // GetDescent wraps pango_font_metrics_get_descent
 // The function returns the following values:
 // 
-// 	- ret int 
+// 	- goret int 
 //
 // Gets the descent from a font metrics structure.
 // 
@@ -14045,17 +14914,17 @@ func (metrics *FontMetrics) GetDescent() int {
 	cret = C.pango_font_metrics_get_descent(carg0)
 	runtime.KeepAlive(metrics)
 
-	var ret int
+	var goret int
 
-	ret = int(cret)
+	goret = int(cret)
 
-	return ret
+	return goret
 }
 
 // GetHeight wraps pango_font_metrics_get_height
 // The function returns the following values:
 // 
-// 	- ret int 
+// 	- goret int 
 //
 // Gets the line height from a font metrics structure.
 // 
@@ -14072,17 +14941,17 @@ func (metrics *FontMetrics) GetHeight() int {
 	cret = C.pango_font_metrics_get_height(carg0)
 	runtime.KeepAlive(metrics)
 
-	var ret int
+	var goret int
 
-	ret = int(cret)
+	goret = int(cret)
 
-	return ret
+	return goret
 }
 
 // GetStrikethroughPosition wraps pango_font_metrics_get_strikethrough_position
 // The function returns the following values:
 // 
-// 	- ret int 
+// 	- goret int 
 //
 // Gets the suggested position to draw the strikethrough.
 // 
@@ -14097,17 +14966,17 @@ func (metrics *FontMetrics) GetStrikethroughPosition() int {
 	cret = C.pango_font_metrics_get_strikethrough_position(carg0)
 	runtime.KeepAlive(metrics)
 
-	var ret int
+	var goret int
 
-	ret = int(cret)
+	goret = int(cret)
 
-	return ret
+	return goret
 }
 
 // GetStrikethroughThickness wraps pango_font_metrics_get_strikethrough_thickness
 // The function returns the following values:
 // 
-// 	- ret int 
+// 	- goret int 
 //
 // Gets the suggested thickness to draw for the strikethrough.
 func (metrics *FontMetrics) GetStrikethroughThickness() int {
@@ -14119,17 +14988,17 @@ func (metrics *FontMetrics) GetStrikethroughThickness() int {
 	cret = C.pango_font_metrics_get_strikethrough_thickness(carg0)
 	runtime.KeepAlive(metrics)
 
-	var ret int
+	var goret int
 
-	ret = int(cret)
+	goret = int(cret)
 
-	return ret
+	return goret
 }
 
 // GetUnderlinePosition wraps pango_font_metrics_get_underline_position
 // The function returns the following values:
 // 
-// 	- ret int 
+// 	- goret int 
 //
 // Gets the suggested position to draw the underline.
 // 
@@ -14145,17 +15014,17 @@ func (metrics *FontMetrics) GetUnderlinePosition() int {
 	cret = C.pango_font_metrics_get_underline_position(carg0)
 	runtime.KeepAlive(metrics)
 
-	var ret int
+	var goret int
 
-	ret = int(cret)
+	goret = int(cret)
 
-	return ret
+	return goret
 }
 
 // GetUnderlineThickness wraps pango_font_metrics_get_underline_thickness
 // The function returns the following values:
 // 
-// 	- ret int 
+// 	- goret int 
 //
 // Gets the suggested thickness to draw for the underline.
 func (metrics *FontMetrics) GetUnderlineThickness() int {
@@ -14167,11 +15036,11 @@ func (metrics *FontMetrics) GetUnderlineThickness() int {
 	cret = C.pango_font_metrics_get_underline_thickness(carg0)
 	runtime.KeepAlive(metrics)
 
-	var ret int
+	var goret int
 
-	ret = int(cret)
+	goret = int(cret)
 
-	return ret
+	return goret
 }
 
 // FontsetClass wraps PangoFontsetClass
@@ -14190,6 +15059,19 @@ type fontsetClass struct {
 // UnsafeFontsetClassFromGlibBorrow is used to convert raw C.PangoFontsetClass pointers to go. This is used by the bindings internally.
 func UnsafeFontsetClassFromGlibBorrow(p unsafe.Pointer) *FontsetClass {
 	return &FontsetClass{&fontsetClass{(*C.PangoFontsetClass)(p)}}
+}
+
+// UnsafeFontsetClassFromGlibNone is used to convert raw C.PangoFontsetClass pointers to go while taking a reference. This is used by the bindings internally.
+func UnsafeFontsetClassFromGlibNone(p unsafe.Pointer) *FontsetClass {
+	// FIXME: this has no ref function, what should we do here?
+	wrapped := UnsafeFontsetClassFromGlibBorrow(p)
+	runtime.SetFinalizer(
+		wrapped.fontsetClass,
+		func (intern *fontsetClass) {
+			C.free(unsafe.Pointer(intern.native))
+		},
+	)
+	return wrapped
 }
 
 // UnsafeFontsetClassFromGlibFull is used to convert raw C.PangoFontsetClass pointers to go while taking a reference. This is used by the bindings internally.
@@ -14237,6 +15119,19 @@ type fontsetSimpleClass struct {
 // UnsafeFontsetSimpleClassFromGlibBorrow is used to convert raw C.PangoFontsetSimpleClass pointers to go. This is used by the bindings internally.
 func UnsafeFontsetSimpleClassFromGlibBorrow(p unsafe.Pointer) *FontsetSimpleClass {
 	return &FontsetSimpleClass{&fontsetSimpleClass{(*C.PangoFontsetSimpleClass)(p)}}
+}
+
+// UnsafeFontsetSimpleClassFromGlibNone is used to convert raw C.PangoFontsetSimpleClass pointers to go while taking a reference. This is used by the bindings internally.
+func UnsafeFontsetSimpleClassFromGlibNone(p unsafe.Pointer) *FontsetSimpleClass {
+	// FIXME: this has no ref function, what should we do here?
+	wrapped := UnsafeFontsetSimpleClassFromGlibBorrow(p)
+	runtime.SetFinalizer(
+		wrapped.fontsetSimpleClass,
+		func (intern *fontsetSimpleClass) {
+			C.free(unsafe.Pointer(intern.native))
+		},
+	)
+	return wrapped
 }
 
 // UnsafeFontsetSimpleClassFromGlibFull is used to convert raw C.PangoFontsetSimpleClass pointers to go while taking a reference. This is used by the bindings internally.
@@ -14302,6 +15197,19 @@ func UnsafeGlyphGeometryFromGlibBorrow(p unsafe.Pointer) *GlyphGeometry {
 	return &GlyphGeometry{&glyphGeometry{(*C.PangoGlyphGeometry)(p)}}
 }
 
+// UnsafeGlyphGeometryFromGlibNone is used to convert raw C.PangoGlyphGeometry pointers to go while taking a reference. This is used by the bindings internally.
+func UnsafeGlyphGeometryFromGlibNone(p unsafe.Pointer) *GlyphGeometry {
+	// FIXME: this has no ref function, what should we do here?
+	wrapped := UnsafeGlyphGeometryFromGlibBorrow(p)
+	runtime.SetFinalizer(
+		wrapped.glyphGeometry,
+		func (intern *glyphGeometry) {
+			C.free(unsafe.Pointer(intern.native))
+		},
+	)
+	return wrapped
+}
+
 // UnsafeGlyphGeometryFromGlibFull is used to convert raw C.PangoGlyphGeometry pointers to go while taking a reference. This is used by the bindings internally.
 func UnsafeGlyphGeometryFromGlibFull(p unsafe.Pointer) *GlyphGeometry {
 	wrapped := UnsafeGlyphGeometryFromGlibBorrow(p)
@@ -14350,6 +15258,19 @@ type glyphInfo struct {
 // UnsafeGlyphInfoFromGlibBorrow is used to convert raw C.PangoGlyphInfo pointers to go. This is used by the bindings internally.
 func UnsafeGlyphInfoFromGlibBorrow(p unsafe.Pointer) *GlyphInfo {
 	return &GlyphInfo{&glyphInfo{(*C.PangoGlyphInfo)(p)}}
+}
+
+// UnsafeGlyphInfoFromGlibNone is used to convert raw C.PangoGlyphInfo pointers to go while taking a reference. This is used by the bindings internally.
+func UnsafeGlyphInfoFromGlibNone(p unsafe.Pointer) *GlyphInfo {
+	// FIXME: this has no ref function, what should we do here?
+	wrapped := UnsafeGlyphInfoFromGlibBorrow(p)
+	runtime.SetFinalizer(
+		wrapped.glyphInfo,
+		func (intern *glyphInfo) {
+			C.free(unsafe.Pointer(intern.native))
+		},
+	)
+	return wrapped
 }
 
 // UnsafeGlyphInfoFromGlibFull is used to convert raw C.PangoGlyphInfo pointers to go while taking a reference. This is used by the bindings internally.
@@ -14401,14 +15322,34 @@ type glyphItem struct {
 	native *C.PangoGlyphItem
 }
 
-func marshalGlyphItem(p uintptr) (interface{}, error) {
-	b := gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Boxed()
+var _ gobject.GoValueInitializer = (*GlyphItem)(nil)
+
+func marshalGlyphItem(p unsafe.Pointer) (interface{}, error) {
+	b := gobject.ValueFromNative(p).Boxed()
 	return UnsafeGlyphItemFromGlibBorrow(b), nil
+}
+
+func (r *GlyphItem) InitGoValue(v *gobject.Value) {
+	v.Init(TypeGlyphItem)
+	v.SetBoxed(unsafe.Pointer(r.native))
 }
 
 // UnsafeGlyphItemFromGlibBorrow is used to convert raw C.PangoGlyphItem pointers to go. This is used by the bindings internally.
 func UnsafeGlyphItemFromGlibBorrow(p unsafe.Pointer) *GlyphItem {
 	return &GlyphItem{&glyphItem{(*C.PangoGlyphItem)(p)}}
+}
+
+// UnsafeGlyphItemFromGlibNone is used to convert raw C.PangoGlyphItem pointers to go while taking a reference. This is used by the bindings internally.
+func UnsafeGlyphItemFromGlibNone(p unsafe.Pointer) *GlyphItem {
+	// FIXME: this has no ref function, what should we do here?
+	wrapped := UnsafeGlyphItemFromGlibBorrow(p)
+	runtime.SetFinalizer(
+		wrapped.glyphItem,
+		func (intern *glyphItem) {
+			C.pango_glyph_item_free(intern.native)
+		},
+	)
+	return wrapped
 }
 
 // UnsafeGlyphItemFromGlibFull is used to convert raw C.PangoGlyphItem pointers to go while taking a reference. This is used by the bindings internally.
@@ -14503,6 +15444,28 @@ func (g *GlyphItem) SetEndXOffset(end_x_offset int) {
 	*valptr = C.int(end_x_offset)
 }
 
+// Copy wraps pango_glyph_item_copy
+// The function returns the following values:
+// 
+// 	- goret *GlyphItem 
+//
+// Make a deep copy of an existing `PangoGlyphItem` structure.
+func (orig *GlyphItem) Copy() *GlyphItem {
+	var carg0 *C.PangoGlyphItem // in, none, converted
+	var cret  *C.PangoGlyphItem // return, full, converted
+
+	carg0 = (*C.PangoGlyphItem)(UnsafeGlyphItemToGlibNone(orig))
+
+	cret = C.pango_glyph_item_copy(carg0)
+	runtime.KeepAlive(orig)
+
+	var goret *GlyphItem
+
+	goret = UnsafeGlyphItemFromGlibFull(unsafe.Pointer(cret))
+
+	return goret
+}
+
 // Split wraps pango_glyph_item_split
 // 
 // The function takes the following parameters:
@@ -14513,7 +15476,7 @@ func (g *GlyphItem) SetEndXOffset(end_x_offset int) {
 // 
 // The function returns the following values:
 // 
-// 	- ret GlyphItem 
+// 	- goret *GlyphItem 
 //
 // Modifies @orig to cover only the text after @split_index, and
 // returns a new item that covers the text before @split_index that
@@ -14526,7 +15489,7 @@ func (g *GlyphItem) SetEndXOffset(end_x_offset int) {
 // 
 // This function is similar in function to pango_item_split() (and uses
 // it internally.)
-func (orig *GlyphItem) Split(text string, splitIndex int) GlyphItem {
+func (orig *GlyphItem) Split(text string, splitIndex int) *GlyphItem {
 	var carg0 *C.PangoGlyphItem // in, none, converted
 	var carg1 *C.gchar          // in, none, string
 	var carg2 C.int             // in, none, casted
@@ -14542,11 +15505,11 @@ func (orig *GlyphItem) Split(text string, splitIndex int) GlyphItem {
 	runtime.KeepAlive(text)
 	runtime.KeepAlive(splitIndex)
 
-	var ret GlyphItem
+	var goret *GlyphItem
 
-	ret = UnsafeGlyphItemFromGlibFull(unsafe.Pointer(cret))
+	goret = UnsafeGlyphItemFromGlibFull(unsafe.Pointer(cret))
 
-	return ret
+	return goret
 }
 
 // GlyphItemIter wraps PangoGlyphItemIter
@@ -14600,14 +15563,34 @@ type glyphItemIter struct {
 	native *C.PangoGlyphItemIter
 }
 
-func marshalGlyphItemIter(p uintptr) (interface{}, error) {
-	b := gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Boxed()
+var _ gobject.GoValueInitializer = (*GlyphItemIter)(nil)
+
+func marshalGlyphItemIter(p unsafe.Pointer) (interface{}, error) {
+	b := gobject.ValueFromNative(p).Boxed()
 	return UnsafeGlyphItemIterFromGlibBorrow(b), nil
+}
+
+func (r *GlyphItemIter) InitGoValue(v *gobject.Value) {
+	v.Init(TypeGlyphItemIter)
+	v.SetBoxed(unsafe.Pointer(r.native))
 }
 
 // UnsafeGlyphItemIterFromGlibBorrow is used to convert raw C.PangoGlyphItemIter pointers to go. This is used by the bindings internally.
 func UnsafeGlyphItemIterFromGlibBorrow(p unsafe.Pointer) *GlyphItemIter {
 	return &GlyphItemIter{&glyphItemIter{(*C.PangoGlyphItemIter)(p)}}
+}
+
+// UnsafeGlyphItemIterFromGlibNone is used to convert raw C.PangoGlyphItemIter pointers to go while taking a reference. This is used by the bindings internally.
+func UnsafeGlyphItemIterFromGlibNone(p unsafe.Pointer) *GlyphItemIter {
+	// FIXME: this has no ref function, what should we do here?
+	wrapped := UnsafeGlyphItemIterFromGlibBorrow(p)
+	runtime.SetFinalizer(
+		wrapped.glyphItemIter,
+		func (intern *glyphItemIter) {
+			C.pango_glyph_item_iter_free(intern.native)
+		},
+	)
+	return wrapped
 }
 
 // UnsafeGlyphItemIterFromGlibFull is used to convert raw C.PangoGlyphItemIter pointers to go while taking a reference. This is used by the bindings internally.
@@ -14726,22 +15709,44 @@ func (g *GlyphItemIter) SetEndChar(end_char int) {
 	*valptr = C.int(end_char)
 }
 
+// Copy wraps pango_glyph_item_iter_copy
+// The function returns the following values:
+// 
+// 	- goret *GlyphItemIter 
+//
+// Make a shallow copy of an existing `PangoGlyphItemIter` structure.
+func (orig *GlyphItemIter) Copy() *GlyphItemIter {
+	var carg0 *C.PangoGlyphItemIter // in, none, converted
+	var cret  *C.PangoGlyphItemIter // return, full, converted
+
+	carg0 = (*C.PangoGlyphItemIter)(UnsafeGlyphItemIterToGlibNone(orig))
+
+	cret = C.pango_glyph_item_iter_copy(carg0)
+	runtime.KeepAlive(orig)
+
+	var goret *GlyphItemIter
+
+	goret = UnsafeGlyphItemIterFromGlibFull(unsafe.Pointer(cret))
+
+	return goret
+}
+
 // InitEnd wraps pango_glyph_item_iter_init_end
 // 
 // The function takes the following parameters:
 // 
-// 	- glyphItem GlyphItem: the glyph item to iterate over 
+// 	- glyphItem *GlyphItem: the glyph item to iterate over 
 // 	- text string: text corresponding to the glyph item 
 // 
 // The function returns the following values:
 // 
-// 	- ret bool 
+// 	- goret bool 
 //
 // Initializes a `PangoGlyphItemIter` structure to point to the
 // last cluster in a glyph item.
 // 
 // See `PangoGlyphItemIter` for details of cluster orders.
-func (iter *GlyphItemIter) InitEnd(glyphItem GlyphItem, text string) bool {
+func (iter *GlyphItemIter) InitEnd(glyphItem *GlyphItem, text string) bool {
 	var carg0 *C.PangoGlyphItemIter // in, none, converted
 	var carg1 *C.PangoGlyphItem     // in, none, converted
 	var carg2 *C.gchar              // in, none, string
@@ -14757,31 +15762,31 @@ func (iter *GlyphItemIter) InitEnd(glyphItem GlyphItem, text string) bool {
 	runtime.KeepAlive(glyphItem)
 	runtime.KeepAlive(text)
 
-	var ret bool
+	var goret bool
 
 	if cret != 0 {
-		ret = true
+		goret = true
 	}
 
-	return ret
+	return goret
 }
 
 // InitStart wraps pango_glyph_item_iter_init_start
 // 
 // The function takes the following parameters:
 // 
-// 	- glyphItem GlyphItem: the glyph item to iterate over 
+// 	- glyphItem *GlyphItem: the glyph item to iterate over 
 // 	- text string: text corresponding to the glyph item 
 // 
 // The function returns the following values:
 // 
-// 	- ret bool 
+// 	- goret bool 
 //
 // Initializes a `PangoGlyphItemIter` structure to point to the
 // first cluster in a glyph item.
 // 
 // See `PangoGlyphItemIter` for details of cluster orders.
-func (iter *GlyphItemIter) InitStart(glyphItem GlyphItem, text string) bool {
+func (iter *GlyphItemIter) InitStart(glyphItem *GlyphItem, text string) bool {
 	var carg0 *C.PangoGlyphItemIter // in, none, converted
 	var carg1 *C.PangoGlyphItem     // in, none, converted
 	var carg2 *C.gchar              // in, none, string
@@ -14797,19 +15802,19 @@ func (iter *GlyphItemIter) InitStart(glyphItem GlyphItem, text string) bool {
 	runtime.KeepAlive(glyphItem)
 	runtime.KeepAlive(text)
 
-	var ret bool
+	var goret bool
 
 	if cret != 0 {
-		ret = true
+		goret = true
 	}
 
-	return ret
+	return goret
 }
 
 // NextCluster wraps pango_glyph_item_iter_next_cluster
 // The function returns the following values:
 // 
-// 	- ret bool 
+// 	- goret bool 
 //
 // Advances the iterator to the next cluster in the glyph item.
 // 
@@ -14823,19 +15828,19 @@ func (iter *GlyphItemIter) NextCluster() bool {
 	cret = C.pango_glyph_item_iter_next_cluster(carg0)
 	runtime.KeepAlive(iter)
 
-	var ret bool
+	var goret bool
 
 	if cret != 0 {
-		ret = true
+		goret = true
 	}
 
-	return ret
+	return goret
 }
 
 // PrevCluster wraps pango_glyph_item_iter_prev_cluster
 // The function returns the following values:
 // 
-// 	- ret bool 
+// 	- goret bool 
 //
 // Moves the iterator to the preceding cluster in the glyph item.
 // See `PangoGlyphItemIter` for details of cluster orders.
@@ -14848,13 +15853,13 @@ func (iter *GlyphItemIter) PrevCluster() bool {
 	cret = C.pango_glyph_item_iter_prev_cluster(carg0)
 	runtime.KeepAlive(iter)
 
-	var ret bool
+	var goret bool
 
 	if cret != 0 {
-		ret = true
+		goret = true
 	}
 
-	return ret
+	return goret
 }
 
 // GlyphString wraps PangoGlyphString
@@ -14873,14 +15878,34 @@ type glyphString struct {
 	native *C.PangoGlyphString
 }
 
-func marshalGlyphString(p uintptr) (interface{}, error) {
-	b := gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Boxed()
+var _ gobject.GoValueInitializer = (*GlyphString)(nil)
+
+func marshalGlyphString(p unsafe.Pointer) (interface{}, error) {
+	b := gobject.ValueFromNative(p).Boxed()
 	return UnsafeGlyphStringFromGlibBorrow(b), nil
+}
+
+func (r *GlyphString) InitGoValue(v *gobject.Value) {
+	v.Init(TypeGlyphString)
+	v.SetBoxed(unsafe.Pointer(r.native))
 }
 
 // UnsafeGlyphStringFromGlibBorrow is used to convert raw C.PangoGlyphString pointers to go. This is used by the bindings internally.
 func UnsafeGlyphStringFromGlibBorrow(p unsafe.Pointer) *GlyphString {
 	return &GlyphString{&glyphString{(*C.PangoGlyphString)(p)}}
+}
+
+// UnsafeGlyphStringFromGlibNone is used to convert raw C.PangoGlyphString pointers to go while taking a reference. This is used by the bindings internally.
+func UnsafeGlyphStringFromGlibNone(p unsafe.Pointer) *GlyphString {
+	// FIXME: this has no ref function, what should we do here?
+	wrapped := UnsafeGlyphStringFromGlibBorrow(p)
+	runtime.SetFinalizer(
+		wrapped.glyphString,
+		func (intern *glyphString) {
+			C.pango_glyph_string_free(intern.native)
+		},
+	)
+	return wrapped
 }
 
 // UnsafeGlyphStringFromGlibFull is used to convert raw C.PangoGlyphString pointers to go while taking a reference. This is used by the bindings internally.
@@ -14918,19 +15943,19 @@ func UnsafeGlyphStringToGlibFull(g *GlyphString) unsafe.Pointer {
 // NewGlyphString wraps pango_glyph_string_new
 // The function returns the following values:
 // 
-// 	- ret GlyphString 
+// 	- goret *GlyphString 
 //
 // Create a new `PangoGlyphString`.
-func NewGlyphString() GlyphString {
+func NewGlyphString() *GlyphString {
 	var cret *C.PangoGlyphString // return, full, converted
 
 	cret = C.pango_glyph_string_new()
 
-	var ret GlyphString
+	var goret *GlyphString
 
-	ret = UnsafeGlyphStringFromGlibFull(unsafe.Pointer(cret))
+	goret = UnsafeGlyphStringFromGlibFull(unsafe.Pointer(cret))
 
-	return ret
+	return goret
 }
 
 // num_glyphs wraps num_glyphs
@@ -14951,10 +15976,130 @@ func (g *GlyphString) SetNumGlyphs(num_glyphs int) {
 	*valptr = C.int(num_glyphs)
 }
 
+// Copy wraps pango_glyph_string_copy
+// The function returns the following values:
+// 
+// 	- goret *GlyphString 
+//
+// Copy a glyph string and associated storage.
+func (str *GlyphString) Copy() *GlyphString {
+	var carg0 *C.PangoGlyphString // in, none, converted
+	var cret  *C.PangoGlyphString // return, full, converted
+
+	carg0 = (*C.PangoGlyphString)(UnsafeGlyphStringToGlibNone(str))
+
+	cret = C.pango_glyph_string_copy(carg0)
+	runtime.KeepAlive(str)
+
+	var goret *GlyphString
+
+	goret = UnsafeGlyphStringFromGlibFull(unsafe.Pointer(cret))
+
+	return goret
+}
+
+// Extents wraps pango_glyph_string_extents
+// 
+// The function takes the following parameters:
+// 
+// 	- font Font: a `PangoFont` 
+// 
+// The function returns the following values:
+// 
+// 	- inkRect Rectangle: rectangle used to store the extents of the glyph string as drawn 
+// 	- logicalRect Rectangle: rectangle used to store the logical extents of the glyph string 
+//
+// Compute the logical and ink extents of a glyph string.
+// 
+// See the documentation for [method@Pango.Font.get_glyph_extents] for details
+// about the interpretation of the rectangles.
+// 
+// Examples of logical (red) and ink (green) rects:
+// 
+// ![](rects1.png) ![](rects2.png)
+func (glyphs *GlyphString) Extents(font Font) (Rectangle, Rectangle) {
+	var carg0 *C.PangoGlyphString // in, none, converted
+	var carg1 *C.PangoFont        // in, none, converted
+	var carg2 C.PangoRectangle    // out, transfer: none, C Pointers: 0, Name: Rectangle, optional, caller-allocates
+	var carg3 C.PangoRectangle    // out, transfer: none, C Pointers: 0, Name: Rectangle, optional, caller-allocates
+
+	carg0 = (*C.PangoGlyphString)(UnsafeGlyphStringToGlibNone(glyphs))
+	carg1 = (*C.PangoFont)(UnsafeFontToGlibNone(font))
+
+	C.pango_glyph_string_extents(carg0, carg1, &carg2, &carg3)
+	runtime.KeepAlive(glyphs)
+	runtime.KeepAlive(font)
+
+	var inkRect     Rectangle
+	var logicalRect Rectangle
+
+	_ = inkRect
+	_ = carg2
+	panic("unimplemented conversion of Rectangle (PangoRectangle)")
+	_ = logicalRect
+	_ = carg3
+	panic("unimplemented conversion of Rectangle (PangoRectangle)")
+
+	return inkRect, logicalRect
+}
+
+// ExtentsRange wraps pango_glyph_string_extents_range
+// 
+// The function takes the following parameters:
+// 
+// 	- start int: start index 
+// 	- end int: end index (the range is the set of bytes with
+//   indices such that start &lt;= index &lt; end) 
+// 	- font Font: a `PangoFont` 
+// 
+// The function returns the following values:
+// 
+// 	- inkRect Rectangle: rectangle used to
+//   store the extents of the glyph string range as drawn 
+// 	- logicalRect Rectangle: rectangle used to
+//   store the logical extents of the glyph string range 
+//
+// Computes the extents of a sub-portion of a glyph string.
+// 
+// The extents are relative to the start of the glyph string range
+// (the origin of their coordinate system is at the start of the range,
+// not at the start of the entire glyph string).
+func (glyphs *GlyphString) ExtentsRange(start int, end int, font Font) (Rectangle, Rectangle) {
+	var carg0 *C.PangoGlyphString // in, none, converted
+	var carg1 C.int               // in, none, casted
+	var carg2 C.int               // in, none, casted
+	var carg3 *C.PangoFont        // in, none, converted
+	var carg4 C.PangoRectangle    // out, transfer: none, C Pointers: 0, Name: Rectangle, optional, caller-allocates
+	var carg5 C.PangoRectangle    // out, transfer: none, C Pointers: 0, Name: Rectangle, optional, caller-allocates
+
+	carg0 = (*C.PangoGlyphString)(UnsafeGlyphStringToGlibNone(glyphs))
+	carg1 = C.int(start)
+	carg2 = C.int(end)
+	carg3 = (*C.PangoFont)(UnsafeFontToGlibNone(font))
+
+	C.pango_glyph_string_extents_range(carg0, carg1, carg2, carg3, &carg4, &carg5)
+	runtime.KeepAlive(glyphs)
+	runtime.KeepAlive(start)
+	runtime.KeepAlive(end)
+	runtime.KeepAlive(font)
+
+	var inkRect     Rectangle
+	var logicalRect Rectangle
+
+	_ = inkRect
+	_ = carg4
+	panic("unimplemented conversion of Rectangle (PangoRectangle)")
+	_ = logicalRect
+	_ = carg5
+	panic("unimplemented conversion of Rectangle (PangoRectangle)")
+
+	return inkRect, logicalRect
+}
+
 // GetWidth wraps pango_glyph_string_get_width
 // The function returns the following values:
 // 
-// 	- ret int 
+// 	- goret int 
 //
 // Computes the logical width of the glyph string.
 // 
@@ -14971,11 +16116,11 @@ func (glyphs *GlyphString) GetWidth() int {
 	cret = C.pango_glyph_string_get_width(carg0)
 	runtime.KeepAlive(glyphs)
 
-	var ret int
+	var goret int
 
-	ret = int(cret)
+	goret = int(cret)
 
-	return ret
+	return goret
 }
 
 // IndexToX wraps pango_glyph_string_index_to_x
@@ -14984,7 +16129,7 @@ func (glyphs *GlyphString) GetWidth() int {
 // 
 // 	- text string: the text for the run 
 // 	- length int: the number of bytes (not characters) in @text. 
-// 	- analysis Analysis: the analysis information return from [func@itemize] 
+// 	- analysis *Analysis: the analysis information return from [func@itemize] 
 // 	- index_ int: the byte index within @text 
 // 	- trailing bool: whether we should compute the result for the beginning (%FALSE)
 //   or end (%TRUE) of the character. 
@@ -15004,7 +16149,7 @@ func (glyphs *GlyphString) GetWidth() int {
 //   &lt;source srcset="glyphstring-positions-dark.png" media="(prefers-color-scheme: dark)"&gt;
 //   &lt;img alt="Glyph positions" src="glyphstring-positions-light.png"&gt;
 // &lt;/picture&gt;
-func (glyphs *GlyphString) IndexToX(text string, length int, analysis Analysis, index_ int, trailing bool) int {
+func (glyphs *GlyphString) IndexToX(text string, length int, analysis *Analysis, index_ int, trailing bool) int {
 	var carg0 *C.PangoGlyphString // in, none, converted
 	var carg1 *C.gchar            // in, none, string
 	var carg2 C.int               // in, none, casted
@@ -15044,8 +16189,8 @@ func (glyphs *GlyphString) IndexToX(text string, length int, analysis Analysis, 
 // 
 // 	- text string: the text for the run 
 // 	- length int: the number of bytes (not characters) in @text. 
-// 	- analysis Analysis: the analysis information return from [func@itemize] 
-// 	- attrs LogAttr (nullable): `PangoLogAttr` array for @text 
+// 	- analysis *Analysis: the analysis information return from [func@itemize] 
+// 	- attrs *LogAttr (nullable): `PangoLogAttr` array for @text 
 // 	- index_ int: the byte index within @text 
 // 	- trailing bool: whether we should compute the result for the beginning (%FALSE)
 //   or end (%TRUE) of the character. 
@@ -15060,7 +16205,7 @@ func (glyphs *GlyphString) IndexToX(text string, length int, analysis Analysis, 
 // accepts a `PangoLogAttr` array. The grapheme boundary information
 // in it can be used to disambiguate positioning inside some complex
 // clusters.
-func (glyphs *GlyphString) IndexToXFull(text string, length int, analysis Analysis, attrs LogAttr, index_ int, trailing bool) int {
+func (glyphs *GlyphString) IndexToXFull(text string, length int, analysis *Analysis, attrs *LogAttr, index_ int, trailing bool) int {
 	var carg0 *C.PangoGlyphString // in, none, converted
 	var carg1 *C.gchar            // in, none, string
 	var carg2 C.int               // in, none, casted
@@ -15124,7 +16269,7 @@ func (str *GlyphString) SetSize(newLen int) {
 // 
 // 	- text string: the text for the run 
 // 	- length int: the number of bytes (not characters) in text. 
-// 	- analysis Analysis: the analysis information return from [func@itemize] 
+// 	- analysis *Analysis: the analysis information return from [func@itemize] 
 // 	- xPos int: the x offset (in Pango units) 
 // 
 // The function returns the following values:
@@ -15140,7 +16285,7 @@ func (str *GlyphString) SetSize(newLen int) {
 // not allowed (such as Thai), the returned value may not be a valid
 // cursor position; the caller must combine the result with the logical
 // attributes for the text to compute the valid cursor position.
-func (glyphs *GlyphString) XToIndex(text string, length int, analysis Analysis, xPos int) (int, int) {
+func (glyphs *GlyphString) XToIndex(text string, length int, analysis *Analysis, xPos int) (int, int) {
 	var carg0 *C.PangoGlyphString // in, none, converted
 	var carg1 *C.gchar            // in, none, string
 	var carg2 C.int               // in, none, casted
@@ -15198,6 +16343,19 @@ func UnsafeGlyphVisAttrFromGlibBorrow(p unsafe.Pointer) *GlyphVisAttr {
 	return &GlyphVisAttr{&glyphVisAttr{(*C.PangoGlyphVisAttr)(p)}}
 }
 
+// UnsafeGlyphVisAttrFromGlibNone is used to convert raw C.PangoGlyphVisAttr pointers to go while taking a reference. This is used by the bindings internally.
+func UnsafeGlyphVisAttrFromGlibNone(p unsafe.Pointer) *GlyphVisAttr {
+	// FIXME: this has no ref function, what should we do here?
+	wrapped := UnsafeGlyphVisAttrFromGlibBorrow(p)
+	runtime.SetFinalizer(
+		wrapped.glyphVisAttr,
+		func (intern *glyphVisAttr) {
+			C.free(unsafe.Pointer(intern.native))
+		},
+	)
+	return wrapped
+}
+
 // UnsafeGlyphVisAttrFromGlibFull is used to convert raw C.PangoGlyphVisAttr pointers to go while taking a reference. This is used by the bindings internally.
 func UnsafeGlyphVisAttrFromGlibFull(p unsafe.Pointer) *GlyphVisAttr {
 	wrapped := UnsafeGlyphVisAttrFromGlibBorrow(p)
@@ -15245,14 +16403,34 @@ type item struct {
 	native *C.PangoItem
 }
 
-func marshalItem(p uintptr) (interface{}, error) {
-	b := gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Boxed()
+var _ gobject.GoValueInitializer = (*Item)(nil)
+
+func marshalItem(p unsafe.Pointer) (interface{}, error) {
+	b := gobject.ValueFromNative(p).Boxed()
 	return UnsafeItemFromGlibBorrow(b), nil
+}
+
+func (r *Item) InitGoValue(v *gobject.Value) {
+	v.Init(TypeItem)
+	v.SetBoxed(unsafe.Pointer(r.native))
 }
 
 // UnsafeItemFromGlibBorrow is used to convert raw C.PangoItem pointers to go. This is used by the bindings internally.
 func UnsafeItemFromGlibBorrow(p unsafe.Pointer) *Item {
 	return &Item{&item{(*C.PangoItem)(p)}}
+}
+
+// UnsafeItemFromGlibNone is used to convert raw C.PangoItem pointers to go while taking a reference. This is used by the bindings internally.
+func UnsafeItemFromGlibNone(p unsafe.Pointer) *Item {
+	// FIXME: this has no ref function, what should we do here?
+	wrapped := UnsafeItemFromGlibBorrow(p)
+	runtime.SetFinalizer(
+		wrapped.item,
+		func (intern *item) {
+			C.pango_item_free(intern.native)
+		},
+	)
+	return wrapped
 }
 
 // UnsafeItemFromGlibFull is used to convert raw C.PangoItem pointers to go while taking a reference. This is used by the bindings internally.
@@ -15290,19 +16468,19 @@ func UnsafeItemToGlibFull(i *Item) unsafe.Pointer {
 // NewItem wraps pango_item_new
 // The function returns the following values:
 // 
-// 	- ret Item 
+// 	- goret *Item 
 //
 // Creates a new `PangoItem` structure initialized to default values.
-func NewItem() Item {
+func NewItem() *Item {
 	var cret *C.PangoItem // return, full, converted
 
 	cret = C.pango_item_new()
 
-	var ret Item
+	var goret *Item
 
-	ret = UnsafeItemFromGlibFull(unsafe.Pointer(cret))
+	goret = UnsafeItemFromGlibFull(unsafe.Pointer(cret))
 
-	return ret
+	return goret
 }
 
 // offset wraps offset
@@ -15363,7 +16541,7 @@ func (i *Item) SetNumChars(num_chars int) {
 // 
 // The function takes the following parameters:
 // 
-// 	- iter AttrIterator: a `PangoAttrIterator` 
+// 	- iter *AttrIterator: a `PangoAttrIterator` 
 //
 // Add attributes to a `PangoItem`.
 // 
@@ -15376,7 +16554,7 @@ func (i *Item) SetNumChars(num_chars int) {
 // and will be advanced past it. This function is meant to be called
 // in a loop over the items resulting from itemization, while passing
 // the iter to each call.
-func (item *Item) ApplyAttrs(iter AttrIterator) {
+func (item *Item) ApplyAttrs(iter *AttrIterator) {
 	var carg0 *C.PangoItem         // in, none, converted
 	var carg1 *C.PangoAttrIterator // in, none, converted
 
@@ -15388,10 +16566,32 @@ func (item *Item) ApplyAttrs(iter AttrIterator) {
 	runtime.KeepAlive(iter)
 }
 
+// Copy wraps pango_item_copy
+// The function returns the following values:
+// 
+// 	- goret *Item 
+//
+// Copy an existing `PangoItem` structure.
+func (item *Item) Copy() *Item {
+	var carg0 *C.PangoItem // in, none, converted
+	var cret  *C.PangoItem // return, full, converted
+
+	carg0 = (*C.PangoItem)(UnsafeItemToGlibNone(item))
+
+	cret = C.pango_item_copy(carg0)
+	runtime.KeepAlive(item)
+
+	var goret *Item
+
+	goret = UnsafeItemFromGlibFull(unsafe.Pointer(cret))
+
+	return goret
+}
+
 // GetCharOffset wraps pango_item_get_char_offset
 // The function returns the following values:
 // 
-// 	- ret int 
+// 	- goret int 
 //
 // Returns the character offset of the item from the beginning
 // of the itemized text.
@@ -15408,11 +16608,11 @@ func (item *Item) GetCharOffset() int {
 	cret = C.pango_item_get_char_offset(carg0)
 	runtime.KeepAlive(item)
 
-	var ret int
+	var goret int
 
-	ret = int(cret)
+	goret = int(cret)
 
-	return ret
+	return goret
 }
 
 // Split wraps pango_item_split
@@ -15425,7 +16625,7 @@ func (item *Item) GetCharOffset() int {
 // 
 // The function returns the following values:
 // 
-// 	- ret Item 
+// 	- goret *Item 
 //
 // Modifies @orig to cover only the text after @split_index, and
 // returns a new item that covers the text before @split_index that
@@ -15439,7 +16639,7 @@ func (item *Item) GetCharOffset() int {
 // provided because the text used to generate the item isn't available,
 // so `pango_item_split()` can't count the char length of the split items
 // itself.
-func (orig *Item) Split(splitIndex int, splitOffset int) Item {
+func (orig *Item) Split(splitIndex int, splitOffset int) *Item {
 	var carg0 *C.PangoItem // in, none, converted
 	var carg1 C.int        // in, none, casted
 	var carg2 C.int        // in, none, casted
@@ -15454,11 +16654,11 @@ func (orig *Item) Split(splitIndex int, splitOffset int) Item {
 	runtime.KeepAlive(splitIndex)
 	runtime.KeepAlive(splitOffset)
 
-	var ret Item
+	var goret *Item
 
-	ret = UnsafeItemFromGlibFull(unsafe.Pointer(cret))
+	goret = UnsafeItemFromGlibFull(unsafe.Pointer(cret))
 
-	return ret
+	return goret
 }
 
 // Language wraps PangoLanguage
@@ -15477,14 +16677,34 @@ type language struct {
 	native *C.PangoLanguage
 }
 
-func marshalLanguage(p uintptr) (interface{}, error) {
-	b := gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Boxed()
+var _ gobject.GoValueInitializer = (*Language)(nil)
+
+func marshalLanguage(p unsafe.Pointer) (interface{}, error) {
+	b := gobject.ValueFromNative(p).Boxed()
 	return UnsafeLanguageFromGlibBorrow(b), nil
+}
+
+func (r *Language) InitGoValue(v *gobject.Value) {
+	v.Init(TypeLanguage)
+	v.SetBoxed(unsafe.Pointer(r.native))
 }
 
 // UnsafeLanguageFromGlibBorrow is used to convert raw C.PangoLanguage pointers to go. This is used by the bindings internally.
 func UnsafeLanguageFromGlibBorrow(p unsafe.Pointer) *Language {
 	return &Language{&language{(*C.PangoLanguage)(p)}}
+}
+
+// UnsafeLanguageFromGlibNone is used to convert raw C.PangoLanguage pointers to go while taking a reference. This is used by the bindings internally.
+func UnsafeLanguageFromGlibNone(p unsafe.Pointer) *Language {
+	// FIXME: this has no ref function, what should we do here?
+	wrapped := UnsafeLanguageFromGlibBorrow(p)
+	runtime.SetFinalizer(
+		wrapped.language,
+		func (intern *language) {
+			C.free(unsafe.Pointer(intern.native))
+		},
+	)
+	return wrapped
 }
 
 // UnsafeLanguageFromGlibFull is used to convert raw C.PangoLanguage pointers to go while taking a reference. This is used by the bindings internally.
@@ -15522,7 +16742,7 @@ func UnsafeLanguageToGlibFull(l *Language) unsafe.Pointer {
 // GetSampleString wraps pango_language_get_sample_string
 // The function returns the following values:
 // 
-// 	- ret string 
+// 	- goret string 
 //
 // Get a string that is representative of the characters needed to
 // render a particular language.
@@ -15552,18 +16772,18 @@ func (language *Language) GetSampleString() string {
 	cret = C.pango_language_get_sample_string(carg0)
 	runtime.KeepAlive(language)
 
-	var ret string
+	var goret string
 
-	ret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
 
-	return ret
+	return goret
 }
 
 // GetScripts wraps pango_language_get_scripts
 // The function returns the following values:
 // 
 // 	- numScripts int: location to return number of scripts 
-// 	- ret array 
+// 	- goret []Script 
 //
 // Determines the scripts used to to write @language.
 // 
@@ -15588,10 +16808,10 @@ func (language *Language) GetSampleString() string {
 // Note: while the return value is declared as `PangoScript`, the
 // returned values are from the `GUnicodeScript` enumeration, which
 // may have more values. Callers need to handle unknown values.
-func (language *Language) GetScripts() (int, array) {
+func (language *Language) GetScripts() (int, []Script) {
 	var carg0 *C.PangoLanguage // in, none, converted
 	var carg1 C.int            // out, full, casted
-	var cret  array            // return, transfer: none, scope: , implicit: false, skip: false, optional: false, nullable: false, caller-allocates: false, has closure: false, has destroy: false
+	var cret  *C.PangoScript   // return, transfer: none, C Pointers: 1, Name: array[Script], scope: , array (inner: *typesystem.Enum)
 
 	carg0 = (*C.PangoLanguage)(UnsafeLanguageToGlibNone(language))
 
@@ -15599,12 +16819,14 @@ func (language *Language) GetScripts() (int, array) {
 	runtime.KeepAlive(language)
 
 	var numScripts int
-	var ret        array
+	var goret      []Script
 
 	numScripts = int(carg1)
-	panic("unimplemented conversion of array (array)")
+	_ = goret
+	_ = cret
+	panic("unimplemented conversion of []Script (const PangoScript*)")
 
-	return numScripts, ret
+	return numScripts, goret
 }
 
 // IncludesScript wraps pango_language_includes_script
@@ -15615,7 +16837,7 @@ func (language *Language) GetScripts() (int, array) {
 // 
 // The function returns the following values:
 // 
-// 	- ret bool 
+// 	- goret bool 
 //
 // Determines if @script is one of the scripts used to
 // write @language.
@@ -15642,13 +16864,13 @@ func (language *Language) IncludesScript(script Script) bool {
 	runtime.KeepAlive(language)
 	runtime.KeepAlive(script)
 
-	var ret bool
+	var goret bool
 
 	if cret != 0 {
-		ret = true
+		goret = true
 	}
 
-	return ret
+	return goret
 }
 
 // Matches wraps pango_language_matches
@@ -15662,7 +16884,7 @@ func (language *Language) IncludesScript(script Script) bool {
 // 
 // The function returns the following values:
 // 
-// 	- ret bool 
+// 	- goret bool 
 //
 // Checks if a language tag matches one of the elements in a list of
 // language ranges.
@@ -15683,19 +16905,19 @@ func (language *Language) Matches(rangeList string) bool {
 	runtime.KeepAlive(language)
 	runtime.KeepAlive(rangeList)
 
-	var ret bool
+	var goret bool
 
 	if cret != 0 {
-		ret = true
+		goret = true
 	}
 
-	return ret
+	return goret
 }
 
 // ToString wraps pango_language_to_string
 // The function returns the following values:
 // 
-// 	- ret string 
+// 	- goret string 
 //
 // Gets the RFC-3066 format string representing the given language tag.
 // 
@@ -15709,11 +16931,11 @@ func (language *Language) ToString() string {
 	cret = C.pango_language_to_string(carg0)
 	runtime.KeepAlive(language)
 
-	var ret string
+	var goret string
 
-	ret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
 
-	return ret
+	return goret
 }
 
 // LayoutClass wraps PangoLayoutClass
@@ -15729,6 +16951,19 @@ type layoutClass struct {
 // UnsafeLayoutClassFromGlibBorrow is used to convert raw C.PangoLayoutClass pointers to go. This is used by the bindings internally.
 func UnsafeLayoutClassFromGlibBorrow(p unsafe.Pointer) *LayoutClass {
 	return &LayoutClass{&layoutClass{(*C.PangoLayoutClass)(p)}}
+}
+
+// UnsafeLayoutClassFromGlibNone is used to convert raw C.PangoLayoutClass pointers to go while taking a reference. This is used by the bindings internally.
+func UnsafeLayoutClassFromGlibNone(p unsafe.Pointer) *LayoutClass {
+	// FIXME: this has no ref function, what should we do here?
+	wrapped := UnsafeLayoutClassFromGlibBorrow(p)
+	runtime.SetFinalizer(
+		wrapped.layoutClass,
+		func (intern *layoutClass) {
+			C.free(unsafe.Pointer(intern.native))
+		},
+	)
+	return wrapped
 }
 
 // UnsafeLayoutClassFromGlibFull is used to convert raw C.PangoLayoutClass pointers to go while taking a reference. This is used by the bindings internally.
@@ -15780,14 +17015,34 @@ type layoutIter struct {
 	native *C.PangoLayoutIter
 }
 
-func marshalLayoutIter(p uintptr) (interface{}, error) {
-	b := gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Boxed()
+var _ gobject.GoValueInitializer = (*LayoutIter)(nil)
+
+func marshalLayoutIter(p unsafe.Pointer) (interface{}, error) {
+	b := gobject.ValueFromNative(p).Boxed()
 	return UnsafeLayoutIterFromGlibBorrow(b), nil
+}
+
+func (r *LayoutIter) InitGoValue(v *gobject.Value) {
+	v.Init(TypeLayoutIter)
+	v.SetBoxed(unsafe.Pointer(r.native))
 }
 
 // UnsafeLayoutIterFromGlibBorrow is used to convert raw C.PangoLayoutIter pointers to go. This is used by the bindings internally.
 func UnsafeLayoutIterFromGlibBorrow(p unsafe.Pointer) *LayoutIter {
 	return &LayoutIter{&layoutIter{(*C.PangoLayoutIter)(p)}}
+}
+
+// UnsafeLayoutIterFromGlibNone is used to convert raw C.PangoLayoutIter pointers to go while taking a reference. This is used by the bindings internally.
+func UnsafeLayoutIterFromGlibNone(p unsafe.Pointer) *LayoutIter {
+	// FIXME: this has no ref function, what should we do here?
+	wrapped := UnsafeLayoutIterFromGlibBorrow(p)
+	runtime.SetFinalizer(
+		wrapped.layoutIter,
+		func (intern *layoutIter) {
+			C.pango_layout_iter_free(intern.native)
+		},
+	)
+	return wrapped
 }
 
 // UnsafeLayoutIterFromGlibFull is used to convert raw C.PangoLayoutIter pointers to go while taking a reference. This is used by the bindings internally.
@@ -15825,7 +17080,7 @@ func UnsafeLayoutIterToGlibFull(l *LayoutIter) unsafe.Pointer {
 // AtLastLine wraps pango_layout_iter_at_last_line
 // The function returns the following values:
 // 
-// 	- ret bool 
+// 	- goret bool 
 //
 // Determines whether @iter is on the last line of the layout.
 func (iter *LayoutIter) AtLastLine() bool {
@@ -15837,19 +17092,41 @@ func (iter *LayoutIter) AtLastLine() bool {
 	cret = C.pango_layout_iter_at_last_line(carg0)
 	runtime.KeepAlive(iter)
 
-	var ret bool
+	var goret bool
 
 	if cret != 0 {
-		ret = true
+		goret = true
 	}
 
-	return ret
+	return goret
+}
+
+// Copy wraps pango_layout_iter_copy
+// The function returns the following values:
+// 
+// 	- goret *LayoutIter 
+//
+// Copies a `PangoLayoutIter`.
+func (iter *LayoutIter) Copy() *LayoutIter {
+	var carg0 *C.PangoLayoutIter // in, none, converted
+	var cret  *C.PangoLayoutIter // return, full, converted
+
+	carg0 = (*C.PangoLayoutIter)(UnsafeLayoutIterToGlibNone(iter))
+
+	cret = C.pango_layout_iter_copy(carg0)
+	runtime.KeepAlive(iter)
+
+	var goret *LayoutIter
+
+	goret = UnsafeLayoutIterFromGlibFull(unsafe.Pointer(cret))
+
+	return goret
 }
 
 // GetBaseline wraps pango_layout_iter_get_baseline
 // The function returns the following values:
 // 
-// 	- ret int 
+// 	- goret int 
 //
 // Gets the Y position of the current line's baseline, in layout
 // coordinates.
@@ -15864,17 +17141,79 @@ func (iter *LayoutIter) GetBaseline() int {
 	cret = C.pango_layout_iter_get_baseline(carg0)
 	runtime.KeepAlive(iter)
 
-	var ret int
+	var goret int
 
-	ret = int(cret)
+	goret = int(cret)
 
-	return ret
+	return goret
+}
+
+// GetCharExtents wraps pango_layout_iter_get_char_extents
+// The function returns the following values:
+// 
+// 	- logicalRect Rectangle: rectangle to fill with
+//   logical extents 
+//
+// Gets the extents of the current character, in layout coordinates.
+// 
+// Layout coordinates have the origin at the top left of the entire layout.
+// 
+// Only logical extents can sensibly be obtained for characters;
+// ink extents make sense only down to the level of clusters.
+func (iter *LayoutIter) GetCharExtents() Rectangle {
+	var carg0 *C.PangoLayoutIter // in, none, converted
+	var carg1 C.PangoRectangle   // out, transfer: none, C Pointers: 0, Name: Rectangle, caller-allocates
+
+	carg0 = (*C.PangoLayoutIter)(UnsafeLayoutIterToGlibNone(iter))
+
+	C.pango_layout_iter_get_char_extents(carg0, &carg1)
+	runtime.KeepAlive(iter)
+
+	var logicalRect Rectangle
+
+	_ = logicalRect
+	_ = carg1
+	panic("unimplemented conversion of Rectangle (PangoRectangle)")
+
+	return logicalRect
+}
+
+// GetClusterExtents wraps pango_layout_iter_get_cluster_extents
+// The function returns the following values:
+// 
+// 	- inkRect Rectangle: rectangle to fill with ink extents 
+// 	- logicalRect Rectangle: rectangle to fill with logical extents 
+//
+// Gets the extents of the current cluster, in layout coordinates.
+// 
+// Layout coordinates have the origin at the top left of the entire layout.
+func (iter *LayoutIter) GetClusterExtents() (Rectangle, Rectangle) {
+	var carg0 *C.PangoLayoutIter // in, none, converted
+	var carg1 C.PangoRectangle   // out, transfer: none, C Pointers: 0, Name: Rectangle, optional, caller-allocates
+	var carg2 C.PangoRectangle   // out, transfer: none, C Pointers: 0, Name: Rectangle, optional, caller-allocates
+
+	carg0 = (*C.PangoLayoutIter)(UnsafeLayoutIterToGlibNone(iter))
+
+	C.pango_layout_iter_get_cluster_extents(carg0, &carg1, &carg2)
+	runtime.KeepAlive(iter)
+
+	var inkRect     Rectangle
+	var logicalRect Rectangle
+
+	_ = inkRect
+	_ = carg1
+	panic("unimplemented conversion of Rectangle (PangoRectangle)")
+	_ = logicalRect
+	_ = carg2
+	panic("unimplemented conversion of Rectangle (PangoRectangle)")
+
+	return inkRect, logicalRect
 }
 
 // GetIndex wraps pango_layout_iter_get_index
 // The function returns the following values:
 // 
-// 	- ret int 
+// 	- goret int 
 //
 // Gets the current byte index.
 // 
@@ -15891,17 +17230,17 @@ func (iter *LayoutIter) GetIndex() int {
 	cret = C.pango_layout_iter_get_index(carg0)
 	runtime.KeepAlive(iter)
 
-	var ret int
+	var goret int
 
-	ret = int(cret)
+	goret = int(cret)
 
-	return ret
+	return goret
 }
 
 // GetLayout wraps pango_layout_iter_get_layout
 // The function returns the following values:
 // 
-// 	- ret Layout 
+// 	- goret Layout 
 //
 // Gets the layout associated with a `PangoLayoutIter`.
 func (iter *LayoutIter) GetLayout() Layout {
@@ -15913,24 +17252,54 @@ func (iter *LayoutIter) GetLayout() Layout {
 	cret = C.pango_layout_iter_get_layout(carg0)
 	runtime.KeepAlive(iter)
 
-	var ret Layout
+	var goret Layout
 
-	ret = UnsafeLayoutFromGlibNone(unsafe.Pointer(cret))
+	goret = UnsafeLayoutFromGlibNone(unsafe.Pointer(cret))
 
-	return ret
+	return goret
+}
+
+// GetLayoutExtents wraps pango_layout_iter_get_layout_extents
+// The function returns the following values:
+// 
+// 	- inkRect Rectangle: rectangle to fill with ink extents 
+// 	- logicalRect Rectangle: rectangle to fill with logical extents 
+//
+// Obtains the extents of the `PangoLayout` being iterated over.
+func (iter *LayoutIter) GetLayoutExtents() (Rectangle, Rectangle) {
+	var carg0 *C.PangoLayoutIter // in, none, converted
+	var carg1 C.PangoRectangle   // out, transfer: none, C Pointers: 0, Name: Rectangle, optional, caller-allocates
+	var carg2 C.PangoRectangle   // out, transfer: none, C Pointers: 0, Name: Rectangle, optional, caller-allocates
+
+	carg0 = (*C.PangoLayoutIter)(UnsafeLayoutIterToGlibNone(iter))
+
+	C.pango_layout_iter_get_layout_extents(carg0, &carg1, &carg2)
+	runtime.KeepAlive(iter)
+
+	var inkRect     Rectangle
+	var logicalRect Rectangle
+
+	_ = inkRect
+	_ = carg1
+	panic("unimplemented conversion of Rectangle (PangoRectangle)")
+	_ = logicalRect
+	_ = carg2
+	panic("unimplemented conversion of Rectangle (PangoRectangle)")
+
+	return inkRect, logicalRect
 }
 
 // GetLine wraps pango_layout_iter_get_line
 // The function returns the following values:
 // 
-// 	- ret LayoutLine 
+// 	- goret *LayoutLine 
 //
 // Gets the current line.
 // 
 // Use the faster [method@Pango.LayoutIter.get_line_readonly] if
 // you do not plan to modify the contents of the line (glyphs,
 // glyph widths, etc.).
-func (iter *LayoutIter) GetLine() LayoutLine {
+func (iter *LayoutIter) GetLine() *LayoutLine {
 	var carg0 *C.PangoLayoutIter // in, none, converted
 	var cret  *C.PangoLayoutLine // return, none, converted
 
@@ -15939,24 +17308,59 @@ func (iter *LayoutIter) GetLine() LayoutLine {
 	cret = C.pango_layout_iter_get_line(carg0)
 	runtime.KeepAlive(iter)
 
-	var ret LayoutLine
+	var goret *LayoutLine
 
-	ret = UnsafeLayoutLineFromGlibNone(unsafe.Pointer(cret))
+	goret = UnsafeLayoutLineFromGlibNone(unsafe.Pointer(cret))
 
-	return ret
+	return goret
+}
+
+// GetLineExtents wraps pango_layout_iter_get_line_extents
+// The function returns the following values:
+// 
+// 	- inkRect Rectangle: rectangle to fill with ink extents 
+// 	- logicalRect Rectangle: rectangle to fill with logical extents 
+//
+// Obtains the extents of the current line.
+// 
+// Extents are in layout coordinates (origin is the top-left corner
+// of the entire `PangoLayout`). Thus the extents returned by this
+// function will be the same width/height but not at the same x/y
+// as the extents returned from [method@Pango.LayoutLine.get_extents].
+func (iter *LayoutIter) GetLineExtents() (Rectangle, Rectangle) {
+	var carg0 *C.PangoLayoutIter // in, none, converted
+	var carg1 C.PangoRectangle   // out, transfer: none, C Pointers: 0, Name: Rectangle, optional, caller-allocates
+	var carg2 C.PangoRectangle   // out, transfer: none, C Pointers: 0, Name: Rectangle, optional, caller-allocates
+
+	carg0 = (*C.PangoLayoutIter)(UnsafeLayoutIterToGlibNone(iter))
+
+	C.pango_layout_iter_get_line_extents(carg0, &carg1, &carg2)
+	runtime.KeepAlive(iter)
+
+	var inkRect     Rectangle
+	var logicalRect Rectangle
+
+	_ = inkRect
+	_ = carg1
+	panic("unimplemented conversion of Rectangle (PangoRectangle)")
+	_ = logicalRect
+	_ = carg2
+	panic("unimplemented conversion of Rectangle (PangoRectangle)")
+
+	return inkRect, logicalRect
 }
 
 // GetLineReadonly wraps pango_layout_iter_get_line_readonly
 // The function returns the following values:
 // 
-// 	- ret LayoutLine 
+// 	- goret *LayoutLine 
 //
 // Gets the current line for read-only access.
 // 
 // This is a faster alternative to [method@Pango.LayoutIter.get_line],
 // but the user is not expected to modify the contents of the line
 // (glyphs, glyph widths, etc.).
-func (iter *LayoutIter) GetLineReadonly() LayoutLine {
+func (iter *LayoutIter) GetLineReadonly() *LayoutLine {
 	var carg0 *C.PangoLayoutIter // in, none, converted
 	var cret  *C.PangoLayoutLine // return, none, converted
 
@@ -15965,11 +17369,11 @@ func (iter *LayoutIter) GetLineReadonly() LayoutLine {
 	cret = C.pango_layout_iter_get_line_readonly(carg0)
 	runtime.KeepAlive(iter)
 
-	var ret LayoutLine
+	var goret *LayoutLine
 
-	ret = UnsafeLayoutLineFromGlibNone(unsafe.Pointer(cret))
+	goret = UnsafeLayoutLineFromGlibNone(unsafe.Pointer(cret))
 
-	return ret
+	return goret
 }
 
 // GetLineYrange wraps pango_layout_iter_get_line_yrange
@@ -16008,10 +17412,42 @@ func (iter *LayoutIter) GetLineYrange() (int, int) {
 	return y0, y1
 }
 
+// GetRun wraps pango_layout_iter_get_run
+// The function returns the following values:
+// 
+// 	- goret *LayoutRun 
+//
+// Gets the current run.
+// 
+// When iterating by run, at the end of each line, there's a position
+// with a %NULL run, so this function can return %NULL. The %NULL run
+// at the end of each line ensures that all lines have at least one run,
+// even lines consisting of only a newline.
+// 
+// Use the faster [method@Pango.LayoutIter.get_run_readonly] if you do not
+// plan to modify the contents of the run (glyphs, glyph widths, etc.).
+func (iter *LayoutIter) GetRun() *LayoutRun {
+	var carg0 *C.PangoLayoutIter // in, none, converted
+	var cret  *C.PangoLayoutRun  // return, transfer: none, C Pointers: 1, Name: LayoutRun, scope: 
+
+	carg0 = (*C.PangoLayoutIter)(UnsafeLayoutIterToGlibNone(iter))
+
+	cret = C.pango_layout_iter_get_run(carg0)
+	runtime.KeepAlive(iter)
+
+	var goret *LayoutRun
+
+	_ = goret
+	_ = cret
+	panic("unimplemented conversion of *LayoutRun (PangoLayoutRun*)")
+
+	return goret
+}
+
 // GetRunBaseline wraps pango_layout_iter_get_run_baseline
 // The function returns the following values:
 // 
-// 	- ret int 
+// 	- goret int 
 //
 // Gets the Y position of the current run's baseline, in layout
 // coordinates.
@@ -16029,17 +17465,82 @@ func (iter *LayoutIter) GetRunBaseline() int {
 	cret = C.pango_layout_iter_get_run_baseline(carg0)
 	runtime.KeepAlive(iter)
 
-	var ret int
+	var goret int
 
-	ret = int(cret)
+	goret = int(cret)
 
-	return ret
+	return goret
+}
+
+// GetRunExtents wraps pango_layout_iter_get_run_extents
+// The function returns the following values:
+// 
+// 	- inkRect Rectangle: rectangle to fill with ink extents 
+// 	- logicalRect Rectangle: rectangle to fill with logical extents 
+//
+// Gets the extents of the current run in layout coordinates.
+// 
+// Layout coordinates have the origin at the top left of the entire layout.
+func (iter *LayoutIter) GetRunExtents() (Rectangle, Rectangle) {
+	var carg0 *C.PangoLayoutIter // in, none, converted
+	var carg1 C.PangoRectangle   // out, transfer: none, C Pointers: 0, Name: Rectangle, optional, caller-allocates
+	var carg2 C.PangoRectangle   // out, transfer: none, C Pointers: 0, Name: Rectangle, optional, caller-allocates
+
+	carg0 = (*C.PangoLayoutIter)(UnsafeLayoutIterToGlibNone(iter))
+
+	C.pango_layout_iter_get_run_extents(carg0, &carg1, &carg2)
+	runtime.KeepAlive(iter)
+
+	var inkRect     Rectangle
+	var logicalRect Rectangle
+
+	_ = inkRect
+	_ = carg1
+	panic("unimplemented conversion of Rectangle (PangoRectangle)")
+	_ = logicalRect
+	_ = carg2
+	panic("unimplemented conversion of Rectangle (PangoRectangle)")
+
+	return inkRect, logicalRect
+}
+
+// GetRunReadonly wraps pango_layout_iter_get_run_readonly
+// The function returns the following values:
+// 
+// 	- goret *LayoutRun 
+//
+// Gets the current run for read-only access.
+// 
+// When iterating by run, at the end of each line, there's a position
+// with a %NULL run, so this function can return %NULL. The %NULL run
+// at the end of each line ensures that all lines have at least one run,
+// even lines consisting of only a newline.
+// 
+// This is a faster alternative to [method@Pango.LayoutIter.get_run],
+// but the user is not expected to modify the contents of the run (glyphs,
+// glyph widths, etc.).
+func (iter *LayoutIter) GetRunReadonly() *LayoutRun {
+	var carg0 *C.PangoLayoutIter // in, none, converted
+	var cret  *C.PangoLayoutRun  // return, transfer: none, C Pointers: 1, Name: LayoutRun, scope: 
+
+	carg0 = (*C.PangoLayoutIter)(UnsafeLayoutIterToGlibNone(iter))
+
+	cret = C.pango_layout_iter_get_run_readonly(carg0)
+	runtime.KeepAlive(iter)
+
+	var goret *LayoutRun
+
+	_ = goret
+	_ = cret
+	panic("unimplemented conversion of *LayoutRun (PangoLayoutRun*)")
+
+	return goret
 }
 
 // NextChar wraps pango_layout_iter_next_char
 // The function returns the following values:
 // 
-// 	- ret bool 
+// 	- goret bool 
 //
 // Moves @iter forward to the next character in visual order.
 // 
@@ -16053,19 +17554,19 @@ func (iter *LayoutIter) NextChar() bool {
 	cret = C.pango_layout_iter_next_char(carg0)
 	runtime.KeepAlive(iter)
 
-	var ret bool
+	var goret bool
 
 	if cret != 0 {
-		ret = true
+		goret = true
 	}
 
-	return ret
+	return goret
 }
 
 // NextCluster wraps pango_layout_iter_next_cluster
 // The function returns the following values:
 // 
-// 	- ret bool 
+// 	- goret bool 
 //
 // Moves @iter forward to the next cluster in visual order.
 // 
@@ -16079,19 +17580,19 @@ func (iter *LayoutIter) NextCluster() bool {
 	cret = C.pango_layout_iter_next_cluster(carg0)
 	runtime.KeepAlive(iter)
 
-	var ret bool
+	var goret bool
 
 	if cret != 0 {
-		ret = true
+		goret = true
 	}
 
-	return ret
+	return goret
 }
 
 // NextLine wraps pango_layout_iter_next_line
 // The function returns the following values:
 // 
-// 	- ret bool 
+// 	- goret bool 
 //
 // Moves @iter forward to the start of the next line.
 // 
@@ -16105,19 +17606,19 @@ func (iter *LayoutIter) NextLine() bool {
 	cret = C.pango_layout_iter_next_line(carg0)
 	runtime.KeepAlive(iter)
 
-	var ret bool
+	var goret bool
 
 	if cret != 0 {
-		ret = true
+		goret = true
 	}
 
-	return ret
+	return goret
 }
 
 // NextRun wraps pango_layout_iter_next_run
 // The function returns the following values:
 // 
-// 	- ret bool 
+// 	- goret bool 
 //
 // Moves @iter forward to the next run in visual order.
 // 
@@ -16131,13 +17632,13 @@ func (iter *LayoutIter) NextRun() bool {
 	cret = C.pango_layout_iter_next_run(carg0)
 	runtime.KeepAlive(iter)
 
-	var ret bool
+	var goret bool
 
 	if cret != 0 {
-		ret = true
+		goret = true
 	}
 
-	return ret
+	return goret
 }
 
 // LayoutLine wraps PangoLayoutLine
@@ -16157,9 +17658,16 @@ type layoutLine struct {
 	native *C.PangoLayoutLine
 }
 
-func marshalLayoutLine(p uintptr) (interface{}, error) {
-	b := gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Boxed()
+var _ gobject.GoValueInitializer = (*LayoutLine)(nil)
+
+func marshalLayoutLine(p unsafe.Pointer) (interface{}, error) {
+	b := gobject.ValueFromNative(p).Boxed()
 	return UnsafeLayoutLineFromGlibBorrow(b), nil
+}
+
+func (r *LayoutLine) InitGoValue(v *gobject.Value) {
+	v.Init(TypeLayoutLine)
+	v.SetBoxed(unsafe.Pointer(r.native))
 }
 
 // UnsafeLayoutLineFromGlibBorrow is used to convert raw C.PangoLayoutLine pointers to go. This is used by the bindings internally.
@@ -16169,8 +17677,8 @@ func UnsafeLayoutLineFromGlibBorrow(p unsafe.Pointer) *LayoutLine {
 
 // UnsafeLayoutLineFromGlibNone is used to convert raw C.PangoLayoutLine pointers to go while taking a reference. This is used by the bindings internally.
 func UnsafeLayoutLineFromGlibNone(p unsafe.Pointer) *LayoutLine {
-	C.pango_layout_line_ref(p)
-	wrapped := UnsafeLayoutLineFromGlibNone(p)
+	C.pango_layout_line_ref((*C.PangoLayoutLine)(p))
+	wrapped := UnsafeLayoutLineFromGlibBorrow(p)
 	runtime.SetFinalizer(
 		wrapped.layoutLine,
 		func (intern *layoutLine) {
@@ -16255,6 +17763,41 @@ func (l *LayoutLine) SetLength(length int) {
 	*valptr = C.int(length)
 }
 
+// GetExtents wraps pango_layout_line_get_extents
+// The function returns the following values:
+// 
+// 	- inkRect Rectangle: rectangle used to store the extents of
+//   the glyph string as drawn 
+// 	- logicalRect Rectangle: rectangle used to store the logical
+//   extents of the glyph string 
+//
+// Computes the logical and ink extents of a layout line.
+// 
+// See [method@Pango.Font.get_glyph_extents] for details
+// about the interpretation of the rectangles.
+func (line *LayoutLine) GetExtents() (Rectangle, Rectangle) {
+	var carg0 *C.PangoLayoutLine // in, none, converted
+	var carg1 C.PangoRectangle   // out, transfer: none, C Pointers: 0, Name: Rectangle, optional, caller-allocates
+	var carg2 C.PangoRectangle   // out, transfer: none, C Pointers: 0, Name: Rectangle, optional, caller-allocates
+
+	carg0 = (*C.PangoLayoutLine)(UnsafeLayoutLineToGlibNone(line))
+
+	C.pango_layout_line_get_extents(carg0, &carg1, &carg2)
+	runtime.KeepAlive(line)
+
+	var inkRect     Rectangle
+	var logicalRect Rectangle
+
+	_ = inkRect
+	_ = carg1
+	panic("unimplemented conversion of Rectangle (PangoRectangle)")
+	_ = logicalRect
+	_ = carg2
+	panic("unimplemented conversion of Rectangle (PangoRectangle)")
+
+	return inkRect, logicalRect
+}
+
 // GetHeight wraps pango_layout_line_get_height
 // The function returns the following values:
 // 
@@ -16286,7 +17829,7 @@ func (line *LayoutLine) GetHeight() int {
 // GetLength wraps pango_layout_line_get_length
 // The function returns the following values:
 // 
-// 	- ret int 
+// 	- goret int 
 //
 // Returns the length of the line, in bytes.
 func (line *LayoutLine) GetLength() int {
@@ -16298,17 +17841,54 @@ func (line *LayoutLine) GetLength() int {
 	cret = C.pango_layout_line_get_length(carg0)
 	runtime.KeepAlive(line)
 
-	var ret int
+	var goret int
 
-	ret = int(cret)
+	goret = int(cret)
 
-	return ret
+	return goret
+}
+
+// GetPixelExtents wraps pango_layout_line_get_pixel_extents
+// The function returns the following values:
+// 
+// 	- inkRect Rectangle: rectangle used to store the extents of
+//   the glyph string as drawn 
+// 	- logicalRect Rectangle: rectangle used to store the logical
+//   extents of the glyph string 
+//
+// Computes the logical and ink extents of @layout_line in device units.
+// 
+// This function just calls [method@Pango.LayoutLine.get_extents] followed by
+// two [func@extents_to_pixels] calls, rounding @ink_rect and @logical_rect
+// such that the rounded rectangles fully contain the unrounded one (that is,
+// passes them as first argument to [func@extents_to_pixels]).
+func (layoutLine *LayoutLine) GetPixelExtents() (Rectangle, Rectangle) {
+	var carg0 *C.PangoLayoutLine // in, none, converted
+	var carg1 C.PangoRectangle   // out, transfer: none, C Pointers: 0, Name: Rectangle, optional, caller-allocates
+	var carg2 C.PangoRectangle   // out, transfer: none, C Pointers: 0, Name: Rectangle, optional, caller-allocates
+
+	carg0 = (*C.PangoLayoutLine)(UnsafeLayoutLineToGlibNone(layoutLine))
+
+	C.pango_layout_line_get_pixel_extents(carg0, &carg1, &carg2)
+	runtime.KeepAlive(layoutLine)
+
+	var inkRect     Rectangle
+	var logicalRect Rectangle
+
+	_ = inkRect
+	_ = carg1
+	panic("unimplemented conversion of Rectangle (PangoRectangle)")
+	_ = logicalRect
+	_ = carg2
+	panic("unimplemented conversion of Rectangle (PangoRectangle)")
+
+	return inkRect, logicalRect
 }
 
 // GetResolvedDirection wraps pango_layout_line_get_resolved_direction
 // The function returns the following values:
 // 
-// 	- ret Direction 
+// 	- goret Direction 
 //
 // Returns the resolved direction of the line.
 func (line *LayoutLine) GetResolvedDirection() Direction {
@@ -16320,17 +17900,17 @@ func (line *LayoutLine) GetResolvedDirection() Direction {
 	cret = C.pango_layout_line_get_resolved_direction(carg0)
 	runtime.KeepAlive(line)
 
-	var ret Direction
+	var goret Direction
 
-	ret = Direction(cret)
+	goret = Direction(cret)
 
-	return ret
+	return goret
 }
 
 // GetStartIndex wraps pango_layout_line_get_start_index
 // The function returns the following values:
 // 
-// 	- ret int 
+// 	- goret int 
 //
 // Returns the start index of the line, as byte index
 // into the text of the layout.
@@ -16343,65 +17923,11 @@ func (line *LayoutLine) GetStartIndex() int {
 	cret = C.pango_layout_line_get_start_index(carg0)
 	runtime.KeepAlive(line)
 
-	var ret int
+	var goret int
 
-	ret = int(cret)
+	goret = int(cret)
 
-	return ret
-}
-
-// GetXRanges wraps pango_layout_line_get_x_ranges
-// 
-// The function takes the following parameters:
-// 
-// 	- startIndex int: Start byte index of the logical range. If this value
-//   is less than the start index for the line, then the first range
-//   will extend all the way to the leading edge of the layout. Otherwise,
-//   it will start at the leading edge of the first character. 
-// 	- endIndex int: Ending byte index of the logical range. If this value is
-//   greater than the end index for the line, then the last range will
-//   extend all the way to the trailing edge of the layout. Otherwise,
-//   it will end at the trailing edge of the last character. 
-// 
-// The function returns the following values:
-// 
-// 	- ranges array: location to
-//   store a pointer to an array of ranges. The array will be of length
-//   `2*n_ranges`, with each range starting at `(*ranges)[2*n]` and of
-//   width `(*ranges)[2*n + 1] - (*ranges)[2*n]`. This array must be freed
-//   with g_free(). The coordinates are relative to the layout and are in
-//   Pango units. 
-// 	- nRanges int: The number of ranges stored in @ranges 
-//
-// Gets a list of visual ranges corresponding to a given logical range.
-// 
-// This list is not necessarily minimal - there may be consecutive
-// ranges which are adjacent. The ranges will be sorted from left to
-// right. The ranges are with respect to the left edge of the entire
-// layout, not with respect to the line.
-func (line *LayoutLine) GetXRanges(startIndex int, endIndex int) (array) {
-	var carg0 *C.PangoLayoutLine // in, none, converted
-	var carg1 C.int              // in, none, casted
-	var carg2 C.int              // in, none, casted
-	var carg3 array              // out, transfer: full, scope: call, implicit: false, skip: false, optional: false, nullable: false, caller-allocates: false, has closure: false, has destroy: false
-	var carg4 C.int              // out, full, casted
-
-	carg0 = (*C.PangoLayoutLine)(UnsafeLayoutLineToGlibNone(line))
-	carg1 = C.int(startIndex)
-	carg2 = C.int(endIndex)
-
-	C.pango_layout_line_get_x_ranges(carg0, carg1, carg2, &carg3, &carg4)
-	runtime.KeepAlive(line)
-	runtime.KeepAlive(startIndex)
-	runtime.KeepAlive(endIndex)
-
-	var ranges  array
-	var nRanges int
-
-	panic("unimplemented conversion of array (array)")
-	nRanges = int(carg4)
-
-	return ranges
+	return goret
 }
 
 // IndexToX wraps pango_layout_line_index_to_x
@@ -16445,7 +17971,7 @@ func (line *LayoutLine) IndexToX(index_ int, trailing bool) int {
 // IsParagraphStart wraps pango_layout_line_is_paragraph_start
 // The function returns the following values:
 // 
-// 	- ret bool 
+// 	- goret bool 
 //
 // Returns whether this is the first line of the paragraph.
 func (line *LayoutLine) IsParagraphStart() bool {
@@ -16457,13 +17983,13 @@ func (line *LayoutLine) IsParagraphStart() bool {
 	cret = C.pango_layout_line_is_paragraph_start(carg0)
 	runtime.KeepAlive(line)
 
-	var ret bool
+	var goret bool
 
 	if cret != 0 {
-		ret = true
+		goret = true
 	}
 
-	return ret
+	return goret
 }
 
 // XToIndex wraps pango_layout_line_x_to_index
@@ -16479,7 +18005,7 @@ func (line *LayoutLine) IsParagraphStart() bool {
 // 	- trailing int: location to store an integer indicating where in the
 //   grapheme the user clicked. It will either be zero, or the number of
 //   characters in the grapheme. 0 represents the leading edge of the grapheme. 
-// 	- ret bool 
+// 	- goret bool 
 //
 // Converts from x offset to the byte index of the corresponding character
 // within the text of the layout.
@@ -16508,15 +18034,15 @@ func (line *LayoutLine) XToIndex(xPos int) (int, int, bool) {
 
 	var index_   int
 	var trailing int
-	var ret      bool
+	var goret    bool
 
 	index_ = int(carg2)
 	trailing = int(carg3)
 	if cret != 0 {
-		ret = true
+		goret = true
 	}
 
-	return index_, trailing, ret
+	return index_, trailing, goret
 }
 
 // LogAttr wraps PangoLogAttr
@@ -16535,6 +18061,19 @@ type logAttr struct {
 // UnsafeLogAttrFromGlibBorrow is used to convert raw C.PangoLogAttr pointers to go. This is used by the bindings internally.
 func UnsafeLogAttrFromGlibBorrow(p unsafe.Pointer) *LogAttr {
 	return &LogAttr{&logAttr{(*C.PangoLogAttr)(p)}}
+}
+
+// UnsafeLogAttrFromGlibNone is used to convert raw C.PangoLogAttr pointers to go while taking a reference. This is used by the bindings internally.
+func UnsafeLogAttrFromGlibNone(p unsafe.Pointer) *LogAttr {
+	// FIXME: this has no ref function, what should we do here?
+	wrapped := UnsafeLogAttrFromGlibBorrow(p)
+	runtime.SetFinalizer(
+		wrapped.logAttr,
+		func (intern *logAttr) {
+			C.free(unsafe.Pointer(intern.native))
+		},
+	)
+	return wrapped
 }
 
 // UnsafeLogAttrFromGlibFull is used to convert raw C.PangoLogAttr pointers to go while taking a reference. This is used by the bindings internally.
@@ -16589,14 +18128,34 @@ type matrix struct {
 	native *C.PangoMatrix
 }
 
-func marshalMatrix(p uintptr) (interface{}, error) {
-	b := gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Boxed()
+var _ gobject.GoValueInitializer = (*Matrix)(nil)
+
+func marshalMatrix(p unsafe.Pointer) (interface{}, error) {
+	b := gobject.ValueFromNative(p).Boxed()
 	return UnsafeMatrixFromGlibBorrow(b), nil
+}
+
+func (r *Matrix) InitGoValue(v *gobject.Value) {
+	v.Init(TypeMatrix)
+	v.SetBoxed(unsafe.Pointer(r.native))
 }
 
 // UnsafeMatrixFromGlibBorrow is used to convert raw C.PangoMatrix pointers to go. This is used by the bindings internally.
 func UnsafeMatrixFromGlibBorrow(p unsafe.Pointer) *Matrix {
 	return &Matrix{&matrix{(*C.PangoMatrix)(p)}}
+}
+
+// UnsafeMatrixFromGlibNone is used to convert raw C.PangoMatrix pointers to go while taking a reference. This is used by the bindings internally.
+func UnsafeMatrixFromGlibNone(p unsafe.Pointer) *Matrix {
+	// FIXME: this has no ref function, what should we do here?
+	wrapped := UnsafeMatrixFromGlibBorrow(p)
+	runtime.SetFinalizer(
+		wrapped.matrix,
+		func (intern *matrix) {
+			C.pango_matrix_free(intern.native)
+		},
+	)
+	return wrapped
 }
 
 // UnsafeMatrixFromGlibFull is used to convert raw C.PangoMatrix pointers to go while taking a reference. This is used by the bindings internally.
@@ -16743,12 +18302,12 @@ func (m *Matrix) SetY0(y0 float64) {
 // 
 // The function takes the following parameters:
 // 
-// 	- newMatrix Matrix: a `PangoMatrix` 
+// 	- newMatrix *Matrix: a `PangoMatrix` 
 //
 // Changes the transformation represented by @matrix to be the
 // transformation given by first applying transformation
 // given by @new_matrix then applying the original transformation.
-func (matrix *Matrix) Concat(newMatrix Matrix) {
+func (matrix *Matrix) Concat(newMatrix *Matrix) {
 	var carg0 *C.PangoMatrix // in, none, converted
 	var carg1 *C.PangoMatrix // in, none, converted
 
@@ -16760,10 +18319,32 @@ func (matrix *Matrix) Concat(newMatrix Matrix) {
 	runtime.KeepAlive(newMatrix)
 }
 
+// Copy wraps pango_matrix_copy
+// The function returns the following values:
+// 
+// 	- goret *Matrix 
+//
+// Copies a `PangoMatrix`.
+func (matrix *Matrix) Copy() *Matrix {
+	var carg0 *C.PangoMatrix // in, none, converted
+	var cret  *C.PangoMatrix // return, full, converted
+
+	carg0 = (*C.PangoMatrix)(UnsafeMatrixToGlibNone(matrix))
+
+	cret = C.pango_matrix_copy(carg0)
+	runtime.KeepAlive(matrix)
+
+	var goret *Matrix
+
+	goret = UnsafeMatrixFromGlibFull(unsafe.Pointer(cret))
+
+	return goret
+}
+
 // GetFontScaleFactor wraps pango_matrix_get_font_scale_factor
 // The function returns the following values:
 // 
-// 	- ret float64 
+// 	- goret float64 
 //
 // Returns the scale factor of a matrix on the height of the font.
 // 
@@ -16779,11 +18360,11 @@ func (matrix *Matrix) GetFontScaleFactor() float64 {
 	cret = C.pango_matrix_get_font_scale_factor(carg0)
 	runtime.KeepAlive(matrix)
 
-	var ret float64
+	var goret float64
 
-	ret = float64(cret)
+	goret = float64(cret)
 
-	return ret
+	return goret
 }
 
 // GetFontScaleFactors wraps pango_matrix_get_font_scale_factors
@@ -16821,7 +18402,7 @@ func (matrix *Matrix) GetFontScaleFactors() (float64, float64) {
 // GetSlantRatio wraps pango_matrix_get_slant_ratio
 // The function returns the following values:
 // 
-// 	- ret float64 
+// 	- goret float64 
 //
 // Gets the slant ratio of a matrix.
 // 
@@ -16840,11 +18421,11 @@ func (matrix *Matrix) GetSlantRatio() float64 {
 	cret = C.pango_matrix_get_slant_ratio(carg0)
 	runtime.KeepAlive(matrix)
 
-	var ret float64
+	var goret float64
 
-	ret = float64(cret)
+	goret = float64(cret)
 
-	return ret
+	return goret
 }
 
 // Rotate wraps pango_matrix_rotate
@@ -16938,6 +18519,19 @@ type rectangle struct {
 // UnsafeRectangleFromGlibBorrow is used to convert raw C.PangoRectangle pointers to go. This is used by the bindings internally.
 func UnsafeRectangleFromGlibBorrow(p unsafe.Pointer) *Rectangle {
 	return &Rectangle{&rectangle{(*C.PangoRectangle)(p)}}
+}
+
+// UnsafeRectangleFromGlibNone is used to convert raw C.PangoRectangle pointers to go while taking a reference. This is used by the bindings internally.
+func UnsafeRectangleFromGlibNone(p unsafe.Pointer) *Rectangle {
+	// FIXME: this has no ref function, what should we do here?
+	wrapped := UnsafeRectangleFromGlibBorrow(p)
+	runtime.SetFinalizer(
+		wrapped.rectangle,
+		func (intern *rectangle) {
+			C.free(unsafe.Pointer(intern.native))
+		},
+	)
+	return wrapped
 }
 
 // UnsafeRectangleFromGlibFull is used to convert raw C.PangoRectangle pointers to go while taking a reference. This is used by the bindings internally.
@@ -17076,6 +18670,19 @@ func UnsafeRendererClassFromGlibBorrow(p unsafe.Pointer) *RendererClass {
 	return &RendererClass{&rendererClass{(*C.PangoRendererClass)(p)}}
 }
 
+// UnsafeRendererClassFromGlibNone is used to convert raw C.PangoRendererClass pointers to go while taking a reference. This is used by the bindings internally.
+func UnsafeRendererClassFromGlibNone(p unsafe.Pointer) *RendererClass {
+	// FIXME: this has no ref function, what should we do here?
+	wrapped := UnsafeRendererClassFromGlibBorrow(p)
+	runtime.SetFinalizer(
+		wrapped.rendererClass,
+		func (intern *rendererClass) {
+			C.free(unsafe.Pointer(intern.native))
+		},
+	)
+	return wrapped
+}
+
 // UnsafeRendererClassFromGlibFull is used to convert raw C.PangoRendererClass pointers to go while taking a reference. This is used by the bindings internally.
 func UnsafeRendererClassFromGlibFull(p unsafe.Pointer) *RendererClass {
 	wrapped := UnsafeRendererClassFromGlibBorrow(p)
@@ -17121,14 +18728,34 @@ type scriptIter struct {
 	native *C.PangoScriptIter
 }
 
-func marshalScriptIter(p uintptr) (interface{}, error) {
-	b := gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Boxed()
+var _ gobject.GoValueInitializer = (*ScriptIter)(nil)
+
+func marshalScriptIter(p unsafe.Pointer) (interface{}, error) {
+	b := gobject.ValueFromNative(p).Boxed()
 	return UnsafeScriptIterFromGlibBorrow(b), nil
+}
+
+func (r *ScriptIter) InitGoValue(v *gobject.Value) {
+	v.Init(TypeScriptIter)
+	v.SetBoxed(unsafe.Pointer(r.native))
 }
 
 // UnsafeScriptIterFromGlibBorrow is used to convert raw C.PangoScriptIter pointers to go. This is used by the bindings internally.
 func UnsafeScriptIterFromGlibBorrow(p unsafe.Pointer) *ScriptIter {
 	return &ScriptIter{&scriptIter{(*C.PangoScriptIter)(p)}}
+}
+
+// UnsafeScriptIterFromGlibNone is used to convert raw C.PangoScriptIter pointers to go while taking a reference. This is used by the bindings internally.
+func UnsafeScriptIterFromGlibNone(p unsafe.Pointer) *ScriptIter {
+	// FIXME: this has no ref function, what should we do here?
+	wrapped := UnsafeScriptIterFromGlibBorrow(p)
+	runtime.SetFinalizer(
+		wrapped.scriptIter,
+		func (intern *scriptIter) {
+			C.pango_script_iter_free(intern.native)
+		},
+	)
+	return wrapped
 }
 
 // UnsafeScriptIterFromGlibFull is used to convert raw C.PangoScriptIter pointers to go while taking a reference. This is used by the bindings internally.
@@ -17172,7 +18799,7 @@ func UnsafeScriptIterToGlibFull(s *ScriptIter) unsafe.Pointer {
 // 
 // The function returns the following values:
 // 
-// 	- ret ScriptIter 
+// 	- goret *ScriptIter 
 //
 // Create a new `PangoScriptIter`, used to break a string of
 // Unicode text into runs by Unicode script.
@@ -17180,7 +18807,7 @@ func UnsafeScriptIterToGlibFull(s *ScriptIter) unsafe.Pointer {
 // No copy is made of @text, so the caller needs to make
 // sure it remains valid until the iterator is freed with
 // [method@Pango.ScriptIter.free].
-func NewScriptIter(text string, length int) ScriptIter {
+func NewScriptIter(text string, length int) *ScriptIter {
 	var carg1 *C.gchar           // in, none, string
 	var carg2 C.int              // in, none, casted
 	var cret  *C.PangoScriptIter // return, full, converted
@@ -17193,11 +18820,11 @@ func NewScriptIter(text string, length int) ScriptIter {
 	runtime.KeepAlive(text)
 	runtime.KeepAlive(length)
 
-	var ret ScriptIter
+	var goret *ScriptIter
 
-	ret = UnsafeScriptIterFromGlibFull(unsafe.Pointer(cret))
+	goret = UnsafeScriptIterFromGlibFull(unsafe.Pointer(cret))
 
-	return ret
+	return goret
 }
 
 // GetRange wraps pango_script_iter_get_range
@@ -17243,7 +18870,7 @@ func (iter *ScriptIter) GetRange() (string, string, Script) {
 // Next wraps pango_script_iter_next
 // The function returns the following values:
 // 
-// 	- ret bool 
+// 	- goret bool 
 //
 // Advances a `PangoScriptIter` to the next range.
 // 
@@ -17258,13 +18885,13 @@ func (iter *ScriptIter) Next() bool {
 	cret = C.pango_script_iter_next(carg0)
 	runtime.KeepAlive(iter)
 
-	var ret bool
+	var goret bool
 
 	if cret != 0 {
-		ret = true
+		goret = true
 	}
 
-	return ret
+	return goret
 }
 
 // TabArray wraps PangoTabArray
@@ -17283,14 +18910,34 @@ type tabArray struct {
 	native *C.PangoTabArray
 }
 
-func marshalTabArray(p uintptr) (interface{}, error) {
-	b := gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Boxed()
+var _ gobject.GoValueInitializer = (*TabArray)(nil)
+
+func marshalTabArray(p unsafe.Pointer) (interface{}, error) {
+	b := gobject.ValueFromNative(p).Boxed()
 	return UnsafeTabArrayFromGlibBorrow(b), nil
+}
+
+func (r *TabArray) InitGoValue(v *gobject.Value) {
+	v.Init(TypeTabArray)
+	v.SetBoxed(unsafe.Pointer(r.native))
 }
 
 // UnsafeTabArrayFromGlibBorrow is used to convert raw C.PangoTabArray pointers to go. This is used by the bindings internally.
 func UnsafeTabArrayFromGlibBorrow(p unsafe.Pointer) *TabArray {
 	return &TabArray{&tabArray{(*C.PangoTabArray)(p)}}
+}
+
+// UnsafeTabArrayFromGlibNone is used to convert raw C.PangoTabArray pointers to go while taking a reference. This is used by the bindings internally.
+func UnsafeTabArrayFromGlibNone(p unsafe.Pointer) *TabArray {
+	// FIXME: this has no ref function, what should we do here?
+	wrapped := UnsafeTabArrayFromGlibBorrow(p)
+	runtime.SetFinalizer(
+		wrapped.tabArray,
+		func (intern *tabArray) {
+			C.pango_tab_array_free(intern.native)
+		},
+	)
+	return wrapped
 }
 
 // UnsafeTabArrayFromGlibFull is used to convert raw C.PangoTabArray pointers to go while taking a reference. This is used by the bindings internally.
@@ -17334,13 +18981,13 @@ func UnsafeTabArrayToGlibFull(t *TabArray) unsafe.Pointer {
 // 
 // The function returns the following values:
 // 
-// 	- ret TabArray 
+// 	- goret *TabArray 
 //
 // Creates an array of @initial_size tab stops.
 // 
 // Tab stops are specified in pixel units if @positions_in_pixels is %TRUE,
 // otherwise in Pango units. All stops are initially at position 0.
-func NewTabArray(initialSize int, positionsInPixels bool) TabArray {
+func NewTabArray(initialSize int, positionsInPixels bool) *TabArray {
 	var carg1 C.int            // in, none, casted
 	var carg2 C.gboolean       // in
 	var cret  *C.PangoTabArray // return, full, converted
@@ -17354,11 +19001,33 @@ func NewTabArray(initialSize int, positionsInPixels bool) TabArray {
 	runtime.KeepAlive(initialSize)
 	runtime.KeepAlive(positionsInPixels)
 
-	var ret TabArray
+	var goret *TabArray
 
-	ret = UnsafeTabArrayFromGlibFull(unsafe.Pointer(cret))
+	goret = UnsafeTabArrayFromGlibFull(unsafe.Pointer(cret))
 
-	return ret
+	return goret
+}
+
+// Copy wraps pango_tab_array_copy
+// The function returns the following values:
+// 
+// 	- goret *TabArray 
+//
+// Copies a `PangoTabArray`.
+func (src *TabArray) Copy() *TabArray {
+	var carg0 *C.PangoTabArray // in, none, converted
+	var cret  *C.PangoTabArray // return, full, converted
+
+	carg0 = (*C.PangoTabArray)(UnsafeTabArrayToGlibNone(src))
+
+	cret = C.pango_tab_array_copy(carg0)
+	runtime.KeepAlive(src)
+
+	var goret *TabArray
+
+	goret = UnsafeTabArrayFromGlibFull(unsafe.Pointer(cret))
+
+	return goret
 }
 
 // GetDecimalPoint wraps pango_tab_array_get_decimal_point
@@ -17369,7 +19038,7 @@ func NewTabArray(initialSize int, positionsInPixels bool) TabArray {
 // 
 // The function returns the following values:
 // 
-// 	- ret uint32 
+// 	- goret uint32 
 //
 // Gets the Unicode character to use as decimal point.
 // 
@@ -17391,17 +19060,17 @@ func (tabArray *TabArray) GetDecimalPoint(tabIndex int) uint32 {
 	runtime.KeepAlive(tabArray)
 	runtime.KeepAlive(tabIndex)
 
-	var ret uint32
+	var goret uint32
 
-	ret = uint32(cret)
+	goret = uint32(cret)
 
-	return ret
+	return goret
 }
 
 // GetPositionsInPixels wraps pango_tab_array_get_positions_in_pixels
 // The function returns the following values:
 // 
-// 	- ret bool 
+// 	- goret bool 
 //
 // Returns %TRUE if the tab positions are in pixels,
 // %FALSE if they are in Pango units.
@@ -17414,19 +19083,19 @@ func (tabArray *TabArray) GetPositionsInPixels() bool {
 	cret = C.pango_tab_array_get_positions_in_pixels(carg0)
 	runtime.KeepAlive(tabArray)
 
-	var ret bool
+	var goret bool
 
 	if cret != 0 {
-		ret = true
+		goret = true
 	}
 
-	return ret
+	return goret
 }
 
 // GetSize wraps pango_tab_array_get_size
 // The function returns the following values:
 // 
-// 	- ret int 
+// 	- goret int 
 //
 // Gets the number of tab stops in @tab_array.
 func (tabArray *TabArray) GetSize() int {
@@ -17438,11 +19107,11 @@ func (tabArray *TabArray) GetSize() int {
 	cret = C.pango_tab_array_get_size(carg0)
 	runtime.KeepAlive(tabArray)
 
-	var ret int
+	var goret int
 
-	ret = int(cret)
+	goret = int(cret)
 
-	return ret
+	return goret
 }
 
 // GetTab wraps pango_tab_array_get_tab
@@ -17595,7 +19264,7 @@ func (tabArray *TabArray) Sort() {
 // ToString wraps pango_tab_array_to_string
 // The function returns the following values:
 // 
-// 	- ret string 
+// 	- goret string 
 //
 // Serializes a `PangoTabArray` to a string.
 // 
@@ -17624,11 +19293,11 @@ func (tabArray *TabArray) ToString() string {
 	cret = C.pango_tab_array_to_string(carg0)
 	runtime.KeepAlive(tabArray)
 
-	var ret string
+	var goret string
 
-	ret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
 	defer C.free(unsafe.Pointer(cret))
 
-	return ret
+	return goret
 }
 

@@ -3,4812 +3,4804 @@
 package gdk
 
 import (
+	"github.com/diamondburned/gotk4/pkg/pango"
+	"context"
+	"runtime"
+	"github.com/diamondburned/gotk4/pkg/glib/v2"
+	"github.com/diamondburned/gotk4/pkg/gdkpixbuf/v2"
 	"unsafe"
 	"github.com/diamondburned/gotk4/pkg/gobject/v2"
-	"runtime"
-	"github.com/diamondburned/gotk4/pkg/core/gbox"
-	"github.com/diamondburned/gotk4/pkg/gdkpixbuf/v2"
-	"github.com/diamondburned/gotk4/pkg/pango"
 	"github.com/diamondburned/gotk4/pkg/gio/v2"
-	"github.com/diamondburned/gotk4/pkg/glib/v2"
+	"github.com/diamondburned/gotk4/pkg/core/gbox"
 )
 
 // #cgo pkg-config: gtk4
 // #cgo CFLAGS: -Wno-deprecated-declarations
 // #include <gdk/gdk.h>
+// extern void _gotk4_gio2_AsyncReadyCallback(GObject*, GAsyncResult*, gpointer);
 import "C"
 
 // GType values.
 var (
-	GTypeAxisUse                      = glib.Type(C.gdk_axis_use_get_type())
-	GTypeCicpRange                    = glib.Type(C.gdk_cicp_range_get_type())
-	GTypeCrossingMode                 = glib.Type(C.gdk_crossing_mode_get_type())
-	GTypeDevicePadFeature             = glib.Type(C.gdk_device_pad_feature_get_type())
-	GTypeDeviceToolType               = glib.Type(C.gdk_device_tool_type_get_type())
-	GTypeDmabufError                  = glib.Type(C.gdk_dmabuf_error_get_type())
-	GTypeDragCancelReason             = glib.Type(C.gdk_drag_cancel_reason_get_type())
-	GTypeEventType                    = glib.Type(C.gdk_event_type_get_type())
-	GTypeFullscreenMode               = glib.Type(C.gdk_fullscreen_mode_get_type())
-	GTypeGLError                      = glib.Type(C.gdk_gl_error_get_type())
-	GTypeGravity                      = glib.Type(C.gdk_gravity_get_type())
-	GTypeInputSource                  = glib.Type(C.gdk_input_source_get_type())
-	GTypeKeyMatch                     = glib.Type(C.gdk_key_match_get_type())
-	GTypeMemoryFormat                 = glib.Type(C.gdk_memory_format_get_type())
-	GTypeNotifyType                   = glib.Type(C.gdk_notify_type_get_type())
-	GTypeScrollDirection              = glib.Type(C.gdk_scroll_direction_get_type())
-	GTypeScrollUnit                   = glib.Type(C.gdk_scroll_unit_get_type())
-	GTypeSubpixelLayout               = glib.Type(C.gdk_subpixel_layout_get_type())
-	GTypeSurfaceEdge                  = glib.Type(C.gdk_surface_edge_get_type())
-	GTypeTextureError                 = glib.Type(C.gdk_texture_error_get_type())
-	GTypeTitlebarGesture              = glib.Type(C.gdk_titlebar_gesture_get_type())
-	GTypeTouchpadGesturePhase         = glib.Type(C.gdk_touchpad_gesture_phase_get_type())
-	GTypeVulkanError                  = glib.Type(C.gdk_vulkan_error_get_type())
-	GTypeAnchorHints                  = glib.Type(C.gdk_anchor_hints_get_type())
-	GTypeAxisFlags                    = glib.Type(C.gdk_axis_flags_get_type())
-	GTypeDragAction                   = glib.Type(C.gdk_drag_action_get_type())
-	GTypeFrameClockPhase              = glib.Type(C.gdk_frame_clock_phase_get_type())
-	GTypeGLAPI                        = glib.Type(C.gdk_gl_api_get_type())
-	GTypeModifierType                 = glib.Type(C.gdk_modifier_type_get_type())
-	GTypePaintableFlags               = glib.Type(C.gdk_paintable_flags_get_type())
-	GTypeSeatCapabilities             = glib.Type(C.gdk_seat_capabilities_get_type())
-	GTypeToplevelState                = glib.Type(C.gdk_toplevel_state_get_type())
-	GTypeDevicePadInstance            = glib.Type(C.gdk_device_pad_get_type())
-	GTypeDragSurfaceInstance          = glib.Type(C.gdk_drag_surface_get_type())
-	GTypePaintableInstance            = glib.Type(C.gdk_paintable_get_type())
-	GTypePopupInstance                = glib.Type(C.gdk_popup_get_type())
-	GTypeToplevelInstance             = glib.Type(C.gdk_toplevel_get_type())
-	GTypeAppLaunchContextInstance     = glib.Type(C.gdk_app_launch_context_get_type())
-	GTypeCicpParamsInstance           = glib.Type(C.gdk_cicp_params_get_type())
-	GTypeClipboardInstance            = glib.Type(C.gdk_clipboard_get_type())
-	GTypeContentDeserializerInstance  = glib.Type(C.gdk_content_deserializer_get_type())
-	GTypeContentProviderInstance      = glib.Type(C.gdk_content_provider_get_type())
-	GTypeContentSerializerInstance    = glib.Type(C.gdk_content_serializer_get_type())
-	GTypeCursorInstance               = glib.Type(C.gdk_cursor_get_type())
-	GTypeDeviceInstance               = glib.Type(C.gdk_device_get_type())
-	GTypeDeviceToolInstance           = glib.Type(C.gdk_device_tool_get_type())
-	GTypeDisplayInstance              = glib.Type(C.gdk_display_get_type())
-	GTypeDisplayManagerInstance       = glib.Type(C.gdk_display_manager_get_type())
-	GTypeDmabufTextureBuilderInstance = glib.Type(C.gdk_dmabuf_texture_builder_get_type())
-	GTypeDragInstance                 = glib.Type(C.gdk_drag_get_type())
-	GTypeDrawContextInstance          = glib.Type(C.gdk_draw_context_get_type())
-	GTypeDropInstance                 = glib.Type(C.gdk_drop_get_type())
-	GTypeFrameClockInstance           = glib.Type(C.gdk_frame_clock_get_type())
-	GTypeGLContextInstance            = glib.Type(C.gdk_gl_context_get_type())
-	GTypeGLTextureBuilderInstance     = glib.Type(C.gdk_gl_texture_builder_get_type())
-	GTypeMemoryTextureBuilderInstance = glib.Type(C.gdk_memory_texture_builder_get_type())
-	GTypeMonitorInstance              = glib.Type(C.gdk_monitor_get_type())
-	GTypeSeatInstance                 = glib.Type(C.gdk_seat_get_type())
-	GTypeSnapshotInstance             = glib.Type(C.gdk_snapshot_get_type())
-	GTypeSurfaceInstance              = glib.Type(C.gdk_surface_get_type())
-	GTypeTextureInstance              = glib.Type(C.gdk_texture_get_type())
-	GTypeVulkanContextInstance        = glib.Type(C.gdk_vulkan_context_get_type())
-	GTypeCairoContextInstance         = glib.Type(C.gdk_cairo_context_get_type())
-	GTypeDmabufTextureInstance        = glib.Type(C.gdk_dmabuf_texture_get_type())
-	GTypeGLTextureInstance            = glib.Type(C.gdk_gl_texture_get_type())
-	GTypeMemoryTextureInstance        = glib.Type(C.gdk_memory_texture_get_type())
-	GTypeColorState                   = glib.Type(C.gdk_color_state_get_type())
-	GTypeContentFormats               = glib.Type(C.gdk_content_formats_get_type())
-	GTypeContentFormatsBuilder        = glib.Type(C.gdk_content_formats_builder_get_type())
-	GTypeDmabufFormats                = glib.Type(C.gdk_dmabuf_formats_get_type())
-	GTypeDragSurfaceSize              = glib.Type(C.gdk_drag_surface_size_get_type())
-	GTypeEventSequence                = glib.Type(C.gdk_event_sequence_get_type())
-	GTypeFileList                     = glib.Type(C.gdk_file_list_get_type())
-	GTypeFrameTimings                 = glib.Type(C.gdk_frame_timings_get_type())
-	GTypePopupLayout                  = glib.Type(C.gdk_popup_layout_get_type())
-	GTypeRGBA                         = glib.Type(C.gdk_rgba_get_type())
-	GTypeRectangle                    = glib.Type(C.gdk_rectangle_get_type())
-	GTypeTextureDownloader            = glib.Type(C.gdk_texture_downloader_get_type())
-	GTypeToplevelLayout               = glib.Type(C.gdk_toplevel_layout_get_type())
-	GTypeToplevelSize                 = glib.Type(C.gdk_toplevel_size_get_type())
+	TypeAxisUse               = gobject.Type(C.gdk_axis_use_get_type())
+	TypeCicpRange             = gobject.Type(C.gdk_cicp_range_get_type())
+	TypeCrossingMode          = gobject.Type(C.gdk_crossing_mode_get_type())
+	TypeDevicePadFeature      = gobject.Type(C.gdk_device_pad_feature_get_type())
+	TypeDeviceToolType        = gobject.Type(C.gdk_device_tool_type_get_type())
+	TypeDmabufError           = gobject.Type(C.gdk_dmabuf_error_get_type())
+	TypeDragCancelReason      = gobject.Type(C.gdk_drag_cancel_reason_get_type())
+	TypeEventType             = gobject.Type(C.gdk_event_type_get_type())
+	TypeFullscreenMode        = gobject.Type(C.gdk_fullscreen_mode_get_type())
+	TypeGLError               = gobject.Type(C.gdk_gl_error_get_type())
+	TypeGravity               = gobject.Type(C.gdk_gravity_get_type())
+	TypeInputSource           = gobject.Type(C.gdk_input_source_get_type())
+	TypeKeyMatch              = gobject.Type(C.gdk_key_match_get_type())
+	TypeMemoryFormat          = gobject.Type(C.gdk_memory_format_get_type())
+	TypeNotifyType            = gobject.Type(C.gdk_notify_type_get_type())
+	TypeScrollDirection       = gobject.Type(C.gdk_scroll_direction_get_type())
+	TypeScrollUnit            = gobject.Type(C.gdk_scroll_unit_get_type())
+	TypeSubpixelLayout        = gobject.Type(C.gdk_subpixel_layout_get_type())
+	TypeSurfaceEdge           = gobject.Type(C.gdk_surface_edge_get_type())
+	TypeTextureError          = gobject.Type(C.gdk_texture_error_get_type())
+	TypeTitlebarGesture       = gobject.Type(C.gdk_titlebar_gesture_get_type())
+	TypeTouchpadGesturePhase  = gobject.Type(C.gdk_touchpad_gesture_phase_get_type())
+	TypeVulkanError           = gobject.Type(C.gdk_vulkan_error_get_type())
+	TypeAnchorHints           = gobject.Type(C.gdk_anchor_hints_get_type())
+	TypeAxisFlags             = gobject.Type(C.gdk_axis_flags_get_type())
+	TypeDragAction            = gobject.Type(C.gdk_drag_action_get_type())
+	TypeFrameClockPhase       = gobject.Type(C.gdk_frame_clock_phase_get_type())
+	TypeGLAPI                 = gobject.Type(C.gdk_gl_api_get_type())
+	TypeModifierType          = gobject.Type(C.gdk_modifier_type_get_type())
+	TypePaintableFlags        = gobject.Type(C.gdk_paintable_flags_get_type())
+	TypeSeatCapabilities      = gobject.Type(C.gdk_seat_capabilities_get_type())
+	TypeToplevelState         = gobject.Type(C.gdk_toplevel_state_get_type())
+	TypeDevicePad             = gobject.Type(C.gdk_device_pad_get_type())
+	TypeDragSurface           = gobject.Type(C.gdk_drag_surface_get_type())
+	TypePaintable             = gobject.Type(C.gdk_paintable_get_type())
+	TypePopup                 = gobject.Type(C.gdk_popup_get_type())
+	TypeToplevel              = gobject.Type(C.gdk_toplevel_get_type())
+	TypeAppLaunchContext      = gobject.Type(C.gdk_app_launch_context_get_type())
+	TypeCicpParams            = gobject.Type(C.gdk_cicp_params_get_type())
+	TypeClipboard             = gobject.Type(C.gdk_clipboard_get_type())
+	TypeContentDeserializer   = gobject.Type(C.gdk_content_deserializer_get_type())
+	TypeContentProvider       = gobject.Type(C.gdk_content_provider_get_type())
+	TypeContentSerializer     = gobject.Type(C.gdk_content_serializer_get_type())
+	TypeCursor                = gobject.Type(C.gdk_cursor_get_type())
+	TypeDevice                = gobject.Type(C.gdk_device_get_type())
+	TypeDeviceTool            = gobject.Type(C.gdk_device_tool_get_type())
+	TypeDisplay               = gobject.Type(C.gdk_display_get_type())
+	TypeDisplayManager        = gobject.Type(C.gdk_display_manager_get_type())
+	TypeDmabufTextureBuilder  = gobject.Type(C.gdk_dmabuf_texture_builder_get_type())
+	TypeDrag                  = gobject.Type(C.gdk_drag_get_type())
+	TypeDrawContext           = gobject.Type(C.gdk_draw_context_get_type())
+	TypeDrop                  = gobject.Type(C.gdk_drop_get_type())
+	TypeFrameClock            = gobject.Type(C.gdk_frame_clock_get_type())
+	TypeGLContext             = gobject.Type(C.gdk_gl_context_get_type())
+	TypeGLTextureBuilder      = gobject.Type(C.gdk_gl_texture_builder_get_type())
+	TypeMemoryTextureBuilder  = gobject.Type(C.gdk_memory_texture_builder_get_type())
+	TypeMonitor               = gobject.Type(C.gdk_monitor_get_type())
+	TypeSeat                  = gobject.Type(C.gdk_seat_get_type())
+	TypeSnapshot              = gobject.Type(C.gdk_snapshot_get_type())
+	TypeSurface               = gobject.Type(C.gdk_surface_get_type())
+	TypeTexture               = gobject.Type(C.gdk_texture_get_type())
+	TypeVulkanContext         = gobject.Type(C.gdk_vulkan_context_get_type())
+	TypeCairoContext          = gobject.Type(C.gdk_cairo_context_get_type())
+	TypeDmabufTexture         = gobject.Type(C.gdk_dmabuf_texture_get_type())
+	TypeGLTexture             = gobject.Type(C.gdk_gl_texture_get_type())
+	TypeMemoryTexture         = gobject.Type(C.gdk_memory_texture_get_type())
+	TypeColorState            = gobject.Type(C.gdk_color_state_get_type())
+	TypeContentFormats        = gobject.Type(C.gdk_content_formats_get_type())
+	TypeContentFormatsBuilder = gobject.Type(C.gdk_content_formats_builder_get_type())
+	TypeDmabufFormats         = gobject.Type(C.gdk_dmabuf_formats_get_type())
+	TypeDragSurfaceSize       = gobject.Type(C.gdk_drag_surface_size_get_type())
+	TypeEventSequence         = gobject.Type(C.gdk_event_sequence_get_type())
+	TypeFileList              = gobject.Type(C.gdk_file_list_get_type())
+	TypeFrameTimings          = gobject.Type(C.gdk_frame_timings_get_type())
+	TypePopupLayout           = gobject.Type(C.gdk_popup_layout_get_type())
+	TypeRGBA                  = gobject.Type(C.gdk_rgba_get_type())
+	TypeRectangle             = gobject.Type(C.gdk_rectangle_get_type())
+	TypeTextureDownloader     = gobject.Type(C.gdk_texture_downloader_get_type())
+	TypeToplevelLayout        = gobject.Type(C.gdk_toplevel_layout_get_type())
+	TypeToplevelSize          = gobject.Type(C.gdk_toplevel_size_get_type())
 )
 
 func init() {
-	glib.RegisterGValueMarshalers([]glib.TypeMarshaler{
-		glib.TypeMarshaler{T: GTypeAxisUse, F: marshalAxisUse},
-		glib.TypeMarshaler{T: GTypeCicpRange, F: marshalCicpRange},
-		glib.TypeMarshaler{T: GTypeCrossingMode, F: marshalCrossingMode},
-		glib.TypeMarshaler{T: GTypeDevicePadFeature, F: marshalDevicePadFeature},
-		glib.TypeMarshaler{T: GTypeDeviceToolType, F: marshalDeviceToolType},
-		glib.TypeMarshaler{T: GTypeDmabufError, F: marshalDmabufError},
-		glib.TypeMarshaler{T: GTypeDragCancelReason, F: marshalDragCancelReason},
-		glib.TypeMarshaler{T: GTypeEventType, F: marshalEventType},
-		glib.TypeMarshaler{T: GTypeFullscreenMode, F: marshalFullscreenMode},
-		glib.TypeMarshaler{T: GTypeGLError, F: marshalGLError},
-		glib.TypeMarshaler{T: GTypeGravity, F: marshalGravity},
-		glib.TypeMarshaler{T: GTypeInputSource, F: marshalInputSource},
-		glib.TypeMarshaler{T: GTypeKeyMatch, F: marshalKeyMatch},
-		glib.TypeMarshaler{T: GTypeMemoryFormat, F: marshalMemoryFormat},
-		glib.TypeMarshaler{T: GTypeNotifyType, F: marshalNotifyType},
-		glib.TypeMarshaler{T: GTypeScrollDirection, F: marshalScrollDirection},
-		glib.TypeMarshaler{T: GTypeScrollUnit, F: marshalScrollUnit},
-		glib.TypeMarshaler{T: GTypeSubpixelLayout, F: marshalSubpixelLayout},
-		glib.TypeMarshaler{T: GTypeSurfaceEdge, F: marshalSurfaceEdge},
-		glib.TypeMarshaler{T: GTypeTextureError, F: marshalTextureError},
-		glib.TypeMarshaler{T: GTypeTitlebarGesture, F: marshalTitlebarGesture},
-		glib.TypeMarshaler{T: GTypeTouchpadGesturePhase, F: marshalTouchpadGesturePhase},
-		glib.TypeMarshaler{T: GTypeVulkanError, F: marshalVulkanError},
-		glib.TypeMarshaler{T: GTypeAnchorHints, F: marshalAnchorHints},
-		glib.TypeMarshaler{T: GTypeAxisFlags, F: marshalAxisFlags},
-		glib.TypeMarshaler{T: GTypeDragAction, F: marshalDragAction},
-		glib.TypeMarshaler{T: GTypeFrameClockPhase, F: marshalFrameClockPhase},
-		glib.TypeMarshaler{T: GTypeGLAPI, F: marshalGLAPI},
-		glib.TypeMarshaler{T: GTypeModifierType, F: marshalModifierType},
-		glib.TypeMarshaler{T: GTypePaintableFlags, F: marshalPaintableFlags},
-		glib.TypeMarshaler{T: GTypeSeatCapabilities, F: marshalSeatCapabilities},
-		glib.TypeMarshaler{T: GTypeToplevelState, F: marshalToplevelState},
-		glib.TypeMarshaler{T: GTypeDevicePadInstance, F: marshalDevicePadInstance},
-		glib.TypeMarshaler{T: GTypeDragSurfaceInstance, F: marshalDragSurfaceInstance},
-		glib.TypeMarshaler{T: GTypePaintableInstance, F: marshalPaintableInstance},
-		glib.TypeMarshaler{T: GTypePopupInstance, F: marshalPopupInstance},
-		glib.TypeMarshaler{T: GTypeToplevelInstance, F: marshalToplevelInstance},
-		glib.TypeMarshaler{T: GTypeAppLaunchContextInstance, F: marshalAppLaunchContextInstance},
-		glib.TypeMarshaler{T: GTypeCicpParamsInstance, F: marshalCicpParamsInstance},
-		glib.TypeMarshaler{T: GTypeClipboardInstance, F: marshalClipboardInstance},
-		glib.TypeMarshaler{T: GTypeContentDeserializerInstance, F: marshalContentDeserializerInstance},
-		glib.TypeMarshaler{T: GTypeContentProviderInstance, F: marshalContentProviderInstance},
-		glib.TypeMarshaler{T: GTypeContentSerializerInstance, F: marshalContentSerializerInstance},
-		glib.TypeMarshaler{T: GTypeCursorInstance, F: marshalCursorInstance},
-		glib.TypeMarshaler{T: GTypeDeviceInstance, F: marshalDeviceInstance},
-		glib.TypeMarshaler{T: GTypeDeviceToolInstance, F: marshalDeviceToolInstance},
-		glib.TypeMarshaler{T: GTypeDisplayInstance, F: marshalDisplayInstance},
-		glib.TypeMarshaler{T: GTypeDisplayManagerInstance, F: marshalDisplayManagerInstance},
-		glib.TypeMarshaler{T: GTypeDmabufTextureBuilderInstance, F: marshalDmabufTextureBuilderInstance},
-		glib.TypeMarshaler{T: GTypeDragInstance, F: marshalDragInstance},
-		glib.TypeMarshaler{T: GTypeDrawContextInstance, F: marshalDrawContextInstance},
-		glib.TypeMarshaler{T: GTypeDropInstance, F: marshalDropInstance},
-		glib.TypeMarshaler{T: GTypeFrameClockInstance, F: marshalFrameClockInstance},
-		glib.TypeMarshaler{T: GTypeGLContextInstance, F: marshalGLContextInstance},
-		glib.TypeMarshaler{T: GTypeGLTextureBuilderInstance, F: marshalGLTextureBuilderInstance},
-		glib.TypeMarshaler{T: GTypeMemoryTextureBuilderInstance, F: marshalMemoryTextureBuilderInstance},
-		glib.TypeMarshaler{T: GTypeMonitorInstance, F: marshalMonitorInstance},
-		glib.TypeMarshaler{T: GTypeSeatInstance, F: marshalSeatInstance},
-		glib.TypeMarshaler{T: GTypeSnapshotInstance, F: marshalSnapshotInstance},
-		glib.TypeMarshaler{T: GTypeSurfaceInstance, F: marshalSurfaceInstance},
-		glib.TypeMarshaler{T: GTypeTextureInstance, F: marshalTextureInstance},
-		glib.TypeMarshaler{T: GTypeVulkanContextInstance, F: marshalVulkanContextInstance},
-		glib.TypeMarshaler{T: GTypeCairoContextInstance, F: marshalCairoContextInstance},
-		glib.TypeMarshaler{T: GTypeDmabufTextureInstance, F: marshalDmabufTextureInstance},
-		glib.TypeMarshaler{T: GTypeGLTextureInstance, F: marshalGLTextureInstance},
-		glib.TypeMarshaler{T: GTypeMemoryTextureInstance, F: marshalMemoryTextureInstance},
-		glib.TypeMarshaler{T: GTypeColorState, F: marshalColorState},
-		glib.TypeMarshaler{T: GTypeContentFormats, F: marshalContentFormats},
-		glib.TypeMarshaler{T: GTypeContentFormatsBuilder, F: marshalContentFormatsBuilder},
-		glib.TypeMarshaler{T: GTypeDmabufFormats, F: marshalDmabufFormats},
-		glib.TypeMarshaler{T: GTypeDragSurfaceSize, F: marshalDragSurfaceSize},
-		glib.TypeMarshaler{T: GTypeEventSequence, F: marshalEventSequence},
-		glib.TypeMarshaler{T: GTypeFileList, F: marshalFileList},
-		glib.TypeMarshaler{T: GTypeFrameTimings, F: marshalFrameTimings},
-		glib.TypeMarshaler{T: GTypePopupLayout, F: marshalPopupLayout},
-		glib.TypeMarshaler{T: GTypeRGBA, F: marshalRGBA},
-		glib.TypeMarshaler{T: GTypeRectangle, F: marshalRectangle},
-		glib.TypeMarshaler{T: GTypeTextureDownloader, F: marshalTextureDownloader},
-		glib.TypeMarshaler{T: GTypeToplevelLayout, F: marshalToplevelLayout},
-		glib.TypeMarshaler{T: GTypeToplevelSize, F: marshalToplevelSize},
+	gobject.RegisterGValueMarshalers([]gobject.TypeMarshaler{
+		gobject.TypeMarshaler{T: TypeAxisUse, F: marshalAxisUse},
+		gobject.TypeMarshaler{T: TypeCicpRange, F: marshalCicpRange},
+		gobject.TypeMarshaler{T: TypeCrossingMode, F: marshalCrossingMode},
+		gobject.TypeMarshaler{T: TypeDevicePadFeature, F: marshalDevicePadFeature},
+		gobject.TypeMarshaler{T: TypeDeviceToolType, F: marshalDeviceToolType},
+		gobject.TypeMarshaler{T: TypeDmabufError, F: marshalDmabufError},
+		gobject.TypeMarshaler{T: TypeDragCancelReason, F: marshalDragCancelReason},
+		gobject.TypeMarshaler{T: TypeEventType, F: marshalEventType},
+		gobject.TypeMarshaler{T: TypeFullscreenMode, F: marshalFullscreenMode},
+		gobject.TypeMarshaler{T: TypeGLError, F: marshalGLError},
+		gobject.TypeMarshaler{T: TypeGravity, F: marshalGravity},
+		gobject.TypeMarshaler{T: TypeInputSource, F: marshalInputSource},
+		gobject.TypeMarshaler{T: TypeKeyMatch, F: marshalKeyMatch},
+		gobject.TypeMarshaler{T: TypeMemoryFormat, F: marshalMemoryFormat},
+		gobject.TypeMarshaler{T: TypeNotifyType, F: marshalNotifyType},
+		gobject.TypeMarshaler{T: TypeScrollDirection, F: marshalScrollDirection},
+		gobject.TypeMarshaler{T: TypeScrollUnit, F: marshalScrollUnit},
+		gobject.TypeMarshaler{T: TypeSubpixelLayout, F: marshalSubpixelLayout},
+		gobject.TypeMarshaler{T: TypeSurfaceEdge, F: marshalSurfaceEdge},
+		gobject.TypeMarshaler{T: TypeTextureError, F: marshalTextureError},
+		gobject.TypeMarshaler{T: TypeTitlebarGesture, F: marshalTitlebarGesture},
+		gobject.TypeMarshaler{T: TypeTouchpadGesturePhase, F: marshalTouchpadGesturePhase},
+		gobject.TypeMarshaler{T: TypeVulkanError, F: marshalVulkanError},
+		gobject.TypeMarshaler{T: TypeAnchorHints, F: marshalAnchorHints},
+		gobject.TypeMarshaler{T: TypeAxisFlags, F: marshalAxisFlags},
+		gobject.TypeMarshaler{T: TypeDragAction, F: marshalDragAction},
+		gobject.TypeMarshaler{T: TypeFrameClockPhase, F: marshalFrameClockPhase},
+		gobject.TypeMarshaler{T: TypeGLAPI, F: marshalGLAPI},
+		gobject.TypeMarshaler{T: TypeModifierType, F: marshalModifierType},
+		gobject.TypeMarshaler{T: TypePaintableFlags, F: marshalPaintableFlags},
+		gobject.TypeMarshaler{T: TypeSeatCapabilities, F: marshalSeatCapabilities},
+		gobject.TypeMarshaler{T: TypeToplevelState, F: marshalToplevelState},
+		gobject.TypeMarshaler{T: TypeDevicePad, F: marshalDevicePadInstance},
+		gobject.TypeMarshaler{T: TypeDragSurface, F: marshalDragSurfaceInstance},
+		gobject.TypeMarshaler{T: TypePaintable, F: marshalPaintableInstance},
+		gobject.TypeMarshaler{T: TypePopup, F: marshalPopupInstance},
+		gobject.TypeMarshaler{T: TypeToplevel, F: marshalToplevelInstance},
+		gobject.TypeMarshaler{T: TypeAppLaunchContext, F: marshalAppLaunchContextInstance},
+		gobject.TypeMarshaler{T: TypeCicpParams, F: marshalCicpParamsInstance},
+		gobject.TypeMarshaler{T: TypeClipboard, F: marshalClipboardInstance},
+		gobject.TypeMarshaler{T: TypeContentDeserializer, F: marshalContentDeserializerInstance},
+		gobject.TypeMarshaler{T: TypeContentProvider, F: marshalContentProviderInstance},
+		gobject.TypeMarshaler{T: TypeContentSerializer, F: marshalContentSerializerInstance},
+		gobject.TypeMarshaler{T: TypeCursor, F: marshalCursorInstance},
+		gobject.TypeMarshaler{T: TypeDevice, F: marshalDeviceInstance},
+		gobject.TypeMarshaler{T: TypeDeviceTool, F: marshalDeviceToolInstance},
+		gobject.TypeMarshaler{T: TypeDisplay, F: marshalDisplayInstance},
+		gobject.TypeMarshaler{T: TypeDisplayManager, F: marshalDisplayManagerInstance},
+		gobject.TypeMarshaler{T: TypeDmabufTextureBuilder, F: marshalDmabufTextureBuilderInstance},
+		gobject.TypeMarshaler{T: TypeDrag, F: marshalDragInstance},
+		gobject.TypeMarshaler{T: TypeDrawContext, F: marshalDrawContextInstance},
+		gobject.TypeMarshaler{T: TypeDrop, F: marshalDropInstance},
+		gobject.TypeMarshaler{T: TypeFrameClock, F: marshalFrameClockInstance},
+		gobject.TypeMarshaler{T: TypeGLContext, F: marshalGLContextInstance},
+		gobject.TypeMarshaler{T: TypeGLTextureBuilder, F: marshalGLTextureBuilderInstance},
+		gobject.TypeMarshaler{T: TypeMemoryTextureBuilder, F: marshalMemoryTextureBuilderInstance},
+		gobject.TypeMarshaler{T: TypeMonitor, F: marshalMonitorInstance},
+		gobject.TypeMarshaler{T: TypeSeat, F: marshalSeatInstance},
+		gobject.TypeMarshaler{T: TypeSnapshot, F: marshalSnapshotInstance},
+		gobject.TypeMarshaler{T: TypeSurface, F: marshalSurfaceInstance},
+		gobject.TypeMarshaler{T: TypeTexture, F: marshalTextureInstance},
+		gobject.TypeMarshaler{T: TypeVulkanContext, F: marshalVulkanContextInstance},
+		gobject.TypeMarshaler{T: TypeCairoContext, F: marshalCairoContextInstance},
+		gobject.TypeMarshaler{T: TypeDmabufTexture, F: marshalDmabufTextureInstance},
+		gobject.TypeMarshaler{T: TypeGLTexture, F: marshalGLTextureInstance},
+		gobject.TypeMarshaler{T: TypeMemoryTexture, F: marshalMemoryTextureInstance},
+		gobject.TypeMarshaler{T: TypeColorState, F: marshalColorState},
+		gobject.TypeMarshaler{T: TypeContentFormats, F: marshalContentFormats},
+		gobject.TypeMarshaler{T: TypeContentFormatsBuilder, F: marshalContentFormatsBuilder},
+		gobject.TypeMarshaler{T: TypeDmabufFormats, F: marshalDmabufFormats},
+		gobject.TypeMarshaler{T: TypeDragSurfaceSize, F: marshalDragSurfaceSize},
+		gobject.TypeMarshaler{T: TypeEventSequence, F: marshalEventSequence},
+		gobject.TypeMarshaler{T: TypeFileList, F: marshalFileList},
+		gobject.TypeMarshaler{T: TypeFrameTimings, F: marshalFrameTimings},
+		gobject.TypeMarshaler{T: TypePopupLayout, F: marshalPopupLayout},
+		gobject.TypeMarshaler{T: TypeRGBA, F: marshalRGBA},
+		gobject.TypeMarshaler{T: TypeRectangle, F: marshalRectangle},
+		gobject.TypeMarshaler{T: TypeTextureDownloader, F: marshalTextureDownloader},
+		gobject.TypeMarshaler{T: TypeToplevelLayout, F: marshalToplevelLayout},
+		gobject.TypeMarshaler{T: TypeToplevelSize, F: marshalToplevelSize},
 	})
 }
 
-// ACTIONALL wraps GDK_ACTION_ALL
+// ActionAll wraps GDK_ACTION_ALL
 //
 // Defines all possible DND actions.
 // 
 // This can be used in [method@Gdk.Drop.status] messages when any drop
 // can be accepted or a more specific drop method is not yet known.
-const ACTIONALL = C.GDK_ACTION_ALL
-// BUTTONMIDDLE wraps GDK_BUTTON_MIDDLE
+const ActionAll = 7
+// ButtonMiddle wraps GDK_BUTTON_MIDDLE
 //
 // The middle button.
-const BUTTONMIDDLE = C.GDK_BUTTON_MIDDLE
-// BUTTONPRIMARY wraps GDK_BUTTON_PRIMARY
+const ButtonMiddle = 2
+// ButtonPrimary wraps GDK_BUTTON_PRIMARY
 //
 // The primary button. This is typically the left mouse button, or the
 // right button in a left-handed setup.
-const BUTTONPRIMARY = C.GDK_BUTTON_PRIMARY
-// BUTTONSECONDARY wraps GDK_BUTTON_SECONDARY
+const ButtonPrimary = 1
+// ButtonSecondary wraps GDK_BUTTON_SECONDARY
 //
 // The secondary button. This is typically the right mouse button, or the
 // left button in a left-handed setup.
-const BUTTONSECONDARY = C.GDK_BUTTON_SECONDARY
-// CURRENTTIME wraps GDK_CURRENT_TIME
+const ButtonSecondary = 3
+// CurrentTime wraps GDK_CURRENT_TIME
 //
 // Represents the current time, and can be used anywhere a time is expected.
-const CURRENTTIME = C.GDK_CURRENT_TIME
-// EVENTPROPAGATE wraps GDK_EVENT_PROPAGATE
-//
-// Use this macro as the return value for continuing the propagation of
-// an event handler.
-const EVENTPROPAGATE = C.GDK_EVENT_PROPAGATE
-// EVENTSTOP wraps GDK_EVENT_STOP
-//
-// Use this macro as the return value for stopping the propagation of
-// an event handler.
-const EVENTSTOP = C.GDK_EVENT_STOP
-// KEY0 wraps GDK_KEY_0
-const KEY0 = C.GDK_KEY_0
-// KEY1 wraps GDK_KEY_1
-const KEY1 = C.GDK_KEY_1
-// KEY2 wraps GDK_KEY_2
-const KEY2 = C.GDK_KEY_2
-// KEY3 wraps GDK_KEY_3
-const KEY3 = C.GDK_KEY_3
-// KEY3270AltCursor wraps GDK_KEY_3270_AltCursor
-const KEY3270AltCursor = C.GDK_KEY_3270_AltCursor
-// KEY3270Attn wraps GDK_KEY_3270_Attn
-const KEY3270Attn = C.GDK_KEY_3270_Attn
-// KEY3270BackTab wraps GDK_KEY_3270_BackTab
-const KEY3270BackTab = C.GDK_KEY_3270_BackTab
-// KEY3270ChangeScreen wraps GDK_KEY_3270_ChangeScreen
-const KEY3270ChangeScreen = C.GDK_KEY_3270_ChangeScreen
-// KEY3270Copy wraps GDK_KEY_3270_Copy
-const KEY3270Copy = C.GDK_KEY_3270_Copy
-// KEY3270CursorBlink wraps GDK_KEY_3270_CursorBlink
-const KEY3270CursorBlink = C.GDK_KEY_3270_CursorBlink
-// KEY3270CursorSelect wraps GDK_KEY_3270_CursorSelect
-const KEY3270CursorSelect = C.GDK_KEY_3270_CursorSelect
-// KEY3270DeleteWord wraps GDK_KEY_3270_DeleteWord
-const KEY3270DeleteWord = C.GDK_KEY_3270_DeleteWord
-// KEY3270Duplicate wraps GDK_KEY_3270_Duplicate
-const KEY3270Duplicate = C.GDK_KEY_3270_Duplicate
-// KEY3270Enter wraps GDK_KEY_3270_Enter
-const KEY3270Enter = C.GDK_KEY_3270_Enter
-// KEY3270EraseEOF wraps GDK_KEY_3270_EraseEOF
-const KEY3270EraseEOF = C.GDK_KEY_3270_EraseEOF
-// KEY3270EraseInput wraps GDK_KEY_3270_EraseInput
-const KEY3270EraseInput = C.GDK_KEY_3270_EraseInput
-// KEY3270ExSelect wraps GDK_KEY_3270_ExSelect
-const KEY3270ExSelect = C.GDK_KEY_3270_ExSelect
-// KEY3270FieldMark wraps GDK_KEY_3270_FieldMark
-const KEY3270FieldMark = C.GDK_KEY_3270_FieldMark
-// KEY3270Ident wraps GDK_KEY_3270_Ident
-const KEY3270Ident = C.GDK_KEY_3270_Ident
-// KEY3270Jump wraps GDK_KEY_3270_Jump
-const KEY3270Jump = C.GDK_KEY_3270_Jump
-// KEY3270KeyClick wraps GDK_KEY_3270_KeyClick
-const KEY3270KeyClick = C.GDK_KEY_3270_KeyClick
-// KEY3270Left2 wraps GDK_KEY_3270_Left2
-const KEY3270Left2 = C.GDK_KEY_3270_Left2
-// KEY3270PA1 wraps GDK_KEY_3270_PA1
-const KEY3270PA1 = C.GDK_KEY_3270_PA1
-// KEY3270PA2 wraps GDK_KEY_3270_PA2
-const KEY3270PA2 = C.GDK_KEY_3270_PA2
-// KEY3270PA3 wraps GDK_KEY_3270_PA3
-const KEY3270PA3 = C.GDK_KEY_3270_PA3
-// KEY3270Play wraps GDK_KEY_3270_Play
-const KEY3270Play = C.GDK_KEY_3270_Play
-// KEY3270PrintScreen wraps GDK_KEY_3270_PrintScreen
-const KEY3270PrintScreen = C.GDK_KEY_3270_PrintScreen
-// KEY3270Quit wraps GDK_KEY_3270_Quit
-const KEY3270Quit = C.GDK_KEY_3270_Quit
-// KEY3270Record wraps GDK_KEY_3270_Record
-const KEY3270Record = C.GDK_KEY_3270_Record
-// KEY3270Reset wraps GDK_KEY_3270_Reset
-const KEY3270Reset = C.GDK_KEY_3270_Reset
-// KEY3270Right2 wraps GDK_KEY_3270_Right2
-const KEY3270Right2 = C.GDK_KEY_3270_Right2
-// KEY3270Rule wraps GDK_KEY_3270_Rule
-const KEY3270Rule = C.GDK_KEY_3270_Rule
-// KEY3270Setup wraps GDK_KEY_3270_Setup
-const KEY3270Setup = C.GDK_KEY_3270_Setup
-// KEY3270Test wraps GDK_KEY_3270_Test
-const KEY3270Test = C.GDK_KEY_3270_Test
-// KEY4 wraps GDK_KEY_4
-const KEY4 = C.GDK_KEY_4
-// KEY5 wraps GDK_KEY_5
-const KEY5 = C.GDK_KEY_5
-// KEY6 wraps GDK_KEY_6
-const KEY6 = C.GDK_KEY_6
-// KEY7 wraps GDK_KEY_7
-const KEY7 = C.GDK_KEY_7
-// KEY8 wraps GDK_KEY_8
-const KEY8 = C.GDK_KEY_8
-// KEY9 wraps GDK_KEY_9
-const KEY9 = C.GDK_KEY_9
-// KEYA wraps GDK_KEY_A
-const KEYA = C.GDK_KEY_A
-// KEYAE wraps GDK_KEY_AE
-const KEYAE = C.GDK_KEY_AE
-// KEYAacute wraps GDK_KEY_Aacute
-const KEYAacute = C.GDK_KEY_Aacute
-// KEYAbelowdot wraps GDK_KEY_Abelowdot
-const KEYAbelowdot = C.GDK_KEY_Abelowdot
-// KEYAbreve wraps GDK_KEY_Abreve
-const KEYAbreve = C.GDK_KEY_Abreve
-// KEYAbreveacute wraps GDK_KEY_Abreveacute
-const KEYAbreveacute = C.GDK_KEY_Abreveacute
-// KEYAbrevebelowdot wraps GDK_KEY_Abrevebelowdot
-const KEYAbrevebelowdot = C.GDK_KEY_Abrevebelowdot
-// KEYAbrevegrave wraps GDK_KEY_Abrevegrave
-const KEYAbrevegrave = C.GDK_KEY_Abrevegrave
-// KEYAbrevehook wraps GDK_KEY_Abrevehook
-const KEYAbrevehook = C.GDK_KEY_Abrevehook
-// KEYAbrevetilde wraps GDK_KEY_Abrevetilde
-const KEYAbrevetilde = C.GDK_KEY_Abrevetilde
-// KEYAccessXEnable wraps GDK_KEY_AccessX_Enable
-const KEYAccessXEnable = C.GDK_KEY_AccessX_Enable
-// KEYAccessXFeedbackEnable wraps GDK_KEY_AccessX_Feedback_Enable
-const KEYAccessXFeedbackEnable = C.GDK_KEY_AccessX_Feedback_Enable
-// KEYAcircumflex wraps GDK_KEY_Acircumflex
-const KEYAcircumflex = C.GDK_KEY_Acircumflex
-// KEYAcircumflexacute wraps GDK_KEY_Acircumflexacute
-const KEYAcircumflexacute = C.GDK_KEY_Acircumflexacute
-// KEYAcircumflexbelowdot wraps GDK_KEY_Acircumflexbelowdot
-const KEYAcircumflexbelowdot = C.GDK_KEY_Acircumflexbelowdot
-// KEYAcircumflexgrave wraps GDK_KEY_Acircumflexgrave
-const KEYAcircumflexgrave = C.GDK_KEY_Acircumflexgrave
-// KEYAcircumflexhook wraps GDK_KEY_Acircumflexhook
-const KEYAcircumflexhook = C.GDK_KEY_Acircumflexhook
-// KEYAcircumflextilde wraps GDK_KEY_Acircumflextilde
-const KEYAcircumflextilde = C.GDK_KEY_Acircumflextilde
-// KEYAddFavorite wraps GDK_KEY_AddFavorite
-const KEYAddFavorite = C.GDK_KEY_AddFavorite
-// KEYAdiaeresis wraps GDK_KEY_Adiaeresis
-const KEYAdiaeresis = C.GDK_KEY_Adiaeresis
-// KEYAgrave wraps GDK_KEY_Agrave
-const KEYAgrave = C.GDK_KEY_Agrave
-// KEYAhook wraps GDK_KEY_Ahook
-const KEYAhook = C.GDK_KEY_Ahook
-// KEYAltL wraps GDK_KEY_Alt_L
-const KEYAltL = C.GDK_KEY_Alt_L
-// KEYAltR wraps GDK_KEY_Alt_R
-const KEYAltR = C.GDK_KEY_Alt_R
-// KEYAmacron wraps GDK_KEY_Amacron
-const KEYAmacron = C.GDK_KEY_Amacron
-// KEYAogonek wraps GDK_KEY_Aogonek
-const KEYAogonek = C.GDK_KEY_Aogonek
-// KEYApplicationLeft wraps GDK_KEY_ApplicationLeft
-const KEYApplicationLeft = C.GDK_KEY_ApplicationLeft
-// KEYApplicationRight wraps GDK_KEY_ApplicationRight
-const KEYApplicationRight = C.GDK_KEY_ApplicationRight
-// KEYArabic0 wraps GDK_KEY_Arabic_0
-const KEYArabic0 = C.GDK_KEY_Arabic_0
-// KEYArabic1 wraps GDK_KEY_Arabic_1
-const KEYArabic1 = C.GDK_KEY_Arabic_1
-// KEYArabic2 wraps GDK_KEY_Arabic_2
-const KEYArabic2 = C.GDK_KEY_Arabic_2
-// KEYArabic3 wraps GDK_KEY_Arabic_3
-const KEYArabic3 = C.GDK_KEY_Arabic_3
-// KEYArabic4 wraps GDK_KEY_Arabic_4
-const KEYArabic4 = C.GDK_KEY_Arabic_4
-// KEYArabic5 wraps GDK_KEY_Arabic_5
-const KEYArabic5 = C.GDK_KEY_Arabic_5
-// KEYArabic6 wraps GDK_KEY_Arabic_6
-const KEYArabic6 = C.GDK_KEY_Arabic_6
-// KEYArabic7 wraps GDK_KEY_Arabic_7
-const KEYArabic7 = C.GDK_KEY_Arabic_7
-// KEYArabic8 wraps GDK_KEY_Arabic_8
-const KEYArabic8 = C.GDK_KEY_Arabic_8
-// KEYArabic9 wraps GDK_KEY_Arabic_9
-const KEYArabic9 = C.GDK_KEY_Arabic_9
-// KEYArabicAin wraps GDK_KEY_Arabic_ain
-const KEYArabicAin = C.GDK_KEY_Arabic_ain
-// KEYArabicAlef wraps GDK_KEY_Arabic_alef
-const KEYArabicAlef = C.GDK_KEY_Arabic_alef
-// KEYArabicAlefmaksura wraps GDK_KEY_Arabic_alefmaksura
-const KEYArabicAlefmaksura = C.GDK_KEY_Arabic_alefmaksura
-// KEYArabicBeh wraps GDK_KEY_Arabic_beh
-const KEYArabicBeh = C.GDK_KEY_Arabic_beh
-// KEYArabicComma wraps GDK_KEY_Arabic_comma
-const KEYArabicComma = C.GDK_KEY_Arabic_comma
-// KEYArabicDad wraps GDK_KEY_Arabic_dad
-const KEYArabicDad = C.GDK_KEY_Arabic_dad
-// KEYArabicDal wraps GDK_KEY_Arabic_dal
-const KEYArabicDal = C.GDK_KEY_Arabic_dal
-// KEYArabicDamma wraps GDK_KEY_Arabic_damma
-const KEYArabicDamma = C.GDK_KEY_Arabic_damma
-// KEYArabicDammatan wraps GDK_KEY_Arabic_dammatan
-const KEYArabicDammatan = C.GDK_KEY_Arabic_dammatan
-// KEYArabicDdal wraps GDK_KEY_Arabic_ddal
-const KEYArabicDdal = C.GDK_KEY_Arabic_ddal
-// KEYArabicFarsiYeh wraps GDK_KEY_Arabic_farsi_yeh
-const KEYArabicFarsiYeh = C.GDK_KEY_Arabic_farsi_yeh
-// KEYArabicFatha wraps GDK_KEY_Arabic_fatha
-const KEYArabicFatha = C.GDK_KEY_Arabic_fatha
-// KEYArabicFathatan wraps GDK_KEY_Arabic_fathatan
-const KEYArabicFathatan = C.GDK_KEY_Arabic_fathatan
-// KEYArabicFeh wraps GDK_KEY_Arabic_feh
-const KEYArabicFeh = C.GDK_KEY_Arabic_feh
-// KEYArabicFullstop wraps GDK_KEY_Arabic_fullstop
-const KEYArabicFullstop = C.GDK_KEY_Arabic_fullstop
-// KEYArabicGaf wraps GDK_KEY_Arabic_gaf
-const KEYArabicGaf = C.GDK_KEY_Arabic_gaf
-// KEYArabicGhain wraps GDK_KEY_Arabic_ghain
-const KEYArabicGhain = C.GDK_KEY_Arabic_ghain
-// KEYArabicHa wraps GDK_KEY_Arabic_ha
-const KEYArabicHa = C.GDK_KEY_Arabic_ha
-// KEYArabicHah wraps GDK_KEY_Arabic_hah
-const KEYArabicHah = C.GDK_KEY_Arabic_hah
-// KEYArabicHamza wraps GDK_KEY_Arabic_hamza
-const KEYArabicHamza = C.GDK_KEY_Arabic_hamza
-// KEYArabicHamzaAbove wraps GDK_KEY_Arabic_hamza_above
-const KEYArabicHamzaAbove = C.GDK_KEY_Arabic_hamza_above
-// KEYArabicHamzaBelow wraps GDK_KEY_Arabic_hamza_below
-const KEYArabicHamzaBelow = C.GDK_KEY_Arabic_hamza_below
-// KEYArabicHamzaonalef wraps GDK_KEY_Arabic_hamzaonalef
-const KEYArabicHamzaonalef = C.GDK_KEY_Arabic_hamzaonalef
-// KEYArabicHamzaonwaw wraps GDK_KEY_Arabic_hamzaonwaw
-const KEYArabicHamzaonwaw = C.GDK_KEY_Arabic_hamzaonwaw
-// KEYArabicHamzaonyeh wraps GDK_KEY_Arabic_hamzaonyeh
-const KEYArabicHamzaonyeh = C.GDK_KEY_Arabic_hamzaonyeh
-// KEYArabicHamzaunderalef wraps GDK_KEY_Arabic_hamzaunderalef
-const KEYArabicHamzaunderalef = C.GDK_KEY_Arabic_hamzaunderalef
-// KEYArabicHeh wraps GDK_KEY_Arabic_heh
-const KEYArabicHeh = C.GDK_KEY_Arabic_heh
-// KEYArabicHehDoachashmee wraps GDK_KEY_Arabic_heh_doachashmee
-const KEYArabicHehDoachashmee = C.GDK_KEY_Arabic_heh_doachashmee
-// KEYArabicHehGoal wraps GDK_KEY_Arabic_heh_goal
-const KEYArabicHehGoal = C.GDK_KEY_Arabic_heh_goal
-// KEYArabicJeem wraps GDK_KEY_Arabic_jeem
-const KEYArabicJeem = C.GDK_KEY_Arabic_jeem
-// KEYArabicJeh wraps GDK_KEY_Arabic_jeh
-const KEYArabicJeh = C.GDK_KEY_Arabic_jeh
-// KEYArabicKaf wraps GDK_KEY_Arabic_kaf
-const KEYArabicKaf = C.GDK_KEY_Arabic_kaf
-// KEYArabicKasra wraps GDK_KEY_Arabic_kasra
-const KEYArabicKasra = C.GDK_KEY_Arabic_kasra
-// KEYArabicKasratan wraps GDK_KEY_Arabic_kasratan
-const KEYArabicKasratan = C.GDK_KEY_Arabic_kasratan
-// KEYArabicKeheh wraps GDK_KEY_Arabic_keheh
-const KEYArabicKeheh = C.GDK_KEY_Arabic_keheh
-// KEYArabicKhah wraps GDK_KEY_Arabic_khah
-const KEYArabicKhah = C.GDK_KEY_Arabic_khah
-// KEYArabicLam wraps GDK_KEY_Arabic_lam
-const KEYArabicLam = C.GDK_KEY_Arabic_lam
-// KEYArabicMaddaAbove wraps GDK_KEY_Arabic_madda_above
-const KEYArabicMaddaAbove = C.GDK_KEY_Arabic_madda_above
-// KEYArabicMaddaonalef wraps GDK_KEY_Arabic_maddaonalef
-const KEYArabicMaddaonalef = C.GDK_KEY_Arabic_maddaonalef
-// KEYArabicMeem wraps GDK_KEY_Arabic_meem
-const KEYArabicMeem = C.GDK_KEY_Arabic_meem
-// KEYArabicNoon wraps GDK_KEY_Arabic_noon
-const KEYArabicNoon = C.GDK_KEY_Arabic_noon
-// KEYArabicNoonGhunna wraps GDK_KEY_Arabic_noon_ghunna
-const KEYArabicNoonGhunna = C.GDK_KEY_Arabic_noon_ghunna
-// KEYArabicPeh wraps GDK_KEY_Arabic_peh
-const KEYArabicPeh = C.GDK_KEY_Arabic_peh
-// KEYArabicPercent wraps GDK_KEY_Arabic_percent
-const KEYArabicPercent = C.GDK_KEY_Arabic_percent
-// KEYArabicQaf wraps GDK_KEY_Arabic_qaf
-const KEYArabicQaf = C.GDK_KEY_Arabic_qaf
-// KEYArabicQuestionMark wraps GDK_KEY_Arabic_question_mark
-const KEYArabicQuestionMark = C.GDK_KEY_Arabic_question_mark
-// KEYArabicRa wraps GDK_KEY_Arabic_ra
-const KEYArabicRa = C.GDK_KEY_Arabic_ra
-// KEYArabicRreh wraps GDK_KEY_Arabic_rreh
-const KEYArabicRreh = C.GDK_KEY_Arabic_rreh
-// KEYArabicSad wraps GDK_KEY_Arabic_sad
-const KEYArabicSad = C.GDK_KEY_Arabic_sad
-// KEYArabicSeen wraps GDK_KEY_Arabic_seen
-const KEYArabicSeen = C.GDK_KEY_Arabic_seen
-// KEYArabicSemicolon wraps GDK_KEY_Arabic_semicolon
-const KEYArabicSemicolon = C.GDK_KEY_Arabic_semicolon
-// KEYArabicShadda wraps GDK_KEY_Arabic_shadda
-const KEYArabicShadda = C.GDK_KEY_Arabic_shadda
-// KEYArabicSheen wraps GDK_KEY_Arabic_sheen
-const KEYArabicSheen = C.GDK_KEY_Arabic_sheen
-// KEYArabicSukun wraps GDK_KEY_Arabic_sukun
-const KEYArabicSukun = C.GDK_KEY_Arabic_sukun
-// KEYArabicSuperscriptAlef wraps GDK_KEY_Arabic_superscript_alef
-const KEYArabicSuperscriptAlef = C.GDK_KEY_Arabic_superscript_alef
-// KEYArabicSwitch wraps GDK_KEY_Arabic_switch
-const KEYArabicSwitch = C.GDK_KEY_Arabic_switch
-// KEYArabicTah wraps GDK_KEY_Arabic_tah
-const KEYArabicTah = C.GDK_KEY_Arabic_tah
-// KEYArabicTatweel wraps GDK_KEY_Arabic_tatweel
-const KEYArabicTatweel = C.GDK_KEY_Arabic_tatweel
-// KEYArabicTcheh wraps GDK_KEY_Arabic_tcheh
-const KEYArabicTcheh = C.GDK_KEY_Arabic_tcheh
-// KEYArabicTeh wraps GDK_KEY_Arabic_teh
-const KEYArabicTeh = C.GDK_KEY_Arabic_teh
-// KEYArabicTehmarbuta wraps GDK_KEY_Arabic_tehmarbuta
-const KEYArabicTehmarbuta = C.GDK_KEY_Arabic_tehmarbuta
-// KEYArabicThal wraps GDK_KEY_Arabic_thal
-const KEYArabicThal = C.GDK_KEY_Arabic_thal
-// KEYArabicTheh wraps GDK_KEY_Arabic_theh
-const KEYArabicTheh = C.GDK_KEY_Arabic_theh
-// KEYArabicTteh wraps GDK_KEY_Arabic_tteh
-const KEYArabicTteh = C.GDK_KEY_Arabic_tteh
-// KEYArabicVeh wraps GDK_KEY_Arabic_veh
-const KEYArabicVeh = C.GDK_KEY_Arabic_veh
-// KEYArabicWaw wraps GDK_KEY_Arabic_waw
-const KEYArabicWaw = C.GDK_KEY_Arabic_waw
-// KEYArabicYeh wraps GDK_KEY_Arabic_yeh
-const KEYArabicYeh = C.GDK_KEY_Arabic_yeh
-// KEYArabicYehBaree wraps GDK_KEY_Arabic_yeh_baree
-const KEYArabicYehBaree = C.GDK_KEY_Arabic_yeh_baree
-// KEYArabicZah wraps GDK_KEY_Arabic_zah
-const KEYArabicZah = C.GDK_KEY_Arabic_zah
-// KEYArabicZain wraps GDK_KEY_Arabic_zain
-const KEYArabicZain = C.GDK_KEY_Arabic_zain
-// KEYAring wraps GDK_KEY_Aring
-const KEYAring = C.GDK_KEY_Aring
-// KEYArmenianAT wraps GDK_KEY_Armenian_AT
-const KEYArmenianAT = C.GDK_KEY_Armenian_AT
-// KEYArmenianAYB wraps GDK_KEY_Armenian_AYB
-const KEYArmenianAYB = C.GDK_KEY_Armenian_AYB
-// KEYArmenianBEN wraps GDK_KEY_Armenian_BEN
-const KEYArmenianBEN = C.GDK_KEY_Armenian_BEN
-// KEYArmenianCHA wraps GDK_KEY_Armenian_CHA
-const KEYArmenianCHA = C.GDK_KEY_Armenian_CHA
-// KEYArmenianDA wraps GDK_KEY_Armenian_DA
-const KEYArmenianDA = C.GDK_KEY_Armenian_DA
-// KEYArmenianDZA wraps GDK_KEY_Armenian_DZA
-const KEYArmenianDZA = C.GDK_KEY_Armenian_DZA
-// KEYArmenianE wraps GDK_KEY_Armenian_E
-const KEYArmenianE = C.GDK_KEY_Armenian_E
-// KEYArmenianFE wraps GDK_KEY_Armenian_FE
-const KEYArmenianFE = C.GDK_KEY_Armenian_FE
-// KEYArmenianGHAT wraps GDK_KEY_Armenian_GHAT
-const KEYArmenianGHAT = C.GDK_KEY_Armenian_GHAT
-// KEYArmenianGIM wraps GDK_KEY_Armenian_GIM
-const KEYArmenianGIM = C.GDK_KEY_Armenian_GIM
-// KEYArmenianHI wraps GDK_KEY_Armenian_HI
-const KEYArmenianHI = C.GDK_KEY_Armenian_HI
-// KEYArmenianHO wraps GDK_KEY_Armenian_HO
-const KEYArmenianHO = C.GDK_KEY_Armenian_HO
-// KEYArmenianINI wraps GDK_KEY_Armenian_INI
-const KEYArmenianINI = C.GDK_KEY_Armenian_INI
-// KEYArmenianJE wraps GDK_KEY_Armenian_JE
-const KEYArmenianJE = C.GDK_KEY_Armenian_JE
-// KEYArmenianKE wraps GDK_KEY_Armenian_KE
-const KEYArmenianKE = C.GDK_KEY_Armenian_KE
-// KEYArmenianKEN wraps GDK_KEY_Armenian_KEN
-const KEYArmenianKEN = C.GDK_KEY_Armenian_KEN
-// KEYArmenianKHE wraps GDK_KEY_Armenian_KHE
-const KEYArmenianKHE = C.GDK_KEY_Armenian_KHE
-// KEYArmenianLYUN wraps GDK_KEY_Armenian_LYUN
-const KEYArmenianLYUN = C.GDK_KEY_Armenian_LYUN
-// KEYArmenianMEN wraps GDK_KEY_Armenian_MEN
-const KEYArmenianMEN = C.GDK_KEY_Armenian_MEN
-// KEYArmenianNU wraps GDK_KEY_Armenian_NU
-const KEYArmenianNU = C.GDK_KEY_Armenian_NU
-// KEYArmenianO wraps GDK_KEY_Armenian_O
-const KEYArmenianO = C.GDK_KEY_Armenian_O
-// KEYArmenianPE wraps GDK_KEY_Armenian_PE
-const KEYArmenianPE = C.GDK_KEY_Armenian_PE
-// KEYArmenianPYUR wraps GDK_KEY_Armenian_PYUR
-const KEYArmenianPYUR = C.GDK_KEY_Armenian_PYUR
-// KEYArmenianRA wraps GDK_KEY_Armenian_RA
-const KEYArmenianRA = C.GDK_KEY_Armenian_RA
-// KEYArmenianRE wraps GDK_KEY_Armenian_RE
-const KEYArmenianRE = C.GDK_KEY_Armenian_RE
-// KEYArmenianSE wraps GDK_KEY_Armenian_SE
-const KEYArmenianSE = C.GDK_KEY_Armenian_SE
-// KEYArmenianSHA wraps GDK_KEY_Armenian_SHA
-const KEYArmenianSHA = C.GDK_KEY_Armenian_SHA
-// KEYArmenianTCHE wraps GDK_KEY_Armenian_TCHE
-const KEYArmenianTCHE = C.GDK_KEY_Armenian_TCHE
-// KEYArmenianTO wraps GDK_KEY_Armenian_TO
-const KEYArmenianTO = C.GDK_KEY_Armenian_TO
-// KEYArmenianTSA wraps GDK_KEY_Armenian_TSA
-const KEYArmenianTSA = C.GDK_KEY_Armenian_TSA
-// KEYArmenianTSO wraps GDK_KEY_Armenian_TSO
-const KEYArmenianTSO = C.GDK_KEY_Armenian_TSO
-// KEYArmenianTYUN wraps GDK_KEY_Armenian_TYUN
-const KEYArmenianTYUN = C.GDK_KEY_Armenian_TYUN
-// KEYArmenianVEV wraps GDK_KEY_Armenian_VEV
-const KEYArmenianVEV = C.GDK_KEY_Armenian_VEV
-// KEYArmenianVO wraps GDK_KEY_Armenian_VO
-const KEYArmenianVO = C.GDK_KEY_Armenian_VO
-// KEYArmenianVYUN wraps GDK_KEY_Armenian_VYUN
-const KEYArmenianVYUN = C.GDK_KEY_Armenian_VYUN
-// KEYArmenianYECH wraps GDK_KEY_Armenian_YECH
-const KEYArmenianYECH = C.GDK_KEY_Armenian_YECH
-// KEYArmenianZA wraps GDK_KEY_Armenian_ZA
-const KEYArmenianZA = C.GDK_KEY_Armenian_ZA
-// KEYArmenianZHE wraps GDK_KEY_Armenian_ZHE
-const KEYArmenianZHE = C.GDK_KEY_Armenian_ZHE
-// KEYArmenianAccent wraps GDK_KEY_Armenian_accent
-const KEYArmenianAccent = C.GDK_KEY_Armenian_accent
-// KEYArmenianAmanak wraps GDK_KEY_Armenian_amanak
-const KEYArmenianAmanak = C.GDK_KEY_Armenian_amanak
-// KEYArmenianApostrophe wraps GDK_KEY_Armenian_apostrophe
-const KEYArmenianApostrophe = C.GDK_KEY_Armenian_apostrophe
-// KEYArmenianAt wraps GDK_KEY_Armenian_at
-const KEYArmenianAt = C.GDK_KEY_Armenian_at
-// KEYArmenianAyb wraps GDK_KEY_Armenian_ayb
-const KEYArmenianAyb = C.GDK_KEY_Armenian_ayb
-// KEYArmenianBen wraps GDK_KEY_Armenian_ben
-const KEYArmenianBen = C.GDK_KEY_Armenian_ben
-// KEYArmenianBut wraps GDK_KEY_Armenian_but
-const KEYArmenianBut = C.GDK_KEY_Armenian_but
-// KEYArmenianCha wraps GDK_KEY_Armenian_cha
-const KEYArmenianCha = C.GDK_KEY_Armenian_cha
-// KEYArmenianDa wraps GDK_KEY_Armenian_da
-const KEYArmenianDa = C.GDK_KEY_Armenian_da
-// KEYArmenianDza wraps GDK_KEY_Armenian_dza
-const KEYArmenianDza = C.GDK_KEY_Armenian_dza
-// KEYArmenianE wraps GDK_KEY_Armenian_e
-const KEYArmenianE = C.GDK_KEY_Armenian_e
-// KEYArmenianExclam wraps GDK_KEY_Armenian_exclam
-const KEYArmenianExclam = C.GDK_KEY_Armenian_exclam
-// KEYArmenianFe wraps GDK_KEY_Armenian_fe
-const KEYArmenianFe = C.GDK_KEY_Armenian_fe
-// KEYArmenianFullStop wraps GDK_KEY_Armenian_full_stop
-const KEYArmenianFullStop = C.GDK_KEY_Armenian_full_stop
-// KEYArmenianGhat wraps GDK_KEY_Armenian_ghat
-const KEYArmenianGhat = C.GDK_KEY_Armenian_ghat
-// KEYArmenianGim wraps GDK_KEY_Armenian_gim
-const KEYArmenianGim = C.GDK_KEY_Armenian_gim
-// KEYArmenianHi wraps GDK_KEY_Armenian_hi
-const KEYArmenianHi = C.GDK_KEY_Armenian_hi
-// KEYArmenianHo wraps GDK_KEY_Armenian_ho
-const KEYArmenianHo = C.GDK_KEY_Armenian_ho
-// KEYArmenianHyphen wraps GDK_KEY_Armenian_hyphen
-const KEYArmenianHyphen = C.GDK_KEY_Armenian_hyphen
-// KEYArmenianIni wraps GDK_KEY_Armenian_ini
-const KEYArmenianIni = C.GDK_KEY_Armenian_ini
-// KEYArmenianJe wraps GDK_KEY_Armenian_je
-const KEYArmenianJe = C.GDK_KEY_Armenian_je
-// KEYArmenianKe wraps GDK_KEY_Armenian_ke
-const KEYArmenianKe = C.GDK_KEY_Armenian_ke
-// KEYArmenianKen wraps GDK_KEY_Armenian_ken
-const KEYArmenianKen = C.GDK_KEY_Armenian_ken
-// KEYArmenianKhe wraps GDK_KEY_Armenian_khe
-const KEYArmenianKhe = C.GDK_KEY_Armenian_khe
-// KEYArmenianLigatureEw wraps GDK_KEY_Armenian_ligature_ew
-const KEYArmenianLigatureEw = C.GDK_KEY_Armenian_ligature_ew
-// KEYArmenianLyun wraps GDK_KEY_Armenian_lyun
-const KEYArmenianLyun = C.GDK_KEY_Armenian_lyun
-// KEYArmenianMen wraps GDK_KEY_Armenian_men
-const KEYArmenianMen = C.GDK_KEY_Armenian_men
-// KEYArmenianNu wraps GDK_KEY_Armenian_nu
-const KEYArmenianNu = C.GDK_KEY_Armenian_nu
-// KEYArmenianO wraps GDK_KEY_Armenian_o
-const KEYArmenianO = C.GDK_KEY_Armenian_o
-// KEYArmenianParuyk wraps GDK_KEY_Armenian_paruyk
-const KEYArmenianParuyk = C.GDK_KEY_Armenian_paruyk
-// KEYArmenianPe wraps GDK_KEY_Armenian_pe
-const KEYArmenianPe = C.GDK_KEY_Armenian_pe
-// KEYArmenianPyur wraps GDK_KEY_Armenian_pyur
-const KEYArmenianPyur = C.GDK_KEY_Armenian_pyur
-// KEYArmenianQuestion wraps GDK_KEY_Armenian_question
-const KEYArmenianQuestion = C.GDK_KEY_Armenian_question
-// KEYArmenianRa wraps GDK_KEY_Armenian_ra
-const KEYArmenianRa = C.GDK_KEY_Armenian_ra
-// KEYArmenianRe wraps GDK_KEY_Armenian_re
-const KEYArmenianRe = C.GDK_KEY_Armenian_re
-// KEYArmenianSe wraps GDK_KEY_Armenian_se
-const KEYArmenianSe = C.GDK_KEY_Armenian_se
-// KEYArmenianSeparationMark wraps GDK_KEY_Armenian_separation_mark
-const KEYArmenianSeparationMark = C.GDK_KEY_Armenian_separation_mark
-// KEYArmenianSHA wraps GDK_KEY_Armenian_sha
-const KEYArmenianSHA = C.GDK_KEY_Armenian_sha
-// KEYArmenianShesht wraps GDK_KEY_Armenian_shesht
-const KEYArmenianShesht = C.GDK_KEY_Armenian_shesht
-// KEYArmenianTche wraps GDK_KEY_Armenian_tche
-const KEYArmenianTche = C.GDK_KEY_Armenian_tche
-// KEYArmenianTo wraps GDK_KEY_Armenian_to
-const KEYArmenianTo = C.GDK_KEY_Armenian_to
-// KEYArmenianTsa wraps GDK_KEY_Armenian_tsa
-const KEYArmenianTsa = C.GDK_KEY_Armenian_tsa
-// KEYArmenianTso wraps GDK_KEY_Armenian_tso
-const KEYArmenianTso = C.GDK_KEY_Armenian_tso
-// KEYArmenianTyun wraps GDK_KEY_Armenian_tyun
-const KEYArmenianTyun = C.GDK_KEY_Armenian_tyun
-// KEYArmenianVerjaket wraps GDK_KEY_Armenian_verjaket
-const KEYArmenianVerjaket = C.GDK_KEY_Armenian_verjaket
-// KEYArmenianVev wraps GDK_KEY_Armenian_vev
-const KEYArmenianVev = C.GDK_KEY_Armenian_vev
-// KEYArmenianVo wraps GDK_KEY_Armenian_vo
-const KEYArmenianVo = C.GDK_KEY_Armenian_vo
-// KEYArmenianVyun wraps GDK_KEY_Armenian_vyun
-const KEYArmenianVyun = C.GDK_KEY_Armenian_vyun
-// KEYArmenianYech wraps GDK_KEY_Armenian_yech
-const KEYArmenianYech = C.GDK_KEY_Armenian_yech
-// KEYArmenianYentamna wraps GDK_KEY_Armenian_yentamna
-const KEYArmenianYentamna = C.GDK_KEY_Armenian_yentamna
-// KEYArmenianZa wraps GDK_KEY_Armenian_za
-const KEYArmenianZa = C.GDK_KEY_Armenian_za
-// KEYArmenianZhe wraps GDK_KEY_Armenian_zhe
-const KEYArmenianZhe = C.GDK_KEY_Armenian_zhe
-// KEYAtilde wraps GDK_KEY_Atilde
-const KEYAtilde = C.GDK_KEY_Atilde
-// KEYAudibleBellEnable wraps GDK_KEY_AudibleBell_Enable
-const KEYAudibleBellEnable = C.GDK_KEY_AudibleBell_Enable
-// KEYAudioCycleTrack wraps GDK_KEY_AudioCycleTrack
-const KEYAudioCycleTrack = C.GDK_KEY_AudioCycleTrack
-// KEYAudioForward wraps GDK_KEY_AudioForward
-const KEYAudioForward = C.GDK_KEY_AudioForward
-// KEYAudioLowerVolume wraps GDK_KEY_AudioLowerVolume
-const KEYAudioLowerVolume = C.GDK_KEY_AudioLowerVolume
-// KEYAudioMedia wraps GDK_KEY_AudioMedia
-const KEYAudioMedia = C.GDK_KEY_AudioMedia
-// KEYAudioMicMute wraps GDK_KEY_AudioMicMute
-const KEYAudioMicMute = C.GDK_KEY_AudioMicMute
-// KEYAudioMute wraps GDK_KEY_AudioMute
-const KEYAudioMute = C.GDK_KEY_AudioMute
-// KEYAudioNext wraps GDK_KEY_AudioNext
-const KEYAudioNext = C.GDK_KEY_AudioNext
-// KEYAudioPause wraps GDK_KEY_AudioPause
-const KEYAudioPause = C.GDK_KEY_AudioPause
-// KEYAudioPlay wraps GDK_KEY_AudioPlay
-const KEYAudioPlay = C.GDK_KEY_AudioPlay
-// KEYAudioPreset wraps GDK_KEY_AudioPreset
-const KEYAudioPreset = C.GDK_KEY_AudioPreset
-// KEYAudioPrev wraps GDK_KEY_AudioPrev
-const KEYAudioPrev = C.GDK_KEY_AudioPrev
-// KEYAudioRaiseVolume wraps GDK_KEY_AudioRaiseVolume
-const KEYAudioRaiseVolume = C.GDK_KEY_AudioRaiseVolume
-// KEYAudioRandomPlay wraps GDK_KEY_AudioRandomPlay
-const KEYAudioRandomPlay = C.GDK_KEY_AudioRandomPlay
-// KEYAudioRecord wraps GDK_KEY_AudioRecord
-const KEYAudioRecord = C.GDK_KEY_AudioRecord
-// KEYAudioRepeat wraps GDK_KEY_AudioRepeat
-const KEYAudioRepeat = C.GDK_KEY_AudioRepeat
-// KEYAudioRewind wraps GDK_KEY_AudioRewind
-const KEYAudioRewind = C.GDK_KEY_AudioRewind
-// KEYAudioStop wraps GDK_KEY_AudioStop
-const KEYAudioStop = C.GDK_KEY_AudioStop
-// KEYAway wraps GDK_KEY_Away
-const KEYAway = C.GDK_KEY_Away
-// KEYB wraps GDK_KEY_B
-const KEYB = C.GDK_KEY_B
-// KEYBabovedot wraps GDK_KEY_Babovedot
-const KEYBabovedot = C.GDK_KEY_Babovedot
-// KEYBack wraps GDK_KEY_Back
-const KEYBack = C.GDK_KEY_Back
-// KEYBackForward wraps GDK_KEY_BackForward
-const KEYBackForward = C.GDK_KEY_BackForward
-// KEYBackSpace wraps GDK_KEY_BackSpace
-const KEYBackSpace = C.GDK_KEY_BackSpace
-// KEYBattery wraps GDK_KEY_Battery
-const KEYBattery = C.GDK_KEY_Battery
-// KEYBegin wraps GDK_KEY_Begin
-const KEYBegin = C.GDK_KEY_Begin
-// KEYBlue wraps GDK_KEY_Blue
-const KEYBlue = C.GDK_KEY_Blue
-// KEYBluetooth wraps GDK_KEY_Bluetooth
-const KEYBluetooth = C.GDK_KEY_Bluetooth
-// KEYBook wraps GDK_KEY_Book
-const KEYBook = C.GDK_KEY_Book
-// KEYBounceKeysEnable wraps GDK_KEY_BounceKeys_Enable
-const KEYBounceKeysEnable = C.GDK_KEY_BounceKeys_Enable
-// KEYBreak wraps GDK_KEY_Break
-const KEYBreak = C.GDK_KEY_Break
-// KEYBrightnessAdjust wraps GDK_KEY_BrightnessAdjust
-const KEYBrightnessAdjust = C.GDK_KEY_BrightnessAdjust
-// KEYByelorussianSHORTU wraps GDK_KEY_Byelorussian_SHORTU
-const KEYByelorussianSHORTU = C.GDK_KEY_Byelorussian_SHORTU
-// KEYByelorussianShortu wraps GDK_KEY_Byelorussian_shortu
-const KEYByelorussianShortu = C.GDK_KEY_Byelorussian_shortu
-// KEYC wraps GDK_KEY_C
-const KEYC = C.GDK_KEY_C
-// KEYCD wraps GDK_KEY_CD
-const KEYCD = C.GDK_KEY_CD
-// KEYCH wraps GDK_KEY_CH
-const KEYCH = C.GDK_KEY_CH
-// KEYCH wraps GDK_KEY_C_H
-const KEYCH = C.GDK_KEY_C_H
-// KEYCH wraps GDK_KEY_C_h
-const KEYCH = C.GDK_KEY_C_h
-// KEYCabovedot wraps GDK_KEY_Cabovedot
-const KEYCabovedot = C.GDK_KEY_Cabovedot
-// KEYCacute wraps GDK_KEY_Cacute
-const KEYCacute = C.GDK_KEY_Cacute
-// KEYCalculator wraps GDK_KEY_Calculator
-const KEYCalculator = C.GDK_KEY_Calculator
-// KEYCalendar wraps GDK_KEY_Calendar
-const KEYCalendar = C.GDK_KEY_Calendar
-// KEYCancel wraps GDK_KEY_Cancel
-const KEYCancel = C.GDK_KEY_Cancel
-// KEYCapsLock wraps GDK_KEY_Caps_Lock
-const KEYCapsLock = C.GDK_KEY_Caps_Lock
-// KEYCcaron wraps GDK_KEY_Ccaron
-const KEYCcaron = C.GDK_KEY_Ccaron
-// KEYCcedilla wraps GDK_KEY_Ccedilla
-const KEYCcedilla = C.GDK_KEY_Ccedilla
-// KEYCcircumflex wraps GDK_KEY_Ccircumflex
-const KEYCcircumflex = C.GDK_KEY_Ccircumflex
-// KEYCh wraps GDK_KEY_Ch
-const KEYCh = C.GDK_KEY_Ch
-// KEYClear wraps GDK_KEY_Clear
-const KEYClear = C.GDK_KEY_Clear
-// KEYClearGrab wraps GDK_KEY_ClearGrab
-const KEYClearGrab = C.GDK_KEY_ClearGrab
-// KEYClose wraps GDK_KEY_Close
-const KEYClose = C.GDK_KEY_Close
-// KEYCodeinput wraps GDK_KEY_Codeinput
-const KEYCodeinput = C.GDK_KEY_Codeinput
-// KEYColonSign wraps GDK_KEY_ColonSign
-const KEYColonSign = C.GDK_KEY_ColonSign
-// KEYCommunity wraps GDK_KEY_Community
-const KEYCommunity = C.GDK_KEY_Community
-// KEYContrastAdjust wraps GDK_KEY_ContrastAdjust
-const KEYContrastAdjust = C.GDK_KEY_ContrastAdjust
-// KEYControlL wraps GDK_KEY_Control_L
-const KEYControlL = C.GDK_KEY_Control_L
-// KEYControlR wraps GDK_KEY_Control_R
-const KEYControlR = C.GDK_KEY_Control_R
-// KEYCopy wraps GDK_KEY_Copy
-const KEYCopy = C.GDK_KEY_Copy
-// KEYCruzeiroSign wraps GDK_KEY_CruzeiroSign
-const KEYCruzeiroSign = C.GDK_KEY_CruzeiroSign
-// KEYCut wraps GDK_KEY_Cut
-const KEYCut = C.GDK_KEY_Cut
-// KEYCycleAngle wraps GDK_KEY_CycleAngle
-const KEYCycleAngle = C.GDK_KEY_CycleAngle
-// KEYCyrillicA wraps GDK_KEY_Cyrillic_A
-const KEYCyrillicA = C.GDK_KEY_Cyrillic_A
-// KEYCyrillicBE wraps GDK_KEY_Cyrillic_BE
-const KEYCyrillicBE = C.GDK_KEY_Cyrillic_BE
-// KEYCyrillicCHE wraps GDK_KEY_Cyrillic_CHE
-const KEYCyrillicCHE = C.GDK_KEY_Cyrillic_CHE
-// KEYCyrillicCHEDescender wraps GDK_KEY_Cyrillic_CHE_descender
-const KEYCyrillicCHEDescender = C.GDK_KEY_Cyrillic_CHE_descender
-// KEYCyrillicCHEVertstroke wraps GDK_KEY_Cyrillic_CHE_vertstroke
-const KEYCyrillicCHEVertstroke = C.GDK_KEY_Cyrillic_CHE_vertstroke
-// KEYCyrillicDE wraps GDK_KEY_Cyrillic_DE
-const KEYCyrillicDE = C.GDK_KEY_Cyrillic_DE
-// KEYCyrillicDZHE wraps GDK_KEY_Cyrillic_DZHE
-const KEYCyrillicDZHE = C.GDK_KEY_Cyrillic_DZHE
-// KEYCyrillicE wraps GDK_KEY_Cyrillic_E
-const KEYCyrillicE = C.GDK_KEY_Cyrillic_E
-// KEYCyrillicEF wraps GDK_KEY_Cyrillic_EF
-const KEYCyrillicEF = C.GDK_KEY_Cyrillic_EF
-// KEYCyrillicEL wraps GDK_KEY_Cyrillic_EL
-const KEYCyrillicEL = C.GDK_KEY_Cyrillic_EL
-// KEYCyrillicEM wraps GDK_KEY_Cyrillic_EM
-const KEYCyrillicEM = C.GDK_KEY_Cyrillic_EM
-// KEYCyrillicEN wraps GDK_KEY_Cyrillic_EN
-const KEYCyrillicEN = C.GDK_KEY_Cyrillic_EN
-// KEYCyrillicENDescender wraps GDK_KEY_Cyrillic_EN_descender
-const KEYCyrillicENDescender = C.GDK_KEY_Cyrillic_EN_descender
-// KEYCyrillicER wraps GDK_KEY_Cyrillic_ER
-const KEYCyrillicER = C.GDK_KEY_Cyrillic_ER
-// KEYCyrillicES wraps GDK_KEY_Cyrillic_ES
-const KEYCyrillicES = C.GDK_KEY_Cyrillic_ES
-// KEYCyrillicGHE wraps GDK_KEY_Cyrillic_GHE
-const KEYCyrillicGHE = C.GDK_KEY_Cyrillic_GHE
-// KEYCyrillicGHEBar wraps GDK_KEY_Cyrillic_GHE_bar
-const KEYCyrillicGHEBar = C.GDK_KEY_Cyrillic_GHE_bar
-// KEYCyrillicHA wraps GDK_KEY_Cyrillic_HA
-const KEYCyrillicHA = C.GDK_KEY_Cyrillic_HA
-// KEYCyrillicHARDSIGN wraps GDK_KEY_Cyrillic_HARDSIGN
-const KEYCyrillicHARDSIGN = C.GDK_KEY_Cyrillic_HARDSIGN
-// KEYCyrillicHADescender wraps GDK_KEY_Cyrillic_HA_descender
-const KEYCyrillicHADescender = C.GDK_KEY_Cyrillic_HA_descender
-// KEYCyrillicI wraps GDK_KEY_Cyrillic_I
-const KEYCyrillicI = C.GDK_KEY_Cyrillic_I
-// KEYCyrillicIE wraps GDK_KEY_Cyrillic_IE
-const KEYCyrillicIE = C.GDK_KEY_Cyrillic_IE
-// KEYCyrillicIO wraps GDK_KEY_Cyrillic_IO
-const KEYCyrillicIO = C.GDK_KEY_Cyrillic_IO
-// KEYCyrillicIMacron wraps GDK_KEY_Cyrillic_I_macron
-const KEYCyrillicIMacron = C.GDK_KEY_Cyrillic_I_macron
-// KEYCyrillicJE wraps GDK_KEY_Cyrillic_JE
-const KEYCyrillicJE = C.GDK_KEY_Cyrillic_JE
-// KEYCyrillicKA wraps GDK_KEY_Cyrillic_KA
-const KEYCyrillicKA = C.GDK_KEY_Cyrillic_KA
-// KEYCyrillicKADescender wraps GDK_KEY_Cyrillic_KA_descender
-const KEYCyrillicKADescender = C.GDK_KEY_Cyrillic_KA_descender
-// KEYCyrillicKAVertstroke wraps GDK_KEY_Cyrillic_KA_vertstroke
-const KEYCyrillicKAVertstroke = C.GDK_KEY_Cyrillic_KA_vertstroke
-// KEYCyrillicLJE wraps GDK_KEY_Cyrillic_LJE
-const KEYCyrillicLJE = C.GDK_KEY_Cyrillic_LJE
-// KEYCyrillicNJE wraps GDK_KEY_Cyrillic_NJE
-const KEYCyrillicNJE = C.GDK_KEY_Cyrillic_NJE
-// KEYCyrillicO wraps GDK_KEY_Cyrillic_O
-const KEYCyrillicO = C.GDK_KEY_Cyrillic_O
-// KEYCyrillicOBar wraps GDK_KEY_Cyrillic_O_bar
-const KEYCyrillicOBar = C.GDK_KEY_Cyrillic_O_bar
-// KEYCyrillicPE wraps GDK_KEY_Cyrillic_PE
-const KEYCyrillicPE = C.GDK_KEY_Cyrillic_PE
-// KEYCyrillicSCHWA wraps GDK_KEY_Cyrillic_SCHWA
-const KEYCyrillicSCHWA = C.GDK_KEY_Cyrillic_SCHWA
-// KEYCyrillicSHA wraps GDK_KEY_Cyrillic_SHA
-const KEYCyrillicSHA = C.GDK_KEY_Cyrillic_SHA
-// KEYCyrillicSHCHA wraps GDK_KEY_Cyrillic_SHCHA
-const KEYCyrillicSHCHA = C.GDK_KEY_Cyrillic_SHCHA
-// KEYCyrillicSHHA wraps GDK_KEY_Cyrillic_SHHA
-const KEYCyrillicSHHA = C.GDK_KEY_Cyrillic_SHHA
-// KEYCyrillicSHORTI wraps GDK_KEY_Cyrillic_SHORTI
-const KEYCyrillicSHORTI = C.GDK_KEY_Cyrillic_SHORTI
-// KEYCyrillicSOFTSIGN wraps GDK_KEY_Cyrillic_SOFTSIGN
-const KEYCyrillicSOFTSIGN = C.GDK_KEY_Cyrillic_SOFTSIGN
-// KEYCyrillicTE wraps GDK_KEY_Cyrillic_TE
-const KEYCyrillicTE = C.GDK_KEY_Cyrillic_TE
-// KEYCyrillicTSE wraps GDK_KEY_Cyrillic_TSE
-const KEYCyrillicTSE = C.GDK_KEY_Cyrillic_TSE
-// KEYCyrillicU wraps GDK_KEY_Cyrillic_U
-const KEYCyrillicU = C.GDK_KEY_Cyrillic_U
-// KEYCyrillicUMacron wraps GDK_KEY_Cyrillic_U_macron
-const KEYCyrillicUMacron = C.GDK_KEY_Cyrillic_U_macron
-// KEYCyrillicUStraight wraps GDK_KEY_Cyrillic_U_straight
-const KEYCyrillicUStraight = C.GDK_KEY_Cyrillic_U_straight
-// KEYCyrillicUStraightBar wraps GDK_KEY_Cyrillic_U_straight_bar
-const KEYCyrillicUStraightBar = C.GDK_KEY_Cyrillic_U_straight_bar
-// KEYCyrillicVE wraps GDK_KEY_Cyrillic_VE
-const KEYCyrillicVE = C.GDK_KEY_Cyrillic_VE
-// KEYCyrillicYA wraps GDK_KEY_Cyrillic_YA
-const KEYCyrillicYA = C.GDK_KEY_Cyrillic_YA
-// KEYCyrillicYERU wraps GDK_KEY_Cyrillic_YERU
-const KEYCyrillicYERU = C.GDK_KEY_Cyrillic_YERU
-// KEYCyrillicYU wraps GDK_KEY_Cyrillic_YU
-const KEYCyrillicYU = C.GDK_KEY_Cyrillic_YU
-// KEYCyrillicZE wraps GDK_KEY_Cyrillic_ZE
-const KEYCyrillicZE = C.GDK_KEY_Cyrillic_ZE
-// KEYCyrillicZHE wraps GDK_KEY_Cyrillic_ZHE
-const KEYCyrillicZHE = C.GDK_KEY_Cyrillic_ZHE
-// KEYCyrillicZHEDescender wraps GDK_KEY_Cyrillic_ZHE_descender
-const KEYCyrillicZHEDescender = C.GDK_KEY_Cyrillic_ZHE_descender
-// KEYCyrillicA wraps GDK_KEY_Cyrillic_a
-const KEYCyrillicA = C.GDK_KEY_Cyrillic_a
-// KEYCyrillicBe wraps GDK_KEY_Cyrillic_be
-const KEYCyrillicBe = C.GDK_KEY_Cyrillic_be
-// KEYCyrillicChe wraps GDK_KEY_Cyrillic_che
-const KEYCyrillicChe = C.GDK_KEY_Cyrillic_che
-// KEYCyrillicCheDescender wraps GDK_KEY_Cyrillic_che_descender
-const KEYCyrillicCheDescender = C.GDK_KEY_Cyrillic_che_descender
-// KEYCyrillicCheVertstroke wraps GDK_KEY_Cyrillic_che_vertstroke
-const KEYCyrillicCheVertstroke = C.GDK_KEY_Cyrillic_che_vertstroke
-// KEYCyrillicDe wraps GDK_KEY_Cyrillic_de
-const KEYCyrillicDe = C.GDK_KEY_Cyrillic_de
-// KEYCyrillicDzhe wraps GDK_KEY_Cyrillic_dzhe
-const KEYCyrillicDzhe = C.GDK_KEY_Cyrillic_dzhe
-// KEYCyrillicE wraps GDK_KEY_Cyrillic_e
-const KEYCyrillicE = C.GDK_KEY_Cyrillic_e
-// KEYCyrillicEf wraps GDK_KEY_Cyrillic_ef
-const KEYCyrillicEf = C.GDK_KEY_Cyrillic_ef
-// KEYCyrillicEl wraps GDK_KEY_Cyrillic_el
-const KEYCyrillicEl = C.GDK_KEY_Cyrillic_el
-// KEYCyrillicEm wraps GDK_KEY_Cyrillic_em
-const KEYCyrillicEm = C.GDK_KEY_Cyrillic_em
-// KEYCyrillicEn wraps GDK_KEY_Cyrillic_en
-const KEYCyrillicEn = C.GDK_KEY_Cyrillic_en
-// KEYCyrillicEnDescender wraps GDK_KEY_Cyrillic_en_descender
-const KEYCyrillicEnDescender = C.GDK_KEY_Cyrillic_en_descender
-// KEYCyrillicEr wraps GDK_KEY_Cyrillic_er
-const KEYCyrillicEr = C.GDK_KEY_Cyrillic_er
-// KEYCyrillicES wraps GDK_KEY_Cyrillic_es
-const KEYCyrillicES = C.GDK_KEY_Cyrillic_es
-// KEYCyrillicGhe wraps GDK_KEY_Cyrillic_ghe
-const KEYCyrillicGhe = C.GDK_KEY_Cyrillic_ghe
-// KEYCyrillicGheBar wraps GDK_KEY_Cyrillic_ghe_bar
-const KEYCyrillicGheBar = C.GDK_KEY_Cyrillic_ghe_bar
-// KEYCyrillicHa wraps GDK_KEY_Cyrillic_ha
-const KEYCyrillicHa = C.GDK_KEY_Cyrillic_ha
-// KEYCyrillicHaDescender wraps GDK_KEY_Cyrillic_ha_descender
-const KEYCyrillicHaDescender = C.GDK_KEY_Cyrillic_ha_descender
-// KEYCyrillicHardsign wraps GDK_KEY_Cyrillic_hardsign
-const KEYCyrillicHardsign = C.GDK_KEY_Cyrillic_hardsign
-// KEYCyrillicI wraps GDK_KEY_Cyrillic_i
-const KEYCyrillicI = C.GDK_KEY_Cyrillic_i
-// KEYCyrillicIMacron wraps GDK_KEY_Cyrillic_i_macron
-const KEYCyrillicIMacron = C.GDK_KEY_Cyrillic_i_macron
-// KEYCyrillicIe wraps GDK_KEY_Cyrillic_ie
-const KEYCyrillicIe = C.GDK_KEY_Cyrillic_ie
-// KEYCyrillicIO wraps GDK_KEY_Cyrillic_io
-const KEYCyrillicIO = C.GDK_KEY_Cyrillic_io
-// KEYCyrillicJe wraps GDK_KEY_Cyrillic_je
-const KEYCyrillicJe = C.GDK_KEY_Cyrillic_je
-// KEYCyrillicKa wraps GDK_KEY_Cyrillic_ka
-const KEYCyrillicKa = C.GDK_KEY_Cyrillic_ka
-// KEYCyrillicKaDescender wraps GDK_KEY_Cyrillic_ka_descender
-const KEYCyrillicKaDescender = C.GDK_KEY_Cyrillic_ka_descender
-// KEYCyrillicKaVertstroke wraps GDK_KEY_Cyrillic_ka_vertstroke
-const KEYCyrillicKaVertstroke = C.GDK_KEY_Cyrillic_ka_vertstroke
-// KEYCyrillicLje wraps GDK_KEY_Cyrillic_lje
-const KEYCyrillicLje = C.GDK_KEY_Cyrillic_lje
-// KEYCyrillicNje wraps GDK_KEY_Cyrillic_nje
-const KEYCyrillicNje = C.GDK_KEY_Cyrillic_nje
-// KEYCyrillicO wraps GDK_KEY_Cyrillic_o
-const KEYCyrillicO = C.GDK_KEY_Cyrillic_o
-// KEYCyrillicOBar wraps GDK_KEY_Cyrillic_o_bar
-const KEYCyrillicOBar = C.GDK_KEY_Cyrillic_o_bar
-// KEYCyrillicPe wraps GDK_KEY_Cyrillic_pe
-const KEYCyrillicPe = C.GDK_KEY_Cyrillic_pe
-// KEYCyrillicSchwa wraps GDK_KEY_Cyrillic_schwa
-const KEYCyrillicSchwa = C.GDK_KEY_Cyrillic_schwa
-// KEYCyrillicSHA wraps GDK_KEY_Cyrillic_sha
-const KEYCyrillicSHA = C.GDK_KEY_Cyrillic_sha
-// KEYCyrillicShcha wraps GDK_KEY_Cyrillic_shcha
-const KEYCyrillicShcha = C.GDK_KEY_Cyrillic_shcha
-// KEYCyrillicShha wraps GDK_KEY_Cyrillic_shha
-const KEYCyrillicShha = C.GDK_KEY_Cyrillic_shha
-// KEYCyrillicShorti wraps GDK_KEY_Cyrillic_shorti
-const KEYCyrillicShorti = C.GDK_KEY_Cyrillic_shorti
-// KEYCyrillicSoftsign wraps GDK_KEY_Cyrillic_softsign
-const KEYCyrillicSoftsign = C.GDK_KEY_Cyrillic_softsign
-// KEYCyrillicTe wraps GDK_KEY_Cyrillic_te
-const KEYCyrillicTe = C.GDK_KEY_Cyrillic_te
-// KEYCyrillicTse wraps GDK_KEY_Cyrillic_tse
-const KEYCyrillicTse = C.GDK_KEY_Cyrillic_tse
-// KEYCyrillicU wraps GDK_KEY_Cyrillic_u
-const KEYCyrillicU = C.GDK_KEY_Cyrillic_u
-// KEYCyrillicUMacron wraps GDK_KEY_Cyrillic_u_macron
-const KEYCyrillicUMacron = C.GDK_KEY_Cyrillic_u_macron
-// KEYCyrillicUStraight wraps GDK_KEY_Cyrillic_u_straight
-const KEYCyrillicUStraight = C.GDK_KEY_Cyrillic_u_straight
-// KEYCyrillicUStraightBar wraps GDK_KEY_Cyrillic_u_straight_bar
-const KEYCyrillicUStraightBar = C.GDK_KEY_Cyrillic_u_straight_bar
-// KEYCyrillicVe wraps GDK_KEY_Cyrillic_ve
-const KEYCyrillicVe = C.GDK_KEY_Cyrillic_ve
-// KEYCyrillicYa wraps GDK_KEY_Cyrillic_ya
-const KEYCyrillicYa = C.GDK_KEY_Cyrillic_ya
-// KEYCyrillicYeru wraps GDK_KEY_Cyrillic_yeru
-const KEYCyrillicYeru = C.GDK_KEY_Cyrillic_yeru
-// KEYCyrillicYu wraps GDK_KEY_Cyrillic_yu
-const KEYCyrillicYu = C.GDK_KEY_Cyrillic_yu
-// KEYCyrillicZe wraps GDK_KEY_Cyrillic_ze
-const KEYCyrillicZe = C.GDK_KEY_Cyrillic_ze
-// KEYCyrillicZhe wraps GDK_KEY_Cyrillic_zhe
-const KEYCyrillicZhe = C.GDK_KEY_Cyrillic_zhe
-// KEYCyrillicZheDescender wraps GDK_KEY_Cyrillic_zhe_descender
-const KEYCyrillicZheDescender = C.GDK_KEY_Cyrillic_zhe_descender
-// KEYD wraps GDK_KEY_D
-const KEYD = C.GDK_KEY_D
-// KEYDOS wraps GDK_KEY_DOS
-const KEYDOS = C.GDK_KEY_DOS
-// KEYDabovedot wraps GDK_KEY_Dabovedot
-const KEYDabovedot = C.GDK_KEY_Dabovedot
-// KEYDcaron wraps GDK_KEY_Dcaron
-const KEYDcaron = C.GDK_KEY_Dcaron
-// KEYDelete wraps GDK_KEY_Delete
-const KEYDelete = C.GDK_KEY_Delete
-// KEYDisplay wraps GDK_KEY_Display
-const KEYDisplay = C.GDK_KEY_Display
-// KEYDocuments wraps GDK_KEY_Documents
-const KEYDocuments = C.GDK_KEY_Documents
-// KEYDongSign wraps GDK_KEY_DongSign
-const KEYDongSign = C.GDK_KEY_DongSign
-// KEYDown wraps GDK_KEY_Down
-const KEYDown = C.GDK_KEY_Down
-// KEYDstroke wraps GDK_KEY_Dstroke
-const KEYDstroke = C.GDK_KEY_Dstroke
-// KEYE wraps GDK_KEY_E
-const KEYE = C.GDK_KEY_E
-// KEYENG wraps GDK_KEY_ENG
-const KEYENG = C.GDK_KEY_ENG
-// KEYETH wraps GDK_KEY_ETH
-const KEYETH = C.GDK_KEY_ETH
-// KEYEZH wraps GDK_KEY_EZH
-const KEYEZH = C.GDK_KEY_EZH
-// KEYEabovedot wraps GDK_KEY_Eabovedot
-const KEYEabovedot = C.GDK_KEY_Eabovedot
-// KEYEacute wraps GDK_KEY_Eacute
-const KEYEacute = C.GDK_KEY_Eacute
-// KEYEbelowdot wraps GDK_KEY_Ebelowdot
-const KEYEbelowdot = C.GDK_KEY_Ebelowdot
-// KEYEcaron wraps GDK_KEY_Ecaron
-const KEYEcaron = C.GDK_KEY_Ecaron
-// KEYEcircumflex wraps GDK_KEY_Ecircumflex
-const KEYEcircumflex = C.GDK_KEY_Ecircumflex
-// KEYEcircumflexacute wraps GDK_KEY_Ecircumflexacute
-const KEYEcircumflexacute = C.GDK_KEY_Ecircumflexacute
-// KEYEcircumflexbelowdot wraps GDK_KEY_Ecircumflexbelowdot
-const KEYEcircumflexbelowdot = C.GDK_KEY_Ecircumflexbelowdot
-// KEYEcircumflexgrave wraps GDK_KEY_Ecircumflexgrave
-const KEYEcircumflexgrave = C.GDK_KEY_Ecircumflexgrave
-// KEYEcircumflexhook wraps GDK_KEY_Ecircumflexhook
-const KEYEcircumflexhook = C.GDK_KEY_Ecircumflexhook
-// KEYEcircumflextilde wraps GDK_KEY_Ecircumflextilde
-const KEYEcircumflextilde = C.GDK_KEY_Ecircumflextilde
-// KEYEcuSign wraps GDK_KEY_EcuSign
-const KEYEcuSign = C.GDK_KEY_EcuSign
-// KEYEdiaeresis wraps GDK_KEY_Ediaeresis
-const KEYEdiaeresis = C.GDK_KEY_Ediaeresis
-// KEYEgrave wraps GDK_KEY_Egrave
-const KEYEgrave = C.GDK_KEY_Egrave
-// KEYEhook wraps GDK_KEY_Ehook
-const KEYEhook = C.GDK_KEY_Ehook
-// KEYEisuShift wraps GDK_KEY_Eisu_Shift
-const KEYEisuShift = C.GDK_KEY_Eisu_Shift
-// KEYEisuToggle wraps GDK_KEY_Eisu_toggle
-const KEYEisuToggle = C.GDK_KEY_Eisu_toggle
-// KEYEject wraps GDK_KEY_Eject
-const KEYEject = C.GDK_KEY_Eject
-// KEYEmacron wraps GDK_KEY_Emacron
-const KEYEmacron = C.GDK_KEY_Emacron
-// KEYEnd wraps GDK_KEY_End
-const KEYEnd = C.GDK_KEY_End
-// KEYEogonek wraps GDK_KEY_Eogonek
-const KEYEogonek = C.GDK_KEY_Eogonek
-// KEYEscape wraps GDK_KEY_Escape
-const KEYEscape = C.GDK_KEY_Escape
-// KEYEth wraps GDK_KEY_Eth
-const KEYEth = C.GDK_KEY_Eth
-// KEYEtilde wraps GDK_KEY_Etilde
-const KEYEtilde = C.GDK_KEY_Etilde
-// KEYEuroSign wraps GDK_KEY_EuroSign
-const KEYEuroSign = C.GDK_KEY_EuroSign
-// KEYExcel wraps GDK_KEY_Excel
-const KEYExcel = C.GDK_KEY_Excel
-// KEYExecute wraps GDK_KEY_Execute
-const KEYExecute = C.GDK_KEY_Execute
-// KEYExplorer wraps GDK_KEY_Explorer
-const KEYExplorer = C.GDK_KEY_Explorer
-// KEYF wraps GDK_KEY_F
-const KEYF = C.GDK_KEY_F
-// KEYF1 wraps GDK_KEY_F1
-const KEYF1 = C.GDK_KEY_F1
-// KEYF10 wraps GDK_KEY_F10
-const KEYF10 = C.GDK_KEY_F10
-// KEYF11 wraps GDK_KEY_F11
-const KEYF11 = C.GDK_KEY_F11
-// KEYF12 wraps GDK_KEY_F12
-const KEYF12 = C.GDK_KEY_F12
-// KEYF13 wraps GDK_KEY_F13
-const KEYF13 = C.GDK_KEY_F13
-// KEYF14 wraps GDK_KEY_F14
-const KEYF14 = C.GDK_KEY_F14
-// KEYF15 wraps GDK_KEY_F15
-const KEYF15 = C.GDK_KEY_F15
-// KEYF16 wraps GDK_KEY_F16
-const KEYF16 = C.GDK_KEY_F16
-// KEYF17 wraps GDK_KEY_F17
-const KEYF17 = C.GDK_KEY_F17
-// KEYF18 wraps GDK_KEY_F18
-const KEYF18 = C.GDK_KEY_F18
-// KEYF19 wraps GDK_KEY_F19
-const KEYF19 = C.GDK_KEY_F19
-// KEYF2 wraps GDK_KEY_F2
-const KEYF2 = C.GDK_KEY_F2
-// KEYF20 wraps GDK_KEY_F20
-const KEYF20 = C.GDK_KEY_F20
-// KEYF21 wraps GDK_KEY_F21
-const KEYF21 = C.GDK_KEY_F21
-// KEYF22 wraps GDK_KEY_F22
-const KEYF22 = C.GDK_KEY_F22
-// KEYF23 wraps GDK_KEY_F23
-const KEYF23 = C.GDK_KEY_F23
-// KEYF24 wraps GDK_KEY_F24
-const KEYF24 = C.GDK_KEY_F24
-// KEYF25 wraps GDK_KEY_F25
-const KEYF25 = C.GDK_KEY_F25
-// KEYF26 wraps GDK_KEY_F26
-const KEYF26 = C.GDK_KEY_F26
-// KEYF27 wraps GDK_KEY_F27
-const KEYF27 = C.GDK_KEY_F27
-// KEYF28 wraps GDK_KEY_F28
-const KEYF28 = C.GDK_KEY_F28
-// KEYF29 wraps GDK_KEY_F29
-const KEYF29 = C.GDK_KEY_F29
-// KEYF3 wraps GDK_KEY_F3
-const KEYF3 = C.GDK_KEY_F3
-// KEYF30 wraps GDK_KEY_F30
-const KEYF30 = C.GDK_KEY_F30
-// KEYF31 wraps GDK_KEY_F31
-const KEYF31 = C.GDK_KEY_F31
-// KEYF32 wraps GDK_KEY_F32
-const KEYF32 = C.GDK_KEY_F32
-// KEYF33 wraps GDK_KEY_F33
-const KEYF33 = C.GDK_KEY_F33
-// KEYF34 wraps GDK_KEY_F34
-const KEYF34 = C.GDK_KEY_F34
-// KEYF35 wraps GDK_KEY_F35
-const KEYF35 = C.GDK_KEY_F35
-// KEYF4 wraps GDK_KEY_F4
-const KEYF4 = C.GDK_KEY_F4
-// KEYF5 wraps GDK_KEY_F5
-const KEYF5 = C.GDK_KEY_F5
-// KEYF6 wraps GDK_KEY_F6
-const KEYF6 = C.GDK_KEY_F6
-// KEYF7 wraps GDK_KEY_F7
-const KEYF7 = C.GDK_KEY_F7
-// KEYF8 wraps GDK_KEY_F8
-const KEYF8 = C.GDK_KEY_F8
-// KEYF9 wraps GDK_KEY_F9
-const KEYF9 = C.GDK_KEY_F9
-// KEYFFrancSign wraps GDK_KEY_FFrancSign
-const KEYFFrancSign = C.GDK_KEY_FFrancSign
-// KEYFabovedot wraps GDK_KEY_Fabovedot
-const KEYFabovedot = C.GDK_KEY_Fabovedot
-// KEYFarsi0 wraps GDK_KEY_Farsi_0
-const KEYFarsi0 = C.GDK_KEY_Farsi_0
-// KEYFarsi1 wraps GDK_KEY_Farsi_1
-const KEYFarsi1 = C.GDK_KEY_Farsi_1
-// KEYFarsi2 wraps GDK_KEY_Farsi_2
-const KEYFarsi2 = C.GDK_KEY_Farsi_2
-// KEYFarsi3 wraps GDK_KEY_Farsi_3
-const KEYFarsi3 = C.GDK_KEY_Farsi_3
-// KEYFarsi4 wraps GDK_KEY_Farsi_4
-const KEYFarsi4 = C.GDK_KEY_Farsi_4
-// KEYFarsi5 wraps GDK_KEY_Farsi_5
-const KEYFarsi5 = C.GDK_KEY_Farsi_5
-// KEYFarsi6 wraps GDK_KEY_Farsi_6
-const KEYFarsi6 = C.GDK_KEY_Farsi_6
-// KEYFarsi7 wraps GDK_KEY_Farsi_7
-const KEYFarsi7 = C.GDK_KEY_Farsi_7
-// KEYFarsi8 wraps GDK_KEY_Farsi_8
-const KEYFarsi8 = C.GDK_KEY_Farsi_8
-// KEYFarsi9 wraps GDK_KEY_Farsi_9
-const KEYFarsi9 = C.GDK_KEY_Farsi_9
-// KEYFarsiYeh wraps GDK_KEY_Farsi_yeh
-const KEYFarsiYeh = C.GDK_KEY_Farsi_yeh
-// KEYFavorites wraps GDK_KEY_Favorites
-const KEYFavorites = C.GDK_KEY_Favorites
-// KEYFinance wraps GDK_KEY_Finance
-const KEYFinance = C.GDK_KEY_Finance
-// KEYFind wraps GDK_KEY_Find
-const KEYFind = C.GDK_KEY_Find
-// KEYFirstVirtualScreen wraps GDK_KEY_First_Virtual_Screen
-const KEYFirstVirtualScreen = C.GDK_KEY_First_Virtual_Screen
-// KEYForward wraps GDK_KEY_Forward
-const KEYForward = C.GDK_KEY_Forward
-// KEYFrameBack wraps GDK_KEY_FrameBack
-const KEYFrameBack = C.GDK_KEY_FrameBack
-// KEYFrameForward wraps GDK_KEY_FrameForward
-const KEYFrameForward = C.GDK_KEY_FrameForward
-// KEYG wraps GDK_KEY_G
-const KEYG = C.GDK_KEY_G
-// KEYGabovedot wraps GDK_KEY_Gabovedot
-const KEYGabovedot = C.GDK_KEY_Gabovedot
-// KEYGame wraps GDK_KEY_Game
-const KEYGame = C.GDK_KEY_Game
-// KEYGbreve wraps GDK_KEY_Gbreve
-const KEYGbreve = C.GDK_KEY_Gbreve
-// KEYGcaron wraps GDK_KEY_Gcaron
-const KEYGcaron = C.GDK_KEY_Gcaron
-// KEYGcedilla wraps GDK_KEY_Gcedilla
-const KEYGcedilla = C.GDK_KEY_Gcedilla
-// KEYGcircumflex wraps GDK_KEY_Gcircumflex
-const KEYGcircumflex = C.GDK_KEY_Gcircumflex
-// KEYGeorgianAn wraps GDK_KEY_Georgian_an
-const KEYGeorgianAn = C.GDK_KEY_Georgian_an
-// KEYGeorgianBan wraps GDK_KEY_Georgian_ban
-const KEYGeorgianBan = C.GDK_KEY_Georgian_ban
-// KEYGeorgianCan wraps GDK_KEY_Georgian_can
-const KEYGeorgianCan = C.GDK_KEY_Georgian_can
-// KEYGeorgianChar wraps GDK_KEY_Georgian_char
-const KEYGeorgianChar = C.GDK_KEY_Georgian_char
-// KEYGeorgianChin wraps GDK_KEY_Georgian_chin
-const KEYGeorgianChin = C.GDK_KEY_Georgian_chin
-// KEYGeorgianCil wraps GDK_KEY_Georgian_cil
-const KEYGeorgianCil = C.GDK_KEY_Georgian_cil
-// KEYGeorgianDon wraps GDK_KEY_Georgian_don
-const KEYGeorgianDon = C.GDK_KEY_Georgian_don
-// KEYGeorgianEn wraps GDK_KEY_Georgian_en
-const KEYGeorgianEn = C.GDK_KEY_Georgian_en
-// KEYGeorgianFi wraps GDK_KEY_Georgian_fi
-const KEYGeorgianFi = C.GDK_KEY_Georgian_fi
-// KEYGeorgianGan wraps GDK_KEY_Georgian_gan
-const KEYGeorgianGan = C.GDK_KEY_Georgian_gan
-// KEYGeorgianGhan wraps GDK_KEY_Georgian_ghan
-const KEYGeorgianGhan = C.GDK_KEY_Georgian_ghan
-// KEYGeorgianHae wraps GDK_KEY_Georgian_hae
-const KEYGeorgianHae = C.GDK_KEY_Georgian_hae
-// KEYGeorgianHar wraps GDK_KEY_Georgian_har
-const KEYGeorgianHar = C.GDK_KEY_Georgian_har
-// KEYGeorgianHe wraps GDK_KEY_Georgian_he
-const KEYGeorgianHe = C.GDK_KEY_Georgian_he
-// KEYGeorgianHie wraps GDK_KEY_Georgian_hie
-const KEYGeorgianHie = C.GDK_KEY_Georgian_hie
-// KEYGeorgianHoe wraps GDK_KEY_Georgian_hoe
-const KEYGeorgianHoe = C.GDK_KEY_Georgian_hoe
-// KEYGeorgianIn wraps GDK_KEY_Georgian_in
-const KEYGeorgianIn = C.GDK_KEY_Georgian_in
-// KEYGeorgianJhan wraps GDK_KEY_Georgian_jhan
-const KEYGeorgianJhan = C.GDK_KEY_Georgian_jhan
-// KEYGeorgianJil wraps GDK_KEY_Georgian_jil
-const KEYGeorgianJil = C.GDK_KEY_Georgian_jil
-// KEYGeorgianKan wraps GDK_KEY_Georgian_kan
-const KEYGeorgianKan = C.GDK_KEY_Georgian_kan
-// KEYGeorgianKhar wraps GDK_KEY_Georgian_khar
-const KEYGeorgianKhar = C.GDK_KEY_Georgian_khar
-// KEYGeorgianLas wraps GDK_KEY_Georgian_las
-const KEYGeorgianLas = C.GDK_KEY_Georgian_las
-// KEYGeorgianMan wraps GDK_KEY_Georgian_man
-const KEYGeorgianMan = C.GDK_KEY_Georgian_man
-// KEYGeorgianNar wraps GDK_KEY_Georgian_nar
-const KEYGeorgianNar = C.GDK_KEY_Georgian_nar
-// KEYGeorgianOn wraps GDK_KEY_Georgian_on
-const KEYGeorgianOn = C.GDK_KEY_Georgian_on
-// KEYGeorgianPar wraps GDK_KEY_Georgian_par
-const KEYGeorgianPar = C.GDK_KEY_Georgian_par
-// KEYGeorgianPhar wraps GDK_KEY_Georgian_phar
-const KEYGeorgianPhar = C.GDK_KEY_Georgian_phar
-// KEYGeorgianQar wraps GDK_KEY_Georgian_qar
-const KEYGeorgianQar = C.GDK_KEY_Georgian_qar
-// KEYGeorgianRae wraps GDK_KEY_Georgian_rae
-const KEYGeorgianRae = C.GDK_KEY_Georgian_rae
-// KEYGeorgianSan wraps GDK_KEY_Georgian_san
-const KEYGeorgianSan = C.GDK_KEY_Georgian_san
-// KEYGeorgianShin wraps GDK_KEY_Georgian_shin
-const KEYGeorgianShin = C.GDK_KEY_Georgian_shin
-// KEYGeorgianTan wraps GDK_KEY_Georgian_tan
-const KEYGeorgianTan = C.GDK_KEY_Georgian_tan
-// KEYGeorgianTar wraps GDK_KEY_Georgian_tar
-const KEYGeorgianTar = C.GDK_KEY_Georgian_tar
-// KEYGeorgianUn wraps GDK_KEY_Georgian_un
-const KEYGeorgianUn = C.GDK_KEY_Georgian_un
-// KEYGeorgianVin wraps GDK_KEY_Georgian_vin
-const KEYGeorgianVin = C.GDK_KEY_Georgian_vin
-// KEYGeorgianWe wraps GDK_KEY_Georgian_we
-const KEYGeorgianWe = C.GDK_KEY_Georgian_we
-// KEYGeorgianXan wraps GDK_KEY_Georgian_xan
-const KEYGeorgianXan = C.GDK_KEY_Georgian_xan
-// KEYGeorgianZen wraps GDK_KEY_Georgian_zen
-const KEYGeorgianZen = C.GDK_KEY_Georgian_zen
-// KEYGeorgianZhar wraps GDK_KEY_Georgian_zhar
-const KEYGeorgianZhar = C.GDK_KEY_Georgian_zhar
-// KEYGo wraps GDK_KEY_Go
-const KEYGo = C.GDK_KEY_Go
-// KEYGreekALPHA wraps GDK_KEY_Greek_ALPHA
-const KEYGreekALPHA = C.GDK_KEY_Greek_ALPHA
-// KEYGreekALPHAaccent wraps GDK_KEY_Greek_ALPHAaccent
-const KEYGreekALPHAaccent = C.GDK_KEY_Greek_ALPHAaccent
-// KEYGreekBETA wraps GDK_KEY_Greek_BETA
-const KEYGreekBETA = C.GDK_KEY_Greek_BETA
-// KEYGreekCHI wraps GDK_KEY_Greek_CHI
-const KEYGreekCHI = C.GDK_KEY_Greek_CHI
-// KEYGreekDELTA wraps GDK_KEY_Greek_DELTA
-const KEYGreekDELTA = C.GDK_KEY_Greek_DELTA
-// KEYGreekEPSILON wraps GDK_KEY_Greek_EPSILON
-const KEYGreekEPSILON = C.GDK_KEY_Greek_EPSILON
-// KEYGreekEPSILONaccent wraps GDK_KEY_Greek_EPSILONaccent
-const KEYGreekEPSILONaccent = C.GDK_KEY_Greek_EPSILONaccent
-// KEYGreekETA wraps GDK_KEY_Greek_ETA
-const KEYGreekETA = C.GDK_KEY_Greek_ETA
-// KEYGreekETAaccent wraps GDK_KEY_Greek_ETAaccent
-const KEYGreekETAaccent = C.GDK_KEY_Greek_ETAaccent
-// KEYGreekGAMMA wraps GDK_KEY_Greek_GAMMA
-const KEYGreekGAMMA = C.GDK_KEY_Greek_GAMMA
-// KEYGreekIOTA wraps GDK_KEY_Greek_IOTA
-const KEYGreekIOTA = C.GDK_KEY_Greek_IOTA
-// KEYGreekIOTAaccent wraps GDK_KEY_Greek_IOTAaccent
-const KEYGreekIOTAaccent = C.GDK_KEY_Greek_IOTAaccent
-// KEYGreekIOTAdiaeresis wraps GDK_KEY_Greek_IOTAdiaeresis
-const KEYGreekIOTAdiaeresis = C.GDK_KEY_Greek_IOTAdiaeresis
-// KEYGreekIOTAdieresis wraps GDK_KEY_Greek_IOTAdieresis
-const KEYGreekIOTAdieresis = C.GDK_KEY_Greek_IOTAdieresis
-// KEYGreekKAPPA wraps GDK_KEY_Greek_KAPPA
-const KEYGreekKAPPA = C.GDK_KEY_Greek_KAPPA
-// KEYGreekLAMBDA wraps GDK_KEY_Greek_LAMBDA
-const KEYGreekLAMBDA = C.GDK_KEY_Greek_LAMBDA
-// KEYGreekLAMDA wraps GDK_KEY_Greek_LAMDA
-const KEYGreekLAMDA = C.GDK_KEY_Greek_LAMDA
-// KEYGreekMU wraps GDK_KEY_Greek_MU
-const KEYGreekMU = C.GDK_KEY_Greek_MU
-// KEYGreekNU wraps GDK_KEY_Greek_NU
-const KEYGreekNU = C.GDK_KEY_Greek_NU
-// KEYGreekOMEGA wraps GDK_KEY_Greek_OMEGA
-const KEYGreekOMEGA = C.GDK_KEY_Greek_OMEGA
-// KEYGreekOMEGAaccent wraps GDK_KEY_Greek_OMEGAaccent
-const KEYGreekOMEGAaccent = C.GDK_KEY_Greek_OMEGAaccent
-// KEYGreekOMICRON wraps GDK_KEY_Greek_OMICRON
-const KEYGreekOMICRON = C.GDK_KEY_Greek_OMICRON
-// KEYGreekOMICRONaccent wraps GDK_KEY_Greek_OMICRONaccent
-const KEYGreekOMICRONaccent = C.GDK_KEY_Greek_OMICRONaccent
-// KEYGreekPHI wraps GDK_KEY_Greek_PHI
-const KEYGreekPHI = C.GDK_KEY_Greek_PHI
-// KEYGreekPI wraps GDK_KEY_Greek_PI
-const KEYGreekPI = C.GDK_KEY_Greek_PI
-// KEYGreekPSI wraps GDK_KEY_Greek_PSI
-const KEYGreekPSI = C.GDK_KEY_Greek_PSI
-// KEYGreekRHO wraps GDK_KEY_Greek_RHO
-const KEYGreekRHO = C.GDK_KEY_Greek_RHO
-// KEYGreekSIGMA wraps GDK_KEY_Greek_SIGMA
-const KEYGreekSIGMA = C.GDK_KEY_Greek_SIGMA
-// KEYGreekTAU wraps GDK_KEY_Greek_TAU
-const KEYGreekTAU = C.GDK_KEY_Greek_TAU
-// KEYGreekTHETA wraps GDK_KEY_Greek_THETA
-const KEYGreekTHETA = C.GDK_KEY_Greek_THETA
-// KEYGreekUPSILON wraps GDK_KEY_Greek_UPSILON
-const KEYGreekUPSILON = C.GDK_KEY_Greek_UPSILON
-// KEYGreekUPSILONaccent wraps GDK_KEY_Greek_UPSILONaccent
-const KEYGreekUPSILONaccent = C.GDK_KEY_Greek_UPSILONaccent
-// KEYGreekUPSILONdieresis wraps GDK_KEY_Greek_UPSILONdieresis
-const KEYGreekUPSILONdieresis = C.GDK_KEY_Greek_UPSILONdieresis
-// KEYGreekXI wraps GDK_KEY_Greek_XI
-const KEYGreekXI = C.GDK_KEY_Greek_XI
-// KEYGreekZETA wraps GDK_KEY_Greek_ZETA
-const KEYGreekZETA = C.GDK_KEY_Greek_ZETA
-// KEYGreekAccentdieresis wraps GDK_KEY_Greek_accentdieresis
-const KEYGreekAccentdieresis = C.GDK_KEY_Greek_accentdieresis
-// KEYGreekAlpha wraps GDK_KEY_Greek_alpha
-const KEYGreekAlpha = C.GDK_KEY_Greek_alpha
-// KEYGreekAlphaaccent wraps GDK_KEY_Greek_alphaaccent
-const KEYGreekAlphaaccent = C.GDK_KEY_Greek_alphaaccent
-// KEYGreekBeta wraps GDK_KEY_Greek_beta
-const KEYGreekBeta = C.GDK_KEY_Greek_beta
-// KEYGreekChi wraps GDK_KEY_Greek_chi
-const KEYGreekChi = C.GDK_KEY_Greek_chi
-// KEYGreekDelta wraps GDK_KEY_Greek_delta
-const KEYGreekDelta = C.GDK_KEY_Greek_delta
-// KEYGreekEpsilon wraps GDK_KEY_Greek_epsilon
-const KEYGreekEpsilon = C.GDK_KEY_Greek_epsilon
-// KEYGreekEpsilonaccent wraps GDK_KEY_Greek_epsilonaccent
-const KEYGreekEpsilonaccent = C.GDK_KEY_Greek_epsilonaccent
-// KEYGreekEta wraps GDK_KEY_Greek_eta
-const KEYGreekEta = C.GDK_KEY_Greek_eta
-// KEYGreekEtaaccent wraps GDK_KEY_Greek_etaaccent
-const KEYGreekEtaaccent = C.GDK_KEY_Greek_etaaccent
-// KEYGreekFinalsmallsigma wraps GDK_KEY_Greek_finalsmallsigma
-const KEYGreekFinalsmallsigma = C.GDK_KEY_Greek_finalsmallsigma
-// KEYGreekGamma wraps GDK_KEY_Greek_gamma
-const KEYGreekGamma = C.GDK_KEY_Greek_gamma
-// KEYGreekHorizbar wraps GDK_KEY_Greek_horizbar
-const KEYGreekHorizbar = C.GDK_KEY_Greek_horizbar
-// KEYGreekIota wraps GDK_KEY_Greek_iota
-const KEYGreekIota = C.GDK_KEY_Greek_iota
-// KEYGreekIotaaccent wraps GDK_KEY_Greek_iotaaccent
-const KEYGreekIotaaccent = C.GDK_KEY_Greek_iotaaccent
-// KEYGreekIotaaccentdieresis wraps GDK_KEY_Greek_iotaaccentdieresis
-const KEYGreekIotaaccentdieresis = C.GDK_KEY_Greek_iotaaccentdieresis
-// KEYGreekIotadieresis wraps GDK_KEY_Greek_iotadieresis
-const KEYGreekIotadieresis = C.GDK_KEY_Greek_iotadieresis
-// KEYGreekKappa wraps GDK_KEY_Greek_kappa
-const KEYGreekKappa = C.GDK_KEY_Greek_kappa
-// KEYGreekLambda wraps GDK_KEY_Greek_lambda
-const KEYGreekLambda = C.GDK_KEY_Greek_lambda
-// KEYGreekLamda wraps GDK_KEY_Greek_lamda
-const KEYGreekLamda = C.GDK_KEY_Greek_lamda
-// KEYGreekMu wraps GDK_KEY_Greek_mu
-const KEYGreekMu = C.GDK_KEY_Greek_mu
-// KEYGreekNu wraps GDK_KEY_Greek_nu
-const KEYGreekNu = C.GDK_KEY_Greek_nu
-// KEYGreekOmega wraps GDK_KEY_Greek_omega
-const KEYGreekOmega = C.GDK_KEY_Greek_omega
-// KEYGreekOmegaaccent wraps GDK_KEY_Greek_omegaaccent
-const KEYGreekOmegaaccent = C.GDK_KEY_Greek_omegaaccent
-// KEYGreekOmicron wraps GDK_KEY_Greek_omicron
-const KEYGreekOmicron = C.GDK_KEY_Greek_omicron
-// KEYGreekOmicronaccent wraps GDK_KEY_Greek_omicronaccent
-const KEYGreekOmicronaccent = C.GDK_KEY_Greek_omicronaccent
-// KEYGreekPhi wraps GDK_KEY_Greek_phi
-const KEYGreekPhi = C.GDK_KEY_Greek_phi
-// KEYGreekPi wraps GDK_KEY_Greek_pi
-const KEYGreekPi = C.GDK_KEY_Greek_pi
-// KEYGreekPsi wraps GDK_KEY_Greek_psi
-const KEYGreekPsi = C.GDK_KEY_Greek_psi
-// KEYGreekRho wraps GDK_KEY_Greek_rho
-const KEYGreekRho = C.GDK_KEY_Greek_rho
-// KEYGreekSigma wraps GDK_KEY_Greek_sigma
-const KEYGreekSigma = C.GDK_KEY_Greek_sigma
-// KEYGreekSwitch wraps GDK_KEY_Greek_switch
-const KEYGreekSwitch = C.GDK_KEY_Greek_switch
-// KEYGreekTau wraps GDK_KEY_Greek_tau
-const KEYGreekTau = C.GDK_KEY_Greek_tau
-// KEYGreekTheta wraps GDK_KEY_Greek_theta
-const KEYGreekTheta = C.GDK_KEY_Greek_theta
-// KEYGreekUpsilon wraps GDK_KEY_Greek_upsilon
-const KEYGreekUpsilon = C.GDK_KEY_Greek_upsilon
-// KEYGreekUpsilonaccent wraps GDK_KEY_Greek_upsilonaccent
-const KEYGreekUpsilonaccent = C.GDK_KEY_Greek_upsilonaccent
-// KEYGreekUpsilonaccentdieresis wraps GDK_KEY_Greek_upsilonaccentdieresis
-const KEYGreekUpsilonaccentdieresis = C.GDK_KEY_Greek_upsilonaccentdieresis
-// KEYGreekUpsilondieresis wraps GDK_KEY_Greek_upsilondieresis
-const KEYGreekUpsilondieresis = C.GDK_KEY_Greek_upsilondieresis
-// KEYGreekXi wraps GDK_KEY_Greek_xi
-const KEYGreekXi = C.GDK_KEY_Greek_xi
-// KEYGreekZeta wraps GDK_KEY_Greek_zeta
-const KEYGreekZeta = C.GDK_KEY_Greek_zeta
-// KEYGreen wraps GDK_KEY_Green
-const KEYGreen = C.GDK_KEY_Green
-// KEYH wraps GDK_KEY_H
-const KEYH = C.GDK_KEY_H
-// KEYHangul wraps GDK_KEY_Hangul
-const KEYHangul = C.GDK_KEY_Hangul
-// KEYHangulA wraps GDK_KEY_Hangul_A
-const KEYHangulA = C.GDK_KEY_Hangul_A
-// KEYHangulAE wraps GDK_KEY_Hangul_AE
-const KEYHangulAE = C.GDK_KEY_Hangul_AE
-// KEYHangulAraeA wraps GDK_KEY_Hangul_AraeA
-const KEYHangulAraeA = C.GDK_KEY_Hangul_AraeA
-// KEYHangulAraeAE wraps GDK_KEY_Hangul_AraeAE
-const KEYHangulAraeAE = C.GDK_KEY_Hangul_AraeAE
-// KEYHangulBanja wraps GDK_KEY_Hangul_Banja
-const KEYHangulBanja = C.GDK_KEY_Hangul_Banja
-// KEYHangulCieuc wraps GDK_KEY_Hangul_Cieuc
-const KEYHangulCieuc = C.GDK_KEY_Hangul_Cieuc
-// KEYHangulCodeinput wraps GDK_KEY_Hangul_Codeinput
-const KEYHangulCodeinput = C.GDK_KEY_Hangul_Codeinput
-// KEYHangulDikeud wraps GDK_KEY_Hangul_Dikeud
-const KEYHangulDikeud = C.GDK_KEY_Hangul_Dikeud
-// KEYHangulE wraps GDK_KEY_Hangul_E
-const KEYHangulE = C.GDK_KEY_Hangul_E
-// KEYHangulEO wraps GDK_KEY_Hangul_EO
-const KEYHangulEO = C.GDK_KEY_Hangul_EO
-// KEYHangulEU wraps GDK_KEY_Hangul_EU
-const KEYHangulEU = C.GDK_KEY_Hangul_EU
-// KEYHangulEnd wraps GDK_KEY_Hangul_End
-const KEYHangulEnd = C.GDK_KEY_Hangul_End
-// KEYHangulHanja wraps GDK_KEY_Hangul_Hanja
-const KEYHangulHanja = C.GDK_KEY_Hangul_Hanja
-// KEYHangulHieuh wraps GDK_KEY_Hangul_Hieuh
-const KEYHangulHieuh = C.GDK_KEY_Hangul_Hieuh
-// KEYHangulI wraps GDK_KEY_Hangul_I
-const KEYHangulI = C.GDK_KEY_Hangul_I
-// KEYHangulIeung wraps GDK_KEY_Hangul_Ieung
-const KEYHangulIeung = C.GDK_KEY_Hangul_Ieung
-// KEYHangulJCieuc wraps GDK_KEY_Hangul_J_Cieuc
-const KEYHangulJCieuc = C.GDK_KEY_Hangul_J_Cieuc
-// KEYHangulJDikeud wraps GDK_KEY_Hangul_J_Dikeud
-const KEYHangulJDikeud = C.GDK_KEY_Hangul_J_Dikeud
-// KEYHangulJHieuh wraps GDK_KEY_Hangul_J_Hieuh
-const KEYHangulJHieuh = C.GDK_KEY_Hangul_J_Hieuh
-// KEYHangulJIeung wraps GDK_KEY_Hangul_J_Ieung
-const KEYHangulJIeung = C.GDK_KEY_Hangul_J_Ieung
-// KEYHangulJJieuj wraps GDK_KEY_Hangul_J_Jieuj
-const KEYHangulJJieuj = C.GDK_KEY_Hangul_J_Jieuj
-// KEYHangulJKhieuq wraps GDK_KEY_Hangul_J_Khieuq
-const KEYHangulJKhieuq = C.GDK_KEY_Hangul_J_Khieuq
-// KEYHangulJKiyeog wraps GDK_KEY_Hangul_J_Kiyeog
-const KEYHangulJKiyeog = C.GDK_KEY_Hangul_J_Kiyeog
-// KEYHangulJKiyeogSios wraps GDK_KEY_Hangul_J_KiyeogSios
-const KEYHangulJKiyeogSios = C.GDK_KEY_Hangul_J_KiyeogSios
-// KEYHangulJKkogjiDalrinIeung wraps GDK_KEY_Hangul_J_KkogjiDalrinIeung
-const KEYHangulJKkogjiDalrinIeung = C.GDK_KEY_Hangul_J_KkogjiDalrinIeung
-// KEYHangulJMieum wraps GDK_KEY_Hangul_J_Mieum
-const KEYHangulJMieum = C.GDK_KEY_Hangul_J_Mieum
-// KEYHangulJNieun wraps GDK_KEY_Hangul_J_Nieun
-const KEYHangulJNieun = C.GDK_KEY_Hangul_J_Nieun
-// KEYHangulJNieunHieuh wraps GDK_KEY_Hangul_J_NieunHieuh
-const KEYHangulJNieunHieuh = C.GDK_KEY_Hangul_J_NieunHieuh
-// KEYHangulJNieunJieuj wraps GDK_KEY_Hangul_J_NieunJieuj
-const KEYHangulJNieunJieuj = C.GDK_KEY_Hangul_J_NieunJieuj
-// KEYHangulJPanSios wraps GDK_KEY_Hangul_J_PanSios
-const KEYHangulJPanSios = C.GDK_KEY_Hangul_J_PanSios
-// KEYHangulJPhieuf wraps GDK_KEY_Hangul_J_Phieuf
-const KEYHangulJPhieuf = C.GDK_KEY_Hangul_J_Phieuf
-// KEYHangulJPieub wraps GDK_KEY_Hangul_J_Pieub
-const KEYHangulJPieub = C.GDK_KEY_Hangul_J_Pieub
-// KEYHangulJPieubSios wraps GDK_KEY_Hangul_J_PieubSios
-const KEYHangulJPieubSios = C.GDK_KEY_Hangul_J_PieubSios
-// KEYHangulJRieul wraps GDK_KEY_Hangul_J_Rieul
-const KEYHangulJRieul = C.GDK_KEY_Hangul_J_Rieul
-// KEYHangulJRieulHieuh wraps GDK_KEY_Hangul_J_RieulHieuh
-const KEYHangulJRieulHieuh = C.GDK_KEY_Hangul_J_RieulHieuh
-// KEYHangulJRieulKiyeog wraps GDK_KEY_Hangul_J_RieulKiyeog
-const KEYHangulJRieulKiyeog = C.GDK_KEY_Hangul_J_RieulKiyeog
-// KEYHangulJRieulMieum wraps GDK_KEY_Hangul_J_RieulMieum
-const KEYHangulJRieulMieum = C.GDK_KEY_Hangul_J_RieulMieum
-// KEYHangulJRieulPhieuf wraps GDK_KEY_Hangul_J_RieulPhieuf
-const KEYHangulJRieulPhieuf = C.GDK_KEY_Hangul_J_RieulPhieuf
-// KEYHangulJRieulPieub wraps GDK_KEY_Hangul_J_RieulPieub
-const KEYHangulJRieulPieub = C.GDK_KEY_Hangul_J_RieulPieub
-// KEYHangulJRieulSios wraps GDK_KEY_Hangul_J_RieulSios
-const KEYHangulJRieulSios = C.GDK_KEY_Hangul_J_RieulSios
-// KEYHangulJRieulTieut wraps GDK_KEY_Hangul_J_RieulTieut
-const KEYHangulJRieulTieut = C.GDK_KEY_Hangul_J_RieulTieut
-// KEYHangulJSios wraps GDK_KEY_Hangul_J_Sios
-const KEYHangulJSios = C.GDK_KEY_Hangul_J_Sios
-// KEYHangulJSsangKiyeog wraps GDK_KEY_Hangul_J_SsangKiyeog
-const KEYHangulJSsangKiyeog = C.GDK_KEY_Hangul_J_SsangKiyeog
-// KEYHangulJSsangSios wraps GDK_KEY_Hangul_J_SsangSios
-const KEYHangulJSsangSios = C.GDK_KEY_Hangul_J_SsangSios
-// KEYHangulJTieut wraps GDK_KEY_Hangul_J_Tieut
-const KEYHangulJTieut = C.GDK_KEY_Hangul_J_Tieut
-// KEYHangulJYeorinHieuh wraps GDK_KEY_Hangul_J_YeorinHieuh
-const KEYHangulJYeorinHieuh = C.GDK_KEY_Hangul_J_YeorinHieuh
-// KEYHangulJamo wraps GDK_KEY_Hangul_Jamo
-const KEYHangulJamo = C.GDK_KEY_Hangul_Jamo
-// KEYHangulJeonja wraps GDK_KEY_Hangul_Jeonja
-const KEYHangulJeonja = C.GDK_KEY_Hangul_Jeonja
-// KEYHangulJieuj wraps GDK_KEY_Hangul_Jieuj
-const KEYHangulJieuj = C.GDK_KEY_Hangul_Jieuj
-// KEYHangulKhieuq wraps GDK_KEY_Hangul_Khieuq
-const KEYHangulKhieuq = C.GDK_KEY_Hangul_Khieuq
-// KEYHangulKiyeog wraps GDK_KEY_Hangul_Kiyeog
-const KEYHangulKiyeog = C.GDK_KEY_Hangul_Kiyeog
-// KEYHangulKiyeogSios wraps GDK_KEY_Hangul_KiyeogSios
-const KEYHangulKiyeogSios = C.GDK_KEY_Hangul_KiyeogSios
-// KEYHangulKkogjiDalrinIeung wraps GDK_KEY_Hangul_KkogjiDalrinIeung
-const KEYHangulKkogjiDalrinIeung = C.GDK_KEY_Hangul_KkogjiDalrinIeung
-// KEYHangulMieum wraps GDK_KEY_Hangul_Mieum
-const KEYHangulMieum = C.GDK_KEY_Hangul_Mieum
-// KEYHangulMultipleCandidate wraps GDK_KEY_Hangul_MultipleCandidate
-const KEYHangulMultipleCandidate = C.GDK_KEY_Hangul_MultipleCandidate
-// KEYHangulNieun wraps GDK_KEY_Hangul_Nieun
-const KEYHangulNieun = C.GDK_KEY_Hangul_Nieun
-// KEYHangulNieunHieuh wraps GDK_KEY_Hangul_NieunHieuh
-const KEYHangulNieunHieuh = C.GDK_KEY_Hangul_NieunHieuh
-// KEYHangulNieunJieuj wraps GDK_KEY_Hangul_NieunJieuj
-const KEYHangulNieunJieuj = C.GDK_KEY_Hangul_NieunJieuj
-// KEYHangulO wraps GDK_KEY_Hangul_O
-const KEYHangulO = C.GDK_KEY_Hangul_O
-// KEYHangulOE wraps GDK_KEY_Hangul_OE
-const KEYHangulOE = C.GDK_KEY_Hangul_OE
-// KEYHangulPanSios wraps GDK_KEY_Hangul_PanSios
-const KEYHangulPanSios = C.GDK_KEY_Hangul_PanSios
-// KEYHangulPhieuf wraps GDK_KEY_Hangul_Phieuf
-const KEYHangulPhieuf = C.GDK_KEY_Hangul_Phieuf
-// KEYHangulPieub wraps GDK_KEY_Hangul_Pieub
-const KEYHangulPieub = C.GDK_KEY_Hangul_Pieub
-// KEYHangulPieubSios wraps GDK_KEY_Hangul_PieubSios
-const KEYHangulPieubSios = C.GDK_KEY_Hangul_PieubSios
-// KEYHangulPostHanja wraps GDK_KEY_Hangul_PostHanja
-const KEYHangulPostHanja = C.GDK_KEY_Hangul_PostHanja
-// KEYHangulPreHanja wraps GDK_KEY_Hangul_PreHanja
-const KEYHangulPreHanja = C.GDK_KEY_Hangul_PreHanja
-// KEYHangulPreviousCandidate wraps GDK_KEY_Hangul_PreviousCandidate
-const KEYHangulPreviousCandidate = C.GDK_KEY_Hangul_PreviousCandidate
-// KEYHangulRieul wraps GDK_KEY_Hangul_Rieul
-const KEYHangulRieul = C.GDK_KEY_Hangul_Rieul
-// KEYHangulRieulHieuh wraps GDK_KEY_Hangul_RieulHieuh
-const KEYHangulRieulHieuh = C.GDK_KEY_Hangul_RieulHieuh
-// KEYHangulRieulKiyeog wraps GDK_KEY_Hangul_RieulKiyeog
-const KEYHangulRieulKiyeog = C.GDK_KEY_Hangul_RieulKiyeog
-// KEYHangulRieulMieum wraps GDK_KEY_Hangul_RieulMieum
-const KEYHangulRieulMieum = C.GDK_KEY_Hangul_RieulMieum
-// KEYHangulRieulPhieuf wraps GDK_KEY_Hangul_RieulPhieuf
-const KEYHangulRieulPhieuf = C.GDK_KEY_Hangul_RieulPhieuf
-// KEYHangulRieulPieub wraps GDK_KEY_Hangul_RieulPieub
-const KEYHangulRieulPieub = C.GDK_KEY_Hangul_RieulPieub
-// KEYHangulRieulSios wraps GDK_KEY_Hangul_RieulSios
-const KEYHangulRieulSios = C.GDK_KEY_Hangul_RieulSios
-// KEYHangulRieulTieut wraps GDK_KEY_Hangul_RieulTieut
-const KEYHangulRieulTieut = C.GDK_KEY_Hangul_RieulTieut
-// KEYHangulRieulYeorinHieuh wraps GDK_KEY_Hangul_RieulYeorinHieuh
-const KEYHangulRieulYeorinHieuh = C.GDK_KEY_Hangul_RieulYeorinHieuh
-// KEYHangulRomaja wraps GDK_KEY_Hangul_Romaja
-const KEYHangulRomaja = C.GDK_KEY_Hangul_Romaja
-// KEYHangulSingleCandidate wraps GDK_KEY_Hangul_SingleCandidate
-const KEYHangulSingleCandidate = C.GDK_KEY_Hangul_SingleCandidate
-// KEYHangulSios wraps GDK_KEY_Hangul_Sios
-const KEYHangulSios = C.GDK_KEY_Hangul_Sios
-// KEYHangulSpecial wraps GDK_KEY_Hangul_Special
-const KEYHangulSpecial = C.GDK_KEY_Hangul_Special
-// KEYHangulSsangDikeud wraps GDK_KEY_Hangul_SsangDikeud
-const KEYHangulSsangDikeud = C.GDK_KEY_Hangul_SsangDikeud
-// KEYHangulSsangJieuj wraps GDK_KEY_Hangul_SsangJieuj
-const KEYHangulSsangJieuj = C.GDK_KEY_Hangul_SsangJieuj
-// KEYHangulSsangKiyeog wraps GDK_KEY_Hangul_SsangKiyeog
-const KEYHangulSsangKiyeog = C.GDK_KEY_Hangul_SsangKiyeog
-// KEYHangulSsangPieub wraps GDK_KEY_Hangul_SsangPieub
-const KEYHangulSsangPieub = C.GDK_KEY_Hangul_SsangPieub
-// KEYHangulSsangSios wraps GDK_KEY_Hangul_SsangSios
-const KEYHangulSsangSios = C.GDK_KEY_Hangul_SsangSios
-// KEYHangulStart wraps GDK_KEY_Hangul_Start
-const KEYHangulStart = C.GDK_KEY_Hangul_Start
-// KEYHangulSunkyeongeumMieum wraps GDK_KEY_Hangul_SunkyeongeumMieum
-const KEYHangulSunkyeongeumMieum = C.GDK_KEY_Hangul_SunkyeongeumMieum
-// KEYHangulSunkyeongeumPhieuf wraps GDK_KEY_Hangul_SunkyeongeumPhieuf
-const KEYHangulSunkyeongeumPhieuf = C.GDK_KEY_Hangul_SunkyeongeumPhieuf
-// KEYHangulSunkyeongeumPieub wraps GDK_KEY_Hangul_SunkyeongeumPieub
-const KEYHangulSunkyeongeumPieub = C.GDK_KEY_Hangul_SunkyeongeumPieub
-// KEYHangulTieut wraps GDK_KEY_Hangul_Tieut
-const KEYHangulTieut = C.GDK_KEY_Hangul_Tieut
-// KEYHangulU wraps GDK_KEY_Hangul_U
-const KEYHangulU = C.GDK_KEY_Hangul_U
-// KEYHangulWA wraps GDK_KEY_Hangul_WA
-const KEYHangulWA = C.GDK_KEY_Hangul_WA
-// KEYHangulWAE wraps GDK_KEY_Hangul_WAE
-const KEYHangulWAE = C.GDK_KEY_Hangul_WAE
-// KEYHangulWE wraps GDK_KEY_Hangul_WE
-const KEYHangulWE = C.GDK_KEY_Hangul_WE
-// KEYHangulWEO wraps GDK_KEY_Hangul_WEO
-const KEYHangulWEO = C.GDK_KEY_Hangul_WEO
-// KEYHangulWI wraps GDK_KEY_Hangul_WI
-const KEYHangulWI = C.GDK_KEY_Hangul_WI
-// KEYHangulYA wraps GDK_KEY_Hangul_YA
-const KEYHangulYA = C.GDK_KEY_Hangul_YA
-// KEYHangulYAE wraps GDK_KEY_Hangul_YAE
-const KEYHangulYAE = C.GDK_KEY_Hangul_YAE
-// KEYHangulYE wraps GDK_KEY_Hangul_YE
-const KEYHangulYE = C.GDK_KEY_Hangul_YE
-// KEYHangulYEO wraps GDK_KEY_Hangul_YEO
-const KEYHangulYEO = C.GDK_KEY_Hangul_YEO
-// KEYHangulYI wraps GDK_KEY_Hangul_YI
-const KEYHangulYI = C.GDK_KEY_Hangul_YI
-// KEYHangulYO wraps GDK_KEY_Hangul_YO
-const KEYHangulYO = C.GDK_KEY_Hangul_YO
-// KEYHangulYU wraps GDK_KEY_Hangul_YU
-const KEYHangulYU = C.GDK_KEY_Hangul_YU
-// KEYHangulYeorinHieuh wraps GDK_KEY_Hangul_YeorinHieuh
-const KEYHangulYeorinHieuh = C.GDK_KEY_Hangul_YeorinHieuh
-// KEYHangulSwitch wraps GDK_KEY_Hangul_switch
-const KEYHangulSwitch = C.GDK_KEY_Hangul_switch
-// KEYHankaku wraps GDK_KEY_Hankaku
-const KEYHankaku = C.GDK_KEY_Hankaku
-// KEYHcircumflex wraps GDK_KEY_Hcircumflex
-const KEYHcircumflex = C.GDK_KEY_Hcircumflex
-// KEYHebrewSwitch wraps GDK_KEY_Hebrew_switch
-const KEYHebrewSwitch = C.GDK_KEY_Hebrew_switch
-// KEYHelp wraps GDK_KEY_Help
-const KEYHelp = C.GDK_KEY_Help
-// KEYHenkan wraps GDK_KEY_Henkan
-const KEYHenkan = C.GDK_KEY_Henkan
-// KEYHenkanMode wraps GDK_KEY_Henkan_Mode
-const KEYHenkanMode = C.GDK_KEY_Henkan_Mode
-// KEYHibernate wraps GDK_KEY_Hibernate
-const KEYHibernate = C.GDK_KEY_Hibernate
-// KEYHiragana wraps GDK_KEY_Hiragana
-const KEYHiragana = C.GDK_KEY_Hiragana
-// KEYHiraganaKatakana wraps GDK_KEY_Hiragana_Katakana
-const KEYHiraganaKatakana = C.GDK_KEY_Hiragana_Katakana
-// KEYHistory wraps GDK_KEY_History
-const KEYHistory = C.GDK_KEY_History
-// KEYHome wraps GDK_KEY_Home
-const KEYHome = C.GDK_KEY_Home
-// KEYHomePage wraps GDK_KEY_HomePage
-const KEYHomePage = C.GDK_KEY_HomePage
-// KEYHotLinks wraps GDK_KEY_HotLinks
-const KEYHotLinks = C.GDK_KEY_HotLinks
-// KEYHstroke wraps GDK_KEY_Hstroke
-const KEYHstroke = C.GDK_KEY_Hstroke
-// KEYHyperL wraps GDK_KEY_Hyper_L
-const KEYHyperL = C.GDK_KEY_Hyper_L
-// KEYHyperR wraps GDK_KEY_Hyper_R
-const KEYHyperR = C.GDK_KEY_Hyper_R
-// KEYI wraps GDK_KEY_I
-const KEYI = C.GDK_KEY_I
-// KEYISOCenterObject wraps GDK_KEY_ISO_Center_Object
-const KEYISOCenterObject = C.GDK_KEY_ISO_Center_Object
-// KEYISOContinuousUnderline wraps GDK_KEY_ISO_Continuous_Underline
-const KEYISOContinuousUnderline = C.GDK_KEY_ISO_Continuous_Underline
-// KEYISODiscontinuousUnderline wraps GDK_KEY_ISO_Discontinuous_Underline
-const KEYISODiscontinuousUnderline = C.GDK_KEY_ISO_Discontinuous_Underline
-// KEYISOEmphasize wraps GDK_KEY_ISO_Emphasize
-const KEYISOEmphasize = C.GDK_KEY_ISO_Emphasize
-// KEYISOEnter wraps GDK_KEY_ISO_Enter
-const KEYISOEnter = C.GDK_KEY_ISO_Enter
-// KEYISOFastCursorDown wraps GDK_KEY_ISO_Fast_Cursor_Down
-const KEYISOFastCursorDown = C.GDK_KEY_ISO_Fast_Cursor_Down
-// KEYISOFastCursorLeft wraps GDK_KEY_ISO_Fast_Cursor_Left
-const KEYISOFastCursorLeft = C.GDK_KEY_ISO_Fast_Cursor_Left
-// KEYISOFastCursorRight wraps GDK_KEY_ISO_Fast_Cursor_Right
-const KEYISOFastCursorRight = C.GDK_KEY_ISO_Fast_Cursor_Right
-// KEYISOFastCursorUp wraps GDK_KEY_ISO_Fast_Cursor_Up
-const KEYISOFastCursorUp = C.GDK_KEY_ISO_Fast_Cursor_Up
-// KEYISOFirstGroup wraps GDK_KEY_ISO_First_Group
-const KEYISOFirstGroup = C.GDK_KEY_ISO_First_Group
-// KEYISOFirstGroupLock wraps GDK_KEY_ISO_First_Group_Lock
-const KEYISOFirstGroupLock = C.GDK_KEY_ISO_First_Group_Lock
-// KEYISOGroupLatch wraps GDK_KEY_ISO_Group_Latch
-const KEYISOGroupLatch = C.GDK_KEY_ISO_Group_Latch
-// KEYISOGroupLock wraps GDK_KEY_ISO_Group_Lock
-const KEYISOGroupLock = C.GDK_KEY_ISO_Group_Lock
-// KEYISOGroupShift wraps GDK_KEY_ISO_Group_Shift
-const KEYISOGroupShift = C.GDK_KEY_ISO_Group_Shift
-// KEYISOLastGroup wraps GDK_KEY_ISO_Last_Group
-const KEYISOLastGroup = C.GDK_KEY_ISO_Last_Group
-// KEYISOLastGroupLock wraps GDK_KEY_ISO_Last_Group_Lock
-const KEYISOLastGroupLock = C.GDK_KEY_ISO_Last_Group_Lock
-// KEYISOLeftTab wraps GDK_KEY_ISO_Left_Tab
-const KEYISOLeftTab = C.GDK_KEY_ISO_Left_Tab
-// KEYISOLevel2Latch wraps GDK_KEY_ISO_Level2_Latch
-const KEYISOLevel2Latch = C.GDK_KEY_ISO_Level2_Latch
-// KEYISOLevel3Latch wraps GDK_KEY_ISO_Level3_Latch
-const KEYISOLevel3Latch = C.GDK_KEY_ISO_Level3_Latch
-// KEYISOLevel3Lock wraps GDK_KEY_ISO_Level3_Lock
-const KEYISOLevel3Lock = C.GDK_KEY_ISO_Level3_Lock
-// KEYISOLevel3Shift wraps GDK_KEY_ISO_Level3_Shift
-const KEYISOLevel3Shift = C.GDK_KEY_ISO_Level3_Shift
-// KEYISOLevel5Latch wraps GDK_KEY_ISO_Level5_Latch
-const KEYISOLevel5Latch = C.GDK_KEY_ISO_Level5_Latch
-// KEYISOLevel5Lock wraps GDK_KEY_ISO_Level5_Lock
-const KEYISOLevel5Lock = C.GDK_KEY_ISO_Level5_Lock
-// KEYISOLevel5Shift wraps GDK_KEY_ISO_Level5_Shift
-const KEYISOLevel5Shift = C.GDK_KEY_ISO_Level5_Shift
-// KEYISOLock wraps GDK_KEY_ISO_Lock
-const KEYISOLock = C.GDK_KEY_ISO_Lock
-// KEYISOMoveLineDown wraps GDK_KEY_ISO_Move_Line_Down
-const KEYISOMoveLineDown = C.GDK_KEY_ISO_Move_Line_Down
-// KEYISOMoveLineUp wraps GDK_KEY_ISO_Move_Line_Up
-const KEYISOMoveLineUp = C.GDK_KEY_ISO_Move_Line_Up
-// KEYISONextGroup wraps GDK_KEY_ISO_Next_Group
-const KEYISONextGroup = C.GDK_KEY_ISO_Next_Group
-// KEYISONextGroupLock wraps GDK_KEY_ISO_Next_Group_Lock
-const KEYISONextGroupLock = C.GDK_KEY_ISO_Next_Group_Lock
-// KEYISOPartialLineDown wraps GDK_KEY_ISO_Partial_Line_Down
-const KEYISOPartialLineDown = C.GDK_KEY_ISO_Partial_Line_Down
-// KEYISOPartialLineUp wraps GDK_KEY_ISO_Partial_Line_Up
-const KEYISOPartialLineUp = C.GDK_KEY_ISO_Partial_Line_Up
-// KEYISOPartialSpaceLeft wraps GDK_KEY_ISO_Partial_Space_Left
-const KEYISOPartialSpaceLeft = C.GDK_KEY_ISO_Partial_Space_Left
-// KEYISOPartialSpaceRight wraps GDK_KEY_ISO_Partial_Space_Right
-const KEYISOPartialSpaceRight = C.GDK_KEY_ISO_Partial_Space_Right
-// KEYISOPrevGroup wraps GDK_KEY_ISO_Prev_Group
-const KEYISOPrevGroup = C.GDK_KEY_ISO_Prev_Group
-// KEYISOPrevGroupLock wraps GDK_KEY_ISO_Prev_Group_Lock
-const KEYISOPrevGroupLock = C.GDK_KEY_ISO_Prev_Group_Lock
-// KEYISOReleaseBothMargins wraps GDK_KEY_ISO_Release_Both_Margins
-const KEYISOReleaseBothMargins = C.GDK_KEY_ISO_Release_Both_Margins
-// KEYISOReleaseMarginLeft wraps GDK_KEY_ISO_Release_Margin_Left
-const KEYISOReleaseMarginLeft = C.GDK_KEY_ISO_Release_Margin_Left
-// KEYISOReleaseMarginRight wraps GDK_KEY_ISO_Release_Margin_Right
-const KEYISOReleaseMarginRight = C.GDK_KEY_ISO_Release_Margin_Right
-// KEYISOSetMarginLeft wraps GDK_KEY_ISO_Set_Margin_Left
-const KEYISOSetMarginLeft = C.GDK_KEY_ISO_Set_Margin_Left
-// KEYISOSetMarginRight wraps GDK_KEY_ISO_Set_Margin_Right
-const KEYISOSetMarginRight = C.GDK_KEY_ISO_Set_Margin_Right
-// KEYIabovedot wraps GDK_KEY_Iabovedot
-const KEYIabovedot = C.GDK_KEY_Iabovedot
-// KEYIacute wraps GDK_KEY_Iacute
-const KEYIacute = C.GDK_KEY_Iacute
-// KEYIbelowdot wraps GDK_KEY_Ibelowdot
-const KEYIbelowdot = C.GDK_KEY_Ibelowdot
-// KEYIbreve wraps GDK_KEY_Ibreve
-const KEYIbreve = C.GDK_KEY_Ibreve
-// KEYIcircumflex wraps GDK_KEY_Icircumflex
-const KEYIcircumflex = C.GDK_KEY_Icircumflex
-// KEYIdiaeresis wraps GDK_KEY_Idiaeresis
-const KEYIdiaeresis = C.GDK_KEY_Idiaeresis
-// KEYIgrave wraps GDK_KEY_Igrave
-const KEYIgrave = C.GDK_KEY_Igrave
-// KEYIhook wraps GDK_KEY_Ihook
-const KEYIhook = C.GDK_KEY_Ihook
-// KEYImacron wraps GDK_KEY_Imacron
-const KEYImacron = C.GDK_KEY_Imacron
-// KEYInsert wraps GDK_KEY_Insert
-const KEYInsert = C.GDK_KEY_Insert
-// KEYIogonek wraps GDK_KEY_Iogonek
-const KEYIogonek = C.GDK_KEY_Iogonek
-// KEYItilde wraps GDK_KEY_Itilde
-const KEYItilde = C.GDK_KEY_Itilde
-// KEYJ wraps GDK_KEY_J
-const KEYJ = C.GDK_KEY_J
-// KEYJcircumflex wraps GDK_KEY_Jcircumflex
-const KEYJcircumflex = C.GDK_KEY_Jcircumflex
-// KEYK wraps GDK_KEY_K
-const KEYK = C.GDK_KEY_K
-// KEYKP0 wraps GDK_KEY_KP_0
-const KEYKP0 = C.GDK_KEY_KP_0
-// KEYKP1 wraps GDK_KEY_KP_1
-const KEYKP1 = C.GDK_KEY_KP_1
-// KEYKP2 wraps GDK_KEY_KP_2
-const KEYKP2 = C.GDK_KEY_KP_2
-// KEYKP3 wraps GDK_KEY_KP_3
-const KEYKP3 = C.GDK_KEY_KP_3
-// KEYKP4 wraps GDK_KEY_KP_4
-const KEYKP4 = C.GDK_KEY_KP_4
-// KEYKP5 wraps GDK_KEY_KP_5
-const KEYKP5 = C.GDK_KEY_KP_5
-// KEYKP6 wraps GDK_KEY_KP_6
-const KEYKP6 = C.GDK_KEY_KP_6
-// KEYKP7 wraps GDK_KEY_KP_7
-const KEYKP7 = C.GDK_KEY_KP_7
-// KEYKP8 wraps GDK_KEY_KP_8
-const KEYKP8 = C.GDK_KEY_KP_8
-// KEYKP9 wraps GDK_KEY_KP_9
-const KEYKP9 = C.GDK_KEY_KP_9
-// KEYKPAdd wraps GDK_KEY_KP_Add
-const KEYKPAdd = C.GDK_KEY_KP_Add
-// KEYKPBegin wraps GDK_KEY_KP_Begin
-const KEYKPBegin = C.GDK_KEY_KP_Begin
-// KEYKPDecimal wraps GDK_KEY_KP_Decimal
-const KEYKPDecimal = C.GDK_KEY_KP_Decimal
-// KEYKPDelete wraps GDK_KEY_KP_Delete
-const KEYKPDelete = C.GDK_KEY_KP_Delete
-// KEYKPDivide wraps GDK_KEY_KP_Divide
-const KEYKPDivide = C.GDK_KEY_KP_Divide
-// KEYKPDown wraps GDK_KEY_KP_Down
-const KEYKPDown = C.GDK_KEY_KP_Down
-// KEYKPEnd wraps GDK_KEY_KP_End
-const KEYKPEnd = C.GDK_KEY_KP_End
-// KEYKPEnter wraps GDK_KEY_KP_Enter
-const KEYKPEnter = C.GDK_KEY_KP_Enter
-// KEYKPEqual wraps GDK_KEY_KP_Equal
-const KEYKPEqual = C.GDK_KEY_KP_Equal
-// KEYKPF1 wraps GDK_KEY_KP_F1
-const KEYKPF1 = C.GDK_KEY_KP_F1
-// KEYKPF2 wraps GDK_KEY_KP_F2
-const KEYKPF2 = C.GDK_KEY_KP_F2
-// KEYKPF3 wraps GDK_KEY_KP_F3
-const KEYKPF3 = C.GDK_KEY_KP_F3
-// KEYKPF4 wraps GDK_KEY_KP_F4
-const KEYKPF4 = C.GDK_KEY_KP_F4
-// KEYKPHome wraps GDK_KEY_KP_Home
-const KEYKPHome = C.GDK_KEY_KP_Home
-// KEYKPInsert wraps GDK_KEY_KP_Insert
-const KEYKPInsert = C.GDK_KEY_KP_Insert
-// KEYKPLeft wraps GDK_KEY_KP_Left
-const KEYKPLeft = C.GDK_KEY_KP_Left
-// KEYKPMultiply wraps GDK_KEY_KP_Multiply
-const KEYKPMultiply = C.GDK_KEY_KP_Multiply
-// KEYKPNext wraps GDK_KEY_KP_Next
-const KEYKPNext = C.GDK_KEY_KP_Next
-// KEYKPPageDown wraps GDK_KEY_KP_Page_Down
-const KEYKPPageDown = C.GDK_KEY_KP_Page_Down
-// KEYKPPageUp wraps GDK_KEY_KP_Page_Up
-const KEYKPPageUp = C.GDK_KEY_KP_Page_Up
-// KEYKPPrior wraps GDK_KEY_KP_Prior
-const KEYKPPrior = C.GDK_KEY_KP_Prior
-// KEYKPRight wraps GDK_KEY_KP_Right
-const KEYKPRight = C.GDK_KEY_KP_Right
-// KEYKPSeparator wraps GDK_KEY_KP_Separator
-const KEYKPSeparator = C.GDK_KEY_KP_Separator
-// KEYKPSpace wraps GDK_KEY_KP_Space
-const KEYKPSpace = C.GDK_KEY_KP_Space
-// KEYKPSubtract wraps GDK_KEY_KP_Subtract
-const KEYKPSubtract = C.GDK_KEY_KP_Subtract
-// KEYKPTab wraps GDK_KEY_KP_Tab
-const KEYKPTab = C.GDK_KEY_KP_Tab
-// KEYKPUp wraps GDK_KEY_KP_Up
-const KEYKPUp = C.GDK_KEY_KP_Up
-// KEYKanaLock wraps GDK_KEY_Kana_Lock
-const KEYKanaLock = C.GDK_KEY_Kana_Lock
-// KEYKanaShift wraps GDK_KEY_Kana_Shift
-const KEYKanaShift = C.GDK_KEY_Kana_Shift
-// KEYKanji wraps GDK_KEY_Kanji
-const KEYKanji = C.GDK_KEY_Kanji
-// KEYKanjiBangou wraps GDK_KEY_Kanji_Bangou
-const KEYKanjiBangou = C.GDK_KEY_Kanji_Bangou
-// KEYKatakana wraps GDK_KEY_Katakana
-const KEYKatakana = C.GDK_KEY_Katakana
-// KEYKbdBrightnessDown wraps GDK_KEY_KbdBrightnessDown
-const KEYKbdBrightnessDown = C.GDK_KEY_KbdBrightnessDown
-// KEYKbdBrightnessUp wraps GDK_KEY_KbdBrightnessUp
-const KEYKbdBrightnessUp = C.GDK_KEY_KbdBrightnessUp
-// KEYKbdLightOnOff wraps GDK_KEY_KbdLightOnOff
-const KEYKbdLightOnOff = C.GDK_KEY_KbdLightOnOff
-// KEYKcedilla wraps GDK_KEY_Kcedilla
-const KEYKcedilla = C.GDK_KEY_Kcedilla
-// KEYKeyboard wraps GDK_KEY_Keyboard
-const KEYKeyboard = C.GDK_KEY_Keyboard
-// KEYKoreanWon wraps GDK_KEY_Korean_Won
-const KEYKoreanWon = C.GDK_KEY_Korean_Won
-// KEYL wraps GDK_KEY_L
-const KEYL = C.GDK_KEY_L
-// KEYL1 wraps GDK_KEY_L1
-const KEYL1 = C.GDK_KEY_L1
-// KEYL10 wraps GDK_KEY_L10
-const KEYL10 = C.GDK_KEY_L10
-// KEYL2 wraps GDK_KEY_L2
-const KEYL2 = C.GDK_KEY_L2
-// KEYL3 wraps GDK_KEY_L3
-const KEYL3 = C.GDK_KEY_L3
-// KEYL4 wraps GDK_KEY_L4
-const KEYL4 = C.GDK_KEY_L4
-// KEYL5 wraps GDK_KEY_L5
-const KEYL5 = C.GDK_KEY_L5
-// KEYL6 wraps GDK_KEY_L6
-const KEYL6 = C.GDK_KEY_L6
-// KEYL7 wraps GDK_KEY_L7
-const KEYL7 = C.GDK_KEY_L7
-// KEYL8 wraps GDK_KEY_L8
-const KEYL8 = C.GDK_KEY_L8
-// KEYL9 wraps GDK_KEY_L9
-const KEYL9 = C.GDK_KEY_L9
-// KEYLacute wraps GDK_KEY_Lacute
-const KEYLacute = C.GDK_KEY_Lacute
-// KEYLastVirtualScreen wraps GDK_KEY_Last_Virtual_Screen
-const KEYLastVirtualScreen = C.GDK_KEY_Last_Virtual_Screen
-// KEYLaunch0 wraps GDK_KEY_Launch0
-const KEYLaunch0 = C.GDK_KEY_Launch0
-// KEYLaunch1 wraps GDK_KEY_Launch1
-const KEYLaunch1 = C.GDK_KEY_Launch1
-// KEYLaunch2 wraps GDK_KEY_Launch2
-const KEYLaunch2 = C.GDK_KEY_Launch2
-// KEYLaunch3 wraps GDK_KEY_Launch3
-const KEYLaunch3 = C.GDK_KEY_Launch3
-// KEYLaunch4 wraps GDK_KEY_Launch4
-const KEYLaunch4 = C.GDK_KEY_Launch4
-// KEYLaunch5 wraps GDK_KEY_Launch5
-const KEYLaunch5 = C.GDK_KEY_Launch5
-// KEYLaunch6 wraps GDK_KEY_Launch6
-const KEYLaunch6 = C.GDK_KEY_Launch6
-// KEYLaunch7 wraps GDK_KEY_Launch7
-const KEYLaunch7 = C.GDK_KEY_Launch7
-// KEYLaunch8 wraps GDK_KEY_Launch8
-const KEYLaunch8 = C.GDK_KEY_Launch8
-// KEYLaunch9 wraps GDK_KEY_Launch9
-const KEYLaunch9 = C.GDK_KEY_Launch9
-// KEYLaunchA wraps GDK_KEY_LaunchA
-const KEYLaunchA = C.GDK_KEY_LaunchA
-// KEYLaunchB wraps GDK_KEY_LaunchB
-const KEYLaunchB = C.GDK_KEY_LaunchB
-// KEYLaunchC wraps GDK_KEY_LaunchC
-const KEYLaunchC = C.GDK_KEY_LaunchC
-// KEYLaunchD wraps GDK_KEY_LaunchD
-const KEYLaunchD = C.GDK_KEY_LaunchD
-// KEYLaunchE wraps GDK_KEY_LaunchE
-const KEYLaunchE = C.GDK_KEY_LaunchE
-// KEYLaunchF wraps GDK_KEY_LaunchF
-const KEYLaunchF = C.GDK_KEY_LaunchF
-// KEYLbelowdot wraps GDK_KEY_Lbelowdot
-const KEYLbelowdot = C.GDK_KEY_Lbelowdot
-// KEYLcaron wraps GDK_KEY_Lcaron
-const KEYLcaron = C.GDK_KEY_Lcaron
-// KEYLcedilla wraps GDK_KEY_Lcedilla
-const KEYLcedilla = C.GDK_KEY_Lcedilla
-// KEYLeft wraps GDK_KEY_Left
-const KEYLeft = C.GDK_KEY_Left
-// KEYLightBulb wraps GDK_KEY_LightBulb
-const KEYLightBulb = C.GDK_KEY_LightBulb
-// KEYLinefeed wraps GDK_KEY_Linefeed
-const KEYLinefeed = C.GDK_KEY_Linefeed
-// KEYLiraSign wraps GDK_KEY_LiraSign
-const KEYLiraSign = C.GDK_KEY_LiraSign
-// KEYLogGrabInfo wraps GDK_KEY_LogGrabInfo
-const KEYLogGrabInfo = C.GDK_KEY_LogGrabInfo
-// KEYLogOff wraps GDK_KEY_LogOff
-const KEYLogOff = C.GDK_KEY_LogOff
-// KEYLogWindowTree wraps GDK_KEY_LogWindowTree
-const KEYLogWindowTree = C.GDK_KEY_LogWindowTree
-// KEYLstroke wraps GDK_KEY_Lstroke
-const KEYLstroke = C.GDK_KEY_Lstroke
-// KEYM wraps GDK_KEY_M
-const KEYM = C.GDK_KEY_M
-// KEYMabovedot wraps GDK_KEY_Mabovedot
-const KEYMabovedot = C.GDK_KEY_Mabovedot
-// KEYMacedoniaDSE wraps GDK_KEY_Macedonia_DSE
-const KEYMacedoniaDSE = C.GDK_KEY_Macedonia_DSE
-// KEYMacedoniaGJE wraps GDK_KEY_Macedonia_GJE
-const KEYMacedoniaGJE = C.GDK_KEY_Macedonia_GJE
-// KEYMacedoniaKJE wraps GDK_KEY_Macedonia_KJE
-const KEYMacedoniaKJE = C.GDK_KEY_Macedonia_KJE
-// KEYMacedoniaDse wraps GDK_KEY_Macedonia_dse
-const KEYMacedoniaDse = C.GDK_KEY_Macedonia_dse
-// KEYMacedoniaGje wraps GDK_KEY_Macedonia_gje
-const KEYMacedoniaGje = C.GDK_KEY_Macedonia_gje
-// KEYMacedoniaKje wraps GDK_KEY_Macedonia_kje
-const KEYMacedoniaKje = C.GDK_KEY_Macedonia_kje
-// KEYMaeKoho wraps GDK_KEY_Mae_Koho
-const KEYMaeKoho = C.GDK_KEY_Mae_Koho
-// KEYMail wraps GDK_KEY_Mail
-const KEYMail = C.GDK_KEY_Mail
-// KEYMailForward wraps GDK_KEY_MailForward
-const KEYMailForward = C.GDK_KEY_MailForward
-// KEYMarket wraps GDK_KEY_Market
-const KEYMarket = C.GDK_KEY_Market
-// KEYMassyo wraps GDK_KEY_Massyo
-const KEYMassyo = C.GDK_KEY_Massyo
-// KEYMeeting wraps GDK_KEY_Meeting
-const KEYMeeting = C.GDK_KEY_Meeting
-// KEYMemo wraps GDK_KEY_Memo
-const KEYMemo = C.GDK_KEY_Memo
-// KEYMenu wraps GDK_KEY_Menu
-const KEYMenu = C.GDK_KEY_Menu
-// KEYMenuKB wraps GDK_KEY_MenuKB
-const KEYMenuKB = C.GDK_KEY_MenuKB
-// KEYMenuPB wraps GDK_KEY_MenuPB
-const KEYMenuPB = C.GDK_KEY_MenuPB
-// KEYMessenger wraps GDK_KEY_Messenger
-const KEYMessenger = C.GDK_KEY_Messenger
-// KEYMetaL wraps GDK_KEY_Meta_L
-const KEYMetaL = C.GDK_KEY_Meta_L
-// KEYMetaR wraps GDK_KEY_Meta_R
-const KEYMetaR = C.GDK_KEY_Meta_R
-// KEYMillSign wraps GDK_KEY_MillSign
-const KEYMillSign = C.GDK_KEY_MillSign
-// KEYModeLock wraps GDK_KEY_ModeLock
-const KEYModeLock = C.GDK_KEY_ModeLock
-// KEYModeSwitch wraps GDK_KEY_Mode_switch
-const KEYModeSwitch = C.GDK_KEY_Mode_switch
-// KEYMonBrightnessDown wraps GDK_KEY_MonBrightnessDown
-const KEYMonBrightnessDown = C.GDK_KEY_MonBrightnessDown
-// KEYMonBrightnessUp wraps GDK_KEY_MonBrightnessUp
-const KEYMonBrightnessUp = C.GDK_KEY_MonBrightnessUp
-// KEYMouseKeysAccelEnable wraps GDK_KEY_MouseKeys_Accel_Enable
-const KEYMouseKeysAccelEnable = C.GDK_KEY_MouseKeys_Accel_Enable
-// KEYMouseKeysEnable wraps GDK_KEY_MouseKeys_Enable
-const KEYMouseKeysEnable = C.GDK_KEY_MouseKeys_Enable
-// KEYMuhenkan wraps GDK_KEY_Muhenkan
-const KEYMuhenkan = C.GDK_KEY_Muhenkan
-// KEYMultiKey wraps GDK_KEY_Multi_key
-const KEYMultiKey = C.GDK_KEY_Multi_key
-// KEYMultipleCandidate wraps GDK_KEY_MultipleCandidate
-const KEYMultipleCandidate = C.GDK_KEY_MultipleCandidate
-// KEYMusic wraps GDK_KEY_Music
-const KEYMusic = C.GDK_KEY_Music
-// KEYMyComputer wraps GDK_KEY_MyComputer
-const KEYMyComputer = C.GDK_KEY_MyComputer
-// KEYMySites wraps GDK_KEY_MySites
-const KEYMySites = C.GDK_KEY_MySites
-// KEYN wraps GDK_KEY_N
-const KEYN = C.GDK_KEY_N
-// KEYNacute wraps GDK_KEY_Nacute
-const KEYNacute = C.GDK_KEY_Nacute
-// KEYNairaSign wraps GDK_KEY_NairaSign
-const KEYNairaSign = C.GDK_KEY_NairaSign
-// KEYNcaron wraps GDK_KEY_Ncaron
-const KEYNcaron = C.GDK_KEY_Ncaron
-// KEYNcedilla wraps GDK_KEY_Ncedilla
-const KEYNcedilla = C.GDK_KEY_Ncedilla
-// NewKEY wraps GDK_KEY_New
-const NewKEY = C.GDK_KEY_New
-// KEYNewSheqelSign wraps GDK_KEY_NewSheqelSign
-const KEYNewSheqelSign = C.GDK_KEY_NewSheqelSign
-// KEYNews wraps GDK_KEY_News
-const KEYNews = C.GDK_KEY_News
-// KEYNext wraps GDK_KEY_Next
-const KEYNext = C.GDK_KEY_Next
-// KEYNextVMode wraps GDK_KEY_Next_VMode
-const KEYNextVMode = C.GDK_KEY_Next_VMode
-// KEYNextVirtualScreen wraps GDK_KEY_Next_Virtual_Screen
-const KEYNextVirtualScreen = C.GDK_KEY_Next_Virtual_Screen
-// KEYNtilde wraps GDK_KEY_Ntilde
-const KEYNtilde = C.GDK_KEY_Ntilde
-// KEYNumLock wraps GDK_KEY_Num_Lock
-const KEYNumLock = C.GDK_KEY_Num_Lock
-// KEYO wraps GDK_KEY_O
-const KEYO = C.GDK_KEY_O
-// KEYOE wraps GDK_KEY_OE
-const KEYOE = C.GDK_KEY_OE
-// KEYOacute wraps GDK_KEY_Oacute
-const KEYOacute = C.GDK_KEY_Oacute
-// KEYObarred wraps GDK_KEY_Obarred
-const KEYObarred = C.GDK_KEY_Obarred
-// KEYObelowdot wraps GDK_KEY_Obelowdot
-const KEYObelowdot = C.GDK_KEY_Obelowdot
-// KEYOcaron wraps GDK_KEY_Ocaron
-const KEYOcaron = C.GDK_KEY_Ocaron
-// KEYOcircumflex wraps GDK_KEY_Ocircumflex
-const KEYOcircumflex = C.GDK_KEY_Ocircumflex
-// KEYOcircumflexacute wraps GDK_KEY_Ocircumflexacute
-const KEYOcircumflexacute = C.GDK_KEY_Ocircumflexacute
-// KEYOcircumflexbelowdot wraps GDK_KEY_Ocircumflexbelowdot
-const KEYOcircumflexbelowdot = C.GDK_KEY_Ocircumflexbelowdot
-// KEYOcircumflexgrave wraps GDK_KEY_Ocircumflexgrave
-const KEYOcircumflexgrave = C.GDK_KEY_Ocircumflexgrave
-// KEYOcircumflexhook wraps GDK_KEY_Ocircumflexhook
-const KEYOcircumflexhook = C.GDK_KEY_Ocircumflexhook
-// KEYOcircumflextilde wraps GDK_KEY_Ocircumflextilde
-const KEYOcircumflextilde = C.GDK_KEY_Ocircumflextilde
-// KEYOdiaeresis wraps GDK_KEY_Odiaeresis
-const KEYOdiaeresis = C.GDK_KEY_Odiaeresis
-// KEYOdoubleacute wraps GDK_KEY_Odoubleacute
-const KEYOdoubleacute = C.GDK_KEY_Odoubleacute
-// KEYOfficeHome wraps GDK_KEY_OfficeHome
-const KEYOfficeHome = C.GDK_KEY_OfficeHome
-// KEYOgrave wraps GDK_KEY_Ograve
-const KEYOgrave = C.GDK_KEY_Ograve
-// KEYOhook wraps GDK_KEY_Ohook
-const KEYOhook = C.GDK_KEY_Ohook
-// KEYOhorn wraps GDK_KEY_Ohorn
-const KEYOhorn = C.GDK_KEY_Ohorn
-// KEYOhornacute wraps GDK_KEY_Ohornacute
-const KEYOhornacute = C.GDK_KEY_Ohornacute
-// KEYOhornbelowdot wraps GDK_KEY_Ohornbelowdot
-const KEYOhornbelowdot = C.GDK_KEY_Ohornbelowdot
-// KEYOhorngrave wraps GDK_KEY_Ohorngrave
-const KEYOhorngrave = C.GDK_KEY_Ohorngrave
-// KEYOhornhook wraps GDK_KEY_Ohornhook
-const KEYOhornhook = C.GDK_KEY_Ohornhook
-// KEYOhorntilde wraps GDK_KEY_Ohorntilde
-const KEYOhorntilde = C.GDK_KEY_Ohorntilde
-// KEYOmacron wraps GDK_KEY_Omacron
-const KEYOmacron = C.GDK_KEY_Omacron
-// KEYOoblique wraps GDK_KEY_Ooblique
-const KEYOoblique = C.GDK_KEY_Ooblique
-// KEYOpen wraps GDK_KEY_Open
-const KEYOpen = C.GDK_KEY_Open
-// KEYOpenURL wraps GDK_KEY_OpenURL
-const KEYOpenURL = C.GDK_KEY_OpenURL
-// KEYOption wraps GDK_KEY_Option
-const KEYOption = C.GDK_KEY_Option
-// KEYOslash wraps GDK_KEY_Oslash
-const KEYOslash = C.GDK_KEY_Oslash
-// KEYOtilde wraps GDK_KEY_Otilde
-const KEYOtilde = C.GDK_KEY_Otilde
-// KEYOverlay1Enable wraps GDK_KEY_Overlay1_Enable
-const KEYOverlay1Enable = C.GDK_KEY_Overlay1_Enable
-// KEYOverlay2Enable wraps GDK_KEY_Overlay2_Enable
-const KEYOverlay2Enable = C.GDK_KEY_Overlay2_Enable
-// KEYP wraps GDK_KEY_P
-const KEYP = C.GDK_KEY_P
-// KEYPabovedot wraps GDK_KEY_Pabovedot
-const KEYPabovedot = C.GDK_KEY_Pabovedot
-// KEYPageDown wraps GDK_KEY_Page_Down
-const KEYPageDown = C.GDK_KEY_Page_Down
-// KEYPageUp wraps GDK_KEY_Page_Up
-const KEYPageUp = C.GDK_KEY_Page_Up
-// KEYPaste wraps GDK_KEY_Paste
-const KEYPaste = C.GDK_KEY_Paste
-// KEYPause wraps GDK_KEY_Pause
-const KEYPause = C.GDK_KEY_Pause
-// KEYPesetaSign wraps GDK_KEY_PesetaSign
-const KEYPesetaSign = C.GDK_KEY_PesetaSign
-// KEYPhone wraps GDK_KEY_Phone
-const KEYPhone = C.GDK_KEY_Phone
-// KEYPictures wraps GDK_KEY_Pictures
-const KEYPictures = C.GDK_KEY_Pictures
-// KEYPointerAccelerate wraps GDK_KEY_Pointer_Accelerate
-const KEYPointerAccelerate = C.GDK_KEY_Pointer_Accelerate
-// KEYPointerButton1 wraps GDK_KEY_Pointer_Button1
-const KEYPointerButton1 = C.GDK_KEY_Pointer_Button1
-// KEYPointerButton2 wraps GDK_KEY_Pointer_Button2
-const KEYPointerButton2 = C.GDK_KEY_Pointer_Button2
-// KEYPointerButton3 wraps GDK_KEY_Pointer_Button3
-const KEYPointerButton3 = C.GDK_KEY_Pointer_Button3
-// KEYPointerButton4 wraps GDK_KEY_Pointer_Button4
-const KEYPointerButton4 = C.GDK_KEY_Pointer_Button4
-// KEYPointerButton5 wraps GDK_KEY_Pointer_Button5
-const KEYPointerButton5 = C.GDK_KEY_Pointer_Button5
-// KEYPointerButtonDflt wraps GDK_KEY_Pointer_Button_Dflt
-const KEYPointerButtonDflt = C.GDK_KEY_Pointer_Button_Dflt
-// KEYPointerDblClick1 wraps GDK_KEY_Pointer_DblClick1
-const KEYPointerDblClick1 = C.GDK_KEY_Pointer_DblClick1
-// KEYPointerDblClick2 wraps GDK_KEY_Pointer_DblClick2
-const KEYPointerDblClick2 = C.GDK_KEY_Pointer_DblClick2
-// KEYPointerDblClick3 wraps GDK_KEY_Pointer_DblClick3
-const KEYPointerDblClick3 = C.GDK_KEY_Pointer_DblClick3
-// KEYPointerDblClick4 wraps GDK_KEY_Pointer_DblClick4
-const KEYPointerDblClick4 = C.GDK_KEY_Pointer_DblClick4
-// KEYPointerDblClick5 wraps GDK_KEY_Pointer_DblClick5
-const KEYPointerDblClick5 = C.GDK_KEY_Pointer_DblClick5
-// KEYPointerDblClickDflt wraps GDK_KEY_Pointer_DblClick_Dflt
-const KEYPointerDblClickDflt = C.GDK_KEY_Pointer_DblClick_Dflt
-// KEYPointerDfltBtnNext wraps GDK_KEY_Pointer_DfltBtnNext
-const KEYPointerDfltBtnNext = C.GDK_KEY_Pointer_DfltBtnNext
-// KEYPointerDfltBtnPrev wraps GDK_KEY_Pointer_DfltBtnPrev
-const KEYPointerDfltBtnPrev = C.GDK_KEY_Pointer_DfltBtnPrev
-// KEYPointerDown wraps GDK_KEY_Pointer_Down
-const KEYPointerDown = C.GDK_KEY_Pointer_Down
-// KEYPointerDownLeft wraps GDK_KEY_Pointer_DownLeft
-const KEYPointerDownLeft = C.GDK_KEY_Pointer_DownLeft
-// KEYPointerDownRight wraps GDK_KEY_Pointer_DownRight
-const KEYPointerDownRight = C.GDK_KEY_Pointer_DownRight
-// KEYPointerDrag1 wraps GDK_KEY_Pointer_Drag1
-const KEYPointerDrag1 = C.GDK_KEY_Pointer_Drag1
-// KEYPointerDrag2 wraps GDK_KEY_Pointer_Drag2
-const KEYPointerDrag2 = C.GDK_KEY_Pointer_Drag2
-// KEYPointerDrag3 wraps GDK_KEY_Pointer_Drag3
-const KEYPointerDrag3 = C.GDK_KEY_Pointer_Drag3
-// KEYPointerDrag4 wraps GDK_KEY_Pointer_Drag4
-const KEYPointerDrag4 = C.GDK_KEY_Pointer_Drag4
-// KEYPointerDrag5 wraps GDK_KEY_Pointer_Drag5
-const KEYPointerDrag5 = C.GDK_KEY_Pointer_Drag5
-// KEYPointerDragDflt wraps GDK_KEY_Pointer_Drag_Dflt
-const KEYPointerDragDflt = C.GDK_KEY_Pointer_Drag_Dflt
-// KEYPointerEnableKeys wraps GDK_KEY_Pointer_EnableKeys
-const KEYPointerEnableKeys = C.GDK_KEY_Pointer_EnableKeys
-// KEYPointerLeft wraps GDK_KEY_Pointer_Left
-const KEYPointerLeft = C.GDK_KEY_Pointer_Left
-// KEYPointerRight wraps GDK_KEY_Pointer_Right
-const KEYPointerRight = C.GDK_KEY_Pointer_Right
-// KEYPointerUp wraps GDK_KEY_Pointer_Up
-const KEYPointerUp = C.GDK_KEY_Pointer_Up
-// KEYPointerUpLeft wraps GDK_KEY_Pointer_UpLeft
-const KEYPointerUpLeft = C.GDK_KEY_Pointer_UpLeft
-// KEYPointerUpRight wraps GDK_KEY_Pointer_UpRight
-const KEYPointerUpRight = C.GDK_KEY_Pointer_UpRight
-// KEYPowerDown wraps GDK_KEY_PowerDown
-const KEYPowerDown = C.GDK_KEY_PowerDown
-// KEYPowerOff wraps GDK_KEY_PowerOff
-const KEYPowerOff = C.GDK_KEY_PowerOff
-// KEYPrevVMode wraps GDK_KEY_Prev_VMode
-const KEYPrevVMode = C.GDK_KEY_Prev_VMode
-// KEYPrevVirtualScreen wraps GDK_KEY_Prev_Virtual_Screen
-const KEYPrevVirtualScreen = C.GDK_KEY_Prev_Virtual_Screen
-// KEYPreviousCandidate wraps GDK_KEY_PreviousCandidate
-const KEYPreviousCandidate = C.GDK_KEY_PreviousCandidate
-// KEYPrint wraps GDK_KEY_Print
-const KEYPrint = C.GDK_KEY_Print
-// KEYPrior wraps GDK_KEY_Prior
-const KEYPrior = C.GDK_KEY_Prior
-// KEYQ wraps GDK_KEY_Q
-const KEYQ = C.GDK_KEY_Q
-// KEYR wraps GDK_KEY_R
-const KEYR = C.GDK_KEY_R
-// KEYR1 wraps GDK_KEY_R1
-const KEYR1 = C.GDK_KEY_R1
-// KEYR10 wraps GDK_KEY_R10
-const KEYR10 = C.GDK_KEY_R10
-// KEYR11 wraps GDK_KEY_R11
-const KEYR11 = C.GDK_KEY_R11
-// KEYR12 wraps GDK_KEY_R12
-const KEYR12 = C.GDK_KEY_R12
-// KEYR13 wraps GDK_KEY_R13
-const KEYR13 = C.GDK_KEY_R13
-// KEYR14 wraps GDK_KEY_R14
-const KEYR14 = C.GDK_KEY_R14
-// KEYR15 wraps GDK_KEY_R15
-const KEYR15 = C.GDK_KEY_R15
-// KEYR2 wraps GDK_KEY_R2
-const KEYR2 = C.GDK_KEY_R2
-// KEYR3 wraps GDK_KEY_R3
-const KEYR3 = C.GDK_KEY_R3
-// KEYR4 wraps GDK_KEY_R4
-const KEYR4 = C.GDK_KEY_R4
-// KEYR5 wraps GDK_KEY_R5
-const KEYR5 = C.GDK_KEY_R5
-// KEYR6 wraps GDK_KEY_R6
-const KEYR6 = C.GDK_KEY_R6
-// KEYR7 wraps GDK_KEY_R7
-const KEYR7 = C.GDK_KEY_R7
-// KEYR8 wraps GDK_KEY_R8
-const KEYR8 = C.GDK_KEY_R8
-// KEYR9 wraps GDK_KEY_R9
-const KEYR9 = C.GDK_KEY_R9
-// KEYRFKill wraps GDK_KEY_RFKill
-const KEYRFKill = C.GDK_KEY_RFKill
-// KEYRacute wraps GDK_KEY_Racute
-const KEYRacute = C.GDK_KEY_Racute
-// KEYRcaron wraps GDK_KEY_Rcaron
-const KEYRcaron = C.GDK_KEY_Rcaron
-// KEYRcedilla wraps GDK_KEY_Rcedilla
-const KEYRcedilla = C.GDK_KEY_Rcedilla
-// KEYRed wraps GDK_KEY_Red
-const KEYRed = C.GDK_KEY_Red
-// KEYRedo wraps GDK_KEY_Redo
-const KEYRedo = C.GDK_KEY_Redo
-// KEYRefresh wraps GDK_KEY_Refresh
-const KEYRefresh = C.GDK_KEY_Refresh
-// KEYReload wraps GDK_KEY_Reload
-const KEYReload = C.GDK_KEY_Reload
-// KEYRepeatKeysEnable wraps GDK_KEY_RepeatKeys_Enable
-const KEYRepeatKeysEnable = C.GDK_KEY_RepeatKeys_Enable
-// KEYReply wraps GDK_KEY_Reply
-const KEYReply = C.GDK_KEY_Reply
-// KEYReturn wraps GDK_KEY_Return
-const KEYReturn = C.GDK_KEY_Return
-// KEYRight wraps GDK_KEY_Right
-const KEYRight = C.GDK_KEY_Right
-// KEYRockerDown wraps GDK_KEY_RockerDown
-const KEYRockerDown = C.GDK_KEY_RockerDown
-// KEYRockerEnter wraps GDK_KEY_RockerEnter
-const KEYRockerEnter = C.GDK_KEY_RockerEnter
-// KEYRockerUp wraps GDK_KEY_RockerUp
-const KEYRockerUp = C.GDK_KEY_RockerUp
-// KEYRomaji wraps GDK_KEY_Romaji
-const KEYRomaji = C.GDK_KEY_Romaji
-// KEYRotateWindows wraps GDK_KEY_RotateWindows
-const KEYRotateWindows = C.GDK_KEY_RotateWindows
-// KEYRotationKB wraps GDK_KEY_RotationKB
-const KEYRotationKB = C.GDK_KEY_RotationKB
-// KEYRotationPB wraps GDK_KEY_RotationPB
-const KEYRotationPB = C.GDK_KEY_RotationPB
-// KEYRupeeSign wraps GDK_KEY_RupeeSign
-const KEYRupeeSign = C.GDK_KEY_RupeeSign
-// KEYS wraps GDK_KEY_S
-const KEYS = C.GDK_KEY_S
-// KEYSCHWA wraps GDK_KEY_SCHWA
-const KEYSCHWA = C.GDK_KEY_SCHWA
-// KEYSabovedot wraps GDK_KEY_Sabovedot
-const KEYSabovedot = C.GDK_KEY_Sabovedot
-// KEYSacute wraps GDK_KEY_Sacute
-const KEYSacute = C.GDK_KEY_Sacute
-// KEYSave wraps GDK_KEY_Save
-const KEYSave = C.GDK_KEY_Save
-// KEYScaron wraps GDK_KEY_Scaron
-const KEYScaron = C.GDK_KEY_Scaron
-// KEYScedilla wraps GDK_KEY_Scedilla
-const KEYScedilla = C.GDK_KEY_Scedilla
-// KEYScircumflex wraps GDK_KEY_Scircumflex
-const KEYScircumflex = C.GDK_KEY_Scircumflex
-// KEYScreenSaver wraps GDK_KEY_ScreenSaver
-const KEYScreenSaver = C.GDK_KEY_ScreenSaver
-// KEYScrollClick wraps GDK_KEY_ScrollClick
-const KEYScrollClick = C.GDK_KEY_ScrollClick
-// KEYScrollDown wraps GDK_KEY_ScrollDown
-const KEYScrollDown = C.GDK_KEY_ScrollDown
-// KEYScrollUp wraps GDK_KEY_ScrollUp
-const KEYScrollUp = C.GDK_KEY_ScrollUp
-// KEYScrollLock wraps GDK_KEY_Scroll_Lock
-const KEYScrollLock = C.GDK_KEY_Scroll_Lock
-// KEYSearch wraps GDK_KEY_Search
-const KEYSearch = C.GDK_KEY_Search
-// KEYSelect wraps GDK_KEY_Select
-const KEYSelect = C.GDK_KEY_Select
-// KEYSelectButton wraps GDK_KEY_SelectButton
-const KEYSelectButton = C.GDK_KEY_SelectButton
-// KEYSend wraps GDK_KEY_Send
-const KEYSend = C.GDK_KEY_Send
-// KEYSerbianDJE wraps GDK_KEY_Serbian_DJE
-const KEYSerbianDJE = C.GDK_KEY_Serbian_DJE
-// KEYSerbianDZE wraps GDK_KEY_Serbian_DZE
-const KEYSerbianDZE = C.GDK_KEY_Serbian_DZE
-// KEYSerbianJE wraps GDK_KEY_Serbian_JE
-const KEYSerbianJE = C.GDK_KEY_Serbian_JE
-// KEYSerbianLJE wraps GDK_KEY_Serbian_LJE
-const KEYSerbianLJE = C.GDK_KEY_Serbian_LJE
-// KEYSerbianNJE wraps GDK_KEY_Serbian_NJE
-const KEYSerbianNJE = C.GDK_KEY_Serbian_NJE
-// KEYSerbianTSHE wraps GDK_KEY_Serbian_TSHE
-const KEYSerbianTSHE = C.GDK_KEY_Serbian_TSHE
-// KEYSerbianDje wraps GDK_KEY_Serbian_dje
-const KEYSerbianDje = C.GDK_KEY_Serbian_dje
-// KEYSerbianDze wraps GDK_KEY_Serbian_dze
-const KEYSerbianDze = C.GDK_KEY_Serbian_dze
-// KEYSerbianJe wraps GDK_KEY_Serbian_je
-const KEYSerbianJe = C.GDK_KEY_Serbian_je
-// KEYSerbianLje wraps GDK_KEY_Serbian_lje
-const KEYSerbianLje = C.GDK_KEY_Serbian_lje
-// KEYSerbianNje wraps GDK_KEY_Serbian_nje
-const KEYSerbianNje = C.GDK_KEY_Serbian_nje
-// KEYSerbianTshe wraps GDK_KEY_Serbian_tshe
-const KEYSerbianTshe = C.GDK_KEY_Serbian_tshe
-// KEYShiftL wraps GDK_KEY_Shift_L
-const KEYShiftL = C.GDK_KEY_Shift_L
-// KEYShiftLock wraps GDK_KEY_Shift_Lock
-const KEYShiftLock = C.GDK_KEY_Shift_Lock
-// KEYShiftR wraps GDK_KEY_Shift_R
-const KEYShiftR = C.GDK_KEY_Shift_R
-// KEYShop wraps GDK_KEY_Shop
-const KEYShop = C.GDK_KEY_Shop
-// KEYSingleCandidate wraps GDK_KEY_SingleCandidate
-const KEYSingleCandidate = C.GDK_KEY_SingleCandidate
-// KEYSinhA wraps GDK_KEY_Sinh_a
-const KEYSinhA = C.GDK_KEY_Sinh_a
-// KEYSinhAa wraps GDK_KEY_Sinh_aa
-const KEYSinhAa = C.GDK_KEY_Sinh_aa
-// KEYSinhAa2 wraps GDK_KEY_Sinh_aa2
-const KEYSinhAa2 = C.GDK_KEY_Sinh_aa2
-// KEYSinhAe wraps GDK_KEY_Sinh_ae
-const KEYSinhAe = C.GDK_KEY_Sinh_ae
-// KEYSinhAe2 wraps GDK_KEY_Sinh_ae2
-const KEYSinhAe2 = C.GDK_KEY_Sinh_ae2
-// KEYSinhAee wraps GDK_KEY_Sinh_aee
-const KEYSinhAee = C.GDK_KEY_Sinh_aee
-// KEYSinhAee2 wraps GDK_KEY_Sinh_aee2
-const KEYSinhAee2 = C.GDK_KEY_Sinh_aee2
-// KEYSinhAi wraps GDK_KEY_Sinh_ai
-const KEYSinhAi = C.GDK_KEY_Sinh_ai
-// KEYSinhAi2 wraps GDK_KEY_Sinh_ai2
-const KEYSinhAi2 = C.GDK_KEY_Sinh_ai2
-// KEYSinhAl wraps GDK_KEY_Sinh_al
-const KEYSinhAl = C.GDK_KEY_Sinh_al
-// KEYSinhAu wraps GDK_KEY_Sinh_au
-const KEYSinhAu = C.GDK_KEY_Sinh_au
-// KEYSinhAu2 wraps GDK_KEY_Sinh_au2
-const KEYSinhAu2 = C.GDK_KEY_Sinh_au2
-// KEYSinhBa wraps GDK_KEY_Sinh_ba
-const KEYSinhBa = C.GDK_KEY_Sinh_ba
-// KEYSinhBha wraps GDK_KEY_Sinh_bha
-const KEYSinhBha = C.GDK_KEY_Sinh_bha
-// KEYSinhCa wraps GDK_KEY_Sinh_ca
-const KEYSinhCa = C.GDK_KEY_Sinh_ca
-// KEYSinhCha wraps GDK_KEY_Sinh_cha
-const KEYSinhCha = C.GDK_KEY_Sinh_cha
-// KEYSinhDda wraps GDK_KEY_Sinh_dda
-const KEYSinhDda = C.GDK_KEY_Sinh_dda
-// KEYSinhDdha wraps GDK_KEY_Sinh_ddha
-const KEYSinhDdha = C.GDK_KEY_Sinh_ddha
-// KEYSinhDha wraps GDK_KEY_Sinh_dha
-const KEYSinhDha = C.GDK_KEY_Sinh_dha
-// KEYSinhDhha wraps GDK_KEY_Sinh_dhha
-const KEYSinhDhha = C.GDK_KEY_Sinh_dhha
-// KEYSinhE wraps GDK_KEY_Sinh_e
-const KEYSinhE = C.GDK_KEY_Sinh_e
-// KEYSinhE2 wraps GDK_KEY_Sinh_e2
-const KEYSinhE2 = C.GDK_KEY_Sinh_e2
-// KEYSinhEe wraps GDK_KEY_Sinh_ee
-const KEYSinhEe = C.GDK_KEY_Sinh_ee
-// KEYSinhEe2 wraps GDK_KEY_Sinh_ee2
-const KEYSinhEe2 = C.GDK_KEY_Sinh_ee2
-// KEYSinhFa wraps GDK_KEY_Sinh_fa
-const KEYSinhFa = C.GDK_KEY_Sinh_fa
-// KEYSinhGa wraps GDK_KEY_Sinh_ga
-const KEYSinhGa = C.GDK_KEY_Sinh_ga
-// KEYSinhGha wraps GDK_KEY_Sinh_gha
-const KEYSinhGha = C.GDK_KEY_Sinh_gha
-// KEYSinhH2 wraps GDK_KEY_Sinh_h2
-const KEYSinhH2 = C.GDK_KEY_Sinh_h2
-// KEYSinhHa wraps GDK_KEY_Sinh_ha
-const KEYSinhHa = C.GDK_KEY_Sinh_ha
-// KEYSinhI wraps GDK_KEY_Sinh_i
-const KEYSinhI = C.GDK_KEY_Sinh_i
-// KEYSinhI2 wraps GDK_KEY_Sinh_i2
-const KEYSinhI2 = C.GDK_KEY_Sinh_i2
-// KEYSinhIi wraps GDK_KEY_Sinh_ii
-const KEYSinhIi = C.GDK_KEY_Sinh_ii
-// KEYSinhIi2 wraps GDK_KEY_Sinh_ii2
-const KEYSinhIi2 = C.GDK_KEY_Sinh_ii2
-// KEYSinhJa wraps GDK_KEY_Sinh_ja
-const KEYSinhJa = C.GDK_KEY_Sinh_ja
-// KEYSinhJha wraps GDK_KEY_Sinh_jha
-const KEYSinhJha = C.GDK_KEY_Sinh_jha
-// KEYSinhJnya wraps GDK_KEY_Sinh_jnya
-const KEYSinhJnya = C.GDK_KEY_Sinh_jnya
-// KEYSinhKa wraps GDK_KEY_Sinh_ka
-const KEYSinhKa = C.GDK_KEY_Sinh_ka
-// KEYSinhKha wraps GDK_KEY_Sinh_kha
-const KEYSinhKha = C.GDK_KEY_Sinh_kha
-// KEYSinhKunddaliya wraps GDK_KEY_Sinh_kunddaliya
-const KEYSinhKunddaliya = C.GDK_KEY_Sinh_kunddaliya
-// KEYSinhLa wraps GDK_KEY_Sinh_la
-const KEYSinhLa = C.GDK_KEY_Sinh_la
-// KEYSinhLla wraps GDK_KEY_Sinh_lla
-const KEYSinhLla = C.GDK_KEY_Sinh_lla
-// KEYSinhLu wraps GDK_KEY_Sinh_lu
-const KEYSinhLu = C.GDK_KEY_Sinh_lu
-// KEYSinhLu2 wraps GDK_KEY_Sinh_lu2
-const KEYSinhLu2 = C.GDK_KEY_Sinh_lu2
-// KEYSinhLuu wraps GDK_KEY_Sinh_luu
-const KEYSinhLuu = C.GDK_KEY_Sinh_luu
-// KEYSinhLuu2 wraps GDK_KEY_Sinh_luu2
-const KEYSinhLuu2 = C.GDK_KEY_Sinh_luu2
-// KEYSinhMa wraps GDK_KEY_Sinh_ma
-const KEYSinhMa = C.GDK_KEY_Sinh_ma
-// KEYSinhMba wraps GDK_KEY_Sinh_mba
-const KEYSinhMba = C.GDK_KEY_Sinh_mba
-// KEYSinhNa wraps GDK_KEY_Sinh_na
-const KEYSinhNa = C.GDK_KEY_Sinh_na
-// KEYSinhNdda wraps GDK_KEY_Sinh_ndda
-const KEYSinhNdda = C.GDK_KEY_Sinh_ndda
-// KEYSinhNdha wraps GDK_KEY_Sinh_ndha
-const KEYSinhNdha = C.GDK_KEY_Sinh_ndha
-// KEYSinhNg wraps GDK_KEY_Sinh_ng
-const KEYSinhNg = C.GDK_KEY_Sinh_ng
-// KEYSinhNg2 wraps GDK_KEY_Sinh_ng2
-const KEYSinhNg2 = C.GDK_KEY_Sinh_ng2
-// KEYSinhNga wraps GDK_KEY_Sinh_nga
-const KEYSinhNga = C.GDK_KEY_Sinh_nga
-// KEYSinhNja wraps GDK_KEY_Sinh_nja
-const KEYSinhNja = C.GDK_KEY_Sinh_nja
-// KEYSinhNna wraps GDK_KEY_Sinh_nna
-const KEYSinhNna = C.GDK_KEY_Sinh_nna
-// KEYSinhNya wraps GDK_KEY_Sinh_nya
-const KEYSinhNya = C.GDK_KEY_Sinh_nya
-// KEYSinhO wraps GDK_KEY_Sinh_o
-const KEYSinhO = C.GDK_KEY_Sinh_o
-// KEYSinhO2 wraps GDK_KEY_Sinh_o2
-const KEYSinhO2 = C.GDK_KEY_Sinh_o2
-// KEYSinhOo wraps GDK_KEY_Sinh_oo
-const KEYSinhOo = C.GDK_KEY_Sinh_oo
-// KEYSinhOo2 wraps GDK_KEY_Sinh_oo2
-const KEYSinhOo2 = C.GDK_KEY_Sinh_oo2
-// KEYSinhPa wraps GDK_KEY_Sinh_pa
-const KEYSinhPa = C.GDK_KEY_Sinh_pa
-// KEYSinhPha wraps GDK_KEY_Sinh_pha
-const KEYSinhPha = C.GDK_KEY_Sinh_pha
-// KEYSinhRa wraps GDK_KEY_Sinh_ra
-const KEYSinhRa = C.GDK_KEY_Sinh_ra
-// KEYSinhRi wraps GDK_KEY_Sinh_ri
-const KEYSinhRi = C.GDK_KEY_Sinh_ri
-// KEYSinhRii wraps GDK_KEY_Sinh_rii
-const KEYSinhRii = C.GDK_KEY_Sinh_rii
-// KEYSinhRu2 wraps GDK_KEY_Sinh_ru2
-const KEYSinhRu2 = C.GDK_KEY_Sinh_ru2
-// KEYSinhRuu2 wraps GDK_KEY_Sinh_ruu2
-const KEYSinhRuu2 = C.GDK_KEY_Sinh_ruu2
-// KEYSinhSa wraps GDK_KEY_Sinh_sa
-const KEYSinhSa = C.GDK_KEY_Sinh_sa
-// KEYSinhSHA wraps GDK_KEY_Sinh_sha
-const KEYSinhSHA = C.GDK_KEY_Sinh_sha
-// KEYSinhSsha wraps GDK_KEY_Sinh_ssha
-const KEYSinhSsha = C.GDK_KEY_Sinh_ssha
-// KEYSinhTha wraps GDK_KEY_Sinh_tha
-const KEYSinhTha = C.GDK_KEY_Sinh_tha
-// KEYSinhThha wraps GDK_KEY_Sinh_thha
-const KEYSinhThha = C.GDK_KEY_Sinh_thha
-// KEYSinhTta wraps GDK_KEY_Sinh_tta
-const KEYSinhTta = C.GDK_KEY_Sinh_tta
-// KEYSinhTtha wraps GDK_KEY_Sinh_ttha
-const KEYSinhTtha = C.GDK_KEY_Sinh_ttha
-// KEYSinhU wraps GDK_KEY_Sinh_u
-const KEYSinhU = C.GDK_KEY_Sinh_u
-// KEYSinhU2 wraps GDK_KEY_Sinh_u2
-const KEYSinhU2 = C.GDK_KEY_Sinh_u2
-// KEYSinhUu wraps GDK_KEY_Sinh_uu
-const KEYSinhUu = C.GDK_KEY_Sinh_uu
-// KEYSinhUu2 wraps GDK_KEY_Sinh_uu2
-const KEYSinhUu2 = C.GDK_KEY_Sinh_uu2
-// KEYSinhVa wraps GDK_KEY_Sinh_va
-const KEYSinhVa = C.GDK_KEY_Sinh_va
-// KEYSinhYa wraps GDK_KEY_Sinh_ya
-const KEYSinhYa = C.GDK_KEY_Sinh_ya
-// KEYSleep wraps GDK_KEY_Sleep
-const KEYSleep = C.GDK_KEY_Sleep
-// KEYSlowKeysEnable wraps GDK_KEY_SlowKeys_Enable
-const KEYSlowKeysEnable = C.GDK_KEY_SlowKeys_Enable
-// KEYSpell wraps GDK_KEY_Spell
-const KEYSpell = C.GDK_KEY_Spell
-// KEYSplitScreen wraps GDK_KEY_SplitScreen
-const KEYSplitScreen = C.GDK_KEY_SplitScreen
-// KEYStandby wraps GDK_KEY_Standby
-const KEYStandby = C.GDK_KEY_Standby
-// KEYStart wraps GDK_KEY_Start
-const KEYStart = C.GDK_KEY_Start
-// KEYStickyKeysEnable wraps GDK_KEY_StickyKeys_Enable
-const KEYStickyKeysEnable = C.GDK_KEY_StickyKeys_Enable
-// KEYStop wraps GDK_KEY_Stop
-const KEYStop = C.GDK_KEY_Stop
-// KEYSubtitle wraps GDK_KEY_Subtitle
-const KEYSubtitle = C.GDK_KEY_Subtitle
-// KEYSuperL wraps GDK_KEY_Super_L
-const KEYSuperL = C.GDK_KEY_Super_L
-// KEYSuperR wraps GDK_KEY_Super_R
-const KEYSuperR = C.GDK_KEY_Super_R
-// KEYSupport wraps GDK_KEY_Support
-const KEYSupport = C.GDK_KEY_Support
-// KEYSuspend wraps GDK_KEY_Suspend
-const KEYSuspend = C.GDK_KEY_Suspend
-// KEYSwitchVT1 wraps GDK_KEY_Switch_VT_1
-const KEYSwitchVT1 = C.GDK_KEY_Switch_VT_1
-// KEYSwitchVT10 wraps GDK_KEY_Switch_VT_10
-const KEYSwitchVT10 = C.GDK_KEY_Switch_VT_10
-// KEYSwitchVT11 wraps GDK_KEY_Switch_VT_11
-const KEYSwitchVT11 = C.GDK_KEY_Switch_VT_11
-// KEYSwitchVT12 wraps GDK_KEY_Switch_VT_12
-const KEYSwitchVT12 = C.GDK_KEY_Switch_VT_12
-// KEYSwitchVT2 wraps GDK_KEY_Switch_VT_2
-const KEYSwitchVT2 = C.GDK_KEY_Switch_VT_2
-// KEYSwitchVT3 wraps GDK_KEY_Switch_VT_3
-const KEYSwitchVT3 = C.GDK_KEY_Switch_VT_3
-// KEYSwitchVT4 wraps GDK_KEY_Switch_VT_4
-const KEYSwitchVT4 = C.GDK_KEY_Switch_VT_4
-// KEYSwitchVT5 wraps GDK_KEY_Switch_VT_5
-const KEYSwitchVT5 = C.GDK_KEY_Switch_VT_5
-// KEYSwitchVT6 wraps GDK_KEY_Switch_VT_6
-const KEYSwitchVT6 = C.GDK_KEY_Switch_VT_6
-// KEYSwitchVT7 wraps GDK_KEY_Switch_VT_7
-const KEYSwitchVT7 = C.GDK_KEY_Switch_VT_7
-// KEYSwitchVT8 wraps GDK_KEY_Switch_VT_8
-const KEYSwitchVT8 = C.GDK_KEY_Switch_VT_8
-// KEYSwitchVT9 wraps GDK_KEY_Switch_VT_9
-const KEYSwitchVT9 = C.GDK_KEY_Switch_VT_9
-// KEYSysReq wraps GDK_KEY_Sys_Req
-const KEYSysReq = C.GDK_KEY_Sys_Req
-// KEYT wraps GDK_KEY_T
-const KEYT = C.GDK_KEY_T
-// KEYTHORN wraps GDK_KEY_THORN
-const KEYTHORN = C.GDK_KEY_THORN
-// KEYTab wraps GDK_KEY_Tab
-const KEYTab = C.GDK_KEY_Tab
-// KEYTabovedot wraps GDK_KEY_Tabovedot
-const KEYTabovedot = C.GDK_KEY_Tabovedot
-// KEYTaskPane wraps GDK_KEY_TaskPane
-const KEYTaskPane = C.GDK_KEY_TaskPane
-// KEYTcaron wraps GDK_KEY_Tcaron
-const KEYTcaron = C.GDK_KEY_Tcaron
-// KEYTcedilla wraps GDK_KEY_Tcedilla
-const KEYTcedilla = C.GDK_KEY_Tcedilla
-// KEYTerminal wraps GDK_KEY_Terminal
-const KEYTerminal = C.GDK_KEY_Terminal
-// KEYTerminateServer wraps GDK_KEY_Terminate_Server
-const KEYTerminateServer = C.GDK_KEY_Terminate_Server
-// KEYThaiBaht wraps GDK_KEY_Thai_baht
-const KEYThaiBaht = C.GDK_KEY_Thai_baht
-// KEYThaiBobaimai wraps GDK_KEY_Thai_bobaimai
-const KEYThaiBobaimai = C.GDK_KEY_Thai_bobaimai
-// KEYThaiChochan wraps GDK_KEY_Thai_chochan
-const KEYThaiChochan = C.GDK_KEY_Thai_chochan
-// KEYThaiChochang wraps GDK_KEY_Thai_chochang
-const KEYThaiChochang = C.GDK_KEY_Thai_chochang
-// KEYThaiChoching wraps GDK_KEY_Thai_choching
-const KEYThaiChoching = C.GDK_KEY_Thai_choching
-// KEYThaiChochoe wraps GDK_KEY_Thai_chochoe
-const KEYThaiChochoe = C.GDK_KEY_Thai_chochoe
-// KEYThaiDochada wraps GDK_KEY_Thai_dochada
-const KEYThaiDochada = C.GDK_KEY_Thai_dochada
-// KEYThaiDodek wraps GDK_KEY_Thai_dodek
-const KEYThaiDodek = C.GDK_KEY_Thai_dodek
-// KEYThaiFofa wraps GDK_KEY_Thai_fofa
-const KEYThaiFofa = C.GDK_KEY_Thai_fofa
-// KEYThaiFofan wraps GDK_KEY_Thai_fofan
-const KEYThaiFofan = C.GDK_KEY_Thai_fofan
-// KEYThaiHohip wraps GDK_KEY_Thai_hohip
-const KEYThaiHohip = C.GDK_KEY_Thai_hohip
-// KEYThaiHonokhuk wraps GDK_KEY_Thai_honokhuk
-const KEYThaiHonokhuk = C.GDK_KEY_Thai_honokhuk
-// KEYThaiKhokhai wraps GDK_KEY_Thai_khokhai
-const KEYThaiKhokhai = C.GDK_KEY_Thai_khokhai
-// KEYThaiKhokhon wraps GDK_KEY_Thai_khokhon
-const KEYThaiKhokhon = C.GDK_KEY_Thai_khokhon
-// KEYThaiKhokhuat wraps GDK_KEY_Thai_khokhuat
-const KEYThaiKhokhuat = C.GDK_KEY_Thai_khokhuat
-// KEYThaiKhokhwai wraps GDK_KEY_Thai_khokhwai
-const KEYThaiKhokhwai = C.GDK_KEY_Thai_khokhwai
-// KEYThaiKhorakhang wraps GDK_KEY_Thai_khorakhang
-const KEYThaiKhorakhang = C.GDK_KEY_Thai_khorakhang
-// KEYThaiKokai wraps GDK_KEY_Thai_kokai
-const KEYThaiKokai = C.GDK_KEY_Thai_kokai
-// KEYThaiLakkhangyao wraps GDK_KEY_Thai_lakkhangyao
-const KEYThaiLakkhangyao = C.GDK_KEY_Thai_lakkhangyao
-// KEYThaiLekchet wraps GDK_KEY_Thai_lekchet
-const KEYThaiLekchet = C.GDK_KEY_Thai_lekchet
-// KEYThaiLekha wraps GDK_KEY_Thai_lekha
-const KEYThaiLekha = C.GDK_KEY_Thai_lekha
-// KEYThaiLekhok wraps GDK_KEY_Thai_lekhok
-const KEYThaiLekhok = C.GDK_KEY_Thai_lekhok
-// KEYThaiLekkao wraps GDK_KEY_Thai_lekkao
-const KEYThaiLekkao = C.GDK_KEY_Thai_lekkao
-// KEYThaiLeknung wraps GDK_KEY_Thai_leknung
-const KEYThaiLeknung = C.GDK_KEY_Thai_leknung
-// KEYThaiLekpaet wraps GDK_KEY_Thai_lekpaet
-const KEYThaiLekpaet = C.GDK_KEY_Thai_lekpaet
-// KEYThaiLeksam wraps GDK_KEY_Thai_leksam
-const KEYThaiLeksam = C.GDK_KEY_Thai_leksam
-// KEYThaiLeksi wraps GDK_KEY_Thai_leksi
-const KEYThaiLeksi = C.GDK_KEY_Thai_leksi
-// KEYThaiLeksong wraps GDK_KEY_Thai_leksong
-const KEYThaiLeksong = C.GDK_KEY_Thai_leksong
-// KEYThaiLeksun wraps GDK_KEY_Thai_leksun
-const KEYThaiLeksun = C.GDK_KEY_Thai_leksun
-// KEYThaiLochula wraps GDK_KEY_Thai_lochula
-const KEYThaiLochula = C.GDK_KEY_Thai_lochula
-// KEYThaiLoling wraps GDK_KEY_Thai_loling
-const KEYThaiLoling = C.GDK_KEY_Thai_loling
-// KEYThaiLu wraps GDK_KEY_Thai_lu
-const KEYThaiLu = C.GDK_KEY_Thai_lu
-// KEYThaiMaichattawa wraps GDK_KEY_Thai_maichattawa
-const KEYThaiMaichattawa = C.GDK_KEY_Thai_maichattawa
-// KEYThaiMaiek wraps GDK_KEY_Thai_maiek
-const KEYThaiMaiek = C.GDK_KEY_Thai_maiek
-// KEYThaiMaihanakat wraps GDK_KEY_Thai_maihanakat
-const KEYThaiMaihanakat = C.GDK_KEY_Thai_maihanakat
-// KEYThaiMaihanakatMaitho wraps GDK_KEY_Thai_maihanakat_maitho
-const KEYThaiMaihanakatMaitho = C.GDK_KEY_Thai_maihanakat_maitho
-// KEYThaiMaitaikhu wraps GDK_KEY_Thai_maitaikhu
-const KEYThaiMaitaikhu = C.GDK_KEY_Thai_maitaikhu
-// KEYThaiMaitho wraps GDK_KEY_Thai_maitho
-const KEYThaiMaitho = C.GDK_KEY_Thai_maitho
-// KEYThaiMaitri wraps GDK_KEY_Thai_maitri
-const KEYThaiMaitri = C.GDK_KEY_Thai_maitri
-// KEYThaiMaiyamok wraps GDK_KEY_Thai_maiyamok
-const KEYThaiMaiyamok = C.GDK_KEY_Thai_maiyamok
-// KEYThaiMoma wraps GDK_KEY_Thai_moma
-const KEYThaiMoma = C.GDK_KEY_Thai_moma
-// KEYThaiNgongu wraps GDK_KEY_Thai_ngongu
-const KEYThaiNgongu = C.GDK_KEY_Thai_ngongu
-// KEYThaiNikhahit wraps GDK_KEY_Thai_nikhahit
-const KEYThaiNikhahit = C.GDK_KEY_Thai_nikhahit
-// KEYThaiNonen wraps GDK_KEY_Thai_nonen
-const KEYThaiNonen = C.GDK_KEY_Thai_nonen
-// KEYThaiNonu wraps GDK_KEY_Thai_nonu
-const KEYThaiNonu = C.GDK_KEY_Thai_nonu
-// KEYThaiOang wraps GDK_KEY_Thai_oang
-const KEYThaiOang = C.GDK_KEY_Thai_oang
-// KEYThaiPaiyannoi wraps GDK_KEY_Thai_paiyannoi
-const KEYThaiPaiyannoi = C.GDK_KEY_Thai_paiyannoi
-// KEYThaiPhinthu wraps GDK_KEY_Thai_phinthu
-const KEYThaiPhinthu = C.GDK_KEY_Thai_phinthu
-// KEYThaiPhophan wraps GDK_KEY_Thai_phophan
-const KEYThaiPhophan = C.GDK_KEY_Thai_phophan
-// KEYThaiPhophung wraps GDK_KEY_Thai_phophung
-const KEYThaiPhophung = C.GDK_KEY_Thai_phophung
-// KEYThaiPhosamphao wraps GDK_KEY_Thai_phosamphao
-const KEYThaiPhosamphao = C.GDK_KEY_Thai_phosamphao
-// KEYThaiPopla wraps GDK_KEY_Thai_popla
-const KEYThaiPopla = C.GDK_KEY_Thai_popla
-// KEYThaiRorua wraps GDK_KEY_Thai_rorua
-const KEYThaiRorua = C.GDK_KEY_Thai_rorua
-// KEYThaiRu wraps GDK_KEY_Thai_ru
-const KEYThaiRu = C.GDK_KEY_Thai_ru
-// KEYThaiSaraa wraps GDK_KEY_Thai_saraa
-const KEYThaiSaraa = C.GDK_KEY_Thai_saraa
-// KEYThaiSaraaa wraps GDK_KEY_Thai_saraaa
-const KEYThaiSaraaa = C.GDK_KEY_Thai_saraaa
-// KEYThaiSaraae wraps GDK_KEY_Thai_saraae
-const KEYThaiSaraae = C.GDK_KEY_Thai_saraae
-// KEYThaiSaraaimaimalai wraps GDK_KEY_Thai_saraaimaimalai
-const KEYThaiSaraaimaimalai = C.GDK_KEY_Thai_saraaimaimalai
-// KEYThaiSaraaimaimuan wraps GDK_KEY_Thai_saraaimaimuan
-const KEYThaiSaraaimaimuan = C.GDK_KEY_Thai_saraaimaimuan
-// KEYThaiSaraam wraps GDK_KEY_Thai_saraam
-const KEYThaiSaraam = C.GDK_KEY_Thai_saraam
-// KEYThaiSarae wraps GDK_KEY_Thai_sarae
-const KEYThaiSarae = C.GDK_KEY_Thai_sarae
-// KEYThaiSarai wraps GDK_KEY_Thai_sarai
-const KEYThaiSarai = C.GDK_KEY_Thai_sarai
-// KEYThaiSaraii wraps GDK_KEY_Thai_saraii
-const KEYThaiSaraii = C.GDK_KEY_Thai_saraii
-// KEYThaiSarao wraps GDK_KEY_Thai_sarao
-const KEYThaiSarao = C.GDK_KEY_Thai_sarao
-// KEYThaiSarau wraps GDK_KEY_Thai_sarau
-const KEYThaiSarau = C.GDK_KEY_Thai_sarau
-// KEYThaiSaraue wraps GDK_KEY_Thai_saraue
-const KEYThaiSaraue = C.GDK_KEY_Thai_saraue
-// KEYThaiSarauee wraps GDK_KEY_Thai_sarauee
-const KEYThaiSarauee = C.GDK_KEY_Thai_sarauee
-// KEYThaiSarauu wraps GDK_KEY_Thai_sarauu
-const KEYThaiSarauu = C.GDK_KEY_Thai_sarauu
-// KEYThaiSorusi wraps GDK_KEY_Thai_sorusi
-const KEYThaiSorusi = C.GDK_KEY_Thai_sorusi
-// KEYThaiSosala wraps GDK_KEY_Thai_sosala
-const KEYThaiSosala = C.GDK_KEY_Thai_sosala
-// KEYThaiSoso wraps GDK_KEY_Thai_soso
-const KEYThaiSoso = C.GDK_KEY_Thai_soso
-// KEYThaiSosua wraps GDK_KEY_Thai_sosua
-const KEYThaiSosua = C.GDK_KEY_Thai_sosua
-// KEYThaiThanthakhat wraps GDK_KEY_Thai_thanthakhat
-const KEYThaiThanthakhat = C.GDK_KEY_Thai_thanthakhat
-// KEYThaiThonangmontho wraps GDK_KEY_Thai_thonangmontho
-const KEYThaiThonangmontho = C.GDK_KEY_Thai_thonangmontho
-// KEYThaiThophuthao wraps GDK_KEY_Thai_thophuthao
-const KEYThaiThophuthao = C.GDK_KEY_Thai_thophuthao
-// KEYThaiThothahan wraps GDK_KEY_Thai_thothahan
-const KEYThaiThothahan = C.GDK_KEY_Thai_thothahan
-// KEYThaiThothan wraps GDK_KEY_Thai_thothan
-const KEYThaiThothan = C.GDK_KEY_Thai_thothan
-// KEYThaiThothong wraps GDK_KEY_Thai_thothong
-const KEYThaiThothong = C.GDK_KEY_Thai_thothong
-// KEYThaiThothung wraps GDK_KEY_Thai_thothung
-const KEYThaiThothung = C.GDK_KEY_Thai_thothung
-// KEYThaiTopatak wraps GDK_KEY_Thai_topatak
-const KEYThaiTopatak = C.GDK_KEY_Thai_topatak
-// KEYThaiTotao wraps GDK_KEY_Thai_totao
-const KEYThaiTotao = C.GDK_KEY_Thai_totao
-// KEYThaiWowaen wraps GDK_KEY_Thai_wowaen
-const KEYThaiWowaen = C.GDK_KEY_Thai_wowaen
-// KEYThaiYoyak wraps GDK_KEY_Thai_yoyak
-const KEYThaiYoyak = C.GDK_KEY_Thai_yoyak
-// KEYThaiYoying wraps GDK_KEY_Thai_yoying
-const KEYThaiYoying = C.GDK_KEY_Thai_yoying
-// KEYThorn wraps GDK_KEY_Thorn
-const KEYThorn = C.GDK_KEY_Thorn
-// KEYTime wraps GDK_KEY_Time
-const KEYTime = C.GDK_KEY_Time
-// KEYToDoList wraps GDK_KEY_ToDoList
-const KEYToDoList = C.GDK_KEY_ToDoList
-// KEYTools wraps GDK_KEY_Tools
-const KEYTools = C.GDK_KEY_Tools
-// KEYTopMenu wraps GDK_KEY_TopMenu
-const KEYTopMenu = C.GDK_KEY_TopMenu
-// KEYTouchpadOff wraps GDK_KEY_TouchpadOff
-const KEYTouchpadOff = C.GDK_KEY_TouchpadOff
-// KEYTouchpadOn wraps GDK_KEY_TouchpadOn
-const KEYTouchpadOn = C.GDK_KEY_TouchpadOn
-// KEYTouchpadToggle wraps GDK_KEY_TouchpadToggle
-const KEYTouchpadToggle = C.GDK_KEY_TouchpadToggle
-// KEYTouroku wraps GDK_KEY_Touroku
-const KEYTouroku = C.GDK_KEY_Touroku
-// KEYTravel wraps GDK_KEY_Travel
-const KEYTravel = C.GDK_KEY_Travel
-// KEYTslash wraps GDK_KEY_Tslash
-const KEYTslash = C.GDK_KEY_Tslash
-// KEYU wraps GDK_KEY_U
-const KEYU = C.GDK_KEY_U
-// KEYUWB wraps GDK_KEY_UWB
-const KEYUWB = C.GDK_KEY_UWB
-// KEYUacute wraps GDK_KEY_Uacute
-const KEYUacute = C.GDK_KEY_Uacute
-// KEYUbelowdot wraps GDK_KEY_Ubelowdot
-const KEYUbelowdot = C.GDK_KEY_Ubelowdot
-// KEYUbreve wraps GDK_KEY_Ubreve
-const KEYUbreve = C.GDK_KEY_Ubreve
-// KEYUcircumflex wraps GDK_KEY_Ucircumflex
-const KEYUcircumflex = C.GDK_KEY_Ucircumflex
-// KEYUdiaeresis wraps GDK_KEY_Udiaeresis
-const KEYUdiaeresis = C.GDK_KEY_Udiaeresis
-// KEYUdoubleacute wraps GDK_KEY_Udoubleacute
-const KEYUdoubleacute = C.GDK_KEY_Udoubleacute
-// KEYUgrave wraps GDK_KEY_Ugrave
-const KEYUgrave = C.GDK_KEY_Ugrave
-// KEYUhook wraps GDK_KEY_Uhook
-const KEYUhook = C.GDK_KEY_Uhook
-// KEYUhorn wraps GDK_KEY_Uhorn
-const KEYUhorn = C.GDK_KEY_Uhorn
-// KEYUhornacute wraps GDK_KEY_Uhornacute
-const KEYUhornacute = C.GDK_KEY_Uhornacute
-// KEYUhornbelowdot wraps GDK_KEY_Uhornbelowdot
-const KEYUhornbelowdot = C.GDK_KEY_Uhornbelowdot
-// KEYUhorngrave wraps GDK_KEY_Uhorngrave
-const KEYUhorngrave = C.GDK_KEY_Uhorngrave
-// KEYUhornhook wraps GDK_KEY_Uhornhook
-const KEYUhornhook = C.GDK_KEY_Uhornhook
-// KEYUhorntilde wraps GDK_KEY_Uhorntilde
-const KEYUhorntilde = C.GDK_KEY_Uhorntilde
-// KEYUkrainianGHEWITHUPTURN wraps GDK_KEY_Ukrainian_GHE_WITH_UPTURN
-const KEYUkrainianGHEWITHUPTURN = C.GDK_KEY_Ukrainian_GHE_WITH_UPTURN
-// KEYUkrainianI wraps GDK_KEY_Ukrainian_I
-const KEYUkrainianI = C.GDK_KEY_Ukrainian_I
-// KEYUkrainianIE wraps GDK_KEY_Ukrainian_IE
-const KEYUkrainianIE = C.GDK_KEY_Ukrainian_IE
-// KEYUkrainianYI wraps GDK_KEY_Ukrainian_YI
-const KEYUkrainianYI = C.GDK_KEY_Ukrainian_YI
-// KEYUkrainianGheWithUpturn wraps GDK_KEY_Ukrainian_ghe_with_upturn
-const KEYUkrainianGheWithUpturn = C.GDK_KEY_Ukrainian_ghe_with_upturn
-// KEYUkrainianI wraps GDK_KEY_Ukrainian_i
-const KEYUkrainianI = C.GDK_KEY_Ukrainian_i
-// KEYUkrainianIe wraps GDK_KEY_Ukrainian_ie
-const KEYUkrainianIe = C.GDK_KEY_Ukrainian_ie
-// KEYUkrainianYi wraps GDK_KEY_Ukrainian_yi
-const KEYUkrainianYi = C.GDK_KEY_Ukrainian_yi
-// KEYUkranianI wraps GDK_KEY_Ukranian_I
-const KEYUkranianI = C.GDK_KEY_Ukranian_I
-// KEYUkranianJE wraps GDK_KEY_Ukranian_JE
-const KEYUkranianJE = C.GDK_KEY_Ukranian_JE
-// KEYUkranianYI wraps GDK_KEY_Ukranian_YI
-const KEYUkranianYI = C.GDK_KEY_Ukranian_YI
-// KEYUkranianI wraps GDK_KEY_Ukranian_i
-const KEYUkranianI = C.GDK_KEY_Ukranian_i
-// KEYUkranianJe wraps GDK_KEY_Ukranian_je
-const KEYUkranianJe = C.GDK_KEY_Ukranian_je
-// KEYUkranianYi wraps GDK_KEY_Ukranian_yi
-const KEYUkranianYi = C.GDK_KEY_Ukranian_yi
-// KEYUmacron wraps GDK_KEY_Umacron
-const KEYUmacron = C.GDK_KEY_Umacron
-// KEYUndo wraps GDK_KEY_Undo
-const KEYUndo = C.GDK_KEY_Undo
-// KEYUngrab wraps GDK_KEY_Ungrab
-const KEYUngrab = C.GDK_KEY_Ungrab
-// KEYUogonek wraps GDK_KEY_Uogonek
-const KEYUogonek = C.GDK_KEY_Uogonek
-// KEYUp wraps GDK_KEY_Up
-const KEYUp = C.GDK_KEY_Up
-// KEYUring wraps GDK_KEY_Uring
-const KEYUring = C.GDK_KEY_Uring
-// KEYUser1KB wraps GDK_KEY_User1KB
-const KEYUser1KB = C.GDK_KEY_User1KB
-// KEYUser2KB wraps GDK_KEY_User2KB
-const KEYUser2KB = C.GDK_KEY_User2KB
-// KEYUserPB wraps GDK_KEY_UserPB
-const KEYUserPB = C.GDK_KEY_UserPB
-// KEYUtilde wraps GDK_KEY_Utilde
-const KEYUtilde = C.GDK_KEY_Utilde
-// KEYV wraps GDK_KEY_V
-const KEYV = C.GDK_KEY_V
-// KEYVendorHome wraps GDK_KEY_VendorHome
-const KEYVendorHome = C.GDK_KEY_VendorHome
-// KEYVideo wraps GDK_KEY_Video
-const KEYVideo = C.GDK_KEY_Video
-// KEYView wraps GDK_KEY_View
-const KEYView = C.GDK_KEY_View
-// KEYVoidSymbol wraps GDK_KEY_VoidSymbol
-const KEYVoidSymbol = C.GDK_KEY_VoidSymbol
-// KEYW wraps GDK_KEY_W
-const KEYW = C.GDK_KEY_W
-// KEYWLAN wraps GDK_KEY_WLAN
-const KEYWLAN = C.GDK_KEY_WLAN
-// KEYWWAN wraps GDK_KEY_WWAN
-const KEYWWAN = C.GDK_KEY_WWAN
-// KEYWWW wraps GDK_KEY_WWW
-const KEYWWW = C.GDK_KEY_WWW
-// KEYWacute wraps GDK_KEY_Wacute
-const KEYWacute = C.GDK_KEY_Wacute
-// KEYWakeUp wraps GDK_KEY_WakeUp
-const KEYWakeUp = C.GDK_KEY_WakeUp
-// KEYWcircumflex wraps GDK_KEY_Wcircumflex
-const KEYWcircumflex = C.GDK_KEY_Wcircumflex
-// KEYWdiaeresis wraps GDK_KEY_Wdiaeresis
-const KEYWdiaeresis = C.GDK_KEY_Wdiaeresis
-// KEYWebCam wraps GDK_KEY_WebCam
-const KEYWebCam = C.GDK_KEY_WebCam
-// KEYWgrave wraps GDK_KEY_Wgrave
-const KEYWgrave = C.GDK_KEY_Wgrave
-// KEYWheelButton wraps GDK_KEY_WheelButton
-const KEYWheelButton = C.GDK_KEY_WheelButton
-// KEYWindowClear wraps GDK_KEY_WindowClear
-const KEYWindowClear = C.GDK_KEY_WindowClear
-// KEYWonSign wraps GDK_KEY_WonSign
-const KEYWonSign = C.GDK_KEY_WonSign
-// KEYWord wraps GDK_KEY_Word
-const KEYWord = C.GDK_KEY_Word
-// KEYX wraps GDK_KEY_X
-const KEYX = C.GDK_KEY_X
-// KEYXabovedot wraps GDK_KEY_Xabovedot
-const KEYXabovedot = C.GDK_KEY_Xabovedot
-// KEYXfer wraps GDK_KEY_Xfer
-const KEYXfer = C.GDK_KEY_Xfer
-// KEYY wraps GDK_KEY_Y
-const KEYY = C.GDK_KEY_Y
-// KEYYacute wraps GDK_KEY_Yacute
-const KEYYacute = C.GDK_KEY_Yacute
-// KEYYbelowdot wraps GDK_KEY_Ybelowdot
-const KEYYbelowdot = C.GDK_KEY_Ybelowdot
-// KEYYcircumflex wraps GDK_KEY_Ycircumflex
-const KEYYcircumflex = C.GDK_KEY_Ycircumflex
-// KEYYdiaeresis wraps GDK_KEY_Ydiaeresis
-const KEYYdiaeresis = C.GDK_KEY_Ydiaeresis
-// KEYYellow wraps GDK_KEY_Yellow
-const KEYYellow = C.GDK_KEY_Yellow
-// KEYYgrave wraps GDK_KEY_Ygrave
-const KEYYgrave = C.GDK_KEY_Ygrave
-// KEYYhook wraps GDK_KEY_Yhook
-const KEYYhook = C.GDK_KEY_Yhook
-// KEYYtilde wraps GDK_KEY_Ytilde
-const KEYYtilde = C.GDK_KEY_Ytilde
-// KEYZ wraps GDK_KEY_Z
-const KEYZ = C.GDK_KEY_Z
-// KEYZabovedot wraps GDK_KEY_Zabovedot
-const KEYZabovedot = C.GDK_KEY_Zabovedot
-// KEYZacute wraps GDK_KEY_Zacute
-const KEYZacute = C.GDK_KEY_Zacute
-// KEYZcaron wraps GDK_KEY_Zcaron
-const KEYZcaron = C.GDK_KEY_Zcaron
-// KEYZenKoho wraps GDK_KEY_Zen_Koho
-const KEYZenKoho = C.GDK_KEY_Zen_Koho
-// KEYZenkaku wraps GDK_KEY_Zenkaku
-const KEYZenkaku = C.GDK_KEY_Zenkaku
-// KEYZenkakuHankaku wraps GDK_KEY_Zenkaku_Hankaku
-const KEYZenkakuHankaku = C.GDK_KEY_Zenkaku_Hankaku
-// KEYZoomIn wraps GDK_KEY_ZoomIn
-const KEYZoomIn = C.GDK_KEY_ZoomIn
-// KEYZoomOut wraps GDK_KEY_ZoomOut
-const KEYZoomOut = C.GDK_KEY_ZoomOut
-// KEYZstroke wraps GDK_KEY_Zstroke
-const KEYZstroke = C.GDK_KEY_Zstroke
-// KEYA wraps GDK_KEY_a
-const KEYA = C.GDK_KEY_a
-// KEYAacute wraps GDK_KEY_aacute
-const KEYAacute = C.GDK_KEY_aacute
-// KEYAbelowdot wraps GDK_KEY_abelowdot
-const KEYAbelowdot = C.GDK_KEY_abelowdot
-// KEYAbovedot wraps GDK_KEY_abovedot
-const KEYAbovedot = C.GDK_KEY_abovedot
-// KEYAbreve wraps GDK_KEY_abreve
-const KEYAbreve = C.GDK_KEY_abreve
-// KEYAbreveacute wraps GDK_KEY_abreveacute
-const KEYAbreveacute = C.GDK_KEY_abreveacute
-// KEYAbrevebelowdot wraps GDK_KEY_abrevebelowdot
-const KEYAbrevebelowdot = C.GDK_KEY_abrevebelowdot
-// KEYAbrevegrave wraps GDK_KEY_abrevegrave
-const KEYAbrevegrave = C.GDK_KEY_abrevegrave
-// KEYAbrevehook wraps GDK_KEY_abrevehook
-const KEYAbrevehook = C.GDK_KEY_abrevehook
-// KEYAbrevetilde wraps GDK_KEY_abrevetilde
-const KEYAbrevetilde = C.GDK_KEY_abrevetilde
-// KEYAcircumflex wraps GDK_KEY_acircumflex
-const KEYAcircumflex = C.GDK_KEY_acircumflex
-// KEYAcircumflexacute wraps GDK_KEY_acircumflexacute
-const KEYAcircumflexacute = C.GDK_KEY_acircumflexacute
-// KEYAcircumflexbelowdot wraps GDK_KEY_acircumflexbelowdot
-const KEYAcircumflexbelowdot = C.GDK_KEY_acircumflexbelowdot
-// KEYAcircumflexgrave wraps GDK_KEY_acircumflexgrave
-const KEYAcircumflexgrave = C.GDK_KEY_acircumflexgrave
-// KEYAcircumflexhook wraps GDK_KEY_acircumflexhook
-const KEYAcircumflexhook = C.GDK_KEY_acircumflexhook
-// KEYAcircumflextilde wraps GDK_KEY_acircumflextilde
-const KEYAcircumflextilde = C.GDK_KEY_acircumflextilde
-// KEYAcute wraps GDK_KEY_acute
-const KEYAcute = C.GDK_KEY_acute
-// KEYAdiaeresis wraps GDK_KEY_adiaeresis
-const KEYAdiaeresis = C.GDK_KEY_adiaeresis
-// KEYAe wraps GDK_KEY_ae
-const KEYAe = C.GDK_KEY_ae
-// KEYAgrave wraps GDK_KEY_agrave
-const KEYAgrave = C.GDK_KEY_agrave
-// KEYAhook wraps GDK_KEY_ahook
-const KEYAhook = C.GDK_KEY_ahook
-// KEYAmacron wraps GDK_KEY_amacron
-const KEYAmacron = C.GDK_KEY_amacron
-// KEYAmpersand wraps GDK_KEY_ampersand
-const KEYAmpersand = C.GDK_KEY_ampersand
-// KEYAogonek wraps GDK_KEY_aogonek
-const KEYAogonek = C.GDK_KEY_aogonek
-// KEYApostrophe wraps GDK_KEY_apostrophe
-const KEYApostrophe = C.GDK_KEY_apostrophe
-// KEYApproxeq wraps GDK_KEY_approxeq
-const KEYApproxeq = C.GDK_KEY_approxeq
-// KEYApproximate wraps GDK_KEY_approximate
-const KEYApproximate = C.GDK_KEY_approximate
-// KEYAring wraps GDK_KEY_aring
-const KEYAring = C.GDK_KEY_aring
-// KEYAsciicircum wraps GDK_KEY_asciicircum
-const KEYAsciicircum = C.GDK_KEY_asciicircum
-// KEYAsciitilde wraps GDK_KEY_asciitilde
-const KEYAsciitilde = C.GDK_KEY_asciitilde
-// KEYAsterisk wraps GDK_KEY_asterisk
-const KEYAsterisk = C.GDK_KEY_asterisk
-// KEYAt wraps GDK_KEY_at
-const KEYAt = C.GDK_KEY_at
-// KEYAtilde wraps GDK_KEY_atilde
-const KEYAtilde = C.GDK_KEY_atilde
-// KEYB wraps GDK_KEY_b
-const KEYB = C.GDK_KEY_b
-// KEYBabovedot wraps GDK_KEY_babovedot
-const KEYBabovedot = C.GDK_KEY_babovedot
-// KEYBackslash wraps GDK_KEY_backslash
-const KEYBackslash = C.GDK_KEY_backslash
-// KEYBallotcross wraps GDK_KEY_ballotcross
-const KEYBallotcross = C.GDK_KEY_ballotcross
-// KEYBar wraps GDK_KEY_bar
-const KEYBar = C.GDK_KEY_bar
-// KEYBecause wraps GDK_KEY_because
-const KEYBecause = C.GDK_KEY_because
-// KEYBlank wraps GDK_KEY_blank
-const KEYBlank = C.GDK_KEY_blank
-// KEYBotintegral wraps GDK_KEY_botintegral
-const KEYBotintegral = C.GDK_KEY_botintegral
-// KEYBotleftparens wraps GDK_KEY_botleftparens
-const KEYBotleftparens = C.GDK_KEY_botleftparens
-// KEYBotleftsqbracket wraps GDK_KEY_botleftsqbracket
-const KEYBotleftsqbracket = C.GDK_KEY_botleftsqbracket
-// KEYBotleftsummation wraps GDK_KEY_botleftsummation
-const KEYBotleftsummation = C.GDK_KEY_botleftsummation
-// KEYBotrightparens wraps GDK_KEY_botrightparens
-const KEYBotrightparens = C.GDK_KEY_botrightparens
-// KEYBotrightsqbracket wraps GDK_KEY_botrightsqbracket
-const KEYBotrightsqbracket = C.GDK_KEY_botrightsqbracket
-// KEYBotrightsummation wraps GDK_KEY_botrightsummation
-const KEYBotrightsummation = C.GDK_KEY_botrightsummation
-// KEYBott wraps GDK_KEY_bott
-const KEYBott = C.GDK_KEY_bott
-// KEYBotvertsummationconnector wraps GDK_KEY_botvertsummationconnector
-const KEYBotvertsummationconnector = C.GDK_KEY_botvertsummationconnector
-// KEYBraceleft wraps GDK_KEY_braceleft
-const KEYBraceleft = C.GDK_KEY_braceleft
-// KEYBraceright wraps GDK_KEY_braceright
-const KEYBraceright = C.GDK_KEY_braceright
-// KEYBracketleft wraps GDK_KEY_bracketleft
-const KEYBracketleft = C.GDK_KEY_bracketleft
-// KEYBracketright wraps GDK_KEY_bracketright
-const KEYBracketright = C.GDK_KEY_bracketright
-// KEYBrailleBlank wraps GDK_KEY_braille_blank
-const KEYBrailleBlank = C.GDK_KEY_braille_blank
-// KEYBrailleDot1 wraps GDK_KEY_braille_dot_1
-const KEYBrailleDot1 = C.GDK_KEY_braille_dot_1
-// KEYBrailleDot10 wraps GDK_KEY_braille_dot_10
-const KEYBrailleDot10 = C.GDK_KEY_braille_dot_10
-// KEYBrailleDot2 wraps GDK_KEY_braille_dot_2
-const KEYBrailleDot2 = C.GDK_KEY_braille_dot_2
-// KEYBrailleDot3 wraps GDK_KEY_braille_dot_3
-const KEYBrailleDot3 = C.GDK_KEY_braille_dot_3
-// KEYBrailleDot4 wraps GDK_KEY_braille_dot_4
-const KEYBrailleDot4 = C.GDK_KEY_braille_dot_4
-// KEYBrailleDot5 wraps GDK_KEY_braille_dot_5
-const KEYBrailleDot5 = C.GDK_KEY_braille_dot_5
-// KEYBrailleDot6 wraps GDK_KEY_braille_dot_6
-const KEYBrailleDot6 = C.GDK_KEY_braille_dot_6
-// KEYBrailleDot7 wraps GDK_KEY_braille_dot_7
-const KEYBrailleDot7 = C.GDK_KEY_braille_dot_7
-// KEYBrailleDot8 wraps GDK_KEY_braille_dot_8
-const KEYBrailleDot8 = C.GDK_KEY_braille_dot_8
-// KEYBrailleDot9 wraps GDK_KEY_braille_dot_9
-const KEYBrailleDot9 = C.GDK_KEY_braille_dot_9
-// KEYBrailleDots1 wraps GDK_KEY_braille_dots_1
-const KEYBrailleDots1 = C.GDK_KEY_braille_dots_1
-// KEYBrailleDots12 wraps GDK_KEY_braille_dots_12
-const KEYBrailleDots12 = C.GDK_KEY_braille_dots_12
-// KEYBrailleDots123 wraps GDK_KEY_braille_dots_123
-const KEYBrailleDots123 = C.GDK_KEY_braille_dots_123
-// KEYBrailleDots1234 wraps GDK_KEY_braille_dots_1234
-const KEYBrailleDots1234 = C.GDK_KEY_braille_dots_1234
-// KEYBrailleDots12345 wraps GDK_KEY_braille_dots_12345
-const KEYBrailleDots12345 = C.GDK_KEY_braille_dots_12345
-// KEYBrailleDots123456 wraps GDK_KEY_braille_dots_123456
-const KEYBrailleDots123456 = C.GDK_KEY_braille_dots_123456
-// KEYBrailleDots1234567 wraps GDK_KEY_braille_dots_1234567
-const KEYBrailleDots1234567 = C.GDK_KEY_braille_dots_1234567
-// KEYBrailleDots12345678 wraps GDK_KEY_braille_dots_12345678
-const KEYBrailleDots12345678 = C.GDK_KEY_braille_dots_12345678
-// KEYBrailleDots1234568 wraps GDK_KEY_braille_dots_1234568
-const KEYBrailleDots1234568 = C.GDK_KEY_braille_dots_1234568
-// KEYBrailleDots123457 wraps GDK_KEY_braille_dots_123457
-const KEYBrailleDots123457 = C.GDK_KEY_braille_dots_123457
-// KEYBrailleDots1234578 wraps GDK_KEY_braille_dots_1234578
-const KEYBrailleDots1234578 = C.GDK_KEY_braille_dots_1234578
-// KEYBrailleDots123458 wraps GDK_KEY_braille_dots_123458
-const KEYBrailleDots123458 = C.GDK_KEY_braille_dots_123458
-// KEYBrailleDots12346 wraps GDK_KEY_braille_dots_12346
-const KEYBrailleDots12346 = C.GDK_KEY_braille_dots_12346
-// KEYBrailleDots123467 wraps GDK_KEY_braille_dots_123467
-const KEYBrailleDots123467 = C.GDK_KEY_braille_dots_123467
-// KEYBrailleDots1234678 wraps GDK_KEY_braille_dots_1234678
-const KEYBrailleDots1234678 = C.GDK_KEY_braille_dots_1234678
-// KEYBrailleDots123468 wraps GDK_KEY_braille_dots_123468
-const KEYBrailleDots123468 = C.GDK_KEY_braille_dots_123468
-// KEYBrailleDots12347 wraps GDK_KEY_braille_dots_12347
-const KEYBrailleDots12347 = C.GDK_KEY_braille_dots_12347
-// KEYBrailleDots123478 wraps GDK_KEY_braille_dots_123478
-const KEYBrailleDots123478 = C.GDK_KEY_braille_dots_123478
-// KEYBrailleDots12348 wraps GDK_KEY_braille_dots_12348
-const KEYBrailleDots12348 = C.GDK_KEY_braille_dots_12348
-// KEYBrailleDots1235 wraps GDK_KEY_braille_dots_1235
-const KEYBrailleDots1235 = C.GDK_KEY_braille_dots_1235
-// KEYBrailleDots12356 wraps GDK_KEY_braille_dots_12356
-const KEYBrailleDots12356 = C.GDK_KEY_braille_dots_12356
-// KEYBrailleDots123567 wraps GDK_KEY_braille_dots_123567
-const KEYBrailleDots123567 = C.GDK_KEY_braille_dots_123567
-// KEYBrailleDots1235678 wraps GDK_KEY_braille_dots_1235678
-const KEYBrailleDots1235678 = C.GDK_KEY_braille_dots_1235678
-// KEYBrailleDots123568 wraps GDK_KEY_braille_dots_123568
-const KEYBrailleDots123568 = C.GDK_KEY_braille_dots_123568
-// KEYBrailleDots12357 wraps GDK_KEY_braille_dots_12357
-const KEYBrailleDots12357 = C.GDK_KEY_braille_dots_12357
-// KEYBrailleDots123578 wraps GDK_KEY_braille_dots_123578
-const KEYBrailleDots123578 = C.GDK_KEY_braille_dots_123578
-// KEYBrailleDots12358 wraps GDK_KEY_braille_dots_12358
-const KEYBrailleDots12358 = C.GDK_KEY_braille_dots_12358
-// KEYBrailleDots1236 wraps GDK_KEY_braille_dots_1236
-const KEYBrailleDots1236 = C.GDK_KEY_braille_dots_1236
-// KEYBrailleDots12367 wraps GDK_KEY_braille_dots_12367
-const KEYBrailleDots12367 = C.GDK_KEY_braille_dots_12367
-// KEYBrailleDots123678 wraps GDK_KEY_braille_dots_123678
-const KEYBrailleDots123678 = C.GDK_KEY_braille_dots_123678
-// KEYBrailleDots12368 wraps GDK_KEY_braille_dots_12368
-const KEYBrailleDots12368 = C.GDK_KEY_braille_dots_12368
-// KEYBrailleDots1237 wraps GDK_KEY_braille_dots_1237
-const KEYBrailleDots1237 = C.GDK_KEY_braille_dots_1237
-// KEYBrailleDots12378 wraps GDK_KEY_braille_dots_12378
-const KEYBrailleDots12378 = C.GDK_KEY_braille_dots_12378
-// KEYBrailleDots1238 wraps GDK_KEY_braille_dots_1238
-const KEYBrailleDots1238 = C.GDK_KEY_braille_dots_1238
-// KEYBrailleDots124 wraps GDK_KEY_braille_dots_124
-const KEYBrailleDots124 = C.GDK_KEY_braille_dots_124
-// KEYBrailleDots1245 wraps GDK_KEY_braille_dots_1245
-const KEYBrailleDots1245 = C.GDK_KEY_braille_dots_1245
-// KEYBrailleDots12456 wraps GDK_KEY_braille_dots_12456
-const KEYBrailleDots12456 = C.GDK_KEY_braille_dots_12456
-// KEYBrailleDots124567 wraps GDK_KEY_braille_dots_124567
-const KEYBrailleDots124567 = C.GDK_KEY_braille_dots_124567
-// KEYBrailleDots1245678 wraps GDK_KEY_braille_dots_1245678
-const KEYBrailleDots1245678 = C.GDK_KEY_braille_dots_1245678
-// KEYBrailleDots124568 wraps GDK_KEY_braille_dots_124568
-const KEYBrailleDots124568 = C.GDK_KEY_braille_dots_124568
-// KEYBrailleDots12457 wraps GDK_KEY_braille_dots_12457
-const KEYBrailleDots12457 = C.GDK_KEY_braille_dots_12457
-// KEYBrailleDots124578 wraps GDK_KEY_braille_dots_124578
-const KEYBrailleDots124578 = C.GDK_KEY_braille_dots_124578
-// KEYBrailleDots12458 wraps GDK_KEY_braille_dots_12458
-const KEYBrailleDots12458 = C.GDK_KEY_braille_dots_12458
-// KEYBrailleDots1246 wraps GDK_KEY_braille_dots_1246
-const KEYBrailleDots1246 = C.GDK_KEY_braille_dots_1246
-// KEYBrailleDots12467 wraps GDK_KEY_braille_dots_12467
-const KEYBrailleDots12467 = C.GDK_KEY_braille_dots_12467
-// KEYBrailleDots124678 wraps GDK_KEY_braille_dots_124678
-const KEYBrailleDots124678 = C.GDK_KEY_braille_dots_124678
-// KEYBrailleDots12468 wraps GDK_KEY_braille_dots_12468
-const KEYBrailleDots12468 = C.GDK_KEY_braille_dots_12468
-// KEYBrailleDots1247 wraps GDK_KEY_braille_dots_1247
-const KEYBrailleDots1247 = C.GDK_KEY_braille_dots_1247
-// KEYBrailleDots12478 wraps GDK_KEY_braille_dots_12478
-const KEYBrailleDots12478 = C.GDK_KEY_braille_dots_12478
-// KEYBrailleDots1248 wraps GDK_KEY_braille_dots_1248
-const KEYBrailleDots1248 = C.GDK_KEY_braille_dots_1248
-// KEYBrailleDots125 wraps GDK_KEY_braille_dots_125
-const KEYBrailleDots125 = C.GDK_KEY_braille_dots_125
-// KEYBrailleDots1256 wraps GDK_KEY_braille_dots_1256
-const KEYBrailleDots1256 = C.GDK_KEY_braille_dots_1256
-// KEYBrailleDots12567 wraps GDK_KEY_braille_dots_12567
-const KEYBrailleDots12567 = C.GDK_KEY_braille_dots_12567
-// KEYBrailleDots125678 wraps GDK_KEY_braille_dots_125678
-const KEYBrailleDots125678 = C.GDK_KEY_braille_dots_125678
-// KEYBrailleDots12568 wraps GDK_KEY_braille_dots_12568
-const KEYBrailleDots12568 = C.GDK_KEY_braille_dots_12568
-// KEYBrailleDots1257 wraps GDK_KEY_braille_dots_1257
-const KEYBrailleDots1257 = C.GDK_KEY_braille_dots_1257
-// KEYBrailleDots12578 wraps GDK_KEY_braille_dots_12578
-const KEYBrailleDots12578 = C.GDK_KEY_braille_dots_12578
-// KEYBrailleDots1258 wraps GDK_KEY_braille_dots_1258
-const KEYBrailleDots1258 = C.GDK_KEY_braille_dots_1258
-// KEYBrailleDots126 wraps GDK_KEY_braille_dots_126
-const KEYBrailleDots126 = C.GDK_KEY_braille_dots_126
-// KEYBrailleDots1267 wraps GDK_KEY_braille_dots_1267
-const KEYBrailleDots1267 = C.GDK_KEY_braille_dots_1267
-// KEYBrailleDots12678 wraps GDK_KEY_braille_dots_12678
-const KEYBrailleDots12678 = C.GDK_KEY_braille_dots_12678
-// KEYBrailleDots1268 wraps GDK_KEY_braille_dots_1268
-const KEYBrailleDots1268 = C.GDK_KEY_braille_dots_1268
-// KEYBrailleDots127 wraps GDK_KEY_braille_dots_127
-const KEYBrailleDots127 = C.GDK_KEY_braille_dots_127
-// KEYBrailleDots1278 wraps GDK_KEY_braille_dots_1278
-const KEYBrailleDots1278 = C.GDK_KEY_braille_dots_1278
-// KEYBrailleDots128 wraps GDK_KEY_braille_dots_128
-const KEYBrailleDots128 = C.GDK_KEY_braille_dots_128
-// KEYBrailleDots13 wraps GDK_KEY_braille_dots_13
-const KEYBrailleDots13 = C.GDK_KEY_braille_dots_13
-// KEYBrailleDots134 wraps GDK_KEY_braille_dots_134
-const KEYBrailleDots134 = C.GDK_KEY_braille_dots_134
-// KEYBrailleDots1345 wraps GDK_KEY_braille_dots_1345
-const KEYBrailleDots1345 = C.GDK_KEY_braille_dots_1345
-// KEYBrailleDots13456 wraps GDK_KEY_braille_dots_13456
-const KEYBrailleDots13456 = C.GDK_KEY_braille_dots_13456
-// KEYBrailleDots134567 wraps GDK_KEY_braille_dots_134567
-const KEYBrailleDots134567 = C.GDK_KEY_braille_dots_134567
-// KEYBrailleDots1345678 wraps GDK_KEY_braille_dots_1345678
-const KEYBrailleDots1345678 = C.GDK_KEY_braille_dots_1345678
-// KEYBrailleDots134568 wraps GDK_KEY_braille_dots_134568
-const KEYBrailleDots134568 = C.GDK_KEY_braille_dots_134568
-// KEYBrailleDots13457 wraps GDK_KEY_braille_dots_13457
-const KEYBrailleDots13457 = C.GDK_KEY_braille_dots_13457
-// KEYBrailleDots134578 wraps GDK_KEY_braille_dots_134578
-const KEYBrailleDots134578 = C.GDK_KEY_braille_dots_134578
-// KEYBrailleDots13458 wraps GDK_KEY_braille_dots_13458
-const KEYBrailleDots13458 = C.GDK_KEY_braille_dots_13458
-// KEYBrailleDots1346 wraps GDK_KEY_braille_dots_1346
-const KEYBrailleDots1346 = C.GDK_KEY_braille_dots_1346
-// KEYBrailleDots13467 wraps GDK_KEY_braille_dots_13467
-const KEYBrailleDots13467 = C.GDK_KEY_braille_dots_13467
-// KEYBrailleDots134678 wraps GDK_KEY_braille_dots_134678
-const KEYBrailleDots134678 = C.GDK_KEY_braille_dots_134678
-// KEYBrailleDots13468 wraps GDK_KEY_braille_dots_13468
-const KEYBrailleDots13468 = C.GDK_KEY_braille_dots_13468
-// KEYBrailleDots1347 wraps GDK_KEY_braille_dots_1347
-const KEYBrailleDots1347 = C.GDK_KEY_braille_dots_1347
-// KEYBrailleDots13478 wraps GDK_KEY_braille_dots_13478
-const KEYBrailleDots13478 = C.GDK_KEY_braille_dots_13478
-// KEYBrailleDots1348 wraps GDK_KEY_braille_dots_1348
-const KEYBrailleDots1348 = C.GDK_KEY_braille_dots_1348
-// KEYBrailleDots135 wraps GDK_KEY_braille_dots_135
-const KEYBrailleDots135 = C.GDK_KEY_braille_dots_135
-// KEYBrailleDots1356 wraps GDK_KEY_braille_dots_1356
-const KEYBrailleDots1356 = C.GDK_KEY_braille_dots_1356
-// KEYBrailleDots13567 wraps GDK_KEY_braille_dots_13567
-const KEYBrailleDots13567 = C.GDK_KEY_braille_dots_13567
-// KEYBrailleDots135678 wraps GDK_KEY_braille_dots_135678
-const KEYBrailleDots135678 = C.GDK_KEY_braille_dots_135678
-// KEYBrailleDots13568 wraps GDK_KEY_braille_dots_13568
-const KEYBrailleDots13568 = C.GDK_KEY_braille_dots_13568
-// KEYBrailleDots1357 wraps GDK_KEY_braille_dots_1357
-const KEYBrailleDots1357 = C.GDK_KEY_braille_dots_1357
-// KEYBrailleDots13578 wraps GDK_KEY_braille_dots_13578
-const KEYBrailleDots13578 = C.GDK_KEY_braille_dots_13578
-// KEYBrailleDots1358 wraps GDK_KEY_braille_dots_1358
-const KEYBrailleDots1358 = C.GDK_KEY_braille_dots_1358
-// KEYBrailleDots136 wraps GDK_KEY_braille_dots_136
-const KEYBrailleDots136 = C.GDK_KEY_braille_dots_136
-// KEYBrailleDots1367 wraps GDK_KEY_braille_dots_1367
-const KEYBrailleDots1367 = C.GDK_KEY_braille_dots_1367
-// KEYBrailleDots13678 wraps GDK_KEY_braille_dots_13678
-const KEYBrailleDots13678 = C.GDK_KEY_braille_dots_13678
-// KEYBrailleDots1368 wraps GDK_KEY_braille_dots_1368
-const KEYBrailleDots1368 = C.GDK_KEY_braille_dots_1368
-// KEYBrailleDots137 wraps GDK_KEY_braille_dots_137
-const KEYBrailleDots137 = C.GDK_KEY_braille_dots_137
-// KEYBrailleDots1378 wraps GDK_KEY_braille_dots_1378
-const KEYBrailleDots1378 = C.GDK_KEY_braille_dots_1378
-// KEYBrailleDots138 wraps GDK_KEY_braille_dots_138
-const KEYBrailleDots138 = C.GDK_KEY_braille_dots_138
-// KEYBrailleDots14 wraps GDK_KEY_braille_dots_14
-const KEYBrailleDots14 = C.GDK_KEY_braille_dots_14
-// KEYBrailleDots145 wraps GDK_KEY_braille_dots_145
-const KEYBrailleDots145 = C.GDK_KEY_braille_dots_145
-// KEYBrailleDots1456 wraps GDK_KEY_braille_dots_1456
-const KEYBrailleDots1456 = C.GDK_KEY_braille_dots_1456
-// KEYBrailleDots14567 wraps GDK_KEY_braille_dots_14567
-const KEYBrailleDots14567 = C.GDK_KEY_braille_dots_14567
-// KEYBrailleDots145678 wraps GDK_KEY_braille_dots_145678
-const KEYBrailleDots145678 = C.GDK_KEY_braille_dots_145678
-// KEYBrailleDots14568 wraps GDK_KEY_braille_dots_14568
-const KEYBrailleDots14568 = C.GDK_KEY_braille_dots_14568
-// KEYBrailleDots1457 wraps GDK_KEY_braille_dots_1457
-const KEYBrailleDots1457 = C.GDK_KEY_braille_dots_1457
-// KEYBrailleDots14578 wraps GDK_KEY_braille_dots_14578
-const KEYBrailleDots14578 = C.GDK_KEY_braille_dots_14578
-// KEYBrailleDots1458 wraps GDK_KEY_braille_dots_1458
-const KEYBrailleDots1458 = C.GDK_KEY_braille_dots_1458
-// KEYBrailleDots146 wraps GDK_KEY_braille_dots_146
-const KEYBrailleDots146 = C.GDK_KEY_braille_dots_146
-// KEYBrailleDots1467 wraps GDK_KEY_braille_dots_1467
-const KEYBrailleDots1467 = C.GDK_KEY_braille_dots_1467
-// KEYBrailleDots14678 wraps GDK_KEY_braille_dots_14678
-const KEYBrailleDots14678 = C.GDK_KEY_braille_dots_14678
-// KEYBrailleDots1468 wraps GDK_KEY_braille_dots_1468
-const KEYBrailleDots1468 = C.GDK_KEY_braille_dots_1468
-// KEYBrailleDots147 wraps GDK_KEY_braille_dots_147
-const KEYBrailleDots147 = C.GDK_KEY_braille_dots_147
-// KEYBrailleDots1478 wraps GDK_KEY_braille_dots_1478
-const KEYBrailleDots1478 = C.GDK_KEY_braille_dots_1478
-// KEYBrailleDots148 wraps GDK_KEY_braille_dots_148
-const KEYBrailleDots148 = C.GDK_KEY_braille_dots_148
-// KEYBrailleDots15 wraps GDK_KEY_braille_dots_15
-const KEYBrailleDots15 = C.GDK_KEY_braille_dots_15
-// KEYBrailleDots156 wraps GDK_KEY_braille_dots_156
-const KEYBrailleDots156 = C.GDK_KEY_braille_dots_156
-// KEYBrailleDots1567 wraps GDK_KEY_braille_dots_1567
-const KEYBrailleDots1567 = C.GDK_KEY_braille_dots_1567
-// KEYBrailleDots15678 wraps GDK_KEY_braille_dots_15678
-const KEYBrailleDots15678 = C.GDK_KEY_braille_dots_15678
-// KEYBrailleDots1568 wraps GDK_KEY_braille_dots_1568
-const KEYBrailleDots1568 = C.GDK_KEY_braille_dots_1568
-// KEYBrailleDots157 wraps GDK_KEY_braille_dots_157
-const KEYBrailleDots157 = C.GDK_KEY_braille_dots_157
-// KEYBrailleDots1578 wraps GDK_KEY_braille_dots_1578
-const KEYBrailleDots1578 = C.GDK_KEY_braille_dots_1578
-// KEYBrailleDots158 wraps GDK_KEY_braille_dots_158
-const KEYBrailleDots158 = C.GDK_KEY_braille_dots_158
-// KEYBrailleDots16 wraps GDK_KEY_braille_dots_16
-const KEYBrailleDots16 = C.GDK_KEY_braille_dots_16
-// KEYBrailleDots167 wraps GDK_KEY_braille_dots_167
-const KEYBrailleDots167 = C.GDK_KEY_braille_dots_167
-// KEYBrailleDots1678 wraps GDK_KEY_braille_dots_1678
-const KEYBrailleDots1678 = C.GDK_KEY_braille_dots_1678
-// KEYBrailleDots168 wraps GDK_KEY_braille_dots_168
-const KEYBrailleDots168 = C.GDK_KEY_braille_dots_168
-// KEYBrailleDots17 wraps GDK_KEY_braille_dots_17
-const KEYBrailleDots17 = C.GDK_KEY_braille_dots_17
-// KEYBrailleDots178 wraps GDK_KEY_braille_dots_178
-const KEYBrailleDots178 = C.GDK_KEY_braille_dots_178
-// KEYBrailleDots18 wraps GDK_KEY_braille_dots_18
-const KEYBrailleDots18 = C.GDK_KEY_braille_dots_18
-// KEYBrailleDots2 wraps GDK_KEY_braille_dots_2
-const KEYBrailleDots2 = C.GDK_KEY_braille_dots_2
-// KEYBrailleDots23 wraps GDK_KEY_braille_dots_23
-const KEYBrailleDots23 = C.GDK_KEY_braille_dots_23
-// KEYBrailleDots234 wraps GDK_KEY_braille_dots_234
-const KEYBrailleDots234 = C.GDK_KEY_braille_dots_234
-// KEYBrailleDots2345 wraps GDK_KEY_braille_dots_2345
-const KEYBrailleDots2345 = C.GDK_KEY_braille_dots_2345
-// KEYBrailleDots23456 wraps GDK_KEY_braille_dots_23456
-const KEYBrailleDots23456 = C.GDK_KEY_braille_dots_23456
-// KEYBrailleDots234567 wraps GDK_KEY_braille_dots_234567
-const KEYBrailleDots234567 = C.GDK_KEY_braille_dots_234567
-// KEYBrailleDots2345678 wraps GDK_KEY_braille_dots_2345678
-const KEYBrailleDots2345678 = C.GDK_KEY_braille_dots_2345678
-// KEYBrailleDots234568 wraps GDK_KEY_braille_dots_234568
-const KEYBrailleDots234568 = C.GDK_KEY_braille_dots_234568
-// KEYBrailleDots23457 wraps GDK_KEY_braille_dots_23457
-const KEYBrailleDots23457 = C.GDK_KEY_braille_dots_23457
-// KEYBrailleDots234578 wraps GDK_KEY_braille_dots_234578
-const KEYBrailleDots234578 = C.GDK_KEY_braille_dots_234578
-// KEYBrailleDots23458 wraps GDK_KEY_braille_dots_23458
-const KEYBrailleDots23458 = C.GDK_KEY_braille_dots_23458
-// KEYBrailleDots2346 wraps GDK_KEY_braille_dots_2346
-const KEYBrailleDots2346 = C.GDK_KEY_braille_dots_2346
-// KEYBrailleDots23467 wraps GDK_KEY_braille_dots_23467
-const KEYBrailleDots23467 = C.GDK_KEY_braille_dots_23467
-// KEYBrailleDots234678 wraps GDK_KEY_braille_dots_234678
-const KEYBrailleDots234678 = C.GDK_KEY_braille_dots_234678
-// KEYBrailleDots23468 wraps GDK_KEY_braille_dots_23468
-const KEYBrailleDots23468 = C.GDK_KEY_braille_dots_23468
-// KEYBrailleDots2347 wraps GDK_KEY_braille_dots_2347
-const KEYBrailleDots2347 = C.GDK_KEY_braille_dots_2347
-// KEYBrailleDots23478 wraps GDK_KEY_braille_dots_23478
-const KEYBrailleDots23478 = C.GDK_KEY_braille_dots_23478
-// KEYBrailleDots2348 wraps GDK_KEY_braille_dots_2348
-const KEYBrailleDots2348 = C.GDK_KEY_braille_dots_2348
-// KEYBrailleDots235 wraps GDK_KEY_braille_dots_235
-const KEYBrailleDots235 = C.GDK_KEY_braille_dots_235
-// KEYBrailleDots2356 wraps GDK_KEY_braille_dots_2356
-const KEYBrailleDots2356 = C.GDK_KEY_braille_dots_2356
-// KEYBrailleDots23567 wraps GDK_KEY_braille_dots_23567
-const KEYBrailleDots23567 = C.GDK_KEY_braille_dots_23567
-// KEYBrailleDots235678 wraps GDK_KEY_braille_dots_235678
-const KEYBrailleDots235678 = C.GDK_KEY_braille_dots_235678
-// KEYBrailleDots23568 wraps GDK_KEY_braille_dots_23568
-const KEYBrailleDots23568 = C.GDK_KEY_braille_dots_23568
-// KEYBrailleDots2357 wraps GDK_KEY_braille_dots_2357
-const KEYBrailleDots2357 = C.GDK_KEY_braille_dots_2357
-// KEYBrailleDots23578 wraps GDK_KEY_braille_dots_23578
-const KEYBrailleDots23578 = C.GDK_KEY_braille_dots_23578
-// KEYBrailleDots2358 wraps GDK_KEY_braille_dots_2358
-const KEYBrailleDots2358 = C.GDK_KEY_braille_dots_2358
-// KEYBrailleDots236 wraps GDK_KEY_braille_dots_236
-const KEYBrailleDots236 = C.GDK_KEY_braille_dots_236
-// KEYBrailleDots2367 wraps GDK_KEY_braille_dots_2367
-const KEYBrailleDots2367 = C.GDK_KEY_braille_dots_2367
-// KEYBrailleDots23678 wraps GDK_KEY_braille_dots_23678
-const KEYBrailleDots23678 = C.GDK_KEY_braille_dots_23678
-// KEYBrailleDots2368 wraps GDK_KEY_braille_dots_2368
-const KEYBrailleDots2368 = C.GDK_KEY_braille_dots_2368
-// KEYBrailleDots237 wraps GDK_KEY_braille_dots_237
-const KEYBrailleDots237 = C.GDK_KEY_braille_dots_237
-// KEYBrailleDots2378 wraps GDK_KEY_braille_dots_2378
-const KEYBrailleDots2378 = C.GDK_KEY_braille_dots_2378
-// KEYBrailleDots238 wraps GDK_KEY_braille_dots_238
-const KEYBrailleDots238 = C.GDK_KEY_braille_dots_238
-// KEYBrailleDots24 wraps GDK_KEY_braille_dots_24
-const KEYBrailleDots24 = C.GDK_KEY_braille_dots_24
-// KEYBrailleDots245 wraps GDK_KEY_braille_dots_245
-const KEYBrailleDots245 = C.GDK_KEY_braille_dots_245
-// KEYBrailleDots2456 wraps GDK_KEY_braille_dots_2456
-const KEYBrailleDots2456 = C.GDK_KEY_braille_dots_2456
-// KEYBrailleDots24567 wraps GDK_KEY_braille_dots_24567
-const KEYBrailleDots24567 = C.GDK_KEY_braille_dots_24567
-// KEYBrailleDots245678 wraps GDK_KEY_braille_dots_245678
-const KEYBrailleDots245678 = C.GDK_KEY_braille_dots_245678
-// KEYBrailleDots24568 wraps GDK_KEY_braille_dots_24568
-const KEYBrailleDots24568 = C.GDK_KEY_braille_dots_24568
-// KEYBrailleDots2457 wraps GDK_KEY_braille_dots_2457
-const KEYBrailleDots2457 = C.GDK_KEY_braille_dots_2457
-// KEYBrailleDots24578 wraps GDK_KEY_braille_dots_24578
-const KEYBrailleDots24578 = C.GDK_KEY_braille_dots_24578
-// KEYBrailleDots2458 wraps GDK_KEY_braille_dots_2458
-const KEYBrailleDots2458 = C.GDK_KEY_braille_dots_2458
-// KEYBrailleDots246 wraps GDK_KEY_braille_dots_246
-const KEYBrailleDots246 = C.GDK_KEY_braille_dots_246
-// KEYBrailleDots2467 wraps GDK_KEY_braille_dots_2467
-const KEYBrailleDots2467 = C.GDK_KEY_braille_dots_2467
-// KEYBrailleDots24678 wraps GDK_KEY_braille_dots_24678
-const KEYBrailleDots24678 = C.GDK_KEY_braille_dots_24678
-// KEYBrailleDots2468 wraps GDK_KEY_braille_dots_2468
-const KEYBrailleDots2468 = C.GDK_KEY_braille_dots_2468
-// KEYBrailleDots247 wraps GDK_KEY_braille_dots_247
-const KEYBrailleDots247 = C.GDK_KEY_braille_dots_247
-// KEYBrailleDots2478 wraps GDK_KEY_braille_dots_2478
-const KEYBrailleDots2478 = C.GDK_KEY_braille_dots_2478
-// KEYBrailleDots248 wraps GDK_KEY_braille_dots_248
-const KEYBrailleDots248 = C.GDK_KEY_braille_dots_248
-// KEYBrailleDots25 wraps GDK_KEY_braille_dots_25
-const KEYBrailleDots25 = C.GDK_KEY_braille_dots_25
-// KEYBrailleDots256 wraps GDK_KEY_braille_dots_256
-const KEYBrailleDots256 = C.GDK_KEY_braille_dots_256
-// KEYBrailleDots2567 wraps GDK_KEY_braille_dots_2567
-const KEYBrailleDots2567 = C.GDK_KEY_braille_dots_2567
-// KEYBrailleDots25678 wraps GDK_KEY_braille_dots_25678
-const KEYBrailleDots25678 = C.GDK_KEY_braille_dots_25678
-// KEYBrailleDots2568 wraps GDK_KEY_braille_dots_2568
-const KEYBrailleDots2568 = C.GDK_KEY_braille_dots_2568
-// KEYBrailleDots257 wraps GDK_KEY_braille_dots_257
-const KEYBrailleDots257 = C.GDK_KEY_braille_dots_257
-// KEYBrailleDots2578 wraps GDK_KEY_braille_dots_2578
-const KEYBrailleDots2578 = C.GDK_KEY_braille_dots_2578
-// KEYBrailleDots258 wraps GDK_KEY_braille_dots_258
-const KEYBrailleDots258 = C.GDK_KEY_braille_dots_258
-// KEYBrailleDots26 wraps GDK_KEY_braille_dots_26
-const KEYBrailleDots26 = C.GDK_KEY_braille_dots_26
-// KEYBrailleDots267 wraps GDK_KEY_braille_dots_267
-const KEYBrailleDots267 = C.GDK_KEY_braille_dots_267
-// KEYBrailleDots2678 wraps GDK_KEY_braille_dots_2678
-const KEYBrailleDots2678 = C.GDK_KEY_braille_dots_2678
-// KEYBrailleDots268 wraps GDK_KEY_braille_dots_268
-const KEYBrailleDots268 = C.GDK_KEY_braille_dots_268
-// KEYBrailleDots27 wraps GDK_KEY_braille_dots_27
-const KEYBrailleDots27 = C.GDK_KEY_braille_dots_27
-// KEYBrailleDots278 wraps GDK_KEY_braille_dots_278
-const KEYBrailleDots278 = C.GDK_KEY_braille_dots_278
-// KEYBrailleDots28 wraps GDK_KEY_braille_dots_28
-const KEYBrailleDots28 = C.GDK_KEY_braille_dots_28
-// KEYBrailleDots3 wraps GDK_KEY_braille_dots_3
-const KEYBrailleDots3 = C.GDK_KEY_braille_dots_3
-// KEYBrailleDots34 wraps GDK_KEY_braille_dots_34
-const KEYBrailleDots34 = C.GDK_KEY_braille_dots_34
-// KEYBrailleDots345 wraps GDK_KEY_braille_dots_345
-const KEYBrailleDots345 = C.GDK_KEY_braille_dots_345
-// KEYBrailleDots3456 wraps GDK_KEY_braille_dots_3456
-const KEYBrailleDots3456 = C.GDK_KEY_braille_dots_3456
-// KEYBrailleDots34567 wraps GDK_KEY_braille_dots_34567
-const KEYBrailleDots34567 = C.GDK_KEY_braille_dots_34567
-// KEYBrailleDots345678 wraps GDK_KEY_braille_dots_345678
-const KEYBrailleDots345678 = C.GDK_KEY_braille_dots_345678
-// KEYBrailleDots34568 wraps GDK_KEY_braille_dots_34568
-const KEYBrailleDots34568 = C.GDK_KEY_braille_dots_34568
-// KEYBrailleDots3457 wraps GDK_KEY_braille_dots_3457
-const KEYBrailleDots3457 = C.GDK_KEY_braille_dots_3457
-// KEYBrailleDots34578 wraps GDK_KEY_braille_dots_34578
-const KEYBrailleDots34578 = C.GDK_KEY_braille_dots_34578
-// KEYBrailleDots3458 wraps GDK_KEY_braille_dots_3458
-const KEYBrailleDots3458 = C.GDK_KEY_braille_dots_3458
-// KEYBrailleDots346 wraps GDK_KEY_braille_dots_346
-const KEYBrailleDots346 = C.GDK_KEY_braille_dots_346
-// KEYBrailleDots3467 wraps GDK_KEY_braille_dots_3467
-const KEYBrailleDots3467 = C.GDK_KEY_braille_dots_3467
-// KEYBrailleDots34678 wraps GDK_KEY_braille_dots_34678
-const KEYBrailleDots34678 = C.GDK_KEY_braille_dots_34678
-// KEYBrailleDots3468 wraps GDK_KEY_braille_dots_3468
-const KEYBrailleDots3468 = C.GDK_KEY_braille_dots_3468
-// KEYBrailleDots347 wraps GDK_KEY_braille_dots_347
-const KEYBrailleDots347 = C.GDK_KEY_braille_dots_347
-// KEYBrailleDots3478 wraps GDK_KEY_braille_dots_3478
-const KEYBrailleDots3478 = C.GDK_KEY_braille_dots_3478
-// KEYBrailleDots348 wraps GDK_KEY_braille_dots_348
-const KEYBrailleDots348 = C.GDK_KEY_braille_dots_348
-// KEYBrailleDots35 wraps GDK_KEY_braille_dots_35
-const KEYBrailleDots35 = C.GDK_KEY_braille_dots_35
-// KEYBrailleDots356 wraps GDK_KEY_braille_dots_356
-const KEYBrailleDots356 = C.GDK_KEY_braille_dots_356
-// KEYBrailleDots3567 wraps GDK_KEY_braille_dots_3567
-const KEYBrailleDots3567 = C.GDK_KEY_braille_dots_3567
-// KEYBrailleDots35678 wraps GDK_KEY_braille_dots_35678
-const KEYBrailleDots35678 = C.GDK_KEY_braille_dots_35678
-// KEYBrailleDots3568 wraps GDK_KEY_braille_dots_3568
-const KEYBrailleDots3568 = C.GDK_KEY_braille_dots_3568
-// KEYBrailleDots357 wraps GDK_KEY_braille_dots_357
-const KEYBrailleDots357 = C.GDK_KEY_braille_dots_357
-// KEYBrailleDots3578 wraps GDK_KEY_braille_dots_3578
-const KEYBrailleDots3578 = C.GDK_KEY_braille_dots_3578
-// KEYBrailleDots358 wraps GDK_KEY_braille_dots_358
-const KEYBrailleDots358 = C.GDK_KEY_braille_dots_358
-// KEYBrailleDots36 wraps GDK_KEY_braille_dots_36
-const KEYBrailleDots36 = C.GDK_KEY_braille_dots_36
-// KEYBrailleDots367 wraps GDK_KEY_braille_dots_367
-const KEYBrailleDots367 = C.GDK_KEY_braille_dots_367
-// KEYBrailleDots3678 wraps GDK_KEY_braille_dots_3678
-const KEYBrailleDots3678 = C.GDK_KEY_braille_dots_3678
-// KEYBrailleDots368 wraps GDK_KEY_braille_dots_368
-const KEYBrailleDots368 = C.GDK_KEY_braille_dots_368
-// KEYBrailleDots37 wraps GDK_KEY_braille_dots_37
-const KEYBrailleDots37 = C.GDK_KEY_braille_dots_37
-// KEYBrailleDots378 wraps GDK_KEY_braille_dots_378
-const KEYBrailleDots378 = C.GDK_KEY_braille_dots_378
-// KEYBrailleDots38 wraps GDK_KEY_braille_dots_38
-const KEYBrailleDots38 = C.GDK_KEY_braille_dots_38
-// KEYBrailleDots4 wraps GDK_KEY_braille_dots_4
-const KEYBrailleDots4 = C.GDK_KEY_braille_dots_4
-// KEYBrailleDots45 wraps GDK_KEY_braille_dots_45
-const KEYBrailleDots45 = C.GDK_KEY_braille_dots_45
-// KEYBrailleDots456 wraps GDK_KEY_braille_dots_456
-const KEYBrailleDots456 = C.GDK_KEY_braille_dots_456
-// KEYBrailleDots4567 wraps GDK_KEY_braille_dots_4567
-const KEYBrailleDots4567 = C.GDK_KEY_braille_dots_4567
-// KEYBrailleDots45678 wraps GDK_KEY_braille_dots_45678
-const KEYBrailleDots45678 = C.GDK_KEY_braille_dots_45678
-// KEYBrailleDots4568 wraps GDK_KEY_braille_dots_4568
-const KEYBrailleDots4568 = C.GDK_KEY_braille_dots_4568
-// KEYBrailleDots457 wraps GDK_KEY_braille_dots_457
-const KEYBrailleDots457 = C.GDK_KEY_braille_dots_457
-// KEYBrailleDots4578 wraps GDK_KEY_braille_dots_4578
-const KEYBrailleDots4578 = C.GDK_KEY_braille_dots_4578
-// KEYBrailleDots458 wraps GDK_KEY_braille_dots_458
-const KEYBrailleDots458 = C.GDK_KEY_braille_dots_458
-// KEYBrailleDots46 wraps GDK_KEY_braille_dots_46
-const KEYBrailleDots46 = C.GDK_KEY_braille_dots_46
-// KEYBrailleDots467 wraps GDK_KEY_braille_dots_467
-const KEYBrailleDots467 = C.GDK_KEY_braille_dots_467
-// KEYBrailleDots4678 wraps GDK_KEY_braille_dots_4678
-const KEYBrailleDots4678 = C.GDK_KEY_braille_dots_4678
-// KEYBrailleDots468 wraps GDK_KEY_braille_dots_468
-const KEYBrailleDots468 = C.GDK_KEY_braille_dots_468
-// KEYBrailleDots47 wraps GDK_KEY_braille_dots_47
-const KEYBrailleDots47 = C.GDK_KEY_braille_dots_47
-// KEYBrailleDots478 wraps GDK_KEY_braille_dots_478
-const KEYBrailleDots478 = C.GDK_KEY_braille_dots_478
-// KEYBrailleDots48 wraps GDK_KEY_braille_dots_48
-const KEYBrailleDots48 = C.GDK_KEY_braille_dots_48
-// KEYBrailleDots5 wraps GDK_KEY_braille_dots_5
-const KEYBrailleDots5 = C.GDK_KEY_braille_dots_5
-// KEYBrailleDots56 wraps GDK_KEY_braille_dots_56
-const KEYBrailleDots56 = C.GDK_KEY_braille_dots_56
-// KEYBrailleDots567 wraps GDK_KEY_braille_dots_567
-const KEYBrailleDots567 = C.GDK_KEY_braille_dots_567
-// KEYBrailleDots5678 wraps GDK_KEY_braille_dots_5678
-const KEYBrailleDots5678 = C.GDK_KEY_braille_dots_5678
-// KEYBrailleDots568 wraps GDK_KEY_braille_dots_568
-const KEYBrailleDots568 = C.GDK_KEY_braille_dots_568
-// KEYBrailleDots57 wraps GDK_KEY_braille_dots_57
-const KEYBrailleDots57 = C.GDK_KEY_braille_dots_57
-// KEYBrailleDots578 wraps GDK_KEY_braille_dots_578
-const KEYBrailleDots578 = C.GDK_KEY_braille_dots_578
-// KEYBrailleDots58 wraps GDK_KEY_braille_dots_58
-const KEYBrailleDots58 = C.GDK_KEY_braille_dots_58
-// KEYBrailleDots6 wraps GDK_KEY_braille_dots_6
-const KEYBrailleDots6 = C.GDK_KEY_braille_dots_6
-// KEYBrailleDots67 wraps GDK_KEY_braille_dots_67
-const KEYBrailleDots67 = C.GDK_KEY_braille_dots_67
-// KEYBrailleDots678 wraps GDK_KEY_braille_dots_678
-const KEYBrailleDots678 = C.GDK_KEY_braille_dots_678
-// KEYBrailleDots68 wraps GDK_KEY_braille_dots_68
-const KEYBrailleDots68 = C.GDK_KEY_braille_dots_68
-// KEYBrailleDots7 wraps GDK_KEY_braille_dots_7
-const KEYBrailleDots7 = C.GDK_KEY_braille_dots_7
-// KEYBrailleDots78 wraps GDK_KEY_braille_dots_78
-const KEYBrailleDots78 = C.GDK_KEY_braille_dots_78
-// KEYBrailleDots8 wraps GDK_KEY_braille_dots_8
-const KEYBrailleDots8 = C.GDK_KEY_braille_dots_8
-// KEYBreve wraps GDK_KEY_breve
-const KEYBreve = C.GDK_KEY_breve
-// KEYBrokenbar wraps GDK_KEY_brokenbar
-const KEYBrokenbar = C.GDK_KEY_brokenbar
-// KEYC wraps GDK_KEY_c
-const KEYC = C.GDK_KEY_c
-// KEYCH wraps GDK_KEY_c_h
-const KEYCH = C.GDK_KEY_c_h
-// KEYCabovedot wraps GDK_KEY_cabovedot
-const KEYCabovedot = C.GDK_KEY_cabovedot
-// KEYCacute wraps GDK_KEY_cacute
-const KEYCacute = C.GDK_KEY_cacute
-// KEYCareof wraps GDK_KEY_careof
-const KEYCareof = C.GDK_KEY_careof
-// KEYCaret wraps GDK_KEY_caret
-const KEYCaret = C.GDK_KEY_caret
-// KEYCaron wraps GDK_KEY_caron
-const KEYCaron = C.GDK_KEY_caron
-// KEYCcaron wraps GDK_KEY_ccaron
-const KEYCcaron = C.GDK_KEY_ccaron
-// KEYCcedilla wraps GDK_KEY_ccedilla
-const KEYCcedilla = C.GDK_KEY_ccedilla
-// KEYCcircumflex wraps GDK_KEY_ccircumflex
-const KEYCcircumflex = C.GDK_KEY_ccircumflex
-// KEYCedilla wraps GDK_KEY_cedilla
-const KEYCedilla = C.GDK_KEY_cedilla
-// KEYCent wraps GDK_KEY_cent
-const KEYCent = C.GDK_KEY_cent
-// KEYCh wraps GDK_KEY_ch
-const KEYCh = C.GDK_KEY_ch
-// KEYCheckerboard wraps GDK_KEY_checkerboard
-const KEYCheckerboard = C.GDK_KEY_checkerboard
-// KEYCheckmark wraps GDK_KEY_checkmark
-const KEYCheckmark = C.GDK_KEY_checkmark
-// KEYCircle wraps GDK_KEY_circle
-const KEYCircle = C.GDK_KEY_circle
-// KEYClub wraps GDK_KEY_club
-const KEYClub = C.GDK_KEY_club
-// KEYColon wraps GDK_KEY_colon
-const KEYColon = C.GDK_KEY_colon
-// KEYCombiningAcute wraps GDK_KEY_combining_acute
-const KEYCombiningAcute = C.GDK_KEY_combining_acute
-// KEYCombiningBelowdot wraps GDK_KEY_combining_belowdot
-const KEYCombiningBelowdot = C.GDK_KEY_combining_belowdot
-// KEYCombiningGrave wraps GDK_KEY_combining_grave
-const KEYCombiningGrave = C.GDK_KEY_combining_grave
-// KEYCombiningHook wraps GDK_KEY_combining_hook
-const KEYCombiningHook = C.GDK_KEY_combining_hook
-// KEYCombiningTilde wraps GDK_KEY_combining_tilde
-const KEYCombiningTilde = C.GDK_KEY_combining_tilde
-// KEYComma wraps GDK_KEY_comma
-const KEYComma = C.GDK_KEY_comma
-// KEYContainsas wraps GDK_KEY_containsas
-const KEYContainsas = C.GDK_KEY_containsas
-// KEYCopyright wraps GDK_KEY_copyright
-const KEYCopyright = C.GDK_KEY_copyright
-// KEYCr wraps GDK_KEY_cr
-const KEYCr = C.GDK_KEY_cr
-// KEYCrossinglines wraps GDK_KEY_crossinglines
-const KEYCrossinglines = C.GDK_KEY_crossinglines
-// KEYCuberoot wraps GDK_KEY_cuberoot
-const KEYCuberoot = C.GDK_KEY_cuberoot
-// KEYCurrency wraps GDK_KEY_currency
-const KEYCurrency = C.GDK_KEY_currency
-// KEYCursor wraps GDK_KEY_cursor
-const KEYCursor = C.GDK_KEY_cursor
-// KEYD wraps GDK_KEY_d
-const KEYD = C.GDK_KEY_d
-// KEYDabovedot wraps GDK_KEY_dabovedot
-const KEYDabovedot = C.GDK_KEY_dabovedot
-// KEYDagger wraps GDK_KEY_dagger
-const KEYDagger = C.GDK_KEY_dagger
-// KEYDcaron wraps GDK_KEY_dcaron
-const KEYDcaron = C.GDK_KEY_dcaron
-// KEYDeadA wraps GDK_KEY_dead_A
-const KEYDeadA = C.GDK_KEY_dead_A
-// KEYDeadE wraps GDK_KEY_dead_E
-const KEYDeadE = C.GDK_KEY_dead_E
-// KEYDeadI wraps GDK_KEY_dead_I
-const KEYDeadI = C.GDK_KEY_dead_I
-// KEYDeadO wraps GDK_KEY_dead_O
-const KEYDeadO = C.GDK_KEY_dead_O
-// KEYDeadSCHWA wraps GDK_KEY_dead_SCHWA
-const KEYDeadSCHWA = C.GDK_KEY_dead_SCHWA
-// KEYDeadU wraps GDK_KEY_dead_U
-const KEYDeadU = C.GDK_KEY_dead_U
-// KEYDeadA wraps GDK_KEY_dead_a
-const KEYDeadA = C.GDK_KEY_dead_a
-// KEYDeadAbovecomma wraps GDK_KEY_dead_abovecomma
-const KEYDeadAbovecomma = C.GDK_KEY_dead_abovecomma
-// KEYDeadAbovedot wraps GDK_KEY_dead_abovedot
-const KEYDeadAbovedot = C.GDK_KEY_dead_abovedot
-// KEYDeadAbovereversedcomma wraps GDK_KEY_dead_abovereversedcomma
-const KEYDeadAbovereversedcomma = C.GDK_KEY_dead_abovereversedcomma
-// KEYDeadAbovering wraps GDK_KEY_dead_abovering
-const KEYDeadAbovering = C.GDK_KEY_dead_abovering
-// KEYDeadAboveverticalline wraps GDK_KEY_dead_aboveverticalline
-const KEYDeadAboveverticalline = C.GDK_KEY_dead_aboveverticalline
-// KEYDeadAcute wraps GDK_KEY_dead_acute
-const KEYDeadAcute = C.GDK_KEY_dead_acute
-// KEYDeadBelowbreve wraps GDK_KEY_dead_belowbreve
-const KEYDeadBelowbreve = C.GDK_KEY_dead_belowbreve
-// KEYDeadBelowcircumflex wraps GDK_KEY_dead_belowcircumflex
-const KEYDeadBelowcircumflex = C.GDK_KEY_dead_belowcircumflex
-// KEYDeadBelowcomma wraps GDK_KEY_dead_belowcomma
-const KEYDeadBelowcomma = C.GDK_KEY_dead_belowcomma
-// KEYDeadBelowdiaeresis wraps GDK_KEY_dead_belowdiaeresis
-const KEYDeadBelowdiaeresis = C.GDK_KEY_dead_belowdiaeresis
-// KEYDeadBelowdot wraps GDK_KEY_dead_belowdot
-const KEYDeadBelowdot = C.GDK_KEY_dead_belowdot
-// KEYDeadBelowmacron wraps GDK_KEY_dead_belowmacron
-const KEYDeadBelowmacron = C.GDK_KEY_dead_belowmacron
-// KEYDeadBelowring wraps GDK_KEY_dead_belowring
-const KEYDeadBelowring = C.GDK_KEY_dead_belowring
-// KEYDeadBelowtilde wraps GDK_KEY_dead_belowtilde
-const KEYDeadBelowtilde = C.GDK_KEY_dead_belowtilde
-// KEYDeadBelowverticalline wraps GDK_KEY_dead_belowverticalline
-const KEYDeadBelowverticalline = C.GDK_KEY_dead_belowverticalline
-// KEYDeadBreve wraps GDK_KEY_dead_breve
-const KEYDeadBreve = C.GDK_KEY_dead_breve
-// KEYDeadCapitalSchwa wraps GDK_KEY_dead_capital_schwa
-const KEYDeadCapitalSchwa = C.GDK_KEY_dead_capital_schwa
-// KEYDeadCaron wraps GDK_KEY_dead_caron
-const KEYDeadCaron = C.GDK_KEY_dead_caron
-// KEYDeadCedilla wraps GDK_KEY_dead_cedilla
-const KEYDeadCedilla = C.GDK_KEY_dead_cedilla
-// KEYDeadCircumflex wraps GDK_KEY_dead_circumflex
-const KEYDeadCircumflex = C.GDK_KEY_dead_circumflex
-// KEYDeadCurrency wraps GDK_KEY_dead_currency
-const KEYDeadCurrency = C.GDK_KEY_dead_currency
-// KEYDeadDasia wraps GDK_KEY_dead_dasia
-const KEYDeadDasia = C.GDK_KEY_dead_dasia
-// KEYDeadDiaeresis wraps GDK_KEY_dead_diaeresis
-const KEYDeadDiaeresis = C.GDK_KEY_dead_diaeresis
-// KEYDeadDoubleacute wraps GDK_KEY_dead_doubleacute
-const KEYDeadDoubleacute = C.GDK_KEY_dead_doubleacute
-// KEYDeadDoublegrave wraps GDK_KEY_dead_doublegrave
-const KEYDeadDoublegrave = C.GDK_KEY_dead_doublegrave
-// KEYDeadE wraps GDK_KEY_dead_e
-const KEYDeadE = C.GDK_KEY_dead_e
-// KEYDeadGrave wraps GDK_KEY_dead_grave
-const KEYDeadGrave = C.GDK_KEY_dead_grave
-// KEYDeadGreek wraps GDK_KEY_dead_greek
-const KEYDeadGreek = C.GDK_KEY_dead_greek
-// KEYDeadHamza wraps GDK_KEY_dead_hamza
-const KEYDeadHamza = C.GDK_KEY_dead_hamza
-// KEYDeadHook wraps GDK_KEY_dead_hook
-const KEYDeadHook = C.GDK_KEY_dead_hook
-// KEYDeadHorn wraps GDK_KEY_dead_horn
-const KEYDeadHorn = C.GDK_KEY_dead_horn
-// KEYDeadI wraps GDK_KEY_dead_i
-const KEYDeadI = C.GDK_KEY_dead_i
-// KEYDeadInvertedbreve wraps GDK_KEY_dead_invertedbreve
-const KEYDeadInvertedbreve = C.GDK_KEY_dead_invertedbreve
-// KEYDeadIota wraps GDK_KEY_dead_iota
-const KEYDeadIota = C.GDK_KEY_dead_iota
-// KEYDeadLongsolidusoverlay wraps GDK_KEY_dead_longsolidusoverlay
-const KEYDeadLongsolidusoverlay = C.GDK_KEY_dead_longsolidusoverlay
-// KEYDeadLowline wraps GDK_KEY_dead_lowline
-const KEYDeadLowline = C.GDK_KEY_dead_lowline
-// KEYDeadMacron wraps GDK_KEY_dead_macron
-const KEYDeadMacron = C.GDK_KEY_dead_macron
-// KEYDeadO wraps GDK_KEY_dead_o
-const KEYDeadO = C.GDK_KEY_dead_o
-// KEYDeadOgonek wraps GDK_KEY_dead_ogonek
-const KEYDeadOgonek = C.GDK_KEY_dead_ogonek
-// KEYDeadPerispomeni wraps GDK_KEY_dead_perispomeni
-const KEYDeadPerispomeni = C.GDK_KEY_dead_perispomeni
-// KEYDeadPsili wraps GDK_KEY_dead_psili
-const KEYDeadPsili = C.GDK_KEY_dead_psili
-// KEYDeadSchwa wraps GDK_KEY_dead_schwa
-const KEYDeadSchwa = C.GDK_KEY_dead_schwa
-// KEYDeadSemivoicedSound wraps GDK_KEY_dead_semivoiced_sound
-const KEYDeadSemivoicedSound = C.GDK_KEY_dead_semivoiced_sound
-// KEYDeadSmallSchwa wraps GDK_KEY_dead_small_schwa
-const KEYDeadSmallSchwa = C.GDK_KEY_dead_small_schwa
-// KEYDeadStroke wraps GDK_KEY_dead_stroke
-const KEYDeadStroke = C.GDK_KEY_dead_stroke
-// KEYDeadTilde wraps GDK_KEY_dead_tilde
-const KEYDeadTilde = C.GDK_KEY_dead_tilde
-// KEYDeadU wraps GDK_KEY_dead_u
-const KEYDeadU = C.GDK_KEY_dead_u
-// KEYDeadVoicedSound wraps GDK_KEY_dead_voiced_sound
-const KEYDeadVoicedSound = C.GDK_KEY_dead_voiced_sound
-// KEYDecimalpoint wraps GDK_KEY_decimalpoint
-const KEYDecimalpoint = C.GDK_KEY_decimalpoint
-// KEYDegree wraps GDK_KEY_degree
-const KEYDegree = C.GDK_KEY_degree
-// KEYDiaeresis wraps GDK_KEY_diaeresis
-const KEYDiaeresis = C.GDK_KEY_diaeresis
-// KEYDiamond wraps GDK_KEY_diamond
-const KEYDiamond = C.GDK_KEY_diamond
-// KEYDigitspace wraps GDK_KEY_digitspace
-const KEYDigitspace = C.GDK_KEY_digitspace
-// KEYDintegral wraps GDK_KEY_dintegral
-const KEYDintegral = C.GDK_KEY_dintegral
-// KEYDivision wraps GDK_KEY_division
-const KEYDivision = C.GDK_KEY_division
-// KEYDollar wraps GDK_KEY_dollar
-const KEYDollar = C.GDK_KEY_dollar
-// KEYDoubbaselinedot wraps GDK_KEY_doubbaselinedot
-const KEYDoubbaselinedot = C.GDK_KEY_doubbaselinedot
-// KEYDoubleacute wraps GDK_KEY_doubleacute
-const KEYDoubleacute = C.GDK_KEY_doubleacute
-// KEYDoubledagger wraps GDK_KEY_doubledagger
-const KEYDoubledagger = C.GDK_KEY_doubledagger
-// KEYDoublelowquotemark wraps GDK_KEY_doublelowquotemark
-const KEYDoublelowquotemark = C.GDK_KEY_doublelowquotemark
-// KEYDownarrow wraps GDK_KEY_downarrow
-const KEYDownarrow = C.GDK_KEY_downarrow
-// KEYDowncaret wraps GDK_KEY_downcaret
-const KEYDowncaret = C.GDK_KEY_downcaret
-// KEYDownshoe wraps GDK_KEY_downshoe
-const KEYDownshoe = C.GDK_KEY_downshoe
-// KEYDownstile wraps GDK_KEY_downstile
-const KEYDownstile = C.GDK_KEY_downstile
-// KEYDowntack wraps GDK_KEY_downtack
-const KEYDowntack = C.GDK_KEY_downtack
-// KEYDstroke wraps GDK_KEY_dstroke
-const KEYDstroke = C.GDK_KEY_dstroke
-// KEYE wraps GDK_KEY_e
-const KEYE = C.GDK_KEY_e
-// KEYEabovedot wraps GDK_KEY_eabovedot
-const KEYEabovedot = C.GDK_KEY_eabovedot
-// KEYEacute wraps GDK_KEY_eacute
-const KEYEacute = C.GDK_KEY_eacute
-// KEYEbelowdot wraps GDK_KEY_ebelowdot
-const KEYEbelowdot = C.GDK_KEY_ebelowdot
-// KEYEcaron wraps GDK_KEY_ecaron
-const KEYEcaron = C.GDK_KEY_ecaron
-// KEYEcircumflex wraps GDK_KEY_ecircumflex
-const KEYEcircumflex = C.GDK_KEY_ecircumflex
-// KEYEcircumflexacute wraps GDK_KEY_ecircumflexacute
-const KEYEcircumflexacute = C.GDK_KEY_ecircumflexacute
-// KEYEcircumflexbelowdot wraps GDK_KEY_ecircumflexbelowdot
-const KEYEcircumflexbelowdot = C.GDK_KEY_ecircumflexbelowdot
-// KEYEcircumflexgrave wraps GDK_KEY_ecircumflexgrave
-const KEYEcircumflexgrave = C.GDK_KEY_ecircumflexgrave
-// KEYEcircumflexhook wraps GDK_KEY_ecircumflexhook
-const KEYEcircumflexhook = C.GDK_KEY_ecircumflexhook
-// KEYEcircumflextilde wraps GDK_KEY_ecircumflextilde
-const KEYEcircumflextilde = C.GDK_KEY_ecircumflextilde
-// KEYEdiaeresis wraps GDK_KEY_ediaeresis
-const KEYEdiaeresis = C.GDK_KEY_ediaeresis
-// KEYEgrave wraps GDK_KEY_egrave
-const KEYEgrave = C.GDK_KEY_egrave
-// KEYEhook wraps GDK_KEY_ehook
-const KEYEhook = C.GDK_KEY_ehook
-// KEYEightsubscript wraps GDK_KEY_eightsubscript
-const KEYEightsubscript = C.GDK_KEY_eightsubscript
-// KEYEightsuperior wraps GDK_KEY_eightsuperior
-const KEYEightsuperior = C.GDK_KEY_eightsuperior
-// KEYElementof wraps GDK_KEY_elementof
-const KEYElementof = C.GDK_KEY_elementof
-// KEYEllipsis wraps GDK_KEY_ellipsis
-const KEYEllipsis = C.GDK_KEY_ellipsis
-// KEYEm3Space wraps GDK_KEY_em3space
-const KEYEm3Space = C.GDK_KEY_em3space
-// KEYEm4Space wraps GDK_KEY_em4space
-const KEYEm4Space = C.GDK_KEY_em4space
-// KEYEmacron wraps GDK_KEY_emacron
-const KEYEmacron = C.GDK_KEY_emacron
-// KEYEmdash wraps GDK_KEY_emdash
-const KEYEmdash = C.GDK_KEY_emdash
-// KEYEmfilledcircle wraps GDK_KEY_emfilledcircle
-const KEYEmfilledcircle = C.GDK_KEY_emfilledcircle
-// KEYEmfilledrect wraps GDK_KEY_emfilledrect
-const KEYEmfilledrect = C.GDK_KEY_emfilledrect
-// KEYEmopencircle wraps GDK_KEY_emopencircle
-const KEYEmopencircle = C.GDK_KEY_emopencircle
-// KEYEmopenrectangle wraps GDK_KEY_emopenrectangle
-const KEYEmopenrectangle = C.GDK_KEY_emopenrectangle
-// KEYEmptyset wraps GDK_KEY_emptyset
-const KEYEmptyset = C.GDK_KEY_emptyset
-// KEYEmspace wraps GDK_KEY_emspace
-const KEYEmspace = C.GDK_KEY_emspace
-// KEYEndash wraps GDK_KEY_endash
-const KEYEndash = C.GDK_KEY_endash
-// KEYEnfilledcircbullet wraps GDK_KEY_enfilledcircbullet
-const KEYEnfilledcircbullet = C.GDK_KEY_enfilledcircbullet
-// KEYEnfilledsqbullet wraps GDK_KEY_enfilledsqbullet
-const KEYEnfilledsqbullet = C.GDK_KEY_enfilledsqbullet
-// KEYEng wraps GDK_KEY_eng
-const KEYEng = C.GDK_KEY_eng
-// KEYEnopencircbullet wraps GDK_KEY_enopencircbullet
-const KEYEnopencircbullet = C.GDK_KEY_enopencircbullet
-// KEYEnopensquarebullet wraps GDK_KEY_enopensquarebullet
-const KEYEnopensquarebullet = C.GDK_KEY_enopensquarebullet
-// KEYEnspace wraps GDK_KEY_enspace
-const KEYEnspace = C.GDK_KEY_enspace
-// KEYEogonek wraps GDK_KEY_eogonek
-const KEYEogonek = C.GDK_KEY_eogonek
-// KEYEqual wraps GDK_KEY_equal
-const KEYEqual = C.GDK_KEY_equal
-// KEYEth wraps GDK_KEY_eth
-const KEYEth = C.GDK_KEY_eth
-// KEYEtilde wraps GDK_KEY_etilde
-const KEYEtilde = C.GDK_KEY_etilde
-// KEYExclam wraps GDK_KEY_exclam
-const KEYExclam = C.GDK_KEY_exclam
-// KEYExclamdown wraps GDK_KEY_exclamdown
-const KEYExclamdown = C.GDK_KEY_exclamdown
-// KEYEzh wraps GDK_KEY_ezh
-const KEYEzh = C.GDK_KEY_ezh
-// KEYF wraps GDK_KEY_f
-const KEYF = C.GDK_KEY_f
-// KEYFabovedot wraps GDK_KEY_fabovedot
-const KEYFabovedot = C.GDK_KEY_fabovedot
-// KEYFemalesymbol wraps GDK_KEY_femalesymbol
-const KEYFemalesymbol = C.GDK_KEY_femalesymbol
-// KEYFf wraps GDK_KEY_ff
-const KEYFf = C.GDK_KEY_ff
-// KEYFigdash wraps GDK_KEY_figdash
-const KEYFigdash = C.GDK_KEY_figdash
-// KEYFilledlefttribullet wraps GDK_KEY_filledlefttribullet
-const KEYFilledlefttribullet = C.GDK_KEY_filledlefttribullet
-// KEYFilledrectbullet wraps GDK_KEY_filledrectbullet
-const KEYFilledrectbullet = C.GDK_KEY_filledrectbullet
-// KEYFilledrighttribullet wraps GDK_KEY_filledrighttribullet
-const KEYFilledrighttribullet = C.GDK_KEY_filledrighttribullet
-// KEYFilledtribulletdown wraps GDK_KEY_filledtribulletdown
-const KEYFilledtribulletdown = C.GDK_KEY_filledtribulletdown
-// KEYFilledtribulletup wraps GDK_KEY_filledtribulletup
-const KEYFilledtribulletup = C.GDK_KEY_filledtribulletup
-// KEYFiveeighths wraps GDK_KEY_fiveeighths
-const KEYFiveeighths = C.GDK_KEY_fiveeighths
-// KEYFivesixths wraps GDK_KEY_fivesixths
-const KEYFivesixths = C.GDK_KEY_fivesixths
-// KEYFivesubscript wraps GDK_KEY_fivesubscript
-const KEYFivesubscript = C.GDK_KEY_fivesubscript
-// KEYFivesuperior wraps GDK_KEY_fivesuperior
-const KEYFivesuperior = C.GDK_KEY_fivesuperior
-// KEYFourfifths wraps GDK_KEY_fourfifths
-const KEYFourfifths = C.GDK_KEY_fourfifths
-// KEYFoursubscript wraps GDK_KEY_foursubscript
-const KEYFoursubscript = C.GDK_KEY_foursubscript
-// KEYFoursuperior wraps GDK_KEY_foursuperior
-const KEYFoursuperior = C.GDK_KEY_foursuperior
-// KEYFourthroot wraps GDK_KEY_fourthroot
-const KEYFourthroot = C.GDK_KEY_fourthroot
-// KEYFunction wraps GDK_KEY_function
-const KEYFunction = C.GDK_KEY_function
-// KEYG wraps GDK_KEY_g
-const KEYG = C.GDK_KEY_g
-// KEYGabovedot wraps GDK_KEY_gabovedot
-const KEYGabovedot = C.GDK_KEY_gabovedot
-// KEYGbreve wraps GDK_KEY_gbreve
-const KEYGbreve = C.GDK_KEY_gbreve
-// KEYGcaron wraps GDK_KEY_gcaron
-const KEYGcaron = C.GDK_KEY_gcaron
-// KEYGcedilla wraps GDK_KEY_gcedilla
-const KEYGcedilla = C.GDK_KEY_gcedilla
-// KEYGcircumflex wraps GDK_KEY_gcircumflex
-const KEYGcircumflex = C.GDK_KEY_gcircumflex
-// KEYGrave wraps GDK_KEY_grave
-const KEYGrave = C.GDK_KEY_grave
-// KEYGreater wraps GDK_KEY_greater
-const KEYGreater = C.GDK_KEY_greater
-// KEYGreaterthanequal wraps GDK_KEY_greaterthanequal
-const KEYGreaterthanequal = C.GDK_KEY_greaterthanequal
-// KEYGuillemetleft wraps GDK_KEY_guillemetleft
-const KEYGuillemetleft = C.GDK_KEY_guillemetleft
-// KEYGuillemetright wraps GDK_KEY_guillemetright
-const KEYGuillemetright = C.GDK_KEY_guillemetright
-// KEYGuillemotleft wraps GDK_KEY_guillemotleft
-const KEYGuillemotleft = C.GDK_KEY_guillemotleft
-// KEYGuillemotright wraps GDK_KEY_guillemotright
-const KEYGuillemotright = C.GDK_KEY_guillemotright
-// KEYH wraps GDK_KEY_h
-const KEYH = C.GDK_KEY_h
-// KEYHairspace wraps GDK_KEY_hairspace
-const KEYHairspace = C.GDK_KEY_hairspace
-// KEYHcircumflex wraps GDK_KEY_hcircumflex
-const KEYHcircumflex = C.GDK_KEY_hcircumflex
-// KEYHeart wraps GDK_KEY_heart
-const KEYHeart = C.GDK_KEY_heart
-// KEYHebrewAleph wraps GDK_KEY_hebrew_aleph
-const KEYHebrewAleph = C.GDK_KEY_hebrew_aleph
-// KEYHebrewAyin wraps GDK_KEY_hebrew_ayin
-const KEYHebrewAyin = C.GDK_KEY_hebrew_ayin
-// KEYHebrewBet wraps GDK_KEY_hebrew_bet
-const KEYHebrewBet = C.GDK_KEY_hebrew_bet
-// KEYHebrewBeth wraps GDK_KEY_hebrew_beth
-const KEYHebrewBeth = C.GDK_KEY_hebrew_beth
-// KEYHebrewChet wraps GDK_KEY_hebrew_chet
-const KEYHebrewChet = C.GDK_KEY_hebrew_chet
-// KEYHebrewDalet wraps GDK_KEY_hebrew_dalet
-const KEYHebrewDalet = C.GDK_KEY_hebrew_dalet
-// KEYHebrewDaleth wraps GDK_KEY_hebrew_daleth
-const KEYHebrewDaleth = C.GDK_KEY_hebrew_daleth
-// KEYHebrewDoublelowline wraps GDK_KEY_hebrew_doublelowline
-const KEYHebrewDoublelowline = C.GDK_KEY_hebrew_doublelowline
-// KEYHebrewFinalkaph wraps GDK_KEY_hebrew_finalkaph
-const KEYHebrewFinalkaph = C.GDK_KEY_hebrew_finalkaph
-// KEYHebrewFinalmem wraps GDK_KEY_hebrew_finalmem
-const KEYHebrewFinalmem = C.GDK_KEY_hebrew_finalmem
-// KEYHebrewFinalnun wraps GDK_KEY_hebrew_finalnun
-const KEYHebrewFinalnun = C.GDK_KEY_hebrew_finalnun
-// KEYHebrewFinalpe wraps GDK_KEY_hebrew_finalpe
-const KEYHebrewFinalpe = C.GDK_KEY_hebrew_finalpe
-// KEYHebrewFinalzade wraps GDK_KEY_hebrew_finalzade
-const KEYHebrewFinalzade = C.GDK_KEY_hebrew_finalzade
-// KEYHebrewFinalzadi wraps GDK_KEY_hebrew_finalzadi
-const KEYHebrewFinalzadi = C.GDK_KEY_hebrew_finalzadi
-// KEYHebrewGimel wraps GDK_KEY_hebrew_gimel
-const KEYHebrewGimel = C.GDK_KEY_hebrew_gimel
-// KEYHebrewGimmel wraps GDK_KEY_hebrew_gimmel
-const KEYHebrewGimmel = C.GDK_KEY_hebrew_gimmel
-// KEYHebrewHe wraps GDK_KEY_hebrew_he
-const KEYHebrewHe = C.GDK_KEY_hebrew_he
-// KEYHebrewHet wraps GDK_KEY_hebrew_het
-const KEYHebrewHet = C.GDK_KEY_hebrew_het
-// KEYHebrewKaph wraps GDK_KEY_hebrew_kaph
-const KEYHebrewKaph = C.GDK_KEY_hebrew_kaph
-// KEYHebrewKuf wraps GDK_KEY_hebrew_kuf
-const KEYHebrewKuf = C.GDK_KEY_hebrew_kuf
-// KEYHebrewLamed wraps GDK_KEY_hebrew_lamed
-const KEYHebrewLamed = C.GDK_KEY_hebrew_lamed
-// KEYHebrewMem wraps GDK_KEY_hebrew_mem
-const KEYHebrewMem = C.GDK_KEY_hebrew_mem
-// KEYHebrewNun wraps GDK_KEY_hebrew_nun
-const KEYHebrewNun = C.GDK_KEY_hebrew_nun
-// KEYHebrewPe wraps GDK_KEY_hebrew_pe
-const KEYHebrewPe = C.GDK_KEY_hebrew_pe
-// KEYHebrewQoph wraps GDK_KEY_hebrew_qoph
-const KEYHebrewQoph = C.GDK_KEY_hebrew_qoph
-// KEYHebrewResh wraps GDK_KEY_hebrew_resh
-const KEYHebrewResh = C.GDK_KEY_hebrew_resh
-// KEYHebrewSamech wraps GDK_KEY_hebrew_samech
-const KEYHebrewSamech = C.GDK_KEY_hebrew_samech
-// KEYHebrewSamekh wraps GDK_KEY_hebrew_samekh
-const KEYHebrewSamekh = C.GDK_KEY_hebrew_samekh
-// KEYHebrewShin wraps GDK_KEY_hebrew_shin
-const KEYHebrewShin = C.GDK_KEY_hebrew_shin
-// KEYHebrewTaf wraps GDK_KEY_hebrew_taf
-const KEYHebrewTaf = C.GDK_KEY_hebrew_taf
-// KEYHebrewTaw wraps GDK_KEY_hebrew_taw
-const KEYHebrewTaw = C.GDK_KEY_hebrew_taw
-// KEYHebrewTet wraps GDK_KEY_hebrew_tet
-const KEYHebrewTet = C.GDK_KEY_hebrew_tet
-// KEYHebrewTeth wraps GDK_KEY_hebrew_teth
-const KEYHebrewTeth = C.GDK_KEY_hebrew_teth
-// KEYHebrewWaw wraps GDK_KEY_hebrew_waw
-const KEYHebrewWaw = C.GDK_KEY_hebrew_waw
-// KEYHebrewYod wraps GDK_KEY_hebrew_yod
-const KEYHebrewYod = C.GDK_KEY_hebrew_yod
-// KEYHebrewZade wraps GDK_KEY_hebrew_zade
-const KEYHebrewZade = C.GDK_KEY_hebrew_zade
-// KEYHebrewZadi wraps GDK_KEY_hebrew_zadi
-const KEYHebrewZadi = C.GDK_KEY_hebrew_zadi
-// KEYHebrewZain wraps GDK_KEY_hebrew_zain
-const KEYHebrewZain = C.GDK_KEY_hebrew_zain
-// KEYHebrewZayin wraps GDK_KEY_hebrew_zayin
-const KEYHebrewZayin = C.GDK_KEY_hebrew_zayin
-// KEYHexagram wraps GDK_KEY_hexagram
-const KEYHexagram = C.GDK_KEY_hexagram
-// KEYHorizconnector wraps GDK_KEY_horizconnector
-const KEYHorizconnector = C.GDK_KEY_horizconnector
-// KEYHorizlinescan1 wraps GDK_KEY_horizlinescan1
-const KEYHorizlinescan1 = C.GDK_KEY_horizlinescan1
-// KEYHorizlinescan3 wraps GDK_KEY_horizlinescan3
-const KEYHorizlinescan3 = C.GDK_KEY_horizlinescan3
-// KEYHorizlinescan5 wraps GDK_KEY_horizlinescan5
-const KEYHorizlinescan5 = C.GDK_KEY_horizlinescan5
-// KEYHorizlinescan7 wraps GDK_KEY_horizlinescan7
-const KEYHorizlinescan7 = C.GDK_KEY_horizlinescan7
-// KEYHorizlinescan9 wraps GDK_KEY_horizlinescan9
-const KEYHorizlinescan9 = C.GDK_KEY_horizlinescan9
-// KEYHstroke wraps GDK_KEY_hstroke
-const KEYHstroke = C.GDK_KEY_hstroke
-// KEYHt wraps GDK_KEY_ht
-const KEYHt = C.GDK_KEY_ht
-// KEYHyphen wraps GDK_KEY_hyphen
-const KEYHyphen = C.GDK_KEY_hyphen
-// KEYI wraps GDK_KEY_i
-const KEYI = C.GDK_KEY_i
-// KEYITouch wraps GDK_KEY_iTouch
-const KEYITouch = C.GDK_KEY_iTouch
-// KEYIacute wraps GDK_KEY_iacute
-const KEYIacute = C.GDK_KEY_iacute
-// KEYIbelowdot wraps GDK_KEY_ibelowdot
-const KEYIbelowdot = C.GDK_KEY_ibelowdot
-// KEYIbreve wraps GDK_KEY_ibreve
-const KEYIbreve = C.GDK_KEY_ibreve
-// KEYIcircumflex wraps GDK_KEY_icircumflex
-const KEYIcircumflex = C.GDK_KEY_icircumflex
-// KEYIdentical wraps GDK_KEY_identical
-const KEYIdentical = C.GDK_KEY_identical
-// KEYIdiaeresis wraps GDK_KEY_idiaeresis
-const KEYIdiaeresis = C.GDK_KEY_idiaeresis
-// KEYIdotless wraps GDK_KEY_idotless
-const KEYIdotless = C.GDK_KEY_idotless
-// KEYIfonlyif wraps GDK_KEY_ifonlyif
-const KEYIfonlyif = C.GDK_KEY_ifonlyif
-// KEYIgrave wraps GDK_KEY_igrave
-const KEYIgrave = C.GDK_KEY_igrave
-// KEYIhook wraps GDK_KEY_ihook
-const KEYIhook = C.GDK_KEY_ihook
-// KEYImacron wraps GDK_KEY_imacron
-const KEYImacron = C.GDK_KEY_imacron
-// KEYImplies wraps GDK_KEY_implies
-const KEYImplies = C.GDK_KEY_implies
-// KEYIncludedin wraps GDK_KEY_includedin
-const KEYIncludedin = C.GDK_KEY_includedin
-// KEYIncludes wraps GDK_KEY_includes
-const KEYIncludes = C.GDK_KEY_includes
-// KEYInfinity wraps GDK_KEY_infinity
-const KEYInfinity = C.GDK_KEY_infinity
-// KEYIntegral wraps GDK_KEY_integral
-const KEYIntegral = C.GDK_KEY_integral
-// KEYIntersection wraps GDK_KEY_intersection
-const KEYIntersection = C.GDK_KEY_intersection
-// KEYIogonek wraps GDK_KEY_iogonek
-const KEYIogonek = C.GDK_KEY_iogonek
-// KEYItilde wraps GDK_KEY_itilde
-const KEYItilde = C.GDK_KEY_itilde
-// KEYJ wraps GDK_KEY_j
-const KEYJ = C.GDK_KEY_j
-// KEYJcircumflex wraps GDK_KEY_jcircumflex
-const KEYJcircumflex = C.GDK_KEY_jcircumflex
-// KEYJot wraps GDK_KEY_jot
-const KEYJot = C.GDK_KEY_jot
-// KEYK wraps GDK_KEY_k
-const KEYK = C.GDK_KEY_k
-// KEYKanaA wraps GDK_KEY_kana_A
-const KEYKanaA = C.GDK_KEY_kana_A
-// KEYKanaCHI wraps GDK_KEY_kana_CHI
-const KEYKanaCHI = C.GDK_KEY_kana_CHI
-// KEYKanaE wraps GDK_KEY_kana_E
-const KEYKanaE = C.GDK_KEY_kana_E
-// KEYKanaFU wraps GDK_KEY_kana_FU
-const KEYKanaFU = C.GDK_KEY_kana_FU
-// KEYKanaHA wraps GDK_KEY_kana_HA
-const KEYKanaHA = C.GDK_KEY_kana_HA
-// KEYKanaHE wraps GDK_KEY_kana_HE
-const KEYKanaHE = C.GDK_KEY_kana_HE
-// KEYKanaHI wraps GDK_KEY_kana_HI
-const KEYKanaHI = C.GDK_KEY_kana_HI
-// KEYKanaHO wraps GDK_KEY_kana_HO
-const KEYKanaHO = C.GDK_KEY_kana_HO
-// KEYKanaHU wraps GDK_KEY_kana_HU
-const KEYKanaHU = C.GDK_KEY_kana_HU
-// KEYKanaI wraps GDK_KEY_kana_I
-const KEYKanaI = C.GDK_KEY_kana_I
-// KEYKanaKA wraps GDK_KEY_kana_KA
-const KEYKanaKA = C.GDK_KEY_kana_KA
-// KEYKanaKE wraps GDK_KEY_kana_KE
-const KEYKanaKE = C.GDK_KEY_kana_KE
-// KEYKanaKI wraps GDK_KEY_kana_KI
-const KEYKanaKI = C.GDK_KEY_kana_KI
-// KEYKanaKO wraps GDK_KEY_kana_KO
-const KEYKanaKO = C.GDK_KEY_kana_KO
-// KEYKanaKU wraps GDK_KEY_kana_KU
-const KEYKanaKU = C.GDK_KEY_kana_KU
-// KEYKanaMA wraps GDK_KEY_kana_MA
-const KEYKanaMA = C.GDK_KEY_kana_MA
-// KEYKanaME wraps GDK_KEY_kana_ME
-const KEYKanaME = C.GDK_KEY_kana_ME
-// KEYKanaMI wraps GDK_KEY_kana_MI
-const KEYKanaMI = C.GDK_KEY_kana_MI
-// KEYKanaMO wraps GDK_KEY_kana_MO
-const KEYKanaMO = C.GDK_KEY_kana_MO
-// KEYKanaMU wraps GDK_KEY_kana_MU
-const KEYKanaMU = C.GDK_KEY_kana_MU
-// KEYKanaN wraps GDK_KEY_kana_N
-const KEYKanaN = C.GDK_KEY_kana_N
-// KEYKanaNA wraps GDK_KEY_kana_NA
-const KEYKanaNA = C.GDK_KEY_kana_NA
-// KEYKanaNE wraps GDK_KEY_kana_NE
-const KEYKanaNE = C.GDK_KEY_kana_NE
-// KEYKanaNI wraps GDK_KEY_kana_NI
-const KEYKanaNI = C.GDK_KEY_kana_NI
-// KEYKanaNO wraps GDK_KEY_kana_NO
-const KEYKanaNO = C.GDK_KEY_kana_NO
-// KEYKanaNU wraps GDK_KEY_kana_NU
-const KEYKanaNU = C.GDK_KEY_kana_NU
-// KEYKanaO wraps GDK_KEY_kana_O
-const KEYKanaO = C.GDK_KEY_kana_O
-// KEYKanaRA wraps GDK_KEY_kana_RA
-const KEYKanaRA = C.GDK_KEY_kana_RA
-// KEYKanaRE wraps GDK_KEY_kana_RE
-const KEYKanaRE = C.GDK_KEY_kana_RE
-// KEYKanaRI wraps GDK_KEY_kana_RI
-const KEYKanaRI = C.GDK_KEY_kana_RI
-// KEYKanaRO wraps GDK_KEY_kana_RO
-const KEYKanaRO = C.GDK_KEY_kana_RO
-// KEYKanaRU wraps GDK_KEY_kana_RU
-const KEYKanaRU = C.GDK_KEY_kana_RU
-// KEYKanaSA wraps GDK_KEY_kana_SA
-const KEYKanaSA = C.GDK_KEY_kana_SA
-// KEYKanaSE wraps GDK_KEY_kana_SE
-const KEYKanaSE = C.GDK_KEY_kana_SE
-// KEYKanaSHI wraps GDK_KEY_kana_SHI
-const KEYKanaSHI = C.GDK_KEY_kana_SHI
-// KEYKanaSO wraps GDK_KEY_kana_SO
-const KEYKanaSO = C.GDK_KEY_kana_SO
-// KEYKanaSU wraps GDK_KEY_kana_SU
-const KEYKanaSU = C.GDK_KEY_kana_SU
-// KEYKanaTA wraps GDK_KEY_kana_TA
-const KEYKanaTA = C.GDK_KEY_kana_TA
-// KEYKanaTE wraps GDK_KEY_kana_TE
-const KEYKanaTE = C.GDK_KEY_kana_TE
-// KEYKanaTI wraps GDK_KEY_kana_TI
-const KEYKanaTI = C.GDK_KEY_kana_TI
-// KEYKanaTO wraps GDK_KEY_kana_TO
-const KEYKanaTO = C.GDK_KEY_kana_TO
-// KEYKanaTSU wraps GDK_KEY_kana_TSU
-const KEYKanaTSU = C.GDK_KEY_kana_TSU
-// KEYKanaTU wraps GDK_KEY_kana_TU
-const KEYKanaTU = C.GDK_KEY_kana_TU
-// KEYKanaU wraps GDK_KEY_kana_U
-const KEYKanaU = C.GDK_KEY_kana_U
-// KEYKanaWA wraps GDK_KEY_kana_WA
-const KEYKanaWA = C.GDK_KEY_kana_WA
-// KEYKanaWO wraps GDK_KEY_kana_WO
-const KEYKanaWO = C.GDK_KEY_kana_WO
-// KEYKanaYA wraps GDK_KEY_kana_YA
-const KEYKanaYA = C.GDK_KEY_kana_YA
-// KEYKanaYO wraps GDK_KEY_kana_YO
-const KEYKanaYO = C.GDK_KEY_kana_YO
-// KEYKanaYU wraps GDK_KEY_kana_YU
-const KEYKanaYU = C.GDK_KEY_kana_YU
-// KEYKanaA wraps GDK_KEY_kana_a
-const KEYKanaA = C.GDK_KEY_kana_a
-// KEYKanaClosingbracket wraps GDK_KEY_kana_closingbracket
-const KEYKanaClosingbracket = C.GDK_KEY_kana_closingbracket
-// KEYKanaComma wraps GDK_KEY_kana_comma
-const KEYKanaComma = C.GDK_KEY_kana_comma
-// KEYKanaConjunctive wraps GDK_KEY_kana_conjunctive
-const KEYKanaConjunctive = C.GDK_KEY_kana_conjunctive
-// KEYKanaE wraps GDK_KEY_kana_e
-const KEYKanaE = C.GDK_KEY_kana_e
-// KEYKanaFullstop wraps GDK_KEY_kana_fullstop
-const KEYKanaFullstop = C.GDK_KEY_kana_fullstop
-// KEYKanaI wraps GDK_KEY_kana_i
-const KEYKanaI = C.GDK_KEY_kana_i
-// KEYKanaMiddledot wraps GDK_KEY_kana_middledot
-const KEYKanaMiddledot = C.GDK_KEY_kana_middledot
-// KEYKanaO wraps GDK_KEY_kana_o
-const KEYKanaO = C.GDK_KEY_kana_o
-// KEYKanaOpeningbracket wraps GDK_KEY_kana_openingbracket
-const KEYKanaOpeningbracket = C.GDK_KEY_kana_openingbracket
-// KEYKanaSwitch wraps GDK_KEY_kana_switch
-const KEYKanaSwitch = C.GDK_KEY_kana_switch
-// KEYKanaTsu wraps GDK_KEY_kana_tsu
-const KEYKanaTsu = C.GDK_KEY_kana_tsu
-// KEYKanaTu wraps GDK_KEY_kana_tu
-const KEYKanaTu = C.GDK_KEY_kana_tu
-// KEYKanaU wraps GDK_KEY_kana_u
-const KEYKanaU = C.GDK_KEY_kana_u
-// KEYKanaYa wraps GDK_KEY_kana_ya
-const KEYKanaYa = C.GDK_KEY_kana_ya
-// KEYKanaYo wraps GDK_KEY_kana_yo
-const KEYKanaYo = C.GDK_KEY_kana_yo
-// KEYKanaYu wraps GDK_KEY_kana_yu
-const KEYKanaYu = C.GDK_KEY_kana_yu
-// KEYKappa wraps GDK_KEY_kappa
-const KEYKappa = C.GDK_KEY_kappa
-// KEYKcedilla wraps GDK_KEY_kcedilla
-const KEYKcedilla = C.GDK_KEY_kcedilla
-// KEYKra wraps GDK_KEY_kra
-const KEYKra = C.GDK_KEY_kra
-// KEYL wraps GDK_KEY_l
-const KEYL = C.GDK_KEY_l
-// KEYLacute wraps GDK_KEY_lacute
-const KEYLacute = C.GDK_KEY_lacute
-// KEYLatincross wraps GDK_KEY_latincross
-const KEYLatincross = C.GDK_KEY_latincross
-// KEYLbelowdot wraps GDK_KEY_lbelowdot
-const KEYLbelowdot = C.GDK_KEY_lbelowdot
-// KEYLcaron wraps GDK_KEY_lcaron
-const KEYLcaron = C.GDK_KEY_lcaron
-// KEYLcedilla wraps GDK_KEY_lcedilla
-const KEYLcedilla = C.GDK_KEY_lcedilla
-// KEYLeftanglebracket wraps GDK_KEY_leftanglebracket
-const KEYLeftanglebracket = C.GDK_KEY_leftanglebracket
-// KEYLeftarrow wraps GDK_KEY_leftarrow
-const KEYLeftarrow = C.GDK_KEY_leftarrow
-// KEYLeftcaret wraps GDK_KEY_leftcaret
-const KEYLeftcaret = C.GDK_KEY_leftcaret
-// KEYLeftdoublequotemark wraps GDK_KEY_leftdoublequotemark
-const KEYLeftdoublequotemark = C.GDK_KEY_leftdoublequotemark
-// KEYLeftmiddlecurlybrace wraps GDK_KEY_leftmiddlecurlybrace
-const KEYLeftmiddlecurlybrace = C.GDK_KEY_leftmiddlecurlybrace
-// KEYLeftopentriangle wraps GDK_KEY_leftopentriangle
-const KEYLeftopentriangle = C.GDK_KEY_leftopentriangle
-// KEYLeftpointer wraps GDK_KEY_leftpointer
-const KEYLeftpointer = C.GDK_KEY_leftpointer
-// KEYLeftradical wraps GDK_KEY_leftradical
-const KEYLeftradical = C.GDK_KEY_leftradical
-// KEYLeftshoe wraps GDK_KEY_leftshoe
-const KEYLeftshoe = C.GDK_KEY_leftshoe
-// KEYLeftsinglequotemark wraps GDK_KEY_leftsinglequotemark
-const KEYLeftsinglequotemark = C.GDK_KEY_leftsinglequotemark
-// KEYLeftt wraps GDK_KEY_leftt
-const KEYLeftt = C.GDK_KEY_leftt
-// KEYLefttack wraps GDK_KEY_lefttack
-const KEYLefttack = C.GDK_KEY_lefttack
-// KEYLess wraps GDK_KEY_less
-const KEYLess = C.GDK_KEY_less
-// KEYLessthanequal wraps GDK_KEY_lessthanequal
-const KEYLessthanequal = C.GDK_KEY_lessthanequal
-// KEYLf wraps GDK_KEY_lf
-const KEYLf = C.GDK_KEY_lf
-// KEYLogicaland wraps GDK_KEY_logicaland
-const KEYLogicaland = C.GDK_KEY_logicaland
-// KEYLogicalor wraps GDK_KEY_logicalor
-const KEYLogicalor = C.GDK_KEY_logicalor
-// KEYLowleftcorner wraps GDK_KEY_lowleftcorner
-const KEYLowleftcorner = C.GDK_KEY_lowleftcorner
-// KEYLowrightcorner wraps GDK_KEY_lowrightcorner
-const KEYLowrightcorner = C.GDK_KEY_lowrightcorner
-// KEYLstroke wraps GDK_KEY_lstroke
-const KEYLstroke = C.GDK_KEY_lstroke
-// KEYM wraps GDK_KEY_m
-const KEYM = C.GDK_KEY_m
-// KEYMabovedot wraps GDK_KEY_mabovedot
-const KEYMabovedot = C.GDK_KEY_mabovedot
-// KEYMacron wraps GDK_KEY_macron
-const KEYMacron = C.GDK_KEY_macron
-// KEYMalesymbol wraps GDK_KEY_malesymbol
-const KEYMalesymbol = C.GDK_KEY_malesymbol
-// KEYMaltesecross wraps GDK_KEY_maltesecross
-const KEYMaltesecross = C.GDK_KEY_maltesecross
-// KEYMarker wraps GDK_KEY_marker
-const KEYMarker = C.GDK_KEY_marker
-// KEYMasculine wraps GDK_KEY_masculine
-const KEYMasculine = C.GDK_KEY_masculine
-// KEYMinus wraps GDK_KEY_minus
-const KEYMinus = C.GDK_KEY_minus
-// KEYMinutes wraps GDK_KEY_minutes
-const KEYMinutes = C.GDK_KEY_minutes
-// KEYMu wraps GDK_KEY_mu
-const KEYMu = C.GDK_KEY_mu
-// KEYMultiply wraps GDK_KEY_multiply
-const KEYMultiply = C.GDK_KEY_multiply
-// KEYMusicalflat wraps GDK_KEY_musicalflat
-const KEYMusicalflat = C.GDK_KEY_musicalflat
-// KEYMusicalsharp wraps GDK_KEY_musicalsharp
-const KEYMusicalsharp = C.GDK_KEY_musicalsharp
-// KEYN wraps GDK_KEY_n
-const KEYN = C.GDK_KEY_n
-// KEYNabla wraps GDK_KEY_nabla
-const KEYNabla = C.GDK_KEY_nabla
-// KEYNacute wraps GDK_KEY_nacute
-const KEYNacute = C.GDK_KEY_nacute
-// KEYNcaron wraps GDK_KEY_ncaron
-const KEYNcaron = C.GDK_KEY_ncaron
-// KEYNcedilla wraps GDK_KEY_ncedilla
-const KEYNcedilla = C.GDK_KEY_ncedilla
-// KEYNinesubscript wraps GDK_KEY_ninesubscript
-const KEYNinesubscript = C.GDK_KEY_ninesubscript
-// KEYNinesuperior wraps GDK_KEY_ninesuperior
-const KEYNinesuperior = C.GDK_KEY_ninesuperior
-// KEYNl wraps GDK_KEY_nl
-const KEYNl = C.GDK_KEY_nl
-// KEYNobreakspace wraps GDK_KEY_nobreakspace
-const KEYNobreakspace = C.GDK_KEY_nobreakspace
-// KEYNotapproxeq wraps GDK_KEY_notapproxeq
-const KEYNotapproxeq = C.GDK_KEY_notapproxeq
-// KEYNotelementof wraps GDK_KEY_notelementof
-const KEYNotelementof = C.GDK_KEY_notelementof
-// KEYNotequal wraps GDK_KEY_notequal
-const KEYNotequal = C.GDK_KEY_notequal
-// KEYNotidentical wraps GDK_KEY_notidentical
-const KEYNotidentical = C.GDK_KEY_notidentical
-// KEYNotsign wraps GDK_KEY_notsign
-const KEYNotsign = C.GDK_KEY_notsign
-// KEYNtilde wraps GDK_KEY_ntilde
-const KEYNtilde = C.GDK_KEY_ntilde
-// KEYNumbersign wraps GDK_KEY_numbersign
-const KEYNumbersign = C.GDK_KEY_numbersign
-// KEYNumerosign wraps GDK_KEY_numerosign
-const KEYNumerosign = C.GDK_KEY_numerosign
-// KEYO wraps GDK_KEY_o
-const KEYO = C.GDK_KEY_o
-// KEYOacute wraps GDK_KEY_oacute
-const KEYOacute = C.GDK_KEY_oacute
-// KEYObarred wraps GDK_KEY_obarred
-const KEYObarred = C.GDK_KEY_obarred
-// KEYObelowdot wraps GDK_KEY_obelowdot
-const KEYObelowdot = C.GDK_KEY_obelowdot
-// KEYOcaron wraps GDK_KEY_ocaron
-const KEYOcaron = C.GDK_KEY_ocaron
-// KEYOcircumflex wraps GDK_KEY_ocircumflex
-const KEYOcircumflex = C.GDK_KEY_ocircumflex
-// KEYOcircumflexacute wraps GDK_KEY_ocircumflexacute
-const KEYOcircumflexacute = C.GDK_KEY_ocircumflexacute
-// KEYOcircumflexbelowdot wraps GDK_KEY_ocircumflexbelowdot
-const KEYOcircumflexbelowdot = C.GDK_KEY_ocircumflexbelowdot
-// KEYOcircumflexgrave wraps GDK_KEY_ocircumflexgrave
-const KEYOcircumflexgrave = C.GDK_KEY_ocircumflexgrave
-// KEYOcircumflexhook wraps GDK_KEY_ocircumflexhook
-const KEYOcircumflexhook = C.GDK_KEY_ocircumflexhook
-// KEYOcircumflextilde wraps GDK_KEY_ocircumflextilde
-const KEYOcircumflextilde = C.GDK_KEY_ocircumflextilde
-// KEYOdiaeresis wraps GDK_KEY_odiaeresis
-const KEYOdiaeresis = C.GDK_KEY_odiaeresis
-// KEYOdoubleacute wraps GDK_KEY_odoubleacute
-const KEYOdoubleacute = C.GDK_KEY_odoubleacute
-// KEYOe wraps GDK_KEY_oe
-const KEYOe = C.GDK_KEY_oe
-// KEYOgonek wraps GDK_KEY_ogonek
-const KEYOgonek = C.GDK_KEY_ogonek
-// KEYOgrave wraps GDK_KEY_ograve
-const KEYOgrave = C.GDK_KEY_ograve
-// KEYOhook wraps GDK_KEY_ohook
-const KEYOhook = C.GDK_KEY_ohook
-// KEYOhorn wraps GDK_KEY_ohorn
-const KEYOhorn = C.GDK_KEY_ohorn
-// KEYOhornacute wraps GDK_KEY_ohornacute
-const KEYOhornacute = C.GDK_KEY_ohornacute
-// KEYOhornbelowdot wraps GDK_KEY_ohornbelowdot
-const KEYOhornbelowdot = C.GDK_KEY_ohornbelowdot
-// KEYOhorngrave wraps GDK_KEY_ohorngrave
-const KEYOhorngrave = C.GDK_KEY_ohorngrave
-// KEYOhornhook wraps GDK_KEY_ohornhook
-const KEYOhornhook = C.GDK_KEY_ohornhook
-// KEYOhorntilde wraps GDK_KEY_ohorntilde
-const KEYOhorntilde = C.GDK_KEY_ohorntilde
-// KEYOmacron wraps GDK_KEY_omacron
-const KEYOmacron = C.GDK_KEY_omacron
-// KEYOneeighth wraps GDK_KEY_oneeighth
-const KEYOneeighth = C.GDK_KEY_oneeighth
-// KEYOnefifth wraps GDK_KEY_onefifth
-const KEYOnefifth = C.GDK_KEY_onefifth
-// KEYOnehalf wraps GDK_KEY_onehalf
-const KEYOnehalf = C.GDK_KEY_onehalf
-// KEYOnequarter wraps GDK_KEY_onequarter
-const KEYOnequarter = C.GDK_KEY_onequarter
-// KEYOnesixth wraps GDK_KEY_onesixth
-const KEYOnesixth = C.GDK_KEY_onesixth
-// KEYOnesubscript wraps GDK_KEY_onesubscript
-const KEYOnesubscript = C.GDK_KEY_onesubscript
-// KEYOnesuperior wraps GDK_KEY_onesuperior
-const KEYOnesuperior = C.GDK_KEY_onesuperior
-// KEYOnethird wraps GDK_KEY_onethird
-const KEYOnethird = C.GDK_KEY_onethird
-// KEYOoblique wraps GDK_KEY_ooblique
-const KEYOoblique = C.GDK_KEY_ooblique
-// KEYOpenrectbullet wraps GDK_KEY_openrectbullet
-const KEYOpenrectbullet = C.GDK_KEY_openrectbullet
-// KEYOpenstar wraps GDK_KEY_openstar
-const KEYOpenstar = C.GDK_KEY_openstar
-// KEYOpentribulletdown wraps GDK_KEY_opentribulletdown
-const KEYOpentribulletdown = C.GDK_KEY_opentribulletdown
-// KEYOpentribulletup wraps GDK_KEY_opentribulletup
-const KEYOpentribulletup = C.GDK_KEY_opentribulletup
-// KEYOrdfeminine wraps GDK_KEY_ordfeminine
-const KEYOrdfeminine = C.GDK_KEY_ordfeminine
-// KEYOrdmasculine wraps GDK_KEY_ordmasculine
-const KEYOrdmasculine = C.GDK_KEY_ordmasculine
-// KEYOslash wraps GDK_KEY_oslash
-const KEYOslash = C.GDK_KEY_oslash
-// KEYOtilde wraps GDK_KEY_otilde
-const KEYOtilde = C.GDK_KEY_otilde
-// KEYOverbar wraps GDK_KEY_overbar
-const KEYOverbar = C.GDK_KEY_overbar
-// KEYOverline wraps GDK_KEY_overline
-const KEYOverline = C.GDK_KEY_overline
-// KEYP wraps GDK_KEY_p
-const KEYP = C.GDK_KEY_p
-// KEYPabovedot wraps GDK_KEY_pabovedot
-const KEYPabovedot = C.GDK_KEY_pabovedot
-// KEYParagraph wraps GDK_KEY_paragraph
-const KEYParagraph = C.GDK_KEY_paragraph
-// KEYParenleft wraps GDK_KEY_parenleft
-const KEYParenleft = C.GDK_KEY_parenleft
-// KEYParenright wraps GDK_KEY_parenright
-const KEYParenright = C.GDK_KEY_parenright
-// KEYPartdifferential wraps GDK_KEY_partdifferential
-const KEYPartdifferential = C.GDK_KEY_partdifferential
-// KEYPartialderivative wraps GDK_KEY_partialderivative
-const KEYPartialderivative = C.GDK_KEY_partialderivative
-// KEYPercent wraps GDK_KEY_percent
-const KEYPercent = C.GDK_KEY_percent
-// KEYPeriod wraps GDK_KEY_period
-const KEYPeriod = C.GDK_KEY_period
-// KEYPeriodcentered wraps GDK_KEY_periodcentered
-const KEYPeriodcentered = C.GDK_KEY_periodcentered
-// KEYPermille wraps GDK_KEY_permille
-const KEYPermille = C.GDK_KEY_permille
-// KEYPhonographcopyright wraps GDK_KEY_phonographcopyright
-const KEYPhonographcopyright = C.GDK_KEY_phonographcopyright
-// KEYPlus wraps GDK_KEY_plus
-const KEYPlus = C.GDK_KEY_plus
-// KEYPlusminus wraps GDK_KEY_plusminus
-const KEYPlusminus = C.GDK_KEY_plusminus
-// KEYPrescription wraps GDK_KEY_prescription
-const KEYPrescription = C.GDK_KEY_prescription
-// KEYProlongedsound wraps GDK_KEY_prolongedsound
-const KEYProlongedsound = C.GDK_KEY_prolongedsound
-// KEYPunctspace wraps GDK_KEY_punctspace
-const KEYPunctspace = C.GDK_KEY_punctspace
-// KEYQ wraps GDK_KEY_q
-const KEYQ = C.GDK_KEY_q
-// KEYQuad wraps GDK_KEY_quad
-const KEYQuad = C.GDK_KEY_quad
-// KEYQuestion wraps GDK_KEY_question
-const KEYQuestion = C.GDK_KEY_question
-// KEYQuestiondown wraps GDK_KEY_questiondown
-const KEYQuestiondown = C.GDK_KEY_questiondown
-// KEYQuotedbl wraps GDK_KEY_quotedbl
-const KEYQuotedbl = C.GDK_KEY_quotedbl
-// KEYQuoteleft wraps GDK_KEY_quoteleft
-const KEYQuoteleft = C.GDK_KEY_quoteleft
-// KEYQuoteright wraps GDK_KEY_quoteright
-const KEYQuoteright = C.GDK_KEY_quoteright
-// KEYR wraps GDK_KEY_r
-const KEYR = C.GDK_KEY_r
-// KEYRacute wraps GDK_KEY_racute
-const KEYRacute = C.GDK_KEY_racute
-// KEYRadical wraps GDK_KEY_radical
-const KEYRadical = C.GDK_KEY_radical
-// KEYRcaron wraps GDK_KEY_rcaron
-const KEYRcaron = C.GDK_KEY_rcaron
-// KEYRcedilla wraps GDK_KEY_rcedilla
-const KEYRcedilla = C.GDK_KEY_rcedilla
-// KEYRegistered wraps GDK_KEY_registered
-const KEYRegistered = C.GDK_KEY_registered
-// KEYRightanglebracket wraps GDK_KEY_rightanglebracket
-const KEYRightanglebracket = C.GDK_KEY_rightanglebracket
-// KEYRightarrow wraps GDK_KEY_rightarrow
-const KEYRightarrow = C.GDK_KEY_rightarrow
-// KEYRightcaret wraps GDK_KEY_rightcaret
-const KEYRightcaret = C.GDK_KEY_rightcaret
-// KEYRightdoublequotemark wraps GDK_KEY_rightdoublequotemark
-const KEYRightdoublequotemark = C.GDK_KEY_rightdoublequotemark
-// KEYRightmiddlecurlybrace wraps GDK_KEY_rightmiddlecurlybrace
-const KEYRightmiddlecurlybrace = C.GDK_KEY_rightmiddlecurlybrace
-// KEYRightmiddlesummation wraps GDK_KEY_rightmiddlesummation
-const KEYRightmiddlesummation = C.GDK_KEY_rightmiddlesummation
-// KEYRightopentriangle wraps GDK_KEY_rightopentriangle
-const KEYRightopentriangle = C.GDK_KEY_rightopentriangle
-// KEYRightpointer wraps GDK_KEY_rightpointer
-const KEYRightpointer = C.GDK_KEY_rightpointer
-// KEYRightshoe wraps GDK_KEY_rightshoe
-const KEYRightshoe = C.GDK_KEY_rightshoe
-// KEYRightsinglequotemark wraps GDK_KEY_rightsinglequotemark
-const KEYRightsinglequotemark = C.GDK_KEY_rightsinglequotemark
-// KEYRightt wraps GDK_KEY_rightt
-const KEYRightt = C.GDK_KEY_rightt
-// KEYRighttack wraps GDK_KEY_righttack
-const KEYRighttack = C.GDK_KEY_righttack
-// KEYS wraps GDK_KEY_s
-const KEYS = C.GDK_KEY_s
-// KEYSabovedot wraps GDK_KEY_sabovedot
-const KEYSabovedot = C.GDK_KEY_sabovedot
-// KEYSacute wraps GDK_KEY_sacute
-const KEYSacute = C.GDK_KEY_sacute
-// KEYScaron wraps GDK_KEY_scaron
-const KEYScaron = C.GDK_KEY_scaron
-// KEYScedilla wraps GDK_KEY_scedilla
-const KEYScedilla = C.GDK_KEY_scedilla
-// KEYSchwa wraps GDK_KEY_schwa
-const KEYSchwa = C.GDK_KEY_schwa
-// KEYScircumflex wraps GDK_KEY_scircumflex
-const KEYScircumflex = C.GDK_KEY_scircumflex
-// KEYScriptSwitch wraps GDK_KEY_script_switch
-const KEYScriptSwitch = C.GDK_KEY_script_switch
-// KEYSeconds wraps GDK_KEY_seconds
-const KEYSeconds = C.GDK_KEY_seconds
-// KEYSection wraps GDK_KEY_section
-const KEYSection = C.GDK_KEY_section
-// KEYSemicolon wraps GDK_KEY_semicolon
-const KEYSemicolon = C.GDK_KEY_semicolon
-// KEYSemivoicedsound wraps GDK_KEY_semivoicedsound
-const KEYSemivoicedsound = C.GDK_KEY_semivoicedsound
-// KEYSeveneighths wraps GDK_KEY_seveneighths
-const KEYSeveneighths = C.GDK_KEY_seveneighths
-// KEYSevensubscript wraps GDK_KEY_sevensubscript
-const KEYSevensubscript = C.GDK_KEY_sevensubscript
-// KEYSevensuperior wraps GDK_KEY_sevensuperior
-const KEYSevensuperior = C.GDK_KEY_sevensuperior
-// KEYSignaturemark wraps GDK_KEY_signaturemark
-const KEYSignaturemark = C.GDK_KEY_signaturemark
-// KEYSignifblank wraps GDK_KEY_signifblank
-const KEYSignifblank = C.GDK_KEY_signifblank
-// KEYSimilarequal wraps GDK_KEY_similarequal
-const KEYSimilarequal = C.GDK_KEY_similarequal
-// KEYSinglelowquotemark wraps GDK_KEY_singlelowquotemark
-const KEYSinglelowquotemark = C.GDK_KEY_singlelowquotemark
-// KEYSixsubscript wraps GDK_KEY_sixsubscript
-const KEYSixsubscript = C.GDK_KEY_sixsubscript
-// KEYSixsuperior wraps GDK_KEY_sixsuperior
-const KEYSixsuperior = C.GDK_KEY_sixsuperior
-// KEYSlash wraps GDK_KEY_slash
-const KEYSlash = C.GDK_KEY_slash
-// KEYSoliddiamond wraps GDK_KEY_soliddiamond
-const KEYSoliddiamond = C.GDK_KEY_soliddiamond
-// KEYSpace wraps GDK_KEY_space
-const KEYSpace = C.GDK_KEY_space
-// KEYSquareroot wraps GDK_KEY_squareroot
-const KEYSquareroot = C.GDK_KEY_squareroot
-// KEYSsharp wraps GDK_KEY_ssharp
-const KEYSsharp = C.GDK_KEY_ssharp
-// KEYSterling wraps GDK_KEY_sterling
-const KEYSterling = C.GDK_KEY_sterling
-// KEYStricteq wraps GDK_KEY_stricteq
-const KEYStricteq = C.GDK_KEY_stricteq
-// KEYT wraps GDK_KEY_t
-const KEYT = C.GDK_KEY_t
-// KEYTabovedot wraps GDK_KEY_tabovedot
-const KEYTabovedot = C.GDK_KEY_tabovedot
-// KEYTcaron wraps GDK_KEY_tcaron
-const KEYTcaron = C.GDK_KEY_tcaron
-// KEYTcedilla wraps GDK_KEY_tcedilla
-const KEYTcedilla = C.GDK_KEY_tcedilla
-// KEYTelephone wraps GDK_KEY_telephone
-const KEYTelephone = C.GDK_KEY_telephone
-// KEYTelephonerecorder wraps GDK_KEY_telephonerecorder
-const KEYTelephonerecorder = C.GDK_KEY_telephonerecorder
-// KEYTherefore wraps GDK_KEY_therefore
-const KEYTherefore = C.GDK_KEY_therefore
-// KEYThinspace wraps GDK_KEY_thinspace
-const KEYThinspace = C.GDK_KEY_thinspace
-// KEYThorn wraps GDK_KEY_thorn
-const KEYThorn = C.GDK_KEY_thorn
-// KEYThreeeighths wraps GDK_KEY_threeeighths
-const KEYThreeeighths = C.GDK_KEY_threeeighths
-// KEYThreefifths wraps GDK_KEY_threefifths
-const KEYThreefifths = C.GDK_KEY_threefifths
-// KEYThreequarters wraps GDK_KEY_threequarters
-const KEYThreequarters = C.GDK_KEY_threequarters
-// KEYThreesubscript wraps GDK_KEY_threesubscript
-const KEYThreesubscript = C.GDK_KEY_threesubscript
-// KEYThreesuperior wraps GDK_KEY_threesuperior
-const KEYThreesuperior = C.GDK_KEY_threesuperior
-// KEYTintegral wraps GDK_KEY_tintegral
-const KEYTintegral = C.GDK_KEY_tintegral
-// KEYTopintegral wraps GDK_KEY_topintegral
-const KEYTopintegral = C.GDK_KEY_topintegral
-// KEYTopleftparens wraps GDK_KEY_topleftparens
-const KEYTopleftparens = C.GDK_KEY_topleftparens
-// KEYTopleftradical wraps GDK_KEY_topleftradical
-const KEYTopleftradical = C.GDK_KEY_topleftradical
-// KEYTopleftsqbracket wraps GDK_KEY_topleftsqbracket
-const KEYTopleftsqbracket = C.GDK_KEY_topleftsqbracket
-// KEYTopleftsummation wraps GDK_KEY_topleftsummation
-const KEYTopleftsummation = C.GDK_KEY_topleftsummation
-// KEYToprightparens wraps GDK_KEY_toprightparens
-const KEYToprightparens = C.GDK_KEY_toprightparens
-// KEYToprightsqbracket wraps GDK_KEY_toprightsqbracket
-const KEYToprightsqbracket = C.GDK_KEY_toprightsqbracket
-// KEYToprightsummation wraps GDK_KEY_toprightsummation
-const KEYToprightsummation = C.GDK_KEY_toprightsummation
-// KEYTopt wraps GDK_KEY_topt
-const KEYTopt = C.GDK_KEY_topt
-// KEYTopvertsummationconnector wraps GDK_KEY_topvertsummationconnector
-const KEYTopvertsummationconnector = C.GDK_KEY_topvertsummationconnector
-// KEYTrademark wraps GDK_KEY_trademark
-const KEYTrademark = C.GDK_KEY_trademark
-// KEYTrademarkincircle wraps GDK_KEY_trademarkincircle
-const KEYTrademarkincircle = C.GDK_KEY_trademarkincircle
-// KEYTslash wraps GDK_KEY_tslash
-const KEYTslash = C.GDK_KEY_tslash
-// KEYTwofifths wraps GDK_KEY_twofifths
-const KEYTwofifths = C.GDK_KEY_twofifths
-// KEYTwosubscript wraps GDK_KEY_twosubscript
-const KEYTwosubscript = C.GDK_KEY_twosubscript
-// KEYTwosuperior wraps GDK_KEY_twosuperior
-const KEYTwosuperior = C.GDK_KEY_twosuperior
-// KEYTwothirds wraps GDK_KEY_twothirds
-const KEYTwothirds = C.GDK_KEY_twothirds
-// KEYU wraps GDK_KEY_u
-const KEYU = C.GDK_KEY_u
-// KEYUacute wraps GDK_KEY_uacute
-const KEYUacute = C.GDK_KEY_uacute
-// KEYUbelowdot wraps GDK_KEY_ubelowdot
-const KEYUbelowdot = C.GDK_KEY_ubelowdot
-// KEYUbreve wraps GDK_KEY_ubreve
-const KEYUbreve = C.GDK_KEY_ubreve
-// KEYUcircumflex wraps GDK_KEY_ucircumflex
-const KEYUcircumflex = C.GDK_KEY_ucircumflex
-// KEYUdiaeresis wraps GDK_KEY_udiaeresis
-const KEYUdiaeresis = C.GDK_KEY_udiaeresis
-// KEYUdoubleacute wraps GDK_KEY_udoubleacute
-const KEYUdoubleacute = C.GDK_KEY_udoubleacute
-// KEYUgrave wraps GDK_KEY_ugrave
-const KEYUgrave = C.GDK_KEY_ugrave
-// KEYUhook wraps GDK_KEY_uhook
-const KEYUhook = C.GDK_KEY_uhook
-// KEYUhorn wraps GDK_KEY_uhorn
-const KEYUhorn = C.GDK_KEY_uhorn
-// KEYUhornacute wraps GDK_KEY_uhornacute
-const KEYUhornacute = C.GDK_KEY_uhornacute
-// KEYUhornbelowdot wraps GDK_KEY_uhornbelowdot
-const KEYUhornbelowdot = C.GDK_KEY_uhornbelowdot
-// KEYUhorngrave wraps GDK_KEY_uhorngrave
-const KEYUhorngrave = C.GDK_KEY_uhorngrave
-// KEYUhornhook wraps GDK_KEY_uhornhook
-const KEYUhornhook = C.GDK_KEY_uhornhook
-// KEYUhorntilde wraps GDK_KEY_uhorntilde
-const KEYUhorntilde = C.GDK_KEY_uhorntilde
-// KEYUmacron wraps GDK_KEY_umacron
-const KEYUmacron = C.GDK_KEY_umacron
-// KEYUnderbar wraps GDK_KEY_underbar
-const KEYUnderbar = C.GDK_KEY_underbar
-// KEYUnderscore wraps GDK_KEY_underscore
-const KEYUnderscore = C.GDK_KEY_underscore
-// KEYUnion wraps GDK_KEY_union
-const KEYUnion = C.GDK_KEY_union
-// KEYUogonek wraps GDK_KEY_uogonek
-const KEYUogonek = C.GDK_KEY_uogonek
-// KEYUparrow wraps GDK_KEY_uparrow
-const KEYUparrow = C.GDK_KEY_uparrow
-// KEYUpcaret wraps GDK_KEY_upcaret
-const KEYUpcaret = C.GDK_KEY_upcaret
-// KEYUpleftcorner wraps GDK_KEY_upleftcorner
-const KEYUpleftcorner = C.GDK_KEY_upleftcorner
-// KEYUprightcorner wraps GDK_KEY_uprightcorner
-const KEYUprightcorner = C.GDK_KEY_uprightcorner
-// KEYUpshoe wraps GDK_KEY_upshoe
-const KEYUpshoe = C.GDK_KEY_upshoe
-// KEYUpstile wraps GDK_KEY_upstile
-const KEYUpstile = C.GDK_KEY_upstile
-// KEYUptack wraps GDK_KEY_uptack
-const KEYUptack = C.GDK_KEY_uptack
-// KEYUring wraps GDK_KEY_uring
-const KEYUring = C.GDK_KEY_uring
-// KEYUtilde wraps GDK_KEY_utilde
-const KEYUtilde = C.GDK_KEY_utilde
-// KEYV wraps GDK_KEY_v
-const KEYV = C.GDK_KEY_v
-// KEYVariation wraps GDK_KEY_variation
-const KEYVariation = C.GDK_KEY_variation
-// KEYVertbar wraps GDK_KEY_vertbar
-const KEYVertbar = C.GDK_KEY_vertbar
-// KEYVertconnector wraps GDK_KEY_vertconnector
-const KEYVertconnector = C.GDK_KEY_vertconnector
-// KEYVoicedsound wraps GDK_KEY_voicedsound
-const KEYVoicedsound = C.GDK_KEY_voicedsound
-// KEYVt wraps GDK_KEY_vt
-const KEYVt = C.GDK_KEY_vt
-// KEYW wraps GDK_KEY_w
-const KEYW = C.GDK_KEY_w
-// KEYWacute wraps GDK_KEY_wacute
-const KEYWacute = C.GDK_KEY_wacute
-// KEYWcircumflex wraps GDK_KEY_wcircumflex
-const KEYWcircumflex = C.GDK_KEY_wcircumflex
-// KEYWdiaeresis wraps GDK_KEY_wdiaeresis
-const KEYWdiaeresis = C.GDK_KEY_wdiaeresis
-// KEYWgrave wraps GDK_KEY_wgrave
-const KEYWgrave = C.GDK_KEY_wgrave
-// KEYX wraps GDK_KEY_x
-const KEYX = C.GDK_KEY_x
-// KEYXabovedot wraps GDK_KEY_xabovedot
-const KEYXabovedot = C.GDK_KEY_xabovedot
-// KEYY wraps GDK_KEY_y
-const KEYY = C.GDK_KEY_y
-// KEYYacute wraps GDK_KEY_yacute
-const KEYYacute = C.GDK_KEY_yacute
-// KEYYbelowdot wraps GDK_KEY_ybelowdot
-const KEYYbelowdot = C.GDK_KEY_ybelowdot
-// KEYYcircumflex wraps GDK_KEY_ycircumflex
-const KEYYcircumflex = C.GDK_KEY_ycircumflex
-// KEYYdiaeresis wraps GDK_KEY_ydiaeresis
-const KEYYdiaeresis = C.GDK_KEY_ydiaeresis
-// KEYYen wraps GDK_KEY_yen
-const KEYYen = C.GDK_KEY_yen
-// KEYYgrave wraps GDK_KEY_ygrave
-const KEYYgrave = C.GDK_KEY_ygrave
-// KEYYhook wraps GDK_KEY_yhook
-const KEYYhook = C.GDK_KEY_yhook
-// KEYYtilde wraps GDK_KEY_ytilde
-const KEYYtilde = C.GDK_KEY_ytilde
-// KEYZ wraps GDK_KEY_z
-const KEYZ = C.GDK_KEY_z
-// KEYZabovedot wraps GDK_KEY_zabovedot
-const KEYZabovedot = C.GDK_KEY_zabovedot
-// KEYZacute wraps GDK_KEY_zacute
-const KEYZacute = C.GDK_KEY_zacute
-// KEYZcaron wraps GDK_KEY_zcaron
-const KEYZcaron = C.GDK_KEY_zcaron
-// KEYZerosubscript wraps GDK_KEY_zerosubscript
-const KEYZerosubscript = C.GDK_KEY_zerosubscript
-// KEYZerosuperior wraps GDK_KEY_zerosuperior
-const KEYZerosuperior = C.GDK_KEY_zerosuperior
-// KEYZstroke wraps GDK_KEY_zstroke
-const KEYZstroke = C.GDK_KEY_zstroke
-// MODIFIERMASK wraps GDK_MODIFIER_MASK
+const CurrentTime = 0
+// Key0 wraps GDK_KEY_0
+const Key0 = 48
+// Key1 wraps GDK_KEY_1
+const Key1 = 49
+// Key2 wraps GDK_KEY_2
+const Key2 = 50
+// Key3 wraps GDK_KEY_3
+const Key3 = 51
+// Key3270Altcursor wraps GDK_KEY_3270_AltCursor
+const Key3270Altcursor = 64784
+// Key3270Attn wraps GDK_KEY_3270_Attn
+const Key3270Attn = 64782
+// Key3270Backtab wraps GDK_KEY_3270_BackTab
+const Key3270Backtab = 64773
+// Key3270Changescreen wraps GDK_KEY_3270_ChangeScreen
+const Key3270Changescreen = 64793
+// Key3270Copy wraps GDK_KEY_3270_Copy
+const Key3270Copy = 64789
+// Key3270Cursorblink wraps GDK_KEY_3270_CursorBlink
+const Key3270Cursorblink = 64783
+// Key3270Cursorselect wraps GDK_KEY_3270_CursorSelect
+const Key3270Cursorselect = 64796
+// Key3270Deleteword wraps GDK_KEY_3270_DeleteWord
+const Key3270Deleteword = 64794
+// Key3270Duplicate wraps GDK_KEY_3270_Duplicate
+const Key3270Duplicate = 64769
+// Key3270Enter wraps GDK_KEY_3270_Enter
+const Key3270Enter = 64798
+// Key3270Eraseeof wraps GDK_KEY_3270_EraseEOF
+const Key3270Eraseeof = 64774
+// Key3270Eraseinput wraps GDK_KEY_3270_EraseInput
+const Key3270Eraseinput = 64775
+// Key3270Exselect wraps GDK_KEY_3270_ExSelect
+const Key3270Exselect = 64795
+// Key3270Fieldmark wraps GDK_KEY_3270_FieldMark
+const Key3270Fieldmark = 64770
+// Key3270Ident wraps GDK_KEY_3270_Ident
+const Key3270Ident = 64787
+// Key3270Jump wraps GDK_KEY_3270_Jump
+const Key3270Jump = 64786
+// Key3270Keyclick wraps GDK_KEY_3270_KeyClick
+const Key3270Keyclick = 64785
+// Key3270Left2 wraps GDK_KEY_3270_Left2
+const Key3270Left2 = 64772
+// Key3270Pa1 wraps GDK_KEY_3270_PA1
+const Key3270Pa1 = 64778
+// Key3270Pa2 wraps GDK_KEY_3270_PA2
+const Key3270Pa2 = 64779
+// Key3270Pa3 wraps GDK_KEY_3270_PA3
+const Key3270Pa3 = 64780
+// Key3270Play wraps GDK_KEY_3270_Play
+const Key3270Play = 64790
+// Key3270Printscreen wraps GDK_KEY_3270_PrintScreen
+const Key3270Printscreen = 64797
+// Key3270Quit wraps GDK_KEY_3270_Quit
+const Key3270Quit = 64777
+// Key3270Record wraps GDK_KEY_3270_Record
+const Key3270Record = 64792
+// Key3270Reset wraps GDK_KEY_3270_Reset
+const Key3270Reset = 64776
+// Key3270Right2 wraps GDK_KEY_3270_Right2
+const Key3270Right2 = 64771
+// Key3270Rule wraps GDK_KEY_3270_Rule
+const Key3270Rule = 64788
+// Key3270Setup wraps GDK_KEY_3270_Setup
+const Key3270Setup = 64791
+// Key3270Test wraps GDK_KEY_3270_Test
+const Key3270Test = 64781
+// Key4 wraps GDK_KEY_4
+const Key4 = 52
+// Key5 wraps GDK_KEY_5
+const Key5 = 53
+// Key6 wraps GDK_KEY_6
+const Key6 = 54
+// Key7 wraps GDK_KEY_7
+const Key7 = 55
+// Key8 wraps GDK_KEY_8
+const Key8 = 56
+// Key9 wraps GDK_KEY_9
+const Key9 = 57
+// KeyA wraps GDK_KEY_A
+const KeyA = 65
+// KeyAe wraps GDK_KEY_AE
+const KeyAe = 198
+// KeyAacute wraps GDK_KEY_Aacute
+const KeyAacute = 193
+// KeyAbelowdot wraps GDK_KEY_Abelowdot
+const KeyAbelowdot = 16785056
+// KeyAbreve wraps GDK_KEY_Abreve
+const KeyAbreve = 451
+// KeyAbreveacute wraps GDK_KEY_Abreveacute
+const KeyAbreveacute = 16785070
+// KeyAbrevebelowdot wraps GDK_KEY_Abrevebelowdot
+const KeyAbrevebelowdot = 16785078
+// KeyAbrevegrave wraps GDK_KEY_Abrevegrave
+const KeyAbrevegrave = 16785072
+// KeyAbrevehook wraps GDK_KEY_Abrevehook
+const KeyAbrevehook = 16785074
+// KeyAbrevetilde wraps GDK_KEY_Abrevetilde
+const KeyAbrevetilde = 16785076
+// KeyAccessxEnable wraps GDK_KEY_AccessX_Enable
+const KeyAccessxEnable = 65136
+// KeyAccessxFeedbackEnable wraps GDK_KEY_AccessX_Feedback_Enable
+const KeyAccessxFeedbackEnable = 65137
+// KeyAcircumflex wraps GDK_KEY_Acircumflex
+const KeyAcircumflex = 194
+// KeyAcircumflexacute wraps GDK_KEY_Acircumflexacute
+const KeyAcircumflexacute = 16785060
+// KeyAcircumflexbelowdot wraps GDK_KEY_Acircumflexbelowdot
+const KeyAcircumflexbelowdot = 16785068
+// KeyAcircumflexgrave wraps GDK_KEY_Acircumflexgrave
+const KeyAcircumflexgrave = 16785062
+// KeyAcircumflexhook wraps GDK_KEY_Acircumflexhook
+const KeyAcircumflexhook = 16785064
+// KeyAcircumflextilde wraps GDK_KEY_Acircumflextilde
+const KeyAcircumflextilde = 16785066
+// KeyAddfavorite wraps GDK_KEY_AddFavorite
+const KeyAddfavorite = 269025081
+// KeyAdiaeresis wraps GDK_KEY_Adiaeresis
+const KeyAdiaeresis = 196
+// KeyAgrave wraps GDK_KEY_Agrave
+const KeyAgrave = 192
+// KeyAhook wraps GDK_KEY_Ahook
+const KeyAhook = 16785058
+// KeyAltL wraps GDK_KEY_Alt_L
+const KeyAltL = 65513
+// KeyAltR wraps GDK_KEY_Alt_R
+const KeyAltR = 65514
+// KeyAmacron wraps GDK_KEY_Amacron
+const KeyAmacron = 960
+// KeyAogonek wraps GDK_KEY_Aogonek
+const KeyAogonek = 417
+// KeyApplicationleft wraps GDK_KEY_ApplicationLeft
+const KeyApplicationleft = 269025104
+// KeyApplicationright wraps GDK_KEY_ApplicationRight
+const KeyApplicationright = 269025105
+// KeyArabic0 wraps GDK_KEY_Arabic_0
+const KeyArabic0 = 16778848
+// KeyArabic1 wraps GDK_KEY_Arabic_1
+const KeyArabic1 = 16778849
+// KeyArabic2 wraps GDK_KEY_Arabic_2
+const KeyArabic2 = 16778850
+// KeyArabic3 wraps GDK_KEY_Arabic_3
+const KeyArabic3 = 16778851
+// KeyArabic4 wraps GDK_KEY_Arabic_4
+const KeyArabic4 = 16778852
+// KeyArabic5 wraps GDK_KEY_Arabic_5
+const KeyArabic5 = 16778853
+// KeyArabic6 wraps GDK_KEY_Arabic_6
+const KeyArabic6 = 16778854
+// KeyArabic7 wraps GDK_KEY_Arabic_7
+const KeyArabic7 = 16778855
+// KeyArabic8 wraps GDK_KEY_Arabic_8
+const KeyArabic8 = 16778856
+// KeyArabic9 wraps GDK_KEY_Arabic_9
+const KeyArabic9 = 16778857
+// KeyArabicAin wraps GDK_KEY_Arabic_ain
+const KeyArabicAin = 1497
+// KeyArabicAlef wraps GDK_KEY_Arabic_alef
+const KeyArabicAlef = 1479
+// KeyArabicAlefmaksura wraps GDK_KEY_Arabic_alefmaksura
+const KeyArabicAlefmaksura = 1513
+// KeyArabicBeh wraps GDK_KEY_Arabic_beh
+const KeyArabicBeh = 1480
+// KeyArabicComma wraps GDK_KEY_Arabic_comma
+const KeyArabicComma = 1452
+// KeyArabicDad wraps GDK_KEY_Arabic_dad
+const KeyArabicDad = 1494
+// KeyArabicDal wraps GDK_KEY_Arabic_dal
+const KeyArabicDal = 1487
+// KeyArabicDamma wraps GDK_KEY_Arabic_damma
+const KeyArabicDamma = 1519
+// KeyArabicDammatan wraps GDK_KEY_Arabic_dammatan
+const KeyArabicDammatan = 1516
+// KeyArabicDdal wraps GDK_KEY_Arabic_ddal
+const KeyArabicDdal = 16778888
+// KeyArabicFarsiYeh wraps GDK_KEY_Arabic_farsi_yeh
+const KeyArabicFarsiYeh = 16778956
+// KeyArabicFatha wraps GDK_KEY_Arabic_fatha
+const KeyArabicFatha = 1518
+// KeyArabicFathatan wraps GDK_KEY_Arabic_fathatan
+const KeyArabicFathatan = 1515
+// KeyArabicFeh wraps GDK_KEY_Arabic_feh
+const KeyArabicFeh = 1505
+// KeyArabicFullstop wraps GDK_KEY_Arabic_fullstop
+const KeyArabicFullstop = 16778964
+// KeyArabicGaf wraps GDK_KEY_Arabic_gaf
+const KeyArabicGaf = 16778927
+// KeyArabicGhain wraps GDK_KEY_Arabic_ghain
+const KeyArabicGhain = 1498
+// KeyArabicHa wraps GDK_KEY_Arabic_ha
+const KeyArabicHa = 1511
+// KeyArabicHah wraps GDK_KEY_Arabic_hah
+const KeyArabicHah = 1485
+// KeyArabicHamza wraps GDK_KEY_Arabic_hamza
+const KeyArabicHamza = 1473
+// KeyArabicHamzaAbove wraps GDK_KEY_Arabic_hamza_above
+const KeyArabicHamzaAbove = 16778836
+// KeyArabicHamzaBelow wraps GDK_KEY_Arabic_hamza_below
+const KeyArabicHamzaBelow = 16778837
+// KeyArabicHamzaonalef wraps GDK_KEY_Arabic_hamzaonalef
+const KeyArabicHamzaonalef = 1475
+// KeyArabicHamzaonwaw wraps GDK_KEY_Arabic_hamzaonwaw
+const KeyArabicHamzaonwaw = 1476
+// KeyArabicHamzaonyeh wraps GDK_KEY_Arabic_hamzaonyeh
+const KeyArabicHamzaonyeh = 1478
+// KeyArabicHamzaunderalef wraps GDK_KEY_Arabic_hamzaunderalef
+const KeyArabicHamzaunderalef = 1477
+// KeyArabicHeh wraps GDK_KEY_Arabic_heh
+const KeyArabicHeh = 1511
+// KeyArabicHehDoachashmee wraps GDK_KEY_Arabic_heh_doachashmee
+const KeyArabicHehDoachashmee = 16778942
+// KeyArabicHehGoal wraps GDK_KEY_Arabic_heh_goal
+const KeyArabicHehGoal = 16778945
+// KeyArabicJeem wraps GDK_KEY_Arabic_jeem
+const KeyArabicJeem = 1484
+// KeyArabicJeh wraps GDK_KEY_Arabic_jeh
+const KeyArabicJeh = 16778904
+// KeyArabicKaf wraps GDK_KEY_Arabic_kaf
+const KeyArabicKaf = 1507
+// KeyArabicKasra wraps GDK_KEY_Arabic_kasra
+const KeyArabicKasra = 1520
+// KeyArabicKasratan wraps GDK_KEY_Arabic_kasratan
+const KeyArabicKasratan = 1517
+// KeyArabicKeheh wraps GDK_KEY_Arabic_keheh
+const KeyArabicKeheh = 16778921
+// KeyArabicKhah wraps GDK_KEY_Arabic_khah
+const KeyArabicKhah = 1486
+// KeyArabicLam wraps GDK_KEY_Arabic_lam
+const KeyArabicLam = 1508
+// KeyArabicMaddaAbove wraps GDK_KEY_Arabic_madda_above
+const KeyArabicMaddaAbove = 16778835
+// KeyArabicMaddaonalef wraps GDK_KEY_Arabic_maddaonalef
+const KeyArabicMaddaonalef = 1474
+// KeyArabicMeem wraps GDK_KEY_Arabic_meem
+const KeyArabicMeem = 1509
+// KeyArabicNoon wraps GDK_KEY_Arabic_noon
+const KeyArabicNoon = 1510
+// KeyArabicNoonGhunna wraps GDK_KEY_Arabic_noon_ghunna
+const KeyArabicNoonGhunna = 16778938
+// KeyArabicPeh wraps GDK_KEY_Arabic_peh
+const KeyArabicPeh = 16778878
+// KeyArabicPercent wraps GDK_KEY_Arabic_percent
+const KeyArabicPercent = 16778858
+// KeyArabicQaf wraps GDK_KEY_Arabic_qaf
+const KeyArabicQaf = 1506
+// KeyArabicQuestionMark wraps GDK_KEY_Arabic_question_mark
+const KeyArabicQuestionMark = 1471
+// KeyArabicRa wraps GDK_KEY_Arabic_ra
+const KeyArabicRa = 1489
+// KeyArabicRreh wraps GDK_KEY_Arabic_rreh
+const KeyArabicRreh = 16778897
+// KeyArabicSad wraps GDK_KEY_Arabic_sad
+const KeyArabicSad = 1493
+// KeyArabicSeen wraps GDK_KEY_Arabic_seen
+const KeyArabicSeen = 1491
+// KeyArabicSemicolon wraps GDK_KEY_Arabic_semicolon
+const KeyArabicSemicolon = 1467
+// KeyArabicShadda wraps GDK_KEY_Arabic_shadda
+const KeyArabicShadda = 1521
+// KeyArabicSheen wraps GDK_KEY_Arabic_sheen
+const KeyArabicSheen = 1492
+// KeyArabicSukun wraps GDK_KEY_Arabic_sukun
+const KeyArabicSukun = 1522
+// KeyArabicSuperscriptAlef wraps GDK_KEY_Arabic_superscript_alef
+const KeyArabicSuperscriptAlef = 16778864
+// KeyArabicSwitch wraps GDK_KEY_Arabic_switch
+const KeyArabicSwitch = 65406
+// KeyArabicTah wraps GDK_KEY_Arabic_tah
+const KeyArabicTah = 1495
+// KeyArabicTatweel wraps GDK_KEY_Arabic_tatweel
+const KeyArabicTatweel = 1504
+// KeyArabicTcheh wraps GDK_KEY_Arabic_tcheh
+const KeyArabicTcheh = 16778886
+// KeyArabicTeh wraps GDK_KEY_Arabic_teh
+const KeyArabicTeh = 1482
+// KeyArabicTehmarbuta wraps GDK_KEY_Arabic_tehmarbuta
+const KeyArabicTehmarbuta = 1481
+// KeyArabicThal wraps GDK_KEY_Arabic_thal
+const KeyArabicThal = 1488
+// KeyArabicTheh wraps GDK_KEY_Arabic_theh
+const KeyArabicTheh = 1483
+// KeyArabicTteh wraps GDK_KEY_Arabic_tteh
+const KeyArabicTteh = 16778873
+// KeyArabicVeh wraps GDK_KEY_Arabic_veh
+const KeyArabicVeh = 16778916
+// KeyArabicWaw wraps GDK_KEY_Arabic_waw
+const KeyArabicWaw = 1512
+// KeyArabicYeh wraps GDK_KEY_Arabic_yeh
+const KeyArabicYeh = 1514
+// KeyArabicYehBaree wraps GDK_KEY_Arabic_yeh_baree
+const KeyArabicYehBaree = 16778962
+// KeyArabicZah wraps GDK_KEY_Arabic_zah
+const KeyArabicZah = 1496
+// KeyArabicZain wraps GDK_KEY_Arabic_zain
+const KeyArabicZain = 1490
+// KeyAring wraps GDK_KEY_Aring
+const KeyAring = 197
+// KeyArmenianAt wraps GDK_KEY_Armenian_AT
+const KeyArmenianAt = 16778552
+// KeyArmenianAyb wraps GDK_KEY_Armenian_AYB
+const KeyArmenianAyb = 16778545
+// KeyArmenianBen wraps GDK_KEY_Armenian_BEN
+const KeyArmenianBen = 16778546
+// KeyArmenianCha wraps GDK_KEY_Armenian_CHA
+const KeyArmenianCha = 16778569
+// KeyArmenianDa wraps GDK_KEY_Armenian_DA
+const KeyArmenianDa = 16778548
+// KeyArmenianDza wraps GDK_KEY_Armenian_DZA
+const KeyArmenianDza = 16778561
+// KeyArmenianE wraps GDK_KEY_Armenian_E
+const KeyArmenianE = 16778551
+// KeyArmenianFe wraps GDK_KEY_Armenian_FE
+const KeyArmenianFe = 16778582
+// KeyArmenianGhat wraps GDK_KEY_Armenian_GHAT
+const KeyArmenianGhat = 16778562
+// KeyArmenianGim wraps GDK_KEY_Armenian_GIM
+const KeyArmenianGim = 16778547
+// KeyArmenianHi wraps GDK_KEY_Armenian_HI
+const KeyArmenianHi = 16778565
+// KeyArmenianHo wraps GDK_KEY_Armenian_HO
+const KeyArmenianHo = 16778560
+// KeyArmenianIni wraps GDK_KEY_Armenian_INI
+const KeyArmenianIni = 16778555
+// KeyArmenianJe wraps GDK_KEY_Armenian_JE
+const KeyArmenianJe = 16778571
+// KeyArmenianKe wraps GDK_KEY_Armenian_KE
+const KeyArmenianKe = 16778580
+// KeyArmenianKen wraps GDK_KEY_Armenian_KEN
+const KeyArmenianKen = 16778559
+// KeyArmenianKhe wraps GDK_KEY_Armenian_KHE
+const KeyArmenianKhe = 16778557
+// KeyArmenianLyun wraps GDK_KEY_Armenian_LYUN
+const KeyArmenianLyun = 16778556
+// KeyArmenianMen wraps GDK_KEY_Armenian_MEN
+const KeyArmenianMen = 16778564
+// KeyArmenianNu wraps GDK_KEY_Armenian_NU
+const KeyArmenianNu = 16778566
+// KeyArmenianO wraps GDK_KEY_Armenian_O
+const KeyArmenianO = 16778581
+// KeyArmenianPe wraps GDK_KEY_Armenian_PE
+const KeyArmenianPe = 16778570
+// KeyArmenianPyur wraps GDK_KEY_Armenian_PYUR
+const KeyArmenianPyur = 16778579
+// KeyArmenianRa wraps GDK_KEY_Armenian_RA
+const KeyArmenianRa = 16778572
+// KeyArmenianRe wraps GDK_KEY_Armenian_RE
+const KeyArmenianRe = 16778576
+// KeyArmenianSe wraps GDK_KEY_Armenian_SE
+const KeyArmenianSe = 16778573
+// KeyArmenianSHA wraps GDK_KEY_Armenian_SHA
+const KeyArmenianSHA = 16778567
+// KeyArmenianTche wraps GDK_KEY_Armenian_TCHE
+const KeyArmenianTche = 16778563
+// KeyArmenianTo wraps GDK_KEY_Armenian_TO
+const KeyArmenianTo = 16778553
+// KeyArmenianTsa wraps GDK_KEY_Armenian_TSA
+const KeyArmenianTsa = 16778558
+// KeyArmenianTso wraps GDK_KEY_Armenian_TSO
+const KeyArmenianTso = 16778577
+// KeyArmenianTyun wraps GDK_KEY_Armenian_TYUN
+const KeyArmenianTyun = 16778575
+// KeyArmenianVev wraps GDK_KEY_Armenian_VEV
+const KeyArmenianVev = 16778574
+// KeyArmenianVo wraps GDK_KEY_Armenian_VO
+const KeyArmenianVo = 16778568
+// KeyArmenianVyun wraps GDK_KEY_Armenian_VYUN
+const KeyArmenianVyun = 16778578
+// KeyArmenianYech wraps GDK_KEY_Armenian_YECH
+const KeyArmenianYech = 16778549
+// KeyArmenianZa wraps GDK_KEY_Armenian_ZA
+const KeyArmenianZa = 16778550
+// KeyArmenianZhe wraps GDK_KEY_Armenian_ZHE
+const KeyArmenianZhe = 16778554
+// KeyArmenianAccent wraps GDK_KEY_Armenian_accent
+const KeyArmenianAccent = 16778587
+// KeyArmenianAmanak wraps GDK_KEY_Armenian_amanak
+const KeyArmenianAmanak = 16778588
+// KeyArmenianApostrophe wraps GDK_KEY_Armenian_apostrophe
+const KeyArmenianApostrophe = 16778586
+// KeyArmenianAt wraps GDK_KEY_Armenian_at
+const KeyArmenianAt = 16778600
+// KeyArmenianAyb wraps GDK_KEY_Armenian_ayb
+const KeyArmenianAyb = 16778593
+// KeyArmenianBen wraps GDK_KEY_Armenian_ben
+const KeyArmenianBen = 16778594
+// KeyArmenianBut wraps GDK_KEY_Armenian_but
+const KeyArmenianBut = 16778589
+// KeyArmenianCha wraps GDK_KEY_Armenian_cha
+const KeyArmenianCha = 16778617
+// KeyArmenianDa wraps GDK_KEY_Armenian_da
+const KeyArmenianDa = 16778596
+// KeyArmenianDza wraps GDK_KEY_Armenian_dza
+const KeyArmenianDza = 16778609
+// KeyArmenianE wraps GDK_KEY_Armenian_e
+const KeyArmenianE = 16778599
+// KeyArmenianExclam wraps GDK_KEY_Armenian_exclam
+const KeyArmenianExclam = 16778588
+// KeyArmenianFe wraps GDK_KEY_Armenian_fe
+const KeyArmenianFe = 16778630
+// KeyArmenianFullStop wraps GDK_KEY_Armenian_full_stop
+const KeyArmenianFullStop = 16778633
+// KeyArmenianGhat wraps GDK_KEY_Armenian_ghat
+const KeyArmenianGhat = 16778610
+// KeyArmenianGim wraps GDK_KEY_Armenian_gim
+const KeyArmenianGim = 16778595
+// KeyArmenianHi wraps GDK_KEY_Armenian_hi
+const KeyArmenianHi = 16778613
+// KeyArmenianHo wraps GDK_KEY_Armenian_ho
+const KeyArmenianHo = 16778608
+// KeyArmenianHyphen wraps GDK_KEY_Armenian_hyphen
+const KeyArmenianHyphen = 16778634
+// KeyArmenianIni wraps GDK_KEY_Armenian_ini
+const KeyArmenianIni = 16778603
+// KeyArmenianJe wraps GDK_KEY_Armenian_je
+const KeyArmenianJe = 16778619
+// KeyArmenianKe wraps GDK_KEY_Armenian_ke
+const KeyArmenianKe = 16778628
+// KeyArmenianKen wraps GDK_KEY_Armenian_ken
+const KeyArmenianKen = 16778607
+// KeyArmenianKhe wraps GDK_KEY_Armenian_khe
+const KeyArmenianKhe = 16778605
+// KeyArmenianLigatureEw wraps GDK_KEY_Armenian_ligature_ew
+const KeyArmenianLigatureEw = 16778631
+// KeyArmenianLyun wraps GDK_KEY_Armenian_lyun
+const KeyArmenianLyun = 16778604
+// KeyArmenianMen wraps GDK_KEY_Armenian_men
+const KeyArmenianMen = 16778612
+// KeyArmenianNu wraps GDK_KEY_Armenian_nu
+const KeyArmenianNu = 16778614
+// KeyArmenianO wraps GDK_KEY_Armenian_o
+const KeyArmenianO = 16778629
+// KeyArmenianParuyk wraps GDK_KEY_Armenian_paruyk
+const KeyArmenianParuyk = 16778590
+// KeyArmenianPe wraps GDK_KEY_Armenian_pe
+const KeyArmenianPe = 16778618
+// KeyArmenianPyur wraps GDK_KEY_Armenian_pyur
+const KeyArmenianPyur = 16778627
+// KeyArmenianQuestion wraps GDK_KEY_Armenian_question
+const KeyArmenianQuestion = 16778590
+// KeyArmenianRa wraps GDK_KEY_Armenian_ra
+const KeyArmenianRa = 16778620
+// KeyArmenianRe wraps GDK_KEY_Armenian_re
+const KeyArmenianRe = 16778624
+// KeyArmenianSe wraps GDK_KEY_Armenian_se
+const KeyArmenianSe = 16778621
+// KeyArmenianSeparationMark wraps GDK_KEY_Armenian_separation_mark
+const KeyArmenianSeparationMark = 16778589
+// KeyArmenianSHA wraps GDK_KEY_Armenian_sha
+const KeyArmenianSHA = 16778615
+// KeyArmenianShesht wraps GDK_KEY_Armenian_shesht
+const KeyArmenianShesht = 16778587
+// KeyArmenianTche wraps GDK_KEY_Armenian_tche
+const KeyArmenianTche = 16778611
+// KeyArmenianTo wraps GDK_KEY_Armenian_to
+const KeyArmenianTo = 16778601
+// KeyArmenianTsa wraps GDK_KEY_Armenian_tsa
+const KeyArmenianTsa = 16778606
+// KeyArmenianTso wraps GDK_KEY_Armenian_tso
+const KeyArmenianTso = 16778625
+// KeyArmenianTyun wraps GDK_KEY_Armenian_tyun
+const KeyArmenianTyun = 16778623
+// KeyArmenianVerjaket wraps GDK_KEY_Armenian_verjaket
+const KeyArmenianVerjaket = 16778633
+// KeyArmenianVev wraps GDK_KEY_Armenian_vev
+const KeyArmenianVev = 16778622
+// KeyArmenianVo wraps GDK_KEY_Armenian_vo
+const KeyArmenianVo = 16778616
+// KeyArmenianVyun wraps GDK_KEY_Armenian_vyun
+const KeyArmenianVyun = 16778626
+// KeyArmenianYech wraps GDK_KEY_Armenian_yech
+const KeyArmenianYech = 16778597
+// KeyArmenianYentamna wraps GDK_KEY_Armenian_yentamna
+const KeyArmenianYentamna = 16778634
+// KeyArmenianZa wraps GDK_KEY_Armenian_za
+const KeyArmenianZa = 16778598
+// KeyArmenianZhe wraps GDK_KEY_Armenian_zhe
+const KeyArmenianZhe = 16778602
+// KeyAtilde wraps GDK_KEY_Atilde
+const KeyAtilde = 195
+// KeyAudiblebellEnable wraps GDK_KEY_AudibleBell_Enable
+const KeyAudiblebellEnable = 65146
+// KeyAudiocycletrack wraps GDK_KEY_AudioCycleTrack
+const KeyAudiocycletrack = 269025179
+// KeyAudioforward wraps GDK_KEY_AudioForward
+const KeyAudioforward = 269025175
+// KeyAudiolowervolume wraps GDK_KEY_AudioLowerVolume
+const KeyAudiolowervolume = 269025041
+// KeyAudiomedia wraps GDK_KEY_AudioMedia
+const KeyAudiomedia = 269025074
+// KeyAudiomicmute wraps GDK_KEY_AudioMicMute
+const KeyAudiomicmute = 269025202
+// KeyAudiomute wraps GDK_KEY_AudioMute
+const KeyAudiomute = 269025042
+// KeyAudionext wraps GDK_KEY_AudioNext
+const KeyAudionext = 269025047
+// KeyAudiopause wraps GDK_KEY_AudioPause
+const KeyAudiopause = 269025073
+// KeyAudioplay wraps GDK_KEY_AudioPlay
+const KeyAudioplay = 269025044
+// KeyAudiopreset wraps GDK_KEY_AudioPreset
+const KeyAudiopreset = 269025206
+// KeyAudioprev wraps GDK_KEY_AudioPrev
+const KeyAudioprev = 269025046
+// KeyAudioraisevolume wraps GDK_KEY_AudioRaiseVolume
+const KeyAudioraisevolume = 269025043
+// KeyAudiorandomplay wraps GDK_KEY_AudioRandomPlay
+const KeyAudiorandomplay = 269025177
+// KeyAudiorecord wraps GDK_KEY_AudioRecord
+const KeyAudiorecord = 269025052
+// KeyAudiorepeat wraps GDK_KEY_AudioRepeat
+const KeyAudiorepeat = 269025176
+// KeyAudiorewind wraps GDK_KEY_AudioRewind
+const KeyAudiorewind = 269025086
+// KeyAudiostop wraps GDK_KEY_AudioStop
+const KeyAudiostop = 269025045
+// KeyAway wraps GDK_KEY_Away
+const KeyAway = 269025165
+// KeyB wraps GDK_KEY_B
+const KeyB = 66
+// KeyBabovedot wraps GDK_KEY_Babovedot
+const KeyBabovedot = 16784898
+// KeyBack wraps GDK_KEY_Back
+const KeyBack = 269025062
+// KeyBackforward wraps GDK_KEY_BackForward
+const KeyBackforward = 269025087
+// KeyBackspace wraps GDK_KEY_BackSpace
+const KeyBackspace = 65288
+// KeyBattery wraps GDK_KEY_Battery
+const KeyBattery = 269025171
+// KeyBegin wraps GDK_KEY_Begin
+const KeyBegin = 65368
+// KeyBlue wraps GDK_KEY_Blue
+const KeyBlue = 269025190
+// KeyBluetooth wraps GDK_KEY_Bluetooth
+const KeyBluetooth = 269025172
+// KeyBook wraps GDK_KEY_Book
+const KeyBook = 269025106
+// KeyBouncekeysEnable wraps GDK_KEY_BounceKeys_Enable
+const KeyBouncekeysEnable = 65140
+// KeyBreak wraps GDK_KEY_Break
+const KeyBreak = 65387
+// KeyBrightnessadjust wraps GDK_KEY_BrightnessAdjust
+const KeyBrightnessadjust = 269025083
+// KeyByelorussianShortu wraps GDK_KEY_Byelorussian_SHORTU
+const KeyByelorussianShortu = 1726
+// KeyByelorussianShortu wraps GDK_KEY_Byelorussian_shortu
+const KeyByelorussianShortu = 1710
+// KeyC wraps GDK_KEY_C
+const KeyC = 67
+// KeyCd wraps GDK_KEY_CD
+const KeyCd = 269025107
+// KeyCh wraps GDK_KEY_CH
+const KeyCh = 65186
+// KeyCH wraps GDK_KEY_C_H
+const KeyCH = 65189
+// KeyCH wraps GDK_KEY_C_h
+const KeyCH = 65188
+// KeyCabovedot wraps GDK_KEY_Cabovedot
+const KeyCabovedot = 709
+// KeyCacute wraps GDK_KEY_Cacute
+const KeyCacute = 454
+// KeyCalculator wraps GDK_KEY_Calculator
+const KeyCalculator = 269025053
+// KeyCalendar wraps GDK_KEY_Calendar
+const KeyCalendar = 269025056
+// KeyCancel wraps GDK_KEY_Cancel
+const KeyCancel = 65385
+// KeyCapsLock wraps GDK_KEY_Caps_Lock
+const KeyCapsLock = 65509
+// KeyCcaron wraps GDK_KEY_Ccaron
+const KeyCcaron = 456
+// KeyCcedilla wraps GDK_KEY_Ccedilla
+const KeyCcedilla = 199
+// KeyCcircumflex wraps GDK_KEY_Ccircumflex
+const KeyCcircumflex = 710
+// KeyCh wraps GDK_KEY_Ch
+const KeyCh = 65185
+// KeyClear wraps GDK_KEY_Clear
+const KeyClear = 65291
+// KeyCleargrab wraps GDK_KEY_ClearGrab
+const KeyCleargrab = 269024801
+// KeyClose wraps GDK_KEY_Close
+const KeyClose = 269025110
+// KeyCodeinput wraps GDK_KEY_Codeinput
+const KeyCodeinput = 65335
+// KeyColonsign wraps GDK_KEY_ColonSign
+const KeyColonsign = 16785569
+// KeyCommunity wraps GDK_KEY_Community
+const KeyCommunity = 269025085
+// KeyContrastadjust wraps GDK_KEY_ContrastAdjust
+const KeyContrastadjust = 269025058
+// KeyControlL wraps GDK_KEY_Control_L
+const KeyControlL = 65507
+// KeyControlR wraps GDK_KEY_Control_R
+const KeyControlR = 65508
+// KeyCopy wraps GDK_KEY_Copy
+const KeyCopy = 269025111
+// KeyCruzeirosign wraps GDK_KEY_CruzeiroSign
+const KeyCruzeirosign = 16785570
+// KeyCut wraps GDK_KEY_Cut
+const KeyCut = 269025112
+// KeyCycleangle wraps GDK_KEY_CycleAngle
+const KeyCycleangle = 269025180
+// KeyCyrillicA wraps GDK_KEY_Cyrillic_A
+const KeyCyrillicA = 1761
+// KeyCyrillicBe wraps GDK_KEY_Cyrillic_BE
+const KeyCyrillicBe = 1762
+// KeyCyrillicChe wraps GDK_KEY_Cyrillic_CHE
+const KeyCyrillicChe = 1790
+// KeyCyrillicCheDescender wraps GDK_KEY_Cyrillic_CHE_descender
+const KeyCyrillicCheDescender = 16778422
+// KeyCyrillicCheVertstroke wraps GDK_KEY_Cyrillic_CHE_vertstroke
+const KeyCyrillicCheVertstroke = 16778424
+// KeyCyrillicDe wraps GDK_KEY_Cyrillic_DE
+const KeyCyrillicDe = 1764
+// KeyCyrillicDzhe wraps GDK_KEY_Cyrillic_DZHE
+const KeyCyrillicDzhe = 1727
+// KeyCyrillicE wraps GDK_KEY_Cyrillic_E
+const KeyCyrillicE = 1788
+// KeyCyrillicEf wraps GDK_KEY_Cyrillic_EF
+const KeyCyrillicEf = 1766
+// KeyCyrillicEl wraps GDK_KEY_Cyrillic_EL
+const KeyCyrillicEl = 1772
+// KeyCyrillicEm wraps GDK_KEY_Cyrillic_EM
+const KeyCyrillicEm = 1773
+// KeyCyrillicEn wraps GDK_KEY_Cyrillic_EN
+const KeyCyrillicEn = 1774
+// KeyCyrillicEnDescender wraps GDK_KEY_Cyrillic_EN_descender
+const KeyCyrillicEnDescender = 16778402
+// KeyCyrillicEr wraps GDK_KEY_Cyrillic_ER
+const KeyCyrillicEr = 1778
+// KeyCyrillicES wraps GDK_KEY_Cyrillic_ES
+const KeyCyrillicES = 1779
+// KeyCyrillicGhe wraps GDK_KEY_Cyrillic_GHE
+const KeyCyrillicGhe = 1767
+// KeyCyrillicGheBar wraps GDK_KEY_Cyrillic_GHE_bar
+const KeyCyrillicGheBar = 16778386
+// KeyCyrillicHa wraps GDK_KEY_Cyrillic_HA
+const KeyCyrillicHa = 1768
+// KeyCyrillicHardsign wraps GDK_KEY_Cyrillic_HARDSIGN
+const KeyCyrillicHardsign = 1791
+// KeyCyrillicHaDescender wraps GDK_KEY_Cyrillic_HA_descender
+const KeyCyrillicHaDescender = 16778418
+// KeyCyrillicI wraps GDK_KEY_Cyrillic_I
+const KeyCyrillicI = 1769
+// KeyCyrillicIe wraps GDK_KEY_Cyrillic_IE
+const KeyCyrillicIe = 1765
+// KeyCyrillicIO wraps GDK_KEY_Cyrillic_IO
+const KeyCyrillicIO = 1715
+// KeyCyrillicIMacron wraps GDK_KEY_Cyrillic_I_macron
+const KeyCyrillicIMacron = 16778466
+// KeyCyrillicJe wraps GDK_KEY_Cyrillic_JE
+const KeyCyrillicJe = 1720
+// KeyCyrillicKa wraps GDK_KEY_Cyrillic_KA
+const KeyCyrillicKa = 1771
+// KeyCyrillicKaDescender wraps GDK_KEY_Cyrillic_KA_descender
+const KeyCyrillicKaDescender = 16778394
+// KeyCyrillicKaVertstroke wraps GDK_KEY_Cyrillic_KA_vertstroke
+const KeyCyrillicKaVertstroke = 16778396
+// KeyCyrillicLje wraps GDK_KEY_Cyrillic_LJE
+const KeyCyrillicLje = 1721
+// KeyCyrillicNje wraps GDK_KEY_Cyrillic_NJE
+const KeyCyrillicNje = 1722
+// KeyCyrillicO wraps GDK_KEY_Cyrillic_O
+const KeyCyrillicO = 1775
+// KeyCyrillicOBar wraps GDK_KEY_Cyrillic_O_bar
+const KeyCyrillicOBar = 16778472
+// KeyCyrillicPe wraps GDK_KEY_Cyrillic_PE
+const KeyCyrillicPe = 1776
+// KeyCyrillicSchwa wraps GDK_KEY_Cyrillic_SCHWA
+const KeyCyrillicSchwa = 16778456
+// KeyCyrillicSHA wraps GDK_KEY_Cyrillic_SHA
+const KeyCyrillicSHA = 1787
+// KeyCyrillicShcha wraps GDK_KEY_Cyrillic_SHCHA
+const KeyCyrillicShcha = 1789
+// KeyCyrillicShha wraps GDK_KEY_Cyrillic_SHHA
+const KeyCyrillicShha = 16778426
+// KeyCyrillicShorti wraps GDK_KEY_Cyrillic_SHORTI
+const KeyCyrillicShorti = 1770
+// KeyCyrillicSoftsign wraps GDK_KEY_Cyrillic_SOFTSIGN
+const KeyCyrillicSoftsign = 1784
+// KeyCyrillicTe wraps GDK_KEY_Cyrillic_TE
+const KeyCyrillicTe = 1780
+// KeyCyrillicTse wraps GDK_KEY_Cyrillic_TSE
+const KeyCyrillicTse = 1763
+// KeyCyrillicU wraps GDK_KEY_Cyrillic_U
+const KeyCyrillicU = 1781
+// KeyCyrillicUMacron wraps GDK_KEY_Cyrillic_U_macron
+const KeyCyrillicUMacron = 16778478
+// KeyCyrillicUStraight wraps GDK_KEY_Cyrillic_U_straight
+const KeyCyrillicUStraight = 16778414
+// KeyCyrillicUStraightBar wraps GDK_KEY_Cyrillic_U_straight_bar
+const KeyCyrillicUStraightBar = 16778416
+// KeyCyrillicVe wraps GDK_KEY_Cyrillic_VE
+const KeyCyrillicVe = 1783
+// KeyCyrillicYa wraps GDK_KEY_Cyrillic_YA
+const KeyCyrillicYa = 1777
+// KeyCyrillicYeru wraps GDK_KEY_Cyrillic_YERU
+const KeyCyrillicYeru = 1785
+// KeyCyrillicYu wraps GDK_KEY_Cyrillic_YU
+const KeyCyrillicYu = 1760
+// KeyCyrillicZe wraps GDK_KEY_Cyrillic_ZE
+const KeyCyrillicZe = 1786
+// KeyCyrillicZhe wraps GDK_KEY_Cyrillic_ZHE
+const KeyCyrillicZhe = 1782
+// KeyCyrillicZheDescender wraps GDK_KEY_Cyrillic_ZHE_descender
+const KeyCyrillicZheDescender = 16778390
+// KeyCyrillicA wraps GDK_KEY_Cyrillic_a
+const KeyCyrillicA = 1729
+// KeyCyrillicBe wraps GDK_KEY_Cyrillic_be
+const KeyCyrillicBe = 1730
+// KeyCyrillicChe wraps GDK_KEY_Cyrillic_che
+const KeyCyrillicChe = 1758
+// KeyCyrillicCheDescender wraps GDK_KEY_Cyrillic_che_descender
+const KeyCyrillicCheDescender = 16778423
+// KeyCyrillicCheVertstroke wraps GDK_KEY_Cyrillic_che_vertstroke
+const KeyCyrillicCheVertstroke = 16778425
+// KeyCyrillicDe wraps GDK_KEY_Cyrillic_de
+const KeyCyrillicDe = 1732
+// KeyCyrillicDzhe wraps GDK_KEY_Cyrillic_dzhe
+const KeyCyrillicDzhe = 1711
+// KeyCyrillicE wraps GDK_KEY_Cyrillic_e
+const KeyCyrillicE = 1756
+// KeyCyrillicEf wraps GDK_KEY_Cyrillic_ef
+const KeyCyrillicEf = 1734
+// KeyCyrillicEl wraps GDK_KEY_Cyrillic_el
+const KeyCyrillicEl = 1740
+// KeyCyrillicEm wraps GDK_KEY_Cyrillic_em
+const KeyCyrillicEm = 1741
+// KeyCyrillicEn wraps GDK_KEY_Cyrillic_en
+const KeyCyrillicEn = 1742
+// KeyCyrillicEnDescender wraps GDK_KEY_Cyrillic_en_descender
+const KeyCyrillicEnDescender = 16778403
+// KeyCyrillicEr wraps GDK_KEY_Cyrillic_er
+const KeyCyrillicEr = 1746
+// KeyCyrillicES wraps GDK_KEY_Cyrillic_es
+const KeyCyrillicES = 1747
+// KeyCyrillicGhe wraps GDK_KEY_Cyrillic_ghe
+const KeyCyrillicGhe = 1735
+// KeyCyrillicGheBar wraps GDK_KEY_Cyrillic_ghe_bar
+const KeyCyrillicGheBar = 16778387
+// KeyCyrillicHa wraps GDK_KEY_Cyrillic_ha
+const KeyCyrillicHa = 1736
+// KeyCyrillicHaDescender wraps GDK_KEY_Cyrillic_ha_descender
+const KeyCyrillicHaDescender = 16778419
+// KeyCyrillicHardsign wraps GDK_KEY_Cyrillic_hardsign
+const KeyCyrillicHardsign = 1759
+// KeyCyrillicI wraps GDK_KEY_Cyrillic_i
+const KeyCyrillicI = 1737
+// KeyCyrillicIMacron wraps GDK_KEY_Cyrillic_i_macron
+const KeyCyrillicIMacron = 16778467
+// KeyCyrillicIe wraps GDK_KEY_Cyrillic_ie
+const KeyCyrillicIe = 1733
+// KeyCyrillicIO wraps GDK_KEY_Cyrillic_io
+const KeyCyrillicIO = 1699
+// KeyCyrillicJe wraps GDK_KEY_Cyrillic_je
+const KeyCyrillicJe = 1704
+// KeyCyrillicKa wraps GDK_KEY_Cyrillic_ka
+const KeyCyrillicKa = 1739
+// KeyCyrillicKaDescender wraps GDK_KEY_Cyrillic_ka_descender
+const KeyCyrillicKaDescender = 16778395
+// KeyCyrillicKaVertstroke wraps GDK_KEY_Cyrillic_ka_vertstroke
+const KeyCyrillicKaVertstroke = 16778397
+// KeyCyrillicLje wraps GDK_KEY_Cyrillic_lje
+const KeyCyrillicLje = 1705
+// KeyCyrillicNje wraps GDK_KEY_Cyrillic_nje
+const KeyCyrillicNje = 1706
+// KeyCyrillicO wraps GDK_KEY_Cyrillic_o
+const KeyCyrillicO = 1743
+// KeyCyrillicOBar wraps GDK_KEY_Cyrillic_o_bar
+const KeyCyrillicOBar = 16778473
+// KeyCyrillicPe wraps GDK_KEY_Cyrillic_pe
+const KeyCyrillicPe = 1744
+// KeyCyrillicSchwa wraps GDK_KEY_Cyrillic_schwa
+const KeyCyrillicSchwa = 16778457
+// KeyCyrillicSHA wraps GDK_KEY_Cyrillic_sha
+const KeyCyrillicSHA = 1755
+// KeyCyrillicShcha wraps GDK_KEY_Cyrillic_shcha
+const KeyCyrillicShcha = 1757
+// KeyCyrillicShha wraps GDK_KEY_Cyrillic_shha
+const KeyCyrillicShha = 16778427
+// KeyCyrillicShorti wraps GDK_KEY_Cyrillic_shorti
+const KeyCyrillicShorti = 1738
+// KeyCyrillicSoftsign wraps GDK_KEY_Cyrillic_softsign
+const KeyCyrillicSoftsign = 1752
+// KeyCyrillicTe wraps GDK_KEY_Cyrillic_te
+const KeyCyrillicTe = 1748
+// KeyCyrillicTse wraps GDK_KEY_Cyrillic_tse
+const KeyCyrillicTse = 1731
+// KeyCyrillicU wraps GDK_KEY_Cyrillic_u
+const KeyCyrillicU = 1749
+// KeyCyrillicUMacron wraps GDK_KEY_Cyrillic_u_macron
+const KeyCyrillicUMacron = 16778479
+// KeyCyrillicUStraight wraps GDK_KEY_Cyrillic_u_straight
+const KeyCyrillicUStraight = 16778415
+// KeyCyrillicUStraightBar wraps GDK_KEY_Cyrillic_u_straight_bar
+const KeyCyrillicUStraightBar = 16778417
+// KeyCyrillicVe wraps GDK_KEY_Cyrillic_ve
+const KeyCyrillicVe = 1751
+// KeyCyrillicYa wraps GDK_KEY_Cyrillic_ya
+const KeyCyrillicYa = 1745
+// KeyCyrillicYeru wraps GDK_KEY_Cyrillic_yeru
+const KeyCyrillicYeru = 1753
+// KeyCyrillicYu wraps GDK_KEY_Cyrillic_yu
+const KeyCyrillicYu = 1728
+// KeyCyrillicZe wraps GDK_KEY_Cyrillic_ze
+const KeyCyrillicZe = 1754
+// KeyCyrillicZhe wraps GDK_KEY_Cyrillic_zhe
+const KeyCyrillicZhe = 1750
+// KeyCyrillicZheDescender wraps GDK_KEY_Cyrillic_zhe_descender
+const KeyCyrillicZheDescender = 16778391
+// KeyD wraps GDK_KEY_D
+const KeyD = 68
+// KeyDos wraps GDK_KEY_DOS
+const KeyDos = 269025114
+// KeyDabovedot wraps GDK_KEY_Dabovedot
+const KeyDabovedot = 16784906
+// KeyDcaron wraps GDK_KEY_Dcaron
+const KeyDcaron = 463
+// KeyDelete wraps GDK_KEY_Delete
+const KeyDelete = 65535
+// KeyDisplay wraps GDK_KEY_Display
+const KeyDisplay = 269025113
+// KeyDocuments wraps GDK_KEY_Documents
+const KeyDocuments = 269025115
+// KeyDongsign wraps GDK_KEY_DongSign
+const KeyDongsign = 16785579
+// KeyDown wraps GDK_KEY_Down
+const KeyDown = 65364
+// KeyDstroke wraps GDK_KEY_Dstroke
+const KeyDstroke = 464
+// KeyE wraps GDK_KEY_E
+const KeyE = 69
+// KeyEng wraps GDK_KEY_ENG
+const KeyEng = 957
+// KeyEth wraps GDK_KEY_ETH
+const KeyEth = 208
+// KeyEzh wraps GDK_KEY_EZH
+const KeyEzh = 16777655
+// KeyEabovedot wraps GDK_KEY_Eabovedot
+const KeyEabovedot = 972
+// KeyEacute wraps GDK_KEY_Eacute
+const KeyEacute = 201
+// KeyEbelowdot wraps GDK_KEY_Ebelowdot
+const KeyEbelowdot = 16785080
+// KeyEcaron wraps GDK_KEY_Ecaron
+const KeyEcaron = 460
+// KeyEcircumflex wraps GDK_KEY_Ecircumflex
+const KeyEcircumflex = 202
+// KeyEcircumflexacute wraps GDK_KEY_Ecircumflexacute
+const KeyEcircumflexacute = 16785086
+// KeyEcircumflexbelowdot wraps GDK_KEY_Ecircumflexbelowdot
+const KeyEcircumflexbelowdot = 16785094
+// KeyEcircumflexgrave wraps GDK_KEY_Ecircumflexgrave
+const KeyEcircumflexgrave = 16785088
+// KeyEcircumflexhook wraps GDK_KEY_Ecircumflexhook
+const KeyEcircumflexhook = 16785090
+// KeyEcircumflextilde wraps GDK_KEY_Ecircumflextilde
+const KeyEcircumflextilde = 16785092
+// KeyEcusign wraps GDK_KEY_EcuSign
+const KeyEcusign = 16785568
+// KeyEdiaeresis wraps GDK_KEY_Ediaeresis
+const KeyEdiaeresis = 203
+// KeyEgrave wraps GDK_KEY_Egrave
+const KeyEgrave = 200
+// KeyEhook wraps GDK_KEY_Ehook
+const KeyEhook = 16785082
+// KeyEisuShift wraps GDK_KEY_Eisu_Shift
+const KeyEisuShift = 65327
+// KeyEisuToggle wraps GDK_KEY_Eisu_toggle
+const KeyEisuToggle = 65328
+// KeyEject wraps GDK_KEY_Eject
+const KeyEject = 269025068
+// KeyEmacron wraps GDK_KEY_Emacron
+const KeyEmacron = 938
+// KeyEnd wraps GDK_KEY_End
+const KeyEnd = 65367
+// KeyEogonek wraps GDK_KEY_Eogonek
+const KeyEogonek = 458
+// KeyEscape wraps GDK_KEY_Escape
+const KeyEscape = 65307
+// KeyEth wraps GDK_KEY_Eth
+const KeyEth = 208
+// KeyEtilde wraps GDK_KEY_Etilde
+const KeyEtilde = 16785084
+// KeyEurosign wraps GDK_KEY_EuroSign
+const KeyEurosign = 8364
+// KeyExcel wraps GDK_KEY_Excel
+const KeyExcel = 269025116
+// KeyExecute wraps GDK_KEY_Execute
+const KeyExecute = 65378
+// KeyExplorer wraps GDK_KEY_Explorer
+const KeyExplorer = 269025117
+// KeyF wraps GDK_KEY_F
+const KeyF = 70
+// KeyF1 wraps GDK_KEY_F1
+const KeyF1 = 65470
+// KeyF10 wraps GDK_KEY_F10
+const KeyF10 = 65479
+// KeyF11 wraps GDK_KEY_F11
+const KeyF11 = 65480
+// KeyF12 wraps GDK_KEY_F12
+const KeyF12 = 65481
+// KeyF13 wraps GDK_KEY_F13
+const KeyF13 = 65482
+// KeyF14 wraps GDK_KEY_F14
+const KeyF14 = 65483
+// KeyF15 wraps GDK_KEY_F15
+const KeyF15 = 65484
+// KeyF16 wraps GDK_KEY_F16
+const KeyF16 = 65485
+// KeyF17 wraps GDK_KEY_F17
+const KeyF17 = 65486
+// KeyF18 wraps GDK_KEY_F18
+const KeyF18 = 65487
+// KeyF19 wraps GDK_KEY_F19
+const KeyF19 = 65488
+// KeyF2 wraps GDK_KEY_F2
+const KeyF2 = 65471
+// KeyF20 wraps GDK_KEY_F20
+const KeyF20 = 65489
+// KeyF21 wraps GDK_KEY_F21
+const KeyF21 = 65490
+// KeyF22 wraps GDK_KEY_F22
+const KeyF22 = 65491
+// KeyF23 wraps GDK_KEY_F23
+const KeyF23 = 65492
+// KeyF24 wraps GDK_KEY_F24
+const KeyF24 = 65493
+// KeyF25 wraps GDK_KEY_F25
+const KeyF25 = 65494
+// KeyF26 wraps GDK_KEY_F26
+const KeyF26 = 65495
+// KeyF27 wraps GDK_KEY_F27
+const KeyF27 = 65496
+// KeyF28 wraps GDK_KEY_F28
+const KeyF28 = 65497
+// KeyF29 wraps GDK_KEY_F29
+const KeyF29 = 65498
+// KeyF3 wraps GDK_KEY_F3
+const KeyF3 = 65472
+// KeyF30 wraps GDK_KEY_F30
+const KeyF30 = 65499
+// KeyF31 wraps GDK_KEY_F31
+const KeyF31 = 65500
+// KeyF32 wraps GDK_KEY_F32
+const KeyF32 = 65501
+// KeyF33 wraps GDK_KEY_F33
+const KeyF33 = 65502
+// KeyF34 wraps GDK_KEY_F34
+const KeyF34 = 65503
+// KeyF35 wraps GDK_KEY_F35
+const KeyF35 = 65504
+// KeyF4 wraps GDK_KEY_F4
+const KeyF4 = 65473
+// KeyF5 wraps GDK_KEY_F5
+const KeyF5 = 65474
+// KeyF6 wraps GDK_KEY_F6
+const KeyF6 = 65475
+// KeyF7 wraps GDK_KEY_F7
+const KeyF7 = 65476
+// KeyF8 wraps GDK_KEY_F8
+const KeyF8 = 65477
+// KeyF9 wraps GDK_KEY_F9
+const KeyF9 = 65478
+// KeyFfrancsign wraps GDK_KEY_FFrancSign
+const KeyFfrancsign = 16785571
+// KeyFabovedot wraps GDK_KEY_Fabovedot
+const KeyFabovedot = 16784926
+// KeyFarsi0 wraps GDK_KEY_Farsi_0
+const KeyFarsi0 = 16778992
+// KeyFarsi1 wraps GDK_KEY_Farsi_1
+const KeyFarsi1 = 16778993
+// KeyFarsi2 wraps GDK_KEY_Farsi_2
+const KeyFarsi2 = 16778994
+// KeyFarsi3 wraps GDK_KEY_Farsi_3
+const KeyFarsi3 = 16778995
+// KeyFarsi4 wraps GDK_KEY_Farsi_4
+const KeyFarsi4 = 16778996
+// KeyFarsi5 wraps GDK_KEY_Farsi_5
+const KeyFarsi5 = 16778997
+// KeyFarsi6 wraps GDK_KEY_Farsi_6
+const KeyFarsi6 = 16778998
+// KeyFarsi7 wraps GDK_KEY_Farsi_7
+const KeyFarsi7 = 16778999
+// KeyFarsi8 wraps GDK_KEY_Farsi_8
+const KeyFarsi8 = 16779000
+// KeyFarsi9 wraps GDK_KEY_Farsi_9
+const KeyFarsi9 = 16779001
+// KeyFarsiYeh wraps GDK_KEY_Farsi_yeh
+const KeyFarsiYeh = 16778956
+// KeyFavorites wraps GDK_KEY_Favorites
+const KeyFavorites = 269025072
+// KeyFinance wraps GDK_KEY_Finance
+const KeyFinance = 269025084
+// KeyFind wraps GDK_KEY_Find
+const KeyFind = 65384
+// KeyFirstVirtualScreen wraps GDK_KEY_First_Virtual_Screen
+const KeyFirstVirtualScreen = 65232
+// KeyForward wraps GDK_KEY_Forward
+const KeyForward = 269025063
+// KeyFrameback wraps GDK_KEY_FrameBack
+const KeyFrameback = 269025181
+// KeyFrameforward wraps GDK_KEY_FrameForward
+const KeyFrameforward = 269025182
+// KeyG wraps GDK_KEY_G
+const KeyG = 71
+// KeyGabovedot wraps GDK_KEY_Gabovedot
+const KeyGabovedot = 725
+// KeyGame wraps GDK_KEY_Game
+const KeyGame = 269025118
+// KeyGbreve wraps GDK_KEY_Gbreve
+const KeyGbreve = 683
+// KeyGcaron wraps GDK_KEY_Gcaron
+const KeyGcaron = 16777702
+// KeyGcedilla wraps GDK_KEY_Gcedilla
+const KeyGcedilla = 939
+// KeyGcircumflex wraps GDK_KEY_Gcircumflex
+const KeyGcircumflex = 728
+// KeyGeorgianAn wraps GDK_KEY_Georgian_an
+const KeyGeorgianAn = 16781520
+// KeyGeorgianBan wraps GDK_KEY_Georgian_ban
+const KeyGeorgianBan = 16781521
+// KeyGeorgianCan wraps GDK_KEY_Georgian_can
+const KeyGeorgianCan = 16781546
+// KeyGeorgianChar wraps GDK_KEY_Georgian_char
+const KeyGeorgianChar = 16781549
+// KeyGeorgianChin wraps GDK_KEY_Georgian_chin
+const KeyGeorgianChin = 16781545
+// KeyGeorgianCil wraps GDK_KEY_Georgian_cil
+const KeyGeorgianCil = 16781548
+// KeyGeorgianDon wraps GDK_KEY_Georgian_don
+const KeyGeorgianDon = 16781523
+// KeyGeorgianEn wraps GDK_KEY_Georgian_en
+const KeyGeorgianEn = 16781524
+// KeyGeorgianFi wraps GDK_KEY_Georgian_fi
+const KeyGeorgianFi = 16781558
+// KeyGeorgianGan wraps GDK_KEY_Georgian_gan
+const KeyGeorgianGan = 16781522
+// KeyGeorgianGhan wraps GDK_KEY_Georgian_ghan
+const KeyGeorgianGhan = 16781542
+// KeyGeorgianHae wraps GDK_KEY_Georgian_hae
+const KeyGeorgianHae = 16781552
+// KeyGeorgianHar wraps GDK_KEY_Georgian_har
+const KeyGeorgianHar = 16781556
+// KeyGeorgianHe wraps GDK_KEY_Georgian_he
+const KeyGeorgianHe = 16781553
+// KeyGeorgianHie wraps GDK_KEY_Georgian_hie
+const KeyGeorgianHie = 16781554
+// KeyGeorgianHoe wraps GDK_KEY_Georgian_hoe
+const KeyGeorgianHoe = 16781557
+// KeyGeorgianIn wraps GDK_KEY_Georgian_in
+const KeyGeorgianIn = 16781528
+// KeyGeorgianJhan wraps GDK_KEY_Georgian_jhan
+const KeyGeorgianJhan = 16781551
+// KeyGeorgianJil wraps GDK_KEY_Georgian_jil
+const KeyGeorgianJil = 16781547
+// KeyGeorgianKan wraps GDK_KEY_Georgian_kan
+const KeyGeorgianKan = 16781529
+// KeyGeorgianKhar wraps GDK_KEY_Georgian_khar
+const KeyGeorgianKhar = 16781541
+// KeyGeorgianLas wraps GDK_KEY_Georgian_las
+const KeyGeorgianLas = 16781530
+// KeyGeorgianMan wraps GDK_KEY_Georgian_man
+const KeyGeorgianMan = 16781531
+// KeyGeorgianNar wraps GDK_KEY_Georgian_nar
+const KeyGeorgianNar = 16781532
+// KeyGeorgianOn wraps GDK_KEY_Georgian_on
+const KeyGeorgianOn = 16781533
+// KeyGeorgianPar wraps GDK_KEY_Georgian_par
+const KeyGeorgianPar = 16781534
+// KeyGeorgianPhar wraps GDK_KEY_Georgian_phar
+const KeyGeorgianPhar = 16781540
+// KeyGeorgianQar wraps GDK_KEY_Georgian_qar
+const KeyGeorgianQar = 16781543
+// KeyGeorgianRae wraps GDK_KEY_Georgian_rae
+const KeyGeorgianRae = 16781536
+// KeyGeorgianSan wraps GDK_KEY_Georgian_san
+const KeyGeorgianSan = 16781537
+// KeyGeorgianShin wraps GDK_KEY_Georgian_shin
+const KeyGeorgianShin = 16781544
+// KeyGeorgianTan wraps GDK_KEY_Georgian_tan
+const KeyGeorgianTan = 16781527
+// KeyGeorgianTar wraps GDK_KEY_Georgian_tar
+const KeyGeorgianTar = 16781538
+// KeyGeorgianUn wraps GDK_KEY_Georgian_un
+const KeyGeorgianUn = 16781539
+// KeyGeorgianVin wraps GDK_KEY_Georgian_vin
+const KeyGeorgianVin = 16781525
+// KeyGeorgianWe wraps GDK_KEY_Georgian_we
+const KeyGeorgianWe = 16781555
+// KeyGeorgianXan wraps GDK_KEY_Georgian_xan
+const KeyGeorgianXan = 16781550
+// KeyGeorgianZen wraps GDK_KEY_Georgian_zen
+const KeyGeorgianZen = 16781526
+// KeyGeorgianZhar wraps GDK_KEY_Georgian_zhar
+const KeyGeorgianZhar = 16781535
+// KeyGo wraps GDK_KEY_Go
+const KeyGo = 269025119
+// KeyGreekAlpha wraps GDK_KEY_Greek_ALPHA
+const KeyGreekAlpha = 1985
+// KeyGreekAlphaaccent wraps GDK_KEY_Greek_ALPHAaccent
+const KeyGreekAlphaaccent = 1953
+// KeyGreekBeta wraps GDK_KEY_Greek_BETA
+const KeyGreekBeta = 1986
+// KeyGreekChi wraps GDK_KEY_Greek_CHI
+const KeyGreekChi = 2007
+// KeyGreekDelta wraps GDK_KEY_Greek_DELTA
+const KeyGreekDelta = 1988
+// KeyGreekEpsilon wraps GDK_KEY_Greek_EPSILON
+const KeyGreekEpsilon = 1989
+// KeyGreekEpsilonaccent wraps GDK_KEY_Greek_EPSILONaccent
+const KeyGreekEpsilonaccent = 1954
+// KeyGreekEta wraps GDK_KEY_Greek_ETA
+const KeyGreekEta = 1991
+// KeyGreekEtaaccent wraps GDK_KEY_Greek_ETAaccent
+const KeyGreekEtaaccent = 1955
+// KeyGreekGamma wraps GDK_KEY_Greek_GAMMA
+const KeyGreekGamma = 1987
+// KeyGreekIota wraps GDK_KEY_Greek_IOTA
+const KeyGreekIota = 1993
+// KeyGreekIotaaccent wraps GDK_KEY_Greek_IOTAaccent
+const KeyGreekIotaaccent = 1956
+// KeyGreekIotadiaeresis wraps GDK_KEY_Greek_IOTAdiaeresis
+const KeyGreekIotadiaeresis = 1957
+// KeyGreekIotadieresis wraps GDK_KEY_Greek_IOTAdieresis
+const KeyGreekIotadieresis = 1957
+// KeyGreekKappa wraps GDK_KEY_Greek_KAPPA
+const KeyGreekKappa = 1994
+// KeyGreekLambda wraps GDK_KEY_Greek_LAMBDA
+const KeyGreekLambda = 1995
+// KeyGreekLamda wraps GDK_KEY_Greek_LAMDA
+const KeyGreekLamda = 1995
+// KeyGreekMu wraps GDK_KEY_Greek_MU
+const KeyGreekMu = 1996
+// KeyGreekNu wraps GDK_KEY_Greek_NU
+const KeyGreekNu = 1997
+// KeyGreekOmega wraps GDK_KEY_Greek_OMEGA
+const KeyGreekOmega = 2009
+// KeyGreekOmegaaccent wraps GDK_KEY_Greek_OMEGAaccent
+const KeyGreekOmegaaccent = 1963
+// KeyGreekOmicron wraps GDK_KEY_Greek_OMICRON
+const KeyGreekOmicron = 1999
+// KeyGreekOmicronaccent wraps GDK_KEY_Greek_OMICRONaccent
+const KeyGreekOmicronaccent = 1959
+// KeyGreekPhi wraps GDK_KEY_Greek_PHI
+const KeyGreekPhi = 2006
+// KeyGreekPi wraps GDK_KEY_Greek_PI
+const KeyGreekPi = 2000
+// KeyGreekPsi wraps GDK_KEY_Greek_PSI
+const KeyGreekPsi = 2008
+// KeyGreekRho wraps GDK_KEY_Greek_RHO
+const KeyGreekRho = 2001
+// KeyGreekSigma wraps GDK_KEY_Greek_SIGMA
+const KeyGreekSigma = 2002
+// KeyGreekTau wraps GDK_KEY_Greek_TAU
+const KeyGreekTau = 2004
+// KeyGreekTheta wraps GDK_KEY_Greek_THETA
+const KeyGreekTheta = 1992
+// KeyGreekUpsilon wraps GDK_KEY_Greek_UPSILON
+const KeyGreekUpsilon = 2005
+// KeyGreekUpsilonaccent wraps GDK_KEY_Greek_UPSILONaccent
+const KeyGreekUpsilonaccent = 1960
+// KeyGreekUpsilondieresis wraps GDK_KEY_Greek_UPSILONdieresis
+const KeyGreekUpsilondieresis = 1961
+// KeyGreekXi wraps GDK_KEY_Greek_XI
+const KeyGreekXi = 1998
+// KeyGreekZeta wraps GDK_KEY_Greek_ZETA
+const KeyGreekZeta = 1990
+// KeyGreekAccentdieresis wraps GDK_KEY_Greek_accentdieresis
+const KeyGreekAccentdieresis = 1966
+// KeyGreekAlpha wraps GDK_KEY_Greek_alpha
+const KeyGreekAlpha = 2017
+// KeyGreekAlphaaccent wraps GDK_KEY_Greek_alphaaccent
+const KeyGreekAlphaaccent = 1969
+// KeyGreekBeta wraps GDK_KEY_Greek_beta
+const KeyGreekBeta = 2018
+// KeyGreekChi wraps GDK_KEY_Greek_chi
+const KeyGreekChi = 2039
+// KeyGreekDelta wraps GDK_KEY_Greek_delta
+const KeyGreekDelta = 2020
+// KeyGreekEpsilon wraps GDK_KEY_Greek_epsilon
+const KeyGreekEpsilon = 2021
+// KeyGreekEpsilonaccent wraps GDK_KEY_Greek_epsilonaccent
+const KeyGreekEpsilonaccent = 1970
+// KeyGreekEta wraps GDK_KEY_Greek_eta
+const KeyGreekEta = 2023
+// KeyGreekEtaaccent wraps GDK_KEY_Greek_etaaccent
+const KeyGreekEtaaccent = 1971
+// KeyGreekFinalsmallsigma wraps GDK_KEY_Greek_finalsmallsigma
+const KeyGreekFinalsmallsigma = 2035
+// KeyGreekGamma wraps GDK_KEY_Greek_gamma
+const KeyGreekGamma = 2019
+// KeyGreekHorizbar wraps GDK_KEY_Greek_horizbar
+const KeyGreekHorizbar = 1967
+// KeyGreekIota wraps GDK_KEY_Greek_iota
+const KeyGreekIota = 2025
+// KeyGreekIotaaccent wraps GDK_KEY_Greek_iotaaccent
+const KeyGreekIotaaccent = 1972
+// KeyGreekIotaaccentdieresis wraps GDK_KEY_Greek_iotaaccentdieresis
+const KeyGreekIotaaccentdieresis = 1974
+// KeyGreekIotadieresis wraps GDK_KEY_Greek_iotadieresis
+const KeyGreekIotadieresis = 1973
+// KeyGreekKappa wraps GDK_KEY_Greek_kappa
+const KeyGreekKappa = 2026
+// KeyGreekLambda wraps GDK_KEY_Greek_lambda
+const KeyGreekLambda = 2027
+// KeyGreekLamda wraps GDK_KEY_Greek_lamda
+const KeyGreekLamda = 2027
+// KeyGreekMu wraps GDK_KEY_Greek_mu
+const KeyGreekMu = 2028
+// KeyGreekNu wraps GDK_KEY_Greek_nu
+const KeyGreekNu = 2029
+// KeyGreekOmega wraps GDK_KEY_Greek_omega
+const KeyGreekOmega = 2041
+// KeyGreekOmegaaccent wraps GDK_KEY_Greek_omegaaccent
+const KeyGreekOmegaaccent = 1979
+// KeyGreekOmicron wraps GDK_KEY_Greek_omicron
+const KeyGreekOmicron = 2031
+// KeyGreekOmicronaccent wraps GDK_KEY_Greek_omicronaccent
+const KeyGreekOmicronaccent = 1975
+// KeyGreekPhi wraps GDK_KEY_Greek_phi
+const KeyGreekPhi = 2038
+// KeyGreekPi wraps GDK_KEY_Greek_pi
+const KeyGreekPi = 2032
+// KeyGreekPsi wraps GDK_KEY_Greek_psi
+const KeyGreekPsi = 2040
+// KeyGreekRho wraps GDK_KEY_Greek_rho
+const KeyGreekRho = 2033
+// KeyGreekSigma wraps GDK_KEY_Greek_sigma
+const KeyGreekSigma = 2034
+// KeyGreekSwitch wraps GDK_KEY_Greek_switch
+const KeyGreekSwitch = 65406
+// KeyGreekTau wraps GDK_KEY_Greek_tau
+const KeyGreekTau = 2036
+// KeyGreekTheta wraps GDK_KEY_Greek_theta
+const KeyGreekTheta = 2024
+// KeyGreekUpsilon wraps GDK_KEY_Greek_upsilon
+const KeyGreekUpsilon = 2037
+// KeyGreekUpsilonaccent wraps GDK_KEY_Greek_upsilonaccent
+const KeyGreekUpsilonaccent = 1976
+// KeyGreekUpsilonaccentdieresis wraps GDK_KEY_Greek_upsilonaccentdieresis
+const KeyGreekUpsilonaccentdieresis = 1978
+// KeyGreekUpsilondieresis wraps GDK_KEY_Greek_upsilondieresis
+const KeyGreekUpsilondieresis = 1977
+// KeyGreekXi wraps GDK_KEY_Greek_xi
+const KeyGreekXi = 2030
+// KeyGreekZeta wraps GDK_KEY_Greek_zeta
+const KeyGreekZeta = 2022
+// KeyGreen wraps GDK_KEY_Green
+const KeyGreen = 269025188
+// KeyH wraps GDK_KEY_H
+const KeyH = 72
+// KeyHangul wraps GDK_KEY_Hangul
+const KeyHangul = 65329
+// KeyHangulA wraps GDK_KEY_Hangul_A
+const KeyHangulA = 3775
+// KeyHangulAe wraps GDK_KEY_Hangul_AE
+const KeyHangulAe = 3776
+// KeyHangulAraea wraps GDK_KEY_Hangul_AraeA
+const KeyHangulAraea = 3830
+// KeyHangulAraeae wraps GDK_KEY_Hangul_AraeAE
+const KeyHangulAraeae = 3831
+// KeyHangulBanja wraps GDK_KEY_Hangul_Banja
+const KeyHangulBanja = 65337
+// KeyHangulCieuc wraps GDK_KEY_Hangul_Cieuc
+const KeyHangulCieuc = 3770
+// KeyHangulCodeinput wraps GDK_KEY_Hangul_Codeinput
+const KeyHangulCodeinput = 65335
+// KeyHangulDikeud wraps GDK_KEY_Hangul_Dikeud
+const KeyHangulDikeud = 3751
+// KeyHangulE wraps GDK_KEY_Hangul_E
+const KeyHangulE = 3780
+// KeyHangulEo wraps GDK_KEY_Hangul_EO
+const KeyHangulEo = 3779
+// KeyHangulEu wraps GDK_KEY_Hangul_EU
+const KeyHangulEu = 3793
+// KeyHangulEnd wraps GDK_KEY_Hangul_End
+const KeyHangulEnd = 65331
+// KeyHangulHanja wraps GDK_KEY_Hangul_Hanja
+const KeyHangulHanja = 65332
+// KeyHangulHieuh wraps GDK_KEY_Hangul_Hieuh
+const KeyHangulHieuh = 3774
+// KeyHangulI wraps GDK_KEY_Hangul_I
+const KeyHangulI = 3795
+// KeyHangulIeung wraps GDK_KEY_Hangul_Ieung
+const KeyHangulIeung = 3767
+// KeyHangulJCieuc wraps GDK_KEY_Hangul_J_Cieuc
+const KeyHangulJCieuc = 3818
+// KeyHangulJDikeud wraps GDK_KEY_Hangul_J_Dikeud
+const KeyHangulJDikeud = 3802
+// KeyHangulJHieuh wraps GDK_KEY_Hangul_J_Hieuh
+const KeyHangulJHieuh = 3822
+// KeyHangulJIeung wraps GDK_KEY_Hangul_J_Ieung
+const KeyHangulJIeung = 3816
+// KeyHangulJJieuj wraps GDK_KEY_Hangul_J_Jieuj
+const KeyHangulJJieuj = 3817
+// KeyHangulJKhieuq wraps GDK_KEY_Hangul_J_Khieuq
+const KeyHangulJKhieuq = 3819
+// KeyHangulJKiyeog wraps GDK_KEY_Hangul_J_Kiyeog
+const KeyHangulJKiyeog = 3796
+// KeyHangulJKiyeogsios wraps GDK_KEY_Hangul_J_KiyeogSios
+const KeyHangulJKiyeogsios = 3798
+// KeyHangulJKkogjidalrinieung wraps GDK_KEY_Hangul_J_KkogjiDalrinIeung
+const KeyHangulJKkogjidalrinieung = 3833
+// KeyHangulJMieum wraps GDK_KEY_Hangul_J_Mieum
+const KeyHangulJMieum = 3811
+// KeyHangulJNieun wraps GDK_KEY_Hangul_J_Nieun
+const KeyHangulJNieun = 3799
+// KeyHangulJNieunhieuh wraps GDK_KEY_Hangul_J_NieunHieuh
+const KeyHangulJNieunhieuh = 3801
+// KeyHangulJNieunjieuj wraps GDK_KEY_Hangul_J_NieunJieuj
+const KeyHangulJNieunjieuj = 3800
+// KeyHangulJPansios wraps GDK_KEY_Hangul_J_PanSios
+const KeyHangulJPansios = 3832
+// KeyHangulJPhieuf wraps GDK_KEY_Hangul_J_Phieuf
+const KeyHangulJPhieuf = 3821
+// KeyHangulJPieub wraps GDK_KEY_Hangul_J_Pieub
+const KeyHangulJPieub = 3812
+// KeyHangulJPieubsios wraps GDK_KEY_Hangul_J_PieubSios
+const KeyHangulJPieubsios = 3813
+// KeyHangulJRieul wraps GDK_KEY_Hangul_J_Rieul
+const KeyHangulJRieul = 3803
+// KeyHangulJRieulhieuh wraps GDK_KEY_Hangul_J_RieulHieuh
+const KeyHangulJRieulhieuh = 3810
+// KeyHangulJRieulkiyeog wraps GDK_KEY_Hangul_J_RieulKiyeog
+const KeyHangulJRieulkiyeog = 3804
+// KeyHangulJRieulmieum wraps GDK_KEY_Hangul_J_RieulMieum
+const KeyHangulJRieulmieum = 3805
+// KeyHangulJRieulphieuf wraps GDK_KEY_Hangul_J_RieulPhieuf
+const KeyHangulJRieulphieuf = 3809
+// KeyHangulJRieulpieub wraps GDK_KEY_Hangul_J_RieulPieub
+const KeyHangulJRieulpieub = 3806
+// KeyHangulJRieulsios wraps GDK_KEY_Hangul_J_RieulSios
+const KeyHangulJRieulsios = 3807
+// KeyHangulJRieultieut wraps GDK_KEY_Hangul_J_RieulTieut
+const KeyHangulJRieultieut = 3808
+// KeyHangulJSios wraps GDK_KEY_Hangul_J_Sios
+const KeyHangulJSios = 3814
+// KeyHangulJSsangkiyeog wraps GDK_KEY_Hangul_J_SsangKiyeog
+const KeyHangulJSsangkiyeog = 3797
+// KeyHangulJSsangsios wraps GDK_KEY_Hangul_J_SsangSios
+const KeyHangulJSsangsios = 3815
+// KeyHangulJTieut wraps GDK_KEY_Hangul_J_Tieut
+const KeyHangulJTieut = 3820
+// KeyHangulJYeorinhieuh wraps GDK_KEY_Hangul_J_YeorinHieuh
+const KeyHangulJYeorinhieuh = 3834
+// KeyHangulJamo wraps GDK_KEY_Hangul_Jamo
+const KeyHangulJamo = 65333
+// KeyHangulJeonja wraps GDK_KEY_Hangul_Jeonja
+const KeyHangulJeonja = 65336
+// KeyHangulJieuj wraps GDK_KEY_Hangul_Jieuj
+const KeyHangulJieuj = 3768
+// KeyHangulKhieuq wraps GDK_KEY_Hangul_Khieuq
+const KeyHangulKhieuq = 3771
+// KeyHangulKiyeog wraps GDK_KEY_Hangul_Kiyeog
+const KeyHangulKiyeog = 3745
+// KeyHangulKiyeogsios wraps GDK_KEY_Hangul_KiyeogSios
+const KeyHangulKiyeogsios = 3747
+// KeyHangulKkogjidalrinieung wraps GDK_KEY_Hangul_KkogjiDalrinIeung
+const KeyHangulKkogjidalrinieung = 3827
+// KeyHangulMieum wraps GDK_KEY_Hangul_Mieum
+const KeyHangulMieum = 3761
+// KeyHangulMultiplecandidate wraps GDK_KEY_Hangul_MultipleCandidate
+const KeyHangulMultiplecandidate = 65341
+// KeyHangulNieun wraps GDK_KEY_Hangul_Nieun
+const KeyHangulNieun = 3748
+// KeyHangulNieunhieuh wraps GDK_KEY_Hangul_NieunHieuh
+const KeyHangulNieunhieuh = 3750
+// KeyHangulNieunjieuj wraps GDK_KEY_Hangul_NieunJieuj
+const KeyHangulNieunjieuj = 3749
+// KeyHangulO wraps GDK_KEY_Hangul_O
+const KeyHangulO = 3783
+// KeyHangulOe wraps GDK_KEY_Hangul_OE
+const KeyHangulOe = 3786
+// KeyHangulPansios wraps GDK_KEY_Hangul_PanSios
+const KeyHangulPansios = 3826
+// KeyHangulPhieuf wraps GDK_KEY_Hangul_Phieuf
+const KeyHangulPhieuf = 3773
+// KeyHangulPieub wraps GDK_KEY_Hangul_Pieub
+const KeyHangulPieub = 3762
+// KeyHangulPieubsios wraps GDK_KEY_Hangul_PieubSios
+const KeyHangulPieubsios = 3764
+// KeyHangulPosthanja wraps GDK_KEY_Hangul_PostHanja
+const KeyHangulPosthanja = 65339
+// KeyHangulPrehanja wraps GDK_KEY_Hangul_PreHanja
+const KeyHangulPrehanja = 65338
+// KeyHangulPreviouscandidate wraps GDK_KEY_Hangul_PreviousCandidate
+const KeyHangulPreviouscandidate = 65342
+// KeyHangulRieul wraps GDK_KEY_Hangul_Rieul
+const KeyHangulRieul = 3753
+// KeyHangulRieulhieuh wraps GDK_KEY_Hangul_RieulHieuh
+const KeyHangulRieulhieuh = 3760
+// KeyHangulRieulkiyeog wraps GDK_KEY_Hangul_RieulKiyeog
+const KeyHangulRieulkiyeog = 3754
+// KeyHangulRieulmieum wraps GDK_KEY_Hangul_RieulMieum
+const KeyHangulRieulmieum = 3755
+// KeyHangulRieulphieuf wraps GDK_KEY_Hangul_RieulPhieuf
+const KeyHangulRieulphieuf = 3759
+// KeyHangulRieulpieub wraps GDK_KEY_Hangul_RieulPieub
+const KeyHangulRieulpieub = 3756
+// KeyHangulRieulsios wraps GDK_KEY_Hangul_RieulSios
+const KeyHangulRieulsios = 3757
+// KeyHangulRieultieut wraps GDK_KEY_Hangul_RieulTieut
+const KeyHangulRieultieut = 3758
+// KeyHangulRieulyeorinhieuh wraps GDK_KEY_Hangul_RieulYeorinHieuh
+const KeyHangulRieulyeorinhieuh = 3823
+// KeyHangulRomaja wraps GDK_KEY_Hangul_Romaja
+const KeyHangulRomaja = 65334
+// KeyHangulSinglecandidate wraps GDK_KEY_Hangul_SingleCandidate
+const KeyHangulSinglecandidate = 65340
+// KeyHangulSios wraps GDK_KEY_Hangul_Sios
+const KeyHangulSios = 3765
+// KeyHangulSpecial wraps GDK_KEY_Hangul_Special
+const KeyHangulSpecial = 65343
+// KeyHangulSsangdikeud wraps GDK_KEY_Hangul_SsangDikeud
+const KeyHangulSsangdikeud = 3752
+// KeyHangulSsangjieuj wraps GDK_KEY_Hangul_SsangJieuj
+const KeyHangulSsangjieuj = 3769
+// KeyHangulSsangkiyeog wraps GDK_KEY_Hangul_SsangKiyeog
+const KeyHangulSsangkiyeog = 3746
+// KeyHangulSsangpieub wraps GDK_KEY_Hangul_SsangPieub
+const KeyHangulSsangpieub = 3763
+// KeyHangulSsangsios wraps GDK_KEY_Hangul_SsangSios
+const KeyHangulSsangsios = 3766
+// KeyHangulStart wraps GDK_KEY_Hangul_Start
+const KeyHangulStart = 65330
+// KeyHangulSunkyeongeummieum wraps GDK_KEY_Hangul_SunkyeongeumMieum
+const KeyHangulSunkyeongeummieum = 3824
+// KeyHangulSunkyeongeumphieuf wraps GDK_KEY_Hangul_SunkyeongeumPhieuf
+const KeyHangulSunkyeongeumphieuf = 3828
+// KeyHangulSunkyeongeumpieub wraps GDK_KEY_Hangul_SunkyeongeumPieub
+const KeyHangulSunkyeongeumpieub = 3825
+// KeyHangulTieut wraps GDK_KEY_Hangul_Tieut
+const KeyHangulTieut = 3772
+// KeyHangulU wraps GDK_KEY_Hangul_U
+const KeyHangulU = 3788
+// KeyHangulWa wraps GDK_KEY_Hangul_WA
+const KeyHangulWa = 3784
+// KeyHangulWae wraps GDK_KEY_Hangul_WAE
+const KeyHangulWae = 3785
+// KeyHangulWe wraps GDK_KEY_Hangul_WE
+const KeyHangulWe = 3790
+// KeyHangulWeo wraps GDK_KEY_Hangul_WEO
+const KeyHangulWeo = 3789
+// KeyHangulWi wraps GDK_KEY_Hangul_WI
+const KeyHangulWi = 3791
+// KeyHangulYa wraps GDK_KEY_Hangul_YA
+const KeyHangulYa = 3777
+// KeyHangulYae wraps GDK_KEY_Hangul_YAE
+const KeyHangulYae = 3778
+// KeyHangulYe wraps GDK_KEY_Hangul_YE
+const KeyHangulYe = 3782
+// KeyHangulYeo wraps GDK_KEY_Hangul_YEO
+const KeyHangulYeo = 3781
+// KeyHangulYi wraps GDK_KEY_Hangul_YI
+const KeyHangulYi = 3794
+// KeyHangulYo wraps GDK_KEY_Hangul_YO
+const KeyHangulYo = 3787
+// KeyHangulYu wraps GDK_KEY_Hangul_YU
+const KeyHangulYu = 3792
+// KeyHangulYeorinhieuh wraps GDK_KEY_Hangul_YeorinHieuh
+const KeyHangulYeorinhieuh = 3829
+// KeyHangulSwitch wraps GDK_KEY_Hangul_switch
+const KeyHangulSwitch = 65406
+// KeyHankaku wraps GDK_KEY_Hankaku
+const KeyHankaku = 65321
+// KeyHcircumflex wraps GDK_KEY_Hcircumflex
+const KeyHcircumflex = 678
+// KeyHebrewSwitch wraps GDK_KEY_Hebrew_switch
+const KeyHebrewSwitch = 65406
+// KeyHelp wraps GDK_KEY_Help
+const KeyHelp = 65386
+// KeyHenkan wraps GDK_KEY_Henkan
+const KeyHenkan = 65315
+// KeyHenkanMode wraps GDK_KEY_Henkan_Mode
+const KeyHenkanMode = 65315
+// KeyHibernate wraps GDK_KEY_Hibernate
+const KeyHibernate = 269025192
+// KeyHiragana wraps GDK_KEY_Hiragana
+const KeyHiragana = 65317
+// KeyHiraganaKatakana wraps GDK_KEY_Hiragana_Katakana
+const KeyHiraganaKatakana = 65319
+// KeyHistory wraps GDK_KEY_History
+const KeyHistory = 269025079
+// KeyHome wraps GDK_KEY_Home
+const KeyHome = 65360
+// KeyHomepage wraps GDK_KEY_HomePage
+const KeyHomepage = 269025048
+// KeyHotlinks wraps GDK_KEY_HotLinks
+const KeyHotlinks = 269025082
+// KeyHstroke wraps GDK_KEY_Hstroke
+const KeyHstroke = 673
+// KeyHyperL wraps GDK_KEY_Hyper_L
+const KeyHyperL = 65517
+// KeyHyperR wraps GDK_KEY_Hyper_R
+const KeyHyperR = 65518
+// KeyI wraps GDK_KEY_I
+const KeyI = 73
+// KeyISOCenterObject wraps GDK_KEY_ISO_Center_Object
+const KeyISOCenterObject = 65075
+// KeyISOContinuousUnderline wraps GDK_KEY_ISO_Continuous_Underline
+const KeyISOContinuousUnderline = 65072
+// KeyISODiscontinuousUnderline wraps GDK_KEY_ISO_Discontinuous_Underline
+const KeyISODiscontinuousUnderline = 65073
+// KeyISOEmphasize wraps GDK_KEY_ISO_Emphasize
+const KeyISOEmphasize = 65074
+// KeyISOEnter wraps GDK_KEY_ISO_Enter
+const KeyISOEnter = 65076
+// KeyISOFastCursorDown wraps GDK_KEY_ISO_Fast_Cursor_Down
+const KeyISOFastCursorDown = 65071
+// KeyISOFastCursorLeft wraps GDK_KEY_ISO_Fast_Cursor_Left
+const KeyISOFastCursorLeft = 65068
+// KeyISOFastCursorRight wraps GDK_KEY_ISO_Fast_Cursor_Right
+const KeyISOFastCursorRight = 65069
+// KeyISOFastCursorUp wraps GDK_KEY_ISO_Fast_Cursor_Up
+const KeyISOFastCursorUp = 65070
+// KeyISOFirstGroup wraps GDK_KEY_ISO_First_Group
+const KeyISOFirstGroup = 65036
+// KeyISOFirstGroupLock wraps GDK_KEY_ISO_First_Group_Lock
+const KeyISOFirstGroupLock = 65037
+// KeyISOGroupLatch wraps GDK_KEY_ISO_Group_Latch
+const KeyISOGroupLatch = 65030
+// KeyISOGroupLock wraps GDK_KEY_ISO_Group_Lock
+const KeyISOGroupLock = 65031
+// KeyISOGroupShift wraps GDK_KEY_ISO_Group_Shift
+const KeyISOGroupShift = 65406
+// KeyISOLastGroup wraps GDK_KEY_ISO_Last_Group
+const KeyISOLastGroup = 65038
+// KeyISOLastGroupLock wraps GDK_KEY_ISO_Last_Group_Lock
+const KeyISOLastGroupLock = 65039
+// KeyISOLeftTab wraps GDK_KEY_ISO_Left_Tab
+const KeyISOLeftTab = 65056
+// KeyISOLevel2Latch wraps GDK_KEY_ISO_Level2_Latch
+const KeyISOLevel2Latch = 65026
+// KeyISOLevel3Latch wraps GDK_KEY_ISO_Level3_Latch
+const KeyISOLevel3Latch = 65028
+// KeyISOLevel3Lock wraps GDK_KEY_ISO_Level3_Lock
+const KeyISOLevel3Lock = 65029
+// KeyISOLevel3Shift wraps GDK_KEY_ISO_Level3_Shift
+const KeyISOLevel3Shift = 65027
+// KeyISOLevel5Latch wraps GDK_KEY_ISO_Level5_Latch
+const KeyISOLevel5Latch = 65042
+// KeyISOLevel5Lock wraps GDK_KEY_ISO_Level5_Lock
+const KeyISOLevel5Lock = 65043
+// KeyISOLevel5Shift wraps GDK_KEY_ISO_Level5_Shift
+const KeyISOLevel5Shift = 65041
+// KeyISOLock wraps GDK_KEY_ISO_Lock
+const KeyISOLock = 65025
+// KeyISOMoveLineDown wraps GDK_KEY_ISO_Move_Line_Down
+const KeyISOMoveLineDown = 65058
+// KeyISOMoveLineUp wraps GDK_KEY_ISO_Move_Line_Up
+const KeyISOMoveLineUp = 65057
+// KeyISONextGroup wraps GDK_KEY_ISO_Next_Group
+const KeyISONextGroup = 65032
+// KeyISONextGroupLock wraps GDK_KEY_ISO_Next_Group_Lock
+const KeyISONextGroupLock = 65033
+// KeyISOPartialLineDown wraps GDK_KEY_ISO_Partial_Line_Down
+const KeyISOPartialLineDown = 65060
+// KeyISOPartialLineUp wraps GDK_KEY_ISO_Partial_Line_Up
+const KeyISOPartialLineUp = 65059
+// KeyISOPartialSpaceLeft wraps GDK_KEY_ISO_Partial_Space_Left
+const KeyISOPartialSpaceLeft = 65061
+// KeyISOPartialSpaceRight wraps GDK_KEY_ISO_Partial_Space_Right
+const KeyISOPartialSpaceRight = 65062
+// KeyISOPrevGroup wraps GDK_KEY_ISO_Prev_Group
+const KeyISOPrevGroup = 65034
+// KeyISOPrevGroupLock wraps GDK_KEY_ISO_Prev_Group_Lock
+const KeyISOPrevGroupLock = 65035
+// KeyISOReleaseBothMargins wraps GDK_KEY_ISO_Release_Both_Margins
+const KeyISOReleaseBothMargins = 65067
+// KeyISOReleaseMarginLeft wraps GDK_KEY_ISO_Release_Margin_Left
+const KeyISOReleaseMarginLeft = 65065
+// KeyISOReleaseMarginRight wraps GDK_KEY_ISO_Release_Margin_Right
+const KeyISOReleaseMarginRight = 65066
+// KeyISOSetMarginLeft wraps GDK_KEY_ISO_Set_Margin_Left
+const KeyISOSetMarginLeft = 65063
+// KeyISOSetMarginRight wraps GDK_KEY_ISO_Set_Margin_Right
+const KeyISOSetMarginRight = 65064
+// KeyIabovedot wraps GDK_KEY_Iabovedot
+const KeyIabovedot = 681
+// KeyIacute wraps GDK_KEY_Iacute
+const KeyIacute = 205
+// KeyIbelowdot wraps GDK_KEY_Ibelowdot
+const KeyIbelowdot = 16785098
+// KeyIbreve wraps GDK_KEY_Ibreve
+const KeyIbreve = 16777516
+// KeyIcircumflex wraps GDK_KEY_Icircumflex
+const KeyIcircumflex = 206
+// KeyIdiaeresis wraps GDK_KEY_Idiaeresis
+const KeyIdiaeresis = 207
+// KeyIgrave wraps GDK_KEY_Igrave
+const KeyIgrave = 204
+// KeyIhook wraps GDK_KEY_Ihook
+const KeyIhook = 16785096
+// KeyImacron wraps GDK_KEY_Imacron
+const KeyImacron = 975
+// KeyInsert wraps GDK_KEY_Insert
+const KeyInsert = 65379
+// KeyIogonek wraps GDK_KEY_Iogonek
+const KeyIogonek = 967
+// KeyItilde wraps GDK_KEY_Itilde
+const KeyItilde = 933
+// KeyJ wraps GDK_KEY_J
+const KeyJ = 74
+// KeyJcircumflex wraps GDK_KEY_Jcircumflex
+const KeyJcircumflex = 684
+// KeyK wraps GDK_KEY_K
+const KeyK = 75
+// KeyKp0 wraps GDK_KEY_KP_0
+const KeyKp0 = 65456
+// KeyKp1 wraps GDK_KEY_KP_1
+const KeyKp1 = 65457
+// KeyKp2 wraps GDK_KEY_KP_2
+const KeyKp2 = 65458
+// KeyKp3 wraps GDK_KEY_KP_3
+const KeyKp3 = 65459
+// KeyKp4 wraps GDK_KEY_KP_4
+const KeyKp4 = 65460
+// KeyKp5 wraps GDK_KEY_KP_5
+const KeyKp5 = 65461
+// KeyKp6 wraps GDK_KEY_KP_6
+const KeyKp6 = 65462
+// KeyKp7 wraps GDK_KEY_KP_7
+const KeyKp7 = 65463
+// KeyKp8 wraps GDK_KEY_KP_8
+const KeyKp8 = 65464
+// KeyKp9 wraps GDK_KEY_KP_9
+const KeyKp9 = 65465
+// KeyKpAdd wraps GDK_KEY_KP_Add
+const KeyKpAdd = 65451
+// KeyKpBegin wraps GDK_KEY_KP_Begin
+const KeyKpBegin = 65437
+// KeyKpDecimal wraps GDK_KEY_KP_Decimal
+const KeyKpDecimal = 65454
+// KeyKpDelete wraps GDK_KEY_KP_Delete
+const KeyKpDelete = 65439
+// KeyKpDivide wraps GDK_KEY_KP_Divide
+const KeyKpDivide = 65455
+// KeyKpDown wraps GDK_KEY_KP_Down
+const KeyKpDown = 65433
+// KeyKpEnd wraps GDK_KEY_KP_End
+const KeyKpEnd = 65436
+// KeyKpEnter wraps GDK_KEY_KP_Enter
+const KeyKpEnter = 65421
+// KeyKpEqual wraps GDK_KEY_KP_Equal
+const KeyKpEqual = 65469
+// KeyKpF1 wraps GDK_KEY_KP_F1
+const KeyKpF1 = 65425
+// KeyKpF2 wraps GDK_KEY_KP_F2
+const KeyKpF2 = 65426
+// KeyKpF3 wraps GDK_KEY_KP_F3
+const KeyKpF3 = 65427
+// KeyKpF4 wraps GDK_KEY_KP_F4
+const KeyKpF4 = 65428
+// KeyKpHome wraps GDK_KEY_KP_Home
+const KeyKpHome = 65429
+// KeyKpInsert wraps GDK_KEY_KP_Insert
+const KeyKpInsert = 65438
+// KeyKpLeft wraps GDK_KEY_KP_Left
+const KeyKpLeft = 65430
+// KeyKpMultiply wraps GDK_KEY_KP_Multiply
+const KeyKpMultiply = 65450
+// KeyKpNext wraps GDK_KEY_KP_Next
+const KeyKpNext = 65435
+// KeyKpPageDown wraps GDK_KEY_KP_Page_Down
+const KeyKpPageDown = 65435
+// KeyKpPageUp wraps GDK_KEY_KP_Page_Up
+const KeyKpPageUp = 65434
+// KeyKpPrior wraps GDK_KEY_KP_Prior
+const KeyKpPrior = 65434
+// KeyKpRight wraps GDK_KEY_KP_Right
+const KeyKpRight = 65432
+// KeyKpSeparator wraps GDK_KEY_KP_Separator
+const KeyKpSeparator = 65452
+// KeyKpSpace wraps GDK_KEY_KP_Space
+const KeyKpSpace = 65408
+// KeyKpSubtract wraps GDK_KEY_KP_Subtract
+const KeyKpSubtract = 65453
+// KeyKpTab wraps GDK_KEY_KP_Tab
+const KeyKpTab = 65417
+// KeyKpUp wraps GDK_KEY_KP_Up
+const KeyKpUp = 65431
+// KeyKanaLock wraps GDK_KEY_Kana_Lock
+const KeyKanaLock = 65325
+// KeyKanaShift wraps GDK_KEY_Kana_Shift
+const KeyKanaShift = 65326
+// KeyKanji wraps GDK_KEY_Kanji
+const KeyKanji = 65313
+// KeyKanjiBangou wraps GDK_KEY_Kanji_Bangou
+const KeyKanjiBangou = 65335
+// KeyKatakana wraps GDK_KEY_Katakana
+const KeyKatakana = 65318
+// KeyKbdbrightnessdown wraps GDK_KEY_KbdBrightnessDown
+const KeyKbdbrightnessdown = 269025030
+// KeyKbdbrightnessup wraps GDK_KEY_KbdBrightnessUp
+const KeyKbdbrightnessup = 269025029
+// KeyKbdlightonoff wraps GDK_KEY_KbdLightOnOff
+const KeyKbdlightonoff = 269025028
+// KeyKcedilla wraps GDK_KEY_Kcedilla
+const KeyKcedilla = 979
+// KeyKeyboard wraps GDK_KEY_Keyboard
+const KeyKeyboard = 269025203
+// KeyKoreanWon wraps GDK_KEY_Korean_Won
+const KeyKoreanWon = 3839
+// KeyL wraps GDK_KEY_L
+const KeyL = 76
+// KeyL1 wraps GDK_KEY_L1
+const KeyL1 = 65480
+// KeyL10 wraps GDK_KEY_L10
+const KeyL10 = 65489
+// KeyL2 wraps GDK_KEY_L2
+const KeyL2 = 65481
+// KeyL3 wraps GDK_KEY_L3
+const KeyL3 = 65482
+// KeyL4 wraps GDK_KEY_L4
+const KeyL4 = 65483
+// KeyL5 wraps GDK_KEY_L5
+const KeyL5 = 65484
+// KeyL6 wraps GDK_KEY_L6
+const KeyL6 = 65485
+// KeyL7 wraps GDK_KEY_L7
+const KeyL7 = 65486
+// KeyL8 wraps GDK_KEY_L8
+const KeyL8 = 65487
+// KeyL9 wraps GDK_KEY_L9
+const KeyL9 = 65488
+// KeyLacute wraps GDK_KEY_Lacute
+const KeyLacute = 453
+// KeyLastVirtualScreen wraps GDK_KEY_Last_Virtual_Screen
+const KeyLastVirtualScreen = 65236
+// KeyLaunch0 wraps GDK_KEY_Launch0
+const KeyLaunch0 = 269025088
+// KeyLaunch1 wraps GDK_KEY_Launch1
+const KeyLaunch1 = 269025089
+// KeyLaunch2 wraps GDK_KEY_Launch2
+const KeyLaunch2 = 269025090
+// KeyLaunch3 wraps GDK_KEY_Launch3
+const KeyLaunch3 = 269025091
+// KeyLaunch4 wraps GDK_KEY_Launch4
+const KeyLaunch4 = 269025092
+// KeyLaunch5 wraps GDK_KEY_Launch5
+const KeyLaunch5 = 269025093
+// KeyLaunch6 wraps GDK_KEY_Launch6
+const KeyLaunch6 = 269025094
+// KeyLaunch7 wraps GDK_KEY_Launch7
+const KeyLaunch7 = 269025095
+// KeyLaunch8 wraps GDK_KEY_Launch8
+const KeyLaunch8 = 269025096
+// KeyLaunch9 wraps GDK_KEY_Launch9
+const KeyLaunch9 = 269025097
+// KeyLauncha wraps GDK_KEY_LaunchA
+const KeyLauncha = 269025098
+// KeyLaunchb wraps GDK_KEY_LaunchB
+const KeyLaunchb = 269025099
+// KeyLaunchc wraps GDK_KEY_LaunchC
+const KeyLaunchc = 269025100
+// KeyLaunchd wraps GDK_KEY_LaunchD
+const KeyLaunchd = 269025101
+// KeyLaunche wraps GDK_KEY_LaunchE
+const KeyLaunche = 269025102
+// KeyLaunchf wraps GDK_KEY_LaunchF
+const KeyLaunchf = 269025103
+// KeyLbelowdot wraps GDK_KEY_Lbelowdot
+const KeyLbelowdot = 16784950
+// KeyLcaron wraps GDK_KEY_Lcaron
+const KeyLcaron = 421
+// KeyLcedilla wraps GDK_KEY_Lcedilla
+const KeyLcedilla = 934
+// KeyLeft wraps GDK_KEY_Left
+const KeyLeft = 65361
+// KeyLightbulb wraps GDK_KEY_LightBulb
+const KeyLightbulb = 269025077
+// KeyLinefeed wraps GDK_KEY_Linefeed
+const KeyLinefeed = 65290
+// KeyLirasign wraps GDK_KEY_LiraSign
+const KeyLirasign = 16785572
+// KeyLoggrabinfo wraps GDK_KEY_LogGrabInfo
+const KeyLoggrabinfo = 269024805
+// KeyLogoff wraps GDK_KEY_LogOff
+const KeyLogoff = 269025121
+// KeyLogwindowtree wraps GDK_KEY_LogWindowTree
+const KeyLogwindowtree = 269024804
+// KeyLstroke wraps GDK_KEY_Lstroke
+const KeyLstroke = 419
+// KeyM wraps GDK_KEY_M
+const KeyM = 77
+// KeyMabovedot wraps GDK_KEY_Mabovedot
+const KeyMabovedot = 16784960
+// KeyMacedoniaDse wraps GDK_KEY_Macedonia_DSE
+const KeyMacedoniaDse = 1717
+// KeyMacedoniaGje wraps GDK_KEY_Macedonia_GJE
+const KeyMacedoniaGje = 1714
+// KeyMacedoniaKje wraps GDK_KEY_Macedonia_KJE
+const KeyMacedoniaKje = 1724
+// KeyMacedoniaDse wraps GDK_KEY_Macedonia_dse
+const KeyMacedoniaDse = 1701
+// KeyMacedoniaGje wraps GDK_KEY_Macedonia_gje
+const KeyMacedoniaGje = 1698
+// KeyMacedoniaKje wraps GDK_KEY_Macedonia_kje
+const KeyMacedoniaKje = 1708
+// KeyMaeKoho wraps GDK_KEY_Mae_Koho
+const KeyMaeKoho = 65342
+// KeyMail wraps GDK_KEY_Mail
+const KeyMail = 269025049
+// KeyMailforward wraps GDK_KEY_MailForward
+const KeyMailforward = 269025168
+// KeyMarket wraps GDK_KEY_Market
+const KeyMarket = 269025122
+// KeyMassyo wraps GDK_KEY_Massyo
+const KeyMassyo = 65324
+// KeyMeeting wraps GDK_KEY_Meeting
+const KeyMeeting = 269025123
+// KeyMemo wraps GDK_KEY_Memo
+const KeyMemo = 269025054
+// KeyMenu wraps GDK_KEY_Menu
+const KeyMenu = 65383
+// KeyMenukb wraps GDK_KEY_MenuKB
+const KeyMenukb = 269025125
+// KeyMenupb wraps GDK_KEY_MenuPB
+const KeyMenupb = 269025126
+// KeyMessenger wraps GDK_KEY_Messenger
+const KeyMessenger = 269025166
+// KeyMetaL wraps GDK_KEY_Meta_L
+const KeyMetaL = 65511
+// KeyMetaR wraps GDK_KEY_Meta_R
+const KeyMetaR = 65512
+// KeyMillsign wraps GDK_KEY_MillSign
+const KeyMillsign = 16785573
+// KeyModelock wraps GDK_KEY_ModeLock
+const KeyModelock = 269025025
+// KeyModeSwitch wraps GDK_KEY_Mode_switch
+const KeyModeSwitch = 65406
+// KeyMonbrightnessdown wraps GDK_KEY_MonBrightnessDown
+const KeyMonbrightnessdown = 269025027
+// KeyMonbrightnessup wraps GDK_KEY_MonBrightnessUp
+const KeyMonbrightnessup = 269025026
+// KeyMousekeysAccelEnable wraps GDK_KEY_MouseKeys_Accel_Enable
+const KeyMousekeysAccelEnable = 65143
+// KeyMousekeysEnable wraps GDK_KEY_MouseKeys_Enable
+const KeyMousekeysEnable = 65142
+// KeyMuhenkan wraps GDK_KEY_Muhenkan
+const KeyMuhenkan = 65314
+// KeyMultiKey wraps GDK_KEY_Multi_key
+const KeyMultiKey = 65312
+// KeyMultiplecandidate wraps GDK_KEY_MultipleCandidate
+const KeyMultiplecandidate = 65341
+// KeyMusic wraps GDK_KEY_Music
+const KeyMusic = 269025170
+// KeyMycomputer wraps GDK_KEY_MyComputer
+const KeyMycomputer = 269025075
+// KeyMysites wraps GDK_KEY_MySites
+const KeyMysites = 269025127
+// KeyN wraps GDK_KEY_N
+const KeyN = 78
+// KeyNacute wraps GDK_KEY_Nacute
+const KeyNacute = 465
+// KeyNairasign wraps GDK_KEY_NairaSign
+const KeyNairasign = 16785574
+// KeyNcaron wraps GDK_KEY_Ncaron
+const KeyNcaron = 466
+// KeyNcedilla wraps GDK_KEY_Ncedilla
+const KeyNcedilla = 977
+// NewKey wraps GDK_KEY_New
+const NewKey = 269025128
+// KeyNewsheqelsign wraps GDK_KEY_NewSheqelSign
+const KeyNewsheqelsign = 16785578
+// KeyNews wraps GDK_KEY_News
+const KeyNews = 269025129
+// KeyNext wraps GDK_KEY_Next
+const KeyNext = 65366
+// KeyNextVmode wraps GDK_KEY_Next_VMode
+const KeyNextVmode = 269024802
+// KeyNextVirtualScreen wraps GDK_KEY_Next_Virtual_Screen
+const KeyNextVirtualScreen = 65234
+// KeyNtilde wraps GDK_KEY_Ntilde
+const KeyNtilde = 209
+// KeyNumLock wraps GDK_KEY_Num_Lock
+const KeyNumLock = 65407
+// KeyO wraps GDK_KEY_O
+const KeyO = 79
+// KeyOe wraps GDK_KEY_OE
+const KeyOe = 5052
+// KeyOacute wraps GDK_KEY_Oacute
+const KeyOacute = 211
+// KeyObarred wraps GDK_KEY_Obarred
+const KeyObarred = 16777631
+// KeyObelowdot wraps GDK_KEY_Obelowdot
+const KeyObelowdot = 16785100
+// KeyOcaron wraps GDK_KEY_Ocaron
+const KeyOcaron = 16777681
+// KeyOcircumflex wraps GDK_KEY_Ocircumflex
+const KeyOcircumflex = 212
+// KeyOcircumflexacute wraps GDK_KEY_Ocircumflexacute
+const KeyOcircumflexacute = 16785104
+// KeyOcircumflexbelowdot wraps GDK_KEY_Ocircumflexbelowdot
+const KeyOcircumflexbelowdot = 16785112
+// KeyOcircumflexgrave wraps GDK_KEY_Ocircumflexgrave
+const KeyOcircumflexgrave = 16785106
+// KeyOcircumflexhook wraps GDK_KEY_Ocircumflexhook
+const KeyOcircumflexhook = 16785108
+// KeyOcircumflextilde wraps GDK_KEY_Ocircumflextilde
+const KeyOcircumflextilde = 16785110
+// KeyOdiaeresis wraps GDK_KEY_Odiaeresis
+const KeyOdiaeresis = 214
+// KeyOdoubleacute wraps GDK_KEY_Odoubleacute
+const KeyOdoubleacute = 469
+// KeyOfficehome wraps GDK_KEY_OfficeHome
+const KeyOfficehome = 269025130
+// KeyOgrave wraps GDK_KEY_Ograve
+const KeyOgrave = 210
+// KeyOhook wraps GDK_KEY_Ohook
+const KeyOhook = 16785102
+// KeyOhorn wraps GDK_KEY_Ohorn
+const KeyOhorn = 16777632
+// KeyOhornacute wraps GDK_KEY_Ohornacute
+const KeyOhornacute = 16785114
+// KeyOhornbelowdot wraps GDK_KEY_Ohornbelowdot
+const KeyOhornbelowdot = 16785122
+// KeyOhorngrave wraps GDK_KEY_Ohorngrave
+const KeyOhorngrave = 16785116
+// KeyOhornhook wraps GDK_KEY_Ohornhook
+const KeyOhornhook = 16785118
+// KeyOhorntilde wraps GDK_KEY_Ohorntilde
+const KeyOhorntilde = 16785120
+// KeyOmacron wraps GDK_KEY_Omacron
+const KeyOmacron = 978
+// KeyOoblique wraps GDK_KEY_Ooblique
+const KeyOoblique = 216
+// KeyOpen wraps GDK_KEY_Open
+const KeyOpen = 269025131
+// KeyOpenurl wraps GDK_KEY_OpenURL
+const KeyOpenurl = 269025080
+// KeyOption wraps GDK_KEY_Option
+const KeyOption = 269025132
+// KeyOslash wraps GDK_KEY_Oslash
+const KeyOslash = 216
+// KeyOtilde wraps GDK_KEY_Otilde
+const KeyOtilde = 213
+// KeyOverlay1Enable wraps GDK_KEY_Overlay1_Enable
+const KeyOverlay1Enable = 65144
+// KeyOverlay2Enable wraps GDK_KEY_Overlay2_Enable
+const KeyOverlay2Enable = 65145
+// KeyP wraps GDK_KEY_P
+const KeyP = 80
+// KeyPabovedot wraps GDK_KEY_Pabovedot
+const KeyPabovedot = 16784982
+// KeyPageDown wraps GDK_KEY_Page_Down
+const KeyPageDown = 65366
+// KeyPageUp wraps GDK_KEY_Page_Up
+const KeyPageUp = 65365
+// KeyPaste wraps GDK_KEY_Paste
+const KeyPaste = 269025133
+// KeyPause wraps GDK_KEY_Pause
+const KeyPause = 65299
+// KeyPesetasign wraps GDK_KEY_PesetaSign
+const KeyPesetasign = 16785575
+// KeyPhone wraps GDK_KEY_Phone
+const KeyPhone = 269025134
+// KeyPictures wraps GDK_KEY_Pictures
+const KeyPictures = 269025169
+// KeyPointerAccelerate wraps GDK_KEY_Pointer_Accelerate
+const KeyPointerAccelerate = 65274
+// KeyPointerButton1 wraps GDK_KEY_Pointer_Button1
+const KeyPointerButton1 = 65257
+// KeyPointerButton2 wraps GDK_KEY_Pointer_Button2
+const KeyPointerButton2 = 65258
+// KeyPointerButton3 wraps GDK_KEY_Pointer_Button3
+const KeyPointerButton3 = 65259
+// KeyPointerButton4 wraps GDK_KEY_Pointer_Button4
+const KeyPointerButton4 = 65260
+// KeyPointerButton5 wraps GDK_KEY_Pointer_Button5
+const KeyPointerButton5 = 65261
+// KeyPointerButtonDflt wraps GDK_KEY_Pointer_Button_Dflt
+const KeyPointerButtonDflt = 65256
+// KeyPointerDblclick1 wraps GDK_KEY_Pointer_DblClick1
+const KeyPointerDblclick1 = 65263
+// KeyPointerDblclick2 wraps GDK_KEY_Pointer_DblClick2
+const KeyPointerDblclick2 = 65264
+// KeyPointerDblclick3 wraps GDK_KEY_Pointer_DblClick3
+const KeyPointerDblclick3 = 65265
+// KeyPointerDblclick4 wraps GDK_KEY_Pointer_DblClick4
+const KeyPointerDblclick4 = 65266
+// KeyPointerDblclick5 wraps GDK_KEY_Pointer_DblClick5
+const KeyPointerDblclick5 = 65267
+// KeyPointerDblclickDflt wraps GDK_KEY_Pointer_DblClick_Dflt
+const KeyPointerDblclickDflt = 65262
+// KeyPointerDfltbtnnext wraps GDK_KEY_Pointer_DfltBtnNext
+const KeyPointerDfltbtnnext = 65275
+// KeyPointerDfltbtnprev wraps GDK_KEY_Pointer_DfltBtnPrev
+const KeyPointerDfltbtnprev = 65276
+// KeyPointerDown wraps GDK_KEY_Pointer_Down
+const KeyPointerDown = 65251
+// KeyPointerDownleft wraps GDK_KEY_Pointer_DownLeft
+const KeyPointerDownleft = 65254
+// KeyPointerDownright wraps GDK_KEY_Pointer_DownRight
+const KeyPointerDownright = 65255
+// KeyPointerDrag1 wraps GDK_KEY_Pointer_Drag1
+const KeyPointerDrag1 = 65269
+// KeyPointerDrag2 wraps GDK_KEY_Pointer_Drag2
+const KeyPointerDrag2 = 65270
+// KeyPointerDrag3 wraps GDK_KEY_Pointer_Drag3
+const KeyPointerDrag3 = 65271
+// KeyPointerDrag4 wraps GDK_KEY_Pointer_Drag4
+const KeyPointerDrag4 = 65272
+// KeyPointerDrag5 wraps GDK_KEY_Pointer_Drag5
+const KeyPointerDrag5 = 65277
+// KeyPointerDragDflt wraps GDK_KEY_Pointer_Drag_Dflt
+const KeyPointerDragDflt = 65268
+// KeyPointerEnablekeys wraps GDK_KEY_Pointer_EnableKeys
+const KeyPointerEnablekeys = 65273
+// KeyPointerLeft wraps GDK_KEY_Pointer_Left
+const KeyPointerLeft = 65248
+// KeyPointerRight wraps GDK_KEY_Pointer_Right
+const KeyPointerRight = 65249
+// KeyPointerUp wraps GDK_KEY_Pointer_Up
+const KeyPointerUp = 65250
+// KeyPointerUpleft wraps GDK_KEY_Pointer_UpLeft
+const KeyPointerUpleft = 65252
+// KeyPointerUpright wraps GDK_KEY_Pointer_UpRight
+const KeyPointerUpright = 65253
+// KeyPowerdown wraps GDK_KEY_PowerDown
+const KeyPowerdown = 269025057
+// KeyPoweroff wraps GDK_KEY_PowerOff
+const KeyPoweroff = 269025066
+// KeyPrevVmode wraps GDK_KEY_Prev_VMode
+const KeyPrevVmode = 269024803
+// KeyPrevVirtualScreen wraps GDK_KEY_Prev_Virtual_Screen
+const KeyPrevVirtualScreen = 65233
+// KeyPreviouscandidate wraps GDK_KEY_PreviousCandidate
+const KeyPreviouscandidate = 65342
+// KeyPrint wraps GDK_KEY_Print
+const KeyPrint = 65377
+// KeyPrior wraps GDK_KEY_Prior
+const KeyPrior = 65365
+// KeyQ wraps GDK_KEY_Q
+const KeyQ = 81
+// KeyR wraps GDK_KEY_R
+const KeyR = 82
+// KeyR1 wraps GDK_KEY_R1
+const KeyR1 = 65490
+// KeyR10 wraps GDK_KEY_R10
+const KeyR10 = 65499
+// KeyR11 wraps GDK_KEY_R11
+const KeyR11 = 65500
+// KeyR12 wraps GDK_KEY_R12
+const KeyR12 = 65501
+// KeyR13 wraps GDK_KEY_R13
+const KeyR13 = 65502
+// KeyR14 wraps GDK_KEY_R14
+const KeyR14 = 65503
+// KeyR15 wraps GDK_KEY_R15
+const KeyR15 = 65504
+// KeyR2 wraps GDK_KEY_R2
+const KeyR2 = 65491
+// KeyR3 wraps GDK_KEY_R3
+const KeyR3 = 65492
+// KeyR4 wraps GDK_KEY_R4
+const KeyR4 = 65493
+// KeyR5 wraps GDK_KEY_R5
+const KeyR5 = 65494
+// KeyR6 wraps GDK_KEY_R6
+const KeyR6 = 65495
+// KeyR7 wraps GDK_KEY_R7
+const KeyR7 = 65496
+// KeyR8 wraps GDK_KEY_R8
+const KeyR8 = 65497
+// KeyR9 wraps GDK_KEY_R9
+const KeyR9 = 65498
+// KeyRfkill wraps GDK_KEY_RFKill
+const KeyRfkill = 269025205
+// KeyRacute wraps GDK_KEY_Racute
+const KeyRacute = 448
+// KeyRcaron wraps GDK_KEY_Rcaron
+const KeyRcaron = 472
+// KeyRcedilla wraps GDK_KEY_Rcedilla
+const KeyRcedilla = 931
+// KeyRed wraps GDK_KEY_Red
+const KeyRed = 269025187
+// KeyRedo wraps GDK_KEY_Redo
+const KeyRedo = 65382
+// KeyRefresh wraps GDK_KEY_Refresh
+const KeyRefresh = 269025065
+// KeyReload wraps GDK_KEY_Reload
+const KeyReload = 269025139
+// KeyRepeatkeysEnable wraps GDK_KEY_RepeatKeys_Enable
+const KeyRepeatkeysEnable = 65138
+// KeyReply wraps GDK_KEY_Reply
+const KeyReply = 269025138
+// KeyReturn wraps GDK_KEY_Return
+const KeyReturn = 65293
+// KeyRight wraps GDK_KEY_Right
+const KeyRight = 65363
+// KeyRockerdown wraps GDK_KEY_RockerDown
+const KeyRockerdown = 269025060
+// KeyRockerenter wraps GDK_KEY_RockerEnter
+const KeyRockerenter = 269025061
+// KeyRockerup wraps GDK_KEY_RockerUp
+const KeyRockerup = 269025059
+// KeyRomaji wraps GDK_KEY_Romaji
+const KeyRomaji = 65316
+// KeyRotatewindows wraps GDK_KEY_RotateWindows
+const KeyRotatewindows = 269025140
+// KeyRotationkb wraps GDK_KEY_RotationKB
+const KeyRotationkb = 269025142
+// KeyRotationpb wraps GDK_KEY_RotationPB
+const KeyRotationpb = 269025141
+// KeyRupeesign wraps GDK_KEY_RupeeSign
+const KeyRupeesign = 16785576
+// KeyS wraps GDK_KEY_S
+const KeyS = 83
+// KeySchwa wraps GDK_KEY_SCHWA
+const KeySchwa = 16777615
+// KeySabovedot wraps GDK_KEY_Sabovedot
+const KeySabovedot = 16784992
+// KeySacute wraps GDK_KEY_Sacute
+const KeySacute = 422
+// KeySave wraps GDK_KEY_Save
+const KeySave = 269025143
+// KeyScaron wraps GDK_KEY_Scaron
+const KeyScaron = 425
+// KeyScedilla wraps GDK_KEY_Scedilla
+const KeyScedilla = 426
+// KeyScircumflex wraps GDK_KEY_Scircumflex
+const KeyScircumflex = 734
+// KeyScreensaver wraps GDK_KEY_ScreenSaver
+const KeyScreensaver = 269025069
+// KeyScrollclick wraps GDK_KEY_ScrollClick
+const KeyScrollclick = 269025146
+// KeyScrolldown wraps GDK_KEY_ScrollDown
+const KeyScrolldown = 269025145
+// KeyScrollup wraps GDK_KEY_ScrollUp
+const KeyScrollup = 269025144
+// KeyScrollLock wraps GDK_KEY_Scroll_Lock
+const KeyScrollLock = 65300
+// KeySearch wraps GDK_KEY_Search
+const KeySearch = 269025051
+// KeySelect wraps GDK_KEY_Select
+const KeySelect = 65376
+// KeySelectbutton wraps GDK_KEY_SelectButton
+const KeySelectbutton = 269025184
+// KeySend wraps GDK_KEY_Send
+const KeySend = 269025147
+// KeySerbianDje wraps GDK_KEY_Serbian_DJE
+const KeySerbianDje = 1713
+// KeySerbianDze wraps GDK_KEY_Serbian_DZE
+const KeySerbianDze = 1727
+// KeySerbianJe wraps GDK_KEY_Serbian_JE
+const KeySerbianJe = 1720
+// KeySerbianLje wraps GDK_KEY_Serbian_LJE
+const KeySerbianLje = 1721
+// KeySerbianNje wraps GDK_KEY_Serbian_NJE
+const KeySerbianNje = 1722
+// KeySerbianTshe wraps GDK_KEY_Serbian_TSHE
+const KeySerbianTshe = 1723
+// KeySerbianDje wraps GDK_KEY_Serbian_dje
+const KeySerbianDje = 1697
+// KeySerbianDze wraps GDK_KEY_Serbian_dze
+const KeySerbianDze = 1711
+// KeySerbianJe wraps GDK_KEY_Serbian_je
+const KeySerbianJe = 1704
+// KeySerbianLje wraps GDK_KEY_Serbian_lje
+const KeySerbianLje = 1705
+// KeySerbianNje wraps GDK_KEY_Serbian_nje
+const KeySerbianNje = 1706
+// KeySerbianTshe wraps GDK_KEY_Serbian_tshe
+const KeySerbianTshe = 1707
+// KeyShiftL wraps GDK_KEY_Shift_L
+const KeyShiftL = 65505
+// KeyShiftLock wraps GDK_KEY_Shift_Lock
+const KeyShiftLock = 65510
+// KeyShiftR wraps GDK_KEY_Shift_R
+const KeyShiftR = 65506
+// KeyShop wraps GDK_KEY_Shop
+const KeyShop = 269025078
+// KeySinglecandidate wraps GDK_KEY_SingleCandidate
+const KeySinglecandidate = 65340
+// KeySinhA wraps GDK_KEY_Sinh_a
+const KeySinhA = 16780677
+// KeySinhAa wraps GDK_KEY_Sinh_aa
+const KeySinhAa = 16780678
+// KeySinhAa2 wraps GDK_KEY_Sinh_aa2
+const KeySinhAa2 = 16780751
+// KeySinhAe wraps GDK_KEY_Sinh_ae
+const KeySinhAe = 16780679
+// KeySinhAe2 wraps GDK_KEY_Sinh_ae2
+const KeySinhAe2 = 16780752
+// KeySinhAee wraps GDK_KEY_Sinh_aee
+const KeySinhAee = 16780680
+// KeySinhAee2 wraps GDK_KEY_Sinh_aee2
+const KeySinhAee2 = 16780753
+// KeySinhAi wraps GDK_KEY_Sinh_ai
+const KeySinhAi = 16780691
+// KeySinhAi2 wraps GDK_KEY_Sinh_ai2
+const KeySinhAi2 = 16780763
+// KeySinhAl wraps GDK_KEY_Sinh_al
+const KeySinhAl = 16780746
+// KeySinhAu wraps GDK_KEY_Sinh_au
+const KeySinhAu = 16780694
+// KeySinhAu2 wraps GDK_KEY_Sinh_au2
+const KeySinhAu2 = 16780766
+// KeySinhBa wraps GDK_KEY_Sinh_ba
+const KeySinhBa = 16780726
+// KeySinhBha wraps GDK_KEY_Sinh_bha
+const KeySinhBha = 16780727
+// KeySinhCa wraps GDK_KEY_Sinh_ca
+const KeySinhCa = 16780704
+// KeySinhCha wraps GDK_KEY_Sinh_cha
+const KeySinhCha = 16780705
+// KeySinhDda wraps GDK_KEY_Sinh_dda
+const KeySinhDda = 16780713
+// KeySinhDdha wraps GDK_KEY_Sinh_ddha
+const KeySinhDdha = 16780714
+// KeySinhDha wraps GDK_KEY_Sinh_dha
+const KeySinhDha = 16780719
+// KeySinhDhha wraps GDK_KEY_Sinh_dhha
+const KeySinhDhha = 16780720
+// KeySinhE wraps GDK_KEY_Sinh_e
+const KeySinhE = 16780689
+// KeySinhE2 wraps GDK_KEY_Sinh_e2
+const KeySinhE2 = 16780761
+// KeySinhEe wraps GDK_KEY_Sinh_ee
+const KeySinhEe = 16780690
+// KeySinhEe2 wraps GDK_KEY_Sinh_ee2
+const KeySinhEe2 = 16780762
+// KeySinhFa wraps GDK_KEY_Sinh_fa
+const KeySinhFa = 16780742
+// KeySinhGa wraps GDK_KEY_Sinh_ga
+const KeySinhGa = 16780700
+// KeySinhGha wraps GDK_KEY_Sinh_gha
+const KeySinhGha = 16780701
+// KeySinhH2 wraps GDK_KEY_Sinh_h2
+const KeySinhH2 = 16780675
+// KeySinhHa wraps GDK_KEY_Sinh_ha
+const KeySinhHa = 16780740
+// KeySinhI wraps GDK_KEY_Sinh_i
+const KeySinhI = 16780681
+// KeySinhI2 wraps GDK_KEY_Sinh_i2
+const KeySinhI2 = 16780754
+// KeySinhIi wraps GDK_KEY_Sinh_ii
+const KeySinhIi = 16780682
+// KeySinhIi2 wraps GDK_KEY_Sinh_ii2
+const KeySinhIi2 = 16780755
+// KeySinhJa wraps GDK_KEY_Sinh_ja
+const KeySinhJa = 16780706
+// KeySinhJha wraps GDK_KEY_Sinh_jha
+const KeySinhJha = 16780707
+// KeySinhJnya wraps GDK_KEY_Sinh_jnya
+const KeySinhJnya = 16780709
+// KeySinhKa wraps GDK_KEY_Sinh_ka
+const KeySinhKa = 16780698
+// KeySinhKha wraps GDK_KEY_Sinh_kha
+const KeySinhKha = 16780699
+// KeySinhKunddaliya wraps GDK_KEY_Sinh_kunddaliya
+const KeySinhKunddaliya = 16780788
+// KeySinhLa wraps GDK_KEY_Sinh_la
+const KeySinhLa = 16780733
+// KeySinhLla wraps GDK_KEY_Sinh_lla
+const KeySinhLla = 16780741
+// KeySinhLu wraps GDK_KEY_Sinh_lu
+const KeySinhLu = 16780687
+// KeySinhLu2 wraps GDK_KEY_Sinh_lu2
+const KeySinhLu2 = 16780767
+// KeySinhLuu wraps GDK_KEY_Sinh_luu
+const KeySinhLuu = 16780688
+// KeySinhLuu2 wraps GDK_KEY_Sinh_luu2
+const KeySinhLuu2 = 16780787
+// KeySinhMa wraps GDK_KEY_Sinh_ma
+const KeySinhMa = 16780728
+// KeySinhMba wraps GDK_KEY_Sinh_mba
+const KeySinhMba = 16780729
+// KeySinhNa wraps GDK_KEY_Sinh_na
+const KeySinhNa = 16780721
+// KeySinhNdda wraps GDK_KEY_Sinh_ndda
+const KeySinhNdda = 16780716
+// KeySinhNdha wraps GDK_KEY_Sinh_ndha
+const KeySinhNdha = 16780723
+// KeySinhNg wraps GDK_KEY_Sinh_ng
+const KeySinhNg = 16780674
+// KeySinhNg2 wraps GDK_KEY_Sinh_ng2
+const KeySinhNg2 = 16780702
+// KeySinhNga wraps GDK_KEY_Sinh_nga
+const KeySinhNga = 16780703
+// KeySinhNja wraps GDK_KEY_Sinh_nja
+const KeySinhNja = 16780710
+// KeySinhNna wraps GDK_KEY_Sinh_nna
+const KeySinhNna = 16780715
+// KeySinhNya wraps GDK_KEY_Sinh_nya
+const KeySinhNya = 16780708
+// KeySinhO wraps GDK_KEY_Sinh_o
+const KeySinhO = 16780692
+// KeySinhO2 wraps GDK_KEY_Sinh_o2
+const KeySinhO2 = 16780764
+// KeySinhOo wraps GDK_KEY_Sinh_oo
+const KeySinhOo = 16780693
+// KeySinhOo2 wraps GDK_KEY_Sinh_oo2
+const KeySinhOo2 = 16780765
+// KeySinhPa wraps GDK_KEY_Sinh_pa
+const KeySinhPa = 16780724
+// KeySinhPha wraps GDK_KEY_Sinh_pha
+const KeySinhPha = 16780725
+// KeySinhRa wraps GDK_KEY_Sinh_ra
+const KeySinhRa = 16780731
+// KeySinhRi wraps GDK_KEY_Sinh_ri
+const KeySinhRi = 16780685
+// KeySinhRii wraps GDK_KEY_Sinh_rii
+const KeySinhRii = 16780686
+// KeySinhRu2 wraps GDK_KEY_Sinh_ru2
+const KeySinhRu2 = 16780760
+// KeySinhRuu2 wraps GDK_KEY_Sinh_ruu2
+const KeySinhRuu2 = 16780786
+// KeySinhSa wraps GDK_KEY_Sinh_sa
+const KeySinhSa = 16780739
+// KeySinhSHA wraps GDK_KEY_Sinh_sha
+const KeySinhSHA = 16780737
+// KeySinhSsha wraps GDK_KEY_Sinh_ssha
+const KeySinhSsha = 16780738
+// KeySinhTha wraps GDK_KEY_Sinh_tha
+const KeySinhTha = 16780717
+// KeySinhThha wraps GDK_KEY_Sinh_thha
+const KeySinhThha = 16780718
+// KeySinhTta wraps GDK_KEY_Sinh_tta
+const KeySinhTta = 16780711
+// KeySinhTtha wraps GDK_KEY_Sinh_ttha
+const KeySinhTtha = 16780712
+// KeySinhU wraps GDK_KEY_Sinh_u
+const KeySinhU = 16780683
+// KeySinhU2 wraps GDK_KEY_Sinh_u2
+const KeySinhU2 = 16780756
+// KeySinhUu wraps GDK_KEY_Sinh_uu
+const KeySinhUu = 16780684
+// KeySinhUu2 wraps GDK_KEY_Sinh_uu2
+const KeySinhUu2 = 16780758
+// KeySinhVa wraps GDK_KEY_Sinh_va
+const KeySinhVa = 16780736
+// KeySinhYa wraps GDK_KEY_Sinh_ya
+const KeySinhYa = 16780730
+// KeySleep wraps GDK_KEY_Sleep
+const KeySleep = 269025071
+// KeySlowkeysEnable wraps GDK_KEY_SlowKeys_Enable
+const KeySlowkeysEnable = 65139
+// KeySpell wraps GDK_KEY_Spell
+const KeySpell = 269025148
+// KeySplitscreen wraps GDK_KEY_SplitScreen
+const KeySplitscreen = 269025149
+// KeyStandby wraps GDK_KEY_Standby
+const KeyStandby = 269025040
+// KeyStart wraps GDK_KEY_Start
+const KeyStart = 269025050
+// KeyStickykeysEnable wraps GDK_KEY_StickyKeys_Enable
+const KeyStickykeysEnable = 65141
+// KeyStop wraps GDK_KEY_Stop
+const KeyStop = 269025064
+// KeySubtitle wraps GDK_KEY_Subtitle
+const KeySubtitle = 269025178
+// KeySuperL wraps GDK_KEY_Super_L
+const KeySuperL = 65515
+// KeySuperR wraps GDK_KEY_Super_R
+const KeySuperR = 65516
+// KeySupport wraps GDK_KEY_Support
+const KeySupport = 269025150
+// KeySuspend wraps GDK_KEY_Suspend
+const KeySuspend = 269025191
+// KeySwitchVt1 wraps GDK_KEY_Switch_VT_1
+const KeySwitchVt1 = 269024769
+// KeySwitchVt10 wraps GDK_KEY_Switch_VT_10
+const KeySwitchVt10 = 269024778
+// KeySwitchVt11 wraps GDK_KEY_Switch_VT_11
+const KeySwitchVt11 = 269024779
+// KeySwitchVt12 wraps GDK_KEY_Switch_VT_12
+const KeySwitchVt12 = 269024780
+// KeySwitchVt2 wraps GDK_KEY_Switch_VT_2
+const KeySwitchVt2 = 269024770
+// KeySwitchVt3 wraps GDK_KEY_Switch_VT_3
+const KeySwitchVt3 = 269024771
+// KeySwitchVt4 wraps GDK_KEY_Switch_VT_4
+const KeySwitchVt4 = 269024772
+// KeySwitchVt5 wraps GDK_KEY_Switch_VT_5
+const KeySwitchVt5 = 269024773
+// KeySwitchVt6 wraps GDK_KEY_Switch_VT_6
+const KeySwitchVt6 = 269024774
+// KeySwitchVt7 wraps GDK_KEY_Switch_VT_7
+const KeySwitchVt7 = 269024775
+// KeySwitchVt8 wraps GDK_KEY_Switch_VT_8
+const KeySwitchVt8 = 269024776
+// KeySwitchVt9 wraps GDK_KEY_Switch_VT_9
+const KeySwitchVt9 = 269024777
+// KeySysReq wraps GDK_KEY_Sys_Req
+const KeySysReq = 65301
+// KeyT wraps GDK_KEY_T
+const KeyT = 84
+// KeyThorn wraps GDK_KEY_THORN
+const KeyThorn = 222
+// KeyTab wraps GDK_KEY_Tab
+const KeyTab = 65289
+// KeyTabovedot wraps GDK_KEY_Tabovedot
+const KeyTabovedot = 16785002
+// KeyTaskpane wraps GDK_KEY_TaskPane
+const KeyTaskpane = 269025151
+// KeyTcaron wraps GDK_KEY_Tcaron
+const KeyTcaron = 427
+// KeyTcedilla wraps GDK_KEY_Tcedilla
+const KeyTcedilla = 478
+// KeyTerminal wraps GDK_KEY_Terminal
+const KeyTerminal = 269025152
+// KeyTerminateServer wraps GDK_KEY_Terminate_Server
+const KeyTerminateServer = 65237
+// KeyThaiBaht wraps GDK_KEY_Thai_baht
+const KeyThaiBaht = 3551
+// KeyThaiBobaimai wraps GDK_KEY_Thai_bobaimai
+const KeyThaiBobaimai = 3514
+// KeyThaiChochan wraps GDK_KEY_Thai_chochan
+const KeyThaiChochan = 3496
+// KeyThaiChochang wraps GDK_KEY_Thai_chochang
+const KeyThaiChochang = 3498
+// KeyThaiChoching wraps GDK_KEY_Thai_choching
+const KeyThaiChoching = 3497
+// KeyThaiChochoe wraps GDK_KEY_Thai_chochoe
+const KeyThaiChochoe = 3500
+// KeyThaiDochada wraps GDK_KEY_Thai_dochada
+const KeyThaiDochada = 3502
+// KeyThaiDodek wraps GDK_KEY_Thai_dodek
+const KeyThaiDodek = 3508
+// KeyThaiFofa wraps GDK_KEY_Thai_fofa
+const KeyThaiFofa = 3517
+// KeyThaiFofan wraps GDK_KEY_Thai_fofan
+const KeyThaiFofan = 3519
+// KeyThaiHohip wraps GDK_KEY_Thai_hohip
+const KeyThaiHohip = 3531
+// KeyThaiHonokhuk wraps GDK_KEY_Thai_honokhuk
+const KeyThaiHonokhuk = 3534
+// KeyThaiKhokhai wraps GDK_KEY_Thai_khokhai
+const KeyThaiKhokhai = 3490
+// KeyThaiKhokhon wraps GDK_KEY_Thai_khokhon
+const KeyThaiKhokhon = 3493
+// KeyThaiKhokhuat wraps GDK_KEY_Thai_khokhuat
+const KeyThaiKhokhuat = 3491
+// KeyThaiKhokhwai wraps GDK_KEY_Thai_khokhwai
+const KeyThaiKhokhwai = 3492
+// KeyThaiKhorakhang wraps GDK_KEY_Thai_khorakhang
+const KeyThaiKhorakhang = 3494
+// KeyThaiKokai wraps GDK_KEY_Thai_kokai
+const KeyThaiKokai = 3489
+// KeyThaiLakkhangyao wraps GDK_KEY_Thai_lakkhangyao
+const KeyThaiLakkhangyao = 3557
+// KeyThaiLekchet wraps GDK_KEY_Thai_lekchet
+const KeyThaiLekchet = 3575
+// KeyThaiLekha wraps GDK_KEY_Thai_lekha
+const KeyThaiLekha = 3573
+// KeyThaiLekhok wraps GDK_KEY_Thai_lekhok
+const KeyThaiLekhok = 3574
+// KeyThaiLekkao wraps GDK_KEY_Thai_lekkao
+const KeyThaiLekkao = 3577
+// KeyThaiLeknung wraps GDK_KEY_Thai_leknung
+const KeyThaiLeknung = 3569
+// KeyThaiLekpaet wraps GDK_KEY_Thai_lekpaet
+const KeyThaiLekpaet = 3576
+// KeyThaiLeksam wraps GDK_KEY_Thai_leksam
+const KeyThaiLeksam = 3571
+// KeyThaiLeksi wraps GDK_KEY_Thai_leksi
+const KeyThaiLeksi = 3572
+// KeyThaiLeksong wraps GDK_KEY_Thai_leksong
+const KeyThaiLeksong = 3570
+// KeyThaiLeksun wraps GDK_KEY_Thai_leksun
+const KeyThaiLeksun = 3568
+// KeyThaiLochula wraps GDK_KEY_Thai_lochula
+const KeyThaiLochula = 3532
+// KeyThaiLoling wraps GDK_KEY_Thai_loling
+const KeyThaiLoling = 3525
+// KeyThaiLu wraps GDK_KEY_Thai_lu
+const KeyThaiLu = 3526
+// KeyThaiMaichattawa wraps GDK_KEY_Thai_maichattawa
+const KeyThaiMaichattawa = 3563
+// KeyThaiMaiek wraps GDK_KEY_Thai_maiek
+const KeyThaiMaiek = 3560
+// KeyThaiMaihanakat wraps GDK_KEY_Thai_maihanakat
+const KeyThaiMaihanakat = 3537
+// KeyThaiMaihanakatMaitho wraps GDK_KEY_Thai_maihanakat_maitho
+const KeyThaiMaihanakatMaitho = 3550
+// KeyThaiMaitaikhu wraps GDK_KEY_Thai_maitaikhu
+const KeyThaiMaitaikhu = 3559
+// KeyThaiMaitho wraps GDK_KEY_Thai_maitho
+const KeyThaiMaitho = 3561
+// KeyThaiMaitri wraps GDK_KEY_Thai_maitri
+const KeyThaiMaitri = 3562
+// KeyThaiMaiyamok wraps GDK_KEY_Thai_maiyamok
+const KeyThaiMaiyamok = 3558
+// KeyThaiMoma wraps GDK_KEY_Thai_moma
+const KeyThaiMoma = 3521
+// KeyThaiNgongu wraps GDK_KEY_Thai_ngongu
+const KeyThaiNgongu = 3495
+// KeyThaiNikhahit wraps GDK_KEY_Thai_nikhahit
+const KeyThaiNikhahit = 3565
+// KeyThaiNonen wraps GDK_KEY_Thai_nonen
+const KeyThaiNonen = 3507
+// KeyThaiNonu wraps GDK_KEY_Thai_nonu
+const KeyThaiNonu = 3513
+// KeyThaiOang wraps GDK_KEY_Thai_oang
+const KeyThaiOang = 3533
+// KeyThaiPaiyannoi wraps GDK_KEY_Thai_paiyannoi
+const KeyThaiPaiyannoi = 3535
+// KeyThaiPhinthu wraps GDK_KEY_Thai_phinthu
+const KeyThaiPhinthu = 3546
+// KeyThaiPhophan wraps GDK_KEY_Thai_phophan
+const KeyThaiPhophan = 3518
+// KeyThaiPhophung wraps GDK_KEY_Thai_phophung
+const KeyThaiPhophung = 3516
+// KeyThaiPhosamphao wraps GDK_KEY_Thai_phosamphao
+const KeyThaiPhosamphao = 3520
+// KeyThaiPopla wraps GDK_KEY_Thai_popla
+const KeyThaiPopla = 3515
+// KeyThaiRorua wraps GDK_KEY_Thai_rorua
+const KeyThaiRorua = 3523
+// KeyThaiRu wraps GDK_KEY_Thai_ru
+const KeyThaiRu = 3524
+// KeyThaiSaraa wraps GDK_KEY_Thai_saraa
+const KeyThaiSaraa = 3536
+// KeyThaiSaraaa wraps GDK_KEY_Thai_saraaa
+const KeyThaiSaraaa = 3538
+// KeyThaiSaraae wraps GDK_KEY_Thai_saraae
+const KeyThaiSaraae = 3553
+// KeyThaiSaraaimaimalai wraps GDK_KEY_Thai_saraaimaimalai
+const KeyThaiSaraaimaimalai = 3556
+// KeyThaiSaraaimaimuan wraps GDK_KEY_Thai_saraaimaimuan
+const KeyThaiSaraaimaimuan = 3555
+// KeyThaiSaraam wraps GDK_KEY_Thai_saraam
+const KeyThaiSaraam = 3539
+// KeyThaiSarae wraps GDK_KEY_Thai_sarae
+const KeyThaiSarae = 3552
+// KeyThaiSarai wraps GDK_KEY_Thai_sarai
+const KeyThaiSarai = 3540
+// KeyThaiSaraii wraps GDK_KEY_Thai_saraii
+const KeyThaiSaraii = 3541
+// KeyThaiSarao wraps GDK_KEY_Thai_sarao
+const KeyThaiSarao = 3554
+// KeyThaiSarau wraps GDK_KEY_Thai_sarau
+const KeyThaiSarau = 3544
+// KeyThaiSaraue wraps GDK_KEY_Thai_saraue
+const KeyThaiSaraue = 3542
+// KeyThaiSarauee wraps GDK_KEY_Thai_sarauee
+const KeyThaiSarauee = 3543
+// KeyThaiSarauu wraps GDK_KEY_Thai_sarauu
+const KeyThaiSarauu = 3545
+// KeyThaiSorusi wraps GDK_KEY_Thai_sorusi
+const KeyThaiSorusi = 3529
+// KeyThaiSosala wraps GDK_KEY_Thai_sosala
+const KeyThaiSosala = 3528
+// KeyThaiSoso wraps GDK_KEY_Thai_soso
+const KeyThaiSoso = 3499
+// KeyThaiSosua wraps GDK_KEY_Thai_sosua
+const KeyThaiSosua = 3530
+// KeyThaiThanthakhat wraps GDK_KEY_Thai_thanthakhat
+const KeyThaiThanthakhat = 3564
+// KeyThaiThonangmontho wraps GDK_KEY_Thai_thonangmontho
+const KeyThaiThonangmontho = 3505
+// KeyThaiThophuthao wraps GDK_KEY_Thai_thophuthao
+const KeyThaiThophuthao = 3506
+// KeyThaiThothahan wraps GDK_KEY_Thai_thothahan
+const KeyThaiThothahan = 3511
+// KeyThaiThothan wraps GDK_KEY_Thai_thothan
+const KeyThaiThothan = 3504
+// KeyThaiThothong wraps GDK_KEY_Thai_thothong
+const KeyThaiThothong = 3512
+// KeyThaiThothung wraps GDK_KEY_Thai_thothung
+const KeyThaiThothung = 3510
+// KeyThaiTopatak wraps GDK_KEY_Thai_topatak
+const KeyThaiTopatak = 3503
+// KeyThaiTotao wraps GDK_KEY_Thai_totao
+const KeyThaiTotao = 3509
+// KeyThaiWowaen wraps GDK_KEY_Thai_wowaen
+const KeyThaiWowaen = 3527
+// KeyThaiYoyak wraps GDK_KEY_Thai_yoyak
+const KeyThaiYoyak = 3522
+// KeyThaiYoying wraps GDK_KEY_Thai_yoying
+const KeyThaiYoying = 3501
+// KeyThorn wraps GDK_KEY_Thorn
+const KeyThorn = 222
+// KeyTime wraps GDK_KEY_Time
+const KeyTime = 269025183
+// KeyTodolist wraps GDK_KEY_ToDoList
+const KeyTodolist = 269025055
+// KeyTools wraps GDK_KEY_Tools
+const KeyTools = 269025153
+// KeyTopmenu wraps GDK_KEY_TopMenu
+const KeyTopmenu = 269025186
+// KeyTouchpadoff wraps GDK_KEY_TouchpadOff
+const KeyTouchpadoff = 269025201
+// KeyTouchpadon wraps GDK_KEY_TouchpadOn
+const KeyTouchpadon = 269025200
+// KeyTouchpadtoggle wraps GDK_KEY_TouchpadToggle
+const KeyTouchpadtoggle = 269025193
+// KeyTouroku wraps GDK_KEY_Touroku
+const KeyTouroku = 65323
+// KeyTravel wraps GDK_KEY_Travel
+const KeyTravel = 269025154
+// KeyTslash wraps GDK_KEY_Tslash
+const KeyTslash = 940
+// KeyU wraps GDK_KEY_U
+const KeyU = 85
+// KeyUwb wraps GDK_KEY_UWB
+const KeyUwb = 269025174
+// KeyUacute wraps GDK_KEY_Uacute
+const KeyUacute = 218
+// KeyUbelowdot wraps GDK_KEY_Ubelowdot
+const KeyUbelowdot = 16785124
+// KeyUbreve wraps GDK_KEY_Ubreve
+const KeyUbreve = 733
+// KeyUcircumflex wraps GDK_KEY_Ucircumflex
+const KeyUcircumflex = 219
+// KeyUdiaeresis wraps GDK_KEY_Udiaeresis
+const KeyUdiaeresis = 220
+// KeyUdoubleacute wraps GDK_KEY_Udoubleacute
+const KeyUdoubleacute = 475
+// KeyUgrave wraps GDK_KEY_Ugrave
+const KeyUgrave = 217
+// KeyUhook wraps GDK_KEY_Uhook
+const KeyUhook = 16785126
+// KeyUhorn wraps GDK_KEY_Uhorn
+const KeyUhorn = 16777647
+// KeyUhornacute wraps GDK_KEY_Uhornacute
+const KeyUhornacute = 16785128
+// KeyUhornbelowdot wraps GDK_KEY_Uhornbelowdot
+const KeyUhornbelowdot = 16785136
+// KeyUhorngrave wraps GDK_KEY_Uhorngrave
+const KeyUhorngrave = 16785130
+// KeyUhornhook wraps GDK_KEY_Uhornhook
+const KeyUhornhook = 16785132
+// KeyUhorntilde wraps GDK_KEY_Uhorntilde
+const KeyUhorntilde = 16785134
+// KeyUkrainianGheWithUpturn wraps GDK_KEY_Ukrainian_GHE_WITH_UPTURN
+const KeyUkrainianGheWithUpturn = 1725
+// KeyUkrainianI wraps GDK_KEY_Ukrainian_I
+const KeyUkrainianI = 1718
+// KeyUkrainianIe wraps GDK_KEY_Ukrainian_IE
+const KeyUkrainianIe = 1716
+// KeyUkrainianYi wraps GDK_KEY_Ukrainian_YI
+const KeyUkrainianYi = 1719
+// KeyUkrainianGheWithUpturn wraps GDK_KEY_Ukrainian_ghe_with_upturn
+const KeyUkrainianGheWithUpturn = 1709
+// KeyUkrainianI wraps GDK_KEY_Ukrainian_i
+const KeyUkrainianI = 1702
+// KeyUkrainianIe wraps GDK_KEY_Ukrainian_ie
+const KeyUkrainianIe = 1700
+// KeyUkrainianYi wraps GDK_KEY_Ukrainian_yi
+const KeyUkrainianYi = 1703
+// KeyUkranianI wraps GDK_KEY_Ukranian_I
+const KeyUkranianI = 1718
+// KeyUkranianJe wraps GDK_KEY_Ukranian_JE
+const KeyUkranianJe = 1716
+// KeyUkranianYi wraps GDK_KEY_Ukranian_YI
+const KeyUkranianYi = 1719
+// KeyUkranianI wraps GDK_KEY_Ukranian_i
+const KeyUkranianI = 1702
+// KeyUkranianJe wraps GDK_KEY_Ukranian_je
+const KeyUkranianJe = 1700
+// KeyUkranianYi wraps GDK_KEY_Ukranian_yi
+const KeyUkranianYi = 1703
+// KeyUmacron wraps GDK_KEY_Umacron
+const KeyUmacron = 990
+// KeyUndo wraps GDK_KEY_Undo
+const KeyUndo = 65381
+// KeyUngrab wraps GDK_KEY_Ungrab
+const KeyUngrab = 269024800
+// KeyUogonek wraps GDK_KEY_Uogonek
+const KeyUogonek = 985
+// KeyUp wraps GDK_KEY_Up
+const KeyUp = 65362
+// KeyUring wraps GDK_KEY_Uring
+const KeyUring = 473
+// KeyUser1Kb wraps GDK_KEY_User1KB
+const KeyUser1Kb = 269025157
+// KeyUser2Kb wraps GDK_KEY_User2KB
+const KeyUser2Kb = 269025158
+// KeyUserpb wraps GDK_KEY_UserPB
+const KeyUserpb = 269025156
+// KeyUtilde wraps GDK_KEY_Utilde
+const KeyUtilde = 989
+// KeyV wraps GDK_KEY_V
+const KeyV = 86
+// KeyVendorhome wraps GDK_KEY_VendorHome
+const KeyVendorhome = 269025076
+// KeyVideo wraps GDK_KEY_Video
+const KeyVideo = 269025159
+// KeyView wraps GDK_KEY_View
+const KeyView = 269025185
+// KeyVoidsymbol wraps GDK_KEY_VoidSymbol
+const KeyVoidsymbol = 16777215
+// KeyW wraps GDK_KEY_W
+const KeyW = 87
+// KeyWlan wraps GDK_KEY_WLAN
+const KeyWlan = 269025173
+// KeyWwan wraps GDK_KEY_WWAN
+const KeyWwan = 269025204
+// KeyWww wraps GDK_KEY_WWW
+const KeyWww = 269025070
+// KeyWacute wraps GDK_KEY_Wacute
+const KeyWacute = 16785026
+// KeyWakeup wraps GDK_KEY_WakeUp
+const KeyWakeup = 269025067
+// KeyWcircumflex wraps GDK_KEY_Wcircumflex
+const KeyWcircumflex = 16777588
+// KeyWdiaeresis wraps GDK_KEY_Wdiaeresis
+const KeyWdiaeresis = 16785028
+// KeyWebcam wraps GDK_KEY_WebCam
+const KeyWebcam = 269025167
+// KeyWgrave wraps GDK_KEY_Wgrave
+const KeyWgrave = 16785024
+// KeyWheelbutton wraps GDK_KEY_WheelButton
+const KeyWheelbutton = 269025160
+// KeyWindowclear wraps GDK_KEY_WindowClear
+const KeyWindowclear = 269025109
+// KeyWonsign wraps GDK_KEY_WonSign
+const KeyWonsign = 16785577
+// KeyWord wraps GDK_KEY_Word
+const KeyWord = 269025161
+// KeYX wraps GDK_KEY_X
+const KeYX = 88
+// KeyXabovedot wraps GDK_KEY_Xabovedot
+const KeyXabovedot = 16785034
+// KeyXfer wraps GDK_KEY_Xfer
+const KeyXfer = 269025162
+// KeYY wraps GDK_KEY_Y
+const KeYY = 89
+// KeyYacute wraps GDK_KEY_Yacute
+const KeyYacute = 221
+// KeyYbelowdot wraps GDK_KEY_Ybelowdot
+const KeyYbelowdot = 16785140
+// KeyYcircumflex wraps GDK_KEY_Ycircumflex
+const KeyYcircumflex = 16777590
+// KeyYdiaeresis wraps GDK_KEY_Ydiaeresis
+const KeyYdiaeresis = 5054
+// KeyYellow wraps GDK_KEY_Yellow
+const KeyYellow = 269025189
+// KeyYgrave wraps GDK_KEY_Ygrave
+const KeyYgrave = 16785138
+// KeyYhook wraps GDK_KEY_Yhook
+const KeyYhook = 16785142
+// KeyYtilde wraps GDK_KEY_Ytilde
+const KeyYtilde = 16785144
+// KeYZ wraps GDK_KEY_Z
+const KeYZ = 90
+// KeyZabovedot wraps GDK_KEY_Zabovedot
+const KeyZabovedot = 431
+// KeyZacute wraps GDK_KEY_Zacute
+const KeyZacute = 428
+// KeyZcaron wraps GDK_KEY_Zcaron
+const KeyZcaron = 430
+// KeyZenKoho wraps GDK_KEY_Zen_Koho
+const KeyZenKoho = 65341
+// KeyZenkaku wraps GDK_KEY_Zenkaku
+const KeyZenkaku = 65320
+// KeyZenkakuHankaku wraps GDK_KEY_Zenkaku_Hankaku
+const KeyZenkakuHankaku = 65322
+// KeyZoomin wraps GDK_KEY_ZoomIn
+const KeyZoomin = 269025163
+// KeyZoomout wraps GDK_KEY_ZoomOut
+const KeyZoomout = 269025164
+// KeyZstroke wraps GDK_KEY_Zstroke
+const KeyZstroke = 16777653
+// KeyA wraps GDK_KEY_a
+const KeyA = 97
+// KeyAacute wraps GDK_KEY_aacute
+const KeyAacute = 225
+// KeyAbelowdot wraps GDK_KEY_abelowdot
+const KeyAbelowdot = 16785057
+// KeyAbovedot wraps GDK_KEY_abovedot
+const KeyAbovedot = 511
+// KeyAbreve wraps GDK_KEY_abreve
+const KeyAbreve = 483
+// KeyAbreveacute wraps GDK_KEY_abreveacute
+const KeyAbreveacute = 16785071
+// KeyAbrevebelowdot wraps GDK_KEY_abrevebelowdot
+const KeyAbrevebelowdot = 16785079
+// KeyAbrevegrave wraps GDK_KEY_abrevegrave
+const KeyAbrevegrave = 16785073
+// KeyAbrevehook wraps GDK_KEY_abrevehook
+const KeyAbrevehook = 16785075
+// KeyAbrevetilde wraps GDK_KEY_abrevetilde
+const KeyAbrevetilde = 16785077
+// KeyAcircumflex wraps GDK_KEY_acircumflex
+const KeyAcircumflex = 226
+// KeyAcircumflexacute wraps GDK_KEY_acircumflexacute
+const KeyAcircumflexacute = 16785061
+// KeyAcircumflexbelowdot wraps GDK_KEY_acircumflexbelowdot
+const KeyAcircumflexbelowdot = 16785069
+// KeyAcircumflexgrave wraps GDK_KEY_acircumflexgrave
+const KeyAcircumflexgrave = 16785063
+// KeyAcircumflexhook wraps GDK_KEY_acircumflexhook
+const KeyAcircumflexhook = 16785065
+// KeyAcircumflextilde wraps GDK_KEY_acircumflextilde
+const KeyAcircumflextilde = 16785067
+// KeyAcute wraps GDK_KEY_acute
+const KeyAcute = 180
+// KeyAdiaeresis wraps GDK_KEY_adiaeresis
+const KeyAdiaeresis = 228
+// KeyAe wraps GDK_KEY_ae
+const KeyAe = 230
+// KeyAgrave wraps GDK_KEY_agrave
+const KeyAgrave = 224
+// KeyAhook wraps GDK_KEY_ahook
+const KeyAhook = 16785059
+// KeyAmacron wraps GDK_KEY_amacron
+const KeyAmacron = 992
+// KeyAmpersand wraps GDK_KEY_ampersand
+const KeyAmpersand = 38
+// KeyAogonek wraps GDK_KEY_aogonek
+const KeyAogonek = 433
+// KeyApostrophe wraps GDK_KEY_apostrophe
+const KeyApostrophe = 39
+// KeyApproxeq wraps GDK_KEY_approxeq
+const KeyApproxeq = 16785992
+// KeyApproximate wraps GDK_KEY_approximate
+const KeyApproximate = 2248
+// KeyAring wraps GDK_KEY_aring
+const KeyAring = 229
+// KeyAsciicircum wraps GDK_KEY_asciicircum
+const KeyAsciicircum = 94
+// KeyAsciitilde wraps GDK_KEY_asciitilde
+const KeyAsciitilde = 126
+// KeyAsterisk wraps GDK_KEY_asterisk
+const KeyAsterisk = 42
+// KeyAt wraps GDK_KEY_at
+const KeyAt = 64
+// KeyAtilde wraps GDK_KEY_atilde
+const KeyAtilde = 227
+// KeyB wraps GDK_KEY_b
+const KeyB = 98
+// KeyBabovedot wraps GDK_KEY_babovedot
+const KeyBabovedot = 16784899
+// KeyBackslash wraps GDK_KEY_backslash
+const KeyBackslash = 92
+// KeyBallotcross wraps GDK_KEY_ballotcross
+const KeyBallotcross = 2804
+// KeyBar wraps GDK_KEY_bar
+const KeyBar = 124
+// KeyBecause wraps GDK_KEY_because
+const KeyBecause = 16785973
+// KeyBlank wraps GDK_KEY_blank
+const KeyBlank = 2527
+// KeyBotintegral wraps GDK_KEY_botintegral
+const KeyBotintegral = 2213
+// KeyBotleftparens wraps GDK_KEY_botleftparens
+const KeyBotleftparens = 2220
+// KeyBotleftsqbracket wraps GDK_KEY_botleftsqbracket
+const KeyBotleftsqbracket = 2216
+// KeyBotleftsummation wraps GDK_KEY_botleftsummation
+const KeyBotleftsummation = 2226
+// KeyBotrightparens wraps GDK_KEY_botrightparens
+const KeyBotrightparens = 2222
+// KeyBotrightsqbracket wraps GDK_KEY_botrightsqbracket
+const KeyBotrightsqbracket = 2218
+// KeyBotrightsummation wraps GDK_KEY_botrightsummation
+const KeyBotrightsummation = 2230
+// KeyBott wraps GDK_KEY_bott
+const KeyBott = 2550
+// KeyBotvertsummationconnector wraps GDK_KEY_botvertsummationconnector
+const KeyBotvertsummationconnector = 2228
+// KeyBraceleft wraps GDK_KEY_braceleft
+const KeyBraceleft = 123
+// KeyBraceright wraps GDK_KEY_braceright
+const KeyBraceright = 125
+// KeyBracketleft wraps GDK_KEY_bracketleft
+const KeyBracketleft = 91
+// KeyBracketright wraps GDK_KEY_bracketright
+const KeyBracketright = 93
+// KeyBrailleBlank wraps GDK_KEY_braille_blank
+const KeyBrailleBlank = 16787456
+// KeyBrailleDot1 wraps GDK_KEY_braille_dot_1
+const KeyBrailleDot1 = 65521
+// KeyBrailleDot10 wraps GDK_KEY_braille_dot_10
+const KeyBrailleDot10 = 65530
+// KeyBrailleDot2 wraps GDK_KEY_braille_dot_2
+const KeyBrailleDot2 = 65522
+// KeyBrailleDot3 wraps GDK_KEY_braille_dot_3
+const KeyBrailleDot3 = 65523
+// KeyBrailleDot4 wraps GDK_KEY_braille_dot_4
+const KeyBrailleDot4 = 65524
+// KeyBrailleDot5 wraps GDK_KEY_braille_dot_5
+const KeyBrailleDot5 = 65525
+// KeyBrailleDot6 wraps GDK_KEY_braille_dot_6
+const KeyBrailleDot6 = 65526
+// KeyBrailleDot7 wraps GDK_KEY_braille_dot_7
+const KeyBrailleDot7 = 65527
+// KeyBrailleDot8 wraps GDK_KEY_braille_dot_8
+const KeyBrailleDot8 = 65528
+// KeyBrailleDot9 wraps GDK_KEY_braille_dot_9
+const KeyBrailleDot9 = 65529
+// KeyBrailleDots1 wraps GDK_KEY_braille_dots_1
+const KeyBrailleDots1 = 16787457
+// KeyBrailleDots12 wraps GDK_KEY_braille_dots_12
+const KeyBrailleDots12 = 16787459
+// KeyBrailleDots123 wraps GDK_KEY_braille_dots_123
+const KeyBrailleDots123 = 16787463
+// KeyBrailleDots1234 wraps GDK_KEY_braille_dots_1234
+const KeyBrailleDots1234 = 16787471
+// KeyBrailleDots12345 wraps GDK_KEY_braille_dots_12345
+const KeyBrailleDots12345 = 16787487
+// KeyBrailleDots123456 wraps GDK_KEY_braille_dots_123456
+const KeyBrailleDots123456 = 16787519
+// KeyBrailleDots1234567 wraps GDK_KEY_braille_dots_1234567
+const KeyBrailleDots1234567 = 16787583
+// KeyBrailleDots12345678 wraps GDK_KEY_braille_dots_12345678
+const KeyBrailleDots12345678 = 16787711
+// KeyBrailleDots1234568 wraps GDK_KEY_braille_dots_1234568
+const KeyBrailleDots1234568 = 16787647
+// KeyBrailleDots123457 wraps GDK_KEY_braille_dots_123457
+const KeyBrailleDots123457 = 16787551
+// KeyBrailleDots1234578 wraps GDK_KEY_braille_dots_1234578
+const KeyBrailleDots1234578 = 16787679
+// KeyBrailleDots123458 wraps GDK_KEY_braille_dots_123458
+const KeyBrailleDots123458 = 16787615
+// KeyBrailleDots12346 wraps GDK_KEY_braille_dots_12346
+const KeyBrailleDots12346 = 16787503
+// KeyBrailleDots123467 wraps GDK_KEY_braille_dots_123467
+const KeyBrailleDots123467 = 16787567
+// KeyBrailleDots1234678 wraps GDK_KEY_braille_dots_1234678
+const KeyBrailleDots1234678 = 16787695
+// KeyBrailleDots123468 wraps GDK_KEY_braille_dots_123468
+const KeyBrailleDots123468 = 16787631
+// KeyBrailleDots12347 wraps GDK_KEY_braille_dots_12347
+const KeyBrailleDots12347 = 16787535
+// KeyBrailleDots123478 wraps GDK_KEY_braille_dots_123478
+const KeyBrailleDots123478 = 16787663
+// KeyBrailleDots12348 wraps GDK_KEY_braille_dots_12348
+const KeyBrailleDots12348 = 16787599
+// KeyBrailleDots1235 wraps GDK_KEY_braille_dots_1235
+const KeyBrailleDots1235 = 16787479
+// KeyBrailleDots12356 wraps GDK_KEY_braille_dots_12356
+const KeyBrailleDots12356 = 16787511
+// KeyBrailleDots123567 wraps GDK_KEY_braille_dots_123567
+const KeyBrailleDots123567 = 16787575
+// KeyBrailleDots1235678 wraps GDK_KEY_braille_dots_1235678
+const KeyBrailleDots1235678 = 16787703
+// KeyBrailleDots123568 wraps GDK_KEY_braille_dots_123568
+const KeyBrailleDots123568 = 16787639
+// KeyBrailleDots12357 wraps GDK_KEY_braille_dots_12357
+const KeyBrailleDots12357 = 16787543
+// KeyBrailleDots123578 wraps GDK_KEY_braille_dots_123578
+const KeyBrailleDots123578 = 16787671
+// KeyBrailleDots12358 wraps GDK_KEY_braille_dots_12358
+const KeyBrailleDots12358 = 16787607
+// KeyBrailleDots1236 wraps GDK_KEY_braille_dots_1236
+const KeyBrailleDots1236 = 16787495
+// KeyBrailleDots12367 wraps GDK_KEY_braille_dots_12367
+const KeyBrailleDots12367 = 16787559
+// KeyBrailleDots123678 wraps GDK_KEY_braille_dots_123678
+const KeyBrailleDots123678 = 16787687
+// KeyBrailleDots12368 wraps GDK_KEY_braille_dots_12368
+const KeyBrailleDots12368 = 16787623
+// KeyBrailleDots1237 wraps GDK_KEY_braille_dots_1237
+const KeyBrailleDots1237 = 16787527
+// KeyBrailleDots12378 wraps GDK_KEY_braille_dots_12378
+const KeyBrailleDots12378 = 16787655
+// KeyBrailleDots1238 wraps GDK_KEY_braille_dots_1238
+const KeyBrailleDots1238 = 16787591
+// KeyBrailleDots124 wraps GDK_KEY_braille_dots_124
+const KeyBrailleDots124 = 16787467
+// KeyBrailleDots1245 wraps GDK_KEY_braille_dots_1245
+const KeyBrailleDots1245 = 16787483
+// KeyBrailleDots12456 wraps GDK_KEY_braille_dots_12456
+const KeyBrailleDots12456 = 16787515
+// KeyBrailleDots124567 wraps GDK_KEY_braille_dots_124567
+const KeyBrailleDots124567 = 16787579
+// KeyBrailleDots1245678 wraps GDK_KEY_braille_dots_1245678
+const KeyBrailleDots1245678 = 16787707
+// KeyBrailleDots124568 wraps GDK_KEY_braille_dots_124568
+const KeyBrailleDots124568 = 16787643
+// KeyBrailleDots12457 wraps GDK_KEY_braille_dots_12457
+const KeyBrailleDots12457 = 16787547
+// KeyBrailleDots124578 wraps GDK_KEY_braille_dots_124578
+const KeyBrailleDots124578 = 16787675
+// KeyBrailleDots12458 wraps GDK_KEY_braille_dots_12458
+const KeyBrailleDots12458 = 16787611
+// KeyBrailleDots1246 wraps GDK_KEY_braille_dots_1246
+const KeyBrailleDots1246 = 16787499
+// KeyBrailleDots12467 wraps GDK_KEY_braille_dots_12467
+const KeyBrailleDots12467 = 16787563
+// KeyBrailleDots124678 wraps GDK_KEY_braille_dots_124678
+const KeyBrailleDots124678 = 16787691
+// KeyBrailleDots12468 wraps GDK_KEY_braille_dots_12468
+const KeyBrailleDots12468 = 16787627
+// KeyBrailleDots1247 wraps GDK_KEY_braille_dots_1247
+const KeyBrailleDots1247 = 16787531
+// KeyBrailleDots12478 wraps GDK_KEY_braille_dots_12478
+const KeyBrailleDots12478 = 16787659
+// KeyBrailleDots1248 wraps GDK_KEY_braille_dots_1248
+const KeyBrailleDots1248 = 16787595
+// KeyBrailleDots125 wraps GDK_KEY_braille_dots_125
+const KeyBrailleDots125 = 16787475
+// KeyBrailleDots1256 wraps GDK_KEY_braille_dots_1256
+const KeyBrailleDots1256 = 16787507
+// KeyBrailleDots12567 wraps GDK_KEY_braille_dots_12567
+const KeyBrailleDots12567 = 16787571
+// KeyBrailleDots125678 wraps GDK_KEY_braille_dots_125678
+const KeyBrailleDots125678 = 16787699
+// KeyBrailleDots12568 wraps GDK_KEY_braille_dots_12568
+const KeyBrailleDots12568 = 16787635
+// KeyBrailleDots1257 wraps GDK_KEY_braille_dots_1257
+const KeyBrailleDots1257 = 16787539
+// KeyBrailleDots12578 wraps GDK_KEY_braille_dots_12578
+const KeyBrailleDots12578 = 16787667
+// KeyBrailleDots1258 wraps GDK_KEY_braille_dots_1258
+const KeyBrailleDots1258 = 16787603
+// KeyBrailleDots126 wraps GDK_KEY_braille_dots_126
+const KeyBrailleDots126 = 16787491
+// KeyBrailleDots1267 wraps GDK_KEY_braille_dots_1267
+const KeyBrailleDots1267 = 16787555
+// KeyBrailleDots12678 wraps GDK_KEY_braille_dots_12678
+const KeyBrailleDots12678 = 16787683
+// KeyBrailleDots1268 wraps GDK_KEY_braille_dots_1268
+const KeyBrailleDots1268 = 16787619
+// KeyBrailleDots127 wraps GDK_KEY_braille_dots_127
+const KeyBrailleDots127 = 16787523
+// KeyBrailleDots1278 wraps GDK_KEY_braille_dots_1278
+const KeyBrailleDots1278 = 16787651
+// KeyBrailleDots128 wraps GDK_KEY_braille_dots_128
+const KeyBrailleDots128 = 16787587
+// KeyBrailleDots13 wraps GDK_KEY_braille_dots_13
+const KeyBrailleDots13 = 16787461
+// KeyBrailleDots134 wraps GDK_KEY_braille_dots_134
+const KeyBrailleDots134 = 16787469
+// KeyBrailleDots1345 wraps GDK_KEY_braille_dots_1345
+const KeyBrailleDots1345 = 16787485
+// KeyBrailleDots13456 wraps GDK_KEY_braille_dots_13456
+const KeyBrailleDots13456 = 16787517
+// KeyBrailleDots134567 wraps GDK_KEY_braille_dots_134567
+const KeyBrailleDots134567 = 16787581
+// KeyBrailleDots1345678 wraps GDK_KEY_braille_dots_1345678
+const KeyBrailleDots1345678 = 16787709
+// KeyBrailleDots134568 wraps GDK_KEY_braille_dots_134568
+const KeyBrailleDots134568 = 16787645
+// KeyBrailleDots13457 wraps GDK_KEY_braille_dots_13457
+const KeyBrailleDots13457 = 16787549
+// KeyBrailleDots134578 wraps GDK_KEY_braille_dots_134578
+const KeyBrailleDots134578 = 16787677
+// KeyBrailleDots13458 wraps GDK_KEY_braille_dots_13458
+const KeyBrailleDots13458 = 16787613
+// KeyBrailleDots1346 wraps GDK_KEY_braille_dots_1346
+const KeyBrailleDots1346 = 16787501
+// KeyBrailleDots13467 wraps GDK_KEY_braille_dots_13467
+const KeyBrailleDots13467 = 16787565
+// KeyBrailleDots134678 wraps GDK_KEY_braille_dots_134678
+const KeyBrailleDots134678 = 16787693
+// KeyBrailleDots13468 wraps GDK_KEY_braille_dots_13468
+const KeyBrailleDots13468 = 16787629
+// KeyBrailleDots1347 wraps GDK_KEY_braille_dots_1347
+const KeyBrailleDots1347 = 16787533
+// KeyBrailleDots13478 wraps GDK_KEY_braille_dots_13478
+const KeyBrailleDots13478 = 16787661
+// KeyBrailleDots1348 wraps GDK_KEY_braille_dots_1348
+const KeyBrailleDots1348 = 16787597
+// KeyBrailleDots135 wraps GDK_KEY_braille_dots_135
+const KeyBrailleDots135 = 16787477
+// KeyBrailleDots1356 wraps GDK_KEY_braille_dots_1356
+const KeyBrailleDots1356 = 16787509
+// KeyBrailleDots13567 wraps GDK_KEY_braille_dots_13567
+const KeyBrailleDots13567 = 16787573
+// KeyBrailleDots135678 wraps GDK_KEY_braille_dots_135678
+const KeyBrailleDots135678 = 16787701
+// KeyBrailleDots13568 wraps GDK_KEY_braille_dots_13568
+const KeyBrailleDots13568 = 16787637
+// KeyBrailleDots1357 wraps GDK_KEY_braille_dots_1357
+const KeyBrailleDots1357 = 16787541
+// KeyBrailleDots13578 wraps GDK_KEY_braille_dots_13578
+const KeyBrailleDots13578 = 16787669
+// KeyBrailleDots1358 wraps GDK_KEY_braille_dots_1358
+const KeyBrailleDots1358 = 16787605
+// KeyBrailleDots136 wraps GDK_KEY_braille_dots_136
+const KeyBrailleDots136 = 16787493
+// KeyBrailleDots1367 wraps GDK_KEY_braille_dots_1367
+const KeyBrailleDots1367 = 16787557
+// KeyBrailleDots13678 wraps GDK_KEY_braille_dots_13678
+const KeyBrailleDots13678 = 16787685
+// KeyBrailleDots1368 wraps GDK_KEY_braille_dots_1368
+const KeyBrailleDots1368 = 16787621
+// KeyBrailleDots137 wraps GDK_KEY_braille_dots_137
+const KeyBrailleDots137 = 16787525
+// KeyBrailleDots1378 wraps GDK_KEY_braille_dots_1378
+const KeyBrailleDots1378 = 16787653
+// KeyBrailleDots138 wraps GDK_KEY_braille_dots_138
+const KeyBrailleDots138 = 16787589
+// KeyBrailleDots14 wraps GDK_KEY_braille_dots_14
+const KeyBrailleDots14 = 16787465
+// KeyBrailleDots145 wraps GDK_KEY_braille_dots_145
+const KeyBrailleDots145 = 16787481
+// KeyBrailleDots1456 wraps GDK_KEY_braille_dots_1456
+const KeyBrailleDots1456 = 16787513
+// KeyBrailleDots14567 wraps GDK_KEY_braille_dots_14567
+const KeyBrailleDots14567 = 16787577
+// KeyBrailleDots145678 wraps GDK_KEY_braille_dots_145678
+const KeyBrailleDots145678 = 16787705
+// KeyBrailleDots14568 wraps GDK_KEY_braille_dots_14568
+const KeyBrailleDots14568 = 16787641
+// KeyBrailleDots1457 wraps GDK_KEY_braille_dots_1457
+const KeyBrailleDots1457 = 16787545
+// KeyBrailleDots14578 wraps GDK_KEY_braille_dots_14578
+const KeyBrailleDots14578 = 16787673
+// KeyBrailleDots1458 wraps GDK_KEY_braille_dots_1458
+const KeyBrailleDots1458 = 16787609
+// KeyBrailleDots146 wraps GDK_KEY_braille_dots_146
+const KeyBrailleDots146 = 16787497
+// KeyBrailleDots1467 wraps GDK_KEY_braille_dots_1467
+const KeyBrailleDots1467 = 16787561
+// KeyBrailleDots14678 wraps GDK_KEY_braille_dots_14678
+const KeyBrailleDots14678 = 16787689
+// KeyBrailleDots1468 wraps GDK_KEY_braille_dots_1468
+const KeyBrailleDots1468 = 16787625
+// KeyBrailleDots147 wraps GDK_KEY_braille_dots_147
+const KeyBrailleDots147 = 16787529
+// KeyBrailleDots1478 wraps GDK_KEY_braille_dots_1478
+const KeyBrailleDots1478 = 16787657
+// KeyBrailleDots148 wraps GDK_KEY_braille_dots_148
+const KeyBrailleDots148 = 16787593
+// KeyBrailleDots15 wraps GDK_KEY_braille_dots_15
+const KeyBrailleDots15 = 16787473
+// KeyBrailleDots156 wraps GDK_KEY_braille_dots_156
+const KeyBrailleDots156 = 16787505
+// KeyBrailleDots1567 wraps GDK_KEY_braille_dots_1567
+const KeyBrailleDots1567 = 16787569
+// KeyBrailleDots15678 wraps GDK_KEY_braille_dots_15678
+const KeyBrailleDots15678 = 16787697
+// KeyBrailleDots1568 wraps GDK_KEY_braille_dots_1568
+const KeyBrailleDots1568 = 16787633
+// KeyBrailleDots157 wraps GDK_KEY_braille_dots_157
+const KeyBrailleDots157 = 16787537
+// KeyBrailleDots1578 wraps GDK_KEY_braille_dots_1578
+const KeyBrailleDots1578 = 16787665
+// KeyBrailleDots158 wraps GDK_KEY_braille_dots_158
+const KeyBrailleDots158 = 16787601
+// KeyBrailleDots16 wraps GDK_KEY_braille_dots_16
+const KeyBrailleDots16 = 16787489
+// KeyBrailleDots167 wraps GDK_KEY_braille_dots_167
+const KeyBrailleDots167 = 16787553
+// KeyBrailleDots1678 wraps GDK_KEY_braille_dots_1678
+const KeyBrailleDots1678 = 16787681
+// KeyBrailleDots168 wraps GDK_KEY_braille_dots_168
+const KeyBrailleDots168 = 16787617
+// KeyBrailleDots17 wraps GDK_KEY_braille_dots_17
+const KeyBrailleDots17 = 16787521
+// KeyBrailleDots178 wraps GDK_KEY_braille_dots_178
+const KeyBrailleDots178 = 16787649
+// KeyBrailleDots18 wraps GDK_KEY_braille_dots_18
+const KeyBrailleDots18 = 16787585
+// KeyBrailleDots2 wraps GDK_KEY_braille_dots_2
+const KeyBrailleDots2 = 16787458
+// KeyBrailleDots23 wraps GDK_KEY_braille_dots_23
+const KeyBrailleDots23 = 16787462
+// KeyBrailleDots234 wraps GDK_KEY_braille_dots_234
+const KeyBrailleDots234 = 16787470
+// KeyBrailleDots2345 wraps GDK_KEY_braille_dots_2345
+const KeyBrailleDots2345 = 16787486
+// KeyBrailleDots23456 wraps GDK_KEY_braille_dots_23456
+const KeyBrailleDots23456 = 16787518
+// KeyBrailleDots234567 wraps GDK_KEY_braille_dots_234567
+const KeyBrailleDots234567 = 16787582
+// KeyBrailleDots2345678 wraps GDK_KEY_braille_dots_2345678
+const KeyBrailleDots2345678 = 16787710
+// KeyBrailleDots234568 wraps GDK_KEY_braille_dots_234568
+const KeyBrailleDots234568 = 16787646
+// KeyBrailleDots23457 wraps GDK_KEY_braille_dots_23457
+const KeyBrailleDots23457 = 16787550
+// KeyBrailleDots234578 wraps GDK_KEY_braille_dots_234578
+const KeyBrailleDots234578 = 16787678
+// KeyBrailleDots23458 wraps GDK_KEY_braille_dots_23458
+const KeyBrailleDots23458 = 16787614
+// KeyBrailleDots2346 wraps GDK_KEY_braille_dots_2346
+const KeyBrailleDots2346 = 16787502
+// KeyBrailleDots23467 wraps GDK_KEY_braille_dots_23467
+const KeyBrailleDots23467 = 16787566
+// KeyBrailleDots234678 wraps GDK_KEY_braille_dots_234678
+const KeyBrailleDots234678 = 16787694
+// KeyBrailleDots23468 wraps GDK_KEY_braille_dots_23468
+const KeyBrailleDots23468 = 16787630
+// KeyBrailleDots2347 wraps GDK_KEY_braille_dots_2347
+const KeyBrailleDots2347 = 16787534
+// KeyBrailleDots23478 wraps GDK_KEY_braille_dots_23478
+const KeyBrailleDots23478 = 16787662
+// KeyBrailleDots2348 wraps GDK_KEY_braille_dots_2348
+const KeyBrailleDots2348 = 16787598
+// KeyBrailleDots235 wraps GDK_KEY_braille_dots_235
+const KeyBrailleDots235 = 16787478
+// KeyBrailleDots2356 wraps GDK_KEY_braille_dots_2356
+const KeyBrailleDots2356 = 16787510
+// KeyBrailleDots23567 wraps GDK_KEY_braille_dots_23567
+const KeyBrailleDots23567 = 16787574
+// KeyBrailleDots235678 wraps GDK_KEY_braille_dots_235678
+const KeyBrailleDots235678 = 16787702
+// KeyBrailleDots23568 wraps GDK_KEY_braille_dots_23568
+const KeyBrailleDots23568 = 16787638
+// KeyBrailleDots2357 wraps GDK_KEY_braille_dots_2357
+const KeyBrailleDots2357 = 16787542
+// KeyBrailleDots23578 wraps GDK_KEY_braille_dots_23578
+const KeyBrailleDots23578 = 16787670
+// KeyBrailleDots2358 wraps GDK_KEY_braille_dots_2358
+const KeyBrailleDots2358 = 16787606
+// KeyBrailleDots236 wraps GDK_KEY_braille_dots_236
+const KeyBrailleDots236 = 16787494
+// KeyBrailleDots2367 wraps GDK_KEY_braille_dots_2367
+const KeyBrailleDots2367 = 16787558
+// KeyBrailleDots23678 wraps GDK_KEY_braille_dots_23678
+const KeyBrailleDots23678 = 16787686
+// KeyBrailleDots2368 wraps GDK_KEY_braille_dots_2368
+const KeyBrailleDots2368 = 16787622
+// KeyBrailleDots237 wraps GDK_KEY_braille_dots_237
+const KeyBrailleDots237 = 16787526
+// KeyBrailleDots2378 wraps GDK_KEY_braille_dots_2378
+const KeyBrailleDots2378 = 16787654
+// KeyBrailleDots238 wraps GDK_KEY_braille_dots_238
+const KeyBrailleDots238 = 16787590
+// KeyBrailleDots24 wraps GDK_KEY_braille_dots_24
+const KeyBrailleDots24 = 16787466
+// KeyBrailleDots245 wraps GDK_KEY_braille_dots_245
+const KeyBrailleDots245 = 16787482
+// KeyBrailleDots2456 wraps GDK_KEY_braille_dots_2456
+const KeyBrailleDots2456 = 16787514
+// KeyBrailleDots24567 wraps GDK_KEY_braille_dots_24567
+const KeyBrailleDots24567 = 16787578
+// KeyBrailleDots245678 wraps GDK_KEY_braille_dots_245678
+const KeyBrailleDots245678 = 16787706
+// KeyBrailleDots24568 wraps GDK_KEY_braille_dots_24568
+const KeyBrailleDots24568 = 16787642
+// KeyBrailleDots2457 wraps GDK_KEY_braille_dots_2457
+const KeyBrailleDots2457 = 16787546
+// KeyBrailleDots24578 wraps GDK_KEY_braille_dots_24578
+const KeyBrailleDots24578 = 16787674
+// KeyBrailleDots2458 wraps GDK_KEY_braille_dots_2458
+const KeyBrailleDots2458 = 16787610
+// KeyBrailleDots246 wraps GDK_KEY_braille_dots_246
+const KeyBrailleDots246 = 16787498
+// KeyBrailleDots2467 wraps GDK_KEY_braille_dots_2467
+const KeyBrailleDots2467 = 16787562
+// KeyBrailleDots24678 wraps GDK_KEY_braille_dots_24678
+const KeyBrailleDots24678 = 16787690
+// KeyBrailleDots2468 wraps GDK_KEY_braille_dots_2468
+const KeyBrailleDots2468 = 16787626
+// KeyBrailleDots247 wraps GDK_KEY_braille_dots_247
+const KeyBrailleDots247 = 16787530
+// KeyBrailleDots2478 wraps GDK_KEY_braille_dots_2478
+const KeyBrailleDots2478 = 16787658
+// KeyBrailleDots248 wraps GDK_KEY_braille_dots_248
+const KeyBrailleDots248 = 16787594
+// KeyBrailleDots25 wraps GDK_KEY_braille_dots_25
+const KeyBrailleDots25 = 16787474
+// KeyBrailleDots256 wraps GDK_KEY_braille_dots_256
+const KeyBrailleDots256 = 16787506
+// KeyBrailleDots2567 wraps GDK_KEY_braille_dots_2567
+const KeyBrailleDots2567 = 16787570
+// KeyBrailleDots25678 wraps GDK_KEY_braille_dots_25678
+const KeyBrailleDots25678 = 16787698
+// KeyBrailleDots2568 wraps GDK_KEY_braille_dots_2568
+const KeyBrailleDots2568 = 16787634
+// KeyBrailleDots257 wraps GDK_KEY_braille_dots_257
+const KeyBrailleDots257 = 16787538
+// KeyBrailleDots2578 wraps GDK_KEY_braille_dots_2578
+const KeyBrailleDots2578 = 16787666
+// KeyBrailleDots258 wraps GDK_KEY_braille_dots_258
+const KeyBrailleDots258 = 16787602
+// KeyBrailleDots26 wraps GDK_KEY_braille_dots_26
+const KeyBrailleDots26 = 16787490
+// KeyBrailleDots267 wraps GDK_KEY_braille_dots_267
+const KeyBrailleDots267 = 16787554
+// KeyBrailleDots2678 wraps GDK_KEY_braille_dots_2678
+const KeyBrailleDots2678 = 16787682
+// KeyBrailleDots268 wraps GDK_KEY_braille_dots_268
+const KeyBrailleDots268 = 16787618
+// KeyBrailleDots27 wraps GDK_KEY_braille_dots_27
+const KeyBrailleDots27 = 16787522
+// KeyBrailleDots278 wraps GDK_KEY_braille_dots_278
+const KeyBrailleDots278 = 16787650
+// KeyBrailleDots28 wraps GDK_KEY_braille_dots_28
+const KeyBrailleDots28 = 16787586
+// KeyBrailleDots3 wraps GDK_KEY_braille_dots_3
+const KeyBrailleDots3 = 16787460
+// KeyBrailleDots34 wraps GDK_KEY_braille_dots_34
+const KeyBrailleDots34 = 16787468
+// KeyBrailleDots345 wraps GDK_KEY_braille_dots_345
+const KeyBrailleDots345 = 16787484
+// KeyBrailleDots3456 wraps GDK_KEY_braille_dots_3456
+const KeyBrailleDots3456 = 16787516
+// KeyBrailleDots34567 wraps GDK_KEY_braille_dots_34567
+const KeyBrailleDots34567 = 16787580
+// KeyBrailleDots345678 wraps GDK_KEY_braille_dots_345678
+const KeyBrailleDots345678 = 16787708
+// KeyBrailleDots34568 wraps GDK_KEY_braille_dots_34568
+const KeyBrailleDots34568 = 16787644
+// KeyBrailleDots3457 wraps GDK_KEY_braille_dots_3457
+const KeyBrailleDots3457 = 16787548
+// KeyBrailleDots34578 wraps GDK_KEY_braille_dots_34578
+const KeyBrailleDots34578 = 16787676
+// KeyBrailleDots3458 wraps GDK_KEY_braille_dots_3458
+const KeyBrailleDots3458 = 16787612
+// KeyBrailleDots346 wraps GDK_KEY_braille_dots_346
+const KeyBrailleDots346 = 16787500
+// KeyBrailleDots3467 wraps GDK_KEY_braille_dots_3467
+const KeyBrailleDots3467 = 16787564
+// KeyBrailleDots34678 wraps GDK_KEY_braille_dots_34678
+const KeyBrailleDots34678 = 16787692
+// KeyBrailleDots3468 wraps GDK_KEY_braille_dots_3468
+const KeyBrailleDots3468 = 16787628
+// KeyBrailleDots347 wraps GDK_KEY_braille_dots_347
+const KeyBrailleDots347 = 16787532
+// KeyBrailleDots3478 wraps GDK_KEY_braille_dots_3478
+const KeyBrailleDots3478 = 16787660
+// KeyBrailleDots348 wraps GDK_KEY_braille_dots_348
+const KeyBrailleDots348 = 16787596
+// KeyBrailleDots35 wraps GDK_KEY_braille_dots_35
+const KeyBrailleDots35 = 16787476
+// KeyBrailleDots356 wraps GDK_KEY_braille_dots_356
+const KeyBrailleDots356 = 16787508
+// KeyBrailleDots3567 wraps GDK_KEY_braille_dots_3567
+const KeyBrailleDots3567 = 16787572
+// KeyBrailleDots35678 wraps GDK_KEY_braille_dots_35678
+const KeyBrailleDots35678 = 16787700
+// KeyBrailleDots3568 wraps GDK_KEY_braille_dots_3568
+const KeyBrailleDots3568 = 16787636
+// KeyBrailleDots357 wraps GDK_KEY_braille_dots_357
+const KeyBrailleDots357 = 16787540
+// KeyBrailleDots3578 wraps GDK_KEY_braille_dots_3578
+const KeyBrailleDots3578 = 16787668
+// KeyBrailleDots358 wraps GDK_KEY_braille_dots_358
+const KeyBrailleDots358 = 16787604
+// KeyBrailleDots36 wraps GDK_KEY_braille_dots_36
+const KeyBrailleDots36 = 16787492
+// KeyBrailleDots367 wraps GDK_KEY_braille_dots_367
+const KeyBrailleDots367 = 16787556
+// KeyBrailleDots3678 wraps GDK_KEY_braille_dots_3678
+const KeyBrailleDots3678 = 16787684
+// KeyBrailleDots368 wraps GDK_KEY_braille_dots_368
+const KeyBrailleDots368 = 16787620
+// KeyBrailleDots37 wraps GDK_KEY_braille_dots_37
+const KeyBrailleDots37 = 16787524
+// KeyBrailleDots378 wraps GDK_KEY_braille_dots_378
+const KeyBrailleDots378 = 16787652
+// KeyBrailleDots38 wraps GDK_KEY_braille_dots_38
+const KeyBrailleDots38 = 16787588
+// KeyBrailleDots4 wraps GDK_KEY_braille_dots_4
+const KeyBrailleDots4 = 16787464
+// KeyBrailleDots45 wraps GDK_KEY_braille_dots_45
+const KeyBrailleDots45 = 16787480
+// KeyBrailleDots456 wraps GDK_KEY_braille_dots_456
+const KeyBrailleDots456 = 16787512
+// KeyBrailleDots4567 wraps GDK_KEY_braille_dots_4567
+const KeyBrailleDots4567 = 16787576
+// KeyBrailleDots45678 wraps GDK_KEY_braille_dots_45678
+const KeyBrailleDots45678 = 16787704
+// KeyBrailleDots4568 wraps GDK_KEY_braille_dots_4568
+const KeyBrailleDots4568 = 16787640
+// KeyBrailleDots457 wraps GDK_KEY_braille_dots_457
+const KeyBrailleDots457 = 16787544
+// KeyBrailleDots4578 wraps GDK_KEY_braille_dots_4578
+const KeyBrailleDots4578 = 16787672
+// KeyBrailleDots458 wraps GDK_KEY_braille_dots_458
+const KeyBrailleDots458 = 16787608
+// KeyBrailleDots46 wraps GDK_KEY_braille_dots_46
+const KeyBrailleDots46 = 16787496
+// KeyBrailleDots467 wraps GDK_KEY_braille_dots_467
+const KeyBrailleDots467 = 16787560
+// KeyBrailleDots4678 wraps GDK_KEY_braille_dots_4678
+const KeyBrailleDots4678 = 16787688
+// KeyBrailleDots468 wraps GDK_KEY_braille_dots_468
+const KeyBrailleDots468 = 16787624
+// KeyBrailleDots47 wraps GDK_KEY_braille_dots_47
+const KeyBrailleDots47 = 16787528
+// KeyBrailleDots478 wraps GDK_KEY_braille_dots_478
+const KeyBrailleDots478 = 16787656
+// KeyBrailleDots48 wraps GDK_KEY_braille_dots_48
+const KeyBrailleDots48 = 16787592
+// KeyBrailleDots5 wraps GDK_KEY_braille_dots_5
+const KeyBrailleDots5 = 16787472
+// KeyBrailleDots56 wraps GDK_KEY_braille_dots_56
+const KeyBrailleDots56 = 16787504
+// KeyBrailleDots567 wraps GDK_KEY_braille_dots_567
+const KeyBrailleDots567 = 16787568
+// KeyBrailleDots5678 wraps GDK_KEY_braille_dots_5678
+const KeyBrailleDots5678 = 16787696
+// KeyBrailleDots568 wraps GDK_KEY_braille_dots_568
+const KeyBrailleDots568 = 16787632
+// KeyBrailleDots57 wraps GDK_KEY_braille_dots_57
+const KeyBrailleDots57 = 16787536
+// KeyBrailleDots578 wraps GDK_KEY_braille_dots_578
+const KeyBrailleDots578 = 16787664
+// KeyBrailleDots58 wraps GDK_KEY_braille_dots_58
+const KeyBrailleDots58 = 16787600
+// KeyBrailleDots6 wraps GDK_KEY_braille_dots_6
+const KeyBrailleDots6 = 16787488
+// KeyBrailleDots67 wraps GDK_KEY_braille_dots_67
+const KeyBrailleDots67 = 16787552
+// KeyBrailleDots678 wraps GDK_KEY_braille_dots_678
+const KeyBrailleDots678 = 16787680
+// KeyBrailleDots68 wraps GDK_KEY_braille_dots_68
+const KeyBrailleDots68 = 16787616
+// KeyBrailleDots7 wraps GDK_KEY_braille_dots_7
+const KeyBrailleDots7 = 16787520
+// KeyBrailleDots78 wraps GDK_KEY_braille_dots_78
+const KeyBrailleDots78 = 16787648
+// KeyBrailleDots8 wraps GDK_KEY_braille_dots_8
+const KeyBrailleDots8 = 16787584
+// KeyBreve wraps GDK_KEY_breve
+const KeyBreve = 418
+// KeyBrokenbar wraps GDK_KEY_brokenbar
+const KeyBrokenbar = 166
+// KeyC wraps GDK_KEY_c
+const KeyC = 99
+// KeyCH wraps GDK_KEY_c_h
+const KeyCH = 65187
+// KeyCabovedot wraps GDK_KEY_cabovedot
+const KeyCabovedot = 741
+// KeyCacute wraps GDK_KEY_cacute
+const KeyCacute = 486
+// KeyCareof wraps GDK_KEY_careof
+const KeyCareof = 2744
+// KeyCaret wraps GDK_KEY_caret
+const KeyCaret = 2812
+// KeyCaron wraps GDK_KEY_caron
+const KeyCaron = 439
+// KeyCcaron wraps GDK_KEY_ccaron
+const KeyCcaron = 488
+// KeyCcedilla wraps GDK_KEY_ccedilla
+const KeyCcedilla = 231
+// KeyCcircumflex wraps GDK_KEY_ccircumflex
+const KeyCcircumflex = 742
+// KeyCedilla wraps GDK_KEY_cedilla
+const KeyCedilla = 184
+// KeyCent wraps GDK_KEY_cent
+const KeyCent = 162
+// KeyCh wraps GDK_KEY_ch
+const KeyCh = 65184
+// KeyCheckerboard wraps GDK_KEY_checkerboard
+const KeyCheckerboard = 2529
+// KeyCheckmark wraps GDK_KEY_checkmark
+const KeyCheckmark = 2803
+// KeyCircle wraps GDK_KEY_circle
+const KeyCircle = 3023
+// KeyClub wraps GDK_KEY_club
+const KeyClub = 2796
+// KeyColon wraps GDK_KEY_colon
+const KeyColon = 58
+// KeyCombiningAcute wraps GDK_KEY_combining_acute
+const KeyCombiningAcute = 16777985
+// KeyCombiningBelowdot wraps GDK_KEY_combining_belowdot
+const KeyCombiningBelowdot = 16778019
+// KeyCombiningGrave wraps GDK_KEY_combining_grave
+const KeyCombiningGrave = 16777984
+// KeyCombiningHook wraps GDK_KEY_combining_hook
+const KeyCombiningHook = 16777993
+// KeyCombiningTilde wraps GDK_KEY_combining_tilde
+const KeyCombiningTilde = 16777987
+// KeyComma wraps GDK_KEY_comma
+const KeyComma = 44
+// KeyContainsas wraps GDK_KEY_containsas
+const KeyContainsas = 16785931
+// KeyCopyright wraps GDK_KEY_copyright
+const KeyCopyright = 169
+// KeyCr wraps GDK_KEY_cr
+const KeyCr = 2532
+// KeyCrossinglines wraps GDK_KEY_crossinglines
+const KeyCrossinglines = 2542
+// KeyCuberoot wraps GDK_KEY_cuberoot
+const KeyCuberoot = 16785947
+// KeyCurrency wraps GDK_KEY_currency
+const KeyCurrency = 164
+// KeyCursor wraps GDK_KEY_cursor
+const KeyCursor = 2815
+// KeyD wraps GDK_KEY_d
+const KeyD = 100
+// KeyDabovedot wraps GDK_KEY_dabovedot
+const KeyDabovedot = 16784907
+// KeyDagger wraps GDK_KEY_dagger
+const KeyDagger = 2801
+// KeyDcaron wraps GDK_KEY_dcaron
+const KeyDcaron = 495
+// KeyDeadA wraps GDK_KEY_dead_A
+const KeyDeadA = 65153
+// KeyDeadE wraps GDK_KEY_dead_E
+const KeyDeadE = 65155
+// KeyDeadI wraps GDK_KEY_dead_I
+const KeyDeadI = 65157
+// KeyDeadO wraps GDK_KEY_dead_O
+const KeyDeadO = 65159
+// KeyDeadSchwa wraps GDK_KEY_dead_SCHWA
+const KeyDeadSchwa = 65163
+// KeyDeadU wraps GDK_KEY_dead_U
+const KeyDeadU = 65161
+// KeyDeadA wraps GDK_KEY_dead_a
+const KeyDeadA = 65152
+// KeyDeadAbovecomma wraps GDK_KEY_dead_abovecomma
+const KeyDeadAbovecomma = 65124
+// KeyDeadAbovedot wraps GDK_KEY_dead_abovedot
+const KeyDeadAbovedot = 65110
+// KeyDeadAbovereversedcomma wraps GDK_KEY_dead_abovereversedcomma
+const KeyDeadAbovereversedcomma = 65125
+// KeyDeadAbovering wraps GDK_KEY_dead_abovering
+const KeyDeadAbovering = 65112
+// KeyDeadAboveverticalline wraps GDK_KEY_dead_aboveverticalline
+const KeyDeadAboveverticalline = 65169
+// KeyDeadAcute wraps GDK_KEY_dead_acute
+const KeyDeadAcute = 65105
+// KeyDeadBelowbreve wraps GDK_KEY_dead_belowbreve
+const KeyDeadBelowbreve = 65131
+// KeyDeadBelowcircumflex wraps GDK_KEY_dead_belowcircumflex
+const KeyDeadBelowcircumflex = 65129
+// KeyDeadBelowcomma wraps GDK_KEY_dead_belowcomma
+const KeyDeadBelowcomma = 65134
+// KeyDeadBelowdiaeresis wraps GDK_KEY_dead_belowdiaeresis
+const KeyDeadBelowdiaeresis = 65132
+// KeyDeadBelowdot wraps GDK_KEY_dead_belowdot
+const KeyDeadBelowdot = 65120
+// KeyDeadBelowmacron wraps GDK_KEY_dead_belowmacron
+const KeyDeadBelowmacron = 65128
+// KeyDeadBelowring wraps GDK_KEY_dead_belowring
+const KeyDeadBelowring = 65127
+// KeyDeadBelowtilde wraps GDK_KEY_dead_belowtilde
+const KeyDeadBelowtilde = 65130
+// KeyDeadBelowverticalline wraps GDK_KEY_dead_belowverticalline
+const KeyDeadBelowverticalline = 65170
+// KeyDeadBreve wraps GDK_KEY_dead_breve
+const KeyDeadBreve = 65109
+// KeyDeadCapitalSchwa wraps GDK_KEY_dead_capital_schwa
+const KeyDeadCapitalSchwa = 65163
+// KeyDeadCaron wraps GDK_KEY_dead_caron
+const KeyDeadCaron = 65114
+// KeyDeadCedilla wraps GDK_KEY_dead_cedilla
+const KeyDeadCedilla = 65115
+// KeyDeadCircumflex wraps GDK_KEY_dead_circumflex
+const KeyDeadCircumflex = 65106
+// KeyDeadCurrency wraps GDK_KEY_dead_currency
+const KeyDeadCurrency = 65135
+// KeyDeadDasia wraps GDK_KEY_dead_dasia
+const KeyDeadDasia = 65125
+// KeyDeadDiaeresis wraps GDK_KEY_dead_diaeresis
+const KeyDeadDiaeresis = 65111
+// KeyDeadDoubleacute wraps GDK_KEY_dead_doubleacute
+const KeyDeadDoubleacute = 65113
+// KeyDeadDoublegrave wraps GDK_KEY_dead_doublegrave
+const KeyDeadDoublegrave = 65126
+// KeyDeadE wraps GDK_KEY_dead_e
+const KeyDeadE = 65154
+// KeyDeadGrave wraps GDK_KEY_dead_grave
+const KeyDeadGrave = 65104
+// KeyDeadGreek wraps GDK_KEY_dead_greek
+const KeyDeadGreek = 65164
+// KeyDeadHamza wraps GDK_KEY_dead_hamza
+const KeyDeadHamza = 65165
+// KeyDeadHook wraps GDK_KEY_dead_hook
+const KeyDeadHook = 65121
+// KeyDeadHorn wraps GDK_KEY_dead_horn
+const KeyDeadHorn = 65122
+// KeyDeadI wraps GDK_KEY_dead_i
+const KeyDeadI = 65156
+// KeyDeadInvertedbreve wraps GDK_KEY_dead_invertedbreve
+const KeyDeadInvertedbreve = 65133
+// KeyDeadIota wraps GDK_KEY_dead_iota
+const KeyDeadIota = 65117
+// KeyDeadLongsolidusoverlay wraps GDK_KEY_dead_longsolidusoverlay
+const KeyDeadLongsolidusoverlay = 65171
+// KeyDeadLowline wraps GDK_KEY_dead_lowline
+const KeyDeadLowline = 65168
+// KeyDeadMacron wraps GDK_KEY_dead_macron
+const KeyDeadMacron = 65108
+// KeyDeadO wraps GDK_KEY_dead_o
+const KeyDeadO = 65158
+// KeyDeadOgonek wraps GDK_KEY_dead_ogonek
+const KeyDeadOgonek = 65116
+// KeyDeadPerispomeni wraps GDK_KEY_dead_perispomeni
+const KeyDeadPerispomeni = 65107
+// KeyDeadPsili wraps GDK_KEY_dead_psili
+const KeyDeadPsili = 65124
+// KeyDeadSchwa wraps GDK_KEY_dead_schwa
+const KeyDeadSchwa = 65162
+// KeyDeadSemivoicedSound wraps GDK_KEY_dead_semivoiced_sound
+const KeyDeadSemivoicedSound = 65119
+// KeyDeadSmallSchwa wraps GDK_KEY_dead_small_schwa
+const KeyDeadSmallSchwa = 65162
+// KeyDeadStroke wraps GDK_KEY_dead_stroke
+const KeyDeadStroke = 65123
+// KeyDeadTilde wraps GDK_KEY_dead_tilde
+const KeyDeadTilde = 65107
+// KeyDeadU wraps GDK_KEY_dead_u
+const KeyDeadU = 65160
+// KeyDeadVoicedSound wraps GDK_KEY_dead_voiced_sound
+const KeyDeadVoicedSound = 65118
+// KeyDecimalpoint wraps GDK_KEY_decimalpoint
+const KeyDecimalpoint = 2749
+// KeyDegree wraps GDK_KEY_degree
+const KeyDegree = 176
+// KeyDiaeresis wraps GDK_KEY_diaeresis
+const KeyDiaeresis = 168
+// KeyDiamond wraps GDK_KEY_diamond
+const KeyDiamond = 2797
+// KeyDigitspace wraps GDK_KEY_digitspace
+const KeyDigitspace = 2725
+// KeyDintegral wraps GDK_KEY_dintegral
+const KeyDintegral = 16785964
+// KeyDivision wraps GDK_KEY_division
+const KeyDivision = 247
+// KeyDollar wraps GDK_KEY_dollar
+const KeyDollar = 36
+// KeyDoubbaselinedot wraps GDK_KEY_doubbaselinedot
+const KeyDoubbaselinedot = 2735
+// KeyDoubleacute wraps GDK_KEY_doubleacute
+const KeyDoubleacute = 445
+// KeyDoubledagger wraps GDK_KEY_doubledagger
+const KeyDoubledagger = 2802
+// KeyDoublelowquotemark wraps GDK_KEY_doublelowquotemark
+const KeyDoublelowquotemark = 2814
+// KeyDownarrow wraps GDK_KEY_downarrow
+const KeyDownarrow = 2302
+// KeyDowncaret wraps GDK_KEY_downcaret
+const KeyDowncaret = 2984
+// KeyDownshoe wraps GDK_KEY_downshoe
+const KeyDownshoe = 3030
+// KeyDownstile wraps GDK_KEY_downstile
+const KeyDownstile = 3012
+// KeyDowntack wraps GDK_KEY_downtack
+const KeyDowntack = 3010
+// KeyDstroke wraps GDK_KEY_dstroke
+const KeyDstroke = 496
+// KeyE wraps GDK_KEY_e
+const KeyE = 101
+// KeyEabovedot wraps GDK_KEY_eabovedot
+const KeyEabovedot = 1004
+// KeyEacute wraps GDK_KEY_eacute
+const KeyEacute = 233
+// KeyEbelowdot wraps GDK_KEY_ebelowdot
+const KeyEbelowdot = 16785081
+// KeyEcaron wraps GDK_KEY_ecaron
+const KeyEcaron = 492
+// KeyEcircumflex wraps GDK_KEY_ecircumflex
+const KeyEcircumflex = 234
+// KeyEcircumflexacute wraps GDK_KEY_ecircumflexacute
+const KeyEcircumflexacute = 16785087
+// KeyEcircumflexbelowdot wraps GDK_KEY_ecircumflexbelowdot
+const KeyEcircumflexbelowdot = 16785095
+// KeyEcircumflexgrave wraps GDK_KEY_ecircumflexgrave
+const KeyEcircumflexgrave = 16785089
+// KeyEcircumflexhook wraps GDK_KEY_ecircumflexhook
+const KeyEcircumflexhook = 16785091
+// KeyEcircumflextilde wraps GDK_KEY_ecircumflextilde
+const KeyEcircumflextilde = 16785093
+// KeyEdiaeresis wraps GDK_KEY_ediaeresis
+const KeyEdiaeresis = 235
+// KeyEgrave wraps GDK_KEY_egrave
+const KeyEgrave = 232
+// KeyEhook wraps GDK_KEY_ehook
+const KeyEhook = 16785083
+// KeyEightsubscript wraps GDK_KEY_eightsubscript
+const KeyEightsubscript = 16785544
+// KeyEightsuperior wraps GDK_KEY_eightsuperior
+const KeyEightsuperior = 16785528
+// KeyElementof wraps GDK_KEY_elementof
+const KeyElementof = 16785928
+// KeyEllipsis wraps GDK_KEY_ellipsis
+const KeyEllipsis = 2734
+// KeyEm3Space wraps GDK_KEY_em3space
+const KeyEm3Space = 2723
+// KeyEm4Space wraps GDK_KEY_em4space
+const KeyEm4Space = 2724
+// KeyEmacron wraps GDK_KEY_emacron
+const KeyEmacron = 954
+// KeyEmdash wraps GDK_KEY_emdash
+const KeyEmdash = 2729
+// KeyEmfilledcircle wraps GDK_KEY_emfilledcircle
+const KeyEmfilledcircle = 2782
+// KeyEmfilledrect wraps GDK_KEY_emfilledrect
+const KeyEmfilledrect = 2783
+// KeyEmopencircle wraps GDK_KEY_emopencircle
+const KeyEmopencircle = 2766
+// KeyEmopenrectangle wraps GDK_KEY_emopenrectangle
+const KeyEmopenrectangle = 2767
+// KeyEmptyset wraps GDK_KEY_emptyset
+const KeyEmptyset = 16785925
+// KeyEmspace wraps GDK_KEY_emspace
+const KeyEmspace = 2721
+// KeyEndash wraps GDK_KEY_endash
+const KeyEndash = 2730
+// KeyEnfilledcircbullet wraps GDK_KEY_enfilledcircbullet
+const KeyEnfilledcircbullet = 2790
+// KeyEnfilledsqbullet wraps GDK_KEY_enfilledsqbullet
+const KeyEnfilledsqbullet = 2791
+// KeyEng wraps GDK_KEY_eng
+const KeyEng = 959
+// KeyEnopencircbullet wraps GDK_KEY_enopencircbullet
+const KeyEnopencircbullet = 2784
+// KeyEnopensquarebullet wraps GDK_KEY_enopensquarebullet
+const KeyEnopensquarebullet = 2785
+// KeyEnspace wraps GDK_KEY_enspace
+const KeyEnspace = 2722
+// KeyEogonek wraps GDK_KEY_eogonek
+const KeyEogonek = 490
+// KeyEqual wraps GDK_KEY_equal
+const KeyEqual = 61
+// KeyEth wraps GDK_KEY_eth
+const KeyEth = 240
+// KeyEtilde wraps GDK_KEY_etilde
+const KeyEtilde = 16785085
+// KeyExclam wraps GDK_KEY_exclam
+const KeyExclam = 33
+// KeyExclamdown wraps GDK_KEY_exclamdown
+const KeyExclamdown = 161
+// KeyEzh wraps GDK_KEY_ezh
+const KeyEzh = 16777874
+// KeyF wraps GDK_KEY_f
+const KeyF = 102
+// KeyFabovedot wraps GDK_KEY_fabovedot
+const KeyFabovedot = 16784927
+// KeyFemalesymbol wraps GDK_KEY_femalesymbol
+const KeyFemalesymbol = 2808
+// KeyFf wraps GDK_KEY_ff
+const KeyFf = 2531
+// KeyFigdash wraps GDK_KEY_figdash
+const KeyFigdash = 2747
+// KeyFilledlefttribullet wraps GDK_KEY_filledlefttribullet
+const KeyFilledlefttribullet = 2780
+// KeyFilledrectbullet wraps GDK_KEY_filledrectbullet
+const KeyFilledrectbullet = 2779
+// KeyFilledrighttribullet wraps GDK_KEY_filledrighttribullet
+const KeyFilledrighttribullet = 2781
+// KeyFilledtribulletdown wraps GDK_KEY_filledtribulletdown
+const KeyFilledtribulletdown = 2793
+// KeyFilledtribulletup wraps GDK_KEY_filledtribulletup
+const KeyFilledtribulletup = 2792
+// KeyFiveeighths wraps GDK_KEY_fiveeighths
+const KeyFiveeighths = 2757
+// KeyFivesixths wraps GDK_KEY_fivesixths
+const KeyFivesixths = 2743
+// KeyFivesubscript wraps GDK_KEY_fivesubscript
+const KeyFivesubscript = 16785541
+// KeyFivesuperior wraps GDK_KEY_fivesuperior
+const KeyFivesuperior = 16785525
+// KeyFourfifths wraps GDK_KEY_fourfifths
+const KeyFourfifths = 2741
+// KeyFoursubscript wraps GDK_KEY_foursubscript
+const KeyFoursubscript = 16785540
+// KeyFoursuperior wraps GDK_KEY_foursuperior
+const KeyFoursuperior = 16785524
+// KeyFourthroot wraps GDK_KEY_fourthroot
+const KeyFourthroot = 16785948
+// KeyFunction wraps GDK_KEY_function
+const KeyFunction = 2294
+// KeyG wraps GDK_KEY_g
+const KeyG = 103
+// KeyGabovedot wraps GDK_KEY_gabovedot
+const KeyGabovedot = 757
+// KeyGbreve wraps GDK_KEY_gbreve
+const KeyGbreve = 699
+// KeyGcaron wraps GDK_KEY_gcaron
+const KeyGcaron = 16777703
+// KeyGcedilla wraps GDK_KEY_gcedilla
+const KeyGcedilla = 955
+// KeyGcircumflex wraps GDK_KEY_gcircumflex
+const KeyGcircumflex = 760
+// KeyGrave wraps GDK_KEY_grave
+const KeyGrave = 96
+// KeyGreater wraps GDK_KEY_greater
+const KeyGreater = 62
+// KeyGreaterthanequal wraps GDK_KEY_greaterthanequal
+const KeyGreaterthanequal = 2238
+// KeyGuillemetleft wraps GDK_KEY_guillemetleft
+const KeyGuillemetleft = 171
+// KeyGuillemetright wraps GDK_KEY_guillemetright
+const KeyGuillemetright = 187
+// KeyGuillemotleft wraps GDK_KEY_guillemotleft
+const KeyGuillemotleft = 171
+// KeyGuillemotright wraps GDK_KEY_guillemotright
+const KeyGuillemotright = 187
+// KeyH wraps GDK_KEY_h
+const KeyH = 104
+// KeyHairspace wraps GDK_KEY_hairspace
+const KeyHairspace = 2728
+// KeyHcircumflex wraps GDK_KEY_hcircumflex
+const KeyHcircumflex = 694
+// KeyHeart wraps GDK_KEY_heart
+const KeyHeart = 2798
+// KeyHebrewAleph wraps GDK_KEY_hebrew_aleph
+const KeyHebrewAleph = 3296
+// KeyHebrewAyin wraps GDK_KEY_hebrew_ayin
+const KeyHebrewAyin = 3314
+// KeyHebrewBet wraps GDK_KEY_hebrew_bet
+const KeyHebrewBet = 3297
+// KeyHebrewBeth wraps GDK_KEY_hebrew_beth
+const KeyHebrewBeth = 3297
+// KeyHebrewChet wraps GDK_KEY_hebrew_chet
+const KeyHebrewChet = 3303
+// KeyHebrewDalet wraps GDK_KEY_hebrew_dalet
+const KeyHebrewDalet = 3299
+// KeyHebrewDaleth wraps GDK_KEY_hebrew_daleth
+const KeyHebrewDaleth = 3299
+// KeyHebrewDoublelowline wraps GDK_KEY_hebrew_doublelowline
+const KeyHebrewDoublelowline = 3295
+// KeyHebrewFinalkaph wraps GDK_KEY_hebrew_finalkaph
+const KeyHebrewFinalkaph = 3306
+// KeyHebrewFinalmem wraps GDK_KEY_hebrew_finalmem
+const KeyHebrewFinalmem = 3309
+// KeyHebrewFinalnun wraps GDK_KEY_hebrew_finalnun
+const KeyHebrewFinalnun = 3311
+// KeyHebrewFinalpe wraps GDK_KEY_hebrew_finalpe
+const KeyHebrewFinalpe = 3315
+// KeyHebrewFinalzade wraps GDK_KEY_hebrew_finalzade
+const KeyHebrewFinalzade = 3317
+// KeyHebrewFinalzadi wraps GDK_KEY_hebrew_finalzadi
+const KeyHebrewFinalzadi = 3317
+// KeyHebrewGimel wraps GDK_KEY_hebrew_gimel
+const KeyHebrewGimel = 3298
+// KeyHebrewGimmel wraps GDK_KEY_hebrew_gimmel
+const KeyHebrewGimmel = 3298
+// KeyHebrewHe wraps GDK_KEY_hebrew_he
+const KeyHebrewHe = 3300
+// KeyHebrewHet wraps GDK_KEY_hebrew_het
+const KeyHebrewHet = 3303
+// KeyHebrewKaph wraps GDK_KEY_hebrew_kaph
+const KeyHebrewKaph = 3307
+// KeyHebrewKuf wraps GDK_KEY_hebrew_kuf
+const KeyHebrewKuf = 3319
+// KeyHebrewLamed wraps GDK_KEY_hebrew_lamed
+const KeyHebrewLamed = 3308
+// KeyHebrewMem wraps GDK_KEY_hebrew_mem
+const KeyHebrewMem = 3310
+// KeyHebrewNun wraps GDK_KEY_hebrew_nun
+const KeyHebrewNun = 3312
+// KeyHebrewPe wraps GDK_KEY_hebrew_pe
+const KeyHebrewPe = 3316
+// KeyHebrewQoph wraps GDK_KEY_hebrew_qoph
+const KeyHebrewQoph = 3319
+// KeyHebrewResh wraps GDK_KEY_hebrew_resh
+const KeyHebrewResh = 3320
+// KeyHebrewSamech wraps GDK_KEY_hebrew_samech
+const KeyHebrewSamech = 3313
+// KeyHebrewSamekh wraps GDK_KEY_hebrew_samekh
+const KeyHebrewSamekh = 3313
+// KeyHebrewShin wraps GDK_KEY_hebrew_shin
+const KeyHebrewShin = 3321
+// KeyHebrewTaf wraps GDK_KEY_hebrew_taf
+const KeyHebrewTaf = 3322
+// KeyHebrewTaw wraps GDK_KEY_hebrew_taw
+const KeyHebrewTaw = 3322
+// KeyHebrewTet wraps GDK_KEY_hebrew_tet
+const KeyHebrewTet = 3304
+// KeyHebrewTeth wraps GDK_KEY_hebrew_teth
+const KeyHebrewTeth = 3304
+// KeyHebrewWaw wraps GDK_KEY_hebrew_waw
+const KeyHebrewWaw = 3301
+// KeyHebrewYod wraps GDK_KEY_hebrew_yod
+const KeyHebrewYod = 3305
+// KeyHebrewZade wraps GDK_KEY_hebrew_zade
+const KeyHebrewZade = 3318
+// KeyHebrewZadi wraps GDK_KEY_hebrew_zadi
+const KeyHebrewZadi = 3318
+// KeyHebrewZain wraps GDK_KEY_hebrew_zain
+const KeyHebrewZain = 3302
+// KeyHebrewZayin wraps GDK_KEY_hebrew_zayin
+const KeyHebrewZayin = 3302
+// KeyHexagram wraps GDK_KEY_hexagram
+const KeyHexagram = 2778
+// KeyHorizconnector wraps GDK_KEY_horizconnector
+const KeyHorizconnector = 2211
+// KeyHorizlinescan1 wraps GDK_KEY_horizlinescan1
+const KeyHorizlinescan1 = 2543
+// KeyHorizlinescan3 wraps GDK_KEY_horizlinescan3
+const KeyHorizlinescan3 = 2544
+// KeyHorizlinescan5 wraps GDK_KEY_horizlinescan5
+const KeyHorizlinescan5 = 2545
+// KeyHorizlinescan7 wraps GDK_KEY_horizlinescan7
+const KeyHorizlinescan7 = 2546
+// KeyHorizlinescan9 wraps GDK_KEY_horizlinescan9
+const KeyHorizlinescan9 = 2547
+// KeyHstroke wraps GDK_KEY_hstroke
+const KeyHstroke = 689
+// KeyHt wraps GDK_KEY_ht
+const KeyHt = 2530
+// KeyHyphen wraps GDK_KEY_hyphen
+const KeyHyphen = 173
+// KeyI wraps GDK_KEY_i
+const KeyI = 105
+// KeyItouch wraps GDK_KEY_iTouch
+const KeyItouch = 269025120
+// KeyIacute wraps GDK_KEY_iacute
+const KeyIacute = 237
+// KeyIbelowdot wraps GDK_KEY_ibelowdot
+const KeyIbelowdot = 16785099
+// KeyIbreve wraps GDK_KEY_ibreve
+const KeyIbreve = 16777517
+// KeyIcircumflex wraps GDK_KEY_icircumflex
+const KeyIcircumflex = 238
+// KeyIdentical wraps GDK_KEY_identical
+const KeyIdentical = 2255
+// KeyIdiaeresis wraps GDK_KEY_idiaeresis
+const KeyIdiaeresis = 239
+// KeyIdotless wraps GDK_KEY_idotless
+const KeyIdotless = 697
+// KeyIfonlyif wraps GDK_KEY_ifonlyif
+const KeyIfonlyif = 2253
+// KeyIgrave wraps GDK_KEY_igrave
+const KeyIgrave = 236
+// KeyIhook wraps GDK_KEY_ihook
+const KeyIhook = 16785097
+// KeyImacron wraps GDK_KEY_imacron
+const KeyImacron = 1007
+// KeyImplies wraps GDK_KEY_implies
+const KeyImplies = 2254
+// KeyIncludedin wraps GDK_KEY_includedin
+const KeyIncludedin = 2266
+// KeyIncludes wraps GDK_KEY_includes
+const KeyIncludes = 2267
+// KeyInfinity wraps GDK_KEY_infinity
+const KeyInfinity = 2242
+// KeyIntegral wraps GDK_KEY_integral
+const KeyIntegral = 2239
+// KeyIntersection wraps GDK_KEY_intersection
+const KeyIntersection = 2268
+// KeyIogonek wraps GDK_KEY_iogonek
+const KeyIogonek = 999
+// KeyItilde wraps GDK_KEY_itilde
+const KeyItilde = 949
+// KeyJ wraps GDK_KEY_j
+const KeyJ = 106
+// KeyJcircumflex wraps GDK_KEY_jcircumflex
+const KeyJcircumflex = 700
+// KeyJot wraps GDK_KEY_jot
+const KeyJot = 3018
+// KeyK wraps GDK_KEY_k
+const KeyK = 107
+// KeyKanaA wraps GDK_KEY_kana_A
+const KeyKanaA = 1201
+// KeyKanaChi wraps GDK_KEY_kana_CHI
+const KeyKanaChi = 1217
+// KeyKanaE wraps GDK_KEY_kana_E
+const KeyKanaE = 1204
+// KeyKanaFu wraps GDK_KEY_kana_FU
+const KeyKanaFu = 1228
+// KeyKanaHa wraps GDK_KEY_kana_HA
+const KeyKanaHa = 1226
+// KeyKanaHe wraps GDK_KEY_kana_HE
+const KeyKanaHe = 1229
+// KeyKanaHi wraps GDK_KEY_kana_HI
+const KeyKanaHi = 1227
+// KeyKanaHo wraps GDK_KEY_kana_HO
+const KeyKanaHo = 1230
+// KeyKanaHu wraps GDK_KEY_kana_HU
+const KeyKanaHu = 1228
+// KeyKanaI wraps GDK_KEY_kana_I
+const KeyKanaI = 1202
+// KeyKanaKa wraps GDK_KEY_kana_KA
+const KeyKanaKa = 1206
+// KeyKanaKe wraps GDK_KEY_kana_KE
+const KeyKanaKe = 1209
+// KeyKanaKi wraps GDK_KEY_kana_KI
+const KeyKanaKi = 1207
+// KeyKanaKo wraps GDK_KEY_kana_KO
+const KeyKanaKo = 1210
+// KeyKanaKu wraps GDK_KEY_kana_KU
+const KeyKanaKu = 1208
+// KeyKanaMa wraps GDK_KEY_kana_MA
+const KeyKanaMa = 1231
+// KeyKanaMe wraps GDK_KEY_kana_ME
+const KeyKanaMe = 1234
+// KeyKanaMi wraps GDK_KEY_kana_MI
+const KeyKanaMi = 1232
+// KeyKanaMo wraps GDK_KEY_kana_MO
+const KeyKanaMo = 1235
+// KeyKanaMu wraps GDK_KEY_kana_MU
+const KeyKanaMu = 1233
+// KeyKanaN wraps GDK_KEY_kana_N
+const KeyKanaN = 1245
+// KeyKanaNa wraps GDK_KEY_kana_NA
+const KeyKanaNa = 1221
+// KeyKanaNe wraps GDK_KEY_kana_NE
+const KeyKanaNe = 1224
+// KeyKanaNi wraps GDK_KEY_kana_NI
+const KeyKanaNi = 1222
+// KeyKanaNo wraps GDK_KEY_kana_NO
+const KeyKanaNo = 1225
+// KeyKanaNu wraps GDK_KEY_kana_NU
+const KeyKanaNu = 1223
+// KeyKanaO wraps GDK_KEY_kana_O
+const KeyKanaO = 1205
+// KeyKanaRa wraps GDK_KEY_kana_RA
+const KeyKanaRa = 1239
+// KeyKanaRe wraps GDK_KEY_kana_RE
+const KeyKanaRe = 1242
+// KeyKanaRi wraps GDK_KEY_kana_RI
+const KeyKanaRi = 1240
+// KeyKanaRo wraps GDK_KEY_kana_RO
+const KeyKanaRo = 1243
+// KeyKanaRu wraps GDK_KEY_kana_RU
+const KeyKanaRu = 1241
+// KeyKanaSa wraps GDK_KEY_kana_SA
+const KeyKanaSa = 1211
+// KeyKanaSe wraps GDK_KEY_kana_SE
+const KeyKanaSe = 1214
+// KeyKanaShi wraps GDK_KEY_kana_SHI
+const KeyKanaShi = 1212
+// KeyKanaSo wraps GDK_KEY_kana_SO
+const KeyKanaSo = 1215
+// KeyKanaSu wraps GDK_KEY_kana_SU
+const KeyKanaSu = 1213
+// KeyKanaTa wraps GDK_KEY_kana_TA
+const KeyKanaTa = 1216
+// KeyKanaTe wraps GDK_KEY_kana_TE
+const KeyKanaTe = 1219
+// KeyKanaTi wraps GDK_KEY_kana_TI
+const KeyKanaTi = 1217
+// KeyKanaTo wraps GDK_KEY_kana_TO
+const KeyKanaTo = 1220
+// KeyKanaTsu wraps GDK_KEY_kana_TSU
+const KeyKanaTsu = 1218
+// KeyKanaTu wraps GDK_KEY_kana_TU
+const KeyKanaTu = 1218
+// KeyKanaU wraps GDK_KEY_kana_U
+const KeyKanaU = 1203
+// KeyKanaWa wraps GDK_KEY_kana_WA
+const KeyKanaWa = 1244
+// KeyKanaWo wraps GDK_KEY_kana_WO
+const KeyKanaWo = 1190
+// KeyKanaYa wraps GDK_KEY_kana_YA
+const KeyKanaYa = 1236
+// KeyKanaYo wraps GDK_KEY_kana_YO
+const KeyKanaYo = 1238
+// KeyKanaYu wraps GDK_KEY_kana_YU
+const KeyKanaYu = 1237
+// KeyKanaA wraps GDK_KEY_kana_a
+const KeyKanaA = 1191
+// KeyKanaClosingbracket wraps GDK_KEY_kana_closingbracket
+const KeyKanaClosingbracket = 1187
+// KeyKanaComma wraps GDK_KEY_kana_comma
+const KeyKanaComma = 1188
+// KeyKanaConjunctive wraps GDK_KEY_kana_conjunctive
+const KeyKanaConjunctive = 1189
+// KeyKanaE wraps GDK_KEY_kana_e
+const KeyKanaE = 1194
+// KeyKanaFullstop wraps GDK_KEY_kana_fullstop
+const KeyKanaFullstop = 1185
+// KeyKanaI wraps GDK_KEY_kana_i
+const KeyKanaI = 1192
+// KeyKanaMiddledot wraps GDK_KEY_kana_middledot
+const KeyKanaMiddledot = 1189
+// KeyKanaO wraps GDK_KEY_kana_o
+const KeyKanaO = 1195
+// KeyKanaOpeningbracket wraps GDK_KEY_kana_openingbracket
+const KeyKanaOpeningbracket = 1186
+// KeyKanaSwitch wraps GDK_KEY_kana_switch
+const KeyKanaSwitch = 65406
+// KeyKanaTsu wraps GDK_KEY_kana_tsu
+const KeyKanaTsu = 1199
+// KeyKanaTu wraps GDK_KEY_kana_tu
+const KeyKanaTu = 1199
+// KeyKanaU wraps GDK_KEY_kana_u
+const KeyKanaU = 1193
+// KeyKanaYa wraps GDK_KEY_kana_ya
+const KeyKanaYa = 1196
+// KeyKanaYo wraps GDK_KEY_kana_yo
+const KeyKanaYo = 1198
+// KeyKanaYu wraps GDK_KEY_kana_yu
+const KeyKanaYu = 1197
+// KeyKappa wraps GDK_KEY_kappa
+const KeyKappa = 930
+// KeyKcedilla wraps GDK_KEY_kcedilla
+const KeyKcedilla = 1011
+// KeyKra wraps GDK_KEY_kra
+const KeyKra = 930
+// KeyL wraps GDK_KEY_l
+const KeyL = 108
+// KeyLacute wraps GDK_KEY_lacute
+const KeyLacute = 485
+// KeyLatincross wraps GDK_KEY_latincross
+const KeyLatincross = 2777
+// KeyLbelowdot wraps GDK_KEY_lbelowdot
+const KeyLbelowdot = 16784951
+// KeyLcaron wraps GDK_KEY_lcaron
+const KeyLcaron = 437
+// KeyLcedilla wraps GDK_KEY_lcedilla
+const KeyLcedilla = 950
+// KeyLeftanglebracket wraps GDK_KEY_leftanglebracket
+const KeyLeftanglebracket = 2748
+// KeyLeftarrow wraps GDK_KEY_leftarrow
+const KeyLeftarrow = 2299
+// KeyLeftcaret wraps GDK_KEY_leftcaret
+const KeyLeftcaret = 2979
+// KeyLeftdoublequotemark wraps GDK_KEY_leftdoublequotemark
+const KeyLeftdoublequotemark = 2770
+// KeyLeftmiddlecurlybrace wraps GDK_KEY_leftmiddlecurlybrace
+const KeyLeftmiddlecurlybrace = 2223
+// KeyLeftopentriangle wraps GDK_KEY_leftopentriangle
+const KeyLeftopentriangle = 2764
+// KeyLeftpointer wraps GDK_KEY_leftpointer
+const KeyLeftpointer = 2794
+// KeyLeftradical wraps GDK_KEY_leftradical
+const KeyLeftradical = 2209
+// KeyLeftshoe wraps GDK_KEY_leftshoe
+const KeyLeftshoe = 3034
+// KeyLeftsinglequotemark wraps GDK_KEY_leftsinglequotemark
+const KeyLeftsinglequotemark = 2768
+// KeyLeftt wraps GDK_KEY_leftt
+const KeyLeftt = 2548
+// KeyLefttack wraps GDK_KEY_lefttack
+const KeyLefttack = 3036
+// KeyLess wraps GDK_KEY_less
+const KeyLess = 60
+// KeyLessthanequal wraps GDK_KEY_lessthanequal
+const KeyLessthanequal = 2236
+// KeyLf wraps GDK_KEY_lf
+const KeyLf = 2533
+// KeyLogicaland wraps GDK_KEY_logicaland
+const KeyLogicaland = 2270
+// KeyLogicalor wraps GDK_KEY_logicalor
+const KeyLogicalor = 2271
+// KeyLowleftcorner wraps GDK_KEY_lowleftcorner
+const KeyLowleftcorner = 2541
+// KeyLowrightcorner wraps GDK_KEY_lowrightcorner
+const KeyLowrightcorner = 2538
+// KeyLstroke wraps GDK_KEY_lstroke
+const KeyLstroke = 435
+// KeyM wraps GDK_KEY_m
+const KeyM = 109
+// KeyMabovedot wraps GDK_KEY_mabovedot
+const KeyMabovedot = 16784961
+// KeyMacron wraps GDK_KEY_macron
+const KeyMacron = 175
+// KeyMalesymbol wraps GDK_KEY_malesymbol
+const KeyMalesymbol = 2807
+// KeyMaltesecross wraps GDK_KEY_maltesecross
+const KeyMaltesecross = 2800
+// KeyMarker wraps GDK_KEY_marker
+const KeyMarker = 2751
+// KeyMasculine wraps GDK_KEY_masculine
+const KeyMasculine = 186
+// KeyMinus wraps GDK_KEY_minus
+const KeyMinus = 45
+// KeyMinutes wraps GDK_KEY_minutes
+const KeyMinutes = 2774
+// KeyMu wraps GDK_KEY_mu
+const KeyMu = 181
+// KeyMultiply wraps GDK_KEY_multiply
+const KeyMultiply = 215
+// KeyMusicalflat wraps GDK_KEY_musicalflat
+const KeyMusicalflat = 2806
+// KeyMusicalsharp wraps GDK_KEY_musicalsharp
+const KeyMusicalsharp = 2805
+// KeyN wraps GDK_KEY_n
+const KeyN = 110
+// KeyNabla wraps GDK_KEY_nabla
+const KeyNabla = 2245
+// KeyNacute wraps GDK_KEY_nacute
+const KeyNacute = 497
+// KeyNcaron wraps GDK_KEY_ncaron
+const KeyNcaron = 498
+// KeyNcedilla wraps GDK_KEY_ncedilla
+const KeyNcedilla = 1009
+// KeyNinesubscript wraps GDK_KEY_ninesubscript
+const KeyNinesubscript = 16785545
+// KeyNinesuperior wraps GDK_KEY_ninesuperior
+const KeyNinesuperior = 16785529
+// KeyNl wraps GDK_KEY_nl
+const KeyNl = 2536
+// KeyNobreakspace wraps GDK_KEY_nobreakspace
+const KeyNobreakspace = 160
+// KeyNotapproxeq wraps GDK_KEY_notapproxeq
+const KeyNotapproxeq = 16785991
+// KeyNotelementof wraps GDK_KEY_notelementof
+const KeyNotelementof = 16785929
+// KeyNotequal wraps GDK_KEY_notequal
+const KeyNotequal = 2237
+// KeyNotidentical wraps GDK_KEY_notidentical
+const KeyNotidentical = 16786018
+// KeyNotsign wraps GDK_KEY_notsign
+const KeyNotsign = 172
+// KeyNtilde wraps GDK_KEY_ntilde
+const KeyNtilde = 241
+// KeyNumbersign wraps GDK_KEY_numbersign
+const KeyNumbersign = 35
+// KeyNumerosign wraps GDK_KEY_numerosign
+const KeyNumerosign = 1712
+// KeyO wraps GDK_KEY_o
+const KeyO = 111
+// KeyOacute wraps GDK_KEY_oacute
+const KeyOacute = 243
+// KeyObarred wraps GDK_KEY_obarred
+const KeyObarred = 16777845
+// KeyObelowdot wraps GDK_KEY_obelowdot
+const KeyObelowdot = 16785101
+// KeyOcaron wraps GDK_KEY_ocaron
+const KeyOcaron = 16777682
+// KeyOcircumflex wraps GDK_KEY_ocircumflex
+const KeyOcircumflex = 244
+// KeyOcircumflexacute wraps GDK_KEY_ocircumflexacute
+const KeyOcircumflexacute = 16785105
+// KeyOcircumflexbelowdot wraps GDK_KEY_ocircumflexbelowdot
+const KeyOcircumflexbelowdot = 16785113
+// KeyOcircumflexgrave wraps GDK_KEY_ocircumflexgrave
+const KeyOcircumflexgrave = 16785107
+// KeyOcircumflexhook wraps GDK_KEY_ocircumflexhook
+const KeyOcircumflexhook = 16785109
+// KeyOcircumflextilde wraps GDK_KEY_ocircumflextilde
+const KeyOcircumflextilde = 16785111
+// KeyOdiaeresis wraps GDK_KEY_odiaeresis
+const KeyOdiaeresis = 246
+// KeyOdoubleacute wraps GDK_KEY_odoubleacute
+const KeyOdoubleacute = 501
+// KeyOe wraps GDK_KEY_oe
+const KeyOe = 5053
+// KeyOgonek wraps GDK_KEY_ogonek
+const KeyOgonek = 434
+// KeyOgrave wraps GDK_KEY_ograve
+const KeyOgrave = 242
+// KeyOhook wraps GDK_KEY_ohook
+const KeyOhook = 16785103
+// KeyOhorn wraps GDK_KEY_ohorn
+const KeyOhorn = 16777633
+// KeyOhornacute wraps GDK_KEY_ohornacute
+const KeyOhornacute = 16785115
+// KeyOhornbelowdot wraps GDK_KEY_ohornbelowdot
+const KeyOhornbelowdot = 16785123
+// KeyOhorngrave wraps GDK_KEY_ohorngrave
+const KeyOhorngrave = 16785117
+// KeyOhornhook wraps GDK_KEY_ohornhook
+const KeyOhornhook = 16785119
+// KeyOhorntilde wraps GDK_KEY_ohorntilde
+const KeyOhorntilde = 16785121
+// KeyOmacron wraps GDK_KEY_omacron
+const KeyOmacron = 1010
+// KeyOneeighth wraps GDK_KEY_oneeighth
+const KeyOneeighth = 2755
+// KeyOnefifth wraps GDK_KEY_onefifth
+const KeyOnefifth = 2738
+// KeyOnehalf wraps GDK_KEY_onehalf
+const KeyOnehalf = 189
+// KeyOnequarter wraps GDK_KEY_onequarter
+const KeyOnequarter = 188
+// KeyOnesixth wraps GDK_KEY_onesixth
+const KeyOnesixth = 2742
+// KeyOnesubscript wraps GDK_KEY_onesubscript
+const KeyOnesubscript = 16785537
+// KeyOnesuperior wraps GDK_KEY_onesuperior
+const KeyOnesuperior = 185
+// KeyOnethird wraps GDK_KEY_onethird
+const KeyOnethird = 2736
+// KeyOoblique wraps GDK_KEY_ooblique
+const KeyOoblique = 248
+// KeyOpenrectbullet wraps GDK_KEY_openrectbullet
+const KeyOpenrectbullet = 2786
+// KeyOpenstar wraps GDK_KEY_openstar
+const KeyOpenstar = 2789
+// KeyOpentribulletdown wraps GDK_KEY_opentribulletdown
+const KeyOpentribulletdown = 2788
+// KeyOpentribulletup wraps GDK_KEY_opentribulletup
+const KeyOpentribulletup = 2787
+// KeyOrdfeminine wraps GDK_KEY_ordfeminine
+const KeyOrdfeminine = 170
+// KeyOrdmasculine wraps GDK_KEY_ordmasculine
+const KeyOrdmasculine = 186
+// KeyOslash wraps GDK_KEY_oslash
+const KeyOslash = 248
+// KeyOtilde wraps GDK_KEY_otilde
+const KeyOtilde = 245
+// KeyOverbar wraps GDK_KEY_overbar
+const KeyOverbar = 3008
+// KeyOverline wraps GDK_KEY_overline
+const KeyOverline = 1150
+// KeyP wraps GDK_KEY_p
+const KeyP = 112
+// KeyPabovedot wraps GDK_KEY_pabovedot
+const KeyPabovedot = 16784983
+// KeyParagraph wraps GDK_KEY_paragraph
+const KeyParagraph = 182
+// KeyParenleft wraps GDK_KEY_parenleft
+const KeyParenleft = 40
+// KeyParenright wraps GDK_KEY_parenright
+const KeyParenright = 41
+// KeyPartdifferential wraps GDK_KEY_partdifferential
+const KeyPartdifferential = 16785922
+// KeyPartialderivative wraps GDK_KEY_partialderivative
+const KeyPartialderivative = 2287
+// KeyPercent wraps GDK_KEY_percent
+const KeyPercent = 37
+// KeyPeriod wraps GDK_KEY_period
+const KeyPeriod = 46
+// KeyPeriodcentered wraps GDK_KEY_periodcentered
+const KeyPeriodcentered = 183
+// KeyPermille wraps GDK_KEY_permille
+const KeyPermille = 2773
+// KeyPhonographcopyright wraps GDK_KEY_phonographcopyright
+const KeyPhonographcopyright = 2811
+// KeyPlus wraps GDK_KEY_plus
+const KeyPlus = 43
+// KeyPlusminus wraps GDK_KEY_plusminus
+const KeyPlusminus = 177
+// KeyPrescription wraps GDK_KEY_prescription
+const KeyPrescription = 2772
+// KeyProlongedsound wraps GDK_KEY_prolongedsound
+const KeyProlongedsound = 1200
+// KeyPunctspace wraps GDK_KEY_punctspace
+const KeyPunctspace = 2726
+// KeyQ wraps GDK_KEY_q
+const KeyQ = 113
+// KeyQuad wraps GDK_KEY_quad
+const KeyQuad = 3020
+// KeyQuestion wraps GDK_KEY_question
+const KeyQuestion = 63
+// KeyQuestiondown wraps GDK_KEY_questiondown
+const KeyQuestiondown = 191
+// KeyQuotedbl wraps GDK_KEY_quotedbl
+const KeyQuotedbl = 34
+// KeyQuoteleft wraps GDK_KEY_quoteleft
+const KeyQuoteleft = 96
+// KeyQuoteright wraps GDK_KEY_quoteright
+const KeyQuoteright = 39
+// KeyR wraps GDK_KEY_r
+const KeyR = 114
+// KeyRacute wraps GDK_KEY_racute
+const KeyRacute = 480
+// KeyRadical wraps GDK_KEY_radical
+const KeyRadical = 2262
+// KeyRcaron wraps GDK_KEY_rcaron
+const KeyRcaron = 504
+// KeyRcedilla wraps GDK_KEY_rcedilla
+const KeyRcedilla = 947
+// KeyRegistered wraps GDK_KEY_registered
+const KeyRegistered = 174
+// KeyRightanglebracket wraps GDK_KEY_rightanglebracket
+const KeyRightanglebracket = 2750
+// KeyRightarrow wraps GDK_KEY_rightarrow
+const KeyRightarrow = 2301
+// KeyRightcaret wraps GDK_KEY_rightcaret
+const KeyRightcaret = 2982
+// KeyRightdoublequotemark wraps GDK_KEY_rightdoublequotemark
+const KeyRightdoublequotemark = 2771
+// KeyRightmiddlecurlybrace wraps GDK_KEY_rightmiddlecurlybrace
+const KeyRightmiddlecurlybrace = 2224
+// KeyRightmiddlesummation wraps GDK_KEY_rightmiddlesummation
+const KeyRightmiddlesummation = 2231
+// KeyRightopentriangle wraps GDK_KEY_rightopentriangle
+const KeyRightopentriangle = 2765
+// KeyRightpointer wraps GDK_KEY_rightpointer
+const KeyRightpointer = 2795
+// KeyRightshoe wraps GDK_KEY_rightshoe
+const KeyRightshoe = 3032
+// KeyRightsinglequotemark wraps GDK_KEY_rightsinglequotemark
+const KeyRightsinglequotemark = 2769
+// KeyRightt wraps GDK_KEY_rightt
+const KeyRightt = 2549
+// KeyRighttack wraps GDK_KEY_righttack
+const KeyRighttack = 3068
+// KeyS wraps GDK_KEY_s
+const KeyS = 115
+// KeySabovedot wraps GDK_KEY_sabovedot
+const KeySabovedot = 16784993
+// KeySacute wraps GDK_KEY_sacute
+const KeySacute = 438
+// KeyScaron wraps GDK_KEY_scaron
+const KeyScaron = 441
+// KeyScedilla wraps GDK_KEY_scedilla
+const KeyScedilla = 442
+// KeySchwa wraps GDK_KEY_schwa
+const KeySchwa = 16777817
+// KeyScircumflex wraps GDK_KEY_scircumflex
+const KeyScircumflex = 766
+// KeyScriptSwitch wraps GDK_KEY_script_switch
+const KeyScriptSwitch = 65406
+// KeySeconds wraps GDK_KEY_seconds
+const KeySeconds = 2775
+// KeySection wraps GDK_KEY_section
+const KeySection = 167
+// KeySemicolon wraps GDK_KEY_semicolon
+const KeySemicolon = 59
+// KeySemivoicedsound wraps GDK_KEY_semivoicedsound
+const KeySemivoicedsound = 1247
+// KeySeveneighths wraps GDK_KEY_seveneighths
+const KeySeveneighths = 2758
+// KeySevensubscript wraps GDK_KEY_sevensubscript
+const KeySevensubscript = 16785543
+// KeySevensuperior wraps GDK_KEY_sevensuperior
+const KeySevensuperior = 16785527
+// KeySignaturemark wraps GDK_KEY_signaturemark
+const KeySignaturemark = 2762
+// KeySignifblank wraps GDK_KEY_signifblank
+const KeySignifblank = 2732
+// KeySimilarequal wraps GDK_KEY_similarequal
+const KeySimilarequal = 2249
+// KeySinglelowquotemark wraps GDK_KEY_singlelowquotemark
+const KeySinglelowquotemark = 2813
+// KeySixsubscript wraps GDK_KEY_sixsubscript
+const KeySixsubscript = 16785542
+// KeySixsuperior wraps GDK_KEY_sixsuperior
+const KeySixsuperior = 16785526
+// KeySlash wraps GDK_KEY_slash
+const KeySlash = 47
+// KeySoliddiamond wraps GDK_KEY_soliddiamond
+const KeySoliddiamond = 2528
+// KeySpace wraps GDK_KEY_space
+const KeySpace = 32
+// KeySquareroot wraps GDK_KEY_squareroot
+const KeySquareroot = 16785946
+// KeySsharp wraps GDK_KEY_ssharp
+const KeySsharp = 223
+// KeySterling wraps GDK_KEY_sterling
+const KeySterling = 163
+// KeyStricteq wraps GDK_KEY_stricteq
+const KeyStricteq = 16786019
+// KeyT wraps GDK_KEY_t
+const KeyT = 116
+// KeyTabovedot wraps GDK_KEY_tabovedot
+const KeyTabovedot = 16785003
+// KeyTcaron wraps GDK_KEY_tcaron
+const KeyTcaron = 443
+// KeyTcedilla wraps GDK_KEY_tcedilla
+const KeyTcedilla = 510
+// KeyTelephone wraps GDK_KEY_telephone
+const KeyTelephone = 2809
+// KeyTelephonerecorder wraps GDK_KEY_telephonerecorder
+const KeyTelephonerecorder = 2810
+// KeyTherefore wraps GDK_KEY_therefore
+const KeyTherefore = 2240
+// KeyThinspace wraps GDK_KEY_thinspace
+const KeyThinspace = 2727
+// KeyThorn wraps GDK_KEY_thorn
+const KeyThorn = 254
+// KeyThreeeighths wraps GDK_KEY_threeeighths
+const KeyThreeeighths = 2756
+// KeyThreefifths wraps GDK_KEY_threefifths
+const KeyThreefifths = 2740
+// KeyThreequarters wraps GDK_KEY_threequarters
+const KeyThreequarters = 190
+// KeyThreesubscript wraps GDK_KEY_threesubscript
+const KeyThreesubscript = 16785539
+// KeyThreesuperior wraps GDK_KEY_threesuperior
+const KeyThreesuperior = 179
+// KeyTintegral wraps GDK_KEY_tintegral
+const KeyTintegral = 16785965
+// KeyTopintegral wraps GDK_KEY_topintegral
+const KeyTopintegral = 2212
+// KeyTopleftparens wraps GDK_KEY_topleftparens
+const KeyTopleftparens = 2219
+// KeyTopleftradical wraps GDK_KEY_topleftradical
+const KeyTopleftradical = 2210
+// KeyTopleftsqbracket wraps GDK_KEY_topleftsqbracket
+const KeyTopleftsqbracket = 2215
+// KeyTopleftsummation wraps GDK_KEY_topleftsummation
+const KeyTopleftsummation = 2225
+// KeyToprightparens wraps GDK_KEY_toprightparens
+const KeyToprightparens = 2221
+// KeyToprightsqbracket wraps GDK_KEY_toprightsqbracket
+const KeyToprightsqbracket = 2217
+// KeyToprightsummation wraps GDK_KEY_toprightsummation
+const KeyToprightsummation = 2229
+// KeyTopt wraps GDK_KEY_topt
+const KeyTopt = 2551
+// KeyTopvertsummationconnector wraps GDK_KEY_topvertsummationconnector
+const KeyTopvertsummationconnector = 2227
+// KeyTrademark wraps GDK_KEY_trademark
+const KeyTrademark = 2761
+// KeyTrademarkincircle wraps GDK_KEY_trademarkincircle
+const KeyTrademarkincircle = 2763
+// KeyTslash wraps GDK_KEY_tslash
+const KeyTslash = 956
+// KeyTwofifths wraps GDK_KEY_twofifths
+const KeyTwofifths = 2739
+// KeyTwosubscript wraps GDK_KEY_twosubscript
+const KeyTwosubscript = 16785538
+// KeyTwosuperior wraps GDK_KEY_twosuperior
+const KeyTwosuperior = 178
+// KeyTwothirds wraps GDK_KEY_twothirds
+const KeyTwothirds = 2737
+// KeyU wraps GDK_KEY_u
+const KeyU = 117
+// KeyUacute wraps GDK_KEY_uacute
+const KeyUacute = 250
+// KeyUbelowdot wraps GDK_KEY_ubelowdot
+const KeyUbelowdot = 16785125
+// KeyUbreve wraps GDK_KEY_ubreve
+const KeyUbreve = 765
+// KeyUcircumflex wraps GDK_KEY_ucircumflex
+const KeyUcircumflex = 251
+// KeyUdiaeresis wraps GDK_KEY_udiaeresis
+const KeyUdiaeresis = 252
+// KeyUdoubleacute wraps GDK_KEY_udoubleacute
+const KeyUdoubleacute = 507
+// KeyUgrave wraps GDK_KEY_ugrave
+const KeyUgrave = 249
+// KeyUhook wraps GDK_KEY_uhook
+const KeyUhook = 16785127
+// KeyUhorn wraps GDK_KEY_uhorn
+const KeyUhorn = 16777648
+// KeyUhornacute wraps GDK_KEY_uhornacute
+const KeyUhornacute = 16785129
+// KeyUhornbelowdot wraps GDK_KEY_uhornbelowdot
+const KeyUhornbelowdot = 16785137
+// KeyUhorngrave wraps GDK_KEY_uhorngrave
+const KeyUhorngrave = 16785131
+// KeyUhornhook wraps GDK_KEY_uhornhook
+const KeyUhornhook = 16785133
+// KeyUhorntilde wraps GDK_KEY_uhorntilde
+const KeyUhorntilde = 16785135
+// KeyUmacron wraps GDK_KEY_umacron
+const KeyUmacron = 1022
+// KeyUnderbar wraps GDK_KEY_underbar
+const KeyUnderbar = 3014
+// KeyUnderscore wraps GDK_KEY_underscore
+const KeyUnderscore = 95
+// KeyUnion wraps GDK_KEY_union
+const KeyUnion = 2269
+// KeyUogonek wraps GDK_KEY_uogonek
+const KeyUogonek = 1017
+// KeyUparrow wraps GDK_KEY_uparrow
+const KeyUparrow = 2300
+// KeyUpcaret wraps GDK_KEY_upcaret
+const KeyUpcaret = 2985
+// KeyUpleftcorner wraps GDK_KEY_upleftcorner
+const KeyUpleftcorner = 2540
+// KeyUprightcorner wraps GDK_KEY_uprightcorner
+const KeyUprightcorner = 2539
+// KeyUpshoe wraps GDK_KEY_upshoe
+const KeyUpshoe = 3011
+// KeyUpstile wraps GDK_KEY_upstile
+const KeyUpstile = 3027
+// KeyUptack wraps GDK_KEY_uptack
+const KeyUptack = 3022
+// KeyUring wraps GDK_KEY_uring
+const KeyUring = 505
+// KeyUtilde wraps GDK_KEY_utilde
+const KeyUtilde = 1021
+// KeyV wraps GDK_KEY_v
+const KeyV = 118
+// KeyVariation wraps GDK_KEY_variation
+const KeyVariation = 2241
+// KeyVertbar wraps GDK_KEY_vertbar
+const KeyVertbar = 2552
+// KeyVertconnector wraps GDK_KEY_vertconnector
+const KeyVertconnector = 2214
+// KeyVoicedsound wraps GDK_KEY_voicedsound
+const KeyVoicedsound = 1246
+// KeyVt wraps GDK_KEY_vt
+const KeyVt = 2537
+// KeyW wraps GDK_KEY_w
+const KeyW = 119
+// KeyWacute wraps GDK_KEY_wacute
+const KeyWacute = 16785027
+// KeyWcircumflex wraps GDK_KEY_wcircumflex
+const KeyWcircumflex = 16777589
+// KeyWdiaeresis wraps GDK_KEY_wdiaeresis
+const KeyWdiaeresis = 16785029
+// KeyWgrave wraps GDK_KEY_wgrave
+const KeyWgrave = 16785025
+// KeYX wraps GDK_KEY_x
+const KeYX = 120
+// KeyXabovedot wraps GDK_KEY_xabovedot
+const KeyXabovedot = 16785035
+// KeYY wraps GDK_KEY_y
+const KeYY = 121
+// KeyYacute wraps GDK_KEY_yacute
+const KeyYacute = 253
+// KeyYbelowdot wraps GDK_KEY_ybelowdot
+const KeyYbelowdot = 16785141
+// KeyYcircumflex wraps GDK_KEY_ycircumflex
+const KeyYcircumflex = 16777591
+// KeyYdiaeresis wraps GDK_KEY_ydiaeresis
+const KeyYdiaeresis = 255
+// KeyYen wraps GDK_KEY_yen
+const KeyYen = 165
+// KeyYgrave wraps GDK_KEY_ygrave
+const KeyYgrave = 16785139
+// KeyYhook wraps GDK_KEY_yhook
+const KeyYhook = 16785143
+// KeyYtilde wraps GDK_KEY_ytilde
+const KeyYtilde = 16785145
+// KeYZ wraps GDK_KEY_z
+const KeYZ = 122
+// KeyZabovedot wraps GDK_KEY_zabovedot
+const KeyZabovedot = 447
+// KeyZacute wraps GDK_KEY_zacute
+const KeyZacute = 444
+// KeyZcaron wraps GDK_KEY_zcaron
+const KeyZcaron = 446
+// KeyZerosubscript wraps GDK_KEY_zerosubscript
+const KeyZerosubscript = 16785536
+// KeyZerosuperior wraps GDK_KEY_zerosuperior
+const KeyZerosuperior = 16785520
+// KeyZstroke wraps GDK_KEY_zstroke
+const KeyZstroke = 16777654
+// ModifierMask wraps GDK_MODIFIER_MASK
 //
 // A mask covering all entries in `GdkModifierType`.
-const MODIFIERMASK = C.GDK_MODIFIER_MASK
-// PRIORITYREDRAW wraps GDK_PRIORITY_REDRAW
+const ModifierMask = 469769999
+// PriorityRedraw wraps GDK_PRIORITY_REDRAW
 //
 // This is the priority that the idle handler processing surface updates
 // is given in the main loop.
-const PRIORITYREDRAW = C.GDK_PRIORITY_REDRAW
+const PriorityRedraw = 120
 // AxisUse wraps GdkAxisUse
 //
 // Defines how device axes are interpreted by GTK.
@@ -4873,12 +4865,15 @@ const (
 	AxisLast AxisUse = C.GDK_AXIS_LAST
 )
 
-func marshalAxisUse(p uintptr) (interface{}, error) {
-	return AxisUse(gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Enum()), nil
+func marshalAxisUse(p unsafe.Pointer) (any, error) {
+	return AxisUse(gobject.ValueFromNative(p).Enum()), nil
 }
 
-func (e AxisUse) SetValue(v *gobject.Value) {
-	panic("TODO")
+var _ gobject.GoValueInitializer = AxisUse(0)
+
+func (e AxisUse) InitGoValue(v *gobject.Value) {
+	v.Init(TypeAxisUse)
+	v.SetEnum(int(e))
 }
 
 // CicpRange wraps GdkCicpRange
@@ -4902,12 +4897,15 @@ const (
 	CicpRangeFull CicpRange = C.GDK_CICP_RANGE_FULL
 )
 
-func marshalCicpRange(p uintptr) (interface{}, error) {
-	return CicpRange(gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Enum()), nil
+func marshalCicpRange(p unsafe.Pointer) (any, error) {
+	return CicpRange(gobject.ValueFromNative(p).Enum()), nil
 }
 
-func (e CicpRange) SetValue(v *gobject.Value) {
-	panic("TODO")
+var _ gobject.GoValueInitializer = CicpRange(0)
+
+func (e CicpRange) InitGoValue(v *gobject.Value) {
+	v.Init(TypeCicpRange)
+	v.SetEnum(int(e))
 }
 
 // CrossingMode wraps GdkCrossingMode
@@ -4959,12 +4957,15 @@ const (
 	CrossingDeviceSwitch CrossingMode = C.GDK_CROSSING_DEVICE_SWITCH
 )
 
-func marshalCrossingMode(p uintptr) (interface{}, error) {
-	return CrossingMode(gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Enum()), nil
+func marshalCrossingMode(p unsafe.Pointer) (any, error) {
+	return CrossingMode(gobject.ValueFromNative(p).Enum()), nil
 }
 
-func (e CrossingMode) SetValue(v *gobject.Value) {
-	panic("TODO")
+var _ gobject.GoValueInitializer = CrossingMode(0)
+
+func (e CrossingMode) InitGoValue(v *gobject.Value) {
+	v.Init(TypeCrossingMode)
+	v.SetEnum(int(e))
 }
 
 // DevicePadFeature wraps GdkDevicePadFeature
@@ -4987,12 +4988,15 @@ const (
 	DevicePadFeatureStrip DevicePadFeature = C.GDK_DEVICE_PAD_FEATURE_STRIP
 )
 
-func marshalDevicePadFeature(p uintptr) (interface{}, error) {
-	return DevicePadFeature(gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Enum()), nil
+func marshalDevicePadFeature(p unsafe.Pointer) (any, error) {
+	return DevicePadFeature(gobject.ValueFromNative(p).Enum()), nil
 }
 
-func (e DevicePadFeature) SetValue(v *gobject.Value) {
-	panic("TODO")
+var _ gobject.GoValueInitializer = DevicePadFeature(0)
+
+func (e DevicePadFeature) InitGoValue(v *gobject.Value) {
+	v.Init(TypeDevicePadFeature)
+	v.SetEnum(int(e))
 }
 
 // DeviceToolType wraps GdkDeviceToolType
@@ -5036,12 +5040,15 @@ const (
 	DeviceToolTypeLens DeviceToolType = C.GDK_DEVICE_TOOL_TYPE_LENS
 )
 
-func marshalDeviceToolType(p uintptr) (interface{}, error) {
-	return DeviceToolType(gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Enum()), nil
+func marshalDeviceToolType(p unsafe.Pointer) (any, error) {
+	return DeviceToolType(gobject.ValueFromNative(p).Enum()), nil
 }
 
-func (e DeviceToolType) SetValue(v *gobject.Value) {
-	panic("TODO")
+var _ gobject.GoValueInitializer = DeviceToolType(0)
+
+func (e DeviceToolType) InitGoValue(v *gobject.Value) {
+	v.Init(TypeDeviceToolType)
+	v.SetEnum(int(e))
 }
 
 // DmabufError wraps GdkDmabufError
@@ -5066,12 +5073,15 @@ const (
 	DmabufErrorCreationFailed DmabufError = C.GDK_DMABUF_ERROR_CREATION_FAILED
 )
 
-func marshalDmabufError(p uintptr) (interface{}, error) {
-	return DmabufError(gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Enum()), nil
+func marshalDmabufError(p unsafe.Pointer) (any, error) {
+	return DmabufError(gobject.ValueFromNative(p).Enum()), nil
 }
 
-func (e DmabufError) SetValue(v *gobject.Value) {
-	panic("TODO")
+var _ gobject.GoValueInitializer = DmabufError(0)
+
+func (e DmabufError) InitGoValue(v *gobject.Value) {
+	v.Init(TypeDmabufError)
+	v.SetEnum(int(e))
 }
 
 // DragCancelReason wraps GdkDragCancelReason
@@ -5094,12 +5104,15 @@ const (
 	DragCancelError DragCancelReason = C.GDK_DRAG_CANCEL_ERROR
 )
 
-func marshalDragCancelReason(p uintptr) (interface{}, error) {
-	return DragCancelReason(gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Enum()), nil
+func marshalDragCancelReason(p unsafe.Pointer) (any, error) {
+	return DragCancelReason(gobject.ValueFromNative(p).Enum()), nil
 }
 
-func (e DragCancelReason) SetValue(v *gobject.Value) {
-	panic("TODO")
+var _ gobject.GoValueInitializer = DragCancelReason(0)
+
+func (e DragCancelReason) InitGoValue(v *gobject.Value) {
+	v.Init(TypeDragCancelReason)
+	v.SetEnum(int(e))
 }
 
 // EventType wraps GdkEventType
@@ -5238,12 +5251,15 @@ const (
 	EventLast EventType = C.GDK_EVENT_LAST
 )
 
-func marshalEventType(p uintptr) (interface{}, error) {
-	return EventType(gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Enum()), nil
+func marshalEventType(p unsafe.Pointer) (any, error) {
+	return EventType(gobject.ValueFromNative(p).Enum()), nil
 }
 
-func (e EventType) SetValue(v *gobject.Value) {
-	panic("TODO")
+var _ gobject.GoValueInitializer = EventType(0)
+
+func (e EventType) InitGoValue(v *gobject.Value) {
+	v.Init(TypeEventType)
+	v.SetEnum(int(e))
 }
 
 // FullscreenMode wraps GdkFullscreenMode
@@ -5262,12 +5278,15 @@ const (
 	FullscreenOnAllMonitors FullscreenMode = C.GDK_FULLSCREEN_ON_ALL_MONITORS
 )
 
-func marshalFullscreenMode(p uintptr) (interface{}, error) {
-	return FullscreenMode(gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Enum()), nil
+func marshalFullscreenMode(p unsafe.Pointer) (any, error) {
+	return FullscreenMode(gobject.ValueFromNative(p).Enum()), nil
 }
 
-func (e FullscreenMode) SetValue(v *gobject.Value) {
-	panic("TODO")
+var _ gobject.GoValueInitializer = FullscreenMode(0)
+
+func (e FullscreenMode) InitGoValue(v *gobject.Value) {
+	v.Init(TypeFullscreenMode)
+	v.SetEnum(int(e))
 }
 
 // GLError wraps GdkGLError
@@ -5298,12 +5317,15 @@ const (
 	GLErrorLinkFailed GLError = C.GDK_GL_ERROR_LINK_FAILED
 )
 
-func marshalGLError(p uintptr) (interface{}, error) {
-	return GLError(gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Enum()), nil
+func marshalGLError(p unsafe.Pointer) (any, error) {
+	return GLError(gobject.ValueFromNative(p).Enum()), nil
 }
 
-func (e GLError) SetValue(v *gobject.Value) {
-	panic("TODO")
+var _ gobject.GoValueInitializer = GLError(0)
+
+func (e GLError) InitGoValue(v *gobject.Value) {
+	v.Init(TypeGLError)
+	v.SetEnum(int(e))
 }
 
 // Gravity wraps GdkGravity
@@ -5355,12 +5377,15 @@ const (
 	GravityStatic Gravity = C.GDK_GRAVITY_STATIC
 )
 
-func marshalGravity(p uintptr) (interface{}, error) {
-	return Gravity(gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Enum()), nil
+func marshalGravity(p unsafe.Pointer) (any, error) {
+	return Gravity(gobject.ValueFromNative(p).Enum()), nil
 }
 
-func (e Gravity) SetValue(v *gobject.Value) {
-	panic("TODO")
+var _ gobject.GoValueInitializer = Gravity(0)
+
+func (e Gravity) InitGoValue(v *gobject.Value) {
+	v.Init(TypeGravity)
+	v.SetEnum(int(e))
 }
 
 // InputSource wraps GdkInputSource
@@ -5403,12 +5428,15 @@ const (
 	SourceTabletPad InputSource = C.GDK_SOURCE_TABLET_PAD
 )
 
-func marshalInputSource(p uintptr) (interface{}, error) {
-	return InputSource(gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Enum()), nil
+func marshalInputSource(p unsafe.Pointer) (any, error) {
+	return InputSource(gobject.ValueFromNative(p).Enum()), nil
 }
 
-func (e InputSource) SetValue(v *gobject.Value) {
-	panic("TODO")
+var _ gobject.GoValueInitializer = InputSource(0)
+
+func (e InputSource) InitGoValue(v *gobject.Value) {
+	v.Init(TypeInputSource)
+	v.SetEnum(int(e))
 }
 
 // KeyMatch wraps GdkKeyMatch
@@ -5434,12 +5462,15 @@ const (
 	KeyMatchExact KeyMatch = C.GDK_KEY_MATCH_EXACT
 )
 
-func marshalKeyMatch(p uintptr) (interface{}, error) {
-	return KeyMatch(gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Enum()), nil
+func marshalKeyMatch(p unsafe.Pointer) (any, error) {
+	return KeyMatch(gobject.ValueFromNative(p).Enum()), nil
 }
 
-func (e KeyMatch) SetValue(v *gobject.Value) {
-	panic("TODO")
+var _ gobject.GoValueInitializer = KeyMatch(0)
+
+func (e KeyMatch) InitGoValue(v *gobject.Value) {
+	v.Init(TypeKeyMatch)
+	v.SetEnum(int(e))
 }
 
 // MemoryFormat wraps GdkMemoryFormat
@@ -5606,12 +5637,15 @@ const (
 	MemoryNFormats MemoryFormat = C.GDK_MEMORY_N_FORMATS
 )
 
-func marshalMemoryFormat(p uintptr) (interface{}, error) {
-	return MemoryFormat(gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Enum()), nil
+func marshalMemoryFormat(p unsafe.Pointer) (any, error) {
+	return MemoryFormat(gobject.ValueFromNative(p).Enum()), nil
 }
 
-func (e MemoryFormat) SetValue(v *gobject.Value) {
-	panic("TODO")
+var _ gobject.GoValueInitializer = MemoryFormat(0)
+
+func (e MemoryFormat) InitGoValue(v *gobject.Value) {
+	v.Init(TypeMemoryFormat)
+	v.SetEnum(int(e))
 }
 
 // NotifyType wraps GdkNotifyType
@@ -5656,12 +5690,15 @@ const (
 	NotifyUnknown NotifyType = C.GDK_NOTIFY_UNKNOWN
 )
 
-func marshalNotifyType(p uintptr) (interface{}, error) {
-	return NotifyType(gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Enum()), nil
+func marshalNotifyType(p unsafe.Pointer) (any, error) {
+	return NotifyType(gobject.ValueFromNative(p).Enum()), nil
 }
 
-func (e NotifyType) SetValue(v *gobject.Value) {
-	panic("TODO")
+var _ gobject.GoValueInitializer = NotifyType(0)
+
+func (e NotifyType) InitGoValue(v *gobject.Value) {
+	v.Init(TypeNotifyType)
+	v.SetEnum(int(e))
 }
 
 // ScrollDirection wraps GdkScrollDirection
@@ -5693,12 +5730,15 @@ const (
 	ScrollSmooth ScrollDirection = C.GDK_SCROLL_SMOOTH
 )
 
-func marshalScrollDirection(p uintptr) (interface{}, error) {
-	return ScrollDirection(gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Enum()), nil
+func marshalScrollDirection(p unsafe.Pointer) (any, error) {
+	return ScrollDirection(gobject.ValueFromNative(p).Enum()), nil
 }
 
-func (e ScrollDirection) SetValue(v *gobject.Value) {
-	panic("TODO")
+var _ gobject.GoValueInitializer = ScrollDirection(0)
+
+func (e ScrollDirection) InitGoValue(v *gobject.Value) {
+	v.Init(TypeScrollDirection)
+	v.SetEnum(int(e))
 }
 
 // ScrollUnit wraps GdkScrollUnit
@@ -5733,12 +5773,15 @@ const (
 	ScrollUnitSurface ScrollUnit = C.GDK_SCROLL_UNIT_SURFACE
 )
 
-func marshalScrollUnit(p uintptr) (interface{}, error) {
-	return ScrollUnit(gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Enum()), nil
+func marshalScrollUnit(p unsafe.Pointer) (any, error) {
+	return ScrollUnit(gobject.ValueFromNative(p).Enum()), nil
 }
 
-func (e ScrollUnit) SetValue(v *gobject.Value) {
-	panic("TODO")
+var _ gobject.GoValueInitializer = ScrollUnit(0)
+
+func (e ScrollUnit) InitGoValue(v *gobject.Value) {
+	v.Init(TypeScrollUnit)
+	v.SetEnum(int(e))
 }
 
 // SubpixelLayout wraps GdkSubpixelLayout
@@ -5774,12 +5817,15 @@ const (
 	SubpixelLayoutVerticalBGR SubpixelLayout = C.GDK_SUBPIXEL_LAYOUT_VERTICAL_BGR
 )
 
-func marshalSubpixelLayout(p uintptr) (interface{}, error) {
-	return SubpixelLayout(gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Enum()), nil
+func marshalSubpixelLayout(p unsafe.Pointer) (any, error) {
+	return SubpixelLayout(gobject.ValueFromNative(p).Enum()), nil
 }
 
-func (e SubpixelLayout) SetValue(v *gobject.Value) {
-	panic("TODO")
+var _ gobject.GoValueInitializer = SubpixelLayout(0)
+
+func (e SubpixelLayout) InitGoValue(v *gobject.Value) {
+	v.Init(TypeSubpixelLayout)
+	v.SetEnum(int(e))
 }
 
 // SurfaceEdge wraps GdkSurfaceEdge
@@ -5822,12 +5868,15 @@ const (
 	SurfaceEdgeSouthEast SurfaceEdge = C.GDK_SURFACE_EDGE_SOUTH_EAST
 )
 
-func marshalSurfaceEdge(p uintptr) (interface{}, error) {
-	return SurfaceEdge(gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Enum()), nil
+func marshalSurfaceEdge(p unsafe.Pointer) (any, error) {
+	return SurfaceEdge(gobject.ValueFromNative(p).Enum()), nil
 }
 
-func (e SurfaceEdge) SetValue(v *gobject.Value) {
-	panic("TODO")
+var _ gobject.GoValueInitializer = SurfaceEdge(0)
+
+func (e SurfaceEdge) InitGoValue(v *gobject.Value) {
+	v.Init(TypeSurfaceEdge)
+	v.SetEnum(int(e))
 }
 
 // TextureError wraps GdkTextureError
@@ -5855,12 +5904,15 @@ const (
 	TextureErrorUnsupportedFormat TextureError = C.GDK_TEXTURE_ERROR_UNSUPPORTED_FORMAT
 )
 
-func marshalTextureError(p uintptr) (interface{}, error) {
-	return TextureError(gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Enum()), nil
+func marshalTextureError(p unsafe.Pointer) (any, error) {
+	return TextureError(gobject.ValueFromNative(p).Enum()), nil
 }
 
-func (e TextureError) SetValue(v *gobject.Value) {
-	panic("TODO")
+var _ gobject.GoValueInitializer = TextureError(0)
+
+func (e TextureError) InitGoValue(v *gobject.Value) {
+	v.Init(TypeTextureError)
+	v.SetEnum(int(e))
 }
 
 // TitlebarGesture wraps GdkTitlebarGesture
@@ -5884,12 +5936,15 @@ const (
 	TitlebarGestureMiddleClick TitlebarGesture = C.GDK_TITLEBAR_GESTURE_MIDDLE_CLICK
 )
 
-func marshalTitlebarGesture(p uintptr) (interface{}, error) {
-	return TitlebarGesture(gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Enum()), nil
+func marshalTitlebarGesture(p unsafe.Pointer) (any, error) {
+	return TitlebarGesture(gobject.ValueFromNative(p).Enum()), nil
 }
 
-func (e TitlebarGesture) SetValue(v *gobject.Value) {
-	panic("TODO")
+var _ gobject.GoValueInitializer = TitlebarGesture(0)
+
+func (e TitlebarGesture) InitGoValue(v *gobject.Value) {
+	v.Init(TypeTitlebarGesture)
+	v.SetEnum(int(e))
 }
 
 // TouchpadGesturePhase wraps GdkTouchpadGesturePhase
@@ -5935,12 +5990,15 @@ const (
 	TouchpadGesturePhaseCancel TouchpadGesturePhase = C.GDK_TOUCHPAD_GESTURE_PHASE_CANCEL
 )
 
-func marshalTouchpadGesturePhase(p uintptr) (interface{}, error) {
-	return TouchpadGesturePhase(gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Enum()), nil
+func marshalTouchpadGesturePhase(p unsafe.Pointer) (any, error) {
+	return TouchpadGesturePhase(gobject.ValueFromNative(p).Enum()), nil
 }
 
-func (e TouchpadGesturePhase) SetValue(v *gobject.Value) {
-	panic("TODO")
+var _ gobject.GoValueInitializer = TouchpadGesturePhase(0)
+
+func (e TouchpadGesturePhase) InitGoValue(v *gobject.Value) {
+	v.Init(TypeTouchpadGesturePhase)
+	v.SetEnum(int(e))
 }
 
 // VulkanError wraps GdkVulkanError
@@ -5960,12 +6018,15 @@ const (
 	VulkanErrorNotAvailable VulkanError = C.GDK_VULKAN_ERROR_NOT_AVAILABLE
 )
 
-func marshalVulkanError(p uintptr) (interface{}, error) {
-	return VulkanError(gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Enum()), nil
+func marshalVulkanError(p unsafe.Pointer) (any, error) {
+	return VulkanError(gobject.ValueFromNative(p).Enum()), nil
 }
 
-func (e VulkanError) SetValue(v *gobject.Value) {
-	panic("TODO")
+var _ gobject.GoValueInitializer = VulkanError(0)
+
+func (e VulkanError) InitGoValue(v *gobject.Value) {
+	v.Init(TypeVulkanError)
+	v.SetEnum(int(e))
 }
 
 // AnchorHints wraps GdkAnchorHints
@@ -6026,16 +6087,19 @@ const (
 	AnchorResize AnchorHints = C.GDK_ANCHOR_RESIZE
 )
 
-func marshalAnchorHints(p uintptr) (interface{}, error) {
-	return AnchorHints(gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Flags()), nil
+func marshalAnchorHints(p unsafe.Pointer) (any, error) {
+	return AnchorHints(gobject.ValueFromNative(p).Flags()), nil
 }
 // Has returns true if a contains other
 func (a AnchorHints) Has(other AnchorHints) bool {
 	return (a & other) == other
 }
 
-func (a AnchorHints) SetValue(v *gobject.Value) {
-	panic("TODO")
+var _ gobject.GoValueInitializer = AnchorHints(0)
+
+func (f AnchorHints) InitGoValue(v *gobject.Value) {
+	v.Init(TypeAnchorHints)
+	v.SetFlags(int(f))
 }
 
 // AxisFlags wraps GdkAxisFlags
@@ -6090,16 +6154,19 @@ const (
 	AxisFlagSlider AxisFlags = C.GDK_AXIS_FLAG_SLIDER
 )
 
-func marshalAxisFlags(p uintptr) (interface{}, error) {
-	return AxisFlags(gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Flags()), nil
+func marshalAxisFlags(p unsafe.Pointer) (any, error) {
+	return AxisFlags(gobject.ValueFromNative(p).Flags()), nil
 }
 // Has returns true if a contains other
 func (a AxisFlags) Has(other AxisFlags) bool {
 	return (a & other) == other
 }
 
-func (a AxisFlags) SetValue(v *gobject.Value) {
-	panic("TODO")
+var _ gobject.GoValueInitializer = AxisFlags(0)
+
+func (f AxisFlags) InitGoValue(v *gobject.Value) {
+	v.Init(TypeAxisFlags)
+	v.SetFlags(int(f))
 }
 
 // DragAction wraps GdkDragAction
@@ -6130,16 +6197,19 @@ const (
 	ActionAsk DragAction = C.GDK_ACTION_ASK
 )
 
-func marshalDragAction(p uintptr) (interface{}, error) {
-	return DragAction(gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Flags()), nil
+func marshalDragAction(p unsafe.Pointer) (any, error) {
+	return DragAction(gobject.ValueFromNative(p).Flags()), nil
 }
 // Has returns true if d contains other
 func (d DragAction) Has(other DragAction) bool {
 	return (d & other) == other
 }
 
-func (d DragAction) SetValue(v *gobject.Value) {
-	panic("TODO")
+var _ gobject.GoValueInitializer = DragAction(0)
+
+func (f DragAction) InitGoValue(v *gobject.Value) {
+	v.Init(TypeDragAction)
+	v.SetFlags(int(f))
 }
 
 // FrameClockPhase wraps GdkFrameClockPhase
@@ -6184,16 +6254,19 @@ const (
 	FrameClockPhaseAfterPaint FrameClockPhase = C.GDK_FRAME_CLOCK_PHASE_AFTER_PAINT
 )
 
-func marshalFrameClockPhase(p uintptr) (interface{}, error) {
-	return FrameClockPhase(gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Flags()), nil
+func marshalFrameClockPhase(p unsafe.Pointer) (any, error) {
+	return FrameClockPhase(gobject.ValueFromNative(p).Flags()), nil
 }
 // Has returns true if f contains other
 func (f FrameClockPhase) Has(other FrameClockPhase) bool {
 	return (f & other) == other
 }
 
-func (f FrameClockPhase) SetValue(v *gobject.Value) {
-	panic("TODO")
+var _ gobject.GoValueInitializer = FrameClockPhase(0)
+
+func (f FrameClockPhase) InitGoValue(v *gobject.Value) {
+	v.Init(TypeFrameClockPhase)
+	v.SetFlags(int(f))
 }
 
 // GLAPI wraps GdkGLAPI
@@ -6212,16 +6285,19 @@ const (
 	GLApiGles GLAPI = C.GDK_GL_API_GLES
 )
 
-func marshalGLAPI(p uintptr) (interface{}, error) {
-	return GLAPI(gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Flags()), nil
+func marshalGLAPI(p unsafe.Pointer) (any, error) {
+	return GLAPI(gobject.ValueFromNative(p).Flags()), nil
 }
 // Has returns true if g contains other
 func (g GLAPI) Has(other GLAPI) bool {
 	return (g & other) == other
 }
 
-func (g GLAPI) SetValue(v *gobject.Value) {
-	panic("TODO")
+var _ gobject.GoValueInitializer = GLAPI(0)
+
+func (f GLAPI) InitGoValue(v *gobject.Value) {
+	v.Init(TypeGLAPI)
+	v.SetFlags(int(f))
 }
 
 // ModifierType wraps GdkModifierType
@@ -6295,16 +6371,19 @@ const (
 	MetaMask ModifierType = C.GDK_META_MASK
 )
 
-func marshalModifierType(p uintptr) (interface{}, error) {
-	return ModifierType(gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Flags()), nil
+func marshalModifierType(p unsafe.Pointer) (any, error) {
+	return ModifierType(gobject.ValueFromNative(p).Flags()), nil
 }
 // Has returns true if m contains other
 func (m ModifierType) Has(other ModifierType) bool {
 	return (m & other) == other
 }
 
-func (m ModifierType) SetValue(v *gobject.Value) {
-	panic("TODO")
+var _ gobject.GoValueInitializer = ModifierType(0)
+
+func (f ModifierType) InitGoValue(v *gobject.Value) {
+	v.Init(TypeModifierType)
+	v.SetFlags(int(f))
 }
 
 // PaintableFlags wraps GdkPaintableFlags
@@ -6329,16 +6408,19 @@ const (
 	PaintableStaticContents PaintableFlags = C.GDK_PAINTABLE_STATIC_CONTENTS
 )
 
-func marshalPaintableFlags(p uintptr) (interface{}, error) {
-	return PaintableFlags(gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Flags()), nil
+func marshalPaintableFlags(p unsafe.Pointer) (any, error) {
+	return PaintableFlags(gobject.ValueFromNative(p).Flags()), nil
 }
 // Has returns true if p contains other
 func (p PaintableFlags) Has(other PaintableFlags) bool {
 	return (p & other) == other
 }
 
-func (p PaintableFlags) SetValue(v *gobject.Value) {
-	panic("TODO")
+var _ gobject.GoValueInitializer = PaintableFlags(0)
+
+func (f PaintableFlags) InitGoValue(v *gobject.Value) {
+	v.Init(TypePaintableFlags)
+	v.SetFlags(int(f))
 }
 
 // SeatCapabilities wraps GdkSeatCapabilities
@@ -6381,16 +6463,19 @@ const (
 	SeatCapabilityAll SeatCapabilities = C.GDK_SEAT_CAPABILITY_ALL
 )
 
-func marshalSeatCapabilities(p uintptr) (interface{}, error) {
-	return SeatCapabilities(gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Flags()), nil
+func marshalSeatCapabilities(p unsafe.Pointer) (any, error) {
+	return SeatCapabilities(gobject.ValueFromNative(p).Flags()), nil
 }
 // Has returns true if s contains other
 func (s SeatCapabilities) Has(other SeatCapabilities) bool {
 	return (s & other) == other
 }
 
-func (s SeatCapabilities) SetValue(v *gobject.Value) {
-	panic("TODO")
+var _ gobject.GoValueInitializer = SeatCapabilities(0)
+
+func (f SeatCapabilities) InitGoValue(v *gobject.Value) {
+	v.Init(TypeSeatCapabilities)
+	v.SetFlags(int(f))
 }
 
 // ToplevelState wraps GdkToplevelState
@@ -6475,199 +6560,151 @@ const (
 	ToplevelStateSuspended ToplevelState = C.GDK_TOPLEVEL_STATE_SUSPENDED
 )
 
-func marshalToplevelState(p uintptr) (interface{}, error) {
-	return ToplevelState(gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Flags()), nil
+func marshalToplevelState(p unsafe.Pointer) (any, error) {
+	return ToplevelState(gobject.ValueFromNative(p).Flags()), nil
 }
 // Has returns true if t contains other
 func (t ToplevelState) Has(other ToplevelState) bool {
 	return (t & other) == other
 }
 
-func (t ToplevelState) SetValue(v *gobject.Value) {
-	panic("TODO")
+var _ gobject.GoValueInitializer = ToplevelState(0)
+
+func (f ToplevelState) InitGoValue(v *gobject.Value) {
+	v.Init(TypeToplevelState)
+	v.SetFlags(int(f))
 }
-
-// ContentDeserializeFunc wraps GdkContentDeserializeFunc
-//
-// The type of a function that can be registered with gdk_content_register_deserializer().
-// 
-// When the function gets called to operate on content, it can call functions on the
-// @deserializer object to obtain the mime type, input stream, user data, etc. for its
-// operation.
-type ContentDeserializeFunc func(deserializer ContentDeserializer)
-
-// ContentSerializeFunc wraps GdkContentSerializeFunc
-//
-// The type of a function that can be registered with gdk_content_register_serializer().
-// 
-// When the function gets called to operate on content, it can call functions on the
-// @serializer object to obtain the mime type, output stream, user data, etc. for its
-// operation.
-type ContentSerializeFunc func(serializer ContentSerializer)
-
-// CursorGetTextureCallback wraps GdkCursorGetTextureCallback
-//
-// The type of callback used by a dynamic `GdkCursor` to generate
-// a texture for the cursor image at the given @cursor_size
-// and @scale.
-// 
-// The actual cursor size in application pixels may be different
-// from @cursor_size x @cursor_size, and will be returned in
-// @width, @height. The returned texture should have a size that
-// corresponds to the actual cursor size, in device pixels (i.e.
-// application pixels, multiplied by @scale).
-// 
-// This function may fail and return `NULL`, in which case
-// the fallback cursor will be used.
-type CursorGetTextureCallback func(cursor Cursor, cursorSize int, scale float64, data unsafe.Pointer) (width int, height int, hotspotX int, hotspotY int, ret Texture)
 
 // ContentDeserializeAsync wraps gdk_content_deserialize_async
 // 
 // The function takes the following parameters:
 // 
+// 	- cancellable context.Context (nullable): optional `GCancellable` object 
 // 	- stream gio.InputStream: a `GInputStream` to read the serialized content from 
 // 	- mimeType string: the mime type to deserialize from 
-// 	- typ glib.Type: the GType to deserialize from 
+// 	- typ gobject.Type: the GType to deserialize from 
 // 	- ioPriority int: the I/O priority of the operation 
-// 	- cancellable gio. (nullable): optional `GCancellable` object 
 // 	- callback gio.AsyncReadyCallback (nullable): callback to call when the operation is done 
 //
 // Read content from the given input stream and deserialize it, asynchronously.
 // 
 // The default I/O priority is %G_PRIORITY_DEFAULT (i.e. 0), and lower numbers
 // indicate a higher priority.
-func ContentDeserializeAsync(stream gio.InputStream, mimeType string, typ glib.Type, ioPriority int, cancellable gio., callback gio.AsyncReadyCallback) {
+func ContentDeserializeAsync(cancellable context.Context, stream gio.InputStream, mimeType string, typ gobject.Type, ioPriority int, callback gio.AsyncReadyCallback) {
+	var carg5 *C.GCancellable       // in, none, converted, nullable
 	var carg1 *C.GInputStream       // in, none, converted
 	var carg2 *C.gchar              // in, none, string
-	var carg3 C.GType               // in, none, casted
+	var carg3 C.GType               // in, none, casted, alias
 	var carg4 C.int                 // in, none, casted
-	var carg5 *C.Cancellable        // in, none, converted, nullable
 	var carg6 C.GAsyncReadyCallback // callback, scope: async, closure: carg7, nullable
 	var carg7 C.gpointer            // implicit
 
-	carg1 = (*C.GInputStream)(UnsafeInputStreamToGlibNone(stream))
+	if cancellable != nil {
+		carg5 = (*C.GCancellable)(gio.UnsafeGCancellableToGlibNone(cancellable))
+	}
+	carg1 = (*C.GInputStream)(gio.UnsafeInputStreamToGlibNone(stream))
 	carg2 = (*C.gchar)(unsafe.Pointer(C.CString(mimeType)))
 	defer C.free(unsafe.Pointer(carg2))
 	carg3 = C.GType(typ)
 	carg4 = C.int(ioPriority)
-	if cancellable != nil {
-		carg5 = (*C.Cancellable)(UnsafeCancellableToGlibNone(cancellable))
-	}
 	if callback != nil {
 		carg6 = (*[0]byte)(C._gotk4_gio2_AsyncReadyCallback)
 		carg7 = C.gpointer(gbox.AssignOnce(callback))
 	}
 
 	C.gdk_content_deserialize_async(carg1, carg2, carg3, carg4, carg5, carg6, carg7)
+	runtime.KeepAlive(cancellable)
 	runtime.KeepAlive(stream)
 	runtime.KeepAlive(mimeType)
 	runtime.KeepAlive(typ)
 	runtime.KeepAlive(ioPriority)
-	runtime.KeepAlive(cancellable)
 	runtime.KeepAlive(callback)
 }
 
-// ContentRegisterDeserializer wraps gdk_content_register_deserializer
+// ContentDeserializeFinish wraps gdk_content_deserialize_finish
 // 
 // The function takes the following parameters:
 // 
-// 	- mimeType string: the mime type which the function can deserialize from 
-// 	- typ glib.Type: the type of objects that the function creates 
-// 	- deserialize ContentDeserializeFunc: the callback 
-//
-// Registers a function to deserialize object of a given type.
-func ContentRegisterDeserializer(mimeType string, typ glib.Type, deserialize ContentDeserializeFunc) {
-	var carg1 *C.gchar                    // in, none, string
-	var carg2 C.GType                     // in, none, casted
-	var carg3 C.GdkContentDeserializeFunc // callback, scope: notified, closure: carg4, destroy: carg5
-	var carg4 C.gpointer                  // implicit
-	var carg5 C.GDestroyNotify            // implicit
-
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(mimeType)))
-	defer C.free(unsafe.Pointer(carg1))
-	carg2 = C.GType(typ)
-	carg3 = (*[0]byte)(C._gotk4_gdk4_ContentDeserializeFunc)
-	carg4 = C.gpointer(gbox.Assign(deserialize))
-	carg5 = (C.GDestroyNotify)((*[0]byte)(C.callbackDelete))
-
-	C.gdk_content_register_deserializer(carg1, carg2, carg3, carg4, carg5)
-	runtime.KeepAlive(mimeType)
-	runtime.KeepAlive(typ)
-	runtime.KeepAlive(deserialize)
-}
-
-// ContentRegisterSerializer wraps gdk_content_register_serializer
+// 	- result gio.AsyncResult: the `GAsyncResult` 
 // 
-// The function takes the following parameters:
+// The function returns the following values:
 // 
-// 	- typ glib.Type: the type of objects that the function can serialize 
-// 	- mimeType string: the mime type to serialize to 
-// 	- serialize ContentSerializeFunc: the callback 
+// 	- value gobject.Value: return location for the result of the operation 
+// 	- goret bool 
+// 	- _goerr error (nullable): an error 
 //
-// Registers a function to serialize objects of a given type.
-func ContentRegisterSerializer(typ glib.Type, mimeType string, serialize ContentSerializeFunc) {
-	var carg1 C.GType                   // in, none, casted
-	var carg2 *C.gchar                  // in, none, string
-	var carg3 C.GdkContentSerializeFunc // callback, scope: notified, closure: carg4, destroy: carg5
-	var carg4 C.gpointer                // implicit
-	var carg5 C.GDestroyNotify          // implicit
+// Finishes a content deserialization operation.
+func ContentDeserializeFinish(result gio.AsyncResult) (gobject.Value, bool, error) {
+	var carg1 *C.GAsyncResult // in, none, converted
+	var carg2 C.GValue        // out, transfer: none, C Pointers: 0, Name: Value, caller-allocates
+	var cret  C.gboolean      // return
+	var _cerr *C.GError       // out, full, converted, nullable
 
-	carg1 = C.GType(typ)
-	carg2 = (*C.gchar)(unsafe.Pointer(C.CString(mimeType)))
-	defer C.free(unsafe.Pointer(carg2))
-	carg3 = (*[0]byte)(C._gotk4_gdk4_ContentSerializeFunc)
-	carg4 = C.gpointer(gbox.Assign(serialize))
-	carg5 = (C.GDestroyNotify)((*[0]byte)(C.callbackDelete))
+	carg1 = (*C.GAsyncResult)(gio.UnsafeAsyncResultToGlibNone(result))
 
-	C.gdk_content_register_serializer(carg1, carg2, carg3, carg4, carg5)
-	runtime.KeepAlive(typ)
-	runtime.KeepAlive(mimeType)
-	runtime.KeepAlive(serialize)
+	cret = C.gdk_content_deserialize_finish(carg1, &carg2, &_cerr)
+	runtime.KeepAlive(result)
+
+	var value  gobject.Value
+	var goret  bool
+	var _goerr error
+
+	_ = value
+	_ = carg2
+	panic("unimplemented conversion of gobject.Value (GValue)")
+	if cret != 0 {
+		goret = true
+	}
+	if _cerr != nil {
+		_goerr = glib.UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
+	}
+
+	return value, goret, _goerr
 }
 
 // ContentSerializeAsync wraps gdk_content_serialize_async
 // 
 // The function takes the following parameters:
 // 
+// 	- cancellable context.Context (nullable): optional `GCancellable` object 
 // 	- stream gio.OutputStream: a `GOutputStream` to write the serialized content to 
 // 	- mimeType string: the mime type to serialize to 
 // 	- value *gobject.Value: the content to serialize 
 // 	- ioPriority int: the I/O priority of the operation 
-// 	- cancellable gio. (nullable): optional `GCancellable` object 
 // 	- callback gio.AsyncReadyCallback (nullable): callback to call when the operation is done 
 //
 // Serialize content and write it to the given output stream, asynchronously.
 // 
 // The default I/O priority is %G_PRIORITY_DEFAULT (i.e. 0), and lower numbers
 // indicate a higher priority.
-func ContentSerializeAsync(stream gio.OutputStream, mimeType string, value *gobject.Value, ioPriority int, cancellable gio., callback gio.AsyncReadyCallback) {
+func ContentSerializeAsync(cancellable context.Context, stream gio.OutputStream, mimeType string, value *gobject.Value, ioPriority int, callback gio.AsyncReadyCallback) {
+	var carg5 *C.GCancellable       // in, none, converted, nullable
 	var carg1 *C.GOutputStream      // in, none, converted
 	var carg2 *C.gchar              // in, none, string
 	var carg3 *C.GValue             // in, none, converted
 	var carg4 C.int                 // in, none, casted
-	var carg5 *C.Cancellable        // in, none, converted, nullable
 	var carg6 C.GAsyncReadyCallback // callback, scope: async, closure: carg7, nullable
 	var carg7 C.gpointer            // implicit
 
-	carg1 = (*C.GOutputStream)(UnsafeOutputStreamToGlibNone(stream))
+	if cancellable != nil {
+		carg5 = (*C.GCancellable)(gio.UnsafeGCancellableToGlibNone(cancellable))
+	}
+	carg1 = (*C.GOutputStream)(gio.UnsafeOutputStreamToGlibNone(stream))
 	carg2 = (*C.gchar)(unsafe.Pointer(C.CString(mimeType)))
 	defer C.free(unsafe.Pointer(carg2))
-	carg3 = (*C.GValue)(TODOToGlibNone(value))
+	carg3 = (*C.GValue)(gobject.UnsafeValueToGlibNone(value))
 	carg4 = C.int(ioPriority)
-	if cancellable != nil {
-		carg5 = (*C.Cancellable)(UnsafeCancellableToGlibNone(cancellable))
-	}
 	if callback != nil {
 		carg6 = (*[0]byte)(C._gotk4_gio2_AsyncReadyCallback)
 		carg7 = C.gpointer(gbox.AssignOnce(callback))
 	}
 
 	C.gdk_content_serialize_async(carg1, carg2, carg3, carg4, carg5, carg6, carg7)
+	runtime.KeepAlive(cancellable)
 	runtime.KeepAlive(stream)
 	runtime.KeepAlive(mimeType)
 	runtime.KeepAlive(value)
 	runtime.KeepAlive(ioPriority)
-	runtime.KeepAlive(cancellable)
 	runtime.KeepAlive(callback)
 }
 
@@ -6679,7 +6716,7 @@ func ContentSerializeAsync(stream gio.OutputStream, mimeType string, value *gobj
 // 
 // The function returns the following values:
 // 
-// 	- ret bool 
+// 	- goret bool 
 // 	- _goerr error (nullable): an error 
 //
 // Finishes a content serialization operation.
@@ -6688,22 +6725,22 @@ func ContentSerializeFinish(result gio.AsyncResult) (bool, error) {
 	var cret  C.gboolean      // return
 	var _cerr *C.GError       // out, full, converted, nullable
 
-	carg1 = (*C.GAsyncResult)(UnsafeAsyncResultToGlibNone(result))
+	carg1 = (*C.GAsyncResult)(gio.UnsafeAsyncResultToGlibNone(result))
 
 	cret = C.gdk_content_serialize_finish(carg1, &_cerr)
 	runtime.KeepAlive(result)
 
-	var ret    bool
+	var goret  bool
 	var _goerr error
 
 	if cret != 0 {
-		ret = true
+		goret = true
 	}
 	if _cerr != nil {
-		_goerr = UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
+		_goerr = glib.UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
 	}
 
-	return ret, _goerr
+	return goret, _goerr
 }
 
 // InternMIMEType wraps gdk_intern_mime_type
@@ -6714,7 +6751,7 @@ func ContentSerializeFinish(result gio.AsyncResult) (bool, error) {
 // 
 // The function returns the following values:
 // 
-// 	- ret string 
+// 	- goret string 
 //
 // Canonicalizes the given mime type and interns the result.
 // 
@@ -6730,11 +6767,11 @@ func InternMIMEType(str string) string {
 	cret = C.gdk_intern_mime_type(carg1)
 	runtime.KeepAlive(str)
 
-	var ret string
+	var goret string
 
-	ret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
 
-	return ret
+	return goret
 }
 
 // KeyvalConvertCase wraps gdk_keyval_convert_case
@@ -6778,7 +6815,7 @@ func KeyvalConvertCase(symbol uint) (uint, uint) {
 // 
 // The function returns the following values:
 // 
-// 	- ret uint 
+// 	- goret uint 
 //
 // Converts a key name to a key value.
 // 
@@ -6795,11 +6832,11 @@ func KeyvalFromName(keyvalName string) uint {
 	cret = C.gdk_keyval_from_name(carg1)
 	runtime.KeepAlive(keyvalName)
 
-	var ret uint
+	var goret uint
 
-	ret = uint(cret)
+	goret = uint(cret)
 
-	return ret
+	return goret
 }
 
 // KeyvalIsLower wraps gdk_keyval_is_lower
@@ -6810,7 +6847,7 @@ func KeyvalFromName(keyvalName string) uint {
 // 
 // The function returns the following values:
 // 
-// 	- ret bool 
+// 	- goret bool 
 //
 // Returns %TRUE if the given key value is in lower case.
 func KeyvalIsLower(keyval uint) bool {
@@ -6822,13 +6859,13 @@ func KeyvalIsLower(keyval uint) bool {
 	cret = C.gdk_keyval_is_lower(carg1)
 	runtime.KeepAlive(keyval)
 
-	var ret bool
+	var goret bool
 
 	if cret != 0 {
-		ret = true
+		goret = true
 	}
 
-	return ret
+	return goret
 }
 
 // KeyvalIsUpper wraps gdk_keyval_is_upper
@@ -6839,7 +6876,7 @@ func KeyvalIsLower(keyval uint) bool {
 // 
 // The function returns the following values:
 // 
-// 	- ret bool 
+// 	- goret bool 
 //
 // Returns %TRUE if the given key value is in upper case.
 func KeyvalIsUpper(keyval uint) bool {
@@ -6851,13 +6888,13 @@ func KeyvalIsUpper(keyval uint) bool {
 	cret = C.gdk_keyval_is_upper(carg1)
 	runtime.KeepAlive(keyval)
 
-	var ret bool
+	var goret bool
 
 	if cret != 0 {
-		ret = true
+		goret = true
 	}
 
-	return ret
+	return goret
 }
 
 // KeyvalName wraps gdk_keyval_name
@@ -6868,7 +6905,7 @@ func KeyvalIsUpper(keyval uint) bool {
 // 
 // The function returns the following values:
 // 
-// 	- ret string 
+// 	- goret string 
 //
 // Converts a key value into a symbolic name.
 // 
@@ -6884,11 +6921,11 @@ func KeyvalName(keyval uint) string {
 	cret = C.gdk_keyval_name(carg1)
 	runtime.KeepAlive(keyval)
 
-	var ret string
+	var goret string
 
-	ret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
 
-	return ret
+	return goret
 }
 
 // KeyvalToLower wraps gdk_keyval_to_lower
@@ -6899,7 +6936,7 @@ func KeyvalName(keyval uint) string {
 // 
 // The function returns the following values:
 // 
-// 	- ret uint 
+// 	- goret uint 
 //
 // Converts a key value to lower case, if applicable.
 func KeyvalToLower(keyval uint) uint {
@@ -6911,11 +6948,11 @@ func KeyvalToLower(keyval uint) uint {
 	cret = C.gdk_keyval_to_lower(carg1)
 	runtime.KeepAlive(keyval)
 
-	var ret uint
+	var goret uint
 
-	ret = uint(cret)
+	goret = uint(cret)
 
-	return ret
+	return goret
 }
 
 // KeyvalToUnicode wraps gdk_keyval_to_unicode
@@ -6926,7 +6963,7 @@ func KeyvalToLower(keyval uint) uint {
 // 
 // The function returns the following values:
 // 
-// 	- ret uint32 
+// 	- goret uint32 
 //
 // Convert from a GDK key symbol to the corresponding Unicode
 // character.
@@ -6943,11 +6980,11 @@ func KeyvalToUnicode(keyval uint) uint32 {
 	cret = C.gdk_keyval_to_unicode(carg1)
 	runtime.KeepAlive(keyval)
 
-	var ret uint32
+	var goret uint32
 
-	ret = uint32(cret)
+	goret = uint32(cret)
 
-	return ret
+	return goret
 }
 
 // KeyvalToUpper wraps gdk_keyval_to_upper
@@ -6958,7 +6995,7 @@ func KeyvalToUnicode(keyval uint) uint32 {
 // 
 // The function returns the following values:
 // 
-// 	- ret uint 
+// 	- goret uint 
 //
 // Converts a key value to upper case, if applicable.
 func KeyvalToUpper(keyval uint) uint {
@@ -6970,11 +7007,11 @@ func KeyvalToUpper(keyval uint) uint {
 	cret = C.gdk_keyval_to_upper(carg1)
 	runtime.KeepAlive(keyval)
 
-	var ret uint
+	var goret uint
 
-	ret = uint(cret)
+	goret = uint(cret)
 
-	return ret
+	return goret
 }
 
 // PixbufGetFromTexture wraps gdk_pixbuf_get_from_texture
@@ -6985,7 +7022,7 @@ func KeyvalToUpper(keyval uint) uint {
 // 
 // The function returns the following values:
 // 
-// 	- ret gdkpixbuf.Pixbuf 
+// 	- goret gdkpixbuf.Pixbuf 
 //
 // Creates a new pixbuf from @texture.
 // 
@@ -7004,11 +7041,11 @@ func PixbufGetFromTexture(texture Texture) gdkpixbuf.Pixbuf {
 	cret = C.gdk_pixbuf_get_from_texture(carg1)
 	runtime.KeepAlive(texture)
 
-	var ret gdkpixbuf.Pixbuf
+	var goret gdkpixbuf.Pixbuf
 
-	ret = UnsafePixbufFromGlibFull(unsafe.Pointer(cret))
+	goret = gdkpixbuf.UnsafePixbufFromGlibFull(unsafe.Pointer(cret))
 
-	return ret
+	return goret
 }
 
 // SetAllowedBackends wraps gdk_set_allowed_backends
@@ -7068,7 +7105,7 @@ func SetAllowedBackends(backends string) {
 // 
 // The function returns the following values:
 // 
-// 	- ret uint 
+// 	- goret uint 
 //
 // Convert from a Unicode character to a key symbol.
 func UnicodeToKeyval(wc uint32) uint {
@@ -7080,17 +7117,17 @@ func UnicodeToKeyval(wc uint32) uint {
 	cret = C.gdk_unicode_to_keyval(carg1)
 	runtime.KeepAlive(wc)
 
-	var ret uint
+	var goret uint
 
-	ret = uint(cret)
+	goret = uint(cret)
 
-	return ret
+	return goret
 }
 
 // DevicePadInstance is the instance type used by all types implementing GdkDevicePad. It is used internally by the bindings. Users should use the interface [DevicePad] instead.
 type DevicePadInstance struct {
 	_ [0]func() // equal guard
-	*gobject.ObjectInstance
+	Instance gobject.ObjectInstance
 }
 
 var _ DevicePad = (*DevicePadInstance)(nil)
@@ -7115,7 +7152,7 @@ var _ DevicePad = (*DevicePadInstance)(nil)
 // out through [method@Gdk.DevicePad.get_group_n_modes], and the current mode
 // for a given group will be notified through events of type `GDK_PAD_GROUP_MODE`.
 type DevicePad interface {
-	gobject.Object
+	upcastToGdkDevicePad() *DevicePadInstance
 
 	// GetFeatureGroup wraps gdk_device_pad_get_feature_group
 	// 
@@ -7126,7 +7163,7 @@ type DevicePad interface {
 	// 
 	// The function returns the following values:
 	// 
-	// 	- ret int 
+	// 	- goret int 
 	//
 	// Returns the group the given @feature and @idx belong to.
 	// 
@@ -7140,7 +7177,7 @@ type DevicePad interface {
 	// 
 	// The function returns the following values:
 	// 
-	// 	- ret int 
+	// 	- goret int 
 	//
 	// Returns the number of modes that @group may have.
 	GetGroupNModes(int) int
@@ -7152,14 +7189,14 @@ type DevicePad interface {
 	// 
 	// The function returns the following values:
 	// 
-	// 	- ret int 
+	// 	- goret int 
 	//
 	// Returns the number of features a tablet pad has.
 	GetNFeatures(DevicePadFeature) int
 	// GetNGroups wraps gdk_device_pad_get_n_groups
 	// The function returns the following values:
 	// 
-	// 	- ret int 
+	// 	- goret int 
 	//
 	// Returns the number of groups this pad device has.
 	// 
@@ -7169,39 +7206,42 @@ type DevicePad interface {
 	GetNGroups() int
 }
 
+var _ DevicePad = (*DevicePadInstance)(nil)
+
 func unsafeWrapDevicePad(base *gobject.ObjectInstance) *DevicePadInstance {
 	return &DevicePadInstance{
-		ObjectInstance: base,
+		Instance: *base,
 	}
 }
 
-func marshalDevicePadInstance(p uintptr) (interface{}, error) {
-	return unsafeWrapDevicePad(gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Object()), nil
+func marshalDevicePadInstance(p unsafe.Pointer) (any, error) {
+	return unsafeWrapDevicePad(gobject.ValueFromNative(p).Object()), nil
 }
 
-// UnsafeDevicePadFromGlibBorrow is used to convert raw GdkDevicePad pointers to go. This is used by the bindings internally.
-func UnsafeDevicePadFromGlibBorrow(c unsafe.Pointer) DevicePad {
-	return gobject.TODOBorrow(c).(DevicePad)
+func (d *DevicePadInstance) upcastToGdkDevicePad() *DevicePadInstance {
+	return d
 }
 
 // UnsafeDevicePadFromGlibNone is used to convert raw GdkDevicePad pointers to go while taking a reference and attaching a finalizer. This is used by the bindings internally.
 func UnsafeDevicePadFromGlibNone(c unsafe.Pointer) DevicePad {
-	return gobject.Take(c).(DevicePad)
+	return gobject.UnsafeObjectFromGlibNone(c).(DevicePad)
 }
 
 // UnsafeDevicePadFromGlibFull is used to convert raw GdkDevicePad pointers to go while attaching a finalizer. This is used by the bindings internally.
 func UnsafeDevicePadFromGlibFull(c unsafe.Pointer) DevicePad {
-	return gobject.AssumeOwnership(c).(DevicePad)
+	return gobject.UnsafeObjectFromGlibFull(c).(DevicePad)
 }
 
 // UnsafeDevicePadToGlibNone is used to convert the instance to it's C value GdkDevicePad. This is used by the bindings internally.
 func UnsafeDevicePadToGlibNone(c DevicePad) unsafe.Pointer {
-	return gobject.TODOToNone(c)
+	i := c.upcastToGdkDevicePad()
+	return gobject.UnsafeObjectToGlibNone(&i.Instance)
 }
 
 // UnsafeDevicePadToGlibFull is used to convert the instance to it's C value GdkDevicePad, while removeing the finalizer. This is used by the bindings internally.
 func UnsafeDevicePadToGlibFull(c DevicePad) unsafe.Pointer {
-	return gobject.TODOToFull(c)
+	i := c.upcastToGdkDevicePad()
+	return gobject.UnsafeObjectToGlibFull(&i.Instance)
 }
 
 // GetFeatureGroup wraps gdk_device_pad_get_feature_group
@@ -7213,7 +7253,7 @@ func UnsafeDevicePadToGlibFull(c DevicePad) unsafe.Pointer {
 // 
 // The function returns the following values:
 // 
-// 	- ret int 
+// 	- goret int 
 //
 // Returns the group the given @feature and @idx belong to.
 // 
@@ -7233,11 +7273,11 @@ func (pad *DevicePadInstance) GetFeatureGroup(feature DevicePadFeature, featureI
 	runtime.KeepAlive(feature)
 	runtime.KeepAlive(featureIdx)
 
-	var ret int
+	var goret int
 
-	ret = int(cret)
+	goret = int(cret)
 
-	return ret
+	return goret
 }
 
 // GetGroupNModes wraps gdk_device_pad_get_group_n_modes
@@ -7248,7 +7288,7 @@ func (pad *DevicePadInstance) GetFeatureGroup(feature DevicePadFeature, featureI
 // 
 // The function returns the following values:
 // 
-// 	- ret int 
+// 	- goret int 
 //
 // Returns the number of modes that @group may have.
 func (pad *DevicePadInstance) GetGroupNModes(groupIdx int) int {
@@ -7263,11 +7303,11 @@ func (pad *DevicePadInstance) GetGroupNModes(groupIdx int) int {
 	runtime.KeepAlive(pad)
 	runtime.KeepAlive(groupIdx)
 
-	var ret int
+	var goret int
 
-	ret = int(cret)
+	goret = int(cret)
 
-	return ret
+	return goret
 }
 
 // GetNFeatures wraps gdk_device_pad_get_n_features
@@ -7278,7 +7318,7 @@ func (pad *DevicePadInstance) GetGroupNModes(groupIdx int) int {
 // 
 // The function returns the following values:
 // 
-// 	- ret int 
+// 	- goret int 
 //
 // Returns the number of features a tablet pad has.
 func (pad *DevicePadInstance) GetNFeatures(feature DevicePadFeature) int {
@@ -7293,17 +7333,17 @@ func (pad *DevicePadInstance) GetNFeatures(feature DevicePadFeature) int {
 	runtime.KeepAlive(pad)
 	runtime.KeepAlive(feature)
 
-	var ret int
+	var goret int
 
-	ret = int(cret)
+	goret = int(cret)
 
-	return ret
+	return goret
 }
 
 // GetNGroups wraps gdk_device_pad_get_n_groups
 // The function returns the following values:
 // 
-// 	- ret int 
+// 	- goret int 
 //
 // Returns the number of groups this pad device has.
 // 
@@ -7319,17 +7359,17 @@ func (pad *DevicePadInstance) GetNGroups() int {
 	cret = C.gdk_device_pad_get_n_groups(carg0)
 	runtime.KeepAlive(pad)
 
-	var ret int
+	var goret int
 
-	ret = int(cret)
+	goret = int(cret)
 
-	return ret
+	return goret
 }
 
 // DragSurfaceInstance is the instance type used by all types implementing GdkDragSurface. It is used internally by the bindings. Users should use the interface [DragSurface] instead.
 type DragSurfaceInstance struct {
 	_ [0]func() // equal guard
-	*gobject.ObjectInstance
+	Instance gobject.ObjectInstance
 }
 
 var _ DragSurface = (*DragSurfaceInstance)(nil)
@@ -7338,7 +7378,7 @@ var _ DragSurface = (*DragSurfaceInstance)(nil)
 //
 // A `GdkDragSurface` is an interface for surfaces used during DND.
 type DragSurface interface {
-	gobject.Object
+	upcastToGdkDragSurface() *DragSurfaceInstance
 
 	// Present wraps gdk_drag_surface_present
 	// 
@@ -7349,45 +7389,48 @@ type DragSurface interface {
 	// 
 	// The function returns the following values:
 	// 
-	// 	- ret bool 
+	// 	- goret bool 
 	//
 	// Present @drag_surface.
 	Present(int, int) bool
 }
 
+var _ DragSurface = (*DragSurfaceInstance)(nil)
+
 func unsafeWrapDragSurface(base *gobject.ObjectInstance) *DragSurfaceInstance {
 	return &DragSurfaceInstance{
-		ObjectInstance: base,
+		Instance: *base,
 	}
 }
 
-func marshalDragSurfaceInstance(p uintptr) (interface{}, error) {
-	return unsafeWrapDragSurface(gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Object()), nil
+func marshalDragSurfaceInstance(p unsafe.Pointer) (any, error) {
+	return unsafeWrapDragSurface(gobject.ValueFromNative(p).Object()), nil
 }
 
-// UnsafeDragSurfaceFromGlibBorrow is used to convert raw GdkDragSurface pointers to go. This is used by the bindings internally.
-func UnsafeDragSurfaceFromGlibBorrow(c unsafe.Pointer) DragSurface {
-	return gobject.TODOBorrow(c).(DragSurface)
+func (d *DragSurfaceInstance) upcastToGdkDragSurface() *DragSurfaceInstance {
+	return d
 }
 
 // UnsafeDragSurfaceFromGlibNone is used to convert raw GdkDragSurface pointers to go while taking a reference and attaching a finalizer. This is used by the bindings internally.
 func UnsafeDragSurfaceFromGlibNone(c unsafe.Pointer) DragSurface {
-	return gobject.Take(c).(DragSurface)
+	return gobject.UnsafeObjectFromGlibNone(c).(DragSurface)
 }
 
 // UnsafeDragSurfaceFromGlibFull is used to convert raw GdkDragSurface pointers to go while attaching a finalizer. This is used by the bindings internally.
 func UnsafeDragSurfaceFromGlibFull(c unsafe.Pointer) DragSurface {
-	return gobject.AssumeOwnership(c).(DragSurface)
+	return gobject.UnsafeObjectFromGlibFull(c).(DragSurface)
 }
 
 // UnsafeDragSurfaceToGlibNone is used to convert the instance to it's C value GdkDragSurface. This is used by the bindings internally.
 func UnsafeDragSurfaceToGlibNone(c DragSurface) unsafe.Pointer {
-	return gobject.TODOToNone(c)
+	i := c.upcastToGdkDragSurface()
+	return gobject.UnsafeObjectToGlibNone(&i.Instance)
 }
 
 // UnsafeDragSurfaceToGlibFull is used to convert the instance to it's C value GdkDragSurface, while removeing the finalizer. This is used by the bindings internally.
 func UnsafeDragSurfaceToGlibFull(c DragSurface) unsafe.Pointer {
-	return gobject.TODOToFull(c)
+	i := c.upcastToGdkDragSurface()
+	return gobject.UnsafeObjectToGlibFull(&i.Instance)
 }
 
 // Present wraps gdk_drag_surface_present
@@ -7399,7 +7442,7 @@ func UnsafeDragSurfaceToGlibFull(c DragSurface) unsafe.Pointer {
 // 
 // The function returns the following values:
 // 
-// 	- ret bool 
+// 	- goret bool 
 //
 // Present @drag_surface.
 func (dragSurface *DragSurfaceInstance) Present(width int, height int) bool {
@@ -7417,19 +7460,19 @@ func (dragSurface *DragSurfaceInstance) Present(width int, height int) bool {
 	runtime.KeepAlive(width)
 	runtime.KeepAlive(height)
 
-	var ret bool
+	var goret bool
 
 	if cret != 0 {
-		ret = true
+		goret = true
 	}
 
-	return ret
+	return goret
 }
 
 // PaintableInstance is the instance type used by all types implementing GdkPaintable. It is used internally by the bindings. Users should use the interface [Paintable] instead.
 type PaintableInstance struct {
 	_ [0]func() // equal guard
-	*gobject.ObjectInstance
+	Instance gobject.ObjectInstance
 }
 
 var _ Paintable = (*PaintableInstance)(nil)
@@ -7482,7 +7525,7 @@ var _ Paintable = (*PaintableInstance)(nil)
 // [method@Gdk.Paintable.invalidate_size],
 // [func@Gdk.Paintable.new_empty].
 type Paintable interface {
-	gobject.Object
+	upcastToGdkPaintable() *PaintableInstance
 
 	// ComputeConcreteSize wraps gdk_paintable_compute_concrete_size
 	// 
@@ -7516,7 +7559,7 @@ type Paintable interface {
 	// GetCurrentImage wraps gdk_paintable_get_current_image
 	// The function returns the following values:
 	// 
-	// 	- ret Paintable 
+	// 	- goret Paintable 
 	//
 	// Gets an immutable paintable for the current contents displayed by @paintable.
 	// 
@@ -7528,7 +7571,7 @@ type Paintable interface {
 	// GetFlags wraps gdk_paintable_get_flags
 	// The function returns the following values:
 	// 
-	// 	- ret PaintableFlags 
+	// 	- goret PaintableFlags 
 	//
 	// Get flags for the paintable.
 	// 
@@ -7539,7 +7582,7 @@ type Paintable interface {
 	// GetIntrinsicAspectRatio wraps gdk_paintable_get_intrinsic_aspect_ratio
 	// The function returns the following values:
 	// 
-	// 	- ret float64 
+	// 	- goret float64 
 	//
 	// Gets the preferred aspect ratio the @paintable would like to be displayed at.
 	// 
@@ -7562,7 +7605,7 @@ type Paintable interface {
 	// GetIntrinsicHeight wraps gdk_paintable_get_intrinsic_height
 	// The function returns the following values:
 	// 
-	// 	- ret int 
+	// 	- goret int 
 	//
 	// Gets the preferred height the @paintable would like to be displayed at.
 	// 
@@ -7578,7 +7621,7 @@ type Paintable interface {
 	// GetIntrinsicWidth wraps gdk_paintable_get_intrinsic_width
 	// The function returns the following values:
 	// 
-	// 	- ret int 
+	// 	- goret int 
 	//
 	// Gets the preferred width the @paintable would like to be displayed at.
 	// 
@@ -7633,42 +7676,45 @@ type Paintable interface {
 	Snapshot(Snapshot, float64, float64)
 }
 
+var _ Paintable = (*PaintableInstance)(nil)
+
 func unsafeWrapPaintable(base *gobject.ObjectInstance) *PaintableInstance {
 	return &PaintableInstance{
-		ObjectInstance: base,
+		Instance: *base,
 	}
 }
 
-func marshalPaintableInstance(p uintptr) (interface{}, error) {
-	return unsafeWrapPaintable(gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Object()), nil
+func marshalPaintableInstance(p unsafe.Pointer) (any, error) {
+	return unsafeWrapPaintable(gobject.ValueFromNative(p).Object()), nil
 }
 
-// UnsafePaintableFromGlibBorrow is used to convert raw GdkPaintable pointers to go. This is used by the bindings internally.
-func UnsafePaintableFromGlibBorrow(c unsafe.Pointer) Paintable {
-	return gobject.TODOBorrow(c).(Paintable)
+func (p *PaintableInstance) upcastToGdkPaintable() *PaintableInstance {
+	return p
 }
 
 // UnsafePaintableFromGlibNone is used to convert raw GdkPaintable pointers to go while taking a reference and attaching a finalizer. This is used by the bindings internally.
 func UnsafePaintableFromGlibNone(c unsafe.Pointer) Paintable {
-	return gobject.Take(c).(Paintable)
+	return gobject.UnsafeObjectFromGlibNone(c).(Paintable)
 }
 
 // UnsafePaintableFromGlibFull is used to convert raw GdkPaintable pointers to go while attaching a finalizer. This is used by the bindings internally.
 func UnsafePaintableFromGlibFull(c unsafe.Pointer) Paintable {
-	return gobject.AssumeOwnership(c).(Paintable)
+	return gobject.UnsafeObjectFromGlibFull(c).(Paintable)
 }
 
 // UnsafePaintableToGlibNone is used to convert the instance to it's C value GdkPaintable. This is used by the bindings internally.
 func UnsafePaintableToGlibNone(c Paintable) unsafe.Pointer {
-	return gobject.TODOToNone(c)
+	i := c.upcastToGdkPaintable()
+	return gobject.UnsafeObjectToGlibNone(&i.Instance)
 }
 
 // UnsafePaintableToGlibFull is used to convert the instance to it's C value GdkPaintable, while removeing the finalizer. This is used by the bindings internally.
 func UnsafePaintableToGlibFull(c Paintable) unsafe.Pointer {
-	return gobject.TODOToFull(c)
+	i := c.upcastToGdkPaintable()
+	return gobject.UnsafeObjectToGlibFull(&i.Instance)
 }
 
-// NewEmpty wraps gdk_paintable_new_empty
+// NewPaintableInstanceEmpty wraps gdk_paintable_new_empty
 // 
 // The function takes the following parameters:
 // 
@@ -7677,7 +7723,7 @@ func UnsafePaintableToGlibFull(c Paintable) unsafe.Pointer {
 // 
 // The function returns the following values:
 // 
-// 	- ret Paintable 
+// 	- goret Paintable 
 //
 // Returns a paintable that has the given intrinsic size and draws nothing.
 // 
@@ -7686,7 +7732,7 @@ func UnsafePaintableToGlibFull(c Paintable) unsafe.Pointer {
 // when the paintable is in an incomplete state (like a
 // [GtkMediaStream](../gtk4/class.MediaStream.html) before receiving
 // the first frame).
-func NewEmpty(intrinsicWidth int, intrinsicHeight int) Paintable {
+func NewPaintableInstanceEmpty(intrinsicWidth int, intrinsicHeight int) Paintable {
 	var carg1 C.int           // in, none, casted
 	var carg2 C.int           // in, none, casted
 	var cret  *C.GdkPaintable // return, full, converted
@@ -7698,11 +7744,11 @@ func NewEmpty(intrinsicWidth int, intrinsicHeight int) Paintable {
 	runtime.KeepAlive(intrinsicWidth)
 	runtime.KeepAlive(intrinsicHeight)
 
-	var ret Paintable
+	var goret Paintable
 
-	ret = UnsafePaintableFromGlibFull(unsafe.Pointer(cret))
+	goret = UnsafePaintableFromGlibFull(unsafe.Pointer(cret))
 
-	return ret
+	return goret
 }
 
 // ComputeConcreteSize wraps gdk_paintable_compute_concrete_size
@@ -7767,7 +7813,7 @@ func (paintable *PaintableInstance) ComputeConcreteSize(specifiedWidth float64, 
 // GetCurrentImage wraps gdk_paintable_get_current_image
 // The function returns the following values:
 // 
-// 	- ret Paintable 
+// 	- goret Paintable 
 //
 // Gets an immutable paintable for the current contents displayed by @paintable.
 // 
@@ -7784,17 +7830,17 @@ func (paintable *PaintableInstance) GetCurrentImage() Paintable {
 	cret = C.gdk_paintable_get_current_image(carg0)
 	runtime.KeepAlive(paintable)
 
-	var ret Paintable
+	var goret Paintable
 
-	ret = UnsafePaintableFromGlibFull(unsafe.Pointer(cret))
+	goret = UnsafePaintableFromGlibFull(unsafe.Pointer(cret))
 
-	return ret
+	return goret
 }
 
 // GetFlags wraps gdk_paintable_get_flags
 // The function returns the following values:
 // 
-// 	- ret PaintableFlags 
+// 	- goret PaintableFlags 
 //
 // Get flags for the paintable.
 // 
@@ -7810,17 +7856,17 @@ func (paintable *PaintableInstance) GetFlags() PaintableFlags {
 	cret = C.gdk_paintable_get_flags(carg0)
 	runtime.KeepAlive(paintable)
 
-	var ret PaintableFlags
+	var goret PaintableFlags
 
-	ret = PaintableFlags(cret)
+	goret = PaintableFlags(cret)
 
-	return ret
+	return goret
 }
 
 // GetIntrinsicAspectRatio wraps gdk_paintable_get_intrinsic_aspect_ratio
 // The function returns the following values:
 // 
-// 	- ret float64 
+// 	- goret float64 
 //
 // Gets the preferred aspect ratio the @paintable would like to be displayed at.
 // 
@@ -7848,17 +7894,17 @@ func (paintable *PaintableInstance) GetIntrinsicAspectRatio() float64 {
 	cret = C.gdk_paintable_get_intrinsic_aspect_ratio(carg0)
 	runtime.KeepAlive(paintable)
 
-	var ret float64
+	var goret float64
 
-	ret = float64(cret)
+	goret = float64(cret)
 
-	return ret
+	return goret
 }
 
 // GetIntrinsicHeight wraps gdk_paintable_get_intrinsic_height
 // The function returns the following values:
 // 
-// 	- ret int 
+// 	- goret int 
 //
 // Gets the preferred height the @paintable would like to be displayed at.
 // 
@@ -7879,17 +7925,17 @@ func (paintable *PaintableInstance) GetIntrinsicHeight() int {
 	cret = C.gdk_paintable_get_intrinsic_height(carg0)
 	runtime.KeepAlive(paintable)
 
-	var ret int
+	var goret int
 
-	ret = int(cret)
+	goret = int(cret)
 
-	return ret
+	return goret
 }
 
 // GetIntrinsicWidth wraps gdk_paintable_get_intrinsic_width
 // The function returns the following values:
 // 
-// 	- ret int 
+// 	- goret int 
 //
 // Gets the preferred width the @paintable would like to be displayed at.
 // 
@@ -7910,11 +7956,11 @@ func (paintable *PaintableInstance) GetIntrinsicWidth() int {
 	cret = C.gdk_paintable_get_intrinsic_width(carg0)
 	runtime.KeepAlive(paintable)
 
-	var ret int
+	var goret int
 
-	ret = int(cret)
+	goret = int(cret)
 
-	return ret
+	return goret
 }
 
 // InvalidateContents wraps gdk_paintable_invalidate_contents
@@ -7993,7 +8039,7 @@ func (paintable *PaintableInstance) Snapshot(snapshot Snapshot, width float64, h
 // PopupInstance is the instance type used by all types implementing GdkPopup. It is used internally by the bindings. Users should use the interface [Popup] instead.
 type PopupInstance struct {
 	_ [0]func() // equal guard
-	*gobject.ObjectInstance
+	Instance gobject.ObjectInstance
 }
 
 var _ Popup = (*PopupInstance)(nil)
@@ -8008,40 +8054,40 @@ var _ Popup = (*PopupInstance)(nil)
 // They can be modal, which is indicated by the [property@Gdk.Popup:autohide]
 // property.
 type Popup interface {
-	gobject.Object
+	upcastToGdkPopup() *PopupInstance
 
 	// GetAutohide wraps gdk_popup_get_autohide
 	// The function returns the following values:
 	// 
-	// 	- ret bool 
+	// 	- goret bool 
 	//
 	// Returns whether this popup is set to hide on outside clicks.
 	GetAutohide() bool
 	// GetParent wraps gdk_popup_get_parent
 	// The function returns the following values:
 	// 
-	// 	- ret Surface 
+	// 	- goret Surface 
 	//
 	// Returns the parent surface of a popup.
 	GetParent() Surface
 	// GetPositionX wraps gdk_popup_get_position_x
 	// The function returns the following values:
 	// 
-	// 	- ret int 
+	// 	- goret int 
 	//
 	// Obtains the position of the popup relative to its parent.
 	GetPositionX() int
 	// GetPositionY wraps gdk_popup_get_position_y
 	// The function returns the following values:
 	// 
-	// 	- ret int 
+	// 	- goret int 
 	//
 	// Obtains the position of the popup relative to its parent.
 	GetPositionY() int
 	// GetRectAnchor wraps gdk_popup_get_rect_anchor
 	// The function returns the following values:
 	// 
-	// 	- ret Gravity 
+	// 	- goret Gravity 
 	//
 	// Gets the current popup rectangle anchor.
 	// 
@@ -8051,7 +8097,7 @@ type Popup interface {
 	// GetSurfaceAnchor wraps gdk_popup_get_surface_anchor
 	// The function returns the following values:
 	// 
-	// 	- ret Gravity 
+	// 	- goret Gravity 
 	//
 	// Gets the current popup surface anchor.
 	// 
@@ -8064,11 +8110,11 @@ type Popup interface {
 	// 
 	// 	- width int: the unconstrained popup width to layout 
 	// 	- height int: the unconstrained popup height to layout 
-	// 	- layout PopupLayout: the `GdkPopupLayout` object used to layout 
+	// 	- layout *PopupLayout: the `GdkPopupLayout` object used to layout 
 	// 
 	// The function returns the following values:
 	// 
-	// 	- ret bool 
+	// 	- goret bool 
 	//
 	// Present @popup after having processed the `GdkPopupLayout` rules.
 	// 
@@ -8085,48 +8131,51 @@ type Popup interface {
 	// Presenting may fail, for example if the @popup is set to autohide
 	// and is immediately hidden upon being presented. If presenting failed,
 	// the [signal@Gdk.Surface::layout] signal will not me emitted.
-	Present(int, int, PopupLayout) bool
+	Present(int, int, *PopupLayout) bool
 }
+
+var _ Popup = (*PopupInstance)(nil)
 
 func unsafeWrapPopup(base *gobject.ObjectInstance) *PopupInstance {
 	return &PopupInstance{
-		ObjectInstance: base,
+		Instance: *base,
 	}
 }
 
-func marshalPopupInstance(p uintptr) (interface{}, error) {
-	return unsafeWrapPopup(gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Object()), nil
+func marshalPopupInstance(p unsafe.Pointer) (any, error) {
+	return unsafeWrapPopup(gobject.ValueFromNative(p).Object()), nil
 }
 
-// UnsafePopupFromGlibBorrow is used to convert raw GdkPopup pointers to go. This is used by the bindings internally.
-func UnsafePopupFromGlibBorrow(c unsafe.Pointer) Popup {
-	return gobject.TODOBorrow(c).(Popup)
+func (p *PopupInstance) upcastToGdkPopup() *PopupInstance {
+	return p
 }
 
 // UnsafePopupFromGlibNone is used to convert raw GdkPopup pointers to go while taking a reference and attaching a finalizer. This is used by the bindings internally.
 func UnsafePopupFromGlibNone(c unsafe.Pointer) Popup {
-	return gobject.Take(c).(Popup)
+	return gobject.UnsafeObjectFromGlibNone(c).(Popup)
 }
 
 // UnsafePopupFromGlibFull is used to convert raw GdkPopup pointers to go while attaching a finalizer. This is used by the bindings internally.
 func UnsafePopupFromGlibFull(c unsafe.Pointer) Popup {
-	return gobject.AssumeOwnership(c).(Popup)
+	return gobject.UnsafeObjectFromGlibFull(c).(Popup)
 }
 
 // UnsafePopupToGlibNone is used to convert the instance to it's C value GdkPopup. This is used by the bindings internally.
 func UnsafePopupToGlibNone(c Popup) unsafe.Pointer {
-	return gobject.TODOToNone(c)
+	i := c.upcastToGdkPopup()
+	return gobject.UnsafeObjectToGlibNone(&i.Instance)
 }
 
 // UnsafePopupToGlibFull is used to convert the instance to it's C value GdkPopup, while removeing the finalizer. This is used by the bindings internally.
 func UnsafePopupToGlibFull(c Popup) unsafe.Pointer {
-	return gobject.TODOToFull(c)
+	i := c.upcastToGdkPopup()
+	return gobject.UnsafeObjectToGlibFull(&i.Instance)
 }
 
 // GetAutohide wraps gdk_popup_get_autohide
 // The function returns the following values:
 // 
-// 	- ret bool 
+// 	- goret bool 
 //
 // Returns whether this popup is set to hide on outside clicks.
 func (popup *PopupInstance) GetAutohide() bool {
@@ -8138,19 +8187,19 @@ func (popup *PopupInstance) GetAutohide() bool {
 	cret = C.gdk_popup_get_autohide(carg0)
 	runtime.KeepAlive(popup)
 
-	var ret bool
+	var goret bool
 
 	if cret != 0 {
-		ret = true
+		goret = true
 	}
 
-	return ret
+	return goret
 }
 
 // GetParent wraps gdk_popup_get_parent
 // The function returns the following values:
 // 
-// 	- ret Surface 
+// 	- goret Surface 
 //
 // Returns the parent surface of a popup.
 func (popup *PopupInstance) GetParent() Surface {
@@ -8162,17 +8211,17 @@ func (popup *PopupInstance) GetParent() Surface {
 	cret = C.gdk_popup_get_parent(carg0)
 	runtime.KeepAlive(popup)
 
-	var ret Surface
+	var goret Surface
 
-	ret = UnsafeSurfaceFromGlibNone(unsafe.Pointer(cret))
+	goret = UnsafeSurfaceFromGlibNone(unsafe.Pointer(cret))
 
-	return ret
+	return goret
 }
 
 // GetPositionX wraps gdk_popup_get_position_x
 // The function returns the following values:
 // 
-// 	- ret int 
+// 	- goret int 
 //
 // Obtains the position of the popup relative to its parent.
 func (popup *PopupInstance) GetPositionX() int {
@@ -8184,17 +8233,17 @@ func (popup *PopupInstance) GetPositionX() int {
 	cret = C.gdk_popup_get_position_x(carg0)
 	runtime.KeepAlive(popup)
 
-	var ret int
+	var goret int
 
-	ret = int(cret)
+	goret = int(cret)
 
-	return ret
+	return goret
 }
 
 // GetPositionY wraps gdk_popup_get_position_y
 // The function returns the following values:
 // 
-// 	- ret int 
+// 	- goret int 
 //
 // Obtains the position of the popup relative to its parent.
 func (popup *PopupInstance) GetPositionY() int {
@@ -8206,17 +8255,17 @@ func (popup *PopupInstance) GetPositionY() int {
 	cret = C.gdk_popup_get_position_y(carg0)
 	runtime.KeepAlive(popup)
 
-	var ret int
+	var goret int
 
-	ret = int(cret)
+	goret = int(cret)
 
-	return ret
+	return goret
 }
 
 // GetRectAnchor wraps gdk_popup_get_rect_anchor
 // The function returns the following values:
 // 
-// 	- ret Gravity 
+// 	- goret Gravity 
 //
 // Gets the current popup rectangle anchor.
 // 
@@ -8231,17 +8280,17 @@ func (popup *PopupInstance) GetRectAnchor() Gravity {
 	cret = C.gdk_popup_get_rect_anchor(carg0)
 	runtime.KeepAlive(popup)
 
-	var ret Gravity
+	var goret Gravity
 
-	ret = Gravity(cret)
+	goret = Gravity(cret)
 
-	return ret
+	return goret
 }
 
 // GetSurfaceAnchor wraps gdk_popup_get_surface_anchor
 // The function returns the following values:
 // 
-// 	- ret Gravity 
+// 	- goret Gravity 
 //
 // Gets the current popup surface anchor.
 // 
@@ -8256,11 +8305,11 @@ func (popup *PopupInstance) GetSurfaceAnchor() Gravity {
 	cret = C.gdk_popup_get_surface_anchor(carg0)
 	runtime.KeepAlive(popup)
 
-	var ret Gravity
+	var goret Gravity
 
-	ret = Gravity(cret)
+	goret = Gravity(cret)
 
-	return ret
+	return goret
 }
 
 // Present wraps gdk_popup_present
@@ -8269,11 +8318,11 @@ func (popup *PopupInstance) GetSurfaceAnchor() Gravity {
 // 
 // 	- width int: the unconstrained popup width to layout 
 // 	- height int: the unconstrained popup height to layout 
-// 	- layout PopupLayout: the `GdkPopupLayout` object used to layout 
+// 	- layout *PopupLayout: the `GdkPopupLayout` object used to layout 
 // 
 // The function returns the following values:
 // 
-// 	- ret bool 
+// 	- goret bool 
 //
 // Present @popup after having processed the `GdkPopupLayout` rules.
 // 
@@ -8290,7 +8339,7 @@ func (popup *PopupInstance) GetSurfaceAnchor() Gravity {
 // Presenting may fail, for example if the @popup is set to autohide
 // and is immediately hidden upon being presented. If presenting failed,
 // the [signal@Gdk.Surface::layout] signal will not me emitted.
-func (popup *PopupInstance) Present(width int, height int, layout PopupLayout) bool {
+func (popup *PopupInstance) Present(width int, height int, layout *PopupLayout) bool {
 	var carg0 *C.GdkPopup       // in, none, converted
 	var carg1 C.int             // in, none, casted
 	var carg2 C.int             // in, none, casted
@@ -8308,19 +8357,19 @@ func (popup *PopupInstance) Present(width int, height int, layout PopupLayout) b
 	runtime.KeepAlive(height)
 	runtime.KeepAlive(layout)
 
-	var ret bool
+	var goret bool
 
 	if cret != 0 {
-		ret = true
+		goret = true
 	}
 
-	return ret
+	return goret
 }
 
 // ToplevelInstance is the instance type used by all types implementing GdkToplevel. It is used internally by the bindings. Users should use the interface [Toplevel] instead.
 type ToplevelInstance struct {
 	_ [0]func() // equal guard
-	*gobject.ObjectInstance
+	Instance gobject.ObjectInstance
 }
 
 var _ Toplevel = (*ToplevelInstance)(nil)
@@ -8333,7 +8382,7 @@ var _ Toplevel = (*ToplevelInstance)(nil)
 // the windowing system, such as controlling maximization and size of the
 // surface, setting icons and transient parents for dialogs.
 type Toplevel interface {
-	gobject.Object
+	upcastToGdkToplevel() *ToplevelInstance
 
 	// BeginMove wraps gdk_toplevel_begin_move
 	// 
@@ -8381,7 +8430,7 @@ type Toplevel interface {
 	// GetState wraps gdk_toplevel_get_state
 	// The function returns the following values:
 	// 
-	// 	- ret ToplevelState 
+	// 	- goret ToplevelState 
 	//
 	// Gets the bitwise or of the currently active surface state flags,
 	// from the `GdkToplevelState` enumeration.
@@ -8389,7 +8438,7 @@ type Toplevel interface {
 	// Lower wraps gdk_toplevel_lower
 	// The function returns the following values:
 	// 
-	// 	- ret bool 
+	// 	- goret bool 
 	//
 	// Asks to lower the @toplevel below other windows.
 	// 
@@ -8398,7 +8447,7 @@ type Toplevel interface {
 	// Minimize wraps gdk_toplevel_minimize
 	// The function returns the following values:
 	// 
-	// 	- ret bool 
+	// 	- goret bool 
 	//
 	// Asks to minimize the @toplevel.
 	// 
@@ -8408,7 +8457,7 @@ type Toplevel interface {
 	// 
 	// The function takes the following parameters:
 	// 
-	// 	- layout ToplevelLayout: the `GdkToplevelLayout` object used to layout 
+	// 	- layout *ToplevelLayout: the `GdkToplevelLayout` object used to layout 
 	//
 	// Present @toplevel after having processed the `GdkToplevelLayout` rules.
 	// 
@@ -8421,7 +8470,7 @@ type Toplevel interface {
 	// 
 	// Presenting is asynchronous and the specified layout parameters are not
 	// guaranteed to be respected.
-	Present(ToplevelLayout)
+	Present(*ToplevelLayout)
 	// RestoreSystemShortcuts wraps gdk_toplevel_restore_system_shortcuts
 	//
 	// Restore default system keyboard shortcuts which were previously
@@ -8510,7 +8559,7 @@ type Toplevel interface {
 	// SupportsEdgeConstraints wraps gdk_toplevel_supports_edge_constraints
 	// The function returns the following values:
 	// 
-	// 	- ret bool 
+	// 	- goret bool 
 	//
 	// Returns whether the desktop environment supports
 	// tiled window states.
@@ -8523,45 +8572,48 @@ type Toplevel interface {
 	// 
 	// The function returns the following values:
 	// 
-	// 	- ret bool 
+	// 	- goret bool 
 	//
 	// Performs a title bar gesture.
 	TitlebarGesture(TitlebarGesture) bool
 }
 
+var _ Toplevel = (*ToplevelInstance)(nil)
+
 func unsafeWrapToplevel(base *gobject.ObjectInstance) *ToplevelInstance {
 	return &ToplevelInstance{
-		ObjectInstance: base,
+		Instance: *base,
 	}
 }
 
-func marshalToplevelInstance(p uintptr) (interface{}, error) {
-	return unsafeWrapToplevel(gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Object()), nil
+func marshalToplevelInstance(p unsafe.Pointer) (any, error) {
+	return unsafeWrapToplevel(gobject.ValueFromNative(p).Object()), nil
 }
 
-// UnsafeToplevelFromGlibBorrow is used to convert raw GdkToplevel pointers to go. This is used by the bindings internally.
-func UnsafeToplevelFromGlibBorrow(c unsafe.Pointer) Toplevel {
-	return gobject.TODOBorrow(c).(Toplevel)
+func (t *ToplevelInstance) upcastToGdkToplevel() *ToplevelInstance {
+	return t
 }
 
 // UnsafeToplevelFromGlibNone is used to convert raw GdkToplevel pointers to go while taking a reference and attaching a finalizer. This is used by the bindings internally.
 func UnsafeToplevelFromGlibNone(c unsafe.Pointer) Toplevel {
-	return gobject.Take(c).(Toplevel)
+	return gobject.UnsafeObjectFromGlibNone(c).(Toplevel)
 }
 
 // UnsafeToplevelFromGlibFull is used to convert raw GdkToplevel pointers to go while attaching a finalizer. This is used by the bindings internally.
 func UnsafeToplevelFromGlibFull(c unsafe.Pointer) Toplevel {
-	return gobject.AssumeOwnership(c).(Toplevel)
+	return gobject.UnsafeObjectFromGlibFull(c).(Toplevel)
 }
 
 // UnsafeToplevelToGlibNone is used to convert the instance to it's C value GdkToplevel. This is used by the bindings internally.
 func UnsafeToplevelToGlibNone(c Toplevel) unsafe.Pointer {
-	return gobject.TODOToNone(c)
+	i := c.upcastToGdkToplevel()
+	return gobject.UnsafeObjectToGlibNone(&i.Instance)
 }
 
 // UnsafeToplevelToGlibFull is used to convert the instance to it's C value GdkToplevel, while removeing the finalizer. This is used by the bindings internally.
 func UnsafeToplevelToGlibFull(c Toplevel) unsafe.Pointer {
-	return gobject.TODOToFull(c)
+	i := c.upcastToGdkToplevel()
+	return gobject.UnsafeObjectToGlibFull(&i.Instance)
 }
 
 // BeginMove wraps gdk_toplevel_begin_move
@@ -8672,7 +8724,7 @@ func (toplevel *ToplevelInstance) Focus(timestamp uint32) {
 // GetState wraps gdk_toplevel_get_state
 // The function returns the following values:
 // 
-// 	- ret ToplevelState 
+// 	- goret ToplevelState 
 //
 // Gets the bitwise or of the currently active surface state flags,
 // from the `GdkToplevelState` enumeration.
@@ -8685,17 +8737,17 @@ func (toplevel *ToplevelInstance) GetState() ToplevelState {
 	cret = C.gdk_toplevel_get_state(carg0)
 	runtime.KeepAlive(toplevel)
 
-	var ret ToplevelState
+	var goret ToplevelState
 
-	ret = ToplevelState(cret)
+	goret = ToplevelState(cret)
 
-	return ret
+	return goret
 }
 
 // Lower wraps gdk_toplevel_lower
 // The function returns the following values:
 // 
-// 	- ret bool 
+// 	- goret bool 
 //
 // Asks to lower the @toplevel below other windows.
 // 
@@ -8709,19 +8761,19 @@ func (toplevel *ToplevelInstance) Lower() bool {
 	cret = C.gdk_toplevel_lower(carg0)
 	runtime.KeepAlive(toplevel)
 
-	var ret bool
+	var goret bool
 
 	if cret != 0 {
-		ret = true
+		goret = true
 	}
 
-	return ret
+	return goret
 }
 
 // Minimize wraps gdk_toplevel_minimize
 // The function returns the following values:
 // 
-// 	- ret bool 
+// 	- goret bool 
 //
 // Asks to minimize the @toplevel.
 // 
@@ -8735,20 +8787,20 @@ func (toplevel *ToplevelInstance) Minimize() bool {
 	cret = C.gdk_toplevel_minimize(carg0)
 	runtime.KeepAlive(toplevel)
 
-	var ret bool
+	var goret bool
 
 	if cret != 0 {
-		ret = true
+		goret = true
 	}
 
-	return ret
+	return goret
 }
 
 // Present wraps gdk_toplevel_present
 // 
 // The function takes the following parameters:
 // 
-// 	- layout ToplevelLayout: the `GdkToplevelLayout` object used to layout 
+// 	- layout *ToplevelLayout: the `GdkToplevelLayout` object used to layout 
 //
 // Present @toplevel after having processed the `GdkToplevelLayout` rules.
 // 
@@ -8761,7 +8813,7 @@ func (toplevel *ToplevelInstance) Minimize() bool {
 // 
 // Presenting is asynchronous and the specified layout parameters are not
 // guaranteed to be respected.
-func (toplevel *ToplevelInstance) Present(layout ToplevelLayout) {
+func (toplevel *ToplevelInstance) Present(layout *ToplevelLayout) {
 	var carg0 *C.GdkToplevel       // in, none, converted
 	var carg1 *C.GdkToplevelLayout // in, none, converted
 
@@ -8943,7 +8995,7 @@ func (toplevel *ToplevelInstance) SetTransientFor(parent Surface) {
 // SupportsEdgeConstraints wraps gdk_toplevel_supports_edge_constraints
 // The function returns the following values:
 // 
-// 	- ret bool 
+// 	- goret bool 
 //
 // Returns whether the desktop environment supports
 // tiled window states.
@@ -8956,13 +9008,13 @@ func (toplevel *ToplevelInstance) SupportsEdgeConstraints() bool {
 	cret = C.gdk_toplevel_supports_edge_constraints(carg0)
 	runtime.KeepAlive(toplevel)
 
-	var ret bool
+	var goret bool
 
 	if cret != 0 {
-		ret = true
+		goret = true
 	}
 
-	return ret
+	return goret
 }
 
 // TitlebarGesture wraps gdk_toplevel_titlebar_gesture
@@ -8973,7 +9025,7 @@ func (toplevel *ToplevelInstance) SupportsEdgeConstraints() bool {
 // 
 // The function returns the following values:
 // 
-// 	- ret bool 
+// 	- goret bool 
 //
 // Performs a title bar gesture.
 func (toplevel *ToplevelInstance) TitlebarGesture(gesture TitlebarGesture) bool {
@@ -8988,13 +9040,13 @@ func (toplevel *ToplevelInstance) TitlebarGesture(gesture TitlebarGesture) bool 
 	runtime.KeepAlive(toplevel)
 	runtime.KeepAlive(gesture)
 
-	var ret bool
+	var goret bool
 
 	if cret != 0 {
-		ret = true
+		goret = true
 	}
 
-	return ret
+	return goret
 }
 
 // AppLaunchContextInstance is the instance type used by all types extending GdkAppLaunchContext. It is used internally by the bindings. Users should use the interface [AppLaunchContext] instead.
@@ -9033,7 +9085,7 @@ type AppLaunchContext interface {
 	// GetDisplay wraps gdk_app_launch_context_get_display
 	// The function returns the following values:
 	// 
-	// 	- ret Display 
+	// 	- goret Display 
 	//
 	// Gets the `GdkDisplay` that @context is for.
 	GetDisplay() Display
@@ -9105,31 +9157,26 @@ type AppLaunchContext interface {
 	SetTimestamp(uint32)
 }
 
-func unsafeWrapAppLaunchContext(base *gio.ObjectInstance) *AppLaunchContextInstance {
+func unsafeWrapAppLaunchContext(base *gobject.ObjectInstance) *AppLaunchContextInstance {
 	return &AppLaunchContextInstance{
-		ObjectInstance: gobject.ObjectInstance{
+		AppLaunchContextInstance: gio.AppLaunchContextInstance{
 			ObjectInstance: *base,
 		},
 	}
 }
 
-func marshalAppLaunchContextInstance(p uintptr) (interface{}, error) {
-	return unsafeWrapAppLaunchContext(gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Object()), nil
-}
-
-// UnsafeAppLaunchContextFromGlibBorrow is used to convert raw GdkAppLaunchContext pointers to go. This is used by the bindings internally.
-func UnsafeAppLaunchContextFromGlibBorrow(c unsafe.Pointer) AppLaunchContext {
-	return gio.TODOBorrow(c).(AppLaunchContext)
+func marshalAppLaunchContextInstance(p unsafe.Pointer) (any, error) {
+	return unsafeWrapAppLaunchContext(gobject.ValueFromNative(p).Object()), nil
 }
 
 // UnsafeAppLaunchContextFromGlibNone is used to convert raw GdkAppLaunchContext pointers to go while taking a reference and attaching a finalizer. This is used by the bindings internally.
 func UnsafeAppLaunchContextFromGlibNone(c unsafe.Pointer) AppLaunchContext {
-	return gio.Take(c).(AppLaunchContext)
+	return gobject.UnsafeObjectFromGlibNone(c).(AppLaunchContext)
 }
 
 // UnsafeAppLaunchContextFromGlibFull is used to convert raw GdkAppLaunchContext pointers to go while attaching a finalizer. This is used by the bindings internally.
 func UnsafeAppLaunchContextFromGlibFull(c unsafe.Pointer) AppLaunchContext {
-	return gio.AssumeOwnership(c).(AppLaunchContext)
+	return gobject.UnsafeObjectFromGlibFull(c).(AppLaunchContext)
 }
 
 func (a *AppLaunchContextInstance) upcastToGdkAppLaunchContext() *AppLaunchContextInstance {
@@ -9138,18 +9185,18 @@ func (a *AppLaunchContextInstance) upcastToGdkAppLaunchContext() *AppLaunchConte
 
 // UnsafeAppLaunchContextToGlibNone is used to convert the instance to it's C value GdkAppLaunchContext. This is used by the bindings internally.
 func UnsafeAppLaunchContextToGlibNone(c AppLaunchContext) unsafe.Pointer {
-	return gio.TODOToNone(c)
+	return gobject.UnsafeObjectToGlibNone(c)
 }
 
 // UnsafeAppLaunchContextToGlibFull is used to convert the instance to it's C value GdkAppLaunchContext, while removeing the finalizer. This is used by the bindings internally.
 func UnsafeAppLaunchContextToGlibFull(c AppLaunchContext) unsafe.Pointer {
-	return gio.TODOToFull(c)
+	return gobject.UnsafeObjectToGlibFull(c)
 }
 
 // GetDisplay wraps gdk_app_launch_context_get_display
 // The function returns the following values:
 // 
-// 	- ret Display 
+// 	- goret Display 
 //
 // Gets the `GdkDisplay` that @context is for.
 func (context *AppLaunchContextInstance) GetDisplay() Display {
@@ -9161,11 +9208,11 @@ func (context *AppLaunchContextInstance) GetDisplay() Display {
 	cret = C.gdk_app_launch_context_get_display(carg0)
 	runtime.KeepAlive(context)
 
-	var ret Display
+	var goret Display
 
-	ret = UnsafeDisplayFromGlibNone(unsafe.Pointer(cret))
+	goret = UnsafeDisplayFromGlibNone(unsafe.Pointer(cret))
 
-	return ret
+	return goret
 }
 
 // SetDesktop wraps gdk_app_launch_context_set_desktop
@@ -9218,7 +9265,7 @@ func (context *AppLaunchContextInstance) SetIcon(icon gio.Icon) {
 
 	carg0 = (*C.GdkAppLaunchContext)(UnsafeAppLaunchContextToGlibNone(context))
 	if icon != nil {
-		carg1 = (*C.GIcon)(UnsafeIconToGlibNone(icon))
+		carg1 = (*C.GIcon)(gio.UnsafeIconToGlibNone(icon))
 	}
 
 	C.gdk_app_launch_context_set_icon(carg0, carg1)
@@ -9243,7 +9290,7 @@ func (context *AppLaunchContextInstance) SetIcon(icon gio.Icon) {
 // for the launched application itself.
 func (context *AppLaunchContextInstance) SetIconName(iconName string) {
 	var carg0 *C.GdkAppLaunchContext // in, none, converted
-	var carg1 *C.gchar               // in, none, string, nullable
+	var carg1 *C.gchar               // in, none, string, nullable-string
 
 	carg0 = (*C.GdkAppLaunchContext)(UnsafeAppLaunchContextToGlibNone(context))
 	if iconName != "" {
@@ -9318,7 +9365,7 @@ type CicpParams interface {
 	// BuildColorState wraps gdk_cicp_params_build_color_state
 	// The function returns the following values:
 	// 
-	// 	- ret ColorState 
+	// 	- goret *ColorState 
 	// 	- _goerr error (nullable): an error 
 	//
 	// Creates a new `GdkColorState` object for the cicp parameters in @self.
@@ -9326,11 +9373,11 @@ type CicpParams interface {
 	// Note that this may fail if the cicp parameters in @self are not
 	// supported by GTK. In that case, `NULL` is returned, and @error is set
 	// with an error message that can be presented to the user.
-	BuildColorState() (ColorState, error)
+	BuildColorState() (*ColorState, error)
 	// GetColorPrimaries wraps gdk_cicp_params_get_color_primaries
 	// The function returns the following values:
 	// 
-	// 	- ret uint 
+	// 	- goret uint 
 	//
 	// Returns the value of the color-primaries property
 	// of @self.
@@ -9338,21 +9385,21 @@ type CicpParams interface {
 	// GetMatrixCoefficients wraps gdk_cicp_params_get_matrix_coefficients
 	// The function returns the following values:
 	// 
-	// 	- ret uint 
+	// 	- goret uint 
 	//
 	// Gets the matrix-coefficients property of @self.
 	GetMatrixCoefficients() uint
 	// GetRange wraps gdk_cicp_params_get_range
 	// The function returns the following values:
 	// 
-	// 	- ret CicpRange 
+	// 	- goret CicpRange 
 	//
 	// Gets the range property of @self.
 	GetRange() CicpRange
 	// GetTransferFunction wraps gdk_cicp_params_get_transfer_function
 	// The function returns the following values:
 	// 
-	// 	- ret uint 
+	// 	- goret uint 
 	//
 	// Gets the transfer-function property of @self.
 	GetTransferFunction() uint
@@ -9397,23 +9444,18 @@ func unsafeWrapCicpParams(base *gobject.ObjectInstance) *CicpParamsInstance {
 	}
 }
 
-func marshalCicpParamsInstance(p uintptr) (interface{}, error) {
-	return unsafeWrapCicpParams(gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Object()), nil
-}
-
-// UnsafeCicpParamsFromGlibBorrow is used to convert raw GdkCicpParams pointers to go. This is used by the bindings internally.
-func UnsafeCicpParamsFromGlibBorrow(c unsafe.Pointer) CicpParams {
-	return gobject.TODOBorrow(c).(CicpParams)
+func marshalCicpParamsInstance(p unsafe.Pointer) (any, error) {
+	return unsafeWrapCicpParams(gobject.ValueFromNative(p).Object()), nil
 }
 
 // UnsafeCicpParamsFromGlibNone is used to convert raw GdkCicpParams pointers to go while taking a reference and attaching a finalizer. This is used by the bindings internally.
 func UnsafeCicpParamsFromGlibNone(c unsafe.Pointer) CicpParams {
-	return gobject.Take(c).(CicpParams)
+	return gobject.UnsafeObjectFromGlibNone(c).(CicpParams)
 }
 
 // UnsafeCicpParamsFromGlibFull is used to convert raw GdkCicpParams pointers to go while attaching a finalizer. This is used by the bindings internally.
 func UnsafeCicpParamsFromGlibFull(c unsafe.Pointer) CicpParams {
-	return gobject.AssumeOwnership(c).(CicpParams)
+	return gobject.UnsafeObjectFromGlibFull(c).(CicpParams)
 }
 
 func (c *CicpParamsInstance) upcastToGdkCicpParams() *CicpParamsInstance {
@@ -9422,18 +9464,18 @@ func (c *CicpParamsInstance) upcastToGdkCicpParams() *CicpParamsInstance {
 
 // UnsafeCicpParamsToGlibNone is used to convert the instance to it's C value GdkCicpParams. This is used by the bindings internally.
 func UnsafeCicpParamsToGlibNone(c CicpParams) unsafe.Pointer {
-	return gobject.TODOToNone(c)
+	return gobject.UnsafeObjectToGlibNone(c)
 }
 
 // UnsafeCicpParamsToGlibFull is used to convert the instance to it's C value GdkCicpParams, while removeing the finalizer. This is used by the bindings internally.
 func UnsafeCicpParamsToGlibFull(c CicpParams) unsafe.Pointer {
-	return gobject.TODOToFull(c)
+	return gobject.UnsafeObjectToGlibFull(c)
 }
 
 // NewCicpParamsInstance wraps gdk_cicp_params_new
 // The function returns the following values:
 // 
-// 	- ret CicpParams 
+// 	- goret CicpParams 
 //
 // Creates a new `GdkCicpParams` object.
 // 
@@ -9444,17 +9486,17 @@ func NewCicpParamsInstance() CicpParams {
 
 	cret = C.gdk_cicp_params_new()
 
-	var ret CicpParams
+	var goret CicpParams
 
-	ret = UnsafeCicpParamsFromGlibFull(unsafe.Pointer(cret))
+	goret = UnsafeCicpParamsFromGlibFull(unsafe.Pointer(cret))
 
-	return ret
+	return goret
 }
 
 // BuildColorState wraps gdk_cicp_params_build_color_state
 // The function returns the following values:
 // 
-// 	- ret ColorState 
+// 	- goret *ColorState 
 // 	- _goerr error (nullable): an error 
 //
 // Creates a new `GdkColorState` object for the cicp parameters in @self.
@@ -9462,7 +9504,7 @@ func NewCicpParamsInstance() CicpParams {
 // Note that this may fail if the cicp parameters in @self are not
 // supported by GTK. In that case, `NULL` is returned, and @error is set
 // with an error message that can be presented to the user.
-func (self *CicpParamsInstance) BuildColorState() (ColorState, error) {
+func (self *CicpParamsInstance) BuildColorState() (*ColorState, error) {
 	var carg0 *C.GdkCicpParams // in, none, converted
 	var cret  *C.GdkColorState // return, full, converted
 	var _cerr *C.GError        // out, full, converted, nullable
@@ -9472,21 +9514,21 @@ func (self *CicpParamsInstance) BuildColorState() (ColorState, error) {
 	cret = C.gdk_cicp_params_build_color_state(carg0, &_cerr)
 	runtime.KeepAlive(self)
 
-	var ret    ColorState
+	var goret  *ColorState
 	var _goerr error
 
-	ret = UnsafeColorStateFromGlibFull(unsafe.Pointer(cret))
+	goret = UnsafeColorStateFromGlibFull(unsafe.Pointer(cret))
 	if _cerr != nil {
-		_goerr = UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
+		_goerr = glib.UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
 	}
 
-	return ret, _goerr
+	return goret, _goerr
 }
 
 // GetColorPrimaries wraps gdk_cicp_params_get_color_primaries
 // The function returns the following values:
 // 
-// 	- ret uint 
+// 	- goret uint 
 //
 // Returns the value of the color-primaries property
 // of @self.
@@ -9499,17 +9541,17 @@ func (self *CicpParamsInstance) GetColorPrimaries() uint {
 	cret = C.gdk_cicp_params_get_color_primaries(carg0)
 	runtime.KeepAlive(self)
 
-	var ret uint
+	var goret uint
 
-	ret = uint(cret)
+	goret = uint(cret)
 
-	return ret
+	return goret
 }
 
 // GetMatrixCoefficients wraps gdk_cicp_params_get_matrix_coefficients
 // The function returns the following values:
 // 
-// 	- ret uint 
+// 	- goret uint 
 //
 // Gets the matrix-coefficients property of @self.
 func (self *CicpParamsInstance) GetMatrixCoefficients() uint {
@@ -9521,17 +9563,17 @@ func (self *CicpParamsInstance) GetMatrixCoefficients() uint {
 	cret = C.gdk_cicp_params_get_matrix_coefficients(carg0)
 	runtime.KeepAlive(self)
 
-	var ret uint
+	var goret uint
 
-	ret = uint(cret)
+	goret = uint(cret)
 
-	return ret
+	return goret
 }
 
 // GetRange wraps gdk_cicp_params_get_range
 // The function returns the following values:
 // 
-// 	- ret CicpRange 
+// 	- goret CicpRange 
 //
 // Gets the range property of @self.
 func (self *CicpParamsInstance) GetRange() CicpRange {
@@ -9543,17 +9585,17 @@ func (self *CicpParamsInstance) GetRange() CicpRange {
 	cret = C.gdk_cicp_params_get_range(carg0)
 	runtime.KeepAlive(self)
 
-	var ret CicpRange
+	var goret CicpRange
 
-	ret = CicpRange(cret)
+	goret = CicpRange(cret)
 
-	return ret
+	return goret
 }
 
 // GetTransferFunction wraps gdk_cicp_params_get_transfer_function
 // The function returns the following values:
 // 
-// 	- ret uint 
+// 	- goret uint 
 //
 // Gets the transfer-function property of @self.
 func (self *CicpParamsInstance) GetTransferFunction() uint {
@@ -9565,11 +9607,11 @@ func (self *CicpParamsInstance) GetTransferFunction() uint {
 	cret = C.gdk_cicp_params_get_transfer_function(carg0)
 	runtime.KeepAlive(self)
 
-	var ret uint
+	var goret uint
 
-	ret = uint(cret)
+	goret = uint(cret)
 
-	return ret
+	return goret
 }
 
 // SetColorPrimaries wraps gdk_cicp_params_set_color_primaries
@@ -9683,7 +9725,7 @@ type Clipboard interface {
 	// GetContent wraps gdk_clipboard_get_content
 	// The function returns the following values:
 	// 
-	// 	- ret ContentProvider 
+	// 	- goret ContentProvider 
 	//
 	// Returns the `GdkContentProvider` currently set on @clipboard.
 	// 
@@ -9693,21 +9735,21 @@ type Clipboard interface {
 	// GetDisplay wraps gdk_clipboard_get_display
 	// The function returns the following values:
 	// 
-	// 	- ret Display 
+	// 	- goret Display 
 	//
 	// Gets the `GdkDisplay` that the clipboard was created for.
 	GetDisplay() Display
 	// GetFormats wraps gdk_clipboard_get_formats
 	// The function returns the following values:
 	// 
-	// 	- ret ContentFormats 
+	// 	- goret *ContentFormats 
 	//
 	// Gets the formats that the clipboard can provide its current contents in.
-	GetFormats() ContentFormats
+	GetFormats() *ContentFormats
 	// IsLocal wraps gdk_clipboard_is_local
 	// The function returns the following values:
 	// 
-	// 	- ret bool 
+	// 	- goret bool 
 	//
 	// Returns if the clipboard is local.
 	// 
@@ -9721,9 +9763,9 @@ type Clipboard interface {
 	// 
 	// The function takes the following parameters:
 	// 
-	// 	- mimeTypes array: a %NULL-terminated array of mime types to choose from 
+	// 	- cancellable context.Context (nullable): optional `GCancellable` object 
+	// 	- mimeTypes []string: a %NULL-terminated array of mime types to choose from 
 	// 	- ioPriority int: the I/O priority of the request 
-	// 	- cancellable gio. (nullable): optional `GCancellable` object 
 	// 	- callback gio.AsyncReadyCallback (nullable): callback to call when the request is satisfied 
 	//
 	// Asynchronously requests an input stream to read the @clipboard's
@@ -9731,7 +9773,7 @@ type Clipboard interface {
 	// 
 	// The clipboard will choose the most suitable mime type from the given list
 	// to fulfill the request, preferring the ones listed first.
-	ReadAsync(array, int, gio., gio.AsyncReadyCallback)
+	ReadAsync(context.Context, []string, int, gio.AsyncReadyCallback)
 	// ReadFinish wraps gdk_clipboard_read_finish
 	// 
 	// The function takes the following parameters:
@@ -9742,7 +9784,7 @@ type Clipboard interface {
 	// 
 	// 	- outMimeType string: location to store
 	//   the chosen mime type 
-	// 	- ret gio.InputStream 
+	// 	- goret gio.InputStream 
 	// 	- _goerr error (nullable): an error 
 	//
 	// Finishes an asynchronous clipboard read.
@@ -9753,7 +9795,7 @@ type Clipboard interface {
 	// 
 	// The function takes the following parameters:
 	// 
-	// 	- cancellable gio. (nullable): optional `GCancellable` object 
+	// 	- cancellable context.Context (nullable): optional `GCancellable` object 
 	// 	- callback gio.AsyncReadyCallback (nullable): callback to call when the request is satisfied 
 	//
 	// Asynchronously request the @clipboard contents converted to a string.
@@ -9761,7 +9803,7 @@ type Clipboard interface {
 	// This is a simple wrapper around [method@Gdk.Clipboard.read_value_async].
 	// Use that function or [method@Gdk.Clipboard.read_async] directly if you
 	// need more control over the operation.
-	ReadTextAsync(gio., gio.AsyncReadyCallback)
+	ReadTextAsync(context.Context, gio.AsyncReadyCallback)
 	// ReadTextFinish wraps gdk_clipboard_read_text_finish
 	// 
 	// The function takes the following parameters:
@@ -9770,7 +9812,7 @@ type Clipboard interface {
 	// 
 	// The function returns the following values:
 	// 
-	// 	- ret string 
+	// 	- goret string 
 	// 	- _goerr error (nullable): an error 
 	//
 	// Finishes an asynchronous clipboard read.
@@ -9781,7 +9823,7 @@ type Clipboard interface {
 	// 
 	// The function takes the following parameters:
 	// 
-	// 	- cancellable gio. (nullable): optional `GCancellable` object, %NULL to ignore. 
+	// 	- cancellable context.Context (nullable): optional `GCancellable` object, %NULL to ignore. 
 	// 	- callback gio.AsyncReadyCallback (nullable): callback to call when the request is satisfied 
 	//
 	// Asynchronously request the @clipboard contents converted to a `GdkPixbuf`.
@@ -9789,7 +9831,7 @@ type Clipboard interface {
 	// This is a simple wrapper around [method@Gdk.Clipboard.read_value_async].
 	// Use that function or [method@Gdk.Clipboard.read_async] directly if you
 	// need more control over the operation.
-	ReadTextureAsync(gio., gio.AsyncReadyCallback)
+	ReadTextureAsync(context.Context, gio.AsyncReadyCallback)
 	// ReadTextureFinish wraps gdk_clipboard_read_texture_finish
 	// 
 	// The function takes the following parameters:
@@ -9798,7 +9840,7 @@ type Clipboard interface {
 	// 
 	// The function returns the following values:
 	// 
-	// 	- ret Texture 
+	// 	- goret Texture 
 	// 	- _goerr error (nullable): an error 
 	//
 	// Finishes an asynchronous clipboard read.
@@ -9809,9 +9851,9 @@ type Clipboard interface {
 	// 
 	// The function takes the following parameters:
 	// 
-	// 	- typ glib.Type: a `GType` to read 
+	// 	- cancellable context.Context (nullable): optional `GCancellable` object 
+	// 	- typ gobject.Type: a `GType` to read 
 	// 	- ioPriority int: the I/O priority of the request 
-	// 	- cancellable gio. (nullable): optional `GCancellable` object 
 	// 	- callback gio.AsyncReadyCallback (nullable): callback to call when the request is satisfied 
 	//
 	// Asynchronously request the @clipboard contents converted to the given
@@ -9820,7 +9862,7 @@ type Clipboard interface {
 	// For local clipboard contents that are available in the given `GType`,
 	// the value will be copied directly. Otherwise, GDK will try to use
 	// [func@content_deserialize_async] to convert the clipboard's data.
-	ReadValueAsync(glib.Type, int, gio., gio.AsyncReadyCallback)
+	ReadValueAsync(context.Context, gobject.Type, int, gio.AsyncReadyCallback)
 	// ReadValueFinish wraps gdk_clipboard_read_value_finish
 	// 
 	// The function takes the following parameters:
@@ -9829,7 +9871,7 @@ type Clipboard interface {
 	// 
 	// The function returns the following values:
 	// 
-	// 	- ret *gobject.Value 
+	// 	- goret *gobject.Value 
 	// 	- _goerr error (nullable): an error 
 	//
 	// Finishes an asynchronous clipboard read.
@@ -9845,7 +9887,7 @@ type Clipboard interface {
 	// 
 	// The function returns the following values:
 	// 
-	// 	- ret bool 
+	// 	- goret bool 
 	//
 	// Sets a new content provider on @clipboard.
 	// 
@@ -9888,8 +9930,8 @@ type Clipboard interface {
 	// 
 	// The function takes the following parameters:
 	// 
+	// 	- cancellable context.Context (nullable): optional `GCancellable` object 
 	// 	- ioPriority int: the I/O priority of the request 
-	// 	- cancellable gio. (nullable): optional `GCancellable` object 
 	// 	- callback gio.AsyncReadyCallback (nullable): callback to call when the request is satisfied 
 	//
 	// Asynchronously instructs the @clipboard to store its contents remotely.
@@ -9904,7 +9946,7 @@ type Clipboard interface {
 	// This function is called automatically when a
 	// [GtkApplication](../gtk4/class.Application.html)
 	// is shut down, so you likely don't need to call it.
-	StoreAsync(int, gio., gio.AsyncReadyCallback)
+	StoreAsync(context.Context, int, gio.AsyncReadyCallback)
 	// StoreFinish wraps gdk_clipboard_store_finish
 	// 
 	// The function takes the following parameters:
@@ -9913,7 +9955,7 @@ type Clipboard interface {
 	// 
 	// The function returns the following values:
 	// 
-	// 	- ret bool 
+	// 	- goret bool 
 	// 	- _goerr error (nullable): an error 
 	//
 	// Finishes an asynchronous clipboard store.
@@ -9928,23 +9970,18 @@ func unsafeWrapClipboard(base *gobject.ObjectInstance) *ClipboardInstance {
 	}
 }
 
-func marshalClipboardInstance(p uintptr) (interface{}, error) {
-	return unsafeWrapClipboard(gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Object()), nil
-}
-
-// UnsafeClipboardFromGlibBorrow is used to convert raw GdkClipboard pointers to go. This is used by the bindings internally.
-func UnsafeClipboardFromGlibBorrow(c unsafe.Pointer) Clipboard {
-	return gobject.TODOBorrow(c).(Clipboard)
+func marshalClipboardInstance(p unsafe.Pointer) (any, error) {
+	return unsafeWrapClipboard(gobject.ValueFromNative(p).Object()), nil
 }
 
 // UnsafeClipboardFromGlibNone is used to convert raw GdkClipboard pointers to go while taking a reference and attaching a finalizer. This is used by the bindings internally.
 func UnsafeClipboardFromGlibNone(c unsafe.Pointer) Clipboard {
-	return gobject.Take(c).(Clipboard)
+	return gobject.UnsafeObjectFromGlibNone(c).(Clipboard)
 }
 
 // UnsafeClipboardFromGlibFull is used to convert raw GdkClipboard pointers to go while attaching a finalizer. This is used by the bindings internally.
 func UnsafeClipboardFromGlibFull(c unsafe.Pointer) Clipboard {
-	return gobject.AssumeOwnership(c).(Clipboard)
+	return gobject.UnsafeObjectFromGlibFull(c).(Clipboard)
 }
 
 func (c *ClipboardInstance) upcastToGdkClipboard() *ClipboardInstance {
@@ -9953,18 +9990,18 @@ func (c *ClipboardInstance) upcastToGdkClipboard() *ClipboardInstance {
 
 // UnsafeClipboardToGlibNone is used to convert the instance to it's C value GdkClipboard. This is used by the bindings internally.
 func UnsafeClipboardToGlibNone(c Clipboard) unsafe.Pointer {
-	return gobject.TODOToNone(c)
+	return gobject.UnsafeObjectToGlibNone(c)
 }
 
 // UnsafeClipboardToGlibFull is used to convert the instance to it's C value GdkClipboard, while removeing the finalizer. This is used by the bindings internally.
 func UnsafeClipboardToGlibFull(c Clipboard) unsafe.Pointer {
-	return gobject.TODOToFull(c)
+	return gobject.UnsafeObjectToGlibFull(c)
 }
 
 // GetContent wraps gdk_clipboard_get_content
 // The function returns the following values:
 // 
-// 	- ret ContentProvider 
+// 	- goret ContentProvider 
 //
 // Returns the `GdkContentProvider` currently set on @clipboard.
 // 
@@ -9979,17 +10016,17 @@ func (clipboard *ClipboardInstance) GetContent() ContentProvider {
 	cret = C.gdk_clipboard_get_content(carg0)
 	runtime.KeepAlive(clipboard)
 
-	var ret ContentProvider
+	var goret ContentProvider
 
-	ret = UnsafeContentProviderFromGlibNone(unsafe.Pointer(cret))
+	goret = UnsafeContentProviderFromGlibNone(unsafe.Pointer(cret))
 
-	return ret
+	return goret
 }
 
 // GetDisplay wraps gdk_clipboard_get_display
 // The function returns the following values:
 // 
-// 	- ret Display 
+// 	- goret Display 
 //
 // Gets the `GdkDisplay` that the clipboard was created for.
 func (clipboard *ClipboardInstance) GetDisplay() Display {
@@ -10001,20 +10038,20 @@ func (clipboard *ClipboardInstance) GetDisplay() Display {
 	cret = C.gdk_clipboard_get_display(carg0)
 	runtime.KeepAlive(clipboard)
 
-	var ret Display
+	var goret Display
 
-	ret = UnsafeDisplayFromGlibNone(unsafe.Pointer(cret))
+	goret = UnsafeDisplayFromGlibNone(unsafe.Pointer(cret))
 
-	return ret
+	return goret
 }
 
 // GetFormats wraps gdk_clipboard_get_formats
 // The function returns the following values:
 // 
-// 	- ret ContentFormats 
+// 	- goret *ContentFormats 
 //
 // Gets the formats that the clipboard can provide its current contents in.
-func (clipboard *ClipboardInstance) GetFormats() ContentFormats {
+func (clipboard *ClipboardInstance) GetFormats() *ContentFormats {
 	var carg0 *C.GdkClipboard      // in, none, converted
 	var cret  *C.GdkContentFormats // return, none, converted
 
@@ -10023,17 +10060,17 @@ func (clipboard *ClipboardInstance) GetFormats() ContentFormats {
 	cret = C.gdk_clipboard_get_formats(carg0)
 	runtime.KeepAlive(clipboard)
 
-	var ret ContentFormats
+	var goret *ContentFormats
 
-	ret = UnsafeContentFormatsFromGlibNone(unsafe.Pointer(cret))
+	goret = UnsafeContentFormatsFromGlibNone(unsafe.Pointer(cret))
 
-	return ret
+	return goret
 }
 
 // IsLocal wraps gdk_clipboard_is_local
 // The function returns the following values:
 // 
-// 	- ret bool 
+// 	- goret bool 
 //
 // Returns if the clipboard is local.
 // 
@@ -10051,22 +10088,22 @@ func (clipboard *ClipboardInstance) IsLocal() bool {
 	cret = C.gdk_clipboard_is_local(carg0)
 	runtime.KeepAlive(clipboard)
 
-	var ret bool
+	var goret bool
 
 	if cret != 0 {
-		ret = true
+		goret = true
 	}
 
-	return ret
+	return goret
 }
 
 // ReadAsync wraps gdk_clipboard_read_async
 // 
 // The function takes the following parameters:
 // 
-// 	- mimeTypes array: a %NULL-terminated array of mime types to choose from 
+// 	- cancellable context.Context (nullable): optional `GCancellable` object 
+// 	- mimeTypes []string: a %NULL-terminated array of mime types to choose from 
 // 	- ioPriority int: the I/O priority of the request 
-// 	- cancellable gio. (nullable): optional `GCancellable` object 
 // 	- callback gio.AsyncReadyCallback (nullable): callback to call when the request is satisfied 
 //
 // Asynchronously requests an input stream to read the @clipboard's
@@ -10074,20 +10111,22 @@ func (clipboard *ClipboardInstance) IsLocal() bool {
 // 
 // The clipboard will choose the most suitable mime type from the given list
 // to fulfill the request, preferring the ones listed first.
-func (clipboard *ClipboardInstance) ReadAsync(mimeTypes array, ioPriority int, cancellable gio., callback gio.AsyncReadyCallback) {
+func (clipboard *ClipboardInstance) ReadAsync(cancellable context.Context, mimeTypes []string, ioPriority int, callback gio.AsyncReadyCallback) {
 	var carg0 *C.GdkClipboard       // in, none, converted
-	var carg1 array                 // in, transfer: none, scope: call, implicit: false, skip: false, optional: false, nullable: false, caller-allocates: false, has closure: false, has destroy: false
+	var carg3 *C.GCancellable       // in, none, converted, nullable
+	var carg1 **C.char              // in, transfer: none, C Pointers: 2, Name: array[utf8], array (inner: *typesystem.StringPrimitive, zero-terminated)
 	var carg2 C.int                 // in, none, casted
-	var carg3 *C.Cancellable        // in, none, converted, nullable
 	var carg4 C.GAsyncReadyCallback // callback, scope: async, closure: carg5, nullable
 	var carg5 C.gpointer            // implicit
 
 	carg0 = (*C.GdkClipboard)(UnsafeClipboardToGlibNone(clipboard))
-	panic("unimplemented conversion of array (array)")
-	carg2 = C.int(ioPriority)
 	if cancellable != nil {
-		carg3 = (*C.Cancellable)(UnsafeCancellableToGlibNone(cancellable))
+		carg3 = (*C.GCancellable)(gio.UnsafeGCancellableToGlibNone(cancellable))
 	}
+	_ = mimeTypes
+	_ = carg1
+	panic("unimplemented conversion of []string (const char**)")
+	carg2 = C.int(ioPriority)
 	if callback != nil {
 		carg4 = (*[0]byte)(C._gotk4_gio2_AsyncReadyCallback)
 		carg5 = C.gpointer(gbox.AssignOnce(callback))
@@ -10095,9 +10134,9 @@ func (clipboard *ClipboardInstance) ReadAsync(mimeTypes array, ioPriority int, c
 
 	C.gdk_clipboard_read_async(carg0, carg1, carg2, carg3, carg4, carg5)
 	runtime.KeepAlive(clipboard)
+	runtime.KeepAlive(cancellable)
 	runtime.KeepAlive(mimeTypes)
 	runtime.KeepAlive(ioPriority)
-	runtime.KeepAlive(cancellable)
 	runtime.KeepAlive(callback)
 }
 
@@ -10111,7 +10150,7 @@ func (clipboard *ClipboardInstance) ReadAsync(mimeTypes array, ioPriority int, c
 // 
 // 	- outMimeType string: location to store
 //   the chosen mime type 
-// 	- ret gio.InputStream 
+// 	- goret gio.InputStream 
 // 	- _goerr error (nullable): an error 
 //
 // Finishes an asynchronous clipboard read.
@@ -10125,30 +10164,30 @@ func (clipboard *ClipboardInstance) ReadFinish(result gio.AsyncResult) (string, 
 	var _cerr *C.GError       // out, full, converted, nullable
 
 	carg0 = (*C.GdkClipboard)(UnsafeClipboardToGlibNone(clipboard))
-	carg1 = (*C.GAsyncResult)(UnsafeAsyncResultToGlibNone(result))
+	carg1 = (*C.GAsyncResult)(gio.UnsafeAsyncResultToGlibNone(result))
 
 	cret = C.gdk_clipboard_read_finish(carg0, carg1, &carg2, &_cerr)
 	runtime.KeepAlive(clipboard)
 	runtime.KeepAlive(result)
 
 	var outMimeType string
-	var ret         gio.InputStream
+	var goret       gio.InputStream
 	var _goerr      error
 
 	outMimeType = C.GoString((*C.gchar)(unsafe.Pointer(carg2)))
-	ret = UnsafeInputStreamFromGlibFull(unsafe.Pointer(cret))
+	goret = gio.UnsafeInputStreamFromGlibFull(unsafe.Pointer(cret))
 	if _cerr != nil {
-		_goerr = UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
+		_goerr = glib.UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
 	}
 
-	return outMimeType, ret, _goerr
+	return outMimeType, goret, _goerr
 }
 
 // ReadTextAsync wraps gdk_clipboard_read_text_async
 // 
 // The function takes the following parameters:
 // 
-// 	- cancellable gio. (nullable): optional `GCancellable` object 
+// 	- cancellable context.Context (nullable): optional `GCancellable` object 
 // 	- callback gio.AsyncReadyCallback (nullable): callback to call when the request is satisfied 
 //
 // Asynchronously request the @clipboard contents converted to a string.
@@ -10156,15 +10195,15 @@ func (clipboard *ClipboardInstance) ReadFinish(result gio.AsyncResult) (string, 
 // This is a simple wrapper around [method@Gdk.Clipboard.read_value_async].
 // Use that function or [method@Gdk.Clipboard.read_async] directly if you
 // need more control over the operation.
-func (clipboard *ClipboardInstance) ReadTextAsync(cancellable gio., callback gio.AsyncReadyCallback) {
+func (clipboard *ClipboardInstance) ReadTextAsync(cancellable context.Context, callback gio.AsyncReadyCallback) {
 	var carg0 *C.GdkClipboard       // in, none, converted
-	var carg1 *C.Cancellable        // in, none, converted, nullable
+	var carg1 *C.GCancellable       // in, none, converted, nullable
 	var carg2 C.GAsyncReadyCallback // callback, scope: async, closure: carg3, nullable
 	var carg3 C.gpointer            // implicit
 
 	carg0 = (*C.GdkClipboard)(UnsafeClipboardToGlibNone(clipboard))
 	if cancellable != nil {
-		carg1 = (*C.Cancellable)(UnsafeCancellableToGlibNone(cancellable))
+		carg1 = (*C.GCancellable)(gio.UnsafeGCancellableToGlibNone(cancellable))
 	}
 	if callback != nil {
 		carg2 = (*[0]byte)(C._gotk4_gio2_AsyncReadyCallback)
@@ -10185,7 +10224,7 @@ func (clipboard *ClipboardInstance) ReadTextAsync(cancellable gio., callback gio
 // 
 // The function returns the following values:
 // 
-// 	- ret string 
+// 	- goret string 
 // 	- _goerr error (nullable): an error 
 //
 // Finishes an asynchronous clipboard read.
@@ -10198,29 +10237,29 @@ func (clipboard *ClipboardInstance) ReadTextFinish(result gio.AsyncResult) (stri
 	var _cerr *C.GError       // out, full, converted, nullable
 
 	carg0 = (*C.GdkClipboard)(UnsafeClipboardToGlibNone(clipboard))
-	carg1 = (*C.GAsyncResult)(UnsafeAsyncResultToGlibNone(result))
+	carg1 = (*C.GAsyncResult)(gio.UnsafeAsyncResultToGlibNone(result))
 
 	cret = C.gdk_clipboard_read_text_finish(carg0, carg1, &_cerr)
 	runtime.KeepAlive(clipboard)
 	runtime.KeepAlive(result)
 
-	var ret    string
+	var goret  string
 	var _goerr error
 
-	ret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
 	defer C.free(unsafe.Pointer(cret))
 	if _cerr != nil {
-		_goerr = UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
+		_goerr = glib.UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
 	}
 
-	return ret, _goerr
+	return goret, _goerr
 }
 
 // ReadTextureAsync wraps gdk_clipboard_read_texture_async
 // 
 // The function takes the following parameters:
 // 
-// 	- cancellable gio. (nullable): optional `GCancellable` object, %NULL to ignore. 
+// 	- cancellable context.Context (nullable): optional `GCancellable` object, %NULL to ignore. 
 // 	- callback gio.AsyncReadyCallback (nullable): callback to call when the request is satisfied 
 //
 // Asynchronously request the @clipboard contents converted to a `GdkPixbuf`.
@@ -10228,15 +10267,15 @@ func (clipboard *ClipboardInstance) ReadTextFinish(result gio.AsyncResult) (stri
 // This is a simple wrapper around [method@Gdk.Clipboard.read_value_async].
 // Use that function or [method@Gdk.Clipboard.read_async] directly if you
 // need more control over the operation.
-func (clipboard *ClipboardInstance) ReadTextureAsync(cancellable gio., callback gio.AsyncReadyCallback) {
+func (clipboard *ClipboardInstance) ReadTextureAsync(cancellable context.Context, callback gio.AsyncReadyCallback) {
 	var carg0 *C.GdkClipboard       // in, none, converted
-	var carg1 *C.Cancellable        // in, none, converted, nullable
+	var carg1 *C.GCancellable       // in, none, converted, nullable
 	var carg2 C.GAsyncReadyCallback // callback, scope: async, closure: carg3, nullable
 	var carg3 C.gpointer            // implicit
 
 	carg0 = (*C.GdkClipboard)(UnsafeClipboardToGlibNone(clipboard))
 	if cancellable != nil {
-		carg1 = (*C.Cancellable)(UnsafeCancellableToGlibNone(cancellable))
+		carg1 = (*C.GCancellable)(gio.UnsafeGCancellableToGlibNone(cancellable))
 	}
 	if callback != nil {
 		carg2 = (*[0]byte)(C._gotk4_gio2_AsyncReadyCallback)
@@ -10257,7 +10296,7 @@ func (clipboard *ClipboardInstance) ReadTextureAsync(cancellable gio., callback 
 // 
 // The function returns the following values:
 // 
-// 	- ret Texture 
+// 	- goret Texture 
 // 	- _goerr error (nullable): an error 
 //
 // Finishes an asynchronous clipboard read.
@@ -10270,30 +10309,30 @@ func (clipboard *ClipboardInstance) ReadTextureFinish(result gio.AsyncResult) (T
 	var _cerr *C.GError       // out, full, converted, nullable
 
 	carg0 = (*C.GdkClipboard)(UnsafeClipboardToGlibNone(clipboard))
-	carg1 = (*C.GAsyncResult)(UnsafeAsyncResultToGlibNone(result))
+	carg1 = (*C.GAsyncResult)(gio.UnsafeAsyncResultToGlibNone(result))
 
 	cret = C.gdk_clipboard_read_texture_finish(carg0, carg1, &_cerr)
 	runtime.KeepAlive(clipboard)
 	runtime.KeepAlive(result)
 
-	var ret    Texture
+	var goret  Texture
 	var _goerr error
 
-	ret = UnsafeTextureFromGlibFull(unsafe.Pointer(cret))
+	goret = UnsafeTextureFromGlibFull(unsafe.Pointer(cret))
 	if _cerr != nil {
-		_goerr = UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
+		_goerr = glib.UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
 	}
 
-	return ret, _goerr
+	return goret, _goerr
 }
 
 // ReadValueAsync wraps gdk_clipboard_read_value_async
 // 
 // The function takes the following parameters:
 // 
-// 	- typ glib.Type: a `GType` to read 
+// 	- cancellable context.Context (nullable): optional `GCancellable` object 
+// 	- typ gobject.Type: a `GType` to read 
 // 	- ioPriority int: the I/O priority of the request 
-// 	- cancellable gio. (nullable): optional `GCancellable` object 
 // 	- callback gio.AsyncReadyCallback (nullable): callback to call when the request is satisfied 
 //
 // Asynchronously request the @clipboard contents converted to the given
@@ -10302,20 +10341,20 @@ func (clipboard *ClipboardInstance) ReadTextureFinish(result gio.AsyncResult) (T
 // For local clipboard contents that are available in the given `GType`,
 // the value will be copied directly. Otherwise, GDK will try to use
 // [func@content_deserialize_async] to convert the clipboard's data.
-func (clipboard *ClipboardInstance) ReadValueAsync(typ glib.Type, ioPriority int, cancellable gio., callback gio.AsyncReadyCallback) {
+func (clipboard *ClipboardInstance) ReadValueAsync(cancellable context.Context, typ gobject.Type, ioPriority int, callback gio.AsyncReadyCallback) {
 	var carg0 *C.GdkClipboard       // in, none, converted
-	var carg1 C.GType               // in, none, casted
+	var carg3 *C.GCancellable       // in, none, converted, nullable
+	var carg1 C.GType               // in, none, casted, alias
 	var carg2 C.int                 // in, none, casted
-	var carg3 *C.Cancellable        // in, none, converted, nullable
 	var carg4 C.GAsyncReadyCallback // callback, scope: async, closure: carg5, nullable
 	var carg5 C.gpointer            // implicit
 
 	carg0 = (*C.GdkClipboard)(UnsafeClipboardToGlibNone(clipboard))
+	if cancellable != nil {
+		carg3 = (*C.GCancellable)(gio.UnsafeGCancellableToGlibNone(cancellable))
+	}
 	carg1 = C.GType(typ)
 	carg2 = C.int(ioPriority)
-	if cancellable != nil {
-		carg3 = (*C.Cancellable)(UnsafeCancellableToGlibNone(cancellable))
-	}
 	if callback != nil {
 		carg4 = (*[0]byte)(C._gotk4_gio2_AsyncReadyCallback)
 		carg5 = C.gpointer(gbox.AssignOnce(callback))
@@ -10323,9 +10362,9 @@ func (clipboard *ClipboardInstance) ReadValueAsync(typ glib.Type, ioPriority int
 
 	C.gdk_clipboard_read_value_async(carg0, carg1, carg2, carg3, carg4, carg5)
 	runtime.KeepAlive(clipboard)
+	runtime.KeepAlive(cancellable)
 	runtime.KeepAlive(typ)
 	runtime.KeepAlive(ioPriority)
-	runtime.KeepAlive(cancellable)
 	runtime.KeepAlive(callback)
 }
 
@@ -10337,7 +10376,7 @@ func (clipboard *ClipboardInstance) ReadValueAsync(typ glib.Type, ioPriority int
 // 
 // The function returns the following values:
 // 
-// 	- ret *gobject.Value 
+// 	- goret *gobject.Value 
 // 	- _goerr error (nullable): an error 
 //
 // Finishes an asynchronous clipboard read.
@@ -10350,21 +10389,21 @@ func (clipboard *ClipboardInstance) ReadValueFinish(result gio.AsyncResult) (*go
 	var _cerr *C.GError       // out, full, converted, nullable
 
 	carg0 = (*C.GdkClipboard)(UnsafeClipboardToGlibNone(clipboard))
-	carg1 = (*C.GAsyncResult)(UnsafeAsyncResultToGlibNone(result))
+	carg1 = (*C.GAsyncResult)(gio.UnsafeAsyncResultToGlibNone(result))
 
 	cret = C.gdk_clipboard_read_value_finish(carg0, carg1, &_cerr)
 	runtime.KeepAlive(clipboard)
 	runtime.KeepAlive(result)
 
-	var ret    *gobject.Value
+	var goret  *gobject.Value
 	var _goerr error
 
-	ret = TODOFromGlibNone(unsafe.Pointer(cret))
+	goret = gobject.TODOFromGlibNone(unsafe.Pointer(cret))
 	if _cerr != nil {
-		_goerr = UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
+		_goerr = glib.UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
 	}
 
-	return ret, _goerr
+	return goret, _goerr
 }
 
 // SetContent wraps gdk_clipboard_set_content
@@ -10376,7 +10415,7 @@ func (clipboard *ClipboardInstance) ReadValueFinish(result gio.AsyncResult) (*go
 // 
 // The function returns the following values:
 // 
-// 	- ret bool 
+// 	- goret bool 
 //
 // Sets a new content provider on @clipboard.
 // 
@@ -10404,13 +10443,13 @@ func (clipboard *ClipboardInstance) SetContent(provider ContentProvider) bool {
 	runtime.KeepAlive(clipboard)
 	runtime.KeepAlive(provider)
 
-	var ret bool
+	var goret bool
 
 	if cret != 0 {
-		ret = true
+		goret = true
 	}
 
-	return ret
+	return goret
 }
 
 // SetText wraps gdk_clipboard_set_text
@@ -10464,7 +10503,7 @@ func (clipboard *ClipboardInstance) SetValue(value *gobject.Value) {
 	var carg1 *C.GValue       // in, none, converted
 
 	carg0 = (*C.GdkClipboard)(UnsafeClipboardToGlibNone(clipboard))
-	carg1 = (*C.GValue)(TODOToGlibNone(value))
+	carg1 = (*C.GValue)(gobject.UnsafeValueToGlibNone(value))
 
 	C.gdk_clipboard_set_value(carg0, carg1)
 	runtime.KeepAlive(clipboard)
@@ -10475,8 +10514,8 @@ func (clipboard *ClipboardInstance) SetValue(value *gobject.Value) {
 // 
 // The function takes the following parameters:
 // 
+// 	- cancellable context.Context (nullable): optional `GCancellable` object 
 // 	- ioPriority int: the I/O priority of the request 
-// 	- cancellable gio. (nullable): optional `GCancellable` object 
 // 	- callback gio.AsyncReadyCallback (nullable): callback to call when the request is satisfied 
 //
 // Asynchronously instructs the @clipboard to store its contents remotely.
@@ -10491,18 +10530,18 @@ func (clipboard *ClipboardInstance) SetValue(value *gobject.Value) {
 // This function is called automatically when a
 // [GtkApplication](../gtk4/class.Application.html)
 // is shut down, so you likely don't need to call it.
-func (clipboard *ClipboardInstance) StoreAsync(ioPriority int, cancellable gio., callback gio.AsyncReadyCallback) {
+func (clipboard *ClipboardInstance) StoreAsync(cancellable context.Context, ioPriority int, callback gio.AsyncReadyCallback) {
 	var carg0 *C.GdkClipboard       // in, none, converted
+	var carg2 *C.GCancellable       // in, none, converted, nullable
 	var carg1 C.int                 // in, none, casted
-	var carg2 *C.Cancellable        // in, none, converted, nullable
 	var carg3 C.GAsyncReadyCallback // callback, scope: async, closure: carg4, nullable
 	var carg4 C.gpointer            // implicit
 
 	carg0 = (*C.GdkClipboard)(UnsafeClipboardToGlibNone(clipboard))
-	carg1 = C.int(ioPriority)
 	if cancellable != nil {
-		carg2 = (*C.Cancellable)(UnsafeCancellableToGlibNone(cancellable))
+		carg2 = (*C.GCancellable)(gio.UnsafeGCancellableToGlibNone(cancellable))
 	}
+	carg1 = C.int(ioPriority)
 	if callback != nil {
 		carg3 = (*[0]byte)(C._gotk4_gio2_AsyncReadyCallback)
 		carg4 = C.gpointer(gbox.AssignOnce(callback))
@@ -10510,8 +10549,8 @@ func (clipboard *ClipboardInstance) StoreAsync(ioPriority int, cancellable gio.,
 
 	C.gdk_clipboard_store_async(carg0, carg1, carg2, carg3, carg4)
 	runtime.KeepAlive(clipboard)
-	runtime.KeepAlive(ioPriority)
 	runtime.KeepAlive(cancellable)
+	runtime.KeepAlive(ioPriority)
 	runtime.KeepAlive(callback)
 }
 
@@ -10523,7 +10562,7 @@ func (clipboard *ClipboardInstance) StoreAsync(ioPriority int, cancellable gio.,
 // 
 // The function returns the following values:
 // 
-// 	- ret bool 
+// 	- goret bool 
 // 	- _goerr error (nullable): an error 
 //
 // Finishes an asynchronous clipboard store.
@@ -10536,23 +10575,23 @@ func (clipboard *ClipboardInstance) StoreFinish(result gio.AsyncResult) (bool, e
 	var _cerr *C.GError       // out, full, converted, nullable
 
 	carg0 = (*C.GdkClipboard)(UnsafeClipboardToGlibNone(clipboard))
-	carg1 = (*C.GAsyncResult)(UnsafeAsyncResultToGlibNone(result))
+	carg1 = (*C.GAsyncResult)(gio.UnsafeAsyncResultToGlibNone(result))
 
 	cret = C.gdk_clipboard_store_finish(carg0, carg1, &_cerr)
 	runtime.KeepAlive(clipboard)
 	runtime.KeepAlive(result)
 
-	var ret    bool
+	var goret  bool
 	var _goerr error
 
 	if cret != 0 {
-		ret = true
+		goret = true
 	}
 	if _cerr != nil {
-		_goerr = UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
+		_goerr = glib.UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
 	}
 
-	return ret, _goerr
+	return goret, _goerr
 }
 
 // ContentDeserializerInstance is the instance type used by all types extending GdkContentDeserializer. It is used internally by the bindings. Users should use the interface [ContentDeserializer] instead.
@@ -10560,7 +10599,7 @@ type ContentDeserializerInstance struct {
 	_ [0]func() // equal guard
 	gobject.ObjectInstance
 	// implemented interfaces:
-gio.AsyncResult
+	gio.AsyncResultInstance
 }
 
 var _ ContentDeserializer = (*ContentDeserializerInstance)(nil)
@@ -10586,23 +10625,23 @@ type ContentDeserializer interface {
 	// GetCancellable wraps gdk_content_deserializer_get_cancellable
 	// The function returns the following values:
 	// 
-	// 	- ret gio. 
+	// 	- goret context.Context 
 	//
 	// Gets the cancellable for the current operation.
 	// 
 	// This is the `GCancellable` that was passed to [func@Gdk.content_deserialize_async].
-	GetCancellable() gio.
+	GetCancellable() context.Context
 	// GetGType wraps gdk_content_deserializer_get_gtype
 	// The function returns the following values:
 	// 
-	// 	- ret glib.Type 
+	// 	- goret gobject.Type 
 	//
 	// Gets the `GType` to create an instance of.
-	GetGType() glib.Type
+	GetGType() gobject.Type
 	// GetInputStream wraps gdk_content_deserializer_get_input_stream
 	// The function returns the following values:
 	// 
-	// 	- ret gio.InputStream 
+	// 	- goret gio.InputStream 
 	//
 	// Gets the input stream for the current operation.
 	// 
@@ -10611,14 +10650,14 @@ type ContentDeserializer interface {
 	// GetMIMEType wraps gdk_content_deserializer_get_mime_type
 	// The function returns the following values:
 	// 
-	// 	- ret string 
+	// 	- goret string 
 	//
 	// Gets the mime type to deserialize from.
 	GetMIMEType() string
 	// GetPriority wraps gdk_content_deserializer_get_priority
 	// The function returns the following values:
 	// 
-	// 	- ret int 
+	// 	- goret int 
 	//
 	// Gets the I/O priority for the current operation.
 	// 
@@ -10627,7 +10666,7 @@ type ContentDeserializer interface {
 	// GetTaskData wraps gdk_content_deserializer_get_task_data
 	// The function returns the following values:
 	// 
-	// 	- ret unsafe.Pointer 
+	// 	- goret unsafe.Pointer 
 	//
 	// Gets the data that was associated with the current operation.
 	// 
@@ -10636,14 +10675,14 @@ type ContentDeserializer interface {
 	// GetUserData wraps gdk_content_deserializer_get_user_data
 	// The function returns the following values:
 	// 
-	// 	- ret unsafe.Pointer 
+	// 	- goret unsafe.Pointer 
 	//
 	// Gets the user data that was passed when the deserializer was registered.
 	GetUserData() unsafe.Pointer
 	// GetValue wraps gdk_content_deserializer_get_value
 	// The function returns the following values:
 	// 
-	// 	- ret *gobject.Value 
+	// 	- goret *gobject.Value 
 	//
 	// Gets the `GValue` to store the deserialized object in.
 	GetValue() *gobject.Value
@@ -10667,28 +10706,23 @@ func unsafeWrapContentDeserializer(base *gobject.ObjectInstance) *ContentDeseria
 	return &ContentDeserializerInstance{
 		ObjectInstance: *base,
 		AsyncResultInstance: gio.AsyncResultInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 	}
 }
 
-func marshalContentDeserializerInstance(p uintptr) (interface{}, error) {
-	return unsafeWrapContentDeserializer(gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Object()), nil
-}
-
-// UnsafeContentDeserializerFromGlibBorrow is used to convert raw GdkContentDeserializer pointers to go. This is used by the bindings internally.
-func UnsafeContentDeserializerFromGlibBorrow(c unsafe.Pointer) ContentDeserializer {
-	return gobject.TODOBorrow(c).(ContentDeserializer)
+func marshalContentDeserializerInstance(p unsafe.Pointer) (any, error) {
+	return unsafeWrapContentDeserializer(gobject.ValueFromNative(p).Object()), nil
 }
 
 // UnsafeContentDeserializerFromGlibNone is used to convert raw GdkContentDeserializer pointers to go while taking a reference and attaching a finalizer. This is used by the bindings internally.
 func UnsafeContentDeserializerFromGlibNone(c unsafe.Pointer) ContentDeserializer {
-	return gobject.Take(c).(ContentDeserializer)
+	return gobject.UnsafeObjectFromGlibNone(c).(ContentDeserializer)
 }
 
 // UnsafeContentDeserializerFromGlibFull is used to convert raw GdkContentDeserializer pointers to go while attaching a finalizer. This is used by the bindings internally.
 func UnsafeContentDeserializerFromGlibFull(c unsafe.Pointer) ContentDeserializer {
-	return gobject.AssumeOwnership(c).(ContentDeserializer)
+	return gobject.UnsafeObjectFromGlibFull(c).(ContentDeserializer)
 }
 
 func (c *ContentDeserializerInstance) upcastToGdkContentDeserializer() *ContentDeserializerInstance {
@@ -10697,64 +10731,64 @@ func (c *ContentDeserializerInstance) upcastToGdkContentDeserializer() *ContentD
 
 // UnsafeContentDeserializerToGlibNone is used to convert the instance to it's C value GdkContentDeserializer. This is used by the bindings internally.
 func UnsafeContentDeserializerToGlibNone(c ContentDeserializer) unsafe.Pointer {
-	return gobject.TODOToNone(c)
+	return gobject.UnsafeObjectToGlibNone(c)
 }
 
 // UnsafeContentDeserializerToGlibFull is used to convert the instance to it's C value GdkContentDeserializer, while removeing the finalizer. This is used by the bindings internally.
 func UnsafeContentDeserializerToGlibFull(c ContentDeserializer) unsafe.Pointer {
-	return gobject.TODOToFull(c)
+	return gobject.UnsafeObjectToGlibFull(c)
 }
 
 // GetCancellable wraps gdk_content_deserializer_get_cancellable
 // The function returns the following values:
 // 
-// 	- ret gio. 
+// 	- goret context.Context 
 //
 // Gets the cancellable for the current operation.
 // 
 // This is the `GCancellable` that was passed to [func@Gdk.content_deserialize_async].
-func (deserializer *ContentDeserializerInstance) GetCancellable() gio. {
+func (deserializer *ContentDeserializerInstance) GetCancellable() context.Context {
 	var carg0 *C.GdkContentDeserializer // in, none, converted
-	var cret  *C.Cancellable            // return, none, converted
+	var cret  *C.GCancellable           // return, none, converted
 
 	carg0 = (*C.GdkContentDeserializer)(UnsafeContentDeserializerToGlibNone(deserializer))
 
 	cret = C.gdk_content_deserializer_get_cancellable(carg0)
 	runtime.KeepAlive(deserializer)
 
-	var ret gio.
+	var goret context.Context
 
-	ret = UnsafeCancellableFromGlibNone(unsafe.Pointer(cret))
+	goret = gio.NewCancellableContext(unsafe.Pointer(cret))
 
-	return ret
+	return goret
 }
 
 // GetGType wraps gdk_content_deserializer_get_gtype
 // The function returns the following values:
 // 
-// 	- ret glib.Type 
+// 	- goret gobject.Type 
 //
 // Gets the `GType` to create an instance of.
-func (deserializer *ContentDeserializerInstance) GetGType() glib.Type {
+func (deserializer *ContentDeserializerInstance) GetGType() gobject.Type {
 	var carg0 *C.GdkContentDeserializer // in, none, converted
-	var cret  C.GType                   // return, none, casted
+	var cret  C.GType                   // return, none, casted, alias
 
 	carg0 = (*C.GdkContentDeserializer)(UnsafeContentDeserializerToGlibNone(deserializer))
 
 	cret = C.gdk_content_deserializer_get_gtype(carg0)
 	runtime.KeepAlive(deserializer)
 
-	var ret glib.Type
+	var goret gobject.Type
 
-	ret = glib.Type(cret)
+	goret = gobject.Type(cret)
 
-	return ret
+	return goret
 }
 
 // GetInputStream wraps gdk_content_deserializer_get_input_stream
 // The function returns the following values:
 // 
-// 	- ret gio.InputStream 
+// 	- goret gio.InputStream 
 //
 // Gets the input stream for the current operation.
 // 
@@ -10768,17 +10802,17 @@ func (deserializer *ContentDeserializerInstance) GetInputStream() gio.InputStrea
 	cret = C.gdk_content_deserializer_get_input_stream(carg0)
 	runtime.KeepAlive(deserializer)
 
-	var ret gio.InputStream
+	var goret gio.InputStream
 
-	ret = UnsafeInputStreamFromGlibNone(unsafe.Pointer(cret))
+	goret = gio.UnsafeInputStreamFromGlibNone(unsafe.Pointer(cret))
 
-	return ret
+	return goret
 }
 
 // GetMIMEType wraps gdk_content_deserializer_get_mime_type
 // The function returns the following values:
 // 
-// 	- ret string 
+// 	- goret string 
 //
 // Gets the mime type to deserialize from.
 func (deserializer *ContentDeserializerInstance) GetMIMEType() string {
@@ -10790,17 +10824,17 @@ func (deserializer *ContentDeserializerInstance) GetMIMEType() string {
 	cret = C.gdk_content_deserializer_get_mime_type(carg0)
 	runtime.KeepAlive(deserializer)
 
-	var ret string
+	var goret string
 
-	ret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
 
-	return ret
+	return goret
 }
 
 // GetPriority wraps gdk_content_deserializer_get_priority
 // The function returns the following values:
 // 
-// 	- ret int 
+// 	- goret int 
 //
 // Gets the I/O priority for the current operation.
 // 
@@ -10814,17 +10848,17 @@ func (deserializer *ContentDeserializerInstance) GetPriority() int {
 	cret = C.gdk_content_deserializer_get_priority(carg0)
 	runtime.KeepAlive(deserializer)
 
-	var ret int
+	var goret int
 
-	ret = int(cret)
+	goret = int(cret)
 
-	return ret
+	return goret
 }
 
 // GetTaskData wraps gdk_content_deserializer_get_task_data
 // The function returns the following values:
 // 
-// 	- ret unsafe.Pointer 
+// 	- goret unsafe.Pointer 
 //
 // Gets the data that was associated with the current operation.
 // 
@@ -10838,17 +10872,17 @@ func (deserializer *ContentDeserializerInstance) GetTaskData() unsafe.Pointer {
 	cret = C.gdk_content_deserializer_get_task_data(carg0)
 	runtime.KeepAlive(deserializer)
 
-	var ret unsafe.Pointer
+	var goret unsafe.Pointer
 
-	ret = unsafe.Pointer(cret)
+	goret = unsafe.Pointer(cret)
 
-	return ret
+	return goret
 }
 
 // GetUserData wraps gdk_content_deserializer_get_user_data
 // The function returns the following values:
 // 
-// 	- ret unsafe.Pointer 
+// 	- goret unsafe.Pointer 
 //
 // Gets the user data that was passed when the deserializer was registered.
 func (deserializer *ContentDeserializerInstance) GetUserData() unsafe.Pointer {
@@ -10860,17 +10894,17 @@ func (deserializer *ContentDeserializerInstance) GetUserData() unsafe.Pointer {
 	cret = C.gdk_content_deserializer_get_user_data(carg0)
 	runtime.KeepAlive(deserializer)
 
-	var ret unsafe.Pointer
+	var goret unsafe.Pointer
 
-	ret = unsafe.Pointer(cret)
+	goret = unsafe.Pointer(cret)
 
-	return ret
+	return goret
 }
 
 // GetValue wraps gdk_content_deserializer_get_value
 // The function returns the following values:
 // 
-// 	- ret *gobject.Value 
+// 	- goret *gobject.Value 
 //
 // Gets the `GValue` to store the deserialized object in.
 func (deserializer *ContentDeserializerInstance) GetValue() *gobject.Value {
@@ -10882,11 +10916,11 @@ func (deserializer *ContentDeserializerInstance) GetValue() *gobject.Value {
 	cret = C.gdk_content_deserializer_get_value(carg0)
 	runtime.KeepAlive(deserializer)
 
-	var ret *gobject.Value
+	var goret *gobject.Value
 
-	ret = TODOFromGlibNone(unsafe.Pointer(cret))
+	goret = gobject.TODOFromGlibNone(unsafe.Pointer(cret))
 
-	return ret
+	return goret
 }
 
 // ReturnError wraps gdk_content_deserializer_return_error
@@ -10903,7 +10937,7 @@ func (deserializer *ContentDeserializerInstance) ReturnError(err error) {
 	var carg1 *C.GError                 // in, full, converted
 
 	carg0 = (*C.GdkContentDeserializer)(UnsafeContentDeserializerToGlibNone(deserializer))
-	carg1 = (*C.GError)(UnsafeErrorToGlibFull(err))
+	carg1 = (*C.GError)(glib.UnsafeErrorToGlibFull(err))
 
 	C.gdk_content_deserializer_return_error(carg0, carg1)
 	runtime.KeepAlive(deserializer)
@@ -10949,17 +10983,32 @@ type ContentProvider interface {
 	//
 	// Emits the ::content-changed signal.
 	ContentChanged()
+	// GetValue wraps gdk_content_provider_get_value
+	// The function returns the following values:
+	// 
+	// 	- value gobject.Value: the `GValue` to fill 
+	// 	- goret bool 
+	// 	- _goerr error (nullable): an error 
+	//
+	// Gets the contents of @provider stored in @value.
+	// 
+	// The @value will have been initialized to the `GType` the value should be
+	// provided in. This given `GType` does not need to be listed in the formats
+	// returned by [method@Gdk.ContentProvider.ref_formats]. However, if the
+	// given `GType` is not supported, this operation can fail and
+	// `G_IO_ERROR_NOT_SUPPORTED` will be reported.
+	GetValue() (gobject.Value, bool, error)
 	// RefFormats wraps gdk_content_provider_ref_formats
 	// The function returns the following values:
 	// 
-	// 	- ret ContentFormats 
+	// 	- goret *ContentFormats 
 	//
 	// Gets the formats that the provider can provide its current contents in.
-	RefFormats() ContentFormats
+	RefFormats() *ContentFormats
 	// RefStorableFormats wraps gdk_content_provider_ref_storable_formats
 	// The function returns the following values:
 	// 
-	// 	- ret ContentFormats 
+	// 	- goret *ContentFormats 
 	//
 	// Gets the formats that the provider suggests other applications to store
 	// the data in.
@@ -10967,15 +11016,15 @@ type ContentProvider interface {
 	// An example of such an application would be a clipboard manager.
 	// 
 	// This can be assumed to be a subset of [method@Gdk.ContentProvider.ref_formats].
-	RefStorableFormats() ContentFormats
+	RefStorableFormats() *ContentFormats
 	// WriteMIMETypeAsync wraps gdk_content_provider_write_mime_type_async
 	// 
 	// The function takes the following parameters:
 	// 
+	// 	- cancellable context.Context (nullable): optional `GCancellable` object, %NULL to ignore. 
 	// 	- mimeType string: the mime type to provide the data in 
 	// 	- stream gio.OutputStream: the `GOutputStream` to write to 
 	// 	- ioPriority int: I/O priority of the request. 
-	// 	- cancellable gio. (nullable): optional `GCancellable` object, %NULL to ignore. 
 	// 	- callback gio.AsyncReadyCallback (nullable): callback to call when the request is satisfied 
 	//
 	// Asynchronously writes the contents of @provider to @stream in the given
@@ -10986,7 +11035,7 @@ type ContentProvider interface {
 	// not supported, `G_IO_ERROR_NOT_SUPPORTED` will be reported.
 	// 
 	// The given @stream will not be closed.
-	WriteMIMETypeAsync(string, gio.OutputStream, int, gio., gio.AsyncReadyCallback)
+	WriteMIMETypeAsync(context.Context, string, gio.OutputStream, int, gio.AsyncReadyCallback)
 	// WriteMIMETypeFinish wraps gdk_content_provider_write_mime_type_finish
 	// 
 	// The function takes the following parameters:
@@ -10995,7 +11044,7 @@ type ContentProvider interface {
 	// 
 	// The function returns the following values:
 	// 
-	// 	- ret bool 
+	// 	- goret bool 
 	// 	- _goerr error (nullable): an error 
 	//
 	// Finishes an asynchronous write operation.
@@ -11010,23 +11059,18 @@ func unsafeWrapContentProvider(base *gobject.ObjectInstance) *ContentProviderIns
 	}
 }
 
-func marshalContentProviderInstance(p uintptr) (interface{}, error) {
-	return unsafeWrapContentProvider(gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Object()), nil
-}
-
-// UnsafeContentProviderFromGlibBorrow is used to convert raw GdkContentProvider pointers to go. This is used by the bindings internally.
-func UnsafeContentProviderFromGlibBorrow(c unsafe.Pointer) ContentProvider {
-	return gobject.TODOBorrow(c).(ContentProvider)
+func marshalContentProviderInstance(p unsafe.Pointer) (any, error) {
+	return unsafeWrapContentProvider(gobject.ValueFromNative(p).Object()), nil
 }
 
 // UnsafeContentProviderFromGlibNone is used to convert raw GdkContentProvider pointers to go while taking a reference and attaching a finalizer. This is used by the bindings internally.
 func UnsafeContentProviderFromGlibNone(c unsafe.Pointer) ContentProvider {
-	return gobject.Take(c).(ContentProvider)
+	return gobject.UnsafeObjectFromGlibNone(c).(ContentProvider)
 }
 
 // UnsafeContentProviderFromGlibFull is used to convert raw GdkContentProvider pointers to go while attaching a finalizer. This is used by the bindings internally.
 func UnsafeContentProviderFromGlibFull(c unsafe.Pointer) ContentProvider {
-	return gobject.AssumeOwnership(c).(ContentProvider)
+	return gobject.UnsafeObjectFromGlibFull(c).(ContentProvider)
 }
 
 func (c *ContentProviderInstance) upcastToGdkContentProvider() *ContentProviderInstance {
@@ -11035,12 +11079,45 @@ func (c *ContentProviderInstance) upcastToGdkContentProvider() *ContentProviderI
 
 // UnsafeContentProviderToGlibNone is used to convert the instance to it's C value GdkContentProvider. This is used by the bindings internally.
 func UnsafeContentProviderToGlibNone(c ContentProvider) unsafe.Pointer {
-	return gobject.TODOToNone(c)
+	return gobject.UnsafeObjectToGlibNone(c)
 }
 
 // UnsafeContentProviderToGlibFull is used to convert the instance to it's C value GdkContentProvider, while removeing the finalizer. This is used by the bindings internally.
 func UnsafeContentProviderToGlibFull(c ContentProvider) unsafe.Pointer {
-	return gobject.TODOToFull(c)
+	return gobject.UnsafeObjectToGlibFull(c)
+}
+
+// NewContentProviderInstanceForBytes wraps gdk_content_provider_new_for_bytes
+// 
+// The function takes the following parameters:
+// 
+// 	- mimeType string: the mime type 
+// 	- bytes *glib.Bytes: a `GBytes` with the data for @mime_type 
+// 
+// The function returns the following values:
+// 
+// 	- goret ContentProvider 
+//
+// Create a content provider that provides the given @bytes as data for
+// the given @mime_type.
+func NewContentProviderInstanceForBytes(mimeType string, bytes *glib.Bytes) ContentProvider {
+	var carg1 *C.gchar              // in, none, string
+	var carg2 *C.GBytes             // in, none, converted
+	var cret  *C.GdkContentProvider // return, full, converted
+
+	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(mimeType)))
+	defer C.free(unsafe.Pointer(carg1))
+	carg2 = (*C.GBytes)(glib.UnsafeBytesToGlibNone(bytes))
+
+	cret = C.gdk_content_provider_new_for_bytes(carg1, carg2)
+	runtime.KeepAlive(mimeType)
+	runtime.KeepAlive(bytes)
+
+	var goret ContentProvider
+
+	goret = UnsafeContentProviderFromGlibFull(unsafe.Pointer(cret))
+
+	return goret
 }
 
 // NewContentProviderInstanceForValue wraps gdk_content_provider_new_for_value
@@ -11051,35 +11128,35 @@ func UnsafeContentProviderToGlibFull(c ContentProvider) unsafe.Pointer {
 // 
 // The function returns the following values:
 // 
-// 	- ret ContentProvider 
+// 	- goret ContentProvider 
 //
 // Create a content provider that provides the given @value.
 func NewContentProviderInstanceForValue(value *gobject.Value) ContentProvider {
 	var carg1 *C.GValue             // in, none, converted
 	var cret  *C.GdkContentProvider // return, full, converted
 
-	carg1 = (*C.GValue)(TODOToGlibNone(value))
+	carg1 = (*C.GValue)(gobject.UnsafeValueToGlibNone(value))
 
 	cret = C.gdk_content_provider_new_for_value(carg1)
 	runtime.KeepAlive(value)
 
-	var ret ContentProvider
+	var goret ContentProvider
 
-	ret = UnsafeContentProviderFromGlibFull(unsafe.Pointer(cret))
+	goret = UnsafeContentProviderFromGlibFull(unsafe.Pointer(cret))
 
-	return ret
+	return goret
 }
 
 // NewContentProviderInstanceUnion wraps gdk_content_provider_new_union
 // 
 // The function takes the following parameters:
 // 
-// 	- providers array (nullable): 
+// 	- providers []ContentProvider (nullable): 
 //   The `GdkContentProvider`s to present the union of 
 // 
 // The function returns the following values:
 // 
-// 	- ret ContentProvider 
+// 	- goret ContentProvider 
 //
 // Creates a content provider that represents all the given @providers.
 // 
@@ -11096,23 +11173,24 @@ func NewContentProviderInstanceForValue(value *gobject.Value) ContentProvider {
 //                                   gdk_content_provider_new_typed (GDK_TYPE_TEXTURE, texture)
 //                                 }, 2);
 // ```
-func NewContentProviderInstanceUnion(providers array) ContentProvider {
-	var carg1 array                 // in, transfer: full, scope: call, implicit: false, skip: false, optional: false, nullable: true, caller-allocates: false, has closure: false, has destroy: false, nullable
-	var carg2 C.gsize               // implicit
-	var cret  *C.GdkContentProvider // return, full, converted
+func NewContentProviderInstanceUnion(providers []ContentProvider) ContentProvider {
+	var carg1 **C.GdkContentProvider // in, transfer: full, C Pointers: 2, Name: array[ContentProvider], nullable, array (inner: *typesystem.Class, length-by: carg2)
+	var carg2 C.gsize                // implicit
+	var cret  *C.GdkContentProvider  // return, full, converted
 
-	if providers != nil {
-		panic("unimplemented conversion of array (array)")
-	}
+	_ = providers
+	_ = carg1
+	_ = carg2
+	panic("unimplemented conversion of []ContentProvider (GdkContentProvider**)")
 
 	cret = C.gdk_content_provider_new_union(carg1, carg2)
 	runtime.KeepAlive(providers)
 
-	var ret ContentProvider
+	var goret ContentProvider
 
-	ret = UnsafeContentProviderFromGlibFull(unsafe.Pointer(cret))
+	goret = UnsafeContentProviderFromGlibFull(unsafe.Pointer(cret))
 
-	return ret
+	return goret
 }
 
 // ContentChanged wraps gdk_content_provider_content_changed
@@ -11127,13 +11205,55 @@ func (provider *ContentProviderInstance) ContentChanged() {
 	runtime.KeepAlive(provider)
 }
 
+// GetValue wraps gdk_content_provider_get_value
+// The function returns the following values:
+// 
+// 	- value gobject.Value: the `GValue` to fill 
+// 	- goret bool 
+// 	- _goerr error (nullable): an error 
+//
+// Gets the contents of @provider stored in @value.
+// 
+// The @value will have been initialized to the `GType` the value should be
+// provided in. This given `GType` does not need to be listed in the formats
+// returned by [method@Gdk.ContentProvider.ref_formats]. However, if the
+// given `GType` is not supported, this operation can fail and
+// `G_IO_ERROR_NOT_SUPPORTED` will be reported.
+func (provider *ContentProviderInstance) GetValue() (gobject.Value, bool, error) {
+	var carg0 *C.GdkContentProvider // in, none, converted
+	var carg1 C.GValue              // out, transfer: none, C Pointers: 0, Name: Value, caller-allocates
+	var cret  C.gboolean            // return
+	var _cerr *C.GError             // out, full, converted, nullable
+
+	carg0 = (*C.GdkContentProvider)(UnsafeContentProviderToGlibNone(provider))
+
+	cret = C.gdk_content_provider_get_value(carg0, &carg1, &_cerr)
+	runtime.KeepAlive(provider)
+
+	var value  gobject.Value
+	var goret  bool
+	var _goerr error
+
+	_ = value
+	_ = carg1
+	panic("unimplemented conversion of gobject.Value (GValue)")
+	if cret != 0 {
+		goret = true
+	}
+	if _cerr != nil {
+		_goerr = glib.UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
+	}
+
+	return value, goret, _goerr
+}
+
 // RefFormats wraps gdk_content_provider_ref_formats
 // The function returns the following values:
 // 
-// 	- ret ContentFormats 
+// 	- goret *ContentFormats 
 //
 // Gets the formats that the provider can provide its current contents in.
-func (provider *ContentProviderInstance) RefFormats() ContentFormats {
+func (provider *ContentProviderInstance) RefFormats() *ContentFormats {
 	var carg0 *C.GdkContentProvider // in, none, converted
 	var cret  *C.GdkContentFormats  // return, full, converted
 
@@ -11142,17 +11262,17 @@ func (provider *ContentProviderInstance) RefFormats() ContentFormats {
 	cret = C.gdk_content_provider_ref_formats(carg0)
 	runtime.KeepAlive(provider)
 
-	var ret ContentFormats
+	var goret *ContentFormats
 
-	ret = UnsafeContentFormatsFromGlibFull(unsafe.Pointer(cret))
+	goret = UnsafeContentFormatsFromGlibFull(unsafe.Pointer(cret))
 
-	return ret
+	return goret
 }
 
 // RefStorableFormats wraps gdk_content_provider_ref_storable_formats
 // The function returns the following values:
 // 
-// 	- ret ContentFormats 
+// 	- goret *ContentFormats 
 //
 // Gets the formats that the provider suggests other applications to store
 // the data in.
@@ -11160,7 +11280,7 @@ func (provider *ContentProviderInstance) RefFormats() ContentFormats {
 // An example of such an application would be a clipboard manager.
 // 
 // This can be assumed to be a subset of [method@Gdk.ContentProvider.ref_formats].
-func (provider *ContentProviderInstance) RefStorableFormats() ContentFormats {
+func (provider *ContentProviderInstance) RefStorableFormats() *ContentFormats {
 	var carg0 *C.GdkContentProvider // in, none, converted
 	var cret  *C.GdkContentFormats  // return, full, converted
 
@@ -11169,21 +11289,21 @@ func (provider *ContentProviderInstance) RefStorableFormats() ContentFormats {
 	cret = C.gdk_content_provider_ref_storable_formats(carg0)
 	runtime.KeepAlive(provider)
 
-	var ret ContentFormats
+	var goret *ContentFormats
 
-	ret = UnsafeContentFormatsFromGlibFull(unsafe.Pointer(cret))
+	goret = UnsafeContentFormatsFromGlibFull(unsafe.Pointer(cret))
 
-	return ret
+	return goret
 }
 
 // WriteMIMETypeAsync wraps gdk_content_provider_write_mime_type_async
 // 
 // The function takes the following parameters:
 // 
+// 	- cancellable context.Context (nullable): optional `GCancellable` object, %NULL to ignore. 
 // 	- mimeType string: the mime type to provide the data in 
 // 	- stream gio.OutputStream: the `GOutputStream` to write to 
 // 	- ioPriority int: I/O priority of the request. 
-// 	- cancellable gio. (nullable): optional `GCancellable` object, %NULL to ignore. 
 // 	- callback gio.AsyncReadyCallback (nullable): callback to call when the request is satisfied 
 //
 // Asynchronously writes the contents of @provider to @stream in the given
@@ -11194,23 +11314,23 @@ func (provider *ContentProviderInstance) RefStorableFormats() ContentFormats {
 // not supported, `G_IO_ERROR_NOT_SUPPORTED` will be reported.
 // 
 // The given @stream will not be closed.
-func (provider *ContentProviderInstance) WriteMIMETypeAsync(mimeType string, stream gio.OutputStream, ioPriority int, cancellable gio., callback gio.AsyncReadyCallback) {
+func (provider *ContentProviderInstance) WriteMIMETypeAsync(cancellable context.Context, mimeType string, stream gio.OutputStream, ioPriority int, callback gio.AsyncReadyCallback) {
 	var carg0 *C.GdkContentProvider // in, none, converted
+	var carg4 *C.GCancellable       // in, none, converted, nullable
 	var carg1 *C.gchar              // in, none, string
 	var carg2 *C.GOutputStream      // in, none, converted
 	var carg3 C.int                 // in, none, casted
-	var carg4 *C.Cancellable        // in, none, converted, nullable
 	var carg5 C.GAsyncReadyCallback // callback, scope: async, closure: carg6, nullable
 	var carg6 C.gpointer            // implicit
 
 	carg0 = (*C.GdkContentProvider)(UnsafeContentProviderToGlibNone(provider))
+	if cancellable != nil {
+		carg4 = (*C.GCancellable)(gio.UnsafeGCancellableToGlibNone(cancellable))
+	}
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(mimeType)))
 	defer C.free(unsafe.Pointer(carg1))
-	carg2 = (*C.GOutputStream)(UnsafeOutputStreamToGlibNone(stream))
+	carg2 = (*C.GOutputStream)(gio.UnsafeOutputStreamToGlibNone(stream))
 	carg3 = C.int(ioPriority)
-	if cancellable != nil {
-		carg4 = (*C.Cancellable)(UnsafeCancellableToGlibNone(cancellable))
-	}
 	if callback != nil {
 		carg5 = (*[0]byte)(C._gotk4_gio2_AsyncReadyCallback)
 		carg6 = C.gpointer(gbox.AssignOnce(callback))
@@ -11218,10 +11338,10 @@ func (provider *ContentProviderInstance) WriteMIMETypeAsync(mimeType string, str
 
 	C.gdk_content_provider_write_mime_type_async(carg0, carg1, carg2, carg3, carg4, carg5, carg6)
 	runtime.KeepAlive(provider)
+	runtime.KeepAlive(cancellable)
 	runtime.KeepAlive(mimeType)
 	runtime.KeepAlive(stream)
 	runtime.KeepAlive(ioPriority)
-	runtime.KeepAlive(cancellable)
 	runtime.KeepAlive(callback)
 }
 
@@ -11233,7 +11353,7 @@ func (provider *ContentProviderInstance) WriteMIMETypeAsync(mimeType string, str
 // 
 // The function returns the following values:
 // 
-// 	- ret bool 
+// 	- goret bool 
 // 	- _goerr error (nullable): an error 
 //
 // Finishes an asynchronous write operation.
@@ -11246,23 +11366,23 @@ func (provider *ContentProviderInstance) WriteMIMETypeFinish(result gio.AsyncRes
 	var _cerr *C.GError             // out, full, converted, nullable
 
 	carg0 = (*C.GdkContentProvider)(UnsafeContentProviderToGlibNone(provider))
-	carg1 = (*C.GAsyncResult)(UnsafeAsyncResultToGlibNone(result))
+	carg1 = (*C.GAsyncResult)(gio.UnsafeAsyncResultToGlibNone(result))
 
 	cret = C.gdk_content_provider_write_mime_type_finish(carg0, carg1, &_cerr)
 	runtime.KeepAlive(provider)
 	runtime.KeepAlive(result)
 
-	var ret    bool
+	var goret  bool
 	var _goerr error
 
 	if cret != 0 {
-		ret = true
+		goret = true
 	}
 	if _cerr != nil {
-		_goerr = UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
+		_goerr = glib.UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
 	}
 
-	return ret, _goerr
+	return goret, _goerr
 }
 
 // ContentSerializerInstance is the instance type used by all types extending GdkContentSerializer. It is used internally by the bindings. Users should use the interface [ContentSerializer] instead.
@@ -11270,7 +11390,7 @@ type ContentSerializerInstance struct {
 	_ [0]func() // equal guard
 	gobject.ObjectInstance
 	// implemented interfaces:
-gio.AsyncResult
+	gio.AsyncResultInstance
 }
 
 var _ ContentSerializer = (*ContentSerializerInstance)(nil)
@@ -11297,30 +11417,30 @@ type ContentSerializer interface {
 	// GetCancellable wraps gdk_content_serializer_get_cancellable
 	// The function returns the following values:
 	// 
-	// 	- ret gio. 
+	// 	- goret context.Context 
 	//
 	// Gets the cancellable for the current operation.
 	// 
 	// This is the `GCancellable` that was passed to [func@content_serialize_async].
-	GetCancellable() gio.
+	GetCancellable() context.Context
 	// GetGType wraps gdk_content_serializer_get_gtype
 	// The function returns the following values:
 	// 
-	// 	- ret glib.Type 
+	// 	- goret gobject.Type 
 	//
 	// Gets the `GType` to of the object to serialize.
-	GetGType() glib.Type
+	GetGType() gobject.Type
 	// GetMIMEType wraps gdk_content_serializer_get_mime_type
 	// The function returns the following values:
 	// 
-	// 	- ret string 
+	// 	- goret string 
 	//
 	// Gets the mime type to serialize to.
 	GetMIMEType() string
 	// GetOutputStream wraps gdk_content_serializer_get_output_stream
 	// The function returns the following values:
 	// 
-	// 	- ret gio.OutputStream 
+	// 	- goret gio.OutputStream 
 	//
 	// Gets the output stream for the current operation.
 	// 
@@ -11329,7 +11449,7 @@ type ContentSerializer interface {
 	// GetPriority wraps gdk_content_serializer_get_priority
 	// The function returns the following values:
 	// 
-	// 	- ret int 
+	// 	- goret int 
 	//
 	// Gets the I/O priority for the current operation.
 	// 
@@ -11338,7 +11458,7 @@ type ContentSerializer interface {
 	// GetTaskData wraps gdk_content_serializer_get_task_data
 	// The function returns the following values:
 	// 
-	// 	- ret unsafe.Pointer 
+	// 	- goret unsafe.Pointer 
 	//
 	// Gets the data that was associated with the current operation.
 	// 
@@ -11347,14 +11467,14 @@ type ContentSerializer interface {
 	// GetUserData wraps gdk_content_serializer_get_user_data
 	// The function returns the following values:
 	// 
-	// 	- ret unsafe.Pointer 
+	// 	- goret unsafe.Pointer 
 	//
 	// Gets the user data that was passed when the serializer was registered.
 	GetUserData() unsafe.Pointer
 	// GetValue wraps gdk_content_serializer_get_value
 	// The function returns the following values:
 	// 
-	// 	- ret *gobject.Value 
+	// 	- goret *gobject.Value 
 	//
 	// Gets the `GValue` to read the object to serialize from.
 	GetValue() *gobject.Value
@@ -11378,28 +11498,23 @@ func unsafeWrapContentSerializer(base *gobject.ObjectInstance) *ContentSerialize
 	return &ContentSerializerInstance{
 		ObjectInstance: *base,
 		AsyncResultInstance: gio.AsyncResultInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 	}
 }
 
-func marshalContentSerializerInstance(p uintptr) (interface{}, error) {
-	return unsafeWrapContentSerializer(gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Object()), nil
-}
-
-// UnsafeContentSerializerFromGlibBorrow is used to convert raw GdkContentSerializer pointers to go. This is used by the bindings internally.
-func UnsafeContentSerializerFromGlibBorrow(c unsafe.Pointer) ContentSerializer {
-	return gobject.TODOBorrow(c).(ContentSerializer)
+func marshalContentSerializerInstance(p unsafe.Pointer) (any, error) {
+	return unsafeWrapContentSerializer(gobject.ValueFromNative(p).Object()), nil
 }
 
 // UnsafeContentSerializerFromGlibNone is used to convert raw GdkContentSerializer pointers to go while taking a reference and attaching a finalizer. This is used by the bindings internally.
 func UnsafeContentSerializerFromGlibNone(c unsafe.Pointer) ContentSerializer {
-	return gobject.Take(c).(ContentSerializer)
+	return gobject.UnsafeObjectFromGlibNone(c).(ContentSerializer)
 }
 
 // UnsafeContentSerializerFromGlibFull is used to convert raw GdkContentSerializer pointers to go while attaching a finalizer. This is used by the bindings internally.
 func UnsafeContentSerializerFromGlibFull(c unsafe.Pointer) ContentSerializer {
-	return gobject.AssumeOwnership(c).(ContentSerializer)
+	return gobject.UnsafeObjectFromGlibFull(c).(ContentSerializer)
 }
 
 func (c *ContentSerializerInstance) upcastToGdkContentSerializer() *ContentSerializerInstance {
@@ -11408,64 +11523,64 @@ func (c *ContentSerializerInstance) upcastToGdkContentSerializer() *ContentSeria
 
 // UnsafeContentSerializerToGlibNone is used to convert the instance to it's C value GdkContentSerializer. This is used by the bindings internally.
 func UnsafeContentSerializerToGlibNone(c ContentSerializer) unsafe.Pointer {
-	return gobject.TODOToNone(c)
+	return gobject.UnsafeObjectToGlibNone(c)
 }
 
 // UnsafeContentSerializerToGlibFull is used to convert the instance to it's C value GdkContentSerializer, while removeing the finalizer. This is used by the bindings internally.
 func UnsafeContentSerializerToGlibFull(c ContentSerializer) unsafe.Pointer {
-	return gobject.TODOToFull(c)
+	return gobject.UnsafeObjectToGlibFull(c)
 }
 
 // GetCancellable wraps gdk_content_serializer_get_cancellable
 // The function returns the following values:
 // 
-// 	- ret gio. 
+// 	- goret context.Context 
 //
 // Gets the cancellable for the current operation.
 // 
 // This is the `GCancellable` that was passed to [func@content_serialize_async].
-func (serializer *ContentSerializerInstance) GetCancellable() gio. {
+func (serializer *ContentSerializerInstance) GetCancellable() context.Context {
 	var carg0 *C.GdkContentSerializer // in, none, converted
-	var cret  *C.Cancellable          // return, none, converted
+	var cret  *C.GCancellable         // return, none, converted
 
 	carg0 = (*C.GdkContentSerializer)(UnsafeContentSerializerToGlibNone(serializer))
 
 	cret = C.gdk_content_serializer_get_cancellable(carg0)
 	runtime.KeepAlive(serializer)
 
-	var ret gio.
+	var goret context.Context
 
-	ret = UnsafeCancellableFromGlibNone(unsafe.Pointer(cret))
+	goret = gio.NewCancellableContext(unsafe.Pointer(cret))
 
-	return ret
+	return goret
 }
 
 // GetGType wraps gdk_content_serializer_get_gtype
 // The function returns the following values:
 // 
-// 	- ret glib.Type 
+// 	- goret gobject.Type 
 //
 // Gets the `GType` to of the object to serialize.
-func (serializer *ContentSerializerInstance) GetGType() glib.Type {
+func (serializer *ContentSerializerInstance) GetGType() gobject.Type {
 	var carg0 *C.GdkContentSerializer // in, none, converted
-	var cret  C.GType                 // return, none, casted
+	var cret  C.GType                 // return, none, casted, alias
 
 	carg0 = (*C.GdkContentSerializer)(UnsafeContentSerializerToGlibNone(serializer))
 
 	cret = C.gdk_content_serializer_get_gtype(carg0)
 	runtime.KeepAlive(serializer)
 
-	var ret glib.Type
+	var goret gobject.Type
 
-	ret = glib.Type(cret)
+	goret = gobject.Type(cret)
 
-	return ret
+	return goret
 }
 
 // GetMIMEType wraps gdk_content_serializer_get_mime_type
 // The function returns the following values:
 // 
-// 	- ret string 
+// 	- goret string 
 //
 // Gets the mime type to serialize to.
 func (serializer *ContentSerializerInstance) GetMIMEType() string {
@@ -11477,17 +11592,17 @@ func (serializer *ContentSerializerInstance) GetMIMEType() string {
 	cret = C.gdk_content_serializer_get_mime_type(carg0)
 	runtime.KeepAlive(serializer)
 
-	var ret string
+	var goret string
 
-	ret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
 
-	return ret
+	return goret
 }
 
 // GetOutputStream wraps gdk_content_serializer_get_output_stream
 // The function returns the following values:
 // 
-// 	- ret gio.OutputStream 
+// 	- goret gio.OutputStream 
 //
 // Gets the output stream for the current operation.
 // 
@@ -11501,17 +11616,17 @@ func (serializer *ContentSerializerInstance) GetOutputStream() gio.OutputStream 
 	cret = C.gdk_content_serializer_get_output_stream(carg0)
 	runtime.KeepAlive(serializer)
 
-	var ret gio.OutputStream
+	var goret gio.OutputStream
 
-	ret = UnsafeOutputStreamFromGlibNone(unsafe.Pointer(cret))
+	goret = gio.UnsafeOutputStreamFromGlibNone(unsafe.Pointer(cret))
 
-	return ret
+	return goret
 }
 
 // GetPriority wraps gdk_content_serializer_get_priority
 // The function returns the following values:
 // 
-// 	- ret int 
+// 	- goret int 
 //
 // Gets the I/O priority for the current operation.
 // 
@@ -11525,17 +11640,17 @@ func (serializer *ContentSerializerInstance) GetPriority() int {
 	cret = C.gdk_content_serializer_get_priority(carg0)
 	runtime.KeepAlive(serializer)
 
-	var ret int
+	var goret int
 
-	ret = int(cret)
+	goret = int(cret)
 
-	return ret
+	return goret
 }
 
 // GetTaskData wraps gdk_content_serializer_get_task_data
 // The function returns the following values:
 // 
-// 	- ret unsafe.Pointer 
+// 	- goret unsafe.Pointer 
 //
 // Gets the data that was associated with the current operation.
 // 
@@ -11549,17 +11664,17 @@ func (serializer *ContentSerializerInstance) GetTaskData() unsafe.Pointer {
 	cret = C.gdk_content_serializer_get_task_data(carg0)
 	runtime.KeepAlive(serializer)
 
-	var ret unsafe.Pointer
+	var goret unsafe.Pointer
 
-	ret = unsafe.Pointer(cret)
+	goret = unsafe.Pointer(cret)
 
-	return ret
+	return goret
 }
 
 // GetUserData wraps gdk_content_serializer_get_user_data
 // The function returns the following values:
 // 
-// 	- ret unsafe.Pointer 
+// 	- goret unsafe.Pointer 
 //
 // Gets the user data that was passed when the serializer was registered.
 func (serializer *ContentSerializerInstance) GetUserData() unsafe.Pointer {
@@ -11571,17 +11686,17 @@ func (serializer *ContentSerializerInstance) GetUserData() unsafe.Pointer {
 	cret = C.gdk_content_serializer_get_user_data(carg0)
 	runtime.KeepAlive(serializer)
 
-	var ret unsafe.Pointer
+	var goret unsafe.Pointer
 
-	ret = unsafe.Pointer(cret)
+	goret = unsafe.Pointer(cret)
 
-	return ret
+	return goret
 }
 
 // GetValue wraps gdk_content_serializer_get_value
 // The function returns the following values:
 // 
-// 	- ret *gobject.Value 
+// 	- goret *gobject.Value 
 //
 // Gets the `GValue` to read the object to serialize from.
 func (serializer *ContentSerializerInstance) GetValue() *gobject.Value {
@@ -11593,11 +11708,11 @@ func (serializer *ContentSerializerInstance) GetValue() *gobject.Value {
 	cret = C.gdk_content_serializer_get_value(carg0)
 	runtime.KeepAlive(serializer)
 
-	var ret *gobject.Value
+	var goret *gobject.Value
 
-	ret = TODOFromGlibNone(unsafe.Pointer(cret))
+	goret = gobject.TODOFromGlibNone(unsafe.Pointer(cret))
 
-	return ret
+	return goret
 }
 
 // ReturnError wraps gdk_content_serializer_return_error
@@ -11614,7 +11729,7 @@ func (serializer *ContentSerializerInstance) ReturnError(err error) {
 	var carg1 *C.GError               // in, full, converted
 
 	carg0 = (*C.GdkContentSerializer)(UnsafeContentSerializerToGlibNone(serializer))
-	carg1 = (*C.GError)(UnsafeErrorToGlibFull(err))
+	carg1 = (*C.GError)(glib.UnsafeErrorToGlibFull(err))
 
 	C.gdk_content_serializer_return_error(carg0, carg1)
 	runtime.KeepAlive(serializer)
@@ -11684,7 +11799,7 @@ type Cursor interface {
 	// GetFallback wraps gdk_cursor_get_fallback
 	// The function returns the following values:
 	// 
-	// 	- ret Cursor 
+	// 	- goret Cursor 
 	//
 	// Returns the fallback for this @cursor.
 	// 
@@ -11697,7 +11812,7 @@ type Cursor interface {
 	// GetHotspotX wraps gdk_cursor_get_hotspot_x
 	// The function returns the following values:
 	// 
-	// 	- ret int 
+	// 	- goret int 
 	//
 	// Returns the horizontal offset of the hotspot.
 	// 
@@ -11710,7 +11825,7 @@ type Cursor interface {
 	// GetHotspotY wraps gdk_cursor_get_hotspot_y
 	// The function returns the following values:
 	// 
-	// 	- ret int 
+	// 	- goret int 
 	//
 	// Returns the vertical offset of the hotspot.
 	// 
@@ -11723,7 +11838,7 @@ type Cursor interface {
 	// GetName wraps gdk_cursor_get_name
 	// The function returns the following values:
 	// 
-	// 	- ret string 
+	// 	- goret string 
 	//
 	// Returns the name of the cursor.
 	// 
@@ -11732,7 +11847,7 @@ type Cursor interface {
 	// GetTexture wraps gdk_cursor_get_texture
 	// The function returns the following values:
 	// 
-	// 	- ret Texture 
+	// 	- goret Texture 
 	//
 	// Returns the texture for the cursor.
 	// 
@@ -11746,23 +11861,18 @@ func unsafeWrapCursor(base *gobject.ObjectInstance) *CursorInstance {
 	}
 }
 
-func marshalCursorInstance(p uintptr) (interface{}, error) {
-	return unsafeWrapCursor(gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Object()), nil
-}
-
-// UnsafeCursorFromGlibBorrow is used to convert raw GdkCursor pointers to go. This is used by the bindings internally.
-func UnsafeCursorFromGlibBorrow(c unsafe.Pointer) Cursor {
-	return gobject.TODOBorrow(c).(Cursor)
+func marshalCursorInstance(p unsafe.Pointer) (any, error) {
+	return unsafeWrapCursor(gobject.ValueFromNative(p).Object()), nil
 }
 
 // UnsafeCursorFromGlibNone is used to convert raw GdkCursor pointers to go while taking a reference and attaching a finalizer. This is used by the bindings internally.
 func UnsafeCursorFromGlibNone(c unsafe.Pointer) Cursor {
-	return gobject.Take(c).(Cursor)
+	return gobject.UnsafeObjectFromGlibNone(c).(Cursor)
 }
 
 // UnsafeCursorFromGlibFull is used to convert raw GdkCursor pointers to go while attaching a finalizer. This is used by the bindings internally.
 func UnsafeCursorFromGlibFull(c unsafe.Pointer) Cursor {
-	return gobject.AssumeOwnership(c).(Cursor)
+	return gobject.UnsafeObjectFromGlibFull(c).(Cursor)
 }
 
 func (c *CursorInstance) upcastToGdkCursor() *CursorInstance {
@@ -11771,53 +11881,12 @@ func (c *CursorInstance) upcastToGdkCursor() *CursorInstance {
 
 // UnsafeCursorToGlibNone is used to convert the instance to it's C value GdkCursor. This is used by the bindings internally.
 func UnsafeCursorToGlibNone(c Cursor) unsafe.Pointer {
-	return gobject.TODOToNone(c)
+	return gobject.UnsafeObjectToGlibNone(c)
 }
 
 // UnsafeCursorToGlibFull is used to convert the instance to it's C value GdkCursor, while removeing the finalizer. This is used by the bindings internally.
 func UnsafeCursorToGlibFull(c Cursor) unsafe.Pointer {
-	return gobject.TODOToFull(c)
-}
-
-// NewCursorInstanceFromCallback wraps gdk_cursor_new_from_callback
-// 
-// The function takes the following parameters:
-// 
-// 	- callback CursorGetTextureCallback: the `GdkCursorGetTextureCallback` 
-// 	- fallback Cursor (nullable): the `GdkCursor` to fall back to when
-//   this one cannot be supported 
-// 
-// The function returns the following values:
-// 
-// 	- ret Cursor 
-//
-// Creates a new callback-based cursor object.
-// 
-// Cursors of this kind produce textures for the cursor
-// image on demand, when the @callback is called.
-func NewCursorInstanceFromCallback(callback CursorGetTextureCallback, fallback Cursor) Cursor {
-	var carg1 C.GdkCursorGetTextureCallback // callback, scope: notified, closure: carg2, destroy: carg3
-	var carg2 C.gpointer                    // implicit
-	var carg3 C.GDestroyNotify              // implicit
-	var carg4 *C.GdkCursor                  // in, none, converted, nullable
-	var cret  *C.GdkCursor                  // return, full, converted
-
-	carg1 = (*[0]byte)(C._gotk4_gdk4_CursorGetTextureCallback)
-	carg2 = C.gpointer(gbox.Assign(callback))
-	carg3 = (C.GDestroyNotify)((*[0]byte)(C.callbackDelete))
-	if fallback != nil {
-		carg4 = (*C.GdkCursor)(UnsafeCursorToGlibNone(fallback))
-	}
-
-	cret = C.gdk_cursor_new_from_callback(carg1, carg2, carg3, carg4)
-	runtime.KeepAlive(callback)
-	runtime.KeepAlive(fallback)
-
-	var ret Cursor
-
-	ret = UnsafeCursorFromGlibFull(unsafe.Pointer(cret))
-
-	return ret
+	return gobject.UnsafeObjectToGlibFull(c)
 }
 
 // NewCursorInstanceFromName wraps gdk_cursor_new_from_name
@@ -11830,7 +11899,7 @@ func NewCursorInstanceFromCallback(callback CursorGetTextureCallback, fallback C
 // 
 // The function returns the following values:
 // 
-// 	- ret Cursor 
+// 	- goret Cursor 
 //
 // Creates a new cursor by looking up @name in the current cursor
 // theme.
@@ -11864,11 +11933,11 @@ func NewCursorInstanceFromName(name string, fallback Cursor) Cursor {
 	runtime.KeepAlive(name)
 	runtime.KeepAlive(fallback)
 
-	var ret Cursor
+	var goret Cursor
 
-	ret = UnsafeCursorFromGlibFull(unsafe.Pointer(cret))
+	goret = UnsafeCursorFromGlibFull(unsafe.Pointer(cret))
 
-	return ret
+	return goret
 }
 
 // NewCursorInstanceFromTexture wraps gdk_cursor_new_from_texture
@@ -11883,7 +11952,7 @@ func NewCursorInstanceFromName(name string, fallback Cursor) Cursor {
 // 
 // The function returns the following values:
 // 
-// 	- ret Cursor 
+// 	- goret Cursor 
 //
 // Creates a new cursor from a `GdkTexture`.
 func NewCursorInstanceFromTexture(texture Texture, hotspotX int, hotspotY int, fallback Cursor) Cursor {
@@ -11906,17 +11975,17 @@ func NewCursorInstanceFromTexture(texture Texture, hotspotX int, hotspotY int, f
 	runtime.KeepAlive(hotspotY)
 	runtime.KeepAlive(fallback)
 
-	var ret Cursor
+	var goret Cursor
 
-	ret = UnsafeCursorFromGlibFull(unsafe.Pointer(cret))
+	goret = UnsafeCursorFromGlibFull(unsafe.Pointer(cret))
 
-	return ret
+	return goret
 }
 
 // GetFallback wraps gdk_cursor_get_fallback
 // The function returns the following values:
 // 
-// 	- ret Cursor 
+// 	- goret Cursor 
 //
 // Returns the fallback for this @cursor.
 // 
@@ -11934,17 +12003,17 @@ func (cursor *CursorInstance) GetFallback() Cursor {
 	cret = C.gdk_cursor_get_fallback(carg0)
 	runtime.KeepAlive(cursor)
 
-	var ret Cursor
+	var goret Cursor
 
-	ret = UnsafeCursorFromGlibNone(unsafe.Pointer(cret))
+	goret = UnsafeCursorFromGlibNone(unsafe.Pointer(cret))
 
-	return ret
+	return goret
 }
 
 // GetHotspotX wraps gdk_cursor_get_hotspot_x
 // The function returns the following values:
 // 
-// 	- ret int 
+// 	- goret int 
 //
 // Returns the horizontal offset of the hotspot.
 // 
@@ -11962,17 +12031,17 @@ func (cursor *CursorInstance) GetHotspotX() int {
 	cret = C.gdk_cursor_get_hotspot_x(carg0)
 	runtime.KeepAlive(cursor)
 
-	var ret int
+	var goret int
 
-	ret = int(cret)
+	goret = int(cret)
 
-	return ret
+	return goret
 }
 
 // GetHotspotY wraps gdk_cursor_get_hotspot_y
 // The function returns the following values:
 // 
-// 	- ret int 
+// 	- goret int 
 //
 // Returns the vertical offset of the hotspot.
 // 
@@ -11990,17 +12059,17 @@ func (cursor *CursorInstance) GetHotspotY() int {
 	cret = C.gdk_cursor_get_hotspot_y(carg0)
 	runtime.KeepAlive(cursor)
 
-	var ret int
+	var goret int
 
-	ret = int(cret)
+	goret = int(cret)
 
-	return ret
+	return goret
 }
 
 // GetName wraps gdk_cursor_get_name
 // The function returns the following values:
 // 
-// 	- ret string 
+// 	- goret string 
 //
 // Returns the name of the cursor.
 // 
@@ -12014,17 +12083,17 @@ func (cursor *CursorInstance) GetName() string {
 	cret = C.gdk_cursor_get_name(carg0)
 	runtime.KeepAlive(cursor)
 
-	var ret string
+	var goret string
 
-	ret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
 
-	return ret
+	return goret
 }
 
 // GetTexture wraps gdk_cursor_get_texture
 // The function returns the following values:
 // 
-// 	- ret Texture 
+// 	- goret Texture 
 //
 // Returns the texture for the cursor.
 // 
@@ -12038,11 +12107,11 @@ func (cursor *CursorInstance) GetTexture() Texture {
 	cret = C.gdk_cursor_get_texture(carg0)
 	runtime.KeepAlive(cursor)
 
-	var ret Texture
+	var goret Texture
 
-	ret = UnsafeTextureFromGlibNone(unsafe.Pointer(cret))
+	goret = UnsafeTextureFromGlibNone(unsafe.Pointer(cret))
 
-	return ret
+	return goret
 }
 
 // DeviceInstance is the instance type used by all types extending GdkDevice. It is used internally by the bindings. Users should use the interface [Device] instead.
@@ -12067,7 +12136,7 @@ type Device interface {
 	// GetCapsLockState wraps gdk_device_get_caps_lock_state
 	// The function returns the following values:
 	// 
-	// 	- ret bool 
+	// 	- goret bool 
 	//
 	// Retrieves whether the Caps Lock modifier of the keyboard is locked.
 	// 
@@ -12076,14 +12145,14 @@ type Device interface {
 	// GetDeviceTool wraps gdk_device_get_device_tool
 	// The function returns the following values:
 	// 
-	// 	- ret DeviceTool 
+	// 	- goret DeviceTool 
 	//
 	// Retrieves the current tool for @device.
 	GetDeviceTool() DeviceTool
 	// GetDirection wraps gdk_device_get_direction
 	// The function returns the following values:
 	// 
-	// 	- ret pango.Direction 
+	// 	- goret pango.Direction 
 	//
 	// Returns the direction of effective layout of the keyboard.
 	// 
@@ -12095,14 +12164,14 @@ type Device interface {
 	// GetDisplay wraps gdk_device_get_display
 	// The function returns the following values:
 	// 
-	// 	- ret Display 
+	// 	- goret Display 
 	//
 	// Returns the `GdkDisplay` to which @device pertains.
 	GetDisplay() Display
 	// GetHasCursor wraps gdk_device_get_has_cursor
 	// The function returns the following values:
 	// 
-	// 	- ret bool 
+	// 	- goret bool 
 	//
 	// Determines whether the pointer follows device motion.
 	// 
@@ -12112,7 +12181,7 @@ type Device interface {
 	// GetModifierState wraps gdk_device_get_modifier_state
 	// The function returns the following values:
 	// 
-	// 	- ret ModifierType 
+	// 	- goret ModifierType 
 	//
 	// Retrieves the current modifier state of the keyboard.
 	// 
@@ -12121,14 +12190,14 @@ type Device interface {
 	// GetName wraps gdk_device_get_name
 	// The function returns the following values:
 	// 
-	// 	- ret string 
+	// 	- goret string 
 	//
 	// The name of the device, suitable for showing in a user interface.
 	GetName() string
 	// GetNumLockState wraps gdk_device_get_num_lock_state
 	// The function returns the following values:
 	// 
-	// 	- ret bool 
+	// 	- goret bool 
 	//
 	// Retrieves whether the Num Lock modifier of the keyboard is locked.
 	// 
@@ -12137,14 +12206,14 @@ type Device interface {
 	// GetNumTouches wraps gdk_device_get_num_touches
 	// The function returns the following values:
 	// 
-	// 	- ret uint 
+	// 	- goret uint 
 	//
 	// Retrieves the number of touch points associated to @device.
 	GetNumTouches() uint
 	// GetProductID wraps gdk_device_get_product_id
 	// The function returns the following values:
 	// 
-	// 	- ret string 
+	// 	- goret string 
 	//
 	// Returns the product ID of this device.
 	// 
@@ -12154,7 +12223,7 @@ type Device interface {
 	// GetScrollLockState wraps gdk_device_get_scroll_lock_state
 	// The function returns the following values:
 	// 
-	// 	- ret bool 
+	// 	- goret bool 
 	//
 	// Retrieves whether the Scroll Lock modifier of the keyboard is locked.
 	// 
@@ -12163,14 +12232,14 @@ type Device interface {
 	// GetSeat wraps gdk_device_get_seat
 	// The function returns the following values:
 	// 
-	// 	- ret Seat 
+	// 	- goret Seat 
 	//
 	// Returns the `GdkSeat` the device belongs to.
 	GetSeat() Seat
 	// GetSource wraps gdk_device_get_source
 	// The function returns the following values:
 	// 
-	// 	- ret InputSource 
+	// 	- goret InputSource 
 	//
 	// Determines the type of the device.
 	GetSource() InputSource
@@ -12181,7 +12250,7 @@ type Device interface {
 	//   of the device location relative to the surface origin 
 	// 	- winY float64: return location for the Y coordinate
 	//   of the device location relative to the surface origin 
-	// 	- ret Surface 
+	// 	- goret Surface 
 	//
 	// Obtains the surface underneath @device, returning the location of the
 	// device in @win_x and @win_y.
@@ -12192,7 +12261,7 @@ type Device interface {
 	// GetTimestamp wraps gdk_device_get_timestamp
 	// The function returns the following values:
 	// 
-	// 	- ret uint32 
+	// 	- goret uint32 
 	//
 	// Returns the timestamp of the last activity for this device.
 	// 
@@ -12204,7 +12273,7 @@ type Device interface {
 	// GetVendorID wraps gdk_device_get_vendor_id
 	// The function returns the following values:
 	// 
-	// 	- ret string 
+	// 	- goret string 
 	//
 	// Returns the vendor ID of this device.
 	// 
@@ -12237,7 +12306,7 @@ type Device interface {
 	// HasBidiLayouts wraps gdk_device_has_bidi_layouts
 	// The function returns the following values:
 	// 
-	// 	- ret bool 
+	// 	- goret bool 
 	//
 	// Determines if layouts for both right-to-left and
 	// left-to-right languages are in use on the keyboard.
@@ -12252,23 +12321,18 @@ func unsafeWrapDevice(base *gobject.ObjectInstance) *DeviceInstance {
 	}
 }
 
-func marshalDeviceInstance(p uintptr) (interface{}, error) {
-	return unsafeWrapDevice(gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Object()), nil
-}
-
-// UnsafeDeviceFromGlibBorrow is used to convert raw GdkDevice pointers to go. This is used by the bindings internally.
-func UnsafeDeviceFromGlibBorrow(c unsafe.Pointer) Device {
-	return gobject.TODOBorrow(c).(Device)
+func marshalDeviceInstance(p unsafe.Pointer) (any, error) {
+	return unsafeWrapDevice(gobject.ValueFromNative(p).Object()), nil
 }
 
 // UnsafeDeviceFromGlibNone is used to convert raw GdkDevice pointers to go while taking a reference and attaching a finalizer. This is used by the bindings internally.
 func UnsafeDeviceFromGlibNone(c unsafe.Pointer) Device {
-	return gobject.Take(c).(Device)
+	return gobject.UnsafeObjectFromGlibNone(c).(Device)
 }
 
 // UnsafeDeviceFromGlibFull is used to convert raw GdkDevice pointers to go while attaching a finalizer. This is used by the bindings internally.
 func UnsafeDeviceFromGlibFull(c unsafe.Pointer) Device {
-	return gobject.AssumeOwnership(c).(Device)
+	return gobject.UnsafeObjectFromGlibFull(c).(Device)
 }
 
 func (d *DeviceInstance) upcastToGdkDevice() *DeviceInstance {
@@ -12277,18 +12341,18 @@ func (d *DeviceInstance) upcastToGdkDevice() *DeviceInstance {
 
 // UnsafeDeviceToGlibNone is used to convert the instance to it's C value GdkDevice. This is used by the bindings internally.
 func UnsafeDeviceToGlibNone(c Device) unsafe.Pointer {
-	return gobject.TODOToNone(c)
+	return gobject.UnsafeObjectToGlibNone(c)
 }
 
 // UnsafeDeviceToGlibFull is used to convert the instance to it's C value GdkDevice, while removeing the finalizer. This is used by the bindings internally.
 func UnsafeDeviceToGlibFull(c Device) unsafe.Pointer {
-	return gobject.TODOToFull(c)
+	return gobject.UnsafeObjectToGlibFull(c)
 }
 
 // GetCapsLockState wraps gdk_device_get_caps_lock_state
 // The function returns the following values:
 // 
-// 	- ret bool 
+// 	- goret bool 
 //
 // Retrieves whether the Caps Lock modifier of the keyboard is locked.
 // 
@@ -12302,19 +12366,19 @@ func (device *DeviceInstance) GetCapsLockState() bool {
 	cret = C.gdk_device_get_caps_lock_state(carg0)
 	runtime.KeepAlive(device)
 
-	var ret bool
+	var goret bool
 
 	if cret != 0 {
-		ret = true
+		goret = true
 	}
 
-	return ret
+	return goret
 }
 
 // GetDeviceTool wraps gdk_device_get_device_tool
 // The function returns the following values:
 // 
-// 	- ret DeviceTool 
+// 	- goret DeviceTool 
 //
 // Retrieves the current tool for @device.
 func (device *DeviceInstance) GetDeviceTool() DeviceTool {
@@ -12326,17 +12390,17 @@ func (device *DeviceInstance) GetDeviceTool() DeviceTool {
 	cret = C.gdk_device_get_device_tool(carg0)
 	runtime.KeepAlive(device)
 
-	var ret DeviceTool
+	var goret DeviceTool
 
-	ret = UnsafeDeviceToolFromGlibNone(unsafe.Pointer(cret))
+	goret = UnsafeDeviceToolFromGlibNone(unsafe.Pointer(cret))
 
-	return ret
+	return goret
 }
 
 // GetDirection wraps gdk_device_get_direction
 // The function returns the following values:
 // 
-// 	- ret pango.Direction 
+// 	- goret pango.Direction 
 //
 // Returns the direction of effective layout of the keyboard.
 // 
@@ -12353,17 +12417,17 @@ func (device *DeviceInstance) GetDirection() pango.Direction {
 	cret = C.gdk_device_get_direction(carg0)
 	runtime.KeepAlive(device)
 
-	var ret pango.Direction
+	var goret pango.Direction
 
-	ret = pango.Direction(cret)
+	goret = pango.Direction(cret)
 
-	return ret
+	return goret
 }
 
 // GetDisplay wraps gdk_device_get_display
 // The function returns the following values:
 // 
-// 	- ret Display 
+// 	- goret Display 
 //
 // Returns the `GdkDisplay` to which @device pertains.
 func (device *DeviceInstance) GetDisplay() Display {
@@ -12375,17 +12439,17 @@ func (device *DeviceInstance) GetDisplay() Display {
 	cret = C.gdk_device_get_display(carg0)
 	runtime.KeepAlive(device)
 
-	var ret Display
+	var goret Display
 
-	ret = UnsafeDisplayFromGlibNone(unsafe.Pointer(cret))
+	goret = UnsafeDisplayFromGlibNone(unsafe.Pointer(cret))
 
-	return ret
+	return goret
 }
 
 // GetHasCursor wraps gdk_device_get_has_cursor
 // The function returns the following values:
 // 
-// 	- ret bool 
+// 	- goret bool 
 //
 // Determines whether the pointer follows device motion.
 // 
@@ -12400,19 +12464,19 @@ func (device *DeviceInstance) GetHasCursor() bool {
 	cret = C.gdk_device_get_has_cursor(carg0)
 	runtime.KeepAlive(device)
 
-	var ret bool
+	var goret bool
 
 	if cret != 0 {
-		ret = true
+		goret = true
 	}
 
-	return ret
+	return goret
 }
 
 // GetModifierState wraps gdk_device_get_modifier_state
 // The function returns the following values:
 // 
-// 	- ret ModifierType 
+// 	- goret ModifierType 
 //
 // Retrieves the current modifier state of the keyboard.
 // 
@@ -12426,17 +12490,17 @@ func (device *DeviceInstance) GetModifierState() ModifierType {
 	cret = C.gdk_device_get_modifier_state(carg0)
 	runtime.KeepAlive(device)
 
-	var ret ModifierType
+	var goret ModifierType
 
-	ret = ModifierType(cret)
+	goret = ModifierType(cret)
 
-	return ret
+	return goret
 }
 
 // GetName wraps gdk_device_get_name
 // The function returns the following values:
 // 
-// 	- ret string 
+// 	- goret string 
 //
 // The name of the device, suitable for showing in a user interface.
 func (device *DeviceInstance) GetName() string {
@@ -12448,17 +12512,17 @@ func (device *DeviceInstance) GetName() string {
 	cret = C.gdk_device_get_name(carg0)
 	runtime.KeepAlive(device)
 
-	var ret string
+	var goret string
 
-	ret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
 
-	return ret
+	return goret
 }
 
 // GetNumLockState wraps gdk_device_get_num_lock_state
 // The function returns the following values:
 // 
-// 	- ret bool 
+// 	- goret bool 
 //
 // Retrieves whether the Num Lock modifier of the keyboard is locked.
 // 
@@ -12472,19 +12536,19 @@ func (device *DeviceInstance) GetNumLockState() bool {
 	cret = C.gdk_device_get_num_lock_state(carg0)
 	runtime.KeepAlive(device)
 
-	var ret bool
+	var goret bool
 
 	if cret != 0 {
-		ret = true
+		goret = true
 	}
 
-	return ret
+	return goret
 }
 
 // GetNumTouches wraps gdk_device_get_num_touches
 // The function returns the following values:
 // 
-// 	- ret uint 
+// 	- goret uint 
 //
 // Retrieves the number of touch points associated to @device.
 func (device *DeviceInstance) GetNumTouches() uint {
@@ -12496,17 +12560,17 @@ func (device *DeviceInstance) GetNumTouches() uint {
 	cret = C.gdk_device_get_num_touches(carg0)
 	runtime.KeepAlive(device)
 
-	var ret uint
+	var goret uint
 
-	ret = uint(cret)
+	goret = uint(cret)
 
-	return ret
+	return goret
 }
 
 // GetProductID wraps gdk_device_get_product_id
 // The function returns the following values:
 // 
-// 	- ret string 
+// 	- goret string 
 //
 // Returns the product ID of this device.
 // 
@@ -12521,17 +12585,17 @@ func (device *DeviceInstance) GetProductID() string {
 	cret = C.gdk_device_get_product_id(carg0)
 	runtime.KeepAlive(device)
 
-	var ret string
+	var goret string
 
-	ret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
 
-	return ret
+	return goret
 }
 
 // GetScrollLockState wraps gdk_device_get_scroll_lock_state
 // The function returns the following values:
 // 
-// 	- ret bool 
+// 	- goret bool 
 //
 // Retrieves whether the Scroll Lock modifier of the keyboard is locked.
 // 
@@ -12545,19 +12609,19 @@ func (device *DeviceInstance) GetScrollLockState() bool {
 	cret = C.gdk_device_get_scroll_lock_state(carg0)
 	runtime.KeepAlive(device)
 
-	var ret bool
+	var goret bool
 
 	if cret != 0 {
-		ret = true
+		goret = true
 	}
 
-	return ret
+	return goret
 }
 
 // GetSeat wraps gdk_device_get_seat
 // The function returns the following values:
 // 
-// 	- ret Seat 
+// 	- goret Seat 
 //
 // Returns the `GdkSeat` the device belongs to.
 func (device *DeviceInstance) GetSeat() Seat {
@@ -12569,17 +12633,17 @@ func (device *DeviceInstance) GetSeat() Seat {
 	cret = C.gdk_device_get_seat(carg0)
 	runtime.KeepAlive(device)
 
-	var ret Seat
+	var goret Seat
 
-	ret = UnsafeSeatFromGlibNone(unsafe.Pointer(cret))
+	goret = UnsafeSeatFromGlibNone(unsafe.Pointer(cret))
 
-	return ret
+	return goret
 }
 
 // GetSource wraps gdk_device_get_source
 // The function returns the following values:
 // 
-// 	- ret InputSource 
+// 	- goret InputSource 
 //
 // Determines the type of the device.
 func (device *DeviceInstance) GetSource() InputSource {
@@ -12591,11 +12655,11 @@ func (device *DeviceInstance) GetSource() InputSource {
 	cret = C.gdk_device_get_source(carg0)
 	runtime.KeepAlive(device)
 
-	var ret InputSource
+	var goret InputSource
 
-	ret = InputSource(cret)
+	goret = InputSource(cret)
 
-	return ret
+	return goret
 }
 
 // GetSurfaceAtPosition wraps gdk_device_get_surface_at_position
@@ -12605,7 +12669,7 @@ func (device *DeviceInstance) GetSource() InputSource {
 //   of the device location relative to the surface origin 
 // 	- winY float64: return location for the Y coordinate
 //   of the device location relative to the surface origin 
-// 	- ret Surface 
+// 	- goret Surface 
 //
 // Obtains the surface underneath @device, returning the location of the
 // device in @win_x and @win_y.
@@ -12623,21 +12687,21 @@ func (device *DeviceInstance) GetSurfaceAtPosition() (float64, float64, Surface)
 	cret = C.gdk_device_get_surface_at_position(carg0, &carg1, &carg2)
 	runtime.KeepAlive(device)
 
-	var winX float64
-	var winY float64
-	var ret  Surface
+	var winX  float64
+	var winY  float64
+	var goret Surface
 
 	winX = float64(carg1)
 	winY = float64(carg2)
-	ret = UnsafeSurfaceFromGlibNone(unsafe.Pointer(cret))
+	goret = UnsafeSurfaceFromGlibNone(unsafe.Pointer(cret))
 
-	return winX, winY, ret
+	return winX, winY, goret
 }
 
 // GetTimestamp wraps gdk_device_get_timestamp
 // The function returns the following values:
 // 
-// 	- ret uint32 
+// 	- goret uint32 
 //
 // Returns the timestamp of the last activity for this device.
 // 
@@ -12654,17 +12718,17 @@ func (device *DeviceInstance) GetTimestamp() uint32 {
 	cret = C.gdk_device_get_timestamp(carg0)
 	runtime.KeepAlive(device)
 
-	var ret uint32
+	var goret uint32
 
-	ret = uint32(cret)
+	goret = uint32(cret)
 
-	return ret
+	return goret
 }
 
 // GetVendorID wraps gdk_device_get_vendor_id
 // The function returns the following values:
 // 
-// 	- ret string 
+// 	- goret string 
 //
 // Returns the vendor ID of this device.
 // 
@@ -12702,17 +12766,17 @@ func (device *DeviceInstance) GetVendorID() string {
 	cret = C.gdk_device_get_vendor_id(carg0)
 	runtime.KeepAlive(device)
 
-	var ret string
+	var goret string
 
-	ret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
 
-	return ret
+	return goret
 }
 
 // HasBidiLayouts wraps gdk_device_has_bidi_layouts
 // The function returns the following values:
 // 
-// 	- ret bool 
+// 	- goret bool 
 //
 // Determines if layouts for both right-to-left and
 // left-to-right languages are in use on the keyboard.
@@ -12727,13 +12791,13 @@ func (device *DeviceInstance) HasBidiLayouts() bool {
 	cret = C.gdk_device_has_bidi_layouts(carg0)
 	runtime.KeepAlive(device)
 
-	var ret bool
+	var goret bool
 
 	if cret != 0 {
-		ret = true
+		goret = true
 	}
 
-	return ret
+	return goret
 }
 
 // DeviceToolInstance is the instance type used by all types extending GdkDeviceTool. It is used internally by the bindings. Users should use the interface [DeviceTool] instead.
@@ -12754,14 +12818,14 @@ type DeviceTool interface {
 	// GetAxes wraps gdk_device_tool_get_axes
 	// The function returns the following values:
 	// 
-	// 	- ret AxisFlags 
+	// 	- goret AxisFlags 
 	//
 	// Gets the axes of the tool.
 	GetAxes() AxisFlags
 	// GetHardwareID wraps gdk_device_tool_get_hardware_id
 	// The function returns the following values:
 	// 
-	// 	- ret uint64 
+	// 	- goret uint64 
 	//
 	// Gets the hardware ID of this tool, or 0 if it's not known.
 	// 
@@ -12778,7 +12842,7 @@ type DeviceTool interface {
 	// GetSerial wraps gdk_device_tool_get_serial
 	// The function returns the following values:
 	// 
-	// 	- ret uint64 
+	// 	- goret uint64 
 	//
 	// Gets the serial number of this tool.
 	// 
@@ -12788,7 +12852,7 @@ type DeviceTool interface {
 	// GetToolType wraps gdk_device_tool_get_tool_type
 	// The function returns the following values:
 	// 
-	// 	- ret DeviceToolType 
+	// 	- goret DeviceToolType 
 	//
 	// Gets the `GdkDeviceToolType` of the tool.
 	GetToolType() DeviceToolType
@@ -12800,23 +12864,18 @@ func unsafeWrapDeviceTool(base *gobject.ObjectInstance) *DeviceToolInstance {
 	}
 }
 
-func marshalDeviceToolInstance(p uintptr) (interface{}, error) {
-	return unsafeWrapDeviceTool(gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Object()), nil
-}
-
-// UnsafeDeviceToolFromGlibBorrow is used to convert raw GdkDeviceTool pointers to go. This is used by the bindings internally.
-func UnsafeDeviceToolFromGlibBorrow(c unsafe.Pointer) DeviceTool {
-	return gobject.TODOBorrow(c).(DeviceTool)
+func marshalDeviceToolInstance(p unsafe.Pointer) (any, error) {
+	return unsafeWrapDeviceTool(gobject.ValueFromNative(p).Object()), nil
 }
 
 // UnsafeDeviceToolFromGlibNone is used to convert raw GdkDeviceTool pointers to go while taking a reference and attaching a finalizer. This is used by the bindings internally.
 func UnsafeDeviceToolFromGlibNone(c unsafe.Pointer) DeviceTool {
-	return gobject.Take(c).(DeviceTool)
+	return gobject.UnsafeObjectFromGlibNone(c).(DeviceTool)
 }
 
 // UnsafeDeviceToolFromGlibFull is used to convert raw GdkDeviceTool pointers to go while attaching a finalizer. This is used by the bindings internally.
 func UnsafeDeviceToolFromGlibFull(c unsafe.Pointer) DeviceTool {
-	return gobject.AssumeOwnership(c).(DeviceTool)
+	return gobject.UnsafeObjectFromGlibFull(c).(DeviceTool)
 }
 
 func (d *DeviceToolInstance) upcastToGdkDeviceTool() *DeviceToolInstance {
@@ -12825,18 +12884,18 @@ func (d *DeviceToolInstance) upcastToGdkDeviceTool() *DeviceToolInstance {
 
 // UnsafeDeviceToolToGlibNone is used to convert the instance to it's C value GdkDeviceTool. This is used by the bindings internally.
 func UnsafeDeviceToolToGlibNone(c DeviceTool) unsafe.Pointer {
-	return gobject.TODOToNone(c)
+	return gobject.UnsafeObjectToGlibNone(c)
 }
 
 // UnsafeDeviceToolToGlibFull is used to convert the instance to it's C value GdkDeviceTool, while removeing the finalizer. This is used by the bindings internally.
 func UnsafeDeviceToolToGlibFull(c DeviceTool) unsafe.Pointer {
-	return gobject.TODOToFull(c)
+	return gobject.UnsafeObjectToGlibFull(c)
 }
 
 // GetAxes wraps gdk_device_tool_get_axes
 // The function returns the following values:
 // 
-// 	- ret AxisFlags 
+// 	- goret AxisFlags 
 //
 // Gets the axes of the tool.
 func (tool *DeviceToolInstance) GetAxes() AxisFlags {
@@ -12848,17 +12907,17 @@ func (tool *DeviceToolInstance) GetAxes() AxisFlags {
 	cret = C.gdk_device_tool_get_axes(carg0)
 	runtime.KeepAlive(tool)
 
-	var ret AxisFlags
+	var goret AxisFlags
 
-	ret = AxisFlags(cret)
+	goret = AxisFlags(cret)
 
-	return ret
+	return goret
 }
 
 // GetHardwareID wraps gdk_device_tool_get_hardware_id
 // The function returns the following values:
 // 
-// 	- ret uint64 
+// 	- goret uint64 
 //
 // Gets the hardware ID of this tool, or 0 if it's not known.
 // 
@@ -12880,17 +12939,17 @@ func (tool *DeviceToolInstance) GetHardwareID() uint64 {
 	cret = C.gdk_device_tool_get_hardware_id(carg0)
 	runtime.KeepAlive(tool)
 
-	var ret uint64
+	var goret uint64
 
-	ret = uint64(cret)
+	goret = uint64(cret)
 
-	return ret
+	return goret
 }
 
 // GetSerial wraps gdk_device_tool_get_serial
 // The function returns the following values:
 // 
-// 	- ret uint64 
+// 	- goret uint64 
 //
 // Gets the serial number of this tool.
 // 
@@ -12905,17 +12964,17 @@ func (tool *DeviceToolInstance) GetSerial() uint64 {
 	cret = C.gdk_device_tool_get_serial(carg0)
 	runtime.KeepAlive(tool)
 
-	var ret uint64
+	var goret uint64
 
-	ret = uint64(cret)
+	goret = uint64(cret)
 
-	return ret
+	return goret
 }
 
 // GetToolType wraps gdk_device_tool_get_tool_type
 // The function returns the following values:
 // 
-// 	- ret DeviceToolType 
+// 	- goret DeviceToolType 
 //
 // Gets the `GdkDeviceToolType` of the tool.
 func (tool *DeviceToolInstance) GetToolType() DeviceToolType {
@@ -12927,11 +12986,11 @@ func (tool *DeviceToolInstance) GetToolType() DeviceToolType {
 	cret = C.gdk_device_tool_get_tool_type(carg0)
 	runtime.KeepAlive(tool)
 
-	var ret DeviceToolType
+	var goret DeviceToolType
 
-	ret = DeviceToolType(cret)
+	goret = DeviceToolType(cret)
 
-	return ret
+	return goret
 }
 
 // DisplayInstance is the instance type used by all types extending GdkDisplay. It is used internally by the bindings. Users should use the interface [Display] instead.
@@ -12975,7 +13034,7 @@ type Display interface {
 	// CreateGLContext wraps gdk_display_create_gl_context
 	// The function returns the following values:
 	// 
-	// 	- ret GLContext 
+	// 	- goret GLContext 
 	// 	- _goerr error (nullable): an error 
 	//
 	// Creates a new `GdkGLContext` for the `GdkDisplay`.
@@ -12996,7 +13055,7 @@ type Display interface {
 	// 
 	// The function returns the following values:
 	// 
-	// 	- ret bool 
+	// 	- goret bool 
 	//
 	// Returns %TRUE if there is an ongoing grab on @device for @display.
 	DeviceIsGrabbed(Device) bool
@@ -13016,7 +13075,7 @@ type Display interface {
 	// GetAppLaunchContext wraps gdk_display_get_app_launch_context
 	// The function returns the following values:
 	// 
-	// 	- ret AppLaunchContext 
+	// 	- goret AppLaunchContext 
 	//
 	// Returns a `GdkAppLaunchContext` suitable for launching
 	// applications on the given display.
@@ -13024,14 +13083,14 @@ type Display interface {
 	// GetClipboard wraps gdk_display_get_clipboard
 	// The function returns the following values:
 	// 
-	// 	- ret Clipboard 
+	// 	- goret Clipboard 
 	//
 	// Gets the clipboard used for copy/paste operations.
 	GetClipboard() Clipboard
 	// GetDefaultSeat wraps gdk_display_get_default_seat
 	// The function returns the following values:
 	// 
-	// 	- ret Seat 
+	// 	- goret Seat 
 	//
 	// Returns the default `GdkSeat` for this display.
 	// 
@@ -13041,7 +13100,7 @@ type Display interface {
 	// GetDmabufFormats wraps gdk_display_get_dmabuf_formats
 	// The function returns the following values:
 	// 
-	// 	- ret DmabufFormats 
+	// 	- goret *DmabufFormats 
 	//
 	// Returns the dma-buf formats that are supported on this display.
 	// 
@@ -13052,7 +13111,7 @@ type Display interface {
 	// buffer formats with producers such as v4l, pipewire or GStreamer.
 	// 
 	// To learn more about dma-bufs, see [class@Gdk.DmabufTextureBuilder].
-	GetDmabufFormats() DmabufFormats
+	GetDmabufFormats() *DmabufFormats
 	// GetMonitorAtSurface wraps gdk_display_get_monitor_at_surface
 	// 
 	// The function takes the following parameters:
@@ -13061,7 +13120,7 @@ type Display interface {
 	// 
 	// The function returns the following values:
 	// 
-	// 	- ret Monitor 
+	// 	- goret Monitor 
 	//
 	// Gets the monitor in which the largest area of @surface
 	// resides.
@@ -13069,7 +13128,7 @@ type Display interface {
 	// GetMonitors wraps gdk_display_get_monitors
 	// The function returns the following values:
 	// 
-	// 	- ret gio.ListModel 
+	// 	- goret gio.ListModel 
 	//
 	// Gets the list of monitors associated with this display.
 	// 
@@ -13082,14 +13141,14 @@ type Display interface {
 	// GetName wraps gdk_display_get_name
 	// The function returns the following values:
 	// 
-	// 	- ret string 
+	// 	- goret string 
 	//
 	// Gets the name of the display.
 	GetName() string
 	// GetPrimaryClipboard wraps gdk_display_get_primary_clipboard
 	// The function returns the following values:
 	// 
-	// 	- ret Clipboard 
+	// 	- goret Clipboard 
 	//
 	// Gets the clipboard used for the primary selection.
 	// 
@@ -13105,7 +13164,7 @@ type Display interface {
 	// 
 	// The function returns the following values:
 	// 
-	// 	- ret bool 
+	// 	- goret bool 
 	//
 	// Retrieves a desktop-wide setting such as double-click time
 	// for the @display.
@@ -13113,7 +13172,7 @@ type Display interface {
 	// GetStartupNotificationID wraps gdk_display_get_startup_notification_id
 	// The function returns the following values:
 	// 
-	// 	- ret string 
+	// 	- goret string 
 	//
 	// Gets the startup notification ID for a Wayland display, or %NULL
 	// if no ID has been defined.
@@ -13123,14 +13182,14 @@ type Display interface {
 	// IsClosed wraps gdk_display_is_closed
 	// The function returns the following values:
 	// 
-	// 	- ret bool 
+	// 	- goret bool 
 	//
 	// Finds out if the display has been closed.
 	IsClosed() bool
 	// IsComposited wraps gdk_display_is_composited
 	// The function returns the following values:
 	// 
-	// 	- ret bool 
+	// 	- goret bool 
 	//
 	// Returns whether surfaces can reasonably be expected to have
 	// their alpha channel drawn correctly on the screen.
@@ -13146,7 +13205,7 @@ type Display interface {
 	// IsRGBA wraps gdk_display_is_rgba
 	// The function returns the following values:
 	// 
-	// 	- ret bool 
+	// 	- goret bool 
 	//
 	// Returns whether surfaces on this @display are created with an
 	// alpha channel.
@@ -13160,60 +13219,6 @@ type Display interface {
 	// 
 	// On modern displays, this value is always %TRUE.
 	IsRGBA() bool
-	// MapKeycode wraps gdk_display_map_keycode
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- keycode uint: a keycode 
-	// 
-	// The function returns the following values:
-	// 
-	// 	- keys array: return
-	//   location for array of `GdkKeymapKey` 
-	// 	- keyvals array: return
-	//   location for array of keyvals 
-	// 	- nEntries int: length of @keys and @keyvals 
-	// 	- ret bool 
-	//
-	// Returns the keyvals bound to @keycode.
-	// 
-	// The Nth `GdkKeymapKey` in @keys is bound to the Nth keyval in @keyvals.
-	// 
-	// When a keycode is pressed by the user, the keyval from
-	// this list of entries is selected by considering the effective
-	// keyboard group and level.
-	// 
-	// Free the returned arrays with g_free().
-	MapKeycode(uint) (array, array, bool)
-	// MapKeyval wraps gdk_display_map_keyval
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- keyval uint: a keyval, such as %GDK_KEY_a, %GDK_KEY_Up, %GDK_KEY_Return, etc. 
-	// 
-	// The function returns the following values:
-	// 
-	// 	- keys array: return location
-	//   for an array of `GdkKeymapKey` 
-	// 	- nKeys int: return location for number of elements in returned array 
-	// 	- ret bool 
-	//
-	// Obtains a list of keycode/group/level combinations that will
-	// generate @keyval.
-	// 
-	// Groups and levels are two kinds of keyboard mode; in general, the level
-	// determines whether the top or bottom symbol on a key is used, and the
-	// group determines whether the left or right symbol is used.
-	// 
-	// On US keyboards, the shift key changes the keyboard level, and there
-	// are no groups. A group switch key might convert a keyboard between
-	// Hebrew to English modes, for example.
-	// 
-	// `GdkEventKey` contains a %group field that indicates the active
-	// keyboard group. The level is computed from the modifier mask.
-	// 
-	// The returned array should be freed with g_free().
-	MapKeyval(uint) (array, bool)
 	// NotifyStartupComplete wraps gdk_display_notify_startup_complete
 	// 
 	// The function takes the following parameters:
@@ -13234,7 +13239,7 @@ type Display interface {
 	// PrepareGL wraps gdk_display_prepare_gl
 	// The function returns the following values:
 	// 
-	// 	- ret bool 
+	// 	- goret bool 
 	// 	- _goerr error (nullable): an error 
 	//
 	// Checks that OpenGL is available for @self and ensures that it is
@@ -13255,7 +13260,7 @@ type Display interface {
 	// SupportsInputShapes wraps gdk_display_supports_input_shapes
 	// The function returns the following values:
 	// 
-	// 	- ret bool 
+	// 	- goret bool 
 	//
 	// Returns %TRUE if the display supports input shapes.
 	// 
@@ -13267,7 +13272,7 @@ type Display interface {
 	// SupportsShadowWidth wraps gdk_display_supports_shadow_width
 	// The function returns the following values:
 	// 
-	// 	- ret bool 
+	// 	- goret bool 
 	//
 	// Returns whether it's possible for a surface to draw outside of the window area.
 	// 
@@ -13302,7 +13307,7 @@ type Display interface {
 	// 	- level int: return location for level 
 	// 	- consumed ModifierType: return location for modifiers that were used
 	//   to determine the group or level 
-	// 	- ret bool 
+	// 	- goret bool 
 	//
 	// Translates the contents of a `GdkEventKey` into a keyval, effective group,
 	// and level.
@@ -13332,23 +13337,18 @@ func unsafeWrapDisplay(base *gobject.ObjectInstance) *DisplayInstance {
 	}
 }
 
-func marshalDisplayInstance(p uintptr) (interface{}, error) {
-	return unsafeWrapDisplay(gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Object()), nil
-}
-
-// UnsafeDisplayFromGlibBorrow is used to convert raw GdkDisplay pointers to go. This is used by the bindings internally.
-func UnsafeDisplayFromGlibBorrow(c unsafe.Pointer) Display {
-	return gobject.TODOBorrow(c).(Display)
+func marshalDisplayInstance(p unsafe.Pointer) (any, error) {
+	return unsafeWrapDisplay(gobject.ValueFromNative(p).Object()), nil
 }
 
 // UnsafeDisplayFromGlibNone is used to convert raw GdkDisplay pointers to go while taking a reference and attaching a finalizer. This is used by the bindings internally.
 func UnsafeDisplayFromGlibNone(c unsafe.Pointer) Display {
-	return gobject.Take(c).(Display)
+	return gobject.UnsafeObjectFromGlibNone(c).(Display)
 }
 
 // UnsafeDisplayFromGlibFull is used to convert raw GdkDisplay pointers to go while attaching a finalizer. This is used by the bindings internally.
 func UnsafeDisplayFromGlibFull(c unsafe.Pointer) Display {
-	return gobject.AssumeOwnership(c).(Display)
+	return gobject.UnsafeObjectFromGlibFull(c).(Display)
 }
 
 func (d *DisplayInstance) upcastToGdkDisplay() *DisplayInstance {
@@ -13357,37 +13357,37 @@ func (d *DisplayInstance) upcastToGdkDisplay() *DisplayInstance {
 
 // UnsafeDisplayToGlibNone is used to convert the instance to it's C value GdkDisplay. This is used by the bindings internally.
 func UnsafeDisplayToGlibNone(c Display) unsafe.Pointer {
-	return gobject.TODOToNone(c)
+	return gobject.UnsafeObjectToGlibNone(c)
 }
 
 // UnsafeDisplayToGlibFull is used to convert the instance to it's C value GdkDisplay, while removeing the finalizer. This is used by the bindings internally.
 func UnsafeDisplayToGlibFull(c Display) unsafe.Pointer {
-	return gobject.TODOToFull(c)
+	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// GetDefault wraps gdk_display_get_default
+// DisplayInstanceGetDefault wraps gdk_display_get_default
 // The function returns the following values:
 // 
-// 	- ret Display 
+// 	- goret Display 
 //
 // Gets the default `GdkDisplay`.
 // 
 // This is a convenience function for:
 // 
 //     gdk_display_manager_get_default_display (gdk_display_manager_get ())
-func GetDefault() Display {
+func DisplayInstanceGetDefault() Display {
 	var cret *C.GdkDisplay // return, none, converted
 
 	cret = C.gdk_display_get_default()
 
-	var ret Display
+	var goret Display
 
-	ret = UnsafeDisplayFromGlibNone(unsafe.Pointer(cret))
+	goret = UnsafeDisplayFromGlibNone(unsafe.Pointer(cret))
 
-	return ret
+	return goret
 }
 
-// Open wraps gdk_display_open
+// DisplayInstanceOpen wraps gdk_display_open
 // 
 // The function takes the following parameters:
 // 
@@ -13395,13 +13395,13 @@ func GetDefault() Display {
 // 
 // The function returns the following values:
 // 
-// 	- ret Display 
+// 	- goret Display 
 //
 // Opens a display.
 // 
 // If opening the display fails, `NULL` is returned.
-func Open(displayName string) Display {
-	var carg1 *C.gchar      // in, none, string, nullable
+func DisplayInstanceOpen(displayName string) Display {
+	var carg1 *C.gchar      // in, none, string, nullable-string
 	var cret  *C.GdkDisplay // return, none, converted
 
 	if displayName != "" {
@@ -13412,11 +13412,11 @@ func Open(displayName string) Display {
 	cret = C.gdk_display_open(carg1)
 	runtime.KeepAlive(displayName)
 
-	var ret Display
+	var goret Display
 
-	ret = UnsafeDisplayFromGlibNone(unsafe.Pointer(cret))
+	goret = UnsafeDisplayFromGlibNone(unsafe.Pointer(cret))
 
-	return ret
+	return goret
 }
 
 // Beep wraps gdk_display_beep
@@ -13448,7 +13448,7 @@ func (display *DisplayInstance) Close() {
 // CreateGLContext wraps gdk_display_create_gl_context
 // The function returns the following values:
 // 
-// 	- ret GLContext 
+// 	- goret GLContext 
 // 	- _goerr error (nullable): an error 
 //
 // Creates a new `GdkGLContext` for the `GdkDisplay`.
@@ -13470,15 +13470,15 @@ func (self *DisplayInstance) CreateGLContext() (GLContext, error) {
 	cret = C.gdk_display_create_gl_context(carg0, &_cerr)
 	runtime.KeepAlive(self)
 
-	var ret    GLContext
+	var goret  GLContext
 	var _goerr error
 
-	ret = UnsafeGLContextFromGlibFull(unsafe.Pointer(cret))
+	goret = UnsafeGLContextFromGlibFull(unsafe.Pointer(cret))
 	if _cerr != nil {
-		_goerr = UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
+		_goerr = glib.UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
 	}
 
-	return ret, _goerr
+	return goret, _goerr
 }
 
 // DeviceIsGrabbed wraps gdk_display_device_is_grabbed
@@ -13489,7 +13489,7 @@ func (self *DisplayInstance) CreateGLContext() (GLContext, error) {
 // 
 // The function returns the following values:
 // 
-// 	- ret bool 
+// 	- goret bool 
 //
 // Returns %TRUE if there is an ongoing grab on @device for @display.
 func (display *DisplayInstance) DeviceIsGrabbed(device Device) bool {
@@ -13504,13 +13504,13 @@ func (display *DisplayInstance) DeviceIsGrabbed(device Device) bool {
 	runtime.KeepAlive(display)
 	runtime.KeepAlive(device)
 
-	var ret bool
+	var goret bool
 
 	if cret != 0 {
-		ret = true
+		goret = true
 	}
 
-	return ret
+	return goret
 }
 
 // Flush wraps gdk_display_flush
@@ -13537,7 +13537,7 @@ func (display *DisplayInstance) Flush() {
 // GetAppLaunchContext wraps gdk_display_get_app_launch_context
 // The function returns the following values:
 // 
-// 	- ret AppLaunchContext 
+// 	- goret AppLaunchContext 
 //
 // Returns a `GdkAppLaunchContext` suitable for launching
 // applications on the given display.
@@ -13550,17 +13550,17 @@ func (display *DisplayInstance) GetAppLaunchContext() AppLaunchContext {
 	cret = C.gdk_display_get_app_launch_context(carg0)
 	runtime.KeepAlive(display)
 
-	var ret AppLaunchContext
+	var goret AppLaunchContext
 
-	ret = UnsafeAppLaunchContextFromGlibFull(unsafe.Pointer(cret))
+	goret = UnsafeAppLaunchContextFromGlibFull(unsafe.Pointer(cret))
 
-	return ret
+	return goret
 }
 
 // GetClipboard wraps gdk_display_get_clipboard
 // The function returns the following values:
 // 
-// 	- ret Clipboard 
+// 	- goret Clipboard 
 //
 // Gets the clipboard used for copy/paste operations.
 func (display *DisplayInstance) GetClipboard() Clipboard {
@@ -13572,17 +13572,17 @@ func (display *DisplayInstance) GetClipboard() Clipboard {
 	cret = C.gdk_display_get_clipboard(carg0)
 	runtime.KeepAlive(display)
 
-	var ret Clipboard
+	var goret Clipboard
 
-	ret = UnsafeClipboardFromGlibNone(unsafe.Pointer(cret))
+	goret = UnsafeClipboardFromGlibNone(unsafe.Pointer(cret))
 
-	return ret
+	return goret
 }
 
 // GetDefaultSeat wraps gdk_display_get_default_seat
 // The function returns the following values:
 // 
-// 	- ret Seat 
+// 	- goret Seat 
 //
 // Returns the default `GdkSeat` for this display.
 // 
@@ -13597,17 +13597,17 @@ func (display *DisplayInstance) GetDefaultSeat() Seat {
 	cret = C.gdk_display_get_default_seat(carg0)
 	runtime.KeepAlive(display)
 
-	var ret Seat
+	var goret Seat
 
-	ret = UnsafeSeatFromGlibNone(unsafe.Pointer(cret))
+	goret = UnsafeSeatFromGlibNone(unsafe.Pointer(cret))
 
-	return ret
+	return goret
 }
 
 // GetDmabufFormats wraps gdk_display_get_dmabuf_formats
 // The function returns the following values:
 // 
-// 	- ret DmabufFormats 
+// 	- goret *DmabufFormats 
 //
 // Returns the dma-buf formats that are supported on this display.
 // 
@@ -13618,7 +13618,7 @@ func (display *DisplayInstance) GetDefaultSeat() Seat {
 // buffer formats with producers such as v4l, pipewire or GStreamer.
 // 
 // To learn more about dma-bufs, see [class@Gdk.DmabufTextureBuilder].
-func (display *DisplayInstance) GetDmabufFormats() DmabufFormats {
+func (display *DisplayInstance) GetDmabufFormats() *DmabufFormats {
 	var carg0 *C.GdkDisplay       // in, none, converted
 	var cret  *C.GdkDmabufFormats // return, none, converted
 
@@ -13627,11 +13627,11 @@ func (display *DisplayInstance) GetDmabufFormats() DmabufFormats {
 	cret = C.gdk_display_get_dmabuf_formats(carg0)
 	runtime.KeepAlive(display)
 
-	var ret DmabufFormats
+	var goret *DmabufFormats
 
-	ret = UnsafeDmabufFormatsFromGlibNone(unsafe.Pointer(cret))
+	goret = UnsafeDmabufFormatsFromGlibNone(unsafe.Pointer(cret))
 
-	return ret
+	return goret
 }
 
 // GetMonitorAtSurface wraps gdk_display_get_monitor_at_surface
@@ -13642,7 +13642,7 @@ func (display *DisplayInstance) GetDmabufFormats() DmabufFormats {
 // 
 // The function returns the following values:
 // 
-// 	- ret Monitor 
+// 	- goret Monitor 
 //
 // Gets the monitor in which the largest area of @surface
 // resides.
@@ -13658,17 +13658,17 @@ func (display *DisplayInstance) GetMonitorAtSurface(surface Surface) Monitor {
 	runtime.KeepAlive(display)
 	runtime.KeepAlive(surface)
 
-	var ret Monitor
+	var goret Monitor
 
-	ret = UnsafeMonitorFromGlibNone(unsafe.Pointer(cret))
+	goret = UnsafeMonitorFromGlibNone(unsafe.Pointer(cret))
 
-	return ret
+	return goret
 }
 
 // GetMonitors wraps gdk_display_get_monitors
 // The function returns the following values:
 // 
-// 	- ret gio.ListModel 
+// 	- goret gio.ListModel 
 //
 // Gets the list of monitors associated with this display.
 // 
@@ -13686,17 +13686,17 @@ func (self *DisplayInstance) GetMonitors() gio.ListModel {
 	cret = C.gdk_display_get_monitors(carg0)
 	runtime.KeepAlive(self)
 
-	var ret gio.ListModel
+	var goret gio.ListModel
 
-	ret = UnsafeListModelFromGlibNone(unsafe.Pointer(cret))
+	goret = gio.UnsafeListModelFromGlibNone(unsafe.Pointer(cret))
 
-	return ret
+	return goret
 }
 
 // GetName wraps gdk_display_get_name
 // The function returns the following values:
 // 
-// 	- ret string 
+// 	- goret string 
 //
 // Gets the name of the display.
 func (display *DisplayInstance) GetName() string {
@@ -13708,17 +13708,17 @@ func (display *DisplayInstance) GetName() string {
 	cret = C.gdk_display_get_name(carg0)
 	runtime.KeepAlive(display)
 
-	var ret string
+	var goret string
 
-	ret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
 
-	return ret
+	return goret
 }
 
 // GetPrimaryClipboard wraps gdk_display_get_primary_clipboard
 // The function returns the following values:
 // 
-// 	- ret Clipboard 
+// 	- goret Clipboard 
 //
 // Gets the clipboard used for the primary selection.
 // 
@@ -13733,11 +13733,11 @@ func (display *DisplayInstance) GetPrimaryClipboard() Clipboard {
 	cret = C.gdk_display_get_primary_clipboard(carg0)
 	runtime.KeepAlive(display)
 
-	var ret Clipboard
+	var goret Clipboard
 
-	ret = UnsafeClipboardFromGlibNone(unsafe.Pointer(cret))
+	goret = UnsafeClipboardFromGlibNone(unsafe.Pointer(cret))
 
-	return ret
+	return goret
 }
 
 // GetSetting wraps gdk_display_get_setting
@@ -13749,7 +13749,7 @@ func (display *DisplayInstance) GetPrimaryClipboard() Clipboard {
 // 
 // The function returns the following values:
 // 
-// 	- ret bool 
+// 	- goret bool 
 //
 // Retrieves a desktop-wide setting such as double-click time
 // for the @display.
@@ -13762,26 +13762,26 @@ func (display *DisplayInstance) GetSetting(name string, value *gobject.Value) bo
 	carg0 = (*C.GdkDisplay)(UnsafeDisplayToGlibNone(display))
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(name)))
 	defer C.free(unsafe.Pointer(carg1))
-	carg2 = (*C.GValue)(TODOToGlibNone(value))
+	carg2 = (*C.GValue)(gobject.UnsafeValueToGlibNone(value))
 
 	cret = C.gdk_display_get_setting(carg0, carg1, carg2)
 	runtime.KeepAlive(display)
 	runtime.KeepAlive(name)
 	runtime.KeepAlive(value)
 
-	var ret bool
+	var goret bool
 
 	if cret != 0 {
-		ret = true
+		goret = true
 	}
 
-	return ret
+	return goret
 }
 
 // GetStartupNotificationID wraps gdk_display_get_startup_notification_id
 // The function returns the following values:
 // 
-// 	- ret string 
+// 	- goret string 
 //
 // Gets the startup notification ID for a Wayland display, or %NULL
 // if no ID has been defined.
@@ -13796,17 +13796,17 @@ func (display *DisplayInstance) GetStartupNotificationID() string {
 	cret = C.gdk_display_get_startup_notification_id(carg0)
 	runtime.KeepAlive(display)
 
-	var ret string
+	var goret string
 
-	ret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
 
-	return ret
+	return goret
 }
 
 // IsClosed wraps gdk_display_is_closed
 // The function returns the following values:
 // 
-// 	- ret bool 
+// 	- goret bool 
 //
 // Finds out if the display has been closed.
 func (display *DisplayInstance) IsClosed() bool {
@@ -13818,19 +13818,19 @@ func (display *DisplayInstance) IsClosed() bool {
 	cret = C.gdk_display_is_closed(carg0)
 	runtime.KeepAlive(display)
 
-	var ret bool
+	var goret bool
 
 	if cret != 0 {
-		ret = true
+		goret = true
 	}
 
-	return ret
+	return goret
 }
 
 // IsComposited wraps gdk_display_is_composited
 // The function returns the following values:
 // 
-// 	- ret bool 
+// 	- goret bool 
 //
 // Returns whether surfaces can reasonably be expected to have
 // their alpha channel drawn correctly on the screen.
@@ -13851,19 +13851,19 @@ func (display *DisplayInstance) IsComposited() bool {
 	cret = C.gdk_display_is_composited(carg0)
 	runtime.KeepAlive(display)
 
-	var ret bool
+	var goret bool
 
 	if cret != 0 {
-		ret = true
+		goret = true
 	}
 
-	return ret
+	return goret
 }
 
 // IsRGBA wraps gdk_display_is_rgba
 // The function returns the following values:
 // 
-// 	- ret bool 
+// 	- goret bool 
 //
 // Returns whether surfaces on this @display are created with an
 // alpha channel.
@@ -13885,122 +13885,13 @@ func (display *DisplayInstance) IsRGBA() bool {
 	cret = C.gdk_display_is_rgba(carg0)
 	runtime.KeepAlive(display)
 
-	var ret bool
+	var goret bool
 
 	if cret != 0 {
-		ret = true
+		goret = true
 	}
 
-	return ret
-}
-
-// MapKeycode wraps gdk_display_map_keycode
-// 
-// The function takes the following parameters:
-// 
-// 	- keycode uint: a keycode 
-// 
-// The function returns the following values:
-// 
-// 	- keys array: return
-//   location for array of `GdkKeymapKey` 
-// 	- keyvals array: return
-//   location for array of keyvals 
-// 	- nEntries int: length of @keys and @keyvals 
-// 	- ret bool 
-//
-// Returns the keyvals bound to @keycode.
-// 
-// The Nth `GdkKeymapKey` in @keys is bound to the Nth keyval in @keyvals.
-// 
-// When a keycode is pressed by the user, the keyval from
-// this list of entries is selected by considering the effective
-// keyboard group and level.
-// 
-// Free the returned arrays with g_free().
-func (display *DisplayInstance) MapKeycode(keycode uint) (array, array, bool) {
-	var carg0 *C.GdkDisplay // in, none, converted
-	var carg1 C.guint       // in, none, casted
-	var carg2 array         // out, transfer: full, scope: call, implicit: false, skip: false, optional: true, nullable: false, caller-allocates: false, has closure: false, has destroy: false
-	var carg3 array         // out, transfer: full, scope: call, implicit: false, skip: false, optional: true, nullable: false, caller-allocates: false, has closure: false, has destroy: false
-	var carg4 C.int         // out, full, casted
-	var cret  C.gboolean    // return
-
-	carg0 = (*C.GdkDisplay)(UnsafeDisplayToGlibNone(display))
-	carg1 = C.guint(keycode)
-
-	cret = C.gdk_display_map_keycode(carg0, carg1, &carg2, &carg3, &carg4)
-	runtime.KeepAlive(display)
-	runtime.KeepAlive(keycode)
-
-	var keys     array
-	var keyvals  array
-	var nEntries int
-	var ret      bool
-
-	panic("unimplemented conversion of array (array)")
-	panic("unimplemented conversion of array (array)")
-	nEntries = int(carg4)
-	if cret != 0 {
-		ret = true
-	}
-
-	return keys, keyvals, ret
-}
-
-// MapKeyval wraps gdk_display_map_keyval
-// 
-// The function takes the following parameters:
-// 
-// 	- keyval uint: a keyval, such as %GDK_KEY_a, %GDK_KEY_Up, %GDK_KEY_Return, etc. 
-// 
-// The function returns the following values:
-// 
-// 	- keys array: return location
-//   for an array of `GdkKeymapKey` 
-// 	- nKeys int: return location for number of elements in returned array 
-// 	- ret bool 
-//
-// Obtains a list of keycode/group/level combinations that will
-// generate @keyval.
-// 
-// Groups and levels are two kinds of keyboard mode; in general, the level
-// determines whether the top or bottom symbol on a key is used, and the
-// group determines whether the left or right symbol is used.
-// 
-// On US keyboards, the shift key changes the keyboard level, and there
-// are no groups. A group switch key might convert a keyboard between
-// Hebrew to English modes, for example.
-// 
-// `GdkEventKey` contains a %group field that indicates the active
-// keyboard group. The level is computed from the modifier mask.
-// 
-// The returned array should be freed with g_free().
-func (display *DisplayInstance) MapKeyval(keyval uint) (array, bool) {
-	var carg0 *C.GdkDisplay // in, none, converted
-	var carg1 C.guint       // in, none, casted
-	var carg2 array         // out, transfer: full, scope: call, implicit: false, skip: false, optional: false, nullable: false, caller-allocates: false, has closure: false, has destroy: false
-	var carg3 C.int         // out, full, casted
-	var cret  C.gboolean    // return
-
-	carg0 = (*C.GdkDisplay)(UnsafeDisplayToGlibNone(display))
-	carg1 = C.guint(keyval)
-
-	cret = C.gdk_display_map_keyval(carg0, carg1, &carg2, &carg3)
-	runtime.KeepAlive(display)
-	runtime.KeepAlive(keyval)
-
-	var keys  array
-	var nKeys int
-	var ret   bool
-
-	panic("unimplemented conversion of array (array)")
-	nKeys = int(carg3)
-	if cret != 0 {
-		ret = true
-	}
-
-	return keys, ret
+	return goret
 }
 
 // NotifyStartupComplete wraps gdk_display_notify_startup_complete
@@ -14035,7 +13926,7 @@ func (display *DisplayInstance) NotifyStartupComplete(startupId string) {
 // PrepareGL wraps gdk_display_prepare_gl
 // The function returns the following values:
 // 
-// 	- ret bool 
+// 	- goret bool 
 // 	- _goerr error (nullable): an error 
 //
 // Checks that OpenGL is available for @self and ensures that it is
@@ -14062,23 +13953,23 @@ func (self *DisplayInstance) PrepareGL() (bool, error) {
 	cret = C.gdk_display_prepare_gl(carg0, &_cerr)
 	runtime.KeepAlive(self)
 
-	var ret    bool
+	var goret  bool
 	var _goerr error
 
 	if cret != 0 {
-		ret = true
+		goret = true
 	}
 	if _cerr != nil {
-		_goerr = UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
+		_goerr = glib.UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
 	}
 
-	return ret, _goerr
+	return goret, _goerr
 }
 
 // SupportsInputShapes wraps gdk_display_supports_input_shapes
 // The function returns the following values:
 // 
-// 	- ret bool 
+// 	- goret bool 
 //
 // Returns %TRUE if the display supports input shapes.
 // 
@@ -14095,19 +13986,19 @@ func (display *DisplayInstance) SupportsInputShapes() bool {
 	cret = C.gdk_display_supports_input_shapes(carg0)
 	runtime.KeepAlive(display)
 
-	var ret bool
+	var goret bool
 
 	if cret != 0 {
-		ret = true
+		goret = true
 	}
 
-	return ret
+	return goret
 }
 
 // SupportsShadowWidth wraps gdk_display_supports_shadow_width
 // The function returns the following values:
 // 
-// 	- ret bool 
+// 	- goret bool 
 //
 // Returns whether it's possible for a surface to draw outside of the window area.
 // 
@@ -14122,13 +14013,13 @@ func (display *DisplayInstance) SupportsShadowWidth() bool {
 	cret = C.gdk_display_supports_shadow_width(carg0)
 	runtime.KeepAlive(display)
 
-	var ret bool
+	var goret bool
 
 	if cret != 0 {
-		ret = true
+		goret = true
 	}
 
-	return ret
+	return goret
 }
 
 // Sync wraps gdk_display_sync
@@ -14167,7 +14058,7 @@ func (display *DisplayInstance) Sync() {
 // 	- level int: return location for level 
 // 	- consumed ModifierType: return location for modifiers that were used
 //   to determine the group or level 
-// 	- ret bool 
+// 	- goret bool 
 //
 // Translates the contents of a `GdkEventKey` into a keyval, effective group,
 // and level.
@@ -14214,17 +14105,17 @@ func (display *DisplayInstance) TranslateKey(keycode uint, state ModifierType, g
 	var effectiveGroup int
 	var level          int
 	var consumed       ModifierType
-	var ret            bool
+	var goret          bool
 
 	keyval = uint(carg4)
 	effectiveGroup = int(carg5)
 	level = int(carg6)
 	consumed = ModifierType(carg7)
 	if cret != 0 {
-		ret = true
+		goret = true
 	}
 
-	return keyval, effectiveGroup, level, consumed, ret
+	return keyval, effectiveGroup, level, consumed, goret
 }
 
 // DisplayManagerInstance is the instance type used by all types extending GdkDisplayManager. It is used internally by the bindings. Users should use the interface [DisplayManager] instead.
@@ -14286,7 +14177,7 @@ type DisplayManager interface {
 	// GetDefaultDisplay wraps gdk_display_manager_get_default_display
 	// The function returns the following values:
 	// 
-	// 	- ret Display 
+	// 	- goret Display 
 	//
 	// Gets the default `GdkDisplay`.
 	GetDefaultDisplay() Display
@@ -14298,7 +14189,7 @@ type DisplayManager interface {
 	// 
 	// The function returns the following values:
 	// 
-	// 	- ret Display 
+	// 	- goret Display 
 	//
 	// Opens a display.
 	OpenDisplay(string) Display
@@ -14318,23 +14209,18 @@ func unsafeWrapDisplayManager(base *gobject.ObjectInstance) *DisplayManagerInsta
 	}
 }
 
-func marshalDisplayManagerInstance(p uintptr) (interface{}, error) {
-	return unsafeWrapDisplayManager(gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Object()), nil
-}
-
-// UnsafeDisplayManagerFromGlibBorrow is used to convert raw GdkDisplayManager pointers to go. This is used by the bindings internally.
-func UnsafeDisplayManagerFromGlibBorrow(c unsafe.Pointer) DisplayManager {
-	return gobject.TODOBorrow(c).(DisplayManager)
+func marshalDisplayManagerInstance(p unsafe.Pointer) (any, error) {
+	return unsafeWrapDisplayManager(gobject.ValueFromNative(p).Object()), nil
 }
 
 // UnsafeDisplayManagerFromGlibNone is used to convert raw GdkDisplayManager pointers to go while taking a reference and attaching a finalizer. This is used by the bindings internally.
 func UnsafeDisplayManagerFromGlibNone(c unsafe.Pointer) DisplayManager {
-	return gobject.Take(c).(DisplayManager)
+	return gobject.UnsafeObjectFromGlibNone(c).(DisplayManager)
 }
 
 // UnsafeDisplayManagerFromGlibFull is used to convert raw GdkDisplayManager pointers to go while attaching a finalizer. This is used by the bindings internally.
 func UnsafeDisplayManagerFromGlibFull(c unsafe.Pointer) DisplayManager {
-	return gobject.AssumeOwnership(c).(DisplayManager)
+	return gobject.UnsafeObjectFromGlibFull(c).(DisplayManager)
 }
 
 func (d *DisplayManagerInstance) upcastToGdkDisplayManager() *DisplayManagerInstance {
@@ -14343,18 +14229,18 @@ func (d *DisplayManagerInstance) upcastToGdkDisplayManager() *DisplayManagerInst
 
 // UnsafeDisplayManagerToGlibNone is used to convert the instance to it's C value GdkDisplayManager. This is used by the bindings internally.
 func UnsafeDisplayManagerToGlibNone(c DisplayManager) unsafe.Pointer {
-	return gobject.TODOToNone(c)
+	return gobject.UnsafeObjectToGlibNone(c)
 }
 
 // UnsafeDisplayManagerToGlibFull is used to convert the instance to it's C value GdkDisplayManager, while removeing the finalizer. This is used by the bindings internally.
 func UnsafeDisplayManagerToGlibFull(c DisplayManager) unsafe.Pointer {
-	return gobject.TODOToFull(c)
+	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// Get wraps gdk_display_manager_get
+// DisplayManagerInstanceGet wraps gdk_display_manager_get
 // The function returns the following values:
 // 
-// 	- ret DisplayManager 
+// 	- goret DisplayManager 
 //
 // Gets the singleton `GdkDisplayManager` object.
 // 
@@ -14365,22 +14251,22 @@ func UnsafeDisplayManagerToGlibFull(c DisplayManager) unsafe.Pointer {
 // 
 // Applications can use [func@set_allowed_backends] to limit what
 // backends will be used.
-func Get() DisplayManager {
+func DisplayManagerInstanceGet() DisplayManager {
 	var cret *C.GdkDisplayManager // return, none, converted
 
 	cret = C.gdk_display_manager_get()
 
-	var ret DisplayManager
+	var goret DisplayManager
 
-	ret = UnsafeDisplayManagerFromGlibNone(unsafe.Pointer(cret))
+	goret = UnsafeDisplayManagerFromGlibNone(unsafe.Pointer(cret))
 
-	return ret
+	return goret
 }
 
 // GetDefaultDisplay wraps gdk_display_manager_get_default_display
 // The function returns the following values:
 // 
-// 	- ret Display 
+// 	- goret Display 
 //
 // Gets the default `GdkDisplay`.
 func (manager *DisplayManagerInstance) GetDefaultDisplay() Display {
@@ -14392,11 +14278,11 @@ func (manager *DisplayManagerInstance) GetDefaultDisplay() Display {
 	cret = C.gdk_display_manager_get_default_display(carg0)
 	runtime.KeepAlive(manager)
 
-	var ret Display
+	var goret Display
 
-	ret = UnsafeDisplayFromGlibNone(unsafe.Pointer(cret))
+	goret = UnsafeDisplayFromGlibNone(unsafe.Pointer(cret))
 
-	return ret
+	return goret
 }
 
 // OpenDisplay wraps gdk_display_manager_open_display
@@ -14407,12 +14293,12 @@ func (manager *DisplayManagerInstance) GetDefaultDisplay() Display {
 // 
 // The function returns the following values:
 // 
-// 	- ret Display 
+// 	- goret Display 
 //
 // Opens a display.
 func (manager *DisplayManagerInstance) OpenDisplay(name string) Display {
 	var carg0 *C.GdkDisplayManager // in, none, converted
-	var carg1 *C.gchar             // in, none, string, nullable
+	var carg1 *C.gchar             // in, none, string, nullable-string
 	var cret  *C.GdkDisplay        // return, none, converted
 
 	carg0 = (*C.GdkDisplayManager)(UnsafeDisplayManagerToGlibNone(manager))
@@ -14425,11 +14311,11 @@ func (manager *DisplayManagerInstance) OpenDisplay(name string) Display {
 	runtime.KeepAlive(manager)
 	runtime.KeepAlive(name)
 
-	var ret Display
+	var goret Display
 
-	ret = UnsafeDisplayFromGlibNone(unsafe.Pointer(cret))
+	goret = UnsafeDisplayFromGlibNone(unsafe.Pointer(cret))
 
-	return ret
+	return goret
 }
 
 // SetDefaultDisplay wraps gdk_display_manager_set_default_display
@@ -14525,14 +14411,14 @@ type DmabufTextureBuilder interface {
 	// GetColorState wraps gdk_dmabuf_texture_builder_get_color_state
 	// The function returns the following values:
 	// 
-	// 	- ret ColorState 
+	// 	- goret *ColorState 
 	//
 	// Gets the color state previously set via gdk_dmabuf_texture_builder_set_color_state().
-	GetColorState() ColorState
+	GetColorState() *ColorState
 	// GetDisplay wraps gdk_dmabuf_texture_builder_get_display
 	// The function returns the following values:
 	// 
-	// 	- ret Display 
+	// 	- goret Display 
 	//
 	// Returns the display that this texture builder is
 	// associated with.
@@ -14545,14 +14431,14 @@ type DmabufTextureBuilder interface {
 	// 
 	// The function returns the following values:
 	// 
-	// 	- ret int 
+	// 	- goret int 
 	//
 	// Gets the file descriptor for a plane.
 	GetFd(uint) int
 	// GetFourcc wraps gdk_dmabuf_texture_builder_get_fourcc
 	// The function returns the following values:
 	// 
-	// 	- ret uint32 
+	// 	- goret uint32 
 	//
 	// Gets the format previously set via gdk_dmabuf_texture_builder_set_fourcc()
 	// or 0 if the format wasn't set.
@@ -14562,7 +14448,7 @@ type DmabufTextureBuilder interface {
 	// GetHeight wraps gdk_dmabuf_texture_builder_get_height
 	// The function returns the following values:
 	// 
-	// 	- ret uint 
+	// 	- goret uint 
 	//
 	// Gets the height previously set via gdk_dmabuf_texture_builder_set_height() or
 	// 0 if the height wasn't set.
@@ -14570,14 +14456,14 @@ type DmabufTextureBuilder interface {
 	// GetModifier wraps gdk_dmabuf_texture_builder_get_modifier
 	// The function returns the following values:
 	// 
-	// 	- ret uint64 
+	// 	- goret uint64 
 	//
 	// Gets the modifier value.
 	GetModifier() uint64
 	// GetNPlanes wraps gdk_dmabuf_texture_builder_get_n_planes
 	// The function returns the following values:
 	// 
-	// 	- ret uint 
+	// 	- goret uint 
 	//
 	// Gets the number of planes.
 	GetNPlanes() uint
@@ -14589,14 +14475,14 @@ type DmabufTextureBuilder interface {
 	// 
 	// The function returns the following values:
 	// 
-	// 	- ret uint 
+	// 	- goret uint 
 	//
 	// Gets the offset value for a plane.
 	GetOffset(uint) uint
 	// GetPremultiplied wraps gdk_dmabuf_texture_builder_get_premultiplied
 	// The function returns the following values:
 	// 
-	// 	- ret bool 
+	// 	- goret bool 
 	//
 	// Whether the data is premultiplied.
 	GetPremultiplied() bool
@@ -14608,14 +14494,14 @@ type DmabufTextureBuilder interface {
 	// 
 	// The function returns the following values:
 	// 
-	// 	- ret uint 
+	// 	- goret uint 
 	//
 	// Gets the stride value for a plane.
 	GetStride(uint) uint
 	// GetUpdateTexture wraps gdk_dmabuf_texture_builder_get_update_texture
 	// The function returns the following values:
 	// 
-	// 	- ret Texture 
+	// 	- goret Texture 
 	//
 	// Gets the texture previously set via gdk_dmabuf_texture_builder_set_update_texture() or
 	// %NULL if none was set.
@@ -14623,7 +14509,7 @@ type DmabufTextureBuilder interface {
 	// GetWidth wraps gdk_dmabuf_texture_builder_get_width
 	// The function returns the following values:
 	// 
-	// 	- ret uint 
+	// 	- goret uint 
 	//
 	// Gets the width previously set via gdk_dmabuf_texture_builder_set_width() or
 	// 0 if the width wasn't set.
@@ -14632,14 +14518,14 @@ type DmabufTextureBuilder interface {
 	// 
 	// The function takes the following parameters:
 	// 
-	// 	- colorState ColorState (nullable): a `GdkColorState` or `NULL` to unset the colorstate. 
+	// 	- colorState *ColorState (nullable): a `GdkColorState` or `NULL` to unset the colorstate. 
 	//
 	// Sets the color state for the texture.
 	// 
 	// By default, the colorstate is `NULL`. In that case, GTK will choose the
 	// correct colorstate based on the format.
 	// If you don't know what colorstates are, this is probably the right thing.
-	SetColorState(ColorState)
+	SetColorState(*ColorState)
 	// SetDisplay wraps gdk_dmabuf_texture_builder_set_display
 	// 
 	// The function takes the following parameters:
@@ -14757,23 +14643,18 @@ func unsafeWrapDmabufTextureBuilder(base *gobject.ObjectInstance) *DmabufTexture
 	}
 }
 
-func marshalDmabufTextureBuilderInstance(p uintptr) (interface{}, error) {
-	return unsafeWrapDmabufTextureBuilder(gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Object()), nil
-}
-
-// UnsafeDmabufTextureBuilderFromGlibBorrow is used to convert raw GdkDmabufTextureBuilder pointers to go. This is used by the bindings internally.
-func UnsafeDmabufTextureBuilderFromGlibBorrow(c unsafe.Pointer) DmabufTextureBuilder {
-	return gobject.TODOBorrow(c).(DmabufTextureBuilder)
+func marshalDmabufTextureBuilderInstance(p unsafe.Pointer) (any, error) {
+	return unsafeWrapDmabufTextureBuilder(gobject.ValueFromNative(p).Object()), nil
 }
 
 // UnsafeDmabufTextureBuilderFromGlibNone is used to convert raw GdkDmabufTextureBuilder pointers to go while taking a reference and attaching a finalizer. This is used by the bindings internally.
 func UnsafeDmabufTextureBuilderFromGlibNone(c unsafe.Pointer) DmabufTextureBuilder {
-	return gobject.Take(c).(DmabufTextureBuilder)
+	return gobject.UnsafeObjectFromGlibNone(c).(DmabufTextureBuilder)
 }
 
 // UnsafeDmabufTextureBuilderFromGlibFull is used to convert raw GdkDmabufTextureBuilder pointers to go while attaching a finalizer. This is used by the bindings internally.
 func UnsafeDmabufTextureBuilderFromGlibFull(c unsafe.Pointer) DmabufTextureBuilder {
-	return gobject.AssumeOwnership(c).(DmabufTextureBuilder)
+	return gobject.UnsafeObjectFromGlibFull(c).(DmabufTextureBuilder)
 }
 
 func (d *DmabufTextureBuilderInstance) upcastToGdkDmabufTextureBuilder() *DmabufTextureBuilderInstance {
@@ -14782,18 +14663,18 @@ func (d *DmabufTextureBuilderInstance) upcastToGdkDmabufTextureBuilder() *Dmabuf
 
 // UnsafeDmabufTextureBuilderToGlibNone is used to convert the instance to it's C value GdkDmabufTextureBuilder. This is used by the bindings internally.
 func UnsafeDmabufTextureBuilderToGlibNone(c DmabufTextureBuilder) unsafe.Pointer {
-	return gobject.TODOToNone(c)
+	return gobject.UnsafeObjectToGlibNone(c)
 }
 
 // UnsafeDmabufTextureBuilderToGlibFull is used to convert the instance to it's C value GdkDmabufTextureBuilder, while removeing the finalizer. This is used by the bindings internally.
 func UnsafeDmabufTextureBuilderToGlibFull(c DmabufTextureBuilder) unsafe.Pointer {
-	return gobject.TODOToFull(c)
+	return gobject.UnsafeObjectToGlibFull(c)
 }
 
 // NewDmabufTextureBuilderInstance wraps gdk_dmabuf_texture_builder_new
 // The function returns the following values:
 // 
-// 	- ret DmabufTextureBuilder 
+// 	- goret DmabufTextureBuilder 
 //
 // Creates a new texture builder.
 func NewDmabufTextureBuilderInstance() DmabufTextureBuilder {
@@ -14801,20 +14682,20 @@ func NewDmabufTextureBuilderInstance() DmabufTextureBuilder {
 
 	cret = C.gdk_dmabuf_texture_builder_new()
 
-	var ret DmabufTextureBuilder
+	var goret DmabufTextureBuilder
 
-	ret = UnsafeDmabufTextureBuilderFromGlibFull(unsafe.Pointer(cret))
+	goret = UnsafeDmabufTextureBuilderFromGlibFull(unsafe.Pointer(cret))
 
-	return ret
+	return goret
 }
 
 // GetColorState wraps gdk_dmabuf_texture_builder_get_color_state
 // The function returns the following values:
 // 
-// 	- ret ColorState 
+// 	- goret *ColorState 
 //
 // Gets the color state previously set via gdk_dmabuf_texture_builder_set_color_state().
-func (self *DmabufTextureBuilderInstance) GetColorState() ColorState {
+func (self *DmabufTextureBuilderInstance) GetColorState() *ColorState {
 	var carg0 *C.GdkDmabufTextureBuilder // in, none, converted
 	var cret  *C.GdkColorState           // return, full, converted
 
@@ -14823,17 +14704,17 @@ func (self *DmabufTextureBuilderInstance) GetColorState() ColorState {
 	cret = C.gdk_dmabuf_texture_builder_get_color_state(carg0)
 	runtime.KeepAlive(self)
 
-	var ret ColorState
+	var goret *ColorState
 
-	ret = UnsafeColorStateFromGlibFull(unsafe.Pointer(cret))
+	goret = UnsafeColorStateFromGlibFull(unsafe.Pointer(cret))
 
-	return ret
+	return goret
 }
 
 // GetDisplay wraps gdk_dmabuf_texture_builder_get_display
 // The function returns the following values:
 // 
-// 	- ret Display 
+// 	- goret Display 
 //
 // Returns the display that this texture builder is
 // associated with.
@@ -14846,11 +14727,11 @@ func (self *DmabufTextureBuilderInstance) GetDisplay() Display {
 	cret = C.gdk_dmabuf_texture_builder_get_display(carg0)
 	runtime.KeepAlive(self)
 
-	var ret Display
+	var goret Display
 
-	ret = UnsafeDisplayFromGlibNone(unsafe.Pointer(cret))
+	goret = UnsafeDisplayFromGlibNone(unsafe.Pointer(cret))
 
-	return ret
+	return goret
 }
 
 // GetFd wraps gdk_dmabuf_texture_builder_get_fd
@@ -14861,7 +14742,7 @@ func (self *DmabufTextureBuilderInstance) GetDisplay() Display {
 // 
 // The function returns the following values:
 // 
-// 	- ret int 
+// 	- goret int 
 //
 // Gets the file descriptor for a plane.
 func (self *DmabufTextureBuilderInstance) GetFd(plane uint) int {
@@ -14876,17 +14757,17 @@ func (self *DmabufTextureBuilderInstance) GetFd(plane uint) int {
 	runtime.KeepAlive(self)
 	runtime.KeepAlive(plane)
 
-	var ret int
+	var goret int
 
-	ret = int(cret)
+	goret = int(cret)
 
-	return ret
+	return goret
 }
 
 // GetFourcc wraps gdk_dmabuf_texture_builder_get_fourcc
 // The function returns the following values:
 // 
-// 	- ret uint32 
+// 	- goret uint32 
 //
 // Gets the format previously set via gdk_dmabuf_texture_builder_set_fourcc()
 // or 0 if the format wasn't set.
@@ -14901,17 +14782,17 @@ func (self *DmabufTextureBuilderInstance) GetFourcc() uint32 {
 	cret = C.gdk_dmabuf_texture_builder_get_fourcc(carg0)
 	runtime.KeepAlive(self)
 
-	var ret uint32
+	var goret uint32
 
-	ret = uint32(cret)
+	goret = uint32(cret)
 
-	return ret
+	return goret
 }
 
 // GetHeight wraps gdk_dmabuf_texture_builder_get_height
 // The function returns the following values:
 // 
-// 	- ret uint 
+// 	- goret uint 
 //
 // Gets the height previously set via gdk_dmabuf_texture_builder_set_height() or
 // 0 if the height wasn't set.
@@ -14924,17 +14805,17 @@ func (self *DmabufTextureBuilderInstance) GetHeight() uint {
 	cret = C.gdk_dmabuf_texture_builder_get_height(carg0)
 	runtime.KeepAlive(self)
 
-	var ret uint
+	var goret uint
 
-	ret = uint(cret)
+	goret = uint(cret)
 
-	return ret
+	return goret
 }
 
 // GetModifier wraps gdk_dmabuf_texture_builder_get_modifier
 // The function returns the following values:
 // 
-// 	- ret uint64 
+// 	- goret uint64 
 //
 // Gets the modifier value.
 func (self *DmabufTextureBuilderInstance) GetModifier() uint64 {
@@ -14946,17 +14827,17 @@ func (self *DmabufTextureBuilderInstance) GetModifier() uint64 {
 	cret = C.gdk_dmabuf_texture_builder_get_modifier(carg0)
 	runtime.KeepAlive(self)
 
-	var ret uint64
+	var goret uint64
 
-	ret = uint64(cret)
+	goret = uint64(cret)
 
-	return ret
+	return goret
 }
 
 // GetNPlanes wraps gdk_dmabuf_texture_builder_get_n_planes
 // The function returns the following values:
 // 
-// 	- ret uint 
+// 	- goret uint 
 //
 // Gets the number of planes.
 func (self *DmabufTextureBuilderInstance) GetNPlanes() uint {
@@ -14968,11 +14849,11 @@ func (self *DmabufTextureBuilderInstance) GetNPlanes() uint {
 	cret = C.gdk_dmabuf_texture_builder_get_n_planes(carg0)
 	runtime.KeepAlive(self)
 
-	var ret uint
+	var goret uint
 
-	ret = uint(cret)
+	goret = uint(cret)
 
-	return ret
+	return goret
 }
 
 // GetOffset wraps gdk_dmabuf_texture_builder_get_offset
@@ -14983,7 +14864,7 @@ func (self *DmabufTextureBuilderInstance) GetNPlanes() uint {
 // 
 // The function returns the following values:
 // 
-// 	- ret uint 
+// 	- goret uint 
 //
 // Gets the offset value for a plane.
 func (self *DmabufTextureBuilderInstance) GetOffset(plane uint) uint {
@@ -14998,17 +14879,17 @@ func (self *DmabufTextureBuilderInstance) GetOffset(plane uint) uint {
 	runtime.KeepAlive(self)
 	runtime.KeepAlive(plane)
 
-	var ret uint
+	var goret uint
 
-	ret = uint(cret)
+	goret = uint(cret)
 
-	return ret
+	return goret
 }
 
 // GetPremultiplied wraps gdk_dmabuf_texture_builder_get_premultiplied
 // The function returns the following values:
 // 
-// 	- ret bool 
+// 	- goret bool 
 //
 // Whether the data is premultiplied.
 func (self *DmabufTextureBuilderInstance) GetPremultiplied() bool {
@@ -15020,13 +14901,13 @@ func (self *DmabufTextureBuilderInstance) GetPremultiplied() bool {
 	cret = C.gdk_dmabuf_texture_builder_get_premultiplied(carg0)
 	runtime.KeepAlive(self)
 
-	var ret bool
+	var goret bool
 
 	if cret != 0 {
-		ret = true
+		goret = true
 	}
 
-	return ret
+	return goret
 }
 
 // GetStride wraps gdk_dmabuf_texture_builder_get_stride
@@ -15037,7 +14918,7 @@ func (self *DmabufTextureBuilderInstance) GetPremultiplied() bool {
 // 
 // The function returns the following values:
 // 
-// 	- ret uint 
+// 	- goret uint 
 //
 // Gets the stride value for a plane.
 func (self *DmabufTextureBuilderInstance) GetStride(plane uint) uint {
@@ -15052,17 +14933,17 @@ func (self *DmabufTextureBuilderInstance) GetStride(plane uint) uint {
 	runtime.KeepAlive(self)
 	runtime.KeepAlive(plane)
 
-	var ret uint
+	var goret uint
 
-	ret = uint(cret)
+	goret = uint(cret)
 
-	return ret
+	return goret
 }
 
 // GetUpdateTexture wraps gdk_dmabuf_texture_builder_get_update_texture
 // The function returns the following values:
 // 
-// 	- ret Texture 
+// 	- goret Texture 
 //
 // Gets the texture previously set via gdk_dmabuf_texture_builder_set_update_texture() or
 // %NULL if none was set.
@@ -15075,17 +14956,17 @@ func (self *DmabufTextureBuilderInstance) GetUpdateTexture() Texture {
 	cret = C.gdk_dmabuf_texture_builder_get_update_texture(carg0)
 	runtime.KeepAlive(self)
 
-	var ret Texture
+	var goret Texture
 
-	ret = UnsafeTextureFromGlibNone(unsafe.Pointer(cret))
+	goret = UnsafeTextureFromGlibNone(unsafe.Pointer(cret))
 
-	return ret
+	return goret
 }
 
 // GetWidth wraps gdk_dmabuf_texture_builder_get_width
 // The function returns the following values:
 // 
-// 	- ret uint 
+// 	- goret uint 
 //
 // Gets the width previously set via gdk_dmabuf_texture_builder_set_width() or
 // 0 if the width wasn't set.
@@ -15098,25 +14979,25 @@ func (self *DmabufTextureBuilderInstance) GetWidth() uint {
 	cret = C.gdk_dmabuf_texture_builder_get_width(carg0)
 	runtime.KeepAlive(self)
 
-	var ret uint
+	var goret uint
 
-	ret = uint(cret)
+	goret = uint(cret)
 
-	return ret
+	return goret
 }
 
 // SetColorState wraps gdk_dmabuf_texture_builder_set_color_state
 // 
 // The function takes the following parameters:
 // 
-// 	- colorState ColorState (nullable): a `GdkColorState` or `NULL` to unset the colorstate. 
+// 	- colorState *ColorState (nullable): a `GdkColorState` or `NULL` to unset the colorstate. 
 //
 // Sets the color state for the texture.
 // 
 // By default, the colorstate is `NULL`. In that case, GTK will choose the
 // correct colorstate based on the format.
 // If you don't know what colorstates are, this is probably the right thing.
-func (self *DmabufTextureBuilderInstance) SetColorState(colorState ColorState) {
+func (self *DmabufTextureBuilderInstance) SetColorState(colorState *ColorState) {
 	var carg0 *C.GdkDmabufTextureBuilder // in, none, converted
 	var carg1 *C.GdkColorState           // in, none, converted, nullable
 
@@ -15418,35 +15299,35 @@ type Drag interface {
 	// GetActions wraps gdk_drag_get_actions
 	// The function returns the following values:
 	// 
-	// 	- ret DragAction 
+	// 	- goret DragAction 
 	//
 	// Determines the bitmask of possible actions proposed by the source.
 	GetActions() DragAction
 	// GetContent wraps gdk_drag_get_content
 	// The function returns the following values:
 	// 
-	// 	- ret ContentProvider 
+	// 	- goret ContentProvider 
 	//
 	// Returns the `GdkContentProvider` associated to the `GdkDrag` object.
 	GetContent() ContentProvider
 	// GetDevice wraps gdk_drag_get_device
 	// The function returns the following values:
 	// 
-	// 	- ret Device 
+	// 	- goret Device 
 	//
 	// Returns the `GdkDevice` associated to the `GdkDrag` object.
 	GetDevice() Device
 	// GetDisplay wraps gdk_drag_get_display
 	// The function returns the following values:
 	// 
-	// 	- ret Display 
+	// 	- goret Display 
 	//
 	// Gets the `GdkDisplay` that the drag object was created for.
 	GetDisplay() Display
 	// GetDragSurface wraps gdk_drag_get_drag_surface
 	// The function returns the following values:
 	// 
-	// 	- ret Surface 
+	// 	- goret Surface 
 	//
 	// Returns the surface on which the drag icon should be rendered
 	// during the drag operation.
@@ -15459,21 +15340,21 @@ type Drag interface {
 	// GetFormats wraps gdk_drag_get_formats
 	// The function returns the following values:
 	// 
-	// 	- ret ContentFormats 
+	// 	- goret *ContentFormats 
 	//
 	// Retrieves the formats supported by this `GdkDrag` object.
-	GetFormats() ContentFormats
+	GetFormats() *ContentFormats
 	// GetSelectedAction wraps gdk_drag_get_selected_action
 	// The function returns the following values:
 	// 
-	// 	- ret DragAction 
+	// 	- goret DragAction 
 	//
 	// Determines the action chosen by the drag destination.
 	GetSelectedAction() DragAction
 	// GetSurface wraps gdk_drag_get_surface
 	// The function returns the following values:
 	// 
-	// 	- ret Surface 
+	// 	- goret Surface 
 	//
 	// Returns the `GdkSurface` where the drag originates.
 	GetSurface() Surface
@@ -15497,23 +15378,18 @@ func unsafeWrapDrag(base *gobject.ObjectInstance) *DragInstance {
 	}
 }
 
-func marshalDragInstance(p uintptr) (interface{}, error) {
-	return unsafeWrapDrag(gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Object()), nil
-}
-
-// UnsafeDragFromGlibBorrow is used to convert raw GdkDrag pointers to go. This is used by the bindings internally.
-func UnsafeDragFromGlibBorrow(c unsafe.Pointer) Drag {
-	return gobject.TODOBorrow(c).(Drag)
+func marshalDragInstance(p unsafe.Pointer) (any, error) {
+	return unsafeWrapDrag(gobject.ValueFromNative(p).Object()), nil
 }
 
 // UnsafeDragFromGlibNone is used to convert raw GdkDrag pointers to go while taking a reference and attaching a finalizer. This is used by the bindings internally.
 func UnsafeDragFromGlibNone(c unsafe.Pointer) Drag {
-	return gobject.Take(c).(Drag)
+	return gobject.UnsafeObjectFromGlibNone(c).(Drag)
 }
 
 // UnsafeDragFromGlibFull is used to convert raw GdkDrag pointers to go while attaching a finalizer. This is used by the bindings internally.
 func UnsafeDragFromGlibFull(c unsafe.Pointer) Drag {
-	return gobject.AssumeOwnership(c).(Drag)
+	return gobject.UnsafeObjectFromGlibFull(c).(Drag)
 }
 
 func (d *DragInstance) upcastToGdkDrag() *DragInstance {
@@ -15522,15 +15398,15 @@ func (d *DragInstance) upcastToGdkDrag() *DragInstance {
 
 // UnsafeDragToGlibNone is used to convert the instance to it's C value GdkDrag. This is used by the bindings internally.
 func UnsafeDragToGlibNone(c Drag) unsafe.Pointer {
-	return gobject.TODOToNone(c)
+	return gobject.UnsafeObjectToGlibNone(c)
 }
 
 // UnsafeDragToGlibFull is used to convert the instance to it's C value GdkDrag, while removeing the finalizer. This is used by the bindings internally.
 func UnsafeDragToGlibFull(c Drag) unsafe.Pointer {
-	return gobject.TODOToFull(c)
+	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// Begin wraps gdk_drag_begin
+// DragInstanceBegin wraps gdk_drag_begin
 // 
 // The function takes the following parameters:
 // 
@@ -15543,7 +15419,7 @@ func UnsafeDragToGlibFull(c Drag) unsafe.Pointer {
 // 
 // The function returns the following values:
 // 
-// 	- ret Drag 
+// 	- goret Drag 
 //
 // Starts a drag and creates a new drag context for it.
 // 
@@ -15559,7 +15435,7 @@ func UnsafeDragToGlibFull(c Drag) unsafe.Pointer {
 // the [signal@Gdk.Drag::dnd-finished] signal and delete the data at
 // the source if [method@Gdk.Drag.get_selected_action] returns
 // %GDK_ACTION_MOVE.
-func Begin(surface Surface, device Device, content ContentProvider, actions DragAction, dx float64, dy float64) Drag {
+func DragInstanceBegin(surface Surface, device Device, content ContentProvider, actions DragAction, dx float64, dy float64) Drag {
 	var carg1 *C.GdkSurface         // in, none, converted
 	var carg2 *C.GdkDevice          // in, none, converted
 	var carg3 *C.GdkContentProvider // in, none, converted
@@ -15583,11 +15459,11 @@ func Begin(surface Surface, device Device, content ContentProvider, actions Drag
 	runtime.KeepAlive(dx)
 	runtime.KeepAlive(dy)
 
-	var ret Drag
+	var goret Drag
 
-	ret = UnsafeDragFromGlibFull(unsafe.Pointer(cret))
+	goret = UnsafeDragFromGlibFull(unsafe.Pointer(cret))
 
-	return ret
+	return goret
 }
 
 // DropDone wraps gdk_drag_drop_done
@@ -15624,7 +15500,7 @@ func (drag *DragInstance) DropDone(success bool) {
 // GetActions wraps gdk_drag_get_actions
 // The function returns the following values:
 // 
-// 	- ret DragAction 
+// 	- goret DragAction 
 //
 // Determines the bitmask of possible actions proposed by the source.
 func (drag *DragInstance) GetActions() DragAction {
@@ -15636,17 +15512,17 @@ func (drag *DragInstance) GetActions() DragAction {
 	cret = C.gdk_drag_get_actions(carg0)
 	runtime.KeepAlive(drag)
 
-	var ret DragAction
+	var goret DragAction
 
-	ret = DragAction(cret)
+	goret = DragAction(cret)
 
-	return ret
+	return goret
 }
 
 // GetContent wraps gdk_drag_get_content
 // The function returns the following values:
 // 
-// 	- ret ContentProvider 
+// 	- goret ContentProvider 
 //
 // Returns the `GdkContentProvider` associated to the `GdkDrag` object.
 func (drag *DragInstance) GetContent() ContentProvider {
@@ -15658,17 +15534,17 @@ func (drag *DragInstance) GetContent() ContentProvider {
 	cret = C.gdk_drag_get_content(carg0)
 	runtime.KeepAlive(drag)
 
-	var ret ContentProvider
+	var goret ContentProvider
 
-	ret = UnsafeContentProviderFromGlibNone(unsafe.Pointer(cret))
+	goret = UnsafeContentProviderFromGlibNone(unsafe.Pointer(cret))
 
-	return ret
+	return goret
 }
 
 // GetDevice wraps gdk_drag_get_device
 // The function returns the following values:
 // 
-// 	- ret Device 
+// 	- goret Device 
 //
 // Returns the `GdkDevice` associated to the `GdkDrag` object.
 func (drag *DragInstance) GetDevice() Device {
@@ -15680,17 +15556,17 @@ func (drag *DragInstance) GetDevice() Device {
 	cret = C.gdk_drag_get_device(carg0)
 	runtime.KeepAlive(drag)
 
-	var ret Device
+	var goret Device
 
-	ret = UnsafeDeviceFromGlibNone(unsafe.Pointer(cret))
+	goret = UnsafeDeviceFromGlibNone(unsafe.Pointer(cret))
 
-	return ret
+	return goret
 }
 
 // GetDisplay wraps gdk_drag_get_display
 // The function returns the following values:
 // 
-// 	- ret Display 
+// 	- goret Display 
 //
 // Gets the `GdkDisplay` that the drag object was created for.
 func (drag *DragInstance) GetDisplay() Display {
@@ -15702,17 +15578,17 @@ func (drag *DragInstance) GetDisplay() Display {
 	cret = C.gdk_drag_get_display(carg0)
 	runtime.KeepAlive(drag)
 
-	var ret Display
+	var goret Display
 
-	ret = UnsafeDisplayFromGlibNone(unsafe.Pointer(cret))
+	goret = UnsafeDisplayFromGlibNone(unsafe.Pointer(cret))
 
-	return ret
+	return goret
 }
 
 // GetDragSurface wraps gdk_drag_get_drag_surface
 // The function returns the following values:
 // 
-// 	- ret Surface 
+// 	- goret Surface 
 //
 // Returns the surface on which the drag icon should be rendered
 // during the drag operation.
@@ -15730,20 +15606,20 @@ func (drag *DragInstance) GetDragSurface() Surface {
 	cret = C.gdk_drag_get_drag_surface(carg0)
 	runtime.KeepAlive(drag)
 
-	var ret Surface
+	var goret Surface
 
-	ret = UnsafeSurfaceFromGlibNone(unsafe.Pointer(cret))
+	goret = UnsafeSurfaceFromGlibNone(unsafe.Pointer(cret))
 
-	return ret
+	return goret
 }
 
 // GetFormats wraps gdk_drag_get_formats
 // The function returns the following values:
 // 
-// 	- ret ContentFormats 
+// 	- goret *ContentFormats 
 //
 // Retrieves the formats supported by this `GdkDrag` object.
-func (drag *DragInstance) GetFormats() ContentFormats {
+func (drag *DragInstance) GetFormats() *ContentFormats {
 	var carg0 *C.GdkDrag           // in, none, converted
 	var cret  *C.GdkContentFormats // return, none, converted
 
@@ -15752,17 +15628,17 @@ func (drag *DragInstance) GetFormats() ContentFormats {
 	cret = C.gdk_drag_get_formats(carg0)
 	runtime.KeepAlive(drag)
 
-	var ret ContentFormats
+	var goret *ContentFormats
 
-	ret = UnsafeContentFormatsFromGlibNone(unsafe.Pointer(cret))
+	goret = UnsafeContentFormatsFromGlibNone(unsafe.Pointer(cret))
 
-	return ret
+	return goret
 }
 
 // GetSelectedAction wraps gdk_drag_get_selected_action
 // The function returns the following values:
 // 
-// 	- ret DragAction 
+// 	- goret DragAction 
 //
 // Determines the action chosen by the drag destination.
 func (drag *DragInstance) GetSelectedAction() DragAction {
@@ -15774,17 +15650,17 @@ func (drag *DragInstance) GetSelectedAction() DragAction {
 	cret = C.gdk_drag_get_selected_action(carg0)
 	runtime.KeepAlive(drag)
 
-	var ret DragAction
+	var goret DragAction
 
-	ret = DragAction(cret)
+	goret = DragAction(cret)
 
-	return ret
+	return goret
 }
 
 // GetSurface wraps gdk_drag_get_surface
 // The function returns the following values:
 // 
-// 	- ret Surface 
+// 	- goret Surface 
 //
 // Returns the `GdkSurface` where the drag originates.
 func (drag *DragInstance) GetSurface() Surface {
@@ -15796,11 +15672,11 @@ func (drag *DragInstance) GetSurface() Surface {
 	cret = C.gdk_drag_get_surface(carg0)
 	runtime.KeepAlive(drag)
 
-	var ret Surface
+	var goret Surface
 
-	ret = UnsafeSurfaceFromGlibNone(unsafe.Pointer(cret))
+	goret = UnsafeSurfaceFromGlibNone(unsafe.Pointer(cret))
 
-	return ret
+	return goret
 }
 
 // SetHotspot wraps gdk_drag_set_hotspot
@@ -15869,21 +15745,21 @@ type DrawContext interface {
 	// GetDisplay wraps gdk_draw_context_get_display
 	// The function returns the following values:
 	// 
-	// 	- ret Display 
+	// 	- goret Display 
 	//
 	// Retrieves the `GdkDisplay` the @context is created for
 	GetDisplay() Display
 	// GetSurface wraps gdk_draw_context_get_surface
 	// The function returns the following values:
 	// 
-	// 	- ret Surface 
+	// 	- goret Surface 
 	//
 	// Retrieves the surface that @context is bound to.
 	GetSurface() Surface
 	// IsInFrame wraps gdk_draw_context_is_in_frame
 	// The function returns the following values:
 	// 
-	// 	- ret bool 
+	// 	- goret bool 
 	//
 	// Returns %TRUE if @context is in the process of drawing to its surface.
 	// 
@@ -15902,23 +15778,18 @@ func unsafeWrapDrawContext(base *gobject.ObjectInstance) *DrawContextInstance {
 	}
 }
 
-func marshalDrawContextInstance(p uintptr) (interface{}, error) {
-	return unsafeWrapDrawContext(gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Object()), nil
-}
-
-// UnsafeDrawContextFromGlibBorrow is used to convert raw GdkDrawContext pointers to go. This is used by the bindings internally.
-func UnsafeDrawContextFromGlibBorrow(c unsafe.Pointer) DrawContext {
-	return gobject.TODOBorrow(c).(DrawContext)
+func marshalDrawContextInstance(p unsafe.Pointer) (any, error) {
+	return unsafeWrapDrawContext(gobject.ValueFromNative(p).Object()), nil
 }
 
 // UnsafeDrawContextFromGlibNone is used to convert raw GdkDrawContext pointers to go while taking a reference and attaching a finalizer. This is used by the bindings internally.
 func UnsafeDrawContextFromGlibNone(c unsafe.Pointer) DrawContext {
-	return gobject.Take(c).(DrawContext)
+	return gobject.UnsafeObjectFromGlibNone(c).(DrawContext)
 }
 
 // UnsafeDrawContextFromGlibFull is used to convert raw GdkDrawContext pointers to go while attaching a finalizer. This is used by the bindings internally.
 func UnsafeDrawContextFromGlibFull(c unsafe.Pointer) DrawContext {
-	return gobject.AssumeOwnership(c).(DrawContext)
+	return gobject.UnsafeObjectFromGlibFull(c).(DrawContext)
 }
 
 func (d *DrawContextInstance) upcastToGdkDrawContext() *DrawContextInstance {
@@ -15927,12 +15798,12 @@ func (d *DrawContextInstance) upcastToGdkDrawContext() *DrawContextInstance {
 
 // UnsafeDrawContextToGlibNone is used to convert the instance to it's C value GdkDrawContext. This is used by the bindings internally.
 func UnsafeDrawContextToGlibNone(c DrawContext) unsafe.Pointer {
-	return gobject.TODOToNone(c)
+	return gobject.UnsafeObjectToGlibNone(c)
 }
 
 // UnsafeDrawContextToGlibFull is used to convert the instance to it's C value GdkDrawContext, while removeing the finalizer. This is used by the bindings internally.
 func UnsafeDrawContextToGlibFull(c DrawContext) unsafe.Pointer {
-	return gobject.TODOToFull(c)
+	return gobject.UnsafeObjectToGlibFull(c)
 }
 
 // EndFrame wraps gdk_draw_context_end_frame
@@ -15960,7 +15831,7 @@ func (context *DrawContextInstance) EndFrame() {
 // GetDisplay wraps gdk_draw_context_get_display
 // The function returns the following values:
 // 
-// 	- ret Display 
+// 	- goret Display 
 //
 // Retrieves the `GdkDisplay` the @context is created for
 func (context *DrawContextInstance) GetDisplay() Display {
@@ -15972,17 +15843,17 @@ func (context *DrawContextInstance) GetDisplay() Display {
 	cret = C.gdk_draw_context_get_display(carg0)
 	runtime.KeepAlive(context)
 
-	var ret Display
+	var goret Display
 
-	ret = UnsafeDisplayFromGlibNone(unsafe.Pointer(cret))
+	goret = UnsafeDisplayFromGlibNone(unsafe.Pointer(cret))
 
-	return ret
+	return goret
 }
 
 // GetSurface wraps gdk_draw_context_get_surface
 // The function returns the following values:
 // 
-// 	- ret Surface 
+// 	- goret Surface 
 //
 // Retrieves the surface that @context is bound to.
 func (context *DrawContextInstance) GetSurface() Surface {
@@ -15994,17 +15865,17 @@ func (context *DrawContextInstance) GetSurface() Surface {
 	cret = C.gdk_draw_context_get_surface(carg0)
 	runtime.KeepAlive(context)
 
-	var ret Surface
+	var goret Surface
 
-	ret = UnsafeSurfaceFromGlibNone(unsafe.Pointer(cret))
+	goret = UnsafeSurfaceFromGlibNone(unsafe.Pointer(cret))
 
-	return ret
+	return goret
 }
 
 // IsInFrame wraps gdk_draw_context_is_in_frame
 // The function returns the following values:
 // 
-// 	- ret bool 
+// 	- goret bool 
 //
 // Returns %TRUE if @context is in the process of drawing to its surface.
 // 
@@ -16023,13 +15894,13 @@ func (context *DrawContextInstance) IsInFrame() bool {
 	cret = C.gdk_draw_context_is_in_frame(carg0)
 	runtime.KeepAlive(context)
 
-	var ret bool
+	var goret bool
 
 	if cret != 0 {
-		ret = true
+		goret = true
 	}
 
-	return ret
+	return goret
 }
 
 // DropInstance is the instance type used by all types extending GdkDrop. It is used internally by the bindings. Users should use the interface [Drop] instead.
@@ -16074,7 +15945,7 @@ type Drop interface {
 	// GetActions wraps gdk_drop_get_actions
 	// The function returns the following values:
 	// 
-	// 	- ret DragAction 
+	// 	- goret DragAction 
 	//
 	// Returns the possible actions for this `GdkDrop`.
 	// 
@@ -16094,21 +15965,21 @@ type Drop interface {
 	// GetDevice wraps gdk_drop_get_device
 	// The function returns the following values:
 	// 
-	// 	- ret Device 
+	// 	- goret Device 
 	//
 	// Returns the `GdkDevice` performing the drop.
 	GetDevice() Device
 	// GetDisplay wraps gdk_drop_get_display
 	// The function returns the following values:
 	// 
-	// 	- ret Display 
+	// 	- goret Display 
 	//
 	// Gets the `GdkDisplay` that @self was created for.
 	GetDisplay() Display
 	// GetDrag wraps gdk_drop_get_drag
 	// The function returns the following values:
 	// 
-	// 	- ret Drag 
+	// 	- goret Drag 
 	//
 	// If this is an in-app drag-and-drop operation, returns the `GdkDrag`
 	// that corresponds to this drop.
@@ -16118,15 +15989,15 @@ type Drop interface {
 	// GetFormats wraps gdk_drop_get_formats
 	// The function returns the following values:
 	// 
-	// 	- ret ContentFormats 
+	// 	- goret *ContentFormats 
 	//
 	// Returns the `GdkContentFormats` that the drop offers the data
 	// to be read in.
-	GetFormats() ContentFormats
+	GetFormats() *ContentFormats
 	// GetSurface wraps gdk_drop_get_surface
 	// The function returns the following values:
 	// 
-	// 	- ret Surface 
+	// 	- goret Surface 
 	//
 	// Returns the `GdkSurface` performing the drop.
 	GetSurface() Surface
@@ -16134,16 +16005,16 @@ type Drop interface {
 	// 
 	// The function takes the following parameters:
 	// 
-	// 	- mimeTypes array: 
+	// 	- cancellable context.Context (nullable): optional `GCancellable` object 
+	// 	- mimeTypes []string: 
 	//   pointer to an array of mime types 
 	// 	- ioPriority int: the I/O priority for the read operation 
-	// 	- cancellable gio. (nullable): optional `GCancellable` object 
 	// 	- callback gio.AsyncReadyCallback (nullable): a `GAsyncReadyCallback` to call when
 	//   the request is satisfied 
 	//
 	// Asynchronously read the dropped data from a `GdkDrop`
 	// in a format that complies with one of the mime types.
-	ReadAsync(array, int, gio., gio.AsyncReadyCallback)
+	ReadAsync(context.Context, []string, int, gio.AsyncReadyCallback)
 	// ReadFinish wraps gdk_drop_read_finish
 	// 
 	// The function takes the following parameters:
@@ -16153,7 +16024,7 @@ type Drop interface {
 	// The function returns the following values:
 	// 
 	// 	- outMimeType string: return location for the used mime type 
-	// 	- ret gio.InputStream 
+	// 	- goret gio.InputStream 
 	// 	- _goerr error (nullable): an error 
 	//
 	// Finishes an async drop read operation.
@@ -16169,9 +16040,9 @@ type Drop interface {
 	// 
 	// The function takes the following parameters:
 	// 
-	// 	- typ glib.Type: a `GType` to read 
+	// 	- cancellable context.Context (nullable): optional `GCancellable` object, %NULL to ignore. 
+	// 	- typ gobject.Type: a `GType` to read 
 	// 	- ioPriority int: the I/O priority of the request. 
-	// 	- cancellable gio. (nullable): optional `GCancellable` object, %NULL to ignore. 
 	// 	- callback gio.AsyncReadyCallback (nullable): callback to call when the request is satisfied 
 	//
 	// Asynchronously request the drag operation's contents converted
@@ -16180,7 +16051,7 @@ type Drop interface {
 	// For local drag-and-drop operations that are available in the given
 	// `GType`, the value will be copied directly. Otherwise, GDK will
 	// try to use [func@Gdk.content_deserialize_async] to convert the data.
-	ReadValueAsync(glib.Type, int, gio., gio.AsyncReadyCallback)
+	ReadValueAsync(context.Context, gobject.Type, int, gio.AsyncReadyCallback)
 	// ReadValueFinish wraps gdk_drop_read_value_finish
 	// 
 	// The function takes the following parameters:
@@ -16189,7 +16060,7 @@ type Drop interface {
 	// 
 	// The function returns the following values:
 	// 
-	// 	- ret *gobject.Value 
+	// 	- goret *gobject.Value 
 	// 	- _goerr error (nullable): an error 
 	//
 	// Finishes an async drop read.
@@ -16227,23 +16098,18 @@ func unsafeWrapDrop(base *gobject.ObjectInstance) *DropInstance {
 	}
 }
 
-func marshalDropInstance(p uintptr) (interface{}, error) {
-	return unsafeWrapDrop(gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Object()), nil
-}
-
-// UnsafeDropFromGlibBorrow is used to convert raw GdkDrop pointers to go. This is used by the bindings internally.
-func UnsafeDropFromGlibBorrow(c unsafe.Pointer) Drop {
-	return gobject.TODOBorrow(c).(Drop)
+func marshalDropInstance(p unsafe.Pointer) (any, error) {
+	return unsafeWrapDrop(gobject.ValueFromNative(p).Object()), nil
 }
 
 // UnsafeDropFromGlibNone is used to convert raw GdkDrop pointers to go while taking a reference and attaching a finalizer. This is used by the bindings internally.
 func UnsafeDropFromGlibNone(c unsafe.Pointer) Drop {
-	return gobject.Take(c).(Drop)
+	return gobject.UnsafeObjectFromGlibNone(c).(Drop)
 }
 
 // UnsafeDropFromGlibFull is used to convert raw GdkDrop pointers to go while attaching a finalizer. This is used by the bindings internally.
 func UnsafeDropFromGlibFull(c unsafe.Pointer) Drop {
-	return gobject.AssumeOwnership(c).(Drop)
+	return gobject.UnsafeObjectFromGlibFull(c).(Drop)
 }
 
 func (d *DropInstance) upcastToGdkDrop() *DropInstance {
@@ -16252,12 +16118,12 @@ func (d *DropInstance) upcastToGdkDrop() *DropInstance {
 
 // UnsafeDropToGlibNone is used to convert the instance to it's C value GdkDrop. This is used by the bindings internally.
 func UnsafeDropToGlibNone(c Drop) unsafe.Pointer {
-	return gobject.TODOToNone(c)
+	return gobject.UnsafeObjectToGlibNone(c)
 }
 
 // UnsafeDropToGlibFull is used to convert the instance to it's C value GdkDrop, while removeing the finalizer. This is used by the bindings internally.
 func UnsafeDropToGlibFull(c Drop) unsafe.Pointer {
-	return gobject.TODOToFull(c)
+	return gobject.UnsafeObjectToGlibFull(c)
 }
 
 // Finish wraps gdk_drop_finish
@@ -16285,7 +16151,7 @@ func (self *DropInstance) Finish(action DragAction) {
 // GetActions wraps gdk_drop_get_actions
 // The function returns the following values:
 // 
-// 	- ret DragAction 
+// 	- goret DragAction 
 //
 // Returns the possible actions for this `GdkDrop`.
 // 
@@ -16310,17 +16176,17 @@ func (self *DropInstance) GetActions() DragAction {
 	cret = C.gdk_drop_get_actions(carg0)
 	runtime.KeepAlive(self)
 
-	var ret DragAction
+	var goret DragAction
 
-	ret = DragAction(cret)
+	goret = DragAction(cret)
 
-	return ret
+	return goret
 }
 
 // GetDevice wraps gdk_drop_get_device
 // The function returns the following values:
 // 
-// 	- ret Device 
+// 	- goret Device 
 //
 // Returns the `GdkDevice` performing the drop.
 func (self *DropInstance) GetDevice() Device {
@@ -16332,17 +16198,17 @@ func (self *DropInstance) GetDevice() Device {
 	cret = C.gdk_drop_get_device(carg0)
 	runtime.KeepAlive(self)
 
-	var ret Device
+	var goret Device
 
-	ret = UnsafeDeviceFromGlibNone(unsafe.Pointer(cret))
+	goret = UnsafeDeviceFromGlibNone(unsafe.Pointer(cret))
 
-	return ret
+	return goret
 }
 
 // GetDisplay wraps gdk_drop_get_display
 // The function returns the following values:
 // 
-// 	- ret Display 
+// 	- goret Display 
 //
 // Gets the `GdkDisplay` that @self was created for.
 func (self *DropInstance) GetDisplay() Display {
@@ -16354,17 +16220,17 @@ func (self *DropInstance) GetDisplay() Display {
 	cret = C.gdk_drop_get_display(carg0)
 	runtime.KeepAlive(self)
 
-	var ret Display
+	var goret Display
 
-	ret = UnsafeDisplayFromGlibNone(unsafe.Pointer(cret))
+	goret = UnsafeDisplayFromGlibNone(unsafe.Pointer(cret))
 
-	return ret
+	return goret
 }
 
 // GetDrag wraps gdk_drop_get_drag
 // The function returns the following values:
 // 
-// 	- ret Drag 
+// 	- goret Drag 
 //
 // If this is an in-app drag-and-drop operation, returns the `GdkDrag`
 // that corresponds to this drop.
@@ -16379,21 +16245,21 @@ func (self *DropInstance) GetDrag() Drag {
 	cret = C.gdk_drop_get_drag(carg0)
 	runtime.KeepAlive(self)
 
-	var ret Drag
+	var goret Drag
 
-	ret = UnsafeDragFromGlibNone(unsafe.Pointer(cret))
+	goret = UnsafeDragFromGlibNone(unsafe.Pointer(cret))
 
-	return ret
+	return goret
 }
 
 // GetFormats wraps gdk_drop_get_formats
 // The function returns the following values:
 // 
-// 	- ret ContentFormats 
+// 	- goret *ContentFormats 
 //
 // Returns the `GdkContentFormats` that the drop offers the data
 // to be read in.
-func (self *DropInstance) GetFormats() ContentFormats {
+func (self *DropInstance) GetFormats() *ContentFormats {
 	var carg0 *C.GdkDrop           // in, none, converted
 	var cret  *C.GdkContentFormats // return, none, converted
 
@@ -16402,17 +16268,17 @@ func (self *DropInstance) GetFormats() ContentFormats {
 	cret = C.gdk_drop_get_formats(carg0)
 	runtime.KeepAlive(self)
 
-	var ret ContentFormats
+	var goret *ContentFormats
 
-	ret = UnsafeContentFormatsFromGlibNone(unsafe.Pointer(cret))
+	goret = UnsafeContentFormatsFromGlibNone(unsafe.Pointer(cret))
 
-	return ret
+	return goret
 }
 
 // GetSurface wraps gdk_drop_get_surface
 // The function returns the following values:
 // 
-// 	- ret Surface 
+// 	- goret Surface 
 //
 // Returns the `GdkSurface` performing the drop.
 func (self *DropInstance) GetSurface() Surface {
@@ -16424,40 +16290,42 @@ func (self *DropInstance) GetSurface() Surface {
 	cret = C.gdk_drop_get_surface(carg0)
 	runtime.KeepAlive(self)
 
-	var ret Surface
+	var goret Surface
 
-	ret = UnsafeSurfaceFromGlibNone(unsafe.Pointer(cret))
+	goret = UnsafeSurfaceFromGlibNone(unsafe.Pointer(cret))
 
-	return ret
+	return goret
 }
 
 // ReadAsync wraps gdk_drop_read_async
 // 
 // The function takes the following parameters:
 // 
-// 	- mimeTypes array: 
+// 	- cancellable context.Context (nullable): optional `GCancellable` object 
+// 	- mimeTypes []string: 
 //   pointer to an array of mime types 
 // 	- ioPriority int: the I/O priority for the read operation 
-// 	- cancellable gio. (nullable): optional `GCancellable` object 
 // 	- callback gio.AsyncReadyCallback (nullable): a `GAsyncReadyCallback` to call when
 //   the request is satisfied 
 //
 // Asynchronously read the dropped data from a `GdkDrop`
 // in a format that complies with one of the mime types.
-func (self *DropInstance) ReadAsync(mimeTypes array, ioPriority int, cancellable gio., callback gio.AsyncReadyCallback) {
+func (self *DropInstance) ReadAsync(cancellable context.Context, mimeTypes []string, ioPriority int, callback gio.AsyncReadyCallback) {
 	var carg0 *C.GdkDrop            // in, none, converted
-	var carg1 array                 // in, transfer: none, scope: call, implicit: false, skip: false, optional: false, nullable: false, caller-allocates: false, has closure: false, has destroy: false
+	var carg3 *C.GCancellable       // in, none, converted, nullable
+	var carg1 **C.char              // in, transfer: none, C Pointers: 2, Name: array[utf8], array (inner: *typesystem.StringPrimitive, zero-terminated)
 	var carg2 C.int                 // in, none, casted
-	var carg3 *C.Cancellable        // in, none, converted, nullable
 	var carg4 C.GAsyncReadyCallback // callback, scope: async, closure: carg5, nullable
 	var carg5 C.gpointer            // implicit
 
 	carg0 = (*C.GdkDrop)(UnsafeDropToGlibNone(self))
-	panic("unimplemented conversion of array (array)")
-	carg2 = C.int(ioPriority)
 	if cancellable != nil {
-		carg3 = (*C.Cancellable)(UnsafeCancellableToGlibNone(cancellable))
+		carg3 = (*C.GCancellable)(gio.UnsafeGCancellableToGlibNone(cancellable))
 	}
+	_ = mimeTypes
+	_ = carg1
+	panic("unimplemented conversion of []string (const char**)")
+	carg2 = C.int(ioPriority)
 	if callback != nil {
 		carg4 = (*[0]byte)(C._gotk4_gio2_AsyncReadyCallback)
 		carg5 = C.gpointer(gbox.AssignOnce(callback))
@@ -16465,9 +16333,9 @@ func (self *DropInstance) ReadAsync(mimeTypes array, ioPriority int, cancellable
 
 	C.gdk_drop_read_async(carg0, carg1, carg2, carg3, carg4, carg5)
 	runtime.KeepAlive(self)
+	runtime.KeepAlive(cancellable)
 	runtime.KeepAlive(mimeTypes)
 	runtime.KeepAlive(ioPriority)
-	runtime.KeepAlive(cancellable)
 	runtime.KeepAlive(callback)
 }
 
@@ -16480,7 +16348,7 @@ func (self *DropInstance) ReadAsync(mimeTypes array, ioPriority int, cancellable
 // The function returns the following values:
 // 
 // 	- outMimeType string: return location for the used mime type 
-// 	- ret gio.InputStream 
+// 	- goret gio.InputStream 
 // 	- _goerr error (nullable): an error 
 //
 // Finishes an async drop read operation.
@@ -16499,32 +16367,32 @@ func (self *DropInstance) ReadFinish(result gio.AsyncResult) (string, gio.InputS
 	var _cerr *C.GError       // out, full, converted, nullable
 
 	carg0 = (*C.GdkDrop)(UnsafeDropToGlibNone(self))
-	carg1 = (*C.GAsyncResult)(UnsafeAsyncResultToGlibNone(result))
+	carg1 = (*C.GAsyncResult)(gio.UnsafeAsyncResultToGlibNone(result))
 
 	cret = C.gdk_drop_read_finish(carg0, carg1, &carg2, &_cerr)
 	runtime.KeepAlive(self)
 	runtime.KeepAlive(result)
 
 	var outMimeType string
-	var ret         gio.InputStream
+	var goret       gio.InputStream
 	var _goerr      error
 
 	outMimeType = C.GoString((*C.gchar)(unsafe.Pointer(carg2)))
-	ret = UnsafeInputStreamFromGlibFull(unsafe.Pointer(cret))
+	goret = gio.UnsafeInputStreamFromGlibFull(unsafe.Pointer(cret))
 	if _cerr != nil {
-		_goerr = UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
+		_goerr = glib.UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
 	}
 
-	return outMimeType, ret, _goerr
+	return outMimeType, goret, _goerr
 }
 
 // ReadValueAsync wraps gdk_drop_read_value_async
 // 
 // The function takes the following parameters:
 // 
-// 	- typ glib.Type: a `GType` to read 
+// 	- cancellable context.Context (nullable): optional `GCancellable` object, %NULL to ignore. 
+// 	- typ gobject.Type: a `GType` to read 
 // 	- ioPriority int: the I/O priority of the request. 
-// 	- cancellable gio. (nullable): optional `GCancellable` object, %NULL to ignore. 
 // 	- callback gio.AsyncReadyCallback (nullable): callback to call when the request is satisfied 
 //
 // Asynchronously request the drag operation's contents converted
@@ -16533,20 +16401,20 @@ func (self *DropInstance) ReadFinish(result gio.AsyncResult) (string, gio.InputS
 // For local drag-and-drop operations that are available in the given
 // `GType`, the value will be copied directly. Otherwise, GDK will
 // try to use [func@Gdk.content_deserialize_async] to convert the data.
-func (self *DropInstance) ReadValueAsync(typ glib.Type, ioPriority int, cancellable gio., callback gio.AsyncReadyCallback) {
+func (self *DropInstance) ReadValueAsync(cancellable context.Context, typ gobject.Type, ioPriority int, callback gio.AsyncReadyCallback) {
 	var carg0 *C.GdkDrop            // in, none, converted
-	var carg1 C.GType               // in, none, casted
+	var carg3 *C.GCancellable       // in, none, converted, nullable
+	var carg1 C.GType               // in, none, casted, alias
 	var carg2 C.int                 // in, none, casted
-	var carg3 *C.Cancellable        // in, none, converted, nullable
 	var carg4 C.GAsyncReadyCallback // callback, scope: async, closure: carg5, nullable
 	var carg5 C.gpointer            // implicit
 
 	carg0 = (*C.GdkDrop)(UnsafeDropToGlibNone(self))
+	if cancellable != nil {
+		carg3 = (*C.GCancellable)(gio.UnsafeGCancellableToGlibNone(cancellable))
+	}
 	carg1 = C.GType(typ)
 	carg2 = C.int(ioPriority)
-	if cancellable != nil {
-		carg3 = (*C.Cancellable)(UnsafeCancellableToGlibNone(cancellable))
-	}
 	if callback != nil {
 		carg4 = (*[0]byte)(C._gotk4_gio2_AsyncReadyCallback)
 		carg5 = C.gpointer(gbox.AssignOnce(callback))
@@ -16554,9 +16422,9 @@ func (self *DropInstance) ReadValueAsync(typ glib.Type, ioPriority int, cancella
 
 	C.gdk_drop_read_value_async(carg0, carg1, carg2, carg3, carg4, carg5)
 	runtime.KeepAlive(self)
+	runtime.KeepAlive(cancellable)
 	runtime.KeepAlive(typ)
 	runtime.KeepAlive(ioPriority)
-	runtime.KeepAlive(cancellable)
 	runtime.KeepAlive(callback)
 }
 
@@ -16568,7 +16436,7 @@ func (self *DropInstance) ReadValueAsync(typ glib.Type, ioPriority int, cancella
 // 
 // The function returns the following values:
 // 
-// 	- ret *gobject.Value 
+// 	- goret *gobject.Value 
 // 	- _goerr error (nullable): an error 
 //
 // Finishes an async drop read.
@@ -16581,21 +16449,21 @@ func (self *DropInstance) ReadValueFinish(result gio.AsyncResult) (*gobject.Valu
 	var _cerr *C.GError       // out, full, converted, nullable
 
 	carg0 = (*C.GdkDrop)(UnsafeDropToGlibNone(self))
-	carg1 = (*C.GAsyncResult)(UnsafeAsyncResultToGlibNone(result))
+	carg1 = (*C.GAsyncResult)(gio.UnsafeAsyncResultToGlibNone(result))
 
 	cret = C.gdk_drop_read_value_finish(carg0, carg1, &_cerr)
 	runtime.KeepAlive(self)
 	runtime.KeepAlive(result)
 
-	var ret    *gobject.Value
+	var goret  *gobject.Value
 	var _goerr error
 
-	ret = TODOFromGlibNone(unsafe.Pointer(cret))
+	goret = gobject.TODOFromGlibNone(unsafe.Pointer(cret))
 	if _cerr != nil {
-		_goerr = UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
+		_goerr = glib.UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
 	}
 
-	return ret, _goerr
+	return goret, _goerr
 }
 
 // Status wraps gdk_drop_status
@@ -16701,14 +16569,14 @@ type FrameClock interface {
 	// GetCurrentTimings wraps gdk_frame_clock_get_current_timings
 	// The function returns the following values:
 	// 
-	// 	- ret FrameTimings 
+	// 	- goret *FrameTimings 
 	//
 	// Gets the frame timings for the current frame.
-	GetCurrentTimings() FrameTimings
+	GetCurrentTimings() *FrameTimings
 	// GetFPS wraps gdk_frame_clock_get_fps
 	// The function returns the following values:
 	// 
-	// 	- ret float64 
+	// 	- goret float64 
 	//
 	// Calculates the current frames-per-second, based on the
 	// frame timings of @frame_clock.
@@ -16716,7 +16584,7 @@ type FrameClock interface {
 	// GetFrameCounter wraps gdk_frame_clock_get_frame_counter
 	// The function returns the following values:
 	// 
-	// 	- ret int64 
+	// 	- goret int64 
 	//
 	// `GdkFrameClock` maintains a 64-bit counter that increments for
 	// each frame drawn.
@@ -16724,7 +16592,7 @@ type FrameClock interface {
 	// GetFrameTime wraps gdk_frame_clock_get_frame_time
 	// The function returns the following values:
 	// 
-	// 	- ret int64 
+	// 	- goret int64 
 	//
 	// Gets the time that should currently be used for animations.
 	// 
@@ -16737,7 +16605,7 @@ type FrameClock interface {
 	// GetHistoryStart wraps gdk_frame_clock_get_history_start
 	// The function returns the following values:
 	// 
-	// 	- ret int64 
+	// 	- goret int64 
 	//
 	// Returns the frame counter for the oldest frame available in history.
 	// 
@@ -16780,7 +16648,7 @@ type FrameClock interface {
 	// 
 	// The function returns the following values:
 	// 
-	// 	- ret FrameTimings 
+	// 	- goret *FrameTimings 
 	//
 	// Retrieves a `GdkFrameTimings` object holding timing information
 	// for the current frame or a recent frame.
@@ -16788,7 +16656,7 @@ type FrameClock interface {
 	// The `GdkFrameTimings` object may not yet be complete: see
 	// [method@Gdk.FrameTimings.get_complete] and
 	// [method@Gdk.FrameClock.get_history_start].
-	GetTimings(int64) FrameTimings
+	GetTimings(int64) *FrameTimings
 	// RequestPhase wraps gdk_frame_clock_request_phase
 	// 
 	// The function takes the following parameters:
@@ -16815,23 +16683,18 @@ func unsafeWrapFrameClock(base *gobject.ObjectInstance) *FrameClockInstance {
 	}
 }
 
-func marshalFrameClockInstance(p uintptr) (interface{}, error) {
-	return unsafeWrapFrameClock(gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Object()), nil
-}
-
-// UnsafeFrameClockFromGlibBorrow is used to convert raw GdkFrameClock pointers to go. This is used by the bindings internally.
-func UnsafeFrameClockFromGlibBorrow(c unsafe.Pointer) FrameClock {
-	return gobject.TODOBorrow(c).(FrameClock)
+func marshalFrameClockInstance(p unsafe.Pointer) (any, error) {
+	return unsafeWrapFrameClock(gobject.ValueFromNative(p).Object()), nil
 }
 
 // UnsafeFrameClockFromGlibNone is used to convert raw GdkFrameClock pointers to go while taking a reference and attaching a finalizer. This is used by the bindings internally.
 func UnsafeFrameClockFromGlibNone(c unsafe.Pointer) FrameClock {
-	return gobject.Take(c).(FrameClock)
+	return gobject.UnsafeObjectFromGlibNone(c).(FrameClock)
 }
 
 // UnsafeFrameClockFromGlibFull is used to convert raw GdkFrameClock pointers to go while attaching a finalizer. This is used by the bindings internally.
 func UnsafeFrameClockFromGlibFull(c unsafe.Pointer) FrameClock {
-	return gobject.AssumeOwnership(c).(FrameClock)
+	return gobject.UnsafeObjectFromGlibFull(c).(FrameClock)
 }
 
 func (f *FrameClockInstance) upcastToGdkFrameClock() *FrameClockInstance {
@@ -16840,12 +16703,12 @@ func (f *FrameClockInstance) upcastToGdkFrameClock() *FrameClockInstance {
 
 // UnsafeFrameClockToGlibNone is used to convert the instance to it's C value GdkFrameClock. This is used by the bindings internally.
 func UnsafeFrameClockToGlibNone(c FrameClock) unsafe.Pointer {
-	return gobject.TODOToNone(c)
+	return gobject.UnsafeObjectToGlibNone(c)
 }
 
 // UnsafeFrameClockToGlibFull is used to convert the instance to it's C value GdkFrameClock, while removeing the finalizer. This is used by the bindings internally.
 func UnsafeFrameClockToGlibFull(c FrameClock) unsafe.Pointer {
-	return gobject.TODOToFull(c)
+	return gobject.UnsafeObjectToGlibFull(c)
 }
 
 // BeginUpdating wraps gdk_frame_clock_begin_updating
@@ -16883,10 +16746,10 @@ func (frameClock *FrameClockInstance) EndUpdating() {
 // GetCurrentTimings wraps gdk_frame_clock_get_current_timings
 // The function returns the following values:
 // 
-// 	- ret FrameTimings 
+// 	- goret *FrameTimings 
 //
 // Gets the frame timings for the current frame.
-func (frameClock *FrameClockInstance) GetCurrentTimings() FrameTimings {
+func (frameClock *FrameClockInstance) GetCurrentTimings() *FrameTimings {
 	var carg0 *C.GdkFrameClock   // in, none, converted
 	var cret  *C.GdkFrameTimings // return, none, converted
 
@@ -16895,17 +16758,17 @@ func (frameClock *FrameClockInstance) GetCurrentTimings() FrameTimings {
 	cret = C.gdk_frame_clock_get_current_timings(carg0)
 	runtime.KeepAlive(frameClock)
 
-	var ret FrameTimings
+	var goret *FrameTimings
 
-	ret = UnsafeFrameTimingsFromGlibNone(unsafe.Pointer(cret))
+	goret = UnsafeFrameTimingsFromGlibNone(unsafe.Pointer(cret))
 
-	return ret
+	return goret
 }
 
 // GetFPS wraps gdk_frame_clock_get_fps
 // The function returns the following values:
 // 
-// 	- ret float64 
+// 	- goret float64 
 //
 // Calculates the current frames-per-second, based on the
 // frame timings of @frame_clock.
@@ -16918,17 +16781,17 @@ func (frameClock *FrameClockInstance) GetFPS() float64 {
 	cret = C.gdk_frame_clock_get_fps(carg0)
 	runtime.KeepAlive(frameClock)
 
-	var ret float64
+	var goret float64
 
-	ret = float64(cret)
+	goret = float64(cret)
 
-	return ret
+	return goret
 }
 
 // GetFrameCounter wraps gdk_frame_clock_get_frame_counter
 // The function returns the following values:
 // 
-// 	- ret int64 
+// 	- goret int64 
 //
 // `GdkFrameClock` maintains a 64-bit counter that increments for
 // each frame drawn.
@@ -16941,17 +16804,17 @@ func (frameClock *FrameClockInstance) GetFrameCounter() int64 {
 	cret = C.gdk_frame_clock_get_frame_counter(carg0)
 	runtime.KeepAlive(frameClock)
 
-	var ret int64
+	var goret int64
 
-	ret = int64(cret)
+	goret = int64(cret)
 
-	return ret
+	return goret
 }
 
 // GetFrameTime wraps gdk_frame_clock_get_frame_time
 // The function returns the following values:
 // 
-// 	- ret int64 
+// 	- goret int64 
 //
 // Gets the time that should currently be used for animations.
 // 
@@ -16969,17 +16832,17 @@ func (frameClock *FrameClockInstance) GetFrameTime() int64 {
 	cret = C.gdk_frame_clock_get_frame_time(carg0)
 	runtime.KeepAlive(frameClock)
 
-	var ret int64
+	var goret int64
 
-	ret = int64(cret)
+	goret = int64(cret)
 
-	return ret
+	return goret
 }
 
 // GetHistoryStart wraps gdk_frame_clock_get_history_start
 // The function returns the following values:
 // 
-// 	- ret int64 
+// 	- goret int64 
 //
 // Returns the frame counter for the oldest frame available in history.
 // 
@@ -16998,11 +16861,11 @@ func (frameClock *FrameClockInstance) GetHistoryStart() int64 {
 	cret = C.gdk_frame_clock_get_history_start(carg0)
 	runtime.KeepAlive(frameClock)
 
-	var ret int64
+	var goret int64
 
-	ret = int64(cret)
+	goret = int64(cret)
 
-	return ret
+	return goret
 }
 
 // GetRefreshInfo wraps gdk_frame_clock_get_refresh_info
@@ -17058,7 +16921,7 @@ func (frameClock *FrameClockInstance) GetRefreshInfo(baseTime int64) (int64, int
 // 
 // The function returns the following values:
 // 
-// 	- ret FrameTimings 
+// 	- goret *FrameTimings 
 //
 // Retrieves a `GdkFrameTimings` object holding timing information
 // for the current frame or a recent frame.
@@ -17066,7 +16929,7 @@ func (frameClock *FrameClockInstance) GetRefreshInfo(baseTime int64) (int64, int
 // The `GdkFrameTimings` object may not yet be complete: see
 // [method@Gdk.FrameTimings.get_complete] and
 // [method@Gdk.FrameClock.get_history_start].
-func (frameClock *FrameClockInstance) GetTimings(frameCounter int64) FrameTimings {
+func (frameClock *FrameClockInstance) GetTimings(frameCounter int64) *FrameTimings {
 	var carg0 *C.GdkFrameClock   // in, none, converted
 	var carg1 C.gint64           // in, none, casted
 	var cret  *C.GdkFrameTimings // return, none, converted
@@ -17078,11 +16941,11 @@ func (frameClock *FrameClockInstance) GetTimings(frameCounter int64) FrameTiming
 	runtime.KeepAlive(frameClock)
 	runtime.KeepAlive(frameCounter)
 
-	var ret FrameTimings
+	var goret *FrameTimings
 
-	ret = UnsafeFrameTimingsFromGlibNone(unsafe.Pointer(cret))
+	goret = UnsafeFrameTimingsFromGlibNone(unsafe.Pointer(cret))
 
-	return ret
+	return goret
 }
 
 // RequestPhase wraps gdk_frame_clock_request_phase
@@ -17180,14 +17043,14 @@ type GLContext interface {
 	// GetAllowedApis wraps gdk_gl_context_get_allowed_apis
 	// The function returns the following values:
 	// 
-	// 	- ret GLAPI 
+	// 	- goret GLAPI 
 	//
 	// Gets the allowed APIs set via gdk_gl_context_set_allowed_apis().
 	GetAllowedApis() GLAPI
 	// GetApi wraps gdk_gl_context_get_api
 	// The function returns the following values:
 	// 
-	// 	- ret GLAPI 
+	// 	- goret GLAPI 
 	//
 	// Gets the API currently in use.
 	// 
@@ -17196,7 +17059,7 @@ type GLContext interface {
 	// GetDebugEnabled wraps gdk_gl_context_get_debug_enabled
 	// The function returns the following values:
 	// 
-	// 	- ret bool 
+	// 	- goret bool 
 	//
 	// Retrieves whether the context is doing extra validations and runtime checking.
 	// 
@@ -17205,14 +17068,14 @@ type GLContext interface {
 	// GetDisplay wraps gdk_gl_context_get_display
 	// The function returns the following values:
 	// 
-	// 	- ret Display 
+	// 	- goret Display 
 	//
 	// Retrieves the display the @context is created for
 	GetDisplay() Display
 	// GetForwardCompatible wraps gdk_gl_context_get_forward_compatible
 	// The function returns the following values:
 	// 
-	// 	- ret bool 
+	// 	- goret bool 
 	//
 	// Retrieves whether the context is forward-compatible.
 	// 
@@ -17234,7 +17097,7 @@ type GLContext interface {
 	// GetSharedContext wraps gdk_gl_context_get_shared_context
 	// The function returns the following values:
 	// 
-	// 	- ret GLContext 
+	// 	- goret GLContext 
 	//
 	// Used to retrieves the `GdkGLContext` that this @context share data with.
 	// 
@@ -17247,14 +17110,14 @@ type GLContext interface {
 	// GetSurface wraps gdk_gl_context_get_surface
 	// The function returns the following values:
 	// 
-	// 	- ret Surface 
+	// 	- goret Surface 
 	//
 	// Retrieves the surface used by the @context.
 	GetSurface() Surface
 	// GetUseES wraps gdk_gl_context_get_use_es
 	// The function returns the following values:
 	// 
-	// 	- ret bool 
+	// 	- goret bool 
 	//
 	// Checks whether the @context is using an OpenGL or OpenGL ES profile.
 	GetUseES() bool
@@ -17271,7 +17134,7 @@ type GLContext interface {
 	// IsLegacy wraps gdk_gl_context_is_legacy
 	// The function returns the following values:
 	// 
-	// 	- ret bool 
+	// 	- goret bool 
 	//
 	// Whether the `GdkGLContext` is in legacy mode or not.
 	// 
@@ -17298,7 +17161,7 @@ type GLContext interface {
 	// 
 	// The function returns the following values:
 	// 
-	// 	- ret bool 
+	// 	- goret bool 
 	//
 	// Checks if the two GL contexts can share resources.
 	// 
@@ -17320,7 +17183,7 @@ type GLContext interface {
 	// Realize wraps gdk_gl_context_realize
 	// The function returns the following values:
 	// 
-	// 	- ret bool 
+	// 	- goret bool 
 	// 	- _goerr error (nullable): an error 
 	//
 	// Realizes the given `GdkGLContext`.
@@ -17411,31 +17274,26 @@ type GLContext interface {
 	SetUseES(int)
 }
 
-func unsafeWrapGLContext(base *ObjectInstance) *GLContextInstance {
+func unsafeWrapGLContext(base *gobject.ObjectInstance) *GLContextInstance {
 	return &GLContextInstance{
-		ObjectInstance: gobject.ObjectInstance{
+		DrawContextInstance: DrawContextInstance{
 			ObjectInstance: *base,
 		},
 	}
 }
 
-func marshalGLContextInstance(p uintptr) (interface{}, error) {
-	return unsafeWrapGLContext(gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Object()), nil
-}
-
-// UnsafeGLContextFromGlibBorrow is used to convert raw GdkGLContext pointers to go. This is used by the bindings internally.
-func UnsafeGLContextFromGlibBorrow(c unsafe.Pointer) GLContext {
-	return TODOBorrow(c).(GLContext)
+func marshalGLContextInstance(p unsafe.Pointer) (any, error) {
+	return unsafeWrapGLContext(gobject.ValueFromNative(p).Object()), nil
 }
 
 // UnsafeGLContextFromGlibNone is used to convert raw GdkGLContext pointers to go while taking a reference and attaching a finalizer. This is used by the bindings internally.
 func UnsafeGLContextFromGlibNone(c unsafe.Pointer) GLContext {
-	return Take(c).(GLContext)
+	return gobject.UnsafeObjectFromGlibNone(c).(GLContext)
 }
 
 // UnsafeGLContextFromGlibFull is used to convert raw GdkGLContext pointers to go while attaching a finalizer. This is used by the bindings internally.
 func UnsafeGLContextFromGlibFull(c unsafe.Pointer) GLContext {
-	return AssumeOwnership(c).(GLContext)
+	return gobject.UnsafeObjectFromGlibFull(c).(GLContext)
 }
 
 func (g *GLContextInstance) upcastToGdkGLContext() *GLContextInstance {
@@ -17444,47 +17302,47 @@ func (g *GLContextInstance) upcastToGdkGLContext() *GLContextInstance {
 
 // UnsafeGLContextToGlibNone is used to convert the instance to it's C value GdkGLContext. This is used by the bindings internally.
 func UnsafeGLContextToGlibNone(c GLContext) unsafe.Pointer {
-	return TODOToNone(c)
+	return gobject.UnsafeObjectToGlibNone(c)
 }
 
 // UnsafeGLContextToGlibFull is used to convert the instance to it's C value GdkGLContext, while removeing the finalizer. This is used by the bindings internally.
 func UnsafeGLContextToGlibFull(c GLContext) unsafe.Pointer {
-	return TODOToFull(c)
+	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// ClearCurrent wraps gdk_gl_context_clear_current
+// GLContextInstanceClearCurrent wraps gdk_gl_context_clear_current
 //
 // Clears the current `GdkGLContext`.
 // 
 // Any OpenGL call after this function returns will be ignored
 // until [method@Gdk.GLContext.make_current] is called.
-func ClearCurrent() {
+func GLContextInstanceClearCurrent() {
 
 	C.gdk_gl_context_clear_current()
 }
 
-// GetCurrent wraps gdk_gl_context_get_current
+// GLContextInstanceGetCurrent wraps gdk_gl_context_get_current
 // The function returns the following values:
 // 
-// 	- ret GLContext 
+// 	- goret GLContext 
 //
 // Retrieves the current `GdkGLContext`.
-func GetCurrent() GLContext {
+func GLContextInstanceGetCurrent() GLContext {
 	var cret *C.GdkGLContext // return, none, converted
 
 	cret = C.gdk_gl_context_get_current()
 
-	var ret GLContext
+	var goret GLContext
 
-	ret = UnsafeGLContextFromGlibNone(unsafe.Pointer(cret))
+	goret = UnsafeGLContextFromGlibNone(unsafe.Pointer(cret))
 
-	return ret
+	return goret
 }
 
 // GetAllowedApis wraps gdk_gl_context_get_allowed_apis
 // The function returns the following values:
 // 
-// 	- ret GLAPI 
+// 	- goret GLAPI 
 //
 // Gets the allowed APIs set via gdk_gl_context_set_allowed_apis().
 func (self *GLContextInstance) GetAllowedApis() GLAPI {
@@ -17496,17 +17354,17 @@ func (self *GLContextInstance) GetAllowedApis() GLAPI {
 	cret = C.gdk_gl_context_get_allowed_apis(carg0)
 	runtime.KeepAlive(self)
 
-	var ret GLAPI
+	var goret GLAPI
 
-	ret = GLAPI(cret)
+	goret = GLAPI(cret)
 
-	return ret
+	return goret
 }
 
 // GetApi wraps gdk_gl_context_get_api
 // The function returns the following values:
 // 
-// 	- ret GLAPI 
+// 	- goret GLAPI 
 //
 // Gets the API currently in use.
 // 
@@ -17520,17 +17378,17 @@ func (self *GLContextInstance) GetApi() GLAPI {
 	cret = C.gdk_gl_context_get_api(carg0)
 	runtime.KeepAlive(self)
 
-	var ret GLAPI
+	var goret GLAPI
 
-	ret = GLAPI(cret)
+	goret = GLAPI(cret)
 
-	return ret
+	return goret
 }
 
 // GetDebugEnabled wraps gdk_gl_context_get_debug_enabled
 // The function returns the following values:
 // 
-// 	- ret bool 
+// 	- goret bool 
 //
 // Retrieves whether the context is doing extra validations and runtime checking.
 // 
@@ -17544,19 +17402,19 @@ func (context *GLContextInstance) GetDebugEnabled() bool {
 	cret = C.gdk_gl_context_get_debug_enabled(carg0)
 	runtime.KeepAlive(context)
 
-	var ret bool
+	var goret bool
 
 	if cret != 0 {
-		ret = true
+		goret = true
 	}
 
-	return ret
+	return goret
 }
 
 // GetDisplay wraps gdk_gl_context_get_display
 // The function returns the following values:
 // 
-// 	- ret Display 
+// 	- goret Display 
 //
 // Retrieves the display the @context is created for
 func (context *GLContextInstance) GetDisplay() Display {
@@ -17568,17 +17426,17 @@ func (context *GLContextInstance) GetDisplay() Display {
 	cret = C.gdk_gl_context_get_display(carg0)
 	runtime.KeepAlive(context)
 
-	var ret Display
+	var goret Display
 
-	ret = UnsafeDisplayFromGlibNone(unsafe.Pointer(cret))
+	goret = UnsafeDisplayFromGlibNone(unsafe.Pointer(cret))
 
-	return ret
+	return goret
 }
 
 // GetForwardCompatible wraps gdk_gl_context_get_forward_compatible
 // The function returns the following values:
 // 
-// 	- ret bool 
+// 	- goret bool 
 //
 // Retrieves whether the context is forward-compatible.
 // 
@@ -17592,13 +17450,13 @@ func (context *GLContextInstance) GetForwardCompatible() bool {
 	cret = C.gdk_gl_context_get_forward_compatible(carg0)
 	runtime.KeepAlive(context)
 
-	var ret bool
+	var goret bool
 
 	if cret != 0 {
-		ret = true
+		goret = true
 	}
 
-	return ret
+	return goret
 }
 
 // GetRequiredVersion wraps gdk_gl_context_get_required_version
@@ -17639,7 +17497,7 @@ func (context *GLContextInstance) GetRequiredVersion() (int, int) {
 // GetSharedContext wraps gdk_gl_context_get_shared_context
 // The function returns the following values:
 // 
-// 	- ret GLContext 
+// 	- goret GLContext 
 //
 // Used to retrieves the `GdkGLContext` that this @context share data with.
 // 
@@ -17657,17 +17515,17 @@ func (context *GLContextInstance) GetSharedContext() GLContext {
 	cret = C.gdk_gl_context_get_shared_context(carg0)
 	runtime.KeepAlive(context)
 
-	var ret GLContext
+	var goret GLContext
 
-	ret = UnsafeGLContextFromGlibNone(unsafe.Pointer(cret))
+	goret = UnsafeGLContextFromGlibNone(unsafe.Pointer(cret))
 
-	return ret
+	return goret
 }
 
 // GetSurface wraps gdk_gl_context_get_surface
 // The function returns the following values:
 // 
-// 	- ret Surface 
+// 	- goret Surface 
 //
 // Retrieves the surface used by the @context.
 func (context *GLContextInstance) GetSurface() Surface {
@@ -17679,17 +17537,17 @@ func (context *GLContextInstance) GetSurface() Surface {
 	cret = C.gdk_gl_context_get_surface(carg0)
 	runtime.KeepAlive(context)
 
-	var ret Surface
+	var goret Surface
 
-	ret = UnsafeSurfaceFromGlibNone(unsafe.Pointer(cret))
+	goret = UnsafeSurfaceFromGlibNone(unsafe.Pointer(cret))
 
-	return ret
+	return goret
 }
 
 // GetUseES wraps gdk_gl_context_get_use_es
 // The function returns the following values:
 // 
-// 	- ret bool 
+// 	- goret bool 
 //
 // Checks whether the @context is using an OpenGL or OpenGL ES profile.
 func (context *GLContextInstance) GetUseES() bool {
@@ -17701,13 +17559,13 @@ func (context *GLContextInstance) GetUseES() bool {
 	cret = C.gdk_gl_context_get_use_es(carg0)
 	runtime.KeepAlive(context)
 
-	var ret bool
+	var goret bool
 
 	if cret != 0 {
-		ret = true
+		goret = true
 	}
 
-	return ret
+	return goret
 }
 
 // GetVersion wraps gdk_gl_context_get_version
@@ -17741,7 +17599,7 @@ func (context *GLContextInstance) GetVersion() (int, int) {
 // IsLegacy wraps gdk_gl_context_is_legacy
 // The function returns the following values:
 // 
-// 	- ret bool 
+// 	- goret bool 
 //
 // Whether the `GdkGLContext` is in legacy mode or not.
 // 
@@ -17768,13 +17626,13 @@ func (context *GLContextInstance) IsLegacy() bool {
 	cret = C.gdk_gl_context_is_legacy(carg0)
 	runtime.KeepAlive(context)
 
-	var ret bool
+	var goret bool
 
 	if cret != 0 {
-		ret = true
+		goret = true
 	}
 
-	return ret
+	return goret
 }
 
 // IsShared wraps gdk_gl_context_is_shared
@@ -17785,7 +17643,7 @@ func (context *GLContextInstance) IsLegacy() bool {
 // 
 // The function returns the following values:
 // 
-// 	- ret bool 
+// 	- goret bool 
 //
 // Checks if the two GL contexts can share resources.
 // 
@@ -17811,13 +17669,13 @@ func (self *GLContextInstance) IsShared(other GLContext) bool {
 	runtime.KeepAlive(self)
 	runtime.KeepAlive(other)
 
-	var ret bool
+	var goret bool
 
 	if cret != 0 {
-		ret = true
+		goret = true
 	}
 
-	return ret
+	return goret
 }
 
 // MakeCurrent wraps gdk_gl_context_make_current
@@ -17835,7 +17693,7 @@ func (context *GLContextInstance) MakeCurrent() {
 // Realize wraps gdk_gl_context_realize
 // The function returns the following values:
 // 
-// 	- ret bool 
+// 	- goret bool 
 // 	- _goerr error (nullable): an error 
 //
 // Realizes the given `GdkGLContext`.
@@ -17851,17 +17709,17 @@ func (context *GLContextInstance) Realize() (bool, error) {
 	cret = C.gdk_gl_context_realize(carg0, &_cerr)
 	runtime.KeepAlive(context)
 
-	var ret    bool
+	var goret  bool
 	var _goerr error
 
 	if cret != 0 {
-		ret = true
+		goret = true
 	}
 	if _cerr != nil {
-		_goerr = UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
+		_goerr = glib.UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
 	}
 
-	return ret, _goerr
+	return goret, _goerr
 }
 
 // SetAllowedApis wraps gdk_gl_context_set_allowed_apis
@@ -18036,14 +17894,14 @@ type GLTextureBuilder interface {
 	// GetColorState wraps gdk_gl_texture_builder_get_color_state
 	// The function returns the following values:
 	// 
-	// 	- ret ColorState 
+	// 	- goret *ColorState 
 	//
 	// Gets the color state previously set via gdk_gl_texture_builder_set_color_state().
-	GetColorState() ColorState
+	GetColorState() *ColorState
 	// GetContext wraps gdk_gl_texture_builder_get_context
 	// The function returns the following values:
 	// 
-	// 	- ret GLContext 
+	// 	- goret GLContext 
 	//
 	// Gets the context previously set via gdk_gl_texture_builder_set_context() or
 	// %NULL if none was set.
@@ -18051,21 +17909,21 @@ type GLTextureBuilder interface {
 	// GetFormat wraps gdk_gl_texture_builder_get_format
 	// The function returns the following values:
 	// 
-	// 	- ret MemoryFormat 
+	// 	- goret MemoryFormat 
 	//
 	// Gets the format previously set via gdk_gl_texture_builder_set_format().
 	GetFormat() MemoryFormat
 	// GetHasMipmap wraps gdk_gl_texture_builder_get_has_mipmap
 	// The function returns the following values:
 	// 
-	// 	- ret bool 
+	// 	- goret bool 
 	//
 	// Gets whether the texture has a mipmap.
 	GetHasMipmap() bool
 	// GetHeight wraps gdk_gl_texture_builder_get_height
 	// The function returns the following values:
 	// 
-	// 	- ret int 
+	// 	- goret int 
 	//
 	// Gets the height previously set via gdk_gl_texture_builder_set_height() or
 	// 0 if the height wasn't set.
@@ -18073,7 +17931,7 @@ type GLTextureBuilder interface {
 	// GetID wraps gdk_gl_texture_builder_get_id
 	// The function returns the following values:
 	// 
-	// 	- ret uint 
+	// 	- goret uint 
 	//
 	// Gets the texture id previously set via gdk_gl_texture_builder_set_id() or
 	// 0 if the id wasn't set.
@@ -18081,14 +17939,14 @@ type GLTextureBuilder interface {
 	// GetSync wraps gdk_gl_texture_builder_get_sync
 	// The function returns the following values:
 	// 
-	// 	- ret unsafe.Pointer 
+	// 	- goret unsafe.Pointer 
 	//
 	// Gets the `GLsync` previously set via gdk_gl_texture_builder_set_sync().
 	GetSync() unsafe.Pointer
 	// GetUpdateTexture wraps gdk_gl_texture_builder_get_update_texture
 	// The function returns the following values:
 	// 
-	// 	- ret Texture 
+	// 	- goret Texture 
 	//
 	// Gets the texture previously set via gdk_gl_texture_builder_set_update_texture() or
 	// %NULL if none was set.
@@ -18096,7 +17954,7 @@ type GLTextureBuilder interface {
 	// GetWidth wraps gdk_gl_texture_builder_get_width
 	// The function returns the following values:
 	// 
-	// 	- ret int 
+	// 	- goret int 
 	//
 	// Gets the width previously set via gdk_gl_texture_builder_set_width() or
 	// 0 if the width wasn't set.
@@ -18105,13 +17963,13 @@ type GLTextureBuilder interface {
 	// 
 	// The function takes the following parameters:
 	// 
-	// 	- colorState ColorState: a `GdkColorState` 
+	// 	- colorState *ColorState: a `GdkColorState` 
 	//
 	// Sets the color state for the texture.
 	// 
 	// By default, the sRGB colorstate is used. If you don't know what
 	// colorstates are, this is probably the right thing.
-	SetColorState(ColorState)
+	SetColorState(*ColorState)
 	// SetContext wraps gdk_gl_texture_builder_set_context
 	// 
 	// The function takes the following parameters:
@@ -18221,23 +18079,18 @@ func unsafeWrapGLTextureBuilder(base *gobject.ObjectInstance) *GLTextureBuilderI
 	}
 }
 
-func marshalGLTextureBuilderInstance(p uintptr) (interface{}, error) {
-	return unsafeWrapGLTextureBuilder(gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Object()), nil
-}
-
-// UnsafeGLTextureBuilderFromGlibBorrow is used to convert raw GdkGLTextureBuilder pointers to go. This is used by the bindings internally.
-func UnsafeGLTextureBuilderFromGlibBorrow(c unsafe.Pointer) GLTextureBuilder {
-	return gobject.TODOBorrow(c).(GLTextureBuilder)
+func marshalGLTextureBuilderInstance(p unsafe.Pointer) (any, error) {
+	return unsafeWrapGLTextureBuilder(gobject.ValueFromNative(p).Object()), nil
 }
 
 // UnsafeGLTextureBuilderFromGlibNone is used to convert raw GdkGLTextureBuilder pointers to go while taking a reference and attaching a finalizer. This is used by the bindings internally.
 func UnsafeGLTextureBuilderFromGlibNone(c unsafe.Pointer) GLTextureBuilder {
-	return gobject.Take(c).(GLTextureBuilder)
+	return gobject.UnsafeObjectFromGlibNone(c).(GLTextureBuilder)
 }
 
 // UnsafeGLTextureBuilderFromGlibFull is used to convert raw GdkGLTextureBuilder pointers to go while attaching a finalizer. This is used by the bindings internally.
 func UnsafeGLTextureBuilderFromGlibFull(c unsafe.Pointer) GLTextureBuilder {
-	return gobject.AssumeOwnership(c).(GLTextureBuilder)
+	return gobject.UnsafeObjectFromGlibFull(c).(GLTextureBuilder)
 }
 
 func (g *GLTextureBuilderInstance) upcastToGdkGLTextureBuilder() *GLTextureBuilderInstance {
@@ -18246,18 +18099,18 @@ func (g *GLTextureBuilderInstance) upcastToGdkGLTextureBuilder() *GLTextureBuild
 
 // UnsafeGLTextureBuilderToGlibNone is used to convert the instance to it's C value GdkGLTextureBuilder. This is used by the bindings internally.
 func UnsafeGLTextureBuilderToGlibNone(c GLTextureBuilder) unsafe.Pointer {
-	return gobject.TODOToNone(c)
+	return gobject.UnsafeObjectToGlibNone(c)
 }
 
 // UnsafeGLTextureBuilderToGlibFull is used to convert the instance to it's C value GdkGLTextureBuilder, while removeing the finalizer. This is used by the bindings internally.
 func UnsafeGLTextureBuilderToGlibFull(c GLTextureBuilder) unsafe.Pointer {
-	return gobject.TODOToFull(c)
+	return gobject.UnsafeObjectToGlibFull(c)
 }
 
 // NewGLTextureBuilderInstance wraps gdk_gl_texture_builder_new
 // The function returns the following values:
 // 
-// 	- ret GLTextureBuilder 
+// 	- goret GLTextureBuilder 
 //
 // Creates a new texture builder.
 func NewGLTextureBuilderInstance() GLTextureBuilder {
@@ -18265,20 +18118,20 @@ func NewGLTextureBuilderInstance() GLTextureBuilder {
 
 	cret = C.gdk_gl_texture_builder_new()
 
-	var ret GLTextureBuilder
+	var goret GLTextureBuilder
 
-	ret = UnsafeGLTextureBuilderFromGlibFull(unsafe.Pointer(cret))
+	goret = UnsafeGLTextureBuilderFromGlibFull(unsafe.Pointer(cret))
 
-	return ret
+	return goret
 }
 
 // GetColorState wraps gdk_gl_texture_builder_get_color_state
 // The function returns the following values:
 // 
-// 	- ret ColorState 
+// 	- goret *ColorState 
 //
 // Gets the color state previously set via gdk_gl_texture_builder_set_color_state().
-func (self *GLTextureBuilderInstance) GetColorState() ColorState {
+func (self *GLTextureBuilderInstance) GetColorState() *ColorState {
 	var carg0 *C.GdkGLTextureBuilder // in, none, converted
 	var cret  *C.GdkColorState       // return, full, converted
 
@@ -18287,17 +18140,17 @@ func (self *GLTextureBuilderInstance) GetColorState() ColorState {
 	cret = C.gdk_gl_texture_builder_get_color_state(carg0)
 	runtime.KeepAlive(self)
 
-	var ret ColorState
+	var goret *ColorState
 
-	ret = UnsafeColorStateFromGlibFull(unsafe.Pointer(cret))
+	goret = UnsafeColorStateFromGlibFull(unsafe.Pointer(cret))
 
-	return ret
+	return goret
 }
 
 // GetContext wraps gdk_gl_texture_builder_get_context
 // The function returns the following values:
 // 
-// 	- ret GLContext 
+// 	- goret GLContext 
 //
 // Gets the context previously set via gdk_gl_texture_builder_set_context() or
 // %NULL if none was set.
@@ -18310,17 +18163,17 @@ func (self *GLTextureBuilderInstance) GetContext() GLContext {
 	cret = C.gdk_gl_texture_builder_get_context(carg0)
 	runtime.KeepAlive(self)
 
-	var ret GLContext
+	var goret GLContext
 
-	ret = UnsafeGLContextFromGlibNone(unsafe.Pointer(cret))
+	goret = UnsafeGLContextFromGlibNone(unsafe.Pointer(cret))
 
-	return ret
+	return goret
 }
 
 // GetFormat wraps gdk_gl_texture_builder_get_format
 // The function returns the following values:
 // 
-// 	- ret MemoryFormat 
+// 	- goret MemoryFormat 
 //
 // Gets the format previously set via gdk_gl_texture_builder_set_format().
 func (self *GLTextureBuilderInstance) GetFormat() MemoryFormat {
@@ -18332,17 +18185,17 @@ func (self *GLTextureBuilderInstance) GetFormat() MemoryFormat {
 	cret = C.gdk_gl_texture_builder_get_format(carg0)
 	runtime.KeepAlive(self)
 
-	var ret MemoryFormat
+	var goret MemoryFormat
 
-	ret = MemoryFormat(cret)
+	goret = MemoryFormat(cret)
 
-	return ret
+	return goret
 }
 
 // GetHasMipmap wraps gdk_gl_texture_builder_get_has_mipmap
 // The function returns the following values:
 // 
-// 	- ret bool 
+// 	- goret bool 
 //
 // Gets whether the texture has a mipmap.
 func (self *GLTextureBuilderInstance) GetHasMipmap() bool {
@@ -18354,19 +18207,19 @@ func (self *GLTextureBuilderInstance) GetHasMipmap() bool {
 	cret = C.gdk_gl_texture_builder_get_has_mipmap(carg0)
 	runtime.KeepAlive(self)
 
-	var ret bool
+	var goret bool
 
 	if cret != 0 {
-		ret = true
+		goret = true
 	}
 
-	return ret
+	return goret
 }
 
 // GetHeight wraps gdk_gl_texture_builder_get_height
 // The function returns the following values:
 // 
-// 	- ret int 
+// 	- goret int 
 //
 // Gets the height previously set via gdk_gl_texture_builder_set_height() or
 // 0 if the height wasn't set.
@@ -18379,17 +18232,17 @@ func (self *GLTextureBuilderInstance) GetHeight() int {
 	cret = C.gdk_gl_texture_builder_get_height(carg0)
 	runtime.KeepAlive(self)
 
-	var ret int
+	var goret int
 
-	ret = int(cret)
+	goret = int(cret)
 
-	return ret
+	return goret
 }
 
 // GetID wraps gdk_gl_texture_builder_get_id
 // The function returns the following values:
 // 
-// 	- ret uint 
+// 	- goret uint 
 //
 // Gets the texture id previously set via gdk_gl_texture_builder_set_id() or
 // 0 if the id wasn't set.
@@ -18402,17 +18255,17 @@ func (self *GLTextureBuilderInstance) GetID() uint {
 	cret = C.gdk_gl_texture_builder_get_id(carg0)
 	runtime.KeepAlive(self)
 
-	var ret uint
+	var goret uint
 
-	ret = uint(cret)
+	goret = uint(cret)
 
-	return ret
+	return goret
 }
 
 // GetSync wraps gdk_gl_texture_builder_get_sync
 // The function returns the following values:
 // 
-// 	- ret unsafe.Pointer 
+// 	- goret unsafe.Pointer 
 //
 // Gets the `GLsync` previously set via gdk_gl_texture_builder_set_sync().
 func (self *GLTextureBuilderInstance) GetSync() unsafe.Pointer {
@@ -18424,17 +18277,17 @@ func (self *GLTextureBuilderInstance) GetSync() unsafe.Pointer {
 	cret = C.gdk_gl_texture_builder_get_sync(carg0)
 	runtime.KeepAlive(self)
 
-	var ret unsafe.Pointer
+	var goret unsafe.Pointer
 
-	ret = unsafe.Pointer(cret)
+	goret = unsafe.Pointer(cret)
 
-	return ret
+	return goret
 }
 
 // GetUpdateTexture wraps gdk_gl_texture_builder_get_update_texture
 // The function returns the following values:
 // 
-// 	- ret Texture 
+// 	- goret Texture 
 //
 // Gets the texture previously set via gdk_gl_texture_builder_set_update_texture() or
 // %NULL if none was set.
@@ -18447,17 +18300,17 @@ func (self *GLTextureBuilderInstance) GetUpdateTexture() Texture {
 	cret = C.gdk_gl_texture_builder_get_update_texture(carg0)
 	runtime.KeepAlive(self)
 
-	var ret Texture
+	var goret Texture
 
-	ret = UnsafeTextureFromGlibNone(unsafe.Pointer(cret))
+	goret = UnsafeTextureFromGlibNone(unsafe.Pointer(cret))
 
-	return ret
+	return goret
 }
 
 // GetWidth wraps gdk_gl_texture_builder_get_width
 // The function returns the following values:
 // 
-// 	- ret int 
+// 	- goret int 
 //
 // Gets the width previously set via gdk_gl_texture_builder_set_width() or
 // 0 if the width wasn't set.
@@ -18470,24 +18323,24 @@ func (self *GLTextureBuilderInstance) GetWidth() int {
 	cret = C.gdk_gl_texture_builder_get_width(carg0)
 	runtime.KeepAlive(self)
 
-	var ret int
+	var goret int
 
-	ret = int(cret)
+	goret = int(cret)
 
-	return ret
+	return goret
 }
 
 // SetColorState wraps gdk_gl_texture_builder_set_color_state
 // 
 // The function takes the following parameters:
 // 
-// 	- colorState ColorState: a `GdkColorState` 
+// 	- colorState *ColorState: a `GdkColorState` 
 //
 // Sets the color state for the texture.
 // 
 // By default, the sRGB colorstate is used. If you don't know what
 // colorstates are, this is probably the right thing.
-func (self *GLTextureBuilderInstance) SetColorState(colorState ColorState) {
+func (self *GLTextureBuilderInstance) SetColorState(colorState *ColorState) {
 	var carg0 *C.GdkGLTextureBuilder // in, none, converted
 	var carg1 *C.GdkColorState       // in, none, converted
 
@@ -18724,7 +18577,7 @@ type MemoryTextureBuilder interface {
 	// Build wraps gdk_memory_texture_builder_build
 	// The function returns the following values:
 	// 
-	// 	- ret Texture 
+	// 	- goret Texture 
 	//
 	// Builds a new `GdkTexture` with the values set up in the builder.
 	// 
@@ -18734,24 +18587,32 @@ type MemoryTextureBuilder interface {
 	// It is possible to call this function multiple times to create multiple textures,
 	// possibly with changing properties in between.
 	Build() Texture
+	// GetBytes wraps gdk_memory_texture_builder_get_bytes
+	// The function returns the following values:
+	// 
+	// 	- goret *glib.Bytes 
+	//
+	// Gets the bytes previously set via gdk_memory_texture_builder_set_bytes()
+	// or %NULL if none was set.
+	GetBytes() *glib.Bytes
 	// GetColorState wraps gdk_memory_texture_builder_get_color_state
 	// The function returns the following values:
 	// 
-	// 	- ret ColorState 
+	// 	- goret *ColorState 
 	//
 	// Gets the colorstate previously set via gdk_memory_texture_builder_set_color_state().
-	GetColorState() ColorState
+	GetColorState() *ColorState
 	// GetFormat wraps gdk_memory_texture_builder_get_format
 	// The function returns the following values:
 	// 
-	// 	- ret MemoryFormat 
+	// 	- goret MemoryFormat 
 	//
 	// Gets the format previously set via gdk_memory_texture_builder_set_format().
 	GetFormat() MemoryFormat
 	// GetHeight wraps gdk_memory_texture_builder_get_height
 	// The function returns the following values:
 	// 
-	// 	- ret int 
+	// 	- goret int 
 	//
 	// Gets the height previously set via gdk_memory_texture_builder_set_height()
 	// or 0 if the height wasn't set.
@@ -18759,14 +18620,14 @@ type MemoryTextureBuilder interface {
 	// GetStride wraps gdk_memory_texture_builder_get_stride
 	// The function returns the following values:
 	// 
-	// 	- ret uint 
+	// 	- goret uint 
 	//
 	// Gets the stride previously set via gdk_memory_texture_builder_set_stride().
 	GetStride() uint
 	// GetUpdateTexture wraps gdk_memory_texture_builder_get_update_texture
 	// The function returns the following values:
 	// 
-	// 	- ret Texture 
+	// 	- goret Texture 
 	//
 	// Gets the texture previously set via gdk_memory_texture_builder_set_update_texture()
 	// or %NULL if none was set.
@@ -18774,22 +18635,32 @@ type MemoryTextureBuilder interface {
 	// GetWidth wraps gdk_memory_texture_builder_get_width
 	// The function returns the following values:
 	// 
-	// 	- ret int 
+	// 	- goret int 
 	//
 	// Gets the width previously set via gdk_memory_texture_builder_set_width()
 	// or 0 if the width wasn't set.
 	GetWidth() int
+	// SetBytes wraps gdk_memory_texture_builder_set_bytes
+	// 
+	// The function takes the following parameters:
+	// 
+	// 	- bytes *glib.Bytes (nullable): The bytes the texture shows or %NULL to unset 
+	//
+	// Sets the data to be shown but the texture.
+	// 
+	// The bytes must be set before calling [method@Gdk.MemoryTextureBuilder.build].
+	SetBytes(*glib.Bytes)
 	// SetColorState wraps gdk_memory_texture_builder_set_color_state
 	// 
 	// The function takes the following parameters:
 	// 
-	// 	- colorState ColorState (nullable): The colorstate describing the data 
+	// 	- colorState *ColorState (nullable): The colorstate describing the data 
 	//
 	// Sets the colorstate describing the data.
 	// 
 	// By default, the sRGB colorstate is used. If you don't know
 	// what colorstates are, this is probably the right thing.
-	SetColorState(ColorState)
+	SetColorState(*ColorState)
 	// SetFormat wraps gdk_memory_texture_builder_set_format
 	// 
 	// The function takes the following parameters:
@@ -18848,23 +18719,18 @@ func unsafeWrapMemoryTextureBuilder(base *gobject.ObjectInstance) *MemoryTexture
 	}
 }
 
-func marshalMemoryTextureBuilderInstance(p uintptr) (interface{}, error) {
-	return unsafeWrapMemoryTextureBuilder(gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Object()), nil
-}
-
-// UnsafeMemoryTextureBuilderFromGlibBorrow is used to convert raw GdkMemoryTextureBuilder pointers to go. This is used by the bindings internally.
-func UnsafeMemoryTextureBuilderFromGlibBorrow(c unsafe.Pointer) MemoryTextureBuilder {
-	return gobject.TODOBorrow(c).(MemoryTextureBuilder)
+func marshalMemoryTextureBuilderInstance(p unsafe.Pointer) (any, error) {
+	return unsafeWrapMemoryTextureBuilder(gobject.ValueFromNative(p).Object()), nil
 }
 
 // UnsafeMemoryTextureBuilderFromGlibNone is used to convert raw GdkMemoryTextureBuilder pointers to go while taking a reference and attaching a finalizer. This is used by the bindings internally.
 func UnsafeMemoryTextureBuilderFromGlibNone(c unsafe.Pointer) MemoryTextureBuilder {
-	return gobject.Take(c).(MemoryTextureBuilder)
+	return gobject.UnsafeObjectFromGlibNone(c).(MemoryTextureBuilder)
 }
 
 // UnsafeMemoryTextureBuilderFromGlibFull is used to convert raw GdkMemoryTextureBuilder pointers to go while attaching a finalizer. This is used by the bindings internally.
 func UnsafeMemoryTextureBuilderFromGlibFull(c unsafe.Pointer) MemoryTextureBuilder {
-	return gobject.AssumeOwnership(c).(MemoryTextureBuilder)
+	return gobject.UnsafeObjectFromGlibFull(c).(MemoryTextureBuilder)
 }
 
 func (m *MemoryTextureBuilderInstance) upcastToGdkMemoryTextureBuilder() *MemoryTextureBuilderInstance {
@@ -18873,18 +18739,18 @@ func (m *MemoryTextureBuilderInstance) upcastToGdkMemoryTextureBuilder() *Memory
 
 // UnsafeMemoryTextureBuilderToGlibNone is used to convert the instance to it's C value GdkMemoryTextureBuilder. This is used by the bindings internally.
 func UnsafeMemoryTextureBuilderToGlibNone(c MemoryTextureBuilder) unsafe.Pointer {
-	return gobject.TODOToNone(c)
+	return gobject.UnsafeObjectToGlibNone(c)
 }
 
 // UnsafeMemoryTextureBuilderToGlibFull is used to convert the instance to it's C value GdkMemoryTextureBuilder, while removeing the finalizer. This is used by the bindings internally.
 func UnsafeMemoryTextureBuilderToGlibFull(c MemoryTextureBuilder) unsafe.Pointer {
-	return gobject.TODOToFull(c)
+	return gobject.UnsafeObjectToGlibFull(c)
 }
 
 // NewMemoryTextureBuilderInstance wraps gdk_memory_texture_builder_new
 // The function returns the following values:
 // 
-// 	- ret MemoryTextureBuilder 
+// 	- goret MemoryTextureBuilder 
 //
 // Creates a new texture builder.
 func NewMemoryTextureBuilderInstance() MemoryTextureBuilder {
@@ -18892,17 +18758,17 @@ func NewMemoryTextureBuilderInstance() MemoryTextureBuilder {
 
 	cret = C.gdk_memory_texture_builder_new()
 
-	var ret MemoryTextureBuilder
+	var goret MemoryTextureBuilder
 
-	ret = UnsafeMemoryTextureBuilderFromGlibFull(unsafe.Pointer(cret))
+	goret = UnsafeMemoryTextureBuilderFromGlibFull(unsafe.Pointer(cret))
 
-	return ret
+	return goret
 }
 
 // Build wraps gdk_memory_texture_builder_build
 // The function returns the following values:
 // 
-// 	- ret Texture 
+// 	- goret Texture 
 //
 // Builds a new `GdkTexture` with the values set up in the builder.
 // 
@@ -18920,20 +18786,43 @@ func (self *MemoryTextureBuilderInstance) Build() Texture {
 	cret = C.gdk_memory_texture_builder_build(carg0)
 	runtime.KeepAlive(self)
 
-	var ret Texture
+	var goret Texture
 
-	ret = UnsafeTextureFromGlibFull(unsafe.Pointer(cret))
+	goret = UnsafeTextureFromGlibFull(unsafe.Pointer(cret))
 
-	return ret
+	return goret
+}
+
+// GetBytes wraps gdk_memory_texture_builder_get_bytes
+// The function returns the following values:
+// 
+// 	- goret *glib.Bytes 
+//
+// Gets the bytes previously set via gdk_memory_texture_builder_set_bytes()
+// or %NULL if none was set.
+func (self *MemoryTextureBuilderInstance) GetBytes() *glib.Bytes {
+	var carg0 *C.GdkMemoryTextureBuilder // in, none, converted
+	var cret  *C.GBytes                  // return, none, converted
+
+	carg0 = (*C.GdkMemoryTextureBuilder)(UnsafeMemoryTextureBuilderToGlibNone(self))
+
+	cret = C.gdk_memory_texture_builder_get_bytes(carg0)
+	runtime.KeepAlive(self)
+
+	var goret *glib.Bytes
+
+	goret = glib.UnsafeBytesFromGlibNone(unsafe.Pointer(cret))
+
+	return goret
 }
 
 // GetColorState wraps gdk_memory_texture_builder_get_color_state
 // The function returns the following values:
 // 
-// 	- ret ColorState 
+// 	- goret *ColorState 
 //
 // Gets the colorstate previously set via gdk_memory_texture_builder_set_color_state().
-func (self *MemoryTextureBuilderInstance) GetColorState() ColorState {
+func (self *MemoryTextureBuilderInstance) GetColorState() *ColorState {
 	var carg0 *C.GdkMemoryTextureBuilder // in, none, converted
 	var cret  *C.GdkColorState           // return, none, converted
 
@@ -18942,17 +18831,17 @@ func (self *MemoryTextureBuilderInstance) GetColorState() ColorState {
 	cret = C.gdk_memory_texture_builder_get_color_state(carg0)
 	runtime.KeepAlive(self)
 
-	var ret ColorState
+	var goret *ColorState
 
-	ret = UnsafeColorStateFromGlibNone(unsafe.Pointer(cret))
+	goret = UnsafeColorStateFromGlibNone(unsafe.Pointer(cret))
 
-	return ret
+	return goret
 }
 
 // GetFormat wraps gdk_memory_texture_builder_get_format
 // The function returns the following values:
 // 
-// 	- ret MemoryFormat 
+// 	- goret MemoryFormat 
 //
 // Gets the format previously set via gdk_memory_texture_builder_set_format().
 func (self *MemoryTextureBuilderInstance) GetFormat() MemoryFormat {
@@ -18964,17 +18853,17 @@ func (self *MemoryTextureBuilderInstance) GetFormat() MemoryFormat {
 	cret = C.gdk_memory_texture_builder_get_format(carg0)
 	runtime.KeepAlive(self)
 
-	var ret MemoryFormat
+	var goret MemoryFormat
 
-	ret = MemoryFormat(cret)
+	goret = MemoryFormat(cret)
 
-	return ret
+	return goret
 }
 
 // GetHeight wraps gdk_memory_texture_builder_get_height
 // The function returns the following values:
 // 
-// 	- ret int 
+// 	- goret int 
 //
 // Gets the height previously set via gdk_memory_texture_builder_set_height()
 // or 0 if the height wasn't set.
@@ -18987,17 +18876,17 @@ func (self *MemoryTextureBuilderInstance) GetHeight() int {
 	cret = C.gdk_memory_texture_builder_get_height(carg0)
 	runtime.KeepAlive(self)
 
-	var ret int
+	var goret int
 
-	ret = int(cret)
+	goret = int(cret)
 
-	return ret
+	return goret
 }
 
 // GetStride wraps gdk_memory_texture_builder_get_stride
 // The function returns the following values:
 // 
-// 	- ret uint 
+// 	- goret uint 
 //
 // Gets the stride previously set via gdk_memory_texture_builder_set_stride().
 func (self *MemoryTextureBuilderInstance) GetStride() uint {
@@ -19009,17 +18898,17 @@ func (self *MemoryTextureBuilderInstance) GetStride() uint {
 	cret = C.gdk_memory_texture_builder_get_stride(carg0)
 	runtime.KeepAlive(self)
 
-	var ret uint
+	var goret uint
 
-	ret = uint(cret)
+	goret = uint(cret)
 
-	return ret
+	return goret
 }
 
 // GetUpdateTexture wraps gdk_memory_texture_builder_get_update_texture
 // The function returns the following values:
 // 
-// 	- ret Texture 
+// 	- goret Texture 
 //
 // Gets the texture previously set via gdk_memory_texture_builder_set_update_texture()
 // or %NULL if none was set.
@@ -19032,17 +18921,17 @@ func (self *MemoryTextureBuilderInstance) GetUpdateTexture() Texture {
 	cret = C.gdk_memory_texture_builder_get_update_texture(carg0)
 	runtime.KeepAlive(self)
 
-	var ret Texture
+	var goret Texture
 
-	ret = UnsafeTextureFromGlibNone(unsafe.Pointer(cret))
+	goret = UnsafeTextureFromGlibNone(unsafe.Pointer(cret))
 
-	return ret
+	return goret
 }
 
 // GetWidth wraps gdk_memory_texture_builder_get_width
 // The function returns the following values:
 // 
-// 	- ret int 
+// 	- goret int 
 //
 // Gets the width previously set via gdk_memory_texture_builder_set_width()
 // or 0 if the width wasn't set.
@@ -19055,24 +18944,47 @@ func (self *MemoryTextureBuilderInstance) GetWidth() int {
 	cret = C.gdk_memory_texture_builder_get_width(carg0)
 	runtime.KeepAlive(self)
 
-	var ret int
+	var goret int
 
-	ret = int(cret)
+	goret = int(cret)
 
-	return ret
+	return goret
+}
+
+// SetBytes wraps gdk_memory_texture_builder_set_bytes
+// 
+// The function takes the following parameters:
+// 
+// 	- bytes *glib.Bytes (nullable): The bytes the texture shows or %NULL to unset 
+//
+// Sets the data to be shown but the texture.
+// 
+// The bytes must be set before calling [method@Gdk.MemoryTextureBuilder.build].
+func (self *MemoryTextureBuilderInstance) SetBytes(bytes *glib.Bytes) {
+	var carg0 *C.GdkMemoryTextureBuilder // in, none, converted
+	var carg1 *C.GBytes                  // in, none, converted, nullable
+
+	carg0 = (*C.GdkMemoryTextureBuilder)(UnsafeMemoryTextureBuilderToGlibNone(self))
+	if bytes != nil {
+		carg1 = (*C.GBytes)(glib.UnsafeBytesToGlibNone(bytes))
+	}
+
+	C.gdk_memory_texture_builder_set_bytes(carg0, carg1)
+	runtime.KeepAlive(self)
+	runtime.KeepAlive(bytes)
 }
 
 // SetColorState wraps gdk_memory_texture_builder_set_color_state
 // 
 // The function takes the following parameters:
 // 
-// 	- colorState ColorState (nullable): The colorstate describing the data 
+// 	- colorState *ColorState (nullable): The colorstate describing the data 
 //
 // Sets the colorstate describing the data.
 // 
 // By default, the sRGB colorstate is used. If you don't know
 // what colorstates are, this is probably the right thing.
-func (self *MemoryTextureBuilderInstance) SetColorState(colorState ColorState) {
+func (self *MemoryTextureBuilderInstance) SetColorState(colorState *ColorState) {
 	var carg0 *C.GdkMemoryTextureBuilder // in, none, converted
 	var carg1 *C.GdkColorState           // in, none, converted, nullable
 
@@ -19217,7 +19129,7 @@ type Monitor interface {
 	// GetConnector wraps gdk_monitor_get_connector
 	// The function returns the following values:
 	// 
-	// 	- ret string 
+	// 	- goret string 
 	//
 	// Gets the name of the monitor's connector, if available.
 	// 
@@ -19228,7 +19140,7 @@ type Monitor interface {
 	// GetDescription wraps gdk_monitor_get_description
 	// The function returns the following values:
 	// 
-	// 	- ret string 
+	// 	- goret string 
 	//
 	// Gets a string describing the monitor, if available.
 	// 
@@ -19237,21 +19149,32 @@ type Monitor interface {
 	// GetDisplay wraps gdk_monitor_get_display
 	// The function returns the following values:
 	// 
-	// 	- ret Display 
+	// 	- goret Display 
 	//
 	// Gets the display that this monitor belongs to.
 	GetDisplay() Display
+	// GetGeometry wraps gdk_monitor_get_geometry
+	// The function returns the following values:
+	// 
+	// 	- geometry Rectangle: a `GdkRectangle` to be filled with the monitor geometry 
+	//
+	// Retrieves the size and position of the monitor within the
+	// display coordinate space.
+	// 
+	// The returned geometry is in  ”application pixels”, not in
+	// ”device pixels” (see [method@Gdk.Monitor.get_scale]).
+	GetGeometry() Rectangle
 	// GetHeightMm wraps gdk_monitor_get_height_mm
 	// The function returns the following values:
 	// 
-	// 	- ret int 
+	// 	- goret int 
 	//
 	// Gets the height in millimeters of the monitor.
 	GetHeightMm() int
 	// GetManufacturer wraps gdk_monitor_get_manufacturer
 	// The function returns the following values:
 	// 
-	// 	- ret string 
+	// 	- goret string 
 	//
 	// Gets the name or PNP ID of the monitor's manufacturer.
 	// 
@@ -19264,14 +19187,14 @@ type Monitor interface {
 	// GetModel wraps gdk_monitor_get_model
 	// The function returns the following values:
 	// 
-	// 	- ret string 
+	// 	- goret string 
 	//
 	// Gets the string identifying the monitor model, if available.
 	GetModel() string
 	// GetRefreshRate wraps gdk_monitor_get_refresh_rate
 	// The function returns the following values:
 	// 
-	// 	- ret int 
+	// 	- goret int 
 	//
 	// Gets the refresh rate of the monitor, if available.
 	// 
@@ -19281,7 +19204,7 @@ type Monitor interface {
 	// GetScale wraps gdk_monitor_get_scale
 	// The function returns the following values:
 	// 
-	// 	- ret float64 
+	// 	- goret float64 
 	//
 	// Gets the internal scale factor that maps from monitor coordinates
 	// to device pixels.
@@ -19293,7 +19216,7 @@ type Monitor interface {
 	// GetScaleFactor wraps gdk_monitor_get_scale_factor
 	// The function returns the following values:
 	// 
-	// 	- ret int 
+	// 	- goret int 
 	//
 	// Gets the internal scale factor that maps from monitor coordinates
 	// to device pixels.
@@ -19308,7 +19231,7 @@ type Monitor interface {
 	// GetSubpixelLayout wraps gdk_monitor_get_subpixel_layout
 	// The function returns the following values:
 	// 
-	// 	- ret SubpixelLayout 
+	// 	- goret SubpixelLayout 
 	//
 	// Gets information about the layout of red, green and blue
 	// primaries for pixels.
@@ -19316,14 +19239,14 @@ type Monitor interface {
 	// GetWidthMm wraps gdk_monitor_get_width_mm
 	// The function returns the following values:
 	// 
-	// 	- ret int 
+	// 	- goret int 
 	//
 	// Gets the width in millimeters of the monitor.
 	GetWidthMm() int
 	// IsValid wraps gdk_monitor_is_valid
 	// The function returns the following values:
 	// 
-	// 	- ret bool 
+	// 	- goret bool 
 	//
 	// Returns %TRUE if the @monitor object corresponds to a
 	// physical monitor.
@@ -19339,23 +19262,18 @@ func unsafeWrapMonitor(base *gobject.ObjectInstance) *MonitorInstance {
 	}
 }
 
-func marshalMonitorInstance(p uintptr) (interface{}, error) {
-	return unsafeWrapMonitor(gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Object()), nil
-}
-
-// UnsafeMonitorFromGlibBorrow is used to convert raw GdkMonitor pointers to go. This is used by the bindings internally.
-func UnsafeMonitorFromGlibBorrow(c unsafe.Pointer) Monitor {
-	return gobject.TODOBorrow(c).(Monitor)
+func marshalMonitorInstance(p unsafe.Pointer) (any, error) {
+	return unsafeWrapMonitor(gobject.ValueFromNative(p).Object()), nil
 }
 
 // UnsafeMonitorFromGlibNone is used to convert raw GdkMonitor pointers to go while taking a reference and attaching a finalizer. This is used by the bindings internally.
 func UnsafeMonitorFromGlibNone(c unsafe.Pointer) Monitor {
-	return gobject.Take(c).(Monitor)
+	return gobject.UnsafeObjectFromGlibNone(c).(Monitor)
 }
 
 // UnsafeMonitorFromGlibFull is used to convert raw GdkMonitor pointers to go while attaching a finalizer. This is used by the bindings internally.
 func UnsafeMonitorFromGlibFull(c unsafe.Pointer) Monitor {
-	return gobject.AssumeOwnership(c).(Monitor)
+	return gobject.UnsafeObjectFromGlibFull(c).(Monitor)
 }
 
 func (m *MonitorInstance) upcastToGdkMonitor() *MonitorInstance {
@@ -19364,18 +19282,18 @@ func (m *MonitorInstance) upcastToGdkMonitor() *MonitorInstance {
 
 // UnsafeMonitorToGlibNone is used to convert the instance to it's C value GdkMonitor. This is used by the bindings internally.
 func UnsafeMonitorToGlibNone(c Monitor) unsafe.Pointer {
-	return gobject.TODOToNone(c)
+	return gobject.UnsafeObjectToGlibNone(c)
 }
 
 // UnsafeMonitorToGlibFull is used to convert the instance to it's C value GdkMonitor, while removeing the finalizer. This is used by the bindings internally.
 func UnsafeMonitorToGlibFull(c Monitor) unsafe.Pointer {
-	return gobject.TODOToFull(c)
+	return gobject.UnsafeObjectToGlibFull(c)
 }
 
 // GetConnector wraps gdk_monitor_get_connector
 // The function returns the following values:
 // 
-// 	- ret string 
+// 	- goret string 
 //
 // Gets the name of the monitor's connector, if available.
 // 
@@ -19391,17 +19309,17 @@ func (monitor *MonitorInstance) GetConnector() string {
 	cret = C.gdk_monitor_get_connector(carg0)
 	runtime.KeepAlive(monitor)
 
-	var ret string
+	var goret string
 
-	ret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
 
-	return ret
+	return goret
 }
 
 // GetDescription wraps gdk_monitor_get_description
 // The function returns the following values:
 // 
-// 	- ret string 
+// 	- goret string 
 //
 // Gets a string describing the monitor, if available.
 // 
@@ -19415,17 +19333,17 @@ func (monitor *MonitorInstance) GetDescription() string {
 	cret = C.gdk_monitor_get_description(carg0)
 	runtime.KeepAlive(monitor)
 
-	var ret string
+	var goret string
 
-	ret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
 
-	return ret
+	return goret
 }
 
 // GetDisplay wraps gdk_monitor_get_display
 // The function returns the following values:
 // 
-// 	- ret Display 
+// 	- goret Display 
 //
 // Gets the display that this monitor belongs to.
 func (monitor *MonitorInstance) GetDisplay() Display {
@@ -19437,17 +19355,45 @@ func (monitor *MonitorInstance) GetDisplay() Display {
 	cret = C.gdk_monitor_get_display(carg0)
 	runtime.KeepAlive(monitor)
 
-	var ret Display
+	var goret Display
 
-	ret = UnsafeDisplayFromGlibNone(unsafe.Pointer(cret))
+	goret = UnsafeDisplayFromGlibNone(unsafe.Pointer(cret))
 
-	return ret
+	return goret
+}
+
+// GetGeometry wraps gdk_monitor_get_geometry
+// The function returns the following values:
+// 
+// 	- geometry Rectangle: a `GdkRectangle` to be filled with the monitor geometry 
+//
+// Retrieves the size and position of the monitor within the
+// display coordinate space.
+// 
+// The returned geometry is in  ”application pixels”, not in
+// ”device pixels” (see [method@Gdk.Monitor.get_scale]).
+func (monitor *MonitorInstance) GetGeometry() Rectangle {
+	var carg0 *C.GdkMonitor  // in, none, converted
+	var carg1 C.GdkRectangle // out, transfer: none, C Pointers: 0, Name: Rectangle, caller-allocates
+
+	carg0 = (*C.GdkMonitor)(UnsafeMonitorToGlibNone(monitor))
+
+	C.gdk_monitor_get_geometry(carg0, &carg1)
+	runtime.KeepAlive(monitor)
+
+	var geometry Rectangle
+
+	_ = geometry
+	_ = carg1
+	panic("unimplemented conversion of Rectangle (GdkRectangle)")
+
+	return geometry
 }
 
 // GetHeightMm wraps gdk_monitor_get_height_mm
 // The function returns the following values:
 // 
-// 	- ret int 
+// 	- goret int 
 //
 // Gets the height in millimeters of the monitor.
 func (monitor *MonitorInstance) GetHeightMm() int {
@@ -19459,17 +19405,17 @@ func (monitor *MonitorInstance) GetHeightMm() int {
 	cret = C.gdk_monitor_get_height_mm(carg0)
 	runtime.KeepAlive(monitor)
 
-	var ret int
+	var goret int
 
-	ret = int(cret)
+	goret = int(cret)
 
-	return ret
+	return goret
 }
 
 // GetManufacturer wraps gdk_monitor_get_manufacturer
 // The function returns the following values:
 // 
-// 	- ret string 
+// 	- goret string 
 //
 // Gets the name or PNP ID of the monitor's manufacturer.
 // 
@@ -19487,17 +19433,17 @@ func (monitor *MonitorInstance) GetManufacturer() string {
 	cret = C.gdk_monitor_get_manufacturer(carg0)
 	runtime.KeepAlive(monitor)
 
-	var ret string
+	var goret string
 
-	ret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
 
-	return ret
+	return goret
 }
 
 // GetModel wraps gdk_monitor_get_model
 // The function returns the following values:
 // 
-// 	- ret string 
+// 	- goret string 
 //
 // Gets the string identifying the monitor model, if available.
 func (monitor *MonitorInstance) GetModel() string {
@@ -19509,17 +19455,17 @@ func (monitor *MonitorInstance) GetModel() string {
 	cret = C.gdk_monitor_get_model(carg0)
 	runtime.KeepAlive(monitor)
 
-	var ret string
+	var goret string
 
-	ret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
 
-	return ret
+	return goret
 }
 
 // GetRefreshRate wraps gdk_monitor_get_refresh_rate
 // The function returns the following values:
 // 
-// 	- ret int 
+// 	- goret int 
 //
 // Gets the refresh rate of the monitor, if available.
 // 
@@ -19534,17 +19480,17 @@ func (monitor *MonitorInstance) GetRefreshRate() int {
 	cret = C.gdk_monitor_get_refresh_rate(carg0)
 	runtime.KeepAlive(monitor)
 
-	var ret int
+	var goret int
 
-	ret = int(cret)
+	goret = int(cret)
 
-	return ret
+	return goret
 }
 
 // GetScale wraps gdk_monitor_get_scale
 // The function returns the following values:
 // 
-// 	- ret float64 
+// 	- goret float64 
 //
 // Gets the internal scale factor that maps from monitor coordinates
 // to device pixels.
@@ -19561,17 +19507,17 @@ func (monitor *MonitorInstance) GetScale() float64 {
 	cret = C.gdk_monitor_get_scale(carg0)
 	runtime.KeepAlive(monitor)
 
-	var ret float64
+	var goret float64
 
-	ret = float64(cret)
+	goret = float64(cret)
 
-	return ret
+	return goret
 }
 
 // GetScaleFactor wraps gdk_monitor_get_scale_factor
 // The function returns the following values:
 // 
-// 	- ret int 
+// 	- goret int 
 //
 // Gets the internal scale factor that maps from monitor coordinates
 // to device pixels.
@@ -19591,17 +19537,17 @@ func (monitor *MonitorInstance) GetScaleFactor() int {
 	cret = C.gdk_monitor_get_scale_factor(carg0)
 	runtime.KeepAlive(monitor)
 
-	var ret int
+	var goret int
 
-	ret = int(cret)
+	goret = int(cret)
 
-	return ret
+	return goret
 }
 
 // GetSubpixelLayout wraps gdk_monitor_get_subpixel_layout
 // The function returns the following values:
 // 
-// 	- ret SubpixelLayout 
+// 	- goret SubpixelLayout 
 //
 // Gets information about the layout of red, green and blue
 // primaries for pixels.
@@ -19614,17 +19560,17 @@ func (monitor *MonitorInstance) GetSubpixelLayout() SubpixelLayout {
 	cret = C.gdk_monitor_get_subpixel_layout(carg0)
 	runtime.KeepAlive(monitor)
 
-	var ret SubpixelLayout
+	var goret SubpixelLayout
 
-	ret = SubpixelLayout(cret)
+	goret = SubpixelLayout(cret)
 
-	return ret
+	return goret
 }
 
 // GetWidthMm wraps gdk_monitor_get_width_mm
 // The function returns the following values:
 // 
-// 	- ret int 
+// 	- goret int 
 //
 // Gets the width in millimeters of the monitor.
 func (monitor *MonitorInstance) GetWidthMm() int {
@@ -19636,17 +19582,17 @@ func (monitor *MonitorInstance) GetWidthMm() int {
 	cret = C.gdk_monitor_get_width_mm(carg0)
 	runtime.KeepAlive(monitor)
 
-	var ret int
+	var goret int
 
-	ret = int(cret)
+	goret = int(cret)
 
-	return ret
+	return goret
 }
 
 // IsValid wraps gdk_monitor_is_valid
 // The function returns the following values:
 // 
-// 	- ret bool 
+// 	- goret bool 
 //
 // Returns %TRUE if the @monitor object corresponds to a
 // physical monitor.
@@ -19662,13 +19608,13 @@ func (monitor *MonitorInstance) IsValid() bool {
 	cret = C.gdk_monitor_is_valid(carg0)
 	runtime.KeepAlive(monitor)
 
-	var ret bool
+	var goret bool
 
 	if cret != 0 {
-		ret = true
+		goret = true
 	}
 
-	return ret
+	return goret
 }
 
 // SeatInstance is the instance type used by all types extending GdkSeat. It is used internally by the bindings. Users should use the interface [Seat] instead.
@@ -19690,28 +19636,28 @@ type Seat interface {
 	// GetCapabilities wraps gdk_seat_get_capabilities
 	// The function returns the following values:
 	// 
-	// 	- ret SeatCapabilities 
+	// 	- goret SeatCapabilities 
 	//
 	// Returns the capabilities this `GdkSeat` currently has.
 	GetCapabilities() SeatCapabilities
 	// GetDisplay wraps gdk_seat_get_display
 	// The function returns the following values:
 	// 
-	// 	- ret Display 
+	// 	- goret Display 
 	//
 	// Returns the `GdkDisplay` this seat belongs to.
 	GetDisplay() Display
 	// GetKeyboard wraps gdk_seat_get_keyboard
 	// The function returns the following values:
 	// 
-	// 	- ret Device 
+	// 	- goret Device 
 	//
 	// Returns the device that routes keyboard events.
 	GetKeyboard() Device
 	// GetPointer wraps gdk_seat_get_pointer
 	// The function returns the following values:
 	// 
-	// 	- ret Device 
+	// 	- goret Device 
 	//
 	// Returns the device that routes pointer events.
 	GetPointer() Device
@@ -19723,23 +19669,18 @@ func unsafeWrapSeat(base *gobject.ObjectInstance) *SeatInstance {
 	}
 }
 
-func marshalSeatInstance(p uintptr) (interface{}, error) {
-	return unsafeWrapSeat(gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Object()), nil
-}
-
-// UnsafeSeatFromGlibBorrow is used to convert raw GdkSeat pointers to go. This is used by the bindings internally.
-func UnsafeSeatFromGlibBorrow(c unsafe.Pointer) Seat {
-	return gobject.TODOBorrow(c).(Seat)
+func marshalSeatInstance(p unsafe.Pointer) (any, error) {
+	return unsafeWrapSeat(gobject.ValueFromNative(p).Object()), nil
 }
 
 // UnsafeSeatFromGlibNone is used to convert raw GdkSeat pointers to go while taking a reference and attaching a finalizer. This is used by the bindings internally.
 func UnsafeSeatFromGlibNone(c unsafe.Pointer) Seat {
-	return gobject.Take(c).(Seat)
+	return gobject.UnsafeObjectFromGlibNone(c).(Seat)
 }
 
 // UnsafeSeatFromGlibFull is used to convert raw GdkSeat pointers to go while attaching a finalizer. This is used by the bindings internally.
 func UnsafeSeatFromGlibFull(c unsafe.Pointer) Seat {
-	return gobject.AssumeOwnership(c).(Seat)
+	return gobject.UnsafeObjectFromGlibFull(c).(Seat)
 }
 
 func (s *SeatInstance) upcastToGdkSeat() *SeatInstance {
@@ -19748,18 +19689,18 @@ func (s *SeatInstance) upcastToGdkSeat() *SeatInstance {
 
 // UnsafeSeatToGlibNone is used to convert the instance to it's C value GdkSeat. This is used by the bindings internally.
 func UnsafeSeatToGlibNone(c Seat) unsafe.Pointer {
-	return gobject.TODOToNone(c)
+	return gobject.UnsafeObjectToGlibNone(c)
 }
 
 // UnsafeSeatToGlibFull is used to convert the instance to it's C value GdkSeat, while removeing the finalizer. This is used by the bindings internally.
 func UnsafeSeatToGlibFull(c Seat) unsafe.Pointer {
-	return gobject.TODOToFull(c)
+	return gobject.UnsafeObjectToGlibFull(c)
 }
 
 // GetCapabilities wraps gdk_seat_get_capabilities
 // The function returns the following values:
 // 
-// 	- ret SeatCapabilities 
+// 	- goret SeatCapabilities 
 //
 // Returns the capabilities this `GdkSeat` currently has.
 func (seat *SeatInstance) GetCapabilities() SeatCapabilities {
@@ -19771,17 +19712,17 @@ func (seat *SeatInstance) GetCapabilities() SeatCapabilities {
 	cret = C.gdk_seat_get_capabilities(carg0)
 	runtime.KeepAlive(seat)
 
-	var ret SeatCapabilities
+	var goret SeatCapabilities
 
-	ret = SeatCapabilities(cret)
+	goret = SeatCapabilities(cret)
 
-	return ret
+	return goret
 }
 
 // GetDisplay wraps gdk_seat_get_display
 // The function returns the following values:
 // 
-// 	- ret Display 
+// 	- goret Display 
 //
 // Returns the `GdkDisplay` this seat belongs to.
 func (seat *SeatInstance) GetDisplay() Display {
@@ -19793,17 +19734,17 @@ func (seat *SeatInstance) GetDisplay() Display {
 	cret = C.gdk_seat_get_display(carg0)
 	runtime.KeepAlive(seat)
 
-	var ret Display
+	var goret Display
 
-	ret = UnsafeDisplayFromGlibNone(unsafe.Pointer(cret))
+	goret = UnsafeDisplayFromGlibNone(unsafe.Pointer(cret))
 
-	return ret
+	return goret
 }
 
 // GetKeyboard wraps gdk_seat_get_keyboard
 // The function returns the following values:
 // 
-// 	- ret Device 
+// 	- goret Device 
 //
 // Returns the device that routes keyboard events.
 func (seat *SeatInstance) GetKeyboard() Device {
@@ -19815,17 +19756,17 @@ func (seat *SeatInstance) GetKeyboard() Device {
 	cret = C.gdk_seat_get_keyboard(carg0)
 	runtime.KeepAlive(seat)
 
-	var ret Device
+	var goret Device
 
-	ret = UnsafeDeviceFromGlibNone(unsafe.Pointer(cret))
+	goret = UnsafeDeviceFromGlibNone(unsafe.Pointer(cret))
 
-	return ret
+	return goret
 }
 
 // GetPointer wraps gdk_seat_get_pointer
 // The function returns the following values:
 // 
-// 	- ret Device 
+// 	- goret Device 
 //
 // Returns the device that routes pointer events.
 func (seat *SeatInstance) GetPointer() Device {
@@ -19837,11 +19778,11 @@ func (seat *SeatInstance) GetPointer() Device {
 	cret = C.gdk_seat_get_pointer(carg0)
 	runtime.KeepAlive(seat)
 
-	var ret Device
+	var goret Device
 
-	ret = UnsafeDeviceFromGlibNone(unsafe.Pointer(cret))
+	goret = UnsafeDeviceFromGlibNone(unsafe.Pointer(cret))
 
-	return ret
+	return goret
 }
 
 // SnapshotInstance is the instance type used by all types extending GdkSnapshot. It is used internally by the bindings. Users should use the interface [Snapshot] instead.
@@ -19860,7 +19801,6 @@ var _ Snapshot = (*SnapshotInstance)(nil)
 type Snapshot interface {
 	gobject.Object
 	upcastToGdkSnapshot() *SnapshotInstance
-
 }
 
 func unsafeWrapSnapshot(base *gobject.ObjectInstance) *SnapshotInstance {
@@ -19869,23 +19809,18 @@ func unsafeWrapSnapshot(base *gobject.ObjectInstance) *SnapshotInstance {
 	}
 }
 
-func marshalSnapshotInstance(p uintptr) (interface{}, error) {
-	return unsafeWrapSnapshot(gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Object()), nil
-}
-
-// UnsafeSnapshotFromGlibBorrow is used to convert raw GdkSnapshot pointers to go. This is used by the bindings internally.
-func UnsafeSnapshotFromGlibBorrow(c unsafe.Pointer) Snapshot {
-	return gobject.TODOBorrow(c).(Snapshot)
+func marshalSnapshotInstance(p unsafe.Pointer) (any, error) {
+	return unsafeWrapSnapshot(gobject.ValueFromNative(p).Object()), nil
 }
 
 // UnsafeSnapshotFromGlibNone is used to convert raw GdkSnapshot pointers to go while taking a reference and attaching a finalizer. This is used by the bindings internally.
 func UnsafeSnapshotFromGlibNone(c unsafe.Pointer) Snapshot {
-	return gobject.Take(c).(Snapshot)
+	return gobject.UnsafeObjectFromGlibNone(c).(Snapshot)
 }
 
 // UnsafeSnapshotFromGlibFull is used to convert raw GdkSnapshot pointers to go while attaching a finalizer. This is used by the bindings internally.
 func UnsafeSnapshotFromGlibFull(c unsafe.Pointer) Snapshot {
-	return gobject.AssumeOwnership(c).(Snapshot)
+	return gobject.UnsafeObjectFromGlibFull(c).(Snapshot)
 }
 
 func (s *SnapshotInstance) upcastToGdkSnapshot() *SnapshotInstance {
@@ -19894,12 +19829,12 @@ func (s *SnapshotInstance) upcastToGdkSnapshot() *SnapshotInstance {
 
 // UnsafeSnapshotToGlibNone is used to convert the instance to it's C value GdkSnapshot. This is used by the bindings internally.
 func UnsafeSnapshotToGlibNone(c Snapshot) unsafe.Pointer {
-	return gobject.TODOToNone(c)
+	return gobject.UnsafeObjectToGlibNone(c)
 }
 
 // UnsafeSnapshotToGlibFull is used to convert the instance to it's C value GdkSnapshot, while removeing the finalizer. This is used by the bindings internally.
 func UnsafeSnapshotToGlibFull(c Snapshot) unsafe.Pointer {
-	return gobject.TODOToFull(c)
+	return gobject.UnsafeObjectToGlibFull(c)
 }
 
 // SurfaceInstance is the instance type used by all types extending GdkSurface. It is used internally by the bindings. Users should use the interface [Surface] instead.
@@ -19935,14 +19870,14 @@ type Surface interface {
 	// CreateCairoContext wraps gdk_surface_create_cairo_context
 	// The function returns the following values:
 	// 
-	// 	- ret CairoContext 
+	// 	- goret CairoContext 
 	//
 	// Creates a new `GdkCairoContext` for rendering on @surface.
 	CreateCairoContext() CairoContext
 	// CreateGLContext wraps gdk_surface_create_gl_context
 	// The function returns the following values:
 	// 
-	// 	- ret GLContext 
+	// 	- goret GLContext 
 	// 	- _goerr error (nullable): an error 
 	//
 	// Creates a new `GdkGLContext` for the `GdkSurface`.
@@ -19955,7 +19890,7 @@ type Surface interface {
 	// CreateVulkanContext wraps gdk_surface_create_vulkan_context
 	// The function returns the following values:
 	// 
-	// 	- ret VulkanContext 
+	// 	- goret VulkanContext 
 	// 	- _goerr error (nullable): an error 
 	//
 	// Sets an error and returns %NULL.
@@ -19978,7 +19913,7 @@ type Surface interface {
 	// GetCursor wraps gdk_surface_get_cursor
 	// The function returns the following values:
 	// 
-	// 	- ret Cursor 
+	// 	- goret Cursor 
 	//
 	// Retrieves a `GdkCursor` pointer for the cursor currently set on the
 	// `GdkSurface`.
@@ -19996,7 +19931,7 @@ type Surface interface {
 	// 
 	// The function returns the following values:
 	// 
-	// 	- ret Cursor 
+	// 	- goret Cursor 
 	//
 	// Retrieves a `GdkCursor` pointer for the @device currently set on the
 	// specified `GdkSurface`.
@@ -20017,7 +19952,7 @@ type Surface interface {
 	// 	- x float64: return location for the X coordinate of @device 
 	// 	- y float64: return location for the Y coordinate of @device 
 	// 	- mask ModifierType: return location for the modifier mask 
-	// 	- ret bool 
+	// 	- goret bool 
 	//
 	// Obtains the current device position and modifier state.
 	// 
@@ -20027,14 +19962,14 @@ type Surface interface {
 	// GetDisplay wraps gdk_surface_get_display
 	// The function returns the following values:
 	// 
-	// 	- ret Display 
+	// 	- goret Display 
 	//
 	// Gets the `GdkDisplay` associated with a `GdkSurface`.
 	GetDisplay() Display
 	// GetFrameClock wraps gdk_surface_get_frame_clock
 	// The function returns the following values:
 	// 
-	// 	- ret FrameClock 
+	// 	- goret FrameClock 
 	//
 	// Gets the frame clock for the surface.
 	// 
@@ -20044,7 +19979,7 @@ type Surface interface {
 	// GetHeight wraps gdk_surface_get_height
 	// The function returns the following values:
 	// 
-	// 	- ret int 
+	// 	- goret int 
 	//
 	// Returns the height of the given @surface.
 	// 
@@ -20054,7 +19989,7 @@ type Surface interface {
 	// GetMapped wraps gdk_surface_get_mapped
 	// The function returns the following values:
 	// 
-	// 	- ret bool 
+	// 	- goret bool 
 	//
 	// Checks whether the surface has been mapped.
 	// 
@@ -20064,7 +19999,7 @@ type Surface interface {
 	// GetScale wraps gdk_surface_get_scale
 	// The function returns the following values:
 	// 
-	// 	- ret float64 
+	// 	- goret float64 
 	//
 	// Returns the internal scale that maps from surface coordinates
 	// to the actual device pixels.
@@ -20081,7 +20016,7 @@ type Surface interface {
 	// GetScaleFactor wraps gdk_surface_get_scale_factor
 	// The function returns the following values:
 	// 
-	// 	- ret int 
+	// 	- goret int 
 	//
 	// Returns the internal scale factor that maps from surface coordinates
 	// to the actual device pixels.
@@ -20098,7 +20033,7 @@ type Surface interface {
 	// GetWidth wraps gdk_surface_get_width
 	// The function returns the following values:
 	// 
-	// 	- ret int 
+	// 	- goret int 
 	//
 	// Returns the width of the given @surface.
 	// 
@@ -20117,7 +20052,7 @@ type Surface interface {
 	// IsDestroyed wraps gdk_surface_is_destroyed
 	// The function returns the following values:
 	// 
-	// 	- ret bool 
+	// 	- goret bool 
 	//
 	// Check to see if a surface is destroyed.
 	IsDestroyed() bool
@@ -20173,23 +20108,18 @@ func unsafeWrapSurface(base *gobject.ObjectInstance) *SurfaceInstance {
 	}
 }
 
-func marshalSurfaceInstance(p uintptr) (interface{}, error) {
-	return unsafeWrapSurface(gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Object()), nil
-}
-
-// UnsafeSurfaceFromGlibBorrow is used to convert raw GdkSurface pointers to go. This is used by the bindings internally.
-func UnsafeSurfaceFromGlibBorrow(c unsafe.Pointer) Surface {
-	return gobject.TODOBorrow(c).(Surface)
+func marshalSurfaceInstance(p unsafe.Pointer) (any, error) {
+	return unsafeWrapSurface(gobject.ValueFromNative(p).Object()), nil
 }
 
 // UnsafeSurfaceFromGlibNone is used to convert raw GdkSurface pointers to go while taking a reference and attaching a finalizer. This is used by the bindings internally.
 func UnsafeSurfaceFromGlibNone(c unsafe.Pointer) Surface {
-	return gobject.Take(c).(Surface)
+	return gobject.UnsafeObjectFromGlibNone(c).(Surface)
 }
 
 // UnsafeSurfaceFromGlibFull is used to convert raw GdkSurface pointers to go while attaching a finalizer. This is used by the bindings internally.
 func UnsafeSurfaceFromGlibFull(c unsafe.Pointer) Surface {
-	return gobject.AssumeOwnership(c).(Surface)
+	return gobject.UnsafeObjectFromGlibFull(c).(Surface)
 }
 
 func (s *SurfaceInstance) upcastToGdkSurface() *SurfaceInstance {
@@ -20198,12 +20128,12 @@ func (s *SurfaceInstance) upcastToGdkSurface() *SurfaceInstance {
 
 // UnsafeSurfaceToGlibNone is used to convert the instance to it's C value GdkSurface. This is used by the bindings internally.
 func UnsafeSurfaceToGlibNone(c Surface) unsafe.Pointer {
-	return gobject.TODOToNone(c)
+	return gobject.UnsafeObjectToGlibNone(c)
 }
 
 // UnsafeSurfaceToGlibFull is used to convert the instance to it's C value GdkSurface, while removeing the finalizer. This is used by the bindings internally.
 func UnsafeSurfaceToGlibFull(c Surface) unsafe.Pointer {
-	return gobject.TODOToFull(c)
+	return gobject.UnsafeObjectToGlibFull(c)
 }
 
 // NewSurfaceInstancePopup wraps gdk_surface_new_popup
@@ -20215,7 +20145,7 @@ func UnsafeSurfaceToGlibFull(c Surface) unsafe.Pointer {
 // 
 // The function returns the following values:
 // 
-// 	- ret Surface 
+// 	- goret Surface 
 //
 // Create a new popup surface.
 // 
@@ -20235,11 +20165,11 @@ func NewSurfaceInstancePopup(parent Surface, autohide bool) Surface {
 	runtime.KeepAlive(parent)
 	runtime.KeepAlive(autohide)
 
-	var ret Surface
+	var goret Surface
 
-	ret = UnsafeSurfaceFromGlibFull(unsafe.Pointer(cret))
+	goret = UnsafeSurfaceFromGlibFull(unsafe.Pointer(cret))
 
-	return ret
+	return goret
 }
 
 // NewSurfaceInstanceToplevel wraps gdk_surface_new_toplevel
@@ -20250,7 +20180,7 @@ func NewSurfaceInstancePopup(parent Surface, autohide bool) Surface {
 // 
 // The function returns the following values:
 // 
-// 	- ret Surface 
+// 	- goret Surface 
 //
 // Creates a new toplevel surface.
 func NewSurfaceInstanceToplevel(display Display) Surface {
@@ -20262,11 +20192,11 @@ func NewSurfaceInstanceToplevel(display Display) Surface {
 	cret = C.gdk_surface_new_toplevel(carg1)
 	runtime.KeepAlive(display)
 
-	var ret Surface
+	var goret Surface
 
-	ret = UnsafeSurfaceFromGlibFull(unsafe.Pointer(cret))
+	goret = UnsafeSurfaceFromGlibFull(unsafe.Pointer(cret))
 
-	return ret
+	return goret
 }
 
 // Beep wraps gdk_surface_beep
@@ -20287,7 +20217,7 @@ func (surface *SurfaceInstance) Beep() {
 // CreateCairoContext wraps gdk_surface_create_cairo_context
 // The function returns the following values:
 // 
-// 	- ret CairoContext 
+// 	- goret CairoContext 
 //
 // Creates a new `GdkCairoContext` for rendering on @surface.
 func (surface *SurfaceInstance) CreateCairoContext() CairoContext {
@@ -20299,17 +20229,17 @@ func (surface *SurfaceInstance) CreateCairoContext() CairoContext {
 	cret = C.gdk_surface_create_cairo_context(carg0)
 	runtime.KeepAlive(surface)
 
-	var ret CairoContext
+	var goret CairoContext
 
-	ret = UnsafeCairoContextFromGlibFull(unsafe.Pointer(cret))
+	goret = UnsafeCairoContextFromGlibFull(unsafe.Pointer(cret))
 
-	return ret
+	return goret
 }
 
 // CreateGLContext wraps gdk_surface_create_gl_context
 // The function returns the following values:
 // 
-// 	- ret GLContext 
+// 	- goret GLContext 
 // 	- _goerr error (nullable): an error 
 //
 // Creates a new `GdkGLContext` for the `GdkSurface`.
@@ -20328,21 +20258,21 @@ func (surface *SurfaceInstance) CreateGLContext() (GLContext, error) {
 	cret = C.gdk_surface_create_gl_context(carg0, &_cerr)
 	runtime.KeepAlive(surface)
 
-	var ret    GLContext
+	var goret  GLContext
 	var _goerr error
 
-	ret = UnsafeGLContextFromGlibFull(unsafe.Pointer(cret))
+	goret = UnsafeGLContextFromGlibFull(unsafe.Pointer(cret))
 	if _cerr != nil {
-		_goerr = UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
+		_goerr = glib.UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
 	}
 
-	return ret, _goerr
+	return goret, _goerr
 }
 
 // CreateVulkanContext wraps gdk_surface_create_vulkan_context
 // The function returns the following values:
 // 
-// 	- ret VulkanContext 
+// 	- goret VulkanContext 
 // 	- _goerr error (nullable): an error 
 //
 // Sets an error and returns %NULL.
@@ -20359,15 +20289,15 @@ func (surface *SurfaceInstance) CreateVulkanContext() (VulkanContext, error) {
 	cret = C.gdk_surface_create_vulkan_context(carg0, &_cerr)
 	runtime.KeepAlive(surface)
 
-	var ret    VulkanContext
+	var goret  VulkanContext
 	var _goerr error
 
-	ret = UnsafeVulkanContextFromGlibFull(unsafe.Pointer(cret))
+	goret = UnsafeVulkanContextFromGlibFull(unsafe.Pointer(cret))
 	if _cerr != nil {
-		_goerr = UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
+		_goerr = glib.UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
 	}
 
-	return ret, _goerr
+	return goret, _goerr
 }
 
 // Destroy wraps gdk_surface_destroy
@@ -20393,7 +20323,7 @@ func (surface *SurfaceInstance) Destroy() {
 // GetCursor wraps gdk_surface_get_cursor
 // The function returns the following values:
 // 
-// 	- ret Cursor 
+// 	- goret Cursor 
 //
 // Retrieves a `GdkCursor` pointer for the cursor currently set on the
 // `GdkSurface`.
@@ -20411,11 +20341,11 @@ func (surface *SurfaceInstance) GetCursor() Cursor {
 	cret = C.gdk_surface_get_cursor(carg0)
 	runtime.KeepAlive(surface)
 
-	var ret Cursor
+	var goret Cursor
 
-	ret = UnsafeCursorFromGlibNone(unsafe.Pointer(cret))
+	goret = UnsafeCursorFromGlibNone(unsafe.Pointer(cret))
 
-	return ret
+	return goret
 }
 
 // GetDeviceCursor wraps gdk_surface_get_device_cursor
@@ -20426,7 +20356,7 @@ func (surface *SurfaceInstance) GetCursor() Cursor {
 // 
 // The function returns the following values:
 // 
-// 	- ret Cursor 
+// 	- goret Cursor 
 //
 // Retrieves a `GdkCursor` pointer for the @device currently set on the
 // specified `GdkSurface`.
@@ -20447,11 +20377,11 @@ func (surface *SurfaceInstance) GetDeviceCursor(device Device) Cursor {
 	runtime.KeepAlive(surface)
 	runtime.KeepAlive(device)
 
-	var ret Cursor
+	var goret Cursor
 
-	ret = UnsafeCursorFromGlibNone(unsafe.Pointer(cret))
+	goret = UnsafeCursorFromGlibNone(unsafe.Pointer(cret))
 
-	return ret
+	return goret
 }
 
 // GetDevicePosition wraps gdk_surface_get_device_position
@@ -20465,7 +20395,7 @@ func (surface *SurfaceInstance) GetDeviceCursor(device Device) Cursor {
 // 	- x float64: return location for the X coordinate of @device 
 // 	- y float64: return location for the Y coordinate of @device 
 // 	- mask ModifierType: return location for the modifier mask 
-// 	- ret bool 
+// 	- goret bool 
 //
 // Obtains the current device position and modifier state.
 // 
@@ -20486,25 +20416,25 @@ func (surface *SurfaceInstance) GetDevicePosition(device Device) (float64, float
 	runtime.KeepAlive(surface)
 	runtime.KeepAlive(device)
 
-	var x    float64
-	var y    float64
-	var mask ModifierType
-	var ret  bool
+	var x     float64
+	var y     float64
+	var mask  ModifierType
+	var goret bool
 
 	x = float64(carg2)
 	y = float64(carg3)
 	mask = ModifierType(carg4)
 	if cret != 0 {
-		ret = true
+		goret = true
 	}
 
-	return x, y, mask, ret
+	return x, y, mask, goret
 }
 
 // GetDisplay wraps gdk_surface_get_display
 // The function returns the following values:
 // 
-// 	- ret Display 
+// 	- goret Display 
 //
 // Gets the `GdkDisplay` associated with a `GdkSurface`.
 func (surface *SurfaceInstance) GetDisplay() Display {
@@ -20516,17 +20446,17 @@ func (surface *SurfaceInstance) GetDisplay() Display {
 	cret = C.gdk_surface_get_display(carg0)
 	runtime.KeepAlive(surface)
 
-	var ret Display
+	var goret Display
 
-	ret = UnsafeDisplayFromGlibNone(unsafe.Pointer(cret))
+	goret = UnsafeDisplayFromGlibNone(unsafe.Pointer(cret))
 
-	return ret
+	return goret
 }
 
 // GetFrameClock wraps gdk_surface_get_frame_clock
 // The function returns the following values:
 // 
-// 	- ret FrameClock 
+// 	- goret FrameClock 
 //
 // Gets the frame clock for the surface.
 // 
@@ -20541,17 +20471,17 @@ func (surface *SurfaceInstance) GetFrameClock() FrameClock {
 	cret = C.gdk_surface_get_frame_clock(carg0)
 	runtime.KeepAlive(surface)
 
-	var ret FrameClock
+	var goret FrameClock
 
-	ret = UnsafeFrameClockFromGlibNone(unsafe.Pointer(cret))
+	goret = UnsafeFrameClockFromGlibNone(unsafe.Pointer(cret))
 
-	return ret
+	return goret
 }
 
 // GetHeight wraps gdk_surface_get_height
 // The function returns the following values:
 // 
-// 	- ret int 
+// 	- goret int 
 //
 // Returns the height of the given @surface.
 // 
@@ -20566,17 +20496,17 @@ func (surface *SurfaceInstance) GetHeight() int {
 	cret = C.gdk_surface_get_height(carg0)
 	runtime.KeepAlive(surface)
 
-	var ret int
+	var goret int
 
-	ret = int(cret)
+	goret = int(cret)
 
-	return ret
+	return goret
 }
 
 // GetMapped wraps gdk_surface_get_mapped
 // The function returns the following values:
 // 
-// 	- ret bool 
+// 	- goret bool 
 //
 // Checks whether the surface has been mapped.
 // 
@@ -20591,19 +20521,19 @@ func (surface *SurfaceInstance) GetMapped() bool {
 	cret = C.gdk_surface_get_mapped(carg0)
 	runtime.KeepAlive(surface)
 
-	var ret bool
+	var goret bool
 
 	if cret != 0 {
-		ret = true
+		goret = true
 	}
 
-	return ret
+	return goret
 }
 
 // GetScale wraps gdk_surface_get_scale
 // The function returns the following values:
 // 
-// 	- ret float64 
+// 	- goret float64 
 //
 // Returns the internal scale that maps from surface coordinates
 // to the actual device pixels.
@@ -20625,17 +20555,17 @@ func (surface *SurfaceInstance) GetScale() float64 {
 	cret = C.gdk_surface_get_scale(carg0)
 	runtime.KeepAlive(surface)
 
-	var ret float64
+	var goret float64
 
-	ret = float64(cret)
+	goret = float64(cret)
 
-	return ret
+	return goret
 }
 
 // GetScaleFactor wraps gdk_surface_get_scale_factor
 // The function returns the following values:
 // 
-// 	- ret int 
+// 	- goret int 
 //
 // Returns the internal scale factor that maps from surface coordinates
 // to the actual device pixels.
@@ -20657,17 +20587,17 @@ func (surface *SurfaceInstance) GetScaleFactor() int {
 	cret = C.gdk_surface_get_scale_factor(carg0)
 	runtime.KeepAlive(surface)
 
-	var ret int
+	var goret int
 
-	ret = int(cret)
+	goret = int(cret)
 
-	return ret
+	return goret
 }
 
 // GetWidth wraps gdk_surface_get_width
 // The function returns the following values:
 // 
-// 	- ret int 
+// 	- goret int 
 //
 // Returns the width of the given @surface.
 // 
@@ -20682,11 +20612,11 @@ func (surface *SurfaceInstance) GetWidth() int {
 	cret = C.gdk_surface_get_width(carg0)
 	runtime.KeepAlive(surface)
 
-	var ret int
+	var goret int
 
-	ret = int(cret)
+	goret = int(cret)
 
-	return ret
+	return goret
 }
 
 // Hide wraps gdk_surface_hide
@@ -20709,7 +20639,7 @@ func (surface *SurfaceInstance) Hide() {
 // IsDestroyed wraps gdk_surface_is_destroyed
 // The function returns the following values:
 // 
-// 	- ret bool 
+// 	- goret bool 
 //
 // Check to see if a surface is destroyed.
 func (surface *SurfaceInstance) IsDestroyed() bool {
@@ -20721,13 +20651,13 @@ func (surface *SurfaceInstance) IsDestroyed() bool {
 	cret = C.gdk_surface_is_destroyed(carg0)
 	runtime.KeepAlive(surface)
 
-	var ret bool
+	var goret bool
 
 	if cret != 0 {
-		ret = true
+		goret = true
 	}
 
-	return ret
+	return goret
 }
 
 // QueueRender wraps gdk_surface_queue_render
@@ -20822,8 +20752,8 @@ type TextureInstance struct {
 	_ [0]func() // equal guard
 	gobject.ObjectInstance
 	// implemented interfaces:
-gio.Icon
-gio.LoadableIcon
+	gio.IconInstance
+	gio.LoadableIconInstance
 }
 
 var _ Texture = (*TextureInstance)(nil)
@@ -20865,14 +20795,14 @@ type Texture interface {
 	// GetColorState wraps gdk_texture_get_color_state
 	// The function returns the following values:
 	// 
-	// 	- ret ColorState 
+	// 	- goret *ColorState 
 	//
 	// Returns the color state associated with the texture.
-	GetColorState() ColorState
+	GetColorState() *ColorState
 	// GetFormat wraps gdk_texture_get_format
 	// The function returns the following values:
 	// 
-	// 	- ret MemoryFormat 
+	// 	- goret MemoryFormat 
 	//
 	// Gets the memory format most closely associated with the data of
 	// the texture.
@@ -20887,14 +20817,14 @@ type Texture interface {
 	// GetHeight wraps gdk_texture_get_height
 	// The function returns the following values:
 	// 
-	// 	- ret int 
+	// 	- goret int 
 	//
 	// Returns the height of the @texture, in pixels.
 	GetHeight() int
 	// GetWidth wraps gdk_texture_get_width
 	// The function returns the following values:
 	// 
-	// 	- ret int 
+	// 	- goret int 
 	//
 	// Returns the width of @texture, in pixels.
 	GetWidth() int
@@ -20906,7 +20836,7 @@ type Texture interface {
 	// 
 	// The function returns the following values:
 	// 
-	// 	- ret bool 
+	// 	- goret bool 
 	//
 	// Store the given @texture to the @filename as a PNG file.
 	// 
@@ -20916,6 +20846,26 @@ type Texture interface {
 	// use [method@Gdk.Texture.save_to_png_bytes] or look into the
 	// gdk-pixbuf library.
 	SaveToPNG(string) bool
+	// SaveToPNGBytes wraps gdk_texture_save_to_png_bytes
+	// The function returns the following values:
+	// 
+	// 	- goret *glib.Bytes 
+	//
+	// Store the given @texture in memory as a PNG file.
+	// 
+	// Use [ctor@Gdk.Texture.new_from_bytes] to read it back.
+	// 
+	// If you want to serialize a texture, this is a convenient and
+	// portable way to do that.
+	// 
+	// If you need more control over the generated image, such as
+	// attaching metadata, you should look into an image handling
+	// library such as the gdk-pixbuf library.
+	// 
+	// If you are dealing with high dynamic range float data, you
+	// might also want to consider [method@Gdk.Texture.save_to_tiff_bytes]
+	// instead.
+	SaveToPNGBytes() *glib.Bytes
 	// SaveToTIFF wraps gdk_texture_save_to_tiff
 	// 
 	// The function takes the following parameters:
@@ -20924,43 +20874,56 @@ type Texture interface {
 	// 
 	// The function returns the following values:
 	// 
-	// 	- ret bool 
+	// 	- goret bool 
 	//
 	// Store the given @texture to the @filename as a TIFF file.
 	// 
 	// GTK will attempt to store data without loss.
 	SaveToTIFF(string) bool
+	// SaveToTIFFBytes wraps gdk_texture_save_to_tiff_bytes
+	// The function returns the following values:
+	// 
+	// 	- goret *glib.Bytes 
+	//
+	// Store the given @texture in memory as a TIFF file.
+	// 
+	// Use [ctor@Gdk.Texture.new_from_bytes] to read it back.
+	// 
+	// This function is intended to store a representation of the
+	// texture's data that is as accurate as possible. This is
+	// particularly relevant when working with high dynamic range
+	// images and floating-point texture data.
+	// 
+	// If that is not your concern and you are interested in a
+	// smaller size and a more portable format, you might want to
+	// use [method@Gdk.Texture.save_to_png_bytes].
+	SaveToTIFFBytes() *glib.Bytes
 }
 
 func unsafeWrapTexture(base *gobject.ObjectInstance) *TextureInstance {
 	return &TextureInstance{
 		ObjectInstance: *base,
 		IconInstance: gio.IconInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 		LoadableIconInstance: gio.LoadableIconInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 	}
 }
 
-func marshalTextureInstance(p uintptr) (interface{}, error) {
-	return unsafeWrapTexture(gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Object()), nil
-}
-
-// UnsafeTextureFromGlibBorrow is used to convert raw GdkTexture pointers to go. This is used by the bindings internally.
-func UnsafeTextureFromGlibBorrow(c unsafe.Pointer) Texture {
-	return gobject.TODOBorrow(c).(Texture)
+func marshalTextureInstance(p unsafe.Pointer) (any, error) {
+	return unsafeWrapTexture(gobject.ValueFromNative(p).Object()), nil
 }
 
 // UnsafeTextureFromGlibNone is used to convert raw GdkTexture pointers to go while taking a reference and attaching a finalizer. This is used by the bindings internally.
 func UnsafeTextureFromGlibNone(c unsafe.Pointer) Texture {
-	return gobject.Take(c).(Texture)
+	return gobject.UnsafeObjectFromGlibNone(c).(Texture)
 }
 
 // UnsafeTextureFromGlibFull is used to convert raw GdkTexture pointers to go while attaching a finalizer. This is used by the bindings internally.
 func UnsafeTextureFromGlibFull(c unsafe.Pointer) Texture {
-	return gobject.AssumeOwnership(c).(Texture)
+	return gobject.UnsafeObjectFromGlibFull(c).(Texture)
 }
 
 func (t *TextureInstance) upcastToGdkTexture() *TextureInstance {
@@ -20969,12 +20932,12 @@ func (t *TextureInstance) upcastToGdkTexture() *TextureInstance {
 
 // UnsafeTextureToGlibNone is used to convert the instance to it's C value GdkTexture. This is used by the bindings internally.
 func UnsafeTextureToGlibNone(c Texture) unsafe.Pointer {
-	return gobject.TODOToNone(c)
+	return gobject.UnsafeObjectToGlibNone(c)
 }
 
 // UnsafeTextureToGlibFull is used to convert the instance to it's C value GdkTexture, while removeing the finalizer. This is used by the bindings internally.
 func UnsafeTextureToGlibFull(c Texture) unsafe.Pointer {
-	return gobject.TODOToFull(c)
+	return gobject.UnsafeObjectToGlibFull(c)
 }
 
 // NewTextureInstanceForPixbuf wraps gdk_texture_new_for_pixbuf
@@ -20985,7 +20948,7 @@ func UnsafeTextureToGlibFull(c Texture) unsafe.Pointer {
 // 
 // The function returns the following values:
 // 
-// 	- ret Texture 
+// 	- goret Texture 
 //
 // Creates a new texture object representing the `GdkPixbuf`.
 // 
@@ -20996,16 +20959,58 @@ func NewTextureInstanceForPixbuf(pixbuf gdkpixbuf.Pixbuf) Texture {
 	var carg1 *C.GdkPixbuf  // in, none, converted
 	var cret  *C.GdkTexture // return, full, converted
 
-	carg1 = (*C.GdkPixbuf)(UnsafePixbufToGlibNone(pixbuf))
+	carg1 = (*C.GdkPixbuf)(gdkpixbuf.UnsafePixbufToGlibNone(pixbuf))
 
 	cret = C.gdk_texture_new_for_pixbuf(carg1)
 	runtime.KeepAlive(pixbuf)
 
-	var ret Texture
+	var goret Texture
 
-	ret = UnsafeTextureFromGlibFull(unsafe.Pointer(cret))
+	goret = UnsafeTextureFromGlibFull(unsafe.Pointer(cret))
 
-	return ret
+	return goret
+}
+
+// NewTextureInstanceFromBytes wraps gdk_texture_new_from_bytes
+// 
+// The function takes the following parameters:
+// 
+// 	- bytes *glib.Bytes: a `GBytes` containing the data to load 
+// 
+// The function returns the following values:
+// 
+// 	- goret Texture 
+// 	- _goerr error (nullable): an error 
+//
+// Creates a new texture by loading an image from memory,
+// 
+// The file format is detected automatically. The supported formats
+// are PNG, JPEG and TIFF, though more formats might be available.
+// 
+// If %NULL is returned, then @error will be set.
+// 
+// This function is threadsafe, so that you can e.g. use GTask
+// and [method@Gio.Task.run_in_thread] to avoid blocking the main thread
+// while loading a big image.
+func NewTextureInstanceFromBytes(bytes *glib.Bytes) (Texture, error) {
+	var carg1 *C.GBytes     // in, none, converted
+	var cret  *C.GdkTexture // return, full, converted
+	var _cerr *C.GError     // out, full, converted, nullable
+
+	carg1 = (*C.GBytes)(glib.UnsafeBytesToGlibNone(bytes))
+
+	cret = C.gdk_texture_new_from_bytes(carg1, &_cerr)
+	runtime.KeepAlive(bytes)
+
+	var goret  Texture
+	var _goerr error
+
+	goret = UnsafeTextureFromGlibFull(unsafe.Pointer(cret))
+	if _cerr != nil {
+		_goerr = glib.UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
+	}
+
+	return goret, _goerr
 }
 
 // NewTextureInstanceFromFile wraps gdk_texture_new_from_file
@@ -21016,7 +21021,7 @@ func NewTextureInstanceForPixbuf(pixbuf gdkpixbuf.Pixbuf) Texture {
 // 
 // The function returns the following values:
 // 
-// 	- ret Texture 
+// 	- goret Texture 
 // 	- _goerr error (nullable): an error 
 //
 // Creates a new texture by loading an image from a file.
@@ -21034,20 +21039,20 @@ func NewTextureInstanceFromFile(file gio.File) (Texture, error) {
 	var cret  *C.GdkTexture // return, full, converted
 	var _cerr *C.GError     // out, full, converted, nullable
 
-	carg1 = (*C.GFile)(UnsafeFileToGlibNone(file))
+	carg1 = (*C.GFile)(gio.UnsafeFileToGlibNone(file))
 
 	cret = C.gdk_texture_new_from_file(carg1, &_cerr)
 	runtime.KeepAlive(file)
 
-	var ret    Texture
+	var goret  Texture
 	var _goerr error
 
-	ret = UnsafeTextureFromGlibFull(unsafe.Pointer(cret))
+	goret = UnsafeTextureFromGlibFull(unsafe.Pointer(cret))
 	if _cerr != nil {
-		_goerr = UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
+		_goerr = glib.UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
 	}
 
-	return ret, _goerr
+	return goret, _goerr
 }
 
 // NewTextureInstanceFromFilename wraps gdk_texture_new_from_filename
@@ -21058,7 +21063,7 @@ func NewTextureInstanceFromFile(file gio.File) (Texture, error) {
 // 
 // The function returns the following values:
 // 
-// 	- ret Texture 
+// 	- goret Texture 
 // 	- _goerr error (nullable): an error 
 //
 // Creates a new texture by loading an image from a file.
@@ -21082,15 +21087,15 @@ func NewTextureInstanceFromFilename(path string) (Texture, error) {
 	cret = C.gdk_texture_new_from_filename(carg1, &_cerr)
 	runtime.KeepAlive(path)
 
-	var ret    Texture
+	var goret  Texture
 	var _goerr error
 
-	ret = UnsafeTextureFromGlibFull(unsafe.Pointer(cret))
+	goret = UnsafeTextureFromGlibFull(unsafe.Pointer(cret))
 	if _cerr != nil {
-		_goerr = UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
+		_goerr = glib.UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
 	}
 
-	return ret, _goerr
+	return goret, _goerr
 }
 
 // NewTextureInstanceFromResource wraps gdk_texture_new_from_resource
@@ -21101,7 +21106,7 @@ func NewTextureInstanceFromFilename(path string) (Texture, error) {
 // 
 // The function returns the following values:
 // 
-// 	- ret Texture 
+// 	- goret Texture 
 //
 // Creates a new texture by loading an image from a resource.
 // 
@@ -21126,20 +21131,20 @@ func NewTextureInstanceFromResource(resourcePath string) Texture {
 	cret = C.gdk_texture_new_from_resource(carg1)
 	runtime.KeepAlive(resourcePath)
 
-	var ret Texture
+	var goret Texture
 
-	ret = UnsafeTextureFromGlibFull(unsafe.Pointer(cret))
+	goret = UnsafeTextureFromGlibFull(unsafe.Pointer(cret))
 
-	return ret
+	return goret
 }
 
 // GetColorState wraps gdk_texture_get_color_state
 // The function returns the following values:
 // 
-// 	- ret ColorState 
+// 	- goret *ColorState 
 //
 // Returns the color state associated with the texture.
-func (self *TextureInstance) GetColorState() ColorState {
+func (self *TextureInstance) GetColorState() *ColorState {
 	var carg0 *C.GdkTexture    // in, none, converted
 	var cret  *C.GdkColorState // return, none, converted
 
@@ -21148,17 +21153,17 @@ func (self *TextureInstance) GetColorState() ColorState {
 	cret = C.gdk_texture_get_color_state(carg0)
 	runtime.KeepAlive(self)
 
-	var ret ColorState
+	var goret *ColorState
 
-	ret = UnsafeColorStateFromGlibNone(unsafe.Pointer(cret))
+	goret = UnsafeColorStateFromGlibNone(unsafe.Pointer(cret))
 
-	return ret
+	return goret
 }
 
 // GetFormat wraps gdk_texture_get_format
 // The function returns the following values:
 // 
-// 	- ret MemoryFormat 
+// 	- goret MemoryFormat 
 //
 // Gets the memory format most closely associated with the data of
 // the texture.
@@ -21178,17 +21183,17 @@ func (self *TextureInstance) GetFormat() MemoryFormat {
 	cret = C.gdk_texture_get_format(carg0)
 	runtime.KeepAlive(self)
 
-	var ret MemoryFormat
+	var goret MemoryFormat
 
-	ret = MemoryFormat(cret)
+	goret = MemoryFormat(cret)
 
-	return ret
+	return goret
 }
 
 // GetHeight wraps gdk_texture_get_height
 // The function returns the following values:
 // 
-// 	- ret int 
+// 	- goret int 
 //
 // Returns the height of the @texture, in pixels.
 func (texture *TextureInstance) GetHeight() int {
@@ -21200,17 +21205,17 @@ func (texture *TextureInstance) GetHeight() int {
 	cret = C.gdk_texture_get_height(carg0)
 	runtime.KeepAlive(texture)
 
-	var ret int
+	var goret int
 
-	ret = int(cret)
+	goret = int(cret)
 
-	return ret
+	return goret
 }
 
 // GetWidth wraps gdk_texture_get_width
 // The function returns the following values:
 // 
-// 	- ret int 
+// 	- goret int 
 //
 // Returns the width of @texture, in pixels.
 func (texture *TextureInstance) GetWidth() int {
@@ -21222,11 +21227,11 @@ func (texture *TextureInstance) GetWidth() int {
 	cret = C.gdk_texture_get_width(carg0)
 	runtime.KeepAlive(texture)
 
-	var ret int
+	var goret int
 
-	ret = int(cret)
+	goret = int(cret)
 
-	return ret
+	return goret
 }
 
 // SaveToPNG wraps gdk_texture_save_to_png
@@ -21237,7 +21242,7 @@ func (texture *TextureInstance) GetWidth() int {
 // 
 // The function returns the following values:
 // 
-// 	- ret bool 
+// 	- goret bool 
 //
 // Store the given @texture to the @filename as a PNG file.
 // 
@@ -21259,13 +21264,48 @@ func (texture *TextureInstance) SaveToPNG(filename string) bool {
 	runtime.KeepAlive(texture)
 	runtime.KeepAlive(filename)
 
-	var ret bool
+	var goret bool
 
 	if cret != 0 {
-		ret = true
+		goret = true
 	}
 
-	return ret
+	return goret
+}
+
+// SaveToPNGBytes wraps gdk_texture_save_to_png_bytes
+// The function returns the following values:
+// 
+// 	- goret *glib.Bytes 
+//
+// Store the given @texture in memory as a PNG file.
+// 
+// Use [ctor@Gdk.Texture.new_from_bytes] to read it back.
+// 
+// If you want to serialize a texture, this is a convenient and
+// portable way to do that.
+// 
+// If you need more control over the generated image, such as
+// attaching metadata, you should look into an image handling
+// library such as the gdk-pixbuf library.
+// 
+// If you are dealing with high dynamic range float data, you
+// might also want to consider [method@Gdk.Texture.save_to_tiff_bytes]
+// instead.
+func (texture *TextureInstance) SaveToPNGBytes() *glib.Bytes {
+	var carg0 *C.GdkTexture // in, none, converted
+	var cret  *C.GBytes     // return, full, converted
+
+	carg0 = (*C.GdkTexture)(UnsafeTextureToGlibNone(texture))
+
+	cret = C.gdk_texture_save_to_png_bytes(carg0)
+	runtime.KeepAlive(texture)
+
+	var goret *glib.Bytes
+
+	goret = glib.UnsafeBytesFromGlibFull(unsafe.Pointer(cret))
+
+	return goret
 }
 
 // SaveToTIFF wraps gdk_texture_save_to_tiff
@@ -21276,7 +21316,7 @@ func (texture *TextureInstance) SaveToPNG(filename string) bool {
 // 
 // The function returns the following values:
 // 
-// 	- ret bool 
+// 	- goret bool 
 //
 // Store the given @texture to the @filename as a TIFF file.
 // 
@@ -21294,13 +21334,46 @@ func (texture *TextureInstance) SaveToTIFF(filename string) bool {
 	runtime.KeepAlive(texture)
 	runtime.KeepAlive(filename)
 
-	var ret bool
+	var goret bool
 
 	if cret != 0 {
-		ret = true
+		goret = true
 	}
 
-	return ret
+	return goret
+}
+
+// SaveToTIFFBytes wraps gdk_texture_save_to_tiff_bytes
+// The function returns the following values:
+// 
+// 	- goret *glib.Bytes 
+//
+// Store the given @texture in memory as a TIFF file.
+// 
+// Use [ctor@Gdk.Texture.new_from_bytes] to read it back.
+// 
+// This function is intended to store a representation of the
+// texture's data that is as accurate as possible. This is
+// particularly relevant when working with high dynamic range
+// images and floating-point texture data.
+// 
+// If that is not your concern and you are interested in a
+// smaller size and a more portable format, you might want to
+// use [method@Gdk.Texture.save_to_png_bytes].
+func (texture *TextureInstance) SaveToTIFFBytes() *glib.Bytes {
+	var carg0 *C.GdkTexture // in, none, converted
+	var cret  *C.GBytes     // return, full, converted
+
+	carg0 = (*C.GdkTexture)(UnsafeTextureToGlibNone(texture))
+
+	cret = C.gdk_texture_save_to_tiff_bytes(carg0)
+	runtime.KeepAlive(texture)
+
+	var goret *glib.Bytes
+
+	goret = glib.UnsafeBytesFromGlibFull(unsafe.Pointer(cret))
+
+	return goret
 }
 
 // VulkanContextInstance is the instance type used by all types extending GdkVulkanContext. It is used internally by the bindings. Users should use the interface [VulkanContext] instead.
@@ -21308,7 +21381,7 @@ type VulkanContextInstance struct {
 	_ [0]func() // equal guard
 	DrawContextInstance
 	// implemented interfaces:
-gio.Initable
+	gio.InitableInstance
 }
 
 var _ VulkanContext = (*VulkanContextInstance)(nil)
@@ -21331,37 +21404,31 @@ type VulkanContext interface {
 	DrawContext
 	gio.Initable
 	upcastToGdkVulkanContext() *VulkanContextInstance
-
 }
 
-func unsafeWrapVulkanContext(base *ObjectInstance) *VulkanContextInstance {
+func unsafeWrapVulkanContext(base *gobject.ObjectInstance) *VulkanContextInstance {
 	return &VulkanContextInstance{
-		ObjectInstance: gobject.ObjectInstance{
+		DrawContextInstance: DrawContextInstance{
 			ObjectInstance: *base,
 		},
 		InitableInstance: gio.InitableInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 	}
 }
 
-func marshalVulkanContextInstance(p uintptr) (interface{}, error) {
-	return unsafeWrapVulkanContext(gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Object()), nil
-}
-
-// UnsafeVulkanContextFromGlibBorrow is used to convert raw GdkVulkanContext pointers to go. This is used by the bindings internally.
-func UnsafeVulkanContextFromGlibBorrow(c unsafe.Pointer) VulkanContext {
-	return TODOBorrow(c).(VulkanContext)
+func marshalVulkanContextInstance(p unsafe.Pointer) (any, error) {
+	return unsafeWrapVulkanContext(gobject.ValueFromNative(p).Object()), nil
 }
 
 // UnsafeVulkanContextFromGlibNone is used to convert raw GdkVulkanContext pointers to go while taking a reference and attaching a finalizer. This is used by the bindings internally.
 func UnsafeVulkanContextFromGlibNone(c unsafe.Pointer) VulkanContext {
-	return Take(c).(VulkanContext)
+	return gobject.UnsafeObjectFromGlibNone(c).(VulkanContext)
 }
 
 // UnsafeVulkanContextFromGlibFull is used to convert raw GdkVulkanContext pointers to go while attaching a finalizer. This is used by the bindings internally.
 func UnsafeVulkanContextFromGlibFull(c unsafe.Pointer) VulkanContext {
-	return AssumeOwnership(c).(VulkanContext)
+	return gobject.UnsafeObjectFromGlibFull(c).(VulkanContext)
 }
 
 func (v *VulkanContextInstance) upcastToGdkVulkanContext() *VulkanContextInstance {
@@ -21370,12 +21437,12 @@ func (v *VulkanContextInstance) upcastToGdkVulkanContext() *VulkanContextInstanc
 
 // UnsafeVulkanContextToGlibNone is used to convert the instance to it's C value GdkVulkanContext. This is used by the bindings internally.
 func UnsafeVulkanContextToGlibNone(c VulkanContext) unsafe.Pointer {
-	return TODOToNone(c)
+	return gobject.UnsafeObjectToGlibNone(c)
 }
 
 // UnsafeVulkanContextToGlibFull is used to convert the instance to it's C value GdkVulkanContext, while removeing the finalizer. This is used by the bindings internally.
 func UnsafeVulkanContextToGlibFull(c VulkanContext) unsafe.Pointer {
-	return TODOToFull(c)
+	return gobject.UnsafeObjectToGlibFull(c)
 }
 
 // CairoContextInstance is the instance type used by all types extending GdkCairoContext. It is used internally by the bindings. Users should use the interface [CairoContext] instead.
@@ -21397,34 +21464,28 @@ var _ CairoContext = (*CairoContextInstance)(nil)
 type CairoContext interface {
 	DrawContext
 	upcastToGdkCairoContext() *CairoContextInstance
-
 }
 
-func unsafeWrapCairoContext(base *ObjectInstance) *CairoContextInstance {
+func unsafeWrapCairoContext(base *gobject.ObjectInstance) *CairoContextInstance {
 	return &CairoContextInstance{
-		ObjectInstance: gobject.ObjectInstance{
+		DrawContextInstance: DrawContextInstance{
 			ObjectInstance: *base,
 		},
 	}
 }
 
-func marshalCairoContextInstance(p uintptr) (interface{}, error) {
-	return unsafeWrapCairoContext(gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Object()), nil
-}
-
-// UnsafeCairoContextFromGlibBorrow is used to convert raw GdkCairoContext pointers to go. This is used by the bindings internally.
-func UnsafeCairoContextFromGlibBorrow(c unsafe.Pointer) CairoContext {
-	return TODOBorrow(c).(CairoContext)
+func marshalCairoContextInstance(p unsafe.Pointer) (any, error) {
+	return unsafeWrapCairoContext(gobject.ValueFromNative(p).Object()), nil
 }
 
 // UnsafeCairoContextFromGlibNone is used to convert raw GdkCairoContext pointers to go while taking a reference and attaching a finalizer. This is used by the bindings internally.
 func UnsafeCairoContextFromGlibNone(c unsafe.Pointer) CairoContext {
-	return Take(c).(CairoContext)
+	return gobject.UnsafeObjectFromGlibNone(c).(CairoContext)
 }
 
 // UnsafeCairoContextFromGlibFull is used to convert raw GdkCairoContext pointers to go while attaching a finalizer. This is used by the bindings internally.
 func UnsafeCairoContextFromGlibFull(c unsafe.Pointer) CairoContext {
-	return AssumeOwnership(c).(CairoContext)
+	return gobject.UnsafeObjectFromGlibFull(c).(CairoContext)
 }
 
 func (c *CairoContextInstance) upcastToGdkCairoContext() *CairoContextInstance {
@@ -21433,12 +21494,12 @@ func (c *CairoContextInstance) upcastToGdkCairoContext() *CairoContextInstance {
 
 // UnsafeCairoContextToGlibNone is used to convert the instance to it's C value GdkCairoContext. This is used by the bindings internally.
 func UnsafeCairoContextToGlibNone(c CairoContext) unsafe.Pointer {
-	return TODOToNone(c)
+	return gobject.UnsafeObjectToGlibNone(c)
 }
 
 // UnsafeCairoContextToGlibFull is used to convert the instance to it's C value GdkCairoContext, while removeing the finalizer. This is used by the bindings internally.
 func UnsafeCairoContextToGlibFull(c CairoContext) unsafe.Pointer {
-	return TODOToFull(c)
+	return gobject.UnsafeObjectToGlibFull(c)
 }
 
 // DmabufTextureInstance is the instance type used by all types extending GdkDmabufTexture. It is used internally by the bindings. Users should use the interface [DmabufTexture] instead.
@@ -21446,7 +21507,7 @@ type DmabufTextureInstance struct {
 	_ [0]func() // equal guard
 	TextureInstance
 	// implemented interfaces:
-Paintable
+	PaintableInstance
 }
 
 var _ DmabufTexture = (*DmabufTextureInstance)(nil)
@@ -21463,43 +21524,37 @@ type DmabufTexture interface {
 	Texture
 	Paintable
 	upcastToGdkDmabufTexture() *DmabufTextureInstance
-
 }
 
-func unsafeWrapDmabufTexture(base *ObjectInstance) *DmabufTextureInstance {
+func unsafeWrapDmabufTexture(base *gobject.ObjectInstance) *DmabufTextureInstance {
 	return &DmabufTextureInstance{
-		ObjectInstance: gobject.ObjectInstance{
+		TextureInstance: TextureInstance{
 			ObjectInstance: *base,
 			IconInstance: gio.IconInstance{
-				ObjectInstance: *base,
+				Instance: *base,
 			},
 			LoadableIconInstance: gio.LoadableIconInstance{
-				ObjectInstance: *base,
+				Instance: *base,
 			},
 		},
 		PaintableInstance: PaintableInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 	}
 }
 
-func marshalDmabufTextureInstance(p uintptr) (interface{}, error) {
-	return unsafeWrapDmabufTexture(gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Object()), nil
-}
-
-// UnsafeDmabufTextureFromGlibBorrow is used to convert raw GdkDmabufTexture pointers to go. This is used by the bindings internally.
-func UnsafeDmabufTextureFromGlibBorrow(c unsafe.Pointer) DmabufTexture {
-	return TODOBorrow(c).(DmabufTexture)
+func marshalDmabufTextureInstance(p unsafe.Pointer) (any, error) {
+	return unsafeWrapDmabufTexture(gobject.ValueFromNative(p).Object()), nil
 }
 
 // UnsafeDmabufTextureFromGlibNone is used to convert raw GdkDmabufTexture pointers to go while taking a reference and attaching a finalizer. This is used by the bindings internally.
 func UnsafeDmabufTextureFromGlibNone(c unsafe.Pointer) DmabufTexture {
-	return Take(c).(DmabufTexture)
+	return gobject.UnsafeObjectFromGlibNone(c).(DmabufTexture)
 }
 
 // UnsafeDmabufTextureFromGlibFull is used to convert raw GdkDmabufTexture pointers to go while attaching a finalizer. This is used by the bindings internally.
 func UnsafeDmabufTextureFromGlibFull(c unsafe.Pointer) DmabufTexture {
-	return AssumeOwnership(c).(DmabufTexture)
+	return gobject.UnsafeObjectFromGlibFull(c).(DmabufTexture)
 }
 
 func (d *DmabufTextureInstance) upcastToGdkDmabufTexture() *DmabufTextureInstance {
@@ -21508,12 +21563,12 @@ func (d *DmabufTextureInstance) upcastToGdkDmabufTexture() *DmabufTextureInstanc
 
 // UnsafeDmabufTextureToGlibNone is used to convert the instance to it's C value GdkDmabufTexture. This is used by the bindings internally.
 func UnsafeDmabufTextureToGlibNone(c DmabufTexture) unsafe.Pointer {
-	return TODOToNone(c)
+	return gobject.UnsafeObjectToGlibNone(c)
 }
 
 // UnsafeDmabufTextureToGlibFull is used to convert the instance to it's C value GdkDmabufTexture, while removeing the finalizer. This is used by the bindings internally.
 func UnsafeDmabufTextureToGlibFull(c DmabufTexture) unsafe.Pointer {
-	return TODOToFull(c)
+	return gobject.UnsafeObjectToGlibFull(c)
 }
 
 // GLTextureInstance is the instance type used by all types extending GdkGLTexture. It is used internally by the bindings. Users should use the interface [GLTexture] instead.
@@ -21521,7 +21576,7 @@ type GLTextureInstance struct {
 	_ [0]func() // equal guard
 	TextureInstance
 	// implemented interfaces:
-Paintable
+	PaintableInstance
 }
 
 var _ GLTexture = (*GLTextureInstance)(nil)
@@ -21544,40 +21599,35 @@ type GLTexture interface {
 	Release()
 }
 
-func unsafeWrapGLTexture(base *ObjectInstance) *GLTextureInstance {
+func unsafeWrapGLTexture(base *gobject.ObjectInstance) *GLTextureInstance {
 	return &GLTextureInstance{
-		ObjectInstance: gobject.ObjectInstance{
+		TextureInstance: TextureInstance{
 			ObjectInstance: *base,
 			IconInstance: gio.IconInstance{
-				ObjectInstance: *base,
+				Instance: *base,
 			},
 			LoadableIconInstance: gio.LoadableIconInstance{
-				ObjectInstance: *base,
+				Instance: *base,
 			},
 		},
 		PaintableInstance: PaintableInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 	}
 }
 
-func marshalGLTextureInstance(p uintptr) (interface{}, error) {
-	return unsafeWrapGLTexture(gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Object()), nil
-}
-
-// UnsafeGLTextureFromGlibBorrow is used to convert raw GdkGLTexture pointers to go. This is used by the bindings internally.
-func UnsafeGLTextureFromGlibBorrow(c unsafe.Pointer) GLTexture {
-	return TODOBorrow(c).(GLTexture)
+func marshalGLTextureInstance(p unsafe.Pointer) (any, error) {
+	return unsafeWrapGLTexture(gobject.ValueFromNative(p).Object()), nil
 }
 
 // UnsafeGLTextureFromGlibNone is used to convert raw GdkGLTexture pointers to go while taking a reference and attaching a finalizer. This is used by the bindings internally.
 func UnsafeGLTextureFromGlibNone(c unsafe.Pointer) GLTexture {
-	return Take(c).(GLTexture)
+	return gobject.UnsafeObjectFromGlibNone(c).(GLTexture)
 }
 
 // UnsafeGLTextureFromGlibFull is used to convert raw GdkGLTexture pointers to go while attaching a finalizer. This is used by the bindings internally.
 func UnsafeGLTextureFromGlibFull(c unsafe.Pointer) GLTexture {
-	return AssumeOwnership(c).(GLTexture)
+	return gobject.UnsafeObjectFromGlibFull(c).(GLTexture)
 }
 
 func (g *GLTextureInstance) upcastToGdkGLTexture() *GLTextureInstance {
@@ -21586,12 +21636,12 @@ func (g *GLTextureInstance) upcastToGdkGLTexture() *GLTextureInstance {
 
 // UnsafeGLTextureToGlibNone is used to convert the instance to it's C value GdkGLTexture. This is used by the bindings internally.
 func UnsafeGLTextureToGlibNone(c GLTexture) unsafe.Pointer {
-	return TODOToNone(c)
+	return gobject.UnsafeObjectToGlibNone(c)
 }
 
 // UnsafeGLTextureToGlibFull is used to convert the instance to it's C value GdkGLTexture, while removeing the finalizer. This is used by the bindings internally.
 func UnsafeGLTextureToGlibFull(c GLTexture) unsafe.Pointer {
-	return TODOToFull(c)
+	return gobject.UnsafeObjectToGlibFull(c)
 }
 
 // Release wraps gdk_gl_texture_release
@@ -21615,7 +21665,7 @@ type MemoryTextureInstance struct {
 	_ [0]func() // equal guard
 	TextureInstance
 	// implemented interfaces:
-Paintable
+	PaintableInstance
 }
 
 var _ MemoryTexture = (*MemoryTextureInstance)(nil)
@@ -21627,43 +21677,37 @@ type MemoryTexture interface {
 	Texture
 	Paintable
 	upcastToGdkMemoryTexture() *MemoryTextureInstance
-
 }
 
-func unsafeWrapMemoryTexture(base *ObjectInstance) *MemoryTextureInstance {
+func unsafeWrapMemoryTexture(base *gobject.ObjectInstance) *MemoryTextureInstance {
 	return &MemoryTextureInstance{
-		ObjectInstance: gobject.ObjectInstance{
+		TextureInstance: TextureInstance{
 			ObjectInstance: *base,
 			IconInstance: gio.IconInstance{
-				ObjectInstance: *base,
+				Instance: *base,
 			},
 			LoadableIconInstance: gio.LoadableIconInstance{
-				ObjectInstance: *base,
+				Instance: *base,
 			},
 		},
 		PaintableInstance: PaintableInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 	}
 }
 
-func marshalMemoryTextureInstance(p uintptr) (interface{}, error) {
-	return unsafeWrapMemoryTexture(gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Object()), nil
-}
-
-// UnsafeMemoryTextureFromGlibBorrow is used to convert raw GdkMemoryTexture pointers to go. This is used by the bindings internally.
-func UnsafeMemoryTextureFromGlibBorrow(c unsafe.Pointer) MemoryTexture {
-	return TODOBorrow(c).(MemoryTexture)
+func marshalMemoryTextureInstance(p unsafe.Pointer) (any, error) {
+	return unsafeWrapMemoryTexture(gobject.ValueFromNative(p).Object()), nil
 }
 
 // UnsafeMemoryTextureFromGlibNone is used to convert raw GdkMemoryTexture pointers to go while taking a reference and attaching a finalizer. This is used by the bindings internally.
 func UnsafeMemoryTextureFromGlibNone(c unsafe.Pointer) MemoryTexture {
-	return Take(c).(MemoryTexture)
+	return gobject.UnsafeObjectFromGlibNone(c).(MemoryTexture)
 }
 
 // UnsafeMemoryTextureFromGlibFull is used to convert raw GdkMemoryTexture pointers to go while attaching a finalizer. This is used by the bindings internally.
 func UnsafeMemoryTextureFromGlibFull(c unsafe.Pointer) MemoryTexture {
-	return AssumeOwnership(c).(MemoryTexture)
+	return gobject.UnsafeObjectFromGlibFull(c).(MemoryTexture)
 }
 
 func (m *MemoryTextureInstance) upcastToGdkMemoryTexture() *MemoryTextureInstance {
@@ -21672,12 +21716,58 @@ func (m *MemoryTextureInstance) upcastToGdkMemoryTexture() *MemoryTextureInstanc
 
 // UnsafeMemoryTextureToGlibNone is used to convert the instance to it's C value GdkMemoryTexture. This is used by the bindings internally.
 func UnsafeMemoryTextureToGlibNone(c MemoryTexture) unsafe.Pointer {
-	return TODOToNone(c)
+	return gobject.UnsafeObjectToGlibNone(c)
 }
 
 // UnsafeMemoryTextureToGlibFull is used to convert the instance to it's C value GdkMemoryTexture, while removeing the finalizer. This is used by the bindings internally.
 func UnsafeMemoryTextureToGlibFull(c MemoryTexture) unsafe.Pointer {
-	return TODOToFull(c)
+	return gobject.UnsafeObjectToGlibFull(c)
+}
+
+// NewMemoryTextureInstance wraps gdk_memory_texture_new
+// 
+// The function takes the following parameters:
+// 
+// 	- width int: the width of the texture 
+// 	- height int: the height of the texture 
+// 	- format MemoryFormat: the format of the data 
+// 	- bytes *glib.Bytes: the `GBytes` containing the pixel data 
+// 	- stride uint: rowstride for the data 
+// 
+// The function returns the following values:
+// 
+// 	- goret MemoryTexture 
+//
+// Creates a new texture for a blob of image data.
+// 
+// The `GBytes` must contain @stride × @height pixels
+// in the given format.
+func NewMemoryTextureInstance(width int, height int, format MemoryFormat, bytes *glib.Bytes, stride uint) MemoryTexture {
+	var carg1 C.int             // in, none, casted
+	var carg2 C.int             // in, none, casted
+	var carg3 C.GdkMemoryFormat // in, none, casted
+	var carg4 *C.GBytes         // in, none, converted
+	var carg5 C.gsize           // in, none, casted
+	var cret  *C.GdkTexture     // return, full, converted, returned class
+
+	carg1 = C.int(width)
+	carg2 = C.int(height)
+	carg3 = C.GdkMemoryFormat(format)
+	carg4 = (*C.GBytes)(glib.UnsafeBytesToGlibNone(bytes))
+	carg5 = C.gsize(stride)
+
+	cret = C.gdk_memory_texture_new(carg1, carg2, carg3, carg4, carg5)
+	runtime.KeepAlive(width)
+	runtime.KeepAlive(height)
+	runtime.KeepAlive(format)
+	runtime.KeepAlive(bytes)
+	runtime.KeepAlive(stride)
+
+	var goret MemoryTexture
+
+	goret = UnsafeMemoryTextureFromGlibFull(unsafe.Pointer(cret))
+
+	return goret
 }
 
 // CicpParamsClass wraps GdkCicpParamsClass
@@ -21693,6 +21783,19 @@ type cicpParamsClass struct {
 // UnsafeCicpParamsClassFromGlibBorrow is used to convert raw C.GdkCicpParamsClass pointers to go. This is used by the bindings internally.
 func UnsafeCicpParamsClassFromGlibBorrow(p unsafe.Pointer) *CicpParamsClass {
 	return &CicpParamsClass{&cicpParamsClass{(*C.GdkCicpParamsClass)(p)}}
+}
+
+// UnsafeCicpParamsClassFromGlibNone is used to convert raw C.GdkCicpParamsClass pointers to go while taking a reference. This is used by the bindings internally.
+func UnsafeCicpParamsClassFromGlibNone(p unsafe.Pointer) *CicpParamsClass {
+	// FIXME: this has no ref function, what should we do here?
+	wrapped := UnsafeCicpParamsClassFromGlibBorrow(p)
+	runtime.SetFinalizer(
+		wrapped.cicpParamsClass,
+		func (intern *cicpParamsClass) {
+			C.free(unsafe.Pointer(intern.native))
+		},
+	)
+	return wrapped
 }
 
 // UnsafeCicpParamsClassFromGlibFull is used to convert raw C.GdkCicpParamsClass pointers to go while taking a reference. This is used by the bindings internally.
@@ -21748,9 +21851,16 @@ type colorState struct {
 	native *C.GdkColorState
 }
 
-func marshalColorState(p uintptr) (interface{}, error) {
-	b := gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Boxed()
+var _ gobject.GoValueInitializer = (*ColorState)(nil)
+
+func marshalColorState(p unsafe.Pointer) (interface{}, error) {
+	b := gobject.ValueFromNative(p).Boxed()
 	return UnsafeColorStateFromGlibBorrow(b), nil
+}
+
+func (r *ColorState) InitGoValue(v *gobject.Value) {
+	v.Init(TypeColorState)
+	v.SetBoxed(unsafe.Pointer(r.native))
 }
 
 // UnsafeColorStateFromGlibBorrow is used to convert raw C.GdkColorState pointers to go. This is used by the bindings internally.
@@ -21760,8 +21870,8 @@ func UnsafeColorStateFromGlibBorrow(p unsafe.Pointer) *ColorState {
 
 // UnsafeColorStateFromGlibNone is used to convert raw C.GdkColorState pointers to go while taking a reference. This is used by the bindings internally.
 func UnsafeColorStateFromGlibNone(p unsafe.Pointer) *ColorState {
-	C.gdk_color_state_ref(p)
-	wrapped := UnsafeColorStateFromGlibNone(p)
+	C.gdk_color_state_ref((*C.GdkColorState)(p))
+	wrapped := UnsafeColorStateFromGlibBorrow(p)
 	runtime.SetFinalizer(
 		wrapped.colorState,
 		func (intern *colorState) {
@@ -21813,7 +21923,7 @@ func UnsafeColorStateToGlibFull(c *ColorState) unsafe.Pointer {
 // CreateCicpParams wraps gdk_color_state_create_cicp_params
 // The function returns the following values:
 // 
-// 	- ret CicpParams 
+// 	- goret CicpParams 
 //
 // Create a [class@Gdk.CicpParams] representing the colorstate.
 // 
@@ -21829,29 +21939,29 @@ func (self *ColorState) CreateCicpParams() CicpParams {
 	cret = C.gdk_color_state_create_cicp_params(carg0)
 	runtime.KeepAlive(self)
 
-	var ret CicpParams
+	var goret CicpParams
 
-	ret = UnsafeCicpParamsFromGlibFull(unsafe.Pointer(cret))
+	goret = UnsafeCicpParamsFromGlibFull(unsafe.Pointer(cret))
 
-	return ret
+	return goret
 }
 
 // Equal wraps gdk_color_state_equal
 // 
 // The function takes the following parameters:
 // 
-// 	- other ColorState: another `GdkColorStatee` 
+// 	- other *ColorState: another `GdkColorStatee` 
 // 
 // The function returns the following values:
 // 
-// 	- ret bool 
+// 	- goret bool 
 //
 // Compares two `GdkColorStates` for equality.
 // 
 // Note that this function is not guaranteed to be perfect and two objects
 // describing the same color state may compare not equal. However, different
 // color states will never compare equal.
-func (self *ColorState) Equal(other ColorState) bool {
+func (self *ColorState) Equal(other *ColorState) bool {
 	var carg0 *C.GdkColorState // in, none, converted
 	var carg1 *C.GdkColorState // in, none, converted
 	var cret  C.gboolean       // return
@@ -21863,13 +21973,13 @@ func (self *ColorState) Equal(other ColorState) bool {
 	runtime.KeepAlive(self)
 	runtime.KeepAlive(other)
 
-	var ret bool
+	var goret bool
 
 	if cret != 0 {
-		ret = true
+		goret = true
 	}
 
-	return ret
+	return goret
 }
 
 // ContentFormats wraps GdkContentFormats
@@ -21915,9 +22025,16 @@ type contentFormats struct {
 	native *C.GdkContentFormats
 }
 
-func marshalContentFormats(p uintptr) (interface{}, error) {
-	b := gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Boxed()
+var _ gobject.GoValueInitializer = (*ContentFormats)(nil)
+
+func marshalContentFormats(p unsafe.Pointer) (interface{}, error) {
+	b := gobject.ValueFromNative(p).Boxed()
 	return UnsafeContentFormatsFromGlibBorrow(b), nil
+}
+
+func (r *ContentFormats) InitGoValue(v *gobject.Value) {
+	v.Init(TypeContentFormats)
+	v.SetBoxed(unsafe.Pointer(r.native))
 }
 
 // UnsafeContentFormatsFromGlibBorrow is used to convert raw C.GdkContentFormats pointers to go. This is used by the bindings internally.
@@ -21927,8 +22044,8 @@ func UnsafeContentFormatsFromGlibBorrow(p unsafe.Pointer) *ContentFormats {
 
 // UnsafeContentFormatsFromGlibNone is used to convert raw C.GdkContentFormats pointers to go while taking a reference. This is used by the bindings internally.
 func UnsafeContentFormatsFromGlibNone(p unsafe.Pointer) *ContentFormats {
-	C.gdk_content_formats_ref(p)
-	wrapped := UnsafeContentFormatsFromGlibNone(p)
+	C.gdk_content_formats_ref((*C.GdkContentFormats)(p))
+	wrapped := UnsafeContentFormatsFromGlibBorrow(p)
 	runtime.SetFinalizer(
 		wrapped.contentFormats,
 		func (intern *contentFormats) {
@@ -21977,54 +22094,19 @@ func UnsafeContentFormatsToGlibFull(c *ContentFormats) unsafe.Pointer {
 	c.native = nil // ContentFormats is invalid from here on
 	return _p
 }
-// NewContentFormats wraps gdk_content_formats_new
-// 
-// The function takes the following parameters:
-// 
-// 	- mimeTypes array (nullable): Pointer to an
-//   array of mime types 
-// 
-// The function returns the following values:
-// 
-// 	- ret ContentFormats 
-//
-// Creates a new `GdkContentFormats` from an array of mime types.
-// 
-// The mime types must be valid and different from each other or the
-// behavior of the return value is undefined. If you cannot guarantee
-// this, use [struct@Gdk.ContentFormatsBuilder] instead.
-func NewContentFormats(mimeTypes array) ContentFormats {
-	var carg1 array                // in, transfer: none, scope: call, implicit: false, skip: false, optional: false, nullable: true, caller-allocates: false, has closure: false, has destroy: false, nullable
-	var carg2 C.guint              // implicit
-	var cret  *C.GdkContentFormats // return, full, converted
-
-	if mimeTypes != nil {
-		panic("unimplemented conversion of array (array)")
-	}
-
-	cret = C.gdk_content_formats_new(carg1, carg2)
-	runtime.KeepAlive(mimeTypes)
-
-	var ret ContentFormats
-
-	ret = UnsafeContentFormatsFromGlibFull(unsafe.Pointer(cret))
-
-	return ret
-}
-
 // NewContentFormatsForGType wraps gdk_content_formats_new_for_gtype
 // 
 // The function takes the following parameters:
 // 
-// 	- typ glib.Type: a `GType` 
+// 	- typ gobject.Type: a `GType` 
 // 
 // The function returns the following values:
 // 
-// 	- ret ContentFormats 
+// 	- goret *ContentFormats 
 //
 // Creates a new `GdkContentFormats` for a given `GType`.
-func NewContentFormatsForGType(typ glib.Type) ContentFormats {
-	var carg1 C.GType              // in, none, casted
+func NewContentFormatsForGType(typ gobject.Type) *ContentFormats {
+	var carg1 C.GType              // in, none, casted, alias
 	var cret  *C.GdkContentFormats // return, full, converted
 
 	carg1 = C.GType(typ)
@@ -22032,27 +22114,27 @@ func NewContentFormatsForGType(typ glib.Type) ContentFormats {
 	cret = C.gdk_content_formats_new_for_gtype(carg1)
 	runtime.KeepAlive(typ)
 
-	var ret ContentFormats
+	var goret *ContentFormats
 
-	ret = UnsafeContentFormatsFromGlibFull(unsafe.Pointer(cret))
+	goret = UnsafeContentFormatsFromGlibFull(unsafe.Pointer(cret))
 
-	return ret
+	return goret
 }
 
 // ContainGType wraps gdk_content_formats_contain_gtype
 // 
 // The function takes the following parameters:
 // 
-// 	- typ glib.Type: the `GType` to search for 
+// 	- typ gobject.Type: the `GType` to search for 
 // 
 // The function returns the following values:
 // 
-// 	- ret bool 
+// 	- goret bool 
 //
 // Checks if a given `GType` is part of the given @formats.
-func (formats *ContentFormats) ContainGType(typ glib.Type) bool {
+func (formats *ContentFormats) ContainGType(typ gobject.Type) bool {
 	var carg0 *C.GdkContentFormats // in, none, converted
-	var carg1 C.GType              // in, none, casted
+	var carg1 C.GType              // in, none, casted, alias
 	var cret  C.gboolean           // return
 
 	carg0 = (*C.GdkContentFormats)(UnsafeContentFormatsToGlibNone(formats))
@@ -22062,13 +22144,13 @@ func (formats *ContentFormats) ContainGType(typ glib.Type) bool {
 	runtime.KeepAlive(formats)
 	runtime.KeepAlive(typ)
 
-	var ret bool
+	var goret bool
 
 	if cret != 0 {
-		ret = true
+		goret = true
 	}
 
-	return ret
+	return goret
 }
 
 // ContainMIMEType wraps gdk_content_formats_contain_mime_type
@@ -22079,7 +22161,7 @@ func (formats *ContentFormats) ContainGType(typ glib.Type) bool {
 // 
 // The function returns the following values:
 // 
-// 	- ret bool 
+// 	- goret bool 
 //
 // Checks if a given mime type is part of the given @formats.
 func (formats *ContentFormats) ContainMIMEType(mimeType string) bool {
@@ -22095,13 +22177,13 @@ func (formats *ContentFormats) ContainMIMEType(mimeType string) bool {
 	runtime.KeepAlive(formats)
 	runtime.KeepAlive(mimeType)
 
-	var ret bool
+	var goret bool
 
 	if cret != 0 {
-		ret = true
+		goret = true
 	}
 
-	return ret
+	return goret
 }
 
 // GetGTypes wraps gdk_content_formats_get_gtypes
@@ -22109,16 +22191,16 @@ func (formats *ContentFormats) ContainMIMEType(mimeType string) bool {
 // 
 // 	- nGtypes uint: optional pointer to take the
 //   number of `GType`s contained in the return value 
-// 	- ret array 
+// 	- goret []gobject.Type 
 //
 // Gets the `GType`s included in @formats.
 // 
 // Note that @formats may not contain any `GType`s, in particular when
 // they are empty. In that case %NULL will be returned.
-func (formats *ContentFormats) GetGTypes() (uint, array) {
+func (formats *ContentFormats) GetGTypes() (uint, []gobject.Type) {
 	var carg0 *C.GdkContentFormats // in, none, converted
 	var carg1 C.gsize              // out, full, casted
-	var cret  array                // return, transfer: none, scope: , implicit: false, skip: false, optional: false, nullable: false, caller-allocates: false, has closure: false, has destroy: false
+	var cret  *C.GType             // return, transfer: none, C Pointers: 1, Name: array[Type], scope: , array (inner: *typesystem.Alias, zero-terminated)
 
 	carg0 = (*C.GdkContentFormats)(UnsafeContentFormatsToGlibNone(formats))
 
@@ -22126,12 +22208,14 @@ func (formats *ContentFormats) GetGTypes() (uint, array) {
 	runtime.KeepAlive(formats)
 
 	var nGtypes uint
-	var ret     array
+	var goret   []gobject.Type
 
 	nGtypes = uint(carg1)
-	panic("unimplemented conversion of array (array)")
+	_ = goret
+	_ = cret
+	panic("unimplemented conversion of []gobject.Type (const GType*)")
 
-	return nGtypes, ret
+	return nGtypes, goret
 }
 
 // GetMIMETypes wraps gdk_content_formats_get_mime_types
@@ -22139,16 +22223,16 @@ func (formats *ContentFormats) GetGTypes() (uint, array) {
 // 
 // 	- nMimeTypes uint: optional pointer to take the
 //   number of mime types contained in the return value 
-// 	- ret array 
+// 	- goret []string 
 //
 // Gets the mime types included in @formats.
 // 
 // Note that @formats may not contain any mime types, in particular
 // when they are empty. In that case %NULL will be returned.
-func (formats *ContentFormats) GetMIMETypes() (uint, array) {
+func (formats *ContentFormats) GetMIMETypes() (uint, []string) {
 	var carg0 *C.GdkContentFormats // in, none, converted
 	var carg1 C.gsize              // out, full, casted
-	var cret  array                // return, transfer: none, scope: , implicit: false, skip: false, optional: false, nullable: false, caller-allocates: false, has closure: false, has destroy: false
+	var cret  **C.char             // return, transfer: none, C Pointers: 2, Name: array[utf8], scope: , array (inner: *typesystem.StringPrimitive, zero-terminated)
 
 	carg0 = (*C.GdkContentFormats)(UnsafeContentFormatsToGlibNone(formats))
 
@@ -22156,26 +22240,28 @@ func (formats *ContentFormats) GetMIMETypes() (uint, array) {
 	runtime.KeepAlive(formats)
 
 	var nMimeTypes uint
-	var ret        array
+	var goret      []string
 
 	nMimeTypes = uint(carg1)
-	panic("unimplemented conversion of array (array)")
+	_ = goret
+	_ = cret
+	panic("unimplemented conversion of []string (const char* const*)")
 
-	return nMimeTypes, ret
+	return nMimeTypes, goret
 }
 
 // Match wraps gdk_content_formats_match
 // 
 // The function takes the following parameters:
 // 
-// 	- second ContentFormats: the `GdkContentFormats` to intersect with 
+// 	- second *ContentFormats: the `GdkContentFormats` to intersect with 
 // 
 // The function returns the following values:
 // 
-// 	- ret bool 
+// 	- goret bool 
 //
 // Checks if @first and @second have any matching formats.
-func (first *ContentFormats) Match(second ContentFormats) bool {
+func (first *ContentFormats) Match(second *ContentFormats) bool {
 	var carg0 *C.GdkContentFormats // in, none, converted
 	var carg1 *C.GdkContentFormats // in, none, converted
 	var cret  C.gboolean           // return
@@ -22187,33 +22273,33 @@ func (first *ContentFormats) Match(second ContentFormats) bool {
 	runtime.KeepAlive(first)
 	runtime.KeepAlive(second)
 
-	var ret bool
+	var goret bool
 
 	if cret != 0 {
-		ret = true
+		goret = true
 	}
 
-	return ret
+	return goret
 }
 
 // MatchGType wraps gdk_content_formats_match_gtype
 // 
 // The function takes the following parameters:
 // 
-// 	- second ContentFormats: the `GdkContentFormats` to intersect with 
+// 	- second *ContentFormats: the `GdkContentFormats` to intersect with 
 // 
 // The function returns the following values:
 // 
-// 	- ret glib.Type 
+// 	- goret gobject.Type 
 //
 // Finds the first `GType` from @first that is also contained
 // in @second.
 // 
 // If no matching `GType` is found, %G_TYPE_INVALID is returned.
-func (first *ContentFormats) MatchGType(second ContentFormats) glib.Type {
+func (first *ContentFormats) MatchGType(second *ContentFormats) gobject.Type {
 	var carg0 *C.GdkContentFormats // in, none, converted
 	var carg1 *C.GdkContentFormats // in, none, converted
-	var cret  C.GType              // return, none, casted
+	var cret  C.GType              // return, none, casted, alias
 
 	carg0 = (*C.GdkContentFormats)(UnsafeContentFormatsToGlibNone(first))
 	carg1 = (*C.GdkContentFormats)(UnsafeContentFormatsToGlibNone(second))
@@ -22222,28 +22308,28 @@ func (first *ContentFormats) MatchGType(second ContentFormats) glib.Type {
 	runtime.KeepAlive(first)
 	runtime.KeepAlive(second)
 
-	var ret glib.Type
+	var goret gobject.Type
 
-	ret = glib.Type(cret)
+	goret = gobject.Type(cret)
 
-	return ret
+	return goret
 }
 
 // MatchMIMEType wraps gdk_content_formats_match_mime_type
 // 
 // The function takes the following parameters:
 // 
-// 	- second ContentFormats: the `GdkContentFormats` to intersect with 
+// 	- second *ContentFormats: the `GdkContentFormats` to intersect with 
 // 
 // The function returns the following values:
 // 
-// 	- ret string 
+// 	- goret string 
 //
 // Finds the first mime type from @first that is also contained
 // in @second.
 // 
 // If no matching mime type is found, %NULL is returned.
-func (first *ContentFormats) MatchMIMEType(second ContentFormats) string {
+func (first *ContentFormats) MatchMIMEType(second *ContentFormats) string {
 	var carg0 *C.GdkContentFormats // in, none, converted
 	var carg1 *C.GdkContentFormats // in, none, converted
 	var cret  *C.gchar             // return, none, string
@@ -22255,17 +22341,17 @@ func (first *ContentFormats) MatchMIMEType(second ContentFormats) string {
 	runtime.KeepAlive(first)
 	runtime.KeepAlive(second)
 
-	var ret string
+	var goret string
 
-	ret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
 
-	return ret
+	return goret
 }
 
 // ToString wraps gdk_content_formats_to_string
 // The function returns the following values:
 // 
-// 	- ret string 
+// 	- goret string 
 //
 // Prints the given @formats into a human-readable string.
 // 
@@ -22282,27 +22368,27 @@ func (formats *ContentFormats) ToString() string {
 	cret = C.gdk_content_formats_to_string(carg0)
 	runtime.KeepAlive(formats)
 
-	var ret string
+	var goret string
 
-	ret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
 	defer C.free(unsafe.Pointer(cret))
 
-	return ret
+	return goret
 }
 
 // Union wraps gdk_content_formats_union
 // 
 // The function takes the following parameters:
 // 
-// 	- second ContentFormats: the `GdkContentFormats` to merge from 
+// 	- second *ContentFormats: the `GdkContentFormats` to merge from 
 // 
 // The function returns the following values:
 // 
-// 	- ret ContentFormats 
+// 	- goret *ContentFormats 
 //
 // Append all missing types from @second to @first, in the order
 // they had in @second.
-func (first *ContentFormats) Union(second ContentFormats) ContentFormats {
+func (first *ContentFormats) Union(second *ContentFormats) *ContentFormats {
 	var carg0 *C.GdkContentFormats // in, none, converted
 	var carg1 *C.GdkContentFormats // in, none, converted
 	var cret  *C.GdkContentFormats // return, full, converted
@@ -22314,21 +22400,21 @@ func (first *ContentFormats) Union(second ContentFormats) ContentFormats {
 	runtime.KeepAlive(first)
 	runtime.KeepAlive(second)
 
-	var ret ContentFormats
+	var goret *ContentFormats
 
-	ret = UnsafeContentFormatsFromGlibFull(unsafe.Pointer(cret))
+	goret = UnsafeContentFormatsFromGlibFull(unsafe.Pointer(cret))
 
-	return ret
+	return goret
 }
 
 // UnionDeserializeGTypes wraps gdk_content_formats_union_deserialize_gtypes
 // The function returns the following values:
 // 
-// 	- ret ContentFormats 
+// 	- goret *ContentFormats 
 //
 // Add GTypes for mime types in @formats for which deserializers are
 // registered.
-func (formats *ContentFormats) UnionDeserializeGTypes() ContentFormats {
+func (formats *ContentFormats) UnionDeserializeGTypes() *ContentFormats {
 	var carg0 *C.GdkContentFormats // in, none, converted
 	var cret  *C.GdkContentFormats // return, full, converted
 
@@ -22337,21 +22423,21 @@ func (formats *ContentFormats) UnionDeserializeGTypes() ContentFormats {
 	cret = C.gdk_content_formats_union_deserialize_gtypes(carg0)
 	runtime.KeepAlive(formats)
 
-	var ret ContentFormats
+	var goret *ContentFormats
 
-	ret = UnsafeContentFormatsFromGlibFull(unsafe.Pointer(cret))
+	goret = UnsafeContentFormatsFromGlibFull(unsafe.Pointer(cret))
 
-	return ret
+	return goret
 }
 
 // UnionDeserializeMIMETypes wraps gdk_content_formats_union_deserialize_mime_types
 // The function returns the following values:
 // 
-// 	- ret ContentFormats 
+// 	- goret *ContentFormats 
 //
 // Add mime types for GTypes in @formats for which deserializers are
 // registered.
-func (formats *ContentFormats) UnionDeserializeMIMETypes() ContentFormats {
+func (formats *ContentFormats) UnionDeserializeMIMETypes() *ContentFormats {
 	var carg0 *C.GdkContentFormats // in, none, converted
 	var cret  *C.GdkContentFormats // return, full, converted
 
@@ -22360,21 +22446,21 @@ func (formats *ContentFormats) UnionDeserializeMIMETypes() ContentFormats {
 	cret = C.gdk_content_formats_union_deserialize_mime_types(carg0)
 	runtime.KeepAlive(formats)
 
-	var ret ContentFormats
+	var goret *ContentFormats
 
-	ret = UnsafeContentFormatsFromGlibFull(unsafe.Pointer(cret))
+	goret = UnsafeContentFormatsFromGlibFull(unsafe.Pointer(cret))
 
-	return ret
+	return goret
 }
 
 // UnionSerializeGTypes wraps gdk_content_formats_union_serialize_gtypes
 // The function returns the following values:
 // 
-// 	- ret ContentFormats 
+// 	- goret *ContentFormats 
 //
 // Add GTypes for the mime types in @formats for which serializers are
 // registered.
-func (formats *ContentFormats) UnionSerializeGTypes() ContentFormats {
+func (formats *ContentFormats) UnionSerializeGTypes() *ContentFormats {
 	var carg0 *C.GdkContentFormats // in, none, converted
 	var cret  *C.GdkContentFormats // return, full, converted
 
@@ -22383,21 +22469,21 @@ func (formats *ContentFormats) UnionSerializeGTypes() ContentFormats {
 	cret = C.gdk_content_formats_union_serialize_gtypes(carg0)
 	runtime.KeepAlive(formats)
 
-	var ret ContentFormats
+	var goret *ContentFormats
 
-	ret = UnsafeContentFormatsFromGlibFull(unsafe.Pointer(cret))
+	goret = UnsafeContentFormatsFromGlibFull(unsafe.Pointer(cret))
 
-	return ret
+	return goret
 }
 
 // UnionSerializeMIMETypes wraps gdk_content_formats_union_serialize_mime_types
 // The function returns the following values:
 // 
-// 	- ret ContentFormats 
+// 	- goret *ContentFormats 
 //
 // Add mime types for GTypes in @formats for which serializers are
 // registered.
-func (formats *ContentFormats) UnionSerializeMIMETypes() ContentFormats {
+func (formats *ContentFormats) UnionSerializeMIMETypes() *ContentFormats {
 	var carg0 *C.GdkContentFormats // in, none, converted
 	var cret  *C.GdkContentFormats // return, full, converted
 
@@ -22406,11 +22492,11 @@ func (formats *ContentFormats) UnionSerializeMIMETypes() ContentFormats {
 	cret = C.gdk_content_formats_union_serialize_mime_types(carg0)
 	runtime.KeepAlive(formats)
 
-	var ret ContentFormats
+	var goret *ContentFormats
 
-	ret = UnsafeContentFormatsFromGlibFull(unsafe.Pointer(cret))
+	goret = UnsafeContentFormatsFromGlibFull(unsafe.Pointer(cret))
 
-	return ret
+	return goret
 }
 
 // ContentFormatsBuilder wraps GdkContentFormatsBuilder
@@ -22426,9 +22512,16 @@ type contentFormatsBuilder struct {
 	native *C.GdkContentFormatsBuilder
 }
 
-func marshalContentFormatsBuilder(p uintptr) (interface{}, error) {
-	b := gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Boxed()
+var _ gobject.GoValueInitializer = (*ContentFormatsBuilder)(nil)
+
+func marshalContentFormatsBuilder(p unsafe.Pointer) (interface{}, error) {
+	b := gobject.ValueFromNative(p).Boxed()
 	return UnsafeContentFormatsBuilderFromGlibBorrow(b), nil
+}
+
+func (r *ContentFormatsBuilder) InitGoValue(v *gobject.Value) {
+	v.Init(TypeContentFormatsBuilder)
+	v.SetBoxed(unsafe.Pointer(r.native))
 }
 
 // UnsafeContentFormatsBuilderFromGlibBorrow is used to convert raw C.GdkContentFormatsBuilder pointers to go. This is used by the bindings internally.
@@ -22438,8 +22531,8 @@ func UnsafeContentFormatsBuilderFromGlibBorrow(p unsafe.Pointer) *ContentFormats
 
 // UnsafeContentFormatsBuilderFromGlibNone is used to convert raw C.GdkContentFormatsBuilder pointers to go while taking a reference. This is used by the bindings internally.
 func UnsafeContentFormatsBuilderFromGlibNone(p unsafe.Pointer) *ContentFormatsBuilder {
-	C.gdk_content_formats_builder_ref(p)
-	wrapped := UnsafeContentFormatsBuilderFromGlibNone(p)
+	C.gdk_content_formats_builder_ref((*C.GdkContentFormatsBuilder)(p))
+	wrapped := UnsafeContentFormatsBuilderFromGlibBorrow(p)
 	runtime.SetFinalizer(
 		wrapped.contentFormatsBuilder,
 		func (intern *contentFormatsBuilder) {
@@ -22491,33 +22584,33 @@ func UnsafeContentFormatsBuilderToGlibFull(c *ContentFormatsBuilder) unsafe.Poin
 // NewContentFormatsBuilder wraps gdk_content_formats_builder_new
 // The function returns the following values:
 // 
-// 	- ret ContentFormatsBuilder 
+// 	- goret *ContentFormatsBuilder 
 //
 // Create a new `GdkContentFormatsBuilder` object.
 // 
 // The resulting builder would create an empty `GdkContentFormats`.
 // Use addition functions to add types to it.
-func NewContentFormatsBuilder() ContentFormatsBuilder {
+func NewContentFormatsBuilder() *ContentFormatsBuilder {
 	var cret *C.GdkContentFormatsBuilder // return, full, converted
 
 	cret = C.gdk_content_formats_builder_new()
 
-	var ret ContentFormatsBuilder
+	var goret *ContentFormatsBuilder
 
-	ret = UnsafeContentFormatsBuilderFromGlibFull(unsafe.Pointer(cret))
+	goret = UnsafeContentFormatsBuilderFromGlibFull(unsafe.Pointer(cret))
 
-	return ret
+	return goret
 }
 
 // AddFormats wraps gdk_content_formats_builder_add_formats
 // 
 // The function takes the following parameters:
 // 
-// 	- formats ContentFormats: the formats to add 
+// 	- formats *ContentFormats: the formats to add 
 //
 // Appends all formats from @formats to @builder, skipping those that
 // already exist.
-func (builder *ContentFormatsBuilder) AddFormats(formats ContentFormats) {
+func (builder *ContentFormatsBuilder) AddFormats(formats *ContentFormats) {
 	var carg0 *C.GdkContentFormatsBuilder // in, none, converted
 	var carg1 *C.GdkContentFormats        // in, none, converted
 
@@ -22533,12 +22626,12 @@ func (builder *ContentFormatsBuilder) AddFormats(formats ContentFormats) {
 // 
 // The function takes the following parameters:
 // 
-// 	- typ glib.Type: a `GType` 
+// 	- typ gobject.Type: a `GType` 
 //
 // Appends @type to @builder if it has not already been added.
-func (builder *ContentFormatsBuilder) AddGType(typ glib.Type) {
+func (builder *ContentFormatsBuilder) AddGType(typ gobject.Type) {
 	var carg0 *C.GdkContentFormatsBuilder // in, none, converted
-	var carg1 C.GType                     // in, none, casted
+	var carg1 C.GType                     // in, none, casted, alias
 
 	carg0 = (*C.GdkContentFormatsBuilder)(UnsafeContentFormatsBuilderToGlibNone(builder))
 	carg1 = C.GType(typ)
@@ -22571,7 +22664,7 @@ func (builder *ContentFormatsBuilder) AddMIMEType(mimeType string) {
 // ToFormats wraps gdk_content_formats_builder_to_formats
 // The function returns the following values:
 // 
-// 	- ret ContentFormats 
+// 	- goret *ContentFormats 
 //
 // Creates a new `GdkContentFormats` from the given @builder.
 // 
@@ -22580,7 +22673,7 @@ func (builder *ContentFormatsBuilder) AddMIMEType(mimeType string) {
 // 
 // This function is intended primarily for bindings. C code should use
 // [method@Gdk.ContentFormatsBuilder.free_to_formats].
-func (builder *ContentFormatsBuilder) ToFormats() ContentFormats {
+func (builder *ContentFormatsBuilder) ToFormats() *ContentFormats {
 	var carg0 *C.GdkContentFormatsBuilder // in, none, converted
 	var cret  *C.GdkContentFormats        // return, full, converted
 
@@ -22589,11 +22682,11 @@ func (builder *ContentFormatsBuilder) ToFormats() ContentFormats {
 	cret = C.gdk_content_formats_builder_to_formats(carg0)
 	runtime.KeepAlive(builder)
 
-	var ret ContentFormats
+	var goret *ContentFormats
 
-	ret = UnsafeContentFormatsFromGlibFull(unsafe.Pointer(cret))
+	goret = UnsafeContentFormatsFromGlibFull(unsafe.Pointer(cret))
 
-	return ret
+	return goret
 }
 
 // ContentProviderClass wraps GdkContentProviderClass
@@ -22611,6 +22704,19 @@ type contentProviderClass struct {
 // UnsafeContentProviderClassFromGlibBorrow is used to convert raw C.GdkContentProviderClass pointers to go. This is used by the bindings internally.
 func UnsafeContentProviderClassFromGlibBorrow(p unsafe.Pointer) *ContentProviderClass {
 	return &ContentProviderClass{&contentProviderClass{(*C.GdkContentProviderClass)(p)}}
+}
+
+// UnsafeContentProviderClassFromGlibNone is used to convert raw C.GdkContentProviderClass pointers to go while taking a reference. This is used by the bindings internally.
+func UnsafeContentProviderClassFromGlibNone(p unsafe.Pointer) *ContentProviderClass {
+	// FIXME: this has no ref function, what should we do here?
+	wrapped := UnsafeContentProviderClassFromGlibBorrow(p)
+	runtime.SetFinalizer(
+		wrapped.contentProviderClass,
+		func (intern *contentProviderClass) {
+			C.free(unsafe.Pointer(intern.native))
+		},
+	)
+	return wrapped
 }
 
 // UnsafeContentProviderClassFromGlibFull is used to convert raw C.GdkContentProviderClass pointers to go while taking a reference. This is used by the bindings internally.
@@ -22658,6 +22764,19 @@ type devicePadInterface struct {
 // UnsafeDevicePadInterfaceFromGlibBorrow is used to convert raw C.GdkDevicePadInterface pointers to go. This is used by the bindings internally.
 func UnsafeDevicePadInterfaceFromGlibBorrow(p unsafe.Pointer) *DevicePadInterface {
 	return &DevicePadInterface{&devicePadInterface{(*C.GdkDevicePadInterface)(p)}}
+}
+
+// UnsafeDevicePadInterfaceFromGlibNone is used to convert raw C.GdkDevicePadInterface pointers to go while taking a reference. This is used by the bindings internally.
+func UnsafeDevicePadInterfaceFromGlibNone(p unsafe.Pointer) *DevicePadInterface {
+	// FIXME: this has no ref function, what should we do here?
+	wrapped := UnsafeDevicePadInterfaceFromGlibBorrow(p)
+	runtime.SetFinalizer(
+		wrapped.devicePadInterface,
+		func (intern *devicePadInterface) {
+			C.free(unsafe.Pointer(intern.native))
+		},
+	)
+	return wrapped
 }
 
 // UnsafeDevicePadInterfaceFromGlibFull is used to convert raw C.GdkDevicePadInterface pointers to go while taking a reference. This is used by the bindings internally.
@@ -22723,9 +22842,16 @@ type dmabufFormats struct {
 	native *C.GdkDmabufFormats
 }
 
-func marshalDmabufFormats(p uintptr) (interface{}, error) {
-	b := gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Boxed()
+var _ gobject.GoValueInitializer = (*DmabufFormats)(nil)
+
+func marshalDmabufFormats(p unsafe.Pointer) (interface{}, error) {
+	b := gobject.ValueFromNative(p).Boxed()
 	return UnsafeDmabufFormatsFromGlibBorrow(b), nil
+}
+
+func (r *DmabufFormats) InitGoValue(v *gobject.Value) {
+	v.Init(TypeDmabufFormats)
+	v.SetBoxed(unsafe.Pointer(r.native))
 }
 
 // UnsafeDmabufFormatsFromGlibBorrow is used to convert raw C.GdkDmabufFormats pointers to go. This is used by the bindings internally.
@@ -22735,8 +22861,8 @@ func UnsafeDmabufFormatsFromGlibBorrow(p unsafe.Pointer) *DmabufFormats {
 
 // UnsafeDmabufFormatsFromGlibNone is used to convert raw C.GdkDmabufFormats pointers to go while taking a reference. This is used by the bindings internally.
 func UnsafeDmabufFormatsFromGlibNone(p unsafe.Pointer) *DmabufFormats {
-	C.gdk_dmabuf_formats_ref(p)
-	wrapped := UnsafeDmabufFormatsFromGlibNone(p)
+	C.gdk_dmabuf_formats_ref((*C.GdkDmabufFormats)(p))
+	wrapped := UnsafeDmabufFormatsFromGlibBorrow(p)
 	runtime.SetFinalizer(
 		wrapped.dmabufFormats,
 		func (intern *dmabufFormats) {
@@ -22794,7 +22920,7 @@ func UnsafeDmabufFormatsToGlibFull(d *DmabufFormats) unsafe.Pointer {
 // 
 // The function returns the following values:
 // 
-// 	- ret bool 
+// 	- goret bool 
 //
 // Returns whether a given format is contained in @formats.
 func (formats *DmabufFormats) Contains(fourcc uint32, modifier uint64) bool {
@@ -22812,28 +22938,28 @@ func (formats *DmabufFormats) Contains(fourcc uint32, modifier uint64) bool {
 	runtime.KeepAlive(fourcc)
 	runtime.KeepAlive(modifier)
 
-	var ret bool
+	var goret bool
 
 	if cret != 0 {
-		ret = true
+		goret = true
 	}
 
-	return ret
+	return goret
 }
 
 // Equal wraps gdk_dmabuf_formats_equal
 // 
 // The function takes the following parameters:
 // 
-// 	- formats2 DmabufFormats (nullable): another `GdkDmabufFormats` 
+// 	- formats2 *DmabufFormats (nullable): another `GdkDmabufFormats` 
 // 
 // The function returns the following values:
 // 
-// 	- ret bool 
+// 	- goret bool 
 //
 // Returns whether @formats1 and @formats2 contain the
 // same dmabuf formats, in the same order.
-func (formats1 *DmabufFormats) Equal(formats2 DmabufFormats) bool {
+func (formats1 *DmabufFormats) Equal(formats2 *DmabufFormats) bool {
 	var carg0 *C.GdkDmabufFormats // in, none, converted
 	var carg1 *C.GdkDmabufFormats // in, none, converted, nullable
 	var cret  C.gboolean          // return
@@ -22847,13 +22973,13 @@ func (formats1 *DmabufFormats) Equal(formats2 DmabufFormats) bool {
 	runtime.KeepAlive(formats1)
 	runtime.KeepAlive(formats2)
 
-	var ret bool
+	var goret bool
 
 	if cret != 0 {
-		ret = true
+		goret = true
 	}
 
-	return ret
+	return goret
 }
 
 // GetFormat wraps gdk_dmabuf_formats_get_format
@@ -22894,7 +23020,7 @@ func (formats *DmabufFormats) GetFormat(idx uint) (uint32, uint64) {
 // GetNFormats wraps gdk_dmabuf_formats_get_n_formats
 // The function returns the following values:
 // 
-// 	- ret uint 
+// 	- goret uint 
 //
 // Returns the number of formats that the @formats object
 // contains.
@@ -22911,11 +23037,11 @@ func (formats *DmabufFormats) GetNFormats() uint {
 	cret = C.gdk_dmabuf_formats_get_n_formats(carg0)
 	runtime.KeepAlive(formats)
 
-	var ret uint
+	var goret uint
 
-	ret = uint(cret)
+	goret = uint(cret)
 
-	return ret
+	return goret
 }
 
 // DmabufTextureBuilderClass wraps GdkDmabufTextureBuilderClass
@@ -22931,6 +23057,19 @@ type dmabufTextureBuilderClass struct {
 // UnsafeDmabufTextureBuilderClassFromGlibBorrow is used to convert raw C.GdkDmabufTextureBuilderClass pointers to go. This is used by the bindings internally.
 func UnsafeDmabufTextureBuilderClassFromGlibBorrow(p unsafe.Pointer) *DmabufTextureBuilderClass {
 	return &DmabufTextureBuilderClass{&dmabufTextureBuilderClass{(*C.GdkDmabufTextureBuilderClass)(p)}}
+}
+
+// UnsafeDmabufTextureBuilderClassFromGlibNone is used to convert raw C.GdkDmabufTextureBuilderClass pointers to go while taking a reference. This is used by the bindings internally.
+func UnsafeDmabufTextureBuilderClassFromGlibNone(p unsafe.Pointer) *DmabufTextureBuilderClass {
+	// FIXME: this has no ref function, what should we do here?
+	wrapped := UnsafeDmabufTextureBuilderClassFromGlibBorrow(p)
+	runtime.SetFinalizer(
+		wrapped.dmabufTextureBuilderClass,
+		func (intern *dmabufTextureBuilderClass) {
+			C.free(unsafe.Pointer(intern.native))
+		},
+	)
+	return wrapped
 }
 
 // UnsafeDmabufTextureBuilderClassFromGlibFull is used to convert raw C.GdkDmabufTextureBuilderClass pointers to go while taking a reference. This is used by the bindings internally.
@@ -22978,6 +23117,19 @@ type dmabufTextureClass struct {
 // UnsafeDmabufTextureClassFromGlibBorrow is used to convert raw C.GdkDmabufTextureClass pointers to go. This is used by the bindings internally.
 func UnsafeDmabufTextureClassFromGlibBorrow(p unsafe.Pointer) *DmabufTextureClass {
 	return &DmabufTextureClass{&dmabufTextureClass{(*C.GdkDmabufTextureClass)(p)}}
+}
+
+// UnsafeDmabufTextureClassFromGlibNone is used to convert raw C.GdkDmabufTextureClass pointers to go while taking a reference. This is used by the bindings internally.
+func UnsafeDmabufTextureClassFromGlibNone(p unsafe.Pointer) *DmabufTextureClass {
+	// FIXME: this has no ref function, what should we do here?
+	wrapped := UnsafeDmabufTextureClassFromGlibBorrow(p)
+	runtime.SetFinalizer(
+		wrapped.dmabufTextureClass,
+		func (intern *dmabufTextureClass) {
+			C.free(unsafe.Pointer(intern.native))
+		},
+	)
+	return wrapped
 }
 
 // UnsafeDmabufTextureClassFromGlibFull is used to convert raw C.GdkDmabufTextureClass pointers to go while taking a reference. This is used by the bindings internally.
@@ -23029,6 +23181,19 @@ func UnsafeDragSurfaceInterfaceFromGlibBorrow(p unsafe.Pointer) *DragSurfaceInte
 	return &DragSurfaceInterface{&dragSurfaceInterface{(*C.GdkDragSurfaceInterface)(p)}}
 }
 
+// UnsafeDragSurfaceInterfaceFromGlibNone is used to convert raw C.GdkDragSurfaceInterface pointers to go while taking a reference. This is used by the bindings internally.
+func UnsafeDragSurfaceInterfaceFromGlibNone(p unsafe.Pointer) *DragSurfaceInterface {
+	// FIXME: this has no ref function, what should we do here?
+	wrapped := UnsafeDragSurfaceInterfaceFromGlibBorrow(p)
+	runtime.SetFinalizer(
+		wrapped.dragSurfaceInterface,
+		func (intern *dragSurfaceInterface) {
+			C.free(unsafe.Pointer(intern.native))
+		},
+	)
+	return wrapped
+}
+
 // UnsafeDragSurfaceInterfaceFromGlibFull is used to convert raw C.GdkDragSurfaceInterface pointers to go while taking a reference. This is used by the bindings internally.
 func UnsafeDragSurfaceInterfaceFromGlibFull(p unsafe.Pointer) *DragSurfaceInterface {
 	wrapped := UnsafeDragSurfaceInterfaceFromGlibBorrow(p)
@@ -23074,14 +23239,34 @@ type dragSurfaceSize struct {
 	native *C.GdkDragSurfaceSize
 }
 
-func marshalDragSurfaceSize(p uintptr) (interface{}, error) {
-	b := gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Boxed()
+var _ gobject.GoValueInitializer = (*DragSurfaceSize)(nil)
+
+func marshalDragSurfaceSize(p unsafe.Pointer) (interface{}, error) {
+	b := gobject.ValueFromNative(p).Boxed()
 	return UnsafeDragSurfaceSizeFromGlibBorrow(b), nil
+}
+
+func (r *DragSurfaceSize) InitGoValue(v *gobject.Value) {
+	v.Init(TypeDragSurfaceSize)
+	v.SetBoxed(unsafe.Pointer(r.native))
 }
 
 // UnsafeDragSurfaceSizeFromGlibBorrow is used to convert raw C.GdkDragSurfaceSize pointers to go. This is used by the bindings internally.
 func UnsafeDragSurfaceSizeFromGlibBorrow(p unsafe.Pointer) *DragSurfaceSize {
 	return &DragSurfaceSize{&dragSurfaceSize{(*C.GdkDragSurfaceSize)(p)}}
+}
+
+// UnsafeDragSurfaceSizeFromGlibNone is used to convert raw C.GdkDragSurfaceSize pointers to go while taking a reference. This is used by the bindings internally.
+func UnsafeDragSurfaceSizeFromGlibNone(p unsafe.Pointer) *DragSurfaceSize {
+	// FIXME: this has no ref function, what should we do here?
+	wrapped := UnsafeDragSurfaceSizeFromGlibBorrow(p)
+	runtime.SetFinalizer(
+		wrapped.dragSurfaceSize,
+		func (intern *dragSurfaceSize) {
+			C.free(unsafe.Pointer(intern.native))
+		},
+	)
+	return wrapped
 }
 
 // UnsafeDragSurfaceSizeFromGlibFull is used to convert raw C.GdkDragSurfaceSize pointers to go while taking a reference. This is used by the bindings internally.
@@ -23152,14 +23337,34 @@ type eventSequence struct {
 	native *C.GdkEventSequence
 }
 
-func marshalEventSequence(p uintptr) (interface{}, error) {
-	b := gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Boxed()
+var _ gobject.GoValueInitializer = (*EventSequence)(nil)
+
+func marshalEventSequence(p unsafe.Pointer) (interface{}, error) {
+	b := gobject.ValueFromNative(p).Boxed()
 	return UnsafeEventSequenceFromGlibBorrow(b), nil
+}
+
+func (r *EventSequence) InitGoValue(v *gobject.Value) {
+	v.Init(TypeEventSequence)
+	v.SetBoxed(unsafe.Pointer(r.native))
 }
 
 // UnsafeEventSequenceFromGlibBorrow is used to convert raw C.GdkEventSequence pointers to go. This is used by the bindings internally.
 func UnsafeEventSequenceFromGlibBorrow(p unsafe.Pointer) *EventSequence {
 	return &EventSequence{&eventSequence{(*C.GdkEventSequence)(p)}}
+}
+
+// UnsafeEventSequenceFromGlibNone is used to convert raw C.GdkEventSequence pointers to go while taking a reference. This is used by the bindings internally.
+func UnsafeEventSequenceFromGlibNone(p unsafe.Pointer) *EventSequence {
+	// FIXME: this has no ref function, what should we do here?
+	wrapped := UnsafeEventSequenceFromGlibBorrow(p)
+	runtime.SetFinalizer(
+		wrapped.eventSequence,
+		func (intern *eventSequence) {
+			C.free(unsafe.Pointer(intern.native))
+		},
+	)
+	return wrapped
 }
 
 // UnsafeEventSequenceFromGlibFull is used to convert raw C.GdkEventSequence pointers to go while taking a reference. This is used by the bindings internally.
@@ -23206,14 +23411,34 @@ type fileList struct {
 	native *C.GdkFileList
 }
 
-func marshalFileList(p uintptr) (interface{}, error) {
-	b := gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Boxed()
+var _ gobject.GoValueInitializer = (*FileList)(nil)
+
+func marshalFileList(p unsafe.Pointer) (interface{}, error) {
+	b := gobject.ValueFromNative(p).Boxed()
 	return UnsafeFileListFromGlibBorrow(b), nil
+}
+
+func (r *FileList) InitGoValue(v *gobject.Value) {
+	v.Init(TypeFileList)
+	v.SetBoxed(unsafe.Pointer(r.native))
 }
 
 // UnsafeFileListFromGlibBorrow is used to convert raw C.GdkFileList pointers to go. This is used by the bindings internally.
 func UnsafeFileListFromGlibBorrow(p unsafe.Pointer) *FileList {
 	return &FileList{&fileList{(*C.GdkFileList)(p)}}
+}
+
+// UnsafeFileListFromGlibNone is used to convert raw C.GdkFileList pointers to go while taking a reference. This is used by the bindings internally.
+func UnsafeFileListFromGlibNone(p unsafe.Pointer) *FileList {
+	// FIXME: this has no ref function, what should we do here?
+	wrapped := UnsafeFileListFromGlibBorrow(p)
+	runtime.SetFinalizer(
+		wrapped.fileList,
+		func (intern *fileList) {
+			C.free(unsafe.Pointer(intern.native))
+		},
+	)
+	return wrapped
 }
 
 // UnsafeFileListFromGlibFull is used to convert raw C.GdkFileList pointers to go while taking a reference. This is used by the bindings internally.
@@ -23252,30 +23477,33 @@ func UnsafeFileListToGlibFull(f *FileList) unsafe.Pointer {
 // 
 // The function takes the following parameters:
 // 
-// 	- files array: the files to add to the list 
+// 	- files []gio.File: the files to add to the list 
 // 
 // The function returns the following values:
 // 
-// 	- ret FileList 
+// 	- goret *FileList 
 //
 // Creates a new `GdkFileList` for the given array of files.
 // 
 // This function is meant to be used by language bindings.
-func NewFileListFromArray(files array) FileList {
-	var carg1 array          // in, transfer: none, scope: call, implicit: false, skip: false, optional: false, nullable: false, caller-allocates: false, has closure: false, has destroy: false
+func NewFileListFromArray(files []gio.File) *FileList {
+	var carg1 **C.GFile      // in, transfer: none, C Pointers: 2, Name: array[File], array (inner: *typesystem.Interface, length-by: carg2)
 	var carg2 C.gsize        // implicit
 	var cret  *C.GdkFileList // return, full, converted
 
-	panic("unimplemented conversion of array (array)")
+	_ = files
+	_ = carg1
+	_ = carg2
+	panic("unimplemented conversion of []gio.File (GFile**)")
 
 	cret = C.gdk_file_list_new_from_array(carg1, carg2)
 	runtime.KeepAlive(files)
 
-	var ret FileList
+	var goret *FileList
 
-	ret = UnsafeFileListFromGlibFull(unsafe.Pointer(cret))
+	goret = UnsafeFileListFromGlibFull(unsafe.Pointer(cret))
 
-	return ret
+	return goret
 }
 
 // FrameClockClass wraps GdkFrameClockClass
@@ -23291,6 +23519,19 @@ type frameClockClass struct {
 // UnsafeFrameClockClassFromGlibBorrow is used to convert raw C.GdkFrameClockClass pointers to go. This is used by the bindings internally.
 func UnsafeFrameClockClassFromGlibBorrow(p unsafe.Pointer) *FrameClockClass {
 	return &FrameClockClass{&frameClockClass{(*C.GdkFrameClockClass)(p)}}
+}
+
+// UnsafeFrameClockClassFromGlibNone is used to convert raw C.GdkFrameClockClass pointers to go while taking a reference. This is used by the bindings internally.
+func UnsafeFrameClockClassFromGlibNone(p unsafe.Pointer) *FrameClockClass {
+	// FIXME: this has no ref function, what should we do here?
+	wrapped := UnsafeFrameClockClassFromGlibBorrow(p)
+	runtime.SetFinalizer(
+		wrapped.frameClockClass,
+		func (intern *frameClockClass) {
+			C.free(unsafe.Pointer(intern.native))
+		},
+	)
+	return wrapped
 }
 
 // UnsafeFrameClockClassFromGlibFull is used to convert raw C.GdkFrameClockClass pointers to go while taking a reference. This is used by the bindings internally.
@@ -23344,9 +23585,16 @@ type frameTimings struct {
 	native *C.GdkFrameTimings
 }
 
-func marshalFrameTimings(p uintptr) (interface{}, error) {
-	b := gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Boxed()
+var _ gobject.GoValueInitializer = (*FrameTimings)(nil)
+
+func marshalFrameTimings(p unsafe.Pointer) (interface{}, error) {
+	b := gobject.ValueFromNative(p).Boxed()
 	return UnsafeFrameTimingsFromGlibBorrow(b), nil
+}
+
+func (r *FrameTimings) InitGoValue(v *gobject.Value) {
+	v.Init(TypeFrameTimings)
+	v.SetBoxed(unsafe.Pointer(r.native))
 }
 
 // UnsafeFrameTimingsFromGlibBorrow is used to convert raw C.GdkFrameTimings pointers to go. This is used by the bindings internally.
@@ -23356,8 +23604,8 @@ func UnsafeFrameTimingsFromGlibBorrow(p unsafe.Pointer) *FrameTimings {
 
 // UnsafeFrameTimingsFromGlibNone is used to convert raw C.GdkFrameTimings pointers to go while taking a reference. This is used by the bindings internally.
 func UnsafeFrameTimingsFromGlibNone(p unsafe.Pointer) *FrameTimings {
-	C.gdk_frame_timings_ref(p)
-	wrapped := UnsafeFrameTimingsFromGlibNone(p)
+	C.gdk_frame_timings_ref((*C.GdkFrameTimings)(p))
+	wrapped := UnsafeFrameTimingsFromGlibBorrow(p)
 	runtime.SetFinalizer(
 		wrapped.frameTimings,
 		func (intern *frameTimings) {
@@ -23409,7 +23657,7 @@ func UnsafeFrameTimingsToGlibFull(f *FrameTimings) unsafe.Pointer {
 // GetComplete wraps gdk_frame_timings_get_complete
 // The function returns the following values:
 // 
-// 	- ret bool 
+// 	- goret bool 
 //
 // Returns whether @timings are complete.
 // 
@@ -23433,19 +23681,19 @@ func (timings *FrameTimings) GetComplete() bool {
 	cret = C.gdk_frame_timings_get_complete(carg0)
 	runtime.KeepAlive(timings)
 
-	var ret bool
+	var goret bool
 
 	if cret != 0 {
-		ret = true
+		goret = true
 	}
 
-	return ret
+	return goret
 }
 
 // GetFrameCounter wraps gdk_frame_timings_get_frame_counter
 // The function returns the following values:
 // 
-// 	- ret int64 
+// 	- goret int64 
 //
 // Gets the frame counter value of the `GdkFrameClock` when
 // this frame was drawn.
@@ -23458,17 +23706,17 @@ func (timings *FrameTimings) GetFrameCounter() int64 {
 	cret = C.gdk_frame_timings_get_frame_counter(carg0)
 	runtime.KeepAlive(timings)
 
-	var ret int64
+	var goret int64
 
-	ret = int64(cret)
+	goret = int64(cret)
 
-	return ret
+	return goret
 }
 
 // GetFrameTime wraps gdk_frame_timings_get_frame_time
 // The function returns the following values:
 // 
-// 	- ret int64 
+// 	- goret int64 
 //
 // Returns the frame time for the frame.
 // 
@@ -23483,17 +23731,17 @@ func (timings *FrameTimings) GetFrameTime() int64 {
 	cret = C.gdk_frame_timings_get_frame_time(carg0)
 	runtime.KeepAlive(timings)
 
-	var ret int64
+	var goret int64
 
-	ret = int64(cret)
+	goret = int64(cret)
 
-	return ret
+	return goret
 }
 
 // GetPredictedPresentationTime wraps gdk_frame_timings_get_predicted_presentation_time
 // The function returns the following values:
 // 
-// 	- ret int64 
+// 	- goret int64 
 //
 // Gets the predicted time at which this frame will be displayed.
 // 
@@ -23516,17 +23764,17 @@ func (timings *FrameTimings) GetPredictedPresentationTime() int64 {
 	cret = C.gdk_frame_timings_get_predicted_presentation_time(carg0)
 	runtime.KeepAlive(timings)
 
-	var ret int64
+	var goret int64
 
-	ret = int64(cret)
+	goret = int64(cret)
 
-	return ret
+	return goret
 }
 
 // GetPresentationTime wraps gdk_frame_timings_get_presentation_time
 // The function returns the following values:
 // 
-// 	- ret int64 
+// 	- goret int64 
 //
 // Reurns the presentation time.
 // 
@@ -23540,17 +23788,17 @@ func (timings *FrameTimings) GetPresentationTime() int64 {
 	cret = C.gdk_frame_timings_get_presentation_time(carg0)
 	runtime.KeepAlive(timings)
 
-	var ret int64
+	var goret int64
 
-	ret = int64(cret)
+	goret = int64(cret)
 
-	return ret
+	return goret
 }
 
 // GetRefreshInterval wraps gdk_frame_timings_get_refresh_interval
 // The function returns the following values:
 // 
-// 	- ret int64 
+// 	- goret int64 
 //
 // Gets the natural interval between presentation times for
 // the display that this frame was displayed on.
@@ -23566,11 +23814,11 @@ func (timings *FrameTimings) GetRefreshInterval() int64 {
 	cret = C.gdk_frame_timings_get_refresh_interval(carg0)
 	runtime.KeepAlive(timings)
 
-	var ret int64
+	var goret int64
 
-	ret = int64(cret)
+	goret = int64(cret)
 
-	return ret
+	return goret
 }
 
 // GLTextureBuilderClass wraps GdkGLTextureBuilderClass
@@ -23586,6 +23834,19 @@ type glTextureBuilderClass struct {
 // UnsafeGLTextureBuilderClassFromGlibBorrow is used to convert raw C.GdkGLTextureBuilderClass pointers to go. This is used by the bindings internally.
 func UnsafeGLTextureBuilderClassFromGlibBorrow(p unsafe.Pointer) *GLTextureBuilderClass {
 	return &GLTextureBuilderClass{&glTextureBuilderClass{(*C.GdkGLTextureBuilderClass)(p)}}
+}
+
+// UnsafeGLTextureBuilderClassFromGlibNone is used to convert raw C.GdkGLTextureBuilderClass pointers to go while taking a reference. This is used by the bindings internally.
+func UnsafeGLTextureBuilderClassFromGlibNone(p unsafe.Pointer) *GLTextureBuilderClass {
+	// FIXME: this has no ref function, what should we do here?
+	wrapped := UnsafeGLTextureBuilderClassFromGlibBorrow(p)
+	runtime.SetFinalizer(
+		wrapped.glTextureBuilderClass,
+		func (intern *glTextureBuilderClass) {
+			C.free(unsafe.Pointer(intern.native))
+		},
+	)
+	return wrapped
 }
 
 // UnsafeGLTextureBuilderClassFromGlibFull is used to convert raw C.GdkGLTextureBuilderClass pointers to go while taking a reference. This is used by the bindings internally.
@@ -23635,6 +23896,19 @@ func UnsafeGLTextureClassFromGlibBorrow(p unsafe.Pointer) *GLTextureClass {
 	return &GLTextureClass{&glTextureClass{(*C.GdkGLTextureClass)(p)}}
 }
 
+// UnsafeGLTextureClassFromGlibNone is used to convert raw C.GdkGLTextureClass pointers to go while taking a reference. This is used by the bindings internally.
+func UnsafeGLTextureClassFromGlibNone(p unsafe.Pointer) *GLTextureClass {
+	// FIXME: this has no ref function, what should we do here?
+	wrapped := UnsafeGLTextureClassFromGlibBorrow(p)
+	runtime.SetFinalizer(
+		wrapped.glTextureClass,
+		func (intern *glTextureClass) {
+			C.free(unsafe.Pointer(intern.native))
+		},
+	)
+	return wrapped
+}
+
 // UnsafeGLTextureClassFromGlibFull is used to convert raw C.GdkGLTextureClass pointers to go while taking a reference. This is used by the bindings internally.
 func UnsafeGLTextureClassFromGlibFull(p unsafe.Pointer) *GLTextureClass {
 	wrapped := UnsafeGLTextureClassFromGlibBorrow(p)
@@ -23682,6 +23956,19 @@ type keymapKey struct {
 // UnsafeKeymapKeyFromGlibBorrow is used to convert raw C.GdkKeymapKey pointers to go. This is used by the bindings internally.
 func UnsafeKeymapKeyFromGlibBorrow(p unsafe.Pointer) *KeymapKey {
 	return &KeymapKey{&keymapKey{(*C.GdkKeymapKey)(p)}}
+}
+
+// UnsafeKeymapKeyFromGlibNone is used to convert raw C.GdkKeymapKey pointers to go while taking a reference. This is used by the bindings internally.
+func UnsafeKeymapKeyFromGlibNone(p unsafe.Pointer) *KeymapKey {
+	// FIXME: this has no ref function, what should we do here?
+	wrapped := UnsafeKeymapKeyFromGlibBorrow(p)
+	runtime.SetFinalizer(
+		wrapped.keymapKey,
+		func (intern *keymapKey) {
+			C.free(unsafe.Pointer(intern.native))
+		},
+	)
+	return wrapped
 }
 
 // UnsafeKeymapKeyFromGlibFull is used to convert raw C.GdkKeymapKey pointers to go while taking a reference. This is used by the bindings internally.
@@ -23803,6 +24090,19 @@ func UnsafeMemoryTextureBuilderClassFromGlibBorrow(p unsafe.Pointer) *MemoryText
 	return &MemoryTextureBuilderClass{&memoryTextureBuilderClass{(*C.GdkMemoryTextureBuilderClass)(p)}}
 }
 
+// UnsafeMemoryTextureBuilderClassFromGlibNone is used to convert raw C.GdkMemoryTextureBuilderClass pointers to go while taking a reference. This is used by the bindings internally.
+func UnsafeMemoryTextureBuilderClassFromGlibNone(p unsafe.Pointer) *MemoryTextureBuilderClass {
+	// FIXME: this has no ref function, what should we do here?
+	wrapped := UnsafeMemoryTextureBuilderClassFromGlibBorrow(p)
+	runtime.SetFinalizer(
+		wrapped.memoryTextureBuilderClass,
+		func (intern *memoryTextureBuilderClass) {
+			C.free(unsafe.Pointer(intern.native))
+		},
+	)
+	return wrapped
+}
+
 // UnsafeMemoryTextureBuilderClassFromGlibFull is used to convert raw C.GdkMemoryTextureBuilderClass pointers to go while taking a reference. This is used by the bindings internally.
 func UnsafeMemoryTextureBuilderClassFromGlibFull(p unsafe.Pointer) *MemoryTextureBuilderClass {
 	wrapped := UnsafeMemoryTextureBuilderClassFromGlibBorrow(p)
@@ -23850,6 +24150,19 @@ func UnsafeMemoryTextureClassFromGlibBorrow(p unsafe.Pointer) *MemoryTextureClas
 	return &MemoryTextureClass{&memoryTextureClass{(*C.GdkMemoryTextureClass)(p)}}
 }
 
+// UnsafeMemoryTextureClassFromGlibNone is used to convert raw C.GdkMemoryTextureClass pointers to go while taking a reference. This is used by the bindings internally.
+func UnsafeMemoryTextureClassFromGlibNone(p unsafe.Pointer) *MemoryTextureClass {
+	// FIXME: this has no ref function, what should we do here?
+	wrapped := UnsafeMemoryTextureClassFromGlibBorrow(p)
+	runtime.SetFinalizer(
+		wrapped.memoryTextureClass,
+		func (intern *memoryTextureClass) {
+			C.free(unsafe.Pointer(intern.native))
+		},
+	)
+	return wrapped
+}
+
 // UnsafeMemoryTextureClassFromGlibFull is used to convert raw C.GdkMemoryTextureClass pointers to go while taking a reference. This is used by the bindings internally.
 func UnsafeMemoryTextureClassFromGlibFull(p unsafe.Pointer) *MemoryTextureClass {
 	wrapped := UnsafeMemoryTextureClassFromGlibBorrow(p)
@@ -23895,6 +24208,19 @@ type monitorClass struct {
 // UnsafeMonitorClassFromGlibBorrow is used to convert raw C.GdkMonitorClass pointers to go. This is used by the bindings internally.
 func UnsafeMonitorClassFromGlibBorrow(p unsafe.Pointer) *MonitorClass {
 	return &MonitorClass{&monitorClass{(*C.GdkMonitorClass)(p)}}
+}
+
+// UnsafeMonitorClassFromGlibNone is used to convert raw C.GdkMonitorClass pointers to go while taking a reference. This is used by the bindings internally.
+func UnsafeMonitorClassFromGlibNone(p unsafe.Pointer) *MonitorClass {
+	// FIXME: this has no ref function, what should we do here?
+	wrapped := UnsafeMonitorClassFromGlibBorrow(p)
+	runtime.SetFinalizer(
+		wrapped.monitorClass,
+		func (intern *monitorClass) {
+			C.free(unsafe.Pointer(intern.native))
+		},
+	)
+	return wrapped
 }
 
 // UnsafeMonitorClassFromGlibFull is used to convert raw C.GdkMonitorClass pointers to go while taking a reference. This is used by the bindings internally.
@@ -23954,6 +24280,19 @@ func UnsafePaintableInterfaceFromGlibBorrow(p unsafe.Pointer) *PaintableInterfac
 	return &PaintableInterface{&paintableInterface{(*C.GdkPaintableInterface)(p)}}
 }
 
+// UnsafePaintableInterfaceFromGlibNone is used to convert raw C.GdkPaintableInterface pointers to go while taking a reference. This is used by the bindings internally.
+func UnsafePaintableInterfaceFromGlibNone(p unsafe.Pointer) *PaintableInterface {
+	// FIXME: this has no ref function, what should we do here?
+	wrapped := UnsafePaintableInterfaceFromGlibBorrow(p)
+	runtime.SetFinalizer(
+		wrapped.paintableInterface,
+		func (intern *paintableInterface) {
+			C.free(unsafe.Pointer(intern.native))
+		},
+	)
+	return wrapped
+}
+
 // UnsafePaintableInterfaceFromGlibFull is used to convert raw C.GdkPaintableInterface pointers to go while taking a reference. This is used by the bindings internally.
 func UnsafePaintableInterfaceFromGlibFull(p unsafe.Pointer) *PaintableInterface {
 	wrapped := UnsafePaintableInterfaceFromGlibBorrow(p)
@@ -23999,6 +24338,19 @@ type popupInterface struct {
 // UnsafePopupInterfaceFromGlibBorrow is used to convert raw C.GdkPopupInterface pointers to go. This is used by the bindings internally.
 func UnsafePopupInterfaceFromGlibBorrow(p unsafe.Pointer) *PopupInterface {
 	return &PopupInterface{&popupInterface{(*C.GdkPopupInterface)(p)}}
+}
+
+// UnsafePopupInterfaceFromGlibNone is used to convert raw C.GdkPopupInterface pointers to go while taking a reference. This is used by the bindings internally.
+func UnsafePopupInterfaceFromGlibNone(p unsafe.Pointer) *PopupInterface {
+	// FIXME: this has no ref function, what should we do here?
+	wrapped := UnsafePopupInterfaceFromGlibBorrow(p)
+	runtime.SetFinalizer(
+		wrapped.popupInterface,
+		func (intern *popupInterface) {
+			C.free(unsafe.Pointer(intern.native))
+		},
+	)
+	return wrapped
 }
 
 // UnsafePopupInterfaceFromGlibFull is used to convert raw C.GdkPopupInterface pointers to go while taking a reference. This is used by the bindings internally.
@@ -24077,9 +24429,16 @@ type popupLayout struct {
 	native *C.GdkPopupLayout
 }
 
-func marshalPopupLayout(p uintptr) (interface{}, error) {
-	b := gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Boxed()
+var _ gobject.GoValueInitializer = (*PopupLayout)(nil)
+
+func marshalPopupLayout(p unsafe.Pointer) (interface{}, error) {
+	b := gobject.ValueFromNative(p).Boxed()
 	return UnsafePopupLayoutFromGlibBorrow(b), nil
+}
+
+func (r *PopupLayout) InitGoValue(v *gobject.Value) {
+	v.Init(TypePopupLayout)
+	v.SetBoxed(unsafe.Pointer(r.native))
 }
 
 // UnsafePopupLayoutFromGlibBorrow is used to convert raw C.GdkPopupLayout pointers to go. This is used by the bindings internally.
@@ -24089,8 +24448,8 @@ func UnsafePopupLayoutFromGlibBorrow(p unsafe.Pointer) *PopupLayout {
 
 // UnsafePopupLayoutFromGlibNone is used to convert raw C.GdkPopupLayout pointers to go while taking a reference. This is used by the bindings internally.
 func UnsafePopupLayoutFromGlibNone(p unsafe.Pointer) *PopupLayout {
-	C.gdk_popup_layout_ref(p)
-	wrapped := UnsafePopupLayoutFromGlibNone(p)
+	C.gdk_popup_layout_ref((*C.GdkPopupLayout)(p))
+	wrapped := UnsafePopupLayoutFromGlibBorrow(p)
 	runtime.SetFinalizer(
 		wrapped.popupLayout,
 		func (intern *popupLayout) {
@@ -24143,13 +24502,13 @@ func UnsafePopupLayoutToGlibFull(p *PopupLayout) unsafe.Pointer {
 // 
 // The function takes the following parameters:
 // 
-// 	- anchorRect Rectangle: the anchor `GdkRectangle` to align @surface with 
+// 	- anchorRect *Rectangle: the anchor `GdkRectangle` to align @surface with 
 // 	- rectAnchor Gravity: the point on @anchor_rect to align with @surface's anchor point 
 // 	- surfaceAnchor Gravity: the point on @surface to align with @rect's anchor point 
 // 
 // The function returns the following values:
 // 
-// 	- ret PopupLayout 
+// 	- goret *PopupLayout 
 //
 // Create a popup layout description.
 // 
@@ -24163,7 +24522,7 @@ func UnsafePopupLayoutToGlibFull(p *PopupLayout) unsafe.Pointer {
 // The position of @anchor_rect's anchor point can optionally be offset using
 // [method@Gdk.PopupLayout.set_offset], which is equivalent to offsetting the
 // position of surface.
-func NewPopupLayout(anchorRect Rectangle, rectAnchor Gravity, surfaceAnchor Gravity) PopupLayout {
+func NewPopupLayout(anchorRect *Rectangle, rectAnchor Gravity, surfaceAnchor Gravity) *PopupLayout {
 	var carg1 *C.GdkRectangle   // in, none, converted
 	var carg2 C.GdkGravity      // in, none, casted
 	var carg3 C.GdkGravity      // in, none, casted
@@ -24178,25 +24537,47 @@ func NewPopupLayout(anchorRect Rectangle, rectAnchor Gravity, surfaceAnchor Grav
 	runtime.KeepAlive(rectAnchor)
 	runtime.KeepAlive(surfaceAnchor)
 
-	var ret PopupLayout
+	var goret *PopupLayout
 
-	ret = UnsafePopupLayoutFromGlibFull(unsafe.Pointer(cret))
+	goret = UnsafePopupLayoutFromGlibFull(unsafe.Pointer(cret))
 
-	return ret
+	return goret
+}
+
+// Copy wraps gdk_popup_layout_copy
+// The function returns the following values:
+// 
+// 	- goret *PopupLayout 
+//
+// Makes a copy of @layout.
+func (layout *PopupLayout) Copy() *PopupLayout {
+	var carg0 *C.GdkPopupLayout // in, none, converted
+	var cret  *C.GdkPopupLayout // return, full, converted
+
+	carg0 = (*C.GdkPopupLayout)(UnsafePopupLayoutToGlibNone(layout))
+
+	cret = C.gdk_popup_layout_copy(carg0)
+	runtime.KeepAlive(layout)
+
+	var goret *PopupLayout
+
+	goret = UnsafePopupLayoutFromGlibFull(unsafe.Pointer(cret))
+
+	return goret
 }
 
 // Equal wraps gdk_popup_layout_equal
 // 
 // The function takes the following parameters:
 // 
-// 	- other PopupLayout: another `GdkPopupLayout` 
+// 	- other *PopupLayout: another `GdkPopupLayout` 
 // 
 // The function returns the following values:
 // 
-// 	- ret bool 
+// 	- goret bool 
 //
 // Check whether @layout and @other has identical layout properties.
-func (layout *PopupLayout) Equal(other PopupLayout) bool {
+func (layout *PopupLayout) Equal(other *PopupLayout) bool {
 	var carg0 *C.GdkPopupLayout // in, none, converted
 	var carg1 *C.GdkPopupLayout // in, none, converted
 	var cret  C.gboolean        // return
@@ -24208,19 +24589,19 @@ func (layout *PopupLayout) Equal(other PopupLayout) bool {
 	runtime.KeepAlive(layout)
 	runtime.KeepAlive(other)
 
-	var ret bool
+	var goret bool
 
 	if cret != 0 {
-		ret = true
+		goret = true
 	}
 
-	return ret
+	return goret
 }
 
 // GetAnchorHints wraps gdk_popup_layout_get_anchor_hints
 // The function returns the following values:
 // 
-// 	- ret AnchorHints 
+// 	- goret AnchorHints 
 //
 // Get the `GdkAnchorHints`.
 func (layout *PopupLayout) GetAnchorHints() AnchorHints {
@@ -24232,20 +24613,20 @@ func (layout *PopupLayout) GetAnchorHints() AnchorHints {
 	cret = C.gdk_popup_layout_get_anchor_hints(carg0)
 	runtime.KeepAlive(layout)
 
-	var ret AnchorHints
+	var goret AnchorHints
 
-	ret = AnchorHints(cret)
+	goret = AnchorHints(cret)
 
-	return ret
+	return goret
 }
 
 // GetAnchorRect wraps gdk_popup_layout_get_anchor_rect
 // The function returns the following values:
 // 
-// 	- ret Rectangle 
+// 	- goret *Rectangle 
 //
 // Get the anchor rectangle.
-func (layout *PopupLayout) GetAnchorRect() Rectangle {
+func (layout *PopupLayout) GetAnchorRect() *Rectangle {
 	var carg0 *C.GdkPopupLayout // in, none, converted
 	var cret  *C.GdkRectangle   // return, none, converted
 
@@ -24254,11 +24635,11 @@ func (layout *PopupLayout) GetAnchorRect() Rectangle {
 	cret = C.gdk_popup_layout_get_anchor_rect(carg0)
 	runtime.KeepAlive(layout)
 
-	var ret Rectangle
+	var goret *Rectangle
 
-	ret = UnsafeRectangleFromGlibNone(unsafe.Pointer(cret))
+	goret = UnsafeRectangleFromGlibNone(unsafe.Pointer(cret))
 
-	return ret
+	return goret
 }
 
 // GetOffset wraps gdk_popup_layout_get_offset
@@ -24290,7 +24671,7 @@ func (layout *PopupLayout) GetOffset() (int, int) {
 // GetRectAnchor wraps gdk_popup_layout_get_rect_anchor
 // The function returns the following values:
 // 
-// 	- ret Gravity 
+// 	- goret Gravity 
 //
 // Returns the anchor position on the anchor rectangle.
 func (layout *PopupLayout) GetRectAnchor() Gravity {
@@ -24302,11 +24683,11 @@ func (layout *PopupLayout) GetRectAnchor() Gravity {
 	cret = C.gdk_popup_layout_get_rect_anchor(carg0)
 	runtime.KeepAlive(layout)
 
-	var ret Gravity
+	var goret Gravity
 
-	ret = Gravity(cret)
+	goret = Gravity(cret)
 
-	return ret
+	return goret
 }
 
 // GetShadowWidth wraps gdk_popup_layout_get_shadow_width
@@ -24346,7 +24727,7 @@ func (layout *PopupLayout) GetShadowWidth() (int, int, int, int) {
 // GetSurfaceAnchor wraps gdk_popup_layout_get_surface_anchor
 // The function returns the following values:
 // 
-// 	- ret Gravity 
+// 	- goret Gravity 
 //
 // Returns the anchor position on the popup surface.
 func (layout *PopupLayout) GetSurfaceAnchor() Gravity {
@@ -24358,11 +24739,11 @@ func (layout *PopupLayout) GetSurfaceAnchor() Gravity {
 	cret = C.gdk_popup_layout_get_surface_anchor(carg0)
 	runtime.KeepAlive(layout)
 
-	var ret Gravity
+	var goret Gravity
 
-	ret = Gravity(cret)
+	goret = Gravity(cret)
 
-	return ret
+	return goret
 }
 
 // SetAnchorHints wraps gdk_popup_layout_set_anchor_hints
@@ -24394,10 +24775,10 @@ func (layout *PopupLayout) SetAnchorHints(anchorHints AnchorHints) {
 // 
 // The function takes the following parameters:
 // 
-// 	- anchorRect Rectangle: the new anchor rectangle 
+// 	- anchorRect *Rectangle: the new anchor rectangle 
 //
 // Set the anchor rectangle.
-func (layout *PopupLayout) SetAnchorRect(anchorRect Rectangle) {
+func (layout *PopupLayout) SetAnchorRect(anchorRect *Rectangle) {
 	var carg0 *C.GdkPopupLayout // in, none, converted
 	var carg1 *C.GdkRectangle   // in, none, converted
 
@@ -24525,14 +24906,34 @@ type rgbA struct {
 	native *C.GdkRGBA
 }
 
-func marshalRGBA(p uintptr) (interface{}, error) {
-	b := gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Boxed()
+var _ gobject.GoValueInitializer = (*RGBA)(nil)
+
+func marshalRGBA(p unsafe.Pointer) (interface{}, error) {
+	b := gobject.ValueFromNative(p).Boxed()
 	return UnsafeRGBAFromGlibBorrow(b), nil
+}
+
+func (r *RGBA) InitGoValue(v *gobject.Value) {
+	v.Init(TypeRGBA)
+	v.SetBoxed(unsafe.Pointer(r.native))
 }
 
 // UnsafeRGBAFromGlibBorrow is used to convert raw C.GdkRGBA pointers to go. This is used by the bindings internally.
 func UnsafeRGBAFromGlibBorrow(p unsafe.Pointer) *RGBA {
 	return &RGBA{&rgbA{(*C.GdkRGBA)(p)}}
+}
+
+// UnsafeRGBAFromGlibNone is used to convert raw C.GdkRGBA pointers to go while taking a reference. This is used by the bindings internally.
+func UnsafeRGBAFromGlibNone(p unsafe.Pointer) *RGBA {
+	// FIXME: this has no ref function, what should we do here?
+	wrapped := UnsafeRGBAFromGlibBorrow(p)
+	runtime.SetFinalizer(
+		wrapped.rgbA,
+		func (intern *rgbA) {
+			C.gdk_rgba_free(intern.native)
+		},
+	)
+	return wrapped
 }
 
 // UnsafeRGBAFromGlibFull is used to convert raw C.GdkRGBA pointers to go while taking a reference. This is used by the bindings internally.
@@ -24641,10 +25042,34 @@ func (r *RGBA) SetAlpha(alpha float32) {
 	*valptr = C.gfloat(alpha)
 }
 
+// Copy wraps gdk_rgba_copy
+// The function returns the following values:
+// 
+// 	- goret *RGBA 
+//
+// Makes a copy of a `GdkRGBA`.
+// 
+// The result must be freed through [method@Gdk.RGBA.free].
+func (rgba *RGBA) Copy() *RGBA {
+	var carg0 *C.GdkRGBA // in, none, converted
+	var cret  *C.GdkRGBA // return, full, converted
+
+	carg0 = (*C.GdkRGBA)(UnsafeRGBAToGlibNone(rgba))
+
+	cret = C.gdk_rgba_copy(carg0)
+	runtime.KeepAlive(rgba)
+
+	var goret *RGBA
+
+	goret = UnsafeRGBAFromGlibFull(unsafe.Pointer(cret))
+
+	return goret
+}
+
 // IsClear wraps gdk_rgba_is_clear
 // The function returns the following values:
 // 
-// 	- ret bool 
+// 	- goret bool 
 //
 // Checks if an @rgba value is transparent.
 // 
@@ -24658,19 +25083,19 @@ func (rgba *RGBA) IsClear() bool {
 	cret = C.gdk_rgba_is_clear(carg0)
 	runtime.KeepAlive(rgba)
 
-	var ret bool
+	var goret bool
 
 	if cret != 0 {
-		ret = true
+		goret = true
 	}
 
-	return ret
+	return goret
 }
 
 // IsOpaque wraps gdk_rgba_is_opaque
 // The function returns the following values:
 // 
-// 	- ret bool 
+// 	- goret bool 
 //
 // Checks if an @rgba value is opaque.
 // 
@@ -24685,13 +25110,13 @@ func (rgba *RGBA) IsOpaque() bool {
 	cret = C.gdk_rgba_is_opaque(carg0)
 	runtime.KeepAlive(rgba)
 
-	var ret bool
+	var goret bool
 
 	if cret != 0 {
-		ret = true
+		goret = true
 	}
 
-	return ret
+	return goret
 }
 
 // Parse wraps gdk_rgba_parse
@@ -24702,7 +25127,7 @@ func (rgba *RGBA) IsOpaque() bool {
 // 
 // The function returns the following values:
 // 
-// 	- ret bool 
+// 	- goret bool 
 //
 // Parses a textual representation of a color.
 // 
@@ -24737,19 +25162,19 @@ func (rgba *RGBA) Parse(spec string) bool {
 	runtime.KeepAlive(rgba)
 	runtime.KeepAlive(spec)
 
-	var ret bool
+	var goret bool
 
 	if cret != 0 {
-		ret = true
+		goret = true
 	}
 
-	return ret
+	return goret
 }
 
 // ToString wraps gdk_rgba_to_string
 // The function returns the following values:
 // 
-// 	- ret string 
+// 	- goret string 
 //
 // Returns a textual specification of @rgba in the form
 // `rgb(r,g,b)` or `rgba(r,g,b,a)`, where “r”, “g”, “b” and
@@ -24773,12 +25198,12 @@ func (rgba *RGBA) ToString() string {
 	cret = C.gdk_rgba_to_string(carg0)
 	runtime.KeepAlive(rgba)
 
-	var ret string
+	var goret string
 
-	ret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
 	defer C.free(unsafe.Pointer(cret))
 
-	return ret
+	return goret
 }
 
 // Rectangle wraps GdkRectangle
@@ -24807,14 +25232,34 @@ type rectangle struct {
 	native *C.GdkRectangle
 }
 
-func marshalRectangle(p uintptr) (interface{}, error) {
-	b := gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Boxed()
+var _ gobject.GoValueInitializer = (*Rectangle)(nil)
+
+func marshalRectangle(p unsafe.Pointer) (interface{}, error) {
+	b := gobject.ValueFromNative(p).Boxed()
 	return UnsafeRectangleFromGlibBorrow(b), nil
+}
+
+func (r *Rectangle) InitGoValue(v *gobject.Value) {
+	v.Init(TypeRectangle)
+	v.SetBoxed(unsafe.Pointer(r.native))
 }
 
 // UnsafeRectangleFromGlibBorrow is used to convert raw C.GdkRectangle pointers to go. This is used by the bindings internally.
 func UnsafeRectangleFromGlibBorrow(p unsafe.Pointer) *Rectangle {
 	return &Rectangle{&rectangle{(*C.GdkRectangle)(p)}}
+}
+
+// UnsafeRectangleFromGlibNone is used to convert raw C.GdkRectangle pointers to go while taking a reference. This is used by the bindings internally.
+func UnsafeRectangleFromGlibNone(p unsafe.Pointer) *Rectangle {
+	// FIXME: this has no ref function, what should we do here?
+	wrapped := UnsafeRectangleFromGlibBorrow(p)
+	runtime.SetFinalizer(
+		wrapped.rectangle,
+		func (intern *rectangle) {
+			C.free(unsafe.Pointer(intern.native))
+		},
+	)
+	return wrapped
 }
 
 // UnsafeRectangleFromGlibFull is used to convert raw C.GdkRectangle pointers to go while taking a reference. This is used by the bindings internally.
@@ -24930,7 +25375,7 @@ func (r *Rectangle) SetHeight(height int) {
 // 
 // The function returns the following values:
 // 
-// 	- ret bool 
+// 	- goret bool 
 //
 // Returns %TRUE if @rect contains the point described by @x and @y.
 func (rect *Rectangle) ContainsPoint(x int, y int) bool {
@@ -24948,27 +25393,27 @@ func (rect *Rectangle) ContainsPoint(x int, y int) bool {
 	runtime.KeepAlive(x)
 	runtime.KeepAlive(y)
 
-	var ret bool
+	var goret bool
 
 	if cret != 0 {
-		ret = true
+		goret = true
 	}
 
-	return ret
+	return goret
 }
 
 // Equal wraps gdk_rectangle_equal
 // 
 // The function takes the following parameters:
 // 
-// 	- rect2 Rectangle: a `GdkRectangle` 
+// 	- rect2 *Rectangle: a `GdkRectangle` 
 // 
 // The function returns the following values:
 // 
-// 	- ret bool 
+// 	- goret bool 
 //
 // Checks if the two given rectangles are equal.
-func (rect1 *Rectangle) Equal(rect2 Rectangle) bool {
+func (rect1 *Rectangle) Equal(rect2 *Rectangle) bool {
 	var carg0 *C.GdkRectangle // in, none, converted
 	var carg1 *C.GdkRectangle // in, none, converted
 	var cret  C.gboolean      // return
@@ -24980,13 +25425,97 @@ func (rect1 *Rectangle) Equal(rect2 Rectangle) bool {
 	runtime.KeepAlive(rect1)
 	runtime.KeepAlive(rect2)
 
-	var ret bool
+	var goret bool
 
 	if cret != 0 {
-		ret = true
+		goret = true
 	}
 
-	return ret
+	return goret
+}
+
+// Intersect wraps gdk_rectangle_intersect
+// 
+// The function takes the following parameters:
+// 
+// 	- src2 *Rectangle: a `GdkRectangle` 
+// 
+// The function returns the following values:
+// 
+// 	- dest Rectangle: return location for the
+//   intersection of @src1 and @src2 
+// 	- goret bool 
+//
+// Calculates the intersection of two rectangles.
+// 
+// It is allowed for @dest to be the same as either @src1 or @src2.
+// If the rectangles do not intersect, @dest’s width and height is set
+// to 0 and its x and y values are undefined. If you are only interested
+// in whether the rectangles intersect, but not in the intersecting area
+// itself, pass %NULL for @dest.
+func (src1 *Rectangle) Intersect(src2 *Rectangle) (Rectangle, bool) {
+	var carg0 *C.GdkRectangle // in, none, converted
+	var carg1 *C.GdkRectangle // in, none, converted
+	var carg2 C.GdkRectangle  // out, transfer: none, C Pointers: 0, Name: Rectangle, optional, caller-allocates
+	var cret  C.gboolean      // return
+
+	carg0 = (*C.GdkRectangle)(UnsafeRectangleToGlibNone(src1))
+	carg1 = (*C.GdkRectangle)(UnsafeRectangleToGlibNone(src2))
+
+	cret = C.gdk_rectangle_intersect(carg0, carg1, &carg2)
+	runtime.KeepAlive(src1)
+	runtime.KeepAlive(src2)
+
+	var dest  Rectangle
+	var goret bool
+
+	_ = dest
+	_ = carg2
+	panic("unimplemented conversion of Rectangle (GdkRectangle)")
+	if cret != 0 {
+		goret = true
+	}
+
+	return dest, goret
+}
+
+// Union wraps gdk_rectangle_union
+// 
+// The function takes the following parameters:
+// 
+// 	- src2 *Rectangle: a `GdkRectangle` 
+// 
+// The function returns the following values:
+// 
+// 	- dest Rectangle: return location for the union of @src1 and @src2 
+//
+// Calculates the union of two rectangles.
+// 
+// The union of rectangles @src1 and @src2 is the smallest rectangle which
+// includes both @src1 and @src2 within it. It is allowed for @dest to be
+// the same as either @src1 or @src2.
+// 
+// Note that this function does not ignore 'empty' rectangles (ie. with
+// zero width or height).
+func (src1 *Rectangle) Union(src2 *Rectangle) Rectangle {
+	var carg0 *C.GdkRectangle // in, none, converted
+	var carg1 *C.GdkRectangle // in, none, converted
+	var carg2 C.GdkRectangle  // out, transfer: none, C Pointers: 0, Name: Rectangle, caller-allocates
+
+	carg0 = (*C.GdkRectangle)(UnsafeRectangleToGlibNone(src1))
+	carg1 = (*C.GdkRectangle)(UnsafeRectangleToGlibNone(src2))
+
+	C.gdk_rectangle_union(carg0, carg1, &carg2)
+	runtime.KeepAlive(src1)
+	runtime.KeepAlive(src2)
+
+	var dest Rectangle
+
+	_ = dest
+	_ = carg2
+	panic("unimplemented conversion of Rectangle (GdkRectangle)")
+
+	return dest
 }
 
 // SnapshotClass wraps GdkSnapshotClass
@@ -25002,6 +25531,19 @@ type snapshotClass struct {
 // UnsafeSnapshotClassFromGlibBorrow is used to convert raw C.GdkSnapshotClass pointers to go. This is used by the bindings internally.
 func UnsafeSnapshotClassFromGlibBorrow(p unsafe.Pointer) *SnapshotClass {
 	return &SnapshotClass{&snapshotClass{(*C.GdkSnapshotClass)(p)}}
+}
+
+// UnsafeSnapshotClassFromGlibNone is used to convert raw C.GdkSnapshotClass pointers to go while taking a reference. This is used by the bindings internally.
+func UnsafeSnapshotClassFromGlibNone(p unsafe.Pointer) *SnapshotClass {
+	// FIXME: this has no ref function, what should we do here?
+	wrapped := UnsafeSnapshotClassFromGlibBorrow(p)
+	runtime.SetFinalizer(
+		wrapped.snapshotClass,
+		func (intern *snapshotClass) {
+			C.free(unsafe.Pointer(intern.native))
+		},
+	)
+	return wrapped
 }
 
 // UnsafeSnapshotClassFromGlibFull is used to convert raw C.GdkSnapshotClass pointers to go while taking a reference. This is used by the bindings internally.
@@ -25051,6 +25593,19 @@ func UnsafeSurfaceClassFromGlibBorrow(p unsafe.Pointer) *SurfaceClass {
 	return &SurfaceClass{&surfaceClass{(*C.GdkSurfaceClass)(p)}}
 }
 
+// UnsafeSurfaceClassFromGlibNone is used to convert raw C.GdkSurfaceClass pointers to go while taking a reference. This is used by the bindings internally.
+func UnsafeSurfaceClassFromGlibNone(p unsafe.Pointer) *SurfaceClass {
+	// FIXME: this has no ref function, what should we do here?
+	wrapped := UnsafeSurfaceClassFromGlibBorrow(p)
+	runtime.SetFinalizer(
+		wrapped.surfaceClass,
+		func (intern *surfaceClass) {
+			C.free(unsafe.Pointer(intern.native))
+		},
+	)
+	return wrapped
+}
+
 // UnsafeSurfaceClassFromGlibFull is used to convert raw C.GdkSurfaceClass pointers to go while taking a reference. This is used by the bindings internally.
 func UnsafeSurfaceClassFromGlibFull(p unsafe.Pointer) *SurfaceClass {
 	wrapped := UnsafeSurfaceClassFromGlibBorrow(p)
@@ -25096,6 +25651,19 @@ type textureClass struct {
 // UnsafeTextureClassFromGlibBorrow is used to convert raw C.GdkTextureClass pointers to go. This is used by the bindings internally.
 func UnsafeTextureClassFromGlibBorrow(p unsafe.Pointer) *TextureClass {
 	return &TextureClass{&textureClass{(*C.GdkTextureClass)(p)}}
+}
+
+// UnsafeTextureClassFromGlibNone is used to convert raw C.GdkTextureClass pointers to go while taking a reference. This is used by the bindings internally.
+func UnsafeTextureClassFromGlibNone(p unsafe.Pointer) *TextureClass {
+	// FIXME: this has no ref function, what should we do here?
+	wrapped := UnsafeTextureClassFromGlibBorrow(p)
+	runtime.SetFinalizer(
+		wrapped.textureClass,
+		func (intern *textureClass) {
+			C.free(unsafe.Pointer(intern.native))
+		},
+	)
+	return wrapped
 }
 
 // UnsafeTextureClassFromGlibFull is used to convert raw C.GdkTextureClass pointers to go while taking a reference. This is used by the bindings internally.
@@ -25151,14 +25719,34 @@ type textureDownloader struct {
 	native *C.GdkTextureDownloader
 }
 
-func marshalTextureDownloader(p uintptr) (interface{}, error) {
-	b := gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Boxed()
+var _ gobject.GoValueInitializer = (*TextureDownloader)(nil)
+
+func marshalTextureDownloader(p unsafe.Pointer) (interface{}, error) {
+	b := gobject.ValueFromNative(p).Boxed()
 	return UnsafeTextureDownloaderFromGlibBorrow(b), nil
+}
+
+func (r *TextureDownloader) InitGoValue(v *gobject.Value) {
+	v.Init(TypeTextureDownloader)
+	v.SetBoxed(unsafe.Pointer(r.native))
 }
 
 // UnsafeTextureDownloaderFromGlibBorrow is used to convert raw C.GdkTextureDownloader pointers to go. This is used by the bindings internally.
 func UnsafeTextureDownloaderFromGlibBorrow(p unsafe.Pointer) *TextureDownloader {
 	return &TextureDownloader{&textureDownloader{(*C.GdkTextureDownloader)(p)}}
+}
+
+// UnsafeTextureDownloaderFromGlibNone is used to convert raw C.GdkTextureDownloader pointers to go while taking a reference. This is used by the bindings internally.
+func UnsafeTextureDownloaderFromGlibNone(p unsafe.Pointer) *TextureDownloader {
+	// FIXME: this has no ref function, what should we do here?
+	wrapped := UnsafeTextureDownloaderFromGlibBorrow(p)
+	runtime.SetFinalizer(
+		wrapped.textureDownloader,
+		func (intern *textureDownloader) {
+			C.gdk_texture_downloader_free(intern.native)
+		},
+	)
+	return wrapped
 }
 
 // UnsafeTextureDownloaderFromGlibFull is used to convert raw C.GdkTextureDownloader pointers to go while taking a reference. This is used by the bindings internally.
@@ -25201,13 +25789,13 @@ func UnsafeTextureDownloaderToGlibFull(t *TextureDownloader) unsafe.Pointer {
 // 
 // The function returns the following values:
 // 
-// 	- ret TextureDownloader 
+// 	- goret *TextureDownloader 
 //
 // Creates a new texture downloader for @texture.
 // 
 // By default, the downloader will convert the data to
 // the default memory format, and to the sRGB color state.
-func NewTextureDownloader(texture Texture) TextureDownloader {
+func NewTextureDownloader(texture Texture) *TextureDownloader {
 	var carg1 *C.GdkTexture           // in, none, converted
 	var cret  *C.GdkTextureDownloader // return, full, converted
 
@@ -25216,20 +25804,76 @@ func NewTextureDownloader(texture Texture) TextureDownloader {
 	cret = C.gdk_texture_downloader_new(carg1)
 	runtime.KeepAlive(texture)
 
-	var ret TextureDownloader
+	var goret *TextureDownloader
 
-	ret = UnsafeTextureDownloaderFromGlibFull(unsafe.Pointer(cret))
+	goret = UnsafeTextureDownloaderFromGlibFull(unsafe.Pointer(cret))
 
-	return ret
+	return goret
+}
+
+// Copy wraps gdk_texture_downloader_copy
+// The function returns the following values:
+// 
+// 	- goret *TextureDownloader 
+//
+// Creates a copy of the downloader.
+// 
+// This function is meant for language bindings.
+func (self *TextureDownloader) Copy() *TextureDownloader {
+	var carg0 *C.GdkTextureDownloader // in, none, converted
+	var cret  *C.GdkTextureDownloader // return, full, converted
+
+	carg0 = (*C.GdkTextureDownloader)(UnsafeTextureDownloaderToGlibNone(self))
+
+	cret = C.gdk_texture_downloader_copy(carg0)
+	runtime.KeepAlive(self)
+
+	var goret *TextureDownloader
+
+	goret = UnsafeTextureDownloaderFromGlibFull(unsafe.Pointer(cret))
+
+	return goret
+}
+
+// DownloadBytes wraps gdk_texture_downloader_download_bytes
+// The function returns the following values:
+// 
+// 	- outStride uint: The stride of the resulting data in bytes 
+// 	- goret *glib.Bytes 
+//
+// Downloads the given texture pixels into a `GBytes`. The rowstride will
+// be stored in the stride value.
+// 
+// This function will abort if it tries to download a large texture and
+// fails to allocate memory. If you think that may happen, you should handle
+// memory allocation yourself and use [method@Gdk.TextureDownloader.download_into]
+// once allocation succeeded.
+func (self *TextureDownloader) DownloadBytes() (uint, *glib.Bytes) {
+	var carg0 *C.GdkTextureDownloader // in, none, converted
+	var carg1 C.gsize                 // out, full, casted
+	var cret  *C.GBytes               // return, full, converted
+
+	carg0 = (*C.GdkTextureDownloader)(UnsafeTextureDownloaderToGlibNone(self))
+
+	cret = C.gdk_texture_downloader_download_bytes(carg0, &carg1)
+	runtime.KeepAlive(self)
+
+	var outStride uint
+	var goret     *glib.Bytes
+
+	outStride = uint(carg1)
+	goret = glib.UnsafeBytesFromGlibFull(unsafe.Pointer(cret))
+
+	return outStride, goret
 }
 
 // GetColorState wraps gdk_texture_downloader_get_color_state
 // The function returns the following values:
 // 
-// 	- ret ColorState 
+// 	- goret *ColorState 
 //
 // Gets the color state that the data will be downloaded in.
-func (self *TextureDownloader) GetColorState() ColorState {
+func (self *TextureDownloader) GetColorState() *ColorState {
 	var carg0 *C.GdkTextureDownloader // in, none, converted
 	var cret  *C.GdkColorState        // return, full, converted
 
@@ -25238,17 +25882,17 @@ func (self *TextureDownloader) GetColorState() ColorState {
 	cret = C.gdk_texture_downloader_get_color_state(carg0)
 	runtime.KeepAlive(self)
 
-	var ret ColorState
+	var goret *ColorState
 
-	ret = UnsafeColorStateFromGlibFull(unsafe.Pointer(cret))
+	goret = UnsafeColorStateFromGlibFull(unsafe.Pointer(cret))
 
-	return ret
+	return goret
 }
 
 // GetFormat wraps gdk_texture_downloader_get_format
 // The function returns the following values:
 // 
-// 	- ret MemoryFormat 
+// 	- goret MemoryFormat 
 //
 // Gets the format that the data will be downloaded in.
 func (self *TextureDownloader) GetFormat() MemoryFormat {
@@ -25260,17 +25904,17 @@ func (self *TextureDownloader) GetFormat() MemoryFormat {
 	cret = C.gdk_texture_downloader_get_format(carg0)
 	runtime.KeepAlive(self)
 
-	var ret MemoryFormat
+	var goret MemoryFormat
 
-	ret = MemoryFormat(cret)
+	goret = MemoryFormat(cret)
 
-	return ret
+	return goret
 }
 
 // GetTexture wraps gdk_texture_downloader_get_texture
 // The function returns the following values:
 // 
-// 	- ret Texture 
+// 	- goret Texture 
 //
 // Gets the texture that the downloader will download.
 func (self *TextureDownloader) GetTexture() Texture {
@@ -25282,24 +25926,24 @@ func (self *TextureDownloader) GetTexture() Texture {
 	cret = C.gdk_texture_downloader_get_texture(carg0)
 	runtime.KeepAlive(self)
 
-	var ret Texture
+	var goret Texture
 
-	ret = UnsafeTextureFromGlibNone(unsafe.Pointer(cret))
+	goret = UnsafeTextureFromGlibNone(unsafe.Pointer(cret))
 
-	return ret
+	return goret
 }
 
 // SetColorState wraps gdk_texture_downloader_set_color_state
 // 
 // The function takes the following parameters:
 // 
-// 	- colorState ColorState: the color state to use 
+// 	- colorState *ColorState: the color state to use 
 //
 // Sets the color state the downloader will convert the data to.
 // 
 // By default, the sRGB colorstate returned by [func@ColorState.get_srgb]
 // is used.
-func (self *TextureDownloader) SetColorState(colorState ColorState) {
+func (self *TextureDownloader) SetColorState(colorState *ColorState) {
 	var carg0 *C.GdkTextureDownloader // in, none, converted
 	var carg1 *C.GdkColorState        // in, none, converted
 
@@ -25373,6 +26017,19 @@ func UnsafeTimeCoordFromGlibBorrow(p unsafe.Pointer) *TimeCoord {
 	return &TimeCoord{&timeCoord{(*C.GdkTimeCoord)(p)}}
 }
 
+// UnsafeTimeCoordFromGlibNone is used to convert raw C.GdkTimeCoord pointers to go while taking a reference. This is used by the bindings internally.
+func UnsafeTimeCoordFromGlibNone(p unsafe.Pointer) *TimeCoord {
+	// FIXME: this has no ref function, what should we do here?
+	wrapped := UnsafeTimeCoordFromGlibBorrow(p)
+	runtime.SetFinalizer(
+		wrapped.timeCoord,
+		func (intern *timeCoord) {
+			C.free(unsafe.Pointer(intern.native))
+		},
+	)
+	return wrapped
+}
+
 // UnsafeTimeCoordFromGlibFull is used to convert raw C.GdkTimeCoord pointers to go while taking a reference. This is used by the bindings internally.
 func UnsafeTimeCoordFromGlibFull(p unsafe.Pointer) *TimeCoord {
 	wrapped := UnsafeTimeCoordFromGlibBorrow(p)
@@ -25438,6 +26095,19 @@ func UnsafeToplevelInterfaceFromGlibBorrow(p unsafe.Pointer) *ToplevelInterface 
 	return &ToplevelInterface{&toplevelInterface{(*C.GdkToplevelInterface)(p)}}
 }
 
+// UnsafeToplevelInterfaceFromGlibNone is used to convert raw C.GdkToplevelInterface pointers to go while taking a reference. This is used by the bindings internally.
+func UnsafeToplevelInterfaceFromGlibNone(p unsafe.Pointer) *ToplevelInterface {
+	// FIXME: this has no ref function, what should we do here?
+	wrapped := UnsafeToplevelInterfaceFromGlibBorrow(p)
+	runtime.SetFinalizer(
+		wrapped.toplevelInterface,
+		func (intern *toplevelInterface) {
+			C.free(unsafe.Pointer(intern.native))
+		},
+	)
+	return wrapped
+}
+
 // UnsafeToplevelInterfaceFromGlibFull is used to convert raw C.GdkToplevelInterface pointers to go while taking a reference. This is used by the bindings internally.
 func UnsafeToplevelInterfaceFromGlibFull(p unsafe.Pointer) *ToplevelInterface {
 	wrapped := UnsafeToplevelInterfaceFromGlibBorrow(p)
@@ -25490,9 +26160,16 @@ type toplevelLayout struct {
 	native *C.GdkToplevelLayout
 }
 
-func marshalToplevelLayout(p uintptr) (interface{}, error) {
-	b := gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Boxed()
+var _ gobject.GoValueInitializer = (*ToplevelLayout)(nil)
+
+func marshalToplevelLayout(p unsafe.Pointer) (interface{}, error) {
+	b := gobject.ValueFromNative(p).Boxed()
 	return UnsafeToplevelLayoutFromGlibBorrow(b), nil
+}
+
+func (r *ToplevelLayout) InitGoValue(v *gobject.Value) {
+	v.Init(TypeToplevelLayout)
+	v.SetBoxed(unsafe.Pointer(r.native))
 }
 
 // UnsafeToplevelLayoutFromGlibBorrow is used to convert raw C.GdkToplevelLayout pointers to go. This is used by the bindings internally.
@@ -25502,8 +26179,8 @@ func UnsafeToplevelLayoutFromGlibBorrow(p unsafe.Pointer) *ToplevelLayout {
 
 // UnsafeToplevelLayoutFromGlibNone is used to convert raw C.GdkToplevelLayout pointers to go while taking a reference. This is used by the bindings internally.
 func UnsafeToplevelLayoutFromGlibNone(p unsafe.Pointer) *ToplevelLayout {
-	C.gdk_toplevel_layout_ref(p)
-	wrapped := UnsafeToplevelLayoutFromGlibNone(p)
+	C.gdk_toplevel_layout_ref((*C.GdkToplevelLayout)(p))
+	wrapped := UnsafeToplevelLayoutFromGlibBorrow(p)
 	runtime.SetFinalizer(
 		wrapped.toplevelLayout,
 		func (intern *toplevelLayout) {
@@ -25555,7 +26232,7 @@ func UnsafeToplevelLayoutToGlibFull(t *ToplevelLayout) unsafe.Pointer {
 // NewToplevelLayout wraps gdk_toplevel_layout_new
 // The function returns the following values:
 // 
-// 	- ret ToplevelLayout 
+// 	- goret *ToplevelLayout 
 //
 // Create a toplevel layout description.
 // 
@@ -25564,30 +26241,52 @@ func UnsafeToplevelLayoutToGlibFull(t *ToplevelLayout) unsafe.Pointer {
 // 
 // The size is in ”application pixels”, not
 // ”device pixels” (see gdk_surface_get_scale_factor()).
-func NewToplevelLayout() ToplevelLayout {
+func NewToplevelLayout() *ToplevelLayout {
 	var cret *C.GdkToplevelLayout // return, full, converted
 
 	cret = C.gdk_toplevel_layout_new()
 
-	var ret ToplevelLayout
+	var goret *ToplevelLayout
 
-	ret = UnsafeToplevelLayoutFromGlibFull(unsafe.Pointer(cret))
+	goret = UnsafeToplevelLayoutFromGlibFull(unsafe.Pointer(cret))
 
-	return ret
+	return goret
+}
+
+// Copy wraps gdk_toplevel_layout_copy
+// The function returns the following values:
+// 
+// 	- goret *ToplevelLayout 
+//
+// Create a new `GdkToplevelLayout` and copy the contents of @layout into it.
+func (layout *ToplevelLayout) Copy() *ToplevelLayout {
+	var carg0 *C.GdkToplevelLayout // in, none, converted
+	var cret  *C.GdkToplevelLayout // return, full, converted
+
+	carg0 = (*C.GdkToplevelLayout)(UnsafeToplevelLayoutToGlibNone(layout))
+
+	cret = C.gdk_toplevel_layout_copy(carg0)
+	runtime.KeepAlive(layout)
+
+	var goret *ToplevelLayout
+
+	goret = UnsafeToplevelLayoutFromGlibFull(unsafe.Pointer(cret))
+
+	return goret
 }
 
 // Equal wraps gdk_toplevel_layout_equal
 // 
 // The function takes the following parameters:
 // 
-// 	- other ToplevelLayout: another `GdkToplevelLayout` 
+// 	- other *ToplevelLayout: another `GdkToplevelLayout` 
 // 
 // The function returns the following values:
 // 
-// 	- ret bool 
+// 	- goret bool 
 //
 // Check whether @layout and @other has identical layout properties.
-func (layout *ToplevelLayout) Equal(other ToplevelLayout) bool {
+func (layout *ToplevelLayout) Equal(other *ToplevelLayout) bool {
 	var carg0 *C.GdkToplevelLayout // in, none, converted
 	var carg1 *C.GdkToplevelLayout // in, none, converted
 	var cret  C.gboolean           // return
@@ -25599,20 +26298,20 @@ func (layout *ToplevelLayout) Equal(other ToplevelLayout) bool {
 	runtime.KeepAlive(layout)
 	runtime.KeepAlive(other)
 
-	var ret bool
+	var goret bool
 
 	if cret != 0 {
-		ret = true
+		goret = true
 	}
 
-	return ret
+	return goret
 }
 
 // GetFullscreen wraps gdk_toplevel_layout_get_fullscreen
 // The function returns the following values:
 // 
 // 	- fullscreen bool: location to store whether the toplevel should be fullscreen 
-// 	- ret bool 
+// 	- goret bool 
 //
 // If the layout specifies whether to the toplevel should go fullscreen,
 // the value pointed to by @fullscreen is set to %TRUE if it should go
@@ -25628,22 +26327,22 @@ func (layout *ToplevelLayout) GetFullscreen() (bool, bool) {
 	runtime.KeepAlive(layout)
 
 	var fullscreen bool
-	var ret        bool
+	var goret      bool
 
 	if carg1 != 0 {
 		fullscreen = true
 	}
 	if cret != 0 {
-		ret = true
+		goret = true
 	}
 
-	return fullscreen, ret
+	return fullscreen, goret
 }
 
 // GetFullscreenMonitor wraps gdk_toplevel_layout_get_fullscreen_monitor
 // The function returns the following values:
 // 
-// 	- ret Monitor 
+// 	- goret Monitor 
 //
 // Returns the monitor that the layout is fullscreening
 // the surface on.
@@ -25656,18 +26355,18 @@ func (layout *ToplevelLayout) GetFullscreenMonitor() Monitor {
 	cret = C.gdk_toplevel_layout_get_fullscreen_monitor(carg0)
 	runtime.KeepAlive(layout)
 
-	var ret Monitor
+	var goret Monitor
 
-	ret = UnsafeMonitorFromGlibNone(unsafe.Pointer(cret))
+	goret = UnsafeMonitorFromGlibNone(unsafe.Pointer(cret))
 
-	return ret
+	return goret
 }
 
 // GetMaximized wraps gdk_toplevel_layout_get_maximized
 // The function returns the following values:
 // 
 // 	- maximized bool: set to %TRUE if the toplevel should be maximized 
-// 	- ret bool 
+// 	- goret bool 
 //
 // If the layout specifies whether to the toplevel should go maximized,
 // the value pointed to by @maximized is set to %TRUE if it should go
@@ -25683,22 +26382,22 @@ func (layout *ToplevelLayout) GetMaximized() (bool, bool) {
 	runtime.KeepAlive(layout)
 
 	var maximized bool
-	var ret       bool
+	var goret     bool
 
 	if carg1 != 0 {
 		maximized = true
 	}
 	if cret != 0 {
-		ret = true
+		goret = true
 	}
 
-	return maximized, ret
+	return maximized, goret
 }
 
 // GetResizable wraps gdk_toplevel_layout_get_resizable
 // The function returns the following values:
 // 
-// 	- ret bool 
+// 	- goret bool 
 //
 // Returns whether the layout should allow the user
 // to resize the surface.
@@ -25711,13 +26410,13 @@ func (layout *ToplevelLayout) GetResizable() bool {
 	cret = C.gdk_toplevel_layout_get_resizable(carg0)
 	runtime.KeepAlive(layout)
 
-	var ret bool
+	var goret bool
 
 	if cret != 0 {
-		ret = true
+		goret = true
 	}
 
-	return ret
+	return goret
 }
 
 // SetFullscreen wraps gdk_toplevel_layout_set_fullscreen
@@ -25805,14 +26504,34 @@ type toplevelSize struct {
 	native *C.GdkToplevelSize
 }
 
-func marshalToplevelSize(p uintptr) (interface{}, error) {
-	b := gobject.TODOFromGlibBorrow(unsafe.Pointer(p)).Boxed()
+var _ gobject.GoValueInitializer = (*ToplevelSize)(nil)
+
+func marshalToplevelSize(p unsafe.Pointer) (interface{}, error) {
+	b := gobject.ValueFromNative(p).Boxed()
 	return UnsafeToplevelSizeFromGlibBorrow(b), nil
+}
+
+func (r *ToplevelSize) InitGoValue(v *gobject.Value) {
+	v.Init(TypeToplevelSize)
+	v.SetBoxed(unsafe.Pointer(r.native))
 }
 
 // UnsafeToplevelSizeFromGlibBorrow is used to convert raw C.GdkToplevelSize pointers to go. This is used by the bindings internally.
 func UnsafeToplevelSizeFromGlibBorrow(p unsafe.Pointer) *ToplevelSize {
 	return &ToplevelSize{&toplevelSize{(*C.GdkToplevelSize)(p)}}
+}
+
+// UnsafeToplevelSizeFromGlibNone is used to convert raw C.GdkToplevelSize pointers to go while taking a reference. This is used by the bindings internally.
+func UnsafeToplevelSizeFromGlibNone(p unsafe.Pointer) *ToplevelSize {
+	// FIXME: this has no ref function, what should we do here?
+	wrapped := UnsafeToplevelSizeFromGlibBorrow(p)
+	runtime.SetFinalizer(
+		wrapped.toplevelSize,
+		func (intern *toplevelSize) {
+			C.free(unsafe.Pointer(intern.native))
+		},
+	)
+	return wrapped
 }
 
 // UnsafeToplevelSizeFromGlibFull is used to convert raw C.GdkToplevelSize pointers to go while taking a reference. This is used by the bindings internally.

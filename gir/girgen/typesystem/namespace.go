@@ -148,7 +148,7 @@ func (reg *Registry) newNamespace(cfg Config, ns *namespaceWithIncludes) *Namesp
 		v.declareNested(e)
 	}
 	for _, v := range ns.Functions {
-		if t := DeclareFunction(e, nil, v); t != nil {
+		if t := DeclareFunction(e, v.CallableAttrs); t != nil {
 			namespace.Functions = append(namespace.Functions, t)
 		}
 	}

@@ -4,239 +4,250 @@ package glib
 
 import (
 	"github.com/diamondburned/gotk4/pkg/core/gbox"
+	"unsafe"
 )
 
 // #include <glib.h>
 import "C"
 
-//export _gotk4_glib2_ClearHandleFunc
-func _gotk4_glib2_ClearHandleFunc(carg1 C.guint) (cret C.void) {
-
-
-	fn(handleId)
-
-
-
-	return cret
-}
-
 //export _gotk4_glib2_CompareDataFunc
-func _gotk4_glib2_CompareDataFunc(carg1 C.gpointer, carg2 C.gpointer, carg3 C.gpointer) (cret C.int) {
+func _gotk4_glib2_CompareDataFunc(carg1 C.gconstpointer, carg2 C.gconstpointer, carg3 C.gpointer) (cret C.int) {
+	var fn CompareDataFunc
+	{
+		v := gbox.Get(uintptr(carg3))
+		if v == nil {
+			panic(`callback not found`)
+		}
+		fn = v.(CompareDataFunc)
+	}
 
+	var a     unsafe.Pointer // in, none, casted, nullable
+	var b     unsafe.Pointer // in, none, casted, nullable
+	var goret int            // return, none, casted
 
-	ret := fn(a, b)
+	if carg1 != nil {
+		a = unsafe.Pointer(carg1)
+	}
+	if carg2 != nil {
+		b = unsafe.Pointer(carg2)
+	}
 
+	goret = fn(a, b)
 
-
-	return cret
-}
-
-//export _gotk4_glib2_CompareFunc
-func _gotk4_glib2_CompareFunc(carg1 C.gpointer, carg2 C.gpointer) (cret C.int) {
-
-
-	ret := fn(a, b)
-
-
-
-	return cret
-}
-
-//export _gotk4_glib2_CopyFunc
-func _gotk4_glib2_CopyFunc(carg1 C.gpointer, carg2 C.gpointer) (cret C.gpointer) {
-
-
-	ret := fn(src, data)
-
-
-
-	return cret
-}
-
-//export _gotk4_glib2_EqualFunc
-func _gotk4_glib2_EqualFunc(carg1 C.gpointer, carg2 C.gpointer) (cret C.gboolean) {
-
-
-	ret := fn(a, b)
-
-
+	cret = C.int(goret)
 
 	return cret
 }
 
 //export _gotk4_glib2_EqualFuncFull
-func _gotk4_glib2_EqualFuncFull(carg1 C.gpointer, carg2 C.gpointer, carg3 C.gpointer) (cret C.gboolean) {
+func _gotk4_glib2_EqualFuncFull(carg1 C.gconstpointer, carg2 C.gconstpointer, carg3 C.gpointer) (cret C.gboolean) {
+	var fn EqualFuncFull
+	{
+		v := gbox.Get(uintptr(carg3))
+		if v == nil {
+			panic(`callback not found`)
+		}
+		fn = v.(EqualFuncFull)
+	}
 
+	var a     unsafe.Pointer // in, none, casted, nullable
+	var b     unsafe.Pointer // in, none, casted, nullable
+	var goret bool           // return
 
-	ret := fn(a, b)
+	if carg1 != nil {
+		a = unsafe.Pointer(carg1)
+	}
+	if carg2 != nil {
+		b = unsafe.Pointer(carg2)
+	}
 
+	goret = fn(a, b)
 
-
-	return cret
-}
-
-//export _gotk4_glib2_FreeFunc
-func _gotk4_glib2_FreeFunc(carg1 C.gpointer) (cret C.void) {
-
-
-	fn(data)
-
-
+	if goret {
+		cret = C.TRUE
+	}
 
 	return cret
 }
 
 //export _gotk4_glib2_Func
-func _gotk4_glib2_Func(carg1 C.gpointer, carg2 C.gpointer) (cret C.void) {
+func _gotk4_glib2_Func(carg1 C.gpointer, carg2 C.gpointer) {
+	var fn Func
+	{
+		v := gbox.Get(uintptr(carg2))
+		if v == nil {
+			panic(`callback not found`)
+		}
+		fn = v.(Func)
+	}
 
+	var data unsafe.Pointer // in, none, casted, nullable
+
+	if carg1 != nil {
+		data = unsafe.Pointer(carg1)
+	}
 
 	fn(data)
-
-
-
-	return cret
 }
 
 //export _gotk4_glib2_HFunc
-func _gotk4_glib2_HFunc(carg1 C.gpointer, carg2 C.gpointer, carg3 C.gpointer) (cret C.void) {
+func _gotk4_glib2_HFunc(carg1 C.gpointer, carg2 C.gpointer, carg3 C.gpointer) {
+	var fn HFunc
+	{
+		v := gbox.Get(uintptr(carg3))
+		if v == nil {
+			panic(`callback not found`)
+		}
+		fn = v.(HFunc)
+	}
 
+	var key   unsafe.Pointer // in, none, casted, nullable
+	var value unsafe.Pointer // in, none, casted, nullable
+
+	if carg1 != nil {
+		key = unsafe.Pointer(carg1)
+	}
+	if carg2 != nil {
+		value = unsafe.Pointer(carg2)
+	}
 
 	fn(key, value)
-
-
-
-	return cret
 }
 
 //export _gotk4_glib2_HRFunc
 func _gotk4_glib2_HRFunc(carg1 C.gpointer, carg2 C.gpointer, carg3 C.gpointer) (cret C.gboolean) {
+	var fn HRFunc
+	{
+		v := gbox.Get(uintptr(carg3))
+		if v == nil {
+			panic(`callback not found`)
+		}
+		fn = v.(HRFunc)
+	}
 
+	var key   unsafe.Pointer // in, none, casted, nullable
+	var value unsafe.Pointer // in, none, casted, nullable
+	var goret bool           // return
 
-	ret := fn(key, value)
+	if carg1 != nil {
+		key = unsafe.Pointer(carg1)
+	}
+	if carg2 != nil {
+		value = unsafe.Pointer(carg2)
+	}
 
+	goret = fn(key, value)
 
-
-	return cret
-}
-
-//export _gotk4_glib2_HashFunc
-func _gotk4_glib2_HashFunc(carg1 C.gpointer) (cret C.guint) {
-
-
-	ret := fn(key)
-
-
-
-	return cret
-}
-
-//export _gotk4_glib2_OptionArgFunc
-func _gotk4_glib2_OptionArgFunc(carg1 *C.gchar, carg2 *C.gchar, carg3 C.gpointer, _cerr *C.GError) (cret C.gboolean) {
-
-
-	ret, _goerr := fn(optionName, value, data)
-
-
+	if goret {
+		cret = C.TRUE
+	}
 
 	return cret
 }
 
-//export _gotk4_glib2_PrintFunc
-func _gotk4_glib2_PrintFunc(carg1 *C.gchar) (cret C.void) {
+//export _gotk4_glib2_LogFunc
+func _gotk4_glib2_LogFunc(carg1 *C.gchar, carg2 C.GLogLevelFlags, carg3 *C.gchar, carg4 C.gpointer) {
+	var fn LogFunc
+	{
+		v := gbox.Get(uintptr(carg4))
+		if v == nil {
+			panic(`callback not found`)
+		}
+		fn = v.(LogFunc)
+	}
 
+	var logDomain string        // in, none, string
+	var logLevel  LogLevelFlags // in, none, casted
+	var message   string        // in, none, string
 
-	fn(str)
+	logDomain = C.GoString((*C.gchar)(unsafe.Pointer(carg1)))
+	logLevel = LogLevelFlags(carg2)
+	message = C.GoString((*C.gchar)(unsafe.Pointer(carg3)))
 
-
-
-	return cret
+	fn(logDomain, logLevel, message)
 }
 
-//export _gotk4_glib2_SourceDummyMarshal
-func _gotk4_glib2_SourceDummyMarshal() (cret C.void) {
+//export _gotk4_glib2_LogWriterFunc
+func _gotk4_glib2_LogWriterFunc(carg1 C.GLogLevelFlags, carg2 *C.GLogField, carg3 C.gsize, carg4 C.gpointer) (cret C.GLogWriterOutput) {
+	var fn LogWriterFunc
+	{
+		v := gbox.Get(uintptr(carg4))
+		if v == nil {
+			panic(`callback not found`)
+		}
+		fn = v.(LogWriterFunc)
+	}
 
+	var logLevel LogLevelFlags   // in, none, casted
+	var fields   []LogField      // in, transfer: none, C Pointers: 1, Name: array[LogField], array (inner: *typesystem.Record, length-by: carg3)
+	var goret    LogWriterOutput // return, none, casted
 
-	fn()
+	logLevel = LogLevelFlags(carg1)
+	_ = fields
+	_ = carg2
+	_ = carg3
+	panic("unimplemented conversion of []LogField (const GLogField*)")
 
+	goret = fn(logLevel, fields)
 
+	cret = C.GLogWriterOutput(goret)
 
 	return cret
 }
 
 //export _gotk4_glib2_SourceFunc
 func _gotk4_glib2_SourceFunc(carg1 C.gpointer) (cret C.gboolean) {
+	var fn SourceFunc
+	{
+		v := gbox.Get(uintptr(carg1))
+		if v == nil {
+			panic(`callback not found`)
+		}
+		fn = v.(SourceFunc)
+	}
 
+	var goret bool // return
 
-	ret := fn()
+	goret = fn()
 
-
+	if goret {
+		cret = C.TRUE
+	}
 
 	return cret
 }
 
 //export _gotk4_glib2_SourceOnceFunc
-func _gotk4_glib2_SourceOnceFunc(carg1 C.gpointer) (cret C.void) {
-
-
-	fn()
-
-
-
-	return cret
-}
-
-//export _gotk4_glib2_SpawnChildSetupFunc
-func _gotk4_glib2_SpawnChildSetupFunc(carg1 C.gpointer) (cret C.void) {
-
-
-	fn(data)
-
-
-
-	return cret
-}
-
-//export _gotk4_glib2_TranslateFunc
-func _gotk4_glib2_TranslateFunc(carg1 *C.gchar, carg2 C.gpointer) (cret *C.gchar) {
-
-
-	ret := fn(str, data)
-
-
-
-	return cret
-}
-
-//export _gotk4_glib2_TraverseFunc
-func _gotk4_glib2_TraverseFunc(carg1 C.gpointer, carg2 C.gpointer, carg3 C.gpointer) (cret C.gboolean) {
-
-
-	ret := fn(key, value, data)
-
-
-
-	return cret
-}
-
-//export _gotk4_glib2_VoidFunc
-func _gotk4_glib2_VoidFunc() (cret C.void) {
-
+func _gotk4_glib2_SourceOnceFunc(carg1 C.gpointer) {
+	var fn SourceOnceFunc
+	{
+		v := gbox.Get(uintptr(carg1))
+		if v == nil {
+			panic(`callback not found`)
+		}
+		fn = v.(SourceOnceFunc)
+	}
 
 	fn()
-
-
-
-	return cret
 }
 
 //export _gotk4_glib2_ChildWatchFunc
-func _gotk4_glib2_ChildWatchFunc(carg1 C.GPid, carg2 C.int, carg3 C.gpointer) (cret C.void) {
+func _gotk4_glib2_ChildWatchFunc(carg1 C.GPid, carg2 C.int, carg3 C.gpointer) {
+	var fn ChildWatchFunc
+	{
+		v := gbox.Get(uintptr(carg3))
+		if v == nil {
+			panic(`callback not found`)
+		}
+		fn = v.(ChildWatchFunc)
+	}
 
+	var pid        Pid // in, none, casted, alias
+	var waitStatus int // in, none, casted
+
+	pid = Pid(carg1)
+	waitStatus = int(carg2)
 
 	fn(pid, waitStatus)
-
-
-
-	return cret
 }
 

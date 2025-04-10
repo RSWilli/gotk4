@@ -4,9 +4,8 @@ package gobject
 
 import (
 	"unsafe"
-	"github.com/diamondburned/gotk4/pkg/glib/v2"
 	"runtime"
-	"github.com/diamondburned/gotk4/pkg/core/gbox"
+	"github.com/diamondburned/gotk4/pkg/glib/v2"
 )
 
 // #cgo pkg-config: gobject-2.0
@@ -16,38 +15,32 @@ import "C"
 
 // GType values.
 var (
-	GTypeBindingFlags             = glib.Type(C.g_binding_flags_get_type())
-	GTypeIOCondition              = glib.Type(C.g_io_condition_get_type())
-	GTypeTypePluginInstance       = glib.Type(C.g_type_plugin_get_type())
-	GTypeBindingInstance          = glib.Type(C.g_binding_get_type())
-	GTypeBindingGroupInstance     = glib.Type(C.g_binding_group_get_type())
-	GTypeInitiallyUnownedInstance = glib.Type(C.g_initially_unowned_get_type())
-	GTypeSignalGroupInstance      = glib.Type(C.g_signal_group_get_type())
-	GTypeTypeModuleInstance       = glib.Type(C.g_type_module_get_type())
-	GTypeClosure                  = glib.Type(C.g_closure_get_type())
-	GTypeValueArray               = glib.Type(C.g_value_array_get_type())
+	TypeBindingFlags     = Type(C.g_binding_flags_get_type())
+	TypeIOCondition      = Type(C.g_io_condition_get_type())
+	TypeTypePlugin       = Type(C.g_type_plugin_get_type())
+	TypeBindingGroup     = Type(C.g_binding_group_get_type())
+	TypeInitiallyUnowned = Type(C.g_initially_unowned_get_type())
+	TypeSignalGroup      = Type(C.g_signal_group_get_type())
+	TypeTypeModule       = Type(C.g_type_module_get_type())
 )
 
 func init() {
-	glib.RegisterGValueMarshalers([]glib.TypeMarshaler{
-		glib.TypeMarshaler{T: GTypeBindingFlags, F: marshalBindingFlags},
-		glib.TypeMarshaler{T: GTypeIOCondition, F: marshalIOCondition},
-		glib.TypeMarshaler{T: GTypeTypePluginInstance, F: marshalTypePluginInstance},
-		glib.TypeMarshaler{T: GTypeBindingInstance, F: marshalBindingInstance},
-		glib.TypeMarshaler{T: GTypeBindingGroupInstance, F: marshalBindingGroupInstance},
-		glib.TypeMarshaler{T: GTypeInitiallyUnownedInstance, F: marshalInitiallyUnownedInstance},
-		glib.TypeMarshaler{T: GTypeSignalGroupInstance, F: marshalSignalGroupInstance},
-		glib.TypeMarshaler{T: GTypeTypeModuleInstance, F: marshalTypeModuleInstance},
-		glib.TypeMarshaler{T: GTypeClosure, F: marshalClosure},
-		glib.TypeMarshaler{T: GTypeValueArray, F: marshalValueArray},
+	RegisterGValueMarshalers([]TypeMarshaler{
+		TypeMarshaler{T: TypeBindingFlags, F: marshalBindingFlags},
+		TypeMarshaler{T: TypeIOCondition, F: marshalIOCondition},
+		TypeMarshaler{T: TypeTypePlugin, F: marshalTypePluginInstance},
+		TypeMarshaler{T: TypeBindingGroup, F: marshalBindingGroupInstance},
+		TypeMarshaler{T: TypeInitiallyUnowned, F: marshalInitiallyUnownedInstance},
+		TypeMarshaler{T: TypeSignalGroup, F: marshalSignalGroupInstance},
+		TypeMarshaler{T: TypeTypeModule, F: marshalTypeModuleInstance},
 	})
 }
 
-// PARAMMASK wraps G_PARAM_MASK
+// ParamMask wraps G_PARAM_MASK
 //
 // Mask containing the bits of #GParamSpec.flags which are reserved for GLib.
-const PARAMMASK = C.G_PARAM_MASK
-// PARAMSTATICSTRINGS wraps G_PARAM_STATIC_STRINGS
+const ParamMask = 255
+// ParamStaticStrings wraps G_PARAM_STATIC_STRINGS
 //
 // #GParamFlags value alias for %G_PARAM_STATIC_NAME | %G_PARAM_STATIC_NICK | %G_PARAM_STATIC_BLURB.
 // 
@@ -58,88 +51,69 @@ const PARAMMASK = C.G_PARAM_MASK
 // nickname or blurb.
 // 
 // Since 2.13.0
-const PARAMSTATICSTRINGS = C.G_PARAM_STATIC_STRINGS
-// PARAMUSERSHIFT wraps G_PARAM_USER_SHIFT
+const ParamStaticStrings = 224
+// ParamUserShift wraps G_PARAM_USER_SHIFT
 //
 // Minimum shift count to be used for user defined flags, to be stored in
 // #GParamSpec.flags. The maximum allowed is 10.
-const PARAMUSERSHIFT = C.G_PARAM_USER_SHIFT
-// SIGNALFLAGSMASK wraps G_SIGNAL_FLAGS_MASK
+const ParamUserShift = 8
+// SignalFlagsMask wraps G_SIGNAL_FLAGS_MASK
 //
 // A mask for all #GSignalFlags bits.
-const SIGNALFLAGSMASK = C.G_SIGNAL_FLAGS_MASK
-// SIGNALMATCHMASK wraps G_SIGNAL_MATCH_MASK
+const SignalFlagsMask = 511
+// SignalMatchMask wraps G_SIGNAL_MATCH_MASK
 //
 // A mask for all #GSignalMatchType bits.
-const SIGNALMATCHMASK = C.G_SIGNAL_MATCH_MASK
-// TYPEFLAGRESERVEDIDBIT wraps G_TYPE_FLAG_RESERVED_ID_BIT
-//
-// A bit in the type number that's supposed to be left untouched.
-const TYPEFLAGRESERVEDIDBIT = C.G_TYPE_FLAG_RESERVED_ID_BIT
-// TYPEFUNDAMENTALMAX wraps G_TYPE_FUNDAMENTAL_MAX
+const SignalMatchMask = 63
+// TypeFundamentalMax wraps G_TYPE_FUNDAMENTAL_MAX
 //
 // An integer constant that represents the number of identifiers reserved
 // for types that are assigned at compile-time.
-const TYPEFUNDAMENTALMAX = C.G_TYPE_FUNDAMENTAL_MAX
-// TYPEFUNDAMENTALSHIFT wraps G_TYPE_FUNDAMENTAL_SHIFT
+const TypeFundamentalMax = 1020
+// TypeFundamentalShift wraps G_TYPE_FUNDAMENTAL_SHIFT
 //
 // Shift value used in converting numbers to type IDs.
-const TYPEFUNDAMENTALSHIFT = C.G_TYPE_FUNDAMENTAL_SHIFT
-// TYPERESERVEDBSEFIRST wraps G_TYPE_RESERVED_BSE_FIRST
+const TypeFundamentalShift = 2
+// TypeReservedBseFirst wraps G_TYPE_RESERVED_BSE_FIRST
 //
 // First fundamental type number to create a new fundamental type id with
 // G_TYPE_MAKE_FUNDAMENTAL() reserved for BSE.
-const TYPERESERVEDBSEFIRST = C.G_TYPE_RESERVED_BSE_FIRST
-// TYPERESERVEDBSELAST wraps G_TYPE_RESERVED_BSE_LAST
+const TypeReservedBseFirst = 32
+// TypeReservedBseLast wraps G_TYPE_RESERVED_BSE_LAST
 //
 // Last fundamental type number reserved for BSE.
-const TYPERESERVEDBSELAST = C.G_TYPE_RESERVED_BSE_LAST
-// TYPERESERVEDGLIBFIRST wraps G_TYPE_RESERVED_GLIB_FIRST
+const TypeReservedBseLast = 48
+// TypeReservedGlibFirst wraps G_TYPE_RESERVED_GLIB_FIRST
 //
 // First fundamental type number to create a new fundamental type id with
 // G_TYPE_MAKE_FUNDAMENTAL() reserved for GLib.
-const TYPERESERVEDGLIBFIRST = C.G_TYPE_RESERVED_GLIB_FIRST
-// TYPERESERVEDGLIBLAST wraps G_TYPE_RESERVED_GLIB_LAST
+const TypeReservedGlibFirst = 22
+// TypeReservedGlibLast wraps G_TYPE_RESERVED_GLIB_LAST
 //
 // Last fundamental type number reserved for GLib.
-const TYPERESERVEDGLIBLAST = C.G_TYPE_RESERVED_GLIB_LAST
-// TYPERESERVEDUSERFIRST wraps G_TYPE_RESERVED_USER_FIRST
+const TypeReservedGlibLast = 31
+// TypeReservedUserFirst wraps G_TYPE_RESERVED_USER_FIRST
 //
 // First available fundamental type number to create new fundamental
 // type id with G_TYPE_MAKE_FUNDAMENTAL().
-const TYPERESERVEDUSERFIRST = C.G_TYPE_RESERVED_USER_FIRST
-// VALUECOLLECTFORMATMAXLENGTH wraps G_VALUE_COLLECT_FORMAT_MAX_LENGTH
+const TypeReservedUserFirst = 49
+// ValueCollectFormatMaxLength wraps G_VALUE_COLLECT_FORMAT_MAX_LENGTH
 //
 // The maximal number of #GTypeCValues which can be collected for a
 // single #GValue.
-const VALUECOLLECTFORMATMAXLENGTH = C.G_VALUE_COLLECT_FORMAT_MAX_LENGTH
-// VALUEINTERNEDSTRING wraps G_VALUE_INTERNED_STRING
+const ValueCollectFormatMaxLength = 8
+// ValueInternedString wraps G_VALUE_INTERNED_STRING
 //
 // For string values, indicates that the string contained is canonical and will
 // exist for the duration of the process. See g_value_set_interned_string().
-const VALUEINTERNEDSTRING = C.G_VALUE_INTERNED_STRING
-// VALUENOCOPYCONTENTS wraps G_VALUE_NOCOPY_CONTENTS
+const ValueInternedString = 268435456
+// ValueNocopyContents wraps G_VALUE_NOCOPY_CONTENTS
 //
 // If passed to G_VALUE_COLLECT(), allocated data won't be copied
 // but used verbatim. This does not affect ref-counted types like
 // objects. This does not affect usage of g_value_copy(), the data will
 // be copied if it is not ref-counted.
-const VALUENOCOPYCONTENTS = C.G_VALUE_NOCOPY_CONTENTS
-// SignalCMarshaller wraps GSignalCMarshaller
-//
-// This is the signature of marshaller functions, required to marshall
-// arrays of parameter values to signal emissions into C language callback
-// invocations.
-// 
-// It is merely an alias to #GClosureMarshal since the #GClosure mechanism
-// takes over responsibility of actual function invocation for the signal
-// system.
-type SignalCMarshaller = ClosureMarshal
-// Type wraps GType
-//
-// A numerical value which represents the unique identifier of a registered
-// type.
-type Type = uint
+const ValueNocopyContents = 134217728
 // BindingFlags wraps GBindingFlags
 //
 // Flags to be passed to g_object_bind_property() or
@@ -176,16 +150,19 @@ const (
 	BindingInvertBoolean BindingFlags = C.G_BINDING_INVERT_BOOLEAN
 )
 
-func marshalBindingFlags(p uintptr) (interface{}, error) {
-	return BindingFlags(TODOFromGlibBorrow(unsafe.Pointer(p)).Flags()), nil
+func marshalBindingFlags(p unsafe.Pointer) (any, error) {
+	return BindingFlags(ValueFromNative(p).Flags()), nil
 }
 // Has returns true if b contains other
 func (b BindingFlags) Has(other BindingFlags) bool {
 	return (b & other) == other
 }
 
-func (b BindingFlags) SetValue(v *Value) {
-	panic("TODO")
+var _ GoValueInitializer = BindingFlags(0)
+
+func (f BindingFlags) InitGoValue(v *Value) {
+	v.Init(TypeBindingFlags)
+	v.SetFlags(int(f))
 }
 
 // ConnectFlags wraps GConnectFlags
@@ -217,10 +194,6 @@ func (c ConnectFlags) Has(other ConnectFlags) bool {
 	return (c & other) == other
 }
 
-func (c ConnectFlags) SetValue(v *Value) {
-	panic("TODO")
-}
-
 // IOCondition wraps GIOCondition
 type IOCondition C.gint
 
@@ -239,16 +212,19 @@ const (
 	IONval IOCondition = C.G_IO_NVAL
 )
 
-func marshalIOCondition(p uintptr) (interface{}, error) {
-	return IOCondition(TODOFromGlibBorrow(unsafe.Pointer(p)).Flags()), nil
+func marshalIOCondition(p unsafe.Pointer) (any, error) {
+	return IOCondition(ValueFromNative(p).Flags()), nil
 }
 // Has returns true if i contains other
 func (i IOCondition) Has(other IOCondition) bool {
 	return (i & other) == other
 }
 
-func (i IOCondition) SetValue(v *Value) {
-	panic("TODO")
+var _ GoValueInitializer = IOCondition(0)
+
+func (f IOCondition) InitGoValue(v *Value) {
+	v.Init(TypeIOCondition)
+	v.SetFlags(int(f))
 }
 
 // ParamFlags wraps GParamFlags
@@ -331,10 +307,6 @@ func (p ParamFlags) Has(other ParamFlags) bool {
 	return (p & other) == other
 }
 
-func (p ParamFlags) SetValue(v *Value) {
-	panic("TODO")
-}
-
 // SignalFlags wraps GSignalFlags
 //
 // The signal flags are used to specify a signal's behaviour.
@@ -401,10 +373,6 @@ func (s SignalFlags) Has(other SignalFlags) bool {
 	return (s & other) == other
 }
 
-func (s SignalFlags) SetValue(v *Value) {
-	panic("TODO")
-}
-
 // SignalMatchType wraps GSignalMatchType
 //
 // The match types specify what g_signal_handlers_block_matched(),
@@ -442,53 +410,6 @@ const (
 // Has returns true if s contains other
 func (s SignalMatchType) Has(other SignalMatchType) bool {
 	return (s & other) == other
-}
-
-func (s SignalMatchType) SetValue(v *Value) {
-	panic("TODO")
-}
-
-// TypeDebugFlags wraps GTypeDebugFlags
-//
-// These flags used to be passed to g_type_init_with_debug_flags() which
-// is now deprecated.
-// 
-// If you need to enable debugging features, use the `GOBJECT_DEBUG`
-// environment variable.
-//
-// Deprecated: (since 2.36.0) g_type_init() is now done automatically
-type TypeDebugFlags C.gint
-
-const (
-	// TypeDebugNone wraps G_TYPE_DEBUG_NONE
-	//
-	// Print no messages
-	TypeDebugNone TypeDebugFlags = C.G_TYPE_DEBUG_NONE
-	// TypeDebugObjects wraps G_TYPE_DEBUG_OBJECTS
-	//
-	// Print messages about object bookkeeping
-	TypeDebugObjects TypeDebugFlags = C.G_TYPE_DEBUG_OBJECTS
-	// TypeDebugSignals wraps G_TYPE_DEBUG_SIGNALS
-	//
-	// Print messages about signal emissions
-	TypeDebugSignals TypeDebugFlags = C.G_TYPE_DEBUG_SIGNALS
-	// TypeDebugInstanceCount wraps G_TYPE_DEBUG_INSTANCE_COUNT
-	//
-	// Keep a count of instances of each type
-	TypeDebugInstanceCount TypeDebugFlags = C.G_TYPE_DEBUG_INSTANCE_COUNT
-	// TypeDebugMask wraps G_TYPE_DEBUG_MASK
-	//
-	// Mask covering all debug flags
-	TypeDebugMask TypeDebugFlags = C.G_TYPE_DEBUG_MASK
-)
-
-// Has returns true if t contains other
-func (t TypeDebugFlags) Has(other TypeDebugFlags) bool {
-	return (t & other) == other
-}
-
-func (t TypeDebugFlags) SetValue(v *Value) {
-	panic("TODO")
 }
 
 // TypeFlags wraps GTypeFlags
@@ -530,10 +451,6 @@ func (t TypeFlags) Has(other TypeFlags) bool {
 	return (t & other) == other
 }
 
-func (t TypeFlags) SetValue(v *Value) {
-	panic("TODO")
-}
-
 // TypeFundamentalFlags wraps GTypeFundamentalFlags
 //
 // Bit masks used to check or determine specific characteristics of a
@@ -564,353 +481,47 @@ func (t TypeFundamentalFlags) Has(other TypeFundamentalFlags) bool {
 	return (t & other) == other
 }
 
-func (t TypeFundamentalFlags) SetValue(v *Value) {
-	panic("TODO")
-}
-
-// BindingTransformFunc wraps GBindingTransformFunc
-//
-// A function to be called to transform @from_value to @to_value.
-// 
-// If this is the @transform_to function of a binding, then @from_value
-// is the @source_property on the @source object, and @to_value is the
-// @target_property on the @target object. If this is the
-// @transform_from function of a %G_BINDING_BIDIRECTIONAL binding,
-// then those roles are reversed.
-type BindingTransformFunc func(binding Binding, fromValue Value, toValue Value) (ret bool)
-
-// BoxedCopyFunc wraps GBoxedCopyFunc
-//
-// This function is provided by the user and should produce a copy
-// of the passed in boxed structure.
-type BoxedCopyFunc func(boxed unsafe.Pointer) (ret unsafe.Pointer)
-
-// BoxedFreeFunc wraps GBoxedFreeFunc
-//
-// This function is provided by the user and should free the boxed
-// structure passed.
-type BoxedFreeFunc func(boxed unsafe.Pointer)
-
-// Callback wraps GCallback
-//
-// The type used for callback functions in structure definitions and function
-// signatures.
-// 
-// This doesn't mean that all callback functions must take no  parameters and
-// return void. The required signature of a callback function is determined by
-// the context in which is used (e.g. the signal to which it is connected).
-// 
-// Use G_CALLBACK() to cast the callback function to a #GCallback.
-type Callback func()
-
-// ClosureMarshal wraps GClosureMarshal
-//
-// The type used for marshaller functions.
-type ClosureMarshal func(closure Closure, returnValue Value, paramValues array, invocationHint unsafe.Pointer, marshalData unsafe.Pointer)
-
-// ClosureNotify wraps GClosureNotify
-//
-// The type used for the various notification callbacks which can be registered
-// on closures.
-type ClosureNotify func(data unsafe.Pointer, closure Closure)
-
-// ObjectFinalizeFunc wraps GObjectFinalizeFunc
-//
-// The type of the @finalize function of #GObjectClass.
-type ObjectFinalizeFunc func(object Object)
-
-// SignalAccumulator wraps GSignalAccumulator
-//
-// The signal accumulator is a special callback function that can be used
-// to collect return values of the various callbacks that are called
-// during a signal emission.
-// 
-// The signal accumulator is specified at signal creation time, if it is
-// left %NULL, no accumulation of callback return values is performed.
-// The return value of signal emissions is then the value returned by the
-// last callback.
-type SignalAccumulator func(ihint SignalInvocationHint, returnAccu Value, handlerReturn Value, data unsafe.Pointer) (ret bool)
-
-// SignalEmissionHook wraps GSignalEmissionHook
-//
-// A simple function pointer to get invoked when the signal is emitted.
-// 
-// Emission hooks allow you to tie a hook to the signal type, so that it will
-// trap all emissions of that signal, from any object.
-// 
-// You may not attach these to signals created with the %G_SIGNAL_NO_HOOKS flag.
-type SignalEmissionHook func(ihint SignalInvocationHint, paramValues array, data unsafe.Pointer) (ret bool)
-
-// ToggleNotify wraps GToggleNotify
-//
-// A callback function used for notification when the state
-// of a toggle reference changes.
-// 
-// See also: g_object_add_toggle_ref()
-type ToggleNotify func(data unsafe.Pointer, object Object, isLastRef bool)
-
-// TypeClassCacheFunc wraps GTypeClassCacheFunc
-//
-// A callback function which is called when the reference count of a class
-// drops to zero.
-// 
-// It may use g_type_class_ref() to prevent the class from being freed. You
-// should not call g_type_class_unref() from a #GTypeClassCacheFunc function
-// to prevent infinite recursion, use g_type_class_unref_uncached() instead.
-// 
-// The functions have to check the class id passed in to figure
-// whether they actually want to cache the class of this type, since all
-// classes are routed through the same #GTypeClassCacheFunc chain.
-type TypeClassCacheFunc func(cacheData unsafe.Pointer, gClass TypeClass) (ret bool)
-
-// TypePluginCompleteInterfaceInfo wraps GTypePluginCompleteInterfaceInfo
-//
-// The type of the @complete_interface_info function of #GTypePluginClass.
-type TypePluginCompleteInterfaceInfo func(plugin TypePlugin, instanceType glib.Type, interfaceType glib.Type, info InterfaceInfo)
-
-// TypePluginCompleteTypeInfo wraps GTypePluginCompleteTypeInfo
-//
-// The type of the @complete_type_info function of #GTypePluginClass.
-type TypePluginCompleteTypeInfo func(plugin TypePlugin, gType glib.Type, info TypeInfo, valueTable TypeValueTable)
-
-// TypePluginUnuse wraps GTypePluginUnuse
-//
-// The type of the @unuse_plugin function of #GTypePluginClass.
-type TypePluginUnuse func(plugin TypePlugin)
-
-// TypePluginUse wraps GTypePluginUse
-//
-// The type of the @use_plugin function of #GTypePluginClass, which gets called
-// to increase the use count of @plugin.
-type TypePluginUse func(plugin TypePlugin)
-
-// TypeValueCollectFunc wraps GTypeValueCollectFunc
-//
-// This function is responsible for converting the values collected from
-// a variadic argument list into contents suitable for storage in a #GValue.
-// 
-// This function should setup @value similar to #GTypeValueInitFunc; e.g.
-// for a string value that does not allow `NULL` pointers, it needs to either
-// emit an error, or do an implicit conversion by storing an empty string.
-// 
-// The @value passed in to this function has a zero-filled data array, so
-// just like for #GTypeValueInitFunc it is guaranteed to not contain any old
-// contents that might need freeing.
-// 
-// The @n_collect_values argument is the string length of the `collect_format`
-// field of #GTypeValueTable, and `collect_values` is an array of #GTypeCValue
-// with length of @n_collect_values, containing the collected values according
-// to `collect_format`.
-// 
-// The @collect_flags argument provided as a hint by the caller. It may
-// contain the flag %G_VALUE_NOCOPY_CONTENTS indicating that the collected
-// value contents may be considered ‘static’ for the duration of the @value
-// lifetime. Thus an extra copy of the contents stored in @collect_values is
-// not required for assignment to @value.
-// 
-// For our above string example, we continue with:
-// 
-// |[&lt;!-- language="C" --&gt;
-// if (!collect_values[0].v_pointer)
-//   value-&gt;data[0].v_pointer = g_strdup ("");
-// else if (collect_flags &amp; G_VALUE_NOCOPY_CONTENTS)
-//   {
-//     value-&gt;data[0].v_pointer = collect_values[0].v_pointer;
-//     // keep a flag for the value_free() implementation to not free this string
-//     value-&gt;data[1].v_uint = G_VALUE_NOCOPY_CONTENTS;
-//   }
-// else
-//   value-&gt;data[0].v_pointer = g_strdup (collect_values[0].v_pointer);
-// return NULL;
-// ]|
-// 
-// It should be noted, that it is generally a bad idea to follow the
-// %G_VALUE_NOCOPY_CONTENTS hint for reference counted types. Due to
-// reentrancy requirements and reference count assertions performed
-// by the signal emission code, reference counts should always be
-// incremented for reference counted contents stored in the `value-&gt;data`
-// array. To deviate from our string example for a moment, and taking
-// a look at an exemplary implementation for `GTypeValueTable.collect_value()`
-// of `GObject`:
-// 
-// |[&lt;!-- language="C" --&gt;
-// GObject *object = G_OBJECT (collect_values[0].v_pointer);
-// g_return_val_if_fail (object != NULL,
-//    g_strdup_printf ("Object %p passed as invalid NULL pointer", object));
-// // never honour G_VALUE_NOCOPY_CONTENTS for ref-counted types
-// value-&gt;data[0].v_pointer = g_object_ref (object);
-// return NULL;
-// ]|
-// 
-// The reference count for valid objects is always incremented, regardless
-// of `collect_flags`. For invalid objects, the example returns a newly
-// allocated string without altering `value`.
-// 
-// Upon success, `collect_value()` needs to return `NULL`. If, however,
-// an error condition occurred, `collect_value()` should return a newly
-// allocated string containing an error diagnostic.
-// 
-// The calling code makes no assumptions about the `value` contents being
-// valid upon error returns, `value` is simply thrown away without further
-// freeing. As such, it is a good idea to not allocate `GValue` contents
-// prior to returning an error; however, `collect_values()` is not obliged
-// to return a correctly setup @value for error returns, simply because
-// any non-`NULL` return is considered a fatal programming error, and
-// further program behaviour is undefined.
-type TypeValueCollectFunc func(value Value, collectValues array, collectFlags uint) (ret string)
-
-// TypeValueFreeFunc wraps GTypeValueFreeFunc
-//
-// Frees any old contents that might be left in the `value-&gt;data` array of
-// the given value.
-// 
-// No resources may remain allocated through the #GValue contents after this
-// function returns. E.g. for our above string type:
-// 
-// |[&lt;!-- language="C" --&gt;
-// // only free strings without a specific flag for static storage
-// if (!(value-&gt;data[1].v_uint &amp; G_VALUE_NOCOPY_CONTENTS))
-//   g_free (value-&gt;data[0].v_pointer);
-// ]|
-type TypeValueFreeFunc func(value Value)
-
-// TypeValueInitFunc wraps GTypeValueInitFunc
-//
-// Initializes the value contents by setting the fields of the `value-&gt;data`
-// array.
-// 
-// The data array of the #GValue passed into this function was zero-filled
-// with `memset()`, so no care has to be taken to free any old contents.
-// For example, in the case of a string value that may never be %NULL, the
-// implementation might look like:
-// 
-// |[&lt;!-- language="C" --&gt;
-// value-&gt;data[0].v_pointer = g_strdup ("");
-// ]|
-type TypeValueInitFunc func(value Value)
-
-// TypeValueLCopyFunc wraps GTypeValueLCopyFunc
-//
-// This function is responsible for storing the `value`
-// contents into arguments passed through a variadic argument list which
-// got collected into `collect_values` according to `lcopy_format`.
-// 
-// The `n_collect_values` argument equals the string length of
-// `lcopy_format`, and `collect_flags` may contain %G_VALUE_NOCOPY_CONTENTS.
-// 
-// In contrast to #GTypeValueCollectFunc, this function is obliged to always
-// properly support %G_VALUE_NOCOPY_CONTENTS.
-// 
-// Similar to #GTypeValueCollectFunc the function may prematurely abort by
-// returning a newly allocated string describing an error condition. To
-// complete the string example:
-// 
-// |[&lt;!-- language="C" --&gt;
-// gchar **string_p = collect_values[0].v_pointer;
-// g_return_val_if_fail (string_p != NULL,
-//   g_strdup ("string location passed as NULL"));
-// 
-// if (collect_flags &amp; G_VALUE_NOCOPY_CONTENTS)
-//   *string_p = value-&gt;data[0].v_pointer;
-// else
-//   *string_p = g_strdup (value-&gt;data[0].v_pointer);
-// ]|
-// 
-// And an illustrative version of this function for reference-counted
-// types:
-// 
-// |[&lt;!-- language="C" --&gt;
-// GObject **object_p = collect_values[0].v_pointer;
-// g_return_val_if_fail (object_p != NULL,
-//   g_strdup ("object location passed as NULL"));
-// 
-// if (value-&gt;data[0].v_pointer == NULL)
-//   *object_p = NULL;
-// else if (collect_flags &amp; G_VALUE_NOCOPY_CONTENTS) // always honour
-//   *object_p = value-&gt;data[0].v_pointer;
-// else
-//   *object_p = g_object_ref (value-&gt;data[0].v_pointer);
-// 
-// return NULL;
-// ]|
-type TypeValueLCopyFunc func(value Value, collectValues array, collectFlags uint) (ret string)
-
-// TypeValuePeekPointerFunc wraps GTypeValuePeekPointerFunc
-//
-// If the value contents fit into a pointer, such as objects or strings,
-// return this pointer, so the caller can peek at the current contents.
-// 
-// To extend on our above string example:
-// 
-// |[&lt;!-- language="C" --&gt;
-// return value-&gt;data[0].v_pointer;
-// ]|
-type TypeValuePeekPointerFunc func(value Value) (ret unsafe.Pointer)
-
-// ValueTransform wraps GValueTransform
-//
-// The type of value transformation functions which can be registered with
-// g_value_register_transform_func().
-// 
-// @dest_value will be initialized to the correct destination type.
-type ValueTransform func(srcValue Value, destValue Value)
-
-// WeakNotify wraps GWeakNotify
-//
-// A #GWeakNotify function can be added to an object as a callback that gets
-// triggered when the object is finalized.
-// 
-// Since the object is already being disposed when the #GWeakNotify is called,
-// there's not much you could do with the object, apart from e.g. using its
-// address as hash-index or the like.
-// 
-// In particular, this means it’s invalid to call g_object_ref(),
-// g_weak_ref_init(), g_weak_ref_set(), g_object_add_toggle_ref(),
-// g_object_weak_ref(), g_object_add_weak_pointer() or any function which calls
-// them on the object from this callback.
-type WeakNotify func(data unsafe.Pointer, whereTheObjectWas Object)
-
 // BoxedCopy wraps g_boxed_copy
 // 
 // The function takes the following parameters:
 // 
-// 	- boxedType glib.Type: The type of @src_boxed. 
+// 	- boxedType Type: The type of @src_boxed. 
 // 	- srcBoxed unsafe.Pointer: The boxed structure to be copied. 
 // 
 // The function returns the following values:
 // 
-// 	- ret unsafe.Pointer 
+// 	- goret unsafe.Pointer 
 //
 // Provide a copy of a boxed structure @src_boxed which is of type @boxed_type.
-func BoxedCopy(boxedType glib.Type, srcBoxed unsafe.Pointer) unsafe.Pointer {
-	var carg1 C.GType    // in, none, casted
-	var carg2 C.gpointer // in, none, casted
-	var cret  C.gpointer // return, full, casted
+func BoxedCopy(boxedType Type, srcBoxed unsafe.Pointer) unsafe.Pointer {
+	var carg1 C.GType         // in, none, casted, alias
+	var carg2 C.gconstpointer // in, none, casted
+	var cret  C.gpointer      // return, full, casted
 
 	carg1 = C.GType(boxedType)
-	carg2 = C.gpointer(srcBoxed)
+	carg2 = C.gconstpointer(srcBoxed)
 
 	cret = C.g_boxed_copy(carg1, carg2)
 	runtime.KeepAlive(boxedType)
 	runtime.KeepAlive(srcBoxed)
 
-	var ret unsafe.Pointer
+	var goret unsafe.Pointer
 
-	ret = unsafe.Pointer(cret)
+	goret = unsafe.Pointer(cret)
 
-	return ret
+	return goret
 }
 
 // BoxedFree wraps g_boxed_free
 // 
 // The function takes the following parameters:
 // 
-// 	- boxedType glib.Type: The type of @boxed. 
+// 	- boxedType Type: The type of @boxed. 
 // 	- boxed unsafe.Pointer: The boxed structure to be freed. 
 //
 // Free the boxed structure @boxed which is of type @boxed_type.
-func BoxedFree(boxedType glib.Type, boxed unsafe.Pointer) {
-	var carg1 C.GType    // in, none, casted
+func BoxedFree(boxedType Type, boxed unsafe.Pointer) {
+	var carg1 C.GType    // in, none, casted, alias
 	var carg2 C.gpointer // in, none, casted
 
 	carg1 = C.GType(boxedType)
@@ -921,19 +532,103 @@ func BoxedFree(boxedType glib.Type, boxed unsafe.Pointer) {
 	runtime.KeepAlive(boxed)
 }
 
+// ClearSignalHandler wraps g_clear_signal_handler
+// 
+// The function takes the following parameters:
+// 
+// 	- handlerIdPtr *uint32: A pointer to a handler ID (of type #gulong) of the handler to be disconnected. 
+// 	- instance unsafe.Pointer: The instance to remove the signal handler from.
+//   This pointer may be %NULL or invalid, if the handler ID is zero. 
+//
+// Disconnects a handler from @instance so it will not be called during
+// any future or currently ongoing emissions of the signal it has been
+// connected to. The @handler_id_ptr is then set to zero, which is never a valid handler ID value (see g_signal_connect()).
+// 
+// If the handler ID is 0 then this function does nothing.
+// 
+// There is also a macro version of this function so that the code
+// will be inlined.
+func ClearSignalHandler(handlerIdPtr *uint32, instance unsafe.Pointer) {
+	var carg1 *C.gulong  // in, transfer: none, C Pointers: 1, Name: gulong
+	var carg2 C.gpointer // in, none, casted
+
+	_ = handlerIdPtr
+	_ = carg1
+	panic("unimplemented conversion of *uint32 (gulong*)")
+	carg2 = C.gpointer(instance)
+
+	C.g_clear_signal_handler(carg1, carg2)
+	runtime.KeepAlive(handlerIdPtr)
+	runtime.KeepAlive(instance)
+}
+
+// EnumCompleteTypeInfo wraps g_enum_complete_type_info
+// 
+// The function takes the following parameters:
+// 
+// 	- gEnumType Type: the type identifier of the type being completed 
+// 	- constValues *EnumValue: An array of #GEnumValue structs for the possible
+//  enumeration values. The array is terminated by a struct with all
+//  members being 0. 
+// 
+// The function returns the following values:
+// 
+// 	- info TypeInfo: the #GTypeInfo struct to be filled in 
+//
+// This function is meant to be called from the `complete_type_info`
+// function of a #GTypePlugin implementation, as in the following
+// example:
+// 
+// |[&lt;!-- language="C" --&gt;
+// static void
+// my_enum_complete_type_info (GTypePlugin     *plugin,
+//                             GType            g_type,
+//                             GTypeInfo       *info,
+//                             GTypeValueTable *value_table)
+// {
+//   static const GEnumValue values[] = {
+//     { MY_ENUM_FOO, "MY_ENUM_FOO", "foo" },
+//     { MY_ENUM_BAR, "MY_ENUM_BAR", "bar" },
+//     { 0, NULL, NULL }
+//   };
+// 
+//   g_enum_complete_type_info (type, info, values);
+// }
+// ]|
+func EnumCompleteTypeInfo(gEnumType Type, constValues *EnumValue) TypeInfo {
+	var carg1 C.GType       // in, none, casted, alias
+	var carg3 *C.GEnumValue // in, none, converted
+	var carg2 C.GTypeInfo   // out, transfer: full, C Pointers: 0, Name: TypeInfo
+
+	carg1 = C.GType(gEnumType)
+	carg3 = (*C.GEnumValue)(UnsafeEnumValueToGlibNone(constValues))
+
+	C.g_enum_complete_type_info(carg1, &carg2, carg3)
+	runtime.KeepAlive(gEnumType)
+	runtime.KeepAlive(constValues)
+
+	var info TypeInfo
+
+	_ = info
+	_ = carg2
+	panic("unimplemented conversion of TypeInfo (GTypeInfo)")
+
+	return info
+}
+
 // EnumGetValue wraps g_enum_get_value
 // 
 // The function takes the following parameters:
 // 
-// 	- enumClass EnumClass: a #GEnumClass 
+// 	- enumClass *EnumClass: a #GEnumClass 
 // 	- value int: the value to look up 
 // 
 // The function returns the following values:
 // 
-// 	- ret EnumValue 
+// 	- goret *EnumValue 
 //
 // Returns the #GEnumValue for a value.
-func EnumGetValue(enumClass EnumClass, value int) EnumValue {
+func EnumGetValue(enumClass *EnumClass, value int) *EnumValue {
 	var carg1 *C.GEnumClass // in, none, converted
 	var carg2 C.int         // in, none, casted
 	var cret  *C.GEnumValue // return, none, converted
@@ -945,26 +640,26 @@ func EnumGetValue(enumClass EnumClass, value int) EnumValue {
 	runtime.KeepAlive(enumClass)
 	runtime.KeepAlive(value)
 
-	var ret EnumValue
+	var goret *EnumValue
 
-	ret = UnsafeEnumValueFromGlibNone(unsafe.Pointer(cret))
+	goret = UnsafeEnumValueFromGlibNone(unsafe.Pointer(cret))
 
-	return ret
+	return goret
 }
 
 // EnumGetValueByName wraps g_enum_get_value_by_name
 // 
 // The function takes the following parameters:
 // 
-// 	- enumClass EnumClass: a #GEnumClass 
+// 	- enumClass *EnumClass: a #GEnumClass 
 // 	- name string: the name to look up 
 // 
 // The function returns the following values:
 // 
-// 	- ret EnumValue 
+// 	- goret *EnumValue 
 //
 // Looks up a #GEnumValue by name.
-func EnumGetValueByName(enumClass EnumClass, name string) EnumValue {
+func EnumGetValueByName(enumClass *EnumClass, name string) *EnumValue {
 	var carg1 *C.GEnumClass // in, none, converted
 	var carg2 *C.gchar      // in, none, string
 	var cret  *C.GEnumValue // return, none, converted
@@ -977,26 +672,26 @@ func EnumGetValueByName(enumClass EnumClass, name string) EnumValue {
 	runtime.KeepAlive(enumClass)
 	runtime.KeepAlive(name)
 
-	var ret EnumValue
+	var goret *EnumValue
 
-	ret = UnsafeEnumValueFromGlibNone(unsafe.Pointer(cret))
+	goret = UnsafeEnumValueFromGlibNone(unsafe.Pointer(cret))
 
-	return ret
+	return goret
 }
 
 // EnumGetValueByNick wraps g_enum_get_value_by_nick
 // 
 // The function takes the following parameters:
 // 
-// 	- enumClass EnumClass: a #GEnumClass 
+// 	- enumClass *EnumClass: a #GEnumClass 
 // 	- nick string: the nickname to look up 
 // 
 // The function returns the following values:
 // 
-// 	- ret EnumValue 
+// 	- goret *EnumValue 
 //
 // Looks up a #GEnumValue by nickname.
-func EnumGetValueByNick(enumClass EnumClass, nick string) EnumValue {
+func EnumGetValueByNick(enumClass *EnumClass, nick string) *EnumValue {
 	var carg1 *C.GEnumClass // in, none, converted
 	var carg2 *C.gchar      // in, none, string
 	var cret  *C.GEnumValue // return, none, converted
@@ -1009,11 +704,11 @@ func EnumGetValueByNick(enumClass EnumClass, nick string) EnumValue {
 	runtime.KeepAlive(enumClass)
 	runtime.KeepAlive(nick)
 
-	var ret EnumValue
+	var goret *EnumValue
 
-	ret = UnsafeEnumValueFromGlibNone(unsafe.Pointer(cret))
+	goret = UnsafeEnumValueFromGlibNone(unsafe.Pointer(cret))
 
-	return ret
+	return goret
 }
 
 // EnumRegisterStatic wraps g_enum_register_static
@@ -1021,24 +716,24 @@ func EnumGetValueByNick(enumClass EnumClass, nick string) EnumValue {
 // The function takes the following parameters:
 // 
 // 	- name string: A nul-terminated string used as the name of the new type. 
-// 	- constStaticValues EnumValue: An array of #GEnumValue structs for the possible
+// 	- constStaticValues *EnumValue: An array of #GEnumValue structs for the possible
 //  enumeration values. The array is terminated by a struct with all
 //  members being 0. GObject keeps a reference to the data, so it cannot
 //  be stack-allocated. 
 // 
 // The function returns the following values:
 // 
-// 	- ret glib.Type 
+// 	- goret Type 
 //
 // Registers a new static enumeration type with the name @name.
 // 
 // It is normally more convenient to let [glib-mkenums][glib-mkenums],
 // generate a my_enum_get_type() function from a usual C enumeration
 // definition  than to write one yourself using g_enum_register_static().
-func EnumRegisterStatic(name string, constStaticValues EnumValue) glib.Type {
+func EnumRegisterStatic(name string, constStaticValues *EnumValue) Type {
 	var carg1 *C.gchar      // in, none, string
 	var carg2 *C.GEnumValue // in, none, converted
-	var cret  C.GType       // return, none, casted
+	var cret  C.GType       // return, none, casted, alias
 
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(name)))
 	defer C.free(unsafe.Pointer(carg1))
@@ -1048,30 +743,30 @@ func EnumRegisterStatic(name string, constStaticValues EnumValue) glib.Type {
 	runtime.KeepAlive(name)
 	runtime.KeepAlive(constStaticValues)
 
-	var ret glib.Type
+	var goret Type
 
-	ret = glib.Type(cret)
+	goret = Type(cret)
 
-	return ret
+	return goret
 }
 
 // EnumToString wraps g_enum_to_string
 // 
 // The function takes the following parameters:
 // 
-// 	- gEnumType glib.Type: the type identifier of a #GEnumClass type 
+// 	- gEnumType Type: the type identifier of a #GEnumClass type 
 // 	- value int: the value 
 // 
 // The function returns the following values:
 // 
-// 	- ret string 
+// 	- goret string 
 //
 // Pretty-prints @value in the form of the enum’s name.
 // 
 // This is intended to be used for debugging purposes. The format of the output
 // may change in the future.
-func EnumToString(gEnumType glib.Type, value int) string {
-	var carg1 C.GType  // in, none, casted
+func EnumToString(gEnumType Type, value int) string {
+	var carg1 C.GType  // in, none, casted, alias
 	var carg2 C.int    // in, none, casted
 	var cret  *C.gchar // return, full, string
 
@@ -1082,27 +777,64 @@ func EnumToString(gEnumType glib.Type, value int) string {
 	runtime.KeepAlive(gEnumType)
 	runtime.KeepAlive(value)
 
-	var ret string
+	var goret string
 
-	ret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
 	defer C.free(unsafe.Pointer(cret))
 
-	return ret
+	return goret
+}
+
+// FlagsCompleteTypeInfo wraps g_flags_complete_type_info
+// 
+// The function takes the following parameters:
+// 
+// 	- gFlagsType Type: the type identifier of the type being completed 
+// 	- constValues *FlagsValue: An array of #GFlagsValue structs for the possible
+//  enumeration values. The array is terminated by a struct with all
+//  members being 0. 
+// 
+// The function returns the following values:
+// 
+// 	- info TypeInfo: the #GTypeInfo struct to be filled in 
+//
+// This function is meant to be called from the complete_type_info()
+// function of a #GTypePlugin implementation, see the example for
+// g_enum_complete_type_info() above.
+func FlagsCompleteTypeInfo(gFlagsType Type, constValues *FlagsValue) TypeInfo {
+	var carg1 C.GType        // in, none, casted, alias
+	var carg3 *C.GFlagsValue // in, none, converted
+	var carg2 C.GTypeInfo    // out, transfer: full, C Pointers: 0, Name: TypeInfo
+
+	carg1 = C.GType(gFlagsType)
+	carg3 = (*C.GFlagsValue)(UnsafeFlagsValueToGlibNone(constValues))
+
+	C.g_flags_complete_type_info(carg1, &carg2, carg3)
+	runtime.KeepAlive(gFlagsType)
+	runtime.KeepAlive(constValues)
+
+	var info TypeInfo
+
+	_ = info
+	_ = carg2
+	panic("unimplemented conversion of TypeInfo (GTypeInfo)")
+
+	return info
 }
 
 // FlagsGetFirstValue wraps g_flags_get_first_value
 // 
 // The function takes the following parameters:
 // 
-// 	- flagsClass FlagsClass: a #GFlagsClass 
+// 	- flagsClass *FlagsClass: a #GFlagsClass 
 // 	- value uint: the value 
 // 
 // The function returns the following values:
 // 
-// 	- ret FlagsValue 
+// 	- goret *FlagsValue 
 //
 // Returns the first #GFlagsValue which is set in @value.
-func FlagsGetFirstValue(flagsClass FlagsClass, value uint) FlagsValue {
+func FlagsGetFirstValue(flagsClass *FlagsClass, value uint) *FlagsValue {
 	var carg1 *C.GFlagsClass // in, none, converted
 	var carg2 C.guint        // in, none, casted
 	var cret  *C.GFlagsValue // return, none, converted
@@ -1114,26 +846,26 @@ func FlagsGetFirstValue(flagsClass FlagsClass, value uint) FlagsValue {
 	runtime.KeepAlive(flagsClass)
 	runtime.KeepAlive(value)
 
-	var ret FlagsValue
+	var goret *FlagsValue
 
-	ret = UnsafeFlagsValueFromGlibNone(unsafe.Pointer(cret))
+	goret = UnsafeFlagsValueFromGlibNone(unsafe.Pointer(cret))
 
-	return ret
+	return goret
 }
 
 // FlagsGetValueByName wraps g_flags_get_value_by_name
 // 
 // The function takes the following parameters:
 // 
-// 	- flagsClass FlagsClass: a #GFlagsClass 
+// 	- flagsClass *FlagsClass: a #GFlagsClass 
 // 	- name string: the name to look up 
 // 
 // The function returns the following values:
 // 
-// 	- ret FlagsValue 
+// 	- goret *FlagsValue 
 //
 // Looks up a #GFlagsValue by name.
-func FlagsGetValueByName(flagsClass FlagsClass, name string) FlagsValue {
+func FlagsGetValueByName(flagsClass *FlagsClass, name string) *FlagsValue {
 	var carg1 *C.GFlagsClass // in, none, converted
 	var carg2 *C.gchar       // in, none, string
 	var cret  *C.GFlagsValue // return, none, converted
@@ -1146,26 +878,26 @@ func FlagsGetValueByName(flagsClass FlagsClass, name string) FlagsValue {
 	runtime.KeepAlive(flagsClass)
 	runtime.KeepAlive(name)
 
-	var ret FlagsValue
+	var goret *FlagsValue
 
-	ret = UnsafeFlagsValueFromGlibNone(unsafe.Pointer(cret))
+	goret = UnsafeFlagsValueFromGlibNone(unsafe.Pointer(cret))
 
-	return ret
+	return goret
 }
 
 // FlagsGetValueByNick wraps g_flags_get_value_by_nick
 // 
 // The function takes the following parameters:
 // 
-// 	- flagsClass FlagsClass: a #GFlagsClass 
+// 	- flagsClass *FlagsClass: a #GFlagsClass 
 // 	- nick string: the nickname to look up 
 // 
 // The function returns the following values:
 // 
-// 	- ret FlagsValue 
+// 	- goret *FlagsValue 
 //
 // Looks up a #GFlagsValue by nickname.
-func FlagsGetValueByNick(flagsClass FlagsClass, nick string) FlagsValue {
+func FlagsGetValueByNick(flagsClass *FlagsClass, nick string) *FlagsValue {
 	var carg1 *C.GFlagsClass // in, none, converted
 	var carg2 *C.gchar       // in, none, string
 	var cret  *C.GFlagsValue // return, none, converted
@@ -1178,11 +910,11 @@ func FlagsGetValueByNick(flagsClass FlagsClass, nick string) FlagsValue {
 	runtime.KeepAlive(flagsClass)
 	runtime.KeepAlive(nick)
 
-	var ret FlagsValue
+	var goret *FlagsValue
 
-	ret = UnsafeFlagsValueFromGlibNone(unsafe.Pointer(cret))
+	goret = UnsafeFlagsValueFromGlibNone(unsafe.Pointer(cret))
 
-	return ret
+	return goret
 }
 
 // FlagsRegisterStatic wraps g_flags_register_static
@@ -1190,23 +922,23 @@ func FlagsGetValueByNick(flagsClass FlagsClass, nick string) FlagsValue {
 // The function takes the following parameters:
 // 
 // 	- name string: A nul-terminated string used as the name of the new type. 
-// 	- constStaticValues FlagsValue: An array of #GFlagsValue structs for the possible
+// 	- constStaticValues *FlagsValue: An array of #GFlagsValue structs for the possible
 //  flags values. The array is terminated by a struct with all members being 0.
 //  GObject keeps a reference to the data, so it cannot be stack-allocated. 
 // 
 // The function returns the following values:
 // 
-// 	- ret glib.Type 
+// 	- goret Type 
 //
 // Registers a new static flags type with the name @name.
 // 
 // It is normally more convenient to let [glib-mkenums][glib-mkenums]
 // generate a my_flags_get_type() function from a usual C enumeration
 // definition than to write one yourself using g_flags_register_static().
-func FlagsRegisterStatic(name string, constStaticValues FlagsValue) glib.Type {
+func FlagsRegisterStatic(name string, constStaticValues *FlagsValue) Type {
 	var carg1 *C.gchar       // in, none, string
 	var carg2 *C.GFlagsValue // in, none, converted
-	var cret  C.GType        // return, none, casted
+	var cret  C.GType        // return, none, casted, alias
 
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(name)))
 	defer C.free(unsafe.Pointer(carg1))
@@ -1216,31 +948,31 @@ func FlagsRegisterStatic(name string, constStaticValues FlagsValue) glib.Type {
 	runtime.KeepAlive(name)
 	runtime.KeepAlive(constStaticValues)
 
-	var ret glib.Type
+	var goret Type
 
-	ret = glib.Type(cret)
+	goret = Type(cret)
 
-	return ret
+	return goret
 }
 
 // FlagsToString wraps g_flags_to_string
 // 
 // The function takes the following parameters:
 // 
-// 	- flagsType glib.Type: the type identifier of a #GFlagsClass type 
+// 	- flagsType Type: the type identifier of a #GFlagsClass type 
 // 	- value uint: the value 
 // 
 // The function returns the following values:
 // 
-// 	- ret string 
+// 	- goret string 
 //
 // Pretty-prints @value in the form of the flag names separated by ` | ` and
 // sorted. Any extra bits will be shown at the end as a hexadecimal number.
 // 
 // This is intended to be used for debugging purposes. The format of the output
 // may change in the future.
-func FlagsToString(flagsType glib.Type, value uint) string {
-	var carg1 C.GType  // in, none, casted
+func FlagsToString(flagsType Type, value uint) string {
+	var carg1 C.GType  // in, none, casted, alias
 	var carg2 C.guint  // in, none, casted
 	var cret  *C.gchar // return, full, string
 
@@ -1251,28 +983,28 @@ func FlagsToString(flagsType glib.Type, value uint) string {
 	runtime.KeepAlive(flagsType)
 	runtime.KeepAlive(value)
 
-	var ret string
+	var goret string
 
-	ret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
 	defer C.free(unsafe.Pointer(cret))
 
-	return ret
+	return goret
 }
 
 // GTypeGetType wraps g_gtype_get_type
 // The function returns the following values:
 // 
-// 	- ret glib.Type 
-func GTypeGetType() glib.Type {
-	var cret C.GType // return, none, casted
+// 	- goret Type 
+func GTypeGetType() Type {
+	var cret C.GType // return, none, casted, alias
 
 	cret = C.g_gtype_get_type()
 
-	var ret glib.Type
+	var goret Type
 
-	ret = glib.Type(cret)
+	goret = Type(cret)
 
-	return ret
+	return goret
 }
 
 // ParamTypeRegisterStatic wraps g_param_type_register_static
@@ -1280,11 +1012,11 @@ func GTypeGetType() glib.Type {
 // The function takes the following parameters:
 // 
 // 	- name string: 0-terminated string used as the name of the new #GParamSpec type. 
-// 	- pspecInfo ParamSpecTypeInfo: The #GParamSpecTypeInfo for this #GParamSpec type. 
+// 	- pspecInfo *ParamSpecTypeInfo: The #GParamSpecTypeInfo for this #GParamSpec type. 
 // 
 // The function returns the following values:
 // 
-// 	- ret glib.Type 
+// 	- goret Type 
 //
 // Registers @name as the name of a new static type derived
 // from %G_TYPE_PARAM.
@@ -1292,10 +1024,10 @@ func GTypeGetType() glib.Type {
 // The type system uses the information contained in the #GParamSpecTypeInfo
 // structure pointed to by @info to manage the #GParamSpec type and its
 // instances.
-func ParamTypeRegisterStatic(name string, pspecInfo ParamSpecTypeInfo) glib.Type {
+func ParamTypeRegisterStatic(name string, pspecInfo *ParamSpecTypeInfo) Type {
 	var carg1 *C.gchar              // in, none, string
 	var carg2 *C.GParamSpecTypeInfo // in, none, converted
-	var cret  C.GType               // return, none, casted
+	var cret  C.GType               // return, none, casted, alias
 
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(name)))
 	defer C.free(unsafe.Pointer(carg1))
@@ -1305,11 +1037,11 @@ func ParamTypeRegisterStatic(name string, pspecInfo ParamSpecTypeInfo) glib.Type
 	runtime.KeepAlive(name)
 	runtime.KeepAlive(pspecInfo)
 
-	var ret glib.Type
+	var goret Type
 
-	ret = glib.Type(cret)
+	goret = Type(cret)
 
-	return ret
+	return goret
 }
 
 // PointerTypeRegisterStatic wraps g_pointer_type_register_static
@@ -1320,13 +1052,13 @@ func ParamTypeRegisterStatic(name string, pspecInfo ParamSpecTypeInfo) glib.Type
 // 
 // The function returns the following values:
 // 
-// 	- ret glib.Type 
+// 	- goret Type 
 //
 // Creates a new %G_TYPE_POINTER derived type id for a new
 // pointer type with name @name.
-func PointerTypeRegisterStatic(name string) glib.Type {
+func PointerTypeRegisterStatic(name string) Type {
 	var carg1 *C.gchar // in, none, string
-	var cret  C.GType  // return, none, casted
+	var cret  C.GType  // return, none, casted, alias
 
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(name)))
 	defer C.free(unsafe.Pointer(carg1))
@@ -1334,153 +1066,231 @@ func PointerTypeRegisterStatic(name string) glib.Type {
 	cret = C.g_pointer_type_register_static(carg1)
 	runtime.KeepAlive(name)
 
-	var ret glib.Type
+	var goret Type
 
-	ret = glib.Type(cret)
+	goret = Type(cret)
 
-	return ret
+	return goret
 }
 
-// SignalAccumulatorFirstWins wraps g_signal_accumulator_first_wins
+// SignalGetInvocationHint wraps g_signal_get_invocation_hint
 // 
 // The function takes the following parameters:
 // 
-// 	- ihint SignalInvocationHint: standard #GSignalAccumulator parameter 
-// 	- returnAccu Value: standard #GSignalAccumulator parameter 
-// 	- handlerReturn Value: standard #GSignalAccumulator parameter 
-// 	- dummy unsafe.Pointer (nullable): standard #GSignalAccumulator parameter 
+// 	- instance unsafe.Pointer: the instance to query 
 // 
 // The function returns the following values:
 // 
-// 	- ret bool 
+// 	- goret *SignalInvocationHint 
 //
-// A predefined #GSignalAccumulator for signals intended to be used as a
-// hook for application code to provide a particular value.  Usually
-// only one such value is desired and multiple handlers for the same
-// signal don't make much sense (except for the case of the default
-// handler defined in the class structure, in which case you will
-// usually want the signal connection to override the class handler).
+// Returns the invocation hint of the innermost signal emission of instance.
+func SignalGetInvocationHint(instance unsafe.Pointer) *SignalInvocationHint {
+	var carg1 C.gpointer               // in, none, casted
+	var cret  *C.GSignalInvocationHint // return, none, converted
+
+	carg1 = C.gpointer(instance)
+
+	cret = C.g_signal_get_invocation_hint(carg1)
+	runtime.KeepAlive(instance)
+
+	var goret *SignalInvocationHint
+
+	goret = UnsafeSignalInvocationHintFromGlibNone(unsafe.Pointer(cret))
+
+	return goret
+}
+
+// SignalHandlerBlock wraps g_signal_handler_block
 // 
-// This accumulator will use the return value from the first signal
-// handler that is run as the return value for the signal and not run
-// any further handlers (ie: the first handler "wins").
-func SignalAccumulatorFirstWins(ihint SignalInvocationHint, returnAccu Value, handlerReturn Value, dummy unsafe.Pointer) bool {
-	var carg1 *C.GSignalInvocationHint // in, none, converted
-	var carg2 *C.GValue                // in, none, converted
-	var carg3 *C.GValue                // in, none, converted
-	var carg4 C.gpointer               // in, none, casted, nullable
-	var cret  C.gboolean               // return
+// The function takes the following parameters:
+// 
+// 	- instance unsafe.Pointer: The instance to block the signal handler of. 
+// 	- handlerId uint32: Handler id of the handler to be blocked. 
+//
+// Blocks a handler of an instance so it will not be called during any
+// signal emissions unless it is unblocked again. Thus "blocking" a
+// signal handler means to temporarily deactivate it, a signal handler
+// has to be unblocked exactly the same amount of times it has been
+// blocked before to become active again.
+// 
+// The @handler_id has to be a valid signal handler id, connected to a
+// signal of @instance.
+func SignalHandlerBlock(instance unsafe.Pointer, handlerId uint32) {
+	var carg1 C.gpointer // in, none, casted
+	var carg2 C.gulong   // in, none, casted
 
-	carg1 = (*C.GSignalInvocationHint)(UnsafeSignalInvocationHintToGlibNone(ihint))
-	carg2 = (*C.GValue)(TODOToGlibNone(returnAccu))
-	carg3 = (*C.GValue)(TODOToGlibNone(handlerReturn))
-	if dummy != nil {
-		carg4 = C.gpointer(dummy)
-	}
+	carg1 = C.gpointer(instance)
+	carg2 = C.gulong(handlerId)
 
-	cret = C.g_signal_accumulator_first_wins(carg1, carg2, carg3, carg4)
-	runtime.KeepAlive(ihint)
-	runtime.KeepAlive(returnAccu)
-	runtime.KeepAlive(handlerReturn)
-	runtime.KeepAlive(dummy)
+	C.g_signal_handler_block(carg1, carg2)
+	runtime.KeepAlive(instance)
+	runtime.KeepAlive(handlerId)
+}
 
-	var ret bool
+// SignalHandlerDisconnect wraps g_signal_handler_disconnect
+// 
+// The function takes the following parameters:
+// 
+// 	- instance unsafe.Pointer: The instance to remove the signal handler from. 
+// 	- handlerId uint32: Handler id of the handler to be disconnected. 
+//
+// Disconnects a handler from an instance so it will not be called during
+// any future or currently ongoing emissions of the signal it has been
+// connected to. The @handler_id becomes invalid and may be reused.
+// 
+// The @handler_id has to be a valid signal handler id, connected to a
+// signal of @instance.
+func SignalHandlerDisconnect(instance unsafe.Pointer, handlerId uint32) {
+	var carg1 C.gpointer // in, none, casted
+	var carg2 C.gulong   // in, none, casted
+
+	carg1 = C.gpointer(instance)
+	carg2 = C.gulong(handlerId)
+
+	C.g_signal_handler_disconnect(carg1, carg2)
+	runtime.KeepAlive(instance)
+	runtime.KeepAlive(handlerId)
+}
+
+// SignalHandlerIsConnected wraps g_signal_handler_is_connected
+// 
+// The function takes the following parameters:
+// 
+// 	- instance unsafe.Pointer: The instance where a signal handler is sought. 
+// 	- handlerId uint32: the handler ID. 
+// 
+// The function returns the following values:
+// 
+// 	- goret bool 
+//
+// Returns whether @handler_id is the ID of a handler connected to @instance.
+func SignalHandlerIsConnected(instance unsafe.Pointer, handlerId uint32) bool {
+	var carg1 C.gpointer // in, none, casted
+	var carg2 C.gulong   // in, none, casted
+	var cret  C.gboolean // return
+
+	carg1 = C.gpointer(instance)
+	carg2 = C.gulong(handlerId)
+
+	cret = C.g_signal_handler_is_connected(carg1, carg2)
+	runtime.KeepAlive(instance)
+	runtime.KeepAlive(handlerId)
+
+	var goret bool
 
 	if cret != 0 {
-		ret = true
+		goret = true
 	}
 
-	return ret
+	return goret
 }
 
-// SignalAccumulatorTrueHandled wraps g_signal_accumulator_true_handled
+// SignalHandlerUnblock wraps g_signal_handler_unblock
 // 
 // The function takes the following parameters:
 // 
-// 	- ihint SignalInvocationHint: standard #GSignalAccumulator parameter 
-// 	- returnAccu Value: standard #GSignalAccumulator parameter 
-// 	- handlerReturn Value: standard #GSignalAccumulator parameter 
-// 	- dummy unsafe.Pointer (nullable): standard #GSignalAccumulator parameter 
-// 
-// The function returns the following values:
-// 
-// 	- ret bool 
+// 	- instance unsafe.Pointer: The instance to unblock the signal handler of. 
+// 	- handlerId uint32: Handler id of the handler to be unblocked. 
 //
-// A predefined #GSignalAccumulator for signals that return a
-// boolean values. The behavior that this accumulator gives is
-// that a return of %TRUE stops the signal emission: no further
-// callbacks will be invoked, while a return of %FALSE allows
-// the emission to continue. The idea here is that a %TRUE return
-// indicates that the callback handled the signal, and no further
-// handling is needed.
-func SignalAccumulatorTrueHandled(ihint SignalInvocationHint, returnAccu Value, handlerReturn Value, dummy unsafe.Pointer) bool {
-	var carg1 *C.GSignalInvocationHint // in, none, converted
-	var carg2 *C.GValue                // in, none, converted
-	var carg3 *C.GValue                // in, none, converted
-	var carg4 C.gpointer               // in, none, casted, nullable
-	var cret  C.gboolean               // return
+// Undoes the effect of a previous g_signal_handler_block() call.  A
+// blocked handler is skipped during signal emissions and will not be
+// invoked, unblocking it (for exactly the amount of times it has been
+// blocked before) reverts its "blocked" state, so the handler will be
+// recognized by the signal system and is called upon future or
+// currently ongoing signal emissions (since the order in which
+// handlers are called during signal emissions is deterministic,
+// whether the unblocked handler in question is called as part of a
+// currently ongoing emission depends on how far that emission has
+// proceeded yet).
+// 
+// The @handler_id has to be a valid id of a signal handler that is
+// connected to a signal of @instance and is currently blocked.
+func SignalHandlerUnblock(instance unsafe.Pointer, handlerId uint32) {
+	var carg1 C.gpointer // in, none, casted
+	var carg2 C.gulong   // in, none, casted
 
-	carg1 = (*C.GSignalInvocationHint)(UnsafeSignalInvocationHintToGlibNone(ihint))
-	carg2 = (*C.GValue)(TODOToGlibNone(returnAccu))
-	carg3 = (*C.GValue)(TODOToGlibNone(handlerReturn))
-	if dummy != nil {
-		carg4 = C.gpointer(dummy)
-	}
+	carg1 = C.gpointer(instance)
+	carg2 = C.gulong(handlerId)
 
-	cret = C.g_signal_accumulator_true_handled(carg1, carg2, carg3, carg4)
-	runtime.KeepAlive(ihint)
-	runtime.KeepAlive(returnAccu)
-	runtime.KeepAlive(handlerReturn)
-	runtime.KeepAlive(dummy)
-
-	var ret bool
-
-	if cret != 0 {
-		ret = true
-	}
-
-	return ret
+	C.g_signal_handler_unblock(carg1, carg2)
+	runtime.KeepAlive(instance)
+	runtime.KeepAlive(handlerId)
 }
 
-// SignalAddEmissionHook wraps g_signal_add_emission_hook
+// SignalHandlersDestroy wraps g_signal_handlers_destroy
 // 
 // The function takes the following parameters:
 // 
-// 	- signalId uint: the signal identifier, as returned by g_signal_lookup(). 
-// 	- detail glib.Quark: the detail on which to call the hook. 
-// 	- hookFunc SignalEmissionHook: a #GSignalEmissionHook function. 
+// 	- instance unsafe.Pointer: The instance whose signal handlers are destroyed 
+//
+// Destroy all signal handlers of a type instance. This function is
+// an implementation detail of the #GObject dispose implementation,
+// and should not be used outside of the type system.
+func SignalHandlersDestroy(instance unsafe.Pointer) {
+	var carg1 C.gpointer // in, none, casted
+
+	carg1 = C.gpointer(instance)
+
+	C.g_signal_handlers_destroy(carg1)
+	runtime.KeepAlive(instance)
+}
+
+// SignalHasHandlerPending wraps g_signal_has_handler_pending
+// 
+// The function takes the following parameters:
+// 
+// 	- instance unsafe.Pointer: the object whose signal handlers are sought. 
+// 	- signalId uint: the signal id. 
+// 	- detail glib.Quark: the detail. 
+// 	- mayBeBlocked bool: whether blocked handlers should count as match. 
 // 
 // The function returns the following values:
 // 
-// 	- ret uint32 
+// 	- goret bool 
 //
-// Adds an emission hook for a signal, which will get called for any emission
-// of that signal, independent of the instance. This is possible only
-// for signals which don't have %G_SIGNAL_NO_HOOKS flag set.
-func SignalAddEmissionHook(signalId uint, detail glib.Quark, hookFunc SignalEmissionHook) uint32 {
-	var carg1 C.guint               // in, none, casted
-	var carg2 C.GQuark              // in, none, casted, alias
-	var carg3 C.GSignalEmissionHook // callback, scope: notified, closure: carg4, destroy: carg5
-	var carg4 C.gpointer            // implicit
-	var carg5 C.GDestroyNotify      // implicit
-	var cret  C.gulong              // return, none, casted
+// Returns whether there are any handlers connected to @instance for the
+// given signal id and detail.
+// 
+// If @detail is 0 then it will only match handlers that were connected
+// without detail.  If @detail is non-zero then it will match handlers
+// connected both without detail and with the given detail.  This is
+// consistent with how a signal emitted with @detail would be delivered
+// to those handlers.
+// 
+// Since 2.46 this also checks for a non-default class closure being
+// installed, as this is basically always what you want.
+// 
+// One example of when you might use this is when the arguments to the
+// signal are difficult to compute. A class implementor may opt to not
+// emit the signal if no one is attached anyway, thus saving the cost
+// of building the arguments.
+func SignalHasHandlerPending(instance unsafe.Pointer, signalId uint, detail glib.Quark, mayBeBlocked bool) bool {
+	var carg1 C.gpointer // in, none, casted
+	var carg2 C.guint    // in, none, casted
+	var carg3 C.GQuark   // in, none, casted, alias
+	var carg4 C.gboolean // in
+	var cret  C.gboolean // return
 
-	carg1 = C.guint(signalId)
-	carg2 = C.GQuark(detail)
-	carg3 = (*[0]byte)(C._gotk4_gobject2_SignalEmissionHook)
-	carg4 = C.gpointer(gbox.Assign(hookFunc))
-	carg5 = (C.GDestroyNotify)((*[0]byte)(C.callbackDelete))
+	carg1 = C.gpointer(instance)
+	carg2 = C.guint(signalId)
+	carg3 = C.GQuark(detail)
+	if mayBeBlocked {
+		carg4 = C.TRUE
+	}
 
-	cret = C.g_signal_add_emission_hook(carg1, carg2, carg3, carg4, carg5)
+	cret = C.g_signal_has_handler_pending(carg1, carg2, carg3, carg4)
+	runtime.KeepAlive(instance)
 	runtime.KeepAlive(signalId)
 	runtime.KeepAlive(detail)
-	runtime.KeepAlive(hookFunc)
+	runtime.KeepAlive(mayBeBlocked)
 
-	var ret uint32
+	var goret bool
 
-	ret = uint32(cret)
+	if cret != 0 {
+		goret = true
+	}
 
-	return ret
+	return goret
 }
 
 // SignalIsValidName wraps g_signal_is_valid_name
@@ -1491,7 +1301,7 @@ func SignalAddEmissionHook(signalId uint, detail glib.Quark, hookFunc SignalEmis
 // 
 // The function returns the following values:
 // 
-// 	- ret bool 
+// 	- goret bool 
 //
 // Validate a signal name. This can be useful for dynamically-generated signals
 // which need to be validated at run-time before actually trying to create them.
@@ -1508,46 +1318,48 @@ func SignalIsValidName(name string) bool {
 	cret = C.g_signal_is_valid_name(carg1)
 	runtime.KeepAlive(name)
 
-	var ret bool
+	var goret bool
 
 	if cret != 0 {
-		ret = true
+		goret = true
 	}
 
-	return ret
+	return goret
 }
 
 // SignalListIDs wraps g_signal_list_ids
 // 
 // The function takes the following parameters:
 // 
-// 	- itype glib.Type: Instance or interface type. 
+// 	- itype Type: Instance or interface type. 
 // 
 // The function returns the following values:
 // 
 // 	- nIds uint: Location to store the number of signal ids for @itype. 
-// 	- ret array 
+// 	- goret []uint 
 //
 // Lists the signals by id that a certain instance or interface type
 // created. Further information about the signals can be acquired through
 // g_signal_query().
-func SignalListIDs(itype glib.Type) (uint, array) {
-	var carg1 C.GType // in, none, casted
-	var carg2 C.guint // out, full, casted
-	var cret  array   // return, transfer: full, scope: , implicit: false, skip: false, optional: false, nullable: false, caller-allocates: false, has closure: false, has destroy: false
+func SignalListIDs(itype Type) (uint, []uint) {
+	var carg1 C.GType  // in, none, casted, alias
+	var carg2 C.guint  // out, full, casted
+	var cret  *C.guint // return, transfer: full, C Pointers: 1, Name: array[guint], scope: , array (inner: *typesystem.CastablePrimitive)
 
 	carg1 = C.GType(itype)
 
 	cret = C.g_signal_list_ids(carg1, &carg2)
 	runtime.KeepAlive(itype)
 
-	var nIds uint
-	var ret  array
+	var nIds  uint
+	var goret []uint
 
 	nIds = uint(carg2)
-	panic("unimplemented conversion of array (array)")
+	_ = goret
+	_ = cret
+	panic("unimplemented conversion of []uint (guint*)")
 
-	return nIds, ret
+	return nIds, goret
 }
 
 // SignalLookup wraps g_signal_lookup
@@ -1555,11 +1367,11 @@ func SignalListIDs(itype glib.Type) (uint, array) {
 // The function takes the following parameters:
 // 
 // 	- name string: the signal's name. 
-// 	- itype glib.Type: the type that the signal operates on. 
+// 	- itype Type: the type that the signal operates on. 
 // 
 // The function returns the following values:
 // 
-// 	- ret uint 
+// 	- goret uint 
 //
 // Given the name of the signal and the type of object it connects to, gets
 // the signal's identifying integer. Emitting the signal by number is
@@ -1572,9 +1384,9 @@ func SignalListIDs(itype glib.Type) (uint, array) {
 // always installed during class initialization.
 // 
 // See g_signal_new() for details on allowed signal names.
-func SignalLookup(name string, itype glib.Type) uint {
+func SignalLookup(name string, itype Type) uint {
 	var carg1 *C.gchar // in, none, string
-	var carg2 C.GType  // in, none, casted
+	var carg2 C.GType  // in, none, casted, alias
 	var cret  C.guint  // return, none, casted
 
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(name)))
@@ -1585,11 +1397,11 @@ func SignalLookup(name string, itype glib.Type) uint {
 	runtime.KeepAlive(name)
 	runtime.KeepAlive(itype)
 
-	var ret uint
+	var goret uint
 
-	ret = uint(cret)
+	goret = uint(cret)
 
-	return ret
+	return goret
 }
 
 // SignalName wraps g_signal_name
@@ -1600,7 +1412,7 @@ func SignalLookup(name string, itype glib.Type) uint {
 // 
 // The function returns the following values:
 // 
-// 	- ret string 
+// 	- goret string 
 //
 // Given the signal's identifier, finds its name.
 // 
@@ -1614,42 +1426,11 @@ func SignalName(signalId uint) string {
 	cret = C.g_signal_name(carg1)
 	runtime.KeepAlive(signalId)
 
-	var ret string
+	var goret string
 
-	ret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
 
-	return ret
-}
-
-// SignalOverrideClassClosure wraps g_signal_override_class_closure
-// 
-// The function takes the following parameters:
-// 
-// 	- signalId uint: the signal id 
-// 	- instanceType glib.Type: the instance type on which to override the class closure
-//  for the signal. 
-// 	- classClosure Closure: the closure. 
-//
-// Overrides the class closure (i.e. the default handler) for the given signal
-// for emissions on instances of @instance_type. @instance_type must be derived
-// from the type to which the signal belongs.
-// 
-// See g_signal_chain_from_overridden() and
-// g_signal_chain_from_overridden_handler() for how to chain up to the
-// parent class closure from inside the overridden one.
-func SignalOverrideClassClosure(signalId uint, instanceType glib.Type, classClosure Closure) {
-	var carg1 C.guint     // in, none, casted
-	var carg2 C.GType     // in, none, casted
-	var carg3 *C.GClosure // in, none, converted
-
-	carg1 = C.guint(signalId)
-	carg2 = C.GType(instanceType)
-	carg3 = (*C.GClosure)(UnsafeClosureToGlibNone(classClosure))
-
-	C.g_signal_override_class_closure(carg1, carg2, carg3)
-	runtime.KeepAlive(signalId)
-	runtime.KeepAlive(instanceType)
-	runtime.KeepAlive(classClosure)
+	return goret
 }
 
 // SignalParseName wraps g_signal_parse_name
@@ -1657,20 +1438,20 @@ func SignalOverrideClassClosure(signalId uint, instanceType glib.Type, classClos
 // The function takes the following parameters:
 // 
 // 	- detailedSignal string: a string of the form "signal-name::detail". 
-// 	- itype glib.Type: The interface/instance type that introduced "signal-name". 
+// 	- itype Type: The interface/instance type that introduced "signal-name". 
 // 	- forceDetailQuark bool: %TRUE forces creation of a #GQuark for the detail. 
 // 
 // The function returns the following values:
 // 
 // 	- signalIdP uint: Location to store the signal id. 
 // 	- detailP glib.Quark: Location to store the detail quark. 
-// 	- ret bool 
+// 	- goret bool 
 //
 // Internal function to parse a signal name into its @signal_id
 // and @detail quark.
-func SignalParseName(detailedSignal string, itype glib.Type, forceDetailQuark bool) (uint, glib.Quark, bool) {
+func SignalParseName(detailedSignal string, itype Type, forceDetailQuark bool) (uint, glib.Quark, bool) {
 	var carg1 *C.gchar   // in, none, string
-	var carg2 C.GType    // in, none, casted
+	var carg2 C.GType    // in, none, casted, alias
 	var carg5 C.gboolean // in
 	var carg3 C.guint    // out, full, casted
 	var carg4 C.GQuark   // out, full, casted, alias
@@ -1690,15 +1471,15 @@ func SignalParseName(detailedSignal string, itype glib.Type, forceDetailQuark bo
 
 	var signalIdP uint
 	var detailP   glib.Quark
-	var ret       bool
+	var goret     bool
 
 	signalIdP = uint(carg3)
 	detailP = glib.Quark(carg4)
 	if cret != 0 {
-		ret = true
+		goret = true
 	}
 
-	return signalIdP, detailP, ret
+	return signalIdP, detailP, goret
 }
 
 // SignalRemoveEmissionHook wraps g_signal_remove_emission_hook
@@ -1722,76 +1503,65 @@ func SignalRemoveEmissionHook(signalId uint, hookId uint32) {
 	runtime.KeepAlive(hookId)
 }
 
-// NewSignalTypeCclosure wraps g_signal_type_cclosure_new
+// SignalStopEmission wraps g_signal_stop_emission
 // 
 // The function takes the following parameters:
 // 
-// 	- itype glib.Type: the #GType identifier of an interface or classed type 
-// 	- structOffset uint: the offset of the member function of @itype's class
-//  structure which is to be invoked by the new closure 
-// 
-// The function returns the following values:
-// 
-// 	- ret Closure 
+// 	- instance unsafe.Pointer: the object whose signal handlers you wish to stop. 
+// 	- signalId uint: the signal identifier, as returned by g_signal_lookup(). 
+// 	- detail glib.Quark: the detail which the signal was emitted with. 
 //
-// Creates a new closure which invokes the function found at the offset
-// @struct_offset in the class structure of the interface or classed type
-// identified by @itype.
-func NewSignalTypeCclosure(itype glib.Type, structOffset uint) Closure {
-	var carg1 C.GType     // in, none, casted
-	var carg2 C.guint     // in, none, casted
-	var cret  *C.GClosure // return, none, converted
+// Stops a signal's current emission.
+// 
+// This will prevent the default method from running, if the signal was
+// %G_SIGNAL_RUN_LAST and you connected normally (i.e. without the "after"
+// flag).
+// 
+// Prints a warning if used on a signal which isn't being emitted.
+func SignalStopEmission(instance unsafe.Pointer, signalId uint, detail glib.Quark) {
+	var carg1 C.gpointer // in, none, casted
+	var carg2 C.guint    // in, none, casted
+	var carg3 C.GQuark   // in, none, casted, alias
 
-	carg1 = C.GType(itype)
-	carg2 = C.guint(structOffset)
+	carg1 = C.gpointer(instance)
+	carg2 = C.guint(signalId)
+	carg3 = C.GQuark(detail)
 
-	cret = C.g_signal_type_cclosure_new(carg1, carg2)
-	runtime.KeepAlive(itype)
-	runtime.KeepAlive(structOffset)
-
-	var ret Closure
-
-	ret = UnsafeClosureFromGlibNone(unsafe.Pointer(cret))
-
-	return ret
+	C.g_signal_stop_emission(carg1, carg2, carg3)
+	runtime.KeepAlive(instance)
+	runtime.KeepAlive(signalId)
+	runtime.KeepAlive(detail)
 }
 
-// StrdupValueContents wraps g_strdup_value_contents
+// SignalStopEmissionByName wraps g_signal_stop_emission_by_name
 // 
 // The function takes the following parameters:
 // 
-// 	- value Value: #GValue which contents are to be described. 
-// 
-// The function returns the following values:
-// 
-// 	- ret string 
+// 	- instance unsafe.Pointer: the object whose signal handlers you wish to stop. 
+// 	- detailedSignal string: a string of the form "signal-name::detail". 
 //
-// Return a newly allocated string, which describes the contents of a
-// #GValue.  The main purpose of this function is to describe #GValue
-// contents for debugging output, the way in which the contents are
-// described may change between different GLib versions.
-func StrdupValueContents(value Value) string {
-	var carg1 *C.GValue // in, none, converted
-	var cret  *C.gchar  // return, full, string
+// Stops a signal's current emission.
+// 
+// This is just like g_signal_stop_emission() except it will look up the
+// signal id for you.
+func SignalStopEmissionByName(instance unsafe.Pointer, detailedSignal string) {
+	var carg1 C.gpointer // in, none, casted
+	var carg2 *C.gchar   // in, none, string
 
-	carg1 = (*C.GValue)(TODOToGlibNone(value))
+	carg1 = C.gpointer(instance)
+	carg2 = (*C.gchar)(unsafe.Pointer(C.CString(detailedSignal)))
+	defer C.free(unsafe.Pointer(carg2))
 
-	cret = C.g_strdup_value_contents(carg1)
-	runtime.KeepAlive(value)
-
-	var ret string
-
-	ret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
-	defer C.free(unsafe.Pointer(cret))
-
-	return ret
+	C.g_signal_stop_emission_by_name(carg1, carg2)
+	runtime.KeepAlive(instance)
+	runtime.KeepAlive(detailedSignal)
 }
 
 // TypeAddClassPrivate wraps g_type_add_class_private
 // 
 // The function takes the following parameters:
 // 
-// 	- classType glib.Type: GType of a classed type 
+// 	- classType Type: GType of a classed type 
 // 	- privateSize uint: size of private structure 
 //
 // Registers a private class structure for a classed type;
@@ -1804,8 +1574,8 @@ func StrdupValueContents(value Value) string {
 // type's get_type() function after the type is registered.
 // The private structure can be retrieved using the
 // G_TYPE_CLASS_GET_PRIVATE() macro.
-func TypeAddClassPrivate(classType glib.Type, privateSize uint) {
-	var carg1 C.GType // in, none, casted
+func TypeAddClassPrivate(classType Type, privateSize uint) {
+	var carg1 C.GType // in, none, casted, alias
 	var carg2 C.gsize // in, none, casted
 
 	carg1 = C.GType(classType)
@@ -1820,14 +1590,14 @@ func TypeAddClassPrivate(classType glib.Type, privateSize uint) {
 // 
 // The function takes the following parameters:
 // 
-// 	- classType glib.Type 
+// 	- classType Type 
 // 	- privateSize uint 
 // 
 // The function returns the following values:
 // 
-// 	- ret int 
-func TypeAddInstancePrivate(classType glib.Type, privateSize uint) int {
-	var carg1 C.GType // in, none, casted
+// 	- goret int 
+func TypeAddInstancePrivate(classType Type, privateSize uint) int {
+	var carg1 C.GType // in, none, casted, alias
 	var carg2 C.gsize // in, none, casted
 	var cret  C.int   // return, none, casted
 
@@ -1838,27 +1608,27 @@ func TypeAddInstancePrivate(classType glib.Type, privateSize uint) int {
 	runtime.KeepAlive(classType)
 	runtime.KeepAlive(privateSize)
 
-	var ret int
+	var goret int
 
-	ret = int(cret)
+	goret = int(cret)
 
-	return ret
+	return goret
 }
 
 // TypeAddInterfaceDynamic wraps g_type_add_interface_dynamic
 // 
 // The function takes the following parameters:
 // 
-// 	- instanceType glib.Type: #GType value of an instantiatable type 
-// 	- interfaceType glib.Type: #GType value of an interface type 
+// 	- instanceType Type: #GType value of an instantiatable type 
+// 	- interfaceType Type: #GType value of an interface type 
 // 	- plugin TypePlugin: #GTypePlugin structure to retrieve the #GInterfaceInfo from 
 //
 // Adds @interface_type to the dynamic @instance_type. The information
 // contained in the #GTypePlugin structure pointed to by @plugin
 // is used to manage the relationship.
-func TypeAddInterfaceDynamic(instanceType glib.Type, interfaceType glib.Type, plugin TypePlugin) {
-	var carg1 C.GType        // in, none, casted
-	var carg2 C.GType        // in, none, casted
+func TypeAddInterfaceDynamic(instanceType Type, interfaceType Type, plugin TypePlugin) {
+	var carg1 C.GType        // in, none, casted, alias
+	var carg2 C.GType        // in, none, casted, alias
 	var carg3 *C.GTypePlugin // in, none, converted
 
 	carg1 = C.GType(instanceType)
@@ -1875,17 +1645,17 @@ func TypeAddInterfaceDynamic(instanceType glib.Type, interfaceType glib.Type, pl
 // 
 // The function takes the following parameters:
 // 
-// 	- instanceType glib.Type: #GType value of an instantiatable type 
-// 	- interfaceType glib.Type: #GType value of an interface type 
-// 	- info InterfaceInfo: #GInterfaceInfo structure for this
+// 	- instanceType Type: #GType value of an instantiatable type 
+// 	- interfaceType Type: #GType value of an interface type 
+// 	- info *InterfaceInfo: #GInterfaceInfo structure for this
 //        (@instance_type, @interface_type) combination 
 //
 // Adds @interface_type to the static @instance_type.
 // The information contained in the #GInterfaceInfo structure
 // pointed to by @info is used to manage the relationship.
-func TypeAddInterfaceStatic(instanceType glib.Type, interfaceType glib.Type, info InterfaceInfo) {
-	var carg1 C.GType           // in, none, casted
-	var carg2 C.GType           // in, none, casted
+func TypeAddInterfaceStatic(instanceType Type, interfaceType Type, info *InterfaceInfo) {
+	var carg1 C.GType           // in, none, casted, alias
+	var carg2 C.GType           // in, none, casted, alias
 	var carg3 *C.GInterfaceInfo // in, none, converted
 
 	carg1 = C.GType(instanceType)
@@ -1898,50 +1668,19 @@ func TypeAddInterfaceStatic(instanceType glib.Type, interfaceType glib.Type, inf
 	runtime.KeepAlive(info)
 }
 
-// TypeCheckClassIsA wraps g_type_check_class_is_a
-// 
-// The function takes the following parameters:
-// 
-// 	- gClass TypeClass 
-// 	- isAType glib.Type 
-// 
-// The function returns the following values:
-// 
-// 	- ret bool 
-func TypeCheckClassIsA(gClass TypeClass, isAType glib.Type) bool {
-	var carg1 *C.GTypeClass // in, none, converted
-	var carg2 C.GType       // in, none, casted
-	var cret  C.gboolean    // return
-
-	carg1 = (*C.GTypeClass)(UnsafeTypeClassToGlibNone(gClass))
-	carg2 = C.GType(isAType)
-
-	cret = C.g_type_check_class_is_a(carg1, carg2)
-	runtime.KeepAlive(gClass)
-	runtime.KeepAlive(isAType)
-
-	var ret bool
-
-	if cret != 0 {
-		ret = true
-	}
-
-	return ret
-}
-
 // TypeCheckInstance wraps g_type_check_instance
 // 
 // The function takes the following parameters:
 // 
-// 	- instance TypeInstance: a valid #GTypeInstance structure 
+// 	- instance *TypeInstance: a valid #GTypeInstance structure 
 // 
 // The function returns the following values:
 // 
-// 	- ret bool 
+// 	- goret bool 
 //
 // Private helper function to aid implementation of the
 // G_TYPE_CHECK_INSTANCE() macro.
-func TypeCheckInstance(instance TypeInstance) bool {
+func TypeCheckInstance(instance *TypeInstance) bool {
 	var carg1 *C.GTypeInstance // in, none, converted
 	var cret  C.gboolean       // return
 
@@ -1950,28 +1689,28 @@ func TypeCheckInstance(instance TypeInstance) bool {
 	cret = C.g_type_check_instance(carg1)
 	runtime.KeepAlive(instance)
 
-	var ret bool
+	var goret bool
 
 	if cret != 0 {
-		ret = true
+		goret = true
 	}
 
-	return ret
+	return goret
 }
 
 // TypeCheckInstanceIsA wraps g_type_check_instance_is_a
 // 
 // The function takes the following parameters:
 // 
-// 	- instance TypeInstance 
-// 	- ifaceType glib.Type 
+// 	- instance *TypeInstance 
+// 	- ifaceType Type 
 // 
 // The function returns the following values:
 // 
-// 	- ret bool 
-func TypeCheckInstanceIsA(instance TypeInstance, ifaceType glib.Type) bool {
+// 	- goret bool 
+func TypeCheckInstanceIsA(instance *TypeInstance, ifaceType Type) bool {
 	var carg1 *C.GTypeInstance // in, none, converted
-	var carg2 C.GType          // in, none, casted
+	var carg2 C.GType          // in, none, casted, alias
 	var cret  C.gboolean       // return
 
 	carg1 = (*C.GTypeInstance)(UnsafeTypeInstanceToGlibNone(instance))
@@ -1981,28 +1720,28 @@ func TypeCheckInstanceIsA(instance TypeInstance, ifaceType glib.Type) bool {
 	runtime.KeepAlive(instance)
 	runtime.KeepAlive(ifaceType)
 
-	var ret bool
+	var goret bool
 
 	if cret != 0 {
-		ret = true
+		goret = true
 	}
 
-	return ret
+	return goret
 }
 
 // TypeCheckInstanceIsFundamentallyA wraps g_type_check_instance_is_fundamentally_a
 // 
 // The function takes the following parameters:
 // 
-// 	- instance TypeInstance 
-// 	- fundamentalType glib.Type 
+// 	- instance *TypeInstance 
+// 	- fundamentalType Type 
 // 
 // The function returns the following values:
 // 
-// 	- ret bool 
-func TypeCheckInstanceIsFundamentallyA(instance TypeInstance, fundamentalType glib.Type) bool {
+// 	- goret bool 
+func TypeCheckInstanceIsFundamentallyA(instance *TypeInstance, fundamentalType Type) bool {
 	var carg1 *C.GTypeInstance // in, none, converted
-	var carg2 C.GType          // in, none, casted
+	var carg2 C.GType          // in, none, casted, alias
 	var cret  C.gboolean       // return
 
 	carg1 = (*C.GTypeInstance)(UnsafeTypeInstanceToGlibNone(instance))
@@ -2012,26 +1751,26 @@ func TypeCheckInstanceIsFundamentallyA(instance TypeInstance, fundamentalType gl
 	runtime.KeepAlive(instance)
 	runtime.KeepAlive(fundamentalType)
 
-	var ret bool
+	var goret bool
 
 	if cret != 0 {
-		ret = true
+		goret = true
 	}
 
-	return ret
+	return goret
 }
 
 // TypeCheckIsValueType wraps g_type_check_is_value_type
 // 
 // The function takes the following parameters:
 // 
-// 	- typ glib.Type 
+// 	- typ Type 
 // 
 // The function returns the following values:
 // 
-// 	- ret bool 
-func TypeCheckIsValueType(typ glib.Type) bool {
-	var carg1 C.GType    // in, none, casted
+// 	- goret bool 
+func TypeCheckIsValueType(typ Type) bool {
+	var carg1 C.GType    // in, none, casted, alias
 	var cret  C.gboolean // return
 
 	carg1 = C.GType(typ)
@@ -2039,91 +1778,33 @@ func TypeCheckIsValueType(typ glib.Type) bool {
 	cret = C.g_type_check_is_value_type(carg1)
 	runtime.KeepAlive(typ)
 
-	var ret bool
+	var goret bool
 
 	if cret != 0 {
-		ret = true
+		goret = true
 	}
 
-	return ret
-}
-
-// TypeCheckValue wraps g_type_check_value
-// 
-// The function takes the following parameters:
-// 
-// 	- value Value 
-// 
-// The function returns the following values:
-// 
-// 	- ret bool 
-func TypeCheckValue(value Value) bool {
-	var carg1 *C.GValue  // in, none, converted
-	var cret  C.gboolean // return
-
-	carg1 = (*C.GValue)(TODOToGlibNone(value))
-
-	cret = C.g_type_check_value(carg1)
-	runtime.KeepAlive(value)
-
-	var ret bool
-
-	if cret != 0 {
-		ret = true
-	}
-
-	return ret
-}
-
-// TypeCheckValueHolds wraps g_type_check_value_holds
-// 
-// The function takes the following parameters:
-// 
-// 	- value Value 
-// 	- typ glib.Type 
-// 
-// The function returns the following values:
-// 
-// 	- ret bool 
-func TypeCheckValueHolds(value Value, typ glib.Type) bool {
-	var carg1 *C.GValue  // in, none, converted
-	var carg2 C.GType    // in, none, casted
-	var cret  C.gboolean // return
-
-	carg1 = (*C.GValue)(TODOToGlibNone(value))
-	carg2 = C.GType(typ)
-
-	cret = C.g_type_check_value_holds(carg1, carg2)
-	runtime.KeepAlive(value)
-	runtime.KeepAlive(typ)
-
-	var ret bool
-
-	if cret != 0 {
-		ret = true
-	}
-
-	return ret
+	return goret
 }
 
 // TypeChildren wraps g_type_children
 // 
 // The function takes the following parameters:
 // 
-// 	- typ glib.Type: the parent type 
+// 	- typ Type: the parent type 
 // 
 // The function returns the following values:
 // 
 // 	- nChildren uint: location to store the length of
 //     the returned array, or %NULL 
-// 	- ret array 
+// 	- goret []Type 
 //
 // Return a newly allocated and 0-terminated array of type IDs, listing
 // the child types of @type.
-func TypeChildren(typ glib.Type) (uint, array) {
-	var carg1 C.GType // in, none, casted
-	var carg2 C.guint // out, full, casted
-	var cret  array   // return, transfer: full, scope: , implicit: false, skip: false, optional: false, nullable: false, caller-allocates: false, has closure: false, has destroy: false
+func TypeChildren(typ Type) (uint, []Type) {
+	var carg1 C.GType  // in, none, casted, alias
+	var carg2 C.guint  // out, full, casted
+	var cret  *C.GType // return, transfer: full, C Pointers: 1, Name: array[Type], scope: , array (inner: *typesystem.Alias)
 
 	carg1 = C.GType(typ)
 
@@ -2131,28 +1812,115 @@ func TypeChildren(typ glib.Type) (uint, array) {
 	runtime.KeepAlive(typ)
 
 	var nChildren uint
-	var ret       array
+	var goret     []Type
 
 	nChildren = uint(carg2)
-	panic("unimplemented conversion of array (array)")
+	_ = goret
+	_ = cret
+	panic("unimplemented conversion of []Type (GType*)")
 
-	return nChildren, ret
+	return nChildren, goret
+}
+
+// TypeDefaultInterfacePeek wraps g_type_default_interface_peek
+// 
+// The function takes the following parameters:
+// 
+// 	- gType Type: an interface type 
+// 
+// The function returns the following values:
+// 
+// 	- goret unsafe.Pointer 
+//
+// If the interface type @g_type is currently in use, returns its
+// default interface vtable.
+func TypeDefaultInterfacePeek(gType Type) unsafe.Pointer {
+	var carg1 C.GType    // in, none, casted, alias
+	var cret  C.gpointer // return, none, casted
+
+	carg1 = C.GType(gType)
+
+	cret = C.g_type_default_interface_peek(carg1)
+	runtime.KeepAlive(gType)
+
+	var goret unsafe.Pointer
+
+	goret = unsafe.Pointer(cret)
+
+	return goret
+}
+
+// TypeDefaultInterfaceRef wraps g_type_default_interface_ref
+// 
+// The function takes the following parameters:
+// 
+// 	- gType Type: an interface type 
+// 
+// The function returns the following values:
+// 
+// 	- goret unsafe.Pointer 
+//
+// Increments the reference count for the interface type @g_type,
+// and returns the default interface vtable for the type.
+// 
+// If the type is not currently in use, then the default vtable
+// for the type will be created and initialized by calling
+// the base interface init and default vtable init functions for
+// the type (the @base_init and @class_init members of #GTypeInfo).
+// Calling g_type_default_interface_ref() is useful when you
+// want to make sure that signals and properties for an interface
+// have been installed.
+func TypeDefaultInterfaceRef(gType Type) unsafe.Pointer {
+	var carg1 C.GType    // in, none, casted, alias
+	var cret  C.gpointer // return, none, casted
+
+	carg1 = C.GType(gType)
+
+	cret = C.g_type_default_interface_ref(carg1)
+	runtime.KeepAlive(gType)
+
+	var goret unsafe.Pointer
+
+	goret = unsafe.Pointer(cret)
+
+	return goret
+}
+
+// TypeDefaultInterfaceUnref wraps g_type_default_interface_unref
+// 
+// The function takes the following parameters:
+// 
+// 	- gIface unsafe.Pointer: the default vtable
+//     structure for an interface, as returned by g_type_default_interface_ref() 
+//
+// Decrements the reference count for the type corresponding to the
+// interface default vtable @g_iface. If the type is dynamic, then
+// when no one is using the interface and all references have
+// been released, the finalize function for the interface's default
+// vtable (the @class_finalize member of #GTypeInfo) will be called.
+func TypeDefaultInterfaceUnref(gIface unsafe.Pointer) {
+	var carg1 C.gpointer // in, none, casted
+
+	carg1 = C.gpointer(gIface)
+
+	C.g_type_default_interface_unref(carg1)
+	runtime.KeepAlive(gIface)
 }
 
 // TypeDepth wraps g_type_depth
 // 
 // The function takes the following parameters:
 // 
-// 	- typ glib.Type: a #GType 
+// 	- typ Type: a #GType 
 // 
 // The function returns the following values:
 // 
-// 	- ret uint 
+// 	- goret uint 
 //
 // Returns the length of the ancestry of the passed in type. This
 // includes the type itself, so that e.g. a fundamental type has depth 1.
-func TypeDepth(typ glib.Type) uint {
-	var carg1 C.GType // in, none, casted
+func TypeDepth(typ Type) uint {
+	var carg1 C.GType // in, none, casted, alias
 	var cret  C.guint // return, none, casted
 
 	carg1 = C.GType(typ)
@@ -2160,18 +1928,18 @@ func TypeDepth(typ glib.Type) uint {
 	cret = C.g_type_depth(carg1)
 	runtime.KeepAlive(typ)
 
-	var ret uint
+	var goret uint
 
-	ret = uint(cret)
+	goret = uint(cret)
 
-	return ret
+	return goret
 }
 
 // TypeEnsure wraps g_type_ensure
 // 
 // The function takes the following parameters:
 // 
-// 	- typ glib.Type: a #GType 
+// 	- typ Type: a #GType 
 //
 // Ensures that the indicated @type has been registered with the
 // type system, and its _class_init() method has been run.
@@ -2185,8 +1953,8 @@ func TypeDepth(typ glib.Type) uint {
 // you write a bare call to a _get_type() macro, it may get optimized
 // out by the compiler. Using g_type_ensure() guarantees that the
 // type's _get_type() method is called.
-func TypeEnsure(typ glib.Type) {
-	var carg1 C.GType // in, none, casted
+func TypeEnsure(typ Type) {
+	var carg1 C.GType // in, none, casted, alias
 
 	carg1 = C.GType(typ)
 
@@ -2198,14 +1966,14 @@ func TypeEnsure(typ glib.Type) {
 // 
 // The function takes the following parameters:
 // 
-// 	- instance TypeInstance: an instance of a type 
+// 	- instance *TypeInstance: an instance of a type 
 //
 // Frees an instance of a type, returning it to the instance pool for
 // the type, if there is one.
 // 
 // Like g_type_create_instance(), this function is reserved for
 // implementors of fundamental types.
-func TypeFreeInstance(instance TypeInstance) {
+func TypeFreeInstance(instance *TypeInstance) {
 	var carg1 *C.GTypeInstance // in, none, converted
 
 	carg1 = (*C.GTypeInstance)(UnsafeTypeInstanceToGlibNone(instance))
@@ -2222,15 +1990,15 @@ func TypeFreeInstance(instance TypeInstance) {
 // 
 // The function returns the following values:
 // 
-// 	- ret glib.Type 
+// 	- goret Type 
 //
 // Look up the type ID from a given type name, returning 0 if no type
 // has been registered under this name (this is the preferred method
 // to find out by name whether a specific type has been registered
 // yet).
-func TypeFromName(name string) glib.Type {
+func TypeFromName(name string) Type {
 	var carg1 *C.gchar // in, none, string
-	var cret  C.GType  // return, none, casted
+	var cret  C.GType  // return, none, casted, alias
 
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(name)))
 	defer C.free(unsafe.Pointer(carg1))
@@ -2238,78 +2006,78 @@ func TypeFromName(name string) glib.Type {
 	cret = C.g_type_from_name(carg1)
 	runtime.KeepAlive(name)
 
-	var ret glib.Type
+	var goret Type
 
-	ret = glib.Type(cret)
+	goret = Type(cret)
 
-	return ret
+	return goret
 }
 
 // TypeFundamental wraps g_type_fundamental
 // 
 // The function takes the following parameters:
 // 
-// 	- typeId glib.Type: valid type ID 
+// 	- typeId Type: valid type ID 
 // 
 // The function returns the following values:
 // 
-// 	- ret glib.Type 
+// 	- goret Type 
 //
 // Internal function, used to extract the fundamental type ID portion.
 // Use G_TYPE_FUNDAMENTAL() instead.
-func TypeFundamental(typeId glib.Type) glib.Type {
-	var carg1 C.GType // in, none, casted
-	var cret  C.GType // return, none, casted
+func TypeFundamental(typeId Type) Type {
+	var carg1 C.GType // in, none, casted, alias
+	var cret  C.GType // return, none, casted, alias
 
 	carg1 = C.GType(typeId)
 
 	cret = C.g_type_fundamental(carg1)
 	runtime.KeepAlive(typeId)
 
-	var ret glib.Type
+	var goret Type
 
-	ret = glib.Type(cret)
+	goret = Type(cret)
 
-	return ret
+	return goret
 }
 
 // TypeFundamentalNext wraps g_type_fundamental_next
 // The function returns the following values:
 // 
-// 	- ret glib.Type 
+// 	- goret Type 
 //
 // Returns the next free fundamental type id which can be used to
 // register a new fundamental type with g_type_register_fundamental().
 // The returned type ID represents the highest currently registered
 // fundamental type identifier.
-func TypeFundamentalNext() glib.Type {
-	var cret C.GType // return, none, casted
+func TypeFundamentalNext() Type {
+	var cret C.GType // return, none, casted, alias
 
 	cret = C.g_type_fundamental_next()
 
-	var ret glib.Type
+	var goret Type
 
-	ret = glib.Type(cret)
+	goret = Type(cret)
 
-	return ret
+	return goret
 }
 
 // TypeGetInstanceCount wraps g_type_get_instance_count
 // 
 // The function takes the following parameters:
 // 
-// 	- typ glib.Type: a #GType 
+// 	- typ Type: a #GType 
 // 
 // The function returns the following values:
 // 
-// 	- ret int 
+// 	- goret int 
 //
 // Returns the number of instances allocated of the particular type;
 // this is only available if GLib is built with debugging support and
 // the `instance-count` debug flag is set (by setting the `GOBJECT_DEBUG`
 // variable to include `instance-count`).
-func TypeGetInstanceCount(typ glib.Type) int {
-	var carg1 C.GType // in, none, casted
+func TypeGetInstanceCount(typ Type) int {
+	var carg1 C.GType // in, none, casted, alias
 	var cret  C.int   // return, none, casted
 
 	carg1 = C.GType(typ)
@@ -2317,26 +2085,26 @@ func TypeGetInstanceCount(typ glib.Type) int {
 	cret = C.g_type_get_instance_count(carg1)
 	runtime.KeepAlive(typ)
 
-	var ret int
+	var goret int
 
-	ret = int(cret)
+	goret = int(cret)
 
-	return ret
+	return goret
 }
 
 // TypeGetPlugin wraps g_type_get_plugin
 // 
 // The function takes the following parameters:
 // 
-// 	- typ glib.Type: #GType to retrieve the plugin for 
+// 	- typ Type: #GType to retrieve the plugin for 
 // 
 // The function returns the following values:
 // 
-// 	- ret TypePlugin 
+// 	- goret TypePlugin 
 //
 // Returns the #GTypePlugin structure for @type.
-func TypeGetPlugin(typ glib.Type) TypePlugin {
-	var carg1 C.GType        // in, none, casted
+func TypeGetPlugin(typ Type) TypePlugin {
+	var carg1 C.GType        // in, none, casted, alias
 	var cret  *C.GTypePlugin // return, none, converted
 
 	carg1 = C.GType(typ)
@@ -2344,23 +2112,23 @@ func TypeGetPlugin(typ glib.Type) TypePlugin {
 	cret = C.g_type_get_plugin(carg1)
 	runtime.KeepAlive(typ)
 
-	var ret TypePlugin
+	var goret TypePlugin
 
-	ret = UnsafeTypePluginFromGlibNone(unsafe.Pointer(cret))
+	goret = UnsafeTypePluginFromGlibNone(unsafe.Pointer(cret))
 
-	return ret
+	return goret
 }
 
 // TypeGetQdata wraps g_type_get_qdata
 // 
 // The function takes the following parameters:
 // 
-// 	- typ glib.Type: a #GType 
+// 	- typ Type: a #GType 
 // 	- quark glib.Quark: a #GQuark id to identify the data 
 // 
 // The function returns the following values:
 // 
-// 	- ret unsafe.Pointer 
+// 	- goret unsafe.Pointer 
 //
 // Obtains data which has previously been attached to @type
 // with g_type_set_qdata().
@@ -2368,8 +2136,8 @@ func TypeGetPlugin(typ glib.Type) TypePlugin {
 // Note that this does not take subtyping into account; data
 // attached to one type with g_type_set_qdata() cannot
 // be retrieved from a subtype using g_type_get_qdata().
-func TypeGetQdata(typ glib.Type, quark glib.Quark) unsafe.Pointer {
-	var carg1 C.GType    // in, none, casted
+func TypeGetQdata(typ Type, quark glib.Quark) unsafe.Pointer {
+	var carg1 C.GType    // in, none, casted, alias
 	var carg2 C.GQuark   // in, none, casted, alias
 	var cret  C.gpointer // return, none, casted
 
@@ -2380,17 +2148,17 @@ func TypeGetQdata(typ glib.Type, quark glib.Quark) unsafe.Pointer {
 	runtime.KeepAlive(typ)
 	runtime.KeepAlive(quark)
 
-	var ret unsafe.Pointer
+	var goret unsafe.Pointer
 
-	ret = unsafe.Pointer(cret)
+	goret = unsafe.Pointer(cret)
 
-	return ret
+	return goret
 }
 
 // TypeGetTypeRegistrationSerial wraps g_type_get_type_registration_serial
 // The function returns the following values:
 // 
-// 	- ret uint 
+// 	- goret uint 
 //
 // Returns an opaque serial number that represents the state of the set
 // of registered types. Any time a type is registered this serial changes,
@@ -2402,67 +2170,31 @@ func TypeGetTypeRegistrationSerial() uint {
 
 	cret = C.g_type_get_type_registration_serial()
 
-	var ret uint
+	var goret uint
 
-	ret = uint(cret)
+	goret = uint(cret)
 
-	return ret
-}
-
-// TypeInit wraps g_type_init
-//
-// This function used to initialise the type system.  Since GLib 2.36,
-// the type system is initialised automatically and this function does
-// nothing.
-//
-// Deprecated: (since 2.36.0) the type system is now initialised automatically
-func TypeInit() {
-
-	C.g_type_init()
-}
-
-// TypeInitWithDebugFlags wraps g_type_init_with_debug_flags
-// 
-// The function takes the following parameters:
-// 
-// 	- debugFlags TypeDebugFlags: bitwise combination of #GTypeDebugFlags values for
-//     debugging purposes 
-//
-// This function used to initialise the type system with debugging
-// flags.  Since GLib 2.36, the type system is initialised automatically
-// and this function does nothing.
-// 
-// If you need to enable debugging features, use the `GOBJECT_DEBUG`
-// environment variable.
-//
-// Deprecated: (since 2.36.0) the type system is now initialised automatically
-func TypeInitWithDebugFlags(debugFlags TypeDebugFlags) {
-	var carg1 C.GTypeDebugFlags // in, none, casted
-
-	carg1 = C.GTypeDebugFlags(debugFlags)
-
-	C.g_type_init_with_debug_flags(carg1)
-	runtime.KeepAlive(debugFlags)
+	return goret
 }
 
 // TypeInterfaces wraps g_type_interfaces
 // 
 // The function takes the following parameters:
 // 
-// 	- typ glib.Type: the type to list interface types for 
+// 	- typ Type: the type to list interface types for 
 // 
 // The function returns the following values:
 // 
 // 	- nInterfaces uint: location to store the length of
 //     the returned array, or %NULL 
-// 	- ret array 
+// 	- goret []Type 
 //
 // Return a newly allocated and 0-terminated array of type IDs, listing
 // the interface types that @type conforms to.
-func TypeInterfaces(typ glib.Type) (uint, array) {
-	var carg1 C.GType // in, none, casted
-	var carg2 C.guint // out, full, casted
-	var cret  array   // return, transfer: full, scope: , implicit: false, skip: false, optional: false, nullable: false, caller-allocates: false, has closure: false, has destroy: false
+func TypeInterfaces(typ Type) (uint, []Type) {
+	var carg1 C.GType  // in, none, casted, alias
+	var carg2 C.guint  // out, full, casted
+	var cret  *C.GType // return, transfer: full, C Pointers: 1, Name: array[Type], scope: , array (inner: *typesystem.Alias)
 
 	carg1 = C.GType(typ)
 
@@ -2470,32 +2202,34 @@ func TypeInterfaces(typ glib.Type) (uint, array) {
 	runtime.KeepAlive(typ)
 
 	var nInterfaces uint
-	var ret         array
+	var goret       []Type
 
 	nInterfaces = uint(carg2)
-	panic("unimplemented conversion of array (array)")
+	_ = goret
+	_ = cret
+	panic("unimplemented conversion of []Type (GType*)")
 
-	return nInterfaces, ret
+	return nInterfaces, goret
 }
 
 // TypeIsA wraps g_type_is_a
 // 
 // The function takes the following parameters:
 // 
-// 	- typ glib.Type: type to check ancestry for 
-// 	- isAType glib.Type: possible ancestor of @type or interface that @type
+// 	- typ Type: type to check ancestry for 
+// 	- isAType Type: possible ancestor of @type or interface that @type
 //     could conform to 
 // 
 // The function returns the following values:
 // 
-// 	- ret bool 
+// 	- goret bool 
 //
 // If @is_a_type is a derivable type, check whether @type is a
 // descendant of @is_a_type. If @is_a_type is an interface, check
 // whether @type conforms to it.
-func TypeIsA(typ glib.Type, isAType glib.Type) bool {
-	var carg1 C.GType    // in, none, casted
-	var carg2 C.GType    // in, none, casted
+func TypeIsA(typ Type, isAType Type) bool {
+	var carg1 C.GType    // in, none, casted, alias
+	var carg2 C.GType    // in, none, casted, alias
 	var cret  C.gboolean // return
 
 	carg1 = C.GType(typ)
@@ -2505,32 +2239,32 @@ func TypeIsA(typ glib.Type, isAType glib.Type) bool {
 	runtime.KeepAlive(typ)
 	runtime.KeepAlive(isAType)
 
-	var ret bool
+	var goret bool
 
 	if cret != 0 {
-		ret = true
+		goret = true
 	}
 
-	return ret
+	return goret
 }
 
 // TypeName wraps g_type_name
 // 
 // The function takes the following parameters:
 // 
-// 	- typ glib.Type: type to return name for 
+// 	- typ Type: type to return name for 
 // 
 // The function returns the following values:
 // 
-// 	- ret string 
+// 	- goret string 
 //
 // Get the unique name that is assigned to a type ID.  Note that this
 // function (like all other GType API) cannot cope with invalid type
 // IDs. %G_TYPE_INVALID may be passed to this function, as may be any
 // other validly registered type ID, but randomized type IDs should
 // not be passed in and will most likely lead to a crash.
-func TypeName(typ glib.Type) string {
-	var carg1 C.GType  // in, none, casted
+func TypeName(typ Type) string {
+	var carg1 C.GType  // in, none, casted, alias
 	var cret  *C.gchar // return, none, string
 
 	carg1 = C.GType(typ)
@@ -2538,48 +2272,23 @@ func TypeName(typ glib.Type) string {
 	cret = C.g_type_name(carg1)
 	runtime.KeepAlive(typ)
 
-	var ret string
+	var goret string
 
-	ret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
 
-	return ret
-}
-
-// TypeNameFromClass wraps g_type_name_from_class
-// 
-// The function takes the following parameters:
-// 
-// 	- gClass TypeClass 
-// 
-// The function returns the following values:
-// 
-// 	- ret string 
-func TypeNameFromClass(gClass TypeClass) string {
-	var carg1 *C.GTypeClass // in, none, converted
-	var cret  *C.gchar      // return, none, string
-
-	carg1 = (*C.GTypeClass)(UnsafeTypeClassToGlibNone(gClass))
-
-	cret = C.g_type_name_from_class(carg1)
-	runtime.KeepAlive(gClass)
-
-	var ret string
-
-	ret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
-
-	return ret
+	return goret
 }
 
 // TypeNameFromInstance wraps g_type_name_from_instance
 // 
 // The function takes the following parameters:
 // 
-// 	- instance TypeInstance 
+// 	- instance *TypeInstance 
 // 
 // The function returns the following values:
 // 
-// 	- ret string 
-func TypeNameFromInstance(instance TypeInstance) string {
+// 	- goret string 
+func TypeNameFromInstance(instance *TypeInstance) string {
 	var carg1 *C.GTypeInstance // in, none, converted
 	var cret  *C.gchar         // return, none, string
 
@@ -2588,23 +2297,23 @@ func TypeNameFromInstance(instance TypeInstance) string {
 	cret = C.g_type_name_from_instance(carg1)
 	runtime.KeepAlive(instance)
 
-	var ret string
+	var goret string
 
-	ret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
 
-	return ret
+	return goret
 }
 
 // TypeNextBase wraps g_type_next_base
 // 
 // The function takes the following parameters:
 // 
-// 	- leafType glib.Type: descendant of @root_type and the type to be returned 
-// 	- rootType glib.Type: immediate parent of the returned type 
+// 	- leafType Type: descendant of @root_type and the type to be returned 
+// 	- rootType Type: immediate parent of the returned type 
 // 
 // The function returns the following values:
 // 
-// 	- ret glib.Type 
+// 	- goret Type 
 //
 // Given a @leaf_type and a @root_type which is contained in its
 // ancestry, return the type that @root_type is the immediate parent
@@ -2613,10 +2322,10 @@ func TypeNameFromInstance(instance TypeInstance) string {
 // @leaf_type.  Given a root type and a leaf type, this function can
 // be used to determine the types and order in which the leaf type is
 // descended from the root type.
-func TypeNextBase(leafType glib.Type, rootType glib.Type) glib.Type {
-	var carg1 C.GType // in, none, casted
-	var carg2 C.GType // in, none, casted
-	var cret  C.GType // return, none, casted
+func TypeNextBase(leafType Type, rootType Type) Type {
+	var carg1 C.GType // in, none, casted, alias
+	var carg2 C.GType // in, none, casted, alias
+	var cret  C.GType // return, none, casted, alias
 
 	carg1 = C.GType(leafType)
 	carg2 = C.GType(rootType)
@@ -2625,54 +2334,54 @@ func TypeNextBase(leafType glib.Type, rootType glib.Type) glib.Type {
 	runtime.KeepAlive(leafType)
 	runtime.KeepAlive(rootType)
 
-	var ret glib.Type
+	var goret Type
 
-	ret = glib.Type(cret)
+	goret = Type(cret)
 
-	return ret
+	return goret
 }
 
 // TypeParent wraps g_type_parent
 // 
 // The function takes the following parameters:
 // 
-// 	- typ glib.Type: the derived type 
+// 	- typ Type: the derived type 
 // 
 // The function returns the following values:
 // 
-// 	- ret glib.Type 
+// 	- goret Type 
 //
 // Return the direct parent type of the passed in type. If the passed
 // in type has no parent, i.e. is a fundamental type, 0 is returned.
-func TypeParent(typ glib.Type) glib.Type {
-	var carg1 C.GType // in, none, casted
-	var cret  C.GType // return, none, casted
+func TypeParent(typ Type) Type {
+	var carg1 C.GType // in, none, casted, alias
+	var cret  C.GType // return, none, casted, alias
 
 	carg1 = C.GType(typ)
 
 	cret = C.g_type_parent(carg1)
 	runtime.KeepAlive(typ)
 
-	var ret glib.Type
+	var goret Type
 
-	ret = glib.Type(cret)
+	goret = Type(cret)
 
-	return ret
+	return goret
 }
 
 // TypeQname wraps g_type_qname
 // 
 // The function takes the following parameters:
 // 
-// 	- typ glib.Type: type to return quark of type name for 
+// 	- typ Type: type to return quark of type name for 
 // 
 // The function returns the following values:
 // 
-// 	- ret glib.Quark 
+// 	- goret glib.Quark 
 //
 // Get the corresponding quark of the type IDs name.
-func TypeQname(typ glib.Type) glib.Quark {
-	var carg1 C.GType  // in, none, casted
+func TypeQname(typ Type) glib.Quark {
+	var carg1 C.GType  // in, none, casted, alias
 	var cret  C.GQuark // return, none, casted, alias
 
 	carg1 = C.GType(typ)
@@ -2680,37 +2389,37 @@ func TypeQname(typ glib.Type) glib.Quark {
 	cret = C.g_type_qname(carg1)
 	runtime.KeepAlive(typ)
 
-	var ret glib.Quark
+	var goret glib.Quark
 
-	ret = glib.Quark(cret)
+	goret = glib.Quark(cret)
 
-	return ret
+	return goret
 }
 
 // TypeRegisterDynamic wraps g_type_register_dynamic
 // 
 // The function takes the following parameters:
 // 
-// 	- parentType glib.Type: type from which this type will be derived 
+// 	- parentType Type: type from which this type will be derived 
 // 	- typeName string: 0-terminated string used as the name of the new type 
 // 	- plugin TypePlugin: #GTypePlugin structure to retrieve the #GTypeInfo from 
 // 	- flags TypeFlags: bitwise combination of #GTypeFlags values 
 // 
 // The function returns the following values:
 // 
-// 	- ret glib.Type 
+// 	- goret Type 
 //
 // Registers @type_name as the name of a new dynamic type derived from
 // @parent_type.  The type system uses the information contained in the
 // #GTypePlugin structure pointed to by @plugin to manage the type and its
 // instances (if not abstract).  The value of @flags determines the nature
 // (e.g. abstract or not) of the type.
-func TypeRegisterDynamic(parentType glib.Type, typeName string, plugin TypePlugin, flags TypeFlags) glib.Type {
-	var carg1 C.GType        // in, none, casted
+func TypeRegisterDynamic(parentType Type, typeName string, plugin TypePlugin, flags TypeFlags) Type {
+	var carg1 C.GType        // in, none, casted, alias
 	var carg2 *C.gchar       // in, none, string
 	var carg3 *C.GTypePlugin // in, none, converted
 	var carg4 C.GTypeFlags   // in, none, casted
-	var cret  C.GType        // return, none, casted
+	var cret  C.GType        // return, none, casted, alias
 
 	carg1 = C.GType(parentType)
 	carg2 = (*C.gchar)(unsafe.Pointer(C.CString(typeName)))
@@ -2724,118 +2433,24 @@ func TypeRegisterDynamic(parentType glib.Type, typeName string, plugin TypePlugi
 	runtime.KeepAlive(plugin)
 	runtime.KeepAlive(flags)
 
-	var ret glib.Type
+	var goret Type
 
-	ret = glib.Type(cret)
+	goret = Type(cret)
 
-	return ret
-}
-
-// TypeRegisterFundamental wraps g_type_register_fundamental
-// 
-// The function takes the following parameters:
-// 
-// 	- typeId glib.Type: a predefined type identifier 
-// 	- typeName string: 0-terminated string used as the name of the new type 
-// 	- info TypeInfo: #GTypeInfo structure for this type 
-// 	- finfo TypeFundamentalInfo: #GTypeFundamentalInfo structure for this type 
-// 	- flags TypeFlags: bitwise combination of #GTypeFlags values 
-// 
-// The function returns the following values:
-// 
-// 	- ret glib.Type 
-//
-// Registers @type_id as the predefined identifier and @type_name as the
-// name of a fundamental type. If @type_id is already registered, or a
-// type named @type_name is already registered, the behaviour is undefined.
-// The type system uses the information contained in the #GTypeInfo structure
-// pointed to by @info and the #GTypeFundamentalInfo structure pointed to by
-// @finfo to manage the type and its instances. The value of @flags determines
-// additional characteristics of the fundamental type.
-func TypeRegisterFundamental(typeId glib.Type, typeName string, info TypeInfo, finfo TypeFundamentalInfo, flags TypeFlags) glib.Type {
-	var carg1 C.GType                 // in, none, casted
-	var carg2 *C.gchar                // in, none, string
-	var carg3 *C.GTypeInfo            // in, none, converted
-	var carg4 *C.GTypeFundamentalInfo // in, none, converted
-	var carg5 C.GTypeFlags            // in, none, casted
-	var cret  C.GType                 // return, none, casted
-
-	carg1 = C.GType(typeId)
-	carg2 = (*C.gchar)(unsafe.Pointer(C.CString(typeName)))
-	defer C.free(unsafe.Pointer(carg2))
-	carg3 = (*C.GTypeInfo)(UnsafeTypeInfoToGlibNone(info))
-	carg4 = (*C.GTypeFundamentalInfo)(UnsafeTypeFundamentalInfoToGlibNone(finfo))
-	carg5 = C.GTypeFlags(flags)
-
-	cret = C.g_type_register_fundamental(carg1, carg2, carg3, carg4, carg5)
-	runtime.KeepAlive(typeId)
-	runtime.KeepAlive(typeName)
-	runtime.KeepAlive(info)
-	runtime.KeepAlive(finfo)
-	runtime.KeepAlive(flags)
-
-	var ret glib.Type
-
-	ret = glib.Type(cret)
-
-	return ret
-}
-
-// TypeRegisterStatic wraps g_type_register_static
-// 
-// The function takes the following parameters:
-// 
-// 	- parentType glib.Type: type from which this type will be derived 
-// 	- typeName string: 0-terminated string used as the name of the new type 
-// 	- info TypeInfo: #GTypeInfo structure for this type 
-// 	- flags TypeFlags: bitwise combination of #GTypeFlags values 
-// 
-// The function returns the following values:
-// 
-// 	- ret glib.Type 
-//
-// Registers @type_name as the name of a new static type derived from
-// @parent_type. The type system uses the information contained in the
-// #GTypeInfo structure pointed to by @info to manage the type and its
-// instances (if not abstract). The value of @flags determines the nature
-// (e.g. abstract or not) of the type.
-func TypeRegisterStatic(parentType glib.Type, typeName string, info TypeInfo, flags TypeFlags) glib.Type {
-	var carg1 C.GType      // in, none, casted
-	var carg2 *C.gchar     // in, none, string
-	var carg3 *C.GTypeInfo // in, none, converted
-	var carg4 C.GTypeFlags // in, none, casted
-	var cret  C.GType      // return, none, casted
-
-	carg1 = C.GType(parentType)
-	carg2 = (*C.gchar)(unsafe.Pointer(C.CString(typeName)))
-	defer C.free(unsafe.Pointer(carg2))
-	carg3 = (*C.GTypeInfo)(UnsafeTypeInfoToGlibNone(info))
-	carg4 = C.GTypeFlags(flags)
-
-	cret = C.g_type_register_static(carg1, carg2, carg3, carg4)
-	runtime.KeepAlive(parentType)
-	runtime.KeepAlive(typeName)
-	runtime.KeepAlive(info)
-	runtime.KeepAlive(flags)
-
-	var ret glib.Type
-
-	ret = glib.Type(cret)
-
-	return ret
+	return goret
 }
 
 // TypeSetQdata wraps g_type_set_qdata
 // 
 // The function takes the following parameters:
 // 
-// 	- typ glib.Type: a #GType 
+// 	- typ Type: a #GType 
 // 	- quark glib.Quark: a #GQuark id to identify the data 
 // 	- data unsafe.Pointer (nullable): the data 
 //
 // Attaches arbitrary data to a type.
-func TypeSetQdata(typ glib.Type, quark glib.Quark, data unsafe.Pointer) {
-	var carg1 C.GType    // in, none, casted
+func TypeSetQdata(typ Type, quark glib.Quark, data unsafe.Pointer) {
+	var carg1 C.GType    // in, none, casted, alias
 	var carg2 C.GQuark   // in, none, casted, alias
 	var carg3 C.gpointer // in, none, casted, nullable
 
@@ -2855,14 +2470,14 @@ func TypeSetQdata(typ glib.Type, quark glib.Quark, data unsafe.Pointer) {
 // 
 // The function takes the following parameters:
 // 
-// 	- typ glib.Type 
+// 	- typ Type 
 // 	- flags uint 
 // 
 // The function returns the following values:
 // 
-// 	- ret bool 
-func TypeTestFlags(typ glib.Type, flags uint) bool {
-	var carg1 C.GType    // in, none, casted
+// 	- goret bool 
+func TypeTestFlags(typ Type, flags uint) bool {
+	var carg1 C.GType    // in, none, casted, alias
 	var carg2 C.guint    // in, none, casted
 	var cret  C.gboolean // return
 
@@ -2873,35 +2488,35 @@ func TypeTestFlags(typ glib.Type, flags uint) bool {
 	runtime.KeepAlive(typ)
 	runtime.KeepAlive(flags)
 
-	var ret bool
+	var goret bool
 
 	if cret != 0 {
-		ret = true
+		goret = true
 	}
 
-	return ret
+	return goret
 }
 
 // VariantGetGType wraps g_variant_get_gtype
 // The function returns the following values:
 // 
-// 	- ret glib.Type 
-func VariantGetGType() glib.Type {
-	var cret C.GType // return, none, casted
+// 	- goret Type 
+func VariantGetGType() Type {
+	var cret C.GType // return, none, casted, alias
 
 	cret = C.g_variant_get_gtype()
 
-	var ret glib.Type
+	var goret Type
 
-	ret = glib.Type(cret)
+	goret = Type(cret)
 
-	return ret
+	return goret
 }
 
 // TypePluginInstance is the instance type used by all types implementing GTypePlugin. It is used internally by the bindings. Users should use the interface [TypePlugin] instead.
 type TypePluginInstance struct {
 	_ [0]func() // equal guard
-	*ObjectInstance
+	Instance ObjectInstance
 }
 
 var _ TypePlugin = (*TypePluginInstance)(nil)
@@ -2957,98 +2572,101 @@ var _ TypePlugin = (*TypePluginInstance)(nil)
 // already implements most of this except for the actual module loading and
 // unloading. It even handles multiple registered types per module.
 type TypePlugin interface {
-	Object
+	upcastToGTypePlugin() *TypePluginInstance
 
 	// CompleteInterfaceInfo wraps g_type_plugin_complete_interface_info
 	// 
 	// The function takes the following parameters:
 	// 
-	// 	- instanceType glib.Type: the #GType of an instantiatable type to which the interface
+	// 	- instanceType Type: the #GType of an instantiatable type to which the interface
 	//  is added 
-	// 	- interfaceType glib.Type: the #GType of the interface whose info is completed 
-	// 	- info InterfaceInfo: the #GInterfaceInfo to fill in 
+	// 	- interfaceType Type: the #GType of the interface whose info is completed 
+	// 	- info *InterfaceInfo: the #GInterfaceInfo to fill in 
 	//
 	// Calls the @complete_interface_info function from the
 	// #GTypePluginClass of @plugin. There should be no need to use this
 	// function outside of the GObject type system itself.
-	CompleteInterfaceInfo(glib.Type, glib.Type, InterfaceInfo)
+	CompleteInterfaceInfo(Type, Type, *InterfaceInfo)
 	// CompleteTypeInfo wraps g_type_plugin_complete_type_info
 	// 
 	// The function takes the following parameters:
 	// 
-	// 	- gType glib.Type: the #GType whose info is completed 
-	// 	- info TypeInfo: the #GTypeInfo struct to fill in 
-	// 	- valueTable TypeValueTable: the #GTypeValueTable to fill in 
+	// 	- gType Type: the #GType whose info is completed 
+	// 	- info *TypeInfo: the #GTypeInfo struct to fill in 
+	// 	- valueTable *TypeValueTable: the #GTypeValueTable to fill in 
 	//
 	// Calls the @complete_type_info function from the #GTypePluginClass of @plugin.
 	// There should be no need to use this function outside of the GObject
 	// type system itself.
-	CompleteTypeInfo(glib.Type, TypeInfo, TypeValueTable)
-	// Unuse wraps g_type_plugin_unuse
+	CompleteTypeInfo(Type, *TypeInfo, *TypeValueTable)
+	// UnusePlugin wraps g_type_plugin_unuse
 	//
 	// Calls the @unuse_plugin function from the #GTypePluginClass of
 	// @plugin.  There should be no need to use this function outside of
 	// the GObject type system itself.
-	Unuse()
-	// Use wraps g_type_plugin_use
+	UnusePlugin()
+	// UsePlugin wraps g_type_plugin_use
 	//
 	// Calls the @use_plugin function from the #GTypePluginClass of
 	// @plugin.  There should be no need to use this function outside of
 	// the GObject type system itself.
-	Use()
+	UsePlugin()
 }
+
+var _ TypePlugin = (*TypePluginInstance)(nil)
 
 func unsafeWrapTypePlugin(base *ObjectInstance) *TypePluginInstance {
 	return &TypePluginInstance{
-		ObjectInstance: base,
+		Instance: *base,
 	}
 }
 
-func marshalTypePluginInstance(p uintptr) (interface{}, error) {
-	return unsafeWrapTypePlugin(TODOFromGlibBorrow(unsafe.Pointer(p)).Object()), nil
+func marshalTypePluginInstance(p unsafe.Pointer) (any, error) {
+	return unsafeWrapTypePlugin(ValueFromNative(p).Object()), nil
 }
 
-// UnsafeTypePluginFromGlibBorrow is used to convert raw GTypePlugin pointers to go. This is used by the bindings internally.
-func UnsafeTypePluginFromGlibBorrow(c unsafe.Pointer) TypePlugin {
-	return TODOBorrow(c).(TypePlugin)
+func (t *TypePluginInstance) upcastToGTypePlugin() *TypePluginInstance {
+	return t
 }
 
 // UnsafeTypePluginFromGlibNone is used to convert raw GTypePlugin pointers to go while taking a reference and attaching a finalizer. This is used by the bindings internally.
 func UnsafeTypePluginFromGlibNone(c unsafe.Pointer) TypePlugin {
-	return Take(c).(TypePlugin)
+	return UnsafeObjectFromGlibNone(c).(TypePlugin)
 }
 
 // UnsafeTypePluginFromGlibFull is used to convert raw GTypePlugin pointers to go while attaching a finalizer. This is used by the bindings internally.
 func UnsafeTypePluginFromGlibFull(c unsafe.Pointer) TypePlugin {
-	return AssumeOwnership(c).(TypePlugin)
+	return UnsafeObjectFromGlibFull(c).(TypePlugin)
 }
 
 // UnsafeTypePluginToGlibNone is used to convert the instance to it's C value GTypePlugin. This is used by the bindings internally.
 func UnsafeTypePluginToGlibNone(c TypePlugin) unsafe.Pointer {
-	return TODOToNone(c)
+	i := c.upcastToGTypePlugin()
+	return UnsafeObjectToGlibNone(&i.Instance)
 }
 
 // UnsafeTypePluginToGlibFull is used to convert the instance to it's C value GTypePlugin, while removeing the finalizer. This is used by the bindings internally.
 func UnsafeTypePluginToGlibFull(c TypePlugin) unsafe.Pointer {
-	return TODOToFull(c)
+	i := c.upcastToGTypePlugin()
+	return UnsafeObjectToGlibFull(&i.Instance)
 }
 
 // CompleteInterfaceInfo wraps g_type_plugin_complete_interface_info
 // 
 // The function takes the following parameters:
 // 
-// 	- instanceType glib.Type: the #GType of an instantiatable type to which the interface
+// 	- instanceType Type: the #GType of an instantiatable type to which the interface
 //  is added 
-// 	- interfaceType glib.Type: the #GType of the interface whose info is completed 
-// 	- info InterfaceInfo: the #GInterfaceInfo to fill in 
+// 	- interfaceType Type: the #GType of the interface whose info is completed 
+// 	- info *InterfaceInfo: the #GInterfaceInfo to fill in 
 //
 // Calls the @complete_interface_info function from the
 // #GTypePluginClass of @plugin. There should be no need to use this
 // function outside of the GObject type system itself.
-func (plugin *TypePluginInstance) CompleteInterfaceInfo(instanceType glib.Type, interfaceType glib.Type, info InterfaceInfo) {
+func (plugin *TypePluginInstance) CompleteInterfaceInfo(instanceType Type, interfaceType Type, info *InterfaceInfo) {
 	var carg0 *C.GTypePlugin    // in, none, converted
-	var carg1 C.GType           // in, none, casted
-	var carg2 C.GType           // in, none, casted
+	var carg1 C.GType           // in, none, casted, alias
+	var carg2 C.GType           // in, none, casted, alias
 	var carg3 *C.GInterfaceInfo // in, none, converted
 
 	carg0 = (*C.GTypePlugin)(UnsafeTypePluginToGlibNone(plugin))
@@ -3067,16 +2685,16 @@ func (plugin *TypePluginInstance) CompleteInterfaceInfo(instanceType glib.Type, 
 // 
 // The function takes the following parameters:
 // 
-// 	- gType glib.Type: the #GType whose info is completed 
-// 	- info TypeInfo: the #GTypeInfo struct to fill in 
-// 	- valueTable TypeValueTable: the #GTypeValueTable to fill in 
+// 	- gType Type: the #GType whose info is completed 
+// 	- info *TypeInfo: the #GTypeInfo struct to fill in 
+// 	- valueTable *TypeValueTable: the #GTypeValueTable to fill in 
 //
 // Calls the @complete_type_info function from the #GTypePluginClass of @plugin.
 // There should be no need to use this function outside of the GObject
 // type system itself.
-func (plugin *TypePluginInstance) CompleteTypeInfo(gType glib.Type, info TypeInfo, valueTable TypeValueTable) {
+func (plugin *TypePluginInstance) CompleteTypeInfo(gType Type, info *TypeInfo, valueTable *TypeValueTable) {
 	var carg0 *C.GTypePlugin     // in, none, converted
-	var carg1 C.GType            // in, none, casted
+	var carg1 C.GType            // in, none, casted, alias
 	var carg2 *C.GTypeInfo       // in, none, converted
 	var carg3 *C.GTypeValueTable // in, none, converted
 
@@ -3092,12 +2710,12 @@ func (plugin *TypePluginInstance) CompleteTypeInfo(gType glib.Type, info TypeInf
 	runtime.KeepAlive(valueTable)
 }
 
-// Unuse wraps g_type_plugin_unuse
+// UnusePlugin wraps g_type_plugin_unuse
 //
 // Calls the @unuse_plugin function from the #GTypePluginClass of
 // @plugin.  There should be no need to use this function outside of
 // the GObject type system itself.
-func (plugin *TypePluginInstance) Unuse() {
+func (plugin *TypePluginInstance) UnusePlugin() {
 	var carg0 *C.GTypePlugin // in, none, converted
 
 	carg0 = (*C.GTypePlugin)(UnsafeTypePluginToGlibNone(plugin))
@@ -3106,451 +2724,18 @@ func (plugin *TypePluginInstance) Unuse() {
 	runtime.KeepAlive(plugin)
 }
 
-// Use wraps g_type_plugin_use
+// UsePlugin wraps g_type_plugin_use
 //
 // Calls the @use_plugin function from the #GTypePluginClass of
 // @plugin.  There should be no need to use this function outside of
 // the GObject type system itself.
-func (plugin *TypePluginInstance) Use() {
+func (plugin *TypePluginInstance) UsePlugin() {
 	var carg0 *C.GTypePlugin // in, none, converted
 
 	carg0 = (*C.GTypePlugin)(UnsafeTypePluginToGlibNone(plugin))
 
 	C.g_type_plugin_use(carg0)
 	runtime.KeepAlive(plugin)
-}
-
-// BindingInstance is the instance type used by all types extending GBinding. It is used internally by the bindings. Users should use the interface [Binding] instead.
-type BindingInstance struct {
-	_ [0]func() // equal guard
-	ObjectInstance
-}
-
-var _ Binding = (*BindingInstance)(nil)
-
-// BindingInstance wraps GBinding
-//
-// `GObject` instance (or source) and another property on another `GObject`
-// instance (or target).
-// 
-// Whenever the source property changes, the same value is applied to the
-// target property; for instance, the following binding:
-// 
-// ```c
-//   g_object_bind_property (object1, "property-a",
-//                           object2, "property-b",
-//                           G_BINDING_DEFAULT);
-// ```
-// 
-// will cause the property named "property-b" of @object2 to be updated
-// every time [method@GObject.set] or the specific accessor changes the value of
-// the property "property-a" of @object1.
-// 
-// It is possible to create a bidirectional binding between two properties
-// of two `GObject` instances, so that if either property changes, the
-// other is updated as well, for instance:
-// 
-// ```c
-//   g_object_bind_property (object1, "property-a",
-//                           object2, "property-b",
-//                           G_BINDING_BIDIRECTIONAL);
-// ```
-// 
-// will keep the two properties in sync.
-// 
-// It is also possible to set a custom transformation function (in both
-// directions, in case of a bidirectional binding) to apply a custom
-// transformation from the source value to the target value before
-// applying it; for instance, the following binding:
-// 
-// ```c
-//   g_object_bind_property_full (adjustment1, "value",
-//                                adjustment2, "value",
-//                                G_BINDING_BIDIRECTIONAL,
-//                                celsius_to_fahrenheit,
-//                                fahrenheit_to_celsius,
-//                                NULL, NULL);
-// ```
-// 
-// will keep the "value" property of the two adjustments in sync; the
-// @celsius_to_fahrenheit function will be called whenever the "value"
-// property of @adjustment1 changes and will transform the current value
-// of the property before applying it to the "value" property of @adjustment2.
-// 
-// Vice versa, the @fahrenheit_to_celsius function will be called whenever
-// the "value" property of @adjustment2 changes, and will transform the
-// current value of the property before applying it to the "value" property
-// of @adjustment1.
-// 
-// Note that #GBinding does not resolve cycles by itself; a cycle like
-// 
-// ```
-//   object1:propertyA -&gt; object2:propertyB
-//   object2:propertyB -&gt; object3:propertyC
-//   object3:propertyC -&gt; object1:propertyA
-// ```
-// 
-// might lead to an infinite loop. The loop, in this particular case,
-// can be avoided if the objects emit the `GObject::notify` signal only
-// if the value has effectively been changed. A binding is implemented
-// using the `GObject::notify` signal, so it is susceptible to all the
-// various ways of blocking a signal emission, like [func@GObject.signal_stop_emission]
-// or [func@GObject.signal_handler_block].
-// 
-// A binding will be severed, and the resources it allocates freed, whenever
-// either one of the `GObject` instances it refers to are finalized, or when
-// the #GBinding instance loses its last reference.
-// 
-// Bindings for languages with garbage collection can use
-// [method@GObject.Binding.unbind] to explicitly release a binding between the source
-// and target properties, instead of relying on the last reference on the
-// binding, source, and target instances to drop.
-type Binding interface {
-	Object
-	upcastToGBinding() *BindingInstance
-
-	// DupSource wraps g_binding_dup_source
-	// The function returns the following values:
-	// 
-	// 	- ret Object 
-	//
-	// Retrieves the #GObject instance used as the source of the binding.
-	// 
-	// A #GBinding can outlive the source #GObject as the binding does not hold a
-	// strong reference to the source. If the source is destroyed before the
-	// binding then this function will return %NULL.
-	DupSource() Object
-	// DupTarget wraps g_binding_dup_target
-	// The function returns the following values:
-	// 
-	// 	- ret Object 
-	//
-	// Retrieves the #GObject instance used as the target of the binding.
-	// 
-	// A #GBinding can outlive the target #GObject as the binding does not hold a
-	// strong reference to the target. If the target is destroyed before the
-	// binding then this function will return %NULL.
-	DupTarget() Object
-	// GetFlags wraps g_binding_get_flags
-	// The function returns the following values:
-	// 
-	// 	- ret BindingFlags 
-	//
-	// Retrieves the flags passed when constructing the #GBinding.
-	GetFlags() BindingFlags
-	// GetSource wraps g_binding_get_source
-	// The function returns the following values:
-	// 
-	// 	- ret Object 
-	//
-	// Retrieves the #GObject instance used as the source of the binding.
-	// 
-	// A #GBinding can outlive the source #GObject as the binding does not hold a
-	// strong reference to the source. If the source is destroyed before the
-	// binding then this function will return %NULL.
-	// 
-	// Use g_binding_dup_source() if the source or binding are used from different
-	// threads as otherwise the pointer returned from this function might become
-	// invalid if the source is finalized from another thread in the meantime.
-	//
-	// Deprecated: (since 2.68.0) Use g_binding_dup_source() for a safer version of this
-	// function.
-	GetSource() Object
-	// GetSourceProperty wraps g_binding_get_source_property
-	// The function returns the following values:
-	// 
-	// 	- ret string 
-	//
-	// Retrieves the name of the property of #GBinding:source used as the source
-	// of the binding.
-	GetSourceProperty() string
-	// GetTarget wraps g_binding_get_target
-	// The function returns the following values:
-	// 
-	// 	- ret Object 
-	//
-	// Retrieves the #GObject instance used as the target of the binding.
-	// 
-	// A #GBinding can outlive the target #GObject as the binding does not hold a
-	// strong reference to the target. If the target is destroyed before the
-	// binding then this function will return %NULL.
-	// 
-	// Use g_binding_dup_target() if the target or binding are used from different
-	// threads as otherwise the pointer returned from this function might become
-	// invalid if the target is finalized from another thread in the meantime.
-	//
-	// Deprecated: (since 2.68.0) Use g_binding_dup_target() for a safer version of this
-	// function.
-	GetTarget() Object
-	// GetTargetProperty wraps g_binding_get_target_property
-	// The function returns the following values:
-	// 
-	// 	- ret string 
-	//
-	// Retrieves the name of the property of #GBinding:target used as the target
-	// of the binding.
-	GetTargetProperty() string
-	// Unbind wraps g_binding_unbind
-	//
-	// Explicitly releases the binding between the source and the target
-	// property expressed by @binding.
-	// 
-	// This function will release the reference that is being held on
-	// the @binding instance if the binding is still bound; if you want to hold on
-	// to the #GBinding instance after calling g_binding_unbind(), you will need
-	// to hold a reference to it.
-	// 
-	// Note however that this function does not take ownership of @binding, it
-	// only unrefs the reference that was initially created by
-	// g_object_bind_property() and is owned by the binding.
-	Unbind()
-}
-
-func unsafeWrapBinding(base *ObjectInstance) *BindingInstance {
-	return &BindingInstance{
-		ObjectInstance: *base,
-	}
-}
-
-func marshalBindingInstance(p uintptr) (interface{}, error) {
-	return unsafeWrapBinding(TODOFromGlibBorrow(unsafe.Pointer(p)).Object()), nil
-}
-
-// UnsafeBindingFromGlibBorrow is used to convert raw GBinding pointers to go. This is used by the bindings internally.
-func UnsafeBindingFromGlibBorrow(c unsafe.Pointer) Binding {
-	return TODOBorrow(c).(Binding)
-}
-
-// UnsafeBindingFromGlibNone is used to convert raw GBinding pointers to go while taking a reference and attaching a finalizer. This is used by the bindings internally.
-func UnsafeBindingFromGlibNone(c unsafe.Pointer) Binding {
-	return Take(c).(Binding)
-}
-
-// UnsafeBindingFromGlibFull is used to convert raw GBinding pointers to go while attaching a finalizer. This is used by the bindings internally.
-func UnsafeBindingFromGlibFull(c unsafe.Pointer) Binding {
-	return AssumeOwnership(c).(Binding)
-}
-
-func (b *BindingInstance) upcastToGBinding() *BindingInstance {
-	return b
-}
-
-// UnsafeBindingToGlibNone is used to convert the instance to it's C value GBinding. This is used by the bindings internally.
-func UnsafeBindingToGlibNone(c Binding) unsafe.Pointer {
-	return TODOToNone(c)
-}
-
-// UnsafeBindingToGlibFull is used to convert the instance to it's C value GBinding, while removeing the finalizer. This is used by the bindings internally.
-func UnsafeBindingToGlibFull(c Binding) unsafe.Pointer {
-	return TODOToFull(c)
-}
-
-// DupSource wraps g_binding_dup_source
-// The function returns the following values:
-// 
-// 	- ret Object 
-//
-// Retrieves the #GObject instance used as the source of the binding.
-// 
-// A #GBinding can outlive the source #GObject as the binding does not hold a
-// strong reference to the source. If the source is destroyed before the
-// binding then this function will return %NULL.
-func (binding *BindingInstance) DupSource() Object {
-	var carg0 *C.GBinding // in, none, converted
-	var cret  *C.GObject  // return, full, converted
-
-	carg0 = (*C.GBinding)(UnsafeBindingToGlibNone(binding))
-
-	cret = C.g_binding_dup_source(carg0)
-	runtime.KeepAlive(binding)
-
-	var ret Object
-
-	ret = AssumeOwnership(unsafe.Pointer(cret))
-
-	return ret
-}
-
-// DupTarget wraps g_binding_dup_target
-// The function returns the following values:
-// 
-// 	- ret Object 
-//
-// Retrieves the #GObject instance used as the target of the binding.
-// 
-// A #GBinding can outlive the target #GObject as the binding does not hold a
-// strong reference to the target. If the target is destroyed before the
-// binding then this function will return %NULL.
-func (binding *BindingInstance) DupTarget() Object {
-	var carg0 *C.GBinding // in, none, converted
-	var cret  *C.GObject  // return, full, converted
-
-	carg0 = (*C.GBinding)(UnsafeBindingToGlibNone(binding))
-
-	cret = C.g_binding_dup_target(carg0)
-	runtime.KeepAlive(binding)
-
-	var ret Object
-
-	ret = AssumeOwnership(unsafe.Pointer(cret))
-
-	return ret
-}
-
-// GetFlags wraps g_binding_get_flags
-// The function returns the following values:
-// 
-// 	- ret BindingFlags 
-//
-// Retrieves the flags passed when constructing the #GBinding.
-func (binding *BindingInstance) GetFlags() BindingFlags {
-	var carg0 *C.GBinding     // in, none, converted
-	var cret  C.GBindingFlags // return, none, casted
-
-	carg0 = (*C.GBinding)(UnsafeBindingToGlibNone(binding))
-
-	cret = C.g_binding_get_flags(carg0)
-	runtime.KeepAlive(binding)
-
-	var ret BindingFlags
-
-	ret = BindingFlags(cret)
-
-	return ret
-}
-
-// GetSource wraps g_binding_get_source
-// The function returns the following values:
-// 
-// 	- ret Object 
-//
-// Retrieves the #GObject instance used as the source of the binding.
-// 
-// A #GBinding can outlive the source #GObject as the binding does not hold a
-// strong reference to the source. If the source is destroyed before the
-// binding then this function will return %NULL.
-// 
-// Use g_binding_dup_source() if the source or binding are used from different
-// threads as otherwise the pointer returned from this function might become
-// invalid if the source is finalized from another thread in the meantime.
-//
-// Deprecated: (since 2.68.0) Use g_binding_dup_source() for a safer version of this
-// function.
-func (binding *BindingInstance) GetSource() Object {
-	var carg0 *C.GBinding // in, none, converted
-	var cret  *C.GObject  // return, none, converted
-
-	carg0 = (*C.GBinding)(UnsafeBindingToGlibNone(binding))
-
-	cret = C.g_binding_get_source(carg0)
-	runtime.KeepAlive(binding)
-
-	var ret Object
-
-	ret = Take(unsafe.Pointer(cret))
-
-	return ret
-}
-
-// GetSourceProperty wraps g_binding_get_source_property
-// The function returns the following values:
-// 
-// 	- ret string 
-//
-// Retrieves the name of the property of #GBinding:source used as the source
-// of the binding.
-func (binding *BindingInstance) GetSourceProperty() string {
-	var carg0 *C.GBinding // in, none, converted
-	var cret  *C.gchar    // return, none, string
-
-	carg0 = (*C.GBinding)(UnsafeBindingToGlibNone(binding))
-
-	cret = C.g_binding_get_source_property(carg0)
-	runtime.KeepAlive(binding)
-
-	var ret string
-
-	ret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
-
-	return ret
-}
-
-// GetTarget wraps g_binding_get_target
-// The function returns the following values:
-// 
-// 	- ret Object 
-//
-// Retrieves the #GObject instance used as the target of the binding.
-// 
-// A #GBinding can outlive the target #GObject as the binding does not hold a
-// strong reference to the target. If the target is destroyed before the
-// binding then this function will return %NULL.
-// 
-// Use g_binding_dup_target() if the target or binding are used from different
-// threads as otherwise the pointer returned from this function might become
-// invalid if the target is finalized from another thread in the meantime.
-//
-// Deprecated: (since 2.68.0) Use g_binding_dup_target() for a safer version of this
-// function.
-func (binding *BindingInstance) GetTarget() Object {
-	var carg0 *C.GBinding // in, none, converted
-	var cret  *C.GObject  // return, none, converted
-
-	carg0 = (*C.GBinding)(UnsafeBindingToGlibNone(binding))
-
-	cret = C.g_binding_get_target(carg0)
-	runtime.KeepAlive(binding)
-
-	var ret Object
-
-	ret = Take(unsafe.Pointer(cret))
-
-	return ret
-}
-
-// GetTargetProperty wraps g_binding_get_target_property
-// The function returns the following values:
-// 
-// 	- ret string 
-//
-// Retrieves the name of the property of #GBinding:target used as the target
-// of the binding.
-func (binding *BindingInstance) GetTargetProperty() string {
-	var carg0 *C.GBinding // in, none, converted
-	var cret  *C.gchar    // return, none, string
-
-	carg0 = (*C.GBinding)(UnsafeBindingToGlibNone(binding))
-
-	cret = C.g_binding_get_target_property(carg0)
-	runtime.KeepAlive(binding)
-
-	var ret string
-
-	ret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
-
-	return ret
-}
-
-// Unbind wraps g_binding_unbind
-//
-// Explicitly releases the binding between the source and the target
-// property expressed by @binding.
-// 
-// This function will release the reference that is being held on
-// the @binding instance if the binding is still bound; if you want to hold on
-// to the #GBinding instance after calling g_binding_unbind(), you will need
-// to hold a reference to it.
-// 
-// Note however that this function does not take ownership of @binding, it
-// only unrefs the reference that was initially created by
-// g_object_bind_property() and is owned by the binding.
-func (binding *BindingInstance) Unbind() {
-	var carg0 *C.GBinding // in, none, converted
-
-	carg0 = (*C.GBinding)(UnsafeBindingToGlibNone(binding))
-
-	C.g_binding_unbind(carg0)
-	runtime.KeepAlive(binding)
 }
 
 // BindingGroupInstance is the instance type used by all types extending GBindingGroup. It is used internally by the bindings. Users should use the interface [BindingGroup] instead.
@@ -3574,6 +2759,42 @@ type BindingGroup interface {
 	Object
 	upcastToGBindingGroup() *BindingGroupInstance
 
+	// Bind wraps g_binding_group_bind
+	// 
+	// The function takes the following parameters:
+	// 
+	// 	- sourceProperty string: the property on the source to bind 
+	// 	- target unsafe.Pointer: the target #GObject 
+	// 	- targetProperty string: the property on @target to bind 
+	// 	- flags BindingFlags: the flags used to create the #GBinding 
+	//
+	// Creates a binding between @source_property on the source object
+	// and @target_property on @target. Whenever the @source_property
+	// is changed the @target_property is updated using the same value.
+	// The binding flag %G_BINDING_SYNC_CREATE is automatically specified.
+	// 
+	// See g_object_bind_property() for more information.
+	Bind(string, unsafe.Pointer, string, BindingFlags)
+	// DupSource wraps g_binding_group_dup_source
+	// The function returns the following values:
+	// 
+	// 	- goret unsafe.Pointer 
+	//
+	// Gets the source object used for binding properties.
+	DupSource() unsafe.Pointer
+	// SetSource wraps g_binding_group_set_source
+	// 
+	// The function takes the following parameters:
+	// 
+	// 	- source unsafe.Pointer (nullable): the source #GObject,
+	//   or %NULL to clear it 
+	//
+	// Sets @source as the source object used for creating property
+	// bindings. If there is already a source object all bindings from it
+	// will be removed.
+	// 
+	// Note that all properties that have been bound must exist on @source.
+	SetSource(unsafe.Pointer)
 }
 
 func unsafeWrapBindingGroup(base *ObjectInstance) *BindingGroupInstance {
@@ -3582,23 +2803,18 @@ func unsafeWrapBindingGroup(base *ObjectInstance) *BindingGroupInstance {
 	}
 }
 
-func marshalBindingGroupInstance(p uintptr) (interface{}, error) {
-	return unsafeWrapBindingGroup(TODOFromGlibBorrow(unsafe.Pointer(p)).Object()), nil
-}
-
-// UnsafeBindingGroupFromGlibBorrow is used to convert raw GBindingGroup pointers to go. This is used by the bindings internally.
-func UnsafeBindingGroupFromGlibBorrow(c unsafe.Pointer) BindingGroup {
-	return TODOBorrow(c).(BindingGroup)
+func marshalBindingGroupInstance(p unsafe.Pointer) (any, error) {
+	return unsafeWrapBindingGroup(ValueFromNative(p).Object()), nil
 }
 
 // UnsafeBindingGroupFromGlibNone is used to convert raw GBindingGroup pointers to go while taking a reference and attaching a finalizer. This is used by the bindings internally.
 func UnsafeBindingGroupFromGlibNone(c unsafe.Pointer) BindingGroup {
-	return Take(c).(BindingGroup)
+	return UnsafeObjectFromGlibNone(c).(BindingGroup)
 }
 
 // UnsafeBindingGroupFromGlibFull is used to convert raw GBindingGroup pointers to go while attaching a finalizer. This is used by the bindings internally.
 func UnsafeBindingGroupFromGlibFull(c unsafe.Pointer) BindingGroup {
-	return AssumeOwnership(c).(BindingGroup)
+	return UnsafeObjectFromGlibFull(c).(BindingGroup)
 }
 
 func (b *BindingGroupInstance) upcastToGBindingGroup() *BindingGroupInstance {
@@ -3607,18 +2823,18 @@ func (b *BindingGroupInstance) upcastToGBindingGroup() *BindingGroupInstance {
 
 // UnsafeBindingGroupToGlibNone is used to convert the instance to it's C value GBindingGroup. This is used by the bindings internally.
 func UnsafeBindingGroupToGlibNone(c BindingGroup) unsafe.Pointer {
-	return TODOToNone(c)
+	return UnsafeObjectToGlibNone(c)
 }
 
 // UnsafeBindingGroupToGlibFull is used to convert the instance to it's C value GBindingGroup, while removeing the finalizer. This is used by the bindings internally.
 func UnsafeBindingGroupToGlibFull(c BindingGroup) unsafe.Pointer {
-	return TODOToFull(c)
+	return UnsafeObjectToGlibFull(c)
 }
 
 // NewBindingGroupInstance wraps g_binding_group_new
 // The function returns the following values:
 // 
-// 	- ret BindingGroup 
+// 	- goret BindingGroup 
 //
 // Creates a new #GBindingGroup.
 func NewBindingGroupInstance() BindingGroup {
@@ -3626,11 +2842,97 @@ func NewBindingGroupInstance() BindingGroup {
 
 	cret = C.g_binding_group_new()
 
-	var ret BindingGroup
+	var goret BindingGroup
 
-	ret = UnsafeBindingGroupFromGlibFull(unsafe.Pointer(cret))
+	goret = UnsafeBindingGroupFromGlibFull(unsafe.Pointer(cret))
 
-	return ret
+	return goret
+}
+
+// Bind wraps g_binding_group_bind
+// 
+// The function takes the following parameters:
+// 
+// 	- sourceProperty string: the property on the source to bind 
+// 	- target unsafe.Pointer: the target #GObject 
+// 	- targetProperty string: the property on @target to bind 
+// 	- flags BindingFlags: the flags used to create the #GBinding 
+//
+// Creates a binding between @source_property on the source object
+// and @target_property on @target. Whenever the @source_property
+// is changed the @target_property is updated using the same value.
+// The binding flag %G_BINDING_SYNC_CREATE is automatically specified.
+// 
+// See g_object_bind_property() for more information.
+func (self *BindingGroupInstance) Bind(sourceProperty string, target unsafe.Pointer, targetProperty string, flags BindingFlags) {
+	var carg0 *C.GBindingGroup // in, none, converted
+	var carg1 *C.gchar         // in, none, string
+	var carg2 C.gpointer       // in, none, casted
+	var carg3 *C.gchar         // in, none, string
+	var carg4 C.GBindingFlags  // in, none, casted
+
+	carg0 = (*C.GBindingGroup)(UnsafeBindingGroupToGlibNone(self))
+	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(sourceProperty)))
+	defer C.free(unsafe.Pointer(carg1))
+	carg2 = C.gpointer(target)
+	carg3 = (*C.gchar)(unsafe.Pointer(C.CString(targetProperty)))
+	defer C.free(unsafe.Pointer(carg3))
+	carg4 = C.GBindingFlags(flags)
+
+	C.g_binding_group_bind(carg0, carg1, carg2, carg3, carg4)
+	runtime.KeepAlive(self)
+	runtime.KeepAlive(sourceProperty)
+	runtime.KeepAlive(target)
+	runtime.KeepAlive(targetProperty)
+	runtime.KeepAlive(flags)
+}
+
+// DupSource wraps g_binding_group_dup_source
+// The function returns the following values:
+// 
+// 	- goret unsafe.Pointer 
+//
+// Gets the source object used for binding properties.
+func (self *BindingGroupInstance) DupSource() unsafe.Pointer {
+	var carg0 *C.GBindingGroup // in, none, converted
+	var cret  C.gpointer       // return, none, casted
+
+	carg0 = (*C.GBindingGroup)(UnsafeBindingGroupToGlibNone(self))
+
+	cret = C.g_binding_group_dup_source(carg0)
+	runtime.KeepAlive(self)
+
+	var goret unsafe.Pointer
+
+	goret = unsafe.Pointer(cret)
+
+	return goret
+}
+
+// SetSource wraps g_binding_group_set_source
+// 
+// The function takes the following parameters:
+// 
+// 	- source unsafe.Pointer (nullable): the source #GObject,
+//   or %NULL to clear it 
+//
+// Sets @source as the source object used for creating property
+// bindings. If there is already a source object all bindings from it
+// will be removed.
+// 
+// Note that all properties that have been bound must exist on @source.
+func (self *BindingGroupInstance) SetSource(source unsafe.Pointer) {
+	var carg0 *C.GBindingGroup // in, none, converted
+	var carg1 C.gpointer       // in, none, casted, nullable
+
+	carg0 = (*C.GBindingGroup)(UnsafeBindingGroupToGlibNone(self))
+	if source != nil {
+		carg1 = C.gpointer(source)
+	}
+
+	C.g_binding_group_set_source(carg0, carg1)
+	runtime.KeepAlive(self)
+	runtime.KeepAlive(source)
 }
 
 // InitiallyUnownedInstance is the instance type used by all types extending GInitiallyUnowned. It is used internally by the bindings. Users should use the interface [InitiallyUnowned] instead.
@@ -3650,7 +2952,6 @@ var _ InitiallyUnowned = (*InitiallyUnownedInstance)(nil)
 type InitiallyUnowned interface {
 	Object
 	upcastToGInitiallyUnowned() *InitiallyUnownedInstance
-
 }
 
 func unsafeWrapInitiallyUnowned(base *ObjectInstance) *InitiallyUnownedInstance {
@@ -3659,23 +2960,18 @@ func unsafeWrapInitiallyUnowned(base *ObjectInstance) *InitiallyUnownedInstance 
 	}
 }
 
-func marshalInitiallyUnownedInstance(p uintptr) (interface{}, error) {
-	return unsafeWrapInitiallyUnowned(TODOFromGlibBorrow(unsafe.Pointer(p)).Object()), nil
-}
-
-// UnsafeInitiallyUnownedFromGlibBorrow is used to convert raw GInitiallyUnowned pointers to go. This is used by the bindings internally.
-func UnsafeInitiallyUnownedFromGlibBorrow(c unsafe.Pointer) InitiallyUnowned {
-	return TODOBorrow(c).(InitiallyUnowned)
+func marshalInitiallyUnownedInstance(p unsafe.Pointer) (any, error) {
+	return unsafeWrapInitiallyUnowned(ValueFromNative(p).Object()), nil
 }
 
 // UnsafeInitiallyUnownedFromGlibNone is used to convert raw GInitiallyUnowned pointers to go while taking a reference and attaching a finalizer. This is used by the bindings internally.
 func UnsafeInitiallyUnownedFromGlibNone(c unsafe.Pointer) InitiallyUnowned {
-	return Take(c).(InitiallyUnowned)
+	return UnsafeObjectFromGlibNone(c).(InitiallyUnowned)
 }
 
 // UnsafeInitiallyUnownedFromGlibFull is used to convert raw GInitiallyUnowned pointers to go while attaching a finalizer. This is used by the bindings internally.
 func UnsafeInitiallyUnownedFromGlibFull(c unsafe.Pointer) InitiallyUnowned {
-	return AssumeOwnership(c).(InitiallyUnowned)
+	return UnsafeObjectFromGlibFull(c).(InitiallyUnowned)
 }
 
 func (i *InitiallyUnownedInstance) upcastToGInitiallyUnowned() *InitiallyUnownedInstance {
@@ -3684,12 +2980,12 @@ func (i *InitiallyUnownedInstance) upcastToGInitiallyUnowned() *InitiallyUnowned
 
 // UnsafeInitiallyUnownedToGlibNone is used to convert the instance to it's C value GInitiallyUnowned. This is used by the bindings internally.
 func UnsafeInitiallyUnownedToGlibNone(c InitiallyUnowned) unsafe.Pointer {
-	return TODOToNone(c)
+	return UnsafeObjectToGlibNone(c)
 }
 
 // UnsafeInitiallyUnownedToGlibFull is used to convert the instance to it's C value GInitiallyUnowned, while removeing the finalizer. This is used by the bindings internally.
 func UnsafeInitiallyUnownedToGlibFull(c InitiallyUnowned) unsafe.Pointer {
-	return TODOToFull(c)
+	return UnsafeObjectToGlibFull(c)
 }
 
 // SignalGroupInstance is the instance type used by all types extending GSignalGroup. It is used internally by the bindings. Users should use the interface [SignalGroup] instead.
@@ -3733,47 +3029,27 @@ type SignalGroup interface {
 	// 
 	// This blocked state will be kept across changes of the target instance.
 	Block()
-	// ConnectClosure wraps g_signal_group_connect_closure
+	// DupTarget wraps g_signal_group_dup_target
+	// The function returns the following values:
+	// 
+	// 	- goret unsafe.Pointer 
+	//
+	// Gets the target instance used when connecting signals.
+	DupTarget() unsafe.Pointer
+	// SetTarget wraps g_signal_group_set_target
 	// 
 	// The function takes the following parameters:
 	// 
-	// 	- detailedSignal string: a string of the form `signal-name` with optional `::signal-detail` 
-	// 	- closure Closure: the closure to connect. 
-	// 	- after bool: whether the handler should be called before or after the
-	//  default handler of the signal. 
+	// 	- target unsafe.Pointer (nullable): The target instance used
+	//     when connecting signals. 
 	//
-	// Connects @closure to the signal @detailed_signal on #GSignalGroup:target.
+	// Sets the target instance used when connecting signals. Any signal
+	// that has been registered with g_signal_group_connect_object() or
+	// similar functions will be connected to this object.
 	// 
-	// You cannot connect a signal handler after #GSignalGroup:target has been set.
-	ConnectClosure(string, Closure, bool)
-	// ConnectData wraps g_signal_group_connect_data
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- detailedSignal string: a string of the form "signal-name::detail" 
-	// 	- cHandler Callback: the #GCallback to connect 
-	// 	- flags ConnectFlags: the flags used to create the signal connection 
-	//
-	// Connects @c_handler to the signal @detailed_signal
-	// on the target instance of @self.
-	// 
-	// You cannot connect a signal handler after #GSignalGroup:target has been set.
-	ConnectData(string, Callback, ConnectFlags)
-	// ConnectSwapped wraps g_signal_group_connect_swapped
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- detailedSignal string: a string of the form "signal-name::detail" 
-	// 	- cHandler Callback: the #GCallback to connect 
-	//
-	// Connects @c_handler to the signal @detailed_signal
-	// on the target instance of @self.
-	// 
-	// The instance on which the signal is emitted and @data
-	// will be swapped when calling @c_handler.
-	// 
-	// You cannot connect a signal handler after #GSignalGroup:target has been set.
-	ConnectSwapped(string, Callback)
+	// If the target instance was previously set, signals will be
+	// disconnected from that object prior to connecting to @target.
+	SetTarget(unsafe.Pointer)
 	// Unblock wraps g_signal_group_unblock
 	//
 	// Unblocks all signal handlers managed by @self so they will be
@@ -3789,23 +3065,18 @@ func unsafeWrapSignalGroup(base *ObjectInstance) *SignalGroupInstance {
 	}
 }
 
-func marshalSignalGroupInstance(p uintptr) (interface{}, error) {
-	return unsafeWrapSignalGroup(TODOFromGlibBorrow(unsafe.Pointer(p)).Object()), nil
-}
-
-// UnsafeSignalGroupFromGlibBorrow is used to convert raw GSignalGroup pointers to go. This is used by the bindings internally.
-func UnsafeSignalGroupFromGlibBorrow(c unsafe.Pointer) SignalGroup {
-	return TODOBorrow(c).(SignalGroup)
+func marshalSignalGroupInstance(p unsafe.Pointer) (any, error) {
+	return unsafeWrapSignalGroup(ValueFromNative(p).Object()), nil
 }
 
 // UnsafeSignalGroupFromGlibNone is used to convert raw GSignalGroup pointers to go while taking a reference and attaching a finalizer. This is used by the bindings internally.
 func UnsafeSignalGroupFromGlibNone(c unsafe.Pointer) SignalGroup {
-	return Take(c).(SignalGroup)
+	return UnsafeObjectFromGlibNone(c).(SignalGroup)
 }
 
 // UnsafeSignalGroupFromGlibFull is used to convert raw GSignalGroup pointers to go while attaching a finalizer. This is used by the bindings internally.
 func UnsafeSignalGroupFromGlibFull(c unsafe.Pointer) SignalGroup {
-	return AssumeOwnership(c).(SignalGroup)
+	return UnsafeObjectFromGlibFull(c).(SignalGroup)
 }
 
 func (s *SignalGroupInstance) upcastToGSignalGroup() *SignalGroupInstance {
@@ -3814,27 +3085,27 @@ func (s *SignalGroupInstance) upcastToGSignalGroup() *SignalGroupInstance {
 
 // UnsafeSignalGroupToGlibNone is used to convert the instance to it's C value GSignalGroup. This is used by the bindings internally.
 func UnsafeSignalGroupToGlibNone(c SignalGroup) unsafe.Pointer {
-	return TODOToNone(c)
+	return UnsafeObjectToGlibNone(c)
 }
 
 // UnsafeSignalGroupToGlibFull is used to convert the instance to it's C value GSignalGroup, while removeing the finalizer. This is used by the bindings internally.
 func UnsafeSignalGroupToGlibFull(c SignalGroup) unsafe.Pointer {
-	return TODOToFull(c)
+	return UnsafeObjectToGlibFull(c)
 }
 
 // NewSignalGroupInstance wraps g_signal_group_new
 // 
 // The function takes the following parameters:
 // 
-// 	- targetType glib.Type: the #GType of the target instance. 
+// 	- targetType Type: the #GType of the target instance. 
 // 
 // The function returns the following values:
 // 
-// 	- ret SignalGroup 
+// 	- goret SignalGroup 
 //
 // Creates a new #GSignalGroup for target instances of @target_type.
-func NewSignalGroupInstance(targetType glib.Type) SignalGroup {
-	var carg1 C.GType         // in, none, casted
+func NewSignalGroupInstance(targetType Type) SignalGroup {
+	var carg1 C.GType         // in, none, casted, alias
 	var cret  *C.GSignalGroup // return, full, converted
 
 	carg1 = C.GType(targetType)
@@ -3842,11 +3113,11 @@ func NewSignalGroupInstance(targetType glib.Type) SignalGroup {
 	cret = C.g_signal_group_new(carg1)
 	runtime.KeepAlive(targetType)
 
-	var ret SignalGroup
+	var goret SignalGroup
 
-	ret = UnsafeSignalGroupFromGlibFull(unsafe.Pointer(cret))
+	goret = UnsafeSignalGroupFromGlibFull(unsafe.Pointer(cret))
 
-	return ret
+	return goret
 }
 
 // Block wraps g_signal_group_block
@@ -3865,104 +3136,53 @@ func (self *SignalGroupInstance) Block() {
 	runtime.KeepAlive(self)
 }
 
-// ConnectClosure wraps g_signal_group_connect_closure
+// DupTarget wraps g_signal_group_dup_target
+// The function returns the following values:
+// 
+// 	- goret unsafe.Pointer 
+//
+// Gets the target instance used when connecting signals.
+func (self *SignalGroupInstance) DupTarget() unsafe.Pointer {
+	var carg0 *C.GSignalGroup // in, none, converted
+	var cret  C.gpointer      // return, full, casted
+
+	carg0 = (*C.GSignalGroup)(UnsafeSignalGroupToGlibNone(self))
+
+	cret = C.g_signal_group_dup_target(carg0)
+	runtime.KeepAlive(self)
+
+	var goret unsafe.Pointer
+
+	goret = unsafe.Pointer(cret)
+
+	return goret
+}
+
+// SetTarget wraps g_signal_group_set_target
 // 
 // The function takes the following parameters:
 // 
-// 	- detailedSignal string: a string of the form `signal-name` with optional `::signal-detail` 
-// 	- closure Closure: the closure to connect. 
-// 	- after bool: whether the handler should be called before or after the
-//  default handler of the signal. 
+// 	- target unsafe.Pointer (nullable): The target instance used
+//     when connecting signals. 
 //
-// Connects @closure to the signal @detailed_signal on #GSignalGroup:target.
+// Sets the target instance used when connecting signals. Any signal
+// that has been registered with g_signal_group_connect_object() or
+// similar functions will be connected to this object.
 // 
-// You cannot connect a signal handler after #GSignalGroup:target has been set.
-func (self *SignalGroupInstance) ConnectClosure(detailedSignal string, closure Closure, after bool) {
+// If the target instance was previously set, signals will be
+// disconnected from that object prior to connecting to @target.
+func (self *SignalGroupInstance) SetTarget(target unsafe.Pointer) {
 	var carg0 *C.GSignalGroup // in, none, converted
-	var carg1 *C.gchar        // in, none, string
-	var carg2 *C.GClosure     // in, none, converted
-	var carg3 C.gboolean      // in
+	var carg1 C.gpointer      // in, none, casted, nullable
 
 	carg0 = (*C.GSignalGroup)(UnsafeSignalGroupToGlibNone(self))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(detailedSignal)))
-	defer C.free(unsafe.Pointer(carg1))
-	carg2 = (*C.GClosure)(UnsafeClosureToGlibNone(closure))
-	if after {
-		carg3 = C.TRUE
+	if target != nil {
+		carg1 = C.gpointer(target)
 	}
 
-	C.g_signal_group_connect_closure(carg0, carg1, carg2, carg3)
+	C.g_signal_group_set_target(carg0, carg1)
 	runtime.KeepAlive(self)
-	runtime.KeepAlive(detailedSignal)
-	runtime.KeepAlive(closure)
-	runtime.KeepAlive(after)
-}
-
-// ConnectData wraps g_signal_group_connect_data
-// 
-// The function takes the following parameters:
-// 
-// 	- detailedSignal string: a string of the form "signal-name::detail" 
-// 	- cHandler Callback: the #GCallback to connect 
-// 	- flags ConnectFlags: the flags used to create the signal connection 
-//
-// Connects @c_handler to the signal @detailed_signal
-// on the target instance of @self.
-// 
-// You cannot connect a signal handler after #GSignalGroup:target has been set.
-func (self *SignalGroupInstance) ConnectData(detailedSignal string, cHandler Callback, flags ConnectFlags) {
-	var carg0 *C.GSignalGroup  // in, none, converted
-	var carg1 *C.gchar         // in, none, string
-	var carg2 C.GCallback      // callback, scope: notified, closure: carg3, destroy: carg4
-	var carg3 C.gpointer       // implicit
-	var carg4 C.GClosureNotify // implicit
-	var carg5 C.GConnectFlags  // in, none, casted
-
-	carg0 = (*C.GSignalGroup)(UnsafeSignalGroupToGlibNone(self))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(detailedSignal)))
-	defer C.free(unsafe.Pointer(carg1))
-	carg2 = (*[0]byte)(C._gotk4_gobject2_Callback)
-	carg3 = C.gpointer(gbox.Assign(cHandler))
-	carg4 = (C.GClosureNotify)((*[0]byte)(C._gotk4_gobject2_ClosureNotify))
-	carg5 = C.GConnectFlags(flags)
-
-	C.g_signal_group_connect_data(carg0, carg1, carg2, carg3, carg4, carg5)
-	runtime.KeepAlive(self)
-	runtime.KeepAlive(detailedSignal)
-	runtime.KeepAlive(cHandler)
-	runtime.KeepAlive(flags)
-}
-
-// ConnectSwapped wraps g_signal_group_connect_swapped
-// 
-// The function takes the following parameters:
-// 
-// 	- detailedSignal string: a string of the form "signal-name::detail" 
-// 	- cHandler Callback: the #GCallback to connect 
-//
-// Connects @c_handler to the signal @detailed_signal
-// on the target instance of @self.
-// 
-// The instance on which the signal is emitted and @data
-// will be swapped when calling @c_handler.
-// 
-// You cannot connect a signal handler after #GSignalGroup:target has been set.
-func (self *SignalGroupInstance) ConnectSwapped(detailedSignal string, cHandler Callback) {
-	var carg0 *C.GSignalGroup // in, none, converted
-	var carg1 *C.gchar        // in, none, string
-	var carg2 C.GCallback     // callback, scope: async, closure: carg3
-	var carg3 C.gpointer      // implicit
-
-	carg0 = (*C.GSignalGroup)(UnsafeSignalGroupToGlibNone(self))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(detailedSignal)))
-	defer C.free(unsafe.Pointer(carg1))
-	carg2 = (*[0]byte)(C._gotk4_gobject2_Callback)
-	carg3 = C.gpointer(gbox.AssignOnce(cHandler))
-
-	C.g_signal_group_connect_swapped(carg0, carg1, carg2, carg3)
-	runtime.KeepAlive(self)
-	runtime.KeepAlive(detailedSignal)
-	runtime.KeepAlive(cHandler)
+	runtime.KeepAlive(target)
 }
 
 // Unblock wraps g_signal_group_unblock
@@ -4029,9 +3249,9 @@ type TypeModule interface {
 	// 
 	// The function takes the following parameters:
 	// 
-	// 	- instanceType glib.Type: type to which to add the interface. 
-	// 	- interfaceType glib.Type: interface type to add 
-	// 	- interfaceInfo InterfaceInfo: type information structure 
+	// 	- instanceType Type: type to which to add the interface. 
+	// 	- interfaceType Type: interface type to add 
+	// 	- interfaceInfo *InterfaceInfo: type information structure 
 	//
 	// Registers an additional interface for a type, whose interface lives
 	// in the given type plugin. If the interface was already registered
@@ -4042,20 +3262,20 @@ type TypeModule interface {
 	// 
 	// Since 2.56 if @module is %NULL this will call g_type_add_interface_static()
 	// instead. This can be used when making a static build of the module.
-	AddInterface(glib.Type, glib.Type, InterfaceInfo)
+	AddInterface(Type, Type, *InterfaceInfo)
 	// RegisterEnum wraps g_type_module_register_enum
 	// 
 	// The function takes the following parameters:
 	// 
 	// 	- name string: name for the type 
-	// 	- constStaticValues EnumValue: an array of #GEnumValue structs for the
+	// 	- constStaticValues *EnumValue: an array of #GEnumValue structs for the
 	//                       possible enumeration values. The array is
 	//                       terminated by a struct with all members being
 	//                       0. 
 	// 
 	// The function returns the following values:
 	// 
-	// 	- ret glib.Type 
+	// 	- goret Type 
 	//
 	// Looks up or registers an enumeration that is implemented with a particular
 	// type plugin. If a type with name @type_name was previously registered,
@@ -4067,20 +3287,20 @@ type TypeModule interface {
 	// 
 	// Since 2.56 if @module is %NULL this will call g_type_register_static()
 	// instead. This can be used when making a static build of the module.
-	RegisterEnum(string, EnumValue) glib.Type
+	RegisterEnum(string, *EnumValue) Type
 	// RegisterFlags wraps g_type_module_register_flags
 	// 
 	// The function takes the following parameters:
 	// 
 	// 	- name string: name for the type 
-	// 	- constStaticValues FlagsValue: an array of #GFlagsValue structs for the
+	// 	- constStaticValues *FlagsValue: an array of #GFlagsValue structs for the
 	//                       possible flags values. The array is
 	//                       terminated by a struct with all members being
 	//                       0. 
 	// 
 	// The function returns the following values:
 	// 
-	// 	- ret glib.Type 
+	// 	- goret Type 
 	//
 	// Looks up or registers a flags type that is implemented with a particular
 	// type plugin. If a type with name @type_name was previously registered,
@@ -4092,19 +3312,19 @@ type TypeModule interface {
 	// 
 	// Since 2.56 if @module is %NULL this will call g_type_register_static()
 	// instead. This can be used when making a static build of the module.
-	RegisterFlags(string, FlagsValue) glib.Type
+	RegisterFlags(string, *FlagsValue) Type
 	// RegisterType wraps g_type_module_register_type
 	// 
 	// The function takes the following parameters:
 	// 
-	// 	- parentType glib.Type: the type for the parent class 
+	// 	- parentType Type: the type for the parent class 
 	// 	- typeName string: name for the type 
-	// 	- typeInfo TypeInfo: type information structure 
+	// 	- typeInfo *TypeInfo: type information structure 
 	// 	- flags TypeFlags: flags field providing details about the type 
 	// 
 	// The function returns the following values:
 	// 
-	// 	- ret glib.Type 
+	// 	- goret Type 
 	//
 	// Looks up or registers a type that is implemented with a particular
 	// type plugin. If a type with name @type_name was previously registered,
@@ -4120,7 +3340,7 @@ type TypeModule interface {
 	// 
 	// Since 2.56 if @module is %NULL this will call g_type_register_static()
 	// instead. This can be used when making a static build of the module.
-	RegisterType(glib.Type, string, TypeInfo, TypeFlags) glib.Type
+	RegisterType(Type, string, *TypeInfo, TypeFlags) Type
 	// SetName wraps g_type_module_set_name
 	// 
 	// The function takes the following parameters:
@@ -4140,7 +3360,7 @@ type TypeModule interface {
 	// Use wraps g_type_module_use
 	// The function returns the following values:
 	// 
-	// 	- ret bool 
+	// 	- goret bool 
 	//
 	// Increases the use count of a #GTypeModule by one. If the
 	// use count was zero before, the plugin will be loaded.
@@ -4155,23 +3375,18 @@ func unsafeWrapTypeModule(base *ObjectInstance) *TypeModuleInstance {
 	}
 }
 
-func marshalTypeModuleInstance(p uintptr) (interface{}, error) {
-	return unsafeWrapTypeModule(TODOFromGlibBorrow(unsafe.Pointer(p)).Object()), nil
-}
-
-// UnsafeTypeModuleFromGlibBorrow is used to convert raw GTypeModule pointers to go. This is used by the bindings internally.
-func UnsafeTypeModuleFromGlibBorrow(c unsafe.Pointer) TypeModule {
-	return TODOBorrow(c).(TypeModule)
+func marshalTypeModuleInstance(p unsafe.Pointer) (any, error) {
+	return unsafeWrapTypeModule(ValueFromNative(p).Object()), nil
 }
 
 // UnsafeTypeModuleFromGlibNone is used to convert raw GTypeModule pointers to go while taking a reference and attaching a finalizer. This is used by the bindings internally.
 func UnsafeTypeModuleFromGlibNone(c unsafe.Pointer) TypeModule {
-	return Take(c).(TypeModule)
+	return UnsafeObjectFromGlibNone(c).(TypeModule)
 }
 
 // UnsafeTypeModuleFromGlibFull is used to convert raw GTypeModule pointers to go while attaching a finalizer. This is used by the bindings internally.
 func UnsafeTypeModuleFromGlibFull(c unsafe.Pointer) TypeModule {
-	return AssumeOwnership(c).(TypeModule)
+	return UnsafeObjectFromGlibFull(c).(TypeModule)
 }
 
 func (t *TypeModuleInstance) upcastToGTypeModule() *TypeModuleInstance {
@@ -4180,21 +3395,21 @@ func (t *TypeModuleInstance) upcastToGTypeModule() *TypeModuleInstance {
 
 // UnsafeTypeModuleToGlibNone is used to convert the instance to it's C value GTypeModule. This is used by the bindings internally.
 func UnsafeTypeModuleToGlibNone(c TypeModule) unsafe.Pointer {
-	return TODOToNone(c)
+	return UnsafeObjectToGlibNone(c)
 }
 
 // UnsafeTypeModuleToGlibFull is used to convert the instance to it's C value GTypeModule, while removeing the finalizer. This is used by the bindings internally.
 func UnsafeTypeModuleToGlibFull(c TypeModule) unsafe.Pointer {
-	return TODOToFull(c)
+	return UnsafeObjectToGlibFull(c)
 }
 
 // AddInterface wraps g_type_module_add_interface
 // 
 // The function takes the following parameters:
 // 
-// 	- instanceType glib.Type: type to which to add the interface. 
-// 	- interfaceType glib.Type: interface type to add 
-// 	- interfaceInfo InterfaceInfo: type information structure 
+// 	- instanceType Type: type to which to add the interface. 
+// 	- interfaceType Type: interface type to add 
+// 	- interfaceInfo *InterfaceInfo: type information structure 
 //
 // Registers an additional interface for a type, whose interface lives
 // in the given type plugin. If the interface was already registered
@@ -4205,10 +3420,10 @@ func UnsafeTypeModuleToGlibFull(c TypeModule) unsafe.Pointer {
 // 
 // Since 2.56 if @module is %NULL this will call g_type_add_interface_static()
 // instead. This can be used when making a static build of the module.
-func (module *TypeModuleInstance) AddInterface(instanceType glib.Type, interfaceType glib.Type, interfaceInfo InterfaceInfo) {
+func (module *TypeModuleInstance) AddInterface(instanceType Type, interfaceType Type, interfaceInfo *InterfaceInfo) {
 	var carg0 *C.GTypeModule    // in, none, converted
-	var carg1 C.GType           // in, none, casted
-	var carg2 C.GType           // in, none, casted
+	var carg1 C.GType           // in, none, casted, alias
+	var carg2 C.GType           // in, none, casted, alias
 	var carg3 *C.GInterfaceInfo // in, none, converted
 
 	carg0 = (*C.GTypeModule)(UnsafeTypeModuleToGlibNone(module))
@@ -4228,14 +3443,14 @@ func (module *TypeModuleInstance) AddInterface(instanceType glib.Type, interface
 // The function takes the following parameters:
 // 
 // 	- name string: name for the type 
-// 	- constStaticValues EnumValue: an array of #GEnumValue structs for the
+// 	- constStaticValues *EnumValue: an array of #GEnumValue structs for the
 //                       possible enumeration values. The array is
 //                       terminated by a struct with all members being
 //                       0. 
 // 
 // The function returns the following values:
 // 
-// 	- ret glib.Type 
+// 	- goret Type 
 //
 // Looks up or registers an enumeration that is implemented with a particular
 // type plugin. If a type with name @type_name was previously registered,
@@ -4247,11 +3462,11 @@ func (module *TypeModuleInstance) AddInterface(instanceType glib.Type, interface
 // 
 // Since 2.56 if @module is %NULL this will call g_type_register_static()
 // instead. This can be used when making a static build of the module.
-func (module *TypeModuleInstance) RegisterEnum(name string, constStaticValues EnumValue) glib.Type {
+func (module *TypeModuleInstance) RegisterEnum(name string, constStaticValues *EnumValue) Type {
 	var carg0 *C.GTypeModule // in, none, converted
 	var carg1 *C.gchar       // in, none, string
 	var carg2 *C.GEnumValue  // in, none, converted
-	var cret  C.GType        // return, none, casted
+	var cret  C.GType        // return, none, casted, alias
 
 	carg0 = (*C.GTypeModule)(UnsafeTypeModuleToGlibNone(module))
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(name)))
@@ -4263,11 +3478,11 @@ func (module *TypeModuleInstance) RegisterEnum(name string, constStaticValues En
 	runtime.KeepAlive(name)
 	runtime.KeepAlive(constStaticValues)
 
-	var ret glib.Type
+	var goret Type
 
-	ret = glib.Type(cret)
+	goret = Type(cret)
 
-	return ret
+	return goret
 }
 
 // RegisterFlags wraps g_type_module_register_flags
@@ -4275,14 +3490,14 @@ func (module *TypeModuleInstance) RegisterEnum(name string, constStaticValues En
 // The function takes the following parameters:
 // 
 // 	- name string: name for the type 
-// 	- constStaticValues FlagsValue: an array of #GFlagsValue structs for the
+// 	- constStaticValues *FlagsValue: an array of #GFlagsValue structs for the
 //                       possible flags values. The array is
 //                       terminated by a struct with all members being
 //                       0. 
 // 
 // The function returns the following values:
 // 
-// 	- ret glib.Type 
+// 	- goret Type 
 //
 // Looks up or registers a flags type that is implemented with a particular
 // type plugin. If a type with name @type_name was previously registered,
@@ -4294,11 +3509,11 @@ func (module *TypeModuleInstance) RegisterEnum(name string, constStaticValues En
 // 
 // Since 2.56 if @module is %NULL this will call g_type_register_static()
 // instead. This can be used when making a static build of the module.
-func (module *TypeModuleInstance) RegisterFlags(name string, constStaticValues FlagsValue) glib.Type {
+func (module *TypeModuleInstance) RegisterFlags(name string, constStaticValues *FlagsValue) Type {
 	var carg0 *C.GTypeModule // in, none, converted
 	var carg1 *C.gchar       // in, none, string
 	var carg2 *C.GFlagsValue // in, none, converted
-	var cret  C.GType        // return, none, casted
+	var cret  C.GType        // return, none, casted, alias
 
 	carg0 = (*C.GTypeModule)(UnsafeTypeModuleToGlibNone(module))
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(name)))
@@ -4310,25 +3525,25 @@ func (module *TypeModuleInstance) RegisterFlags(name string, constStaticValues F
 	runtime.KeepAlive(name)
 	runtime.KeepAlive(constStaticValues)
 
-	var ret glib.Type
+	var goret Type
 
-	ret = glib.Type(cret)
+	goret = Type(cret)
 
-	return ret
+	return goret
 }
 
 // RegisterType wraps g_type_module_register_type
 // 
 // The function takes the following parameters:
 // 
-// 	- parentType glib.Type: the type for the parent class 
+// 	- parentType Type: the type for the parent class 
 // 	- typeName string: name for the type 
-// 	- typeInfo TypeInfo: type information structure 
+// 	- typeInfo *TypeInfo: type information structure 
 // 	- flags TypeFlags: flags field providing details about the type 
 // 
 // The function returns the following values:
 // 
-// 	- ret glib.Type 
+// 	- goret Type 
 //
 // Looks up or registers a type that is implemented with a particular
 // type plugin. If a type with name @type_name was previously registered,
@@ -4344,13 +3559,13 @@ func (module *TypeModuleInstance) RegisterFlags(name string, constStaticValues F
 // 
 // Since 2.56 if @module is %NULL this will call g_type_register_static()
 // instead. This can be used when making a static build of the module.
-func (module *TypeModuleInstance) RegisterType(parentType glib.Type, typeName string, typeInfo TypeInfo, flags TypeFlags) glib.Type {
+func (module *TypeModuleInstance) RegisterType(parentType Type, typeName string, typeInfo *TypeInfo, flags TypeFlags) Type {
 	var carg0 *C.GTypeModule // in, none, converted
-	var carg1 C.GType        // in, none, casted
+	var carg1 C.GType        // in, none, casted, alias
 	var carg2 *C.gchar       // in, none, string
 	var carg3 *C.GTypeInfo   // in, none, converted
 	var carg4 C.GTypeFlags   // in, none, casted
-	var cret  C.GType        // return, none, casted
+	var cret  C.GType        // return, none, casted, alias
 
 	carg0 = (*C.GTypeModule)(UnsafeTypeModuleToGlibNone(module))
 	carg1 = C.GType(parentType)
@@ -4366,11 +3581,11 @@ func (module *TypeModuleInstance) RegisterType(parentType glib.Type, typeName st
 	runtime.KeepAlive(typeInfo)
 	runtime.KeepAlive(flags)
 
-	var ret glib.Type
+	var goret Type
 
-	ret = glib.Type(cret)
+	goret = Type(cret)
 
-	return ret
+	return goret
 }
 
 // SetName wraps g_type_module_set_name
@@ -4412,7 +3627,7 @@ func (module *TypeModuleInstance) Unuse() {
 // Use wraps g_type_module_use
 // The function returns the following values:
 // 
-// 	- ret bool 
+// 	- goret bool 
 //
 // Increases the use count of a #GTypeModule by one. If the
 // use count was zero before, the plugin will be loaded.
@@ -4427,13 +3642,13 @@ func (module *TypeModuleInstance) Use() bool {
 	cret = C.g_type_module_use(carg0)
 	runtime.KeepAlive(module)
 
-	var ret bool
+	var goret bool
 
 	if cret != 0 {
-		ret = true
+		goret = true
 	}
 
-	return ret
+	return goret
 }
 
 // CClosure wraps GCClosure
@@ -4451,6 +3666,19 @@ type cClosure struct {
 // UnsafeCClosureFromGlibBorrow is used to convert raw C.GCClosure pointers to go. This is used by the bindings internally.
 func UnsafeCClosureFromGlibBorrow(p unsafe.Pointer) *CClosure {
 	return &CClosure{&cClosure{(*C.GCClosure)(p)}}
+}
+
+// UnsafeCClosureFromGlibNone is used to convert raw C.GCClosure pointers to go while taking a reference. This is used by the bindings internally.
+func UnsafeCClosureFromGlibNone(p unsafe.Pointer) *CClosure {
+	// FIXME: this has no ref function, what should we do here?
+	wrapped := UnsafeCClosureFromGlibBorrow(p)
+	runtime.SetFinalizer(
+		wrapped.cClosure,
+		func (intern *cClosure) {
+			C.free(unsafe.Pointer(intern.native))
+		},
+	)
+	return wrapped
 }
 
 // UnsafeCClosureFromGlibFull is used to convert raw C.GCClosure pointers to go while taking a reference. This is used by the bindings internally.
@@ -4503,313 +3731,6 @@ func (c *CClosure) SetCallback(callback unsafe.Pointer) {
 	*valptr = C.gpointer(callback)
 }
 
-// Closure wraps GClosure
-//
-// A `GClosure` represents a callback supplied by the programmer.
-// 
-// It will generally comprise a function of some kind and a marshaller
-// used to call it. It is the responsibility of the marshaller to
-// convert the arguments for the invocation from #GValues into
-// a suitable form, perform the callback on the converted arguments,
-// and transform the return value back into a #GValue.
-// 
-// In the case of C programs, a closure usually just holds a pointer
-// to a function and maybe a data argument, and the marshaller
-// converts between #GValue and native C types. The GObject
-// library provides the #GCClosure type for this purpose. Bindings for
-// other languages need marshallers which convert between #GValues
-// and suitable representations in the runtime of the language in
-// order to use functions written in that language as callbacks. Use
-// g_closure_set_marshal() to set the marshaller on such a custom
-// closure implementation.
-// 
-// Within GObject, closures play an important role in the
-// implementation of signals. When a signal is registered, the
-// @c_marshaller argument to g_signal_new() specifies the default C
-// marshaller for any closure which is connected to this
-// signal. GObject provides a number of C marshallers for this
-// purpose, see the g_cclosure_marshal_*() functions. Additional C
-// marshallers can be generated with the [glib-genmarshal][glib-genmarshal]
-// utility.  Closures can be explicitly connected to signals with
-// g_signal_connect_closure(), but it usually more convenient to let
-// GObject create a closure automatically by using one of the
-// g_signal_connect_*() functions which take a callback function/user
-// data pair.
-// 
-// Using closures has a number of important advantages over a simple
-// callback function/data pointer combination:
-// 
-// - Closures allow the callee to get the types of the callback parameters,
-//   which means that language bindings don't have to write individual glue
-//   for each callback type.
-// 
-// - The reference counting of #GClosure makes it easy to handle reentrancy
-//   right; if a callback is removed while it is being invoked, the closure
-//   and its parameters won't be freed until the invocation finishes.
-// 
-// - g_closure_invalidate() and invalidation notifiers allow callbacks to be
-//   automatically removed when the objects they point to go away.
-type Closure struct {
-	*closure
-}
-
-// closure is the struct that's finalized
-type closure struct {
-	native *C.GClosure
-}
-
-func marshalClosure(p uintptr) (interface{}, error) {
-	b := TODOFromGlibBorrow(unsafe.Pointer(p)).Boxed()
-	return UnsafeClosureFromGlibBorrow(b), nil
-}
-
-// UnsafeClosureFromGlibBorrow is used to convert raw C.GClosure pointers to go. This is used by the bindings internally.
-func UnsafeClosureFromGlibBorrow(p unsafe.Pointer) *Closure {
-	return &Closure{&closure{(*C.GClosure)(p)}}
-}
-
-// UnsafeClosureFromGlibNone is used to convert raw C.GClosure pointers to go while taking a reference. This is used by the bindings internally.
-func UnsafeClosureFromGlibNone(p unsafe.Pointer) *Closure {
-	C.g_closure_ref(p)
-	wrapped := UnsafeClosureFromGlibNone(p)
-	runtime.SetFinalizer(
-		wrapped.closure,
-		func (intern *closure) {
-			C.g_closure_unref(intern.native)
-		},
-	)
-	return wrapped
-}
-
-// UnsafeClosureFromGlibFull is used to convert raw C.GClosure pointers to go while taking a reference. This is used by the bindings internally.
-func UnsafeClosureFromGlibFull(p unsafe.Pointer) *Closure {
-	wrapped := UnsafeClosureFromGlibBorrow(p)
-	runtime.SetFinalizer(
-		wrapped.closure,
-		func (intern *closure) {
-			C.g_closure_unref(intern.native)
-		},
-	)
-	return wrapped
-}
-
-// UnsafeClosureRef increases the refcount on the underlying resource. This is used by the bindings internally.
-// 
-// When this is called without an associated call to [Closure.UnsafeClosureUnref], then [Closure] will leak memory.
-func UnsafeClosureRef(c *Closure) {
-	C.g_closure_ref(c.native)
-}
-
-// UnsafeClosureUnref unrefs/frees the underlying resource. This is used by the bindings internally.
-// 
-// After this is called, no other method on [Closure] is expected to work anymore.
-func UnsafeClosureUnref(c *Closure) {
-	C.g_closure_unref(c.native)
-}
-
-// UnsafeClosureToGlibNone returns the underlying C pointer. This is used by the bindings internally.
-func UnsafeClosureToGlibNone(c *Closure) unsafe.Pointer {
-	return unsafe.Pointer(c.native)
-}
-
-// UnsafeClosureToGlibFull returns the underlying C pointer and gives up ownership.
-// This is used by the bindings internally.
-func UnsafeClosureToGlibFull(c *Closure) unsafe.Pointer {
-	runtime.SetFinalizer(c.closure, nil)
-	_p := unsafe.Pointer(c.native)
-	c.native = nil // Closure is invalid from here on
-	return _p
-}
-// NewClosureObject wraps g_closure_new_object
-// 
-// The function takes the following parameters:
-// 
-// 	- sizeofClosure uint: the size of the structure to allocate, must be at least
-//  `sizeof (GClosure)` 
-// 	- object Object: a #GObject pointer to store in the @data field of the newly
-//  allocated #GClosure 
-// 
-// The function returns the following values:
-// 
-// 	- ret Closure 
-//
-// A variant of g_closure_new_simple() which stores @object in the
-// @data field of the closure and calls g_object_watch_closure() on
-// @object and the created closure. This function is mainly useful
-// when implementing new types of closures.
-func NewClosureObject(sizeofClosure uint, object Object) Closure {
-	var carg1 C.guint     // in, none, casted
-	var carg2 *C.GObject  // in, none, converted
-	var cret  *C.GClosure // return, none, converted
-
-	carg1 = C.guint(sizeofClosure)
-	carg2 = (*C.GObject)(TODOToNone(object))
-
-	cret = C.g_closure_new_object(carg1, carg2)
-	runtime.KeepAlive(sizeofClosure)
-	runtime.KeepAlive(object)
-
-	var ret Closure
-
-	ret = UnsafeClosureFromGlibNone(unsafe.Pointer(cret))
-
-	return ret
-}
-
-// NewClosureSimple wraps g_closure_new_simple
-// 
-// The function takes the following parameters:
-// 
-// 	- sizeofClosure uint: the size of the structure to allocate, must be at least
-//                  `sizeof (GClosure)` 
-// 	- data unsafe.Pointer (nullable): data to store in the @data field of the newly allocated #GClosure 
-// 
-// The function returns the following values:
-// 
-// 	- ret Closure 
-//
-// Allocates a struct of the given size and initializes the initial
-// part as a #GClosure.
-// 
-// This function is mainly useful when implementing new types of closures:
-// 
-// |[&lt;!-- language="C" --&gt;
-// typedef struct _MyClosure MyClosure;
-// struct _MyClosure
-// {
-//   GClosure closure;
-//   // extra data goes here
-// };
-// 
-// static void
-// my_closure_finalize (gpointer  notify_data,
-//                      GClosure *closure)
-// {
-//   MyClosure *my_closure = (MyClosure *)closure;
-// 
-//   // free extra data here
-// }
-// 
-// MyClosure *my_closure_new (gpointer data)
-// {
-//   GClosure *closure;
-//   MyClosure *my_closure;
-// 
-//   closure = g_closure_new_simple (sizeof (MyClosure), data);
-//   my_closure = (MyClosure *) closure;
-// 
-//   // initialize extra data here
-// 
-//   g_closure_add_finalize_notifier (closure, notify_data,
-//                                    my_closure_finalize);
-//   return my_closure;
-// }
-// ]|
-func NewClosureSimple(sizeofClosure uint, data unsafe.Pointer) Closure {
-	var carg1 C.guint     // in, none, casted
-	var carg2 C.gpointer  // in, none, casted, nullable
-	var cret  *C.GClosure // return, none, converted
-
-	carg1 = C.guint(sizeofClosure)
-	if data != nil {
-		carg2 = C.gpointer(data)
-	}
-
-	cret = C.g_closure_new_simple(carg1, carg2)
-	runtime.KeepAlive(sizeofClosure)
-	runtime.KeepAlive(data)
-
-	var ret Closure
-
-	ret = UnsafeClosureFromGlibNone(unsafe.Pointer(cret))
-
-	return ret
-}
-
-// Invalidate wraps g_closure_invalidate
-//
-// Sets a flag on the closure to indicate that its calling
-// environment has become invalid, and thus causes any future
-// invocations of g_closure_invoke() on this @closure to be
-// ignored.
-// 
-// Also, invalidation notifiers installed on the closure will
-// be called at this point. Note that unless you are holding a
-// reference to the closure yourself, the invalidation notifiers may
-// unref the closure and cause it to be destroyed, so if you need to
-// access the closure after calling g_closure_invalidate(), make sure
-// that you've previously called g_closure_ref().
-// 
-// Note that g_closure_invalidate() will also be called when the
-// reference count of a closure drops to zero (unless it has already
-// been invalidated before).
-func (closure *Closure) Invalidate() {
-	var carg0 *C.GClosure // in, none, converted
-
-	carg0 = (*C.GClosure)(UnsafeClosureToGlibNone(closure))
-
-	C.g_closure_invalidate(carg0)
-	runtime.KeepAlive(closure)
-}
-
-// Sink wraps g_closure_sink
-//
-// Takes over the initial ownership of a closure.
-// 
-// Each closure is initially created in a "floating" state, which means
-// that the initial reference count is not owned by any caller.
-// 
-// This function checks to see if the object is still floating, and if so,
-// unsets the floating state and decreases the reference count. If the
-// closure is not floating, g_closure_sink() does nothing.
-// 
-// The reason for the existence of the floating state is to prevent
-// cumbersome code sequences like:
-// 
-// |[&lt;!-- language="C" --&gt;
-// closure = g_cclosure_new (cb_func, cb_data);
-// g_source_set_closure (source, closure);
-// g_closure_unref (closure); // GObject doesn't really need this
-// ]|
-// 
-// Because g_source_set_closure() (and similar functions) take ownership of the
-// initial reference count, if it is unowned, we instead can write:
-// 
-// |[&lt;!-- language="C" --&gt;
-// g_source_set_closure (source, g_cclosure_new (cb_func, cb_data));
-// ]|
-// 
-// Generally, this function is used together with g_closure_ref(). An example
-// of storing a closure for later notification looks like:
-// 
-// |[&lt;!-- language="C" --&gt;
-// static GClosure *notify_closure = NULL;
-// void
-// foo_notify_set_closure (GClosure *closure)
-// {
-//   if (notify_closure)
-//     g_closure_unref (notify_closure);
-//   notify_closure = closure;
-//   if (notify_closure)
-//     {
-//       g_closure_ref (notify_closure);
-//       g_closure_sink (notify_closure);
-//     }
-// }
-// ]|
-// 
-// Because g_closure_sink() may decrement the reference count of a closure
-// (if it hasn't been called on @closure yet) just like g_closure_unref(),
-// g_closure_ref() should be called prior to this function.
-func (closure *Closure) Sink() {
-	var carg0 *C.GClosure // in, none, converted
-
-	carg0 = (*C.GClosure)(UnsafeClosureToGlibNone(closure))
-
-	C.g_closure_sink(carg0)
-	runtime.KeepAlive(closure)
-}
-
 // ClosureNotifyData wraps GClosureNotifyData
 type ClosureNotifyData struct {
 	*closureNotifyData
@@ -4823,6 +3744,19 @@ type closureNotifyData struct {
 // UnsafeClosureNotifyDataFromGlibBorrow is used to convert raw C.GClosureNotifyData pointers to go. This is used by the bindings internally.
 func UnsafeClosureNotifyDataFromGlibBorrow(p unsafe.Pointer) *ClosureNotifyData {
 	return &ClosureNotifyData{&closureNotifyData{(*C.GClosureNotifyData)(p)}}
+}
+
+// UnsafeClosureNotifyDataFromGlibNone is used to convert raw C.GClosureNotifyData pointers to go while taking a reference. This is used by the bindings internally.
+func UnsafeClosureNotifyDataFromGlibNone(p unsafe.Pointer) *ClosureNotifyData {
+	// FIXME: this has no ref function, what should we do here?
+	wrapped := UnsafeClosureNotifyDataFromGlibBorrow(p)
+	runtime.SetFinalizer(
+		wrapped.closureNotifyData,
+		func (intern *closureNotifyData) {
+			C.free(unsafe.Pointer(intern.native))
+		},
+	)
+	return wrapped
 }
 
 // UnsafeClosureNotifyDataFromGlibFull is used to convert raw C.GClosureNotifyData pointers to go while taking a reference. This is used by the bindings internally.
@@ -4887,6 +3821,19 @@ type enumClass struct {
 // UnsafeEnumClassFromGlibBorrow is used to convert raw C.GEnumClass pointers to go. This is used by the bindings internally.
 func UnsafeEnumClassFromGlibBorrow(p unsafe.Pointer) *EnumClass {
 	return &EnumClass{&enumClass{(*C.GEnumClass)(p)}}
+}
+
+// UnsafeEnumClassFromGlibNone is used to convert raw C.GEnumClass pointers to go while taking a reference. This is used by the bindings internally.
+func UnsafeEnumClassFromGlibNone(p unsafe.Pointer) *EnumClass {
+	// FIXME: this has no ref function, what should we do here?
+	wrapped := UnsafeEnumClassFromGlibBorrow(p)
+	runtime.SetFinalizer(
+		wrapped.enumClass,
+		func (intern *enumClass) {
+			C.free(unsafe.Pointer(intern.native))
+		},
+	)
+	return wrapped
 }
 
 // UnsafeEnumClassFromGlibFull is used to convert raw C.GEnumClass pointers to go while taking a reference. This is used by the bindings internally.
@@ -4993,6 +3940,19 @@ func UnsafeEnumValueFromGlibBorrow(p unsafe.Pointer) *EnumValue {
 	return &EnumValue{&enumValue{(*C.GEnumValue)(p)}}
 }
 
+// UnsafeEnumValueFromGlibNone is used to convert raw C.GEnumValue pointers to go while taking a reference. This is used by the bindings internally.
+func UnsafeEnumValueFromGlibNone(p unsafe.Pointer) *EnumValue {
+	// FIXME: this has no ref function, what should we do here?
+	wrapped := UnsafeEnumValueFromGlibBorrow(p)
+	runtime.SetFinalizer(
+		wrapped.enumValue,
+		func (intern *enumValue) {
+			C.free(unsafe.Pointer(intern.native))
+		},
+	)
+	return wrapped
+}
+
 // UnsafeEnumValueFromGlibFull is used to convert raw C.GEnumValue pointers to go while taking a reference. This is used by the bindings internally.
 func UnsafeEnumValueFromGlibFull(p unsafe.Pointer) *EnumValue {
 	wrapped := UnsafeEnumValueFromGlibBorrow(p)
@@ -5059,6 +4019,19 @@ type flagsClass struct {
 // UnsafeFlagsClassFromGlibBorrow is used to convert raw C.GFlagsClass pointers to go. This is used by the bindings internally.
 func UnsafeFlagsClassFromGlibBorrow(p unsafe.Pointer) *FlagsClass {
 	return &FlagsClass{&flagsClass{(*C.GFlagsClass)(p)}}
+}
+
+// UnsafeFlagsClassFromGlibNone is used to convert raw C.GFlagsClass pointers to go while taking a reference. This is used by the bindings internally.
+func UnsafeFlagsClassFromGlibNone(p unsafe.Pointer) *FlagsClass {
+	// FIXME: this has no ref function, what should we do here?
+	wrapped := UnsafeFlagsClassFromGlibBorrow(p)
+	runtime.SetFinalizer(
+		wrapped.flagsClass,
+		func (intern *flagsClass) {
+			C.free(unsafe.Pointer(intern.native))
+		},
+	)
+	return wrapped
 }
 
 // UnsafeFlagsClassFromGlibFull is used to convert raw C.GFlagsClass pointers to go while taking a reference. This is used by the bindings internally.
@@ -5147,6 +4120,19 @@ func UnsafeFlagsValueFromGlibBorrow(p unsafe.Pointer) *FlagsValue {
 	return &FlagsValue{&flagsValue{(*C.GFlagsValue)(p)}}
 }
 
+// UnsafeFlagsValueFromGlibNone is used to convert raw C.GFlagsValue pointers to go while taking a reference. This is used by the bindings internally.
+func UnsafeFlagsValueFromGlibNone(p unsafe.Pointer) *FlagsValue {
+	// FIXME: this has no ref function, what should we do here?
+	wrapped := UnsafeFlagsValueFromGlibBorrow(p)
+	runtime.SetFinalizer(
+		wrapped.flagsValue,
+		func (intern *flagsValue) {
+			C.free(unsafe.Pointer(intern.native))
+		},
+	)
+	return wrapped
+}
+
 // UnsafeFlagsValueFromGlibFull is used to convert raw C.GFlagsValue pointers to go while taking a reference. This is used by the bindings internally.
 func UnsafeFlagsValueFromGlibFull(p unsafe.Pointer) *FlagsValue {
 	wrapped := UnsafeFlagsValueFromGlibBorrow(p)
@@ -5214,6 +4200,19 @@ func UnsafeInitiallyUnownedClassFromGlibBorrow(p unsafe.Pointer) *InitiallyUnown
 	return &InitiallyUnownedClass{&initiallyUnownedClass{(*C.GInitiallyUnownedClass)(p)}}
 }
 
+// UnsafeInitiallyUnownedClassFromGlibNone is used to convert raw C.GInitiallyUnownedClass pointers to go while taking a reference. This is used by the bindings internally.
+func UnsafeInitiallyUnownedClassFromGlibNone(p unsafe.Pointer) *InitiallyUnownedClass {
+	// FIXME: this has no ref function, what should we do here?
+	wrapped := UnsafeInitiallyUnownedClassFromGlibBorrow(p)
+	runtime.SetFinalizer(
+		wrapped.initiallyUnownedClass,
+		func (intern *initiallyUnownedClass) {
+			C.free(unsafe.Pointer(intern.native))
+		},
+	)
+	return wrapped
+}
+
 // UnsafeInitiallyUnownedClassFromGlibFull is used to convert raw C.GInitiallyUnownedClass pointers to go while taking a reference. This is used by the bindings internally.
 func UnsafeInitiallyUnownedClassFromGlibFull(p unsafe.Pointer) *InitiallyUnownedClass {
 	wrapped := UnsafeInitiallyUnownedClassFromGlibBorrow(p)
@@ -5262,6 +4261,19 @@ type interfaceInfo struct {
 // UnsafeInterfaceInfoFromGlibBorrow is used to convert raw C.GInterfaceInfo pointers to go. This is used by the bindings internally.
 func UnsafeInterfaceInfoFromGlibBorrow(p unsafe.Pointer) *InterfaceInfo {
 	return &InterfaceInfo{&interfaceInfo{(*C.GInterfaceInfo)(p)}}
+}
+
+// UnsafeInterfaceInfoFromGlibNone is used to convert raw C.GInterfaceInfo pointers to go while taking a reference. This is used by the bindings internally.
+func UnsafeInterfaceInfoFromGlibNone(p unsafe.Pointer) *InterfaceInfo {
+	// FIXME: this has no ref function, what should we do here?
+	wrapped := UnsafeInterfaceInfoFromGlibBorrow(p)
+	runtime.SetFinalizer(
+		wrapped.interfaceInfo,
+		func (intern *interfaceInfo) {
+			C.free(unsafe.Pointer(intern.native))
+		},
+	)
+	return wrapped
 }
 
 // UnsafeInterfaceInfoFromGlibFull is used to convert raw C.GInterfaceInfo pointers to go while taking a reference. This is used by the bindings internally.
@@ -5332,6 +4344,19 @@ func UnsafeObjectConstructParamFromGlibBorrow(p unsafe.Pointer) *ObjectConstruct
 	return &ObjectConstructParam{&objectConstructParam{(*C.GObjectConstructParam)(p)}}
 }
 
+// UnsafeObjectConstructParamFromGlibNone is used to convert raw C.GObjectConstructParam pointers to go while taking a reference. This is used by the bindings internally.
+func UnsafeObjectConstructParamFromGlibNone(p unsafe.Pointer) *ObjectConstructParam {
+	// FIXME: this has no ref function, what should we do here?
+	wrapped := UnsafeObjectConstructParamFromGlibBorrow(p)
+	runtime.SetFinalizer(
+		wrapped.objectConstructParam,
+		func (intern *objectConstructParam) {
+			C.free(unsafe.Pointer(intern.native))
+		},
+	)
+	return wrapped
+}
+
 // UnsafeObjectConstructParamFromGlibFull is used to convert raw C.GObjectConstructParam pointers to go while taking a reference. This is used by the bindings internally.
 func UnsafeObjectConstructParamFromGlibFull(p unsafe.Pointer) *ObjectConstructParam {
 	wrapped := UnsafeObjectConstructParamFromGlibBorrow(p)
@@ -5383,6 +4408,19 @@ func UnsafeParamSpecClassFromGlibBorrow(p unsafe.Pointer) *ParamSpecClass {
 	return &ParamSpecClass{&paramSpecClass{(*C.GParamSpecClass)(p)}}
 }
 
+// UnsafeParamSpecClassFromGlibNone is used to convert raw C.GParamSpecClass pointers to go while taking a reference. This is used by the bindings internally.
+func UnsafeParamSpecClassFromGlibNone(p unsafe.Pointer) *ParamSpecClass {
+	// FIXME: this has no ref function, what should we do here?
+	wrapped := UnsafeParamSpecClassFromGlibBorrow(p)
+	runtime.SetFinalizer(
+		wrapped.paramSpecClass,
+		func (intern *paramSpecClass) {
+			C.free(unsafe.Pointer(intern.native))
+		},
+	)
+	return wrapped
+}
+
 // UnsafeParamSpecClassFromGlibFull is used to convert raw C.GParamSpecClass pointers to go while taking a reference. This is used by the bindings internally.
 func UnsafeParamSpecClassFromGlibFull(p unsafe.Pointer) *ParamSpecClass {
 	wrapped := UnsafeParamSpecClassFromGlibBorrow(p)
@@ -5415,16 +4453,6 @@ func UnsafeParamSpecClassToGlibFull(p *ParamSpecClass) unsafe.Pointer {
 	p.native = nil // ParamSpecClass is invalid from here on
 	return _p
 }
-// value_type wraps value_type
-//
-// the #GValue type for this parameter
-func (p *ParamSpecClass) ValueType() glib.Type {
-	valptr := &p.native.value_type
-	var _v glib.Type
-	_v = glib.Type(*valptr)
-	return _v
-}
-
 // ParamSpecPool wraps GParamSpecPool
 //
 // A #GParamSpecPool maintains a collection of #GParamSpecs which can be
@@ -5444,6 +4472,19 @@ type paramSpecPool struct {
 // UnsafeParamSpecPoolFromGlibBorrow is used to convert raw C.GParamSpecPool pointers to go. This is used by the bindings internally.
 func UnsafeParamSpecPoolFromGlibBorrow(p unsafe.Pointer) *ParamSpecPool {
 	return &ParamSpecPool{&paramSpecPool{(*C.GParamSpecPool)(p)}}
+}
+
+// UnsafeParamSpecPoolFromGlibNone is used to convert raw C.GParamSpecPool pointers to go while taking a reference. This is used by the bindings internally.
+func UnsafeParamSpecPoolFromGlibNone(p unsafe.Pointer) *ParamSpecPool {
+	// FIXME: this has no ref function, what should we do here?
+	wrapped := UnsafeParamSpecPoolFromGlibBorrow(p)
+	runtime.SetFinalizer(
+		wrapped.paramSpecPool,
+		func (intern *paramSpecPool) {
+			C.g_param_spec_pool_free(intern.native)
+		},
+	)
+	return wrapped
 }
 
 // UnsafeParamSpecPoolFromGlibFull is used to convert raw C.GParamSpecPool pointers to go while taking a reference. This is used by the bindings internally.
@@ -5502,6 +4543,19 @@ func UnsafeParamSpecTypeInfoFromGlibBorrow(p unsafe.Pointer) *ParamSpecTypeInfo 
 	return &ParamSpecTypeInfo{&paramSpecTypeInfo{(*C.GParamSpecTypeInfo)(p)}}
 }
 
+// UnsafeParamSpecTypeInfoFromGlibNone is used to convert raw C.GParamSpecTypeInfo pointers to go while taking a reference. This is used by the bindings internally.
+func UnsafeParamSpecTypeInfoFromGlibNone(p unsafe.Pointer) *ParamSpecTypeInfo {
+	// FIXME: this has no ref function, what should we do here?
+	wrapped := UnsafeParamSpecTypeInfoFromGlibBorrow(p)
+	runtime.SetFinalizer(
+		wrapped.paramSpecTypeInfo,
+		func (intern *paramSpecTypeInfo) {
+			C.free(unsafe.Pointer(intern.native))
+		},
+	)
+	return wrapped
+}
+
 // UnsafeParamSpecTypeInfoFromGlibFull is used to convert raw C.GParamSpecTypeInfo pointers to go while taking a reference. This is used by the bindings internally.
 func UnsafeParamSpecTypeInfoFromGlibFull(p unsafe.Pointer) *ParamSpecTypeInfo {
 	wrapped := UnsafeParamSpecTypeInfoFromGlibBorrow(p)
@@ -5554,16 +4608,6 @@ func (p *ParamSpecTypeInfo) NPreallocs() uint16 {
 	return _v
 }
 
-// value_type wraps value_type
-//
-// The #GType of values conforming to this #GParamSpec
-func (p *ParamSpecTypeInfo) ValueType() glib.Type {
-	valptr := &p.native.value_type
-	var _v glib.Type
-	_v = glib.Type(*valptr)
-	return _v
-}
-
 // instance_size wraps instance_size
 //
 // Size of the instance (object) structure.
@@ -5580,66 +4624,6 @@ func (p *ParamSpecTypeInfo) SetNPreallocs(n_preallocs uint16) {
 	*valptr = C.guint16(n_preallocs)
 }
 
-// value_type wraps value_type
-//
-// The #GType of values conforming to this #GParamSpec
-func (p *ParamSpecTypeInfo) SetValueType(value_type Type) {
-	valptr := &p.native.value_type
-	*valptr = C.GType(value_type)
-}
-
-// Parameter wraps GParameter
-//
-// The GParameter struct is an auxiliary structure used
-// to hand parameter name/value pairs to g_object_newv().
-//
-// Deprecated: (since 2.54.0) This type is not introspectable.
-type Parameter struct {
-	*parameter
-}
-
-// parameter is the struct that's finalized
-type parameter struct {
-	native *C.GParameter
-}
-
-// UnsafeParameterFromGlibBorrow is used to convert raw C.GParameter pointers to go. This is used by the bindings internally.
-func UnsafeParameterFromGlibBorrow(p unsafe.Pointer) *Parameter {
-	return &Parameter{&parameter{(*C.GParameter)(p)}}
-}
-
-// UnsafeParameterFromGlibFull is used to convert raw C.GParameter pointers to go while taking a reference. This is used by the bindings internally.
-func UnsafeParameterFromGlibFull(p unsafe.Pointer) *Parameter {
-	wrapped := UnsafeParameterFromGlibBorrow(p)
-	runtime.SetFinalizer(
-		wrapped.parameter,
-		func (intern *parameter) {
-			C.free(unsafe.Pointer(intern.native))
-		},
-	)
-	return wrapped
-}
-
-// UnsafeParameterFree unrefs/frees the underlying resource. This is used by the bindings internally.
-// 
-// After this is called, no other method on [Parameter] is expected to work anymore.
-func UnsafeParameterFree(p *Parameter) {
-	C.free(unsafe.Pointer(p.native))
-}
-
-// UnsafeParameterToGlibNone returns the underlying C pointer. This is used by the bindings internally.
-func UnsafeParameterToGlibNone(p *Parameter) unsafe.Pointer {
-	return unsafe.Pointer(p.native)
-}
-
-// UnsafeParameterToGlibFull returns the underlying C pointer and gives up ownership.
-// This is used by the bindings internally.
-func UnsafeParameterToGlibFull(p *Parameter) unsafe.Pointer {
-	runtime.SetFinalizer(p.parameter, nil)
-	_p := unsafe.Pointer(p.native)
-	p.native = nil // Parameter is invalid from here on
-	return _p
-}
 // SignalInvocationHint wraps GSignalInvocationHint
 //
 // The #GSignalInvocationHint structure is used to pass on additional information
@@ -5656,6 +4640,19 @@ type signalInvocationHint struct {
 // UnsafeSignalInvocationHintFromGlibBorrow is used to convert raw C.GSignalInvocationHint pointers to go. This is used by the bindings internally.
 func UnsafeSignalInvocationHintFromGlibBorrow(p unsafe.Pointer) *SignalInvocationHint {
 	return &SignalInvocationHint{&signalInvocationHint{(*C.GSignalInvocationHint)(p)}}
+}
+
+// UnsafeSignalInvocationHintFromGlibNone is used to convert raw C.GSignalInvocationHint pointers to go while taking a reference. This is used by the bindings internally.
+func UnsafeSignalInvocationHintFromGlibNone(p unsafe.Pointer) *SignalInvocationHint {
+	// FIXME: this has no ref function, what should we do here?
+	wrapped := UnsafeSignalInvocationHintFromGlibBorrow(p)
+	runtime.SetFinalizer(
+		wrapped.signalInvocationHint,
+		func (intern *signalInvocationHint) {
+			C.free(unsafe.Pointer(intern.native))
+		},
+	)
+	return wrapped
 }
 
 // UnsafeSignalInvocationHintFromGlibFull is used to convert raw C.GSignalInvocationHint pointers to go while taking a reference. This is used by the bindings internally.
@@ -5708,208 +4705,6 @@ func (s *SignalInvocationHint) SetSignalID(signal_id uint) {
 	*valptr = C.guint(signal_id)
 }
 
-// SignalQuery wraps GSignalQuery
-//
-// A structure holding in-depth information for a specific signal.
-// 
-// See also: g_signal_query()
-type SignalQuery struct {
-	*signalQuery
-}
-
-// signalQuery is the struct that's finalized
-type signalQuery struct {
-	native *C.GSignalQuery
-}
-
-// UnsafeSignalQueryFromGlibBorrow is used to convert raw C.GSignalQuery pointers to go. This is used by the bindings internally.
-func UnsafeSignalQueryFromGlibBorrow(p unsafe.Pointer) *SignalQuery {
-	return &SignalQuery{&signalQuery{(*C.GSignalQuery)(p)}}
-}
-
-// UnsafeSignalQueryFromGlibFull is used to convert raw C.GSignalQuery pointers to go while taking a reference. This is used by the bindings internally.
-func UnsafeSignalQueryFromGlibFull(p unsafe.Pointer) *SignalQuery {
-	wrapped := UnsafeSignalQueryFromGlibBorrow(p)
-	runtime.SetFinalizer(
-		wrapped.signalQuery,
-		func (intern *signalQuery) {
-			C.free(unsafe.Pointer(intern.native))
-		},
-	)
-	return wrapped
-}
-
-// UnsafeSignalQueryFree unrefs/frees the underlying resource. This is used by the bindings internally.
-// 
-// After this is called, no other method on [SignalQuery] is expected to work anymore.
-func UnsafeSignalQueryFree(s *SignalQuery) {
-	C.free(unsafe.Pointer(s.native))
-}
-
-// UnsafeSignalQueryToGlibNone returns the underlying C pointer. This is used by the bindings internally.
-func UnsafeSignalQueryToGlibNone(s *SignalQuery) unsafe.Pointer {
-	return unsafe.Pointer(s.native)
-}
-
-// UnsafeSignalQueryToGlibFull returns the underlying C pointer and gives up ownership.
-// This is used by the bindings internally.
-func UnsafeSignalQueryToGlibFull(s *SignalQuery) unsafe.Pointer {
-	runtime.SetFinalizer(s.signalQuery, nil)
-	_p := unsafe.Pointer(s.native)
-	s.native = nil // SignalQuery is invalid from here on
-	return _p
-}
-// signal_id wraps signal_id
-//
-// The signal id of the signal being queried, or 0 if the
-//  signal to be queried was unknown.
-func (s *SignalQuery) SignalID() uint {
-	valptr := &s.native.signal_id
-	var _v uint
-	_v = uint(*valptr)
-	return _v
-}
-
-// itype wraps itype
-//
-// The interface/instance type that this signal can be emitted for.
-func (s *SignalQuery) Itype() glib.Type {
-	valptr := &s.native.itype
-	var _v glib.Type
-	_v = glib.Type(*valptr)
-	return _v
-}
-
-// return_type wraps return_type
-//
-// The return type for user callbacks.
-func (s *SignalQuery) ReturnType() glib.Type {
-	valptr := &s.native.return_type
-	var _v glib.Type
-	_v = glib.Type(*valptr)
-	return _v
-}
-
-// n_params wraps n_params
-//
-// The number of parameters that user callbacks take.
-func (s *SignalQuery) NParams() uint {
-	valptr := &s.native.n_params
-	var _v uint
-	_v = uint(*valptr)
-	return _v
-}
-
-// signal_id wraps signal_id
-//
-// The signal id of the signal being queried, or 0 if the
-//  signal to be queried was unknown.
-func (s *SignalQuery) SetSignalID(signal_id uint) {
-	valptr := &s.native.signal_id
-	*valptr = C.guint(signal_id)
-}
-
-// itype wraps itype
-//
-// The interface/instance type that this signal can be emitted for.
-func (s *SignalQuery) SetItype(itype Type) {
-	valptr := &s.native.itype
-	*valptr = C.GType(itype)
-}
-
-// return_type wraps return_type
-//
-// The return type for user callbacks.
-func (s *SignalQuery) SetReturnType(return_type Type) {
-	valptr := &s.native.return_type
-	*valptr = C.GType(return_type)
-}
-
-// n_params wraps n_params
-//
-// The number of parameters that user callbacks take.
-func (s *SignalQuery) SetNParams(n_params uint) {
-	valptr := &s.native.n_params
-	*valptr = C.guint(n_params)
-}
-
-// TypeClass wraps GTypeClass
-//
-// An opaque structure used as the base of all classes.
-type TypeClass struct {
-	*typeClass
-}
-
-// typeClass is the struct that's finalized
-type typeClass struct {
-	native *C.GTypeClass
-}
-
-// UnsafeTypeClassFromGlibBorrow is used to convert raw C.GTypeClass pointers to go. This is used by the bindings internally.
-func UnsafeTypeClassFromGlibBorrow(p unsafe.Pointer) *TypeClass {
-	return &TypeClass{&typeClass{(*C.GTypeClass)(p)}}
-}
-
-// UnsafeTypeClassFromGlibFull is used to convert raw C.GTypeClass pointers to go while taking a reference. This is used by the bindings internally.
-func UnsafeTypeClassFromGlibFull(p unsafe.Pointer) *TypeClass {
-	wrapped := UnsafeTypeClassFromGlibBorrow(p)
-	runtime.SetFinalizer(
-		wrapped.typeClass,
-		func (intern *typeClass) {
-			C.g_type_class_unref(intern.native)
-		},
-	)
-	return wrapped
-}
-
-// UnsafeTypeClassUnref unrefs/frees the underlying resource. This is used by the bindings internally.
-// 
-// After this is called, no other method on [TypeClass] is expected to work anymore.
-func UnsafeTypeClassUnref(t *TypeClass) {
-	C.g_type_class_unref(t.native)
-}
-
-// UnsafeTypeClassToGlibNone returns the underlying C pointer. This is used by the bindings internally.
-func UnsafeTypeClassToGlibNone(t *TypeClass) unsafe.Pointer {
-	return unsafe.Pointer(t.native)
-}
-
-// UnsafeTypeClassToGlibFull returns the underlying C pointer and gives up ownership.
-// This is used by the bindings internally.
-func UnsafeTypeClassToGlibFull(t *TypeClass) unsafe.Pointer {
-	runtime.SetFinalizer(t.typeClass, nil)
-	_p := unsafe.Pointer(t.native)
-	t.native = nil // TypeClass is invalid from here on
-	return _p
-}
-// GetPrivate wraps g_type_class_get_private
-// 
-// The function takes the following parameters:
-// 
-// 	- privateType glib.Type 
-// 
-// The function returns the following values:
-// 
-// 	- ret unsafe.Pointer 
-func (klass *TypeClass) GetPrivate(privateType glib.Type) unsafe.Pointer {
-	var carg0 *C.GTypeClass // in, none, converted
-	var carg1 C.GType       // in, none, casted
-	var cret  C.gpointer    // return, none, casted
-
-	carg0 = (*C.GTypeClass)(UnsafeTypeClassToGlibNone(klass))
-	carg1 = C.GType(privateType)
-
-	cret = C.g_type_class_get_private(carg0, carg1)
-	runtime.KeepAlive(klass)
-	runtime.KeepAlive(privateType)
-
-	var ret unsafe.Pointer
-
-	ret = unsafe.Pointer(cret)
-
-	return ret
-}
-
 // TypeFundamentalInfo wraps GTypeFundamentalInfo
 //
 // A structure that provides information to the type system which is
@@ -5926,6 +4721,19 @@ type typeFundamentalInfo struct {
 // UnsafeTypeFundamentalInfoFromGlibBorrow is used to convert raw C.GTypeFundamentalInfo pointers to go. This is used by the bindings internally.
 func UnsafeTypeFundamentalInfoFromGlibBorrow(p unsafe.Pointer) *TypeFundamentalInfo {
 	return &TypeFundamentalInfo{&typeFundamentalInfo{(*C.GTypeFundamentalInfo)(p)}}
+}
+
+// UnsafeTypeFundamentalInfoFromGlibNone is used to convert raw C.GTypeFundamentalInfo pointers to go while taking a reference. This is used by the bindings internally.
+func UnsafeTypeFundamentalInfoFromGlibNone(p unsafe.Pointer) *TypeFundamentalInfo {
+	// FIXME: this has no ref function, what should we do here?
+	wrapped := UnsafeTypeFundamentalInfoFromGlibBorrow(p)
+	runtime.SetFinalizer(
+		wrapped.typeFundamentalInfo,
+		func (intern *typeFundamentalInfo) {
+			C.free(unsafe.Pointer(intern.native))
+		},
+	)
+	return wrapped
 }
 
 // UnsafeTypeFundamentalInfoFromGlibFull is used to convert raw C.GTypeFundamentalInfo pointers to go while taking a reference. This is used by the bindings internally.
@@ -5983,6 +4791,19 @@ type typeInfo struct {
 // UnsafeTypeInfoFromGlibBorrow is used to convert raw C.GTypeInfo pointers to go. This is used by the bindings internally.
 func UnsafeTypeInfoFromGlibBorrow(p unsafe.Pointer) *TypeInfo {
 	return &TypeInfo{&typeInfo{(*C.GTypeInfo)(p)}}
+}
+
+// UnsafeTypeInfoFromGlibNone is used to convert raw C.GTypeInfo pointers to go while taking a reference. This is used by the bindings internally.
+func UnsafeTypeInfoFromGlibNone(p unsafe.Pointer) *TypeInfo {
+	// FIXME: this has no ref function, what should we do here?
+	wrapped := UnsafeTypeInfoFromGlibBorrow(p)
+	runtime.SetFinalizer(
+		wrapped.typeInfo,
+		func (intern *typeInfo) {
+			C.free(unsafe.Pointer(intern.native))
+		},
+	)
+	return wrapped
 }
 
 // UnsafeTypeInfoFromGlibFull is used to convert raw C.GTypeInfo pointers to go while taking a reference. This is used by the bindings internally.
@@ -6070,7 +4891,7 @@ func (t *TypeInfo) SetClassSize(class_size uint16) {
 // User-supplied data passed to the class init/finalize functions
 func (t *TypeInfo) SetClassData(class_data unsafe.Pointer) {
 	valptr := &t.native.class_data
-	*valptr = C.gpointer(class_data)
+	*valptr = C.gconstpointer(class_data)
 }
 
 // instance_size wraps instance_size
@@ -6104,6 +4925,19 @@ type typeInstance struct {
 // UnsafeTypeInstanceFromGlibBorrow is used to convert raw C.GTypeInstance pointers to go. This is used by the bindings internally.
 func UnsafeTypeInstanceFromGlibBorrow(p unsafe.Pointer) *TypeInstance {
 	return &TypeInstance{&typeInstance{(*C.GTypeInstance)(p)}}
+}
+
+// UnsafeTypeInstanceFromGlibNone is used to convert raw C.GTypeInstance pointers to go while taking a reference. This is used by the bindings internally.
+func UnsafeTypeInstanceFromGlibNone(p unsafe.Pointer) *TypeInstance {
+	// FIXME: this has no ref function, what should we do here?
+	wrapped := UnsafeTypeInstanceFromGlibBorrow(p)
+	runtime.SetFinalizer(
+		wrapped.typeInstance,
+		func (intern *typeInstance) {
+			C.free(unsafe.Pointer(intern.native))
+		},
+	)
+	return wrapped
 }
 
 // UnsafeTypeInstanceFromGlibFull is used to convert raw C.GTypeInstance pointers to go while taking a reference. This is used by the bindings internally.
@@ -6142,14 +4976,14 @@ func UnsafeTypeInstanceToGlibFull(t *TypeInstance) unsafe.Pointer {
 // 
 // The function takes the following parameters:
 // 
-// 	- privateType glib.Type 
+// 	- privateType Type 
 // 
 // The function returns the following values:
 // 
-// 	- ret unsafe.Pointer 
-func (instance *TypeInstance) GetPrivate(privateType glib.Type) unsafe.Pointer {
+// 	- goret unsafe.Pointer 
+func (instance *TypeInstance) GetPrivate(privateType Type) unsafe.Pointer {
 	var carg0 *C.GTypeInstance // in, none, converted
-	var carg1 C.GType          // in, none, casted
+	var carg1 C.GType          // in, none, casted, alias
 	var cret  C.gpointer       // return, none, casted
 
 	carg0 = (*C.GTypeInstance)(UnsafeTypeInstanceToGlibNone(instance))
@@ -6159,62 +4993,13 @@ func (instance *TypeInstance) GetPrivate(privateType glib.Type) unsafe.Pointer {
 	runtime.KeepAlive(instance)
 	runtime.KeepAlive(privateType)
 
-	var ret unsafe.Pointer
+	var goret unsafe.Pointer
 
-	ret = unsafe.Pointer(cret)
+	goret = unsafe.Pointer(cret)
 
-	return ret
+	return goret
 }
 
-// TypeInterface wraps GTypeInterface
-//
-// An opaque structure used as the base of all interface types.
-type TypeInterface struct {
-	*typeInterface
-}
-
-// typeInterface is the struct that's finalized
-type typeInterface struct {
-	native *C.GTypeInterface
-}
-
-// UnsafeTypeInterfaceFromGlibBorrow is used to convert raw C.GTypeInterface pointers to go. This is used by the bindings internally.
-func UnsafeTypeInterfaceFromGlibBorrow(p unsafe.Pointer) *TypeInterface {
-	return &TypeInterface{&typeInterface{(*C.GTypeInterface)(p)}}
-}
-
-// UnsafeTypeInterfaceFromGlibFull is used to convert raw C.GTypeInterface pointers to go while taking a reference. This is used by the bindings internally.
-func UnsafeTypeInterfaceFromGlibFull(p unsafe.Pointer) *TypeInterface {
-	wrapped := UnsafeTypeInterfaceFromGlibBorrow(p)
-	runtime.SetFinalizer(
-		wrapped.typeInterface,
-		func (intern *typeInterface) {
-			C.free(unsafe.Pointer(intern.native))
-		},
-	)
-	return wrapped
-}
-
-// UnsafeTypeInterfaceFree unrefs/frees the underlying resource. This is used by the bindings internally.
-// 
-// After this is called, no other method on [TypeInterface] is expected to work anymore.
-func UnsafeTypeInterfaceFree(t *TypeInterface) {
-	C.free(unsafe.Pointer(t.native))
-}
-
-// UnsafeTypeInterfaceToGlibNone returns the underlying C pointer. This is used by the bindings internally.
-func UnsafeTypeInterfaceToGlibNone(t *TypeInterface) unsafe.Pointer {
-	return unsafe.Pointer(t.native)
-}
-
-// UnsafeTypeInterfaceToGlibFull returns the underlying C pointer and gives up ownership.
-// This is used by the bindings internally.
-func UnsafeTypeInterfaceToGlibFull(t *TypeInterface) unsafe.Pointer {
-	runtime.SetFinalizer(t.typeInterface, nil)
-	_p := unsafe.Pointer(t.native)
-	t.native = nil // TypeInterface is invalid from here on
-	return _p
-}
 // TypeModuleClass wraps GTypeModuleClass
 //
 // In order to implement dynamic loading of types based on #GTypeModule,
@@ -6231,6 +5016,19 @@ type typeModuleClass struct {
 // UnsafeTypeModuleClassFromGlibBorrow is used to convert raw C.GTypeModuleClass pointers to go. This is used by the bindings internally.
 func UnsafeTypeModuleClassFromGlibBorrow(p unsafe.Pointer) *TypeModuleClass {
 	return &TypeModuleClass{&typeModuleClass{(*C.GTypeModuleClass)(p)}}
+}
+
+// UnsafeTypeModuleClassFromGlibNone is used to convert raw C.GTypeModuleClass pointers to go while taking a reference. This is used by the bindings internally.
+func UnsafeTypeModuleClassFromGlibNone(p unsafe.Pointer) *TypeModuleClass {
+	// FIXME: this has no ref function, what should we do here?
+	wrapped := UnsafeTypeModuleClassFromGlibBorrow(p)
+	runtime.SetFinalizer(
+		wrapped.typeModuleClass,
+		func (intern *typeModuleClass) {
+			C.free(unsafe.Pointer(intern.native))
+		},
+	)
+	return wrapped
 }
 
 // UnsafeTypeModuleClassFromGlibFull is used to convert raw C.GTypeModuleClass pointers to go while taking a reference. This is used by the bindings internally.
@@ -6283,6 +5081,19 @@ func UnsafeTypePluginClassFromGlibBorrow(p unsafe.Pointer) *TypePluginClass {
 	return &TypePluginClass{&typePluginClass{(*C.GTypePluginClass)(p)}}
 }
 
+// UnsafeTypePluginClassFromGlibNone is used to convert raw C.GTypePluginClass pointers to go while taking a reference. This is used by the bindings internally.
+func UnsafeTypePluginClassFromGlibNone(p unsafe.Pointer) *TypePluginClass {
+	// FIXME: this has no ref function, what should we do here?
+	wrapped := UnsafeTypePluginClassFromGlibBorrow(p)
+	runtime.SetFinalizer(
+		wrapped.typePluginClass,
+		func (intern *typePluginClass) {
+			C.free(unsafe.Pointer(intern.native))
+		},
+	)
+	return wrapped
+}
+
 // UnsafeTypePluginClassFromGlibFull is used to convert raw C.GTypePluginClass pointers to go while taking a reference. This is used by the bindings internally.
 func UnsafeTypePluginClassFromGlibFull(p unsafe.Pointer) *TypePluginClass {
 	wrapped := UnsafeTypePluginClassFromGlibBorrow(p)
@@ -6315,111 +5126,6 @@ func UnsafeTypePluginClassToGlibFull(t *TypePluginClass) unsafe.Pointer {
 	t.native = nil // TypePluginClass is invalid from here on
 	return _p
 }
-// TypeQuery wraps GTypeQuery
-//
-// A structure holding information for a specific type.
-// 
-// See also: g_type_query()
-type TypeQuery struct {
-	*typeQuery
-}
-
-// typeQuery is the struct that's finalized
-type typeQuery struct {
-	native *C.GTypeQuery
-}
-
-// UnsafeTypeQueryFromGlibBorrow is used to convert raw C.GTypeQuery pointers to go. This is used by the bindings internally.
-func UnsafeTypeQueryFromGlibBorrow(p unsafe.Pointer) *TypeQuery {
-	return &TypeQuery{&typeQuery{(*C.GTypeQuery)(p)}}
-}
-
-// UnsafeTypeQueryFromGlibFull is used to convert raw C.GTypeQuery pointers to go while taking a reference. This is used by the bindings internally.
-func UnsafeTypeQueryFromGlibFull(p unsafe.Pointer) *TypeQuery {
-	wrapped := UnsafeTypeQueryFromGlibBorrow(p)
-	runtime.SetFinalizer(
-		wrapped.typeQuery,
-		func (intern *typeQuery) {
-			C.free(unsafe.Pointer(intern.native))
-		},
-	)
-	return wrapped
-}
-
-// UnsafeTypeQueryFree unrefs/frees the underlying resource. This is used by the bindings internally.
-// 
-// After this is called, no other method on [TypeQuery] is expected to work anymore.
-func UnsafeTypeQueryFree(t *TypeQuery) {
-	C.free(unsafe.Pointer(t.native))
-}
-
-// UnsafeTypeQueryToGlibNone returns the underlying C pointer. This is used by the bindings internally.
-func UnsafeTypeQueryToGlibNone(t *TypeQuery) unsafe.Pointer {
-	return unsafe.Pointer(t.native)
-}
-
-// UnsafeTypeQueryToGlibFull returns the underlying C pointer and gives up ownership.
-// This is used by the bindings internally.
-func UnsafeTypeQueryToGlibFull(t *TypeQuery) unsafe.Pointer {
-	runtime.SetFinalizer(t.typeQuery, nil)
-	_p := unsafe.Pointer(t.native)
-	t.native = nil // TypeQuery is invalid from here on
-	return _p
-}
-// _type wraps type
-//
-// the #GType value of the type
-func (t *TypeQuery) Type() glib.Type {
-	valptr := &t.native._type
-	var _v glib.Type
-	_v = glib.Type(*valptr)
-	return _v
-}
-
-// class_size wraps class_size
-//
-// the size of the class structure
-func (t *TypeQuery) ClassSize() uint {
-	valptr := &t.native.class_size
-	var _v uint
-	_v = uint(*valptr)
-	return _v
-}
-
-// instance_size wraps instance_size
-//
-// the size of the instance structure
-func (t *TypeQuery) InstanceSize() uint {
-	valptr := &t.native.instance_size
-	var _v uint
-	_v = uint(*valptr)
-	return _v
-}
-
-// _type wraps type
-//
-// the #GType value of the type
-func (t *TypeQuery) SetType(_type Type) {
-	valptr := &t.native._type
-	*valptr = C.GType(_type)
-}
-
-// class_size wraps class_size
-//
-// the size of the class structure
-func (t *TypeQuery) SetClassSize(class_size uint) {
-	valptr := &t.native.class_size
-	*valptr = C.guint(class_size)
-}
-
-// instance_size wraps instance_size
-//
-// the size of the instance structure
-func (t *TypeQuery) SetInstanceSize(instance_size uint) {
-	valptr := &t.native.instance_size
-	*valptr = C.guint(instance_size)
-}
-
 // TypeValueTable wraps GTypeValueTable
 //
 // The #GTypeValueTable provides the functions required by the #GValue
@@ -6436,6 +5142,19 @@ type typeValueTable struct {
 // UnsafeTypeValueTableFromGlibBorrow is used to convert raw C.GTypeValueTable pointers to go. This is used by the bindings internally.
 func UnsafeTypeValueTableFromGlibBorrow(p unsafe.Pointer) *TypeValueTable {
 	return &TypeValueTable{&typeValueTable{(*C.GTypeValueTable)(p)}}
+}
+
+// UnsafeTypeValueTableFromGlibNone is used to convert raw C.GTypeValueTable pointers to go while taking a reference. This is used by the bindings internally.
+func UnsafeTypeValueTableFromGlibNone(p unsafe.Pointer) *TypeValueTable {
+	// FIXME: this has no ref function, what should we do here?
+	wrapped := UnsafeTypeValueTableFromGlibBorrow(p)
+	runtime.SetFinalizer(
+		wrapped.typeValueTable,
+		func (intern *typeValueTable) {
+			C.free(unsafe.Pointer(intern.native))
+		},
+	)
+	return wrapped
 }
 
 // UnsafeTypeValueTableFromGlibFull is used to convert raw C.GTypeValueTable pointers to go while taking a reference. This is used by the bindings internally.
@@ -6470,347 +5189,6 @@ func UnsafeTypeValueTableToGlibFull(t *TypeValueTable) unsafe.Pointer {
 	t.native = nil // TypeValueTable is invalid from here on
 	return _p
 }
-// ValueArray wraps GValueArray
-//
-// A `GValueArray` is a container structure to hold an array of generic values.
-// 
-// The prime purpose of a `GValueArray` is for it to be used as an
-// object property that holds an array of values. A `GValueArray` wraps
-// an array of `GValue` elements in order for it to be used as a boxed
-// type through `G_TYPE_VALUE_ARRAY`.
-// 
-// `GValueArray` is deprecated in favour of `GArray` since GLib 2.32.
-// It is possible to create a `GArray` that behaves like a `GValueArray`
-// by using the size of `GValue` as the element size, and by setting
-// [method@GObject.Value.unset] as the clear function using
-// [func@GLib.Array.set_clear_func], for instance, the following code:
-// 
-// ```c
-//   GValueArray *array = g_value_array_new (10);
-// ```
-// 
-// can be replaced by:
-// 
-// ```c
-//   GArray *array = g_array_sized_new (FALSE, TRUE, sizeof (GValue), 10);
-//   g_array_set_clear_func (array, (GDestroyNotify) g_value_unset);
-// ```
-//
-// Deprecated: (since 2.32.0) Use `GArray` instead, if possible for the given use case,
-//    as described above.
-type ValueArray struct {
-	*valueArray
-}
-
-// valueArray is the struct that's finalized
-type valueArray struct {
-	native *C.GValueArray
-}
-
-func marshalValueArray(p uintptr) (interface{}, error) {
-	b := TODOFromGlibBorrow(unsafe.Pointer(p)).Boxed()
-	return UnsafeValueArrayFromGlibBorrow(b), nil
-}
-
-// UnsafeValueArrayFromGlibBorrow is used to convert raw C.GValueArray pointers to go. This is used by the bindings internally.
-func UnsafeValueArrayFromGlibBorrow(p unsafe.Pointer) *ValueArray {
-	return &ValueArray{&valueArray{(*C.GValueArray)(p)}}
-}
-
-// UnsafeValueArrayFromGlibFull is used to convert raw C.GValueArray pointers to go while taking a reference. This is used by the bindings internally.
-func UnsafeValueArrayFromGlibFull(p unsafe.Pointer) *ValueArray {
-	wrapped := UnsafeValueArrayFromGlibBorrow(p)
-	runtime.SetFinalizer(
-		wrapped.valueArray,
-		func (intern *valueArray) {
-			C.g_value_array_free(intern.native)
-		},
-	)
-	return wrapped
-}
-
-// UnsafeValueArrayFree unrefs/frees the underlying resource. This is used by the bindings internally.
-// 
-// After this is called, no other method on [ValueArray] is expected to work anymore.
-func UnsafeValueArrayFree(v *ValueArray) {
-	C.g_value_array_free(v.native)
-}
-
-// UnsafeValueArrayToGlibNone returns the underlying C pointer. This is used by the bindings internally.
-func UnsafeValueArrayToGlibNone(v *ValueArray) unsafe.Pointer {
-	return unsafe.Pointer(v.native)
-}
-
-// UnsafeValueArrayToGlibFull returns the underlying C pointer and gives up ownership.
-// This is used by the bindings internally.
-func UnsafeValueArrayToGlibFull(v *ValueArray) unsafe.Pointer {
-	runtime.SetFinalizer(v.valueArray, nil)
-	_p := unsafe.Pointer(v.native)
-	v.native = nil // ValueArray is invalid from here on
-	return _p
-}
-// NewValueArray wraps g_value_array_new
-// 
-// The function takes the following parameters:
-// 
-// 	- nPrealloced uint: number of values to preallocate space for 
-// 
-// The function returns the following values:
-// 
-// 	- ret ValueArray 
-//
-// Allocate and initialize a new #GValueArray, optionally preserve space
-// for @n_prealloced elements. New arrays always contain 0 elements,
-// regardless of the value of @n_prealloced.
-//
-// Deprecated: (since 2.32.0) Use #GArray and g_array_sized_new() instead.
-func NewValueArray(nPrealloced uint) ValueArray {
-	var carg1 C.guint        // in, none, casted
-	var cret  *C.GValueArray // return, full, converted
-
-	carg1 = C.guint(nPrealloced)
-
-	cret = C.g_value_array_new(carg1)
-	runtime.KeepAlive(nPrealloced)
-
-	var ret ValueArray
-
-	ret = UnsafeValueArrayFromGlibFull(unsafe.Pointer(cret))
-
-	return ret
-}
-
-// n_values wraps n_values
-//
-// number of values contained in the array
-func (v *ValueArray) NValues() uint {
-	valptr := &v.native.n_values
-	var _v uint
-	_v = uint(*valptr)
-	return _v
-}
-
-// n_values wraps n_values
-//
-// number of values contained in the array
-func (v *ValueArray) SetNValues(n_values uint) {
-	valptr := &v.native.n_values
-	*valptr = C.guint(n_values)
-}
-
-// Append wraps g_value_array_append
-// 
-// The function takes the following parameters:
-// 
-// 	- value Value (nullable): #GValue to copy into #GValueArray, or %NULL 
-// 
-// The function returns the following values:
-// 
-// 	- ret ValueArray 
-//
-// Insert a copy of @value as last element of @value_array. If @value is
-// %NULL, an uninitialized value is appended.
-//
-// Deprecated: (since 2.32.0) Use #GArray and g_array_append_val() instead.
-func (valueArray *ValueArray) Append(value Value) ValueArray {
-	var carg0 *C.GValueArray // in, none, converted
-	var carg1 *C.GValue      // in, none, converted, nullable
-	var cret  *C.GValueArray // return, none, converted
-
-	carg0 = (*C.GValueArray)(UnsafeValueArrayToGlibNone(valueArray))
-	if value != nil {
-		carg1 = (*C.GValue)(TODOToGlibNone(value))
-	}
-
-	cret = C.g_value_array_append(carg0, carg1)
-	runtime.KeepAlive(valueArray)
-	runtime.KeepAlive(value)
-
-	var ret ValueArray
-
-	ret = UnsafeValueArrayFromGlibNone(unsafe.Pointer(cret))
-
-	return ret
-}
-
-// GetNth wraps g_value_array_get_nth
-// 
-// The function takes the following parameters:
-// 
-// 	- index_ uint: index of the value of interest 
-// 
-// The function returns the following values:
-// 
-// 	- ret Value 
-//
-// Return a pointer to the value at @index_ contained in @value_array.
-//
-// Deprecated: (since 2.32.0) Use g_array_index() instead.
-func (valueArray *ValueArray) GetNth(index_ uint) Value {
-	var carg0 *C.GValueArray // in, none, converted
-	var carg1 C.guint        // in, none, casted
-	var cret  *C.GValue      // return, none, converted
-
-	carg0 = (*C.GValueArray)(UnsafeValueArrayToGlibNone(valueArray))
-	carg1 = C.guint(index_)
-
-	cret = C.g_value_array_get_nth(carg0, carg1)
-	runtime.KeepAlive(valueArray)
-	runtime.KeepAlive(index_)
-
-	var ret Value
-
-	ret = TODOFromGlibNone(unsafe.Pointer(cret))
-
-	return ret
-}
-
-// Insert wraps g_value_array_insert
-// 
-// The function takes the following parameters:
-// 
-// 	- index_ uint: insertion position, must be &lt;= value_array-&gt;;n_values 
-// 	- value Value (nullable): #GValue to copy into #GValueArray, or %NULL 
-// 
-// The function returns the following values:
-// 
-// 	- ret ValueArray 
-//
-// Insert a copy of @value at specified position into @value_array. If @value
-// is %NULL, an uninitialized value is inserted.
-//
-// Deprecated: (since 2.32.0) Use #GArray and g_array_insert_val() instead.
-func (valueArray *ValueArray) Insert(index_ uint, value Value) ValueArray {
-	var carg0 *C.GValueArray // in, none, converted
-	var carg1 C.guint        // in, none, casted
-	var carg2 *C.GValue      // in, none, converted, nullable
-	var cret  *C.GValueArray // return, none, converted
-
-	carg0 = (*C.GValueArray)(UnsafeValueArrayToGlibNone(valueArray))
-	carg1 = C.guint(index_)
-	if value != nil {
-		carg2 = (*C.GValue)(TODOToGlibNone(value))
-	}
-
-	cret = C.g_value_array_insert(carg0, carg1, carg2)
-	runtime.KeepAlive(valueArray)
-	runtime.KeepAlive(index_)
-	runtime.KeepAlive(value)
-
-	var ret ValueArray
-
-	ret = UnsafeValueArrayFromGlibNone(unsafe.Pointer(cret))
-
-	return ret
-}
-
-// Prepend wraps g_value_array_prepend
-// 
-// The function takes the following parameters:
-// 
-// 	- value Value (nullable): #GValue to copy into #GValueArray, or %NULL 
-// 
-// The function returns the following values:
-// 
-// 	- ret ValueArray 
-//
-// Insert a copy of @value as first element of @value_array. If @value is
-// %NULL, an uninitialized value is prepended.
-//
-// Deprecated: (since 2.32.0) Use #GArray and g_array_prepend_val() instead.
-func (valueArray *ValueArray) Prepend(value Value) ValueArray {
-	var carg0 *C.GValueArray // in, none, converted
-	var carg1 *C.GValue      // in, none, converted, nullable
-	var cret  *C.GValueArray // return, none, converted
-
-	carg0 = (*C.GValueArray)(UnsafeValueArrayToGlibNone(valueArray))
-	if value != nil {
-		carg1 = (*C.GValue)(TODOToGlibNone(value))
-	}
-
-	cret = C.g_value_array_prepend(carg0, carg1)
-	runtime.KeepAlive(valueArray)
-	runtime.KeepAlive(value)
-
-	var ret ValueArray
-
-	ret = UnsafeValueArrayFromGlibNone(unsafe.Pointer(cret))
-
-	return ret
-}
-
-// Remove wraps g_value_array_remove
-// 
-// The function takes the following parameters:
-// 
-// 	- index_ uint: position of value to remove, which must be less than
-//     @value_array-&gt;n_values 
-// 
-// The function returns the following values:
-// 
-// 	- ret ValueArray 
-//
-// Remove the value at position @index_ from @value_array.
-//
-// Deprecated: (since 2.32.0) Use #GArray and g_array_remove_index() instead.
-func (valueArray *ValueArray) Remove(index_ uint) ValueArray {
-	var carg0 *C.GValueArray // in, none, converted
-	var carg1 C.guint        // in, none, casted
-	var cret  *C.GValueArray // return, none, converted
-
-	carg0 = (*C.GValueArray)(UnsafeValueArrayToGlibNone(valueArray))
-	carg1 = C.guint(index_)
-
-	cret = C.g_value_array_remove(carg0, carg1)
-	runtime.KeepAlive(valueArray)
-	runtime.KeepAlive(index_)
-
-	var ret ValueArray
-
-	ret = UnsafeValueArrayFromGlibNone(unsafe.Pointer(cret))
-
-	return ret
-}
-
-// SortWithData wraps g_value_array_sort_with_data
-// 
-// The function takes the following parameters:
-// 
-// 	- compareFunc glib.CompareDataFunc: function to compare elements 
-// 
-// The function returns the following values:
-// 
-// 	- ret ValueArray 
-//
-// Sort @value_array using @compare_func to compare the elements according
-// to the semantics of #GCompareDataFunc.
-// 
-// The current implementation uses the same sorting algorithm as standard
-// C qsort() function.
-//
-// Deprecated: (since 2.32.0) Use #GArray and g_array_sort_with_data().
-func (valueArray *ValueArray) SortWithData(compareFunc glib.CompareDataFunc) ValueArray {
-	var carg0 *C.GValueArray     // in, none, converted
-	var carg1 C.GCompareDataFunc // callback, scope: call, closure: carg2
-	var carg2 C.gpointer         // implicit
-	var cret  *C.GValueArray     // return, none, converted
-
-	carg0 = (*C.GValueArray)(UnsafeValueArrayToGlibNone(valueArray))
-	carg1 = (*[0]byte)(C._gotk4_glib2_CompareDataFunc)
-	carg2 = C.gpointer(gbox.Assign(compareFunc))
-	defer gbox.Delete(uintptr(carg2))
-
-	cret = C.g_value_array_sort_with_data(carg0, carg1, carg2)
-	runtime.KeepAlive(valueArray)
-	runtime.KeepAlive(compareFunc)
-
-	var ret ValueArray
-
-	ret = UnsafeValueArrayFromGlibNone(unsafe.Pointer(cret))
-
-	return ret
-}
-
 // WeakRef wraps GWeakRef
 //
 // A structure containing a weak reference to a #GObject.
@@ -6849,6 +5227,19 @@ type weakRef struct {
 // UnsafeWeakRefFromGlibBorrow is used to convert raw C.GWeakRef pointers to go. This is used by the bindings internally.
 func UnsafeWeakRefFromGlibBorrow(p unsafe.Pointer) *WeakRef {
 	return &WeakRef{&weakRef{(*C.GWeakRef)(p)}}
+}
+
+// UnsafeWeakRefFromGlibNone is used to convert raw C.GWeakRef pointers to go while taking a reference. This is used by the bindings internally.
+func UnsafeWeakRefFromGlibNone(p unsafe.Pointer) *WeakRef {
+	// FIXME: this has no ref function, what should we do here?
+	wrapped := UnsafeWeakRefFromGlibBorrow(p)
+	runtime.SetFinalizer(
+		wrapped.weakRef,
+		func (intern *weakRef) {
+			C.free(unsafe.Pointer(intern.native))
+		},
+	)
+	return wrapped
 }
 
 // UnsafeWeakRefFromGlibFull is used to convert raw C.GWeakRef pointers to go while taking a reference. This is used by the bindings internally.

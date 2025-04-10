@@ -95,6 +95,8 @@ func infoFromAnyGir(girAny any) (string, gir.InfoAttrs, gir.InfoElements) {
 		return t.Name, attrs, elements
 	case gir.Constructor:
 		return t.Name, attrs, elements
+	case gir.CallableAttrs:
+		return t.Name, attrs, elements
 	case gir.Method:
 		return t.Name, attrs, elements
 	case gir.VirtualMethod:

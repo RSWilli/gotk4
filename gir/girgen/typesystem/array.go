@@ -102,12 +102,25 @@ func (e *env) getArrayType(arr *gir.Array) *Array {
 		return nil
 	}
 
-	if arr.CType == "gpointer" || arr.CType == "gconstpointer" || arr.CType == "void*" {
+	if arr.CType == "gpointer" || arr.CType == "gconstpointer" {
 		// this represents a bytes array, e.g. for g_bytes_get_data
 		return &Array{
 			GirName:         arr.Name,
 			CTypeOverride:   arr.CType,
 			CGoTypeOverride: "C." + arr.CType,
+			GoTypeOverride:  "[]byte",
+			FixedSize:       arr.FixedSize,
+			ZeroTerminated:  arr.IsZeroTerminated(),
+
+			Inner: CouldBeForeign[Type]{}, // no inner type
+		}
+	}
+	if arr.CType == "void*" {
+		// this represents a bytes array, e.g. for g_bytes_get_data
+		return &Array{
+			GirName:         arr.Name,
+			CTypeOverride:   arr.CType,
+			CGoTypeOverride: "unsafe.Pointer", // FIXME: this needs an import
 			GoTypeOverride:  "[]byte",
 			FixedSize:       arr.FixedSize,
 			ZeroTerminated:  arr.IsZeroTerminated(),
@@ -124,6 +137,20 @@ func (e *env) getArrayType(arr *gir.Array) *Array {
 			GirName:         arr.Name,
 			CTypeOverride:   arr.CType, // may contain "const"
 			CGoTypeOverride: "*C.gchar",
+			GoTypeOverride:  "string",
+			FixedSize:       arr.FixedSize,
+			ZeroTerminated:  arr.IsZeroTerminated(),
+
+			Inner: CouldBeForeign[Type]{}, // no inner type
+		}
+	}
+
+	if cleanedCtype == "char*" {
+		// this is a string where the length is somehow given
+		return &Array{
+			GirName:         arr.Name,
+			CTypeOverride:   arr.CType, // may contain "const"
+			CGoTypeOverride: "*C.char",
 			GoTypeOverride:  "string",
 			FixedSize:       arr.FixedSize,
 			ZeroTerminated:  arr.IsZeroTerminated(),
@@ -160,10 +187,14 @@ func (e *env) getArrayType(arr *gir.Array) *Array {
 	// 	e.logger.Warn("array pointer count does not match inner type", "name", arr.Type.Name, "ctype", arr.CType)
 	// }
 
+	cgoType := "C." + trimCTypePointers(cleanCType(arr.CType))
+	cGopointers := CountCTypePointers(arr.CType)
+
 	array := &Array{
-		GirName:       arr.Name,
-		CTypeOverride: arr.CType,
-		InnerPointers: innerpointers,
+		GirName:         arr.Name,
+		CTypeOverride:   arr.CType,
+		CGoTypeOverride: GetPointers(cGopointers) + cgoType,
+		InnerPointers:   innerpointers,
 		Inner: CouldBeForeign[Type]{
 			Namespace: ns,
 			Type:      inner,

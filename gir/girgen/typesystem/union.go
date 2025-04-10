@@ -45,19 +45,19 @@ func DeclareUnion(e *env, v gir.Union) *Union {
 
 func (u *Union) declareNested(e *env) resolvedState {
 	for _, v := range u.gir.Functions {
-		if t := DeclareFunction(e, u, v); t != nil {
+		if t := DeclarePrefixedFunction(e, u, v.CallableAttrs); t != nil {
 			u.Functions = append(u.Functions, t)
 		}
 	}
 
 	for _, v := range u.gir.Methods {
-		if t := NewMethod(e, u, v); t != nil {
+		if t := DeclareMethod(e, u, v); t != nil {
 			u.Methods = append(u.Methods, t)
 		}
 	}
 
 	for _, v := range u.gir.Constructors {
-		if t := DeclareConstructor(e, u, v); t != nil {
+		if t := DeclarePrefixedFunction(e, u, v.CallableAttrs); t != nil {
 			u.Constructors = append(u.Constructors, t)
 		}
 	}

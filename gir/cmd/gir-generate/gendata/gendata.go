@@ -151,19 +151,21 @@ var Main = genmain.Data{
 			},
 			"Gio-2": {
 				ManualTypes: []typesystem.Type{
-					&typesystem.Class{
+					&typesystem.Record{
 						BaseType: typesystem.BaseType{
 							GirName: "Cancellable",
-							CGoTyp:  "C.Cancellable",
+							CGoTyp:  "C.GCancellable",
 							CTyp:    "GCancellable",
-							GoTyp:   "Cancellable",
+							GoTyp:   "context.Context",
+
+							GoImport: "context",
 						},
 						BaseConversions: typesystem.BaseConversions{
-							FromGlibBorrowFunction: "UnsafeCancellableFromGlibBorrow",
-							FromGlibFullFunction:   "UnsafeCancellableFromGlibFull",
-							FromGlibNoneFunction:   "UnsafeCancellableFromGlibNone",
-							ToGlibNoneFunction:     "UnsafeCancellableToGlibNone",
-							ToGlibFullFunction:     "UnsafeCancellableToGlibFull",
+							FromGlibBorrowFunction: "",
+							FromGlibFullFunction:   "",
+							FromGlibNoneFunction:   "NewCancellableContext",
+							ToGlibNoneFunction:     "UnsafeGCancellableToGlibNone",
+							ToGlibFullFunction:     "",
 						},
 					},
 				},
@@ -172,9 +174,15 @@ var Main = genmain.Data{
 					typesystem.IgnoreByRegex(".*[Uu]nix.*"),
 					typesystem.IgnoreByRegex(".*Subprocess.*"),
 
+					// These are not found on all systems:
 					typesystem.IgnoreByFileNameSubstring("gsettingsbackend."),
+					typesystem.IgnoreByFileNameSubstring("gdesktopappinfo."),
+					typesystem.IgnoreByFileNameSubstring("gfiledescriptorbased."),
+					typesystem.IgnoreByFileNameSubstring("gthreadedresolver."),
 
 					typesystem.IgnoreMatching("networking_init"),
+					
+					typesystem.IgnoreMatching("DataInputStream.read_byte"), // collides with BufferedInputStream.read_byte
 				},
 			},
 			"GObject-2": {
@@ -423,6 +431,10 @@ var Preprocessors = []Preprocessor{
 	RenameCallable("Atk-1.Action.set_description", "set_action_description"),
 	RenameCallable("Atk-1.Text.add_selection", "add_text_selection"),
 	RenameCallable("Atk-1.Text.remove_selection", "remove_text_selection"),
+
+	// Collide in other namespaces (e.g. Gio) when implementing TypePlugin and TypeModule
+	RenameCallable("GObject-2.TypePlugin.use", "use_plugin"),
+	RenameCallable("GObject-2.TypePlugin.unuse", "unuse_plugin"),
 }
 
 // FIXME: override or manually implement this

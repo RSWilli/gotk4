@@ -4,6 +4,12 @@ package gtk
 
 import (
 	"github.com/diamondburned/gotk4/pkg/core/gbox"
+	"github.com/diamondburned/gotk4/pkg/gdk/v4"
+	"unsafe"
+	"github.com/diamondburned/gotk4/pkg/pango"
+	"github.com/diamondburned/gotk4/pkg/glib/v2"
+	"github.com/diamondburned/gotk4/pkg/gio/v2"
+	"github.com/diamondburned/gotk4/pkg/gobject/v2"
 )
 
 // #include <gtk/gtk.h>
@@ -11,441 +17,989 @@ import "C"
 
 //export _gotk4_gtk4_AssistantPageFunc
 func _gotk4_gtk4_AssistantPageFunc(carg1 C.int, carg2 C.gpointer) (cret C.int) {
+	var fn AssistantPageFunc
+	{
+		v := gbox.Get(uintptr(carg2))
+		if v == nil {
+			panic(`callback not found`)
+		}
+		fn = v.(AssistantPageFunc)
+	}
 
+	var currentPage int // in, none, casted
+	var goret       int // return, none, casted
 
-	ret := fn(currentPage)
+	currentPage = int(carg1)
 
+	goret = fn(currentPage)
 
+	cret = C.int(goret)
 
 	return cret
 }
 
 //export _gotk4_gtk4_CellAllocCallback
 func _gotk4_gtk4_CellAllocCallback(carg1 *C.GtkCellRenderer, carg2 *C.GdkRectangle, carg3 *C.GdkRectangle, carg4 C.gpointer) (cret C.gboolean) {
+	var fn CellAllocCallback
+	{
+		v := gbox.Get(uintptr(carg4))
+		if v == nil {
+			panic(`callback not found`)
+		}
+		fn = v.(CellAllocCallback)
+	}
 
+	var renderer       CellRenderer   // in, none, converted
+	var cellArea       *gdk.Rectangle // in, none, converted
+	var cellBackground *gdk.Rectangle // in, none, converted
+	var goret          bool           // return
 
-	ret := fn(renderer, cellArea, cellBackground)
+	renderer = UnsafeCellRendererFromGlibNone(unsafe.Pointer(carg1))
+	cellArea = gdk.UnsafeRectangleFromGlibNone(unsafe.Pointer(carg2))
+	cellBackground = gdk.UnsafeRectangleFromGlibNone(unsafe.Pointer(carg3))
 
+	goret = fn(renderer, cellArea, cellBackground)
 
+	if goret {
+		cret = C.TRUE
+	}
 
 	return cret
 }
 
 //export _gotk4_gtk4_CellCallback
 func _gotk4_gtk4_CellCallback(carg1 *C.GtkCellRenderer, carg2 C.gpointer) (cret C.gboolean) {
+	var fn CellCallback
+	{
+		v := gbox.Get(uintptr(carg2))
+		if v == nil {
+			panic(`callback not found`)
+		}
+		fn = v.(CellCallback)
+	}
 
+	var renderer CellRenderer // in, none, converted
+	var goret    bool         // return
 
-	ret := fn(renderer)
+	renderer = UnsafeCellRendererFromGlibNone(unsafe.Pointer(carg1))
 
+	goret = fn(renderer)
 
+	if goret {
+		cret = C.TRUE
+	}
 
 	return cret
 }
 
 //export _gotk4_gtk4_CellLayoutDataFunc
-func _gotk4_gtk4_CellLayoutDataFunc(carg1 *C.GtkCellLayout, carg2 *C.GtkCellRenderer, carg3 *C.GtkTreeModel, carg4 *C.GtkTreeIter, carg5 C.gpointer) (cret C.void) {
+func _gotk4_gtk4_CellLayoutDataFunc(carg1 *C.GtkCellLayout, carg2 *C.GtkCellRenderer, carg3 *C.GtkTreeModel, carg4 *C.GtkTreeIter, carg5 C.gpointer) {
+	var fn CellLayoutDataFunc
+	{
+		v := gbox.Get(uintptr(carg5))
+		if v == nil {
+			panic(`callback not found`)
+		}
+		fn = v.(CellLayoutDataFunc)
+	}
 
+	var cellLayout CellLayout   // in, none, converted
+	var cell       CellRenderer // in, none, converted
+	var treeModel  TreeModel    // in, none, converted
+	var iter       *TreeIter    // in, none, converted
+
+	cellLayout = UnsafeCellLayoutFromGlibNone(unsafe.Pointer(carg1))
+	cell = UnsafeCellRendererFromGlibNone(unsafe.Pointer(carg2))
+	treeModel = UnsafeTreeModelFromGlibNone(unsafe.Pointer(carg3))
+	iter = UnsafeTreeIterFromGlibNone(unsafe.Pointer(carg4))
 
 	fn(cellLayout, cell, treeModel, iter)
-
-
-
-	return cret
 }
 
-//export _gotk4_gtk4_CustomAllocateFunc
-func _gotk4_gtk4_CustomAllocateFunc(carg1 *C.GtkWidget, carg2 C.int, carg3 C.int, carg4 C.int) (cret C.void) {
+//export _gotk4_gtk4_CustomFilterFunc
+func _gotk4_gtk4_CustomFilterFunc(carg1 C.gpointer, carg2 C.gpointer) (cret C.gboolean) {
+	var fn CustomFilterFunc
+	{
+		v := gbox.Get(uintptr(carg2))
+		if v == nil {
+			panic(`callback not found`)
+		}
+		fn = v.(CustomFilterFunc)
+	}
 
+	var item  unsafe.Pointer // in, none, casted
+	var goret bool           // return
 
-	fn(widget, width, height, baseline)
+	item = unsafe.Pointer(carg1)
 
+	goret = fn(item)
 
-
-	return cret
-}
-
-//export _gotk4_gtk4_CustomMeasureFunc
-func _gotk4_gtk4_CustomMeasureFunc(carg1 *C.GtkWidget, carg2 C.GtkOrientation, carg3 C.int, carg4 C.int, carg5 C.int, carg6 C.int, carg7 C.int) (cret C.void) {
-
-
-	minimum, natural, minimumBaseline, naturalBaseline := fn(widget, orientation, forSize)
-
-
-
-	return cret
-}
-
-//export _gotk4_gtk4_CustomRequestModeFunc
-func _gotk4_gtk4_CustomRequestModeFunc(carg1 *C.GtkWidget) (cret C.GtkSizeRequestMode) {
-
-
-	ret := fn(widget)
-
-
+	if goret {
+		cret = C.TRUE
+	}
 
 	return cret
 }
 
 //export _gotk4_gtk4_EntryCompletionMatchFunc
 func _gotk4_gtk4_EntryCompletionMatchFunc(carg1 *C.GtkEntryCompletion, carg2 *C.gchar, carg3 *C.GtkTreeIter, carg4 C.gpointer) (cret C.gboolean) {
+	var fn EntryCompletionMatchFunc
+	{
+		v := gbox.Get(uintptr(carg4))
+		if v == nil {
+			panic(`callback not found`)
+		}
+		fn = v.(EntryCompletionMatchFunc)
+	}
 
+	var completion EntryCompletion // in, none, converted
+	var key        string          // in, none, string
+	var iter       *TreeIter       // in, none, converted
+	var goret      bool            // return
 
-	ret := fn(completion, key, iter)
+	completion = UnsafeEntryCompletionFromGlibNone(unsafe.Pointer(carg1))
+	key = C.GoString((*C.gchar)(unsafe.Pointer(carg2)))
+	iter = UnsafeTreeIterFromGlibNone(unsafe.Pointer(carg3))
 
+	goret = fn(completion, key, iter)
 
+	if goret {
+		cret = C.TRUE
+	}
 
 	return cret
 }
 
 //export _gotk4_gtk4_ExpressionNotify
-func _gotk4_gtk4_ExpressionNotify(carg1 C.gpointer) (cret C.void) {
-
+func _gotk4_gtk4_ExpressionNotify(carg1 C.gpointer) {
+	var fn ExpressionNotify
+	{
+		v := gbox.Get(uintptr(carg1))
+		if v == nil {
+			panic(`callback not found`)
+		}
+		fn = v.(ExpressionNotify)
+	}
 
 	fn()
+}
 
+//export _gotk4_gtk4_FlowBoxCreateWidgetFunc
+func _gotk4_gtk4_FlowBoxCreateWidgetFunc(carg1 C.gpointer, carg2 C.gpointer) (cret *C.GtkWidget) {
+	var fn FlowBoxCreateWidgetFunc
+	{
+		v := gbox.Get(uintptr(carg2))
+		if v == nil {
+			panic(`callback not found`)
+		}
+		fn = v.(FlowBoxCreateWidgetFunc)
+	}
 
+	var item  unsafe.Pointer // in, none, casted
+	var goret Widget         // return, full, converted
+
+	item = unsafe.Pointer(carg1)
+
+	goret = fn(item)
+
+	cret = (*C.GtkWidget)(UnsafeWidgetToGlibFull(goret))
 
 	return cret
 }
 
 //export _gotk4_gtk4_FontFilterFunc
 func _gotk4_gtk4_FontFilterFunc(carg1 *C.PangoFontFamily, carg2 *C.PangoFontFace, carg3 C.gpointer) (cret C.gboolean) {
+	var fn FontFilterFunc
+	{
+		v := gbox.Get(uintptr(carg3))
+		if v == nil {
+			panic(`callback not found`)
+		}
+		fn = v.(FontFilterFunc)
+	}
 
+	var family pango.FontFamily // in, none, converted
+	var face   pango.FontFace   // in, none, converted
+	var goret  bool             // return
 
-	ret := fn(family, face)
+	family = pango.UnsafeFontFamilyFromGlibNone(unsafe.Pointer(carg1))
+	face = pango.UnsafeFontFaceFromGlibNone(unsafe.Pointer(carg2))
 
+	goret = fn(family, face)
 
+	if goret {
+		cret = C.TRUE
+	}
+
+	return cret
+}
+
+//export _gotk4_gtk4_ListBoxCreateWidgetFunc
+func _gotk4_gtk4_ListBoxCreateWidgetFunc(carg1 C.gpointer, carg2 C.gpointer) (cret *C.GtkWidget) {
+	var fn ListBoxCreateWidgetFunc
+	{
+		v := gbox.Get(uintptr(carg2))
+		if v == nil {
+			panic(`callback not found`)
+		}
+		fn = v.(ListBoxCreateWidgetFunc)
+	}
+
+	var item  unsafe.Pointer // in, none, casted
+	var goret Widget         // return, full, converted
+
+	item = unsafe.Pointer(carg1)
+
+	goret = fn(item)
+
+	cret = (*C.GtkWidget)(UnsafeWidgetToGlibFull(goret))
+
+	return cret
+}
+
+//export _gotk4_gtk4_MapListModelMapFunc
+func _gotk4_gtk4_MapListModelMapFunc(carg1 C.gpointer, carg2 C.gpointer) (cret C.gpointer) {
+	var fn MapListModelMapFunc
+	{
+		v := gbox.Get(uintptr(carg2))
+		if v == nil {
+			panic(`callback not found`)
+		}
+		fn = v.(MapListModelMapFunc)
+	}
+
+	var item  unsafe.Pointer // in, full, casted
+	var goret unsafe.Pointer // return, full, casted
+
+	item = unsafe.Pointer(carg1)
+
+	goret = fn(item)
+
+	cret = C.gpointer(goret)
 
 	return cret
 }
 
 //export _gotk4_gtk4_PageSetupDoneFunc
-func _gotk4_gtk4_PageSetupDoneFunc(carg1 *C.GtkPageSetup, carg2 C.gpointer) (cret C.void) {
+func _gotk4_gtk4_PageSetupDoneFunc(carg1 *C.GtkPageSetup, carg2 C.gpointer) {
+	var fn PageSetupDoneFunc
+	{
+		v := gbox.Get(uintptr(carg2))
+		if v == nil {
+			panic(`callback not found`)
+		}
+		fn = v.(PageSetupDoneFunc)
+	}
 
+	var pageSetup PageSetup // in, none, converted
+
+	pageSetup = UnsafePageSetupFromGlibNone(unsafe.Pointer(carg1))
 
 	fn(pageSetup)
-
-
-
-	return cret
 }
 
 //export _gotk4_gtk4_PrintJobCompleteFunc
-func _gotk4_gtk4_PrintJobCompleteFunc(carg1 *C.GtkPrintJob, carg2 C.gpointer, carg3 *C.GError) (cret C.void) {
+func _gotk4_gtk4_PrintJobCompleteFunc(carg1 *C.GtkPrintJob, carg2 C.gpointer, carg3 *C.GError) {
+	var fn PrintJobCompleteFunc
+	{
+		v := gbox.Get(uintptr(carg2))
+		if v == nil {
+			panic(`callback not found`)
+		}
+		fn = v.(PrintJobCompleteFunc)
+	}
 
+	var printJob PrintJob // in, none, converted
+	var err      error    // in, none, converted
+
+	printJob = UnsafePrintJobFromGlibNone(unsafe.Pointer(carg1))
+	err = glib.UnsafeErrorFromGlibNone(unsafe.Pointer(carg3))
 
 	fn(printJob, err)
-
-
-
-	return cret
 }
 
 //export _gotk4_gtk4_PrintSettingsFunc
-func _gotk4_gtk4_PrintSettingsFunc(carg1 *C.gchar, carg2 *C.gchar, carg3 C.gpointer) (cret C.void) {
+func _gotk4_gtk4_PrintSettingsFunc(carg1 *C.gchar, carg2 *C.gchar, carg3 C.gpointer) {
+	var fn PrintSettingsFunc
+	{
+		v := gbox.Get(uintptr(carg3))
+		if v == nil {
+			panic(`callback not found`)
+		}
+		fn = v.(PrintSettingsFunc)
+	}
 
+	var key   string // in, none, string
+	var value string // in, none, string
+
+	key = C.GoString((*C.gchar)(unsafe.Pointer(carg1)))
+	value = C.GoString((*C.gchar)(unsafe.Pointer(carg2)))
 
 	fn(key, value)
-
-
-
-	return cret
 }
 
 //export _gotk4_gtk4_PrinterFunc
 func _gotk4_gtk4_PrinterFunc(carg1 *C.GtkPrinter, carg2 C.gpointer) (cret C.gboolean) {
+	var fn PrinterFunc
+	{
+		v := gbox.Get(uintptr(carg2))
+		if v == nil {
+			panic(`callback not found`)
+		}
+		fn = v.(PrinterFunc)
+	}
 
+	var printer Printer // in, none, converted
+	var goret   bool    // return
 
-	ret := fn(printer)
+	printer = UnsafePrinterFromGlibNone(unsafe.Pointer(carg1))
 
+	goret = fn(printer)
 
-
-	return cret
-}
-
-//export _gotk4_gtk4_ShortcutFunc
-func _gotk4_gtk4_ShortcutFunc(carg1 *C.GtkWidget, carg2 *C.GVariant, carg3 C.gpointer) (cret C.gboolean) {
-
-
-	ret := fn(widget, args)
-
-
+	if goret {
+		cret = C.TRUE
+	}
 
 	return cret
 }
 
 //export _gotk4_gtk4_TextBufferCommitNotify
-func _gotk4_gtk4_TextBufferCommitNotify(carg1 *C.GtkTextBuffer, carg2 C.GtkTextBufferNotifyFlags, carg3 C.guint, carg4 C.guint, carg5 C.gpointer) (cret C.void) {
+func _gotk4_gtk4_TextBufferCommitNotify(carg1 *C.GtkTextBuffer, carg2 C.GtkTextBufferNotifyFlags, carg3 C.guint, carg4 C.guint, carg5 C.gpointer) {
+	var fn TextBufferCommitNotify
+	{
+		v := gbox.Get(uintptr(carg5))
+		if v == nil {
+			panic(`callback not found`)
+		}
+		fn = v.(TextBufferCommitNotify)
+	}
 
+	var buffer   TextBuffer            // in, none, converted
+	var flags    TextBufferNotifyFlags // in, none, casted
+	var position uint                  // in, none, casted
+	var length   uint                  // in, none, casted
+
+	buffer = UnsafeTextBufferFromGlibNone(unsafe.Pointer(carg1))
+	flags = TextBufferNotifyFlags(carg2)
+	position = uint(carg3)
+	length = uint(carg4)
 
 	fn(buffer, flags, position, length)
-
-
-
-	return cret
 }
 
 //export _gotk4_gtk4_TextCharPredicate
 func _gotk4_gtk4_TextCharPredicate(carg1 C.gunichar, carg2 C.gpointer) (cret C.gboolean) {
+	var fn TextCharPredicate
+	{
+		v := gbox.Get(uintptr(carg2))
+		if v == nil {
+			panic(`callback not found`)
+		}
+		fn = v.(TextCharPredicate)
+	}
 
+	var ch    uint32 // in, none, casted
+	var goret bool   // return
 
-	ret := fn(ch)
+	ch = uint32(carg1)
 
+	goret = fn(ch)
 
+	if goret {
+		cret = C.TRUE
+	}
 
 	return cret
 }
 
 //export _gotk4_gtk4_TextTagTableForEach
-func _gotk4_gtk4_TextTagTableForEach(carg1 *C.GtkTextTag, carg2 C.gpointer) (cret C.void) {
+func _gotk4_gtk4_TextTagTableForEach(carg1 *C.GtkTextTag, carg2 C.gpointer) {
+	var fn TextTagTableForEach
+	{
+		v := gbox.Get(uintptr(carg2))
+		if v == nil {
+			panic(`callback not found`)
+		}
+		fn = v.(TextTagTableForEach)
+	}
 
+	var tag TextTag // in, none, converted
+
+	tag = UnsafeTextTagFromGlibNone(unsafe.Pointer(carg1))
 
 	fn(tag)
-
-
-
-	return cret
 }
 
 //export _gotk4_gtk4_TickCallback
 func _gotk4_gtk4_TickCallback(carg1 *C.GtkWidget, carg2 *C.GdkFrameClock, carg3 C.gpointer) (cret C.gboolean) {
+	var fn TickCallback
+	{
+		v := gbox.Get(uintptr(carg3))
+		if v == nil {
+			panic(`callback not found`)
+		}
+		fn = v.(TickCallback)
+	}
 
+	var widget     Widget         // in, none, converted
+	var frameClock gdk.FrameClock // in, none, converted
+	var goret      bool           // return
 
-	ret := fn(widget, frameClock)
+	widget = UnsafeWidgetFromGlibNone(unsafe.Pointer(carg1))
+	frameClock = gdk.UnsafeFrameClockFromGlibNone(unsafe.Pointer(carg2))
 
+	goret = fn(widget, frameClock)
 
+	if goret {
+		cret = C.TRUE
+	}
 
 	return cret
 }
 
 //export _gotk4_gtk4_TreeCellDataFunc
-func _gotk4_gtk4_TreeCellDataFunc(carg1 *C.GtkTreeViewColumn, carg2 *C.GtkCellRenderer, carg3 *C.GtkTreeModel, carg4 *C.GtkTreeIter, carg5 C.gpointer) (cret C.void) {
+func _gotk4_gtk4_TreeCellDataFunc(carg1 *C.GtkTreeViewColumn, carg2 *C.GtkCellRenderer, carg3 *C.GtkTreeModel, carg4 *C.GtkTreeIter, carg5 C.gpointer) {
+	var fn TreeCellDataFunc
+	{
+		v := gbox.Get(uintptr(carg5))
+		if v == nil {
+			panic(`callback not found`)
+		}
+		fn = v.(TreeCellDataFunc)
+	}
 
+	var treeColumn TreeViewColumn // in, none, converted
+	var cell       CellRenderer   // in, none, converted
+	var treeModel  TreeModel      // in, none, converted
+	var iter       *TreeIter      // in, none, converted
+
+	treeColumn = UnsafeTreeViewColumnFromGlibNone(unsafe.Pointer(carg1))
+	cell = UnsafeCellRendererFromGlibNone(unsafe.Pointer(carg2))
+	treeModel = UnsafeTreeModelFromGlibNone(unsafe.Pointer(carg3))
+	iter = UnsafeTreeIterFromGlibNone(unsafe.Pointer(carg4))
 
 	fn(treeColumn, cell, treeModel, iter)
-
-
-
-	return cret
 }
 
 //export _gotk4_gtk4_TreeIterCompareFunc
 func _gotk4_gtk4_TreeIterCompareFunc(carg1 *C.GtkTreeModel, carg2 *C.GtkTreeIter, carg3 *C.GtkTreeIter, carg4 C.gpointer) (cret C.int) {
+	var fn TreeIterCompareFunc
+	{
+		v := gbox.Get(uintptr(carg4))
+		if v == nil {
+			panic(`callback not found`)
+		}
+		fn = v.(TreeIterCompareFunc)
+	}
 
+	var model TreeModel // in, none, converted
+	var a     *TreeIter // in, none, converted
+	var b     *TreeIter // in, none, converted
+	var goret int       // return, none, casted
 
-	ret := fn(model, a, b)
+	model = UnsafeTreeModelFromGlibNone(unsafe.Pointer(carg1))
+	a = UnsafeTreeIterFromGlibNone(unsafe.Pointer(carg2))
+	b = UnsafeTreeIterFromGlibNone(unsafe.Pointer(carg3))
 
+	goret = fn(model, a, b)
 
+	cret = C.int(goret)
 
 	return cret
 }
 
+//export _gotk4_gtk4_TreeListModelCreateModelFunc
+func _gotk4_gtk4_TreeListModelCreateModelFunc(carg1 C.gpointer, carg2 C.gpointer) (cret *C.GListModel) {
+	var fn TreeListModelCreateModelFunc
+	{
+		v := gbox.Get(uintptr(carg2))
+		if v == nil {
+			panic(`callback not found`)
+		}
+		fn = v.(TreeListModelCreateModelFunc)
+	}
+
+	var item  unsafe.Pointer // in, none, casted
+	var goret gio.ListModel  // return, full, converted
+
+	item = unsafe.Pointer(carg1)
+
+	goret = fn(item)
+
+	cret = (*C.GListModel)(gio.UnsafeListModelToGlibFull(goret))
+
+	return cret
+}
+
+//export _gotk4_gtk4_TreeModelFilterModifyFunc
+func _gotk4_gtk4_TreeModelFilterModifyFunc(carg1 *C.GtkTreeModel, carg2 *C.GtkTreeIter, carg3 *C.GValue, carg4 C.int, carg5 C.gpointer) {
+	var fn TreeModelFilterModifyFunc
+	{
+		v := gbox.Get(uintptr(carg5))
+		if v == nil {
+			panic(`callback not found`)
+		}
+		fn = v.(TreeModelFilterModifyFunc)
+	}
+
+	var model  TreeModel     // in, none, converted
+	var iter   *TreeIter     // in, none, converted
+	var column int           // in, none, casted
+	var value  gobject.Value // out, transfer: none, C Pointers: 0, Name: Value, caller-allocates
+
+	model = UnsafeTreeModelFromGlibNone(unsafe.Pointer(carg1))
+	iter = UnsafeTreeIterFromGlibNone(unsafe.Pointer(carg2))
+	column = int(carg4)
+
+	value = fn(model, iter, column)
+
+	_ = value
+	_ = carg3
+	panic("unimplemented conversion of gobject.Value (GValue)")
+}
+
 //export _gotk4_gtk4_TreeModelFilterVisibleFunc
 func _gotk4_gtk4_TreeModelFilterVisibleFunc(carg1 *C.GtkTreeModel, carg2 *C.GtkTreeIter, carg3 C.gpointer) (cret C.gboolean) {
+	var fn TreeModelFilterVisibleFunc
+	{
+		v := gbox.Get(uintptr(carg3))
+		if v == nil {
+			panic(`callback not found`)
+		}
+		fn = v.(TreeModelFilterVisibleFunc)
+	}
 
+	var model TreeModel // in, none, converted
+	var iter  *TreeIter // in, none, converted
+	var goret bool      // return
 
-	ret := fn(model, iter)
+	model = UnsafeTreeModelFromGlibNone(unsafe.Pointer(carg1))
+	iter = UnsafeTreeIterFromGlibNone(unsafe.Pointer(carg2))
 
+	goret = fn(model, iter)
 
+	if goret {
+		cret = C.TRUE
+	}
 
 	return cret
 }
 
 //export _gotk4_gtk4_TreeModelForEachFunc
 func _gotk4_gtk4_TreeModelForEachFunc(carg1 *C.GtkTreeModel, carg2 *C.GtkTreePath, carg3 *C.GtkTreeIter, carg4 C.gpointer) (cret C.gboolean) {
+	var fn TreeModelForEachFunc
+	{
+		v := gbox.Get(uintptr(carg4))
+		if v == nil {
+			panic(`callback not found`)
+		}
+		fn = v.(TreeModelForEachFunc)
+	}
 
+	var model TreeModel // in, none, converted
+	var path  *TreePath // in, none, converted
+	var iter  *TreeIter // in, none, converted
+	var goret bool      // return
 
-	ret := fn(model, path, iter)
+	model = UnsafeTreeModelFromGlibNone(unsafe.Pointer(carg1))
+	path = UnsafeTreePathFromGlibNone(unsafe.Pointer(carg2))
+	iter = UnsafeTreeIterFromGlibNone(unsafe.Pointer(carg3))
 
+	goret = fn(model, path, iter)
 
+	if goret {
+		cret = C.TRUE
+	}
 
 	return cret
 }
 
 //export _gotk4_gtk4_TreeSelectionForEachFunc
-func _gotk4_gtk4_TreeSelectionForEachFunc(carg1 *C.GtkTreeModel, carg2 *C.GtkTreePath, carg3 *C.GtkTreeIter, carg4 C.gpointer) (cret C.void) {
+func _gotk4_gtk4_TreeSelectionForEachFunc(carg1 *C.GtkTreeModel, carg2 *C.GtkTreePath, carg3 *C.GtkTreeIter, carg4 C.gpointer) {
+	var fn TreeSelectionForEachFunc
+	{
+		v := gbox.Get(uintptr(carg4))
+		if v == nil {
+			panic(`callback not found`)
+		}
+		fn = v.(TreeSelectionForEachFunc)
+	}
 
+	var model TreeModel // in, none, converted
+	var path  *TreePath // in, none, converted
+	var iter  *TreeIter // in, none, converted
+
+	model = UnsafeTreeModelFromGlibNone(unsafe.Pointer(carg1))
+	path = UnsafeTreePathFromGlibNone(unsafe.Pointer(carg2))
+	iter = UnsafeTreeIterFromGlibNone(unsafe.Pointer(carg3))
 
 	fn(model, path, iter)
-
-
-
-	return cret
 }
 
 //export _gotk4_gtk4_TreeSelectionFunc
 func _gotk4_gtk4_TreeSelectionFunc(carg1 *C.GtkTreeSelection, carg2 *C.GtkTreeModel, carg3 *C.GtkTreePath, carg4 C.gboolean, carg5 C.gpointer) (cret C.gboolean) {
+	var fn TreeSelectionFunc
+	{
+		v := gbox.Get(uintptr(carg5))
+		if v == nil {
+			panic(`callback not found`)
+		}
+		fn = v.(TreeSelectionFunc)
+	}
 
+	var selection             TreeSelection // in, none, converted
+	var model                 TreeModel     // in, none, converted
+	var path                  *TreePath     // in, none, converted
+	var pathCurrentlySelected bool          // in
+	var goret                 bool          // return
 
-	ret := fn(selection, model, path, pathCurrentlySelected)
+	selection = UnsafeTreeSelectionFromGlibNone(unsafe.Pointer(carg1))
+	model = UnsafeTreeModelFromGlibNone(unsafe.Pointer(carg2))
+	path = UnsafeTreePathFromGlibNone(unsafe.Pointer(carg3))
+	if carg4 != 0 {
+		pathCurrentlySelected = true
+	}
 
+	goret = fn(selection, model, path, pathCurrentlySelected)
 
+	if goret {
+		cret = C.TRUE
+	}
 
 	return cret
 }
 
 //export _gotk4_gtk4_TreeViewRowSeparatorFunc
 func _gotk4_gtk4_TreeViewRowSeparatorFunc(carg1 *C.GtkTreeModel, carg2 *C.GtkTreeIter, carg3 C.gpointer) (cret C.gboolean) {
+	var fn TreeViewRowSeparatorFunc
+	{
+		v := gbox.Get(uintptr(carg3))
+		if v == nil {
+			panic(`callback not found`)
+		}
+		fn = v.(TreeViewRowSeparatorFunc)
+	}
 
+	var model TreeModel // in, none, converted
+	var iter  *TreeIter // in, none, converted
+	var goret bool      // return
 
-	ret := fn(model, iter)
+	model = UnsafeTreeModelFromGlibNone(unsafe.Pointer(carg1))
+	iter = UnsafeTreeIterFromGlibNone(unsafe.Pointer(carg2))
 
+	goret = fn(model, iter)
 
+	if goret {
+		cret = C.TRUE
+	}
 
 	return cret
 }
 
 //export _gotk4_gtk4_TreeViewSearchEqualFunc
 func _gotk4_gtk4_TreeViewSearchEqualFunc(carg1 *C.GtkTreeModel, carg2 C.int, carg3 *C.gchar, carg4 *C.GtkTreeIter, carg5 C.gpointer) (cret C.gboolean) {
+	var fn TreeViewSearchEqualFunc
+	{
+		v := gbox.Get(uintptr(carg5))
+		if v == nil {
+			panic(`callback not found`)
+		}
+		fn = v.(TreeViewSearchEqualFunc)
+	}
 
+	var model  TreeModel // in, none, converted
+	var column int       // in, none, casted
+	var key    string    // in, none, string
+	var iter   *TreeIter // in, none, converted
+	var goret  bool      // return
 
-	ret := fn(model, column, key, iter)
+	model = UnsafeTreeModelFromGlibNone(unsafe.Pointer(carg1))
+	column = int(carg2)
+	key = C.GoString((*C.gchar)(unsafe.Pointer(carg3)))
+	iter = UnsafeTreeIterFromGlibNone(unsafe.Pointer(carg4))
 
+	goret = fn(model, column, key, iter)
 
-
-	return cret
-}
-
-//export _gotk4_gtk4_WidgetActionActivateFunc
-func _gotk4_gtk4_WidgetActionActivateFunc(carg1 *C.GtkWidget, carg2 *C.gchar, carg3 *C.GVariant) (cret C.void) {
-
-
-	fn(widget, actionName, parameter)
-
-
+	if goret {
+		cret = C.TRUE
+	}
 
 	return cret
 }
 
 //export _gotk4_gtk4_FlowBoxFilterFunc
 func _gotk4_gtk4_FlowBoxFilterFunc(carg1 *C.GtkFlowBoxChild, carg2 C.gpointer) (cret C.gboolean) {
+	var fn FlowBoxFilterFunc
+	{
+		v := gbox.Get(uintptr(carg2))
+		if v == nil {
+			panic(`callback not found`)
+		}
+		fn = v.(FlowBoxFilterFunc)
+	}
 
+	var child FlowBoxChild // in, none, converted
+	var goret bool         // return
 
-	ret := fn(child)
+	child = UnsafeFlowBoxChildFromGlibNone(unsafe.Pointer(carg1))
 
+	goret = fn(child)
 
+	if goret {
+		cret = C.TRUE
+	}
 
 	return cret
 }
 
 //export _gotk4_gtk4_FlowBoxForEachFunc
-func _gotk4_gtk4_FlowBoxForEachFunc(carg1 *C.GtkFlowBox, carg2 *C.GtkFlowBoxChild, carg3 C.gpointer) (cret C.void) {
+func _gotk4_gtk4_FlowBoxForEachFunc(carg1 *C.GtkFlowBox, carg2 *C.GtkFlowBoxChild, carg3 C.gpointer) {
+	var fn FlowBoxForEachFunc
+	{
+		v := gbox.Get(uintptr(carg3))
+		if v == nil {
+			panic(`callback not found`)
+		}
+		fn = v.(FlowBoxForEachFunc)
+	}
 
+	var box   FlowBox      // in, none, converted
+	var child FlowBoxChild // in, none, converted
+
+	box = UnsafeFlowBoxFromGlibNone(unsafe.Pointer(carg1))
+	child = UnsafeFlowBoxChildFromGlibNone(unsafe.Pointer(carg2))
 
 	fn(box, child)
-
-
-
-	return cret
 }
 
 //export _gotk4_gtk4_FlowBoxSortFunc
 func _gotk4_gtk4_FlowBoxSortFunc(carg1 *C.GtkFlowBoxChild, carg2 *C.GtkFlowBoxChild, carg3 C.gpointer) (cret C.int) {
+	var fn FlowBoxSortFunc
+	{
+		v := gbox.Get(uintptr(carg3))
+		if v == nil {
+			panic(`callback not found`)
+		}
+		fn = v.(FlowBoxSortFunc)
+	}
 
+	var child1 FlowBoxChild // in, none, converted
+	var child2 FlowBoxChild // in, none, converted
+	var goret  int          // return, none, casted
 
-	ret := fn(child1, child2)
+	child1 = UnsafeFlowBoxChildFromGlibNone(unsafe.Pointer(carg1))
+	child2 = UnsafeFlowBoxChildFromGlibNone(unsafe.Pointer(carg2))
 
+	goret = fn(child1, child2)
 
+	cret = C.int(goret)
 
 	return cret
 }
 
 //export _gotk4_gtk4_IconViewForEachFunc
-func _gotk4_gtk4_IconViewForEachFunc(carg1 *C.GtkIconView, carg2 *C.GtkTreePath, carg3 C.gpointer) (cret C.void) {
+func _gotk4_gtk4_IconViewForEachFunc(carg1 *C.GtkIconView, carg2 *C.GtkTreePath, carg3 C.gpointer) {
+	var fn IconViewForEachFunc
+	{
+		v := gbox.Get(uintptr(carg3))
+		if v == nil {
+			panic(`callback not found`)
+		}
+		fn = v.(IconViewForEachFunc)
+	}
 
+	var iconView IconView  // in, none, converted
+	var path     *TreePath // in, none, converted
+
+	iconView = UnsafeIconViewFromGlibNone(unsafe.Pointer(carg1))
+	path = UnsafeTreePathFromGlibNone(unsafe.Pointer(carg2))
 
 	fn(iconView, path)
-
-
-
-	return cret
 }
 
 //export _gotk4_gtk4_ListBoxFilterFunc
 func _gotk4_gtk4_ListBoxFilterFunc(carg1 *C.GtkListBoxRow, carg2 C.gpointer) (cret C.gboolean) {
+	var fn ListBoxFilterFunc
+	{
+		v := gbox.Get(uintptr(carg2))
+		if v == nil {
+			panic(`callback not found`)
+		}
+		fn = v.(ListBoxFilterFunc)
+	}
 
+	var row   ListBoxRow // in, none, converted
+	var goret bool       // return
 
-	ret := fn(row)
+	row = UnsafeListBoxRowFromGlibNone(unsafe.Pointer(carg1))
 
+	goret = fn(row)
 
+	if goret {
+		cret = C.TRUE
+	}
 
 	return cret
 }
 
 //export _gotk4_gtk4_ListBoxForEachFunc
-func _gotk4_gtk4_ListBoxForEachFunc(carg1 *C.GtkListBox, carg2 *C.GtkListBoxRow, carg3 C.gpointer) (cret C.void) {
+func _gotk4_gtk4_ListBoxForEachFunc(carg1 *C.GtkListBox, carg2 *C.GtkListBoxRow, carg3 C.gpointer) {
+	var fn ListBoxForEachFunc
+	{
+		v := gbox.Get(uintptr(carg3))
+		if v == nil {
+			panic(`callback not found`)
+		}
+		fn = v.(ListBoxForEachFunc)
+	}
 
+	var box ListBox    // in, none, converted
+	var row ListBoxRow // in, none, converted
+
+	box = UnsafeListBoxFromGlibNone(unsafe.Pointer(carg1))
+	row = UnsafeListBoxRowFromGlibNone(unsafe.Pointer(carg2))
 
 	fn(box, row)
-
-
-
-	return cret
 }
 
 //export _gotk4_gtk4_ListBoxSortFunc
 func _gotk4_gtk4_ListBoxSortFunc(carg1 *C.GtkListBoxRow, carg2 *C.GtkListBoxRow, carg3 C.gpointer) (cret C.int) {
+	var fn ListBoxSortFunc
+	{
+		v := gbox.Get(uintptr(carg3))
+		if v == nil {
+			panic(`callback not found`)
+		}
+		fn = v.(ListBoxSortFunc)
+	}
 
+	var row1  ListBoxRow // in, none, converted
+	var row2  ListBoxRow // in, none, converted
+	var goret int        // return, none, casted
 
-	ret := fn(row1, row2)
+	row1 = UnsafeListBoxRowFromGlibNone(unsafe.Pointer(carg1))
+	row2 = UnsafeListBoxRowFromGlibNone(unsafe.Pointer(carg2))
 
+	goret = fn(row1, row2)
 
+	cret = C.int(goret)
 
 	return cret
 }
 
 //export _gotk4_gtk4_ListBoxUpdateHeaderFunc
-func _gotk4_gtk4_ListBoxUpdateHeaderFunc(carg1 *C.GtkListBoxRow, carg2 *C.GtkListBoxRow, carg3 C.gpointer) (cret C.void) {
+func _gotk4_gtk4_ListBoxUpdateHeaderFunc(carg1 *C.GtkListBoxRow, carg2 *C.GtkListBoxRow, carg3 C.gpointer) {
+	var fn ListBoxUpdateHeaderFunc
+	{
+		v := gbox.Get(uintptr(carg3))
+		if v == nil {
+			panic(`callback not found`)
+		}
+		fn = v.(ListBoxUpdateHeaderFunc)
+	}
 
+	var row    ListBoxRow // in, none, converted
+	var before ListBoxRow // in, none, converted, nullable
+
+	row = UnsafeListBoxRowFromGlibNone(unsafe.Pointer(carg1))
+	if carg2 != nil {
+		before = UnsafeListBoxRowFromGlibNone(unsafe.Pointer(carg2))
+	}
 
 	fn(row, before)
-
-
-
-	return cret
 }
 
 //export _gotk4_gtk4_MenuButtonCreatePopupFunc
-func _gotk4_gtk4_MenuButtonCreatePopupFunc(carg1 *C.GtkMenuButton, carg2 C.gpointer) (cret C.void) {
+func _gotk4_gtk4_MenuButtonCreatePopupFunc(carg1 *C.GtkMenuButton, carg2 C.gpointer) {
+	var fn MenuButtonCreatePopupFunc
+	{
+		v := gbox.Get(uintptr(carg2))
+		if v == nil {
+			panic(`callback not found`)
+		}
+		fn = v.(MenuButtonCreatePopupFunc)
+	}
 
+	var menuButton MenuButton // in, none, converted
+
+	menuButton = UnsafeMenuButtonFromGlibNone(unsafe.Pointer(carg1))
 
 	fn(menuButton)
-
-
-
-	return cret
 }
 
 //export _gotk4_gtk4_ScaleFormatValueFunc
 func _gotk4_gtk4_ScaleFormatValueFunc(carg1 *C.GtkScale, carg2 C.gdouble, carg3 C.gpointer) (cret *C.gchar) {
+	var fn ScaleFormatValueFunc
+	{
+		v := gbox.Get(uintptr(carg3))
+		if v == nil {
+			panic(`callback not found`)
+		}
+		fn = v.(ScaleFormatValueFunc)
+	}
 
+	var scale Scale   // in, none, converted
+	var value float64 // in, none, casted
+	var goret string  // return, full, string
 
-	ret := fn(scale, value)
+	scale = UnsafeScaleFromGlibNone(unsafe.Pointer(carg1))
+	value = float64(carg2)
 
+	goret = fn(scale, value)
 
+	cret = (*C.gchar)(unsafe.Pointer(C.CString(goret)))
 
 	return cret
 }
 
 //export _gotk4_gtk4_TreeViewColumnDropFunc
 func _gotk4_gtk4_TreeViewColumnDropFunc(carg1 *C.GtkTreeView, carg2 *C.GtkTreeViewColumn, carg3 *C.GtkTreeViewColumn, carg4 *C.GtkTreeViewColumn, carg5 C.gpointer) (cret C.gboolean) {
+	var fn TreeViewColumnDropFunc
+	{
+		v := gbox.Get(uintptr(carg5))
+		if v == nil {
+			panic(`callback not found`)
+		}
+		fn = v.(TreeViewColumnDropFunc)
+	}
 
+	var treeView   TreeView       // in, none, converted
+	var column     TreeViewColumn // in, none, converted
+	var prevColumn TreeViewColumn // in, none, converted
+	var nextColumn TreeViewColumn // in, none, converted
+	var goret      bool           // return
 
-	ret := fn(treeView, column, prevColumn, nextColumn)
+	treeView = UnsafeTreeViewFromGlibNone(unsafe.Pointer(carg1))
+	column = UnsafeTreeViewColumnFromGlibNone(unsafe.Pointer(carg2))
+	prevColumn = UnsafeTreeViewColumnFromGlibNone(unsafe.Pointer(carg3))
+	nextColumn = UnsafeTreeViewColumnFromGlibNone(unsafe.Pointer(carg4))
 
+	goret = fn(treeView, column, prevColumn, nextColumn)
 
+	if goret {
+		cret = C.TRUE
+	}
 
 	return cret
 }
 
 //export _gotk4_gtk4_TreeViewMappingFunc
-func _gotk4_gtk4_TreeViewMappingFunc(carg1 *C.GtkTreeView, carg2 *C.GtkTreePath, carg3 C.gpointer) (cret C.void) {
+func _gotk4_gtk4_TreeViewMappingFunc(carg1 *C.GtkTreeView, carg2 *C.GtkTreePath, carg3 C.gpointer) {
+	var fn TreeViewMappingFunc
+	{
+		v := gbox.Get(uintptr(carg3))
+		if v == nil {
+			panic(`callback not found`)
+		}
+		fn = v.(TreeViewMappingFunc)
+	}
 
+	var treeView TreeView  // in, none, converted
+	var path     *TreePath // in, none, converted
+
+	treeView = UnsafeTreeViewFromGlibNone(unsafe.Pointer(carg1))
+	path = UnsafeTreePathFromGlibNone(unsafe.Pointer(carg2))
 
 	fn(treeView, path)
-
-
-
-	return cret
 }
 

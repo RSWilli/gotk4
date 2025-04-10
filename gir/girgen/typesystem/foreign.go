@@ -43,4 +43,5 @@ var GoBuiltins = []string{
 	"error",
 	"any",
 	"interface{}",
+	"context.Context",
 }

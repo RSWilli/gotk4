@@ -4,29 +4,73 @@ package gdk
 
 import (
 	"github.com/diamondburned/gotk4/pkg/core/gbox"
+	"unsafe"
 )
 
 // #include <gdk/gdk.h>
 import "C"
 
-//export _gotk4_gdk3_SeatGrabPrepareFunc
-func _gotk4_gdk3_SeatGrabPrepareFunc(carg1 *C.GdkSeat, carg2 *C.GdkWindow, carg3 C.gpointer) (cret C.void) {
+//export _gotk4_gdk3_EventFunc
+func _gotk4_gdk3_EventFunc(carg1 *C.GdkEvent, carg2 C.gpointer) {
+	var fn EventFunc
+	{
+		v := gbox.Get(uintptr(carg2))
+		if v == nil {
+			panic(`callback not found`)
+		}
+		fn = v.(EventFunc)
+	}
 
+	var event *Event // in, transfer: none, C Pointers: 1, Name: Event
+
+	_ = event
+	_ = carg1
+	panic("unimplemented conversion of *Event (GdkEvent*)")
+
+	fn(event)
+}
+
+//export _gotk4_gdk3_SeatGrabPrepareFunc
+func _gotk4_gdk3_SeatGrabPrepareFunc(carg1 *C.GdkSeat, carg2 *C.GdkWindow, carg3 C.gpointer) {
+	var fn SeatGrabPrepareFunc
+	{
+		v := gbox.Get(uintptr(carg3))
+		if v == nil {
+			panic(`callback not found`)
+		}
+		fn = v.(SeatGrabPrepareFunc)
+	}
+
+	var seat   Seat   // in, none, converted
+	var window Window // in, none, converted
+
+	seat = UnsafeSeatFromGlibNone(unsafe.Pointer(carg1))
+	window = UnsafeWindowFromGlibNone(unsafe.Pointer(carg2))
 
 	fn(seat, window)
-
-
-
-	return cret
 }
 
 //export _gotk4_gdk3_WindowChildFunc
 func _gotk4_gdk3_WindowChildFunc(carg1 *C.GdkWindow, carg2 C.gpointer) (cret C.gboolean) {
+	var fn WindowChildFunc
+	{
+		v := gbox.Get(uintptr(carg2))
+		if v == nil {
+			panic(`callback not found`)
+		}
+		fn = v.(WindowChildFunc)
+	}
 
+	var window Window // in, none, converted
+	var goret  bool   // return
 
-	ret := fn(window)
+	window = UnsafeWindowFromGlibNone(unsafe.Pointer(carg1))
 
+	goret = fn(window)
 
+	if goret {
+		cret = C.TRUE
+	}
 
 	return cret
 }

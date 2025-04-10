@@ -4,150 +4,109 @@ package gdkpixbuf
 
 import (
 	"github.com/diamondburned/gotk4/pkg/core/gbox"
+	"unsafe"
+	"github.com/diamondburned/gotk4/pkg/glib/v2"
 )
 
 // #include <gdk-pixbuf/gdk-pixbuf.h>
 import "C"
 
-//export _gotk4_gdkpixbuf2_PixbufModuleFillInfoFunc
-func _gotk4_gdkpixbuf2_PixbufModuleFillInfoFunc(carg1 *C.GdkPixbufFormat) (cret C.void) {
-
-
-	fn(info)
-
-
-
-	return cret
-}
-
-//export _gotk4_gdkpixbuf2_PixbufModuleFillVtableFunc
-func _gotk4_gdkpixbuf2_PixbufModuleFillVtableFunc(carg1 *C.GdkPixbufModule) (cret C.void) {
-
-
-	fn(module)
-
-
-
-	return cret
-}
-
-//export _gotk4_gdkpixbuf2_PixbufModuleIncrementLoadFunc
-func _gotk4_gdkpixbuf2_PixbufModuleIncrementLoadFunc(carg1 C.gpointer, carg2 array, carg3 C.guint, _cerr *C.GError) (cret C.gboolean) {
-
-
-	ret, _goerr := fn(context, buf)
-
-
-
-	return cret
-}
-
-//export _gotk4_gdkpixbuf2_PixbufModuleLoadAnimationFunc
-func _gotk4_gdkpixbuf2_PixbufModuleLoadAnimationFunc(carg1 *C.gpointer, _cerr *C.GError) (cret *C.GdkPixbufAnimation) {
-
-
-	ret, _goerr := fn(f)
-
-
-
-	return cret
-}
-
-//export _gotk4_gdkpixbuf2_PixbufModuleLoadFunc
-func _gotk4_gdkpixbuf2_PixbufModuleLoadFunc(carg1 *C.gpointer, _cerr *C.GError) (cret *C.GdkPixbuf) {
-
-
-	ret, _goerr := fn(f)
-
-
-
-	return cret
-}
-
-//export _gotk4_gdkpixbuf2_PixbufModuleLoadXPMDataFunc
-func _gotk4_gdkpixbuf2_PixbufModuleLoadXPMDataFunc(carg1 array) (cret *C.GdkPixbuf) {
-
-
-	ret := fn(data)
-
-
-
-	return cret
-}
-
 //export _gotk4_gdkpixbuf2_PixbufModulePreparedFunc
-func _gotk4_gdkpixbuf2_PixbufModulePreparedFunc(carg1 *C.GdkPixbuf, carg2 *C.GdkPixbufAnimation, carg3 C.gpointer) (cret C.void) {
+func _gotk4_gdkpixbuf2_PixbufModulePreparedFunc(carg1 *C.GdkPixbuf, carg2 *C.GdkPixbufAnimation, carg3 C.gpointer) {
+	var fn PixbufModulePreparedFunc
+	{
+		v := gbox.Get(uintptr(carg3))
+		if v == nil {
+			panic(`callback not found`)
+		}
+		fn = v.(PixbufModulePreparedFunc)
+	}
 
+	var pixbuf Pixbuf          // in, none, converted
+	var anim   PixbufAnimation // in, none, converted
+
+	pixbuf = UnsafePixbufFromGlibNone(unsafe.Pointer(carg1))
+	anim = UnsafePixbufAnimationFromGlibNone(unsafe.Pointer(carg2))
 
 	fn(pixbuf, anim)
-
-
-
-	return cret
-}
-
-//export _gotk4_gdkpixbuf2_PixbufModuleSaveFunc
-func _gotk4_gdkpixbuf2_PixbufModuleSaveFunc(carg1 *C.gpointer, carg2 *C.GdkPixbuf, carg3 array, carg4 array, _cerr *C.GError) (cret C.gboolean) {
-
-
-	ret, _goerr := fn(f, pixbuf, paramKeys, paramValues)
-
-
-
-	return cret
-}
-
-//export _gotk4_gdkpixbuf2_PixbufModuleSaveOptionSupportedFunc
-func _gotk4_gdkpixbuf2_PixbufModuleSaveOptionSupportedFunc(carg1 *C.gchar) (cret C.gboolean) {
-
-
-	ret := fn(optionKey)
-
-
-
-	return cret
 }
 
 //export _gotk4_gdkpixbuf2_PixbufModuleSizeFunc
-func _gotk4_gdkpixbuf2_PixbufModuleSizeFunc(carg1 *C.int, carg2 *C.int, carg3 C.gpointer) (cret C.void) {
+func _gotk4_gdkpixbuf2_PixbufModuleSizeFunc(carg1 *C.int, carg2 *C.int, carg3 C.gpointer) {
+	var fn PixbufModuleSizeFunc
+	{
+		v := gbox.Get(uintptr(carg3))
+		if v == nil {
+			panic(`callback not found`)
+		}
+		fn = v.(PixbufModuleSizeFunc)
+	}
 
+	var width  *int // in, transfer: none, C Pointers: 1, Name: gint
+	var height *int // in, transfer: none, C Pointers: 1, Name: gint
+
+	_ = width
+	_ = carg1
+	panic("unimplemented conversion of *int (gint*)")
+	_ = height
+	_ = carg2
+	panic("unimplemented conversion of *int (gint*)")
 
 	fn(width, height)
-
-
-
-	return cret
-}
-
-//export _gotk4_gdkpixbuf2_PixbufModuleStopLoadFunc
-func _gotk4_gdkpixbuf2_PixbufModuleStopLoadFunc(carg1 C.gpointer, _cerr *C.GError) (cret C.gboolean) {
-
-
-	ret, _goerr := fn(context)
-
-
-
-	return cret
 }
 
 //export _gotk4_gdkpixbuf2_PixbufModuleUpdatedFunc
-func _gotk4_gdkpixbuf2_PixbufModuleUpdatedFunc(carg1 *C.GdkPixbuf, carg2 C.int, carg3 C.int, carg4 C.int, carg5 C.int, carg6 C.gpointer) (cret C.void) {
+func _gotk4_gdkpixbuf2_PixbufModuleUpdatedFunc(carg1 *C.GdkPixbuf, carg2 C.int, carg3 C.int, carg4 C.int, carg5 C.int, carg6 C.gpointer) {
+	var fn PixbufModuleUpdatedFunc
+	{
+		v := gbox.Get(uintptr(carg6))
+		if v == nil {
+			panic(`callback not found`)
+		}
+		fn = v.(PixbufModuleUpdatedFunc)
+	}
 
+	var pixbuf Pixbuf // in, none, converted
+	var x      int    // in, none, casted
+	var y      int    // in, none, casted
+	var width  int    // in, none, casted
+	var height int    // in, none, casted
+
+	pixbuf = UnsafePixbufFromGlibNone(unsafe.Pointer(carg1))
+	x = int(carg2)
+	y = int(carg3)
+	width = int(carg4)
+	height = int(carg5)
 
 	fn(pixbuf, x, y, width, height)
-
-
-
-	return cret
 }
 
 //export _gotk4_gdkpixbuf2_PixbufSaveFunc
-func _gotk4_gdkpixbuf2_PixbufSaveFunc(carg1 array, carg2 C.gsize, carg3 *C.GError, carg4 C.gpointer) (cret C.gboolean) {
+func _gotk4_gdkpixbuf2_PixbufSaveFunc(carg1 *C.gchar, carg2 C.gsize, carg3 **C.GError, carg4 C.gpointer) (cret C.gboolean) {
+	var fn PixbufSaveFunc
+	{
+		v := gbox.Get(uintptr(carg4))
+		if v == nil {
+			panic(`callback not found`)
+		}
+		fn = v.(PixbufSaveFunc)
+	}
 
+	var buf   string // in, transfer: none, C Pointers: 1, Name: array[unknown], array (inner: <nil>, length-by: carg2)
+	var goret bool   // return
+	var err   error  // out, full, converted
 
-	err, ret := fn(buf)
+	_ = buf
+	_ = carg1
+	_ = carg2
+	panic("unimplemented conversion of string (const gchar*)")
 
+	goret, err = fn(buf)
 
+	if goret {
+		cret = C.TRUE
+	}
+	*carg3 = (*C.GError)(glib.UnsafeErrorToGlibFull(err))
 
 	return cret
 }

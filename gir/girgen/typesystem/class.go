@@ -201,7 +201,14 @@ func (c *Class) declareNested(e *env) {
 	e = e.sub("class", c.gir.CType)
 
 	for _, v := range c.gir.Functions {
-		if t := DeclareFunction(e, c, v); t != nil {
+		if v.Name == "new" {
+			// some packages (e.g. gio) misplace the constructor in the functions list
+			e.logger.Info("name will likely collide, changing to avoid collision", "name", v.Name, "cidentifier", v.CIdentifier)
+
+			v.Name = v.Name + "_" + c.gir.Name
+		}
+
+		if t := DeclarePrefixedFunction(e, c, v.CallableAttrs); t != nil {
 			c.Functions = append(c.Functions, t)
 		}
 	}
@@ -219,13 +226,13 @@ func (c *Class) declareNested(e *env) {
 			continue
 		}
 
-		if t := NewMethod(e, c, v); t != nil {
+		if t := DeclareMethod(e, c, v); t != nil {
 			c.Methods = append(c.Methods, t)
 		}
 	}
 
 	for _, v := range c.gir.Constructors {
-		if t := DeclareConstructor(e, c, v); t != nil {
+		if t := DeclarePrefixedFunction(e, c, v.CallableAttrs); t != nil {
 			c.Constructors = append(c.Constructors, t)
 		}
 	}

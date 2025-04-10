@@ -380,6 +380,9 @@ func NewCallableParameters(e *env, v gir.CallableAttrs) (*Parameters, resolvedSt
 			transfer = TransferFull
 		}
 
+		t = wrapInterfaceReturnIfNeeded(t, v.ReturnValue.AnyType)
+		t = wrapClassReturnIfNeeded(t, v.ReturnValue.AnyType)
+
 		ctypePointers := CountCTypePointers(CTypeFromAnytype(v.ReturnValue.AnyType))
 
 		ret := &Param{

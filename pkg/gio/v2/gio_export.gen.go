@@ -4,293 +4,282 @@ package gio
 
 import (
 	"github.com/diamondburned/gotk4/pkg/core/gbox"
+	"github.com/diamondburned/gotk4/pkg/gobject/v2"
+	"unsafe"
 )
 
 // #include <gio/gio.h>
 import "C"
 
 //export _gotk4_gio2_AsyncReadyCallback
-func _gotk4_gio2_AsyncReadyCallback(carg1 *C.GObject, carg2 *C.GAsyncResult, carg3 C.gpointer) (cret C.void) {
+func _gotk4_gio2_AsyncReadyCallback(carg1 *C.GObject, carg2 *C.GAsyncResult, carg3 C.gpointer) {
+	var fn AsyncReadyCallback
+	{
+		v := gbox.Get(uintptr(carg3))
+		if v == nil {
+			panic(`callback not found`)
+		}
+		fn = v.(AsyncReadyCallback)
+	}
 
+	var sourceObject gobject.Object // in, none, converted, nullable
+	var res          AsyncResult    // in, none, converted
+
+	if carg1 != nil {
+		sourceObject = gobject.UnsafeObjectFromGlibNone(unsafe.Pointer(carg1))
+	}
+	res = UnsafeAsyncResultFromGlibNone(unsafe.Pointer(carg2))
 
 	fn(sourceObject, res)
-
-
-
-	return cret
 }
 
 //export _gotk4_gio2_BusAcquiredCallback
-func _gotk4_gio2_BusAcquiredCallback(carg1 *C.GDBusConnection, carg2 *C.gchar, carg3 C.gpointer) (cret C.void) {
+func _gotk4_gio2_BusAcquiredCallback(carg1 *C.GDBusConnection, carg2 *C.gchar, carg3 C.gpointer) {
+	var fn BusAcquiredCallback
+	{
+		v := gbox.Get(uintptr(carg3))
+		if v == nil {
+			panic(`callback not found`)
+		}
+		fn = v.(BusAcquiredCallback)
+	}
 
+	var connection DBusConnection // in, none, converted
+	var name       string         // in, none, string
+
+	connection = UnsafeDBusConnectionFromGlibNone(unsafe.Pointer(carg1))
+	name = C.GoString((*C.gchar)(unsafe.Pointer(carg2)))
 
 	fn(connection, name)
-
-
-
-	return cret
 }
 
 //export _gotk4_gio2_BusNameAcquiredCallback
-func _gotk4_gio2_BusNameAcquiredCallback(carg1 *C.GDBusConnection, carg2 *C.gchar, carg3 C.gpointer) (cret C.void) {
+func _gotk4_gio2_BusNameAcquiredCallback(carg1 *C.GDBusConnection, carg2 *C.gchar, carg3 C.gpointer) {
+	var fn BusNameAcquiredCallback
+	{
+		v := gbox.Get(uintptr(carg3))
+		if v == nil {
+			panic(`callback not found`)
+		}
+		fn = v.(BusNameAcquiredCallback)
+	}
 
+	var connection DBusConnection // in, none, converted
+	var name       string         // in, none, string
+
+	connection = UnsafeDBusConnectionFromGlibNone(unsafe.Pointer(carg1))
+	name = C.GoString((*C.gchar)(unsafe.Pointer(carg2)))
 
 	fn(connection, name)
-
-
-
-	return cret
 }
 
 //export _gotk4_gio2_BusNameAppearedCallback
-func _gotk4_gio2_BusNameAppearedCallback(carg1 *C.GDBusConnection, carg2 *C.gchar, carg3 *C.gchar, carg4 C.gpointer) (cret C.void) {
+func _gotk4_gio2_BusNameAppearedCallback(carg1 *C.GDBusConnection, carg2 *C.gchar, carg3 *C.gchar, carg4 C.gpointer) {
+	var fn BusNameAppearedCallback
+	{
+		v := gbox.Get(uintptr(carg4))
+		if v == nil {
+			panic(`callback not found`)
+		}
+		fn = v.(BusNameAppearedCallback)
+	}
 
+	var connection DBusConnection // in, none, converted
+	var name       string         // in, none, string
+	var nameOwner  string         // in, none, string
+
+	connection = UnsafeDBusConnectionFromGlibNone(unsafe.Pointer(carg1))
+	name = C.GoString((*C.gchar)(unsafe.Pointer(carg2)))
+	nameOwner = C.GoString((*C.gchar)(unsafe.Pointer(carg3)))
 
 	fn(connection, name, nameOwner)
-
-
-
-	return cret
 }
 
 //export _gotk4_gio2_BusNameLostCallback
-func _gotk4_gio2_BusNameLostCallback(carg1 *C.GDBusConnection, carg2 *C.gchar, carg3 C.gpointer) (cret C.void) {
+func _gotk4_gio2_BusNameLostCallback(carg1 *C.GDBusConnection, carg2 *C.gchar, carg3 C.gpointer) {
+	var fn BusNameLostCallback
+	{
+		v := gbox.Get(uintptr(carg3))
+		if v == nil {
+			panic(`callback not found`)
+		}
+		fn = v.(BusNameLostCallback)
+	}
 
+	var connection DBusConnection // in, none, converted
+	var name       string         // in, none, string
+
+	connection = UnsafeDBusConnectionFromGlibNone(unsafe.Pointer(carg1))
+	name = C.GoString((*C.gchar)(unsafe.Pointer(carg2)))
 
 	fn(connection, name)
-
-
-
-	return cret
 }
 
 //export _gotk4_gio2_BusNameVanishedCallback
-func _gotk4_gio2_BusNameVanishedCallback(carg1 *C.GDBusConnection, carg2 *C.gchar, carg3 C.gpointer) (cret C.void) {
+func _gotk4_gio2_BusNameVanishedCallback(carg1 *C.GDBusConnection, carg2 *C.gchar, carg3 C.gpointer) {
+	var fn BusNameVanishedCallback
+	{
+		v := gbox.Get(uintptr(carg3))
+		if v == nil {
+			panic(`callback not found`)
+		}
+		fn = v.(BusNameVanishedCallback)
+	}
 
+	var connection DBusConnection // in, none, converted
+	var name       string         // in, none, string
+
+	connection = UnsafeDBusConnectionFromGlibNone(unsafe.Pointer(carg1))
+	name = C.GoString((*C.gchar)(unsafe.Pointer(carg2)))
 
 	fn(connection, name)
-
-
-
-	return cret
-}
-
-//export _gotk4_gio2_CancellableSourceFunc
-func _gotk4_gio2_CancellableSourceFunc(carg1 *C.Cancellable, carg2 C.gpointer) (cret C.gboolean) {
-
-
-	ret := fn(cancellable, data)
-
-
-
-	return cret
-}
-
-//export _gotk4_gio2_DBusInterfaceGetPropertyFunc
-func _gotk4_gio2_DBusInterfaceGetPropertyFunc(carg1 *C.GDBusConnection, carg2 *C.gchar, carg3 *C.gchar, carg4 *C.gchar, carg5 *C.gchar, carg6 *C.GError, carg7 C.gpointer) (cret *C.GVariant) {
-
-
-	err, ret := fn(connection, sender, objectPath, interfaceName, propertyName)
-
-
-
-	return cret
-}
-
-//export _gotk4_gio2_DBusInterfaceMethodCallFunc
-func _gotk4_gio2_DBusInterfaceMethodCallFunc(carg1 *C.GDBusConnection, carg2 *C.gchar, carg3 *C.gchar, carg4 *C.gchar, carg5 *C.gchar, carg6 *C.GVariant, carg7 *C.GDBusMethodInvocation, carg8 C.gpointer) (cret C.void) {
-
-
-	fn(connection, sender, objectPath, interfaceName, methodName, parameters, invocation)
-
-
-
-	return cret
 }
 
 //export _gotk4_gio2_DBusMessageFilterFunction
 func _gotk4_gio2_DBusMessageFilterFunction(carg1 *C.GDBusConnection, carg2 *C.GDBusMessage, carg3 C.gboolean, carg4 C.gpointer) (cret *C.GDBusMessage) {
+	var fn DBusMessageFilterFunction
+	{
+		v := gbox.Get(uintptr(carg4))
+		if v == nil {
+			panic(`callback not found`)
+		}
+		fn = v.(DBusMessageFilterFunction)
+	}
 
+	var connection DBusConnection // in, none, converted
+	var message    DBusMessage    // in, full, converted
+	var incoming   bool           // in
+	var goret      DBusMessage    // return, full, converted
 
-	ret := fn(connection, message, incoming)
+	connection = UnsafeDBusConnectionFromGlibNone(unsafe.Pointer(carg1))
+	message = UnsafeDBusMessageFromGlibFull(unsafe.Pointer(carg2))
+	if carg3 != 0 {
+		incoming = true
+	}
 
+	goret = fn(connection, message, incoming)
 
-
-	return cret
-}
-
-//export _gotk4_gio2_DBusProxyTypeFunc
-func _gotk4_gio2_DBusProxyTypeFunc(carg1 *C.GDBusObjectManagerClient, carg2 *C.gchar, carg3 *C.gchar, carg4 C.gpointer) (cret C.GType) {
-
-
-	ret := fn(manager, objectPath, interfaceName, data)
-
-
-
-	return cret
-}
-
-//export _gotk4_gio2_DBusSignalCallback
-func _gotk4_gio2_DBusSignalCallback(carg1 *C.GDBusConnection, carg2 *C.gchar, carg3 *C.gchar, carg4 *C.gchar, carg5 *C.gchar, carg6 *C.GVariant, carg7 C.gpointer) (cret C.void) {
-
-
-	fn(connection, senderName, objectPath, interfaceName, signalName, parameters)
-
-
+	cret = (*C.GDBusMessage)(UnsafeDBusMessageToGlibFull(goret))
 
 	return cret
 }
 
 //export _gotk4_gio2_DBusSubtreeDispatchFunc
 func _gotk4_gio2_DBusSubtreeDispatchFunc(carg1 *C.GDBusConnection, carg2 *C.gchar, carg3 *C.gchar, carg4 *C.gchar, carg5 *C.gchar, carg6 *C.gpointer, carg7 C.gpointer) (cret *C.GDBusInterfaceVTable) {
+	var fn DBusSubtreeDispatchFunc
+	{
+		v := gbox.Get(uintptr(carg7))
+		if v == nil {
+			panic(`callback not found`)
+		}
+		fn = v.(DBusSubtreeDispatchFunc)
+	}
 
+	var connection    DBusConnection       // in, none, converted
+	var sender        string               // in, none, string
+	var objectPath    string               // in, none, string
+	var interfaceName string               // in, none, string
+	var node          string               // in, none, string
+	var outUserData   *unsafe.Pointer      // in, transfer: none, C Pointers: 1, Name: gpointer
+	var goret         *DBusInterfaceVTable // return, none, converted
 
-	ret := fn(connection, sender, objectPath, interfaceName, node, outUserData)
+	connection = UnsafeDBusConnectionFromGlibNone(unsafe.Pointer(carg1))
+	sender = C.GoString((*C.gchar)(unsafe.Pointer(carg2)))
+	objectPath = C.GoString((*C.gchar)(unsafe.Pointer(carg3)))
+	interfaceName = C.GoString((*C.gchar)(unsafe.Pointer(carg4)))
+	node = C.GoString((*C.gchar)(unsafe.Pointer(carg5)))
+	_ = outUserData
+	_ = carg6
+	panic("unimplemented conversion of *unsafe.Pointer (gpointer*)")
 
+	goret = fn(connection, sender, objectPath, interfaceName, node, outUserData)
 
+	cret = (*C.GDBusInterfaceVTable)(UnsafeDBusInterfaceVTableToGlibNone(goret))
 
 	return cret
 }
 
 //export _gotk4_gio2_DBusSubtreeEnumerateFunc
-func _gotk4_gio2_DBusSubtreeEnumerateFunc(carg1 *C.GDBusConnection, carg2 *C.gchar, carg3 *C.gchar, carg4 C.gpointer) (cret array) {
+func _gotk4_gio2_DBusSubtreeEnumerateFunc(carg1 *C.GDBusConnection, carg2 *C.gchar, carg3 *C.gchar, carg4 C.gpointer) (cret **C.gchar) {
+	var fn DBusSubtreeEnumerateFunc
+	{
+		v := gbox.Get(uintptr(carg4))
+		if v == nil {
+			panic(`callback not found`)
+		}
+		fn = v.(DBusSubtreeEnumerateFunc)
+	}
 
+	var connection DBusConnection // in, none, converted
+	var sender     string         // in, none, string
+	var objectPath string         // in, none, string
+	var goret      []string       // return, transfer: full, C Pointers: 2, Name: array[utf8], scope: , array (inner: *typesystem.StringPrimitive, zero-terminated)
 
-	ret := fn(connection, sender, objectPath)
+	connection = UnsafeDBusConnectionFromGlibNone(unsafe.Pointer(carg1))
+	sender = C.GoString((*C.gchar)(unsafe.Pointer(carg2)))
+	objectPath = C.GoString((*C.gchar)(unsafe.Pointer(carg3)))
 
+	goret = fn(connection, sender, objectPath)
 
+	_ = goret
+	_ = cret
+	panic("unimplemented conversion of []string (gchar**)")
 
 	return cret
 }
 
 //export _gotk4_gio2_DBusSubtreeIntrospectFunc
-func _gotk4_gio2_DBusSubtreeIntrospectFunc(carg1 *C.GDBusConnection, carg2 *C.gchar, carg3 *C.gchar, carg4 *C.gchar, carg5 C.gpointer) (cret array) {
-
-
-	ret := fn(connection, sender, objectPath, node)
-
-
-
-	return cret
-}
-
-//export _gotk4_gio2_DesktopAppLaunchCallback
-func _gotk4_gio2_DesktopAppLaunchCallback(carg1 *C.GDesktopAppInfo, carg2 C.GPid, carg3 C.gpointer) (cret C.void) {
-
-
-	fn(appinfo, pid)
-
-
-
-	return cret
-}
-
-//export _gotk4_gio2_FileMeasureProgressCallback
-func _gotk4_gio2_FileMeasureProgressCallback(carg1 C.gboolean, carg2 C.guint64, carg3 C.guint64, carg4 C.guint64, carg5 C.gpointer) (cret C.void) {
-
-
-	fn(reporting, currentSize, numDirs, numFiles, data)
-
-
-
-	return cret
-}
-
-//export _gotk4_gio2_FileProgressCallback
-func _gotk4_gio2_FileProgressCallback(carg1 C.gint64, carg2 C.gint64, carg3 C.gpointer) (cret C.void) {
-
-
-	fn(currentNumBytes, totalNumBytes, data)
-
-
-
-	return cret
-}
-
-//export _gotk4_gio2_FileReadMoreCallback
-func _gotk4_gio2_FileReadMoreCallback(carg1 *C.gchar, carg2 C.gint64, carg3 C.gpointer) (cret C.gboolean) {
-
-
-	ret := fn(fileContents, fileSize, callbackData)
-
-
-
-	return cret
-}
-
-//export _gotk4_gio2_IOSchedulerJobFunc
-func _gotk4_gio2_IOSchedulerJobFunc(carg1 *C.GIOSchedulerJob, carg2 *C.Cancellable, carg3 C.gpointer) (cret C.gboolean) {
-
-
-	ret := fn(job, cancellable, data)
-
-
-
-	return cret
-}
-
-//export _gotk4_gio2_PollableSourceFunc
-func _gotk4_gio2_PollableSourceFunc(carg1 *C.GObject, carg2 C.gpointer) (cret C.gboolean) {
-
-
-	ret := fn(pollableStream, data)
-
-
-
-	return cret
-}
-
-//export _gotk4_gio2_ReallocFunc
-func _gotk4_gio2_ReallocFunc(carg1 C.gpointer, carg2 C.gsize) (cret C.gpointer) {
-
-
-	ret := fn(data, size)
-
-
-
-	return cret
-}
-
-//export _gotk4_gio2_SettingsBindGetMapping
-func _gotk4_gio2_SettingsBindGetMapping(carg1 *C.GValue, carg2 *C.GVariant, carg3 C.gpointer) (cret C.gboolean) {
-
-
-	ret := fn(value, variant)
-
-
-
-	return cret
-}
-
-//export _gotk4_gio2_SettingsGetMapping
-func _gotk4_gio2_SettingsGetMapping(carg1 *C.GVariant, carg2 C.gpointer, carg3 C.gpointer) (cret C.gboolean) {
-
-
-	result, ret := fn(value)
-
-
-
-	return cret
-}
-
-//export _gotk4_gio2_SimpleAsyncThreadFunc
-func _gotk4_gio2_SimpleAsyncThreadFunc(carg1 *C.GSimpleAsyncResult, carg2 *C.GObject, carg3 *C.Cancellable) (cret C.void) {
-
-
-	fn(res, object, cancellable)
-
-
+func _gotk4_gio2_DBusSubtreeIntrospectFunc(carg1 *C.GDBusConnection, carg2 *C.gchar, carg3 *C.gchar, carg4 *C.gchar, carg5 C.gpointer) (cret **C.GDBusInterfaceInfo) {
+	var fn DBusSubtreeIntrospectFunc
+	{
+		v := gbox.Get(uintptr(carg5))
+		if v == nil {
+			panic(`callback not found`)
+		}
+		fn = v.(DBusSubtreeIntrospectFunc)
+	}
+
+	var connection DBusConnection       // in, none, converted
+	var sender     string               // in, none, string
+	var objectPath string               // in, none, string
+	var node       string               // in, none, string
+	var goret      []*DBusInterfaceInfo // return, transfer: full, C Pointers: 2, Name: array[DBusInterfaceInfo], scope: , array (inner: *typesystem.Record, zero-terminated)
+
+	connection = UnsafeDBusConnectionFromGlibNone(unsafe.Pointer(carg1))
+	sender = C.GoString((*C.gchar)(unsafe.Pointer(carg2)))
+	objectPath = C.GoString((*C.gchar)(unsafe.Pointer(carg3)))
+	node = C.GoString((*C.gchar)(unsafe.Pointer(carg4)))
+
+	goret = fn(connection, sender, objectPath, node)
+
+	_ = goret
+	_ = cret
+	panic("unimplemented conversion of []*DBusInterfaceInfo (GDBusInterfaceInfo**)")
 
 	return cret
 }
 
 //export _gotk4_gio2_VFSFileLookupFunc
 func _gotk4_gio2_VFSFileLookupFunc(carg1 *C.GVfs, carg2 *C.gchar, carg3 C.gpointer) (cret *C.GFile) {
+	var fn VFSFileLookupFunc
+	{
+		v := gbox.Get(uintptr(carg3))
+		if v == nil {
+			panic(`callback not found`)
+		}
+		fn = v.(VFSFileLookupFunc)
+	}
 
+	var vfs        Vfs    // in, none, converted
+	var identifier string // in, none, string
+	var goret      File   // return, full, converted
 
-	ret := fn(vfs, identifier)
+	vfs = UnsafeVfsFromGlibNone(unsafe.Pointer(carg1))
+	identifier = C.GoString((*C.gchar)(unsafe.Pointer(carg2)))
 
+	goret = fn(vfs, identifier)
 
+	cret = (*C.GFile)(UnsafeFileToGlibFull(goret))
 
 	return cret
 }

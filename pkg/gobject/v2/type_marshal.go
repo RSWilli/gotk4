@@ -1,4 +1,4 @@
-package glib
+package gobject
 
 import (
 	"errors"
@@ -16,14 +16,12 @@ import (
 // static GType _g_value_fundamental(GType type) {
 //   return (G_TYPE_FUNDAMENTAL(type));
 // }
-
 // static gboolean _g_type_is_value(GType g_type) {
 //   return (G_TYPE_IS_VALUE(g_type));
 // }
 import "C"
 
-// Type is a representation of GLib's GType.
-type Type uint
+type Type uint64
 
 const (
 	TypeInvalid   Type = C.G_TYPE_INVALID
@@ -39,7 +37,7 @@ const (
 	TypeInt64     Type = C.G_TYPE_INT64
 	TypeUint64    Type = C.G_TYPE_UINT64
 	TypeEnum      Type = C.G_TYPE_ENUM
-	TypeFlags     Type = C.G_TYPE_FLAGS
+	TypeBitflags  Type = C.G_TYPE_FLAGS // renamed bacause it collides with the TypeFlags
 	TypeFloat     Type = C.G_TYPE_FLOAT
 	TypeDouble    Type = C.G_TYPE_DOUBLE
 	TypeString    Type = C.G_TYPE_STRING
@@ -54,8 +52,8 @@ func FundamentalType(actual Type) Type {
 	return Type(C._g_value_fundamental(C.GType(actual)))
 }
 
-// IsValue checks whether the passed in type can be used for g_value_init().
-func (t Type) IsValue() bool {
+// TypeIsValue checks whether the passed in type can be used for g_value_init().
+func TypeIsValue(t Type) bool {
 	return C._g_type_is_value(C.GType(t)) != 0
 }
 
@@ -104,25 +102,12 @@ func (t Type) interfaces() []Type {
 
 // IsA is a wrapper around g_type_is_a().
 func (t Type) IsA(isAType Type) bool {
-	return gobool(C.g_type_is_a(C.GType(t), C.GType(isAType)))
-}
-
-// TypeFromName is a wrapper around g_type_from_name().
-func TypeFromName(typeName string) Type {
-	cstr := (*C.gchar)(C.CString(typeName))
-	defer C.free(unsafe.Pointer(cstr))
-
-	return Type(C.g_type_from_name(cstr))
-}
-
-// TypeNextBase is a wrapper around g_type_next_base.
-func TypeNextBase(leafType, rootType Type) Type {
-	return Type(C.g_type_next_base(C.GType(leafType), C.GType(rootType)))
+	return C.g_type_is_a(C.GType(t), C.GType(isAType)) != 0
 }
 
 // GValueMarshaler is a marshal function to convert a GValue into an
 // appropriate Go type.  The uintptr parameter is a *C.GValue.
-type GValueMarshaler func(uintptr) (interface{}, error)
+type GValueMarshaler func(unsafe.Pointer) (interface{}, error)
 
 // TypeMarshaler represents an actual type and it's associated marshaler.
 type TypeMarshaler struct {
@@ -159,11 +144,9 @@ func init() {
 	RegisterGValueMarshaler(TypeBoolean, marshalBoolean)
 	RegisterGValueMarshaler(TypeInt, marshalInt)
 	RegisterGValueMarshaler(TypeLong, marshalLong)
-	RegisterGValueMarshaler(TypeEnum, marshalEnum)
 	RegisterGValueMarshaler(TypeInt64, marshalInt64)
 	RegisterGValueMarshaler(TypeUint, marshalUint)
 	RegisterGValueMarshaler(TypeUlong, marshalUlong)
-	RegisterGValueMarshaler(TypeFlags, marshalFlags)
 	RegisterGValueMarshaler(TypeUint64, marshalUint64)
 	RegisterGValueMarshaler(TypeFloat, marshalFloat)
 	RegisterGValueMarshaler(TypeDouble, marshalDouble)
@@ -172,6 +155,10 @@ func init() {
 	RegisterGValueMarshaler(TypeBoxed, marshalBoxed)
 	// RegisterGValueMarshaler(TypeVariant, marshalVariant)
 	RegisterGValueMarshaler(Type(C.g_value_get_type()), marshalValue)
+
+	// included for completeness, each Bitflag/Enum type should implement it's own marshaller
+	RegisterGValueMarshaler(TypeBitflags, marshalFlags)
+	RegisterGValueMarshaler(TypeEnum, marshalEnum)
 }
 
 // lookup returns the closest available GValueMarshaler for the given value's
@@ -262,99 +249,101 @@ func (m *marshalMap) lookupType(t Type) (GValueMarshaler, bool) {
 	return nil, false
 }
 
-func marshalInvalid(uintptr) (interface{}, error) {
+func marshalInvalid(unsafe.Pointer) (interface{}, error) {
 	return nil, errors.New("invalid type")
 }
 
-func marshalNone(uintptr) (interface{}, error) {
+func marshalNone(unsafe.Pointer) (interface{}, error) {
 	return nil, nil
 }
 
-func marshalInterface(uintptr) (interface{}, error) {
+func marshalInterface(unsafe.Pointer) (interface{}, error) {
 	return nil, errors.New("interface conversion not yet implemented")
 }
 
-func marshalChar(p uintptr) (interface{}, error) {
+func marshalChar(p unsafe.Pointer) (interface{}, error) {
 	c := C.g_value_get_schar((*C.GValue)(unsafe.Pointer(p)))
 	return int8(c), nil
 }
 
-func marshalUchar(p uintptr) (interface{}, error) {
+func marshalUchar(p unsafe.Pointer) (interface{}, error) {
 	c := C.g_value_get_uchar((*C.GValue)(unsafe.Pointer(p)))
 	return uint8(c), nil
 }
 
-func marshalBoolean(p uintptr) (interface{}, error) {
+func marshalBoolean(p unsafe.Pointer) (interface{}, error) {
 	c := C.g_value_get_boolean((*C.GValue)(unsafe.Pointer(p)))
-	return gobool(c), nil
+	return c != 0, nil
 }
 
-func marshalInt(p uintptr) (interface{}, error) {
+func marshalInt(p unsafe.Pointer) (interface{}, error) {
 	c := C.g_value_get_int((*C.GValue)(unsafe.Pointer(p)))
 	return int(c), nil
 }
 
-func marshalLong(p uintptr) (interface{}, error) {
+func marshalLong(p unsafe.Pointer) (interface{}, error) {
 	c := C.g_value_get_long((*C.GValue)(unsafe.Pointer(p)))
 	return int(c), nil
 }
 
-func marshalEnum(p uintptr) (interface{}, error) {
+func marshalEnum(p unsafe.Pointer) (interface{}, error) {
+	println("WARN: gvalue enum marshalled via default marshalEnum. Consider implementing your own marshaller or import the generated package containing that registers the marshaller.")
 	c := C.g_value_get_enum((*C.GValue)(unsafe.Pointer(p)))
 	return int(c), nil
 }
 
-func marshalInt64(p uintptr) (interface{}, error) {
+func marshalInt64(p unsafe.Pointer) (interface{}, error) {
 	c := C.g_value_get_int64((*C.GValue)(unsafe.Pointer(p)))
 	return int64(c), nil
 }
 
-func marshalUint(p uintptr) (interface{}, error) {
+func marshalUint(p unsafe.Pointer) (interface{}, error) {
 	c := C.g_value_get_uint((*C.GValue)(unsafe.Pointer(p)))
 	return uint(c), nil
 }
 
-func marshalUlong(p uintptr) (interface{}, error) {
+func marshalUlong(p unsafe.Pointer) (interface{}, error) {
 	c := C.g_value_get_ulong((*C.GValue)(unsafe.Pointer(p)))
 	return uint(c), nil
 }
 
-func marshalFlags(p uintptr) (interface{}, error) {
+func marshalFlags(p unsafe.Pointer) (interface{}, error) {
+	println("WARN: gvalue flags marshalled via default marshalFlags. Consider implementing your own marshaller or import the generated package containing that registers the marshaller.")
 	c := C.g_value_get_flags((*C.GValue)(unsafe.Pointer(p)))
 	return uint(c), nil
 }
 
-func marshalUint64(p uintptr) (interface{}, error) {
+func marshalUint64(p unsafe.Pointer) (interface{}, error) {
 	c := C.g_value_get_uint64((*C.GValue)(unsafe.Pointer(p)))
 	return uint64(c), nil
 }
 
-func marshalFloat(p uintptr) (interface{}, error) {
+func marshalFloat(p unsafe.Pointer) (interface{}, error) {
 	c := C.g_value_get_float((*C.GValue)(unsafe.Pointer(p)))
 	return float32(c), nil
 }
 
-func marshalDouble(p uintptr) (interface{}, error) {
+func marshalDouble(p unsafe.Pointer) (interface{}, error) {
 	c := C.g_value_get_double((*C.GValue)(unsafe.Pointer(p)))
 	return float64(c), nil
 }
 
-func marshalString(p uintptr) (interface{}, error) {
+func marshalString(p unsafe.Pointer) (interface{}, error) {
 	c := C.g_value_get_string((*C.GValue)(unsafe.Pointer(p)))
 	return C.GoString((*C.char)(c)), nil
 }
 
-func marshalBoxed(p uintptr) (interface{}, error) {
+func marshalBoxed(p unsafe.Pointer) (interface{}, error) {
 	c := C.g_value_get_boxed((*C.GValue)(unsafe.Pointer(p)))
 	return unsafe.Pointer(c), nil
 }
 
-func marshalPointer(p uintptr) (interface{}, error) {
+func marshalPointer(p unsafe.Pointer) (interface{}, error) {
 	c := C.g_value_get_pointer((*C.GValue)(unsafe.Pointer(p)))
 	return unsafe.Pointer(c), nil
 }
 
-func marshalVariant(p uintptr) (interface{}, error) {
-	c := C.g_value_get_variant((*C.GValue)(unsafe.Pointer(p)))
-	return newVariant((*C.GVariant)(c)), nil
-}
+// func marshalVariant(p unsafe.Pointer) (interface{}, error) {
+// 	c := C.g_value_get_variant((*C.GValue)(unsafe.Pointer(p)))
+// 	return newVariant((*C.GVariant)(c)), nil
+// }

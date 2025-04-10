@@ -4,29 +4,63 @@ package gsk
 
 import (
 	"github.com/diamondburned/gotk4/pkg/core/gbox"
+	"github.com/diamondburned/gotk4/pkg/glib/v2"
+	"unsafe"
+	"github.com/diamondburned/gotk4/pkg/graphene"
 )
 
 // #include <gsk/gsk.h>
 import "C"
 
 //export _gotk4_gsk4_ParseErrorFunc
-func _gotk4_gsk4_ParseErrorFunc(carg1 *C.GskParseLocation, carg2 *C.GskParseLocation, carg3 *C.GError, carg4 C.gpointer) (cret C.void) {
+func _gotk4_gsk4_ParseErrorFunc(carg1 *C.GskParseLocation, carg2 *C.GskParseLocation, carg3 *C.GError, carg4 C.gpointer) {
+	var fn ParseErrorFunc
+	{
+		v := gbox.Get(uintptr(carg4))
+		if v == nil {
+			panic(`callback not found`)
+		}
+		fn = v.(ParseErrorFunc)
+	}
 
+	var start *ParseLocation // in, none, converted
+	var end   *ParseLocation // in, none, converted
+	var err   error          // in, none, converted
+
+	start = UnsafeParseLocationFromGlibNone(unsafe.Pointer(carg1))
+	end = UnsafeParseLocationFromGlibNone(unsafe.Pointer(carg2))
+	err = glib.UnsafeErrorFromGlibNone(unsafe.Pointer(carg3))
 
 	fn(start, end, err)
-
-
-
-	return cret
 }
 
 //export _gotk4_gsk4_PathForEachFunc
 func _gotk4_gsk4_PathForEachFunc(carg1 C.GskPathOperation, carg2 *C.graphene_point_t, carg3 C.gsize, carg4 C.gfloat, carg5 C.gpointer) (cret C.gboolean) {
+	var fn PathForEachFunc
+	{
+		v := gbox.Get(uintptr(carg5))
+		if v == nil {
+			panic(`callback not found`)
+		}
+		fn = v.(PathForEachFunc)
+	}
 
+	var op     PathOperation   // in, none, casted
+	var pts    *graphene.Point // in, none, converted
+	var nPts   uint            // in, none, casted
+	var weight float32         // in, none, casted
+	var goret  bool            // return
 
-	ret := fn(op, pts, nPts, weight)
+	op = PathOperation(carg1)
+	pts = graphene.UnsafePointFromGlibNone(unsafe.Pointer(carg2))
+	nPts = uint(carg3)
+	weight = float32(carg4)
 
+	goret = fn(op, pts, nPts, weight)
 
+	if goret {
+		cret = C.TRUE
+	}
 
 	return cret
 }

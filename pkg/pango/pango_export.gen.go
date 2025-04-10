@@ -4,40 +4,80 @@ package pango
 
 import (
 	"github.com/diamondburned/gotk4/pkg/core/gbox"
+	"unsafe"
 )
 
 // #include <pango/pango.h>
 import "C"
 
 //export _gotk4_pango1_AttrDataCopyFunc
-func _gotk4_pango1_AttrDataCopyFunc(carg1 C.gpointer) (cret C.gpointer) {
+func _gotk4_pango1_AttrDataCopyFunc(carg1 C.gconstpointer) (cret C.gpointer) {
+	var fn AttrDataCopyFunc
+	{
+		v := gbox.Get(uintptr(carg1))
+		if v == nil {
+			panic(`callback not found`)
+		}
+		fn = v.(AttrDataCopyFunc)
+	}
 
+	var goret unsafe.Pointer // return, none, casted
 
-	ret := fn()
+	goret = fn()
 
-
+	cret = C.gpointer(goret)
 
 	return cret
 }
 
 //export _gotk4_pango1_AttrFilterFunc
 func _gotk4_pango1_AttrFilterFunc(carg1 *C.PangoAttribute, carg2 C.gpointer) (cret C.gboolean) {
+	var fn AttrFilterFunc
+	{
+		v := gbox.Get(uintptr(carg2))
+		if v == nil {
+			panic(`callback not found`)
+		}
+		fn = v.(AttrFilterFunc)
+	}
 
+	var attribute *Attribute // in, none, converted
+	var goret     bool       // return
 
-	ret := fn(attribute)
+	attribute = UnsafeAttributeFromGlibNone(unsafe.Pointer(carg1))
 
+	goret = fn(attribute)
 
+	if goret {
+		cret = C.TRUE
+	}
 
 	return cret
 }
 
 //export _gotk4_pango1_FontsetForEachFunc
 func _gotk4_pango1_FontsetForEachFunc(carg1 *C.PangoFontset, carg2 *C.PangoFont, carg3 C.gpointer) (cret C.gboolean) {
+	var fn FontsetForEachFunc
+	{
+		v := gbox.Get(uintptr(carg3))
+		if v == nil {
+			panic(`callback not found`)
+		}
+		fn = v.(FontsetForEachFunc)
+	}
 
+	var fontset Fontset // in, none, converted
+	var font    Font    // in, none, converted
+	var goret   bool    // return
 
-	ret := fn(fontset, font)
+	fontset = UnsafeFontsetFromGlibNone(unsafe.Pointer(carg1))
+	font = UnsafeFontFromGlibNone(unsafe.Pointer(carg2))
 
+	goret = fn(fontset, font)
 
+	if goret {
+		cret = C.TRUE
+	}
 
 	return cret
 }

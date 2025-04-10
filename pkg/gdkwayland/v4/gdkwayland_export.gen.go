@@ -4,19 +4,29 @@ package gdkwayland
 
 import (
 	"github.com/diamondburned/gotk4/pkg/core/gbox"
+	"unsafe"
 )
 
 // #include <gdk/wayland/gdkwayland.h>
 import "C"
 
 //export _gotk4_gdkwayland4_WaylandToplevelExported
-func _gotk4_gdkwayland4_WaylandToplevelExported(carg1 *C.GdkWaylandToplevel, carg2 *C.gchar, carg3 C.gpointer) (cret C.void) {
+func _gotk4_gdkwayland4_WaylandToplevelExported(carg1 *C.GdkWaylandToplevel, carg2 *C.gchar, carg3 C.gpointer) {
+	var fn WaylandToplevelExported
+	{
+		v := gbox.Get(uintptr(carg3))
+		if v == nil {
+			panic(`callback not found`)
+		}
+		fn = v.(WaylandToplevelExported)
+	}
 
+	var toplevel WaylandToplevel // in, none, converted
+	var handle   string          // in, none, string
+
+	toplevel = UnsafeWaylandToplevelFromGlibNone(unsafe.Pointer(carg1))
+	handle = C.GoString((*C.gchar)(unsafe.Pointer(carg2)))
 
 	fn(toplevel, handle)
-
-
-
-	return cret
 }
 
