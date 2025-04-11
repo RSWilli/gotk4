@@ -324,6 +324,9 @@ var Main = genmain.Data{
 					typesystem.IgnoreMatching("PixbufAnimationIterClass"),
 				},
 			},
+			"GdkX11-4": {
+				MinVersion: "4.19",
+			},
 			"GdkWayland-4": {
 				MinVersion: "4.19",
 				IgnoredDefinitions: []typesystem.IgnoreFunc{

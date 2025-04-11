@@ -3,6 +3,7 @@ package typesystem
 import "fmt"
 
 type ConvertibleType interface {
+	Type
 	CanTransferToGlib(transfer TransferOwnership) bool
 	CanTransferFromGlib(transfer TransferOwnership) bool
 
@@ -112,5 +113,3 @@ func (b BaseConversions) GoUnsafeToGlibFullFunction() string {
 func (b BaseConversions) GoUnsafeToGlibNoneFunction() string {
 	return b.ToGlibNoneFunction
 }
-
-var _ ConvertibleType = BaseConversions{}

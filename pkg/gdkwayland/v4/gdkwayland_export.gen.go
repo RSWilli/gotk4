@@ -12,7 +12,7 @@ import (
 import "C"
 
 //export _gotk4_gdkwayland4_WaylandToplevelExported
-func _gotk4_gdkwayland4_WaylandToplevelExported(carg1 *C.GdkWaylandToplevel, carg2 *C.gchar, carg3 C.gpointer) {
+func _gotk4_gdkwayland4_WaylandToplevelExported(carg1 *C.GdkToplevel, carg2 *C.gchar, carg3 C.gpointer) {
 	var fn WaylandToplevelExported
 	{
 		v := gbox.Get(uintptr(carg3))
@@ -22,7 +22,7 @@ func _gotk4_gdkwayland4_WaylandToplevelExported(carg1 *C.GdkWaylandToplevel, car
 		fn = v.(WaylandToplevelExported)
 	}
 
-	var toplevel WaylandToplevel // in, none, converted
+	var toplevel WaylandToplevel // in, none, converted, casted *C.GdkWaylandToplevel
 	var handle   string          // in, none, string
 
 	toplevel = UnsafeWaylandToplevelFromGlibNone(unsafe.Pointer(carg1))

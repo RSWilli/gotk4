@@ -50,15 +50,10 @@ func NewCToGoConverter(p *typesystem.Param) Converter {
 }
 
 func newCToGoExtraMetadateConverter(p *typesystem.Param) Converter {
-	if _, ok := p.Type.Type.(*typesystem.InterfaceReturn); ok {
-		return &CToGoInterfaceReturnConverter{
+	if t, ok := p.Type.Type.(typesystem.OverriddenCType); ok {
+		return &OverridenCtypeConverter{
 			Param:        p,
-			SubConverter: newCToGoBasicConverter(p),
-		}
-	}
-	if _, ok := p.Type.Type.(*typesystem.ClassReturn); ok {
-		return &CToGoClassReturnConverter{
-			Param:        p,
+			Type:         t,
 			SubConverter: newCToGoBasicConverter(p),
 		}
 	}

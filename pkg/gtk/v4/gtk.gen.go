@@ -21814,7 +21814,7 @@ func UnsafeBuilderCScopeToGlibFull(c BuilderCScope) unsafe.Pointer {
 // Calling this function is only necessary if you want to add
 // custom callbacks via [method@Gtk.BuilderCScope.add_callback_symbol].
 func NewBuilderCScopeInstance() BuilderCScope {
-	var cret *C.GtkBuilderScope // return, full, converted, returned class
+	var cret *C.GtkBuilderScope // return, full, converted, casted *C.GtkBuilderCScope
 
 	cret = C.gtk_builder_cscope_new()
 
@@ -24004,7 +24004,7 @@ func (area *CellAreaInstance) Snapshot(context CellAreaContext, widget Widget, s
 	var carg0 *C.GtkCellArea         // in, none, converted
 	var carg1 *C.GtkCellAreaContext  // in, none, converted
 	var carg2 *C.GtkWidget           // in, none, converted
-	var carg3 *C.Snapshot            // in, none, converted
+	var carg3 *C.GtkSnapshot         // in, none, converted, casted *C.Snapshot
 	var carg4 *C.GdkRectangle        // in, none, converted
 	var carg5 *C.GdkRectangle        // in, none, converted
 	var carg6 C.GtkCellRendererState // in, none, casted
@@ -24013,7 +24013,7 @@ func (area *CellAreaInstance) Snapshot(context CellAreaContext, widget Widget, s
 	carg0 = (*C.GtkCellArea)(UnsafeCellAreaToGlibNone(area))
 	carg1 = (*C.GtkCellAreaContext)(UnsafeCellAreaContextToGlibNone(context))
 	carg2 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(widget))
-	carg3 = (*C.Snapshot)(UnsafeSnapshotToGlibNone(snapshot))
+	carg3 = (*C.GtkSnapshot)(UnsafeSnapshotToGlibNone(snapshot))
 	carg4 = (*C.GdkRectangle)(gdk.UnsafeRectangleToGlibNone(backgroundArea))
 	carg5 = (*C.GdkRectangle)(gdk.UnsafeRectangleToGlibNone(cellArea))
 	carg6 = C.GtkCellRendererState(flags)
@@ -26038,14 +26038,14 @@ func (cell *CellRendererInstance) SetVisible(visible bool) {
 // Deprecated: (since 4.10.0) 
 func (cell *CellRendererInstance) Snapshot(snapshot Snapshot, widget Widget, backgroundArea *gdk.Rectangle, cellArea *gdk.Rectangle, flags CellRendererState) {
 	var carg0 *C.GtkCellRenderer     // in, none, converted
-	var carg1 *C.Snapshot            // in, none, converted
+	var carg1 *C.GtkSnapshot         // in, none, converted, casted *C.Snapshot
 	var carg2 *C.GtkWidget           // in, none, converted
 	var carg3 *C.GdkRectangle        // in, none, converted
 	var carg4 *C.GdkRectangle        // in, none, converted
 	var carg5 C.GtkCellRendererState // in, none, casted
 
 	carg0 = (*C.GtkCellRenderer)(UnsafeCellRendererToGlibNone(cell))
-	carg1 = (*C.Snapshot)(UnsafeSnapshotToGlibNone(snapshot))
+	carg1 = (*C.GtkSnapshot)(UnsafeSnapshotToGlibNone(snapshot))
 	carg2 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(widget))
 	carg3 = (*C.GdkRectangle)(gdk.UnsafeRectangleToGlibNone(backgroundArea))
 	carg4 = (*C.GdkRectangle)(gdk.UnsafeRectangleToGlibNone(cellArea))
@@ -55592,7 +55592,7 @@ func UnsafeSignalActionToGlibFull(c SignalAction) unsafe.Pointer {
 // It will also unpack the args into arguments passed to the signal.
 func NewSignalActionInstance(signalName string) SignalAction {
 	var carg1 *C.gchar             // in, none, string
-	var cret  *C.GtkShortcutAction // return, full, converted, returned class
+	var cret  *C.GtkShortcutAction // return, full, converted, casted *C.GtkSignalAction
 
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(signalName)))
 	defer C.free(unsafe.Pointer(carg1))
@@ -57410,7 +57410,7 @@ func UnsafeSnapshotToGlibFull(c Snapshot) unsafe.Pointer {
 //
 // Creates a new `GtkSnapshot`.
 func NewSnapshotInstance() Snapshot {
-	var cret *C.GtkSnapshot // return, full, converted, returned class
+	var cret *C.GtkSnapshot // return, full, converted, casted *C.Snapshot
 
 	cret = C.gtk_snapshot_new()
 
@@ -57435,12 +57435,12 @@ func NewSnapshotInstance() Snapshot {
 // 
 // The four sides of the border can have different widths and colors.
 func (snapshot *SnapshotInstance) AppendBorder(outline *gsk.RoundedRect, borderWidth [4]float32, borderColor [4]gdk.RGBA) {
-	var carg0 *C.Snapshot       // in, none, converted
+	var carg0 *C.GtkSnapshot    // in, none, converted, casted *C.Snapshot
 	var carg1 *C.GskRoundedRect // in, none, converted
 	var carg2 *C.float          // in, transfer: none, C Pointers: 1, Name: array[gfloat], array (inner: *typesystem.CastablePrimitive, fixed-size: 4)
 	var carg3 *C.GdkRGBA        // in, transfer: none, C Pointers: 1, Name: array[RGBA], array (inner: *typesystem.Record, fixed-size: 4)
 
-	carg0 = (*C.Snapshot)(UnsafeSnapshotToGlibNone(snapshot))
+	carg0 = (*C.GtkSnapshot)(UnsafeSnapshotToGlibNone(snapshot))
 	carg1 = (*C.GskRoundedRect)(gsk.UnsafeRoundedRectToGlibNone(outline))
 	_ = borderWidth
 	_ = carg2
@@ -57470,11 +57470,11 @@ func (snapshot *SnapshotInstance) AppendBorder(outline *gsk.RoundedRect, borderW
 // You should try to avoid calling this function if
 // @color is transparent.
 func (snapshot *SnapshotInstance) AppendColor(color *gdk.RGBA, bounds *graphene.Rect) {
-	var carg0 *C.Snapshot        // in, none, converted
+	var carg0 *C.GtkSnapshot     // in, none, converted, casted *C.Snapshot
 	var carg1 *C.GdkRGBA         // in, none, converted
 	var carg2 *C.graphene_rect_t // in, none, converted
 
-	carg0 = (*C.Snapshot)(UnsafeSnapshotToGlibNone(snapshot))
+	carg0 = (*C.GtkSnapshot)(UnsafeSnapshotToGlibNone(snapshot))
 	carg1 = (*C.GdkRGBA)(gdk.UnsafeRGBAToGlibNone(color))
 	carg2 = (*C.graphene_rect_t)(graphene.UnsafeRectToGlibNone(bounds))
 
@@ -57496,14 +57496,14 @@ func (snapshot *SnapshotInstance) AppendColor(color *gdk.RGBA, bounds *graphene.
 //
 // Appends a conic gradient node with the given stops to @snapshot.
 func (snapshot *SnapshotInstance) AppendConicGradient(bounds *graphene.Rect, center *graphene.Point, rotation float32, stops []gsk.ColorStop) {
-	var carg0 *C.Snapshot         // in, none, converted
+	var carg0 *C.GtkSnapshot      // in, none, converted, casted *C.Snapshot
 	var carg1 *C.graphene_rect_t  // in, none, converted
 	var carg2 *C.graphene_point_t // in, none, converted
 	var carg3 C.gfloat            // in, none, casted
 	var carg4 *C.GskColorStop     // in, transfer: none, C Pointers: 1, Name: array[ColorStop], array (inner: *typesystem.Record, length-by: carg5)
 	var carg5 C.gsize             // implicit
 
-	carg0 = (*C.Snapshot)(UnsafeSnapshotToGlibNone(snapshot))
+	carg0 = (*C.GtkSnapshot)(UnsafeSnapshotToGlibNone(snapshot))
 	carg1 = (*C.graphene_rect_t)(graphene.UnsafeRectToGlibNone(bounds))
 	carg2 = (*C.graphene_point_t)(graphene.UnsafePointToGlibNone(center))
 	carg3 = C.gfloat(rotation)
@@ -57534,12 +57534,12 @@ func (snapshot *SnapshotInstance) AppendConicGradient(bounds *graphene.Rect, cen
 // to fill a path with more complex content than
 // a color.
 func (snapshot *SnapshotInstance) AppendFill(path *gsk.Path, fillRule gsk.FillRule, color *gdk.RGBA) {
-	var carg0 *C.Snapshot   // in, none, converted
-	var carg1 *C.GskPath    // in, none, converted
-	var carg2 C.GskFillRule // in, none, casted
-	var carg3 *C.GdkRGBA    // in, none, converted
+	var carg0 *C.GtkSnapshot // in, none, converted, casted *C.Snapshot
+	var carg1 *C.GskPath     // in, none, converted
+	var carg2 C.GskFillRule  // in, none, casted
+	var carg3 *C.GdkRGBA     // in, none, converted
 
-	carg0 = (*C.Snapshot)(UnsafeSnapshotToGlibNone(snapshot))
+	carg0 = (*C.GtkSnapshot)(UnsafeSnapshotToGlibNone(snapshot))
 	carg1 = (*C.GskPath)(gsk.UnsafePathToGlibNone(path))
 	carg2 = C.GskFillRule(fillRule)
 	carg3 = (*C.GdkRGBA)(gdk.UnsafeRGBAToGlibNone(color))
@@ -57564,7 +57564,7 @@ func (snapshot *SnapshotInstance) AppendFill(path *gsk.Path, fillRule gsk.FillRu
 //
 // Appends an inset shadow into the box given by @outline.
 func (snapshot *SnapshotInstance) AppendInsetShadow(outline *gsk.RoundedRect, color *gdk.RGBA, dx float32, dy float32, spread float32, blurRadius float32) {
-	var carg0 *C.Snapshot       // in, none, converted
+	var carg0 *C.GtkSnapshot    // in, none, converted, casted *C.Snapshot
 	var carg1 *C.GskRoundedRect // in, none, converted
 	var carg2 *C.GdkRGBA        // in, none, converted
 	var carg3 C.gfloat          // in, none, casted
@@ -57572,7 +57572,7 @@ func (snapshot *SnapshotInstance) AppendInsetShadow(outline *gsk.RoundedRect, co
 	var carg5 C.gfloat          // in, none, casted
 	var carg6 C.gfloat          // in, none, casted
 
-	carg0 = (*C.Snapshot)(UnsafeSnapshotToGlibNone(snapshot))
+	carg0 = (*C.GtkSnapshot)(UnsafeSnapshotToGlibNone(snapshot))
 	carg1 = (*C.GskRoundedRect)(gsk.UnsafeRoundedRectToGlibNone(outline))
 	carg2 = (*C.GdkRGBA)(gdk.UnsafeRGBAToGlibNone(color))
 	carg3 = C.gfloat(dx)
@@ -57605,11 +57605,11 @@ func (snapshot *SnapshotInstance) AppendInsetShadow(outline *gsk.RoundedRect, co
 // Note that if the layout does not produce any visible output, then nodes
 // may not be added to the @snapshot.
 func (snapshot *SnapshotInstance) AppendLayout(layout pango.Layout, color *gdk.RGBA) {
-	var carg0 *C.Snapshot    // in, none, converted
+	var carg0 *C.GtkSnapshot // in, none, converted, casted *C.Snapshot
 	var carg1 *C.PangoLayout // in, none, converted
 	var carg2 *C.GdkRGBA     // in, none, converted
 
-	carg0 = (*C.Snapshot)(UnsafeSnapshotToGlibNone(snapshot))
+	carg0 = (*C.GtkSnapshot)(UnsafeSnapshotToGlibNone(snapshot))
 	carg1 = (*C.PangoLayout)(pango.UnsafeLayoutToGlibNone(layout))
 	carg2 = (*C.GdkRGBA)(gdk.UnsafeRGBAToGlibNone(color))
 
@@ -57630,14 +57630,14 @@ func (snapshot *SnapshotInstance) AppendLayout(layout pango.Layout, color *gdk.R
 //
 // Appends a linear gradient node with the given stops to @snapshot.
 func (snapshot *SnapshotInstance) AppendLinearGradient(bounds *graphene.Rect, startPoint *graphene.Point, endPoint *graphene.Point, stops []gsk.ColorStop) {
-	var carg0 *C.Snapshot         // in, none, converted
+	var carg0 *C.GtkSnapshot      // in, none, converted, casted *C.Snapshot
 	var carg1 *C.graphene_rect_t  // in, none, converted
 	var carg2 *C.graphene_point_t // in, none, converted
 	var carg3 *C.graphene_point_t // in, none, converted
 	var carg4 *C.GskColorStop     // in, transfer: none, C Pointers: 1, Name: array[ColorStop], array (inner: *typesystem.Record, length-by: carg5)
 	var carg5 C.gsize             // implicit
 
-	carg0 = (*C.Snapshot)(UnsafeSnapshotToGlibNone(snapshot))
+	carg0 = (*C.GtkSnapshot)(UnsafeSnapshotToGlibNone(snapshot))
 	carg1 = (*C.graphene_rect_t)(graphene.UnsafeRectToGlibNone(bounds))
 	carg2 = (*C.graphene_point_t)(graphene.UnsafePointToGlibNone(startPoint))
 	carg3 = (*C.graphene_point_t)(graphene.UnsafePointToGlibNone(endPoint))
@@ -57667,7 +57667,7 @@ func (snapshot *SnapshotInstance) AppendLinearGradient(bounds *graphene.Rect, st
 //
 // Appends an outset shadow node around the box given by @outline.
 func (snapshot *SnapshotInstance) AppendOutsetShadow(outline *gsk.RoundedRect, color *gdk.RGBA, dx float32, dy float32, spread float32, blurRadius float32) {
-	var carg0 *C.Snapshot       // in, none, converted
+	var carg0 *C.GtkSnapshot    // in, none, converted, casted *C.Snapshot
 	var carg1 *C.GskRoundedRect // in, none, converted
 	var carg2 *C.GdkRGBA        // in, none, converted
 	var carg3 C.gfloat          // in, none, casted
@@ -57675,7 +57675,7 @@ func (snapshot *SnapshotInstance) AppendOutsetShadow(outline *gsk.RoundedRect, c
 	var carg5 C.gfloat          // in, none, casted
 	var carg6 C.gfloat          // in, none, casted
 
-	carg0 = (*C.Snapshot)(UnsafeSnapshotToGlibNone(snapshot))
+	carg0 = (*C.GtkSnapshot)(UnsafeSnapshotToGlibNone(snapshot))
 	carg1 = (*C.GskRoundedRect)(gsk.UnsafeRoundedRectToGlibNone(outline))
 	carg2 = (*C.GdkRGBA)(gdk.UnsafeRGBAToGlibNone(color))
 	carg3 = C.gfloat(dx)
@@ -57707,7 +57707,7 @@ func (snapshot *SnapshotInstance) AppendOutsetShadow(outline *gsk.RoundedRect, c
 //
 // Appends a radial gradient node with the given stops to @snapshot.
 func (snapshot *SnapshotInstance) AppendRadialGradient(bounds *graphene.Rect, center *graphene.Point, hradius float32, vradius float32, start float32, end float32, stops []gsk.ColorStop) {
-	var carg0 *C.Snapshot         // in, none, converted
+	var carg0 *C.GtkSnapshot      // in, none, converted, casted *C.Snapshot
 	var carg1 *C.graphene_rect_t  // in, none, converted
 	var carg2 *C.graphene_point_t // in, none, converted
 	var carg3 C.gfloat            // in, none, casted
@@ -57717,7 +57717,7 @@ func (snapshot *SnapshotInstance) AppendRadialGradient(bounds *graphene.Rect, ce
 	var carg7 *C.GskColorStop     // in, transfer: none, C Pointers: 1, Name: array[ColorStop], array (inner: *typesystem.Record, length-by: carg8)
 	var carg8 C.gsize             // implicit
 
-	carg0 = (*C.Snapshot)(UnsafeSnapshotToGlibNone(snapshot))
+	carg0 = (*C.GtkSnapshot)(UnsafeSnapshotToGlibNone(snapshot))
 	carg1 = (*C.graphene_rect_t)(graphene.UnsafeRectToGlibNone(bounds))
 	carg2 = (*C.graphene_point_t)(graphene.UnsafePointToGlibNone(center))
 	carg3 = C.gfloat(hradius)
@@ -57751,14 +57751,14 @@ func (snapshot *SnapshotInstance) AppendRadialGradient(bounds *graphene.Rect, ce
 //
 // Appends a repeating linear gradient node with the given stops to @snapshot.
 func (snapshot *SnapshotInstance) AppendRepeatingLinearGradient(bounds *graphene.Rect, startPoint *graphene.Point, endPoint *graphene.Point, stops []gsk.ColorStop) {
-	var carg0 *C.Snapshot         // in, none, converted
+	var carg0 *C.GtkSnapshot      // in, none, converted, casted *C.Snapshot
 	var carg1 *C.graphene_rect_t  // in, none, converted
 	var carg2 *C.graphene_point_t // in, none, converted
 	var carg3 *C.graphene_point_t // in, none, converted
 	var carg4 *C.GskColorStop     // in, transfer: none, C Pointers: 1, Name: array[ColorStop], array (inner: *typesystem.Record, length-by: carg5)
 	var carg5 C.gsize             // implicit
 
-	carg0 = (*C.Snapshot)(UnsafeSnapshotToGlibNone(snapshot))
+	carg0 = (*C.GtkSnapshot)(UnsafeSnapshotToGlibNone(snapshot))
 	carg1 = (*C.graphene_rect_t)(graphene.UnsafeRectToGlibNone(bounds))
 	carg2 = (*C.graphene_point_t)(graphene.UnsafePointToGlibNone(startPoint))
 	carg3 = (*C.graphene_point_t)(graphene.UnsafePointToGlibNone(endPoint))
@@ -57789,7 +57789,7 @@ func (snapshot *SnapshotInstance) AppendRepeatingLinearGradient(bounds *graphene
 //
 // Appends a repeating radial gradient node with the given stops to @snapshot.
 func (snapshot *SnapshotInstance) AppendRepeatingRadialGradient(bounds *graphene.Rect, center *graphene.Point, hradius float32, vradius float32, start float32, end float32, stops []gsk.ColorStop) {
-	var carg0 *C.Snapshot         // in, none, converted
+	var carg0 *C.GtkSnapshot      // in, none, converted, casted *C.Snapshot
 	var carg1 *C.graphene_rect_t  // in, none, converted
 	var carg2 *C.graphene_point_t // in, none, converted
 	var carg3 C.gfloat            // in, none, casted
@@ -57799,7 +57799,7 @@ func (snapshot *SnapshotInstance) AppendRepeatingRadialGradient(bounds *graphene
 	var carg7 *C.GskColorStop     // in, transfer: none, C Pointers: 1, Name: array[ColorStop], array (inner: *typesystem.Record, length-by: carg8)
 	var carg8 C.gsize             // implicit
 
-	carg0 = (*C.Snapshot)(UnsafeSnapshotToGlibNone(snapshot))
+	carg0 = (*C.GtkSnapshot)(UnsafeSnapshotToGlibNone(snapshot))
 	carg1 = (*C.graphene_rect_t)(graphene.UnsafeRectToGlibNone(bounds))
 	carg2 = (*C.graphene_point_t)(graphene.UnsafePointToGlibNone(center))
 	carg3 = C.gfloat(hradius)
@@ -57838,12 +57838,12 @@ func (snapshot *SnapshotInstance) AppendRepeatingRadialGradient(bounds *graphene
 // this function provides control about how the filter
 // that is used when scaling.
 func (snapshot *SnapshotInstance) AppendScaledTexture(texture gdk.Texture, filter gsk.ScalingFilter, bounds *graphene.Rect) {
-	var carg0 *C.Snapshot        // in, none, converted
+	var carg0 *C.GtkSnapshot     // in, none, converted, casted *C.Snapshot
 	var carg1 *C.GdkTexture      // in, none, converted
 	var carg2 C.GskScalingFilter // in, none, casted
 	var carg3 *C.graphene_rect_t // in, none, converted
 
-	carg0 = (*C.Snapshot)(UnsafeSnapshotToGlibNone(snapshot))
+	carg0 = (*C.GtkSnapshot)(UnsafeSnapshotToGlibNone(snapshot))
 	carg1 = (*C.GdkTexture)(gdk.UnsafeTextureToGlibNone(texture))
 	carg2 = C.GskScalingFilter(filter)
 	carg3 = (*C.graphene_rect_t)(graphene.UnsafeRectToGlibNone(bounds))
@@ -57869,12 +57869,12 @@ func (snapshot *SnapshotInstance) AppendScaledTexture(texture gdk.Texture, filte
 // to stroke a path with more complex content than
 // a color.
 func (snapshot *SnapshotInstance) AppendStroke(path *gsk.Path, stroke *gsk.Stroke, color *gdk.RGBA) {
-	var carg0 *C.Snapshot  // in, none, converted
-	var carg1 *C.GskPath   // in, none, converted
-	var carg2 *C.GskStroke // in, none, converted
-	var carg3 *C.GdkRGBA   // in, none, converted
+	var carg0 *C.GtkSnapshot // in, none, converted, casted *C.Snapshot
+	var carg1 *C.GskPath     // in, none, converted
+	var carg2 *C.GskStroke   // in, none, converted
+	var carg3 *C.GdkRGBA     // in, none, converted
 
-	carg0 = (*C.Snapshot)(UnsafeSnapshotToGlibNone(snapshot))
+	carg0 = (*C.GtkSnapshot)(UnsafeSnapshotToGlibNone(snapshot))
 	carg1 = (*C.GskPath)(gsk.UnsafePathToGlibNone(path))
 	carg2 = (*C.GskStroke)(gsk.UnsafeStrokeToGlibNone(stroke))
 	carg3 = (*C.GdkRGBA)(gdk.UnsafeRGBAToGlibNone(color))
@@ -57901,11 +57901,11 @@ func (snapshot *SnapshotInstance) AppendStroke(path *gsk.Path, stroke *gsk.Strok
 // linear filtering is used. See [method@Gtk.Snapshot.append_scaled_texture]
 // if you need other filtering, such as nearest-neighbour.
 func (snapshot *SnapshotInstance) AppendTexture(texture gdk.Texture, bounds *graphene.Rect) {
-	var carg0 *C.Snapshot        // in, none, converted
+	var carg0 *C.GtkSnapshot     // in, none, converted, casted *C.Snapshot
 	var carg1 *C.GdkTexture      // in, none, converted
 	var carg2 *C.graphene_rect_t // in, none, converted
 
-	carg0 = (*C.Snapshot)(UnsafeSnapshotToGlibNone(snapshot))
+	carg0 = (*C.GtkSnapshot)(UnsafeSnapshotToGlibNone(snapshot))
 	carg1 = (*C.GdkTexture)(gdk.UnsafeTextureToGlibNone(texture))
 	carg2 = (*C.graphene_rect_t)(graphene.UnsafeRectToGlibNone(bounds))
 
@@ -57928,9 +57928,9 @@ func (snapshot *SnapshotInstance) AppendTexture(texture gdk.Texture, bounds *gra
 //   does not support this feature. Use [class@Gtk.GLArea] for
 //   OpenGL rendering.
 func (snapshot *SnapshotInstance) GLShaderPopTexture() {
-	var carg0 *C.Snapshot // in, none, converted
+	var carg0 *C.GtkSnapshot // in, none, converted, casted *C.Snapshot
 
-	carg0 = (*C.Snapshot)(UnsafeSnapshotToGlibNone(snapshot))
+	carg0 = (*C.GtkSnapshot)(UnsafeSnapshotToGlibNone(snapshot))
 
 	C.gtk_snapshot_gl_shader_pop_texture(carg0)
 	runtime.KeepAlive(snapshot)
@@ -57946,10 +57946,10 @@ func (snapshot *SnapshotInstance) GLShaderPopTexture() {
 // 
 // See [method@Gsk.Transform.perspective] for a discussion on the details.
 func (snapshot *SnapshotInstance) Perspective(depth float32) {
-	var carg0 *C.Snapshot // in, none, converted
-	var carg1 C.gfloat    // in, none, casted
+	var carg0 *C.GtkSnapshot // in, none, converted, casted *C.Snapshot
+	var carg1 C.gfloat       // in, none, casted
 
-	carg0 = (*C.Snapshot)(UnsafeSnapshotToGlibNone(snapshot))
+	carg0 = (*C.GtkSnapshot)(UnsafeSnapshotToGlibNone(snapshot))
 	carg1 = C.gfloat(depth)
 
 	C.gtk_snapshot_perspective(carg0, carg1)
@@ -57962,9 +57962,9 @@ func (snapshot *SnapshotInstance) Perspective(depth float32) {
 // Removes the top element from the stack of render nodes,
 // and appends it to the node underneath it.
 func (snapshot *SnapshotInstance) Pop() {
-	var carg0 *C.Snapshot // in, none, converted
+	var carg0 *C.GtkSnapshot // in, none, converted, casted *C.Snapshot
 
-	carg0 = (*C.Snapshot)(UnsafeSnapshotToGlibNone(snapshot))
+	carg0 = (*C.GtkSnapshot)(UnsafeSnapshotToGlibNone(snapshot))
 
 	C.gtk_snapshot_pop(carg0)
 	runtime.KeepAlive(snapshot)
@@ -57986,10 +57986,10 @@ func (snapshot *SnapshotInstance) Pop() {
 // Calling this function requires two subsequent calls
 // to [method@Gtk.Snapshot.pop].
 func (snapshot *SnapshotInstance) PushBlend(blendMode gsk.BlendMode) {
-	var carg0 *C.Snapshot    // in, none, converted
+	var carg0 *C.GtkSnapshot // in, none, converted, casted *C.Snapshot
 	var carg1 C.GskBlendMode // in, none, casted
 
-	carg0 = (*C.Snapshot)(UnsafeSnapshotToGlibNone(snapshot))
+	carg0 = (*C.GtkSnapshot)(UnsafeSnapshotToGlibNone(snapshot))
 	carg1 = C.GskBlendMode(blendMode)
 
 	C.gtk_snapshot_push_blend(carg0, carg1)
@@ -58007,10 +58007,10 @@ func (snapshot *SnapshotInstance) PushBlend(blendMode gsk.BlendMode) {
 // 
 // The image is recorded until the next call to [method@Gtk.Snapshot.pop].
 func (snapshot *SnapshotInstance) PushBlur(radius float64) {
-	var carg0 *C.Snapshot // in, none, converted
-	var carg1 C.gdouble   // in, none, casted
+	var carg0 *C.GtkSnapshot // in, none, converted, casted *C.Snapshot
+	var carg1 C.gdouble      // in, none, casted
 
-	carg0 = (*C.Snapshot)(UnsafeSnapshotToGlibNone(snapshot))
+	carg0 = (*C.GtkSnapshot)(UnsafeSnapshotToGlibNone(snapshot))
 	carg1 = C.gdouble(radius)
 
 	C.gtk_snapshot_push_blur(carg0, carg1)
@@ -58028,10 +58028,10 @@ func (snapshot *SnapshotInstance) PushBlur(radius float64) {
 // 
 // The image is recorded until the next call to [method@Gtk.Snapshot.pop].
 func (snapshot *SnapshotInstance) PushClip(bounds *graphene.Rect) {
-	var carg0 *C.Snapshot        // in, none, converted
+	var carg0 *C.GtkSnapshot     // in, none, converted, casted *C.Snapshot
 	var carg1 *C.graphene_rect_t // in, none, converted
 
-	carg0 = (*C.Snapshot)(UnsafeSnapshotToGlibNone(snapshot))
+	carg0 = (*C.GtkSnapshot)(UnsafeSnapshotToGlibNone(snapshot))
 	carg1 = (*C.graphene_rect_t)(graphene.UnsafeRectToGlibNone(bounds))
 
 	C.gtk_snapshot_push_clip(carg0, carg1)
@@ -58058,11 +58058,11 @@ func (snapshot *SnapshotInstance) PushClip(bounds *graphene.Rect) {
 // 
 // The image is recorded until the next call to [method@Gtk.Snapshot.pop].
 func (snapshot *SnapshotInstance) PushColorMatrix(colorMatrix *graphene.Matrix, colorOffset *graphene.Vec4) {
-	var carg0 *C.Snapshot          // in, none, converted
+	var carg0 *C.GtkSnapshot       // in, none, converted, casted *C.Snapshot
 	var carg1 *C.graphene_matrix_t // in, none, converted
 	var carg2 *C.graphene_vec4_t   // in, none, converted
 
-	carg0 = (*C.Snapshot)(UnsafeSnapshotToGlibNone(snapshot))
+	carg0 = (*C.GtkSnapshot)(UnsafeSnapshotToGlibNone(snapshot))
 	carg1 = (*C.graphene_matrix_t)(graphene.UnsafeMatrixToGlibNone(colorMatrix))
 	carg2 = (*C.graphene_vec4_t)(graphene.UnsafeVec4ToGlibNone(colorOffset))
 
@@ -58088,10 +58088,10 @@ func (snapshot *SnapshotInstance) PushColorMatrix(colorMatrix *graphene.Matrix, 
 // Calling this function requires two subsequent calls
 // to [method@Gtk.Snapshot.pop].
 func (snapshot *SnapshotInstance) PushCrossFade(progress float64) {
-	var carg0 *C.Snapshot // in, none, converted
-	var carg1 C.gdouble   // in, none, casted
+	var carg0 *C.GtkSnapshot // in, none, converted, casted *C.Snapshot
+	var carg1 C.gdouble      // in, none, casted
 
-	carg0 = (*C.Snapshot)(UnsafeSnapshotToGlibNone(snapshot))
+	carg0 = (*C.GtkSnapshot)(UnsafeSnapshotToGlibNone(snapshot))
 	carg1 = C.gdouble(progress)
 
 	C.gtk_snapshot_push_cross_fade(carg0, carg1)
@@ -58114,11 +58114,11 @@ func (snapshot *SnapshotInstance) PushCrossFade(progress float64) {
 // If you want to fill the path with a color, [method@Gtk.Snapshot.append_fill]
 // may be more convenient.
 func (snapshot *SnapshotInstance) PushFill(path *gsk.Path, fillRule gsk.FillRule) {
-	var carg0 *C.Snapshot   // in, none, converted
-	var carg1 *C.GskPath    // in, none, converted
-	var carg2 C.GskFillRule // in, none, casted
+	var carg0 *C.GtkSnapshot // in, none, converted, casted *C.Snapshot
+	var carg1 *C.GskPath     // in, none, converted
+	var carg2 C.GskFillRule  // in, none, casted
 
-	carg0 = (*C.Snapshot)(UnsafeSnapshotToGlibNone(snapshot))
+	carg0 = (*C.GtkSnapshot)(UnsafeSnapshotToGlibNone(snapshot))
 	carg1 = (*C.GskPath)(gsk.UnsafePathToGlibNone(path))
 	carg2 = C.GskFillRule(fillRule)
 
@@ -58175,12 +58175,12 @@ func (snapshot *SnapshotInstance) PushFill(path *gsk.Path, fillRule gsk.FillRule
 //   does not support this feature. Use [class@Gtk.GLArea] for
 //   OpenGL rendering.
 func (snapshot *SnapshotInstance) PushGLShader(shader gsk.GLShader, bounds *graphene.Rect, takeArgs *glib.Bytes) {
-	var carg0 *C.Snapshot        // in, none, converted
+	var carg0 *C.GtkSnapshot     // in, none, converted, casted *C.Snapshot
 	var carg1 *C.GskGLShader     // in, none, converted
 	var carg2 *C.graphene_rect_t // in, none, converted
 	var carg3 *C.GBytes          // in, full, converted
 
-	carg0 = (*C.Snapshot)(UnsafeSnapshotToGlibNone(snapshot))
+	carg0 = (*C.GtkSnapshot)(UnsafeSnapshotToGlibNone(snapshot))
 	carg1 = (*C.GskGLShader)(gsk.UnsafeGLShaderToGlibNone(shader))
 	carg2 = (*C.graphene_rect_t)(graphene.UnsafeRectToGlibNone(bounds))
 	carg3 = (*C.GBytes)(glib.UnsafeBytesToGlibFull(takeArgs))
@@ -58206,10 +58206,10 @@ func (snapshot *SnapshotInstance) PushGLShader(shader gsk.GLShader, bounds *grap
 // 
 // Calling this function requires 2 subsequent calls to gtk_snapshot_pop().
 func (snapshot *SnapshotInstance) PushMask(maskMode gsk.MaskMode) {
-	var carg0 *C.Snapshot   // in, none, converted
-	var carg1 C.GskMaskMode // in, none, casted
+	var carg0 *C.GtkSnapshot // in, none, converted, casted *C.Snapshot
+	var carg1 C.GskMaskMode  // in, none, casted
 
-	carg0 = (*C.Snapshot)(UnsafeSnapshotToGlibNone(snapshot))
+	carg0 = (*C.GtkSnapshot)(UnsafeSnapshotToGlibNone(snapshot))
 	carg1 = C.GskMaskMode(maskMode)
 
 	C.gtk_snapshot_push_mask(carg0, carg1)
@@ -58227,10 +58227,10 @@ func (snapshot *SnapshotInstance) PushMask(maskMode gsk.MaskMode) {
 // 
 // The image is recorded until the next call to [method@Gtk.Snapshot.pop].
 func (snapshot *SnapshotInstance) PushOpacity(opacity float64) {
-	var carg0 *C.Snapshot // in, none, converted
-	var carg1 C.gdouble   // in, none, casted
+	var carg0 *C.GtkSnapshot // in, none, converted, casted *C.Snapshot
+	var carg1 C.gdouble      // in, none, casted
 
-	carg0 = (*C.Snapshot)(UnsafeSnapshotToGlibNone(snapshot))
+	carg0 = (*C.GtkSnapshot)(UnsafeSnapshotToGlibNone(snapshot))
 	carg1 = C.gdouble(opacity)
 
 	C.gtk_snapshot_push_opacity(carg0, carg1)
@@ -58250,11 +58250,11 @@ func (snapshot *SnapshotInstance) PushOpacity(opacity float64) {
 // 
 // The child is recorded until the next call to [method@Gtk.Snapshot.pop].
 func (snapshot *SnapshotInstance) PushRepeat(bounds *graphene.Rect, childBounds *graphene.Rect) {
-	var carg0 *C.Snapshot        // in, none, converted
+	var carg0 *C.GtkSnapshot     // in, none, converted, casted *C.Snapshot
 	var carg1 *C.graphene_rect_t // in, none, converted
 	var carg2 *C.graphene_rect_t // in, none, converted, nullable
 
-	carg0 = (*C.Snapshot)(UnsafeSnapshotToGlibNone(snapshot))
+	carg0 = (*C.GtkSnapshot)(UnsafeSnapshotToGlibNone(snapshot))
 	carg1 = (*C.graphene_rect_t)(graphene.UnsafeRectToGlibNone(bounds))
 	if childBounds != nil {
 		carg2 = (*C.graphene_rect_t)(graphene.UnsafeRectToGlibNone(childBounds))
@@ -58276,10 +58276,10 @@ func (snapshot *SnapshotInstance) PushRepeat(bounds *graphene.Rect, childBounds 
 // 
 // The image is recorded until the next call to [method@Gtk.Snapshot.pop].
 func (snapshot *SnapshotInstance) PushRoundedClip(bounds *gsk.RoundedRect) {
-	var carg0 *C.Snapshot       // in, none, converted
+	var carg0 *C.GtkSnapshot    // in, none, converted, casted *C.Snapshot
 	var carg1 *C.GskRoundedRect // in, none, converted
 
-	carg0 = (*C.Snapshot)(UnsafeSnapshotToGlibNone(snapshot))
+	carg0 = (*C.GtkSnapshot)(UnsafeSnapshotToGlibNone(snapshot))
 	carg1 = (*C.GskRoundedRect)(gsk.UnsafeRoundedRectToGlibNone(bounds))
 
 	C.gtk_snapshot_push_rounded_clip(carg0, carg1)
@@ -58297,11 +58297,11 @@ func (snapshot *SnapshotInstance) PushRoundedClip(bounds *gsk.RoundedRect) {
 // 
 // The image is recorded until the next call to [method@Gtk.Snapshot.pop].
 func (snapshot *SnapshotInstance) PushShadow(shadow []gsk.Shadow) {
-	var carg0 *C.Snapshot  // in, none, converted
-	var carg1 *C.GskShadow // in, transfer: none, C Pointers: 1, Name: array[Shadow], array (inner: *typesystem.Record, length-by: carg2)
-	var carg2 C.gsize      // implicit
+	var carg0 *C.GtkSnapshot // in, none, converted, casted *C.Snapshot
+	var carg1 *C.GskShadow   // in, transfer: none, C Pointers: 1, Name: array[Shadow], array (inner: *typesystem.Record, length-by: carg2)
+	var carg2 C.gsize        // implicit
 
-	carg0 = (*C.Snapshot)(UnsafeSnapshotToGlibNone(snapshot))
+	carg0 = (*C.GtkSnapshot)(UnsafeSnapshotToGlibNone(snapshot))
 	_ = shadow
 	_ = carg1
 	_ = carg2
@@ -58331,11 +58331,11 @@ func (snapshot *SnapshotInstance) PushShadow(shadow []gsk.Shadow) {
 // If you want to stroke the path with a color, [method@Gtk.Snapshot.append_stroke]
 // may be more convenient.
 func (snapshot *SnapshotInstance) PushStroke(path *gsk.Path, stroke *gsk.Stroke) {
-	var carg0 *C.Snapshot  // in, none, converted
-	var carg1 *C.GskPath   // in, none, converted
-	var carg2 *C.GskStroke // in, none, converted
+	var carg0 *C.GtkSnapshot // in, none, converted, casted *C.Snapshot
+	var carg1 *C.GskPath     // in, none, converted
+	var carg2 *C.GskStroke   // in, none, converted
 
-	carg0 = (*C.Snapshot)(UnsafeSnapshotToGlibNone(snapshot))
+	carg0 = (*C.GtkSnapshot)(UnsafeSnapshotToGlibNone(snapshot))
 	carg1 = (*C.GskPath)(gsk.UnsafePathToGlibNone(path))
 	carg2 = (*C.GskStroke)(gsk.UnsafeStrokeToGlibNone(stroke))
 
@@ -58361,14 +58361,14 @@ func (snapshot *SnapshotInstance) PushStroke(path *gsk.Path, stroke *gsk.Stroke)
 //
 // Deprecated: (since 4.10.0) 
 func (snapshot *SnapshotInstance) RenderBackground(context StyleContext, x float64, y float64, width float64, height float64) {
-	var carg0 *C.Snapshot        // in, none, converted
+	var carg0 *C.GtkSnapshot     // in, none, converted, casted *C.Snapshot
 	var carg1 *C.GtkStyleContext // in, none, converted
 	var carg2 C.gdouble          // in, none, casted
 	var carg3 C.gdouble          // in, none, casted
 	var carg4 C.gdouble          // in, none, casted
 	var carg5 C.gdouble          // in, none, casted
 
-	carg0 = (*C.Snapshot)(UnsafeSnapshotToGlibNone(snapshot))
+	carg0 = (*C.GtkSnapshot)(UnsafeSnapshotToGlibNone(snapshot))
 	carg1 = (*C.GtkStyleContext)(UnsafeStyleContextToGlibNone(context))
 	carg2 = C.gdouble(x)
 	carg3 = C.gdouble(y)
@@ -58400,14 +58400,14 @@ func (snapshot *SnapshotInstance) RenderBackground(context StyleContext, x float
 //
 // Deprecated: (since 4.10.0) 
 func (snapshot *SnapshotInstance) RenderFocus(context StyleContext, x float64, y float64, width float64, height float64) {
-	var carg0 *C.Snapshot        // in, none, converted
+	var carg0 *C.GtkSnapshot     // in, none, converted, casted *C.Snapshot
 	var carg1 *C.GtkStyleContext // in, none, converted
 	var carg2 C.gdouble          // in, none, casted
 	var carg3 C.gdouble          // in, none, casted
 	var carg4 C.gdouble          // in, none, casted
 	var carg5 C.gdouble          // in, none, casted
 
-	carg0 = (*C.Snapshot)(UnsafeSnapshotToGlibNone(snapshot))
+	carg0 = (*C.GtkSnapshot)(UnsafeSnapshotToGlibNone(snapshot))
 	carg1 = (*C.GtkStyleContext)(UnsafeStyleContextToGlibNone(context))
 	carg2 = C.gdouble(x)
 	carg3 = C.gdouble(y)
@@ -58439,14 +58439,14 @@ func (snapshot *SnapshotInstance) RenderFocus(context StyleContext, x float64, y
 //
 // Deprecated: (since 4.10.0) 
 func (snapshot *SnapshotInstance) RenderFrame(context StyleContext, x float64, y float64, width float64, height float64) {
-	var carg0 *C.Snapshot        // in, none, converted
+	var carg0 *C.GtkSnapshot     // in, none, converted, casted *C.Snapshot
 	var carg1 *C.GtkStyleContext // in, none, converted
 	var carg2 C.gdouble          // in, none, casted
 	var carg3 C.gdouble          // in, none, casted
 	var carg4 C.gdouble          // in, none, casted
 	var carg5 C.gdouble          // in, none, casted
 
-	carg0 = (*C.Snapshot)(UnsafeSnapshotToGlibNone(snapshot))
+	carg0 = (*C.GtkSnapshot)(UnsafeSnapshotToGlibNone(snapshot))
 	carg1 = (*C.GtkStyleContext)(UnsafeStyleContextToGlibNone(context))
 	carg2 = C.gdouble(x)
 	carg3 = C.gdouble(y)
@@ -58477,7 +58477,7 @@ func (snapshot *SnapshotInstance) RenderFrame(context StyleContext, x float64, y
 //
 // Deprecated: (since 4.10.0) 
 func (snapshot *SnapshotInstance) RenderInsertionCursor(context StyleContext, x float64, y float64, layout pango.Layout, index int, direction pango.Direction) {
-	var carg0 *C.Snapshot        // in, none, converted
+	var carg0 *C.GtkSnapshot     // in, none, converted, casted *C.Snapshot
 	var carg1 *C.GtkStyleContext // in, none, converted
 	var carg2 C.gdouble          // in, none, casted
 	var carg3 C.gdouble          // in, none, casted
@@ -58485,7 +58485,7 @@ func (snapshot *SnapshotInstance) RenderInsertionCursor(context StyleContext, x 
 	var carg5 C.int              // in, none, casted
 	var carg6 C.PangoDirection   // in, none, casted
 
-	carg0 = (*C.Snapshot)(UnsafeSnapshotToGlibNone(snapshot))
+	carg0 = (*C.GtkSnapshot)(UnsafeSnapshotToGlibNone(snapshot))
 	carg1 = (*C.GtkStyleContext)(UnsafeStyleContextToGlibNone(context))
 	carg2 = C.gdouble(x)
 	carg3 = C.gdouble(y)
@@ -58518,13 +58518,13 @@ func (snapshot *SnapshotInstance) RenderInsertionCursor(context StyleContext, x 
 //
 // Deprecated: (since 4.10.0) 
 func (snapshot *SnapshotInstance) RenderLayout(context StyleContext, x float64, y float64, layout pango.Layout) {
-	var carg0 *C.Snapshot        // in, none, converted
+	var carg0 *C.GtkSnapshot     // in, none, converted, casted *C.Snapshot
 	var carg1 *C.GtkStyleContext // in, none, converted
 	var carg2 C.gdouble          // in, none, casted
 	var carg3 C.gdouble          // in, none, casted
 	var carg4 *C.PangoLayout     // in, none, converted
 
-	carg0 = (*C.Snapshot)(UnsafeSnapshotToGlibNone(snapshot))
+	carg0 = (*C.GtkSnapshot)(UnsafeSnapshotToGlibNone(snapshot))
 	carg1 = (*C.GtkStyleContext)(UnsafeStyleContextToGlibNone(context))
 	carg2 = C.gdouble(x)
 	carg3 = C.gdouble(y)
@@ -58544,9 +58544,9 @@ func (snapshot *SnapshotInstance) RenderLayout(context StyleContext, x float64, 
 // [method@Snapshot.save] and removes that state from the stack of
 // saved states.
 func (snapshot *SnapshotInstance) Restore() {
-	var carg0 *C.Snapshot // in, none, converted
+	var carg0 *C.GtkSnapshot // in, none, converted, casted *C.Snapshot
 
-	carg0 = (*C.Snapshot)(UnsafeSnapshotToGlibNone(snapshot))
+	carg0 = (*C.GtkSnapshot)(UnsafeSnapshotToGlibNone(snapshot))
 
 	C.gtk_snapshot_restore(carg0)
 	runtime.KeepAlive(snapshot)
@@ -58564,10 +58564,10 @@ func (snapshot *SnapshotInstance) Restore() {
 // 
 // To rotate around axes other than the Z axis, use [method@Gsk.Transform.rotate_3d].
 func (snapshot *SnapshotInstance) Rotate(angle float32) {
-	var carg0 *C.Snapshot // in, none, converted
-	var carg1 C.gfloat    // in, none, casted
+	var carg0 *C.GtkSnapshot // in, none, converted, casted *C.Snapshot
+	var carg1 C.gfloat       // in, none, casted
 
-	carg0 = (*C.Snapshot)(UnsafeSnapshotToGlibNone(snapshot))
+	carg0 = (*C.GtkSnapshot)(UnsafeSnapshotToGlibNone(snapshot))
 	carg1 = C.gfloat(angle)
 
 	C.gtk_snapshot_rotate(carg0, carg1)
@@ -58586,11 +58586,11 @@ func (snapshot *SnapshotInstance) Rotate(angle float32) {
 // 
 // For a rotation in 2D space, use [method@Gsk.Transform.rotate].
 func (snapshot *SnapshotInstance) Rotate3D(angle float32, axis *graphene.Vec3) {
-	var carg0 *C.Snapshot        // in, none, converted
+	var carg0 *C.GtkSnapshot     // in, none, converted, casted *C.Snapshot
 	var carg1 C.gfloat           // in, none, casted
 	var carg2 *C.graphene_vec3_t // in, none, converted
 
-	carg0 = (*C.Snapshot)(UnsafeSnapshotToGlibNone(snapshot))
+	carg0 = (*C.GtkSnapshot)(UnsafeSnapshotToGlibNone(snapshot))
 	carg1 = C.gfloat(angle)
 	carg2 = (*C.graphene_vec3_t)(graphene.UnsafeVec3ToGlibNone(axis))
 
@@ -58615,9 +58615,9 @@ func (snapshot *SnapshotInstance) Rotate3D(angle float32, axis *graphene.Vec3) {
 // It is necessary to clear all saved states with corresponding
 // calls to `gtk_snapshot_restore()`.
 func (snapshot *SnapshotInstance) Save() {
-	var carg0 *C.Snapshot // in, none, converted
+	var carg0 *C.GtkSnapshot // in, none, converted, casted *C.Snapshot
 
-	carg0 = (*C.Snapshot)(UnsafeSnapshotToGlibNone(snapshot))
+	carg0 = (*C.GtkSnapshot)(UnsafeSnapshotToGlibNone(snapshot))
 
 	C.gtk_snapshot_save(carg0)
 	runtime.KeepAlive(snapshot)
@@ -58635,11 +58635,11 @@ func (snapshot *SnapshotInstance) Save() {
 // 
 // Use [method@Gtk.Snapshot.scale_3d] to scale in all 3 dimensions.
 func (snapshot *SnapshotInstance) Scale(factorX float32, factorY float32) {
-	var carg0 *C.Snapshot // in, none, converted
-	var carg1 C.gfloat    // in, none, casted
-	var carg2 C.gfloat    // in, none, casted
+	var carg0 *C.GtkSnapshot // in, none, converted, casted *C.Snapshot
+	var carg1 C.gfloat       // in, none, casted
+	var carg2 C.gfloat       // in, none, casted
 
-	carg0 = (*C.Snapshot)(UnsafeSnapshotToGlibNone(snapshot))
+	carg0 = (*C.GtkSnapshot)(UnsafeSnapshotToGlibNone(snapshot))
 	carg1 = C.gfloat(factorX)
 	carg2 = C.gfloat(factorY)
 
@@ -58659,12 +58659,12 @@ func (snapshot *SnapshotInstance) Scale(factorX float32, factorY float32) {
 //
 // Scales @snapshot's coordinate system by the given factors.
 func (snapshot *SnapshotInstance) Scale3D(factorX float32, factorY float32, factorZ float32) {
-	var carg0 *C.Snapshot // in, none, converted
-	var carg1 C.gfloat    // in, none, casted
-	var carg2 C.gfloat    // in, none, casted
-	var carg3 C.gfloat    // in, none, casted
+	var carg0 *C.GtkSnapshot // in, none, converted, casted *C.Snapshot
+	var carg1 C.gfloat       // in, none, casted
+	var carg2 C.gfloat       // in, none, casted
+	var carg3 C.gfloat       // in, none, casted
 
-	carg0 = (*C.Snapshot)(UnsafeSnapshotToGlibNone(snapshot))
+	carg0 = (*C.GtkSnapshot)(UnsafeSnapshotToGlibNone(snapshot))
 	carg1 = C.gfloat(factorX)
 	carg2 = C.gfloat(factorY)
 	carg3 = C.gfloat(factorZ)
@@ -58694,11 +58694,11 @@ func (snapshot *SnapshotInstance) Scale3D(factorX float32, factorY float32, fact
 // add more nodes to @snapshot. The only function that should
 // be called after this is [method@GObject.Object.unref].
 func (snapshot *SnapshotInstance) ToPaintable(size *graphene.Size) gdk.Paintable {
-	var carg0 *C.Snapshot        // in, none, converted
+	var carg0 *C.GtkSnapshot     // in, none, converted, casted *C.Snapshot
 	var carg1 *C.graphene_size_t // in, none, converted, nullable
 	var cret  *C.GdkPaintable    // return, full, converted
 
-	carg0 = (*C.Snapshot)(UnsafeSnapshotToGlibNone(snapshot))
+	carg0 = (*C.GtkSnapshot)(UnsafeSnapshotToGlibNone(snapshot))
 	if size != nil {
 		carg1 = (*C.graphene_size_t)(graphene.UnsafeSizeToGlibNone(size))
 	}
@@ -58722,10 +58722,10 @@ func (snapshot *SnapshotInstance) ToPaintable(size *graphene.Size) gdk.Paintable
 //
 // Transforms @snapshot's coordinate system with the given @transform.
 func (snapshot *SnapshotInstance) Transform(transform *gsk.Transform) {
-	var carg0 *C.Snapshot     // in, none, converted
+	var carg0 *C.GtkSnapshot  // in, none, converted, casted *C.Snapshot
 	var carg1 *C.GskTransform // in, none, converted, nullable
 
-	carg0 = (*C.Snapshot)(UnsafeSnapshotToGlibNone(snapshot))
+	carg0 = (*C.GtkSnapshot)(UnsafeSnapshotToGlibNone(snapshot))
 	if transform != nil {
 		carg1 = (*C.GskTransform)(gsk.UnsafeTransformToGlibNone(transform))
 	}
@@ -58743,10 +58743,10 @@ func (snapshot *SnapshotInstance) Transform(transform *gsk.Transform) {
 //
 // Transforms @snapshot's coordinate system with the given @matrix.
 func (snapshot *SnapshotInstance) TransformMatrix(matrix *graphene.Matrix) {
-	var carg0 *C.Snapshot          // in, none, converted
+	var carg0 *C.GtkSnapshot       // in, none, converted, casted *C.Snapshot
 	var carg1 *C.graphene_matrix_t // in, none, converted
 
-	carg0 = (*C.Snapshot)(UnsafeSnapshotToGlibNone(snapshot))
+	carg0 = (*C.GtkSnapshot)(UnsafeSnapshotToGlibNone(snapshot))
 	carg1 = (*C.graphene_matrix_t)(graphene.UnsafeMatrixToGlibNone(matrix))
 
 	C.gtk_snapshot_transform_matrix(carg0, carg1)
@@ -58762,10 +58762,10 @@ func (snapshot *SnapshotInstance) TransformMatrix(matrix *graphene.Matrix) {
 //
 // Translates @snapshot's coordinate system by @point in 2-dimensional space.
 func (snapshot *SnapshotInstance) Translate(point *graphene.Point) {
-	var carg0 *C.Snapshot         // in, none, converted
+	var carg0 *C.GtkSnapshot      // in, none, converted, casted *C.Snapshot
 	var carg1 *C.graphene_point_t // in, none, converted
 
-	carg0 = (*C.Snapshot)(UnsafeSnapshotToGlibNone(snapshot))
+	carg0 = (*C.GtkSnapshot)(UnsafeSnapshotToGlibNone(snapshot))
 	carg1 = (*C.graphene_point_t)(graphene.UnsafePointToGlibNone(point))
 
 	C.gtk_snapshot_translate(carg0, carg1)
@@ -58781,10 +58781,10 @@ func (snapshot *SnapshotInstance) Translate(point *graphene.Point) {
 //
 // Translates @snapshot's coordinate system by @point.
 func (snapshot *SnapshotInstance) Translate3D(point *graphene.Point3D) {
-	var carg0 *C.Snapshot           // in, none, converted
+	var carg0 *C.GtkSnapshot        // in, none, converted, casted *C.Snapshot
 	var carg1 *C.graphene_point3d_t // in, none, converted
 
-	carg0 = (*C.Snapshot)(UnsafeSnapshotToGlibNone(snapshot))
+	carg0 = (*C.GtkSnapshot)(UnsafeSnapshotToGlibNone(snapshot))
 	carg1 = (*C.graphene_point3d_t)(graphene.UnsafePoint3DToGlibNone(point))
 
 	C.gtk_snapshot_translate_3d(carg0, carg1)
@@ -68250,7 +68250,7 @@ func UnsafeTreeModelSortToGlibFull(c TreeModelSort) unsafe.Pointer {
 // Creates a new `GtkTreeModelSort`, with @child_model as the child model.
 func NewTreeModelSortInstanceWithModel(childModel TreeModel) TreeModelSort {
 	var carg1 *C.GtkTreeModel // in, none, converted
-	var cret  *C.GtkTreeModel // return, full, converted, returned class
+	var cret  *C.GtkTreeModel // return, full, converted, casted *C.GtkTreeModelSort
 
 	carg1 = (*C.GtkTreeModel)(UnsafeTreeModelToGlibNone(childModel))
 
@@ -79566,13 +79566,13 @@ func (widget *WidgetInstance) SizeAllocate(allocation *Allocation, baseline int)
 // 
 // This function does nothing for children that implement `GtkNative`.
 func (widget *WidgetInstance) SnapshotChild(child Widget, snapshot Snapshot) {
-	var carg0 *C.GtkWidget // in, none, converted
-	var carg1 *C.GtkWidget // in, none, converted
-	var carg2 *C.Snapshot  // in, none, converted
+	var carg0 *C.GtkWidget   // in, none, converted
+	var carg1 *C.GtkWidget   // in, none, converted
+	var carg2 *C.GtkSnapshot // in, none, converted, casted *C.Snapshot
 
 	carg0 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(widget))
 	carg1 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(child))
-	carg2 = (*C.Snapshot)(UnsafeSnapshotToGlibNone(snapshot))
+	carg2 = (*C.GtkSnapshot)(UnsafeSnapshotToGlibNone(snapshot))
 
 	C.gtk_widget_snapshot_child(carg0, carg1, carg2)
 	runtime.KeepAlive(widget)
@@ -79818,7 +79818,7 @@ func UnsafeWidgetPaintableToGlibFull(c WidgetPaintable) unsafe.Pointer {
 // Creates a new widget paintable observing the given widget.
 func NewWidgetPaintableInstance(widget Widget) WidgetPaintable {
 	var carg1 *C.GtkWidget    // in, none, converted, nullable
-	var cret  *C.GdkPaintable // return, full, converted, returned class
+	var cret  *C.GdkPaintable // return, full, converted, casted *C.GtkWidgetPaintable
 
 	if widget != nil {
 		carg1 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(widget))
@@ -84445,7 +84445,7 @@ func UnsafeActivateActionToGlibFull(c ActivateAction) unsafe.Pointer {
 // This is an action that calls gtk_widget_activate()
 // on the given widget upon activation.
 func ActivateActionInstanceGet() ActivateAction {
-	var cret *C.GtkShortcutAction // return, none, converted, returned class
+	var cret *C.GtkShortcutAction // return, none, converted, casted *C.GtkActivateAction
 
 	cret = C.gtk_activate_action_get()
 
@@ -98043,7 +98043,7 @@ func (dialog *DialogInstance) AddButton(buttonText string, responseId int) Widge
 // Deprecated: (since 4.10.0) Use [class@Gtk.Window] instead
 func (dialog *DialogInstance) GetContentArea() Box {
 	var carg0 *C.GtkDialog // in, none, converted
-	var cret  *C.GtkWidget // return, none, converted, returned class
+	var cret  *C.GtkWidget // return, none, converted, casted *C.GtkBox
 
 	carg0 = (*C.GtkDialog)(UnsafeDialogToGlibNone(dialog))
 
@@ -98070,7 +98070,7 @@ func (dialog *DialogInstance) GetContentArea() Box {
 // Deprecated: (since 4.10.0) Use [class@Gtk.Window] instead
 func (dialog *DialogInstance) GetHeaderBar() HeaderBar {
 	var carg0 *C.GtkDialog // in, none, converted
-	var cret  *C.GtkWidget // return, none, converted, returned class
+	var cret  *C.GtkWidget // return, none, converted, casted *C.GtkHeaderBar
 
 	carg0 = (*C.GtkDialog)(UnsafeDialogToGlibNone(dialog))
 
@@ -116929,7 +116929,7 @@ func (infoBar *InfoBarInstance) AddButton(buttonText string, responseId int) But
 	var carg0 *C.GtkInfoBar // in, none, converted
 	var carg1 *C.gchar      // in, none, string
 	var carg2 C.int         // in, none, casted
-	var cret  *C.GtkWidget  // return, none, converted, returned class
+	var cret  *C.GtkWidget  // return, none, converted, casted *C.GtkButton
 
 	carg0 = (*C.GtkInfoBar)(UnsafeInfoBarToGlibNone(infoBar))
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(buttonText)))
@@ -124358,7 +124358,7 @@ func UnsafeMediaFileToGlibFull(c MediaFile) unsafe.Pointer {
 //
 // Creates a new empty media file.
 func NewMediaFileInstance() MediaFile {
-	var cret *C.GtkMediaStream // return, full, converted, returned class
+	var cret *C.GtkMediaStream // return, full, converted, casted *C.GtkMediaFile
 
 	cret = C.gtk_media_file_new()
 
@@ -124382,7 +124382,7 @@ func NewMediaFileInstance() MediaFile {
 // Creates a new media file to play @file.
 func NewMediaFileInstanceForFile(file gio.File) MediaFile {
 	var carg1 *C.GFile          // in, none, converted
-	var cret  *C.GtkMediaStream // return, full, converted, returned class
+	var cret  *C.GtkMediaStream // return, full, converted, casted *C.GtkMediaFile
 
 	carg1 = (*C.GFile)(gio.UnsafeFileToGlibNone(file))
 
@@ -124412,7 +124412,7 @@ func NewMediaFileInstanceForFile(file gio.File) MediaFile {
 // to a `GFile` and calls [ctor@Gtk.MediaFile.new_for_file].
 func NewMediaFileInstanceForFilename(filename string) MediaFile {
 	var carg1 *C.gchar          // in, none, string
-	var cret  *C.GtkMediaStream // return, full, converted, returned class
+	var cret  *C.GtkMediaStream // return, full, converted, casted *C.GtkMediaFile
 
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(filename)))
 	defer C.free(unsafe.Pointer(carg1))
@@ -124443,7 +124443,7 @@ func NewMediaFileInstanceForFilename(filename string) MediaFile {
 // the stream should implement the `GSeekable` interface.
 func NewMediaFileInstanceForInputStream(stream gio.InputStream) MediaFile {
 	var carg1 *C.GInputStream   // in, none, converted
-	var cret  *C.GtkMediaStream // return, full, converted, returned class
+	var cret  *C.GtkMediaStream // return, full, converted, casted *C.GtkMediaFile
 
 	carg1 = (*C.GInputStream)(gio.UnsafeInputStreamToGlibNone(stream))
 
@@ -124473,7 +124473,7 @@ func NewMediaFileInstanceForInputStream(stream gio.InputStream) MediaFile {
 // to a `GFile` and calls [ctor@Gtk.MediaFile.new_for_file].
 func NewMediaFileInstanceForResource(resourcePath string) MediaFile {
 	var carg1 *C.gchar          // in, none, string
-	var cret  *C.GtkMediaStream // return, full, converted, returned class
+	var cret  *C.GtkMediaStream // return, full, converted, casted *C.GtkMediaFile
 
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(resourcePath)))
 	defer C.free(unsafe.Pointer(carg1))
@@ -125981,7 +125981,7 @@ func UnsafeMnemonicActionToGlibFull(c MnemonicAction) unsafe.Pointer {
 // This is an action that calls gtk_widget_mnemonic_activate()
 // on the given widget upon activation.
 func MnemonicActionInstanceGet() MnemonicAction {
-	var cret *C.GtkShortcutAction // return, none, converted, returned class
+	var cret *C.GtkShortcutAction // return, none, converted, casted *C.GtkMnemonicAction
 
 	cret = C.gtk_mnemonic_action_get()
 
@@ -126072,7 +126072,7 @@ func UnsafeMnemonicTriggerToGlibFull(c MnemonicTrigger) unsafe.Pointer {
 // modifiers is detected.
 func NewMnemonicTriggerInstance(keyval uint) MnemonicTrigger {
 	var carg1 C.guint               // in, none, casted
-	var cret  *C.GtkShortcutTrigger // return, full, converted, returned class
+	var cret  *C.GtkShortcutTrigger // return, full, converted, casted *C.GtkMnemonicTrigger
 
 	carg1 = C.guint(keyval)
 
@@ -126344,7 +126344,7 @@ func UnsafeNamedActionToGlibFull(c NamedAction) unsafe.Pointer {
 // how to add actions to widgets.
 func NewNamedActionInstance(name string) NamedAction {
 	var carg1 *C.gchar             // in, none, string
-	var cret  *C.GtkShortcutAction // return, full, converted, returned class
+	var cret  *C.GtkShortcutAction // return, full, converted, casted *C.GtkNamedAction
 
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(name)))
 	defer C.free(unsafe.Pointer(carg1))
@@ -126444,7 +126444,7 @@ func UnsafeNeverTriggerToGlibFull(c NeverTrigger) unsafe.Pointer {
 // Use this trigger instead of %NULL because it implements
 // all virtual functions.
 func NeverTriggerInstanceGet() NeverTrigger {
-	var cret *C.GtkShortcutTrigger // return, none, converted, returned class
+	var cret *C.GtkShortcutTrigger // return, none, converted, casted *C.GtkNeverTrigger
 
 	cret = C.gtk_never_trigger_get()
 
@@ -128518,7 +128518,7 @@ func UnsafeNothingActionToGlibFull(c NothingAction) unsafe.Pointer {
 // This is an action that does nothing and where
 // activating it always fails.
 func NothingActionInstanceGet() NothingAction {
-	var cret *C.GtkShortcutAction // return, none, converted, returned class
+	var cret *C.GtkShortcutAction // return, none, converted, casted *C.GtkNothingAction
 
 	cret = C.gtk_nothing_action_get()
 
@@ -136324,7 +136324,7 @@ func (button *ScaleButtonInstance) GetHasFrame() bool {
 // Retrieves the minus button of the `GtkScaleButton`.
 func (button *ScaleButtonInstance) GetMinusButton() Button {
 	var carg0 *C.GtkScaleButton // in, none, converted
-	var cret  *C.GtkWidget      // return, none, converted, returned class
+	var cret  *C.GtkWidget      // return, none, converted, casted *C.GtkButton
 
 	carg0 = (*C.GtkScaleButton)(UnsafeScaleButtonToGlibNone(button))
 
@@ -136346,7 +136346,7 @@ func (button *ScaleButtonInstance) GetMinusButton() Button {
 // Retrieves the plus button of the `GtkScaleButton.`
 func (button *ScaleButtonInstance) GetPlusButton() Button {
 	var carg0 *C.GtkScaleButton // in, none, converted
-	var cret  *C.GtkWidget      // return, none, converted, returned class
+	var cret  *C.GtkWidget      // return, none, converted, casted *C.GtkButton
 
 	carg0 = (*C.GtkScaleButton)(UnsafeScaleButtonToGlibNone(button))
 

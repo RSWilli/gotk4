@@ -14,7 +14,7 @@ import (
 // #cgo pkg-config: gtk4-wayland
 // #cgo CFLAGS: -Wno-deprecated-declarations
 // #include <gdk/wayland/gdkwayland.h>
-// extern void _gotk4_gdkwayland4_WaylandToplevelExported(GdkWaylandToplevel*, gchar*, gpointer);
+// extern void _gotk4_gdkwayland4_WaylandToplevelExported(GdkToplevel*, gchar*, gpointer);
 // extern void callbackDelete(guintptr);
 import "C"
 
@@ -141,10 +141,10 @@ func UnsafeWaylandDeviceToGlibFull(c WaylandDevice) unsafe.Pointer {
 // This is most notably implemented for devices of type
 // %GDK_SOURCE_PEN, %GDK_SOURCE_TABLET_PAD.
 func (device *WaylandDeviceInstance) GetNodePath() string {
-	var carg0 *C.GdkWaylandDevice // in, none, converted
-	var cret  *C.gchar            // return, none, string
+	var carg0 *C.GdkDevice // in, none, converted, casted *C.GdkWaylandDevice
+	var cret  *C.gchar     // return, none, string
 
-	carg0 = (*C.GdkWaylandDevice)(UnsafeWaylandDeviceToGlibNone(device))
+	carg0 = (*C.GdkDevice)(UnsafeWaylandDeviceToGlibNone(device))
 
 	cret = C.gdk_wayland_device_get_node_path(carg0)
 	runtime.KeepAlive(device)
@@ -244,10 +244,10 @@ func UnsafeWaylandDisplayToGlibFull(c WaylandDisplay) unsafe.Pointer {
 //
 // Retrieves the EGL display connection object for the given GDK display.
 func (display *WaylandDisplayInstance) GetEglDisplay() unsafe.Pointer {
-	var carg0 *C.GdkWaylandDisplay // in, none, converted
-	var cret  C.gpointer           // return, none, casted
+	var carg0 *C.GdkDisplay // in, none, converted, casted *C.GdkWaylandDisplay
+	var cret  C.gpointer    // return, none, casted
 
-	carg0 = (*C.GdkWaylandDisplay)(UnsafeWaylandDisplayToGlibNone(display))
+	carg0 = (*C.GdkDisplay)(UnsafeWaylandDisplayToGlibNone(display))
 
 	cret = C.gdk_wayland_display_get_egl_display(carg0)
 	runtime.KeepAlive(display)
@@ -272,11 +272,11 @@ func (display *WaylandDisplayInstance) GetEglDisplay() unsafe.Pointer {
 // Returns %TRUE if the interface was found in the display
 // `wl_registry.global` handler.
 func (display *WaylandDisplayInstance) QueryRegistry(global string) bool {
-	var carg0 *C.GdkWaylandDisplay // in, none, converted
-	var carg1 *C.gchar             // in, none, string
-	var cret  C.gboolean           // return
+	var carg0 *C.GdkDisplay // in, none, converted, casted *C.GdkWaylandDisplay
+	var carg1 *C.gchar      // in, none, string
+	var cret  C.gboolean    // return
 
-	carg0 = (*C.GdkWaylandDisplay)(UnsafeWaylandDisplayToGlibNone(display))
+	carg0 = (*C.GdkDisplay)(UnsafeWaylandDisplayToGlibNone(display))
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(global)))
 	defer C.free(unsafe.Pointer(carg1))
 
@@ -664,10 +664,10 @@ func UnsafeWaylandToplevelToGlibFull(c WaylandToplevel) unsafe.Pointer {
 // Note that this API depends on an unstable Wayland protocol,
 // and thus may require changes in the future.
 func (toplevel *WaylandToplevelInstance) DropExportedHandle(handle string) {
-	var carg0 *C.GdkWaylandToplevel // in, none, converted
-	var carg1 *C.gchar              // in, none, string
+	var carg0 *C.GdkToplevel // in, none, converted, casted *C.GdkWaylandToplevel
+	var carg1 *C.gchar       // in, none, string
 
-	carg0 = (*C.GdkWaylandToplevel)(UnsafeWaylandToplevelToGlibNone(toplevel))
+	carg0 = (*C.GdkToplevel)(UnsafeWaylandToplevelToGlibNone(toplevel))
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(handle)))
 	defer C.free(unsafe.Pointer(carg1))
 
@@ -710,13 +710,13 @@ func (toplevel *WaylandToplevelInstance) DropExportedHandle(handle string) {
 // Note that this API depends on an unstable Wayland protocol,
 // and thus may require changes in the future.
 func (toplevel *WaylandToplevelInstance) ExportHandle(callback WaylandToplevelExported) bool {
-	var carg0 *C.GdkWaylandToplevel        // in, none, converted
+	var carg0 *C.GdkToplevel               // in, none, converted, casted *C.GdkWaylandToplevel
 	var carg1 C.GdkWaylandToplevelExported // callback, scope: notified, closure: carg2, destroy: carg3
 	var carg2 C.gpointer                   // implicit
 	var carg3 C.GDestroyNotify             // implicit
 	var cret  C.gboolean                   // return
 
-	carg0 = (*C.GdkWaylandToplevel)(UnsafeWaylandToplevelToGlibNone(toplevel))
+	carg0 = (*C.GdkToplevel)(UnsafeWaylandToplevelToGlibNone(toplevel))
 	carg1 = (*[0]byte)(C._gotk4_gdkwayland4_WaylandToplevelExported)
 	carg2 = C.gpointer(gbox.Assign(callback))
 	carg3 = (C.GDestroyNotify)((*[0]byte)(C.callbackDelete))
@@ -742,10 +742,10 @@ func (toplevel *WaylandToplevelInstance) ExportHandle(callback WaylandToplevelEx
 //
 // Sets the application id on a `GdkToplevel`.
 func (toplevel *WaylandToplevelInstance) SetApplicationID(applicationId string) {
-	var carg0 *C.GdkWaylandToplevel // in, none, converted
-	var carg1 *C.gchar              // in, none, string
+	var carg0 *C.GdkToplevel // in, none, converted, casted *C.GdkWaylandToplevel
+	var carg1 *C.gchar       // in, none, string
 
-	carg0 = (*C.GdkWaylandToplevel)(UnsafeWaylandToplevelToGlibNone(toplevel))
+	carg0 = (*C.GdkToplevel)(UnsafeWaylandToplevelToGlibNone(toplevel))
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(applicationId)))
 	defer C.free(unsafe.Pointer(carg1))
 
@@ -773,11 +773,11 @@ func (toplevel *WaylandToplevelInstance) SetApplicationID(applicationId string) 
 // Note that this API depends on an unstable Wayland protocol,
 // and thus may require changes in the future.
 func (toplevel *WaylandToplevelInstance) SetTransientForExported(parentHandleStr string) bool {
-	var carg0 *C.GdkWaylandToplevel // in, none, converted
-	var carg1 *C.gchar              // in, none, string
-	var cret  C.gboolean            // return
+	var carg0 *C.GdkToplevel // in, none, converted, casted *C.GdkWaylandToplevel
+	var carg1 *C.gchar       // in, none, string
+	var cret  C.gboolean     // return
 
-	carg0 = (*C.GdkWaylandToplevel)(UnsafeWaylandToplevelToGlibNone(toplevel))
+	carg0 = (*C.GdkToplevel)(UnsafeWaylandToplevelToGlibNone(toplevel))
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(parentHandleStr)))
 	defer C.free(unsafe.Pointer(carg1))
 

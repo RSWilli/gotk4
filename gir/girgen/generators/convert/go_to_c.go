@@ -38,6 +38,18 @@ func NewGoToCConverter(p *typesystem.Param) Converter {
 		}
 		return &GoToCNullableConverter{
 			Param:        p,
+			SubConverter: newGoToCExtraMetadateConverter(p),
+		}
+	}
+
+	return newGoToCExtraMetadateConverter(p)
+}
+
+func newGoToCExtraMetadateConverter(p *typesystem.Param) Converter {
+	if t, ok := p.Type.Type.(typesystem.OverriddenCType); ok {
+		return &OverridenCtypeConverter{
+			Param:        p,
+			Type:         t,
 			SubConverter: newGoToCBasicConverter(p),
 		}
 	}

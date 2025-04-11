@@ -21231,7 +21231,7 @@ func NewMemoryTextureInstance(width int, height int, format MemoryFormat, bytes 
 	var carg3 C.GdkMemoryFormat // in, none, casted
 	var carg4 *C.GBytes         // in, none, converted
 	var carg5 C.gsize           // in, none, casted
-	var cret  *C.GdkTexture     // return, full, converted, returned class
+	var cret  *C.GdkTexture     // return, full, converted, casted *C.GdkMemoryTexture
 
 	carg1 = C.int(width)
 	carg2 = C.int(height)

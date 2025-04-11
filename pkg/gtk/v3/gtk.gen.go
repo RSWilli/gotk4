@@ -61298,7 +61298,7 @@ func UnsafeTreeModelSortToGlibFull(c TreeModelSort) unsafe.Pointer {
 // Creates a new #GtkTreeModelSort, with @child_model as the child model.
 func NewTreeModelSortInstanceWithModel(childModel TreeModel) TreeModelSort {
 	var carg1 *C.GtkTreeModel // in, none, converted
-	var cret  *C.GtkTreeModel // return, full, converted, returned class
+	var cret  *C.GtkTreeModel // return, full, converted, casted *C.GtkTreeModelSort
 
 	carg1 = (*C.GtkTreeModel)(UnsafeTreeModelToGlibNone(childModel))
 
@@ -93128,10 +93128,10 @@ func (menuShell *MenuShellInstance) ActivateItem(menuItem Widget, forceDeactivat
 // item list.
 func (menuShell *MenuShellInstance) Append(child MenuItem) {
 	var carg0 *C.GtkMenuShell // in, none, converted
-	var carg1 *C.GtkMenuItem  // in, none, converted
+	var carg1 *C.GtkWidget    // in, none, converted, casted *C.GtkMenuItem
 
 	carg0 = (*C.GtkMenuShell)(UnsafeMenuShellToGlibNone(menuShell))
-	carg1 = (*C.GtkMenuItem)(UnsafeMenuItemToGlibNone(child))
+	carg1 = (*C.GtkWidget)(UnsafeMenuItemToGlibNone(child))
 
 	C.gtk_menu_shell_append(carg0, carg1)
 	runtime.KeepAlive(menuShell)
@@ -119512,10 +119512,10 @@ func NewFileChooserButtonInstance(title string, action FileChooserAction) Widget
 // added with response %GTK_RESPONSE_ACCEPT or %GTK_RESPONSE_OK in
 // order for the button to take over the file selected in the dialog.
 func NewFileChooserButtonInstanceWithDialog(dialog Dialog) Widget {
-	var carg1 *C.GtkDialog // in, none, converted
+	var carg1 *C.GtkWidget // in, none, converted, casted *C.GtkDialog
 	var cret  *C.GtkWidget // return, none, converted
 
-	carg1 = (*C.GtkDialog)(UnsafeDialogToGlibNone(dialog))
+	carg1 = (*C.GtkWidget)(UnsafeDialogToGlibNone(dialog))
 
 	cret = C.gtk_file_chooser_button_new_with_dialog(carg1)
 	runtime.KeepAlive(dialog)
@@ -123881,7 +123881,7 @@ func (infoBar *InfoBarInstance) AddButton(buttonText string, responseId int) But
 	var carg0 *C.GtkInfoBar // in, none, converted
 	var carg1 *C.gchar      // in, none, string
 	var carg2 C.int         // in, none, casted
-	var cret  *C.GtkWidget  // return, none, converted, returned class
+	var cret  *C.GtkWidget  // return, none, converted, casted *C.GtkButton
 
 	carg0 = (*C.GtkInfoBar)(UnsafeInfoBarToGlibNone(infoBar))
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(buttonText)))
@@ -123908,7 +123908,7 @@ func (infoBar *InfoBarInstance) AddButton(buttonText string, responseId int) But
 // Returns the action area of @info_bar.
 func (infoBar *InfoBarInstance) GetActionArea() Box {
 	var carg0 *C.GtkInfoBar // in, none, converted
-	var cret  *C.GtkWidget  // return, none, converted, returned class
+	var cret  *C.GtkWidget  // return, none, converted, casted *C.GtkBox
 
 	carg0 = (*C.GtkInfoBar)(UnsafeInfoBarToGlibNone(infoBar))
 
@@ -123930,7 +123930,7 @@ func (infoBar *InfoBarInstance) GetActionArea() Box {
 // Returns the content area of @info_bar.
 func (infoBar *InfoBarInstance) GetContentArea() Box {
 	var carg0 *C.GtkInfoBar // in, none, converted
-	var cret  *C.GtkWidget  // return, none, converted, returned class
+	var cret  *C.GtkWidget  // return, none, converted, casted *C.GtkBox
 
 	carg0 = (*C.GtkInfoBar)(UnsafeInfoBarToGlibNone(infoBar))
 
@@ -129063,11 +129063,11 @@ func (menuItem *MenuItemInstance) SetRightJustified(rightJustified bool) {
 // submenu is passed.
 func (menuItem *MenuItemInstance) SetSubmenu(submenu Menu) {
 	var carg0 *C.GtkMenuItem // in, none, converted
-	var carg1 *C.GtkMenu     // in, none, converted, nullable
+	var carg1 *C.GtkWidget   // in, none, converted, casted *C.GtkMenu, nullable
 
 	carg0 = (*C.GtkMenuItem)(UnsafeMenuItemToGlibNone(menuItem))
 	if submenu != nil {
-		carg1 = (*C.GtkMenu)(UnsafeMenuToGlibNone(submenu))
+		carg1 = (*C.GtkWidget)(UnsafeMenuToGlibNone(submenu))
 	}
 
 	C.gtk_menu_item_set_submenu(carg0, carg1)
@@ -131663,7 +131663,7 @@ func (button *ScaleButtonInstance) GetAdjustment() Adjustment {
 // Retrieves the minus button of the #GtkScaleButton.
 func (button *ScaleButtonInstance) GetMinusButton() Button {
 	var carg0 *C.GtkScaleButton // in, none, converted
-	var cret  *C.GtkWidget      // return, none, converted, returned class
+	var cret  *C.GtkWidget      // return, none, converted, casted *C.GtkButton
 
 	carg0 = (*C.GtkScaleButton)(UnsafeScaleButtonToGlibNone(button))
 
@@ -131685,7 +131685,7 @@ func (button *ScaleButtonInstance) GetMinusButton() Button {
 // Retrieves the plus button of the #GtkScaleButton.
 func (button *ScaleButtonInstance) GetPlusButton() Button {
 	var carg0 *C.GtkScaleButton // in, none, converted
-	var cret  *C.GtkWidget      // return, none, converted, returned class
+	var cret  *C.GtkWidget      // return, none, converted, casted *C.GtkButton
 
 	carg0 = (*C.GtkScaleButton)(UnsafeScaleButtonToGlibNone(button))
 
@@ -134497,7 +134497,7 @@ func (statusbar *StatusbarInstance) GetContextID(contextDescription string) uint
 // Retrieves the box containing the label widget.
 func (statusbar *StatusbarInstance) GetMessageArea() Box {
 	var carg0 *C.GtkStatusbar // in, none, converted
-	var cret  *C.GtkWidget    // return, none, converted, returned class
+	var cret  *C.GtkWidget    // return, none, converted, casted *C.GtkBox
 
 	carg0 = (*C.GtkStatusbar)(UnsafeStatusbarToGlibNone(statusbar))
 
@@ -146378,7 +146378,7 @@ func (dialog *DialogInstance) AddButton(buttonText string, responseId int) Widge
 //   is discouraged; use gtk_dialog_add_button(), etc.
 func (dialog *DialogInstance) GetActionArea() Box {
 	var carg0 *C.GtkDialog // in, none, converted
-	var cret  *C.GtkWidget // return, none, converted, returned class
+	var cret  *C.GtkWidget // return, none, converted, casted *C.GtkBox
 
 	carg0 = (*C.GtkDialog)(UnsafeDialogToGlibNone(dialog))
 
@@ -146400,7 +146400,7 @@ func (dialog *DialogInstance) GetActionArea() Box {
 // Returns the content area of @dialog.
 func (dialog *DialogInstance) GetContentArea() Box {
 	var carg0 *C.GtkDialog // in, none, converted
-	var cret  *C.GtkWidget // return, none, converted, returned class
+	var cret  *C.GtkWidget // return, none, converted, casted *C.GtkBox
 
 	carg0 = (*C.GtkDialog)(UnsafeDialogToGlibNone(dialog))
 
@@ -146424,7 +146424,7 @@ func (dialog *DialogInstance) GetContentArea() Box {
 // #GtkDialog:use-header-bar property is %TRUE.
 func (dialog *DialogInstance) GetHeaderBar() HeaderBar {
 	var carg0 *C.GtkDialog // in, none, converted
-	var cret  *C.GtkWidget // return, none, converted, returned class
+	var cret  *C.GtkWidget // return, none, converted, casted *C.GtkHeaderBar
 
 	carg0 = (*C.GtkDialog)(UnsafeDialogToGlibNone(dialog))
 

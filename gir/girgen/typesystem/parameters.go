@@ -213,6 +213,8 @@ func NewCallableParameters(e *env, v gir.CallableAttrs) (*Parameters, resolvedSt
 				return nil, notResolvable
 			}
 
+			t = fixCType(t, v.Parameters.InstanceParameter.AnyType)
+
 			pointers := CountCTypePointers(girType.CType)
 
 			if pointers != 1 {
@@ -276,6 +278,8 @@ func NewCallableParameters(e *env, v gir.CallableAttrs) (*Parameters, resolvedSt
 				e.logger.Warn("type not found", "ctype", debugCTypeFromAnytype(p.AnyType))
 				return nil, maybeResolvable
 			}
+
+			t = fixCType(t, paramType)
 
 			direction := p.Direction
 
@@ -388,8 +392,7 @@ func NewCallableParameters(e *env, v gir.CallableAttrs) (*Parameters, resolvedSt
 			transfer = TransferFull
 		}
 
-		t = wrapInterfaceReturnIfNeeded(t, v.ReturnValue.AnyType)
-		t = wrapClassReturnIfNeeded(t, v.ReturnValue.AnyType)
+		t = fixCType(t, v.ReturnValue.AnyType)
 
 		ctypePointers := CountCTypePointers(CTypeFromAnytype(v.ReturnValue.AnyType))
 

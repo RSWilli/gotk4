@@ -68,10 +68,10 @@ const (
 //
 // Returns the device ID as seen by XInput2.
 func X11DeviceGetID(device X11DeviceXI2) int {
-	var carg1 *C.GdkX11DeviceXI2 // in, none, converted
-	var cret  C.int              // return, none, casted
+	var carg1 *C.GdkDevice // in, none, converted, casted *C.GdkX11DeviceXI2
+	var cret  C.int        // return, none, casted
 
-	carg1 = (*C.GdkX11DeviceXI2)(UnsafeX11DeviceXI2ToGlibNone(device))
+	carg1 = (*C.GdkDevice)(UnsafeX11DeviceXI2ToGlibNone(device))
 
 	cret = C.gdk_x11_device_get_id(carg1)
 	runtime.KeepAlive(device)
@@ -98,7 +98,7 @@ func X11DeviceGetID(device X11DeviceXI2) int {
 func X11DeviceManagerLookup(deviceManager X11DeviceManagerXI2, deviceId int) X11DeviceXI2 {
 	var carg1 *C.GdkX11DeviceManagerXI2 // in, none, converted
 	var carg2 C.int                     // in, none, casted
-	var cret  *C.GdkDevice              // return, none, converted, returned class
+	var cret  *C.GdkDevice              // return, none, converted, casted *C.GdkX11DeviceXI2
 
 	carg1 = (*C.GdkX11DeviceManagerXI2)(UnsafeX11DeviceManagerXI2ToGlibNone(deviceManager))
 	carg2 = C.int(deviceId)
@@ -147,10 +147,10 @@ func X11FreeCompoundText(ctext *uint8) {
 //
 // Routine to get the current X server time stamp.
 func X11GetServerTime(surface X11Surface) uint32 {
-	var carg1 *C.GdkX11Surface // in, none, converted
-	var cret  C.guint32        // return, none, casted
+	var carg1 *C.GdkSurface // in, none, converted, casted *C.GdkX11Surface
+	var cret  C.guint32     // return, none, casted
 
-	carg1 = (*C.GdkX11Surface)(UnsafeX11SurfaceToGlibNone(surface))
+	carg1 = (*C.GdkSurface)(UnsafeX11SurfaceToGlibNone(surface))
 
 	cret = C.gdk_x11_get_server_time(carg1)
 	runtime.KeepAlive(surface)
@@ -436,15 +436,6 @@ type X11Display interface {
 	//
 	// Retrieves the `GdkX11Screen` of the @display.
 	GetScreen() X11Screen
-	// GetStartupNotificationID wraps gdk_x11_display_get_startup_notification_id
-	// The function returns the following values:
-	// 
-	// 	- goret string 
-	//
-	// Gets the startup notification ID for a display.
-	//
-	// Deprecated: (since 4.10.0) 
-	GetStartupNotificationID() string
 	// GetUserTime wraps gdk_x11_display_get_user_time
 	// The function returns the following values:
 	// 
@@ -462,50 +453,6 @@ type X11Display interface {
 	// 
 	// gdk_x11_display_grab()/gdk_x11_display_ungrab() calls can be nested.
 	Grab()
-	// SetCursorTheme wraps gdk_x11_display_set_cursor_theme
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- theme string (nullable): the name of the cursor theme to use, or %NULL
-	//   to unset a previously set value 
-	// 	- size int: the cursor size to use, or 0 to keep the previous size 
-	//
-	// Sets the cursor theme from which the images for cursor
-	// should be taken.
-	// 
-	// If the windowing system supports it, existing cursors created
-	// with [ctor@Gdk.Cursor.new_from_name] are updated to reflect the theme
-	// change. Custom cursors constructed with [ctor@Gdk.Cursor.new_from_texture]
-	// will have to be handled by the application (GTK applications can learn
-	// about cursor theme changes by listening for change notification
-	// for the corresponding `GtkSetting`).
-	//
-	// Deprecated: (since 4.16.0) Use the cursor-related properties of
-	//   [GtkSettings](../gtk4/class.Settings.html) to set the cursor theme
-	SetCursorTheme(string, int)
-	// SetStartupNotificationID wraps gdk_x11_display_set_startup_notification_id
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- startupId string: the startup notification ID (must be valid utf8) 
-	//
-	// Sets the startup notification ID for a display.
-	// 
-	// This is usually taken from the value of the DESKTOP_STARTUP_ID
-	// environment variable, but in some cases (such as the application not
-	// being launched using exec()) it can come from other sources.
-	// 
-	// If the ID contains the string "_TIME" then the portion following that
-	// string is taken to be the X11 timestamp of the event that triggered
-	// the application to be launched and the GDK current event time is set
-	// accordingly.
-	// 
-	// The startup ID is also what is used to signal that the startup is
-	// complete (for example, when opening a window or when calling
-	// gdk_display_notify_startup_complete()).
-	//
-	// Deprecated: (since 4.10.0) Using [method@Gdk.Toplevel.set_startup_id] is sufficient
-	SetStartupNotificationID(string)
 	// SetSurfaceScale wraps gdk_x11_display_set_surface_scale
 	// 
 	// The function takes the following parameters:
@@ -633,10 +580,10 @@ func X11DisplayInstanceSetProgramClass(display gdk.Display, programClass string)
 // If you don’t need to use the return value,
 // gdk_x11_display_error_trap_pop_ignored() would be more efficient.
 func (display *X11DisplayInstance) ErrorTrapPop() int {
-	var carg0 *C.GdkX11Display // in, none, converted
-	var cret  C.int            // return, none, casted
+	var carg0 *C.GdkDisplay // in, none, converted, casted *C.GdkX11Display
+	var cret  C.int         // return, none, casted
 
-	carg0 = (*C.GdkX11Display)(UnsafeX11DisplayToGlibNone(display))
+	carg0 = (*C.GdkDisplay)(UnsafeX11DisplayToGlibNone(display))
 
 	cret = C.gdk_x11_display_error_trap_pop(carg0)
 	runtime.KeepAlive(display)
@@ -655,9 +602,9 @@ func (display *X11DisplayInstance) ErrorTrapPop() int {
 // range of requests to ignore errors for, and ignores those errors
 // if they arrive asynchronously.
 func (display *X11DisplayInstance) ErrorTrapPopIgnored() {
-	var carg0 *C.GdkX11Display // in, none, converted
+	var carg0 *C.GdkDisplay // in, none, converted, casted *C.GdkX11Display
 
-	carg0 = (*C.GdkX11Display)(UnsafeX11DisplayToGlibNone(display))
+	carg0 = (*C.GdkDisplay)(UnsafeX11DisplayToGlibNone(display))
 
 	C.gdk_x11_display_error_trap_pop_ignored(carg0)
 	runtime.KeepAlive(display)
@@ -671,9 +618,9 @@ func (display *X11DisplayInstance) ErrorTrapPopIgnored() {
 // gdk_x11_display_error_trap_pop_ignored()to lift a trap pushed
 // with this function.
 func (display *X11DisplayInstance) ErrorTrapPush() {
-	var carg0 *C.GdkX11Display // in, none, converted
+	var carg0 *C.GdkDisplay // in, none, converted, casted *C.GdkX11Display
 
-	carg0 = (*C.GdkX11Display)(UnsafeX11DisplayToGlibNone(display))
+	carg0 = (*C.GdkDisplay)(UnsafeX11DisplayToGlibNone(display))
 
 	C.gdk_x11_display_error_trap_push(carg0)
 	runtime.KeepAlive(display)
@@ -688,10 +635,10 @@ func (display *X11DisplayInstance) ErrorTrapPush() {
 // on @display. This surface is implicitly created by GDK.
 // See gdk_x11_surface_set_group().
 func (display *X11DisplayInstance) GetDefaultGroup() gdk.Surface {
-	var carg0 *C.GdkX11Display // in, none, converted
-	var cret  *C.GdkSurface    // return, none, converted
+	var carg0 *C.GdkDisplay // in, none, converted, casted *C.GdkX11Display
+	var cret  *C.GdkSurface // return, none, converted
 
-	carg0 = (*C.GdkX11Display)(UnsafeX11DisplayToGlibNone(display))
+	carg0 = (*C.GdkDisplay)(UnsafeX11DisplayToGlibNone(display))
 
 	cret = C.gdk_x11_display_get_default_group(carg0)
 	runtime.KeepAlive(display)
@@ -712,10 +659,10 @@ func (display *X11DisplayInstance) GetDefaultGroup() gdk.Surface {
 // 
 // This function returns `NULL` if GDK is using GLX.
 func (display *X11DisplayInstance) GetEglDisplay() unsafe.Pointer {
-	var carg0 *C.GdkX11Display // in, none, converted
-	var cret  C.gpointer       // return, none, casted
+	var carg0 *C.GdkDisplay // in, none, converted, casted *C.GdkX11Display
+	var cret  C.gpointer    // return, none, casted
 
-	carg0 = (*C.GdkX11Display)(UnsafeX11DisplayToGlibNone(display))
+	carg0 = (*C.GdkDisplay)(UnsafeX11DisplayToGlibNone(display))
 
 	cret = C.gdk_x11_display_get_egl_display(carg0)
 	runtime.KeepAlive(display)
@@ -736,12 +683,12 @@ func (display *X11DisplayInstance) GetEglDisplay() unsafe.Pointer {
 //
 // Retrieves the version of the EGL implementation.
 func (display *X11DisplayInstance) GetEglVersion() (int, int, bool) {
-	var carg0 *C.GdkX11Display // in, none, converted
-	var carg1 C.int            // out, full, casted
-	var carg2 C.int            // out, full, casted
-	var cret  C.gboolean       // return
+	var carg0 *C.GdkDisplay // in, none, converted, casted *C.GdkX11Display
+	var carg1 C.int         // out, full, casted
+	var carg2 C.int         // out, full, casted
+	var cret  C.gboolean    // return
 
-	carg0 = (*C.GdkX11Display)(UnsafeX11DisplayToGlibNone(display))
+	carg0 = (*C.GdkDisplay)(UnsafeX11DisplayToGlibNone(display))
 
 	cret = C.gdk_x11_display_get_egl_version(carg0, &carg1, &carg2)
 	runtime.KeepAlive(display)
@@ -768,12 +715,12 @@ func (display *X11DisplayInstance) GetEglVersion() (int, int, bool) {
 //
 // Retrieves the version of the GLX implementation.
 func (display *X11DisplayInstance) GetGLXVersion() (int, int, bool) {
-	var carg0 *C.GdkX11Display // in, none, converted
-	var carg1 C.int            // out, full, casted
-	var carg2 C.int            // out, full, casted
-	var cret  C.gboolean       // return
+	var carg0 *C.GdkDisplay // in, none, converted, casted *C.GdkX11Display
+	var carg1 C.int         // out, full, casted
+	var carg2 C.int         // out, full, casted
+	var cret  C.gboolean    // return
 
-	carg0 = (*C.GdkX11Display)(UnsafeX11DisplayToGlibNone(display))
+	carg0 = (*C.GdkDisplay)(UnsafeX11DisplayToGlibNone(display))
 
 	cret = C.gdk_x11_display_get_glx_version(carg0, &carg1, &carg2)
 	runtime.KeepAlive(display)
@@ -806,10 +753,10 @@ func (display *X11DisplayInstance) GetGLXVersion() (int, int, bool) {
 // If no monitor is the designated primary monitor, any monitor
 // (usually the first) may be returned.
 func (display *X11DisplayInstance) GetPrimaryMonitor() gdk.Monitor {
-	var carg0 *C.GdkX11Display // in, none, converted
-	var cret  *C.GdkMonitor    // return, none, converted
+	var carg0 *C.GdkDisplay // in, none, converted, casted *C.GdkX11Display
+	var cret  *C.GdkMonitor // return, none, converted
 
-	carg0 = (*C.GdkX11Display)(UnsafeX11DisplayToGlibNone(display))
+	carg0 = (*C.GdkDisplay)(UnsafeX11DisplayToGlibNone(display))
 
 	cret = C.gdk_x11_display_get_primary_monitor(carg0)
 	runtime.KeepAlive(display)
@@ -828,10 +775,10 @@ func (display *X11DisplayInstance) GetPrimaryMonitor() gdk.Monitor {
 //
 // Retrieves the `GdkX11Screen` of the @display.
 func (display *X11DisplayInstance) GetScreen() X11Screen {
-	var carg0 *C.GdkX11Display // in, none, converted
-	var cret  *C.GdkX11Screen  // return, none, converted
+	var carg0 *C.GdkDisplay   // in, none, converted, casted *C.GdkX11Display
+	var cret  *C.GdkX11Screen // return, none, converted
 
-	carg0 = (*C.GdkX11Display)(UnsafeX11DisplayToGlibNone(display))
+	carg0 = (*C.GdkDisplay)(UnsafeX11DisplayToGlibNone(display))
 
 	cret = C.gdk_x11_display_get_screen(carg0)
 	runtime.KeepAlive(display)
@@ -839,30 +786,6 @@ func (display *X11DisplayInstance) GetScreen() X11Screen {
 	var goret X11Screen
 
 	goret = UnsafeX11ScreenFromGlibNone(unsafe.Pointer(cret))
-
-	return goret
-}
-
-// GetStartupNotificationID wraps gdk_x11_display_get_startup_notification_id
-// The function returns the following values:
-// 
-// 	- goret string 
-//
-// Gets the startup notification ID for a display.
-//
-// Deprecated: (since 4.10.0) 
-func (display *X11DisplayInstance) GetStartupNotificationID() string {
-	var carg0 *C.GdkX11Display // in, none, converted
-	var cret  *C.gchar         // return, none, string
-
-	carg0 = (*C.GdkX11Display)(UnsafeX11DisplayToGlibNone(display))
-
-	cret = C.gdk_x11_display_get_startup_notification_id(carg0)
-	runtime.KeepAlive(display)
-
-	var goret string
-
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -877,10 +800,10 @@ func (display *X11DisplayInstance) GetStartupNotificationID() string {
 // by user interaction such as key presses or pointer
 // movements. See gdk_x11_surface_set_user_time().
 func (display *X11DisplayInstance) GetUserTime() uint32 {
-	var carg0 *C.GdkX11Display // in, none, converted
-	var cret  C.guint32        // return, none, casted
+	var carg0 *C.GdkDisplay // in, none, converted, casted *C.GdkX11Display
+	var cret  C.guint32     // return, none, casted
 
-	carg0 = (*C.GdkX11Display)(UnsafeX11DisplayToGlibNone(display))
+	carg0 = (*C.GdkDisplay)(UnsafeX11DisplayToGlibNone(display))
 
 	cret = C.gdk_x11_display_get_user_time(carg0)
 	runtime.KeepAlive(display)
@@ -899,85 +822,12 @@ func (display *X11DisplayInstance) GetUserTime() uint32 {
 // 
 // gdk_x11_display_grab()/gdk_x11_display_ungrab() calls can be nested.
 func (display *X11DisplayInstance) Grab() {
-	var carg0 *C.GdkX11Display // in, none, converted
+	var carg0 *C.GdkDisplay // in, none, converted, casted *C.GdkX11Display
 
-	carg0 = (*C.GdkX11Display)(UnsafeX11DisplayToGlibNone(display))
+	carg0 = (*C.GdkDisplay)(UnsafeX11DisplayToGlibNone(display))
 
 	C.gdk_x11_display_grab(carg0)
 	runtime.KeepAlive(display)
-}
-
-// SetCursorTheme wraps gdk_x11_display_set_cursor_theme
-// 
-// The function takes the following parameters:
-// 
-// 	- theme string (nullable): the name of the cursor theme to use, or %NULL
-//   to unset a previously set value 
-// 	- size int: the cursor size to use, or 0 to keep the previous size 
-//
-// Sets the cursor theme from which the images for cursor
-// should be taken.
-// 
-// If the windowing system supports it, existing cursors created
-// with [ctor@Gdk.Cursor.new_from_name] are updated to reflect the theme
-// change. Custom cursors constructed with [ctor@Gdk.Cursor.new_from_texture]
-// will have to be handled by the application (GTK applications can learn
-// about cursor theme changes by listening for change notification
-// for the corresponding `GtkSetting`).
-//
-// Deprecated: (since 4.16.0) Use the cursor-related properties of
-//   [GtkSettings](../gtk4/class.Settings.html) to set the cursor theme
-func (display *X11DisplayInstance) SetCursorTheme(theme string, size int) {
-	var carg0 *C.GdkX11Display // in, none, converted
-	var carg1 *C.gchar         // in, none, string, nullable-string
-	var carg2 C.int            // in, none, casted
-
-	carg0 = (*C.GdkX11Display)(UnsafeX11DisplayToGlibNone(display))
-	if theme != "" {
-		carg1 = (*C.gchar)(unsafe.Pointer(C.CString(theme)))
-		defer C.free(unsafe.Pointer(carg1))
-	}
-	carg2 = C.int(size)
-
-	C.gdk_x11_display_set_cursor_theme(carg0, carg1, carg2)
-	runtime.KeepAlive(display)
-	runtime.KeepAlive(theme)
-	runtime.KeepAlive(size)
-}
-
-// SetStartupNotificationID wraps gdk_x11_display_set_startup_notification_id
-// 
-// The function takes the following parameters:
-// 
-// 	- startupId string: the startup notification ID (must be valid utf8) 
-//
-// Sets the startup notification ID for a display.
-// 
-// This is usually taken from the value of the DESKTOP_STARTUP_ID
-// environment variable, but in some cases (such as the application not
-// being launched using exec()) it can come from other sources.
-// 
-// If the ID contains the string "_TIME" then the portion following that
-// string is taken to be the X11 timestamp of the event that triggered
-// the application to be launched and the GDK current event time is set
-// accordingly.
-// 
-// The startup ID is also what is used to signal that the startup is
-// complete (for example, when opening a window or when calling
-// gdk_display_notify_startup_complete()).
-//
-// Deprecated: (since 4.10.0) Using [method@Gdk.Toplevel.set_startup_id] is sufficient
-func (display *X11DisplayInstance) SetStartupNotificationID(startupId string) {
-	var carg0 *C.GdkX11Display // in, none, converted
-	var carg1 *C.gchar         // in, none, string
-
-	carg0 = (*C.GdkX11Display)(UnsafeX11DisplayToGlibNone(display))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(startupId)))
-	defer C.free(unsafe.Pointer(carg1))
-
-	C.gdk_x11_display_set_startup_notification_id(carg0, carg1)
-	runtime.KeepAlive(display)
-	runtime.KeepAlive(startupId)
 }
 
 // SetSurfaceScale wraps gdk_x11_display_set_surface_scale
@@ -994,10 +844,10 @@ func (display *X11DisplayInstance) SetStartupNotificationID(startupId string) {
 // Once the scale is set by this call it will not change in response
 // to later user configuration changes.
 func (display *X11DisplayInstance) SetSurfaceScale(scale int) {
-	var carg0 *C.GdkX11Display // in, none, converted
-	var carg1 C.int            // in, none, casted
+	var carg0 *C.GdkDisplay // in, none, converted, casted *C.GdkX11Display
+	var carg1 C.int         // in, none, casted
 
-	carg0 = (*C.GdkX11Display)(UnsafeX11DisplayToGlibNone(display))
+	carg0 = (*C.GdkDisplay)(UnsafeX11DisplayToGlibNone(display))
 	carg1 = C.int(scale)
 
 	C.gdk_x11_display_set_surface_scale(carg0, carg1)
@@ -1010,9 +860,9 @@ func (display *X11DisplayInstance) SetSurfaceScale(scale int) {
 // Ungrab @display after it has been grabbed with
 // gdk_x11_display_grab().
 func (display *X11DisplayInstance) Ungrab() {
-	var carg0 *C.GdkX11Display // in, none, converted
+	var carg0 *C.GdkDisplay // in, none, converted, casted *C.GdkX11Display
 
-	carg0 = (*C.GdkX11Display)(UnsafeX11DisplayToGlibNone(display))
+	carg0 = (*C.GdkDisplay)(UnsafeX11DisplayToGlibNone(display))
 
 	C.gdk_x11_display_ungrab(carg0)
 	runtime.KeepAlive(display)
@@ -1193,10 +1043,10 @@ func UnsafeX11MonitorToGlibFull(c X11Monitor) unsafe.Pointer {
 // The returned geometry is in ”application pixels”, not in ”device pixels”
 // (see [method@Gdk.Monitor.get_scale_factor]).
 func (monitor *X11MonitorInstance) GetWorkarea() gdk.Rectangle {
-	var carg0 *C.GdkX11Monitor // in, none, converted
-	var carg1 C.GdkRectangle   // out, transfer: none, C Pointers: 0, Name: Rectangle, caller-allocates
+	var carg0 *C.GdkMonitor  // in, none, converted, casted *C.GdkX11Monitor
+	var carg1 C.GdkRectangle // out, transfer: none, C Pointers: 0, Name: Rectangle, caller-allocates
 
-	carg0 = (*C.GdkX11Monitor)(UnsafeX11MonitorToGlibNone(monitor))
+	carg0 = (*C.GdkMonitor)(UnsafeX11MonitorToGlibNone(monitor))
 
 	C.gdk_x11_monitor_get_workarea(carg0, &carg1)
 	runtime.KeepAlive(monitor)
@@ -1638,10 +1488,10 @@ func UnsafeX11SurfaceToGlibFull(c X11Surface) unsafe.Pointer {
 //
 // Gets the number of the workspace @surface is on.
 func (surface *X11SurfaceInstance) GetDesktop() uint32 {
-	var carg0 *C.GdkX11Surface // in, none, converted
-	var cret  C.guint32        // return, none, casted
+	var carg0 *C.GdkSurface // in, none, converted, casted *C.GdkX11Surface
+	var cret  C.guint32     // return, none, casted
 
-	carg0 = (*C.GdkX11Surface)(UnsafeX11SurfaceToGlibNone(surface))
+	carg0 = (*C.GdkSurface)(UnsafeX11SurfaceToGlibNone(surface))
 
 	cret = C.gdk_x11_surface_get_desktop(carg0)
 	runtime.KeepAlive(surface)
@@ -1660,10 +1510,10 @@ func (surface *X11SurfaceInstance) GetDesktop() uint32 {
 //
 // Returns the group this surface belongs to.
 func (surface *X11SurfaceInstance) GetGroup() gdk.Surface {
-	var carg0 *C.GdkX11Surface // in, none, converted
-	var cret  *C.GdkSurface    // return, none, converted
+	var carg0 *C.GdkSurface // in, none, converted, casted *C.GdkX11Surface
+	var cret  *C.GdkSurface // return, none, converted
 
-	carg0 = (*C.GdkX11Surface)(UnsafeX11SurfaceToGlibNone(surface))
+	carg0 = (*C.GdkSurface)(UnsafeX11SurfaceToGlibNone(surface))
 
 	cret = C.gdk_x11_surface_get_group(carg0)
 	runtime.KeepAlive(surface)
@@ -1682,9 +1532,9 @@ func (surface *X11SurfaceInstance) GetGroup() gdk.Surface {
 // in the [Extended Window Manager Hints](http://www.freedesktop.org/Standards/wm-spec) specification.
 // Will not do anything if the surface is already on all workspaces.
 func (surface *X11SurfaceInstance) MoveToCurrentDesktop() {
-	var carg0 *C.GdkX11Surface // in, none, converted
+	var carg0 *C.GdkSurface // in, none, converted, casted *C.GdkX11Surface
 
-	carg0 = (*C.GdkX11Surface)(UnsafeX11SurfaceToGlibNone(surface))
+	carg0 = (*C.GdkSurface)(UnsafeX11SurfaceToGlibNone(surface))
 
 	C.gdk_x11_surface_move_to_current_desktop(carg0)
 	runtime.KeepAlive(surface)
@@ -1700,10 +1550,10 @@ func (surface *X11SurfaceInstance) MoveToCurrentDesktop() {
 // window manager that supports multiple workspaces, as described
 // in the [Extended Window Manager Hints](http://www.freedesktop.org/Standards/wm-spec) specification.
 func (surface *X11SurfaceInstance) MoveToDesktop(desktop uint32) {
-	var carg0 *C.GdkX11Surface // in, none, converted
-	var carg1 C.guint32        // in, none, casted
+	var carg0 *C.GdkSurface // in, none, converted, casted *C.GdkX11Surface
+	var carg1 C.guint32     // in, none, casted
 
-	carg0 = (*C.GdkX11Surface)(UnsafeX11SurfaceToGlibNone(surface))
+	carg0 = (*C.GdkSurface)(UnsafeX11SurfaceToGlibNone(surface))
 	carg1 = C.guint32(desktop)
 
 	C.gdk_x11_surface_move_to_desktop(carg0, carg1)
@@ -1724,10 +1574,10 @@ func (surface *X11SurfaceInstance) MoveToDesktop(desktop uint32) {
 // synchronziation may need to be disabled. This is the case for a surface
 // embedded via the XEMBED protocol.
 func (surface *X11SurfaceInstance) SetFrameSyncEnabled(frameSyncEnabled bool) {
-	var carg0 *C.GdkX11Surface // in, none, converted
-	var carg1 C.gboolean       // in
+	var carg0 *C.GdkSurface // in, none, converted, casted *C.GdkX11Surface
+	var carg1 C.gboolean    // in
 
-	carg0 = (*C.GdkX11Surface)(UnsafeX11SurfaceToGlibNone(surface))
+	carg0 = (*C.GdkSurface)(UnsafeX11SurfaceToGlibNone(surface))
 	if frameSyncEnabled {
 		carg1 = C.TRUE
 	}
@@ -1746,10 +1596,10 @@ func (surface *X11SurfaceInstance) SetFrameSyncEnabled(frameSyncEnabled bool) {
 // Sets the group leader of @surface to be @leader.
 // See the ICCCM for details.
 func (surface *X11SurfaceInstance) SetGroup(leader gdk.Surface) {
-	var carg0 *C.GdkX11Surface // in, none, converted
-	var carg1 *C.GdkSurface    // in, none, converted
+	var carg0 *C.GdkSurface // in, none, converted, casted *C.GdkX11Surface
+	var carg1 *C.GdkSurface // in, none, converted
 
-	carg0 = (*C.GdkX11Surface)(UnsafeX11SurfaceToGlibNone(surface))
+	carg0 = (*C.GdkSurface)(UnsafeX11SurfaceToGlibNone(surface))
 	carg1 = (*C.GdkSurface)(gdk.UnsafeSurfaceToGlibNone(leader))
 
 	C.gdk_x11_surface_set_group(carg0, carg1)
@@ -1766,10 +1616,10 @@ func (surface *X11SurfaceInstance) SetGroup(leader gdk.Surface) {
 // Sets a hint on @surface that pagers should not
 // display it. See the EWMH for details.
 func (surface *X11SurfaceInstance) SetSkipPagerHint(skipsPager bool) {
-	var carg0 *C.GdkX11Surface // in, none, converted
-	var carg1 C.gboolean       // in
+	var carg0 *C.GdkSurface // in, none, converted, casted *C.GdkX11Surface
+	var carg1 C.gboolean    // in
 
-	carg0 = (*C.GdkX11Surface)(UnsafeX11SurfaceToGlibNone(surface))
+	carg0 = (*C.GdkSurface)(UnsafeX11SurfaceToGlibNone(surface))
 	if skipsPager {
 		carg1 = C.TRUE
 	}
@@ -1788,10 +1638,10 @@ func (surface *X11SurfaceInstance) SetSkipPagerHint(skipsPager bool) {
 // Sets a hint on @surface that taskbars should not
 // display it. See the EWMH for details.
 func (surface *X11SurfaceInstance) SetSkipTaskbarHint(skipsTaskbar bool) {
-	var carg0 *C.GdkX11Surface // in, none, converted
-	var carg1 C.gboolean       // in
+	var carg0 *C.GdkSurface // in, none, converted, casted *C.GdkX11Surface
+	var carg1 C.gboolean    // in
 
-	carg0 = (*C.GdkX11Surface)(UnsafeX11SurfaceToGlibNone(surface))
+	carg0 = (*C.GdkSurface)(UnsafeX11SurfaceToGlibNone(surface))
 	if skipsTaskbar {
 		carg1 = C.TRUE
 	}
@@ -1817,10 +1667,10 @@ func (surface *X11SurfaceInstance) SetSkipTaskbarHint(skipsTaskbar bool) {
 // function should only be used by applications which do not use GTK
 // to create toplevel surfaces.
 func (surface *X11SurfaceInstance) SetThemeVariant(variant string) {
-	var carg0 *C.GdkX11Surface // in, none, converted
-	var carg1 *C.gchar         // in, none, string
+	var carg0 *C.GdkSurface // in, none, converted, casted *C.GdkX11Surface
+	var carg1 *C.gchar      // in, none, string
 
-	carg0 = (*C.GdkX11Surface)(UnsafeX11SurfaceToGlibNone(surface))
+	carg0 = (*C.GdkSurface)(UnsafeX11SurfaceToGlibNone(surface))
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(variant)))
 	defer C.free(unsafe.Pointer(carg1))
 
@@ -1838,10 +1688,10 @@ func (surface *X11SurfaceInstance) SetThemeVariant(variant string) {
 // Sets a hint on @surface that it needs user attention.
 // See the ICCCM for details.
 func (surface *X11SurfaceInstance) SetUrgencyHint(urgent bool) {
-	var carg0 *C.GdkX11Surface // in, none, converted
-	var carg1 C.gboolean       // in
+	var carg0 *C.GdkSurface // in, none, converted, casted *C.GdkX11Surface
+	var carg1 C.gboolean    // in
 
-	carg0 = (*C.GdkX11Surface)(UnsafeX11SurfaceToGlibNone(surface))
+	carg0 = (*C.GdkSurface)(UnsafeX11SurfaceToGlibNone(surface))
 	if urgent {
 		carg1 = C.TRUE
 	}
@@ -1870,10 +1720,10 @@ func (surface *X11SurfaceInstance) SetUrgencyHint(urgent bool) {
 // function should only be used by applications which handle input
 // events bypassing GDK.
 func (surface *X11SurfaceInstance) SetUserTime(timestamp uint32) {
-	var carg0 *C.GdkX11Surface // in, none, converted
-	var carg1 C.guint32        // in, none, casted
+	var carg0 *C.GdkSurface // in, none, converted, casted *C.GdkX11Surface
+	var carg1 C.guint32     // in, none, casted
 
-	carg0 = (*C.GdkX11Surface)(UnsafeX11SurfaceToGlibNone(surface))
+	carg0 = (*C.GdkSurface)(UnsafeX11SurfaceToGlibNone(surface))
 	carg1 = C.guint32(timestamp)
 
 	C.gdk_x11_surface_set_user_time(carg0, carg1)
@@ -1892,11 +1742,11 @@ func (surface *X11SurfaceInstance) SetUserTime(timestamp uint32) {
 // property of type UTF8_STRING.  If the given @surface is
 // not a toplevel surface, it is ignored.
 func (surface *X11SurfaceInstance) SetUTF8Property(name string, value string) {
-	var carg0 *C.GdkX11Surface // in, none, converted
-	var carg1 *C.gchar         // in, none, string
-	var carg2 *C.gchar         // in, none, string, nullable-string
+	var carg0 *C.GdkSurface // in, none, converted, casted *C.GdkX11Surface
+	var carg1 *C.gchar      // in, none, string
+	var carg2 *C.gchar      // in, none, string, nullable-string
 
-	carg0 = (*C.GdkX11Surface)(UnsafeX11SurfaceToGlibNone(surface))
+	carg0 = (*C.GdkSurface)(UnsafeX11SurfaceToGlibNone(surface))
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(name)))
 	defer C.free(unsafe.Pointer(carg1))
 	if value != "" {

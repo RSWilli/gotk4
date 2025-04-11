@@ -13702,7 +13702,7 @@ func UnsafeDtlsServerConnectionToGlibFull(c DtlsServerConnection) unsafe.Pointer
 func NewDtlsServerConnectionInstance(baseSocket DatagramBased, certificate TlsCertificate) (DtlsServerConnection, error) {
 	var carg1 *C.GDatagramBased  // in, none, converted
 	var carg2 *C.GTlsCertificate // in, none, converted, nullable
-	var cret  *C.GDatagramBased  // return, full, converted, returned interface
+	var cret  *C.GDatagramBased  // return, full, converted, casted *C.GDtlsServerConnection
 	var _cerr *C.GError          // out, full, converted, nullable
 
 	carg1 = (*C.GDatagramBased)(UnsafeDatagramBasedToGlibNone(baseSocket))
@@ -27860,7 +27860,7 @@ func UnsafeTlsClientConnectionToGlibFull(c TlsClientConnection) unsafe.Pointer {
 func NewTlsClientConnectionInstance(baseIoStream IOStream, serverIdentity SocketConnectable) (TlsClientConnection, error) {
 	var carg1 *C.GIOStream          // in, none, converted
 	var carg2 *C.GSocketConnectable // in, none, converted, nullable
-	var cret  *C.GIOStream          // return, full, converted, returned interface
+	var cret  *C.GIOStream          // return, full, converted, casted *C.GTlsClientConnection
 	var _cerr *C.GError             // out, full, converted, nullable
 
 	carg1 = (*C.GIOStream)(UnsafeIOStreamToGlibNone(baseIoStream))
@@ -28159,7 +28159,7 @@ func UnsafeTlsFileDatabaseToGlibFull(c TlsFileDatabase) unsafe.Pointer {
 // The certificates in @anchors must be PEM encoded.
 func NewTlsFileDatabaseInstance(anchors string) (TlsFileDatabase, error) {
 	var carg1 *C.gchar        // in, none, string
-	var cret  *C.GTlsDatabase // return, full, converted, returned interface
+	var cret  *C.GTlsDatabase // return, full, converted, casted *C.GTlsFileDatabase
 	var _cerr *C.GError       // out, full, converted, nullable
 
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(anchors)))
@@ -28254,7 +28254,7 @@ func UnsafeTlsServerConnectionToGlibFull(c TlsServerConnection) unsafe.Pointer {
 func NewTlsServerConnectionInstance(baseIoStream IOStream, certificate TlsCertificate) (TlsServerConnection, error) {
 	var carg1 *C.GIOStream       // in, none, converted
 	var carg2 *C.GTlsCertificate // in, none, converted, nullable
-	var cret  *C.GIOStream       // return, full, converted, returned interface
+	var cret  *C.GIOStream       // return, full, converted, casted *C.GTlsServerConnection
 	var _cerr *C.GError          // out, full, converted, nullable
 
 	carg1 = (*C.GIOStream)(UnsafeIOStreamToGlibNone(baseIoStream))
@@ -29423,7 +29423,7 @@ func UnsafeDtlsClientConnectionToGlibFull(c DtlsClientConnection) unsafe.Pointer
 func NewDtlsClientConnectionInstance(baseSocket DatagramBased, serverIdentity SocketConnectable) (DtlsClientConnection, error) {
 	var carg1 *C.GDatagramBased     // in, none, converted
 	var carg2 *C.GSocketConnectable // in, none, converted, nullable
-	var cret  *C.GDatagramBased     // return, full, converted, returned interface
+	var cret  *C.GDatagramBased     // return, full, converted, casted *C.GDtlsClientConnection
 	var _cerr *C.GError             // out, full, converted, nullable
 
 	carg1 = (*C.GDatagramBased)(UnsafeDatagramBasedToGlibNone(baseSocket))
@@ -32997,7 +32997,7 @@ func UnsafeBytesIconToGlibFull(c BytesIcon) unsafe.Pointer {
 // (for example, if g_loadable_icon_load() is called) if the image is invalid.
 func NewBytesIconInstance(bytes *glib.Bytes) BytesIcon {
 	var carg1 *C.GBytes // in, none, converted
-	var cret  *C.GIcon  // return, full, converted, returned class
+	var cret  *C.GIcon  // return, full, converted, casted *C.GBytesIcon
 
 	carg1 = (*C.GBytes)(glib.UnsafeBytesToGlibNone(bytes))
 
@@ -38437,7 +38437,7 @@ func UnsafeDBusObjectManagerClientToGlibFull(c DBusObjectManagerClient) unsafe.P
 // Finishes an operation started with g_dbus_object_manager_client_new().
 func NewDBusObjectManagerClientInstanceFinish(res AsyncResult) (DBusObjectManagerClient, error) {
 	var carg1 *C.GAsyncResult       // in, none, converted
-	var cret  *C.GDBusObjectManager // return, full, converted, returned class
+	var cret  *C.GDBusObjectManager // return, full, converted, casted *C.GDBusObjectManagerClient
 	var _cerr *C.GError             // out, full, converted, nullable
 
 	carg1 = (*C.GAsyncResult)(UnsafeAsyncResultToGlibNone(res))
@@ -38470,7 +38470,7 @@ func NewDBusObjectManagerClientInstanceFinish(res AsyncResult) (DBusObjectManage
 // Finishes an operation started with g_dbus_object_manager_client_new_for_bus().
 func NewDBusObjectManagerClientInstanceForBusFinish(res AsyncResult) (DBusObjectManagerClient, error) {
 	var carg1 *C.GAsyncResult       // in, none, converted
-	var cret  *C.GDBusObjectManager // return, full, converted, returned class
+	var cret  *C.GDBusObjectManager // return, full, converted, casted *C.GDBusObjectManagerClient
 	var _cerr *C.GError             // out, full, converted, nullable
 
 	carg1 = (*C.GAsyncResult)(UnsafeAsyncResultToGlibNone(res))
@@ -40900,7 +40900,7 @@ func UnsafeEmblemedIconToGlibFull(c EmblemedIcon) unsafe.Pointer {
 func NewEmblemedIconInstance(icon Icon, emblem Emblem) EmblemedIcon {
 	var carg1 *C.GIcon   // in, none, converted
 	var carg2 *C.GEmblem // in, none, converted, nullable
-	var cret  *C.GIcon   // return, full, converted, returned class
+	var cret  *C.GIcon   // return, full, converted, casted *C.GEmblemedIcon
 
 	carg1 = (*C.GIcon)(UnsafeIconToGlibNone(icon))
 	if emblem != nil {
@@ -41880,7 +41880,7 @@ func UnsafeFileIconToGlibFull(c FileIcon) unsafe.Pointer {
 // Creates a new icon for a file.
 func NewFileIconInstance(file File) FileIcon {
 	var carg1 *C.GFile // in, none, converted
-	var cret  *C.GIcon // return, full, converted, returned class
+	var cret  *C.GIcon // return, full, converted, casted *C.GFileIcon
 
 	carg1 = (*C.GFile)(UnsafeFileToGlibNone(file))
 
@@ -50734,7 +50734,7 @@ func UnsafeNetworkAddressToGlibFull(c NetworkAddress) unsafe.Pointer {
 func NewNetworkAddressInstance(hostname string, port uint16) NetworkAddress {
 	var carg1 *C.gchar              // in, none, string
 	var carg2 C.guint16             // in, none, casted
-	var cret  *C.GSocketConnectable // return, full, converted, returned class
+	var cret  *C.GSocketConnectable // return, full, converted, casted *C.GNetworkAddress
 
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(hostname)))
 	defer C.free(unsafe.Pointer(carg1))
@@ -50775,7 +50775,7 @@ func NewNetworkAddressInstance(hostname string, port uint16) NetworkAddress {
 // a #GNetworkAddress created with this constructor.
 func NewNetworkAddressInstanceLoopback(port uint16) NetworkAddress {
 	var carg1 C.guint16             // in, none, casted
-	var cret  *C.GSocketConnectable // return, full, converted, returned class
+	var cret  *C.GSocketConnectable // return, full, converted, casted *C.GNetworkAddress
 
 	carg1 = C.guint16(port)
 
@@ -50825,7 +50825,7 @@ func NewNetworkAddressInstanceLoopback(port uint16) NetworkAddress {
 func NetworkAddressInstanceParse(hostAndPort string, defaultPort uint16) (NetworkAddress, error) {
 	var carg1 *C.gchar              // in, none, string
 	var carg2 C.guint16             // in, none, casted
-	var cret  *C.GSocketConnectable // return, full, converted, returned class
+	var cret  *C.GSocketConnectable // return, full, converted, casted *C.GNetworkAddress
 	var _cerr *C.GError             // out, full, converted, nullable
 
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(hostAndPort)))
@@ -50868,7 +50868,7 @@ func NetworkAddressInstanceParse(hostAndPort string, defaultPort uint16) (Networ
 func NetworkAddressInstanceParseURI(uri string, defaultPort uint16) (NetworkAddress, error) {
 	var carg1 *C.gchar              // in, none, string
 	var carg2 C.guint16             // in, none, casted
-	var cret  *C.GSocketConnectable // return, full, converted, returned class
+	var cret  *C.GSocketConnectable // return, full, converted, casted *C.GNetworkAddress
 	var _cerr *C.GError             // out, full, converted, nullable
 
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(uri)))
@@ -51074,7 +51074,7 @@ func NewNetworkServiceInstance(service string, protocol string, domain string) N
 	var carg1 *C.gchar              // in, none, string
 	var carg2 *C.gchar              // in, none, string
 	var carg3 *C.gchar              // in, none, string
-	var cret  *C.GSocketConnectable // return, full, converted, returned class
+	var cret  *C.GSocketConnectable // return, full, converted, casted *C.GNetworkService
 
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(service)))
 	defer C.free(unsafe.Pointer(carg1))
@@ -69030,7 +69030,7 @@ func UnsafeThemedIconToGlibFull(c ThemedIcon) unsafe.Pointer {
 // Creates a new themed icon for @iconname.
 func NewThemedIconInstance(iconname string) ThemedIcon {
 	var carg1 *C.gchar // in, none, string
-	var cret  *C.GIcon // return, full, converted, returned class
+	var cret  *C.GIcon // return, full, converted, casted *C.GThemedIcon
 
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(iconname)))
 	defer C.free(unsafe.Pointer(carg1))
@@ -69059,7 +69059,7 @@ func NewThemedIconInstance(iconname string) ThemedIcon {
 func NewThemedIconInstanceFromNames(iconnames []string) ThemedIcon {
 	var carg1 **C.char // in, transfer: none, C Pointers: 2, Name: array[utf8], array (inner: *typesystem.StringPrimitive, length-by: carg2)
 	var carg2 C.int    // implicit
-	var cret  *C.GIcon // return, full, converted, returned class
+	var cret  *C.GIcon // return, full, converted, casted *C.GThemedIcon
 
 	_ = iconnames
 	_ = carg1
@@ -69103,7 +69103,7 @@ func NewThemedIconInstanceFromNames(iconnames []string) ThemedIcon {
 // ]|
 func NewThemedIconInstanceWithDefaultFallbacks(iconname string) ThemedIcon {
 	var carg1 *C.gchar // in, none, string
-	var cret  *C.GIcon // return, full, converted, returned class
+	var cret  *C.GIcon // return, full, converted, casted *C.GThemedIcon
 
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(iconname)))
 	defer C.free(unsafe.Pointer(carg1))
