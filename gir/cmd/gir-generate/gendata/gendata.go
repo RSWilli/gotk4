@@ -147,6 +147,11 @@ var Main = genmain.Data{
 					typesystem.IgnoreByFileNameSubstring("gthread."),
 					typesystem.IgnoreByFileNameSubstring("gthreadpool."),
 					typesystem.IgnoreByFileNameSubstring("gtrashstack."),
+
+					// slomo said to consider these as legacy:
+					typesystem.IgnoreMatching("Array"),
+					typesystem.IgnoreMatching("PtrArray"),
+					typesystem.IgnoreMatching("HashTable"),
 				},
 			},
 			"Gio-2": {
