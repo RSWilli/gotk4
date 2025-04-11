@@ -45,21 +45,21 @@ func init() {
 	})
 }
 
-// PixbufMajor wraps GDK_PIXBUF_MAJOR
+// PIXBUF_MAJOR wraps GDK_PIXBUF_MAJOR
 //
 // Major version of gdk-pixbuf library, that is the "0" in
 // "0.8.2" for example.
-const PixbufMajor = 2
-// PixbufMicro wraps GDK_PIXBUF_MICRO
+const PIXBUF_MAJOR = 2
+// PIXBUF_MICRO wraps GDK_PIXBUF_MICRO
 //
 // Micro version of gdk-pixbuf library, that is the "2" in
 // "0.8.2" for example.
-const PixbufMicro = 12
-// PixbufMinor wraps GDK_PIXBUF_MINOR
+const PIXBUF_MICRO = 12
+// PIXBUF_MINOR wraps GDK_PIXBUF_MINOR
 //
 // Minor version of gdk-pixbuf library, that is the "8" in
 // "0.8.2" for example.
-const PixbufMinor = 42
+const PIXBUF_MINOR = 42
 // Colorspace wraps GdkColorspace
 //
 // This enumeration defines the color spaces that are supported by

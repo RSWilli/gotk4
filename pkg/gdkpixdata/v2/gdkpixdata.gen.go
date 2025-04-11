@@ -16,16 +16,16 @@ import (
 import "C"
 
 
-// PixbufMagicNumber wraps GDK_PIXBUF_MAGIC_NUMBER
+// PIXBUF_MAGIC_NUMBER wraps GDK_PIXBUF_MAGIC_NUMBER
 //
 // Magic number for #GdkPixdata structures.
-const PixbufMagicNumber = 1197763408
-// PixdataHeaderLength wraps GDK_PIXDATA_HEADER_LENGTH
+const PIXBUF_MAGIC_NUMBER = 1197763408
+// PIXDATA_HEADER_LENGTH wraps GDK_PIXDATA_HEADER_LENGTH
 //
 // The length of a #GdkPixdata structure without the @pixel_data pointer.
 //
 // Deprecated: (since 2.32.0) 
-const PixdataHeaderLength = 24
+const PIXDATA_HEADER_LENGTH = 24
 // PixdataDumpType wraps GdkPixdataDumpType
 //
 // An enumeration which is used by gdk_pixdata_to_csource() to

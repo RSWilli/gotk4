@@ -923,31 +923,31 @@ func init() {
 	})
 }
 
-// AccessibleValueUndefined wraps GTK_ACCESSIBLE_VALUE_UNDEFINED
+// ACCESSIBLE_VALUE_UNDEFINED wraps GTK_ACCESSIBLE_VALUE_UNDEFINED
 //
 // An undefined value. The accessible attribute is either unset, or its
 // value is undefined.
-const AccessibleValueUndefined = -1
-// BinaryAge wraps GTK_BINARY_AGE
+const ACCESSIBLE_VALUE_UNDEFINED = -1
+// BINARY_AGE wraps GTK_BINARY_AGE
 //
 // Like [func@get_binary_age], but from the headers used at
 // application compile time, rather than from the library linked
 // against at application run time.
-const BinaryAge = 1612
-// InputError wraps GTK_INPUT_ERROR
+const BINARY_AGE = 1612
+// INPUT_ERROR wraps GTK_INPUT_ERROR
 //
 // Constant to return from a signal handler for the ::input
 // signal in case of conversion failure.
 // 
 // See [signal@Gtk.SpinButton::input].
-const InputError = -1
-// InterfaceAge wraps GTK_INTERFACE_AGE
+const INPUT_ERROR = -1
+// INTERFACE_AGE wraps GTK_INTERFACE_AGE
 //
 // Like [func@get_interface_age], but from the headers used at
 // application compile time, rather than from the library linked
 // against at application run time.
-const InterfaceAge = 12
-// InvalidListPosition wraps GTK_INVALID_LIST_POSITION
+const INTERFACE_AGE = 12
+// INVALID_LIST_POSITION wraps GTK_INVALID_LIST_POSITION
 //
 // The value used to refer to a guaranteed invalid position
 // in a `GListModel`.
@@ -958,45 +958,45 @@ const InterfaceAge = 12
 // 
 // Refer to each function's documentation for if this value is
 // allowed and what it does.
-const InvalidListPosition = 4294967295
-// MajorVersion wraps GTK_MAJOR_VERSION
+const INVALID_LIST_POSITION = 4294967295
+// MAJOR_VERSION wraps GTK_MAJOR_VERSION
 //
 // Like [func@get_major_version], but from the headers used at
 // application compile time, rather than from the library linked
 // against at application run time.
-const MajorVersion = 4
-// MaxComposeLen wraps GTK_MAX_COMPOSE_LEN
+const MAJOR_VERSION = 4
+// MAX_COMPOSE_LEN wraps GTK_MAX_COMPOSE_LEN
 //
 // Evaluates to the maximum length of a compose sequence.
 // 
 // This macro is longer used by GTK.
-const MaxComposeLen = 7
-// MicroVersion wraps GTK_MICRO_VERSION
+const MAX_COMPOSE_LEN = 7
+// MICRO_VERSION wraps GTK_MICRO_VERSION
 //
 // Like [func@get_micro_version], but from the headers used at
 // application compile time, rather than from the library linked
 // against at application run time.
-const MicroVersion = 12
-// MinorVersion wraps GTK_MINOR_VERSION
+const MICRO_VERSION = 12
+// MINOR_VERSION wraps GTK_MINOR_VERSION
 //
 // Like [func@get_minor_version], but from the headers used at
 // application compile time, rather than from the library linked
 // against at application run time.
-const MinorVersion = 16
-// PriorityResize wraps GTK_PRIORITY_RESIZE
+const MINOR_VERSION = 16
+// PRIORITY_RESIZE wraps GTK_PRIORITY_RESIZE
 //
 // Use this priority for functionality related to size allocation.
 // 
 // It is used internally by GTK+ to compute the sizes of widgets.
 // This priority is higher than %GDK_PRIORITY_REDRAW to avoid
 // resizing a widget which was just redrawn.
-const PriorityResize = 110
-// StyleProviderPriorityApplication wraps GTK_STYLE_PROVIDER_PRIORITY_APPLICATION
+const PRIORITY_RESIZE = 110
+// STYLE_PROVIDER_PRIORITY_APPLICATION wraps GTK_STYLE_PROVIDER_PRIORITY_APPLICATION
 //
 // A priority that can be used when adding a `GtkStyleProvider`
 // for application-specific style information.
-const StyleProviderPriorityApplication = 600
-// StyleProviderPriorityFallback wraps GTK_STYLE_PROVIDER_PRIORITY_FALLBACK
+const STYLE_PROVIDER_PRIORITY_APPLICATION = 600
+// STYLE_PROVIDER_PRIORITY_FALLBACK wraps GTK_STYLE_PROVIDER_PRIORITY_FALLBACK
 //
 // The priority used for default style information
 // that is used in the absence of themes.
@@ -1005,45 +1005,45 @@ const StyleProviderPriorityApplication = 600
 // styling for custom style classes - themes are likely to
 // override styling provided at this priority with
 // catch-all `* {...}` rules.
-const StyleProviderPriorityFallback = 1
-// StyleProviderPrioritySettings wraps GTK_STYLE_PROVIDER_PRIORITY_SETTINGS
+const STYLE_PROVIDER_PRIORITY_FALLBACK = 1
+// STYLE_PROVIDER_PRIORITY_SETTINGS wraps GTK_STYLE_PROVIDER_PRIORITY_SETTINGS
 //
 // The priority used for style information provided
 // via `GtkSettings`.
 // 
 // This priority is higher than %GTK_STYLE_PROVIDER_PRIORITY_THEME
 // to let settings override themes.
-const StyleProviderPrioritySettings = 400
-// StyleProviderPriorityTheme wraps GTK_STYLE_PROVIDER_PRIORITY_THEME
+const STYLE_PROVIDER_PRIORITY_SETTINGS = 400
+// STYLE_PROVIDER_PRIORITY_THEME wraps GTK_STYLE_PROVIDER_PRIORITY_THEME
 //
 // The priority used for style information provided
 // by themes.
-const StyleProviderPriorityTheme = 200
-// StyleProviderPriorityUser wraps GTK_STYLE_PROVIDER_PRIORITY_USER
+const STYLE_PROVIDER_PRIORITY_THEME = 200
+// STYLE_PROVIDER_PRIORITY_USER wraps GTK_STYLE_PROVIDER_PRIORITY_USER
 //
 // The priority used for the style information from
 // `$XDG_CONFIG_HOME/gtk-4.0/gtk.css`.
 // 
 // You should not use priorities higher than this, to
 // give the user the last word.
-const StyleProviderPriorityUser = 800
-// TextViewPriorityValidate wraps GTK_TEXT_VIEW_PRIORITY_VALIDATE
+const STYLE_PROVIDER_PRIORITY_USER = 800
+// TEXT_VIEW_PRIORITY_VALIDATE wraps GTK_TEXT_VIEW_PRIORITY_VALIDATE
 //
 // The priority at which the text view validates onscreen lines
 // in an idle job in the background.
-const TextViewPriorityValidate = 125
-// TreeSortableDefaultSortColumnID wraps GTK_TREE_SORTABLE_DEFAULT_SORT_COLUMN_ID
+const TEXT_VIEW_PRIORITY_VALIDATE = 125
+// TREE_SORTABLE_DEFAULT_SORT_COLUMN_ID wraps GTK_TREE_SORTABLE_DEFAULT_SORT_COLUMN_ID
 //
 // Uses the default sort function in a [iface@Gtk.TreeSortable].
 // 
 // See also: [method@Gtk.TreeSortable.set_sort_column_id]
-const TreeSortableDefaultSortColumnID = -1
-// TreeSortableUnsortedSortColumnID wraps GTK_TREE_SORTABLE_UNSORTED_SORT_COLUMN_ID
+const TREE_SORTABLE_DEFAULT_SORT_COLUMN_ID = -1
+// TREE_SORTABLE_UNSORTED_SORT_COLUMN_ID wraps GTK_TREE_SORTABLE_UNSORTED_SORT_COLUMN_ID
 //
 // Disables sorting in a [iface@Gtk.TreeSortable].
 // 
 // See also: [method@Gtk.TreeSortable.set_sort_column_id]
-const TreeSortableUnsortedSortColumnID = -2
+const TREE_SORTABLE_UNSORTED_SORT_COLUMN_ID = -2
 // Allocation wraps GtkAllocation
 //
 // The rectangle representing the area allocated for a widget by its parent.

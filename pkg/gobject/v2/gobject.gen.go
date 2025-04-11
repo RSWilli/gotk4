@@ -37,11 +37,11 @@ func init() {
 	})
 }
 
-// ParamMask wraps G_PARAM_MASK
+// PARAM_MASK wraps G_PARAM_MASK
 //
 // Mask containing the bits of #GParamSpec.flags which are reserved for GLib.
-const ParamMask = 255
-// ParamStaticStrings wraps G_PARAM_STATIC_STRINGS
+const PARAM_MASK = 255
+// PARAM_STATIC_STRINGS wraps G_PARAM_STATIC_STRINGS
 //
 // #GParamFlags value alias for %G_PARAM_STATIC_NAME | %G_PARAM_STATIC_NICK | %G_PARAM_STATIC_BLURB.
 // 
@@ -52,69 +52,69 @@ const ParamMask = 255
 // nickname or blurb.
 // 
 // Since 2.13.0
-const ParamStaticStrings = 224
-// ParamUserShift wraps G_PARAM_USER_SHIFT
+const PARAM_STATIC_STRINGS = 224
+// PARAM_USER_SHIFT wraps G_PARAM_USER_SHIFT
 //
 // Minimum shift count to be used for user defined flags, to be stored in
 // #GParamSpec.flags. The maximum allowed is 10.
-const ParamUserShift = 8
-// SignalFlagsMask wraps G_SIGNAL_FLAGS_MASK
+const PARAM_USER_SHIFT = 8
+// SIGNAL_FLAGS_MASK wraps G_SIGNAL_FLAGS_MASK
 //
 // A mask for all #GSignalFlags bits.
-const SignalFlagsMask = 511
-// SignalMatchMask wraps G_SIGNAL_MATCH_MASK
+const SIGNAL_FLAGS_MASK = 511
+// SIGNAL_MATCH_MASK wraps G_SIGNAL_MATCH_MASK
 //
 // A mask for all #GSignalMatchType bits.
-const SignalMatchMask = 63
-// TypeFundamentalMax wraps G_TYPE_FUNDAMENTAL_MAX
+const SIGNAL_MATCH_MASK = 63
+// TYPE_FUNDAMENTAL_MAX wraps G_TYPE_FUNDAMENTAL_MAX
 //
 // An integer constant that represents the number of identifiers reserved
 // for types that are assigned at compile-time.
-const TypeFundamentalMax = 1020
-// TypeFundamentalShift wraps G_TYPE_FUNDAMENTAL_SHIFT
+const TYPE_FUNDAMENTAL_MAX = 1020
+// TYPE_FUNDAMENTAL_SHIFT wraps G_TYPE_FUNDAMENTAL_SHIFT
 //
 // Shift value used in converting numbers to type IDs.
-const TypeFundamentalShift = 2
-// TypeReservedBseFirst wraps G_TYPE_RESERVED_BSE_FIRST
+const TYPE_FUNDAMENTAL_SHIFT = 2
+// TYPE_RESERVED_BSE_FIRST wraps G_TYPE_RESERVED_BSE_FIRST
 //
 // First fundamental type number to create a new fundamental type id with
 // G_TYPE_MAKE_FUNDAMENTAL() reserved for BSE.
-const TypeReservedBseFirst = 32
-// TypeReservedBseLast wraps G_TYPE_RESERVED_BSE_LAST
+const TYPE_RESERVED_BSE_FIRST = 32
+// TYPE_RESERVED_BSE_LAST wraps G_TYPE_RESERVED_BSE_LAST
 //
 // Last fundamental type number reserved for BSE.
-const TypeReservedBseLast = 48
-// TypeReservedGlibFirst wraps G_TYPE_RESERVED_GLIB_FIRST
+const TYPE_RESERVED_BSE_LAST = 48
+// TYPE_RESERVED_GLIB_FIRST wraps G_TYPE_RESERVED_GLIB_FIRST
 //
 // First fundamental type number to create a new fundamental type id with
 // G_TYPE_MAKE_FUNDAMENTAL() reserved for GLib.
-const TypeReservedGlibFirst = 22
-// TypeReservedGlibLast wraps G_TYPE_RESERVED_GLIB_LAST
+const TYPE_RESERVED_GLIB_FIRST = 22
+// TYPE_RESERVED_GLIB_LAST wraps G_TYPE_RESERVED_GLIB_LAST
 //
 // Last fundamental type number reserved for GLib.
-const TypeReservedGlibLast = 31
-// TypeReservedUserFirst wraps G_TYPE_RESERVED_USER_FIRST
+const TYPE_RESERVED_GLIB_LAST = 31
+// TYPE_RESERVED_USER_FIRST wraps G_TYPE_RESERVED_USER_FIRST
 //
 // First available fundamental type number to create new fundamental
 // type id with G_TYPE_MAKE_FUNDAMENTAL().
-const TypeReservedUserFirst = 49
-// ValueCollectFormatMaxLength wraps G_VALUE_COLLECT_FORMAT_MAX_LENGTH
+const TYPE_RESERVED_USER_FIRST = 49
+// VALUE_COLLECT_FORMAT_MAX_LENGTH wraps G_VALUE_COLLECT_FORMAT_MAX_LENGTH
 //
 // The maximal number of #GTypeCValues which can be collected for a
 // single #GValue.
-const ValueCollectFormatMaxLength = 8
-// ValueInternedString wraps G_VALUE_INTERNED_STRING
+const VALUE_COLLECT_FORMAT_MAX_LENGTH = 8
+// VALUE_INTERNED_STRING wraps G_VALUE_INTERNED_STRING
 //
 // For string values, indicates that the string contained is canonical and will
 // exist for the duration of the process. See g_value_set_interned_string().
-const ValueInternedString = 268435456
-// ValueNocopyContents wraps G_VALUE_NOCOPY_CONTENTS
+const VALUE_INTERNED_STRING = 268435456
+// VALUE_NOCOPY_CONTENTS wraps G_VALUE_NOCOPY_CONTENTS
 //
 // If passed to G_VALUE_COLLECT(), allocated data won't be copied
 // but used verbatim. This does not affect ref-counted types like
 // objects. This does not affect usage of g_value_copy(), the data will
 // be copied if it is not ref-counted.
-const ValueNocopyContents = 134217728
+const VALUE_NOCOPY_CONTENTS = 134217728
 // BindingFlags wraps GBindingFlags
 //
 // Flags to be passed to g_object_bind_property() or

@@ -283,6 +283,11 @@ var Main = genmain.Data{
 			"Atk-1": {
 				MinVersion: "2.50",
 			},
+			"Gdk-3": {
+				IgnoredDefinitions: []typesystem.IgnoreFunc{
+					typesystem.IgnoreByFileNameSubstring("gdkprivate"),
+				},
+			},
 			"GdkPixbuf-2": {
 				// MinVersion: "2.50",
 				IgnoredDefinitions: []typesystem.IgnoreFunc{

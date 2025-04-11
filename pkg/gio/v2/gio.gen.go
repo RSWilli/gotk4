@@ -485,13 +485,13 @@ func init() {
 	})
 }
 
-// MenuExporterMaxSectionSize wraps G_MENU_EXPORTER_MAX_SECTION_SIZE
+// MENU_EXPORTER_MAX_SECTION_SIZE wraps G_MENU_EXPORTER_MAX_SECTION_SIZE
 //
 // The maximum number of entries in a menu section supported by
 // g_dbus_connection_export_menu_model().
 // 
 // The exact value of the limit may change in future GLib versions.
-const MenuExporterMaxSectionSize = 1000
+const MENU_EXPORTER_MAX_SECTION_SIZE = 1000
 // BusType wraps GBusType
 //
 // An enumeration for well-known message buses.

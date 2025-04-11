@@ -116,37 +116,37 @@ func init() {
 	})
 }
 
-// BinaryAge wraps ATK_BINARY_AGE
+// BINARY_AGE wraps ATK_BINARY_AGE
 //
 // Like atk_get_binary_age(), but from the headers used at
 // application compile time, rather than from the library linked
 // against at application run time.
-const BinaryAge = 25411
-// InterfaceAge wraps ATK_INTERFACE_AGE
+const BINARY_AGE = 25411
+// INTERFACE_AGE wraps ATK_INTERFACE_AGE
 //
 // Like atk_get_interface_age(), but from the headers used at
 // application compile time, rather than from the library linked
 // against at application run time.
-const InterfaceAge = 1
-// MajorVersion wraps ATK_MAJOR_VERSION
+const INTERFACE_AGE = 1
+// MAJOR_VERSION wraps ATK_MAJOR_VERSION
 //
 // Like atk_get_major_version(), but from the headers used at
 // application compile time, rather than from the library linked
 // against at application run time.
-const MajorVersion = 2
-// MicroVersion wraps ATK_MICRO_VERSION
+const MAJOR_VERSION = 2
+// MICRO_VERSION wraps ATK_MICRO_VERSION
 //
 // Like atk_get_micro_version(), but from the headers used at
 // application compile time, rather than from the library linked
 // against at application run time.
-const MicroVersion = 1
-// MinorVersion wraps ATK_MINOR_VERSION
+const MICRO_VERSION = 1
+// MINOR_VERSION wraps ATK_MINOR_VERSION
 //
 // Like atk_get_minor_version(), but from the headers used at
 // application compile time, rather than from the library linked
 // against at application run time.
-const MinorVersion = 54
-// VersionMinRequired wraps ATK_VERSION_MIN_REQUIRED
+const MINOR_VERSION = 54
+// VERSION_MIN_REQUIRED wraps ATK_VERSION_MIN_REQUIRED
 //
 // A macro that should be defined by the user prior to including
 // the atk/atk.h header.
@@ -160,7 +160,7 @@ const MinorVersion = 54
 // functions, then using functions that were deprecated in version
 // %ATK_VERSION_MIN_REQUIRED or earlier will cause warnings (but
 // using functions deprecated in later releases will not).
-const VersionMinRequired = 2
+const VERSION_MIN_REQUIRED = 2
 // State wraps AtkState
 //
 // An AtkState describes a single state of an object.

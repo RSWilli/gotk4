@@ -23,54 +23,54 @@ import (
 import "C"
 
 
-// BigEndian wraps G_BIG_ENDIAN
+// BIG_ENDIAN wraps G_BIG_ENDIAN
 //
 // Specifies one of the possible types of byte order.
 // See %G_BYTE_ORDER.
-const BigEndian = 4321
-// DirSeparator wraps G_DIR_SEPARATOR
+const BIG_ENDIAN = 4321
+// DIR_SEPARATOR wraps G_DIR_SEPARATOR
 //
 // The directory separator character.
 // This is '/' on UNIX machines and '\' under Windows.
-const DirSeparator = 47
+const DIR_SEPARATOR = 47
 // E wraps G_E
 //
 // The base of natural logarithms.
 const E = 2.718282
-// HaveGint64 wraps G_HAVE_GINT64
-const HaveGint64 = 1
-// HaveGnucVarargs wraps G_HAVE_GNUC_VARARGS
-const HaveGnucVarargs = 1
-// HaveGrowingStack wraps G_HAVE_GROWING_STACK
-const HaveGrowingStack = 0
-// HaveISOVarargs wraps G_HAVE_ISO_VARARGS
-const HaveISOVarargs = 1
-// Ieee754DoubleBias wraps G_IEEE754_DOUBLE_BIAS
+// HAVE_GINT64 wraps G_HAVE_GINT64
+const HAVE_GINT64 = 1
+// HAVE_GNUC_VARARGS wraps G_HAVE_GNUC_VARARGS
+const HAVE_GNUC_VARARGS = 1
+// HAVE_GROWING_STACK wraps G_HAVE_GROWING_STACK
+const HAVE_GROWING_STACK = 0
+// HAVE_ISO_VARARGS wraps G_HAVE_ISO_VARARGS
+const HAVE_ISO_VARARGS = 1
+// IEEE754_DOUBLE_BIAS wraps G_IEEE754_DOUBLE_BIAS
 //
 // The bias by which exponents in double-precision floats are offset.
-const Ieee754DoubleBias = 1023
-// Ieee754FloatBias wraps G_IEEE754_FLOAT_BIAS
+const IEEE754_DOUBLE_BIAS = 1023
+// IEEE754_FLOAT_BIAS wraps G_IEEE754_FLOAT_BIAS
 //
 // The bias by which exponents in single-precision floats are offset.
-const Ieee754FloatBias = 127
-// LittleEndian wraps G_LITTLE_ENDIAN
+const IEEE754_FLOAT_BIAS = 127
+// LITTLE_ENDIAN wraps G_LITTLE_ENDIAN
 //
 // Specifies one of the possible types of byte order.
 // See %G_BYTE_ORDER.
-const LittleEndian = 1234
-// Ln10 wraps G_LN10
+const LITTLE_ENDIAN = 1234
+// LN10 wraps G_LN10
 //
 // The natural logarithm of 10.
-const Ln10 = 2.302585
-// Ln2 wraps G_LN2
+const LN10 = 2.302585
+// LN2 wraps G_LN2
 //
 // The natural logarithm of 2.
-const Ln2 = 0.693147
-// Log2Base10 wraps G_LOG_2_BASE_10
+const LN2 = 0.693147
+// LOG_2_BASE_10 wraps G_LOG_2_BASE_10
 //
 // Multiplying the base 2 exponent by this number yields the base 10 exponent.
-const Log2Base10 = 0.301030
-// LogDomain wraps G_LOG_DOMAIN
+const LOG_2_BASE_10 = 0.301030
+// LOG_DOMAIN wraps G_LOG_DOMAIN
 //
 // Defines the log domain. See [Log Domains](#log-domains).
 // 
@@ -95,114 +95,114 @@ const Log2Base10 = 0.301030
 // Applications can choose to leave it as the default %NULL (or `""`)
 // domain. However, defining the domain offers the same advantages as
 // above.
-const LogDomain = 0
-// LogFatalMask wraps G_LOG_FATAL_MASK
+const LOG_DOMAIN = 0
+// LOG_FATAL_MASK wraps G_LOG_FATAL_MASK
 //
 // GLib log levels that are considered fatal by default.
 // 
 // This is not used if structured logging is enabled; see
 // [Using Structured Logging](logging.html#using-structured-logging).
-const LogFatalMask = 5
-// LogLevelUserShift wraps G_LOG_LEVEL_USER_SHIFT
+const LOG_FATAL_MASK = 5
+// LOG_LEVEL_USER_SHIFT wraps G_LOG_LEVEL_USER_SHIFT
 //
 // Log levels below `1&lt;&lt;G_LOG_LEVEL_USER_SHIFT` are used by GLib.
 // Higher bits can be used for user-defined log levels.
-const LogLevelUserShift = 8
-// MajorVersion wraps GLIB_MAJOR_VERSION
+const LOG_LEVEL_USER_SHIFT = 8
+// MAJOR_VERSION wraps GLIB_MAJOR_VERSION
 //
 // The major version number of the GLib library.
 // 
 // Like #glib_major_version, but from the headers used at
 // application compile time, rather than from the library
 // linked against at application run time.
-const MajorVersion = 2
-// Maxint16 wraps G_MAXINT16
-const Maxint16 = 32767
-// Maxint32 wraps G_MAXINT32
-const Maxint32 = 2147483647
-// Maxint64 wraps G_MAXINT64
-const Maxint64 = 9223372036854775807
-// Maxint8 wraps G_MAXINT8
-const Maxint8 = 127
-// Maxuint16 wraps G_MAXUINT16
-const Maxuint16 = 65535
-// Maxuint32 wraps G_MAXUINT32
-const Maxuint32 = 4294967295
-// Maxuint64 wraps G_MAXUINT64
-const Maxuint64 = 18446744073709551615
-// Maxuint8 wraps G_MAXUINT8
-const Maxuint8 = 255
-// MicroVersion wraps GLIB_MICRO_VERSION
+const MAJOR_VERSION = 2
+// MAXINT16 wraps G_MAXINT16
+const MAXINT16 = 32767
+// MAXINT32 wraps G_MAXINT32
+const MAXINT32 = 2147483647
+// MAXINT64 wraps G_MAXINT64
+const MAXINT64 = 9223372036854775807
+// MAXINT8 wraps G_MAXINT8
+const MAXINT8 = 127
+// MAXUINT16 wraps G_MAXUINT16
+const MAXUINT16 = 65535
+// MAXUINT32 wraps G_MAXUINT32
+const MAXUINT32 = 4294967295
+// MAXUINT64 wraps G_MAXUINT64
+const MAXUINT64 = 18446744073709551615
+// MAXUINT8 wraps G_MAXUINT8
+const MAXUINT8 = 255
+// MICRO_VERSION wraps GLIB_MICRO_VERSION
 //
 // The micro version number of the GLib library.
 // 
 // Like #gtk_micro_version, but from the headers used at
 // application compile time, rather than from the library
 // linked against at application run time.
-const MicroVersion = 4
-// Minint16 wraps G_MININT16
+const MICRO_VERSION = 4
+// MININT16 wraps G_MININT16
 //
 // The minimum value which can be held in a #gint16.
-const Minint16 = -32768
-// Minint32 wraps G_MININT32
+const MININT16 = -32768
+// MININT32 wraps G_MININT32
 //
 // The minimum value which can be held in a #gint32.
-const Minint32 = -2147483648
-// Minint64 wraps G_MININT64
+const MININT32 = -2147483648
+// MININT64 wraps G_MININT64
 //
 // The minimum value which can be held in a #gint64.
-const Minint64 = -9223372036854775808
-// Minint8 wraps G_MININT8
+const MININT64 = -9223372036854775808
+// MININT8 wraps G_MININT8
 //
 // The minimum value which can be held in a #gint8.
-const Minint8 = -128
-// MinorVersion wraps GLIB_MINOR_VERSION
+const MININT8 = -128
+// MINOR_VERSION wraps GLIB_MINOR_VERSION
 //
 // The minor version number of the GLib library.
 // 
 // Like #gtk_minor_version, but from the headers used at
 // application compile time, rather than from the library
 // linked against at application run time.
-const MinorVersion = 82
-// PdpEndian wraps G_PDP_ENDIAN
+const MINOR_VERSION = 82
+// PDP_ENDIAN wraps G_PDP_ENDIAN
 //
 // Specifies one of the possible types of byte order
 // (currently unused). See %G_BYTE_ORDER.
-const PdpEndian = 3412
-// Pi wraps G_PI
+const PDP_ENDIAN = 3412
+// PI wraps G_PI
 //
 // The value of pi (ratio of circle's circumference to its diameter).
-const Pi = 3.141593
-// Pi2 wraps G_PI_2
+const PI = 3.141593
+// PI_2 wraps G_PI_2
 //
 // Pi divided by 2.
-const Pi2 = 1.570796
-// Pi4 wraps G_PI_4
+const PI_2 = 1.570796
+// PI_4 wraps G_PI_4
 //
 // Pi divided by 4.
-const Pi4 = 0.785398
-// PriorityDefault wraps G_PRIORITY_DEFAULT
+const PI_4 = 0.785398
+// PRIORITY_DEFAULT wraps G_PRIORITY_DEFAULT
 //
 // Use this for default priority event sources.
 // 
 // In GLib this priority is used when adding timeout functions
 // with [func@GLib.timeout_add]. In GDK this priority is used for events
 // from the X server.
-const PriorityDefault = 0
-// PriorityDefaultIdle wraps G_PRIORITY_DEFAULT_IDLE
+const PRIORITY_DEFAULT = 0
+// PRIORITY_DEFAULT_IDLE wraps G_PRIORITY_DEFAULT_IDLE
 //
 // Use this for default priority idle functions.
 // 
 // In GLib this priority is used when adding idle functions with
 // [func@GLib.idle_add].
-const PriorityDefaultIdle = 200
-// PriorityHigh wraps G_PRIORITY_HIGH
+const PRIORITY_DEFAULT_IDLE = 200
+// PRIORITY_HIGH wraps G_PRIORITY_HIGH
 //
 // Use this for high priority event sources.
 // 
 // It is not used within GLib or GTK.
-const PriorityHigh = -100
-// PriorityHighIdle wraps G_PRIORITY_HIGH_IDLE
+const PRIORITY_HIGH = -100
+// PRIORITY_HIGH_IDLE wraps G_PRIORITY_HIGH_IDLE
 //
 // Use this for high priority idle functions.
 // 
@@ -210,77 +210,77 @@ const PriorityHigh = -100
 // and %G_PRIORITY_HIGH_IDLE + 20 for redrawing operations. (This is
 // done to ensure that any pending resizes are processed before any
 // pending redraws, so that widgets are not redrawn twice unnecessarily.)
-const PriorityHighIdle = 100
-// PriorityLow wraps G_PRIORITY_LOW
+const PRIORITY_HIGH_IDLE = 100
+// PRIORITY_LOW wraps G_PRIORITY_LOW
 //
 // Use this for very low priority background tasks.
 // 
 // It is not used within GLib or GTK.
-const PriorityLow = 300
-// SearchpathSeparator wraps G_SEARCHPATH_SEPARATOR
+const PRIORITY_LOW = 300
+// SEARCHPATH_SEPARATOR wraps G_SEARCHPATH_SEPARATOR
 //
 // The search path separator character.
 // This is ':' on UNIX machines and ';' under Windows.
-const SearchpathSeparator = 58
-// SizeofLong wraps GLIB_SIZEOF_LONG
-const SizeofLong = 8
-// SizeofSizeT wraps GLIB_SIZEOF_SIZE_T
-const SizeofSizeT = 8
-// SizeofSsizeT wraps GLIB_SIZEOF_SSIZE_T
-const SizeofSsizeT = 8
-// SizeofVoidP wraps GLIB_SIZEOF_VOID_P
-const SizeofVoidP = 8
-// Sqrt2 wraps G_SQRT2
+const SEARCHPATH_SEPARATOR = 58
+// SIZEOF_LONG wraps GLIB_SIZEOF_LONG
+const SIZEOF_LONG = 8
+// SIZEOF_SIZE_T wraps GLIB_SIZEOF_SIZE_T
+const SIZEOF_SIZE_T = 8
+// SIZEOF_SSIZE_T wraps GLIB_SIZEOF_SSIZE_T
+const SIZEOF_SSIZE_T = 8
+// SIZEOF_VOID_P wraps GLIB_SIZEOF_VOID_P
+const SIZEOF_VOID_P = 8
+// SQRT2 wraps G_SQRT2
 //
 // The square root of two.
-const Sqrt2 = 1.414214
-// SysdefAfInet wraps GLIB_SYSDEF_AF_INET
-const SysdefAfInet = 2
-// SysdefAfInet6 wraps GLIB_SYSDEF_AF_INET6
-const SysdefAfInet6 = 10
-// SysdefAfUnix wraps GLIB_SYSDEF_AF_UNIX
-const SysdefAfUnix = 1
-// SysdefMsgDontroute wraps GLIB_SYSDEF_MSG_DONTROUTE
-const SysdefMsgDontroute = 4
-// SysdefMsgOob wraps GLIB_SYSDEF_MSG_OOB
-const SysdefMsgOob = 1
-// SysdefMsgPeek wraps GLIB_SYSDEF_MSG_PEEK
-const SysdefMsgPeek = 2
-// TimeSpanDay wraps G_TIME_SPAN_DAY
+const SQRT2 = 1.414214
+// SYSDEF_AF_INET wraps GLIB_SYSDEF_AF_INET
+const SYSDEF_AF_INET = 2
+// SYSDEF_AF_INET6 wraps GLIB_SYSDEF_AF_INET6
+const SYSDEF_AF_INET6 = 10
+// SYSDEF_AF_UNIX wraps GLIB_SYSDEF_AF_UNIX
+const SYSDEF_AF_UNIX = 1
+// SYSDEF_MSG_DONTROUTE wraps GLIB_SYSDEF_MSG_DONTROUTE
+const SYSDEF_MSG_DONTROUTE = 4
+// SYSDEF_MSG_OOB wraps GLIB_SYSDEF_MSG_OOB
+const SYSDEF_MSG_OOB = 1
+// SYSDEF_MSG_PEEK wraps GLIB_SYSDEF_MSG_PEEK
+const SYSDEF_MSG_PEEK = 2
+// TIME_SPAN_DAY wraps G_TIME_SPAN_DAY
 //
 // Evaluates to a time span of one day.
-const TimeSpanDay = 86400000000
-// TimeSpanHour wraps G_TIME_SPAN_HOUR
+const TIME_SPAN_DAY = 86400000000
+// TIME_SPAN_HOUR wraps G_TIME_SPAN_HOUR
 //
 // Evaluates to a time span of one hour.
-const TimeSpanHour = 3600000000
-// TimeSpanMillisecond wraps G_TIME_SPAN_MILLISECOND
+const TIME_SPAN_HOUR = 3600000000
+// TIME_SPAN_MILLISECOND wraps G_TIME_SPAN_MILLISECOND
 //
 // Evaluates to a time span of one millisecond.
-const TimeSpanMillisecond = 1000
-// TimeSpanMinute wraps G_TIME_SPAN_MINUTE
+const TIME_SPAN_MILLISECOND = 1000
+// TIME_SPAN_MINUTE wraps G_TIME_SPAN_MINUTE
 //
 // Evaluates to a time span of one minute.
-const TimeSpanMinute = 60000000
-// TimeSpanSecond wraps G_TIME_SPAN_SECOND
+const TIME_SPAN_MINUTE = 60000000
+// TIME_SPAN_SECOND wraps G_TIME_SPAN_SECOND
 //
 // Evaluates to a time span of one second.
-const TimeSpanSecond = 1000000
-// UnicharMaxDecompositionLength wraps G_UNICHAR_MAX_DECOMPOSITION_LENGTH
+const TIME_SPAN_SECOND = 1000000
+// UNICHAR_MAX_DECOMPOSITION_LENGTH wraps G_UNICHAR_MAX_DECOMPOSITION_LENGTH
 //
 // The maximum length (in codepoints) of a compatibility or canonical
 // decomposition of a single Unicode character.
 // 
 // This is as defined by Unicode 6.1.
-const UnicharMaxDecompositionLength = 18
-// UsecPerSec wraps G_USEC_PER_SEC
+const UNICHAR_MAX_DECOMPOSITION_LENGTH = 18
+// USEC_PER_SEC wraps G_USEC_PER_SEC
 //
 // Number of microseconds in one second (1 million).
 // This macro is provided for code readability.
-const UsecPerSec = 1000000
-// VaCopyAsArray wraps G_VA_COPY_AS_ARRAY
-const VaCopyAsArray = 1
-// VersionMinRequired wraps GLIB_VERSION_MIN_REQUIRED
+const USEC_PER_SEC = 1000000
+// VA_COPY_AS_ARRAY wraps G_VA_COPY_AS_ARRAY
+const VA_COPY_AS_ARRAY = 1
+// VERSION_MIN_REQUIRED wraps GLIB_VERSION_MIN_REQUIRED
 //
 // A macro that should be defined by the user prior to including
 // the glib.h header.
@@ -294,9 +294,9 @@ const VaCopyAsArray = 1
 // functions, then using functions that were deprecated in version
 // %GLIB_VERSION_MIN_REQUIRED or earlier will cause warnings (but
 // using functions deprecated in later releases will not).
-const VersionMinRequired = 2
-// Win32MsgHandle wraps G_WIN32_MSG_HANDLE
-const Win32MsgHandle = 19981206
+const VERSION_MIN_REQUIRED = 2
+// WIN32_MSG_HANDLE wraps G_WIN32_MSG_HANDLE
+const WIN32_MSG_HANDLE = 19981206
 // Pid wraps GPid
 //
 // A type which is used to hold a process identification.

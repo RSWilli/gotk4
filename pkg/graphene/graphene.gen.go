@@ -55,11 +55,11 @@ func init() {
 	})
 }
 
-// Pi wraps GRAPHENE_PI
-const Pi = 3.141593
-// Pi2 wraps GRAPHENE_PI_2
-const Pi2 = 1.570796
-// Vec2Len wraps GRAPHENE_VEC2_LEN
+// PI wraps GRAPHENE_PI
+const PI = 3.141593
+// PI_2 wraps GRAPHENE_PI_2
+const PI_2 = 1.570796
+// VEC2_LEN wraps GRAPHENE_VEC2_LEN
 //
 // Evaluates to the number of components of a #graphene_vec2_t.
 // 
@@ -76,8 +76,8 @@ const Pi2 = 1.570796
 //   for (int i = 0; i &lt; GRAPHENE_VEC2_LEN; i++)
 //     fprintf (stdout, "component %d: %g\n", i, v[i]);
 // ]|
-const Vec2Len = 2
-// Vec3Len wraps GRAPHENE_VEC3_LEN
+const VEC2_LEN = 2
+// VEC3_LEN wraps GRAPHENE_VEC3_LEN
 //
 // Evaluates to the number of components of a #graphene_vec3_t.
 // 
@@ -94,8 +94,8 @@ const Vec2Len = 2
 //   for (int i = 0; i &lt; GRAPHENE_VEC2_LEN; i++)
 //     fprintf (stdout, "component %d: %g\n", i, v[i]);
 // ]|
-const Vec3Len = 3
-// Vec4Len wraps GRAPHENE_VEC4_LEN
+const VEC3_LEN = 3
+// VEC4_LEN wraps GRAPHENE_VEC4_LEN
 //
 // Evaluates to the number of components of a #graphene_vec4_t.
 // 
@@ -112,7 +112,7 @@ const Vec3Len = 3
 //   for (int i = 0; i &lt; GRAPHENE_VEC4_LEN; i++)
 //     fprintf (stdout, "component %d: %g\n", i, v[i]);
 // ]|
-const Vec4Len = 4
+const VEC4_LEN = 4
 // EulerOrder wraps graphene_euler_order_t
 //
 // Specify the order of the rotations on each axis.

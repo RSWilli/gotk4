@@ -134,31 +134,31 @@ func init() {
 	})
 }
 
-// AnalysisFlagCenteredBaseline wraps PANGO_ANALYSIS_FLAG_CENTERED_BASELINE
+// ANALYSIS_FLAG_CENTERED_BASELINE wraps PANGO_ANALYSIS_FLAG_CENTERED_BASELINE
 //
 // Whether the segment should be shifted to center around the baseline.
 // 
 // This is mainly used in vertical writing directions.
-const AnalysisFlagCenteredBaseline = 1
-// AnalysisFlagIsEllipsis wraps PANGO_ANALYSIS_FLAG_IS_ELLIPSIS
+const ANALYSIS_FLAG_CENTERED_BASELINE = 1
+// ANALYSIS_FLAG_IS_ELLIPSIS wraps PANGO_ANALYSIS_FLAG_IS_ELLIPSIS
 //
 // Whether this run holds ellipsized text.
-const AnalysisFlagIsEllipsis = 2
-// AnalysisFlagNeedHyphen wraps PANGO_ANALYSIS_FLAG_NEED_HYPHEN
+const ANALYSIS_FLAG_IS_ELLIPSIS = 2
+// ANALYSIS_FLAG_NEED_HYPHEN wraps PANGO_ANALYSIS_FLAG_NEED_HYPHEN
 //
 // Whether to add a hyphen at the end of the run during shaping.
-const AnalysisFlagNeedHyphen = 4
-// AttrIndexFromTextBeginning wraps PANGO_ATTR_INDEX_FROM_TEXT_BEGINNING
+const ANALYSIS_FLAG_NEED_HYPHEN = 4
+// ATTR_INDEX_FROM_TEXT_BEGINNING wraps PANGO_ATTR_INDEX_FROM_TEXT_BEGINNING
 //
 // Value for @start_index in `PangoAttribute` that indicates
 // the beginning of the text.
-const AttrIndexFromTextBeginning = 0
-// AttrIndexToTextEnd wraps PANGO_ATTR_INDEX_TO_TEXT_END
+const ATTR_INDEX_FROM_TEXT_BEGINNING = 0
+// ATTR_INDEX_TO_TEXT_END wraps PANGO_ATTR_INDEX_TO_TEXT_END
 //
 // Value for @end_index in `PangoAttribute` that indicates
 // the end of the text.
-const AttrIndexToTextEnd = 4294967295
-// Scale wraps PANGO_SCALE
+const ATTR_INDEX_TO_TEXT_END = 4294967295
+// SCALE wraps PANGO_SCALE
 //
 // The scale between dimensions used for Pango distances and device units.
 // 
@@ -168,19 +168,19 @@ const AttrIndexToTextEnd = 4294967295
 // 
 // When setting font sizes, device units are always considered to be
 // points (as in "12 point font"), rather than pixels.
-const Scale = 1024
-// VersionMajor wraps PANGO_VERSION_MAJOR
+const SCALE = 1024
+// VERSION_MAJOR wraps PANGO_VERSION_MAJOR
 //
 // The major component of the version of Pango available at compile-time.
-const VersionMajor = 1
-// VersionMicro wraps PANGO_VERSION_MICRO
+const VERSION_MAJOR = 1
+// VERSION_MICRO wraps PANGO_VERSION_MICRO
 //
 // The micro component of the version of Pango available at compile-time.
-const VersionMicro = 1
-// VersionMinor wraps PANGO_VERSION_MINOR
+const VERSION_MICRO = 1
+// VERSION_MINOR wraps PANGO_VERSION_MINOR
 //
 // The minor component of the version of Pango available at compile-time.
-const VersionMinor = 56
+const VERSION_MINOR = 56
 // Glyph wraps PangoGlyph
 //
 // A `PangoGlyph` represents a single glyph in the output form of a string.
