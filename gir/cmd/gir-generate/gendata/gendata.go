@@ -246,18 +246,6 @@ var Main = genmain.Data{
 							ToGlibFullFunction:     "TODOToGlibFull",
 						},
 					},
-
-					// &typesystem.ForeignType{
-					// 	SourceNamespace: &typesystem.Namespace{GoName: "coreglib"},
-					// 	Type: &typesystem.Class{
-					// 		BaseType: typesystem.BaseType{
-					// 			GirName: "ParamSpec",
-					// 			GoTyp:   "ParamSpec",
-					// 			CTyp:    "GParamSpec",
-					// 			CGoTyp:  "C.GParamSpec",
-					// 		},
-					// 	},
-					// },
 				},
 				IgnoredDefinitions: []typesystem.IgnoreFunc{
 					// manually implemented, but hidden from the user
@@ -339,6 +327,23 @@ var Main = genmain.Data{
 				IgnoredDefinitions: []typesystem.IgnoreFunc{
 					typesystem.IgnoreByFileNameSubstring("gsk/broadway/gskbroadwayrenderer.h"),
 				},
+			},
+			"Gtk-3": {
+				MinVersion: "3.24",
+				IgnoredDefinitions: []typesystem.IgnoreFunc{
+					// These are not found.
+					typesystem.IgnoreMatching("HeaderBarAccessibleClass"),
+					typesystem.IgnoreMatching("FileChooserWidgetAccessibleClass"),
+					typesystem.IgnoreMatching("_MountOperationHandler"),
+					typesystem.IgnoreMatching("_MountOperationHandlerIface"),
+					typesystem.IgnoreMatching("_MountOperationHandlerSkeleton"),
+					typesystem.IgnoreMatching("_MountOperationHandlerSkeletonClass"),
+					typesystem.IgnoreMatching("_MountOperationHandlerProxy"),
+					typesystem.IgnoreMatching("_MountOperationHandlerProxyClass"),
+				},
+			},
+			"Gtk-4": {
+				MinVersion: "4.19",
 			},
 		},
 	},
@@ -493,6 +498,25 @@ var Preprocessors = []Preprocessor{
 	// Collide in other namespaces (e.g. Gio) when implementing TypePlugin and TypeModule
 	RenameCallable("GObject-2.TypePlugin.use", "use_plugin"),
 	RenameCallable("GObject-2.TypePlugin.unuse", "unuse_plugin"),
+
+	// Collide in gtk-3 when implementing interface:
+	RenameCallable("Gtk-3.Buildable.get_name", "get_buildable_name"),
+	RenameCallable("Gtk-3.Buildable.set_name", "set_buildable_name"),
+	RenameCallable("Gtk-3.ToolShell.get_orientation", "get_tool_shell_orientation"),
+	RenameCallable("Gtk-3.ToolShell.get_icon_size", "get_tool_shell_icon_size"),
+	RenameCallable("Gtk-3.Widget.child_notify", "widget_child_notify"),
+	RenameCallable("Gtk-3.TextView.get_window", "get_text_view_window"),
+	RenameCallable("Gtk-3.ComboBoxText.remove", "remove_combo_box_text"),
+	RenameCallable("Gtk-3.Menu.set_accel_path", "set_menu_accel_path"),
+	RenameCallable("Gtk-3.MenuItem.set_accel_path", "set_menu_item_accel_path"),
+	RenameCallable("Gtk-3.Statusbar.remove", "remove_statusbar"),
+	RenameCallable("Gtk-3.MenuItem.activate", "activate_menu_item"),
+	RenameCallable("Gtk-3.Window.mnemonic_activate", "window_mnemonic_activate"),
+	RenameCallable("Gtk-3.MenuButton.get_direction", "get_menu_button_direction"),
+	RenameCallable("Gtk-3.MenuButton.set_direction", "set_menu_button_direction"),
+
+	// must rename to allow atk interface to be implemented
+	RenameCallable("Gtk-3.CellAccessibleParent.grab_focus", "cell_accessible_parent_grab_focus"),
 }
 
 // FIXME: override or manually implement this

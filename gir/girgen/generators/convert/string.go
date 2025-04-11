@@ -15,7 +15,8 @@ type CToGoStringConverter struct {
 func (c *CToGoStringConverter) Convert(w file.File) {
 	w.GoImport("unsafe")
 
-	fmt.Fprintf(w.Go(), "%s = C.GoString((%s)(unsafe.Pointer(%s)))\n", c.Param.GoName, c.Param.CGoType(), c.Param.CName)
+	// C.GoString always requires the *C.char type, so we cast it always
+	fmt.Fprintf(w.Go(), "%s = C.GoString((*C.char)(unsafe.Pointer(%s)))\n", c.Param.GoName, c.Param.CName)
 
 	switch c.Param.TransferOwnership {
 	case typesystem.TransferFull:

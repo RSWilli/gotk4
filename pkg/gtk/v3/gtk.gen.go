@@ -41,7 +41,6 @@ import (
 // extern gboolean _gotk4_gtk3_TreeViewRowSeparatorFunc(GtkTreeModel*, GtkTreeIter*, gpointer);
 // extern gboolean _gotk4_gtk3_TreeViewSearchEqualFunc(GtkTreeModel*, gint, gchar*, GtkTreeIter*, gpointer);
 // extern gchar* _gotk4_gtk3_CalendarDetailFunc(GtkCalendar*, guint, guint, guint, gpointer);
-// extern gchar* _gotk4_gtk3_TranslateFunc(gchar*, gpointer);
 // extern gint _gotk4_gtk3_AssistantPageFunc(gint, gpointer);
 // extern gint _gotk4_gtk3_FlowBoxSortFunc(GtkFlowBoxChild*, GtkFlowBoxChild*, gpointer);
 // extern gint _gotk4_gtk3_ListBoxSortFunc(GtkListBoxRow*, GtkListBoxRow*, gpointer);
@@ -62,7 +61,6 @@ import (
 // extern void _gotk4_gtk3_PrintSettingsFunc(gchar*, gchar*, gpointer);
 // extern void _gotk4_gtk3_TextTagTableForEach(GtkTextTag*, gpointer);
 // extern void _gotk4_gtk3_TreeCellDataFunc(GtkTreeViewColumn*, GtkCellRenderer*, GtkTreeModel*, GtkTreeIter*, gpointer);
-// extern void _gotk4_gtk3_TreeDestroyCountFunc(GtkTreeView*, GtkTreePath*, gint, gpointer);
 // extern void _gotk4_gtk3_TreeModelFilterModifyFunc(GtkTreeModel*, GtkTreeIter*, GValue, gint, gpointer);
 // extern void _gotk4_gtk3_TreeSelectionForEachFunc(GtkTreeModel*, GtkTreePath*, GtkTreeIter*, gpointer);
 // extern void _gotk4_gtk3_TreeViewMappingFunc(GtkTreeView*, GtkTreePath*, gpointer);
@@ -72,438 +70,427 @@ import "C"
 
 // GType values.
 var (
-	TypeAlign                       = gobject.Type(C.gtk_align_get_type())
-	TypeArrowPlacement              = gobject.Type(C.gtk_arrow_placement_get_type())
-	TypeArrowType                   = gobject.Type(C.gtk_arrow_type_get_type())
-	TypeAssistantPageType           = gobject.Type(C.gtk_assistant_page_type_get_type())
-	TypeBaselinePosition            = gobject.Type(C.gtk_baseline_position_get_type())
-	TypeBorderStyle                 = gobject.Type(C.gtk_border_style_get_type())
-	TypeBuilderError                = gobject.Type(C.gtk_builder_error_get_type())
-	TypeButtonBoxStyle              = gobject.Type(C.gtk_button_box_style_get_type())
-	TypeButtonRole                  = gobject.Type(C.gtk_button_role_get_type())
-	TypeButtonsType                 = gobject.Type(C.gtk_buttons_type_get_type())
-	TypeCellRendererAccelMode       = gobject.Type(C.gtk_cell_renderer_accel_mode_get_type())
-	TypeCellRendererMode            = gobject.Type(C.gtk_cell_renderer_mode_get_type())
-	TypeCornerType                  = gobject.Type(C.gtk_corner_type_get_type())
-	TypeCssProviderError            = gobject.Type(C.gtk_css_provider_error_get_type())
-	TypeCssSectionType              = gobject.Type(C.gtk_css_section_type_get_type())
-	TypeDeleteType                  = gobject.Type(C.gtk_delete_type_get_type())
-	TypeDirectionType               = gobject.Type(C.gtk_direction_type_get_type())
-	TypeDragResult                  = gobject.Type(C.gtk_drag_result_get_type())
-	TypeEntryIconPosition           = gobject.Type(C.gtk_entry_icon_position_get_type())
-	TypeEventSequenceState          = gobject.Type(C.gtk_event_sequence_state_get_type())
-	TypeExpanderStyle               = gobject.Type(C.gtk_expander_style_get_type())
-	TypeFileChooserAction           = gobject.Type(C.gtk_file_chooser_action_get_type())
-	TypeFileChooserConfirmation     = gobject.Type(C.gtk_file_chooser_confirmation_get_type())
-	TypeFileChooserError            = gobject.Type(C.gtk_file_chooser_error_get_type())
-	TypeIMPreeditStyle              = gobject.Type(C.gtk_im_preedit_style_get_type())
-	TypeIMStatusStyle               = gobject.Type(C.gtk_im_status_style_get_type())
-	TypeIconSize                    = gobject.Type(C.gtk_icon_size_get_type())
-	TypeIconThemeError              = gobject.Type(C.gtk_icon_theme_error_get_type())
-	TypeIconViewDropPosition        = gobject.Type(C.gtk_icon_view_drop_position_get_type())
-	TypeImageType                   = gobject.Type(C.gtk_image_type_get_type())
-	TypeInputPurpose                = gobject.Type(C.gtk_input_purpose_get_type())
-	TypeJustification               = gobject.Type(C.gtk_justification_get_type())
-	TypeLevelBarMode                = gobject.Type(C.gtk_level_bar_mode_get_type())
-	TypeLicense                     = gobject.Type(C.gtk_license_get_type())
-	TypeMenuDirectionType           = gobject.Type(C.gtk_menu_direction_type_get_type())
-	TypeMessageType                 = gobject.Type(C.gtk_message_type_get_type())
-	TypeMovementStep                = gobject.Type(C.gtk_movement_step_get_type())
-	TypeNotebookTab                 = gobject.Type(C.gtk_notebook_tab_get_type())
-	TypeNumberUpLayout              = gobject.Type(C.gtk_number_up_layout_get_type())
-	TypeOrientation                 = gobject.Type(C.gtk_orientation_get_type())
-	TypePackDirection               = gobject.Type(C.gtk_pack_direction_get_type())
-	TypePackType                    = gobject.Type(C.gtk_pack_type_get_type())
-	TypePadActionType               = gobject.Type(C.gtk_pad_action_type_get_type())
-	TypePageOrientation             = gobject.Type(C.gtk_page_orientation_get_type())
-	TypePageSet                     = gobject.Type(C.gtk_page_set_get_type())
-	TypePanDirection                = gobject.Type(C.gtk_pan_direction_get_type())
-	TypePathPriorityType            = gobject.Type(C.gtk_path_priority_type_get_type())
-	TypePathType                    = gobject.Type(C.gtk_path_type_get_type())
-	TypePolicyType                  = gobject.Type(C.gtk_policy_type_get_type())
-	TypePopoverConstraint           = gobject.Type(C.gtk_popover_constraint_get_type())
-	TypePositionType                = gobject.Type(C.gtk_position_type_get_type())
-	TypePrintDuplex                 = gobject.Type(C.gtk_print_duplex_get_type())
-	TypePrintError                  = gobject.Type(C.gtk_print_error_get_type())
-	TypePrintOperationAction        = gobject.Type(C.gtk_print_operation_action_get_type())
-	TypePrintOperationResult        = gobject.Type(C.gtk_print_operation_result_get_type())
-	TypePrintPages                  = gobject.Type(C.gtk_print_pages_get_type())
-	TypePrintQuality                = gobject.Type(C.gtk_print_quality_get_type())
-	TypePrintStatus                 = gobject.Type(C.gtk_print_status_get_type())
-	TypePropagationPhase            = gobject.Type(C.gtk_propagation_phase_get_type())
-	TypeRcTokenType                 = gobject.Type(C.gtk_rc_token_type_get_type())
-	TypeRecentChooserError          = gobject.Type(C.gtk_recent_chooser_error_get_type())
-	TypeRecentManagerError          = gobject.Type(C.gtk_recent_manager_error_get_type())
-	TypeRecentSortType              = gobject.Type(C.gtk_recent_sort_type_get_type())
-	TypeReliefStyle                 = gobject.Type(C.gtk_relief_style_get_type())
-	TypeResizeMode                  = gobject.Type(C.gtk_resize_mode_get_type())
-	TypeResponseType                = gobject.Type(C.gtk_response_type_get_type())
-	TypeRevealerTransitionType      = gobject.Type(C.gtk_revealer_transition_type_get_type())
-	TypeScrollStep                  = gobject.Type(C.gtk_scroll_step_get_type())
-	TypeScrollType                  = gobject.Type(C.gtk_scroll_type_get_type())
-	TypeScrollablePolicy            = gobject.Type(C.gtk_scrollable_policy_get_type())
-	TypeSelectionMode               = gobject.Type(C.gtk_selection_mode_get_type())
-	TypeSensitivityType             = gobject.Type(C.gtk_sensitivity_type_get_type())
-	TypeShadowType                  = gobject.Type(C.gtk_shadow_type_get_type())
-	TypeShortcutType                = gobject.Type(C.gtk_shortcut_type_get_type())
-	TypeSizeGroupMode               = gobject.Type(C.gtk_size_group_mode_get_type())
-	TypeSizeRequestMode             = gobject.Type(C.gtk_size_request_mode_get_type())
-	TypeSortType                    = gobject.Type(C.gtk_sort_type_get_type())
-	TypeSpinButtonUpdatePolicy      = gobject.Type(C.gtk_spin_button_update_policy_get_type())
-	TypeSpinType                    = gobject.Type(C.gtk_spin_type_get_type())
-	TypeStackTransitionType         = gobject.Type(C.gtk_stack_transition_type_get_type())
-	TypeStateType                   = gobject.Type(C.gtk_state_type_get_type())
-	TypeTextBufferTargetInfo        = gobject.Type(C.gtk_text_buffer_target_info_get_type())
-	TypeTextDirection               = gobject.Type(C.gtk_text_direction_get_type())
-	TypeTextExtendSelection         = gobject.Type(C.gtk_text_extend_selection_get_type())
-	TypeTextViewLayer               = gobject.Type(C.gtk_text_view_layer_get_type())
-	TypeTextWindowType              = gobject.Type(C.gtk_text_window_type_get_type())
-	TypeToolbarSpaceStyle           = gobject.Type(C.gtk_toolbar_space_style_get_type())
-	TypeToolbarStyle                = gobject.Type(C.gtk_toolbar_style_get_type())
-	TypeTreeViewColumnSizing        = gobject.Type(C.gtk_tree_view_column_sizing_get_type())
-	TypeTreeViewDropPosition        = gobject.Type(C.gtk_tree_view_drop_position_get_type())
-	TypeTreeViewGridLines           = gobject.Type(C.gtk_tree_view_grid_lines_get_type())
-	TypeUnit                        = gobject.Type(C.gtk_unit_get_type())
-	TypeWidgetHelpType              = gobject.Type(C.gtk_widget_help_type_get_type())
-	TypeWindowPosition              = gobject.Type(C.gtk_window_position_get_type())
-	TypeWindowType                  = gobject.Type(C.gtk_window_type_get_type())
-	TypeWrapMode                    = gobject.Type(C.gtk_wrap_mode_get_type())
-	TypeAccelFlags                  = gobject.Type(C.gtk_accel_flags_get_type())
-	TypeApplicationInhibitFlags     = gobject.Type(C.gtk_application_inhibit_flags_get_type())
-	TypeAttachOptions               = gobject.Type(C.gtk_attach_options_get_type())
-	TypeCalendarDisplayOptions      = gobject.Type(C.gtk_calendar_display_options_get_type())
-	TypeCellRendererState           = gobject.Type(C.gtk_cell_renderer_state_get_type())
-	TypeDebugFlag                   = gobject.Type(C.gtk_debug_flag_get_type())
-	TypeDestDefaults                = gobject.Type(C.gtk_dest_defaults_get_type())
-	TypeDialogFlags                 = gobject.Type(C.gtk_dialog_flags_get_type())
-	TypeEventControllerScrollFlags  = gobject.Type(C.gtk_event_controller_scroll_flags_get_type())
-	TypeFileFilterFlags             = gobject.Type(C.gtk_file_filter_flags_get_type())
-	TypeFontChooserLevel            = gobject.Type(C.gtk_font_chooser_level_get_type())
-	TypeIconLookupFlags             = gobject.Type(C.gtk_icon_lookup_flags_get_type())
-	TypeInputHints                  = gobject.Type(C.gtk_input_hints_get_type())
-	TypeJunctionSides               = gobject.Type(C.gtk_junction_sides_get_type())
-	TypePlacesOpenFlags             = gobject.Type(C.gtk_places_open_flags_get_type())
-	TypeRcFlags                     = gobject.Type(C.gtk_rc_flags_get_type())
-	TypeRecentFilterFlags           = gobject.Type(C.gtk_recent_filter_flags_get_type())
-	TypeRegionFlags                 = gobject.Type(C.gtk_region_flags_get_type())
-	TypeStateFlags                  = gobject.Type(C.gtk_state_flags_get_type())
-	TypeStyleContextPrintFlags      = gobject.Type(C.gtk_style_context_print_flags_get_type())
-	TypeTargetFlags                 = gobject.Type(C.gtk_target_flags_get_type())
-	TypeTextSearchFlags             = gobject.Type(C.gtk_text_search_flags_get_type())
-	TypeToolPaletteDragTargets      = gobject.Type(C.gtk_tool_palette_drag_targets_get_type())
-	TypeTreeModelFlags              = gobject.Type(C.gtk_tree_model_flags_get_type())
-	TypeUIManagerItemType           = gobject.Type(C.gtk_ui_manager_item_type_get_type())
-	TypeActionable                  = gobject.Type(C.gtk_actionable_get_type())
-	TypeActivatable                 = gobject.Type(C.gtk_activatable_get_type())
-	TypeAppChooser                  = gobject.Type(C.gtk_app_chooser_get_type())
-	TypeBuildable                   = gobject.Type(C.gtk_buildable_get_type())
-	TypeCellAccessibleParent        = gobject.Type(C.gtk_cell_accessible_parent_get_type())
-	TypeCellEditable                = gobject.Type(C.gtk_cell_editable_get_type())
-	TypeCellLayout                  = gobject.Type(C.gtk_cell_layout_get_type())
-	TypeColorChooser                = gobject.Type(C.gtk_color_chooser_get_type())
-	TypeEditable                    = gobject.Type(C.gtk_editable_get_type())
-	TypeFileChooser                 = gobject.Type(C.gtk_file_chooser_get_type())
-	TypeFontChooser                 = gobject.Type(C.gtk_font_chooser_get_type())
-	TypeOrientable                  = gobject.Type(C.gtk_orientable_get_type())
-	TypePrintOperationPreview       = gobject.Type(C.gtk_print_operation_preview_get_type())
-	TypeRecentChooser               = gobject.Type(C.gtk_recent_chooser_get_type())
-	TypeScrollable                  = gobject.Type(C.gtk_scrollable_get_type())
-	TypeStyleProvider               = gobject.Type(C.gtk_style_provider_get_type())
-	TypeToolShell                   = gobject.Type(C.gtk_tool_shell_get_type())
-	TypeTreeDragDest                = gobject.Type(C.gtk_tree_drag_dest_get_type())
-	TypeTreeDragSource              = gobject.Type(C.gtk_tree_drag_source_get_type())
-	TypeTreeModel                   = gobject.Type(C.gtk_tree_model_get_type())
-	TypeTreeSortable                = gobject.Type(C.gtk_tree_sortable_get_type())
-	TypeAccelGroup                  = gobject.Type(C.gtk_accel_group_get_type())
-	TypeAccelMap                    = gobject.Type(C.gtk_accel_map_get_type())
-	TypeAccessible                  = gobject.Type(C.gtk_accessible_get_type())
-	TypeAction                      = gobject.Type(C.gtk_action_get_type())
-	TypeActionGroup                 = gobject.Type(C.gtk_action_group_get_type())
-	TypeAdjustment                  = gobject.Type(C.gtk_adjustment_get_type())
-	TypeApplication                 = gobject.Type(C.gtk_application_get_type())
-	TypeBuilder                     = gobject.Type(C.gtk_builder_get_type())
-	TypeCellAccessible              = gobject.Type(C.gtk_cell_accessible_get_type())
-	TypeCellArea                    = gobject.Type(C.gtk_cell_area_get_type())
-	TypeCellAreaBox                 = gobject.Type(C.gtk_cell_area_box_get_type())
-	TypeCellAreaContext             = gobject.Type(C.gtk_cell_area_context_get_type())
-	TypeCellRenderer                = gobject.Type(C.gtk_cell_renderer_get_type())
-	TypeCellRendererPixbuf          = gobject.Type(C.gtk_cell_renderer_pixbuf_get_type())
-	TypeCellRendererProgress        = gobject.Type(C.gtk_cell_renderer_progress_get_type())
-	TypeCellRendererSpinner         = gobject.Type(C.gtk_cell_renderer_spinner_get_type())
-	TypeCellRendererText            = gobject.Type(C.gtk_cell_renderer_text_get_type())
-	TypeCellRendererToggle          = gobject.Type(C.gtk_cell_renderer_toggle_get_type())
-	TypeClipboard                   = gobject.Type(C.gtk_clipboard_get_type())
-	TypeContainerCellAccessible     = gobject.Type(C.gtk_container_cell_accessible_get_type())
-	TypeCssProvider                 = gobject.Type(C.gtk_css_provider_get_type())
-	TypeEntryBuffer                 = gobject.Type(C.gtk_entry_buffer_get_type())
-	TypeEntryCompletion             = gobject.Type(C.gtk_entry_completion_get_type())
-	TypeEntryIconAccessible         = gobject.Type(C.gtk_entry_icon_accessible_get_type())
-	TypeEventController             = gobject.Type(C.gtk_event_controller_get_type())
-	TypeEventControllerKey          = gobject.Type(C.gtk_event_controller_key_get_type())
-	TypeEventControllerMotion       = gobject.Type(C.gtk_event_controller_motion_get_type())
-	TypeEventControllerScroll       = gobject.Type(C.gtk_event_controller_scroll_get_type())
-	TypeFileFilter                  = gobject.Type(C.gtk_file_filter_get_type())
-	TypeGesture                     = gobject.Type(C.gtk_gesture_get_type())
-	TypeGestureRotate               = gobject.Type(C.gtk_gesture_rotate_get_type())
-	TypeGestureSingle               = gobject.Type(C.gtk_gesture_single_get_type())
-	TypeGestureStylus               = gobject.Type(C.gtk_gesture_stylus_get_type())
-	TypeGestureSwipe                = gobject.Type(C.gtk_gesture_swipe_get_type())
-	TypeGestureZoom                 = gobject.Type(C.gtk_gesture_zoom_get_type())
-	TypeIMContext                   = gobject.Type(C.gtk_im_context_get_type())
-	TypeIMContextSimple             = gobject.Type(C.gtk_im_context_simple_get_type())
-	TypeIMMulticontext              = gobject.Type(C.gtk_im_multicontext_get_type())
-	TypeIconFactory                 = gobject.Type(C.gtk_icon_factory_get_type())
-	TypeIconInfo                    = gobject.Type(C.gtk_icon_info_get_type())
-	TypeIconTheme                   = gobject.Type(C.gtk_icon_theme_get_type())
-	TypeListStore                   = gobject.Type(C.gtk_list_store_get_type())
-	TypeMountOperation              = gobject.Type(C.gtk_mount_operation_get_type())
-	TypeNativeDialog                = gobject.Type(C.gtk_native_dialog_get_type())
-	TypeNotebookPageAccessible      = gobject.Type(C.gtk_notebook_page_accessible_get_type())
-	TypeNumerableIcon               = gobject.Type(C.gtk_numerable_icon_get_type())
-	TypePadController               = gobject.Type(C.gtk_pad_controller_get_type())
-	TypePageSetup                   = gobject.Type(C.gtk_page_setup_get_type())
-	TypePrintContext                = gobject.Type(C.gtk_print_context_get_type())
-	TypePrintOperation              = gobject.Type(C.gtk_print_operation_get_type())
-	TypePrintSettings               = gobject.Type(C.gtk_print_settings_get_type())
-	TypeRcStyle                     = gobject.Type(C.gtk_rc_style_get_type())
-	TypeRecentAction                = gobject.Type(C.gtk_recent_action_get_type())
-	TypeRecentFilter                = gobject.Type(C.gtk_recent_filter_get_type())
-	TypeRecentManager               = gobject.Type(C.gtk_recent_manager_get_type())
-	TypeRendererCellAccessible      = gobject.Type(C.gtk_renderer_cell_accessible_get_type())
-	TypeSettings                    = gobject.Type(C.gtk_settings_get_type())
-	TypeSizeGroup                   = gobject.Type(C.gtk_size_group_get_type())
-	TypeStatusIcon                  = gobject.Type(C.gtk_status_icon_get_type())
-	TypeStyle                       = gobject.Type(C.gtk_style_get_type())
-	TypeStyleContext                = gobject.Type(C.gtk_style_context_get_type())
-	TypeStyleProperties             = gobject.Type(C.gtk_style_properties_get_type())
-	TypeTextBuffer                  = gobject.Type(C.gtk_text_buffer_get_type())
-	TypeTextCellAccessible          = gobject.Type(C.gtk_text_cell_accessible_get_type())
-	TypeTextChildAnchor             = gobject.Type(C.gtk_text_child_anchor_get_type())
-	TypeTextMark                    = gobject.Type(C.gtk_text_mark_get_type())
-	TypeTextTag                     = gobject.Type(C.gtk_text_tag_get_type())
-	TypeTextTagTable                = gobject.Type(C.gtk_text_tag_table_get_type())
-	TypeThemingEngine               = gobject.Type(C.gtk_theming_engine_get_type())
-	TypeToggleAction                = gobject.Type(C.gtk_toggle_action_get_type())
-	TypeTooltip                     = gobject.Type(C.gtk_tooltip_get_type())
-	TypeToplevelAccessible          = gobject.Type(C.gtk_toplevel_accessible_get_type())
-	TypeTreeModelFilter             = gobject.Type(C.gtk_tree_model_filter_get_type())
-	TypeTreeModelSort               = gobject.Type(C.gtk_tree_model_sort_get_type())
-	TypeTreeSelection               = gobject.Type(C.gtk_tree_selection_get_type())
-	TypeTreeStore                   = gobject.Type(C.gtk_tree_store_get_type())
-	TypeTreeViewColumn              = gobject.Type(C.gtk_tree_view_column_get_type())
-	TypeUIManager                   = gobject.Type(C.gtk_ui_manager_get_type())
-	TypeWidget                      = gobject.Type(C.gtk_widget_get_type())
-	TypeWidgetAccessible            = gobject.Type(C.gtk_widget_accessible_get_type())
-	TypeWindowGroup                 = gobject.Type(C.gtk_window_group_get_type())
-	TypeArrowAccessible             = gobject.Type(C.gtk_arrow_accessible_get_type())
-	TypeBooleanCellAccessible       = gobject.Type(C.gtk_boolean_cell_accessible_get_type())
-	TypeCalendar                    = gobject.Type(C.gtk_calendar_get_type())
-	TypeCellRendererAccel           = gobject.Type(C.gtk_cell_renderer_accel_get_type())
-	TypeCellRendererCombo           = gobject.Type(C.gtk_cell_renderer_combo_get_type())
-	TypeCellRendererSpin            = gobject.Type(C.gtk_cell_renderer_spin_get_type())
-	TypeCellView                    = gobject.Type(C.gtk_cell_view_get_type())
-	TypeContainer                   = gobject.Type(C.gtk_container_get_type())
-	TypeContainerAccessible         = gobject.Type(C.gtk_container_accessible_get_type())
-	TypeDrawingArea                 = gobject.Type(C.gtk_drawing_area_get_type())
-	TypeEntry                       = gobject.Type(C.gtk_entry_get_type())
-	TypeEntryAccessible             = gobject.Type(C.gtk_entry_accessible_get_type())
-	TypeExpanderAccessible          = gobject.Type(C.gtk_expander_accessible_get_type())
-	TypeFileChooserNative           = gobject.Type(C.gtk_file_chooser_native_get_type())
-	TypeFileChooserWidgetAccessible = gobject.Type(C.gtk_file_chooser_widget_accessible_get_type())
-	TypeFixed                       = gobject.Type(C.gtk_fixed_get_type())
-	TypeFlowBox                     = gobject.Type(C.gtk_flow_box_get_type())
-	TypeFlowBoxAccessible           = gobject.Type(C.gtk_flow_box_accessible_get_type())
-	TypeFlowBoxChildAccessible      = gobject.Type(C.gtk_flow_box_child_accessible_get_type())
-	TypeFrameAccessible             = gobject.Type(C.gtk_frame_accessible_get_type())
-	TypeGLArea                      = gobject.Type(C.gtk_gl_area_get_type())
-	TypeGestureDrag                 = gobject.Type(C.gtk_gesture_drag_get_type())
-	TypeGestureLongPress            = gobject.Type(C.gtk_gesture_long_press_get_type())
-	TypeGestureMultiPress           = gobject.Type(C.gtk_gesture_multi_press_get_type())
-	TypeGesturePan                  = gobject.Type(C.gtk_gesture_pan_get_type())
-	TypeGrid                        = gobject.Type(C.gtk_grid_get_type())
-	TypeHSV                         = gobject.Type(C.gtk_hsv_get_type())
-	TypeHeaderBar                   = gobject.Type(C.gtk_header_bar_get_type())
-	TypeHeaderBarAccessible         = gobject.Type(C.gtk_header_bar_accessible_get_type())
-	TypeIconView                    = gobject.Type(C.gtk_icon_view_get_type())
-	TypeIconViewAccessible          = gobject.Type(C.gtk_icon_view_accessible_get_type())
-	TypeImageAccessible             = gobject.Type(C.gtk_image_accessible_get_type())
-	TypeImageCellAccessible         = gobject.Type(C.gtk_image_cell_accessible_get_type())
-	TypeInvisible                   = gobject.Type(C.gtk_invisible_get_type())
-	TypeLabelAccessible             = gobject.Type(C.gtk_label_accessible_get_type())
-	TypeLayout                      = gobject.Type(C.gtk_layout_get_type())
-	TypeLevelBar                    = gobject.Type(C.gtk_level_bar_get_type())
-	TypeLevelBarAccessible          = gobject.Type(C.gtk_level_bar_accessible_get_type())
-	TypeListBox                     = gobject.Type(C.gtk_list_box_get_type())
-	TypeListBoxAccessible           = gobject.Type(C.gtk_list_box_accessible_get_type())
-	TypeListBoxRowAccessible        = gobject.Type(C.gtk_list_box_row_accessible_get_type())
-	TypeMenuItemAccessible          = gobject.Type(C.gtk_menu_item_accessible_get_type())
-	TypeMenuShell                   = gobject.Type(C.gtk_menu_shell_get_type())
-	TypeMenuShellAccessible         = gobject.Type(C.gtk_menu_shell_accessible_get_type())
-	TypeMisc                        = gobject.Type(C.gtk_misc_get_type())
-	TypeNotebook                    = gobject.Type(C.gtk_notebook_get_type())
-	TypeNotebookAccessible          = gobject.Type(C.gtk_notebook_accessible_get_type())
-	TypePaned                       = gobject.Type(C.gtk_paned_get_type())
-	TypePanedAccessible             = gobject.Type(C.gtk_paned_accessible_get_type())
-	TypePopoverAccessible           = gobject.Type(C.gtk_popover_accessible_get_type())
-	TypeProgressBar                 = gobject.Type(C.gtk_progress_bar_get_type())
-	TypeProgressBarAccessible       = gobject.Type(C.gtk_progress_bar_accessible_get_type())
-	TypeRadioAction                 = gobject.Type(C.gtk_radio_action_get_type())
-	TypeRange                       = gobject.Type(C.gtk_range_get_type())
-	TypeRangeAccessible             = gobject.Type(C.gtk_range_accessible_get_type())
-	TypeScale                       = gobject.Type(C.gtk_scale_get_type())
-	TypeScaleAccessible             = gobject.Type(C.gtk_scale_accessible_get_type())
-	TypeScrollbar                   = gobject.Type(C.gtk_scrollbar_get_type())
-	TypeScrolledWindowAccessible    = gobject.Type(C.gtk_scrolled_window_accessible_get_type())
-	TypeSearchEntry                 = gobject.Type(C.gtk_search_entry_get_type())
-	TypeSeparator                   = gobject.Type(C.gtk_separator_get_type())
-	TypeSocket                      = gobject.Type(C.gtk_socket_get_type())
-	TypeSocketAccessible            = gobject.Type(C.gtk_socket_accessible_get_type())
-	TypeSpinButton                  = gobject.Type(C.gtk_spin_button_get_type())
-	TypeSpinButtonAccessible        = gobject.Type(C.gtk_spin_button_accessible_get_type())
-	TypeSpinner                     = gobject.Type(C.gtk_spinner_get_type())
-	TypeSpinnerAccessible           = gobject.Type(C.gtk_spinner_accessible_get_type())
-	TypeStack                       = gobject.Type(C.gtk_stack_get_type())
-	TypeStackAccessible             = gobject.Type(C.gtk_stack_accessible_get_type())
-	TypeStatusbarAccessible         = gobject.Type(C.gtk_statusbar_accessible_get_type())
-	TypeSwitch                      = gobject.Type(C.gtk_switch_get_type())
-	TypeSwitchAccessible            = gobject.Type(C.gtk_switch_accessible_get_type())
-	TypeTable                       = gobject.Type(C.gtk_table_get_type())
-	TypeTextView                    = gobject.Type(C.gtk_text_view_get_type())
-	TypeTextViewAccessible          = gobject.Type(C.gtk_text_view_accessible_get_type())
-	TypeToolItemGroup               = gobject.Type(C.gtk_tool_item_group_get_type())
-	TypeToolPalette                 = gobject.Type(C.gtk_tool_palette_get_type())
-	TypeToolbar                     = gobject.Type(C.gtk_toolbar_get_type())
-	TypeTreeView                    = gobject.Type(C.gtk_tree_view_get_type())
-	TypeTreeViewAccessible          = gobject.Type(C.gtk_tree_view_accessible_get_type())
-	TypeVPaned                      = gobject.Type(C.gtk_vpaned_get_type())
-	TypeVScale                      = gobject.Type(C.gtk_vscale_get_type())
-	TypeVScrollbar                  = gobject.Type(C.gtk_vscrollbar_get_type())
-	TypeVSeparator                  = gobject.Type(C.gtk_vseparator_get_type())
-	TypeWindowAccessible            = gobject.Type(C.gtk_window_accessible_get_type())
-	TypeArrow                       = gobject.Type(C.gtk_arrow_get_type())
-	TypeBin                         = gobject.Type(C.gtk_bin_get_type())
-	TypeBox                         = gobject.Type(C.gtk_box_get_type())
-	TypeButton                      = gobject.Type(C.gtk_button_get_type())
-	TypeButtonAccessible            = gobject.Type(C.gtk_button_accessible_get_type())
-	TypeButtonBox                   = gobject.Type(C.gtk_button_box_get_type())
-	TypeCheckMenuItemAccessible     = gobject.Type(C.gtk_check_menu_item_accessible_get_type())
-	TypeColorButton                 = gobject.Type(C.gtk_color_button_get_type())
-	TypeColorChooserWidget          = gobject.Type(C.gtk_color_chooser_widget_get_type())
-	TypeColorSelection              = gobject.Type(C.gtk_color_selection_get_type())
-	TypeComboBox                    = gobject.Type(C.gtk_combo_box_get_type())
-	TypeComboBoxAccessible          = gobject.Type(C.gtk_combo_box_accessible_get_type())
-	TypeComboBoxText                = gobject.Type(C.gtk_combo_box_text_get_type())
-	TypeEventBox                    = gobject.Type(C.gtk_event_box_get_type())
-	TypeExpander                    = gobject.Type(C.gtk_expander_get_type())
-	TypeFileChooserButton           = gobject.Type(C.gtk_file_chooser_button_get_type())
-	TypeFileChooserWidget           = gobject.Type(C.gtk_file_chooser_widget_get_type())
-	TypeFlowBoxChild                = gobject.Type(C.gtk_flow_box_child_get_type())
-	TypeFontButton                  = gobject.Type(C.gtk_font_button_get_type())
-	TypeFontChooserWidget           = gobject.Type(C.gtk_font_chooser_widget_get_type())
-	TypeFontSelection               = gobject.Type(C.gtk_font_selection_get_type())
-	TypeFrame                       = gobject.Type(C.gtk_frame_get_type())
-	TypeHBox                        = gobject.Type(C.gtk_hbox_get_type())
-	TypeHButtonBox                  = gobject.Type(C.gtk_hbutton_box_get_type())
-	TypeHPaned                      = gobject.Type(C.gtk_hpaned_get_type())
-	TypeHScale                      = gobject.Type(C.gtk_hscale_get_type())
-	TypeHScrollbar                  = gobject.Type(C.gtk_hscrollbar_get_type())
-	TypeHSeparator                  = gobject.Type(C.gtk_hseparator_get_type())
-	TypeHandleBox                   = gobject.Type(C.gtk_handle_box_get_type())
-	TypeImage                       = gobject.Type(C.gtk_image_get_type())
-	TypeInfoBar                     = gobject.Type(C.gtk_info_bar_get_type())
-	TypeLabel                       = gobject.Type(C.gtk_label_get_type())
-	TypeLinkButton                  = gobject.Type(C.gtk_link_button_get_type())
-	TypeLinkButtonAccessible        = gobject.Type(C.gtk_link_button_accessible_get_type())
-	TypeListBoxRow                  = gobject.Type(C.gtk_list_box_row_get_type())
-	TypeLockButton                  = gobject.Type(C.gtk_lock_button_get_type())
-	TypeLockButtonAccessible        = gobject.Type(C.gtk_lock_button_accessible_get_type())
-	TypeMenu                        = gobject.Type(C.gtk_menu_get_type())
-	TypeMenuAccessible              = gobject.Type(C.gtk_menu_accessible_get_type())
-	TypeMenuBar                     = gobject.Type(C.gtk_menu_bar_get_type())
-	TypeMenuItem                    = gobject.Type(C.gtk_menu_item_get_type())
-	TypeModelButton                 = gobject.Type(C.gtk_model_button_get_type())
-	TypeOverlay                     = gobject.Type(C.gtk_overlay_get_type())
-	TypePlugAccessible              = gobject.Type(C.gtk_plug_accessible_get_type())
-	TypePopover                     = gobject.Type(C.gtk_popover_get_type())
-	TypePopoverMenu                 = gobject.Type(C.gtk_popover_menu_get_type())
-	TypeRadioMenuItemAccessible     = gobject.Type(C.gtk_radio_menu_item_accessible_get_type())
-	TypeRecentChooserMenu           = gobject.Type(C.gtk_recent_chooser_menu_get_type())
-	TypeRecentChooserWidget         = gobject.Type(C.gtk_recent_chooser_widget_get_type())
-	TypeRevealer                    = gobject.Type(C.gtk_revealer_get_type())
-	TypeScaleButton                 = gobject.Type(C.gtk_scale_button_get_type())
-	TypeScaleButtonAccessible       = gobject.Type(C.gtk_scale_button_accessible_get_type())
-	TypeScrolledWindow              = gobject.Type(C.gtk_scrolled_window_get_type())
-	TypeSearchBar                   = gobject.Type(C.gtk_search_bar_get_type())
-	TypeSeparatorMenuItem           = gobject.Type(C.gtk_separator_menu_item_get_type())
-	TypeShortcutLabel               = gobject.Type(C.gtk_shortcut_label_get_type())
-	TypeShortcutsGroup              = gobject.Type(C.gtk_shortcuts_group_get_type())
-	TypeShortcutsSection            = gobject.Type(C.gtk_shortcuts_section_get_type())
-	TypeShortcutsShortcut           = gobject.Type(C.gtk_shortcuts_shortcut_get_type())
-	TypeStackSidebar                = gobject.Type(C.gtk_stack_sidebar_get_type())
-	TypeStackSwitcher               = gobject.Type(C.gtk_stack_switcher_get_type())
-	TypeStatusbar                   = gobject.Type(C.gtk_statusbar_get_type())
-	TypeTearoffMenuItem             = gobject.Type(C.gtk_tearoff_menu_item_get_type())
-	TypeToggleButton                = gobject.Type(C.gtk_toggle_button_get_type())
-	TypeToggleButtonAccessible      = gobject.Type(C.gtk_toggle_button_accessible_get_type())
-	TypeToolItem                    = gobject.Type(C.gtk_tool_item_get_type())
-	TypeVBox                        = gobject.Type(C.gtk_vbox_get_type())
-	TypeVButtonBox                  = gobject.Type(C.gtk_vbutton_box_get_type())
-	TypeViewport                    = gobject.Type(C.gtk_viewport_get_type())
-	TypeVolumeButton                = gobject.Type(C.gtk_volume_button_get_type())
-	TypeWindow                      = gobject.Type(C.gtk_window_get_type())
-	TypeAccelLabel                  = gobject.Type(C.gtk_accel_label_get_type())
-	TypeActionBar                   = gobject.Type(C.gtk_action_bar_get_type())
-	TypeAlignment                   = gobject.Type(C.gtk_alignment_get_type())
-	TypeAppChooserButton            = gobject.Type(C.gtk_app_chooser_button_get_type())
-	TypeAppChooserWidget            = gobject.Type(C.gtk_app_chooser_widget_get_type())
-	TypeApplicationWindow           = gobject.Type(C.gtk_application_window_get_type())
-	TypeAspectFrame                 = gobject.Type(C.gtk_aspect_frame_get_type())
-	TypeAssistant                   = gobject.Type(C.gtk_assistant_get_type())
-	TypeCheckButton                 = gobject.Type(C.gtk_check_button_get_type())
-	TypeCheckMenuItem               = gobject.Type(C.gtk_check_menu_item_get_type())
-	TypeDialog                      = gobject.Type(C.gtk_dialog_get_type())
-	TypeFileChooserDialog           = gobject.Type(C.gtk_file_chooser_dialog_get_type())
-	TypeFontChooserDialog           = gobject.Type(C.gtk_font_chooser_dialog_get_type())
-	TypeFontSelectionDialog         = gobject.Type(C.gtk_font_selection_dialog_get_type())
-	TypeImageMenuItem               = gobject.Type(C.gtk_image_menu_item_get_type())
-	TypeMenuButton                  = gobject.Type(C.gtk_menu_button_get_type())
-	TypeMenuButtonAccessible        = gobject.Type(C.gtk_menu_button_accessible_get_type())
-	TypeMessageDialog               = gobject.Type(C.gtk_message_dialog_get_type())
-	TypeOffscreenWindow             = gobject.Type(C.gtk_offscreen_window_get_type())
-	TypePlacesSidebar               = gobject.Type(C.gtk_places_sidebar_get_type())
-	TypePlug                        = gobject.Type(C.gtk_plug_get_type())
-	TypeRadioButton                 = gobject.Type(C.gtk_radio_button_get_type())
-	TypeRadioButtonAccessible       = gobject.Type(C.gtk_radio_button_accessible_get_type())
-	TypeRadioMenuItem               = gobject.Type(C.gtk_radio_menu_item_get_type())
-	TypeRecentChooserDialog         = gobject.Type(C.gtk_recent_chooser_dialog_get_type())
-	TypeSeparatorToolItem           = gobject.Type(C.gtk_separator_tool_item_get_type())
-	TypeShortcutsWindow             = gobject.Type(C.gtk_shortcuts_window_get_type())
-	TypeToolButton                  = gobject.Type(C.gtk_tool_button_get_type())
-	TypeAboutDialog                 = gobject.Type(C.gtk_about_dialog_get_type())
-	TypeAppChooserDialog            = gobject.Type(C.gtk_app_chooser_dialog_get_type())
-	TypeColorChooserDialog          = gobject.Type(C.gtk_color_chooser_dialog_get_type())
-	TypeColorSelectionDialog        = gobject.Type(C.gtk_color_selection_dialog_get_type())
-	TypeMenuToolButton              = gobject.Type(C.gtk_menu_tool_button_get_type())
-	TypeToggleToolButton            = gobject.Type(C.gtk_toggle_tool_button_get_type())
-	TypeRadioToolButton             = gobject.Type(C.gtk_radio_tool_button_get_type())
-	TypeBorder                      = gobject.Type(C.gtk_border_get_type())
-	TypeCssSection                  = gobject.Type(C.gtk_css_section_get_type())
-	TypeGradient                    = gobject.Type(C.gtk_gradient_get_type())
-	TypeIconSet                     = gobject.Type(C.gtk_icon_set_get_type())
-	TypeIconSource                  = gobject.Type(C.gtk_icon_source_get_type())
-	TypePaperSize                   = gobject.Type(C.gtk_paper_size_get_type())
-	TypeRecentInfo                  = gobject.Type(C.gtk_recent_info_get_type())
-	TypeRequisition                 = gobject.Type(C.gtk_requisition_get_type())
-	TypeSelectionData               = gobject.Type(C.gtk_selection_data_get_type())
-	TypeSymbolicColor               = gobject.Type(C.gtk_symbolic_color_get_type())
-	TypeTargetEntry                 = gobject.Type(C.gtk_target_entry_get_type())
-	TypeTargetList                  = gobject.Type(C.gtk_target_list_get_type())
-	TypeTextAttributes              = gobject.Type(C.gtk_text_attributes_get_type())
-	TypeTextIter                    = gobject.Type(C.gtk_text_iter_get_type())
-	TypeTreeIter                    = gobject.Type(C.gtk_tree_iter_get_type())
-	TypeTreePath                    = gobject.Type(C.gtk_tree_path_get_type())
-	TypeTreeRowReference            = gobject.Type(C.gtk_tree_row_reference_get_type())
-	TypeWidgetPath                  = gobject.Type(C.gtk_widget_path_get_type())
+	TypeAlign                      = gobject.Type(C.gtk_align_get_type())
+	TypeArrowPlacement             = gobject.Type(C.gtk_arrow_placement_get_type())
+	TypeArrowType                  = gobject.Type(C.gtk_arrow_type_get_type())
+	TypeAssistantPageType          = gobject.Type(C.gtk_assistant_page_type_get_type())
+	TypeBaselinePosition           = gobject.Type(C.gtk_baseline_position_get_type())
+	TypeBorderStyle                = gobject.Type(C.gtk_border_style_get_type())
+	TypeBuilderError               = gobject.Type(C.gtk_builder_error_get_type())
+	TypeButtonBoxStyle             = gobject.Type(C.gtk_button_box_style_get_type())
+	TypeButtonRole                 = gobject.Type(C.gtk_button_role_get_type())
+	TypeButtonsType                = gobject.Type(C.gtk_buttons_type_get_type())
+	TypeCellRendererAccelMode      = gobject.Type(C.gtk_cell_renderer_accel_mode_get_type())
+	TypeCellRendererMode           = gobject.Type(C.gtk_cell_renderer_mode_get_type())
+	TypeCornerType                 = gobject.Type(C.gtk_corner_type_get_type())
+	TypeCssProviderError           = gobject.Type(C.gtk_css_provider_error_get_type())
+	TypeCssSectionType             = gobject.Type(C.gtk_css_section_type_get_type())
+	TypeDeleteType                 = gobject.Type(C.gtk_delete_type_get_type())
+	TypeDirectionType              = gobject.Type(C.gtk_direction_type_get_type())
+	TypeDragResult                 = gobject.Type(C.gtk_drag_result_get_type())
+	TypeEntryIconPosition          = gobject.Type(C.gtk_entry_icon_position_get_type())
+	TypeEventSequenceState         = gobject.Type(C.gtk_event_sequence_state_get_type())
+	TypeExpanderStyle              = gobject.Type(C.gtk_expander_style_get_type())
+	TypeFileChooserAction          = gobject.Type(C.gtk_file_chooser_action_get_type())
+	TypeFileChooserConfirmation    = gobject.Type(C.gtk_file_chooser_confirmation_get_type())
+	TypeFileChooserError           = gobject.Type(C.gtk_file_chooser_error_get_type())
+	TypeIconSize                   = gobject.Type(C.gtk_icon_size_get_type())
+	TypeIconThemeError             = gobject.Type(C.gtk_icon_theme_error_get_type())
+	TypeIconViewDropPosition       = gobject.Type(C.gtk_icon_view_drop_position_get_type())
+	TypeImageType                  = gobject.Type(C.gtk_image_type_get_type())
+	TypeInputPurpose               = gobject.Type(C.gtk_input_purpose_get_type())
+	TypeJustification              = gobject.Type(C.gtk_justification_get_type())
+	TypeLevelBarMode               = gobject.Type(C.gtk_level_bar_mode_get_type())
+	TypeLicense                    = gobject.Type(C.gtk_license_get_type())
+	TypeMenuDirectionType          = gobject.Type(C.gtk_menu_direction_type_get_type())
+	TypeMessageType                = gobject.Type(C.gtk_message_type_get_type())
+	TypeMovementStep               = gobject.Type(C.gtk_movement_step_get_type())
+	TypeNotebookTab                = gobject.Type(C.gtk_notebook_tab_get_type())
+	TypeNumberUpLayout             = gobject.Type(C.gtk_number_up_layout_get_type())
+	TypeOrientation                = gobject.Type(C.gtk_orientation_get_type())
+	TypePackDirection              = gobject.Type(C.gtk_pack_direction_get_type())
+	TypePackType                   = gobject.Type(C.gtk_pack_type_get_type())
+	TypePadActionType              = gobject.Type(C.gtk_pad_action_type_get_type())
+	TypePageOrientation            = gobject.Type(C.gtk_page_orientation_get_type())
+	TypePageSet                    = gobject.Type(C.gtk_page_set_get_type())
+	TypePanDirection               = gobject.Type(C.gtk_pan_direction_get_type())
+	TypePolicyType                 = gobject.Type(C.gtk_policy_type_get_type())
+	TypePopoverConstraint          = gobject.Type(C.gtk_popover_constraint_get_type())
+	TypePositionType               = gobject.Type(C.gtk_position_type_get_type())
+	TypePrintDuplex                = gobject.Type(C.gtk_print_duplex_get_type())
+	TypePrintError                 = gobject.Type(C.gtk_print_error_get_type())
+	TypePrintOperationAction       = gobject.Type(C.gtk_print_operation_action_get_type())
+	TypePrintOperationResult       = gobject.Type(C.gtk_print_operation_result_get_type())
+	TypePrintPages                 = gobject.Type(C.gtk_print_pages_get_type())
+	TypePrintQuality               = gobject.Type(C.gtk_print_quality_get_type())
+	TypePrintStatus                = gobject.Type(C.gtk_print_status_get_type())
+	TypePropagationPhase           = gobject.Type(C.gtk_propagation_phase_get_type())
+	TypeRecentChooserError         = gobject.Type(C.gtk_recent_chooser_error_get_type())
+	TypeRecentManagerError         = gobject.Type(C.gtk_recent_manager_error_get_type())
+	TypeRecentSortType             = gobject.Type(C.gtk_recent_sort_type_get_type())
+	TypeReliefStyle                = gobject.Type(C.gtk_relief_style_get_type())
+	TypeResizeMode                 = gobject.Type(C.gtk_resize_mode_get_type())
+	TypeResponseType               = gobject.Type(C.gtk_response_type_get_type())
+	TypeRevealerTransitionType     = gobject.Type(C.gtk_revealer_transition_type_get_type())
+	TypeScrollStep                 = gobject.Type(C.gtk_scroll_step_get_type())
+	TypeScrollType                 = gobject.Type(C.gtk_scroll_type_get_type())
+	TypeScrollablePolicy           = gobject.Type(C.gtk_scrollable_policy_get_type())
+	TypeSelectionMode              = gobject.Type(C.gtk_selection_mode_get_type())
+	TypeSensitivityType            = gobject.Type(C.gtk_sensitivity_type_get_type())
+	TypeShadowType                 = gobject.Type(C.gtk_shadow_type_get_type())
+	TypeShortcutType               = gobject.Type(C.gtk_shortcut_type_get_type())
+	TypeSizeGroupMode              = gobject.Type(C.gtk_size_group_mode_get_type())
+	TypeSizeRequestMode            = gobject.Type(C.gtk_size_request_mode_get_type())
+	TypeSortType                   = gobject.Type(C.gtk_sort_type_get_type())
+	TypeSpinButtonUpdatePolicy     = gobject.Type(C.gtk_spin_button_update_policy_get_type())
+	TypeSpinType                   = gobject.Type(C.gtk_spin_type_get_type())
+	TypeStackTransitionType        = gobject.Type(C.gtk_stack_transition_type_get_type())
+	TypeTextBufferTargetInfo       = gobject.Type(C.gtk_text_buffer_target_info_get_type())
+	TypeTextDirection              = gobject.Type(C.gtk_text_direction_get_type())
+	TypeTextExtendSelection        = gobject.Type(C.gtk_text_extend_selection_get_type())
+	TypeTextViewLayer              = gobject.Type(C.gtk_text_view_layer_get_type())
+	TypeTextWindowType             = gobject.Type(C.gtk_text_window_type_get_type())
+	TypeToolbarStyle               = gobject.Type(C.gtk_toolbar_style_get_type())
+	TypeTreeViewColumnSizing       = gobject.Type(C.gtk_tree_view_column_sizing_get_type())
+	TypeTreeViewDropPosition       = gobject.Type(C.gtk_tree_view_drop_position_get_type())
+	TypeTreeViewGridLines          = gobject.Type(C.gtk_tree_view_grid_lines_get_type())
+	TypeUnit                       = gobject.Type(C.gtk_unit_get_type())
+	TypeWidgetHelpType             = gobject.Type(C.gtk_widget_help_type_get_type())
+	TypeWindowPosition             = gobject.Type(C.gtk_window_position_get_type())
+	TypeWindowType                 = gobject.Type(C.gtk_window_type_get_type())
+	TypeWrapMode                   = gobject.Type(C.gtk_wrap_mode_get_type())
+	TypeAccelFlags                 = gobject.Type(C.gtk_accel_flags_get_type())
+	TypeApplicationInhibitFlags    = gobject.Type(C.gtk_application_inhibit_flags_get_type())
+	TypeAttachOptions              = gobject.Type(C.gtk_attach_options_get_type())
+	TypeCalendarDisplayOptions     = gobject.Type(C.gtk_calendar_display_options_get_type())
+	TypeCellRendererState          = gobject.Type(C.gtk_cell_renderer_state_get_type())
+	TypeDebugFlag                  = gobject.Type(C.gtk_debug_flag_get_type())
+	TypeDestDefaults               = gobject.Type(C.gtk_dest_defaults_get_type())
+	TypeDialogFlags                = gobject.Type(C.gtk_dialog_flags_get_type())
+	TypeEventControllerScrollFlags = gobject.Type(C.gtk_event_controller_scroll_flags_get_type())
+	TypeFileFilterFlags            = gobject.Type(C.gtk_file_filter_flags_get_type())
+	TypeFontChooserLevel           = gobject.Type(C.gtk_font_chooser_level_get_type())
+	TypeIconLookupFlags            = gobject.Type(C.gtk_icon_lookup_flags_get_type())
+	TypeInputHints                 = gobject.Type(C.gtk_input_hints_get_type())
+	TypeJunctionSides              = gobject.Type(C.gtk_junction_sides_get_type())
+	TypePlacesOpenFlags            = gobject.Type(C.gtk_places_open_flags_get_type())
+	TypeRcFlags                    = gobject.Type(C.gtk_rc_flags_get_type())
+	TypeRecentFilterFlags          = gobject.Type(C.gtk_recent_filter_flags_get_type())
+	TypeRegionFlags                = gobject.Type(C.gtk_region_flags_get_type())
+	TypeStateFlags                 = gobject.Type(C.gtk_state_flags_get_type())
+	TypeStyleContextPrintFlags     = gobject.Type(C.gtk_style_context_print_flags_get_type())
+	TypeTargetFlags                = gobject.Type(C.gtk_target_flags_get_type())
+	TypeTextSearchFlags            = gobject.Type(C.gtk_text_search_flags_get_type())
+	TypeToolPaletteDragTargets     = gobject.Type(C.gtk_tool_palette_drag_targets_get_type())
+	TypeTreeModelFlags             = gobject.Type(C.gtk_tree_model_flags_get_type())
+	TypeActionable                 = gobject.Type(C.gtk_actionable_get_type())
+	TypeAppChooser                 = gobject.Type(C.gtk_app_chooser_get_type())
+	TypeBuildable                  = gobject.Type(C.gtk_buildable_get_type())
+	TypeCellAccessibleParent       = gobject.Type(C.gtk_cell_accessible_parent_get_type())
+	TypeCellEditable               = gobject.Type(C.gtk_cell_editable_get_type())
+	TypeCellLayout                 = gobject.Type(C.gtk_cell_layout_get_type())
+	TypeColorChooser               = gobject.Type(C.gtk_color_chooser_get_type())
+	TypeEditable                   = gobject.Type(C.gtk_editable_get_type())
+	TypeFileChooser                = gobject.Type(C.gtk_file_chooser_get_type())
+	TypeFontChooser                = gobject.Type(C.gtk_font_chooser_get_type())
+	TypeOrientable                 = gobject.Type(C.gtk_orientable_get_type())
+	TypePrintOperationPreview      = gobject.Type(C.gtk_print_operation_preview_get_type())
+	TypeRecentChooser              = gobject.Type(C.gtk_recent_chooser_get_type())
+	TypeScrollable                 = gobject.Type(C.gtk_scrollable_get_type())
+	TypeStyleProvider              = gobject.Type(C.gtk_style_provider_get_type())
+	TypeToolShell                  = gobject.Type(C.gtk_tool_shell_get_type())
+	TypeTreeDragDest               = gobject.Type(C.gtk_tree_drag_dest_get_type())
+	TypeTreeDragSource             = gobject.Type(C.gtk_tree_drag_source_get_type())
+	TypeTreeModel                  = gobject.Type(C.gtk_tree_model_get_type())
+	TypeTreeSortable               = gobject.Type(C.gtk_tree_sortable_get_type())
+	TypeAccelGroup                 = gobject.Type(C.gtk_accel_group_get_type())
+	TypeAccelMap                   = gobject.Type(C.gtk_accel_map_get_type())
+	TypeAccessible                 = gobject.Type(C.gtk_accessible_get_type())
+	TypeAction                     = gobject.Type(C.gtk_action_get_type())
+	TypeActionGroup                = gobject.Type(C.gtk_action_group_get_type())
+	TypeAdjustment                 = gobject.Type(C.gtk_adjustment_get_type())
+	TypeApplication                = gobject.Type(C.gtk_application_get_type())
+	TypeBuilder                    = gobject.Type(C.gtk_builder_get_type())
+	TypeCellAccessible             = gobject.Type(C.gtk_cell_accessible_get_type())
+	TypeCellArea                   = gobject.Type(C.gtk_cell_area_get_type())
+	TypeCellAreaBox                = gobject.Type(C.gtk_cell_area_box_get_type())
+	TypeCellAreaContext            = gobject.Type(C.gtk_cell_area_context_get_type())
+	TypeCellRenderer               = gobject.Type(C.gtk_cell_renderer_get_type())
+	TypeCellRendererPixbuf         = gobject.Type(C.gtk_cell_renderer_pixbuf_get_type())
+	TypeCellRendererProgress       = gobject.Type(C.gtk_cell_renderer_progress_get_type())
+	TypeCellRendererSpinner        = gobject.Type(C.gtk_cell_renderer_spinner_get_type())
+	TypeCellRendererText           = gobject.Type(C.gtk_cell_renderer_text_get_type())
+	TypeCellRendererToggle         = gobject.Type(C.gtk_cell_renderer_toggle_get_type())
+	TypeClipboard                  = gobject.Type(C.gtk_clipboard_get_type())
+	TypeContainerCellAccessible    = gobject.Type(C.gtk_container_cell_accessible_get_type())
+	TypeCssProvider                = gobject.Type(C.gtk_css_provider_get_type())
+	TypeEntryBuffer                = gobject.Type(C.gtk_entry_buffer_get_type())
+	TypeEntryCompletion            = gobject.Type(C.gtk_entry_completion_get_type())
+	TypeEntryIconAccessible        = gobject.Type(C.gtk_entry_icon_accessible_get_type())
+	TypeEventController            = gobject.Type(C.gtk_event_controller_get_type())
+	TypeEventControllerKey         = gobject.Type(C.gtk_event_controller_key_get_type())
+	TypeEventControllerMotion      = gobject.Type(C.gtk_event_controller_motion_get_type())
+	TypeEventControllerScroll      = gobject.Type(C.gtk_event_controller_scroll_get_type())
+	TypeFileFilter                 = gobject.Type(C.gtk_file_filter_get_type())
+	TypeGesture                    = gobject.Type(C.gtk_gesture_get_type())
+	TypeGestureRotate              = gobject.Type(C.gtk_gesture_rotate_get_type())
+	TypeGestureSingle              = gobject.Type(C.gtk_gesture_single_get_type())
+	TypeGestureStylus              = gobject.Type(C.gtk_gesture_stylus_get_type())
+	TypeGestureSwipe               = gobject.Type(C.gtk_gesture_swipe_get_type())
+	TypeGestureZoom                = gobject.Type(C.gtk_gesture_zoom_get_type())
+	TypeIMContext                  = gobject.Type(C.gtk_im_context_get_type())
+	TypeIMContextSimple            = gobject.Type(C.gtk_im_context_simple_get_type())
+	TypeIMMulticontext             = gobject.Type(C.gtk_im_multicontext_get_type())
+	TypeIconFactory                = gobject.Type(C.gtk_icon_factory_get_type())
+	TypeIconInfo                   = gobject.Type(C.gtk_icon_info_get_type())
+	TypeIconTheme                  = gobject.Type(C.gtk_icon_theme_get_type())
+	TypeListStore                  = gobject.Type(C.gtk_list_store_get_type())
+	TypeMountOperation             = gobject.Type(C.gtk_mount_operation_get_type())
+	TypeNativeDialog               = gobject.Type(C.gtk_native_dialog_get_type())
+	TypeNotebookPageAccessible     = gobject.Type(C.gtk_notebook_page_accessible_get_type())
+	TypeNumerableIcon              = gobject.Type(C.gtk_numerable_icon_get_type())
+	TypePadController              = gobject.Type(C.gtk_pad_controller_get_type())
+	TypePageSetup                  = gobject.Type(C.gtk_page_setup_get_type())
+	TypePrintContext               = gobject.Type(C.gtk_print_context_get_type())
+	TypePrintOperation             = gobject.Type(C.gtk_print_operation_get_type())
+	TypePrintSettings              = gobject.Type(C.gtk_print_settings_get_type())
+	TypeRcStyle                    = gobject.Type(C.gtk_rc_style_get_type())
+	TypeRecentAction               = gobject.Type(C.gtk_recent_action_get_type())
+	TypeRecentFilter               = gobject.Type(C.gtk_recent_filter_get_type())
+	TypeRecentManager              = gobject.Type(C.gtk_recent_manager_get_type())
+	TypeRendererCellAccessible     = gobject.Type(C.gtk_renderer_cell_accessible_get_type())
+	TypeSettings                   = gobject.Type(C.gtk_settings_get_type())
+	TypeSizeGroup                  = gobject.Type(C.gtk_size_group_get_type())
+	TypeStatusIcon                 = gobject.Type(C.gtk_status_icon_get_type())
+	TypeStyle                      = gobject.Type(C.gtk_style_get_type())
+	TypeStyleContext               = gobject.Type(C.gtk_style_context_get_type())
+	TypeStyleProperties            = gobject.Type(C.gtk_style_properties_get_type())
+	TypeTextBuffer                 = gobject.Type(C.gtk_text_buffer_get_type())
+	TypeTextCellAccessible         = gobject.Type(C.gtk_text_cell_accessible_get_type())
+	TypeTextChildAnchor            = gobject.Type(C.gtk_text_child_anchor_get_type())
+	TypeTextMark                   = gobject.Type(C.gtk_text_mark_get_type())
+	TypeTextTag                    = gobject.Type(C.gtk_text_tag_get_type())
+	TypeTextTagTable               = gobject.Type(C.gtk_text_tag_table_get_type())
+	TypeThemingEngine              = gobject.Type(C.gtk_theming_engine_get_type())
+	TypeToggleAction               = gobject.Type(C.gtk_toggle_action_get_type())
+	TypeTooltip                    = gobject.Type(C.gtk_tooltip_get_type())
+	TypeToplevelAccessible         = gobject.Type(C.gtk_toplevel_accessible_get_type())
+	TypeTreeModelFilter            = gobject.Type(C.gtk_tree_model_filter_get_type())
+	TypeTreeModelSort              = gobject.Type(C.gtk_tree_model_sort_get_type())
+	TypeTreeSelection              = gobject.Type(C.gtk_tree_selection_get_type())
+	TypeTreeStore                  = gobject.Type(C.gtk_tree_store_get_type())
+	TypeTreeViewColumn             = gobject.Type(C.gtk_tree_view_column_get_type())
+	TypeUIManager                  = gobject.Type(C.gtk_ui_manager_get_type())
+	TypeWidget                     = gobject.Type(C.gtk_widget_get_type())
+	TypeWidgetAccessible           = gobject.Type(C.gtk_widget_accessible_get_type())
+	TypeWindowGroup                = gobject.Type(C.gtk_window_group_get_type())
+	TypeArrowAccessible            = gobject.Type(C.gtk_arrow_accessible_get_type())
+	TypeBooleanCellAccessible      = gobject.Type(C.gtk_boolean_cell_accessible_get_type())
+	TypeCalendar                   = gobject.Type(C.gtk_calendar_get_type())
+	TypeCellRendererAccel          = gobject.Type(C.gtk_cell_renderer_accel_get_type())
+	TypeCellRendererCombo          = gobject.Type(C.gtk_cell_renderer_combo_get_type())
+	TypeCellRendererSpin           = gobject.Type(C.gtk_cell_renderer_spin_get_type())
+	TypeCellView                   = gobject.Type(C.gtk_cell_view_get_type())
+	TypeContainer                  = gobject.Type(C.gtk_container_get_type())
+	TypeContainerAccessible        = gobject.Type(C.gtk_container_accessible_get_type())
+	TypeDrawingArea                = gobject.Type(C.gtk_drawing_area_get_type())
+	TypeEntry                      = gobject.Type(C.gtk_entry_get_type())
+	TypeEntryAccessible            = gobject.Type(C.gtk_entry_accessible_get_type())
+	TypeExpanderAccessible         = gobject.Type(C.gtk_expander_accessible_get_type())
+	TypeFileChooserNative          = gobject.Type(C.gtk_file_chooser_native_get_type())
+	TypeFixed                      = gobject.Type(C.gtk_fixed_get_type())
+	TypeFlowBox                    = gobject.Type(C.gtk_flow_box_get_type())
+	TypeFlowBoxAccessible          = gobject.Type(C.gtk_flow_box_accessible_get_type())
+	TypeFlowBoxChildAccessible     = gobject.Type(C.gtk_flow_box_child_accessible_get_type())
+	TypeFrameAccessible            = gobject.Type(C.gtk_frame_accessible_get_type())
+	TypeGLArea                     = gobject.Type(C.gtk_gl_area_get_type())
+	TypeGestureDrag                = gobject.Type(C.gtk_gesture_drag_get_type())
+	TypeGestureLongPress           = gobject.Type(C.gtk_gesture_long_press_get_type())
+	TypeGestureMultiPress          = gobject.Type(C.gtk_gesture_multi_press_get_type())
+	TypeGesturePan                 = gobject.Type(C.gtk_gesture_pan_get_type())
+	TypeGrid                       = gobject.Type(C.gtk_grid_get_type())
+	TypeHSV                        = gobject.Type(C.gtk_hsv_get_type())
+	TypeHeaderBar                  = gobject.Type(C.gtk_header_bar_get_type())
+	TypeIconView                   = gobject.Type(C.gtk_icon_view_get_type())
+	TypeIconViewAccessible         = gobject.Type(C.gtk_icon_view_accessible_get_type())
+	TypeImageAccessible            = gobject.Type(C.gtk_image_accessible_get_type())
+	TypeImageCellAccessible        = gobject.Type(C.gtk_image_cell_accessible_get_type())
+	TypeInvisible                  = gobject.Type(C.gtk_invisible_get_type())
+	TypeLabelAccessible            = gobject.Type(C.gtk_label_accessible_get_type())
+	TypeLayout                     = gobject.Type(C.gtk_layout_get_type())
+	TypeLevelBar                   = gobject.Type(C.gtk_level_bar_get_type())
+	TypeLevelBarAccessible         = gobject.Type(C.gtk_level_bar_accessible_get_type())
+	TypeListBox                    = gobject.Type(C.gtk_list_box_get_type())
+	TypeListBoxAccessible          = gobject.Type(C.gtk_list_box_accessible_get_type())
+	TypeListBoxRowAccessible       = gobject.Type(C.gtk_list_box_row_accessible_get_type())
+	TypeMenuItemAccessible         = gobject.Type(C.gtk_menu_item_accessible_get_type())
+	TypeMenuShell                  = gobject.Type(C.gtk_menu_shell_get_type())
+	TypeMenuShellAccessible        = gobject.Type(C.gtk_menu_shell_accessible_get_type())
+	TypeMisc                       = gobject.Type(C.gtk_misc_get_type())
+	TypeNotebook                   = gobject.Type(C.gtk_notebook_get_type())
+	TypeNotebookAccessible         = gobject.Type(C.gtk_notebook_accessible_get_type())
+	TypePaned                      = gobject.Type(C.gtk_paned_get_type())
+	TypePanedAccessible            = gobject.Type(C.gtk_paned_accessible_get_type())
+	TypePopoverAccessible          = gobject.Type(C.gtk_popover_accessible_get_type())
+	TypeProgressBar                = gobject.Type(C.gtk_progress_bar_get_type())
+	TypeProgressBarAccessible      = gobject.Type(C.gtk_progress_bar_accessible_get_type())
+	TypeRadioAction                = gobject.Type(C.gtk_radio_action_get_type())
+	TypeRange                      = gobject.Type(C.gtk_range_get_type())
+	TypeRangeAccessible            = gobject.Type(C.gtk_range_accessible_get_type())
+	TypeScale                      = gobject.Type(C.gtk_scale_get_type())
+	TypeScaleAccessible            = gobject.Type(C.gtk_scale_accessible_get_type())
+	TypeScrollbar                  = gobject.Type(C.gtk_scrollbar_get_type())
+	TypeScrolledWindowAccessible   = gobject.Type(C.gtk_scrolled_window_accessible_get_type())
+	TypeSearchEntry                = gobject.Type(C.gtk_search_entry_get_type())
+	TypeSeparator                  = gobject.Type(C.gtk_separator_get_type())
+	TypeSocket                     = gobject.Type(C.gtk_socket_get_type())
+	TypeSocketAccessible           = gobject.Type(C.gtk_socket_accessible_get_type())
+	TypeSpinButton                 = gobject.Type(C.gtk_spin_button_get_type())
+	TypeSpinButtonAccessible       = gobject.Type(C.gtk_spin_button_accessible_get_type())
+	TypeSpinner                    = gobject.Type(C.gtk_spinner_get_type())
+	TypeSpinnerAccessible          = gobject.Type(C.gtk_spinner_accessible_get_type())
+	TypeStack                      = gobject.Type(C.gtk_stack_get_type())
+	TypeStackAccessible            = gobject.Type(C.gtk_stack_accessible_get_type())
+	TypeStatusbarAccessible        = gobject.Type(C.gtk_statusbar_accessible_get_type())
+	TypeSwitch                     = gobject.Type(C.gtk_switch_get_type())
+	TypeSwitchAccessible           = gobject.Type(C.gtk_switch_accessible_get_type())
+	TypeTable                      = gobject.Type(C.gtk_table_get_type())
+	TypeTextView                   = gobject.Type(C.gtk_text_view_get_type())
+	TypeTextViewAccessible         = gobject.Type(C.gtk_text_view_accessible_get_type())
+	TypeToolItemGroup              = gobject.Type(C.gtk_tool_item_group_get_type())
+	TypeToolPalette                = gobject.Type(C.gtk_tool_palette_get_type())
+	TypeToolbar                    = gobject.Type(C.gtk_toolbar_get_type())
+	TypeTreeView                   = gobject.Type(C.gtk_tree_view_get_type())
+	TypeTreeViewAccessible         = gobject.Type(C.gtk_tree_view_accessible_get_type())
+	TypeVPaned                     = gobject.Type(C.gtk_vpaned_get_type())
+	TypeVScale                     = gobject.Type(C.gtk_vscale_get_type())
+	TypeVScrollbar                 = gobject.Type(C.gtk_vscrollbar_get_type())
+	TypeVSeparator                 = gobject.Type(C.gtk_vseparator_get_type())
+	TypeWindowAccessible           = gobject.Type(C.gtk_window_accessible_get_type())
+	TypeArrow                      = gobject.Type(C.gtk_arrow_get_type())
+	TypeBin                        = gobject.Type(C.gtk_bin_get_type())
+	TypeBox                        = gobject.Type(C.gtk_box_get_type())
+	TypeButton                     = gobject.Type(C.gtk_button_get_type())
+	TypeButtonAccessible           = gobject.Type(C.gtk_button_accessible_get_type())
+	TypeButtonBox                  = gobject.Type(C.gtk_button_box_get_type())
+	TypeCheckMenuItemAccessible    = gobject.Type(C.gtk_check_menu_item_accessible_get_type())
+	TypeColorButton                = gobject.Type(C.gtk_color_button_get_type())
+	TypeColorChooserWidget         = gobject.Type(C.gtk_color_chooser_widget_get_type())
+	TypeColorSelection             = gobject.Type(C.gtk_color_selection_get_type())
+	TypeComboBox                   = gobject.Type(C.gtk_combo_box_get_type())
+	TypeComboBoxAccessible         = gobject.Type(C.gtk_combo_box_accessible_get_type())
+	TypeComboBoxText               = gobject.Type(C.gtk_combo_box_text_get_type())
+	TypeEventBox                   = gobject.Type(C.gtk_event_box_get_type())
+	TypeExpander                   = gobject.Type(C.gtk_expander_get_type())
+	TypeFileChooserButton          = gobject.Type(C.gtk_file_chooser_button_get_type())
+	TypeFileChooserWidget          = gobject.Type(C.gtk_file_chooser_widget_get_type())
+	TypeFlowBoxChild               = gobject.Type(C.gtk_flow_box_child_get_type())
+	TypeFontButton                 = gobject.Type(C.gtk_font_button_get_type())
+	TypeFontChooserWidget          = gobject.Type(C.gtk_font_chooser_widget_get_type())
+	TypeFontSelection              = gobject.Type(C.gtk_font_selection_get_type())
+	TypeFrame                      = gobject.Type(C.gtk_frame_get_type())
+	TypeHBox                       = gobject.Type(C.gtk_hbox_get_type())
+	TypeHButtonBox                 = gobject.Type(C.gtk_hbutton_box_get_type())
+	TypeHPaned                     = gobject.Type(C.gtk_hpaned_get_type())
+	TypeHScale                     = gobject.Type(C.gtk_hscale_get_type())
+	TypeHScrollbar                 = gobject.Type(C.gtk_hscrollbar_get_type())
+	TypeHSeparator                 = gobject.Type(C.gtk_hseparator_get_type())
+	TypeHandleBox                  = gobject.Type(C.gtk_handle_box_get_type())
+	TypeImage                      = gobject.Type(C.gtk_image_get_type())
+	TypeInfoBar                    = gobject.Type(C.gtk_info_bar_get_type())
+	TypeLabel                      = gobject.Type(C.gtk_label_get_type())
+	TypeLinkButton                 = gobject.Type(C.gtk_link_button_get_type())
+	TypeLinkButtonAccessible       = gobject.Type(C.gtk_link_button_accessible_get_type())
+	TypeListBoxRow                 = gobject.Type(C.gtk_list_box_row_get_type())
+	TypeLockButton                 = gobject.Type(C.gtk_lock_button_get_type())
+	TypeLockButtonAccessible       = gobject.Type(C.gtk_lock_button_accessible_get_type())
+	TypeMenu                       = gobject.Type(C.gtk_menu_get_type())
+	TypeMenuAccessible             = gobject.Type(C.gtk_menu_accessible_get_type())
+	TypeMenuBar                    = gobject.Type(C.gtk_menu_bar_get_type())
+	TypeMenuItem                   = gobject.Type(C.gtk_menu_item_get_type())
+	TypeModelButton                = gobject.Type(C.gtk_model_button_get_type())
+	TypeOverlay                    = gobject.Type(C.gtk_overlay_get_type())
+	TypePlugAccessible             = gobject.Type(C.gtk_plug_accessible_get_type())
+	TypePopover                    = gobject.Type(C.gtk_popover_get_type())
+	TypePopoverMenu                = gobject.Type(C.gtk_popover_menu_get_type())
+	TypeRadioMenuItemAccessible    = gobject.Type(C.gtk_radio_menu_item_accessible_get_type())
+	TypeRecentChooserMenu          = gobject.Type(C.gtk_recent_chooser_menu_get_type())
+	TypeRecentChooserWidget        = gobject.Type(C.gtk_recent_chooser_widget_get_type())
+	TypeRevealer                   = gobject.Type(C.gtk_revealer_get_type())
+	TypeScaleButton                = gobject.Type(C.gtk_scale_button_get_type())
+	TypeScaleButtonAccessible      = gobject.Type(C.gtk_scale_button_accessible_get_type())
+	TypeScrolledWindow             = gobject.Type(C.gtk_scrolled_window_get_type())
+	TypeSearchBar                  = gobject.Type(C.gtk_search_bar_get_type())
+	TypeSeparatorMenuItem          = gobject.Type(C.gtk_separator_menu_item_get_type())
+	TypeShortcutLabel              = gobject.Type(C.gtk_shortcut_label_get_type())
+	TypeShortcutsGroup             = gobject.Type(C.gtk_shortcuts_group_get_type())
+	TypeShortcutsSection           = gobject.Type(C.gtk_shortcuts_section_get_type())
+	TypeShortcutsShortcut          = gobject.Type(C.gtk_shortcuts_shortcut_get_type())
+	TypeStackSidebar               = gobject.Type(C.gtk_stack_sidebar_get_type())
+	TypeStackSwitcher              = gobject.Type(C.gtk_stack_switcher_get_type())
+	TypeStatusbar                  = gobject.Type(C.gtk_statusbar_get_type())
+	TypeTearoffMenuItem            = gobject.Type(C.gtk_tearoff_menu_item_get_type())
+	TypeToggleButton               = gobject.Type(C.gtk_toggle_button_get_type())
+	TypeToggleButtonAccessible     = gobject.Type(C.gtk_toggle_button_accessible_get_type())
+	TypeToolItem                   = gobject.Type(C.gtk_tool_item_get_type())
+	TypeVBox                       = gobject.Type(C.gtk_vbox_get_type())
+	TypeVButtonBox                 = gobject.Type(C.gtk_vbutton_box_get_type())
+	TypeViewport                   = gobject.Type(C.gtk_viewport_get_type())
+	TypeVolumeButton               = gobject.Type(C.gtk_volume_button_get_type())
+	TypeWindow                     = gobject.Type(C.gtk_window_get_type())
+	TypeAccelLabel                 = gobject.Type(C.gtk_accel_label_get_type())
+	TypeActionBar                  = gobject.Type(C.gtk_action_bar_get_type())
+	TypeAlignment                  = gobject.Type(C.gtk_alignment_get_type())
+	TypeAppChooserButton           = gobject.Type(C.gtk_app_chooser_button_get_type())
+	TypeAppChooserWidget           = gobject.Type(C.gtk_app_chooser_widget_get_type())
+	TypeApplicationWindow          = gobject.Type(C.gtk_application_window_get_type())
+	TypeAspectFrame                = gobject.Type(C.gtk_aspect_frame_get_type())
+	TypeAssistant                  = gobject.Type(C.gtk_assistant_get_type())
+	TypeCheckButton                = gobject.Type(C.gtk_check_button_get_type())
+	TypeCheckMenuItem              = gobject.Type(C.gtk_check_menu_item_get_type())
+	TypeDialog                     = gobject.Type(C.gtk_dialog_get_type())
+	TypeFileChooserDialog          = gobject.Type(C.gtk_file_chooser_dialog_get_type())
+	TypeFontChooserDialog          = gobject.Type(C.gtk_font_chooser_dialog_get_type())
+	TypeFontSelectionDialog        = gobject.Type(C.gtk_font_selection_dialog_get_type())
+	TypeImageMenuItem              = gobject.Type(C.gtk_image_menu_item_get_type())
+	TypeMenuButton                 = gobject.Type(C.gtk_menu_button_get_type())
+	TypeMenuButtonAccessible       = gobject.Type(C.gtk_menu_button_accessible_get_type())
+	TypeMessageDialog              = gobject.Type(C.gtk_message_dialog_get_type())
+	TypeOffscreenWindow            = gobject.Type(C.gtk_offscreen_window_get_type())
+	TypePlacesSidebar              = gobject.Type(C.gtk_places_sidebar_get_type())
+	TypePlug                       = gobject.Type(C.gtk_plug_get_type())
+	TypeRadioButton                = gobject.Type(C.gtk_radio_button_get_type())
+	TypeRadioButtonAccessible      = gobject.Type(C.gtk_radio_button_accessible_get_type())
+	TypeRadioMenuItem              = gobject.Type(C.gtk_radio_menu_item_get_type())
+	TypeRecentChooserDialog        = gobject.Type(C.gtk_recent_chooser_dialog_get_type())
+	TypeSeparatorToolItem          = gobject.Type(C.gtk_separator_tool_item_get_type())
+	TypeShortcutsWindow            = gobject.Type(C.gtk_shortcuts_window_get_type())
+	TypeToolButton                 = gobject.Type(C.gtk_tool_button_get_type())
+	TypeAboutDialog                = gobject.Type(C.gtk_about_dialog_get_type())
+	TypeAppChooserDialog           = gobject.Type(C.gtk_app_chooser_dialog_get_type())
+	TypeColorChooserDialog         = gobject.Type(C.gtk_color_chooser_dialog_get_type())
+	TypeColorSelectionDialog       = gobject.Type(C.gtk_color_selection_dialog_get_type())
+	TypeMenuToolButton             = gobject.Type(C.gtk_menu_tool_button_get_type())
+	TypeToggleToolButton           = gobject.Type(C.gtk_toggle_tool_button_get_type())
+	TypeRadioToolButton            = gobject.Type(C.gtk_radio_tool_button_get_type())
+	TypeBorder                     = gobject.Type(C.gtk_border_get_type())
+	TypeCssSection                 = gobject.Type(C.gtk_css_section_get_type())
+	TypeGradient                   = gobject.Type(C.gtk_gradient_get_type())
+	TypeIconSet                    = gobject.Type(C.gtk_icon_set_get_type())
+	TypeIconSource                 = gobject.Type(C.gtk_icon_source_get_type())
+	TypePaperSize                  = gobject.Type(C.gtk_paper_size_get_type())
+	TypeRecentInfo                 = gobject.Type(C.gtk_recent_info_get_type())
+	TypeRequisition                = gobject.Type(C.gtk_requisition_get_type())
+	TypeSelectionData              = gobject.Type(C.gtk_selection_data_get_type())
+	TypeSymbolicColor              = gobject.Type(C.gtk_symbolic_color_get_type())
+	TypeTargetEntry                = gobject.Type(C.gtk_target_entry_get_type())
+	TypeTargetList                 = gobject.Type(C.gtk_target_list_get_type())
+	TypeTextAttributes             = gobject.Type(C.gtk_text_attributes_get_type())
+	TypeTextIter                   = gobject.Type(C.gtk_text_iter_get_type())
+	TypeTreeIter                   = gobject.Type(C.gtk_tree_iter_get_type())
+	TypeTreePath                   = gobject.Type(C.gtk_tree_path_get_type())
+	TypeTreeRowReference           = gobject.Type(C.gtk_tree_row_reference_get_type())
+	TypeWidgetPath                 = gobject.Type(C.gtk_widget_path_get_type())
 )
 
 func init() {
@@ -532,8 +519,6 @@ func init() {
 		gobject.TypeMarshaler{T: TypeFileChooserAction, F: marshalFileChooserAction},
 		gobject.TypeMarshaler{T: TypeFileChooserConfirmation, F: marshalFileChooserConfirmation},
 		gobject.TypeMarshaler{T: TypeFileChooserError, F: marshalFileChooserError},
-		gobject.TypeMarshaler{T: TypeIMPreeditStyle, F: marshalIMPreeditStyle},
-		gobject.TypeMarshaler{T: TypeIMStatusStyle, F: marshalIMStatusStyle},
 		gobject.TypeMarshaler{T: TypeIconSize, F: marshalIconSize},
 		gobject.TypeMarshaler{T: TypeIconThemeError, F: marshalIconThemeError},
 		gobject.TypeMarshaler{T: TypeIconViewDropPosition, F: marshalIconViewDropPosition},
@@ -554,8 +539,6 @@ func init() {
 		gobject.TypeMarshaler{T: TypePageOrientation, F: marshalPageOrientation},
 		gobject.TypeMarshaler{T: TypePageSet, F: marshalPageSet},
 		gobject.TypeMarshaler{T: TypePanDirection, F: marshalPanDirection},
-		gobject.TypeMarshaler{T: TypePathPriorityType, F: marshalPathPriorityType},
-		gobject.TypeMarshaler{T: TypePathType, F: marshalPathType},
 		gobject.TypeMarshaler{T: TypePolicyType, F: marshalPolicyType},
 		gobject.TypeMarshaler{T: TypePopoverConstraint, F: marshalPopoverConstraint},
 		gobject.TypeMarshaler{T: TypePositionType, F: marshalPositionType},
@@ -567,7 +550,6 @@ func init() {
 		gobject.TypeMarshaler{T: TypePrintQuality, F: marshalPrintQuality},
 		gobject.TypeMarshaler{T: TypePrintStatus, F: marshalPrintStatus},
 		gobject.TypeMarshaler{T: TypePropagationPhase, F: marshalPropagationPhase},
-		gobject.TypeMarshaler{T: TypeRcTokenType, F: marshalRCTokenType},
 		gobject.TypeMarshaler{T: TypeRecentChooserError, F: marshalRecentChooserError},
 		gobject.TypeMarshaler{T: TypeRecentManagerError, F: marshalRecentManagerError},
 		gobject.TypeMarshaler{T: TypeRecentSortType, F: marshalRecentSortType},
@@ -588,13 +570,11 @@ func init() {
 		gobject.TypeMarshaler{T: TypeSpinButtonUpdatePolicy, F: marshalSpinButtonUpdatePolicy},
 		gobject.TypeMarshaler{T: TypeSpinType, F: marshalSpinType},
 		gobject.TypeMarshaler{T: TypeStackTransitionType, F: marshalStackTransitionType},
-		gobject.TypeMarshaler{T: TypeStateType, F: marshalStateType},
 		gobject.TypeMarshaler{T: TypeTextBufferTargetInfo, F: marshalTextBufferTargetInfo},
 		gobject.TypeMarshaler{T: TypeTextDirection, F: marshalTextDirection},
 		gobject.TypeMarshaler{T: TypeTextExtendSelection, F: marshalTextExtendSelection},
 		gobject.TypeMarshaler{T: TypeTextViewLayer, F: marshalTextViewLayer},
 		gobject.TypeMarshaler{T: TypeTextWindowType, F: marshalTextWindowType},
-		gobject.TypeMarshaler{T: TypeToolbarSpaceStyle, F: marshalToolbarSpaceStyle},
 		gobject.TypeMarshaler{T: TypeToolbarStyle, F: marshalToolbarStyle},
 		gobject.TypeMarshaler{T: TypeTreeViewColumnSizing, F: marshalTreeViewColumnSizing},
 		gobject.TypeMarshaler{T: TypeTreeViewDropPosition, F: marshalTreeViewDropPosition},
@@ -628,9 +608,7 @@ func init() {
 		gobject.TypeMarshaler{T: TypeTextSearchFlags, F: marshalTextSearchFlags},
 		gobject.TypeMarshaler{T: TypeToolPaletteDragTargets, F: marshalToolPaletteDragTargets},
 		gobject.TypeMarshaler{T: TypeTreeModelFlags, F: marshalTreeModelFlags},
-		gobject.TypeMarshaler{T: TypeUIManagerItemType, F: marshalUIManagerItemType},
 		gobject.TypeMarshaler{T: TypeActionable, F: marshalActionableInstance},
-		gobject.TypeMarshaler{T: TypeActivatable, F: marshalActivatableInstance},
 		gobject.TypeMarshaler{T: TypeAppChooser, F: marshalAppChooserInstance},
 		gobject.TypeMarshaler{T: TypeBuildable, F: marshalBuildableInstance},
 		gobject.TypeMarshaler{T: TypeCellAccessibleParent, F: marshalCellAccessibleParentInstance},
@@ -745,7 +723,6 @@ func init() {
 		gobject.TypeMarshaler{T: TypeEntryAccessible, F: marshalEntryAccessibleInstance},
 		gobject.TypeMarshaler{T: TypeExpanderAccessible, F: marshalExpanderAccessibleInstance},
 		gobject.TypeMarshaler{T: TypeFileChooserNative, F: marshalFileChooserNativeInstance},
-		gobject.TypeMarshaler{T: TypeFileChooserWidgetAccessible, F: marshalFileChooserWidgetAccessibleInstance},
 		gobject.TypeMarshaler{T: TypeFixed, F: marshalFixedInstance},
 		gobject.TypeMarshaler{T: TypeFlowBox, F: marshalFlowBoxInstance},
 		gobject.TypeMarshaler{T: TypeFlowBoxAccessible, F: marshalFlowBoxAccessibleInstance},
@@ -759,7 +736,6 @@ func init() {
 		gobject.TypeMarshaler{T: TypeGrid, F: marshalGridInstance},
 		gobject.TypeMarshaler{T: TypeHSV, F: marshalHSVInstance},
 		gobject.TypeMarshaler{T: TypeHeaderBar, F: marshalHeaderBarInstance},
-		gobject.TypeMarshaler{T: TypeHeaderBarAccessible, F: marshalHeaderBarAccessibleInstance},
 		gobject.TypeMarshaler{T: TypeIconView, F: marshalIconViewInstance},
 		gobject.TypeMarshaler{T: TypeIconViewAccessible, F: marshalIconViewAccessibleInstance},
 		gobject.TypeMarshaler{T: TypeImageAccessible, F: marshalImageAccessibleInstance},
@@ -2125,74 +2101,6 @@ func (e FileChooserError) InitGoValue(v *gobject.Value) {
 	v.SetEnum(int(e))
 }
 
-// IMPreeditStyle wraps GtkIMPreeditStyle
-//
-// Style for input method preedit. See also
-// #GtkSettings:gtk-im-preedit-style
-//
-// Deprecated: (since 3.10.0) 
-type IMPreeditStyle C.int
-
-const (
-	// IMPreeditNothing wraps GTK_IM_PREEDIT_NOTHING
-	//
-	// Deprecated
-	IMPreeditNothing IMPreeditStyle = 0
-	// IMPreeditCallback wraps GTK_IM_PREEDIT_CALLBACK
-	//
-	// Deprecated
-	IMPreeditCallback IMPreeditStyle = 1
-	// IMPreeditNone wraps GTK_IM_PREEDIT_NONE
-	//
-	// Deprecated
-	IMPreeditNone IMPreeditStyle = 2
-)
-
-func marshalIMPreeditStyle(p unsafe.Pointer) (any, error) {
-	return IMPreeditStyle(gobject.ValueFromNative(p).Enum()), nil
-}
-
-var _ gobject.GoValueInitializer = IMPreeditStyle(0)
-
-func (e IMPreeditStyle) InitGoValue(v *gobject.Value) {
-	v.Init(TypeIMPreeditStyle)
-	v.SetEnum(int(e))
-}
-
-// IMStatusStyle wraps GtkIMStatusStyle
-//
-// Style for input method status. See also
-// #GtkSettings:gtk-im-status-style
-//
-// Deprecated: (since 3.10.0) 
-type IMStatusStyle C.int
-
-const (
-	// IMStatusNothing wraps GTK_IM_STATUS_NOTHING
-	//
-	// Deprecated
-	IMStatusNothing IMStatusStyle = 0
-	// IMStatusCallback wraps GTK_IM_STATUS_CALLBACK
-	//
-	// Deprecated
-	IMStatusCallback IMStatusStyle = 1
-	// IMStatusNone wraps GTK_IM_STATUS_NONE
-	//
-	// Deprecated
-	IMStatusNone IMStatusStyle = 2
-)
-
-func marshalIMStatusStyle(p unsafe.Pointer) (any, error) {
-	return IMStatusStyle(gobject.ValueFromNative(p).Enum()), nil
-}
-
-var _ gobject.GoValueInitializer = IMStatusStyle(0)
-
-func (e IMStatusStyle) InitGoValue(v *gobject.Value) {
-	v.Init(TypeIMStatusStyle)
-	v.SetEnum(int(e))
-}
-
 // IconSize wraps GtkIconSize
 //
 // Built-in stock icon sizes.
@@ -3038,86 +2946,6 @@ func (e PanDirection) InitGoValue(v *gobject.Value) {
 	v.SetEnum(int(e))
 }
 
-// PathPriorityType wraps GtkPathPriorityType
-//
-// Priorities for path lookups.
-// See also gtk_binding_set_add_path().
-//
-// Deprecated: (since 3.0.0) 
-type PathPriorityType C.int
-
-const (
-	// PathPrioLowest wraps GTK_PATH_PRIO_LOWEST
-	//
-	// Deprecated
-	PathPrioLowest PathPriorityType = 0
-	// PathPrioGTK wraps GTK_PATH_PRIO_GTK
-	//
-	// Deprecated
-	PathPrioGTK PathPriorityType = 4
-	// PathPrioApplication wraps GTK_PATH_PRIO_APPLICATION
-	//
-	// Deprecated
-	PathPrioApplication PathPriorityType = 8
-	// PathPrioTheme wraps GTK_PATH_PRIO_THEME
-	//
-	// Deprecated
-	PathPrioTheme PathPriorityType = 10
-	// PathPrioRC wraps GTK_PATH_PRIO_RC
-	//
-	// Deprecated
-	PathPrioRC PathPriorityType = 12
-	// PathPrioHighest wraps GTK_PATH_PRIO_HIGHEST
-	//
-	// Deprecated
-	PathPrioHighest PathPriorityType = 15
-)
-
-func marshalPathPriorityType(p unsafe.Pointer) (any, error) {
-	return PathPriorityType(gobject.ValueFromNative(p).Enum()), nil
-}
-
-var _ gobject.GoValueInitializer = PathPriorityType(0)
-
-func (e PathPriorityType) InitGoValue(v *gobject.Value) {
-	v.Init(TypePathPriorityType)
-	v.SetEnum(int(e))
-}
-
-// PathType wraps GtkPathType
-//
-// Widget path types.
-// See also gtk_binding_set_add_path().
-//
-// Deprecated: (since 3.0.0) 
-type PathType C.int
-
-const (
-	// PathWidget wraps GTK_PATH_WIDGET
-	//
-	// Deprecated
-	PathWidget PathType = 0
-	// PathWidgetClass wraps GTK_PATH_WIDGET_CLASS
-	//
-	// Deprecated
-	PathWidgetClass PathType = 1
-	// PathClass wraps GTK_PATH_CLASS
-	//
-	// Deprecated
-	PathClass PathType = 2
-)
-
-func marshalPathType(p unsafe.Pointer) (any, error) {
-	return PathType(gobject.ValueFromNative(p).Enum()), nil
-}
-
-var _ gobject.GoValueInitializer = PathType(0)
-
-func (e PathType) InitGoValue(v *gobject.Value) {
-	v.Init(TypePathType)
-	v.SetEnum(int(e))
-}
-
 // PolicyType wraps GtkPolicyType
 //
 // Determines how the size should be computed to achieve the one of the
@@ -3543,190 +3371,6 @@ var _ gobject.GoValueInitializer = PropagationPhase(0)
 
 func (e PropagationPhase) InitGoValue(v *gobject.Value) {
 	v.Init(TypePropagationPhase)
-	v.SetEnum(int(e))
-}
-
-// RCTokenType wraps GtkRcTokenType
-//
-// The #GtkRcTokenType enumeration represents the tokens
-// in the RC file. It is exposed so that theme engines
-// can reuse these tokens when parsing the theme-engine
-// specific portions of a RC file.
-//
-// Deprecated: (since 3.0.0) Use #GtkCssProvider instead.
-type RCTokenType C.int
-
-const (
-	// RCTokenInvalid wraps GTK_RC_TOKEN_INVALID
-	//
-	// Deprecated
-	RCTokenInvalid RCTokenType = 270
-	// RCTokenInclude wraps GTK_RC_TOKEN_INCLUDE
-	//
-	// Deprecated
-	RCTokenInclude RCTokenType = 271
-	// RCTokenNormal wraps GTK_RC_TOKEN_NORMAL
-	//
-	// Deprecated
-	RCTokenNormal RCTokenType = 272
-	// RCTokenActive wraps GTK_RC_TOKEN_ACTIVE
-	//
-	// Deprecated
-	RCTokenActive RCTokenType = 273
-	// RCTokenPrelight wraps GTK_RC_TOKEN_PRELIGHT
-	//
-	// Deprecated
-	RCTokenPrelight RCTokenType = 274
-	// RCTokenSelected wraps GTK_RC_TOKEN_SELECTED
-	//
-	// Deprecated
-	RCTokenSelected RCTokenType = 275
-	// RCTokenInsensitive wraps GTK_RC_TOKEN_INSENSITIVE
-	//
-	// Deprecated
-	RCTokenInsensitive RCTokenType = 276
-	// RCTokenFg wraps GTK_RC_TOKEN_FG
-	//
-	// Deprecated
-	RCTokenFg RCTokenType = 277
-	// RCTokenBg wraps GTK_RC_TOKEN_BG
-	//
-	// Deprecated
-	RCTokenBg RCTokenType = 278
-	// RCTokenText wraps GTK_RC_TOKEN_TEXT
-	//
-	// Deprecated
-	RCTokenText RCTokenType = 279
-	// RCTokenBase wraps GTK_RC_TOKEN_BASE
-	//
-	// Deprecated
-	RCTokenBase RCTokenType = 280
-	// RCTokenXthickness wraps GTK_RC_TOKEN_XTHICKNESS
-	//
-	// Deprecated
-	RCTokenXthickness RCTokenType = 281
-	// RCTokenYthickness wraps GTK_RC_TOKEN_YTHICKNESS
-	//
-	// Deprecated
-	RCTokenYthickness RCTokenType = 282
-	// RCTokenFont wraps GTK_RC_TOKEN_FONT
-	//
-	// Deprecated
-	RCTokenFont RCTokenType = 283
-	// RCTokenFontset wraps GTK_RC_TOKEN_FONTSET
-	//
-	// Deprecated
-	RCTokenFontset RCTokenType = 284
-	// RCTokenFontName wraps GTK_RC_TOKEN_FONT_NAME
-	//
-	// Deprecated
-	RCTokenFontName RCTokenType = 285
-	// RCTokenBgPixmap wraps GTK_RC_TOKEN_BG_PIXMAP
-	//
-	// Deprecated
-	RCTokenBgPixmap RCTokenType = 286
-	// RCTokenPixmapPath wraps GTK_RC_TOKEN_PIXMAP_PATH
-	//
-	// Deprecated
-	RCTokenPixmapPath RCTokenType = 287
-	// RCTokenStyle wraps GTK_RC_TOKEN_STYLE
-	//
-	// Deprecated
-	RCTokenStyle RCTokenType = 288
-	// RCTokenBinding wraps GTK_RC_TOKEN_BINDING
-	//
-	// Deprecated
-	RCTokenBinding RCTokenType = 289
-	// RCTokenBind wraps GTK_RC_TOKEN_BIND
-	//
-	// Deprecated
-	RCTokenBind RCTokenType = 290
-	// RCTokenWidget wraps GTK_RC_TOKEN_WIDGET
-	//
-	// Deprecated
-	RCTokenWidget RCTokenType = 291
-	// RCTokenWidgetClass wraps GTK_RC_TOKEN_WIDGET_CLASS
-	//
-	// Deprecated
-	RCTokenWidgetClass RCTokenType = 292
-	// RCTokenClass wraps GTK_RC_TOKEN_CLASS
-	//
-	// Deprecated
-	RCTokenClass RCTokenType = 293
-	// RCTokenLowest wraps GTK_RC_TOKEN_LOWEST
-	//
-	// Deprecated
-	RCTokenLowest RCTokenType = 294
-	// RCTokenGTK wraps GTK_RC_TOKEN_GTK
-	//
-	// Deprecated
-	RCTokenGTK RCTokenType = 295
-	// RCTokenApplication wraps GTK_RC_TOKEN_APPLICATION
-	//
-	// Deprecated
-	RCTokenApplication RCTokenType = 296
-	// RCTokenTheme wraps GTK_RC_TOKEN_THEME
-	//
-	// Deprecated
-	RCTokenTheme RCTokenType = 297
-	// RCTokenRC wraps GTK_RC_TOKEN_RC
-	//
-	// Deprecated
-	RCTokenRC RCTokenType = 298
-	// RCTokenHighest wraps GTK_RC_TOKEN_HIGHEST
-	//
-	// Deprecated
-	RCTokenHighest RCTokenType = 299
-	// RCTokenEngine wraps GTK_RC_TOKEN_ENGINE
-	//
-	// Deprecated
-	RCTokenEngine RCTokenType = 300
-	// RCTokenModulePath wraps GTK_RC_TOKEN_MODULE_PATH
-	//
-	// Deprecated
-	RCTokenModulePath RCTokenType = 301
-	// RCTokenIMModulePath wraps GTK_RC_TOKEN_IM_MODULE_PATH
-	//
-	// Deprecated
-	RCTokenIMModulePath RCTokenType = 302
-	// RCTokenIMModuleFile wraps GTK_RC_TOKEN_IM_MODULE_FILE
-	//
-	// Deprecated
-	RCTokenIMModuleFile RCTokenType = 303
-	// RCTokenStock wraps GTK_RC_TOKEN_STOCK
-	//
-	// Deprecated
-	RCTokenStock RCTokenType = 304
-	// RCTokenLTR wraps GTK_RC_TOKEN_LTR
-	//
-	// Deprecated
-	RCTokenLTR RCTokenType = 305
-	// RCTokenRTL wraps GTK_RC_TOKEN_RTL
-	//
-	// Deprecated
-	RCTokenRTL RCTokenType = 306
-	// RCTokenColor wraps GTK_RC_TOKEN_COLOR
-	//
-	// Deprecated
-	RCTokenColor RCTokenType = 307
-	// RCTokenUnbind wraps GTK_RC_TOKEN_UNBIND
-	//
-	// Deprecated
-	RCTokenUnbind RCTokenType = 308
-	// RCTokenLast wraps GTK_RC_TOKEN_LAST
-	//
-	// Deprecated
-	RCTokenLast RCTokenType = 309
-)
-
-func marshalRCTokenType(p unsafe.Pointer) (any, error) {
-	return RCTokenType(gobject.ValueFromNative(p).Enum()), nil
-}
-
-var _ gobject.GoValueInitializer = RCTokenType(0)
-
-func (e RCTokenType) InitGoValue(v *gobject.Value) {
-	v.Init(TypeRcTokenType)
 	v.SetEnum(int(e))
 }
 
@@ -4622,63 +4266,6 @@ func (e StackTransitionType) InitGoValue(v *gobject.Value) {
 	v.SetEnum(int(e))
 }
 
-// StateType wraps GtkStateType
-//
-// This type indicates the current state of a widget; the state determines how
-// the widget is drawn. The #GtkStateType enumeration is also used to
-// identify different colors in a #GtkStyle for drawing, so states can be
-// used for subparts of a widget as well as entire widgets.
-//
-// Deprecated: (since 3.14.0) All APIs that are using this enumeration have been deprecated
-//     in favor of alternatives using #GtkStateFlags.
-type StateType C.int
-
-const (
-	// StateNormal wraps GTK_STATE_NORMAL
-	//
-	// State during normal operation.
-	StateNormal StateType = 0
-	// StateActive wraps GTK_STATE_ACTIVE
-	//
-	// State of a currently active widget, such as a depressed button.
-	StateActive StateType = 1
-	// StatePrelight wraps GTK_STATE_PRELIGHT
-	//
-	// State indicating that the mouse pointer is over
-	//                      the widget and the widget will respond to mouse clicks.
-	StatePrelight StateType = 2
-	// StateSelected wraps GTK_STATE_SELECTED
-	//
-	// State of a selected item, such the selected row in a list.
-	StateSelected StateType = 3
-	// StateInsensitive wraps GTK_STATE_INSENSITIVE
-	//
-	// State indicating that the widget is
-	//                         unresponsive to user actions.
-	StateInsensitive StateType = 4
-	// StateInconsistent wraps GTK_STATE_INCONSISTENT
-	//
-	// The widget is inconsistent, such as checkbuttons
-	//                          or radiobuttons that aren’t either set to %TRUE nor %FALSE,
-	//                          or buttons requiring the user attention.
-	StateInconsistent StateType = 5
-	// StateFocused wraps GTK_STATE_FOCUSED
-	//
-	// The widget has the keyboard focus.
-	StateFocused StateType = 6
-)
-
-func marshalStateType(p unsafe.Pointer) (any, error) {
-	return StateType(gobject.ValueFromNative(p).Enum()), nil
-}
-
-var _ gobject.GoValueInitializer = StateType(0)
-
-func (e StateType) InitGoValue(v *gobject.Value) {
-	v.Init(TypeStateType)
-	v.SetEnum(int(e))
-}
-
 // TextBufferTargetInfo wraps GtkTextBufferTargetInfo
 //
 // These values are used as “info” for the targets contained in the
@@ -4856,35 +4443,6 @@ var _ gobject.GoValueInitializer = TextWindowType(0)
 
 func (e TextWindowType) InitGoValue(v *gobject.Value) {
 	v.Init(TypeTextWindowType)
-	v.SetEnum(int(e))
-}
-
-// ToolbarSpaceStyle wraps GtkToolbarSpaceStyle
-//
-// Whether spacers are vertical lines or just blank.
-//
-// Deprecated: (since 3.20.0) 
-type ToolbarSpaceStyle C.int
-
-const (
-	// ToolbarSpaceEmpty wraps GTK_TOOLBAR_SPACE_EMPTY
-	//
-	// Use blank spacers.
-	ToolbarSpaceEmpty ToolbarSpaceStyle = 0
-	// ToolbarSpaceLine wraps GTK_TOOLBAR_SPACE_LINE
-	//
-	// Use vertical lines for spacers.
-	ToolbarSpaceLine ToolbarSpaceStyle = 1
-)
-
-func marshalToolbarSpaceStyle(p unsafe.Pointer) (any, error) {
-	return ToolbarSpaceStyle(gobject.ValueFromNative(p).Enum()), nil
-}
-
-var _ gobject.GoValueInitializer = ToolbarSpaceStyle(0)
-
-func (e ToolbarSpaceStyle) InitGoValue(v *gobject.Value) {
-	v.Init(TypeToolbarSpaceStyle)
 	v.SetEnum(int(e))
 }
 
@@ -6389,77 +5947,6 @@ func (f TreeModelFlags) InitGoValue(v *gobject.Value) {
 	v.SetFlags(int(f))
 }
 
-// UIManagerItemType wraps GtkUIManagerItemType
-//
-// These enumeration values are used by gtk_ui_manager_add_ui() to determine
-// what UI element to create.
-//
-// Deprecated: (since 3.10.0) 
-type UIManagerItemType C.gint
-
-const (
-	// UiManagerAuto wraps GTK_UI_MANAGER_AUTO
-	//
-	// Pick the type of the UI element according to context.
-	UiManagerAuto UIManagerItemType = 0
-	// UiManagerMenubar wraps GTK_UI_MANAGER_MENUBAR
-	//
-	// Create a menubar.
-	UiManagerMenubar UIManagerItemType = 1
-	// UiManagerMenu wraps GTK_UI_MANAGER_MENU
-	//
-	// Create a menu.
-	UiManagerMenu UIManagerItemType = 2
-	// UiManagerToolbar wraps GTK_UI_MANAGER_TOOLBAR
-	//
-	// Create a toolbar.
-	UiManagerToolbar UIManagerItemType = 4
-	// UiManagerPlaceholder wraps GTK_UI_MANAGER_PLACEHOLDER
-	//
-	// Insert a placeholder.
-	UiManagerPlaceholder UIManagerItemType = 8
-	// UiManagerPopup wraps GTK_UI_MANAGER_POPUP
-	//
-	// Create a popup menu.
-	UiManagerPopup UIManagerItemType = 16
-	// UiManagerMenuitem wraps GTK_UI_MANAGER_MENUITEM
-	//
-	// Create a menuitem.
-	UiManagerMenuitem UIManagerItemType = 32
-	// UiManagerToolitem wraps GTK_UI_MANAGER_TOOLITEM
-	//
-	// Create a toolitem.
-	UiManagerToolitem UIManagerItemType = 64
-	// UiManagerSeparator wraps GTK_UI_MANAGER_SEPARATOR
-	//
-	// Create a separator.
-	UiManagerSeparator UIManagerItemType = 128
-	// UiManagerAccelerator wraps GTK_UI_MANAGER_ACCELERATOR
-	//
-	// Install an accelerator.
-	UiManagerAccelerator UIManagerItemType = 256
-	// UiManagerPopupWithAccels wraps GTK_UI_MANAGER_POPUP_WITH_ACCELS
-	//
-	// Same as %GTK_UI_MANAGER_POPUP, but the
-	//   actions’ accelerators are shown.
-	UiManagerPopupWithAccels UIManagerItemType = 512
-)
-
-func marshalUIManagerItemType(p unsafe.Pointer) (any, error) {
-	return UIManagerItemType(gobject.ValueFromNative(p).Flags()), nil
-}
-// Has returns true if u contains other
-func (u UIManagerItemType) Has(other UIManagerItemType) bool {
-	return (u & other) == other
-}
-
-var _ gobject.GoValueInitializer = UIManagerItemType(0)
-
-func (f UIManagerItemType) InitGoValue(v *gobject.Value) {
-	v.Init(TypeUIManagerItemType)
-	v.SetFlags(int(f))
-}
-
 // AssistantPageFunc wraps GtkAssistantPageFunc
 //
 // A function used by gtk_assistant_set_forward_page_func() to know which
@@ -6616,14 +6103,6 @@ type TextTagTableForEach func(tag TextTag)
 //
 // Callback type for adding a function to update animations. See gtk_widget_add_tick_callback().
 type TickCallback func(widget Widget, frameClock gdk.FrameClock) (goret bool)
-
-// TranslateFunc wraps GtkTranslateFunc
-//
-// The function used to translate messages in e.g. #GtkIconFactory
-// and #GtkActionGroup.
-//
-// Deprecated: (since 3.10.0) 
-type TranslateFunc func(path string) (goret string)
 
 // TreeCellDataFunc wraps GtkTreeCellDataFunc
 //
@@ -6868,7 +6347,7 @@ func AcceleratorGetLabel(acceleratorKey uint, acceleratorMods gdk.ModifierType) 
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 	defer C.free(unsafe.Pointer(cret))
 
 	return goret
@@ -6916,7 +6395,7 @@ func AcceleratorGetLabelWithKeycode(display gdk.Display, acceleratorKey uint, ke
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 	defer C.free(unsafe.Pointer(cret))
 
 	return goret
@@ -6953,7 +6432,7 @@ func AcceleratorName(acceleratorKey uint, acceleratorMods gdk.ModifierType) stri
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 	defer C.free(unsafe.Pointer(cret))
 
 	return goret
@@ -6999,7 +6478,7 @@ func AcceleratorNameWithKeycode(display gdk.Display, acceleratorKey uint, keycod
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 	defer C.free(unsafe.Pointer(cret))
 
 	return goret
@@ -7104,47 +6583,6 @@ func AcceleratorValid(keyval uint, modifiers gdk.ModifierType) bool {
 	cret = C.gtk_accelerator_valid(carg1, carg2)
 	runtime.KeepAlive(keyval)
 	runtime.KeepAlive(modifiers)
-
-	var goret bool
-
-	if cret != 0 {
-		goret = true
-	}
-
-	return goret
-}
-
-// AlternativeDialogButtonOrder wraps gtk_alternative_dialog_button_order
-// 
-// The function takes the following parameters:
-// 
-// 	- screen gdk.Screen (nullable): a #GdkScreen, or %NULL to use the default screen 
-// 
-// The function returns the following values:
-// 
-// 	- goret bool 
-//
-// Returns %TRUE if dialogs are expected to use an alternative
-// button order on the screen @screen. See
-// gtk_dialog_set_alternative_button_order() for more details
-// about alternative button order.
-// 
-// If you need to use this function, you should probably connect
-// to the ::notify:gtk-alternative-button-order signal on the
-// #GtkSettings object associated to @screen, in order to be
-// notified if the button order setting changes.
-//
-// Deprecated: (since 3.10.0) Deprecated
-func AlternativeDialogButtonOrder(screen gdk.Screen) bool {
-	var carg1 *C.GdkScreen // in, none, converted, nullable
-	var cret  C.gboolean   // return
-
-	if screen != nil {
-		carg1 = (*C.GdkScreen)(gdk.UnsafeScreenToGlibNone(screen))
-	}
-
-	cret = C.gtk_alternative_dialog_button_order(carg1)
-	runtime.KeepAlive(screen)
 
 	var goret bool
 
@@ -7278,7 +6716,7 @@ func CheckVersion(requiredMajor uint, requiredMinor uint, requiredMicro uint) st
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -7588,38 +7026,6 @@ func DragSetIconPixbuf(context gdk.DragContext, pixbuf gdkpixbuf.Pixbuf, hotX in
 	C.gtk_drag_set_icon_pixbuf(carg1, carg2, carg3, carg4)
 	runtime.KeepAlive(context)
 	runtime.KeepAlive(pixbuf)
-	runtime.KeepAlive(hotX)
-	runtime.KeepAlive(hotY)
-}
-
-// DragSetIconStock wraps gtk_drag_set_icon_stock
-// 
-// The function takes the following parameters:
-// 
-// 	- context gdk.DragContext: the context for a drag (This must be called
-//            with a  context for the source side of a drag) 
-// 	- stockId string: the ID of the stock icon to use for the drag 
-// 	- hotX int: the X offset within the icon of the hotspot 
-// 	- hotY int: the Y offset within the icon of the hotspot 
-//
-// Sets the icon for a given drag from a stock ID.
-//
-// Deprecated: (since 3.10.0) Use gtk_drag_set_icon_name() instead.
-func DragSetIconStock(context gdk.DragContext, stockId string, hotX int, hotY int) {
-	var carg1 *C.GdkDragContext // in, none, converted
-	var carg2 *C.gchar          // in, none, string, casted *C.gchar
-	var carg3 C.gint            // in, none, casted
-	var carg4 C.gint            // in, none, casted
-
-	carg1 = (*C.GdkDragContext)(gdk.UnsafeDragContextToGlibNone(context))
-	carg2 = (*C.gchar)(unsafe.Pointer(C.CString(stockId)))
-	defer C.free(unsafe.Pointer(carg2))
-	carg3 = C.gint(hotX)
-	carg4 = C.gint(hotY)
-
-	C.gtk_drag_set_icon_stock(carg1, carg2, carg3, carg4)
-	runtime.KeepAlive(context)
-	runtime.KeepAlive(stockId)
 	runtime.KeepAlive(hotX)
 	runtime.KeepAlive(hotY)
 }
@@ -8026,25 +7432,6 @@ func GrabGetCurrent() Widget {
 	return goret
 }
 
-// KeySnooperRemove wraps gtk_key_snooper_remove
-// 
-// The function takes the following parameters:
-// 
-// 	- snooperHandlerId uint: Identifies the key snooper to remove 
-//
-// Removes the key snooper function with the given id.
-//
-// Deprecated: (since 3.4.0) Key snooping should not be done. Events should
-//     be handled by widgets.
-func KeySnooperRemove(snooperHandlerId uint) {
-	var carg1 C.guint // in, none, casted
-
-	carg1 = C.guint(snooperHandlerId)
-
-	C.gtk_key_snooper_remove(carg1)
-	runtime.KeepAlive(snooperHandlerId)
-}
-
 // Main wraps gtk_main
 //
 // Runs the main loop until gtk_main_quit() is called.
@@ -8226,501 +7613,6 @@ func PrintRunPageSetupDialogAsync(parent Window, pageSetup PageSetup, settings P
 	runtime.KeepAlive(doneCb)
 }
 
-// RCAddDefaultFile wraps gtk_rc_add_default_file
-// 
-// The function takes the following parameters:
-// 
-// 	- filename string: the pathname to the file. If @filename
-//    is not absolute, it is searched in the current directory. 
-//
-// Adds a file to the list of files to be parsed at the
-// end of gtk_init().
-//
-// Deprecated: (since 3.0.0) Use #GtkStyleContext with a custom #GtkStyleProvider instead
-func RCAddDefaultFile(filename string) {
-	var carg1 *C.gchar // in, none, string, casted *C.gchar
-
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(filename)))
-	defer C.free(unsafe.Pointer(carg1))
-
-	C.gtk_rc_add_default_file(carg1)
-	runtime.KeepAlive(filename)
-}
-
-// RCFindModuleInPath wraps gtk_rc_find_module_in_path
-// 
-// The function takes the following parameters:
-// 
-// 	- moduleFile string: name of a theme engine 
-// 
-// The function returns the following values:
-// 
-// 	- goret string 
-//
-// Searches for a theme engine in the GTK+ search path. This function
-// is not useful for applications and should not be used.
-//
-// Deprecated: (since 3.0.0) Use #GtkCssProvider instead.
-func RCFindModuleInPath(moduleFile string) string {
-	var carg1 *C.gchar // in, none, string, casted *C.gchar
-	var cret  *C.gchar // return, full, string, casted *C.gchar
-
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(moduleFile)))
-	defer C.free(unsafe.Pointer(carg1))
-
-	cret = C.gtk_rc_find_module_in_path(carg1)
-	runtime.KeepAlive(moduleFile)
-
-	var goret string
-
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
-	defer C.free(unsafe.Pointer(cret))
-
-	return goret
-}
-
-// RCFindPixmapInPath wraps gtk_rc_find_pixmap_in_path
-// 
-// The function takes the following parameters:
-// 
-// 	- settings Settings: a #GtkSettings 
-// 	- scanner *glib.Scanner: Scanner used to get line number information for the
-//   warning message, or %NULL 
-// 	- pixmapFile string: name of the pixmap file to locate. 
-// 
-// The function returns the following values:
-// 
-// 	- goret string 
-//
-// Looks up a file in pixmap path for the specified #GtkSettings.
-// If the file is not found, it outputs a warning message using
-// g_warning() and returns %NULL.
-//
-// Deprecated: (since 3.0.0) Use #GtkCssProvider instead.
-func RCFindPixmapInPath(settings Settings, scanner *glib.Scanner, pixmapFile string) string {
-	var carg1 *C.GtkSettings // in, none, converted
-	var carg2 *C.GScanner    // in, none, converted
-	var carg3 *C.gchar       // in, none, string, casted *C.gchar
-	var cret  *C.gchar       // return, full, string, casted *C.gchar
-
-	carg1 = (*C.GtkSettings)(UnsafeSettingsToGlibNone(settings))
-	carg2 = (*C.GScanner)(glib.UnsafeScannerToGlibNone(scanner))
-	carg3 = (*C.gchar)(unsafe.Pointer(C.CString(pixmapFile)))
-	defer C.free(unsafe.Pointer(carg3))
-
-	cret = C.gtk_rc_find_pixmap_in_path(carg1, carg2, carg3)
-	runtime.KeepAlive(settings)
-	runtime.KeepAlive(scanner)
-	runtime.KeepAlive(pixmapFile)
-
-	var goret string
-
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
-	defer C.free(unsafe.Pointer(cret))
-
-	return goret
-}
-
-// RCGetDefaultFiles wraps gtk_rc_get_default_files
-// The function returns the following values:
-// 
-// 	- goret []string 
-//
-// Retrieves the current list of RC files that will be parsed
-// at the end of gtk_init().
-//
-// Deprecated: (since 3.0.0) Use #GtkStyleContext instead
-func RCGetDefaultFiles() []string {
-	var cret **C.gchar // return, transfer: none, C Pointers: 2, Name: array[filename], scope: , array (inner: *typesystem.StringPrimitive, zero-terminated)
-
-	cret = C.gtk_rc_get_default_files()
-
-	var goret []string
-
-	_ = goret
-	_ = cret
-	panic("unimplemented conversion of []string (gchar**)")
-
-	return goret
-}
-
-// RCGetIMModuleFile wraps gtk_rc_get_im_module_file
-// The function returns the following values:
-// 
-// 	- goret string 
-//
-// Obtains the path to the IM modules file. See the documentation
-// of the `GTK_IM_MODULE_FILE`
-// environment variable for more details.
-//
-// Deprecated: (since 3.0.0) Use #GtkCssProvider instead.
-func RCGetIMModuleFile() string {
-	var cret *C.gchar // return, full, string, casted *C.gchar
-
-	cret = C.gtk_rc_get_im_module_file()
-
-	var goret string
-
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
-	defer C.free(unsafe.Pointer(cret))
-
-	return goret
-}
-
-// RCGetIMModulePath wraps gtk_rc_get_im_module_path
-// The function returns the following values:
-// 
-// 	- goret string 
-//
-// Obtains the path in which to look for IM modules. See the documentation
-// of the `GTK_PATH`
-// environment variable for more details about looking up modules. This
-// function is useful solely for utilities supplied with GTK+ and should
-// not be used by applications under normal circumstances.
-//
-// Deprecated: (since 3.0.0) Use #GtkCssProvider instead.
-func RCGetIMModulePath() string {
-	var cret *C.gchar // return, full, string, casted *C.gchar
-
-	cret = C.gtk_rc_get_im_module_path()
-
-	var goret string
-
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
-	defer C.free(unsafe.Pointer(cret))
-
-	return goret
-}
-
-// RCGetModuleDir wraps gtk_rc_get_module_dir
-// The function returns the following values:
-// 
-// 	- goret string 
-//
-// Returns a directory in which GTK+ looks for theme engines.
-// For full information about the search for theme engines,
-// see the docs for `GTK_PATH` in [Running GTK+ Applications][gtk-running].
-//
-// Deprecated: (since 3.0.0) Use #GtkCssProvider instead.
-func RCGetModuleDir() string {
-	var cret *C.gchar // return, full, string, casted *C.gchar
-
-	cret = C.gtk_rc_get_module_dir()
-
-	var goret string
-
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
-	defer C.free(unsafe.Pointer(cret))
-
-	return goret
-}
-
-// RCGetStyle wraps gtk_rc_get_style
-// 
-// The function takes the following parameters:
-// 
-// 	- widget Widget: a #GtkWidget 
-// 
-// The function returns the following values:
-// 
-// 	- goret Style 
-//
-// Finds all matching RC styles for a given widget,
-// composites them together, and then creates a
-// #GtkStyle representing the composite appearance.
-// (GTK+ actually keeps a cache of previously
-// created styles, so a new style may not be
-// created.)
-//
-// Deprecated: (since 3.0.0) Use #GtkStyleContext instead
-func RCGetStyle(widget Widget) Style {
-	var carg1 *C.GtkWidget // in, none, converted
-	var cret  *C.GtkStyle  // return, none, converted
-
-	carg1 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(widget))
-
-	cret = C.gtk_rc_get_style(carg1)
-	runtime.KeepAlive(widget)
-
-	var goret Style
-
-	goret = UnsafeStyleFromGlibNone(unsafe.Pointer(cret))
-
-	return goret
-}
-
-// RCGetStyleByPaths wraps gtk_rc_get_style_by_paths
-// 
-// The function takes the following parameters:
-// 
-// 	- settings Settings: a #GtkSettings object 
-// 	- widgetPath string (nullable): the widget path to use when looking up the
-//     style, or %NULL if no matching against the widget path should be done 
-// 	- classPath string (nullable): the class path to use when looking up the style,
-//     or %NULL if no matching against the class path should be done. 
-// 	- typ gobject.Type: a type that will be used along with parent types of this type
-//     when matching against class styles, or #G_TYPE_NONE 
-// 
-// The function returns the following values:
-// 
-// 	- goret Style 
-//
-// Creates up a #GtkStyle from styles defined in a RC file by providing
-// the raw components used in matching. This function may be useful
-// when creating pseudo-widgets that should be themed like widgets but
-// don’t actually have corresponding GTK+ widgets. An example of this
-// would be items inside a GNOME canvas widget.
-// 
-// The action of gtk_rc_get_style() is similar to:
-// |[&lt;!-- language="C" --&gt;
-//  gtk_widget_path (widget, NULL, &amp;path, NULL);
-//  gtk_widget_class_path (widget, NULL, &amp;class_path, NULL);
-//  gtk_rc_get_style_by_paths (gtk_widget_get_settings (widget),
-//                             path, class_path,
-//                             G_OBJECT_TYPE (widget));
-// ]|
-//
-// Deprecated: (since 3.0.0) Use #GtkStyleContext instead
-func RCGetStyleByPaths(settings Settings, widgetPath string, classPath string, typ gobject.Type) Style {
-	var carg1 *C.GtkSettings // in, none, converted
-	var carg2 *C.char        // in, none, string, nullable-string
-	var carg3 *C.char        // in, none, string, nullable-string
-	var carg4 C.GType        // in, none, casted, alias
-	var cret  *C.GtkStyle    // return, none, converted
-
-	carg1 = (*C.GtkSettings)(UnsafeSettingsToGlibNone(settings))
-	if widgetPath != "" {
-		carg2 = (*C.char)(unsafe.Pointer(C.CString(widgetPath)))
-		defer C.free(unsafe.Pointer(carg2))
-	}
-	if classPath != "" {
-		carg3 = (*C.char)(unsafe.Pointer(C.CString(classPath)))
-		defer C.free(unsafe.Pointer(carg3))
-	}
-	carg4 = C.GType(typ)
-
-	cret = C.gtk_rc_get_style_by_paths(carg1, carg2, carg3, carg4)
-	runtime.KeepAlive(settings)
-	runtime.KeepAlive(widgetPath)
-	runtime.KeepAlive(classPath)
-	runtime.KeepAlive(typ)
-
-	var goret Style
-
-	goret = UnsafeStyleFromGlibNone(unsafe.Pointer(cret))
-
-	return goret
-}
-
-// RCGetThemeDir wraps gtk_rc_get_theme_dir
-// The function returns the following values:
-// 
-// 	- goret string 
-//
-// Returns the standard directory in which themes should
-// be installed. (GTK+ does not actually use this directory
-// itself.)
-//
-// Deprecated: (since 3.0.0) Use #GtkCssProvider instead.
-func RCGetThemeDir() string {
-	var cret *C.gchar // return, full, string, casted *C.gchar
-
-	cret = C.gtk_rc_get_theme_dir()
-
-	var goret string
-
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
-	defer C.free(unsafe.Pointer(cret))
-
-	return goret
-}
-
-// RCParse wraps gtk_rc_parse
-// 
-// The function takes the following parameters:
-// 
-// 	- filename string: the filename of a file to parse. If @filename is not absolute, it
-//  is searched in the current directory. 
-//
-// Parses a given resource file.
-//
-// Deprecated: (since 3.0.0) Use #GtkCssProvider instead.
-func RCParse(filename string) {
-	var carg1 *C.gchar // in, none, string, casted *C.gchar
-
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(filename)))
-	defer C.free(unsafe.Pointer(carg1))
-
-	C.gtk_rc_parse(carg1)
-	runtime.KeepAlive(filename)
-}
-
-// RCParseState wraps gtk_rc_parse_state
-// 
-// The function takes the following parameters:
-// 
-// 	- scanner *glib.Scanner: a #GScanner (must be initialized for parsing an RC file) 
-// 
-// The function returns the following values:
-// 
-// 	- state StateType: A pointer to a #GtkStateType variable in which to
-//  store the result. 
-// 	- goret uint 
-//
-// Parses a #GtkStateType variable from the format expected
-// in a RC file.
-//
-// Deprecated: (since 3.0.0) Use #GtkCssProvider instead
-func RCParseState(scanner *glib.Scanner) (StateType, uint) {
-	var carg1 *C.GScanner    // in, none, converted
-	var carg2 C.GtkStateType // out, full, casted
-	var cret  C.guint        // return, none, casted
-
-	carg1 = (*C.GScanner)(glib.UnsafeScannerToGlibNone(scanner))
-
-	cret = C.gtk_rc_parse_state(carg1, &carg2)
-	runtime.KeepAlive(scanner)
-
-	var state StateType
-	var goret uint
-
-	state = StateType(carg2)
-	goret = uint(cret)
-
-	return state, goret
-}
-
-// RCParseString wraps gtk_rc_parse_string
-// 
-// The function takes the following parameters:
-// 
-// 	- rcString string: a string to parse. 
-//
-// Parses resource information directly from a string.
-//
-// Deprecated: (since 3.0.0) Use #GtkCssProvider instead.
-func RCParseString(rcString string) {
-	var carg1 *C.gchar // in, none, string, casted *C.gchar
-
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(rcString)))
-	defer C.free(unsafe.Pointer(carg1))
-
-	C.gtk_rc_parse_string(carg1)
-	runtime.KeepAlive(rcString)
-}
-
-// RCReparseAll wraps gtk_rc_reparse_all
-// The function returns the following values:
-// 
-// 	- goret bool 
-//
-// If the modification time on any previously read file for the
-// default #GtkSettings has changed, discard all style information
-// and then reread all previously read RC files.
-//
-// Deprecated: (since 3.0.0) Use #GtkCssProvider instead.
-func RCReparseAll() bool {
-	var cret C.gboolean // return
-
-	cret = C.gtk_rc_reparse_all()
-
-	var goret bool
-
-	if cret != 0 {
-		goret = true
-	}
-
-	return goret
-}
-
-// RCReparseAllForSettings wraps gtk_rc_reparse_all_for_settings
-// 
-// The function takes the following parameters:
-// 
-// 	- settings Settings: a #GtkSettings 
-// 	- forceLoad bool: load whether or not anything changed 
-// 
-// The function returns the following values:
-// 
-// 	- goret bool 
-//
-// If the modification time on any previously read file
-// for the given #GtkSettings has changed, discard all style information
-// and then reread all previously read RC files.
-//
-// Deprecated: (since 3.0.0) Use #GtkCssProvider instead.
-func RCReparseAllForSettings(settings Settings, forceLoad bool) bool {
-	var carg1 *C.GtkSettings // in, none, converted
-	var carg2 C.gboolean     // in
-	var cret  C.gboolean     // return
-
-	carg1 = (*C.GtkSettings)(UnsafeSettingsToGlibNone(settings))
-	if forceLoad {
-		carg2 = C.TRUE
-	}
-
-	cret = C.gtk_rc_reparse_all_for_settings(carg1, carg2)
-	runtime.KeepAlive(settings)
-	runtime.KeepAlive(forceLoad)
-
-	var goret bool
-
-	if cret != 0 {
-		goret = true
-	}
-
-	return goret
-}
-
-// RCResetStyles wraps gtk_rc_reset_styles
-// 
-// The function takes the following parameters:
-// 
-// 	- settings Settings: a #GtkSettings 
-//
-// This function recomputes the styles for all widgets that use a
-// particular #GtkSettings object. (There is one #GtkSettings object
-// per #GdkScreen, see gtk_settings_get_for_screen()); It is useful
-// when some global parameter has changed that affects the appearance
-// of all widgets, because when a widget gets a new style, it will
-// both redraw and recompute any cached information about its
-// appearance. As an example, it is used when the default font size
-// set by the operating system changes. Note that this function
-// doesn’t affect widgets that have a style set explicitly on them
-// with gtk_widget_set_style().
-//
-// Deprecated: (since 3.0.0) Use #GtkCssProvider instead.
-func RCResetStyles(settings Settings) {
-	var carg1 *C.GtkSettings // in, none, converted
-
-	carg1 = (*C.GtkSettings)(UnsafeSettingsToGlibNone(settings))
-
-	C.gtk_rc_reset_styles(carg1)
-	runtime.KeepAlive(settings)
-}
-
-// RCSetDefaultFiles wraps gtk_rc_set_default_files
-// 
-// The function takes the following parameters:
-// 
-// 	- filenames []string: A
-//     %NULL-terminated list of filenames. 
-//
-// Sets the list of files that GTK+ will read at the
-// end of gtk_init().
-//
-// Deprecated: (since 3.0.0) Use #GtkStyleContext with a custom #GtkStyleProvider instead
-func RCSetDefaultFiles(filenames []string) {
-	var carg1 **C.gchar // in, transfer: none, C Pointers: 2, Name: array[filename], array (inner: *typesystem.StringPrimitive, zero-terminated)
-
-	_ = filenames
-	_ = carg1
-	panic("unimplemented conversion of []string (gchar**)")
-
-	C.gtk_rc_set_default_files(carg1)
-	runtime.KeepAlive(filenames)
-}
-
 // RenderBackgroundGetClip wraps gtk_render_background_get_clip
 // 
 // The function takes the following parameters:
@@ -8766,46 +7658,6 @@ func RenderBackgroundGetClip(context StyleContext, x float64, y float64, width f
 	panic("unimplemented conversion of gdk.Rectangle (GdkRectangle)")
 
 	return outClip
-}
-
-// RenderIconPixbuf wraps gtk_render_icon_pixbuf
-// 
-// The function takes the following parameters:
-// 
-// 	- context StyleContext: a #GtkStyleContext 
-// 	- source *IconSource: the #GtkIconSource specifying the icon to render 
-// 	- size int: the size (#GtkIconSize) to render the icon at.
-//        A size of `(GtkIconSize) -1` means render at the size of the source
-//        and don’t scale. 
-// 
-// The function returns the following values:
-// 
-// 	- goret gdkpixbuf.Pixbuf 
-//
-// Renders the icon specified by @source at the given @size, returning the result
-// in a pixbuf.
-//
-// Deprecated: (since 3.10.0) Use gtk_icon_theme_load_icon() instead.
-func RenderIconPixbuf(context StyleContext, source *IconSource, size int) gdkpixbuf.Pixbuf {
-	var carg1 *C.GtkStyleContext // in, none, converted
-	var carg2 *C.GtkIconSource   // in, none, converted
-	var carg3 C.GtkIconSize      // in, none, casted, casted C.gint
-	var cret  *C.GdkPixbuf       // return, full, converted
-
-	carg1 = (*C.GtkStyleContext)(UnsafeStyleContextToGlibNone(context))
-	carg2 = (*C.GtkIconSource)(UnsafeIconSourceToGlibNone(source))
-	carg3 = C.GtkIconSize(size)
-
-	cret = C.gtk_render_icon_pixbuf(carg1, carg2, carg3)
-	runtime.KeepAlive(context)
-	runtime.KeepAlive(source)
-	runtime.KeepAlive(size)
-
-	var goret gdkpixbuf.Pixbuf
-
-	goret = gdkpixbuf.UnsafePixbufFromGlibFull(unsafe.Pointer(cret))
-
-	return goret
 }
 
 // RGBToHSV wraps gtk_rgb_to_hsv
@@ -8889,61 +7741,6 @@ func SetDebugFlags(flags uint) {
 	runtime.KeepAlive(flags)
 }
 
-// ShowURI wraps gtk_show_uri
-// 
-// The function takes the following parameters:
-// 
-// 	- screen gdk.Screen (nullable): screen to show the uri on
-//     or %NULL for the default screen 
-// 	- uri string: the uri to show 
-// 	- timestamp uint32: a timestamp to prevent focus stealing 
-// 
-// The function returns the following values:
-// 
-// 	- goret bool 
-// 	- _goerr error (nullable): an error 
-//
-// A convenience function for launching the default application
-// to show the uri. Like gtk_show_uri_on_window(), but takes a screen
-// as transient parent instead of a window.
-// 
-// Note that this function is deprecated as it does not pass the necessary
-// information for helpers to parent their dialog properly, when run from
-// sandboxed applications for example.
-//
-// Deprecated: (since 3.22.0) Use gtk_show_uri_on_window() instead.
-func ShowURI(screen gdk.Screen, uri string, timestamp uint32) (bool, error) {
-	var carg1 *C.GdkScreen // in, none, converted, nullable
-	var carg2 *C.gchar     // in, none, string, casted *C.gchar
-	var carg3 C.guint32    // in, none, casted
-	var cret  C.gboolean   // return
-	var _cerr *C.GError    // out, full, converted, nullable
-
-	if screen != nil {
-		carg1 = (*C.GdkScreen)(gdk.UnsafeScreenToGlibNone(screen))
-	}
-	carg2 = (*C.gchar)(unsafe.Pointer(C.CString(uri)))
-	defer C.free(unsafe.Pointer(carg2))
-	carg3 = C.guint32(timestamp)
-
-	cret = C.gtk_show_uri(carg1, carg2, carg3, &_cerr)
-	runtime.KeepAlive(screen)
-	runtime.KeepAlive(uri)
-	runtime.KeepAlive(timestamp)
-
-	var goret  bool
-	var _goerr error
-
-	if cret != 0 {
-		goret = true
-	}
-	if _cerr != nil {
-		_goerr = glib.UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
-	}
-
-	return goret, _goerr
-}
-
 // ShowURIOnWindow wraps gtk_show_uri_on_window
 // 
 // The function takes the following parameters:
@@ -9004,155 +7801,6 @@ func ShowURIOnWindow(parent Window, uri string, timestamp uint32) (bool, error) 
 	return goret, _goerr
 }
 
-// StockAdd wraps gtk_stock_add
-// 
-// The function takes the following parameters:
-// 
-// 	- items []StockItem: a #GtkStockItem or array of items 
-//
-// Registers each of the stock items in @items. If an item already
-// exists with the same stock ID as one of the @items, the old item
-// gets replaced. The stock items are copied, so GTK+ does not hold
-// any pointer into @items and @items can be freed. Use
-// gtk_stock_add_static() if @items is persistent and GTK+ need not
-// copy the array.
-//
-// Deprecated: (since 3.10.0) 
-func StockAdd(items []StockItem) {
-	var carg1 *C.GtkStockItem // in, transfer: none, C Pointers: 1, Name: array[StockItem], array (inner: *typesystem.Record, length-by: carg2)
-	var carg2 C.guint         // implicit
-
-	_ = items
-	_ = carg1
-	_ = carg2
-	panic("unimplemented conversion of []StockItem (const GtkStockItem*)")
-
-	C.gtk_stock_add(carg1, carg2)
-	runtime.KeepAlive(items)
-}
-
-// StockAddStatic wraps gtk_stock_add_static
-// 
-// The function takes the following parameters:
-// 
-// 	- items []StockItem: a #GtkStockItem or array of #GtkStockItem 
-//
-// Same as gtk_stock_add(), but doesn’t copy @items, so
-// @items must persist until application exit.
-//
-// Deprecated: (since 3.10.0) 
-func StockAddStatic(items []StockItem) {
-	var carg1 *C.GtkStockItem // in, transfer: none, C Pointers: 1, Name: array[StockItem], array (inner: *typesystem.Record, length-by: carg2)
-	var carg2 C.guint         // implicit
-
-	_ = items
-	_ = carg1
-	_ = carg2
-	panic("unimplemented conversion of []StockItem (const GtkStockItem*)")
-
-	C.gtk_stock_add_static(carg1, carg2)
-	runtime.KeepAlive(items)
-}
-
-// StockLookup wraps gtk_stock_lookup
-// 
-// The function takes the following parameters:
-// 
-// 	- stockId string: a stock item name 
-// 
-// The function returns the following values:
-// 
-// 	- item StockItem: stock item to initialize with values 
-// 	- goret bool 
-//
-// Fills @item with the registered values for @stock_id, returning %TRUE
-// if @stock_id was known.
-//
-// Deprecated: (since 3.10.0) 
-func StockLookup(stockId string) (StockItem, bool) {
-	var carg1 *C.gchar       // in, none, string, casted *C.gchar
-	var carg2 C.GtkStockItem // out, transfer: none, C Pointers: 0, Name: StockItem, caller-allocates
-	var cret  C.gboolean     // return
-
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(stockId)))
-	defer C.free(unsafe.Pointer(carg1))
-
-	cret = C.gtk_stock_lookup(carg1, &carg2)
-	runtime.KeepAlive(stockId)
-
-	var item  StockItem
-	var goret bool
-
-	_ = item
-	_ = carg2
-	panic("unimplemented conversion of StockItem (GtkStockItem)")
-	if cret != 0 {
-		goret = true
-	}
-
-	return item, goret
-}
-
-// StockSetTranslateFunc wraps gtk_stock_set_translate_func
-// 
-// The function takes the following parameters:
-// 
-// 	- domain string: the translation domain for which @func shall be used 
-// 	- fn TranslateFunc: a #GtkTranslateFunc 
-//
-// Sets a function to be used for translating the @label of
-// a stock item.
-// 
-// If no function is registered for a translation domain,
-// g_dgettext() is used.
-// 
-// The function is used for all stock items whose
-// @translation_domain matches @domain. Note that it is possible
-// to use strings different from the actual gettext translation domain
-// of your application for this, as long as your #GtkTranslateFunc uses
-// the correct domain when calling dgettext(). This can be useful, e.g.
-// when dealing with message contexts:
-// 
-// |[&lt;!-- language="C" --&gt;
-// GtkStockItem items[] = {
-//  { MY_ITEM1, NC_("odd items", "Item 1"), 0, 0, "odd-item-domain" },
-//  { MY_ITEM2, NC_("even items", "Item 2"), 0, 0, "even-item-domain" },
-// };
-// 
-// gchar *
-// my_translate_func (const gchar *msgid,
-//                    gpointer     data)
-// {
-//   gchar *msgctxt = data;
-// 
-//   return (gchar*)g_dpgettext2 (GETTEXT_PACKAGE, msgctxt, msgid);
-// }
-// 
-// ...
-// 
-// gtk_stock_add (items, G_N_ELEMENTS (items));
-// gtk_stock_set_translate_func ("odd-item-domain", my_translate_func, "odd items");
-// gtk_stock_set_translate_func ("even-item-domain", my_translate_func, "even items");
-// ]|
-//
-// Deprecated: (since 3.10.0) 
-func StockSetTranslateFunc(domain string, fn TranslateFunc) {
-	var carg1 *C.gchar           // in, none, string, casted *C.gchar
-	var carg2 C.GtkTranslateFunc // callback, scope: notified, closure: carg3, destroy: carg4
-	var carg3 C.gpointer         // implicit
-	var carg4 C.GDestroyNotify   // implicit
-
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(domain)))
-	defer C.free(unsafe.Pointer(carg1))
-	carg2 = (*[0]byte)(C._gotk4_gtk3_TranslateFunc)
-	carg3 = C.gpointer(gbox.Assign(fn))
-	carg4 = (C.GDestroyNotify)((*[0]byte)(C.callbackDelete))
-
-	C.gtk_stock_set_translate_func(carg1, carg2, carg3, carg4)
-	runtime.KeepAlive(domain)
-	runtime.KeepAlive(fn)
-}
-
 // TargetTableFree wraps gtk_target_table_free
 // 
 // The function takes the following parameters:
@@ -9208,44 +7856,6 @@ func TargetTableNewFromList(list *TargetList) (int, []TargetEntry) {
 	panic("unimplemented conversion of []TargetEntry (GtkTargetEntry*)")
 
 	return nTargets, goret
-}
-
-// TestCreateSimpleWindow wraps gtk_test_create_simple_window
-// 
-// The function takes the following parameters:
-// 
-// 	- windowTitle string: Title of the window to be displayed. 
-// 	- dialogText string: Text inside the window to be displayed. 
-// 
-// The function returns the following values:
-// 
-// 	- goret Widget 
-//
-// Create a simple window with window title @window_title and
-// text contents @dialog_text.
-// The window will quit any running gtk_main()-loop when destroyed, and it
-// will automatically be destroyed upon test function teardown.
-//
-// Deprecated: (since 3.20.0) This testing infrastructure is phased out in favor of reftests.
-func TestCreateSimpleWindow(windowTitle string, dialogText string) Widget {
-	var carg1 *C.gchar     // in, none, string, casted *C.gchar
-	var carg2 *C.gchar     // in, none, string, casted *C.gchar
-	var cret  *C.GtkWidget // return, none, converted
-
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(windowTitle)))
-	defer C.free(unsafe.Pointer(carg1))
-	carg2 = (*C.gchar)(unsafe.Pointer(C.CString(dialogText)))
-	defer C.free(unsafe.Pointer(carg2))
-
-	cret = C.gtk_test_create_simple_window(carg1, carg2)
-	runtime.KeepAlive(windowTitle)
-	runtime.KeepAlive(dialogText)
-
-	var goret Widget
-
-	goret = UnsafeWidgetFromGlibNone(unsafe.Pointer(cret))
-
-	return goret
 }
 
 // TestFindLabel wraps gtk_test_find_label
@@ -9398,210 +8008,6 @@ func TestListAllTypes() (uint, []gobject.Type) {
 func TestRegisterAllTypes() {
 
 	C.gtk_test_register_all_types()
-}
-
-// TestSliderGetValue wraps gtk_test_slider_get_value
-// 
-// The function takes the following parameters:
-// 
-// 	- widget Widget: valid widget pointer. 
-// 
-// The function returns the following values:
-// 
-// 	- goret float64 
-//
-// Retrive the literal adjustment value for GtkRange based
-// widgets and spin buttons. Note that the value returned by
-// this function is anything between the lower and upper bounds
-// of the adjustment belonging to @widget, and is not a percentage
-// as passed in to gtk_test_slider_set_perc().
-//
-// Deprecated: (since 3.20.0) This testing infrastructure is phased out in favor of reftests.
-func TestSliderGetValue(widget Widget) float64 {
-	var carg1 *C.GtkWidget // in, none, converted
-	var cret  C.double     // return, none, casted, casted C.gdouble
-
-	carg1 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(widget))
-
-	cret = C.gtk_test_slider_get_value(carg1)
-	runtime.KeepAlive(widget)
-
-	var goret float64
-
-	goret = float64(cret)
-
-	return goret
-}
-
-// TestSliderSetPerc wraps gtk_test_slider_set_perc
-// 
-// The function takes the following parameters:
-// 
-// 	- widget Widget: valid widget pointer. 
-// 	- percentage float64: value between 0 and 100. 
-//
-// This function will adjust the slider position of all GtkRange
-// based widgets, such as scrollbars or scales, it’ll also adjust
-// spin buttons. The adjustment value of these widgets is set to
-// a value between the lower and upper limits, according to the
-// @percentage argument.
-//
-// Deprecated: (since 3.20.0) This testing infrastructure is phased out in favor of reftests.
-func TestSliderSetPerc(widget Widget, percentage float64) {
-	var carg1 *C.GtkWidget // in, none, converted
-	var carg2 C.double     // in, none, casted, casted C.gdouble
-
-	carg1 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(widget))
-	carg2 = C.double(percentage)
-
-	C.gtk_test_slider_set_perc(carg1, carg2)
-	runtime.KeepAlive(widget)
-	runtime.KeepAlive(percentage)
-}
-
-// TestSpinButtonClick wraps gtk_test_spin_button_click
-// 
-// The function takes the following parameters:
-// 
-// 	- spinner SpinButton: valid GtkSpinButton widget. 
-// 	- button uint: Number of the pointer button for the event, usually 1, 2 or 3. 
-// 	- upwards bool: %TRUE for upwards arrow click, %FALSE for downwards arrow click. 
-// 
-// The function returns the following values:
-// 
-// 	- goret bool 
-//
-// This function will generate a @button click in the upwards or downwards
-// spin button arrow areas, usually leading to an increase or decrease of
-// spin button’s value.
-//
-// Deprecated: (since 3.20.0) This testing infrastructure is phased out in favor of reftests.
-func TestSpinButtonClick(spinner SpinButton, button uint, upwards bool) bool {
-	var carg1 *C.GtkSpinButton // in, none, converted
-	var carg2 C.guint          // in, none, casted
-	var carg3 C.gboolean       // in
-	var cret  C.gboolean       // return
-
-	carg1 = (*C.GtkSpinButton)(UnsafeSpinButtonToGlibNone(spinner))
-	carg2 = C.guint(button)
-	if upwards {
-		carg3 = C.TRUE
-	}
-
-	cret = C.gtk_test_spin_button_click(carg1, carg2, carg3)
-	runtime.KeepAlive(spinner)
-	runtime.KeepAlive(button)
-	runtime.KeepAlive(upwards)
-
-	var goret bool
-
-	if cret != 0 {
-		goret = true
-	}
-
-	return goret
-}
-
-// TestTextGet wraps gtk_test_text_get
-// 
-// The function takes the following parameters:
-// 
-// 	- widget Widget: valid widget pointer. 
-// 
-// The function returns the following values:
-// 
-// 	- goret string 
-//
-// Retrive the text string of @widget if it is a GtkLabel,
-// GtkEditable (entry and text widgets) or GtkTextView.
-//
-// Deprecated: (since 3.20.0) This testing infrastructure is phased out in favor of reftests.
-func TestTextGet(widget Widget) string {
-	var carg1 *C.GtkWidget // in, none, converted
-	var cret  *C.gchar     // return, full, string, casted *C.gchar
-
-	carg1 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(widget))
-
-	cret = C.gtk_test_text_get(carg1)
-	runtime.KeepAlive(widget)
-
-	var goret string
-
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
-	defer C.free(unsafe.Pointer(cret))
-
-	return goret
-}
-
-// TestTextSet wraps gtk_test_text_set
-// 
-// The function takes the following parameters:
-// 
-// 	- widget Widget: valid widget pointer. 
-// 	- str string: a 0-terminated C string 
-//
-// Set the text string of @widget to @string if it is a GtkLabel,
-// GtkEditable (entry and text widgets) or GtkTextView.
-//
-// Deprecated: (since 3.20.0) This testing infrastructure is phased out in favor of reftests.
-func TestTextSet(widget Widget, str string) {
-	var carg1 *C.GtkWidget // in, none, converted
-	var carg2 *C.gchar     // in, none, string, casted *C.gchar
-
-	carg1 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(widget))
-	carg2 = (*C.gchar)(unsafe.Pointer(C.CString(str)))
-	defer C.free(unsafe.Pointer(carg2))
-
-	C.gtk_test_text_set(carg1, carg2)
-	runtime.KeepAlive(widget)
-	runtime.KeepAlive(str)
-}
-
-// TestWidgetClick wraps gtk_test_widget_click
-// 
-// The function takes the following parameters:
-// 
-// 	- widget Widget: Widget to generate a button click on. 
-// 	- button uint: Number of the pointer button for the event, usually 1, 2 or 3. 
-// 	- modifiers gdk.ModifierType: Keyboard modifiers the event is setup with. 
-// 
-// The function returns the following values:
-// 
-// 	- goret bool 
-//
-// This function will generate a @button click (button press and button
-// release event) in the middle of the first GdkWindow found that belongs
-// to @widget.
-// For windowless widgets like #GtkButton (which returns %FALSE from
-// gtk_widget_get_has_window()), this will often be an
-// input-only event window. For other widgets, this is usually widget-&gt;window.
-// Certain caveats should be considered when using this function, in
-// particular because the mouse pointer is warped to the button click
-// location, see gdk_test_simulate_button() for details.
-//
-// Deprecated: (since 3.20.0) This testing infrastructure is phased out in favor of reftests.
-func TestWidgetClick(widget Widget, button uint, modifiers gdk.ModifierType) bool {
-	var carg1 *C.GtkWidget      // in, none, converted
-	var carg2 C.guint           // in, none, casted
-	var carg3 C.GdkModifierType // in, none, casted
-	var cret  C.gboolean        // return
-
-	carg1 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(widget))
-	carg2 = C.guint(button)
-	carg3 = C.GdkModifierType(modifiers)
-
-	cret = C.gtk_test_widget_click(carg1, carg2, carg3)
-	runtime.KeepAlive(widget)
-	runtime.KeepAlive(button)
-	runtime.KeepAlive(modifiers)
-
-	var goret bool
-
-	if cret != 0 {
-		goret = true
-	}
-
-	return goret
 }
 
 // TestWidgetSendKey wraps gtk_test_widget_send_key
@@ -9946,7 +8352,7 @@ func (actionable *ActionableInstance) GetActionName() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -10011,545 +8417,6 @@ func (actionable *ActionableInstance) SetDetailedActionName(detailedActionName s
 	C.gtk_actionable_set_detailed_action_name(carg0, carg1)
 	runtime.KeepAlive(actionable)
 	runtime.KeepAlive(detailedActionName)
-}
-
-// ActivatableInstance is the instance type used by all types implementing GtkActivatable. It is used internally by the bindings. Users should use the interface [Activatable] instead.
-type ActivatableInstance struct {
-	_ [0]func() // equal guard
-	Instance gobject.ObjectInstance
-}
-
-var _ Activatable = (*ActivatableInstance)(nil)
-
-// ActivatableInstance wraps GtkActivatable
-//
-// Activatable widgets can be connected to a #GtkAction and reflects
-// the state of its action. A #GtkActivatable can also provide feedback
-// through its action, as they are responsible for activating their
-// related actions.
-// 
-// # Implementing GtkActivatable
-// 
-// When extending a class that is already #GtkActivatable; it is only
-// necessary to implement the #GtkActivatable-&gt;sync_action_properties()
-// and #GtkActivatable-&gt;update() methods and chain up to the parent
-// implementation, however when introducing
-// a new #GtkActivatable class; the #GtkActivatable:related-action and
-// #GtkActivatable:use-action-appearance properties need to be handled by
-// the implementor. Handling these properties is mostly a matter of installing
-// the action pointer and boolean flag on your instance, and calling
-// gtk_activatable_do_set_related_action() and
-// gtk_activatable_sync_action_properties() at the appropriate times.
-// 
-// ## A class fragment implementing #GtkActivatable
-// 
-// |[&lt;!-- language="C" --&gt;
-// 
-// enum {
-// ...
-// 
-// PROP_ACTIVATABLE_RELATED_ACTION,
-// PROP_ACTIVATABLE_USE_ACTION_APPEARANCE
-// }
-// 
-// struct _FooBarPrivate
-// {
-// 
-//   ...
-// 
-//   GtkAction      *action;
-//   gboolean        use_action_appearance;
-// };
-// 
-// ...
-// 
-// static void foo_bar_activatable_interface_init         (GtkActivatableIface  *iface);
-// static void foo_bar_activatable_update                 (GtkActivatable       *activatable,
-// 						           GtkAction            *action,
-// 						           const gchar          *property_name);
-// static void foo_bar_activatable_sync_action_properties (GtkActivatable       *activatable,
-// 						           GtkAction            *action);
-// ...
-// 
-// 
-// static void
-// foo_bar_class_init (FooBarClass *klass)
-// {
-// 
-//   ...
-// 
-//   g_object_class_override_property (gobject_class, PROP_ACTIVATABLE_RELATED_ACTION, "related-action");
-//   g_object_class_override_property (gobject_class, PROP_ACTIVATABLE_USE_ACTION_APPEARANCE, "use-action-appearance");
-// 
-//   ...
-// }
-// 
-// 
-// static void
-// foo_bar_activatable_interface_init (GtkActivatableIface  *iface)
-// {
-//   iface-&gt;update = foo_bar_activatable_update;
-//   iface-&gt;sync_action_properties = foo_bar_activatable_sync_action_properties;
-// }
-// 
-// ... Break the reference using gtk_activatable_do_set_related_action()...
-// 
-// static void
-// foo_bar_dispose (GObject *object)
-// {
-//   FooBar *bar = FOO_BAR (object);
-//   FooBarPrivate *priv = FOO_BAR_GET_PRIVATE (bar);
-// 
-//   ...
-// 
-//   if (priv-&gt;action)
-//     {
-//       gtk_activatable_do_set_related_action (GTK_ACTIVATABLE (bar), NULL);
-//       priv-&gt;action = NULL;
-//     }
-//   G_OBJECT_CLASS (foo_bar_parent_class)-&gt;dispose (object);
-// }
-// 
-// ... Handle the “related-action” and “use-action-appearance” properties ...
-// 
-// static void
-// foo_bar_set_property (GObject         *object,
-//                       guint            prop_id,
-//                       const GValue    *value,
-//                       GParamSpec      *pspec)
-// {
-//   FooBar *bar = FOO_BAR (object);
-//   FooBarPrivate *priv = FOO_BAR_GET_PRIVATE (bar);
-// 
-//   switch (prop_id)
-//     {
-// 
-//       ...
-// 
-//     case PROP_ACTIVATABLE_RELATED_ACTION:
-//       foo_bar_set_related_action (bar, g_value_get_object (value));
-//       break;
-//     case PROP_ACTIVATABLE_USE_ACTION_APPEARANCE:
-//       foo_bar_set_use_action_appearance (bar, g_value_get_boolean (value));
-//       break;
-//     default:
-//       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
-//       break;
-//     }
-// }
-// 
-// static void
-// foo_bar_get_property (GObject         *object,
-//                          guint            prop_id,
-//                          GValue          *value,
-//                          GParamSpec      *pspec)
-// {
-//   FooBar *bar = FOO_BAR (object);
-//   FooBarPrivate *priv = FOO_BAR_GET_PRIVATE (bar);
-// 
-//   switch (prop_id)
-//     {
-// 
-//       ...
-// 
-//     case PROP_ACTIVATABLE_RELATED_ACTION:
-//       g_value_set_object (value, priv-&gt;action);
-//       break;
-//     case PROP_ACTIVATABLE_USE_ACTION_APPEARANCE:
-//       g_value_set_boolean (value, priv-&gt;use_action_appearance);
-//       break;
-//     default:
-//       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
-//       break;
-//     }
-// }
-// 
-// 
-// static void
-// foo_bar_set_use_action_appearance (FooBar   *bar,
-// 				   gboolean  use_appearance)
-// {
-//   FooBarPrivate *priv = FOO_BAR_GET_PRIVATE (bar);
-// 
-//   if (priv-&gt;use_action_appearance != use_appearance)
-//     {
-//       priv-&gt;use_action_appearance = use_appearance;
-//       
-//       gtk_activatable_sync_action_properties (GTK_ACTIVATABLE (bar), priv-&gt;action);
-//     }
-// }
-// 
-// ... call gtk_activatable_do_set_related_action() and then assign the action pointer,
-// no need to reference the action here since gtk_activatable_do_set_related_action() already
-// holds a reference here for you...
-// static void
-// foo_bar_set_related_action (FooBar    *bar,
-// 			    GtkAction *action)
-// {
-//   FooBarPrivate *priv = FOO_BAR_GET_PRIVATE (bar);
-// 
-//   if (priv-&gt;action == action)
-//     return;
-// 
-//   gtk_activatable_do_set_related_action (GTK_ACTIVATABLE (bar), action);
-// 
-//   priv-&gt;action = action;
-// }
-// 
-// ... Selectively reset and update activatable depending on the use-action-appearance property ...
-// static void
-// gtk_button_activatable_sync_action_properties (GtkActivatable       *activatable,
-// 		                                  GtkAction            *action)
-// {
-//   GtkButtonPrivate *priv = GTK_BUTTON_GET_PRIVATE (activatable);
-// 
-//   if (!action)
-//     return;
-// 
-//   if (gtk_action_is_visible (action))
-//     gtk_widget_show (GTK_WIDGET (activatable));
-//   else
-//     gtk_widget_hide (GTK_WIDGET (activatable));
-//   
-//   gtk_widget_set_sensitive (GTK_WIDGET (activatable), gtk_action_is_sensitive (action));
-// 
-//   ...
-//   
-//   if (priv-&gt;use_action_appearance)
-//     {
-//       if (gtk_action_get_stock_id (action))
-// 	foo_bar_set_stock (button, gtk_action_get_stock_id (action));
-//       else if (gtk_action_get_label (action))
-// 	foo_bar_set_label (button, gtk_action_get_label (action));
-// 
-//       ...
-// 
-//     }
-// }
-// 
-// static void
-// foo_bar_activatable_update (GtkActivatable       *activatable,
-// 			       GtkAction            *action,
-// 			       const gchar          *property_name)
-// {
-//   FooBarPrivate *priv = FOO_BAR_GET_PRIVATE (activatable);
-// 
-//   if (strcmp (property_name, "visible") == 0)
-//     {
-//       if (gtk_action_is_visible (action))
-// 	gtk_widget_show (GTK_WIDGET (activatable));
-//       else
-// 	gtk_widget_hide (GTK_WIDGET (activatable));
-//     }
-//   else if (strcmp (property_name, "sensitive") == 0)
-//     gtk_widget_set_sensitive (GTK_WIDGET (activatable), gtk_action_is_sensitive (action));
-// 
-//   ...
-// 
-//   if (!priv-&gt;use_action_appearance)
-//     return;
-// 
-//   if (strcmp (property_name, "stock-id") == 0)
-//     foo_bar_set_stock (button, gtk_action_get_stock_id (action));
-//   else if (strcmp (property_name, "label") == 0)
-//     foo_bar_set_label (button, gtk_action_get_label (action));
-// 
-//   ...
-// }
-// ]|
-type Activatable interface {
-	upcastToGtkActivatable() *ActivatableInstance
-
-	// DoSetRelatedAction wraps gtk_activatable_do_set_related_action
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- action Action: the #GtkAction to set 
-	//
-	// This is a utility function for #GtkActivatable implementors.
-	// 
-	// When implementing #GtkActivatable you must call this when
-	// handling changes of the #GtkActivatable:related-action, and
-	// you must also use this to break references in #GObject-&gt;dispose().
-	// 
-	// This function adds a reference to the currently set related
-	// action for you, it also makes sure the #GtkActivatable-&gt;update()
-	// method is called when the related #GtkAction properties change
-	// and registers to the action’s proxy list.
-	// 
-	// &gt; Be careful to call this before setting the local
-	// &gt; copy of the #GtkAction property, since this function uses
-	// &gt; gtk_activatable_get_related_action() to retrieve the
-	// &gt; previous action.
-	//
-	// Deprecated: (since 3.10.0) 
-	DoSetRelatedAction(Action)
-	// GetRelatedAction wraps gtk_activatable_get_related_action
-	// The function returns the following values:
-	// 
-	// 	- goret Action 
-	//
-	// Gets the related #GtkAction for @activatable.
-	//
-	// Deprecated: (since 3.10.0) 
-	GetRelatedAction() Action
-	// GetUseActionAppearance wraps gtk_activatable_get_use_action_appearance
-	// The function returns the following values:
-	// 
-	// 	- goret bool 
-	//
-	// Gets whether this activatable should reset its layout
-	// and appearance when setting the related action or when
-	// the action changes appearance.
-	//
-	// Deprecated: (since 3.10.0) 
-	GetUseActionAppearance() bool
-	// SetRelatedAction wraps gtk_activatable_set_related_action
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- action Action: the #GtkAction to set 
-	//
-	// Sets the related action on the @activatable object.
-	// 
-	// &gt; #GtkActivatable implementors need to handle the #GtkActivatable:related-action
-	// &gt; property and call gtk_activatable_do_set_related_action() when it changes.
-	//
-	// Deprecated: (since 3.10.0) 
-	SetRelatedAction(Action)
-	// SetUseActionAppearance wraps gtk_activatable_set_use_action_appearance
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- useAppearance bool: whether to use the actions appearance 
-	//
-	// Sets whether this activatable should reset its layout and appearance
-	// when setting the related action or when the action changes appearance
-	// 
-	// &gt; #GtkActivatable implementors need to handle the
-	// &gt; #GtkActivatable:use-action-appearance property and call
-	// &gt; gtk_activatable_sync_action_properties() to update @activatable
-	// &gt; if needed.
-	//
-	// Deprecated: (since 3.10.0) 
-	SetUseActionAppearance(bool)
-	// SyncActionProperties wraps gtk_activatable_sync_action_properties
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- action Action (nullable): the related #GtkAction or %NULL 
-	//
-	// This is called to update the activatable completely, this is called
-	// internally when the #GtkActivatable:related-action property is set
-	// or unset and by the implementing class when
-	// #GtkActivatable:use-action-appearance changes.
-	//
-	// Deprecated: (since 3.10.0) 
-	SyncActionProperties(Action)
-}
-
-var _ Activatable = (*ActivatableInstance)(nil)
-
-func unsafeWrapActivatable(base *gobject.ObjectInstance) *ActivatableInstance {
-	return &ActivatableInstance{
-		Instance: *base,
-	}
-}
-
-func marshalActivatableInstance(p unsafe.Pointer) (any, error) {
-	return unsafeWrapActivatable(gobject.ValueFromNative(p).Object()), nil
-}
-
-func (a *ActivatableInstance) upcastToGtkActivatable() *ActivatableInstance {
-	return a
-}
-
-// UnsafeActivatableFromGlibNone is used to convert raw GtkActivatable pointers to go while taking a reference and attaching a finalizer. This is used by the bindings internally.
-func UnsafeActivatableFromGlibNone(c unsafe.Pointer) Activatable {
-	return gobject.UnsafeObjectFromGlibNone(c).(Activatable)
-}
-
-// UnsafeActivatableFromGlibFull is used to convert raw GtkActivatable pointers to go while attaching a finalizer. This is used by the bindings internally.
-func UnsafeActivatableFromGlibFull(c unsafe.Pointer) Activatable {
-	return gobject.UnsafeObjectFromGlibFull(c).(Activatable)
-}
-
-// UnsafeActivatableToGlibNone is used to convert the instance to it's C value GtkActivatable. This is used by the bindings internally.
-func UnsafeActivatableToGlibNone(c Activatable) unsafe.Pointer {
-	i := c.upcastToGtkActivatable()
-	return gobject.UnsafeObjectToGlibNone(&i.Instance)
-}
-
-// UnsafeActivatableToGlibFull is used to convert the instance to it's C value GtkActivatable, while removeing the finalizer. This is used by the bindings internally.
-func UnsafeActivatableToGlibFull(c Activatable) unsafe.Pointer {
-	i := c.upcastToGtkActivatable()
-	return gobject.UnsafeObjectToGlibFull(&i.Instance)
-}
-
-// DoSetRelatedAction wraps gtk_activatable_do_set_related_action
-// 
-// The function takes the following parameters:
-// 
-// 	- action Action: the #GtkAction to set 
-//
-// This is a utility function for #GtkActivatable implementors.
-// 
-// When implementing #GtkActivatable you must call this when
-// handling changes of the #GtkActivatable:related-action, and
-// you must also use this to break references in #GObject-&gt;dispose().
-// 
-// This function adds a reference to the currently set related
-// action for you, it also makes sure the #GtkActivatable-&gt;update()
-// method is called when the related #GtkAction properties change
-// and registers to the action’s proxy list.
-// 
-// &gt; Be careful to call this before setting the local
-// &gt; copy of the #GtkAction property, since this function uses
-// &gt; gtk_activatable_get_related_action() to retrieve the
-// &gt; previous action.
-//
-// Deprecated: (since 3.10.0) 
-func (activatable *ActivatableInstance) DoSetRelatedAction(action Action) {
-	var carg0 *C.GtkActivatable // in, none, converted
-	var carg1 *C.GtkAction      // in, none, converted
-
-	carg0 = (*C.GtkActivatable)(UnsafeActivatableToGlibNone(activatable))
-	carg1 = (*C.GtkAction)(UnsafeActionToGlibNone(action))
-
-	C.gtk_activatable_do_set_related_action(carg0, carg1)
-	runtime.KeepAlive(activatable)
-	runtime.KeepAlive(action)
-}
-
-// GetRelatedAction wraps gtk_activatable_get_related_action
-// The function returns the following values:
-// 
-// 	- goret Action 
-//
-// Gets the related #GtkAction for @activatable.
-//
-// Deprecated: (since 3.10.0) 
-func (activatable *ActivatableInstance) GetRelatedAction() Action {
-	var carg0 *C.GtkActivatable // in, none, converted
-	var cret  *C.GtkAction      // return, none, converted
-
-	carg0 = (*C.GtkActivatable)(UnsafeActivatableToGlibNone(activatable))
-
-	cret = C.gtk_activatable_get_related_action(carg0)
-	runtime.KeepAlive(activatable)
-
-	var goret Action
-
-	goret = UnsafeActionFromGlibNone(unsafe.Pointer(cret))
-
-	return goret
-}
-
-// GetUseActionAppearance wraps gtk_activatable_get_use_action_appearance
-// The function returns the following values:
-// 
-// 	- goret bool 
-//
-// Gets whether this activatable should reset its layout
-// and appearance when setting the related action or when
-// the action changes appearance.
-//
-// Deprecated: (since 3.10.0) 
-func (activatable *ActivatableInstance) GetUseActionAppearance() bool {
-	var carg0 *C.GtkActivatable // in, none, converted
-	var cret  C.gboolean        // return
-
-	carg0 = (*C.GtkActivatable)(UnsafeActivatableToGlibNone(activatable))
-
-	cret = C.gtk_activatable_get_use_action_appearance(carg0)
-	runtime.KeepAlive(activatable)
-
-	var goret bool
-
-	if cret != 0 {
-		goret = true
-	}
-
-	return goret
-}
-
-// SetRelatedAction wraps gtk_activatable_set_related_action
-// 
-// The function takes the following parameters:
-// 
-// 	- action Action: the #GtkAction to set 
-//
-// Sets the related action on the @activatable object.
-// 
-// &gt; #GtkActivatable implementors need to handle the #GtkActivatable:related-action
-// &gt; property and call gtk_activatable_do_set_related_action() when it changes.
-//
-// Deprecated: (since 3.10.0) 
-func (activatable *ActivatableInstance) SetRelatedAction(action Action) {
-	var carg0 *C.GtkActivatable // in, none, converted
-	var carg1 *C.GtkAction      // in, none, converted
-
-	carg0 = (*C.GtkActivatable)(UnsafeActivatableToGlibNone(activatable))
-	carg1 = (*C.GtkAction)(UnsafeActionToGlibNone(action))
-
-	C.gtk_activatable_set_related_action(carg0, carg1)
-	runtime.KeepAlive(activatable)
-	runtime.KeepAlive(action)
-}
-
-// SetUseActionAppearance wraps gtk_activatable_set_use_action_appearance
-// 
-// The function takes the following parameters:
-// 
-// 	- useAppearance bool: whether to use the actions appearance 
-//
-// Sets whether this activatable should reset its layout and appearance
-// when setting the related action or when the action changes appearance
-// 
-// &gt; #GtkActivatable implementors need to handle the
-// &gt; #GtkActivatable:use-action-appearance property and call
-// &gt; gtk_activatable_sync_action_properties() to update @activatable
-// &gt; if needed.
-//
-// Deprecated: (since 3.10.0) 
-func (activatable *ActivatableInstance) SetUseActionAppearance(useAppearance bool) {
-	var carg0 *C.GtkActivatable // in, none, converted
-	var carg1 C.gboolean        // in
-
-	carg0 = (*C.GtkActivatable)(UnsafeActivatableToGlibNone(activatable))
-	if useAppearance {
-		carg1 = C.TRUE
-	}
-
-	C.gtk_activatable_set_use_action_appearance(carg0, carg1)
-	runtime.KeepAlive(activatable)
-	runtime.KeepAlive(useAppearance)
-}
-
-// SyncActionProperties wraps gtk_activatable_sync_action_properties
-// 
-// The function takes the following parameters:
-// 
-// 	- action Action (nullable): the related #GtkAction or %NULL 
-//
-// This is called to update the activatable completely, this is called
-// internally when the #GtkActivatable:related-action property is set
-// or unset and by the implementing class when
-// #GtkActivatable:use-action-appearance changes.
-//
-// Deprecated: (since 3.10.0) 
-func (activatable *ActivatableInstance) SyncActionProperties(action Action) {
-	var carg0 *C.GtkActivatable // in, none, converted
-	var carg1 *C.GtkAction      // in, none, converted, nullable
-
-	carg0 = (*C.GtkActivatable)(UnsafeActivatableToGlibNone(activatable))
-	if action != nil {
-		carg1 = (*C.GtkAction)(UnsafeActionToGlibNone(action))
-	}
-
-	C.gtk_activatable_sync_action_properties(carg0, carg1)
-	runtime.KeepAlive(activatable)
-	runtime.KeepAlive(action)
 }
 
 // AppChooserInstance is the instance type used by all types implementing GtkAppChooser. It is used internally by the bindings. Users should use the interface [AppChooser] instead.
@@ -10679,7 +8546,7 @@ func (self *AppChooserInstance) GetContentType() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 	defer C.free(unsafe.Pointer(cret))
 
 	return goret
@@ -10803,7 +8670,7 @@ type Buildable interface {
 	//
 	// Get the internal child called @childname of the @buildable object.
 	GetInternalChild(Builder, string) gobject.Object
-	// GetName wraps gtk_buildable_get_name
+	// GetBuildableName wraps gtk_buildable_get_name
 	// The function returns the following values:
 	// 
 	// 	- goret string 
@@ -10813,7 +8680,7 @@ type Buildable interface {
 	// #GtkBuilder sets the name based on the
 	// [GtkBuilder UI definition][BUILDER-UI]
 	// used to construct the @buildable.
-	GetName() string
+	GetBuildableName() string
 	// ParserFinished wraps gtk_buildable_parser_finished
 	// 
 	// The function takes the following parameters:
@@ -10836,14 +8703,14 @@ type Buildable interface {
 	//
 	// Sets the property name @name to @value on the @buildable object.
 	SetBuildableProperty(Builder, string, *gobject.Value)
-	// SetName wraps gtk_buildable_set_name
+	// SetBuildableName wraps gtk_buildable_set_name
 	// 
 	// The function takes the following parameters:
 	// 
 	// 	- name string: name to set 
 	//
 	// Sets the name of the @buildable object.
-	SetName(string)
+	SetBuildableName(string)
 }
 
 var _ Buildable = (*BuildableInstance)(nil)
@@ -11120,7 +8987,7 @@ func (buildable *BuildableInstance) GetInternalChild(builder Builder, childname 
 	return goret
 }
 
-// GetName wraps gtk_buildable_get_name
+// GetBuildableName wraps gtk_buildable_get_name
 // The function returns the following values:
 // 
 // 	- goret string 
@@ -11130,7 +8997,7 @@ func (buildable *BuildableInstance) GetInternalChild(builder Builder, childname 
 // #GtkBuilder sets the name based on the
 // [GtkBuilder UI definition][BUILDER-UI]
 // used to construct the @buildable.
-func (buildable *BuildableInstance) GetName() string {
+func (buildable *BuildableInstance) GetBuildableName() string {
 	var carg0 *C.GtkBuildable // in, none, converted
 	var cret  *C.gchar        // return, none, string, casted *C.gchar
 
@@ -11141,7 +9008,7 @@ func (buildable *BuildableInstance) GetName() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -11197,14 +9064,14 @@ func (buildable *BuildableInstance) SetBuildableProperty(builder Builder, name s
 	runtime.KeepAlive(value)
 }
 
-// SetName wraps gtk_buildable_set_name
+// SetBuildableName wraps gtk_buildable_set_name
 // 
 // The function takes the following parameters:
 // 
 // 	- name string: name to set 
 //
 // Sets the name of the @buildable object.
-func (buildable *BuildableInstance) SetName(name string) {
+func (buildable *BuildableInstance) SetBuildableName(name string) {
 	var carg0 *C.GtkBuildable // in, none, converted
 	var carg1 *C.gchar        // in, none, string, casted *C.gchar
 
@@ -11302,7 +9169,7 @@ type CellAccessibleParent interface {
 	// 
 	// 	- goret CellRendererState 
 	GetRendererState(CellAccessible) CellRendererState
-	// GrabFocus wraps gtk_cell_accessible_parent_grab_focus
+	// CellAccessibleParentGrabFocus wraps gtk_cell_accessible_parent_grab_focus
 	// 
 	// The function takes the following parameters:
 	// 
@@ -11311,7 +9178,7 @@ type CellAccessibleParent interface {
 	// The function returns the following values:
 	// 
 	// 	- goret bool 
-	GrabFocus(CellAccessible) bool
+	CellAccessibleParentGrabFocus(CellAccessible) bool
 	// UpdateRelationset wraps gtk_cell_accessible_parent_update_relationset
 	// 
 	// The function takes the following parameters:
@@ -11572,7 +9439,7 @@ func (parent *CellAccessibleParentInstance) GetRendererState(cell CellAccessible
 	return goret
 }
 
-// GrabFocus wraps gtk_cell_accessible_parent_grab_focus
+// CellAccessibleParentGrabFocus wraps gtk_cell_accessible_parent_grab_focus
 // 
 // The function takes the following parameters:
 // 
@@ -11581,7 +9448,7 @@ func (parent *CellAccessibleParentInstance) GetRendererState(cell CellAccessible
 // The function returns the following values:
 // 
 // 	- goret bool 
-func (parent *CellAccessibleParentInstance) GrabFocus(cell CellAccessible) bool {
+func (parent *CellAccessibleParentInstance) CellAccessibleParentGrabFocus(cell CellAccessible) bool {
 	var carg0 *C.GtkCellAccessibleParent // in, none, converted
 	var carg1 *C.GtkCellAccessible       // in, none, converted
 	var cret  C.gboolean                 // return
@@ -12731,7 +10598,7 @@ func (editable *EditableInstance) GetChars(startPos int, endPos int) string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 	defer C.free(unsafe.Pointer(cret))
 
 	return goret
@@ -14097,7 +11964,7 @@ func (chooser *FileChooserInstance) GetCurrentFolder() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 	defer C.free(unsafe.Pointer(cret))
 
 	return goret
@@ -14152,7 +12019,7 @@ func (chooser *FileChooserInstance) GetCurrentFolderURI() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 	defer C.free(unsafe.Pointer(cret))
 
 	return goret
@@ -14182,7 +12049,7 @@ func (chooser *FileChooserInstance) GetCurrentName() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 	defer C.free(unsafe.Pointer(cret))
 
 	return goret
@@ -14286,7 +12153,7 @@ func (chooser *FileChooserInstance) GetFilename() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 	defer C.free(unsafe.Pointer(cret))
 
 	return goret
@@ -14531,7 +12398,7 @@ func (chooser *FileChooserInstance) GetURI() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 	defer C.free(unsafe.Pointer(cret))
 
 	return goret
@@ -15801,7 +13668,7 @@ func (fontchooser *FontChooserInstance) GetFont() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 	defer C.free(unsafe.Pointer(cret))
 
 	return goret
@@ -16018,7 +13885,7 @@ func (fontchooser *FontChooserInstance) GetPreviewText() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 	defer C.free(unsafe.Pointer(cret))
 
 	return goret
@@ -16891,7 +14758,7 @@ func (chooser *RecentChooserInstance) GetCurrentURI() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 	defer C.free(unsafe.Pointer(cret))
 
 	return goret
@@ -17889,38 +15756,6 @@ var _ StyleProvider = (*StyleProviderInstance)(nil)
 // See gtk_style_context_add_provider() and gtk_style_context_add_provider_for_screen().
 type StyleProvider interface {
 	upcastToGtkStyleProvider() *StyleProviderInstance
-
-	// GetIconFactory wraps gtk_style_provider_get_icon_factory
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- path *WidgetPath: #GtkWidgetPath to query 
-	// 
-	// The function returns the following values:
-	// 
-	// 	- goret IconFactory 
-	//
-	// Returns the #GtkIconFactory defined to be in use for @path, or %NULL if none
-	// is defined.
-	//
-	// Deprecated: (since 3.8.0) Will always return %NULL for all GTK-provided style providers.
-	GetIconFactory(*WidgetPath) IconFactory
-	// GetStyle wraps gtk_style_provider_get_style
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- path *WidgetPath: #GtkWidgetPath to query 
-	// 
-	// The function returns the following values:
-	// 
-	// 	- goret StyleProperties 
-	//
-	// Returns the style settings affecting a widget defined by @path, or %NULL if
-	// @provider doesn’t contemplate styling @path.
-	//
-	// Deprecated: (since 3.8.0) Will always return %NULL for all GTK-provided style providers
-	//     as the interface cannot correctly work the way CSS is specified.
-	GetStyle(*WidgetPath) StyleProperties
 }
 
 var _ StyleProvider = (*StyleProviderInstance)(nil)
@@ -17961,73 +15796,6 @@ func UnsafeStyleProviderToGlibFull(c StyleProvider) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(&i.Instance)
 }
 
-// GetIconFactory wraps gtk_style_provider_get_icon_factory
-// 
-// The function takes the following parameters:
-// 
-// 	- path *WidgetPath: #GtkWidgetPath to query 
-// 
-// The function returns the following values:
-// 
-// 	- goret IconFactory 
-//
-// Returns the #GtkIconFactory defined to be in use for @path, or %NULL if none
-// is defined.
-//
-// Deprecated: (since 3.8.0) Will always return %NULL for all GTK-provided style providers.
-func (provider *StyleProviderInstance) GetIconFactory(path *WidgetPath) IconFactory {
-	var carg0 *C.GtkStyleProvider // in, none, converted
-	var carg1 *C.GtkWidgetPath    // in, none, converted
-	var cret  *C.GtkIconFactory   // return, none, converted
-
-	carg0 = (*C.GtkStyleProvider)(UnsafeStyleProviderToGlibNone(provider))
-	carg1 = (*C.GtkWidgetPath)(UnsafeWidgetPathToGlibNone(path))
-
-	cret = C.gtk_style_provider_get_icon_factory(carg0, carg1)
-	runtime.KeepAlive(provider)
-	runtime.KeepAlive(path)
-
-	var goret IconFactory
-
-	goret = UnsafeIconFactoryFromGlibNone(unsafe.Pointer(cret))
-
-	return goret
-}
-
-// GetStyle wraps gtk_style_provider_get_style
-// 
-// The function takes the following parameters:
-// 
-// 	- path *WidgetPath: #GtkWidgetPath to query 
-// 
-// The function returns the following values:
-// 
-// 	- goret StyleProperties 
-//
-// Returns the style settings affecting a widget defined by @path, or %NULL if
-// @provider doesn’t contemplate styling @path.
-//
-// Deprecated: (since 3.8.0) Will always return %NULL for all GTK-provided style providers
-//     as the interface cannot correctly work the way CSS is specified.
-func (provider *StyleProviderInstance) GetStyle(path *WidgetPath) StyleProperties {
-	var carg0 *C.GtkStyleProvider   // in, none, converted
-	var carg1 *C.GtkWidgetPath      // in, none, converted
-	var cret  *C.GtkStyleProperties // return, full, converted
-
-	carg0 = (*C.GtkStyleProvider)(UnsafeStyleProviderToGlibNone(provider))
-	carg1 = (*C.GtkWidgetPath)(UnsafeWidgetPathToGlibNone(path))
-
-	cret = C.gtk_style_provider_get_style(carg0, carg1)
-	runtime.KeepAlive(provider)
-	runtime.KeepAlive(path)
-
-	var goret StyleProperties
-
-	goret = UnsafeStylePropertiesFromGlibFull(unsafe.Pointer(cret))
-
-	return goret
-}
-
 // ToolShellInstance is the instance type used by all types implementing GtkToolShell. It is used internally by the bindings. Users should use the interface [ToolShell] instead.
 type ToolShellInstance struct {
 	_ [0]func() // equal guard
@@ -18052,15 +15820,15 @@ type ToolShell interface {
 	// call this function directly, but rely on gtk_tool_item_get_ellipsize_mode()
 	// instead.
 	GetEllipsizeMode() pango.EllipsizeMode
-	// GetIconSize wraps gtk_tool_shell_get_icon_size
+	// GetToolShellIconSize wraps gtk_tool_shell_get_icon_size
 	// The function returns the following values:
 	// 
 	// 	- goret int 
 	//
 	// Retrieves the icon size for the tool shell. Tool items must not call this
 	// function directly, but rely on gtk_tool_item_get_icon_size() instead.
-	GetIconSize() int
-	// GetOrientation wraps gtk_tool_shell_get_orientation
+	GetToolShellIconSize() int
+	// GetToolShellOrientation wraps gtk_tool_shell_get_orientation
 	// The function returns the following values:
 	// 
 	// 	- goret Orientation 
@@ -18068,7 +15836,7 @@ type ToolShell interface {
 	// Retrieves the current orientation for the tool shell. Tool items must not
 	// call this function directly, but rely on gtk_tool_item_get_orientation()
 	// instead.
-	GetOrientation() Orientation
+	GetToolShellOrientation() Orientation
 	// GetReliefStyle wraps gtk_tool_shell_get_relief_style
 	// The function returns the following values:
 	// 
@@ -18186,14 +15954,14 @@ func (shell *ToolShellInstance) GetEllipsizeMode() pango.EllipsizeMode {
 	return goret
 }
 
-// GetIconSize wraps gtk_tool_shell_get_icon_size
+// GetToolShellIconSize wraps gtk_tool_shell_get_icon_size
 // The function returns the following values:
 // 
 // 	- goret int 
 //
 // Retrieves the icon size for the tool shell. Tool items must not call this
 // function directly, but rely on gtk_tool_item_get_icon_size() instead.
-func (shell *ToolShellInstance) GetIconSize() int {
+func (shell *ToolShellInstance) GetToolShellIconSize() int {
 	var carg0 *C.GtkToolShell // in, none, converted
 	var cret  C.GtkIconSize   // return, none, casted, casted C.gint
 
@@ -18209,7 +15977,7 @@ func (shell *ToolShellInstance) GetIconSize() int {
 	return goret
 }
 
-// GetOrientation wraps gtk_tool_shell_get_orientation
+// GetToolShellOrientation wraps gtk_tool_shell_get_orientation
 // The function returns the following values:
 // 
 // 	- goret Orientation 
@@ -18217,7 +15985,7 @@ func (shell *ToolShellInstance) GetIconSize() int {
 // Retrieves the current orientation for the tool shell. Tool items must not
 // call this function directly, but rely on gtk_tool_item_get_orientation()
 // instead.
-func (shell *ToolShellInstance) GetOrientation() Orientation {
+func (shell *ToolShellInstance) GetToolShellOrientation() Orientation {
 	var carg0 *C.GtkToolShell  // in, none, converted
 	var cret  C.GtkOrientation // return, none, casted
 
@@ -19660,7 +17428,7 @@ func (treeModel *TreeModelInstance) GetStringFromIter(iter *TreeIter) string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 	defer C.free(unsafe.Pointer(cret))
 
 	return goret
@@ -21281,13 +19049,6 @@ type Accessible interface {
 	atk.Object
 	upcastToGtkAccessible() *AccessibleInstance
 
-	// ConnectWidgetDestroyed wraps gtk_accessible_connect_widget_destroyed
-	//
-	// This function specifies the callback function to be called
-	// when the widget corresponding to a GtkAccessible is destroyed.
-	//
-	// Deprecated: (since 3.4.0) Use gtk_accessible_set_widget() and its vfuncs.
-	ConnectWidgetDestroyed()
 	// GetWidget wraps gtk_accessible_get_widget
 	// The function returns the following values:
 	// 
@@ -21346,21 +19107,6 @@ func UnsafeAccessibleToGlibNone(c Accessible) unsafe.Pointer {
 // UnsafeAccessibleToGlibFull is used to convert the instance to it's C value GtkAccessible, while removeing the finalizer. This is used by the bindings internally.
 func UnsafeAccessibleToGlibFull(c Accessible) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
-}
-
-// ConnectWidgetDestroyed wraps gtk_accessible_connect_widget_destroyed
-//
-// This function specifies the callback function to be called
-// when the widget corresponding to a GtkAccessible is destroyed.
-//
-// Deprecated: (since 3.4.0) Use gtk_accessible_set_widget() and its vfuncs.
-func (accessible *AccessibleInstance) ConnectWidgetDestroyed() {
-	var carg0 *C.GtkAccessible // in, none, converted
-
-	carg0 = (*C.GtkAccessible)(UnsafeAccessibleToGlibNone(accessible))
-
-	C.gtk_accessible_connect_widget_destroyed(carg0)
-	runtime.KeepAlive(accessible)
 }
 
 // GetWidget wraps gtk_accessible_get_widget
@@ -21473,449 +19219,6 @@ var _ Action = (*ActionInstance)(nil)
 type Action interface {
 	gobject.Object
 	upcastToGtkAction() *ActionInstance
-
-	// Activate wraps gtk_action_activate
-	//
-	// Emits the “activate” signal on the specified action, if it isn't
-	// insensitive. This gets called by the proxy widgets when they get
-	// activated.
-	// 
-	// It can also be used to manually activate an action.
-	//
-	// Deprecated: (since 3.10.0) Use g_action_group_activate_action() on a #GAction instead
-	Activate()
-	// BlockActivate wraps gtk_action_block_activate
-	//
-	// Disable activation signals from the action
-	// 
-	// This is needed when updating the state of your proxy
-	// #GtkActivatable widget could result in calling gtk_action_activate(),
-	// this is a convenience function to avoid recursing in those
-	// cases (updating toggle state for instance).
-	//
-	// Deprecated: (since 3.10.0) Use g_simple_action_set_enabled() to disable the
-	// #GSimpleAction instead
-	BlockActivate()
-	// ConnectAccelerator wraps gtk_action_connect_accelerator
-	//
-	// Installs the accelerator for @action if @action has an
-	// accel path and group. See gtk_action_set_accel_path() and
-	// gtk_action_set_accel_group()
-	// 
-	// Since multiple proxies may independently trigger the installation
-	// of the accelerator, the @action counts the number of times this
-	// function has been called and doesn’t remove the accelerator until
-	// gtk_action_disconnect_accelerator() has been called as many times.
-	//
-	// Deprecated: (since 3.10.0) Use #GAction and the accelerator group on an associated
-	// #GtkMenu instead
-	ConnectAccelerator()
-	// CreateIcon wraps gtk_action_create_icon
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- iconSize int: the size of the icon (#GtkIconSize) that should
-	//      be created. 
-	// 
-	// The function returns the following values:
-	// 
-	// 	- goret Widget 
-	//
-	// This function is intended for use by action implementations to
-	// create icons displayed in the proxy widgets.
-	//
-	// Deprecated: (since 3.10.0) Use g_menu_item_set_icon() to set an icon on a #GMenuItem,
-	// or gtk_container_add() to add a #GtkImage to a #GtkButton
-	CreateIcon(int) Widget
-	// CreateMenu wraps gtk_action_create_menu
-	// The function returns the following values:
-	// 
-	// 	- goret Widget 
-	//
-	// If @action provides a #GtkMenu widget as a submenu for the menu
-	// item or the toolbar item it creates, this function returns an
-	// instance of that menu.
-	//
-	// Deprecated: (since 3.10.0) Use #GAction and #GMenuModel instead, and create a
-	// #GtkMenu with gtk_menu_new_from_model()
-	CreateMenu() Widget
-	// CreateMenuItem wraps gtk_action_create_menu_item
-	// The function returns the following values:
-	// 
-	// 	- goret Widget 
-	//
-	// Creates a menu item widget that proxies for the given action.
-	//
-	// Deprecated: (since 3.10.0) Use g_menu_item_new() and associate it with a #GAction
-	// instead.
-	CreateMenuItem() Widget
-	// CreateToolItem wraps gtk_action_create_tool_item
-	// The function returns the following values:
-	// 
-	// 	- goret Widget 
-	//
-	// Creates a toolbar item widget that proxies for the given action.
-	//
-	// Deprecated: (since 3.10.0) Use a #GtkToolItem and associate it with a #GAction using
-	// gtk_actionable_set_action_name() instead
-	CreateToolItem() Widget
-	// DisconnectAccelerator wraps gtk_action_disconnect_accelerator
-	//
-	// Undoes the effect of one call to gtk_action_connect_accelerator().
-	//
-	// Deprecated: (since 3.10.0) Use #GAction and the accelerator group on an associated
-	// #GtkMenu instead
-	DisconnectAccelerator()
-	// GetAccelPath wraps gtk_action_get_accel_path
-	// The function returns the following values:
-	// 
-	// 	- goret string 
-	//
-	// Returns the accel path for this action.
-	//
-	// Deprecated: (since 3.10.0) Use #GAction and the accelerator path on an associated
-	// #GtkMenu instead
-	GetAccelPath() string
-	// GetAlwaysShowImage wraps gtk_action_get_always_show_image
-	// The function returns the following values:
-	// 
-	// 	- goret bool 
-	//
-	// Returns whether @action's menu item proxies will always
-	// show their image, if available.
-	//
-	// Deprecated: (since 3.10.0) Use g_menu_item_get_attribute_value() on a #GMenuItem
-	// instead
-	GetAlwaysShowImage() bool
-	// GetGIcon wraps gtk_action_get_gicon
-	// The function returns the following values:
-	// 
-	// 	- goret gio.Icon 
-	//
-	// Gets the gicon of @action.
-	//
-	// Deprecated: (since 3.10.0) Use #GAction instead, and
-	// g_menu_item_get_attribute_value() to get an icon from a #GMenuItem
-	// associated with a #GAction
-	GetGIcon() gio.Icon
-	// GetIconName wraps gtk_action_get_icon_name
-	// The function returns the following values:
-	// 
-	// 	- goret string 
-	//
-	// Gets the icon name of @action.
-	//
-	// Deprecated: (since 3.10.0) Use #GAction instead, and
-	// g_menu_item_get_attribute_value() to get an icon from a #GMenuItem
-	// associated with a #GAction
-	GetIconName() string
-	// GetIsImportant wraps gtk_action_get_is_important
-	// The function returns the following values:
-	// 
-	// 	- goret bool 
-	//
-	// Checks whether @action is important or not
-	//
-	// Deprecated: (since 3.10.0) Use #GAction instead, and control and monitor whether
-	// labels are shown directly
-	GetIsImportant() bool
-	// GetLabel wraps gtk_action_get_label
-	// The function returns the following values:
-	// 
-	// 	- goret string 
-	//
-	// Gets the label text of @action.
-	//
-	// Deprecated: (since 3.10.0) Use #GAction instead, and get a label from a menu item
-	// with g_menu_item_get_attribute_value(). For #GtkActionable widgets, use the
-	// widget-specific API to get a label
-	GetLabel() string
-	// GetName wraps gtk_action_get_name
-	// The function returns the following values:
-	// 
-	// 	- goret string 
-	//
-	// Returns the name of the action.
-	//
-	// Deprecated: (since 3.10.0) Use g_action_get_name() on a #GAction instead
-	GetName() string
-	// GetSensitive wraps gtk_action_get_sensitive
-	// The function returns the following values:
-	// 
-	// 	- goret bool 
-	//
-	// Returns whether the action itself is sensitive. Note that this doesn’t
-	// necessarily mean effective sensitivity. See gtk_action_is_sensitive()
-	// for that.
-	//
-	// Deprecated: (since 3.10.0) Use g_action_get_enabled() on a #GAction
-	// instead
-	GetSensitive() bool
-	// GetShortLabel wraps gtk_action_get_short_label
-	// The function returns the following values:
-	// 
-	// 	- goret string 
-	//
-	// Gets the short label text of @action.
-	//
-	// Deprecated: (since 3.10.0) Use #GAction instead, which has no equivalent of short
-	// labels
-	GetShortLabel() string
-	// GetStockID wraps gtk_action_get_stock_id
-	// The function returns the following values:
-	// 
-	// 	- goret string 
-	//
-	// Gets the stock id of @action.
-	//
-	// Deprecated: (since 3.10.0) Use #GAction instead, which has no equivalent of stock
-	// items
-	GetStockID() string
-	// GetTooltip wraps gtk_action_get_tooltip
-	// The function returns the following values:
-	// 
-	// 	- goret string 
-	//
-	// Gets the tooltip text of @action.
-	//
-	// Deprecated: (since 3.10.0) Use #GAction instead, and get tooltips from associated
-	// #GtkActionable widgets with gtk_widget_get_tooltip_text()
-	GetTooltip() string
-	// GetVisible wraps gtk_action_get_visible
-	// The function returns the following values:
-	// 
-	// 	- goret bool 
-	//
-	// Returns whether the action itself is visible. Note that this doesn’t
-	// necessarily mean effective visibility. See gtk_action_is_sensitive()
-	// for that.
-	//
-	// Deprecated: (since 3.10.0) Use #GAction instead, and control and monitor the state of
-	// #GtkActionable widgets directly
-	GetVisible() bool
-	// GetVisibleHorizontal wraps gtk_action_get_visible_horizontal
-	// The function returns the following values:
-	// 
-	// 	- goret bool 
-	//
-	// Checks whether @action is visible when horizontal
-	//
-	// Deprecated: (since 3.10.0) Use #GAction instead, and control and monitor the
-	// visibility of associated widgets and menu items directly
-	GetVisibleHorizontal() bool
-	// GetVisibleVertical wraps gtk_action_get_visible_vertical
-	// The function returns the following values:
-	// 
-	// 	- goret bool 
-	//
-	// Checks whether @action is visible when horizontal
-	//
-	// Deprecated: (since 3.10.0) Use #GAction instead, and control and monitor the
-	// visibility of associated widgets and menu items directly
-	GetVisibleVertical() bool
-	// IsSensitive wraps gtk_action_is_sensitive
-	// The function returns the following values:
-	// 
-	// 	- goret bool 
-	//
-	// Returns whether the action is effectively sensitive.
-	//
-	// Deprecated: (since 3.10.0) Use g_action_get_enabled() on a #GAction
-	// instead
-	IsSensitive() bool
-	// IsVisible wraps gtk_action_is_visible
-	// The function returns the following values:
-	// 
-	// 	- goret bool 
-	//
-	// Returns whether the action is effectively visible.
-	//
-	// Deprecated: (since 3.10.0) Use #GAction instead, and control and monitor the state of
-	// #GtkActionable widgets directly
-	IsVisible() bool
-	// SetAccelGroup wraps gtk_action_set_accel_group
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- accelGroup AccelGroup (nullable): a #GtkAccelGroup or %NULL 
-	//
-	// Sets the #GtkAccelGroup in which the accelerator for this action
-	// will be installed.
-	//
-	// Deprecated: (since 3.10.0) Use #GAction and the accelerator group on an associated
-	// #GtkMenu instead
-	SetAccelGroup(AccelGroup)
-	// SetAccelPath wraps gtk_action_set_accel_path
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- accelPath string: the accelerator path 
-	//
-	// Sets the accel path for this action.  All proxy widgets associated
-	// with the action will have this accel path, so that their
-	// accelerators are consistent.
-	// 
-	// Note that @accel_path string will be stored in a #GQuark. Therefore, if you
-	// pass a static string, you can save some memory by interning it first with
-	// g_intern_static_string().
-	//
-	// Deprecated: (since 3.10.0) Use #GAction and the accelerator path on an associated
-	// #GtkMenu instead
-	SetAccelPath(string)
-	// SetAlwaysShowImage wraps gtk_action_set_always_show_image
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- alwaysShow bool: %TRUE if menuitem proxies should always show their image 
-	//
-	// Sets whether @action's menu item proxies will ignore the
-	// #GtkSettings:gtk-menu-images setting and always show their image, if available.
-	// 
-	// Use this if the menu item would be useless or hard to use
-	// without their image.
-	//
-	// Deprecated: (since 3.10.0) Use g_menu_item_set_icon() on a #GMenuItem instead, if the
-	// item should have an image
-	SetAlwaysShowImage(bool)
-	// SetGIcon wraps gtk_action_set_gicon
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- icon gio.Icon: the #GIcon to set 
-	//
-	// Sets the icon of @action.
-	//
-	// Deprecated: (since 3.10.0) Use #GAction instead, and g_menu_item_set_icon() to set an
-	// icon on a #GMenuItem associated with a #GAction, or gtk_container_add() to
-	// add a #GtkImage to a #GtkButton
-	SetGIcon(gio.Icon)
-	// SetIconName wraps gtk_action_set_icon_name
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- iconName string: the icon name to set 
-	//
-	// Sets the icon name on @action
-	//
-	// Deprecated: (since 3.10.0) Use #GAction instead, and g_menu_item_set_icon() to set an
-	// icon on a #GMenuItem associated with a #GAction, or gtk_container_add() to
-	// add a #GtkImage to a #GtkButton
-	SetIconName(string)
-	// SetIsImportant wraps gtk_action_set_is_important
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- isImportant bool: %TRUE to make the action important 
-	//
-	// Sets whether the action is important, this attribute is used
-	// primarily by toolbar items to decide whether to show a label
-	// or not.
-	//
-	// Deprecated: (since 3.10.0) Use #GAction instead, and control and monitor whether
-	// labels are shown directly
-	SetIsImportant(bool)
-	// SetLabel wraps gtk_action_set_label
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- label string: the label text to set 
-	//
-	// Sets the label of @action.
-	//
-	// Deprecated: (since 3.10.0) Use #GAction instead, and set a label on a menu item with
-	// g_menu_item_set_label(). For #GtkActionable widgets, use the widget-specific
-	// API to set a label
-	SetLabel(string)
-	// SetSensitive wraps gtk_action_set_sensitive
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- sensitive bool: %TRUE to make the action sensitive 
-	//
-	// Sets the :sensitive property of the action to @sensitive. Note that
-	// this doesn’t necessarily mean effective sensitivity. See
-	// gtk_action_is_sensitive()
-	// for that.
-	//
-	// Deprecated: (since 3.10.0) Use g_simple_action_set_enabled() on a #GSimpleAction
-	// instead
-	SetSensitive(bool)
-	// SetShortLabel wraps gtk_action_set_short_label
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- shortLabel string: the label text to set 
-	//
-	// Sets a shorter label text on @action.
-	//
-	// Deprecated: (since 3.10.0) Use #GAction instead, which has no equivalent of short
-	// labels
-	SetShortLabel(string)
-	// SetStockID wraps gtk_action_set_stock_id
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- stockId string: the stock id 
-	//
-	// Sets the stock id on @action
-	//
-	// Deprecated: (since 3.10.0) Use #GAction instead, which has no equivalent of stock
-	// items
-	SetStockID(string)
-	// SetTooltip wraps gtk_action_set_tooltip
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- tooltip string: the tooltip text 
-	//
-	// Sets the tooltip text on @action
-	//
-	// Deprecated: (since 3.10.0) Use #GAction instead, and set tooltips on associated
-	// #GtkActionable widgets with gtk_widget_set_tooltip_text()
-	SetTooltip(string)
-	// SetVisible wraps gtk_action_set_visible
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- visible bool: %TRUE to make the action visible 
-	//
-	// Sets the :visible property of the action to @visible. Note that
-	// this doesn’t necessarily mean effective visibility. See
-	// gtk_action_is_visible()
-	// for that.
-	//
-	// Deprecated: (since 3.10.0) Use #GAction instead, and control and monitor the state of
-	// #GtkActionable widgets directly
-	SetVisible(bool)
-	// SetVisibleHorizontal wraps gtk_action_set_visible_horizontal
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- visibleHorizontal bool: whether the action is visible horizontally 
-	//
-	// Sets whether @action is visible when horizontal
-	//
-	// Deprecated: (since 3.10.0) Use #GAction instead, and control and monitor the
-	// visibility of associated widgets and menu items directly
-	SetVisibleHorizontal(bool)
-	// SetVisibleVertical wraps gtk_action_set_visible_vertical
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- visibleVertical bool: whether the action is visible vertically 
-	//
-	// Sets whether @action is visible when vertical
-	//
-	// Deprecated: (since 3.10.0) Use #GAction instead, and control and monitor the
-	// visibility of associated widgets and menu items directly
-	SetVisibleVertical(bool)
-	// UnblockActivate wraps gtk_action_unblock_activate
-	//
-	// Reenable activation signals from the action
-	//
-	// Deprecated: (since 3.10.0) Use g_simple_action_set_enabled() to enable the
-	// #GSimpleAction instead
-	UnblockActivate()
 }
 
 func unsafeWrapAction(base *gobject.ObjectInstance) *ActionInstance {
@@ -21950,1039 +19253,6 @@ func UnsafeActionToGlibNone(c Action) unsafe.Pointer {
 // UnsafeActionToGlibFull is used to convert the instance to it's C value GtkAction, while removeing the finalizer. This is used by the bindings internally.
 func UnsafeActionToGlibFull(c Action) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
-}
-
-// NewActionInstance wraps gtk_action_new
-// 
-// The function takes the following parameters:
-// 
-// 	- name string: A unique name for the action 
-// 	- label string (nullable): the label displayed in menu items and on buttons,
-//         or %NULL 
-// 	- tooltip string (nullable): a tooltip for the action, or %NULL 
-// 	- stockId string (nullable): the stock icon to display in widgets representing
-//            the action, or %NULL 
-// 
-// The function returns the following values:
-// 
-// 	- goret Action 
-//
-// Creates a new #GtkAction object. To add the action to a
-// #GtkActionGroup and set the accelerator for the action,
-// call gtk_action_group_add_action_with_accel().
-// See the [UI Definition section][XML-UI] for information on allowed action
-// names.
-//
-// Deprecated: (since 3.10.0) Use #GAction instead, associating it to a widget with
-// #GtkActionable or creating a #GtkMenu with gtk_menu_new_from_model()
-func NewActionInstance(name string, label string, tooltip string, stockId string) Action {
-	var carg1 *C.gchar     // in, none, string, casted *C.gchar
-	var carg2 *C.gchar     // in, none, string, nullable-string
-	var carg3 *C.gchar     // in, none, string, nullable-string
-	var carg4 *C.gchar     // in, none, string, nullable-string
-	var cret  *C.GtkAction // return, full, converted
-
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(name)))
-	defer C.free(unsafe.Pointer(carg1))
-	if label != "" {
-		carg2 = (*C.gchar)(unsafe.Pointer(C.CString(label)))
-		defer C.free(unsafe.Pointer(carg2))
-	}
-	if tooltip != "" {
-		carg3 = (*C.gchar)(unsafe.Pointer(C.CString(tooltip)))
-		defer C.free(unsafe.Pointer(carg3))
-	}
-	if stockId != "" {
-		carg4 = (*C.gchar)(unsafe.Pointer(C.CString(stockId)))
-		defer C.free(unsafe.Pointer(carg4))
-	}
-
-	cret = C.gtk_action_new(carg1, carg2, carg3, carg4)
-	runtime.KeepAlive(name)
-	runtime.KeepAlive(label)
-	runtime.KeepAlive(tooltip)
-	runtime.KeepAlive(stockId)
-
-	var goret Action
-
-	goret = UnsafeActionFromGlibFull(unsafe.Pointer(cret))
-
-	return goret
-}
-
-// Activate wraps gtk_action_activate
-//
-// Emits the “activate” signal on the specified action, if it isn't
-// insensitive. This gets called by the proxy widgets when they get
-// activated.
-// 
-// It can also be used to manually activate an action.
-//
-// Deprecated: (since 3.10.0) Use g_action_group_activate_action() on a #GAction instead
-func (action *ActionInstance) Activate() {
-	var carg0 *C.GtkAction // in, none, converted
-
-	carg0 = (*C.GtkAction)(UnsafeActionToGlibNone(action))
-
-	C.gtk_action_activate(carg0)
-	runtime.KeepAlive(action)
-}
-
-// BlockActivate wraps gtk_action_block_activate
-//
-// Disable activation signals from the action
-// 
-// This is needed when updating the state of your proxy
-// #GtkActivatable widget could result in calling gtk_action_activate(),
-// this is a convenience function to avoid recursing in those
-// cases (updating toggle state for instance).
-//
-// Deprecated: (since 3.10.0) Use g_simple_action_set_enabled() to disable the
-// #GSimpleAction instead
-func (action *ActionInstance) BlockActivate() {
-	var carg0 *C.GtkAction // in, none, converted
-
-	carg0 = (*C.GtkAction)(UnsafeActionToGlibNone(action))
-
-	C.gtk_action_block_activate(carg0)
-	runtime.KeepAlive(action)
-}
-
-// ConnectAccelerator wraps gtk_action_connect_accelerator
-//
-// Installs the accelerator for @action if @action has an
-// accel path and group. See gtk_action_set_accel_path() and
-// gtk_action_set_accel_group()
-// 
-// Since multiple proxies may independently trigger the installation
-// of the accelerator, the @action counts the number of times this
-// function has been called and doesn’t remove the accelerator until
-// gtk_action_disconnect_accelerator() has been called as many times.
-//
-// Deprecated: (since 3.10.0) Use #GAction and the accelerator group on an associated
-// #GtkMenu instead
-func (action *ActionInstance) ConnectAccelerator() {
-	var carg0 *C.GtkAction // in, none, converted
-
-	carg0 = (*C.GtkAction)(UnsafeActionToGlibNone(action))
-
-	C.gtk_action_connect_accelerator(carg0)
-	runtime.KeepAlive(action)
-}
-
-// CreateIcon wraps gtk_action_create_icon
-// 
-// The function takes the following parameters:
-// 
-// 	- iconSize int: the size of the icon (#GtkIconSize) that should
-//      be created. 
-// 
-// The function returns the following values:
-// 
-// 	- goret Widget 
-//
-// This function is intended for use by action implementations to
-// create icons displayed in the proxy widgets.
-//
-// Deprecated: (since 3.10.0) Use g_menu_item_set_icon() to set an icon on a #GMenuItem,
-// or gtk_container_add() to add a #GtkImage to a #GtkButton
-func (action *ActionInstance) CreateIcon(iconSize int) Widget {
-	var carg0 *C.GtkAction  // in, none, converted
-	var carg1 C.GtkIconSize // in, none, casted, casted C.gint
-	var cret  *C.GtkWidget  // return, none, converted
-
-	carg0 = (*C.GtkAction)(UnsafeActionToGlibNone(action))
-	carg1 = C.GtkIconSize(iconSize)
-
-	cret = C.gtk_action_create_icon(carg0, carg1)
-	runtime.KeepAlive(action)
-	runtime.KeepAlive(iconSize)
-
-	var goret Widget
-
-	goret = UnsafeWidgetFromGlibNone(unsafe.Pointer(cret))
-
-	return goret
-}
-
-// CreateMenu wraps gtk_action_create_menu
-// The function returns the following values:
-// 
-// 	- goret Widget 
-//
-// If @action provides a #GtkMenu widget as a submenu for the menu
-// item or the toolbar item it creates, this function returns an
-// instance of that menu.
-//
-// Deprecated: (since 3.10.0) Use #GAction and #GMenuModel instead, and create a
-// #GtkMenu with gtk_menu_new_from_model()
-func (action *ActionInstance) CreateMenu() Widget {
-	var carg0 *C.GtkAction // in, none, converted
-	var cret  *C.GtkWidget // return, none, converted
-
-	carg0 = (*C.GtkAction)(UnsafeActionToGlibNone(action))
-
-	cret = C.gtk_action_create_menu(carg0)
-	runtime.KeepAlive(action)
-
-	var goret Widget
-
-	goret = UnsafeWidgetFromGlibNone(unsafe.Pointer(cret))
-
-	return goret
-}
-
-// CreateMenuItem wraps gtk_action_create_menu_item
-// The function returns the following values:
-// 
-// 	- goret Widget 
-//
-// Creates a menu item widget that proxies for the given action.
-//
-// Deprecated: (since 3.10.0) Use g_menu_item_new() and associate it with a #GAction
-// instead.
-func (action *ActionInstance) CreateMenuItem() Widget {
-	var carg0 *C.GtkAction // in, none, converted
-	var cret  *C.GtkWidget // return, none, converted
-
-	carg0 = (*C.GtkAction)(UnsafeActionToGlibNone(action))
-
-	cret = C.gtk_action_create_menu_item(carg0)
-	runtime.KeepAlive(action)
-
-	var goret Widget
-
-	goret = UnsafeWidgetFromGlibNone(unsafe.Pointer(cret))
-
-	return goret
-}
-
-// CreateToolItem wraps gtk_action_create_tool_item
-// The function returns the following values:
-// 
-// 	- goret Widget 
-//
-// Creates a toolbar item widget that proxies for the given action.
-//
-// Deprecated: (since 3.10.0) Use a #GtkToolItem and associate it with a #GAction using
-// gtk_actionable_set_action_name() instead
-func (action *ActionInstance) CreateToolItem() Widget {
-	var carg0 *C.GtkAction // in, none, converted
-	var cret  *C.GtkWidget // return, none, converted
-
-	carg0 = (*C.GtkAction)(UnsafeActionToGlibNone(action))
-
-	cret = C.gtk_action_create_tool_item(carg0)
-	runtime.KeepAlive(action)
-
-	var goret Widget
-
-	goret = UnsafeWidgetFromGlibNone(unsafe.Pointer(cret))
-
-	return goret
-}
-
-// DisconnectAccelerator wraps gtk_action_disconnect_accelerator
-//
-// Undoes the effect of one call to gtk_action_connect_accelerator().
-//
-// Deprecated: (since 3.10.0) Use #GAction and the accelerator group on an associated
-// #GtkMenu instead
-func (action *ActionInstance) DisconnectAccelerator() {
-	var carg0 *C.GtkAction // in, none, converted
-
-	carg0 = (*C.GtkAction)(UnsafeActionToGlibNone(action))
-
-	C.gtk_action_disconnect_accelerator(carg0)
-	runtime.KeepAlive(action)
-}
-
-// GetAccelPath wraps gtk_action_get_accel_path
-// The function returns the following values:
-// 
-// 	- goret string 
-//
-// Returns the accel path for this action.
-//
-// Deprecated: (since 3.10.0) Use #GAction and the accelerator path on an associated
-// #GtkMenu instead
-func (action *ActionInstance) GetAccelPath() string {
-	var carg0 *C.GtkAction // in, none, converted
-	var cret  *C.gchar     // return, none, string, casted *C.gchar
-
-	carg0 = (*C.GtkAction)(UnsafeActionToGlibNone(action))
-
-	cret = C.gtk_action_get_accel_path(carg0)
-	runtime.KeepAlive(action)
-
-	var goret string
-
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
-
-	return goret
-}
-
-// GetAlwaysShowImage wraps gtk_action_get_always_show_image
-// The function returns the following values:
-// 
-// 	- goret bool 
-//
-// Returns whether @action's menu item proxies will always
-// show their image, if available.
-//
-// Deprecated: (since 3.10.0) Use g_menu_item_get_attribute_value() on a #GMenuItem
-// instead
-func (action *ActionInstance) GetAlwaysShowImage() bool {
-	var carg0 *C.GtkAction // in, none, converted
-	var cret  C.gboolean   // return
-
-	carg0 = (*C.GtkAction)(UnsafeActionToGlibNone(action))
-
-	cret = C.gtk_action_get_always_show_image(carg0)
-	runtime.KeepAlive(action)
-
-	var goret bool
-
-	if cret != 0 {
-		goret = true
-	}
-
-	return goret
-}
-
-// GetGIcon wraps gtk_action_get_gicon
-// The function returns the following values:
-// 
-// 	- goret gio.Icon 
-//
-// Gets the gicon of @action.
-//
-// Deprecated: (since 3.10.0) Use #GAction instead, and
-// g_menu_item_get_attribute_value() to get an icon from a #GMenuItem
-// associated with a #GAction
-func (action *ActionInstance) GetGIcon() gio.Icon {
-	var carg0 *C.GtkAction // in, none, converted
-	var cret  *C.GIcon     // return, none, converted
-
-	carg0 = (*C.GtkAction)(UnsafeActionToGlibNone(action))
-
-	cret = C.gtk_action_get_gicon(carg0)
-	runtime.KeepAlive(action)
-
-	var goret gio.Icon
-
-	goret = gio.UnsafeIconFromGlibNone(unsafe.Pointer(cret))
-
-	return goret
-}
-
-// GetIconName wraps gtk_action_get_icon_name
-// The function returns the following values:
-// 
-// 	- goret string 
-//
-// Gets the icon name of @action.
-//
-// Deprecated: (since 3.10.0) Use #GAction instead, and
-// g_menu_item_get_attribute_value() to get an icon from a #GMenuItem
-// associated with a #GAction
-func (action *ActionInstance) GetIconName() string {
-	var carg0 *C.GtkAction // in, none, converted
-	var cret  *C.gchar     // return, none, string, casted *C.gchar
-
-	carg0 = (*C.GtkAction)(UnsafeActionToGlibNone(action))
-
-	cret = C.gtk_action_get_icon_name(carg0)
-	runtime.KeepAlive(action)
-
-	var goret string
-
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
-
-	return goret
-}
-
-// GetIsImportant wraps gtk_action_get_is_important
-// The function returns the following values:
-// 
-// 	- goret bool 
-//
-// Checks whether @action is important or not
-//
-// Deprecated: (since 3.10.0) Use #GAction instead, and control and monitor whether
-// labels are shown directly
-func (action *ActionInstance) GetIsImportant() bool {
-	var carg0 *C.GtkAction // in, none, converted
-	var cret  C.gboolean   // return
-
-	carg0 = (*C.GtkAction)(UnsafeActionToGlibNone(action))
-
-	cret = C.gtk_action_get_is_important(carg0)
-	runtime.KeepAlive(action)
-
-	var goret bool
-
-	if cret != 0 {
-		goret = true
-	}
-
-	return goret
-}
-
-// GetLabel wraps gtk_action_get_label
-// The function returns the following values:
-// 
-// 	- goret string 
-//
-// Gets the label text of @action.
-//
-// Deprecated: (since 3.10.0) Use #GAction instead, and get a label from a menu item
-// with g_menu_item_get_attribute_value(). For #GtkActionable widgets, use the
-// widget-specific API to get a label
-func (action *ActionInstance) GetLabel() string {
-	var carg0 *C.GtkAction // in, none, converted
-	var cret  *C.gchar     // return, none, string, casted *C.gchar
-
-	carg0 = (*C.GtkAction)(UnsafeActionToGlibNone(action))
-
-	cret = C.gtk_action_get_label(carg0)
-	runtime.KeepAlive(action)
-
-	var goret string
-
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
-
-	return goret
-}
-
-// GetName wraps gtk_action_get_name
-// The function returns the following values:
-// 
-// 	- goret string 
-//
-// Returns the name of the action.
-//
-// Deprecated: (since 3.10.0) Use g_action_get_name() on a #GAction instead
-func (action *ActionInstance) GetName() string {
-	var carg0 *C.GtkAction // in, none, converted
-	var cret  *C.gchar     // return, none, string, casted *C.gchar
-
-	carg0 = (*C.GtkAction)(UnsafeActionToGlibNone(action))
-
-	cret = C.gtk_action_get_name(carg0)
-	runtime.KeepAlive(action)
-
-	var goret string
-
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
-
-	return goret
-}
-
-// GetSensitive wraps gtk_action_get_sensitive
-// The function returns the following values:
-// 
-// 	- goret bool 
-//
-// Returns whether the action itself is sensitive. Note that this doesn’t
-// necessarily mean effective sensitivity. See gtk_action_is_sensitive()
-// for that.
-//
-// Deprecated: (since 3.10.0) Use g_action_get_enabled() on a #GAction
-// instead
-func (action *ActionInstance) GetSensitive() bool {
-	var carg0 *C.GtkAction // in, none, converted
-	var cret  C.gboolean   // return
-
-	carg0 = (*C.GtkAction)(UnsafeActionToGlibNone(action))
-
-	cret = C.gtk_action_get_sensitive(carg0)
-	runtime.KeepAlive(action)
-
-	var goret bool
-
-	if cret != 0 {
-		goret = true
-	}
-
-	return goret
-}
-
-// GetShortLabel wraps gtk_action_get_short_label
-// The function returns the following values:
-// 
-// 	- goret string 
-//
-// Gets the short label text of @action.
-//
-// Deprecated: (since 3.10.0) Use #GAction instead, which has no equivalent of short
-// labels
-func (action *ActionInstance) GetShortLabel() string {
-	var carg0 *C.GtkAction // in, none, converted
-	var cret  *C.gchar     // return, none, string, casted *C.gchar
-
-	carg0 = (*C.GtkAction)(UnsafeActionToGlibNone(action))
-
-	cret = C.gtk_action_get_short_label(carg0)
-	runtime.KeepAlive(action)
-
-	var goret string
-
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
-
-	return goret
-}
-
-// GetStockID wraps gtk_action_get_stock_id
-// The function returns the following values:
-// 
-// 	- goret string 
-//
-// Gets the stock id of @action.
-//
-// Deprecated: (since 3.10.0) Use #GAction instead, which has no equivalent of stock
-// items
-func (action *ActionInstance) GetStockID() string {
-	var carg0 *C.GtkAction // in, none, converted
-	var cret  *C.gchar     // return, none, string, casted *C.gchar
-
-	carg0 = (*C.GtkAction)(UnsafeActionToGlibNone(action))
-
-	cret = C.gtk_action_get_stock_id(carg0)
-	runtime.KeepAlive(action)
-
-	var goret string
-
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
-
-	return goret
-}
-
-// GetTooltip wraps gtk_action_get_tooltip
-// The function returns the following values:
-// 
-// 	- goret string 
-//
-// Gets the tooltip text of @action.
-//
-// Deprecated: (since 3.10.0) Use #GAction instead, and get tooltips from associated
-// #GtkActionable widgets with gtk_widget_get_tooltip_text()
-func (action *ActionInstance) GetTooltip() string {
-	var carg0 *C.GtkAction // in, none, converted
-	var cret  *C.gchar     // return, none, string, casted *C.gchar
-
-	carg0 = (*C.GtkAction)(UnsafeActionToGlibNone(action))
-
-	cret = C.gtk_action_get_tooltip(carg0)
-	runtime.KeepAlive(action)
-
-	var goret string
-
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
-
-	return goret
-}
-
-// GetVisible wraps gtk_action_get_visible
-// The function returns the following values:
-// 
-// 	- goret bool 
-//
-// Returns whether the action itself is visible. Note that this doesn’t
-// necessarily mean effective visibility. See gtk_action_is_sensitive()
-// for that.
-//
-// Deprecated: (since 3.10.0) Use #GAction instead, and control and monitor the state of
-// #GtkActionable widgets directly
-func (action *ActionInstance) GetVisible() bool {
-	var carg0 *C.GtkAction // in, none, converted
-	var cret  C.gboolean   // return
-
-	carg0 = (*C.GtkAction)(UnsafeActionToGlibNone(action))
-
-	cret = C.gtk_action_get_visible(carg0)
-	runtime.KeepAlive(action)
-
-	var goret bool
-
-	if cret != 0 {
-		goret = true
-	}
-
-	return goret
-}
-
-// GetVisibleHorizontal wraps gtk_action_get_visible_horizontal
-// The function returns the following values:
-// 
-// 	- goret bool 
-//
-// Checks whether @action is visible when horizontal
-//
-// Deprecated: (since 3.10.0) Use #GAction instead, and control and monitor the
-// visibility of associated widgets and menu items directly
-func (action *ActionInstance) GetVisibleHorizontal() bool {
-	var carg0 *C.GtkAction // in, none, converted
-	var cret  C.gboolean   // return
-
-	carg0 = (*C.GtkAction)(UnsafeActionToGlibNone(action))
-
-	cret = C.gtk_action_get_visible_horizontal(carg0)
-	runtime.KeepAlive(action)
-
-	var goret bool
-
-	if cret != 0 {
-		goret = true
-	}
-
-	return goret
-}
-
-// GetVisibleVertical wraps gtk_action_get_visible_vertical
-// The function returns the following values:
-// 
-// 	- goret bool 
-//
-// Checks whether @action is visible when horizontal
-//
-// Deprecated: (since 3.10.0) Use #GAction instead, and control and monitor the
-// visibility of associated widgets and menu items directly
-func (action *ActionInstance) GetVisibleVertical() bool {
-	var carg0 *C.GtkAction // in, none, converted
-	var cret  C.gboolean   // return
-
-	carg0 = (*C.GtkAction)(UnsafeActionToGlibNone(action))
-
-	cret = C.gtk_action_get_visible_vertical(carg0)
-	runtime.KeepAlive(action)
-
-	var goret bool
-
-	if cret != 0 {
-		goret = true
-	}
-
-	return goret
-}
-
-// IsSensitive wraps gtk_action_is_sensitive
-// The function returns the following values:
-// 
-// 	- goret bool 
-//
-// Returns whether the action is effectively sensitive.
-//
-// Deprecated: (since 3.10.0) Use g_action_get_enabled() on a #GAction
-// instead
-func (action *ActionInstance) IsSensitive() bool {
-	var carg0 *C.GtkAction // in, none, converted
-	var cret  C.gboolean   // return
-
-	carg0 = (*C.GtkAction)(UnsafeActionToGlibNone(action))
-
-	cret = C.gtk_action_is_sensitive(carg0)
-	runtime.KeepAlive(action)
-
-	var goret bool
-
-	if cret != 0 {
-		goret = true
-	}
-
-	return goret
-}
-
-// IsVisible wraps gtk_action_is_visible
-// The function returns the following values:
-// 
-// 	- goret bool 
-//
-// Returns whether the action is effectively visible.
-//
-// Deprecated: (since 3.10.0) Use #GAction instead, and control and monitor the state of
-// #GtkActionable widgets directly
-func (action *ActionInstance) IsVisible() bool {
-	var carg0 *C.GtkAction // in, none, converted
-	var cret  C.gboolean   // return
-
-	carg0 = (*C.GtkAction)(UnsafeActionToGlibNone(action))
-
-	cret = C.gtk_action_is_visible(carg0)
-	runtime.KeepAlive(action)
-
-	var goret bool
-
-	if cret != 0 {
-		goret = true
-	}
-
-	return goret
-}
-
-// SetAccelGroup wraps gtk_action_set_accel_group
-// 
-// The function takes the following parameters:
-// 
-// 	- accelGroup AccelGroup (nullable): a #GtkAccelGroup or %NULL 
-//
-// Sets the #GtkAccelGroup in which the accelerator for this action
-// will be installed.
-//
-// Deprecated: (since 3.10.0) Use #GAction and the accelerator group on an associated
-// #GtkMenu instead
-func (action *ActionInstance) SetAccelGroup(accelGroup AccelGroup) {
-	var carg0 *C.GtkAction     // in, none, converted
-	var carg1 *C.GtkAccelGroup // in, none, converted, nullable
-
-	carg0 = (*C.GtkAction)(UnsafeActionToGlibNone(action))
-	if accelGroup != nil {
-		carg1 = (*C.GtkAccelGroup)(UnsafeAccelGroupToGlibNone(accelGroup))
-	}
-
-	C.gtk_action_set_accel_group(carg0, carg1)
-	runtime.KeepAlive(action)
-	runtime.KeepAlive(accelGroup)
-}
-
-// SetAccelPath wraps gtk_action_set_accel_path
-// 
-// The function takes the following parameters:
-// 
-// 	- accelPath string: the accelerator path 
-//
-// Sets the accel path for this action.  All proxy widgets associated
-// with the action will have this accel path, so that their
-// accelerators are consistent.
-// 
-// Note that @accel_path string will be stored in a #GQuark. Therefore, if you
-// pass a static string, you can save some memory by interning it first with
-// g_intern_static_string().
-//
-// Deprecated: (since 3.10.0) Use #GAction and the accelerator path on an associated
-// #GtkMenu instead
-func (action *ActionInstance) SetAccelPath(accelPath string) {
-	var carg0 *C.GtkAction // in, none, converted
-	var carg1 *C.gchar     // in, none, string, casted *C.gchar
-
-	carg0 = (*C.GtkAction)(UnsafeActionToGlibNone(action))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(accelPath)))
-	defer C.free(unsafe.Pointer(carg1))
-
-	C.gtk_action_set_accel_path(carg0, carg1)
-	runtime.KeepAlive(action)
-	runtime.KeepAlive(accelPath)
-}
-
-// SetAlwaysShowImage wraps gtk_action_set_always_show_image
-// 
-// The function takes the following parameters:
-// 
-// 	- alwaysShow bool: %TRUE if menuitem proxies should always show their image 
-//
-// Sets whether @action's menu item proxies will ignore the
-// #GtkSettings:gtk-menu-images setting and always show their image, if available.
-// 
-// Use this if the menu item would be useless or hard to use
-// without their image.
-//
-// Deprecated: (since 3.10.0) Use g_menu_item_set_icon() on a #GMenuItem instead, if the
-// item should have an image
-func (action *ActionInstance) SetAlwaysShowImage(alwaysShow bool) {
-	var carg0 *C.GtkAction // in, none, converted
-	var carg1 C.gboolean   // in
-
-	carg0 = (*C.GtkAction)(UnsafeActionToGlibNone(action))
-	if alwaysShow {
-		carg1 = C.TRUE
-	}
-
-	C.gtk_action_set_always_show_image(carg0, carg1)
-	runtime.KeepAlive(action)
-	runtime.KeepAlive(alwaysShow)
-}
-
-// SetGIcon wraps gtk_action_set_gicon
-// 
-// The function takes the following parameters:
-// 
-// 	- icon gio.Icon: the #GIcon to set 
-//
-// Sets the icon of @action.
-//
-// Deprecated: (since 3.10.0) Use #GAction instead, and g_menu_item_set_icon() to set an
-// icon on a #GMenuItem associated with a #GAction, or gtk_container_add() to
-// add a #GtkImage to a #GtkButton
-func (action *ActionInstance) SetGIcon(icon gio.Icon) {
-	var carg0 *C.GtkAction // in, none, converted
-	var carg1 *C.GIcon     // in, none, converted
-
-	carg0 = (*C.GtkAction)(UnsafeActionToGlibNone(action))
-	carg1 = (*C.GIcon)(gio.UnsafeIconToGlibNone(icon))
-
-	C.gtk_action_set_gicon(carg0, carg1)
-	runtime.KeepAlive(action)
-	runtime.KeepAlive(icon)
-}
-
-// SetIconName wraps gtk_action_set_icon_name
-// 
-// The function takes the following parameters:
-// 
-// 	- iconName string: the icon name to set 
-//
-// Sets the icon name on @action
-//
-// Deprecated: (since 3.10.0) Use #GAction instead, and g_menu_item_set_icon() to set an
-// icon on a #GMenuItem associated with a #GAction, or gtk_container_add() to
-// add a #GtkImage to a #GtkButton
-func (action *ActionInstance) SetIconName(iconName string) {
-	var carg0 *C.GtkAction // in, none, converted
-	var carg1 *C.gchar     // in, none, string, casted *C.gchar
-
-	carg0 = (*C.GtkAction)(UnsafeActionToGlibNone(action))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(iconName)))
-	defer C.free(unsafe.Pointer(carg1))
-
-	C.gtk_action_set_icon_name(carg0, carg1)
-	runtime.KeepAlive(action)
-	runtime.KeepAlive(iconName)
-}
-
-// SetIsImportant wraps gtk_action_set_is_important
-// 
-// The function takes the following parameters:
-// 
-// 	- isImportant bool: %TRUE to make the action important 
-//
-// Sets whether the action is important, this attribute is used
-// primarily by toolbar items to decide whether to show a label
-// or not.
-//
-// Deprecated: (since 3.10.0) Use #GAction instead, and control and monitor whether
-// labels are shown directly
-func (action *ActionInstance) SetIsImportant(isImportant bool) {
-	var carg0 *C.GtkAction // in, none, converted
-	var carg1 C.gboolean   // in
-
-	carg0 = (*C.GtkAction)(UnsafeActionToGlibNone(action))
-	if isImportant {
-		carg1 = C.TRUE
-	}
-
-	C.gtk_action_set_is_important(carg0, carg1)
-	runtime.KeepAlive(action)
-	runtime.KeepAlive(isImportant)
-}
-
-// SetLabel wraps gtk_action_set_label
-// 
-// The function takes the following parameters:
-// 
-// 	- label string: the label text to set 
-//
-// Sets the label of @action.
-//
-// Deprecated: (since 3.10.0) Use #GAction instead, and set a label on a menu item with
-// g_menu_item_set_label(). For #GtkActionable widgets, use the widget-specific
-// API to set a label
-func (action *ActionInstance) SetLabel(label string) {
-	var carg0 *C.GtkAction // in, none, converted
-	var carg1 *C.gchar     // in, none, string, casted *C.gchar
-
-	carg0 = (*C.GtkAction)(UnsafeActionToGlibNone(action))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(label)))
-	defer C.free(unsafe.Pointer(carg1))
-
-	C.gtk_action_set_label(carg0, carg1)
-	runtime.KeepAlive(action)
-	runtime.KeepAlive(label)
-}
-
-// SetSensitive wraps gtk_action_set_sensitive
-// 
-// The function takes the following parameters:
-// 
-// 	- sensitive bool: %TRUE to make the action sensitive 
-//
-// Sets the :sensitive property of the action to @sensitive. Note that
-// this doesn’t necessarily mean effective sensitivity. See
-// gtk_action_is_sensitive()
-// for that.
-//
-// Deprecated: (since 3.10.0) Use g_simple_action_set_enabled() on a #GSimpleAction
-// instead
-func (action *ActionInstance) SetSensitive(sensitive bool) {
-	var carg0 *C.GtkAction // in, none, converted
-	var carg1 C.gboolean   // in
-
-	carg0 = (*C.GtkAction)(UnsafeActionToGlibNone(action))
-	if sensitive {
-		carg1 = C.TRUE
-	}
-
-	C.gtk_action_set_sensitive(carg0, carg1)
-	runtime.KeepAlive(action)
-	runtime.KeepAlive(sensitive)
-}
-
-// SetShortLabel wraps gtk_action_set_short_label
-// 
-// The function takes the following parameters:
-// 
-// 	- shortLabel string: the label text to set 
-//
-// Sets a shorter label text on @action.
-//
-// Deprecated: (since 3.10.0) Use #GAction instead, which has no equivalent of short
-// labels
-func (action *ActionInstance) SetShortLabel(shortLabel string) {
-	var carg0 *C.GtkAction // in, none, converted
-	var carg1 *C.gchar     // in, none, string, casted *C.gchar
-
-	carg0 = (*C.GtkAction)(UnsafeActionToGlibNone(action))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(shortLabel)))
-	defer C.free(unsafe.Pointer(carg1))
-
-	C.gtk_action_set_short_label(carg0, carg1)
-	runtime.KeepAlive(action)
-	runtime.KeepAlive(shortLabel)
-}
-
-// SetStockID wraps gtk_action_set_stock_id
-// 
-// The function takes the following parameters:
-// 
-// 	- stockId string: the stock id 
-//
-// Sets the stock id on @action
-//
-// Deprecated: (since 3.10.0) Use #GAction instead, which has no equivalent of stock
-// items
-func (action *ActionInstance) SetStockID(stockId string) {
-	var carg0 *C.GtkAction // in, none, converted
-	var carg1 *C.gchar     // in, none, string, casted *C.gchar
-
-	carg0 = (*C.GtkAction)(UnsafeActionToGlibNone(action))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(stockId)))
-	defer C.free(unsafe.Pointer(carg1))
-
-	C.gtk_action_set_stock_id(carg0, carg1)
-	runtime.KeepAlive(action)
-	runtime.KeepAlive(stockId)
-}
-
-// SetTooltip wraps gtk_action_set_tooltip
-// 
-// The function takes the following parameters:
-// 
-// 	- tooltip string: the tooltip text 
-//
-// Sets the tooltip text on @action
-//
-// Deprecated: (since 3.10.0) Use #GAction instead, and set tooltips on associated
-// #GtkActionable widgets with gtk_widget_set_tooltip_text()
-func (action *ActionInstance) SetTooltip(tooltip string) {
-	var carg0 *C.GtkAction // in, none, converted
-	var carg1 *C.gchar     // in, none, string, casted *C.gchar
-
-	carg0 = (*C.GtkAction)(UnsafeActionToGlibNone(action))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(tooltip)))
-	defer C.free(unsafe.Pointer(carg1))
-
-	C.gtk_action_set_tooltip(carg0, carg1)
-	runtime.KeepAlive(action)
-	runtime.KeepAlive(tooltip)
-}
-
-// SetVisible wraps gtk_action_set_visible
-// 
-// The function takes the following parameters:
-// 
-// 	- visible bool: %TRUE to make the action visible 
-//
-// Sets the :visible property of the action to @visible. Note that
-// this doesn’t necessarily mean effective visibility. See
-// gtk_action_is_visible()
-// for that.
-//
-// Deprecated: (since 3.10.0) Use #GAction instead, and control and monitor the state of
-// #GtkActionable widgets directly
-func (action *ActionInstance) SetVisible(visible bool) {
-	var carg0 *C.GtkAction // in, none, converted
-	var carg1 C.gboolean   // in
-
-	carg0 = (*C.GtkAction)(UnsafeActionToGlibNone(action))
-	if visible {
-		carg1 = C.TRUE
-	}
-
-	C.gtk_action_set_visible(carg0, carg1)
-	runtime.KeepAlive(action)
-	runtime.KeepAlive(visible)
-}
-
-// SetVisibleHorizontal wraps gtk_action_set_visible_horizontal
-// 
-// The function takes the following parameters:
-// 
-// 	- visibleHorizontal bool: whether the action is visible horizontally 
-//
-// Sets whether @action is visible when horizontal
-//
-// Deprecated: (since 3.10.0) Use #GAction instead, and control and monitor the
-// visibility of associated widgets and menu items directly
-func (action *ActionInstance) SetVisibleHorizontal(visibleHorizontal bool) {
-	var carg0 *C.GtkAction // in, none, converted
-	var carg1 C.gboolean   // in
-
-	carg0 = (*C.GtkAction)(UnsafeActionToGlibNone(action))
-	if visibleHorizontal {
-		carg1 = C.TRUE
-	}
-
-	C.gtk_action_set_visible_horizontal(carg0, carg1)
-	runtime.KeepAlive(action)
-	runtime.KeepAlive(visibleHorizontal)
-}
-
-// SetVisibleVertical wraps gtk_action_set_visible_vertical
-// 
-// The function takes the following parameters:
-// 
-// 	- visibleVertical bool: whether the action is visible vertically 
-//
-// Sets whether @action is visible when vertical
-//
-// Deprecated: (since 3.10.0) Use #GAction instead, and control and monitor the
-// visibility of associated widgets and menu items directly
-func (action *ActionInstance) SetVisibleVertical(visibleVertical bool) {
-	var carg0 *C.GtkAction // in, none, converted
-	var carg1 C.gboolean   // in
-
-	carg0 = (*C.GtkAction)(UnsafeActionToGlibNone(action))
-	if visibleVertical {
-		carg1 = C.TRUE
-	}
-
-	C.gtk_action_set_visible_vertical(carg0, carg1)
-	runtime.KeepAlive(action)
-	runtime.KeepAlive(visibleVertical)
-}
-
-// UnblockActivate wraps gtk_action_unblock_activate
-//
-// Reenable activation signals from the action
-//
-// Deprecated: (since 3.10.0) Use g_simple_action_set_enabled() to enable the
-// #GSimpleAction instead
-func (action *ActionInstance) UnblockActivate() {
-	var carg0 *C.GtkAction // in, none, converted
-
-	carg0 = (*C.GtkAction)(UnsafeActionToGlibNone(action))
-
-	C.gtk_action_unblock_activate(carg0)
-	runtime.KeepAlive(action)
 }
 
 // ActionGroupInstance is the instance type used by all types extending GtkActionGroup. It is used internally by the bindings. Users should use the interface [ActionGroup] instead.
@@ -23048,182 +19318,6 @@ var _ ActionGroup = (*ActionGroupInstance)(nil)
 type ActionGroup interface {
 	gobject.Object
 	upcastToGtkActionGroup() *ActionGroupInstance
-
-	// AddAction wraps gtk_action_group_add_action
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- action Action: an action 
-	//
-	// Adds an action object to the action group. Note that this function
-	// does not set up the accel path of the action, which can lead to problems
-	// if a user tries to modify the accelerator of a menuitem associated with
-	// the action. Therefore you must either set the accel path yourself with
-	// gtk_action_set_accel_path(), or use
-	// `gtk_action_group_add_action_with_accel (..., NULL)`.
-	//
-	// Deprecated: (since 3.10.0) 
-	AddAction(Action)
-	// AddActionWithAccel wraps gtk_action_group_add_action_with_accel
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- action Action: the action to add 
-	// 	- accelerator string (nullable): the accelerator for the action, in
-	//   the format understood by gtk_accelerator_parse(), or "" for no accelerator, or
-	//   %NULL to use the stock accelerator 
-	//
-	// Adds an action object to the action group and sets up the accelerator.
-	// 
-	// If @accelerator is %NULL, attempts to use the accelerator associated
-	// with the stock_id of the action.
-	// 
-	// Accel paths are set to `&lt;Actions&gt;/group-name/action-name`.
-	//
-	// Deprecated: (since 3.10.0) 
-	AddActionWithAccel(Action, string)
-	// GetAccelGroup wraps gtk_action_group_get_accel_group
-	// The function returns the following values:
-	// 
-	// 	- goret AccelGroup 
-	//
-	// Gets the accelerator group.
-	//
-	// Deprecated: (since 3.10.0) 
-	GetAccelGroup() AccelGroup
-	// GetAction wraps gtk_action_group_get_action
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- actionName string: the name of the action 
-	// 
-	// The function returns the following values:
-	// 
-	// 	- goret Action 
-	//
-	// Looks up an action in the action group by name.
-	//
-	// Deprecated: (since 3.10.0) 
-	GetAction(string) Action
-	// GetName wraps gtk_action_group_get_name
-	// The function returns the following values:
-	// 
-	// 	- goret string 
-	//
-	// Gets the name of the action group.
-	//
-	// Deprecated: (since 3.10.0) 
-	GetName() string
-	// GetSensitive wraps gtk_action_group_get_sensitive
-	// The function returns the following values:
-	// 
-	// 	- goret bool 
-	//
-	// Returns %TRUE if the group is sensitive.  The constituent actions
-	// can only be logically sensitive (see gtk_action_is_sensitive()) if
-	// they are sensitive (see gtk_action_get_sensitive()) and their group
-	// is sensitive.
-	//
-	// Deprecated: (since 3.10.0) 
-	GetSensitive() bool
-	// GetVisible wraps gtk_action_group_get_visible
-	// The function returns the following values:
-	// 
-	// 	- goret bool 
-	//
-	// Returns %TRUE if the group is visible.  The constituent actions
-	// can only be logically visible (see gtk_action_is_visible()) if
-	// they are visible (see gtk_action_get_visible()) and their group
-	// is visible.
-	//
-	// Deprecated: (since 3.10.0) 
-	GetVisible() bool
-	// RemoveAction wraps gtk_action_group_remove_action
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- action Action: an action 
-	//
-	// Removes an action object from the action group.
-	//
-	// Deprecated: (since 3.10.0) 
-	RemoveAction(Action)
-	// SetAccelGroup wraps gtk_action_group_set_accel_group
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- accelGroup AccelGroup (nullable): a #GtkAccelGroup to set or %NULL 
-	//
-	// Sets the accelerator group to be used by every action in this group.
-	//
-	// Deprecated: (since 3.10.0) 
-	SetAccelGroup(AccelGroup)
-	// SetSensitive wraps gtk_action_group_set_sensitive
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- sensitive bool: new sensitivity 
-	//
-	// Changes the sensitivity of @action_group
-	//
-	// Deprecated: (since 3.10.0) 
-	SetSensitive(bool)
-	// SetTranslateFunc wraps gtk_action_group_set_translate_func
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- fn TranslateFunc: a #GtkTranslateFunc 
-	//
-	// Sets a function to be used for translating the @label and @tooltip of
-	// #GtkActionEntrys added by gtk_action_group_add_actions().
-	// 
-	// If you’re using gettext(), it is enough to set the translation domain
-	// with gtk_action_group_set_translation_domain().
-	//
-	// Deprecated: (since 3.10.0) 
-	SetTranslateFunc(TranslateFunc)
-	// SetTranslationDomain wraps gtk_action_group_set_translation_domain
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- domain string (nullable): the translation domain to use for g_dgettext()
-	// calls, or %NULL to use the domain set with textdomain() 
-	//
-	// Sets the translation domain and uses g_dgettext() for translating the
-	// @label and @tooltip of #GtkActionEntrys added by
-	// gtk_action_group_add_actions().
-	// 
-	// If you’re not using gettext() for localization, see
-	// gtk_action_group_set_translate_func().
-	//
-	// Deprecated: (since 3.10.0) 
-	SetTranslationDomain(string)
-	// SetVisible wraps gtk_action_group_set_visible
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- visible bool: new visiblity 
-	//
-	// Changes the visible of @action_group.
-	//
-	// Deprecated: (since 3.10.0) 
-	SetVisible(bool)
-	// TranslateString wraps gtk_action_group_translate_string
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- str string: a string 
-	// 
-	// The function returns the following values:
-	// 
-	// 	- goret string 
-	//
-	// Translates a string using the function set with
-	// gtk_action_group_set_translate_func(). This
-	// is mainly intended for language bindings.
-	//
-	// Deprecated: (since 3.10.0) 
-	TranslateString(string) string
 }
 
 func unsafeWrapActionGroup(base *gobject.ObjectInstance) *ActionGroupInstance {
@@ -23260,422 +19354,6 @@ func UnsafeActionGroupToGlibFull(c ActionGroup) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewActionGroupInstance wraps gtk_action_group_new
-// 
-// The function takes the following parameters:
-// 
-// 	- name string: the name of the action group. 
-// 
-// The function returns the following values:
-// 
-// 	- goret ActionGroup 
-//
-// Creates a new #GtkActionGroup object. The name of the action group
-// is used when associating [keybindings][Action-Accel]
-// with the actions.
-//
-// Deprecated: (since 3.10.0) 
-func NewActionGroupInstance(name string) ActionGroup {
-	var carg1 *C.gchar          // in, none, string, casted *C.gchar
-	var cret  *C.GtkActionGroup // return, full, converted
-
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(name)))
-	defer C.free(unsafe.Pointer(carg1))
-
-	cret = C.gtk_action_group_new(carg1)
-	runtime.KeepAlive(name)
-
-	var goret ActionGroup
-
-	goret = UnsafeActionGroupFromGlibFull(unsafe.Pointer(cret))
-
-	return goret
-}
-
-// AddAction wraps gtk_action_group_add_action
-// 
-// The function takes the following parameters:
-// 
-// 	- action Action: an action 
-//
-// Adds an action object to the action group. Note that this function
-// does not set up the accel path of the action, which can lead to problems
-// if a user tries to modify the accelerator of a menuitem associated with
-// the action. Therefore you must either set the accel path yourself with
-// gtk_action_set_accel_path(), or use
-// `gtk_action_group_add_action_with_accel (..., NULL)`.
-//
-// Deprecated: (since 3.10.0) 
-func (actionGroup *ActionGroupInstance) AddAction(action Action) {
-	var carg0 *C.GtkActionGroup // in, none, converted
-	var carg1 *C.GtkAction      // in, none, converted
-
-	carg0 = (*C.GtkActionGroup)(UnsafeActionGroupToGlibNone(actionGroup))
-	carg1 = (*C.GtkAction)(UnsafeActionToGlibNone(action))
-
-	C.gtk_action_group_add_action(carg0, carg1)
-	runtime.KeepAlive(actionGroup)
-	runtime.KeepAlive(action)
-}
-
-// AddActionWithAccel wraps gtk_action_group_add_action_with_accel
-// 
-// The function takes the following parameters:
-// 
-// 	- action Action: the action to add 
-// 	- accelerator string (nullable): the accelerator for the action, in
-//   the format understood by gtk_accelerator_parse(), or "" for no accelerator, or
-//   %NULL to use the stock accelerator 
-//
-// Adds an action object to the action group and sets up the accelerator.
-// 
-// If @accelerator is %NULL, attempts to use the accelerator associated
-// with the stock_id of the action.
-// 
-// Accel paths are set to `&lt;Actions&gt;/group-name/action-name`.
-//
-// Deprecated: (since 3.10.0) 
-func (actionGroup *ActionGroupInstance) AddActionWithAccel(action Action, accelerator string) {
-	var carg0 *C.GtkActionGroup // in, none, converted
-	var carg1 *C.GtkAction      // in, none, converted
-	var carg2 *C.gchar          // in, none, string, nullable-string
-
-	carg0 = (*C.GtkActionGroup)(UnsafeActionGroupToGlibNone(actionGroup))
-	carg1 = (*C.GtkAction)(UnsafeActionToGlibNone(action))
-	if accelerator != "" {
-		carg2 = (*C.gchar)(unsafe.Pointer(C.CString(accelerator)))
-		defer C.free(unsafe.Pointer(carg2))
-	}
-
-	C.gtk_action_group_add_action_with_accel(carg0, carg1, carg2)
-	runtime.KeepAlive(actionGroup)
-	runtime.KeepAlive(action)
-	runtime.KeepAlive(accelerator)
-}
-
-// GetAccelGroup wraps gtk_action_group_get_accel_group
-// The function returns the following values:
-// 
-// 	- goret AccelGroup 
-//
-// Gets the accelerator group.
-//
-// Deprecated: (since 3.10.0) 
-func (actionGroup *ActionGroupInstance) GetAccelGroup() AccelGroup {
-	var carg0 *C.GtkActionGroup // in, none, converted
-	var cret  *C.GtkAccelGroup  // return, none, converted
-
-	carg0 = (*C.GtkActionGroup)(UnsafeActionGroupToGlibNone(actionGroup))
-
-	cret = C.gtk_action_group_get_accel_group(carg0)
-	runtime.KeepAlive(actionGroup)
-
-	var goret AccelGroup
-
-	goret = UnsafeAccelGroupFromGlibNone(unsafe.Pointer(cret))
-
-	return goret
-}
-
-// GetAction wraps gtk_action_group_get_action
-// 
-// The function takes the following parameters:
-// 
-// 	- actionName string: the name of the action 
-// 
-// The function returns the following values:
-// 
-// 	- goret Action 
-//
-// Looks up an action in the action group by name.
-//
-// Deprecated: (since 3.10.0) 
-func (actionGroup *ActionGroupInstance) GetAction(actionName string) Action {
-	var carg0 *C.GtkActionGroup // in, none, converted
-	var carg1 *C.gchar          // in, none, string, casted *C.gchar
-	var cret  *C.GtkAction      // return, none, converted
-
-	carg0 = (*C.GtkActionGroup)(UnsafeActionGroupToGlibNone(actionGroup))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(actionName)))
-	defer C.free(unsafe.Pointer(carg1))
-
-	cret = C.gtk_action_group_get_action(carg0, carg1)
-	runtime.KeepAlive(actionGroup)
-	runtime.KeepAlive(actionName)
-
-	var goret Action
-
-	goret = UnsafeActionFromGlibNone(unsafe.Pointer(cret))
-
-	return goret
-}
-
-// GetName wraps gtk_action_group_get_name
-// The function returns the following values:
-// 
-// 	- goret string 
-//
-// Gets the name of the action group.
-//
-// Deprecated: (since 3.10.0) 
-func (actionGroup *ActionGroupInstance) GetName() string {
-	var carg0 *C.GtkActionGroup // in, none, converted
-	var cret  *C.gchar          // return, none, string, casted *C.gchar
-
-	carg0 = (*C.GtkActionGroup)(UnsafeActionGroupToGlibNone(actionGroup))
-
-	cret = C.gtk_action_group_get_name(carg0)
-	runtime.KeepAlive(actionGroup)
-
-	var goret string
-
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
-
-	return goret
-}
-
-// GetSensitive wraps gtk_action_group_get_sensitive
-// The function returns the following values:
-// 
-// 	- goret bool 
-//
-// Returns %TRUE if the group is sensitive.  The constituent actions
-// can only be logically sensitive (see gtk_action_is_sensitive()) if
-// they are sensitive (see gtk_action_get_sensitive()) and their group
-// is sensitive.
-//
-// Deprecated: (since 3.10.0) 
-func (actionGroup *ActionGroupInstance) GetSensitive() bool {
-	var carg0 *C.GtkActionGroup // in, none, converted
-	var cret  C.gboolean        // return
-
-	carg0 = (*C.GtkActionGroup)(UnsafeActionGroupToGlibNone(actionGroup))
-
-	cret = C.gtk_action_group_get_sensitive(carg0)
-	runtime.KeepAlive(actionGroup)
-
-	var goret bool
-
-	if cret != 0 {
-		goret = true
-	}
-
-	return goret
-}
-
-// GetVisible wraps gtk_action_group_get_visible
-// The function returns the following values:
-// 
-// 	- goret bool 
-//
-// Returns %TRUE if the group is visible.  The constituent actions
-// can only be logically visible (see gtk_action_is_visible()) if
-// they are visible (see gtk_action_get_visible()) and their group
-// is visible.
-//
-// Deprecated: (since 3.10.0) 
-func (actionGroup *ActionGroupInstance) GetVisible() bool {
-	var carg0 *C.GtkActionGroup // in, none, converted
-	var cret  C.gboolean        // return
-
-	carg0 = (*C.GtkActionGroup)(UnsafeActionGroupToGlibNone(actionGroup))
-
-	cret = C.gtk_action_group_get_visible(carg0)
-	runtime.KeepAlive(actionGroup)
-
-	var goret bool
-
-	if cret != 0 {
-		goret = true
-	}
-
-	return goret
-}
-
-// RemoveAction wraps gtk_action_group_remove_action
-// 
-// The function takes the following parameters:
-// 
-// 	- action Action: an action 
-//
-// Removes an action object from the action group.
-//
-// Deprecated: (since 3.10.0) 
-func (actionGroup *ActionGroupInstance) RemoveAction(action Action) {
-	var carg0 *C.GtkActionGroup // in, none, converted
-	var carg1 *C.GtkAction      // in, none, converted
-
-	carg0 = (*C.GtkActionGroup)(UnsafeActionGroupToGlibNone(actionGroup))
-	carg1 = (*C.GtkAction)(UnsafeActionToGlibNone(action))
-
-	C.gtk_action_group_remove_action(carg0, carg1)
-	runtime.KeepAlive(actionGroup)
-	runtime.KeepAlive(action)
-}
-
-// SetAccelGroup wraps gtk_action_group_set_accel_group
-// 
-// The function takes the following parameters:
-// 
-// 	- accelGroup AccelGroup (nullable): a #GtkAccelGroup to set or %NULL 
-//
-// Sets the accelerator group to be used by every action in this group.
-//
-// Deprecated: (since 3.10.0) 
-func (actionGroup *ActionGroupInstance) SetAccelGroup(accelGroup AccelGroup) {
-	var carg0 *C.GtkActionGroup // in, none, converted
-	var carg1 *C.GtkAccelGroup  // in, none, converted, nullable
-
-	carg0 = (*C.GtkActionGroup)(UnsafeActionGroupToGlibNone(actionGroup))
-	if accelGroup != nil {
-		carg1 = (*C.GtkAccelGroup)(UnsafeAccelGroupToGlibNone(accelGroup))
-	}
-
-	C.gtk_action_group_set_accel_group(carg0, carg1)
-	runtime.KeepAlive(actionGroup)
-	runtime.KeepAlive(accelGroup)
-}
-
-// SetSensitive wraps gtk_action_group_set_sensitive
-// 
-// The function takes the following parameters:
-// 
-// 	- sensitive bool: new sensitivity 
-//
-// Changes the sensitivity of @action_group
-//
-// Deprecated: (since 3.10.0) 
-func (actionGroup *ActionGroupInstance) SetSensitive(sensitive bool) {
-	var carg0 *C.GtkActionGroup // in, none, converted
-	var carg1 C.gboolean        // in
-
-	carg0 = (*C.GtkActionGroup)(UnsafeActionGroupToGlibNone(actionGroup))
-	if sensitive {
-		carg1 = C.TRUE
-	}
-
-	C.gtk_action_group_set_sensitive(carg0, carg1)
-	runtime.KeepAlive(actionGroup)
-	runtime.KeepAlive(sensitive)
-}
-
-// SetTranslateFunc wraps gtk_action_group_set_translate_func
-// 
-// The function takes the following parameters:
-// 
-// 	- fn TranslateFunc: a #GtkTranslateFunc 
-//
-// Sets a function to be used for translating the @label and @tooltip of
-// #GtkActionEntrys added by gtk_action_group_add_actions().
-// 
-// If you’re using gettext(), it is enough to set the translation domain
-// with gtk_action_group_set_translation_domain().
-//
-// Deprecated: (since 3.10.0) 
-func (actionGroup *ActionGroupInstance) SetTranslateFunc(fn TranslateFunc) {
-	var carg0 *C.GtkActionGroup  // in, none, converted
-	var carg1 C.GtkTranslateFunc // callback, scope: notified, closure: carg2, destroy: carg3
-	var carg2 C.gpointer         // implicit
-	var carg3 C.GDestroyNotify   // implicit
-
-	carg0 = (*C.GtkActionGroup)(UnsafeActionGroupToGlibNone(actionGroup))
-	carg1 = (*[0]byte)(C._gotk4_gtk3_TranslateFunc)
-	carg2 = C.gpointer(gbox.Assign(fn))
-	carg3 = (C.GDestroyNotify)((*[0]byte)(C.callbackDelete))
-
-	C.gtk_action_group_set_translate_func(carg0, carg1, carg2, carg3)
-	runtime.KeepAlive(actionGroup)
-	runtime.KeepAlive(fn)
-}
-
-// SetTranslationDomain wraps gtk_action_group_set_translation_domain
-// 
-// The function takes the following parameters:
-// 
-// 	- domain string (nullable): the translation domain to use for g_dgettext()
-// calls, or %NULL to use the domain set with textdomain() 
-//
-// Sets the translation domain and uses g_dgettext() for translating the
-// @label and @tooltip of #GtkActionEntrys added by
-// gtk_action_group_add_actions().
-// 
-// If you’re not using gettext() for localization, see
-// gtk_action_group_set_translate_func().
-//
-// Deprecated: (since 3.10.0) 
-func (actionGroup *ActionGroupInstance) SetTranslationDomain(domain string) {
-	var carg0 *C.GtkActionGroup // in, none, converted
-	var carg1 *C.gchar          // in, none, string, nullable-string
-
-	carg0 = (*C.GtkActionGroup)(UnsafeActionGroupToGlibNone(actionGroup))
-	if domain != "" {
-		carg1 = (*C.gchar)(unsafe.Pointer(C.CString(domain)))
-		defer C.free(unsafe.Pointer(carg1))
-	}
-
-	C.gtk_action_group_set_translation_domain(carg0, carg1)
-	runtime.KeepAlive(actionGroup)
-	runtime.KeepAlive(domain)
-}
-
-// SetVisible wraps gtk_action_group_set_visible
-// 
-// The function takes the following parameters:
-// 
-// 	- visible bool: new visiblity 
-//
-// Changes the visible of @action_group.
-//
-// Deprecated: (since 3.10.0) 
-func (actionGroup *ActionGroupInstance) SetVisible(visible bool) {
-	var carg0 *C.GtkActionGroup // in, none, converted
-	var carg1 C.gboolean        // in
-
-	carg0 = (*C.GtkActionGroup)(UnsafeActionGroupToGlibNone(actionGroup))
-	if visible {
-		carg1 = C.TRUE
-	}
-
-	C.gtk_action_group_set_visible(carg0, carg1)
-	runtime.KeepAlive(actionGroup)
-	runtime.KeepAlive(visible)
-}
-
-// TranslateString wraps gtk_action_group_translate_string
-// 
-// The function takes the following parameters:
-// 
-// 	- str string: a string 
-// 
-// The function returns the following values:
-// 
-// 	- goret string 
-//
-// Translates a string using the function set with
-// gtk_action_group_set_translate_func(). This
-// is mainly intended for language bindings.
-//
-// Deprecated: (since 3.10.0) 
-func (actionGroup *ActionGroupInstance) TranslateString(str string) string {
-	var carg0 *C.GtkActionGroup // in, none, converted
-	var carg1 *C.gchar          // in, none, string, casted *C.gchar
-	var cret  *C.gchar          // return, none, string, casted *C.gchar
-
-	carg0 = (*C.GtkActionGroup)(UnsafeActionGroupToGlibNone(actionGroup))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(str)))
-	defer C.free(unsafe.Pointer(carg1))
-
-	cret = C.gtk_action_group_translate_string(carg0, carg1)
-	runtime.KeepAlive(actionGroup)
-	runtime.KeepAlive(str)
-
-	var goret string
-
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
-
-	return goret
-}
-
 // AdjustmentInstance is the instance type used by all types extending GtkAdjustment. It is used internally by the bindings. Users should use the interface [Adjustment] instead.
 type AdjustmentInstance struct {
 	_ [0]func() // equal guard
@@ -23697,15 +19375,6 @@ type Adjustment interface {
 	gobject.InitiallyUnowned
 	upcastToGtkAdjustment() *AdjustmentInstance
 
-	// Changed wraps gtk_adjustment_changed
-	//
-	// Emits a #GtkAdjustment::changed signal from the #GtkAdjustment.
-	// This is typically called by the owner of the #GtkAdjustment after it has
-	// changed any of the #GtkAdjustment properties other than the value.
-	//
-	// Deprecated: (since 3.18.0) GTK+ emits #GtkAdjustment::changed itself whenever any
-	//    of the properties (other than value) change
-	Changed()
 	// ClampPage wraps gtk_adjustment_clamp_page
 	// 
 	// The function takes the following parameters:
@@ -23873,15 +19542,6 @@ type Adjustment interface {
 	// effective range of allowed values goes from #GtkAdjustment:lower to
 	// #GtkAdjustment:upper - #GtkAdjustment:page-size.
 	SetValue(float64)
-	// ValueChanged wraps gtk_adjustment_value_changed
-	//
-	// Emits a #GtkAdjustment::value-changed signal from the #GtkAdjustment.
-	// This is typically called by the owner of the #GtkAdjustment after it has
-	// changed the #GtkAdjustment:value property.
-	//
-	// Deprecated: (since 3.18.0) GTK+ emits #GtkAdjustment::value-changed itself whenever
-	//    the value changes
-	ValueChanged()
 }
 
 func unsafeWrapAdjustment(base *gobject.ObjectInstance) *AdjustmentInstance {
@@ -23965,23 +19625,6 @@ func NewAdjustmentInstance(value float64, lower float64, upper float64, stepIncr
 	goret = UnsafeAdjustmentFromGlibNone(unsafe.Pointer(cret))
 
 	return goret
-}
-
-// Changed wraps gtk_adjustment_changed
-//
-// Emits a #GtkAdjustment::changed signal from the #GtkAdjustment.
-// This is typically called by the owner of the #GtkAdjustment after it has
-// changed any of the #GtkAdjustment properties other than the value.
-//
-// Deprecated: (since 3.18.0) GTK+ emits #GtkAdjustment::changed itself whenever any
-//    of the properties (other than value) change
-func (adjustment *AdjustmentInstance) Changed() {
-	var carg0 *C.GtkAdjustment // in, none, converted
-
-	carg0 = (*C.GtkAdjustment)(UnsafeAdjustmentToGlibNone(adjustment))
-
-	C.gtk_adjustment_changed(carg0)
-	runtime.KeepAlive(adjustment)
 }
 
 // ClampPage wraps gtk_adjustment_clamp_page
@@ -24360,23 +20003,6 @@ func (adjustment *AdjustmentInstance) SetValue(value float64) {
 	C.gtk_adjustment_set_value(carg0, carg1)
 	runtime.KeepAlive(adjustment)
 	runtime.KeepAlive(value)
-}
-
-// ValueChanged wraps gtk_adjustment_value_changed
-//
-// Emits a #GtkAdjustment::value-changed signal from the #GtkAdjustment.
-// This is typically called by the owner of the #GtkAdjustment after it has
-// changed the #GtkAdjustment:value property.
-//
-// Deprecated: (since 3.18.0) GTK+ emits #GtkAdjustment::value-changed itself whenever
-//    the value changes
-func (adjustment *AdjustmentInstance) ValueChanged() {
-	var carg0 *C.GtkAdjustment // in, none, converted
-
-	carg0 = (*C.GtkAdjustment)(UnsafeAdjustmentToGlibNone(adjustment))
-
-	C.gtk_adjustment_value_changed(carg0)
-	runtime.KeepAlive(adjustment)
 }
 
 // ApplicationInstance is the instance type used by all types extending GtkApplication. It is used internally by the bindings. Users should use the interface [Application] instead.
@@ -26680,7 +22306,7 @@ func (builder *BuilderInstance) GetTranslationDomain() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -28316,7 +23942,7 @@ func (area *CellAreaInstance) GetCurrentPathString() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -29923,30 +25549,6 @@ type CellRenderer interface {
 	//
 	// Returns the cell renderer’s sensitivity.
 	GetSensitive() bool
-	// GetSize wraps gtk_cell_renderer_get_size
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- widget Widget: the widget the renderer is rendering to 
-	// 	- cellArea *gdk.Rectangle (nullable): The area a cell will be allocated, or %NULL 
-	// 
-	// The function returns the following values:
-	// 
-	// 	- xOffset int: location to return x offset of cell relative to @cell_area, or %NULL 
-	// 	- yOffset int: location to return y offset of cell relative to @cell_area, or %NULL 
-	// 	- width int: location to return width needed to render a cell, or %NULL 
-	// 	- height int: location to return height needed to render a cell, or %NULL 
-	//
-	// Obtains the width and height needed to render the cell. Used by view
-	// widgets to determine the appropriate size for the cell_area passed to
-	// gtk_cell_renderer_render().  If @cell_area is not %NULL, fills in the
-	// x and y offsets (if set) of the cell relative to this location.
-	// 
-	// Please note that the values set in @width and @height, as well as those
-	// in @x_offset and @y_offset are inclusive of the xpad and ypad properties.
-	//
-	// Deprecated: (since 3.0.0) Use gtk_cell_renderer_get_preferred_size() instead.
-	GetSize(Widget, *gdk.Rectangle) (int, int, int, int)
 	// GetState wraps gtk_cell_renderer_get_state
 	// 
 	// The function takes the following parameters:
@@ -30421,62 +26023,6 @@ func (cell *CellRendererInstance) GetSensitive() bool {
 	}
 
 	return goret
-}
-
-// GetSize wraps gtk_cell_renderer_get_size
-// 
-// The function takes the following parameters:
-// 
-// 	- widget Widget: the widget the renderer is rendering to 
-// 	- cellArea *gdk.Rectangle (nullable): The area a cell will be allocated, or %NULL 
-// 
-// The function returns the following values:
-// 
-// 	- xOffset int: location to return x offset of cell relative to @cell_area, or %NULL 
-// 	- yOffset int: location to return y offset of cell relative to @cell_area, or %NULL 
-// 	- width int: location to return width needed to render a cell, or %NULL 
-// 	- height int: location to return height needed to render a cell, or %NULL 
-//
-// Obtains the width and height needed to render the cell. Used by view
-// widgets to determine the appropriate size for the cell_area passed to
-// gtk_cell_renderer_render().  If @cell_area is not %NULL, fills in the
-// x and y offsets (if set) of the cell relative to this location.
-// 
-// Please note that the values set in @width and @height, as well as those
-// in @x_offset and @y_offset are inclusive of the xpad and ypad properties.
-//
-// Deprecated: (since 3.0.0) Use gtk_cell_renderer_get_preferred_size() instead.
-func (cell *CellRendererInstance) GetSize(widget Widget, cellArea *gdk.Rectangle) (int, int, int, int) {
-	var carg0 *C.GtkCellRenderer // in, none, converted
-	var carg1 *C.GtkWidget       // in, none, converted
-	var carg2 *C.GdkRectangle    // in, none, converted, nullable
-	var carg3 C.gint             // out, full, casted
-	var carg4 C.gint             // out, full, casted
-	var carg5 C.gint             // out, full, casted
-	var carg6 C.gint             // out, full, casted
-
-	carg0 = (*C.GtkCellRenderer)(UnsafeCellRendererToGlibNone(cell))
-	carg1 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(widget))
-	if cellArea != nil {
-		carg2 = (*C.GdkRectangle)(gdk.UnsafeRectangleToGlibNone(cellArea))
-	}
-
-	C.gtk_cell_renderer_get_size(carg0, carg1, carg2, &carg3, &carg4, &carg5, &carg6)
-	runtime.KeepAlive(cell)
-	runtime.KeepAlive(widget)
-	runtime.KeepAlive(cellArea)
-
-	var xOffset int
-	var yOffset int
-	var width   int
-	var height  int
-
-	xOffset = int(carg3)
-	yOffset = int(carg4)
-	width = int(carg5)
-	height = int(carg6)
-
-	return xOffset, yOffset, width, height
 }
 
 // GetState wraps gtk_cell_renderer_get_state
@@ -31984,7 +27530,7 @@ func (clipboard *ClipboardInstance) WaitForText() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 	defer C.free(unsafe.Pointer(cret))
 
 	return goret
@@ -33065,7 +28611,7 @@ func (buffer *EntryBufferInstance) GetText() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -33577,7 +29123,7 @@ func (completion *EntryCompletionInstance) ComputePrefix(key string) string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 	defer C.free(unsafe.Pointer(cret))
 
 	return goret
@@ -33623,7 +29169,7 @@ func (completion *EntryCompletionInstance) GetCompletionPrefix() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -35141,7 +30687,7 @@ func (filter *FileFilterInstance) GetName() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -37363,7 +32909,7 @@ func (context *IMContextInstance) GetPreeditString() (string, *pango.AttrList, i
 	var attrs     *pango.AttrList
 	var cursorPos int
 
-	str = C.GoString((*C.gchar)(unsafe.Pointer(carg1)))
+	str = C.GoString((*C.char)(unsafe.Pointer(carg1)))
 	defer C.free(unsafe.Pointer(carg1))
 	attrs = pango.UnsafeAttrListFromGlibFull(unsafe.Pointer(carg2))
 	cursorPos = int(carg3)
@@ -37409,7 +32955,7 @@ func (context *IMContextInstance) GetSurrounding() (string, int, bool) {
 	var cursorIndex int
 	var goret       bool
 
-	text = C.GoString((*C.gchar)(unsafe.Pointer(carg1)))
+	text = C.GoString((*C.char)(unsafe.Pointer(carg1)))
 	defer C.free(unsafe.Pointer(carg1))
 	cursorIndex = int(carg2)
 	if cret != 0 {
@@ -37663,21 +33209,6 @@ type IMMulticontext interface {
 	IMContext
 	upcastToGtkIMMulticontext() *IMMulticontextInstance
 
-	// AppendMenuitems wraps gtk_im_multicontext_append_menuitems
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- menushell MenuShell: a #GtkMenuShell 
-	//
-	// Add menuitems for various available input methods to a menu;
-	// the menuitems, when selected, will switch the input method
-	// for the context and the global default input method.
-	//
-	// Deprecated: (since 3.10.0) It is better to use the system-wide input
-	//     method framework for changing input methods. Modern
-	//     desktop shells offer on-screen displays for this that
-	//     can triggered with a keyboard shortcut, e.g. Super-Space.
-	AppendMenuitems(MenuShell)
 	// GetContextID wraps gtk_im_multicontext_get_context_id
 	// The function returns the following values:
 	// 
@@ -37750,32 +33281,6 @@ func NewIMMulticontextInstance() IMContext {
 	goret = UnsafeIMContextFromGlibFull(unsafe.Pointer(cret))
 
 	return goret
-}
-
-// AppendMenuitems wraps gtk_im_multicontext_append_menuitems
-// 
-// The function takes the following parameters:
-// 
-// 	- menushell MenuShell: a #GtkMenuShell 
-//
-// Add menuitems for various available input methods to a menu;
-// the menuitems, when selected, will switch the input method
-// for the context and the global default input method.
-//
-// Deprecated: (since 3.10.0) It is better to use the system-wide input
-//     method framework for changing input methods. Modern
-//     desktop shells offer on-screen displays for this that
-//     can triggered with a keyboard shortcut, e.g. Super-Space.
-func (context *IMMulticontextInstance) AppendMenuitems(menushell MenuShell) {
-	var carg0 *C.GtkIMMulticontext // in, none, converted
-	var carg1 *C.GtkMenuShell      // in, none, converted
-
-	carg0 = (*C.GtkIMMulticontext)(UnsafeIMMulticontextToGlibNone(context))
-	carg1 = (*C.GtkMenuShell)(UnsafeMenuShellToGlibNone(menushell))
-
-	C.gtk_im_multicontext_append_menuitems(carg0, carg1)
-	runtime.KeepAlive(context)
-	runtime.KeepAlive(menushell)
 }
 
 // GetContextID wraps gtk_im_multicontext_get_context_id
@@ -37906,64 +33411,6 @@ var _ IconFactory = (*IconFactoryInstance)(nil)
 type IconFactory interface {
 	gobject.Object
 	upcastToGtkIconFactory() *IconFactoryInstance
-
-	// Add wraps gtk_icon_factory_add
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- stockId string: icon name 
-	// 	- iconSet *IconSet: icon set 
-	//
-	// Adds the given @icon_set to the icon factory, under the name
-	// @stock_id.  @stock_id should be namespaced for your application,
-	// e.g. “myapp-whatever-icon”.  Normally applications create a
-	// #GtkIconFactory, then add it to the list of default factories with
-	// gtk_icon_factory_add_default(). Then they pass the @stock_id to
-	// widgets such as #GtkImage to display the icon. Themes can provide
-	// an icon with the same name (such as "myapp-whatever-icon") to
-	// override your application’s default icons. If an icon already
-	// existed in @factory for @stock_id, it is unreferenced and replaced
-	// with the new @icon_set.
-	//
-	// Deprecated: (since 3.10.0) Use #GtkIconTheme instead.
-	Add(string, *IconSet)
-	// AddDefault wraps gtk_icon_factory_add_default
-	//
-	// Adds an icon factory to the list of icon factories searched by
-	// gtk_style_lookup_icon_set(). This means that, for example,
-	// gtk_image_new_from_stock() will be able to find icons in @factory.
-	// There will normally be an icon factory added for each library or
-	// application that comes with icons. The default icon factories
-	// can be overridden by themes.
-	//
-	// Deprecated: (since 3.10.0) Use #GtkIconTheme instead.
-	AddDefault()
-	// Lookup wraps gtk_icon_factory_lookup
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- stockId string: an icon name 
-	// 
-	// The function returns the following values:
-	// 
-	// 	- goret *IconSet 
-	//
-	// Looks up @stock_id in the icon factory, returning an icon set
-	// if found, otherwise %NULL. For display to the user, you should
-	// use gtk_style_lookup_icon_set() on the #GtkStyle for the
-	// widget that will display the icon, instead of using this
-	// function directly, so that themes are taken into account.
-	//
-	// Deprecated: (since 3.10.0) Use #GtkIconTheme instead.
-	Lookup(string) *IconSet
-	// RemoveDefault wraps gtk_icon_factory_remove_default
-	//
-	// Removes an icon factory from the list of default icon
-	// factories. Not normally used; you might use it for a library that
-	// can be unloaded or shut down.
-	//
-	// Deprecated: (since 3.10.0) Use #GtkIconTheme instead.
-	RemoveDefault()
 }
 
 func unsafeWrapIconFactory(base *gobject.ObjectInstance) *IconFactoryInstance {
@@ -37998,179 +33445,6 @@ func UnsafeIconFactoryToGlibNone(c IconFactory) unsafe.Pointer {
 // UnsafeIconFactoryToGlibFull is used to convert the instance to it's C value GtkIconFactory, while removeing the finalizer. This is used by the bindings internally.
 func UnsafeIconFactoryToGlibFull(c IconFactory) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
-}
-
-// NewIconFactoryInstance wraps gtk_icon_factory_new
-// The function returns the following values:
-// 
-// 	- goret IconFactory 
-//
-// Creates a new #GtkIconFactory. An icon factory manages a collection
-// of #GtkIconSets; a #GtkIconSet manages a set of variants of a
-// particular icon (i.e. a #GtkIconSet contains variants for different
-// sizes and widget states). Icons in an icon factory are named by a
-// stock ID, which is a simple string identifying the icon. Each
-// #GtkStyle has a list of #GtkIconFactorys derived from the current
-// theme; those icon factories are consulted first when searching for
-// an icon. If the theme doesn’t set a particular icon, GTK+ looks for
-// the icon in a list of default icon factories, maintained by
-// gtk_icon_factory_add_default() and
-// gtk_icon_factory_remove_default(). Applications with icons should
-// add a default icon factory with their icons, which will allow
-// themes to override the icons for the application.
-//
-// Deprecated: (since 3.10.0) Use #GtkIconTheme instead.
-func NewIconFactoryInstance() IconFactory {
-	var cret *C.GtkIconFactory // return, full, converted
-
-	cret = C.gtk_icon_factory_new()
-
-	var goret IconFactory
-
-	goret = UnsafeIconFactoryFromGlibFull(unsafe.Pointer(cret))
-
-	return goret
-}
-
-// IconFactoryInstanceLookupDefault wraps gtk_icon_factory_lookup_default
-// 
-// The function takes the following parameters:
-// 
-// 	- stockId string: an icon name 
-// 
-// The function returns the following values:
-// 
-// 	- goret *IconSet 
-//
-// Looks for an icon in the list of default icon factories.  For
-// display to the user, you should use gtk_style_lookup_icon_set() on
-// the #GtkStyle for the widget that will display the icon, instead of
-// using this function directly, so that themes are taken into
-// account.
-//
-// Deprecated: (since 3.10.0) Use #GtkIconTheme instead.
-func IconFactoryInstanceLookupDefault(stockId string) *IconSet {
-	var carg1 *C.gchar      // in, none, string, casted *C.gchar
-	var cret  *C.GtkIconSet // return, none, converted
-
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(stockId)))
-	defer C.free(unsafe.Pointer(carg1))
-
-	cret = C.gtk_icon_factory_lookup_default(carg1)
-	runtime.KeepAlive(stockId)
-
-	var goret *IconSet
-
-	goret = UnsafeIconSetFromGlibNone(unsafe.Pointer(cret))
-
-	return goret
-}
-
-// Add wraps gtk_icon_factory_add
-// 
-// The function takes the following parameters:
-// 
-// 	- stockId string: icon name 
-// 	- iconSet *IconSet: icon set 
-//
-// Adds the given @icon_set to the icon factory, under the name
-// @stock_id.  @stock_id should be namespaced for your application,
-// e.g. “myapp-whatever-icon”.  Normally applications create a
-// #GtkIconFactory, then add it to the list of default factories with
-// gtk_icon_factory_add_default(). Then they pass the @stock_id to
-// widgets such as #GtkImage to display the icon. Themes can provide
-// an icon with the same name (such as "myapp-whatever-icon") to
-// override your application’s default icons. If an icon already
-// existed in @factory for @stock_id, it is unreferenced and replaced
-// with the new @icon_set.
-//
-// Deprecated: (since 3.10.0) Use #GtkIconTheme instead.
-func (factory *IconFactoryInstance) Add(stockId string, iconSet *IconSet) {
-	var carg0 *C.GtkIconFactory // in, none, converted
-	var carg1 *C.gchar          // in, none, string, casted *C.gchar
-	var carg2 *C.GtkIconSet     // in, none, converted
-
-	carg0 = (*C.GtkIconFactory)(UnsafeIconFactoryToGlibNone(factory))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(stockId)))
-	defer C.free(unsafe.Pointer(carg1))
-	carg2 = (*C.GtkIconSet)(UnsafeIconSetToGlibNone(iconSet))
-
-	C.gtk_icon_factory_add(carg0, carg1, carg2)
-	runtime.KeepAlive(factory)
-	runtime.KeepAlive(stockId)
-	runtime.KeepAlive(iconSet)
-}
-
-// AddDefault wraps gtk_icon_factory_add_default
-//
-// Adds an icon factory to the list of icon factories searched by
-// gtk_style_lookup_icon_set(). This means that, for example,
-// gtk_image_new_from_stock() will be able to find icons in @factory.
-// There will normally be an icon factory added for each library or
-// application that comes with icons. The default icon factories
-// can be overridden by themes.
-//
-// Deprecated: (since 3.10.0) Use #GtkIconTheme instead.
-func (factory *IconFactoryInstance) AddDefault() {
-	var carg0 *C.GtkIconFactory // in, none, converted
-
-	carg0 = (*C.GtkIconFactory)(UnsafeIconFactoryToGlibNone(factory))
-
-	C.gtk_icon_factory_add_default(carg0)
-	runtime.KeepAlive(factory)
-}
-
-// Lookup wraps gtk_icon_factory_lookup
-// 
-// The function takes the following parameters:
-// 
-// 	- stockId string: an icon name 
-// 
-// The function returns the following values:
-// 
-// 	- goret *IconSet 
-//
-// Looks up @stock_id in the icon factory, returning an icon set
-// if found, otherwise %NULL. For display to the user, you should
-// use gtk_style_lookup_icon_set() on the #GtkStyle for the
-// widget that will display the icon, instead of using this
-// function directly, so that themes are taken into account.
-//
-// Deprecated: (since 3.10.0) Use #GtkIconTheme instead.
-func (factory *IconFactoryInstance) Lookup(stockId string) *IconSet {
-	var carg0 *C.GtkIconFactory // in, none, converted
-	var carg1 *C.gchar          // in, none, string, casted *C.gchar
-	var cret  *C.GtkIconSet     // return, none, converted
-
-	carg0 = (*C.GtkIconFactory)(UnsafeIconFactoryToGlibNone(factory))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(stockId)))
-	defer C.free(unsafe.Pointer(carg1))
-
-	cret = C.gtk_icon_factory_lookup(carg0, carg1)
-	runtime.KeepAlive(factory)
-	runtime.KeepAlive(stockId)
-
-	var goret *IconSet
-
-	goret = UnsafeIconSetFromGlibNone(unsafe.Pointer(cret))
-
-	return goret
-}
-
-// RemoveDefault wraps gtk_icon_factory_remove_default
-//
-// Removes an icon factory from the list of default icon
-// factories. Not normally used; you might use it for a library that
-// can be unloaded or shut down.
-//
-// Deprecated: (since 3.10.0) Use #GtkIconTheme instead.
-func (factory *IconFactoryInstance) RemoveDefault() {
-	var carg0 *C.GtkIconFactory // in, none, converted
-
-	carg0 = (*C.GtkIconFactory)(UnsafeIconFactoryToGlibNone(factory))
-
-	C.gtk_icon_factory_remove_default(carg0)
-	runtime.KeepAlive(factory)
 }
 
 // IconInfoInstance is the instance type used by all types extending GtkIconInfo. It is used internally by the bindings. Users should use the interface [IconInfo] instead.
@@ -38217,39 +33491,6 @@ type IconInfo interface {
 	// Note that for scaled icons the base size does
 	// not include the base scale.
 	GetBaseSize() int
-	// GetBuiltinPixbuf wraps gtk_icon_info_get_builtin_pixbuf
-	// The function returns the following values:
-	// 
-	// 	- goret gdkpixbuf.Pixbuf 
-	//
-	// Gets the built-in image for this icon, if any. To allow GTK+ to use
-	// built in icon images, you must pass the %GTK_ICON_LOOKUP_USE_BUILTIN
-	// to gtk_icon_theme_lookup_icon().
-	//
-	// Deprecated: (since 3.14.0) This function is deprecated, use
-	//     gtk_icon_theme_add_resource_path() instead of builtin icons.
-	GetBuiltinPixbuf() gdkpixbuf.Pixbuf
-	// GetDisplayName wraps gtk_icon_info_get_display_name
-	// The function returns the following values:
-	// 
-	// 	- goret string 
-	//
-	// This function is deprecated and always returns %NULL.
-	//
-	// Deprecated: (since 3.14.0) Display names are deprecated
-	GetDisplayName() string
-	// GetEmbeddedRect wraps gtk_icon_info_get_embedded_rect
-	// The function returns the following values:
-	// 
-	// 	- rectangle gdk.Rectangle: #GdkRectangle in which to store embedded
-	//   rectangle coordinates; coordinates are only stored
-	//   when this function returns %TRUE. 
-	// 	- goret bool 
-	//
-	// This function is deprecated and always returns %FALSE.
-	//
-	// Deprecated: (since 3.14.0) Embedded rectangles are deprecated
-	GetEmbeddedRect() (gdk.Rectangle, bool)
 	// GetFilename wraps gtk_icon_info_get_filename
 	// The function returns the following values:
 	// 
@@ -38446,56 +33687,6 @@ type IconInfo interface {
 	//
 	// Finishes an async icon load, see gtk_icon_info_load_symbolic_for_context_async().
 	LoadSymbolicForContextFinish(gio.AsyncResult) (bool, gdkpixbuf.Pixbuf, error)
-	// LoadSymbolicForStyle wraps gtk_icon_info_load_symbolic_for_style
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- style Style: a #GtkStyle to take the colors from 
-	// 	- state StateType: the widget state to use for colors 
-	// 
-	// The function returns the following values:
-	// 
-	// 	- wasSymbolic bool: a #gboolean, returns whether the
-	//     loaded icon was a symbolic one and whether the @fg color was
-	//     applied to it. 
-	// 	- goret gdkpixbuf.Pixbuf 
-	// 	- _goerr error (nullable): an error 
-	//
-	// Loads an icon, modifying it to match the system colours for the foreground,
-	// success, warning and error colors provided. If the icon is not a symbolic
-	// one, the function will return the result from gtk_icon_info_load_icon().
-	// 
-	// This allows loading symbolic icons that will match the system theme.
-	// 
-	// See gtk_icon_info_load_symbolic() for more details.
-	//
-	// Deprecated: (since 3.0.0) Use gtk_icon_info_load_symbolic_for_context() instead
-	LoadSymbolicForStyle(Style, StateType) (bool, gdkpixbuf.Pixbuf, error)
-	// SetRawCoordinates wraps gtk_icon_info_set_raw_coordinates
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- rawCoordinates bool: whether the coordinates of embedded rectangles
-	//     and attached points should be returned in their original
-	//     (unscaled) form. 
-	//
-	// Sets whether the coordinates returned by gtk_icon_info_get_embedded_rect()
-	// and gtk_icon_info_get_attach_points() should be returned in their
-	// original form as specified in the icon theme, instead of scaled
-	// appropriately for the pixbuf returned by gtk_icon_info_load_icon().
-	// 
-	// Raw coordinates are somewhat strange; they are specified to be with
-	// respect to the unscaled pixmap for PNG and XPM icons, but for SVG
-	// icons, they are in a 1000x1000 coordinate space that is scaled
-	// to the final size of the icon.  You can determine if the icon is an SVG
-	// icon by using gtk_icon_info_get_filename(), and seeing if it is non-%NULL
-	// and ends in “.svg”.
-	// 
-	// This function is provided primarily to allow compatibility wrappers
-	// for older API's, and is not expected to be useful for applications.
-	//
-	// Deprecated: (since 3.14.0) Embedded rectangles and attachment points are deprecated
-	SetRawCoordinates(bool)
 }
 
 func unsafeWrapIconInfo(base *gobject.ObjectInstance) *IconInfoInstance {
@@ -38621,91 +33812,6 @@ func (iconInfo *IconInfoInstance) GetBaseSize() int {
 	return goret
 }
 
-// GetBuiltinPixbuf wraps gtk_icon_info_get_builtin_pixbuf
-// The function returns the following values:
-// 
-// 	- goret gdkpixbuf.Pixbuf 
-//
-// Gets the built-in image for this icon, if any. To allow GTK+ to use
-// built in icon images, you must pass the %GTK_ICON_LOOKUP_USE_BUILTIN
-// to gtk_icon_theme_lookup_icon().
-//
-// Deprecated: (since 3.14.0) This function is deprecated, use
-//     gtk_icon_theme_add_resource_path() instead of builtin icons.
-func (iconInfo *IconInfoInstance) GetBuiltinPixbuf() gdkpixbuf.Pixbuf {
-	var carg0 *C.GtkIconInfo // in, none, converted
-	var cret  *C.GdkPixbuf   // return, none, converted
-
-	carg0 = (*C.GtkIconInfo)(UnsafeIconInfoToGlibNone(iconInfo))
-
-	cret = C.gtk_icon_info_get_builtin_pixbuf(carg0)
-	runtime.KeepAlive(iconInfo)
-
-	var goret gdkpixbuf.Pixbuf
-
-	goret = gdkpixbuf.UnsafePixbufFromGlibNone(unsafe.Pointer(cret))
-
-	return goret
-}
-
-// GetDisplayName wraps gtk_icon_info_get_display_name
-// The function returns the following values:
-// 
-// 	- goret string 
-//
-// This function is deprecated and always returns %NULL.
-//
-// Deprecated: (since 3.14.0) Display names are deprecated
-func (iconInfo *IconInfoInstance) GetDisplayName() string {
-	var carg0 *C.GtkIconInfo // in, none, converted
-	var cret  *C.gchar       // return, none, string, casted *C.gchar
-
-	carg0 = (*C.GtkIconInfo)(UnsafeIconInfoToGlibNone(iconInfo))
-
-	cret = C.gtk_icon_info_get_display_name(carg0)
-	runtime.KeepAlive(iconInfo)
-
-	var goret string
-
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
-
-	return goret
-}
-
-// GetEmbeddedRect wraps gtk_icon_info_get_embedded_rect
-// The function returns the following values:
-// 
-// 	- rectangle gdk.Rectangle: #GdkRectangle in which to store embedded
-//   rectangle coordinates; coordinates are only stored
-//   when this function returns %TRUE. 
-// 	- goret bool 
-//
-// This function is deprecated and always returns %FALSE.
-//
-// Deprecated: (since 3.14.0) Embedded rectangles are deprecated
-func (iconInfo *IconInfoInstance) GetEmbeddedRect() (gdk.Rectangle, bool) {
-	var carg0 *C.GtkIconInfo // in, none, converted
-	var carg1 C.GdkRectangle // out, transfer: none, C Pointers: 0, Name: Rectangle, caller-allocates
-	var cret  C.gboolean     // return
-
-	carg0 = (*C.GtkIconInfo)(UnsafeIconInfoToGlibNone(iconInfo))
-
-	cret = C.gtk_icon_info_get_embedded_rect(carg0, &carg1)
-	runtime.KeepAlive(iconInfo)
-
-	var rectangle gdk.Rectangle
-	var goret     bool
-
-	_ = rectangle
-	_ = carg1
-	panic("unimplemented conversion of gdk.Rectangle (GdkRectangle)")
-	if cret != 0 {
-		goret = true
-	}
-
-	return rectangle, goret
-}
-
 // GetFilename wraps gtk_icon_info_get_filename
 // The function returns the following values:
 // 
@@ -38726,7 +33832,7 @@ func (iconInfo *IconInfoInstance) GetFilename() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -39183,100 +34289,6 @@ func (iconInfo *IconInfoInstance) LoadSymbolicForContextFinish(res gio.AsyncResu
 	}
 
 	return wasSymbolic, goret, _goerr
-}
-
-// LoadSymbolicForStyle wraps gtk_icon_info_load_symbolic_for_style
-// 
-// The function takes the following parameters:
-// 
-// 	- style Style: a #GtkStyle to take the colors from 
-// 	- state StateType: the widget state to use for colors 
-// 
-// The function returns the following values:
-// 
-// 	- wasSymbolic bool: a #gboolean, returns whether the
-//     loaded icon was a symbolic one and whether the @fg color was
-//     applied to it. 
-// 	- goret gdkpixbuf.Pixbuf 
-// 	- _goerr error (nullable): an error 
-//
-// Loads an icon, modifying it to match the system colours for the foreground,
-// success, warning and error colors provided. If the icon is not a symbolic
-// one, the function will return the result from gtk_icon_info_load_icon().
-// 
-// This allows loading symbolic icons that will match the system theme.
-// 
-// See gtk_icon_info_load_symbolic() for more details.
-//
-// Deprecated: (since 3.0.0) Use gtk_icon_info_load_symbolic_for_context() instead
-func (iconInfo *IconInfoInstance) LoadSymbolicForStyle(style Style, state StateType) (bool, gdkpixbuf.Pixbuf, error) {
-	var carg0 *C.GtkIconInfo // in, none, converted
-	var carg1 *C.GtkStyle    // in, none, converted
-	var carg2 C.GtkStateType // in, none, casted
-	var carg3 C.gboolean     // out
-	var cret  *C.GdkPixbuf   // return, full, converted
-	var _cerr *C.GError      // out, full, converted, nullable
-
-	carg0 = (*C.GtkIconInfo)(UnsafeIconInfoToGlibNone(iconInfo))
-	carg1 = (*C.GtkStyle)(UnsafeStyleToGlibNone(style))
-	carg2 = C.GtkStateType(state)
-
-	cret = C.gtk_icon_info_load_symbolic_for_style(carg0, carg1, carg2, &carg3, &_cerr)
-	runtime.KeepAlive(iconInfo)
-	runtime.KeepAlive(style)
-	runtime.KeepAlive(state)
-
-	var wasSymbolic bool
-	var goret       gdkpixbuf.Pixbuf
-	var _goerr      error
-
-	if carg3 != 0 {
-		wasSymbolic = true
-	}
-	goret = gdkpixbuf.UnsafePixbufFromGlibFull(unsafe.Pointer(cret))
-	if _cerr != nil {
-		_goerr = glib.UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
-	}
-
-	return wasSymbolic, goret, _goerr
-}
-
-// SetRawCoordinates wraps gtk_icon_info_set_raw_coordinates
-// 
-// The function takes the following parameters:
-// 
-// 	- rawCoordinates bool: whether the coordinates of embedded rectangles
-//     and attached points should be returned in their original
-//     (unscaled) form. 
-//
-// Sets whether the coordinates returned by gtk_icon_info_get_embedded_rect()
-// and gtk_icon_info_get_attach_points() should be returned in their
-// original form as specified in the icon theme, instead of scaled
-// appropriately for the pixbuf returned by gtk_icon_info_load_icon().
-// 
-// Raw coordinates are somewhat strange; they are specified to be with
-// respect to the unscaled pixmap for PNG and XPM icons, but for SVG
-// icons, they are in a 1000x1000 coordinate space that is scaled
-// to the final size of the icon.  You can determine if the icon is an SVG
-// icon by using gtk_icon_info_get_filename(), and seeing if it is non-%NULL
-// and ends in “.svg”.
-// 
-// This function is provided primarily to allow compatibility wrappers
-// for older API's, and is not expected to be useful for applications.
-//
-// Deprecated: (since 3.14.0) Embedded rectangles and attachment points are deprecated
-func (iconInfo *IconInfoInstance) SetRawCoordinates(rawCoordinates bool) {
-	var carg0 *C.GtkIconInfo // in, none, converted
-	var carg1 C.gboolean     // in
-
-	carg0 = (*C.GtkIconInfo)(UnsafeIconInfoToGlibNone(iconInfo))
-	if rawCoordinates {
-		carg1 = C.TRUE
-	}
-
-	C.gtk_icon_info_set_raw_coordinates(carg0, carg1)
-	runtime.KeepAlive(iconInfo)
-	runtime.KeepAlive(rawCoordinates)
 }
 
 // IconThemeInstance is the instance type used by all types extending GtkIconTheme. It is used internally by the bindings. Users should use the interface [IconTheme] instead.
@@ -39738,47 +34750,6 @@ func NewIconThemeInstance() IconTheme {
 	goret = UnsafeIconThemeFromGlibFull(unsafe.Pointer(cret))
 
 	return goret
-}
-
-// IconThemeInstanceAddBuiltinIcon wraps gtk_icon_theme_add_builtin_icon
-// 
-// The function takes the following parameters:
-// 
-// 	- iconName string: the name of the icon to register 
-// 	- size int: the size in pixels at which to register the icon (different
-//     images can be registered for the same icon name at different sizes.) 
-// 	- pixbuf gdkpixbuf.Pixbuf: #GdkPixbuf that contains the image to use for @icon_name 
-//
-// Registers a built-in icon for icon theme lookups. The idea
-// of built-in icons is to allow an application or library
-// that uses themed icons to function requiring files to
-// be present in the file system. For instance, the default
-// images for all of GTK+’s stock icons are registered
-// as built-icons.
-// 
-// In general, if you use gtk_icon_theme_add_builtin_icon()
-// you should also install the icon in the icon theme, so
-// that the icon is generally available.
-// 
-// This function will generally be used with pixbufs loaded
-// via gdk_pixbuf_new_from_inline().
-//
-// Deprecated: (since 3.14.0) Use gtk_icon_theme_add_resource_path()
-//     to add application-specific icons to the icon theme.
-func IconThemeInstanceAddBuiltinIcon(iconName string, size int, pixbuf gdkpixbuf.Pixbuf) {
-	var carg1 *C.gchar     // in, none, string, casted *C.gchar
-	var carg2 C.gint       // in, none, casted
-	var carg3 *C.GdkPixbuf // in, none, converted
-
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(iconName)))
-	defer C.free(unsafe.Pointer(carg1))
-	carg2 = C.gint(size)
-	carg3 = (*C.GdkPixbuf)(gdkpixbuf.UnsafePixbufToGlibNone(pixbuf))
-
-	C.gtk_icon_theme_add_builtin_icon(carg1, carg2, carg3)
-	runtime.KeepAlive(iconName)
-	runtime.KeepAlive(size)
-	runtime.KeepAlive(pixbuf)
 }
 
 // IconThemeInstanceGetDefault wraps gtk_icon_theme_get_default
@@ -42269,141 +37240,6 @@ type NumerableIcon interface {
 	gio.EmblemedIcon
 	gio.Icon
 	upcastToGtkNumerableIcon() *NumerableIconInstance
-
-	// GetBackgroundGIcon wraps gtk_numerable_icon_get_background_gicon
-	// The function returns the following values:
-	// 
-	// 	- goret gio.Icon 
-	//
-	// Returns the #GIcon that was set as the base background image, or
-	// %NULL if there’s none. The caller of this function does not own
-	// a reference to the returned #GIcon.
-	//
-	// Deprecated: (since 3.14.0) 
-	GetBackgroundGIcon() gio.Icon
-	// GetBackgroundIconName wraps gtk_numerable_icon_get_background_icon_name
-	// The function returns the following values:
-	// 
-	// 	- goret string 
-	//
-	// Returns the icon name used as the base background image,
-	// or %NULL if there’s none.
-	//
-	// Deprecated: (since 3.14.0) 
-	GetBackgroundIconName() string
-	// GetCount wraps gtk_numerable_icon_get_count
-	// The function returns the following values:
-	// 
-	// 	- goret int 
-	//
-	// Returns the value currently displayed by @self.
-	//
-	// Deprecated: (since 3.14.0) 
-	GetCount() int
-	// GetLabel wraps gtk_numerable_icon_get_label
-	// The function returns the following values:
-	// 
-	// 	- goret string 
-	//
-	// Returns the currently displayed label of the icon, or %NULL.
-	//
-	// Deprecated: (since 3.14.0) 
-	GetLabel() string
-	// GetStyleContext wraps gtk_numerable_icon_get_style_context
-	// The function returns the following values:
-	// 
-	// 	- goret StyleContext 
-	//
-	// Returns the #GtkStyleContext used by the icon for theming,
-	// or %NULL if there’s none.
-	//
-	// Deprecated: (since 3.14.0) 
-	GetStyleContext() StyleContext
-	// SetBackgroundGIcon wraps gtk_numerable_icon_set_background_gicon
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- icon gio.Icon (nullable): a #GIcon, or %NULL 
-	//
-	// Updates the icon to use @icon as the base background image.
-	// If @icon is %NULL, @self will go back using style information
-	// or default theming for its background image.
-	// 
-	// If this method is called and an icon name was already set as
-	// background for the icon, @icon will be used, i.e. the last method
-	// called between gtk_numerable_icon_set_background_gicon() and
-	// gtk_numerable_icon_set_background_icon_name() has always priority.
-	//
-	// Deprecated: (since 3.14.0) 
-	SetBackgroundGIcon(gio.Icon)
-	// SetBackgroundIconName wraps gtk_numerable_icon_set_background_icon_name
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- iconName string (nullable): an icon name, or %NULL 
-	//
-	// Updates the icon to use the icon named @icon_name from the
-	// current icon theme as the base background image. If @icon_name
-	// is %NULL, @self will go back using style information or default
-	// theming for its background image.
-	// 
-	// If this method is called and a #GIcon was already set as
-	// background for the icon, @icon_name will be used, i.e. the
-	// last method called between gtk_numerable_icon_set_background_icon_name()
-	// and gtk_numerable_icon_set_background_gicon() has always priority.
-	//
-	// Deprecated: (since 3.14.0) 
-	SetBackgroundIconName(string)
-	// SetCount wraps gtk_numerable_icon_set_count
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- count int: a number between -99 and 99 
-	//
-	// Sets the currently displayed value of @self to @count.
-	// 
-	// The numeric value is always clamped to make it two digits, i.e.
-	// between -99 and 99. Setting a count of zero removes the emblem.
-	// If this method is called, and a label was already set on the icon,
-	// it will automatically be reset to %NULL before rendering the number,
-	// i.e. the last method called between gtk_numerable_icon_set_count()
-	// and gtk_numerable_icon_set_label() has always priority.
-	//
-	// Deprecated: (since 3.14.0) 
-	SetCount(int)
-	// SetLabel wraps gtk_numerable_icon_set_label
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- label string (nullable): a short label, or %NULL 
-	//
-	// Sets the currently displayed value of @self to the string
-	// in @label. Setting an empty label removes the emblem.
-	// 
-	// Note that this is meant for displaying short labels, such as
-	// roman numbers, or single letters. For roman numbers, consider
-	// using the Unicode characters U+2160 - U+217F. Strings longer
-	// than two characters will likely not be rendered very well.
-	// 
-	// If this method is called, and a number was already set on the
-	// icon, it will automatically be reset to zero before rendering
-	// the label, i.e. the last method called between
-	// gtk_numerable_icon_set_label() and gtk_numerable_icon_set_count()
-	// has always priority.
-	//
-	// Deprecated: (since 3.14.0) 
-	SetLabel(string)
-	// SetStyleContext wraps gtk_numerable_icon_set_style_context
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- style StyleContext: a #GtkStyleContext 
-	//
-	// Updates the icon to fetch theme information from the
-	// given #GtkStyleContext.
-	//
-	// Deprecated: (since 3.14.0) 
-	SetStyleContext(StyleContext)
 }
 
 func unsafeWrapNumerableIcon(base *gobject.ObjectInstance) *NumerableIconInstance {
@@ -42443,342 +37279,6 @@ func UnsafeNumerableIconToGlibNone(c NumerableIcon) unsafe.Pointer {
 // UnsafeNumerableIconToGlibFull is used to convert the instance to it's C value GtkNumerableIcon, while removeing the finalizer. This is used by the bindings internally.
 func UnsafeNumerableIconToGlibFull(c NumerableIcon) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
-}
-
-// NewNumerableIconInstance wraps gtk_numerable_icon_new
-// 
-// The function takes the following parameters:
-// 
-// 	- baseIcon gio.Icon: a #GIcon to overlay on 
-// 
-// The function returns the following values:
-// 
-// 	- goret gio.Icon 
-//
-// Creates a new unthemed #GtkNumerableIcon.
-//
-// Deprecated: (since 3.14.0) 
-func NewNumerableIconInstance(baseIcon gio.Icon) gio.Icon {
-	var carg1 *C.GIcon // in, none, converted
-	var cret  *C.GIcon // return, full, converted
-
-	carg1 = (*C.GIcon)(gio.UnsafeIconToGlibNone(baseIcon))
-
-	cret = C.gtk_numerable_icon_new(carg1)
-	runtime.KeepAlive(baseIcon)
-
-	var goret gio.Icon
-
-	goret = gio.UnsafeIconFromGlibFull(unsafe.Pointer(cret))
-
-	return goret
-}
-
-// NewNumerableIconInstanceWithStyleContext wraps gtk_numerable_icon_new_with_style_context
-// 
-// The function takes the following parameters:
-// 
-// 	- baseIcon gio.Icon: a #GIcon to overlay on 
-// 	- context StyleContext: a #GtkStyleContext 
-// 
-// The function returns the following values:
-// 
-// 	- goret gio.Icon 
-//
-// Creates a new #GtkNumerableIcon which will themed according
-// to the passed #GtkStyleContext. This is a convenience constructor
-// that calls gtk_numerable_icon_set_style_context() internally.
-//
-// Deprecated: (since 3.14.0) 
-func NewNumerableIconInstanceWithStyleContext(baseIcon gio.Icon, context StyleContext) gio.Icon {
-	var carg1 *C.GIcon           // in, none, converted
-	var carg2 *C.GtkStyleContext // in, none, converted
-	var cret  *C.GIcon           // return, full, converted
-
-	carg1 = (*C.GIcon)(gio.UnsafeIconToGlibNone(baseIcon))
-	carg2 = (*C.GtkStyleContext)(UnsafeStyleContextToGlibNone(context))
-
-	cret = C.gtk_numerable_icon_new_with_style_context(carg1, carg2)
-	runtime.KeepAlive(baseIcon)
-	runtime.KeepAlive(context)
-
-	var goret gio.Icon
-
-	goret = gio.UnsafeIconFromGlibFull(unsafe.Pointer(cret))
-
-	return goret
-}
-
-// GetBackgroundGIcon wraps gtk_numerable_icon_get_background_gicon
-// The function returns the following values:
-// 
-// 	- goret gio.Icon 
-//
-// Returns the #GIcon that was set as the base background image, or
-// %NULL if there’s none. The caller of this function does not own
-// a reference to the returned #GIcon.
-//
-// Deprecated: (since 3.14.0) 
-func (self *NumerableIconInstance) GetBackgroundGIcon() gio.Icon {
-	var carg0 *C.GtkNumerableIcon // in, none, converted
-	var cret  *C.GIcon            // return, none, converted
-
-	carg0 = (*C.GtkNumerableIcon)(UnsafeNumerableIconToGlibNone(self))
-
-	cret = C.gtk_numerable_icon_get_background_gicon(carg0)
-	runtime.KeepAlive(self)
-
-	var goret gio.Icon
-
-	goret = gio.UnsafeIconFromGlibNone(unsafe.Pointer(cret))
-
-	return goret
-}
-
-// GetBackgroundIconName wraps gtk_numerable_icon_get_background_icon_name
-// The function returns the following values:
-// 
-// 	- goret string 
-//
-// Returns the icon name used as the base background image,
-// or %NULL if there’s none.
-//
-// Deprecated: (since 3.14.0) 
-func (self *NumerableIconInstance) GetBackgroundIconName() string {
-	var carg0 *C.GtkNumerableIcon // in, none, converted
-	var cret  *C.gchar            // return, none, string, casted *C.gchar
-
-	carg0 = (*C.GtkNumerableIcon)(UnsafeNumerableIconToGlibNone(self))
-
-	cret = C.gtk_numerable_icon_get_background_icon_name(carg0)
-	runtime.KeepAlive(self)
-
-	var goret string
-
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
-
-	return goret
-}
-
-// GetCount wraps gtk_numerable_icon_get_count
-// The function returns the following values:
-// 
-// 	- goret int 
-//
-// Returns the value currently displayed by @self.
-//
-// Deprecated: (since 3.14.0) 
-func (self *NumerableIconInstance) GetCount() int {
-	var carg0 *C.GtkNumerableIcon // in, none, converted
-	var cret  C.gint              // return, none, casted
-
-	carg0 = (*C.GtkNumerableIcon)(UnsafeNumerableIconToGlibNone(self))
-
-	cret = C.gtk_numerable_icon_get_count(carg0)
-	runtime.KeepAlive(self)
-
-	var goret int
-
-	goret = int(cret)
-
-	return goret
-}
-
-// GetLabel wraps gtk_numerable_icon_get_label
-// The function returns the following values:
-// 
-// 	- goret string 
-//
-// Returns the currently displayed label of the icon, or %NULL.
-//
-// Deprecated: (since 3.14.0) 
-func (self *NumerableIconInstance) GetLabel() string {
-	var carg0 *C.GtkNumerableIcon // in, none, converted
-	var cret  *C.gchar            // return, none, string, casted *C.gchar
-
-	carg0 = (*C.GtkNumerableIcon)(UnsafeNumerableIconToGlibNone(self))
-
-	cret = C.gtk_numerable_icon_get_label(carg0)
-	runtime.KeepAlive(self)
-
-	var goret string
-
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
-
-	return goret
-}
-
-// GetStyleContext wraps gtk_numerable_icon_get_style_context
-// The function returns the following values:
-// 
-// 	- goret StyleContext 
-//
-// Returns the #GtkStyleContext used by the icon for theming,
-// or %NULL if there’s none.
-//
-// Deprecated: (since 3.14.0) 
-func (self *NumerableIconInstance) GetStyleContext() StyleContext {
-	var carg0 *C.GtkNumerableIcon // in, none, converted
-	var cret  *C.GtkStyleContext  // return, none, converted
-
-	carg0 = (*C.GtkNumerableIcon)(UnsafeNumerableIconToGlibNone(self))
-
-	cret = C.gtk_numerable_icon_get_style_context(carg0)
-	runtime.KeepAlive(self)
-
-	var goret StyleContext
-
-	goret = UnsafeStyleContextFromGlibNone(unsafe.Pointer(cret))
-
-	return goret
-}
-
-// SetBackgroundGIcon wraps gtk_numerable_icon_set_background_gicon
-// 
-// The function takes the following parameters:
-// 
-// 	- icon gio.Icon (nullable): a #GIcon, or %NULL 
-//
-// Updates the icon to use @icon as the base background image.
-// If @icon is %NULL, @self will go back using style information
-// or default theming for its background image.
-// 
-// If this method is called and an icon name was already set as
-// background for the icon, @icon will be used, i.e. the last method
-// called between gtk_numerable_icon_set_background_gicon() and
-// gtk_numerable_icon_set_background_icon_name() has always priority.
-//
-// Deprecated: (since 3.14.0) 
-func (self *NumerableIconInstance) SetBackgroundGIcon(icon gio.Icon) {
-	var carg0 *C.GtkNumerableIcon // in, none, converted
-	var carg1 *C.GIcon            // in, none, converted, nullable
-
-	carg0 = (*C.GtkNumerableIcon)(UnsafeNumerableIconToGlibNone(self))
-	if icon != nil {
-		carg1 = (*C.GIcon)(gio.UnsafeIconToGlibNone(icon))
-	}
-
-	C.gtk_numerable_icon_set_background_gicon(carg0, carg1)
-	runtime.KeepAlive(self)
-	runtime.KeepAlive(icon)
-}
-
-// SetBackgroundIconName wraps gtk_numerable_icon_set_background_icon_name
-// 
-// The function takes the following parameters:
-// 
-// 	- iconName string (nullable): an icon name, or %NULL 
-//
-// Updates the icon to use the icon named @icon_name from the
-// current icon theme as the base background image. If @icon_name
-// is %NULL, @self will go back using style information or default
-// theming for its background image.
-// 
-// If this method is called and a #GIcon was already set as
-// background for the icon, @icon_name will be used, i.e. the
-// last method called between gtk_numerable_icon_set_background_icon_name()
-// and gtk_numerable_icon_set_background_gicon() has always priority.
-//
-// Deprecated: (since 3.14.0) 
-func (self *NumerableIconInstance) SetBackgroundIconName(iconName string) {
-	var carg0 *C.GtkNumerableIcon // in, none, converted
-	var carg1 *C.gchar            // in, none, string, nullable-string
-
-	carg0 = (*C.GtkNumerableIcon)(UnsafeNumerableIconToGlibNone(self))
-	if iconName != "" {
-		carg1 = (*C.gchar)(unsafe.Pointer(C.CString(iconName)))
-		defer C.free(unsafe.Pointer(carg1))
-	}
-
-	C.gtk_numerable_icon_set_background_icon_name(carg0, carg1)
-	runtime.KeepAlive(self)
-	runtime.KeepAlive(iconName)
-}
-
-// SetCount wraps gtk_numerable_icon_set_count
-// 
-// The function takes the following parameters:
-// 
-// 	- count int: a number between -99 and 99 
-//
-// Sets the currently displayed value of @self to @count.
-// 
-// The numeric value is always clamped to make it two digits, i.e.
-// between -99 and 99. Setting a count of zero removes the emblem.
-// If this method is called, and a label was already set on the icon,
-// it will automatically be reset to %NULL before rendering the number,
-// i.e. the last method called between gtk_numerable_icon_set_count()
-// and gtk_numerable_icon_set_label() has always priority.
-//
-// Deprecated: (since 3.14.0) 
-func (self *NumerableIconInstance) SetCount(count int) {
-	var carg0 *C.GtkNumerableIcon // in, none, converted
-	var carg1 C.gint              // in, none, casted
-
-	carg0 = (*C.GtkNumerableIcon)(UnsafeNumerableIconToGlibNone(self))
-	carg1 = C.gint(count)
-
-	C.gtk_numerable_icon_set_count(carg0, carg1)
-	runtime.KeepAlive(self)
-	runtime.KeepAlive(count)
-}
-
-// SetLabel wraps gtk_numerable_icon_set_label
-// 
-// The function takes the following parameters:
-// 
-// 	- label string (nullable): a short label, or %NULL 
-//
-// Sets the currently displayed value of @self to the string
-// in @label. Setting an empty label removes the emblem.
-// 
-// Note that this is meant for displaying short labels, such as
-// roman numbers, or single letters. For roman numbers, consider
-// using the Unicode characters U+2160 - U+217F. Strings longer
-// than two characters will likely not be rendered very well.
-// 
-// If this method is called, and a number was already set on the
-// icon, it will automatically be reset to zero before rendering
-// the label, i.e. the last method called between
-// gtk_numerable_icon_set_label() and gtk_numerable_icon_set_count()
-// has always priority.
-//
-// Deprecated: (since 3.14.0) 
-func (self *NumerableIconInstance) SetLabel(label string) {
-	var carg0 *C.GtkNumerableIcon // in, none, converted
-	var carg1 *C.gchar            // in, none, string, nullable-string
-
-	carg0 = (*C.GtkNumerableIcon)(UnsafeNumerableIconToGlibNone(self))
-	if label != "" {
-		carg1 = (*C.gchar)(unsafe.Pointer(C.CString(label)))
-		defer C.free(unsafe.Pointer(carg1))
-	}
-
-	C.gtk_numerable_icon_set_label(carg0, carg1)
-	runtime.KeepAlive(self)
-	runtime.KeepAlive(label)
-}
-
-// SetStyleContext wraps gtk_numerable_icon_set_style_context
-// 
-// The function takes the following parameters:
-// 
-// 	- style StyleContext: a #GtkStyleContext 
-//
-// Updates the icon to fetch theme information from the
-// given #GtkStyleContext.
-//
-// Deprecated: (since 3.14.0) 
-func (self *NumerableIconInstance) SetStyleContext(style StyleContext) {
-	var carg0 *C.GtkNumerableIcon // in, none, converted
-	var carg1 *C.GtkStyleContext  // in, none, converted
-
-	carg0 = (*C.GtkNumerableIcon)(UnsafeNumerableIconToGlibNone(self))
-	carg1 = (*C.GtkStyleContext)(UnsafeStyleContextToGlibNone(style))
-
-	C.gtk_numerable_icon_set_style_context(carg0, carg1)
-	runtime.KeepAlive(self)
-	runtime.KeepAlive(style)
 }
 
 // PadControllerInstance is the instance type used by all types extending GtkPadController. It is used internally by the bindings. Users should use the interface [PadController] instead.
@@ -45223,7 +39723,7 @@ func (op *PrintOperationInstance) GetStatusString() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -46634,7 +41134,7 @@ func (settings *PrintSettingsInstance) Get(key string) string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -46717,7 +41217,7 @@ func (settings *PrintSettingsInstance) GetDefaultSource() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -46739,7 +41239,7 @@ func (settings *PrintSettingsInstance) GetDither() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -46853,7 +41353,7 @@ func (settings *PrintSettingsInstance) GetFinishings() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -46980,7 +41480,7 @@ func (settings *PrintSettingsInstance) GetMediaType() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -47091,7 +41591,7 @@ func (settings *PrintSettingsInstance) GetOutputBin() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -47271,7 +41771,7 @@ func (settings *PrintSettingsInstance) GetPrinter() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -48325,18 +42825,6 @@ var _ RcStyle = (*RcStyleInstance)(nil)
 type RcStyle interface {
 	gobject.Object
 	upcastToGtkRcStyle() *RcStyleInstance
-
-	// Copy wraps gtk_rc_style_copy
-	// The function returns the following values:
-	// 
-	// 	- goret RcStyle 
-	//
-	// Makes a copy of the specified #GtkRcStyle. This function
-	// will correctly copy an RC style that is a member of a class
-	// derived from #GtkRcStyle.
-	//
-	// Deprecated: (since 3.0.0) Use #GtkCssProvider instead.
-	Copy() RcStyle
 }
 
 func unsafeWrapRcStyle(base *gobject.ObjectInstance) *RcStyleInstance {
@@ -48373,53 +42861,6 @@ func UnsafeRcStyleToGlibFull(c RcStyle) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewRcStyleInstance wraps gtk_rc_style_new
-// The function returns the following values:
-// 
-// 	- goret RcStyle 
-//
-// Creates a new #GtkRcStyle with no fields set and
-// a reference count of 1.
-//
-// Deprecated: (since 3.0.0) Use #GtkCssProvider instead.
-func NewRcStyleInstance() RcStyle {
-	var cret *C.GtkRcStyle // return, full, converted
-
-	cret = C.gtk_rc_style_new()
-
-	var goret RcStyle
-
-	goret = UnsafeRcStyleFromGlibFull(unsafe.Pointer(cret))
-
-	return goret
-}
-
-// Copy wraps gtk_rc_style_copy
-// The function returns the following values:
-// 
-// 	- goret RcStyle 
-//
-// Makes a copy of the specified #GtkRcStyle. This function
-// will correctly copy an RC style that is a member of a class
-// derived from #GtkRcStyle.
-//
-// Deprecated: (since 3.0.0) Use #GtkCssProvider instead.
-func (orig *RcStyleInstance) Copy() RcStyle {
-	var carg0 *C.GtkRcStyle // in, none, converted
-	var cret  *C.GtkRcStyle // return, full, converted
-
-	carg0 = (*C.GtkRcStyle)(UnsafeRcStyleToGlibNone(orig))
-
-	cret = C.gtk_rc_style_copy(carg0)
-	runtime.KeepAlive(orig)
-
-	var goret RcStyle
-
-	goret = UnsafeRcStyleFromGlibFull(unsafe.Pointer(cret))
-
-	return goret
-}
-
 // RecentActionInstance is the instance type used by all types extending GtkRecentAction. It is used internally by the bindings. Users should use the interface [RecentAction] instead.
 type RecentActionInstance struct {
 	_ [0]func() // equal guard
@@ -48441,29 +42882,6 @@ var _ RecentAction = (*RecentActionInstance)(nil)
 type RecentAction interface {
 	Action
 	upcastToGtkRecentAction() *RecentActionInstance
-
-	// GetShowNumbers wraps gtk_recent_action_get_show_numbers
-	// The function returns the following values:
-	// 
-	// 	- goret bool 
-	//
-	// Returns the value set by gtk_recent_chooser_menu_set_show_numbers().
-	//
-	// Deprecated: (since 3.10.0) 
-	GetShowNumbers() bool
-	// SetShowNumbers wraps gtk_recent_action_set_show_numbers
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- showNumbers bool: %TRUE if the shown items should be numbered 
-	//
-	// Sets whether a number should be added to the items shown by the
-	// widgets representing @action. The numbers are shown to provide
-	// a unique character for a mnemonic to be used inside the menu item's
-	// label. Only the first ten items get a number to avoid clashes.
-	//
-	// Deprecated: (since 3.10.0) 
-	SetShowNumbers(bool)
 }
 
 func unsafeWrapRecentAction(base *gobject.ObjectInstance) *RecentActionInstance {
@@ -48500,175 +42918,6 @@ func UnsafeRecentActionToGlibNone(c RecentAction) unsafe.Pointer {
 // UnsafeRecentActionToGlibFull is used to convert the instance to it's C value GtkRecentAction, while removeing the finalizer. This is used by the bindings internally.
 func UnsafeRecentActionToGlibFull(c RecentAction) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
-}
-
-// NewRecentActionInstance wraps gtk_recent_action_new
-// 
-// The function takes the following parameters:
-// 
-// 	- name string: a unique name for the action 
-// 	- label string (nullable): the label displayed in menu items and on buttons,
-//   or %NULL 
-// 	- tooltip string (nullable): a tooltip for the action, or %NULL 
-// 	- stockId string (nullable): the stock icon to display in widgets representing
-//   the action, or %NULL 
-// 
-// The function returns the following values:
-// 
-// 	- goret Action 
-//
-// Creates a new #GtkRecentAction object. To add the action to
-// a #GtkActionGroup and set the accelerator for the action,
-// call gtk_action_group_add_action_with_accel().
-//
-// Deprecated: (since 3.10.0) 
-func NewRecentActionInstance(name string, label string, tooltip string, stockId string) Action {
-	var carg1 *C.gchar     // in, none, string, casted *C.gchar
-	var carg2 *C.gchar     // in, none, string, nullable-string
-	var carg3 *C.gchar     // in, none, string, nullable-string
-	var carg4 *C.gchar     // in, none, string, nullable-string
-	var cret  *C.GtkAction // return, full, converted
-
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(name)))
-	defer C.free(unsafe.Pointer(carg1))
-	if label != "" {
-		carg2 = (*C.gchar)(unsafe.Pointer(C.CString(label)))
-		defer C.free(unsafe.Pointer(carg2))
-	}
-	if tooltip != "" {
-		carg3 = (*C.gchar)(unsafe.Pointer(C.CString(tooltip)))
-		defer C.free(unsafe.Pointer(carg3))
-	}
-	if stockId != "" {
-		carg4 = (*C.gchar)(unsafe.Pointer(C.CString(stockId)))
-		defer C.free(unsafe.Pointer(carg4))
-	}
-
-	cret = C.gtk_recent_action_new(carg1, carg2, carg3, carg4)
-	runtime.KeepAlive(name)
-	runtime.KeepAlive(label)
-	runtime.KeepAlive(tooltip)
-	runtime.KeepAlive(stockId)
-
-	var goret Action
-
-	goret = UnsafeActionFromGlibFull(unsafe.Pointer(cret))
-
-	return goret
-}
-
-// NewRecentActionInstanceForManager wraps gtk_recent_action_new_for_manager
-// 
-// The function takes the following parameters:
-// 
-// 	- name string: a unique name for the action 
-// 	- label string (nullable): the label displayed in menu items and on buttons,
-//   or %NULL 
-// 	- tooltip string (nullable): a tooltip for the action, or %NULL 
-// 	- stockId string (nullable): the stock icon to display in widgets representing
-//   the action, or %NULL 
-// 	- manager RecentManager (nullable): a #GtkRecentManager, or %NULL for using the default
-//   #GtkRecentManager 
-// 
-// The function returns the following values:
-// 
-// 	- goret Action 
-//
-// Creates a new #GtkRecentAction object. To add the action to
-// a #GtkActionGroup and set the accelerator for the action,
-// call gtk_action_group_add_action_with_accel().
-//
-// Deprecated: (since 3.10.0) 
-func NewRecentActionInstanceForManager(name string, label string, tooltip string, stockId string, manager RecentManager) Action {
-	var carg1 *C.gchar            // in, none, string, casted *C.gchar
-	var carg2 *C.gchar            // in, none, string, nullable-string
-	var carg3 *C.gchar            // in, none, string, nullable-string
-	var carg4 *C.gchar            // in, none, string, nullable-string
-	var carg5 *C.GtkRecentManager // in, none, converted, nullable
-	var cret  *C.GtkAction        // return, full, converted
-
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(name)))
-	defer C.free(unsafe.Pointer(carg1))
-	if label != "" {
-		carg2 = (*C.gchar)(unsafe.Pointer(C.CString(label)))
-		defer C.free(unsafe.Pointer(carg2))
-	}
-	if tooltip != "" {
-		carg3 = (*C.gchar)(unsafe.Pointer(C.CString(tooltip)))
-		defer C.free(unsafe.Pointer(carg3))
-	}
-	if stockId != "" {
-		carg4 = (*C.gchar)(unsafe.Pointer(C.CString(stockId)))
-		defer C.free(unsafe.Pointer(carg4))
-	}
-	if manager != nil {
-		carg5 = (*C.GtkRecentManager)(UnsafeRecentManagerToGlibNone(manager))
-	}
-
-	cret = C.gtk_recent_action_new_for_manager(carg1, carg2, carg3, carg4, carg5)
-	runtime.KeepAlive(name)
-	runtime.KeepAlive(label)
-	runtime.KeepAlive(tooltip)
-	runtime.KeepAlive(stockId)
-	runtime.KeepAlive(manager)
-
-	var goret Action
-
-	goret = UnsafeActionFromGlibFull(unsafe.Pointer(cret))
-
-	return goret
-}
-
-// GetShowNumbers wraps gtk_recent_action_get_show_numbers
-// The function returns the following values:
-// 
-// 	- goret bool 
-//
-// Returns the value set by gtk_recent_chooser_menu_set_show_numbers().
-//
-// Deprecated: (since 3.10.0) 
-func (action *RecentActionInstance) GetShowNumbers() bool {
-	var carg0 *C.GtkRecentAction // in, none, converted
-	var cret  C.gboolean         // return
-
-	carg0 = (*C.GtkRecentAction)(UnsafeRecentActionToGlibNone(action))
-
-	cret = C.gtk_recent_action_get_show_numbers(carg0)
-	runtime.KeepAlive(action)
-
-	var goret bool
-
-	if cret != 0 {
-		goret = true
-	}
-
-	return goret
-}
-
-// SetShowNumbers wraps gtk_recent_action_set_show_numbers
-// 
-// The function takes the following parameters:
-// 
-// 	- showNumbers bool: %TRUE if the shown items should be numbered 
-//
-// Sets whether a number should be added to the items shown by the
-// widgets representing @action. The numbers are shown to provide
-// a unique character for a mnemonic to be used inside the menu item's
-// label. Only the first ten items get a number to avoid clashes.
-//
-// Deprecated: (since 3.10.0) 
-func (action *RecentActionInstance) SetShowNumbers(showNumbers bool) {
-	var carg0 *C.GtkRecentAction // in, none, converted
-	var carg1 C.gboolean         // in
-
-	carg0 = (*C.GtkRecentAction)(UnsafeRecentActionToGlibNone(action))
-	if showNumbers {
-		carg1 = C.TRUE
-	}
-
-	C.gtk_recent_action_set_show_numbers(carg0, carg1)
-	runtime.KeepAlive(action)
-	runtime.KeepAlive(showNumbers)
 }
 
 // RecentFilterInstance is the instance type used by all types extending GtkRecentFilter. It is used internally by the bindings. Users should use the interface [RecentFilter] instead.
@@ -49121,7 +43370,7 @@ func (filter *RecentFilterInstance) GetName() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -49883,49 +44132,6 @@ type Settings interface {
 	// the setting will again follow the session-wide value for
 	// this setting.
 	ResetProperty(string)
-	// SetDoubleProperty wraps gtk_settings_set_double_property
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- name string 
-	// 	- vDouble float64 
-	// 	- origin string 
-	//
-	//
-	// Deprecated: (since 3.16.0) Use g_object_set() instead.
-	SetDoubleProperty(string, float64, string)
-	// SetLongProperty wraps gtk_settings_set_long_property
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- name string 
-	// 	- vLong int32 
-	// 	- origin string 
-	//
-	//
-	// Deprecated: (since 3.16.0) Use g_object_set() instead.
-	SetLongProperty(string, int32, string)
-	// SetPropertyValue wraps gtk_settings_set_property_value
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- name string 
-	// 	- svalue *SettingsValue 
-	//
-	//
-	// Deprecated: (since 3.16.0) Use g_object_set() instead.
-	SetPropertyValue(string, *SettingsValue)
-	// SetStringProperty wraps gtk_settings_set_string_property
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- name string 
-	// 	- vString string 
-	// 	- origin string 
-	//
-	//
-	// Deprecated: (since 3.16.0) Use g_object_set() instead.
-	SetStringProperty(string, string, string)
 }
 
 func unsafeWrapSettings(base *gobject.ObjectInstance) *SettingsInstance {
@@ -50031,122 +44237,6 @@ func (settings *SettingsInstance) ResetProperty(name string) {
 	runtime.KeepAlive(name)
 }
 
-// SetDoubleProperty wraps gtk_settings_set_double_property
-// 
-// The function takes the following parameters:
-// 
-// 	- name string 
-// 	- vDouble float64 
-// 	- origin string 
-//
-//
-// Deprecated: (since 3.16.0) Use g_object_set() instead.
-func (settings *SettingsInstance) SetDoubleProperty(name string, vDouble float64, origin string) {
-	var carg0 *C.GtkSettings // in, none, converted
-	var carg1 *C.gchar       // in, none, string, casted *C.gchar
-	var carg2 C.gdouble      // in, none, casted
-	var carg3 *C.gchar       // in, none, string, casted *C.gchar
-
-	carg0 = (*C.GtkSettings)(UnsafeSettingsToGlibNone(settings))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(name)))
-	defer C.free(unsafe.Pointer(carg1))
-	carg2 = C.gdouble(vDouble)
-	carg3 = (*C.gchar)(unsafe.Pointer(C.CString(origin)))
-	defer C.free(unsafe.Pointer(carg3))
-
-	C.gtk_settings_set_double_property(carg0, carg1, carg2, carg3)
-	runtime.KeepAlive(settings)
-	runtime.KeepAlive(name)
-	runtime.KeepAlive(vDouble)
-	runtime.KeepAlive(origin)
-}
-
-// SetLongProperty wraps gtk_settings_set_long_property
-// 
-// The function takes the following parameters:
-// 
-// 	- name string 
-// 	- vLong int32 
-// 	- origin string 
-//
-//
-// Deprecated: (since 3.16.0) Use g_object_set() instead.
-func (settings *SettingsInstance) SetLongProperty(name string, vLong int32, origin string) {
-	var carg0 *C.GtkSettings // in, none, converted
-	var carg1 *C.gchar       // in, none, string, casted *C.gchar
-	var carg2 C.glong        // in, none, casted
-	var carg3 *C.gchar       // in, none, string, casted *C.gchar
-
-	carg0 = (*C.GtkSettings)(UnsafeSettingsToGlibNone(settings))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(name)))
-	defer C.free(unsafe.Pointer(carg1))
-	carg2 = C.glong(vLong)
-	carg3 = (*C.gchar)(unsafe.Pointer(C.CString(origin)))
-	defer C.free(unsafe.Pointer(carg3))
-
-	C.gtk_settings_set_long_property(carg0, carg1, carg2, carg3)
-	runtime.KeepAlive(settings)
-	runtime.KeepAlive(name)
-	runtime.KeepAlive(vLong)
-	runtime.KeepAlive(origin)
-}
-
-// SetPropertyValue wraps gtk_settings_set_property_value
-// 
-// The function takes the following parameters:
-// 
-// 	- name string 
-// 	- svalue *SettingsValue 
-//
-//
-// Deprecated: (since 3.16.0) Use g_object_set() instead.
-func (settings *SettingsInstance) SetPropertyValue(name string, svalue *SettingsValue) {
-	var carg0 *C.GtkSettings      // in, none, converted
-	var carg1 *C.gchar            // in, none, string, casted *C.gchar
-	var carg2 *C.GtkSettingsValue // in, none, converted
-
-	carg0 = (*C.GtkSettings)(UnsafeSettingsToGlibNone(settings))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(name)))
-	defer C.free(unsafe.Pointer(carg1))
-	carg2 = (*C.GtkSettingsValue)(UnsafeSettingsValueToGlibNone(svalue))
-
-	C.gtk_settings_set_property_value(carg0, carg1, carg2)
-	runtime.KeepAlive(settings)
-	runtime.KeepAlive(name)
-	runtime.KeepAlive(svalue)
-}
-
-// SetStringProperty wraps gtk_settings_set_string_property
-// 
-// The function takes the following parameters:
-// 
-// 	- name string 
-// 	- vString string 
-// 	- origin string 
-//
-//
-// Deprecated: (since 3.16.0) Use g_object_set() instead.
-func (settings *SettingsInstance) SetStringProperty(name string, vString string, origin string) {
-	var carg0 *C.GtkSettings // in, none, converted
-	var carg1 *C.gchar       // in, none, string, casted *C.gchar
-	var carg2 *C.gchar       // in, none, string, casted *C.gchar
-	var carg3 *C.gchar       // in, none, string, casted *C.gchar
-
-	carg0 = (*C.GtkSettings)(UnsafeSettingsToGlibNone(settings))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(name)))
-	defer C.free(unsafe.Pointer(carg1))
-	carg2 = (*C.gchar)(unsafe.Pointer(C.CString(vString)))
-	defer C.free(unsafe.Pointer(carg2))
-	carg3 = (*C.gchar)(unsafe.Pointer(C.CString(origin)))
-	defer C.free(unsafe.Pointer(carg3))
-
-	C.gtk_settings_set_string_property(carg0, carg1, carg2, carg3)
-	runtime.KeepAlive(settings)
-	runtime.KeepAlive(name)
-	runtime.KeepAlive(vString)
-	runtime.KeepAlive(origin)
-}
-
 // SizeGroupInstance is the instance type used by all types extending GtkSizeGroup. It is used internally by the bindings. Users should use the interface [SizeGroup] instead.
 type SizeGroupInstance struct {
 	_ [0]func() // equal guard
@@ -50242,20 +44332,6 @@ type SizeGroup interface {
 	// When the widget is destroyed or no longer referenced elsewhere, it will
 	// be removed from the size group.
 	AddWidget(Widget)
-	// GetIgnoreHidden wraps gtk_size_group_get_ignore_hidden
-	// The function returns the following values:
-	// 
-	// 	- goret bool 
-	//
-	// Returns if invisible widgets are ignored when calculating the size.
-	//
-	// Deprecated: (since 3.22.0) Measuring the size of hidden widgets has not worked
-	//     reliably for a long time. In most cases, they will report a size
-	//     of 0 nowadays, and thus, their size will not affect the other
-	//     size group members. In effect, size groups will always operate
-	//     as if this property was %TRUE. Use a #GtkStack instead to hide
-	//     widgets while still having their size taken into account.
-	GetIgnoreHidden() bool
 	// GetMode wraps gtk_size_group_get_mode
 	// The function returns the following values:
 	// 
@@ -50271,23 +44347,6 @@ type SizeGroup interface {
 	//
 	// Removes a widget from a #GtkSizeGroup.
 	RemoveWidget(Widget)
-	// SetIgnoreHidden wraps gtk_size_group_set_ignore_hidden
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- ignoreHidden bool: whether unmapped widgets should be ignored
-	//   when calculating the size 
-	//
-	// Sets whether unmapped widgets should be ignored when
-	// calculating the size.
-	//
-	// Deprecated: (since 3.22.0) Measuring the size of hidden widgets has not worked
-	//     reliably for a long time. In most cases, they will report a size
-	//     of 0 nowadays, and thus, their size will not affect the other
-	//     size group members. In effect, size groups will always operate
-	//     as if this property was %TRUE. Use a #GtkStack instead to hide
-	//     widgets while still having their size taken into account.
-	SetIgnoreHidden(bool)
 	// SetMode wraps gtk_size_group_set_mode
 	// 
 	// The function takes the following parameters:
@@ -50390,37 +44449,6 @@ func (sizeGroup *SizeGroupInstance) AddWidget(widget Widget) {
 	runtime.KeepAlive(widget)
 }
 
-// GetIgnoreHidden wraps gtk_size_group_get_ignore_hidden
-// The function returns the following values:
-// 
-// 	- goret bool 
-//
-// Returns if invisible widgets are ignored when calculating the size.
-//
-// Deprecated: (since 3.22.0) Measuring the size of hidden widgets has not worked
-//     reliably for a long time. In most cases, they will report a size
-//     of 0 nowadays, and thus, their size will not affect the other
-//     size group members. In effect, size groups will always operate
-//     as if this property was %TRUE. Use a #GtkStack instead to hide
-//     widgets while still having their size taken into account.
-func (sizeGroup *SizeGroupInstance) GetIgnoreHidden() bool {
-	var carg0 *C.GtkSizeGroup // in, none, converted
-	var cret  C.gboolean      // return
-
-	carg0 = (*C.GtkSizeGroup)(UnsafeSizeGroupToGlibNone(sizeGroup))
-
-	cret = C.gtk_size_group_get_ignore_hidden(carg0)
-	runtime.KeepAlive(sizeGroup)
-
-	var goret bool
-
-	if cret != 0 {
-		goret = true
-	}
-
-	return goret
-}
-
 // GetMode wraps gtk_size_group_get_mode
 // The function returns the following values:
 // 
@@ -50460,36 +44488,6 @@ func (sizeGroup *SizeGroupInstance) RemoveWidget(widget Widget) {
 	C.gtk_size_group_remove_widget(carg0, carg1)
 	runtime.KeepAlive(sizeGroup)
 	runtime.KeepAlive(widget)
-}
-
-// SetIgnoreHidden wraps gtk_size_group_set_ignore_hidden
-// 
-// The function takes the following parameters:
-// 
-// 	- ignoreHidden bool: whether unmapped widgets should be ignored
-//   when calculating the size 
-//
-// Sets whether unmapped widgets should be ignored when
-// calculating the size.
-//
-// Deprecated: (since 3.22.0) Measuring the size of hidden widgets has not worked
-//     reliably for a long time. In most cases, they will report a size
-//     of 0 nowadays, and thus, their size will not affect the other
-//     size group members. In effect, size groups will always operate
-//     as if this property was %TRUE. Use a #GtkStack instead to hide
-//     widgets while still having their size taken into account.
-func (sizeGroup *SizeGroupInstance) SetIgnoreHidden(ignoreHidden bool) {
-	var carg0 *C.GtkSizeGroup // in, none, converted
-	var carg1 C.gboolean      // in
-
-	carg0 = (*C.GtkSizeGroup)(UnsafeSizeGroupToGlibNone(sizeGroup))
-	if ignoreHidden {
-		carg1 = C.TRUE
-	}
-
-	C.gtk_size_group_set_ignore_hidden(carg0, carg1)
-	runtime.KeepAlive(sizeGroup)
-	runtime.KeepAlive(ignoreHidden)
 }
 
 // SetMode wraps gtk_size_group_set_mode
@@ -50562,408 +44560,6 @@ var _ StatusIcon = (*StatusIconInstance)(nil)
 type StatusIcon interface {
 	gobject.Object
 	upcastToGtkStatusIcon() *StatusIconInstance
-
-	// GetGeometry wraps gtk_status_icon_get_geometry
-	// The function returns the following values:
-	// 
-	// 	- screen gdk.Screen: return location for
-	//          the screen, or %NULL if the information is not needed 
-	// 	- area gdk.Rectangle: return location for the area occupied by
-	//        the status icon, or %NULL 
-	// 	- orientation Orientation: return location for the
-	//    orientation of the panel in which the status icon is embedded,
-	//    or %NULL. A panel at the top or bottom of the screen is
-	//    horizontal, a panel at the left or right is vertical. 
-	// 	- goret bool 
-	//
-	// Obtains information about the location of the status icon
-	// on screen. This information can be used to e.g. position
-	// popups like notification bubbles.
-	// 
-	// See gtk_status_icon_position_menu() for a more convenient
-	// alternative for positioning menus.
-	// 
-	// Note that some platforms do not allow GTK+ to provide
-	// this information, and even on platforms that do allow it,
-	// the information is not reliable unless the status icon
-	// is embedded in a notification area, see
-	// gtk_status_icon_is_embedded().
-	//
-	// Deprecated: (since 3.14.0) Use #GNotification and #GtkApplication to
-	//   provide status notifications; there is no direct replacement
-	//   for this function, as the platform is responsible for the
-	//   presentation of notifications
-	GetGeometry() (gdk.Screen, gdk.Rectangle, Orientation, bool)
-	// GetGIcon wraps gtk_status_icon_get_gicon
-	// The function returns the following values:
-	// 
-	// 	- goret gio.Icon 
-	//
-	// Retrieves the #GIcon being displayed by the #GtkStatusIcon.
-	// The storage type of the status icon must be %GTK_IMAGE_EMPTY or
-	// %GTK_IMAGE_GICON (see gtk_status_icon_get_storage_type()).
-	// The caller of this function does not own a reference to the
-	// returned #GIcon.
-	// 
-	// If this function fails, @icon is left unchanged;
-	//
-	// Deprecated: (since 3.14.0) Use #GNotification and #GtkApplication to
-	//   provide status notifications; there is no direct replacement
-	//   for this function
-	GetGIcon() gio.Icon
-	// GetHasTooltip wraps gtk_status_icon_get_has_tooltip
-	// The function returns the following values:
-	// 
-	// 	- goret bool 
-	//
-	// Returns the current value of the has-tooltip property.
-	// See #GtkStatusIcon:has-tooltip for more information.
-	//
-	// Deprecated: (since 3.14.0) Use #GNotification and #GtkApplication to
-	//   provide status notifications; there is no direct replacement
-	//   for this function
-	GetHasTooltip() bool
-	// GetIconName wraps gtk_status_icon_get_icon_name
-	// The function returns the following values:
-	// 
-	// 	- goret string 
-	//
-	// Gets the name of the icon being displayed by the #GtkStatusIcon.
-	// The storage type of the status icon must be %GTK_IMAGE_EMPTY or
-	// %GTK_IMAGE_ICON_NAME (see gtk_status_icon_get_storage_type()).
-	// The returned string is owned by the #GtkStatusIcon and should not
-	// be freed or modified.
-	//
-	// Deprecated: (since 3.14.0) Use #GNotification and #GtkApplication to
-	//   provide status notifications; there is no direct replacement
-	//   for this function
-	GetIconName() string
-	// GetPixbuf wraps gtk_status_icon_get_pixbuf
-	// The function returns the following values:
-	// 
-	// 	- goret gdkpixbuf.Pixbuf 
-	//
-	// Gets the #GdkPixbuf being displayed by the #GtkStatusIcon.
-	// The storage type of the status icon must be %GTK_IMAGE_EMPTY or
-	// %GTK_IMAGE_PIXBUF (see gtk_status_icon_get_storage_type()).
-	// The caller of this function does not own a reference to the
-	// returned pixbuf.
-	//
-	// Deprecated: (since 3.14.0) Use #GNotification and #GtkApplication to
-	//   provide status notifications; there is no direct replacement
-	//   for this function
-	GetPixbuf() gdkpixbuf.Pixbuf
-	// GetScreen wraps gtk_status_icon_get_screen
-	// The function returns the following values:
-	// 
-	// 	- goret gdk.Screen 
-	//
-	// Returns the #GdkScreen associated with @status_icon.
-	//
-	// Deprecated: (since 3.14.0) Use #GNotification and #GtkApplication to
-	//   provide status notifications; there is no direct replacement
-	//   for this function, as notifications are managed by the platform
-	GetScreen() gdk.Screen
-	// GetSize wraps gtk_status_icon_get_size
-	// The function returns the following values:
-	// 
-	// 	- goret int 
-	//
-	// Gets the size in pixels that is available for the image.
-	// Stock icons and named icons adapt their size automatically
-	// if the size of the notification area changes. For other
-	// storage types, the size-changed signal can be used to
-	// react to size changes.
-	// 
-	// Note that the returned size is only meaningful while the
-	// status icon is embedded (see gtk_status_icon_is_embedded()).
-	//
-	// Deprecated: (since 3.14.0) Use #GNotification and #GtkApplication to
-	//   provide status notifications; there is no direct replacement
-	//   for this function, as the representation of a notification
-	//   is left to the platform
-	GetSize() int
-	// GetStock wraps gtk_status_icon_get_stock
-	// The function returns the following values:
-	// 
-	// 	- goret string 
-	//
-	// Gets the id of the stock icon being displayed by the #GtkStatusIcon.
-	// The storage type of the status icon must be %GTK_IMAGE_EMPTY or
-	// %GTK_IMAGE_STOCK (see gtk_status_icon_get_storage_type()).
-	// The returned string is owned by the #GtkStatusIcon and should not
-	// be freed or modified.
-	//
-	// Deprecated: (since 3.10.0) Use gtk_status_icon_get_icon_name() instead.
-	GetStock() string
-	// GetStorageType wraps gtk_status_icon_get_storage_type
-	// The function returns the following values:
-	// 
-	// 	- goret ImageType 
-	//
-	// Gets the type of representation being used by the #GtkStatusIcon
-	// to store image data. If the #GtkStatusIcon has no image data,
-	// the return value will be %GTK_IMAGE_EMPTY.
-	//
-	// Deprecated: (since 3.14.0) Use #GNotification and #GtkApplication to
-	//   provide status notifications; there is no direct replacement
-	//   for this function, and #GNotification only supports #GIcon
-	//   instances
-	GetStorageType() ImageType
-	// GetTitle wraps gtk_status_icon_get_title
-	// The function returns the following values:
-	// 
-	// 	- goret string 
-	//
-	// Gets the title of this tray icon. See gtk_status_icon_set_title().
-	//
-	// Deprecated: (since 3.14.0) Use #GNotification and #GtkApplication to
-	//   provide status notifications; there is no direct replacement
-	//   for this function
-	GetTitle() string
-	// GetTooltipMarkup wraps gtk_status_icon_get_tooltip_markup
-	// The function returns the following values:
-	// 
-	// 	- goret string 
-	//
-	// Gets the contents of the tooltip for @status_icon.
-	//
-	// Deprecated: (since 3.14.0) Use #GNotification and #GtkApplication to
-	//   provide status notifications; there is no direct replacement
-	//   for this function
-	GetTooltipMarkup() string
-	// GetTooltipText wraps gtk_status_icon_get_tooltip_text
-	// The function returns the following values:
-	// 
-	// 	- goret string 
-	//
-	// Gets the contents of the tooltip for @status_icon.
-	//
-	// Deprecated: (since 3.14.0) Use #GNotification and #GtkApplication to
-	//   provide status notifications; there is no direct replacement
-	//   for this function
-	GetTooltipText() string
-	// GetVisible wraps gtk_status_icon_get_visible
-	// The function returns the following values:
-	// 
-	// 	- goret bool 
-	//
-	// Returns whether the status icon is visible or not.
-	// Note that being visible does not guarantee that
-	// the user can actually see the icon, see also
-	// gtk_status_icon_is_embedded().
-	//
-	// Deprecated: (since 3.14.0) Use #GNotification and #GtkApplication to
-	//   provide status notifications; there is no direct replacement
-	//   for this function
-	GetVisible() bool
-	// GetX11WindowID wraps gtk_status_icon_get_x11_window_id
-	// The function returns the following values:
-	// 
-	// 	- goret uint32 
-	//
-	// This function is only useful on the X11/freedesktop.org platform.
-	// 
-	// It returns a window ID for the widget in the underlying
-	// status icon implementation.  This is useful for the Galago
-	// notification service, which can send a window ID in the protocol
-	// in order for the server to position notification windows
-	// pointing to a status icon reliably.
-	// 
-	// This function is not intended for other use cases which are
-	// more likely to be met by one of the non-X11 specific methods, such
-	// as gtk_status_icon_position_menu().
-	//
-	// Deprecated: (since 3.14.0) Use #GNotification and #GtkApplication to
-	//   provide status notifications; there is no direct replacement
-	//   for this function
-	GetX11WindowID() uint32
-	// IsEmbedded wraps gtk_status_icon_is_embedded
-	// The function returns the following values:
-	// 
-	// 	- goret bool 
-	//
-	// Returns whether the status icon is embedded in a notification
-	// area.
-	//
-	// Deprecated: (since 3.14.0) Use #GNotification and #GtkApplication to
-	//   provide status notifications; there is no direct replacement
-	//   for this function
-	IsEmbedded() bool
-	// SetFromFile wraps gtk_status_icon_set_from_file
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- filename string: a filename 
-	//
-	// Makes @status_icon display the file @filename.
-	// See gtk_status_icon_new_from_file() for details.
-	//
-	// Deprecated: (since 3.14.0) Use #GNotification and #GtkApplication to
-	//   provide status notifications; you can use g_notification_set_icon()
-	//   to associate a #GIcon with a notification
-	SetFromFile(string)
-	// SetFromGIcon wraps gtk_status_icon_set_from_gicon
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- icon gio.Icon: a GIcon 
-	//
-	// Makes @status_icon display the #GIcon.
-	// See gtk_status_icon_new_from_gicon() for details.
-	//
-	// Deprecated: (since 3.14.0) Use #GNotification and #GtkApplication to
-	//   provide status notifications; you can use g_notification_set_icon()
-	//   to associate a #GIcon with a notification
-	SetFromGIcon(gio.Icon)
-	// SetFromIconName wraps gtk_status_icon_set_from_icon_name
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- iconName string: an icon name 
-	//
-	// Makes @status_icon display the icon named @icon_name from the
-	// current icon theme.
-	// See gtk_status_icon_new_from_icon_name() for details.
-	//
-	// Deprecated: (since 3.14.0) Use #GNotification and #GtkApplication to
-	//   provide status notifications; you can use g_notification_set_icon()
-	//   to associate a #GIcon with a notification
-	SetFromIconName(string)
-	// SetFromPixbuf wraps gtk_status_icon_set_from_pixbuf
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- pixbuf gdkpixbuf.Pixbuf (nullable): a #GdkPixbuf or %NULL 
-	//
-	// Makes @status_icon display @pixbuf.
-	// See gtk_status_icon_new_from_pixbuf() for details.
-	//
-	// Deprecated: (since 3.14.0) Use #GNotification and #GtkApplication to
-	//   provide status notifications; you can use g_notification_set_icon()
-	//   to associate a #GIcon with a notification
-	SetFromPixbuf(gdkpixbuf.Pixbuf)
-	// SetFromStock wraps gtk_status_icon_set_from_stock
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- stockId string: a stock icon id 
-	//
-	// Makes @status_icon display the stock icon with the id @stock_id.
-	// See gtk_status_icon_new_from_stock() for details.
-	//
-	// Deprecated: (since 3.10.0) Use gtk_status_icon_set_from_icon_name() instead.
-	SetFromStock(string)
-	// SetHasTooltip wraps gtk_status_icon_set_has_tooltip
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- hasTooltip bool: whether or not @status_icon has a tooltip 
-	//
-	// Sets the has-tooltip property on @status_icon to @has_tooltip.
-	// See #GtkStatusIcon:has-tooltip for more information.
-	//
-	// Deprecated: (since 3.14.0) Use #GNotification and #GtkApplication to
-	//   provide status notifications; there is no direct replacement
-	//   for this function, but notifications can display an arbitrary
-	//   amount of text using g_notification_set_body()
-	SetHasTooltip(bool)
-	// SetName wraps gtk_status_icon_set_name
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- name string: the name 
-	//
-	// Sets the name of this tray icon.
-	// This should be a string identifying this icon. It is may be
-	// used for sorting the icons in the tray and will not be shown to
-	// the user.
-	//
-	// Deprecated: (since 3.14.0) Use #GNotification and #GtkApplication to
-	//   provide status notifications; there is no direct replacement
-	//   for this function, as notifications are associated with a
-	//   unique application identifier by #GApplication
-	SetName(string)
-	// SetScreen wraps gtk_status_icon_set_screen
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- screen gdk.Screen: a #GdkScreen 
-	//
-	// Sets the #GdkScreen where @status_icon is displayed; if
-	// the icon is already mapped, it will be unmapped, and
-	// then remapped on the new screen.
-	//
-	// Deprecated: (since 3.14.0) Use #GNotification and #GtkApplication to
-	//   provide status notifications; there is no direct replacement
-	//   for this function, as GTK typically only has one #GdkScreen
-	//   and notifications are managed by the platform
-	SetScreen(gdk.Screen)
-	// SetTitle wraps gtk_status_icon_set_title
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- title string: the title 
-	//
-	// Sets the title of this tray icon.
-	// This should be a short, human-readable, localized string
-	// describing the tray icon. It may be used by tools like screen
-	// readers to render the tray icon.
-	//
-	// Deprecated: (since 3.14.0) Use #GNotification and #GtkApplication to
-	//   provide status notifications; you should use g_notification_set_title()
-	//   and g_notification_set_body() to present text inside your notification
-	SetTitle(string)
-	// SetTooltipMarkup wraps gtk_status_icon_set_tooltip_markup
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- markup string (nullable): the contents of the tooltip for @status_icon, or %NULL 
-	//
-	// Sets @markup as the contents of the tooltip, which is marked up with
-	//  the [Pango text markup language][PangoMarkupFormat].
-	// 
-	// This function will take care of setting #GtkStatusIcon:has-tooltip to %TRUE
-	// and of the default handler for the #GtkStatusIcon::query-tooltip signal.
-	// 
-	// See also the #GtkStatusIcon:tooltip-markup property and
-	// gtk_tooltip_set_markup().
-	//
-	// Deprecated: (since 3.14.0) Use #GNotification and #GtkApplication to
-	//   provide status notifications; there is no direct replacement
-	//   for this function
-	SetTooltipMarkup(string)
-	// SetTooltipText wraps gtk_status_icon_set_tooltip_text
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- text string: the contents of the tooltip for @status_icon 
-	//
-	// Sets @text as the contents of the tooltip.
-	// 
-	// This function will take care of setting #GtkStatusIcon:has-tooltip to
-	// %TRUE and of the default handler for the #GtkStatusIcon::query-tooltip
-	// signal.
-	// 
-	// See also the #GtkStatusIcon:tooltip-text property and
-	// gtk_tooltip_set_text().
-	//
-	// Deprecated: (since 3.14.0) Use #GNotification and #GtkApplication to
-	//   provide status notifications; there is no direct replacement
-	//   for this function
-	SetTooltipText(string)
-	// SetVisible wraps gtk_status_icon_set_visible
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- visible bool: %TRUE to show the status icon, %FALSE to hide it 
-	//
-	// Shows or hides a status icon.
-	//
-	// Deprecated: (since 3.14.0) Use #GNotification and #GtkApplication to
-	//   provide status notifications; there is no direct replacement
-	//   for this function, as notifications are managed by the platform
-	SetVisible(bool)
 }
 
 func unsafeWrapStatusIcon(base *gobject.ObjectInstance) *StatusIconInstance {
@@ -51000,986 +44596,6 @@ func UnsafeStatusIconToGlibFull(c StatusIcon) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewStatusIconInstance wraps gtk_status_icon_new
-// The function returns the following values:
-// 
-// 	- goret StatusIcon 
-//
-// Creates an empty status icon object.
-//
-// Deprecated: (since 3.14.0) Use #GNotification and #GtkApplication to
-//   provide status notifications
-func NewStatusIconInstance() StatusIcon {
-	var cret *C.GtkStatusIcon // return, full, converted
-
-	cret = C.gtk_status_icon_new()
-
-	var goret StatusIcon
-
-	goret = UnsafeStatusIconFromGlibFull(unsafe.Pointer(cret))
-
-	return goret
-}
-
-// NewStatusIconInstanceFromFile wraps gtk_status_icon_new_from_file
-// 
-// The function takes the following parameters:
-// 
-// 	- filename string: a filename 
-// 
-// The function returns the following values:
-// 
-// 	- goret StatusIcon 
-//
-// Creates a status icon displaying the file @filename.
-// 
-// The image will be scaled down to fit in the available
-// space in the notification area, if necessary.
-//
-// Deprecated: (since 3.14.0) Use #GNotification and #GtkApplication to
-//   provide status notifications
-func NewStatusIconInstanceFromFile(filename string) StatusIcon {
-	var carg1 *C.gchar         // in, none, string, casted *C.gchar
-	var cret  *C.GtkStatusIcon // return, full, converted
-
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(filename)))
-	defer C.free(unsafe.Pointer(carg1))
-
-	cret = C.gtk_status_icon_new_from_file(carg1)
-	runtime.KeepAlive(filename)
-
-	var goret StatusIcon
-
-	goret = UnsafeStatusIconFromGlibFull(unsafe.Pointer(cret))
-
-	return goret
-}
-
-// NewStatusIconInstanceFromGIcon wraps gtk_status_icon_new_from_gicon
-// 
-// The function takes the following parameters:
-// 
-// 	- icon gio.Icon: a #GIcon 
-// 
-// The function returns the following values:
-// 
-// 	- goret StatusIcon 
-//
-// Creates a status icon displaying a #GIcon. If the icon is a
-// themed icon, it will be updated when the theme changes.
-//
-// Deprecated: (since 3.14.0) Use #GNotification and #GtkApplication to
-//   provide status notifications
-func NewStatusIconInstanceFromGIcon(icon gio.Icon) StatusIcon {
-	var carg1 *C.GIcon         // in, none, converted
-	var cret  *C.GtkStatusIcon // return, full, converted
-
-	carg1 = (*C.GIcon)(gio.UnsafeIconToGlibNone(icon))
-
-	cret = C.gtk_status_icon_new_from_gicon(carg1)
-	runtime.KeepAlive(icon)
-
-	var goret StatusIcon
-
-	goret = UnsafeStatusIconFromGlibFull(unsafe.Pointer(cret))
-
-	return goret
-}
-
-// NewStatusIconInstanceFromIconName wraps gtk_status_icon_new_from_icon_name
-// 
-// The function takes the following parameters:
-// 
-// 	- iconName string: an icon name 
-// 
-// The function returns the following values:
-// 
-// 	- goret StatusIcon 
-//
-// Creates a status icon displaying an icon from the current icon theme.
-// If the current icon theme is changed, the icon will be updated
-// appropriately.
-//
-// Deprecated: (since 3.14.0) Use #GNotification and #GtkApplication to
-//   provide status notifications
-func NewStatusIconInstanceFromIconName(iconName string) StatusIcon {
-	var carg1 *C.gchar         // in, none, string, casted *C.gchar
-	var cret  *C.GtkStatusIcon // return, full, converted
-
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(iconName)))
-	defer C.free(unsafe.Pointer(carg1))
-
-	cret = C.gtk_status_icon_new_from_icon_name(carg1)
-	runtime.KeepAlive(iconName)
-
-	var goret StatusIcon
-
-	goret = UnsafeStatusIconFromGlibFull(unsafe.Pointer(cret))
-
-	return goret
-}
-
-// NewStatusIconInstanceFromPixbuf wraps gtk_status_icon_new_from_pixbuf
-// 
-// The function takes the following parameters:
-// 
-// 	- pixbuf gdkpixbuf.Pixbuf: a #GdkPixbuf 
-// 
-// The function returns the following values:
-// 
-// 	- goret StatusIcon 
-//
-// Creates a status icon displaying @pixbuf.
-// 
-// The image will be scaled down to fit in the available
-// space in the notification area, if necessary.
-//
-// Deprecated: (since 3.14.0) Use #GNotification and #GtkApplication to
-//   provide status notifications
-func NewStatusIconInstanceFromPixbuf(pixbuf gdkpixbuf.Pixbuf) StatusIcon {
-	var carg1 *C.GdkPixbuf     // in, none, converted
-	var cret  *C.GtkStatusIcon // return, full, converted
-
-	carg1 = (*C.GdkPixbuf)(gdkpixbuf.UnsafePixbufToGlibNone(pixbuf))
-
-	cret = C.gtk_status_icon_new_from_pixbuf(carg1)
-	runtime.KeepAlive(pixbuf)
-
-	var goret StatusIcon
-
-	goret = UnsafeStatusIconFromGlibFull(unsafe.Pointer(cret))
-
-	return goret
-}
-
-// NewStatusIconInstanceFromStock wraps gtk_status_icon_new_from_stock
-// 
-// The function takes the following parameters:
-// 
-// 	- stockId string: a stock icon id 
-// 
-// The function returns the following values:
-// 
-// 	- goret StatusIcon 
-//
-// Creates a status icon displaying a stock icon. Sample stock icon
-// names are #GTK_STOCK_OPEN, #GTK_STOCK_QUIT. You can register your
-// own stock icon names, see gtk_icon_factory_add_default() and
-// gtk_icon_factory_add().
-//
-// Deprecated: (since 3.14.0) Use #GNotification and #GtkApplication to
-//   provide status notifications
-func NewStatusIconInstanceFromStock(stockId string) StatusIcon {
-	var carg1 *C.gchar         // in, none, string, casted *C.gchar
-	var cret  *C.GtkStatusIcon // return, full, converted
-
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(stockId)))
-	defer C.free(unsafe.Pointer(carg1))
-
-	cret = C.gtk_status_icon_new_from_stock(carg1)
-	runtime.KeepAlive(stockId)
-
-	var goret StatusIcon
-
-	goret = UnsafeStatusIconFromGlibFull(unsafe.Pointer(cret))
-
-	return goret
-}
-
-// GetGeometry wraps gtk_status_icon_get_geometry
-// The function returns the following values:
-// 
-// 	- screen gdk.Screen: return location for
-//          the screen, or %NULL if the information is not needed 
-// 	- area gdk.Rectangle: return location for the area occupied by
-//        the status icon, or %NULL 
-// 	- orientation Orientation: return location for the
-//    orientation of the panel in which the status icon is embedded,
-//    or %NULL. A panel at the top or bottom of the screen is
-//    horizontal, a panel at the left or right is vertical. 
-// 	- goret bool 
-//
-// Obtains information about the location of the status icon
-// on screen. This information can be used to e.g. position
-// popups like notification bubbles.
-// 
-// See gtk_status_icon_position_menu() for a more convenient
-// alternative for positioning menus.
-// 
-// Note that some platforms do not allow GTK+ to provide
-// this information, and even on platforms that do allow it,
-// the information is not reliable unless the status icon
-// is embedded in a notification area, see
-// gtk_status_icon_is_embedded().
-//
-// Deprecated: (since 3.14.0) Use #GNotification and #GtkApplication to
-//   provide status notifications; there is no direct replacement
-//   for this function, as the platform is responsible for the
-//   presentation of notifications
-func (statusIcon *StatusIconInstance) GetGeometry() (gdk.Screen, gdk.Rectangle, Orientation, bool) {
-	var carg0 *C.GtkStatusIcon // in, none, converted
-	var carg1 *C.GdkScreen     // out, none, converted
-	var carg2 C.GdkRectangle   // out, transfer: none, C Pointers: 0, Name: Rectangle, optional, caller-allocates
-	var carg3 C.GtkOrientation // out, full, casted
-	var cret  C.gboolean       // return
-
-	carg0 = (*C.GtkStatusIcon)(UnsafeStatusIconToGlibNone(statusIcon))
-
-	cret = C.gtk_status_icon_get_geometry(carg0, &carg1, &carg2, &carg3)
-	runtime.KeepAlive(statusIcon)
-
-	var screen      gdk.Screen
-	var area        gdk.Rectangle
-	var orientation Orientation
-	var goret       bool
-
-	screen = gdk.UnsafeScreenFromGlibNone(unsafe.Pointer(carg1))
-	_ = area
-	_ = carg2
-	panic("unimplemented conversion of gdk.Rectangle (GdkRectangle)")
-	orientation = Orientation(carg3)
-	if cret != 0 {
-		goret = true
-	}
-
-	return screen, area, orientation, goret
-}
-
-// GetGIcon wraps gtk_status_icon_get_gicon
-// The function returns the following values:
-// 
-// 	- goret gio.Icon 
-//
-// Retrieves the #GIcon being displayed by the #GtkStatusIcon.
-// The storage type of the status icon must be %GTK_IMAGE_EMPTY or
-// %GTK_IMAGE_GICON (see gtk_status_icon_get_storage_type()).
-// The caller of this function does not own a reference to the
-// returned #GIcon.
-// 
-// If this function fails, @icon is left unchanged;
-//
-// Deprecated: (since 3.14.0) Use #GNotification and #GtkApplication to
-//   provide status notifications; there is no direct replacement
-//   for this function
-func (statusIcon *StatusIconInstance) GetGIcon() gio.Icon {
-	var carg0 *C.GtkStatusIcon // in, none, converted
-	var cret  *C.GIcon         // return, none, converted
-
-	carg0 = (*C.GtkStatusIcon)(UnsafeStatusIconToGlibNone(statusIcon))
-
-	cret = C.gtk_status_icon_get_gicon(carg0)
-	runtime.KeepAlive(statusIcon)
-
-	var goret gio.Icon
-
-	goret = gio.UnsafeIconFromGlibNone(unsafe.Pointer(cret))
-
-	return goret
-}
-
-// GetHasTooltip wraps gtk_status_icon_get_has_tooltip
-// The function returns the following values:
-// 
-// 	- goret bool 
-//
-// Returns the current value of the has-tooltip property.
-// See #GtkStatusIcon:has-tooltip for more information.
-//
-// Deprecated: (since 3.14.0) Use #GNotification and #GtkApplication to
-//   provide status notifications; there is no direct replacement
-//   for this function
-func (statusIcon *StatusIconInstance) GetHasTooltip() bool {
-	var carg0 *C.GtkStatusIcon // in, none, converted
-	var cret  C.gboolean       // return
-
-	carg0 = (*C.GtkStatusIcon)(UnsafeStatusIconToGlibNone(statusIcon))
-
-	cret = C.gtk_status_icon_get_has_tooltip(carg0)
-	runtime.KeepAlive(statusIcon)
-
-	var goret bool
-
-	if cret != 0 {
-		goret = true
-	}
-
-	return goret
-}
-
-// GetIconName wraps gtk_status_icon_get_icon_name
-// The function returns the following values:
-// 
-// 	- goret string 
-//
-// Gets the name of the icon being displayed by the #GtkStatusIcon.
-// The storage type of the status icon must be %GTK_IMAGE_EMPTY or
-// %GTK_IMAGE_ICON_NAME (see gtk_status_icon_get_storage_type()).
-// The returned string is owned by the #GtkStatusIcon and should not
-// be freed or modified.
-//
-// Deprecated: (since 3.14.0) Use #GNotification and #GtkApplication to
-//   provide status notifications; there is no direct replacement
-//   for this function
-func (statusIcon *StatusIconInstance) GetIconName() string {
-	var carg0 *C.GtkStatusIcon // in, none, converted
-	var cret  *C.gchar         // return, none, string, casted *C.gchar
-
-	carg0 = (*C.GtkStatusIcon)(UnsafeStatusIconToGlibNone(statusIcon))
-
-	cret = C.gtk_status_icon_get_icon_name(carg0)
-	runtime.KeepAlive(statusIcon)
-
-	var goret string
-
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
-
-	return goret
-}
-
-// GetPixbuf wraps gtk_status_icon_get_pixbuf
-// The function returns the following values:
-// 
-// 	- goret gdkpixbuf.Pixbuf 
-//
-// Gets the #GdkPixbuf being displayed by the #GtkStatusIcon.
-// The storage type of the status icon must be %GTK_IMAGE_EMPTY or
-// %GTK_IMAGE_PIXBUF (see gtk_status_icon_get_storage_type()).
-// The caller of this function does not own a reference to the
-// returned pixbuf.
-//
-// Deprecated: (since 3.14.0) Use #GNotification and #GtkApplication to
-//   provide status notifications; there is no direct replacement
-//   for this function
-func (statusIcon *StatusIconInstance) GetPixbuf() gdkpixbuf.Pixbuf {
-	var carg0 *C.GtkStatusIcon // in, none, converted
-	var cret  *C.GdkPixbuf     // return, none, converted
-
-	carg0 = (*C.GtkStatusIcon)(UnsafeStatusIconToGlibNone(statusIcon))
-
-	cret = C.gtk_status_icon_get_pixbuf(carg0)
-	runtime.KeepAlive(statusIcon)
-
-	var goret gdkpixbuf.Pixbuf
-
-	goret = gdkpixbuf.UnsafePixbufFromGlibNone(unsafe.Pointer(cret))
-
-	return goret
-}
-
-// GetScreen wraps gtk_status_icon_get_screen
-// The function returns the following values:
-// 
-// 	- goret gdk.Screen 
-//
-// Returns the #GdkScreen associated with @status_icon.
-//
-// Deprecated: (since 3.14.0) Use #GNotification and #GtkApplication to
-//   provide status notifications; there is no direct replacement
-//   for this function, as notifications are managed by the platform
-func (statusIcon *StatusIconInstance) GetScreen() gdk.Screen {
-	var carg0 *C.GtkStatusIcon // in, none, converted
-	var cret  *C.GdkScreen     // return, none, converted
-
-	carg0 = (*C.GtkStatusIcon)(UnsafeStatusIconToGlibNone(statusIcon))
-
-	cret = C.gtk_status_icon_get_screen(carg0)
-	runtime.KeepAlive(statusIcon)
-
-	var goret gdk.Screen
-
-	goret = gdk.UnsafeScreenFromGlibNone(unsafe.Pointer(cret))
-
-	return goret
-}
-
-// GetSize wraps gtk_status_icon_get_size
-// The function returns the following values:
-// 
-// 	- goret int 
-//
-// Gets the size in pixels that is available for the image.
-// Stock icons and named icons adapt their size automatically
-// if the size of the notification area changes. For other
-// storage types, the size-changed signal can be used to
-// react to size changes.
-// 
-// Note that the returned size is only meaningful while the
-// status icon is embedded (see gtk_status_icon_is_embedded()).
-//
-// Deprecated: (since 3.14.0) Use #GNotification and #GtkApplication to
-//   provide status notifications; there is no direct replacement
-//   for this function, as the representation of a notification
-//   is left to the platform
-func (statusIcon *StatusIconInstance) GetSize() int {
-	var carg0 *C.GtkStatusIcon // in, none, converted
-	var cret  C.gint           // return, none, casted
-
-	carg0 = (*C.GtkStatusIcon)(UnsafeStatusIconToGlibNone(statusIcon))
-
-	cret = C.gtk_status_icon_get_size(carg0)
-	runtime.KeepAlive(statusIcon)
-
-	var goret int
-
-	goret = int(cret)
-
-	return goret
-}
-
-// GetStock wraps gtk_status_icon_get_stock
-// The function returns the following values:
-// 
-// 	- goret string 
-//
-// Gets the id of the stock icon being displayed by the #GtkStatusIcon.
-// The storage type of the status icon must be %GTK_IMAGE_EMPTY or
-// %GTK_IMAGE_STOCK (see gtk_status_icon_get_storage_type()).
-// The returned string is owned by the #GtkStatusIcon and should not
-// be freed or modified.
-//
-// Deprecated: (since 3.10.0) Use gtk_status_icon_get_icon_name() instead.
-func (statusIcon *StatusIconInstance) GetStock() string {
-	var carg0 *C.GtkStatusIcon // in, none, converted
-	var cret  *C.gchar         // return, none, string, casted *C.gchar
-
-	carg0 = (*C.GtkStatusIcon)(UnsafeStatusIconToGlibNone(statusIcon))
-
-	cret = C.gtk_status_icon_get_stock(carg0)
-	runtime.KeepAlive(statusIcon)
-
-	var goret string
-
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
-
-	return goret
-}
-
-// GetStorageType wraps gtk_status_icon_get_storage_type
-// The function returns the following values:
-// 
-// 	- goret ImageType 
-//
-// Gets the type of representation being used by the #GtkStatusIcon
-// to store image data. If the #GtkStatusIcon has no image data,
-// the return value will be %GTK_IMAGE_EMPTY.
-//
-// Deprecated: (since 3.14.0) Use #GNotification and #GtkApplication to
-//   provide status notifications; there is no direct replacement
-//   for this function, and #GNotification only supports #GIcon
-//   instances
-func (statusIcon *StatusIconInstance) GetStorageType() ImageType {
-	var carg0 *C.GtkStatusIcon // in, none, converted
-	var cret  C.GtkImageType   // return, none, casted
-
-	carg0 = (*C.GtkStatusIcon)(UnsafeStatusIconToGlibNone(statusIcon))
-
-	cret = C.gtk_status_icon_get_storage_type(carg0)
-	runtime.KeepAlive(statusIcon)
-
-	var goret ImageType
-
-	goret = ImageType(cret)
-
-	return goret
-}
-
-// GetTitle wraps gtk_status_icon_get_title
-// The function returns the following values:
-// 
-// 	- goret string 
-//
-// Gets the title of this tray icon. See gtk_status_icon_set_title().
-//
-// Deprecated: (since 3.14.0) Use #GNotification and #GtkApplication to
-//   provide status notifications; there is no direct replacement
-//   for this function
-func (statusIcon *StatusIconInstance) GetTitle() string {
-	var carg0 *C.GtkStatusIcon // in, none, converted
-	var cret  *C.gchar         // return, none, string, casted *C.gchar
-
-	carg0 = (*C.GtkStatusIcon)(UnsafeStatusIconToGlibNone(statusIcon))
-
-	cret = C.gtk_status_icon_get_title(carg0)
-	runtime.KeepAlive(statusIcon)
-
-	var goret string
-
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
-
-	return goret
-}
-
-// GetTooltipMarkup wraps gtk_status_icon_get_tooltip_markup
-// The function returns the following values:
-// 
-// 	- goret string 
-//
-// Gets the contents of the tooltip for @status_icon.
-//
-// Deprecated: (since 3.14.0) Use #GNotification and #GtkApplication to
-//   provide status notifications; there is no direct replacement
-//   for this function
-func (statusIcon *StatusIconInstance) GetTooltipMarkup() string {
-	var carg0 *C.GtkStatusIcon // in, none, converted
-	var cret  *C.gchar         // return, full, string, casted *C.gchar
-
-	carg0 = (*C.GtkStatusIcon)(UnsafeStatusIconToGlibNone(statusIcon))
-
-	cret = C.gtk_status_icon_get_tooltip_markup(carg0)
-	runtime.KeepAlive(statusIcon)
-
-	var goret string
-
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
-	defer C.free(unsafe.Pointer(cret))
-
-	return goret
-}
-
-// GetTooltipText wraps gtk_status_icon_get_tooltip_text
-// The function returns the following values:
-// 
-// 	- goret string 
-//
-// Gets the contents of the tooltip for @status_icon.
-//
-// Deprecated: (since 3.14.0) Use #GNotification and #GtkApplication to
-//   provide status notifications; there is no direct replacement
-//   for this function
-func (statusIcon *StatusIconInstance) GetTooltipText() string {
-	var carg0 *C.GtkStatusIcon // in, none, converted
-	var cret  *C.gchar         // return, full, string, casted *C.gchar
-
-	carg0 = (*C.GtkStatusIcon)(UnsafeStatusIconToGlibNone(statusIcon))
-
-	cret = C.gtk_status_icon_get_tooltip_text(carg0)
-	runtime.KeepAlive(statusIcon)
-
-	var goret string
-
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
-	defer C.free(unsafe.Pointer(cret))
-
-	return goret
-}
-
-// GetVisible wraps gtk_status_icon_get_visible
-// The function returns the following values:
-// 
-// 	- goret bool 
-//
-// Returns whether the status icon is visible or not.
-// Note that being visible does not guarantee that
-// the user can actually see the icon, see also
-// gtk_status_icon_is_embedded().
-//
-// Deprecated: (since 3.14.0) Use #GNotification and #GtkApplication to
-//   provide status notifications; there is no direct replacement
-//   for this function
-func (statusIcon *StatusIconInstance) GetVisible() bool {
-	var carg0 *C.GtkStatusIcon // in, none, converted
-	var cret  C.gboolean       // return
-
-	carg0 = (*C.GtkStatusIcon)(UnsafeStatusIconToGlibNone(statusIcon))
-
-	cret = C.gtk_status_icon_get_visible(carg0)
-	runtime.KeepAlive(statusIcon)
-
-	var goret bool
-
-	if cret != 0 {
-		goret = true
-	}
-
-	return goret
-}
-
-// GetX11WindowID wraps gtk_status_icon_get_x11_window_id
-// The function returns the following values:
-// 
-// 	- goret uint32 
-//
-// This function is only useful on the X11/freedesktop.org platform.
-// 
-// It returns a window ID for the widget in the underlying
-// status icon implementation.  This is useful for the Galago
-// notification service, which can send a window ID in the protocol
-// in order for the server to position notification windows
-// pointing to a status icon reliably.
-// 
-// This function is not intended for other use cases which are
-// more likely to be met by one of the non-X11 specific methods, such
-// as gtk_status_icon_position_menu().
-//
-// Deprecated: (since 3.14.0) Use #GNotification and #GtkApplication to
-//   provide status notifications; there is no direct replacement
-//   for this function
-func (statusIcon *StatusIconInstance) GetX11WindowID() uint32 {
-	var carg0 *C.GtkStatusIcon // in, none, converted
-	var cret  C.guint32        // return, none, casted
-
-	carg0 = (*C.GtkStatusIcon)(UnsafeStatusIconToGlibNone(statusIcon))
-
-	cret = C.gtk_status_icon_get_x11_window_id(carg0)
-	runtime.KeepAlive(statusIcon)
-
-	var goret uint32
-
-	goret = uint32(cret)
-
-	return goret
-}
-
-// IsEmbedded wraps gtk_status_icon_is_embedded
-// The function returns the following values:
-// 
-// 	- goret bool 
-//
-// Returns whether the status icon is embedded in a notification
-// area.
-//
-// Deprecated: (since 3.14.0) Use #GNotification and #GtkApplication to
-//   provide status notifications; there is no direct replacement
-//   for this function
-func (statusIcon *StatusIconInstance) IsEmbedded() bool {
-	var carg0 *C.GtkStatusIcon // in, none, converted
-	var cret  C.gboolean       // return
-
-	carg0 = (*C.GtkStatusIcon)(UnsafeStatusIconToGlibNone(statusIcon))
-
-	cret = C.gtk_status_icon_is_embedded(carg0)
-	runtime.KeepAlive(statusIcon)
-
-	var goret bool
-
-	if cret != 0 {
-		goret = true
-	}
-
-	return goret
-}
-
-// SetFromFile wraps gtk_status_icon_set_from_file
-// 
-// The function takes the following parameters:
-// 
-// 	- filename string: a filename 
-//
-// Makes @status_icon display the file @filename.
-// See gtk_status_icon_new_from_file() for details.
-//
-// Deprecated: (since 3.14.0) Use #GNotification and #GtkApplication to
-//   provide status notifications; you can use g_notification_set_icon()
-//   to associate a #GIcon with a notification
-func (statusIcon *StatusIconInstance) SetFromFile(filename string) {
-	var carg0 *C.GtkStatusIcon // in, none, converted
-	var carg1 *C.gchar         // in, none, string, casted *C.gchar
-
-	carg0 = (*C.GtkStatusIcon)(UnsafeStatusIconToGlibNone(statusIcon))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(filename)))
-	defer C.free(unsafe.Pointer(carg1))
-
-	C.gtk_status_icon_set_from_file(carg0, carg1)
-	runtime.KeepAlive(statusIcon)
-	runtime.KeepAlive(filename)
-}
-
-// SetFromGIcon wraps gtk_status_icon_set_from_gicon
-// 
-// The function takes the following parameters:
-// 
-// 	- icon gio.Icon: a GIcon 
-//
-// Makes @status_icon display the #GIcon.
-// See gtk_status_icon_new_from_gicon() for details.
-//
-// Deprecated: (since 3.14.0) Use #GNotification and #GtkApplication to
-//   provide status notifications; you can use g_notification_set_icon()
-//   to associate a #GIcon with a notification
-func (statusIcon *StatusIconInstance) SetFromGIcon(icon gio.Icon) {
-	var carg0 *C.GtkStatusIcon // in, none, converted
-	var carg1 *C.GIcon         // in, none, converted
-
-	carg0 = (*C.GtkStatusIcon)(UnsafeStatusIconToGlibNone(statusIcon))
-	carg1 = (*C.GIcon)(gio.UnsafeIconToGlibNone(icon))
-
-	C.gtk_status_icon_set_from_gicon(carg0, carg1)
-	runtime.KeepAlive(statusIcon)
-	runtime.KeepAlive(icon)
-}
-
-// SetFromIconName wraps gtk_status_icon_set_from_icon_name
-// 
-// The function takes the following parameters:
-// 
-// 	- iconName string: an icon name 
-//
-// Makes @status_icon display the icon named @icon_name from the
-// current icon theme.
-// See gtk_status_icon_new_from_icon_name() for details.
-//
-// Deprecated: (since 3.14.0) Use #GNotification and #GtkApplication to
-//   provide status notifications; you can use g_notification_set_icon()
-//   to associate a #GIcon with a notification
-func (statusIcon *StatusIconInstance) SetFromIconName(iconName string) {
-	var carg0 *C.GtkStatusIcon // in, none, converted
-	var carg1 *C.gchar         // in, none, string, casted *C.gchar
-
-	carg0 = (*C.GtkStatusIcon)(UnsafeStatusIconToGlibNone(statusIcon))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(iconName)))
-	defer C.free(unsafe.Pointer(carg1))
-
-	C.gtk_status_icon_set_from_icon_name(carg0, carg1)
-	runtime.KeepAlive(statusIcon)
-	runtime.KeepAlive(iconName)
-}
-
-// SetFromPixbuf wraps gtk_status_icon_set_from_pixbuf
-// 
-// The function takes the following parameters:
-// 
-// 	- pixbuf gdkpixbuf.Pixbuf (nullable): a #GdkPixbuf or %NULL 
-//
-// Makes @status_icon display @pixbuf.
-// See gtk_status_icon_new_from_pixbuf() for details.
-//
-// Deprecated: (since 3.14.0) Use #GNotification and #GtkApplication to
-//   provide status notifications; you can use g_notification_set_icon()
-//   to associate a #GIcon with a notification
-func (statusIcon *StatusIconInstance) SetFromPixbuf(pixbuf gdkpixbuf.Pixbuf) {
-	var carg0 *C.GtkStatusIcon // in, none, converted
-	var carg1 *C.GdkPixbuf     // in, none, converted, nullable
-
-	carg0 = (*C.GtkStatusIcon)(UnsafeStatusIconToGlibNone(statusIcon))
-	if pixbuf != nil {
-		carg1 = (*C.GdkPixbuf)(gdkpixbuf.UnsafePixbufToGlibNone(pixbuf))
-	}
-
-	C.gtk_status_icon_set_from_pixbuf(carg0, carg1)
-	runtime.KeepAlive(statusIcon)
-	runtime.KeepAlive(pixbuf)
-}
-
-// SetFromStock wraps gtk_status_icon_set_from_stock
-// 
-// The function takes the following parameters:
-// 
-// 	- stockId string: a stock icon id 
-//
-// Makes @status_icon display the stock icon with the id @stock_id.
-// See gtk_status_icon_new_from_stock() for details.
-//
-// Deprecated: (since 3.10.0) Use gtk_status_icon_set_from_icon_name() instead.
-func (statusIcon *StatusIconInstance) SetFromStock(stockId string) {
-	var carg0 *C.GtkStatusIcon // in, none, converted
-	var carg1 *C.gchar         // in, none, string, casted *C.gchar
-
-	carg0 = (*C.GtkStatusIcon)(UnsafeStatusIconToGlibNone(statusIcon))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(stockId)))
-	defer C.free(unsafe.Pointer(carg1))
-
-	C.gtk_status_icon_set_from_stock(carg0, carg1)
-	runtime.KeepAlive(statusIcon)
-	runtime.KeepAlive(stockId)
-}
-
-// SetHasTooltip wraps gtk_status_icon_set_has_tooltip
-// 
-// The function takes the following parameters:
-// 
-// 	- hasTooltip bool: whether or not @status_icon has a tooltip 
-//
-// Sets the has-tooltip property on @status_icon to @has_tooltip.
-// See #GtkStatusIcon:has-tooltip for more information.
-//
-// Deprecated: (since 3.14.0) Use #GNotification and #GtkApplication to
-//   provide status notifications; there is no direct replacement
-//   for this function, but notifications can display an arbitrary
-//   amount of text using g_notification_set_body()
-func (statusIcon *StatusIconInstance) SetHasTooltip(hasTooltip bool) {
-	var carg0 *C.GtkStatusIcon // in, none, converted
-	var carg1 C.gboolean       // in
-
-	carg0 = (*C.GtkStatusIcon)(UnsafeStatusIconToGlibNone(statusIcon))
-	if hasTooltip {
-		carg1 = C.TRUE
-	}
-
-	C.gtk_status_icon_set_has_tooltip(carg0, carg1)
-	runtime.KeepAlive(statusIcon)
-	runtime.KeepAlive(hasTooltip)
-}
-
-// SetName wraps gtk_status_icon_set_name
-// 
-// The function takes the following parameters:
-// 
-// 	- name string: the name 
-//
-// Sets the name of this tray icon.
-// This should be a string identifying this icon. It is may be
-// used for sorting the icons in the tray and will not be shown to
-// the user.
-//
-// Deprecated: (since 3.14.0) Use #GNotification and #GtkApplication to
-//   provide status notifications; there is no direct replacement
-//   for this function, as notifications are associated with a
-//   unique application identifier by #GApplication
-func (statusIcon *StatusIconInstance) SetName(name string) {
-	var carg0 *C.GtkStatusIcon // in, none, converted
-	var carg1 *C.gchar         // in, none, string, casted *C.gchar
-
-	carg0 = (*C.GtkStatusIcon)(UnsafeStatusIconToGlibNone(statusIcon))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(name)))
-	defer C.free(unsafe.Pointer(carg1))
-
-	C.gtk_status_icon_set_name(carg0, carg1)
-	runtime.KeepAlive(statusIcon)
-	runtime.KeepAlive(name)
-}
-
-// SetScreen wraps gtk_status_icon_set_screen
-// 
-// The function takes the following parameters:
-// 
-// 	- screen gdk.Screen: a #GdkScreen 
-//
-// Sets the #GdkScreen where @status_icon is displayed; if
-// the icon is already mapped, it will be unmapped, and
-// then remapped on the new screen.
-//
-// Deprecated: (since 3.14.0) Use #GNotification and #GtkApplication to
-//   provide status notifications; there is no direct replacement
-//   for this function, as GTK typically only has one #GdkScreen
-//   and notifications are managed by the platform
-func (statusIcon *StatusIconInstance) SetScreen(screen gdk.Screen) {
-	var carg0 *C.GtkStatusIcon // in, none, converted
-	var carg1 *C.GdkScreen     // in, none, converted
-
-	carg0 = (*C.GtkStatusIcon)(UnsafeStatusIconToGlibNone(statusIcon))
-	carg1 = (*C.GdkScreen)(gdk.UnsafeScreenToGlibNone(screen))
-
-	C.gtk_status_icon_set_screen(carg0, carg1)
-	runtime.KeepAlive(statusIcon)
-	runtime.KeepAlive(screen)
-}
-
-// SetTitle wraps gtk_status_icon_set_title
-// 
-// The function takes the following parameters:
-// 
-// 	- title string: the title 
-//
-// Sets the title of this tray icon.
-// This should be a short, human-readable, localized string
-// describing the tray icon. It may be used by tools like screen
-// readers to render the tray icon.
-//
-// Deprecated: (since 3.14.0) Use #GNotification and #GtkApplication to
-//   provide status notifications; you should use g_notification_set_title()
-//   and g_notification_set_body() to present text inside your notification
-func (statusIcon *StatusIconInstance) SetTitle(title string) {
-	var carg0 *C.GtkStatusIcon // in, none, converted
-	var carg1 *C.gchar         // in, none, string, casted *C.gchar
-
-	carg0 = (*C.GtkStatusIcon)(UnsafeStatusIconToGlibNone(statusIcon))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(title)))
-	defer C.free(unsafe.Pointer(carg1))
-
-	C.gtk_status_icon_set_title(carg0, carg1)
-	runtime.KeepAlive(statusIcon)
-	runtime.KeepAlive(title)
-}
-
-// SetTooltipMarkup wraps gtk_status_icon_set_tooltip_markup
-// 
-// The function takes the following parameters:
-// 
-// 	- markup string (nullable): the contents of the tooltip for @status_icon, or %NULL 
-//
-// Sets @markup as the contents of the tooltip, which is marked up with
-//  the [Pango text markup language][PangoMarkupFormat].
-// 
-// This function will take care of setting #GtkStatusIcon:has-tooltip to %TRUE
-// and of the default handler for the #GtkStatusIcon::query-tooltip signal.
-// 
-// See also the #GtkStatusIcon:tooltip-markup property and
-// gtk_tooltip_set_markup().
-//
-// Deprecated: (since 3.14.0) Use #GNotification and #GtkApplication to
-//   provide status notifications; there is no direct replacement
-//   for this function
-func (statusIcon *StatusIconInstance) SetTooltipMarkup(markup string) {
-	var carg0 *C.GtkStatusIcon // in, none, converted
-	var carg1 *C.gchar         // in, none, string, nullable-string
-
-	carg0 = (*C.GtkStatusIcon)(UnsafeStatusIconToGlibNone(statusIcon))
-	if markup != "" {
-		carg1 = (*C.gchar)(unsafe.Pointer(C.CString(markup)))
-		defer C.free(unsafe.Pointer(carg1))
-	}
-
-	C.gtk_status_icon_set_tooltip_markup(carg0, carg1)
-	runtime.KeepAlive(statusIcon)
-	runtime.KeepAlive(markup)
-}
-
-// SetTooltipText wraps gtk_status_icon_set_tooltip_text
-// 
-// The function takes the following parameters:
-// 
-// 	- text string: the contents of the tooltip for @status_icon 
-//
-// Sets @text as the contents of the tooltip.
-// 
-// This function will take care of setting #GtkStatusIcon:has-tooltip to
-// %TRUE and of the default handler for the #GtkStatusIcon::query-tooltip
-// signal.
-// 
-// See also the #GtkStatusIcon:tooltip-text property and
-// gtk_tooltip_set_text().
-//
-// Deprecated: (since 3.14.0) Use #GNotification and #GtkApplication to
-//   provide status notifications; there is no direct replacement
-//   for this function
-func (statusIcon *StatusIconInstance) SetTooltipText(text string) {
-	var carg0 *C.GtkStatusIcon // in, none, converted
-	var carg1 *C.gchar         // in, none, string, casted *C.gchar
-
-	carg0 = (*C.GtkStatusIcon)(UnsafeStatusIconToGlibNone(statusIcon))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(text)))
-	defer C.free(unsafe.Pointer(carg1))
-
-	C.gtk_status_icon_set_tooltip_text(carg0, carg1)
-	runtime.KeepAlive(statusIcon)
-	runtime.KeepAlive(text)
-}
-
-// SetVisible wraps gtk_status_icon_set_visible
-// 
-// The function takes the following parameters:
-// 
-// 	- visible bool: %TRUE to show the status icon, %FALSE to hide it 
-//
-// Shows or hides a status icon.
-//
-// Deprecated: (since 3.14.0) Use #GNotification and #GtkApplication to
-//   provide status notifications; there is no direct replacement
-//   for this function, as notifications are managed by the platform
-func (statusIcon *StatusIconInstance) SetVisible(visible bool) {
-	var carg0 *C.GtkStatusIcon // in, none, converted
-	var carg1 C.gboolean       // in
-
-	carg0 = (*C.GtkStatusIcon)(UnsafeStatusIconToGlibNone(statusIcon))
-	if visible {
-		carg1 = C.TRUE
-	}
-
-	C.gtk_status_icon_set_visible(carg0, carg1)
-	runtime.KeepAlive(statusIcon)
-	runtime.KeepAlive(visible)
-}
-
 // StyleInstance is the instance type used by all types extending GtkStyle. It is used internally by the bindings. Users should use the interface [Style] instead.
 type StyleInstance struct {
 	_ [0]func() // equal guard
@@ -52010,22 +44626,6 @@ type Style interface {
 	gobject.Object
 	upcastToGtkStyle() *StyleInstance
 
-	// Copy wraps gtk_style_copy
-	// The function returns the following values:
-	// 
-	// 	- goret Style 
-	//
-	// Creates a copy of the passed in #GtkStyle object.
-	//
-	// Deprecated: (since 3.0.0) Use #GtkStyleContext instead
-	Copy() Style
-	// Detach wraps gtk_style_detach
-	//
-	// Detaches a style from a window. If the style is not attached
-	// to any windows anymore, it is unrealized. See gtk_style_attach().
-	//
-	// Deprecated: (since 3.0.0) Use #GtkStyleContext instead
-	Detach()
 	// GetStyleProperty wraps gtk_style_get_style_property
 	// 
 	// The function takes the following parameters:
@@ -52048,57 +44648,6 @@ type Style interface {
 	//
 	// Returns whether @style has an associated #GtkStyleContext.
 	HasContext() bool
-	// LookupIconSet wraps gtk_style_lookup_icon_set
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- stockId string: an icon name 
-	// 
-	// The function returns the following values:
-	// 
-	// 	- goret *IconSet 
-	//
-	// Looks up @stock_id in the icon factories associated with @style
-	// and the default icon factory, returning an icon set if found,
-	// otherwise %NULL.
-	//
-	// Deprecated: (since 3.0.0) Use gtk_style_context_lookup_icon_set() instead
-	LookupIconSet(string) *IconSet
-	// RenderIcon wraps gtk_style_render_icon
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- source *IconSource: the #GtkIconSource specifying the icon to render 
-	// 	- direction TextDirection: a text direction 
-	// 	- state StateType: a state 
-	// 	- size int: the size to render the icon at (#GtkIconSize). A size of
-	//     `(GtkIconSize)-1` means render at the size of the source and
-	//     don’t scale. 
-	// 	- widget Widget (nullable): the widget 
-	// 	- detail string (nullable): a style detail 
-	// 
-	// The function returns the following values:
-	// 
-	// 	- goret gdkpixbuf.Pixbuf 
-	//
-	// Renders the icon specified by @source at the given @size
-	// according to the given parameters and returns the result in a
-	// pixbuf.
-	//
-	// Deprecated: (since 3.0.0) Use gtk_render_icon_pixbuf() instead
-	RenderIcon(*IconSource, TextDirection, StateType, int, Widget, string) gdkpixbuf.Pixbuf
-	// SetBackground wraps gtk_style_set_background
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- window gdk.Window: a #GdkWindow 
-	// 	- stateType StateType: a state 
-	//
-	// Sets the background of @window to the background color or pixmap
-	// specified by @style for the given state.
-	//
-	// Deprecated: (since 3.0.0) Use gtk_style_context_set_background() instead
-	SetBackground(gdk.Window, StateType)
 }
 
 func unsafeWrapStyle(base *gobject.ObjectInstance) *StyleInstance {
@@ -52133,65 +44682,6 @@ func UnsafeStyleToGlibNone(c Style) unsafe.Pointer {
 // UnsafeStyleToGlibFull is used to convert the instance to it's C value GtkStyle, while removeing the finalizer. This is used by the bindings internally.
 func UnsafeStyleToGlibFull(c Style) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
-}
-
-// NewStyleInstance wraps gtk_style_new
-// The function returns the following values:
-// 
-// 	- goret Style 
-//
-// Creates a new #GtkStyle.
-//
-// Deprecated: (since 3.0.0) Use #GtkStyleContext
-func NewStyleInstance() Style {
-	var cret *C.GtkStyle // return, full, converted
-
-	cret = C.gtk_style_new()
-
-	var goret Style
-
-	goret = UnsafeStyleFromGlibFull(unsafe.Pointer(cret))
-
-	return goret
-}
-
-// Copy wraps gtk_style_copy
-// The function returns the following values:
-// 
-// 	- goret Style 
-//
-// Creates a copy of the passed in #GtkStyle object.
-//
-// Deprecated: (since 3.0.0) Use #GtkStyleContext instead
-func (style *StyleInstance) Copy() Style {
-	var carg0 *C.GtkStyle // in, none, converted
-	var cret  *C.GtkStyle // return, full, converted
-
-	carg0 = (*C.GtkStyle)(UnsafeStyleToGlibNone(style))
-
-	cret = C.gtk_style_copy(carg0)
-	runtime.KeepAlive(style)
-
-	var goret Style
-
-	goret = UnsafeStyleFromGlibFull(unsafe.Pointer(cret))
-
-	return goret
-}
-
-// Detach wraps gtk_style_detach
-//
-// Detaches a style from a window. If the style is not attached
-// to any windows anymore, it is unrealized. See gtk_style_attach().
-//
-// Deprecated: (since 3.0.0) Use #GtkStyleContext instead
-func (style *StyleInstance) Detach() {
-	var carg0 *C.GtkStyle // in, none, converted
-
-	carg0 = (*C.GtkStyle)(UnsafeStyleToGlibNone(style))
-
-	C.gtk_style_detach(carg0)
-	runtime.KeepAlive(style)
 }
 
 // GetStyleProperty wraps gtk_style_get_style_property
@@ -52255,128 +44745,6 @@ func (style *StyleInstance) HasContext() bool {
 	}
 
 	return goret
-}
-
-// LookupIconSet wraps gtk_style_lookup_icon_set
-// 
-// The function takes the following parameters:
-// 
-// 	- stockId string: an icon name 
-// 
-// The function returns the following values:
-// 
-// 	- goret *IconSet 
-//
-// Looks up @stock_id in the icon factories associated with @style
-// and the default icon factory, returning an icon set if found,
-// otherwise %NULL.
-//
-// Deprecated: (since 3.0.0) Use gtk_style_context_lookup_icon_set() instead
-func (style *StyleInstance) LookupIconSet(stockId string) *IconSet {
-	var carg0 *C.GtkStyle   // in, none, converted
-	var carg1 *C.gchar      // in, none, string, casted *C.gchar
-	var cret  *C.GtkIconSet // return, none, converted
-
-	carg0 = (*C.GtkStyle)(UnsafeStyleToGlibNone(style))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(stockId)))
-	defer C.free(unsafe.Pointer(carg1))
-
-	cret = C.gtk_style_lookup_icon_set(carg0, carg1)
-	runtime.KeepAlive(style)
-	runtime.KeepAlive(stockId)
-
-	var goret *IconSet
-
-	goret = UnsafeIconSetFromGlibNone(unsafe.Pointer(cret))
-
-	return goret
-}
-
-// RenderIcon wraps gtk_style_render_icon
-// 
-// The function takes the following parameters:
-// 
-// 	- source *IconSource: the #GtkIconSource specifying the icon to render 
-// 	- direction TextDirection: a text direction 
-// 	- state StateType: a state 
-// 	- size int: the size to render the icon at (#GtkIconSize). A size of
-//     `(GtkIconSize)-1` means render at the size of the source and
-//     don’t scale. 
-// 	- widget Widget (nullable): the widget 
-// 	- detail string (nullable): a style detail 
-// 
-// The function returns the following values:
-// 
-// 	- goret gdkpixbuf.Pixbuf 
-//
-// Renders the icon specified by @source at the given @size
-// according to the given parameters and returns the result in a
-// pixbuf.
-//
-// Deprecated: (since 3.0.0) Use gtk_render_icon_pixbuf() instead
-func (style *StyleInstance) RenderIcon(source *IconSource, direction TextDirection, state StateType, size int, widget Widget, detail string) gdkpixbuf.Pixbuf {
-	var carg0 *C.GtkStyle        // in, none, converted
-	var carg1 *C.GtkIconSource   // in, none, converted
-	var carg2 C.GtkTextDirection // in, none, casted
-	var carg3 C.GtkStateType     // in, none, casted
-	var carg4 C.GtkIconSize      // in, none, casted, casted C.gint
-	var carg5 *C.GtkWidget       // in, none, converted, nullable
-	var carg6 *C.gchar           // in, none, string, nullable-string
-	var cret  *C.GdkPixbuf       // return, full, converted
-
-	carg0 = (*C.GtkStyle)(UnsafeStyleToGlibNone(style))
-	carg1 = (*C.GtkIconSource)(UnsafeIconSourceToGlibNone(source))
-	carg2 = C.GtkTextDirection(direction)
-	carg3 = C.GtkStateType(state)
-	carg4 = C.GtkIconSize(size)
-	if widget != nil {
-		carg5 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(widget))
-	}
-	if detail != "" {
-		carg6 = (*C.gchar)(unsafe.Pointer(C.CString(detail)))
-		defer C.free(unsafe.Pointer(carg6))
-	}
-
-	cret = C.gtk_style_render_icon(carg0, carg1, carg2, carg3, carg4, carg5, carg6)
-	runtime.KeepAlive(style)
-	runtime.KeepAlive(source)
-	runtime.KeepAlive(direction)
-	runtime.KeepAlive(state)
-	runtime.KeepAlive(size)
-	runtime.KeepAlive(widget)
-	runtime.KeepAlive(detail)
-
-	var goret gdkpixbuf.Pixbuf
-
-	goret = gdkpixbuf.UnsafePixbufFromGlibFull(unsafe.Pointer(cret))
-
-	return goret
-}
-
-// SetBackground wraps gtk_style_set_background
-// 
-// The function takes the following parameters:
-// 
-// 	- window gdk.Window: a #GdkWindow 
-// 	- stateType StateType: a state 
-//
-// Sets the background of @window to the background color or pixmap
-// specified by @style for the given state.
-//
-// Deprecated: (since 3.0.0) Use gtk_style_context_set_background() instead
-func (style *StyleInstance) SetBackground(window gdk.Window, stateType StateType) {
-	var carg0 *C.GtkStyle    // in, none, converted
-	var carg1 *C.GdkWindow   // in, none, converted
-	var carg2 C.GtkStateType // in, none, casted
-
-	carg0 = (*C.GtkStyle)(UnsafeStyleToGlibNone(style))
-	carg1 = (*C.GdkWindow)(gdk.UnsafeWindowToGlibNone(window))
-	carg2 = C.GtkStateType(stateType)
-
-	C.gtk_style_set_background(carg0, carg1, carg2)
-	runtime.KeepAlive(style)
-	runtime.KeepAlive(window)
-	runtime.KeepAlive(stateType)
 }
 
 // StyleContextInstance is the instance type used by all types extending GtkStyleContext. It is used internally by the bindings. Users should use the interface [StyleContext] instead.
@@ -52490,80 +44858,6 @@ type StyleContext interface {
 	// added through this function takes precedence over another added
 	// through gtk_style_context_add_provider_for_screen().
 	AddProvider(StyleProvider, uint)
-	// AddRegion wraps gtk_style_context_add_region
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- regionName string: region name to use in styling 
-	// 	- flags RegionFlags: flags that apply to the region 
-	//
-	// Adds a region to @context, so posterior calls to
-	// gtk_style_context_get() or any of the gtk_render_*()
-	// functions will make use of this new region for styling.
-	// 
-	// In the CSS file format, a #GtkTreeView defining a “row”
-	// region, would be matched by:
-	// 
-	// |[ &lt;!-- language="CSS" --&gt;
-	// treeview row { ... }
-	// ]|
-	// 
-	// Pseudo-classes are used for matching @flags, so the two
-	// following rules:
-	// |[ &lt;!-- language="CSS" --&gt;
-	// treeview row:nth-child(even) { ... }
-	// treeview row:nth-child(odd) { ... }
-	// ]|
-	// 
-	// would apply to even and odd rows, respectively.
-	// 
-	// Region names must only contain lowercase letters
-	// and “-”, starting always with a lowercase letter.
-	//
-	// Deprecated: (since 3.14.0) 
-	AddRegion(string, RegionFlags)
-	// CancelAnimations wraps gtk_style_context_cancel_animations
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- regionId unsafe.Pointer (nullable): animatable region to stop, or %NULL.
-	//     See gtk_style_context_push_animatable_region() 
-	//
-	// Stops all running animations for @region_id and all animatable
-	// regions underneath.
-	// 
-	// A %NULL @region_id will stop all ongoing animations in @context,
-	// when dealing with a #GtkStyleContext obtained through
-	// gtk_widget_get_style_context(), this is normally done for you
-	// in all circumstances you would expect all widget to be stopped,
-	// so this should be only used in complex widgets with different
-	// animatable regions.
-	//
-	// Deprecated: (since 3.6.0) This function does nothing.
-	CancelAnimations(unsafe.Pointer)
-	// GetBackgroundColor wraps gtk_style_context_get_background_color
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- state StateFlags: state to retrieve the color for 
-	// 
-	// The function returns the following values:
-	// 
-	// 	- color gdk.RGBA: return value for the background color 
-	//
-	// Gets the background color for a given state.
-	// 
-	// This function is far less useful than it seems, and it should not be used in
-	// newly written code. CSS has no concept of "background color", as a background
-	// can be an image, or a gradient, or any other pattern including solid colors.
-	// 
-	// The only reason why you would call gtk_style_context_get_background_color() is
-	// to use the returned value to draw the background with it; the correct way to
-	// achieve this result is to use gtk_render_background() instead, along with CSS
-	// style classes to modify the color to be rendered.
-	//
-	// Deprecated: (since 3.16.0) Use gtk_render_background() instead.
-	GetBackgroundColor(StateFlags) gdk.RGBA
 	// GetBorder wraps gtk_style_context_get_border
 	// 
 	// The function takes the following parameters:
@@ -52579,20 +44873,6 @@ type StyleContext interface {
 	// See gtk_style_context_get_property() and
 	// #GTK_STYLE_PROPERTY_BORDER_WIDTH for details.
 	GetBorder(StateFlags) Border
-	// GetBorderColor wraps gtk_style_context_get_border_color
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- state StateFlags: state to retrieve the color for 
-	// 
-	// The function returns the following values:
-	// 
-	// 	- color gdk.RGBA: return value for the border color 
-	//
-	// Gets the border color for a given state.
-	//
-	// Deprecated: (since 3.16.0) Use gtk_render_frame() instead.
-	GetBorderColor(StateFlags) gdk.RGBA
 	// GetColor wraps gtk_style_context_get_color
 	// 
 	// The function takes the following parameters:
@@ -52608,34 +44888,6 @@ type StyleContext interface {
 	// See gtk_style_context_get_property() and
 	// #GTK_STYLE_PROPERTY_COLOR for details.
 	GetColor(StateFlags) gdk.RGBA
-	// GetDirection wraps gtk_style_context_get_direction
-	// The function returns the following values:
-	// 
-	// 	- goret TextDirection 
-	//
-	// Returns the widget direction used for rendering.
-	//
-	// Deprecated: (since 3.8.0) Use gtk_style_context_get_state() and
-	//   check for #GTK_STATE_FLAG_DIR_LTR and
-	//   #GTK_STATE_FLAG_DIR_RTL instead.
-	GetDirection() TextDirection
-	// GetFont wraps gtk_style_context_get_font
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- state StateFlags: state to retrieve the font for 
-	// 
-	// The function returns the following values:
-	// 
-	// 	- goret *pango.FontDescription 
-	//
-	// Returns the font description for a given state. The returned
-	// object is const and will remain valid until the
-	// #GtkStyleContext::changed signal happens.
-	//
-	// Deprecated: (since 3.8.0) Use gtk_style_context_get() for "font" or
-	//     subproperties instead.
-	GetFont(StateFlags) *pango.FontDescription
 	// GetFrameClock wraps gtk_style_context_get_frame_clock
 	// The function returns the following values:
 	// 
@@ -52792,31 +45044,6 @@ type StyleContext interface {
 	// Returns %TRUE if @context currently has defined the
 	// given class name.
 	HasClass(string) bool
-	// HasRegion wraps gtk_style_context_has_region
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- regionName string: a region name 
-	// 
-	// The function returns the following values:
-	// 
-	// 	- flagsReturn RegionFlags: return location for region flags 
-	// 	- goret bool 
-	//
-	// Returns %TRUE if @context has the region defined.
-	// If @flags_return is not %NULL, it is set to the flags
-	// affecting the region.
-	//
-	// Deprecated: (since 3.14.0) 
-	HasRegion(string) (RegionFlags, bool)
-	// Invalidate wraps gtk_style_context_invalidate
-	//
-	// Invalidates @context style information, so it will be reconstructed
-	// again. It is useful if you modify the @context and need the new
-	// information immediately.
-	//
-	// Deprecated: (since 3.12.0) Style contexts are invalidated automatically.
-	Invalidate()
 	// LookupColor wraps gtk_style_context_lookup_color
 	// 
 	// The function takes the following parameters:
@@ -52830,101 +45057,6 @@ type StyleContext interface {
 	//
 	// Looks up and resolves a color name in the @context color map.
 	LookupColor(string) (gdk.RGBA, bool)
-	// LookupIconSet wraps gtk_style_context_lookup_icon_set
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- stockId string: an icon name 
-	// 
-	// The function returns the following values:
-	// 
-	// 	- goret *IconSet 
-	//
-	// Looks up @stock_id in the icon factories associated to @context and
-	// the default icon factory, returning an icon set if found, otherwise
-	// %NULL.
-	//
-	// Deprecated: (since 3.10.0) Use gtk_icon_theme_lookup_icon() instead.
-	LookupIconSet(string) *IconSet
-	// NotifyStateChange wraps gtk_style_context_notify_state_change
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- window gdk.Window: a #GdkWindow 
-	// 	- regionId unsafe.Pointer (nullable): animatable region to notify on, or %NULL.
-	//     See gtk_style_context_push_animatable_region() 
-	// 	- state StateType: state to trigger transition for 
-	// 	- stateValue bool: %TRUE if @state is the state we are changing to,
-	//     %FALSE if we are changing away from it 
-	//
-	// Notifies a state change on @context, so if the current style makes use
-	// of transition animations, one will be started so all rendered elements
-	// under @region_id are animated for state @state being set to value
-	// @state_value.
-	// 
-	// The @window parameter is used in order to invalidate the rendered area
-	// as the animation runs, so make sure it is the same window that is being
-	// rendered on by the gtk_render_*() functions.
-	// 
-	// If @region_id is %NULL, all rendered elements using @context will be
-	// affected by this state transition.
-	// 
-	// As a practical example, a #GtkButton notifying a state transition on
-	// the prelight state:
-	// |[ &lt;!-- language="C" --&gt;
-	// gtk_style_context_notify_state_change (context,
-	//                                        gtk_widget_get_window (widget),
-	//                                        NULL,
-	//                                        GTK_STATE_PRELIGHT,
-	//                                        button-&gt;in_button);
-	// ]|
-	// 
-	// Can be handled in the CSS file like this:
-	// |[ &lt;!-- language="CSS" --&gt;
-	// button {
-	//     background-color: #f00
-	// }
-	// 
-	// button:hover {
-	//     background-color: #fff;
-	//     transition: 200ms linear
-	// }
-	// ]|
-	// 
-	// This combination will animate the button background from red to white
-	// if a pointer enters the button, and back to red if the pointer leaves
-	// the button.
-	// 
-	// Note that @state is used when finding the transition parameters, which
-	// is why the style places the transition under the :hover pseudo-class.
-	//
-	// Deprecated: (since 3.6.0) This function does nothing.
-	NotifyStateChange(gdk.Window, unsafe.Pointer, StateType, bool)
-	// PopAnimatableRegion wraps gtk_style_context_pop_animatable_region
-	//
-	// Pops an animatable region from @context.
-	// See gtk_style_context_push_animatable_region().
-	//
-	// Deprecated: (since 3.6.0) This function does nothing.
-	PopAnimatableRegion()
-	// PushAnimatableRegion wraps gtk_style_context_push_animatable_region
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- regionId unsafe.Pointer (nullable): unique identifier for the animatable region 
-	//
-	// Pushes an animatable region, so all further gtk_render_*() calls between
-	// this call and the following gtk_style_context_pop_animatable_region()
-	// will potentially show transition animations for this region if
-	// gtk_style_context_notify_state_change() is called for a given state,
-	// and the current theme/style defines transition animations for state
-	// changes.
-	// 
-	// The @region_id used must be unique in @context so the themes
-	// can uniquely identify rendered elements subject to a state transition.
-	//
-	// Deprecated: (since 3.6.0) This function does nothing.
-	PushAnimatableRegion(unsafe.Pointer)
 	// RemoveClass wraps gtk_style_context_remove_class
 	// 
 	// The function takes the following parameters:
@@ -52941,16 +45073,6 @@ type StyleContext interface {
 	//
 	// Removes @provider from the style providers list in @context.
 	RemoveProvider(StyleProvider)
-	// RemoveRegion wraps gtk_style_context_remove_region
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- regionName string: region name to unset 
-	//
-	// Removes a region from @context.
-	//
-	// Deprecated: (since 3.14.0) 
-	RemoveRegion(string)
 	// Restore wraps gtk_style_context_restore
 	//
 	// Restores @context state to a previous stage.
@@ -52966,51 +45088,6 @@ type StyleContext interface {
 	// The matching call to gtk_style_context_restore() must be done
 	// before GTK returns to the main loop.
 	Save()
-	// ScrollAnimations wraps gtk_style_context_scroll_animations
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- window gdk.Window: a #GdkWindow used previously in
-	//          gtk_style_context_notify_state_change() 
-	// 	- dx int: Amount to scroll in the X axis 
-	// 	- dy int: Amount to scroll in the Y axis 
-	//
-	// This function is analogous to gdk_window_scroll(), and
-	// should be called together with it so the invalidation
-	// areas for any ongoing animation are scrolled together
-	// with it.
-	//
-	// Deprecated: (since 3.6.0) This function does nothing.
-	ScrollAnimations(gdk.Window, int, int)
-	// SetBackground wraps gtk_style_context_set_background
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- window gdk.Window: a #GdkWindow 
-	//
-	// Sets the background of @window to the background pattern or
-	// color specified in @context for its current state.
-	//
-	// Deprecated: (since 3.18.0) Use gtk_render_background() instead.
-	//   Note that clients still using this function are now responsible
-	//   for calling this function again whenever @context is invalidated.
-	SetBackground(gdk.Window)
-	// SetDirection wraps gtk_style_context_set_direction
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- direction TextDirection: the new direction. 
-	//
-	// Sets the reading direction for rendering purposes.
-	// 
-	// If you are using a #GtkStyleContext returned from
-	// gtk_widget_get_style_context(), you do not need to
-	// call this yourself.
-	//
-	// Deprecated: (since 3.8.0) Use gtk_style_context_set_state() with
-	//   #GTK_STATE_FLAG_DIR_LTR and #GTK_STATE_FLAG_DIR_RTL
-	//   instead.
-	SetDirection(TextDirection)
 	// SetFrameClock wraps gtk_style_context_set_frame_clock
 	// 
 	// The function takes the following parameters:
@@ -53101,28 +45178,6 @@ type StyleContext interface {
 	//
 	// Sets the state to be used for style matching.
 	SetState(StateFlags)
-	// StateIsRunning wraps gtk_style_context_state_is_running
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- state StateType: a widget state 
-	// 
-	// The function returns the following values:
-	// 
-	// 	- progress float64: return location for the transition progress 
-	// 	- goret bool 
-	//
-	// Returns %TRUE if there is a transition animation running for the
-	// current region (see gtk_style_context_push_animatable_region()).
-	// 
-	// If @progress is not %NULL, the animation progress will be returned
-	// there, 0.0 means the state is closest to being unset, while 1.0 means
-	// it’s closest to being set. This means transition animation will
-	// run from 0 to 1 when @state is being set and from 1 to 0 when
-	// it’s being unset.
-	//
-	// Deprecated: (since 3.6.0) This function always returns %FALSE
-	StateIsRunning(StateType) (float64, bool)
 	// ToString wraps gtk_style_context_to_string
 	// 
 	// The function takes the following parameters:
@@ -53352,128 +45407,6 @@ func (context *StyleContextInstance) AddProvider(provider StyleProvider, priorit
 	runtime.KeepAlive(priority)
 }
 
-// AddRegion wraps gtk_style_context_add_region
-// 
-// The function takes the following parameters:
-// 
-// 	- regionName string: region name to use in styling 
-// 	- flags RegionFlags: flags that apply to the region 
-//
-// Adds a region to @context, so posterior calls to
-// gtk_style_context_get() or any of the gtk_render_*()
-// functions will make use of this new region for styling.
-// 
-// In the CSS file format, a #GtkTreeView defining a “row”
-// region, would be matched by:
-// 
-// |[ &lt;!-- language="CSS" --&gt;
-// treeview row { ... }
-// ]|
-// 
-// Pseudo-classes are used for matching @flags, so the two
-// following rules:
-// |[ &lt;!-- language="CSS" --&gt;
-// treeview row:nth-child(even) { ... }
-// treeview row:nth-child(odd) { ... }
-// ]|
-// 
-// would apply to even and odd rows, respectively.
-// 
-// Region names must only contain lowercase letters
-// and “-”, starting always with a lowercase letter.
-//
-// Deprecated: (since 3.14.0) 
-func (context *StyleContextInstance) AddRegion(regionName string, flags RegionFlags) {
-	var carg0 *C.GtkStyleContext // in, none, converted
-	var carg1 *C.gchar           // in, none, string, casted *C.gchar
-	var carg2 C.GtkRegionFlags   // in, none, casted
-
-	carg0 = (*C.GtkStyleContext)(UnsafeStyleContextToGlibNone(context))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(regionName)))
-	defer C.free(unsafe.Pointer(carg1))
-	carg2 = C.GtkRegionFlags(flags)
-
-	C.gtk_style_context_add_region(carg0, carg1, carg2)
-	runtime.KeepAlive(context)
-	runtime.KeepAlive(regionName)
-	runtime.KeepAlive(flags)
-}
-
-// CancelAnimations wraps gtk_style_context_cancel_animations
-// 
-// The function takes the following parameters:
-// 
-// 	- regionId unsafe.Pointer (nullable): animatable region to stop, or %NULL.
-//     See gtk_style_context_push_animatable_region() 
-//
-// Stops all running animations for @region_id and all animatable
-// regions underneath.
-// 
-// A %NULL @region_id will stop all ongoing animations in @context,
-// when dealing with a #GtkStyleContext obtained through
-// gtk_widget_get_style_context(), this is normally done for you
-// in all circumstances you would expect all widget to be stopped,
-// so this should be only used in complex widgets with different
-// animatable regions.
-//
-// Deprecated: (since 3.6.0) This function does nothing.
-func (context *StyleContextInstance) CancelAnimations(regionId unsafe.Pointer) {
-	var carg0 *C.GtkStyleContext // in, none, converted
-	var carg1 C.gpointer         // in, none, casted, nullable
-
-	carg0 = (*C.GtkStyleContext)(UnsafeStyleContextToGlibNone(context))
-	if regionId != nil {
-		carg1 = C.gpointer(regionId)
-	}
-
-	C.gtk_style_context_cancel_animations(carg0, carg1)
-	runtime.KeepAlive(context)
-	runtime.KeepAlive(regionId)
-}
-
-// GetBackgroundColor wraps gtk_style_context_get_background_color
-// 
-// The function takes the following parameters:
-// 
-// 	- state StateFlags: state to retrieve the color for 
-// 
-// The function returns the following values:
-// 
-// 	- color gdk.RGBA: return value for the background color 
-//
-// Gets the background color for a given state.
-// 
-// This function is far less useful than it seems, and it should not be used in
-// newly written code. CSS has no concept of "background color", as a background
-// can be an image, or a gradient, or any other pattern including solid colors.
-// 
-// The only reason why you would call gtk_style_context_get_background_color() is
-// to use the returned value to draw the background with it; the correct way to
-// achieve this result is to use gtk_render_background() instead, along with CSS
-// style classes to modify the color to be rendered.
-//
-// Deprecated: (since 3.16.0) Use gtk_render_background() instead.
-func (context *StyleContextInstance) GetBackgroundColor(state StateFlags) gdk.RGBA {
-	var carg0 *C.GtkStyleContext // in, none, converted
-	var carg1 C.GtkStateFlags    // in, none, casted
-	var carg2 C.GdkRGBA          // out, transfer: none, C Pointers: 0, Name: RGBA, caller-allocates
-
-	carg0 = (*C.GtkStyleContext)(UnsafeStyleContextToGlibNone(context))
-	carg1 = C.GtkStateFlags(state)
-
-	C.gtk_style_context_get_background_color(carg0, carg1, &carg2)
-	runtime.KeepAlive(context)
-	runtime.KeepAlive(state)
-
-	var color gdk.RGBA
-
-	_ = color
-	_ = carg2
-	panic("unimplemented conversion of gdk.RGBA (GdkRGBA)")
-
-	return color
-}
-
 // GetBorder wraps gtk_style_context_get_border
 // 
 // The function takes the following parameters:
@@ -53509,40 +45442,6 @@ func (context *StyleContextInstance) GetBorder(state StateFlags) Border {
 	return border
 }
 
-// GetBorderColor wraps gtk_style_context_get_border_color
-// 
-// The function takes the following parameters:
-// 
-// 	- state StateFlags: state to retrieve the color for 
-// 
-// The function returns the following values:
-// 
-// 	- color gdk.RGBA: return value for the border color 
-//
-// Gets the border color for a given state.
-//
-// Deprecated: (since 3.16.0) Use gtk_render_frame() instead.
-func (context *StyleContextInstance) GetBorderColor(state StateFlags) gdk.RGBA {
-	var carg0 *C.GtkStyleContext // in, none, converted
-	var carg1 C.GtkStateFlags    // in, none, casted
-	var carg2 C.GdkRGBA          // out, transfer: none, C Pointers: 0, Name: RGBA, caller-allocates
-
-	carg0 = (*C.GtkStyleContext)(UnsafeStyleContextToGlibNone(context))
-	carg1 = C.GtkStateFlags(state)
-
-	C.gtk_style_context_get_border_color(carg0, carg1, &carg2)
-	runtime.KeepAlive(context)
-	runtime.KeepAlive(state)
-
-	var color gdk.RGBA
-
-	_ = color
-	_ = carg2
-	panic("unimplemented conversion of gdk.RGBA (GdkRGBA)")
-
-	return color
-}
-
 // GetColor wraps gtk_style_context_get_color
 // 
 // The function takes the following parameters:
@@ -53576,67 +45475,6 @@ func (context *StyleContextInstance) GetColor(state StateFlags) gdk.RGBA {
 	panic("unimplemented conversion of gdk.RGBA (GdkRGBA)")
 
 	return color
-}
-
-// GetDirection wraps gtk_style_context_get_direction
-// The function returns the following values:
-// 
-// 	- goret TextDirection 
-//
-// Returns the widget direction used for rendering.
-//
-// Deprecated: (since 3.8.0) Use gtk_style_context_get_state() and
-//   check for #GTK_STATE_FLAG_DIR_LTR and
-//   #GTK_STATE_FLAG_DIR_RTL instead.
-func (context *StyleContextInstance) GetDirection() TextDirection {
-	var carg0 *C.GtkStyleContext // in, none, converted
-	var cret  C.GtkTextDirection // return, none, casted
-
-	carg0 = (*C.GtkStyleContext)(UnsafeStyleContextToGlibNone(context))
-
-	cret = C.gtk_style_context_get_direction(carg0)
-	runtime.KeepAlive(context)
-
-	var goret TextDirection
-
-	goret = TextDirection(cret)
-
-	return goret
-}
-
-// GetFont wraps gtk_style_context_get_font
-// 
-// The function takes the following parameters:
-// 
-// 	- state StateFlags: state to retrieve the font for 
-// 
-// The function returns the following values:
-// 
-// 	- goret *pango.FontDescription 
-//
-// Returns the font description for a given state. The returned
-// object is const and will remain valid until the
-// #GtkStyleContext::changed signal happens.
-//
-// Deprecated: (since 3.8.0) Use gtk_style_context_get() for "font" or
-//     subproperties instead.
-func (context *StyleContextInstance) GetFont(state StateFlags) *pango.FontDescription {
-	var carg0 *C.GtkStyleContext      // in, none, converted
-	var carg1 C.GtkStateFlags         // in, none, casted
-	var cret  *C.PangoFontDescription // return, none, converted
-
-	carg0 = (*C.GtkStyleContext)(UnsafeStyleContextToGlibNone(context))
-	carg1 = C.GtkStateFlags(state)
-
-	cret = C.gtk_style_context_get_font(carg0, carg1)
-	runtime.KeepAlive(context)
-	runtime.KeepAlive(state)
-
-	var goret *pango.FontDescription
-
-	goret = pango.UnsafeFontDescriptionFromGlibNone(unsafe.Pointer(cret))
-
-	return goret
 }
 
 // GetFrameClock wraps gtk_style_context_get_frame_clock
@@ -54019,63 +45857,6 @@ func (context *StyleContextInstance) HasClass(className string) bool {
 	return goret
 }
 
-// HasRegion wraps gtk_style_context_has_region
-// 
-// The function takes the following parameters:
-// 
-// 	- regionName string: a region name 
-// 
-// The function returns the following values:
-// 
-// 	- flagsReturn RegionFlags: return location for region flags 
-// 	- goret bool 
-//
-// Returns %TRUE if @context has the region defined.
-// If @flags_return is not %NULL, it is set to the flags
-// affecting the region.
-//
-// Deprecated: (since 3.14.0) 
-func (context *StyleContextInstance) HasRegion(regionName string) (RegionFlags, bool) {
-	var carg0 *C.GtkStyleContext // in, none, converted
-	var carg1 *C.gchar           // in, none, string, casted *C.gchar
-	var carg2 C.GtkRegionFlags   // out, full, casted
-	var cret  C.gboolean         // return
-
-	carg0 = (*C.GtkStyleContext)(UnsafeStyleContextToGlibNone(context))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(regionName)))
-	defer C.free(unsafe.Pointer(carg1))
-
-	cret = C.gtk_style_context_has_region(carg0, carg1, &carg2)
-	runtime.KeepAlive(context)
-	runtime.KeepAlive(regionName)
-
-	var flagsReturn RegionFlags
-	var goret       bool
-
-	flagsReturn = RegionFlags(carg2)
-	if cret != 0 {
-		goret = true
-	}
-
-	return flagsReturn, goret
-}
-
-// Invalidate wraps gtk_style_context_invalidate
-//
-// Invalidates @context style information, so it will be reconstructed
-// again. It is useful if you modify the @context and need the new
-// information immediately.
-//
-// Deprecated: (since 3.12.0) Style contexts are invalidated automatically.
-func (context *StyleContextInstance) Invalidate() {
-	var carg0 *C.GtkStyleContext // in, none, converted
-
-	carg0 = (*C.GtkStyleContext)(UnsafeStyleContextToGlibNone(context))
-
-	C.gtk_style_context_invalidate(carg0)
-	runtime.KeepAlive(context)
-}
-
 // LookupColor wraps gtk_style_context_lookup_color
 // 
 // The function takes the following parameters:
@@ -54113,165 +45894,6 @@ func (context *StyleContextInstance) LookupColor(colorName string) (gdk.RGBA, bo
 	}
 
 	return color, goret
-}
-
-// LookupIconSet wraps gtk_style_context_lookup_icon_set
-// 
-// The function takes the following parameters:
-// 
-// 	- stockId string: an icon name 
-// 
-// The function returns the following values:
-// 
-// 	- goret *IconSet 
-//
-// Looks up @stock_id in the icon factories associated to @context and
-// the default icon factory, returning an icon set if found, otherwise
-// %NULL.
-//
-// Deprecated: (since 3.10.0) Use gtk_icon_theme_lookup_icon() instead.
-func (context *StyleContextInstance) LookupIconSet(stockId string) *IconSet {
-	var carg0 *C.GtkStyleContext // in, none, converted
-	var carg1 *C.gchar           // in, none, string, casted *C.gchar
-	var cret  *C.GtkIconSet      // return, none, converted
-
-	carg0 = (*C.GtkStyleContext)(UnsafeStyleContextToGlibNone(context))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(stockId)))
-	defer C.free(unsafe.Pointer(carg1))
-
-	cret = C.gtk_style_context_lookup_icon_set(carg0, carg1)
-	runtime.KeepAlive(context)
-	runtime.KeepAlive(stockId)
-
-	var goret *IconSet
-
-	goret = UnsafeIconSetFromGlibNone(unsafe.Pointer(cret))
-
-	return goret
-}
-
-// NotifyStateChange wraps gtk_style_context_notify_state_change
-// 
-// The function takes the following parameters:
-// 
-// 	- window gdk.Window: a #GdkWindow 
-// 	- regionId unsafe.Pointer (nullable): animatable region to notify on, or %NULL.
-//     See gtk_style_context_push_animatable_region() 
-// 	- state StateType: state to trigger transition for 
-// 	- stateValue bool: %TRUE if @state is the state we are changing to,
-//     %FALSE if we are changing away from it 
-//
-// Notifies a state change on @context, so if the current style makes use
-// of transition animations, one will be started so all rendered elements
-// under @region_id are animated for state @state being set to value
-// @state_value.
-// 
-// The @window parameter is used in order to invalidate the rendered area
-// as the animation runs, so make sure it is the same window that is being
-// rendered on by the gtk_render_*() functions.
-// 
-// If @region_id is %NULL, all rendered elements using @context will be
-// affected by this state transition.
-// 
-// As a practical example, a #GtkButton notifying a state transition on
-// the prelight state:
-// |[ &lt;!-- language="C" --&gt;
-// gtk_style_context_notify_state_change (context,
-//                                        gtk_widget_get_window (widget),
-//                                        NULL,
-//                                        GTK_STATE_PRELIGHT,
-//                                        button-&gt;in_button);
-// ]|
-// 
-// Can be handled in the CSS file like this:
-// |[ &lt;!-- language="CSS" --&gt;
-// button {
-//     background-color: #f00
-// }
-// 
-// button:hover {
-//     background-color: #fff;
-//     transition: 200ms linear
-// }
-// ]|
-// 
-// This combination will animate the button background from red to white
-// if a pointer enters the button, and back to red if the pointer leaves
-// the button.
-// 
-// Note that @state is used when finding the transition parameters, which
-// is why the style places the transition under the :hover pseudo-class.
-//
-// Deprecated: (since 3.6.0) This function does nothing.
-func (context *StyleContextInstance) NotifyStateChange(window gdk.Window, regionId unsafe.Pointer, state StateType, stateValue bool) {
-	var carg0 *C.GtkStyleContext // in, none, converted
-	var carg1 *C.GdkWindow       // in, none, converted
-	var carg2 C.gpointer         // in, none, casted, nullable
-	var carg3 C.GtkStateType     // in, none, casted
-	var carg4 C.gboolean         // in
-
-	carg0 = (*C.GtkStyleContext)(UnsafeStyleContextToGlibNone(context))
-	carg1 = (*C.GdkWindow)(gdk.UnsafeWindowToGlibNone(window))
-	if regionId != nil {
-		carg2 = C.gpointer(regionId)
-	}
-	carg3 = C.GtkStateType(state)
-	if stateValue {
-		carg4 = C.TRUE
-	}
-
-	C.gtk_style_context_notify_state_change(carg0, carg1, carg2, carg3, carg4)
-	runtime.KeepAlive(context)
-	runtime.KeepAlive(window)
-	runtime.KeepAlive(regionId)
-	runtime.KeepAlive(state)
-	runtime.KeepAlive(stateValue)
-}
-
-// PopAnimatableRegion wraps gtk_style_context_pop_animatable_region
-//
-// Pops an animatable region from @context.
-// See gtk_style_context_push_animatable_region().
-//
-// Deprecated: (since 3.6.0) This function does nothing.
-func (context *StyleContextInstance) PopAnimatableRegion() {
-	var carg0 *C.GtkStyleContext // in, none, converted
-
-	carg0 = (*C.GtkStyleContext)(UnsafeStyleContextToGlibNone(context))
-
-	C.gtk_style_context_pop_animatable_region(carg0)
-	runtime.KeepAlive(context)
-}
-
-// PushAnimatableRegion wraps gtk_style_context_push_animatable_region
-// 
-// The function takes the following parameters:
-// 
-// 	- regionId unsafe.Pointer (nullable): unique identifier for the animatable region 
-//
-// Pushes an animatable region, so all further gtk_render_*() calls between
-// this call and the following gtk_style_context_pop_animatable_region()
-// will potentially show transition animations for this region if
-// gtk_style_context_notify_state_change() is called for a given state,
-// and the current theme/style defines transition animations for state
-// changes.
-// 
-// The @region_id used must be unique in @context so the themes
-// can uniquely identify rendered elements subject to a state transition.
-//
-// Deprecated: (since 3.6.0) This function does nothing.
-func (context *StyleContextInstance) PushAnimatableRegion(regionId unsafe.Pointer) {
-	var carg0 *C.GtkStyleContext // in, none, converted
-	var carg1 C.gpointer         // in, none, casted, nullable
-
-	carg0 = (*C.GtkStyleContext)(UnsafeStyleContextToGlibNone(context))
-	if regionId != nil {
-		carg1 = C.gpointer(regionId)
-	}
-
-	C.gtk_style_context_push_animatable_region(carg0, carg1)
-	runtime.KeepAlive(context)
-	runtime.KeepAlive(regionId)
 }
 
 // RemoveClass wraps gtk_style_context_remove_class
@@ -54313,28 +45935,6 @@ func (context *StyleContextInstance) RemoveProvider(provider StyleProvider) {
 	runtime.KeepAlive(provider)
 }
 
-// RemoveRegion wraps gtk_style_context_remove_region
-// 
-// The function takes the following parameters:
-// 
-// 	- regionName string: region name to unset 
-//
-// Removes a region from @context.
-//
-// Deprecated: (since 3.14.0) 
-func (context *StyleContextInstance) RemoveRegion(regionName string) {
-	var carg0 *C.GtkStyleContext // in, none, converted
-	var carg1 *C.gchar           // in, none, string, casted *C.gchar
-
-	carg0 = (*C.GtkStyleContext)(UnsafeStyleContextToGlibNone(context))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(regionName)))
-	defer C.free(unsafe.Pointer(carg1))
-
-	C.gtk_style_context_remove_region(carg0, carg1)
-	runtime.KeepAlive(context)
-	runtime.KeepAlive(regionName)
-}
-
 // Restore wraps gtk_style_context_restore
 //
 // Restores @context state to a previous stage.
@@ -54364,90 +45964,6 @@ func (context *StyleContextInstance) Save() {
 
 	C.gtk_style_context_save(carg0)
 	runtime.KeepAlive(context)
-}
-
-// ScrollAnimations wraps gtk_style_context_scroll_animations
-// 
-// The function takes the following parameters:
-// 
-// 	- window gdk.Window: a #GdkWindow used previously in
-//          gtk_style_context_notify_state_change() 
-// 	- dx int: Amount to scroll in the X axis 
-// 	- dy int: Amount to scroll in the Y axis 
-//
-// This function is analogous to gdk_window_scroll(), and
-// should be called together with it so the invalidation
-// areas for any ongoing animation are scrolled together
-// with it.
-//
-// Deprecated: (since 3.6.0) This function does nothing.
-func (context *StyleContextInstance) ScrollAnimations(window gdk.Window, dx int, dy int) {
-	var carg0 *C.GtkStyleContext // in, none, converted
-	var carg1 *C.GdkWindow       // in, none, converted
-	var carg2 C.gint             // in, none, casted
-	var carg3 C.gint             // in, none, casted
-
-	carg0 = (*C.GtkStyleContext)(UnsafeStyleContextToGlibNone(context))
-	carg1 = (*C.GdkWindow)(gdk.UnsafeWindowToGlibNone(window))
-	carg2 = C.gint(dx)
-	carg3 = C.gint(dy)
-
-	C.gtk_style_context_scroll_animations(carg0, carg1, carg2, carg3)
-	runtime.KeepAlive(context)
-	runtime.KeepAlive(window)
-	runtime.KeepAlive(dx)
-	runtime.KeepAlive(dy)
-}
-
-// SetBackground wraps gtk_style_context_set_background
-// 
-// The function takes the following parameters:
-// 
-// 	- window gdk.Window: a #GdkWindow 
-//
-// Sets the background of @window to the background pattern or
-// color specified in @context for its current state.
-//
-// Deprecated: (since 3.18.0) Use gtk_render_background() instead.
-//   Note that clients still using this function are now responsible
-//   for calling this function again whenever @context is invalidated.
-func (context *StyleContextInstance) SetBackground(window gdk.Window) {
-	var carg0 *C.GtkStyleContext // in, none, converted
-	var carg1 *C.GdkWindow       // in, none, converted
-
-	carg0 = (*C.GtkStyleContext)(UnsafeStyleContextToGlibNone(context))
-	carg1 = (*C.GdkWindow)(gdk.UnsafeWindowToGlibNone(window))
-
-	C.gtk_style_context_set_background(carg0, carg1)
-	runtime.KeepAlive(context)
-	runtime.KeepAlive(window)
-}
-
-// SetDirection wraps gtk_style_context_set_direction
-// 
-// The function takes the following parameters:
-// 
-// 	- direction TextDirection: the new direction. 
-//
-// Sets the reading direction for rendering purposes.
-// 
-// If you are using a #GtkStyleContext returned from
-// gtk_widget_get_style_context(), you do not need to
-// call this yourself.
-//
-// Deprecated: (since 3.8.0) Use gtk_style_context_set_state() with
-//   #GTK_STATE_FLAG_DIR_LTR and #GTK_STATE_FLAG_DIR_RTL
-//   instead.
-func (context *StyleContextInstance) SetDirection(direction TextDirection) {
-	var carg0 *C.GtkStyleContext // in, none, converted
-	var carg1 C.GtkTextDirection // in, none, casted
-
-	carg0 = (*C.GtkStyleContext)(UnsafeStyleContextToGlibNone(context))
-	carg1 = C.GtkTextDirection(direction)
-
-	C.gtk_style_context_set_direction(carg0, carg1)
-	runtime.KeepAlive(context)
-	runtime.KeepAlive(direction)
 }
 
 // SetFrameClock wraps gtk_style_context_set_frame_clock
@@ -54619,51 +46135,6 @@ func (context *StyleContextInstance) SetState(flags StateFlags) {
 	runtime.KeepAlive(flags)
 }
 
-// StateIsRunning wraps gtk_style_context_state_is_running
-// 
-// The function takes the following parameters:
-// 
-// 	- state StateType: a widget state 
-// 
-// The function returns the following values:
-// 
-// 	- progress float64: return location for the transition progress 
-// 	- goret bool 
-//
-// Returns %TRUE if there is a transition animation running for the
-// current region (see gtk_style_context_push_animatable_region()).
-// 
-// If @progress is not %NULL, the animation progress will be returned
-// there, 0.0 means the state is closest to being unset, while 1.0 means
-// it’s closest to being set. This means transition animation will
-// run from 0 to 1 when @state is being set and from 1 to 0 when
-// it’s being unset.
-//
-// Deprecated: (since 3.6.0) This function always returns %FALSE
-func (context *StyleContextInstance) StateIsRunning(state StateType) (float64, bool) {
-	var carg0 *C.GtkStyleContext // in, none, converted
-	var carg1 C.GtkStateType     // in, none, casted
-	var carg2 C.gdouble          // out, full, casted
-	var cret  C.gboolean         // return
-
-	carg0 = (*C.GtkStyleContext)(UnsafeStyleContextToGlibNone(context))
-	carg1 = C.GtkStateType(state)
-
-	cret = C.gtk_style_context_state_is_running(carg0, carg1, &carg2)
-	runtime.KeepAlive(context)
-	runtime.KeepAlive(state)
-
-	var progress float64
-	var goret    bool
-
-	progress = float64(carg2)
-	if cret != 0 {
-		goret = true
-	}
-
-	return progress, goret
-}
-
 // ToString wraps gtk_style_context_to_string
 // 
 // The function takes the following parameters:
@@ -54733,94 +46204,6 @@ var _ StyleProperties = (*StylePropertiesInstance)(nil)
 type StyleProperties interface {
 	gobject.Object
 	upcastToGtkStyleProperties() *StylePropertiesInstance
-
-	// Clear wraps gtk_style_properties_clear
-	//
-	// Clears all style information from @props.
-	//
-	// Deprecated: (since 3.16.0) #GtkStyleProperties are deprecated.
-	Clear()
-	// GetProperty wraps gtk_style_properties_get_property
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- property string: style property name 
-	// 	- state StateFlags: state to retrieve the property value for 
-	// 
-	// The function returns the following values:
-	// 
-	// 	- value gobject.Value: return location for the style property value. 
-	// 	- goret bool 
-	//
-	// Gets a style property from @props for the given state. When done with @value,
-	// g_value_unset() needs to be called to free any allocated memory.
-	//
-	// Deprecated: (since 3.16.0) #GtkStyleProperties are deprecated.
-	GetProperty(string, StateFlags) (gobject.Value, bool)
-	// LookupColor wraps gtk_style_properties_lookup_color
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- name string: color name to lookup 
-	// 
-	// The function returns the following values:
-	// 
-	// 	- goret *SymbolicColor 
-	//
-	// Returns the symbolic color that is mapped
-	// to @name.
-	//
-	// Deprecated: (since 3.8.0) #GtkSymbolicColor is deprecated.
-	LookupColor(string) *SymbolicColor
-	// MapColor wraps gtk_style_properties_map_color
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- name string: color name 
-	// 	- color *SymbolicColor: #GtkSymbolicColor to map @name to 
-	//
-	// Maps @color so it can be referenced by @name. See
-	// gtk_style_properties_lookup_color()
-	//
-	// Deprecated: (since 3.8.0) #GtkSymbolicColor is deprecated.
-	MapColor(string, *SymbolicColor)
-	// Merge wraps gtk_style_properties_merge
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- propsToMerge StyleProperties: a second #GtkStyleProperties 
-	// 	- replace bool: whether to replace values or not 
-	//
-	// Merges into @props all the style information contained
-	// in @props_to_merge. If @replace is %TRUE, the values
-	// will be overwritten, if it is %FALSE, the older values
-	// will prevail.
-	//
-	// Deprecated: (since 3.16.0) #GtkStyleProperties are deprecated.
-	Merge(StyleProperties, bool)
-	// SetProperty wraps gtk_style_properties_set_property
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- property string: styling property to set 
-	// 	- state StateFlags: state to set the value for 
-	// 	- value *gobject.Value: new value for the property 
-	//
-	// Sets a styling property in @props.
-	//
-	// Deprecated: (since 3.16.0) #GtkStyleProperties are deprecated.
-	SetProperty(string, StateFlags, *gobject.Value)
-	// UnsetProperty wraps gtk_style_properties_unset_property
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- property string: property to unset 
-	// 	- state StateFlags: state to unset 
-	//
-	// Unsets a style property in @props.
-	//
-	// Deprecated: (since 3.16.0) #GtkStyleProperties are deprecated.
-	UnsetProperty(string, StateFlags)
 }
 
 func unsafeWrapStyleProperties(base *gobject.ObjectInstance) *StylePropertiesInstance {
@@ -54855,233 +46238,6 @@ func UnsafeStylePropertiesToGlibNone(c StyleProperties) unsafe.Pointer {
 // UnsafeStylePropertiesToGlibFull is used to convert the instance to it's C value GtkStyleProperties, while removeing the finalizer. This is used by the bindings internally.
 func UnsafeStylePropertiesToGlibFull(c StyleProperties) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
-}
-
-// NewStylePropertiesInstance wraps gtk_style_properties_new
-// The function returns the following values:
-// 
-// 	- goret StyleProperties 
-//
-// Returns a newly created #GtkStyleProperties
-//
-// Deprecated: (since 3.16.0) #GtkStyleProperties are deprecated.
-func NewStylePropertiesInstance() StyleProperties {
-	var cret *C.GtkStyleProperties // return, full, converted
-
-	cret = C.gtk_style_properties_new()
-
-	var goret StyleProperties
-
-	goret = UnsafeStylePropertiesFromGlibFull(unsafe.Pointer(cret))
-
-	return goret
-}
-
-// Clear wraps gtk_style_properties_clear
-//
-// Clears all style information from @props.
-//
-// Deprecated: (since 3.16.0) #GtkStyleProperties are deprecated.
-func (props *StylePropertiesInstance) Clear() {
-	var carg0 *C.GtkStyleProperties // in, none, converted
-
-	carg0 = (*C.GtkStyleProperties)(UnsafeStylePropertiesToGlibNone(props))
-
-	C.gtk_style_properties_clear(carg0)
-	runtime.KeepAlive(props)
-}
-
-// GetProperty wraps gtk_style_properties_get_property
-// 
-// The function takes the following parameters:
-// 
-// 	- property string: style property name 
-// 	- state StateFlags: state to retrieve the property value for 
-// 
-// The function returns the following values:
-// 
-// 	- value gobject.Value: return location for the style property value. 
-// 	- goret bool 
-//
-// Gets a style property from @props for the given state. When done with @value,
-// g_value_unset() needs to be called to free any allocated memory.
-//
-// Deprecated: (since 3.16.0) #GtkStyleProperties are deprecated.
-func (props *StylePropertiesInstance) GetProperty(property string, state StateFlags) (gobject.Value, bool) {
-	var carg0 *C.GtkStyleProperties // in, none, converted
-	var carg1 *C.gchar              // in, none, string, casted *C.gchar
-	var carg2 C.GtkStateFlags       // in, none, casted
-	var carg3 C.GValue              // out, transfer: full, C Pointers: 0, Name: Value, caller-allocates
-	var cret  C.gboolean            // return
-
-	carg0 = (*C.GtkStyleProperties)(UnsafeStylePropertiesToGlibNone(props))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(property)))
-	defer C.free(unsafe.Pointer(carg1))
-	carg2 = C.GtkStateFlags(state)
-
-	cret = C.gtk_style_properties_get_property(carg0, carg1, carg2, &carg3)
-	runtime.KeepAlive(props)
-	runtime.KeepAlive(property)
-	runtime.KeepAlive(state)
-
-	var value gobject.Value
-	var goret bool
-
-	_ = value
-	_ = carg3
-	panic("unimplemented conversion of gobject.Value (GValue)")
-	if cret != 0 {
-		goret = true
-	}
-
-	return value, goret
-}
-
-// LookupColor wraps gtk_style_properties_lookup_color
-// 
-// The function takes the following parameters:
-// 
-// 	- name string: color name to lookup 
-// 
-// The function returns the following values:
-// 
-// 	- goret *SymbolicColor 
-//
-// Returns the symbolic color that is mapped
-// to @name.
-//
-// Deprecated: (since 3.8.0) #GtkSymbolicColor is deprecated.
-func (props *StylePropertiesInstance) LookupColor(name string) *SymbolicColor {
-	var carg0 *C.GtkStyleProperties // in, none, converted
-	var carg1 *C.gchar              // in, none, string, casted *C.gchar
-	var cret  *C.GtkSymbolicColor   // return, none, converted
-
-	carg0 = (*C.GtkStyleProperties)(UnsafeStylePropertiesToGlibNone(props))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(name)))
-	defer C.free(unsafe.Pointer(carg1))
-
-	cret = C.gtk_style_properties_lookup_color(carg0, carg1)
-	runtime.KeepAlive(props)
-	runtime.KeepAlive(name)
-
-	var goret *SymbolicColor
-
-	goret = UnsafeSymbolicColorFromGlibNone(unsafe.Pointer(cret))
-
-	return goret
-}
-
-// MapColor wraps gtk_style_properties_map_color
-// 
-// The function takes the following parameters:
-// 
-// 	- name string: color name 
-// 	- color *SymbolicColor: #GtkSymbolicColor to map @name to 
-//
-// Maps @color so it can be referenced by @name. See
-// gtk_style_properties_lookup_color()
-//
-// Deprecated: (since 3.8.0) #GtkSymbolicColor is deprecated.
-func (props *StylePropertiesInstance) MapColor(name string, color *SymbolicColor) {
-	var carg0 *C.GtkStyleProperties // in, none, converted
-	var carg1 *C.gchar              // in, none, string, casted *C.gchar
-	var carg2 *C.GtkSymbolicColor   // in, none, converted
-
-	carg0 = (*C.GtkStyleProperties)(UnsafeStylePropertiesToGlibNone(props))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(name)))
-	defer C.free(unsafe.Pointer(carg1))
-	carg2 = (*C.GtkSymbolicColor)(UnsafeSymbolicColorToGlibNone(color))
-
-	C.gtk_style_properties_map_color(carg0, carg1, carg2)
-	runtime.KeepAlive(props)
-	runtime.KeepAlive(name)
-	runtime.KeepAlive(color)
-}
-
-// Merge wraps gtk_style_properties_merge
-// 
-// The function takes the following parameters:
-// 
-// 	- propsToMerge StyleProperties: a second #GtkStyleProperties 
-// 	- replace bool: whether to replace values or not 
-//
-// Merges into @props all the style information contained
-// in @props_to_merge. If @replace is %TRUE, the values
-// will be overwritten, if it is %FALSE, the older values
-// will prevail.
-//
-// Deprecated: (since 3.16.0) #GtkStyleProperties are deprecated.
-func (props *StylePropertiesInstance) Merge(propsToMerge StyleProperties, replace bool) {
-	var carg0 *C.GtkStyleProperties // in, none, converted
-	var carg1 *C.GtkStyleProperties // in, none, converted
-	var carg2 C.gboolean            // in
-
-	carg0 = (*C.GtkStyleProperties)(UnsafeStylePropertiesToGlibNone(props))
-	carg1 = (*C.GtkStyleProperties)(UnsafeStylePropertiesToGlibNone(propsToMerge))
-	if replace {
-		carg2 = C.TRUE
-	}
-
-	C.gtk_style_properties_merge(carg0, carg1, carg2)
-	runtime.KeepAlive(props)
-	runtime.KeepAlive(propsToMerge)
-	runtime.KeepAlive(replace)
-}
-
-// SetProperty wraps gtk_style_properties_set_property
-// 
-// The function takes the following parameters:
-// 
-// 	- property string: styling property to set 
-// 	- state StateFlags: state to set the value for 
-// 	- value *gobject.Value: new value for the property 
-//
-// Sets a styling property in @props.
-//
-// Deprecated: (since 3.16.0) #GtkStyleProperties are deprecated.
-func (props *StylePropertiesInstance) SetProperty(property string, state StateFlags, value *gobject.Value) {
-	var carg0 *C.GtkStyleProperties // in, none, converted
-	var carg1 *C.gchar              // in, none, string, casted *C.gchar
-	var carg2 C.GtkStateFlags       // in, none, casted
-	var carg3 *C.GValue             // in, none, converted
-
-	carg0 = (*C.GtkStyleProperties)(UnsafeStylePropertiesToGlibNone(props))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(property)))
-	defer C.free(unsafe.Pointer(carg1))
-	carg2 = C.GtkStateFlags(state)
-	carg3 = (*C.GValue)(gobject.UnsafeValueToGlibNone(value))
-
-	C.gtk_style_properties_set_property(carg0, carg1, carg2, carg3)
-	runtime.KeepAlive(props)
-	runtime.KeepAlive(property)
-	runtime.KeepAlive(state)
-	runtime.KeepAlive(value)
-}
-
-// UnsetProperty wraps gtk_style_properties_unset_property
-// 
-// The function takes the following parameters:
-// 
-// 	- property string: property to unset 
-// 	- state StateFlags: state to unset 
-//
-// Unsets a style property in @props.
-//
-// Deprecated: (since 3.16.0) #GtkStyleProperties are deprecated.
-func (props *StylePropertiesInstance) UnsetProperty(property string, state StateFlags) {
-	var carg0 *C.GtkStyleProperties // in, none, converted
-	var carg1 *C.gchar              // in, none, string, casted *C.gchar
-	var carg2 C.GtkStateFlags       // in, none, casted
-
-	carg0 = (*C.GtkStyleProperties)(UnsafeStylePropertiesToGlibNone(props))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(property)))
-	defer C.free(unsafe.Pointer(carg1))
-	carg2 = C.GtkStateFlags(state)
-
-	C.gtk_style_properties_unset_property(carg0, carg1, carg2)
-	runtime.KeepAlive(props)
-	runtime.KeepAlive(property)
-	runtime.KeepAlive(state)
 }
 
 // TextBufferInstance is the instance type used by all types extending GtkTextBuffer. It is used internally by the bindings. Users should use the interface [TextBuffer] instead.
@@ -57078,7 +48234,7 @@ func (buffer *TextBufferInstance) GetSlice(start *TextIter, end *TextIter, inclu
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 	defer C.free(unsafe.Pointer(cret))
 
 	return goret
@@ -57173,7 +48329,7 @@ func (buffer *TextBufferInstance) GetText(start *TextIter, end *TextIter, includ
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 	defer C.free(unsafe.Pointer(cret))
 
 	return goret
@@ -58265,7 +49421,7 @@ func (mark *TextMarkInstance) GetName() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -58831,254 +49987,6 @@ var _ ThemingEngine = (*ThemingEngineInstance)(nil)
 type ThemingEngine interface {
 	gobject.Object
 	upcastToGtkThemingEngine() *ThemingEngineInstance
-
-	// GetBackgroundColor wraps gtk_theming_engine_get_background_color
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- state StateFlags: state to retrieve the color for 
-	// 
-	// The function returns the following values:
-	// 
-	// 	- color gdk.RGBA: return value for the background color 
-	//
-	// Gets the background color for a given state.
-	//
-	// Deprecated: (since 3.14.0) 
-	GetBackgroundColor(StateFlags) gdk.RGBA
-	// GetBorder wraps gtk_theming_engine_get_border
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- state StateFlags: state to retrieve the border for 
-	// 
-	// The function returns the following values:
-	// 
-	// 	- border Border: return value for the border settings 
-	//
-	// Gets the border for a given state as a #GtkBorder.
-	//
-	// Deprecated: (since 3.14.0) 
-	GetBorder(StateFlags) Border
-	// GetBorderColor wraps gtk_theming_engine_get_border_color
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- state StateFlags: state to retrieve the color for 
-	// 
-	// The function returns the following values:
-	// 
-	// 	- color gdk.RGBA: return value for the border color 
-	//
-	// Gets the border color for a given state.
-	//
-	// Deprecated: (since 3.14.0) 
-	GetBorderColor(StateFlags) gdk.RGBA
-	// GetColor wraps gtk_theming_engine_get_color
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- state StateFlags: state to retrieve the color for 
-	// 
-	// The function returns the following values:
-	// 
-	// 	- color gdk.RGBA: return value for the foreground color 
-	//
-	// Gets the foreground color for a given state.
-	//
-	// Deprecated: (since 3.14.0) 
-	GetColor(StateFlags) gdk.RGBA
-	// GetDirection wraps gtk_theming_engine_get_direction
-	// The function returns the following values:
-	// 
-	// 	- goret TextDirection 
-	//
-	// Returns the widget direction used for rendering.
-	//
-	// Deprecated: (since 3.8.0) Use gtk_theming_engine_get_state() and
-	//   check for #GTK_STATE_FLAG_DIR_LTR and
-	//   #GTK_STATE_FLAG_DIR_RTL instead.
-	GetDirection() TextDirection
-	// GetFont wraps gtk_theming_engine_get_font
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- state StateFlags: state to retrieve the font for 
-	// 
-	// The function returns the following values:
-	// 
-	// 	- goret *pango.FontDescription 
-	//
-	// Returns the font description for a given state.
-	//
-	// Deprecated: (since 3.8.0) Use gtk_theming_engine_get()
-	GetFont(StateFlags) *pango.FontDescription
-	// GetJunctionSides wraps gtk_theming_engine_get_junction_sides
-	// The function returns the following values:
-	// 
-	// 	- goret JunctionSides 
-	//
-	// Returns the widget direction used for rendering.
-	//
-	// Deprecated: (since 3.14.0) 
-	GetJunctionSides() JunctionSides
-	// GetMargin wraps gtk_theming_engine_get_margin
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- state StateFlags: state to retrieve the border for 
-	// 
-	// The function returns the following values:
-	// 
-	// 	- margin Border: return value for the margin settings 
-	//
-	// Gets the margin for a given state as a #GtkBorder.
-	//
-	// Deprecated: (since 3.14.0) 
-	GetMargin(StateFlags) Border
-	// GetPadding wraps gtk_theming_engine_get_padding
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- state StateFlags: state to retrieve the padding for 
-	// 
-	// The function returns the following values:
-	// 
-	// 	- padding Border: return value for the padding settings 
-	//
-	// Gets the padding for a given state as a #GtkBorder.
-	//
-	// Deprecated: (since 3.14.0) 
-	GetPadding(StateFlags) Border
-	// GetPath wraps gtk_theming_engine_get_path
-	// The function returns the following values:
-	// 
-	// 	- goret *WidgetPath 
-	//
-	// Returns the widget path used for style matching.
-	//
-	// Deprecated: (since 3.14.0) 
-	GetPath() *WidgetPath
-	// GetProperty wraps gtk_theming_engine_get_property
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- property string: the property name 
-	// 	- state StateFlags: state to retrieve the value for 
-	// 
-	// The function returns the following values:
-	// 
-	// 	- value gobject.Value: return location for the property value,
-	//         you must free this memory using g_value_unset() once you are
-	//         done with it. 
-	//
-	// Gets a property value as retrieved from the style settings that apply
-	// to the currently rendered element.
-	//
-	// Deprecated: (since 3.14.0) 
-	GetProperty(string, StateFlags) gobject.Value
-	// GetScreen wraps gtk_theming_engine_get_screen
-	// The function returns the following values:
-	// 
-	// 	- goret gdk.Screen 
-	//
-	// Returns the #GdkScreen to which @engine currently rendering to.
-	//
-	// Deprecated: (since 3.14.0) 
-	GetScreen() gdk.Screen
-	// GetState wraps gtk_theming_engine_get_state
-	// The function returns the following values:
-	// 
-	// 	- goret StateFlags 
-	//
-	// returns the state used when rendering.
-	//
-	// Deprecated: (since 3.14.0) 
-	GetState() StateFlags
-	// GetStyleProperty wraps gtk_theming_engine_get_style_property
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- propertyName string: the name of the widget style property 
-	// 
-	// The function returns the following values:
-	// 
-	// 	- value gobject.Value: Return location for the property value, free with
-	//         g_value_unset() after use. 
-	//
-	// Gets the value for a widget style property.
-	//
-	// Deprecated: (since 3.14.0) 
-	GetStyleProperty(string) gobject.Value
-	// HasClass wraps gtk_theming_engine_has_class
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- styleClass string: class name to look up 
-	// 
-	// The function returns the following values:
-	// 
-	// 	- goret bool 
-	//
-	// Returns %TRUE if the currently rendered contents have
-	// defined the given class name.
-	//
-	// Deprecated: (since 3.14.0) 
-	HasClass(string) bool
-	// HasRegion wraps gtk_theming_engine_has_region
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- styleRegion string: a region name 
-	// 
-	// The function returns the following values:
-	// 
-	// 	- flags RegionFlags: return location for region flags 
-	// 	- goret bool 
-	//
-	// Returns %TRUE if the currently rendered contents have the
-	// region defined. If @flags_return is not %NULL, it is set
-	// to the flags affecting the region.
-	//
-	// Deprecated: (since 3.14.0) 
-	HasRegion(string) (RegionFlags, bool)
-	// LookupColor wraps gtk_theming_engine_lookup_color
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- colorName string: color name to lookup 
-	// 
-	// The function returns the following values:
-	// 
-	// 	- color gdk.RGBA: Return location for the looked up color 
-	// 	- goret bool 
-	//
-	// Looks up and resolves a color name in the current style’s color map.
-	//
-	// Deprecated: (since 3.14.0) 
-	LookupColor(string) (gdk.RGBA, bool)
-	// StateIsRunning wraps gtk_theming_engine_state_is_running
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- state StateType: a widget state 
-	// 
-	// The function returns the following values:
-	// 
-	// 	- progress float64: return location for the transition progress 
-	// 	- goret bool 
-	//
-	// Returns %TRUE if there is a transition animation running for the
-	// current region (see gtk_style_context_push_animatable_region()).
-	// 
-	// If @progress is not %NULL, the animation progress will be returned
-	// there, 0.0 means the state is closest to being %FALSE, while 1.0 means
-	// it’s closest to being %TRUE. This means transition animations will
-	// run from 0 to 1 when @state is being set to %TRUE and from 1 to 0 when
-	// it’s being set to %FALSE.
-	//
-	// Deprecated: (since 3.6.0) Always returns %FALSE
-	StateIsRunning(StateType) (float64, bool)
 }
 
 func unsafeWrapThemingEngine(base *gobject.ObjectInstance) *ThemingEngineInstance {
@@ -59115,636 +50023,6 @@ func UnsafeThemingEngineToGlibFull(c ThemingEngine) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// ThemingEngineInstanceLoad wraps gtk_theming_engine_load
-// 
-// The function takes the following parameters:
-// 
-// 	- name string: Theme engine name to load 
-// 
-// The function returns the following values:
-// 
-// 	- goret ThemingEngine 
-//
-// Loads and initializes a theming engine module from the
-// standard directories.
-//
-// Deprecated: (since 3.14.0) 
-func ThemingEngineInstanceLoad(name string) ThemingEngine {
-	var carg1 *C.gchar            // in, none, string, casted *C.gchar
-	var cret  *C.GtkThemingEngine // return, none, converted
-
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(name)))
-	defer C.free(unsafe.Pointer(carg1))
-
-	cret = C.gtk_theming_engine_load(carg1)
-	runtime.KeepAlive(name)
-
-	var goret ThemingEngine
-
-	goret = UnsafeThemingEngineFromGlibNone(unsafe.Pointer(cret))
-
-	return goret
-}
-
-// GetBackgroundColor wraps gtk_theming_engine_get_background_color
-// 
-// The function takes the following parameters:
-// 
-// 	- state StateFlags: state to retrieve the color for 
-// 
-// The function returns the following values:
-// 
-// 	- color gdk.RGBA: return value for the background color 
-//
-// Gets the background color for a given state.
-//
-// Deprecated: (since 3.14.0) 
-func (engine *ThemingEngineInstance) GetBackgroundColor(state StateFlags) gdk.RGBA {
-	var carg0 *C.GtkThemingEngine // in, none, converted
-	var carg1 C.GtkStateFlags     // in, none, casted
-	var carg2 C.GdkRGBA           // out, transfer: none, C Pointers: 0, Name: RGBA, caller-allocates
-
-	carg0 = (*C.GtkThemingEngine)(UnsafeThemingEngineToGlibNone(engine))
-	carg1 = C.GtkStateFlags(state)
-
-	C.gtk_theming_engine_get_background_color(carg0, carg1, &carg2)
-	runtime.KeepAlive(engine)
-	runtime.KeepAlive(state)
-
-	var color gdk.RGBA
-
-	_ = color
-	_ = carg2
-	panic("unimplemented conversion of gdk.RGBA (GdkRGBA)")
-
-	return color
-}
-
-// GetBorder wraps gtk_theming_engine_get_border
-// 
-// The function takes the following parameters:
-// 
-// 	- state StateFlags: state to retrieve the border for 
-// 
-// The function returns the following values:
-// 
-// 	- border Border: return value for the border settings 
-//
-// Gets the border for a given state as a #GtkBorder.
-//
-// Deprecated: (since 3.14.0) 
-func (engine *ThemingEngineInstance) GetBorder(state StateFlags) Border {
-	var carg0 *C.GtkThemingEngine // in, none, converted
-	var carg1 C.GtkStateFlags     // in, none, casted
-	var carg2 C.GtkBorder         // out, transfer: none, C Pointers: 0, Name: Border, caller-allocates
-
-	carg0 = (*C.GtkThemingEngine)(UnsafeThemingEngineToGlibNone(engine))
-	carg1 = C.GtkStateFlags(state)
-
-	C.gtk_theming_engine_get_border(carg0, carg1, &carg2)
-	runtime.KeepAlive(engine)
-	runtime.KeepAlive(state)
-
-	var border Border
-
-	_ = border
-	_ = carg2
-	panic("unimplemented conversion of Border (GtkBorder)")
-
-	return border
-}
-
-// GetBorderColor wraps gtk_theming_engine_get_border_color
-// 
-// The function takes the following parameters:
-// 
-// 	- state StateFlags: state to retrieve the color for 
-// 
-// The function returns the following values:
-// 
-// 	- color gdk.RGBA: return value for the border color 
-//
-// Gets the border color for a given state.
-//
-// Deprecated: (since 3.14.0) 
-func (engine *ThemingEngineInstance) GetBorderColor(state StateFlags) gdk.RGBA {
-	var carg0 *C.GtkThemingEngine // in, none, converted
-	var carg1 C.GtkStateFlags     // in, none, casted
-	var carg2 C.GdkRGBA           // out, transfer: none, C Pointers: 0, Name: RGBA, caller-allocates
-
-	carg0 = (*C.GtkThemingEngine)(UnsafeThemingEngineToGlibNone(engine))
-	carg1 = C.GtkStateFlags(state)
-
-	C.gtk_theming_engine_get_border_color(carg0, carg1, &carg2)
-	runtime.KeepAlive(engine)
-	runtime.KeepAlive(state)
-
-	var color gdk.RGBA
-
-	_ = color
-	_ = carg2
-	panic("unimplemented conversion of gdk.RGBA (GdkRGBA)")
-
-	return color
-}
-
-// GetColor wraps gtk_theming_engine_get_color
-// 
-// The function takes the following parameters:
-// 
-// 	- state StateFlags: state to retrieve the color for 
-// 
-// The function returns the following values:
-// 
-// 	- color gdk.RGBA: return value for the foreground color 
-//
-// Gets the foreground color for a given state.
-//
-// Deprecated: (since 3.14.0) 
-func (engine *ThemingEngineInstance) GetColor(state StateFlags) gdk.RGBA {
-	var carg0 *C.GtkThemingEngine // in, none, converted
-	var carg1 C.GtkStateFlags     // in, none, casted
-	var carg2 C.GdkRGBA           // out, transfer: none, C Pointers: 0, Name: RGBA, caller-allocates
-
-	carg0 = (*C.GtkThemingEngine)(UnsafeThemingEngineToGlibNone(engine))
-	carg1 = C.GtkStateFlags(state)
-
-	C.gtk_theming_engine_get_color(carg0, carg1, &carg2)
-	runtime.KeepAlive(engine)
-	runtime.KeepAlive(state)
-
-	var color gdk.RGBA
-
-	_ = color
-	_ = carg2
-	panic("unimplemented conversion of gdk.RGBA (GdkRGBA)")
-
-	return color
-}
-
-// GetDirection wraps gtk_theming_engine_get_direction
-// The function returns the following values:
-// 
-// 	- goret TextDirection 
-//
-// Returns the widget direction used for rendering.
-//
-// Deprecated: (since 3.8.0) Use gtk_theming_engine_get_state() and
-//   check for #GTK_STATE_FLAG_DIR_LTR and
-//   #GTK_STATE_FLAG_DIR_RTL instead.
-func (engine *ThemingEngineInstance) GetDirection() TextDirection {
-	var carg0 *C.GtkThemingEngine // in, none, converted
-	var cret  C.GtkTextDirection  // return, none, casted
-
-	carg0 = (*C.GtkThemingEngine)(UnsafeThemingEngineToGlibNone(engine))
-
-	cret = C.gtk_theming_engine_get_direction(carg0)
-	runtime.KeepAlive(engine)
-
-	var goret TextDirection
-
-	goret = TextDirection(cret)
-
-	return goret
-}
-
-// GetFont wraps gtk_theming_engine_get_font
-// 
-// The function takes the following parameters:
-// 
-// 	- state StateFlags: state to retrieve the font for 
-// 
-// The function returns the following values:
-// 
-// 	- goret *pango.FontDescription 
-//
-// Returns the font description for a given state.
-//
-// Deprecated: (since 3.8.0) Use gtk_theming_engine_get()
-func (engine *ThemingEngineInstance) GetFont(state StateFlags) *pango.FontDescription {
-	var carg0 *C.GtkThemingEngine     // in, none, converted
-	var carg1 C.GtkStateFlags         // in, none, casted
-	var cret  *C.PangoFontDescription // return, none, converted
-
-	carg0 = (*C.GtkThemingEngine)(UnsafeThemingEngineToGlibNone(engine))
-	carg1 = C.GtkStateFlags(state)
-
-	cret = C.gtk_theming_engine_get_font(carg0, carg1)
-	runtime.KeepAlive(engine)
-	runtime.KeepAlive(state)
-
-	var goret *pango.FontDescription
-
-	goret = pango.UnsafeFontDescriptionFromGlibNone(unsafe.Pointer(cret))
-
-	return goret
-}
-
-// GetJunctionSides wraps gtk_theming_engine_get_junction_sides
-// The function returns the following values:
-// 
-// 	- goret JunctionSides 
-//
-// Returns the widget direction used for rendering.
-//
-// Deprecated: (since 3.14.0) 
-func (engine *ThemingEngineInstance) GetJunctionSides() JunctionSides {
-	var carg0 *C.GtkThemingEngine // in, none, converted
-	var cret  C.GtkJunctionSides  // return, none, casted
-
-	carg0 = (*C.GtkThemingEngine)(UnsafeThemingEngineToGlibNone(engine))
-
-	cret = C.gtk_theming_engine_get_junction_sides(carg0)
-	runtime.KeepAlive(engine)
-
-	var goret JunctionSides
-
-	goret = JunctionSides(cret)
-
-	return goret
-}
-
-// GetMargin wraps gtk_theming_engine_get_margin
-// 
-// The function takes the following parameters:
-// 
-// 	- state StateFlags: state to retrieve the border for 
-// 
-// The function returns the following values:
-// 
-// 	- margin Border: return value for the margin settings 
-//
-// Gets the margin for a given state as a #GtkBorder.
-//
-// Deprecated: (since 3.14.0) 
-func (engine *ThemingEngineInstance) GetMargin(state StateFlags) Border {
-	var carg0 *C.GtkThemingEngine // in, none, converted
-	var carg1 C.GtkStateFlags     // in, none, casted
-	var carg2 C.GtkBorder         // out, transfer: none, C Pointers: 0, Name: Border, caller-allocates
-
-	carg0 = (*C.GtkThemingEngine)(UnsafeThemingEngineToGlibNone(engine))
-	carg1 = C.GtkStateFlags(state)
-
-	C.gtk_theming_engine_get_margin(carg0, carg1, &carg2)
-	runtime.KeepAlive(engine)
-	runtime.KeepAlive(state)
-
-	var margin Border
-
-	_ = margin
-	_ = carg2
-	panic("unimplemented conversion of Border (GtkBorder)")
-
-	return margin
-}
-
-// GetPadding wraps gtk_theming_engine_get_padding
-// 
-// The function takes the following parameters:
-// 
-// 	- state StateFlags: state to retrieve the padding for 
-// 
-// The function returns the following values:
-// 
-// 	- padding Border: return value for the padding settings 
-//
-// Gets the padding for a given state as a #GtkBorder.
-//
-// Deprecated: (since 3.14.0) 
-func (engine *ThemingEngineInstance) GetPadding(state StateFlags) Border {
-	var carg0 *C.GtkThemingEngine // in, none, converted
-	var carg1 C.GtkStateFlags     // in, none, casted
-	var carg2 C.GtkBorder         // out, transfer: none, C Pointers: 0, Name: Border, caller-allocates
-
-	carg0 = (*C.GtkThemingEngine)(UnsafeThemingEngineToGlibNone(engine))
-	carg1 = C.GtkStateFlags(state)
-
-	C.gtk_theming_engine_get_padding(carg0, carg1, &carg2)
-	runtime.KeepAlive(engine)
-	runtime.KeepAlive(state)
-
-	var padding Border
-
-	_ = padding
-	_ = carg2
-	panic("unimplemented conversion of Border (GtkBorder)")
-
-	return padding
-}
-
-// GetPath wraps gtk_theming_engine_get_path
-// The function returns the following values:
-// 
-// 	- goret *WidgetPath 
-//
-// Returns the widget path used for style matching.
-//
-// Deprecated: (since 3.14.0) 
-func (engine *ThemingEngineInstance) GetPath() *WidgetPath {
-	var carg0 *C.GtkThemingEngine // in, none, converted
-	var cret  *C.GtkWidgetPath    // return, none, converted
-
-	carg0 = (*C.GtkThemingEngine)(UnsafeThemingEngineToGlibNone(engine))
-
-	cret = C.gtk_theming_engine_get_path(carg0)
-	runtime.KeepAlive(engine)
-
-	var goret *WidgetPath
-
-	goret = UnsafeWidgetPathFromGlibNone(unsafe.Pointer(cret))
-
-	return goret
-}
-
-// GetProperty wraps gtk_theming_engine_get_property
-// 
-// The function takes the following parameters:
-// 
-// 	- property string: the property name 
-// 	- state StateFlags: state to retrieve the value for 
-// 
-// The function returns the following values:
-// 
-// 	- value gobject.Value: return location for the property value,
-//         you must free this memory using g_value_unset() once you are
-//         done with it. 
-//
-// Gets a property value as retrieved from the style settings that apply
-// to the currently rendered element.
-//
-// Deprecated: (since 3.14.0) 
-func (engine *ThemingEngineInstance) GetProperty(property string, state StateFlags) gobject.Value {
-	var carg0 *C.GtkThemingEngine // in, none, converted
-	var carg1 *C.gchar            // in, none, string, casted *C.gchar
-	var carg2 C.GtkStateFlags     // in, none, casted
-	var carg3 C.GValue            // out, transfer: full, C Pointers: 0, Name: Value, caller-allocates
-
-	carg0 = (*C.GtkThemingEngine)(UnsafeThemingEngineToGlibNone(engine))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(property)))
-	defer C.free(unsafe.Pointer(carg1))
-	carg2 = C.GtkStateFlags(state)
-
-	C.gtk_theming_engine_get_property(carg0, carg1, carg2, &carg3)
-	runtime.KeepAlive(engine)
-	runtime.KeepAlive(property)
-	runtime.KeepAlive(state)
-
-	var value gobject.Value
-
-	_ = value
-	_ = carg3
-	panic("unimplemented conversion of gobject.Value (GValue)")
-
-	return value
-}
-
-// GetScreen wraps gtk_theming_engine_get_screen
-// The function returns the following values:
-// 
-// 	- goret gdk.Screen 
-//
-// Returns the #GdkScreen to which @engine currently rendering to.
-//
-// Deprecated: (since 3.14.0) 
-func (engine *ThemingEngineInstance) GetScreen() gdk.Screen {
-	var carg0 *C.GtkThemingEngine // in, none, converted
-	var cret  *C.GdkScreen        // return, none, converted
-
-	carg0 = (*C.GtkThemingEngine)(UnsafeThemingEngineToGlibNone(engine))
-
-	cret = C.gtk_theming_engine_get_screen(carg0)
-	runtime.KeepAlive(engine)
-
-	var goret gdk.Screen
-
-	goret = gdk.UnsafeScreenFromGlibNone(unsafe.Pointer(cret))
-
-	return goret
-}
-
-// GetState wraps gtk_theming_engine_get_state
-// The function returns the following values:
-// 
-// 	- goret StateFlags 
-//
-// returns the state used when rendering.
-//
-// Deprecated: (since 3.14.0) 
-func (engine *ThemingEngineInstance) GetState() StateFlags {
-	var carg0 *C.GtkThemingEngine // in, none, converted
-	var cret  C.GtkStateFlags     // return, none, casted
-
-	carg0 = (*C.GtkThemingEngine)(UnsafeThemingEngineToGlibNone(engine))
-
-	cret = C.gtk_theming_engine_get_state(carg0)
-	runtime.KeepAlive(engine)
-
-	var goret StateFlags
-
-	goret = StateFlags(cret)
-
-	return goret
-}
-
-// GetStyleProperty wraps gtk_theming_engine_get_style_property
-// 
-// The function takes the following parameters:
-// 
-// 	- propertyName string: the name of the widget style property 
-// 
-// The function returns the following values:
-// 
-// 	- value gobject.Value: Return location for the property value, free with
-//         g_value_unset() after use. 
-//
-// Gets the value for a widget style property.
-//
-// Deprecated: (since 3.14.0) 
-func (engine *ThemingEngineInstance) GetStyleProperty(propertyName string) gobject.Value {
-	var carg0 *C.GtkThemingEngine // in, none, converted
-	var carg1 *C.gchar            // in, none, string, casted *C.gchar
-	var carg2 C.GValue            // out, transfer: none, C Pointers: 0, Name: Value, caller-allocates
-
-	carg0 = (*C.GtkThemingEngine)(UnsafeThemingEngineToGlibNone(engine))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(propertyName)))
-	defer C.free(unsafe.Pointer(carg1))
-
-	C.gtk_theming_engine_get_style_property(carg0, carg1, &carg2)
-	runtime.KeepAlive(engine)
-	runtime.KeepAlive(propertyName)
-
-	var value gobject.Value
-
-	_ = value
-	_ = carg2
-	panic("unimplemented conversion of gobject.Value (GValue)")
-
-	return value
-}
-
-// HasClass wraps gtk_theming_engine_has_class
-// 
-// The function takes the following parameters:
-// 
-// 	- styleClass string: class name to look up 
-// 
-// The function returns the following values:
-// 
-// 	- goret bool 
-//
-// Returns %TRUE if the currently rendered contents have
-// defined the given class name.
-//
-// Deprecated: (since 3.14.0) 
-func (engine *ThemingEngineInstance) HasClass(styleClass string) bool {
-	var carg0 *C.GtkThemingEngine // in, none, converted
-	var carg1 *C.gchar            // in, none, string, casted *C.gchar
-	var cret  C.gboolean          // return
-
-	carg0 = (*C.GtkThemingEngine)(UnsafeThemingEngineToGlibNone(engine))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(styleClass)))
-	defer C.free(unsafe.Pointer(carg1))
-
-	cret = C.gtk_theming_engine_has_class(carg0, carg1)
-	runtime.KeepAlive(engine)
-	runtime.KeepAlive(styleClass)
-
-	var goret bool
-
-	if cret != 0 {
-		goret = true
-	}
-
-	return goret
-}
-
-// HasRegion wraps gtk_theming_engine_has_region
-// 
-// The function takes the following parameters:
-// 
-// 	- styleRegion string: a region name 
-// 
-// The function returns the following values:
-// 
-// 	- flags RegionFlags: return location for region flags 
-// 	- goret bool 
-//
-// Returns %TRUE if the currently rendered contents have the
-// region defined. If @flags_return is not %NULL, it is set
-// to the flags affecting the region.
-//
-// Deprecated: (since 3.14.0) 
-func (engine *ThemingEngineInstance) HasRegion(styleRegion string) (RegionFlags, bool) {
-	var carg0 *C.GtkThemingEngine // in, none, converted
-	var carg1 *C.gchar            // in, none, string, casted *C.gchar
-	var carg2 C.GtkRegionFlags    // out, full, casted
-	var cret  C.gboolean          // return
-
-	carg0 = (*C.GtkThemingEngine)(UnsafeThemingEngineToGlibNone(engine))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(styleRegion)))
-	defer C.free(unsafe.Pointer(carg1))
-
-	cret = C.gtk_theming_engine_has_region(carg0, carg1, &carg2)
-	runtime.KeepAlive(engine)
-	runtime.KeepAlive(styleRegion)
-
-	var flags RegionFlags
-	var goret bool
-
-	flags = RegionFlags(carg2)
-	if cret != 0 {
-		goret = true
-	}
-
-	return flags, goret
-}
-
-// LookupColor wraps gtk_theming_engine_lookup_color
-// 
-// The function takes the following parameters:
-// 
-// 	- colorName string: color name to lookup 
-// 
-// The function returns the following values:
-// 
-// 	- color gdk.RGBA: Return location for the looked up color 
-// 	- goret bool 
-//
-// Looks up and resolves a color name in the current style’s color map.
-//
-// Deprecated: (since 3.14.0) 
-func (engine *ThemingEngineInstance) LookupColor(colorName string) (gdk.RGBA, bool) {
-	var carg0 *C.GtkThemingEngine // in, none, converted
-	var carg1 *C.gchar            // in, none, string, casted *C.gchar
-	var carg2 C.GdkRGBA           // out, transfer: none, C Pointers: 0, Name: RGBA, caller-allocates
-	var cret  C.gboolean          // return
-
-	carg0 = (*C.GtkThemingEngine)(UnsafeThemingEngineToGlibNone(engine))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(colorName)))
-	defer C.free(unsafe.Pointer(carg1))
-
-	cret = C.gtk_theming_engine_lookup_color(carg0, carg1, &carg2)
-	runtime.KeepAlive(engine)
-	runtime.KeepAlive(colorName)
-
-	var color gdk.RGBA
-	var goret bool
-
-	_ = color
-	_ = carg2
-	panic("unimplemented conversion of gdk.RGBA (GdkRGBA)")
-	if cret != 0 {
-		goret = true
-	}
-
-	return color, goret
-}
-
-// StateIsRunning wraps gtk_theming_engine_state_is_running
-// 
-// The function takes the following parameters:
-// 
-// 	- state StateType: a widget state 
-// 
-// The function returns the following values:
-// 
-// 	- progress float64: return location for the transition progress 
-// 	- goret bool 
-//
-// Returns %TRUE if there is a transition animation running for the
-// current region (see gtk_style_context_push_animatable_region()).
-// 
-// If @progress is not %NULL, the animation progress will be returned
-// there, 0.0 means the state is closest to being %FALSE, while 1.0 means
-// it’s closest to being %TRUE. This means transition animations will
-// run from 0 to 1 when @state is being set to %TRUE and from 1 to 0 when
-// it’s being set to %FALSE.
-//
-// Deprecated: (since 3.6.0) Always returns %FALSE
-func (engine *ThemingEngineInstance) StateIsRunning(state StateType) (float64, bool) {
-	var carg0 *C.GtkThemingEngine // in, none, converted
-	var carg1 C.GtkStateType      // in, none, casted
-	var carg2 C.gdouble           // out, full, casted
-	var cret  C.gboolean          // return
-
-	carg0 = (*C.GtkThemingEngine)(UnsafeThemingEngineToGlibNone(engine))
-	carg1 = C.GtkStateType(state)
-
-	cret = C.gtk_theming_engine_state_is_running(carg0, carg1, &carg2)
-	runtime.KeepAlive(engine)
-	runtime.KeepAlive(state)
-
-	var progress float64
-	var goret    bool
-
-	progress = float64(carg2)
-	if cret != 0 {
-		goret = true
-	}
-
-	return progress, goret
-}
-
 // ToggleActionInstance is the instance type used by all types extending GtkToggleAction. It is used internally by the bindings. Users should use the interface [ToggleAction] instead.
 type ToggleActionInstance struct {
 	_ [0]func() // equal guard
@@ -59760,52 +50038,6 @@ var _ ToggleAction = (*ToggleActionInstance)(nil)
 type ToggleAction interface {
 	Action
 	upcastToGtkToggleAction() *ToggleActionInstance
-
-	// GetActive wraps gtk_toggle_action_get_active
-	// The function returns the following values:
-	// 
-	// 	- goret bool 
-	//
-	// Returns the checked state of the toggle action.
-	//
-	// Deprecated: (since 3.10.0) 
-	GetActive() bool
-	// GetDrawAsRadio wraps gtk_toggle_action_get_draw_as_radio
-	// The function returns the following values:
-	// 
-	// 	- goret bool 
-	//
-	// Returns whether the action should have proxies like a radio action.
-	//
-	// Deprecated: (since 3.10.0) 
-	GetDrawAsRadio() bool
-	// SetActive wraps gtk_toggle_action_set_active
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- isActive bool: whether the action should be checked or not 
-	//
-	// Sets the checked state on the toggle action.
-	//
-	// Deprecated: (since 3.10.0) 
-	SetActive(bool)
-	// SetDrawAsRadio wraps gtk_toggle_action_set_draw_as_radio
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- drawAsRadio bool: whether the action should have proxies like a radio
-	//    action 
-	//
-	// Sets whether the action should have proxies like a radio action.
-	//
-	// Deprecated: (since 3.10.0) 
-	SetDrawAsRadio(bool)
-	// Toggled wraps gtk_toggle_action_toggled
-	//
-	// Emits the “toggled” signal on the toggle action.
-	//
-	// Deprecated: (since 3.10.0) 
-	Toggled()
 }
 
 func unsafeWrapToggleAction(base *gobject.ObjectInstance) *ToggleActionInstance {
@@ -59842,174 +50074,6 @@ func UnsafeToggleActionToGlibNone(c ToggleAction) unsafe.Pointer {
 // UnsafeToggleActionToGlibFull is used to convert the instance to it's C value GtkToggleAction, while removeing the finalizer. This is used by the bindings internally.
 func UnsafeToggleActionToGlibFull(c ToggleAction) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
-}
-
-// NewToggleActionInstance wraps gtk_toggle_action_new
-// 
-// The function takes the following parameters:
-// 
-// 	- name string: A unique name for the action 
-// 	- label string (nullable): The label displayed in menu items and on buttons,
-//         or %NULL 
-// 	- tooltip string (nullable): A tooltip for the action, or %NULL 
-// 	- stockId string (nullable): The stock icon to display in widgets representing
-//            the action, or %NULL 
-// 
-// The function returns the following values:
-// 
-// 	- goret ToggleAction 
-//
-// Creates a new #GtkToggleAction object. To add the action to
-// a #GtkActionGroup and set the accelerator for the action,
-// call gtk_action_group_add_action_with_accel().
-//
-// Deprecated: (since 3.10.0) 
-func NewToggleActionInstance(name string, label string, tooltip string, stockId string) ToggleAction {
-	var carg1 *C.gchar           // in, none, string, casted *C.gchar
-	var carg2 *C.gchar           // in, none, string, nullable-string
-	var carg3 *C.gchar           // in, none, string, nullable-string
-	var carg4 *C.gchar           // in, none, string, nullable-string
-	var cret  *C.GtkToggleAction // return, full, converted
-
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(name)))
-	defer C.free(unsafe.Pointer(carg1))
-	if label != "" {
-		carg2 = (*C.gchar)(unsafe.Pointer(C.CString(label)))
-		defer C.free(unsafe.Pointer(carg2))
-	}
-	if tooltip != "" {
-		carg3 = (*C.gchar)(unsafe.Pointer(C.CString(tooltip)))
-		defer C.free(unsafe.Pointer(carg3))
-	}
-	if stockId != "" {
-		carg4 = (*C.gchar)(unsafe.Pointer(C.CString(stockId)))
-		defer C.free(unsafe.Pointer(carg4))
-	}
-
-	cret = C.gtk_toggle_action_new(carg1, carg2, carg3, carg4)
-	runtime.KeepAlive(name)
-	runtime.KeepAlive(label)
-	runtime.KeepAlive(tooltip)
-	runtime.KeepAlive(stockId)
-
-	var goret ToggleAction
-
-	goret = UnsafeToggleActionFromGlibFull(unsafe.Pointer(cret))
-
-	return goret
-}
-
-// GetActive wraps gtk_toggle_action_get_active
-// The function returns the following values:
-// 
-// 	- goret bool 
-//
-// Returns the checked state of the toggle action.
-//
-// Deprecated: (since 3.10.0) 
-func (action *ToggleActionInstance) GetActive() bool {
-	var carg0 *C.GtkToggleAction // in, none, converted
-	var cret  C.gboolean         // return
-
-	carg0 = (*C.GtkToggleAction)(UnsafeToggleActionToGlibNone(action))
-
-	cret = C.gtk_toggle_action_get_active(carg0)
-	runtime.KeepAlive(action)
-
-	var goret bool
-
-	if cret != 0 {
-		goret = true
-	}
-
-	return goret
-}
-
-// GetDrawAsRadio wraps gtk_toggle_action_get_draw_as_radio
-// The function returns the following values:
-// 
-// 	- goret bool 
-//
-// Returns whether the action should have proxies like a radio action.
-//
-// Deprecated: (since 3.10.0) 
-func (action *ToggleActionInstance) GetDrawAsRadio() bool {
-	var carg0 *C.GtkToggleAction // in, none, converted
-	var cret  C.gboolean         // return
-
-	carg0 = (*C.GtkToggleAction)(UnsafeToggleActionToGlibNone(action))
-
-	cret = C.gtk_toggle_action_get_draw_as_radio(carg0)
-	runtime.KeepAlive(action)
-
-	var goret bool
-
-	if cret != 0 {
-		goret = true
-	}
-
-	return goret
-}
-
-// SetActive wraps gtk_toggle_action_set_active
-// 
-// The function takes the following parameters:
-// 
-// 	- isActive bool: whether the action should be checked or not 
-//
-// Sets the checked state on the toggle action.
-//
-// Deprecated: (since 3.10.0) 
-func (action *ToggleActionInstance) SetActive(isActive bool) {
-	var carg0 *C.GtkToggleAction // in, none, converted
-	var carg1 C.gboolean         // in
-
-	carg0 = (*C.GtkToggleAction)(UnsafeToggleActionToGlibNone(action))
-	if isActive {
-		carg1 = C.TRUE
-	}
-
-	C.gtk_toggle_action_set_active(carg0, carg1)
-	runtime.KeepAlive(action)
-	runtime.KeepAlive(isActive)
-}
-
-// SetDrawAsRadio wraps gtk_toggle_action_set_draw_as_radio
-// 
-// The function takes the following parameters:
-// 
-// 	- drawAsRadio bool: whether the action should have proxies like a radio
-//    action 
-//
-// Sets whether the action should have proxies like a radio action.
-//
-// Deprecated: (since 3.10.0) 
-func (action *ToggleActionInstance) SetDrawAsRadio(drawAsRadio bool) {
-	var carg0 *C.GtkToggleAction // in, none, converted
-	var carg1 C.gboolean         // in
-
-	carg0 = (*C.GtkToggleAction)(UnsafeToggleActionToGlibNone(action))
-	if drawAsRadio {
-		carg1 = C.TRUE
-	}
-
-	C.gtk_toggle_action_set_draw_as_radio(carg0, carg1)
-	runtime.KeepAlive(action)
-	runtime.KeepAlive(drawAsRadio)
-}
-
-// Toggled wraps gtk_toggle_action_toggled
-//
-// Emits the “toggled” signal on the toggle action.
-//
-// Deprecated: (since 3.10.0) 
-func (action *ToggleActionInstance) Toggled() {
-	var carg0 *C.GtkToggleAction // in, none, converted
-
-	carg0 = (*C.GtkToggleAction)(UnsafeToggleActionToGlibNone(action))
-
-	C.gtk_toggle_action_toggled(carg0)
-	runtime.KeepAlive(action)
 }
 
 // TooltipInstance is the instance type used by all types extending GtkTooltip. It is used internally by the bindings. Users should use the interface [Tooltip] instead.
@@ -60104,19 +50168,6 @@ type Tooltip interface {
 	// the icon indicated by @icon_name with the size indicated
 	// by @size.  If @icon_name is %NULL, the image will be hidden.
 	SetIconFromIconName(string, int)
-	// SetIconFromStock wraps gtk_tooltip_set_icon_from_stock
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- stockId string (nullable): a stock id, or %NULL 
-	// 	- size int: a stock icon size (#GtkIconSize) 
-	//
-	// Sets the icon of the tooltip (which is in front of the text) to be
-	// the stock item indicated by @stock_id with the size indicated
-	// by @size.  If @stock_id is %NULL, the image will be hidden.
-	//
-	// Deprecated: (since 3.10.0) Use gtk_tooltip_set_icon_from_icon_name() instead.
-	SetIconFromStock(string, int)
 	// SetMarkup wraps gtk_tooltip_set_markup
 	// 
 	// The function takes the following parameters:
@@ -60306,36 +50357,6 @@ func (tooltip *TooltipInstance) SetIconFromIconName(iconName string, size int) {
 	C.gtk_tooltip_set_icon_from_icon_name(carg0, carg1, carg2)
 	runtime.KeepAlive(tooltip)
 	runtime.KeepAlive(iconName)
-	runtime.KeepAlive(size)
-}
-
-// SetIconFromStock wraps gtk_tooltip_set_icon_from_stock
-// 
-// The function takes the following parameters:
-// 
-// 	- stockId string (nullable): a stock id, or %NULL 
-// 	- size int: a stock icon size (#GtkIconSize) 
-//
-// Sets the icon of the tooltip (which is in front of the text) to be
-// the stock item indicated by @stock_id with the size indicated
-// by @size.  If @stock_id is %NULL, the image will be hidden.
-//
-// Deprecated: (since 3.10.0) Use gtk_tooltip_set_icon_from_icon_name() instead.
-func (tooltip *TooltipInstance) SetIconFromStock(stockId string, size int) {
-	var carg0 *C.GtkTooltip // in, none, converted
-	var carg1 *C.gchar      // in, none, string, nullable-string
-	var carg2 C.GtkIconSize // in, none, casted, casted C.gint
-
-	carg0 = (*C.GtkTooltip)(UnsafeTooltipToGlibNone(tooltip))
-	if stockId != "" {
-		carg1 = (*C.gchar)(unsafe.Pointer(C.CString(stockId)))
-		defer C.free(unsafe.Pointer(carg1))
-	}
-	carg2 = C.GtkIconSize(size)
-
-	C.gtk_tooltip_set_icon_from_stock(carg0, carg1, carg2)
-	runtime.KeepAlive(tooltip)
-	runtime.KeepAlive(stockId)
 	runtime.KeepAlive(size)
 }
 
@@ -64266,7 +54287,7 @@ func (treeColumn *TreeViewColumnInstance) GetTitle() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -65087,235 +55108,6 @@ var _ UIManager = (*UIManagerInstance)(nil)
 type UIManager interface {
 	gobject.Object
 	upcastToGtkUIManager() *UIManagerInstance
-
-	// AddUi wraps gtk_ui_manager_add_ui
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- mergeId uint: the merge id for the merged UI, see gtk_ui_manager_new_merge_id() 
-	// 	- path string: a path 
-	// 	- name string: the name for the added UI element 
-	// 	- action string (nullable): the name of the action to be proxied, or %NULL to add a separator 
-	// 	- typ UIManagerItemType: the type of UI element to add. 
-	// 	- top bool: if %TRUE, the UI element is added before its siblings, otherwise it
-	//   is added after its siblings. 
-	//
-	// Adds a UI element to the current contents of @manager.
-	// 
-	// If @type is %GTK_UI_MANAGER_AUTO, GTK+ inserts a menuitem, toolitem or
-	// separator if such an element can be inserted at the place determined by
-	// @path. Otherwise @type must indicate an element that can be inserted at
-	// the place determined by @path.
-	// 
-	// If @path points to a menuitem or toolitem, the new element will be inserted
-	// before or after this item, depending on @top.
-	//
-	// Deprecated: (since 3.10.0) 
-	AddUi(uint, string, string, string, UIManagerItemType, bool)
-	// AddUiFromFile wraps gtk_ui_manager_add_ui_from_file
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- filename string: the name of the file to parse 
-	// 
-	// The function returns the following values:
-	// 
-	// 	- goret uint 
-	// 	- _goerr error (nullable): an error 
-	//
-	// Parses a file containing a [UI definition][XML-UI] and
-	// merges it with the current contents of @manager.
-	//
-	// Deprecated: (since 3.10.0) 
-	AddUiFromFile(string) (uint, error)
-	// AddUiFromResource wraps gtk_ui_manager_add_ui_from_resource
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- resourcePath string: the resource path of the file to parse 
-	// 
-	// The function returns the following values:
-	// 
-	// 	- goret uint 
-	// 	- _goerr error (nullable): an error 
-	//
-	// Parses a resource file containing a [UI definition][XML-UI] and
-	// merges it with the current contents of @manager.
-	//
-	// Deprecated: (since 3.10.0) 
-	AddUiFromResource(string) (uint, error)
-	// AddUiFromString wraps gtk_ui_manager_add_ui_from_string
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- buffer string: the string to parse 
-	// 	- length int: the length of @buffer (may be -1 if @buffer is nul-terminated) 
-	// 
-	// The function returns the following values:
-	// 
-	// 	- goret uint 
-	// 	- _goerr error (nullable): an error 
-	//
-	// Parses a string containing a [UI definition][XML-UI] and merges it with
-	// the current contents of @manager. An enclosing `&lt;ui&gt;` element is added if
-	// it is missing.
-	//
-	// Deprecated: (since 3.10.0) 
-	AddUiFromString(string, int) (uint, error)
-	// EnsureUpdate wraps gtk_ui_manager_ensure_update
-	//
-	// Makes sure that all pending updates to the UI have been completed.
-	// 
-	// This may occasionally be necessary, since #GtkUIManager updates the
-	// UI in an idle function. A typical example where this function is
-	// useful is to enforce that the menubar and toolbar have been added to
-	// the main window before showing it:
-	// |[&lt;!-- language="C" --&gt;
-	// gtk_container_add (GTK_CONTAINER (window), vbox);
-	// g_signal_connect (merge, "add-widget",
-	//                   G_CALLBACK (add_widget), vbox);
-	// gtk_ui_manager_add_ui_from_file (merge, "my-menus");
-	// gtk_ui_manager_add_ui_from_file (merge, "my-toolbars");
-	// gtk_ui_manager_ensure_update (merge);
-	// gtk_widget_show (window);
-	// ]|
-	//
-	// Deprecated: (since 3.10.0) 
-	EnsureUpdate()
-	// GetAccelGroup wraps gtk_ui_manager_get_accel_group
-	// The function returns the following values:
-	// 
-	// 	- goret AccelGroup 
-	//
-	// Returns the #GtkAccelGroup associated with @manager.
-	//
-	// Deprecated: (since 3.10.0) 
-	GetAccelGroup() AccelGroup
-	// GetAction wraps gtk_ui_manager_get_action
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- path string: a path 
-	// 
-	// The function returns the following values:
-	// 
-	// 	- goret Action 
-	//
-	// Looks up an action by following a path. See gtk_ui_manager_get_widget()
-	// for more information about paths.
-	//
-	// Deprecated: (since 3.10.0) 
-	GetAction(string) Action
-	// GetAddTearoffs wraps gtk_ui_manager_get_add_tearoffs
-	// The function returns the following values:
-	// 
-	// 	- goret bool 
-	//
-	// Returns whether menus generated by this #GtkUIManager
-	// will have tearoff menu items.
-	//
-	// Deprecated: (since 3.4.0) Tearoff menus are deprecated and should not
-	//     be used in newly written code.
-	GetAddTearoffs() bool
-	// GetUi wraps gtk_ui_manager_get_ui
-	// The function returns the following values:
-	// 
-	// 	- goret string 
-	//
-	// Creates a [UI definition][XML-UI] of the merged UI.
-	//
-	// Deprecated: (since 3.10.0) 
-	GetUi() string
-	// GetWidget wraps gtk_ui_manager_get_widget
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- path string: a path 
-	// 
-	// The function returns the following values:
-	// 
-	// 	- goret Widget 
-	//
-	// Looks up a widget by following a path.
-	// The path consists of the names specified in the XML description of the UI.
-	// separated by “/”. Elements which don’t have a name or action attribute in
-	// the XML (e.g. `&lt;popup&gt;`) can be addressed by their XML element name
-	// (e.g. "popup"). The root element ("/ui") can be omitted in the path.
-	// 
-	// Note that the widget found by following a path that ends in a `&lt;menu&gt;`;
-	// element is the menuitem to which the menu is attached, not the menu it
-	// manages.
-	// 
-	// Also note that the widgets constructed by a ui manager are not tied to
-	// the lifecycle of the ui manager. If you add the widgets returned by this
-	// function to some container or explicitly ref them, they will survive the
-	// destruction of the ui manager.
-	//
-	// Deprecated: (since 3.10.0) 
-	GetWidget(string) Widget
-	// InsertActionGroup wraps gtk_ui_manager_insert_action_group
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- actionGroup ActionGroup: the action group to be inserted 
-	// 	- pos int: the position at which the group will be inserted. 
-	//
-	// Inserts an action group into the list of action groups associated
-	// with @manager. Actions in earlier groups hide actions with the same
-	// name in later groups.
-	// 
-	// If @pos is larger than the number of action groups in @manager, or
-	// negative, @action_group will be inserted at the end of the internal
-	// list.
-	//
-	// Deprecated: (since 3.10.0) 
-	InsertActionGroup(ActionGroup, int)
-	// NewMergeID wraps gtk_ui_manager_new_merge_id
-	// The function returns the following values:
-	// 
-	// 	- goret uint 
-	//
-	// Returns an unused merge id, suitable for use with
-	// gtk_ui_manager_add_ui().
-	//
-	// Deprecated: (since 3.10.0) 
-	NewMergeID() uint
-	// RemoveActionGroup wraps gtk_ui_manager_remove_action_group
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- actionGroup ActionGroup: the action group to be removed 
-	//
-	// Removes an action group from the list of action groups associated
-	// with @manager.
-	//
-	// Deprecated: (since 3.10.0) 
-	RemoveActionGroup(ActionGroup)
-	// RemoveUi wraps gtk_ui_manager_remove_ui
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- mergeId uint: a merge id as returned by gtk_ui_manager_add_ui_from_string() 
-	//
-	// Unmerges the part of @manager's content identified by @merge_id.
-	//
-	// Deprecated: (since 3.10.0) 
-	RemoveUi(uint)
-	// SetAddTearoffs wraps gtk_ui_manager_set_add_tearoffs
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- addTearoffs bool: whether tearoff menu items are added 
-	//
-	// Sets the “add_tearoffs” property, which controls whether menus
-	// generated by this #GtkUIManager will have tearoff menu items.
-	// 
-	// Note that this only affects regular menus. Generated popup
-	// menus never have tearoff menu items.
-	//
-	// Deprecated: (since 3.4.0) Tearoff menus are deprecated and should not
-	//     be used in newly written code.
-	SetAddTearoffs(bool)
 }
 
 func unsafeWrapUIManager(base *gobject.ObjectInstance) *UIManagerInstance {
@@ -65350,520 +55142,6 @@ func UnsafeUIManagerToGlibNone(c UIManager) unsafe.Pointer {
 // UnsafeUIManagerToGlibFull is used to convert the instance to it's C value GtkUIManager, while removeing the finalizer. This is used by the bindings internally.
 func UnsafeUIManagerToGlibFull(c UIManager) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
-}
-
-// NewUIManagerInstance wraps gtk_ui_manager_new
-// The function returns the following values:
-// 
-// 	- goret UIManager 
-//
-// Creates a new ui manager object.
-//
-// Deprecated: (since 3.10.0) 
-func NewUIManagerInstance() UIManager {
-	var cret *C.GtkUIManager // return, full, converted
-
-	cret = C.gtk_ui_manager_new()
-
-	var goret UIManager
-
-	goret = UnsafeUIManagerFromGlibFull(unsafe.Pointer(cret))
-
-	return goret
-}
-
-// AddUi wraps gtk_ui_manager_add_ui
-// 
-// The function takes the following parameters:
-// 
-// 	- mergeId uint: the merge id for the merged UI, see gtk_ui_manager_new_merge_id() 
-// 	- path string: a path 
-// 	- name string: the name for the added UI element 
-// 	- action string (nullable): the name of the action to be proxied, or %NULL to add a separator 
-// 	- typ UIManagerItemType: the type of UI element to add. 
-// 	- top bool: if %TRUE, the UI element is added before its siblings, otherwise it
-//   is added after its siblings. 
-//
-// Adds a UI element to the current contents of @manager.
-// 
-// If @type is %GTK_UI_MANAGER_AUTO, GTK+ inserts a menuitem, toolitem or
-// separator if such an element can be inserted at the place determined by
-// @path. Otherwise @type must indicate an element that can be inserted at
-// the place determined by @path.
-// 
-// If @path points to a menuitem or toolitem, the new element will be inserted
-// before or after this item, depending on @top.
-//
-// Deprecated: (since 3.10.0) 
-func (manager *UIManagerInstance) AddUi(mergeId uint, path string, name string, action string, typ UIManagerItemType, top bool) {
-	var carg0 *C.GtkUIManager        // in, none, converted
-	var carg1 C.guint                // in, none, casted
-	var carg2 *C.gchar               // in, none, string, casted *C.gchar
-	var carg3 *C.gchar               // in, none, string, casted *C.gchar
-	var carg4 *C.gchar               // in, none, string, nullable-string
-	var carg5 C.GtkUIManagerItemType // in, none, casted
-	var carg6 C.gboolean             // in
-
-	carg0 = (*C.GtkUIManager)(UnsafeUIManagerToGlibNone(manager))
-	carg1 = C.guint(mergeId)
-	carg2 = (*C.gchar)(unsafe.Pointer(C.CString(path)))
-	defer C.free(unsafe.Pointer(carg2))
-	carg3 = (*C.gchar)(unsafe.Pointer(C.CString(name)))
-	defer C.free(unsafe.Pointer(carg3))
-	if action != "" {
-		carg4 = (*C.gchar)(unsafe.Pointer(C.CString(action)))
-		defer C.free(unsafe.Pointer(carg4))
-	}
-	carg5 = C.GtkUIManagerItemType(typ)
-	if top {
-		carg6 = C.TRUE
-	}
-
-	C.gtk_ui_manager_add_ui(carg0, carg1, carg2, carg3, carg4, carg5, carg6)
-	runtime.KeepAlive(manager)
-	runtime.KeepAlive(mergeId)
-	runtime.KeepAlive(path)
-	runtime.KeepAlive(name)
-	runtime.KeepAlive(action)
-	runtime.KeepAlive(typ)
-	runtime.KeepAlive(top)
-}
-
-// AddUiFromFile wraps gtk_ui_manager_add_ui_from_file
-// 
-// The function takes the following parameters:
-// 
-// 	- filename string: the name of the file to parse 
-// 
-// The function returns the following values:
-// 
-// 	- goret uint 
-// 	- _goerr error (nullable): an error 
-//
-// Parses a file containing a [UI definition][XML-UI] and
-// merges it with the current contents of @manager.
-//
-// Deprecated: (since 3.10.0) 
-func (manager *UIManagerInstance) AddUiFromFile(filename string) (uint, error) {
-	var carg0 *C.GtkUIManager // in, none, converted
-	var carg1 *C.gchar        // in, none, string, casted *C.gchar
-	var cret  C.guint         // return, none, casted
-	var _cerr *C.GError       // out, full, converted, nullable
-
-	carg0 = (*C.GtkUIManager)(UnsafeUIManagerToGlibNone(manager))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(filename)))
-	defer C.free(unsafe.Pointer(carg1))
-
-	cret = C.gtk_ui_manager_add_ui_from_file(carg0, carg1, &_cerr)
-	runtime.KeepAlive(manager)
-	runtime.KeepAlive(filename)
-
-	var goret  uint
-	var _goerr error
-
-	goret = uint(cret)
-	if _cerr != nil {
-		_goerr = glib.UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
-	}
-
-	return goret, _goerr
-}
-
-// AddUiFromResource wraps gtk_ui_manager_add_ui_from_resource
-// 
-// The function takes the following parameters:
-// 
-// 	- resourcePath string: the resource path of the file to parse 
-// 
-// The function returns the following values:
-// 
-// 	- goret uint 
-// 	- _goerr error (nullable): an error 
-//
-// Parses a resource file containing a [UI definition][XML-UI] and
-// merges it with the current contents of @manager.
-//
-// Deprecated: (since 3.10.0) 
-func (manager *UIManagerInstance) AddUiFromResource(resourcePath string) (uint, error) {
-	var carg0 *C.GtkUIManager // in, none, converted
-	var carg1 *C.gchar        // in, none, string, casted *C.gchar
-	var cret  C.guint         // return, none, casted
-	var _cerr *C.GError       // out, full, converted, nullable
-
-	carg0 = (*C.GtkUIManager)(UnsafeUIManagerToGlibNone(manager))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(resourcePath)))
-	defer C.free(unsafe.Pointer(carg1))
-
-	cret = C.gtk_ui_manager_add_ui_from_resource(carg0, carg1, &_cerr)
-	runtime.KeepAlive(manager)
-	runtime.KeepAlive(resourcePath)
-
-	var goret  uint
-	var _goerr error
-
-	goret = uint(cret)
-	if _cerr != nil {
-		_goerr = glib.UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
-	}
-
-	return goret, _goerr
-}
-
-// AddUiFromString wraps gtk_ui_manager_add_ui_from_string
-// 
-// The function takes the following parameters:
-// 
-// 	- buffer string: the string to parse 
-// 	- length int: the length of @buffer (may be -1 if @buffer is nul-terminated) 
-// 
-// The function returns the following values:
-// 
-// 	- goret uint 
-// 	- _goerr error (nullable): an error 
-//
-// Parses a string containing a [UI definition][XML-UI] and merges it with
-// the current contents of @manager. An enclosing `&lt;ui&gt;` element is added if
-// it is missing.
-//
-// Deprecated: (since 3.10.0) 
-func (manager *UIManagerInstance) AddUiFromString(buffer string, length int) (uint, error) {
-	var carg0 *C.GtkUIManager // in, none, converted
-	var carg1 *C.gchar        // in, none, string, casted *C.gchar
-	var carg2 C.gssize        // in, none, casted
-	var cret  C.guint         // return, none, casted
-	var _cerr *C.GError       // out, full, converted, nullable
-
-	carg0 = (*C.GtkUIManager)(UnsafeUIManagerToGlibNone(manager))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(buffer)))
-	defer C.free(unsafe.Pointer(carg1))
-	carg2 = C.gssize(length)
-
-	cret = C.gtk_ui_manager_add_ui_from_string(carg0, carg1, carg2, &_cerr)
-	runtime.KeepAlive(manager)
-	runtime.KeepAlive(buffer)
-	runtime.KeepAlive(length)
-
-	var goret  uint
-	var _goerr error
-
-	goret = uint(cret)
-	if _cerr != nil {
-		_goerr = glib.UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
-	}
-
-	return goret, _goerr
-}
-
-// EnsureUpdate wraps gtk_ui_manager_ensure_update
-//
-// Makes sure that all pending updates to the UI have been completed.
-// 
-// This may occasionally be necessary, since #GtkUIManager updates the
-// UI in an idle function. A typical example where this function is
-// useful is to enforce that the menubar and toolbar have been added to
-// the main window before showing it:
-// |[&lt;!-- language="C" --&gt;
-// gtk_container_add (GTK_CONTAINER (window), vbox);
-// g_signal_connect (merge, "add-widget",
-//                   G_CALLBACK (add_widget), vbox);
-// gtk_ui_manager_add_ui_from_file (merge, "my-menus");
-// gtk_ui_manager_add_ui_from_file (merge, "my-toolbars");
-// gtk_ui_manager_ensure_update (merge);
-// gtk_widget_show (window);
-// ]|
-//
-// Deprecated: (since 3.10.0) 
-func (manager *UIManagerInstance) EnsureUpdate() {
-	var carg0 *C.GtkUIManager // in, none, converted
-
-	carg0 = (*C.GtkUIManager)(UnsafeUIManagerToGlibNone(manager))
-
-	C.gtk_ui_manager_ensure_update(carg0)
-	runtime.KeepAlive(manager)
-}
-
-// GetAccelGroup wraps gtk_ui_manager_get_accel_group
-// The function returns the following values:
-// 
-// 	- goret AccelGroup 
-//
-// Returns the #GtkAccelGroup associated with @manager.
-//
-// Deprecated: (since 3.10.0) 
-func (manager *UIManagerInstance) GetAccelGroup() AccelGroup {
-	var carg0 *C.GtkUIManager  // in, none, converted
-	var cret  *C.GtkAccelGroup // return, none, converted
-
-	carg0 = (*C.GtkUIManager)(UnsafeUIManagerToGlibNone(manager))
-
-	cret = C.gtk_ui_manager_get_accel_group(carg0)
-	runtime.KeepAlive(manager)
-
-	var goret AccelGroup
-
-	goret = UnsafeAccelGroupFromGlibNone(unsafe.Pointer(cret))
-
-	return goret
-}
-
-// GetAction wraps gtk_ui_manager_get_action
-// 
-// The function takes the following parameters:
-// 
-// 	- path string: a path 
-// 
-// The function returns the following values:
-// 
-// 	- goret Action 
-//
-// Looks up an action by following a path. See gtk_ui_manager_get_widget()
-// for more information about paths.
-//
-// Deprecated: (since 3.10.0) 
-func (manager *UIManagerInstance) GetAction(path string) Action {
-	var carg0 *C.GtkUIManager // in, none, converted
-	var carg1 *C.gchar        // in, none, string, casted *C.gchar
-	var cret  *C.GtkAction    // return, none, converted
-
-	carg0 = (*C.GtkUIManager)(UnsafeUIManagerToGlibNone(manager))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(path)))
-	defer C.free(unsafe.Pointer(carg1))
-
-	cret = C.gtk_ui_manager_get_action(carg0, carg1)
-	runtime.KeepAlive(manager)
-	runtime.KeepAlive(path)
-
-	var goret Action
-
-	goret = UnsafeActionFromGlibNone(unsafe.Pointer(cret))
-
-	return goret
-}
-
-// GetAddTearoffs wraps gtk_ui_manager_get_add_tearoffs
-// The function returns the following values:
-// 
-// 	- goret bool 
-//
-// Returns whether menus generated by this #GtkUIManager
-// will have tearoff menu items.
-//
-// Deprecated: (since 3.4.0) Tearoff menus are deprecated and should not
-//     be used in newly written code.
-func (manager *UIManagerInstance) GetAddTearoffs() bool {
-	var carg0 *C.GtkUIManager // in, none, converted
-	var cret  C.gboolean      // return
-
-	carg0 = (*C.GtkUIManager)(UnsafeUIManagerToGlibNone(manager))
-
-	cret = C.gtk_ui_manager_get_add_tearoffs(carg0)
-	runtime.KeepAlive(manager)
-
-	var goret bool
-
-	if cret != 0 {
-		goret = true
-	}
-
-	return goret
-}
-
-// GetUi wraps gtk_ui_manager_get_ui
-// The function returns the following values:
-// 
-// 	- goret string 
-//
-// Creates a [UI definition][XML-UI] of the merged UI.
-//
-// Deprecated: (since 3.10.0) 
-func (manager *UIManagerInstance) GetUi() string {
-	var carg0 *C.GtkUIManager // in, none, converted
-	var cret  *C.gchar        // return, full, string, casted *C.gchar
-
-	carg0 = (*C.GtkUIManager)(UnsafeUIManagerToGlibNone(manager))
-
-	cret = C.gtk_ui_manager_get_ui(carg0)
-	runtime.KeepAlive(manager)
-
-	var goret string
-
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
-	defer C.free(unsafe.Pointer(cret))
-
-	return goret
-}
-
-// GetWidget wraps gtk_ui_manager_get_widget
-// 
-// The function takes the following parameters:
-// 
-// 	- path string: a path 
-// 
-// The function returns the following values:
-// 
-// 	- goret Widget 
-//
-// Looks up a widget by following a path.
-// The path consists of the names specified in the XML description of the UI.
-// separated by “/”. Elements which don’t have a name or action attribute in
-// the XML (e.g. `&lt;popup&gt;`) can be addressed by their XML element name
-// (e.g. "popup"). The root element ("/ui") can be omitted in the path.
-// 
-// Note that the widget found by following a path that ends in a `&lt;menu&gt;`;
-// element is the menuitem to which the menu is attached, not the menu it
-// manages.
-// 
-// Also note that the widgets constructed by a ui manager are not tied to
-// the lifecycle of the ui manager. If you add the widgets returned by this
-// function to some container or explicitly ref them, they will survive the
-// destruction of the ui manager.
-//
-// Deprecated: (since 3.10.0) 
-func (manager *UIManagerInstance) GetWidget(path string) Widget {
-	var carg0 *C.GtkUIManager // in, none, converted
-	var carg1 *C.gchar        // in, none, string, casted *C.gchar
-	var cret  *C.GtkWidget    // return, none, converted
-
-	carg0 = (*C.GtkUIManager)(UnsafeUIManagerToGlibNone(manager))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(path)))
-	defer C.free(unsafe.Pointer(carg1))
-
-	cret = C.gtk_ui_manager_get_widget(carg0, carg1)
-	runtime.KeepAlive(manager)
-	runtime.KeepAlive(path)
-
-	var goret Widget
-
-	goret = UnsafeWidgetFromGlibNone(unsafe.Pointer(cret))
-
-	return goret
-}
-
-// InsertActionGroup wraps gtk_ui_manager_insert_action_group
-// 
-// The function takes the following parameters:
-// 
-// 	- actionGroup ActionGroup: the action group to be inserted 
-// 	- pos int: the position at which the group will be inserted. 
-//
-// Inserts an action group into the list of action groups associated
-// with @manager. Actions in earlier groups hide actions with the same
-// name in later groups.
-// 
-// If @pos is larger than the number of action groups in @manager, or
-// negative, @action_group will be inserted at the end of the internal
-// list.
-//
-// Deprecated: (since 3.10.0) 
-func (manager *UIManagerInstance) InsertActionGroup(actionGroup ActionGroup, pos int) {
-	var carg0 *C.GtkUIManager   // in, none, converted
-	var carg1 *C.GtkActionGroup // in, none, converted
-	var carg2 C.gint            // in, none, casted
-
-	carg0 = (*C.GtkUIManager)(UnsafeUIManagerToGlibNone(manager))
-	carg1 = (*C.GtkActionGroup)(UnsafeActionGroupToGlibNone(actionGroup))
-	carg2 = C.gint(pos)
-
-	C.gtk_ui_manager_insert_action_group(carg0, carg1, carg2)
-	runtime.KeepAlive(manager)
-	runtime.KeepAlive(actionGroup)
-	runtime.KeepAlive(pos)
-}
-
-// NewMergeID wraps gtk_ui_manager_new_merge_id
-// The function returns the following values:
-// 
-// 	- goret uint 
-//
-// Returns an unused merge id, suitable for use with
-// gtk_ui_manager_add_ui().
-//
-// Deprecated: (since 3.10.0) 
-func (manager *UIManagerInstance) NewMergeID() uint {
-	var carg0 *C.GtkUIManager // in, none, converted
-	var cret  C.guint         // return, none, casted
-
-	carg0 = (*C.GtkUIManager)(UnsafeUIManagerToGlibNone(manager))
-
-	cret = C.gtk_ui_manager_new_merge_id(carg0)
-	runtime.KeepAlive(manager)
-
-	var goret uint
-
-	goret = uint(cret)
-
-	return goret
-}
-
-// RemoveActionGroup wraps gtk_ui_manager_remove_action_group
-// 
-// The function takes the following parameters:
-// 
-// 	- actionGroup ActionGroup: the action group to be removed 
-//
-// Removes an action group from the list of action groups associated
-// with @manager.
-//
-// Deprecated: (since 3.10.0) 
-func (manager *UIManagerInstance) RemoveActionGroup(actionGroup ActionGroup) {
-	var carg0 *C.GtkUIManager   // in, none, converted
-	var carg1 *C.GtkActionGroup // in, none, converted
-
-	carg0 = (*C.GtkUIManager)(UnsafeUIManagerToGlibNone(manager))
-	carg1 = (*C.GtkActionGroup)(UnsafeActionGroupToGlibNone(actionGroup))
-
-	C.gtk_ui_manager_remove_action_group(carg0, carg1)
-	runtime.KeepAlive(manager)
-	runtime.KeepAlive(actionGroup)
-}
-
-// RemoveUi wraps gtk_ui_manager_remove_ui
-// 
-// The function takes the following parameters:
-// 
-// 	- mergeId uint: a merge id as returned by gtk_ui_manager_add_ui_from_string() 
-//
-// Unmerges the part of @manager's content identified by @merge_id.
-//
-// Deprecated: (since 3.10.0) 
-func (manager *UIManagerInstance) RemoveUi(mergeId uint) {
-	var carg0 *C.GtkUIManager // in, none, converted
-	var carg1 C.guint         // in, none, casted
-
-	carg0 = (*C.GtkUIManager)(UnsafeUIManagerToGlibNone(manager))
-	carg1 = C.guint(mergeId)
-
-	C.gtk_ui_manager_remove_ui(carg0, carg1)
-	runtime.KeepAlive(manager)
-	runtime.KeepAlive(mergeId)
-}
-
-// SetAddTearoffs wraps gtk_ui_manager_set_add_tearoffs
-// 
-// The function takes the following parameters:
-// 
-// 	- addTearoffs bool: whether tearoff menu items are added 
-//
-// Sets the “add_tearoffs” property, which controls whether menus
-// generated by this #GtkUIManager will have tearoff menu items.
-// 
-// Note that this only affects regular menus. Generated popup
-// menus never have tearoff menu items.
-//
-// Deprecated: (since 3.4.0) Tearoff menus are deprecated and should not
-//     be used in newly written code.
-func (manager *UIManagerInstance) SetAddTearoffs(addTearoffs bool) {
-	var carg0 *C.GtkUIManager // in, none, converted
-	var carg1 C.gboolean      // in
-
-	carg0 = (*C.GtkUIManager)(UnsafeUIManagerToGlibNone(manager))
-	if addTearoffs {
-		carg1 = C.TRUE
-	}
-
-	C.gtk_ui_manager_set_add_tearoffs(carg0, carg1)
-	runtime.KeepAlive(manager)
-	runtime.KeepAlive(addTearoffs)
 }
 
 // WidgetInstance is the instance type used by all types extending GtkWidget. It is used internally by the bindings. Users should use the interface [Widget] instead.
@@ -66407,7 +55685,7 @@ type Widget interface {
 	// call gtk_widget_grab_focus() to place the focus accordingly;
 	// if returning %FALSE, they don’t modify the current focus location.
 	ChildFocus(DirectionType) bool
-	// ChildNotify wraps gtk_widget_child_notify
+	// WidgetChildNotify wraps gtk_widget_child_notify
 	// 
 	// The function takes the following parameters:
 	// 
@@ -66421,22 +55699,7 @@ type Widget interface {
 	// This is the analogue of g_object_notify() for child properties.
 	// 
 	// Also see gtk_container_child_notify().
-	ChildNotify(string)
-	// ClassPath wraps gtk_widget_class_path
-	// The function returns the following values:
-	// 
-	// 	- pathLength uint: location to store the length of the
-	//     class path, or %NULL 
-	// 	- path string: location to store the class path as an
-	//     allocated string, or %NULL 
-	// 	- pathReversed string: location to store the reverse
-	//     class path as an allocated string, or %NULL 
-	//
-	// Same as gtk_widget_path(), but always uses the name of a widget’s type,
-	// never uses a custom name set with gtk_widget_set_name().
-	//
-	// Deprecated: (since 3.0.0) Use gtk_widget_get_path() instead
-	ClassPath() (uint, string, string)
+	WidgetChildNotify(string)
 	// ComputeExpand wraps gtk_widget_compute_expand
 	// 
 	// The function takes the following parameters:
@@ -66645,21 +55908,6 @@ type Widget interface {
 	// }
 	// ]|
 	DragDestSet(DestDefaults, []TargetEntry, gdk.DragAction)
-	// DragDestSetProxy wraps gtk_drag_dest_set_proxy
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- proxyWindow gdk.Window: the window to which to forward drag events 
-	// 	- protocol gdk.DragProtocol: the drag protocol which the @proxy_window accepts
-	//   (You can use gdk_drag_get_protocol() to determine this) 
-	// 	- useCoordinates bool: If %TRUE, send the same coordinates to the
-	//   destination, because it is an embedded
-	//   subwindow. 
-	//
-	// Sets this widget as a proxy for drops to another window.
-	//
-	// Deprecated: (since 3.22.0) 
-	DragDestSetProxy(gdk.Window, gdk.DragProtocol, bool)
 	// DragDestSetTargetList wraps gtk_drag_dest_set_target_list
 	// 
 	// The function takes the following parameters:
@@ -66767,17 +56015,6 @@ type Widget interface {
 	// from a #GdkPixbuf. GTK+ retains a reference for @pixbuf and will
 	// release it when it is no longer needed.
 	DragSourceSetIconPixbuf(gdkpixbuf.Pixbuf)
-	// DragSourceSetIconStock wraps gtk_drag_source_set_icon_stock
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- stockId string: the ID of the stock icon to use 
-	//
-	// Sets the icon that will be used for drags from a particular source
-	// to a stock icon.
-	//
-	// Deprecated: (since 3.10.0) Use gtk_drag_source_set_icon_name() instead.
-	DragSourceSetIconStock(string)
 	// DragSourceSetTargetList wraps gtk_drag_source_set_target_list
 	// 
 	// The function takes the following parameters:
@@ -66797,16 +56034,6 @@ type Widget interface {
 	// Removes a highlight set by gtk_drag_highlight() from
 	// a widget.
 	DragUnhighlight()
-	// EnsureStyle wraps gtk_widget_ensure_style
-	//
-	// Ensures that @widget has a style (@widget-&gt;style).
-	// 
-	// Not a very useful function; most of the time, if you
-	// want the style, the widget is realized, and realized
-	// widgets are guaranteed to have a style already.
-	//
-	// Deprecated: (since 3.0.0) Use #GtkStyleContext instead
-	EnsureStyle()
 	// ErrorBell wraps gtk_widget_error_bell
 	//
 	// Notifies the user about an input-related error on this widget.
@@ -66971,32 +56198,6 @@ type Widget interface {
 	// Determines whether @widget can own the input focus. See
 	// gtk_widget_set_can_focus().
 	GetCanFocus() bool
-	// GetChildRequisition wraps gtk_widget_get_child_requisition
-	// The function returns the following values:
-	// 
-	// 	- requisition Requisition: a #GtkRequisition to be filled in 
-	//
-	// This function is only for use in widget implementations. Obtains
-	// @widget-&gt;requisition, unless someone has forced a particular
-	// geometry on the widget (e.g. with gtk_widget_set_size_request()),
-	// in which case it returns that geometry instead of the widget's
-	// requisition.
-	// 
-	// This function differs from gtk_widget_size_request() in that
-	// it retrieves the last size request value from @widget-&gt;requisition,
-	// while gtk_widget_size_request() actually calls the "size_request" method
-	// on @widget to compute the size request and fill in @widget-&gt;requisition,
-	// and only then returns @widget-&gt;requisition.
-	// 
-	// Because this function does not call the “size_request” method, it
-	// can only be used when you know that @widget-&gt;requisition is
-	// up-to-date, that is, gtk_widget_size_request() has been called
-	// since the last time a resize was queued. In general, only container
-	// implementations have this information; applications should use
-	// gtk_widget_size_request().
-	//
-	// Deprecated: (since 3.0.0) Use gtk_widget_get_preferred_size() instead.
-	GetChildRequisition() Requisition
 	// GetChildVisible wraps gtk_widget_get_child_visible
 	// The function returns the following values:
 	// 
@@ -67022,15 +56223,6 @@ type Widget interface {
 	// Historically, in GTK+ the clip area has been equal to the allocation
 	// retrieved via gtk_widget_get_allocation().
 	GetClip() Allocation
-	// GetCompositeName wraps gtk_widget_get_composite_name
-	// The function returns the following values:
-	// 
-	// 	- goret string 
-	//
-	// Obtains the composite name of a widget.
-	//
-	// Deprecated: (since 3.10.0) Use gtk_widget_class_set_template(), or don’t use this API at all.
-	GetCompositeName() string
 	// GetDeviceEnabled wraps gtk_widget_get_device_enabled
 	// 
 	// The function takes the following parameters:
@@ -67227,24 +56419,6 @@ type Widget interface {
 	//
 	// Gets the value of the #GtkWidget:margin-end property.
 	GetMarginEnd() int
-	// GetMarginLeft wraps gtk_widget_get_margin_left
-	// The function returns the following values:
-	// 
-	// 	- goret int 
-	//
-	// Gets the value of the #GtkWidget:margin-left property.
-	//
-	// Deprecated: (since 3.12.0) Use gtk_widget_get_margin_start() instead.
-	GetMarginLeft() int
-	// GetMarginRight wraps gtk_widget_get_margin_right
-	// The function returns the following values:
-	// 
-	// 	- goret int 
-	//
-	// Gets the value of the #GtkWidget:margin-right property.
-	//
-	// Deprecated: (since 3.12.0) Use gtk_widget_get_margin_end() instead.
-	GetMarginRight() int
 	// GetMarginStart wraps gtk_widget_get_margin_start
 	// The function returns the following values:
 	// 
@@ -67274,26 +56448,6 @@ type Widget interface {
 	// 
 	// See gdk_keymap_get_modifier_mask().
 	GetModifierMask(gdk.ModifierIntent) gdk.ModifierType
-	// GetModifierStyle wraps gtk_widget_get_modifier_style
-	// The function returns the following values:
-	// 
-	// 	- goret RcStyle 
-	//
-	// Returns the current modifier style for the widget. (As set by
-	// gtk_widget_modify_style().) If no style has previously set, a new
-	// #GtkRcStyle will be created with all values unset, and set as the
-	// modifier style for the widget. If you make changes to this rc
-	// style, you must call gtk_widget_modify_style(), passing in the
-	// returned rc style, to make sure that your changes take effect.
-	// 
-	// Caution: passing the style back to gtk_widget_modify_style() will
-	// normally end up destroying it, because gtk_widget_modify_style() copies
-	// the passed-in style and sets the copy as the new modifier style,
-	// thus dropping any reference to the old modifier style. Add a reference
-	// to the modifier style if you want to keep it alive.
-	//
-	// Deprecated: (since 3.0.0) Use #GtkStyleContext with a custom #GtkStyleProvider instead
-	GetModifierStyle() RcStyle
 	// GetName wraps gtk_widget_get_name
 	// The function returns the following values:
 	// 
@@ -67355,20 +56509,6 @@ type Widget interface {
 	// is not connected to a toplevel widget, a partial path will be
 	// created.
 	GetPath() *WidgetPath
-	// GetPointer wraps gtk_widget_get_pointer
-	// The function returns the following values:
-	// 
-	// 	- x int: return location for the X coordinate, or %NULL 
-	// 	- y int: return location for the Y coordinate, or %NULL 
-	//
-	// Obtains the location of the mouse pointer in widget coordinates.
-	// Widget coordinates are a bit odd; for historical reasons, they are
-	// defined as @widget-&gt;window coordinates for widgets that return %TRUE for
-	// gtk_widget_get_has_window(); and are relative to @widget-&gt;allocation.x,
-	// @widget-&gt;allocation.y otherwise.
-	//
-	// Deprecated: (since 3.4.0) Use gdk_window_get_device_position() instead.
-	GetPointer() (int, int)
 	// GetPreferredHeight wraps gtk_widget_get_preferred_height
 	// The function returns the following values:
 	// 
@@ -67517,40 +56657,6 @@ type Widget interface {
 	// context of their children or in context of their allocation
 	// capabilities.
 	GetRequestMode() SizeRequestMode
-	// GetRequisition wraps gtk_widget_get_requisition
-	// The function returns the following values:
-	// 
-	// 	- requisition Requisition: a pointer to a #GtkRequisition to copy to 
-	//
-	// Retrieves the widget’s requisition.
-	// 
-	// This function should only be used by widget implementations in
-	// order to figure whether the widget’s requisition has actually
-	// changed after some internal state change (so that they can call
-	// gtk_widget_queue_resize() instead of gtk_widget_queue_draw()).
-	// 
-	// Normally, gtk_widget_size_request() should be used.
-	//
-	// Deprecated: (since 3.0.0) The #GtkRequisition cache on the widget was
-	// removed, If you need to cache sizes across requests and allocations,
-	// add an explicit cache to the widget in question instead.
-	GetRequisition() Requisition
-	// GetRootWindow wraps gtk_widget_get_root_window
-	// The function returns the following values:
-	// 
-	// 	- goret gdk.Window 
-	//
-	// Get the root window where this widget is located. This function can
-	// only be called after the widget has been added to a widget
-	// hierarchy with #GtkWindow at the top.
-	// 
-	// The root window is useful for such purposes as creating a popup
-	// #GdkWindow associated with the window. In general, you should only
-	// create display specific resources when a widget has been realized,
-	// and you should free those resources when the widget is unrealized.
-	//
-	// Deprecated: (since 3.12.0) Use gdk_screen_get_root_window() instead
-	GetRootWindow() gdk.Window
 	// GetScaleFactor wraps gtk_widget_get_scale_factor
 	// The function returns the following values:
 	// 
@@ -67612,15 +56718,6 @@ type Widget interface {
 	// actually request, call gtk_widget_get_preferred_size() instead of
 	// this function.
 	GetSizeRequest() (int, int)
-	// GetState wraps gtk_widget_get_state
-	// The function returns the following values:
-	// 
-	// 	- goret StateType 
-	//
-	// Returns the widget’s state. See gtk_widget_set_state().
-	//
-	// Deprecated: (since 3.0.0) Use gtk_widget_get_state_flags() instead.
-	GetState() StateType
 	// GetStateFlags wraps gtk_widget_get_state_flags
 	// The function returns the following values:
 	// 
@@ -67635,15 +56732,6 @@ type Widget interface {
 	// #GtkStateFlags to pass to a #GtkStyleContext method, you
 	// should look at gtk_style_context_get_state().
 	GetStateFlags() StateFlags
-	// GetStyle wraps gtk_widget_get_style
-	// The function returns the following values:
-	// 
-	// 	- goret Style 
-	//
-	// Simply an accessor function that returns @widget-&gt;style.
-	//
-	// Deprecated: (since 3.0.0) Use #GtkStyleContext instead
-	GetStyle() Style
 	// GetStyleContext wraps gtk_widget_get_style_context
 	// The function returns the following values:
 	// 
@@ -67881,15 +56969,6 @@ type Widget interface {
 	// 
 	// See also gtk_grab_add().
 	HasGrab() bool
-	// HasRCStyle wraps gtk_widget_has_rc_style
-	// The function returns the following values:
-	// 
-	// 	- goret bool 
-	//
-	// Determines if the widget style has been looked up through the rc mechanism.
-	//
-	// Deprecated: (since 3.0.0) Use #GtkStyleContext instead
-	HasRCStyle() bool
 	// HasScreen wraps gtk_widget_has_screen
 	// The function returns the following values:
 	// 
@@ -68006,21 +57085,6 @@ type Widget interface {
 	// Determines whether @widget is somewhere inside @ancestor, possibly with
 	// intermediate containers.
 	IsAncestor(Widget) bool
-	// IsComposited wraps gtk_widget_is_composited
-	// The function returns the following values:
-	// 
-	// 	- goret bool 
-	//
-	// Whether @widget can rely on having its alpha channel
-	// drawn correctly. On X11 this function returns whether a
-	// compositing manager is running for @widget’s screen.
-	// 
-	// Please note that the semantics of this call will change
-	// in the future if used on a widget that has a composited
-	// window in its hierarchy (as set by gdk_window_set_composited()).
-	//
-	// Deprecated: (since 3.22.0) Use gdk_screen_is_composited() instead.
-	IsComposited() bool
 	// IsDrawable wraps gtk_widget_is_drawable
 	// The function returns the following values:
 	// 
@@ -68133,187 +57197,6 @@ type Widget interface {
 	//
 	// Emits the #GtkWidget::mnemonic-activate signal.
 	MnemonicActivate(bool) bool
-	// ModifyFont wraps gtk_widget_modify_font
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- fontDesc *pango.FontDescription (nullable): the font description to use, or %NULL
-	//     to undo the effect of previous calls to gtk_widget_modify_font() 
-	//
-	// Sets the font to use for a widget.
-	// 
-	// All other style values are left untouched.
-	// See also gtk_widget_modify_style().
-	//
-	// Deprecated: (since 3.0.0) Use gtk_widget_override_font() instead
-	ModifyFont(*pango.FontDescription)
-	// ModifyStyle wraps gtk_widget_modify_style
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- style RcStyle: the #GtkRcStyle-struct holding the style modifications 
-	//
-	// Modifies style values on the widget.
-	// 
-	// Modifications made using this technique take precedence over
-	// style values set via an RC file, however, they will be overridden
-	// if a style is explicitly set on the widget using gtk_widget_set_style().
-	// The #GtkRcStyle-struct is designed so each field can either be
-	// set or unset, so it is possible, using this function, to modify some
-	// style values and leave the others unchanged.
-	// 
-	// Note that modifications made with this function are not cumulative
-	// with previous calls to gtk_widget_modify_style() or with such
-	// functions as gtk_widget_modify_fg(). If you wish to retain
-	// previous values, you must first call gtk_widget_get_modifier_style(),
-	// make your modifications to the returned style, then call
-	// gtk_widget_modify_style() with that style. On the other hand,
-	// if you first call gtk_widget_modify_style(), subsequent calls
-	// to such functions gtk_widget_modify_fg() will have a cumulative
-	// effect with the initial modifications.
-	//
-	// Deprecated: (since 3.0.0) Use #GtkStyleContext with a custom #GtkStyleProvider instead
-	ModifyStyle(RcStyle)
-	// OverrideBackgroundColor wraps gtk_widget_override_background_color
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- state StateFlags: the state for which to set the background color 
-	// 	- color *gdk.RGBA (nullable): the color to assign, or %NULL to undo the effect
-	//     of previous calls to gtk_widget_override_background_color() 
-	//
-	// Sets the background color to use for a widget.
-	// 
-	// All other style values are left untouched.
-	// See gtk_widget_override_color().
-	//
-	// Deprecated: (since 3.16.0) This function is not useful in the context of CSS-based
-	//   rendering. If you wish to change the way a widget renders its background
-	//   you should use a custom CSS style, through an application-specific
-	//   #GtkStyleProvider and a CSS style class. You can also override the default
-	//   drawing of a widget through the #GtkWidget::draw signal, and use Cairo to
-	//   draw a specific color, regardless of the CSS style.
-	OverrideBackgroundColor(StateFlags, *gdk.RGBA)
-	// OverrideColor wraps gtk_widget_override_color
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- state StateFlags: the state for which to set the color 
-	// 	- color *gdk.RGBA (nullable): the color to assign, or %NULL to undo the effect
-	//     of previous calls to gtk_widget_override_color() 
-	//
-	// Sets the color to use for a widget.
-	// 
-	// All other style values are left untouched.
-	// 
-	// This function does not act recursively. Setting the color of a
-	// container does not affect its children. Note that some widgets that
-	// you may not think of as containers, for instance #GtkButtons,
-	// are actually containers.
-	// 
-	// This API is mostly meant as a quick way for applications to
-	// change a widget appearance. If you are developing a widgets
-	// library and intend this change to be themeable, it is better
-	// done by setting meaningful CSS classes in your
-	// widget/container implementation through gtk_style_context_add_class().
-	// 
-	// This way, your widget library can install a #GtkCssProvider
-	// with the %GTK_STYLE_PROVIDER_PRIORITY_FALLBACK priority in order
-	// to provide a default styling for those widgets that need so, and
-	// this theming may fully overridden by the user’s theme.
-	// 
-	// Note that for complex widgets this may bring in undesired
-	// results (such as uniform background color everywhere), in
-	// these cases it is better to fully style such widgets through a
-	// #GtkCssProvider with the %GTK_STYLE_PROVIDER_PRIORITY_APPLICATION
-	// priority.
-	//
-	// Deprecated: (since 3.16.0) Use a custom style provider and style classes instead
-	OverrideColor(StateFlags, *gdk.RGBA)
-	// OverrideCursor wraps gtk_widget_override_cursor
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- cursor *gdk.RGBA (nullable): the color to use for primary cursor (does not need to be
-	//     allocated), or %NULL to undo the effect of previous calls to
-	//     of gtk_widget_override_cursor(). 
-	// 	- secondaryCursor *gdk.RGBA (nullable): the color to use for secondary cursor (does not
-	//     need to be allocated), or %NULL to undo the effect of previous
-	//     calls to of gtk_widget_override_cursor(). 
-	//
-	// Sets the cursor color to use in a widget, overriding the
-	// cursor-color and secondary-cursor-color
-	// style properties. All other style values are left untouched.
-	// See also gtk_widget_modify_style().
-	// 
-	// Note that the underlying properties have the #GdkColor type,
-	// so the alpha value in @primary and @secondary will be ignored.
-	//
-	// Deprecated: (since 3.16.0) This function is not useful in the context of CSS-based
-	//   rendering. If you wish to change the color used to render the primary
-	//   and secondary cursors you should use a custom CSS style, through an
-	//   application-specific #GtkStyleProvider and a CSS style class.
-	OverrideCursor(*gdk.RGBA, *gdk.RGBA)
-	// OverrideFont wraps gtk_widget_override_font
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- fontDesc *pango.FontDescription (nullable): the font description to use, or %NULL to undo
-	//     the effect of previous calls to gtk_widget_override_font() 
-	//
-	// Sets the font to use for a widget. All other style values are
-	// left untouched. See gtk_widget_override_color().
-	//
-	// Deprecated: (since 3.16.0) This function is not useful in the context of CSS-based
-	//   rendering. If you wish to change the font a widget uses to render its text
-	//   you should use a custom CSS style, through an application-specific
-	//   #GtkStyleProvider and a CSS style class.
-	OverrideFont(*pango.FontDescription)
-	// OverrideSymbolicColor wraps gtk_widget_override_symbolic_color
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- name string: the name of the symbolic color to modify 
-	// 	- color *gdk.RGBA (nullable): the color to assign (does not need
-	//     to be allocated), or %NULL to undo the effect of previous
-	//     calls to gtk_widget_override_symbolic_color() 
-	//
-	// Sets a symbolic color for a widget.
-	// 
-	// All other style values are left untouched.
-	// See gtk_widget_override_color() for overriding the foreground
-	// or background color.
-	//
-	// Deprecated: (since 3.16.0) This function is not useful in the context of CSS-based
-	//   rendering. If you wish to change the color used to render symbolic icons
-	//   you should use a custom CSS style, through an application-specific
-	//   #GtkStyleProvider and a CSS style class.
-	OverrideSymbolicColor(string, *gdk.RGBA)
-	// Path wraps gtk_widget_path
-	// The function returns the following values:
-	// 
-	// 	- pathLength uint: location to store length of the path,
-	//     or %NULL 
-	// 	- path string: location to store allocated path string,
-	//     or %NULL 
-	// 	- pathReversed string: location to store allocated reverse
-	//     path string, or %NULL 
-	//
-	// Obtains the full path to @widget. The path is simply the name of a
-	// widget and all its parents in the container hierarchy, separated by
-	// periods. The name of a widget comes from
-	// gtk_widget_get_name(). Paths are used to apply styles to a widget
-	// in gtkrc configuration files. Widget names are the type of the
-	// widget by default (e.g. “GtkButton”) or can be set to an
-	// application-specific value with gtk_widget_set_name(). By setting
-	// the name of a widget, you allow users or theme authors to apply
-	// styles to that specific widget in their gtkrc
-	// file. @path_reversed_p fills in the path in reverse order,
-	// i.e. starting with @widget’s name instead of starting with the name
-	// of @widget’s outermost ancestor.
-	//
-	// Deprecated: (since 3.0.0) Use gtk_widget_get_path() instead
-	Path() (uint, string, string)
 	// QueueAllocate wraps gtk_widget_queue_allocate
 	//
 	// This function is only for use in widget implementations.
@@ -68449,80 +57332,6 @@ type Widget interface {
 	// Removes a tick callback previously registered with
 	// gtk_widget_add_tick_callback().
 	RemoveTickCallback(uint)
-	// RenderIcon wraps gtk_widget_render_icon
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- stockId string: a stock ID 
-	// 	- size int: a stock size (#GtkIconSize). A size of `(GtkIconSize)-1`
-	//     means render at the size of the source and don’t scale (if there are
-	//     multiple source sizes, GTK+ picks one of the available sizes). 
-	// 	- detail string (nullable): render detail to pass to theme engine 
-	// 
-	// The function returns the following values:
-	// 
-	// 	- goret gdkpixbuf.Pixbuf 
-	//
-	// A convenience function that uses the theme settings for @widget
-	// to look up @stock_id and render it to a pixbuf. @stock_id should
-	// be a stock icon ID such as #GTK_STOCK_OPEN or #GTK_STOCK_OK. @size
-	// should be a size such as #GTK_ICON_SIZE_MENU. @detail should be a
-	// string that identifies the widget or code doing the rendering, so
-	// that theme engines can special-case rendering for that widget or
-	// code.
-	// 
-	// The pixels in the returned #GdkPixbuf are shared with the rest of
-	// the application and should not be modified. The pixbuf should be
-	// freed after use with g_object_unref().
-	//
-	// Deprecated: (since 3.0.0) Use gtk_widget_render_icon_pixbuf() instead.
-	RenderIcon(string, int, string) gdkpixbuf.Pixbuf
-	// RenderIconPixbuf wraps gtk_widget_render_icon_pixbuf
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- stockId string: a stock ID 
-	// 	- size int: a stock size (#GtkIconSize). A size of `(GtkIconSize)-1`
-	//     means render at the size of the source and don’t scale (if there are
-	//     multiple source sizes, GTK+ picks one of the available sizes). 
-	// 
-	// The function returns the following values:
-	// 
-	// 	- goret gdkpixbuf.Pixbuf 
-	//
-	// A convenience function that uses the theme engine and style
-	// settings for @widget to look up @stock_id and render it to
-	// a pixbuf. @stock_id should be a stock icon ID such as
-	// #GTK_STOCK_OPEN or #GTK_STOCK_OK. @size should be a size
-	// such as #GTK_ICON_SIZE_MENU.
-	// 
-	// The pixels in the returned #GdkPixbuf are shared with the rest of
-	// the application and should not be modified. The pixbuf should be freed
-	// after use with g_object_unref().
-	//
-	// Deprecated: (since 3.10.0) Use gtk_icon_theme_load_icon() instead.
-	RenderIconPixbuf(string, int) gdkpixbuf.Pixbuf
-	// Reparent wraps gtk_widget_reparent
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- newParent Widget: a #GtkContainer to move the widget into 
-	//
-	// Moves a widget from one #GtkContainer to another, handling reference
-	// count issues to avoid destroying the widget.
-	//
-	// Deprecated: (since 3.14.0) Use gtk_container_remove() and gtk_container_add().
-	Reparent(Widget)
-	// ResetRCStyles wraps gtk_widget_reset_rc_styles
-	//
-	// Reset the styles of @widget and all descendents, so when
-	// they are looked up again, they get the correct values
-	// for the currently loaded RC file settings.
-	// 
-	// This function is not useful for applications.
-	//
-	// Deprecated: (since 3.0.0) Use #GtkStyleContext instead, and gtk_widget_reset_style()
-	ResetRCStyles()
 	// ResetStyle wraps gtk_widget_reset_style
 	//
 	// Updates the style context of @widget and all descendants
@@ -68654,17 +57463,6 @@ type Widget interface {
 	// If this function is not called by @widget during a ::size-allocate handler,
 	// the clip will be set to @widget's allocation.
 	SetClip(*Allocation)
-	// SetCompositeName wraps gtk_widget_set_composite_name
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- name string: the name to set 
-	//
-	// Sets a widgets composite name. The widget must be
-	// a composite child of its parent; see gtk_widget_push_composite_child().
-	//
-	// Deprecated: (since 3.10.0) Use gtk_widget_class_set_template(), or don’t use this API at all.
-	SetCompositeName(string)
 	// SetDeviceEnabled wraps gtk_widget_set_device_enabled
 	// 
 	// The function takes the following parameters:
@@ -68717,42 +57515,6 @@ type Widget interface {
 	// If the direction is set to %GTK_TEXT_DIR_NONE, then the value
 	// set by gtk_widget_set_default_direction() will be used.
 	SetDirection(TextDirection)
-	// SetDoubleBuffered wraps gtk_widget_set_double_buffered
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- doubleBuffered bool: %TRUE to double-buffer a widget 
-	//
-	// Widgets are double buffered by default; you can use this function
-	// to turn off the buffering. “Double buffered” simply means that
-	// gdk_window_begin_draw_frame() and gdk_window_end_draw_frame() are called
-	// automatically around expose events sent to the
-	// widget. gdk_window_begin_draw_frame() diverts all drawing to a widget's
-	// window to an offscreen buffer, and gdk_window_end_draw_frame() draws the
-	// buffer to the screen. The result is that users see the window
-	// update in one smooth step, and don’t see individual graphics
-	// primitives being rendered.
-	// 
-	// In very simple terms, double buffered widgets don’t flicker,
-	// so you would only use this function to turn off double buffering
-	// if you had special needs and really knew what you were doing.
-	// 
-	// Note: if you turn off double-buffering, you have to handle
-	// expose events, since even the clearing to the background color or
-	// pixmap will not happen automatically (as it is done in
-	// gdk_window_begin_draw_frame()).
-	// 
-	// In 3.10 GTK and GDK have been restructured for translucent drawing. Since
-	// then expose events for double-buffered widgets are culled into a single
-	// event to the toplevel GDK window. If you now unset double buffering, you
-	// will cause a separate rendering pass for every widget. This will likely
-	// cause rendering problems - in particular related to stacking - and usually
-	// increases rendering times significantly.
-	//
-	// Deprecated: (since 3.14.0) This function does not work under non-X11 backends or with
-	// non-native windows.
-	// It should not be used in newly written code.
-	SetDoubleBuffered(bool)
 	// SetEvents wraps gtk_widget_set_events
 	// 
 	// The function takes the following parameters:
@@ -68910,28 +57672,6 @@ type Widget interface {
 	// Sets the end margin of @widget.
 	// See the #GtkWidget:margin-end property.
 	SetMarginEnd(int)
-	// SetMarginLeft wraps gtk_widget_set_margin_left
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- margin int: the left margin 
-	//
-	// Sets the left margin of @widget.
-	// See the #GtkWidget:margin-left property.
-	//
-	// Deprecated: (since 3.12.0) Use gtk_widget_set_margin_start() instead.
-	SetMarginLeft(int)
-	// SetMarginRight wraps gtk_widget_set_margin_right
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- margin int: the right margin 
-	//
-	// Sets the right margin of @widget.
-	// See the #GtkWidget:margin-right property.
-	//
-	// Deprecated: (since 3.12.0) Use gtk_widget_set_margin_end() instead.
-	SetMarginRight(int)
 	// SetMarginStart wraps gtk_widget_set_margin_start
 	// 
 	// The function takes the following parameters:
@@ -69126,18 +57866,6 @@ type Widget interface {
 	// margin-bottom, but it does include pretty much all other padding
 	// or border properties set by any subclass of #GtkWidget.
 	SetSizeRequest(int, int)
-	// SetState wraps gtk_widget_set_state
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- state StateType: new state for @widget 
-	//
-	// This function is for use in widget implementations. Sets the state
-	// of a widget (insensitive, prelighted, etc.) Usually you should set
-	// the state using wrapper functions such as gtk_widget_set_sensitive().
-	//
-	// Deprecated: (since 3.0.0) Use gtk_widget_set_state_flags() instead.
-	SetState(StateType)
 	// SetStateFlags wraps gtk_widget_set_state_flags
 	// 
 	// The function takes the following parameters:
@@ -69159,19 +57887,6 @@ type Widget interface {
 	// state flag down the hierarchy, both gtk_widget_get_state_flags() and
 	// gtk_widget_is_sensitive() will make use of these.
 	SetStateFlags(StateFlags, bool)
-	// SetStyle wraps gtk_widget_set_style
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- style Style (nullable): a #GtkStyle, or %NULL to remove the effect
-	//     of a previous call to gtk_widget_set_style() and go back to
-	//     the default style 
-	//
-	// Used to set the #GtkStyle for a widget (@widget-&gt;style). Since
-	// GTK 3, this function does nothing, the passed in style is ignored.
-	//
-	// Deprecated: (since 3.0.0) Use #GtkStyleContext instead
-	SetStyle(Style)
 	// SetSupportMultidevice wraps gtk_widget_set_support_multidevice
 	// 
 	// The function takes the following parameters:
@@ -69365,42 +58080,6 @@ type Widget interface {
 	// If the child widget does not have a valign of %GTK_ALIGN_BASELINE the
 	// baseline argument is ignored and -1 is used instead.
 	SizeAllocateWithBaseline(*Allocation, int)
-	// SizeRequest wraps gtk_widget_size_request
-	// The function returns the following values:
-	// 
-	// 	- requisition Requisition: a #GtkRequisition to be filled in 
-	//
-	// This function is typically used when implementing a #GtkContainer
-	// subclass.  Obtains the preferred size of a widget. The container
-	// uses this information to arrange its child widgets and decide what
-	// size allocations to give them with gtk_widget_size_allocate().
-	// 
-	// You can also call this function from an application, with some
-	// caveats. Most notably, getting a size request requires the widget
-	// to be associated with a screen, because font information may be
-	// needed. Multihead-aware applications should keep this in mind.
-	// 
-	// Also remember that the size request is not necessarily the size
-	// a widget will actually be allocated.
-	//
-	// Deprecated: (since 3.0.0) Use gtk_widget_get_preferred_size() instead.
-	SizeRequest() Requisition
-	// StyleAttach wraps gtk_widget_style_attach
-	//
-	// This function attaches the widget’s #GtkStyle to the widget's
-	// #GdkWindow. It is a replacement for
-	// 
-	// |[
-	// widget-&gt;style = gtk_style_attach (widget-&gt;style, widget-&gt;window);
-	// ]|
-	// 
-	// and should only ever be called in a derived widget’s “realize”
-	// implementation which does not chain up to its parent class'
-	// “realize” implementation, because one of the parent classes
-	// (finally #GtkWidget) would attach the style itself.
-	//
-	// Deprecated: (since 3.0.0) This step is unnecessary with #GtkStyleContext.
-	StyleAttach()
 	// StyleGetProperty wraps gtk_widget_style_get_property
 	// 
 	// The function takes the following parameters:
@@ -69536,56 +58215,6 @@ func WidgetInstanceGetDefaultDirection() TextDirection {
 	goret = TextDirection(cret)
 
 	return goret
-}
-
-// WidgetInstanceGetDefaultStyle wraps gtk_widget_get_default_style
-// The function returns the following values:
-// 
-// 	- goret Style 
-//
-// Returns the default style used by all widgets initially.
-//
-// Deprecated: (since 3.0.0) Use #GtkStyleContext instead, and
-//     gtk_css_provider_get_default() to obtain a #GtkStyleProvider
-//     with the default widget style information.
-func WidgetInstanceGetDefaultStyle() Style {
-	var cret *C.GtkStyle // return, none, converted
-
-	cret = C.gtk_widget_get_default_style()
-
-	var goret Style
-
-	goret = UnsafeStyleFromGlibNone(unsafe.Pointer(cret))
-
-	return goret
-}
-
-// WidgetInstancePopCompositeChild wraps gtk_widget_pop_composite_child
-//
-// Cancels the effect of a previous call to gtk_widget_push_composite_child().
-//
-// Deprecated: (since 3.10.0) Use gtk_widget_class_set_template(), or don’t use this API at all.
-func WidgetInstancePopCompositeChild() {
-
-	C.gtk_widget_pop_composite_child()
-}
-
-// WidgetInstancePushCompositeChild wraps gtk_widget_push_composite_child
-//
-// Makes all newly-created widgets as composite children until
-// the corresponding gtk_widget_pop_composite_child() call.
-// 
-// A composite child is a child that’s an implementation detail of the
-// container it’s inside and should not be visible to people using the
-// container. Composite children aren’t treated differently by GTK+ (but
-// see gtk_container_foreach() vs. gtk_container_forall()), but e.g. GUI
-// builders might want to treat them in a different way.
-//
-// Deprecated: (since 3.10.0) This API never really worked well and was mostly unused, now
-// we have a more complete mechanism for composite children, see gtk_widget_class_set_template().
-func WidgetInstancePushCompositeChild() {
-
-	C.gtk_widget_push_composite_child()
 }
 
 // WidgetInstanceSetDefaultDirection wraps gtk_widget_set_default_direction
@@ -69886,7 +58515,7 @@ func (widget *WidgetInstance) ChildFocus(direction DirectionType) bool {
 	return goret
 }
 
-// ChildNotify wraps gtk_widget_child_notify
+// WidgetChildNotify wraps gtk_widget_child_notify
 // 
 // The function takes the following parameters:
 // 
@@ -69900,7 +58529,7 @@ func (widget *WidgetInstance) ChildFocus(direction DirectionType) bool {
 // This is the analogue of g_object_notify() for child properties.
 // 
 // Also see gtk_container_child_notify().
-func (widget *WidgetInstance) ChildNotify(childProperty string) {
+func (widget *WidgetInstance) WidgetChildNotify(childProperty string) {
 	var carg0 *C.GtkWidget // in, none, converted
 	var carg1 *C.gchar     // in, none, string, casted *C.gchar
 
@@ -69911,44 +58540,6 @@ func (widget *WidgetInstance) ChildNotify(childProperty string) {
 	C.gtk_widget_child_notify(carg0, carg1)
 	runtime.KeepAlive(widget)
 	runtime.KeepAlive(childProperty)
-}
-
-// ClassPath wraps gtk_widget_class_path
-// The function returns the following values:
-// 
-// 	- pathLength uint: location to store the length of the
-//     class path, or %NULL 
-// 	- path string: location to store the class path as an
-//     allocated string, or %NULL 
-// 	- pathReversed string: location to store the reverse
-//     class path as an allocated string, or %NULL 
-//
-// Same as gtk_widget_path(), but always uses the name of a widget’s type,
-// never uses a custom name set with gtk_widget_set_name().
-//
-// Deprecated: (since 3.0.0) Use gtk_widget_get_path() instead
-func (widget *WidgetInstance) ClassPath() (uint, string, string) {
-	var carg0 *C.GtkWidget // in, none, converted
-	var carg1 C.guint      // out, full, casted
-	var carg2 *C.gchar     // out, full, string, casted *C.gchar
-	var carg3 *C.gchar     // out, full, string, casted *C.gchar
-
-	carg0 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(widget))
-
-	C.gtk_widget_class_path(carg0, &carg1, &carg2, &carg3)
-	runtime.KeepAlive(widget)
-
-	var pathLength   uint
-	var path         string
-	var pathReversed string
-
-	pathLength = uint(carg1)
-	path = C.GoString((*C.gchar)(unsafe.Pointer(carg2)))
-	defer C.free(unsafe.Pointer(carg2))
-	pathReversed = C.GoString((*C.gchar)(unsafe.Pointer(carg3)))
-	defer C.free(unsafe.Pointer(carg3))
-
-	return pathLength, path, pathReversed
 }
 
 // ComputeExpand wraps gtk_widget_compute_expand
@@ -70349,40 +58940,6 @@ func (widget *WidgetInstance) DragDestSet(flags DestDefaults, targets []TargetEn
 	runtime.KeepAlive(actions)
 }
 
-// DragDestSetProxy wraps gtk_drag_dest_set_proxy
-// 
-// The function takes the following parameters:
-// 
-// 	- proxyWindow gdk.Window: the window to which to forward drag events 
-// 	- protocol gdk.DragProtocol: the drag protocol which the @proxy_window accepts
-//   (You can use gdk_drag_get_protocol() to determine this) 
-// 	- useCoordinates bool: If %TRUE, send the same coordinates to the
-//   destination, because it is an embedded
-//   subwindow. 
-//
-// Sets this widget as a proxy for drops to another window.
-//
-// Deprecated: (since 3.22.0) 
-func (widget *WidgetInstance) DragDestSetProxy(proxyWindow gdk.Window, protocol gdk.DragProtocol, useCoordinates bool) {
-	var carg0 *C.GtkWidget      // in, none, converted
-	var carg1 *C.GdkWindow      // in, none, converted
-	var carg2 C.GdkDragProtocol // in, none, casted
-	var carg3 C.gboolean        // in
-
-	carg0 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(widget))
-	carg1 = (*C.GdkWindow)(gdk.UnsafeWindowToGlibNone(proxyWindow))
-	carg2 = C.GdkDragProtocol(protocol)
-	if useCoordinates {
-		carg3 = C.TRUE
-	}
-
-	C.gtk_drag_dest_set_proxy(carg0, carg1, carg2, carg3)
-	runtime.KeepAlive(widget)
-	runtime.KeepAlive(proxyWindow)
-	runtime.KeepAlive(protocol)
-	runtime.KeepAlive(useCoordinates)
-}
-
 // DragDestSetTargetList wraps gtk_drag_dest_set_target_list
 // 
 // The function takes the following parameters:
@@ -70626,29 +59183,6 @@ func (widget *WidgetInstance) DragSourceSetIconPixbuf(pixbuf gdkpixbuf.Pixbuf) {
 	runtime.KeepAlive(pixbuf)
 }
 
-// DragSourceSetIconStock wraps gtk_drag_source_set_icon_stock
-// 
-// The function takes the following parameters:
-// 
-// 	- stockId string: the ID of the stock icon to use 
-//
-// Sets the icon that will be used for drags from a particular source
-// to a stock icon.
-//
-// Deprecated: (since 3.10.0) Use gtk_drag_source_set_icon_name() instead.
-func (widget *WidgetInstance) DragSourceSetIconStock(stockId string) {
-	var carg0 *C.GtkWidget // in, none, converted
-	var carg1 *C.gchar     // in, none, string, casted *C.gchar
-
-	carg0 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(widget))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(stockId)))
-	defer C.free(unsafe.Pointer(carg1))
-
-	C.gtk_drag_source_set_icon_stock(carg0, carg1)
-	runtime.KeepAlive(widget)
-	runtime.KeepAlive(stockId)
-}
-
 // DragSourceSetTargetList wraps gtk_drag_source_set_target_list
 // 
 // The function takes the following parameters:
@@ -70694,24 +59228,6 @@ func (widget *WidgetInstance) DragUnhighlight() {
 	carg0 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(widget))
 
 	C.gtk_drag_unhighlight(carg0)
-	runtime.KeepAlive(widget)
-}
-
-// EnsureStyle wraps gtk_widget_ensure_style
-//
-// Ensures that @widget has a style (@widget-&gt;style).
-// 
-// Not a very useful function; most of the time, if you
-// want the style, the widget is realized, and realized
-// widgets are guaranteed to have a style already.
-//
-// Deprecated: (since 3.0.0) Use #GtkStyleContext instead
-func (widget *WidgetInstance) EnsureStyle() {
-	var carg0 *C.GtkWidget // in, none, converted
-
-	carg0 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(widget))
-
-	C.gtk_widget_ensure_style(carg0)
 	runtime.KeepAlive(widget)
 }
 
@@ -71080,49 +59596,6 @@ func (widget *WidgetInstance) GetCanFocus() bool {
 	return goret
 }
 
-// GetChildRequisition wraps gtk_widget_get_child_requisition
-// The function returns the following values:
-// 
-// 	- requisition Requisition: a #GtkRequisition to be filled in 
-//
-// This function is only for use in widget implementations. Obtains
-// @widget-&gt;requisition, unless someone has forced a particular
-// geometry on the widget (e.g. with gtk_widget_set_size_request()),
-// in which case it returns that geometry instead of the widget's
-// requisition.
-// 
-// This function differs from gtk_widget_size_request() in that
-// it retrieves the last size request value from @widget-&gt;requisition,
-// while gtk_widget_size_request() actually calls the "size_request" method
-// on @widget to compute the size request and fill in @widget-&gt;requisition,
-// and only then returns @widget-&gt;requisition.
-// 
-// Because this function does not call the “size_request” method, it
-// can only be used when you know that @widget-&gt;requisition is
-// up-to-date, that is, gtk_widget_size_request() has been called
-// since the last time a resize was queued. In general, only container
-// implementations have this information; applications should use
-// gtk_widget_size_request().
-//
-// Deprecated: (since 3.0.0) Use gtk_widget_get_preferred_size() instead.
-func (widget *WidgetInstance) GetChildRequisition() Requisition {
-	var carg0 *C.GtkWidget     // in, none, converted
-	var carg1 C.GtkRequisition // out, transfer: none, C Pointers: 0, Name: Requisition, caller-allocates
-
-	carg0 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(widget))
-
-	C.gtk_widget_get_child_requisition(carg0, &carg1)
-	runtime.KeepAlive(widget)
-
-	var requisition Requisition
-
-	_ = requisition
-	_ = carg1
-	panic("unimplemented conversion of Requisition (GtkRequisition)")
-
-	return requisition
-}
-
 // GetChildVisible wraps gtk_widget_get_child_visible
 // The function returns the following values:
 // 
@@ -71180,31 +59653,6 @@ func (widget *WidgetInstance) GetClip() Allocation {
 	panic("unimplemented conversion of Allocation (GtkAllocation)")
 
 	return clip
-}
-
-// GetCompositeName wraps gtk_widget_get_composite_name
-// The function returns the following values:
-// 
-// 	- goret string 
-//
-// Obtains the composite name of a widget.
-//
-// Deprecated: (since 3.10.0) Use gtk_widget_class_set_template(), or don’t use this API at all.
-func (widget *WidgetInstance) GetCompositeName() string {
-	var carg0 *C.GtkWidget // in, none, converted
-	var cret  *C.gchar     // return, full, string, casted *C.gchar
-
-	carg0 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(widget))
-
-	cret = C.gtk_widget_get_composite_name(carg0)
-	runtime.KeepAlive(widget)
-
-	var goret string
-
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
-	defer C.free(unsafe.Pointer(cret))
-
-	return goret
 }
 
 // GetDeviceEnabled wraps gtk_widget_get_device_enabled
@@ -71680,54 +60128,6 @@ func (widget *WidgetInstance) GetMarginEnd() int {
 	return goret
 }
 
-// GetMarginLeft wraps gtk_widget_get_margin_left
-// The function returns the following values:
-// 
-// 	- goret int 
-//
-// Gets the value of the #GtkWidget:margin-left property.
-//
-// Deprecated: (since 3.12.0) Use gtk_widget_get_margin_start() instead.
-func (widget *WidgetInstance) GetMarginLeft() int {
-	var carg0 *C.GtkWidget // in, none, converted
-	var cret  C.gint       // return, none, casted
-
-	carg0 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(widget))
-
-	cret = C.gtk_widget_get_margin_left(carg0)
-	runtime.KeepAlive(widget)
-
-	var goret int
-
-	goret = int(cret)
-
-	return goret
-}
-
-// GetMarginRight wraps gtk_widget_get_margin_right
-// The function returns the following values:
-// 
-// 	- goret int 
-//
-// Gets the value of the #GtkWidget:margin-right property.
-//
-// Deprecated: (since 3.12.0) Use gtk_widget_get_margin_end() instead.
-func (widget *WidgetInstance) GetMarginRight() int {
-	var carg0 *C.GtkWidget // in, none, converted
-	var cret  C.gint       // return, none, casted
-
-	carg0 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(widget))
-
-	cret = C.gtk_widget_get_margin_right(carg0)
-	runtime.KeepAlive(widget)
-
-	var goret int
-
-	goret = int(cret)
-
-	return goret
-}
-
 // GetMarginStart wraps gtk_widget_get_margin_start
 // The function returns the following values:
 // 
@@ -71805,41 +60205,6 @@ func (widget *WidgetInstance) GetModifierMask(intent gdk.ModifierIntent) gdk.Mod
 	return goret
 }
 
-// GetModifierStyle wraps gtk_widget_get_modifier_style
-// The function returns the following values:
-// 
-// 	- goret RcStyle 
-//
-// Returns the current modifier style for the widget. (As set by
-// gtk_widget_modify_style().) If no style has previously set, a new
-// #GtkRcStyle will be created with all values unset, and set as the
-// modifier style for the widget. If you make changes to this rc
-// style, you must call gtk_widget_modify_style(), passing in the
-// returned rc style, to make sure that your changes take effect.
-// 
-// Caution: passing the style back to gtk_widget_modify_style() will
-// normally end up destroying it, because gtk_widget_modify_style() copies
-// the passed-in style and sets the copy as the new modifier style,
-// thus dropping any reference to the old modifier style. Add a reference
-// to the modifier style if you want to keep it alive.
-//
-// Deprecated: (since 3.0.0) Use #GtkStyleContext with a custom #GtkStyleProvider instead
-func (widget *WidgetInstance) GetModifierStyle() RcStyle {
-	var carg0 *C.GtkWidget  // in, none, converted
-	var cret  *C.GtkRcStyle // return, none, converted
-
-	carg0 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(widget))
-
-	cret = C.gtk_widget_get_modifier_style(carg0)
-	runtime.KeepAlive(widget)
-
-	var goret RcStyle
-
-	goret = UnsafeRcStyleFromGlibNone(unsafe.Pointer(cret))
-
-	return goret
-}
-
 // GetName wraps gtk_widget_get_name
 // The function returns the following values:
 // 
@@ -71858,7 +60223,7 @@ func (widget *WidgetInstance) GetName() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -72006,38 +60371,6 @@ func (widget *WidgetInstance) GetPath() *WidgetPath {
 	goret = UnsafeWidgetPathFromGlibNone(unsafe.Pointer(cret))
 
 	return goret
-}
-
-// GetPointer wraps gtk_widget_get_pointer
-// The function returns the following values:
-// 
-// 	- x int: return location for the X coordinate, or %NULL 
-// 	- y int: return location for the Y coordinate, or %NULL 
-//
-// Obtains the location of the mouse pointer in widget coordinates.
-// Widget coordinates are a bit odd; for historical reasons, they are
-// defined as @widget-&gt;window coordinates for widgets that return %TRUE for
-// gtk_widget_get_has_window(); and are relative to @widget-&gt;allocation.x,
-// @widget-&gt;allocation.y otherwise.
-//
-// Deprecated: (since 3.4.0) Use gdk_window_get_device_position() instead.
-func (widget *WidgetInstance) GetPointer() (int, int) {
-	var carg0 *C.GtkWidget // in, none, converted
-	var carg1 C.gint       // out, full, casted
-	var carg2 C.gint       // out, full, casted
-
-	carg0 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(widget))
-
-	C.gtk_widget_get_pointer(carg0, &carg1, &carg2)
-	runtime.KeepAlive(widget)
-
-	var x int
-	var y int
-
-	x = int(carg1)
-	y = int(carg2)
-
-	return x, y
 }
 
 // GetPreferredHeight wraps gtk_widget_get_preferred_height
@@ -72364,72 +60697,6 @@ func (widget *WidgetInstance) GetRequestMode() SizeRequestMode {
 	return goret
 }
 
-// GetRequisition wraps gtk_widget_get_requisition
-// The function returns the following values:
-// 
-// 	- requisition Requisition: a pointer to a #GtkRequisition to copy to 
-//
-// Retrieves the widget’s requisition.
-// 
-// This function should only be used by widget implementations in
-// order to figure whether the widget’s requisition has actually
-// changed after some internal state change (so that they can call
-// gtk_widget_queue_resize() instead of gtk_widget_queue_draw()).
-// 
-// Normally, gtk_widget_size_request() should be used.
-//
-// Deprecated: (since 3.0.0) The #GtkRequisition cache on the widget was
-// removed, If you need to cache sizes across requests and allocations,
-// add an explicit cache to the widget in question instead.
-func (widget *WidgetInstance) GetRequisition() Requisition {
-	var carg0 *C.GtkWidget     // in, none, converted
-	var carg1 C.GtkRequisition // out, transfer: none, C Pointers: 0, Name: Requisition, caller-allocates
-
-	carg0 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(widget))
-
-	C.gtk_widget_get_requisition(carg0, &carg1)
-	runtime.KeepAlive(widget)
-
-	var requisition Requisition
-
-	_ = requisition
-	_ = carg1
-	panic("unimplemented conversion of Requisition (GtkRequisition)")
-
-	return requisition
-}
-
-// GetRootWindow wraps gtk_widget_get_root_window
-// The function returns the following values:
-// 
-// 	- goret gdk.Window 
-//
-// Get the root window where this widget is located. This function can
-// only be called after the widget has been added to a widget
-// hierarchy with #GtkWindow at the top.
-// 
-// The root window is useful for such purposes as creating a popup
-// #GdkWindow associated with the window. In general, you should only
-// create display specific resources when a widget has been realized,
-// and you should free those resources when the widget is unrealized.
-//
-// Deprecated: (since 3.12.0) Use gdk_screen_get_root_window() instead
-func (widget *WidgetInstance) GetRootWindow() gdk.Window {
-	var carg0 *C.GtkWidget // in, none, converted
-	var cret  *C.GdkWindow // return, none, converted
-
-	carg0 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(widget))
-
-	cret = C.gtk_widget_get_root_window(carg0)
-	runtime.KeepAlive(widget)
-
-	var goret gdk.Window
-
-	goret = gdk.UnsafeWindowFromGlibNone(unsafe.Pointer(cret))
-
-	return goret
-}
-
 // GetScaleFactor wraps gtk_widget_get_scale_factor
 // The function returns the following values:
 // 
@@ -72571,30 +60838,6 @@ func (widget *WidgetInstance) GetSizeRequest() (int, int) {
 	return width, height
 }
 
-// GetState wraps gtk_widget_get_state
-// The function returns the following values:
-// 
-// 	- goret StateType 
-//
-// Returns the widget’s state. See gtk_widget_set_state().
-//
-// Deprecated: (since 3.0.0) Use gtk_widget_get_state_flags() instead.
-func (widget *WidgetInstance) GetState() StateType {
-	var carg0 *C.GtkWidget   // in, none, converted
-	var cret  C.GtkStateType // return, none, casted
-
-	carg0 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(widget))
-
-	cret = C.gtk_widget_get_state(carg0)
-	runtime.KeepAlive(widget)
-
-	var goret StateType
-
-	goret = StateType(cret)
-
-	return goret
-}
-
 // GetStateFlags wraps gtk_widget_get_state_flags
 // The function returns the following values:
 // 
@@ -72620,30 +60863,6 @@ func (widget *WidgetInstance) GetStateFlags() StateFlags {
 	var goret StateFlags
 
 	goret = StateFlags(cret)
-
-	return goret
-}
-
-// GetStyle wraps gtk_widget_get_style
-// The function returns the following values:
-// 
-// 	- goret Style 
-//
-// Simply an accessor function that returns @widget-&gt;style.
-//
-// Deprecated: (since 3.0.0) Use #GtkStyleContext instead
-func (widget *WidgetInstance) GetStyle() Style {
-	var carg0 *C.GtkWidget // in, none, converted
-	var cret  *C.GtkStyle  // return, none, converted
-
-	carg0 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(widget))
-
-	cret = C.gtk_widget_get_style(carg0)
-	runtime.KeepAlive(widget)
-
-	var goret Style
-
-	goret = UnsafeStyleFromGlibNone(unsafe.Pointer(cret))
 
 	return goret
 }
@@ -72756,7 +60975,7 @@ func (widget *WidgetInstance) GetTooltipMarkup() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 	defer C.free(unsafe.Pointer(cret))
 
 	return goret
@@ -72779,7 +60998,7 @@ func (widget *WidgetInstance) GetTooltipText() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 	defer C.free(unsafe.Pointer(cret))
 
 	return goret
@@ -73195,32 +61414,6 @@ func (widget *WidgetInstance) HasGrab() bool {
 	return goret
 }
 
-// HasRCStyle wraps gtk_widget_has_rc_style
-// The function returns the following values:
-// 
-// 	- goret bool 
-//
-// Determines if the widget style has been looked up through the rc mechanism.
-//
-// Deprecated: (since 3.0.0) Use #GtkStyleContext instead
-func (widget *WidgetInstance) HasRCStyle() bool {
-	var carg0 *C.GtkWidget // in, none, converted
-	var cret  C.gboolean   // return
-
-	carg0 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(widget))
-
-	cret = C.gtk_widget_has_rc_style(carg0)
-	runtime.KeepAlive(widget)
-
-	var goret bool
-
-	if cret != 0 {
-		goret = true
-	}
-
-	return goret
-}
-
 // HasScreen wraps gtk_widget_has_screen
 // The function returns the following values:
 // 
@@ -73473,38 +61666,6 @@ func (widget *WidgetInstance) IsAncestor(ancestor Widget) bool {
 	cret = C.gtk_widget_is_ancestor(carg0, carg1)
 	runtime.KeepAlive(widget)
 	runtime.KeepAlive(ancestor)
-
-	var goret bool
-
-	if cret != 0 {
-		goret = true
-	}
-
-	return goret
-}
-
-// IsComposited wraps gtk_widget_is_composited
-// The function returns the following values:
-// 
-// 	- goret bool 
-//
-// Whether @widget can rely on having its alpha channel
-// drawn correctly. On X11 this function returns whether a
-// compositing manager is running for @widget’s screen.
-// 
-// Please note that the semantics of this call will change
-// in the future if used on a widget that has a composited
-// window in its hierarchy (as set by gdk_window_set_composited()).
-//
-// Deprecated: (since 3.22.0) Use gdk_screen_is_composited() instead.
-func (widget *WidgetInstance) IsComposited() bool {
-	var carg0 *C.GtkWidget // in, none, converted
-	var cret  C.gboolean   // return
-
-	carg0 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(widget))
-
-	cret = C.gtk_widget_is_composited(carg0)
-	runtime.KeepAlive(widget)
 
 	var goret bool
 
@@ -73779,314 +61940,6 @@ func (widget *WidgetInstance) MnemonicActivate(groupCycling bool) bool {
 	return goret
 }
 
-// ModifyFont wraps gtk_widget_modify_font
-// 
-// The function takes the following parameters:
-// 
-// 	- fontDesc *pango.FontDescription (nullable): the font description to use, or %NULL
-//     to undo the effect of previous calls to gtk_widget_modify_font() 
-//
-// Sets the font to use for a widget.
-// 
-// All other style values are left untouched.
-// See also gtk_widget_modify_style().
-//
-// Deprecated: (since 3.0.0) Use gtk_widget_override_font() instead
-func (widget *WidgetInstance) ModifyFont(fontDesc *pango.FontDescription) {
-	var carg0 *C.GtkWidget            // in, none, converted
-	var carg1 *C.PangoFontDescription // in, none, converted, nullable
-
-	carg0 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(widget))
-	if fontDesc != nil {
-		carg1 = (*C.PangoFontDescription)(pango.UnsafeFontDescriptionToGlibNone(fontDesc))
-	}
-
-	C.gtk_widget_modify_font(carg0, carg1)
-	runtime.KeepAlive(widget)
-	runtime.KeepAlive(fontDesc)
-}
-
-// ModifyStyle wraps gtk_widget_modify_style
-// 
-// The function takes the following parameters:
-// 
-// 	- style RcStyle: the #GtkRcStyle-struct holding the style modifications 
-//
-// Modifies style values on the widget.
-// 
-// Modifications made using this technique take precedence over
-// style values set via an RC file, however, they will be overridden
-// if a style is explicitly set on the widget using gtk_widget_set_style().
-// The #GtkRcStyle-struct is designed so each field can either be
-// set or unset, so it is possible, using this function, to modify some
-// style values and leave the others unchanged.
-// 
-// Note that modifications made with this function are not cumulative
-// with previous calls to gtk_widget_modify_style() or with such
-// functions as gtk_widget_modify_fg(). If you wish to retain
-// previous values, you must first call gtk_widget_get_modifier_style(),
-// make your modifications to the returned style, then call
-// gtk_widget_modify_style() with that style. On the other hand,
-// if you first call gtk_widget_modify_style(), subsequent calls
-// to such functions gtk_widget_modify_fg() will have a cumulative
-// effect with the initial modifications.
-//
-// Deprecated: (since 3.0.0) Use #GtkStyleContext with a custom #GtkStyleProvider instead
-func (widget *WidgetInstance) ModifyStyle(style RcStyle) {
-	var carg0 *C.GtkWidget  // in, none, converted
-	var carg1 *C.GtkRcStyle // in, none, converted
-
-	carg0 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(widget))
-	carg1 = (*C.GtkRcStyle)(UnsafeRcStyleToGlibNone(style))
-
-	C.gtk_widget_modify_style(carg0, carg1)
-	runtime.KeepAlive(widget)
-	runtime.KeepAlive(style)
-}
-
-// OverrideBackgroundColor wraps gtk_widget_override_background_color
-// 
-// The function takes the following parameters:
-// 
-// 	- state StateFlags: the state for which to set the background color 
-// 	- color *gdk.RGBA (nullable): the color to assign, or %NULL to undo the effect
-//     of previous calls to gtk_widget_override_background_color() 
-//
-// Sets the background color to use for a widget.
-// 
-// All other style values are left untouched.
-// See gtk_widget_override_color().
-//
-// Deprecated: (since 3.16.0) This function is not useful in the context of CSS-based
-//   rendering. If you wish to change the way a widget renders its background
-//   you should use a custom CSS style, through an application-specific
-//   #GtkStyleProvider and a CSS style class. You can also override the default
-//   drawing of a widget through the #GtkWidget::draw signal, and use Cairo to
-//   draw a specific color, regardless of the CSS style.
-func (widget *WidgetInstance) OverrideBackgroundColor(state StateFlags, color *gdk.RGBA) {
-	var carg0 *C.GtkWidget    // in, none, converted
-	var carg1 C.GtkStateFlags // in, none, casted
-	var carg2 *C.GdkRGBA      // in, none, converted, nullable
-
-	carg0 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(widget))
-	carg1 = C.GtkStateFlags(state)
-	if color != nil {
-		carg2 = (*C.GdkRGBA)(gdk.UnsafeRGBAToGlibNone(color))
-	}
-
-	C.gtk_widget_override_background_color(carg0, carg1, carg2)
-	runtime.KeepAlive(widget)
-	runtime.KeepAlive(state)
-	runtime.KeepAlive(color)
-}
-
-// OverrideColor wraps gtk_widget_override_color
-// 
-// The function takes the following parameters:
-// 
-// 	- state StateFlags: the state for which to set the color 
-// 	- color *gdk.RGBA (nullable): the color to assign, or %NULL to undo the effect
-//     of previous calls to gtk_widget_override_color() 
-//
-// Sets the color to use for a widget.
-// 
-// All other style values are left untouched.
-// 
-// This function does not act recursively. Setting the color of a
-// container does not affect its children. Note that some widgets that
-// you may not think of as containers, for instance #GtkButtons,
-// are actually containers.
-// 
-// This API is mostly meant as a quick way for applications to
-// change a widget appearance. If you are developing a widgets
-// library and intend this change to be themeable, it is better
-// done by setting meaningful CSS classes in your
-// widget/container implementation through gtk_style_context_add_class().
-// 
-// This way, your widget library can install a #GtkCssProvider
-// with the %GTK_STYLE_PROVIDER_PRIORITY_FALLBACK priority in order
-// to provide a default styling for those widgets that need so, and
-// this theming may fully overridden by the user’s theme.
-// 
-// Note that for complex widgets this may bring in undesired
-// results (such as uniform background color everywhere), in
-// these cases it is better to fully style such widgets through a
-// #GtkCssProvider with the %GTK_STYLE_PROVIDER_PRIORITY_APPLICATION
-// priority.
-//
-// Deprecated: (since 3.16.0) Use a custom style provider and style classes instead
-func (widget *WidgetInstance) OverrideColor(state StateFlags, color *gdk.RGBA) {
-	var carg0 *C.GtkWidget    // in, none, converted
-	var carg1 C.GtkStateFlags // in, none, casted
-	var carg2 *C.GdkRGBA      // in, none, converted, nullable
-
-	carg0 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(widget))
-	carg1 = C.GtkStateFlags(state)
-	if color != nil {
-		carg2 = (*C.GdkRGBA)(gdk.UnsafeRGBAToGlibNone(color))
-	}
-
-	C.gtk_widget_override_color(carg0, carg1, carg2)
-	runtime.KeepAlive(widget)
-	runtime.KeepAlive(state)
-	runtime.KeepAlive(color)
-}
-
-// OverrideCursor wraps gtk_widget_override_cursor
-// 
-// The function takes the following parameters:
-// 
-// 	- cursor *gdk.RGBA (nullable): the color to use for primary cursor (does not need to be
-//     allocated), or %NULL to undo the effect of previous calls to
-//     of gtk_widget_override_cursor(). 
-// 	- secondaryCursor *gdk.RGBA (nullable): the color to use for secondary cursor (does not
-//     need to be allocated), or %NULL to undo the effect of previous
-//     calls to of gtk_widget_override_cursor(). 
-//
-// Sets the cursor color to use in a widget, overriding the
-// cursor-color and secondary-cursor-color
-// style properties. All other style values are left untouched.
-// See also gtk_widget_modify_style().
-// 
-// Note that the underlying properties have the #GdkColor type,
-// so the alpha value in @primary and @secondary will be ignored.
-//
-// Deprecated: (since 3.16.0) This function is not useful in the context of CSS-based
-//   rendering. If you wish to change the color used to render the primary
-//   and secondary cursors you should use a custom CSS style, through an
-//   application-specific #GtkStyleProvider and a CSS style class.
-func (widget *WidgetInstance) OverrideCursor(cursor *gdk.RGBA, secondaryCursor *gdk.RGBA) {
-	var carg0 *C.GtkWidget // in, none, converted
-	var carg1 *C.GdkRGBA   // in, none, converted, nullable
-	var carg2 *C.GdkRGBA   // in, none, converted, nullable
-
-	carg0 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(widget))
-	if cursor != nil {
-		carg1 = (*C.GdkRGBA)(gdk.UnsafeRGBAToGlibNone(cursor))
-	}
-	if secondaryCursor != nil {
-		carg2 = (*C.GdkRGBA)(gdk.UnsafeRGBAToGlibNone(secondaryCursor))
-	}
-
-	C.gtk_widget_override_cursor(carg0, carg1, carg2)
-	runtime.KeepAlive(widget)
-	runtime.KeepAlive(cursor)
-	runtime.KeepAlive(secondaryCursor)
-}
-
-// OverrideFont wraps gtk_widget_override_font
-// 
-// The function takes the following parameters:
-// 
-// 	- fontDesc *pango.FontDescription (nullable): the font description to use, or %NULL to undo
-//     the effect of previous calls to gtk_widget_override_font() 
-//
-// Sets the font to use for a widget. All other style values are
-// left untouched. See gtk_widget_override_color().
-//
-// Deprecated: (since 3.16.0) This function is not useful in the context of CSS-based
-//   rendering. If you wish to change the font a widget uses to render its text
-//   you should use a custom CSS style, through an application-specific
-//   #GtkStyleProvider and a CSS style class.
-func (widget *WidgetInstance) OverrideFont(fontDesc *pango.FontDescription) {
-	var carg0 *C.GtkWidget            // in, none, converted
-	var carg1 *C.PangoFontDescription // in, none, converted, nullable
-
-	carg0 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(widget))
-	if fontDesc != nil {
-		carg1 = (*C.PangoFontDescription)(pango.UnsafeFontDescriptionToGlibNone(fontDesc))
-	}
-
-	C.gtk_widget_override_font(carg0, carg1)
-	runtime.KeepAlive(widget)
-	runtime.KeepAlive(fontDesc)
-}
-
-// OverrideSymbolicColor wraps gtk_widget_override_symbolic_color
-// 
-// The function takes the following parameters:
-// 
-// 	- name string: the name of the symbolic color to modify 
-// 	- color *gdk.RGBA (nullable): the color to assign (does not need
-//     to be allocated), or %NULL to undo the effect of previous
-//     calls to gtk_widget_override_symbolic_color() 
-//
-// Sets a symbolic color for a widget.
-// 
-// All other style values are left untouched.
-// See gtk_widget_override_color() for overriding the foreground
-// or background color.
-//
-// Deprecated: (since 3.16.0) This function is not useful in the context of CSS-based
-//   rendering. If you wish to change the color used to render symbolic icons
-//   you should use a custom CSS style, through an application-specific
-//   #GtkStyleProvider and a CSS style class.
-func (widget *WidgetInstance) OverrideSymbolicColor(name string, color *gdk.RGBA) {
-	var carg0 *C.GtkWidget // in, none, converted
-	var carg1 *C.gchar     // in, none, string, casted *C.gchar
-	var carg2 *C.GdkRGBA   // in, none, converted, nullable
-
-	carg0 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(widget))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(name)))
-	defer C.free(unsafe.Pointer(carg1))
-	if color != nil {
-		carg2 = (*C.GdkRGBA)(gdk.UnsafeRGBAToGlibNone(color))
-	}
-
-	C.gtk_widget_override_symbolic_color(carg0, carg1, carg2)
-	runtime.KeepAlive(widget)
-	runtime.KeepAlive(name)
-	runtime.KeepAlive(color)
-}
-
-// Path wraps gtk_widget_path
-// The function returns the following values:
-// 
-// 	- pathLength uint: location to store length of the path,
-//     or %NULL 
-// 	- path string: location to store allocated path string,
-//     or %NULL 
-// 	- pathReversed string: location to store allocated reverse
-//     path string, or %NULL 
-//
-// Obtains the full path to @widget. The path is simply the name of a
-// widget and all its parents in the container hierarchy, separated by
-// periods. The name of a widget comes from
-// gtk_widget_get_name(). Paths are used to apply styles to a widget
-// in gtkrc configuration files. Widget names are the type of the
-// widget by default (e.g. “GtkButton”) or can be set to an
-// application-specific value with gtk_widget_set_name(). By setting
-// the name of a widget, you allow users or theme authors to apply
-// styles to that specific widget in their gtkrc
-// file. @path_reversed_p fills in the path in reverse order,
-// i.e. starting with @widget’s name instead of starting with the name
-// of @widget’s outermost ancestor.
-//
-// Deprecated: (since 3.0.0) Use gtk_widget_get_path() instead
-func (widget *WidgetInstance) Path() (uint, string, string) {
-	var carg0 *C.GtkWidget // in, none, converted
-	var carg1 C.guint      // out, full, casted
-	var carg2 *C.gchar     // out, full, string, casted *C.gchar
-	var carg3 *C.gchar     // out, full, string, casted *C.gchar
-
-	carg0 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(widget))
-
-	C.gtk_widget_path(carg0, &carg1, &carg2, &carg3)
-	runtime.KeepAlive(widget)
-
-	var pathLength   uint
-	var path         string
-	var pathReversed string
-
-	pathLength = uint(carg1)
-	path = C.GoString((*C.gchar)(unsafe.Pointer(carg2)))
-	defer C.free(unsafe.Pointer(carg2))
-	pathReversed = C.GoString((*C.gchar)(unsafe.Pointer(carg3)))
-	defer C.free(unsafe.Pointer(carg3))
-
-	return pathLength, path, pathReversed
-}
-
 // QueueAllocate wraps gtk_widget_queue_allocate
 //
 // This function is only for use in widget implementations.
@@ -74349,149 +62202,6 @@ func (widget *WidgetInstance) RemoveTickCallback(id uint) {
 	runtime.KeepAlive(id)
 }
 
-// RenderIcon wraps gtk_widget_render_icon
-// 
-// The function takes the following parameters:
-// 
-// 	- stockId string: a stock ID 
-// 	- size int: a stock size (#GtkIconSize). A size of `(GtkIconSize)-1`
-//     means render at the size of the source and don’t scale (if there are
-//     multiple source sizes, GTK+ picks one of the available sizes). 
-// 	- detail string (nullable): render detail to pass to theme engine 
-// 
-// The function returns the following values:
-// 
-// 	- goret gdkpixbuf.Pixbuf 
-//
-// A convenience function that uses the theme settings for @widget
-// to look up @stock_id and render it to a pixbuf. @stock_id should
-// be a stock icon ID such as #GTK_STOCK_OPEN or #GTK_STOCK_OK. @size
-// should be a size such as #GTK_ICON_SIZE_MENU. @detail should be a
-// string that identifies the widget or code doing the rendering, so
-// that theme engines can special-case rendering for that widget or
-// code.
-// 
-// The pixels in the returned #GdkPixbuf are shared with the rest of
-// the application and should not be modified. The pixbuf should be
-// freed after use with g_object_unref().
-//
-// Deprecated: (since 3.0.0) Use gtk_widget_render_icon_pixbuf() instead.
-func (widget *WidgetInstance) RenderIcon(stockId string, size int, detail string) gdkpixbuf.Pixbuf {
-	var carg0 *C.GtkWidget  // in, none, converted
-	var carg1 *C.gchar      // in, none, string, casted *C.gchar
-	var carg2 C.GtkIconSize // in, none, casted, casted C.gint
-	var carg3 *C.gchar      // in, none, string, nullable-string
-	var cret  *C.GdkPixbuf  // return, full, converted
-
-	carg0 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(widget))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(stockId)))
-	defer C.free(unsafe.Pointer(carg1))
-	carg2 = C.GtkIconSize(size)
-	if detail != "" {
-		carg3 = (*C.gchar)(unsafe.Pointer(C.CString(detail)))
-		defer C.free(unsafe.Pointer(carg3))
-	}
-
-	cret = C.gtk_widget_render_icon(carg0, carg1, carg2, carg3)
-	runtime.KeepAlive(widget)
-	runtime.KeepAlive(stockId)
-	runtime.KeepAlive(size)
-	runtime.KeepAlive(detail)
-
-	var goret gdkpixbuf.Pixbuf
-
-	goret = gdkpixbuf.UnsafePixbufFromGlibFull(unsafe.Pointer(cret))
-
-	return goret
-}
-
-// RenderIconPixbuf wraps gtk_widget_render_icon_pixbuf
-// 
-// The function takes the following parameters:
-// 
-// 	- stockId string: a stock ID 
-// 	- size int: a stock size (#GtkIconSize). A size of `(GtkIconSize)-1`
-//     means render at the size of the source and don’t scale (if there are
-//     multiple source sizes, GTK+ picks one of the available sizes). 
-// 
-// The function returns the following values:
-// 
-// 	- goret gdkpixbuf.Pixbuf 
-//
-// A convenience function that uses the theme engine and style
-// settings for @widget to look up @stock_id and render it to
-// a pixbuf. @stock_id should be a stock icon ID such as
-// #GTK_STOCK_OPEN or #GTK_STOCK_OK. @size should be a size
-// such as #GTK_ICON_SIZE_MENU.
-// 
-// The pixels in the returned #GdkPixbuf are shared with the rest of
-// the application and should not be modified. The pixbuf should be freed
-// after use with g_object_unref().
-//
-// Deprecated: (since 3.10.0) Use gtk_icon_theme_load_icon() instead.
-func (widget *WidgetInstance) RenderIconPixbuf(stockId string, size int) gdkpixbuf.Pixbuf {
-	var carg0 *C.GtkWidget  // in, none, converted
-	var carg1 *C.gchar      // in, none, string, casted *C.gchar
-	var carg2 C.GtkIconSize // in, none, casted, casted C.gint
-	var cret  *C.GdkPixbuf  // return, full, converted
-
-	carg0 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(widget))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(stockId)))
-	defer C.free(unsafe.Pointer(carg1))
-	carg2 = C.GtkIconSize(size)
-
-	cret = C.gtk_widget_render_icon_pixbuf(carg0, carg1, carg2)
-	runtime.KeepAlive(widget)
-	runtime.KeepAlive(stockId)
-	runtime.KeepAlive(size)
-
-	var goret gdkpixbuf.Pixbuf
-
-	goret = gdkpixbuf.UnsafePixbufFromGlibFull(unsafe.Pointer(cret))
-
-	return goret
-}
-
-// Reparent wraps gtk_widget_reparent
-// 
-// The function takes the following parameters:
-// 
-// 	- newParent Widget: a #GtkContainer to move the widget into 
-//
-// Moves a widget from one #GtkContainer to another, handling reference
-// count issues to avoid destroying the widget.
-//
-// Deprecated: (since 3.14.0) Use gtk_container_remove() and gtk_container_add().
-func (widget *WidgetInstance) Reparent(newParent Widget) {
-	var carg0 *C.GtkWidget // in, none, converted
-	var carg1 *C.GtkWidget // in, none, converted
-
-	carg0 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(widget))
-	carg1 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(newParent))
-
-	C.gtk_widget_reparent(carg0, carg1)
-	runtime.KeepAlive(widget)
-	runtime.KeepAlive(newParent)
-}
-
-// ResetRCStyles wraps gtk_widget_reset_rc_styles
-//
-// Reset the styles of @widget and all descendents, so when
-// they are looked up again, they get the correct values
-// for the currently loaded RC file settings.
-// 
-// This function is not useful for applications.
-//
-// Deprecated: (since 3.0.0) Use #GtkStyleContext instead, and gtk_widget_reset_style()
-func (widget *WidgetInstance) ResetRCStyles() {
-	var carg0 *C.GtkWidget // in, none, converted
-
-	carg0 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(widget))
-
-	C.gtk_widget_reset_rc_styles(carg0)
-	runtime.KeepAlive(widget)
-}
-
 // ResetStyle wraps gtk_widget_reset_style
 //
 // Updates the style context of @widget and all descendants
@@ -74728,29 +62438,6 @@ func (widget *WidgetInstance) SetClip(clip *Allocation) {
 	runtime.KeepAlive(clip)
 }
 
-// SetCompositeName wraps gtk_widget_set_composite_name
-// 
-// The function takes the following parameters:
-// 
-// 	- name string: the name to set 
-//
-// Sets a widgets composite name. The widget must be
-// a composite child of its parent; see gtk_widget_push_composite_child().
-//
-// Deprecated: (since 3.10.0) Use gtk_widget_class_set_template(), or don’t use this API at all.
-func (widget *WidgetInstance) SetCompositeName(name string) {
-	var carg0 *C.GtkWidget // in, none, converted
-	var carg1 *C.gchar     // in, none, string, casted *C.gchar
-
-	carg0 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(widget))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(name)))
-	defer C.free(unsafe.Pointer(carg1))
-
-	C.gtk_widget_set_composite_name(carg0, carg1)
-	runtime.KeepAlive(widget)
-	runtime.KeepAlive(name)
-}
-
 // SetDeviceEnabled wraps gtk_widget_set_device_enabled
 // 
 // The function takes the following parameters:
@@ -74842,55 +62529,6 @@ func (widget *WidgetInstance) SetDirection(dir TextDirection) {
 	C.gtk_widget_set_direction(carg0, carg1)
 	runtime.KeepAlive(widget)
 	runtime.KeepAlive(dir)
-}
-
-// SetDoubleBuffered wraps gtk_widget_set_double_buffered
-// 
-// The function takes the following parameters:
-// 
-// 	- doubleBuffered bool: %TRUE to double-buffer a widget 
-//
-// Widgets are double buffered by default; you can use this function
-// to turn off the buffering. “Double buffered” simply means that
-// gdk_window_begin_draw_frame() and gdk_window_end_draw_frame() are called
-// automatically around expose events sent to the
-// widget. gdk_window_begin_draw_frame() diverts all drawing to a widget's
-// window to an offscreen buffer, and gdk_window_end_draw_frame() draws the
-// buffer to the screen. The result is that users see the window
-// update in one smooth step, and don’t see individual graphics
-// primitives being rendered.
-// 
-// In very simple terms, double buffered widgets don’t flicker,
-// so you would only use this function to turn off double buffering
-// if you had special needs and really knew what you were doing.
-// 
-// Note: if you turn off double-buffering, you have to handle
-// expose events, since even the clearing to the background color or
-// pixmap will not happen automatically (as it is done in
-// gdk_window_begin_draw_frame()).
-// 
-// In 3.10 GTK and GDK have been restructured for translucent drawing. Since
-// then expose events for double-buffered widgets are culled into a single
-// event to the toplevel GDK window. If you now unset double buffering, you
-// will cause a separate rendering pass for every widget. This will likely
-// cause rendering problems - in particular related to stacking - and usually
-// increases rendering times significantly.
-//
-// Deprecated: (since 3.14.0) This function does not work under non-X11 backends or with
-// non-native windows.
-// It should not be used in newly written code.
-func (widget *WidgetInstance) SetDoubleBuffered(doubleBuffered bool) {
-	var carg0 *C.GtkWidget // in, none, converted
-	var carg1 C.gboolean   // in
-
-	carg0 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(widget))
-	if doubleBuffered {
-		carg1 = C.TRUE
-	}
-
-	C.gtk_widget_set_double_buffered(carg0, carg1)
-	runtime.KeepAlive(widget)
-	runtime.KeepAlive(doubleBuffered)
 }
 
 // SetEvents wraps gtk_widget_set_events
@@ -75181,50 +62819,6 @@ func (widget *WidgetInstance) SetMarginEnd(margin int) {
 	carg1 = C.gint(margin)
 
 	C.gtk_widget_set_margin_end(carg0, carg1)
-	runtime.KeepAlive(widget)
-	runtime.KeepAlive(margin)
-}
-
-// SetMarginLeft wraps gtk_widget_set_margin_left
-// 
-// The function takes the following parameters:
-// 
-// 	- margin int: the left margin 
-//
-// Sets the left margin of @widget.
-// See the #GtkWidget:margin-left property.
-//
-// Deprecated: (since 3.12.0) Use gtk_widget_set_margin_start() instead.
-func (widget *WidgetInstance) SetMarginLeft(margin int) {
-	var carg0 *C.GtkWidget // in, none, converted
-	var carg1 C.gint       // in, none, casted
-
-	carg0 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(widget))
-	carg1 = C.gint(margin)
-
-	C.gtk_widget_set_margin_left(carg0, carg1)
-	runtime.KeepAlive(widget)
-	runtime.KeepAlive(margin)
-}
-
-// SetMarginRight wraps gtk_widget_set_margin_right
-// 
-// The function takes the following parameters:
-// 
-// 	- margin int: the right margin 
-//
-// Sets the right margin of @widget.
-// See the #GtkWidget:margin-right property.
-//
-// Deprecated: (since 3.12.0) Use gtk_widget_set_margin_end() instead.
-func (widget *WidgetInstance) SetMarginRight(margin int) {
-	var carg0 *C.GtkWidget // in, none, converted
-	var carg1 C.gint       // in, none, casted
-
-	carg0 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(widget))
-	carg1 = C.gint(margin)
-
-	C.gtk_widget_set_margin_right(carg0, carg1)
 	runtime.KeepAlive(widget)
 	runtime.KeepAlive(margin)
 }
@@ -75569,29 +63163,6 @@ func (widget *WidgetInstance) SetSizeRequest(width int, height int) {
 	runtime.KeepAlive(height)
 }
 
-// SetState wraps gtk_widget_set_state
-// 
-// The function takes the following parameters:
-// 
-// 	- state StateType: new state for @widget 
-//
-// This function is for use in widget implementations. Sets the state
-// of a widget (insensitive, prelighted, etc.) Usually you should set
-// the state using wrapper functions such as gtk_widget_set_sensitive().
-//
-// Deprecated: (since 3.0.0) Use gtk_widget_set_state_flags() instead.
-func (widget *WidgetInstance) SetState(state StateType) {
-	var carg0 *C.GtkWidget   // in, none, converted
-	var carg1 C.GtkStateType // in, none, casted
-
-	carg0 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(widget))
-	carg1 = C.GtkStateType(state)
-
-	C.gtk_widget_set_state(carg0, carg1)
-	runtime.KeepAlive(widget)
-	runtime.KeepAlive(state)
-}
-
 // SetStateFlags wraps gtk_widget_set_state_flags
 // 
 // The function takes the following parameters:
@@ -75627,32 +63198,6 @@ func (widget *WidgetInstance) SetStateFlags(flags StateFlags, clear bool) {
 	runtime.KeepAlive(widget)
 	runtime.KeepAlive(flags)
 	runtime.KeepAlive(clear)
-}
-
-// SetStyle wraps gtk_widget_set_style
-// 
-// The function takes the following parameters:
-// 
-// 	- style Style (nullable): a #GtkStyle, or %NULL to remove the effect
-//     of a previous call to gtk_widget_set_style() and go back to
-//     the default style 
-//
-// Used to set the #GtkStyle for a widget (@widget-&gt;style). Since
-// GTK 3, this function does nothing, the passed in style is ignored.
-//
-// Deprecated: (since 3.0.0) Use #GtkStyleContext instead
-func (widget *WidgetInstance) SetStyle(style Style) {
-	var carg0 *C.GtkWidget // in, none, converted
-	var carg1 *C.GtkStyle  // in, none, converted, nullable
-
-	carg0 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(widget))
-	if style != nil {
-		carg1 = (*C.GtkStyle)(UnsafeStyleToGlibNone(style))
-	}
-
-	C.gtk_widget_set_style(carg0, carg1)
-	runtime.KeepAlive(widget)
-	runtime.KeepAlive(style)
 }
 
 // SetSupportMultidevice wraps gtk_widget_set_support_multidevice
@@ -76027,67 +63572,6 @@ func (widget *WidgetInstance) SizeAllocateWithBaseline(allocation *Allocation, b
 	runtime.KeepAlive(widget)
 	runtime.KeepAlive(allocation)
 	runtime.KeepAlive(baseline)
-}
-
-// SizeRequest wraps gtk_widget_size_request
-// The function returns the following values:
-// 
-// 	- requisition Requisition: a #GtkRequisition to be filled in 
-//
-// This function is typically used when implementing a #GtkContainer
-// subclass.  Obtains the preferred size of a widget. The container
-// uses this information to arrange its child widgets and decide what
-// size allocations to give them with gtk_widget_size_allocate().
-// 
-// You can also call this function from an application, with some
-// caveats. Most notably, getting a size request requires the widget
-// to be associated with a screen, because font information may be
-// needed. Multihead-aware applications should keep this in mind.
-// 
-// Also remember that the size request is not necessarily the size
-// a widget will actually be allocated.
-//
-// Deprecated: (since 3.0.0) Use gtk_widget_get_preferred_size() instead.
-func (widget *WidgetInstance) SizeRequest() Requisition {
-	var carg0 *C.GtkWidget     // in, none, converted
-	var carg1 C.GtkRequisition // out, transfer: none, C Pointers: 0, Name: Requisition, caller-allocates
-
-	carg0 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(widget))
-
-	C.gtk_widget_size_request(carg0, &carg1)
-	runtime.KeepAlive(widget)
-
-	var requisition Requisition
-
-	_ = requisition
-	_ = carg1
-	panic("unimplemented conversion of Requisition (GtkRequisition)")
-
-	return requisition
-}
-
-// StyleAttach wraps gtk_widget_style_attach
-//
-// This function attaches the widget’s #GtkStyle to the widget's
-// #GdkWindow. It is a replacement for
-// 
-// |[
-// widget-&gt;style = gtk_style_attach (widget-&gt;style, widget-&gt;window);
-// ]|
-// 
-// and should only ever be called in a derived widget’s “realize”
-// implementation which does not chain up to its parent class'
-// “realize” implementation, because one of the parent classes
-// (finally #GtkWidget) would attach the style itself.
-//
-// Deprecated: (since 3.0.0) This step is unnecessary with #GtkStyleContext.
-func (widget *WidgetInstance) StyleAttach() {
-	var carg0 *C.GtkWidget // in, none, converted
-
-	carg0 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(widget))
-
-	C.gtk_widget_style_attach(carg0)
-	runtime.KeepAlive(widget)
 }
 
 // StyleGetProperty wraps gtk_widget_style_get_property
@@ -77548,25 +65032,6 @@ type CellView interface {
 	// Returns the model for @cell_view. If no model is used %NULL is
 	// returned.
 	GetModel() TreeModel
-	// GetSizeOfRow wraps gtk_cell_view_get_size_of_row
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- path *TreePath: a #GtkTreePath 
-	// 
-	// The function returns the following values:
-	// 
-	// 	- requisition Requisition: return location for the size 
-	// 	- goret bool 
-	//
-	// Sets @requisition to the size needed by @cell_view to display
-	// the model row pointed to by @path.
-	//
-	// Deprecated: (since 3.0.0) Combo box formerly used this to calculate the
-	// sizes for cellviews, now you can achieve this by either using
-	// the #GtkCellView:fit-model property or by setting the currently
-	// displayed row of the #GtkCellView and using gtk_widget_get_preferred_size().
-	GetSizeOfRow(*TreePath) (Requisition, bool)
 	// SetBackgroundRGBA wraps gtk_cell_view_set_background_rgba
 	// 
 	// The function takes the following parameters:
@@ -77910,50 +65375,6 @@ func (cellView *CellViewInstance) GetModel() TreeModel {
 	goret = UnsafeTreeModelFromGlibNone(unsafe.Pointer(cret))
 
 	return goret
-}
-
-// GetSizeOfRow wraps gtk_cell_view_get_size_of_row
-// 
-// The function takes the following parameters:
-// 
-// 	- path *TreePath: a #GtkTreePath 
-// 
-// The function returns the following values:
-// 
-// 	- requisition Requisition: return location for the size 
-// 	- goret bool 
-//
-// Sets @requisition to the size needed by @cell_view to display
-// the model row pointed to by @path.
-//
-// Deprecated: (since 3.0.0) Combo box formerly used this to calculate the
-// sizes for cellviews, now you can achieve this by either using
-// the #GtkCellView:fit-model property or by setting the currently
-// displayed row of the #GtkCellView and using gtk_widget_get_preferred_size().
-func (cellView *CellViewInstance) GetSizeOfRow(path *TreePath) (Requisition, bool) {
-	var carg0 *C.GtkCellView   // in, none, converted
-	var carg1 *C.GtkTreePath   // in, none, converted
-	var carg2 C.GtkRequisition // out, transfer: none, C Pointers: 0, Name: Requisition, caller-allocates
-	var cret  C.gboolean       // return
-
-	carg0 = (*C.GtkCellView)(UnsafeCellViewToGlibNone(cellView))
-	carg1 = (*C.GtkTreePath)(UnsafeTreePathToGlibNone(path))
-
-	cret = C.gtk_cell_view_get_size_of_row(carg0, carg1, &carg2)
-	runtime.KeepAlive(cellView)
-	runtime.KeepAlive(path)
-
-	var requisition Requisition
-	var goret       bool
-
-	_ = requisition
-	_ = carg2
-	panic("unimplemented conversion of Requisition (GtkRequisition)")
-	if cret != 0 {
-		goret = true
-	}
-
-	return requisition, goret
 }
 
 // SetBackgroundRGBA wraps gtk_cell_view_set_background_rgba
@@ -78438,18 +65859,6 @@ type Container interface {
 	// Returns a newly created widget path representing all the widget hierarchy
 	// from the toplevel down to and including @child.
 	GetPathForChild(Widget) *WidgetPath
-	// GetResizeMode wraps gtk_container_get_resize_mode
-	// The function returns the following values:
-	// 
-	// 	- goret ResizeMode 
-	//
-	// Returns the resize mode for the container. See
-	// gtk_container_set_resize_mode ().
-	//
-	// Deprecated: (since 3.12.0) Resize modes are deprecated. They aren’t necessary
-	//     anymore since frame clocks and might introduce obscure bugs if
-	//     used.
-	GetResizeMode() ResizeMode
 	// Remove wraps gtk_container_remove
 	// 
 	// The function takes the following parameters:
@@ -78466,11 +65875,6 @@ type Container interface {
 	// using gtk_widget_destroy() since this will remove it from the
 	// container and help break any circular reference count cycles.
 	Remove(Widget)
-	// ResizeChildren wraps gtk_container_resize_children
-	//
-	//
-	// Deprecated: (since 3.10.0) 
-	ResizeChildren()
 	// SetBorderWidth wraps gtk_container_set_border_width
 	// 
 	// The function takes the following parameters:
@@ -78537,35 +65941,6 @@ type Container interface {
 	// The adjustments have to be in pixel units and in the same coordinate
 	// system as the allocation for immediate children of the container.
 	SetFocusVAdjustment(Adjustment)
-	// SetReallocateRedraws wraps gtk_container_set_reallocate_redraws
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- needsRedraws bool: the new value for the container’s @reallocate_redraws flag 
-	//
-	// Sets the @reallocate_redraws flag of the container to the given value.
-	// 
-	// Containers requesting reallocation redraws get automatically
-	// redrawn if any of their children changed allocation.
-	//
-	// Deprecated: (since 3.14.0) Call gtk_widget_queue_draw() in your size_allocate handler.
-	SetReallocateRedraws(bool)
-	// SetResizeMode wraps gtk_container_set_resize_mode
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- resizeMode ResizeMode: the new resize mode 
-	//
-	// Sets the resize mode for the container.
-	// 
-	// The resize mode of a container determines whether a resize request
-	// will be passed to the container’s parent, queued for later execution
-	// or executed immediately.
-	//
-	// Deprecated: (since 3.12.0) Resize modes are deprecated. They aren’t necessary
-	//     anymore since frame clocks and might introduce obscure bugs if
-	//     used.
-	SetResizeMode(ResizeMode)
 	// UnsetFocusChain wraps gtk_container_unset_focus_chain
 	//
 	// Removes a focus chain explicitly set with gtk_container_set_focus_chain().
@@ -78957,33 +66332,6 @@ func (container *ContainerInstance) GetPathForChild(child Widget) *WidgetPath {
 	return goret
 }
 
-// GetResizeMode wraps gtk_container_get_resize_mode
-// The function returns the following values:
-// 
-// 	- goret ResizeMode 
-//
-// Returns the resize mode for the container. See
-// gtk_container_set_resize_mode ().
-//
-// Deprecated: (since 3.12.0) Resize modes are deprecated. They aren’t necessary
-//     anymore since frame clocks and might introduce obscure bugs if
-//     used.
-func (container *ContainerInstance) GetResizeMode() ResizeMode {
-	var carg0 *C.GtkContainer // in, none, converted
-	var cret  C.GtkResizeMode // return, none, casted
-
-	carg0 = (*C.GtkContainer)(UnsafeContainerToGlibNone(container))
-
-	cret = C.gtk_container_get_resize_mode(carg0)
-	runtime.KeepAlive(container)
-
-	var goret ResizeMode
-
-	goret = ResizeMode(cret)
-
-	return goret
-}
-
 // Remove wraps gtk_container_remove
 // 
 // The function takes the following parameters:
@@ -79009,19 +66357,6 @@ func (container *ContainerInstance) Remove(widget Widget) {
 	C.gtk_container_remove(carg0, carg1)
 	runtime.KeepAlive(container)
 	runtime.KeepAlive(widget)
-}
-
-// ResizeChildren wraps gtk_container_resize_children
-//
-//
-// Deprecated: (since 3.10.0) 
-func (container *ContainerInstance) ResizeChildren() {
-	var carg0 *C.GtkContainer // in, none, converted
-
-	carg0 = (*C.GtkContainer)(UnsafeContainerToGlibNone(container))
-
-	C.gtk_container_resize_children(carg0)
-	runtime.KeepAlive(container)
 }
 
 // SetBorderWidth wraps gtk_container_set_border_width
@@ -79134,59 +66469,6 @@ func (container *ContainerInstance) SetFocusVAdjustment(adjustment Adjustment) {
 	C.gtk_container_set_focus_vadjustment(carg0, carg1)
 	runtime.KeepAlive(container)
 	runtime.KeepAlive(adjustment)
-}
-
-// SetReallocateRedraws wraps gtk_container_set_reallocate_redraws
-// 
-// The function takes the following parameters:
-// 
-// 	- needsRedraws bool: the new value for the container’s @reallocate_redraws flag 
-//
-// Sets the @reallocate_redraws flag of the container to the given value.
-// 
-// Containers requesting reallocation redraws get automatically
-// redrawn if any of their children changed allocation.
-//
-// Deprecated: (since 3.14.0) Call gtk_widget_queue_draw() in your size_allocate handler.
-func (container *ContainerInstance) SetReallocateRedraws(needsRedraws bool) {
-	var carg0 *C.GtkContainer // in, none, converted
-	var carg1 C.gboolean      // in
-
-	carg0 = (*C.GtkContainer)(UnsafeContainerToGlibNone(container))
-	if needsRedraws {
-		carg1 = C.TRUE
-	}
-
-	C.gtk_container_set_reallocate_redraws(carg0, carg1)
-	runtime.KeepAlive(container)
-	runtime.KeepAlive(needsRedraws)
-}
-
-// SetResizeMode wraps gtk_container_set_resize_mode
-// 
-// The function takes the following parameters:
-// 
-// 	- resizeMode ResizeMode: the new resize mode 
-//
-// Sets the resize mode for the container.
-// 
-// The resize mode of a container determines whether a resize request
-// will be passed to the container’s parent, queued for later execution
-// or executed immediately.
-//
-// Deprecated: (since 3.12.0) Resize modes are deprecated. They aren’t necessary
-//     anymore since frame clocks and might introduce obscure bugs if
-//     used.
-func (container *ContainerInstance) SetResizeMode(resizeMode ResizeMode) {
-	var carg0 *C.GtkContainer // in, none, converted
-	var carg1 C.GtkResizeMode // in, none, casted
-
-	carg0 = (*C.GtkContainer)(UnsafeContainerToGlibNone(container))
-	carg1 = C.GtkResizeMode(resizeMode)
-
-	C.gtk_container_set_resize_mode(carg0, carg1)
-	runtime.KeepAlive(container)
-	runtime.KeepAlive(resizeMode)
 }
 
 // UnsetFocusChain wraps gtk_container_unset_focus_chain
@@ -79685,22 +66967,6 @@ type Entry interface {
 	//
 	// Returns whether the icon appears sensitive or insensitive.
 	GetIconSensitive(EntryIconPosition) bool
-	// GetIconStock wraps gtk_entry_get_icon_stock
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- iconPos EntryIconPosition: Icon position 
-	// 
-	// The function returns the following values:
-	// 
-	// 	- goret string 
-	//
-	// Retrieves the stock id used for the icon, or %NULL if there is
-	// no icon or if the icon was set by some other method (e.g., by
-	// pixbuf, icon name or gicon).
-	//
-	// Deprecated: (since 3.10.0) Use gtk_entry_get_icon_name() instead.
-	GetIconStock(EntryIconPosition) string
 	// GetIconStorageType wraps gtk_entry_get_icon_storage_type
 	// 
 	// The function takes the following parameters:
@@ -79741,18 +67007,6 @@ type Entry interface {
 	// Gets the contents of the tooltip on the icon at the specified
 	// position in @entry.
 	GetIconTooltipText(EntryIconPosition) string
-	// GetInnerBorder wraps gtk_entry_get_inner_border
-	// The function returns the following values:
-	// 
-	// 	- goret *Border 
-	//
-	// This function returns the entry’s #GtkEntry:inner-border property. See
-	// gtk_entry_set_inner_border() for more information.
-	//
-	// Deprecated: (since 3.4.0) Use the standard border and padding CSS properties (through
-	//   objects like #GtkStyleContext and #GtkCssProvider); the value returned by
-	//   this function is ignored by #GtkEntry.
-	GetInnerBorder() *Border
 	// GetInputHints wraps gtk_entry_get_input_hints
 	// The function returns the following values:
 	// 
@@ -80132,20 +67386,6 @@ type Entry interface {
 	// 
 	// If @pixbuf is %NULL, no icon will be shown in the specified position.
 	SetIconFromPixbuf(EntryIconPosition, gdkpixbuf.Pixbuf)
-	// SetIconFromStock wraps gtk_entry_set_icon_from_stock
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- iconPos EntryIconPosition: Icon position 
-	// 	- stockId string (nullable): The name of the stock item, or %NULL 
-	//
-	// Sets the icon shown in the entry at the specified position from
-	// a stock image.
-	// 
-	// If @stock_id is %NULL, no icon will be shown in the specified position.
-	//
-	// Deprecated: (since 3.10.0) Use gtk_entry_set_icon_from_icon_name() instead.
-	SetIconFromStock(EntryIconPosition, string)
 	// SetIconSensitive wraps gtk_entry_set_icon_sensitive
 	// 
 	// The function takes the following parameters:
@@ -80193,25 +67433,6 @@ type Entry interface {
 	// gtk_widget_set_has_tooltip() to set GtkWidget:has-tooltip back to %TRUE, or
 	// setting at least one non-empty tooltip on any icon achieves the same result.
 	SetIconTooltipText(EntryIconPosition, string)
-	// SetInnerBorder wraps gtk_entry_set_inner_border
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- border *Border (nullable): a #GtkBorder, or %NULL 
-	//
-	// Sets %entry’s inner-border property to @border, or clears it if %NULL
-	// is passed. The inner-border is the area around the entry’s text, but
-	// inside its frame.
-	// 
-	// If set, this property overrides the inner-border style property.
-	// Overriding the style-provided border is useful when you want to do
-	// in-place editing of some text in a canvas or list widget, where
-	// pixel-exact positioning of the entry is important.
-	//
-	// Deprecated: (since 3.4.0) Use the standard border and padding CSS properties (through
-	//   objects like #GtkStyleContext and #GtkCssProvider); the value set with
-	//   this function is ignored by #GtkEntry.
-	SetInnerBorder(*Border)
 	// SetInputHints wraps gtk_entry_set_input_hints
 	// 
 	// The function takes the following parameters:
@@ -80839,7 +68060,7 @@ func (entry *EntryInstance) GetIconName(iconPos EntryIconPosition) string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -80910,40 +68131,6 @@ func (entry *EntryInstance) GetIconSensitive(iconPos EntryIconPosition) bool {
 	return goret
 }
 
-// GetIconStock wraps gtk_entry_get_icon_stock
-// 
-// The function takes the following parameters:
-// 
-// 	- iconPos EntryIconPosition: Icon position 
-// 
-// The function returns the following values:
-// 
-// 	- goret string 
-//
-// Retrieves the stock id used for the icon, or %NULL if there is
-// no icon or if the icon was set by some other method (e.g., by
-// pixbuf, icon name or gicon).
-//
-// Deprecated: (since 3.10.0) Use gtk_entry_get_icon_name() instead.
-func (entry *EntryInstance) GetIconStock(iconPos EntryIconPosition) string {
-	var carg0 *C.GtkEntry            // in, none, converted
-	var carg1 C.GtkEntryIconPosition // in, none, casted
-	var cret  *C.gchar               // return, none, string, casted *C.gchar
-
-	carg0 = (*C.GtkEntry)(UnsafeEntryToGlibNone(entry))
-	carg1 = C.GtkEntryIconPosition(iconPos)
-
-	cret = C.gtk_entry_get_icon_stock(carg0, carg1)
-	runtime.KeepAlive(entry)
-	runtime.KeepAlive(iconPos)
-
-	var goret string
-
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
-
-	return goret
-}
-
 // GetIconStorageType wraps gtk_entry_get_icon_storage_type
 // 
 // The function takes the following parameters:
@@ -81002,7 +68189,7 @@ func (entry *EntryInstance) GetIconTooltipMarkup(iconPos EntryIconPosition) stri
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 	defer C.free(unsafe.Pointer(cret))
 
 	return goret
@@ -81034,35 +68221,8 @@ func (entry *EntryInstance) GetIconTooltipText(iconPos EntryIconPosition) string
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 	defer C.free(unsafe.Pointer(cret))
-
-	return goret
-}
-
-// GetInnerBorder wraps gtk_entry_get_inner_border
-// The function returns the following values:
-// 
-// 	- goret *Border 
-//
-// This function returns the entry’s #GtkEntry:inner-border property. See
-// gtk_entry_set_inner_border() for more information.
-//
-// Deprecated: (since 3.4.0) Use the standard border and padding CSS properties (through
-//   objects like #GtkStyleContext and #GtkCssProvider); the value returned by
-//   this function is ignored by #GtkEntry.
-func (entry *EntryInstance) GetInnerBorder() *Border {
-	var carg0 *C.GtkEntry  // in, none, converted
-	var cret  *C.GtkBorder // return, none, converted
-
-	carg0 = (*C.GtkEntry)(UnsafeEntryToGlibNone(entry))
-
-	cret = C.gtk_entry_get_inner_border(carg0)
-	runtime.KeepAlive(entry)
-
-	var goret *Border
-
-	goret = UnsafeBorderFromGlibNone(unsafe.Pointer(cret))
 
 	return goret
 }
@@ -81299,7 +68459,7 @@ func (entry *EntryInstance) GetPlaceholderText() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -81393,7 +68553,7 @@ func (entry *EntryInstance) GetText() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -81939,37 +69099,6 @@ func (entry *EntryInstance) SetIconFromPixbuf(iconPos EntryIconPosition, pixbuf 
 	runtime.KeepAlive(pixbuf)
 }
 
-// SetIconFromStock wraps gtk_entry_set_icon_from_stock
-// 
-// The function takes the following parameters:
-// 
-// 	- iconPos EntryIconPosition: Icon position 
-// 	- stockId string (nullable): The name of the stock item, or %NULL 
-//
-// Sets the icon shown in the entry at the specified position from
-// a stock image.
-// 
-// If @stock_id is %NULL, no icon will be shown in the specified position.
-//
-// Deprecated: (since 3.10.0) Use gtk_entry_set_icon_from_icon_name() instead.
-func (entry *EntryInstance) SetIconFromStock(iconPos EntryIconPosition, stockId string) {
-	var carg0 *C.GtkEntry            // in, none, converted
-	var carg1 C.GtkEntryIconPosition // in, none, casted
-	var carg2 *C.gchar               // in, none, string, nullable-string
-
-	carg0 = (*C.GtkEntry)(UnsafeEntryToGlibNone(entry))
-	carg1 = C.GtkEntryIconPosition(iconPos)
-	if stockId != "" {
-		carg2 = (*C.gchar)(unsafe.Pointer(C.CString(stockId)))
-		defer C.free(unsafe.Pointer(carg2))
-	}
-
-	C.gtk_entry_set_icon_from_stock(carg0, carg1, carg2)
-	runtime.KeepAlive(entry)
-	runtime.KeepAlive(iconPos)
-	runtime.KeepAlive(stockId)
-}
-
 // SetIconSensitive wraps gtk_entry_set_icon_sensitive
 // 
 // The function takes the following parameters:
@@ -82065,38 +69194,6 @@ func (entry *EntryInstance) SetIconTooltipText(iconPos EntryIconPosition, toolti
 	runtime.KeepAlive(entry)
 	runtime.KeepAlive(iconPos)
 	runtime.KeepAlive(tooltip)
-}
-
-// SetInnerBorder wraps gtk_entry_set_inner_border
-// 
-// The function takes the following parameters:
-// 
-// 	- border *Border (nullable): a #GtkBorder, or %NULL 
-//
-// Sets %entry’s inner-border property to @border, or clears it if %NULL
-// is passed. The inner-border is the area around the entry’s text, but
-// inside its frame.
-// 
-// If set, this property overrides the inner-border style property.
-// Overriding the style-provided border is useful when you want to do
-// in-place editing of some text in a canvas or list widget, where
-// pixel-exact positioning of the entry is important.
-//
-// Deprecated: (since 3.4.0) Use the standard border and padding CSS properties (through
-//   objects like #GtkStyleContext and #GtkCssProvider); the value set with
-//   this function is ignored by #GtkEntry.
-func (entry *EntryInstance) SetInnerBorder(border *Border) {
-	var carg0 *C.GtkEntry  // in, none, converted
-	var carg1 *C.GtkBorder // in, none, converted, nullable
-
-	carg0 = (*C.GtkEntry)(UnsafeEntryToGlibNone(entry))
-	if border != nil {
-		carg1 = (*C.GtkBorder)(UnsafeBorderToGlibNone(border))
-	}
-
-	C.gtk_entry_set_inner_border(carg0, carg1)
-	runtime.KeepAlive(entry)
-	runtime.KeepAlive(border)
 }
 
 // SetInputHints wraps gtk_entry_set_input_hints
@@ -82996,71 +70093,6 @@ func (self *FileChooserNativeInstance) SetCancelLabel(cancelLabel string) {
 	C.gtk_file_chooser_native_set_cancel_label(carg0, carg1)
 	runtime.KeepAlive(self)
 	runtime.KeepAlive(cancelLabel)
-}
-
-// FileChooserWidgetAccessibleInstance is the instance type used by all types extending GtkFileChooserWidgetAccessible. It is used internally by the bindings. Users should use the interface [FileChooserWidgetAccessible] instead.
-type FileChooserWidgetAccessibleInstance struct {
-	_ [0]func() // equal guard
-	ContainerAccessibleInstance
-	// implemented interfaces:
-	atk.ActionInstance
-}
-
-var _ FileChooserWidgetAccessible = (*FileChooserWidgetAccessibleInstance)(nil)
-
-// FileChooserWidgetAccessibleInstance wraps GtkFileChooserWidgetAccessible
-type FileChooserWidgetAccessible interface {
-	ContainerAccessible
-	atk.Action
-	upcastToGtkFileChooserWidgetAccessible() *FileChooserWidgetAccessibleInstance
-}
-
-func unsafeWrapFileChooserWidgetAccessible(base *gobject.ObjectInstance) *FileChooserWidgetAccessibleInstance {
-	return &FileChooserWidgetAccessibleInstance{
-		ContainerAccessibleInstance: ContainerAccessibleInstance{
-			WidgetAccessibleInstance: WidgetAccessibleInstance{
-				AccessibleInstance: AccessibleInstance{
-					ObjectInstance: atk.ObjectInstance{
-						ObjectInstance: *base,
-					},
-				},
-				ComponentInstance: atk.ComponentInstance{
-					Instance: *base,
-				},
-			},
-		},
-		ActionInstance: atk.ActionInstance{
-			Instance: *base,
-		},
-	}
-}
-
-func marshalFileChooserWidgetAccessibleInstance(p unsafe.Pointer) (any, error) {
-	return unsafeWrapFileChooserWidgetAccessible(gobject.ValueFromNative(p).Object()), nil
-}
-
-// UnsafeFileChooserWidgetAccessibleFromGlibNone is used to convert raw GtkFileChooserWidgetAccessible pointers to go while taking a reference and attaching a finalizer. This is used by the bindings internally.
-func UnsafeFileChooserWidgetAccessibleFromGlibNone(c unsafe.Pointer) FileChooserWidgetAccessible {
-	return gobject.UnsafeObjectFromGlibNone(c).(FileChooserWidgetAccessible)
-}
-
-// UnsafeFileChooserWidgetAccessibleFromGlibFull is used to convert raw GtkFileChooserWidgetAccessible pointers to go while attaching a finalizer. This is used by the bindings internally.
-func UnsafeFileChooserWidgetAccessibleFromGlibFull(c unsafe.Pointer) FileChooserWidgetAccessible {
-	return gobject.UnsafeObjectFromGlibFull(c).(FileChooserWidgetAccessible)
-}
-
-func (f *FileChooserWidgetAccessibleInstance) upcastToGtkFileChooserWidgetAccessible() *FileChooserWidgetAccessibleInstance {
-	return f
-}
-
-// UnsafeFileChooserWidgetAccessibleToGlibNone is used to convert the instance to it's C value GtkFileChooserWidgetAccessible. This is used by the bindings internally.
-func UnsafeFileChooserWidgetAccessibleToGlibNone(c FileChooserWidgetAccessible) unsafe.Pointer {
-	return gobject.UnsafeObjectToGlibNone(c)
-}
-
-// UnsafeFileChooserWidgetAccessibleToGlibFull is used to convert the instance to it's C value GtkFileChooserWidgetAccessible, while removeing the finalizer. This is used by the bindings internally.
-func UnsafeFileChooserWidgetAccessibleToGlibFull(c FileChooserWidgetAccessible) unsafe.Pointer {
-	return gobject.UnsafeObjectToGlibFull(c)
 }
 
 // FixedInstance is the instance type used by all types extending GtkFixed. It is used internally by the bindings. Users should use the interface [Fixed] instead.
@@ -87395,7 +74427,7 @@ func (bar *HeaderBarInstance) GetDecorationLayout() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -87467,7 +74499,7 @@ func (bar *HeaderBarInstance) GetSubtitle() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -87489,7 +74521,7 @@ func (bar *HeaderBarInstance) GetTitle() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -87696,65 +74728,6 @@ func (bar *HeaderBarInstance) SetTitle(title string) {
 	C.gtk_header_bar_set_title(carg0, carg1)
 	runtime.KeepAlive(bar)
 	runtime.KeepAlive(title)
-}
-
-// HeaderBarAccessibleInstance is the instance type used by all types extending GtkHeaderBarAccessible. It is used internally by the bindings. Users should use the interface [HeaderBarAccessible] instead.
-type HeaderBarAccessibleInstance struct {
-	_ [0]func() // equal guard
-	ContainerAccessibleInstance
-}
-
-var _ HeaderBarAccessible = (*HeaderBarAccessibleInstance)(nil)
-
-// HeaderBarAccessibleInstance wraps GtkHeaderBarAccessible
-type HeaderBarAccessible interface {
-	ContainerAccessible
-	upcastToGtkHeaderBarAccessible() *HeaderBarAccessibleInstance
-}
-
-func unsafeWrapHeaderBarAccessible(base *gobject.ObjectInstance) *HeaderBarAccessibleInstance {
-	return &HeaderBarAccessibleInstance{
-		ContainerAccessibleInstance: ContainerAccessibleInstance{
-			WidgetAccessibleInstance: WidgetAccessibleInstance{
-				AccessibleInstance: AccessibleInstance{
-					ObjectInstance: atk.ObjectInstance{
-						ObjectInstance: *base,
-					},
-				},
-				ComponentInstance: atk.ComponentInstance{
-					Instance: *base,
-				},
-			},
-		},
-	}
-}
-
-func marshalHeaderBarAccessibleInstance(p unsafe.Pointer) (any, error) {
-	return unsafeWrapHeaderBarAccessible(gobject.ValueFromNative(p).Object()), nil
-}
-
-// UnsafeHeaderBarAccessibleFromGlibNone is used to convert raw GtkHeaderBarAccessible pointers to go while taking a reference and attaching a finalizer. This is used by the bindings internally.
-func UnsafeHeaderBarAccessibleFromGlibNone(c unsafe.Pointer) HeaderBarAccessible {
-	return gobject.UnsafeObjectFromGlibNone(c).(HeaderBarAccessible)
-}
-
-// UnsafeHeaderBarAccessibleFromGlibFull is used to convert raw GtkHeaderBarAccessible pointers to go while attaching a finalizer. This is used by the bindings internally.
-func UnsafeHeaderBarAccessibleFromGlibFull(c unsafe.Pointer) HeaderBarAccessible {
-	return gobject.UnsafeObjectFromGlibFull(c).(HeaderBarAccessible)
-}
-
-func (h *HeaderBarAccessibleInstance) upcastToGtkHeaderBarAccessible() *HeaderBarAccessibleInstance {
-	return h
-}
-
-// UnsafeHeaderBarAccessibleToGlibNone is used to convert the instance to it's C value GtkHeaderBarAccessible. This is used by the bindings internally.
-func UnsafeHeaderBarAccessibleToGlibNone(c HeaderBarAccessible) unsafe.Pointer {
-	return gobject.UnsafeObjectToGlibNone(c)
-}
-
-// UnsafeHeaderBarAccessibleToGlibFull is used to convert the instance to it's C value GtkHeaderBarAccessible, while removeing the finalizer. This is used by the bindings internally.
-func UnsafeHeaderBarAccessibleToGlibFull(c HeaderBarAccessible) unsafe.Pointer {
-	return gobject.UnsafeObjectToGlibFull(c)
 }
 
 // IconViewInstance is the instance type used by all types extending GtkIconView. It is used internally by the bindings. Users should use the interface [IconView] instead.
@@ -90486,20 +77459,6 @@ type Layout interface {
 	//
 	// Retrieve the bin window of the layout used for drawing operations.
 	GetBinWindow() gdk.Window
-	// GetHAdjustment wraps gtk_layout_get_hadjustment
-	// The function returns the following values:
-	// 
-	// 	- goret Adjustment 
-	//
-	// This function should only be called after the layout has been
-	// placed in a #GtkScrolledWindow or otherwise configured for
-	// scrolling. It returns the #GtkAdjustment used for communication
-	// between the horizontal scrollbar and @layout.
-	// 
-	// See #GtkScrolledWindow, #GtkScrollbar, #GtkAdjustment for details.
-	//
-	// Deprecated: (since 3.0.0) Use gtk_scrollable_get_hadjustment()
-	GetHAdjustment() Adjustment
 	// GetSize wraps gtk_layout_get_size
 	// The function returns the following values:
 	// 
@@ -90512,20 +77471,6 @@ type Layout interface {
 	// the total extents of the layout’s scrollbar area. See
 	// gtk_layout_set_size ().
 	GetSize() (uint, uint)
-	// GetVAdjustment wraps gtk_layout_get_vadjustment
-	// The function returns the following values:
-	// 
-	// 	- goret Adjustment 
-	//
-	// This function should only be called after the layout has been
-	// placed in a #GtkScrolledWindow or otherwise configured for
-	// scrolling. It returns the #GtkAdjustment used for communication
-	// between the vertical scrollbar and @layout.
-	// 
-	// See #GtkScrolledWindow, #GtkScrollbar, #GtkAdjustment for details.
-	//
-	// Deprecated: (since 3.0.0) Use gtk_scrollable_get_vadjustment()
-	GetVAdjustment() Adjustment
 	// Move wraps gtk_layout_move
 	// 
 	// The function takes the following parameters:
@@ -90547,18 +77492,6 @@ type Layout interface {
 	// Adds @child_widget to @layout, at position (@x,@y).
 	// @layout becomes the new parent container of @child_widget.
 	Put(Widget, int, int)
-	// SetHAdjustment wraps gtk_layout_set_hadjustment
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- adjustment Adjustment (nullable): new scroll adjustment 
-	//
-	// Sets the horizontal scroll adjustment for the layout.
-	// 
-	// See #GtkScrolledWindow, #GtkScrollbar, #GtkAdjustment for details.
-	//
-	// Deprecated: (since 3.0.0) Use gtk_scrollable_set_hadjustment()
-	SetHAdjustment(Adjustment)
 	// SetSize wraps gtk_layout_set_size
 	// 
 	// The function takes the following parameters:
@@ -90568,18 +77501,6 @@ type Layout interface {
 	//
 	// Sets the size of the scrollable area of the layout.
 	SetSize(uint, uint)
-	// SetVAdjustment wraps gtk_layout_set_vadjustment
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- adjustment Adjustment (nullable): new scroll adjustment 
-	//
-	// Sets the vertical scroll adjustment for the layout.
-	// 
-	// See #GtkScrolledWindow, #GtkScrollbar, #GtkAdjustment for details.
-	//
-	// Deprecated: (since 3.0.0) Use gtk_scrollable_set_vadjustment()
-	SetVAdjustment(Adjustment)
 }
 
 func unsafeWrapLayout(base *gobject.ObjectInstance) *LayoutInstance {
@@ -90690,35 +77611,6 @@ func (layout *LayoutInstance) GetBinWindow() gdk.Window {
 	return goret
 }
 
-// GetHAdjustment wraps gtk_layout_get_hadjustment
-// The function returns the following values:
-// 
-// 	- goret Adjustment 
-//
-// This function should only be called after the layout has been
-// placed in a #GtkScrolledWindow or otherwise configured for
-// scrolling. It returns the #GtkAdjustment used for communication
-// between the horizontal scrollbar and @layout.
-// 
-// See #GtkScrolledWindow, #GtkScrollbar, #GtkAdjustment for details.
-//
-// Deprecated: (since 3.0.0) Use gtk_scrollable_get_hadjustment()
-func (layout *LayoutInstance) GetHAdjustment() Adjustment {
-	var carg0 *C.GtkLayout     // in, none, converted
-	var cret  *C.GtkAdjustment // return, none, converted
-
-	carg0 = (*C.GtkLayout)(UnsafeLayoutToGlibNone(layout))
-
-	cret = C.gtk_layout_get_hadjustment(carg0)
-	runtime.KeepAlive(layout)
-
-	var goret Adjustment
-
-	goret = UnsafeAdjustmentFromGlibNone(unsafe.Pointer(cret))
-
-	return goret
-}
-
 // GetSize wraps gtk_layout_get_size
 // The function returns the following values:
 // 
@@ -90747,35 +77639,6 @@ func (layout *LayoutInstance) GetSize() (uint, uint) {
 	height = uint(carg2)
 
 	return width, height
-}
-
-// GetVAdjustment wraps gtk_layout_get_vadjustment
-// The function returns the following values:
-// 
-// 	- goret Adjustment 
-//
-// This function should only be called after the layout has been
-// placed in a #GtkScrolledWindow or otherwise configured for
-// scrolling. It returns the #GtkAdjustment used for communication
-// between the vertical scrollbar and @layout.
-// 
-// See #GtkScrolledWindow, #GtkScrollbar, #GtkAdjustment for details.
-//
-// Deprecated: (since 3.0.0) Use gtk_scrollable_get_vadjustment()
-func (layout *LayoutInstance) GetVAdjustment() Adjustment {
-	var carg0 *C.GtkLayout     // in, none, converted
-	var cret  *C.GtkAdjustment // return, none, converted
-
-	carg0 = (*C.GtkLayout)(UnsafeLayoutToGlibNone(layout))
-
-	cret = C.gtk_layout_get_vadjustment(carg0)
-	runtime.KeepAlive(layout)
-
-	var goret Adjustment
-
-	goret = UnsafeAdjustmentFromGlibNone(unsafe.Pointer(cret))
-
-	return goret
 }
 
 // Move wraps gtk_layout_move
@@ -90833,31 +77696,6 @@ func (layout *LayoutInstance) Put(childWidget Widget, x int, y int) {
 	runtime.KeepAlive(y)
 }
 
-// SetHAdjustment wraps gtk_layout_set_hadjustment
-// 
-// The function takes the following parameters:
-// 
-// 	- adjustment Adjustment (nullable): new scroll adjustment 
-//
-// Sets the horizontal scroll adjustment for the layout.
-// 
-// See #GtkScrolledWindow, #GtkScrollbar, #GtkAdjustment for details.
-//
-// Deprecated: (since 3.0.0) Use gtk_scrollable_set_hadjustment()
-func (layout *LayoutInstance) SetHAdjustment(adjustment Adjustment) {
-	var carg0 *C.GtkLayout     // in, none, converted
-	var carg1 *C.GtkAdjustment // in, none, converted, nullable
-
-	carg0 = (*C.GtkLayout)(UnsafeLayoutToGlibNone(layout))
-	if adjustment != nil {
-		carg1 = (*C.GtkAdjustment)(UnsafeAdjustmentToGlibNone(adjustment))
-	}
-
-	C.gtk_layout_set_hadjustment(carg0, carg1)
-	runtime.KeepAlive(layout)
-	runtime.KeepAlive(adjustment)
-}
-
 // SetSize wraps gtk_layout_set_size
 // 
 // The function takes the following parameters:
@@ -90879,31 +77717,6 @@ func (layout *LayoutInstance) SetSize(width uint, height uint) {
 	runtime.KeepAlive(layout)
 	runtime.KeepAlive(width)
 	runtime.KeepAlive(height)
-}
-
-// SetVAdjustment wraps gtk_layout_set_vadjustment
-// 
-// The function takes the following parameters:
-// 
-// 	- adjustment Adjustment (nullable): new scroll adjustment 
-//
-// Sets the vertical scroll adjustment for the layout.
-// 
-// See #GtkScrolledWindow, #GtkScrollbar, #GtkAdjustment for details.
-//
-// Deprecated: (since 3.0.0) Use gtk_scrollable_set_vadjustment()
-func (layout *LayoutInstance) SetVAdjustment(adjustment Adjustment) {
-	var carg0 *C.GtkLayout     // in, none, converted
-	var carg1 *C.GtkAdjustment // in, none, converted, nullable
-
-	carg0 = (*C.GtkLayout)(UnsafeLayoutToGlibNone(layout))
-	if adjustment != nil {
-		carg1 = (*C.GtkAdjustment)(UnsafeAdjustmentToGlibNone(adjustment))
-	}
-
-	C.gtk_layout_set_vadjustment(carg0, carg1)
-	runtime.KeepAlive(layout)
-	runtime.KeepAlive(adjustment)
 }
 
 // LevelBarInstance is the instance type used by all types extending GtkLevelBar. It is used internally by the bindings. Users should use the interface [LevelBar] instead.
@@ -93551,55 +80364,6 @@ type Misc interface {
 	Widget
 	Buildable
 	upcastToGtkMisc() *MiscInstance
-
-	// GetAlignment wraps gtk_misc_get_alignment
-	// The function returns the following values:
-	// 
-	// 	- xalign float32: location to store X alignment of @misc, or %NULL 
-	// 	- yalign float32: location to store Y alignment of @misc, or %NULL 
-	//
-	// Gets the X and Y alignment of the widget within its allocation.
-	// See gtk_misc_set_alignment().
-	//
-	// Deprecated: (since 3.14.0) Use #GtkWidget alignment and margin properties.
-	GetAlignment() (float32, float32)
-	// GetPadding wraps gtk_misc_get_padding
-	// The function returns the following values:
-	// 
-	// 	- xpad int: location to store padding in the X
-	//        direction, or %NULL 
-	// 	- ypad int: location to store padding in the Y
-	//        direction, or %NULL 
-	//
-	// Gets the padding in the X and Y directions of the widget.
-	// See gtk_misc_set_padding().
-	//
-	// Deprecated: (since 3.14.0) Use #GtkWidget alignment and margin properties.
-	GetPadding() (int, int)
-	// SetAlignment wraps gtk_misc_set_alignment
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- xalign float32: the horizontal alignment, from 0 (left) to 1 (right). 
-	// 	- yalign float32: the vertical alignment, from 0 (top) to 1 (bottom). 
-	//
-	// Sets the alignment of the widget.
-	//
-	// Deprecated: (since 3.14.0) Use #GtkWidget's alignment (#GtkWidget:halign and #GtkWidget:valign) and margin properties or #GtkLabel's #GtkLabel:xalign and #GtkLabel:yalign properties.
-	SetAlignment(float32, float32)
-	// SetPadding wraps gtk_misc_set_padding
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- xpad int: the amount of space to add on the left and right of the widget,
-	//   in pixels. 
-	// 	- ypad int: the amount of space to add on the top and bottom of the widget,
-	//   in pixels. 
-	//
-	// Sets the amount of space to add around the widget.
-	//
-	// Deprecated: (since 3.14.0) Use #GtkWidget alignment and margin properties.
-	SetPadding(int, int)
 }
 
 func unsafeWrapMisc(base *gobject.ObjectInstance) *MiscInstance {
@@ -93644,118 +80408,6 @@ func UnsafeMiscToGlibNone(c Misc) unsafe.Pointer {
 // UnsafeMiscToGlibFull is used to convert the instance to it's C value GtkMisc, while removeing the finalizer. This is used by the bindings internally.
 func UnsafeMiscToGlibFull(c Misc) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
-}
-
-// GetAlignment wraps gtk_misc_get_alignment
-// The function returns the following values:
-// 
-// 	- xalign float32: location to store X alignment of @misc, or %NULL 
-// 	- yalign float32: location to store Y alignment of @misc, or %NULL 
-//
-// Gets the X and Y alignment of the widget within its allocation.
-// See gtk_misc_set_alignment().
-//
-// Deprecated: (since 3.14.0) Use #GtkWidget alignment and margin properties.
-func (misc *MiscInstance) GetAlignment() (float32, float32) {
-	var carg0 *C.GtkMisc // in, none, converted
-	var carg1 C.gfloat   // out, full, casted
-	var carg2 C.gfloat   // out, full, casted
-
-	carg0 = (*C.GtkMisc)(UnsafeMiscToGlibNone(misc))
-
-	C.gtk_misc_get_alignment(carg0, &carg1, &carg2)
-	runtime.KeepAlive(misc)
-
-	var xalign float32
-	var yalign float32
-
-	xalign = float32(carg1)
-	yalign = float32(carg2)
-
-	return xalign, yalign
-}
-
-// GetPadding wraps gtk_misc_get_padding
-// The function returns the following values:
-// 
-// 	- xpad int: location to store padding in the X
-//        direction, or %NULL 
-// 	- ypad int: location to store padding in the Y
-//        direction, or %NULL 
-//
-// Gets the padding in the X and Y directions of the widget.
-// See gtk_misc_set_padding().
-//
-// Deprecated: (since 3.14.0) Use #GtkWidget alignment and margin properties.
-func (misc *MiscInstance) GetPadding() (int, int) {
-	var carg0 *C.GtkMisc // in, none, converted
-	var carg1 C.gint     // out, full, casted
-	var carg2 C.gint     // out, full, casted
-
-	carg0 = (*C.GtkMisc)(UnsafeMiscToGlibNone(misc))
-
-	C.gtk_misc_get_padding(carg0, &carg1, &carg2)
-	runtime.KeepAlive(misc)
-
-	var xpad int
-	var ypad int
-
-	xpad = int(carg1)
-	ypad = int(carg2)
-
-	return xpad, ypad
-}
-
-// SetAlignment wraps gtk_misc_set_alignment
-// 
-// The function takes the following parameters:
-// 
-// 	- xalign float32: the horizontal alignment, from 0 (left) to 1 (right). 
-// 	- yalign float32: the vertical alignment, from 0 (top) to 1 (bottom). 
-//
-// Sets the alignment of the widget.
-//
-// Deprecated: (since 3.14.0) Use #GtkWidget's alignment (#GtkWidget:halign and #GtkWidget:valign) and margin properties or #GtkLabel's #GtkLabel:xalign and #GtkLabel:yalign properties.
-func (misc *MiscInstance) SetAlignment(xalign float32, yalign float32) {
-	var carg0 *C.GtkMisc // in, none, converted
-	var carg1 C.gfloat   // in, none, casted
-	var carg2 C.gfloat   // in, none, casted
-
-	carg0 = (*C.GtkMisc)(UnsafeMiscToGlibNone(misc))
-	carg1 = C.gfloat(xalign)
-	carg2 = C.gfloat(yalign)
-
-	C.gtk_misc_set_alignment(carg0, carg1, carg2)
-	runtime.KeepAlive(misc)
-	runtime.KeepAlive(xalign)
-	runtime.KeepAlive(yalign)
-}
-
-// SetPadding wraps gtk_misc_set_padding
-// 
-// The function takes the following parameters:
-// 
-// 	- xpad int: the amount of space to add on the left and right of the widget,
-//   in pixels. 
-// 	- ypad int: the amount of space to add on the top and bottom of the widget,
-//   in pixels. 
-//
-// Sets the amount of space to add around the widget.
-//
-// Deprecated: (since 3.14.0) Use #GtkWidget alignment and margin properties.
-func (misc *MiscInstance) SetPadding(xpad int, ypad int) {
-	var carg0 *C.GtkMisc // in, none, converted
-	var carg1 C.gint     // in, none, casted
-	var carg2 C.gint     // in, none, casted
-
-	carg0 = (*C.GtkMisc)(UnsafeMiscToGlibNone(misc))
-	carg1 = C.gint(xpad)
-	carg2 = C.gint(ypad)
-
-	C.gtk_misc_set_padding(carg0, carg1, carg2)
-	runtime.KeepAlive(misc)
-	runtime.KeepAlive(xpad)
-	runtime.KeepAlive(ypad)
 }
 
 // NotebookInstance is the instance type used by all types extending GtkNotebook. It is used internally by the bindings. Users should use the interface [Notebook] instead.
@@ -94008,15 +80660,6 @@ type Notebook interface {
 	//
 	// Returns whether the tab contents can be detached from @notebook.
 	GetTabDetachable(Widget) bool
-	// GetTabHborder wraps gtk_notebook_get_tab_hborder
-	// The function returns the following values:
-	// 
-	// 	- goret uint16 
-	//
-	// Returns the horizontal width of a tab border.
-	//
-	// Deprecated: (since 3.4.0) this function returns zero
-	GetTabHborder() uint16
 	// GetTabLabel wraps gtk_notebook_get_tab_label
 	// 
 	// The function takes the following parameters:
@@ -94064,15 +80707,6 @@ type Notebook interface {
 	//
 	// Gets whether the tab can be reordered via drag and drop or not.
 	GetTabReorderable(Widget) bool
-	// GetTabVborder wraps gtk_notebook_get_tab_vborder
-	// The function returns the following values:
-	// 
-	// 	- goret uint16 
-	//
-	// Returns the vertical width of a tab border.
-	//
-	// Deprecated: (since 3.4.0) this function returns zero
-	GetTabVborder() uint16
 	// InsertPage wraps gtk_notebook_insert_page
 	// 
 	// The function takes the following parameters:
@@ -94629,7 +81263,7 @@ func (notebook *NotebookInstance) GetGroupName() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -94690,7 +81324,7 @@ func (notebook *NotebookInstance) GetMenuLabelText(child Widget) string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -94855,30 +81489,6 @@ func (notebook *NotebookInstance) GetTabDetachable(child Widget) bool {
 	return goret
 }
 
-// GetTabHborder wraps gtk_notebook_get_tab_hborder
-// The function returns the following values:
-// 
-// 	- goret uint16 
-//
-// Returns the horizontal width of a tab border.
-//
-// Deprecated: (since 3.4.0) this function returns zero
-func (notebook *NotebookInstance) GetTabHborder() uint16 {
-	var carg0 *C.GtkNotebook // in, none, converted
-	var cret  C.guint16      // return, none, casted
-
-	carg0 = (*C.GtkNotebook)(UnsafeNotebookToGlibNone(notebook))
-
-	cret = C.gtk_notebook_get_tab_hborder(carg0)
-	runtime.KeepAlive(notebook)
-
-	var goret uint16
-
-	goret = uint16(cret)
-
-	return goret
-}
-
 // GetTabLabel wraps gtk_notebook_get_tab_label
 // 
 // The function takes the following parameters:
@@ -94937,7 +81547,7 @@ func (notebook *NotebookInstance) GetTabLabelText(child Widget) string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -94993,30 +81603,6 @@ func (notebook *NotebookInstance) GetTabReorderable(child Widget) bool {
 	if cret != 0 {
 		goret = true
 	}
-
-	return goret
-}
-
-// GetTabVborder wraps gtk_notebook_get_tab_vborder
-// The function returns the following values:
-// 
-// 	- goret uint16 
-//
-// Returns the vertical width of a tab border.
-//
-// Deprecated: (since 3.4.0) this function returns zero
-func (notebook *NotebookInstance) GetTabVborder() uint16 {
-	var carg0 *C.GtkNotebook // in, none, converted
-	var cret  C.guint16      // return, none, casted
-
-	carg0 = (*C.GtkNotebook)(UnsafeNotebookToGlibNone(notebook))
-
-	cret = C.gtk_notebook_get_tab_vborder(carg0)
-	runtime.KeepAlive(notebook)
-
-	var goret uint16
-
-	goret = uint16(cret)
 
 	return goret
 }
@@ -96786,7 +83372,7 @@ func (pbar *ProgressBarInstance) GetText() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -97031,56 +83617,6 @@ type RadioAction interface {
 	ToggleAction
 	Buildable
 	upcastToGtkRadioAction() *RadioActionInstance
-
-	// GetCurrentValue wraps gtk_radio_action_get_current_value
-	// The function returns the following values:
-	// 
-	// 	- goret int 
-	//
-	// Obtains the value property of the currently active member of
-	// the group to which @action belongs.
-	//
-	// Deprecated: (since 3.10.0) 
-	GetCurrentValue() int
-	// JoinGroup wraps gtk_radio_action_join_group
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- groupSource RadioAction (nullable): a radio action object whos group we are
-	//   joining, or %NULL to remove the radio action from its group 
-	//
-	// Joins a radio action object to the group of another radio action object.
-	// 
-	// Use this in language bindings instead of the gtk_radio_action_get_group()
-	// and gtk_radio_action_set_group() methods
-	// 
-	// A common way to set up a group of radio actions is the following:
-	// |[&lt;!-- language="C" --&gt;
-	//   GtkRadioAction *action;
-	//   GtkRadioAction *last_action;
-	//  
-	//   while ( ...more actions to add... /)
-	//     {
-	//        action = gtk_radio_action_new (...);
-	//        
-	//        gtk_radio_action_join_group (action, last_action);
-	//        last_action = action;
-	//     }
-	// ]|
-	//
-	// Deprecated: (since 3.10.0) 
-	JoinGroup(RadioAction)
-	// SetCurrentValue wraps gtk_radio_action_set_current_value
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- currentValue int: the new value 
-	//
-	// Sets the currently active group member to the member with value
-	// property @current_value.
-	//
-	// Deprecated: (since 3.10.0) 
-	SetCurrentValue(int)
 }
 
 func unsafeWrapRadioAction(base *gobject.ObjectInstance) *RadioActionInstance {
@@ -97122,154 +83658,6 @@ func UnsafeRadioActionToGlibNone(c RadioAction) unsafe.Pointer {
 // UnsafeRadioActionToGlibFull is used to convert the instance to it's C value GtkRadioAction, while removeing the finalizer. This is used by the bindings internally.
 func UnsafeRadioActionToGlibFull(c RadioAction) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
-}
-
-// NewRadioActionInstance wraps gtk_radio_action_new
-// 
-// The function takes the following parameters:
-// 
-// 	- name string: A unique name for the action 
-// 	- label string (nullable): The label displayed in menu items and on buttons,
-//   or %NULL 
-// 	- tooltip string (nullable): A tooltip for this action, or %NULL 
-// 	- stockId string (nullable): The stock icon to display in widgets representing
-//   this action, or %NULL 
-// 	- value int: The value which gtk_radio_action_get_current_value() should
-//   return if this action is selected. 
-// 
-// The function returns the following values:
-// 
-// 	- goret RadioAction 
-//
-// Creates a new #GtkRadioAction object. To add the action to
-// a #GtkActionGroup and set the accelerator for the action,
-// call gtk_action_group_add_action_with_accel().
-//
-// Deprecated: (since 3.10.0) 
-func NewRadioActionInstance(name string, label string, tooltip string, stockId string, value int) RadioAction {
-	var carg1 *C.gchar          // in, none, string, casted *C.gchar
-	var carg2 *C.gchar          // in, none, string, nullable-string
-	var carg3 *C.gchar          // in, none, string, nullable-string
-	var carg4 *C.gchar          // in, none, string, nullable-string
-	var carg5 C.gint            // in, none, casted
-	var cret  *C.GtkRadioAction // return, full, converted
-
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(name)))
-	defer C.free(unsafe.Pointer(carg1))
-	if label != "" {
-		carg2 = (*C.gchar)(unsafe.Pointer(C.CString(label)))
-		defer C.free(unsafe.Pointer(carg2))
-	}
-	if tooltip != "" {
-		carg3 = (*C.gchar)(unsafe.Pointer(C.CString(tooltip)))
-		defer C.free(unsafe.Pointer(carg3))
-	}
-	if stockId != "" {
-		carg4 = (*C.gchar)(unsafe.Pointer(C.CString(stockId)))
-		defer C.free(unsafe.Pointer(carg4))
-	}
-	carg5 = C.gint(value)
-
-	cret = C.gtk_radio_action_new(carg1, carg2, carg3, carg4, carg5)
-	runtime.KeepAlive(name)
-	runtime.KeepAlive(label)
-	runtime.KeepAlive(tooltip)
-	runtime.KeepAlive(stockId)
-	runtime.KeepAlive(value)
-
-	var goret RadioAction
-
-	goret = UnsafeRadioActionFromGlibFull(unsafe.Pointer(cret))
-
-	return goret
-}
-
-// GetCurrentValue wraps gtk_radio_action_get_current_value
-// The function returns the following values:
-// 
-// 	- goret int 
-//
-// Obtains the value property of the currently active member of
-// the group to which @action belongs.
-//
-// Deprecated: (since 3.10.0) 
-func (action *RadioActionInstance) GetCurrentValue() int {
-	var carg0 *C.GtkRadioAction // in, none, converted
-	var cret  C.gint            // return, none, casted
-
-	carg0 = (*C.GtkRadioAction)(UnsafeRadioActionToGlibNone(action))
-
-	cret = C.gtk_radio_action_get_current_value(carg0)
-	runtime.KeepAlive(action)
-
-	var goret int
-
-	goret = int(cret)
-
-	return goret
-}
-
-// JoinGroup wraps gtk_radio_action_join_group
-// 
-// The function takes the following parameters:
-// 
-// 	- groupSource RadioAction (nullable): a radio action object whos group we are
-//   joining, or %NULL to remove the radio action from its group 
-//
-// Joins a radio action object to the group of another radio action object.
-// 
-// Use this in language bindings instead of the gtk_radio_action_get_group()
-// and gtk_radio_action_set_group() methods
-// 
-// A common way to set up a group of radio actions is the following:
-// |[&lt;!-- language="C" --&gt;
-//   GtkRadioAction *action;
-//   GtkRadioAction *last_action;
-//  
-//   while ( ...more actions to add... /)
-//     {
-//        action = gtk_radio_action_new (...);
-//        
-//        gtk_radio_action_join_group (action, last_action);
-//        last_action = action;
-//     }
-// ]|
-//
-// Deprecated: (since 3.10.0) 
-func (action *RadioActionInstance) JoinGroup(groupSource RadioAction) {
-	var carg0 *C.GtkRadioAction // in, none, converted
-	var carg1 *C.GtkRadioAction // in, none, converted, nullable
-
-	carg0 = (*C.GtkRadioAction)(UnsafeRadioActionToGlibNone(action))
-	if groupSource != nil {
-		carg1 = (*C.GtkRadioAction)(UnsafeRadioActionToGlibNone(groupSource))
-	}
-
-	C.gtk_radio_action_join_group(carg0, carg1)
-	runtime.KeepAlive(action)
-	runtime.KeepAlive(groupSource)
-}
-
-// SetCurrentValue wraps gtk_radio_action_set_current_value
-// 
-// The function takes the following parameters:
-// 
-// 	- currentValue int: the new value 
-//
-// Sets the currently active group member to the member with value
-// property @current_value.
-//
-// Deprecated: (since 3.10.0) 
-func (action *RadioActionInstance) SetCurrentValue(currentValue int) {
-	var carg0 *C.GtkRadioAction // in, none, converted
-	var carg1 C.gint            // in, none, casted
-
-	carg0 = (*C.GtkRadioAction)(UnsafeRadioActionToGlibNone(action))
-	carg1 = C.gint(currentValue)
-
-	C.gtk_radio_action_set_current_value(carg0, carg1)
-	runtime.KeepAlive(action)
-	runtime.KeepAlive(currentValue)
 }
 
 // RangeInstance is the instance type used by all types extending GtkRange. It is used internally by the bindings. Users should use the interface [Range] instead.
@@ -97337,18 +83725,6 @@ type Range interface {
 	// Gets the sensitivity policy for the stepper that points to the
 	// 'lower' end of the GtkRange’s adjustment.
 	GetLowerStepperSensitivity() SensitivityType
-	// GetMinSliderSize wraps gtk_range_get_min_slider_size
-	// The function returns the following values:
-	// 
-	// 	- goret int 
-	//
-	// This function is useful mainly for #GtkRange subclasses.
-	// 
-	// See gtk_range_set_min_slider_size().
-	//
-	// Deprecated: (since 3.20.0) Use the min-height/min-width CSS properties on the slider
-	//   node.
-	GetMinSliderSize() int
 	// GetRangeRect wraps gtk_range_get_range_rect
 	// The function returns the following values:
 	// 
@@ -97499,19 +83875,6 @@ type Range interface {
 	// Sets the sensitivity policy for the stepper that points to the
 	// 'lower' end of the GtkRange’s adjustment.
 	SetLowerStepperSensitivity(SensitivityType)
-	// SetMinSliderSize wraps gtk_range_set_min_slider_size
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- minSize int: The slider’s minimum size 
-	//
-	// Sets the minimum size of the range’s slider.
-	// 
-	// This function is useful mainly for #GtkRange subclasses.
-	//
-	// Deprecated: (since 3.20.0) Use the min-height/min-width CSS properties on the slider
-	//   node.
-	SetMinSliderSize(int)
 	// SetRange wraps gtk_range_set_range
 	// 
 	// The function takes the following parameters:
@@ -97746,33 +84109,6 @@ func (_range *RangeInstance) GetLowerStepperSensitivity() SensitivityType {
 	var goret SensitivityType
 
 	goret = SensitivityType(cret)
-
-	return goret
-}
-
-// GetMinSliderSize wraps gtk_range_get_min_slider_size
-// The function returns the following values:
-// 
-// 	- goret int 
-//
-// This function is useful mainly for #GtkRange subclasses.
-// 
-// See gtk_range_set_min_slider_size().
-//
-// Deprecated: (since 3.20.0) Use the min-height/min-width CSS properties on the slider
-//   node.
-func (_range *RangeInstance) GetMinSliderSize() int {
-	var carg0 *C.GtkRange // in, none, converted
-	var cret  C.gint      // return, none, casted
-
-	carg0 = (*C.GtkRange)(UnsafeRangeToGlibNone(_range))
-
-	cret = C.gtk_range_get_min_slider_size(carg0)
-	runtime.KeepAlive(_range)
-
-	var goret int
-
-	goret = int(cret)
 
 	return goret
 }
@@ -98129,30 +84465,6 @@ func (_range *RangeInstance) SetLowerStepperSensitivity(sensitivity SensitivityT
 	C.gtk_range_set_lower_stepper_sensitivity(carg0, carg1)
 	runtime.KeepAlive(_range)
 	runtime.KeepAlive(sensitivity)
-}
-
-// SetMinSliderSize wraps gtk_range_set_min_slider_size
-// 
-// The function takes the following parameters:
-// 
-// 	- minSize int: The slider’s minimum size 
-//
-// Sets the minimum size of the range’s slider.
-// 
-// This function is useful mainly for #GtkRange subclasses.
-//
-// Deprecated: (since 3.20.0) Use the min-height/min-width CSS properties on the slider
-//   node.
-func (_range *RangeInstance) SetMinSliderSize(minSize int) {
-	var carg0 *C.GtkRange // in, none, converted
-	var carg1 C.gint      // in, none, casted
-
-	carg0 = (*C.GtkRange)(UnsafeRangeToGlibNone(_range))
-	carg1 = C.gint(minSize)
-
-	C.gtk_range_set_min_slider_size(carg0, carg1)
-	runtime.KeepAlive(_range)
-	runtime.KeepAlive(minSize)
 }
 
 // SetRange wraps gtk_range_set_range
@@ -101574,7 +87886,7 @@ func (stack *StackInstance) GetVisibleChildName() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -101934,7 +88246,6 @@ type SwitchInstance struct {
 	WidgetInstance
 	// implemented interfaces:
 	ActionableInstance
-	ActivatableInstance
 	BuildableInstance
 }
 
@@ -101961,7 +88272,6 @@ var _ Switch = (*SwitchInstance)(nil)
 type Switch interface {
 	Widget
 	Actionable
-	Activatable
 	Buildable
 	upcastToGtkSwitch() *SwitchInstance
 
@@ -102014,9 +88324,6 @@ func unsafeWrapSwitch(base *gobject.ObjectInstance) *SwitchInstance {
 			},
 		},
 		ActionableInstance: ActionableInstance{
-			Instance: *base,
-		},
-		ActivatableInstance: ActivatableInstance{
 			Instance: *base,
 		},
 		BuildableInstance: BuildableInstance{
@@ -102267,208 +88574,6 @@ var _ Table = (*TableInstance)(nil)
 type Table interface {
 	Container
 	upcastToGtkTable() *TableInstance
-
-	// Attach wraps gtk_table_attach
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- child Widget: The widget to add. 
-	// 	- leftAttach uint: the column number to attach the left side of a child widget to. 
-	// 	- rightAttach uint: the column number to attach the right side of a child widget to. 
-	// 	- topAttach uint: the row number to attach the top of a child widget to. 
-	// 	- bottomAttach uint: the row number to attach the bottom of a child widget to. 
-	// 	- xoptions AttachOptions: Used to specify the properties of the child widget when the table is resized. 
-	// 	- yoptions AttachOptions: The same as xoptions, except this field determines behaviour of vertical resizing. 
-	// 	- xpadding uint: An integer value specifying the padding on the left and right of the widget being added to the table. 
-	// 	- ypadding uint: The amount of padding above and below the child widget. 
-	//
-	// Adds a widget to a table. The number of “cells” that a widget will occupy is
-	// specified by @left_attach, @right_attach, @top_attach and @bottom_attach.
-	// These each represent the leftmost, rightmost, uppermost and lowest column
-	// and row numbers of the table. (Columns and rows are indexed from zero).
-	// 
-	// To make a button occupy the lower right cell of a 2x2 table, use
-	// |[
-	// gtk_table_attach (table, button,
-	//                   1, 2, // left, right attach
-	//                   1, 2, // top, bottom attach
-	//                   xoptions, yoptions,
-	//                   xpadding, ypadding);
-	// ]|
-	// If you want to make the button span the entire bottom row, use @left_attach == 0 and @right_attach = 2 instead.
-	//
-	// Deprecated: (since 3.4.0) Use gtk_grid_attach() with #GtkGrid. Note that the attach
-	//     arguments differ between those two functions.
-	Attach(Widget, uint, uint, uint, uint, AttachOptions, AttachOptions, uint, uint)
-	// AttachDefaults wraps gtk_table_attach_defaults
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- widget Widget: The child widget to add. 
-	// 	- leftAttach uint: The column number to attach the left side of the child widget to. 
-	// 	- rightAttach uint: The column number to attach the right side of the child widget to. 
-	// 	- topAttach uint: The row number to attach the top of the child widget to. 
-	// 	- bottomAttach uint: The row number to attach the bottom of the child widget to. 
-	//
-	// As there are many options associated with gtk_table_attach(), this convenience
-	// function provides the programmer with a means to add children to a table with
-	// identical padding and expansion options. The values used for the #GtkAttachOptions
-	// are `GTK_EXPAND | GTK_FILL`, and the padding is set to 0.
-	//
-	// Deprecated: (since 3.4.0) Use gtk_grid_attach() with #GtkGrid. Note that the attach
-	//     arguments differ between those two functions.
-	AttachDefaults(Widget, uint, uint, uint, uint)
-	// GetColSpacing wraps gtk_table_get_col_spacing
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- column uint: a column in the table, 0 indicates the first column 
-	// 
-	// The function returns the following values:
-	// 
-	// 	- goret uint 
-	//
-	// Gets the amount of space between column @col, and
-	// column @col + 1. See gtk_table_set_col_spacing().
-	//
-	// Deprecated: (since 3.4.0) #GtkGrid does not offer a replacement for this
-	//     functionality.
-	GetColSpacing(uint) uint
-	// GetDefaultColSpacing wraps gtk_table_get_default_col_spacing
-	// The function returns the following values:
-	// 
-	// 	- goret uint 
-	//
-	// Gets the default column spacing for the table. This is
-	// the spacing that will be used for newly added columns.
-	// (See gtk_table_set_col_spacings())
-	//
-	// Deprecated: (since 3.4.0) Use gtk_grid_get_column_spacing() with #GtkGrid.
-	GetDefaultColSpacing() uint
-	// GetDefaultRowSpacing wraps gtk_table_get_default_row_spacing
-	// The function returns the following values:
-	// 
-	// 	- goret uint 
-	//
-	// Gets the default row spacing for the table. This is
-	// the spacing that will be used for newly added rows.
-	// (See gtk_table_set_row_spacings())
-	//
-	// Deprecated: (since 3.4.0) Use gtk_grid_get_row_spacing() with #GtkGrid.
-	GetDefaultRowSpacing() uint
-	// GetHomogeneous wraps gtk_table_get_homogeneous
-	// The function returns the following values:
-	// 
-	// 	- goret bool 
-	//
-	// Returns whether the table cells are all constrained to the same
-	// width and height. (See gtk_table_set_homogeneous ())
-	//
-	// Deprecated: (since 3.4.0) Use gtk_grid_get_row_homogeneous() and
-	//     gtk_grid_get_column_homogeneous() with #GtkGrid.
-	GetHomogeneous() bool
-	// GetRowSpacing wraps gtk_table_get_row_spacing
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- row uint: a row in the table, 0 indicates the first row 
-	// 
-	// The function returns the following values:
-	// 
-	// 	- goret uint 
-	//
-	// Gets the amount of space between row @row, and
-	// row @row + 1. See gtk_table_set_row_spacing().
-	//
-	// Deprecated: (since 3.4.0) #GtkGrid does not offer a replacement for this
-	//     functionality.
-	GetRowSpacing(uint) uint
-	// GetSize wraps gtk_table_get_size
-	// The function returns the following values:
-	// 
-	// 	- rows uint: return location for the number of
-	//   rows, or %NULL 
-	// 	- columns uint: return location for the number
-	//   of columns, or %NULL 
-	//
-	// Gets the number of rows and columns in the table.
-	//
-	// Deprecated: (since 3.4.0) #GtkGrid does not expose the number of columns and
-	//     rows.
-	GetSize() (uint, uint)
-	// Resize wraps gtk_table_resize
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- rows uint: The new number of rows. 
-	// 	- columns uint: The new number of columns. 
-	//
-	// If you need to change a table’s size after
-	// it has been created, this function allows you to do so.
-	//
-	// Deprecated: (since 3.4.0) #GtkGrid resizes automatically.
-	Resize(uint, uint)
-	// SetColSpacing wraps gtk_table_set_col_spacing
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- column uint: the column whose spacing should be changed. 
-	// 	- spacing uint: number of pixels that the spacing should take up. 
-	//
-	// Alters the amount of space between a given table column and the following
-	// column.
-	//
-	// Deprecated: (since 3.4.0) Use gtk_widget_set_margin_start() and
-	//     gtk_widget_set_margin_end() on the widgets contained in the row if
-	//     you need this functionality. #GtkGrid does not support per-row spacing.
-	SetColSpacing(uint, uint)
-	// SetColSpacings wraps gtk_table_set_col_spacings
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- spacing uint: the number of pixels of space to place between every column
-	//   in the table. 
-	//
-	// Sets the space between every column in @table equal to @spacing.
-	//
-	// Deprecated: (since 3.4.0) Use gtk_grid_set_column_spacing() with #GtkGrid.
-	SetColSpacings(uint)
-	// SetHomogeneous wraps gtk_table_set_homogeneous
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- homogeneous bool: Set to %TRUE to ensure all table cells are the same size. Set
-	//   to %FALSE if this is not your desired behaviour. 
-	//
-	// Changes the homogenous property of table cells, ie. whether all cells are
-	// an equal size or not.
-	//
-	// Deprecated: (since 3.4.0) Use gtk_grid_set_row_homogeneous() and
-	//     gtk_grid_set_column_homogeneous() with #GtkGrid.
-	SetHomogeneous(bool)
-	// SetRowSpacing wraps gtk_table_set_row_spacing
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- row uint: row number whose spacing will be changed. 
-	// 	- spacing uint: number of pixels that the spacing should take up. 
-	//
-	// Changes the space between a given table row and the subsequent row.
-	//
-	// Deprecated: (since 3.4.0) Use gtk_widget_set_margin_top() and
-	//     gtk_widget_set_margin_bottom() on the widgets contained in the row if
-	//     you need this functionality. #GtkGrid does not support per-row spacing.
-	SetRowSpacing(uint, uint)
-	// SetRowSpacings wraps gtk_table_set_row_spacings
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- spacing uint: the number of pixels of space to place between every row in the table. 
-	//
-	// Sets the space between every row in @table equal to @spacing.
-	//
-	// Deprecated: (since 3.4.0) Use gtk_grid_set_row_spacing() with #GtkGrid.
-	SetRowSpacings(uint)
 }
 
 func unsafeWrapTable(base *gobject.ObjectInstance) *TableInstance {
@@ -102515,487 +88620,6 @@ func UnsafeTableToGlibNone(c Table) unsafe.Pointer {
 // UnsafeTableToGlibFull is used to convert the instance to it's C value GtkTable, while removeing the finalizer. This is used by the bindings internally.
 func UnsafeTableToGlibFull(c Table) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
-}
-
-// NewTableInstance wraps gtk_table_new
-// 
-// The function takes the following parameters:
-// 
-// 	- rows uint: The number of rows the new table should have. 
-// 	- columns uint: The number of columns the new table should have. 
-// 	- homogeneous bool: If set to %TRUE, all table cells are resized to the size of
-//   the cell containing the largest widget. 
-// 
-// The function returns the following values:
-// 
-// 	- goret Widget 
-//
-// Used to create a new table widget. An initial size must be given by
-// specifying how many rows and columns the table should have, although
-// this can be changed later with gtk_table_resize().  @rows and @columns
-// must both be in the range 1 .. 65535. For historical reasons, 0 is accepted
-// as well and is silently interpreted as 1.
-//
-// Deprecated: (since 3.4.0) Use gtk_grid_new().
-func NewTableInstance(rows uint, columns uint, homogeneous bool) Widget {
-	var carg1 C.guint      // in, none, casted
-	var carg2 C.guint      // in, none, casted
-	var carg3 C.gboolean   // in
-	var cret  *C.GtkWidget // return, none, converted
-
-	carg1 = C.guint(rows)
-	carg2 = C.guint(columns)
-	if homogeneous {
-		carg3 = C.TRUE
-	}
-
-	cret = C.gtk_table_new(carg1, carg2, carg3)
-	runtime.KeepAlive(rows)
-	runtime.KeepAlive(columns)
-	runtime.KeepAlive(homogeneous)
-
-	var goret Widget
-
-	goret = UnsafeWidgetFromGlibNone(unsafe.Pointer(cret))
-
-	return goret
-}
-
-// Attach wraps gtk_table_attach
-// 
-// The function takes the following parameters:
-// 
-// 	- child Widget: The widget to add. 
-// 	- leftAttach uint: the column number to attach the left side of a child widget to. 
-// 	- rightAttach uint: the column number to attach the right side of a child widget to. 
-// 	- topAttach uint: the row number to attach the top of a child widget to. 
-// 	- bottomAttach uint: the row number to attach the bottom of a child widget to. 
-// 	- xoptions AttachOptions: Used to specify the properties of the child widget when the table is resized. 
-// 	- yoptions AttachOptions: The same as xoptions, except this field determines behaviour of vertical resizing. 
-// 	- xpadding uint: An integer value specifying the padding on the left and right of the widget being added to the table. 
-// 	- ypadding uint: The amount of padding above and below the child widget. 
-//
-// Adds a widget to a table. The number of “cells” that a widget will occupy is
-// specified by @left_attach, @right_attach, @top_attach and @bottom_attach.
-// These each represent the leftmost, rightmost, uppermost and lowest column
-// and row numbers of the table. (Columns and rows are indexed from zero).
-// 
-// To make a button occupy the lower right cell of a 2x2 table, use
-// |[
-// gtk_table_attach (table, button,
-//                   1, 2, // left, right attach
-//                   1, 2, // top, bottom attach
-//                   xoptions, yoptions,
-//                   xpadding, ypadding);
-// ]|
-// If you want to make the button span the entire bottom row, use @left_attach == 0 and @right_attach = 2 instead.
-//
-// Deprecated: (since 3.4.0) Use gtk_grid_attach() with #GtkGrid. Note that the attach
-//     arguments differ between those two functions.
-func (table *TableInstance) Attach(child Widget, leftAttach uint, rightAttach uint, topAttach uint, bottomAttach uint, xoptions AttachOptions, yoptions AttachOptions, xpadding uint, ypadding uint) {
-	var carg0 *C.GtkTable        // in, none, converted
-	var carg1 *C.GtkWidget       // in, none, converted
-	var carg2 C.guint            // in, none, casted
-	var carg3 C.guint            // in, none, casted
-	var carg4 C.guint            // in, none, casted
-	var carg5 C.guint            // in, none, casted
-	var carg6 C.GtkAttachOptions // in, none, casted
-	var carg7 C.GtkAttachOptions // in, none, casted
-	var carg8 C.guint            // in, none, casted
-	var carg9 C.guint            // in, none, casted
-
-	carg0 = (*C.GtkTable)(UnsafeTableToGlibNone(table))
-	carg1 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(child))
-	carg2 = C.guint(leftAttach)
-	carg3 = C.guint(rightAttach)
-	carg4 = C.guint(topAttach)
-	carg5 = C.guint(bottomAttach)
-	carg6 = C.GtkAttachOptions(xoptions)
-	carg7 = C.GtkAttachOptions(yoptions)
-	carg8 = C.guint(xpadding)
-	carg9 = C.guint(ypadding)
-
-	C.gtk_table_attach(carg0, carg1, carg2, carg3, carg4, carg5, carg6, carg7, carg8, carg9)
-	runtime.KeepAlive(table)
-	runtime.KeepAlive(child)
-	runtime.KeepAlive(leftAttach)
-	runtime.KeepAlive(rightAttach)
-	runtime.KeepAlive(topAttach)
-	runtime.KeepAlive(bottomAttach)
-	runtime.KeepAlive(xoptions)
-	runtime.KeepAlive(yoptions)
-	runtime.KeepAlive(xpadding)
-	runtime.KeepAlive(ypadding)
-}
-
-// AttachDefaults wraps gtk_table_attach_defaults
-// 
-// The function takes the following parameters:
-// 
-// 	- widget Widget: The child widget to add. 
-// 	- leftAttach uint: The column number to attach the left side of the child widget to. 
-// 	- rightAttach uint: The column number to attach the right side of the child widget to. 
-// 	- topAttach uint: The row number to attach the top of the child widget to. 
-// 	- bottomAttach uint: The row number to attach the bottom of the child widget to. 
-//
-// As there are many options associated with gtk_table_attach(), this convenience
-// function provides the programmer with a means to add children to a table with
-// identical padding and expansion options. The values used for the #GtkAttachOptions
-// are `GTK_EXPAND | GTK_FILL`, and the padding is set to 0.
-//
-// Deprecated: (since 3.4.0) Use gtk_grid_attach() with #GtkGrid. Note that the attach
-//     arguments differ between those two functions.
-func (table *TableInstance) AttachDefaults(widget Widget, leftAttach uint, rightAttach uint, topAttach uint, bottomAttach uint) {
-	var carg0 *C.GtkTable  // in, none, converted
-	var carg1 *C.GtkWidget // in, none, converted
-	var carg2 C.guint      // in, none, casted
-	var carg3 C.guint      // in, none, casted
-	var carg4 C.guint      // in, none, casted
-	var carg5 C.guint      // in, none, casted
-
-	carg0 = (*C.GtkTable)(UnsafeTableToGlibNone(table))
-	carg1 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(widget))
-	carg2 = C.guint(leftAttach)
-	carg3 = C.guint(rightAttach)
-	carg4 = C.guint(topAttach)
-	carg5 = C.guint(bottomAttach)
-
-	C.gtk_table_attach_defaults(carg0, carg1, carg2, carg3, carg4, carg5)
-	runtime.KeepAlive(table)
-	runtime.KeepAlive(widget)
-	runtime.KeepAlive(leftAttach)
-	runtime.KeepAlive(rightAttach)
-	runtime.KeepAlive(topAttach)
-	runtime.KeepAlive(bottomAttach)
-}
-
-// GetColSpacing wraps gtk_table_get_col_spacing
-// 
-// The function takes the following parameters:
-// 
-// 	- column uint: a column in the table, 0 indicates the first column 
-// 
-// The function returns the following values:
-// 
-// 	- goret uint 
-//
-// Gets the amount of space between column @col, and
-// column @col + 1. See gtk_table_set_col_spacing().
-//
-// Deprecated: (since 3.4.0) #GtkGrid does not offer a replacement for this
-//     functionality.
-func (table *TableInstance) GetColSpacing(column uint) uint {
-	var carg0 *C.GtkTable // in, none, converted
-	var carg1 C.guint     // in, none, casted
-	var cret  C.guint     // return, none, casted
-
-	carg0 = (*C.GtkTable)(UnsafeTableToGlibNone(table))
-	carg1 = C.guint(column)
-
-	cret = C.gtk_table_get_col_spacing(carg0, carg1)
-	runtime.KeepAlive(table)
-	runtime.KeepAlive(column)
-
-	var goret uint
-
-	goret = uint(cret)
-
-	return goret
-}
-
-// GetDefaultColSpacing wraps gtk_table_get_default_col_spacing
-// The function returns the following values:
-// 
-// 	- goret uint 
-//
-// Gets the default column spacing for the table. This is
-// the spacing that will be used for newly added columns.
-// (See gtk_table_set_col_spacings())
-//
-// Deprecated: (since 3.4.0) Use gtk_grid_get_column_spacing() with #GtkGrid.
-func (table *TableInstance) GetDefaultColSpacing() uint {
-	var carg0 *C.GtkTable // in, none, converted
-	var cret  C.guint     // return, none, casted
-
-	carg0 = (*C.GtkTable)(UnsafeTableToGlibNone(table))
-
-	cret = C.gtk_table_get_default_col_spacing(carg0)
-	runtime.KeepAlive(table)
-
-	var goret uint
-
-	goret = uint(cret)
-
-	return goret
-}
-
-// GetDefaultRowSpacing wraps gtk_table_get_default_row_spacing
-// The function returns the following values:
-// 
-// 	- goret uint 
-//
-// Gets the default row spacing for the table. This is
-// the spacing that will be used for newly added rows.
-// (See gtk_table_set_row_spacings())
-//
-// Deprecated: (since 3.4.0) Use gtk_grid_get_row_spacing() with #GtkGrid.
-func (table *TableInstance) GetDefaultRowSpacing() uint {
-	var carg0 *C.GtkTable // in, none, converted
-	var cret  C.guint     // return, none, casted
-
-	carg0 = (*C.GtkTable)(UnsafeTableToGlibNone(table))
-
-	cret = C.gtk_table_get_default_row_spacing(carg0)
-	runtime.KeepAlive(table)
-
-	var goret uint
-
-	goret = uint(cret)
-
-	return goret
-}
-
-// GetHomogeneous wraps gtk_table_get_homogeneous
-// The function returns the following values:
-// 
-// 	- goret bool 
-//
-// Returns whether the table cells are all constrained to the same
-// width and height. (See gtk_table_set_homogeneous ())
-//
-// Deprecated: (since 3.4.0) Use gtk_grid_get_row_homogeneous() and
-//     gtk_grid_get_column_homogeneous() with #GtkGrid.
-func (table *TableInstance) GetHomogeneous() bool {
-	var carg0 *C.GtkTable // in, none, converted
-	var cret  C.gboolean  // return
-
-	carg0 = (*C.GtkTable)(UnsafeTableToGlibNone(table))
-
-	cret = C.gtk_table_get_homogeneous(carg0)
-	runtime.KeepAlive(table)
-
-	var goret bool
-
-	if cret != 0 {
-		goret = true
-	}
-
-	return goret
-}
-
-// GetRowSpacing wraps gtk_table_get_row_spacing
-// 
-// The function takes the following parameters:
-// 
-// 	- row uint: a row in the table, 0 indicates the first row 
-// 
-// The function returns the following values:
-// 
-// 	- goret uint 
-//
-// Gets the amount of space between row @row, and
-// row @row + 1. See gtk_table_set_row_spacing().
-//
-// Deprecated: (since 3.4.0) #GtkGrid does not offer a replacement for this
-//     functionality.
-func (table *TableInstance) GetRowSpacing(row uint) uint {
-	var carg0 *C.GtkTable // in, none, converted
-	var carg1 C.guint     // in, none, casted
-	var cret  C.guint     // return, none, casted
-
-	carg0 = (*C.GtkTable)(UnsafeTableToGlibNone(table))
-	carg1 = C.guint(row)
-
-	cret = C.gtk_table_get_row_spacing(carg0, carg1)
-	runtime.KeepAlive(table)
-	runtime.KeepAlive(row)
-
-	var goret uint
-
-	goret = uint(cret)
-
-	return goret
-}
-
-// GetSize wraps gtk_table_get_size
-// The function returns the following values:
-// 
-// 	- rows uint: return location for the number of
-//   rows, or %NULL 
-// 	- columns uint: return location for the number
-//   of columns, or %NULL 
-//
-// Gets the number of rows and columns in the table.
-//
-// Deprecated: (since 3.4.0) #GtkGrid does not expose the number of columns and
-//     rows.
-func (table *TableInstance) GetSize() (uint, uint) {
-	var carg0 *C.GtkTable // in, none, converted
-	var carg1 C.guint     // out, full, casted
-	var carg2 C.guint     // out, full, casted
-
-	carg0 = (*C.GtkTable)(UnsafeTableToGlibNone(table))
-
-	C.gtk_table_get_size(carg0, &carg1, &carg2)
-	runtime.KeepAlive(table)
-
-	var rows    uint
-	var columns uint
-
-	rows = uint(carg1)
-	columns = uint(carg2)
-
-	return rows, columns
-}
-
-// Resize wraps gtk_table_resize
-// 
-// The function takes the following parameters:
-// 
-// 	- rows uint: The new number of rows. 
-// 	- columns uint: The new number of columns. 
-//
-// If you need to change a table’s size after
-// it has been created, this function allows you to do so.
-//
-// Deprecated: (since 3.4.0) #GtkGrid resizes automatically.
-func (table *TableInstance) Resize(rows uint, columns uint) {
-	var carg0 *C.GtkTable // in, none, converted
-	var carg1 C.guint     // in, none, casted
-	var carg2 C.guint     // in, none, casted
-
-	carg0 = (*C.GtkTable)(UnsafeTableToGlibNone(table))
-	carg1 = C.guint(rows)
-	carg2 = C.guint(columns)
-
-	C.gtk_table_resize(carg0, carg1, carg2)
-	runtime.KeepAlive(table)
-	runtime.KeepAlive(rows)
-	runtime.KeepAlive(columns)
-}
-
-// SetColSpacing wraps gtk_table_set_col_spacing
-// 
-// The function takes the following parameters:
-// 
-// 	- column uint: the column whose spacing should be changed. 
-// 	- spacing uint: number of pixels that the spacing should take up. 
-//
-// Alters the amount of space between a given table column and the following
-// column.
-//
-// Deprecated: (since 3.4.0) Use gtk_widget_set_margin_start() and
-//     gtk_widget_set_margin_end() on the widgets contained in the row if
-//     you need this functionality. #GtkGrid does not support per-row spacing.
-func (table *TableInstance) SetColSpacing(column uint, spacing uint) {
-	var carg0 *C.GtkTable // in, none, converted
-	var carg1 C.guint     // in, none, casted
-	var carg2 C.guint     // in, none, casted
-
-	carg0 = (*C.GtkTable)(UnsafeTableToGlibNone(table))
-	carg1 = C.guint(column)
-	carg2 = C.guint(spacing)
-
-	C.gtk_table_set_col_spacing(carg0, carg1, carg2)
-	runtime.KeepAlive(table)
-	runtime.KeepAlive(column)
-	runtime.KeepAlive(spacing)
-}
-
-// SetColSpacings wraps gtk_table_set_col_spacings
-// 
-// The function takes the following parameters:
-// 
-// 	- spacing uint: the number of pixels of space to place between every column
-//   in the table. 
-//
-// Sets the space between every column in @table equal to @spacing.
-//
-// Deprecated: (since 3.4.0) Use gtk_grid_set_column_spacing() with #GtkGrid.
-func (table *TableInstance) SetColSpacings(spacing uint) {
-	var carg0 *C.GtkTable // in, none, converted
-	var carg1 C.guint     // in, none, casted
-
-	carg0 = (*C.GtkTable)(UnsafeTableToGlibNone(table))
-	carg1 = C.guint(spacing)
-
-	C.gtk_table_set_col_spacings(carg0, carg1)
-	runtime.KeepAlive(table)
-	runtime.KeepAlive(spacing)
-}
-
-// SetHomogeneous wraps gtk_table_set_homogeneous
-// 
-// The function takes the following parameters:
-// 
-// 	- homogeneous bool: Set to %TRUE to ensure all table cells are the same size. Set
-//   to %FALSE if this is not your desired behaviour. 
-//
-// Changes the homogenous property of table cells, ie. whether all cells are
-// an equal size or not.
-//
-// Deprecated: (since 3.4.0) Use gtk_grid_set_row_homogeneous() and
-//     gtk_grid_set_column_homogeneous() with #GtkGrid.
-func (table *TableInstance) SetHomogeneous(homogeneous bool) {
-	var carg0 *C.GtkTable // in, none, converted
-	var carg1 C.gboolean  // in
-
-	carg0 = (*C.GtkTable)(UnsafeTableToGlibNone(table))
-	if homogeneous {
-		carg1 = C.TRUE
-	}
-
-	C.gtk_table_set_homogeneous(carg0, carg1)
-	runtime.KeepAlive(table)
-	runtime.KeepAlive(homogeneous)
-}
-
-// SetRowSpacing wraps gtk_table_set_row_spacing
-// 
-// The function takes the following parameters:
-// 
-// 	- row uint: row number whose spacing will be changed. 
-// 	- spacing uint: number of pixels that the spacing should take up. 
-//
-// Changes the space between a given table row and the subsequent row.
-//
-// Deprecated: (since 3.4.0) Use gtk_widget_set_margin_top() and
-//     gtk_widget_set_margin_bottom() on the widgets contained in the row if
-//     you need this functionality. #GtkGrid does not support per-row spacing.
-func (table *TableInstance) SetRowSpacing(row uint, spacing uint) {
-	var carg0 *C.GtkTable // in, none, converted
-	var carg1 C.guint     // in, none, casted
-	var carg2 C.guint     // in, none, casted
-
-	carg0 = (*C.GtkTable)(UnsafeTableToGlibNone(table))
-	carg1 = C.guint(row)
-	carg2 = C.guint(spacing)
-
-	C.gtk_table_set_row_spacing(carg0, carg1, carg2)
-	runtime.KeepAlive(table)
-	runtime.KeepAlive(row)
-	runtime.KeepAlive(spacing)
-}
-
-// SetRowSpacings wraps gtk_table_set_row_spacings
-// 
-// The function takes the following parameters:
-// 
-// 	- spacing uint: the number of pixels of space to place between every row in the table. 
-//
-// Sets the space between every row in @table equal to @spacing.
-//
-// Deprecated: (since 3.4.0) Use gtk_grid_set_row_spacing() with #GtkGrid.
-func (table *TableInstance) SetRowSpacings(spacing uint) {
-	var carg0 *C.GtkTable // in, none, converted
-	var carg1 C.guint     // in, none, casted
-
-	carg0 = (*C.GtkTable)(UnsafeTableToGlibNone(table))
-	carg1 = C.guint(spacing)
-
-	C.gtk_table_set_row_spacings(carg0, carg1)
-	runtime.KeepAlive(table)
-	runtime.KeepAlive(spacing)
 }
 
 // TextViewInstance is the instance type used by all types extending GtkTextView. It is used internally by the bindings. Users should use the interface [TextView] instead.
@@ -103265,15 +88889,6 @@ type TextView interface {
 	// Returns the default editability of the #GtkTextView. Tags in the
 	// buffer may override this setting for some ranges of text.
 	GetEditable() bool
-	// GetHAdjustment wraps gtk_text_view_get_hadjustment
-	// The function returns the following values:
-	// 
-	// 	- goret Adjustment 
-	//
-	// Gets the horizontal-scrolling #GtkAdjustment.
-	//
-	// Deprecated: (since 3.0.0) Use gtk_scrollable_get_hadjustment()
-	GetHAdjustment() Adjustment
 	// GetIndent wraps gtk_text_view_get_indent
 	// The function returns the following values:
 	// 
@@ -103470,15 +89085,6 @@ type TextView interface {
 	//
 	// Gets the top margin for text in the @text_view.
 	GetTopMargin() int
-	// GetVAdjustment wraps gtk_text_view_get_vadjustment
-	// The function returns the following values:
-	// 
-	// 	- goret Adjustment 
-	//
-	// Gets the vertical-scrolling #GtkAdjustment.
-	//
-	// Deprecated: (since 3.0.0) Use gtk_scrollable_get_vadjustment()
-	GetVAdjustment() Adjustment
 	// GetVisibleRect wraps gtk_text_view_get_visible_rect
 	// The function returns the following values:
 	// 
@@ -103488,7 +89094,7 @@ type TextView interface {
 	// region of the buffer, in buffer coordinates. Convert to window coordinates
 	// with gtk_text_view_buffer_to_window_coords().
 	GetVisibleRect() gdk.Rectangle
-	// GetWindow wraps gtk_text_view_get_window
+	// GetTextViewWindow wraps gtk_text_view_get_window
 	// 
 	// The function takes the following parameters:
 	// 
@@ -103504,7 +89110,7 @@ type TextView interface {
 	// text buffer. Windows are %NULL and nonexistent if their width or
 	// height is 0, and are nonexistent before the widget has been
 	// realized.
-	GetWindow(TextWindowType) gdk.Window
+	GetTextViewWindow(TextWindowType) gdk.Window
 	// GetWindowType wraps gtk_text_view_get_window_type
 	// 
 	// The function takes the following parameters:
@@ -104550,30 +90156,6 @@ func (textView *TextViewInstance) GetEditable() bool {
 	return goret
 }
 
-// GetHAdjustment wraps gtk_text_view_get_hadjustment
-// The function returns the following values:
-// 
-// 	- goret Adjustment 
-//
-// Gets the horizontal-scrolling #GtkAdjustment.
-//
-// Deprecated: (since 3.0.0) Use gtk_scrollable_get_hadjustment()
-func (textView *TextViewInstance) GetHAdjustment() Adjustment {
-	var carg0 *C.GtkTextView   // in, none, converted
-	var cret  *C.GtkAdjustment // return, none, converted
-
-	carg0 = (*C.GtkTextView)(UnsafeTextViewToGlibNone(textView))
-
-	cret = C.gtk_text_view_get_hadjustment(carg0)
-	runtime.KeepAlive(textView)
-
-	var goret Adjustment
-
-	goret = UnsafeAdjustmentFromGlibNone(unsafe.Pointer(cret))
-
-	return goret
-}
-
 // GetIndent wraps gtk_text_view_get_indent
 // The function returns the following values:
 // 
@@ -105092,30 +90674,6 @@ func (textView *TextViewInstance) GetTopMargin() int {
 	return goret
 }
 
-// GetVAdjustment wraps gtk_text_view_get_vadjustment
-// The function returns the following values:
-// 
-// 	- goret Adjustment 
-//
-// Gets the vertical-scrolling #GtkAdjustment.
-//
-// Deprecated: (since 3.0.0) Use gtk_scrollable_get_vadjustment()
-func (textView *TextViewInstance) GetVAdjustment() Adjustment {
-	var carg0 *C.GtkTextView   // in, none, converted
-	var cret  *C.GtkAdjustment // return, none, converted
-
-	carg0 = (*C.GtkTextView)(UnsafeTextViewToGlibNone(textView))
-
-	cret = C.gtk_text_view_get_vadjustment(carg0)
-	runtime.KeepAlive(textView)
-
-	var goret Adjustment
-
-	goret = UnsafeAdjustmentFromGlibNone(unsafe.Pointer(cret))
-
-	return goret
-}
-
 // GetVisibleRect wraps gtk_text_view_get_visible_rect
 // The function returns the following values:
 // 
@@ -105142,7 +90700,7 @@ func (textView *TextViewInstance) GetVisibleRect() gdk.Rectangle {
 	return visibleRect
 }
 
-// GetWindow wraps gtk_text_view_get_window
+// GetTextViewWindow wraps gtk_text_view_get_window
 // 
 // The function takes the following parameters:
 // 
@@ -105158,7 +90716,7 @@ func (textView *TextViewInstance) GetVisibleRect() gdk.Rectangle {
 // text buffer. Windows are %NULL and nonexistent if their width or
 // height is 0, and are nonexistent before the widget has been
 // realized.
-func (textView *TextViewInstance) GetWindow(win TextWindowType) gdk.Window {
+func (textView *TextViewInstance) GetTextViewWindow(win TextWindowType) gdk.Window {
 	var carg0 *C.GtkTextView      // in, none, converted
 	var carg1 C.GtkTextWindowType // in, none, casted
 	var cret  *C.GdkWindow        // return, none, converted
@@ -106583,7 +92141,7 @@ func (group *ToolItemGroupInstance) GetLabel() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -106996,15 +92554,6 @@ type ToolPalette interface {
 	// Gets the position of @group in @palette as index.
 	// See gtk_tool_palette_set_group_position().
 	GetGroupPosition(ToolItemGroup) int
-	// GetHAdjustment wraps gtk_tool_palette_get_hadjustment
-	// The function returns the following values:
-	// 
-	// 	- goret Adjustment 
-	//
-	// Gets the horizontal adjustment of the tool palette.
-	//
-	// Deprecated: (since 3.0.0) Use gtk_scrollable_get_hadjustment()
-	GetHAdjustment() Adjustment
 	// GetIconSize wraps gtk_tool_palette_get_icon_size
 	// The function returns the following values:
 	// 
@@ -107020,15 +92569,6 @@ type ToolPalette interface {
 	//
 	// Gets the style (icons, text or both) of items in the tool palette.
 	GetStyle() ToolbarStyle
-	// GetVAdjustment wraps gtk_tool_palette_get_vadjustment
-	// The function returns the following values:
-	// 
-	// 	- goret Adjustment 
-	//
-	// Gets the vertical adjustment of the tool palette.
-	//
-	// Deprecated: (since 3.0.0) Use gtk_scrollable_get_vadjustment()
-	GetVAdjustment() Adjustment
 	// SetDragSource wraps gtk_tool_palette_set_drag_source
 	// 
 	// The function takes the following parameters:
@@ -107438,30 +92978,6 @@ func (palette *ToolPaletteInstance) GetGroupPosition(group ToolItemGroup) int {
 	return goret
 }
 
-// GetHAdjustment wraps gtk_tool_palette_get_hadjustment
-// The function returns the following values:
-// 
-// 	- goret Adjustment 
-//
-// Gets the horizontal adjustment of the tool palette.
-//
-// Deprecated: (since 3.0.0) Use gtk_scrollable_get_hadjustment()
-func (palette *ToolPaletteInstance) GetHAdjustment() Adjustment {
-	var carg0 *C.GtkToolPalette // in, none, converted
-	var cret  *C.GtkAdjustment  // return, none, converted
-
-	carg0 = (*C.GtkToolPalette)(UnsafeToolPaletteToGlibNone(palette))
-
-	cret = C.gtk_tool_palette_get_hadjustment(carg0)
-	runtime.KeepAlive(palette)
-
-	var goret Adjustment
-
-	goret = UnsafeAdjustmentFromGlibNone(unsafe.Pointer(cret))
-
-	return goret
-}
-
 // GetIconSize wraps gtk_tool_palette_get_icon_size
 // The function returns the following values:
 // 
@@ -107503,30 +93019,6 @@ func (palette *ToolPaletteInstance) GetStyle() ToolbarStyle {
 	var goret ToolbarStyle
 
 	goret = ToolbarStyle(cret)
-
-	return goret
-}
-
-// GetVAdjustment wraps gtk_tool_palette_get_vadjustment
-// The function returns the following values:
-// 
-// 	- goret Adjustment 
-//
-// Gets the vertical adjustment of the tool palette.
-//
-// Deprecated: (since 3.0.0) Use gtk_scrollable_get_vadjustment()
-func (palette *ToolPaletteInstance) GetVAdjustment() Adjustment {
-	var carg0 *C.GtkToolPalette // in, none, converted
-	var cret  *C.GtkAdjustment  // return, none, converted
-
-	carg0 = (*C.GtkToolPalette)(UnsafeToolPaletteToGlibNone(palette))
-
-	cret = C.gtk_tool_palette_get_vadjustment(carg0)
-	runtime.KeepAlive(palette)
-
-	var goret Adjustment
-
-	goret = UnsafeAdjustmentFromGlibNone(unsafe.Pointer(cret))
 
 	return goret
 }
@@ -108752,15 +94244,6 @@ type TreeView interface {
 	//
 	// Returns which grid lines are enabled in @tree_view.
 	GetGridLines() TreeViewGridLines
-	// GetHAdjustment wraps gtk_tree_view_get_hadjustment
-	// The function returns the following values:
-	// 
-	// 	- goret Adjustment 
-	//
-	// Gets the #GtkAdjustment currently being used for the horizontal aspect.
-	//
-	// Deprecated: (since 3.0.0) Use gtk_scrollable_get_hadjustment()
-	GetHAdjustment() Adjustment
 	// GetHeadersClickable wraps gtk_tree_view_get_headers_clickable
 	// The function returns the following values:
 	// 
@@ -108866,15 +94349,6 @@ type TreeView interface {
 	// selection mode is #GTK_SELECTION_MULTIPLE, rubber banding will allow the
 	// user to select multiple rows by dragging the mouse.
 	GetRubberBanding() bool
-	// GetRulesHint wraps gtk_tree_view_get_rules_hint
-	// The function returns the following values:
-	// 
-	// 	- goret bool 
-	//
-	// Gets the setting set by gtk_tree_view_set_rules_hint().
-	//
-	// Deprecated: (since 3.14.0) 
-	GetRulesHint() bool
 	// GetSearchColumn wraps gtk_tree_view_get_search_column
 	// The function returns the following values:
 	// 
@@ -108913,15 +94387,6 @@ type TreeView interface {
 	// Returns the column of @tree_view’s model which is being used for
 	// displaying tooltips on @tree_view’s rows.
 	GetTooltipColumn() int
-	// GetVAdjustment wraps gtk_tree_view_get_vadjustment
-	// The function returns the following values:
-	// 
-	// 	- goret Adjustment 
-	//
-	// Gets the #GtkAdjustment currently being used for the vertical aspect.
-	//
-	// Deprecated: (since 3.0.0) Use gtk_scrollable_get_vadjustment()
-	GetVAdjustment() Adjustment
 	// GetVisibleRange wraps gtk_tree_view_get_visible_range
 	// The function returns the following values:
 	// 
@@ -109189,18 +94654,6 @@ type TreeView interface {
 	// If @path is invalid for @model, the current cursor (if any) will be unset
 	// and the function will return without failing.
 	SetCursorOnCell(*TreePath, TreeViewColumn, CellRenderer, bool)
-	// SetDestroyCountFunc wraps gtk_tree_view_set_destroy_count_func
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- fn TreeDestroyCountFunc (nullable): Function to be called when a view row is destroyed, or %NULL 
-	//
-	// This function should almost never be used.  It is meant for private use by
-	// ATK for determining the number of visible children that are removed when the
-	// user collapses a row, or a row is deleted.
-	//
-	// Deprecated: (since 3.4.0) Accessibility does not need the function anymore.
-	SetDestroyCountFunc(TreeDestroyCountFunc)
 	// SetDragDestRow wraps gtk_tree_view_set_drag_dest_row
 	// 
 	// The function takes the following parameters:
@@ -109266,16 +94719,6 @@ type TreeView interface {
 	//
 	// Sets which grid lines to draw in @tree_view.
 	SetGridLines(TreeViewGridLines)
-	// SetHAdjustment wraps gtk_tree_view_set_hadjustment
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- adjustment Adjustment (nullable): The #GtkAdjustment to set, or %NULL 
-	//
-	// Sets the #GtkAdjustment for the current horizontal aspect.
-	//
-	// Deprecated: (since 3.0.0) Use gtk_scrollable_set_hadjustment()
-	SetHAdjustment(Adjustment)
 	// SetHeadersClickable wraps gtk_tree_view_set_headers_clickable
 	// 
 	// The function takes the following parameters:
@@ -109376,30 +94819,6 @@ type TreeView interface {
 	// is #GTK_SELECTION_MULTIPLE, rubber banding will allow the user to select
 	// multiple rows by dragging the mouse.
 	SetRubberBanding(bool)
-	// SetRulesHint wraps gtk_tree_view_set_rules_hint
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- setting bool: %TRUE if the tree requires reading across rows 
-	//
-	// Sets a hint for the theme to draw even/odd rows in the @tree_view
-	// with different colors, also known as "zebra striping".
-	// 
-	// This function tells the GTK+ theme that the user interface for your
-	// application requires users to read across tree rows and associate
-	// cells with one another.
-	// 
-	// Do not use it just because you prefer the appearance of the ruled
-	// tree; that’s a question for the theme. Some themes will draw tree
-	// rows in alternating colors even when rules are turned off, and
-	// users who prefer that appearance all the time can choose those
-	// themes. You should call this function only as a semantic hint to
-	// the theme engine that your tree makes alternating colors useful
-	// from a functional standpoint (since it has lots of columns,
-	// generally).
-	//
-	// Deprecated: (since 3.14.0) 
-	SetRulesHint(bool)
 	// SetSearchColumn wraps gtk_tree_view_set_search_column
 	// 
 	// The function takes the following parameters:
@@ -109510,16 +94929,6 @@ type TreeView interface {
 	// See also gtk_tree_view_set_tooltip_column() for a simpler alternative.
 	// See also gtk_tooltip_set_tip_area().
 	SetTooltipRow(Tooltip, *TreePath)
-	// SetVAdjustment wraps gtk_tree_view_set_vadjustment
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- adjustment Adjustment (nullable): The #GtkAdjustment to set, or %NULL 
-	//
-	// Sets the #GtkAdjustment for the current vertical aspect.
-	//
-	// Deprecated: (since 3.0.0) Use gtk_scrollable_set_vadjustment()
-	SetVAdjustment(Adjustment)
 	// UnsetRowsDragDest wraps gtk_tree_view_unset_rows_drag_dest
 	//
 	// Undoes the effect of
@@ -110492,30 +95901,6 @@ func (treeView *TreeViewInstance) GetGridLines() TreeViewGridLines {
 	return goret
 }
 
-// GetHAdjustment wraps gtk_tree_view_get_hadjustment
-// The function returns the following values:
-// 
-// 	- goret Adjustment 
-//
-// Gets the #GtkAdjustment currently being used for the horizontal aspect.
-//
-// Deprecated: (since 3.0.0) Use gtk_scrollable_get_hadjustment()
-func (treeView *TreeViewInstance) GetHAdjustment() Adjustment {
-	var carg0 *C.GtkTreeView   // in, none, converted
-	var cret  *C.GtkAdjustment // return, none, converted
-
-	carg0 = (*C.GtkTreeView)(UnsafeTreeViewToGlibNone(treeView))
-
-	cret = C.gtk_tree_view_get_hadjustment(carg0)
-	runtime.KeepAlive(treeView)
-
-	var goret Adjustment
-
-	goret = UnsafeAdjustmentFromGlibNone(unsafe.Pointer(cret))
-
-	return goret
-}
-
 // GetHeadersClickable wraps gtk_tree_view_get_headers_clickable
 // The function returns the following values:
 // 
@@ -110807,32 +96192,6 @@ func (treeView *TreeViewInstance) GetRubberBanding() bool {
 	return goret
 }
 
-// GetRulesHint wraps gtk_tree_view_get_rules_hint
-// The function returns the following values:
-// 
-// 	- goret bool 
-//
-// Gets the setting set by gtk_tree_view_set_rules_hint().
-//
-// Deprecated: (since 3.14.0) 
-func (treeView *TreeViewInstance) GetRulesHint() bool {
-	var carg0 *C.GtkTreeView // in, none, converted
-	var cret  C.gboolean     // return
-
-	carg0 = (*C.GtkTreeView)(UnsafeTreeViewToGlibNone(treeView))
-
-	cret = C.gtk_tree_view_get_rules_hint(carg0)
-	runtime.KeepAlive(treeView)
-
-	var goret bool
-
-	if cret != 0 {
-		goret = true
-	}
-
-	return goret
-}
-
 // GetSearchColumn wraps gtk_tree_view_get_search_column
 // The function returns the following values:
 // 
@@ -110944,30 +96303,6 @@ func (treeView *TreeViewInstance) GetTooltipColumn() int {
 	var goret int
 
 	goret = int(cret)
-
-	return goret
-}
-
-// GetVAdjustment wraps gtk_tree_view_get_vadjustment
-// The function returns the following values:
-// 
-// 	- goret Adjustment 
-//
-// Gets the #GtkAdjustment currently being used for the vertical aspect.
-//
-// Deprecated: (since 3.0.0) Use gtk_scrollable_get_vadjustment()
-func (treeView *TreeViewInstance) GetVAdjustment() Adjustment {
-	var carg0 *C.GtkTreeView   // in, none, converted
-	var cret  *C.GtkAdjustment // return, none, converted
-
-	carg0 = (*C.GtkTreeView)(UnsafeTreeViewToGlibNone(treeView))
-
-	cret = C.gtk_tree_view_get_vadjustment(carg0)
-	runtime.KeepAlive(treeView)
-
-	var goret Adjustment
-
-	goret = UnsafeAdjustmentFromGlibNone(unsafe.Pointer(cret))
 
 	return goret
 }
@@ -111590,35 +96925,6 @@ func (treeView *TreeViewInstance) SetCursorOnCell(path *TreePath, focusColumn Tr
 	runtime.KeepAlive(startEditing)
 }
 
-// SetDestroyCountFunc wraps gtk_tree_view_set_destroy_count_func
-// 
-// The function takes the following parameters:
-// 
-// 	- fn TreeDestroyCountFunc (nullable): Function to be called when a view row is destroyed, or %NULL 
-//
-// This function should almost never be used.  It is meant for private use by
-// ATK for determining the number of visible children that are removed when the
-// user collapses a row, or a row is deleted.
-//
-// Deprecated: (since 3.4.0) Accessibility does not need the function anymore.
-func (treeView *TreeViewInstance) SetDestroyCountFunc(fn TreeDestroyCountFunc) {
-	var carg0 *C.GtkTreeView            // in, none, converted
-	var carg1 C.GtkTreeDestroyCountFunc // callback, scope: notified, closure: carg2, destroy: carg3, nullable
-	var carg2 C.gpointer                // implicit
-	var carg3 C.GDestroyNotify          // implicit
-
-	carg0 = (*C.GtkTreeView)(UnsafeTreeViewToGlibNone(treeView))
-	if fn != nil {
-		carg1 = (*[0]byte)(C._gotk4_gtk3_TreeDestroyCountFunc)
-		carg2 = C.gpointer(gbox.Assign(fn))
-		carg3 = (C.GDestroyNotify)((*[0]byte)(C.callbackDelete))
-	}
-
-	C.gtk_tree_view_set_destroy_count_func(carg0, carg1, carg2, carg3)
-	runtime.KeepAlive(treeView)
-	runtime.KeepAlive(fn)
-}
-
 // SetDragDestRow wraps gtk_tree_view_set_drag_dest_row
 // 
 // The function takes the following parameters:
@@ -111761,29 +97067,6 @@ func (treeView *TreeViewInstance) SetGridLines(gridLines TreeViewGridLines) {
 	C.gtk_tree_view_set_grid_lines(carg0, carg1)
 	runtime.KeepAlive(treeView)
 	runtime.KeepAlive(gridLines)
-}
-
-// SetHAdjustment wraps gtk_tree_view_set_hadjustment
-// 
-// The function takes the following parameters:
-// 
-// 	- adjustment Adjustment (nullable): The #GtkAdjustment to set, or %NULL 
-//
-// Sets the #GtkAdjustment for the current horizontal aspect.
-//
-// Deprecated: (since 3.0.0) Use gtk_scrollable_set_hadjustment()
-func (treeView *TreeViewInstance) SetHAdjustment(adjustment Adjustment) {
-	var carg0 *C.GtkTreeView   // in, none, converted
-	var carg1 *C.GtkAdjustment // in, none, converted, nullable
-
-	carg0 = (*C.GtkTreeView)(UnsafeTreeViewToGlibNone(treeView))
-	if adjustment != nil {
-		carg1 = (*C.GtkAdjustment)(UnsafeAdjustmentToGlibNone(adjustment))
-	}
-
-	C.gtk_tree_view_set_hadjustment(carg0, carg1)
-	runtime.KeepAlive(treeView)
-	runtime.KeepAlive(adjustment)
 }
 
 // SetHeadersClickable wraps gtk_tree_view_set_headers_clickable
@@ -112003,43 +97286,6 @@ func (treeView *TreeViewInstance) SetRubberBanding(enable bool) {
 	C.gtk_tree_view_set_rubber_banding(carg0, carg1)
 	runtime.KeepAlive(treeView)
 	runtime.KeepAlive(enable)
-}
-
-// SetRulesHint wraps gtk_tree_view_set_rules_hint
-// 
-// The function takes the following parameters:
-// 
-// 	- setting bool: %TRUE if the tree requires reading across rows 
-//
-// Sets a hint for the theme to draw even/odd rows in the @tree_view
-// with different colors, also known as "zebra striping".
-// 
-// This function tells the GTK+ theme that the user interface for your
-// application requires users to read across tree rows and associate
-// cells with one another.
-// 
-// Do not use it just because you prefer the appearance of the ruled
-// tree; that’s a question for the theme. Some themes will draw tree
-// rows in alternating colors even when rules are turned off, and
-// users who prefer that appearance all the time can choose those
-// themes. You should call this function only as a semantic hint to
-// the theme engine that your tree makes alternating colors useful
-// from a functional standpoint (since it has lots of columns,
-// generally).
-//
-// Deprecated: (since 3.14.0) 
-func (treeView *TreeViewInstance) SetRulesHint(setting bool) {
-	var carg0 *C.GtkTreeView // in, none, converted
-	var carg1 C.gboolean     // in
-
-	carg0 = (*C.GtkTreeView)(UnsafeTreeViewToGlibNone(treeView))
-	if setting {
-		carg1 = C.TRUE
-	}
-
-	C.gtk_tree_view_set_rules_hint(carg0, carg1)
-	runtime.KeepAlive(treeView)
-	runtime.KeepAlive(setting)
 }
 
 // SetSearchColumn wraps gtk_tree_view_set_search_column
@@ -112272,29 +97518,6 @@ func (treeView *TreeViewInstance) SetTooltipRow(tooltip Tooltip, path *TreePath)
 	runtime.KeepAlive(path)
 }
 
-// SetVAdjustment wraps gtk_tree_view_set_vadjustment
-// 
-// The function takes the following parameters:
-// 
-// 	- adjustment Adjustment (nullable): The #GtkAdjustment to set, or %NULL 
-//
-// Sets the #GtkAdjustment for the current vertical aspect.
-//
-// Deprecated: (since 3.0.0) Use gtk_scrollable_set_vadjustment()
-func (treeView *TreeViewInstance) SetVAdjustment(adjustment Adjustment) {
-	var carg0 *C.GtkTreeView   // in, none, converted
-	var carg1 *C.GtkAdjustment // in, none, converted, nullable
-
-	carg0 = (*C.GtkTreeView)(UnsafeTreeViewToGlibNone(treeView))
-	if adjustment != nil {
-		carg1 = (*C.GtkAdjustment)(UnsafeAdjustmentToGlibNone(adjustment))
-	}
-
-	C.gtk_tree_view_set_vadjustment(carg0, carg1)
-	runtime.KeepAlive(treeView)
-	runtime.KeepAlive(adjustment)
-}
-
 // UnsetRowsDragDest wraps gtk_tree_view_unset_rows_drag_dest
 //
 // Undoes the effect of
@@ -112470,26 +97693,6 @@ func UnsafeVPanedToGlibFull(c VPaned) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewVPanedInstance wraps gtk_vpaned_new
-// The function returns the following values:
-// 
-// 	- goret Widget 
-//
-// Create a new #GtkVPaned
-//
-// Deprecated: (since 3.2.0) Use gtk_paned_new() with %GTK_ORIENTATION_VERTICAL instead
-func NewVPanedInstance() Widget {
-	var cret *C.GtkWidget // return, none, converted
-
-	cret = C.gtk_vpaned_new()
-
-	var goret Widget
-
-	goret = UnsafeWidgetFromGlibNone(unsafe.Pointer(cret))
-
-	return goret
-}
-
 // VScaleInstance is the instance type used by all types extending GtkVScale. It is used internally by the bindings. Users should use the interface [VScale] instead.
 type VScaleInstance struct {
 	_ [0]func() // equal guard
@@ -112561,79 +97764,6 @@ func UnsafeVScaleToGlibNone(c VScale) unsafe.Pointer {
 // UnsafeVScaleToGlibFull is used to convert the instance to it's C value GtkVScale, while removeing the finalizer. This is used by the bindings internally.
 func UnsafeVScaleToGlibFull(c VScale) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
-}
-
-// NewVScaleInstance wraps gtk_vscale_new
-// 
-// The function takes the following parameters:
-// 
-// 	- adjustment Adjustment: the #GtkAdjustment which sets the range of the scale. 
-// 
-// The function returns the following values:
-// 
-// 	- goret Widget 
-//
-// Creates a new #GtkVScale.
-//
-// Deprecated: (since 3.2.0) Use gtk_scale_new() with %GTK_ORIENTATION_VERTICAL instead
-func NewVScaleInstance(adjustment Adjustment) Widget {
-	var carg1 *C.GtkAdjustment // in, none, converted
-	var cret  *C.GtkWidget     // return, none, converted
-
-	carg1 = (*C.GtkAdjustment)(UnsafeAdjustmentToGlibNone(adjustment))
-
-	cret = C.gtk_vscale_new(carg1)
-	runtime.KeepAlive(adjustment)
-
-	var goret Widget
-
-	goret = UnsafeWidgetFromGlibNone(unsafe.Pointer(cret))
-
-	return goret
-}
-
-// NewVScaleInstanceWithRange wraps gtk_vscale_new_with_range
-// 
-// The function takes the following parameters:
-// 
-// 	- min float64: minimum value 
-// 	- max float64: maximum value 
-// 	- step float64: step increment (tick size) used with keyboard shortcuts 
-// 
-// The function returns the following values:
-// 
-// 	- goret Widget 
-//
-// Creates a new vertical scale widget that lets the user input a
-// number between @min and @max (including @min and @max) with the
-// increment @step.  @step must be nonzero; it’s the distance the
-// slider moves when using the arrow keys to adjust the scale value.
-// 
-// Note that the way in which the precision is derived works best if @step
-// is a power of ten. If the resulting precision is not suitable for your
-// needs, use gtk_scale_set_digits() to correct it.
-//
-// Deprecated: (since 3.2.0) Use gtk_scale_new_with_range() with %GTK_ORIENTATION_VERTICAL instead
-func NewVScaleInstanceWithRange(min float64, max float64, step float64) Widget {
-	var carg1 C.gdouble    // in, none, casted
-	var carg2 C.gdouble    // in, none, casted
-	var carg3 C.gdouble    // in, none, casted
-	var cret  *C.GtkWidget // return, none, converted
-
-	carg1 = C.gdouble(min)
-	carg2 = C.gdouble(max)
-	carg3 = C.gdouble(step)
-
-	cret = C.gtk_vscale_new_with_range(carg1, carg2, carg3)
-	runtime.KeepAlive(min)
-	runtime.KeepAlive(max)
-	runtime.KeepAlive(step)
-
-	var goret Widget
-
-	goret = UnsafeWidgetFromGlibNone(unsafe.Pointer(cret))
-
-	return goret
 }
 
 // VScrollbarInstance is the instance type used by all types extending GtkVScrollbar. It is used internally by the bindings. Users should use the interface [VScrollbar] instead.
@@ -112710,37 +97840,6 @@ func UnsafeVScrollbarToGlibFull(c VScrollbar) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewVScrollbarInstance wraps gtk_vscrollbar_new
-// 
-// The function takes the following parameters:
-// 
-// 	- adjustment Adjustment (nullable): the #GtkAdjustment to use, or %NULL to create a new adjustment 
-// 
-// The function returns the following values:
-// 
-// 	- goret Widget 
-//
-// Creates a new vertical scrollbar.
-//
-// Deprecated: (since 3.2.0) Use gtk_scrollbar_new() with %GTK_ORIENTATION_VERTICAL instead
-func NewVScrollbarInstance(adjustment Adjustment) Widget {
-	var carg1 *C.GtkAdjustment // in, none, converted, nullable
-	var cret  *C.GtkWidget     // return, none, converted
-
-	if adjustment != nil {
-		carg1 = (*C.GtkAdjustment)(UnsafeAdjustmentToGlibNone(adjustment))
-	}
-
-	cret = C.gtk_vscrollbar_new(carg1)
-	runtime.KeepAlive(adjustment)
-
-	var goret Widget
-
-	goret = UnsafeWidgetFromGlibNone(unsafe.Pointer(cret))
-
-	return goret
-}
-
 // VSeparatorInstance is the instance type used by all types extending GtkVSeparator. It is used internally by the bindings. Users should use the interface [VSeparator] instead.
 type VSeparatorInstance struct {
 	_ [0]func() // equal guard
@@ -112808,26 +97907,6 @@ func UnsafeVSeparatorToGlibNone(c VSeparator) unsafe.Pointer {
 // UnsafeVSeparatorToGlibFull is used to convert the instance to it's C value GtkVSeparator, while removeing the finalizer. This is used by the bindings internally.
 func UnsafeVSeparatorToGlibFull(c VSeparator) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
-}
-
-// NewVSeparatorInstance wraps gtk_vseparator_new
-// The function returns the following values:
-// 
-// 	- goret Widget 
-//
-// Creates a new #GtkVSeparator.
-//
-// Deprecated: (since 3.2.0) Use gtk_separator_new() with %GTK_ORIENTATION_VERTICAL instead
-func NewVSeparatorInstance() Widget {
-	var cret *C.GtkWidget // return, none, converted
-
-	cret = C.gtk_vseparator_new()
-
-	var goret Widget
-
-	goret = UnsafeWidgetFromGlibNone(unsafe.Pointer(cret))
-
-	return goret
 }
 
 // WindowAccessibleInstance is the instance type used by all types extending GtkWindowAccessible. It is used internally by the bindings. Users should use the interface [WindowAccessible] instead.
@@ -112928,18 +98007,6 @@ var _ Arrow = (*ArrowInstance)(nil)
 type Arrow interface {
 	Misc
 	upcastToGtkArrow() *ArrowInstance
-
-	// Set wraps gtk_arrow_set
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- arrowType ArrowType: a valid #GtkArrowType. 
-	// 	- shadowType ShadowType: a valid #GtkShadowType. 
-	//
-	// Sets the direction and style of the #GtkArrow, @arrow.
-	//
-	// Deprecated: (since 3.14.0) Use a #GtkImage with a suitable icon.
-	Set(ArrowType, ShadowType)
 }
 
 func unsafeWrapArrow(base *gobject.ObjectInstance) *ArrowInstance {
@@ -112986,64 +98053,6 @@ func UnsafeArrowToGlibNone(c Arrow) unsafe.Pointer {
 // UnsafeArrowToGlibFull is used to convert the instance to it's C value GtkArrow, while removeing the finalizer. This is used by the bindings internally.
 func UnsafeArrowToGlibFull(c Arrow) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
-}
-
-// NewArrowInstance wraps gtk_arrow_new
-// 
-// The function takes the following parameters:
-// 
-// 	- arrowType ArrowType: a valid #GtkArrowType. 
-// 	- shadowType ShadowType: a valid #GtkShadowType. 
-// 
-// The function returns the following values:
-// 
-// 	- goret Widget 
-//
-// Creates a new #GtkArrow widget.
-//
-// Deprecated: (since 3.14.0) Use a #GtkImage with a suitable icon.
-func NewArrowInstance(arrowType ArrowType, shadowType ShadowType) Widget {
-	var carg1 C.GtkArrowType  // in, none, casted
-	var carg2 C.GtkShadowType // in, none, casted
-	var cret  *C.GtkWidget    // return, none, converted
-
-	carg1 = C.GtkArrowType(arrowType)
-	carg2 = C.GtkShadowType(shadowType)
-
-	cret = C.gtk_arrow_new(carg1, carg2)
-	runtime.KeepAlive(arrowType)
-	runtime.KeepAlive(shadowType)
-
-	var goret Widget
-
-	goret = UnsafeWidgetFromGlibNone(unsafe.Pointer(cret))
-
-	return goret
-}
-
-// Set wraps gtk_arrow_set
-// 
-// The function takes the following parameters:
-// 
-// 	- arrowType ArrowType: a valid #GtkArrowType. 
-// 	- shadowType ShadowType: a valid #GtkShadowType. 
-//
-// Sets the direction and style of the #GtkArrow, @arrow.
-//
-// Deprecated: (since 3.14.0) Use a #GtkImage with a suitable icon.
-func (arrow *ArrowInstance) Set(arrowType ArrowType, shadowType ShadowType) {
-	var carg0 *C.GtkArrow     // in, none, converted
-	var carg1 C.GtkArrowType  // in, none, casted
-	var carg2 C.GtkShadowType // in, none, casted
-
-	carg0 = (*C.GtkArrow)(UnsafeArrowToGlibNone(arrow))
-	carg1 = C.GtkArrowType(arrowType)
-	carg2 = C.GtkShadowType(shadowType)
-
-	C.gtk_arrow_set(carg0, carg1, carg2)
-	runtime.KeepAlive(arrow)
-	runtime.KeepAlive(arrowType)
-	runtime.KeepAlive(shadowType)
 }
 
 // BinInstance is the instance type used by all types extending GtkBin. It is used internally by the bindings. Users should use the interface [Bin] instead.
@@ -113867,7 +98876,6 @@ type ButtonInstance struct {
 	BinInstance
 	// implemented interfaces:
 	ActionableInstance
-	ActivatableInstance
 }
 
 var _ Button = (*ButtonInstance)(nil)
@@ -113899,30 +98907,12 @@ var _ Button = (*ButtonInstance)(nil)
 type Button interface {
 	Bin
 	Actionable
-	Activatable
 	upcastToGtkButton() *ButtonInstance
 
 	// Clicked wraps gtk_button_clicked
 	//
 	// Emits a #GtkButton::clicked signal to the given #GtkButton.
 	Clicked()
-	// Enter wraps gtk_button_enter
-	//
-	// Emits a #GtkButton::enter signal to the given #GtkButton.
-	//
-	// Deprecated: (since 2.20.0) Use the #GtkWidget::enter-notify-event signal.
-	Enter()
-	// GetAlignment wraps gtk_button_get_alignment
-	// The function returns the following values:
-	// 
-	// 	- xalign float32: return location for horizontal alignment 
-	// 	- yalign float32: return location for vertical alignment 
-	//
-	// Gets the alignment of the child in the button.
-	//
-	// Deprecated: (since 3.14.0) Access the child widget directly if you need to control
-	// its alignment.
-	GetAlignment() (float32, float32)
 	// GetAlwaysShowImage wraps gtk_button_get_always_show_image
 	// The function returns the following values:
 	// 
@@ -113939,16 +98929,6 @@ type Button interface {
 	// Returns the button’s event window if it is realized, %NULL otherwise.
 	// This function should be rarely needed.
 	GetEventWindow() gdk.Window
-	// GetFocusOnClick wraps gtk_button_get_focus_on_click
-	// The function returns the following values:
-	// 
-	// 	- goret bool 
-	//
-	// Returns whether the button grabs focus when it is clicked with the mouse.
-	// See gtk_button_set_focus_on_click().
-	//
-	// Deprecated: (since 3.20.0) Use gtk_widget_get_focus_on_click() instead
-	GetFocusOnClick() bool
 	// GetImage wraps gtk_button_get_image
 	// The function returns the following values:
 	// 
@@ -113984,15 +98964,6 @@ type Button interface {
 	//
 	// Returns the current relief style of the given #GtkButton.
 	GetRelief() ReliefStyle
-	// GetUseStock wraps gtk_button_get_use_stock
-	// The function returns the following values:
-	// 
-	// 	- goret bool 
-	//
-	// Returns whether the button label is a stock item.
-	//
-	// Deprecated: (since 3.10.0) 
-	GetUseStock() bool
 	// GetUseUnderline wraps gtk_button_get_use_underline
 	// The function returns the following values:
 	// 
@@ -114001,39 +98972,6 @@ type Button interface {
 	// Returns whether an embedded underline in the button label indicates a
 	// mnemonic. See gtk_button_set_use_underline ().
 	GetUseUnderline() bool
-	// Leave wraps gtk_button_leave
-	//
-	// Emits a #GtkButton::leave signal to the given #GtkButton.
-	//
-	// Deprecated: (since 2.20.0) Use the #GtkWidget::leave-notify-event signal.
-	Leave()
-	// Pressed wraps gtk_button_pressed
-	//
-	// Emits a #GtkButton::pressed signal to the given #GtkButton.
-	//
-	// Deprecated: (since 2.20.0) Use the #GtkWidget::button-press-event signal.
-	Pressed()
-	// Released wraps gtk_button_released
-	//
-	// Emits a #GtkButton::released signal to the given #GtkButton.
-	//
-	// Deprecated: (since 2.20.0) Use the #GtkWidget::button-release-event signal.
-	Released()
-	// SetAlignment wraps gtk_button_set_alignment
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- xalign float32: the horizontal position of the child, 0.0 is left aligned,
-	//   1.0 is right aligned 
-	// 	- yalign float32: the vertical position of the child, 0.0 is top aligned,
-	//   1.0 is bottom aligned 
-	//
-	// Sets the alignment of the child. This property has no effect unless
-	// the child is a #GtkMisc or a #GtkAlignment.
-	//
-	// Deprecated: (since 3.14.0) Access the child widget directly if you need to control
-	// its alignment.
-	SetAlignment(float32, float32)
 	// SetAlwaysShowImage wraps gtk_button_set_always_show_image
 	// 
 	// The function takes the following parameters:
@@ -114046,19 +98984,6 @@ type Button interface {
 	// Use this property if the button  would be useless or hard to use
 	// without the image.
 	SetAlwaysShowImage(bool)
-	// SetFocusOnClick wraps gtk_button_set_focus_on_click
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- focusOnClick bool: whether the button grabs focus when clicked with the mouse 
-	//
-	// Sets whether the button will grab focus when it is clicked with the mouse.
-	// Making mouse clicks not grab focus is useful in places like toolbars where
-	// you don’t want the keyboard focus removed from the main area of the
-	// application.
-	//
-	// Deprecated: (since 3.20.0) Use gtk_widget_set_focus_on_click() instead
-	SetFocusOnClick(bool)
 	// SetImage wraps gtk_button_set_image
 	// 
 	// The function takes the following parameters:
@@ -114103,17 +99028,6 @@ type Button interface {
 	// The deprecated value %GTK_RELIEF_HALF behaves the same as
 	// %GTK_RELIEF_NORMAL.
 	SetRelief(ReliefStyle)
-	// SetUseStock wraps gtk_button_set_use_stock
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- useStock bool: %TRUE if the button should use a stock item 
-	//
-	// If %TRUE, the label set on the button is used as a
-	// stock id to select the stock item for the button.
-	//
-	// Deprecated: (since 3.10.0) 
-	SetUseStock(bool)
 	// SetUseUnderline wraps gtk_button_set_use_underline
 	// 
 	// The function takes the following parameters:
@@ -114143,9 +99057,6 @@ func unsafeWrapButton(base *gobject.ObjectInstance) *ButtonInstance {
 			},
 		},
 		ActionableInstance: ActionableInstance{
-			Instance: *base,
-		},
-		ActivatableInstance: ActivatableInstance{
 			Instance: *base,
 		},
 	}
@@ -114239,43 +99150,6 @@ func NewButtonInstanceFromIconName(iconName string, size int) Widget {
 	return goret
 }
 
-// NewButtonInstanceFromStock wraps gtk_button_new_from_stock
-// 
-// The function takes the following parameters:
-// 
-// 	- stockId string: the name of the stock item 
-// 
-// The function returns the following values:
-// 
-// 	- goret Widget 
-//
-// Creates a new #GtkButton containing the image and text from a
-// [stock item][gtkstock].
-// Some stock ids have preprocessor macros like #GTK_STOCK_OK and
-// #GTK_STOCK_APPLY.
-// 
-// If @stock_id is unknown, then it will be treated as a mnemonic
-// label (as for gtk_button_new_with_mnemonic()).
-//
-// Deprecated: (since 3.10.0) Stock items are deprecated. Use gtk_button_new_with_label()
-// instead.
-func NewButtonInstanceFromStock(stockId string) Widget {
-	var carg1 *C.gchar     // in, none, string, casted *C.gchar
-	var cret  *C.GtkWidget // return, none, converted
-
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(stockId)))
-	defer C.free(unsafe.Pointer(carg1))
-
-	cret = C.gtk_button_new_from_stock(carg1)
-	runtime.KeepAlive(stockId)
-
-	var goret Widget
-
-	goret = UnsafeWidgetFromGlibNone(unsafe.Pointer(cret))
-
-	return goret
-}
-
 // NewButtonInstanceWithLabel wraps gtk_button_new_with_label
 // 
 // The function takes the following parameters:
@@ -114351,49 +99225,6 @@ func (button *ButtonInstance) Clicked() {
 	runtime.KeepAlive(button)
 }
 
-// Enter wraps gtk_button_enter
-//
-// Emits a #GtkButton::enter signal to the given #GtkButton.
-//
-// Deprecated: (since 2.20.0) Use the #GtkWidget::enter-notify-event signal.
-func (button *ButtonInstance) Enter() {
-	var carg0 *C.GtkButton // in, none, converted
-
-	carg0 = (*C.GtkButton)(UnsafeButtonToGlibNone(button))
-
-	C.gtk_button_enter(carg0)
-	runtime.KeepAlive(button)
-}
-
-// GetAlignment wraps gtk_button_get_alignment
-// The function returns the following values:
-// 
-// 	- xalign float32: return location for horizontal alignment 
-// 	- yalign float32: return location for vertical alignment 
-//
-// Gets the alignment of the child in the button.
-//
-// Deprecated: (since 3.14.0) Access the child widget directly if you need to control
-// its alignment.
-func (button *ButtonInstance) GetAlignment() (float32, float32) {
-	var carg0 *C.GtkButton // in, none, converted
-	var carg1 C.gfloat     // out, full, casted
-	var carg2 C.gfloat     // out, full, casted
-
-	carg0 = (*C.GtkButton)(UnsafeButtonToGlibNone(button))
-
-	C.gtk_button_get_alignment(carg0, &carg1, &carg2)
-	runtime.KeepAlive(button)
-
-	var xalign float32
-	var yalign float32
-
-	xalign = float32(carg1)
-	yalign = float32(carg2)
-
-	return xalign, yalign
-}
-
 // GetAlwaysShowImage wraps gtk_button_get_always_show_image
 // The function returns the following values:
 // 
@@ -114438,33 +99269,6 @@ func (button *ButtonInstance) GetEventWindow() gdk.Window {
 	var goret gdk.Window
 
 	goret = gdk.UnsafeWindowFromGlibNone(unsafe.Pointer(cret))
-
-	return goret
-}
-
-// GetFocusOnClick wraps gtk_button_get_focus_on_click
-// The function returns the following values:
-// 
-// 	- goret bool 
-//
-// Returns whether the button grabs focus when it is clicked with the mouse.
-// See gtk_button_set_focus_on_click().
-//
-// Deprecated: (since 3.20.0) Use gtk_widget_get_focus_on_click() instead
-func (button *ButtonInstance) GetFocusOnClick() bool {
-	var carg0 *C.GtkButton // in, none, converted
-	var cret  C.gboolean   // return
-
-	carg0 = (*C.GtkButton)(UnsafeButtonToGlibNone(button))
-
-	cret = C.gtk_button_get_focus_on_click(carg0)
-	runtime.KeepAlive(button)
-
-	var goret bool
-
-	if cret != 0 {
-		goret = true
-	}
 
 	return goret
 }
@@ -114537,7 +99341,7 @@ func (button *ButtonInstance) GetLabel() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -114560,32 +99364,6 @@ func (button *ButtonInstance) GetRelief() ReliefStyle {
 	var goret ReliefStyle
 
 	goret = ReliefStyle(cret)
-
-	return goret
-}
-
-// GetUseStock wraps gtk_button_get_use_stock
-// The function returns the following values:
-// 
-// 	- goret bool 
-//
-// Returns whether the button label is a stock item.
-//
-// Deprecated: (since 3.10.0) 
-func (button *ButtonInstance) GetUseStock() bool {
-	var carg0 *C.GtkButton // in, none, converted
-	var cret  C.gboolean   // return
-
-	carg0 = (*C.GtkButton)(UnsafeButtonToGlibNone(button))
-
-	cret = C.gtk_button_get_use_stock(carg0)
-	runtime.KeepAlive(button)
-
-	var goret bool
-
-	if cret != 0 {
-		goret = true
-	}
 
 	return goret
 }
@@ -114615,77 +99393,6 @@ func (button *ButtonInstance) GetUseUnderline() bool {
 	return goret
 }
 
-// Leave wraps gtk_button_leave
-//
-// Emits a #GtkButton::leave signal to the given #GtkButton.
-//
-// Deprecated: (since 2.20.0) Use the #GtkWidget::leave-notify-event signal.
-func (button *ButtonInstance) Leave() {
-	var carg0 *C.GtkButton // in, none, converted
-
-	carg0 = (*C.GtkButton)(UnsafeButtonToGlibNone(button))
-
-	C.gtk_button_leave(carg0)
-	runtime.KeepAlive(button)
-}
-
-// Pressed wraps gtk_button_pressed
-//
-// Emits a #GtkButton::pressed signal to the given #GtkButton.
-//
-// Deprecated: (since 2.20.0) Use the #GtkWidget::button-press-event signal.
-func (button *ButtonInstance) Pressed() {
-	var carg0 *C.GtkButton // in, none, converted
-
-	carg0 = (*C.GtkButton)(UnsafeButtonToGlibNone(button))
-
-	C.gtk_button_pressed(carg0)
-	runtime.KeepAlive(button)
-}
-
-// Released wraps gtk_button_released
-//
-// Emits a #GtkButton::released signal to the given #GtkButton.
-//
-// Deprecated: (since 2.20.0) Use the #GtkWidget::button-release-event signal.
-func (button *ButtonInstance) Released() {
-	var carg0 *C.GtkButton // in, none, converted
-
-	carg0 = (*C.GtkButton)(UnsafeButtonToGlibNone(button))
-
-	C.gtk_button_released(carg0)
-	runtime.KeepAlive(button)
-}
-
-// SetAlignment wraps gtk_button_set_alignment
-// 
-// The function takes the following parameters:
-// 
-// 	- xalign float32: the horizontal position of the child, 0.0 is left aligned,
-//   1.0 is right aligned 
-// 	- yalign float32: the vertical position of the child, 0.0 is top aligned,
-//   1.0 is bottom aligned 
-//
-// Sets the alignment of the child. This property has no effect unless
-// the child is a #GtkMisc or a #GtkAlignment.
-//
-// Deprecated: (since 3.14.0) Access the child widget directly if you need to control
-// its alignment.
-func (button *ButtonInstance) SetAlignment(xalign float32, yalign float32) {
-	var carg0 *C.GtkButton // in, none, converted
-	var carg1 C.gfloat     // in, none, casted
-	var carg2 C.gfloat     // in, none, casted
-
-	carg0 = (*C.GtkButton)(UnsafeButtonToGlibNone(button))
-	carg1 = C.gfloat(xalign)
-	carg2 = C.gfloat(yalign)
-
-	C.gtk_button_set_alignment(carg0, carg1, carg2)
-	runtime.KeepAlive(button)
-	runtime.KeepAlive(xalign)
-	runtime.KeepAlive(yalign)
-}
-
 // SetAlwaysShowImage wraps gtk_button_set_always_show_image
 // 
 // The function takes the following parameters:
@@ -114709,32 +99416,6 @@ func (button *ButtonInstance) SetAlwaysShowImage(alwaysShow bool) {
 	C.gtk_button_set_always_show_image(carg0, carg1)
 	runtime.KeepAlive(button)
 	runtime.KeepAlive(alwaysShow)
-}
-
-// SetFocusOnClick wraps gtk_button_set_focus_on_click
-// 
-// The function takes the following parameters:
-// 
-// 	- focusOnClick bool: whether the button grabs focus when clicked with the mouse 
-//
-// Sets whether the button will grab focus when it is clicked with the mouse.
-// Making mouse clicks not grab focus is useful in places like toolbars where
-// you don’t want the keyboard focus removed from the main area of the
-// application.
-//
-// Deprecated: (since 3.20.0) Use gtk_widget_set_focus_on_click() instead
-func (button *ButtonInstance) SetFocusOnClick(focusOnClick bool) {
-	var carg0 *C.GtkButton // in, none, converted
-	var carg1 C.gboolean   // in
-
-	carg0 = (*C.GtkButton)(UnsafeButtonToGlibNone(button))
-	if focusOnClick {
-		carg1 = C.TRUE
-	}
-
-	C.gtk_button_set_focus_on_click(carg0, carg1)
-	runtime.KeepAlive(button)
-	runtime.KeepAlive(focusOnClick)
 }
 
 // SetImage wraps gtk_button_set_image
@@ -114826,30 +99507,6 @@ func (button *ButtonInstance) SetRelief(relief ReliefStyle) {
 	C.gtk_button_set_relief(carg0, carg1)
 	runtime.KeepAlive(button)
 	runtime.KeepAlive(relief)
-}
-
-// SetUseStock wraps gtk_button_set_use_stock
-// 
-// The function takes the following parameters:
-// 
-// 	- useStock bool: %TRUE if the button should use a stock item 
-//
-// If %TRUE, the label set on the button is used as a
-// stock id to select the stock item for the button.
-//
-// Deprecated: (since 3.10.0) 
-func (button *ButtonInstance) SetUseStock(useStock bool) {
-	var carg0 *C.GtkButton // in, none, converted
-	var carg1 C.gboolean   // in
-
-	carg0 = (*C.GtkButton)(UnsafeButtonToGlibNone(button))
-	if useStock {
-		carg1 = C.TRUE
-	}
-
-	C.gtk_button_set_use_stock(carg0, carg1)
-	runtime.KeepAlive(button)
-	runtime.KeepAlive(useStock)
 }
 
 // SetUseUnderline wraps gtk_button_set_use_underline
@@ -115367,15 +100024,6 @@ type ColorButton interface {
 	ColorChooser
 	upcastToGtkColorButton() *ColorButtonInstance
 
-	// GetAlpha wraps gtk_color_button_get_alpha
-	// The function returns the following values:
-	// 
-	// 	- goret uint16 
-	//
-	// Returns the current alpha value.
-	//
-	// Deprecated: (since 3.4.0) Use gtk_color_chooser_get_rgba() instead.
-	GetAlpha() uint16
 	// GetTitle wraps gtk_color_button_get_title
 	// The function returns the following values:
 	// 
@@ -115383,25 +100031,6 @@ type ColorButton interface {
 	//
 	// Gets the title of the color selection dialog.
 	GetTitle() string
-	// GetUseAlpha wraps gtk_color_button_get_use_alpha
-	// The function returns the following values:
-	// 
-	// 	- goret bool 
-	//
-	// Does the color selection dialog use the alpha channel ?
-	//
-	// Deprecated: (since 3.4.0) Use gtk_color_chooser_get_use_alpha() instead.
-	GetUseAlpha() bool
-	// SetAlpha wraps gtk_color_button_set_alpha
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- alpha uint16: an integer between 0 and 65535 
-	//
-	// Sets the current opacity to be @alpha.
-	//
-	// Deprecated: (since 3.4.0) Use gtk_color_chooser_set_rgba() instead.
-	SetAlpha(uint16)
 	// SetTitle wraps gtk_color_button_set_title
 	// 
 	// The function takes the following parameters:
@@ -115410,16 +100039,6 @@ type ColorButton interface {
 	//
 	// Sets the title for the color selection dialog.
 	SetTitle(string)
-	// SetUseAlpha wraps gtk_color_button_set_use_alpha
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- useAlpha bool: %TRUE if color button should use alpha channel, %FALSE if not 
-	//
-	// Sets whether or not the color button should use the alpha channel.
-	//
-	// Deprecated: (since 3.4.0) Use gtk_color_chooser_set_use_alpha() instead.
-	SetUseAlpha(bool)
 }
 
 func unsafeWrapColorButton(base *gobject.ObjectInstance) *ColorButtonInstance {
@@ -115441,9 +100060,6 @@ func unsafeWrapColorButton(base *gobject.ObjectInstance) *ColorButtonInstance {
 				},
 			},
 			ActionableInstance: ActionableInstance{
-				Instance: *base,
-			},
-			ActivatableInstance: ActivatableInstance{
 				Instance: *base,
 			},
 		},
@@ -115532,30 +100148,6 @@ func NewColorButtonInstanceWithRGBA(rgba *gdk.RGBA) Widget {
 	return goret
 }
 
-// GetAlpha wraps gtk_color_button_get_alpha
-// The function returns the following values:
-// 
-// 	- goret uint16 
-//
-// Returns the current alpha value.
-//
-// Deprecated: (since 3.4.0) Use gtk_color_chooser_get_rgba() instead.
-func (button *ColorButtonInstance) GetAlpha() uint16 {
-	var carg0 *C.GtkColorButton // in, none, converted
-	var cret  C.guint16         // return, none, casted
-
-	carg0 = (*C.GtkColorButton)(UnsafeColorButtonToGlibNone(button))
-
-	cret = C.gtk_color_button_get_alpha(carg0)
-	runtime.KeepAlive(button)
-
-	var goret uint16
-
-	goret = uint16(cret)
-
-	return goret
-}
-
 // GetTitle wraps gtk_color_button_get_title
 // The function returns the following values:
 // 
@@ -115573,56 +100165,9 @@ func (button *ColorButtonInstance) GetTitle() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
-}
-
-// GetUseAlpha wraps gtk_color_button_get_use_alpha
-// The function returns the following values:
-// 
-// 	- goret bool 
-//
-// Does the color selection dialog use the alpha channel ?
-//
-// Deprecated: (since 3.4.0) Use gtk_color_chooser_get_use_alpha() instead.
-func (button *ColorButtonInstance) GetUseAlpha() bool {
-	var carg0 *C.GtkColorButton // in, none, converted
-	var cret  C.gboolean        // return
-
-	carg0 = (*C.GtkColorButton)(UnsafeColorButtonToGlibNone(button))
-
-	cret = C.gtk_color_button_get_use_alpha(carg0)
-	runtime.KeepAlive(button)
-
-	var goret bool
-
-	if cret != 0 {
-		goret = true
-	}
-
-	return goret
-}
-
-// SetAlpha wraps gtk_color_button_set_alpha
-// 
-// The function takes the following parameters:
-// 
-// 	- alpha uint16: an integer between 0 and 65535 
-//
-// Sets the current opacity to be @alpha.
-//
-// Deprecated: (since 3.4.0) Use gtk_color_chooser_set_rgba() instead.
-func (button *ColorButtonInstance) SetAlpha(alpha uint16) {
-	var carg0 *C.GtkColorButton // in, none, converted
-	var carg1 C.guint16         // in, none, casted
-
-	carg0 = (*C.GtkColorButton)(UnsafeColorButtonToGlibNone(button))
-	carg1 = C.guint16(alpha)
-
-	C.gtk_color_button_set_alpha(carg0, carg1)
-	runtime.KeepAlive(button)
-	runtime.KeepAlive(alpha)
 }
 
 // SetTitle wraps gtk_color_button_set_title
@@ -115643,29 +100188,6 @@ func (button *ColorButtonInstance) SetTitle(title string) {
 	C.gtk_color_button_set_title(carg0, carg1)
 	runtime.KeepAlive(button)
 	runtime.KeepAlive(title)
-}
-
-// SetUseAlpha wraps gtk_color_button_set_use_alpha
-// 
-// The function takes the following parameters:
-// 
-// 	- useAlpha bool: %TRUE if color button should use alpha channel, %FALSE if not 
-//
-// Sets whether or not the color button should use the alpha channel.
-//
-// Deprecated: (since 3.4.0) Use gtk_color_chooser_set_use_alpha() instead.
-func (button *ColorButtonInstance) SetUseAlpha(useAlpha bool) {
-	var carg0 *C.GtkColorButton // in, none, converted
-	var carg1 C.gboolean        // in
-
-	carg0 = (*C.GtkColorButton)(UnsafeColorButtonToGlibNone(button))
-	if useAlpha {
-		carg1 = C.TRUE
-	}
-
-	C.gtk_color_button_set_use_alpha(carg0, carg1)
-	runtime.KeepAlive(button)
-	runtime.KeepAlive(useAlpha)
 }
 
 // ColorChooserWidgetInstance is the instance type used by all types extending GtkColorChooserWidget. It is used internally by the bindings. Users should use the interface [ColorChooserWidget] instead.
@@ -116379,15 +100901,6 @@ type ComboBox interface {
 	// Sets @iter to point to the currently active item, if any item is active.
 	// Otherwise, @iter is left unchanged.
 	GetActiveIter() (TreeIter, bool)
-	// GetAddTearoffs wraps gtk_combo_box_get_add_tearoffs
-	// The function returns the following values:
-	// 
-	// 	- goret bool 
-	//
-	// Gets the current value of the :add-tearoffs property.
-	//
-	// Deprecated: (since 3.10.0) 
-	GetAddTearoffs() bool
 	// GetButtonSensitivity wraps gtk_combo_box_get_button_sensitivity
 	// The function returns the following values:
 	// 
@@ -116411,16 +100924,6 @@ type ComboBox interface {
 	// Returns the column which @combo_box is using to get the strings
 	// from to display in the internal entry.
 	GetEntryTextColumn() int
-	// GetFocusOnClick wraps gtk_combo_box_get_focus_on_click
-	// The function returns the following values:
-	// 
-	// 	- goret bool 
-	//
-	// Returns whether the combo box grabs focus when it is clicked
-	// with the mouse. See gtk_combo_box_set_focus_on_click().
-	//
-	// Deprecated: (since 3.20.0) Use gtk_widget_get_focus_on_click() instead
-	GetFocusOnClick() bool
 	// GetHasEntry wraps gtk_combo_box_get_has_entry
 	// The function returns the following values:
 	// 
@@ -116468,16 +100971,6 @@ type ComboBox interface {
 	//
 	// Returns the column with row span information for @combo_box.
 	GetRowSpanColumn() int
-	// GetTitle wraps gtk_combo_box_get_title
-	// The function returns the following values:
-	// 
-	// 	- goret string 
-	//
-	// Gets the current title of the menu in tearoff mode. See
-	// gtk_combo_box_set_add_tearoffs().
-	//
-	// Deprecated: (since 3.10.0) 
-	GetTitle() string
 	// GetWrapWidth wraps gtk_combo_box_get_wrap_width
 	// The function returns the following values:
 	// 
@@ -116548,17 +101041,6 @@ type ComboBox interface {
 	// Sets the current active item to be the one referenced by @iter, or
 	// unsets the active item if @iter is %NULL.
 	SetActiveIter(*TreeIter)
-	// SetAddTearoffs wraps gtk_combo_box_set_add_tearoffs
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- addTearoffs bool: %TRUE to add tearoff menu items 
-	//
-	// Sets whether the popup menu should have a tearoff
-	// menu item.
-	//
-	// Deprecated: (since 3.10.0) 
-	SetAddTearoffs(bool)
 	// SetButtonSensitivity wraps gtk_combo_box_set_button_sensitivity
 	// 
 	// The function takes the following parameters:
@@ -116593,20 +101075,6 @@ type ComboBox interface {
 	// This is only relevant if @combo_box has been created with
 	// #GtkComboBox:has-entry as %TRUE.
 	SetEntryTextColumn(int)
-	// SetFocusOnClick wraps gtk_combo_box_set_focus_on_click
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- focusOnClick bool: whether the combo box grabs focus when clicked
-	//    with the mouse 
-	//
-	// Sets whether the combo box will grab focus when it is clicked with
-	// the mouse. Making mouse clicks not grab focus is useful in places
-	// like toolbars where you don’t want the keyboard focus removed from
-	// the main area of the application.
-	//
-	// Deprecated: (since 3.20.0) Use gtk_widget_set_focus_on_click() instead
-	SetFocusOnClick(bool)
 	// SetIDColumn wraps gtk_combo_box_set_id_column
 	// 
 	// The function takes the following parameters:
@@ -116659,16 +101127,6 @@ type ComboBox interface {
 	// The row span column contains integers which indicate how many rows
 	// an item should span.
 	SetRowSpanColumn(int)
-	// SetTitle wraps gtk_combo_box_set_title
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- title string: a title for the menu in tearoff mode 
-	//
-	// Sets the menu’s title in tearoff mode.
-	//
-	// Deprecated: (since 3.10.0) 
-	SetTitle(string)
 	// SetWrapWidth wraps gtk_combo_box_set_wrap_width
 	// 
 	// The function takes the following parameters:
@@ -116935,7 +101393,7 @@ func (comboBox *ComboBoxInstance) GetActiveID() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -116969,32 +101427,6 @@ func (comboBox *ComboBoxInstance) GetActiveIter() (TreeIter, bool) {
 	}
 
 	return iter, goret
-}
-
-// GetAddTearoffs wraps gtk_combo_box_get_add_tearoffs
-// The function returns the following values:
-// 
-// 	- goret bool 
-//
-// Gets the current value of the :add-tearoffs property.
-//
-// Deprecated: (since 3.10.0) 
-func (comboBox *ComboBoxInstance) GetAddTearoffs() bool {
-	var carg0 *C.GtkComboBox // in, none, converted
-	var cret  C.gboolean     // return
-
-	carg0 = (*C.GtkComboBox)(UnsafeComboBoxToGlibNone(comboBox))
-
-	cret = C.gtk_combo_box_get_add_tearoffs(carg0)
-	runtime.KeepAlive(comboBox)
-
-	var goret bool
-
-	if cret != 0 {
-		goret = true
-	}
-
-	return goret
 }
 
 // GetButtonSensitivity wraps gtk_combo_box_get_button_sensitivity
@@ -117061,33 +101493,6 @@ func (comboBox *ComboBoxInstance) GetEntryTextColumn() int {
 	var goret int
 
 	goret = int(cret)
-
-	return goret
-}
-
-// GetFocusOnClick wraps gtk_combo_box_get_focus_on_click
-// The function returns the following values:
-// 
-// 	- goret bool 
-//
-// Returns whether the combo box grabs focus when it is clicked
-// with the mouse. See gtk_combo_box_set_focus_on_click().
-//
-// Deprecated: (since 3.20.0) Use gtk_widget_get_focus_on_click() instead
-func (combo *ComboBoxInstance) GetFocusOnClick() bool {
-	var carg0 *C.GtkComboBox // in, none, converted
-	var cret  C.gboolean     // return
-
-	carg0 = (*C.GtkComboBox)(UnsafeComboBoxToGlibNone(combo))
-
-	cret = C.gtk_combo_box_get_focus_on_click(carg0)
-	runtime.KeepAlive(combo)
-
-	var goret bool
-
-	if cret != 0 {
-		goret = true
-	}
 
 	return goret
 }
@@ -117229,31 +101634,6 @@ func (comboBox *ComboBoxInstance) GetRowSpanColumn() int {
 	var goret int
 
 	goret = int(cret)
-
-	return goret
-}
-
-// GetTitle wraps gtk_combo_box_get_title
-// The function returns the following values:
-// 
-// 	- goret string 
-//
-// Gets the current title of the menu in tearoff mode. See
-// gtk_combo_box_set_add_tearoffs().
-//
-// Deprecated: (since 3.10.0) 
-func (comboBox *ComboBoxInstance) GetTitle() string {
-	var carg0 *C.GtkComboBox // in, none, converted
-	var cret  *C.gchar       // return, none, string, casted *C.gchar
-
-	carg0 = (*C.GtkComboBox)(UnsafeComboBoxToGlibNone(comboBox))
-
-	cret = C.gtk_combo_box_get_title(carg0)
-	runtime.KeepAlive(comboBox)
-
-	var goret string
-
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -117417,30 +101797,6 @@ func (comboBox *ComboBoxInstance) SetActiveIter(iter *TreeIter) {
 	runtime.KeepAlive(iter)
 }
 
-// SetAddTearoffs wraps gtk_combo_box_set_add_tearoffs
-// 
-// The function takes the following parameters:
-// 
-// 	- addTearoffs bool: %TRUE to add tearoff menu items 
-//
-// Sets whether the popup menu should have a tearoff
-// menu item.
-//
-// Deprecated: (since 3.10.0) 
-func (comboBox *ComboBoxInstance) SetAddTearoffs(addTearoffs bool) {
-	var carg0 *C.GtkComboBox // in, none, converted
-	var carg1 C.gboolean     // in
-
-	carg0 = (*C.GtkComboBox)(UnsafeComboBoxToGlibNone(comboBox))
-	if addTearoffs {
-		carg1 = C.TRUE
-	}
-
-	C.gtk_combo_box_set_add_tearoffs(carg0, carg1)
-	runtime.KeepAlive(comboBox)
-	runtime.KeepAlive(addTearoffs)
-}
-
 // SetButtonSensitivity wraps gtk_combo_box_set_button_sensitivity
 // 
 // The function takes the following parameters:
@@ -117506,33 +101862,6 @@ func (comboBox *ComboBoxInstance) SetEntryTextColumn(textColumn int) {
 	C.gtk_combo_box_set_entry_text_column(carg0, carg1)
 	runtime.KeepAlive(comboBox)
 	runtime.KeepAlive(textColumn)
-}
-
-// SetFocusOnClick wraps gtk_combo_box_set_focus_on_click
-// 
-// The function takes the following parameters:
-// 
-// 	- focusOnClick bool: whether the combo box grabs focus when clicked
-//    with the mouse 
-//
-// Sets whether the combo box will grab focus when it is clicked with
-// the mouse. Making mouse clicks not grab focus is useful in places
-// like toolbars where you don’t want the keyboard focus removed from
-// the main area of the application.
-//
-// Deprecated: (since 3.20.0) Use gtk_widget_set_focus_on_click() instead
-func (combo *ComboBoxInstance) SetFocusOnClick(focusOnClick bool) {
-	var carg0 *C.GtkComboBox // in, none, converted
-	var carg1 C.gboolean     // in
-
-	carg0 = (*C.GtkComboBox)(UnsafeComboBoxToGlibNone(combo))
-	if focusOnClick {
-		carg1 = C.TRUE
-	}
-
-	C.gtk_combo_box_set_focus_on_click(carg0, carg1)
-	runtime.KeepAlive(combo)
-	runtime.KeepAlive(focusOnClick)
 }
 
 // SetIDColumn wraps gtk_combo_box_set_id_column
@@ -117648,28 +101977,6 @@ func (comboBox *ComboBoxInstance) SetRowSpanColumn(rowSpan int) {
 	C.gtk_combo_box_set_row_span_column(carg0, carg1)
 	runtime.KeepAlive(comboBox)
 	runtime.KeepAlive(rowSpan)
-}
-
-// SetTitle wraps gtk_combo_box_set_title
-// 
-// The function takes the following parameters:
-// 
-// 	- title string: a title for the menu in tearoff mode 
-//
-// Sets the menu’s title in tearoff mode.
-//
-// Deprecated: (since 3.10.0) 
-func (comboBox *ComboBoxInstance) SetTitle(title string) {
-	var carg0 *C.GtkComboBox // in, none, converted
-	var carg1 *C.gchar       // in, none, string, casted *C.gchar
-
-	carg0 = (*C.GtkComboBox)(UnsafeComboBoxToGlibNone(comboBox))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(title)))
-	defer C.free(unsafe.Pointer(carg1))
-
-	C.gtk_combo_box_set_title(carg0, carg1)
-	runtime.KeepAlive(comboBox)
-	runtime.KeepAlive(title)
 }
 
 // SetWrapWidth wraps gtk_combo_box_set_wrap_width
@@ -117915,14 +102222,14 @@ type ComboBoxText interface {
 	// This is the same as calling gtk_combo_box_text_insert_text() with a
 	// position of 0.
 	PrependText(string)
-	// Remove wraps gtk_combo_box_text_remove
+	// RemoveComboBoxText wraps gtk_combo_box_text_remove
 	// 
 	// The function takes the following parameters:
 	// 
 	// 	- position int: Index of the item to remove 
 	//
 	// Removes the string at @position from @combo_box.
-	Remove(int)
+	RemoveComboBoxText(int)
 	// RemoveAll wraps gtk_combo_box_text_remove_all
 	//
 	// Removes all the text entries from the combo box.
@@ -118097,7 +102404,7 @@ func (comboBox *ComboBoxTextInstance) GetActiveText() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 	defer C.free(unsafe.Pointer(cret))
 
 	return goret
@@ -118221,14 +102528,14 @@ func (comboBox *ComboBoxTextInstance) PrependText(text string) {
 	runtime.KeepAlive(text)
 }
 
-// Remove wraps gtk_combo_box_text_remove
+// RemoveComboBoxText wraps gtk_combo_box_text_remove
 // 
 // The function takes the following parameters:
 // 
 // 	- position int: Index of the item to remove 
 //
 // Removes the string at @position from @combo_box.
-func (comboBox *ComboBoxTextInstance) Remove(position int) {
+func (comboBox *ComboBoxTextInstance) RemoveComboBoxText(position int) {
 	var carg0 *C.GtkComboBoxText // in, none, converted
 	var carg1 C.gint             // in, none, casted
 
@@ -118686,15 +102993,6 @@ type Expander interface {
 	// Returns whether the expander will resize the toplevel widget
 	// containing the expander upon resizing and collpasing.
 	GetResizeToplevel() bool
-	// GetSpacing wraps gtk_expander_get_spacing
-	// The function returns the following values:
-	// 
-	// 	- goret int 
-	//
-	// Gets the value set by gtk_expander_set_spacing().
-	//
-	// Deprecated: (since 3.20.0) Use margins on the child instead.
-	GetSpacing() int
 	// GetUseMarkup wraps gtk_expander_get_use_markup
 	// The function returns the following values:
 	// 
@@ -118762,17 +103060,6 @@ type Expander interface {
 	// Sets whether the expander will resize the toplevel widget
 	// containing the expander upon resizing and collpasing.
 	SetResizeToplevel(bool)
-	// SetSpacing wraps gtk_expander_set_spacing
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- spacing int: distance between the expander and child in pixels 
-	//
-	// Sets the spacing field of @expander, which is the number of
-	// pixels to place between expander and the child.
-	//
-	// Deprecated: (since 3.20.0) Use margins on the child instead.
-	SetSpacing(int)
 	// SetUseMarkup wraps gtk_expander_set_use_markup
 	// 
 	// The function takes the following parameters:
@@ -118962,7 +103249,7 @@ func (expander *ExpanderInstance) GetLabel() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -119036,30 +103323,6 @@ func (expander *ExpanderInstance) GetResizeToplevel() bool {
 	if cret != 0 {
 		goret = true
 	}
-
-	return goret
-}
-
-// GetSpacing wraps gtk_expander_get_spacing
-// The function returns the following values:
-// 
-// 	- goret int 
-//
-// Gets the value set by gtk_expander_set_spacing().
-//
-// Deprecated: (since 3.20.0) Use margins on the child instead.
-func (expander *ExpanderInstance) GetSpacing() int {
-	var carg0 *C.GtkExpander // in, none, converted
-	var cret  C.gint         // return, none, casted
-
-	carg0 = (*C.GtkExpander)(UnsafeExpanderToGlibNone(expander))
-
-	cret = C.gtk_expander_get_spacing(carg0)
-	runtime.KeepAlive(expander)
-
-	var goret int
-
-	goret = int(cret)
 
 	return goret
 }
@@ -119231,28 +103494,6 @@ func (expander *ExpanderInstance) SetResizeToplevel(resizeToplevel bool) {
 	runtime.KeepAlive(resizeToplevel)
 }
 
-// SetSpacing wraps gtk_expander_set_spacing
-// 
-// The function takes the following parameters:
-// 
-// 	- spacing int: distance between the expander and child in pixels 
-//
-// Sets the spacing field of @expander, which is the number of
-// pixels to place between expander and the child.
-//
-// Deprecated: (since 3.20.0) Use margins on the child instead.
-func (expander *ExpanderInstance) SetSpacing(spacing int) {
-	var carg0 *C.GtkExpander // in, none, converted
-	var carg1 C.gint         // in, none, casted
-
-	carg0 = (*C.GtkExpander)(UnsafeExpanderToGlibNone(expander))
-	carg1 = C.gint(spacing)
-
-	C.gtk_expander_set_spacing(carg0, carg1)
-	runtime.KeepAlive(expander)
-	runtime.KeepAlive(spacing)
-}
-
 // SetUseMarkup wraps gtk_expander_set_use_markup
 // 
 // The function takes the following parameters:
@@ -119349,16 +103590,6 @@ type FileChooserButton interface {
 	FileChooser
 	upcastToGtkFileChooserButton() *FileChooserButtonInstance
 
-	// GetFocusOnClick wraps gtk_file_chooser_button_get_focus_on_click
-	// The function returns the following values:
-	// 
-	// 	- goret bool 
-	//
-	// Returns whether the button grabs focus when it is clicked with the mouse.
-	// See gtk_file_chooser_button_set_focus_on_click().
-	//
-	// Deprecated: (since 3.20.0) Use gtk_widget_get_focus_on_click() instead
-	GetFocusOnClick() bool
 	// GetTitle wraps gtk_file_chooser_button_get_title
 	// The function returns the following values:
 	// 
@@ -119374,19 +103605,6 @@ type FileChooserButton interface {
 	//
 	// Retrieves the width in characters of the @button widget’s entry and/or label.
 	GetWidthChars() int
-	// SetFocusOnClick wraps gtk_file_chooser_button_set_focus_on_click
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- focusOnClick bool: whether the button grabs focus when clicked with the mouse 
-	//
-	// Sets whether the button will grab focus when it is clicked with the mouse.
-	// Making mouse clicks not grab focus is useful in places like toolbars where
-	// you don’t want the keyboard focus removed from the main area of the
-	// application.
-	//
-	// Deprecated: (since 3.20.0) Use gtk_widget_set_focus_on_click() instead
-	SetFocusOnClick(bool)
 	// SetTitle wraps gtk_file_chooser_button_set_title
 	// 
 	// The function takes the following parameters:
@@ -119527,33 +103745,6 @@ func NewFileChooserButtonInstanceWithDialog(dialog Dialog) Widget {
 	return goret
 }
 
-// GetFocusOnClick wraps gtk_file_chooser_button_get_focus_on_click
-// The function returns the following values:
-// 
-// 	- goret bool 
-//
-// Returns whether the button grabs focus when it is clicked with the mouse.
-// See gtk_file_chooser_button_set_focus_on_click().
-//
-// Deprecated: (since 3.20.0) Use gtk_widget_get_focus_on_click() instead
-func (button *FileChooserButtonInstance) GetFocusOnClick() bool {
-	var carg0 *C.GtkFileChooserButton // in, none, converted
-	var cret  C.gboolean              // return
-
-	carg0 = (*C.GtkFileChooserButton)(UnsafeFileChooserButtonToGlibNone(button))
-
-	cret = C.gtk_file_chooser_button_get_focus_on_click(carg0)
-	runtime.KeepAlive(button)
-
-	var goret bool
-
-	if cret != 0 {
-		goret = true
-	}
-
-	return goret
-}
-
 // GetTitle wraps gtk_file_chooser_button_get_title
 // The function returns the following values:
 // 
@@ -119572,7 +103763,7 @@ func (button *FileChooserButtonInstance) GetTitle() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -119597,32 +103788,6 @@ func (button *FileChooserButtonInstance) GetWidthChars() int {
 	goret = int(cret)
 
 	return goret
-}
-
-// SetFocusOnClick wraps gtk_file_chooser_button_set_focus_on_click
-// 
-// The function takes the following parameters:
-// 
-// 	- focusOnClick bool: whether the button grabs focus when clicked with the mouse 
-//
-// Sets whether the button will grab focus when it is clicked with the mouse.
-// Making mouse clicks not grab focus is useful in places like toolbars where
-// you don’t want the keyboard focus removed from the main area of the
-// application.
-//
-// Deprecated: (since 3.20.0) Use gtk_widget_set_focus_on_click() instead
-func (button *FileChooserButtonInstance) SetFocusOnClick(focusOnClick bool) {
-	var carg0 *C.GtkFileChooserButton // in, none, converted
-	var carg1 C.gboolean              // in
-
-	carg0 = (*C.GtkFileChooserButton)(UnsafeFileChooserButtonToGlibNone(button))
-	if focusOnClick {
-		carg1 = C.TRUE
-	}
-
-	C.gtk_file_chooser_button_set_focus_on_click(carg0, carg1)
-	runtime.KeepAlive(button)
-	runtime.KeepAlive(focusOnClick)
 }
 
 // SetTitle wraps gtk_file_chooser_button_set_title
@@ -119987,20 +104152,6 @@ type FontButton interface {
 	FontChooser
 	upcastToGtkFontButton() *FontButtonInstance
 
-	// GetFontName wraps gtk_font_button_get_font_name
-	// The function returns the following values:
-	// 
-	// 	- goret string 
-	//
-	// Retrieves the name of the currently selected font. This name includes
-	// style and size information as well. If you want to render something
-	// with the font, use this string with pango_font_description_from_string() .
-	// If you’re interested in peeking certain values (family name,
-	// style, size, weight) just query these properties from the
-	// #PangoFontDescription object.
-	//
-	// Deprecated: (since 3.22.0) Use gtk_font_chooser_get_font() instead
-	GetFontName() string
 	// GetShowSize wraps gtk_font_button_get_show_size
 	// The function returns the following values:
 	// 
@@ -120036,20 +104187,6 @@ type FontButton interface {
 	//
 	// Returns whether the selected size is used in the label.
 	GetUseSize() bool
-	// SetFontName wraps gtk_font_button_set_font_name
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- fontname string: Name of font to display in font chooser dialog 
-	// 
-	// The function returns the following values:
-	// 
-	// 	- goret bool 
-	//
-	// Sets or updates the currently-displayed font in font picker dialog.
-	//
-	// Deprecated: (since 3.22.0) Use gtk_font_chooser_set_font() instead
-	SetFontName(string) bool
 	// SetShowSize wraps gtk_font_button_set_show_size
 	// 
 	// The function takes the following parameters:
@@ -120111,9 +104248,6 @@ func unsafeWrapFontButton(base *gobject.ObjectInstance) *FontButtonInstance {
 				},
 			},
 			ActionableInstance: ActionableInstance{
-				Instance: *base,
-			},
-			ActivatableInstance: ActivatableInstance{
 				Instance: *base,
 			},
 		},
@@ -120197,35 +104331,6 @@ func NewFontButtonInstanceWithFont(fontname string) Widget {
 	return goret
 }
 
-// GetFontName wraps gtk_font_button_get_font_name
-// The function returns the following values:
-// 
-// 	- goret string 
-//
-// Retrieves the name of the currently selected font. This name includes
-// style and size information as well. If you want to render something
-// with the font, use this string with pango_font_description_from_string() .
-// If you’re interested in peeking certain values (family name,
-// style, size, weight) just query these properties from the
-// #PangoFontDescription object.
-//
-// Deprecated: (since 3.22.0) Use gtk_font_chooser_get_font() instead
-func (fontButton *FontButtonInstance) GetFontName() string {
-	var carg0 *C.GtkFontButton // in, none, converted
-	var cret  *C.gchar         // return, none, string, casted *C.gchar
-
-	carg0 = (*C.GtkFontButton)(UnsafeFontButtonToGlibNone(fontButton))
-
-	cret = C.gtk_font_button_get_font_name(carg0)
-	runtime.KeepAlive(fontButton)
-
-	var goret string
-
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
-
-	return goret
-}
-
 // GetShowSize wraps gtk_font_button_get_show_size
 // The function returns the following values:
 // 
@@ -120291,7 +104396,7 @@ func (fontButton *FontButtonInstance) GetTitle() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -120334,41 +104439,6 @@ func (fontButton *FontButtonInstance) GetUseSize() bool {
 
 	cret = C.gtk_font_button_get_use_size(carg0)
 	runtime.KeepAlive(fontButton)
-
-	var goret bool
-
-	if cret != 0 {
-		goret = true
-	}
-
-	return goret
-}
-
-// SetFontName wraps gtk_font_button_set_font_name
-// 
-// The function takes the following parameters:
-// 
-// 	- fontname string: Name of font to display in font chooser dialog 
-// 
-// The function returns the following values:
-// 
-// 	- goret bool 
-//
-// Sets or updates the currently-displayed font in font picker dialog.
-//
-// Deprecated: (since 3.22.0) Use gtk_font_chooser_set_font() instead
-func (fontButton *FontButtonInstance) SetFontName(fontname string) bool {
-	var carg0 *C.GtkFontButton // in, none, converted
-	var carg1 *C.gchar         // in, none, string, casted *C.gchar
-	var cret  C.gboolean       // return
-
-	carg0 = (*C.GtkFontButton)(UnsafeFontButtonToGlibNone(fontButton))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(fontname)))
-	defer C.free(unsafe.Pointer(carg1))
-
-	cret = C.gtk_font_button_set_font_name(carg0, carg1)
-	runtime.KeepAlive(fontButton)
-	runtime.KeepAlive(fontname)
 
 	var goret bool
 
@@ -120602,137 +104672,6 @@ var _ FontSelection = (*FontSelectionInstance)(nil)
 type FontSelection interface {
 	Box
 	upcastToGtkFontSelection() *FontSelectionInstance
-
-	// GetFace wraps gtk_font_selection_get_face
-	// The function returns the following values:
-	// 
-	// 	- goret pango.FontFace 
-	//
-	// Gets the #PangoFontFace representing the selected font group
-	// details (i.e. family, slant, weight, width, etc).
-	//
-	// Deprecated: (since 3.2.0) Use #GtkFontChooser
-	GetFace() pango.FontFace
-	// GetFaceList wraps gtk_font_selection_get_face_list
-	// The function returns the following values:
-	// 
-	// 	- goret Widget 
-	//
-	// This returns the #GtkTreeView which lists all styles available for
-	// the selected font. For example, “Regular”, “Bold”, etc.
-	//
-	// Deprecated: (since 3.2.0) Use #GtkFontChooser
-	GetFaceList() Widget
-	// GetFamily wraps gtk_font_selection_get_family
-	// The function returns the following values:
-	// 
-	// 	- goret pango.FontFamily 
-	//
-	// Gets the #PangoFontFamily representing the selected font family.
-	//
-	// Deprecated: (since 3.2.0) Use #GtkFontChooser
-	GetFamily() pango.FontFamily
-	// GetFamilyList wraps gtk_font_selection_get_family_list
-	// The function returns the following values:
-	// 
-	// 	- goret Widget 
-	//
-	// This returns the #GtkTreeView that lists font families, for
-	// example, “Sans”, “Serif”, etc.
-	//
-	// Deprecated: (since 3.2.0) Use #GtkFontChooser
-	GetFamilyList() Widget
-	// GetFontName wraps gtk_font_selection_get_font_name
-	// The function returns the following values:
-	// 
-	// 	- goret string 
-	//
-	// Gets the currently-selected font name.
-	// 
-	// Note that this can be a different string than what you set with
-	// gtk_font_selection_set_font_name(), as the font selection widget may
-	// normalize font names and thus return a string with a different structure.
-	// For example, “Helvetica Italic Bold 12” could be normalized to
-	// “Helvetica Bold Italic 12”. Use pango_font_description_equal()
-	// if you want to compare two font descriptions.
-	//
-	// Deprecated: (since 3.2.0) Use #GtkFontChooser
-	GetFontName() string
-	// GetPreviewEntry wraps gtk_font_selection_get_preview_entry
-	// The function returns the following values:
-	// 
-	// 	- goret Widget 
-	//
-	// This returns the #GtkEntry used to display the font as a preview.
-	//
-	// Deprecated: (since 3.2.0) Use #GtkFontChooser
-	GetPreviewEntry() Widget
-	// GetPreviewText wraps gtk_font_selection_get_preview_text
-	// The function returns the following values:
-	// 
-	// 	- goret string 
-	//
-	// Gets the text displayed in the preview area.
-	//
-	// Deprecated: (since 3.2.0) Use #GtkFontChooser
-	GetPreviewText() string
-	// GetSize wraps gtk_font_selection_get_size
-	// The function returns the following values:
-	// 
-	// 	- goret int 
-	//
-	// The selected font size.
-	//
-	// Deprecated: (since 3.2.0) Use #GtkFontChooser
-	GetSize() int
-	// GetSizeEntry wraps gtk_font_selection_get_size_entry
-	// The function returns the following values:
-	// 
-	// 	- goret Widget 
-	//
-	// This returns the #GtkEntry used to allow the user to edit the font
-	// number manually instead of selecting it from the list of font sizes.
-	//
-	// Deprecated: (since 3.2.0) Use #GtkFontChooser
-	GetSizeEntry() Widget
-	// GetSizeList wraps gtk_font_selection_get_size_list
-	// The function returns the following values:
-	// 
-	// 	- goret Widget 
-	//
-	// This returns the #GtkTreeView used to list font sizes.
-	//
-	// Deprecated: (since 3.2.0) Use #GtkFontChooser
-	GetSizeList() Widget
-	// SetFontName wraps gtk_font_selection_set_font_name
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- fontname string: a font name like “Helvetica 12” or “Times Bold 18” 
-	// 
-	// The function returns the following values:
-	// 
-	// 	- goret bool 
-	//
-	// Sets the currently-selected font.
-	// 
-	// Note that the @fontsel needs to know the screen in which it will appear
-	// for this to work; this can be guaranteed by simply making sure that the
-	// @fontsel is inserted in a toplevel window before you call this function.
-	//
-	// Deprecated: (since 3.2.0) Use #GtkFontChooser
-	SetFontName(string) bool
-	// SetPreviewText wraps gtk_font_selection_set_preview_text
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- text string: the text to display in the preview area 
-	//
-	// Sets the text displayed in the preview area.
-	// The @text is used to show how the selected font looks.
-	//
-	// Deprecated: (since 3.2.0) Use #GtkFontChooser
-	SetPreviewText(string)
 }
 
 func unsafeWrapFontSelection(base *gobject.ObjectInstance) *FontSelectionInstance {
@@ -120784,340 +104723,6 @@ func UnsafeFontSelectionToGlibNone(c FontSelection) unsafe.Pointer {
 // UnsafeFontSelectionToGlibFull is used to convert the instance to it's C value GtkFontSelection, while removeing the finalizer. This is used by the bindings internally.
 func UnsafeFontSelectionToGlibFull(c FontSelection) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
-}
-
-// NewFontSelectionInstance wraps gtk_font_selection_new
-// The function returns the following values:
-// 
-// 	- goret Widget 
-//
-// Creates a new #GtkFontSelection.
-//
-// Deprecated: (since 3.2.0) Use #GtkFontChooserWidget instead
-func NewFontSelectionInstance() Widget {
-	var cret *C.GtkWidget // return, none, converted
-
-	cret = C.gtk_font_selection_new()
-
-	var goret Widget
-
-	goret = UnsafeWidgetFromGlibNone(unsafe.Pointer(cret))
-
-	return goret
-}
-
-// GetFace wraps gtk_font_selection_get_face
-// The function returns the following values:
-// 
-// 	- goret pango.FontFace 
-//
-// Gets the #PangoFontFace representing the selected font group
-// details (i.e. family, slant, weight, width, etc).
-//
-// Deprecated: (since 3.2.0) Use #GtkFontChooser
-func (fontsel *FontSelectionInstance) GetFace() pango.FontFace {
-	var carg0 *C.GtkFontSelection // in, none, converted
-	var cret  *C.PangoFontFace    // return, none, converted
-
-	carg0 = (*C.GtkFontSelection)(UnsafeFontSelectionToGlibNone(fontsel))
-
-	cret = C.gtk_font_selection_get_face(carg0)
-	runtime.KeepAlive(fontsel)
-
-	var goret pango.FontFace
-
-	goret = pango.UnsafeFontFaceFromGlibNone(unsafe.Pointer(cret))
-
-	return goret
-}
-
-// GetFaceList wraps gtk_font_selection_get_face_list
-// The function returns the following values:
-// 
-// 	- goret Widget 
-//
-// This returns the #GtkTreeView which lists all styles available for
-// the selected font. For example, “Regular”, “Bold”, etc.
-//
-// Deprecated: (since 3.2.0) Use #GtkFontChooser
-func (fontsel *FontSelectionInstance) GetFaceList() Widget {
-	var carg0 *C.GtkFontSelection // in, none, converted
-	var cret  *C.GtkWidget        // return, none, converted
-
-	carg0 = (*C.GtkFontSelection)(UnsafeFontSelectionToGlibNone(fontsel))
-
-	cret = C.gtk_font_selection_get_face_list(carg0)
-	runtime.KeepAlive(fontsel)
-
-	var goret Widget
-
-	goret = UnsafeWidgetFromGlibNone(unsafe.Pointer(cret))
-
-	return goret
-}
-
-// GetFamily wraps gtk_font_selection_get_family
-// The function returns the following values:
-// 
-// 	- goret pango.FontFamily 
-//
-// Gets the #PangoFontFamily representing the selected font family.
-//
-// Deprecated: (since 3.2.0) Use #GtkFontChooser
-func (fontsel *FontSelectionInstance) GetFamily() pango.FontFamily {
-	var carg0 *C.GtkFontSelection // in, none, converted
-	var cret  *C.PangoFontFamily  // return, none, converted
-
-	carg0 = (*C.GtkFontSelection)(UnsafeFontSelectionToGlibNone(fontsel))
-
-	cret = C.gtk_font_selection_get_family(carg0)
-	runtime.KeepAlive(fontsel)
-
-	var goret pango.FontFamily
-
-	goret = pango.UnsafeFontFamilyFromGlibNone(unsafe.Pointer(cret))
-
-	return goret
-}
-
-// GetFamilyList wraps gtk_font_selection_get_family_list
-// The function returns the following values:
-// 
-// 	- goret Widget 
-//
-// This returns the #GtkTreeView that lists font families, for
-// example, “Sans”, “Serif”, etc.
-//
-// Deprecated: (since 3.2.0) Use #GtkFontChooser
-func (fontsel *FontSelectionInstance) GetFamilyList() Widget {
-	var carg0 *C.GtkFontSelection // in, none, converted
-	var cret  *C.GtkWidget        // return, none, converted
-
-	carg0 = (*C.GtkFontSelection)(UnsafeFontSelectionToGlibNone(fontsel))
-
-	cret = C.gtk_font_selection_get_family_list(carg0)
-	runtime.KeepAlive(fontsel)
-
-	var goret Widget
-
-	goret = UnsafeWidgetFromGlibNone(unsafe.Pointer(cret))
-
-	return goret
-}
-
-// GetFontName wraps gtk_font_selection_get_font_name
-// The function returns the following values:
-// 
-// 	- goret string 
-//
-// Gets the currently-selected font name.
-// 
-// Note that this can be a different string than what you set with
-// gtk_font_selection_set_font_name(), as the font selection widget may
-// normalize font names and thus return a string with a different structure.
-// For example, “Helvetica Italic Bold 12” could be normalized to
-// “Helvetica Bold Italic 12”. Use pango_font_description_equal()
-// if you want to compare two font descriptions.
-//
-// Deprecated: (since 3.2.0) Use #GtkFontChooser
-func (fontsel *FontSelectionInstance) GetFontName() string {
-	var carg0 *C.GtkFontSelection // in, none, converted
-	var cret  *C.gchar            // return, full, string, casted *C.gchar
-
-	carg0 = (*C.GtkFontSelection)(UnsafeFontSelectionToGlibNone(fontsel))
-
-	cret = C.gtk_font_selection_get_font_name(carg0)
-	runtime.KeepAlive(fontsel)
-
-	var goret string
-
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
-	defer C.free(unsafe.Pointer(cret))
-
-	return goret
-}
-
-// GetPreviewEntry wraps gtk_font_selection_get_preview_entry
-// The function returns the following values:
-// 
-// 	- goret Widget 
-//
-// This returns the #GtkEntry used to display the font as a preview.
-//
-// Deprecated: (since 3.2.0) Use #GtkFontChooser
-func (fontsel *FontSelectionInstance) GetPreviewEntry() Widget {
-	var carg0 *C.GtkFontSelection // in, none, converted
-	var cret  *C.GtkWidget        // return, none, converted
-
-	carg0 = (*C.GtkFontSelection)(UnsafeFontSelectionToGlibNone(fontsel))
-
-	cret = C.gtk_font_selection_get_preview_entry(carg0)
-	runtime.KeepAlive(fontsel)
-
-	var goret Widget
-
-	goret = UnsafeWidgetFromGlibNone(unsafe.Pointer(cret))
-
-	return goret
-}
-
-// GetPreviewText wraps gtk_font_selection_get_preview_text
-// The function returns the following values:
-// 
-// 	- goret string 
-//
-// Gets the text displayed in the preview area.
-//
-// Deprecated: (since 3.2.0) Use #GtkFontChooser
-func (fontsel *FontSelectionInstance) GetPreviewText() string {
-	var carg0 *C.GtkFontSelection // in, none, converted
-	var cret  *C.gchar            // return, none, string, casted *C.gchar
-
-	carg0 = (*C.GtkFontSelection)(UnsafeFontSelectionToGlibNone(fontsel))
-
-	cret = C.gtk_font_selection_get_preview_text(carg0)
-	runtime.KeepAlive(fontsel)
-
-	var goret string
-
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
-
-	return goret
-}
-
-// GetSize wraps gtk_font_selection_get_size
-// The function returns the following values:
-// 
-// 	- goret int 
-//
-// The selected font size.
-//
-// Deprecated: (since 3.2.0) Use #GtkFontChooser
-func (fontsel *FontSelectionInstance) GetSize() int {
-	var carg0 *C.GtkFontSelection // in, none, converted
-	var cret  C.gint              // return, none, casted
-
-	carg0 = (*C.GtkFontSelection)(UnsafeFontSelectionToGlibNone(fontsel))
-
-	cret = C.gtk_font_selection_get_size(carg0)
-	runtime.KeepAlive(fontsel)
-
-	var goret int
-
-	goret = int(cret)
-
-	return goret
-}
-
-// GetSizeEntry wraps gtk_font_selection_get_size_entry
-// The function returns the following values:
-// 
-// 	- goret Widget 
-//
-// This returns the #GtkEntry used to allow the user to edit the font
-// number manually instead of selecting it from the list of font sizes.
-//
-// Deprecated: (since 3.2.0) Use #GtkFontChooser
-func (fontsel *FontSelectionInstance) GetSizeEntry() Widget {
-	var carg0 *C.GtkFontSelection // in, none, converted
-	var cret  *C.GtkWidget        // return, none, converted
-
-	carg0 = (*C.GtkFontSelection)(UnsafeFontSelectionToGlibNone(fontsel))
-
-	cret = C.gtk_font_selection_get_size_entry(carg0)
-	runtime.KeepAlive(fontsel)
-
-	var goret Widget
-
-	goret = UnsafeWidgetFromGlibNone(unsafe.Pointer(cret))
-
-	return goret
-}
-
-// GetSizeList wraps gtk_font_selection_get_size_list
-// The function returns the following values:
-// 
-// 	- goret Widget 
-//
-// This returns the #GtkTreeView used to list font sizes.
-//
-// Deprecated: (since 3.2.0) Use #GtkFontChooser
-func (fontsel *FontSelectionInstance) GetSizeList() Widget {
-	var carg0 *C.GtkFontSelection // in, none, converted
-	var cret  *C.GtkWidget        // return, none, converted
-
-	carg0 = (*C.GtkFontSelection)(UnsafeFontSelectionToGlibNone(fontsel))
-
-	cret = C.gtk_font_selection_get_size_list(carg0)
-	runtime.KeepAlive(fontsel)
-
-	var goret Widget
-
-	goret = UnsafeWidgetFromGlibNone(unsafe.Pointer(cret))
-
-	return goret
-}
-
-// SetFontName wraps gtk_font_selection_set_font_name
-// 
-// The function takes the following parameters:
-// 
-// 	- fontname string: a font name like “Helvetica 12” or “Times Bold 18” 
-// 
-// The function returns the following values:
-// 
-// 	- goret bool 
-//
-// Sets the currently-selected font.
-// 
-// Note that the @fontsel needs to know the screen in which it will appear
-// for this to work; this can be guaranteed by simply making sure that the
-// @fontsel is inserted in a toplevel window before you call this function.
-//
-// Deprecated: (since 3.2.0) Use #GtkFontChooser
-func (fontsel *FontSelectionInstance) SetFontName(fontname string) bool {
-	var carg0 *C.GtkFontSelection // in, none, converted
-	var carg1 *C.gchar            // in, none, string, casted *C.gchar
-	var cret  C.gboolean          // return
-
-	carg0 = (*C.GtkFontSelection)(UnsafeFontSelectionToGlibNone(fontsel))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(fontname)))
-	defer C.free(unsafe.Pointer(carg1))
-
-	cret = C.gtk_font_selection_set_font_name(carg0, carg1)
-	runtime.KeepAlive(fontsel)
-	runtime.KeepAlive(fontname)
-
-	var goret bool
-
-	if cret != 0 {
-		goret = true
-	}
-
-	return goret
-}
-
-// SetPreviewText wraps gtk_font_selection_set_preview_text
-// 
-// The function takes the following parameters:
-// 
-// 	- text string: the text to display in the preview area 
-//
-// Sets the text displayed in the preview area.
-// The @text is used to show how the selected font looks.
-//
-// Deprecated: (since 3.2.0) Use #GtkFontChooser
-func (fontsel *FontSelectionInstance) SetPreviewText(text string) {
-	var carg0 *C.GtkFontSelection // in, none, converted
-	var carg1 *C.gchar            // in, none, string, casted *C.gchar
-
-	carg0 = (*C.GtkFontSelection)(UnsafeFontSelectionToGlibNone(fontsel))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(text)))
-	defer C.free(unsafe.Pointer(carg1))
-
-	C.gtk_font_selection_set_preview_text(carg0, carg1)
-	runtime.KeepAlive(fontsel)
-	runtime.KeepAlive(text)
 }
 
 // FrameInstance is the instance type used by all types extending GtkFrame. It is used internally by the bindings. Users should use the interface [Frame] instead.
@@ -121358,7 +104963,7 @@ func (frame *FrameInstance) GetLabel() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -121618,42 +105223,6 @@ func UnsafeHBoxToGlibFull(c HBox) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewHBoxInstance wraps gtk_hbox_new
-// 
-// The function takes the following parameters:
-// 
-// 	- homogeneous bool: %TRUE if all children are to be given equal space allotments. 
-// 	- spacing int: the number of pixels to place by default between children. 
-// 
-// The function returns the following values:
-// 
-// 	- goret Widget 
-//
-// Creates a new #GtkHBox.
-//
-// Deprecated: (since 3.2.0) You should use gtk_box_new() with a %GTK_ORIENTATION_HORIZONTAL
-//   #GtkOrientable:orientation instead
-func NewHBoxInstance(homogeneous bool, spacing int) Widget {
-	var carg1 C.gboolean   // in
-	var carg2 C.gint       // in, none, casted
-	var cret  *C.GtkWidget // return, none, converted
-
-	if homogeneous {
-		carg1 = C.TRUE
-	}
-	carg2 = C.gint(spacing)
-
-	cret = C.gtk_hbox_new(carg1, carg2)
-	runtime.KeepAlive(homogeneous)
-	runtime.KeepAlive(spacing)
-
-	var goret Widget
-
-	goret = UnsafeWidgetFromGlibNone(unsafe.Pointer(cret))
-
-	return goret
-}
-
 // HButtonBoxInstance is the instance type used by all types extending GtkHButtonBox. It is used internally by the bindings. Users should use the interface [HButtonBox] instead.
 type HButtonBoxInstance struct {
 	_ [0]func() // equal guard
@@ -121719,26 +105288,6 @@ func UnsafeHButtonBoxToGlibNone(c HButtonBox) unsafe.Pointer {
 // UnsafeHButtonBoxToGlibFull is used to convert the instance to it's C value GtkHButtonBox, while removeing the finalizer. This is used by the bindings internally.
 func UnsafeHButtonBoxToGlibFull(c HButtonBox) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
-}
-
-// NewHButtonBoxInstance wraps gtk_hbutton_box_new
-// The function returns the following values:
-// 
-// 	- goret Widget 
-//
-// Creates a new horizontal button box.
-//
-// Deprecated: (since 3.2.0) Use gtk_button_box_new() with %GTK_ORIENTATION_HORIZONTAL instead
-func NewHButtonBoxInstance() Widget {
-	var cret *C.GtkWidget // return, none, converted
-
-	cret = C.gtk_hbutton_box_new()
-
-	var goret Widget
-
-	goret = UnsafeWidgetFromGlibNone(unsafe.Pointer(cret))
-
-	return goret
 }
 
 // HPanedInstance is the instance type used by all types extending GtkHPaned. It is used internally by the bindings. Users should use the interface [HPaned] instead.
@@ -121813,26 +105362,6 @@ func UnsafeHPanedToGlibFull(c HPaned) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewHPanedInstance wraps gtk_hpaned_new
-// The function returns the following values:
-// 
-// 	- goret Widget 
-//
-// Create a new #GtkHPaned
-//
-// Deprecated: (since 3.2.0) Use gtk_paned_new() with %GTK_ORIENTATION_HORIZONTAL instead
-func NewHPanedInstance() Widget {
-	var cret *C.GtkWidget // return, none, converted
-
-	cret = C.gtk_hpaned_new()
-
-	var goret Widget
-
-	goret = UnsafeWidgetFromGlibNone(unsafe.Pointer(cret))
-
-	return goret
-}
-
 // HScaleInstance is the instance type used by all types extending GtkHScale. It is used internally by the bindings. Users should use the interface [HScale] instead.
 type HScaleInstance struct {
 	_ [0]func() // equal guard
@@ -121904,82 +105433,6 @@ func UnsafeHScaleToGlibNone(c HScale) unsafe.Pointer {
 // UnsafeHScaleToGlibFull is used to convert the instance to it's C value GtkHScale, while removeing the finalizer. This is used by the bindings internally.
 func UnsafeHScaleToGlibFull(c HScale) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
-}
-
-// NewHScaleInstance wraps gtk_hscale_new
-// 
-// The function takes the following parameters:
-// 
-// 	- adjustment Adjustment (nullable): the #GtkAdjustment which sets the range of
-// the scale. 
-// 
-// The function returns the following values:
-// 
-// 	- goret Widget 
-//
-// Creates a new #GtkHScale.
-//
-// Deprecated: (since 3.2.0) Use gtk_scale_new() with %GTK_ORIENTATION_HORIZONTAL instead
-func NewHScaleInstance(adjustment Adjustment) Widget {
-	var carg1 *C.GtkAdjustment // in, none, converted, nullable
-	var cret  *C.GtkWidget     // return, none, converted
-
-	if adjustment != nil {
-		carg1 = (*C.GtkAdjustment)(UnsafeAdjustmentToGlibNone(adjustment))
-	}
-
-	cret = C.gtk_hscale_new(carg1)
-	runtime.KeepAlive(adjustment)
-
-	var goret Widget
-
-	goret = UnsafeWidgetFromGlibNone(unsafe.Pointer(cret))
-
-	return goret
-}
-
-// NewHScaleInstanceWithRange wraps gtk_hscale_new_with_range
-// 
-// The function takes the following parameters:
-// 
-// 	- min float64: minimum value 
-// 	- max float64: maximum value 
-// 	- step float64: step increment (tick size) used with keyboard shortcuts 
-// 
-// The function returns the following values:
-// 
-// 	- goret Widget 
-//
-// Creates a new horizontal scale widget that lets the user input a
-// number between @min and @max (including @min and @max) with the
-// increment @step.  @step must be nonzero; it’s the distance the
-// slider moves when using the arrow keys to adjust the scale value.
-// 
-// Note that the way in which the precision is derived works best if @step
-// is a power of ten. If the resulting precision is not suitable for your
-// needs, use gtk_scale_set_digits() to correct it.
-//
-// Deprecated: (since 3.2.0) Use gtk_scale_new_with_range() with %GTK_ORIENTATION_HORIZONTAL instead
-func NewHScaleInstanceWithRange(min float64, max float64, step float64) Widget {
-	var carg1 C.gdouble    // in, none, casted
-	var carg2 C.gdouble    // in, none, casted
-	var carg3 C.gdouble    // in, none, casted
-	var cret  *C.GtkWidget // return, none, converted
-
-	carg1 = C.gdouble(min)
-	carg2 = C.gdouble(max)
-	carg3 = C.gdouble(step)
-
-	cret = C.gtk_hscale_new_with_range(carg1, carg2, carg3)
-	runtime.KeepAlive(min)
-	runtime.KeepAlive(max)
-	runtime.KeepAlive(step)
-
-	var goret Widget
-
-	goret = UnsafeWidgetFromGlibNone(unsafe.Pointer(cret))
-
-	return goret
 }
 
 // HScrollbarInstance is the instance type used by all types extending GtkHScrollbar. It is used internally by the bindings. Users should use the interface [HScrollbar] instead.
@@ -122056,37 +105509,6 @@ func UnsafeHScrollbarToGlibFull(c HScrollbar) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewHScrollbarInstance wraps gtk_hscrollbar_new
-// 
-// The function takes the following parameters:
-// 
-// 	- adjustment Adjustment (nullable): the #GtkAdjustment to use, or %NULL to create a new adjustment 
-// 
-// The function returns the following values:
-// 
-// 	- goret Widget 
-//
-// Creates a new horizontal scrollbar.
-//
-// Deprecated: (since 3.2.0) Use gtk_scrollbar_new() with %GTK_ORIENTATION_HORIZONTAL instead
-func NewHScrollbarInstance(adjustment Adjustment) Widget {
-	var carg1 *C.GtkAdjustment // in, none, converted, nullable
-	var cret  *C.GtkWidget     // return, none, converted
-
-	if adjustment != nil {
-		carg1 = (*C.GtkAdjustment)(UnsafeAdjustmentToGlibNone(adjustment))
-	}
-
-	cret = C.gtk_hscrollbar_new(carg1)
-	runtime.KeepAlive(adjustment)
-
-	var goret Widget
-
-	goret = UnsafeWidgetFromGlibNone(unsafe.Pointer(cret))
-
-	return goret
-}
-
 // HSeparatorInstance is the instance type used by all types extending GtkHSeparator. It is used internally by the bindings. Users should use the interface [HSeparator] instead.
 type HSeparatorInstance struct {
 	_ [0]func() // equal guard
@@ -122161,26 +105583,6 @@ func UnsafeHSeparatorToGlibFull(c HSeparator) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewHSeparatorInstance wraps gtk_hseparator_new
-// The function returns the following values:
-// 
-// 	- goret Widget 
-//
-// Creates a new #GtkHSeparator.
-//
-// Deprecated: (since 3.2.0) Use gtk_separator_new() with %GTK_ORIENTATION_HORIZONTAL instead
-func NewHSeparatorInstance() Widget {
-	var cret *C.GtkWidget // return, none, converted
-
-	cret = C.gtk_hseparator_new()
-
-	var goret Widget
-
-	goret = UnsafeWidgetFromGlibNone(unsafe.Pointer(cret))
-
-	return goret
-}
-
 // HandleBoxInstance is the instance type used by all types extending GtkHandleBox. It is used internally by the bindings. Users should use the interface [HandleBox] instead.
 type HandleBoxInstance struct {
 	_ [0]func() // equal guard
@@ -122219,91 +105621,6 @@ var _ HandleBox = (*HandleBoxInstance)(nil)
 type HandleBox interface {
 	Bin
 	upcastToGtkHandleBox() *HandleBoxInstance
-
-	// GetChildDetached wraps gtk_handle_box_get_child_detached
-	// The function returns the following values:
-	// 
-	// 	- goret bool 
-	//
-	// Whether the handlebox’s child is currently detached.
-	//
-	// Deprecated: (since 3.4.0) #GtkHandleBox has been deprecated.
-	GetChildDetached() bool
-	// GetHandlePosition wraps gtk_handle_box_get_handle_position
-	// The function returns the following values:
-	// 
-	// 	- goret PositionType 
-	//
-	// Gets the handle position of the handle box. See
-	// gtk_handle_box_set_handle_position().
-	//
-	// Deprecated: (since 3.4.0) #GtkHandleBox has been deprecated.
-	GetHandlePosition() PositionType
-	// GetShadowType wraps gtk_handle_box_get_shadow_type
-	// The function returns the following values:
-	// 
-	// 	- goret ShadowType 
-	//
-	// Gets the type of shadow drawn around the handle box. See
-	// gtk_handle_box_set_shadow_type().
-	//
-	// Deprecated: (since 3.4.0) #GtkHandleBox has been deprecated.
-	GetShadowType() ShadowType
-	// GetSnapEdge wraps gtk_handle_box_get_snap_edge
-	// The function returns the following values:
-	// 
-	// 	- goret PositionType 
-	//
-	// Gets the edge used for determining reattachment of the handle box.
-	// See gtk_handle_box_set_snap_edge().
-	//
-	// Deprecated: (since 3.4.0) #GtkHandleBox has been deprecated.
-	GetSnapEdge() PositionType
-	// SetHandlePosition wraps gtk_handle_box_set_handle_position
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- position PositionType: the side of the handlebox where the handle should be drawn. 
-	//
-	// Sets the side of the handlebox where the handle is drawn.
-	//
-	// Deprecated: (since 3.4.0) #GtkHandleBox has been deprecated.
-	SetHandlePosition(PositionType)
-	// SetShadowType wraps gtk_handle_box_set_shadow_type
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- typ ShadowType: the shadow type. 
-	//
-	// Sets the type of shadow to be drawn around the border
-	// of the handle box.
-	//
-	// Deprecated: (since 3.4.0) #GtkHandleBox has been deprecated.
-	SetShadowType(ShadowType)
-	// SetSnapEdge wraps gtk_handle_box_set_snap_edge
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- edge PositionType: the snap edge, or -1 to unset the value; in which
-	//   case GTK+ will try to guess an appropriate value
-	//   in the future. 
-	//
-	// Sets the snap edge of a handlebox. The snap edge is
-	// the edge of the detached child that must be aligned
-	// with the corresponding edge of the “ghost” left
-	// behind when the child was detached to reattach
-	// the torn-off window. Usually, the snap edge should
-	// be chosen so that it stays in the same place on
-	// the screen when the handlebox is torn off.
-	// 
-	// If the snap edge is not set, then an appropriate value
-	// will be guessed from the handle position. If the
-	// handle position is %GTK_POS_RIGHT or %GTK_POS_LEFT,
-	// then the snap edge will be %GTK_POS_TOP, otherwise
-	// it will be %GTK_POS_LEFT.
-	//
-	// Deprecated: (since 3.4.0) #GtkHandleBox has been deprecated.
-	SetSnapEdge(PositionType)
 }
 
 func unsafeWrapHandleBox(base *gobject.ObjectInstance) *HandleBoxInstance {
@@ -122352,205 +105669,6 @@ func UnsafeHandleBoxToGlibNone(c HandleBox) unsafe.Pointer {
 // UnsafeHandleBoxToGlibFull is used to convert the instance to it's C value GtkHandleBox, while removeing the finalizer. This is used by the bindings internally.
 func UnsafeHandleBoxToGlibFull(c HandleBox) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
-}
-
-// NewHandleBoxInstance wraps gtk_handle_box_new
-// The function returns the following values:
-// 
-// 	- goret Widget 
-//
-// Create a new handle box.
-//
-// Deprecated: (since 3.4.0) #GtkHandleBox has been deprecated.
-func NewHandleBoxInstance() Widget {
-	var cret *C.GtkWidget // return, none, converted
-
-	cret = C.gtk_handle_box_new()
-
-	var goret Widget
-
-	goret = UnsafeWidgetFromGlibNone(unsafe.Pointer(cret))
-
-	return goret
-}
-
-// GetChildDetached wraps gtk_handle_box_get_child_detached
-// The function returns the following values:
-// 
-// 	- goret bool 
-//
-// Whether the handlebox’s child is currently detached.
-//
-// Deprecated: (since 3.4.0) #GtkHandleBox has been deprecated.
-func (handleBox *HandleBoxInstance) GetChildDetached() bool {
-	var carg0 *C.GtkHandleBox // in, none, converted
-	var cret  C.gboolean      // return
-
-	carg0 = (*C.GtkHandleBox)(UnsafeHandleBoxToGlibNone(handleBox))
-
-	cret = C.gtk_handle_box_get_child_detached(carg0)
-	runtime.KeepAlive(handleBox)
-
-	var goret bool
-
-	if cret != 0 {
-		goret = true
-	}
-
-	return goret
-}
-
-// GetHandlePosition wraps gtk_handle_box_get_handle_position
-// The function returns the following values:
-// 
-// 	- goret PositionType 
-//
-// Gets the handle position of the handle box. See
-// gtk_handle_box_set_handle_position().
-//
-// Deprecated: (since 3.4.0) #GtkHandleBox has been deprecated.
-func (handleBox *HandleBoxInstance) GetHandlePosition() PositionType {
-	var carg0 *C.GtkHandleBox   // in, none, converted
-	var cret  C.GtkPositionType // return, none, casted
-
-	carg0 = (*C.GtkHandleBox)(UnsafeHandleBoxToGlibNone(handleBox))
-
-	cret = C.gtk_handle_box_get_handle_position(carg0)
-	runtime.KeepAlive(handleBox)
-
-	var goret PositionType
-
-	goret = PositionType(cret)
-
-	return goret
-}
-
-// GetShadowType wraps gtk_handle_box_get_shadow_type
-// The function returns the following values:
-// 
-// 	- goret ShadowType 
-//
-// Gets the type of shadow drawn around the handle box. See
-// gtk_handle_box_set_shadow_type().
-//
-// Deprecated: (since 3.4.0) #GtkHandleBox has been deprecated.
-func (handleBox *HandleBoxInstance) GetShadowType() ShadowType {
-	var carg0 *C.GtkHandleBox // in, none, converted
-	var cret  C.GtkShadowType // return, none, casted
-
-	carg0 = (*C.GtkHandleBox)(UnsafeHandleBoxToGlibNone(handleBox))
-
-	cret = C.gtk_handle_box_get_shadow_type(carg0)
-	runtime.KeepAlive(handleBox)
-
-	var goret ShadowType
-
-	goret = ShadowType(cret)
-
-	return goret
-}
-
-// GetSnapEdge wraps gtk_handle_box_get_snap_edge
-// The function returns the following values:
-// 
-// 	- goret PositionType 
-//
-// Gets the edge used for determining reattachment of the handle box.
-// See gtk_handle_box_set_snap_edge().
-//
-// Deprecated: (since 3.4.0) #GtkHandleBox has been deprecated.
-func (handleBox *HandleBoxInstance) GetSnapEdge() PositionType {
-	var carg0 *C.GtkHandleBox   // in, none, converted
-	var cret  C.GtkPositionType // return, none, casted
-
-	carg0 = (*C.GtkHandleBox)(UnsafeHandleBoxToGlibNone(handleBox))
-
-	cret = C.gtk_handle_box_get_snap_edge(carg0)
-	runtime.KeepAlive(handleBox)
-
-	var goret PositionType
-
-	goret = PositionType(cret)
-
-	return goret
-}
-
-// SetHandlePosition wraps gtk_handle_box_set_handle_position
-// 
-// The function takes the following parameters:
-// 
-// 	- position PositionType: the side of the handlebox where the handle should be drawn. 
-//
-// Sets the side of the handlebox where the handle is drawn.
-//
-// Deprecated: (since 3.4.0) #GtkHandleBox has been deprecated.
-func (handleBox *HandleBoxInstance) SetHandlePosition(position PositionType) {
-	var carg0 *C.GtkHandleBox   // in, none, converted
-	var carg1 C.GtkPositionType // in, none, casted
-
-	carg0 = (*C.GtkHandleBox)(UnsafeHandleBoxToGlibNone(handleBox))
-	carg1 = C.GtkPositionType(position)
-
-	C.gtk_handle_box_set_handle_position(carg0, carg1)
-	runtime.KeepAlive(handleBox)
-	runtime.KeepAlive(position)
-}
-
-// SetShadowType wraps gtk_handle_box_set_shadow_type
-// 
-// The function takes the following parameters:
-// 
-// 	- typ ShadowType: the shadow type. 
-//
-// Sets the type of shadow to be drawn around the border
-// of the handle box.
-//
-// Deprecated: (since 3.4.0) #GtkHandleBox has been deprecated.
-func (handleBox *HandleBoxInstance) SetShadowType(typ ShadowType) {
-	var carg0 *C.GtkHandleBox // in, none, converted
-	var carg1 C.GtkShadowType // in, none, casted
-
-	carg0 = (*C.GtkHandleBox)(UnsafeHandleBoxToGlibNone(handleBox))
-	carg1 = C.GtkShadowType(typ)
-
-	C.gtk_handle_box_set_shadow_type(carg0, carg1)
-	runtime.KeepAlive(handleBox)
-	runtime.KeepAlive(typ)
-}
-
-// SetSnapEdge wraps gtk_handle_box_set_snap_edge
-// 
-// The function takes the following parameters:
-// 
-// 	- edge PositionType: the snap edge, or -1 to unset the value; in which
-//   case GTK+ will try to guess an appropriate value
-//   in the future. 
-//
-// Sets the snap edge of a handlebox. The snap edge is
-// the edge of the detached child that must be aligned
-// with the corresponding edge of the “ghost” left
-// behind when the child was detached to reattach
-// the torn-off window. Usually, the snap edge should
-// be chosen so that it stays in the same place on
-// the screen when the handlebox is torn off.
-// 
-// If the snap edge is not set, then an appropriate value
-// will be guessed from the handle position. If the
-// handle position is %GTK_POS_RIGHT or %GTK_POS_LEFT,
-// then the snap edge will be %GTK_POS_TOP, otherwise
-// it will be %GTK_POS_LEFT.
-//
-// Deprecated: (since 3.4.0) #GtkHandleBox has been deprecated.
-func (handleBox *HandleBoxInstance) SetSnapEdge(edge PositionType) {
-	var carg0 *C.GtkHandleBox   // in, none, converted
-	var carg1 C.GtkPositionType // in, none, casted
-
-	carg0 = (*C.GtkHandleBox)(UnsafeHandleBoxToGlibNone(handleBox))
-	carg1 = C.GtkPositionType(edge)
-
-	C.gtk_handle_box_set_snap_edge(carg0, carg1)
-	runtime.KeepAlive(handleBox)
-	runtime.KeepAlive(edge)
 }
 
 // ImageInstance is the instance type used by all types extending GtkImage. It is used internally by the bindings. Users should use the interface [Image] instead.
@@ -122683,20 +105801,6 @@ type Image interface {
 	// The returned string is owned by the #GtkImage and should not
 	// be freed.
 	GetIconName() (string, int)
-	// GetIconSet wraps gtk_image_get_icon_set
-	// The function returns the following values:
-	// 
-	// 	- iconSet *IconSet: location to store a
-	//     #GtkIconSet, or %NULL 
-	// 	- size int: location to store a stock
-	//     icon size (#GtkIconSize), or %NULL 
-	//
-	// Gets the icon set and size being displayed by the #GtkImage.
-	// The storage type of the image must be %GTK_IMAGE_EMPTY or
-	// %GTK_IMAGE_ICON_SET (see gtk_image_get_storage_type()).
-	//
-	// Deprecated: (since 3.10.0) Use gtk_image_get_icon_name() instead.
-	GetIconSet() (*IconSet, int)
 	// GetPixbuf wraps gtk_image_get_pixbuf
 	// The function returns the following values:
 	// 
@@ -122715,22 +105819,6 @@ type Image interface {
 	//
 	// Gets the pixel size used for named icons.
 	GetPixelSize() int
-	// GetStock wraps gtk_image_get_stock
-	// The function returns the following values:
-	// 
-	// 	- stockId string: place to store a
-	//     stock icon name, or %NULL 
-	// 	- size int: place to store a stock icon
-	//     size (#GtkIconSize), or %NULL 
-	//
-	// Gets the stock icon name and size being displayed by the #GtkImage.
-	// The storage type of the image must be %GTK_IMAGE_EMPTY or
-	// %GTK_IMAGE_STOCK (see gtk_image_get_storage_type()).
-	// The returned string is owned by the #GtkImage and should not
-	// be freed.
-	//
-	// Deprecated: (since 3.10.0) Use gtk_image_get_icon_name() instead.
-	GetStock() (string, int)
 	// GetStorageType wraps gtk_image_get_storage_type
 	// The function returns the following values:
 	// 
@@ -122766,17 +105854,6 @@ type Image interface {
 	//
 	// See gtk_image_new_from_icon_name() for details.
 	SetFromIconName(string, int)
-	// SetFromIconSet wraps gtk_image_set_from_icon_set
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- iconSet *IconSet: a #GtkIconSet 
-	// 	- size int: a stock icon size (#GtkIconSize) 
-	//
-	// See gtk_image_new_from_icon_set() for details.
-	//
-	// Deprecated: (since 3.10.0) Use gtk_image_set_from_icon_name() instead.
-	SetFromIconSet(*IconSet, int)
 	// SetFromPixbuf wraps gtk_image_set_from_pixbuf
 	// 
 	// The function takes the following parameters:
@@ -122793,17 +105870,6 @@ type Image interface {
 	//
 	// See gtk_image_new_from_resource() for details.
 	SetFromResource(string)
-	// SetFromStock wraps gtk_image_set_from_stock
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- stockId string: a stock icon name 
-	// 	- size int: a stock icon size (#GtkIconSize) 
-	//
-	// See gtk_image_new_from_stock() for details.
-	//
-	// Deprecated: (since 3.10.0) Use gtk_image_set_from_icon_name() instead.
-	SetFromStock(string, int)
 	// SetPixelSize wraps gtk_image_set_pixel_size
 	// 
 	// The function takes the following parameters:
@@ -122994,49 +106060,6 @@ func NewImageInstanceFromIconName(iconName string, size int) Widget {
 	return goret
 }
 
-// NewImageInstanceFromIconSet wraps gtk_image_new_from_icon_set
-// 
-// The function takes the following parameters:
-// 
-// 	- iconSet *IconSet: a #GtkIconSet 
-// 	- size int: a stock icon size (#GtkIconSize) 
-// 
-// The function returns the following values:
-// 
-// 	- goret Widget 
-//
-// Creates a #GtkImage displaying an icon set. Sample stock sizes are
-// #GTK_ICON_SIZE_MENU, #GTK_ICON_SIZE_SMALL_TOOLBAR. Instead of using
-// this function, usually it’s better to create a #GtkIconFactory, put
-// your icon sets in the icon factory, add the icon factory to the
-// list of default factories with gtk_icon_factory_add_default(), and
-// then use gtk_image_new_from_stock(). This will allow themes to
-// override the icon you ship with your application.
-// 
-// The #GtkImage does not assume a reference to the
-// icon set; you still need to unref it if you own references.
-// #GtkImage will add its own reference rather than adopting yours.
-//
-// Deprecated: (since 3.10.0) Use gtk_image_new_from_icon_name() instead.
-func NewImageInstanceFromIconSet(iconSet *IconSet, size int) Widget {
-	var carg1 *C.GtkIconSet // in, none, converted
-	var carg2 C.GtkIconSize // in, none, casted, casted C.gint
-	var cret  *C.GtkWidget  // return, none, converted
-
-	carg1 = (*C.GtkIconSet)(UnsafeIconSetToGlibNone(iconSet))
-	carg2 = C.GtkIconSize(size)
-
-	cret = C.gtk_image_new_from_icon_set(carg1, carg2)
-	runtime.KeepAlive(iconSet)
-	runtime.KeepAlive(size)
-
-	var goret Widget
-
-	goret = UnsafeWidgetFromGlibNone(unsafe.Pointer(cret))
-
-	return goret
-}
-
 // NewImageInstanceFromPixbuf wraps gtk_image_new_from_pixbuf
 // 
 // The function takes the following parameters:
@@ -123116,45 +106139,6 @@ func NewImageInstanceFromResource(resourcePath string) Widget {
 	return goret
 }
 
-// NewImageInstanceFromStock wraps gtk_image_new_from_stock
-// 
-// The function takes the following parameters:
-// 
-// 	- stockId string: a stock icon name 
-// 	- size int: a stock icon size (#GtkIconSize) 
-// 
-// The function returns the following values:
-// 
-// 	- goret Widget 
-//
-// Creates a #GtkImage displaying a stock icon. Sample stock icon
-// names are #GTK_STOCK_OPEN, #GTK_STOCK_QUIT. Sample stock sizes
-// are #GTK_ICON_SIZE_MENU, #GTK_ICON_SIZE_SMALL_TOOLBAR. If the stock
-// icon name isn’t known, the image will be empty.
-// You can register your own stock icon names, see
-// gtk_icon_factory_add_default() and gtk_icon_factory_add().
-//
-// Deprecated: (since 3.10.0) Use gtk_image_new_from_icon_name() instead.
-func NewImageInstanceFromStock(stockId string, size int) Widget {
-	var carg1 *C.gchar      // in, none, string, casted *C.gchar
-	var carg2 C.GtkIconSize // in, none, casted, casted C.gint
-	var cret  *C.GtkWidget  // return, none, converted
-
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(stockId)))
-	defer C.free(unsafe.Pointer(carg1))
-	carg2 = C.GtkIconSize(size)
-
-	cret = C.gtk_image_new_from_stock(carg1, carg2)
-	runtime.KeepAlive(stockId)
-	runtime.KeepAlive(size)
-
-	var goret Widget
-
-	goret = UnsafeWidgetFromGlibNone(unsafe.Pointer(cret))
-
-	return goret
-}
-
 // Clear wraps gtk_image_clear
 //
 // Resets the image to be empty.
@@ -123225,42 +106209,10 @@ func (image *ImageInstance) GetIconName() (string, int) {
 	var iconName string
 	var size     int
 
-	iconName = C.GoString((*C.gchar)(unsafe.Pointer(carg1)))
+	iconName = C.GoString((*C.char)(unsafe.Pointer(carg1)))
 	size = int(carg2)
 
 	return iconName, size
-}
-
-// GetIconSet wraps gtk_image_get_icon_set
-// The function returns the following values:
-// 
-// 	- iconSet *IconSet: location to store a
-//     #GtkIconSet, or %NULL 
-// 	- size int: location to store a stock
-//     icon size (#GtkIconSize), or %NULL 
-//
-// Gets the icon set and size being displayed by the #GtkImage.
-// The storage type of the image must be %GTK_IMAGE_EMPTY or
-// %GTK_IMAGE_ICON_SET (see gtk_image_get_storage_type()).
-//
-// Deprecated: (since 3.10.0) Use gtk_image_get_icon_name() instead.
-func (image *ImageInstance) GetIconSet() (*IconSet, int) {
-	var carg0 *C.GtkImage   // in, none, converted
-	var carg1 *C.GtkIconSet // out, none, converted
-	var carg2 C.GtkIconSize // out, full, casted, casted C.gint
-
-	carg0 = (*C.GtkImage)(UnsafeImageToGlibNone(image))
-
-	C.gtk_image_get_icon_set(carg0, &carg1, &carg2)
-	runtime.KeepAlive(image)
-
-	var iconSet *IconSet
-	var size    int
-
-	iconSet = UnsafeIconSetFromGlibNone(unsafe.Pointer(carg1))
-	size = int(carg2)
-
-	return iconSet, size
 }
 
 // GetPixbuf wraps gtk_image_get_pixbuf
@@ -123309,40 +106261,6 @@ func (image *ImageInstance) GetPixelSize() int {
 	goret = int(cret)
 
 	return goret
-}
-
-// GetStock wraps gtk_image_get_stock
-// The function returns the following values:
-// 
-// 	- stockId string: place to store a
-//     stock icon name, or %NULL 
-// 	- size int: place to store a stock icon
-//     size (#GtkIconSize), or %NULL 
-//
-// Gets the stock icon name and size being displayed by the #GtkImage.
-// The storage type of the image must be %GTK_IMAGE_EMPTY or
-// %GTK_IMAGE_STOCK (see gtk_image_get_storage_type()).
-// The returned string is owned by the #GtkImage and should not
-// be freed.
-//
-// Deprecated: (since 3.10.0) Use gtk_image_get_icon_name() instead.
-func (image *ImageInstance) GetStock() (string, int) {
-	var carg0 *C.GtkImage   // in, none, converted
-	var carg1 *C.gchar      // out, none, string, casted *C.gchar
-	var carg2 C.GtkIconSize // out, full, casted, casted C.gint
-
-	carg0 = (*C.GtkImage)(UnsafeImageToGlibNone(image))
-
-	C.gtk_image_get_stock(carg0, &carg1, &carg2)
-	runtime.KeepAlive(image)
-
-	var stockId string
-	var size    int
-
-	stockId = C.GoString((*C.gchar)(unsafe.Pointer(carg1)))
-	size = int(carg2)
-
-	return stockId, size
 }
 
 // GetStorageType wraps gtk_image_get_storage_type
@@ -123440,31 +106358,6 @@ func (image *ImageInstance) SetFromIconName(iconName string, size int) {
 	runtime.KeepAlive(size)
 }
 
-// SetFromIconSet wraps gtk_image_set_from_icon_set
-// 
-// The function takes the following parameters:
-// 
-// 	- iconSet *IconSet: a #GtkIconSet 
-// 	- size int: a stock icon size (#GtkIconSize) 
-//
-// See gtk_image_new_from_icon_set() for details.
-//
-// Deprecated: (since 3.10.0) Use gtk_image_set_from_icon_name() instead.
-func (image *ImageInstance) SetFromIconSet(iconSet *IconSet, size int) {
-	var carg0 *C.GtkImage   // in, none, converted
-	var carg1 *C.GtkIconSet // in, none, converted
-	var carg2 C.GtkIconSize // in, none, casted, casted C.gint
-
-	carg0 = (*C.GtkImage)(UnsafeImageToGlibNone(image))
-	carg1 = (*C.GtkIconSet)(UnsafeIconSetToGlibNone(iconSet))
-	carg2 = C.GtkIconSize(size)
-
-	C.gtk_image_set_from_icon_set(carg0, carg1, carg2)
-	runtime.KeepAlive(image)
-	runtime.KeepAlive(iconSet)
-	runtime.KeepAlive(size)
-}
-
 // SetFromPixbuf wraps gtk_image_set_from_pixbuf
 // 
 // The function takes the following parameters:
@@ -123506,32 +106399,6 @@ func (image *ImageInstance) SetFromResource(resourcePath string) {
 	C.gtk_image_set_from_resource(carg0, carg1)
 	runtime.KeepAlive(image)
 	runtime.KeepAlive(resourcePath)
-}
-
-// SetFromStock wraps gtk_image_set_from_stock
-// 
-// The function takes the following parameters:
-// 
-// 	- stockId string: a stock icon name 
-// 	- size int: a stock icon size (#GtkIconSize) 
-//
-// See gtk_image_new_from_stock() for details.
-//
-// Deprecated: (since 3.10.0) Use gtk_image_set_from_icon_name() instead.
-func (image *ImageInstance) SetFromStock(stockId string, size int) {
-	var carg0 *C.GtkImage   // in, none, converted
-	var carg1 *C.gchar      // in, none, string, casted *C.gchar
-	var carg2 C.GtkIconSize // in, none, casted, casted C.gint
-
-	carg0 = (*C.GtkImage)(UnsafeImageToGlibNone(image))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(stockId)))
-	defer C.free(unsafe.Pointer(carg1))
-	carg2 = C.GtkIconSize(size)
-
-	C.gtk_image_set_from_stock(carg0, carg1, carg2)
-	runtime.KeepAlive(image)
-	runtime.KeepAlive(stockId)
-	runtime.KeepAlive(size)
 }
 
 // SetPixelSize wraps gtk_image_set_pixel_size
@@ -125046,7 +107913,7 @@ func (label *LabelInstance) GetCurrentURI() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -125114,7 +107981,7 @@ func (label *LabelInstance) GetLabel() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -125420,7 +108287,7 @@ func (label *LabelInstance) GetText() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -126247,9 +109114,6 @@ func unsafeWrapLinkButton(base *gobject.ObjectInstance) *LinkButtonInstance {
 			ActionableInstance: ActionableInstance{
 				Instance: *base,
 			},
-			ActivatableInstance: ActivatableInstance{
-				Instance: *base,
-			},
 		},
 	}
 }
@@ -126362,7 +109226,7 @@ func (linkButton *LinkButtonInstance) GetURI() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -126978,9 +109842,6 @@ func unsafeWrapLockButton(base *gobject.ObjectInstance) *LockButtonInstance {
 			ActionableInstance: ActionableInstance{
 				Instance: *base,
 			},
-			ActivatableInstance: ActivatableInstance{
-				Instance: *base,
-			},
 		},
 	}
 }
@@ -127305,25 +110166,6 @@ type Menu interface {
 	// Returns whether the menu reserves space for toggles and
 	// icons, regardless of their actual presence.
 	GetReserveToggleSize() bool
-	// GetTearoffState wraps gtk_menu_get_tearoff_state
-	// The function returns the following values:
-	// 
-	// 	- goret bool 
-	//
-	// Returns whether the menu is torn off.
-	// See gtk_menu_set_tearoff_state().
-	//
-	// Deprecated: (since 3.10.0) 
-	GetTearoffState() bool
-	// GetTitle wraps gtk_menu_get_title
-	// The function returns the following values:
-	// 
-	// 	- goret string 
-	//
-	// Returns the title of the menu. See gtk_menu_set_title().
-	//
-	// Deprecated: (since 3.10.0) 
-	GetTitle() string
 	// PlaceOnMonitor wraps gtk_menu_place_on_monitor
 	// 
 	// The function takes the following parameters:
@@ -127364,7 +110206,7 @@ type Menu interface {
 	// in order for those windows to support all the accelerators
 	// contained in this group.
 	SetAccelGroup(AccelGroup)
-	// SetAccelPath wraps gtk_menu_set_accel_path
+	// SetMenuAccelPath wraps gtk_menu_set_accel_path
 	// 
 	// The function takes the following parameters:
 	// 
@@ -127391,7 +110233,7 @@ type Menu interface {
 	// Note that @accel_path string will be stored in a #GQuark. Therefore,
 	// if you pass a static string, you can save some memory by interning
 	// it first with g_intern_static_string().
-	SetAccelPath(string)
+	SetMenuAccelPath(string)
 	// SetActive wraps gtk_menu_set_active
 	// 
 	// The function takes the following parameters:
@@ -127437,35 +110279,6 @@ type Menu interface {
 	//
 	// Sets the #GdkScreen on which the menu will be displayed.
 	SetScreen(gdk.Screen)
-	// SetTearoffState wraps gtk_menu_set_tearoff_state
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- tornOff bool: If %TRUE, menu is displayed as a tearoff menu. 
-	//
-	// Changes the tearoff state of the menu.  A menu is normally
-	// displayed as drop down menu which persists as long as the menu is
-	// active.  It can also be displayed as a tearoff menu which persists
-	// until it is closed or reattached.
-	//
-	// Deprecated: (since 3.10.0) 
-	SetTearoffState(bool)
-	// SetTitle wraps gtk_menu_set_title
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- title string (nullable): a string containing the title for the menu, or %NULL to
-	//   inherit the title of the parent menu item, if any 
-	//
-	// Sets the title string for the menu.
-	// 
-	// The title is displayed when the menu is shown as a tearoff
-	// menu. If @title is %NULL, the menu will see if it is attached
-	// to a parent menu item, and if so it will try to use the same
-	// text as that menu item’s label.
-	//
-	// Deprecated: (since 3.10.0) 
-	SetTitle(string)
 }
 
 func unsafeWrapMenu(base *gobject.ObjectInstance) *MenuInstance {
@@ -127665,7 +110478,7 @@ func (menu *MenuInstance) GetAccelPath() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -127758,57 +110571,6 @@ func (menu *MenuInstance) GetReserveToggleSize() bool {
 	if cret != 0 {
 		goret = true
 	}
-
-	return goret
-}
-
-// GetTearoffState wraps gtk_menu_get_tearoff_state
-// The function returns the following values:
-// 
-// 	- goret bool 
-//
-// Returns whether the menu is torn off.
-// See gtk_menu_set_tearoff_state().
-//
-// Deprecated: (since 3.10.0) 
-func (menu *MenuInstance) GetTearoffState() bool {
-	var carg0 *C.GtkMenu // in, none, converted
-	var cret  C.gboolean // return
-
-	carg0 = (*C.GtkMenu)(UnsafeMenuToGlibNone(menu))
-
-	cret = C.gtk_menu_get_tearoff_state(carg0)
-	runtime.KeepAlive(menu)
-
-	var goret bool
-
-	if cret != 0 {
-		goret = true
-	}
-
-	return goret
-}
-
-// GetTitle wraps gtk_menu_get_title
-// The function returns the following values:
-// 
-// 	- goret string 
-//
-// Returns the title of the menu. See gtk_menu_set_title().
-//
-// Deprecated: (since 3.10.0) 
-func (menu *MenuInstance) GetTitle() string {
-	var carg0 *C.GtkMenu // in, none, converted
-	var cret  *C.gchar   // return, none, string, casted *C.gchar
-
-	carg0 = (*C.GtkMenu)(UnsafeMenuToGlibNone(menu))
-
-	cret = C.gtk_menu_get_title(carg0)
-	runtime.KeepAlive(menu)
-
-	var goret string
-
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -127907,7 +110669,7 @@ func (menu *MenuInstance) SetAccelGroup(accelGroup AccelGroup) {
 	runtime.KeepAlive(accelGroup)
 }
 
-// SetAccelPath wraps gtk_menu_set_accel_path
+// SetMenuAccelPath wraps gtk_menu_set_accel_path
 // 
 // The function takes the following parameters:
 // 
@@ -127934,7 +110696,7 @@ func (menu *MenuInstance) SetAccelGroup(accelGroup AccelGroup) {
 // Note that @accel_path string will be stored in a #GQuark. Therefore,
 // if you pass a static string, you can save some memory by interning
 // it first with g_intern_static_string().
-func (menu *MenuInstance) SetAccelPath(accelPath string) {
+func (menu *MenuInstance) SetMenuAccelPath(accelPath string) {
 	var carg0 *C.GtkMenu // in, none, converted
 	var carg1 *C.gchar   // in, none, string, nullable-string
 
@@ -128040,62 +110802,6 @@ func (menu *MenuInstance) SetScreen(screen gdk.Screen) {
 	C.gtk_menu_set_screen(carg0, carg1)
 	runtime.KeepAlive(menu)
 	runtime.KeepAlive(screen)
-}
-
-// SetTearoffState wraps gtk_menu_set_tearoff_state
-// 
-// The function takes the following parameters:
-// 
-// 	- tornOff bool: If %TRUE, menu is displayed as a tearoff menu. 
-//
-// Changes the tearoff state of the menu.  A menu is normally
-// displayed as drop down menu which persists as long as the menu is
-// active.  It can also be displayed as a tearoff menu which persists
-// until it is closed or reattached.
-//
-// Deprecated: (since 3.10.0) 
-func (menu *MenuInstance) SetTearoffState(tornOff bool) {
-	var carg0 *C.GtkMenu // in, none, converted
-	var carg1 C.gboolean // in
-
-	carg0 = (*C.GtkMenu)(UnsafeMenuToGlibNone(menu))
-	if tornOff {
-		carg1 = C.TRUE
-	}
-
-	C.gtk_menu_set_tearoff_state(carg0, carg1)
-	runtime.KeepAlive(menu)
-	runtime.KeepAlive(tornOff)
-}
-
-// SetTitle wraps gtk_menu_set_title
-// 
-// The function takes the following parameters:
-// 
-// 	- title string (nullable): a string containing the title for the menu, or %NULL to
-//   inherit the title of the parent menu item, if any 
-//
-// Sets the title string for the menu.
-// 
-// The title is displayed when the menu is shown as a tearoff
-// menu. If @title is %NULL, the menu will see if it is attached
-// to a parent menu item, and if so it will try to use the same
-// text as that menu item’s label.
-//
-// Deprecated: (since 3.10.0) 
-func (menu *MenuInstance) SetTitle(title string) {
-	var carg0 *C.GtkMenu // in, none, converted
-	var carg1 *C.gchar   // in, none, string, nullable-string
-
-	carg0 = (*C.GtkMenu)(UnsafeMenuToGlibNone(menu))
-	if title != "" {
-		carg1 = (*C.gchar)(unsafe.Pointer(C.CString(title)))
-		defer C.free(unsafe.Pointer(carg1))
-	}
-
-	C.gtk_menu_set_title(carg0, carg1)
-	runtime.KeepAlive(menu)
-	runtime.KeepAlive(title)
 }
 
 // MenuAccessibleInstance is the instance type used by all types extending GtkMenuAccessible. It is used internally by the bindings. Users should use the interface [MenuAccessible] instead.
@@ -128406,7 +111112,6 @@ type MenuItemInstance struct {
 	BinInstance
 	// implemented interfaces:
 	ActionableInstance
-	ActivatableInstance
 }
 
 var _ MenuItem = (*MenuItemInstance)(nil)
@@ -128464,13 +111169,12 @@ var _ MenuItem = (*MenuItemInstance)(nil)
 type MenuItem interface {
 	Bin
 	Actionable
-	Activatable
 	upcastToGtkMenuItem() *MenuItemInstance
 
-	// Activate wraps gtk_menu_item_activate
+	// ActivateMenuItem wraps gtk_menu_item_activate
 	//
 	// Emits the #GtkMenuItem::activate signal on the given item
-	Activate()
+	ActivateMenuItem()
 	// Deselect wraps gtk_menu_item_deselect
 	//
 	// Emits the #GtkMenuItem::deselect signal on the given item.
@@ -128500,16 +111204,6 @@ type MenuItem interface {
 	// the submenu indicator, regardless if it has a submenu
 	// or not.
 	GetReserveIndicator() bool
-	// GetRightJustified wraps gtk_menu_item_get_right_justified
-	// The function returns the following values:
-	// 
-	// 	- goret bool 
-	//
-	// Gets whether the menu item appears justified at the right
-	// side of the menu bar.
-	//
-	// Deprecated: (since 3.2.0) See gtk_menu_item_set_right_justified()
-	GetRightJustified() bool
 	// GetSubmenu wraps gtk_menu_item_get_submenu
 	// The function returns the following values:
 	// 
@@ -128530,7 +111224,7 @@ type MenuItem interface {
 	//
 	// Emits the #GtkMenuItem::select signal on the given item.
 	Select()
-	// SetAccelPath wraps gtk_menu_item_set_accel_path
+	// SetMenuItemAccelPath wraps gtk_menu_item_set_accel_path
 	// 
 	// The function takes the following parameters:
 	// 
@@ -128556,7 +111250,7 @@ type MenuItem interface {
 	// Note that @accel_path string will be stored in a #GQuark.
 	// Therefore, if you pass a static string, you can save some memory
 	// by interning it first with g_intern_static_string().
-	SetAccelPath(string)
+	SetMenuItemAccelPath(string)
 	// SetLabel wraps gtk_menu_item_set_label
 	// 
 	// The function takes the following parameters:
@@ -128578,22 +111272,6 @@ type MenuItem interface {
 	// There should be little need for applications to call
 	// this functions.
 	SetReserveIndicator(bool)
-	// SetRightJustified wraps gtk_menu_item_set_right_justified
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- rightJustified bool: if %TRUE the menu item will appear at the
-	//   far right if added to a menu bar 
-	//
-	// Sets whether the menu item appears justified at the right
-	// side of a menu bar. This was traditionally done for “Help”
-	// menu items, but is now considered a bad idea. (If the widget
-	// layout is reversed for a right-to-left language like Hebrew
-	// or Arabic, right-justified-menu-items appear at the left.)
-	//
-	// Deprecated: (since 3.2.0) If you insist on using it, use
-	//   gtk_widget_set_hexpand() and gtk_widget_set_halign().
-	SetRightJustified(bool)
 	// SetSubmenu wraps gtk_menu_item_set_submenu
 	// 
 	// The function takes the following parameters:
@@ -128640,9 +111318,6 @@ func unsafeWrapMenuItem(base *gobject.ObjectInstance) *MenuItemInstance {
 			},
 		},
 		ActionableInstance: ActionableInstance{
-			Instance: *base,
-		},
-		ActivatableInstance: ActivatableInstance{
 			Instance: *base,
 		},
 	}
@@ -128754,10 +111429,10 @@ func NewMenuItemInstanceWithMnemonic(label string) Widget {
 	return goret
 }
 
-// Activate wraps gtk_menu_item_activate
+// ActivateMenuItem wraps gtk_menu_item_activate
 //
 // Emits the #GtkMenuItem::activate signal on the given item
-func (menuItem *MenuItemInstance) Activate() {
+func (menuItem *MenuItemInstance) ActivateMenuItem() {
 	var carg0 *C.GtkMenuItem // in, none, converted
 
 	carg0 = (*C.GtkMenuItem)(UnsafeMenuItemToGlibNone(menuItem))
@@ -128797,7 +111472,7 @@ func (menuItem *MenuItemInstance) GetAccelPath() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -128819,7 +111494,7 @@ func (menuItem *MenuItemInstance) GetLabel() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -128839,33 +111514,6 @@ func (menuItem *MenuItemInstance) GetReserveIndicator() bool {
 	carg0 = (*C.GtkMenuItem)(UnsafeMenuItemToGlibNone(menuItem))
 
 	cret = C.gtk_menu_item_get_reserve_indicator(carg0)
-	runtime.KeepAlive(menuItem)
-
-	var goret bool
-
-	if cret != 0 {
-		goret = true
-	}
-
-	return goret
-}
-
-// GetRightJustified wraps gtk_menu_item_get_right_justified
-// The function returns the following values:
-// 
-// 	- goret bool 
-//
-// Gets whether the menu item appears justified at the right
-// side of the menu bar.
-//
-// Deprecated: (since 3.2.0) See gtk_menu_item_set_right_justified()
-func (menuItem *MenuItemInstance) GetRightJustified() bool {
-	var carg0 *C.GtkMenuItem // in, none, converted
-	var cret  C.gboolean     // return
-
-	carg0 = (*C.GtkMenuItem)(UnsafeMenuItemToGlibNone(menuItem))
-
-	cret = C.gtk_menu_item_get_right_justified(carg0)
 	runtime.KeepAlive(menuItem)
 
 	var goret bool
@@ -128937,7 +111585,7 @@ func (menuItem *MenuItemInstance) Select() {
 	runtime.KeepAlive(menuItem)
 }
 
-// SetAccelPath wraps gtk_menu_item_set_accel_path
+// SetMenuItemAccelPath wraps gtk_menu_item_set_accel_path
 // 
 // The function takes the following parameters:
 // 
@@ -128963,7 +111611,7 @@ func (menuItem *MenuItemInstance) Select() {
 // Note that @accel_path string will be stored in a #GQuark.
 // Therefore, if you pass a static string, you can save some memory
 // by interning it first with g_intern_static_string().
-func (menuItem *MenuItemInstance) SetAccelPath(accelPath string) {
+func (menuItem *MenuItemInstance) SetMenuItemAccelPath(accelPath string) {
 	var carg0 *C.GtkMenuItem // in, none, converted
 	var carg1 *C.gchar       // in, none, string, nullable-string
 
@@ -129022,35 +111670,6 @@ func (menuItem *MenuItemInstance) SetReserveIndicator(reserve bool) {
 	C.gtk_menu_item_set_reserve_indicator(carg0, carg1)
 	runtime.KeepAlive(menuItem)
 	runtime.KeepAlive(reserve)
-}
-
-// SetRightJustified wraps gtk_menu_item_set_right_justified
-// 
-// The function takes the following parameters:
-// 
-// 	- rightJustified bool: if %TRUE the menu item will appear at the
-//   far right if added to a menu bar 
-//
-// Sets whether the menu item appears justified at the right
-// side of a menu bar. This was traditionally done for “Help”
-// menu items, but is now considered a bad idea. (If the widget
-// layout is reversed for a right-to-left language like Hebrew
-// or Arabic, right-justified-menu-items appear at the left.)
-//
-// Deprecated: (since 3.2.0) If you insist on using it, use
-//   gtk_widget_set_hexpand() and gtk_widget_set_halign().
-func (menuItem *MenuItemInstance) SetRightJustified(rightJustified bool) {
-	var carg0 *C.GtkMenuItem // in, none, converted
-	var carg1 C.gboolean     // in
-
-	carg0 = (*C.GtkMenuItem)(UnsafeMenuItemToGlibNone(menuItem))
-	if rightJustified {
-		carg1 = C.TRUE
-	}
-
-	C.gtk_menu_item_set_right_justified(carg0, carg1)
-	runtime.KeepAlive(menuItem)
-	runtime.KeepAlive(rightJustified)
 }
 
 // SetSubmenu wraps gtk_menu_item_set_submenu
@@ -129249,9 +111868,6 @@ func unsafeWrapModelButton(base *gobject.ObjectInstance) *ModelButtonInstance {
 				},
 			},
 			ActionableInstance: ActionableInstance{
-				Instance: *base,
-			},
-			ActivatableInstance: ActivatableInstance{
 				Instance: *base,
 			},
 		},
@@ -129667,7 +112283,7 @@ func (plug *PlugAccessibleInstance) GetID() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 	defer C.free(unsafe.Pointer(cret))
 
 	return goret
@@ -129830,17 +112446,6 @@ type Popover interface {
 	//
 	// Returns the widget @popover is currently attached to
 	GetRelativeTo() Widget
-	// GetTransitionsEnabled wraps gtk_popover_get_transitions_enabled
-	// The function returns the following values:
-	// 
-	// 	- goret bool 
-	//
-	// Returns whether show/hide transitions are enabled on this popover.
-	//
-	// Deprecated: (since 3.22.0) You can show or hide the popover without transitions
-	//   using gtk_widget_show() and gtk_widget_hide() while gtk_popover_popup()
-	//   and gtk_popover_popdown() will use transitions.
-	GetTransitionsEnabled() bool
 	// Popdown wraps gtk_popover_popdown
 	//
 	// Pops @popover down.This is different than a gtk_widget_hide() call
@@ -129923,18 +112528,6 @@ type Popover interface {
 	// will be detached from its previous widget, and consequently destroyed
 	// unless extra references are kept.
 	SetRelativeTo(Widget)
-	// SetTransitionsEnabled wraps gtk_popover_set_transitions_enabled
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- transitionsEnabled bool: Whether transitions are enabled 
-	//
-	// Sets whether show/hide transitions are enabled on this popover
-	//
-	// Deprecated: (since 3.22.0) You can show or hide the popover without transitions
-	//   using gtk_widget_show() and gtk_widget_hide() while gtk_popover_popup()
-	//   and gtk_popover_popdown() will use transitions.
-	SetTransitionsEnabled(bool)
 }
 
 func unsafeWrapPopover(base *gobject.ObjectInstance) *PopoverInstance {
@@ -130256,34 +112849,6 @@ func (popover *PopoverInstance) GetRelativeTo() Widget {
 	return goret
 }
 
-// GetTransitionsEnabled wraps gtk_popover_get_transitions_enabled
-// The function returns the following values:
-// 
-// 	- goret bool 
-//
-// Returns whether show/hide transitions are enabled on this popover.
-//
-// Deprecated: (since 3.22.0) You can show or hide the popover without transitions
-//   using gtk_widget_show() and gtk_widget_hide() while gtk_popover_popup()
-//   and gtk_popover_popdown() will use transitions.
-func (popover *PopoverInstance) GetTransitionsEnabled() bool {
-	var carg0 *C.GtkPopover // in, none, converted
-	var cret  C.gboolean    // return
-
-	carg0 = (*C.GtkPopover)(UnsafePopoverToGlibNone(popover))
-
-	cret = C.gtk_popover_get_transitions_enabled(carg0)
-	runtime.KeepAlive(popover)
-
-	var goret bool
-
-	if cret != 0 {
-		goret = true
-	}
-
-	return goret
-}
-
 // Popdown wraps gtk_popover_popdown
 //
 // Pops @popover down.This is different than a gtk_widget_hide() call
@@ -130452,31 +113017,6 @@ func (popover *PopoverInstance) SetRelativeTo(relativeTo Widget) {
 	C.gtk_popover_set_relative_to(carg0, carg1)
 	runtime.KeepAlive(popover)
 	runtime.KeepAlive(relativeTo)
-}
-
-// SetTransitionsEnabled wraps gtk_popover_set_transitions_enabled
-// 
-// The function takes the following parameters:
-// 
-// 	- transitionsEnabled bool: Whether transitions are enabled 
-//
-// Sets whether show/hide transitions are enabled on this popover
-//
-// Deprecated: (since 3.22.0) You can show or hide the popover without transitions
-//   using gtk_widget_show() and gtk_widget_hide() while gtk_popover_popup()
-//   and gtk_popover_popdown() will use transitions.
-func (popover *PopoverInstance) SetTransitionsEnabled(transitionsEnabled bool) {
-	var carg0 *C.GtkPopover // in, none, converted
-	var carg1 C.gboolean    // in
-
-	carg0 = (*C.GtkPopover)(UnsafePopoverToGlibNone(popover))
-	if transitionsEnabled {
-		carg1 = C.TRUE
-	}
-
-	C.gtk_popover_set_transitions_enabled(carg0, carg1)
-	runtime.KeepAlive(popover)
-	runtime.KeepAlive(transitionsEnabled)
 }
 
 // PopoverMenuInstance is the instance type used by all types extending GtkPopoverMenu. It is used internally by the bindings. Users should use the interface [PopoverMenu] instead.
@@ -130753,7 +113293,6 @@ type RecentChooserMenuInstance struct {
 	_ [0]func() // equal guard
 	MenuInstance
 	// implemented interfaces:
-	ActivatableInstance
 	RecentChooserInstance
 }
 
@@ -130781,7 +113320,6 @@ var _ RecentChooserMenu = (*RecentChooserMenuInstance)(nil)
 // Recently used files are supported since GTK+ 2.10.
 type RecentChooserMenu interface {
 	Menu
-	Activatable
 	RecentChooser
 	upcastToGtkRecentChooserMenu() *RecentChooserMenuInstance
 
@@ -130823,9 +113361,6 @@ func unsafeWrapRecentChooserMenu(base *gobject.ObjectInstance) *RecentChooserMen
 					},
 				},
 			},
-		},
-		ActivatableInstance: ActivatableInstance{
-			Instance: *base,
 		},
 		RecentChooserInstance: RecentChooserInstance{
 			Instance: *base,
@@ -131545,9 +114080,6 @@ func unsafeWrapScaleButton(base *gobject.ObjectInstance) *ScaleButtonInstance {
 			ActionableInstance: ActionableInstance{
 				Instance: *base,
 			},
-			ActivatableInstance: ActivatableInstance{
-				Instance: *base,
-			},
 		},
 		OrientableInstance: OrientableInstance{
 			Instance: *base,
@@ -131972,32 +114504,6 @@ type ScrolledWindow interface {
 	Bin
 	upcastToGtkScrolledWindow() *ScrolledWindowInstance
 
-	// AddWithViewport wraps gtk_scrolled_window_add_with_viewport
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- child Widget: the widget you want to scroll 
-	//
-	// Used to add children without native scrolling capabilities. This
-	// is simply a convenience function; it is equivalent to adding the
-	// unscrollable child to a viewport, then adding the viewport to the
-	// scrolled window. If a child has native scrolling, use
-	// gtk_container_add() instead of this function.
-	// 
-	// The viewport scrolls the child by moving its #GdkWindow, and takes
-	// the size of the child to be the size of its toplevel #GdkWindow.
-	// This will be very wrong for most widgets that support native scrolling;
-	// for example, if you add a widget such as #GtkTreeView with a viewport,
-	// the whole widget will scroll, including the column headings. Thus,
-	// widgets with native scrolling support should not be used with the
-	// #GtkViewport proxy.
-	// 
-	// A widget supports scrolling natively if it implements the
-	// #GtkScrollable interface.
-	//
-	// Deprecated: (since 3.8.0) gtk_container_add() will automatically add
-	// a #GtkViewport if the child doesn’t implement #GtkScrollable.
-	AddWithViewport(Widget)
 	// GetCaptureButtonPress wraps gtk_scrolled_window_get_capture_button_press
 	// The function returns the following values:
 	// 
@@ -132383,43 +114889,6 @@ func NewScrolledWindowInstance(hadjustment Adjustment, vadjustment Adjustment) W
 	goret = UnsafeWidgetFromGlibNone(unsafe.Pointer(cret))
 
 	return goret
-}
-
-// AddWithViewport wraps gtk_scrolled_window_add_with_viewport
-// 
-// The function takes the following parameters:
-// 
-// 	- child Widget: the widget you want to scroll 
-//
-// Used to add children without native scrolling capabilities. This
-// is simply a convenience function; it is equivalent to adding the
-// unscrollable child to a viewport, then adding the viewport to the
-// scrolled window. If a child has native scrolling, use
-// gtk_container_add() instead of this function.
-// 
-// The viewport scrolls the child by moving its #GdkWindow, and takes
-// the size of the child to be the size of its toplevel #GdkWindow.
-// This will be very wrong for most widgets that support native scrolling;
-// for example, if you add a widget such as #GtkTreeView with a viewport,
-// the whole widget will scroll, including the column headings. Thus,
-// widgets with native scrolling support should not be used with the
-// #GtkViewport proxy.
-// 
-// A widget supports scrolling natively if it implements the
-// #GtkScrollable interface.
-//
-// Deprecated: (since 3.8.0) gtk_container_add() will automatically add
-// a #GtkViewport if the child doesn’t implement #GtkScrollable.
-func (scrolledWindow *ScrolledWindowInstance) AddWithViewport(child Widget) {
-	var carg0 *C.GtkScrolledWindow // in, none, converted
-	var carg1 *C.GtkWidget         // in, none, converted
-
-	carg0 = (*C.GtkScrolledWindow)(UnsafeScrolledWindowToGlibNone(scrolledWindow))
-	carg1 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(child))
-
-	C.gtk_scrolled_window_add_with_viewport(carg0, carg1)
-	runtime.KeepAlive(scrolledWindow)
-	runtime.KeepAlive(child)
 }
 
 // GetCaptureButtonPress wraps gtk_scrolled_window_get_capture_button_press
@@ -133460,9 +115929,6 @@ func unsafeWrapSeparatorMenuItem(base *gobject.ObjectInstance) *SeparatorMenuIte
 			ActionableInstance: ActionableInstance{
 				Instance: *base,
 			},
-			ActivatableInstance: ActivatableInstance{
-				Instance: *base,
-			},
 		},
 	}
 }
@@ -133657,7 +116123,7 @@ func (self *ShortcutLabelInstance) GetAccelerator() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -133679,7 +116145,7 @@ func (self *ShortcutLabelInstance) GetDisabledText() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -134365,7 +116831,7 @@ type Statusbar interface {
 	//
 	// Pushes a new message onto a statusbar’s stack.
 	Push(uint, string) uint
-	// Remove wraps gtk_statusbar_remove
+	// RemoveStatusbar wraps gtk_statusbar_remove
 	// 
 	// The function takes the following parameters:
 	// 
@@ -134374,7 +116840,7 @@ type Statusbar interface {
 	//
 	// Forces the removal of a message from a statusbar’s stack.
 	// The exact @context_id and @message_id must be specified.
-	Remove(uint, uint)
+	RemoveStatusbar(uint, uint)
 	// RemoveAll wraps gtk_statusbar_remove_all
 	// 
 	// The function takes the following parameters:
@@ -134571,7 +117037,7 @@ func (statusbar *StatusbarInstance) Push(contextId uint, text string) uint {
 	return goret
 }
 
-// Remove wraps gtk_statusbar_remove
+// RemoveStatusbar wraps gtk_statusbar_remove
 // 
 // The function takes the following parameters:
 // 
@@ -134580,7 +117046,7 @@ func (statusbar *StatusbarInstance) Push(contextId uint, text string) uint {
 //
 // Forces the removal of a message from a statusbar’s stack.
 // The exact @context_id and @message_id must be specified.
-func (statusbar *StatusbarInstance) Remove(contextId uint, messageId uint) {
+func (statusbar *StatusbarInstance) RemoveStatusbar(contextId uint, messageId uint) {
 	var carg0 *C.GtkStatusbar // in, none, converted
 	var carg1 C.guint         // in, none, casted
 	var carg2 C.guint         // in, none, casted
@@ -134666,9 +117132,6 @@ func unsafeWrapTearoffMenuItem(base *gobject.ObjectInstance) *TearoffMenuItemIns
 			ActionableInstance: ActionableInstance{
 				Instance: *base,
 			},
-			ActivatableInstance: ActivatableInstance{
-				Instance: *base,
-			},
 		},
 	}
 }
@@ -134699,27 +117162,6 @@ func UnsafeTearoffMenuItemToGlibNone(c TearoffMenuItem) unsafe.Pointer {
 // UnsafeTearoffMenuItemToGlibFull is used to convert the instance to it's C value GtkTearoffMenuItem, while removeing the finalizer. This is used by the bindings internally.
 func UnsafeTearoffMenuItemToGlibFull(c TearoffMenuItem) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
-}
-
-// NewTearoffMenuItemInstance wraps gtk_tearoff_menu_item_new
-// The function returns the following values:
-// 
-// 	- goret Widget 
-//
-// Creates a new #GtkTearoffMenuItem.
-//
-// Deprecated: (since 3.4.0) #GtkTearoffMenuItem is deprecated and should not be
-//     used in newly written code.
-func NewTearoffMenuItemInstance() Widget {
-	var cret *C.GtkWidget // return, none, converted
-
-	cret = C.gtk_tearoff_menu_item_new()
-
-	var goret Widget
-
-	goret = UnsafeWidgetFromGlibNone(unsafe.Pointer(cret))
-
-	return goret
 }
 
 // ToggleButtonInstance is the instance type used by all types extending GtkToggleButton. It is used internally by the bindings. Users should use the interface [ToggleButton] instead.
@@ -134890,9 +117332,6 @@ func unsafeWrapToggleButton(base *gobject.ObjectInstance) *ToggleButtonInstance 
 				},
 			},
 			ActionableInstance: ActionableInstance{
-				Instance: *base,
-			},
-			ActivatableInstance: ActivatableInstance{
 				Instance: *base,
 			},
 		},
@@ -135246,8 +117685,6 @@ func UnsafeToggleButtonAccessibleToGlibFull(c ToggleButtonAccessible) unsafe.Poi
 type ToolItemInstance struct {
 	_ [0]func() // equal guard
 	BinInstance
-	// implemented interfaces:
-	ActivatableInstance
 }
 
 var _ ToolItem = (*ToolItemInstance)(nil)
@@ -135266,7 +117703,6 @@ var _ ToolItem = (*ToolItemInstance)(nil)
 // #GtkToolShell for a description of the tool shell interface.
 type ToolItem interface {
 	Bin
-	Activatable
 	upcastToGtkToolItem() *ToolItemInstance
 
 	// GetEllipsizeMode wraps gtk_tool_item_get_ellipsize_mode
@@ -135555,9 +117991,6 @@ func unsafeWrapToolItem(base *gobject.ObjectInstance) *ToolItemInstance {
 					Instance: *base,
 				},
 			},
-		},
-		ActivatableInstance: ActivatableInstance{
-			Instance: *base,
 		},
 	}
 }
@@ -136358,42 +118791,6 @@ func UnsafeVBoxToGlibFull(c VBox) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewVBoxInstance wraps gtk_vbox_new
-// 
-// The function takes the following parameters:
-// 
-// 	- homogeneous bool: %TRUE if all children are to be given equal space allotments. 
-// 	- spacing int: the number of pixels to place by default between children. 
-// 
-// The function returns the following values:
-// 
-// 	- goret Widget 
-//
-// Creates a new #GtkVBox.
-//
-// Deprecated: (since 3.2.0) You should use gtk_box_new() with a %GTK_ORIENTATION_VERTICAL
-//   #GtkOrientable:orientation instead
-func NewVBoxInstance(homogeneous bool, spacing int) Widget {
-	var carg1 C.gboolean   // in
-	var carg2 C.gint       // in, none, casted
-	var cret  *C.GtkWidget // return, none, converted
-
-	if homogeneous {
-		carg1 = C.TRUE
-	}
-	carg2 = C.gint(spacing)
-
-	cret = C.gtk_vbox_new(carg1, carg2)
-	runtime.KeepAlive(homogeneous)
-	runtime.KeepAlive(spacing)
-
-	var goret Widget
-
-	goret = UnsafeWidgetFromGlibNone(unsafe.Pointer(cret))
-
-	return goret
-}
-
 // VButtonBoxInstance is the instance type used by all types extending GtkVButtonBox. It is used internally by the bindings. Users should use the interface [VButtonBox] instead.
 type VButtonBoxInstance struct {
 	_ [0]func() // equal guard
@@ -136461,26 +118858,6 @@ func UnsafeVButtonBoxToGlibFull(c VButtonBox) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewVButtonBoxInstance wraps gtk_vbutton_box_new
-// The function returns the following values:
-// 
-// 	- goret Widget 
-//
-// Creates a new vertical button box.
-//
-// Deprecated: (since 3.2.0) Use gtk_button_box_new() with %GTK_ORIENTATION_VERTICAL instead
-func NewVButtonBoxInstance() Widget {
-	var cret *C.GtkWidget // return, none, converted
-
-	cret = C.gtk_vbutton_box_new()
-
-	var goret Widget
-
-	goret = UnsafeWidgetFromGlibNone(unsafe.Pointer(cret))
-
-	return goret
-}
-
 // ViewportInstance is the instance type used by all types extending GtkViewport. It is used internally by the bindings. Users should use the interface [Viewport] instead.
 type ViewportInstance struct {
 	_ [0]func() // equal guard
@@ -136524,15 +118901,6 @@ type Viewport interface {
 	//
 	// Gets the bin window of the #GtkViewport.
 	GetBinWindow() gdk.Window
-	// GetHAdjustment wraps gtk_viewport_get_hadjustment
-	// The function returns the following values:
-	// 
-	// 	- goret Adjustment 
-	//
-	// Returns the horizontal adjustment of the viewport.
-	//
-	// Deprecated: (since 3.0.0) Use gtk_scrollable_get_hadjustment()
-	GetHAdjustment() Adjustment
 	// GetShadowType wraps gtk_viewport_get_shadow_type
 	// The function returns the following values:
 	// 
@@ -136541,15 +118909,6 @@ type Viewport interface {
 	// Gets the shadow type of the #GtkViewport. See
 	// gtk_viewport_set_shadow_type().
 	GetShadowType() ShadowType
-	// GetVAdjustment wraps gtk_viewport_get_vadjustment
-	// The function returns the following values:
-	// 
-	// 	- goret Adjustment 
-	//
-	// Returns the vertical adjustment of the viewport.
-	//
-	// Deprecated: (since 3.0.0) Use gtk_scrollable_get_vadjustment()
-	GetVAdjustment() Adjustment
 	// GetViewWindow wraps gtk_viewport_get_view_window
 	// The function returns the following values:
 	// 
@@ -136557,16 +118916,6 @@ type Viewport interface {
 	//
 	// Gets the view window of the #GtkViewport.
 	GetViewWindow() gdk.Window
-	// SetHAdjustment wraps gtk_viewport_set_hadjustment
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- adjustment Adjustment (nullable): a #GtkAdjustment. 
-	//
-	// Sets the horizontal adjustment of the viewport.
-	//
-	// Deprecated: (since 3.0.0) Use gtk_scrollable_set_hadjustment()
-	SetHAdjustment(Adjustment)
 	// SetShadowType wraps gtk_viewport_set_shadow_type
 	// 
 	// The function takes the following parameters:
@@ -136575,16 +118924,6 @@ type Viewport interface {
 	//
 	// Sets the shadow type of the viewport.
 	SetShadowType(ShadowType)
-	// SetVAdjustment wraps gtk_viewport_set_vadjustment
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- adjustment Adjustment (nullable): a #GtkAdjustment. 
-	//
-	// Sets the vertical adjustment of the viewport.
-	//
-	// Deprecated: (since 3.0.0) Use gtk_scrollable_set_vadjustment()
-	SetVAdjustment(Adjustment)
 }
 
 func unsafeWrapViewport(base *gobject.ObjectInstance) *ViewportInstance {
@@ -136696,30 +119035,6 @@ func (viewport *ViewportInstance) GetBinWindow() gdk.Window {
 	return goret
 }
 
-// GetHAdjustment wraps gtk_viewport_get_hadjustment
-// The function returns the following values:
-// 
-// 	- goret Adjustment 
-//
-// Returns the horizontal adjustment of the viewport.
-//
-// Deprecated: (since 3.0.0) Use gtk_scrollable_get_hadjustment()
-func (viewport *ViewportInstance) GetHAdjustment() Adjustment {
-	var carg0 *C.GtkViewport   // in, none, converted
-	var cret  *C.GtkAdjustment // return, none, converted
-
-	carg0 = (*C.GtkViewport)(UnsafeViewportToGlibNone(viewport))
-
-	cret = C.gtk_viewport_get_hadjustment(carg0)
-	runtime.KeepAlive(viewport)
-
-	var goret Adjustment
-
-	goret = UnsafeAdjustmentFromGlibNone(unsafe.Pointer(cret))
-
-	return goret
-}
-
 // GetShadowType wraps gtk_viewport_get_shadow_type
 // The function returns the following values:
 // 
@@ -136739,30 +119054,6 @@ func (viewport *ViewportInstance) GetShadowType() ShadowType {
 	var goret ShadowType
 
 	goret = ShadowType(cret)
-
-	return goret
-}
-
-// GetVAdjustment wraps gtk_viewport_get_vadjustment
-// The function returns the following values:
-// 
-// 	- goret Adjustment 
-//
-// Returns the vertical adjustment of the viewport.
-//
-// Deprecated: (since 3.0.0) Use gtk_scrollable_get_vadjustment()
-func (viewport *ViewportInstance) GetVAdjustment() Adjustment {
-	var carg0 *C.GtkViewport   // in, none, converted
-	var cret  *C.GtkAdjustment // return, none, converted
-
-	carg0 = (*C.GtkViewport)(UnsafeViewportToGlibNone(viewport))
-
-	cret = C.gtk_viewport_get_vadjustment(carg0)
-	runtime.KeepAlive(viewport)
-
-	var goret Adjustment
-
-	goret = UnsafeAdjustmentFromGlibNone(unsafe.Pointer(cret))
 
 	return goret
 }
@@ -136789,29 +119080,6 @@ func (viewport *ViewportInstance) GetViewWindow() gdk.Window {
 	return goret
 }
 
-// SetHAdjustment wraps gtk_viewport_set_hadjustment
-// 
-// The function takes the following parameters:
-// 
-// 	- adjustment Adjustment (nullable): a #GtkAdjustment. 
-//
-// Sets the horizontal adjustment of the viewport.
-//
-// Deprecated: (since 3.0.0) Use gtk_scrollable_set_hadjustment()
-func (viewport *ViewportInstance) SetHAdjustment(adjustment Adjustment) {
-	var carg0 *C.GtkViewport   // in, none, converted
-	var carg1 *C.GtkAdjustment // in, none, converted, nullable
-
-	carg0 = (*C.GtkViewport)(UnsafeViewportToGlibNone(viewport))
-	if adjustment != nil {
-		carg1 = (*C.GtkAdjustment)(UnsafeAdjustmentToGlibNone(adjustment))
-	}
-
-	C.gtk_viewport_set_hadjustment(carg0, carg1)
-	runtime.KeepAlive(viewport)
-	runtime.KeepAlive(adjustment)
-}
-
 // SetShadowType wraps gtk_viewport_set_shadow_type
 // 
 // The function takes the following parameters:
@@ -136829,29 +119097,6 @@ func (viewport *ViewportInstance) SetShadowType(typ ShadowType) {
 	C.gtk_viewport_set_shadow_type(carg0, carg1)
 	runtime.KeepAlive(viewport)
 	runtime.KeepAlive(typ)
-}
-
-// SetVAdjustment wraps gtk_viewport_set_vadjustment
-// 
-// The function takes the following parameters:
-// 
-// 	- adjustment Adjustment (nullable): a #GtkAdjustment. 
-//
-// Sets the vertical adjustment of the viewport.
-//
-// Deprecated: (since 3.0.0) Use gtk_scrollable_set_vadjustment()
-func (viewport *ViewportInstance) SetVAdjustment(adjustment Adjustment) {
-	var carg0 *C.GtkViewport   // in, none, converted
-	var carg1 *C.GtkAdjustment // in, none, converted, nullable
-
-	carg0 = (*C.GtkViewport)(UnsafeViewportToGlibNone(viewport))
-	if adjustment != nil {
-		carg1 = (*C.GtkAdjustment)(UnsafeAdjustmentToGlibNone(adjustment))
-	}
-
-	C.gtk_viewport_set_vadjustment(carg0, carg1)
-	runtime.KeepAlive(viewport)
-	runtime.KeepAlive(adjustment)
 }
 
 // VolumeButtonInstance is the instance type used by all types extending GtkVolumeButton. It is used internally by the bindings. Users should use the interface [VolumeButton] instead.
@@ -136892,9 +119137,6 @@ func unsafeWrapVolumeButton(base *gobject.ObjectInstance) *VolumeButtonInstance 
 					},
 				},
 				ActionableInstance: ActionableInstance{
-					Instance: *base,
-				},
-				ActivatableInstance: ActivatableInstance{
 					Instance: *base,
 				},
 			},
@@ -137258,15 +119500,6 @@ type Window interface {
 	// @window is %NULL or if @window does not have an explicit
 	// window group.
 	GetGroup() WindowGroup
-	// GetHasResizeGrip wraps gtk_window_get_has_resize_grip
-	// The function returns the following values:
-	// 
-	// 	- goret bool 
-	//
-	// Determines whether the window may have a resize grip.
-	//
-	// Deprecated: (since 3.14.0) Resize grips have been removed.
-	GetHasResizeGrip() bool
 	// GetHideTitlebarWhenMaximized wraps gtk_window_get_hide_titlebar_when_maximized
 	// The function returns the following values:
 	// 
@@ -137314,16 +119547,6 @@ type Window interface {
 	//
 	// Returns whether the window is modal. See gtk_window_set_modal().
 	GetModal() bool
-	// GetOpacity wraps gtk_window_get_opacity
-	// The function returns the following values:
-	// 
-	// 	- goret float64 
-	//
-	// Fetches the requested opacity for this window. See
-	// gtk_window_set_opacity().
-	//
-	// Deprecated: (since 3.8.0) Use gtk_widget_get_opacity instead.
-	GetOpacity() float64
 	// GetPosition wraps gtk_window_get_position
 	// The function returns the following values:
 	// 
@@ -137376,18 +119599,6 @@ type Window interface {
 	//
 	// Gets the value set by gtk_window_set_resizable().
 	GetResizable() bool
-	// GetResizeGripArea wraps gtk_window_get_resize_grip_area
-	// The function returns the following values:
-	// 
-	// 	- rect gdk.Rectangle: a pointer to a #GdkRectangle which we should store
-	//     the resize grip area 
-	// 	- goret bool 
-	//
-	// If a window has a resize grip, this will retrieve the grip
-	// position, width and height into the specified #GdkRectangle.
-	//
-	// Deprecated: (since 3.14.0) Resize grips have been removed.
-	GetResizeGripArea() (gdk.Rectangle, bool)
 	// GetRole wraps gtk_window_get_role
 	// The function returns the following values:
 	// 
@@ -137617,7 +119828,7 @@ type Window interface {
 	// on #GtkWidget, or by listening to notifications on the
 	// #GtkWindow:is-maximized property.
 	Maximize()
-	// MnemonicActivate wraps gtk_window_mnemonic_activate
+	// WindowMnemonicActivate wraps gtk_window_mnemonic_activate
 	// 
 	// The function takes the following parameters:
 	// 
@@ -137629,7 +119840,7 @@ type Window interface {
 	// 	- goret bool 
 	//
 	// Activates the targets associated with the mnemonic.
-	MnemonicActivate(uint, gdk.ModifierType) bool
+	WindowMnemonicActivate(uint, gdk.ModifierType) bool
 	// Move wraps gtk_window_move
 	// 
 	// The function takes the following parameters:
@@ -137671,90 +119882,6 @@ type Window interface {
 	// 
 	// The gtk_window_get_position() documentation may also be relevant.
 	Move(int, int)
-	// ParseGeometry wraps gtk_window_parse_geometry
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- geometry string: geometry string 
-	// 
-	// The function returns the following values:
-	// 
-	// 	- goret bool 
-	//
-	// Parses a standard X Window System geometry string - see the
-	// manual page for X (type “man X”) for details on this.
-	// gtk_window_parse_geometry() does work on all GTK+ ports
-	// including Win32 but is primarily intended for an X environment.
-	// 
-	// If either a size or a position can be extracted from the
-	// geometry string, gtk_window_parse_geometry() returns %TRUE
-	// and calls gtk_window_set_default_size() and/or gtk_window_move()
-	// to resize/move the window.
-	// 
-	// If gtk_window_parse_geometry() returns %TRUE, it will also
-	// set the #GDK_HINT_USER_POS and/or #GDK_HINT_USER_SIZE hints
-	// indicating to the window manager that the size/position of
-	// the window was user-specified. This causes most window
-	// managers to honor the geometry.
-	// 
-	// Note that for gtk_window_parse_geometry() to work as expected, it has
-	// to be called when the window has its “final” size, i.e. after calling
-	// gtk_widget_show_all() on the contents and gtk_window_set_geometry_hints()
-	// on the window.
-	// |[&lt;!-- language="C" --&gt;
-	// #include &lt;gtk/gtk.h&gt;
-	// 
-	// static void
-	// fill_with_content (GtkWidget *vbox)
-	// {
-	//   // fill with content...
-	// }
-	// 
-	// int
-	// main (int argc, char *argv[])
-	// {
-	//   GtkWidget *window, *vbox;
-	//   GdkGeometry size_hints = {
-	//     100, 50, 0, 0, 100, 50, 10,
-	//     10, 0.0, 0.0, GDK_GRAVITY_NORTH_WEST
-	//   };
-	// 
-	//   gtk_init (&amp;argc, &amp;argv);
-	// 
-	//   window = gtk_window_new (GTK_WINDOW_TOPLEVEL);
-	//   vbox = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
-	// 
-	//   gtk_container_add (GTK_CONTAINER (window), vbox);
-	//   fill_with_content (vbox);
-	//   gtk_widget_show_all (vbox);
-	// 
-	//   gtk_window_set_geometry_hints (GTK_WINDOW (window),
-	// 	  			    NULL,
-	// 				    &amp;size_hints,
-	// 				    GDK_HINT_MIN_SIZE |
-	// 				    GDK_HINT_BASE_SIZE |
-	// 				    GDK_HINT_RESIZE_INC);
-	// 
-	//   if (argc &gt; 1)
-	//     {
-	//       gboolean res;
-	//       res = gtk_window_parse_geometry (GTK_WINDOW (window),
-	//                                        argv[1]);
-	//       if (! res)
-	//         fprintf (stderr,
-	//                  "Failed to parse “%s”\n",
-	//                  argv[1]);
-	//     }
-	// 
-	//   gtk_widget_show_all (window);
-	//   gtk_main ();
-	// 
-	//   return 0;
-	// }
-	// ]|
-	//
-	// Deprecated: (since 3.20.0) Geometry handling in GTK is deprecated.
-	ParseGeometry(string) bool
 	// Present wraps gtk_window_present
 	//
 	// Presents a window to the user. This function should not be used
@@ -137821,16 +119948,6 @@ type Window interface {
 	//
 	// Removes a mnemonic from this window.
 	RemoveMnemonic(uint, Widget)
-	// ReshowWithInitialSize wraps gtk_window_reshow_with_initial_size
-	//
-	// Hides @window, then reshows it, resetting the
-	// default size and position of the window. Used
-	// by GUI builders only.
-	//
-	// Deprecated: (since 3.10.0) GUI builders can call gtk_widget_hide(),
-	//   gtk_widget_unrealize() and then gtk_widget_show() on @window
-	//   themselves, if they still need this functionality.
-	ReshowWithInitialSize()
 	// Resize wraps gtk_window_resize
 	// 
 	// The function takes the following parameters:
@@ -137867,29 +119984,6 @@ type Window interface {
 	// window content smaller that specified by gtk_window_resize() and not
 	// a larger window.
 	Resize(int, int)
-	// ResizeGripIsVisible wraps gtk_window_resize_grip_is_visible
-	// The function returns the following values:
-	// 
-	// 	- goret bool 
-	//
-	// Determines whether a resize grip is visible for the specified window.
-	//
-	// Deprecated: (since 3.14.0) Resize grips have been removed.
-	ResizeGripIsVisible() bool
-	// ResizeToGeometry wraps gtk_window_resize_to_geometry
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- width int: width in resize increments to resize the window to 
-	// 	- height int: height in resize increments to resize the window to 
-	//
-	// Like gtk_window_resize(), but @width and @height are interpreted
-	// in terms of the base size and increment set with
-	// gtk_window_set_geometry_hints.
-	//
-	// Deprecated: (since 3.20.0) This function does nothing. Use
-	//    gtk_window_resize() and compute the geometry yourself.
-	ResizeToGeometry(int, int)
 	// SetAcceptFocus wraps gtk_window_set_accept_focus
 	// 
 	// The function takes the following parameters:
@@ -137972,20 +120066,6 @@ type Window interface {
 	// the default widget, you must call gtk_widget_set_can_default() on
 	// the widget you’d like to make the default.
 	SetDefault(Widget)
-	// SetDefaultGeometry wraps gtk_window_set_default_geometry
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- width int: width in resize increments, or -1 to unset the default width 
-	// 	- height int: height in resize increments, or -1 to unset the default height 
-	//
-	// Like gtk_window_set_default_size(), but @width and @height are interpreted
-	// in terms of the base size and increment set with
-	// gtk_window_set_geometry_hints.
-	//
-	// Deprecated: (since 3.20.0) This function does nothing. If you want to set a default
-	//     size, use gtk_window_set_default_size() instead.
-	SetDefaultGeometry(int, int)
 	// SetDefaultSize wraps gtk_window_set_default_size
 	// 
 	// The function takes the following parameters:
@@ -138114,21 +120194,6 @@ type Window interface {
 	// The default window gravity is #GDK_GRAVITY_NORTH_WEST which will
 	// typically “do what you mean.”
 	SetGravity(gdk.Gravity)
-	// SetHasResizeGrip wraps gtk_window_set_has_resize_grip
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- value bool: %TRUE to allow a resize grip 
-	//
-	// Sets whether @window has a corner resize grip.
-	// 
-	// Note that the resize grip is only shown if the window
-	// is actually resizable and not maximized. Use
-	// gtk_window_resize_grip_is_visible() to find out if the
-	// resize grip is currently shown.
-	//
-	// Deprecated: (since 3.14.0) Resize grips have been removed.
-	SetHasResizeGrip(bool)
 	// SetHasUserRefCount wraps gtk_window_set_has_user_ref_count
 	// 
 	// The function takes the following parameters:
@@ -138300,24 +120365,6 @@ type Window interface {
 	// parent; most [window managers][gtk-X11-arch]
 	// will then disallow lowering the dialog below the parent.
 	SetModal(bool)
-	// SetOpacity wraps gtk_window_set_opacity
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- opacity float64: desired opacity, between 0 and 1 
-	//
-	// Request the windowing system to make @window partially transparent,
-	// with opacity 0 being fully transparent and 1 fully opaque. (Values
-	// of the opacity parameter are clamped to the [0,1] range.) On X11
-	// this has any effect only on X screens with a compositing manager
-	// running. See gtk_widget_is_composited(). On Windows it should work
-	// always.
-	// 
-	// Note that setting a window’s opacity after the window has been
-	// shown causes it to flicker once on Windows.
-	//
-	// Deprecated: (since 3.8.0) Use gtk_widget_set_opacity instead.
-	SetOpacity(float64)
 	// SetPosition wraps gtk_window_set_position
 	// 
 	// The function takes the following parameters:
@@ -138485,24 +120532,6 @@ type Window interface {
 	// Windows may set a hint asking the desktop environment to draw
 	// the users attention to the window. This function sets this hint.
 	SetUrgencyHint(bool)
-	// SetWmclass wraps gtk_window_set_wmclass
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- wmclassName string: window name hint 
-	// 	- wmclassClass string: window class hint 
-	//
-	// Don’t use this function. It sets the X Window System “class” and
-	// “name” hints for a window.  According to the ICCCM, you should
-	// always set these to the same value for all windows in an
-	// application, and GTK+ sets them to that value by default, so calling
-	// this function is sort of pointless. However, you may want to call
-	// gtk_window_set_role() on each window in your application, for the
-	// benefit of the session manager. Setting the role allows the window
-	// manager to restore window positions when loading a saved session.
-	//
-	// Deprecated: (since 3.22.0) 
-	SetWmclass(string, string)
 	// Stick wraps gtk_window_stick
 	//
 	// Asks to stick @window, which means that it will appear on all user
@@ -138668,7 +120697,7 @@ func WindowInstanceGetDefaultIconName() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -139398,32 +121427,6 @@ func (window *WindowInstance) GetGroup() WindowGroup {
 	return goret
 }
 
-// GetHasResizeGrip wraps gtk_window_get_has_resize_grip
-// The function returns the following values:
-// 
-// 	- goret bool 
-//
-// Determines whether the window may have a resize grip.
-//
-// Deprecated: (since 3.14.0) Resize grips have been removed.
-func (window *WindowInstance) GetHasResizeGrip() bool {
-	var carg0 *C.GtkWindow // in, none, converted
-	var cret  C.gboolean   // return
-
-	carg0 = (*C.GtkWindow)(UnsafeWindowToGlibNone(window))
-
-	cret = C.gtk_window_get_has_resize_grip(carg0)
-	runtime.KeepAlive(window)
-
-	var goret bool
-
-	if cret != 0 {
-		goret = true
-	}
-
-	return goret
-}
-
 // GetHideTitlebarWhenMaximized wraps gtk_window_get_hide_titlebar_when_maximized
 // The function returns the following values:
 // 
@@ -139491,7 +121494,7 @@ func (window *WindowInstance) GetIconName() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -139563,31 +121566,6 @@ func (window *WindowInstance) GetModal() bool {
 	if cret != 0 {
 		goret = true
 	}
-
-	return goret
-}
-
-// GetOpacity wraps gtk_window_get_opacity
-// The function returns the following values:
-// 
-// 	- goret float64 
-//
-// Fetches the requested opacity for this window. See
-// gtk_window_set_opacity().
-//
-// Deprecated: (since 3.8.0) Use gtk_widget_get_opacity instead.
-func (window *WindowInstance) GetOpacity() float64 {
-	var carg0 *C.GtkWindow // in, none, converted
-	var cret  C.gdouble    // return, none, casted
-
-	carg0 = (*C.GtkWindow)(UnsafeWindowToGlibNone(window))
-
-	cret = C.gtk_window_get_opacity(carg0)
-	runtime.KeepAlive(window)
-
-	var goret float64
-
-	goret = float64(cret)
 
 	return goret
 }
@@ -139679,40 +121657,6 @@ func (window *WindowInstance) GetResizable() bool {
 	return goret
 }
 
-// GetResizeGripArea wraps gtk_window_get_resize_grip_area
-// The function returns the following values:
-// 
-// 	- rect gdk.Rectangle: a pointer to a #GdkRectangle which we should store
-//     the resize grip area 
-// 	- goret bool 
-//
-// If a window has a resize grip, this will retrieve the grip
-// position, width and height into the specified #GdkRectangle.
-//
-// Deprecated: (since 3.14.0) Resize grips have been removed.
-func (window *WindowInstance) GetResizeGripArea() (gdk.Rectangle, bool) {
-	var carg0 *C.GtkWindow   // in, none, converted
-	var carg1 C.GdkRectangle // out, transfer: none, C Pointers: 0, Name: Rectangle, caller-allocates
-	var cret  C.gboolean     // return
-
-	carg0 = (*C.GtkWindow)(UnsafeWindowToGlibNone(window))
-
-	cret = C.gtk_window_get_resize_grip_area(carg0, &carg1)
-	runtime.KeepAlive(window)
-
-	var rect  gdk.Rectangle
-	var goret bool
-
-	_ = rect
-	_ = carg1
-	panic("unimplemented conversion of gdk.Rectangle (GdkRectangle)")
-	if cret != 0 {
-		goret = true
-	}
-
-	return rect, goret
-}
-
 // GetRole wraps gtk_window_get_role
 // The function returns the following values:
 // 
@@ -139731,7 +121675,7 @@ func (window *WindowInstance) GetRole() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -139920,7 +121864,7 @@ func (window *WindowInstance) GetTitle() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -140200,7 +122144,7 @@ func (window *WindowInstance) Maximize() {
 	runtime.KeepAlive(window)
 }
 
-// MnemonicActivate wraps gtk_window_mnemonic_activate
+// WindowMnemonicActivate wraps gtk_window_mnemonic_activate
 // 
 // The function takes the following parameters:
 // 
@@ -140212,7 +122156,7 @@ func (window *WindowInstance) Maximize() {
 // 	- goret bool 
 //
 // Activates the targets associated with the mnemonic.
-func (window *WindowInstance) MnemonicActivate(keyval uint, modifier gdk.ModifierType) bool {
+func (window *WindowInstance) WindowMnemonicActivate(keyval uint, modifier gdk.ModifierType) bool {
 	var carg0 *C.GtkWindow      // in, none, converted
 	var carg1 C.guint           // in, none, casted
 	var carg2 C.GdkModifierType // in, none, casted
@@ -140289,111 +122233,6 @@ func (window *WindowInstance) Move(x int, y int) {
 	runtime.KeepAlive(window)
 	runtime.KeepAlive(x)
 	runtime.KeepAlive(y)
-}
-
-// ParseGeometry wraps gtk_window_parse_geometry
-// 
-// The function takes the following parameters:
-// 
-// 	- geometry string: geometry string 
-// 
-// The function returns the following values:
-// 
-// 	- goret bool 
-//
-// Parses a standard X Window System geometry string - see the
-// manual page for X (type “man X”) for details on this.
-// gtk_window_parse_geometry() does work on all GTK+ ports
-// including Win32 but is primarily intended for an X environment.
-// 
-// If either a size or a position can be extracted from the
-// geometry string, gtk_window_parse_geometry() returns %TRUE
-// and calls gtk_window_set_default_size() and/or gtk_window_move()
-// to resize/move the window.
-// 
-// If gtk_window_parse_geometry() returns %TRUE, it will also
-// set the #GDK_HINT_USER_POS and/or #GDK_HINT_USER_SIZE hints
-// indicating to the window manager that the size/position of
-// the window was user-specified. This causes most window
-// managers to honor the geometry.
-// 
-// Note that for gtk_window_parse_geometry() to work as expected, it has
-// to be called when the window has its “final” size, i.e. after calling
-// gtk_widget_show_all() on the contents and gtk_window_set_geometry_hints()
-// on the window.
-// |[&lt;!-- language="C" --&gt;
-// #include &lt;gtk/gtk.h&gt;
-// 
-// static void
-// fill_with_content (GtkWidget *vbox)
-// {
-//   // fill with content...
-// }
-// 
-// int
-// main (int argc, char *argv[])
-// {
-//   GtkWidget *window, *vbox;
-//   GdkGeometry size_hints = {
-//     100, 50, 0, 0, 100, 50, 10,
-//     10, 0.0, 0.0, GDK_GRAVITY_NORTH_WEST
-//   };
-// 
-//   gtk_init (&amp;argc, &amp;argv);
-// 
-//   window = gtk_window_new (GTK_WINDOW_TOPLEVEL);
-//   vbox = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
-// 
-//   gtk_container_add (GTK_CONTAINER (window), vbox);
-//   fill_with_content (vbox);
-//   gtk_widget_show_all (vbox);
-// 
-//   gtk_window_set_geometry_hints (GTK_WINDOW (window),
-// 	  			    NULL,
-// 				    &amp;size_hints,
-// 				    GDK_HINT_MIN_SIZE |
-// 				    GDK_HINT_BASE_SIZE |
-// 				    GDK_HINT_RESIZE_INC);
-// 
-//   if (argc &gt; 1)
-//     {
-//       gboolean res;
-//       res = gtk_window_parse_geometry (GTK_WINDOW (window),
-//                                        argv[1]);
-//       if (! res)
-//         fprintf (stderr,
-//                  "Failed to parse “%s”\n",
-//                  argv[1]);
-//     }
-// 
-//   gtk_widget_show_all (window);
-//   gtk_main ();
-// 
-//   return 0;
-// }
-// ]|
-//
-// Deprecated: (since 3.20.0) Geometry handling in GTK is deprecated.
-func (window *WindowInstance) ParseGeometry(geometry string) bool {
-	var carg0 *C.GtkWindow // in, none, converted
-	var carg1 *C.gchar     // in, none, string, casted *C.gchar
-	var cret  C.gboolean   // return
-
-	carg0 = (*C.GtkWindow)(UnsafeWindowToGlibNone(window))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(geometry)))
-	defer C.free(unsafe.Pointer(carg1))
-
-	cret = C.gtk_window_parse_geometry(carg0, carg1)
-	runtime.KeepAlive(window)
-	runtime.KeepAlive(geometry)
-
-	var goret bool
-
-	if cret != 0 {
-		goret = true
-	}
-
-	return goret
 }
 
 // Present wraps gtk_window_present
@@ -140526,24 +122365,6 @@ func (window *WindowInstance) RemoveMnemonic(keyval uint, target Widget) {
 	runtime.KeepAlive(target)
 }
 
-// ReshowWithInitialSize wraps gtk_window_reshow_with_initial_size
-//
-// Hides @window, then reshows it, resetting the
-// default size and position of the window. Used
-// by GUI builders only.
-//
-// Deprecated: (since 3.10.0) GUI builders can call gtk_widget_hide(),
-//   gtk_widget_unrealize() and then gtk_widget_show() on @window
-//   themselves, if they still need this functionality.
-func (window *WindowInstance) ReshowWithInitialSize() {
-	var carg0 *C.GtkWindow // in, none, converted
-
-	carg0 = (*C.GtkWindow)(UnsafeWindowToGlibNone(window))
-
-	C.gtk_window_reshow_with_initial_size(carg0)
-	runtime.KeepAlive(window)
-}
-
 // Resize wraps gtk_window_resize
 // 
 // The function takes the following parameters:
@@ -140589,60 +122410,6 @@ func (window *WindowInstance) Resize(width int, height int) {
 	carg2 = C.gint(height)
 
 	C.gtk_window_resize(carg0, carg1, carg2)
-	runtime.KeepAlive(window)
-	runtime.KeepAlive(width)
-	runtime.KeepAlive(height)
-}
-
-// ResizeGripIsVisible wraps gtk_window_resize_grip_is_visible
-// The function returns the following values:
-// 
-// 	- goret bool 
-//
-// Determines whether a resize grip is visible for the specified window.
-//
-// Deprecated: (since 3.14.0) Resize grips have been removed.
-func (window *WindowInstance) ResizeGripIsVisible() bool {
-	var carg0 *C.GtkWindow // in, none, converted
-	var cret  C.gboolean   // return
-
-	carg0 = (*C.GtkWindow)(UnsafeWindowToGlibNone(window))
-
-	cret = C.gtk_window_resize_grip_is_visible(carg0)
-	runtime.KeepAlive(window)
-
-	var goret bool
-
-	if cret != 0 {
-		goret = true
-	}
-
-	return goret
-}
-
-// ResizeToGeometry wraps gtk_window_resize_to_geometry
-// 
-// The function takes the following parameters:
-// 
-// 	- width int: width in resize increments to resize the window to 
-// 	- height int: height in resize increments to resize the window to 
-//
-// Like gtk_window_resize(), but @width and @height are interpreted
-// in terms of the base size and increment set with
-// gtk_window_set_geometry_hints.
-//
-// Deprecated: (since 3.20.0) This function does nothing. Use
-//    gtk_window_resize() and compute the geometry yourself.
-func (window *WindowInstance) ResizeToGeometry(width int, height int) {
-	var carg0 *C.GtkWindow // in, none, converted
-	var carg1 C.gint       // in, none, casted
-	var carg2 C.gint       // in, none, casted
-
-	carg0 = (*C.GtkWindow)(UnsafeWindowToGlibNone(window))
-	carg1 = C.gint(width)
-	carg2 = C.gint(height)
-
-	C.gtk_window_resize_to_geometry(carg0, carg1, carg2)
 	runtime.KeepAlive(window)
 	runtime.KeepAlive(width)
 	runtime.KeepAlive(height)
@@ -140793,34 +122560,6 @@ func (window *WindowInstance) SetDefault(defaultWidget Widget) {
 	C.gtk_window_set_default(carg0, carg1)
 	runtime.KeepAlive(window)
 	runtime.KeepAlive(defaultWidget)
-}
-
-// SetDefaultGeometry wraps gtk_window_set_default_geometry
-// 
-// The function takes the following parameters:
-// 
-// 	- width int: width in resize increments, or -1 to unset the default width 
-// 	- height int: height in resize increments, or -1 to unset the default height 
-//
-// Like gtk_window_set_default_size(), but @width and @height are interpreted
-// in terms of the base size and increment set with
-// gtk_window_set_geometry_hints.
-//
-// Deprecated: (since 3.20.0) This function does nothing. If you want to set a default
-//     size, use gtk_window_set_default_size() instead.
-func (window *WindowInstance) SetDefaultGeometry(width int, height int) {
-	var carg0 *C.GtkWindow // in, none, converted
-	var carg1 C.gint       // in, none, casted
-	var carg2 C.gint       // in, none, casted
-
-	carg0 = (*C.GtkWindow)(UnsafeWindowToGlibNone(window))
-	carg1 = C.gint(width)
-	carg2 = C.gint(height)
-
-	C.gtk_window_set_default_geometry(carg0, carg1, carg2)
-	runtime.KeepAlive(window)
-	runtime.KeepAlive(width)
-	runtime.KeepAlive(height)
 }
 
 // SetDefaultSize wraps gtk_window_set_default_size
@@ -141060,34 +122799,6 @@ func (window *WindowInstance) SetGravity(gravity gdk.Gravity) {
 	C.gtk_window_set_gravity(carg0, carg1)
 	runtime.KeepAlive(window)
 	runtime.KeepAlive(gravity)
-}
-
-// SetHasResizeGrip wraps gtk_window_set_has_resize_grip
-// 
-// The function takes the following parameters:
-// 
-// 	- value bool: %TRUE to allow a resize grip 
-//
-// Sets whether @window has a corner resize grip.
-// 
-// Note that the resize grip is only shown if the window
-// is actually resizable and not maximized. Use
-// gtk_window_resize_grip_is_visible() to find out if the
-// resize grip is currently shown.
-//
-// Deprecated: (since 3.14.0) Resize grips have been removed.
-func (window *WindowInstance) SetHasResizeGrip(value bool) {
-	var carg0 *C.GtkWindow // in, none, converted
-	var carg1 C.gboolean   // in
-
-	carg0 = (*C.GtkWindow)(UnsafeWindowToGlibNone(window))
-	if value {
-		carg1 = C.TRUE
-	}
-
-	C.gtk_window_set_has_resize_grip(carg0, carg1)
-	runtime.KeepAlive(window)
-	runtime.KeepAlive(value)
 }
 
 // SetHasUserRefCount wraps gtk_window_set_has_user_ref_count
@@ -141403,35 +123114,6 @@ func (window *WindowInstance) SetModal(modal bool) {
 	runtime.KeepAlive(modal)
 }
 
-// SetOpacity wraps gtk_window_set_opacity
-// 
-// The function takes the following parameters:
-// 
-// 	- opacity float64: desired opacity, between 0 and 1 
-//
-// Request the windowing system to make @window partially transparent,
-// with opacity 0 being fully transparent and 1 fully opaque. (Values
-// of the opacity parameter are clamped to the [0,1] range.) On X11
-// this has any effect only on X screens with a compositing manager
-// running. See gtk_widget_is_composited(). On Windows it should work
-// always.
-// 
-// Note that setting a window’s opacity after the window has been
-// shown causes it to flicker once on Windows.
-//
-// Deprecated: (since 3.8.0) Use gtk_widget_set_opacity instead.
-func (window *WindowInstance) SetOpacity(opacity float64) {
-	var carg0 *C.GtkWindow // in, none, converted
-	var carg1 C.gdouble    // in, none, casted
-
-	carg0 = (*C.GtkWindow)(UnsafeWindowToGlibNone(window))
-	carg1 = C.gdouble(opacity)
-
-	C.gtk_window_set_opacity(carg0, carg1)
-	runtime.KeepAlive(window)
-	runtime.KeepAlive(opacity)
-}
-
 // SetPosition wraps gtk_window_set_position
 // 
 // The function takes the following parameters:
@@ -141744,40 +123426,6 @@ func (window *WindowInstance) SetUrgencyHint(setting bool) {
 	C.gtk_window_set_urgency_hint(carg0, carg1)
 	runtime.KeepAlive(window)
 	runtime.KeepAlive(setting)
-}
-
-// SetWmclass wraps gtk_window_set_wmclass
-// 
-// The function takes the following parameters:
-// 
-// 	- wmclassName string: window name hint 
-// 	- wmclassClass string: window class hint 
-//
-// Don’t use this function. It sets the X Window System “class” and
-// “name” hints for a window.  According to the ICCCM, you should
-// always set these to the same value for all windows in an
-// application, and GTK+ sets them to that value by default, so calling
-// this function is sort of pointless. However, you may want to call
-// gtk_window_set_role() on each window in your application, for the
-// benefit of the session manager. Setting the role allows the window
-// manager to restore window positions when loading a saved session.
-//
-// Deprecated: (since 3.22.0) 
-func (window *WindowInstance) SetWmclass(wmclassName string, wmclassClass string) {
-	var carg0 *C.GtkWindow // in, none, converted
-	var carg1 *C.gchar     // in, none, string, casted *C.gchar
-	var carg2 *C.gchar     // in, none, string, casted *C.gchar
-
-	carg0 = (*C.GtkWindow)(UnsafeWindowToGlibNone(window))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(wmclassName)))
-	defer C.free(unsafe.Pointer(carg1))
-	carg2 = (*C.gchar)(unsafe.Pointer(C.CString(wmclassClass)))
-	defer C.free(unsafe.Pointer(carg2))
-
-	C.gtk_window_set_wmclass(carg0, carg1, carg2)
-	runtime.KeepAlive(window)
-	runtime.KeepAlive(wmclassName)
-	runtime.KeepAlive(wmclassClass)
 }
 
 // Stick wraps gtk_window_stick
@@ -142466,60 +124114,6 @@ var _ Alignment = (*AlignmentInstance)(nil)
 type Alignment interface {
 	Bin
 	upcastToGtkAlignment() *AlignmentInstance
-
-	// GetPadding wraps gtk_alignment_get_padding
-	// The function returns the following values:
-	// 
-	// 	- paddingTop uint: location to store the padding for
-	//     the top of the widget, or %NULL 
-	// 	- paddingBottom uint: location to store the padding
-	//     for the bottom of the widget, or %NULL 
-	// 	- paddingLeft uint: location to store the padding
-	//     for the left of the widget, or %NULL 
-	// 	- paddingRight uint: location to store the padding
-	//     for the right of the widget, or %NULL 
-	//
-	// Gets the padding on the different sides of the widget.
-	// See gtk_alignment_set_padding ().
-	//
-	// Deprecated: (since 3.14.0) Use #GtkWidget alignment and margin properties
-	GetPadding() (uint, uint, uint, uint)
-	// Set wraps gtk_alignment_set
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- xalign float32: the horizontal alignment of the child widget, from 0 (left) to 1
-	//  (right). 
-	// 	- yalign float32: the vertical alignment of the child widget, from 0 (top) to 1
-	//  (bottom). 
-	// 	- xscale float32: the amount that the child widget expands horizontally to fill up
-	//  unused space, from 0 to 1.
-	//  A value of 0 indicates that the child widget should never expand.
-	//  A value of 1 indicates that the child widget will expand to fill all of the
-	//  space allocated for the #GtkAlignment. 
-	// 	- yscale float32: the amount that the child widget expands vertically to fill up
-	//  unused space, from 0 to 1. The values are similar to @xscale. 
-	//
-	// Sets the #GtkAlignment values.
-	//
-	// Deprecated: (since 3.14.0) Use #GtkWidget alignment and margin properties
-	Set(float32, float32, float32, float32)
-	// SetPadding wraps gtk_alignment_set_padding
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- paddingTop uint: the padding at the top of the widget 
-	// 	- paddingBottom uint: the padding at the bottom of the widget 
-	// 	- paddingLeft uint: the padding at the left of the widget 
-	// 	- paddingRight uint: the padding at the right of the widget. 
-	//
-	// Sets the padding on the different sides of the widget.
-	// The padding adds blank space to the sides of the widget. For instance,
-	// this can be used to indent the child widget towards the right by adding
-	// padding on the left.
-	//
-	// Deprecated: (since 3.14.0) Use #GtkWidget alignment and margin properties
-	SetPadding(uint, uint, uint, uint)
 }
 
 func unsafeWrapAlignment(base *gobject.ObjectInstance) *AlignmentInstance {
@@ -142568,171 +124162,6 @@ func UnsafeAlignmentToGlibNone(c Alignment) unsafe.Pointer {
 // UnsafeAlignmentToGlibFull is used to convert the instance to it's C value GtkAlignment, while removeing the finalizer. This is used by the bindings internally.
 func UnsafeAlignmentToGlibFull(c Alignment) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
-}
-
-// NewAlignmentInstance wraps gtk_alignment_new
-// 
-// The function takes the following parameters:
-// 
-// 	- xalign float32: the horizontal alignment of the child widget, from 0 (left) to 1
-//  (right). 
-// 	- yalign float32: the vertical alignment of the child widget, from 0 (top) to 1
-//  (bottom). 
-// 	- xscale float32: the amount that the child widget expands horizontally to fill up
-//  unused space, from 0 to 1.
-//  A value of 0 indicates that the child widget should never expand.
-//  A value of 1 indicates that the child widget will expand to fill all of the
-//  space allocated for the #GtkAlignment. 
-// 	- yscale float32: the amount that the child widget expands vertically to fill up
-//  unused space, from 0 to 1. The values are similar to @xscale. 
-// 
-// The function returns the following values:
-// 
-// 	- goret Widget 
-//
-// Creates a new #GtkAlignment.
-//
-// Deprecated: (since 3.14.0) Use #GtkWidget alignment and margin properties
-func NewAlignmentInstance(xalign float32, yalign float32, xscale float32, yscale float32) Widget {
-	var carg1 C.gfloat     // in, none, casted
-	var carg2 C.gfloat     // in, none, casted
-	var carg3 C.gfloat     // in, none, casted
-	var carg4 C.gfloat     // in, none, casted
-	var cret  *C.GtkWidget // return, none, converted
-
-	carg1 = C.gfloat(xalign)
-	carg2 = C.gfloat(yalign)
-	carg3 = C.gfloat(xscale)
-	carg4 = C.gfloat(yscale)
-
-	cret = C.gtk_alignment_new(carg1, carg2, carg3, carg4)
-	runtime.KeepAlive(xalign)
-	runtime.KeepAlive(yalign)
-	runtime.KeepAlive(xscale)
-	runtime.KeepAlive(yscale)
-
-	var goret Widget
-
-	goret = UnsafeWidgetFromGlibNone(unsafe.Pointer(cret))
-
-	return goret
-}
-
-// GetPadding wraps gtk_alignment_get_padding
-// The function returns the following values:
-// 
-// 	- paddingTop uint: location to store the padding for
-//     the top of the widget, or %NULL 
-// 	- paddingBottom uint: location to store the padding
-//     for the bottom of the widget, or %NULL 
-// 	- paddingLeft uint: location to store the padding
-//     for the left of the widget, or %NULL 
-// 	- paddingRight uint: location to store the padding
-//     for the right of the widget, or %NULL 
-//
-// Gets the padding on the different sides of the widget.
-// See gtk_alignment_set_padding ().
-//
-// Deprecated: (since 3.14.0) Use #GtkWidget alignment and margin properties
-func (alignment *AlignmentInstance) GetPadding() (uint, uint, uint, uint) {
-	var carg0 *C.GtkAlignment // in, none, converted
-	var carg1 C.guint         // out, full, casted
-	var carg2 C.guint         // out, full, casted
-	var carg3 C.guint         // out, full, casted
-	var carg4 C.guint         // out, full, casted
-
-	carg0 = (*C.GtkAlignment)(UnsafeAlignmentToGlibNone(alignment))
-
-	C.gtk_alignment_get_padding(carg0, &carg1, &carg2, &carg3, &carg4)
-	runtime.KeepAlive(alignment)
-
-	var paddingTop    uint
-	var paddingBottom uint
-	var paddingLeft   uint
-	var paddingRight  uint
-
-	paddingTop = uint(carg1)
-	paddingBottom = uint(carg2)
-	paddingLeft = uint(carg3)
-	paddingRight = uint(carg4)
-
-	return paddingTop, paddingBottom, paddingLeft, paddingRight
-}
-
-// Set wraps gtk_alignment_set
-// 
-// The function takes the following parameters:
-// 
-// 	- xalign float32: the horizontal alignment of the child widget, from 0 (left) to 1
-//  (right). 
-// 	- yalign float32: the vertical alignment of the child widget, from 0 (top) to 1
-//  (bottom). 
-// 	- xscale float32: the amount that the child widget expands horizontally to fill up
-//  unused space, from 0 to 1.
-//  A value of 0 indicates that the child widget should never expand.
-//  A value of 1 indicates that the child widget will expand to fill all of the
-//  space allocated for the #GtkAlignment. 
-// 	- yscale float32: the amount that the child widget expands vertically to fill up
-//  unused space, from 0 to 1. The values are similar to @xscale. 
-//
-// Sets the #GtkAlignment values.
-//
-// Deprecated: (since 3.14.0) Use #GtkWidget alignment and margin properties
-func (alignment *AlignmentInstance) Set(xalign float32, yalign float32, xscale float32, yscale float32) {
-	var carg0 *C.GtkAlignment // in, none, converted
-	var carg1 C.gfloat        // in, none, casted
-	var carg2 C.gfloat        // in, none, casted
-	var carg3 C.gfloat        // in, none, casted
-	var carg4 C.gfloat        // in, none, casted
-
-	carg0 = (*C.GtkAlignment)(UnsafeAlignmentToGlibNone(alignment))
-	carg1 = C.gfloat(xalign)
-	carg2 = C.gfloat(yalign)
-	carg3 = C.gfloat(xscale)
-	carg4 = C.gfloat(yscale)
-
-	C.gtk_alignment_set(carg0, carg1, carg2, carg3, carg4)
-	runtime.KeepAlive(alignment)
-	runtime.KeepAlive(xalign)
-	runtime.KeepAlive(yalign)
-	runtime.KeepAlive(xscale)
-	runtime.KeepAlive(yscale)
-}
-
-// SetPadding wraps gtk_alignment_set_padding
-// 
-// The function takes the following parameters:
-// 
-// 	- paddingTop uint: the padding at the top of the widget 
-// 	- paddingBottom uint: the padding at the bottom of the widget 
-// 	- paddingLeft uint: the padding at the left of the widget 
-// 	- paddingRight uint: the padding at the right of the widget. 
-//
-// Sets the padding on the different sides of the widget.
-// The padding adds blank space to the sides of the widget. For instance,
-// this can be used to indent the child widget towards the right by adding
-// padding on the left.
-//
-// Deprecated: (since 3.14.0) Use #GtkWidget alignment and margin properties
-func (alignment *AlignmentInstance) SetPadding(paddingTop uint, paddingBottom uint, paddingLeft uint, paddingRight uint) {
-	var carg0 *C.GtkAlignment // in, none, converted
-	var carg1 C.guint         // in, none, casted
-	var carg2 C.guint         // in, none, casted
-	var carg3 C.guint         // in, none, casted
-	var carg4 C.guint         // in, none, casted
-
-	carg0 = (*C.GtkAlignment)(UnsafeAlignmentToGlibNone(alignment))
-	carg1 = C.guint(paddingTop)
-	carg2 = C.guint(paddingBottom)
-	carg3 = C.guint(paddingLeft)
-	carg4 = C.guint(paddingRight)
-
-	C.gtk_alignment_set_padding(carg0, carg1, carg2, carg3, carg4)
-	runtime.KeepAlive(alignment)
-	runtime.KeepAlive(paddingTop)
-	runtime.KeepAlive(paddingBottom)
-	runtime.KeepAlive(paddingLeft)
-	runtime.KeepAlive(paddingRight)
 }
 
 // AppChooserButtonInstance is the instance type used by all types extending GtkAppChooserButton. It is used internally by the bindings. Users should use the interface [AppChooserButton] instead.
@@ -143010,7 +124439,7 @@ func (self *AppChooserButtonInstance) GetHeading() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -143397,7 +124826,7 @@ func (self *AppChooserWidgetInstance) GetDefaultText() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -144337,36 +125766,6 @@ type Assistant interface {
 	//
 	// Gets whether page has padding.
 	GetPageHasPadding(Widget) bool
-	// GetPageHeaderImage wraps gtk_assistant_get_page_header_image
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- page Widget: a page of @assistant 
-	// 
-	// The function returns the following values:
-	// 
-	// 	- goret gdkpixbuf.Pixbuf 
-	//
-	// Gets the header image for @page.
-	//
-	// Deprecated: (since 3.2.0) Since GTK+ 3.2, a header is no longer shown;
-	//     add your header decoration to the page content instead.
-	GetPageHeaderImage(Widget) gdkpixbuf.Pixbuf
-	// GetPageSideImage wraps gtk_assistant_get_page_side_image
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- page Widget: a page of @assistant 
-	// 
-	// The function returns the following values:
-	// 
-	// 	- goret gdkpixbuf.Pixbuf 
-	//
-	// Gets the side image for @page.
-	//
-	// Deprecated: (since 3.2.0) Since GTK+ 3.2, sidebar images are not
-	//     shown anymore.
-	GetPageSideImage(Widget) gdkpixbuf.Pixbuf
 	// GetPageTitle wraps gtk_assistant_get_page_title
 	// 
 	// The function takes the following parameters:
@@ -144506,33 +125905,6 @@ type Assistant interface {
 	// Sets whether the assistant is adding padding around
 	// the page.
 	SetPageHasPadding(Widget, bool)
-	// SetPageHeaderImage wraps gtk_assistant_set_page_header_image
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- page Widget: a page of @assistant 
-	// 	- pixbuf gdkpixbuf.Pixbuf (nullable): the new header image @page 
-	//
-	// Sets a header image for @page.
-	//
-	// Deprecated: (since 3.2.0) Since GTK+ 3.2, a header is no longer shown;
-	//     add your header decoration to the page content instead.
-	SetPageHeaderImage(Widget, gdkpixbuf.Pixbuf)
-	// SetPageSideImage wraps gtk_assistant_set_page_side_image
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- page Widget: a page of @assistant 
-	// 	- pixbuf gdkpixbuf.Pixbuf (nullable): the new side image @page 
-	//
-	// Sets a side image for @page.
-	// 
-	// This image used to be displayed in the side area of the assistant
-	// when @page is the current page.
-	//
-	// Deprecated: (since 3.2.0) Since GTK+ 3.2, sidebar images are not
-	//     shown anymore.
-	SetPageSideImage(Widget, gdkpixbuf.Pixbuf)
 	// SetPageTitle wraps gtk_assistant_set_page_title
 	// 
 	// The function takes the following parameters:
@@ -144846,72 +126218,6 @@ func (assistant *AssistantInstance) GetPageHasPadding(page Widget) bool {
 	return goret
 }
 
-// GetPageHeaderImage wraps gtk_assistant_get_page_header_image
-// 
-// The function takes the following parameters:
-// 
-// 	- page Widget: a page of @assistant 
-// 
-// The function returns the following values:
-// 
-// 	- goret gdkpixbuf.Pixbuf 
-//
-// Gets the header image for @page.
-//
-// Deprecated: (since 3.2.0) Since GTK+ 3.2, a header is no longer shown;
-//     add your header decoration to the page content instead.
-func (assistant *AssistantInstance) GetPageHeaderImage(page Widget) gdkpixbuf.Pixbuf {
-	var carg0 *C.GtkAssistant // in, none, converted
-	var carg1 *C.GtkWidget    // in, none, converted
-	var cret  *C.GdkPixbuf    // return, none, converted
-
-	carg0 = (*C.GtkAssistant)(UnsafeAssistantToGlibNone(assistant))
-	carg1 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(page))
-
-	cret = C.gtk_assistant_get_page_header_image(carg0, carg1)
-	runtime.KeepAlive(assistant)
-	runtime.KeepAlive(page)
-
-	var goret gdkpixbuf.Pixbuf
-
-	goret = gdkpixbuf.UnsafePixbufFromGlibNone(unsafe.Pointer(cret))
-
-	return goret
-}
-
-// GetPageSideImage wraps gtk_assistant_get_page_side_image
-// 
-// The function takes the following parameters:
-// 
-// 	- page Widget: a page of @assistant 
-// 
-// The function returns the following values:
-// 
-// 	- goret gdkpixbuf.Pixbuf 
-//
-// Gets the side image for @page.
-//
-// Deprecated: (since 3.2.0) Since GTK+ 3.2, sidebar images are not
-//     shown anymore.
-func (assistant *AssistantInstance) GetPageSideImage(page Widget) gdkpixbuf.Pixbuf {
-	var carg0 *C.GtkAssistant // in, none, converted
-	var carg1 *C.GtkWidget    // in, none, converted
-	var cret  *C.GdkPixbuf    // return, none, converted
-
-	carg0 = (*C.GtkAssistant)(UnsafeAssistantToGlibNone(assistant))
-	carg1 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(page))
-
-	cret = C.gtk_assistant_get_page_side_image(carg0, carg1)
-	runtime.KeepAlive(assistant)
-	runtime.KeepAlive(page)
-
-	var goret gdkpixbuf.Pixbuf
-
-	goret = gdkpixbuf.UnsafePixbufFromGlibNone(unsafe.Pointer(cret))
-
-	return goret
-}
-
 // GetPageTitle wraps gtk_assistant_get_page_title
 // 
 // The function takes the following parameters:
@@ -144937,7 +126243,7 @@ func (assistant *AssistantInstance) GetPageTitle(page Widget) string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -145224,65 +126530,6 @@ func (assistant *AssistantInstance) SetPageHasPadding(page Widget, hasPadding bo
 	runtime.KeepAlive(hasPadding)
 }
 
-// SetPageHeaderImage wraps gtk_assistant_set_page_header_image
-// 
-// The function takes the following parameters:
-// 
-// 	- page Widget: a page of @assistant 
-// 	- pixbuf gdkpixbuf.Pixbuf (nullable): the new header image @page 
-//
-// Sets a header image for @page.
-//
-// Deprecated: (since 3.2.0) Since GTK+ 3.2, a header is no longer shown;
-//     add your header decoration to the page content instead.
-func (assistant *AssistantInstance) SetPageHeaderImage(page Widget, pixbuf gdkpixbuf.Pixbuf) {
-	var carg0 *C.GtkAssistant // in, none, converted
-	var carg1 *C.GtkWidget    // in, none, converted
-	var carg2 *C.GdkPixbuf    // in, none, converted, nullable
-
-	carg0 = (*C.GtkAssistant)(UnsafeAssistantToGlibNone(assistant))
-	carg1 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(page))
-	if pixbuf != nil {
-		carg2 = (*C.GdkPixbuf)(gdkpixbuf.UnsafePixbufToGlibNone(pixbuf))
-	}
-
-	C.gtk_assistant_set_page_header_image(carg0, carg1, carg2)
-	runtime.KeepAlive(assistant)
-	runtime.KeepAlive(page)
-	runtime.KeepAlive(pixbuf)
-}
-
-// SetPageSideImage wraps gtk_assistant_set_page_side_image
-// 
-// The function takes the following parameters:
-// 
-// 	- page Widget: a page of @assistant 
-// 	- pixbuf gdkpixbuf.Pixbuf (nullable): the new side image @page 
-//
-// Sets a side image for @page.
-// 
-// This image used to be displayed in the side area of the assistant
-// when @page is the current page.
-//
-// Deprecated: (since 3.2.0) Since GTK+ 3.2, sidebar images are not
-//     shown anymore.
-func (assistant *AssistantInstance) SetPageSideImage(page Widget, pixbuf gdkpixbuf.Pixbuf) {
-	var carg0 *C.GtkAssistant // in, none, converted
-	var carg1 *C.GtkWidget    // in, none, converted
-	var carg2 *C.GdkPixbuf    // in, none, converted, nullable
-
-	carg0 = (*C.GtkAssistant)(UnsafeAssistantToGlibNone(assistant))
-	carg1 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(page))
-	if pixbuf != nil {
-		carg2 = (*C.GdkPixbuf)(gdkpixbuf.UnsafePixbufToGlibNone(pixbuf))
-	}
-
-	C.gtk_assistant_set_page_side_image(carg0, carg1, carg2)
-	runtime.KeepAlive(assistant)
-	runtime.KeepAlive(page)
-	runtime.KeepAlive(pixbuf)
-}
-
 // SetPageTitle wraps gtk_assistant_set_page_title
 // 
 // The function takes the following parameters:
@@ -145417,9 +126664,6 @@ func unsafeWrapCheckButton(base *gobject.ObjectInstance) *CheckButtonInstance {
 					},
 				},
 				ActionableInstance: ActionableInstance{
-					Instance: *base,
-				},
-				ActivatableInstance: ActivatableInstance{
 					Instance: *base,
 				},
 			},
@@ -145642,9 +126886,6 @@ func unsafeWrapCheckMenuItem(base *gobject.ObjectInstance) *CheckMenuItemInstanc
 				},
 			},
 			ActionableInstance: ActionableInstance{
-				Instance: *base,
-			},
-			ActivatableInstance: ActivatableInstance{
 				Instance: *base,
 			},
 		},
@@ -146074,16 +127315,6 @@ type Dialog interface {
 	// dialog’s action area. The button widget is returned, but usually
 	// you don’t need it.
 	AddButton(string, int) Widget
-	// GetActionArea wraps gtk_dialog_get_action_area
-	// The function returns the following values:
-	// 
-	// 	- goret Box 
-	//
-	// Returns the action area of @dialog.
-	//
-	// Deprecated: (since 3.12.0) Direct access to the action area
-	//   is discouraged; use gtk_dialog_add_button(), etc.
-	GetActionArea() Box
 	// GetContentArea wraps gtk_dialog_get_content_area
 	// The function returns the following values:
 	// 
@@ -146188,24 +127419,6 @@ type Dialog interface {
 	// such as timeouts, IO channel watches, DND drops, etc, will
 	// be triggered during a gtk_dialog_run() call.
 	Run() int
-	// SetAlternativeButtonOrderFromArray wraps gtk_dialog_set_alternative_button_order_from_array
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- newOrder []int: an array of response ids of
-	//     @dialog’s buttons 
-	//
-	// Sets an alternative button order. If the
-	// #GtkSettings:gtk-alternative-button-order setting is set to %TRUE,
-	// the dialog buttons are reordered according to the order of the
-	// response ids in @new_order.
-	// 
-	// See gtk_dialog_set_alternative_button_order() for more information.
-	// 
-	// This function is for use by language bindings.
-	//
-	// Deprecated: (since 3.10.0) Deprecated
-	SetAlternativeButtonOrderFromArray([]int)
 	// SetDefaultResponse wraps gtk_dialog_set_default_response
 	// 
 	// The function takes the following parameters:
@@ -146363,31 +127576,6 @@ func (dialog *DialogInstance) AddButton(buttonText string, responseId int) Widge
 	var goret Widget
 
 	goret = UnsafeWidgetFromGlibNone(unsafe.Pointer(cret))
-
-	return goret
-}
-
-// GetActionArea wraps gtk_dialog_get_action_area
-// The function returns the following values:
-// 
-// 	- goret Box 
-//
-// Returns the action area of @dialog.
-//
-// Deprecated: (since 3.12.0) Direct access to the action area
-//   is discouraged; use gtk_dialog_add_button(), etc.
-func (dialog *DialogInstance) GetActionArea() Box {
-	var carg0 *C.GtkDialog // in, none, converted
-	var cret  *C.GtkWidget // return, none, converted, casted *C.GtkBox
-
-	carg0 = (*C.GtkDialog)(UnsafeDialogToGlibNone(dialog))
-
-	cret = C.gtk_dialog_get_action_area(carg0)
-	runtime.KeepAlive(dialog)
-
-	var goret Box
-
-	goret = UnsafeBoxFromGlibNone(unsafe.Pointer(cret))
 
 	return goret
 }
@@ -146586,39 +127774,6 @@ func (dialog *DialogInstance) Run() int {
 	goret = int(cret)
 
 	return goret
-}
-
-// SetAlternativeButtonOrderFromArray wraps gtk_dialog_set_alternative_button_order_from_array
-// 
-// The function takes the following parameters:
-// 
-// 	- newOrder []int: an array of response ids of
-//     @dialog’s buttons 
-//
-// Sets an alternative button order. If the
-// #GtkSettings:gtk-alternative-button-order setting is set to %TRUE,
-// the dialog buttons are reordered according to the order of the
-// response ids in @new_order.
-// 
-// See gtk_dialog_set_alternative_button_order() for more information.
-// 
-// This function is for use by language bindings.
-//
-// Deprecated: (since 3.10.0) Deprecated
-func (dialog *DialogInstance) SetAlternativeButtonOrderFromArray(newOrder []int) {
-	var carg0 *C.GtkDialog // in, none, converted
-	var carg1 C.gint       // implicit
-	var carg2 *C.gint      // in, transfer: none, C Pointers: 1, Name: array[gint], array (inner: *typesystem.CastablePrimitive, length-by: carg1)
-
-	carg0 = (*C.GtkDialog)(UnsafeDialogToGlibNone(dialog))
-	_ = newOrder
-	_ = carg2
-	_ = carg1
-	panic("unimplemented conversion of []int (gint*)")
-
-	C.gtk_dialog_set_alternative_button_order_from_array(carg0, carg1, carg2)
-	runtime.KeepAlive(dialog)
-	runtime.KeepAlive(newOrder)
 }
 
 // SetDefaultResponse wraps gtk_dialog_set_default_response
@@ -147026,83 +128181,6 @@ var _ FontSelectionDialog = (*FontSelectionDialogInstance)(nil)
 type FontSelectionDialog interface {
 	Dialog
 	upcastToGtkFontSelectionDialog() *FontSelectionDialogInstance
-
-	// GetCancelButton wraps gtk_font_selection_dialog_get_cancel_button
-	// The function returns the following values:
-	// 
-	// 	- goret Widget 
-	//
-	// Gets the “Cancel” button.
-	//
-	// Deprecated: (since 3.2.0) Use #GtkFontChooserDialog
-	GetCancelButton() Widget
-	// GetFontName wraps gtk_font_selection_dialog_get_font_name
-	// The function returns the following values:
-	// 
-	// 	- goret string 
-	//
-	// Gets the currently-selected font name.
-	// 
-	// Note that this can be a different string than what you set with
-	// gtk_font_selection_dialog_set_font_name(), as the font selection widget
-	// may normalize font names and thus return a string with a different
-	// structure. For example, “Helvetica Italic Bold 12” could be normalized
-	// to “Helvetica Bold Italic 12”.  Use pango_font_description_equal()
-	// if you want to compare two font descriptions.
-	//
-	// Deprecated: (since 3.2.0) Use #GtkFontChooserDialog
-	GetFontName() string
-	// GetFontSelection wraps gtk_font_selection_dialog_get_font_selection
-	// The function returns the following values:
-	// 
-	// 	- goret Widget 
-	//
-	// Retrieves the #GtkFontSelection widget embedded in the dialog.
-	//
-	// Deprecated: (since 3.2.0) Use #GtkFontChooserDialog
-	GetFontSelection() Widget
-	// GetOKButton wraps gtk_font_selection_dialog_get_ok_button
-	// The function returns the following values:
-	// 
-	// 	- goret Widget 
-	//
-	// Gets the “OK” button.
-	//
-	// Deprecated: (since 3.2.0) Use #GtkFontChooserDialog
-	GetOKButton() Widget
-	// GetPreviewText wraps gtk_font_selection_dialog_get_preview_text
-	// The function returns the following values:
-	// 
-	// 	- goret string 
-	//
-	// Gets the text displayed in the preview area.
-	//
-	// Deprecated: (since 3.2.0) Use #GtkFontChooserDialog
-	GetPreviewText() string
-	// SetFontName wraps gtk_font_selection_dialog_set_font_name
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- fontname string: a font name like “Helvetica 12” or “Times Bold 18” 
-	// 
-	// The function returns the following values:
-	// 
-	// 	- goret bool 
-	//
-	// Sets the currently selected font.
-	//
-	// Deprecated: (since 3.2.0) Use #GtkFontChooserDialog
-	SetFontName(string) bool
-	// SetPreviewText wraps gtk_font_selection_dialog_set_preview_text
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- text string: the text to display in the preview area 
-	//
-	// Sets the text displayed in the preview area.
-	//
-	// Deprecated: (since 3.2.0) Use #GtkFontChooserDialog
-	SetPreviewText(string)
 }
 
 func unsafeWrapFontSelectionDialog(base *gobject.ObjectInstance) *FontSelectionDialogInstance {
@@ -147155,221 +128233,6 @@ func UnsafeFontSelectionDialogToGlibNone(c FontSelectionDialog) unsafe.Pointer {
 // UnsafeFontSelectionDialogToGlibFull is used to convert the instance to it's C value GtkFontSelectionDialog, while removeing the finalizer. This is used by the bindings internally.
 func UnsafeFontSelectionDialogToGlibFull(c FontSelectionDialog) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
-}
-
-// NewFontSelectionDialogInstance wraps gtk_font_selection_dialog_new
-// 
-// The function takes the following parameters:
-// 
-// 	- title string: the title of the dialog window 
-// 
-// The function returns the following values:
-// 
-// 	- goret Widget 
-//
-// Creates a new #GtkFontSelectionDialog.
-//
-// Deprecated: (since 3.2.0) Use #GtkFontChooserDialog
-func NewFontSelectionDialogInstance(title string) Widget {
-	var carg1 *C.gchar     // in, none, string, casted *C.gchar
-	var cret  *C.GtkWidget // return, none, converted
-
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(title)))
-	defer C.free(unsafe.Pointer(carg1))
-
-	cret = C.gtk_font_selection_dialog_new(carg1)
-	runtime.KeepAlive(title)
-
-	var goret Widget
-
-	goret = UnsafeWidgetFromGlibNone(unsafe.Pointer(cret))
-
-	return goret
-}
-
-// GetCancelButton wraps gtk_font_selection_dialog_get_cancel_button
-// The function returns the following values:
-// 
-// 	- goret Widget 
-//
-// Gets the “Cancel” button.
-//
-// Deprecated: (since 3.2.0) Use #GtkFontChooserDialog
-func (fsd *FontSelectionDialogInstance) GetCancelButton() Widget {
-	var carg0 *C.GtkFontSelectionDialog // in, none, converted
-	var cret  *C.GtkWidget              // return, none, converted
-
-	carg0 = (*C.GtkFontSelectionDialog)(UnsafeFontSelectionDialogToGlibNone(fsd))
-
-	cret = C.gtk_font_selection_dialog_get_cancel_button(carg0)
-	runtime.KeepAlive(fsd)
-
-	var goret Widget
-
-	goret = UnsafeWidgetFromGlibNone(unsafe.Pointer(cret))
-
-	return goret
-}
-
-// GetFontName wraps gtk_font_selection_dialog_get_font_name
-// The function returns the following values:
-// 
-// 	- goret string 
-//
-// Gets the currently-selected font name.
-// 
-// Note that this can be a different string than what you set with
-// gtk_font_selection_dialog_set_font_name(), as the font selection widget
-// may normalize font names and thus return a string with a different
-// structure. For example, “Helvetica Italic Bold 12” could be normalized
-// to “Helvetica Bold Italic 12”.  Use pango_font_description_equal()
-// if you want to compare two font descriptions.
-//
-// Deprecated: (since 3.2.0) Use #GtkFontChooserDialog
-func (fsd *FontSelectionDialogInstance) GetFontName() string {
-	var carg0 *C.GtkFontSelectionDialog // in, none, converted
-	var cret  *C.gchar                  // return, full, string, casted *C.gchar
-
-	carg0 = (*C.GtkFontSelectionDialog)(UnsafeFontSelectionDialogToGlibNone(fsd))
-
-	cret = C.gtk_font_selection_dialog_get_font_name(carg0)
-	runtime.KeepAlive(fsd)
-
-	var goret string
-
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
-	defer C.free(unsafe.Pointer(cret))
-
-	return goret
-}
-
-// GetFontSelection wraps gtk_font_selection_dialog_get_font_selection
-// The function returns the following values:
-// 
-// 	- goret Widget 
-//
-// Retrieves the #GtkFontSelection widget embedded in the dialog.
-//
-// Deprecated: (since 3.2.0) Use #GtkFontChooserDialog
-func (fsd *FontSelectionDialogInstance) GetFontSelection() Widget {
-	var carg0 *C.GtkFontSelectionDialog // in, none, converted
-	var cret  *C.GtkWidget              // return, none, converted
-
-	carg0 = (*C.GtkFontSelectionDialog)(UnsafeFontSelectionDialogToGlibNone(fsd))
-
-	cret = C.gtk_font_selection_dialog_get_font_selection(carg0)
-	runtime.KeepAlive(fsd)
-
-	var goret Widget
-
-	goret = UnsafeWidgetFromGlibNone(unsafe.Pointer(cret))
-
-	return goret
-}
-
-// GetOKButton wraps gtk_font_selection_dialog_get_ok_button
-// The function returns the following values:
-// 
-// 	- goret Widget 
-//
-// Gets the “OK” button.
-//
-// Deprecated: (since 3.2.0) Use #GtkFontChooserDialog
-func (fsd *FontSelectionDialogInstance) GetOKButton() Widget {
-	var carg0 *C.GtkFontSelectionDialog // in, none, converted
-	var cret  *C.GtkWidget              // return, none, converted
-
-	carg0 = (*C.GtkFontSelectionDialog)(UnsafeFontSelectionDialogToGlibNone(fsd))
-
-	cret = C.gtk_font_selection_dialog_get_ok_button(carg0)
-	runtime.KeepAlive(fsd)
-
-	var goret Widget
-
-	goret = UnsafeWidgetFromGlibNone(unsafe.Pointer(cret))
-
-	return goret
-}
-
-// GetPreviewText wraps gtk_font_selection_dialog_get_preview_text
-// The function returns the following values:
-// 
-// 	- goret string 
-//
-// Gets the text displayed in the preview area.
-//
-// Deprecated: (since 3.2.0) Use #GtkFontChooserDialog
-func (fsd *FontSelectionDialogInstance) GetPreviewText() string {
-	var carg0 *C.GtkFontSelectionDialog // in, none, converted
-	var cret  *C.gchar                  // return, none, string, casted *C.gchar
-
-	carg0 = (*C.GtkFontSelectionDialog)(UnsafeFontSelectionDialogToGlibNone(fsd))
-
-	cret = C.gtk_font_selection_dialog_get_preview_text(carg0)
-	runtime.KeepAlive(fsd)
-
-	var goret string
-
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
-
-	return goret
-}
-
-// SetFontName wraps gtk_font_selection_dialog_set_font_name
-// 
-// The function takes the following parameters:
-// 
-// 	- fontname string: a font name like “Helvetica 12” or “Times Bold 18” 
-// 
-// The function returns the following values:
-// 
-// 	- goret bool 
-//
-// Sets the currently selected font.
-//
-// Deprecated: (since 3.2.0) Use #GtkFontChooserDialog
-func (fsd *FontSelectionDialogInstance) SetFontName(fontname string) bool {
-	var carg0 *C.GtkFontSelectionDialog // in, none, converted
-	var carg1 *C.gchar                  // in, none, string, casted *C.gchar
-	var cret  C.gboolean                // return
-
-	carg0 = (*C.GtkFontSelectionDialog)(UnsafeFontSelectionDialogToGlibNone(fsd))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(fontname)))
-	defer C.free(unsafe.Pointer(carg1))
-
-	cret = C.gtk_font_selection_dialog_set_font_name(carg0, carg1)
-	runtime.KeepAlive(fsd)
-	runtime.KeepAlive(fontname)
-
-	var goret bool
-
-	if cret != 0 {
-		goret = true
-	}
-
-	return goret
-}
-
-// SetPreviewText wraps gtk_font_selection_dialog_set_preview_text
-// 
-// The function takes the following parameters:
-// 
-// 	- text string: the text to display in the preview area 
-//
-// Sets the text displayed in the preview area.
-//
-// Deprecated: (since 3.2.0) Use #GtkFontChooserDialog
-func (fsd *FontSelectionDialogInstance) SetPreviewText(text string) {
-	var carg0 *C.GtkFontSelectionDialog // in, none, converted
-	var carg1 *C.gchar                  // in, none, string, casted *C.gchar
-
-	carg0 = (*C.GtkFontSelectionDialog)(UnsafeFontSelectionDialogToGlibNone(fsd))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(text)))
-	defer C.free(unsafe.Pointer(carg1))
-
-	C.gtk_font_selection_dialog_set_preview_text(carg0, carg1)
-	runtime.KeepAlive(fsd)
-	runtime.KeepAlive(text)
 }
 
 // ImageMenuItemInstance is the instance type used by all types extending GtkImageMenuItem. It is used internally by the bindings. Users should use the interface [ImageMenuItem] instead.
@@ -147446,90 +128309,6 @@ var _ ImageMenuItem = (*ImageMenuItemInstance)(nil)
 type ImageMenuItem interface {
 	MenuItem
 	upcastToGtkImageMenuItem() *ImageMenuItemInstance
-
-	// GetAlwaysShowImage wraps gtk_image_menu_item_get_always_show_image
-	// The function returns the following values:
-	// 
-	// 	- goret bool 
-	//
-	// Returns whether the menu item will ignore the #GtkSettings:gtk-menu-images
-	// setting and always show the image, if available.
-	//
-	// Deprecated: (since 3.10.0) 
-	GetAlwaysShowImage() bool
-	// GetImage wraps gtk_image_menu_item_get_image
-	// The function returns the following values:
-	// 
-	// 	- goret Widget 
-	//
-	// Gets the widget that is currently set as the image of @image_menu_item.
-	// See gtk_image_menu_item_set_image().
-	//
-	// Deprecated: (since 3.10.0) 
-	GetImage() Widget
-	// GetUseStock wraps gtk_image_menu_item_get_use_stock
-	// The function returns the following values:
-	// 
-	// 	- goret bool 
-	//
-	// Checks whether the label set in the menuitem is used as a
-	// stock id to select the stock item for the item.
-	//
-	// Deprecated: (since 3.10.0) 
-	GetUseStock() bool
-	// SetAccelGroup wraps gtk_image_menu_item_set_accel_group
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- accelGroup AccelGroup: the #GtkAccelGroup 
-	//
-	// Specifies an @accel_group to add the menu items accelerator to
-	// (this only applies to stock items so a stock item must already
-	// be set, make sure to call gtk_image_menu_item_set_use_stock()
-	// and gtk_menu_item_set_label() with a valid stock item first).
-	// 
-	// If you want this menu item to have changeable accelerators then
-	// you shouldnt need this (see gtk_image_menu_item_new_from_stock()).
-	//
-	// Deprecated: (since 3.10.0) 
-	SetAccelGroup(AccelGroup)
-	// SetAlwaysShowImage wraps gtk_image_menu_item_set_always_show_image
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- alwaysShow bool: %TRUE if the menuitem should always show the image 
-	//
-	// If %TRUE, the menu item will ignore the #GtkSettings:gtk-menu-images
-	// setting and always show the image, if available.
-	// 
-	// Use this property if the menuitem would be useless or hard to use
-	// without the image.
-	//
-	// Deprecated: (since 3.10.0) 
-	SetAlwaysShowImage(bool)
-	// SetImage wraps gtk_image_menu_item_set_image
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- image Widget (nullable): a widget to set as the image for the menu item. 
-	//
-	// Sets the image of @image_menu_item to the given widget.
-	// Note that it depends on the show-menu-images setting whether
-	// the image will be displayed or not.
-	//
-	// Deprecated: (since 3.10.0) 
-	SetImage(Widget)
-	// SetUseStock wraps gtk_image_menu_item_set_use_stock
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- useStock bool: %TRUE if the menuitem should use a stock item 
-	//
-	// If %TRUE, the label set in the menuitem is used as a
-	// stock id to select the stock item for the item.
-	//
-	// Deprecated: (since 3.10.0) 
-	SetUseStock(bool)
 }
 
 func unsafeWrapImageMenuItem(base *gobject.ObjectInstance) *ImageMenuItemInstance {
@@ -147551,9 +128330,6 @@ func unsafeWrapImageMenuItem(base *gobject.ObjectInstance) *ImageMenuItemInstanc
 				},
 			},
 			ActionableInstance: ActionableInstance{
-				Instance: *base,
-			},
-			ActivatableInstance: ActivatableInstance{
 				Instance: *base,
 			},
 		},
@@ -147586,316 +128362,6 @@ func UnsafeImageMenuItemToGlibNone(c ImageMenuItem) unsafe.Pointer {
 // UnsafeImageMenuItemToGlibFull is used to convert the instance to it's C value GtkImageMenuItem, while removeing the finalizer. This is used by the bindings internally.
 func UnsafeImageMenuItemToGlibFull(c ImageMenuItem) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
-}
-
-// NewImageMenuItemInstance wraps gtk_image_menu_item_new
-// The function returns the following values:
-// 
-// 	- goret Widget 
-//
-// Creates a new #GtkImageMenuItem with an empty label.
-//
-// Deprecated: (since 3.10.0) Use gtk_menu_item_new() instead.
-func NewImageMenuItemInstance() Widget {
-	var cret *C.GtkWidget // return, none, converted
-
-	cret = C.gtk_image_menu_item_new()
-
-	var goret Widget
-
-	goret = UnsafeWidgetFromGlibNone(unsafe.Pointer(cret))
-
-	return goret
-}
-
-// NewImageMenuItemInstanceFromStock wraps gtk_image_menu_item_new_from_stock
-// 
-// The function takes the following parameters:
-// 
-// 	- stockId string: the name of the stock item. 
-// 	- accelGroup AccelGroup (nullable): the #GtkAccelGroup to add the menu items
-//   accelerator to, or %NULL. 
-// 
-// The function returns the following values:
-// 
-// 	- goret Widget 
-//
-// Creates a new #GtkImageMenuItem containing the image and text from a
-// stock item. Some stock ids have preprocessor macros like #GTK_STOCK_OK
-// and #GTK_STOCK_APPLY.
-// 
-// If you want this menu item to have changeable accelerators, then pass in
-// %NULL for accel_group. Next call gtk_menu_item_set_accel_path() with an
-// appropriate path for the menu item, use gtk_stock_lookup() to look up the
-// standard accelerator for the stock item, and if one is found, call
-// gtk_accel_map_add_entry() to register it.
-//
-// Deprecated: (since 3.10.0) Use gtk_menu_item_new_with_mnemonic() instead.
-func NewImageMenuItemInstanceFromStock(stockId string, accelGroup AccelGroup) Widget {
-	var carg1 *C.gchar         // in, none, string, casted *C.gchar
-	var carg2 *C.GtkAccelGroup // in, none, converted, nullable
-	var cret  *C.GtkWidget     // return, none, converted
-
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(stockId)))
-	defer C.free(unsafe.Pointer(carg1))
-	if accelGroup != nil {
-		carg2 = (*C.GtkAccelGroup)(UnsafeAccelGroupToGlibNone(accelGroup))
-	}
-
-	cret = C.gtk_image_menu_item_new_from_stock(carg1, carg2)
-	runtime.KeepAlive(stockId)
-	runtime.KeepAlive(accelGroup)
-
-	var goret Widget
-
-	goret = UnsafeWidgetFromGlibNone(unsafe.Pointer(cret))
-
-	return goret
-}
-
-// NewImageMenuItemInstanceWithLabel wraps gtk_image_menu_item_new_with_label
-// 
-// The function takes the following parameters:
-// 
-// 	- label string: the text of the menu item. 
-// 
-// The function returns the following values:
-// 
-// 	- goret Widget 
-//
-// Creates a new #GtkImageMenuItem containing a label.
-//
-// Deprecated: (since 3.10.0) Use gtk_menu_item_new_with_label() instead.
-func NewImageMenuItemInstanceWithLabel(label string) Widget {
-	var carg1 *C.gchar     // in, none, string, casted *C.gchar
-	var cret  *C.GtkWidget // return, none, converted
-
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(label)))
-	defer C.free(unsafe.Pointer(carg1))
-
-	cret = C.gtk_image_menu_item_new_with_label(carg1)
-	runtime.KeepAlive(label)
-
-	var goret Widget
-
-	goret = UnsafeWidgetFromGlibNone(unsafe.Pointer(cret))
-
-	return goret
-}
-
-// NewImageMenuItemInstanceWithMnemonic wraps gtk_image_menu_item_new_with_mnemonic
-// 
-// The function takes the following parameters:
-// 
-// 	- label string: the text of the menu item, with an underscore in front of the
-//         mnemonic character 
-// 
-// The function returns the following values:
-// 
-// 	- goret Widget 
-//
-// Creates a new #GtkImageMenuItem containing a label. The label
-// will be created using gtk_label_new_with_mnemonic(), so underscores
-// in @label indicate the mnemonic for the menu item.
-//
-// Deprecated: (since 3.10.0) Use gtk_menu_item_new_with_mnemonic() instead.
-func NewImageMenuItemInstanceWithMnemonic(label string) Widget {
-	var carg1 *C.gchar     // in, none, string, casted *C.gchar
-	var cret  *C.GtkWidget // return, none, converted
-
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(label)))
-	defer C.free(unsafe.Pointer(carg1))
-
-	cret = C.gtk_image_menu_item_new_with_mnemonic(carg1)
-	runtime.KeepAlive(label)
-
-	var goret Widget
-
-	goret = UnsafeWidgetFromGlibNone(unsafe.Pointer(cret))
-
-	return goret
-}
-
-// GetAlwaysShowImage wraps gtk_image_menu_item_get_always_show_image
-// The function returns the following values:
-// 
-// 	- goret bool 
-//
-// Returns whether the menu item will ignore the #GtkSettings:gtk-menu-images
-// setting and always show the image, if available.
-//
-// Deprecated: (since 3.10.0) 
-func (imageMenuItem *ImageMenuItemInstance) GetAlwaysShowImage() bool {
-	var carg0 *C.GtkImageMenuItem // in, none, converted
-	var cret  C.gboolean          // return
-
-	carg0 = (*C.GtkImageMenuItem)(UnsafeImageMenuItemToGlibNone(imageMenuItem))
-
-	cret = C.gtk_image_menu_item_get_always_show_image(carg0)
-	runtime.KeepAlive(imageMenuItem)
-
-	var goret bool
-
-	if cret != 0 {
-		goret = true
-	}
-
-	return goret
-}
-
-// GetImage wraps gtk_image_menu_item_get_image
-// The function returns the following values:
-// 
-// 	- goret Widget 
-//
-// Gets the widget that is currently set as the image of @image_menu_item.
-// See gtk_image_menu_item_set_image().
-//
-// Deprecated: (since 3.10.0) 
-func (imageMenuItem *ImageMenuItemInstance) GetImage() Widget {
-	var carg0 *C.GtkImageMenuItem // in, none, converted
-	var cret  *C.GtkWidget        // return, none, converted
-
-	carg0 = (*C.GtkImageMenuItem)(UnsafeImageMenuItemToGlibNone(imageMenuItem))
-
-	cret = C.gtk_image_menu_item_get_image(carg0)
-	runtime.KeepAlive(imageMenuItem)
-
-	var goret Widget
-
-	goret = UnsafeWidgetFromGlibNone(unsafe.Pointer(cret))
-
-	return goret
-}
-
-// GetUseStock wraps gtk_image_menu_item_get_use_stock
-// The function returns the following values:
-// 
-// 	- goret bool 
-//
-// Checks whether the label set in the menuitem is used as a
-// stock id to select the stock item for the item.
-//
-// Deprecated: (since 3.10.0) 
-func (imageMenuItem *ImageMenuItemInstance) GetUseStock() bool {
-	var carg0 *C.GtkImageMenuItem // in, none, converted
-	var cret  C.gboolean          // return
-
-	carg0 = (*C.GtkImageMenuItem)(UnsafeImageMenuItemToGlibNone(imageMenuItem))
-
-	cret = C.gtk_image_menu_item_get_use_stock(carg0)
-	runtime.KeepAlive(imageMenuItem)
-
-	var goret bool
-
-	if cret != 0 {
-		goret = true
-	}
-
-	return goret
-}
-
-// SetAccelGroup wraps gtk_image_menu_item_set_accel_group
-// 
-// The function takes the following parameters:
-// 
-// 	- accelGroup AccelGroup: the #GtkAccelGroup 
-//
-// Specifies an @accel_group to add the menu items accelerator to
-// (this only applies to stock items so a stock item must already
-// be set, make sure to call gtk_image_menu_item_set_use_stock()
-// and gtk_menu_item_set_label() with a valid stock item first).
-// 
-// If you want this menu item to have changeable accelerators then
-// you shouldnt need this (see gtk_image_menu_item_new_from_stock()).
-//
-// Deprecated: (since 3.10.0) 
-func (imageMenuItem *ImageMenuItemInstance) SetAccelGroup(accelGroup AccelGroup) {
-	var carg0 *C.GtkImageMenuItem // in, none, converted
-	var carg1 *C.GtkAccelGroup    // in, none, converted
-
-	carg0 = (*C.GtkImageMenuItem)(UnsafeImageMenuItemToGlibNone(imageMenuItem))
-	carg1 = (*C.GtkAccelGroup)(UnsafeAccelGroupToGlibNone(accelGroup))
-
-	C.gtk_image_menu_item_set_accel_group(carg0, carg1)
-	runtime.KeepAlive(imageMenuItem)
-	runtime.KeepAlive(accelGroup)
-}
-
-// SetAlwaysShowImage wraps gtk_image_menu_item_set_always_show_image
-// 
-// The function takes the following parameters:
-// 
-// 	- alwaysShow bool: %TRUE if the menuitem should always show the image 
-//
-// If %TRUE, the menu item will ignore the #GtkSettings:gtk-menu-images
-// setting and always show the image, if available.
-// 
-// Use this property if the menuitem would be useless or hard to use
-// without the image.
-//
-// Deprecated: (since 3.10.0) 
-func (imageMenuItem *ImageMenuItemInstance) SetAlwaysShowImage(alwaysShow bool) {
-	var carg0 *C.GtkImageMenuItem // in, none, converted
-	var carg1 C.gboolean          // in
-
-	carg0 = (*C.GtkImageMenuItem)(UnsafeImageMenuItemToGlibNone(imageMenuItem))
-	if alwaysShow {
-		carg1 = C.TRUE
-	}
-
-	C.gtk_image_menu_item_set_always_show_image(carg0, carg1)
-	runtime.KeepAlive(imageMenuItem)
-	runtime.KeepAlive(alwaysShow)
-}
-
-// SetImage wraps gtk_image_menu_item_set_image
-// 
-// The function takes the following parameters:
-// 
-// 	- image Widget (nullable): a widget to set as the image for the menu item. 
-//
-// Sets the image of @image_menu_item to the given widget.
-// Note that it depends on the show-menu-images setting whether
-// the image will be displayed or not.
-//
-// Deprecated: (since 3.10.0) 
-func (imageMenuItem *ImageMenuItemInstance) SetImage(image Widget) {
-	var carg0 *C.GtkImageMenuItem // in, none, converted
-	var carg1 *C.GtkWidget        // in, none, converted, nullable
-
-	carg0 = (*C.GtkImageMenuItem)(UnsafeImageMenuItemToGlibNone(imageMenuItem))
-	if image != nil {
-		carg1 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(image))
-	}
-
-	C.gtk_image_menu_item_set_image(carg0, carg1)
-	runtime.KeepAlive(imageMenuItem)
-	runtime.KeepAlive(image)
-}
-
-// SetUseStock wraps gtk_image_menu_item_set_use_stock
-// 
-// The function takes the following parameters:
-// 
-// 	- useStock bool: %TRUE if the menuitem should use a stock item 
-//
-// If %TRUE, the label set in the menuitem is used as a
-// stock id to select the stock item for the item.
-//
-// Deprecated: (since 3.10.0) 
-func (imageMenuItem *ImageMenuItemInstance) SetUseStock(useStock bool) {
-	var carg0 *C.GtkImageMenuItem // in, none, converted
-	var carg1 C.gboolean          // in
-
-	carg0 = (*C.GtkImageMenuItem)(UnsafeImageMenuItemToGlibNone(imageMenuItem))
-	if useStock {
-		carg1 = C.TRUE
-	}
-
-	C.gtk_image_menu_item_set_use_stock(carg0, carg1)
-	runtime.KeepAlive(imageMenuItem)
-	runtime.KeepAlive(useStock)
 }
 
 // MenuButtonInstance is the instance type used by all types extending GtkMenuButton. It is used internally by the bindings. Users should use the interface [MenuButton] instead.
@@ -148002,13 +128468,13 @@ type MenuButton interface {
 	//
 	// Returns the parent #GtkWidget to use to line up with menu.
 	GetAlignWidget() Widget
-	// GetDirection wraps gtk_menu_button_get_direction
+	// GetMenuButtonDirection wraps gtk_menu_button_get_direction
 	// The function returns the following values:
 	// 
 	// 	- goret ArrowType 
 	//
 	// Returns the direction the popup will be pointing at when popped up.
-	GetDirection() ArrowType
+	GetMenuButtonDirection() ArrowType
 	// GetMenuModel wraps gtk_menu_button_get_menu_model
 	// The function returns the following values:
 	// 
@@ -148057,7 +128523,7 @@ type MenuButton interface {
 	// Note that this property is only used with menus currently,
 	// and not for popovers.
 	SetAlignWidget(Widget)
-	// SetDirection wraps gtk_menu_button_set_direction
+	// SetMenuButtonDirection wraps gtk_menu_button_set_direction
 	// 
 	// The function takes the following parameters:
 	// 
@@ -148072,7 +128538,7 @@ type MenuButton interface {
 	// 
 	// If you pass %GTK_ARROW_NONE for a @direction, the popup will behave
 	// as if you passed %GTK_ARROW_DOWN (although you won’t see any arrows).
-	SetDirection(ArrowType)
+	SetMenuButtonDirection(ArrowType)
 	// SetMenuModel wraps gtk_menu_button_set_menu_model
 	// 
 	// The function takes the following parameters:
@@ -148150,9 +128616,6 @@ func unsafeWrapMenuButton(base *gobject.ObjectInstance) *MenuButtonInstance {
 				ActionableInstance: ActionableInstance{
 					Instance: *base,
 				},
-				ActivatableInstance: ActivatableInstance{
-					Instance: *base,
-				},
 			},
 		},
 	}
@@ -148228,13 +128691,13 @@ func (menuButton *MenuButtonInstance) GetAlignWidget() Widget {
 	return goret
 }
 
-// GetDirection wraps gtk_menu_button_get_direction
+// GetMenuButtonDirection wraps gtk_menu_button_get_direction
 // The function returns the following values:
 // 
 // 	- goret ArrowType 
 //
 // Returns the direction the popup will be pointing at when popped up.
-func (menuButton *MenuButtonInstance) GetDirection() ArrowType {
+func (menuButton *MenuButtonInstance) GetMenuButtonDirection() ArrowType {
 	var carg0 *C.GtkMenuButton // in, none, converted
 	var cret  C.GtkArrowType   // return, none, casted
 
@@ -148373,7 +128836,7 @@ func (menuButton *MenuButtonInstance) SetAlignWidget(alignWidget Widget) {
 	runtime.KeepAlive(alignWidget)
 }
 
-// SetDirection wraps gtk_menu_button_set_direction
+// SetMenuButtonDirection wraps gtk_menu_button_set_direction
 // 
 // The function takes the following parameters:
 // 
@@ -148388,7 +128851,7 @@ func (menuButton *MenuButtonInstance) SetAlignWidget(alignWidget Widget) {
 // 
 // If you pass %GTK_ARROW_NONE for a @direction, the popup will behave
 // as if you passed %GTK_ARROW_DOWN (although you won’t see any arrows).
-func (menuButton *MenuButtonInstance) SetDirection(direction ArrowType) {
+func (menuButton *MenuButtonInstance) SetMenuButtonDirection(direction ArrowType) {
 	var carg0 *C.GtkMenuButton // in, none, converted
 	var carg1 C.GtkArrowType   // in, none, casted
 
@@ -148640,15 +129103,6 @@ type MessageDialog interface {
 	Dialog
 	upcastToGtkMessageDialog() *MessageDialogInstance
 
-	// GetImage wraps gtk_message_dialog_get_image
-	// The function returns the following values:
-	// 
-	// 	- goret Widget 
-	//
-	// Gets the dialog’s image.
-	//
-	// Deprecated: (since 3.12.0) Use #GtkDialog for dialogs with images
-	GetImage() Widget
 	// GetMessageArea wraps gtk_message_dialog_get_message_area
 	// The function returns the following values:
 	// 
@@ -148660,16 +129114,6 @@ type MessageDialog interface {
 	// See gtk_dialog_get_content_area() for the corresponding
 	// function in the parent #GtkDialog.
 	GetMessageArea() Widget
-	// SetImage wraps gtk_message_dialog_set_image
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- image Widget: the image 
-	//
-	// Sets the dialog’s image to @image.
-	//
-	// Deprecated: (since 3.12.0) Use #GtkDialog to create dialogs with images
-	SetImage(Widget)
 	// SetMarkup wraps gtk_message_dialog_set_markup
 	// 
 	// The function takes the following parameters:
@@ -148733,30 +129177,6 @@ func UnsafeMessageDialogToGlibFull(c MessageDialog) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// GetImage wraps gtk_message_dialog_get_image
-// The function returns the following values:
-// 
-// 	- goret Widget 
-//
-// Gets the dialog’s image.
-//
-// Deprecated: (since 3.12.0) Use #GtkDialog for dialogs with images
-func (dialog *MessageDialogInstance) GetImage() Widget {
-	var carg0 *C.GtkMessageDialog // in, none, converted
-	var cret  *C.GtkWidget        // return, none, converted
-
-	carg0 = (*C.GtkMessageDialog)(UnsafeMessageDialogToGlibNone(dialog))
-
-	cret = C.gtk_message_dialog_get_image(carg0)
-	runtime.KeepAlive(dialog)
-
-	var goret Widget
-
-	goret = UnsafeWidgetFromGlibNone(unsafe.Pointer(cret))
-
-	return goret
-}
-
 // GetMessageArea wraps gtk_message_dialog_get_message_area
 // The function returns the following values:
 // 
@@ -148781,27 +129201,6 @@ func (messageDialog *MessageDialogInstance) GetMessageArea() Widget {
 	goret = UnsafeWidgetFromGlibNone(unsafe.Pointer(cret))
 
 	return goret
-}
-
-// SetImage wraps gtk_message_dialog_set_image
-// 
-// The function takes the following parameters:
-// 
-// 	- image Widget: the image 
-//
-// Sets the dialog’s image to @image.
-//
-// Deprecated: (since 3.12.0) Use #GtkDialog to create dialogs with images
-func (dialog *MessageDialogInstance) SetImage(image Widget) {
-	var carg0 *C.GtkMessageDialog // in, none, converted
-	var carg1 *C.GtkWidget        // in, none, converted
-
-	carg0 = (*C.GtkMessageDialog)(UnsafeMessageDialogToGlibNone(dialog))
-	carg1 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(image))
-
-	C.gtk_message_dialog_set_image(carg0, carg1)
-	runtime.KeepAlive(dialog)
-	runtime.KeepAlive(image)
 }
 
 // SetMarkup wraps gtk_message_dialog_set_markup
@@ -149069,16 +129468,6 @@ type PlacesSidebar interface {
 	//
 	// Gets the open flags.
 	GetOpenFlags() PlacesOpenFlags
-	// GetShowConnectToServer wraps gtk_places_sidebar_get_show_connect_to_server
-	// The function returns the following values:
-	// 
-	// 	- goret bool 
-	//
-	// Returns the value previously set with gtk_places_sidebar_set_show_connect_to_server()
-	//
-	// Deprecated: (since 3.18.0) It is recommended to group this functionality with the drives
-	//     and network location under the new 'Other Location' item
-	GetShowConnectToServer() bool
 	// GetShowDesktop wraps gtk_places_sidebar_get_show_desktop
 	// The function returns the following values:
 	// 
@@ -149191,22 +129580,6 @@ type PlacesSidebar interface {
 	// Passing 0 for @flags will cause #GTK_PLACES_OPEN_NORMAL to always be sent
 	// to callbacks for the “open-location” signal.
 	SetOpenFlags(PlacesOpenFlags)
-	// SetShowConnectToServer wraps gtk_places_sidebar_set_show_connect_to_server
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- showConnectToServer bool: whether to show an item for the Connect to Server command 
-	//
-	// Sets whether the @sidebar should show an item for connecting to a network server;
-	// this is off by default. An application may want to turn this on if it implements
-	// a way for the user to connect to network servers directly.
-	// 
-	// If you enable this, you should connect to the
-	// #GtkPlacesSidebar::show-connect-to-server signal.
-	//
-	// Deprecated: (since 3.18.0) It is recommended to group this functionality with the drives
-	//     and network location under the new 'Other Location' item
-	SetShowConnectToServer(bool)
 	// SetShowDesktop wraps gtk_places_sidebar_set_show_desktop
 	// 
 	// The function takes the following parameters:
@@ -149480,33 +129853,6 @@ func (sidebar *PlacesSidebarInstance) GetOpenFlags() PlacesOpenFlags {
 	var goret PlacesOpenFlags
 
 	goret = PlacesOpenFlags(cret)
-
-	return goret
-}
-
-// GetShowConnectToServer wraps gtk_places_sidebar_get_show_connect_to_server
-// The function returns the following values:
-// 
-// 	- goret bool 
-//
-// Returns the value previously set with gtk_places_sidebar_set_show_connect_to_server()
-//
-// Deprecated: (since 3.18.0) It is recommended to group this functionality with the drives
-//     and network location under the new 'Other Location' item
-func (sidebar *PlacesSidebarInstance) GetShowConnectToServer() bool {
-	var carg0 *C.GtkPlacesSidebar // in, none, converted
-	var cret  C.gboolean          // return
-
-	carg0 = (*C.GtkPlacesSidebar)(UnsafePlacesSidebarToGlibNone(sidebar))
-
-	cret = C.gtk_places_sidebar_get_show_connect_to_server(carg0)
-	runtime.KeepAlive(sidebar)
-
-	var goret bool
-
-	if cret != 0 {
-		goret = true
-	}
 
 	return goret
 }
@@ -149787,35 +130133,6 @@ func (sidebar *PlacesSidebarInstance) SetOpenFlags(flags PlacesOpenFlags) {
 	C.gtk_places_sidebar_set_open_flags(carg0, carg1)
 	runtime.KeepAlive(sidebar)
 	runtime.KeepAlive(flags)
-}
-
-// SetShowConnectToServer wraps gtk_places_sidebar_set_show_connect_to_server
-// 
-// The function takes the following parameters:
-// 
-// 	- showConnectToServer bool: whether to show an item for the Connect to Server command 
-//
-// Sets whether the @sidebar should show an item for connecting to a network server;
-// this is off by default. An application may want to turn this on if it implements
-// a way for the user to connect to network servers directly.
-// 
-// If you enable this, you should connect to the
-// #GtkPlacesSidebar::show-connect-to-server signal.
-//
-// Deprecated: (since 3.18.0) It is recommended to group this functionality with the drives
-//     and network location under the new 'Other Location' item
-func (sidebar *PlacesSidebarInstance) SetShowConnectToServer(showConnectToServer bool) {
-	var carg0 *C.GtkPlacesSidebar // in, none, converted
-	var carg1 C.gboolean          // in
-
-	carg0 = (*C.GtkPlacesSidebar)(UnsafePlacesSidebarToGlibNone(sidebar))
-	if showConnectToServer {
-		carg1 = C.TRUE
-	}
-
-	C.gtk_places_sidebar_set_show_connect_to_server(carg0, carg1)
-	runtime.KeepAlive(sidebar)
-	runtime.KeepAlive(showConnectToServer)
 }
 
 // SetShowDesktop wraps gtk_places_sidebar_set_show_desktop
@@ -150256,9 +130573,6 @@ func unsafeWrapRadioButton(base *gobject.ObjectInstance) *RadioButtonInstance {
 					ActionableInstance: ActionableInstance{
 						Instance: *base,
 					},
-					ActivatableInstance: ActivatableInstance{
-						Instance: *base,
-					},
 				},
 			},
 		},
@@ -150606,9 +130920,6 @@ func unsafeWrapRadioMenuItem(base *gobject.ObjectInstance) *RadioMenuItemInstanc
 					},
 				},
 				ActionableInstance: ActionableInstance{
-					Instance: *base,
-				},
-				ActivatableInstance: ActivatableInstance{
 					Instance: *base,
 				},
 			},
@@ -150974,9 +131285,6 @@ func unsafeWrapSeparatorToolItem(base *gobject.ObjectInstance) *SeparatorToolIte
 					},
 				},
 			},
-			ActivatableInstance: ActivatableInstance{
-				Instance: *base,
-			},
 		},
 	}
 }
@@ -151252,16 +131560,6 @@ type ToolButton interface {
 	// Returns the widget used as label on @button.
 	// See gtk_tool_button_set_label_widget().
 	GetLabelWidget() Widget
-	// GetStockID wraps gtk_tool_button_get_stock_id
-	// The function returns the following values:
-	// 
-	// 	- goret string 
-	//
-	// Returns the name of the stock item. See gtk_tool_button_set_stock_id().
-	// The returned string is owned by GTK+ and must not be freed or modifed.
-	//
-	// Deprecated: (since 3.10.0) Use gtk_tool_button_get_icon_name() instead.
-	GetStockID() string
 	// GetUseUnderline wraps gtk_tool_button_get_use_underline
 	// The function returns the following values:
 	// 
@@ -151317,18 +131615,6 @@ type ToolButton interface {
 	// determined by the #GtkToolButton:stock-id property is used as label. If
 	// #GtkToolButton:stock-id is also %NULL, @button does not have a label.
 	SetLabelWidget(Widget)
-	// SetStockID wraps gtk_tool_button_set_stock_id
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- stockId string (nullable): a name of a stock item, or %NULL 
-	//
-	// Sets the name of the stock item. See gtk_tool_button_new_from_stock().
-	// The stock_id property only has an effect if not overridden by non-%NULL
-	// #GtkToolButton:label-widget and #GtkToolButton:icon-widget properties.
-	//
-	// Deprecated: (since 3.10.0) Use gtk_tool_button_set_icon_name() instead.
-	SetStockID(string)
 	// SetUseUnderline wraps gtk_tool_button_set_use_underline
 	// 
 	// The function takes the following parameters:
@@ -151363,9 +131649,6 @@ func unsafeWrapToolButton(base *gobject.ObjectInstance) *ToolButtonInstance {
 						Instance: *base,
 					},
 				},
-			},
-			ActivatableInstance: ActivatableInstance{
-				Instance: *base,
 			},
 		},
 		ActionableInstance: ActionableInstance{
@@ -151439,41 +131722,6 @@ func NewToolButtonInstance(iconWidget Widget, label string) ToolItem {
 	return goret
 }
 
-// NewToolButtonInstanceFromStock wraps gtk_tool_button_new_from_stock
-// 
-// The function takes the following parameters:
-// 
-// 	- stockId string: the name of the stock item 
-// 
-// The function returns the following values:
-// 
-// 	- goret ToolItem 
-//
-// Creates a new #GtkToolButton containing the image and text from a
-// stock item. Some stock ids have preprocessor macros like #GTK_STOCK_OK
-// and #GTK_STOCK_APPLY.
-// 
-// It is an error if @stock_id is not a name of a stock item.
-//
-// Deprecated: (since 3.10.0) Use gtk_tool_button_new() together with
-// gtk_image_new_from_icon_name() instead.
-func NewToolButtonInstanceFromStock(stockId string) ToolItem {
-	var carg1 *C.gchar       // in, none, string, casted *C.gchar
-	var cret  *C.GtkToolItem // return, none, converted
-
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(stockId)))
-	defer C.free(unsafe.Pointer(carg1))
-
-	cret = C.gtk_tool_button_new_from_stock(carg1)
-	runtime.KeepAlive(stockId)
-
-	var goret ToolItem
-
-	goret = UnsafeToolItemFromGlibNone(unsafe.Pointer(cret))
-
-	return goret
-}
-
 // GetIconName wraps gtk_tool_button_get_icon_name
 // The function returns the following values:
 // 
@@ -151492,7 +131740,7 @@ func (button *ToolButtonInstance) GetIconName() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -151539,7 +131787,7 @@ func (button *ToolButtonInstance) GetLabel() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -151563,31 +131811,6 @@ func (button *ToolButtonInstance) GetLabelWidget() Widget {
 	var goret Widget
 
 	goret = UnsafeWidgetFromGlibNone(unsafe.Pointer(cret))
-
-	return goret
-}
-
-// GetStockID wraps gtk_tool_button_get_stock_id
-// The function returns the following values:
-// 
-// 	- goret string 
-//
-// Returns the name of the stock item. See gtk_tool_button_set_stock_id().
-// The returned string is owned by GTK+ and must not be freed or modifed.
-//
-// Deprecated: (since 3.10.0) Use gtk_tool_button_get_icon_name() instead.
-func (button *ToolButtonInstance) GetStockID() string {
-	var carg0 *C.GtkToolButton // in, none, converted
-	var cret  *C.gchar         // return, none, string, casted *C.gchar
-
-	carg0 = (*C.GtkToolButton)(UnsafeToolButtonToGlibNone(button))
-
-	cret = C.gtk_tool_button_get_stock_id(carg0)
-	runtime.KeepAlive(button)
-
-	var goret string
-
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -151716,32 +131939,6 @@ func (button *ToolButtonInstance) SetLabelWidget(labelWidget Widget) {
 	C.gtk_tool_button_set_label_widget(carg0, carg1)
 	runtime.KeepAlive(button)
 	runtime.KeepAlive(labelWidget)
-}
-
-// SetStockID wraps gtk_tool_button_set_stock_id
-// 
-// The function takes the following parameters:
-// 
-// 	- stockId string (nullable): a name of a stock item, or %NULL 
-//
-// Sets the name of the stock item. See gtk_tool_button_new_from_stock().
-// The stock_id property only has an effect if not overridden by non-%NULL
-// #GtkToolButton:label-widget and #GtkToolButton:icon-widget properties.
-//
-// Deprecated: (since 3.10.0) Use gtk_tool_button_set_icon_name() instead.
-func (button *ToolButtonInstance) SetStockID(stockId string) {
-	var carg0 *C.GtkToolButton // in, none, converted
-	var carg1 *C.gchar         // in, none, string, nullable-string
-
-	carg0 = (*C.GtkToolButton)(UnsafeToolButtonToGlibNone(button))
-	if stockId != "" {
-		carg1 = (*C.gchar)(unsafe.Pointer(C.CString(stockId)))
-		defer C.free(unsafe.Pointer(carg1))
-	}
-
-	C.gtk_tool_button_set_stock_id(carg0, carg1)
-	runtime.KeepAlive(button)
-	runtime.KeepAlive(stockId)
 }
 
 // SetUseUnderline wraps gtk_tool_button_set_use_underline
@@ -152259,7 +132456,7 @@ func (about *AboutDialogInstance) GetComments() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -152281,7 +132478,7 @@ func (about *AboutDialogInstance) GetCopyright() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -152328,7 +132525,7 @@ func (about *AboutDialogInstance) GetLicense() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -152394,7 +132591,7 @@ func (about *AboutDialogInstance) GetLogoIconName() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -152416,7 +132613,7 @@ func (about *AboutDialogInstance) GetProgramName() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -152439,7 +132636,7 @@ func (about *AboutDialogInstance) GetTranslatorCredits() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -152461,7 +132658,7 @@ func (about *AboutDialogInstance) GetVersion() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -152483,7 +132680,7 @@ func (about *AboutDialogInstance) GetWebsite() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -152505,7 +132702,7 @@ func (about *AboutDialogInstance) GetWebsiteLabel() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -153085,7 +133282,7 @@ func (self *AppChooserDialogInstance) GetHeading() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -153461,9 +133658,6 @@ func unsafeWrapMenuToolButton(base *gobject.ObjectInstance) *MenuToolButtonInsta
 						},
 					},
 				},
-				ActivatableInstance: ActivatableInstance{
-					Instance: *base,
-				},
 			},
 			ActionableInstance: ActionableInstance{
 				Instance: *base,
@@ -153529,38 +133723,6 @@ func NewMenuToolButtonInstance(iconWidget Widget, label string) ToolItem {
 	cret = C.gtk_menu_tool_button_new(carg1, carg2)
 	runtime.KeepAlive(iconWidget)
 	runtime.KeepAlive(label)
-
-	var goret ToolItem
-
-	goret = UnsafeToolItemFromGlibNone(unsafe.Pointer(cret))
-
-	return goret
-}
-
-// NewMenuToolButtonInstanceFromStock wraps gtk_menu_tool_button_new_from_stock
-// 
-// The function takes the following parameters:
-// 
-// 	- stockId string: the name of a stock item 
-// 
-// The function returns the following values:
-// 
-// 	- goret ToolItem 
-//
-// Creates a new #GtkMenuToolButton.
-// The new #GtkMenuToolButton will contain an icon and label from
-// the stock item indicated by @stock_id.
-//
-// Deprecated: (since 3.10.0) Use gtk_menu_tool_button_new() instead.
-func NewMenuToolButtonInstanceFromStock(stockId string) ToolItem {
-	var carg1 *C.gchar       // in, none, string, casted *C.gchar
-	var cret  *C.GtkToolItem // return, none, converted
-
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(stockId)))
-	defer C.free(unsafe.Pointer(carg1))
-
-	cret = C.gtk_menu_tool_button_new_from_stock(carg1)
-	runtime.KeepAlive(stockId)
 
 	var goret ToolItem
 
@@ -153716,9 +133878,6 @@ func unsafeWrapToggleToolButton(base *gobject.ObjectInstance) *ToggleToolButtonI
 						},
 					},
 				},
-				ActivatableInstance: ActivatableInstance{
-					Instance: *base,
-				},
 			},
 			ActionableInstance: ActionableInstance{
 				Instance: *base,
@@ -153765,40 +133924,6 @@ func NewToggleToolButtonInstance() ToolItem {
 	var cret *C.GtkToolItem // return, none, converted
 
 	cret = C.gtk_toggle_tool_button_new()
-
-	var goret ToolItem
-
-	goret = UnsafeToolItemFromGlibNone(unsafe.Pointer(cret))
-
-	return goret
-}
-
-// NewToggleToolButtonInstanceFromStock wraps gtk_toggle_tool_button_new_from_stock
-// 
-// The function takes the following parameters:
-// 
-// 	- stockId string: the name of the stock item 
-// 
-// The function returns the following values:
-// 
-// 	- goret ToolItem 
-//
-// Creates a new #GtkToggleToolButton containing the image and text from a
-// stock item. Some stock ids have preprocessor macros like #GTK_STOCK_OK
-// and #GTK_STOCK_APPLY.
-// 
-// It is an error if @stock_id is not a name of a stock item.
-//
-// Deprecated: (since 3.10.0) Use gtk_toggle_tool_button_new() instead.
-func NewToggleToolButtonInstanceFromStock(stockId string) ToolItem {
-	var carg1 *C.gchar       // in, none, string, casted *C.gchar
-	var cret  *C.GtkToolItem // return, none, converted
-
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(stockId)))
-	defer C.free(unsafe.Pointer(carg1))
-
-	cret = C.gtk_toggle_tool_button_new_from_stock(carg1)
-	runtime.KeepAlive(stockId)
 
 	var goret ToolItem
 
@@ -153901,9 +134026,6 @@ func unsafeWrapRadioToolButton(base *gobject.ObjectInstance) *RadioToolButtonIns
 							},
 						},
 					},
-					ActivatableInstance: ActivatableInstance{
-						Instance: *base,
-					},
 				},
 				ActionableInstance: ActionableInstance{
 					Instance: *base,
@@ -153962,44 +134084,6 @@ func NewRadioToolButtonInstanceFromWidget(group RadioToolButton) ToolItem {
 
 	cret = C.gtk_radio_tool_button_new_from_widget(carg1)
 	runtime.KeepAlive(group)
-
-	var goret ToolItem
-
-	goret = UnsafeToolItemFromGlibNone(unsafe.Pointer(cret))
-
-	return goret
-}
-
-// NewRadioToolButtonInstanceWithStockFromWidget wraps gtk_radio_tool_button_new_with_stock_from_widget
-// 
-// The function takes the following parameters:
-// 
-// 	- group RadioToolButton (nullable): An existing #GtkRadioToolButton. 
-// 	- stockId string: the name of a stock item 
-// 
-// The function returns the following values:
-// 
-// 	- goret ToolItem 
-//
-// Creates a new #GtkRadioToolButton adding it to the same group as @group.
-// The new #GtkRadioToolButton will contain an icon and label from the
-// stock item indicated by @stock_id.
-//
-// Deprecated: (since 3.10.0) gtk_radio_tool_button_new_from_widget
-func NewRadioToolButtonInstanceWithStockFromWidget(group RadioToolButton, stockId string) ToolItem {
-	var carg1 *C.GtkRadioToolButton // in, none, converted, nullable
-	var carg2 *C.gchar              // in, none, string, casted *C.gchar
-	var cret  *C.GtkToolItem        // return, none, converted
-
-	if group != nil {
-		carg1 = (*C.GtkRadioToolButton)(UnsafeRadioToolButtonToGlibNone(group))
-	}
-	carg2 = (*C.gchar)(unsafe.Pointer(C.CString(stockId)))
-	defer C.free(unsafe.Pointer(carg2))
-
-	cret = C.gtk_radio_tool_button_new_with_stock_from_widget(carg1, carg2)
-	runtime.KeepAlive(group)
-	runtime.KeepAlive(stockId)
 
 	var goret ToolItem
 
@@ -154566,71 +134650,6 @@ func UnsafeActionClassToGlibFull(a *ActionClass) unsafe.Pointer {
 	a.native = nil // ActionClass is invalid from here on
 	return _p
 }
-// ActionEntry wraps GtkActionEntry
-//
-// #GtkActionEntry structs are used with gtk_action_group_add_actions() to
-// construct actions.
-//
-// Deprecated: (since 3.10.0) 
-type ActionEntry struct {
-	*actionEntry
-}
-
-// actionEntry is the struct that's finalized
-type actionEntry struct {
-	native *C.GtkActionEntry
-}
-
-// UnsafeActionEntryFromGlibBorrow is used to convert raw C.GtkActionEntry pointers to go. This is used by the bindings internally.
-func UnsafeActionEntryFromGlibBorrow(p unsafe.Pointer) *ActionEntry {
-	return &ActionEntry{&actionEntry{(*C.GtkActionEntry)(p)}}
-}
-
-// UnsafeActionEntryFromGlibNone is used to convert raw C.GtkActionEntry pointers to go while taking a reference. This is used by the bindings internally.
-func UnsafeActionEntryFromGlibNone(p unsafe.Pointer) *ActionEntry {
-	// FIXME: this has no ref function, what should we do here?
-	wrapped := UnsafeActionEntryFromGlibBorrow(p)
-	runtime.SetFinalizer(
-		wrapped.actionEntry,
-		func (intern *actionEntry) {
-			C.free(unsafe.Pointer(intern.native))
-		},
-	)
-	return wrapped
-}
-
-// UnsafeActionEntryFromGlibFull is used to convert raw C.GtkActionEntry pointers to go while taking a reference. This is used by the bindings internally.
-func UnsafeActionEntryFromGlibFull(p unsafe.Pointer) *ActionEntry {
-	wrapped := UnsafeActionEntryFromGlibBorrow(p)
-	runtime.SetFinalizer(
-		wrapped.actionEntry,
-		func (intern *actionEntry) {
-			C.free(unsafe.Pointer(intern.native))
-		},
-	)
-	return wrapped
-}
-
-// UnsafeActionEntryFree unrefs/frees the underlying resource. This is used by the bindings internally.
-// 
-// After this is called, no other method on [ActionEntry] is expected to work anymore.
-func UnsafeActionEntryFree(a *ActionEntry) {
-	C.free(unsafe.Pointer(a.native))
-}
-
-// UnsafeActionEntryToGlibNone returns the underlying C pointer. This is used by the bindings internally.
-func UnsafeActionEntryToGlibNone(a *ActionEntry) unsafe.Pointer {
-	return unsafe.Pointer(a.native)
-}
-
-// UnsafeActionEntryToGlibFull returns the underlying C pointer and gives up ownership.
-// This is used by the bindings internally.
-func UnsafeActionEntryToGlibFull(a *ActionEntry) unsafe.Pointer {
-	runtime.SetFinalizer(a.actionEntry, nil)
-	_p := unsafe.Pointer(a.native)
-	a.native = nil // ActionEntry is invalid from here on
-	return _p
-}
 // ActionGroupClass wraps GtkActionGroupClass
 type ActionGroupClass struct {
 	*actionGroupClass
@@ -154751,70 +134770,6 @@ func UnsafeActionableInterfaceToGlibFull(a *ActionableInterface) unsafe.Pointer 
 	runtime.SetFinalizer(a.actionableInterface, nil)
 	_p := unsafe.Pointer(a.native)
 	a.native = nil // ActionableInterface is invalid from here on
-	return _p
-}
-// ActivatableIface wraps GtkActivatableIface
-//
-// &gt; This method can be called with a %NULL action at times.
-//
-// Deprecated: (since 3.10.0) 
-type ActivatableIface struct {
-	*activatableIface
-}
-
-// activatableIface is the struct that's finalized
-type activatableIface struct {
-	native *C.GtkActivatableIface
-}
-
-// UnsafeActivatableIfaceFromGlibBorrow is used to convert raw C.GtkActivatableIface pointers to go. This is used by the bindings internally.
-func UnsafeActivatableIfaceFromGlibBorrow(p unsafe.Pointer) *ActivatableIface {
-	return &ActivatableIface{&activatableIface{(*C.GtkActivatableIface)(p)}}
-}
-
-// UnsafeActivatableIfaceFromGlibNone is used to convert raw C.GtkActivatableIface pointers to go while taking a reference. This is used by the bindings internally.
-func UnsafeActivatableIfaceFromGlibNone(p unsafe.Pointer) *ActivatableIface {
-	// FIXME: this has no ref function, what should we do here?
-	wrapped := UnsafeActivatableIfaceFromGlibBorrow(p)
-	runtime.SetFinalizer(
-		wrapped.activatableIface,
-		func (intern *activatableIface) {
-			C.free(unsafe.Pointer(intern.native))
-		},
-	)
-	return wrapped
-}
-
-// UnsafeActivatableIfaceFromGlibFull is used to convert raw C.GtkActivatableIface pointers to go while taking a reference. This is used by the bindings internally.
-func UnsafeActivatableIfaceFromGlibFull(p unsafe.Pointer) *ActivatableIface {
-	wrapped := UnsafeActivatableIfaceFromGlibBorrow(p)
-	runtime.SetFinalizer(
-		wrapped.activatableIface,
-		func (intern *activatableIface) {
-			C.free(unsafe.Pointer(intern.native))
-		},
-	)
-	return wrapped
-}
-
-// UnsafeActivatableIfaceFree unrefs/frees the underlying resource. This is used by the bindings internally.
-// 
-// After this is called, no other method on [ActivatableIface] is expected to work anymore.
-func UnsafeActivatableIfaceFree(a *ActivatableIface) {
-	C.free(unsafe.Pointer(a.native))
-}
-
-// UnsafeActivatableIfaceToGlibNone returns the underlying C pointer. This is used by the bindings internally.
-func UnsafeActivatableIfaceToGlibNone(a *ActivatableIface) unsafe.Pointer {
-	return unsafe.Pointer(a.native)
-}
-
-// UnsafeActivatableIfaceToGlibFull returns the underlying C pointer and gives up ownership.
-// This is used by the bindings internally.
-func UnsafeActivatableIfaceToGlibFull(a *ActivatableIface) unsafe.Pointer {
-	runtime.SetFinalizer(a.activatableIface, nil)
-	_p := unsafe.Pointer(a.native)
-	a.native = nil // ActivatableIface is invalid from here on
 	return _p
 }
 // AdjustmentClass wraps GtkAdjustmentClass
@@ -155806,39 +135761,6 @@ func (bindingSet *BindingSet) Activate(keyval uint, modifiers gdk.ModifierType, 
 	}
 
 	return goret
-}
-
-// AddPath wraps gtk_binding_set_add_path
-// 
-// The function takes the following parameters:
-// 
-// 	- pathType PathType: path type the pattern applies to 
-// 	- pathPattern string: the actual match pattern 
-// 	- priority PathPriorityType: binding priority 
-//
-// This function was used internally by the GtkRC parsing mechanism
-// to assign match patterns to #GtkBindingSet structures.
-// 
-// In GTK+ 3, these match patterns are unused.
-//
-// Deprecated: (since 3.0.0) 
-func (bindingSet *BindingSet) AddPath(pathType PathType, pathPattern string, priority PathPriorityType) {
-	var carg0 *C.GtkBindingSet      // in, none, converted
-	var carg1 C.GtkPathType         // in, none, casted
-	var carg2 *C.gchar              // in, none, string, casted *C.gchar
-	var carg3 C.GtkPathPriorityType // in, none, casted
-
-	carg0 = (*C.GtkBindingSet)(UnsafeBindingSetToGlibNone(bindingSet))
-	carg1 = C.GtkPathType(pathType)
-	carg2 = (*C.gchar)(unsafe.Pointer(C.CString(pathPattern)))
-	defer C.free(unsafe.Pointer(carg2))
-	carg3 = C.GtkPathPriorityType(priority)
-
-	C.gtk_binding_set_add_path(carg0, carg1, carg2, carg3)
-	runtime.KeepAlive(bindingSet)
-	runtime.KeepAlive(pathType)
-	runtime.KeepAlive(pathPattern)
-	runtime.KeepAlive(priority)
 }
 
 // BindingSignal wraps GtkBindingSignal
@@ -159911,66 +139833,6 @@ func UnsafeFileChooserNativeClassToGlibFull(f *FileChooserNativeClass) unsafe.Po
 	f.native = nil // FileChooserNativeClass is invalid from here on
 	return _p
 }
-// FileChooserWidgetAccessibleClass wraps GtkFileChooserWidgetAccessibleClass
-type FileChooserWidgetAccessibleClass struct {
-	*fileChooserWidgetAccessibleClass
-}
-
-// fileChooserWidgetAccessibleClass is the struct that's finalized
-type fileChooserWidgetAccessibleClass struct {
-	native *C.GtkFileChooserWidgetAccessibleClass
-}
-
-// UnsafeFileChooserWidgetAccessibleClassFromGlibBorrow is used to convert raw C.GtkFileChooserWidgetAccessibleClass pointers to go. This is used by the bindings internally.
-func UnsafeFileChooserWidgetAccessibleClassFromGlibBorrow(p unsafe.Pointer) *FileChooserWidgetAccessibleClass {
-	return &FileChooserWidgetAccessibleClass{&fileChooserWidgetAccessibleClass{(*C.GtkFileChooserWidgetAccessibleClass)(p)}}
-}
-
-// UnsafeFileChooserWidgetAccessibleClassFromGlibNone is used to convert raw C.GtkFileChooserWidgetAccessibleClass pointers to go while taking a reference. This is used by the bindings internally.
-func UnsafeFileChooserWidgetAccessibleClassFromGlibNone(p unsafe.Pointer) *FileChooserWidgetAccessibleClass {
-	// FIXME: this has no ref function, what should we do here?
-	wrapped := UnsafeFileChooserWidgetAccessibleClassFromGlibBorrow(p)
-	runtime.SetFinalizer(
-		wrapped.fileChooserWidgetAccessibleClass,
-		func (intern *fileChooserWidgetAccessibleClass) {
-			C.free(unsafe.Pointer(intern.native))
-		},
-	)
-	return wrapped
-}
-
-// UnsafeFileChooserWidgetAccessibleClassFromGlibFull is used to convert raw C.GtkFileChooserWidgetAccessibleClass pointers to go while taking a reference. This is used by the bindings internally.
-func UnsafeFileChooserWidgetAccessibleClassFromGlibFull(p unsafe.Pointer) *FileChooserWidgetAccessibleClass {
-	wrapped := UnsafeFileChooserWidgetAccessibleClassFromGlibBorrow(p)
-	runtime.SetFinalizer(
-		wrapped.fileChooserWidgetAccessibleClass,
-		func (intern *fileChooserWidgetAccessibleClass) {
-			C.free(unsafe.Pointer(intern.native))
-		},
-	)
-	return wrapped
-}
-
-// UnsafeFileChooserWidgetAccessibleClassFree unrefs/frees the underlying resource. This is used by the bindings internally.
-// 
-// After this is called, no other method on [FileChooserWidgetAccessibleClass] is expected to work anymore.
-func UnsafeFileChooserWidgetAccessibleClassFree(f *FileChooserWidgetAccessibleClass) {
-	C.free(unsafe.Pointer(f.native))
-}
-
-// UnsafeFileChooserWidgetAccessibleClassToGlibNone returns the underlying C pointer. This is used by the bindings internally.
-func UnsafeFileChooserWidgetAccessibleClassToGlibNone(f *FileChooserWidgetAccessibleClass) unsafe.Pointer {
-	return unsafe.Pointer(f.native)
-}
-
-// UnsafeFileChooserWidgetAccessibleClassToGlibFull returns the underlying C pointer and gives up ownership.
-// This is used by the bindings internally.
-func UnsafeFileChooserWidgetAccessibleClassToGlibFull(f *FileChooserWidgetAccessibleClass) unsafe.Pointer {
-	runtime.SetFinalizer(f.fileChooserWidgetAccessibleClass, nil)
-	_p := unsafe.Pointer(f.native)
-	f.native = nil // FileChooserWidgetAccessibleClass is invalid from here on
-	return _p
-}
 // FileChooserWidgetClass wraps GtkFileChooserWidgetClass
 type FileChooserWidgetClass struct {
 	*fileChooserWidgetClass
@@ -161720,150 +141582,6 @@ func UnsafeGradientToGlibFull(g *Gradient) unsafe.Pointer {
 	g.native = nil // Gradient is invalid from here on
 	return _p
 }
-// NewGradientLinear wraps gtk_gradient_new_linear
-// 
-// The function takes the following parameters:
-// 
-// 	- x0 float64: X coordinate of the starting point 
-// 	- y0 float64: Y coordinate of the starting point 
-// 	- x1 float64: X coordinate of the end point 
-// 	- y1 float64: Y coordinate of the end point 
-// 
-// The function returns the following values:
-// 
-// 	- goret *Gradient 
-//
-// Creates a new linear gradient along the line defined by (x0, y0) and (x1, y1). Before using the gradient
-// a number of stop colors must be added through gtk_gradient_add_color_stop().
-//
-// Deprecated: (since 3.8.0) #GtkGradient is deprecated.
-func NewGradientLinear(x0 float64, y0 float64, x1 float64, y1 float64) *Gradient {
-	var carg1 C.gdouble      // in, none, casted
-	var carg2 C.gdouble      // in, none, casted
-	var carg3 C.gdouble      // in, none, casted
-	var carg4 C.gdouble      // in, none, casted
-	var cret  *C.GtkGradient // return, full, converted
-
-	carg1 = C.gdouble(x0)
-	carg2 = C.gdouble(y0)
-	carg3 = C.gdouble(x1)
-	carg4 = C.gdouble(y1)
-
-	cret = C.gtk_gradient_new_linear(carg1, carg2, carg3, carg4)
-	runtime.KeepAlive(x0)
-	runtime.KeepAlive(y0)
-	runtime.KeepAlive(x1)
-	runtime.KeepAlive(y1)
-
-	var goret *Gradient
-
-	goret = UnsafeGradientFromGlibFull(unsafe.Pointer(cret))
-
-	return goret
-}
-
-// NewGradientRadial wraps gtk_gradient_new_radial
-// 
-// The function takes the following parameters:
-// 
-// 	- x0 float64: X coordinate of the start circle 
-// 	- y0 float64: Y coordinate of the start circle 
-// 	- radius0 float64: radius of the start circle 
-// 	- x1 float64: X coordinate of the end circle 
-// 	- y1 float64: Y coordinate of the end circle 
-// 	- radius1 float64: radius of the end circle 
-// 
-// The function returns the following values:
-// 
-// 	- goret *Gradient 
-//
-// Creates a new radial gradient along the two circles defined by (x0, y0, radius0) and
-// (x1, y1, radius1). Before using the gradient a number of stop colors must be added
-// through gtk_gradient_add_color_stop().
-//
-// Deprecated: (since 3.8.0) #GtkGradient is deprecated.
-func NewGradientRadial(x0 float64, y0 float64, radius0 float64, x1 float64, y1 float64, radius1 float64) *Gradient {
-	var carg1 C.gdouble      // in, none, casted
-	var carg2 C.gdouble      // in, none, casted
-	var carg3 C.gdouble      // in, none, casted
-	var carg4 C.gdouble      // in, none, casted
-	var carg5 C.gdouble      // in, none, casted
-	var carg6 C.gdouble      // in, none, casted
-	var cret  *C.GtkGradient // return, full, converted
-
-	carg1 = C.gdouble(x0)
-	carg2 = C.gdouble(y0)
-	carg3 = C.gdouble(radius0)
-	carg4 = C.gdouble(x1)
-	carg5 = C.gdouble(y1)
-	carg6 = C.gdouble(radius1)
-
-	cret = C.gtk_gradient_new_radial(carg1, carg2, carg3, carg4, carg5, carg6)
-	runtime.KeepAlive(x0)
-	runtime.KeepAlive(y0)
-	runtime.KeepAlive(radius0)
-	runtime.KeepAlive(x1)
-	runtime.KeepAlive(y1)
-	runtime.KeepAlive(radius1)
-
-	var goret *Gradient
-
-	goret = UnsafeGradientFromGlibFull(unsafe.Pointer(cret))
-
-	return goret
-}
-
-// AddColorStop wraps gtk_gradient_add_color_stop
-// 
-// The function takes the following parameters:
-// 
-// 	- offset float64: offset for the color stop 
-// 	- color *SymbolicColor: color to use 
-//
-// Adds a stop color to @gradient.
-//
-// Deprecated: (since 3.8.0) #GtkGradient is deprecated.
-func (gradient *Gradient) AddColorStop(offset float64, color *SymbolicColor) {
-	var carg0 *C.GtkGradient      // in, none, converted
-	var carg1 C.gdouble           // in, none, casted
-	var carg2 *C.GtkSymbolicColor // in, none, converted
-
-	carg0 = (*C.GtkGradient)(UnsafeGradientToGlibNone(gradient))
-	carg1 = C.gdouble(offset)
-	carg2 = (*C.GtkSymbolicColor)(UnsafeSymbolicColorToGlibNone(color))
-
-	C.gtk_gradient_add_color_stop(carg0, carg1, carg2)
-	runtime.KeepAlive(gradient)
-	runtime.KeepAlive(offset)
-	runtime.KeepAlive(color)
-}
-
-// ToString wraps gtk_gradient_to_string
-// The function returns the following values:
-// 
-// 	- goret string 
-//
-// Creates a string representation for @gradient that is suitable
-// for using in GTK CSS files.
-//
-// Deprecated: (since 3.8.0) #GtkGradient is deprecated.
-func (gradient *Gradient) ToString() string {
-	var carg0 *C.GtkGradient // in, none, converted
-	var cret  *C.char        // return, full, string, casted *C.gchar
-
-	carg0 = (*C.GtkGradient)(UnsafeGradientToGlibNone(gradient))
-
-	cret = C.gtk_gradient_to_string(carg0)
-	runtime.KeepAlive(gradient)
-
-	var goret string
-
-	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
-	defer C.free(unsafe.Pointer(cret))
-
-	return goret
-}
-
 // GridClass wraps GtkGridClass
 type GridClass struct {
 	*gridClass
@@ -162404,66 +142122,6 @@ func UnsafeHandleBoxClassToGlibFull(h *HandleBoxClass) unsafe.Pointer {
 	h.native = nil // HandleBoxClass is invalid from here on
 	return _p
 }
-// HeaderBarAccessibleClass wraps GtkHeaderBarAccessibleClass
-type HeaderBarAccessibleClass struct {
-	*headerBarAccessibleClass
-}
-
-// headerBarAccessibleClass is the struct that's finalized
-type headerBarAccessibleClass struct {
-	native *C.GtkHeaderBarAccessibleClass
-}
-
-// UnsafeHeaderBarAccessibleClassFromGlibBorrow is used to convert raw C.GtkHeaderBarAccessibleClass pointers to go. This is used by the bindings internally.
-func UnsafeHeaderBarAccessibleClassFromGlibBorrow(p unsafe.Pointer) *HeaderBarAccessibleClass {
-	return &HeaderBarAccessibleClass{&headerBarAccessibleClass{(*C.GtkHeaderBarAccessibleClass)(p)}}
-}
-
-// UnsafeHeaderBarAccessibleClassFromGlibNone is used to convert raw C.GtkHeaderBarAccessibleClass pointers to go while taking a reference. This is used by the bindings internally.
-func UnsafeHeaderBarAccessibleClassFromGlibNone(p unsafe.Pointer) *HeaderBarAccessibleClass {
-	// FIXME: this has no ref function, what should we do here?
-	wrapped := UnsafeHeaderBarAccessibleClassFromGlibBorrow(p)
-	runtime.SetFinalizer(
-		wrapped.headerBarAccessibleClass,
-		func (intern *headerBarAccessibleClass) {
-			C.free(unsafe.Pointer(intern.native))
-		},
-	)
-	return wrapped
-}
-
-// UnsafeHeaderBarAccessibleClassFromGlibFull is used to convert raw C.GtkHeaderBarAccessibleClass pointers to go while taking a reference. This is used by the bindings internally.
-func UnsafeHeaderBarAccessibleClassFromGlibFull(p unsafe.Pointer) *HeaderBarAccessibleClass {
-	wrapped := UnsafeHeaderBarAccessibleClassFromGlibBorrow(p)
-	runtime.SetFinalizer(
-		wrapped.headerBarAccessibleClass,
-		func (intern *headerBarAccessibleClass) {
-			C.free(unsafe.Pointer(intern.native))
-		},
-	)
-	return wrapped
-}
-
-// UnsafeHeaderBarAccessibleClassFree unrefs/frees the underlying resource. This is used by the bindings internally.
-// 
-// After this is called, no other method on [HeaderBarAccessibleClass] is expected to work anymore.
-func UnsafeHeaderBarAccessibleClassFree(h *HeaderBarAccessibleClass) {
-	C.free(unsafe.Pointer(h.native))
-}
-
-// UnsafeHeaderBarAccessibleClassToGlibNone returns the underlying C pointer. This is used by the bindings internally.
-func UnsafeHeaderBarAccessibleClassToGlibNone(h *HeaderBarAccessibleClass) unsafe.Pointer {
-	return unsafe.Pointer(h.native)
-}
-
-// UnsafeHeaderBarAccessibleClassToGlibFull returns the underlying C pointer and gives up ownership.
-// This is used by the bindings internally.
-func UnsafeHeaderBarAccessibleClassToGlibFull(h *HeaderBarAccessibleClass) unsafe.Pointer {
-	runtime.SetFinalizer(h.headerBarAccessibleClass, nil)
-	_p := unsafe.Pointer(h.native)
-	h.native = nil // HeaderBarAccessibleClass is invalid from here on
-	return _p
-}
 // HeaderBarClass wraps GtkHeaderBarClass
 type HeaderBarClass struct {
 	*headerBarClass
@@ -162965,247 +142623,6 @@ func UnsafeIconSetToGlibFull(i *IconSet) unsafe.Pointer {
 	i.native = nil // IconSet is invalid from here on
 	return _p
 }
-// NewIconSet wraps gtk_icon_set_new
-// The function returns the following values:
-// 
-// 	- goret *IconSet 
-//
-// Creates a new #GtkIconSet. A #GtkIconSet represents a single icon
-// in various sizes and widget states. It can provide a #GdkPixbuf
-// for a given size and state on request, and automatically caches
-// some of the rendered #GdkPixbuf objects.
-// 
-// Normally you would use gtk_widget_render_icon_pixbuf() instead of
-// using #GtkIconSet directly. The one case where you’d use
-// #GtkIconSet is to create application-specific icon sets to place in
-// a #GtkIconFactory.
-//
-// Deprecated: (since 3.10.0) Use #GtkIconTheme instead.
-func NewIconSet() *IconSet {
-	var cret *C.GtkIconSet // return, full, converted
-
-	cret = C.gtk_icon_set_new()
-
-	var goret *IconSet
-
-	goret = UnsafeIconSetFromGlibFull(unsafe.Pointer(cret))
-
-	return goret
-}
-
-// NewIconSetFromPixbuf wraps gtk_icon_set_new_from_pixbuf
-// 
-// The function takes the following parameters:
-// 
-// 	- pixbuf gdkpixbuf.Pixbuf: a #GdkPixbuf 
-// 
-// The function returns the following values:
-// 
-// 	- goret *IconSet 
-//
-// Creates a new #GtkIconSet with @pixbuf as the default/fallback
-// source image. If you don’t add any additional #GtkIconSource to the
-// icon set, all variants of the icon will be created from @pixbuf,
-// using scaling, pixelation, etc. as required to adjust the icon size
-// or make the icon look insensitive/prelighted.
-//
-// Deprecated: (since 3.10.0) Use #GtkIconTheme instead.
-func NewIconSetFromPixbuf(pixbuf gdkpixbuf.Pixbuf) *IconSet {
-	var carg1 *C.GdkPixbuf  // in, none, converted
-	var cret  *C.GtkIconSet // return, full, converted
-
-	carg1 = (*C.GdkPixbuf)(gdkpixbuf.UnsafePixbufToGlibNone(pixbuf))
-
-	cret = C.gtk_icon_set_new_from_pixbuf(carg1)
-	runtime.KeepAlive(pixbuf)
-
-	var goret *IconSet
-
-	goret = UnsafeIconSetFromGlibFull(unsafe.Pointer(cret))
-
-	return goret
-}
-
-// AddSource wraps gtk_icon_set_add_source
-// 
-// The function takes the following parameters:
-// 
-// 	- source *IconSource: a #GtkIconSource 
-//
-// Icon sets have a list of #GtkIconSource, which they use as base
-// icons for rendering icons in different states and sizes. Icons are
-// scaled, made to look insensitive, etc. in
-// gtk_icon_set_render_icon(), but #GtkIconSet needs base images to
-// work with. The base images and when to use them are described by
-// a #GtkIconSource.
-// 
-// This function copies @source, so you can reuse the same source immediately
-// without affecting the icon set.
-// 
-// An example of when you’d use this function: a web browser’s "Back
-// to Previous Page" icon might point in a different direction in
-// Hebrew and in English; it might look different when insensitive;
-// and it might change size depending on toolbar mode (small/large
-// icons). So a single icon set would contain all those variants of
-// the icon, and you might add a separate source for each one.
-// 
-// You should nearly always add a “default” icon source with all
-// fields wildcarded, which will be used as a fallback if no more
-// specific source matches. #GtkIconSet always prefers more specific
-// icon sources to more generic icon sources. The order in which you
-// add the sources to the icon set does not matter.
-// 
-// gtk_icon_set_new_from_pixbuf() creates a new icon set with a
-// default icon source based on the given pixbuf.
-//
-// Deprecated: (since 3.10.0) Use #GtkIconTheme instead.
-func (iconSet *IconSet) AddSource(source *IconSource) {
-	var carg0 *C.GtkIconSet    // in, none, converted
-	var carg1 *C.GtkIconSource // in, none, converted
-
-	carg0 = (*C.GtkIconSet)(UnsafeIconSetToGlibNone(iconSet))
-	carg1 = (*C.GtkIconSource)(UnsafeIconSourceToGlibNone(source))
-
-	C.gtk_icon_set_add_source(carg0, carg1)
-	runtime.KeepAlive(iconSet)
-	runtime.KeepAlive(source)
-}
-
-// Copy wraps gtk_icon_set_copy
-// The function returns the following values:
-// 
-// 	- goret *IconSet 
-//
-// Copies @icon_set by value.
-//
-// Deprecated: (since 3.10.0) Use #GtkIconTheme instead.
-func (iconSet *IconSet) Copy() *IconSet {
-	var carg0 *C.GtkIconSet // in, none, converted
-	var cret  *C.GtkIconSet // return, full, converted
-
-	carg0 = (*C.GtkIconSet)(UnsafeIconSetToGlibNone(iconSet))
-
-	cret = C.gtk_icon_set_copy(carg0)
-	runtime.KeepAlive(iconSet)
-
-	var goret *IconSet
-
-	goret = UnsafeIconSetFromGlibFull(unsafe.Pointer(cret))
-
-	return goret
-}
-
-// RenderIcon wraps gtk_icon_set_render_icon
-// 
-// The function takes the following parameters:
-// 
-// 	- style Style (nullable): a #GtkStyle associated with @widget, or %NULL 
-// 	- direction TextDirection: text direction 
-// 	- state StateType: widget state 
-// 	- size int: icon size (#GtkIconSize). A size of `(GtkIconSize)-1`
-//        means render at the size of the source and don’t scale. 
-// 	- widget Widget (nullable): widget that will display the icon, or %NULL.
-//          The only use that is typically made of this
-//          is to determine the appropriate #GdkScreen. 
-// 	- detail string (nullable): detail to pass to the theme engine, or %NULL.
-//          Note that passing a detail of anything but %NULL
-//          will disable caching. 
-// 
-// The function returns the following values:
-// 
-// 	- goret gdkpixbuf.Pixbuf 
-//
-// Renders an icon using gtk_style_render_icon(). In most cases,
-// gtk_widget_render_icon() is better, since it automatically provides
-// most of the arguments from the current widget settings.  This
-// function never returns %NULL; if the icon can’t be rendered
-// (perhaps because an image file fails to load), a default "missing
-// image" icon will be returned instead.
-//
-// Deprecated: (since 3.0.0) Use gtk_icon_set_render_icon_pixbuf() instead
-func (iconSet *IconSet) RenderIcon(style Style, direction TextDirection, state StateType, size int, widget Widget, detail string) gdkpixbuf.Pixbuf {
-	var carg0 *C.GtkIconSet      // in, none, converted
-	var carg1 *C.GtkStyle        // in, none, converted, nullable
-	var carg2 C.GtkTextDirection // in, none, casted
-	var carg3 C.GtkStateType     // in, none, casted
-	var carg4 C.GtkIconSize      // in, none, casted, casted C.gint
-	var carg5 *C.GtkWidget       // in, none, converted, nullable
-	var carg6 *C.gchar           // in, none, string, nullable-string
-	var cret  *C.GdkPixbuf       // return, full, converted
-
-	carg0 = (*C.GtkIconSet)(UnsafeIconSetToGlibNone(iconSet))
-	if style != nil {
-		carg1 = (*C.GtkStyle)(UnsafeStyleToGlibNone(style))
-	}
-	carg2 = C.GtkTextDirection(direction)
-	carg3 = C.GtkStateType(state)
-	carg4 = C.GtkIconSize(size)
-	if widget != nil {
-		carg5 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(widget))
-	}
-	if detail != "" {
-		carg6 = (*C.gchar)(unsafe.Pointer(C.CString(detail)))
-		defer C.free(unsafe.Pointer(carg6))
-	}
-
-	cret = C.gtk_icon_set_render_icon(carg0, carg1, carg2, carg3, carg4, carg5, carg6)
-	runtime.KeepAlive(iconSet)
-	runtime.KeepAlive(style)
-	runtime.KeepAlive(direction)
-	runtime.KeepAlive(state)
-	runtime.KeepAlive(size)
-	runtime.KeepAlive(widget)
-	runtime.KeepAlive(detail)
-
-	var goret gdkpixbuf.Pixbuf
-
-	goret = gdkpixbuf.UnsafePixbufFromGlibFull(unsafe.Pointer(cret))
-
-	return goret
-}
-
-// RenderIconPixbuf wraps gtk_icon_set_render_icon_pixbuf
-// 
-// The function takes the following parameters:
-// 
-// 	- context StyleContext: a #GtkStyleContext 
-// 	- size int: icon size (#GtkIconSize). A size of `(GtkIconSize)-1`
-//        means render at the size of the source and don’t scale. 
-// 
-// The function returns the following values:
-// 
-// 	- goret gdkpixbuf.Pixbuf 
-//
-// Renders an icon using gtk_render_icon_pixbuf(). In most cases,
-// gtk_widget_render_icon_pixbuf() is better, since it automatically provides
-// most of the arguments from the current widget settings.  This
-// function never returns %NULL; if the icon can’t be rendered
-// (perhaps because an image file fails to load), a default "missing
-// image" icon will be returned instead.
-//
-// Deprecated: (since 3.10.0) Use #GtkIconTheme instead.
-func (iconSet *IconSet) RenderIconPixbuf(context StyleContext, size int) gdkpixbuf.Pixbuf {
-	var carg0 *C.GtkIconSet      // in, none, converted
-	var carg1 *C.GtkStyleContext // in, none, converted
-	var carg2 C.GtkIconSize      // in, none, casted, casted C.gint
-	var cret  *C.GdkPixbuf       // return, full, converted
-
-	carg0 = (*C.GtkIconSet)(UnsafeIconSetToGlibNone(iconSet))
-	carg1 = (*C.GtkStyleContext)(UnsafeStyleContextToGlibNone(context))
-	carg2 = C.GtkIconSize(size)
-
-	cret = C.gtk_icon_set_render_icon_pixbuf(carg0, carg1, carg2)
-	runtime.KeepAlive(iconSet)
-	runtime.KeepAlive(context)
-	runtime.KeepAlive(size)
-
-	var goret gdkpixbuf.Pixbuf
-
-	goret = gdkpixbuf.UnsafePixbufFromGlibFull(unsafe.Pointer(cret))
-
-	return goret
-}
-
 // IconSource wraps GtkIconSource
 type IconSource struct {
 	*iconSource
@@ -163278,565 +142695,6 @@ func UnsafeIconSourceToGlibFull(i *IconSource) unsafe.Pointer {
 	i.native = nil // IconSource is invalid from here on
 	return _p
 }
-// NewIconSource wraps gtk_icon_source_new
-// The function returns the following values:
-// 
-// 	- goret *IconSource 
-//
-// Creates a new #GtkIconSource. A #GtkIconSource contains a #GdkPixbuf (or
-// image filename) that serves as the base image for one or more of the
-// icons in a #GtkIconSet, along with a specification for which icons in the
-// icon set will be based on that pixbuf or image file. An icon set contains
-// a set of icons that represent “the same” logical concept in different states,
-// different global text directions, and different sizes.
-// 
-// So for example a web browser’s “Back to Previous Page” icon might
-// point in a different direction in Hebrew and in English; it might
-// look different when insensitive; and it might change size depending
-// on toolbar mode (small/large icons). So a single icon set would
-// contain all those variants of the icon. #GtkIconSet contains a list
-// of #GtkIconSource from which it can derive specific icon variants in
-// the set.
-// 
-// In the simplest case, #GtkIconSet contains one source pixbuf from
-// which it derives all variants. The convenience function
-// gtk_icon_set_new_from_pixbuf() handles this case; if you only have
-// one source pixbuf, just use that function.
-// 
-// If you want to use a different base pixbuf for different icon
-// variants, you create multiple icon sources, mark which variants
-// they’ll be used to create, and add them to the icon set with
-// gtk_icon_set_add_source().
-// 
-// By default, the icon source has all parameters wildcarded. That is,
-// the icon source will be used as the base icon for any desired text
-// direction, widget state, or icon size.
-//
-// Deprecated: (since 3.10.0) Use #GtkIconTheme instead.
-func NewIconSource() *IconSource {
-	var cret *C.GtkIconSource // return, full, converted
-
-	cret = C.gtk_icon_source_new()
-
-	var goret *IconSource
-
-	goret = UnsafeIconSourceFromGlibFull(unsafe.Pointer(cret))
-
-	return goret
-}
-
-// Copy wraps gtk_icon_source_copy
-// The function returns the following values:
-// 
-// 	- goret *IconSource 
-//
-// Creates a copy of @source; mostly useful for language bindings.
-//
-// Deprecated: (since 3.10.0) Use #GtkIconTheme instead.
-func (source *IconSource) Copy() *IconSource {
-	var carg0 *C.GtkIconSource // in, none, converted
-	var cret  *C.GtkIconSource // return, full, converted
-
-	carg0 = (*C.GtkIconSource)(UnsafeIconSourceToGlibNone(source))
-
-	cret = C.gtk_icon_source_copy(carg0)
-	runtime.KeepAlive(source)
-
-	var goret *IconSource
-
-	goret = UnsafeIconSourceFromGlibFull(unsafe.Pointer(cret))
-
-	return goret
-}
-
-// GetDirection wraps gtk_icon_source_get_direction
-// The function returns the following values:
-// 
-// 	- goret TextDirection 
-//
-// Obtains the text direction this icon source applies to. The return
-// value is only useful/meaningful if the text direction is not
-// wildcarded.
-//
-// Deprecated: (since 3.10.0) Use #GtkIconTheme instead.
-func (source *IconSource) GetDirection() TextDirection {
-	var carg0 *C.GtkIconSource   // in, none, converted
-	var cret  C.GtkTextDirection // return, none, casted
-
-	carg0 = (*C.GtkIconSource)(UnsafeIconSourceToGlibNone(source))
-
-	cret = C.gtk_icon_source_get_direction(carg0)
-	runtime.KeepAlive(source)
-
-	var goret TextDirection
-
-	goret = TextDirection(cret)
-
-	return goret
-}
-
-// GetDirectionWildcarded wraps gtk_icon_source_get_direction_wildcarded
-// The function returns the following values:
-// 
-// 	- goret bool 
-//
-// Gets the value set by gtk_icon_source_set_direction_wildcarded().
-//
-// Deprecated: (since 3.10.0) Use #GtkIconTheme instead.
-func (source *IconSource) GetDirectionWildcarded() bool {
-	var carg0 *C.GtkIconSource // in, none, converted
-	var cret  C.gboolean       // return
-
-	carg0 = (*C.GtkIconSource)(UnsafeIconSourceToGlibNone(source))
-
-	cret = C.gtk_icon_source_get_direction_wildcarded(carg0)
-	runtime.KeepAlive(source)
-
-	var goret bool
-
-	if cret != 0 {
-		goret = true
-	}
-
-	return goret
-}
-
-// GetFilename wraps gtk_icon_source_get_filename
-// The function returns the following values:
-// 
-// 	- goret string 
-//
-// Retrieves the source filename, or %NULL if none is set. The
-// filename is not a copy, and should not be modified or expected to
-// persist beyond the lifetime of the icon source.
-//
-// Deprecated: (since 3.10.0) Use #GtkIconTheme instead.
-func (source *IconSource) GetFilename() string {
-	var carg0 *C.GtkIconSource // in, none, converted
-	var cret  *C.gchar         // return, none, string, casted *C.gchar
-
-	carg0 = (*C.GtkIconSource)(UnsafeIconSourceToGlibNone(source))
-
-	cret = C.gtk_icon_source_get_filename(carg0)
-	runtime.KeepAlive(source)
-
-	var goret string
-
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
-
-	return goret
-}
-
-// GetIconName wraps gtk_icon_source_get_icon_name
-// The function returns the following values:
-// 
-// 	- goret string 
-//
-// Retrieves the source icon name, or %NULL if none is set. The
-// icon_name is not a copy, and should not be modified or expected to
-// persist beyond the lifetime of the icon source.
-//
-// Deprecated: (since 3.10.0) Use #GtkIconTheme instead.
-func (source *IconSource) GetIconName() string {
-	var carg0 *C.GtkIconSource // in, none, converted
-	var cret  *C.gchar         // return, none, string, casted *C.gchar
-
-	carg0 = (*C.GtkIconSource)(UnsafeIconSourceToGlibNone(source))
-
-	cret = C.gtk_icon_source_get_icon_name(carg0)
-	runtime.KeepAlive(source)
-
-	var goret string
-
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
-
-	return goret
-}
-
-// GetPixbuf wraps gtk_icon_source_get_pixbuf
-// The function returns the following values:
-// 
-// 	- goret gdkpixbuf.Pixbuf 
-//
-// Retrieves the source pixbuf, or %NULL if none is set.
-// In addition, if a filename source is in use, this
-// function in some cases will return the pixbuf from
-// loaded from the filename. This is, for example, true
-// for the GtkIconSource passed to the #GtkStyle render_icon()
-// virtual function. The reference count on the pixbuf is
-// not incremented.
-//
-// Deprecated: (since 3.10.0) Use #GtkIconTheme instead.
-func (source *IconSource) GetPixbuf() gdkpixbuf.Pixbuf {
-	var carg0 *C.GtkIconSource // in, none, converted
-	var cret  *C.GdkPixbuf     // return, none, converted
-
-	carg0 = (*C.GtkIconSource)(UnsafeIconSourceToGlibNone(source))
-
-	cret = C.gtk_icon_source_get_pixbuf(carg0)
-	runtime.KeepAlive(source)
-
-	var goret gdkpixbuf.Pixbuf
-
-	goret = gdkpixbuf.UnsafePixbufFromGlibNone(unsafe.Pointer(cret))
-
-	return goret
-}
-
-// GetSize wraps gtk_icon_source_get_size
-// The function returns the following values:
-// 
-// 	- goret int 
-//
-// Obtains the icon size this source applies to. The return value
-// is only useful/meaningful if the icon size is not wildcarded.
-//
-// Deprecated: (since 3.10.0) Use #GtkIconTheme instead.
-func (source *IconSource) GetSize() int {
-	var carg0 *C.GtkIconSource // in, none, converted
-	var cret  C.GtkIconSize    // return, none, casted, casted C.gint
-
-	carg0 = (*C.GtkIconSource)(UnsafeIconSourceToGlibNone(source))
-
-	cret = C.gtk_icon_source_get_size(carg0)
-	runtime.KeepAlive(source)
-
-	var goret int
-
-	goret = int(cret)
-
-	return goret
-}
-
-// GetSizeWildcarded wraps gtk_icon_source_get_size_wildcarded
-// The function returns the following values:
-// 
-// 	- goret bool 
-//
-// Gets the value set by gtk_icon_source_set_size_wildcarded().
-//
-// Deprecated: (since 3.10.0) Use #GtkIconTheme instead.
-func (source *IconSource) GetSizeWildcarded() bool {
-	var carg0 *C.GtkIconSource // in, none, converted
-	var cret  C.gboolean       // return
-
-	carg0 = (*C.GtkIconSource)(UnsafeIconSourceToGlibNone(source))
-
-	cret = C.gtk_icon_source_get_size_wildcarded(carg0)
-	runtime.KeepAlive(source)
-
-	var goret bool
-
-	if cret != 0 {
-		goret = true
-	}
-
-	return goret
-}
-
-// GetState wraps gtk_icon_source_get_state
-// The function returns the following values:
-// 
-// 	- goret StateType 
-//
-// Obtains the widget state this icon source applies to. The return
-// value is only useful/meaningful if the widget state is not
-// wildcarded.
-//
-// Deprecated: (since 3.10.0) Use #GtkIconTheme instead.
-func (source *IconSource) GetState() StateType {
-	var carg0 *C.GtkIconSource // in, none, converted
-	var cret  C.GtkStateType   // return, none, casted
-
-	carg0 = (*C.GtkIconSource)(UnsafeIconSourceToGlibNone(source))
-
-	cret = C.gtk_icon_source_get_state(carg0)
-	runtime.KeepAlive(source)
-
-	var goret StateType
-
-	goret = StateType(cret)
-
-	return goret
-}
-
-// GetStateWildcarded wraps gtk_icon_source_get_state_wildcarded
-// The function returns the following values:
-// 
-// 	- goret bool 
-//
-// Gets the value set by gtk_icon_source_set_state_wildcarded().
-//
-// Deprecated: (since 3.10.0) Use #GtkIconTheme instead.
-func (source *IconSource) GetStateWildcarded() bool {
-	var carg0 *C.GtkIconSource // in, none, converted
-	var cret  C.gboolean       // return
-
-	carg0 = (*C.GtkIconSource)(UnsafeIconSourceToGlibNone(source))
-
-	cret = C.gtk_icon_source_get_state_wildcarded(carg0)
-	runtime.KeepAlive(source)
-
-	var goret bool
-
-	if cret != 0 {
-		goret = true
-	}
-
-	return goret
-}
-
-// SetDirection wraps gtk_icon_source_set_direction
-// 
-// The function takes the following parameters:
-// 
-// 	- direction TextDirection: text direction this source applies to 
-//
-// Sets the text direction this icon source is intended to be used
-// with.
-// 
-// Setting the text direction on an icon source makes no difference
-// if the text direction is wildcarded. Therefore, you should usually
-// call gtk_icon_source_set_direction_wildcarded() to un-wildcard it
-// in addition to calling this function.
-//
-// Deprecated: (since 3.10.0) Use #GtkIconTheme instead.
-func (source *IconSource) SetDirection(direction TextDirection) {
-	var carg0 *C.GtkIconSource   // in, none, converted
-	var carg1 C.GtkTextDirection // in, none, casted
-
-	carg0 = (*C.GtkIconSource)(UnsafeIconSourceToGlibNone(source))
-	carg1 = C.GtkTextDirection(direction)
-
-	C.gtk_icon_source_set_direction(carg0, carg1)
-	runtime.KeepAlive(source)
-	runtime.KeepAlive(direction)
-}
-
-// SetDirectionWildcarded wraps gtk_icon_source_set_direction_wildcarded
-// 
-// The function takes the following parameters:
-// 
-// 	- setting bool: %TRUE to wildcard the text direction 
-//
-// If the text direction is wildcarded, this source can be used
-// as the base image for an icon in any #GtkTextDirection.
-// If the text direction is not wildcarded, then the
-// text direction the icon source applies to should be set
-// with gtk_icon_source_set_direction(), and the icon source
-// will only be used with that text direction.
-// 
-// #GtkIconSet prefers non-wildcarded sources (exact matches) over
-// wildcarded sources, and will use an exact match when possible.
-//
-// Deprecated: (since 3.10.0) Use #GtkIconTheme instead.
-func (source *IconSource) SetDirectionWildcarded(setting bool) {
-	var carg0 *C.GtkIconSource // in, none, converted
-	var carg1 C.gboolean       // in
-
-	carg0 = (*C.GtkIconSource)(UnsafeIconSourceToGlibNone(source))
-	if setting {
-		carg1 = C.TRUE
-	}
-
-	C.gtk_icon_source_set_direction_wildcarded(carg0, carg1)
-	runtime.KeepAlive(source)
-	runtime.KeepAlive(setting)
-}
-
-// SetFilename wraps gtk_icon_source_set_filename
-// 
-// The function takes the following parameters:
-// 
-// 	- filename string: image file to use 
-//
-// Sets the name of an image file to use as a base image when creating
-// icon variants for #GtkIconSet. The filename must be absolute.
-//
-// Deprecated: (since 3.10.0) Use #GtkIconTheme instead.
-func (source *IconSource) SetFilename(filename string) {
-	var carg0 *C.GtkIconSource // in, none, converted
-	var carg1 *C.gchar         // in, none, string, casted *C.gchar
-
-	carg0 = (*C.GtkIconSource)(UnsafeIconSourceToGlibNone(source))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(filename)))
-	defer C.free(unsafe.Pointer(carg1))
-
-	C.gtk_icon_source_set_filename(carg0, carg1)
-	runtime.KeepAlive(source)
-	runtime.KeepAlive(filename)
-}
-
-// SetIconName wraps gtk_icon_source_set_icon_name
-// 
-// The function takes the following parameters:
-// 
-// 	- iconName string (nullable): name of icon to use 
-//
-// Sets the name of an icon to look up in the current icon theme
-// to use as a base image when creating icon variants for #GtkIconSet.
-//
-// Deprecated: (since 3.10.0) Use #GtkIconTheme instead.
-func (source *IconSource) SetIconName(iconName string) {
-	var carg0 *C.GtkIconSource // in, none, converted
-	var carg1 *C.gchar         // in, none, string, nullable-string
-
-	carg0 = (*C.GtkIconSource)(UnsafeIconSourceToGlibNone(source))
-	if iconName != "" {
-		carg1 = (*C.gchar)(unsafe.Pointer(C.CString(iconName)))
-		defer C.free(unsafe.Pointer(carg1))
-	}
-
-	C.gtk_icon_source_set_icon_name(carg0, carg1)
-	runtime.KeepAlive(source)
-	runtime.KeepAlive(iconName)
-}
-
-// SetPixbuf wraps gtk_icon_source_set_pixbuf
-// 
-// The function takes the following parameters:
-// 
-// 	- pixbuf gdkpixbuf.Pixbuf: pixbuf to use as a source 
-//
-// Sets a pixbuf to use as a base image when creating icon variants
-// for #GtkIconSet.
-//
-// Deprecated: (since 3.10.0) Use #GtkIconTheme instead.
-func (source *IconSource) SetPixbuf(pixbuf gdkpixbuf.Pixbuf) {
-	var carg0 *C.GtkIconSource // in, none, converted
-	var carg1 *C.GdkPixbuf     // in, none, converted
-
-	carg0 = (*C.GtkIconSource)(UnsafeIconSourceToGlibNone(source))
-	carg1 = (*C.GdkPixbuf)(gdkpixbuf.UnsafePixbufToGlibNone(pixbuf))
-
-	C.gtk_icon_source_set_pixbuf(carg0, carg1)
-	runtime.KeepAlive(source)
-	runtime.KeepAlive(pixbuf)
-}
-
-// SetSize wraps gtk_icon_source_set_size
-// 
-// The function takes the following parameters:
-// 
-// 	- size int: icon size (#GtkIconSize) this source applies to 
-//
-// Sets the icon size this icon source is intended to be used
-// with.
-// 
-// Setting the icon size on an icon source makes no difference
-// if the size is wildcarded. Therefore, you should usually
-// call gtk_icon_source_set_size_wildcarded() to un-wildcard it
-// in addition to calling this function.
-//
-// Deprecated: (since 3.10.0) Use #GtkIconTheme instead.
-func (source *IconSource) SetSize(size int) {
-	var carg0 *C.GtkIconSource // in, none, converted
-	var carg1 C.GtkIconSize    // in, none, casted, casted C.gint
-
-	carg0 = (*C.GtkIconSource)(UnsafeIconSourceToGlibNone(source))
-	carg1 = C.GtkIconSize(size)
-
-	C.gtk_icon_source_set_size(carg0, carg1)
-	runtime.KeepAlive(source)
-	runtime.KeepAlive(size)
-}
-
-// SetSizeWildcarded wraps gtk_icon_source_set_size_wildcarded
-// 
-// The function takes the following parameters:
-// 
-// 	- setting bool: %TRUE to wildcard the widget state 
-//
-// If the icon size is wildcarded, this source can be used as the base
-// image for an icon of any size.  If the size is not wildcarded, then
-// the size the source applies to should be set with
-// gtk_icon_source_set_size() and the icon source will only be used
-// with that specific size.
-// 
-// #GtkIconSet prefers non-wildcarded sources (exact matches) over
-// wildcarded sources, and will use an exact match when possible.
-// 
-// #GtkIconSet will normally scale wildcarded source images to produce
-// an appropriate icon at a given size, but will not change the size
-// of source images that match exactly.
-//
-// Deprecated: (since 3.10.0) Use #GtkIconTheme instead.
-func (source *IconSource) SetSizeWildcarded(setting bool) {
-	var carg0 *C.GtkIconSource // in, none, converted
-	var carg1 C.gboolean       // in
-
-	carg0 = (*C.GtkIconSource)(UnsafeIconSourceToGlibNone(source))
-	if setting {
-		carg1 = C.TRUE
-	}
-
-	C.gtk_icon_source_set_size_wildcarded(carg0, carg1)
-	runtime.KeepAlive(source)
-	runtime.KeepAlive(setting)
-}
-
-// SetState wraps gtk_icon_source_set_state
-// 
-// The function takes the following parameters:
-// 
-// 	- state StateType: widget state this source applies to 
-//
-// Sets the widget state this icon source is intended to be used
-// with.
-// 
-// Setting the widget state on an icon source makes no difference
-// if the state is wildcarded. Therefore, you should usually
-// call gtk_icon_source_set_state_wildcarded() to un-wildcard it
-// in addition to calling this function.
-//
-// Deprecated: (since 3.10.0) Use #GtkIconTheme instead.
-func (source *IconSource) SetState(state StateType) {
-	var carg0 *C.GtkIconSource // in, none, converted
-	var carg1 C.GtkStateType   // in, none, casted
-
-	carg0 = (*C.GtkIconSource)(UnsafeIconSourceToGlibNone(source))
-	carg1 = C.GtkStateType(state)
-
-	C.gtk_icon_source_set_state(carg0, carg1)
-	runtime.KeepAlive(source)
-	runtime.KeepAlive(state)
-}
-
-// SetStateWildcarded wraps gtk_icon_source_set_state_wildcarded
-// 
-// The function takes the following parameters:
-// 
-// 	- setting bool: %TRUE to wildcard the widget state 
-//
-// If the widget state is wildcarded, this source can be used as the
-// base image for an icon in any #GtkStateType.  If the widget state
-// is not wildcarded, then the state the source applies to should be
-// set with gtk_icon_source_set_state() and the icon source will
-// only be used with that specific state.
-// 
-// #GtkIconSet prefers non-wildcarded sources (exact matches) over
-// wildcarded sources, and will use an exact match when possible.
-// 
-// #GtkIconSet will normally transform wildcarded source images to
-// produce an appropriate icon for a given state, for example
-// lightening an image on prelight, but will not modify source images
-// that match exactly.
-//
-// Deprecated: (since 3.10.0) Use #GtkIconTheme instead.
-func (source *IconSource) SetStateWildcarded(setting bool) {
-	var carg0 *C.GtkIconSource // in, none, converted
-	var carg1 C.gboolean       // in
-
-	carg0 = (*C.GtkIconSource)(UnsafeIconSourceToGlibNone(source))
-	if setting {
-		carg1 = C.TRUE
-	}
-
-	C.gtk_icon_source_set_state_wildcarded(carg0, carg1)
-	runtime.KeepAlive(source)
-	runtime.KeepAlive(setting)
-}
-
 // IconThemeClass wraps GtkIconThemeClass
 type IconThemeClass struct {
 	*iconThemeClass
@@ -167371,7 +146229,7 @@ func (size *PaperSize) GetDisplayName() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -167424,7 +146282,7 @@ func (size *PaperSize) GetName() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -167447,7 +146305,7 @@ func (size *PaperSize) GetPPDName() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -168274,91 +147132,6 @@ func UnsafeRadioActionClassToGlibFull(r *RadioActionClass) unsafe.Pointer {
 	r.native = nil // RadioActionClass is invalid from here on
 	return _p
 }
-// RadioActionEntry wraps GtkRadioActionEntry
-//
-// #GtkRadioActionEntry structs are used with
-// gtk_action_group_add_radio_actions() to construct groups of radio actions.
-//
-// Deprecated: (since 3.10.0) 
-type RadioActionEntry struct {
-	*radioActionEntry
-}
-
-// radioActionEntry is the struct that's finalized
-type radioActionEntry struct {
-	native *C.GtkRadioActionEntry
-}
-
-// UnsafeRadioActionEntryFromGlibBorrow is used to convert raw C.GtkRadioActionEntry pointers to go. This is used by the bindings internally.
-func UnsafeRadioActionEntryFromGlibBorrow(p unsafe.Pointer) *RadioActionEntry {
-	return &RadioActionEntry{&radioActionEntry{(*C.GtkRadioActionEntry)(p)}}
-}
-
-// UnsafeRadioActionEntryFromGlibNone is used to convert raw C.GtkRadioActionEntry pointers to go while taking a reference. This is used by the bindings internally.
-func UnsafeRadioActionEntryFromGlibNone(p unsafe.Pointer) *RadioActionEntry {
-	// FIXME: this has no ref function, what should we do here?
-	wrapped := UnsafeRadioActionEntryFromGlibBorrow(p)
-	runtime.SetFinalizer(
-		wrapped.radioActionEntry,
-		func (intern *radioActionEntry) {
-			C.free(unsafe.Pointer(intern.native))
-		},
-	)
-	return wrapped
-}
-
-// UnsafeRadioActionEntryFromGlibFull is used to convert raw C.GtkRadioActionEntry pointers to go while taking a reference. This is used by the bindings internally.
-func UnsafeRadioActionEntryFromGlibFull(p unsafe.Pointer) *RadioActionEntry {
-	wrapped := UnsafeRadioActionEntryFromGlibBorrow(p)
-	runtime.SetFinalizer(
-		wrapped.radioActionEntry,
-		func (intern *radioActionEntry) {
-			C.free(unsafe.Pointer(intern.native))
-		},
-	)
-	return wrapped
-}
-
-// UnsafeRadioActionEntryFree unrefs/frees the underlying resource. This is used by the bindings internally.
-// 
-// After this is called, no other method on [RadioActionEntry] is expected to work anymore.
-func UnsafeRadioActionEntryFree(r *RadioActionEntry) {
-	C.free(unsafe.Pointer(r.native))
-}
-
-// UnsafeRadioActionEntryToGlibNone returns the underlying C pointer. This is used by the bindings internally.
-func UnsafeRadioActionEntryToGlibNone(r *RadioActionEntry) unsafe.Pointer {
-	return unsafe.Pointer(r.native)
-}
-
-// UnsafeRadioActionEntryToGlibFull returns the underlying C pointer and gives up ownership.
-// This is used by the bindings internally.
-func UnsafeRadioActionEntryToGlibFull(r *RadioActionEntry) unsafe.Pointer {
-	runtime.SetFinalizer(r.radioActionEntry, nil)
-	_p := unsafe.Pointer(r.native)
-	r.native = nil // RadioActionEntry is invalid from here on
-	return _p
-}
-// value wraps value
-//
-// The value to set on the radio action. See
-//  gtk_radio_action_get_current_value().
-func (r *RadioActionEntry) Value() int {
-	valptr := &r.native.value
-	var _v int
-	_v = int(*valptr)
-	return _v
-}
-
-// value wraps value
-//
-// The value to set on the radio action. See
-//  gtk_radio_action_get_current_value().
-func (r *RadioActionEntry) SetValue(value int) {
-	valptr := &r.native.value
-	*valptr = C.gint(value)
-}
-
 // RadioButtonAccessibleClass wraps GtkRadioButtonAccessibleClass
 type RadioButtonAccessibleClass struct {
 	*radioButtonAccessibleClass
@@ -169646,7 +148419,7 @@ func (info *RecentInfo) GetApplicationInfo(appName string) (string, uint, uint64
 	var time_   uint64
 	var goret   bool
 
-	appExec = C.GoString((*C.gchar)(unsafe.Pointer(carg2)))
+	appExec = C.GoString((*C.char)(unsafe.Pointer(carg2)))
 	count = uint(carg3)
 	time_ = uint64(carg4)
 	if cret != 0 {
@@ -169701,7 +148474,7 @@ func (info *RecentInfo) GetDescription() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -169724,7 +148497,7 @@ func (info *RecentInfo) GetDisplayName() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -169828,7 +148601,7 @@ func (info *RecentInfo) GetMIMEType() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -169902,7 +148675,7 @@ func (info *RecentInfo) GetShortName() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 	defer C.free(unsafe.Pointer(cret))
 
 	return goret
@@ -169925,7 +148698,7 @@ func (info *RecentInfo) GetURI() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -169949,7 +148722,7 @@ func (info *RecentInfo) GetURIDisplay() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 	defer C.free(unsafe.Pointer(cret))
 
 	return goret
@@ -170088,7 +148861,7 @@ func (info *RecentInfo) LastApplication() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 	defer C.free(unsafe.Pointer(cret))
 
 	return goret
@@ -171396,7 +150169,7 @@ func (selectionData *SelectionData) GetText() string {
 
 	var goret string
 
-	goret = C.GoString((*C.guchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 	defer C.free(unsafe.Pointer(cret))
 
 	return goret
@@ -173105,87 +151878,6 @@ func UnsafeStatusbarClassToGlibFull(s *StatusbarClass) unsafe.Pointer {
 	s.native = nil // StatusbarClass is invalid from here on
 	return _p
 }
-// StockItem wraps GtkStockItem
-//
-//
-// Deprecated: (since 3.10.0) 
-type StockItem struct {
-	*stockItem
-}
-
-// stockItem is the struct that's finalized
-type stockItem struct {
-	native *C.GtkStockItem
-}
-
-// UnsafeStockItemFromGlibBorrow is used to convert raw C.GtkStockItem pointers to go. This is used by the bindings internally.
-func UnsafeStockItemFromGlibBorrow(p unsafe.Pointer) *StockItem {
-	return &StockItem{&stockItem{(*C.GtkStockItem)(p)}}
-}
-
-// UnsafeStockItemFromGlibNone is used to convert raw C.GtkStockItem pointers to go while taking a reference. This is used by the bindings internally.
-func UnsafeStockItemFromGlibNone(p unsafe.Pointer) *StockItem {
-	// FIXME: this has no ref function, what should we do here?
-	wrapped := UnsafeStockItemFromGlibBorrow(p)
-	runtime.SetFinalizer(
-		wrapped.stockItem,
-		func (intern *stockItem) {
-			C.gtk_stock_item_free(intern.native)
-		},
-	)
-	return wrapped
-}
-
-// UnsafeStockItemFromGlibFull is used to convert raw C.GtkStockItem pointers to go while taking a reference. This is used by the bindings internally.
-func UnsafeStockItemFromGlibFull(p unsafe.Pointer) *StockItem {
-	wrapped := UnsafeStockItemFromGlibBorrow(p)
-	runtime.SetFinalizer(
-		wrapped.stockItem,
-		func (intern *stockItem) {
-			C.gtk_stock_item_free(intern.native)
-		},
-	)
-	return wrapped
-}
-
-// UnsafeStockItemFree unrefs/frees the underlying resource. This is used by the bindings internally.
-// 
-// After this is called, no other method on [StockItem] is expected to work anymore.
-func UnsafeStockItemFree(s *StockItem) {
-	C.gtk_stock_item_free(s.native)
-}
-
-// UnsafeStockItemToGlibNone returns the underlying C pointer. This is used by the bindings internally.
-func UnsafeStockItemToGlibNone(s *StockItem) unsafe.Pointer {
-	return unsafe.Pointer(s.native)
-}
-
-// UnsafeStockItemToGlibFull returns the underlying C pointer and gives up ownership.
-// This is used by the bindings internally.
-func UnsafeStockItemToGlibFull(s *StockItem) unsafe.Pointer {
-	runtime.SetFinalizer(s.stockItem, nil)
-	_p := unsafe.Pointer(s.native)
-	s.native = nil // StockItem is invalid from here on
-	return _p
-}
-// keyval wraps keyval
-//
-// Keyboard accelerator
-func (s *StockItem) Keyval() uint {
-	valptr := &s.native.keyval
-	var _v uint
-	_v = uint(*valptr)
-	return _v
-}
-
-// keyval wraps keyval
-//
-// Keyboard accelerator
-func (s *StockItem) SetKeyval(keyval uint) {
-	valptr := &s.native.keyval
-	*valptr = C.guint(keyval)
-}
-
 // StyleClass wraps GtkStyleClass
 type StyleClass struct {
 	*styleClass
@@ -173641,296 +152333,6 @@ func UnsafeSymbolicColorToGlibFull(s *SymbolicColor) unsafe.Pointer {
 	s.native = nil // SymbolicColor is invalid from here on
 	return _p
 }
-// NewSymbolicColorAlpha wraps gtk_symbolic_color_new_alpha
-// 
-// The function takes the following parameters:
-// 
-// 	- color *SymbolicColor: another #GtkSymbolicColor 
-// 	- factor float64: factor to apply to @color alpha 
-// 
-// The function returns the following values:
-// 
-// 	- goret *SymbolicColor 
-//
-// Creates a symbolic color by modifying the relative alpha
-// value of @color. A factor &lt; 1.0 would resolve to a more
-// transparent color, while &gt; 1.0 would resolve to a more
-// opaque color.
-//
-// Deprecated: (since 3.8.0) #GtkSymbolicColor is deprecated.
-func NewSymbolicColorAlpha(color *SymbolicColor, factor float64) *SymbolicColor {
-	var carg1 *C.GtkSymbolicColor // in, none, converted
-	var carg2 C.gdouble           // in, none, casted
-	var cret  *C.GtkSymbolicColor // return, full, converted
-
-	carg1 = (*C.GtkSymbolicColor)(UnsafeSymbolicColorToGlibNone(color))
-	carg2 = C.gdouble(factor)
-
-	cret = C.gtk_symbolic_color_new_alpha(carg1, carg2)
-	runtime.KeepAlive(color)
-	runtime.KeepAlive(factor)
-
-	var goret *SymbolicColor
-
-	goret = UnsafeSymbolicColorFromGlibFull(unsafe.Pointer(cret))
-
-	return goret
-}
-
-// NewSymbolicColorLiteral wraps gtk_symbolic_color_new_literal
-// 
-// The function takes the following parameters:
-// 
-// 	- color *gdk.RGBA: a #GdkRGBA 
-// 
-// The function returns the following values:
-// 
-// 	- goret *SymbolicColor 
-//
-// Creates a symbolic color pointing to a literal color.
-//
-// Deprecated: (since 3.8.0) #GtkSymbolicColor is deprecated.
-func NewSymbolicColorLiteral(color *gdk.RGBA) *SymbolicColor {
-	var carg1 *C.GdkRGBA          // in, none, converted
-	var cret  *C.GtkSymbolicColor // return, full, converted
-
-	carg1 = (*C.GdkRGBA)(gdk.UnsafeRGBAToGlibNone(color))
-
-	cret = C.gtk_symbolic_color_new_literal(carg1)
-	runtime.KeepAlive(color)
-
-	var goret *SymbolicColor
-
-	goret = UnsafeSymbolicColorFromGlibFull(unsafe.Pointer(cret))
-
-	return goret
-}
-
-// NewSymbolicColorMix wraps gtk_symbolic_color_new_mix
-// 
-// The function takes the following parameters:
-// 
-// 	- color1 *SymbolicColor: color to mix 
-// 	- color2 *SymbolicColor: another color to mix 
-// 	- factor float64: mix factor 
-// 
-// The function returns the following values:
-// 
-// 	- goret *SymbolicColor 
-//
-// Creates a symbolic color defined as a mix of another
-// two colors. a mix factor of 0 would resolve to @color1,
-// while a factor of 1 would resolve to @color2.
-//
-// Deprecated: (since 3.8.0) #GtkSymbolicColor is deprecated.
-func NewSymbolicColorMix(color1 *SymbolicColor, color2 *SymbolicColor, factor float64) *SymbolicColor {
-	var carg1 *C.GtkSymbolicColor // in, none, converted
-	var carg2 *C.GtkSymbolicColor // in, none, converted
-	var carg3 C.gdouble           // in, none, casted
-	var cret  *C.GtkSymbolicColor // return, full, converted
-
-	carg1 = (*C.GtkSymbolicColor)(UnsafeSymbolicColorToGlibNone(color1))
-	carg2 = (*C.GtkSymbolicColor)(UnsafeSymbolicColorToGlibNone(color2))
-	carg3 = C.gdouble(factor)
-
-	cret = C.gtk_symbolic_color_new_mix(carg1, carg2, carg3)
-	runtime.KeepAlive(color1)
-	runtime.KeepAlive(color2)
-	runtime.KeepAlive(factor)
-
-	var goret *SymbolicColor
-
-	goret = UnsafeSymbolicColorFromGlibFull(unsafe.Pointer(cret))
-
-	return goret
-}
-
-// NewSymbolicColorName wraps gtk_symbolic_color_new_name
-// 
-// The function takes the following parameters:
-// 
-// 	- name string: color name 
-// 
-// The function returns the following values:
-// 
-// 	- goret *SymbolicColor 
-//
-// Creates a symbolic color pointing to an unresolved named
-// color. See gtk_style_context_lookup_color() and
-// gtk_style_properties_lookup_color().
-//
-// Deprecated: (since 3.8.0) #GtkSymbolicColor is deprecated.
-func NewSymbolicColorName(name string) *SymbolicColor {
-	var carg1 *C.gchar            // in, none, string, casted *C.gchar
-	var cret  *C.GtkSymbolicColor // return, full, converted
-
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(name)))
-	defer C.free(unsafe.Pointer(carg1))
-
-	cret = C.gtk_symbolic_color_new_name(carg1)
-	runtime.KeepAlive(name)
-
-	var goret *SymbolicColor
-
-	goret = UnsafeSymbolicColorFromGlibFull(unsafe.Pointer(cret))
-
-	return goret
-}
-
-// NewSymbolicColorShade wraps gtk_symbolic_color_new_shade
-// 
-// The function takes the following parameters:
-// 
-// 	- color *SymbolicColor: another #GtkSymbolicColor 
-// 	- factor float64: shading factor to apply to @color 
-// 
-// The function returns the following values:
-// 
-// 	- goret *SymbolicColor 
-//
-// Creates a symbolic color defined as a shade of
-// another color. A factor &gt; 1.0 would resolve to
-// a brighter color, while &lt; 1.0 would resolve to
-// a darker color.
-//
-// Deprecated: (since 3.8.0) #GtkSymbolicColor is deprecated.
-func NewSymbolicColorShade(color *SymbolicColor, factor float64) *SymbolicColor {
-	var carg1 *C.GtkSymbolicColor // in, none, converted
-	var carg2 C.gdouble           // in, none, casted
-	var cret  *C.GtkSymbolicColor // return, full, converted
-
-	carg1 = (*C.GtkSymbolicColor)(UnsafeSymbolicColorToGlibNone(color))
-	carg2 = C.gdouble(factor)
-
-	cret = C.gtk_symbolic_color_new_shade(carg1, carg2)
-	runtime.KeepAlive(color)
-	runtime.KeepAlive(factor)
-
-	var goret *SymbolicColor
-
-	goret = UnsafeSymbolicColorFromGlibFull(unsafe.Pointer(cret))
-
-	return goret
-}
-
-// NewSymbolicColorWin32 wraps gtk_symbolic_color_new_win32
-// 
-// The function takes the following parameters:
-// 
-// 	- themeClass string: The theme class to pull color from 
-// 	- id int: The color id 
-// 
-// The function returns the following values:
-// 
-// 	- goret *SymbolicColor 
-//
-// Creates a symbolic color based on the current win32
-// theme.
-// 
-// Note that while this call is available on all platforms
-// the actual value returned is not reliable on non-win32
-// platforms.
-//
-// Deprecated: (since 3.8.0) #GtkSymbolicColor is deprecated.
-func NewSymbolicColorWin32(themeClass string, id int) *SymbolicColor {
-	var carg1 *C.gchar            // in, none, string, casted *C.gchar
-	var carg2 C.gint              // in, none, casted
-	var cret  *C.GtkSymbolicColor // return, full, converted
-
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(themeClass)))
-	defer C.free(unsafe.Pointer(carg1))
-	carg2 = C.gint(id)
-
-	cret = C.gtk_symbolic_color_new_win32(carg1, carg2)
-	runtime.KeepAlive(themeClass)
-	runtime.KeepAlive(id)
-
-	var goret *SymbolicColor
-
-	goret = UnsafeSymbolicColorFromGlibFull(unsafe.Pointer(cret))
-
-	return goret
-}
-
-// Resolve wraps gtk_symbolic_color_resolve
-// 
-// The function takes the following parameters:
-// 
-// 	- props StyleProperties (nullable): #GtkStyleProperties to use when resolving
-//    named colors, or %NULL 
-// 
-// The function returns the following values:
-// 
-// 	- resolvedColor gdk.RGBA: return location for the resolved color 
-// 	- goret bool 
-//
-// If @color is resolvable, @resolved_color will be filled in
-// with the resolved color, and %TRUE will be returned. Generally,
-// if @color can’t be resolved, it is due to it being defined on
-// top of a named color that doesn’t exist in @props.
-// 
-// When @props is %NULL, resolving of named colors will fail, so if
-// your @color is or references such a color, this function will
-// return %FALSE.
-//
-// Deprecated: (since 3.8.0) #GtkSymbolicColor is deprecated.
-func (color *SymbolicColor) Resolve(props StyleProperties) (gdk.RGBA, bool) {
-	var carg0 *C.GtkSymbolicColor   // in, none, converted
-	var carg1 *C.GtkStyleProperties // in, none, converted, nullable
-	var carg2 C.GdkRGBA             // out, transfer: none, C Pointers: 0, Name: RGBA, caller-allocates
-	var cret  C.gboolean            // return
-
-	carg0 = (*C.GtkSymbolicColor)(UnsafeSymbolicColorToGlibNone(color))
-	if props != nil {
-		carg1 = (*C.GtkStyleProperties)(UnsafeStylePropertiesToGlibNone(props))
-	}
-
-	cret = C.gtk_symbolic_color_resolve(carg0, carg1, &carg2)
-	runtime.KeepAlive(color)
-	runtime.KeepAlive(props)
-
-	var resolvedColor gdk.RGBA
-	var goret         bool
-
-	_ = resolvedColor
-	_ = carg2
-	panic("unimplemented conversion of gdk.RGBA (GdkRGBA)")
-	if cret != 0 {
-		goret = true
-	}
-
-	return resolvedColor, goret
-}
-
-// ToString wraps gtk_symbolic_color_to_string
-// The function returns the following values:
-// 
-// 	- goret string 
-//
-// Converts the given @color to a string representation. This is useful
-// both for debugging and for serialization of strings. The format of
-// the string may change between different versions of GTK, but it is
-// guaranteed that the GTK css parser is able to read the string and
-// create the same symbolic color from it.
-//
-// Deprecated: (since 3.8.0) #GtkSymbolicColor is deprecated.
-func (color *SymbolicColor) ToString() string {
-	var carg0 *C.GtkSymbolicColor // in, none, converted
-	var cret  *C.char             // return, full, string, casted *C.gchar
-
-	carg0 = (*C.GtkSymbolicColor)(UnsafeSymbolicColorToGlibNone(color))
-
-	cret = C.gtk_symbolic_color_to_string(carg0)
-	runtime.KeepAlive(color)
-
-	var goret string
-
-	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
-	defer C.free(unsafe.Pointer(cret))
-
-	return goret
-}
-
 // TableChild wraps GtkTableChild
 type TableChild struct {
 	*tableChild
@@ -176165,50 +154567,6 @@ func (iter *TextIter) BackwardWordStarts(count int) bool {
 	return goret
 }
 
-// BeginsTag wraps gtk_text_iter_begins_tag
-// 
-// The function takes the following parameters:
-// 
-// 	- tag TextTag (nullable): a #GtkTextTag, or %NULL 
-// 
-// The function returns the following values:
-// 
-// 	- goret bool 
-//
-// Returns %TRUE if @tag is toggled on at exactly this point. If @tag
-// is %NULL, returns %TRUE if any tag is toggled on at this point.
-// 
-// Note that if gtk_text_iter_begins_tag() returns %TRUE, it means that @iter is
-// at the beginning of the tagged range, and that the
-// character at @iter is inside the tagged range. In other
-// words, unlike gtk_text_iter_ends_tag(), if gtk_text_iter_begins_tag() returns
-// %TRUE, gtk_text_iter_has_tag() will also return %TRUE for the same
-// parameters.
-//
-// Deprecated: (since 3.20.0) Use gtk_text_iter_starts_tag() instead.
-func (iter *TextIter) BeginsTag(tag TextTag) bool {
-	var carg0 *C.GtkTextIter // in, none, converted
-	var carg1 *C.GtkTextTag  // in, none, converted, nullable
-	var cret  C.gboolean     // return
-
-	carg0 = (*C.GtkTextIter)(UnsafeTextIterToGlibNone(iter))
-	if tag != nil {
-		carg1 = (*C.GtkTextTag)(UnsafeTextTagToGlibNone(tag))
-	}
-
-	cret = C.gtk_text_iter_begins_tag(carg0, carg1)
-	runtime.KeepAlive(iter)
-	runtime.KeepAlive(tag)
-
-	var goret bool
-
-	if cret != 0 {
-		goret = true
-	}
-
-	return goret
-}
-
 // CanInsert wraps gtk_text_iter_can_insert
 // 
 // The function takes the following parameters:
@@ -177546,7 +155904,7 @@ func (start *TextIter) GetSlice(end *TextIter) string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 	defer C.free(unsafe.Pointer(cret))
 
 	return goret
@@ -177581,7 +155939,7 @@ func (start *TextIter) GetText(end *TextIter) string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 	defer C.free(unsafe.Pointer(cret))
 
 	return goret
@@ -177664,7 +156022,7 @@ func (start *TextIter) GetVisibleSlice(end *TextIter) string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 	defer C.free(unsafe.Pointer(cret))
 
 	return goret
@@ -177697,7 +156055,7 @@ func (start *TextIter) GetVisibleText(end *TextIter) string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 	defer C.free(unsafe.Pointer(cret))
 
 	return goret
@@ -178701,71 +157059,6 @@ func UnsafeToggleActionClassToGlibFull(t *ToggleActionClass) unsafe.Pointer {
 	runtime.SetFinalizer(t.toggleActionClass, nil)
 	_p := unsafe.Pointer(t.native)
 	t.native = nil // ToggleActionClass is invalid from here on
-	return _p
-}
-// ToggleActionEntry wraps GtkToggleActionEntry
-//
-// #GtkToggleActionEntry structs are used with
-// gtk_action_group_add_toggle_actions() to construct toggle actions.
-//
-// Deprecated: (since 3.10.0) 
-type ToggleActionEntry struct {
-	*toggleActionEntry
-}
-
-// toggleActionEntry is the struct that's finalized
-type toggleActionEntry struct {
-	native *C.GtkToggleActionEntry
-}
-
-// UnsafeToggleActionEntryFromGlibBorrow is used to convert raw C.GtkToggleActionEntry pointers to go. This is used by the bindings internally.
-func UnsafeToggleActionEntryFromGlibBorrow(p unsafe.Pointer) *ToggleActionEntry {
-	return &ToggleActionEntry{&toggleActionEntry{(*C.GtkToggleActionEntry)(p)}}
-}
-
-// UnsafeToggleActionEntryFromGlibNone is used to convert raw C.GtkToggleActionEntry pointers to go while taking a reference. This is used by the bindings internally.
-func UnsafeToggleActionEntryFromGlibNone(p unsafe.Pointer) *ToggleActionEntry {
-	// FIXME: this has no ref function, what should we do here?
-	wrapped := UnsafeToggleActionEntryFromGlibBorrow(p)
-	runtime.SetFinalizer(
-		wrapped.toggleActionEntry,
-		func (intern *toggleActionEntry) {
-			C.free(unsafe.Pointer(intern.native))
-		},
-	)
-	return wrapped
-}
-
-// UnsafeToggleActionEntryFromGlibFull is used to convert raw C.GtkToggleActionEntry pointers to go while taking a reference. This is used by the bindings internally.
-func UnsafeToggleActionEntryFromGlibFull(p unsafe.Pointer) *ToggleActionEntry {
-	wrapped := UnsafeToggleActionEntryFromGlibBorrow(p)
-	runtime.SetFinalizer(
-		wrapped.toggleActionEntry,
-		func (intern *toggleActionEntry) {
-			C.free(unsafe.Pointer(intern.native))
-		},
-	)
-	return wrapped
-}
-
-// UnsafeToggleActionEntryFree unrefs/frees the underlying resource. This is used by the bindings internally.
-// 
-// After this is called, no other method on [ToggleActionEntry] is expected to work anymore.
-func UnsafeToggleActionEntryFree(t *ToggleActionEntry) {
-	C.free(unsafe.Pointer(t.native))
-}
-
-// UnsafeToggleActionEntryToGlibNone returns the underlying C pointer. This is used by the bindings internally.
-func UnsafeToggleActionEntryToGlibNone(t *ToggleActionEntry) unsafe.Pointer {
-	return unsafe.Pointer(t.native)
-}
-
-// UnsafeToggleActionEntryToGlibFull returns the underlying C pointer and gives up ownership.
-// This is used by the bindings internally.
-func UnsafeToggleActionEntryToGlibFull(t *ToggleActionEntry) unsafe.Pointer {
-	runtime.SetFinalizer(t.toggleActionEntry, nil)
-	_p := unsafe.Pointer(t.native)
-	t.native = nil // ToggleActionEntry is invalid from here on
 	return _p
 }
 // ToggleButtonAccessibleClass wraps GtkToggleButtonAccessibleClass
@@ -180256,7 +158549,7 @@ func (path *TreePath) ToString() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 	defer C.free(unsafe.Pointer(cret))
 
 	return goret
@@ -182197,41 +160490,6 @@ func (path *WidgetPath) IterAddClass(pos int, name string) {
 	runtime.KeepAlive(name)
 }
 
-// IterAddRegion wraps gtk_widget_path_iter_add_region
-// 
-// The function takes the following parameters:
-// 
-// 	- pos int: position to modify, -1 for the path head 
-// 	- name string: region name 
-// 	- flags RegionFlags: flags affecting the region 
-//
-// Adds the region @name to the widget at position @pos in
-// the hierarchy defined in @path. See
-// gtk_style_context_add_region().
-// 
-// Region names must only contain lowercase letters
-// and “-”, starting always with a lowercase letter.
-//
-// Deprecated: (since 3.14.0) The use of regions is deprecated.
-func (path *WidgetPath) IterAddRegion(pos int, name string, flags RegionFlags) {
-	var carg0 *C.GtkWidgetPath // in, none, converted
-	var carg1 C.gint           // in, none, casted
-	var carg2 *C.gchar         // in, none, string, casted *C.gchar
-	var carg3 C.GtkRegionFlags // in, none, casted
-
-	carg0 = (*C.GtkWidgetPath)(UnsafeWidgetPathToGlibNone(path))
-	carg1 = C.gint(pos)
-	carg2 = (*C.gchar)(unsafe.Pointer(C.CString(name)))
-	defer C.free(unsafe.Pointer(carg2))
-	carg3 = C.GtkRegionFlags(flags)
-
-	C.gtk_widget_path_iter_add_region(carg0, carg1, carg2, carg3)
-	runtime.KeepAlive(path)
-	runtime.KeepAlive(pos)
-	runtime.KeepAlive(name)
-	runtime.KeepAlive(flags)
-}
-
 // IterClearClasses wraps gtk_widget_path_iter_clear_classes
 // 
 // The function takes the following parameters:
@@ -182248,28 +160506,6 @@ func (path *WidgetPath) IterClearClasses(pos int) {
 	carg1 = C.gint(pos)
 
 	C.gtk_widget_path_iter_clear_classes(carg0, carg1)
-	runtime.KeepAlive(path)
-	runtime.KeepAlive(pos)
-}
-
-// IterClearRegions wraps gtk_widget_path_iter_clear_regions
-// 
-// The function takes the following parameters:
-// 
-// 	- pos int: position to modify, -1 for the path head 
-//
-// Removes all regions from the widget at position @pos in the
-// hierarchy defined in @path.
-//
-// Deprecated: (since 3.14.0) The use of regions is deprecated.
-func (path *WidgetPath) IterClearRegions(pos int) {
-	var carg0 *C.GtkWidgetPath // in, none, converted
-	var carg1 C.gint           // in, none, casted
-
-	carg0 = (*C.GtkWidgetPath)(UnsafeWidgetPathToGlibNone(path))
-	carg1 = C.gint(pos)
-
-	C.gtk_widget_path_iter_clear_regions(carg0, carg1)
 	runtime.KeepAlive(path)
 	runtime.KeepAlive(pos)
 }
@@ -182301,7 +160537,7 @@ func (path *WidgetPath) IterGetName(pos int) string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -182614,93 +160850,6 @@ func (path *WidgetPath) IterHasQname(pos int, qname glib.Quark) bool {
 	return goret
 }
 
-// IterHasQregion wraps gtk_widget_path_iter_has_qregion
-// 
-// The function takes the following parameters:
-// 
-// 	- pos int: position to query, -1 for the path head 
-// 	- qname glib.Quark: region name as a #GQuark 
-// 
-// The function returns the following values:
-// 
-// 	- flags RegionFlags: return location for the region flags 
-// 	- goret bool 
-//
-// See gtk_widget_path_iter_has_region(). This is a version that operates
-// with GQuarks.
-//
-// Deprecated: (since 3.14.0) The use of regions is deprecated.
-func (path *WidgetPath) IterHasQregion(pos int, qname glib.Quark) (RegionFlags, bool) {
-	var carg0 *C.GtkWidgetPath // in, none, converted
-	var carg1 C.gint           // in, none, casted
-	var carg2 C.GQuark         // in, none, casted, alias
-	var carg3 C.GtkRegionFlags // out, full, casted
-	var cret  C.gboolean       // return
-
-	carg0 = (*C.GtkWidgetPath)(UnsafeWidgetPathToGlibNone(path))
-	carg1 = C.gint(pos)
-	carg2 = C.GQuark(qname)
-
-	cret = C.gtk_widget_path_iter_has_qregion(carg0, carg1, carg2, &carg3)
-	runtime.KeepAlive(path)
-	runtime.KeepAlive(pos)
-	runtime.KeepAlive(qname)
-
-	var flags RegionFlags
-	var goret bool
-
-	flags = RegionFlags(carg3)
-	if cret != 0 {
-		goret = true
-	}
-
-	return flags, goret
-}
-
-// IterHasRegion wraps gtk_widget_path_iter_has_region
-// 
-// The function takes the following parameters:
-// 
-// 	- pos int: position to query, -1 for the path head 
-// 	- name string: region name 
-// 
-// The function returns the following values:
-// 
-// 	- flags RegionFlags: return location for the region flags 
-// 	- goret bool 
-//
-// Returns %TRUE if the widget at position @pos has the class @name
-// defined, %FALSE otherwise.
-//
-// Deprecated: (since 3.14.0) The use of regions is deprecated.
-func (path *WidgetPath) IterHasRegion(pos int, name string) (RegionFlags, bool) {
-	var carg0 *C.GtkWidgetPath // in, none, converted
-	var carg1 C.gint           // in, none, casted
-	var carg2 *C.gchar         // in, none, string, casted *C.gchar
-	var carg3 C.GtkRegionFlags // out, full, casted
-	var cret  C.gboolean       // return
-
-	carg0 = (*C.GtkWidgetPath)(UnsafeWidgetPathToGlibNone(path))
-	carg1 = C.gint(pos)
-	carg2 = (*C.gchar)(unsafe.Pointer(C.CString(name)))
-	defer C.free(unsafe.Pointer(carg2))
-
-	cret = C.gtk_widget_path_iter_has_region(carg0, carg1, carg2, &carg3)
-	runtime.KeepAlive(path)
-	runtime.KeepAlive(pos)
-	runtime.KeepAlive(name)
-
-	var flags RegionFlags
-	var goret bool
-
-	flags = RegionFlags(carg3)
-	if cret != 0 {
-		goret = true
-	}
-
-	return flags, goret
-}
-
 // IterRemoveClass wraps gtk_widget_path_iter_remove_class
 // 
 // The function takes the following parameters:
@@ -182721,33 +160870,6 @@ func (path *WidgetPath) IterRemoveClass(pos int, name string) {
 	defer C.free(unsafe.Pointer(carg2))
 
 	C.gtk_widget_path_iter_remove_class(carg0, carg1, carg2)
-	runtime.KeepAlive(path)
-	runtime.KeepAlive(pos)
-	runtime.KeepAlive(name)
-}
-
-// IterRemoveRegion wraps gtk_widget_path_iter_remove_region
-// 
-// The function takes the following parameters:
-// 
-// 	- pos int: position to modify, -1 for the path head 
-// 	- name string: region name 
-//
-// Removes the region @name from the widget at position @pos in
-// the hierarchy defined in @path.
-//
-// Deprecated: (since 3.14.0) The use of regions is deprecated.
-func (path *WidgetPath) IterRemoveRegion(pos int, name string) {
-	var carg0 *C.GtkWidgetPath // in, none, converted
-	var carg1 C.gint           // in, none, casted
-	var carg2 *C.gchar         // in, none, string, casted *C.gchar
-
-	carg0 = (*C.GtkWidgetPath)(UnsafeWidgetPathToGlibNone(path))
-	carg1 = C.gint(pos)
-	carg2 = (*C.gchar)(unsafe.Pointer(C.CString(name)))
-	defer C.free(unsafe.Pointer(carg2))
-
-	C.gtk_widget_path_iter_remove_region(carg0, carg1, carg2)
 	runtime.KeepAlive(path)
 	runtime.KeepAlive(pos)
 	runtime.KeepAlive(name)
@@ -183179,377 +161301,5 @@ func UnsafeWindowGroupClassToGlibFull(w *WindowGroupClass) unsafe.Pointer {
 	runtime.SetFinalizer(w.windowGroupClass, nil)
 	_p := unsafe.Pointer(w.native)
 	w.native = nil // WindowGroupClass is invalid from here on
-	return _p
-}
-// _MountOperationHandler wraps _GtkMountOperationHandler
-//
-// Abstract interface type for the D-Bus interface &lt;link linkend="gdbus-interface-org-Gtk-MountOperationHandler.top_of_page"&gt;org.Gtk.MountOperationHandler&lt;/link&gt;.
-type _MountOperationHandler struct {
-	*_MountOperationHandler
-}
-
-// _MountOperationHandler is the struct that's finalized
-type _MountOperationHandler struct {
-	native *C._GtkMountOperationHandler
-}
-
-// Unsafe_MountOperationHandlerFromGlibBorrow is used to convert raw C._GtkMountOperationHandler pointers to go. This is used by the bindings internally.
-func Unsafe_MountOperationHandlerFromGlibBorrow(p unsafe.Pointer) *_MountOperationHandler {
-	return &_MountOperationHandler{&_MountOperationHandler{(*C._GtkMountOperationHandler)(p)}}
-}
-
-// Unsafe_MountOperationHandlerFromGlibNone is used to convert raw C._GtkMountOperationHandler pointers to go while taking a reference. This is used by the bindings internally.
-func Unsafe_MountOperationHandlerFromGlibNone(p unsafe.Pointer) *_MountOperationHandler {
-	// FIXME: this has no ref function, what should we do here?
-	wrapped := Unsafe_MountOperationHandlerFromGlibBorrow(p)
-	runtime.SetFinalizer(
-		wrapped._MountOperationHandler,
-		func (intern *_MountOperationHandler) {
-			C.free(unsafe.Pointer(intern.native))
-		},
-	)
-	return wrapped
-}
-
-// Unsafe_MountOperationHandlerFromGlibFull is used to convert raw C._GtkMountOperationHandler pointers to go while taking a reference. This is used by the bindings internally.
-func Unsafe_MountOperationHandlerFromGlibFull(p unsafe.Pointer) *_MountOperationHandler {
-	wrapped := Unsafe_MountOperationHandlerFromGlibBorrow(p)
-	runtime.SetFinalizer(
-		wrapped._MountOperationHandler,
-		func (intern *_MountOperationHandler) {
-			C.free(unsafe.Pointer(intern.native))
-		},
-	)
-	return wrapped
-}
-
-// Unsafe_MountOperationHandlerFree unrefs/frees the underlying resource. This is used by the bindings internally.
-// 
-// After this is called, no other method on [_MountOperationHandler] is expected to work anymore.
-func Unsafe_MountOperationHandlerFree(_ *_MountOperationHandler) {
-	C.free(unsafe.Pointer(_.native))
-}
-
-// Unsafe_MountOperationHandlerToGlibNone returns the underlying C pointer. This is used by the bindings internally.
-func Unsafe_MountOperationHandlerToGlibNone(_ *_MountOperationHandler) unsafe.Pointer {
-	return unsafe.Pointer(_.native)
-}
-
-// Unsafe_MountOperationHandlerToGlibFull returns the underlying C pointer and gives up ownership.
-// This is used by the bindings internally.
-func Unsafe_MountOperationHandlerToGlibFull(_ *_MountOperationHandler) unsafe.Pointer {
-	runtime.SetFinalizer(_._MountOperationHandler, nil)
-	_p := unsafe.Pointer(_.native)
-	_.native = nil // _MountOperationHandler is invalid from here on
-	return _p
-}
-// _MountOperationHandlerIface wraps _GtkMountOperationHandlerIface
-//
-// Virtual table for the D-Bus interface &lt;link linkend="gdbus-interface-org-Gtk-MountOperationHandler.top_of_page"&gt;org.Gtk.MountOperationHandler&lt;/link&gt;.
-type _MountOperationHandlerIface struct {
-	*_MountOperationHandlerIface
-}
-
-// _MountOperationHandlerIface is the struct that's finalized
-type _MountOperationHandlerIface struct {
-	native *C._GtkMountOperationHandlerIface
-}
-
-// Unsafe_MountOperationHandlerIfaceFromGlibBorrow is used to convert raw C._GtkMountOperationHandlerIface pointers to go. This is used by the bindings internally.
-func Unsafe_MountOperationHandlerIfaceFromGlibBorrow(p unsafe.Pointer) *_MountOperationHandlerIface {
-	return &_MountOperationHandlerIface{&_MountOperationHandlerIface{(*C._GtkMountOperationHandlerIface)(p)}}
-}
-
-// Unsafe_MountOperationHandlerIfaceFromGlibNone is used to convert raw C._GtkMountOperationHandlerIface pointers to go while taking a reference. This is used by the bindings internally.
-func Unsafe_MountOperationHandlerIfaceFromGlibNone(p unsafe.Pointer) *_MountOperationHandlerIface {
-	// FIXME: this has no ref function, what should we do here?
-	wrapped := Unsafe_MountOperationHandlerIfaceFromGlibBorrow(p)
-	runtime.SetFinalizer(
-		wrapped._MountOperationHandlerIface,
-		func (intern *_MountOperationHandlerIface) {
-			C.free(unsafe.Pointer(intern.native))
-		},
-	)
-	return wrapped
-}
-
-// Unsafe_MountOperationHandlerIfaceFromGlibFull is used to convert raw C._GtkMountOperationHandlerIface pointers to go while taking a reference. This is used by the bindings internally.
-func Unsafe_MountOperationHandlerIfaceFromGlibFull(p unsafe.Pointer) *_MountOperationHandlerIface {
-	wrapped := Unsafe_MountOperationHandlerIfaceFromGlibBorrow(p)
-	runtime.SetFinalizer(
-		wrapped._MountOperationHandlerIface,
-		func (intern *_MountOperationHandlerIface) {
-			C.free(unsafe.Pointer(intern.native))
-		},
-	)
-	return wrapped
-}
-
-// Unsafe_MountOperationHandlerIfaceFree unrefs/frees the underlying resource. This is used by the bindings internally.
-// 
-// After this is called, no other method on [_MountOperationHandlerIface] is expected to work anymore.
-func Unsafe_MountOperationHandlerIfaceFree(_ *_MountOperationHandlerIface) {
-	C.free(unsafe.Pointer(_.native))
-}
-
-// Unsafe_MountOperationHandlerIfaceToGlibNone returns the underlying C pointer. This is used by the bindings internally.
-func Unsafe_MountOperationHandlerIfaceToGlibNone(_ *_MountOperationHandlerIface) unsafe.Pointer {
-	return unsafe.Pointer(_.native)
-}
-
-// Unsafe_MountOperationHandlerIfaceToGlibFull returns the underlying C pointer and gives up ownership.
-// This is used by the bindings internally.
-func Unsafe_MountOperationHandlerIfaceToGlibFull(_ *_MountOperationHandlerIface) unsafe.Pointer {
-	runtime.SetFinalizer(_._MountOperationHandlerIface, nil)
-	_p := unsafe.Pointer(_.native)
-	_.native = nil // _MountOperationHandlerIface is invalid from here on
-	return _p
-}
-// _MountOperationHandlerProxy wraps _GtkMountOperationHandlerProxy
-//
-// The #_GtkMountOperationHandlerProxy structure contains only private data and should only be accessed using the provided API.
-type _MountOperationHandlerProxy struct {
-	*_MountOperationHandlerProxy
-}
-
-// _MountOperationHandlerProxy is the struct that's finalized
-type _MountOperationHandlerProxy struct {
-	native *C._GtkMountOperationHandlerProxy
-}
-
-// Unsafe_MountOperationHandlerProxyFromGlibBorrow is used to convert raw C._GtkMountOperationHandlerProxy pointers to go. This is used by the bindings internally.
-func Unsafe_MountOperationHandlerProxyFromGlibBorrow(p unsafe.Pointer) *_MountOperationHandlerProxy {
-	return &_MountOperationHandlerProxy{&_MountOperationHandlerProxy{(*C._GtkMountOperationHandlerProxy)(p)}}
-}
-
-// Unsafe_MountOperationHandlerProxyFromGlibNone is used to convert raw C._GtkMountOperationHandlerProxy pointers to go while taking a reference. This is used by the bindings internally.
-func Unsafe_MountOperationHandlerProxyFromGlibNone(p unsafe.Pointer) *_MountOperationHandlerProxy {
-	// FIXME: this has no ref function, what should we do here?
-	wrapped := Unsafe_MountOperationHandlerProxyFromGlibBorrow(p)
-	runtime.SetFinalizer(
-		wrapped._MountOperationHandlerProxy,
-		func (intern *_MountOperationHandlerProxy) {
-			C.free(unsafe.Pointer(intern.native))
-		},
-	)
-	return wrapped
-}
-
-// Unsafe_MountOperationHandlerProxyFromGlibFull is used to convert raw C._GtkMountOperationHandlerProxy pointers to go while taking a reference. This is used by the bindings internally.
-func Unsafe_MountOperationHandlerProxyFromGlibFull(p unsafe.Pointer) *_MountOperationHandlerProxy {
-	wrapped := Unsafe_MountOperationHandlerProxyFromGlibBorrow(p)
-	runtime.SetFinalizer(
-		wrapped._MountOperationHandlerProxy,
-		func (intern *_MountOperationHandlerProxy) {
-			C.free(unsafe.Pointer(intern.native))
-		},
-	)
-	return wrapped
-}
-
-// Unsafe_MountOperationHandlerProxyFree unrefs/frees the underlying resource. This is used by the bindings internally.
-// 
-// After this is called, no other method on [_MountOperationHandlerProxy] is expected to work anymore.
-func Unsafe_MountOperationHandlerProxyFree(_ *_MountOperationHandlerProxy) {
-	C.free(unsafe.Pointer(_.native))
-}
-
-// Unsafe_MountOperationHandlerProxyToGlibNone returns the underlying C pointer. This is used by the bindings internally.
-func Unsafe_MountOperationHandlerProxyToGlibNone(_ *_MountOperationHandlerProxy) unsafe.Pointer {
-	return unsafe.Pointer(_.native)
-}
-
-// Unsafe_MountOperationHandlerProxyToGlibFull returns the underlying C pointer and gives up ownership.
-// This is used by the bindings internally.
-func Unsafe_MountOperationHandlerProxyToGlibFull(_ *_MountOperationHandlerProxy) unsafe.Pointer {
-	runtime.SetFinalizer(_._MountOperationHandlerProxy, nil)
-	_p := unsafe.Pointer(_.native)
-	_.native = nil // _MountOperationHandlerProxy is invalid from here on
-	return _p
-}
-// _MountOperationHandlerProxyClass wraps _GtkMountOperationHandlerProxyClass
-//
-// Class structure for #_GtkMountOperationHandlerProxy.
-type _MountOperationHandlerProxyClass struct {
-	*_MountOperationHandlerProxyClass
-}
-
-// _MountOperationHandlerProxyClass is the struct that's finalized
-type _MountOperationHandlerProxyClass struct {
-	native *C._GtkMountOperationHandlerProxyClass
-}
-
-// Unsafe_MountOperationHandlerProxyClassFromGlibBorrow is used to convert raw C._GtkMountOperationHandlerProxyClass pointers to go. This is used by the bindings internally.
-func Unsafe_MountOperationHandlerProxyClassFromGlibBorrow(p unsafe.Pointer) *_MountOperationHandlerProxyClass {
-	return &_MountOperationHandlerProxyClass{&_MountOperationHandlerProxyClass{(*C._GtkMountOperationHandlerProxyClass)(p)}}
-}
-
-// Unsafe_MountOperationHandlerProxyClassFromGlibNone is used to convert raw C._GtkMountOperationHandlerProxyClass pointers to go while taking a reference. This is used by the bindings internally.
-func Unsafe_MountOperationHandlerProxyClassFromGlibNone(p unsafe.Pointer) *_MountOperationHandlerProxyClass {
-	// FIXME: this has no ref function, what should we do here?
-	wrapped := Unsafe_MountOperationHandlerProxyClassFromGlibBorrow(p)
-	runtime.SetFinalizer(
-		wrapped._MountOperationHandlerProxyClass,
-		func (intern *_MountOperationHandlerProxyClass) {
-			C.free(unsafe.Pointer(intern.native))
-		},
-	)
-	return wrapped
-}
-
-// Unsafe_MountOperationHandlerProxyClassFromGlibFull is used to convert raw C._GtkMountOperationHandlerProxyClass pointers to go while taking a reference. This is used by the bindings internally.
-func Unsafe_MountOperationHandlerProxyClassFromGlibFull(p unsafe.Pointer) *_MountOperationHandlerProxyClass {
-	wrapped := Unsafe_MountOperationHandlerProxyClassFromGlibBorrow(p)
-	runtime.SetFinalizer(
-		wrapped._MountOperationHandlerProxyClass,
-		func (intern *_MountOperationHandlerProxyClass) {
-			C.free(unsafe.Pointer(intern.native))
-		},
-	)
-	return wrapped
-}
-
-// Unsafe_MountOperationHandlerProxyClassFree unrefs/frees the underlying resource. This is used by the bindings internally.
-// 
-// After this is called, no other method on [_MountOperationHandlerProxyClass] is expected to work anymore.
-func Unsafe_MountOperationHandlerProxyClassFree(_ *_MountOperationHandlerProxyClass) {
-	C.free(unsafe.Pointer(_.native))
-}
-
-// Unsafe_MountOperationHandlerProxyClassToGlibNone returns the underlying C pointer. This is used by the bindings internally.
-func Unsafe_MountOperationHandlerProxyClassToGlibNone(_ *_MountOperationHandlerProxyClass) unsafe.Pointer {
-	return unsafe.Pointer(_.native)
-}
-
-// Unsafe_MountOperationHandlerProxyClassToGlibFull returns the underlying C pointer and gives up ownership.
-// This is used by the bindings internally.
-func Unsafe_MountOperationHandlerProxyClassToGlibFull(_ *_MountOperationHandlerProxyClass) unsafe.Pointer {
-	runtime.SetFinalizer(_._MountOperationHandlerProxyClass, nil)
-	_p := unsafe.Pointer(_.native)
-	_.native = nil // _MountOperationHandlerProxyClass is invalid from here on
-	return _p
-}
-// _MountOperationHandlerSkeleton wraps _GtkMountOperationHandlerSkeleton
-//
-// The #_GtkMountOperationHandlerSkeleton structure contains only private data and should only be accessed using the provided API.
-type _MountOperationHandlerSkeleton struct {
-	*_MountOperationHandlerSkeleton
-}
-
-// _MountOperationHandlerSkeleton is the struct that's finalized
-type _MountOperationHandlerSkeleton struct {
-	native *C._GtkMountOperationHandlerSkeleton
-}
-
-// Unsafe_MountOperationHandlerSkeletonFromGlibBorrow is used to convert raw C._GtkMountOperationHandlerSkeleton pointers to go. This is used by the bindings internally.
-func Unsafe_MountOperationHandlerSkeletonFromGlibBorrow(p unsafe.Pointer) *_MountOperationHandlerSkeleton {
-	return &_MountOperationHandlerSkeleton{&_MountOperationHandlerSkeleton{(*C._GtkMountOperationHandlerSkeleton)(p)}}
-}
-
-// Unsafe_MountOperationHandlerSkeletonFromGlibNone is used to convert raw C._GtkMountOperationHandlerSkeleton pointers to go while taking a reference. This is used by the bindings internally.
-func Unsafe_MountOperationHandlerSkeletonFromGlibNone(p unsafe.Pointer) *_MountOperationHandlerSkeleton {
-	// FIXME: this has no ref function, what should we do here?
-	wrapped := Unsafe_MountOperationHandlerSkeletonFromGlibBorrow(p)
-	runtime.SetFinalizer(
-		wrapped._MountOperationHandlerSkeleton,
-		func (intern *_MountOperationHandlerSkeleton) {
-			C.free(unsafe.Pointer(intern.native))
-		},
-	)
-	return wrapped
-}
-
-// Unsafe_MountOperationHandlerSkeletonFromGlibFull is used to convert raw C._GtkMountOperationHandlerSkeleton pointers to go while taking a reference. This is used by the bindings internally.
-func Unsafe_MountOperationHandlerSkeletonFromGlibFull(p unsafe.Pointer) *_MountOperationHandlerSkeleton {
-	wrapped := Unsafe_MountOperationHandlerSkeletonFromGlibBorrow(p)
-	runtime.SetFinalizer(
-		wrapped._MountOperationHandlerSkeleton,
-		func (intern *_MountOperationHandlerSkeleton) {
-			C.free(unsafe.Pointer(intern.native))
-		},
-	)
-	return wrapped
-}
-
-// Unsafe_MountOperationHandlerSkeletonFree unrefs/frees the underlying resource. This is used by the bindings internally.
-// 
-// After this is called, no other method on [_MountOperationHandlerSkeleton] is expected to work anymore.
-func Unsafe_MountOperationHandlerSkeletonFree(_ *_MountOperationHandlerSkeleton) {
-	C.free(unsafe.Pointer(_.native))
-}
-
-// Unsafe_MountOperationHandlerSkeletonToGlibNone returns the underlying C pointer. This is used by the bindings internally.
-func Unsafe_MountOperationHandlerSkeletonToGlibNone(_ *_MountOperationHandlerSkeleton) unsafe.Pointer {
-	return unsafe.Pointer(_.native)
-}
-
-// Unsafe_MountOperationHandlerSkeletonToGlibFull returns the underlying C pointer and gives up ownership.
-// This is used by the bindings internally.
-func Unsafe_MountOperationHandlerSkeletonToGlibFull(_ *_MountOperationHandlerSkeleton) unsafe.Pointer {
-	runtime.SetFinalizer(_._MountOperationHandlerSkeleton, nil)
-	_p := unsafe.Pointer(_.native)
-	_.native = nil // _MountOperationHandlerSkeleton is invalid from here on
-	return _p
-}
-// _MountOperationHandlerSkeletonClass wraps _GtkMountOperationHandlerSkeletonClass
-//
-// Class structure for #_GtkMountOperationHandlerSkeleton.
-type _MountOperationHandlerSkeletonClass struct {
-	*_MountOperationHandlerSkeletonClass
-}
-
-// _MountOperationHandlerSkeletonClass is the struct that's finalized
-type _MountOperationHandlerSkeletonClass struct {
-	native *C._GtkMountOperationHandlerSkeletonClass
-}
-
-// Unsafe_MountOperationHandlerSkeletonClassFromGlibBorrow is used to convert raw C._GtkMountOperationHandlerSkeletonClass pointers to go. This is used by the bindings internally.
-func Unsafe_MountOperationHandlerSkeletonClassFromGlibBorrow(p unsafe.Pointer) *_MountOperationHandlerSkeletonClass {
-	return &_MountOperationHandlerSkeletonClass{&_MountOperationHandlerSkeletonClass{(*C._GtkMountOperationHandlerSkeletonClass)(p)}}
-}
-
-// Unsafe_MountOperationHandlerSkeletonClassFromGlibNone is used to convert raw C._GtkMountOperationHandlerSkeletonClass pointers to go while taking a reference. This is used by the bindings internally.
-func Unsafe_MountOperationHandlerSkeletonClassFromGlibNone(p unsafe.Pointer) *_MountOperationHandlerSkeletonClass {
-	// FIXME: this has no ref function, what should we do here?
-	wrapped := Unsafe_MountOperationHandlerSkeletonClassFromGlibBorrow(p)
-	runtime.SetFinalizer(
-		wrapped._MountOperationHandlerSkeletonClass,
-		func (intern *_MountOperationHandlerSkeletonClass) {
-			C.free(unsafe.Pointer(intern.native))
-		},
-	)
-	return wrapped
-}
-
-// Unsafe_MountOperationHandlerSkeletonClassFromGlibFull is used to convert raw C._GtkMountOperationHandlerSkeletonClass pointers to go while taking a reference. This is used by the bindings internally.
-func Unsafe_MountOperationHandlerSkeletonClassFromGlibFull(p unsafe.Pointer) *_MountOperationHandlerSkeletonClass {
-	wrapped := Unsafe_MountOperationHandlerSkeletonClassFromGlibBorrow(p)
-	runtime.SetFinalizer(
-		wrapped._MountOperationHandlerSkeletonClass,
-		func (intern *_MountOperationHandlerSkeletonClass) {
-			C.free(unsafe.Pointer(intern.native))
-		},
-	)
-	return wrapped
-}
-
-// Unsafe_MountOperationHandlerSkeletonClassFree unrefs/frees the underlying resource. This is used by the bindings internally.
-// 
-// After this is called, no other method on [_MountOperationHandlerSkeletonClass] is expected to work anymore.
-func Unsafe_MountOperationHandlerSkeletonClassFree(_ *_MountOperationHandlerSkeletonClass) {
-	C.free(unsafe.Pointer(_.native))
-}
-
-// Unsafe_MountOperationHandlerSkeletonClassToGlibNone returns the underlying C pointer. This is used by the bindings internally.
-func Unsafe_MountOperationHandlerSkeletonClassToGlibNone(_ *_MountOperationHandlerSkeletonClass) unsafe.Pointer {
-	return unsafe.Pointer(_.native)
-}
-
-// Unsafe_MountOperationHandlerSkeletonClassToGlibFull returns the underlying C pointer and gives up ownership.
-// This is used by the bindings internally.
-func Unsafe_MountOperationHandlerSkeletonClassToGlibFull(_ *_MountOperationHandlerSkeletonClass) unsafe.Pointer {
-	runtime.SetFinalizer(_._MountOperationHandlerSkeletonClass, nil)
-	_p := unsafe.Pointer(_.native)
-	_.native = nil // _MountOperationHandlerSkeletonClass is invalid from here on
 	return _p
 }

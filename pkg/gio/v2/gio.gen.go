@@ -4631,7 +4631,7 @@ func ContentTypeFromMIMEType(mimeType string) string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 	defer C.free(unsafe.Pointer(cret))
 
 	return goret
@@ -4660,7 +4660,7 @@ func ContentTypeGetDescription(typ string) string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 	defer C.free(unsafe.Pointer(cret))
 
 	return goret
@@ -4693,7 +4693,7 @@ func ContentTypeGetGenericIconName(typ string) string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 	defer C.free(unsafe.Pointer(cret))
 
 	return goret
@@ -4771,7 +4771,7 @@ func ContentTypeGetMIMEType(typ string) string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 	defer C.free(unsafe.Pointer(cret))
 
 	return goret
@@ -4848,7 +4848,7 @@ func ContentTypeGuess(filename string, data []byte) (bool, string) {
 	if carg4 != 0 {
 		resultUncertain = true
 	}
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 	defer C.free(unsafe.Pointer(cret))
 
 	return resultUncertain, goret
@@ -5070,7 +5070,7 @@ func DBusAddressEscapeValue(str string) string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 	defer C.free(unsafe.Pointer(cret))
 
 	return goret
@@ -5112,7 +5112,7 @@ func DBusAddressGetForBusSync(cancellable context.Context, busType BusType) (str
 	var goret  string
 	var _goerr error
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 	defer C.free(unsafe.Pointer(cret))
 	if _cerr != nil {
 		_goerr = glib.UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
@@ -5194,7 +5194,7 @@ func DBusAddressGetStreamFinish(res AsyncResult) (string, IOStream, error) {
 	var _goerr  error
 
 	if carg2 != nil {
-		outGuid = C.GoString((*C.gchar)(unsafe.Pointer(carg2)))
+		outGuid = C.GoString((*C.char)(unsafe.Pointer(carg2)))
 		defer C.free(unsafe.Pointer(carg2))
 	}
 	goret = UnsafeIOStreamFromGlibFull(unsafe.Pointer(cret))
@@ -5250,7 +5250,7 @@ func DBusAddressGetStreamSync(cancellable context.Context, address string) (stri
 	var _goerr  error
 
 	if carg2 != nil {
-		outGuid = C.GoString((*C.gchar)(unsafe.Pointer(carg2)))
+		outGuid = C.GoString((*C.char)(unsafe.Pointer(carg2)))
 		defer C.free(unsafe.Pointer(carg2))
 	}
 	goret = UnsafeIOStreamFromGlibFull(unsafe.Pointer(cret))
@@ -5284,7 +5284,7 @@ func DBusEscapeObjectPath(s string) string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 	defer C.free(unsafe.Pointer(cret))
 
 	return goret
@@ -5329,7 +5329,7 @@ func DBusEscapeObjectPathBytestring(bytes []uint8) string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 	defer C.free(unsafe.Pointer(cret))
 
 	return goret
@@ -5358,7 +5358,7 @@ func DBusGenerateGUID() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 	defer C.free(unsafe.Pointer(cret))
 
 	return goret
@@ -6575,7 +6575,7 @@ func (action *ActionInstance) GetName() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -10203,7 +10203,7 @@ func (object *DBusObjectInstance) GetObjectPath() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -10386,7 +10386,7 @@ func (manager *DBusObjectManagerInstance) GetObjectPath() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -11832,7 +11832,7 @@ func (drive *DriveInstance) GetSortKey() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -12940,7 +12940,7 @@ func (conn *DtlsConnectionInstance) GetCiphersuiteName() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 	defer C.free(unsafe.Pointer(cret))
 
 	return goret
@@ -13016,7 +13016,7 @@ func (conn *DtlsConnectionInstance) GetNegotiatedProtocol() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -18512,7 +18512,7 @@ func (file *FileInstance) LoadBytes(cancellable context.Context) (string, *glib.
 	var _goerr  error
 
 	if carg2 != nil {
-		etagOut = C.GoString((*C.gchar)(unsafe.Pointer(carg2)))
+		etagOut = C.GoString((*C.char)(unsafe.Pointer(carg2)))
 		defer C.free(unsafe.Pointer(carg2))
 	}
 	goret = glib.UnsafeBytesFromGlibFull(unsafe.Pointer(cret))
@@ -18603,7 +18603,7 @@ func (file *FileInstance) LoadBytesFinish(result AsyncResult) (string, *glib.Byt
 	var _goerr  error
 
 	if carg2 != nil {
-		etagOut = C.GoString((*C.gchar)(unsafe.Pointer(carg2)))
+		etagOut = C.GoString((*C.char)(unsafe.Pointer(carg2)))
 		defer C.free(unsafe.Pointer(carg2))
 	}
 	goret = glib.UnsafeBytesFromGlibFull(unsafe.Pointer(cret))
@@ -22693,7 +22693,7 @@ func (icon *IconInstance) ToString() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 	defer C.free(unsafe.Pointer(cret))
 
 	return goret
@@ -24343,7 +24343,7 @@ func (mount *MountInstance) GetSortKey() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -27280,7 +27280,7 @@ func (connectable *SocketConnectableInstance) ToString() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 	defer C.free(unsafe.Pointer(cret))
 
 	return goret
@@ -29013,7 +29013,7 @@ func (volume *VolumeInstance) GetSortKey() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -31117,7 +31117,7 @@ func (application *ApplicationInstance) GetApplicationID() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -31186,7 +31186,7 @@ func (application *ApplicationInstance) GetDBusObjectPath() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -31344,7 +31344,7 @@ func (application *ApplicationInstance) GetResourceBasePath() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -31366,7 +31366,7 @@ func (application *ApplicationInstance) GetVersion() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -32637,7 +32637,7 @@ func (cmdline *ApplicationCommandLineInstance) GetCwd() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -32827,7 +32827,7 @@ func (cmdline *ApplicationCommandLineInstance) Getenv(name string) string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -33444,7 +33444,7 @@ func (credentials *CredentialsInstance) ToString() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 	defer C.free(unsafe.Pointer(cret))
 
 	return goret
@@ -35309,7 +35309,7 @@ func (connection *DBusConnectionInstance) GetGUID() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -35415,7 +35415,7 @@ func (connection *DBusConnectionInstance) GetUniqueName() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -36254,7 +36254,7 @@ func (interface_ *DBusInterfaceSkeletonInstance) GetObjectPath() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -36990,7 +36990,7 @@ func (message *DBusMessageInstance) GetArg0() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -37014,7 +37014,7 @@ func (message *DBusMessageInstance) GetArg0Path() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -37058,7 +37058,7 @@ func (message *DBusMessageInstance) GetDestination() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -37080,7 +37080,7 @@ func (message *DBusMessageInstance) GetErrorName() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -37148,7 +37148,7 @@ func (message *DBusMessageInstance) GetInterface() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -37196,7 +37196,7 @@ func (message *DBusMessageInstance) GetMember() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -37240,7 +37240,7 @@ func (message *DBusMessageInstance) GetPath() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -37284,7 +37284,7 @@ func (message *DBusMessageInstance) GetSender() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -37330,7 +37330,7 @@ func (message *DBusMessageInstance) GetSignature() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -37461,7 +37461,7 @@ func (message *DBusMessageInstance) Print(indent uint) string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 	defer C.free(unsafe.Pointer(cret))
 
 	return goret
@@ -38019,7 +38019,7 @@ func (invocation *DBusMethodInvocationInstance) GetInterfaceName() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -38097,7 +38097,7 @@ func (invocation *DBusMethodInvocationInstance) GetMethodName() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -38119,7 +38119,7 @@ func (invocation *DBusMethodInvocationInstance) GetObjectPath() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -38173,7 +38173,7 @@ func (invocation *DBusMethodInvocationInstance) GetSender() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -38551,7 +38551,7 @@ func (manager *DBusObjectManagerClientInstance) GetName() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -38576,7 +38576,7 @@ func (manager *DBusObjectManagerClientInstance) GetNameOwner() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 	defer C.free(unsafe.Pointer(cret))
 
 	return goret
@@ -39959,7 +39959,7 @@ func (proxy *DBusProxyInstance) GetInterfaceName() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -39985,7 +39985,7 @@ func (proxy *DBusProxyInstance) GetName() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -40010,7 +40010,7 @@ func (proxy *DBusProxyInstance) GetNameOwner() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 	defer C.free(unsafe.Pointer(cret))
 
 	return goret
@@ -40033,7 +40033,7 @@ func (proxy *DBusProxyInstance) GetObjectPath() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -40290,7 +40290,7 @@ func (server *DBusServerInstance) GetClientAddress() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -40334,7 +40334,7 @@ func (server *DBusServerInstance) GetGUID() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -46324,7 +46324,7 @@ func (address *InetAddressInstance) ToString() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 	defer C.free(unsafe.Pointer(cret))
 
 	return goret
@@ -46658,7 +46658,7 @@ func (mask *InetAddressMaskInstance) ToString() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 	defer C.free(unsafe.Pointer(cret))
 
 	return goret
@@ -48691,7 +48691,7 @@ func (iter *MenuAttributeIterInstance) GetName() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -49425,7 +49425,7 @@ func (iter *MenuLinkIterInstance) GetName() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -49466,7 +49466,7 @@ func (iter *MenuLinkIterInstance) GetNext() (string, MenuModel, bool) {
 	var value   MenuModel
 	var goret   bool
 
-	outLink = C.GoString((*C.gchar)(unsafe.Pointer(carg1)))
+	outLink = C.GoString((*C.char)(unsafe.Pointer(carg1)))
 	value = UnsafeMenuModelFromGlibFull(unsafe.Pointer(carg2))
 	if cret != 0 {
 		goret = true
@@ -50908,7 +50908,7 @@ func (addr *NetworkAddressInstance) GetHostname() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -50952,7 +50952,7 @@ func (addr *NetworkAddressInstance) GetScheme() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -51113,7 +51113,7 @@ func (srv *NetworkServiceInstance) GetDomain() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -51135,7 +51135,7 @@ func (srv *NetworkServiceInstance) GetProtocol() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -51158,7 +51158,7 @@ func (srv *NetworkServiceInstance) GetScheme() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -51180,7 +51180,7 @@ func (srv *NetworkServiceInstance) GetService() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -54723,7 +54723,7 @@ func (resolver *ResolverInstance) LookupByAddress(cancellable context.Context, a
 	var goret  string
 	var _goerr error
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 	defer C.free(unsafe.Pointer(cret))
 	if _cerr != nil {
 		_goerr = glib.UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
@@ -54800,7 +54800,7 @@ func (resolver *ResolverInstance) LookupByAddressFinish(result AsyncResult) (str
 	var goret  string
 	var _goerr error
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 	defer C.free(unsafe.Pointer(cret))
 	if _cerr != nil {
 		_goerr = glib.UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
@@ -56592,7 +56592,7 @@ func (settings *SettingsInstance) GetString(key string) string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 	defer C.free(unsafe.Pointer(cret))
 
 	return goret
@@ -67666,7 +67666,7 @@ func (task *TaskInstance) GetName() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -68866,7 +68866,7 @@ func (self *TestDBusInstance) GetBusAddress() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -69793,7 +69793,7 @@ func (cert *TlsCertificateInstance) GetIssuerName() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 	defer C.free(unsafe.Pointer(cret))
 
 	return goret
@@ -69860,7 +69860,7 @@ func (cert *TlsCertificateInstance) GetSubjectName() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 	defer C.free(unsafe.Pointer(cret))
 
 	return goret
@@ -70449,7 +70449,7 @@ func (conn *TlsConnectionInstance) GetCiphersuiteName() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 	defer C.free(unsafe.Pointer(cret))
 
 	return goret
@@ -70525,7 +70525,7 @@ func (conn *TlsConnectionInstance) GetNegotiatedProtocol() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -71399,7 +71399,7 @@ func (self *TlsDatabaseInstance) CreateCertificateHandle(certificate TlsCertific
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 	defer C.free(unsafe.Pointer(cret))
 
 	return goret
@@ -72803,7 +72803,7 @@ func (password *TlsPasswordInstance) GetDescription() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -72883,7 +72883,7 @@ func (password *TlsPasswordInstance) GetWarning() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -76726,7 +76726,7 @@ func (proxy *ProxyAddressInstance) GetDestinationHostname() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -76773,7 +76773,7 @@ func (proxy *ProxyAddressInstance) GetDestinationProtocol() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -76795,7 +76795,7 @@ func (proxy *ProxyAddressInstance) GetPassword() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -76817,7 +76817,7 @@ func (proxy *ProxyAddressInstance) GetProtocol() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -76839,7 +76839,7 @@ func (proxy *ProxyAddressInstance) GetURI() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -76861,7 +76861,7 @@ func (proxy *ProxyAddressInstance) GetUsername() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -88760,7 +88760,7 @@ func (schema *SettingsSchema) GetID() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -88824,7 +88824,7 @@ func (schema *SettingsSchema) GetPath() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -89029,7 +89029,7 @@ func (key *SettingsSchemaKey) GetDescription() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -89051,7 +89051,7 @@ func (key *SettingsSchemaKey) GetName() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -89085,7 +89085,7 @@ func (key *SettingsSchemaKey) GetSummary() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -90220,7 +90220,7 @@ func (target *SrvTarget) GetHostname() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }

@@ -61,8 +61,8 @@ func _gotk4_gtk3_BuilderConnectFunc(carg1 *C.GtkBuilder, carg2 *C.GObject, carg3
 
 	builder = UnsafeBuilderFromGlibNone(unsafe.Pointer(carg1))
 	object = gobject.UnsafeObjectFromGlibNone(unsafe.Pointer(carg2))
-	signalName = C.GoString((*C.gchar)(unsafe.Pointer(carg3)))
-	handlerName = C.GoString((*C.gchar)(unsafe.Pointer(carg4)))
+	signalName = C.GoString((*C.char)(unsafe.Pointer(carg3)))
+	handlerName = C.GoString((*C.char)(unsafe.Pointer(carg4)))
 	if carg5 != nil {
 		connectObject = gobject.UnsafeObjectFromGlibNone(unsafe.Pointer(carg5))
 	}
@@ -223,7 +223,7 @@ func _gotk4_gtk3_ClipboardTextReceivedFunc(carg1 *C.GtkClipboard, carg2 *C.gchar
 
 	clipboard = UnsafeClipboardFromGlibNone(unsafe.Pointer(carg1))
 	if carg2 != nil {
-		text = C.GoString((*C.gchar)(unsafe.Pointer(carg2)))
+		text = C.GoString((*C.char)(unsafe.Pointer(carg2)))
 	}
 
 	fn(clipboard, text)
@@ -268,7 +268,7 @@ func _gotk4_gtk3_EntryCompletionMatchFunc(carg1 *C.GtkEntryCompletion, carg2 *C.
 	var goret      bool            // return
 
 	completion = UnsafeEntryCompletionFromGlibNone(unsafe.Pointer(carg1))
-	key = C.GoString((*C.gchar)(unsafe.Pointer(carg2)))
+	key = C.GoString((*C.char)(unsafe.Pointer(carg2)))
 	iter = UnsafeTreeIterFromGlibNone(unsafe.Pointer(carg3))
 
 	goret = fn(completion, key, iter)
@@ -435,8 +435,8 @@ func _gotk4_gtk3_PrintSettingsFunc(carg1 *C.gchar, carg2 *C.gchar, carg3 C.gpoin
 	var key   string // in, none, string, casted *C.gchar
 	var value string // in, none, string, casted *C.gchar
 
-	key = C.GoString((*C.gchar)(unsafe.Pointer(carg1)))
-	value = C.GoString((*C.gchar)(unsafe.Pointer(carg2)))
+	key = C.GoString((*C.char)(unsafe.Pointer(carg1)))
+	value = C.GoString((*C.char)(unsafe.Pointer(carg2)))
 
 	fn(key, value)
 }
@@ -630,29 +630,6 @@ func _gotk4_gtk3_TickCallback(carg1 *C.GtkWidget, carg2 *C.GdkFrameClock, carg3 
 	if goret {
 		cret = C.TRUE
 	}
-
-	return cret
-}
-
-//export _gotk4_gtk3_TranslateFunc
-func _gotk4_gtk3_TranslateFunc(carg1 *C.gchar, carg2 C.gpointer) (cret *C.gchar) {
-	var fn TranslateFunc
-	{
-		v := gbox.Get(uintptr(carg2))
-		if v == nil {
-			panic(`callback not found`)
-		}
-		fn = v.(TranslateFunc)
-	}
-
-	var path  string // in, none, string, casted *C.gchar
-	var goret string // return, full, string, casted *C.gchar
-
-	path = C.GoString((*C.gchar)(unsafe.Pointer(carg1)))
-
-	goret = fn(path)
-
-	cret = (*C.gchar)(unsafe.Pointer(C.CString(goret)))
 
 	return cret
 }
@@ -892,7 +869,7 @@ func _gotk4_gtk3_TreeViewSearchEqualFunc(carg1 *C.GtkTreeModel, carg2 C.gint, ca
 
 	model = UnsafeTreeModelFromGlibNone(unsafe.Pointer(carg1))
 	column = int(carg2)
-	key = C.GoString((*C.gchar)(unsafe.Pointer(carg3)))
+	key = C.GoString((*C.char)(unsafe.Pointer(carg3)))
 	iter = UnsafeTreeIterFromGlibNone(unsafe.Pointer(carg4))
 
 	goret = fn(model, column, key, iter)

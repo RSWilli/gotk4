@@ -161,9 +161,9 @@ func _gotk4_glib2_LogFunc(carg1 *C.gchar, carg2 C.GLogLevelFlags, carg3 *C.gchar
 	var logLevel  LogLevelFlags // in, none, casted
 	var message   string        // in, none, string, casted *C.gchar
 
-	logDomain = C.GoString((*C.gchar)(unsafe.Pointer(carg1)))
+	logDomain = C.GoString((*C.char)(unsafe.Pointer(carg1)))
 	logLevel = LogLevelFlags(carg2)
-	message = C.GoString((*C.gchar)(unsafe.Pointer(carg3)))
+	message = C.GoString((*C.char)(unsafe.Pointer(carg3)))
 
 	fn(logDomain, logLevel, message)
 }

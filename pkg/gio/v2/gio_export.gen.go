@@ -49,7 +49,7 @@ func _gotk4_gio2_BusAcquiredCallback(carg1 *C.GDBusConnection, carg2 *C.gchar, c
 	var name       string         // in, none, string, casted *C.gchar
 
 	connection = UnsafeDBusConnectionFromGlibNone(unsafe.Pointer(carg1))
-	name = C.GoString((*C.gchar)(unsafe.Pointer(carg2)))
+	name = C.GoString((*C.char)(unsafe.Pointer(carg2)))
 
 	fn(connection, name)
 }
@@ -69,7 +69,7 @@ func _gotk4_gio2_BusNameAcquiredCallback(carg1 *C.GDBusConnection, carg2 *C.gcha
 	var name       string         // in, none, string, casted *C.gchar
 
 	connection = UnsafeDBusConnectionFromGlibNone(unsafe.Pointer(carg1))
-	name = C.GoString((*C.gchar)(unsafe.Pointer(carg2)))
+	name = C.GoString((*C.char)(unsafe.Pointer(carg2)))
 
 	fn(connection, name)
 }
@@ -90,8 +90,8 @@ func _gotk4_gio2_BusNameAppearedCallback(carg1 *C.GDBusConnection, carg2 *C.gcha
 	var nameOwner  string         // in, none, string, casted *C.gchar
 
 	connection = UnsafeDBusConnectionFromGlibNone(unsafe.Pointer(carg1))
-	name = C.GoString((*C.gchar)(unsafe.Pointer(carg2)))
-	nameOwner = C.GoString((*C.gchar)(unsafe.Pointer(carg3)))
+	name = C.GoString((*C.char)(unsafe.Pointer(carg2)))
+	nameOwner = C.GoString((*C.char)(unsafe.Pointer(carg3)))
 
 	fn(connection, name, nameOwner)
 }
@@ -111,7 +111,7 @@ func _gotk4_gio2_BusNameLostCallback(carg1 *C.GDBusConnection, carg2 *C.gchar, c
 	var name       string         // in, none, string, casted *C.gchar
 
 	connection = UnsafeDBusConnectionFromGlibNone(unsafe.Pointer(carg1))
-	name = C.GoString((*C.gchar)(unsafe.Pointer(carg2)))
+	name = C.GoString((*C.char)(unsafe.Pointer(carg2)))
 
 	fn(connection, name)
 }
@@ -131,7 +131,7 @@ func _gotk4_gio2_BusNameVanishedCallback(carg1 *C.GDBusConnection, carg2 *C.gcha
 	var name       string         // in, none, string, casted *C.gchar
 
 	connection = UnsafeDBusConnectionFromGlibNone(unsafe.Pointer(carg1))
-	name = C.GoString((*C.gchar)(unsafe.Pointer(carg2)))
+	name = C.GoString((*C.char)(unsafe.Pointer(carg2)))
 
 	fn(connection, name)
 }
@@ -185,10 +185,10 @@ func _gotk4_gio2_DBusSubtreeDispatchFunc(carg1 *C.GDBusConnection, carg2 *C.gcha
 	var goret         *DBusInterfaceVTable // return, none, converted
 
 	connection = UnsafeDBusConnectionFromGlibNone(unsafe.Pointer(carg1))
-	sender = C.GoString((*C.gchar)(unsafe.Pointer(carg2)))
-	objectPath = C.GoString((*C.gchar)(unsafe.Pointer(carg3)))
-	interfaceName = C.GoString((*C.gchar)(unsafe.Pointer(carg4)))
-	node = C.GoString((*C.gchar)(unsafe.Pointer(carg5)))
+	sender = C.GoString((*C.char)(unsafe.Pointer(carg2)))
+	objectPath = C.GoString((*C.char)(unsafe.Pointer(carg3)))
+	interfaceName = C.GoString((*C.char)(unsafe.Pointer(carg4)))
+	node = C.GoString((*C.char)(unsafe.Pointer(carg5)))
 	_ = outUserData
 	_ = carg6
 	panic("unimplemented conversion of *unsafe.Pointer (gpointer*)")
@@ -217,8 +217,8 @@ func _gotk4_gio2_DBusSubtreeEnumerateFunc(carg1 *C.GDBusConnection, carg2 *C.gch
 	var goret      []string       // return, transfer: full, C Pointers: 2, Name: array[utf8], scope: , array (inner: *typesystem.StringPrimitive, zero-terminated)
 
 	connection = UnsafeDBusConnectionFromGlibNone(unsafe.Pointer(carg1))
-	sender = C.GoString((*C.gchar)(unsafe.Pointer(carg2)))
-	objectPath = C.GoString((*C.gchar)(unsafe.Pointer(carg3)))
+	sender = C.GoString((*C.char)(unsafe.Pointer(carg2)))
+	objectPath = C.GoString((*C.char)(unsafe.Pointer(carg3)))
 
 	goret = fn(connection, sender, objectPath)
 
@@ -247,9 +247,9 @@ func _gotk4_gio2_DBusSubtreeIntrospectFunc(carg1 *C.GDBusConnection, carg2 *C.gc
 	var goret      []*DBusInterfaceInfo // return, transfer: full, C Pointers: 2, Name: array[DBusInterfaceInfo], scope: , array (inner: *typesystem.Record, zero-terminated)
 
 	connection = UnsafeDBusConnectionFromGlibNone(unsafe.Pointer(carg1))
-	sender = C.GoString((*C.gchar)(unsafe.Pointer(carg2)))
-	objectPath = C.GoString((*C.gchar)(unsafe.Pointer(carg3)))
-	node = C.GoString((*C.gchar)(unsafe.Pointer(carg4)))
+	sender = C.GoString((*C.char)(unsafe.Pointer(carg2)))
+	objectPath = C.GoString((*C.char)(unsafe.Pointer(carg3)))
+	node = C.GoString((*C.char)(unsafe.Pointer(carg4)))
 
 	goret = fn(connection, sender, objectPath, node)
 

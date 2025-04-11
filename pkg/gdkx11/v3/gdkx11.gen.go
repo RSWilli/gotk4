@@ -881,7 +881,7 @@ func (display *X11DisplayInstance) GetStartupNotificationID() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }

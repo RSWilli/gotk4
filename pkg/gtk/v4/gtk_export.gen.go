@@ -9,7 +9,6 @@ import (
 	"github.com/diamondburned/gotk4/pkg/gdk/v4"
 	"github.com/diamondburned/gotk4/pkg/gio/v2"
 	"github.com/diamondburned/gotk4/pkg/glib/v2"
-	"github.com/diamondburned/gotk4/pkg/gobject/v2"
 	"github.com/diamondburned/gotk4/pkg/pango"
 )
 
@@ -39,84 +38,6 @@ func _gotk4_gtk4_AssistantPageFunc(carg1 C.int, carg2 C.gpointer) (cret C.int) {
 	return cret
 }
 
-//export _gotk4_gtk4_CellAllocCallback
-func _gotk4_gtk4_CellAllocCallback(carg1 *C.GtkCellRenderer, carg2 *C.GdkRectangle, carg3 *C.GdkRectangle, carg4 C.gpointer) (cret C.gboolean) {
-	var fn CellAllocCallback
-	{
-		v := gbox.Get(uintptr(carg4))
-		if v == nil {
-			panic(`callback not found`)
-		}
-		fn = v.(CellAllocCallback)
-	}
-
-	var renderer       CellRenderer   // in, none, converted
-	var cellArea       *gdk.Rectangle // in, none, converted
-	var cellBackground *gdk.Rectangle // in, none, converted
-	var goret          bool           // return
-
-	renderer = UnsafeCellRendererFromGlibNone(unsafe.Pointer(carg1))
-	cellArea = gdk.UnsafeRectangleFromGlibNone(unsafe.Pointer(carg2))
-	cellBackground = gdk.UnsafeRectangleFromGlibNone(unsafe.Pointer(carg3))
-
-	goret = fn(renderer, cellArea, cellBackground)
-
-	if goret {
-		cret = C.TRUE
-	}
-
-	return cret
-}
-
-//export _gotk4_gtk4_CellCallback
-func _gotk4_gtk4_CellCallback(carg1 *C.GtkCellRenderer, carg2 C.gpointer) (cret C.gboolean) {
-	var fn CellCallback
-	{
-		v := gbox.Get(uintptr(carg2))
-		if v == nil {
-			panic(`callback not found`)
-		}
-		fn = v.(CellCallback)
-	}
-
-	var renderer CellRenderer // in, none, converted
-	var goret    bool         // return
-
-	renderer = UnsafeCellRendererFromGlibNone(unsafe.Pointer(carg1))
-
-	goret = fn(renderer)
-
-	if goret {
-		cret = C.TRUE
-	}
-
-	return cret
-}
-
-//export _gotk4_gtk4_CellLayoutDataFunc
-func _gotk4_gtk4_CellLayoutDataFunc(carg1 *C.GtkCellLayout, carg2 *C.GtkCellRenderer, carg3 *C.GtkTreeModel, carg4 *C.GtkTreeIter, carg5 C.gpointer) {
-	var fn CellLayoutDataFunc
-	{
-		v := gbox.Get(uintptr(carg5))
-		if v == nil {
-			panic(`callback not found`)
-		}
-		fn = v.(CellLayoutDataFunc)
-	}
-
-	var cellLayout CellLayout   // in, none, converted
-	var cell       CellRenderer // in, none, converted
-	var treeModel  TreeModel    // in, none, converted
-	var iter       *TreeIter    // in, none, converted
-
-	cellLayout = UnsafeCellLayoutFromGlibNone(unsafe.Pointer(carg1))
-	cell = UnsafeCellRendererFromGlibNone(unsafe.Pointer(carg2))
-	treeModel = UnsafeTreeModelFromGlibNone(unsafe.Pointer(carg3))
-	iter = UnsafeTreeIterFromGlibNone(unsafe.Pointer(carg4))
-
-	fn(cellLayout, cell, treeModel, iter)
-}
-
 //export _gotk4_gtk4_CustomFilterFunc
 func _gotk4_gtk4_CustomFilterFunc(carg1 C.gpointer, carg2 C.gpointer) (cret C.gboolean) {
 	var fn CustomFilterFunc
@@ -134,35 +55,6 @@ func _gotk4_gtk4_CustomFilterFunc(carg1 C.gpointer, carg2 C.gpointer) (cret C.gb
 	item = unsafe.Pointer(carg1)
 
 	goret = fn(item)
-
-	if goret {
-		cret = C.TRUE
-	}
-
-	return cret
-}
-
-//export _gotk4_gtk4_EntryCompletionMatchFunc
-func _gotk4_gtk4_EntryCompletionMatchFunc(carg1 *C.GtkEntryCompletion, carg2 *C.char, carg3 *C.GtkTreeIter, carg4 C.gpointer) (cret C.gboolean) {
-	var fn EntryCompletionMatchFunc
-	{
-		v := gbox.Get(uintptr(carg4))
-		if v == nil {
-			panic(`callback not found`)
-		}
-		fn = v.(EntryCompletionMatchFunc)
-	}
-
-	var completion EntryCompletion // in, none, converted
-	var key        string          // in, none, string, casted *C.gchar
-	var iter       *TreeIter       // in, none, converted
-	var goret      bool            // return
-
-	completion = UnsafeEntryCompletionFromGlibNone(unsafe.Pointer(carg1))
-	key = C.GoString((*C.char)(unsafe.Pointer(carg2)))
-	iter = UnsafeTreeIterFromGlibNone(unsafe.Pointer(carg3))
-
-	goret = fn(completion, key, iter)
 
 	if goret {
 		cret = C.TRUE
@@ -458,57 +350,6 @@ func _gotk4_gtk4_TickCallback(carg1 *C.GtkWidget, carg2 *C.GdkFrameClock, carg3 
 	return cret
 }
 
-//export _gotk4_gtk4_TreeCellDataFunc
-func _gotk4_gtk4_TreeCellDataFunc(carg1 *C.GtkTreeViewColumn, carg2 *C.GtkCellRenderer, carg3 *C.GtkTreeModel, carg4 *C.GtkTreeIter, carg5 C.gpointer) {
-	var fn TreeCellDataFunc
-	{
-		v := gbox.Get(uintptr(carg5))
-		if v == nil {
-			panic(`callback not found`)
-		}
-		fn = v.(TreeCellDataFunc)
-	}
-
-	var treeColumn TreeViewColumn // in, none, converted
-	var cell       CellRenderer   // in, none, converted
-	var treeModel  TreeModel      // in, none, converted
-	var iter       *TreeIter      // in, none, converted
-
-	treeColumn = UnsafeTreeViewColumnFromGlibNone(unsafe.Pointer(carg1))
-	cell = UnsafeCellRendererFromGlibNone(unsafe.Pointer(carg2))
-	treeModel = UnsafeTreeModelFromGlibNone(unsafe.Pointer(carg3))
-	iter = UnsafeTreeIterFromGlibNone(unsafe.Pointer(carg4))
-
-	fn(treeColumn, cell, treeModel, iter)
-}
-
-//export _gotk4_gtk4_TreeIterCompareFunc
-func _gotk4_gtk4_TreeIterCompareFunc(carg1 *C.GtkTreeModel, carg2 *C.GtkTreeIter, carg3 *C.GtkTreeIter, carg4 C.gpointer) (cret C.int) {
-	var fn TreeIterCompareFunc
-	{
-		v := gbox.Get(uintptr(carg4))
-		if v == nil {
-			panic(`callback not found`)
-		}
-		fn = v.(TreeIterCompareFunc)
-	}
-
-	var model TreeModel // in, none, converted
-	var a     *TreeIter // in, none, converted
-	var b     *TreeIter // in, none, converted
-	var goret int       // return, none, casted, casted C.gint
-
-	model = UnsafeTreeModelFromGlibNone(unsafe.Pointer(carg1))
-	a = UnsafeTreeIterFromGlibNone(unsafe.Pointer(carg2))
-	b = UnsafeTreeIterFromGlibNone(unsafe.Pointer(carg3))
-
-	goret = fn(model, a, b)
-
-	cret = C.int(goret)
-
-	return cret
-}
-
 //export _gotk4_gtk4_TreeListModelCreateModelFunc
 func _gotk4_gtk4_TreeListModelCreateModelFunc(carg1 C.gpointer, carg2 C.gpointer) (cret *C.GListModel) {
 	var fn TreeListModelCreateModelFunc
@@ -528,202 +369,6 @@ func _gotk4_gtk4_TreeListModelCreateModelFunc(carg1 C.gpointer, carg2 C.gpointer
 	goret = fn(item)
 
 	cret = (*C.GListModel)(gio.UnsafeListModelToGlibFull(goret))
-
-	return cret
-}
-
-//export _gotk4_gtk4_TreeModelFilterModifyFunc
-func _gotk4_gtk4_TreeModelFilterModifyFunc(carg1 *C.GtkTreeModel, carg2 *C.GtkTreeIter, carg3 *C.GValue, carg4 C.int, carg5 C.gpointer) {
-	var fn TreeModelFilterModifyFunc
-	{
-		v := gbox.Get(uintptr(carg5))
-		if v == nil {
-			panic(`callback not found`)
-		}
-		fn = v.(TreeModelFilterModifyFunc)
-	}
-
-	var model  TreeModel     // in, none, converted
-	var iter   *TreeIter     // in, none, converted
-	var column int           // in, none, casted, casted C.gint
-	var value  gobject.Value // out, transfer: none, C Pointers: 0, Name: Value, caller-allocates
-
-	model = UnsafeTreeModelFromGlibNone(unsafe.Pointer(carg1))
-	iter = UnsafeTreeIterFromGlibNone(unsafe.Pointer(carg2))
-	column = int(carg4)
-
-	value = fn(model, iter, column)
-
-	_ = value
-	_ = carg3
-	panic("unimplemented conversion of gobject.Value (GValue)")
-}
-
-//export _gotk4_gtk4_TreeModelFilterVisibleFunc
-func _gotk4_gtk4_TreeModelFilterVisibleFunc(carg1 *C.GtkTreeModel, carg2 *C.GtkTreeIter, carg3 C.gpointer) (cret C.gboolean) {
-	var fn TreeModelFilterVisibleFunc
-	{
-		v := gbox.Get(uintptr(carg3))
-		if v == nil {
-			panic(`callback not found`)
-		}
-		fn = v.(TreeModelFilterVisibleFunc)
-	}
-
-	var model TreeModel // in, none, converted
-	var iter  *TreeIter // in, none, converted
-	var goret bool      // return
-
-	model = UnsafeTreeModelFromGlibNone(unsafe.Pointer(carg1))
-	iter = UnsafeTreeIterFromGlibNone(unsafe.Pointer(carg2))
-
-	goret = fn(model, iter)
-
-	if goret {
-		cret = C.TRUE
-	}
-
-	return cret
-}
-
-//export _gotk4_gtk4_TreeModelForEachFunc
-func _gotk4_gtk4_TreeModelForEachFunc(carg1 *C.GtkTreeModel, carg2 *C.GtkTreePath, carg3 *C.GtkTreeIter, carg4 C.gpointer) (cret C.gboolean) {
-	var fn TreeModelForEachFunc
-	{
-		v := gbox.Get(uintptr(carg4))
-		if v == nil {
-			panic(`callback not found`)
-		}
-		fn = v.(TreeModelForEachFunc)
-	}
-
-	var model TreeModel // in, none, converted
-	var path  *TreePath // in, none, converted
-	var iter  *TreeIter // in, none, converted
-	var goret bool      // return
-
-	model = UnsafeTreeModelFromGlibNone(unsafe.Pointer(carg1))
-	path = UnsafeTreePathFromGlibNone(unsafe.Pointer(carg2))
-	iter = UnsafeTreeIterFromGlibNone(unsafe.Pointer(carg3))
-
-	goret = fn(model, path, iter)
-
-	if goret {
-		cret = C.TRUE
-	}
-
-	return cret
-}
-
-//export _gotk4_gtk4_TreeSelectionForEachFunc
-func _gotk4_gtk4_TreeSelectionForEachFunc(carg1 *C.GtkTreeModel, carg2 *C.GtkTreePath, carg3 *C.GtkTreeIter, carg4 C.gpointer) {
-	var fn TreeSelectionForEachFunc
-	{
-		v := gbox.Get(uintptr(carg4))
-		if v == nil {
-			panic(`callback not found`)
-		}
-		fn = v.(TreeSelectionForEachFunc)
-	}
-
-	var model TreeModel // in, none, converted
-	var path  *TreePath // in, none, converted
-	var iter  *TreeIter // in, none, converted
-
-	model = UnsafeTreeModelFromGlibNone(unsafe.Pointer(carg1))
-	path = UnsafeTreePathFromGlibNone(unsafe.Pointer(carg2))
-	iter = UnsafeTreeIterFromGlibNone(unsafe.Pointer(carg3))
-
-	fn(model, path, iter)
-}
-
-//export _gotk4_gtk4_TreeSelectionFunc
-func _gotk4_gtk4_TreeSelectionFunc(carg1 *C.GtkTreeSelection, carg2 *C.GtkTreeModel, carg3 *C.GtkTreePath, carg4 C.gboolean, carg5 C.gpointer) (cret C.gboolean) {
-	var fn TreeSelectionFunc
-	{
-		v := gbox.Get(uintptr(carg5))
-		if v == nil {
-			panic(`callback not found`)
-		}
-		fn = v.(TreeSelectionFunc)
-	}
-
-	var selection             TreeSelection // in, none, converted
-	var model                 TreeModel     // in, none, converted
-	var path                  *TreePath     // in, none, converted
-	var pathCurrentlySelected bool          // in
-	var goret                 bool          // return
-
-	selection = UnsafeTreeSelectionFromGlibNone(unsafe.Pointer(carg1))
-	model = UnsafeTreeModelFromGlibNone(unsafe.Pointer(carg2))
-	path = UnsafeTreePathFromGlibNone(unsafe.Pointer(carg3))
-	if carg4 != 0 {
-		pathCurrentlySelected = true
-	}
-
-	goret = fn(selection, model, path, pathCurrentlySelected)
-
-	if goret {
-		cret = C.TRUE
-	}
-
-	return cret
-}
-
-//export _gotk4_gtk4_TreeViewRowSeparatorFunc
-func _gotk4_gtk4_TreeViewRowSeparatorFunc(carg1 *C.GtkTreeModel, carg2 *C.GtkTreeIter, carg3 C.gpointer) (cret C.gboolean) {
-	var fn TreeViewRowSeparatorFunc
-	{
-		v := gbox.Get(uintptr(carg3))
-		if v == nil {
-			panic(`callback not found`)
-		}
-		fn = v.(TreeViewRowSeparatorFunc)
-	}
-
-	var model TreeModel // in, none, converted
-	var iter  *TreeIter // in, none, converted
-	var goret bool      // return
-
-	model = UnsafeTreeModelFromGlibNone(unsafe.Pointer(carg1))
-	iter = UnsafeTreeIterFromGlibNone(unsafe.Pointer(carg2))
-
-	goret = fn(model, iter)
-
-	if goret {
-		cret = C.TRUE
-	}
-
-	return cret
-}
-
-//export _gotk4_gtk4_TreeViewSearchEqualFunc
-func _gotk4_gtk4_TreeViewSearchEqualFunc(carg1 *C.GtkTreeModel, carg2 C.int, carg3 *C.char, carg4 *C.GtkTreeIter, carg5 C.gpointer) (cret C.gboolean) {
-	var fn TreeViewSearchEqualFunc
-	{
-		v := gbox.Get(uintptr(carg5))
-		if v == nil {
-			panic(`callback not found`)
-		}
-		fn = v.(TreeViewSearchEqualFunc)
-	}
-
-	var model  TreeModel // in, none, converted
-	var column int       // in, none, casted, casted C.gint
-	var key    string    // in, none, string, casted *C.gchar
-	var iter   *TreeIter // in, none, converted
-	var goret  bool      // return
-
-	model = UnsafeTreeModelFromGlibNone(unsafe.Pointer(carg1))
-	column = int(carg2)
-	key = C.GoString((*C.char)(unsafe.Pointer(carg3)))
-	iter = UnsafeTreeIterFromGlibNone(unsafe.Pointer(carg4))
-
-	goret = fn(model, column, key, iter)
-
-	if goret {
-		cret = C.TRUE
-	}
 
 	return cret
 }
@@ -796,26 +441,6 @@ func _gotk4_gtk4_FlowBoxSortFunc(carg1 *C.GtkFlowBoxChild, carg2 *C.GtkFlowBoxCh
 	cret = C.int(goret)
 
 	return cret
-}
-
-//export _gotk4_gtk4_IconViewForEachFunc
-func _gotk4_gtk4_IconViewForEachFunc(carg1 *C.GtkIconView, carg2 *C.GtkTreePath, carg3 C.gpointer) {
-	var fn IconViewForEachFunc
-	{
-		v := gbox.Get(uintptr(carg3))
-		if v == nil {
-			panic(`callback not found`)
-		}
-		fn = v.(IconViewForEachFunc)
-	}
-
-	var iconView IconView  // in, none, converted
-	var path     *TreePath // in, none, converted
-
-	iconView = UnsafeIconViewFromGlibNone(unsafe.Pointer(carg1))
-	path = UnsafeTreePathFromGlibNone(unsafe.Pointer(carg2))
-
-	fn(iconView, path)
 }
 
 //export _gotk4_gtk4_ListBoxFilterFunc
@@ -951,56 +576,5 @@ func _gotk4_gtk4_ScaleFormatValueFunc(carg1 *C.GtkScale, carg2 C.double, carg3 C
 	cret = (*C.char)(unsafe.Pointer(C.CString(goret)))
 
 	return cret
-}
-
-//export _gotk4_gtk4_TreeViewColumnDropFunc
-func _gotk4_gtk4_TreeViewColumnDropFunc(carg1 *C.GtkTreeView, carg2 *C.GtkTreeViewColumn, carg3 *C.GtkTreeViewColumn, carg4 *C.GtkTreeViewColumn, carg5 C.gpointer) (cret C.gboolean) {
-	var fn TreeViewColumnDropFunc
-	{
-		v := gbox.Get(uintptr(carg5))
-		if v == nil {
-			panic(`callback not found`)
-		}
-		fn = v.(TreeViewColumnDropFunc)
-	}
-
-	var treeView   TreeView       // in, none, converted
-	var column     TreeViewColumn // in, none, converted
-	var prevColumn TreeViewColumn // in, none, converted
-	var nextColumn TreeViewColumn // in, none, converted
-	var goret      bool           // return
-
-	treeView = UnsafeTreeViewFromGlibNone(unsafe.Pointer(carg1))
-	column = UnsafeTreeViewColumnFromGlibNone(unsafe.Pointer(carg2))
-	prevColumn = UnsafeTreeViewColumnFromGlibNone(unsafe.Pointer(carg3))
-	nextColumn = UnsafeTreeViewColumnFromGlibNone(unsafe.Pointer(carg4))
-
-	goret = fn(treeView, column, prevColumn, nextColumn)
-
-	if goret {
-		cret = C.TRUE
-	}
-
-	return cret
-}
-
-//export _gotk4_gtk4_TreeViewMappingFunc
-func _gotk4_gtk4_TreeViewMappingFunc(carg1 *C.GtkTreeView, carg2 *C.GtkTreePath, carg3 C.gpointer) {
-	var fn TreeViewMappingFunc
-	{
-		v := gbox.Get(uintptr(carg3))
-		if v == nil {
-			panic(`callback not found`)
-		}
-		fn = v.(TreeViewMappingFunc)
-	}
-
-	var treeView TreeView  // in, none, converted
-	var path     *TreePath // in, none, converted
-
-	treeView = UnsafeTreeViewFromGlibNone(unsafe.Pointer(carg1))
-	path = UnsafeTreePathFromGlibNone(unsafe.Pointer(carg2))
-
-	fn(treeView, path)
 }
 
