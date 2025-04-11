@@ -1,11 +1,20 @@
 package gtk
 
+import (
+	"runtime"
+)
+
 // #cgo pkg-config: gtk+-3.0
 // #cgo CFLAGS: -Wno-deprecated-declarations
 // #include <gtk/gtk-a11y.h>
 // #include <gtk/gtk.h>
 // #include <gtk/gtkx.h>
 import "C"
+
+func init() {
+	// lock main to main thread
+	runtime.LockOSThread()
+}
 
 // Init binds to the gtk_init() function. Argument parsing is not
 // supported.
