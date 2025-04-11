@@ -242,8 +242,8 @@ var Main = genmain.Data{
 						},
 						BaseConversions: typesystem.BaseConversions{
 							FromGlibBorrowFunction: "ValueFromNative",
-							FromGlibFullFunction:   "", // TODO
-							FromGlibNoneFunction:   "", // TODO
+							FromGlibFullFunction:   "ValueFromNativeOwned", // TODO
+							FromGlibNoneFunction:   "",                     // TODO
 							ToGlibNoneFunction:     "UnsafeValueToGlibNone",
 							ToGlibFullFunction:     "", // TODO
 						},
