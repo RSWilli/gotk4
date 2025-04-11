@@ -8,7 +8,6 @@ import (
 	"github.com/diamondburned/gotk4/pkg/core/gbox"
 	"github.com/diamondburned/gotk4/pkg/gdk/v4"
 	"github.com/diamondburned/gotk4/pkg/gio/v2"
-	"github.com/diamondburned/gotk4/pkg/glib/v2"
 	"github.com/diamondburned/gotk4/pkg/pango"
 )
 
@@ -189,71 +188,6 @@ func _gotk4_gtk4_PageSetupDoneFunc(carg1 *C.GtkPageSetup, carg2 C.gpointer) {
 	pageSetup = UnsafePageSetupFromGlibNone(unsafe.Pointer(carg1))
 
 	fn(pageSetup)
-}
-
-//export _gotk4_gtk4_PrintJobCompleteFunc
-func _gotk4_gtk4_PrintJobCompleteFunc(carg1 *C.GtkPrintJob, carg2 C.gpointer, carg3 *C.GError) {
-	var fn PrintJobCompleteFunc
-	{
-		v := gbox.Get(uintptr(carg2))
-		if v == nil {
-			panic(`callback not found`)
-		}
-		fn = v.(PrintJobCompleteFunc)
-	}
-
-	var printJob PrintJob // in, none, converted
-	var err      error    // in, none, converted
-
-	printJob = UnsafePrintJobFromGlibNone(unsafe.Pointer(carg1))
-	err = glib.UnsafeErrorFromGlibNone(unsafe.Pointer(carg3))
-
-	fn(printJob, err)
-}
-
-//export _gotk4_gtk4_PrintSettingsFunc
-func _gotk4_gtk4_PrintSettingsFunc(carg1 *C.char, carg2 *C.char, carg3 C.gpointer) {
-	var fn PrintSettingsFunc
-	{
-		v := gbox.Get(uintptr(carg3))
-		if v == nil {
-			panic(`callback not found`)
-		}
-		fn = v.(PrintSettingsFunc)
-	}
-
-	var key   string // in, none, string, casted *C.gchar
-	var value string // in, none, string, casted *C.gchar
-
-	key = C.GoString((*C.char)(unsafe.Pointer(carg1)))
-	value = C.GoString((*C.char)(unsafe.Pointer(carg2)))
-
-	fn(key, value)
-}
-
-//export _gotk4_gtk4_PrinterFunc
-func _gotk4_gtk4_PrinterFunc(carg1 *C.GtkPrinter, carg2 C.gpointer) (cret C.gboolean) {
-	var fn PrinterFunc
-	{
-		v := gbox.Get(uintptr(carg2))
-		if v == nil {
-			panic(`callback not found`)
-		}
-		fn = v.(PrinterFunc)
-	}
-
-	var printer Printer // in, none, converted
-	var goret   bool    // return
-
-	printer = UnsafePrinterFromGlibNone(unsafe.Pointer(carg1))
-
-	goret = fn(printer)
-
-	if goret {
-		cret = C.TRUE
-	}
-
-	return cret
 }
 
 //export _gotk4_gtk4_TextBufferCommitNotify

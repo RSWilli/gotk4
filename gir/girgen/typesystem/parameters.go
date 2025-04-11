@@ -150,6 +150,24 @@ func (param *Param) valid(e *env) bool {
 		return true
 	}
 
+	if conv, ok := param.Type.Type.(ConvertibleType); ok {
+		// FIXME: this is inverted for callbacks
+		switch param.Direction {
+		case "inout":
+			panic("should not be inout")
+		case "in":
+			if !conv.CanTransferToGlib(param.TransferOwnership) {
+				e.logger.Warn("transfer ownership not valid for type", "type", param.Type.Type.GIRName(), "transfer", param.TransferOwnership)
+				return false
+			}
+		case "out", "return":
+			if !conv.CanTransferFromGlib(param.TransferOwnership) {
+				e.logger.Warn("transfer ownership not valid for type", "type", param.Type.Type.GIRName(), "transfer", param.TransferOwnership)
+				return false
+			}
+		}
+	}
+
 	switch t := param.Type.Type.(type) {
 	case checkedParameterType:
 		return t.allowedTypeForParam(param)

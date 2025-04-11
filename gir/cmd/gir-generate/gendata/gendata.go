@@ -230,6 +230,8 @@ var Main = genmain.Data{
 							CTyp:    "GObjectClass",
 							CGoTyp:  "C.GObjectClass",
 						},
+						// not transferable, we don't want any methods with this
+						BaseConversions: typesystem.BaseConversions{},
 					},
 					&typesystem.Record{
 						BaseType: typesystem.BaseType{
@@ -240,10 +242,10 @@ var Main = genmain.Data{
 						},
 						BaseConversions: typesystem.BaseConversions{
 							FromGlibBorrowFunction: "ValueFromNative",
-							FromGlibFullFunction:   "TODOFromGlibFull",
-							FromGlibNoneFunction:   "TODOFromGlibNone",
+							FromGlibFullFunction:   "", // TODO
+							FromGlibNoneFunction:   "", // TODO
 							ToGlibNoneFunction:     "UnsafeValueToGlibNone",
-							ToGlibFullFunction:     "TODOToGlibFull",
+							ToGlibFullFunction:     "", // TODO
 						},
 					},
 				},
@@ -344,6 +346,14 @@ var Main = genmain.Data{
 			},
 			"Gtk-4": {
 				MinVersion: "4.19",
+				IgnoredDefinitions: []typesystem.IgnoreFunc{
+					// These are not found.
+					typesystem.IgnoreByFileNameSubstring("gtkpagesetupunixdialog"),
+					typesystem.IgnoreByFileNameSubstring("gtkprintunixdialog"),
+					typesystem.IgnoreByFileNameSubstring("gtkprinter"),
+					typesystem.IgnoreByFileNameSubstring("gtkprintjob"),
+					typesystem.IgnoreByRegex("Print.*"),
+				},
 			},
 		},
 	},

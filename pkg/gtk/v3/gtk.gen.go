@@ -61,7 +61,6 @@ import (
 // extern void _gotk4_gtk3_PrintSettingsFunc(gchar*, gchar*, gpointer);
 // extern void _gotk4_gtk3_TextTagTableForEach(GtkTextTag*, gpointer);
 // extern void _gotk4_gtk3_TreeCellDataFunc(GtkTreeViewColumn*, GtkCellRenderer*, GtkTreeModel*, GtkTreeIter*, gpointer);
-// extern void _gotk4_gtk3_TreeModelFilterModifyFunc(GtkTreeModel*, GtkTreeIter*, GValue, gint, gpointer);
 // extern void _gotk4_gtk3_TreeSelectionForEachFunc(GtkTreeModel*, GtkTreePath*, GtkTreeIter*, gpointer);
 // extern void _gotk4_gtk3_TreeViewMappingFunc(GtkTreeView*, GtkTreePath*, gpointer);
 // extern void _gotk4_gtk3_TreeViewSearchPositionFunc(GtkTreeView*, GtkWidget*, gpointer);
@@ -6127,16 +6126,6 @@ type TreeCellDataFunc func(treeColumn TreeViewColumn, cell CellRenderer, treeMod
 // for the “price” column could be one which returns
 // `price_of(@a) - price_of(@b)`.
 type TreeIterCompareFunc func(model TreeModel, a *TreeIter, b *TreeIter) (goret int)
-
-// TreeModelFilterModifyFunc wraps GtkTreeModelFilterModifyFunc
-//
-// A function which calculates display values from raw values in the model.
-// It must fill @value with the display value for the column @column in the
-// row indicated by @iter.
-// 
-// Since this function is called for each data access, it’s not a
-// particularly efficient operation.
-type TreeModelFilterModifyFunc func(model TreeModel, iter *TreeIter, column int) (value gobject.Value)
 
 // TreeModelFilterVisibleFunc wraps GtkTreeModelFilterVisibleFunc
 //
@@ -16843,22 +16832,6 @@ type TreeModel interface {
 	// For example, “4:10:0:3” would be an acceptable
 	// return value for this string.
 	GetStringFromIter(*TreeIter) string
-	// GetValue wraps gtk_tree_model_get_value
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- iter *TreeIter: the #GtkTreeIter-struct 
-	// 	- column int: the column to lookup the value at 
-	// 
-	// The function returns the following values:
-	// 
-	// 	- value gobject.Value: an empty #GValue to set 
-	//
-	// Initializes and sets @value to that at @column.
-	// 
-	// When done with @value, g_value_unset() needs to be called
-	// to free any allocated memory.
-	GetValue(*TreeIter, int) gobject.Value
 	// IterChildren wraps gtk_tree_model_iter_children
 	// 
 	// The function takes the following parameters:
@@ -17432,45 +17405,6 @@ func (treeModel *TreeModelInstance) GetStringFromIter(iter *TreeIter) string {
 	defer C.free(unsafe.Pointer(cret))
 
 	return goret
-}
-
-// GetValue wraps gtk_tree_model_get_value
-// 
-// The function takes the following parameters:
-// 
-// 	- iter *TreeIter: the #GtkTreeIter-struct 
-// 	- column int: the column to lookup the value at 
-// 
-// The function returns the following values:
-// 
-// 	- value gobject.Value: an empty #GValue to set 
-//
-// Initializes and sets @value to that at @column.
-// 
-// When done with @value, g_value_unset() needs to be called
-// to free any allocated memory.
-func (treeModel *TreeModelInstance) GetValue(iter *TreeIter, column int) gobject.Value {
-	var carg0 *C.GtkTreeModel // in, none, converted
-	var carg1 *C.GtkTreeIter  // in, none, converted
-	var carg2 C.gint          // in, none, casted
-	var carg3 C.GValue        // out, transfer: none, C Pointers: 0, Name: Value, caller-allocates
-
-	carg0 = (*C.GtkTreeModel)(UnsafeTreeModelToGlibNone(treeModel))
-	carg1 = (*C.GtkTreeIter)(UnsafeTreeIterToGlibNone(iter))
-	carg2 = C.gint(column)
-
-	C.gtk_tree_model_get_value(carg0, carg1, carg2, &carg3)
-	runtime.KeepAlive(treeModel)
-	runtime.KeepAlive(iter)
-	runtime.KeepAlive(column)
-
-	var value gobject.Value
-
-	_ = value
-	_ = carg3
-	panic("unimplemented conversion of gobject.Value (GValue)")
-
-	return value
 }
 
 // IterChildren wraps gtk_tree_model_iter_children
@@ -21584,27 +21518,6 @@ type Builder interface {
 	// Sets the translation domain of @builder.
 	// See #GtkBuilder:translation-domain.
 	SetTranslationDomain(string)
-	// ValueFromStringType wraps gtk_builder_value_from_string_type
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- typ gobject.Type: the #GType of the value 
-	// 	- str string: the string representation of the value 
-	// 
-	// The function returns the following values:
-	// 
-	// 	- value gobject.Value: the #GValue to store the result in 
-	// 	- goret bool 
-	// 	- _goerr error (nullable): an error 
-	//
-	// Like gtk_builder_value_from_string(), this function demarshals
-	// a value from a string, but takes a #GType instead of #GParamSpec.
-	// This function calls g_value_init() on the @value argument, so it
-	// need not be initialised beforehand.
-	// 
-	// Upon errors %FALSE will be returned and @error will be assigned a
-	// #GError from the #GTK_BUILDER_ERROR domain.
-	ValueFromStringType(gobject.Type, string) (gobject.Value, bool, error)
 }
 
 func unsafeWrapBuilder(base *gobject.ObjectInstance) *BuilderInstance {
@@ -22387,61 +22300,6 @@ func (builder *BuilderInstance) SetTranslationDomain(domain string) {
 	C.gtk_builder_set_translation_domain(carg0, carg1)
 	runtime.KeepAlive(builder)
 	runtime.KeepAlive(domain)
-}
-
-// ValueFromStringType wraps gtk_builder_value_from_string_type
-// 
-// The function takes the following parameters:
-// 
-// 	- typ gobject.Type: the #GType of the value 
-// 	- str string: the string representation of the value 
-// 
-// The function returns the following values:
-// 
-// 	- value gobject.Value: the #GValue to store the result in 
-// 	- goret bool 
-// 	- _goerr error (nullable): an error 
-//
-// Like gtk_builder_value_from_string(), this function demarshals
-// a value from a string, but takes a #GType instead of #GParamSpec.
-// This function calls g_value_init() on the @value argument, so it
-// need not be initialised beforehand.
-// 
-// Upon errors %FALSE will be returned and @error will be assigned a
-// #GError from the #GTK_BUILDER_ERROR domain.
-func (builder *BuilderInstance) ValueFromStringType(typ gobject.Type, str string) (gobject.Value, bool, error) {
-	var carg0 *C.GtkBuilder // in, none, converted
-	var carg1 C.GType       // in, none, casted, alias
-	var carg2 *C.gchar      // in, none, string, casted *C.gchar
-	var carg3 C.GValue      // out, transfer: none, C Pointers: 0, Name: Value, caller-allocates
-	var cret  C.gboolean    // return
-	var _cerr *C.GError     // out, full, converted, nullable
-
-	carg0 = (*C.GtkBuilder)(UnsafeBuilderToGlibNone(builder))
-	carg1 = C.GType(typ)
-	carg2 = (*C.gchar)(unsafe.Pointer(C.CString(str)))
-	defer C.free(unsafe.Pointer(carg2))
-
-	cret = C.gtk_builder_value_from_string_type(carg0, carg1, carg2, &carg3, &_cerr)
-	runtime.KeepAlive(builder)
-	runtime.KeepAlive(typ)
-	runtime.KeepAlive(str)
-
-	var value  gobject.Value
-	var goret  bool
-	var _goerr error
-
-	_ = value
-	_ = carg3
-	panic("unimplemented conversion of gobject.Value (GValue)")
-	if cret != 0 {
-		goret = true
-	}
-	if _cerr != nil {
-		_goerr = glib.UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
-	}
-
-	return value, goret, _goerr
 }
 
 // CellAccessibleInstance is the instance type used by all types extending GtkCellAccessible. It is used internally by the bindings. Users should use the interface [CellAccessible] instead.
@@ -44626,21 +44484,6 @@ type Style interface {
 	gobject.Object
 	upcastToGtkStyle() *StyleInstance
 
-	// GetStyleProperty wraps gtk_style_get_style_property
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- widgetType gobject.Type: the #GType of a descendant of #GtkWidget 
-	// 	- propertyName string: the name of the style property to get 
-	// 
-	// The function returns the following values:
-	// 
-	// 	- value gobject.Value: a #GValue where the value of the property being
-	//     queried will be stored 
-	//
-	// Queries the value of a style property corresponding to a
-	// widget class is in the given style.
-	GetStyleProperty(gobject.Type, string) gobject.Value
 	// HasContext wraps gtk_style_has_context
 	// The function returns the following values:
 	// 
@@ -44682,45 +44525,6 @@ func UnsafeStyleToGlibNone(c Style) unsafe.Pointer {
 // UnsafeStyleToGlibFull is used to convert the instance to it's C value GtkStyle, while removeing the finalizer. This is used by the bindings internally.
 func UnsafeStyleToGlibFull(c Style) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
-}
-
-// GetStyleProperty wraps gtk_style_get_style_property
-// 
-// The function takes the following parameters:
-// 
-// 	- widgetType gobject.Type: the #GType of a descendant of #GtkWidget 
-// 	- propertyName string: the name of the style property to get 
-// 
-// The function returns the following values:
-// 
-// 	- value gobject.Value: a #GValue where the value of the property being
-//     queried will be stored 
-//
-// Queries the value of a style property corresponding to a
-// widget class is in the given style.
-func (style *StyleInstance) GetStyleProperty(widgetType gobject.Type, propertyName string) gobject.Value {
-	var carg0 *C.GtkStyle // in, none, converted
-	var carg1 C.GType     // in, none, casted, alias
-	var carg2 *C.gchar    // in, none, string, casted *C.gchar
-	var carg3 C.GValue    // out, transfer: none, C Pointers: 0, Name: Value, caller-allocates
-
-	carg0 = (*C.GtkStyle)(UnsafeStyleToGlibNone(style))
-	carg1 = C.GType(widgetType)
-	carg2 = (*C.gchar)(unsafe.Pointer(C.CString(propertyName)))
-	defer C.free(unsafe.Pointer(carg2))
-
-	C.gtk_style_get_style_property(carg0, carg1, carg2, &carg3)
-	runtime.KeepAlive(style)
-	runtime.KeepAlive(widgetType)
-	runtime.KeepAlive(propertyName)
-
-	var value gobject.Value
-
-	_ = value
-	_ = carg3
-	panic("unimplemented conversion of gobject.Value (GValue)")
-
-	return value
 }
 
 // HasContext wraps gtk_style_has_context
@@ -44945,31 +44749,6 @@ type StyleContext interface {
 	//
 	// Returns the widget path used for style matching.
 	GetPath() *WidgetPath
-	// GetProperty wraps gtk_style_context_get_property
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- property string: style property name 
-	// 	- state StateFlags: state to retrieve the property value for 
-	// 
-	// The function returns the following values:
-	// 
-	// 	- value gobject.Value: return location for the style property value 
-	//
-	// Gets a style property from @context for the given state.
-	// 
-	// Note that not all CSS properties that are supported by GTK+ can be
-	// retrieved in this way, since they may not be representable as #GValue.
-	// GTK+ defines macros for a number of properties that can be used
-	// with this function.
-	// 
-	// Note that passing a state other than the current state of @context
-	// is not recommended unless the style context has been saved with
-	// gtk_style_context_save().
-	// 
-	// When @value is no longer needed, g_value_unset() must be called
-	// to free any allocated memory.
-	GetProperty(string, StateFlags) gobject.Value
 	// GetScale wraps gtk_style_context_get_scale
 	// The function returns the following values:
 	// 
@@ -45632,55 +45411,6 @@ func (context *StyleContextInstance) GetPath() *WidgetPath {
 	goret = UnsafeWidgetPathFromGlibNone(unsafe.Pointer(cret))
 
 	return goret
-}
-
-// GetProperty wraps gtk_style_context_get_property
-// 
-// The function takes the following parameters:
-// 
-// 	- property string: style property name 
-// 	- state StateFlags: state to retrieve the property value for 
-// 
-// The function returns the following values:
-// 
-// 	- value gobject.Value: return location for the style property value 
-//
-// Gets a style property from @context for the given state.
-// 
-// Note that not all CSS properties that are supported by GTK+ can be
-// retrieved in this way, since they may not be representable as #GValue.
-// GTK+ defines macros for a number of properties that can be used
-// with this function.
-// 
-// Note that passing a state other than the current state of @context
-// is not recommended unless the style context has been saved with
-// gtk_style_context_save().
-// 
-// When @value is no longer needed, g_value_unset() must be called
-// to free any allocated memory.
-func (context *StyleContextInstance) GetProperty(property string, state StateFlags) gobject.Value {
-	var carg0 *C.GtkStyleContext // in, none, converted
-	var carg1 *C.gchar           // in, none, string, casted *C.gchar
-	var carg2 C.GtkStateFlags    // in, none, casted
-	var carg3 C.GValue           // out, transfer: full, C Pointers: 0, Name: Value, caller-allocates
-
-	carg0 = (*C.GtkStyleContext)(UnsafeStyleContextToGlibNone(context))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(property)))
-	defer C.free(unsafe.Pointer(carg1))
-	carg2 = C.GtkStateFlags(state)
-
-	C.gtk_style_context_get_property(carg0, carg1, carg2, &carg3)
-	runtime.KeepAlive(context)
-	runtime.KeepAlive(property)
-	runtime.KeepAlive(state)
-
-	var value gobject.Value
-
-	_ = value
-	_ = carg3
-	panic("unimplemented conversion of gobject.Value (GValue)")
-
-	return value
 }
 
 // GetScale wraps gtk_style_context_get_scale
@@ -50641,24 +50371,6 @@ type TreeModelFilter interface {
 	// Emits ::row_changed for each row in the child model, which causes
 	// the filter to re-evaluate whether a row is visible or not.
 	Refilter()
-	// SetModifyFunc wraps gtk_tree_model_filter_set_modify_func
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- types []gobject.Type: The #GTypes of the columns. 
-	// 	- fn TreeModelFilterModifyFunc: A #GtkTreeModelFilterModifyFunc 
-	//
-	// With the @n_columns and @types parameters, you give an array of column
-	// types for this model (which will be exposed to the parent model/view).
-	// The @func, @data and @destroy parameters are for specifying the modify
-	// function. The modify function will get called for each
-	// data access, the goal of the modify function is to return the data which
-	// should be displayed at the location specified using the parameters of the
-	// modify function.
-	// 
-	// Note that gtk_tree_model_filter_set_modify_func()
-	// can only be called once for a given filter model.
-	SetModifyFunc([]gobject.Type, TreeModelFilterModifyFunc)
 	// SetVisibleColumn wraps gtk_tree_model_filter_set_visible_column
 	// 
 	// The function takes the following parameters:
@@ -50941,46 +50653,6 @@ func (filter *TreeModelFilterInstance) Refilter() {
 
 	C.gtk_tree_model_filter_refilter(carg0)
 	runtime.KeepAlive(filter)
-}
-
-// SetModifyFunc wraps gtk_tree_model_filter_set_modify_func
-// 
-// The function takes the following parameters:
-// 
-// 	- types []gobject.Type: The #GTypes of the columns. 
-// 	- fn TreeModelFilterModifyFunc: A #GtkTreeModelFilterModifyFunc 
-//
-// With the @n_columns and @types parameters, you give an array of column
-// types for this model (which will be exposed to the parent model/view).
-// The @func, @data and @destroy parameters are for specifying the modify
-// function. The modify function will get called for each
-// data access, the goal of the modify function is to return the data which
-// should be displayed at the location specified using the parameters of the
-// modify function.
-// 
-// Note that gtk_tree_model_filter_set_modify_func()
-// can only be called once for a given filter model.
-func (filter *TreeModelFilterInstance) SetModifyFunc(types []gobject.Type, fn TreeModelFilterModifyFunc) {
-	var carg0 *C.GtkTreeModelFilter          // in, none, converted
-	var carg1 C.gint                         // implicit
-	var carg2 *C.GType                       // in, transfer: none, C Pointers: 1, Name: array[Type], array (inner: *typesystem.Alias, length-by: carg1)
-	var carg3 C.GtkTreeModelFilterModifyFunc // callback, scope: notified, closure: carg4, destroy: carg5
-	var carg4 C.gpointer                     // implicit
-	var carg5 C.GDestroyNotify               // implicit
-
-	carg0 = (*C.GtkTreeModelFilter)(UnsafeTreeModelFilterToGlibNone(filter))
-	_ = types
-	_ = carg2
-	_ = carg1
-	panic("unimplemented conversion of []gobject.Type (GType*)")
-	carg3 = (*[0]byte)(C._gotk4_gtk3_TreeModelFilterModifyFunc)
-	carg4 = C.gpointer(gbox.Assign(fn))
-	carg5 = (C.GDestroyNotify)((*[0]byte)(C.callbackDelete))
-
-	C.gtk_tree_model_filter_set_modify_func(carg0, carg1, carg2, carg3, carg4, carg5)
-	runtime.KeepAlive(filter)
-	runtime.KeepAlive(types)
-	runtime.KeepAlive(fn)
 }
 
 // SetVisibleColumn wraps gtk_tree_model_filter_set_visible_column
