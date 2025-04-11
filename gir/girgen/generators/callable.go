@@ -129,6 +129,14 @@ func (m *CallableGenerator) Generate(w *file.Package) {
 
 		// w.GoImportType(param.Type) // don't import here, as the CGo type does not reference the namespace
 	}
+
+	// params that are part of the C call still need to be declared
+	for _, v := range m.Signature.CParameters() {
+		if v.Skip {
+			fmt.Fprintf(&decls, "var\t%s\t%s\t// skipped\n", v.CName, v.CGoType())
+		}
+	}
+
 	for i, ret := range m.Signature.GoReturns {
 		conv := m.ReturnConverters[i]
 		fmt.Fprintf(&decls, "var\t%s\t%s\t// %s\n", ret.CName, ret.CGoType(), conv.Metadata())
