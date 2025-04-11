@@ -85,8 +85,14 @@ func NewIdentifierGoDocGenerator(identifier DocumentedIdentifier) *GoDocGenerato
 func NewTypeGoDocGenerator(typ DocumentedType) *GoDocGenerator {
 	// info := GetInfoFields(girWithDoc)
 
+	gotype := typ.GoType(0)
+
+	if t, ok := typ.(*typesystem.Class); ok {
+		gotype = t.GoInterfaceName
+	}
+
 	return &GoDocGenerator{
-		DocString: fmt.Sprintf("%s wraps %s", typ.GoType(0), typ.CType(0)),
+		DocString: fmt.Sprintf("%s wraps %s", gotype, typ.CType(0)),
 		GIRDoc:    typ.Documentation(),
 	}
 }
