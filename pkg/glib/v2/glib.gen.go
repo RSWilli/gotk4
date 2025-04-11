@@ -5508,7 +5508,7 @@ func FileErrorQuark() Quark {
 // 
 // 	- contents string: location to store an allocated string, use g_free() to free
 //     the returned string 
-// 	- length uint (nullable): location to store length in bytes of the contents, or %NULL 
+// 	- length uint: location to store length in bytes of the contents, or %NULL 
 // 	- goret bool 
 // 	- _goerr error (nullable): an error 
 //

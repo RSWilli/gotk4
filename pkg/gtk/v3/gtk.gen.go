@@ -85849,8 +85849,8 @@ type GestureDrag interface {
 	// GetOffset wraps gtk_gesture_drag_get_offset
 	// The function returns the following values:
 	// 
-	// 	- x float64 (nullable): X offset for the current point 
-	// 	- y float64 (nullable): Y offset for the current point 
+	// 	- x float64: X offset for the current point 
+	// 	- y float64: Y offset for the current point 
 	// 	- goret bool 
 	//
 	// If the @gesture is active, this function returns %TRUE and
@@ -85860,8 +85860,8 @@ type GestureDrag interface {
 	// GetStartPoint wraps gtk_gesture_drag_get_start_point
 	// The function returns the following values:
 	// 
-	// 	- x float64 (nullable): X coordinate for the drag start point 
-	// 	- y float64 (nullable): Y coordinate for the drag start point 
+	// 	- x float64: X coordinate for the drag start point 
+	// 	- y float64: Y coordinate for the drag start point 
 	// 	- goret bool 
 	//
 	// If the @gesture is active, this function returns %TRUE
@@ -85940,8 +85940,8 @@ func NewGestureDragInstance(widget Widget) Gesture {
 // GetOffset wraps gtk_gesture_drag_get_offset
 // The function returns the following values:
 // 
-// 	- x float64 (nullable): X offset for the current point 
-// 	- y float64 (nullable): Y offset for the current point 
+// 	- x float64: X offset for the current point 
+// 	- y float64: Y offset for the current point 
 // 	- goret bool 
 //
 // If the @gesture is active, this function returns %TRUE and
@@ -85949,8 +85949,8 @@ func NewGestureDragInstance(widget Widget) Gesture {
 // as an offset to the starting drag point.
 func (gesture *GestureDragInstance) GetOffset() (float64, float64, bool) {
 	var carg0 *C.GtkGestureDrag // in, none, converted
-	var carg1 C.gdouble         // out, full, casted, nullable
-	var carg2 C.gdouble         // out, full, casted, nullable
+	var carg1 C.gdouble         // out, full, casted
+	var carg2 C.gdouble         // out, full, casted
 	var cret  C.gboolean        // return
 
 	carg0 = (*C.GtkGestureDrag)(UnsafeGestureDragToGlibNone(gesture))
@@ -85962,12 +85962,8 @@ func (gesture *GestureDragInstance) GetOffset() (float64, float64, bool) {
 	var y     float64
 	var goret bool
 
-	if carg1 != nil {
-		x = float64(carg1)
-	}
-	if carg2 != nil {
-		y = float64(carg2)
-	}
+	x = float64(carg1)
+	y = float64(carg2)
 	if cret != 0 {
 		goret = true
 	}
@@ -85978,8 +85974,8 @@ func (gesture *GestureDragInstance) GetOffset() (float64, float64, bool) {
 // GetStartPoint wraps gtk_gesture_drag_get_start_point
 // The function returns the following values:
 // 
-// 	- x float64 (nullable): X coordinate for the drag start point 
-// 	- y float64 (nullable): Y coordinate for the drag start point 
+// 	- x float64: X coordinate for the drag start point 
+// 	- y float64: Y coordinate for the drag start point 
 // 	- goret bool 
 //
 // If the @gesture is active, this function returns %TRUE
@@ -85987,8 +85983,8 @@ func (gesture *GestureDragInstance) GetOffset() (float64, float64, bool) {
 // in window-relative coordinates.
 func (gesture *GestureDragInstance) GetStartPoint() (float64, float64, bool) {
 	var carg0 *C.GtkGestureDrag // in, none, converted
-	var carg1 C.gdouble         // out, full, casted, nullable
-	var carg2 C.gdouble         // out, full, casted, nullable
+	var carg1 C.gdouble         // out, full, casted
+	var carg2 C.gdouble         // out, full, casted
 	var cret  C.gboolean        // return
 
 	carg0 = (*C.GtkGestureDrag)(UnsafeGestureDragToGlibNone(gesture))
@@ -86000,12 +85996,8 @@ func (gesture *GestureDragInstance) GetStartPoint() (float64, float64, bool) {
 	var y     float64
 	var goret bool
 
-	if carg1 != nil {
-		x = float64(carg1)
-	}
-	if carg2 != nil {
-		y = float64(carg2)
-	}
+	x = float64(carg1)
+	y = float64(carg2)
 	if cret != 0 {
 		goret = true
 	}
@@ -138166,8 +138158,8 @@ type Window interface {
 	// GetSize wraps gtk_window_get_size
 	// The function returns the following values:
 	// 
-	// 	- width int (nullable): return location for width, or %NULL 
-	// 	- height int (nullable): return location for height, or %NULL 
+	// 	- width int: return location for width, or %NULL 
+	// 	- height int: return location for height, or %NULL 
 	//
 	// Obtains the current size of @window.
 	// 
@@ -140521,8 +140513,8 @@ func (window *WindowInstance) GetScreen() gdk.Screen {
 // GetSize wraps gtk_window_get_size
 // The function returns the following values:
 // 
-// 	- width int (nullable): return location for width, or %NULL 
-// 	- height int (nullable): return location for height, or %NULL 
+// 	- width int: return location for width, or %NULL 
+// 	- height int: return location for height, or %NULL 
 //
 // Obtains the current size of @window.
 // 
@@ -140598,8 +140590,8 @@ func (window *WindowInstance) GetScreen() gdk.Screen {
 // see: gtk_window_set_position().
 func (window *WindowInstance) GetSize() (int, int) {
 	var carg0 *C.GtkWindow // in, none, converted
-	var carg1 C.int        // out, full, casted, nullable
-	var carg2 C.int        // out, full, casted, nullable
+	var carg1 C.int        // out, full, casted
+	var carg2 C.int        // out, full, casted
 
 	carg0 = (*C.GtkWindow)(UnsafeWindowToGlibNone(window))
 
@@ -140609,12 +140601,8 @@ func (window *WindowInstance) GetSize() (int, int) {
 	var width  int
 	var height int
 
-	if carg1 != nil {
-		width = int(carg1)
-	}
-	if carg2 != nil {
-		height = int(carg2)
-	}
+	width = int(carg1)
+	height = int(carg2)
 
 	return width, height
 }

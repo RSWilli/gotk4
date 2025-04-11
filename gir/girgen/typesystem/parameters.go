@@ -304,6 +304,14 @@ func NewCallableParameters(e *env, v gir.CallableAttrs) (*Parameters, resolvedSt
 				}
 			}
 
+			nullable := p.Nullable
+
+			if p.Direction == "out" && (p.Optional || p.Nullable) && ctypePointers == 0 && !isPointer(t) {
+				// when the out param is converted to a value, and that valu has no pointers,
+				// then it cannot be nil
+				nullable = false
+			}
+
 			param := &Param{
 				Doc:    NewParamDoc(p.ParameterAttrs),
 				CName:  fmt.Sprintf("carg%d", i+1),
@@ -316,7 +324,7 @@ func NewCallableParameters(e *env, v gir.CallableAttrs) (*Parameters, resolvedSt
 				TransferOwnership: transfer,
 				Skip:              p.Skip,
 				Optional:          p.Optional,
-				Nullable:          p.Nullable,
+				Nullable:          nullable,
 				Direction:         direction,
 				Scope:             scope,
 				CallerAllocates:   p.CallerAllocates,

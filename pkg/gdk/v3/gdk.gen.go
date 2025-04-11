@@ -14934,8 +14934,8 @@ type GLContext interface {
 	// GetRequiredVersion wraps gdk_gl_context_get_required_version
 	// The function returns the following values:
 	// 
-	// 	- major int (nullable): return location for the major version to request 
-	// 	- minor int (nullable): return location for the minor version to request 
+	// 	- major int: return location for the major version to request 
+	// 	- minor int: return location for the minor version to request 
 	//
 	// Retrieves the major and minor version requested by calling
 	// gdk_gl_context_set_required_version().
@@ -15208,15 +15208,15 @@ func (context *GLContextInstance) GetForwardCompatible() bool {
 // GetRequiredVersion wraps gdk_gl_context_get_required_version
 // The function returns the following values:
 // 
-// 	- major int (nullable): return location for the major version to request 
-// 	- minor int (nullable): return location for the minor version to request 
+// 	- major int: return location for the major version to request 
+// 	- minor int: return location for the minor version to request 
 //
 // Retrieves the major and minor version requested by calling
 // gdk_gl_context_set_required_version().
 func (context *GLContextInstance) GetRequiredVersion() (int, int) {
 	var carg0 *C.GdkGLContext // in, none, converted
-	var carg1 C.int           // out, full, casted, nullable
-	var carg2 C.int           // out, full, casted, nullable
+	var carg1 C.int           // out, full, casted
+	var carg2 C.int           // out, full, casted
 
 	carg0 = (*C.GdkGLContext)(UnsafeGLContextToGlibNone(context))
 
@@ -15226,12 +15226,8 @@ func (context *GLContextInstance) GetRequiredVersion() (int, int) {
 	var major int
 	var minor int
 
-	if carg1 != nil {
-		major = int(carg1)
-	}
-	if carg2 != nil {
-		minor = int(carg2)
-	}
+	major = int(carg1)
+	minor = int(carg2)
 
 	return major, minor
 }

@@ -1,6 +1,7 @@
 package typesystem
 
 import (
+	"slices"
 	"strings"
 
 	"github.com/diamondburned/gotk4/gir"
@@ -49,4 +50,13 @@ func decreaseAnyTypePointers(typ gir.AnyType) (gir.AnyType, bool) {
 	}
 
 	return res, true
+}
+
+var pointerTypes = []Type{
+	Gpointer,
+	Gconstpointer,
+}
+
+func isPointer(typ Type) bool {
+	return slices.Contains(pointerTypes, typ)
 }

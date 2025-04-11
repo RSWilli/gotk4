@@ -5069,7 +5069,7 @@ func (point1 *PathPoint) Equal(point2 *PathPoint) bool {
 // 
 // The function returns the following values:
 // 
-// 	- center graphene.Point (nullable): Return location for
+// 	- center graphene.Point: Return location for
 //   the center of the osculating circle 
 // 	- goret float32 
 //
@@ -5097,7 +5097,7 @@ func (point *PathPoint) GetCurvature(path *Path, direction PathDirection) (graph
 	var carg0 *C.GskPathPoint    // in, none, converted
 	var carg1 *C.GskPath         // in, none, converted
 	var carg2 C.GskPathDirection // in, none, casted
-	var carg3 C.graphene_point_t // out, transfer: none, C Pointers: 0, Name: Point, nullable, caller-allocates
+	var carg3 C.graphene_point_t // out, transfer: none, C Pointers: 0, Name: Point, caller-allocates
 	var cret  C.gfloat           // return, none, casted
 
 	carg0 = (*C.GskPathPoint)(UnsafePathPointToGlibNone(point))

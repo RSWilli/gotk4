@@ -286,6 +286,10 @@ var Main = genmain.Data{
 			"Gdk-3": {
 				IgnoredDefinitions: []typesystem.IgnoreFunc{
 					typesystem.IgnoreByFileNameSubstring("gdkprivate"),
+					typesystem.IgnoreMatching("Clipboard.read_value_finish"),
+					typesystem.IgnoreMatching("ContentDeserializer.get_value"),
+					typesystem.IgnoreMatching("ContentSerializer.get_value"),
+					typesystem.IgnoreMatching("Drop.read_value_finish"),
 				},
 			},
 			"GdkPixbuf-2": {
