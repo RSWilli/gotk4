@@ -334,6 +334,12 @@ var Main = genmain.Data{
 					typesystem.IgnoreMatching("WaylandDevice.get_xkb_keymap"),
 				},
 			},
+			"Gsk-4": {
+				MinVersion: "4.19",
+				IgnoredDefinitions: []typesystem.IgnoreFunc{
+					typesystem.IgnoreByFileNameSubstring("gsk/broadway/gskbroadwayrenderer.h"),
+				},
+			},
 		},
 	},
 }
