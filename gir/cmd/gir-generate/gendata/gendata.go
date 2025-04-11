@@ -509,7 +509,7 @@ var Preprocessors = []Preprocessor{
 	RenameCallable("GObject-2.TypePlugin.use", "use_plugin"),
 	RenameCallable("GObject-2.TypePlugin.unuse", "unuse_plugin"),
 
-	// Collide in gtk-3 when implementing interface:
+	// Collide in Gtk-3 when implementing interface:
 	RenameCallable("Gtk-3.Buildable.get_name", "get_buildable_name"),
 	RenameCallable("Gtk-3.Buildable.set_name", "set_buildable_name"),
 	RenameCallable("Gtk-3.ToolShell.get_orientation", "get_tool_shell_orientation"),
@@ -527,6 +527,10 @@ var Preprocessors = []Preprocessor{
 
 	// must rename to allow atk interface to be implemented
 	RenameCallable("Gtk-3.CellAccessibleParent.grab_focus", "cell_accessible_parent_grab_focus"),
+
+	// Collide in Gtk-4 when implementing interface:
+	RenameCallable("Gtk-4.MenuButton.get_direction", "get_menu_button_direction"),
+	RenameCallable("Gtk-4.MenuButton.set_direction", "set_menu_button_direction"),
 }
 
 // FIXME: override or manually implement this

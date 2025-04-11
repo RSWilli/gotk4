@@ -86050,13 +86050,13 @@ type MenuButton interface {
 	//
 	// Gets the child widget of @menu_button.
 	GetChild() Widget
-	// GetDirection wraps gtk_menu_button_get_direction
+	// GetMenuButtonDirection wraps gtk_menu_button_get_direction
 	// The function returns the following values:
 	// 
 	// 	- goret ArrowType 
 	//
 	// Returns the direction the popup will be pointing at when popped up.
-	GetDirection() ArrowType
+	GetMenuButtonDirection() ArrowType
 	// GetHasFrame wraps gtk_menu_button_get_has_frame
 	// The function returns the following values:
 	// 
@@ -86185,7 +86185,7 @@ type MenuButton interface {
 	// Using this function will not reset the menu widget attached to
 	// @menu_button. Instead, this can be done manually in @func.
 	SetCreatePopupFunc(MenuButtonCreatePopupFunc)
-	// SetDirection wraps gtk_menu_button_set_direction
+	// SetMenuButtonDirection wraps gtk_menu_button_set_direction
 	// 
 	// The function takes the following parameters:
 	// 
@@ -86201,7 +86201,7 @@ type MenuButton interface {
 	// 
 	// If you pass %GTK_ARROW_NONE for a @direction, the popup will behave
 	// as if you passed %GTK_ARROW_DOWN (although you won’t see any arrows).
-	SetDirection(ArrowType)
+	SetMenuButtonDirection(ArrowType)
 	// SetHasFrame wraps gtk_menu_button_set_has_frame
 	// 
 	// The function takes the following parameters:
@@ -86455,13 +86455,13 @@ func (menuButton *MenuButtonInstance) GetChild() Widget {
 	return goret
 }
 
-// GetDirection wraps gtk_menu_button_get_direction
+// GetMenuButtonDirection wraps gtk_menu_button_get_direction
 // The function returns the following values:
 // 
 // 	- goret ArrowType 
 //
 // Returns the direction the popup will be pointing at when popped up.
-func (menuButton *MenuButtonInstance) GetDirection() ArrowType {
+func (menuButton *MenuButtonInstance) GetMenuButtonDirection() ArrowType {
 	var carg0 *C.GtkMenuButton // in, none, converted
 	var cret  C.GtkArrowType   // return, none, casted
 
@@ -86801,7 +86801,7 @@ func (menuButton *MenuButtonInstance) SetCreatePopupFunc(fn MenuButtonCreatePopu
 	runtime.KeepAlive(fn)
 }
 
-// SetDirection wraps gtk_menu_button_set_direction
+// SetMenuButtonDirection wraps gtk_menu_button_set_direction
 // 
 // The function takes the following parameters:
 // 
@@ -86817,7 +86817,7 @@ func (menuButton *MenuButtonInstance) SetCreatePopupFunc(fn MenuButtonCreatePopu
 // 
 // If you pass %GTK_ARROW_NONE for a @direction, the popup will behave
 // as if you passed %GTK_ARROW_DOWN (although you won’t see any arrows).
-func (menuButton *MenuButtonInstance) SetDirection(direction ArrowType) {
+func (menuButton *MenuButtonInstance) SetMenuButtonDirection(direction ArrowType) {
 	var carg0 *C.GtkMenuButton // in, none, converted
 	var carg1 C.GtkArrowType   // in, none, casted
 
