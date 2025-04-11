@@ -8555,90 +8555,6 @@ func RCParse(filename string) {
 	runtime.KeepAlive(filename)
 }
 
-// RCParseColor wraps gtk_rc_parse_color
-// 
-// The function takes the following parameters:
-// 
-// 	- scanner *glib.Scanner: a #GScanner 
-// 
-// The function returns the following values:
-// 
-// 	- color gdk.Color: a pointer to a #GdkColor in which to store
-//     the result 
-// 	- goret uint 
-//
-// Parses a color in the format expected
-// in a RC file.
-// 
-// Note that theme engines should use gtk_rc_parse_color_full() in
-// order to support symbolic colors.
-//
-// Deprecated: (since 3.0.0) Use #GtkCssProvider instead
-func RCParseColor(scanner *glib.Scanner) (gdk.Color, uint) {
-	var carg1 *C.GScanner // in, none, converted
-	var carg2 C.GdkColor  // out, transfer: none, C Pointers: 0, Name: Color, caller-allocates
-	var cret  C.guint     // return, none, casted
-
-	carg1 = (*C.GScanner)(glib.UnsafeScannerToGlibNone(scanner))
-
-	cret = C.gtk_rc_parse_color(carg1, &carg2)
-	runtime.KeepAlive(scanner)
-
-	var color gdk.Color
-	var goret uint
-
-	_ = color
-	_ = carg2
-	panic("unimplemented conversion of gdk.Color (GdkColor)")
-	goret = uint(cret)
-
-	return color, goret
-}
-
-// RCParseColorFull wraps gtk_rc_parse_color_full
-// 
-// The function takes the following parameters:
-// 
-// 	- scanner *glib.Scanner: a #GScanner 
-// 	- style RcStyle (nullable): a #GtkRcStyle, or %NULL 
-// 
-// The function returns the following values:
-// 
-// 	- color gdk.Color: a pointer to a #GdkColor in which to store
-//     the result 
-// 	- goret uint 
-//
-// Parses a color in the format expected
-// in a RC file. If @style is not %NULL, it will be consulted to resolve
-// references to symbolic colors.
-//
-// Deprecated: (since 3.0.0) Use #GtkCssProvider instead
-func RCParseColorFull(scanner *glib.Scanner, style RcStyle) (gdk.Color, uint) {
-	var carg1 *C.GScanner   // in, none, converted
-	var carg2 *C.GtkRcStyle // in, none, converted, nullable
-	var carg3 C.GdkColor    // out, transfer: none, C Pointers: 0, Name: Color, caller-allocates
-	var cret  C.guint       // return, none, casted
-
-	carg1 = (*C.GScanner)(glib.UnsafeScannerToGlibNone(scanner))
-	if style != nil {
-		carg2 = (*C.GtkRcStyle)(UnsafeRcStyleToGlibNone(style))
-	}
-
-	cret = C.gtk_rc_parse_color_full(carg1, carg2, &carg3)
-	runtime.KeepAlive(scanner)
-	runtime.KeepAlive(style)
-
-	var color gdk.Color
-	var goret uint
-
-	_ = color
-	_ = carg3
-	panic("unimplemented conversion of gdk.Color (GdkColor)")
-	goret = uint(cret)
-
-	return color, goret
-}
-
 // RCParseState wraps gtk_rc_parse_state
 // 
 // The function takes the following parameters:
@@ -52132,25 +52048,6 @@ type Style interface {
 	//
 	// Returns whether @style has an associated #GtkStyleContext.
 	HasContext() bool
-	// LookupColor wraps gtk_style_lookup_color
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- colorName string: the name of the logical color to look up 
-	// 
-	// The function returns the following values:
-	// 
-	// 	- color gdk.Color: the #GdkColor to fill in 
-	// 	- goret bool 
-	//
-	// Looks up @color_name in the style’s logical color mappings,
-	// filling in @color and returning %TRUE if found, otherwise
-	// returning %FALSE. Do not cache the found mapping, because
-	// it depends on the #GtkStyle and might change when a theme
-	// switch occurs.
-	//
-	// Deprecated: (since 3.0.0) Use gtk_style_context_lookup_color() instead
-	LookupColor(string) (gdk.Color, bool)
 	// LookupIconSet wraps gtk_style_lookup_icon_set
 	// 
 	// The function takes the following parameters:
@@ -52358,51 +52255,6 @@ func (style *StyleInstance) HasContext() bool {
 	}
 
 	return goret
-}
-
-// LookupColor wraps gtk_style_lookup_color
-// 
-// The function takes the following parameters:
-// 
-// 	- colorName string: the name of the logical color to look up 
-// 
-// The function returns the following values:
-// 
-// 	- color gdk.Color: the #GdkColor to fill in 
-// 	- goret bool 
-//
-// Looks up @color_name in the style’s logical color mappings,
-// filling in @color and returning %TRUE if found, otherwise
-// returning %FALSE. Do not cache the found mapping, because
-// it depends on the #GtkStyle and might change when a theme
-// switch occurs.
-//
-// Deprecated: (since 3.0.0) Use gtk_style_context_lookup_color() instead
-func (style *StyleInstance) LookupColor(colorName string) (gdk.Color, bool) {
-	var carg0 *C.GtkStyle // in, none, converted
-	var carg1 *C.gchar    // in, none, string
-	var carg2 C.GdkColor  // out, transfer: none, C Pointers: 0, Name: Color, caller-allocates
-	var cret  C.gboolean  // return
-
-	carg0 = (*C.GtkStyle)(UnsafeStyleToGlibNone(style))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(colorName)))
-	defer C.free(unsafe.Pointer(carg1))
-
-	cret = C.gtk_style_lookup_color(carg0, carg1, &carg2)
-	runtime.KeepAlive(style)
-	runtime.KeepAlive(colorName)
-
-	var color gdk.Color
-	var goret bool
-
-	_ = color
-	_ = carg2
-	panic("unimplemented conversion of gdk.Color (GdkColor)")
-	if cret != 0 {
-		goret = true
-	}
-
-	return color, goret
 }
 
 // LookupIconSet wraps gtk_style_lookup_icon_set
@@ -68281,95 +68133,6 @@ type Widget interface {
 	//
 	// Emits the #GtkWidget::mnemonic-activate signal.
 	MnemonicActivate(bool) bool
-	// ModifyBase wraps gtk_widget_modify_base
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- state StateType: the state for which to set the base color 
-	// 	- color *gdk.Color (nullable): the color to assign (does not need to
-	//     be allocated), or %NULL to undo the effect of previous
-	//     calls to of gtk_widget_modify_base(). 
-	//
-	// Sets the base color for a widget in a particular state.
-	// All other style values are left untouched. The base color
-	// is the background color used along with the text color
-	// (see gtk_widget_modify_text()) for widgets such as #GtkEntry
-	// and #GtkTextView. See also gtk_widget_modify_style().
-	// 
-	// &gt; Note that “no window” widgets (which have the %GTK_NO_WINDOW
-	// &gt; flag set) draw on their parent container’s window and thus may
-	// &gt; not draw any background themselves. This is the case for e.g.
-	// &gt; #GtkLabel.
-	// &gt;
-	// &gt; To modify the background of such widgets, you have to set the
-	// &gt; base color on their parent; if you want to set the background
-	// &gt; of a rectangular area around a label, try placing the label in
-	// &gt; a #GtkEventBox widget and setting the base color on that.
-	//
-	// Deprecated: (since 3.0.0) Use gtk_widget_override_background_color() instead
-	ModifyBase(StateType, *gdk.Color)
-	// ModifyBg wraps gtk_widget_modify_bg
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- state StateType: the state for which to set the background color 
-	// 	- color *gdk.Color (nullable): the color to assign (does not need
-	//     to be allocated), or %NULL to undo the effect of previous
-	//     calls to of gtk_widget_modify_bg(). 
-	//
-	// Sets the background color for a widget in a particular state.
-	// 
-	// All other style values are left untouched.
-	// See also gtk_widget_modify_style().
-	// 
-	// &gt; Note that “no window” widgets (which have the %GTK_NO_WINDOW
-	// &gt; flag set) draw on their parent container’s window and thus may
-	// &gt; not draw any background themselves. This is the case for e.g.
-	// &gt; #GtkLabel.
-	// &gt;
-	// &gt; To modify the background of such widgets, you have to set the
-	// &gt; background color on their parent; if you want to set the background
-	// &gt; of a rectangular area around a label, try placing the label in
-	// &gt; a #GtkEventBox widget and setting the background color on that.
-	//
-	// Deprecated: (since 3.0.0) Use gtk_widget_override_background_color() instead
-	ModifyBg(StateType, *gdk.Color)
-	// ModifyCursor wraps gtk_widget_modify_cursor
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- primary *gdk.Color (nullable): the color to use for primary cursor (does not
-	//     need to be allocated), or %NULL to undo the effect of previous
-	//     calls to of gtk_widget_modify_cursor(). 
-	// 	- secondary *gdk.Color (nullable): the color to use for secondary cursor (does
-	//     not need to be allocated), or %NULL to undo the effect of
-	//     previous calls to of gtk_widget_modify_cursor(). 
-	//
-	// Sets the cursor color to use in a widget, overriding the #GtkWidget
-	// cursor-color and secondary-cursor-color
-	// style properties.
-	// 
-	// All other style values are left untouched.
-	// See also gtk_widget_modify_style().
-	//
-	// Deprecated: (since 3.0.0) Use gtk_widget_override_cursor() instead.
-	ModifyCursor(*gdk.Color, *gdk.Color)
-	// ModifyFg wraps gtk_widget_modify_fg
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- state StateType: the state for which to set the foreground color 
-	// 	- color *gdk.Color (nullable): the color to assign (does not need to be allocated),
-	//     or %NULL to undo the effect of previous calls to
-	//     of gtk_widget_modify_fg(). 
-	//
-	// Sets the foreground color for a widget in a particular state.
-	// 
-	// All other style values are left untouched.
-	// See also gtk_widget_modify_style().
-	//
-	// Deprecated: (since 3.0.0) Use gtk_widget_override_color() instead
-	ModifyFg(StateType, *gdk.Color)
 	// ModifyFont wraps gtk_widget_modify_font
 	// 
 	// The function takes the following parameters:
@@ -68411,25 +68174,6 @@ type Widget interface {
 	//
 	// Deprecated: (since 3.0.0) Use #GtkStyleContext with a custom #GtkStyleProvider instead
 	ModifyStyle(RcStyle)
-	// ModifyText wraps gtk_widget_modify_text
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- state StateType: the state for which to set the text color 
-	// 	- color *gdk.Color (nullable): the color to assign (does not need to
-	//     be allocated), or %NULL to undo the effect of previous
-	//     calls to of gtk_widget_modify_text(). 
-	//
-	// Sets the text color for a widget in a particular state.
-	// 
-	// All other style values are left untouched.
-	// The text color is the foreground color used along with the
-	// base color (see gtk_widget_modify_base()) for widgets such
-	// as #GtkEntry and #GtkTextView.
-	// See also gtk_widget_modify_style().
-	//
-	// Deprecated: (since 3.0.0) Use gtk_widget_override_color() instead
-	ModifyText(StateType, *gdk.Color)
 	// OverrideBackgroundColor wraps gtk_widget_override_background_color
 	// 
 	// The function takes the following parameters:
@@ -74035,161 +73779,6 @@ func (widget *WidgetInstance) MnemonicActivate(groupCycling bool) bool {
 	return goret
 }
 
-// ModifyBase wraps gtk_widget_modify_base
-// 
-// The function takes the following parameters:
-// 
-// 	- state StateType: the state for which to set the base color 
-// 	- color *gdk.Color (nullable): the color to assign (does not need to
-//     be allocated), or %NULL to undo the effect of previous
-//     calls to of gtk_widget_modify_base(). 
-//
-// Sets the base color for a widget in a particular state.
-// All other style values are left untouched. The base color
-// is the background color used along with the text color
-// (see gtk_widget_modify_text()) for widgets such as #GtkEntry
-// and #GtkTextView. See also gtk_widget_modify_style().
-// 
-// &gt; Note that “no window” widgets (which have the %GTK_NO_WINDOW
-// &gt; flag set) draw on their parent container’s window and thus may
-// &gt; not draw any background themselves. This is the case for e.g.
-// &gt; #GtkLabel.
-// &gt;
-// &gt; To modify the background of such widgets, you have to set the
-// &gt; base color on their parent; if you want to set the background
-// &gt; of a rectangular area around a label, try placing the label in
-// &gt; a #GtkEventBox widget and setting the base color on that.
-//
-// Deprecated: (since 3.0.0) Use gtk_widget_override_background_color() instead
-func (widget *WidgetInstance) ModifyBase(state StateType, color *gdk.Color) {
-	var carg0 *C.GtkWidget   // in, none, converted
-	var carg1 C.GtkStateType // in, none, casted
-	var carg2 *C.GdkColor    // in, none, converted, nullable
-
-	carg0 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(widget))
-	carg1 = C.GtkStateType(state)
-	if color != nil {
-		carg2 = (*C.GdkColor)(gdk.UnsafeColorToGlibNone(color))
-	}
-
-	C.gtk_widget_modify_base(carg0, carg1, carg2)
-	runtime.KeepAlive(widget)
-	runtime.KeepAlive(state)
-	runtime.KeepAlive(color)
-}
-
-// ModifyBg wraps gtk_widget_modify_bg
-// 
-// The function takes the following parameters:
-// 
-// 	- state StateType: the state for which to set the background color 
-// 	- color *gdk.Color (nullable): the color to assign (does not need
-//     to be allocated), or %NULL to undo the effect of previous
-//     calls to of gtk_widget_modify_bg(). 
-//
-// Sets the background color for a widget in a particular state.
-// 
-// All other style values are left untouched.
-// See also gtk_widget_modify_style().
-// 
-// &gt; Note that “no window” widgets (which have the %GTK_NO_WINDOW
-// &gt; flag set) draw on their parent container’s window and thus may
-// &gt; not draw any background themselves. This is the case for e.g.
-// &gt; #GtkLabel.
-// &gt;
-// &gt; To modify the background of such widgets, you have to set the
-// &gt; background color on their parent; if you want to set the background
-// &gt; of a rectangular area around a label, try placing the label in
-// &gt; a #GtkEventBox widget and setting the background color on that.
-//
-// Deprecated: (since 3.0.0) Use gtk_widget_override_background_color() instead
-func (widget *WidgetInstance) ModifyBg(state StateType, color *gdk.Color) {
-	var carg0 *C.GtkWidget   // in, none, converted
-	var carg1 C.GtkStateType // in, none, casted
-	var carg2 *C.GdkColor    // in, none, converted, nullable
-
-	carg0 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(widget))
-	carg1 = C.GtkStateType(state)
-	if color != nil {
-		carg2 = (*C.GdkColor)(gdk.UnsafeColorToGlibNone(color))
-	}
-
-	C.gtk_widget_modify_bg(carg0, carg1, carg2)
-	runtime.KeepAlive(widget)
-	runtime.KeepAlive(state)
-	runtime.KeepAlive(color)
-}
-
-// ModifyCursor wraps gtk_widget_modify_cursor
-// 
-// The function takes the following parameters:
-// 
-// 	- primary *gdk.Color (nullable): the color to use for primary cursor (does not
-//     need to be allocated), or %NULL to undo the effect of previous
-//     calls to of gtk_widget_modify_cursor(). 
-// 	- secondary *gdk.Color (nullable): the color to use for secondary cursor (does
-//     not need to be allocated), or %NULL to undo the effect of
-//     previous calls to of gtk_widget_modify_cursor(). 
-//
-// Sets the cursor color to use in a widget, overriding the #GtkWidget
-// cursor-color and secondary-cursor-color
-// style properties.
-// 
-// All other style values are left untouched.
-// See also gtk_widget_modify_style().
-//
-// Deprecated: (since 3.0.0) Use gtk_widget_override_cursor() instead.
-func (widget *WidgetInstance) ModifyCursor(primary *gdk.Color, secondary *gdk.Color) {
-	var carg0 *C.GtkWidget // in, none, converted
-	var carg1 *C.GdkColor  // in, none, converted, nullable
-	var carg2 *C.GdkColor  // in, none, converted, nullable
-
-	carg0 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(widget))
-	if primary != nil {
-		carg1 = (*C.GdkColor)(gdk.UnsafeColorToGlibNone(primary))
-	}
-	if secondary != nil {
-		carg2 = (*C.GdkColor)(gdk.UnsafeColorToGlibNone(secondary))
-	}
-
-	C.gtk_widget_modify_cursor(carg0, carg1, carg2)
-	runtime.KeepAlive(widget)
-	runtime.KeepAlive(primary)
-	runtime.KeepAlive(secondary)
-}
-
-// ModifyFg wraps gtk_widget_modify_fg
-// 
-// The function takes the following parameters:
-// 
-// 	- state StateType: the state for which to set the foreground color 
-// 	- color *gdk.Color (nullable): the color to assign (does not need to be allocated),
-//     or %NULL to undo the effect of previous calls to
-//     of gtk_widget_modify_fg(). 
-//
-// Sets the foreground color for a widget in a particular state.
-// 
-// All other style values are left untouched.
-// See also gtk_widget_modify_style().
-//
-// Deprecated: (since 3.0.0) Use gtk_widget_override_color() instead
-func (widget *WidgetInstance) ModifyFg(state StateType, color *gdk.Color) {
-	var carg0 *C.GtkWidget   // in, none, converted
-	var carg1 C.GtkStateType // in, none, casted
-	var carg2 *C.GdkColor    // in, none, converted, nullable
-
-	carg0 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(widget))
-	carg1 = C.GtkStateType(state)
-	if color != nil {
-		carg2 = (*C.GdkColor)(gdk.UnsafeColorToGlibNone(color))
-	}
-
-	C.gtk_widget_modify_fg(carg0, carg1, carg2)
-	runtime.KeepAlive(widget)
-	runtime.KeepAlive(state)
-	runtime.KeepAlive(color)
-}
-
 // ModifyFont wraps gtk_widget_modify_font
 // 
 // The function takes the following parameters:
@@ -74253,41 +73842,6 @@ func (widget *WidgetInstance) ModifyStyle(style RcStyle) {
 	C.gtk_widget_modify_style(carg0, carg1)
 	runtime.KeepAlive(widget)
 	runtime.KeepAlive(style)
-}
-
-// ModifyText wraps gtk_widget_modify_text
-// 
-// The function takes the following parameters:
-// 
-// 	- state StateType: the state for which to set the text color 
-// 	- color *gdk.Color (nullable): the color to assign (does not need to
-//     be allocated), or %NULL to undo the effect of previous
-//     calls to of gtk_widget_modify_text(). 
-//
-// Sets the text color for a widget in a particular state.
-// 
-// All other style values are left untouched.
-// The text color is the foreground color used along with the
-// base color (see gtk_widget_modify_base()) for widgets such
-// as #GtkEntry and #GtkTextView.
-// See also gtk_widget_modify_style().
-//
-// Deprecated: (since 3.0.0) Use gtk_widget_override_color() instead
-func (widget *WidgetInstance) ModifyText(state StateType, color *gdk.Color) {
-	var carg0 *C.GtkWidget   // in, none, converted
-	var carg1 C.GtkStateType // in, none, casted
-	var carg2 *C.GdkColor    // in, none, converted, nullable
-
-	carg0 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(widget))
-	carg1 = C.GtkStateType(state)
-	if color != nil {
-		carg2 = (*C.GdkColor)(gdk.UnsafeColorToGlibNone(color))
-	}
-
-	C.gtk_widget_modify_text(carg0, carg1, carg2)
-	runtime.KeepAlive(widget)
-	runtime.KeepAlive(state)
-	runtime.KeepAlive(color)
 }
 
 // OverrideBackgroundColor wraps gtk_widget_override_background_color
@@ -78013,16 +77567,6 @@ type CellView interface {
 	// the #GtkCellView:fit-model property or by setting the currently
 	// displayed row of the #GtkCellView and using gtk_widget_get_preferred_size().
 	GetSizeOfRow(*TreePath) (Requisition, bool)
-	// SetBackgroundColor wraps gtk_cell_view_set_background_color
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- color *gdk.Color: the new background color 
-	//
-	// Sets the background color of @view.
-	//
-	// Deprecated: (since 3.4.0) Use gtk_cell_view_set_background_rgba() instead.
-	SetBackgroundColor(*gdk.Color)
 	// SetBackgroundRGBA wraps gtk_cell_view_set_background_rgba
 	// 
 	// The function takes the following parameters:
@@ -78410,27 +77954,6 @@ func (cellView *CellViewInstance) GetSizeOfRow(path *TreePath) (Requisition, boo
 	}
 
 	return requisition, goret
-}
-
-// SetBackgroundColor wraps gtk_cell_view_set_background_color
-// 
-// The function takes the following parameters:
-// 
-// 	- color *gdk.Color: the new background color 
-//
-// Sets the background color of @view.
-//
-// Deprecated: (since 3.4.0) Use gtk_cell_view_set_background_rgba() instead.
-func (cellView *CellViewInstance) SetBackgroundColor(color *gdk.Color) {
-	var carg0 *C.GtkCellView // in, none, converted
-	var carg1 *C.GdkColor    // in, none, converted
-
-	carg0 = (*C.GtkCellView)(UnsafeCellViewToGlibNone(cellView))
-	carg1 = (*C.GdkColor)(gdk.UnsafeColorToGlibNone(color))
-
-	C.gtk_cell_view_set_background_color(carg0, carg1)
-	runtime.KeepAlive(cellView)
-	runtime.KeepAlive(color)
 }
 
 // SetBackgroundRGBA wraps gtk_cell_view_set_background_rgba
@@ -115853,15 +115376,6 @@ type ColorButton interface {
 	//
 	// Deprecated: (since 3.4.0) Use gtk_color_chooser_get_rgba() instead.
 	GetAlpha() uint16
-	// GetColor wraps gtk_color_button_get_color
-	// The function returns the following values:
-	// 
-	// 	- color gdk.Color: a #GdkColor to fill in with the current color 
-	//
-	// Sets @color to be the current color in the #GtkColorButton widget.
-	//
-	// Deprecated: (since 3.4.0) Use gtk_color_chooser_get_rgba() instead.
-	GetColor() gdk.Color
 	// GetTitle wraps gtk_color_button_get_title
 	// The function returns the following values:
 	// 
@@ -115888,16 +115402,6 @@ type ColorButton interface {
 	//
 	// Deprecated: (since 3.4.0) Use gtk_color_chooser_set_rgba() instead.
 	SetAlpha(uint16)
-	// SetColor wraps gtk_color_button_set_color
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- color *gdk.Color: A #GdkColor to set the current color with 
-	//
-	// Sets the current color to be @color.
-	//
-	// Deprecated: Use gtk_color_chooser_set_rgba() instead.
-	SetColor(*gdk.Color)
 	// SetTitle wraps gtk_color_button_set_title
 	// 
 	// The function takes the following parameters:
@@ -116001,35 +115505,6 @@ func NewColorButtonInstance() Widget {
 	return goret
 }
 
-// NewColorButtonInstanceWithColor wraps gtk_color_button_new_with_color
-// 
-// The function takes the following parameters:
-// 
-// 	- color *gdk.Color: A #GdkColor to set the current color with 
-// 
-// The function returns the following values:
-// 
-// 	- goret Widget 
-//
-// Creates a new color button.
-//
-// Deprecated: (since 3.4.0) Use gtk_color_button_new_with_rgba() instead.
-func NewColorButtonInstanceWithColor(color *gdk.Color) Widget {
-	var carg1 *C.GdkColor  // in, none, converted
-	var cret  *C.GtkWidget // return, none, converted
-
-	carg1 = (*C.GdkColor)(gdk.UnsafeColorToGlibNone(color))
-
-	cret = C.gtk_color_button_new_with_color(carg1)
-	runtime.KeepAlive(color)
-
-	var goret Widget
-
-	goret = UnsafeWidgetFromGlibNone(unsafe.Pointer(cret))
-
-	return goret
-}
-
 // NewColorButtonInstanceWithRGBA wraps gtk_color_button_new_with_rgba
 // 
 // The function takes the following parameters:
@@ -116079,32 +115554,6 @@ func (button *ColorButtonInstance) GetAlpha() uint16 {
 	goret = uint16(cret)
 
 	return goret
-}
-
-// GetColor wraps gtk_color_button_get_color
-// The function returns the following values:
-// 
-// 	- color gdk.Color: a #GdkColor to fill in with the current color 
-//
-// Sets @color to be the current color in the #GtkColorButton widget.
-//
-// Deprecated: (since 3.4.0) Use gtk_color_chooser_get_rgba() instead.
-func (button *ColorButtonInstance) GetColor() gdk.Color {
-	var carg0 *C.GtkColorButton // in, none, converted
-	var carg1 C.GdkColor        // out, transfer: none, C Pointers: 0, Name: Color, caller-allocates
-
-	carg0 = (*C.GtkColorButton)(UnsafeColorButtonToGlibNone(button))
-
-	C.gtk_color_button_get_color(carg0, &carg1)
-	runtime.KeepAlive(button)
-
-	var color gdk.Color
-
-	_ = color
-	_ = carg1
-	panic("unimplemented conversion of gdk.Color (GdkColor)")
-
-	return color
 }
 
 // GetTitle wraps gtk_color_button_get_title
@@ -116174,27 +115623,6 @@ func (button *ColorButtonInstance) SetAlpha(alpha uint16) {
 	C.gtk_color_button_set_alpha(carg0, carg1)
 	runtime.KeepAlive(button)
 	runtime.KeepAlive(alpha)
-}
-
-// SetColor wraps gtk_color_button_set_color
-// 
-// The function takes the following parameters:
-// 
-// 	- color *gdk.Color: A #GdkColor to set the current color with 
-//
-// Sets the current color to be @color.
-//
-// Deprecated: Use gtk_color_chooser_set_rgba() instead.
-func (button *ColorButtonInstance) SetColor(color *gdk.Color) {
-	var carg0 *C.GtkColorButton // in, none, converted
-	var carg1 *C.GdkColor       // in, none, converted
-
-	carg0 = (*C.GtkColorButton)(UnsafeColorButtonToGlibNone(button))
-	carg1 = (*C.GdkColor)(gdk.UnsafeColorToGlibNone(color))
-
-	C.gtk_color_button_set_color(carg0, carg1)
-	runtime.KeepAlive(button)
-	runtime.KeepAlive(color)
 }
 
 // SetTitle wraps gtk_color_button_set_title
@@ -116370,15 +115798,6 @@ type ColorSelection interface {
 	//
 	// Returns the current alpha value.
 	GetCurrentAlpha() uint16
-	// GetCurrentColor wraps gtk_color_selection_get_current_color
-	// The function returns the following values:
-	// 
-	// 	- color gdk.Color: a #GdkColor to fill in with the current color 
-	//
-	// Sets @color to be the current color in the GtkColorSelection widget.
-	//
-	// Deprecated: (since 3.4.0) Use gtk_color_selection_get_current_rgba() instead.
-	GetCurrentColor() gdk.Color
 	// GetCurrentRGBA wraps gtk_color_selection_get_current_rgba
 	// The function returns the following values:
 	// 
@@ -116407,15 +115826,6 @@ type ColorSelection interface {
 	//
 	// Returns the previous alpha value.
 	GetPreviousAlpha() uint16
-	// GetPreviousColor wraps gtk_color_selection_get_previous_color
-	// The function returns the following values:
-	// 
-	// 	- color gdk.Color: a #GdkColor to fill in with the original color value 
-	//
-	// Fills @color in with the original color value.
-	//
-	// Deprecated: (since 3.4.0) Use gtk_color_selection_get_previous_rgba() instead.
-	GetPreviousColor() gdk.Color
 	// GetPreviousRGBA wraps gtk_color_selection_get_previous_rgba
 	// The function returns the following values:
 	// 
@@ -116441,19 +115851,6 @@ type ColorSelection interface {
 	// The first time this is called, it will also set
 	// the original opacity to be @alpha too.
 	SetCurrentAlpha(uint16)
-	// SetCurrentColor wraps gtk_color_selection_set_current_color
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- color *gdk.Color: a #GdkColor to set the current color with 
-	//
-	// Sets the current color to be @color.
-	// 
-	// The first time this is called, it will also set
-	// the original color to be @color too.
-	//
-	// Deprecated: (since 3.4.0) Use gtk_color_selection_set_current_rgba() instead.
-	SetCurrentColor(*gdk.Color)
 	// SetCurrentRGBA wraps gtk_color_selection_set_current_rgba
 	// 
 	// The function takes the following parameters:
@@ -116492,21 +115889,6 @@ type ColorSelection interface {
 	// This function should be called with some hesitations,
 	// as it might seem confusing to have that alpha change.
 	SetPreviousAlpha(uint16)
-	// SetPreviousColor wraps gtk_color_selection_set_previous_color
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- color *gdk.Color: a #GdkColor to set the previous color with 
-	//
-	// Sets the “previous” color to be @color.
-	// 
-	// This function should be called with some hesitations,
-	// as it might seem confusing to have that color change.
-	// Calling gtk_color_selection_set_current_color() will also
-	// set this color the first time it is called.
-	//
-	// Deprecated: (since 3.4.0) Use gtk_color_selection_set_previous_rgba() instead.
-	SetPreviousColor(*gdk.Color)
 	// SetPreviousRGBA wraps gtk_color_selection_set_previous_rgba
 	// 
 	// The function takes the following parameters:
@@ -116591,38 +115973,6 @@ func NewColorSelectionInstance() Widget {
 	return goret
 }
 
-// ColorSelectionInstancePaletteToString wraps gtk_color_selection_palette_to_string
-// 
-// The function takes the following parameters:
-// 
-// 	- colors []gdk.Color: an array of colors 
-// 
-// The function returns the following values:
-// 
-// 	- goret string 
-//
-// Encodes a palette as a string, useful for persistent storage.
-func ColorSelectionInstancePaletteToString(colors []gdk.Color) string {
-	var carg1 *C.GdkColor // in, transfer: none, C Pointers: 1, Name: array[Color], array (inner: *typesystem.Record, length-by: carg2)
-	var carg2 C.int       // implicit
-	var cret  *C.gchar    // return, full, string
-
-	_ = colors
-	_ = carg1
-	_ = carg2
-	panic("unimplemented conversion of []gdk.Color (const GdkColor*)")
-
-	cret = C.gtk_color_selection_palette_to_string(carg1, carg2)
-	runtime.KeepAlive(colors)
-
-	var goret string
-
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
-	defer C.free(unsafe.Pointer(cret))
-
-	return goret
-}
-
 // GetCurrentAlpha wraps gtk_color_selection_get_current_alpha
 // The function returns the following values:
 // 
@@ -116643,32 +115993,6 @@ func (colorsel *ColorSelectionInstance) GetCurrentAlpha() uint16 {
 	goret = uint16(cret)
 
 	return goret
-}
-
-// GetCurrentColor wraps gtk_color_selection_get_current_color
-// The function returns the following values:
-// 
-// 	- color gdk.Color: a #GdkColor to fill in with the current color 
-//
-// Sets @color to be the current color in the GtkColorSelection widget.
-//
-// Deprecated: (since 3.4.0) Use gtk_color_selection_get_current_rgba() instead.
-func (colorsel *ColorSelectionInstance) GetCurrentColor() gdk.Color {
-	var carg0 *C.GtkColorSelection // in, none, converted
-	var carg1 C.GdkColor           // out, transfer: none, C Pointers: 0, Name: Color, caller-allocates
-
-	carg0 = (*C.GtkColorSelection)(UnsafeColorSelectionToGlibNone(colorsel))
-
-	C.gtk_color_selection_get_current_color(carg0, &carg1)
-	runtime.KeepAlive(colorsel)
-
-	var color gdk.Color
-
-	_ = color
-	_ = carg1
-	panic("unimplemented conversion of gdk.Color (GdkColor)")
-
-	return color
 }
 
 // GetCurrentRGBA wraps gtk_color_selection_get_current_rgba
@@ -116765,32 +116089,6 @@ func (colorsel *ColorSelectionInstance) GetPreviousAlpha() uint16 {
 	return goret
 }
 
-// GetPreviousColor wraps gtk_color_selection_get_previous_color
-// The function returns the following values:
-// 
-// 	- color gdk.Color: a #GdkColor to fill in with the original color value 
-//
-// Fills @color in with the original color value.
-//
-// Deprecated: (since 3.4.0) Use gtk_color_selection_get_previous_rgba() instead.
-func (colorsel *ColorSelectionInstance) GetPreviousColor() gdk.Color {
-	var carg0 *C.GtkColorSelection // in, none, converted
-	var carg1 C.GdkColor           // out, transfer: none, C Pointers: 0, Name: Color, caller-allocates
-
-	carg0 = (*C.GtkColorSelection)(UnsafeColorSelectionToGlibNone(colorsel))
-
-	C.gtk_color_selection_get_previous_color(carg0, &carg1)
-	runtime.KeepAlive(colorsel)
-
-	var color gdk.Color
-
-	_ = color
-	_ = carg1
-	panic("unimplemented conversion of gdk.Color (GdkColor)")
-
-	return color
-}
-
 // GetPreviousRGBA wraps gtk_color_selection_get_previous_rgba
 // The function returns the following values:
 // 
@@ -116859,30 +116157,6 @@ func (colorsel *ColorSelectionInstance) SetCurrentAlpha(alpha uint16) {
 	C.gtk_color_selection_set_current_alpha(carg0, carg1)
 	runtime.KeepAlive(colorsel)
 	runtime.KeepAlive(alpha)
-}
-
-// SetCurrentColor wraps gtk_color_selection_set_current_color
-// 
-// The function takes the following parameters:
-// 
-// 	- color *gdk.Color: a #GdkColor to set the current color with 
-//
-// Sets the current color to be @color.
-// 
-// The first time this is called, it will also set
-// the original color to be @color too.
-//
-// Deprecated: (since 3.4.0) Use gtk_color_selection_set_current_rgba() instead.
-func (colorsel *ColorSelectionInstance) SetCurrentColor(color *gdk.Color) {
-	var carg0 *C.GtkColorSelection // in, none, converted
-	var carg1 *C.GdkColor          // in, none, converted
-
-	carg0 = (*C.GtkColorSelection)(UnsafeColorSelectionToGlibNone(colorsel))
-	carg1 = (*C.GdkColor)(gdk.UnsafeColorToGlibNone(color))
-
-	C.gtk_color_selection_set_current_color(carg0, carg1)
-	runtime.KeepAlive(colorsel)
-	runtime.KeepAlive(color)
 }
 
 // SetCurrentRGBA wraps gtk_color_selection_set_current_rgba
@@ -116969,32 +116243,6 @@ func (colorsel *ColorSelectionInstance) SetPreviousAlpha(alpha uint16) {
 	C.gtk_color_selection_set_previous_alpha(carg0, carg1)
 	runtime.KeepAlive(colorsel)
 	runtime.KeepAlive(alpha)
-}
-
-// SetPreviousColor wraps gtk_color_selection_set_previous_color
-// 
-// The function takes the following parameters:
-// 
-// 	- color *gdk.Color: a #GdkColor to set the previous color with 
-//
-// Sets the “previous” color to be @color.
-// 
-// This function should be called with some hesitations,
-// as it might seem confusing to have that color change.
-// Calling gtk_color_selection_set_current_color() will also
-// set this color the first time it is called.
-//
-// Deprecated: (since 3.4.0) Use gtk_color_selection_set_previous_rgba() instead.
-func (colorsel *ColorSelectionInstance) SetPreviousColor(color *gdk.Color) {
-	var carg0 *C.GtkColorSelection // in, none, converted
-	var carg1 *C.GdkColor          // in, none, converted
-
-	carg0 = (*C.GtkColorSelection)(UnsafeColorSelectionToGlibNone(colorsel))
-	carg1 = (*C.GdkColor)(gdk.UnsafeColorToGlibNone(color))
-
-	C.gtk_color_selection_set_previous_color(carg0, carg1)
-	runtime.KeepAlive(colorsel)
-	runtime.KeepAlive(color)
 }
 
 // SetPreviousRGBA wraps gtk_color_selection_set_previous_rgba

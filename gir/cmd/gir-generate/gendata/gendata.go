@@ -128,7 +128,6 @@ var Main = genmain.Data{
 					typesystem.IgnoreByFileNameSubstring("gerror."), // already handled internally
 					typesystem.IgnoreByFileNameSubstring("ghook."),
 					typesystem.IgnoreByFileNameSubstring("glib-unix."),
-					typesystem.IgnoreByFileNameSubstring("glist."),
 					typesystem.IgnoreByFileNameSubstring("gmacros."),
 					typesystem.IgnoreByFileNameSubstring("gmem."),
 					typesystem.IgnoreByFileNameSubstring("gnetworking."), // needs header
@@ -137,7 +136,6 @@ var Main = genmain.Data{
 					typesystem.IgnoreByFileNameSubstring("grefcount."),
 					typesystem.IgnoreByFileNameSubstring("grefstring."),
 					typesystem.IgnoreByFileNameSubstring("gslice."),
-					typesystem.IgnoreByFileNameSubstring("gslist."),
 					typesystem.IgnoreByFileNameSubstring("gstdio."),
 					typesystem.IgnoreByFileNameSubstring("gstrfuncs."),
 					typesystem.IgnoreByFileNameSubstring("gstringchunk."),
@@ -148,8 +146,10 @@ var Main = genmain.Data{
 					typesystem.IgnoreByFileNameSubstring("gthreadpool."),
 					typesystem.IgnoreByFileNameSubstring("gtrashstack."),
 
-					// slomo said to consider these as legacy:
+					// slomo said to consider these as legacy (also see https://gitlab.gnome.org/GNOME/gobject-introspection/-/issues/305#note_981623):
 					typesystem.IgnoreMatching("Array"),
+					typesystem.IgnoreMatching("List"),
+					typesystem.IgnoreMatching("SList"),
 					typesystem.IgnoreMatching("PtrArray"),
 					typesystem.IgnoreMatching("HashTable"),
 				},
@@ -289,8 +289,21 @@ var Main = genmain.Data{
 				MinVersion: "2.50",
 			},
 			"Gdk-3": {
+				MinVersion: "3.24",
 				IgnoredDefinitions: []typesystem.IgnoreFunc{
-					typesystem.IgnoreByFileNameSubstring("gdkprivate"),
+					typesystem.IgnoreByFileNameSubstring("gdkprivate"), // not found
+
+					// These return instance owned GValues, maybe implement them manually?
+					typesystem.IgnoreMatching("Clipboard.read_value_finish"),
+					typesystem.IgnoreMatching("ContentDeserializer.get_value"),
+					typesystem.IgnoreMatching("ContentSerializer.get_value"),
+					typesystem.IgnoreMatching("Drop.read_value_finish"),
+				},
+			},
+			"Gdk-4": {
+				MinVersion: "4.19",
+				IgnoredDefinitions: []typesystem.IgnoreFunc{
+					// These return instance owned GValues, maybe implement them manually?
 					typesystem.IgnoreMatching("Clipboard.read_value_finish"),
 					typesystem.IgnoreMatching("ContentDeserializer.get_value"),
 					typesystem.IgnoreMatching("ContentSerializer.get_value"),
@@ -298,7 +311,7 @@ var Main = genmain.Data{
 				},
 			},
 			"GdkPixbuf-2": {
-				// MinVersion: "2.50",
+				MinVersion: "2.42",
 				IgnoredDefinitions: []typesystem.IgnoreFunc{
 					// these are not found:
 					typesystem.IgnoreMatching("PixbufModule"),
@@ -309,6 +322,13 @@ var Main = genmain.Data{
 					typesystem.IgnoreMatching("PixbufFormat.disabled"),
 					typesystem.IgnoreMatching("PixbufAnimationClass"),
 					typesystem.IgnoreMatching("PixbufAnimationIterClass"),
+				},
+			},
+			"GdkWayland-4": {
+				MinVersion: "4.19",
+				IgnoredDefinitions: []typesystem.IgnoreFunc{
+					// FIXME: returned type is converted to *gpointer? https://docs.gtk.org/gdk4-wayland/method.WaylandDevice.get_xkb_keymap.html
+					typesystem.IgnoreMatching("WaylandDevice.get_xkb_keymap"),
 				},
 			},
 		},

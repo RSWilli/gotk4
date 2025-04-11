@@ -87,7 +87,6 @@ var (
 	TypeSeat                 = gobject.Type(C.gdk_seat_get_type())
 	TypeVisual               = gobject.Type(C.gdk_visual_get_type())
 	TypeWindow               = gobject.Type(C.gdk_window_get_type())
-	TypeColor                = gobject.Type(C.gdk_color_get_type())
 	TypeEventSequence        = gobject.Type(C.gdk_event_sequence_get_type())
 	TypeFrameTimings         = gobject.Type(C.gdk_frame_timings_get_type())
 	TypeRGBA                 = gobject.Type(C.gdk_rgba_get_type())
@@ -160,7 +159,6 @@ func init() {
 		gobject.TypeMarshaler{T: TypeSeat, F: marshalSeatInstance},
 		gobject.TypeMarshaler{T: TypeVisual, F: marshalVisualInstance},
 		gobject.TypeMarshaler{T: TypeWindow, F: marshalWindowInstance},
-		gobject.TypeMarshaler{T: TypeColor, F: marshalColor},
 		gobject.TypeMarshaler{T: TypeEventSequence, F: marshalEventSequence},
 		gobject.TypeMarshaler{T: TypeFrameTimings, F: marshalFrameTimings},
 		gobject.TypeMarshaler{T: TypeRGBA, F: marshalRGBA},
@@ -7727,26 +7725,6 @@ type SeatGrabPrepareFunc func(seat Seat, window Window)
 // recursively invalidate it or now.
 type WindowChildFunc func(window Window) (goret bool)
 
-// AddOptionEntriesLibgtkOnly wraps gdk_add_option_entries_libgtk_only
-// 
-// The function takes the following parameters:
-// 
-// 	- group *glib.OptionGroup: An option group. 
-//
-// Appends gdk option entries to the passed in option group. This is
-// not public API and must not be used by applications.
-//
-// Deprecated: (since 3.16.0) This symbol was never meant to be used outside
-//   of GTK+
-func AddOptionEntriesLibgtkOnly(group *glib.OptionGroup) {
-	var carg1 *C.GOptionGroup // in, none, converted
-
-	carg1 = (*C.GOptionGroup)(glib.UnsafeOptionGroupToGlibNone(group))
-
-	C.gdk_add_option_entries_libgtk_only(carg1)
-	runtime.KeepAlive(group)
-}
-
 // Beep wraps gdk_beep
 //
 // Emits a short beep on the default display.
@@ -8206,30 +8184,6 @@ func GetDefaultRootWindow() Window {
 	return goret
 }
 
-// GetDisplay wraps gdk_get_display
-// The function returns the following values:
-// 
-// 	- goret string 
-//
-// Gets the name of the display, which usually comes from the
-// `DISPLAY` environment variable or the
-// `--display` command line option.
-//
-// Deprecated: (since 3.8.0) Call gdk_display_get_name (gdk_display_get_default ()))
-//    instead.
-func GetDisplay() string {
-	var cret *C.gchar // return, full, string
-
-	cret = C.gdk_get_display()
-
-	var goret string
-
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
-	defer C.free(unsafe.Pointer(cret))
-
-	return goret
-}
-
 // GetDisplayArgName wraps gdk_get_display_arg_name
 // The function returns the following values:
 // 
@@ -8288,78 +8242,6 @@ func GetShowEvents() bool {
 	}
 
 	return goret
-}
-
-// KeyboardGrab wraps gdk_keyboard_grab
-// 
-// The function takes the following parameters:
-// 
-// 	- window Window: the #GdkWindow which will own the grab (the grab window). 
-// 	- ownerEvents bool: if %FALSE then all keyboard events are reported with respect to
-//   @window. If %TRUE then keyboard events for this application are
-//   reported as normal, but keyboard events outside this application
-//   are reported with respect to @window. Both key press and key
-//   release events are always reported, independant of the event mask
-//   set by the application. 
-// 	- time_ uint32: a timestamp from a #GdkEvent, or %GDK_CURRENT_TIME if no timestamp is
-//   available. 
-// 
-// The function returns the following values:
-// 
-// 	- goret GrabStatus 
-//
-// Grabs the keyboard so that all events are passed to this
-// application until the keyboard is ungrabbed with gdk_keyboard_ungrab().
-// This overrides any previous keyboard grab by this client.
-// 
-// If you set up anything at the time you take the grab that needs to be cleaned
-// up when the grab ends, you should handle the #GdkEventGrabBroken events that
-// are emitted when the grab ends unvoluntarily.
-//
-// Deprecated: (since 3.0.0) Use gdk_device_grab() instead.
-func KeyboardGrab(window Window, ownerEvents bool, time_ uint32) GrabStatus {
-	var carg1 *C.GdkWindow    // in, none, converted
-	var carg2 C.gboolean      // in
-	var carg3 C.guint32       // in, none, casted
-	var cret  C.GdkGrabStatus // return, none, casted
-
-	carg1 = (*C.GdkWindow)(UnsafeWindowToGlibNone(window))
-	if ownerEvents {
-		carg2 = C.TRUE
-	}
-	carg3 = C.guint32(time_)
-
-	cret = C.gdk_keyboard_grab(carg1, carg2, carg3)
-	runtime.KeepAlive(window)
-	runtime.KeepAlive(ownerEvents)
-	runtime.KeepAlive(time_)
-
-	var goret GrabStatus
-
-	goret = GrabStatus(cret)
-
-	return goret
-}
-
-// KeyboardUngrab wraps gdk_keyboard_ungrab
-// 
-// The function takes the following parameters:
-// 
-// 	- time_ uint32: a timestamp from a #GdkEvent, or %GDK_CURRENT_TIME if no
-//        timestamp is available. 
-//
-// Ungrabs the keyboard on the default display, if it is grabbed by this
-// application.
-//
-// Deprecated: (since 3.0.0) Use gdk_device_ungrab(), together with gdk_device_grab()
-//             instead.
-func KeyboardUngrab(time_ uint32) {
-	var carg1 C.guint32 // in, none, casted
-
-	carg1 = C.guint32(time_)
-
-	C.gdk_keyboard_ungrab(carg1)
-	runtime.KeepAlive(time_)
 }
 
 // KeyvalConvertCase wraps gdk_keyval_convert_case
@@ -8869,153 +8751,6 @@ func PixbufGetFromWindow(window Window, srcX int, srcY int, width int, height in
 	return goret
 }
 
-// PointerGrab wraps gdk_pointer_grab
-// 
-// The function takes the following parameters:
-// 
-// 	- window Window: the #GdkWindow which will own the grab (the grab window). 
-// 	- ownerEvents bool: if %FALSE then all pointer events are reported with respect to
-//                @window and are only reported if selected by @event_mask. If %TRUE then pointer
-//                events for this application are reported as normal, but pointer events outside
-//                this application are reported with respect to @window and only if selected by
-//                @event_mask. In either mode, unreported events are discarded. 
-// 	- eventMask EventMask: specifies the event mask, which is used in accordance with
-//              @owner_events. Note that only pointer events (i.e. button and motion events)
-//              may be selected. 
-// 	- confineTo Window (nullable): If non-%NULL, the pointer will be confined to this
-//              window during the grab. If the pointer is outside @confine_to, it will
-//              automatically be moved to the closest edge of @confine_to and enter
-//              and leave events will be generated as necessary. 
-// 	- cursor Cursor (nullable): the cursor to display while the grab is active. If this is %NULL then
-//          the normal cursors are used for @window and its descendants, and the cursor
-//          for @window is used for all other windows. 
-// 	- time_ uint32: the timestamp of the event which led to this pointer grab. This usually
-//         comes from a #GdkEventButton struct, though %GDK_CURRENT_TIME can be used if
-//         the time isn’t known. 
-// 
-// The function returns the following values:
-// 
-// 	- goret GrabStatus 
-//
-// Grabs the pointer (usually a mouse) so that all events are passed to this
-// application until the pointer is ungrabbed with gdk_pointer_ungrab(), or
-// the grab window becomes unviewable.
-// This overrides any previous pointer grab by this client.
-// 
-// Pointer grabs are used for operations which need complete control over mouse
-// events, even if the mouse leaves the application.
-// For example in GTK+ it is used for Drag and Drop, for dragging the handle in
-// the #GtkHPaned and #GtkVPaned widgets.
-// 
-// Note that if the event mask of an X window has selected both button press and
-// button release events, then a button press event will cause an automatic
-// pointer grab until the button is released.
-// X does this automatically since most applications expect to receive button
-// press and release events in pairs.
-// It is equivalent to a pointer grab on the window with @owner_events set to
-// %TRUE.
-// 
-// If you set up anything at the time you take the grab that needs to be cleaned
-// up when the grab ends, you should handle the #GdkEventGrabBroken events that
-// are emitted when the grab ends unvoluntarily.
-//
-// Deprecated: (since 3.0.0) Use gdk_device_grab() instead.
-func PointerGrab(window Window, ownerEvents bool, eventMask EventMask, confineTo Window, cursor Cursor, time_ uint32) GrabStatus {
-	var carg1 *C.GdkWindow    // in, none, converted
-	var carg2 C.gboolean      // in
-	var carg3 C.GdkEventMask  // in, none, casted
-	var carg4 *C.GdkWindow    // in, none, converted, nullable
-	var carg5 *C.GdkCursor    // in, none, converted, nullable
-	var carg6 C.guint32       // in, none, casted
-	var cret  C.GdkGrabStatus // return, none, casted
-
-	carg1 = (*C.GdkWindow)(UnsafeWindowToGlibNone(window))
-	if ownerEvents {
-		carg2 = C.TRUE
-	}
-	carg3 = C.GdkEventMask(eventMask)
-	if confineTo != nil {
-		carg4 = (*C.GdkWindow)(UnsafeWindowToGlibNone(confineTo))
-	}
-	if cursor != nil {
-		carg5 = (*C.GdkCursor)(UnsafeCursorToGlibNone(cursor))
-	}
-	carg6 = C.guint32(time_)
-
-	cret = C.gdk_pointer_grab(carg1, carg2, carg3, carg4, carg5, carg6)
-	runtime.KeepAlive(window)
-	runtime.KeepAlive(ownerEvents)
-	runtime.KeepAlive(eventMask)
-	runtime.KeepAlive(confineTo)
-	runtime.KeepAlive(cursor)
-	runtime.KeepAlive(time_)
-
-	var goret GrabStatus
-
-	goret = GrabStatus(cret)
-
-	return goret
-}
-
-// PointerIsGrabbed wraps gdk_pointer_is_grabbed
-// The function returns the following values:
-// 
-// 	- goret bool 
-//
-// Returns %TRUE if the pointer on the default display is currently
-// grabbed by this application.
-// 
-// Note that this does not take the inmplicit pointer grab on button
-// presses into account.
-//
-// Deprecated: (since 3.0.0) Use gdk_display_device_is_grabbed() instead.
-func PointerIsGrabbed() bool {
-	var cret C.gboolean // return
-
-	cret = C.gdk_pointer_is_grabbed()
-
-	var goret bool
-
-	if cret != 0 {
-		goret = true
-	}
-
-	return goret
-}
-
-// PointerUngrab wraps gdk_pointer_ungrab
-// 
-// The function takes the following parameters:
-// 
-// 	- time_ uint32: a timestamp from a #GdkEvent, or %GDK_CURRENT_TIME if no
-//  timestamp is available. 
-//
-// Ungrabs the pointer on the default display, if it is grabbed by this
-// application.
-//
-// Deprecated: (since 3.0.0) Use gdk_device_ungrab(), together with gdk_device_grab()
-//             instead.
-func PointerUngrab(time_ uint32) {
-	var carg1 C.guint32 // in, none, casted
-
-	carg1 = C.guint32(time_)
-
-	C.gdk_pointer_ungrab(carg1)
-	runtime.KeepAlive(time_)
-}
-
-// PreParseLibgtkOnly wraps gdk_pre_parse_libgtk_only
-//
-// Prepare for parsing command line arguments for GDK. This is not
-// public API and should not be used in application code.
-//
-// Deprecated: (since 3.16.0) This symbol was never meant to be used outside
-//   of GTK+
-func PreParseLibgtkOnly() {
-
-	C.gdk_pre_parse_libgtk_only()
-}
-
 // SetAllowedBackends wraps gdk_set_allowed_backends
 // 
 // The function takes the following parameters:
@@ -9502,46 +9237,6 @@ func ThreadsAddTimeoutSecondsFull(priority int, interval uint, function glib.Sou
 	return goret
 }
 
-// ThreadsEnter wraps gdk_threads_enter
-//
-// This function marks the beginning of a critical section in which
-// GDK and GTK+ functions can be called safely and without causing race
-// conditions. Only one thread at a time can be in such a critial
-// section.
-//
-// Deprecated: (since 3.6.0) All GDK and GTK+ calls should be made from the main
-//     thread
-func ThreadsEnter() {
-
-	C.gdk_threads_enter()
-}
-
-// ThreadsInit wraps gdk_threads_init
-//
-// Initializes GDK so that it can be used from multiple threads
-// in conjunction with gdk_threads_enter() and gdk_threads_leave().
-// 
-// This call must be made before any use of the main loop from
-// GTK+; to be safe, call it before gtk_init().
-//
-// Deprecated: (since 3.6.0) All GDK and GTK+ calls should be made from the main
-//     thread
-func ThreadsInit() {
-
-	C.gdk_threads_init()
-}
-
-// ThreadsLeave wraps gdk_threads_leave
-//
-// Leaves a critical region begun with gdk_threads_enter().
-//
-// Deprecated: (since 3.6.0) All GDK and GTK+ calls should be made from the main
-//     thread
-func ThreadsLeave() {
-
-	C.gdk_threads_leave()
-}
-
 // UnicodeToKeyval wraps gdk_unicode_to_keyval
 // 
 // The function takes the following parameters:
@@ -9888,17 +9583,6 @@ type AppLaunchContext interface {
 	// it is up to the window manager to pick one, typically it will
 	// be the current workspace.
 	SetDesktop(int)
-	// SetDisplay wraps gdk_app_launch_context_set_display
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- display Display: a #GdkDisplay 
-	//
-	// Sets the display on which applications will be launched when
-	// using this context. See also gdk_app_launch_context_set_screen().
-	//
-	// Deprecated: (since 3.0.0) Use gdk_display_get_app_launch_context() instead
-	SetDisplay(Display)
 	// SetIcon wraps gdk_app_launch_context_set_icon
 	// 
 	// The function takes the following parameters:
@@ -9996,26 +9680,6 @@ func UnsafeAppLaunchContextToGlibFull(c AppLaunchContext) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewAppLaunchContextInstance wraps gdk_app_launch_context_new
-// The function returns the following values:
-// 
-// 	- goret AppLaunchContext 
-//
-// Creates a new #GdkAppLaunchContext.
-//
-// Deprecated: (since 3.0.0) Use gdk_display_get_app_launch_context() instead
-func NewAppLaunchContextInstance() AppLaunchContext {
-	var cret *C.GdkAppLaunchContext // return, full, converted
-
-	cret = C.gdk_app_launch_context_new()
-
-	var goret AppLaunchContext
-
-	goret = UnsafeAppLaunchContextFromGlibFull(unsafe.Pointer(cret))
-
-	return goret
-}
-
 // SetDesktop wraps gdk_app_launch_context_set_desktop
 // 
 // The function takes the following parameters:
@@ -10040,28 +9704,6 @@ func (context *AppLaunchContextInstance) SetDesktop(desktop int) {
 	C.gdk_app_launch_context_set_desktop(carg0, carg1)
 	runtime.KeepAlive(context)
 	runtime.KeepAlive(desktop)
-}
-
-// SetDisplay wraps gdk_app_launch_context_set_display
-// 
-// The function takes the following parameters:
-// 
-// 	- display Display: a #GdkDisplay 
-//
-// Sets the display on which applications will be launched when
-// using this context. See also gdk_app_launch_context_set_screen().
-//
-// Deprecated: (since 3.0.0) Use gdk_display_get_app_launch_context() instead
-func (context *AppLaunchContextInstance) SetDisplay(display Display) {
-	var carg0 *C.GdkAppLaunchContext // in, none, converted
-	var carg1 *C.GdkDisplay          // in, none, converted
-
-	carg0 = (*C.GdkAppLaunchContext)(UnsafeAppLaunchContextToGlibNone(context))
-	carg1 = (*C.GdkDisplay)(UnsafeDisplayToGlibNone(display))
-
-	C.gdk_app_launch_context_set_display(carg0, carg1)
-	runtime.KeepAlive(context)
-	runtime.KeepAlive(display)
 }
 
 // SetIcon wraps gdk_app_launch_context_set_icon
@@ -10246,38 +9888,6 @@ func UnsafeCursorToGlibNone(c Cursor) unsafe.Pointer {
 // UnsafeCursorToGlibFull is used to convert the instance to it's C value GdkCursor, while removeing the finalizer. This is used by the bindings internally.
 func UnsafeCursorToGlibFull(c Cursor) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
-}
-
-// NewCursorInstance wraps gdk_cursor_new
-// 
-// The function takes the following parameters:
-// 
-// 	- cursorType CursorType: cursor to create 
-// 
-// The function returns the following values:
-// 
-// 	- goret Cursor 
-//
-// Creates a new cursor from the set of builtin cursors for the default display.
-// See gdk_cursor_new_for_display().
-// 
-// To make the cursor invisible, use %GDK_BLANK_CURSOR.
-//
-// Deprecated: (since 3.16.0) Use gdk_cursor_new_for_display() instead.
-func NewCursorInstance(cursorType CursorType) Cursor {
-	var carg1 C.GdkCursorType // in, none, casted
-	var cret  *C.GdkCursor    // return, full, converted
-
-	carg1 = C.GdkCursorType(cursorType)
-
-	cret = C.gdk_cursor_new(carg1)
-	runtime.KeepAlive(cursorType)
-
-	var goret Cursor
-
-	goret = UnsafeCursorFromGlibFull(unsafe.Pointer(cret))
-
-	return goret
 }
 
 // NewCursorInstanceForDisplay wraps gdk_cursor_new_for_display
@@ -10752,56 +10362,6 @@ type Device interface {
 	// function may not be called on devices of type %GDK_DEVICE_TYPE_SLAVE,
 	// unless there is an ongoing grab on them, see gdk_device_grab().
 	GetWindowAtPositionDouble() (float64, float64, Window)
-	// Grab wraps gdk_device_grab
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- window Window: the #GdkWindow which will own the grab (the grab window) 
-	// 	- grabOwnership GrabOwnership: specifies the grab ownership. 
-	// 	- ownerEvents bool: if %FALSE then all device events are reported with respect to
-	//                @window and are only reported if selected by @event_mask. If
-	//                %TRUE then pointer events for this application are reported
-	//                as normal, but pointer events outside this application are
-	//                reported with respect to @window and only if selected by
-	//                @event_mask. In either mode, unreported events are discarded. 
-	// 	- eventMask EventMask: specifies the event mask, which is used in accordance with
-	//              @owner_events. 
-	// 	- cursor Cursor (nullable): the cursor to display while the grab is active if the device is
-	//          a pointer. If this is %NULL then the normal cursors are used for
-	//          @window and its descendants, and the cursor for @window is used
-	//          elsewhere. 
-	// 	- time_ uint32: the timestamp of the event which led to this pointer grab. This
-	//         usually comes from the #GdkEvent struct, though %GDK_CURRENT_TIME
-	//         can be used if the time isn’t known. 
-	// 
-	// The function returns the following values:
-	// 
-	// 	- goret GrabStatus 
-	//
-	// Grabs the device so that all events coming from this device are passed to
-	// this application until the device is ungrabbed with gdk_device_ungrab(),
-	// or the window becomes unviewable. This overrides any previous grab on the device
-	// by this client.
-	// 
-	// Note that @device and @window need to be on the same display.
-	// 
-	// Device grabs are used for operations which need complete control over the
-	// given device events (either pointer or keyboard). For example in GTK+ this
-	// is used for Drag and Drop operations, popup menus and such.
-	// 
-	// Note that if the event mask of an X window has selected both button press
-	// and button release events, then a button press event will cause an automatic
-	// pointer grab until the button is released. X does this automatically since
-	// most applications expect to receive button press and release events in pairs.
-	// It is equivalent to a pointer grab on the window with @owner_events set to
-	// %TRUE.
-	// 
-	// If you set up anything at the time you take the grab that needs to be
-	// cleaned up when the grab ends, you should handle the #GdkEventGrabBroken
-	// events that are emitted when the grab ends unvoluntarily.
-	//
-	// Deprecated: (since 3.20.0) Use gdk_seat_grab() instead.
-	Grab(Window, GrabOwnership, bool, EventMask, Cursor, uint32) GrabStatus
 	// SetAxisUse wraps gdk_device_set_axis_use
 	// 
 	// The function takes the following parameters:
@@ -10840,16 +10400,6 @@ type Device interface {
 	// slaves connected to these) drive the pointer cursor, which is not limited
 	// by the input mode.
 	SetMode(InputMode) bool
-	// Ungrab wraps gdk_device_ungrab
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- time_ uint32: a timestap (e.g. %GDK_CURRENT_TIME). 
-	//
-	// Release any grab on @device.
-	//
-	// Deprecated: (since 3.20.0) Use gdk_seat_ungrab() instead.
-	Ungrab(uint32)
 	// Warp wraps gdk_device_warp
 	// 
 	// The function takes the following parameters:
@@ -10904,55 +10454,6 @@ func UnsafeDeviceToGlibNone(c Device) unsafe.Pointer {
 // UnsafeDeviceToGlibFull is used to convert the instance to it's C value GdkDevice, while removeing the finalizer. This is used by the bindings internally.
 func UnsafeDeviceToGlibFull(c Device) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
-}
-
-// DeviceInstanceGrabInfoLibgtkOnly wraps gdk_device_grab_info_libgtk_only
-// 
-// The function takes the following parameters:
-// 
-// 	- display Display: the display for which to get the grab information 
-// 	- device Device: device to get the grab information from 
-// 
-// The function returns the following values:
-// 
-// 	- grabWindow Window: location to store current grab window 
-// 	- ownerEvents bool: location to store boolean indicating whether
-//   the @owner_events flag to gdk_keyboard_grab() or
-//   gdk_pointer_grab() was %TRUE. 
-// 	- goret bool 
-//
-// Determines information about the current keyboard grab.
-// This is not public API and must not be used by applications.
-//
-// Deprecated: (since 3.16.0) The symbol was never meant to be used outside
-//   of GTK+
-func DeviceInstanceGrabInfoLibgtkOnly(display Display, device Device) (Window, bool, bool) {
-	var carg1 *C.GdkDisplay // in, none, converted
-	var carg2 *C.GdkDevice  // in, none, converted
-	var carg3 *C.GdkWindow  // out, none, converted
-	var carg4 C.gboolean    // out
-	var cret  C.gboolean    // return
-
-	carg1 = (*C.GdkDisplay)(UnsafeDisplayToGlibNone(display))
-	carg2 = (*C.GdkDevice)(UnsafeDeviceToGlibNone(device))
-
-	cret = C.gdk_device_grab_info_libgtk_only(carg1, carg2, &carg3, &carg4)
-	runtime.KeepAlive(display)
-	runtime.KeepAlive(device)
-
-	var grabWindow  Window
-	var ownerEvents bool
-	var goret       bool
-
-	grabWindow = UnsafeWindowFromGlibNone(unsafe.Pointer(carg3))
-	if carg4 != 0 {
-		ownerEvents = true
-	}
-	if cret != 0 {
-		goret = true
-	}
-
-	return grabWindow, ownerEvents, goret
 }
 
 // GetAssociatedDevice wraps gdk_device_get_associated_device
@@ -11519,93 +11020,6 @@ func (device *DeviceInstance) GetWindowAtPositionDouble() (float64, float64, Win
 	return winX, winY, goret
 }
 
-// Grab wraps gdk_device_grab
-// 
-// The function takes the following parameters:
-// 
-// 	- window Window: the #GdkWindow which will own the grab (the grab window) 
-// 	- grabOwnership GrabOwnership: specifies the grab ownership. 
-// 	- ownerEvents bool: if %FALSE then all device events are reported with respect to
-//                @window and are only reported if selected by @event_mask. If
-//                %TRUE then pointer events for this application are reported
-//                as normal, but pointer events outside this application are
-//                reported with respect to @window and only if selected by
-//                @event_mask. In either mode, unreported events are discarded. 
-// 	- eventMask EventMask: specifies the event mask, which is used in accordance with
-//              @owner_events. 
-// 	- cursor Cursor (nullable): the cursor to display while the grab is active if the device is
-//          a pointer. If this is %NULL then the normal cursors are used for
-//          @window and its descendants, and the cursor for @window is used
-//          elsewhere. 
-// 	- time_ uint32: the timestamp of the event which led to this pointer grab. This
-//         usually comes from the #GdkEvent struct, though %GDK_CURRENT_TIME
-//         can be used if the time isn’t known. 
-// 
-// The function returns the following values:
-// 
-// 	- goret GrabStatus 
-//
-// Grabs the device so that all events coming from this device are passed to
-// this application until the device is ungrabbed with gdk_device_ungrab(),
-// or the window becomes unviewable. This overrides any previous grab on the device
-// by this client.
-// 
-// Note that @device and @window need to be on the same display.
-// 
-// Device grabs are used for operations which need complete control over the
-// given device events (either pointer or keyboard). For example in GTK+ this
-// is used for Drag and Drop operations, popup menus and such.
-// 
-// Note that if the event mask of an X window has selected both button press
-// and button release events, then a button press event will cause an automatic
-// pointer grab until the button is released. X does this automatically since
-// most applications expect to receive button press and release events in pairs.
-// It is equivalent to a pointer grab on the window with @owner_events set to
-// %TRUE.
-// 
-// If you set up anything at the time you take the grab that needs to be
-// cleaned up when the grab ends, you should handle the #GdkEventGrabBroken
-// events that are emitted when the grab ends unvoluntarily.
-//
-// Deprecated: (since 3.20.0) Use gdk_seat_grab() instead.
-func (device *DeviceInstance) Grab(window Window, grabOwnership GrabOwnership, ownerEvents bool, eventMask EventMask, cursor Cursor, time_ uint32) GrabStatus {
-	var carg0 *C.GdkDevice       // in, none, converted
-	var carg1 *C.GdkWindow       // in, none, converted
-	var carg2 C.GdkGrabOwnership // in, none, casted
-	var carg3 C.gboolean         // in
-	var carg4 C.GdkEventMask     // in, none, casted
-	var carg5 *C.GdkCursor       // in, none, converted, nullable
-	var carg6 C.guint32          // in, none, casted
-	var cret  C.GdkGrabStatus    // return, none, casted
-
-	carg0 = (*C.GdkDevice)(UnsafeDeviceToGlibNone(device))
-	carg1 = (*C.GdkWindow)(UnsafeWindowToGlibNone(window))
-	carg2 = C.GdkGrabOwnership(grabOwnership)
-	if ownerEvents {
-		carg3 = C.TRUE
-	}
-	carg4 = C.GdkEventMask(eventMask)
-	if cursor != nil {
-		carg5 = (*C.GdkCursor)(UnsafeCursorToGlibNone(cursor))
-	}
-	carg6 = C.guint32(time_)
-
-	cret = C.gdk_device_grab(carg0, carg1, carg2, carg3, carg4, carg5, carg6)
-	runtime.KeepAlive(device)
-	runtime.KeepAlive(window)
-	runtime.KeepAlive(grabOwnership)
-	runtime.KeepAlive(ownerEvents)
-	runtime.KeepAlive(eventMask)
-	runtime.KeepAlive(cursor)
-	runtime.KeepAlive(time_)
-
-	var goret GrabStatus
-
-	goret = GrabStatus(cret)
-
-	return goret
-}
-
 // SetAxisUse wraps gdk_device_set_axis_use
 // 
 // The function takes the following parameters:
@@ -11693,27 +11107,6 @@ func (device *DeviceInstance) SetMode(mode InputMode) bool {
 	}
 
 	return goret
-}
-
-// Ungrab wraps gdk_device_ungrab
-// 
-// The function takes the following parameters:
-// 
-// 	- time_ uint32: a timestap (e.g. %GDK_CURRENT_TIME). 
-//
-// Release any grab on @device.
-//
-// Deprecated: (since 3.20.0) Use gdk_seat_ungrab() instead.
-func (device *DeviceInstance) Ungrab(time_ uint32) {
-	var carg0 *C.GdkDevice // in, none, converted
-	var carg1 C.guint32    // in, none, casted
-
-	carg0 = (*C.GdkDevice)(UnsafeDeviceToGlibNone(device))
-	carg1 = C.guint32(time_)
-
-	C.gdk_device_ungrab(carg0, carg1)
-	runtime.KeepAlive(device)
-	runtime.KeepAlive(time_)
 }
 
 // Warp wraps gdk_device_warp
@@ -11881,20 +11274,6 @@ type DeviceManager interface {
 	gobject.Object
 	upcastToGdkDeviceManager() *DeviceManagerInstance
 
-	// GetClientPointer wraps gdk_device_manager_get_client_pointer
-	// The function returns the following values:
-	// 
-	// 	- goret Device 
-	//
-	// Returns the client pointer, that is, the master pointer that acts as the core pointer
-	// for this application. In X11, window managers may change this depending on the interaction
-	// pattern under the presence of several pointers.
-	// 
-	// You should use this function seldomly, only in code that isn’t triggered by a #GdkEvent
-	// and there aren’t other means to get a meaningful #GdkDevice to operate on.
-	//
-	// Deprecated: (since 3.20.0) Use gdk_seat_get_pointer() instead.
-	GetClientPointer() Device
 	// GetDisplay wraps gdk_device_manager_get_display
 	// The function returns the following values:
 	// 
@@ -11936,35 +11315,6 @@ func UnsafeDeviceManagerToGlibNone(c DeviceManager) unsafe.Pointer {
 // UnsafeDeviceManagerToGlibFull is used to convert the instance to it's C value GdkDeviceManager, while removeing the finalizer. This is used by the bindings internally.
 func UnsafeDeviceManagerToGlibFull(c DeviceManager) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
-}
-
-// GetClientPointer wraps gdk_device_manager_get_client_pointer
-// The function returns the following values:
-// 
-// 	- goret Device 
-//
-// Returns the client pointer, that is, the master pointer that acts as the core pointer
-// for this application. In X11, window managers may change this depending on the interaction
-// pattern under the presence of several pointers.
-// 
-// You should use this function seldomly, only in code that isn’t triggered by a #GdkEvent
-// and there aren’t other means to get a meaningful #GdkDevice to operate on.
-//
-// Deprecated: (since 3.20.0) Use gdk_seat_get_pointer() instead.
-func (deviceManager *DeviceManagerInstance) GetClientPointer() Device {
-	var carg0 *C.GdkDeviceManager // in, none, converted
-	var cret  *C.GdkDevice        // return, none, converted
-
-	carg0 = (*C.GdkDeviceManager)(UnsafeDeviceManagerToGlibNone(deviceManager))
-
-	cret = C.gdk_device_manager_get_client_pointer(carg0)
-	runtime.KeepAlive(deviceManager)
-
-	var goret Device
-
-	goret = UnsafeDeviceFromGlibNone(unsafe.Pointer(cret))
-
-	return goret
 }
 
 // GetDisplay wraps gdk_device_manager_get_display
@@ -12246,15 +11596,6 @@ type Display interface {
 	//
 	// Returns the default #GdkSeat for this display.
 	GetDefaultSeat() Seat
-	// GetDeviceManager wraps gdk_display_get_device_manager
-	// The function returns the following values:
-	// 
-	// 	- goret DeviceManager 
-	//
-	// Returns the #GdkDeviceManager associated to @display.
-	//
-	// Deprecated: (since 3.20.0) Use gdk_display_get_default_seat() and #GdkSeat operations.
-	GetDeviceManager() DeviceManager
 	// GetMaximalCursorSize wraps gdk_display_get_maximal_cursor_size
 	// The function returns the following values:
 	// 
@@ -12313,15 +11654,6 @@ type Display interface {
 	// The returned number is valid until the next emission of the
 	// #GdkDisplay::monitor-added or #GdkDisplay::monitor-removed signal.
 	GetNMonitors() int
-	// GetNScreens wraps gdk_display_get_n_screens
-	// The function returns the following values:
-	// 
-	// 	- goret int 
-	//
-	// Gets the number of screen managed by the @display.
-	//
-	// Deprecated: (since 3.10.0) The number of screens is always 1.
-	GetNScreens() int
 	// GetName wraps gdk_display_get_name
 	// The function returns the following values:
 	// 
@@ -12329,20 +11661,6 @@ type Display interface {
 	//
 	// Gets the name of the display.
 	GetName() string
-	// GetPointer wraps gdk_display_get_pointer
-	// The function returns the following values:
-	// 
-	// 	- screen Screen: location to store the screen that the
-	//          cursor is on, or %NULL. 
-	// 	- x int: location to store root window X coordinate of pointer, or %NULL. 
-	// 	- y int: location to store root window Y coordinate of pointer, or %NULL. 
-	// 	- mask ModifierType: location to store current modifier mask, or %NULL 
-	//
-	// Gets the current location of the pointer and the current modifier
-	// mask for a given display.
-	//
-	// Deprecated: (since 3.0.0) Use gdk_device_get_position() instead.
-	GetPointer() (Screen, int, int, ModifierType)
 	// GetPrimaryMonitor wraps gdk_display_get_primary_monitor
 	// The function returns the following values:
 	// 
@@ -12355,36 +11673,6 @@ type Display interface {
 	// manager to place the windows, specialized desktop applications
 	// such as panels should place themselves on the primary monitor.
 	GetPrimaryMonitor() Monitor
-	// GetScreen wraps gdk_display_get_screen
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- screenNum int: the screen number 
-	// 
-	// The function returns the following values:
-	// 
-	// 	- goret Screen 
-	//
-	// Returns a screen object for one of the screens of the display.
-	//
-	// Deprecated: (since 3.20.0) There is only one screen; use gdk_display_get_default_screen() to get it.
-	GetScreen(int) Screen
-	// GetWindowAtPointer wraps gdk_display_get_window_at_pointer
-	// The function returns the following values:
-	// 
-	// 	- winX int: return location for x coordinate of the pointer location relative
-	//    to the window origin, or %NULL 
-	// 	- winY int: return location for y coordinate of the pointer location relative
-	//  &amp;    to the window origin, or %NULL 
-	// 	- goret Window 
-	//
-	// Obtains the window underneath the mouse pointer, returning the location
-	// of the pointer in that window in @win_x, @win_y for @screen. Returns %NULL
-	// if the window under the mouse pointer is not known to GDK (for example,
-	// belongs to another application).
-	//
-	// Deprecated: (since 3.0.0) Use gdk_device_get_window_at_position() instead.
-	GetWindowAtPointer() (int, int, Window)
 	// HasPending wraps gdk_display_has_pending
 	// The function returns the following values:
 	// 
@@ -12400,17 +11688,6 @@ type Display interface {
 	//
 	// Finds out if the display has been closed.
 	IsClosed() bool
-	// KeyboardUngrab wraps gdk_display_keyboard_ungrab
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- time_ uint32: a timestap (e.g #GDK_CURRENT_TIME). 
-	//
-	// Release any keyboard grab
-	//
-	// Deprecated: (since 3.0.0) Use gdk_device_ungrab(), together with gdk_device_grab()
-	//             instead.
-	KeyboardUngrab(uint32)
 	// NotifyStartupComplete wraps gdk_display_notify_startup_complete
 	// 
 	// The function takes the following parameters:
@@ -12426,26 +11703,6 @@ type Display interface {
 	// gtk_window_set_auto_startup_notification() is called to
 	// disable that feature.
 	NotifyStartupComplete(string)
-	// PointerIsGrabbed wraps gdk_display_pointer_is_grabbed
-	// The function returns the following values:
-	// 
-	// 	- goret bool 
-	//
-	// Test if the pointer is grabbed.
-	//
-	// Deprecated: (since 3.0.0) Use gdk_display_device_is_grabbed() instead.
-	PointerIsGrabbed() bool
-	// PointerUngrab wraps gdk_display_pointer_ungrab
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- time_ uint32: a timestap (e.g. %GDK_CURRENT_TIME). 
-	//
-	// Release any pointer grab.
-	//
-	// Deprecated: (since 3.0.0) Use gdk_device_ungrab(), together with gdk_device_grab()
-	//             instead.
-	PointerUngrab(uint32)
 	// SetDoubleClickDistance wraps gdk_display_set_double_click_distance
 	// 
 	// The function takes the following parameters:
@@ -12479,20 +11736,6 @@ type Display interface {
 	// application has quit. On X11 this checks if a clipboard daemon is
 	// running.
 	SupportsClipboardPersistence() bool
-	// SupportsComposite wraps gdk_display_supports_composite
-	// The function returns the following values:
-	// 
-	// 	- goret bool 
-	//
-	// Returns %TRUE if gdk_window_set_composited() can be used
-	// to redirect drawing on the window using compositing.
-	// 
-	// Currently this only works on X11 with XComposite and
-	// XDamage extensions available.
-	//
-	// Deprecated: (since 3.16.0) Compositing is an outdated technology that
-	//   only ever worked on X11.
-	SupportsComposite() bool
 	// SupportsCursorAlpha wraps gdk_display_supports_cursor_alpha
 	// The function returns the following values:
 	// 
@@ -12547,28 +11790,6 @@ type Display interface {
 	// This is most useful for X11. On windowing systems where requests are
 	// handled synchronously, this function will do nothing.
 	Sync()
-	// WarpPointer wraps gdk_display_warp_pointer
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- screen Screen: the screen of @display to warp the pointer to 
-	// 	- x int: the x coordinate of the destination 
-	// 	- y int: the y coordinate of the destination 
-	//
-	// Warps the pointer of @display to the point @x,@y on
-	// the screen @screen, unless the pointer is confined
-	// to a window by a grab, in which case it will be moved
-	// as far as allowed by the grab. Warping the pointer
-	// creates events as if the user had moved the mouse
-	// instantaneously to the destination.
-	// 
-	// Note that the pointer should normally be under the
-	// control of the user. This function was added to cover
-	// some rare use cases like keyboard navigation support
-	// for the color picker in the #GtkColorSelectionDialog.
-	//
-	// Deprecated: (since 3.0.0) Use gdk_device_warp() instead.
-	WarpPointer(Screen, int, int)
 }
 
 func unsafeWrapDisplay(base *gobject.ObjectInstance) *DisplayInstance {
@@ -12645,31 +11866,6 @@ func DisplayInstanceOpen(displayName string) Display {
 
 	cret = C.gdk_display_open(carg1)
 	runtime.KeepAlive(displayName)
-
-	var goret Display
-
-	goret = UnsafeDisplayFromGlibNone(unsafe.Pointer(cret))
-
-	return goret
-}
-
-// DisplayInstanceOpenDefaultLibgtkOnly wraps gdk_display_open_default_libgtk_only
-// The function returns the following values:
-// 
-// 	- goret Display 
-//
-// Opens the default display specified by command line arguments or
-// environment variables, sets it as the default display, and returns
-// it. gdk_parse_args() must have been called first. If the default
-// display has previously been set, simply returns that. An internal
-// function that should not be used by applications.
-//
-// Deprecated: (since 3.16.0) This symbol was never meant to be used outside
-//   of GTK+
-func DisplayInstanceOpenDefaultLibgtkOnly() Display {
-	var cret *C.GdkDisplay // return, none, converted
-
-	cret = C.gdk_display_open_default_libgtk_only()
 
 	var goret Display
 
@@ -12868,30 +12064,6 @@ func (display *DisplayInstance) GetDefaultSeat() Seat {
 	return goret
 }
 
-// GetDeviceManager wraps gdk_display_get_device_manager
-// The function returns the following values:
-// 
-// 	- goret DeviceManager 
-//
-// Returns the #GdkDeviceManager associated to @display.
-//
-// Deprecated: (since 3.20.0) Use gdk_display_get_default_seat() and #GdkSeat operations.
-func (display *DisplayInstance) GetDeviceManager() DeviceManager {
-	var carg0 *C.GdkDisplay       // in, none, converted
-	var cret  *C.GdkDeviceManager // return, none, converted
-
-	carg0 = (*C.GdkDisplay)(UnsafeDisplayToGlibNone(display))
-
-	cret = C.gdk_display_get_device_manager(carg0)
-	runtime.KeepAlive(display)
-
-	var goret DeviceManager
-
-	goret = UnsafeDeviceManagerFromGlibNone(unsafe.Pointer(cret))
-
-	return goret
-}
-
 // GetMaximalCursorSize wraps gdk_display_get_maximal_cursor_size
 // The function returns the following values:
 // 
@@ -13040,30 +12212,6 @@ func (display *DisplayInstance) GetNMonitors() int {
 	return goret
 }
 
-// GetNScreens wraps gdk_display_get_n_screens
-// The function returns the following values:
-// 
-// 	- goret int 
-//
-// Gets the number of screen managed by the @display.
-//
-// Deprecated: (since 3.10.0) The number of screens is always 1.
-func (display *DisplayInstance) GetNScreens() int {
-	var carg0 *C.GdkDisplay // in, none, converted
-	var cret  C.int         // return, none, casted
-
-	carg0 = (*C.GdkDisplay)(UnsafeDisplayToGlibNone(display))
-
-	cret = C.gdk_display_get_n_screens(carg0)
-	runtime.KeepAlive(display)
-
-	var goret int
-
-	goret = int(cret)
-
-	return goret
-}
-
 // GetName wraps gdk_display_get_name
 // The function returns the following values:
 // 
@@ -13084,44 +12232,6 @@ func (display *DisplayInstance) GetName() string {
 	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
 
 	return goret
-}
-
-// GetPointer wraps gdk_display_get_pointer
-// The function returns the following values:
-// 
-// 	- screen Screen: location to store the screen that the
-//          cursor is on, or %NULL. 
-// 	- x int: location to store root window X coordinate of pointer, or %NULL. 
-// 	- y int: location to store root window Y coordinate of pointer, or %NULL. 
-// 	- mask ModifierType: location to store current modifier mask, or %NULL 
-//
-// Gets the current location of the pointer and the current modifier
-// mask for a given display.
-//
-// Deprecated: (since 3.0.0) Use gdk_device_get_position() instead.
-func (display *DisplayInstance) GetPointer() (Screen, int, int, ModifierType) {
-	var carg0 *C.GdkDisplay     // in, none, converted
-	var carg1 *C.GdkScreen      // out, none, converted
-	var carg2 C.int             // out, full, casted
-	var carg3 C.int             // out, full, casted
-	var carg4 C.GdkModifierType // out, full, casted
-
-	carg0 = (*C.GdkDisplay)(UnsafeDisplayToGlibNone(display))
-
-	C.gdk_display_get_pointer(carg0, &carg1, &carg2, &carg3, &carg4)
-	runtime.KeepAlive(display)
-
-	var screen Screen
-	var x      int
-	var y      int
-	var mask   ModifierType
-
-	screen = UnsafeScreenFromGlibNone(unsafe.Pointer(carg1))
-	x = int(carg2)
-	y = int(carg3)
-	mask = ModifierType(carg4)
-
-	return screen, x, y, mask
 }
 
 // GetPrimaryMonitor wraps gdk_display_get_primary_monitor
@@ -13149,75 +12259,6 @@ func (display *DisplayInstance) GetPrimaryMonitor() Monitor {
 	goret = UnsafeMonitorFromGlibNone(unsafe.Pointer(cret))
 
 	return goret
-}
-
-// GetScreen wraps gdk_display_get_screen
-// 
-// The function takes the following parameters:
-// 
-// 	- screenNum int: the screen number 
-// 
-// The function returns the following values:
-// 
-// 	- goret Screen 
-//
-// Returns a screen object for one of the screens of the display.
-//
-// Deprecated: (since 3.20.0) There is only one screen; use gdk_display_get_default_screen() to get it.
-func (display *DisplayInstance) GetScreen(screenNum int) Screen {
-	var carg0 *C.GdkDisplay // in, none, converted
-	var carg1 C.int         // in, none, casted
-	var cret  *C.GdkScreen  // return, none, converted
-
-	carg0 = (*C.GdkDisplay)(UnsafeDisplayToGlibNone(display))
-	carg1 = C.int(screenNum)
-
-	cret = C.gdk_display_get_screen(carg0, carg1)
-	runtime.KeepAlive(display)
-	runtime.KeepAlive(screenNum)
-
-	var goret Screen
-
-	goret = UnsafeScreenFromGlibNone(unsafe.Pointer(cret))
-
-	return goret
-}
-
-// GetWindowAtPointer wraps gdk_display_get_window_at_pointer
-// The function returns the following values:
-// 
-// 	- winX int: return location for x coordinate of the pointer location relative
-//    to the window origin, or %NULL 
-// 	- winY int: return location for y coordinate of the pointer location relative
-//  &amp;    to the window origin, or %NULL 
-// 	- goret Window 
-//
-// Obtains the window underneath the mouse pointer, returning the location
-// of the pointer in that window in @win_x, @win_y for @screen. Returns %NULL
-// if the window under the mouse pointer is not known to GDK (for example,
-// belongs to another application).
-//
-// Deprecated: (since 3.0.0) Use gdk_device_get_window_at_position() instead.
-func (display *DisplayInstance) GetWindowAtPointer() (int, int, Window) {
-	var carg0 *C.GdkDisplay // in, none, converted
-	var carg1 C.int         // out, full, casted
-	var carg2 C.int         // out, full, casted
-	var cret  *C.GdkWindow  // return, none, converted
-
-	carg0 = (*C.GdkDisplay)(UnsafeDisplayToGlibNone(display))
-
-	cret = C.gdk_display_get_window_at_pointer(carg0, &carg1, &carg2)
-	runtime.KeepAlive(display)
-
-	var winX  int
-	var winY  int
-	var goret Window
-
-	winX = int(carg1)
-	winY = int(carg2)
-	goret = UnsafeWindowFromGlibNone(unsafe.Pointer(cret))
-
-	return winX, winY, goret
 }
 
 // HasPending wraps gdk_display_has_pending
@@ -13269,28 +12310,6 @@ func (display *DisplayInstance) IsClosed() bool {
 	return goret
 }
 
-// KeyboardUngrab wraps gdk_display_keyboard_ungrab
-// 
-// The function takes the following parameters:
-// 
-// 	- time_ uint32: a timestap (e.g #GDK_CURRENT_TIME). 
-//
-// Release any keyboard grab
-//
-// Deprecated: (since 3.0.0) Use gdk_device_ungrab(), together with gdk_device_grab()
-//             instead.
-func (display *DisplayInstance) KeyboardUngrab(time_ uint32) {
-	var carg0 *C.GdkDisplay // in, none, converted
-	var carg1 C.guint32     // in, none, casted
-
-	carg0 = (*C.GdkDisplay)(UnsafeDisplayToGlibNone(display))
-	carg1 = C.guint32(time_)
-
-	C.gdk_display_keyboard_ungrab(carg0, carg1)
-	runtime.KeepAlive(display)
-	runtime.KeepAlive(time_)
-}
-
 // NotifyStartupComplete wraps gdk_display_notify_startup_complete
 // 
 // The function takes the following parameters:
@@ -13316,54 +12335,6 @@ func (display *DisplayInstance) NotifyStartupComplete(startupId string) {
 	C.gdk_display_notify_startup_complete(carg0, carg1)
 	runtime.KeepAlive(display)
 	runtime.KeepAlive(startupId)
-}
-
-// PointerIsGrabbed wraps gdk_display_pointer_is_grabbed
-// The function returns the following values:
-// 
-// 	- goret bool 
-//
-// Test if the pointer is grabbed.
-//
-// Deprecated: (since 3.0.0) Use gdk_display_device_is_grabbed() instead.
-func (display *DisplayInstance) PointerIsGrabbed() bool {
-	var carg0 *C.GdkDisplay // in, none, converted
-	var cret  C.gboolean    // return
-
-	carg0 = (*C.GdkDisplay)(UnsafeDisplayToGlibNone(display))
-
-	cret = C.gdk_display_pointer_is_grabbed(carg0)
-	runtime.KeepAlive(display)
-
-	var goret bool
-
-	if cret != 0 {
-		goret = true
-	}
-
-	return goret
-}
-
-// PointerUngrab wraps gdk_display_pointer_ungrab
-// 
-// The function takes the following parameters:
-// 
-// 	- time_ uint32: a timestap (e.g. %GDK_CURRENT_TIME). 
-//
-// Release any pointer grab.
-//
-// Deprecated: (since 3.0.0) Use gdk_device_ungrab(), together with gdk_device_grab()
-//             instead.
-func (display *DisplayInstance) PointerUngrab(time_ uint32) {
-	var carg0 *C.GdkDisplay // in, none, converted
-	var carg1 C.guint32     // in, none, casted
-
-	carg0 = (*C.GdkDisplay)(UnsafeDisplayToGlibNone(display))
-	carg1 = C.guint32(time_)
-
-	C.gdk_display_pointer_ungrab(carg0, carg1)
-	runtime.KeepAlive(display)
-	runtime.KeepAlive(time_)
 }
 
 // SetDoubleClickDistance wraps gdk_display_set_double_click_distance
@@ -13427,37 +12398,6 @@ func (display *DisplayInstance) SupportsClipboardPersistence() bool {
 	carg0 = (*C.GdkDisplay)(UnsafeDisplayToGlibNone(display))
 
 	cret = C.gdk_display_supports_clipboard_persistence(carg0)
-	runtime.KeepAlive(display)
-
-	var goret bool
-
-	if cret != 0 {
-		goret = true
-	}
-
-	return goret
-}
-
-// SupportsComposite wraps gdk_display_supports_composite
-// The function returns the following values:
-// 
-// 	- goret bool 
-//
-// Returns %TRUE if gdk_window_set_composited() can be used
-// to redirect drawing on the window using compositing.
-// 
-// Currently this only works on X11 with XComposite and
-// XDamage extensions available.
-//
-// Deprecated: (since 3.16.0) Compositing is an outdated technology that
-//   only ever worked on X11.
-func (display *DisplayInstance) SupportsComposite() bool {
-	var carg0 *C.GdkDisplay // in, none, converted
-	var cret  C.gboolean    // return
-
-	carg0 = (*C.GdkDisplay)(UnsafeDisplayToGlibNone(display))
-
-	cret = C.gdk_display_supports_composite(carg0)
 	runtime.KeepAlive(display)
 
 	var goret bool
@@ -13614,45 +12554,6 @@ func (display *DisplayInstance) Sync() {
 
 	C.gdk_display_sync(carg0)
 	runtime.KeepAlive(display)
-}
-
-// WarpPointer wraps gdk_display_warp_pointer
-// 
-// The function takes the following parameters:
-// 
-// 	- screen Screen: the screen of @display to warp the pointer to 
-// 	- x int: the x coordinate of the destination 
-// 	- y int: the y coordinate of the destination 
-//
-// Warps the pointer of @display to the point @x,@y on
-// the screen @screen, unless the pointer is confined
-// to a window by a grab, in which case it will be moved
-// as far as allowed by the grab. Warping the pointer
-// creates events as if the user had moved the mouse
-// instantaneously to the destination.
-// 
-// Note that the pointer should normally be under the
-// control of the user. This function was added to cover
-// some rare use cases like keyboard navigation support
-// for the color picker in the #GtkColorSelectionDialog.
-//
-// Deprecated: (since 3.0.0) Use gdk_device_warp() instead.
-func (display *DisplayInstance) WarpPointer(screen Screen, x int, y int) {
-	var carg0 *C.GdkDisplay // in, none, converted
-	var carg1 *C.GdkScreen  // in, none, converted
-	var carg2 C.int         // in, none, casted
-	var carg3 C.int         // in, none, casted
-
-	carg0 = (*C.GdkDisplay)(UnsafeDisplayToGlibNone(display))
-	carg1 = (*C.GdkScreen)(UnsafeScreenToGlibNone(screen))
-	carg2 = C.int(x)
-	carg3 = C.int(y)
-
-	C.gdk_display_warp_pointer(carg0, carg1, carg2, carg3)
-	runtime.KeepAlive(display)
-	runtime.KeepAlive(screen)
-	runtime.KeepAlive(x)
-	runtime.KeepAlive(y)
 }
 
 // DisplayManagerInstance is the instance type used by all types extending GdkDisplayManager. It is used internally by the bindings. Users should use the interface [DisplayManager] instead.
@@ -15726,26 +14627,6 @@ func UnsafeKeymapToGlibFull(c Keymap) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// KeymapInstanceGetDefault wraps gdk_keymap_get_default
-// The function returns the following values:
-// 
-// 	- goret Keymap 
-//
-// Returns the #GdkKeymap attached to the default display.
-//
-// Deprecated: (since 3.22.0) Use gdk_keymap_get_for_display() instead
-func KeymapInstanceGetDefault() Keymap {
-	var cret *C.GdkKeymap // return, none, converted
-
-	cret = C.gdk_keymap_get_default()
-
-	var goret Keymap
-
-	goret = UnsafeKeymapFromGlibNone(unsafe.Pointer(cret))
-
-	return goret
-}
-
 // KeymapInstanceGetForDisplay wraps gdk_keymap_get_for_display
 // 
 // The function takes the following parameters:
@@ -16558,28 +15439,6 @@ type Screen interface {
 	gobject.Object
 	upcastToGdkScreen() *ScreenInstance
 
-	// GetActiveWindow wraps gdk_screen_get_active_window
-	// The function returns the following values:
-	// 
-	// 	- goret Window 
-	//
-	// Returns the screen’s currently active window.
-	// 
-	// On X11, this is done by inspecting the _NET_ACTIVE_WINDOW property
-	// on the root window, as described in the
-	// [Extended Window Manager Hints](http://www.freedesktop.org/Standards/wm-spec).
-	// If there is no currently currently active
-	// window, or the window manager does not support the
-	// _NET_ACTIVE_WINDOW hint, this function returns %NULL.
-	// 
-	// On other platforms, this function may return %NULL, depending on whether
-	// it is implementable on that platform.
-	// 
-	// The returned window should be unrefed using g_object_unref() when
-	// no longer needed.
-	//
-	// Deprecated: (since 3.22.0) 
-	GetActiveWindow() Window
 	// GetDisplay wraps gdk_screen_get_display
 	// The function returns the following values:
 	// 
@@ -16587,212 +15446,6 @@ type Screen interface {
 	//
 	// Gets the display to which the @screen belongs.
 	GetDisplay() Display
-	// GetHeight wraps gdk_screen_get_height
-	// The function returns the following values:
-	// 
-	// 	- goret int 
-	//
-	// Gets the height of @screen in pixels. The returned size is in
-	// ”application pixels”, not in ”device pixels” (see
-	// gdk_screen_get_monitor_scale_factor()).
-	//
-	// Deprecated: (since 3.22.0) Use per-monitor information instead
-	GetHeight() int
-	// GetHeightMm wraps gdk_screen_get_height_mm
-	// The function returns the following values:
-	// 
-	// 	- goret int 
-	//
-	// Returns the height of @screen in millimeters.
-	// 
-	// Note that this value is somewhat ill-defined when the screen
-	// has multiple monitors of different resolution. It is recommended
-	// to use the monitor dimensions instead.
-	//
-	// Deprecated: (since 3.22.0) Use per-monitor information instead
-	GetHeightMm() int
-	// GetMonitorAtPoint wraps gdk_screen_get_monitor_at_point
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- x int: the x coordinate in the virtual screen. 
-	// 	- y int: the y coordinate in the virtual screen. 
-	// 
-	// The function returns the following values:
-	// 
-	// 	- goret int 
-	//
-	// Returns the monitor number in which the point (@x,@y) is located.
-	//
-	// Deprecated: (since 3.22.0) Use gdk_display_get_monitor_at_point() instead
-	GetMonitorAtPoint(int, int) int
-	// GetMonitorAtWindow wraps gdk_screen_get_monitor_at_window
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- window Window: a #GdkWindow 
-	// 
-	// The function returns the following values:
-	// 
-	// 	- goret int 
-	//
-	// Returns the number of the monitor in which the largest area of the
-	// bounding rectangle of @window resides.
-	//
-	// Deprecated: (since 3.22.0) Use gdk_display_get_monitor_at_window() instead
-	GetMonitorAtWindow(Window) int
-	// GetMonitorGeometry wraps gdk_screen_get_monitor_geometry
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- monitorNum int: the monitor number 
-	// 
-	// The function returns the following values:
-	// 
-	// 	- dest Rectangle: a #GdkRectangle to be filled with
-	//     the monitor geometry 
-	//
-	// Retrieves the #GdkRectangle representing the size and position of
-	// the individual monitor within the entire screen area. The returned
-	// geometry is in ”application pixels”, not in ”device pixels” (see
-	// gdk_screen_get_monitor_scale_factor()).
-	// 
-	// Monitor numbers start at 0. To obtain the number of monitors of
-	// @screen, use gdk_screen_get_n_monitors().
-	// 
-	// Note that the size of the entire screen area can be retrieved via
-	// gdk_screen_get_width() and gdk_screen_get_height().
-	//
-	// Deprecated: (since 3.22.0) Use gdk_monitor_get_geometry() instead
-	GetMonitorGeometry(int) Rectangle
-	// GetMonitorHeightMm wraps gdk_screen_get_monitor_height_mm
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- monitorNum int: number of the monitor, between 0 and gdk_screen_get_n_monitors (screen) 
-	// 
-	// The function returns the following values:
-	// 
-	// 	- goret int 
-	//
-	// Gets the height in millimeters of the specified monitor.
-	//
-	// Deprecated: (since 3.22.0) Use gdk_monitor_get_height_mm() instead
-	GetMonitorHeightMm(int) int
-	// GetMonitorPlugName wraps gdk_screen_get_monitor_plug_name
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- monitorNum int: number of the monitor, between 0 and gdk_screen_get_n_monitors (screen) 
-	// 
-	// The function returns the following values:
-	// 
-	// 	- goret string 
-	//
-	// Returns the output name of the specified monitor.
-	// Usually something like VGA, DVI, or TV, not the actual
-	// product name of the display device.
-	//
-	// Deprecated: (since 3.22.0) Use gdk_monitor_get_model() instead
-	GetMonitorPlugName(int) string
-	// GetMonitorScaleFactor wraps gdk_screen_get_monitor_scale_factor
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- monitorNum int: number of the monitor, between 0 and gdk_screen_get_n_monitors (screen) 
-	// 
-	// The function returns the following values:
-	// 
-	// 	- goret int 
-	//
-	// Returns the internal scale factor that maps from monitor coordinates
-	// to the actual device pixels. On traditional systems this is 1, but
-	// on very high density outputs this can be a higher value (often 2).
-	// 
-	// This can be used if you want to create pixel based data for a
-	// particular monitor, but most of the time you’re drawing to a window
-	// where it is better to use gdk_window_get_scale_factor() instead.
-	//
-	// Deprecated: (since 3.22.0) Use gdk_monitor_get_scale_factor() instead
-	GetMonitorScaleFactor(int) int
-	// GetMonitorWidthMm wraps gdk_screen_get_monitor_width_mm
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- monitorNum int: number of the monitor, between 0 and gdk_screen_get_n_monitors (screen) 
-	// 
-	// The function returns the following values:
-	// 
-	// 	- goret int 
-	//
-	// Gets the width in millimeters of the specified monitor, if available.
-	//
-	// Deprecated: (since 3.22.0) Use gdk_monitor_get_width_mm() instead
-	GetMonitorWidthMm(int) int
-	// GetMonitorWorkarea wraps gdk_screen_get_monitor_workarea
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- monitorNum int: the monitor number 
-	// 
-	// The function returns the following values:
-	// 
-	// 	- dest Rectangle: a #GdkRectangle to be filled with
-	//     the monitor workarea 
-	//
-	// Retrieves the #GdkRectangle representing the size and position of
-	// the “work area” on a monitor within the entire screen area. The returned
-	// geometry is in ”application pixels”, not in ”device pixels” (see
-	// gdk_screen_get_monitor_scale_factor()).
-	// 
-	// The work area should be considered when positioning menus and
-	// similar popups, to avoid placing them below panels, docks or other
-	// desktop components.
-	// 
-	// Note that not all backends may have a concept of workarea. This
-	// function will return the monitor geometry if a workarea is not
-	// available, or does not apply.
-	// 
-	// Monitor numbers start at 0. To obtain the number of monitors of
-	// @screen, use gdk_screen_get_n_monitors().
-	//
-	// Deprecated: (since 3.22.0) Use gdk_monitor_get_workarea() instead
-	GetMonitorWorkarea(int) Rectangle
-	// GetNMonitors wraps gdk_screen_get_n_monitors
-	// The function returns the following values:
-	// 
-	// 	- goret int 
-	//
-	// Returns the number of monitors which @screen consists of.
-	//
-	// Deprecated: (since 3.22.0) Use gdk_display_get_n_monitors() instead
-	GetNMonitors() int
-	// GetNumber wraps gdk_screen_get_number
-	// The function returns the following values:
-	// 
-	// 	- goret int 
-	//
-	// Gets the index of @screen among the screens in the display
-	// to which it belongs. (See gdk_screen_get_display())
-	//
-	// Deprecated: (since 3.22.0) 
-	GetNumber() int
-	// GetPrimaryMonitor wraps gdk_screen_get_primary_monitor
-	// The function returns the following values:
-	// 
-	// 	- goret int 
-	//
-	// Gets the primary monitor for @screen.  The primary monitor
-	// is considered the monitor where the “main desktop” lives.
-	// While normal application windows typically allow the window
-	// manager to place the windows, specialized desktop applications
-	// such as panels should place themselves on the primary monitor.
-	// 
-	// If no primary monitor is configured by the user, the return value
-	// will be 0, defaulting to the first monitor.
-	//
-	// Deprecated: (since 3.22.0) Use gdk_display_get_primary_monitor() instead
-	GetPrimaryMonitor() int
 	// GetResolution wraps gdk_screen_get_resolution
 	// The function returns the following values:
 	// 
@@ -16853,30 +15506,6 @@ type Screen interface {
 	// This is the visual for the root window of the display.
 	// The return value should not be freed.
 	GetSystemVisual() Visual
-	// GetWidth wraps gdk_screen_get_width
-	// The function returns the following values:
-	// 
-	// 	- goret int 
-	//
-	// Gets the width of @screen in pixels. The returned size is in
-	// ”application pixels”, not in ”device pixels” (see
-	// gdk_screen_get_monitor_scale_factor()).
-	//
-	// Deprecated: (since 3.22.0) Use per-monitor information instead
-	GetWidth() int
-	// GetWidthMm wraps gdk_screen_get_width_mm
-	// The function returns the following values:
-	// 
-	// 	- goret int 
-	//
-	// Gets the width of @screen in millimeters.
-	// 
-	// Note that this value is somewhat ill-defined when the screen
-	// has multiple monitors of different resolution. It is recommended
-	// to use the monitor dimensions instead.
-	//
-	// Deprecated: (since 3.22.0) Use per-monitor information instead
-	GetWidthMm() int
 	// IsComposited wraps gdk_screen_is_composited
 	// The function returns the following values:
 	// 
@@ -16889,16 +15518,6 @@ type Screen interface {
 	// On X11 this function returns whether a compositing manager is
 	// compositing @screen.
 	IsComposited() bool
-	// MakeDisplayName wraps gdk_screen_make_display_name
-	// The function returns the following values:
-	// 
-	// 	- goret string 
-	//
-	// Determines the name to pass to gdk_display_open() to get
-	// a #GdkDisplay with this screen as the default screen.
-	//
-	// Deprecated: (since 3.22.0) 
-	MakeDisplayName() string
 	// SetResolution wraps gdk_screen_set_resolution
 	// 
 	// The function takes the following parameters:
@@ -16966,129 +15585,6 @@ func ScreenInstanceGetDefault() Screen {
 	return goret
 }
 
-// ScreenInstanceHeight wraps gdk_screen_height
-// The function returns the following values:
-// 
-// 	- goret int 
-//
-// Gets the height of the default screen in pixels. The returned
-// size is in ”application pixels”, not in ”device pixels” (see
-// gdk_screen_get_monitor_scale_factor()).
-//
-// Deprecated: (since 3.22.0) Use per-monitor information
-func ScreenInstanceHeight() int {
-	var cret C.int // return, none, casted
-
-	cret = C.gdk_screen_height()
-
-	var goret int
-
-	goret = int(cret)
-
-	return goret
-}
-
-// ScreenInstanceHeightMm wraps gdk_screen_height_mm
-// The function returns the following values:
-// 
-// 	- goret int 
-//
-// Returns the height of the default screen in millimeters.
-// Note that on many X servers this value will not be correct.
-//
-// Deprecated: (since 3.22.0) Use per-monitor information
-func ScreenInstanceHeightMm() int {
-	var cret C.int // return, none, casted
-
-	cret = C.gdk_screen_height_mm()
-
-	var goret int
-
-	goret = int(cret)
-
-	return goret
-}
-
-// ScreenInstanceWidth wraps gdk_screen_width
-// The function returns the following values:
-// 
-// 	- goret int 
-//
-// Gets the width of the default screen in pixels. The returned
-// size is in ”application pixels”, not in ”device pixels” (see
-// gdk_screen_get_monitor_scale_factor()).
-//
-// Deprecated: (since 3.22.0) Use per-monitor information
-func ScreenInstanceWidth() int {
-	var cret C.int // return, none, casted
-
-	cret = C.gdk_screen_width()
-
-	var goret int
-
-	goret = int(cret)
-
-	return goret
-}
-
-// ScreenInstanceWidthMm wraps gdk_screen_width_mm
-// The function returns the following values:
-// 
-// 	- goret int 
-//
-// Returns the width of the default screen in millimeters.
-// Note that on many X servers this value will not be correct.
-//
-// Deprecated: (since 3.22.0) Use per-monitor information
-func ScreenInstanceWidthMm() int {
-	var cret C.int // return, none, casted
-
-	cret = C.gdk_screen_width_mm()
-
-	var goret int
-
-	goret = int(cret)
-
-	return goret
-}
-
-// GetActiveWindow wraps gdk_screen_get_active_window
-// The function returns the following values:
-// 
-// 	- goret Window 
-//
-// Returns the screen’s currently active window.
-// 
-// On X11, this is done by inspecting the _NET_ACTIVE_WINDOW property
-// on the root window, as described in the
-// [Extended Window Manager Hints](http://www.freedesktop.org/Standards/wm-spec).
-// If there is no currently currently active
-// window, or the window manager does not support the
-// _NET_ACTIVE_WINDOW hint, this function returns %NULL.
-// 
-// On other platforms, this function may return %NULL, depending on whether
-// it is implementable on that platform.
-// 
-// The returned window should be unrefed using g_object_unref() when
-// no longer needed.
-//
-// Deprecated: (since 3.22.0) 
-func (screen *ScreenInstance) GetActiveWindow() Window {
-	var carg0 *C.GdkScreen // in, none, converted
-	var cret  *C.GdkWindow // return, full, converted
-
-	carg0 = (*C.GdkScreen)(UnsafeScreenToGlibNone(screen))
-
-	cret = C.gdk_screen_get_active_window(carg0)
-	runtime.KeepAlive(screen)
-
-	var goret Window
-
-	goret = UnsafeWindowFromGlibFull(unsafe.Pointer(cret))
-
-	return goret
-}
-
 // GetDisplay wraps gdk_screen_get_display
 // The function returns the following values:
 // 
@@ -17107,439 +15603,6 @@ func (screen *ScreenInstance) GetDisplay() Display {
 	var goret Display
 
 	goret = UnsafeDisplayFromGlibNone(unsafe.Pointer(cret))
-
-	return goret
-}
-
-// GetHeight wraps gdk_screen_get_height
-// The function returns the following values:
-// 
-// 	- goret int 
-//
-// Gets the height of @screen in pixels. The returned size is in
-// ”application pixels”, not in ”device pixels” (see
-// gdk_screen_get_monitor_scale_factor()).
-//
-// Deprecated: (since 3.22.0) Use per-monitor information instead
-func (screen *ScreenInstance) GetHeight() int {
-	var carg0 *C.GdkScreen // in, none, converted
-	var cret  C.int        // return, none, casted
-
-	carg0 = (*C.GdkScreen)(UnsafeScreenToGlibNone(screen))
-
-	cret = C.gdk_screen_get_height(carg0)
-	runtime.KeepAlive(screen)
-
-	var goret int
-
-	goret = int(cret)
-
-	return goret
-}
-
-// GetHeightMm wraps gdk_screen_get_height_mm
-// The function returns the following values:
-// 
-// 	- goret int 
-//
-// Returns the height of @screen in millimeters.
-// 
-// Note that this value is somewhat ill-defined when the screen
-// has multiple monitors of different resolution. It is recommended
-// to use the monitor dimensions instead.
-//
-// Deprecated: (since 3.22.0) Use per-monitor information instead
-func (screen *ScreenInstance) GetHeightMm() int {
-	var carg0 *C.GdkScreen // in, none, converted
-	var cret  C.int        // return, none, casted
-
-	carg0 = (*C.GdkScreen)(UnsafeScreenToGlibNone(screen))
-
-	cret = C.gdk_screen_get_height_mm(carg0)
-	runtime.KeepAlive(screen)
-
-	var goret int
-
-	goret = int(cret)
-
-	return goret
-}
-
-// GetMonitorAtPoint wraps gdk_screen_get_monitor_at_point
-// 
-// The function takes the following parameters:
-// 
-// 	- x int: the x coordinate in the virtual screen. 
-// 	- y int: the y coordinate in the virtual screen. 
-// 
-// The function returns the following values:
-// 
-// 	- goret int 
-//
-// Returns the monitor number in which the point (@x,@y) is located.
-//
-// Deprecated: (since 3.22.0) Use gdk_display_get_monitor_at_point() instead
-func (screen *ScreenInstance) GetMonitorAtPoint(x int, y int) int {
-	var carg0 *C.GdkScreen // in, none, converted
-	var carg1 C.int        // in, none, casted
-	var carg2 C.int        // in, none, casted
-	var cret  C.int        // return, none, casted
-
-	carg0 = (*C.GdkScreen)(UnsafeScreenToGlibNone(screen))
-	carg1 = C.int(x)
-	carg2 = C.int(y)
-
-	cret = C.gdk_screen_get_monitor_at_point(carg0, carg1, carg2)
-	runtime.KeepAlive(screen)
-	runtime.KeepAlive(x)
-	runtime.KeepAlive(y)
-
-	var goret int
-
-	goret = int(cret)
-
-	return goret
-}
-
-// GetMonitorAtWindow wraps gdk_screen_get_monitor_at_window
-// 
-// The function takes the following parameters:
-// 
-// 	- window Window: a #GdkWindow 
-// 
-// The function returns the following values:
-// 
-// 	- goret int 
-//
-// Returns the number of the monitor in which the largest area of the
-// bounding rectangle of @window resides.
-//
-// Deprecated: (since 3.22.0) Use gdk_display_get_monitor_at_window() instead
-func (screen *ScreenInstance) GetMonitorAtWindow(window Window) int {
-	var carg0 *C.GdkScreen // in, none, converted
-	var carg1 *C.GdkWindow // in, none, converted
-	var cret  C.int        // return, none, casted
-
-	carg0 = (*C.GdkScreen)(UnsafeScreenToGlibNone(screen))
-	carg1 = (*C.GdkWindow)(UnsafeWindowToGlibNone(window))
-
-	cret = C.gdk_screen_get_monitor_at_window(carg0, carg1)
-	runtime.KeepAlive(screen)
-	runtime.KeepAlive(window)
-
-	var goret int
-
-	goret = int(cret)
-
-	return goret
-}
-
-// GetMonitorGeometry wraps gdk_screen_get_monitor_geometry
-// 
-// The function takes the following parameters:
-// 
-// 	- monitorNum int: the monitor number 
-// 
-// The function returns the following values:
-// 
-// 	- dest Rectangle: a #GdkRectangle to be filled with
-//     the monitor geometry 
-//
-// Retrieves the #GdkRectangle representing the size and position of
-// the individual monitor within the entire screen area. The returned
-// geometry is in ”application pixels”, not in ”device pixels” (see
-// gdk_screen_get_monitor_scale_factor()).
-// 
-// Monitor numbers start at 0. To obtain the number of monitors of
-// @screen, use gdk_screen_get_n_monitors().
-// 
-// Note that the size of the entire screen area can be retrieved via
-// gdk_screen_get_width() and gdk_screen_get_height().
-//
-// Deprecated: (since 3.22.0) Use gdk_monitor_get_geometry() instead
-func (screen *ScreenInstance) GetMonitorGeometry(monitorNum int) Rectangle {
-	var carg0 *C.GdkScreen   // in, none, converted
-	var carg1 C.int          // in, none, casted
-	var carg2 C.GdkRectangle // out, transfer: none, C Pointers: 0, Name: Rectangle, optional, caller-allocates
-
-	carg0 = (*C.GdkScreen)(UnsafeScreenToGlibNone(screen))
-	carg1 = C.int(monitorNum)
-
-	C.gdk_screen_get_monitor_geometry(carg0, carg1, &carg2)
-	runtime.KeepAlive(screen)
-	runtime.KeepAlive(monitorNum)
-
-	var dest Rectangle
-
-	_ = dest
-	_ = carg2
-	panic("unimplemented conversion of Rectangle (GdkRectangle)")
-
-	return dest
-}
-
-// GetMonitorHeightMm wraps gdk_screen_get_monitor_height_mm
-// 
-// The function takes the following parameters:
-// 
-// 	- monitorNum int: number of the monitor, between 0 and gdk_screen_get_n_monitors (screen) 
-// 
-// The function returns the following values:
-// 
-// 	- goret int 
-//
-// Gets the height in millimeters of the specified monitor.
-//
-// Deprecated: (since 3.22.0) Use gdk_monitor_get_height_mm() instead
-func (screen *ScreenInstance) GetMonitorHeightMm(monitorNum int) int {
-	var carg0 *C.GdkScreen // in, none, converted
-	var carg1 C.int        // in, none, casted
-	var cret  C.int        // return, none, casted
-
-	carg0 = (*C.GdkScreen)(UnsafeScreenToGlibNone(screen))
-	carg1 = C.int(monitorNum)
-
-	cret = C.gdk_screen_get_monitor_height_mm(carg0, carg1)
-	runtime.KeepAlive(screen)
-	runtime.KeepAlive(monitorNum)
-
-	var goret int
-
-	goret = int(cret)
-
-	return goret
-}
-
-// GetMonitorPlugName wraps gdk_screen_get_monitor_plug_name
-// 
-// The function takes the following parameters:
-// 
-// 	- monitorNum int: number of the monitor, between 0 and gdk_screen_get_n_monitors (screen) 
-// 
-// The function returns the following values:
-// 
-// 	- goret string 
-//
-// Returns the output name of the specified monitor.
-// Usually something like VGA, DVI, or TV, not the actual
-// product name of the display device.
-//
-// Deprecated: (since 3.22.0) Use gdk_monitor_get_model() instead
-func (screen *ScreenInstance) GetMonitorPlugName(monitorNum int) string {
-	var carg0 *C.GdkScreen // in, none, converted
-	var carg1 C.int        // in, none, casted
-	var cret  *C.gchar     // return, full, string
-
-	carg0 = (*C.GdkScreen)(UnsafeScreenToGlibNone(screen))
-	carg1 = C.int(monitorNum)
-
-	cret = C.gdk_screen_get_monitor_plug_name(carg0, carg1)
-	runtime.KeepAlive(screen)
-	runtime.KeepAlive(monitorNum)
-
-	var goret string
-
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
-	defer C.free(unsafe.Pointer(cret))
-
-	return goret
-}
-
-// GetMonitorScaleFactor wraps gdk_screen_get_monitor_scale_factor
-// 
-// The function takes the following parameters:
-// 
-// 	- monitorNum int: number of the monitor, between 0 and gdk_screen_get_n_monitors (screen) 
-// 
-// The function returns the following values:
-// 
-// 	- goret int 
-//
-// Returns the internal scale factor that maps from monitor coordinates
-// to the actual device pixels. On traditional systems this is 1, but
-// on very high density outputs this can be a higher value (often 2).
-// 
-// This can be used if you want to create pixel based data for a
-// particular monitor, but most of the time you’re drawing to a window
-// where it is better to use gdk_window_get_scale_factor() instead.
-//
-// Deprecated: (since 3.22.0) Use gdk_monitor_get_scale_factor() instead
-func (screen *ScreenInstance) GetMonitorScaleFactor(monitorNum int) int {
-	var carg0 *C.GdkScreen // in, none, converted
-	var carg1 C.int        // in, none, casted
-	var cret  C.int        // return, none, casted
-
-	carg0 = (*C.GdkScreen)(UnsafeScreenToGlibNone(screen))
-	carg1 = C.int(monitorNum)
-
-	cret = C.gdk_screen_get_monitor_scale_factor(carg0, carg1)
-	runtime.KeepAlive(screen)
-	runtime.KeepAlive(monitorNum)
-
-	var goret int
-
-	goret = int(cret)
-
-	return goret
-}
-
-// GetMonitorWidthMm wraps gdk_screen_get_monitor_width_mm
-// 
-// The function takes the following parameters:
-// 
-// 	- monitorNum int: number of the monitor, between 0 and gdk_screen_get_n_monitors (screen) 
-// 
-// The function returns the following values:
-// 
-// 	- goret int 
-//
-// Gets the width in millimeters of the specified monitor, if available.
-//
-// Deprecated: (since 3.22.0) Use gdk_monitor_get_width_mm() instead
-func (screen *ScreenInstance) GetMonitorWidthMm(monitorNum int) int {
-	var carg0 *C.GdkScreen // in, none, converted
-	var carg1 C.int        // in, none, casted
-	var cret  C.int        // return, none, casted
-
-	carg0 = (*C.GdkScreen)(UnsafeScreenToGlibNone(screen))
-	carg1 = C.int(monitorNum)
-
-	cret = C.gdk_screen_get_monitor_width_mm(carg0, carg1)
-	runtime.KeepAlive(screen)
-	runtime.KeepAlive(monitorNum)
-
-	var goret int
-
-	goret = int(cret)
-
-	return goret
-}
-
-// GetMonitorWorkarea wraps gdk_screen_get_monitor_workarea
-// 
-// The function takes the following parameters:
-// 
-// 	- monitorNum int: the monitor number 
-// 
-// The function returns the following values:
-// 
-// 	- dest Rectangle: a #GdkRectangle to be filled with
-//     the monitor workarea 
-//
-// Retrieves the #GdkRectangle representing the size and position of
-// the “work area” on a monitor within the entire screen area. The returned
-// geometry is in ”application pixels”, not in ”device pixels” (see
-// gdk_screen_get_monitor_scale_factor()).
-// 
-// The work area should be considered when positioning menus and
-// similar popups, to avoid placing them below panels, docks or other
-// desktop components.
-// 
-// Note that not all backends may have a concept of workarea. This
-// function will return the monitor geometry if a workarea is not
-// available, or does not apply.
-// 
-// Monitor numbers start at 0. To obtain the number of monitors of
-// @screen, use gdk_screen_get_n_monitors().
-//
-// Deprecated: (since 3.22.0) Use gdk_monitor_get_workarea() instead
-func (screen *ScreenInstance) GetMonitorWorkarea(monitorNum int) Rectangle {
-	var carg0 *C.GdkScreen   // in, none, converted
-	var carg1 C.int          // in, none, casted
-	var carg2 C.GdkRectangle // out, transfer: none, C Pointers: 0, Name: Rectangle, optional, caller-allocates
-
-	carg0 = (*C.GdkScreen)(UnsafeScreenToGlibNone(screen))
-	carg1 = C.int(monitorNum)
-
-	C.gdk_screen_get_monitor_workarea(carg0, carg1, &carg2)
-	runtime.KeepAlive(screen)
-	runtime.KeepAlive(monitorNum)
-
-	var dest Rectangle
-
-	_ = dest
-	_ = carg2
-	panic("unimplemented conversion of Rectangle (GdkRectangle)")
-
-	return dest
-}
-
-// GetNMonitors wraps gdk_screen_get_n_monitors
-// The function returns the following values:
-// 
-// 	- goret int 
-//
-// Returns the number of monitors which @screen consists of.
-//
-// Deprecated: (since 3.22.0) Use gdk_display_get_n_monitors() instead
-func (screen *ScreenInstance) GetNMonitors() int {
-	var carg0 *C.GdkScreen // in, none, converted
-	var cret  C.int        // return, none, casted
-
-	carg0 = (*C.GdkScreen)(UnsafeScreenToGlibNone(screen))
-
-	cret = C.gdk_screen_get_n_monitors(carg0)
-	runtime.KeepAlive(screen)
-
-	var goret int
-
-	goret = int(cret)
-
-	return goret
-}
-
-// GetNumber wraps gdk_screen_get_number
-// The function returns the following values:
-// 
-// 	- goret int 
-//
-// Gets the index of @screen among the screens in the display
-// to which it belongs. (See gdk_screen_get_display())
-//
-// Deprecated: (since 3.22.0) 
-func (screen *ScreenInstance) GetNumber() int {
-	var carg0 *C.GdkScreen // in, none, converted
-	var cret  C.int        // return, none, casted
-
-	carg0 = (*C.GdkScreen)(UnsafeScreenToGlibNone(screen))
-
-	cret = C.gdk_screen_get_number(carg0)
-	runtime.KeepAlive(screen)
-
-	var goret int
-
-	goret = int(cret)
-
-	return goret
-}
-
-// GetPrimaryMonitor wraps gdk_screen_get_primary_monitor
-// The function returns the following values:
-// 
-// 	- goret int 
-//
-// Gets the primary monitor for @screen.  The primary monitor
-// is considered the monitor where the “main desktop” lives.
-// While normal application windows typically allow the window
-// manager to place the windows, specialized desktop applications
-// such as panels should place themselves on the primary monitor.
-// 
-// If no primary monitor is configured by the user, the return value
-// will be 0, defaulting to the first monitor.
-//
-// Deprecated: (since 3.22.0) Use gdk_display_get_primary_monitor() instead
-func (screen *ScreenInstance) GetPrimaryMonitor() int {
-	var carg0 *C.GdkScreen // in, none, converted
-	var cret  C.int        // return, none, casted
-
-	carg0 = (*C.GdkScreen)(UnsafeScreenToGlibNone(screen))
-
-	cret = C.gdk_screen_get_primary_monitor(carg0)
-	runtime.KeepAlive(screen)
-
-	var goret int
-
-	goret = int(cret)
 
 	return goret
 }
@@ -17688,60 +15751,6 @@ func (screen *ScreenInstance) GetSystemVisual() Visual {
 	return goret
 }
 
-// GetWidth wraps gdk_screen_get_width
-// The function returns the following values:
-// 
-// 	- goret int 
-//
-// Gets the width of @screen in pixels. The returned size is in
-// ”application pixels”, not in ”device pixels” (see
-// gdk_screen_get_monitor_scale_factor()).
-//
-// Deprecated: (since 3.22.0) Use per-monitor information instead
-func (screen *ScreenInstance) GetWidth() int {
-	var carg0 *C.GdkScreen // in, none, converted
-	var cret  C.int        // return, none, casted
-
-	carg0 = (*C.GdkScreen)(UnsafeScreenToGlibNone(screen))
-
-	cret = C.gdk_screen_get_width(carg0)
-	runtime.KeepAlive(screen)
-
-	var goret int
-
-	goret = int(cret)
-
-	return goret
-}
-
-// GetWidthMm wraps gdk_screen_get_width_mm
-// The function returns the following values:
-// 
-// 	- goret int 
-//
-// Gets the width of @screen in millimeters.
-// 
-// Note that this value is somewhat ill-defined when the screen
-// has multiple monitors of different resolution. It is recommended
-// to use the monitor dimensions instead.
-//
-// Deprecated: (since 3.22.0) Use per-monitor information instead
-func (screen *ScreenInstance) GetWidthMm() int {
-	var carg0 *C.GdkScreen // in, none, converted
-	var cret  C.int        // return, none, casted
-
-	carg0 = (*C.GdkScreen)(UnsafeScreenToGlibNone(screen))
-
-	cret = C.gdk_screen_get_width_mm(carg0)
-	runtime.KeepAlive(screen)
-
-	var goret int
-
-	goret = int(cret)
-
-	return goret
-}
-
 // IsComposited wraps gdk_screen_is_composited
 // The function returns the following values:
 // 
@@ -17767,32 +15776,6 @@ func (screen *ScreenInstance) IsComposited() bool {
 	if cret != 0 {
 		goret = true
 	}
-
-	return goret
-}
-
-// MakeDisplayName wraps gdk_screen_make_display_name
-// The function returns the following values:
-// 
-// 	- goret string 
-//
-// Determines the name to pass to gdk_display_open() to get
-// a #GdkDisplay with this screen as the default screen.
-//
-// Deprecated: (since 3.22.0) 
-func (screen *ScreenInstance) MakeDisplayName() string {
-	var carg0 *C.GdkScreen // in, none, converted
-	var cret  *C.gchar     // return, full, string
-
-	carg0 = (*C.GdkScreen)(UnsafeScreenToGlibNone(screen))
-
-	cret = C.gdk_screen_make_display_name(carg0)
-	runtime.KeepAlive(screen)
-
-	var goret string
-
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
-	defer C.free(unsafe.Pointer(cret))
 
 	return goret
 }
@@ -18020,18 +16003,6 @@ type Visual interface {
 	gobject.Object
 	upcastToGdkVisual() *VisualInstance
 
-	// GetBitsPerRGB wraps gdk_visual_get_bits_per_rgb
-	// The function returns the following values:
-	// 
-	// 	- goret int 
-	//
-	// Returns the number of significant bits per red, green and blue value.
-	// 
-	// Not all GDK backend provide a meaningful value for this function.
-	//
-	// Deprecated: (since 3.22.0) Use gdk_visual_get_red_pixel_details() and its variants to
-	//     learn about the pixel layout of TrueColor and DirectColor visuals
-	GetBitsPerRGB() int
 	// GetBluePixelDetails wraps gdk_visual_get_blue_pixel_details
 	// The function returns the following values:
 	// 
@@ -18045,31 +16016,6 @@ type Visual interface {
 	// to be in position (according to the "mask"). Finally, "precision" refers
 	// to how much precision the pixel value contains for a particular primary.
 	GetBluePixelDetails() (uint32, int, int)
-	// GetByteOrder wraps gdk_visual_get_byte_order
-	// The function returns the following values:
-	// 
-	// 	- goret ByteOrder 
-	//
-	// Returns the byte order of this visual.
-	// 
-	// The information returned by this function is only relevant
-	// when working with XImages, and not all backends return
-	// meaningful information for this.
-	//
-	// Deprecated: (since 3.22.0) This information is not useful
-	GetByteOrder() ByteOrder
-	// GetColormapSize wraps gdk_visual_get_colormap_size
-	// The function returns the following values:
-	// 
-	// 	- goret int 
-	//
-	// Returns the size of a colormap for this visual.
-	// 
-	// You have to use platform-specific APIs to manipulate colormaps.
-	//
-	// Deprecated: (since 3.22.0) This information is not useful, since GDK does not
-	//     provide APIs to operate on colormaps.
-	GetColormapSize() int
 	// GetDepth wraps gdk_visual_get_depth
 	// The function returns the following values:
 	// 
@@ -18153,222 +16099,6 @@ func UnsafeVisualToGlibFull(c Visual) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// VisualInstanceGetBest wraps gdk_visual_get_best
-// The function returns the following values:
-// 
-// 	- goret Visual 
-//
-// Get the visual with the most available colors for the default
-// GDK screen. The return value should not be freed.
-//
-// Deprecated: (since 3.22.0) Visual selection should be done using
-//     gdk_screen_get_system_visual() and gdk_screen_get_rgba_visual()
-func VisualInstanceGetBest() Visual {
-	var cret *C.GdkVisual // return, none, converted
-
-	cret = C.gdk_visual_get_best()
-
-	var goret Visual
-
-	goret = UnsafeVisualFromGlibNone(unsafe.Pointer(cret))
-
-	return goret
-}
-
-// VisualInstanceGetBestDepth wraps gdk_visual_get_best_depth
-// The function returns the following values:
-// 
-// 	- goret int 
-//
-// Get the best available depth for the default GDK screen.  “Best”
-// means “largest,” i.e. 32 preferred over 24 preferred over 8 bits
-// per pixel.
-//
-// Deprecated: (since 3.22.0) Visual selection should be done using
-//     gdk_screen_get_system_visual() and gdk_screen_get_rgba_visual()
-func VisualInstanceGetBestDepth() int {
-	var cret C.int // return, none, casted
-
-	cret = C.gdk_visual_get_best_depth()
-
-	var goret int
-
-	goret = int(cret)
-
-	return goret
-}
-
-// VisualInstanceGetBestType wraps gdk_visual_get_best_type
-// The function returns the following values:
-// 
-// 	- goret VisualType 
-//
-// Return the best available visual type for the default GDK screen.
-//
-// Deprecated: (since 3.22.0) Visual selection should be done using
-//     gdk_screen_get_system_visual() and gdk_screen_get_rgba_visual()
-func VisualInstanceGetBestType() VisualType {
-	var cret C.GdkVisualType // return, none, casted
-
-	cret = C.gdk_visual_get_best_type()
-
-	var goret VisualType
-
-	goret = VisualType(cret)
-
-	return goret
-}
-
-// VisualInstanceGetBestWithBoth wraps gdk_visual_get_best_with_both
-// 
-// The function takes the following parameters:
-// 
-// 	- depth int: a bit depth 
-// 	- visualType VisualType: a visual type 
-// 
-// The function returns the following values:
-// 
-// 	- goret Visual 
-//
-// Combines gdk_visual_get_best_with_depth() and
-// gdk_visual_get_best_with_type().
-//
-// Deprecated: (since 3.22.0) Visual selection should be done using
-//     gdk_screen_get_system_visual() and gdk_screen_get_rgba_visual()
-func VisualInstanceGetBestWithBoth(depth int, visualType VisualType) Visual {
-	var carg1 C.int           // in, none, casted
-	var carg2 C.GdkVisualType // in, none, casted
-	var cret  *C.GdkVisual    // return, none, converted
-
-	carg1 = C.int(depth)
-	carg2 = C.GdkVisualType(visualType)
-
-	cret = C.gdk_visual_get_best_with_both(carg1, carg2)
-	runtime.KeepAlive(depth)
-	runtime.KeepAlive(visualType)
-
-	var goret Visual
-
-	goret = UnsafeVisualFromGlibNone(unsafe.Pointer(cret))
-
-	return goret
-}
-
-// VisualInstanceGetBestWithDepth wraps gdk_visual_get_best_with_depth
-// 
-// The function takes the following parameters:
-// 
-// 	- depth int: a bit depth 
-// 
-// The function returns the following values:
-// 
-// 	- goret Visual 
-//
-// Get the best visual with depth @depth for the default GDK screen.
-// Color visuals and visuals with mutable colormaps are preferred
-// over grayscale or fixed-colormap visuals. The return value should
-// not be freed. %NULL may be returned if no visual supports @depth.
-//
-// Deprecated: (since 3.22.0) Visual selection should be done using
-//     gdk_screen_get_system_visual() and gdk_screen_get_rgba_visual()
-func VisualInstanceGetBestWithDepth(depth int) Visual {
-	var carg1 C.int        // in, none, casted
-	var cret  *C.GdkVisual // return, none, converted
-
-	carg1 = C.int(depth)
-
-	cret = C.gdk_visual_get_best_with_depth(carg1)
-	runtime.KeepAlive(depth)
-
-	var goret Visual
-
-	goret = UnsafeVisualFromGlibNone(unsafe.Pointer(cret))
-
-	return goret
-}
-
-// VisualInstanceGetBestWithType wraps gdk_visual_get_best_with_type
-// 
-// The function takes the following parameters:
-// 
-// 	- visualType VisualType: a visual type 
-// 
-// The function returns the following values:
-// 
-// 	- goret Visual 
-//
-// Get the best visual of the given @visual_type for the default GDK screen.
-// Visuals with higher color depths are considered better. The return value
-// should not be freed. %NULL may be returned if no visual has type
-// @visual_type.
-//
-// Deprecated: (since 3.22.0) Visual selection should be done using
-//     gdk_screen_get_system_visual() and gdk_screen_get_rgba_visual()
-func VisualInstanceGetBestWithType(visualType VisualType) Visual {
-	var carg1 C.GdkVisualType // in, none, casted
-	var cret  *C.GdkVisual    // return, none, converted
-
-	carg1 = C.GdkVisualType(visualType)
-
-	cret = C.gdk_visual_get_best_with_type(carg1)
-	runtime.KeepAlive(visualType)
-
-	var goret Visual
-
-	goret = UnsafeVisualFromGlibNone(unsafe.Pointer(cret))
-
-	return goret
-}
-
-// VisualInstanceGetSystem wraps gdk_visual_get_system
-// The function returns the following values:
-// 
-// 	- goret Visual 
-//
-// Get the system’s default visual for the default GDK screen.
-// This is the visual for the root window of the display.
-// The return value should not be freed.
-//
-// Deprecated: (since 3.22.0) Use gdk_screen_get_system_visual (gdk_screen_get_default ()).
-func VisualInstanceGetSystem() Visual {
-	var cret *C.GdkVisual // return, none, converted
-
-	cret = C.gdk_visual_get_system()
-
-	var goret Visual
-
-	goret = UnsafeVisualFromGlibNone(unsafe.Pointer(cret))
-
-	return goret
-}
-
-// GetBitsPerRGB wraps gdk_visual_get_bits_per_rgb
-// The function returns the following values:
-// 
-// 	- goret int 
-//
-// Returns the number of significant bits per red, green and blue value.
-// 
-// Not all GDK backend provide a meaningful value for this function.
-//
-// Deprecated: (since 3.22.0) Use gdk_visual_get_red_pixel_details() and its variants to
-//     learn about the pixel layout of TrueColor and DirectColor visuals
-func (visual *VisualInstance) GetBitsPerRGB() int {
-	var carg0 *C.GdkVisual // in, none, converted
-	var cret  C.int        // return, none, casted
-
-	carg0 = (*C.GdkVisual)(UnsafeVisualToGlibNone(visual))
-
-	cret = C.gdk_visual_get_bits_per_rgb(carg0)
-	runtime.KeepAlive(visual)
-
-	var goret int
-
-	goret = int(cret)
-
-	return goret
-}
-
 // GetBluePixelDetails wraps gdk_visual_get_blue_pixel_details
 // The function returns the following values:
 // 
@@ -18401,61 +16131,6 @@ func (visual *VisualInstance) GetBluePixelDetails() (uint32, int, int) {
 	precision = int(carg3)
 
 	return mask, shift, precision
-}
-
-// GetByteOrder wraps gdk_visual_get_byte_order
-// The function returns the following values:
-// 
-// 	- goret ByteOrder 
-//
-// Returns the byte order of this visual.
-// 
-// The information returned by this function is only relevant
-// when working with XImages, and not all backends return
-// meaningful information for this.
-//
-// Deprecated: (since 3.22.0) This information is not useful
-func (visual *VisualInstance) GetByteOrder() ByteOrder {
-	var carg0 *C.GdkVisual   // in, none, converted
-	var cret  C.GdkByteOrder // return, none, casted
-
-	carg0 = (*C.GdkVisual)(UnsafeVisualToGlibNone(visual))
-
-	cret = C.gdk_visual_get_byte_order(carg0)
-	runtime.KeepAlive(visual)
-
-	var goret ByteOrder
-
-	goret = ByteOrder(cret)
-
-	return goret
-}
-
-// GetColormapSize wraps gdk_visual_get_colormap_size
-// The function returns the following values:
-// 
-// 	- goret int 
-//
-// Returns the size of a colormap for this visual.
-// 
-// You have to use platform-specific APIs to manipulate colormaps.
-//
-// Deprecated: (since 3.22.0) This information is not useful, since GDK does not
-//     provide APIs to operate on colormaps.
-func (visual *VisualInstance) GetColormapSize() int {
-	var carg0 *C.GdkVisual // in, none, converted
-	var cret  C.int        // return, none, casted
-
-	carg0 = (*C.GdkVisual)(UnsafeVisualToGlibNone(visual))
-
-	cret = C.gdk_visual_get_colormap_size(carg0)
-	runtime.KeepAlive(visual)
-
-	var goret int
-
-	goret = int(cret)
-
-	return goret
 }
 
 // GetDepth wraps gdk_visual_get_depth
@@ -18642,18 +16317,6 @@ type Window interface {
 	// [Extended Window Manager Hints](http://www.freedesktop.org/Standards/wm-spec)
 	// but has a fallback implementation for other window managers.
 	BeginMoveDragForDevice(Device, int, int, int, uint32)
-	// BeginPaintRect wraps gdk_window_begin_paint_rect
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- rectangle *Rectangle: rectangle you intend to draw to 
-	//
-	// A convenience wrapper around gdk_window_begin_paint_region() which
-	// creates a rectangular region for you. See
-	// gdk_window_begin_paint_region() for details.
-	//
-	// Deprecated: (since 3.22.0) Use gdk_window_begin_draw_frame() instead
-	BeginPaintRect(*Rectangle)
 	// BeginResizeDrag wraps gdk_window_begin_resize_drag
 	// 
 	// The function takes the following parameters:
@@ -18688,12 +16351,6 @@ type Window interface {
 	// [Extended Window Manager Hints](http://www.freedesktop.org/Standards/wm-spec)
 	// but has a fallback implementation for other window managers.
 	BeginResizeDragForDevice(WindowEdge, Device, int, int, int, uint32)
-	// ConfigureFinished wraps gdk_window_configure_finished
-	//
-	// Does nothing, present only for compatiblity.
-	//
-	// Deprecated: (since 3.8.0) this function is no longer needed
-	ConfigureFinished()
 	// CoordsFromParent wraps gdk_window_coords_from_parent
 	// 
 	// The function takes the following parameters:
@@ -18786,12 +16443,6 @@ type Window interface {
 	// Note that a window will not be destroyed automatically when its reference count
 	// reaches zero. You must call this function yourself before that happens.
 	Destroy()
-	// EnableSynchronizedConfigure wraps gdk_window_enable_synchronized_configure
-	//
-	// Does nothing, present only for compatiblity.
-	//
-	// Deprecated: (since 3.8.0) this function is no longer needed
-	EnableSynchronizedConfigure()
 	// EndDrawFrame wraps gdk_window_end_draw_frame
 	// 
 	// The function takes the following parameters:
@@ -18829,12 +16480,6 @@ type Window interface {
 	// 
 	// Some backends may not support native child windows.
 	EnsureNative() bool
-	// Flush wraps gdk_window_flush
-	//
-	// This function does nothing.
-	//
-	// Deprecated: (since 3.14.0) 
-	Flush()
 	// Focus wraps gdk_window_focus
 	// 
 	// The function takes the following parameters:
@@ -18844,21 +16489,6 @@ type Window interface {
 	// Sets keyboard focus to @window. In most cases, gtk_window_present_with_time()
 	// should be used on a #GtkWindow, rather than calling this function.
 	Focus(uint32)
-	// FreezeToplevelUpdatesLibgtkOnly wraps gdk_window_freeze_toplevel_updates_libgtk_only
-	//
-	// Temporarily freezes a window and all its descendants such that it won't
-	// receive expose events.  The window will begin receiving expose events
-	// again when gdk_window_thaw_toplevel_updates_libgtk_only() is called. If
-	// gdk_window_freeze_toplevel_updates_libgtk_only()
-	// has been called more than once,
-	// gdk_window_thaw_toplevel_updates_libgtk_only() must be called
-	// an equal number of times to begin processing exposes.
-	// 
-	// This function is not part of the GDK public API and is only
-	// for use by GTK+.
-	//
-	// Deprecated: (since 3.16.0) This symbol was never meant to be used outside of GTK+
-	FreezeToplevelUpdatesLibgtkOnly()
 	// FreezeUpdates wraps gdk_window_freeze_updates
 	//
 	// Temporarily freezes a window such that it won’t receive expose
@@ -18908,18 +16538,6 @@ type Window interface {
 	// Determines whether or not the desktop environment shuld be hinted that
 	// the window does not want to receive input focus.
 	GetAcceptFocus() bool
-	// GetComposited wraps gdk_window_get_composited
-	// The function returns the following values:
-	// 
-	// 	- goret bool 
-	//
-	// Determines whether @window is composited.
-	// 
-	// See gdk_window_set_composited().
-	//
-	// Deprecated: (since 3.16.0) Compositing is an outdated technology that
-	//   only ever worked on X11.
-	GetComposited() bool
 	// GetCursor wraps gdk_window_get_cursor
 	// The function returns the following values:
 	// 
@@ -19185,23 +16803,6 @@ type Window interface {
 	// 
 	// See gdk_window_set_pass_through() for details
 	GetPassThrough() bool
-	// GetPointer wraps gdk_window_get_pointer
-	// The function returns the following values:
-	// 
-	// 	- x int: return location for X coordinate of pointer or %NULL to not
-	//      return the X coordinate 
-	// 	- y int: return location for Y coordinate of pointer or %NULL to not
-	//      return the Y coordinate 
-	// 	- mask ModifierType: return location for modifier mask or %NULL to not return the
-	//      modifier mask 
-	// 	- goret Window 
-	//
-	// Obtains the current pointer position and modifier state.
-	// The position is given in coordinates relative to the upper left
-	// corner of @window.
-	//
-	// Deprecated: (since 3.0.0) Use gdk_window_get_device_position() instead.
-	GetPointer() (int, int, ModifierType, Window)
 	// GetPosition wraps gdk_window_get_position
 	// The function returns the following values:
 	// 
@@ -19533,23 +17134,6 @@ type Window interface {
 	// Connect to the #GdkWindow::moved-to-rect signal to find out how it was
 	// actually positioned.
 	MoveToRect(*Rectangle, Gravity, Gravity, AnchorHints, int, int)
-	// ProcessUpdates wraps gdk_window_process_updates
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- updateChildren bool: whether to also process updates for child windows 
-	//
-	// Sends one or more expose events to @window. The areas in each
-	// expose event will cover the entire update area for the window (see
-	// gdk_window_invalidate_region() for details). Normally GDK calls
-	// gdk_window_process_all_updates() on your behalf, so there’s no
-	// need to call this function unless you want to force expose events
-	// to be delivered immediately and synchronously (vs. the usual
-	// case, where GDK delivers them in an idle handler). Occasionally
-	// this is useful to produce nicer scrolling behavior, for example.
-	//
-	// Deprecated: (since 3.22.0) 
-	ProcessUpdates(bool)
 	// Raise wraps gdk_window_raise
 	//
 	// Raises @window to the top of the Z-order (stacking order), so that
@@ -19640,33 +17224,6 @@ type Window interface {
 	// On X, it is the responsibility of the window manager to interpret this
 	// hint. ICCCM-compliant window manager usually respect it.
 	SetAcceptFocus(bool)
-	// SetBackground wraps gdk_window_set_background
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- color *Color: a #GdkColor 
-	//
-	// Sets the background color of @window.
-	// 
-	// However, when using GTK+, influence the background of a widget
-	// using a style class or CSS — if you’re an application — or with
-	// gtk_style_context_set_background() — if you're implementing a
-	// custom widget.
-	//
-	// Deprecated: (since 3.4.0) Don't use this function
-	SetBackground(*Color)
-	// SetBackgroundRGBA wraps gdk_window_set_background_rgba
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- rgba *RGBA: a #GdkRGBA color 
-	//
-	// Sets the background color of @window.
-	// 
-	// See also gdk_window_set_background_pattern().
-	//
-	// Deprecated: (since 3.22.0) Don't use this function
-	SetBackgroundRGBA(*RGBA)
 	// SetChildInputShapes wraps gdk_window_set_child_input_shapes
 	//
 	// Sets the input shape mask of @window to the union of input shape masks
@@ -19681,38 +17238,6 @@ type Window interface {
 	// itself. Contrast with gdk_window_merge_child_shapes() which includes
 	// the shape mask of @window in the masks to be merged.
 	SetChildShapes()
-	// SetComposited wraps gdk_window_set_composited
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- composited bool: %TRUE to set the window as composited 
-	//
-	// Sets a #GdkWindow as composited, or unsets it. Composited
-	// windows do not automatically have their contents drawn to
-	// the screen. Drawing is redirected to an offscreen buffer
-	// and an expose event is emitted on the parent of the composited
-	// window. It is the responsibility of the parent’s expose handler
-	// to manually merge the off-screen content onto the screen in
-	// whatever way it sees fit.
-	// 
-	// It only makes sense for child windows to be composited; see
-	// gdk_window_set_opacity() if you need translucent toplevel
-	// windows.
-	// 
-	// An additional effect of this call is that the area of this
-	// window is no longer clipped from regions marked for
-	// invalidation on its parent. Draws done on the parent
-	// window are also no longer clipped by the child.
-	// 
-	// This call is only supported on some systems (currently,
-	// only X11 with new enough Xcomposite and Xdamage extensions).
-	// You must call gdk_display_supports_composite() to check if
-	// setting a window as composited is supported before
-	// attempting to do so.
-	//
-	// Deprecated: (since 3.16.0) Compositing is an outdated technology that
-	//   only ever worked on X11.
-	SetComposited(bool)
 	// SetCursor wraps gdk_window_set_cursor
 	// 
 	// The function takes the following parameters:
@@ -20131,24 +17656,6 @@ type Window interface {
 	// When using GTK+, typically you should use gtk_window_set_startup_id()
 	// instead of this low-level function.
 	SetStartupID(string)
-	// SetStaticGravities wraps gdk_window_set_static_gravities
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- useStatic bool: %TRUE to turn on static gravity 
-	// 
-	// The function returns the following values:
-	// 
-	// 	- goret bool 
-	//
-	// Used to set the bit gravity of the given window to static, and flag
-	// it so all children get static subwindow gravity. This is used if you
-	// are implementing scary features that involve deep knowledge of the
-	// windowing system. Don’t worry about it.
-	//
-	// Deprecated: (since 3.16.0) static gravities haven't worked on anything but X11
-	//   for a long time.
-	SetStaticGravities(bool) bool
 	// SetSupportMultidevice wraps gdk_window_set_support_multidevice
 	// 
 	// The function takes the following parameters:
@@ -20256,16 +17763,6 @@ type Window interface {
 	// the window. For window managers that don’t support this operation,
 	// there’s nothing you can do to force it to happen.
 	Stick()
-	// ThawToplevelUpdatesLibgtkOnly wraps gdk_window_thaw_toplevel_updates_libgtk_only
-	//
-	// Thaws a window frozen with
-	// gdk_window_freeze_toplevel_updates_libgtk_only().
-	// 
-	// This function is not part of the GDK public API and is only
-	// for use by GTK+.
-	//
-	// Deprecated: (since 3.16.0) This symbol was never meant to be used outside of GTK+
-	ThawToplevelUpdatesLibgtkOnly()
 	// ThawUpdates wraps gdk_window_thaw_updates
 	//
 	// Thaws a window frozen with gdk_window_freeze_updates().
@@ -20386,41 +17883,6 @@ func NewWindowInstance(parent Window, attributes *WindowAttr, attributesMask int
 	return goret
 }
 
-// WindowInstanceAtPointer wraps gdk_window_at_pointer
-// The function returns the following values:
-// 
-// 	- winX int: return location for origin of the window under the pointer 
-// 	- winY int: return location for origin of the window under the pointer 
-// 	- goret Window 
-//
-// Obtains the window underneath the mouse pointer, returning the
-// location of that window in @win_x, @win_y. Returns %NULL if the
-// window under the mouse pointer is not known to GDK (if the window
-// belongs to another application and a #GdkWindow hasn’t been created
-// for it with gdk_window_foreign_new())
-// 
-// NOTE: For multihead-aware widgets or applications use
-// gdk_display_get_window_at_pointer() instead.
-//
-// Deprecated: (since 3.0.0) Use gdk_device_get_window_at_position() instead.
-func WindowInstanceAtPointer() (int, int, Window) {
-	var carg1 C.int        // out, full, casted
-	var carg2 C.int        // out, full, casted
-	var cret  *C.GdkWindow // return, none, converted
-
-	cret = C.gdk_window_at_pointer(&carg1, &carg2)
-
-	var winX  int
-	var winY  int
-	var goret Window
-
-	winX = int(carg1)
-	winY = int(carg2)
-	goret = UnsafeWindowFromGlibNone(unsafe.Pointer(cret))
-
-	return winX, winY, goret
-}
-
 // WindowInstanceConstrainSize wraps gdk_window_constrain_size
 // 
 // The function takes the following parameters:
@@ -20463,55 +17925,6 @@ func WindowInstanceConstrainSize(geometry *Geometry, flags WindowHints, width in
 	newHeight = int(carg6)
 
 	return newWidth, newHeight
-}
-
-// WindowInstanceProcessAllUpdates wraps gdk_window_process_all_updates
-//
-// Calls gdk_window_process_updates() for all windows (see #GdkWindow)
-// in the application.
-//
-// Deprecated: (since 3.22.0) 
-func WindowInstanceProcessAllUpdates() {
-
-	C.gdk_window_process_all_updates()
-}
-
-// WindowInstanceSetDebugUpdates wraps gdk_window_set_debug_updates
-// 
-// The function takes the following parameters:
-// 
-// 	- setting bool: %TRUE to turn on update debugging 
-//
-// With update debugging enabled, calls to
-// gdk_window_invalidate_region() clear the invalidated region of the
-// screen to a noticeable color, and GDK pauses for a short time
-// before sending exposes to windows during
-// gdk_window_process_updates().  The net effect is that you can see
-// the invalid region for each window and watch redraws as they
-// occur. This allows you to diagnose inefficiencies in your application.
-// 
-// In essence, because the GDK rendering model prevents all flicker,
-// if you are redrawing the same region 400 times you may never
-// notice, aside from noticing a speed problem. Enabling update
-// debugging causes GTK to flicker slowly and noticeably, so you can
-// see exactly what’s being redrawn when, in what order.
-// 
-// The --gtk-debug=updates command line option passed to GTK+ programs
-// enables this debug option at application startup time. That's
-// usually more useful than calling gdk_window_set_debug_updates()
-// yourself, though you might want to use this function to enable
-// updates sometime after application startup time.
-//
-// Deprecated: (since 3.22.0) 
-func WindowInstanceSetDebugUpdates(setting bool) {
-	var carg1 C.gboolean // in
-
-	if setting {
-		carg1 = C.TRUE
-	}
-
-	C.gdk_window_set_debug_updates(carg1)
-	runtime.KeepAlive(setting)
 }
 
 // Beep wraps gdk_window_beep
@@ -20602,29 +18015,6 @@ func (window *WindowInstance) BeginMoveDragForDevice(device Device, button int, 
 	runtime.KeepAlive(timestamp)
 }
 
-// BeginPaintRect wraps gdk_window_begin_paint_rect
-// 
-// The function takes the following parameters:
-// 
-// 	- rectangle *Rectangle: rectangle you intend to draw to 
-//
-// A convenience wrapper around gdk_window_begin_paint_region() which
-// creates a rectangular region for you. See
-// gdk_window_begin_paint_region() for details.
-//
-// Deprecated: (since 3.22.0) Use gdk_window_begin_draw_frame() instead
-func (window *WindowInstance) BeginPaintRect(rectangle *Rectangle) {
-	var carg0 *C.GdkWindow    // in, none, converted
-	var carg1 *C.GdkRectangle // in, none, converted
-
-	carg0 = (*C.GdkWindow)(UnsafeWindowToGlibNone(window))
-	carg1 = (*C.GdkRectangle)(UnsafeRectangleToGlibNone(rectangle))
-
-	C.gdk_window_begin_paint_rect(carg0, carg1)
-	runtime.KeepAlive(window)
-	runtime.KeepAlive(rectangle)
-}
-
 // BeginResizeDrag wraps gdk_window_begin_resize_drag
 // 
 // The function takes the following parameters:
@@ -20706,20 +18096,6 @@ func (window *WindowInstance) BeginResizeDragForDevice(edge WindowEdge, device D
 	runtime.KeepAlive(rootX)
 	runtime.KeepAlive(rootY)
 	runtime.KeepAlive(timestamp)
-}
-
-// ConfigureFinished wraps gdk_window_configure_finished
-//
-// Does nothing, present only for compatiblity.
-//
-// Deprecated: (since 3.8.0) this function is no longer needed
-func (window *WindowInstance) ConfigureFinished() {
-	var carg0 *C.GdkWindow // in, none, converted
-
-	carg0 = (*C.GdkWindow)(UnsafeWindowToGlibNone(window))
-
-	C.gdk_window_configure_finished(carg0)
-	runtime.KeepAlive(window)
 }
 
 // CoordsFromParent wraps gdk_window_coords_from_parent
@@ -20898,20 +18274,6 @@ func (window *WindowInstance) Destroy() {
 	runtime.KeepAlive(window)
 }
 
-// EnableSynchronizedConfigure wraps gdk_window_enable_synchronized_configure
-//
-// Does nothing, present only for compatiblity.
-//
-// Deprecated: (since 3.8.0) this function is no longer needed
-func (window *WindowInstance) EnableSynchronizedConfigure() {
-	var carg0 *C.GdkWindow // in, none, converted
-
-	carg0 = (*C.GdkWindow)(UnsafeWindowToGlibNone(window))
-
-	C.gdk_window_enable_synchronized_configure(carg0)
-	runtime.KeepAlive(window)
-}
-
 // EndDrawFrame wraps gdk_window_end_draw_frame
 // 
 // The function takes the following parameters:
@@ -20985,20 +18347,6 @@ func (window *WindowInstance) EnsureNative() bool {
 	return goret
 }
 
-// Flush wraps gdk_window_flush
-//
-// This function does nothing.
-//
-// Deprecated: (since 3.14.0) 
-func (window *WindowInstance) Flush() {
-	var carg0 *C.GdkWindow // in, none, converted
-
-	carg0 = (*C.GdkWindow)(UnsafeWindowToGlibNone(window))
-
-	C.gdk_window_flush(carg0)
-	runtime.KeepAlive(window)
-}
-
 // Focus wraps gdk_window_focus
 // 
 // The function takes the following parameters:
@@ -21017,29 +18365,6 @@ func (window *WindowInstance) Focus(timestamp uint32) {
 	C.gdk_window_focus(carg0, carg1)
 	runtime.KeepAlive(window)
 	runtime.KeepAlive(timestamp)
-}
-
-// FreezeToplevelUpdatesLibgtkOnly wraps gdk_window_freeze_toplevel_updates_libgtk_only
-//
-// Temporarily freezes a window and all its descendants such that it won't
-// receive expose events.  The window will begin receiving expose events
-// again when gdk_window_thaw_toplevel_updates_libgtk_only() is called. If
-// gdk_window_freeze_toplevel_updates_libgtk_only()
-// has been called more than once,
-// gdk_window_thaw_toplevel_updates_libgtk_only() must be called
-// an equal number of times to begin processing exposes.
-// 
-// This function is not part of the GDK public API and is only
-// for use by GTK+.
-//
-// Deprecated: (since 3.16.0) This symbol was never meant to be used outside of GTK+
-func (window *WindowInstance) FreezeToplevelUpdatesLibgtkOnly() {
-	var carg0 *C.GdkWindow // in, none, converted
-
-	carg0 = (*C.GdkWindow)(UnsafeWindowToGlibNone(window))
-
-	C.gdk_window_freeze_toplevel_updates_libgtk_only(carg0)
-	runtime.KeepAlive(window)
 }
 
 // FreezeUpdates wraps gdk_window_freeze_updates
@@ -21132,35 +18457,6 @@ func (window *WindowInstance) GetAcceptFocus() bool {
 	carg0 = (*C.GdkWindow)(UnsafeWindowToGlibNone(window))
 
 	cret = C.gdk_window_get_accept_focus(carg0)
-	runtime.KeepAlive(window)
-
-	var goret bool
-
-	if cret != 0 {
-		goret = true
-	}
-
-	return goret
-}
-
-// GetComposited wraps gdk_window_get_composited
-// The function returns the following values:
-// 
-// 	- goret bool 
-//
-// Determines whether @window is composited.
-// 
-// See gdk_window_set_composited().
-//
-// Deprecated: (since 3.16.0) Compositing is an outdated technology that
-//   only ever worked on X11.
-func (window *WindowInstance) GetComposited() bool {
-	var carg0 *C.GdkWindow // in, none, converted
-	var cret  C.gboolean   // return
-
-	carg0 = (*C.GdkWindow)(UnsafeWindowToGlibNone(window))
-
-	cret = C.gdk_window_get_composited(carg0)
 	runtime.KeepAlive(window)
 
 	var goret bool
@@ -21843,47 +19139,6 @@ func (window *WindowInstance) GetPassThrough() bool {
 	}
 
 	return goret
-}
-
-// GetPointer wraps gdk_window_get_pointer
-// The function returns the following values:
-// 
-// 	- x int: return location for X coordinate of pointer or %NULL to not
-//      return the X coordinate 
-// 	- y int: return location for Y coordinate of pointer or %NULL to not
-//      return the Y coordinate 
-// 	- mask ModifierType: return location for modifier mask or %NULL to not return the
-//      modifier mask 
-// 	- goret Window 
-//
-// Obtains the current pointer position and modifier state.
-// The position is given in coordinates relative to the upper left
-// corner of @window.
-//
-// Deprecated: (since 3.0.0) Use gdk_window_get_device_position() instead.
-func (window *WindowInstance) GetPointer() (int, int, ModifierType, Window) {
-	var carg0 *C.GdkWindow      // in, none, converted
-	var carg1 C.int             // out, full, casted
-	var carg2 C.int             // out, full, casted
-	var carg3 C.GdkModifierType // out, full, casted
-	var cret  *C.GdkWindow      // return, none, converted
-
-	carg0 = (*C.GdkWindow)(UnsafeWindowToGlibNone(window))
-
-	cret = C.gdk_window_get_pointer(carg0, &carg1, &carg2, &carg3)
-	runtime.KeepAlive(window)
-
-	var x     int
-	var y     int
-	var mask  ModifierType
-	var goret Window
-
-	x = int(carg1)
-	y = int(carg2)
-	mask = ModifierType(carg3)
-	goret = UnsafeWindowFromGlibNone(unsafe.Pointer(cret))
-
-	return x, y, mask, goret
 }
 
 // GetPosition wraps gdk_window_get_position
@@ -22677,36 +19932,6 @@ func (window *WindowInstance) MoveToRect(rect *Rectangle, rectAnchor Gravity, wi
 	runtime.KeepAlive(rectAnchorDy)
 }
 
-// ProcessUpdates wraps gdk_window_process_updates
-// 
-// The function takes the following parameters:
-// 
-// 	- updateChildren bool: whether to also process updates for child windows 
-//
-// Sends one or more expose events to @window. The areas in each
-// expose event will cover the entire update area for the window (see
-// gdk_window_invalidate_region() for details). Normally GDK calls
-// gdk_window_process_all_updates() on your behalf, so there’s no
-// need to call this function unless you want to force expose events
-// to be delivered immediately and synchronously (vs. the usual
-// case, where GDK delivers them in an idle handler). Occasionally
-// this is useful to produce nicer scrolling behavior, for example.
-//
-// Deprecated: (since 3.22.0) 
-func (window *WindowInstance) ProcessUpdates(updateChildren bool) {
-	var carg0 *C.GdkWindow // in, none, converted
-	var carg1 C.gboolean   // in
-
-	carg0 = (*C.GdkWindow)(UnsafeWindowToGlibNone(window))
-	if updateChildren {
-		carg1 = C.TRUE
-	}
-
-	C.gdk_window_process_updates(carg0, carg1)
-	runtime.KeepAlive(window)
-	runtime.KeepAlive(updateChildren)
-}
-
 // Raise wraps gdk_window_raise
 //
 // Raises @window to the top of the Z-order (stacking order), so that
@@ -22889,55 +20114,6 @@ func (window *WindowInstance) SetAcceptFocus(acceptFocus bool) {
 	runtime.KeepAlive(acceptFocus)
 }
 
-// SetBackground wraps gdk_window_set_background
-// 
-// The function takes the following parameters:
-// 
-// 	- color *Color: a #GdkColor 
-//
-// Sets the background color of @window.
-// 
-// However, when using GTK+, influence the background of a widget
-// using a style class or CSS — if you’re an application — or with
-// gtk_style_context_set_background() — if you're implementing a
-// custom widget.
-//
-// Deprecated: (since 3.4.0) Don't use this function
-func (window *WindowInstance) SetBackground(color *Color) {
-	var carg0 *C.GdkWindow // in, none, converted
-	var carg1 *C.GdkColor  // in, none, converted
-
-	carg0 = (*C.GdkWindow)(UnsafeWindowToGlibNone(window))
-	carg1 = (*C.GdkColor)(UnsafeColorToGlibNone(color))
-
-	C.gdk_window_set_background(carg0, carg1)
-	runtime.KeepAlive(window)
-	runtime.KeepAlive(color)
-}
-
-// SetBackgroundRGBA wraps gdk_window_set_background_rgba
-// 
-// The function takes the following parameters:
-// 
-// 	- rgba *RGBA: a #GdkRGBA color 
-//
-// Sets the background color of @window.
-// 
-// See also gdk_window_set_background_pattern().
-//
-// Deprecated: (since 3.22.0) Don't use this function
-func (window *WindowInstance) SetBackgroundRGBA(rgba *RGBA) {
-	var carg0 *C.GdkWindow // in, none, converted
-	var carg1 *C.GdkRGBA   // in, none, converted
-
-	carg0 = (*C.GdkWindow)(UnsafeWindowToGlibNone(window))
-	carg1 = (*C.GdkRGBA)(UnsafeRGBAToGlibNone(rgba))
-
-	C.gdk_window_set_background_rgba(carg0, carg1)
-	runtime.KeepAlive(window)
-	runtime.KeepAlive(rgba)
-}
-
 // SetChildInputShapes wraps gdk_window_set_child_input_shapes
 //
 // Sets the input shape mask of @window to the union of input shape masks
@@ -22966,51 +20142,6 @@ func (window *WindowInstance) SetChildShapes() {
 
 	C.gdk_window_set_child_shapes(carg0)
 	runtime.KeepAlive(window)
-}
-
-// SetComposited wraps gdk_window_set_composited
-// 
-// The function takes the following parameters:
-// 
-// 	- composited bool: %TRUE to set the window as composited 
-//
-// Sets a #GdkWindow as composited, or unsets it. Composited
-// windows do not automatically have their contents drawn to
-// the screen. Drawing is redirected to an offscreen buffer
-// and an expose event is emitted on the parent of the composited
-// window. It is the responsibility of the parent’s expose handler
-// to manually merge the off-screen content onto the screen in
-// whatever way it sees fit.
-// 
-// It only makes sense for child windows to be composited; see
-// gdk_window_set_opacity() if you need translucent toplevel
-// windows.
-// 
-// An additional effect of this call is that the area of this
-// window is no longer clipped from regions marked for
-// invalidation on its parent. Draws done on the parent
-// window are also no longer clipped by the child.
-// 
-// This call is only supported on some systems (currently,
-// only X11 with new enough Xcomposite and Xdamage extensions).
-// You must call gdk_display_supports_composite() to check if
-// setting a window as composited is supported before
-// attempting to do so.
-//
-// Deprecated: (since 3.16.0) Compositing is an outdated technology that
-//   only ever worked on X11.
-func (window *WindowInstance) SetComposited(composited bool) {
-	var carg0 *C.GdkWindow // in, none, converted
-	var carg1 C.gboolean   // in
-
-	carg0 = (*C.GdkWindow)(UnsafeWindowToGlibNone(window))
-	if composited {
-		carg1 = C.TRUE
-	}
-
-	C.gdk_window_set_composited(carg0, carg1)
-	runtime.KeepAlive(window)
-	runtime.KeepAlive(composited)
 }
 
 // SetCursor wraps gdk_window_set_cursor
@@ -23743,46 +20874,6 @@ func (window *WindowInstance) SetStartupID(startupId string) {
 	runtime.KeepAlive(startupId)
 }
 
-// SetStaticGravities wraps gdk_window_set_static_gravities
-// 
-// The function takes the following parameters:
-// 
-// 	- useStatic bool: %TRUE to turn on static gravity 
-// 
-// The function returns the following values:
-// 
-// 	- goret bool 
-//
-// Used to set the bit gravity of the given window to static, and flag
-// it so all children get static subwindow gravity. This is used if you
-// are implementing scary features that involve deep knowledge of the
-// windowing system. Don’t worry about it.
-//
-// Deprecated: (since 3.16.0) static gravities haven't worked on anything but X11
-//   for a long time.
-func (window *WindowInstance) SetStaticGravities(useStatic bool) bool {
-	var carg0 *C.GdkWindow // in, none, converted
-	var carg1 C.gboolean   // in
-	var cret  C.gboolean   // return
-
-	carg0 = (*C.GdkWindow)(UnsafeWindowToGlibNone(window))
-	if useStatic {
-		carg1 = C.TRUE
-	}
-
-	cret = C.gdk_window_set_static_gravities(carg0, carg1)
-	runtime.KeepAlive(window)
-	runtime.KeepAlive(useStatic)
-
-	var goret bool
-
-	if cret != 0 {
-		goret = true
-	}
-
-	return goret
-}
-
 // SetSupportMultidevice wraps gdk_window_set_support_multidevice
 // 
 // The function takes the following parameters:
@@ -23987,24 +21078,6 @@ func (window *WindowInstance) Stick() {
 	runtime.KeepAlive(window)
 }
 
-// ThawToplevelUpdatesLibgtkOnly wraps gdk_window_thaw_toplevel_updates_libgtk_only
-//
-// Thaws a window frozen with
-// gdk_window_freeze_toplevel_updates_libgtk_only().
-// 
-// This function is not part of the GDK public API and is only
-// for use by GTK+.
-//
-// Deprecated: (since 3.16.0) This symbol was never meant to be used outside of GTK+
-func (window *WindowInstance) ThawToplevelUpdatesLibgtkOnly() {
-	var carg0 *C.GdkWindow // in, none, converted
-
-	carg0 = (*C.GdkWindow)(UnsafeWindowToGlibNone(window))
-
-	C.gdk_window_thaw_toplevel_updates_libgtk_only(carg0)
-	runtime.KeepAlive(window)
-}
-
 // ThawUpdates wraps gdk_window_thaw_updates
 //
 // Thaws a window frozen with gdk_window_freeze_updates().
@@ -24150,275 +21223,6 @@ func UnsafeAtomToGlibFull(a *Atom) unsafe.Pointer {
 	a.native = nil // Atom is invalid from here on
 	return _p
 }
-// Color wraps GdkColor
-//
-// A #GdkColor is used to describe a color,
-// similar to the XColor struct used in the X11 drawing API.
-//
-// Deprecated: (since 3.14.0) Use #GdkRGBA
-type Color struct {
-	*color
-}
-
-// color is the struct that's finalized
-type color struct {
-	native *C.GdkColor
-}
-
-var _ gobject.GoValueInitializer = (*Color)(nil)
-
-func marshalColor(p unsafe.Pointer) (interface{}, error) {
-	b := gobject.ValueFromNative(p).Boxed()
-	return UnsafeColorFromGlibBorrow(b), nil
-}
-
-func (r *Color) InitGoValue(v *gobject.Value) {
-	v.Init(TypeColor)
-	v.SetBoxed(unsafe.Pointer(r.native))
-}
-
-// UnsafeColorFromGlibBorrow is used to convert raw C.GdkColor pointers to go. This is used by the bindings internally.
-func UnsafeColorFromGlibBorrow(p unsafe.Pointer) *Color {
-	return &Color{&color{(*C.GdkColor)(p)}}
-}
-
-// UnsafeColorFromGlibNone is used to convert raw C.GdkColor pointers to go while taking a reference. This is used by the bindings internally.
-func UnsafeColorFromGlibNone(p unsafe.Pointer) *Color {
-	// FIXME: this has no ref function, what should we do here?
-	wrapped := UnsafeColorFromGlibBorrow(p)
-	runtime.SetFinalizer(
-		wrapped.color,
-		func (intern *color) {
-			C.gdk_color_free(intern.native)
-		},
-	)
-	return wrapped
-}
-
-// UnsafeColorFromGlibFull is used to convert raw C.GdkColor pointers to go while taking a reference. This is used by the bindings internally.
-func UnsafeColorFromGlibFull(p unsafe.Pointer) *Color {
-	wrapped := UnsafeColorFromGlibBorrow(p)
-	runtime.SetFinalizer(
-		wrapped.color,
-		func (intern *color) {
-			C.gdk_color_free(intern.native)
-		},
-	)
-	return wrapped
-}
-
-// UnsafeColorFree unrefs/frees the underlying resource. This is used by the bindings internally.
-// 
-// After this is called, no other method on [Color] is expected to work anymore.
-func UnsafeColorFree(c *Color) {
-	C.gdk_color_free(c.native)
-}
-
-// UnsafeColorToGlibNone returns the underlying C pointer. This is used by the bindings internally.
-func UnsafeColorToGlibNone(c *Color) unsafe.Pointer {
-	return unsafe.Pointer(c.native)
-}
-
-// UnsafeColorToGlibFull returns the underlying C pointer and gives up ownership.
-// This is used by the bindings internally.
-func UnsafeColorToGlibFull(c *Color) unsafe.Pointer {
-	runtime.SetFinalizer(c.color, nil)
-	_p := unsafe.Pointer(c.native)
-	c.native = nil // Color is invalid from here on
-	return _p
-}
-// pixel wraps pixel
-//
-// For allocated colors, the pixel value used to
-//     draw this color on the screen. Not used anymore.
-func (c *Color) Pixel() uint32 {
-	valptr := &c.native.pixel
-	var _v uint32
-	_v = uint32(*valptr)
-	return _v
-}
-
-// red wraps red
-//
-// The red component of the color. This is
-//     a value between 0 and 65535, with 65535 indicating
-//     full intensity
-func (c *Color) Red() uint16 {
-	valptr := &c.native.red
-	var _v uint16
-	_v = uint16(*valptr)
-	return _v
-}
-
-// green wraps green
-//
-// The green component of the color
-func (c *Color) Green() uint16 {
-	valptr := &c.native.green
-	var _v uint16
-	_v = uint16(*valptr)
-	return _v
-}
-
-// blue wraps blue
-//
-// The blue component of the color
-func (c *Color) Blue() uint16 {
-	valptr := &c.native.blue
-	var _v uint16
-	_v = uint16(*valptr)
-	return _v
-}
-
-// pixel wraps pixel
-//
-// For allocated colors, the pixel value used to
-//     draw this color on the screen. Not used anymore.
-func (c *Color) SetPixel(pixel uint32) {
-	valptr := &c.native.pixel
-	*valptr = C.guint32(pixel)
-}
-
-// red wraps red
-//
-// The red component of the color. This is
-//     a value between 0 and 65535, with 65535 indicating
-//     full intensity
-func (c *Color) SetRed(red uint16) {
-	valptr := &c.native.red
-	*valptr = C.guint16(red)
-}
-
-// green wraps green
-//
-// The green component of the color
-func (c *Color) SetGreen(green uint16) {
-	valptr := &c.native.green
-	*valptr = C.guint16(green)
-}
-
-// blue wraps blue
-//
-// The blue component of the color
-func (c *Color) SetBlue(blue uint16) {
-	valptr := &c.native.blue
-	*valptr = C.guint16(blue)
-}
-
-// Copy wraps gdk_color_copy
-// The function returns the following values:
-// 
-// 	- goret *Color 
-//
-// Makes a copy of a #GdkColor.
-// 
-// The result must be freed using gdk_color_free().
-//
-// Deprecated: (since 3.14.0) Use #GdkRGBA
-func (color *Color) Copy() *Color {
-	var carg0 *C.GdkColor // in, none, converted
-	var cret  *C.GdkColor // return, full, converted
-
-	carg0 = (*C.GdkColor)(UnsafeColorToGlibNone(color))
-
-	cret = C.gdk_color_copy(carg0)
-	runtime.KeepAlive(color)
-
-	var goret *Color
-
-	goret = UnsafeColorFromGlibFull(unsafe.Pointer(cret))
-
-	return goret
-}
-
-// Equal wraps gdk_color_equal
-// 
-// The function takes the following parameters:
-// 
-// 	- colorb *Color: another #GdkColor 
-// 
-// The function returns the following values:
-// 
-// 	- goret bool 
-//
-// Compares two colors.
-//
-// Deprecated: (since 3.14.0) Use #GdkRGBA
-func (colora *Color) Equal(colorb *Color) bool {
-	var carg0 *C.GdkColor // in, none, converted
-	var carg1 *C.GdkColor // in, none, converted
-	var cret  C.gboolean  // return
-
-	carg0 = (*C.GdkColor)(UnsafeColorToGlibNone(colora))
-	carg1 = (*C.GdkColor)(UnsafeColorToGlibNone(colorb))
-
-	cret = C.gdk_color_equal(carg0, carg1)
-	runtime.KeepAlive(colora)
-	runtime.KeepAlive(colorb)
-
-	var goret bool
-
-	if cret != 0 {
-		goret = true
-	}
-
-	return goret
-}
-
-// Hash wraps gdk_color_hash
-// The function returns the following values:
-// 
-// 	- goret uint 
-//
-// A hash function suitable for using for a hash
-// table that stores #GdkColors.
-//
-// Deprecated: (since 3.14.0) Use #GdkRGBA
-func (color *Color) Hash() uint {
-	var carg0 *C.GdkColor // in, none, converted
-	var cret  C.guint     // return, none, casted
-
-	carg0 = (*C.GdkColor)(UnsafeColorToGlibNone(color))
-
-	cret = C.gdk_color_hash(carg0)
-	runtime.KeepAlive(color)
-
-	var goret uint
-
-	goret = uint(cret)
-
-	return goret
-}
-
-// ToString wraps gdk_color_to_string
-// The function returns the following values:
-// 
-// 	- goret string 
-//
-// Returns a textual specification of @color in the hexadecimal
-// form “\#rrrrggggbbbb” where “r”, “g” and “b” are hex digits
-// representing the red, green and blue components respectively.
-// 
-// The returned string can be parsed by gdk_color_parse().
-//
-// Deprecated: (since 3.14.0) Use #GdkRGBA
-func (color *Color) ToString() string {
-	var carg0 *C.GdkColor // in, none, converted
-	var cret  *C.gchar    // return, full, string
-
-	carg0 = (*C.GdkColor)(UnsafeColorToGlibNone(color))
-
-	cret = C.gdk_color_to_string(carg0)
-	runtime.KeepAlive(color)
-
-	var goret string
-
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
-	defer C.free(unsafe.Pointer(cret))
-
-	return goret
-}
-
 // DevicePadInterface wraps GdkDevicePadInterface
 type DevicePadInterface struct {
 	*devicePadInterface
@@ -27945,91 +24749,6 @@ func (e *EventTouchpadSwipe) SetXRoot(x_root float64) {
 func (e *EventTouchpadSwipe) SetYRoot(y_root float64) {
 	valptr := &e.native.y_root
 	*valptr = C.gdouble(y_root)
-}
-
-// EventVisibility wraps GdkEventVisibility
-//
-// Generated when the window visibility status has changed.
-//
-// Deprecated: (since 3.12.0) Modern composited windowing systems with pervasive
-//     transparency make it impossible to track the visibility of a window
-//     reliably, so this event can not be guaranteed to provide useful
-//     information.
-type EventVisibility struct {
-	*eventVisibility
-}
-
-// eventVisibility is the struct that's finalized
-type eventVisibility struct {
-	native *C.GdkEventVisibility
-}
-
-// UnsafeEventVisibilityFromGlibBorrow is used to convert raw C.GdkEventVisibility pointers to go. This is used by the bindings internally.
-func UnsafeEventVisibilityFromGlibBorrow(p unsafe.Pointer) *EventVisibility {
-	return &EventVisibility{&eventVisibility{(*C.GdkEventVisibility)(p)}}
-}
-
-// UnsafeEventVisibilityFromGlibNone is used to convert raw C.GdkEventVisibility pointers to go while taking a reference. This is used by the bindings internally.
-func UnsafeEventVisibilityFromGlibNone(p unsafe.Pointer) *EventVisibility {
-	// FIXME: this has no ref function, what should we do here?
-	wrapped := UnsafeEventVisibilityFromGlibBorrow(p)
-	runtime.SetFinalizer(
-		wrapped.eventVisibility,
-		func (intern *eventVisibility) {
-			C.free(unsafe.Pointer(intern.native))
-		},
-	)
-	return wrapped
-}
-
-// UnsafeEventVisibilityFromGlibFull is used to convert raw C.GdkEventVisibility pointers to go while taking a reference. This is used by the bindings internally.
-func UnsafeEventVisibilityFromGlibFull(p unsafe.Pointer) *EventVisibility {
-	wrapped := UnsafeEventVisibilityFromGlibBorrow(p)
-	runtime.SetFinalizer(
-		wrapped.eventVisibility,
-		func (intern *eventVisibility) {
-			C.free(unsafe.Pointer(intern.native))
-		},
-	)
-	return wrapped
-}
-
-// UnsafeEventVisibilityFree unrefs/frees the underlying resource. This is used by the bindings internally.
-// 
-// After this is called, no other method on [EventVisibility] is expected to work anymore.
-func UnsafeEventVisibilityFree(e *EventVisibility) {
-	C.free(unsafe.Pointer(e.native))
-}
-
-// UnsafeEventVisibilityToGlibNone returns the underlying C pointer. This is used by the bindings internally.
-func UnsafeEventVisibilityToGlibNone(e *EventVisibility) unsafe.Pointer {
-	return unsafe.Pointer(e.native)
-}
-
-// UnsafeEventVisibilityToGlibFull returns the underlying C pointer and gives up ownership.
-// This is used by the bindings internally.
-func UnsafeEventVisibilityToGlibFull(e *EventVisibility) unsafe.Pointer {
-	runtime.SetFinalizer(e.eventVisibility, nil)
-	_p := unsafe.Pointer(e.native)
-	e.native = nil // EventVisibility is invalid from here on
-	return _p
-}
-// send_event wraps send_event
-//
-// %TRUE if the event was sent explicitly.
-func (e *EventVisibility) SendEvent() int8 {
-	valptr := &e.native.send_event
-	var _v int8
-	_v = int8(*valptr)
-	return _v
-}
-
-// send_event wraps send_event
-//
-// %TRUE if the event was sent explicitly.
-func (e *EventVisibility) SetSendEvent(send_event int8) {
-	valptr := &e.native.send_event
-	*valptr = C.gint8(send_event)
 }
 
 // EventWindowState wraps GdkEventWindowState

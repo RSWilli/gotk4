@@ -90,13 +90,6 @@ type WaylandDevice interface {
 	// This is most notably implemented for devices of type
 	// %GDK_SOURCE_PEN, %GDK_SOURCE_TABLET_PAD.
 	GetNodePath() string
-	// GetXkbKeymap wraps gdk_wayland_device_get_xkb_keymap
-	// The function returns the following values:
-	// 
-	// 	- goret *unsafe.Pointer 
-	//
-	// Returns the `xkb_keymap` of a `GdkDevice`.
-	GetXkbKeymap() *unsafe.Pointer
 }
 
 func unsafeWrapWaylandDevice(base *gobject.ObjectInstance) *WaylandDeviceInstance {
@@ -164,30 +157,6 @@ func (device *WaylandDeviceInstance) GetNodePath() string {
 	return goret
 }
 
-// GetXkbKeymap wraps gdk_wayland_device_get_xkb_keymap
-// The function returns the following values:
-// 
-// 	- goret *unsafe.Pointer 
-//
-// Returns the `xkb_keymap` of a `GdkDevice`.
-func (device *WaylandDeviceInstance) GetXkbKeymap() *unsafe.Pointer {
-	var carg0 *C.GdkWaylandDevice // in, none, converted
-	var cret  *C.gpointer         // return, transfer: none, C Pointers: 1, Name: gpointer, scope: 
-
-	carg0 = (*C.GdkWaylandDevice)(UnsafeWaylandDeviceToGlibNone(device))
-
-	cret = C.gdk_wayland_device_get_xkb_keymap(carg0)
-	runtime.KeepAlive(device)
-
-	var goret *unsafe.Pointer
-
-	_ = goret
-	_ = cret
-	panic("unimplemented conversion of *unsafe.Pointer (gpointer*)")
-
-	return goret
-}
-
 // WaylandDisplayInstance is the instance type used by all types extending GdkWaylandDisplay. It is used internally by the bindings. Users should use the interface [WaylandDisplay] instead.
 type WaylandDisplayInstance struct {
 	_ [0]func() // equal guard
@@ -218,16 +187,6 @@ type WaylandDisplay interface {
 	//
 	// Retrieves the EGL display connection object for the given GDK display.
 	GetEglDisplay() unsafe.Pointer
-	// GetStartupNotificationID wraps gdk_wayland_display_get_startup_notification_id
-	// The function returns the following values:
-	// 
-	// 	- goret string 
-	//
-	// Gets the startup notification ID for a Wayland display, or %NULL
-	// if no ID has been defined.
-	//
-	// Deprecated: (since 4.10.0) 
-	GetStartupNotificationID() string
 	// QueryRegistry wraps gdk_wayland_display_query_registry
 	// 
 	// The function takes the following parameters:
@@ -241,36 +200,6 @@ type WaylandDisplay interface {
 	// Returns %TRUE if the interface was found in the display
 	// `wl_registry.global` handler.
 	QueryRegistry(string) bool
-	// SetCursorTheme wraps gdk_wayland_display_set_cursor_theme
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- name string: the new cursor theme 
-	// 	- size int: the size to use for cursors 
-	//
-	// Sets the cursor theme for the given @display.
-	//
-	// Deprecated: (since 4.16.0) Use the cursor-related properties of
-	//   [GtkSettings](../gtk4/class.Settings.html) to set the cursor theme
-	SetCursorTheme(string, int)
-	// SetStartupNotificationID wraps gdk_wayland_display_set_startup_notification_id
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- startupId string: the startup notification ID (must be valid utf8) 
-	//
-	// Sets the startup notification ID for a display.
-	// 
-	// This is usually taken from the value of the `DESKTOP_STARTUP_ID`
-	// environment variable, but in some cases (such as the application not
-	// being launched using exec()) it can come from other sources.
-	// 
-	// The startup ID is also what is used to signal that the startup is
-	// complete (for example, when opening a window or when calling
-	// [method@Gdk.Display.notify_startup_complete]).
-	//
-	// Deprecated: (since 4.10.0) Use [method@Gdk.Toplevel.set_startup_id]
-	SetStartupNotificationID(string)
 }
 
 func unsafeWrapWaylandDisplay(base *gobject.ObjectInstance) *WaylandDisplayInstance {
@@ -331,31 +260,6 @@ func (display *WaylandDisplayInstance) GetEglDisplay() unsafe.Pointer {
 	return goret
 }
 
-// GetStartupNotificationID wraps gdk_wayland_display_get_startup_notification_id
-// The function returns the following values:
-// 
-// 	- goret string 
-//
-// Gets the startup notification ID for a Wayland display, or %NULL
-// if no ID has been defined.
-//
-// Deprecated: (since 4.10.0) 
-func (display *WaylandDisplayInstance) GetStartupNotificationID() string {
-	var carg0 *C.GdkWaylandDisplay // in, none, converted
-	var cret  *C.gchar             // return, none, string
-
-	carg0 = (*C.GdkWaylandDisplay)(UnsafeWaylandDisplayToGlibNone(display))
-
-	cret = C.gdk_wayland_display_get_startup_notification_id(carg0)
-	runtime.KeepAlive(display)
-
-	var goret string
-
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
-
-	return goret
-}
-
 // QueryRegistry wraps gdk_wayland_display_query_registry
 // 
 // The function takes the following parameters:
@@ -388,63 +292,6 @@ func (display *WaylandDisplayInstance) QueryRegistry(global string) bool {
 	}
 
 	return goret
-}
-
-// SetCursorTheme wraps gdk_wayland_display_set_cursor_theme
-// 
-// The function takes the following parameters:
-// 
-// 	- name string: the new cursor theme 
-// 	- size int: the size to use for cursors 
-//
-// Sets the cursor theme for the given @display.
-//
-// Deprecated: (since 4.16.0) Use the cursor-related properties of
-//   [GtkSettings](../gtk4/class.Settings.html) to set the cursor theme
-func (display *WaylandDisplayInstance) SetCursorTheme(name string, size int) {
-	var carg0 *C.GdkWaylandDisplay // in, none, converted
-	var carg1 *C.gchar             // in, none, string
-	var carg2 C.int                // in, none, casted
-
-	carg0 = (*C.GdkWaylandDisplay)(UnsafeWaylandDisplayToGlibNone(display))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(name)))
-	defer C.free(unsafe.Pointer(carg1))
-	carg2 = C.int(size)
-
-	C.gdk_wayland_display_set_cursor_theme(carg0, carg1, carg2)
-	runtime.KeepAlive(display)
-	runtime.KeepAlive(name)
-	runtime.KeepAlive(size)
-}
-
-// SetStartupNotificationID wraps gdk_wayland_display_set_startup_notification_id
-// 
-// The function takes the following parameters:
-// 
-// 	- startupId string: the startup notification ID (must be valid utf8) 
-//
-// Sets the startup notification ID for a display.
-// 
-// This is usually taken from the value of the `DESKTOP_STARTUP_ID`
-// environment variable, but in some cases (such as the application not
-// being launched using exec()) it can come from other sources.
-// 
-// The startup ID is also what is used to signal that the startup is
-// complete (for example, when opening a window or when calling
-// [method@Gdk.Display.notify_startup_complete]).
-//
-// Deprecated: (since 4.10.0) Use [method@Gdk.Toplevel.set_startup_id]
-func (display *WaylandDisplayInstance) SetStartupNotificationID(startupId string) {
-	var carg0 *C.GdkWaylandDisplay // in, none, converted
-	var carg1 *C.gchar             // in, none, string
-
-	carg0 = (*C.GdkWaylandDisplay)(UnsafeWaylandDisplayToGlibNone(display))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(startupId)))
-	defer C.free(unsafe.Pointer(carg1))
-
-	C.gdk_wayland_display_set_startup_notification_id(carg0, carg1)
-	runtime.KeepAlive(display)
-	runtime.KeepAlive(startupId)
 }
 
 // WaylandGLContextInstance is the instance type used by all types extending GdkWaylandGLContext. It is used internally by the bindings. Users should use the interface [WaylandGLContext] instead.
@@ -764,24 +611,6 @@ type WaylandToplevel interface {
 	// Note that this API depends on an unstable Wayland protocol,
 	// and thus may require changes in the future.
 	SetTransientForExported(string) bool
-	// UnexportHandle wraps gdk_wayland_toplevel_unexport_handle
-	//
-	// Destroys the handle that was obtained with
-	// gdk_wayland_toplevel_export_handle().
-	// 
-	// It is an error to call this function on a surface that
-	// does not have a handle.
-	// 
-	// Since 4.12, this function does nothing. Use
-	// [method@GdkWayland.WaylandToplevel.drop_exported_handle] instead to drop a
-	// handle that was obtained with [method@GdkWayland.WaylandToplevel.export_handle].
-	// 
-	// Note that this API depends on an unstable Wayland protocol,
-	// and thus may require changes in the future.
-	//
-	// Deprecated: (since 4.12.0) Use [method@GdkWayland.WaylandToplevel.drop_exported_handle]
-	//   instead, this function does nothing
-	UnexportHandle()
 }
 
 func unsafeWrapWaylandToplevel(base *gobject.ObjectInstance) *WaylandToplevelInstance {
@@ -964,32 +793,6 @@ func (toplevel *WaylandToplevelInstance) SetTransientForExported(parentHandleStr
 	}
 
 	return goret
-}
-
-// UnexportHandle wraps gdk_wayland_toplevel_unexport_handle
-//
-// Destroys the handle that was obtained with
-// gdk_wayland_toplevel_export_handle().
-// 
-// It is an error to call this function on a surface that
-// does not have a handle.
-// 
-// Since 4.12, this function does nothing. Use
-// [method@GdkWayland.WaylandToplevel.drop_exported_handle] instead to drop a
-// handle that was obtained with [method@GdkWayland.WaylandToplevel.export_handle].
-// 
-// Note that this API depends on an unstable Wayland protocol,
-// and thus may require changes in the future.
-//
-// Deprecated: (since 4.12.0) Use [method@GdkWayland.WaylandToplevel.drop_exported_handle]
-//   instead, this function does nothing
-func (toplevel *WaylandToplevelInstance) UnexportHandle() {
-	var carg0 *C.GdkWaylandToplevel // in, none, converted
-
-	carg0 = (*C.GdkWaylandToplevel)(UnsafeWaylandToplevelToGlibNone(toplevel))
-
-	C.gdk_wayland_toplevel_unexport_handle(carg0)
-	runtime.KeepAlive(toplevel)
 }
 
 // WaylandPopupInstance is the instance type used by all types extending GdkWaylandPopup. It is used internally by the bindings. Users should use the interface [WaylandPopup] instead.

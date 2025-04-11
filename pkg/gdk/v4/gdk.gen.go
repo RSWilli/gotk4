@@ -84,7 +84,6 @@ var (
 	TypeSnapshot              = gobject.Type(C.gdk_snapshot_get_type())
 	TypeSurface               = gobject.Type(C.gdk_surface_get_type())
 	TypeTexture               = gobject.Type(C.gdk_texture_get_type())
-	TypeVulkanContext         = gobject.Type(C.gdk_vulkan_context_get_type())
 	TypeCairoContext          = gobject.Type(C.gdk_cairo_context_get_type())
 	TypeDmabufTexture         = gobject.Type(C.gdk_dmabuf_texture_get_type())
 	TypeGLTexture             = gobject.Type(C.gdk_gl_texture_get_type())
@@ -168,7 +167,6 @@ func init() {
 		gobject.TypeMarshaler{T: TypeSnapshot, F: marshalSnapshotInstance},
 		gobject.TypeMarshaler{T: TypeSurface, F: marshalSurfaceInstance},
 		gobject.TypeMarshaler{T: TypeTexture, F: marshalTextureInstance},
-		gobject.TypeMarshaler{T: TypeVulkanContext, F: marshalVulkanContextInstance},
 		gobject.TypeMarshaler{T: TypeCairoContext, F: marshalCairoContextInstance},
 		gobject.TypeMarshaler{T: TypeDmabufTexture, F: marshalDmabufTextureInstance},
 		gobject.TypeMarshaler{T: TypeGLTexture, F: marshalGLTextureInstance},
@@ -7015,40 +7013,6 @@ func KeyvalToUpper(keyval uint) uint {
 	return goret
 }
 
-// PixbufGetFromTexture wraps gdk_pixbuf_get_from_texture
-// 
-// The function takes the following parameters:
-// 
-// 	- texture Texture: a `GdkTexture` 
-// 
-// The function returns the following values:
-// 
-// 	- goret gdkpixbuf.Pixbuf 
-//
-// Creates a new pixbuf from @texture.
-// 
-// This should generally not be used in newly written code as later
-// stages will almost certainly convert the pixbuf back into a texture
-// to draw it on screen.
-//
-// Deprecated: (since 4.12.0) Use [class@Gdk.Texture] and subclasses instead
-//   cairo surfaces and pixbufs
-func PixbufGetFromTexture(texture Texture) gdkpixbuf.Pixbuf {
-	var carg1 *C.GdkTexture // in, none, converted
-	var cret  *C.GdkPixbuf  // return, full, converted
-
-	carg1 = (*C.GdkTexture)(UnsafeTextureToGlibNone(texture))
-
-	cret = C.gdk_pixbuf_get_from_texture(carg1)
-	runtime.KeepAlive(texture)
-
-	var goret gdkpixbuf.Pixbuf
-
-	goret = gdkpixbuf.UnsafePixbufFromGlibFull(unsafe.Pointer(cret))
-
-	return goret
-}
-
 // SetAllowedBackends wraps gdk_set_allowed_backends
 // 
 // The function takes the following parameters:
@@ -9864,21 +9828,6 @@ type Clipboard interface {
 	// the value will be copied directly. Otherwise, GDK will try to use
 	// [func@content_deserialize_async] to convert the clipboard's data.
 	ReadValueAsync(context.Context, gobject.Type, int, gio.AsyncReadyCallback)
-	// ReadValueFinish wraps gdk_clipboard_read_value_finish
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- result gio.AsyncResult: a `GAsyncResult` 
-	// 
-	// The function returns the following values:
-	// 
-	// 	- goret *gobject.Value 
-	// 	- _goerr error (nullable): an error 
-	//
-	// Finishes an asynchronous clipboard read.
-	// 
-	// See [method@Gdk.Clipboard.read_value_async].
-	ReadValueFinish(gio.AsyncResult) (*gobject.Value, error)
 	// SetContent wraps gdk_clipboard_set_content
 	// 
 	// The function takes the following parameters:
@@ -10369,44 +10318,6 @@ func (clipboard *ClipboardInstance) ReadValueAsync(cancellable context.Context, 
 	runtime.KeepAlive(callback)
 }
 
-// ReadValueFinish wraps gdk_clipboard_read_value_finish
-// 
-// The function takes the following parameters:
-// 
-// 	- result gio.AsyncResult: a `GAsyncResult` 
-// 
-// The function returns the following values:
-// 
-// 	- goret *gobject.Value 
-// 	- _goerr error (nullable): an error 
-//
-// Finishes an asynchronous clipboard read.
-// 
-// See [method@Gdk.Clipboard.read_value_async].
-func (clipboard *ClipboardInstance) ReadValueFinish(result gio.AsyncResult) (*gobject.Value, error) {
-	var carg0 *C.GdkClipboard // in, none, converted
-	var carg1 *C.GAsyncResult // in, none, converted
-	var cret  *C.GValue       // return, none, converted
-	var _cerr *C.GError       // out, full, converted, nullable
-
-	carg0 = (*C.GdkClipboard)(UnsafeClipboardToGlibNone(clipboard))
-	carg1 = (*C.GAsyncResult)(gio.UnsafeAsyncResultToGlibNone(result))
-
-	cret = C.gdk_clipboard_read_value_finish(carg0, carg1, &_cerr)
-	runtime.KeepAlive(clipboard)
-	runtime.KeepAlive(result)
-
-	var goret  *gobject.Value
-	var _goerr error
-
-	goret = gobject.TODOFromGlibNone(unsafe.Pointer(cret))
-	if _cerr != nil {
-		_goerr = glib.UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
-	}
-
-	return goret, _goerr
-}
-
 // SetContent wraps gdk_clipboard_set_content
 // 
 // The function takes the following parameters:
@@ -10680,13 +10591,6 @@ type ContentDeserializer interface {
 	//
 	// Gets the user data that was passed when the deserializer was registered.
 	GetUserData() unsafe.Pointer
-	// GetValue wraps gdk_content_deserializer_get_value
-	// The function returns the following values:
-	// 
-	// 	- goret *gobject.Value 
-	//
-	// Gets the `GValue` to store the deserialized object in.
-	GetValue() *gobject.Value
 	// ReturnError wraps gdk_content_deserializer_return_error
 	// 
 	// The function takes the following parameters:
@@ -10898,28 +10802,6 @@ func (deserializer *ContentDeserializerInstance) GetUserData() unsafe.Pointer {
 	var goret unsafe.Pointer
 
 	goret = unsafe.Pointer(cret)
-
-	return goret
-}
-
-// GetValue wraps gdk_content_deserializer_get_value
-// The function returns the following values:
-// 
-// 	- goret *gobject.Value 
-//
-// Gets the `GValue` to store the deserialized object in.
-func (deserializer *ContentDeserializerInstance) GetValue() *gobject.Value {
-	var carg0 *C.GdkContentDeserializer // in, none, converted
-	var cret  *C.GValue                 // return, none, converted
-
-	carg0 = (*C.GdkContentDeserializer)(UnsafeContentDeserializerToGlibNone(deserializer))
-
-	cret = C.gdk_content_deserializer_get_value(carg0)
-	runtime.KeepAlive(deserializer)
-
-	var goret *gobject.Value
-
-	goret = gobject.TODOFromGlibNone(unsafe.Pointer(cret))
 
 	return goret
 }
@@ -11472,13 +11354,6 @@ type ContentSerializer interface {
 	//
 	// Gets the user data that was passed when the serializer was registered.
 	GetUserData() unsafe.Pointer
-	// GetValue wraps gdk_content_serializer_get_value
-	// The function returns the following values:
-	// 
-	// 	- goret *gobject.Value 
-	//
-	// Gets the `GValue` to read the object to serialize from.
-	GetValue() *gobject.Value
 	// ReturnError wraps gdk_content_serializer_return_error
 	// 
 	// The function takes the following parameters:
@@ -11690,28 +11565,6 @@ func (serializer *ContentSerializerInstance) GetUserData() unsafe.Pointer {
 	var goret unsafe.Pointer
 
 	goret = unsafe.Pointer(cret)
-
-	return goret
-}
-
-// GetValue wraps gdk_content_serializer_get_value
-// The function returns the following values:
-// 
-// 	- goret *gobject.Value 
-//
-// Gets the `GValue` to read the object to serialize from.
-func (serializer *ContentSerializerInstance) GetValue() *gobject.Value {
-	var carg0 *C.GdkContentSerializer // in, none, converted
-	var cret  *C.GValue               // return, none, converted
-
-	carg0 = (*C.GdkContentSerializer)(UnsafeContentSerializerToGlibNone(serializer))
-
-	cret = C.gdk_content_serializer_get_value(carg0)
-	runtime.KeepAlive(serializer)
-
-	var goret *gobject.Value
-
-	goret = gobject.TODOFromGlibNone(unsafe.Pointer(cret))
 
 	return goret
 }
@@ -13170,16 +13023,6 @@ type Display interface {
 	// Retrieves a desktop-wide setting such as double-click time
 	// for the @display.
 	GetSetting(string, *gobject.Value) bool
-	// GetStartupNotificationID wraps gdk_display_get_startup_notification_id
-	// The function returns the following values:
-	// 
-	// 	- goret string 
-	//
-	// Gets the startup notification ID for a Wayland display, or %NULL
-	// if no ID has been defined.
-	//
-	// Deprecated: (since 4.10.0) 
-	GetStartupNotificationID() string
 	// IsClosed wraps gdk_display_is_closed
 	// The function returns the following values:
 	// 
@@ -13220,23 +13063,6 @@ type Display interface {
 	// 
 	// On modern displays, this value is always %TRUE.
 	IsRGBA() bool
-	// NotifyStartupComplete wraps gdk_display_notify_startup_complete
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- startupId string: a startup-notification identifier, for which
-	//   notification process should be completed 
-	//
-	// Indicates to the GUI environment that the application has
-	// finished loading, using a given identifier.
-	// 
-	// GTK will call this function automatically for [GtkWindow](../gtk4/class.Window.html)
-	// with custom startup-notification identifier unless
-	// [gtk_window_set_auto_startup_notification()](../gtk4/method.Window.set_auto_startup_notification.html)
-	// is called to disable that feature.
-	//
-	// Deprecated: (since 4.10.0) Using [method@Gdk.Toplevel.set_startup_id] is sufficient
-	NotifyStartupComplete(string)
 	// PrepareGL wraps gdk_display_prepare_gl
 	// The function returns the following values:
 	// 
@@ -13779,31 +13605,6 @@ func (display *DisplayInstance) GetSetting(name string, value *gobject.Value) bo
 	return goret
 }
 
-// GetStartupNotificationID wraps gdk_display_get_startup_notification_id
-// The function returns the following values:
-// 
-// 	- goret string 
-//
-// Gets the startup notification ID for a Wayland display, or %NULL
-// if no ID has been defined.
-//
-// Deprecated: (since 4.10.0) 
-func (display *DisplayInstance) GetStartupNotificationID() string {
-	var carg0 *C.GdkDisplay // in, none, converted
-	var cret  *C.gchar      // return, none, string
-
-	carg0 = (*C.GdkDisplay)(UnsafeDisplayToGlibNone(display))
-
-	cret = C.gdk_display_get_startup_notification_id(carg0)
-	runtime.KeepAlive(display)
-
-	var goret string
-
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
-
-	return goret
-}
-
 // IsClosed wraps gdk_display_is_closed
 // The function returns the following values:
 // 
@@ -13893,35 +13694,6 @@ func (display *DisplayInstance) IsRGBA() bool {
 	}
 
 	return goret
-}
-
-// NotifyStartupComplete wraps gdk_display_notify_startup_complete
-// 
-// The function takes the following parameters:
-// 
-// 	- startupId string: a startup-notification identifier, for which
-//   notification process should be completed 
-//
-// Indicates to the GUI environment that the application has
-// finished loading, using a given identifier.
-// 
-// GTK will call this function automatically for [GtkWindow](../gtk4/class.Window.html)
-// with custom startup-notification identifier unless
-// [gtk_window_set_auto_startup_notification()](../gtk4/method.Window.set_auto_startup_notification.html)
-// is called to disable that feature.
-//
-// Deprecated: (since 4.10.0) Using [method@Gdk.Toplevel.set_startup_id] is sufficient
-func (display *DisplayInstance) NotifyStartupComplete(startupId string) {
-	var carg0 *C.GdkDisplay // in, none, converted
-	var carg1 *C.gchar      // in, none, string
-
-	carg0 = (*C.GdkDisplay)(UnsafeDisplayToGlibNone(display))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(startupId)))
-	defer C.free(unsafe.Pointer(carg1))
-
-	C.gdk_display_notify_startup_complete(carg0, carg1)
-	runtime.KeepAlive(display)
-	runtime.KeepAlive(startupId)
 }
 
 // PrepareGL wraps gdk_display_prepare_gl
@@ -15729,20 +15501,6 @@ type DrawContext interface {
 	gobject.Object
 	upcastToGdkDrawContext() *DrawContextInstance
 
-	// EndFrame wraps gdk_draw_context_end_frame
-	//
-	// Ends a drawing operation started with gdk_draw_context_begin_frame().
-	// 
-	// This makes the drawing available on screen.
-	// See [method@Gdk.DrawContext.begin_frame] for more details about drawing.
-	// 
-	// When using a [class@Gdk.GLContext], this function may call `glFlush()`
-	// implicitly before returning; it is not recommended to call `glFlush()`
-	// explicitly before calling this function.
-	//
-	// Deprecated: (since 4.16.0) Drawing directly to the surface is no longer recommended.
-	//   Use `GskRenderNode` and `GskRenderer`.
-	EndFrame()
 	// GetDisplay wraps gdk_draw_context_get_display
 	// The function returns the following values:
 	// 
@@ -15757,20 +15515,6 @@ type DrawContext interface {
 	//
 	// Retrieves the surface that @context is bound to.
 	GetSurface() Surface
-	// IsInFrame wraps gdk_draw_context_is_in_frame
-	// The function returns the following values:
-	// 
-	// 	- goret bool 
-	//
-	// Returns %TRUE if @context is in the process of drawing to its surface.
-	// 
-	// This is the case between calls to [method@Gdk.DrawContext.begin_frame]
-	// and [method@Gdk.DrawContext.end_frame]. In this situation, drawing commands
-	// may be effecting the contents of the @context's surface.
-	//
-	// Deprecated: (since 4.16.0) Drawing directly to the surface is no longer recommended.
-	//   Use `GskRenderNode` and `GskRenderer`.
-	IsInFrame() bool
 }
 
 func unsafeWrapDrawContext(base *gobject.ObjectInstance) *DrawContextInstance {
@@ -15805,28 +15549,6 @@ func UnsafeDrawContextToGlibNone(c DrawContext) unsafe.Pointer {
 // UnsafeDrawContextToGlibFull is used to convert the instance to it's C value GdkDrawContext, while removeing the finalizer. This is used by the bindings internally.
 func UnsafeDrawContextToGlibFull(c DrawContext) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
-}
-
-// EndFrame wraps gdk_draw_context_end_frame
-//
-// Ends a drawing operation started with gdk_draw_context_begin_frame().
-// 
-// This makes the drawing available on screen.
-// See [method@Gdk.DrawContext.begin_frame] for more details about drawing.
-// 
-// When using a [class@Gdk.GLContext], this function may call `glFlush()`
-// implicitly before returning; it is not recommended to call `glFlush()`
-// explicitly before calling this function.
-//
-// Deprecated: (since 4.16.0) Drawing directly to the surface is no longer recommended.
-//   Use `GskRenderNode` and `GskRenderer`.
-func (context *DrawContextInstance) EndFrame() {
-	var carg0 *C.GdkDrawContext // in, none, converted
-
-	carg0 = (*C.GdkDrawContext)(UnsafeDrawContextToGlibNone(context))
-
-	C.gdk_draw_context_end_frame(carg0)
-	runtime.KeepAlive(context)
 }
 
 // GetDisplay wraps gdk_draw_context_get_display
@@ -15869,37 +15591,6 @@ func (context *DrawContextInstance) GetSurface() Surface {
 	var goret Surface
 
 	goret = UnsafeSurfaceFromGlibNone(unsafe.Pointer(cret))
-
-	return goret
-}
-
-// IsInFrame wraps gdk_draw_context_is_in_frame
-// The function returns the following values:
-// 
-// 	- goret bool 
-//
-// Returns %TRUE if @context is in the process of drawing to its surface.
-// 
-// This is the case between calls to [method@Gdk.DrawContext.begin_frame]
-// and [method@Gdk.DrawContext.end_frame]. In this situation, drawing commands
-// may be effecting the contents of the @context's surface.
-//
-// Deprecated: (since 4.16.0) Drawing directly to the surface is no longer recommended.
-//   Use `GskRenderNode` and `GskRenderer`.
-func (context *DrawContextInstance) IsInFrame() bool {
-	var carg0 *C.GdkDrawContext // in, none, converted
-	var cret  C.gboolean        // return
-
-	carg0 = (*C.GdkDrawContext)(UnsafeDrawContextToGlibNone(context))
-
-	cret = C.gdk_draw_context_is_in_frame(carg0)
-	runtime.KeepAlive(context)
-
-	var goret bool
-
-	if cret != 0 {
-		goret = true
-	}
 
 	return goret
 }
@@ -16053,21 +15744,6 @@ type Drop interface {
 	// `GType`, the value will be copied directly. Otherwise, GDK will
 	// try to use [func@Gdk.content_deserialize_async] to convert the data.
 	ReadValueAsync(context.Context, gobject.Type, int, gio.AsyncReadyCallback)
-	// ReadValueFinish wraps gdk_drop_read_value_finish
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- result gio.AsyncResult: a `GAsyncResult` 
-	// 
-	// The function returns the following values:
-	// 
-	// 	- goret *gobject.Value 
-	// 	- _goerr error (nullable): an error 
-	//
-	// Finishes an async drop read.
-	// 
-	// See [method@Gdk.Drop.read_value_async].
-	ReadValueFinish(gio.AsyncResult) (*gobject.Value, error)
 	// Status wraps gdk_drop_status
 	// 
 	// The function takes the following parameters:
@@ -16427,44 +16103,6 @@ func (self *DropInstance) ReadValueAsync(cancellable context.Context, typ gobjec
 	runtime.KeepAlive(typ)
 	runtime.KeepAlive(ioPriority)
 	runtime.KeepAlive(callback)
-}
-
-// ReadValueFinish wraps gdk_drop_read_value_finish
-// 
-// The function takes the following parameters:
-// 
-// 	- result gio.AsyncResult: a `GAsyncResult` 
-// 
-// The function returns the following values:
-// 
-// 	- goret *gobject.Value 
-// 	- _goerr error (nullable): an error 
-//
-// Finishes an async drop read.
-// 
-// See [method@Gdk.Drop.read_value_async].
-func (self *DropInstance) ReadValueFinish(result gio.AsyncResult) (*gobject.Value, error) {
-	var carg0 *C.GdkDrop      // in, none, converted
-	var carg1 *C.GAsyncResult // in, none, converted
-	var cret  *C.GValue       // return, none, converted
-	var _cerr *C.GError       // out, full, converted, nullable
-
-	carg0 = (*C.GdkDrop)(UnsafeDropToGlibNone(self))
-	carg1 = (*C.GAsyncResult)(gio.UnsafeAsyncResultToGlibNone(result))
-
-	cret = C.gdk_drop_read_value_finish(carg0, carg1, &_cerr)
-	runtime.KeepAlive(self)
-	runtime.KeepAlive(result)
-
-	var goret  *gobject.Value
-	var _goerr error
-
-	goret = gobject.TODOFromGlibNone(unsafe.Pointer(cret))
-	if _cerr != nil {
-		_goerr = glib.UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
-	}
-
-	return goret, _goerr
 }
 
 // Status wraps gdk_drop_status
@@ -17095,19 +16733,6 @@ type GLContext interface {
 	// 
 	// See [method@Gdk.GLContext.set_required_version].
 	GetRequiredVersion() (int, int)
-	// GetSharedContext wraps gdk_gl_context_get_shared_context
-	// The function returns the following values:
-	// 
-	// 	- goret GLContext 
-	//
-	// Used to retrieves the `GdkGLContext` that this @context share data with.
-	// 
-	// As many contexts can share data now and no single shared context exists
-	// anymore, this function has been deprecated and now always returns %NULL.
-	//
-	// Deprecated: (since 4.4.0) Use [method@Gdk.GLContext.is_shared] to check if contexts
-	//   can be shared.
-	GetSharedContext() GLContext
 	// GetSurface wraps gdk_gl_context_get_surface
 	// The function returns the following values:
 	// 
@@ -17489,34 +17114,6 @@ func (context *GLContextInstance) GetRequiredVersion() (int, int) {
 	minor = int(carg2)
 
 	return major, minor
-}
-
-// GetSharedContext wraps gdk_gl_context_get_shared_context
-// The function returns the following values:
-// 
-// 	- goret GLContext 
-//
-// Used to retrieves the `GdkGLContext` that this @context share data with.
-// 
-// As many contexts can share data now and no single shared context exists
-// anymore, this function has been deprecated and now always returns %NULL.
-//
-// Deprecated: (since 4.4.0) Use [method@Gdk.GLContext.is_shared] to check if contexts
-//   can be shared.
-func (context *GLContextInstance) GetSharedContext() GLContext {
-	var carg0 *C.GdkGLContext // in, none, converted
-	var cret  *C.GdkGLContext // return, none, converted
-
-	carg0 = (*C.GdkGLContext)(UnsafeGLContextToGlibNone(context))
-
-	cret = C.gdk_gl_context_get_shared_context(carg0)
-	runtime.KeepAlive(context)
-
-	var goret GLContext
-
-	goret = UnsafeGLContextFromGlibNone(unsafe.Pointer(cret))
-
-	return goret
 }
 
 // GetSurface wraps gdk_gl_context_get_surface
@@ -19884,17 +19481,6 @@ type Surface interface {
 	// Before using the returned `GdkGLContext`, you will need to
 	// call [method@Gdk.GLContext.make_current] or [method@Gdk.GLContext.realize].
 	CreateGLContext() (GLContext, error)
-	// CreateVulkanContext wraps gdk_surface_create_vulkan_context
-	// The function returns the following values:
-	// 
-	// 	- goret VulkanContext 
-	// 	- _goerr error (nullable): an error 
-	//
-	// Sets an error and returns %NULL.
-	//
-	// Deprecated: (since 4.14.0) GTK does not expose any Vulkan internals. This
-	//   function is a leftover that was accidentally exposed.
-	CreateVulkanContext() (VulkanContext, error)
 	// Destroy wraps gdk_surface_destroy
 	//
 	// Destroys the window system resources associated with @surface and
@@ -20259,37 +19845,6 @@ func (surface *SurfaceInstance) CreateGLContext() (GLContext, error) {
 	var _goerr error
 
 	goret = UnsafeGLContextFromGlibFull(unsafe.Pointer(cret))
-	if _cerr != nil {
-		_goerr = glib.UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
-	}
-
-	return goret, _goerr
-}
-
-// CreateVulkanContext wraps gdk_surface_create_vulkan_context
-// The function returns the following values:
-// 
-// 	- goret VulkanContext 
-// 	- _goerr error (nullable): an error 
-//
-// Sets an error and returns %NULL.
-//
-// Deprecated: (since 4.14.0) GTK does not expose any Vulkan internals. This
-//   function is a leftover that was accidentally exposed.
-func (surface *SurfaceInstance) CreateVulkanContext() (VulkanContext, error) {
-	var carg0 *C.GdkSurface       // in, none, converted
-	var cret  *C.GdkVulkanContext // return, full, converted
-	var _cerr *C.GError           // out, full, converted, nullable
-
-	carg0 = (*C.GdkSurface)(UnsafeSurfaceToGlibNone(surface))
-
-	cret = C.gdk_surface_create_vulkan_context(carg0, &_cerr)
-	runtime.KeepAlive(surface)
-
-	var goret  VulkanContext
-	var _goerr error
-
-	goret = UnsafeVulkanContextFromGlibFull(unsafe.Pointer(cret))
 	if _cerr != nil {
 		_goerr = glib.UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
 	}
@@ -21371,75 +20926,6 @@ func (texture *TextureInstance) SaveToTIFFBytes() *glib.Bytes {
 	goret = glib.UnsafeBytesFromGlibFull(unsafe.Pointer(cret))
 
 	return goret
-}
-
-// VulkanContextInstance is the instance type used by all types extending GdkVulkanContext. It is used internally by the bindings. Users should use the interface [VulkanContext] instead.
-type VulkanContextInstance struct {
-	_ [0]func() // equal guard
-	DrawContextInstance
-	// implemented interfaces:
-	gio.InitableInstance
-}
-
-var _ VulkanContext = (*VulkanContextInstance)(nil)
-
-// VulkanContextInstance wraps GdkVulkanContext
-//
-// `GdkVulkanContext` is an object representing the platform-specific
-// Vulkan draw context.
-// 
-// `GdkVulkanContext`s are created for a surface using
-// [method@Gdk.Surface.create_vulkan_context], and the context will match
-// the characteristics of the surface.
-// 
-// Support for `GdkVulkanContext` is platform-specific and context creation
-// can fail, returning %NULL context.
-//
-// Deprecated: (since 4.14.0) GTK does not expose any Vulkan internals. This
-//   struct is a leftover that was accidentally exposed.
-type VulkanContext interface {
-	DrawContext
-	gio.Initable
-	upcastToGdkVulkanContext() *VulkanContextInstance
-}
-
-func unsafeWrapVulkanContext(base *gobject.ObjectInstance) *VulkanContextInstance {
-	return &VulkanContextInstance{
-		DrawContextInstance: DrawContextInstance{
-			ObjectInstance: *base,
-		},
-		InitableInstance: gio.InitableInstance{
-			Instance: *base,
-		},
-	}
-}
-
-func marshalVulkanContextInstance(p unsafe.Pointer) (any, error) {
-	return unsafeWrapVulkanContext(gobject.ValueFromNative(p).Object()), nil
-}
-
-// UnsafeVulkanContextFromGlibNone is used to convert raw GdkVulkanContext pointers to go while taking a reference and attaching a finalizer. This is used by the bindings internally.
-func UnsafeVulkanContextFromGlibNone(c unsafe.Pointer) VulkanContext {
-	return gobject.UnsafeObjectFromGlibNone(c).(VulkanContext)
-}
-
-// UnsafeVulkanContextFromGlibFull is used to convert raw GdkVulkanContext pointers to go while attaching a finalizer. This is used by the bindings internally.
-func UnsafeVulkanContextFromGlibFull(c unsafe.Pointer) VulkanContext {
-	return gobject.UnsafeObjectFromGlibFull(c).(VulkanContext)
-}
-
-func (v *VulkanContextInstance) upcastToGdkVulkanContext() *VulkanContextInstance {
-	return v
-}
-
-// UnsafeVulkanContextToGlibNone is used to convert the instance to it's C value GdkVulkanContext. This is used by the bindings internally.
-func UnsafeVulkanContextToGlibNone(c VulkanContext) unsafe.Pointer {
-	return gobject.UnsafeObjectToGlibNone(c)
-}
-
-// UnsafeVulkanContextToGlibFull is used to convert the instance to it's C value GdkVulkanContext, while removeing the finalizer. This is used by the bindings internally.
-func UnsafeVulkanContextToGlibFull(c VulkanContext) unsafe.Pointer {
-	return gobject.UnsafeObjectToGlibFull(c)
 }
 
 // CairoContextInstance is the instance type used by all types extending GdkCairoContext. It is used internally by the bindings. Users should use the interface [CairoContext] instead.
