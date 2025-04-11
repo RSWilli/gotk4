@@ -1145,9 +1145,9 @@ func UnsafePixbufToGlibFull(c Pixbuf) unsafe.Pointer {
 func NewPixbufInstance(colorspace Colorspace, hasAlpha bool, bitsPerSample int, width int, height int) Pixbuf {
 	var carg1 C.GdkColorspace // in, none, casted
 	var carg2 C.gboolean      // in
-	var carg3 C.int           // in, none, casted
-	var carg4 C.int           // in, none, casted
-	var carg5 C.int           // in, none, casted
+	var carg3 C.int           // in, none, casted, casted C.gint
+	var carg4 C.int           // in, none, casted, casted C.gint
+	var carg5 C.int           // in, none, casted, casted C.gint
 	var cret  *C.GdkPixbuf    // return, full, converted
 
 	carg1 = C.GdkColorspace(colorspace)
@@ -1198,10 +1198,10 @@ func NewPixbufInstanceFromBytes(data *glib.Bytes, colorspace Colorspace, hasAlph
 	var carg1 *C.GBytes       // in, none, converted
 	var carg2 C.GdkColorspace // in, none, casted
 	var carg3 C.gboolean      // in
-	var carg4 C.int           // in, none, casted
-	var carg5 C.int           // in, none, casted
-	var carg6 C.int           // in, none, casted
-	var carg7 C.int           // in, none, casted
+	var carg4 C.int           // in, none, casted, casted C.gint
+	var carg5 C.int           // in, none, casted, casted C.gint
+	var carg6 C.int           // in, none, casted, casted C.gint
+	var carg7 C.int           // in, none, casted, casted C.gint
 	var cret  *C.GdkPixbuf    // return, full, converted
 
 	carg1 = (*C.GBytes)(glib.UnsafeBytesToGlibNone(data))
@@ -1255,11 +1255,11 @@ func NewPixbufInstanceFromBytes(data *glib.Bytes, colorspace Colorspace, hasAlph
 // 
 // The error domains are `GDK_PIXBUF_ERROR` and `G_FILE_ERROR`.
 func NewPixbufInstanceFromFile(filename string) (Pixbuf, error) {
-	var carg1 *C.gchar     // in, none, string
+	var carg1 *C.char      // in, none, string, casted *C.gchar
 	var cret  *C.GdkPixbuf // return, full, converted
 	var _cerr *C.GError    // out, full, converted, nullable
 
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(filename)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(filename)))
 	defer C.free(unsafe.Pointer(carg1))
 
 	cret = C.gdk_pixbuf_new_from_file(carg1, &_cerr)
@@ -1314,14 +1314,14 @@ func NewPixbufInstanceFromFile(filename string) (Pixbuf, error) {
 // at all in that dimension. Negative values for `width` and `height` are
 // allowed since 2.8.
 func NewPixbufInstanceFromFileAtScale(filename string, width int, height int, preserveAspectRatio bool) (Pixbuf, error) {
-	var carg1 *C.gchar     // in, none, string
-	var carg2 C.int        // in, none, casted
-	var carg3 C.int        // in, none, casted
+	var carg1 *C.char      // in, none, string, casted *C.gchar
+	var carg2 C.int        // in, none, casted, casted C.gint
+	var carg3 C.int        // in, none, casted, casted C.gint
 	var carg4 C.gboolean   // in
 	var cret  *C.GdkPixbuf // return, full, converted
 	var _cerr *C.GError    // out, full, converted, nullable
 
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(filename)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(filename)))
 	defer C.free(unsafe.Pointer(carg1))
 	carg2 = C.int(width)
 	carg3 = C.int(height)
@@ -1379,13 +1379,13 @@ func NewPixbufInstanceFromFileAtScale(filename string, width int, height int, pr
 // and image at the requested size, regardless of aspect ratio, use
 // [ctor@GdkPixbuf.Pixbuf.new_from_file_at_scale].
 func NewPixbufInstanceFromFileAtSize(filename string, width int, height int) (Pixbuf, error) {
-	var carg1 *C.gchar     // in, none, string
-	var carg2 C.int        // in, none, casted
-	var carg3 C.int        // in, none, casted
+	var carg1 *C.char      // in, none, string, casted *C.gchar
+	var carg2 C.int        // in, none, casted, casted C.gint
+	var carg3 C.int        // in, none, casted, casted C.gint
 	var cret  *C.GdkPixbuf // return, full, converted
 	var _cerr *C.GError    // out, full, converted, nullable
 
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(filename)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(filename)))
 	defer C.free(unsafe.Pointer(carg1))
 	carg2 = C.int(width)
 	carg3 = C.int(height)
@@ -1422,11 +1422,11 @@ func NewPixbufInstanceFromFileAtSize(filename string, width int, height int) (Pi
 // The file format is detected automatically. If `NULL` is returned, then
 // @error will be set.
 func NewPixbufInstanceFromResource(resourcePath string) (Pixbuf, error) {
-	var carg1 *C.gchar     // in, none, string
+	var carg1 *C.char      // in, none, string, casted *C.gchar
 	var cret  *C.GdkPixbuf // return, full, converted
 	var _cerr *C.GError    // out, full, converted, nullable
 
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(resourcePath)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(resourcePath)))
 	defer C.free(unsafe.Pointer(carg1))
 
 	cret = C.gdk_pixbuf_new_from_resource(carg1, &_cerr)
@@ -1471,14 +1471,14 @@ func NewPixbufInstanceFromResource(resourcePath string) (Pixbuf, error) {
 // 
 // The stream is not closed.
 func NewPixbufInstanceFromResourceAtScale(resourcePath string, width int, height int, preserveAspectRatio bool) (Pixbuf, error) {
-	var carg1 *C.gchar     // in, none, string
-	var carg2 C.int        // in, none, casted
-	var carg3 C.int        // in, none, casted
+	var carg1 *C.char      // in, none, string, casted *C.gchar
+	var carg2 C.int        // in, none, casted, casted C.gint
+	var carg3 C.int        // in, none, casted, casted C.gint
 	var carg4 C.gboolean   // in
 	var cret  *C.GdkPixbuf // return, full, converted
 	var _cerr *C.GError    // out, full, converted, nullable
 
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(resourcePath)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(resourcePath)))
 	defer C.free(unsafe.Pointer(carg1))
 	carg2 = C.int(width)
 	carg3 = C.int(height)
@@ -1592,8 +1592,8 @@ func NewPixbufInstanceFromStream(cancellable context.Context, stream gio.InputSt
 func NewPixbufInstanceFromStreamAtScale(cancellable context.Context, stream gio.InputStream, width int, height int, preserveAspectRatio bool) (Pixbuf, error) {
 	var carg5 *C.GCancellable // in, none, converted, nullable
 	var carg1 *C.GInputStream // in, none, converted
-	var carg2 C.int           // in, none, casted
-	var carg3 C.int           // in, none, casted
+	var carg2 C.gint          // in, none, casted
+	var carg3 C.gint          // in, none, casted
 	var carg4 C.gboolean      // in
 	var cret  *C.GdkPixbuf    // return, full, converted
 	var _cerr *C.GError       // out, full, converted, nullable
@@ -1602,8 +1602,8 @@ func NewPixbufInstanceFromStreamAtScale(cancellable context.Context, stream gio.
 		carg5 = (*C.GCancellable)(gio.UnsafeGCancellableToGlibNone(cancellable))
 	}
 	carg1 = (*C.GInputStream)(gio.UnsafeInputStreamToGlibNone(stream))
-	carg2 = C.int(width)
-	carg3 = C.int(height)
+	carg2 = C.gint(width)
+	carg3 = C.gint(height)
 	if preserveAspectRatio {
 		carg4 = C.TRUE
 	}
@@ -1714,10 +1714,10 @@ func NewPixbufInstanceFromXPMData(data []string) Pixbuf {
 func PixbufInstanceCalculateRowstride(colorspace Colorspace, hasAlpha bool, bitsPerSample int, width int, height int) int {
 	var carg1 C.GdkColorspace // in, none, casted
 	var carg2 C.gboolean      // in
-	var carg3 C.int           // in, none, casted
-	var carg4 C.int           // in, none, casted
-	var carg5 C.int           // in, none, casted
-	var cret  C.int           // return, none, casted
+	var carg3 C.int           // in, none, casted, casted C.gint
+	var carg4 C.int           // in, none, casted, casted C.gint
+	var carg5 C.int           // in, none, casted, casted C.gint
+	var cret  C.gint          // return, none, casted
 
 	carg1 = C.GdkColorspace(colorspace)
 	if hasAlpha {
@@ -1755,9 +1755,9 @@ func PixbufInstanceCalculateRowstride(colorspace Colorspace, hasAlpha bool, bits
 //
 // Parses an image file far enough to determine its format and size.
 func PixbufInstanceGetFileInfo(filename string) (int, int, *PixbufFormat) {
-	var carg1 *C.gchar           // in, none, string
-	var carg2 C.int              // out, full, casted
-	var carg3 C.int              // out, full, casted
+	var carg1 *C.gchar           // in, none, string, casted *C.gchar
+	var carg2 C.gint             // out, full, casted
+	var carg3 C.gint             // out, full, casted
 	var cret  *C.GdkPixbufFormat // return, none, converted
 
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(filename)))
@@ -1796,7 +1796,7 @@ func PixbufInstanceGetFileInfo(filename string) (int, int, *PixbufFormat) {
 // get the result of the operation.
 func PixbufInstanceGetFileInfoAsync(cancellable context.Context, filename string, callback gio.AsyncReadyCallback) {
 	var carg2 *C.GCancellable       // in, none, converted, nullable
-	var carg1 *C.gchar              // in, none, string
+	var carg1 *C.gchar              // in, none, string, casted *C.gchar
 	var carg3 C.GAsyncReadyCallback // callback, scope: async, closure: carg4, nullable
 	var carg4 C.gpointer            // implicit
 
@@ -1833,8 +1833,8 @@ func PixbufInstanceGetFileInfoAsync(cancellable context.Context, filename string
 // gdk_pixbuf_get_file_info_async().
 func PixbufInstanceGetFileInfoFinish(asyncResult gio.AsyncResult) (int, int, *PixbufFormat, error) {
 	var carg1 *C.GAsyncResult    // in, none, converted
-	var carg2 C.int              // out, full, casted
-	var carg3 C.int              // out, full, casted
+	var carg2 C.gint             // out, full, casted
+	var carg3 C.gint             // out, full, casted
 	var cret  *C.GdkPixbufFormat // return, none, converted
 	var _cerr *C.GError          // out, full, converted, nullable
 
@@ -1883,11 +1883,11 @@ func PixbufInstanceGetFileInfoFinish(asyncResult gio.AsyncResult) (int, int, *Pi
 // with the application in a separate directory from the OS or runtime-
 // provided modules.
 func PixbufInstanceInitModules(path string) (bool, error) {
-	var carg1 *C.gchar   // in, none, string
+	var carg1 *C.char    // in, none, string, casted *C.gchar
 	var cret  C.gboolean // return
 	var _cerr *C.GError  // out, full, converted, nullable
 
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(path)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(path)))
 	defer C.free(unsafe.Pointer(carg1))
 
 	cret = C.gdk_pixbuf_init_modules(carg1, &_cerr)
@@ -1964,8 +1964,8 @@ func NewPixbufInstanceFromStreamAsync(cancellable context.Context, stream gio.In
 func NewPixbufInstanceFromStreamAtScaleAsync(cancellable context.Context, stream gio.InputStream, width int, height int, preserveAspectRatio bool, callback gio.AsyncReadyCallback) {
 	var carg5 *C.GCancellable       // in, none, converted, nullable
 	var carg1 *C.GInputStream       // in, none, converted
-	var carg2 C.int                 // in, none, casted
-	var carg3 C.int                 // in, none, casted
+	var carg2 C.gint                // in, none, casted
+	var carg3 C.gint                // in, none, casted
 	var carg4 C.gboolean            // in
 	var carg6 C.GAsyncReadyCallback // callback, scope: async, closure: carg7, nullable
 	var carg7 C.gpointer            // implicit
@@ -1974,8 +1974,8 @@ func NewPixbufInstanceFromStreamAtScaleAsync(cancellable context.Context, stream
 		carg5 = (*C.GCancellable)(gio.UnsafeGCancellableToGlibNone(cancellable))
 	}
 	carg1 = (*C.GInputStream)(gio.UnsafeInputStreamToGlibNone(stream))
-	carg2 = C.int(width)
-	carg3 = C.int(height)
+	carg2 = C.gint(width)
+	carg3 = C.gint(height)
 	if preserveAspectRatio {
 		carg4 = C.TRUE
 	}
@@ -2148,16 +2148,16 @@ func (src *PixbufInstance) ApplyEmbeddedOrientation() Pixbuf {
 func (src *PixbufInstance) Composite(dest Pixbuf, destX int, destY int, destWidth int, destHeight int, offsetX float64, offsetY float64, scaleX float64, scaleY float64, interpType InterpType, overallAlpha int) {
 	var carg0  *C.GdkPixbuf    // in, none, converted
 	var carg1  *C.GdkPixbuf    // in, none, converted
-	var carg2  C.int           // in, none, casted
-	var carg3  C.int           // in, none, casted
-	var carg4  C.int           // in, none, casted
-	var carg5  C.int           // in, none, casted
-	var carg6  C.gdouble       // in, none, casted
-	var carg7  C.gdouble       // in, none, casted
-	var carg8  C.gdouble       // in, none, casted
-	var carg9  C.gdouble       // in, none, casted
+	var carg2  C.int           // in, none, casted, casted C.gint
+	var carg3  C.int           // in, none, casted, casted C.gint
+	var carg4  C.int           // in, none, casted, casted C.gint
+	var carg5  C.int           // in, none, casted, casted C.gint
+	var carg6  C.double        // in, none, casted, casted C.gdouble
+	var carg7  C.double        // in, none, casted, casted C.gdouble
+	var carg8  C.double        // in, none, casted, casted C.gdouble
+	var carg9  C.double        // in, none, casted, casted C.gdouble
 	var carg10 C.GdkInterpType // in, none, casted
-	var carg11 C.int           // in, none, casted
+	var carg11 C.int           // in, none, casted, casted C.gint
 
 	carg0 = (*C.GdkPixbuf)(UnsafePixbufToGlibNone(src))
 	carg1 = (*C.GdkPixbuf)(UnsafePixbufToGlibNone(dest))
@@ -2165,10 +2165,10 @@ func (src *PixbufInstance) Composite(dest Pixbuf, destX int, destY int, destWidt
 	carg3 = C.int(destY)
 	carg4 = C.int(destWidth)
 	carg5 = C.int(destHeight)
-	carg6 = C.gdouble(offsetX)
-	carg7 = C.gdouble(offsetY)
-	carg8 = C.gdouble(scaleX)
-	carg9 = C.gdouble(scaleY)
+	carg6 = C.double(offsetX)
+	carg7 = C.double(offsetY)
+	carg8 = C.double(scaleX)
+	carg9 = C.double(scaleY)
 	carg10 = C.GdkInterpType(interpType)
 	carg11 = C.int(overallAlpha)
 
@@ -2223,19 +2223,19 @@ func (src *PixbufInstance) Composite(dest Pixbuf, destX int, destY int, destWidt
 func (src *PixbufInstance) CompositeColor(dest Pixbuf, destX int, destY int, destWidth int, destHeight int, offsetX float64, offsetY float64, scaleX float64, scaleY float64, interpType InterpType, overallAlpha int, checkX int, checkY int, checkSize int, color1 uint32, color2 uint32) {
 	var carg0  *C.GdkPixbuf    // in, none, converted
 	var carg1  *C.GdkPixbuf    // in, none, converted
-	var carg2  C.int           // in, none, casted
-	var carg3  C.int           // in, none, casted
-	var carg4  C.int           // in, none, casted
-	var carg5  C.int           // in, none, casted
-	var carg6  C.gdouble       // in, none, casted
-	var carg7  C.gdouble       // in, none, casted
-	var carg8  C.gdouble       // in, none, casted
-	var carg9  C.gdouble       // in, none, casted
+	var carg2  C.int           // in, none, casted, casted C.gint
+	var carg3  C.int           // in, none, casted, casted C.gint
+	var carg4  C.int           // in, none, casted, casted C.gint
+	var carg5  C.int           // in, none, casted, casted C.gint
+	var carg6  C.double        // in, none, casted, casted C.gdouble
+	var carg7  C.double        // in, none, casted, casted C.gdouble
+	var carg8  C.double        // in, none, casted, casted C.gdouble
+	var carg9  C.double        // in, none, casted, casted C.gdouble
 	var carg10 C.GdkInterpType // in, none, casted
-	var carg11 C.int           // in, none, casted
-	var carg12 C.int           // in, none, casted
-	var carg13 C.int           // in, none, casted
-	var carg14 C.int           // in, none, casted
+	var carg11 C.int           // in, none, casted, casted C.gint
+	var carg12 C.int           // in, none, casted, casted C.gint
+	var carg13 C.int           // in, none, casted, casted C.gint
+	var carg14 C.int           // in, none, casted, casted C.gint
 	var carg15 C.guint32       // in, none, casted
 	var carg16 C.guint32       // in, none, casted
 
@@ -2245,10 +2245,10 @@ func (src *PixbufInstance) CompositeColor(dest Pixbuf, destX int, destY int, des
 	carg3 = C.int(destY)
 	carg4 = C.int(destWidth)
 	carg5 = C.int(destHeight)
-	carg6 = C.gdouble(offsetX)
-	carg7 = C.gdouble(offsetY)
-	carg8 = C.gdouble(scaleX)
-	carg9 = C.gdouble(scaleY)
+	carg6 = C.double(offsetX)
+	carg7 = C.double(offsetY)
+	carg8 = C.double(scaleX)
+	carg9 = C.double(scaleY)
 	carg10 = C.GdkInterpType(interpType)
 	carg11 = C.int(overallAlpha)
 	carg12 = C.int(checkX)
@@ -2298,11 +2298,11 @@ func (src *PixbufInstance) CompositeColor(dest Pixbuf, destX int, destY int, des
 // and `color2`.
 func (src *PixbufInstance) CompositeColorSimple(destWidth int, destHeight int, interpType InterpType, overallAlpha int, checkSize int, color1 uint32, color2 uint32) Pixbuf {
 	var carg0 *C.GdkPixbuf    // in, none, converted
-	var carg1 C.int           // in, none, casted
-	var carg2 C.int           // in, none, casted
+	var carg1 C.int           // in, none, casted, casted C.gint
+	var carg2 C.int           // in, none, casted, casted C.gint
 	var carg3 C.GdkInterpType // in, none, casted
-	var carg4 C.int           // in, none, casted
-	var carg5 C.int           // in, none, casted
+	var carg4 C.int           // in, none, casted, casted C.gint
+	var carg5 C.int           // in, none, casted, casted C.gint
 	var carg6 C.guint32       // in, none, casted
 	var carg7 C.guint32       // in, none, casted
 	var cret  *C.GdkPixbuf    // return, full, converted
@@ -2380,13 +2380,13 @@ func (pixbuf *PixbufInstance) Copy() Pixbuf {
 // Therefore, you can not use this function to scroll a pixbuf.
 func (srcPixbuf *PixbufInstance) CopyArea(srcX int, srcY int, width int, height int, destPixbuf Pixbuf, destX int, destY int) {
 	var carg0 *C.GdkPixbuf // in, none, converted
-	var carg1 C.int        // in, none, casted
-	var carg2 C.int        // in, none, casted
-	var carg3 C.int        // in, none, casted
-	var carg4 C.int        // in, none, casted
+	var carg1 C.int        // in, none, casted, casted C.gint
+	var carg2 C.int        // in, none, casted, casted C.gint
+	var carg3 C.int        // in, none, casted, casted C.gint
+	var carg4 C.int        // in, none, casted, casted C.gint
 	var carg5 *C.GdkPixbuf // in, none, converted
-	var carg6 C.int        // in, none, casted
-	var carg7 C.int        // in, none, casted
+	var carg6 C.int        // in, none, casted, casted C.gint
+	var carg7 C.int        // in, none, casted, casted C.gint
 
 	carg0 = (*C.GdkPixbuf)(UnsafePixbufToGlibNone(srcPixbuf))
 	carg1 = C.int(srcX)
@@ -2510,7 +2510,7 @@ func (src *PixbufInstance) Flip(horizontal bool) Pixbuf {
 // Queries the number of bits per color sample in a pixbuf.
 func (pixbuf *PixbufInstance) GetBitsPerSample() int {
 	var carg0 *C.GdkPixbuf // in, none, converted
-	var cret  C.int        // return, none, casted
+	var cret  C.int        // return, none, casted, casted C.gint
 
 	carg0 = (*C.GdkPixbuf)(UnsafePixbufToGlibNone(pixbuf))
 
@@ -2600,7 +2600,7 @@ func (pixbuf *PixbufInstance) GetHasAlpha() bool {
 // Queries the height of a pixbuf.
 func (pixbuf *PixbufInstance) GetHeight() int {
 	var carg0 *C.GdkPixbuf // in, none, converted
-	var cret  C.int        // return, none, casted
+	var cret  C.int        // return, none, casted, casted C.gint
 
 	carg0 = (*C.GdkPixbuf)(UnsafePixbufToGlibNone(pixbuf))
 
@@ -2622,7 +2622,7 @@ func (pixbuf *PixbufInstance) GetHeight() int {
 // Queries the number of channels of a pixbuf.
 func (pixbuf *PixbufInstance) GetNChannels() int {
 	var carg0 *C.GdkPixbuf // in, none, converted
-	var cret  C.int        // return, none, casted
+	var cret  C.int        // return, none, casted, casted C.gint
 
 	carg0 = (*C.GdkPixbuf)(UnsafePixbufToGlibNone(pixbuf))
 
@@ -2663,8 +2663,8 @@ func (pixbuf *PixbufInstance) GetNChannels() int {
 // EXIF tag.
 func (pixbuf *PixbufInstance) GetOption(key string) string {
 	var carg0 *C.GdkPixbuf // in, none, converted
-	var carg1 *C.gchar     // in, none, string
-	var cret  *C.gchar     // return, none, string
+	var carg1 *C.gchar     // in, none, string, casted *C.gchar
+	var cret  *C.gchar     // return, none, string, casted *C.gchar
 
 	carg0 = (*C.GdkPixbuf)(UnsafePixbufToGlibNone(pixbuf))
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(key)))
@@ -2724,7 +2724,7 @@ func (pixbuf *PixbufInstance) GetPixelsWithLength() (uint, []byte) {
 // the start of a row and the start of the next row.
 func (pixbuf *PixbufInstance) GetRowstride() int {
 	var carg0 *C.GdkPixbuf // in, none, converted
-	var cret  C.int        // return, none, casted
+	var cret  C.int        // return, none, casted, casted C.gint
 
 	carg0 = (*C.GdkPixbuf)(UnsafePixbufToGlibNone(pixbuf))
 
@@ -2746,7 +2746,7 @@ func (pixbuf *PixbufInstance) GetRowstride() int {
 // Queries the width of a pixbuf.
 func (pixbuf *PixbufInstance) GetWidth() int {
 	var carg0 *C.GdkPixbuf // in, none, converted
-	var cret  C.int        // return, none, casted
+	var cret  C.int        // return, none, casted, casted C.gint
 
 	carg0 = (*C.GdkPixbuf)(UnsafePixbufToGlibNone(pixbuf))
 
@@ -2784,10 +2784,10 @@ func (pixbuf *PixbufInstance) GetWidth() int {
 // to be mutable.
 func (srcPixbuf *PixbufInstance) NewSubpixbuf(srcX int, srcY int, width int, height int) Pixbuf {
 	var carg0 *C.GdkPixbuf // in, none, converted
-	var carg1 C.int        // in, none, casted
-	var carg2 C.int        // in, none, casted
-	var carg3 C.int        // in, none, casted
-	var carg4 C.int        // in, none, casted
+	var carg1 C.int        // in, none, casted, casted C.gint
+	var carg2 C.int        // in, none, casted, casted C.gint
+	var carg3 C.int        // in, none, casted, casted C.gint
+	var carg4 C.int        // in, none, casted, casted C.gint
 	var cret  *C.GdkPixbuf // return, full, converted
 
 	carg0 = (*C.GdkPixbuf)(UnsafePixbufToGlibNone(srcPixbuf))
@@ -2876,7 +2876,7 @@ func (pixbuf *PixbufInstance) ReadPixels() *uint8 {
 // Removes the key/value pair option attached to a `GdkPixbuf`.
 func (pixbuf *PixbufInstance) RemoveOption(key string) bool {
 	var carg0 *C.GdkPixbuf // in, none, converted
-	var carg1 *C.gchar     // in, none, string
+	var carg1 *C.gchar     // in, none, string, casted *C.gchar
 	var cret  C.gboolean   // return
 
 	carg0 = (*C.GdkPixbuf)(UnsafePixbufToGlibNone(pixbuf))
@@ -2995,7 +2995,7 @@ func (src *PixbufInstance) SaturateAndPixelate(dest Pixbuf, saturation float32, 
 // See [method@GdkPixbuf.Pixbuf.save_to_buffer] for more details.
 func (pixbuf *PixbufInstance) SaveToBufferv(typ string, optionKeys []string, optionValues []string) (string, bool, error) {
 	var carg0 *C.GdkPixbuf // in, none, converted
-	var carg3 *C.gchar     // in, none, string
+	var carg3 *C.char      // in, none, string, casted *C.gchar
 	var carg4 **C.char     // in, transfer: none, C Pointers: 2, Name: array[utf8], nullable, array (inner: *typesystem.StringPrimitive, zero-terminated)
 	var carg5 **C.char     // in, transfer: none, C Pointers: 2, Name: array[utf8], nullable, array (inner: *typesystem.StringPrimitive, zero-terminated)
 	var carg1 *C.gchar     // out, transfer: full, C Pointers: 1, Name: array[unknown], array (inner: <nil>, length-by: carg2)
@@ -3004,7 +3004,7 @@ func (pixbuf *PixbufInstance) SaveToBufferv(typ string, optionKeys []string, opt
 	var _cerr *C.GError    // out, full, converted, nullable
 
 	carg0 = (*C.GdkPixbuf)(UnsafePixbufToGlibNone(pixbuf))
-	carg3 = (*C.gchar)(unsafe.Pointer(C.CString(typ)))
+	carg3 = (*C.char)(unsafe.Pointer(C.CString(typ)))
 	defer C.free(unsafe.Pointer(carg3))
 	_ = optionKeys
 	_ = carg4
@@ -3064,7 +3064,7 @@ func (pixbuf *PixbufInstance) SaveToCallbackv(saveFunc PixbufSaveFunc, typ strin
 	var carg0 *C.GdkPixbuf        // in, none, converted
 	var carg1 C.GdkPixbufSaveFunc // callback, scope: call, closure: carg2
 	var carg2 C.gpointer          // implicit
-	var carg3 *C.gchar            // in, none, string
+	var carg3 *C.char             // in, none, string, casted *C.gchar
 	var carg4 **C.char            // in, transfer: none, C Pointers: 2, Name: array[utf8], nullable, array (inner: *typesystem.StringPrimitive, zero-terminated)
 	var carg5 **C.char            // in, transfer: none, C Pointers: 2, Name: array[utf8], nullable, array (inner: *typesystem.StringPrimitive, zero-terminated)
 	var cret  C.gboolean          // return
@@ -3074,7 +3074,7 @@ func (pixbuf *PixbufInstance) SaveToCallbackv(saveFunc PixbufSaveFunc, typ strin
 	carg1 = (*[0]byte)(C._gotk4_gdkpixbuf2_PixbufSaveFunc)
 	carg2 = C.gpointer(gbox.Assign(saveFunc))
 	defer gbox.Delete(uintptr(carg2))
-	carg3 = (*C.gchar)(unsafe.Pointer(C.CString(typ)))
+	carg3 = (*C.char)(unsafe.Pointer(C.CString(typ)))
 	defer C.free(unsafe.Pointer(carg3))
 	_ = optionKeys
 	_ = carg4
@@ -3128,7 +3128,7 @@ func (pixbuf *PixbufInstance) SaveToStreamv(cancellable context.Context, stream 
 	var carg0 *C.GdkPixbuf     // in, none, converted
 	var carg5 *C.GCancellable  // in, none, converted, nullable
 	var carg1 *C.GOutputStream // in, none, converted
-	var carg2 *C.gchar         // in, none, string
+	var carg2 *C.char          // in, none, string, casted *C.gchar
 	var carg3 **C.char         // in, transfer: none, C Pointers: 2, Name: array[utf8], nullable, array (inner: *typesystem.StringPrimitive, zero-terminated)
 	var carg4 **C.char         // in, transfer: none, C Pointers: 2, Name: array[utf8], nullable, array (inner: *typesystem.StringPrimitive, zero-terminated)
 	var cret  C.gboolean       // return
@@ -3139,7 +3139,7 @@ func (pixbuf *PixbufInstance) SaveToStreamv(cancellable context.Context, stream 
 		carg5 = (*C.GCancellable)(gio.UnsafeGCancellableToGlibNone(cancellable))
 	}
 	carg1 = (*C.GOutputStream)(gio.UnsafeOutputStreamToGlibNone(stream))
-	carg2 = (*C.gchar)(unsafe.Pointer(C.CString(typ)))
+	carg2 = (*C.char)(unsafe.Pointer(C.CString(typ)))
 	defer C.free(unsafe.Pointer(carg2))
 	_ = optionKeys
 	_ = carg3
@@ -3193,7 +3193,7 @@ func (pixbuf *PixbufInstance) SaveToStreamvAsync(cancellable context.Context, st
 	var carg0 *C.GdkPixbuf          // in, none, converted
 	var carg5 *C.GCancellable       // in, none, converted, nullable
 	var carg1 *C.GOutputStream      // in, none, converted
-	var carg2 *C.gchar              // in, none, string
+	var carg2 *C.gchar              // in, none, string, casted *C.gchar
 	var carg3 **C.gchar             // in, transfer: none, C Pointers: 2, Name: array[utf8], nullable, array (inner: *typesystem.StringPrimitive, zero-terminated)
 	var carg4 **C.gchar             // in, transfer: none, C Pointers: 2, Name: array[utf8], nullable, array (inner: *typesystem.StringPrimitive, zero-terminated)
 	var carg6 C.GAsyncReadyCallback // callback, scope: async, closure: carg7, nullable
@@ -3250,17 +3250,17 @@ func (pixbuf *PixbufInstance) SaveToStreamvAsync(cancellable context.Context, st
 // See [method@GdkPixbuf.Pixbuf.save] for more details.
 func (pixbuf *PixbufInstance) Savev(filename string, typ string, optionKeys []string, optionValues []string) (bool, error) {
 	var carg0 *C.GdkPixbuf // in, none, converted
-	var carg1 *C.gchar     // in, none, string
-	var carg2 *C.gchar     // in, none, string
+	var carg1 *C.char      // in, none, string, casted *C.gchar
+	var carg2 *C.char      // in, none, string, casted *C.gchar
 	var carg3 **C.char     // in, transfer: none, C Pointers: 2, Name: array[utf8], nullable, array (inner: *typesystem.StringPrimitive, zero-terminated)
 	var carg4 **C.char     // in, transfer: none, C Pointers: 2, Name: array[utf8], nullable, array (inner: *typesystem.StringPrimitive, zero-terminated)
 	var cret  C.gboolean   // return
 	var _cerr *C.GError    // out, full, converted, nullable
 
 	carg0 = (*C.GdkPixbuf)(UnsafePixbufToGlibNone(pixbuf))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(filename)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(filename)))
 	defer C.free(unsafe.Pointer(carg1))
-	carg2 = (*C.gchar)(unsafe.Pointer(C.CString(typ)))
+	carg2 = (*C.char)(unsafe.Pointer(C.CString(typ)))
 	defer C.free(unsafe.Pointer(carg2))
 	_ = optionKeys
 	_ = carg3
@@ -3320,14 +3320,14 @@ func (pixbuf *PixbufInstance) Savev(filename string, typ string, optionKeys []st
 func (src *PixbufInstance) Scale(dest Pixbuf, destX int, destY int, destWidth int, destHeight int, offsetX float64, offsetY float64, scaleX float64, scaleY float64, interpType InterpType) {
 	var carg0  *C.GdkPixbuf    // in, none, converted
 	var carg1  *C.GdkPixbuf    // in, none, converted
-	var carg2  C.int           // in, none, casted
-	var carg3  C.int           // in, none, casted
-	var carg4  C.int           // in, none, casted
-	var carg5  C.int           // in, none, casted
-	var carg6  C.gdouble       // in, none, casted
-	var carg7  C.gdouble       // in, none, casted
-	var carg8  C.gdouble       // in, none, casted
-	var carg9  C.gdouble       // in, none, casted
+	var carg2  C.int           // in, none, casted, casted C.gint
+	var carg3  C.int           // in, none, casted, casted C.gint
+	var carg4  C.int           // in, none, casted, casted C.gint
+	var carg5  C.int           // in, none, casted, casted C.gint
+	var carg6  C.double        // in, none, casted, casted C.gdouble
+	var carg7  C.double        // in, none, casted, casted C.gdouble
+	var carg8  C.double        // in, none, casted, casted C.gdouble
+	var carg9  C.double        // in, none, casted, casted C.gdouble
 	var carg10 C.GdkInterpType // in, none, casted
 
 	carg0 = (*C.GdkPixbuf)(UnsafePixbufToGlibNone(src))
@@ -3336,10 +3336,10 @@ func (src *PixbufInstance) Scale(dest Pixbuf, destX int, destY int, destWidth in
 	carg3 = C.int(destY)
 	carg4 = C.int(destWidth)
 	carg5 = C.int(destHeight)
-	carg6 = C.gdouble(offsetX)
-	carg7 = C.gdouble(offsetY)
-	carg8 = C.gdouble(scaleX)
-	carg9 = C.gdouble(scaleY)
+	carg6 = C.double(offsetX)
+	carg7 = C.double(offsetY)
+	carg8 = C.double(scaleX)
+	carg9 = C.double(scaleY)
 	carg10 = C.GdkInterpType(interpType)
 
 	C.gdk_pixbuf_scale(carg0, carg1, carg2, carg3, carg4, carg5, carg6, carg7, carg8, carg9, carg10)
@@ -3388,8 +3388,8 @@ func (src *PixbufInstance) Scale(dest Pixbuf, destX int, destY int, destWidth in
 // and [method@GdkPixbuf.Pixbuf.composite].
 func (src *PixbufInstance) ScaleSimple(destWidth int, destHeight int, interpType InterpType) Pixbuf {
 	var carg0 *C.GdkPixbuf    // in, none, converted
-	var carg1 C.int           // in, none, casted
-	var carg2 C.int           // in, none, casted
+	var carg1 C.int           // in, none, casted, casted C.gint
+	var carg2 C.int           // in, none, casted, casted C.gint
 	var carg3 C.GdkInterpType // in, none, casted
 	var cret  *C.GdkPixbuf    // return, full, converted
 
@@ -3428,8 +3428,8 @@ func (src *PixbufInstance) ScaleSimple(destWidth int, destHeight int, interpType
 // the new value is ignored and `FALSE` is returned.
 func (pixbuf *PixbufInstance) SetOption(key string, value string) bool {
 	var carg0 *C.GdkPixbuf // in, none, converted
-	var carg1 *C.gchar     // in, none, string
-	var carg2 *C.gchar     // in, none, string
+	var carg1 *C.gchar     // in, none, string, casted *C.gchar
+	var carg2 *C.gchar     // in, none, string, casted *C.gchar
 	var cret  C.gboolean   // return
 
 	carg0 = (*C.GdkPixbuf)(UnsafePixbufToGlibNone(pixbuf))
@@ -3685,11 +3685,11 @@ func NewPixbufLoaderInstance() PixbufLoader {
 // gdk_pixbuf_format_get_mime_types() on each of the #GdkPixbufFormat
 // structs returned by gdk_pixbuf_get_formats().
 func NewPixbufLoaderInstanceWithMIMEType(mimeType string) (PixbufLoader, error) {
-	var carg1 *C.gchar           // in, none, string
+	var carg1 *C.char            // in, none, string, casted *C.gchar
 	var cret  *C.GdkPixbufLoader // return, full, converted
 	var _cerr *C.GError          // out, full, converted, nullable
 
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(mimeType)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(mimeType)))
 	defer C.free(unsafe.Pointer(carg1))
 
 	cret = C.gdk_pixbuf_loader_new_with_mime_type(carg1, &_cerr)
@@ -3732,11 +3732,11 @@ func NewPixbufLoaderInstanceWithMIMEType(mimeType string) (PixbufLoader, error) 
 // supported image formats, call gdk_pixbuf_format_get_name() on each
 // of the #GdkPixbufFormat structs returned by gdk_pixbuf_get_formats().
 func NewPixbufLoaderInstanceWithType(imageType string) (PixbufLoader, error) {
-	var carg1 *C.gchar           // in, none, string
+	var carg1 *C.char            // in, none, string, casted *C.gchar
 	var cret  *C.GdkPixbufLoader // return, full, converted
 	var _cerr *C.GError          // out, full, converted, nullable
 
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(imageType)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(imageType)))
 	defer C.free(unsafe.Pointer(carg1))
 
 	cret = C.gdk_pixbuf_loader_new_with_type(carg1, &_cerr)
@@ -3873,8 +3873,8 @@ func (loader *PixbufLoaderInstance) GetPixbuf() Pixbuf {
 // emission of the ::size-prepared signal.
 func (loader *PixbufLoaderInstance) SetSize(width int, height int) {
 	var carg0 *C.GdkPixbufLoader // in, none, converted
-	var carg1 C.int              // in, none, casted
-	var carg2 C.int              // in, none, casted
+	var carg1 C.int              // in, none, casted, casted C.gint
+	var carg2 C.int              // in, none, casted, casted C.gint
 
 	carg0 = (*C.GdkPixbufLoader)(UnsafePixbufLoaderToGlibNone(loader))
 	carg1 = C.int(width)
@@ -4074,7 +4074,7 @@ func (format *PixbufFormat) Copy() *PixbufFormat {
 // Returns a description of the format.
 func (format *PixbufFormat) GetDescription() string {
 	var carg0 *C.GdkPixbufFormat // in, none, converted
-	var cret  *C.gchar           // return, full, string
+	var cret  *C.gchar           // return, full, string, casted *C.gchar
 
 	carg0 = (*C.GdkPixbufFormat)(UnsafePixbufFormatToGlibNone(format))
 
@@ -4125,7 +4125,7 @@ func (format *PixbufFormat) GetExtensions() []string {
 // "LGPL", "GPL", "QPL", "GPL/QPL", or "other" to indicate some other license.
 func (format *PixbufFormat) GetLicense() string {
 	var carg0 *C.GdkPixbufFormat // in, none, converted
-	var cret  *C.gchar           // return, full, string
+	var cret  *C.gchar           // return, full, string, casted *C.gchar
 
 	carg0 = (*C.GdkPixbufFormat)(UnsafePixbufFormatToGlibNone(format))
 
@@ -4172,7 +4172,7 @@ func (format *PixbufFormat) GetMIMETypes() []string {
 // Returns the name of the format.
 func (format *PixbufFormat) GetName() string {
 	var carg0 *C.GdkPixbufFormat // in, none, converted
-	var cret  *C.gchar           // return, full, string
+	var cret  *C.gchar           // return, full, string, casted *C.gchar
 
 	carg0 = (*C.GdkPixbufFormat)(UnsafePixbufFormatToGlibNone(format))
 
@@ -4229,7 +4229,7 @@ func (format *PixbufFormat) IsDisabled() bool {
 // See gdk_pixbuf_save() for more information about option keys.
 func (format *PixbufFormat) IsSaveOptionSupported(optionKey string) bool {
 	var carg0 *C.GdkPixbufFormat // in, none, converted
-	var carg1 *C.gchar           // in, none, string
+	var carg1 *C.gchar           // in, none, string, casted *C.gchar
 	var cret  C.gboolean         // return
 
 	carg0 = (*C.GdkPixbufFormat)(UnsafePixbufFormatToGlibNone(format))

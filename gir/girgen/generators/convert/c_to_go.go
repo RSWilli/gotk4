@@ -62,15 +62,20 @@ func newCToGoExtraMetadateConverter(p *typesystem.Param) Converter {
 }
 
 func newCToGoBasicConverter(p *typesystem.Param) Converter {
-	switch p.Type.Type {
-	case typesystem.Utf8, typesystem.Filename:
+	if p.Type.Type.GoType(0) == "string" {
 		return &CToGoStringConverter{Param: p}
-	case typesystem.Gboolean:
+	}
+
+	if p.Type.Type.CType(0) == "_Bool" { // needed for e.g. graphene
+		return &CToGoCastingConverter{Param: p}
+	}
+
+	if p.Type.Type.GoType(0) == "bool" {
 		return &CToGoBooleanConverter{Param: p}
 	}
 
 	switch p.Type.Type.(type) {
-	case *typesystem.CastablePrimitive, *typesystem.Bitfield, *typesystem.Enum:
+	case typesystem.CastableType, *typesystem.Bitfield, *typesystem.Enum:
 		if p.CTypePointers == 0 {
 			return &CToGoCastingConverter{
 				Param: p,
@@ -99,7 +104,7 @@ func newCToGoBasicConverter(p *typesystem.Param) Converter {
 func newCToGoAliasedConverter(p *typesystem.Param) Converter {
 	subtype := p.Type.Type.(*typesystem.Alias).AliasedType
 
-	if _, ok := subtype.Type.(*typesystem.CastablePrimitive); ok && p.CTypePointers == 0 {
+	if _, ok := subtype.Type.(typesystem.CastableType); ok && p.CTypePointers == 0 {
 		return &AliasConverter{
 			SubConverter: &CToGoCastingConverter{
 				Param: p,

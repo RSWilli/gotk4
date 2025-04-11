@@ -27,8 +27,8 @@ func _gotk4_gtk4_AssistantPageFunc(carg1 C.int, carg2 C.gpointer) (cret C.int) {
 		fn = v.(AssistantPageFunc)
 	}
 
-	var currentPage int // in, none, casted
-	var goret       int // return, none, casted
+	var currentPage int // in, none, casted, casted C.gint
+	var goret       int // return, none, casted, casted C.gint
 
 	currentPage = int(carg1)
 
@@ -143,7 +143,7 @@ func _gotk4_gtk4_CustomFilterFunc(carg1 C.gpointer, carg2 C.gpointer) (cret C.gb
 }
 
 //export _gotk4_gtk4_EntryCompletionMatchFunc
-func _gotk4_gtk4_EntryCompletionMatchFunc(carg1 *C.GtkEntryCompletion, carg2 *C.gchar, carg3 *C.GtkTreeIter, carg4 C.gpointer) (cret C.gboolean) {
+func _gotk4_gtk4_EntryCompletionMatchFunc(carg1 *C.GtkEntryCompletion, carg2 *C.char, carg3 *C.GtkTreeIter, carg4 C.gpointer) (cret C.gboolean) {
 	var fn EntryCompletionMatchFunc
 	{
 		v := gbox.Get(uintptr(carg4))
@@ -154,12 +154,12 @@ func _gotk4_gtk4_EntryCompletionMatchFunc(carg1 *C.GtkEntryCompletion, carg2 *C.
 	}
 
 	var completion EntryCompletion // in, none, converted
-	var key        string          // in, none, string
+	var key        string          // in, none, string, casted *C.gchar
 	var iter       *TreeIter       // in, none, converted
 	var goret      bool            // return
 
 	completion = UnsafeEntryCompletionFromGlibNone(unsafe.Pointer(carg1))
-	key = C.GoString((*C.gchar)(unsafe.Pointer(carg2)))
+	key = C.GoString((*C.char)(unsafe.Pointer(carg2)))
 	iter = UnsafeTreeIterFromGlibNone(unsafe.Pointer(carg3))
 
 	goret = fn(completion, key, iter)
@@ -320,7 +320,7 @@ func _gotk4_gtk4_PrintJobCompleteFunc(carg1 *C.GtkPrintJob, carg2 C.gpointer, ca
 }
 
 //export _gotk4_gtk4_PrintSettingsFunc
-func _gotk4_gtk4_PrintSettingsFunc(carg1 *C.gchar, carg2 *C.gchar, carg3 C.gpointer) {
+func _gotk4_gtk4_PrintSettingsFunc(carg1 *C.char, carg2 *C.char, carg3 C.gpointer) {
 	var fn PrintSettingsFunc
 	{
 		v := gbox.Get(uintptr(carg3))
@@ -330,11 +330,11 @@ func _gotk4_gtk4_PrintSettingsFunc(carg1 *C.gchar, carg2 *C.gchar, carg3 C.gpoin
 		fn = v.(PrintSettingsFunc)
 	}
 
-	var key   string // in, none, string
-	var value string // in, none, string
+	var key   string // in, none, string, casted *C.gchar
+	var value string // in, none, string, casted *C.gchar
 
-	key = C.GoString((*C.gchar)(unsafe.Pointer(carg1)))
-	value = C.GoString((*C.gchar)(unsafe.Pointer(carg2)))
+	key = C.GoString((*C.char)(unsafe.Pointer(carg1)))
+	value = C.GoString((*C.char)(unsafe.Pointer(carg2)))
 
 	fn(key, value)
 }
@@ -496,7 +496,7 @@ func _gotk4_gtk4_TreeIterCompareFunc(carg1 *C.GtkTreeModel, carg2 *C.GtkTreeIter
 	var model TreeModel // in, none, converted
 	var a     *TreeIter // in, none, converted
 	var b     *TreeIter // in, none, converted
-	var goret int       // return, none, casted
+	var goret int       // return, none, casted, casted C.gint
 
 	model = UnsafeTreeModelFromGlibNone(unsafe.Pointer(carg1))
 	a = UnsafeTreeIterFromGlibNone(unsafe.Pointer(carg2))
@@ -545,7 +545,7 @@ func _gotk4_gtk4_TreeModelFilterModifyFunc(carg1 *C.GtkTreeModel, carg2 *C.GtkTr
 
 	var model  TreeModel     // in, none, converted
 	var iter   *TreeIter     // in, none, converted
-	var column int           // in, none, casted
+	var column int           // in, none, casted, casted C.gint
 	var value  gobject.Value // out, transfer: none, C Pointers: 0, Name: Value, caller-allocates
 
 	model = UnsafeTreeModelFromGlibNone(unsafe.Pointer(carg1))
@@ -698,7 +698,7 @@ func _gotk4_gtk4_TreeViewRowSeparatorFunc(carg1 *C.GtkTreeModel, carg2 *C.GtkTre
 }
 
 //export _gotk4_gtk4_TreeViewSearchEqualFunc
-func _gotk4_gtk4_TreeViewSearchEqualFunc(carg1 *C.GtkTreeModel, carg2 C.int, carg3 *C.gchar, carg4 *C.GtkTreeIter, carg5 C.gpointer) (cret C.gboolean) {
+func _gotk4_gtk4_TreeViewSearchEqualFunc(carg1 *C.GtkTreeModel, carg2 C.int, carg3 *C.char, carg4 *C.GtkTreeIter, carg5 C.gpointer) (cret C.gboolean) {
 	var fn TreeViewSearchEqualFunc
 	{
 		v := gbox.Get(uintptr(carg5))
@@ -709,14 +709,14 @@ func _gotk4_gtk4_TreeViewSearchEqualFunc(carg1 *C.GtkTreeModel, carg2 C.int, car
 	}
 
 	var model  TreeModel // in, none, converted
-	var column int       // in, none, casted
-	var key    string    // in, none, string
+	var column int       // in, none, casted, casted C.gint
+	var key    string    // in, none, string, casted *C.gchar
 	var iter   *TreeIter // in, none, converted
 	var goret  bool      // return
 
 	model = UnsafeTreeModelFromGlibNone(unsafe.Pointer(carg1))
 	column = int(carg2)
-	key = C.GoString((*C.gchar)(unsafe.Pointer(carg3)))
+	key = C.GoString((*C.char)(unsafe.Pointer(carg3)))
 	iter = UnsafeTreeIterFromGlibNone(unsafe.Pointer(carg4))
 
 	goret = fn(model, column, key, iter)
@@ -786,7 +786,7 @@ func _gotk4_gtk4_FlowBoxSortFunc(carg1 *C.GtkFlowBoxChild, carg2 *C.GtkFlowBoxCh
 
 	var child1 FlowBoxChild // in, none, converted
 	var child2 FlowBoxChild // in, none, converted
-	var goret  int          // return, none, casted
+	var goret  int          // return, none, casted, casted C.gint
 
 	child1 = UnsafeFlowBoxChildFromGlibNone(unsafe.Pointer(carg1))
 	child2 = UnsafeFlowBoxChildFromGlibNone(unsafe.Pointer(carg2))
@@ -876,7 +876,7 @@ func _gotk4_gtk4_ListBoxSortFunc(carg1 *C.GtkListBoxRow, carg2 *C.GtkListBoxRow,
 
 	var row1  ListBoxRow // in, none, converted
 	var row2  ListBoxRow // in, none, converted
-	var goret int        // return, none, casted
+	var goret int        // return, none, casted, casted C.gint
 
 	row1 = UnsafeListBoxRowFromGlibNone(unsafe.Pointer(carg1))
 	row2 = UnsafeListBoxRowFromGlibNone(unsafe.Pointer(carg2))
@@ -929,7 +929,7 @@ func _gotk4_gtk4_MenuButtonCreatePopupFunc(carg1 *C.GtkMenuButton, carg2 C.gpoin
 }
 
 //export _gotk4_gtk4_ScaleFormatValueFunc
-func _gotk4_gtk4_ScaleFormatValueFunc(carg1 *C.GtkScale, carg2 C.gdouble, carg3 C.gpointer) (cret *C.gchar) {
+func _gotk4_gtk4_ScaleFormatValueFunc(carg1 *C.GtkScale, carg2 C.double, carg3 C.gpointer) (cret *C.char) {
 	var fn ScaleFormatValueFunc
 	{
 		v := gbox.Get(uintptr(carg3))
@@ -940,15 +940,15 @@ func _gotk4_gtk4_ScaleFormatValueFunc(carg1 *C.GtkScale, carg2 C.gdouble, carg3 
 	}
 
 	var scale Scale   // in, none, converted
-	var value float64 // in, none, casted
-	var goret string  // return, full, string
+	var value float64 // in, none, casted, casted C.gdouble
+	var goret string  // return, full, string, casted *C.gchar
 
 	scale = UnsafeScaleFromGlibNone(unsafe.Pointer(carg1))
 	value = float64(carg2)
 
 	goret = fn(scale, value)
 
-	cret = (*C.gchar)(unsafe.Pointer(C.CString(goret)))
+	cret = (*C.char)(unsafe.Pointer(C.CString(goret)))
 
 	return cret
 }

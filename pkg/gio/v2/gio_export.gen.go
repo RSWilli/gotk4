@@ -46,7 +46,7 @@ func _gotk4_gio2_BusAcquiredCallback(carg1 *C.GDBusConnection, carg2 *C.gchar, c
 	}
 
 	var connection DBusConnection // in, none, converted
-	var name       string         // in, none, string
+	var name       string         // in, none, string, casted *C.gchar
 
 	connection = UnsafeDBusConnectionFromGlibNone(unsafe.Pointer(carg1))
 	name = C.GoString((*C.gchar)(unsafe.Pointer(carg2)))
@@ -66,7 +66,7 @@ func _gotk4_gio2_BusNameAcquiredCallback(carg1 *C.GDBusConnection, carg2 *C.gcha
 	}
 
 	var connection DBusConnection // in, none, converted
-	var name       string         // in, none, string
+	var name       string         // in, none, string, casted *C.gchar
 
 	connection = UnsafeDBusConnectionFromGlibNone(unsafe.Pointer(carg1))
 	name = C.GoString((*C.gchar)(unsafe.Pointer(carg2)))
@@ -86,8 +86,8 @@ func _gotk4_gio2_BusNameAppearedCallback(carg1 *C.GDBusConnection, carg2 *C.gcha
 	}
 
 	var connection DBusConnection // in, none, converted
-	var name       string         // in, none, string
-	var nameOwner  string         // in, none, string
+	var name       string         // in, none, string, casted *C.gchar
+	var nameOwner  string         // in, none, string, casted *C.gchar
 
 	connection = UnsafeDBusConnectionFromGlibNone(unsafe.Pointer(carg1))
 	name = C.GoString((*C.gchar)(unsafe.Pointer(carg2)))
@@ -108,7 +108,7 @@ func _gotk4_gio2_BusNameLostCallback(carg1 *C.GDBusConnection, carg2 *C.gchar, c
 	}
 
 	var connection DBusConnection // in, none, converted
-	var name       string         // in, none, string
+	var name       string         // in, none, string, casted *C.gchar
 
 	connection = UnsafeDBusConnectionFromGlibNone(unsafe.Pointer(carg1))
 	name = C.GoString((*C.gchar)(unsafe.Pointer(carg2)))
@@ -128,7 +128,7 @@ func _gotk4_gio2_BusNameVanishedCallback(carg1 *C.GDBusConnection, carg2 *C.gcha
 	}
 
 	var connection DBusConnection // in, none, converted
-	var name       string         // in, none, string
+	var name       string         // in, none, string, casted *C.gchar
 
 	connection = UnsafeDBusConnectionFromGlibNone(unsafe.Pointer(carg1))
 	name = C.GoString((*C.gchar)(unsafe.Pointer(carg2)))
@@ -177,10 +177,10 @@ func _gotk4_gio2_DBusSubtreeDispatchFunc(carg1 *C.GDBusConnection, carg2 *C.gcha
 	}
 
 	var connection    DBusConnection       // in, none, converted
-	var sender        string               // in, none, string
-	var objectPath    string               // in, none, string
-	var interfaceName string               // in, none, string
-	var node          string               // in, none, string
+	var sender        string               // in, none, string, casted *C.gchar
+	var objectPath    string               // in, none, string, casted *C.gchar
+	var interfaceName string               // in, none, string, casted *C.gchar
+	var node          string               // in, none, string, casted *C.gchar
 	var outUserData   *unsafe.Pointer      // in, transfer: none, C Pointers: 1, Name: gpointer
 	var goret         *DBusInterfaceVTable // return, none, converted
 
@@ -212,8 +212,8 @@ func _gotk4_gio2_DBusSubtreeEnumerateFunc(carg1 *C.GDBusConnection, carg2 *C.gch
 	}
 
 	var connection DBusConnection // in, none, converted
-	var sender     string         // in, none, string
-	var objectPath string         // in, none, string
+	var sender     string         // in, none, string, casted *C.gchar
+	var objectPath string         // in, none, string, casted *C.gchar
 	var goret      []string       // return, transfer: full, C Pointers: 2, Name: array[utf8], scope: , array (inner: *typesystem.StringPrimitive, zero-terminated)
 
 	connection = UnsafeDBusConnectionFromGlibNone(unsafe.Pointer(carg1))
@@ -241,9 +241,9 @@ func _gotk4_gio2_DBusSubtreeIntrospectFunc(carg1 *C.GDBusConnection, carg2 *C.gc
 	}
 
 	var connection DBusConnection       // in, none, converted
-	var sender     string               // in, none, string
-	var objectPath string               // in, none, string
-	var node       string               // in, none, string
+	var sender     string               // in, none, string, casted *C.gchar
+	var objectPath string               // in, none, string, casted *C.gchar
+	var node       string               // in, none, string, casted *C.gchar
 	var goret      []*DBusInterfaceInfo // return, transfer: full, C Pointers: 2, Name: array[DBusInterfaceInfo], scope: , array (inner: *typesystem.Record, zero-terminated)
 
 	connection = UnsafeDBusConnectionFromGlibNone(unsafe.Pointer(carg1))
@@ -261,7 +261,7 @@ func _gotk4_gio2_DBusSubtreeIntrospectFunc(carg1 *C.GDBusConnection, carg2 *C.gc
 }
 
 //export _gotk4_gio2_VFSFileLookupFunc
-func _gotk4_gio2_VFSFileLookupFunc(carg1 *C.GVfs, carg2 *C.gchar, carg3 C.gpointer) (cret *C.GFile) {
+func _gotk4_gio2_VFSFileLookupFunc(carg1 *C.GVfs, carg2 *C.char, carg3 C.gpointer) (cret *C.GFile) {
 	var fn VFSFileLookupFunc
 	{
 		v := gbox.Get(uintptr(carg3))
@@ -272,11 +272,11 @@ func _gotk4_gio2_VFSFileLookupFunc(carg1 *C.GVfs, carg2 *C.gchar, carg3 C.gpoint
 	}
 
 	var vfs        Vfs    // in, none, converted
-	var identifier string // in, none, string
+	var identifier string // in, none, string, casted *C.gchar
 	var goret      File   // return, full, converted
 
 	vfs = UnsafeVfsFromGlibNone(unsafe.Pointer(carg1))
-	identifier = C.GoString((*C.gchar)(unsafe.Pointer(carg2)))
+	identifier = C.GoString((*C.char)(unsafe.Pointer(carg2)))
 
 	goret = fn(vfs, identifier)
 

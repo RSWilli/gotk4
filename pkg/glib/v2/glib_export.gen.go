@@ -12,7 +12,7 @@ import (
 import "C"
 
 //export _gotk4_glib2_CompareDataFunc
-func _gotk4_glib2_CompareDataFunc(carg1 C.gconstpointer, carg2 C.gconstpointer, carg3 C.gpointer) (cret C.int) {
+func _gotk4_glib2_CompareDataFunc(carg1 C.gconstpointer, carg2 C.gconstpointer, carg3 C.gpointer) (cret C.gint) {
 	var fn CompareDataFunc
 	{
 		v := gbox.Get(uintptr(carg3))
@@ -35,7 +35,7 @@ func _gotk4_glib2_CompareDataFunc(carg1 C.gconstpointer, carg2 C.gconstpointer, 
 
 	goret = fn(a, b)
 
-	cret = C.int(goret)
+	cret = C.gint(goret)
 
 	return cret
 }
@@ -157,9 +157,9 @@ func _gotk4_glib2_LogFunc(carg1 *C.gchar, carg2 C.GLogLevelFlags, carg3 *C.gchar
 		fn = v.(LogFunc)
 	}
 
-	var logDomain string        // in, none, string
+	var logDomain string        // in, none, string, casted *C.gchar
 	var logLevel  LogLevelFlags // in, none, casted
-	var message   string        // in, none, string
+	var message   string        // in, none, string, casted *C.gchar
 
 	logDomain = C.GoString((*C.gchar)(unsafe.Pointer(carg1)))
 	logLevel = LogLevelFlags(carg2)
@@ -233,7 +233,7 @@ func _gotk4_glib2_SourceOnceFunc(carg1 C.gpointer) {
 }
 
 //export _gotk4_glib2_ChildWatchFunc
-func _gotk4_glib2_ChildWatchFunc(carg1 C.GPid, carg2 C.int, carg3 C.gpointer) {
+func _gotk4_glib2_ChildWatchFunc(carg1 C.GPid, carg2 C.gint, carg3 C.gpointer) {
 	var fn ChildWatchFunc
 	{
 		v := gbox.Get(uintptr(carg3))

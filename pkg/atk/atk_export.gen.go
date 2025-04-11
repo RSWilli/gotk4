@@ -34,7 +34,7 @@ func _gotk4_atk1_Function(carg1 C.gpointer) (cret C.gboolean) {
 }
 
 //export _gotk4_atk1_KeySnoopFunc
-func _gotk4_atk1_KeySnoopFunc(carg1 *C.AtkKeyEventStruct, carg2 C.gpointer) (cret C.int) {
+func _gotk4_atk1_KeySnoopFunc(carg1 *C.AtkKeyEventStruct, carg2 C.gpointer) (cret C.gint) {
 	var fn KeySnoopFunc
 	{
 		v := gbox.Get(uintptr(carg2))
@@ -51,7 +51,7 @@ func _gotk4_atk1_KeySnoopFunc(carg1 *C.AtkKeyEventStruct, carg2 C.gpointer) (cre
 
 	goret = fn(event)
 
-	cret = C.int(goret)
+	cret = C.gint(goret)
 
 	return cret
 }

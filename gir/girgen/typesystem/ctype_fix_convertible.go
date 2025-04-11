@@ -1,7 +1,5 @@
 package typesystem
 
-import "github.com/diamondburned/gotk4/gir"
-
 // OverriddenCTypeConvertible is a type that wraps a type if the ctype differs from the ctype
 // of the gir type that is resolved. This produces an implicit cast in the generated code.
 type OverriddenCTypeConvertible struct {
@@ -89,29 +87,3 @@ func (i *OverriddenCTypeConvertible) GoTypeRequiredImport() (alias string, modul
 var _ Type = (*OverriddenCTypeConvertible)(nil)
 var _ ConvertibleType = (*OverriddenCTypeConvertible)(nil)
 var _ OverriddenCType = (*OverriddenCTypeConvertible)(nil)
-
-func fixCType(resolved Type, requested gir.AnyType) Type {
-	inter, ok := resolved.(ConvertibleType)
-
-	if !ok {
-		return resolved
-	}
-
-	if requested.Type == nil {
-		panic("requested type is nil")
-	}
-
-	req := requested.Type
-
-	ctype := cleanCType(trimCTypePointers(req.CType))
-
-	if ctype == inter.CType(0) {
-		return resolved
-	}
-
-	return &OverriddenCTypeConvertible{
-		Actual:  inter,
-		Ctype:   ctype,
-		Cgotype: "C." + ctype,
-	}
-}

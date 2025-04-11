@@ -13,7 +13,7 @@ import (
 import "C"
 
 //export _gotk4_gdkpixbuf2_PixbufModuleSizeFunc
-func _gotk4_gdkpixbuf2_PixbufModuleSizeFunc(carg1 *C.int, carg2 *C.int, carg3 C.gpointer) {
+func _gotk4_gdkpixbuf2_PixbufModuleSizeFunc(carg1 *C.gint, carg2 *C.gint, carg3 C.gpointer) {
 	var fn PixbufModuleSizeFunc
 	{
 		v := gbox.Get(uintptr(carg3))
@@ -48,10 +48,10 @@ func _gotk4_gdkpixbuf2_PixbufModuleUpdatedFunc(carg1 *C.GdkPixbuf, carg2 C.int, 
 	}
 
 	var pixbuf Pixbuf // in, none, converted
-	var x      int    // in, none, casted
-	var y      int    // in, none, casted
-	var width  int    // in, none, casted
-	var height int    // in, none, casted
+	var x      int    // in, none, casted, casted C.gint
+	var y      int    // in, none, casted, casted C.gint
+	var width  int    // in, none, casted, casted C.gint
+	var height int    // in, none, casted, casted C.gint
 
 	pixbuf = UnsafePixbufFromGlibNone(unsafe.Pointer(carg1))
 	x = int(carg2)

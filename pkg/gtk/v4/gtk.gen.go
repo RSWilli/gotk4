@@ -24,10 +24,11 @@ import (
 // extern GListModel* _gotk4_gtk4_TreeListModelCreateModelFunc(gpointer, gpointer);
 // extern GtkWidget* _gotk4_gtk4_FlowBoxCreateWidgetFunc(gpointer, gpointer);
 // extern GtkWidget* _gotk4_gtk4_ListBoxCreateWidgetFunc(gpointer, gpointer);
+// extern char* _gotk4_gtk4_ScaleFormatValueFunc(GtkScale*, double, gpointer);
 // extern gboolean _gotk4_gtk4_CellAllocCallback(GtkCellRenderer*, GdkRectangle*, GdkRectangle*, gpointer);
 // extern gboolean _gotk4_gtk4_CellCallback(GtkCellRenderer*, gpointer);
 // extern gboolean _gotk4_gtk4_CustomFilterFunc(gpointer, gpointer);
-// extern gboolean _gotk4_gtk4_EntryCompletionMatchFunc(GtkEntryCompletion*, gchar*, GtkTreeIter*, gpointer);
+// extern gboolean _gotk4_gtk4_EntryCompletionMatchFunc(GtkEntryCompletion*, char*, GtkTreeIter*, gpointer);
 // extern gboolean _gotk4_gtk4_FlowBoxFilterFunc(GtkFlowBoxChild*, gpointer);
 // extern gboolean _gotk4_gtk4_FontFilterFunc(PangoFontFamily*, PangoFontFace*, gpointer);
 // extern gboolean _gotk4_gtk4_ListBoxFilterFunc(GtkListBoxRow*, gpointer);
@@ -39,14 +40,13 @@ import (
 // extern gboolean _gotk4_gtk4_TreeSelectionFunc(GtkTreeSelection*, GtkTreeModel*, GtkTreePath*, gboolean, gpointer);
 // extern gboolean _gotk4_gtk4_TreeViewColumnDropFunc(GtkTreeView*, GtkTreeViewColumn*, GtkTreeViewColumn*, GtkTreeViewColumn*, gpointer);
 // extern gboolean _gotk4_gtk4_TreeViewRowSeparatorFunc(GtkTreeModel*, GtkTreeIter*, gpointer);
-// extern gboolean _gotk4_gtk4_TreeViewSearchEqualFunc(GtkTreeModel*, gint, gchar*, GtkTreeIter*, gpointer);
-// extern gchar* _gotk4_gtk4_ScaleFormatValueFunc(GtkScale*, gdouble, gpointer);
+// extern gboolean _gotk4_gtk4_TreeViewSearchEqualFunc(GtkTreeModel*, int, char*, GtkTreeIter*, gpointer);
 // extern gint _gotk4_glib2_CompareDataFunc(gconstpointer, gconstpointer, gpointer);
-// extern gint _gotk4_gtk4_AssistantPageFunc(gint, gpointer);
-// extern gint _gotk4_gtk4_FlowBoxSortFunc(GtkFlowBoxChild*, GtkFlowBoxChild*, gpointer);
-// extern gint _gotk4_gtk4_ListBoxSortFunc(GtkListBoxRow*, GtkListBoxRow*, gpointer);
-// extern gint _gotk4_gtk4_TreeIterCompareFunc(GtkTreeModel*, GtkTreeIter*, GtkTreeIter*, gpointer);
 // extern gpointer _gotk4_gtk4_MapListModelMapFunc(gpointer, gpointer);
+// extern int _gotk4_gtk4_AssistantPageFunc(int, gpointer);
+// extern int _gotk4_gtk4_FlowBoxSortFunc(GtkFlowBoxChild*, GtkFlowBoxChild*, gpointer);
+// extern int _gotk4_gtk4_ListBoxSortFunc(GtkListBoxRow*, GtkListBoxRow*, gpointer);
+// extern int _gotk4_gtk4_TreeIterCompareFunc(GtkTreeModel*, GtkTreeIter*, GtkTreeIter*, gpointer);
 // extern void _gotk4_gio2_AsyncReadyCallback(GObject*, GAsyncResult*, gpointer);
 // extern void _gotk4_gtk4_CellLayoutDataFunc(GtkCellLayout*, GtkCellRenderer*, GtkTreeModel*, GtkTreeIter*, gpointer);
 // extern void _gotk4_gtk4_FlowBoxForEachFunc(GtkFlowBox*, GtkFlowBoxChild*, gpointer);
@@ -56,11 +56,11 @@ import (
 // extern void _gotk4_gtk4_MenuButtonCreatePopupFunc(GtkMenuButton*, gpointer);
 // extern void _gotk4_gtk4_PageSetupDoneFunc(GtkPageSetup*, gpointer);
 // extern void _gotk4_gtk4_PrintJobCompleteFunc(GtkPrintJob*, gpointer, GError*);
-// extern void _gotk4_gtk4_PrintSettingsFunc(gchar*, gchar*, gpointer);
+// extern void _gotk4_gtk4_PrintSettingsFunc(char*, char*, gpointer);
 // extern void _gotk4_gtk4_TextBufferCommitNotify(GtkTextBuffer*, GtkTextBufferNotifyFlags, guint, guint, gpointer);
 // extern void _gotk4_gtk4_TextTagTableForEach(GtkTextTag*, gpointer);
 // extern void _gotk4_gtk4_TreeCellDataFunc(GtkTreeViewColumn*, GtkCellRenderer*, GtkTreeModel*, GtkTreeIter*, gpointer);
-// extern void _gotk4_gtk4_TreeModelFilterModifyFunc(GtkTreeModel*, GtkTreeIter*, GValue, gint, gpointer);
+// extern void _gotk4_gtk4_TreeModelFilterModifyFunc(GtkTreeModel*, GtkTreeIter*, GValue, int, gpointer);
 // extern void _gotk4_gtk4_TreeSelectionForEachFunc(GtkTreeModel*, GtkTreePath*, GtkTreeIter*, gpointer);
 // extern void _gotk4_gtk4_TreeViewMappingFunc(GtkTreeView*, GtkTreePath*, gpointer);
 // extern void callbackDelete(guintptr);
@@ -7422,7 +7422,7 @@ func AcceleratorGetDefaultModMask() gdk.ModifierType {
 func AcceleratorGetLabel(acceleratorKey uint, acceleratorMods gdk.ModifierType) string {
 	var carg1 C.guint           // in, none, casted
 	var carg2 C.GdkModifierType // in, none, casted
-	var cret  *C.gchar          // return, full, string
+	var cret  *C.char           // return, full, string, casted *C.gchar
 
 	carg1 = C.guint(acceleratorKey)
 	carg2 = C.GdkModifierType(acceleratorMods)
@@ -7433,7 +7433,7 @@ func AcceleratorGetLabel(acceleratorKey uint, acceleratorMods gdk.ModifierType) 
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 	defer C.free(unsafe.Pointer(cret))
 
 	return goret
@@ -7466,7 +7466,7 @@ func AcceleratorGetLabelWithKeycode(display gdk.Display, acceleratorKey uint, ke
 	var carg2 C.guint           // in, none, casted
 	var carg3 C.guint           // in, none, casted
 	var carg4 C.GdkModifierType // in, none, casted
-	var cret  *C.gchar          // return, full, string
+	var cret  *C.char           // return, full, string, casted *C.gchar
 
 	if display != nil {
 		carg1 = (*C.GdkDisplay)(gdk.UnsafeDisplayToGlibNone(display))
@@ -7483,7 +7483,7 @@ func AcceleratorGetLabelWithKeycode(display gdk.Display, acceleratorKey uint, ke
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 	defer C.free(unsafe.Pointer(cret))
 
 	return goret
@@ -7511,7 +7511,7 @@ func AcceleratorGetLabelWithKeycode(display gdk.Display, acceleratorKey uint, ke
 func AcceleratorName(acceleratorKey uint, acceleratorMods gdk.ModifierType) string {
 	var carg1 C.guint           // in, none, casted
 	var carg2 C.GdkModifierType // in, none, casted
-	var cret  *C.gchar          // return, full, string
+	var cret  *C.char           // return, full, string, casted *C.gchar
 
 	carg1 = C.guint(acceleratorKey)
 	carg2 = C.GdkModifierType(acceleratorMods)
@@ -7522,7 +7522,7 @@ func AcceleratorName(acceleratorKey uint, acceleratorMods gdk.ModifierType) stri
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 	defer C.free(unsafe.Pointer(cret))
 
 	return goret
@@ -7552,7 +7552,7 @@ func AcceleratorNameWithKeycode(display gdk.Display, acceleratorKey uint, keycod
 	var carg2 C.guint           // in, none, casted
 	var carg3 C.guint           // in, none, casted
 	var carg4 C.GdkModifierType // in, none, casted
-	var cret  *C.gchar          // return, full, string
+	var cret  *C.char           // return, full, string, casted *C.gchar
 
 	if display != nil {
 		carg1 = (*C.GdkDisplay)(gdk.UnsafeDisplayToGlibNone(display))
@@ -7569,7 +7569,7 @@ func AcceleratorNameWithKeycode(display gdk.Display, acceleratorKey uint, keycod
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 	defer C.free(unsafe.Pointer(cret))
 
 	return goret
@@ -7612,12 +7612,12 @@ func AcceleratorNameWithKeycode(display gdk.Display, acceleratorKey uint, keycod
 // If the parse operation fails, @accelerator_key and @accelerator_mods will
 // be set to 0 (zero).
 func AcceleratorParse(accelerator string) (uint, gdk.ModifierType, bool) {
-	var carg1 *C.gchar          // in, none, string
+	var carg1 *C.char           // in, none, string, casted *C.gchar
 	var carg2 C.guint           // out, full, casted
 	var carg3 C.GdkModifierType // out, full, casted
 	var cret  C.gboolean        // return
 
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(accelerator)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(accelerator)))
 	defer C.free(unsafe.Pointer(carg1))
 
 	cret = C.gtk_accelerator_parse(carg1, &carg2, &carg3)
@@ -7710,10 +7710,10 @@ func AcceleratorValid(keyval uint, modifiers gdk.ModifierType) bool {
 // old version of gtk_check_version(), but still get loaded
 // into an application using a newer version of GTK.
 func CheckVersion(requiredMajor uint, requiredMinor uint, requiredMicro uint) string {
-	var carg1 C.guint  // in, none, casted
-	var carg2 C.guint  // in, none, casted
-	var carg3 C.guint  // in, none, casted
-	var cret  *C.gchar // return, none, string
+	var carg1 C.guint // in, none, casted
+	var carg2 C.guint // in, none, casted
+	var carg3 C.guint // in, none, casted
+	var cret  *C.char // return, none, string, casted *C.gchar
 
 	carg1 = C.guint(requiredMajor)
 	carg2 = C.guint(requiredMinor)
@@ -7726,7 +7726,7 @@ func CheckVersion(requiredMajor uint, requiredMinor uint, requiredMicro uint) st
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -7802,10 +7802,10 @@ func DisableSetlocale() {
 // `GtkRequestedSize` struct. If all sizes reach their natural size then
 // the remaining space is returned.
 func DistributeNaturalAllocation(extraSpace int, sizes []RequestedSize) int {
-	var carg1 C.int               // in, none, casted
+	var carg1 C.int               // in, none, casted, casted C.gint
 	var carg2 C.guint             // implicit
 	var carg3 *C.GtkRequestedSize // in, transfer: none, C Pointers: 1, Name: array[RequestedSize], array (inner: *typesystem.Record, length-by: carg2)
-	var cret  C.int               // return, none, casted
+	var cret  C.int               // return, none, casted, casted C.gint
 
 	carg1 = C.int(extraSpace)
 	_ = sizes
@@ -8080,16 +8080,16 @@ func GetMinorVersion() uint {
 // Input values must be in the [0.0, 1.0] range;
 // output values will be in the same range.
 func HSVToRGB(h float32, s float32, v float32) (float32, float32, float32) {
-	var carg1 C.gfloat // in, none, casted
-	var carg2 C.gfloat // in, none, casted
-	var carg3 C.gfloat // in, none, casted
-	var carg4 C.gfloat // out, full, casted
-	var carg5 C.gfloat // out, full, casted
-	var carg6 C.gfloat // out, full, casted
+	var carg1 C.float // in, none, casted, casted C.gfloat
+	var carg2 C.float // in, none, casted, casted C.gfloat
+	var carg3 C.float // in, none, casted, casted C.gfloat
+	var carg4 C.float // out, full, casted, casted C.gfloat
+	var carg5 C.float // out, full, casted, casted C.gfloat
+	var carg6 C.float // out, full, casted, casted C.gfloat
 
-	carg1 = C.gfloat(h)
-	carg2 = C.gfloat(s)
-	carg3 = C.gfloat(v)
+	carg1 = C.float(h)
+	carg2 = C.float(s)
+	carg3 = C.float(v)
 
 	C.gtk_hsv_to_rgb(carg1, carg2, carg3, &carg4, &carg5, &carg6)
 	runtime.KeepAlive(h)
@@ -8285,16 +8285,16 @@ func PrintRunPageSetupDialogAsync(parent Window, pageSetup PageSetup, settings P
 // Input values must be in the [0.0, 1.0] range;
 // output values will be in the same range.
 func RGBToHSV(r float32, g float32, b float32) (float32, float32, float32) {
-	var carg1 C.gfloat // in, none, casted
-	var carg2 C.gfloat // in, none, casted
-	var carg3 C.gfloat // in, none, casted
-	var carg4 C.gfloat // out, full, casted
-	var carg5 C.gfloat // out, full, casted
-	var carg6 C.gfloat // out, full, casted
+	var carg1 C.float // in, none, casted, casted C.gfloat
+	var carg2 C.float // in, none, casted, casted C.gfloat
+	var carg3 C.float // in, none, casted, casted C.gfloat
+	var carg4 C.float // out, full, casted, casted C.gfloat
+	var carg5 C.float // out, full, casted, casted C.gfloat
+	var carg6 C.float // out, full, casted, casted C.gfloat
 
-	carg1 = C.gfloat(r)
-	carg2 = C.gfloat(g)
-	carg3 = C.gfloat(b)
+	carg1 = C.float(r)
+	carg2 = C.float(g)
+	carg3 = C.float(b)
 
 	C.gtk_rgb_to_hsv(carg1, carg2, carg3, &carg4, &carg5, &carg6)
 	runtime.KeepAlive(r)
@@ -8343,13 +8343,13 @@ func SetDebugFlags(flags DebugFlags) {
 //   [method@Gtk.UriLauncher.launch] instead
 func ShowURI(parent Window, uri string, timestamp uint32) {
 	var carg1 *C.GtkWindow // in, none, converted, nullable
-	var carg2 *C.gchar     // in, none, string
+	var carg2 *C.char      // in, none, string, casted *C.gchar
 	var carg3 C.guint32    // in, none, casted
 
 	if parent != nil {
 		carg1 = (*C.GtkWindow)(UnsafeWindowToGlibNone(parent))
 	}
-	carg2 = (*C.gchar)(unsafe.Pointer(C.CString(uri)))
+	carg2 = (*C.char)(unsafe.Pointer(C.CString(uri)))
 	defer C.free(unsafe.Pointer(carg2))
 	carg3 = C.guint32(timestamp)
 
@@ -8382,7 +8382,7 @@ func ShowURI(parent Window, uri string, timestamp uint32) {
 func ShowURIFull(cancellable context.Context, parent Window, uri string, timestamp uint32, callback gio.AsyncReadyCallback) {
 	var carg4 *C.GCancellable       // in, none, converted, nullable
 	var carg1 *C.GtkWindow          // in, none, converted, nullable
-	var carg2 *C.gchar              // in, none, string
+	var carg2 *C.char               // in, none, string, casted *C.gchar
 	var carg3 C.guint32             // in, none, casted
 	var carg5 C.GAsyncReadyCallback // callback, scope: async, closure: carg6, nullable
 	var carg6 C.gpointer            // implicit
@@ -8393,7 +8393,7 @@ func ShowURIFull(cancellable context.Context, parent Window, uri string, timesta
 	if parent != nil {
 		carg1 = (*C.GtkWindow)(UnsafeWindowToGlibNone(parent))
 	}
-	carg2 = (*C.gchar)(unsafe.Pointer(C.CString(uri)))
+	carg2 = (*C.char)(unsafe.Pointer(C.CString(uri)))
 	defer C.free(unsafe.Pointer(carg2))
 	carg3 = C.guint32(timestamp)
 	if callback != nil {
@@ -8467,23 +8467,23 @@ func ShowURIFullFinish(parent Window, result gio.AsyncResult) (bool, error) {
 //
 // Prints an assertion message for gtk_test_accessible_assert_role().
 func TestAccessibleAssertionMessageRole(domain string, file string, line int, fn string, expr string, accessible Accessible, expectedRole AccessibleRole, actualRole AccessibleRole) {
-	var carg1 *C.gchar            // in, none, string
-	var carg2 *C.gchar            // in, none, string
-	var carg3 C.int               // in, none, casted
-	var carg4 *C.gchar            // in, none, string
-	var carg5 *C.gchar            // in, none, string
+	var carg1 *C.char             // in, none, string, casted *C.gchar
+	var carg2 *C.char             // in, none, string, casted *C.gchar
+	var carg3 C.int               // in, none, casted, casted C.gint
+	var carg4 *C.char             // in, none, string, casted *C.gchar
+	var carg5 *C.char             // in, none, string, casted *C.gchar
 	var carg6 *C.GtkAccessible    // in, none, converted
 	var carg7 C.GtkAccessibleRole // in, none, casted
 	var carg8 C.GtkAccessibleRole // in, none, casted
 
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(domain)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(domain)))
 	defer C.free(unsafe.Pointer(carg1))
-	carg2 = (*C.gchar)(unsafe.Pointer(C.CString(file)))
+	carg2 = (*C.char)(unsafe.Pointer(C.CString(file)))
 	defer C.free(unsafe.Pointer(carg2))
 	carg3 = C.int(line)
-	carg4 = (*C.gchar)(unsafe.Pointer(C.CString(fn)))
+	carg4 = (*C.char)(unsafe.Pointer(C.CString(fn)))
 	defer C.free(unsafe.Pointer(carg4))
-	carg5 = (*C.gchar)(unsafe.Pointer(C.CString(expr)))
+	carg5 = (*C.char)(unsafe.Pointer(C.CString(expr)))
 	defer C.free(unsafe.Pointer(carg5))
 	carg6 = (*C.GtkAccessible)(UnsafeAccessibleToGlibNone(accessible))
 	carg7 = C.GtkAccessibleRole(expectedRole)
@@ -9052,11 +9052,11 @@ func UnsafeAccessibleToGlibFull(c Accessible) unsafe.Pointer {
 // does not interrupts the user's current screen reader output.
 func (self *AccessibleInstance) Announce(message string, priority AccessibleAnnouncementPriority) {
 	var carg0 *C.GtkAccessible                    // in, none, converted
-	var carg1 *C.gchar                            // in, none, string
+	var carg1 *C.char                             // in, none, string, casted *C.gchar
 	var carg2 C.GtkAccessibleAnnouncementPriority // in, none, casted
 
 	carg0 = (*C.GtkAccessible)(UnsafeAccessibleToGlibNone(self))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(message)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(message)))
 	defer C.free(unsafe.Pointer(carg1))
 	carg2 = C.GtkAccessibleAnnouncementPriority(priority)
 
@@ -9150,10 +9150,10 @@ func (self *AccessibleInstance) GetAtContext() ATContext {
 // child widget.
 func (self *AccessibleInstance) GetBounds() (int, int, int, int, bool) {
 	var carg0 *C.GtkAccessible // in, none, converted
-	var carg1 C.int            // out, full, casted
-	var carg2 C.int            // out, full, casted
-	var carg3 C.int            // out, full, casted
-	var carg4 C.int            // out, full, casted
+	var carg1 C.int            // out, full, casted, casted C.gint
+	var carg2 C.int            // out, full, casted, casted C.gint
+	var carg3 C.int            // out, full, casted, casted C.gint
+	var carg4 C.int            // out, full, casted, casted C.gint
 	var cret  C.gboolean       // return
 
 	carg0 = (*C.GtkAccessible)(UnsafeAccessibleToGlibNone(self))
@@ -9685,13 +9685,13 @@ func (self *AccessibleTextInstance) UpdateCaretPosition() {
 func (self *AccessibleTextInstance) UpdateContents(change AccessibleTextContentChange, start uint, end uint) {
 	var carg0 *C.GtkAccessibleText             // in, none, converted
 	var carg1 C.GtkAccessibleTextContentChange // in, none, casted
-	var carg2 C.guint                          // in, none, casted
-	var carg3 C.guint                          // in, none, casted
+	var carg2 C.uint                           // in, none, casted, casted C.guint
+	var carg3 C.uint                           // in, none, casted, casted C.guint
 
 	carg0 = (*C.GtkAccessibleText)(UnsafeAccessibleTextToGlibNone(self))
 	carg1 = C.GtkAccessibleTextContentChange(change)
-	carg2 = C.guint(start)
-	carg3 = C.guint(end)
+	carg2 = C.uint(start)
+	carg3 = C.uint(end)
 
 	C.gtk_accessible_text_update_contents(carg0, carg1, carg2, carg3)
 	runtime.KeepAlive(self)
@@ -9829,7 +9829,7 @@ func UnsafeActionableToGlibFull(c Actionable) unsafe.Pointer {
 // Gets the action name for @actionable.
 func (actionable *ActionableInstance) GetActionName() string {
 	var carg0 *C.GtkActionable // in, none, converted
-	var cret  *C.gchar         // return, none, string
+	var cret  *C.char          // return, none, string, casted *C.gchar
 
 	carg0 = (*C.GtkActionable)(UnsafeActionableToGlibNone(actionable))
 
@@ -9838,7 +9838,7 @@ func (actionable *ActionableInstance) GetActionName() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -9864,11 +9864,11 @@ func (actionable *ActionableInstance) GetActionName() string {
 // associated with the window.
 func (actionable *ActionableInstance) SetActionName(actionName string) {
 	var carg0 *C.GtkActionable // in, none, converted
-	var carg1 *C.gchar         // in, none, string, nullable-string
+	var carg1 *C.char          // in, none, string, nullable-string
 
 	carg0 = (*C.GtkActionable)(UnsafeActionableToGlibNone(actionable))
 	if actionName != "" {
-		carg1 = (*C.gchar)(unsafe.Pointer(C.CString(actionName)))
+		carg1 = (*C.char)(unsafe.Pointer(C.CString(actionName)))
 		defer C.free(unsafe.Pointer(carg1))
 	}
 
@@ -9890,10 +9890,10 @@ func (actionable *ActionableInstance) SetActionName(actionName string) {
 // [func@Gio.Action.parse_detailed_name].
 func (actionable *ActionableInstance) SetDetailedActionName(detailedActionName string) {
 	var carg0 *C.GtkActionable // in, none, converted
-	var carg1 *C.gchar         // in, none, string
+	var carg1 *C.char          // in, none, string, casted *C.gchar
 
 	carg0 = (*C.GtkActionable)(UnsafeActionableToGlibNone(actionable))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(detailedActionName)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(detailedActionName)))
 	defer C.free(unsafe.Pointer(carg1))
 
 	C.gtk_actionable_set_detailed_action_name(carg0, carg1)
@@ -10037,7 +10037,7 @@ func (self *AppChooserInstance) GetAppInfo() gio.AppInfo {
 // Deprecated: (since 4.10.0) This widget will be removed in GTK 5
 func (self *AppChooserInstance) GetContentType() string {
 	var carg0 *C.GtkAppChooser // in, none, converted
-	var cret  *C.gchar         // return, full, string
+	var cret  *C.char          // return, full, string, casted *C.gchar
 
 	carg0 = (*C.GtkAppChooser)(UnsafeAppChooserToGlibNone(self))
 
@@ -10046,7 +10046,7 @@ func (self *AppChooserInstance) GetContentType() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 	defer C.free(unsafe.Pointer(cret))
 
 	return goret
@@ -10153,7 +10153,7 @@ func UnsafeBuildableToGlibFull(c Buildable) unsafe.Pointer {
 // of the `&lt;object&gt;` tag used to construct the @buildable.
 func (buildable *BuildableInstance) GetBuildableID() string {
 	var carg0 *C.GtkBuildable // in, none, converted
-	var cret  *C.gchar        // return, none, string
+	var cret  *C.char         // return, none, string, casted *C.gchar
 
 	carg0 = (*C.GtkBuildable)(UnsafeBuildableToGlibNone(buildable))
 
@@ -10162,7 +10162,7 @@ func (buildable *BuildableInstance) GetBuildableID() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -10630,12 +10630,12 @@ func UnsafeCellLayoutToGlibFull(c CellLayout) unsafe.Pointer {
 func (cellLayout *CellLayoutInstance) AddAttribute(cell CellRenderer, attribute string, column int) {
 	var carg0 *C.GtkCellLayout   // in, none, converted
 	var carg1 *C.GtkCellRenderer // in, none, converted
-	var carg2 *C.gchar           // in, none, string
-	var carg3 C.int              // in, none, casted
+	var carg2 *C.char            // in, none, string, casted *C.gchar
+	var carg3 C.int              // in, none, casted, casted C.gint
 
 	carg0 = (*C.GtkCellLayout)(UnsafeCellLayoutToGlibNone(cellLayout))
 	carg1 = (*C.GtkCellRenderer)(UnsafeCellRendererToGlibNone(cell))
-	carg2 = (*C.gchar)(unsafe.Pointer(C.CString(attribute)))
+	carg2 = (*C.char)(unsafe.Pointer(C.CString(attribute)))
 	defer C.free(unsafe.Pointer(carg2))
 	carg3 = C.int(column)
 
@@ -10787,7 +10787,7 @@ func (cellLayout *CellLayoutInstance) PackStart(cell CellRenderer, expand bool) 
 func (cellLayout *CellLayoutInstance) Reorder(cell CellRenderer, position int) {
 	var carg0 *C.GtkCellLayout   // in, none, converted
 	var carg1 *C.GtkCellRenderer // in, none, converted
-	var carg2 C.int              // in, none, casted
+	var carg2 C.int              // in, none, casted, casted C.gint
 
 	carg0 = (*C.GtkCellLayout)(UnsafeCellLayoutToGlibNone(cellLayout))
 	carg1 = (*C.GtkCellRenderer)(UnsafeCellRendererToGlibNone(cell))
@@ -10998,7 +10998,7 @@ func UnsafeColorChooserToGlibFull(c ColorChooser) unsafe.Pointer {
 func (chooser *ColorChooserInstance) AddPalette(orientation Orientation, colorsPerLine int, colors []gdk.RGBA) {
 	var carg0 *C.GtkColorChooser // in, none, converted
 	var carg1 C.GtkOrientation   // in, none, casted
-	var carg2 C.int              // in, none, casted
+	var carg2 C.int              // in, none, casted, casted C.gint
 	var carg3 C.int              // implicit
 	var carg4 *C.GdkRGBA         // in, transfer: none, C Pointers: 1, Name: array[RGBA], nullable, array (inner: *typesystem.Record, length-by: carg3)
 
@@ -11894,15 +11894,15 @@ func UnsafeFileChooserToGlibFull(c FileChooser) unsafe.Pointer {
 // Deprecated: (since 4.10.0) Use [class@Gtk.FileDialog] instead
 func (chooser *FileChooserInstance) AddChoice(id string, label string, options []string, optionLabels []string) {
 	var carg0 *C.GtkFileChooser // in, none, converted
-	var carg1 *C.gchar          // in, none, string
-	var carg2 *C.gchar          // in, none, string
+	var carg1 *C.char           // in, none, string, casted *C.gchar
+	var carg2 *C.char           // in, none, string, casted *C.gchar
 	var carg3 **C.char          // in, transfer: none, C Pointers: 2, Name: array[utf8], nullable, array (inner: *typesystem.StringPrimitive, zero-terminated)
 	var carg4 **C.char          // in, transfer: none, C Pointers: 2, Name: array[utf8], nullable, array (inner: *typesystem.StringPrimitive, zero-terminated)
 
 	carg0 = (*C.GtkFileChooser)(UnsafeFileChooserToGlibNone(chooser))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(id)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(id)))
 	defer C.free(unsafe.Pointer(carg1))
-	carg2 = (*C.gchar)(unsafe.Pointer(C.CString(label)))
+	carg2 = (*C.char)(unsafe.Pointer(C.CString(label)))
 	defer C.free(unsafe.Pointer(carg2))
 	_ = options
 	_ = carg3
@@ -12026,11 +12026,11 @@ func (chooser *FileChooserInstance) GetAction() FileChooserAction {
 // Deprecated: (since 4.10.0) Use [class@Gtk.FileDialog] instead
 func (chooser *FileChooserInstance) GetChoice(id string) string {
 	var carg0 *C.GtkFileChooser // in, none, converted
-	var carg1 *C.gchar          // in, none, string
-	var cret  *C.gchar          // return, none, string
+	var carg1 *C.char           // in, none, string, casted *C.gchar
+	var cret  *C.char           // return, none, string, casted *C.gchar
 
 	carg0 = (*C.GtkFileChooser)(UnsafeFileChooserToGlibNone(chooser))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(id)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(id)))
 	defer C.free(unsafe.Pointer(carg1))
 
 	cret = C.gtk_file_chooser_get_choice(carg0, carg1)
@@ -12039,7 +12039,7 @@ func (chooser *FileChooserInstance) GetChoice(id string) string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -12107,7 +12107,7 @@ func (chooser *FileChooserInstance) GetCurrentFolder() gio.File {
 // Deprecated: (since 4.10.0) Use [class@Gtk.FileDialog] instead
 func (chooser *FileChooserInstance) GetCurrentName() string {
 	var carg0 *C.GtkFileChooser // in, none, converted
-	var cret  *C.gchar          // return, full, string
+	var cret  *C.char           // return, full, string, casted *C.gchar
 
 	carg0 = (*C.GtkFileChooser)(UnsafeFileChooserToGlibNone(chooser))
 
@@ -12116,7 +12116,7 @@ func (chooser *FileChooserInstance) GetCurrentName() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 	defer C.free(unsafe.Pointer(cret))
 
 	return goret
@@ -12297,10 +12297,10 @@ func (chooser *FileChooserInstance) GetShortcutFolders() gio.ListModel {
 // Deprecated: (since 4.10.0) Use [class@Gtk.FileDialog] instead
 func (chooser *FileChooserInstance) RemoveChoice(id string) {
 	var carg0 *C.GtkFileChooser // in, none, converted
-	var carg1 *C.gchar          // in, none, string
+	var carg1 *C.char           // in, none, string, casted *C.gchar
 
 	carg0 = (*C.GtkFileChooser)(UnsafeFileChooserToGlibNone(chooser))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(id)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(id)))
 	defer C.free(unsafe.Pointer(carg1))
 
 	C.gtk_file_chooser_remove_choice(carg0, carg1)
@@ -12411,13 +12411,13 @@ func (chooser *FileChooserInstance) SetAction(action FileChooserAction) {
 // Deprecated: (since 4.10.0) Use [class@Gtk.FileDialog] instead
 func (chooser *FileChooserInstance) SetChoice(id string, option string) {
 	var carg0 *C.GtkFileChooser // in, none, converted
-	var carg1 *C.gchar          // in, none, string
-	var carg2 *C.gchar          // in, none, string
+	var carg1 *C.char           // in, none, string, casted *C.gchar
+	var carg2 *C.char           // in, none, string, casted *C.gchar
 
 	carg0 = (*C.GtkFileChooser)(UnsafeFileChooserToGlibNone(chooser))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(id)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(id)))
 	defer C.free(unsafe.Pointer(carg1))
-	carg2 = (*C.gchar)(unsafe.Pointer(C.CString(option)))
+	carg2 = (*C.char)(unsafe.Pointer(C.CString(option)))
 	defer C.free(unsafe.Pointer(carg2))
 
 	C.gtk_file_chooser_set_choice(carg0, carg1, carg2)
@@ -12517,10 +12517,10 @@ func (chooser *FileChooserInstance) SetCurrentFolder(file gio.File) (bool, error
 // Deprecated: (since 4.10.0) Use [class@Gtk.FileDialog] instead
 func (chooser *FileChooserInstance) SetCurrentName(name string) {
 	var carg0 *C.GtkFileChooser // in, none, converted
-	var carg1 *C.gchar          // in, none, string
+	var carg1 *C.char           // in, none, string, casted *C.gchar
 
 	carg0 = (*C.GtkFileChooser)(UnsafeFileChooserToGlibNone(chooser))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(name)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(name)))
 	defer C.free(unsafe.Pointer(carg1))
 
 	C.gtk_file_chooser_set_current_name(carg0, carg1)
@@ -13002,7 +13002,7 @@ func UnsafeFontChooserToGlibFull(c FontChooser) unsafe.Pointer {
 // instead
 func (fontchooser *FontChooserInstance) GetFont() string {
 	var carg0 *C.GtkFontChooser // in, none, converted
-	var cret  *C.gchar          // return, full, string
+	var cret  *C.char           // return, full, string, casted *C.gchar
 
 	carg0 = (*C.GtkFontChooser)(UnsafeFontChooserToGlibNone(fontchooser))
 
@@ -13011,7 +13011,7 @@ func (fontchooser *FontChooserInstance) GetFont() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 	defer C.free(unsafe.Pointer(cret))
 
 	return goret
@@ -13123,7 +13123,7 @@ func (fontchooser *FontChooserInstance) GetFontFamily() pango.FontFamily {
 // instead
 func (fontchooser *FontChooserInstance) GetFontFeatures() string {
 	var carg0 *C.GtkFontChooser // in, none, converted
-	var cret  *C.gchar          // return, full, string
+	var cret  *C.char           // return, full, string, casted *C.gchar
 
 	carg0 = (*C.GtkFontChooser)(UnsafeFontChooserToGlibNone(fontchooser))
 
@@ -13132,7 +13132,7 @@ func (fontchooser *FontChooserInstance) GetFontFeatures() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 	defer C.free(unsafe.Pointer(cret))
 
 	return goret
@@ -13175,7 +13175,7 @@ func (fontchooser *FontChooserInstance) GetFontMap() pango.FontMap {
 // instead
 func (fontchooser *FontChooserInstance) GetFontSize() int {
 	var carg0 *C.GtkFontChooser // in, none, converted
-	var cret  C.int             // return, none, casted
+	var cret  C.int             // return, none, casted, casted C.gint
 
 	carg0 = (*C.GtkFontChooser)(UnsafeFontChooserToGlibNone(fontchooser))
 
@@ -13200,7 +13200,7 @@ func (fontchooser *FontChooserInstance) GetFontSize() int {
 // instead
 func (fontchooser *FontChooserInstance) GetLanguage() string {
 	var carg0 *C.GtkFontChooser // in, none, converted
-	var cret  *C.gchar          // return, full, string
+	var cret  *C.char           // return, full, string, casted *C.gchar
 
 	carg0 = (*C.GtkFontChooser)(UnsafeFontChooserToGlibNone(fontchooser))
 
@@ -13209,7 +13209,7 @@ func (fontchooser *FontChooserInstance) GetLanguage() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 	defer C.free(unsafe.Pointer(cret))
 
 	return goret
@@ -13251,7 +13251,7 @@ func (fontchooser *FontChooserInstance) GetLevel() FontChooserLevel {
 // instead
 func (fontchooser *FontChooserInstance) GetPreviewText() string {
 	var carg0 *C.GtkFontChooser // in, none, converted
-	var cret  *C.gchar          // return, full, string
+	var cret  *C.char           // return, full, string, casted *C.gchar
 
 	carg0 = (*C.GtkFontChooser)(UnsafeFontChooserToGlibNone(fontchooser))
 
@@ -13260,7 +13260,7 @@ func (fontchooser *FontChooserInstance) GetPreviewText() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 	defer C.free(unsafe.Pointer(cret))
 
 	return goret
@@ -13334,10 +13334,10 @@ func (fontchooser *FontChooserInstance) SetFilterFunc(filter FontFilterFunc) {
 // instead
 func (fontchooser *FontChooserInstance) SetFont(fontname string) {
 	var carg0 *C.GtkFontChooser // in, none, converted
-	var carg1 *C.gchar          // in, none, string
+	var carg1 *C.char           // in, none, string, casted *C.gchar
 
 	carg0 = (*C.GtkFontChooser)(UnsafeFontChooserToGlibNone(fontchooser))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(fontname)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(fontname)))
 	defer C.free(unsafe.Pointer(carg1))
 
 	C.gtk_font_chooser_set_font(carg0, carg1)
@@ -13427,10 +13427,10 @@ func (fontchooser *FontChooserInstance) SetFontMap(fontmap pango.FontMap) {
 // instead
 func (fontchooser *FontChooserInstance) SetLanguage(language string) {
 	var carg0 *C.GtkFontChooser // in, none, converted
-	var carg1 *C.gchar          // in, none, string
+	var carg1 *C.char           // in, none, string, casted *C.gchar
 
 	carg0 = (*C.GtkFontChooser)(UnsafeFontChooserToGlibNone(fontchooser))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(language)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(language)))
 	defer C.free(unsafe.Pointer(carg1))
 
 	C.gtk_font_chooser_set_language(carg0, carg1)
@@ -13474,10 +13474,10 @@ func (fontchooser *FontChooserInstance) SetLevel(level FontChooserLevel) {
 // instead
 func (fontchooser *FontChooserInstance) SetPreviewText(text string) {
 	var carg0 *C.GtkFontChooser // in, none, converted
-	var carg1 *C.gchar          // in, none, string
+	var carg1 *C.char           // in, none, string, casted *C.gchar
 
 	carg0 = (*C.GtkFontChooser)(UnsafeFontChooserToGlibNone(fontchooser))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(text)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(text)))
 	defer C.free(unsafe.Pointer(carg1))
 
 	C.gtk_font_chooser_set_preview_text(carg0, carg1)
@@ -13822,7 +13822,7 @@ func (preview *PrintOperationPreviewInstance) EndPreview() {
 // have been selected for printing.
 func (preview *PrintOperationPreviewInstance) IsSelected(pageNr int) bool {
 	var carg0 *C.GtkPrintOperationPreview // in, none, converted
-	var carg1 C.int                       // in, none, casted
+	var carg1 C.int                       // in, none, casted, casted C.gint
 	var cret  C.gboolean                  // return
 
 	carg0 = (*C.GtkPrintOperationPreview)(UnsafePrintOperationPreviewToGlibNone(preview))
@@ -13860,7 +13860,7 @@ func (preview *PrintOperationPreviewInstance) IsSelected(pageNr int) bool {
 // be associated with the print context.
 func (preview *PrintOperationPreviewInstance) RenderPage(pageNr int) {
 	var carg0 *C.GtkPrintOperationPreview // in, none, converted
-	var carg1 C.int                       // in, none, casted
+	var carg1 C.int                       // in, none, casted, casted C.gint
 
 	carg0 = (*C.GtkPrintOperationPreview)(UnsafePrintOperationPreviewToGlibNone(preview))
 	carg1 = C.int(pageNr)
@@ -15287,15 +15287,15 @@ func UnsafeSymbolicPaintableToGlibFull(c SymbolicPaintable) unsafe.Pointer {
 func (paintable *SymbolicPaintableInstance) SnapshotSymbolic(snapshot gdk.Snapshot, width float64, height float64, colors []gdk.RGBA) {
 	var carg0 *C.GtkSymbolicPaintable // in, none, converted
 	var carg1 *C.GdkSnapshot          // in, none, converted
-	var carg2 C.gdouble               // in, none, casted
-	var carg3 C.gdouble               // in, none, casted
+	var carg2 C.double                // in, none, casted, casted C.gdouble
+	var carg3 C.double                // in, none, casted, casted C.gdouble
 	var carg4 *C.GdkRGBA              // in, transfer: none, C Pointers: 1, Name: array[RGBA], array (inner: *typesystem.Record, length-by: carg5)
 	var carg5 C.gsize                 // implicit
 
 	carg0 = (*C.GtkSymbolicPaintable)(UnsafeSymbolicPaintableToGlibNone(paintable))
 	carg1 = (*C.GdkSnapshot)(gdk.UnsafeSnapshotToGlibNone(snapshot))
-	carg2 = C.gdouble(width)
-	carg3 = C.gdouble(height)
+	carg2 = C.double(width)
+	carg3 = C.double(height)
 	_ = colors
 	_ = carg4
 	_ = carg5
@@ -16458,7 +16458,7 @@ func (model *TreeModelInstance) ForEach(fn TreeModelForEachFunc) {
 // Deprecated: (since 4.10.0) 
 func (treeModel *TreeModelInstance) GetColumnType(index_ int) gobject.Type {
 	var carg0 *C.GtkTreeModel // in, none, converted
-	var carg1 C.int           // in, none, casted
+	var carg1 C.int           // in, none, casted, casted C.gint
 	var cret  C.GType         // return, none, casted, alias
 
 	carg0 = (*C.GtkTreeModel)(UnsafeTreeModelToGlibNone(treeModel))
@@ -16600,12 +16600,12 @@ func (treeModel *TreeModelInstance) GetIterFirst() (TreeIter, bool) {
 // Deprecated: (since 4.10.0) 
 func (treeModel *TreeModelInstance) GetIterFromString(pathString string) (TreeIter, bool) {
 	var carg0 *C.GtkTreeModel // in, none, converted
-	var carg2 *C.gchar        // in, none, string
+	var carg2 *C.char         // in, none, string, casted *C.gchar
 	var carg1 C.GtkTreeIter   // out, transfer: none, C Pointers: 0, Name: TreeIter, caller-allocates
 	var cret  C.gboolean      // return
 
 	carg0 = (*C.GtkTreeModel)(UnsafeTreeModelToGlibNone(treeModel))
-	carg2 = (*C.gchar)(unsafe.Pointer(C.CString(pathString)))
+	carg2 = (*C.char)(unsafe.Pointer(C.CString(pathString)))
 	defer C.free(unsafe.Pointer(carg2))
 
 	cret = C.gtk_tree_model_get_iter_from_string(carg0, &carg1, carg2)
@@ -16635,7 +16635,7 @@ func (treeModel *TreeModelInstance) GetIterFromString(pathString string) (TreeIt
 // Deprecated: (since 4.10.0) 
 func (treeModel *TreeModelInstance) GetNColumns() int {
 	var carg0 *C.GtkTreeModel // in, none, converted
-	var cret  C.int           // return, none, casted
+	var cret  C.int           // return, none, casted, casted C.gint
 
 	carg0 = (*C.GtkTreeModel)(UnsafeTreeModelToGlibNone(treeModel))
 
@@ -16703,7 +16703,7 @@ func (treeModel *TreeModelInstance) GetPath(iter *TreeIter) *TreePath {
 func (treeModel *TreeModelInstance) GetStringFromIter(iter *TreeIter) string {
 	var carg0 *C.GtkTreeModel // in, none, converted
 	var carg1 *C.GtkTreeIter  // in, none, converted
-	var cret  *C.gchar        // return, full, string
+	var cret  *C.char         // return, full, string, casted *C.gchar
 
 	carg0 = (*C.GtkTreeModel)(UnsafeTreeModelToGlibNone(treeModel))
 	carg1 = (*C.GtkTreeIter)(UnsafeTreeIterToGlibNone(iter))
@@ -16714,7 +16714,7 @@ func (treeModel *TreeModelInstance) GetStringFromIter(iter *TreeIter) string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 	defer C.free(unsafe.Pointer(cret))
 
 	return goret
@@ -16740,7 +16740,7 @@ func (treeModel *TreeModelInstance) GetStringFromIter(iter *TreeIter) string {
 func (treeModel *TreeModelInstance) GetValue(iter *TreeIter, column int) gobject.Value {
 	var carg0 *C.GtkTreeModel // in, none, converted
 	var carg1 *C.GtkTreeIter  // in, none, converted
-	var carg2 C.int           // in, none, casted
+	var carg2 C.int           // in, none, casted, casted C.gint
 	var carg3 C.GValue        // out, transfer: none, C Pointers: 0, Name: Value, caller-allocates
 
 	carg0 = (*C.GtkTreeModel)(UnsafeTreeModelToGlibNone(treeModel))
@@ -16863,7 +16863,7 @@ func (treeModel *TreeModelInstance) IterHasChild(iter *TreeIter) bool {
 func (treeModel *TreeModelInstance) IterNChildren(iter *TreeIter) int {
 	var carg0 *C.GtkTreeModel // in, none, converted
 	var carg1 *C.GtkTreeIter  // in, none, converted, nullable
-	var cret  C.int           // return, none, casted
+	var cret  C.int           // return, none, casted, casted C.gint
 
 	carg0 = (*C.GtkTreeModel)(UnsafeTreeModelToGlibNone(treeModel))
 	if iter != nil {
@@ -16942,7 +16942,7 @@ func (treeModel *TreeModelInstance) IterNext(iter *TreeIter) bool {
 func (treeModel *TreeModelInstance) IterNthChild(parent *TreeIter, n int) (TreeIter, bool) {
 	var carg0 *C.GtkTreeModel // in, none, converted
 	var carg2 *C.GtkTreeIter  // in, none, converted, nullable
-	var carg3 C.int           // in, none, casted
+	var carg3 C.int           // in, none, casted, casted C.gint
 	var carg1 C.GtkTreeIter   // out, transfer: none, C Pointers: 0, Name: TreeIter, caller-allocates
 	var cret  C.gboolean      // return
 
@@ -17438,7 +17438,7 @@ func UnsafeTreeSortableToGlibFull(c TreeSortable) unsafe.Pointer {
 // Deprecated: (since 4.10.0) 
 func (sortable *TreeSortableInstance) GetSortColumnID() (int, SortType, bool) {
 	var carg0 *C.GtkTreeSortable // in, none, converted
-	var carg1 C.int              // out, full, casted
+	var carg1 C.int              // out, full, casted, casted C.gint
 	var carg2 C.GtkSortType      // out, full, casted
 	var cret  C.gboolean         // return
 
@@ -17541,7 +17541,7 @@ func (sortable *TreeSortableInstance) SetDefaultSortFunc(sortFunc TreeIterCompar
 // Deprecated: (since 4.10.0) 
 func (sortable *TreeSortableInstance) SetSortColumnID(sortColumnId int, order SortType) {
 	var carg0 *C.GtkTreeSortable // in, none, converted
-	var carg1 C.int              // in, none, casted
+	var carg1 C.int              // in, none, casted, casted C.gint
 	var carg2 C.GtkSortType      // in, none, casted
 
 	carg0 = (*C.GtkTreeSortable)(UnsafeTreeSortableToGlibNone(sortable))
@@ -17568,7 +17568,7 @@ func (sortable *TreeSortableInstance) SetSortColumnID(sortColumnId int, order So
 // Deprecated: (since 4.10.0) 
 func (sortable *TreeSortableInstance) SetSortFunc(sortColumnId int, sortFunc TreeIterCompareFunc) {
 	var carg0 *C.GtkTreeSortable       // in, none, converted
-	var carg1 C.int                    // in, none, casted
+	var carg1 C.int                    // in, none, casted, casted C.gint
 	var carg2 C.GtkTreeIterCompareFunc // callback, scope: notified, closure: carg3, destroy: carg4
 	var carg3 C.gpointer               // implicit
 	var carg4 C.GDestroyNotify         // implicit
@@ -18004,20 +18004,20 @@ func UnsafeAdjustmentToGlibFull(c Adjustment) unsafe.Pointer {
 //
 // Creates a new `GtkAdjustment`.
 func NewAdjustmentInstance(value float64, lower float64, upper float64, stepIncrement float64, pageIncrement float64, pageSize float64) Adjustment {
-	var carg1 C.gdouble        // in, none, casted
-	var carg2 C.gdouble        // in, none, casted
-	var carg3 C.gdouble        // in, none, casted
-	var carg4 C.gdouble        // in, none, casted
-	var carg5 C.gdouble        // in, none, casted
-	var carg6 C.gdouble        // in, none, casted
+	var carg1 C.double         // in, none, casted, casted C.gdouble
+	var carg2 C.double         // in, none, casted, casted C.gdouble
+	var carg3 C.double         // in, none, casted, casted C.gdouble
+	var carg4 C.double         // in, none, casted, casted C.gdouble
+	var carg5 C.double         // in, none, casted, casted C.gdouble
+	var carg6 C.double         // in, none, casted, casted C.gdouble
 	var cret  *C.GtkAdjustment // return, none, converted
 
-	carg1 = C.gdouble(value)
-	carg2 = C.gdouble(lower)
-	carg3 = C.gdouble(upper)
-	carg4 = C.gdouble(stepIncrement)
-	carg5 = C.gdouble(pageIncrement)
-	carg6 = C.gdouble(pageSize)
+	carg1 = C.double(value)
+	carg2 = C.double(lower)
+	carg3 = C.double(upper)
+	carg4 = C.double(stepIncrement)
+	carg5 = C.double(pageIncrement)
+	carg6 = C.double(pageSize)
 
 	cret = C.gtk_adjustment_new(carg1, carg2, carg3, carg4, carg5, carg6)
 	runtime.KeepAlive(value)
@@ -18052,12 +18052,12 @@ func NewAdjustmentInstance(value float64, lower float64, upper float64, stepIncr
 // if the value is changed.
 func (adjustment *AdjustmentInstance) ClampPage(lower float64, upper float64) {
 	var carg0 *C.GtkAdjustment // in, none, converted
-	var carg1 C.gdouble        // in, none, casted
-	var carg2 C.gdouble        // in, none, casted
+	var carg1 C.double         // in, none, casted, casted C.gdouble
+	var carg2 C.double         // in, none, casted, casted C.gdouble
 
 	carg0 = (*C.GtkAdjustment)(UnsafeAdjustmentToGlibNone(adjustment))
-	carg1 = C.gdouble(lower)
-	carg2 = C.gdouble(upper)
+	carg1 = C.double(lower)
+	carg2 = C.double(upper)
 
 	C.gtk_adjustment_clamp_page(carg0, carg1, carg2)
 	runtime.KeepAlive(adjustment)
@@ -18085,20 +18085,20 @@ func (adjustment *AdjustmentInstance) ClampPage(lower float64, upper float64) {
 // [signal@Gtk.Adjustment::changed] into one.
 func (adjustment *AdjustmentInstance) Configure(value float64, lower float64, upper float64, stepIncrement float64, pageIncrement float64, pageSize float64) {
 	var carg0 *C.GtkAdjustment // in, none, converted
-	var carg1 C.gdouble        // in, none, casted
-	var carg2 C.gdouble        // in, none, casted
-	var carg3 C.gdouble        // in, none, casted
-	var carg4 C.gdouble        // in, none, casted
-	var carg5 C.gdouble        // in, none, casted
-	var carg6 C.gdouble        // in, none, casted
+	var carg1 C.double         // in, none, casted, casted C.gdouble
+	var carg2 C.double         // in, none, casted, casted C.gdouble
+	var carg3 C.double         // in, none, casted, casted C.gdouble
+	var carg4 C.double         // in, none, casted, casted C.gdouble
+	var carg5 C.double         // in, none, casted, casted C.gdouble
+	var carg6 C.double         // in, none, casted, casted C.gdouble
 
 	carg0 = (*C.GtkAdjustment)(UnsafeAdjustmentToGlibNone(adjustment))
-	carg1 = C.gdouble(value)
-	carg2 = C.gdouble(lower)
-	carg3 = C.gdouble(upper)
-	carg4 = C.gdouble(stepIncrement)
-	carg5 = C.gdouble(pageIncrement)
-	carg6 = C.gdouble(pageSize)
+	carg1 = C.double(value)
+	carg2 = C.double(lower)
+	carg3 = C.double(upper)
+	carg4 = C.double(stepIncrement)
+	carg5 = C.double(pageIncrement)
+	carg6 = C.double(pageSize)
 
 	C.gtk_adjustment_configure(carg0, carg1, carg2, carg3, carg4, carg5, carg6)
 	runtime.KeepAlive(adjustment)
@@ -18118,7 +18118,7 @@ func (adjustment *AdjustmentInstance) Configure(value float64, lower float64, up
 // Retrieves the minimum value of the adjustment.
 func (adjustment *AdjustmentInstance) GetLower() float64 {
 	var carg0 *C.GtkAdjustment // in, none, converted
-	var cret  C.gdouble        // return, none, casted
+	var cret  C.double         // return, none, casted, casted C.gdouble
 
 	carg0 = (*C.GtkAdjustment)(UnsafeAdjustmentToGlibNone(adjustment))
 
@@ -18140,7 +18140,7 @@ func (adjustment *AdjustmentInstance) GetLower() float64 {
 // Gets the smaller of step increment and page increment.
 func (adjustment *AdjustmentInstance) GetMinimumIncrement() float64 {
 	var carg0 *C.GtkAdjustment // in, none, converted
-	var cret  C.gdouble        // return, none, casted
+	var cret  C.double         // return, none, casted, casted C.gdouble
 
 	carg0 = (*C.GtkAdjustment)(UnsafeAdjustmentToGlibNone(adjustment))
 
@@ -18162,7 +18162,7 @@ func (adjustment *AdjustmentInstance) GetMinimumIncrement() float64 {
 // Retrieves the page increment of the adjustment.
 func (adjustment *AdjustmentInstance) GetPageIncrement() float64 {
 	var carg0 *C.GtkAdjustment // in, none, converted
-	var cret  C.gdouble        // return, none, casted
+	var cret  C.double         // return, none, casted, casted C.gdouble
 
 	carg0 = (*C.GtkAdjustment)(UnsafeAdjustmentToGlibNone(adjustment))
 
@@ -18184,7 +18184,7 @@ func (adjustment *AdjustmentInstance) GetPageIncrement() float64 {
 // Retrieves the page size of the adjustment.
 func (adjustment *AdjustmentInstance) GetPageSize() float64 {
 	var carg0 *C.GtkAdjustment // in, none, converted
-	var cret  C.gdouble        // return, none, casted
+	var cret  C.double         // return, none, casted, casted C.gdouble
 
 	carg0 = (*C.GtkAdjustment)(UnsafeAdjustmentToGlibNone(adjustment))
 
@@ -18206,7 +18206,7 @@ func (adjustment *AdjustmentInstance) GetPageSize() float64 {
 // Retrieves the step increment of the adjustment.
 func (adjustment *AdjustmentInstance) GetStepIncrement() float64 {
 	var carg0 *C.GtkAdjustment // in, none, converted
-	var cret  C.gdouble        // return, none, casted
+	var cret  C.double         // return, none, casted, casted C.gdouble
 
 	carg0 = (*C.GtkAdjustment)(UnsafeAdjustmentToGlibNone(adjustment))
 
@@ -18228,7 +18228,7 @@ func (adjustment *AdjustmentInstance) GetStepIncrement() float64 {
 // Retrieves the maximum value of the adjustment.
 func (adjustment *AdjustmentInstance) GetUpper() float64 {
 	var carg0 *C.GtkAdjustment // in, none, converted
-	var cret  C.gdouble        // return, none, casted
+	var cret  C.double         // return, none, casted, casted C.gdouble
 
 	carg0 = (*C.GtkAdjustment)(UnsafeAdjustmentToGlibNone(adjustment))
 
@@ -18250,7 +18250,7 @@ func (adjustment *AdjustmentInstance) GetUpper() float64 {
 // Gets the current value of the adjustment.
 func (adjustment *AdjustmentInstance) GetValue() float64 {
 	var carg0 *C.GtkAdjustment // in, none, converted
-	var cret  C.gdouble        // return, none, casted
+	var cret  C.double         // return, none, casted, casted C.gdouble
 
 	carg0 = (*C.GtkAdjustment)(UnsafeAdjustmentToGlibNone(adjustment))
 
@@ -18285,10 +18285,10 @@ func (adjustment *AdjustmentInstance) GetValue() float64 {
 // to change, or using [method@Gtk.Adjustment.configure] has the same effect.
 func (adjustment *AdjustmentInstance) SetLower(lower float64) {
 	var carg0 *C.GtkAdjustment // in, none, converted
-	var carg1 C.gdouble        // in, none, casted
+	var carg1 C.double         // in, none, casted, casted C.gdouble
 
 	carg0 = (*C.GtkAdjustment)(UnsafeAdjustmentToGlibNone(adjustment))
-	carg1 = C.gdouble(lower)
+	carg1 = C.double(lower)
 
 	C.gtk_adjustment_set_lower(carg0, carg1)
 	runtime.KeepAlive(adjustment)
@@ -18308,10 +18308,10 @@ func (adjustment *AdjustmentInstance) SetLower(lower float64) {
 // signal when setting multiple adjustment properties.
 func (adjustment *AdjustmentInstance) SetPageIncrement(pageIncrement float64) {
 	var carg0 *C.GtkAdjustment // in, none, converted
-	var carg1 C.gdouble        // in, none, casted
+	var carg1 C.double         // in, none, casted, casted C.gdouble
 
 	carg0 = (*C.GtkAdjustment)(UnsafeAdjustmentToGlibNone(adjustment))
-	carg1 = C.gdouble(pageIncrement)
+	carg1 = C.double(pageIncrement)
 
 	C.gtk_adjustment_set_page_increment(carg0, carg1)
 	runtime.KeepAlive(adjustment)
@@ -18331,10 +18331,10 @@ func (adjustment *AdjustmentInstance) SetPageIncrement(pageIncrement float64) {
 // signal when setting multiple adjustment properties.
 func (adjustment *AdjustmentInstance) SetPageSize(pageSize float64) {
 	var carg0 *C.GtkAdjustment // in, none, converted
-	var carg1 C.gdouble        // in, none, casted
+	var carg1 C.double         // in, none, casted, casted C.gdouble
 
 	carg0 = (*C.GtkAdjustment)(UnsafeAdjustmentToGlibNone(adjustment))
-	carg1 = C.gdouble(pageSize)
+	carg1 = C.double(pageSize)
 
 	C.gtk_adjustment_set_page_size(carg0, carg1)
 	runtime.KeepAlive(adjustment)
@@ -18354,10 +18354,10 @@ func (adjustment *AdjustmentInstance) SetPageSize(pageSize float64) {
 // signal when setting multiple adjustment properties.
 func (adjustment *AdjustmentInstance) SetStepIncrement(stepIncrement float64) {
 	var carg0 *C.GtkAdjustment // in, none, converted
-	var carg1 C.gdouble        // in, none, casted
+	var carg1 C.double         // in, none, casted, casted C.gdouble
 
 	carg0 = (*C.GtkAdjustment)(UnsafeAdjustmentToGlibNone(adjustment))
-	carg1 = C.gdouble(stepIncrement)
+	carg1 = C.double(stepIncrement)
 
 	C.gtk_adjustment_set_step_increment(carg0, carg1)
 	runtime.KeepAlive(adjustment)
@@ -18380,10 +18380,10 @@ func (adjustment *AdjustmentInstance) SetStepIncrement(stepIncrement float64) {
 // signal when setting multiple adjustment properties.
 func (adjustment *AdjustmentInstance) SetUpper(upper float64) {
 	var carg0 *C.GtkAdjustment // in, none, converted
-	var carg1 C.gdouble        // in, none, casted
+	var carg1 C.double         // in, none, casted, casted C.gdouble
 
 	carg0 = (*C.GtkAdjustment)(UnsafeAdjustmentToGlibNone(adjustment))
-	carg1 = C.gdouble(upper)
+	carg1 = C.double(upper)
 
 	C.gtk_adjustment_set_upper(carg0, carg1)
 	runtime.KeepAlive(adjustment)
@@ -18407,10 +18407,10 @@ func (adjustment *AdjustmentInstance) SetUpper(upper float64) {
 // [property@Gtk.Adjustment:upper] - [property@Gtk.Adjustment:page-size].
 func (adjustment *AdjustmentInstance) SetValue(value float64) {
 	var carg0 *C.GtkAdjustment // in, none, converted
-	var carg1 C.gdouble        // in, none, casted
+	var carg1 C.double         // in, none, casted, casted C.gdouble
 
 	carg0 = (*C.GtkAdjustment)(UnsafeAdjustmentToGlibNone(adjustment))
-	carg1 = C.gdouble(value)
+	carg1 = C.double(value)
 
 	C.gtk_adjustment_set_value(carg0, carg1)
 	runtime.KeepAlive(adjustment)
@@ -18672,7 +18672,7 @@ func (self *AlertDialogInstance) Choose(cancellable context.Context, parent Wind
 func (self *AlertDialogInstance) ChooseFinish(result gio.AsyncResult) (int, error) {
 	var carg0 *C.GtkAlertDialog // in, none, converted
 	var carg1 *C.GAsyncResult   // in, none, converted
-	var cret  C.int             // return, none, casted
+	var cret  C.int             // return, none, casted, casted C.gint
 	var _cerr *C.GError         // out, full, converted, nullable
 
 	carg0 = (*C.GtkAlertDialog)(UnsafeAlertDialogToGlibNone(self))
@@ -18725,7 +18725,7 @@ func (self *AlertDialogInstance) GetButtons() []string {
 // Returns the index of the cancel button.
 func (self *AlertDialogInstance) GetCancelButton() int {
 	var carg0 *C.GtkAlertDialog // in, none, converted
-	var cret  C.int             // return, none, casted
+	var cret  C.int             // return, none, casted, casted C.gint
 
 	carg0 = (*C.GtkAlertDialog)(UnsafeAlertDialogToGlibNone(self))
 
@@ -18747,7 +18747,7 @@ func (self *AlertDialogInstance) GetCancelButton() int {
 // Returns the index of the default button.
 func (self *AlertDialogInstance) GetDefaultButton() int {
 	var carg0 *C.GtkAlertDialog // in, none, converted
-	var cret  C.int             // return, none, casted
+	var cret  C.int             // return, none, casted, casted C.gint
 
 	carg0 = (*C.GtkAlertDialog)(UnsafeAlertDialogToGlibNone(self))
 
@@ -18769,7 +18769,7 @@ func (self *AlertDialogInstance) GetDefaultButton() int {
 // Returns the detail text that will be shown in the alert.
 func (self *AlertDialogInstance) GetDetail() string {
 	var carg0 *C.GtkAlertDialog // in, none, converted
-	var cret  *C.gchar          // return, none, string
+	var cret  *C.char           // return, none, string, casted *C.gchar
 
 	carg0 = (*C.GtkAlertDialog)(UnsafeAlertDialogToGlibNone(self))
 
@@ -18778,7 +18778,7 @@ func (self *AlertDialogInstance) GetDetail() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -18791,7 +18791,7 @@ func (self *AlertDialogInstance) GetDetail() string {
 // Returns the message that will be shown in the alert.
 func (self *AlertDialogInstance) GetMessage() string {
 	var carg0 *C.GtkAlertDialog // in, none, converted
-	var cret  *C.gchar          // return, none, string
+	var cret  *C.char           // return, none, string, casted *C.gchar
 
 	carg0 = (*C.GtkAlertDialog)(UnsafeAlertDialogToGlibNone(self))
 
@@ -18800,7 +18800,7 @@ func (self *AlertDialogInstance) GetMessage() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -18863,7 +18863,7 @@ func (self *AlertDialogInstance) SetButtons(labels []string) {
 // details of how this value is used.
 func (self *AlertDialogInstance) SetCancelButton(button int) {
 	var carg0 *C.GtkAlertDialog // in, none, converted
-	var carg1 C.int             // in, none, casted
+	var carg1 C.int             // in, none, casted, casted C.gint
 
 	carg0 = (*C.GtkAlertDialog)(UnsafeAlertDialogToGlibNone(self))
 	carg1 = C.int(button)
@@ -18885,7 +18885,7 @@ func (self *AlertDialogInstance) SetCancelButton(button int) {
 // details of how this value is used.
 func (self *AlertDialogInstance) SetDefaultButton(button int) {
 	var carg0 *C.GtkAlertDialog // in, none, converted
-	var carg1 C.int             // in, none, casted
+	var carg1 C.int             // in, none, casted, casted C.gint
 
 	carg0 = (*C.GtkAlertDialog)(UnsafeAlertDialogToGlibNone(self))
 	carg1 = C.int(button)
@@ -18904,10 +18904,10 @@ func (self *AlertDialogInstance) SetDefaultButton(button int) {
 // Sets the detail text that will be shown in the alert.
 func (self *AlertDialogInstance) SetDetail(detail string) {
 	var carg0 *C.GtkAlertDialog // in, none, converted
-	var carg1 *C.gchar          // in, none, string
+	var carg1 *C.char           // in, none, string, casted *C.gchar
 
 	carg0 = (*C.GtkAlertDialog)(UnsafeAlertDialogToGlibNone(self))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(detail)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(detail)))
 	defer C.free(unsafe.Pointer(carg1))
 
 	C.gtk_alert_dialog_set_detail(carg0, carg1)
@@ -18924,10 +18924,10 @@ func (self *AlertDialogInstance) SetDetail(detail string) {
 // Sets the message that will be shown in the alert.
 func (self *AlertDialogInstance) SetMessage(message string) {
 	var carg0 *C.GtkAlertDialog // in, none, converted
-	var carg1 *C.gchar          // in, none, string
+	var carg1 *C.char           // in, none, string, casted *C.gchar
 
 	carg0 = (*C.GtkAlertDialog)(UnsafeAlertDialogToGlibNone(self))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(message)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(message)))
 	defer C.free(unsafe.Pointer(carg1))
 
 	C.gtk_alert_dialog_set_message(carg0, carg1)
@@ -19381,12 +19381,12 @@ func UnsafeApplicationToGlibFull(c Application) unsafe.Pointer {
 // If no application ID is given then some features (most notably application
 // uniqueness) will be disabled.
 func NewApplicationInstance(applicationId string, flags gio.ApplicationFlags) Application {
-	var carg1 *C.gchar            // in, none, string, nullable-string
+	var carg1 *C.char             // in, none, string, nullable-string
 	var carg2 C.GApplicationFlags // in, none, casted
 	var cret  *C.GtkApplication   // return, full, converted
 
 	if applicationId != "" {
-		carg1 = (*C.gchar)(unsafe.Pointer(C.CString(applicationId)))
+		carg1 = (*C.char)(unsafe.Pointer(C.CString(applicationId)))
 		defer C.free(unsafe.Pointer(carg1))
 	}
 	carg2 = C.GApplicationFlags(flags)
@@ -19450,11 +19450,11 @@ func (application *ApplicationInstance) AddWindow(window Window) {
 // the given action.
 func (application *ApplicationInstance) GetAccelsForAction(detailedActionName string) []string {
 	var carg0 *C.GtkApplication // in, none, converted
-	var carg1 *C.gchar          // in, none, string
+	var carg1 *C.char           // in, none, string, casted *C.gchar
 	var cret  **C.char          // return, transfer: full, C Pointers: 2, Name: array[utf8], scope: , array (inner: *typesystem.StringPrimitive, zero-terminated)
 
 	carg0 = (*C.GtkApplication)(UnsafeApplicationToGlibNone(application))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(detailedActionName)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(detailedActionName)))
 	defer C.free(unsafe.Pointer(carg1))
 
 	cret = C.gtk_application_get_accels_for_action(carg0, carg1)
@@ -19499,11 +19499,11 @@ func (application *ApplicationInstance) GetAccelsForAction(detailedActionName st
 // If you are unsure, check it with [func@Gtk.accelerator_parse] first.
 func (application *ApplicationInstance) GetActionsForAccel(accel string) []string {
 	var carg0 *C.GtkApplication // in, none, converted
-	var carg1 *C.gchar          // in, none, string
+	var carg1 *C.char           // in, none, string, casted *C.gchar
 	var cret  **C.char          // return, transfer: full, C Pointers: 2, Name: array[utf8], scope: , array (inner: *typesystem.StringPrimitive, zero-terminated)
 
 	carg0 = (*C.GtkApplication)(UnsafeApplicationToGlibNone(application))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(accel)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(accel)))
 	defer C.free(unsafe.Pointer(carg1))
 
 	cret = C.gtk_application_get_actions_for_accel(carg0, carg1)
@@ -19562,11 +19562,11 @@ func (application *ApplicationInstance) GetActiveWindow() Window {
 // for more information.
 func (application *ApplicationInstance) GetMenuByID(id string) gio.Menu {
 	var carg0 *C.GtkApplication // in, none, converted
-	var carg1 *C.gchar          // in, none, string
+	var carg1 *C.char           // in, none, string, casted *C.gchar
 	var cret  *C.GMenu          // return, none, converted
 
 	carg0 = (*C.GtkApplication)(UnsafeApplicationToGlibNone(application))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(id)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(id)))
 	defer C.free(unsafe.Pointer(carg1))
 
 	cret = C.gtk_application_get_menu_by_id(carg0, carg1)
@@ -19676,7 +19676,7 @@ func (application *ApplicationInstance) Inhibit(window Window, flags Application
 	var carg0 *C.GtkApplication            // in, none, converted
 	var carg1 *C.GtkWindow                 // in, none, converted, nullable
 	var carg2 C.GtkApplicationInhibitFlags // in, none, casted
-	var carg3 *C.gchar                     // in, none, string, nullable-string
+	var carg3 *C.char                      // in, none, string, nullable-string
 	var cret  C.guint                      // return, none, casted
 
 	carg0 = (*C.GtkApplication)(UnsafeApplicationToGlibNone(application))
@@ -19685,7 +19685,7 @@ func (application *ApplicationInstance) Inhibit(window Window, flags Application
 	}
 	carg2 = C.GtkApplicationInhibitFlags(flags)
 	if reason != "" {
-		carg3 = (*C.gchar)(unsafe.Pointer(C.CString(reason)))
+		carg3 = (*C.char)(unsafe.Pointer(C.CString(reason)))
 		defer C.free(unsafe.Pointer(carg3))
 	}
 
@@ -19776,11 +19776,11 @@ func (application *ApplicationInstance) RemoveWindow(window Window) {
 // `g_action_print_detailed_name()`.
 func (application *ApplicationInstance) SetAccelsForAction(detailedActionName string, accels []string) {
 	var carg0 *C.GtkApplication // in, none, converted
-	var carg1 *C.gchar          // in, none, string
+	var carg1 *C.char           // in, none, string, casted *C.gchar
 	var carg2 **C.char          // in, transfer: none, C Pointers: 2, Name: array[utf8], array (inner: *typesystem.StringPrimitive, zero-terminated)
 
 	carg0 = (*C.GtkApplication)(UnsafeApplicationToGlibNone(application))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(detailedActionName)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(detailedActionName)))
 	defer C.free(unsafe.Pointer(carg1))
 	_ = accels
 	_ = carg2
@@ -20070,16 +20070,16 @@ func UnsafeBookmarkListToGlibFull(c BookmarkList) unsafe.Pointer {
 //
 // Creates a new `GtkBookmarkList` with the given @attributes.
 func NewBookmarkListInstance(filename string, attributes string) BookmarkList {
-	var carg1 *C.gchar           // in, none, string, nullable-string
-	var carg2 *C.gchar           // in, none, string, nullable-string
+	var carg1 *C.char            // in, none, string, nullable-string
+	var carg2 *C.char            // in, none, string, nullable-string
 	var cret  *C.GtkBookmarkList // return, full, converted
 
 	if filename != "" {
-		carg1 = (*C.gchar)(unsafe.Pointer(C.CString(filename)))
+		carg1 = (*C.char)(unsafe.Pointer(C.CString(filename)))
 		defer C.free(unsafe.Pointer(carg1))
 	}
 	if attributes != "" {
-		carg2 = (*C.gchar)(unsafe.Pointer(C.CString(attributes)))
+		carg2 = (*C.char)(unsafe.Pointer(C.CString(attributes)))
 		defer C.free(unsafe.Pointer(carg2))
 	}
 
@@ -20102,7 +20102,7 @@ func NewBookmarkListInstance(filename string, attributes string) BookmarkList {
 // Gets the attributes queried on the children.
 func (self *BookmarkListInstance) GetAttributes() string {
 	var carg0 *C.GtkBookmarkList // in, none, converted
-	var cret  *C.gchar           // return, none, string
+	var cret  *C.char            // return, none, string, casted *C.gchar
 
 	carg0 = (*C.GtkBookmarkList)(UnsafeBookmarkListToGlibNone(self))
 
@@ -20111,7 +20111,7 @@ func (self *BookmarkListInstance) GetAttributes() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -20125,7 +20125,7 @@ func (self *BookmarkListInstance) GetAttributes() string {
 // this list is loading.
 func (self *BookmarkListInstance) GetFilename() string {
 	var carg0 *C.GtkBookmarkList // in, none, converted
-	var cret  *C.gchar           // return, none, string
+	var cret  *C.char            // return, none, string, casted *C.gchar
 
 	carg0 = (*C.GtkBookmarkList)(UnsafeBookmarkListToGlibNone(self))
 
@@ -20134,7 +20134,7 @@ func (self *BookmarkListInstance) GetFilename() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -20147,7 +20147,7 @@ func (self *BookmarkListInstance) GetFilename() string {
 // Gets the IO priority to use while loading file.
 func (self *BookmarkListInstance) GetIOPriority() int {
 	var carg0 *C.GtkBookmarkList // in, none, converted
-	var cret  C.int              // return, none, casted
+	var cret  C.int              // return, none, casted, casted C.gint
 
 	carg0 = (*C.GtkBookmarkList)(UnsafeBookmarkListToGlibNone(self))
 
@@ -20201,11 +20201,11 @@ func (self *BookmarkListInstance) IsLoading() bool {
 // of `GFileInfo`s will still be created.
 func (self *BookmarkListInstance) SetAttributes(attributes string) {
 	var carg0 *C.GtkBookmarkList // in, none, converted
-	var carg1 *C.gchar           // in, none, string, nullable-string
+	var carg1 *C.char            // in, none, string, nullable-string
 
 	carg0 = (*C.GtkBookmarkList)(UnsafeBookmarkListToGlibNone(self))
 	if attributes != "" {
-		carg1 = (*C.gchar)(unsafe.Pointer(C.CString(attributes)))
+		carg1 = (*C.char)(unsafe.Pointer(C.CString(attributes)))
 		defer C.free(unsafe.Pointer(carg1))
 	}
 
@@ -20225,7 +20225,7 @@ func (self *BookmarkListInstance) SetAttributes(attributes string) {
 // The default IO priority is %G_PRIORITY_DEFAULT.
 func (self *BookmarkListInstance) SetIOPriority(ioPriority int) {
 	var carg0 *C.GtkBookmarkList // in, none, converted
-	var carg1 C.int              // in, none, casted
+	var carg1 C.int              // in, none, casted, casted C.gint
 
 	carg0 = (*C.GtkBookmarkList)(UnsafeBookmarkListToGlibNone(self))
 	carg1 = C.int(ioPriority)
@@ -20966,10 +20966,10 @@ func NewBuilderInstance() Builder {
 // the program will be aborted. You should only ever attempt to parse
 // user interface descriptions that are shipped as part of your program.
 func NewBuilderInstanceFromFile(filename string) Builder {
-	var carg1 *C.gchar      // in, none, string
+	var carg1 *C.char       // in, none, string, casted *C.gchar
 	var cret  *C.GtkBuilder // return, full, converted
 
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(filename)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(filename)))
 	defer C.free(unsafe.Pointer(carg1))
 
 	cret = C.gtk_builder_new_from_file(carg1)
@@ -20997,10 +20997,10 @@ func NewBuilderInstanceFromFile(filename string) Builder {
 // If there is an error locating the resource or parsing the
 // description, then the program will be aborted.
 func NewBuilderInstanceFromResource(resourcePath string) Builder {
-	var carg1 *C.gchar      // in, none, string
+	var carg1 *C.char       // in, none, string, casted *C.gchar
 	var cret  *C.GtkBuilder // return, full, converted
 
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(resourcePath)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(resourcePath)))
 	defer C.free(unsafe.Pointer(carg1))
 
 	cret = C.gtk_builder_new_from_resource(carg1)
@@ -21033,11 +21033,11 @@ func NewBuilderInstanceFromResource(resourcePath string) Builder {
 // aborted. You should not attempt to parse user interface description
 // from untrusted sources.
 func NewBuilderInstanceFromString(str string, length int) Builder {
-	var carg1 *C.gchar      // in, none, string
+	var carg1 *C.char       // in, none, string, casted *C.gchar
 	var carg2 C.gssize      // in, none, casted
 	var cret  *C.GtkBuilder // return, full, converted
 
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(str)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(str)))
 	defer C.free(unsafe.Pointer(carg1))
 	carg2 = C.gssize(length)
 
@@ -21083,12 +21083,12 @@ func NewBuilderInstanceFromString(str string, length int) Builder {
 // thing to do when an error is detected is to call `g_error()`.
 func (builder *BuilderInstance) AddFromFile(filename string) (bool, error) {
 	var carg0 *C.GtkBuilder // in, none, converted
-	var carg1 *C.gchar      // in, none, string
+	var carg1 *C.char       // in, none, string, casted *C.gchar
 	var cret  C.gboolean    // return
 	var _cerr *C.GError     // out, full, converted, nullable
 
 	carg0 = (*C.GtkBuilder)(UnsafeBuilderToGlibNone(builder))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(filename)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(filename)))
 	defer C.free(unsafe.Pointer(carg1))
 
 	cret = C.gtk_builder_add_from_file(carg0, carg1, &_cerr)
@@ -21136,12 +21136,12 @@ func (builder *BuilderInstance) AddFromFile(filename string) (bool, error) {
 // to call g_error().
 func (builder *BuilderInstance) AddFromResource(resourcePath string) (bool, error) {
 	var carg0 *C.GtkBuilder // in, none, converted
-	var carg1 *C.gchar      // in, none, string
+	var carg1 *C.char       // in, none, string, casted *C.gchar
 	var cret  C.gboolean    // return
 	var _cerr *C.GError     // out, full, converted, nullable
 
 	carg0 = (*C.GtkBuilder)(UnsafeBuilderToGlibNone(builder))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(resourcePath)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(resourcePath)))
 	defer C.free(unsafe.Pointer(carg1))
 
 	cret = C.gtk_builder_add_from_resource(carg0, carg1, &_cerr)
@@ -21190,13 +21190,13 @@ func (builder *BuilderInstance) AddFromResource(resourcePath string) (bool, erro
 // to call g_error().
 func (builder *BuilderInstance) AddFromString(buffer string, length int) (bool, error) {
 	var carg0 *C.GtkBuilder // in, none, converted
-	var carg1 *C.gchar      // in, none, string
+	var carg1 *C.char       // in, none, string, casted *C.gchar
 	var carg2 C.gssize      // in, none, casted
 	var cret  C.gboolean    // return
 	var _cerr *C.GError     // out, full, converted, nullable
 
 	carg0 = (*C.GtkBuilder)(UnsafeBuilderToGlibNone(builder))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(buffer)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(buffer)))
 	defer C.free(unsafe.Pointer(carg1))
 	carg2 = C.gssize(length)
 
@@ -21243,13 +21243,13 @@ func (builder *BuilderInstance) AddFromString(buffer string, length int) (bool, 
 // `GtkTreeModel`), you have to explicitly list all of them in @object_ids.
 func (builder *BuilderInstance) AddObjectsFromFile(filename string, objectIds []string) (bool, error) {
 	var carg0 *C.GtkBuilder // in, none, converted
-	var carg1 *C.gchar      // in, none, string
+	var carg1 *C.char       // in, none, string, casted *C.gchar
 	var carg2 **C.char      // in, transfer: none, C Pointers: 2, Name: array[utf8], array (inner: *typesystem.StringPrimitive, zero-terminated)
 	var cret  C.gboolean    // return
 	var _cerr *C.GError     // out, full, converted, nullable
 
 	carg0 = (*C.GtkBuilder)(UnsafeBuilderToGlibNone(builder))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(filename)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(filename)))
 	defer C.free(unsafe.Pointer(carg1))
 	_ = objectIds
 	_ = carg2
@@ -21298,13 +21298,13 @@ func (builder *BuilderInstance) AddObjectsFromFile(filename string, objectIds []
 // `GtkTreeModel`), you have to explicitly list all of them in @object_ids.
 func (builder *BuilderInstance) AddObjectsFromResource(resourcePath string, objectIds []string) (bool, error) {
 	var carg0 *C.GtkBuilder // in, none, converted
-	var carg1 *C.gchar      // in, none, string
+	var carg1 *C.char       // in, none, string, casted *C.gchar
 	var carg2 **C.char      // in, transfer: none, C Pointers: 2, Name: array[utf8], array (inner: *typesystem.StringPrimitive, zero-terminated)
 	var cret  C.gboolean    // return
 	var _cerr *C.GError     // out, full, converted, nullable
 
 	carg0 = (*C.GtkBuilder)(UnsafeBuilderToGlibNone(builder))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(resourcePath)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(resourcePath)))
 	defer C.free(unsafe.Pointer(carg1))
 	_ = objectIds
 	_ = carg2
@@ -21353,14 +21353,14 @@ func (builder *BuilderInstance) AddObjectsFromResource(resourcePath string, obje
 // `GtkTreeModel`), you have to explicitly list all of them in @object_ids.
 func (builder *BuilderInstance) AddObjectsFromString(buffer string, length int, objectIds []string) (bool, error) {
 	var carg0 *C.GtkBuilder // in, none, converted
-	var carg1 *C.gchar      // in, none, string
+	var carg1 *C.char       // in, none, string, casted *C.gchar
 	var carg2 C.gssize      // in, none, casted
 	var carg3 **C.char      // in, transfer: none, C Pointers: 2, Name: array[utf8], array (inner: *typesystem.StringPrimitive, zero-terminated)
 	var cret  C.gboolean    // return
 	var _cerr *C.GError     // out, full, converted, nullable
 
 	carg0 = (*C.GtkBuilder)(UnsafeBuilderToGlibNone(builder))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(buffer)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(buffer)))
 	defer C.free(unsafe.Pointer(carg1))
 	carg2 = C.gssize(length)
 	_ = objectIds
@@ -21402,11 +21402,11 @@ func (builder *BuilderInstance) AddObjectsFromString(buffer string, length int, 
 // if an object has already been added with @name.
 func (builder *BuilderInstance) ExposeObject(name string, object gobject.Object) {
 	var carg0 *C.GtkBuilder // in, none, converted
-	var carg1 *C.gchar      // in, none, string
+	var carg1 *C.char       // in, none, string, casted *C.gchar
 	var carg2 *C.GObject    // in, none, converted
 
 	carg0 = (*C.GtkBuilder)(UnsafeBuilderToGlibNone(builder))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(name)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(name)))
 	defer C.free(unsafe.Pointer(carg1))
 	carg2 = (*C.GObject)(gobject.UnsafeObjectToGlibNone(object))
 
@@ -21439,7 +21439,7 @@ func (builder *BuilderInstance) ExtendWithTemplate(object gobject.Object, templa
 	var carg0 *C.GtkBuilder // in, none, converted
 	var carg1 *C.GObject    // in, none, converted
 	var carg2 C.GType       // in, none, casted, alias
-	var carg3 *C.gchar      // in, none, string
+	var carg3 *C.char       // in, none, string, casted *C.gchar
 	var carg4 C.gssize      // in, none, casted
 	var cret  C.gboolean    // return
 	var _cerr *C.GError     // out, full, converted, nullable
@@ -21447,7 +21447,7 @@ func (builder *BuilderInstance) ExtendWithTemplate(object gobject.Object, templa
 	carg0 = (*C.GtkBuilder)(UnsafeBuilderToGlibNone(builder))
 	carg1 = (*C.GObject)(gobject.UnsafeObjectToGlibNone(object))
 	carg2 = C.GType(templateType)
-	carg3 = (*C.gchar)(unsafe.Pointer(C.CString(buffer)))
+	carg3 = (*C.char)(unsafe.Pointer(C.CString(buffer)))
 	defer C.free(unsafe.Pointer(carg3))
 	carg4 = C.gssize(length)
 
@@ -21509,11 +21509,11 @@ func (builder *BuilderInstance) GetCurrentObject() gobject.Object {
 // of the returned object.
 func (builder *BuilderInstance) GetObject(name string) gobject.Object {
 	var carg0 *C.GtkBuilder // in, none, converted
-	var carg1 *C.gchar      // in, none, string
+	var carg1 *C.char       // in, none, string, casted *C.gchar
 	var cret  *C.GObject    // return, none, converted
 
 	carg0 = (*C.GtkBuilder)(UnsafeBuilderToGlibNone(builder))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(name)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(name)))
 	defer C.free(unsafe.Pointer(carg1))
 
 	cret = C.gtk_builder_get_object(carg0, carg1)
@@ -21557,7 +21557,7 @@ func (builder *BuilderInstance) GetScope() BuilderScope {
 // Gets the translation domain of @builder.
 func (builder *BuilderInstance) GetTranslationDomain() string {
 	var carg0 *C.GtkBuilder // in, none, converted
-	var cret  *C.gchar      // return, none, string
+	var cret  *C.char       // return, none, string, casted *C.gchar
 
 	carg0 = (*C.GtkBuilder)(UnsafeBuilderToGlibNone(builder))
 
@@ -21566,7 +21566,7 @@ func (builder *BuilderInstance) GetTranslationDomain() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -21588,11 +21588,11 @@ func (builder *BuilderInstance) GetTranslationDomain() string {
 // the `GtkBuildable` interface on a type.
 func (builder *BuilderInstance) GetTypeFromName(typeName string) gobject.Type {
 	var carg0 *C.GtkBuilder // in, none, converted
-	var carg1 *C.gchar      // in, none, string
+	var carg1 *C.char       // in, none, string, casted *C.gchar
 	var cret  C.GType       // return, none, casted, alias
 
 	carg0 = (*C.GtkBuilder)(UnsafeBuilderToGlibNone(builder))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(typeName)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(typeName)))
 	defer C.free(unsafe.Pointer(carg1))
 
 	cret = C.gtk_builder_get_type_from_name(carg0, carg1)
@@ -21667,11 +21667,11 @@ func (builder *BuilderInstance) SetScope(scope BuilderScope) {
 // Sets the translation domain of @builder.
 func (builder *BuilderInstance) SetTranslationDomain(domain string) {
 	var carg0 *C.GtkBuilder // in, none, converted
-	var carg1 *C.gchar      // in, none, string, nullable-string
+	var carg1 *C.char       // in, none, string, nullable-string
 
 	carg0 = (*C.GtkBuilder)(UnsafeBuilderToGlibNone(builder))
 	if domain != "" {
-		carg1 = (*C.gchar)(unsafe.Pointer(C.CString(domain)))
+		carg1 = (*C.char)(unsafe.Pointer(C.CString(domain)))
 		defer C.free(unsafe.Pointer(carg1))
 	}
 
@@ -21706,14 +21706,14 @@ func (builder *BuilderInstance) SetTranslationDomain(domain string) {
 func (builder *BuilderInstance) ValueFromStringType(typ gobject.Type, str string) (gobject.Value, bool, error) {
 	var carg0 *C.GtkBuilder // in, none, converted
 	var carg1 C.GType       // in, none, casted, alias
-	var carg2 *C.gchar      // in, none, string
+	var carg2 *C.char       // in, none, string, casted *C.gchar
 	var carg3 C.GValue      // out, transfer: none, C Pointers: 0, Name: Value, caller-allocates
 	var cret  C.gboolean    // return
 	var _cerr *C.GError     // out, full, converted, nullable
 
 	carg0 = (*C.GtkBuilder)(UnsafeBuilderToGlibNone(builder))
 	carg1 = C.GType(typ)
-	carg2 = (*C.gchar)(unsafe.Pointer(C.CString(str)))
+	carg2 = (*C.char)(unsafe.Pointer(C.CString(str)))
 	defer C.free(unsafe.Pointer(carg2))
 
 	cret = C.gtk_builder_value_from_string_type(carg0, carg1, carg2, &carg3, &_cerr)
@@ -22927,12 +22927,12 @@ func (area *CellAreaInstance) ApplyAttributes(treeModel TreeModel, iter *TreeIte
 func (area *CellAreaInstance) AttributeConnect(renderer CellRenderer, attribute string, column int) {
 	var carg0 *C.GtkCellArea     // in, none, converted
 	var carg1 *C.GtkCellRenderer // in, none, converted
-	var carg2 *C.gchar           // in, none, string
-	var carg3 C.int              // in, none, casted
+	var carg2 *C.char            // in, none, string, casted *C.gchar
+	var carg3 C.int              // in, none, casted, casted C.gint
 
 	carg0 = (*C.GtkCellArea)(UnsafeCellAreaToGlibNone(area))
 	carg1 = (*C.GtkCellRenderer)(UnsafeCellRendererToGlibNone(renderer))
-	carg2 = (*C.gchar)(unsafe.Pointer(C.CString(attribute)))
+	carg2 = (*C.char)(unsafe.Pointer(C.CString(attribute)))
 	defer C.free(unsafe.Pointer(carg2))
 	carg3 = C.int(column)
 
@@ -22958,11 +22958,11 @@ func (area *CellAreaInstance) AttributeConnect(renderer CellRenderer, attribute 
 func (area *CellAreaInstance) AttributeDisconnect(renderer CellRenderer, attribute string) {
 	var carg0 *C.GtkCellArea     // in, none, converted
 	var carg1 *C.GtkCellRenderer // in, none, converted
-	var carg2 *C.gchar           // in, none, string
+	var carg2 *C.char            // in, none, string, casted *C.gchar
 
 	carg0 = (*C.GtkCellArea)(UnsafeCellAreaToGlibNone(area))
 	carg1 = (*C.GtkCellRenderer)(UnsafeCellRendererToGlibNone(renderer))
-	carg2 = (*C.gchar)(unsafe.Pointer(C.CString(attribute)))
+	carg2 = (*C.char)(unsafe.Pointer(C.CString(attribute)))
 	defer C.free(unsafe.Pointer(carg2))
 
 	C.gtk_cell_area_attribute_disconnect(carg0, carg1, carg2)
@@ -22989,12 +22989,12 @@ func (area *CellAreaInstance) AttributeDisconnect(renderer CellRenderer, attribu
 func (area *CellAreaInstance) AttributeGetColumn(renderer CellRenderer, attribute string) int {
 	var carg0 *C.GtkCellArea     // in, none, converted
 	var carg1 *C.GtkCellRenderer // in, none, converted
-	var carg2 *C.gchar           // in, none, string
-	var cret  C.int              // return, none, casted
+	var carg2 *C.char            // in, none, string, casted *C.gchar
+	var cret  C.int              // return, none, casted, casted C.gint
 
 	carg0 = (*C.GtkCellArea)(UnsafeCellAreaToGlibNone(area))
 	carg1 = (*C.GtkCellRenderer)(UnsafeCellRendererToGlibNone(renderer))
-	carg2 = (*C.gchar)(unsafe.Pointer(C.CString(attribute)))
+	carg2 = (*C.char)(unsafe.Pointer(C.CString(attribute)))
 	defer C.free(unsafe.Pointer(carg2))
 
 	cret = C.gtk_cell_area_attribute_get_column(carg0, carg1, carg2)
@@ -23023,12 +23023,12 @@ func (area *CellAreaInstance) AttributeGetColumn(renderer CellRenderer, attribut
 func (area *CellAreaInstance) CellGetProperty(renderer CellRenderer, propertyName string, value *gobject.Value) {
 	var carg0 *C.GtkCellArea     // in, none, converted
 	var carg1 *C.GtkCellRenderer // in, none, converted
-	var carg2 *C.gchar           // in, none, string
+	var carg2 *C.char            // in, none, string, casted *C.gchar
 	var carg3 *C.GValue          // in, none, converted
 
 	carg0 = (*C.GtkCellArea)(UnsafeCellAreaToGlibNone(area))
 	carg1 = (*C.GtkCellRenderer)(UnsafeCellRendererToGlibNone(renderer))
-	carg2 = (*C.gchar)(unsafe.Pointer(C.CString(propertyName)))
+	carg2 = (*C.char)(unsafe.Pointer(C.CString(propertyName)))
 	defer C.free(unsafe.Pointer(carg2))
 	carg3 = (*C.GValue)(gobject.UnsafeValueToGlibNone(value))
 
@@ -23053,12 +23053,12 @@ func (area *CellAreaInstance) CellGetProperty(renderer CellRenderer, propertyNam
 func (area *CellAreaInstance) CellSetProperty(renderer CellRenderer, propertyName string, value *gobject.Value) {
 	var carg0 *C.GtkCellArea     // in, none, converted
 	var carg1 *C.GtkCellRenderer // in, none, converted
-	var carg2 *C.gchar           // in, none, string
+	var carg2 *C.char            // in, none, string, casted *C.gchar
 	var carg3 *C.GValue          // in, none, converted
 
 	carg0 = (*C.GtkCellArea)(UnsafeCellAreaToGlibNone(area))
 	carg1 = (*C.GtkCellRenderer)(UnsafeCellRendererToGlibNone(renderer))
-	carg2 = (*C.gchar)(unsafe.Pointer(C.CString(propertyName)))
+	carg2 = (*C.char)(unsafe.Pointer(C.CString(propertyName)))
 	defer C.free(unsafe.Pointer(carg2))
 	carg3 = (*C.GValue)(gobject.UnsafeValueToGlibNone(value))
 
@@ -23317,8 +23317,8 @@ func (area *CellAreaInstance) GetCellAtPosition(context CellAreaContext, widget 
 	var carg1 *C.GtkCellAreaContext // in, none, converted
 	var carg2 *C.GtkWidget          // in, none, converted
 	var carg3 *C.GdkRectangle       // in, none, converted
-	var carg4 C.int                 // in, none, casted
-	var carg5 C.int                 // in, none, casted
+	var carg4 C.int                 // in, none, casted, casted C.gint
+	var carg5 C.int                 // in, none, casted, casted C.gint
 	var carg6 C.GdkRectangle        // out, transfer: none, C Pointers: 0, Name: Rectangle, optional, caller-allocates
 	var cret  *C.GtkCellRenderer    // return, none, converted
 
@@ -23360,7 +23360,7 @@ func (area *CellAreaInstance) GetCellAtPosition(context CellAreaContext, widget 
 // subclasses.
 func (area *CellAreaInstance) GetCurrentPathString() string {
 	var carg0 *C.GtkCellArea // in, none, converted
-	var cret  *C.gchar       // return, none, string
+	var cret  *C.char        // return, none, string, casted *C.gchar
 
 	carg0 = (*C.GtkCellArea)(UnsafeCellAreaToGlibNone(area))
 
@@ -23369,7 +23369,7 @@ func (area *CellAreaInstance) GetCurrentPathString() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -23511,8 +23511,8 @@ func (area *CellAreaInstance) GetPreferredHeight(context CellAreaContext, widget
 	var carg0 *C.GtkCellArea        // in, none, converted
 	var carg1 *C.GtkCellAreaContext // in, none, converted
 	var carg2 *C.GtkWidget          // in, none, converted
-	var carg3 C.int                 // out, full, casted
-	var carg4 C.int                 // out, full, casted
+	var carg3 C.int                 // out, full, casted, casted C.gint
+	var carg4 C.int                 // out, full, casted, casted C.gint
 
 	carg0 = (*C.GtkCellArea)(UnsafeCellAreaToGlibNone(area))
 	carg1 = (*C.GtkCellAreaContext)(UnsafeCellAreaContextToGlibNone(context))
@@ -23565,9 +23565,9 @@ func (area *CellAreaInstance) GetPreferredHeightForWidth(context CellAreaContext
 	var carg0 *C.GtkCellArea        // in, none, converted
 	var carg1 *C.GtkCellAreaContext // in, none, converted
 	var carg2 *C.GtkWidget          // in, none, converted
-	var carg3 C.int                 // in, none, casted
-	var carg4 C.int                 // out, full, casted
-	var carg5 C.int                 // out, full, casted
+	var carg3 C.int                 // in, none, casted, casted C.gint
+	var carg4 C.int                 // out, full, casted, casted C.gint
+	var carg5 C.int                 // out, full, casted, casted C.gint
 
 	carg0 = (*C.GtkCellArea)(UnsafeCellAreaToGlibNone(area))
 	carg1 = (*C.GtkCellAreaContext)(UnsafeCellAreaContextToGlibNone(context))
@@ -23614,8 +23614,8 @@ func (area *CellAreaInstance) GetPreferredWidth(context CellAreaContext, widget 
 	var carg0 *C.GtkCellArea        // in, none, converted
 	var carg1 *C.GtkCellAreaContext // in, none, converted
 	var carg2 *C.GtkWidget          // in, none, converted
-	var carg3 C.int                 // out, full, casted
-	var carg4 C.int                 // out, full, casted
+	var carg3 C.int                 // out, full, casted, casted C.gint
+	var carg4 C.int                 // out, full, casted, casted C.gint
 
 	carg0 = (*C.GtkCellArea)(UnsafeCellAreaToGlibNone(area))
 	carg1 = (*C.GtkCellAreaContext)(UnsafeCellAreaContextToGlibNone(context))
@@ -23668,9 +23668,9 @@ func (area *CellAreaInstance) GetPreferredWidthForHeight(context CellAreaContext
 	var carg0 *C.GtkCellArea        // in, none, converted
 	var carg1 *C.GtkCellAreaContext // in, none, converted
 	var carg2 *C.GtkWidget          // in, none, converted
-	var carg3 C.int                 // in, none, casted
-	var carg4 C.int                 // out, full, casted
-	var carg5 C.int                 // out, full, casted
+	var carg3 C.int                 // in, none, casted, casted C.gint
+	var carg4 C.int                 // out, full, casted, casted C.gint
+	var carg5 C.int                 // out, full, casted, casted C.gint
 
 	carg0 = (*C.GtkCellArea)(UnsafeCellAreaToGlibNone(area))
 	carg1 = (*C.GtkCellAreaContext)(UnsafeCellAreaContextToGlibNone(context))
@@ -23930,9 +23930,9 @@ func (area *CellAreaInstance) RequestRenderer(renderer CellRenderer, orientation
 	var carg1 *C.GtkCellRenderer // in, none, converted
 	var carg2 C.GtkOrientation   // in, none, casted
 	var carg3 *C.GtkWidget       // in, none, converted
-	var carg4 C.int              // in, none, casted
-	var carg5 C.int              // out, full, casted
-	var carg6 C.int              // out, full, casted
+	var carg4 C.int              // in, none, casted, casted C.gint
+	var carg5 C.int              // out, full, casted, casted C.gint
+	var carg6 C.int              // out, full, casted, casted C.gint
 
 	carg0 = (*C.GtkCellArea)(UnsafeCellAreaToGlibNone(area))
 	carg1 = (*C.GtkCellRenderer)(UnsafeCellRendererToGlibNone(renderer))
@@ -24221,7 +24221,7 @@ func NewCellAreaBoxInstance() CellArea {
 // Deprecated: (since 4.10.0) 
 func (box *CellAreaBoxInstance) GetSpacing() int {
 	var carg0 *C.GtkCellAreaBox // in, none, converted
-	var cret  C.int             // return, none, casted
+	var cret  C.int             // return, none, casted, casted C.gint
 
 	carg0 = (*C.GtkCellAreaBox)(UnsafeCellAreaBoxToGlibNone(box))
 
@@ -24332,7 +24332,7 @@ func (box *CellAreaBoxInstance) PackStart(renderer CellRenderer, expand bool, al
 // Deprecated: (since 4.10.0) 
 func (box *CellAreaBoxInstance) SetSpacing(spacing int) {
 	var carg0 *C.GtkCellAreaBox // in, none, converted
-	var carg1 C.int             // in, none, casted
+	var carg1 C.int             // in, none, casted, casted C.gint
 
 	carg0 = (*C.GtkCellAreaBox)(UnsafeCellAreaBoxToGlibNone(box))
 	carg1 = C.int(spacing)
@@ -24610,8 +24610,8 @@ func UnsafeCellAreaContextToGlibFull(c CellAreaContext) unsafe.Pointer {
 // Deprecated: (since 4.10.0) This object will be removed in GTK 5
 func (context *CellAreaContextInstance) Allocate(width int, height int) {
 	var carg0 *C.GtkCellAreaContext // in, none, converted
-	var carg1 C.int                 // in, none, casted
-	var carg2 C.int                 // in, none, casted
+	var carg1 C.int                 // in, none, casted, casted C.gint
+	var carg2 C.int                 // in, none, casted, casted C.gint
 
 	carg0 = (*C.GtkCellAreaContext)(UnsafeCellAreaContextToGlibNone(context))
 	carg1 = C.int(width)
@@ -24638,8 +24638,8 @@ func (context *CellAreaContextInstance) Allocate(width int, height int) {
 // Deprecated: (since 4.10.0) This object will be removed in GTK 5
 func (context *CellAreaContextInstance) GetAllocation() (int, int) {
 	var carg0 *C.GtkCellAreaContext // in, none, converted
-	var carg1 C.int                 // out, full, casted
-	var carg2 C.int                 // out, full, casted
+	var carg1 C.int                 // out, full, casted, casted C.gint
+	var carg2 C.int                 // out, full, casted, casted C.gint
 
 	carg0 = (*C.GtkCellAreaContext)(UnsafeCellAreaContextToGlibNone(context))
 
@@ -24703,8 +24703,8 @@ func (context *CellAreaContextInstance) GetArea() CellArea {
 // Deprecated: (since 4.10.0) This object will be removed in GTK 5
 func (context *CellAreaContextInstance) GetPreferredHeight() (int, int) {
 	var carg0 *C.GtkCellAreaContext // in, none, converted
-	var carg1 C.int                 // out, full, casted
-	var carg2 C.int                 // out, full, casted
+	var carg1 C.int                 // out, full, casted, casted C.gint
+	var carg2 C.int                 // out, full, casted, casted C.gint
 
 	carg0 = (*C.GtkCellAreaContext)(UnsafeCellAreaContextToGlibNone(context))
 
@@ -24740,9 +24740,9 @@ func (context *CellAreaContextInstance) GetPreferredHeight() (int, int) {
 // Deprecated: (since 4.10.0) This object will be removed in GTK 5
 func (context *CellAreaContextInstance) GetPreferredHeightForWidth(width int) (int, int) {
 	var carg0 *C.GtkCellAreaContext // in, none, converted
-	var carg1 C.int                 // in, none, casted
-	var carg2 C.int                 // out, full, casted
-	var carg3 C.int                 // out, full, casted
+	var carg1 C.int                 // in, none, casted, casted C.gint
+	var carg2 C.int                 // out, full, casted, casted C.gint
+	var carg3 C.int                 // out, full, casted, casted C.gint
 
 	carg0 = (*C.GtkCellAreaContext)(UnsafeCellAreaContextToGlibNone(context))
 	carg1 = C.int(width)
@@ -24775,8 +24775,8 @@ func (context *CellAreaContextInstance) GetPreferredHeightForWidth(width int) (i
 // Deprecated: (since 4.10.0) This object will be removed in GTK 5
 func (context *CellAreaContextInstance) GetPreferredWidth() (int, int) {
 	var carg0 *C.GtkCellAreaContext // in, none, converted
-	var carg1 C.int                 // out, full, casted
-	var carg2 C.int                 // out, full, casted
+	var carg1 C.int                 // out, full, casted, casted C.gint
+	var carg2 C.int                 // out, full, casted, casted C.gint
 
 	carg0 = (*C.GtkCellAreaContext)(UnsafeCellAreaContextToGlibNone(context))
 
@@ -24812,9 +24812,9 @@ func (context *CellAreaContextInstance) GetPreferredWidth() (int, int) {
 // Deprecated: (since 4.10.0) This object will be removed in GTK 5
 func (context *CellAreaContextInstance) GetPreferredWidthForHeight(height int) (int, int) {
 	var carg0 *C.GtkCellAreaContext // in, none, converted
-	var carg1 C.int                 // in, none, casted
-	var carg2 C.int                 // out, full, casted
-	var carg3 C.int                 // out, full, casted
+	var carg1 C.int                 // in, none, casted, casted C.gint
+	var carg2 C.int                 // out, full, casted, casted C.gint
+	var carg3 C.int                 // out, full, casted, casted C.gint
 
 	carg0 = (*C.GtkCellAreaContext)(UnsafeCellAreaContextToGlibNone(context))
 	carg1 = C.int(height)
@@ -24850,8 +24850,8 @@ func (context *CellAreaContextInstance) GetPreferredWidthForHeight(height int) (
 // Deprecated: (since 4.10.0) This object will be removed in GTK 5
 func (context *CellAreaContextInstance) PushPreferredHeight(minimumHeight int, naturalHeight int) {
 	var carg0 *C.GtkCellAreaContext // in, none, converted
-	var carg1 C.int                 // in, none, casted
-	var carg2 C.int                 // in, none, casted
+	var carg1 C.int                 // in, none, casted, casted C.gint
+	var carg2 C.int                 // in, none, casted, casted C.gint
 
 	carg0 = (*C.GtkCellAreaContext)(UnsafeCellAreaContextToGlibNone(context))
 	carg1 = C.int(minimumHeight)
@@ -24881,8 +24881,8 @@ func (context *CellAreaContextInstance) PushPreferredHeight(minimumHeight int, n
 // Deprecated: (since 4.10.0) This object will be removed in GTK 5
 func (context *CellAreaContextInstance) PushPreferredWidth(minimumWidth int, naturalWidth int) {
 	var carg0 *C.GtkCellAreaContext // in, none, converted
-	var carg1 C.int                 // in, none, casted
-	var carg2 C.int                 // in, none, casted
+	var carg1 C.int                 // in, none, casted, casted C.gint
+	var carg2 C.int                 // in, none, casted, casted C.gint
 
 	carg0 = (*C.GtkCellAreaContext)(UnsafeCellAreaContextToGlibNone(context))
 	carg1 = C.int(minimumWidth)
@@ -25386,8 +25386,8 @@ func (cell *CellRendererInstance) GetAlignedArea(widget Widget, flags CellRender
 // Deprecated: (since 4.10.0) 
 func (cell *CellRendererInstance) GetAlignment() (float32, float32) {
 	var carg0 *C.GtkCellRenderer // in, none, converted
-	var carg1 C.gfloat           // out, full, casted
-	var carg2 C.gfloat           // out, full, casted
+	var carg1 C.float            // out, full, casted, casted C.gfloat
+	var carg2 C.float            // out, full, casted, casted C.gfloat
 
 	carg0 = (*C.GtkCellRenderer)(UnsafeCellRendererToGlibNone(cell))
 
@@ -25414,8 +25414,8 @@ func (cell *CellRendererInstance) GetAlignment() (float32, float32) {
 // Deprecated: (since 4.10.0) 
 func (cell *CellRendererInstance) GetFixedSize() (int, int) {
 	var carg0 *C.GtkCellRenderer // in, none, converted
-	var carg1 C.int              // out, full, casted
-	var carg2 C.int              // out, full, casted
+	var carg1 C.int              // out, full, casted, casted C.gint
+	var carg2 C.int              // out, full, casted, casted C.gint
 
 	carg0 = (*C.GtkCellRenderer)(UnsafeCellRendererToGlibNone(cell))
 
@@ -25494,8 +25494,8 @@ func (cell *CellRendererInstance) GetIsExpander() bool {
 // Deprecated: (since 4.10.0) 
 func (cell *CellRendererInstance) GetPadding() (int, int) {
 	var carg0 *C.GtkCellRenderer // in, none, converted
-	var carg1 C.int              // out, full, casted
-	var carg2 C.int              // out, full, casted
+	var carg1 C.int              // out, full, casted, casted C.gint
+	var carg2 C.int              // out, full, casted, casted C.gint
 
 	carg0 = (*C.GtkCellRenderer)(UnsafeCellRendererToGlibNone(cell))
 
@@ -25528,8 +25528,8 @@ func (cell *CellRendererInstance) GetPadding() (int, int) {
 func (cell *CellRendererInstance) GetPreferredHeight(widget Widget) (int, int) {
 	var carg0 *C.GtkCellRenderer // in, none, converted
 	var carg1 *C.GtkWidget       // in, none, converted
-	var carg2 C.int              // out, full, casted
-	var carg3 C.int              // out, full, casted
+	var carg2 C.int              // out, full, casted, casted C.gint
+	var carg3 C.int              // out, full, casted, casted C.gint
 
 	carg0 = (*C.GtkCellRenderer)(UnsafeCellRendererToGlibNone(cell))
 	carg1 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(widget))
@@ -25566,9 +25566,9 @@ func (cell *CellRendererInstance) GetPreferredHeight(widget Widget) (int, int) {
 func (cell *CellRendererInstance) GetPreferredHeightForWidth(widget Widget, width int) (int, int) {
 	var carg0 *C.GtkCellRenderer // in, none, converted
 	var carg1 *C.GtkWidget       // in, none, converted
-	var carg2 C.int              // in, none, casted
-	var carg3 C.int              // out, full, casted
-	var carg4 C.int              // out, full, casted
+	var carg2 C.int              // in, none, casted, casted C.gint
+	var carg3 C.int              // out, full, casted, casted C.gint
+	var carg4 C.int              // out, full, casted, casted C.gint
 
 	carg0 = (*C.GtkCellRenderer)(UnsafeCellRendererToGlibNone(cell))
 	carg1 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(widget))
@@ -25646,8 +25646,8 @@ func (cell *CellRendererInstance) GetPreferredSize(widget Widget) (Requisition, 
 func (cell *CellRendererInstance) GetPreferredWidth(widget Widget) (int, int) {
 	var carg0 *C.GtkCellRenderer // in, none, converted
 	var carg1 *C.GtkWidget       // in, none, converted
-	var carg2 C.int              // out, full, casted
-	var carg3 C.int              // out, full, casted
+	var carg2 C.int              // out, full, casted, casted C.gint
+	var carg3 C.int              // out, full, casted, casted C.gint
 
 	carg0 = (*C.GtkCellRenderer)(UnsafeCellRendererToGlibNone(cell))
 	carg1 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(widget))
@@ -25684,9 +25684,9 @@ func (cell *CellRendererInstance) GetPreferredWidth(widget Widget) (int, int) {
 func (cell *CellRendererInstance) GetPreferredWidthForHeight(widget Widget, height int) (int, int) {
 	var carg0 *C.GtkCellRenderer // in, none, converted
 	var carg1 *C.GtkWidget       // in, none, converted
-	var carg2 C.int              // in, none, casted
-	var carg3 C.int              // out, full, casted
-	var carg4 C.int              // out, full, casted
+	var carg2 C.int              // in, none, casted, casted C.gint
+	var carg3 C.int              // out, full, casted, casted C.gint
+	var carg4 C.int              // out, full, casted, casted C.gint
 
 	carg0 = (*C.GtkCellRenderer)(UnsafeCellRendererToGlibNone(cell))
 	carg1 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(widget))
@@ -25861,12 +25861,12 @@ func (cell *CellRendererInstance) IsActivatable() bool {
 // Deprecated: (since 4.10.0) 
 func (cell *CellRendererInstance) SetAlignment(xalign float32, yalign float32) {
 	var carg0 *C.GtkCellRenderer // in, none, converted
-	var carg1 C.gfloat           // in, none, casted
-	var carg2 C.gfloat           // in, none, casted
+	var carg1 C.float            // in, none, casted, casted C.gfloat
+	var carg2 C.float            // in, none, casted, casted C.gfloat
 
 	carg0 = (*C.GtkCellRenderer)(UnsafeCellRendererToGlibNone(cell))
-	carg1 = C.gfloat(xalign)
-	carg2 = C.gfloat(yalign)
+	carg1 = C.float(xalign)
+	carg2 = C.float(yalign)
 
 	C.gtk_cell_renderer_set_alignment(carg0, carg1, carg2)
 	runtime.KeepAlive(cell)
@@ -25886,8 +25886,8 @@ func (cell *CellRendererInstance) SetAlignment(xalign float32, yalign float32) {
 // Deprecated: (since 4.10.0) 
 func (cell *CellRendererInstance) SetFixedSize(width int, height int) {
 	var carg0 *C.GtkCellRenderer // in, none, converted
-	var carg1 C.int              // in, none, casted
-	var carg2 C.int              // in, none, casted
+	var carg1 C.int              // in, none, casted, casted C.gint
+	var carg2 C.int              // in, none, casted, casted C.gint
 
 	carg0 = (*C.GtkCellRenderer)(UnsafeCellRendererToGlibNone(cell))
 	carg1 = C.int(width)
@@ -25957,8 +25957,8 @@ func (cell *CellRendererInstance) SetIsExpander(isExpander bool) {
 // Deprecated: (since 4.10.0) 
 func (cell *CellRendererInstance) SetPadding(xpad int, ypad int) {
 	var carg0 *C.GtkCellRenderer // in, none, converted
-	var carg1 C.int              // in, none, casted
-	var carg2 C.int              // in, none, casted
+	var carg1 C.int              // in, none, casted, casted C.gint
+	var carg2 C.int              // in, none, casted, casted C.gint
 
 	carg0 = (*C.GtkCellRenderer)(UnsafeCellRendererToGlibNone(cell))
 	carg1 = C.int(xpad)
@@ -26478,7 +26478,7 @@ func NewCellRendererTextInstance() CellRenderer {
 // Deprecated: (since 4.10.0) 
 func (renderer *CellRendererTextInstance) SetFixedHeightFromFont(numberOfRows int) {
 	var carg0 *C.GtkCellRendererText // in, none, converted
-	var carg1 C.int                  // in, none, casted
+	var carg1 C.int                  // in, none, casted, casted C.gint
 
 	carg0 = (*C.GtkCellRendererText)(UnsafeCellRendererTextToGlibNone(renderer))
 	carg1 = C.int(numberOfRows)
@@ -27068,7 +27068,7 @@ func (self *ColorDialogInstance) GetModal() bool {
 // color chooser dialog.
 func (self *ColorDialogInstance) GetTitle() string {
 	var carg0 *C.GtkColorDialog // in, none, converted
-	var cret  *C.gchar          // return, none, string
+	var cret  *C.char           // return, none, string, casted *C.gchar
 
 	carg0 = (*C.GtkColorDialog)(UnsafeColorDialogToGlibNone(self))
 
@@ -27077,7 +27077,7 @@ func (self *ColorDialogInstance) GetTitle() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -27139,10 +27139,10 @@ func (self *ColorDialogInstance) SetModal(modal bool) {
 // color chooser dialog.
 func (self *ColorDialogInstance) SetTitle(title string) {
 	var carg0 *C.GtkColorDialog // in, none, converted
-	var carg1 *C.gchar          // in, none, string
+	var carg1 *C.char           // in, none, string, casted *C.gchar
 
 	carg0 = (*C.GtkColorDialog)(UnsafeColorDialogToGlibNone(self))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(title)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(title)))
 	defer C.free(unsafe.Pointer(carg1))
 
 	C.gtk_color_dialog_set_title(carg0, carg1)
@@ -27429,12 +27429,12 @@ func UnsafeColumnViewColumnToGlibFull(c ColumnViewColumn) unsafe.Pointer {
 //   gtk_builder_list_item_factory_new_from_resource ("/name.ui"));
 // ```
 func NewColumnViewColumnInstance(title string, factory ListItemFactory) ColumnViewColumn {
-	var carg1 *C.gchar               // in, none, string, nullable-string
+	var carg1 *C.char                // in, none, string, nullable-string
 	var carg2 *C.GtkListItemFactory  // in, full, converted, nullable
 	var cret  *C.GtkColumnViewColumn // return, full, converted
 
 	if title != "" {
-		carg1 = (*C.gchar)(unsafe.Pointer(C.CString(title)))
+		carg1 = (*C.char)(unsafe.Pointer(C.CString(title)))
 		defer C.free(unsafe.Pointer(carg1))
 	}
 	if factory != nil {
@@ -27531,7 +27531,7 @@ func (self *ColumnViewColumnInstance) GetFactory() ListItemFactory {
 // Gets the fixed width of the column.
 func (self *ColumnViewColumnInstance) GetFixedWidth() int {
 	var carg0 *C.GtkColumnViewColumn // in, none, converted
-	var cret  C.int                  // return, none, casted
+	var cret  C.int                  // return, none, casted, casted C.gint
 
 	carg0 = (*C.GtkColumnViewColumn)(UnsafeColumnViewColumnToGlibNone(self))
 
@@ -27576,7 +27576,7 @@ func (self *ColumnViewColumnInstance) GetHeaderMenu() gio.MenuModel {
 // Returns the ID set with gtk_column_view_column_set_id().
 func (self *ColumnViewColumnInstance) GetID() string {
 	var carg0 *C.GtkColumnViewColumn // in, none, converted
-	var cret  *C.gchar               // return, none, string
+	var cret  *C.char                // return, none, string, casted *C.gchar
 
 	carg0 = (*C.GtkColumnViewColumn)(UnsafeColumnViewColumnToGlibNone(self))
 
@@ -27585,7 +27585,7 @@ func (self *ColumnViewColumnInstance) GetID() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -27644,7 +27644,7 @@ func (self *ColumnViewColumnInstance) GetSorter() Sorter {
 // Returns the title set with gtk_column_view_column_set_title().
 func (self *ColumnViewColumnInstance) GetTitle() string {
 	var carg0 *C.GtkColumnViewColumn // in, none, converted
-	var cret  *C.gchar               // return, none, string
+	var cret  *C.char                // return, none, string, casted *C.gchar
 
 	carg0 = (*C.GtkColumnViewColumn)(UnsafeColumnViewColumnToGlibNone(self))
 
@@ -27653,7 +27653,7 @@ func (self *ColumnViewColumnInstance) GetTitle() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -27741,7 +27741,7 @@ func (self *ColumnViewColumnInstance) SetFactory(factory ListItemFactory) {
 // width. Interactive resizing also sets the “fixed-width” property.
 func (self *ColumnViewColumnInstance) SetFixedWidth(fixedWidth int) {
 	var carg0 *C.GtkColumnViewColumn // in, none, converted
-	var carg1 C.int                  // in, none, casted
+	var carg1 C.int                  // in, none, casted, casted C.gint
 
 	carg0 = (*C.GtkColumnViewColumn)(UnsafeColumnViewColumnToGlibNone(self))
 	carg1 = C.int(fixedWidth)
@@ -27787,11 +27787,11 @@ func (self *ColumnViewColumnInstance) SetHeaderMenu(menu gio.MenuModel) {
 // It is up to callers to ensure uniqueness of IDs.
 func (self *ColumnViewColumnInstance) SetID(id string) {
 	var carg0 *C.GtkColumnViewColumn // in, none, converted
-	var carg1 *C.gchar               // in, none, string, nullable-string
+	var carg1 *C.char                // in, none, string, nullable-string
 
 	carg0 = (*C.GtkColumnViewColumn)(UnsafeColumnViewColumnToGlibNone(self))
 	if id != "" {
-		carg1 = (*C.gchar)(unsafe.Pointer(C.CString(id)))
+		carg1 = (*C.char)(unsafe.Pointer(C.CString(id)))
 		defer C.free(unsafe.Pointer(carg1))
 	}
 
@@ -27864,11 +27864,11 @@ func (self *ColumnViewColumnInstance) SetSorter(sorter Sorter) {
 // be translated.
 func (self *ColumnViewColumnInstance) SetTitle(title string) {
 	var carg0 *C.GtkColumnViewColumn // in, none, converted
-	var carg1 *C.gchar               // in, none, string, nullable-string
+	var carg1 *C.char                // in, none, string, nullable-string
 
 	carg0 = (*C.GtkColumnViewColumn)(UnsafeColumnViewColumnToGlibNone(self))
 	if title != "" {
-		carg1 = (*C.gchar)(unsafe.Pointer(C.CString(title)))
+		carg1 = (*C.char)(unsafe.Pointer(C.CString(title)))
 		defer C.free(unsafe.Pointer(carg1))
 	}
 
@@ -28096,7 +28096,7 @@ func UnsafeColumnViewRowToGlibFull(c ColumnViewRow) unsafe.Pointer {
 // Gets the accessible description of @self.
 func (self *ColumnViewRowInstance) GetAccessibleDescription() string {
 	var carg0 *C.GtkColumnViewRow // in, none, converted
-	var cret  *C.gchar            // return, none, string
+	var cret  *C.char             // return, none, string, casted *C.gchar
 
 	carg0 = (*C.GtkColumnViewRow)(UnsafeColumnViewRowToGlibNone(self))
 
@@ -28105,7 +28105,7 @@ func (self *ColumnViewRowInstance) GetAccessibleDescription() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -28118,7 +28118,7 @@ func (self *ColumnViewRowInstance) GetAccessibleDescription() string {
 // Gets the accessible label of @self.
 func (self *ColumnViewRowInstance) GetAccessibleLabel() string {
 	var carg0 *C.GtkColumnViewRow // in, none, converted
-	var cret  *C.gchar            // return, none, string
+	var cret  *C.char             // return, none, string, casted *C.gchar
 
 	carg0 = (*C.GtkColumnViewRow)(UnsafeColumnViewRowToGlibNone(self))
 
@@ -28127,7 +28127,7 @@ func (self *ColumnViewRowInstance) GetAccessibleLabel() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -28294,10 +28294,10 @@ func (self *ColumnViewRowInstance) GetSelected() bool {
 // which may be used by e.g. screen readers.
 func (self *ColumnViewRowInstance) SetAccessibleDescription(description string) {
 	var carg0 *C.GtkColumnViewRow // in, none, converted
-	var carg1 *C.gchar            // in, none, string
+	var carg1 *C.char             // in, none, string, casted *C.gchar
 
 	carg0 = (*C.GtkColumnViewRow)(UnsafeColumnViewRowToGlibNone(self))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(description)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(description)))
 	defer C.free(unsafe.Pointer(carg1))
 
 	C.gtk_column_view_row_set_accessible_description(carg0, carg1)
@@ -28315,10 +28315,10 @@ func (self *ColumnViewRowInstance) SetAccessibleDescription(description string) 
 // which may be used by e.g. screen readers.
 func (self *ColumnViewRowInstance) SetAccessibleLabel(label string) {
 	var carg0 *C.GtkColumnViewRow // in, none, converted
-	var carg1 *C.gchar            // in, none, string
+	var carg1 *C.char             // in, none, string, casted *C.gchar
 
 	carg0 = (*C.GtkColumnViewRow)(UnsafeColumnViewRowToGlibNone(self))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(label)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(label)))
 	defer C.free(unsafe.Pointer(carg1))
 
 	C.gtk_column_view_row_set_accessible_label(carg0, carg1)
@@ -28593,9 +28593,9 @@ func NewConstraintInstance(target unsafe.Pointer, targetAttribute ConstraintAttr
 	var carg3 C.GtkConstraintRelation  // in, none, casted
 	var carg4 C.gpointer               // in, none, casted, nullable
 	var carg5 C.GtkConstraintAttribute // in, none, casted
-	var carg6 C.gdouble                // in, none, casted
-	var carg7 C.gdouble                // in, none, casted
-	var carg8 C.int                    // in, none, casted
+	var carg6 C.double                 // in, none, casted, casted C.gdouble
+	var carg7 C.double                 // in, none, casted, casted C.gdouble
+	var carg8 C.int                    // in, none, casted, casted C.gint
 	var cret  *C.GtkConstraint         // return, full, converted
 
 	if target != nil {
@@ -28607,8 +28607,8 @@ func NewConstraintInstance(target unsafe.Pointer, targetAttribute ConstraintAttr
 		carg4 = C.gpointer(source)
 	}
 	carg5 = C.GtkConstraintAttribute(sourceAttribute)
-	carg6 = C.gdouble(multiplier)
-	carg7 = C.gdouble(constant)
+	carg6 = C.double(multiplier)
+	carg7 = C.double(constant)
 	carg8 = C.int(strength)
 
 	cret = C.gtk_constraint_new(carg1, carg2, carg3, carg4, carg5, carg6, carg7, carg8)
@@ -28648,8 +28648,8 @@ func NewConstraintInstanceConstant(target unsafe.Pointer, targetAttribute Constr
 	var carg1 C.gpointer               // in, none, casted, nullable
 	var carg2 C.GtkConstraintAttribute // in, none, casted
 	var carg3 C.GtkConstraintRelation  // in, none, casted
-	var carg4 C.gdouble                // in, none, casted
-	var carg5 C.int                    // in, none, casted
+	var carg4 C.double                 // in, none, casted, casted C.gdouble
+	var carg5 C.int                    // in, none, casted, casted C.gint
 	var cret  *C.GtkConstraint         // return, full, converted
 
 	if target != nil {
@@ -28657,7 +28657,7 @@ func NewConstraintInstanceConstant(target unsafe.Pointer, targetAttribute Constr
 	}
 	carg2 = C.GtkConstraintAttribute(targetAttribute)
 	carg3 = C.GtkConstraintRelation(relation)
-	carg4 = C.gdouble(constant)
+	carg4 = C.double(constant)
 	carg5 = C.int(strength)
 
 	cret = C.gtk_constraint_new_constant(carg1, carg2, carg3, carg4, carg5)
@@ -28682,7 +28682,7 @@ func NewConstraintInstanceConstant(target unsafe.Pointer, targetAttribute Constr
 // Retrieves the constant factor added to the source attributes' value.
 func (constraint *ConstraintInstance) GetConstant() float64 {
 	var carg0 *C.GtkConstraint // in, none, converted
-	var cret  C.gdouble        // return, none, casted
+	var cret  C.double         // return, none, casted, casted C.gdouble
 
 	carg0 = (*C.GtkConstraint)(UnsafeConstraintToGlibNone(constraint))
 
@@ -28705,7 +28705,7 @@ func (constraint *ConstraintInstance) GetConstant() float64 {
 // attribute's value.
 func (constraint *ConstraintInstance) GetMultiplier() float64 {
 	var carg0 *C.GtkConstraint // in, none, converted
-	var cret  C.gdouble        // return, none, casted
+	var cret  C.double         // return, none, casted, casted C.gdouble
 
 	carg0 = (*C.GtkConstraint)(UnsafeConstraintToGlibNone(constraint))
 
@@ -28797,7 +28797,7 @@ func (constraint *ConstraintInstance) GetSourceAttribute() ConstraintAttribute {
 // Retrieves the strength of the constraint.
 func (constraint *ConstraintInstance) GetStrength() int {
 	var carg0 *C.GtkConstraint // in, none, converted
-	var cret  C.int            // return, none, casted
+	var cret  C.int            // return, none, casted, casted C.gint
 
 	carg0 = (*C.GtkConstraint)(UnsafeConstraintToGlibNone(constraint))
 
@@ -29116,8 +29116,8 @@ func NewConstraintGuideInstance() ConstraintGuide {
 // Gets the maximum size of @guide.
 func (guide *ConstraintGuideInstance) GetMaxSize() (int, int) {
 	var carg0 *C.GtkConstraintGuide // in, none, converted
-	var carg1 C.int                 // out, full, casted
-	var carg2 C.int                 // out, full, casted
+	var carg1 C.int                 // out, full, casted, casted C.gint
+	var carg2 C.int                 // out, full, casted, casted C.gint
 
 	carg0 = (*C.GtkConstraintGuide)(UnsafeConstraintGuideToGlibNone(guide))
 
@@ -29142,8 +29142,8 @@ func (guide *ConstraintGuideInstance) GetMaxSize() (int, int) {
 // Gets the minimum size of @guide.
 func (guide *ConstraintGuideInstance) GetMinSize() (int, int) {
 	var carg0 *C.GtkConstraintGuide // in, none, converted
-	var carg1 C.int                 // out, full, casted
-	var carg2 C.int                 // out, full, casted
+	var carg1 C.int                 // out, full, casted, casted C.gint
+	var carg2 C.int                 // out, full, casted, casted C.gint
 
 	carg0 = (*C.GtkConstraintGuide)(UnsafeConstraintGuideToGlibNone(guide))
 
@@ -29167,7 +29167,7 @@ func (guide *ConstraintGuideInstance) GetMinSize() (int, int) {
 // Retrieves the name set using gtk_constraint_guide_set_name().
 func (guide *ConstraintGuideInstance) GetName() string {
 	var carg0 *C.GtkConstraintGuide // in, none, converted
-	var cret  *C.gchar              // return, none, string
+	var cret  *C.char               // return, none, string, casted *C.gchar
 
 	carg0 = (*C.GtkConstraintGuide)(UnsafeConstraintGuideToGlibNone(guide))
 
@@ -29176,7 +29176,7 @@ func (guide *ConstraintGuideInstance) GetName() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -29190,8 +29190,8 @@ func (guide *ConstraintGuideInstance) GetName() string {
 // Gets the natural size of @guide.
 func (guide *ConstraintGuideInstance) GetNatSize() (int, int) {
 	var carg0 *C.GtkConstraintGuide // in, none, converted
-	var carg1 C.int                 // out, full, casted
-	var carg2 C.int                 // out, full, casted
+	var carg1 C.int                 // out, full, casted, casted C.gint
+	var carg2 C.int                 // out, full, casted, casted C.gint
 
 	carg0 = (*C.GtkConstraintGuide)(UnsafeConstraintGuideToGlibNone(guide))
 
@@ -29242,8 +29242,8 @@ func (guide *ConstraintGuideInstance) GetStrength() ConstraintStrength {
 // the constraints will be updated to reflect the new size.
 func (guide *ConstraintGuideInstance) SetMaxSize(width int, height int) {
 	var carg0 *C.GtkConstraintGuide // in, none, converted
-	var carg1 C.int                 // in, none, casted
-	var carg2 C.int                 // in, none, casted
+	var carg1 C.int                 // in, none, casted, casted C.gint
+	var carg2 C.int                 // in, none, casted, casted C.gint
 
 	carg0 = (*C.GtkConstraintGuide)(UnsafeConstraintGuideToGlibNone(guide))
 	carg1 = C.int(width)
@@ -29268,8 +29268,8 @@ func (guide *ConstraintGuideInstance) SetMaxSize(width int, height int) {
 // the constraints will be updated to reflect the new size.
 func (guide *ConstraintGuideInstance) SetMinSize(width int, height int) {
 	var carg0 *C.GtkConstraintGuide // in, none, converted
-	var carg1 C.int                 // in, none, casted
-	var carg2 C.int                 // in, none, casted
+	var carg1 C.int                 // in, none, casted, casted C.gint
+	var carg2 C.int                 // in, none, casted, casted C.gint
 
 	carg0 = (*C.GtkConstraintGuide)(UnsafeConstraintGuideToGlibNone(guide))
 	carg1 = C.int(width)
@@ -29292,11 +29292,11 @@ func (guide *ConstraintGuideInstance) SetMinSize(width int, height int) {
 // The name is useful for debugging purposes.
 func (guide *ConstraintGuideInstance) SetName(name string) {
 	var carg0 *C.GtkConstraintGuide // in, none, converted
-	var carg1 *C.gchar              // in, none, string, nullable-string
+	var carg1 *C.char               // in, none, string, nullable-string
 
 	carg0 = (*C.GtkConstraintGuide)(UnsafeConstraintGuideToGlibNone(guide))
 	if name != "" {
-		carg1 = (*C.gchar)(unsafe.Pointer(C.CString(name)))
+		carg1 = (*C.char)(unsafe.Pointer(C.CString(name)))
 		defer C.free(unsafe.Pointer(carg1))
 	}
 
@@ -29318,8 +29318,8 @@ func (guide *ConstraintGuideInstance) SetName(name string) {
 // the constraints will be updated to reflect the new size.
 func (guide *ConstraintGuideInstance) SetNatSize(width int, height int) {
 	var carg0 *C.GtkConstraintGuide // in, none, converted
-	var carg1 C.int                 // in, none, casted
-	var carg2 C.int                 // in, none, casted
+	var carg1 C.int                 // in, none, casted, casted C.gint
+	var carg2 C.int                 // in, none, casted, casted C.gint
 
 	carg0 = (*C.GtkConstraintGuide)(UnsafeConstraintGuideToGlibNone(guide))
 	carg1 = C.int(width)
@@ -29576,11 +29576,11 @@ func (cssProvider *CssProviderInstance) LoadFromBytes(data *glib.Bytes) {
 //   or [method@Gtk.CssProvider.load_from_bytes] instead
 func (cssProvider *CssProviderInstance) LoadFromData(data string, length int) {
 	var carg0 *C.GtkCssProvider // in, none, converted
-	var carg1 *C.gchar          // in, none, string
+	var carg1 *C.char           // in, none, string, casted *C.gchar
 	var carg2 C.gssize          // in, none, casted
 
 	carg0 = (*C.GtkCssProvider)(UnsafeCssProviderToGlibNone(cssProvider))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(data)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(data)))
 	defer C.free(unsafe.Pointer(carg1))
 	carg2 = C.gssize(length)
 
@@ -29622,10 +29622,10 @@ func (cssProvider *CssProviderInstance) LoadFromFile(file gio.File) {
 // This clears any previously loaded information.
 func (cssProvider *CssProviderInstance) LoadFromPath(path string) {
 	var carg0 *C.GtkCssProvider // in, none, converted
-	var carg1 *C.gchar          // in, none, string
+	var carg1 *C.char           // in, none, string, casted *C.gchar
 
 	carg0 = (*C.GtkCssProvider)(UnsafeCssProviderToGlibNone(cssProvider))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(path)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(path)))
 	defer C.free(unsafe.Pointer(carg1))
 
 	C.gtk_css_provider_load_from_path(carg0, carg1)
@@ -29645,10 +29645,10 @@ func (cssProvider *CssProviderInstance) LoadFromPath(path string) {
 // This clears any previously loaded information.
 func (cssProvider *CssProviderInstance) LoadFromResource(resourcePath string) {
 	var carg0 *C.GtkCssProvider // in, none, converted
-	var carg1 *C.gchar          // in, none, string
+	var carg1 *C.char           // in, none, string, casted *C.gchar
 
 	carg0 = (*C.GtkCssProvider)(UnsafeCssProviderToGlibNone(cssProvider))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(resourcePath)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(resourcePath)))
 	defer C.free(unsafe.Pointer(carg1))
 
 	C.gtk_css_provider_load_from_resource(carg0, carg1)
@@ -29667,10 +29667,10 @@ func (cssProvider *CssProviderInstance) LoadFromResource(resourcePath string) {
 // This clears any previously loaded information.
 func (cssProvider *CssProviderInstance) LoadFromString(str string) {
 	var carg0 *C.GtkCssProvider // in, none, converted
-	var carg1 *C.gchar          // in, none, string
+	var carg1 *C.char           // in, none, string, casted *C.gchar
 
 	carg0 = (*C.GtkCssProvider)(UnsafeCssProviderToGlibNone(cssProvider))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(str)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(str)))
 	defer C.free(unsafe.Pointer(carg1))
 
 	C.gtk_css_provider_load_from_string(carg0, carg1)
@@ -29693,14 +29693,14 @@ func (cssProvider *CssProviderInstance) LoadFromString(str string) {
 // mechanism to load the theme that GTK uses for loading its own theme.
 func (provider *CssProviderInstance) LoadNamed(name string, variant string) {
 	var carg0 *C.GtkCssProvider // in, none, converted
-	var carg1 *C.gchar          // in, none, string
-	var carg2 *C.gchar          // in, none, string, nullable-string
+	var carg1 *C.char           // in, none, string, casted *C.gchar
+	var carg2 *C.char           // in, none, string, nullable-string
 
 	carg0 = (*C.GtkCssProvider)(UnsafeCssProviderToGlibNone(provider))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(name)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(name)))
 	defer C.free(unsafe.Pointer(carg1))
 	if variant != "" {
-		carg2 = (*C.gchar)(unsafe.Pointer(C.CString(variant)))
+		carg2 = (*C.char)(unsafe.Pointer(C.CString(variant)))
 		defer C.free(unsafe.Pointer(carg2))
 	}
 
@@ -29724,7 +29724,7 @@ func (provider *CssProviderInstance) LoadNamed(name string, variant string) {
 // of this @provider.
 func (provider *CssProviderInstance) ToString() string {
 	var carg0 *C.GtkCssProvider // in, none, converted
-	var cret  *C.gchar          // return, full, string
+	var cret  *C.char           // return, full, string, casted *C.gchar
 
 	carg0 = (*C.GtkCssProvider)(UnsafeCssProviderToGlibNone(provider))
 
@@ -29733,7 +29733,7 @@ func (provider *CssProviderInstance) ToString() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 	defer C.free(unsafe.Pointer(cret))
 
 	return goret
@@ -29943,12 +29943,12 @@ func UnsafeDirectoryListToGlibFull(c DirectoryList) unsafe.Pointer {
 // The `GtkDirectoryList` is querying the given @file
 // with the given @attributes.
 func NewDirectoryListInstance(attributes string, file gio.File) DirectoryList {
-	var carg1 *C.gchar            // in, none, string, nullable-string
+	var carg1 *C.char             // in, none, string, nullable-string
 	var carg2 *C.GFile            // in, none, converted, nullable
 	var cret  *C.GtkDirectoryList // return, full, converted
 
 	if attributes != "" {
-		carg1 = (*C.gchar)(unsafe.Pointer(C.CString(attributes)))
+		carg1 = (*C.char)(unsafe.Pointer(C.CString(attributes)))
 		defer C.free(unsafe.Pointer(carg1))
 	}
 	if file != nil {
@@ -29974,7 +29974,7 @@ func NewDirectoryListInstance(attributes string, file gio.File) DirectoryList {
 // Gets the attributes queried on the children.
 func (self *DirectoryListInstance) GetAttributes() string {
 	var carg0 *C.GtkDirectoryList // in, none, converted
-	var cret  *C.gchar            // return, none, string
+	var cret  *C.char             // return, none, string, casted *C.gchar
 
 	carg0 = (*C.GtkDirectoryList)(UnsafeDirectoryListToGlibNone(self))
 
@@ -29983,7 +29983,7 @@ func (self *DirectoryListInstance) GetAttributes() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -30047,7 +30047,7 @@ func (self *DirectoryListInstance) GetFile() gio.File {
 // Gets the IO priority set via gtk_directory_list_set_io_priority().
 func (self *DirectoryListInstance) GetIOPriority() int {
 	var carg0 *C.GtkDirectoryList // in, none, converted
-	var cret  C.int               // return, none, casted
+	var cret  C.int               // return, none, casted, casted C.gint
 
 	carg0 = (*C.GtkDirectoryList)(UnsafeDirectoryListToGlibNone(self))
 
@@ -30127,11 +30127,11 @@ func (self *DirectoryListInstance) IsLoading() bool {
 // not contain any extra attributes.
 func (self *DirectoryListInstance) SetAttributes(attributes string) {
 	var carg0 *C.GtkDirectoryList // in, none, converted
-	var carg1 *C.gchar            // in, none, string, nullable-string
+	var carg1 *C.char             // in, none, string, nullable-string
 
 	carg0 = (*C.GtkDirectoryList)(UnsafeDirectoryListToGlibNone(self))
 	if attributes != "" {
-		carg1 = (*C.gchar)(unsafe.Pointer(C.CString(attributes)))
+		carg1 = (*C.char)(unsafe.Pointer(C.CString(attributes)))
 		defer C.free(unsafe.Pointer(carg1))
 	}
 
@@ -30180,7 +30180,7 @@ func (self *DirectoryListInstance) SetFile(file gio.File) {
 // may increase responsiveness.
 func (self *DirectoryListInstance) SetIOPriority(ioPriority int) {
 	var carg0 *C.GtkDirectoryList // in, none, converted
-	var carg1 C.int               // in, none, casted
+	var carg1 C.int               // in, none, casted, casted C.gint
 
 	carg0 = (*C.GtkDirectoryList)(UnsafeDirectoryListToGlibNone(self))
 	carg1 = C.int(ioPriority)
@@ -30421,12 +30421,12 @@ func UnsafeEntryBufferToGlibFull(c EntryBuffer) unsafe.Pointer {
 // 
 // Optionally, specify initial text to set in the buffer.
 func NewEntryBufferInstance(initialChars string, nInitialChars int) EntryBuffer {
-	var carg1 *C.gchar          // in, none, string, nullable-string
-	var carg2 C.int             // in, none, casted
+	var carg1 *C.char           // in, none, string, nullable-string
+	var carg2 C.int             // in, none, casted, casted C.gint
 	var cret  *C.GtkEntryBuffer // return, full, converted
 
 	if initialChars != "" {
-		carg1 = (*C.gchar)(unsafe.Pointer(C.CString(initialChars)))
+		carg1 = (*C.char)(unsafe.Pointer(C.CString(initialChars)))
 		defer C.free(unsafe.Pointer(carg1))
 	}
 	carg2 = C.int(nInitialChars)
@@ -30467,7 +30467,7 @@ func NewEntryBufferInstance(initialChars string, nInitialChars int) EntryBuffer 
 func (buffer *EntryBufferInstance) DeleteText(position uint, nChars int) uint {
 	var carg0 *C.GtkEntryBuffer // in, none, converted
 	var carg1 C.guint           // in, none, casted
-	var carg2 C.int             // in, none, casted
+	var carg2 C.int             // in, none, casted, casted C.gint
 	var cret  C.guint           // return, none, casted
 
 	carg0 = (*C.GtkEntryBuffer)(UnsafeEntryBufferToGlibNone(buffer))
@@ -30521,12 +30521,12 @@ func (buffer *EntryBufferInstance) EmitDeletedText(position uint, nChars uint) {
 func (buffer *EntryBufferInstance) EmitInsertedText(position uint, chars string, nChars uint) {
 	var carg0 *C.GtkEntryBuffer // in, none, converted
 	var carg1 C.guint           // in, none, casted
-	var carg2 *C.gchar          // in, none, string
+	var carg2 *C.char           // in, none, string, casted *C.gchar
 	var carg3 C.guint           // in, none, casted
 
 	carg0 = (*C.GtkEntryBuffer)(UnsafeEntryBufferToGlibNone(buffer))
 	carg1 = C.guint(position)
-	carg2 = (*C.gchar)(unsafe.Pointer(C.CString(chars)))
+	carg2 = (*C.char)(unsafe.Pointer(C.CString(chars)))
 	defer C.free(unsafe.Pointer(carg2))
 	carg3 = C.guint(nChars)
 
@@ -30591,7 +30591,7 @@ func (buffer *EntryBufferInstance) GetLength() uint {
 // Retrieves the maximum allowed length of the text in @buffer.
 func (buffer *EntryBufferInstance) GetMaxLength() int {
 	var carg0 *C.GtkEntryBuffer // in, none, converted
-	var cret  C.int             // return, none, casted
+	var cret  C.int             // return, none, casted, casted C.gint
 
 	carg0 = (*C.GtkEntryBuffer)(UnsafeEntryBufferToGlibNone(buffer))
 
@@ -30616,7 +30616,7 @@ func (buffer *EntryBufferInstance) GetMaxLength() int {
 // unless this object emits a signal, or is finalized.
 func (buffer *EntryBufferInstance) GetText() string {
 	var carg0 *C.GtkEntryBuffer // in, none, converted
-	var cret  *C.gchar          // return, none, string
+	var cret  *C.char           // return, none, string, casted *C.gchar
 
 	carg0 = (*C.GtkEntryBuffer)(UnsafeEntryBufferToGlibNone(buffer))
 
@@ -30625,7 +30625,7 @@ func (buffer *EntryBufferInstance) GetText() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -30654,13 +30654,13 @@ func (buffer *EntryBufferInstance) GetText() string {
 func (buffer *EntryBufferInstance) InsertText(position uint, chars string, nChars int) uint {
 	var carg0 *C.GtkEntryBuffer // in, none, converted
 	var carg1 C.guint           // in, none, casted
-	var carg2 *C.gchar          // in, none, string
-	var carg3 C.int             // in, none, casted
+	var carg2 *C.char           // in, none, string, casted *C.gchar
+	var carg3 C.int             // in, none, casted, casted C.gint
 	var cret  C.guint           // return, none, casted
 
 	carg0 = (*C.GtkEntryBuffer)(UnsafeEntryBufferToGlibNone(buffer))
 	carg1 = C.guint(position)
-	carg2 = (*C.gchar)(unsafe.Pointer(C.CString(chars)))
+	carg2 = (*C.char)(unsafe.Pointer(C.CString(chars)))
 	defer C.free(unsafe.Pointer(carg2))
 	carg3 = C.int(nChars)
 
@@ -30691,7 +30691,7 @@ func (buffer *EntryBufferInstance) InsertText(position uint, chars string, nChar
 // they will be truncated to fit.
 func (buffer *EntryBufferInstance) SetMaxLength(maxLength int) {
 	var carg0 *C.GtkEntryBuffer // in, none, converted
-	var carg1 C.int             // in, none, casted
+	var carg1 C.int             // in, none, casted, casted C.gint
 
 	carg0 = (*C.GtkEntryBuffer)(UnsafeEntryBufferToGlibNone(buffer))
 	carg1 = C.int(maxLength)
@@ -30717,11 +30717,11 @@ func (buffer *EntryBufferInstance) SetMaxLength(maxLength int) {
 // Note that @n_chars is in characters, not in bytes.
 func (buffer *EntryBufferInstance) SetText(chars string, nChars int) {
 	var carg0 *C.GtkEntryBuffer // in, none, converted
-	var carg1 *C.gchar          // in, none, string
-	var carg2 C.int             // in, none, casted
+	var carg1 *C.char           // in, none, string, casted *C.gchar
+	var carg2 C.int             // in, none, casted, casted C.gint
 
 	carg0 = (*C.GtkEntryBuffer)(UnsafeEntryBufferToGlibNone(buffer))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(chars)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(chars)))
 	defer C.free(unsafe.Pointer(carg1))
 	carg2 = C.int(nChars)
 
@@ -31160,11 +31160,11 @@ func (completion *EntryCompletionInstance) Complete() {
 // Deprecated: (since 4.10.0) GtkEntryCompletion will be removed in GTK 5.
 func (completion *EntryCompletionInstance) ComputePrefix(key string) string {
 	var carg0 *C.GtkEntryCompletion // in, none, converted
-	var carg1 *C.gchar              // in, none, string
-	var cret  *C.gchar              // return, full, string
+	var carg1 *C.char               // in, none, string, casted *C.gchar
+	var cret  *C.char               // return, full, string, casted *C.gchar
 
 	carg0 = (*C.GtkEntryCompletion)(UnsafeEntryCompletionToGlibNone(completion))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(key)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(key)))
 	defer C.free(unsafe.Pointer(carg1))
 
 	cret = C.gtk_entry_completion_compute_prefix(carg0, carg1)
@@ -31173,7 +31173,7 @@ func (completion *EntryCompletionInstance) ComputePrefix(key string) string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 	defer C.free(unsafe.Pointer(cret))
 
 	return goret
@@ -31190,7 +31190,7 @@ func (completion *EntryCompletionInstance) ComputePrefix(key string) string {
 // Deprecated: (since 4.10.0) GtkEntryCompletion will be removed in GTK 5.
 func (completion *EntryCompletionInstance) GetCompletionPrefix() string {
 	var carg0 *C.GtkEntryCompletion // in, none, converted
-	var cret  *C.gchar              // return, none, string
+	var cret  *C.char               // return, none, string, casted *C.gchar
 
 	carg0 = (*C.GtkEntryCompletion)(UnsafeEntryCompletionToGlibNone(completion))
 
@@ -31199,7 +31199,7 @@ func (completion *EntryCompletionInstance) GetCompletionPrefix() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -31291,7 +31291,7 @@ func (completion *EntryCompletionInstance) GetInlineSelection() bool {
 // Deprecated: (since 4.10.0) GtkEntryCompletion will be removed in GTK 5.
 func (completion *EntryCompletionInstance) GetMinimumKeyLength() int {
 	var carg0 *C.GtkEntryCompletion // in, none, converted
-	var cret  C.int                 // return, none, casted
+	var cret  C.int                 // return, none, casted, casted C.gint
 
 	carg0 = (*C.GtkEntryCompletion)(UnsafeEntryCompletionToGlibNone(completion))
 
@@ -31421,7 +31421,7 @@ func (completion *EntryCompletionInstance) GetPopupSingleMatch() bool {
 // Deprecated: (since 4.10.0) GtkEntryCompletion will be removed in GTK 5.
 func (completion *EntryCompletionInstance) GetTextColumn() int {
 	var carg0 *C.GtkEntryCompletion // in, none, converted
-	var cret  C.int                 // return, none, casted
+	var cret  C.int                 // return, none, casted, casted C.gint
 
 	carg0 = (*C.GtkEntryCompletion)(UnsafeEntryCompletionToGlibNone(completion))
 
@@ -31541,7 +31541,7 @@ func (completion *EntryCompletionInstance) SetMatchFunc(fn EntryCompletionMatchF
 // Deprecated: (since 4.10.0) GtkEntryCompletion will be removed in GTK 5.
 func (completion *EntryCompletionInstance) SetMinimumKeyLength(length int) {
 	var carg0 *C.GtkEntryCompletion // in, none, converted
-	var carg1 C.int                 // in, none, casted
+	var carg1 C.int                 // in, none, casted, casted C.gint
 
 	carg0 = (*C.GtkEntryCompletion)(UnsafeEntryCompletionToGlibNone(completion))
 	carg1 = C.int(length)
@@ -31673,7 +31673,7 @@ func (completion *EntryCompletionInstance) SetPopupSingleMatch(popupSingleMatch 
 // Deprecated: (since 4.10.0) GtkEntryCompletion will be removed in GTK 5.
 func (completion *EntryCompletionInstance) SetTextColumn(column int) {
 	var carg0 *C.GtkEntryCompletion // in, none, converted
-	var carg1 C.int                 // in, none, casted
+	var carg1 C.int                 // in, none, casted, casted C.gint
 
 	carg0 = (*C.GtkEntryCompletion)(UnsafeEntryCompletionToGlibNone(completion))
 	carg1 = C.int(column)
@@ -31929,7 +31929,7 @@ func (controller *EventControllerInstance) GetCurrentEventTime() uint32 {
 // Gets the name of @controller.
 func (controller *EventControllerInstance) GetName() string {
 	var carg0 *C.GtkEventController // in, none, converted
-	var cret  *C.gchar              // return, none, string
+	var cret  *C.char               // return, none, string, casted *C.gchar
 
 	carg0 = (*C.GtkEventController)(UnsafeEventControllerToGlibNone(controller))
 
@@ -31938,7 +31938,7 @@ func (controller *EventControllerInstance) GetName() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -32030,11 +32030,11 @@ func (controller *EventControllerInstance) Reset() {
 // Sets a name on the controller that can be used for debugging.
 func (controller *EventControllerInstance) SetName(name string) {
 	var carg0 *C.GtkEventController // in, none, converted
-	var carg1 *C.gchar              // in, none, string, nullable-string
+	var carg1 *C.char               // in, none, string, nullable-string
 
 	carg0 = (*C.GtkEventController)(UnsafeEventControllerToGlibNone(controller))
 	if name != "" {
-		carg1 = (*C.gchar)(unsafe.Pointer(C.CString(name)))
+		carg1 = (*C.char)(unsafe.Pointer(C.CString(name)))
 		defer C.free(unsafe.Pointer(carg1))
 	}
 
@@ -32097,11 +32097,11 @@ func (controller *EventControllerInstance) SetPropagationPhase(phase Propagation
 // Sets a name on the controller that can be used for debugging.
 func (controller *EventControllerInstance) SetStaticName(name string) {
 	var carg0 *C.GtkEventController // in, none, converted
-	var carg1 *C.gchar              // in, none, string, nullable-string
+	var carg1 *C.char               // in, none, string, nullable-string
 
 	carg0 = (*C.GtkEventController)(UnsafeEventControllerToGlibNone(controller))
 	if name != "" {
-		carg1 = (*C.gchar)(unsafe.Pointer(C.CString(name)))
+		carg1 = (*C.char)(unsafe.Pointer(C.CString(name)))
 		defer C.free(unsafe.Pointer(carg1))
 	}
 
@@ -33272,7 +33272,7 @@ func NewFileDialogInstance() FileDialog {
 // Retrieves the text used by the dialog on its accept button.
 func (self *FileDialogInstance) GetAcceptLabel() string {
 	var carg0 *C.GtkFileDialog // in, none, converted
-	var cret  *C.gchar         // return, none, string
+	var cret  *C.char          // return, none, string, casted *C.gchar
 
 	carg0 = (*C.GtkFileDialog)(UnsafeFileDialogToGlibNone(self))
 
@@ -33281,7 +33281,7 @@ func (self *FileDialogInstance) GetAcceptLabel() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -33386,7 +33386,7 @@ func (self *FileDialogInstance) GetInitialFolder() gio.File {
 // Gets the name for the file that should be initially set.
 func (self *FileDialogInstance) GetInitialName() string {
 	var carg0 *C.GtkFileDialog // in, none, converted
-	var cret  *C.gchar         // return, none, string
+	var cret  *C.char          // return, none, string, casted *C.gchar
 
 	carg0 = (*C.GtkFileDialog)(UnsafeFileDialogToGlibNone(self))
 
@@ -33395,7 +33395,7 @@ func (self *FileDialogInstance) GetInitialName() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -33435,7 +33435,7 @@ func (self *FileDialogInstance) GetModal() bool {
 // file chooser dialog.
 func (self *FileDialogInstance) GetTitle() string {
 	var carg0 *C.GtkFileDialog // in, none, converted
-	var cret  *C.gchar         // return, none, string
+	var cret  *C.char          // return, none, string, casted *C.gchar
 
 	carg0 = (*C.GtkFileDialog)(UnsafeFileDialogToGlibNone(self))
 
@@ -33444,7 +33444,7 @@ func (self *FileDialogInstance) GetTitle() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -33851,11 +33851,11 @@ func (self *FileDialogInstance) SelectMultipleFoldersFinish(result gio.AsyncResu
 // a default label, depending on what API is used to launch the file dialog.
 func (self *FileDialogInstance) SetAcceptLabel(acceptLabel string) {
 	var carg0 *C.GtkFileDialog // in, none, converted
-	var carg1 *C.gchar         // in, none, string, nullable-string
+	var carg1 *C.char          // in, none, string, nullable-string
 
 	carg0 = (*C.GtkFileDialog)(UnsafeFileDialogToGlibNone(self))
 	if acceptLabel != "" {
-		carg1 = (*C.gchar)(unsafe.Pointer(C.CString(acceptLabel)))
+		carg1 = (*C.char)(unsafe.Pointer(C.CString(acceptLabel)))
 		defer C.free(unsafe.Pointer(carg1))
 	}
 
@@ -33974,11 +33974,11 @@ func (self *FileDialogInstance) SetInitialFolder(folder gio.File) {
 // [property@Gtk.FileDialog:initial-folder], the dialog should preselect it.
 func (self *FileDialogInstance) SetInitialName(name string) {
 	var carg0 *C.GtkFileDialog // in, none, converted
-	var carg1 *C.gchar         // in, none, string, nullable-string
+	var carg1 *C.char          // in, none, string, nullable-string
 
 	carg0 = (*C.GtkFileDialog)(UnsafeFileDialogToGlibNone(self))
 	if name != "" {
-		carg1 = (*C.gchar)(unsafe.Pointer(C.CString(name)))
+		carg1 = (*C.char)(unsafe.Pointer(C.CString(name)))
 		defer C.free(unsafe.Pointer(carg1))
 	}
 
@@ -34020,10 +34020,10 @@ func (self *FileDialogInstance) SetModal(modal bool) {
 // file chooser dialog.
 func (self *FileDialogInstance) SetTitle(title string) {
 	var carg0 *C.GtkFileDialog // in, none, converted
-	var carg1 *C.gchar         // in, none, string
+	var carg1 *C.char          // in, none, string, casted *C.gchar
 
 	carg0 = (*C.GtkFileDialog)(UnsafeFileDialogToGlibNone(self))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(title)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(title)))
 	defer C.free(unsafe.Pointer(carg1))
 
 	C.gtk_file_dialog_set_title(carg0, carg1)
@@ -35855,7 +35855,7 @@ func (self *FontDialogInstance) ChooseFontAndFeaturesFinish(result gio.AsyncResu
 	var carg0 *C.GtkFontDialog        // in, none, converted
 	var carg1 *C.GAsyncResult         // in, none, converted
 	var carg2 *C.PangoFontDescription // out, full, converted
-	var carg3 *C.gchar                // out, full, string
+	var carg3 *C.char                 // out, full, string, casted *C.gchar
 	var carg4 *C.PangoLanguage        // out, full, converted
 	var cret  C.gboolean              // return
 	var _cerr *C.GError               // out, full, converted, nullable
@@ -35874,7 +35874,7 @@ func (self *FontDialogInstance) ChooseFontAndFeaturesFinish(result gio.AsyncResu
 	var _goerr       error
 
 	fontDesc = pango.UnsafeFontDescriptionFromGlibFull(unsafe.Pointer(carg2))
-	fontFeatures = C.GoString((*C.gchar)(unsafe.Pointer(carg3)))
+	fontFeatures = C.GoString((*C.char)(unsafe.Pointer(carg3)))
 	defer C.free(unsafe.Pointer(carg3))
 	language = pango.UnsafeLanguageFromGlibFull(unsafe.Pointer(carg4))
 	if cret != 0 {
@@ -36027,7 +36027,7 @@ func (self *FontDialogInstance) GetModal() bool {
 // font chooser dialog.
 func (self *FontDialogInstance) GetTitle() string {
 	var carg0 *C.GtkFontDialog // in, none, converted
-	var cret  *C.gchar         // return, none, string
+	var cret  *C.char          // return, none, string, casted *C.gchar
 
 	carg0 = (*C.GtkFontDialog)(UnsafeFontDialogToGlibNone(self))
 
@@ -36036,7 +36036,7 @@ func (self *FontDialogInstance) GetTitle() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -36141,10 +36141,10 @@ func (self *FontDialogInstance) SetModal(modal bool) {
 // font chooser dialog.
 func (self *FontDialogInstance) SetTitle(title string) {
 	var carg0 *C.GtkFontDialog // in, none, converted
-	var carg1 *C.gchar         // in, none, string
+	var carg1 *C.char          // in, none, string, casted *C.gchar
 
 	carg0 = (*C.GtkFontDialog)(UnsafeFontDialogToGlibNone(self))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(title)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(title)))
 	defer C.free(unsafe.Pointer(carg1))
 
 	C.gtk_font_dialog_set_title(carg0, carg1)
@@ -36608,8 +36608,8 @@ func (gesture *GestureInstance) GetBoundingBox() (gdk.Rectangle, bool) {
 // Otherwise, %FALSE will be returned.
 func (gesture *GestureInstance) GetBoundingBoxCenter() (float64, float64, bool) {
 	var carg0 *C.GtkGesture // in, none, converted
-	var carg1 C.gdouble     // out, full, casted
-	var carg2 C.gdouble     // out, full, casted
+	var carg1 C.double      // out, full, casted, casted C.gdouble
+	var carg2 C.double      // out, full, casted, casted C.gdouble
 	var cret  C.gboolean    // return
 
 	carg0 = (*C.GtkGesture)(UnsafeGestureToGlibNone(gesture))
@@ -36697,8 +36697,8 @@ func (gesture *GestureInstance) GetLastUpdatedSequence() *gdk.EventSequence {
 func (gesture *GestureInstance) GetPoint(sequence *gdk.EventSequence) (float64, float64, bool) {
 	var carg0 *C.GtkGesture       // in, none, converted
 	var carg1 *C.GdkEventSequence // in, none, converted, nullable
-	var carg2 C.gdouble           // out, full, casted
-	var carg3 C.gdouble           // out, full, casted
+	var carg2 C.double            // out, full, casted, casted C.gdouble
+	var carg3 C.double            // out, full, casted, casted C.gdouble
 	var cret  C.gboolean          // return
 
 	carg0 = (*C.GtkGesture)(UnsafeGestureToGlibNone(gesture))
@@ -37174,7 +37174,7 @@ func NewGestureRotateInstance() Gesture {
 // not active, 0 is returned.
 func (gesture *GestureRotateInstance) GetAngleDelta() float64 {
 	var carg0 *C.GtkGestureRotate // in, none, converted
-	var cret  C.gdouble           // return, none, casted
+	var cret  C.double            // return, none, casted, casted C.gdouble
 
 	carg0 = (*C.GtkGestureRotate)(UnsafeGestureRotateToGlibNone(gesture))
 
@@ -37679,7 +37679,7 @@ func NewGestureStylusInstance() Gesture {
 func (gesture *GestureStylusInstance) GetAxis(axis gdk.AxisUse) (float64, bool) {
 	var carg0 *C.GtkGestureStylus // in, none, converted
 	var carg1 C.GdkAxisUse        // in, none, casted
-	var carg2 C.gdouble           // out, full, casted
+	var carg2 C.double            // out, full, casted, casted C.gdouble
 	var cret  C.gboolean          // return
 
 	carg0 = (*C.GtkGestureStylus)(UnsafeGestureStylusToGlibNone(gesture))
@@ -37891,8 +37891,8 @@ func NewGestureSwipeInstance() Gesture {
 // last events processed.
 func (gesture *GestureSwipeInstance) GetVelocity() (float64, float64, bool) {
 	var carg0 *C.GtkGestureSwipe // in, none, converted
-	var carg1 C.gdouble          // out, full, casted
-	var carg2 C.gdouble          // out, full, casted
+	var carg1 C.double           // out, full, casted, casted C.gdouble
+	var carg2 C.double           // out, full, casted, casted C.gdouble
 	var cret  C.gboolean         // return
 
 	carg0 = (*C.GtkGestureSwipe)(UnsafeGestureSwipeToGlibNone(gesture))
@@ -38016,7 +38016,7 @@ func NewGestureZoomInstance() Gesture {
 // active, 1 is returned.
 func (gesture *GestureZoomInstance) GetScaleDelta() float64 {
 	var carg0 *C.GtkGestureZoom // in, none, converted
-	var cret  C.gdouble         // return, none, casted
+	var cret  C.double          // return, none, casted, casted C.gdouble
 
 	carg0 = (*C.GtkGestureZoom)(UnsafeGestureZoomToGlibNone(gesture))
 
@@ -38357,8 +38357,8 @@ func UnsafeIMContextToGlibFull(c IMContext) unsafe.Pointer {
 // It is not useful for applications.
 func (context *IMContextInstance) DeleteSurrounding(offset int, nChars int) bool {
 	var carg0 *C.GtkIMContext // in, none, converted
-	var carg1 C.int           // in, none, casted
-	var carg2 C.int           // in, none, casted
+	var carg1 C.int           // in, none, casted, casted C.gint
+	var carg2 C.int           // in, none, casted, casted C.gint
 	var cret  C.gboolean      // return
 
 	carg0 = (*C.GtkIMContext)(UnsafeIMContextToGlibNone(context))
@@ -38406,7 +38406,7 @@ func (context *IMContextInstance) FilterKey(press bool, surface gdk.Surface, dev
 	var carg4 C.guint32         // in, none, casted
 	var carg5 C.guint           // in, none, casted
 	var carg6 C.GdkModifierType // in, none, casted
-	var carg7 C.int             // in, none, casted
+	var carg7 C.int             // in, none, casted, casted C.gint
 	var cret  C.gboolean        // return
 
 	carg0 = (*C.GtkIMContext)(UnsafeIMContextToGlibNone(context))
@@ -38488,9 +38488,9 @@ func (context *IMContextInstance) FocusOut() {
 // This string should be displayed inserted at the insertion point.
 func (context *IMContextInstance) GetPreeditString() (string, *pango.AttrList, int) {
 	var carg0 *C.GtkIMContext  // in, none, converted
-	var carg1 *C.gchar         // out, full, string
+	var carg1 *C.char          // out, full, string, casted *C.gchar
 	var carg2 *C.PangoAttrList // out, full, converted
-	var carg3 C.int            // out, full, casted
+	var carg3 C.int            // out, full, casted, casted C.gint
 
 	carg0 = (*C.GtkIMContext)(UnsafeIMContextToGlibNone(context))
 
@@ -38501,7 +38501,7 @@ func (context *IMContextInstance) GetPreeditString() (string, *pango.AttrList, i
 	var attrs     *pango.AttrList
 	var cursorPos int
 
-	str = C.GoString((*C.gchar)(unsafe.Pointer(carg1)))
+	str = C.GoString((*C.char)(unsafe.Pointer(carg1)))
 	defer C.free(unsafe.Pointer(carg1))
 	attrs = pango.UnsafeAttrListFromGlibFull(unsafe.Pointer(carg2))
 	cursorPos = int(carg3)
@@ -38539,8 +38539,8 @@ func (context *IMContextInstance) GetPreeditString() (string, *pango.AttrList, i
 // Deprecated: (since 4.2.0) Use [method@Gtk.IMContext.get_surrounding_with_selection] instead.
 func (context *IMContextInstance) GetSurrounding() (string, int, bool) {
 	var carg0 *C.GtkIMContext // in, none, converted
-	var carg1 *C.gchar        // out, full, string
-	var carg2 C.int           // out, full, casted
+	var carg1 *C.char         // out, full, string, casted *C.gchar
+	var carg2 C.int           // out, full, casted, casted C.gint
 	var cret  C.gboolean      // return
 
 	carg0 = (*C.GtkIMContext)(UnsafeIMContextToGlibNone(context))
@@ -38552,7 +38552,7 @@ func (context *IMContextInstance) GetSurrounding() (string, int, bool) {
 	var cursorIndex int
 	var goret       bool
 
-	text = C.GoString((*C.gchar)(unsafe.Pointer(carg1)))
+	text = C.GoString((*C.char)(unsafe.Pointer(carg1)))
 	defer C.free(unsafe.Pointer(carg1))
 	cursorIndex = int(carg2)
 	if cret != 0 {
@@ -38592,9 +38592,9 @@ func (context *IMContextInstance) GetSurrounding() (string, int, bool) {
 // function without context.
 func (context *IMContextInstance) GetSurroundingWithSelection() (string, int, int, bool) {
 	var carg0 *C.GtkIMContext // in, none, converted
-	var carg1 *C.gchar        // out, full, string
-	var carg2 C.int           // out, full, casted
-	var carg3 C.int           // out, full, casted
+	var carg1 *C.char         // out, full, string, casted *C.gchar
+	var carg2 C.int           // out, full, casted, casted C.gint
+	var carg3 C.int           // out, full, casted, casted C.gint
 	var cret  C.gboolean      // return
 
 	carg0 = (*C.GtkIMContext)(UnsafeIMContextToGlibNone(context))
@@ -38607,7 +38607,7 @@ func (context *IMContextInstance) GetSurroundingWithSelection() (string, int, in
 	var anchorIndex int
 	var goret       bool
 
-	text = C.GoString((*C.gchar)(unsafe.Pointer(carg1)))
+	text = C.GoString((*C.char)(unsafe.Pointer(carg1)))
 	defer C.free(unsafe.Pointer(carg1))
 	cursorIndex = int(carg2)
 	anchorIndex = int(carg3)
@@ -38700,12 +38700,12 @@ func (context *IMContextInstance) SetCursorLocation(area *gdk.Rectangle) {
 // Deprecated: (since 4.2.0) Use [method@Gtk.IMContext.set_surrounding_with_selection] instead
 func (context *IMContextInstance) SetSurrounding(text string, len int, cursorIndex int) {
 	var carg0 *C.GtkIMContext // in, none, converted
-	var carg1 *C.gchar        // in, none, string
-	var carg2 C.int           // in, none, casted
-	var carg3 C.int           // in, none, casted
+	var carg1 *C.char         // in, none, string, casted *C.gchar
+	var carg2 C.int           // in, none, casted, casted C.gint
+	var carg3 C.int           // in, none, casted, casted C.gint
 
 	carg0 = (*C.GtkIMContext)(UnsafeIMContextToGlibNone(context))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(text)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(text)))
 	defer C.free(unsafe.Pointer(carg1))
 	carg2 = C.int(len)
 	carg3 = C.int(cursorIndex)
@@ -38733,13 +38733,13 @@ func (context *IMContextInstance) SetSurrounding(text string, len int, cursorInd
 // have no effect if called at other times.
 func (context *IMContextInstance) SetSurroundingWithSelection(text string, len int, cursorIndex int, anchorIndex int) {
 	var carg0 *C.GtkIMContext // in, none, converted
-	var carg1 *C.gchar        // in, none, string
-	var carg2 C.int           // in, none, casted
-	var carg3 C.int           // in, none, casted
-	var carg4 C.int           // in, none, casted
+	var carg1 *C.char         // in, none, string, casted *C.gchar
+	var carg2 C.int           // in, none, casted, casted C.gint
+	var carg3 C.int           // in, none, casted, casted C.gint
+	var carg4 C.int           // in, none, casted, casted C.gint
 
 	carg0 = (*C.GtkIMContext)(UnsafeIMContextToGlibNone(context))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(text)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(text)))
 	defer C.free(unsafe.Pointer(carg1))
 	carg2 = C.int(len)
 	carg3 = C.int(cursorIndex)
@@ -38904,10 +38904,10 @@ func NewIMContextSimpleInstance() IMContext {
 // Adds an additional table from the X11 compose file.
 func (contextSimple *IMContextSimpleInstance) AddComposeFile(composeFile string) {
 	var carg0 *C.GtkIMContextSimple // in, none, converted
-	var carg1 *C.gchar              // in, none, string
+	var carg1 *C.char               // in, none, string, casted *C.gchar
 
 	carg0 = (*C.GtkIMContextSimple)(UnsafeIMContextSimpleToGlibNone(contextSimple))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(composeFile)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(composeFile)))
 	defer C.free(unsafe.Pointer(carg1))
 
 	C.gtk_im_context_simple_add_compose_file(carg0, carg1)
@@ -39021,7 +39021,7 @@ func NewIMMulticontextInstance() IMContext {
 // Gets the id of the currently active delegate of the @context.
 func (context *IMMulticontextInstance) GetContextID() string {
 	var carg0 *C.GtkIMMulticontext // in, none, converted
-	var cret  *C.gchar             // return, none, string
+	var cret  *C.char              // return, none, string, casted *C.gchar
 
 	carg0 = (*C.GtkIMMulticontext)(UnsafeIMMulticontextToGlibNone(context))
 
@@ -39030,7 +39030,7 @@ func (context *IMMulticontextInstance) GetContextID() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -39051,11 +39051,11 @@ func (context *IMMulticontextInstance) GetContextID() string {
 // property.
 func (context *IMMulticontextInstance) SetContextID(contextId string) {
 	var carg0 *C.GtkIMMulticontext // in, none, converted
-	var carg1 *C.gchar             // in, none, string, nullable-string
+	var carg1 *C.char              // in, none, string, nullable-string
 
 	carg0 = (*C.GtkIMMulticontext)(UnsafeIMMulticontextToGlibNone(context))
 	if contextId != "" {
-		carg1 = (*C.gchar)(unsafe.Pointer(C.CString(contextId)))
+		carg1 = (*C.char)(unsafe.Pointer(C.CString(contextId)))
 		defer C.free(unsafe.Pointer(carg1))
 	}
 
@@ -39177,8 +39177,8 @@ func UnsafeIconPaintableToGlibFull(c IconPaintable) unsafe.Pointer {
 // The icon can then be rendered by using it as a `GdkPaintable`.
 func NewIconPaintableInstanceForFile(file gio.File, size int, scale int) IconPaintable {
 	var carg1 *C.GFile            // in, none, converted
-	var carg2 C.int               // in, none, casted
-	var carg3 C.int               // in, none, casted
+	var carg2 C.int               // in, none, casted, casted C.gint
+	var carg3 C.int               // in, none, casted, casted C.gint
 	var cret  *C.GtkIconPaintable // return, full, converted
 
 	carg1 = (*C.GFile)(gio.UnsafeFileToGlibNone(file))
@@ -39237,7 +39237,7 @@ func (self *IconPaintableInstance) GetFile() gio.File {
 // returns %NULL.
 func (self *IconPaintableInstance) GetIconName() string {
 	var carg0 *C.GtkIconPaintable // in, none, converted
-	var cret  *C.gchar            // return, none, string
+	var cret  *C.char             // return, none, string, casted *C.gchar
 
 	carg0 = (*C.GtkIconPaintable)(UnsafeIconPaintableToGlibNone(self))
 
@@ -39246,7 +39246,7 @@ func (self *IconPaintableInstance) GetIconName() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -39648,10 +39648,10 @@ func IconThemeInstanceGetForDisplay(display gdk.Display) IconTheme {
 // available as part of the icon theme.
 func (self *IconThemeInstance) AddResourcePath(path string) {
 	var carg0 *C.GtkIconTheme // in, none, converted
-	var carg1 *C.gchar        // in, none, string
+	var carg1 *C.char         // in, none, string, casted *C.gchar
 
 	carg0 = (*C.GtkIconTheme)(UnsafeIconThemeToGlibNone(self))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(path)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(path)))
 	defer C.free(unsafe.Pointer(carg1))
 
 	C.gtk_icon_theme_add_resource_path(carg0, carg1)
@@ -39670,10 +39670,10 @@ func (self *IconThemeInstance) AddResourcePath(path string) {
 // See [method@Gtk.IconTheme.set_search_path].
 func (self *IconThemeInstance) AddSearchPath(path string) {
 	var carg0 *C.GtkIconTheme // in, none, converted
-	var carg1 *C.gchar        // in, none, string
+	var carg1 *C.char         // in, none, string, casted *C.gchar
 
 	carg0 = (*C.GtkIconTheme)(UnsafeIconThemeToGlibNone(self))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(path)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(path)))
 	defer C.free(unsafe.Pointer(carg1))
 
 	C.gtk_icon_theme_add_search_path(carg0, carg1)
@@ -39745,11 +39745,11 @@ func (self *IconThemeInstance) GetIconNames() []string {
 // format. The array is zero-terminated.
 func (self *IconThemeInstance) GetIconSizes(iconName string) []int {
 	var carg0 *C.GtkIconTheme // in, none, converted
-	var carg1 *C.gchar        // in, none, string
+	var carg1 *C.char         // in, none, string, casted *C.gchar
 	var cret  *C.int          // return, transfer: full, C Pointers: 1, Name: array[gint], scope: , array (inner: *typesystem.CastablePrimitive, zero-terminated)
 
 	carg0 = (*C.GtkIconTheme)(UnsafeIconThemeToGlibNone(self))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(iconName)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(iconName)))
 	defer C.free(unsafe.Pointer(carg1))
 
 	cret = C.gtk_icon_theme_get_icon_sizes(carg0, carg1)
@@ -39825,7 +39825,7 @@ func (self *IconThemeInstance) GetSearchPath() []string {
 // Gets the current icon theme name.
 func (self *IconThemeInstance) GetThemeName() string {
 	var carg0 *C.GtkIconTheme // in, none, converted
-	var cret  *C.gchar        // return, full, string
+	var cret  *C.char         // return, full, string, casted *C.gchar
 
 	carg0 = (*C.GtkIconTheme)(UnsafeIconThemeToGlibNone(self))
 
@@ -39834,7 +39834,7 @@ func (self *IconThemeInstance) GetThemeName() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 	defer C.free(unsafe.Pointer(cret))
 
 	return goret
@@ -39887,11 +39887,11 @@ func (self *IconThemeInstance) HasGIcon(gicon gio.Icon) bool {
 // for a particular name.
 func (self *IconThemeInstance) HasIcon(iconName string) bool {
 	var carg0 *C.GtkIconTheme // in, none, converted
-	var carg1 *C.gchar        // in, none, string
+	var carg1 *C.char         // in, none, string, casted *C.gchar
 	var cret  C.gboolean      // return
 
 	carg0 = (*C.GtkIconTheme)(UnsafeIconThemeToGlibNone(self))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(iconName)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(iconName)))
 	defer C.free(unsafe.Pointer(carg1))
 
 	cret = C.gtk_icon_theme_has_icon(carg0, carg1)
@@ -39928,8 +39928,8 @@ func (self *IconThemeInstance) HasIcon(iconName string) bool {
 func (self *IconThemeInstance) LookupByGIcon(icon gio.Icon, size int, scale int, direction TextDirection, flags IconLookupFlags) IconPaintable {
 	var carg0 *C.GtkIconTheme      // in, none, converted
 	var carg1 *C.GIcon             // in, none, converted
-	var carg2 C.int                // in, none, casted
-	var carg3 C.int                // in, none, casted
+	var carg2 C.int                // in, none, casted, casted C.gint
+	var carg3 C.int                // in, none, casted, casted C.gint
 	var carg4 C.GtkTextDirection   // in, none, casted
 	var carg5 C.GtkIconLookupFlags // in, none, casted
 	var cret  *C.GtkIconPaintable  // return, full, converted
@@ -39989,16 +39989,16 @@ func (self *IconThemeInstance) LookupByGIcon(icon gio.Icon, size int, scale int,
 // GtkWidgetClass.css-changed() function.
 func (self *IconThemeInstance) LookupIcon(iconName string, fallbacks []string, size int, scale int, direction TextDirection, flags IconLookupFlags) IconPaintable {
 	var carg0 *C.GtkIconTheme      // in, none, converted
-	var carg1 *C.gchar             // in, none, string
+	var carg1 *C.char              // in, none, string, casted *C.gchar
 	var carg2 **C.char             // in, transfer: none, C Pointers: 2, Name: array[utf8], nullable, array (inner: *typesystem.StringPrimitive, zero-terminated)
-	var carg3 C.int                // in, none, casted
-	var carg4 C.int                // in, none, casted
+	var carg3 C.int                // in, none, casted, casted C.gint
+	var carg4 C.int                // in, none, casted, casted C.gint
 	var carg5 C.GtkTextDirection   // in, none, casted
 	var carg6 C.GtkIconLookupFlags // in, none, casted
 	var cret  *C.GtkIconPaintable  // return, full, converted
 
 	carg0 = (*C.GtkIconTheme)(UnsafeIconThemeToGlibNone(self))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(iconName)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(iconName)))
 	defer C.free(unsafe.Pointer(carg1))
 	_ = fallbacks
 	_ = carg2
@@ -40107,11 +40107,11 @@ func (self *IconThemeInstance) SetSearchPath(path []string) {
 // from [func@Gtk.IconTheme.get_for_display].
 func (self *IconThemeInstance) SetThemeName(themeName string) {
 	var carg0 *C.GtkIconTheme // in, none, converted
-	var carg1 *C.gchar        // in, none, string, nullable-string
+	var carg1 *C.char         // in, none, string, nullable-string
 
 	carg0 = (*C.GtkIconTheme)(UnsafeIconThemeToGlibNone(self))
 	if themeName != "" {
-		carg1 = (*C.gchar)(unsafe.Pointer(C.CString(themeName)))
+		carg1 = (*C.char)(unsafe.Pointer(C.CString(themeName)))
 		defer C.free(unsafe.Pointer(carg1))
 	}
 
@@ -40435,9 +40435,9 @@ func UnsafeLayoutManagerToGlibFull(c LayoutManager) unsafe.Pointer {
 func (manager *LayoutManagerInstance) Allocate(widget Widget, width int, height int, baseline int) {
 	var carg0 *C.GtkLayoutManager // in, none, converted
 	var carg1 *C.GtkWidget        // in, none, converted
-	var carg2 C.int               // in, none, casted
-	var carg3 C.int               // in, none, casted
-	var carg4 C.int               // in, none, casted
+	var carg2 C.int               // in, none, casted, casted C.gint
+	var carg3 C.int               // in, none, casted, casted C.gint
+	var carg4 C.int               // in, none, casted, casted C.gint
 
 	carg0 = (*C.GtkLayoutManager)(UnsafeLayoutManagerToGlibNone(manager))
 	carg1 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(widget))
@@ -40582,11 +40582,11 @@ func (manager *LayoutManagerInstance) Measure(widget Widget, orientation Orienta
 	var carg0 *C.GtkLayoutManager // in, none, converted
 	var carg1 *C.GtkWidget        // in, none, converted
 	var carg2 C.GtkOrientation    // in, none, casted
-	var carg3 C.int               // in, none, casted
-	var carg4 C.int               // out, full, casted
-	var carg5 C.int               // out, full, casted
-	var carg6 C.int               // out, full, casted
-	var carg7 C.int               // out, full, casted
+	var carg3 C.int               // in, none, casted, casted C.gint
+	var carg4 C.int               // out, full, casted, casted C.gint
+	var carg5 C.int               // out, full, casted, casted C.gint
+	var carg6 C.int               // out, full, casted, casted C.gint
+	var carg7 C.int               // out, full, casted, casted C.gint
 
 	carg0 = (*C.GtkLayoutManager)(UnsafeLayoutManagerToGlibNone(manager))
 	carg1 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(widget))
@@ -41106,7 +41106,7 @@ func UnsafeListItemToGlibFull(c ListItem) unsafe.Pointer {
 // Gets the accessible description of @self.
 func (self *ListItemInstance) GetAccessibleDescription() string {
 	var carg0 *C.GtkListItem // in, none, converted
-	var cret  *C.gchar       // return, none, string
+	var cret  *C.char        // return, none, string, casted *C.gchar
 
 	carg0 = (*C.GtkListItem)(UnsafeListItemToGlibNone(self))
 
@@ -41115,7 +41115,7 @@ func (self *ListItemInstance) GetAccessibleDescription() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -41128,7 +41128,7 @@ func (self *ListItemInstance) GetAccessibleDescription() string {
 // Gets the accessible label of @self.
 func (self *ListItemInstance) GetAccessibleLabel() string {
 	var carg0 *C.GtkListItem // in, none, converted
-	var cret  *C.gchar       // return, none, string
+	var cret  *C.char        // return, none, string, casted *C.gchar
 
 	carg0 = (*C.GtkListItem)(UnsafeListItemToGlibNone(self))
 
@@ -41137,7 +41137,7 @@ func (self *ListItemInstance) GetAccessibleLabel() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -41327,10 +41327,10 @@ func (self *ListItemInstance) GetSelected() bool {
 // which may be used by e.g. screen readers.
 func (self *ListItemInstance) SetAccessibleDescription(description string) {
 	var carg0 *C.GtkListItem // in, none, converted
-	var carg1 *C.gchar       // in, none, string
+	var carg1 *C.char        // in, none, string, casted *C.gchar
 
 	carg0 = (*C.GtkListItem)(UnsafeListItemToGlibNone(self))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(description)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(description)))
 	defer C.free(unsafe.Pointer(carg1))
 
 	C.gtk_list_item_set_accessible_description(carg0, carg1)
@@ -41348,10 +41348,10 @@ func (self *ListItemInstance) SetAccessibleDescription(description string) {
 // which may be used by e.g. screen readers.
 func (self *ListItemInstance) SetAccessibleLabel(label string) {
 	var carg0 *C.GtkListItem // in, none, converted
-	var carg1 *C.gchar       // in, none, string
+	var carg1 *C.char        // in, none, string, casted *C.gchar
 
 	carg0 = (*C.GtkListItem)(UnsafeListItemToGlibNone(self))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(label)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(label)))
 	defer C.free(unsafe.Pointer(carg1))
 
 	C.gtk_list_item_set_accessible_label(carg0, carg1)
@@ -42094,7 +42094,7 @@ func (listStore *ListStoreInstance) Clear() {
 // Deprecated: (since 4.10.0) Use list models
 func (listStore *ListStoreInstance) Insert(position int) TreeIter {
 	var carg0 *C.GtkListStore // in, none, converted
-	var carg2 C.int           // in, none, casted
+	var carg2 C.int           // in, none, casted, casted C.gint
 	var carg1 C.GtkTreeIter   // out, transfer: none, C Pointers: 0, Name: TreeIter, caller-allocates
 
 	carg0 = (*C.GtkListStore)(UnsafeListStoreToGlibNone(listStore))
@@ -42212,7 +42212,7 @@ func (listStore *ListStoreInstance) InsertBefore(sibling *TreeIter) TreeIter {
 // Deprecated: (since 4.10.0) Use list models
 func (listStore *ListStoreInstance) InsertWithValuesv(position int, columns []int, values []gobject.Value) TreeIter {
 	var carg0 *C.GtkListStore // in, none, converted
-	var carg2 C.int           // in, none, casted
+	var carg2 C.int           // in, none, casted, casted C.gint
 	var carg3 *C.int          // in, transfer: none, C Pointers: 1, Name: array[gint], array (inner: *typesystem.CastablePrimitive, length-by: carg5)
 	var carg4 *C.GValue       // in, transfer: none, C Pointers: 1, Name: array[Value], array (inner: *typesystem.Record, length-by: carg5)
 	var carg5 C.int           // implicit
@@ -42478,7 +42478,7 @@ func (listStore *ListStoreInstance) SetColumnTypes(types []gobject.Type) {
 func (listStore *ListStoreInstance) SetValue(iter *TreeIter, column int, value *gobject.Value) {
 	var carg0 *C.GtkListStore // in, none, converted
 	var carg1 *C.GtkTreeIter  // in, none, converted
-	var carg2 C.int           // in, none, casted
+	var carg2 C.int           // in, none, casted, casted C.gint
 	var carg3 *C.GValue       // in, none, converted
 
 	carg0 = (*C.GtkListStore)(UnsafeListStoreToGlibNone(listStore))
@@ -43459,7 +43459,7 @@ func (self *MediaStreamInstance) GetTimestamp() int64 {
 // See [method@Gtk.MediaStream.set_volume] for details.
 func (self *MediaStreamInstance) GetVolume() float64 {
 	var carg0 *C.GtkMediaStream // in, none, converted
-	var cret  C.gdouble         // return, none, casted
+	var cret  C.double          // return, none, casted, casted C.gdouble
 
 	carg0 = (*C.GtkMediaStream)(UnsafeMediaStreamToGlibNone(self))
 
@@ -43826,10 +43826,10 @@ func (self *MediaStreamInstance) SetPlaying(playing bool) {
 // When the stream is unmuted, the new volume setting will take effect.
 func (self *MediaStreamInstance) SetVolume(volume float64) {
 	var carg0 *C.GtkMediaStream // in, none, converted
-	var carg1 C.gdouble         // in, none, casted
+	var carg1 C.double          // in, none, casted, casted C.gdouble
 
 	carg0 = (*C.GtkMediaStream)(UnsafeMediaStreamToGlibNone(self))
-	carg1 = C.gdouble(volume)
+	carg1 = C.double(volume)
 
 	C.gtk_media_stream_set_volume(carg0, carg1)
 	runtime.KeepAlive(self)
@@ -44696,7 +44696,7 @@ func (self *NativeDialogInstance) GetModal() bool {
 // Gets the title of the `GtkNativeDialog`.
 func (self *NativeDialogInstance) GetTitle() string {
 	var carg0 *C.GtkNativeDialog // in, none, converted
-	var cret  *C.gchar           // return, none, string
+	var cret  *C.char            // return, none, string, casted *C.gchar
 
 	carg0 = (*C.GtkNativeDialog)(UnsafeNativeDialogToGlibNone(self))
 
@@ -44705,7 +44705,7 @@ func (self *NativeDialogInstance) GetTitle() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -44810,10 +44810,10 @@ func (self *NativeDialogInstance) SetModal(modal bool) {
 // Sets the title of the `GtkNativeDialog.`
 func (self *NativeDialogInstance) SetTitle(title string) {
 	var carg0 *C.GtkNativeDialog // in, none, converted
-	var carg1 *C.gchar           // in, none, string
+	var carg1 *C.char            // in, none, string, casted *C.gchar
 
 	carg0 = (*C.GtkNativeDialog)(UnsafeNativeDialogToGlibNone(self))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(title)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(title)))
 	defer C.free(unsafe.Pointer(carg1))
 
 	C.gtk_native_dialog_set_title(carg0, carg1)
@@ -45549,18 +45549,18 @@ func NewPadControllerInstance(group gio.ActionGroup, pad gdk.Device) PadControll
 func (controller *PadControllerInstance) SetAction(typ PadActionType, index int, mode int, label string, actionName string) {
 	var carg0 *C.GtkPadController // in, none, converted
 	var carg1 C.GtkPadActionType  // in, none, casted
-	var carg2 C.int               // in, none, casted
-	var carg3 C.int               // in, none, casted
-	var carg4 *C.gchar            // in, none, string
-	var carg5 *C.gchar            // in, none, string
+	var carg2 C.int               // in, none, casted, casted C.gint
+	var carg3 C.int               // in, none, casted, casted C.gint
+	var carg4 *C.char             // in, none, string, casted *C.gchar
+	var carg5 *C.char             // in, none, string, casted *C.gchar
 
 	carg0 = (*C.GtkPadController)(UnsafePadControllerToGlibNone(controller))
 	carg1 = C.GtkPadActionType(typ)
 	carg2 = C.int(index)
 	carg3 = C.int(mode)
-	carg4 = (*C.gchar)(unsafe.Pointer(C.CString(label)))
+	carg4 = (*C.char)(unsafe.Pointer(C.CString(label)))
 	defer C.free(unsafe.Pointer(carg4))
-	carg5 = (*C.gchar)(unsafe.Pointer(C.CString(actionName)))
+	carg5 = (*C.char)(unsafe.Pointer(C.CString(actionName)))
 	defer C.free(unsafe.Pointer(carg5))
 
 	C.gtk_pad_controller_set_action(carg0, carg1, carg2, carg3, carg4, carg5)
@@ -45976,11 +45976,11 @@ func NewPageSetupInstance() PageSetup {
 // page setup, or %NULL if an error occurred.
 // See [method@Gtk.PageSetup.to_file].
 func NewPageSetupInstanceFromFile(fileName string) (PageSetup, error) {
-	var carg1 *C.gchar        // in, none, string
+	var carg1 *C.char         // in, none, string, casted *C.gchar
 	var cret  *C.GtkPageSetup // return, full, converted
 	var _cerr *C.GError       // out, full, converted, nullable
 
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(fileName)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(fileName)))
 	defer C.free(unsafe.Pointer(carg1))
 
 	cret = C.gtk_page_setup_new_from_file(carg1, &_cerr)
@@ -46017,13 +46017,13 @@ func NewPageSetupInstanceFromFile(fileName string) (PageSetup, error) {
 // page setup, or %NULL if an error occurred.
 func NewPageSetupInstanceFromKeyFile(keyFile *glib.KeyFile, groupName string) (PageSetup, error) {
 	var carg1 *C.GKeyFile     // in, none, converted
-	var carg2 *C.gchar        // in, none, string, nullable-string
+	var carg2 *C.char         // in, none, string, nullable-string
 	var cret  *C.GtkPageSetup // return, full, converted
 	var _cerr *C.GError       // out, full, converted, nullable
 
 	carg1 = (*C.GKeyFile)(glib.UnsafeKeyFileToGlibNone(keyFile))
 	if groupName != "" {
-		carg2 = (*C.gchar)(unsafe.Pointer(C.CString(groupName)))
+		carg2 = (*C.char)(unsafe.Pointer(C.CString(groupName)))
 		defer C.free(unsafe.Pointer(carg2))
 	}
 
@@ -46078,7 +46078,7 @@ func (other *PageSetupInstance) Copy() PageSetup {
 func (setup *PageSetupInstance) GetBottomMargin(unit Unit) float64 {
 	var carg0 *C.GtkPageSetup // in, none, converted
 	var carg1 C.GtkUnit       // in, none, casted
-	var cret  C.gdouble       // return, none, casted
+	var cret  C.double        // return, none, casted, casted C.gdouble
 
 	carg0 = (*C.GtkPageSetup)(UnsafePageSetupToGlibNone(setup))
 	carg1 = C.GtkUnit(unit)
@@ -46108,7 +46108,7 @@ func (setup *PageSetupInstance) GetBottomMargin(unit Unit) float64 {
 func (setup *PageSetupInstance) GetLeftMargin(unit Unit) float64 {
 	var carg0 *C.GtkPageSetup // in, none, converted
 	var carg1 C.GtkUnit       // in, none, casted
-	var cret  C.gdouble       // return, none, casted
+	var cret  C.double        // return, none, casted, casted C.gdouble
 
 	carg0 = (*C.GtkPageSetup)(UnsafePageSetupToGlibNone(setup))
 	carg1 = C.GtkUnit(unit)
@@ -46164,7 +46164,7 @@ func (setup *PageSetupInstance) GetOrientation() PageOrientation {
 func (setup *PageSetupInstance) GetPageHeight(unit Unit) float64 {
 	var carg0 *C.GtkPageSetup // in, none, converted
 	var carg1 C.GtkUnit       // in, none, casted
-	var cret  C.gdouble       // return, none, casted
+	var cret  C.double        // return, none, casted, casted C.gdouble
 
 	carg0 = (*C.GtkPageSetup)(UnsafePageSetupToGlibNone(setup))
 	carg1 = C.GtkUnit(unit)
@@ -46198,7 +46198,7 @@ func (setup *PageSetupInstance) GetPageHeight(unit Unit) float64 {
 func (setup *PageSetupInstance) GetPageWidth(unit Unit) float64 {
 	var carg0 *C.GtkPageSetup // in, none, converted
 	var carg1 C.GtkUnit       // in, none, casted
-	var cret  C.gdouble       // return, none, casted
+	var cret  C.double        // return, none, casted, casted C.gdouble
 
 	carg0 = (*C.GtkPageSetup)(UnsafePageSetupToGlibNone(setup))
 	carg1 = C.GtkUnit(unit)
@@ -46232,7 +46232,7 @@ func (setup *PageSetupInstance) GetPageWidth(unit Unit) float64 {
 func (setup *PageSetupInstance) GetPaperHeight(unit Unit) float64 {
 	var carg0 *C.GtkPageSetup // in, none, converted
 	var carg1 C.GtkUnit       // in, none, casted
-	var cret  C.gdouble       // return, none, casted
+	var cret  C.double        // return, none, casted, casted C.gdouble
 
 	carg0 = (*C.GtkPageSetup)(UnsafePageSetupToGlibNone(setup))
 	carg1 = C.GtkUnit(unit)
@@ -46288,7 +46288,7 @@ func (setup *PageSetupInstance) GetPaperSize() *PaperSize {
 func (setup *PageSetupInstance) GetPaperWidth(unit Unit) float64 {
 	var carg0 *C.GtkPageSetup // in, none, converted
 	var carg1 C.GtkUnit       // in, none, casted
-	var cret  C.gdouble       // return, none, casted
+	var cret  C.double        // return, none, casted, casted C.gdouble
 
 	carg0 = (*C.GtkPageSetup)(UnsafePageSetupToGlibNone(setup))
 	carg1 = C.GtkUnit(unit)
@@ -46318,7 +46318,7 @@ func (setup *PageSetupInstance) GetPaperWidth(unit Unit) float64 {
 func (setup *PageSetupInstance) GetRightMargin(unit Unit) float64 {
 	var carg0 *C.GtkPageSetup // in, none, converted
 	var carg1 C.GtkUnit       // in, none, casted
-	var cret  C.gdouble       // return, none, casted
+	var cret  C.double        // return, none, casted, casted C.gdouble
 
 	carg0 = (*C.GtkPageSetup)(UnsafePageSetupToGlibNone(setup))
 	carg1 = C.GtkUnit(unit)
@@ -46348,7 +46348,7 @@ func (setup *PageSetupInstance) GetRightMargin(unit Unit) float64 {
 func (setup *PageSetupInstance) GetTopMargin(unit Unit) float64 {
 	var carg0 *C.GtkPageSetup // in, none, converted
 	var carg1 C.GtkUnit       // in, none, casted
-	var cret  C.gdouble       // return, none, casted
+	var cret  C.double        // return, none, casted, casted C.gdouble
 
 	carg0 = (*C.GtkPageSetup)(UnsafePageSetupToGlibNone(setup))
 	carg1 = C.GtkUnit(unit)
@@ -46380,12 +46380,12 @@ func (setup *PageSetupInstance) GetTopMargin(unit Unit) float64 {
 // See [method@Gtk.PageSetup.to_file].
 func (setup *PageSetupInstance) LoadFile(fileName string) (bool, error) {
 	var carg0 *C.GtkPageSetup // in, none, converted
-	var carg1 *C.gchar        // in, none, string
+	var carg1 *C.char         // in, none, string, casted *C.gchar
 	var cret  C.gboolean      // return
 	var _cerr *C.GError       // out, full, converted, nullable
 
 	carg0 = (*C.GtkPageSetup)(UnsafePageSetupToGlibNone(setup))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(fileName)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(fileName)))
 	defer C.free(unsafe.Pointer(carg1))
 
 	cret = C.gtk_page_setup_load_file(carg0, carg1, &_cerr)
@@ -46423,14 +46423,14 @@ func (setup *PageSetupInstance) LoadFile(fileName string) (bool, error) {
 func (setup *PageSetupInstance) LoadKeyFile(keyFile *glib.KeyFile, groupName string) (bool, error) {
 	var carg0 *C.GtkPageSetup // in, none, converted
 	var carg1 *C.GKeyFile     // in, none, converted
-	var carg2 *C.gchar        // in, none, string, nullable-string
+	var carg2 *C.char         // in, none, string, nullable-string
 	var cret  C.gboolean      // return
 	var _cerr *C.GError       // out, full, converted, nullable
 
 	carg0 = (*C.GtkPageSetup)(UnsafePageSetupToGlibNone(setup))
 	carg1 = (*C.GKeyFile)(glib.UnsafeKeyFileToGlibNone(keyFile))
 	if groupName != "" {
-		carg2 = (*C.gchar)(unsafe.Pointer(C.CString(groupName)))
+		carg2 = (*C.char)(unsafe.Pointer(C.CString(groupName)))
 		defer C.free(unsafe.Pointer(carg2))
 	}
 
@@ -46462,11 +46462,11 @@ func (setup *PageSetupInstance) LoadKeyFile(keyFile *glib.KeyFile, groupName str
 // Sets the bottom margin of the `GtkPageSetup`.
 func (setup *PageSetupInstance) SetBottomMargin(margin float64, unit Unit) {
 	var carg0 *C.GtkPageSetup // in, none, converted
-	var carg1 C.gdouble       // in, none, casted
+	var carg1 C.double        // in, none, casted, casted C.gdouble
 	var carg2 C.GtkUnit       // in, none, casted
 
 	carg0 = (*C.GtkPageSetup)(UnsafePageSetupToGlibNone(setup))
-	carg1 = C.gdouble(margin)
+	carg1 = C.double(margin)
 	carg2 = C.GtkUnit(unit)
 
 	C.gtk_page_setup_set_bottom_margin(carg0, carg1, carg2)
@@ -46485,11 +46485,11 @@ func (setup *PageSetupInstance) SetBottomMargin(margin float64, unit Unit) {
 // Sets the left margin of the `GtkPageSetup`.
 func (setup *PageSetupInstance) SetLeftMargin(margin float64, unit Unit) {
 	var carg0 *C.GtkPageSetup // in, none, converted
-	var carg1 C.gdouble       // in, none, casted
+	var carg1 C.double        // in, none, casted, casted C.gdouble
 	var carg2 C.GtkUnit       // in, none, casted
 
 	carg0 = (*C.GtkPageSetup)(UnsafePageSetupToGlibNone(setup))
-	carg1 = C.gdouble(margin)
+	carg1 = C.double(margin)
 	carg2 = C.GtkUnit(unit)
 
 	C.gtk_page_setup_set_left_margin(carg0, carg1, carg2)
@@ -46569,11 +46569,11 @@ func (setup *PageSetupInstance) SetPaperSizeAndDefaultMargins(size *PaperSize) {
 // Sets the right margin of the `GtkPageSetup`.
 func (setup *PageSetupInstance) SetRightMargin(margin float64, unit Unit) {
 	var carg0 *C.GtkPageSetup // in, none, converted
-	var carg1 C.gdouble       // in, none, casted
+	var carg1 C.double        // in, none, casted, casted C.gdouble
 	var carg2 C.GtkUnit       // in, none, casted
 
 	carg0 = (*C.GtkPageSetup)(UnsafePageSetupToGlibNone(setup))
-	carg1 = C.gdouble(margin)
+	carg1 = C.double(margin)
 	carg2 = C.GtkUnit(unit)
 
 	C.gtk_page_setup_set_right_margin(carg0, carg1, carg2)
@@ -46592,11 +46592,11 @@ func (setup *PageSetupInstance) SetRightMargin(margin float64, unit Unit) {
 // Sets the top margin of the `GtkPageSetup`.
 func (setup *PageSetupInstance) SetTopMargin(margin float64, unit Unit) {
 	var carg0 *C.GtkPageSetup // in, none, converted
-	var carg1 C.gdouble       // in, none, casted
+	var carg1 C.double        // in, none, casted, casted C.gdouble
 	var carg2 C.GtkUnit       // in, none, casted
 
 	carg0 = (*C.GtkPageSetup)(UnsafePageSetupToGlibNone(setup))
-	carg1 = C.gdouble(margin)
+	carg1 = C.double(margin)
 	carg2 = C.GtkUnit(unit)
 
 	C.gtk_page_setup_set_top_margin(carg0, carg1, carg2)
@@ -46619,12 +46619,12 @@ func (setup *PageSetupInstance) SetTopMargin(margin float64, unit Unit) {
 // This function saves the information from @setup to @file_name.
 func (setup *PageSetupInstance) ToFile(fileName string) (bool, error) {
 	var carg0 *C.GtkPageSetup // in, none, converted
-	var carg1 *C.gchar        // in, none, string
+	var carg1 *C.char         // in, none, string, casted *C.gchar
 	var cret  C.gboolean      // return
 	var _cerr *C.GError       // out, full, converted, nullable
 
 	carg0 = (*C.GtkPageSetup)(UnsafePageSetupToGlibNone(setup))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(fileName)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(fileName)))
 	defer C.free(unsafe.Pointer(carg1))
 
 	cret = C.gtk_page_setup_to_file(carg0, carg1, &_cerr)
@@ -46656,12 +46656,12 @@ func (setup *PageSetupInstance) ToFile(fileName string) (bool, error) {
 func (setup *PageSetupInstance) ToKeyFile(keyFile *glib.KeyFile, groupName string) {
 	var carg0 *C.GtkPageSetup // in, none, converted
 	var carg1 *C.GKeyFile     // in, none, converted
-	var carg2 *C.gchar        // in, none, string, nullable-string
+	var carg2 *C.char         // in, none, string, nullable-string
 
 	carg0 = (*C.GtkPageSetup)(UnsafePageSetupToGlibNone(setup))
 	carg1 = (*C.GKeyFile)(glib.UnsafeKeyFileToGlibNone(keyFile))
 	if groupName != "" {
-		carg2 = (*C.gchar)(unsafe.Pointer(C.CString(groupName)))
+		carg2 = (*C.char)(unsafe.Pointer(C.CString(groupName)))
 		defer C.free(unsafe.Pointer(carg2))
 	}
 
@@ -46992,7 +46992,7 @@ func (context *PrintContextInstance) CreatePangoLayout() pango.Layout {
 // in dots per inch.
 func (context *PrintContextInstance) GetDPIX() float64 {
 	var carg0 *C.GtkPrintContext // in, none, converted
-	var cret  C.gdouble          // return, none, casted
+	var cret  C.double           // return, none, casted, casted C.gdouble
 
 	carg0 = (*C.GtkPrintContext)(UnsafePrintContextToGlibNone(context))
 
@@ -47015,7 +47015,7 @@ func (context *PrintContextInstance) GetDPIX() float64 {
 // in dots per inch.
 func (context *PrintContextInstance) GetDPIY() float64 {
 	var carg0 *C.GtkPrintContext // in, none, converted
-	var cret  C.gdouble          // return, none, casted
+	var cret  C.double           // return, none, casted, casted C.gdouble
 
 	carg0 = (*C.GtkPrintContext)(UnsafePrintContextToGlibNone(context))
 
@@ -47042,10 +47042,10 @@ func (context *PrintContextInstance) GetDPIY() float64 {
 // in units.
 func (context *PrintContextInstance) GetHardMargins() (float64, float64, float64, float64, bool) {
 	var carg0 *C.GtkPrintContext // in, none, converted
-	var carg1 C.gdouble          // out, full, casted
-	var carg2 C.gdouble          // out, full, casted
-	var carg3 C.gdouble          // out, full, casted
-	var carg4 C.gdouble          // out, full, casted
+	var carg1 C.double           // out, full, casted, casted C.gdouble
+	var carg2 C.double           // out, full, casted, casted C.gdouble
+	var carg3 C.double           // out, full, casted, casted C.gdouble
+	var carg4 C.double           // out, full, casted, casted C.gdouble
 	var cret  C.gboolean         // return
 
 	carg0 = (*C.GtkPrintContext)(UnsafePrintContextToGlibNone(context))
@@ -47078,7 +47078,7 @@ func (context *PrintContextInstance) GetHardMargins() (float64, float64, float64
 // Obtains the height of the `GtkPrintContext`, in pixels.
 func (context *PrintContextInstance) GetHeight() float64 {
 	var carg0 *C.GtkPrintContext // in, none, converted
-	var cret  C.gdouble          // return, none, casted
+	var cret  C.double           // return, none, casted, casted C.gdouble
 
 	carg0 = (*C.GtkPrintContext)(UnsafePrintContextToGlibNone(context))
 
@@ -47146,7 +47146,7 @@ func (context *PrintContextInstance) GetPangoFontmap() pango.FontMap {
 // Obtains the width of the `GtkPrintContext`, in pixels.
 func (context *PrintContextInstance) GetWidth() float64 {
 	var carg0 *C.GtkPrintContext // in, none, converted
-	var cret  C.gdouble          // return, none, casted
+	var cret  C.double           // return, none, casted, casted C.gdouble
 
 	carg0 = (*C.GtkPrintContext)(UnsafePrintContextToGlibNone(context))
 
@@ -47437,7 +47437,7 @@ func NewPrintDialogInstance() PrintDialog {
 // accept button of the print dialog.
 func (self *PrintDialogInstance) GetAcceptLabel() string {
 	var carg0 *C.GtkPrintDialog // in, none, converted
-	var cret  *C.gchar          // return, none, string
+	var cret  *C.char           // return, none, string, casted *C.gchar
 
 	carg0 = (*C.GtkPrintDialog)(UnsafePrintDialogToGlibNone(self))
 
@@ -47446,7 +47446,7 @@ func (self *PrintDialogInstance) GetAcceptLabel() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -47530,7 +47530,7 @@ func (self *PrintDialogInstance) GetPrintSettings() PrintSettings {
 // print dialog.
 func (self *PrintDialogInstance) GetTitle() string {
 	var carg0 *C.GtkPrintDialog // in, none, converted
-	var cret  *C.gchar          // return, none, string
+	var cret  *C.char           // return, none, string, casted *C.gchar
 
 	carg0 = (*C.GtkPrintDialog)(UnsafePrintDialogToGlibNone(self))
 
@@ -47539,7 +47539,7 @@ func (self *PrintDialogInstance) GetTitle() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -47737,10 +47737,10 @@ func (self *PrintDialogInstance) PrintFinish(result gio.AsyncResult) (gio.Output
 // [method@Gtk.PrintDialog.setup].
 func (self *PrintDialogInstance) SetAcceptLabel(acceptLabel string) {
 	var carg0 *C.GtkPrintDialog // in, none, converted
-	var carg1 *C.gchar          // in, none, string
+	var carg1 *C.char           // in, none, string, casted *C.gchar
 
 	carg0 = (*C.GtkPrintDialog)(UnsafePrintDialogToGlibNone(self))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(acceptLabel)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(acceptLabel)))
 	defer C.free(unsafe.Pointer(carg1))
 
 	C.gtk_print_dialog_set_accept_label(carg0, carg1)
@@ -47818,10 +47818,10 @@ func (self *PrintDialogInstance) SetPrintSettings(printSettings PrintSettings) {
 // Sets the title that will be shown on the print dialog.
 func (self *PrintDialogInstance) SetTitle(title string) {
 	var carg0 *C.GtkPrintDialog // in, none, converted
-	var carg1 *C.gchar          // in, none, string
+	var carg1 *C.char           // in, none, string, casted *C.gchar
 
 	carg0 = (*C.GtkPrintDialog)(UnsafePrintDialogToGlibNone(self))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(title)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(title)))
 	defer C.free(unsafe.Pointer(carg1))
 
 	C.gtk_print_dialog_set_title(carg0, carg1)
@@ -48247,13 +48247,13 @@ func UnsafePrintJobToGlibFull(c PrintJob) unsafe.Pointer {
 //
 // Creates a new `GtkPrintJob`.
 func NewPrintJobInstance(title string, printer Printer, settings PrintSettings, pageSetup PageSetup) PrintJob {
-	var carg1 *C.gchar            // in, none, string
+	var carg1 *C.char             // in, none, string, casted *C.gchar
 	var carg2 *C.GtkPrinter       // in, none, converted
 	var carg3 *C.GtkPrintSettings // in, none, converted
 	var carg4 *C.GtkPageSetup     // in, none, converted
 	var cret  *C.GtkPrintJob      // return, full, converted
 
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(title)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(title)))
 	defer C.free(unsafe.Pointer(carg1))
 	carg2 = (*C.GtkPrinter)(UnsafePrinterToGlibNone(printer))
 	carg3 = (*C.GtkPrintSettings)(UnsafePrintSettingsToGlibNone(settings))
@@ -48348,7 +48348,7 @@ func (job *PrintJobInstance) GetNUpLayout() NumberUpLayout {
 // Gets the number of copies of this job.
 func (job *PrintJobInstance) GetNumCopies() int {
 	var carg0 *C.GtkPrintJob // in, none, converted
-	var cret  C.int          // return, none, casted
+	var cret  C.int          // return, none, casted, casted C.gint
 
 	carg0 = (*C.GtkPrintJob)(UnsafePrintJobToGlibNone(job))
 
@@ -48371,7 +48371,7 @@ func (job *PrintJobInstance) GetNumCopies() int {
 // Gets the page ranges for this job.
 func (job *PrintJobInstance) GetPageRanges() (int, []PageRange) {
 	var carg0 *C.GtkPrintJob  // in, none, converted
-	var carg1 C.int           // out, full, casted
+	var carg1 C.int           // out, full, casted, casted C.gint
 	var cret  *C.GtkPageRange // return, transfer: none, C Pointers: 1, Name: array[PageRange], scope: , array (inner: *typesystem.Record)
 
 	carg0 = (*C.GtkPrintJob)(UnsafePrintJobToGlibNone(job))
@@ -48512,7 +48512,7 @@ func (job *PrintJobInstance) GetRotate() bool {
 // Gets the scale for this job.
 func (job *PrintJobInstance) GetScale() float64 {
 	var carg0 *C.GtkPrintJob // in, none, converted
-	var cret  C.gdouble      // return, none, casted
+	var cret  C.double       // return, none, casted, casted C.gdouble
 
 	carg0 = (*C.GtkPrintJob)(UnsafePrintJobToGlibNone(job))
 
@@ -48578,7 +48578,7 @@ func (job *PrintJobInstance) GetStatus() PrintStatus {
 // Gets the job title.
 func (job *PrintJobInstance) GetTitle() string {
 	var carg0 *C.GtkPrintJob // in, none, converted
-	var cret  *C.gchar       // return, none, string
+	var cret  *C.char        // return, none, string, casted *C.gchar
 
 	carg0 = (*C.GtkPrintJob)(UnsafePrintJobToGlibNone(job))
 
@@ -48587,7 +48587,7 @@ func (job *PrintJobInstance) GetTitle() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -48710,7 +48710,7 @@ func (job *PrintJobInstance) SetNUpLayout(layout NumberUpLayout) {
 // Sets the number of copies for this job.
 func (job *PrintJobInstance) SetNumCopies(numCopies int) {
 	var carg0 *C.GtkPrintJob // in, none, converted
-	var carg1 C.int          // in, none, casted
+	var carg1 C.int          // in, none, casted, casted C.gint
 
 	carg0 = (*C.GtkPrintJob)(UnsafePrintJobToGlibNone(job))
 	carg1 = C.int(numCopies)
@@ -48835,10 +48835,10 @@ func (job *PrintJobInstance) SetRotate(rotate bool) {
 // 1.0 means unscaled.
 func (job *PrintJobInstance) SetScale(scale float64) {
 	var carg0 *C.GtkPrintJob // in, none, converted
-	var carg1 C.gdouble      // in, none, casted
+	var carg1 C.double       // in, none, casted, casted C.gdouble
 
 	carg0 = (*C.GtkPrintJob)(UnsafePrintJobToGlibNone(job))
-	carg1 = C.gdouble(scale)
+	carg1 = C.double(scale)
 
 	C.gtk_print_job_set_scale(carg0, carg1)
 	runtime.KeepAlive(job)
@@ -48869,7 +48869,7 @@ func (job *PrintJobInstance) SetScale(scale float64) {
 // instead of a filename.
 func (job *PrintJobInstance) SetSourceFd(fd int) (bool, error) {
 	var carg0 *C.GtkPrintJob // in, none, converted
-	var carg1 C.int          // in, none, casted
+	var carg1 C.int          // in, none, casted, casted C.gint
 	var cret  C.gboolean     // return
 	var _cerr *C.GError      // out, full, converted, nullable
 
@@ -48913,12 +48913,12 @@ func (job *PrintJobInstance) SetSourceFd(fd int) (bool, error) {
 // [method@Gtk.Printer.accepts_ps].
 func (job *PrintJobInstance) SetSourceFile(filename string) (bool, error) {
 	var carg0 *C.GtkPrintJob // in, none, converted
-	var carg1 *C.gchar       // in, none, string
+	var carg1 *C.char        // in, none, string, casted *C.gchar
 	var cret  C.gboolean     // return
 	var _cerr *C.GError      // out, full, converted, nullable
 
 	carg0 = (*C.GtkPrintJob)(UnsafePrintJobToGlibNone(job))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(filename)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(filename)))
 	defer C.free(unsafe.Pointer(carg1))
 
 	cret = C.gtk_print_job_set_source_file(carg0, carg1, &_cerr)
@@ -49632,7 +49632,7 @@ func (op *PrintOperationInstance) GetHasSelection() bool {
 // This is typically used to track the progress of print operation.
 func (op *PrintOperationInstance) GetNPagesToPrint() int {
 	var carg0 *C.GtkPrintOperation // in, none, converted
-	var cret  C.int                // return, none, casted
+	var cret  C.int                // return, none, casted, casted C.gint
 
 	carg0 = (*C.GtkPrintOperation)(UnsafePrintOperationToGlibNone(op))
 
@@ -49711,7 +49711,7 @@ func (op *PrintOperationInstance) GetStatus() PrintStatus {
 // a status value that is suitable for programmatic use.
 func (op *PrintOperationInstance) GetStatusString() string {
 	var carg0 *C.GtkPrintOperation // in, none, converted
-	var cret  *C.gchar             // return, none, string
+	var cret  *C.char              // return, none, string, casted *C.gchar
 
 	carg0 = (*C.GtkPrintOperation)(UnsafePrintOperationToGlibNone(op))
 
@@ -49720,7 +49720,7 @@ func (op *PrintOperationInstance) GetStatusString() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -49916,7 +49916,7 @@ func (op *PrintOperationInstance) SetAllowAsync(allowAsync bool) {
 // Note that this only makes sense for pre-paginated documents.
 func (op *PrintOperationInstance) SetCurrentPage(currentPage int) {
 	var carg0 *C.GtkPrintOperation // in, none, converted
-	var carg1 C.int                // in, none, casted
+	var carg1 C.int                // in, none, casted, casted C.gint
 
 	carg0 = (*C.GtkPrintOperation)(UnsafePrintOperationToGlibNone(op))
 	carg1 = C.int(currentPage)
@@ -49935,11 +49935,11 @@ func (op *PrintOperationInstance) SetCurrentPage(currentPage int) {
 // Sets the label for the tab holding custom widgets.
 func (op *PrintOperationInstance) SetCustomTabLabel(label string) {
 	var carg0 *C.GtkPrintOperation // in, none, converted
-	var carg1 *C.gchar             // in, none, string, nullable-string
+	var carg1 *C.char              // in, none, string, nullable-string
 
 	carg0 = (*C.GtkPrintOperation)(UnsafePrintOperationToGlibNone(op))
 	if label != "" {
-		carg1 = (*C.gchar)(unsafe.Pointer(C.CString(label)))
+		carg1 = (*C.char)(unsafe.Pointer(C.CString(label)))
 		defer C.free(unsafe.Pointer(carg1))
 	}
 
@@ -50032,10 +50032,10 @@ func (op *PrintOperationInstance) SetEmbedPageSetup(embed bool) {
 // of printers in the print dialog.
 func (op *PrintOperationInstance) SetExportFilename(filename string) {
 	var carg0 *C.GtkPrintOperation // in, none, converted
-	var carg1 *C.gchar             // in, none, string
+	var carg1 *C.char              // in, none, string, casted *C.gchar
 
 	carg0 = (*C.GtkPrintOperation)(UnsafePrintOperationToGlibNone(op))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(filename)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(filename)))
 	defer C.free(unsafe.Pointer(carg1))
 
 	C.gtk_print_operation_set_export_filename(carg0, carg1)
@@ -50083,10 +50083,10 @@ func (op *PrintOperationInstance) SetHasSelection(hasSelection bool) {
 // numbering successive print jobs.
 func (op *PrintOperationInstance) SetJobName(jobName string) {
 	var carg0 *C.GtkPrintOperation // in, none, converted
-	var carg1 *C.gchar             // in, none, string
+	var carg1 *C.char              // in, none, string, casted *C.gchar
 
 	carg0 = (*C.GtkPrintOperation)(UnsafePrintOperationToGlibNone(op))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(jobName)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(jobName)))
 	defer C.free(unsafe.Pointer(carg1))
 
 	C.gtk_print_operation_set_job_name(carg0, carg1)
@@ -50113,7 +50113,7 @@ func (op *PrintOperationInstance) SetJobName(jobName string) {
 // will be for page @n_pages - 1.
 func (op *PrintOperationInstance) SetNPages(nPages int) {
 	var carg0 *C.GtkPrintOperation // in, none, converted
-	var carg1 C.int                // in, none, casted
+	var carg1 C.int                // in, none, casted, casted C.gint
 
 	carg0 = (*C.GtkPrintOperation)(UnsafePrintOperationToGlibNone(op))
 	carg1 = C.int(nPages)
@@ -51021,11 +51021,11 @@ func NewPrintSettingsInstance() PrintSettings {
 // 
 // See [method@Gtk.PrintSettings.to_file].
 func NewPrintSettingsInstanceFromFile(fileName string) (PrintSettings, error) {
-	var carg1 *C.gchar            // in, none, string
+	var carg1 *C.char             // in, none, string, casted *C.gchar
 	var cret  *C.GtkPrintSettings // return, full, converted
 	var _cerr *C.GError           // out, full, converted, nullable
 
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(fileName)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(fileName)))
 	defer C.free(unsafe.Pointer(carg1))
 
 	cret = C.gtk_print_settings_new_from_file(carg1, &_cerr)
@@ -51062,13 +51062,13 @@ func NewPrintSettingsInstanceFromFile(fileName string) (PrintSettings, error) {
 // error is set to either `GFileError` or `GKeyFileError`.
 func NewPrintSettingsInstanceFromKeyFile(keyFile *glib.KeyFile, groupName string) (PrintSettings, error) {
 	var carg1 *C.GKeyFile         // in, none, converted
-	var carg2 *C.gchar            // in, none, string, nullable-string
+	var carg2 *C.char             // in, none, string, nullable-string
 	var cret  *C.GtkPrintSettings // return, full, converted
 	var _cerr *C.GError           // out, full, converted, nullable
 
 	carg1 = (*C.GKeyFile)(glib.UnsafeKeyFileToGlibNone(keyFile))
 	if groupName != "" {
-		carg2 = (*C.gchar)(unsafe.Pointer(C.CString(groupName)))
+		carg2 = (*C.char)(unsafe.Pointer(C.CString(groupName)))
 		defer C.free(unsafe.Pointer(carg2))
 	}
 
@@ -51144,11 +51144,11 @@ func (settings *PrintSettingsInstance) ForEach(fn PrintSettingsFunc) {
 // Looks up the string value associated with @key.
 func (settings *PrintSettingsInstance) Get(key string) string {
 	var carg0 *C.GtkPrintSettings // in, none, converted
-	var carg1 *C.gchar            // in, none, string
-	var cret  *C.gchar            // return, none, string
+	var carg1 *C.char             // in, none, string, casted *C.gchar
+	var cret  *C.char             // return, none, string, casted *C.gchar
 
 	carg0 = (*C.GtkPrintSettings)(UnsafePrintSettingsToGlibNone(settings))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(key)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(key)))
 	defer C.free(unsafe.Pointer(carg1))
 
 	cret = C.gtk_print_settings_get(carg0, carg1)
@@ -51157,7 +51157,7 @@ func (settings *PrintSettingsInstance) Get(key string) string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -51179,11 +51179,11 @@ func (settings *PrintSettingsInstance) Get(key string) string {
 // string %FALSE.
 func (settings *PrintSettingsInstance) GetBool(key string) bool {
 	var carg0 *C.GtkPrintSettings // in, none, converted
-	var carg1 *C.gchar            // in, none, string
+	var carg1 *C.char             // in, none, string, casted *C.gchar
 	var cret  C.gboolean          // return
 
 	carg0 = (*C.GtkPrintSettings)(UnsafePrintSettingsToGlibNone(settings))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(key)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(key)))
 	defer C.free(unsafe.Pointer(carg1))
 
 	cret = C.gtk_print_settings_get_bool(carg0, carg1)
@@ -51231,7 +51231,7 @@ func (settings *PrintSettingsInstance) GetCollate() bool {
 // Gets the value of %GTK_PRINT_SETTINGS_DEFAULT_SOURCE.
 func (settings *PrintSettingsInstance) GetDefaultSource() string {
 	var carg0 *C.GtkPrintSettings // in, none, converted
-	var cret  *C.gchar            // return, none, string
+	var cret  *C.char             // return, none, string, casted *C.gchar
 
 	carg0 = (*C.GtkPrintSettings)(UnsafePrintSettingsToGlibNone(settings))
 
@@ -51240,7 +51240,7 @@ func (settings *PrintSettingsInstance) GetDefaultSource() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -51253,7 +51253,7 @@ func (settings *PrintSettingsInstance) GetDefaultSource() string {
 // Gets the value of %GTK_PRINT_SETTINGS_DITHER.
 func (settings *PrintSettingsInstance) GetDither() string {
 	var carg0 *C.GtkPrintSettings // in, none, converted
-	var cret  *C.gchar            // return, none, string
+	var cret  *C.char             // return, none, string, casted *C.gchar
 
 	carg0 = (*C.GtkPrintSettings)(UnsafePrintSettingsToGlibNone(settings))
 
@@ -51262,7 +51262,7 @@ func (settings *PrintSettingsInstance) GetDither() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -51280,11 +51280,11 @@ func (settings *PrintSettingsInstance) GetDither() string {
 // Returns the double value associated with @key, or 0.
 func (settings *PrintSettingsInstance) GetDouble(key string) float64 {
 	var carg0 *C.GtkPrintSettings // in, none, converted
-	var carg1 *C.gchar            // in, none, string
-	var cret  C.gdouble           // return, none, casted
+	var carg1 *C.char             // in, none, string, casted *C.gchar
+	var cret  C.double            // return, none, casted, casted C.gdouble
 
 	carg0 = (*C.GtkPrintSettings)(UnsafePrintSettingsToGlibNone(settings))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(key)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(key)))
 	defer C.free(unsafe.Pointer(carg1))
 
 	cret = C.gtk_print_settings_get_double(carg0, carg1)
@@ -51316,14 +51316,14 @@ func (settings *PrintSettingsInstance) GetDouble(key string) float64 {
 // Floating point numbers are parsed with g_ascii_strtod().
 func (settings *PrintSettingsInstance) GetDoubleWithDefault(key string, def float64) float64 {
 	var carg0 *C.GtkPrintSettings // in, none, converted
-	var carg1 *C.gchar            // in, none, string
-	var carg2 C.gdouble           // in, none, casted
-	var cret  C.gdouble           // return, none, casted
+	var carg1 *C.char             // in, none, string, casted *C.gchar
+	var carg2 C.double            // in, none, casted, casted C.gdouble
+	var cret  C.double            // return, none, casted, casted C.gdouble
 
 	carg0 = (*C.GtkPrintSettings)(UnsafePrintSettingsToGlibNone(settings))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(key)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(key)))
 	defer C.free(unsafe.Pointer(carg1))
-	carg2 = C.gdouble(def)
+	carg2 = C.double(def)
 
 	cret = C.gtk_print_settings_get_double_with_default(carg0, carg1, carg2)
 	runtime.KeepAlive(settings)
@@ -51367,7 +51367,7 @@ func (settings *PrintSettingsInstance) GetDuplex() PrintDuplex {
 // Gets the value of %GTK_PRINT_SETTINGS_FINISHINGS.
 func (settings *PrintSettingsInstance) GetFinishings() string {
 	var carg0 *C.GtkPrintSettings // in, none, converted
-	var cret  *C.gchar            // return, none, string
+	var cret  *C.char             // return, none, string, casted *C.gchar
 
 	carg0 = (*C.GtkPrintSettings)(UnsafePrintSettingsToGlibNone(settings))
 
@@ -51376,7 +51376,7 @@ func (settings *PrintSettingsInstance) GetFinishings() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -51394,11 +51394,11 @@ func (settings *PrintSettingsInstance) GetFinishings() string {
 // Returns the integer value of @key, or 0.
 func (settings *PrintSettingsInstance) GetInt(key string) int {
 	var carg0 *C.GtkPrintSettings // in, none, converted
-	var carg1 *C.gchar            // in, none, string
-	var cret  C.int               // return, none, casted
+	var carg1 *C.char             // in, none, string, casted *C.gchar
+	var cret  C.int               // return, none, casted, casted C.gint
 
 	carg0 = (*C.GtkPrintSettings)(UnsafePrintSettingsToGlibNone(settings))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(key)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(key)))
 	defer C.free(unsafe.Pointer(carg1))
 
 	cret = C.gtk_print_settings_get_int(carg0, carg1)
@@ -51427,12 +51427,12 @@ func (settings *PrintSettingsInstance) GetInt(key string) int {
 // an integer, or the default value.
 func (settings *PrintSettingsInstance) GetIntWithDefault(key string, def int) int {
 	var carg0 *C.GtkPrintSettings // in, none, converted
-	var carg1 *C.gchar            // in, none, string
-	var carg2 C.int               // in, none, casted
-	var cret  C.int               // return, none, casted
+	var carg1 *C.char             // in, none, string, casted *C.gchar
+	var carg2 C.int               // in, none, casted, casted C.gint
+	var cret  C.int               // return, none, casted, casted C.gint
 
 	carg0 = (*C.GtkPrintSettings)(UnsafePrintSettingsToGlibNone(settings))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(key)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(key)))
 	defer C.free(unsafe.Pointer(carg1))
 	carg2 = C.int(def)
 
@@ -51465,12 +51465,12 @@ func (settings *PrintSettingsInstance) GetIntWithDefault(key string, def int) in
 // The returned value is converted to @units.
 func (settings *PrintSettingsInstance) GetLength(key string, unit Unit) float64 {
 	var carg0 *C.GtkPrintSettings // in, none, converted
-	var carg1 *C.gchar            // in, none, string
+	var carg1 *C.char             // in, none, string, casted *C.gchar
 	var carg2 C.GtkUnit           // in, none, casted
-	var cret  C.gdouble           // return, none, casted
+	var cret  C.double            // return, none, casted, casted C.gdouble
 
 	carg0 = (*C.GtkPrintSettings)(UnsafePrintSettingsToGlibNone(settings))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(key)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(key)))
 	defer C.free(unsafe.Pointer(carg1))
 	carg2 = C.GtkUnit(unit)
 
@@ -51496,7 +51496,7 @@ func (settings *PrintSettingsInstance) GetLength(key string, unit Unit) float64 
 // The set of media types is defined in PWG 5101.1-2002 PWG.
 func (settings *PrintSettingsInstance) GetMediaType() string {
 	var carg0 *C.GtkPrintSettings // in, none, converted
-	var cret  *C.gchar            // return, none, string
+	var cret  *C.char             // return, none, string, casted *C.gchar
 
 	carg0 = (*C.GtkPrintSettings)(UnsafePrintSettingsToGlibNone(settings))
 
@@ -51505,7 +51505,7 @@ func (settings *PrintSettingsInstance) GetMediaType() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -51518,7 +51518,7 @@ func (settings *PrintSettingsInstance) GetMediaType() string {
 // Gets the value of %GTK_PRINT_SETTINGS_N_COPIES.
 func (settings *PrintSettingsInstance) GetNCopies() int {
 	var carg0 *C.GtkPrintSettings // in, none, converted
-	var cret  C.int               // return, none, casted
+	var cret  C.int               // return, none, casted, casted C.gint
 
 	carg0 = (*C.GtkPrintSettings)(UnsafePrintSettingsToGlibNone(settings))
 
@@ -51540,7 +51540,7 @@ func (settings *PrintSettingsInstance) GetNCopies() int {
 // Gets the value of %GTK_PRINT_SETTINGS_NUMBER_UP.
 func (settings *PrintSettingsInstance) GetNumberUp() int {
 	var carg0 *C.GtkPrintSettings // in, none, converted
-	var cret  C.int               // return, none, casted
+	var cret  C.int               // return, none, casted, casted C.gint
 
 	carg0 = (*C.GtkPrintSettings)(UnsafePrintSettingsToGlibNone(settings))
 
@@ -51607,7 +51607,7 @@ func (settings *PrintSettingsInstance) GetOrientation() PageOrientation {
 // Gets the value of %GTK_PRINT_SETTINGS_OUTPUT_BIN.
 func (settings *PrintSettingsInstance) GetOutputBin() string {
 	var carg0 *C.GtkPrintSettings // in, none, converted
-	var cret  *C.gchar            // return, none, string
+	var cret  *C.char             // return, none, string, casted *C.gchar
 
 	carg0 = (*C.GtkPrintSettings)(UnsafePrintSettingsToGlibNone(settings))
 
@@ -51616,7 +51616,7 @@ func (settings *PrintSettingsInstance) GetOutputBin() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -51630,7 +51630,7 @@ func (settings *PrintSettingsInstance) GetOutputBin() string {
 // Gets the value of %GTK_PRINT_SETTINGS_PAGE_RANGES.
 func (settings *PrintSettingsInstance) GetPageRanges() (int, []PageRange) {
 	var carg0 *C.GtkPrintSettings // in, none, converted
-	var carg1 C.int               // out, full, casted
+	var carg1 C.int               // out, full, casted, casted C.gint
 	var cret  *C.GtkPageRange     // return, transfer: full, C Pointers: 1, Name: array[PageRange], scope: , array (inner: *typesystem.Record)
 
 	carg0 = (*C.GtkPrintSettings)(UnsafePrintSettingsToGlibNone(settings))
@@ -51686,7 +51686,7 @@ func (settings *PrintSettingsInstance) GetPageSet() PageSet {
 func (settings *PrintSettingsInstance) GetPaperHeight(unit Unit) float64 {
 	var carg0 *C.GtkPrintSettings // in, none, converted
 	var carg1 C.GtkUnit           // in, none, casted
-	var cret  C.gdouble           // return, none, casted
+	var cret  C.double            // return, none, casted, casted C.gdouble
 
 	carg0 = (*C.GtkPrintSettings)(UnsafePrintSettingsToGlibNone(settings))
 	carg1 = C.GtkUnit(unit)
@@ -51740,7 +51740,7 @@ func (settings *PrintSettingsInstance) GetPaperSize() *PaperSize {
 func (settings *PrintSettingsInstance) GetPaperWidth(unit Unit) float64 {
 	var carg0 *C.GtkPrintSettings // in, none, converted
 	var carg1 C.GtkUnit           // in, none, casted
-	var cret  C.gdouble           // return, none, casted
+	var cret  C.double            // return, none, casted, casted C.gdouble
 
 	carg0 = (*C.GtkPrintSettings)(UnsafePrintSettingsToGlibNone(settings))
 	carg1 = C.GtkUnit(unit)
@@ -51787,7 +51787,7 @@ func (settings *PrintSettingsInstance) GetPrintPages() PrintPages {
 // %GTK_PRINT_SETTINGS_PRINTER.
 func (settings *PrintSettingsInstance) GetPrinter() string {
 	var carg0 *C.GtkPrintSettings // in, none, converted
-	var cret  *C.gchar            // return, none, string
+	var cret  *C.char             // return, none, string, casted *C.gchar
 
 	carg0 = (*C.GtkPrintSettings)(UnsafePrintSettingsToGlibNone(settings))
 
@@ -51796,7 +51796,7 @@ func (settings *PrintSettingsInstance) GetPrinter() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -51809,7 +51809,7 @@ func (settings *PrintSettingsInstance) GetPrinter() string {
 // Gets the value of %GTK_PRINT_SETTINGS_PRINTER_LPI.
 func (settings *PrintSettingsInstance) GetPrinterLpi() float64 {
 	var carg0 *C.GtkPrintSettings // in, none, converted
-	var cret  C.gdouble           // return, none, casted
+	var cret  C.double            // return, none, casted, casted C.gdouble
 
 	carg0 = (*C.GtkPrintSettings)(UnsafePrintSettingsToGlibNone(settings))
 
@@ -51853,7 +51853,7 @@ func (settings *PrintSettingsInstance) GetQuality() PrintQuality {
 // Gets the value of %GTK_PRINT_SETTINGS_RESOLUTION.
 func (settings *PrintSettingsInstance) GetResolution() int {
 	var carg0 *C.GtkPrintSettings // in, none, converted
-	var cret  C.int               // return, none, casted
+	var cret  C.int               // return, none, casted, casted C.gint
 
 	carg0 = (*C.GtkPrintSettings)(UnsafePrintSettingsToGlibNone(settings))
 
@@ -51875,7 +51875,7 @@ func (settings *PrintSettingsInstance) GetResolution() int {
 // Gets the value of %GTK_PRINT_SETTINGS_RESOLUTION_X.
 func (settings *PrintSettingsInstance) GetResolutionX() int {
 	var carg0 *C.GtkPrintSettings // in, none, converted
-	var cret  C.int               // return, none, casted
+	var cret  C.int               // return, none, casted, casted C.gint
 
 	carg0 = (*C.GtkPrintSettings)(UnsafePrintSettingsToGlibNone(settings))
 
@@ -51897,7 +51897,7 @@ func (settings *PrintSettingsInstance) GetResolutionX() int {
 // Gets the value of %GTK_PRINT_SETTINGS_RESOLUTION_Y.
 func (settings *PrintSettingsInstance) GetResolutionY() int {
 	var carg0 *C.GtkPrintSettings // in, none, converted
-	var cret  C.int               // return, none, casted
+	var cret  C.int               // return, none, casted, casted C.gint
 
 	carg0 = (*C.GtkPrintSettings)(UnsafePrintSettingsToGlibNone(settings))
 
@@ -51943,7 +51943,7 @@ func (settings *PrintSettingsInstance) GetReverse() bool {
 // Gets the value of %GTK_PRINT_SETTINGS_SCALE.
 func (settings *PrintSettingsInstance) GetScale() float64 {
 	var carg0 *C.GtkPrintSettings // in, none, converted
-	var cret  C.gdouble           // return, none, casted
+	var cret  C.double            // return, none, casted, casted C.gdouble
 
 	carg0 = (*C.GtkPrintSettings)(UnsafePrintSettingsToGlibNone(settings))
 
@@ -51994,11 +51994,11 @@ func (settings *PrintSettingsInstance) GetUseColor() bool {
 // Returns %TRUE, if a value is associated with @key.
 func (settings *PrintSettingsInstance) HasKey(key string) bool {
 	var carg0 *C.GtkPrintSettings // in, none, converted
-	var carg1 *C.gchar            // in, none, string
+	var carg1 *C.char             // in, none, string, casted *C.gchar
 	var cret  C.gboolean          // return
 
 	carg0 = (*C.GtkPrintSettings)(UnsafePrintSettingsToGlibNone(settings))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(key)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(key)))
 	defer C.free(unsafe.Pointer(carg1))
 
 	cret = C.gtk_print_settings_has_key(carg0, carg1)
@@ -52033,12 +52033,12 @@ func (settings *PrintSettingsInstance) HasKey(key string) bool {
 // See [method@Gtk.PrintSettings.to_file].
 func (settings *PrintSettingsInstance) LoadFile(fileName string) (bool, error) {
 	var carg0 *C.GtkPrintSettings // in, none, converted
-	var carg1 *C.gchar            // in, none, string
+	var carg1 *C.char             // in, none, string, casted *C.gchar
 	var cret  C.gboolean          // return
 	var _cerr *C.GError           // out, full, converted, nullable
 
 	carg0 = (*C.GtkPrintSettings)(UnsafePrintSettingsToGlibNone(settings))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(fileName)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(fileName)))
 	defer C.free(unsafe.Pointer(carg1))
 
 	cret = C.gtk_print_settings_load_file(carg0, carg1, &_cerr)
@@ -52078,14 +52078,14 @@ func (settings *PrintSettingsInstance) LoadFile(fileName string) (bool, error) {
 func (settings *PrintSettingsInstance) LoadKeyFile(keyFile *glib.KeyFile, groupName string) (bool, error) {
 	var carg0 *C.GtkPrintSettings // in, none, converted
 	var carg1 *C.GKeyFile         // in, none, converted
-	var carg2 *C.gchar            // in, none, string, nullable-string
+	var carg2 *C.char             // in, none, string, nullable-string
 	var cret  C.gboolean          // return
 	var _cerr *C.GError           // out, full, converted, nullable
 
 	carg0 = (*C.GtkPrintSettings)(UnsafePrintSettingsToGlibNone(settings))
 	carg1 = (*C.GKeyFile)(glib.UnsafeKeyFileToGlibNone(keyFile))
 	if groupName != "" {
-		carg2 = (*C.gchar)(unsafe.Pointer(C.CString(groupName)))
+		carg2 = (*C.char)(unsafe.Pointer(C.CString(groupName)))
 		defer C.free(unsafe.Pointer(carg2))
 	}
 
@@ -52117,14 +52117,14 @@ func (settings *PrintSettingsInstance) LoadKeyFile(keyFile *glib.KeyFile, groupN
 // Associates @value with @key.
 func (settings *PrintSettingsInstance) Set(key string, value string) {
 	var carg0 *C.GtkPrintSettings // in, none, converted
-	var carg1 *C.gchar            // in, none, string
-	var carg2 *C.gchar            // in, none, string, nullable-string
+	var carg1 *C.char             // in, none, string, casted *C.gchar
+	var carg2 *C.char             // in, none, string, nullable-string
 
 	carg0 = (*C.GtkPrintSettings)(UnsafePrintSettingsToGlibNone(settings))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(key)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(key)))
 	defer C.free(unsafe.Pointer(carg1))
 	if value != "" {
-		carg2 = (*C.gchar)(unsafe.Pointer(C.CString(value)))
+		carg2 = (*C.char)(unsafe.Pointer(C.CString(value)))
 		defer C.free(unsafe.Pointer(carg2))
 	}
 
@@ -52144,11 +52144,11 @@ func (settings *PrintSettingsInstance) Set(key string, value string) {
 // Sets @key to a boolean value.
 func (settings *PrintSettingsInstance) SetBool(key string, value bool) {
 	var carg0 *C.GtkPrintSettings // in, none, converted
-	var carg1 *C.gchar            // in, none, string
+	var carg1 *C.char             // in, none, string, casted *C.gchar
 	var carg2 C.gboolean          // in
 
 	carg0 = (*C.GtkPrintSettings)(UnsafePrintSettingsToGlibNone(settings))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(key)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(key)))
 	defer C.free(unsafe.Pointer(carg1))
 	if value {
 		carg2 = C.TRUE
@@ -52190,10 +52190,10 @@ func (settings *PrintSettingsInstance) SetCollate(collate bool) {
 // Sets the value of %GTK_PRINT_SETTINGS_DEFAULT_SOURCE.
 func (settings *PrintSettingsInstance) SetDefaultSource(defaultSource string) {
 	var carg0 *C.GtkPrintSettings // in, none, converted
-	var carg1 *C.gchar            // in, none, string
+	var carg1 *C.char             // in, none, string, casted *C.gchar
 
 	carg0 = (*C.GtkPrintSettings)(UnsafePrintSettingsToGlibNone(settings))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(defaultSource)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(defaultSource)))
 	defer C.free(unsafe.Pointer(carg1))
 
 	C.gtk_print_settings_set_default_source(carg0, carg1)
@@ -52210,10 +52210,10 @@ func (settings *PrintSettingsInstance) SetDefaultSource(defaultSource string) {
 // Sets the value of %GTK_PRINT_SETTINGS_DITHER.
 func (settings *PrintSettingsInstance) SetDither(dither string) {
 	var carg0 *C.GtkPrintSettings // in, none, converted
-	var carg1 *C.gchar            // in, none, string
+	var carg1 *C.char             // in, none, string, casted *C.gchar
 
 	carg0 = (*C.GtkPrintSettings)(UnsafePrintSettingsToGlibNone(settings))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(dither)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(dither)))
 	defer C.free(unsafe.Pointer(carg1))
 
 	C.gtk_print_settings_set_dither(carg0, carg1)
@@ -52231,13 +52231,13 @@ func (settings *PrintSettingsInstance) SetDither(dither string) {
 // Sets @key to a double value.
 func (settings *PrintSettingsInstance) SetDouble(key string, value float64) {
 	var carg0 *C.GtkPrintSettings // in, none, converted
-	var carg1 *C.gchar            // in, none, string
-	var carg2 C.gdouble           // in, none, casted
+	var carg1 *C.char             // in, none, string, casted *C.gchar
+	var carg2 C.double            // in, none, casted, casted C.gdouble
 
 	carg0 = (*C.GtkPrintSettings)(UnsafePrintSettingsToGlibNone(settings))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(key)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(key)))
 	defer C.free(unsafe.Pointer(carg1))
-	carg2 = C.gdouble(value)
+	carg2 = C.double(value)
 
 	C.gtk_print_settings_set_double(carg0, carg1, carg2)
 	runtime.KeepAlive(settings)
@@ -52273,10 +52273,10 @@ func (settings *PrintSettingsInstance) SetDuplex(duplex PrintDuplex) {
 // Sets the value of %GTK_PRINT_SETTINGS_FINISHINGS.
 func (settings *PrintSettingsInstance) SetFinishings(finishings string) {
 	var carg0 *C.GtkPrintSettings // in, none, converted
-	var carg1 *C.gchar            // in, none, string
+	var carg1 *C.char             // in, none, string, casted *C.gchar
 
 	carg0 = (*C.GtkPrintSettings)(UnsafePrintSettingsToGlibNone(settings))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(finishings)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(finishings)))
 	defer C.free(unsafe.Pointer(carg1))
 
 	C.gtk_print_settings_set_finishings(carg0, carg1)
@@ -52294,11 +52294,11 @@ func (settings *PrintSettingsInstance) SetFinishings(finishings string) {
 // Sets @key to an integer value.
 func (settings *PrintSettingsInstance) SetInt(key string, value int) {
 	var carg0 *C.GtkPrintSettings // in, none, converted
-	var carg1 *C.gchar            // in, none, string
-	var carg2 C.int               // in, none, casted
+	var carg1 *C.char             // in, none, string, casted *C.gchar
+	var carg2 C.int               // in, none, casted, casted C.gint
 
 	carg0 = (*C.GtkPrintSettings)(UnsafePrintSettingsToGlibNone(settings))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(key)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(key)))
 	defer C.free(unsafe.Pointer(carg1))
 	carg2 = C.int(value)
 
@@ -52319,14 +52319,14 @@ func (settings *PrintSettingsInstance) SetInt(key string, value int) {
 // Associates a length in units of @unit with @key.
 func (settings *PrintSettingsInstance) SetLength(key string, value float64, unit Unit) {
 	var carg0 *C.GtkPrintSettings // in, none, converted
-	var carg1 *C.gchar            // in, none, string
-	var carg2 C.gdouble           // in, none, casted
+	var carg1 *C.char             // in, none, string, casted *C.gchar
+	var carg2 C.double            // in, none, casted, casted C.gdouble
 	var carg3 C.GtkUnit           // in, none, casted
 
 	carg0 = (*C.GtkPrintSettings)(UnsafePrintSettingsToGlibNone(settings))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(key)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(key)))
 	defer C.free(unsafe.Pointer(carg1))
-	carg2 = C.gdouble(value)
+	carg2 = C.double(value)
 	carg3 = C.GtkUnit(unit)
 
 	C.gtk_print_settings_set_length(carg0, carg1, carg2, carg3)
@@ -52347,10 +52347,10 @@ func (settings *PrintSettingsInstance) SetLength(key string, value float64, unit
 // The set of media types is defined in PWG 5101.1-2002 PWG.
 func (settings *PrintSettingsInstance) SetMediaType(mediaType string) {
 	var carg0 *C.GtkPrintSettings // in, none, converted
-	var carg1 *C.gchar            // in, none, string
+	var carg1 *C.char             // in, none, string, casted *C.gchar
 
 	carg0 = (*C.GtkPrintSettings)(UnsafePrintSettingsToGlibNone(settings))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(mediaType)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(mediaType)))
 	defer C.free(unsafe.Pointer(carg1))
 
 	C.gtk_print_settings_set_media_type(carg0, carg1)
@@ -52367,7 +52367,7 @@ func (settings *PrintSettingsInstance) SetMediaType(mediaType string) {
 // Sets the value of %GTK_PRINT_SETTINGS_N_COPIES.
 func (settings *PrintSettingsInstance) SetNCopies(numCopies int) {
 	var carg0 *C.GtkPrintSettings // in, none, converted
-	var carg1 C.int               // in, none, casted
+	var carg1 C.int               // in, none, casted, casted C.gint
 
 	carg0 = (*C.GtkPrintSettings)(UnsafePrintSettingsToGlibNone(settings))
 	carg1 = C.int(numCopies)
@@ -52386,7 +52386,7 @@ func (settings *PrintSettingsInstance) SetNCopies(numCopies int) {
 // Sets the value of %GTK_PRINT_SETTINGS_NUMBER_UP.
 func (settings *PrintSettingsInstance) SetNumberUp(numberUp int) {
 	var carg0 *C.GtkPrintSettings // in, none, converted
-	var carg1 C.int               // in, none, casted
+	var carg1 C.int               // in, none, casted, casted C.gint
 
 	carg0 = (*C.GtkPrintSettings)(UnsafePrintSettingsToGlibNone(settings))
 	carg1 = C.int(numberUp)
@@ -52443,10 +52443,10 @@ func (settings *PrintSettingsInstance) SetOrientation(orientation PageOrientatio
 // Sets the value of %GTK_PRINT_SETTINGS_OUTPUT_BIN.
 func (settings *PrintSettingsInstance) SetOutputBin(outputBin string) {
 	var carg0 *C.GtkPrintSettings // in, none, converted
-	var carg1 *C.gchar            // in, none, string
+	var carg1 *C.char             // in, none, string, casted *C.gchar
 
 	carg0 = (*C.GtkPrintSettings)(UnsafePrintSettingsToGlibNone(settings))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(outputBin)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(outputBin)))
 	defer C.free(unsafe.Pointer(carg1))
 
 	C.gtk_print_settings_set_output_bin(carg0, carg1)
@@ -52506,11 +52506,11 @@ func (settings *PrintSettingsInstance) SetPageSet(pageSet PageSet) {
 // Sets the value of %GTK_PRINT_SETTINGS_PAPER_HEIGHT.
 func (settings *PrintSettingsInstance) SetPaperHeight(height float64, unit Unit) {
 	var carg0 *C.GtkPrintSettings // in, none, converted
-	var carg1 C.gdouble           // in, none, casted
+	var carg1 C.double            // in, none, casted, casted C.gdouble
 	var carg2 C.GtkUnit           // in, none, casted
 
 	carg0 = (*C.GtkPrintSettings)(UnsafePrintSettingsToGlibNone(settings))
-	carg1 = C.gdouble(height)
+	carg1 = C.double(height)
 	carg2 = C.GtkUnit(unit)
 
 	C.gtk_print_settings_set_paper_height(carg0, carg1, carg2)
@@ -52550,11 +52550,11 @@ func (settings *PrintSettingsInstance) SetPaperSize(paperSize *PaperSize) {
 // Sets the value of %GTK_PRINT_SETTINGS_PAPER_WIDTH.
 func (settings *PrintSettingsInstance) SetPaperWidth(width float64, unit Unit) {
 	var carg0 *C.GtkPrintSettings // in, none, converted
-	var carg1 C.gdouble           // in, none, casted
+	var carg1 C.double            // in, none, casted, casted C.gdouble
 	var carg2 C.GtkUnit           // in, none, casted
 
 	carg0 = (*C.GtkPrintSettings)(UnsafePrintSettingsToGlibNone(settings))
-	carg1 = C.gdouble(width)
+	carg1 = C.double(width)
 	carg2 = C.GtkUnit(unit)
 
 	C.gtk_print_settings_set_paper_width(carg0, carg1, carg2)
@@ -52592,10 +52592,10 @@ func (settings *PrintSettingsInstance) SetPrintPages(pages PrintPages) {
 // to @printer.
 func (settings *PrintSettingsInstance) SetPrinter(printer string) {
 	var carg0 *C.GtkPrintSettings // in, none, converted
-	var carg1 *C.gchar            // in, none, string
+	var carg1 *C.char             // in, none, string, casted *C.gchar
 
 	carg0 = (*C.GtkPrintSettings)(UnsafePrintSettingsToGlibNone(settings))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(printer)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(printer)))
 	defer C.free(unsafe.Pointer(carg1))
 
 	C.gtk_print_settings_set_printer(carg0, carg1)
@@ -52612,10 +52612,10 @@ func (settings *PrintSettingsInstance) SetPrinter(printer string) {
 // Sets the value of %GTK_PRINT_SETTINGS_PRINTER_LPI.
 func (settings *PrintSettingsInstance) SetPrinterLpi(lpi float64) {
 	var carg0 *C.GtkPrintSettings // in, none, converted
-	var carg1 C.gdouble           // in, none, casted
+	var carg1 C.double            // in, none, casted, casted C.gdouble
 
 	carg0 = (*C.GtkPrintSettings)(UnsafePrintSettingsToGlibNone(settings))
-	carg1 = C.gdouble(lpi)
+	carg1 = C.double(lpi)
 
 	C.gtk_print_settings_set_printer_lpi(carg0, carg1)
 	runtime.KeepAlive(settings)
@@ -52652,7 +52652,7 @@ func (settings *PrintSettingsInstance) SetQuality(quality PrintQuality) {
 // %GTK_PRINT_SETTINGS_RESOLUTION_Y.
 func (settings *PrintSettingsInstance) SetResolution(resolution int) {
 	var carg0 *C.GtkPrintSettings // in, none, converted
-	var carg1 C.int               // in, none, casted
+	var carg1 C.int               // in, none, casted, casted C.gint
 
 	carg0 = (*C.GtkPrintSettings)(UnsafePrintSettingsToGlibNone(settings))
 	carg1 = C.int(resolution)
@@ -52674,8 +52674,8 @@ func (settings *PrintSettingsInstance) SetResolution(resolution int) {
 // %GTK_PRINT_SETTINGS_RESOLUTION_Y.
 func (settings *PrintSettingsInstance) SetResolutionXY(resolutionX int, resolutionY int) {
 	var carg0 *C.GtkPrintSettings // in, none, converted
-	var carg1 C.int               // in, none, casted
-	var carg2 C.int               // in, none, casted
+	var carg1 C.int               // in, none, casted, casted C.gint
+	var carg2 C.int               // in, none, casted, casted C.gint
 
 	carg0 = (*C.GtkPrintSettings)(UnsafePrintSettingsToGlibNone(settings))
 	carg1 = C.int(resolutionX)
@@ -52717,10 +52717,10 @@ func (settings *PrintSettingsInstance) SetReverse(reverse bool) {
 // Sets the value of %GTK_PRINT_SETTINGS_SCALE.
 func (settings *PrintSettingsInstance) SetScale(scale float64) {
 	var carg0 *C.GtkPrintSettings // in, none, converted
-	var carg1 C.gdouble           // in, none, casted
+	var carg1 C.double            // in, none, casted, casted C.gdouble
 
 	carg0 = (*C.GtkPrintSettings)(UnsafePrintSettingsToGlibNone(settings))
-	carg1 = C.gdouble(scale)
+	carg1 = C.double(scale)
 
 	C.gtk_print_settings_set_scale(carg0, carg1)
 	runtime.KeepAlive(settings)
@@ -52765,12 +52765,12 @@ func (settings *PrintSettingsInstance) SetUseColor(useColor bool) {
 // `GFileError` or `GKeyFileError`.
 func (settings *PrintSettingsInstance) ToFile(fileName string) (bool, error) {
 	var carg0 *C.GtkPrintSettings // in, none, converted
-	var carg1 *C.gchar            // in, none, string
+	var carg1 *C.char             // in, none, string, casted *C.gchar
 	var cret  C.gboolean          // return
 	var _cerr *C.GError           // out, full, converted, nullable
 
 	carg0 = (*C.GtkPrintSettings)(UnsafePrintSettingsToGlibNone(settings))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(fileName)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(fileName)))
 	defer C.free(unsafe.Pointer(carg1))
 
 	cret = C.gtk_print_settings_to_file(carg0, carg1, &_cerr)
@@ -52802,12 +52802,12 @@ func (settings *PrintSettingsInstance) ToFile(fileName string) (bool, error) {
 func (settings *PrintSettingsInstance) ToKeyFile(keyFile *glib.KeyFile, groupName string) {
 	var carg0 *C.GtkPrintSettings // in, none, converted
 	var carg1 *C.GKeyFile         // in, none, converted
-	var carg2 *C.gchar            // in, none, string, nullable-string
+	var carg2 *C.char             // in, none, string, nullable-string
 
 	carg0 = (*C.GtkPrintSettings)(UnsafePrintSettingsToGlibNone(settings))
 	carg1 = (*C.GKeyFile)(glib.UnsafeKeyFileToGlibNone(keyFile))
 	if groupName != "" {
-		carg2 = (*C.gchar)(unsafe.Pointer(C.CString(groupName)))
+		carg2 = (*C.char)(unsafe.Pointer(C.CString(groupName)))
 		defer C.free(unsafe.Pointer(carg2))
 	}
 
@@ -52828,10 +52828,10 @@ func (settings *PrintSettingsInstance) ToKeyFile(keyFile *glib.KeyFile, groupNam
 // This has the same effect as setting the value to %NULL.
 func (settings *PrintSettingsInstance) Unset(key string) {
 	var carg0 *C.GtkPrintSettings // in, none, converted
-	var carg1 *C.gchar            // in, none, string
+	var carg1 *C.char             // in, none, string, casted *C.gchar
 
 	carg0 = (*C.GtkPrintSettings)(UnsafePrintSettingsToGlibNone(settings))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(key)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(key)))
 	defer C.free(unsafe.Pointer(carg1))
 
 	C.gtk_print_settings_unset(carg0, carg1)
@@ -53109,12 +53109,12 @@ func UnsafePrinterToGlibFull(c Printer) unsafe.Pointer {
 //
 // Creates a new `GtkPrinter`.
 func NewPrinterInstance(name string, backend *PrintBackend, virtual_ bool) Printer {
-	var carg1 *C.gchar           // in, none, string
+	var carg1 *C.char            // in, none, string, casted *C.gchar
 	var carg2 *C.GtkPrintBackend // in, none, converted
 	var carg3 C.gboolean         // in
 	var cret  *C.GtkPrinter      // return, full, converted
 
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(name)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(name)))
 	defer C.free(unsafe.Pointer(carg1))
 	carg2 = (*C.GtkPrintBackend)(UnsafePrintBackendToGlibNone(backend))
 	if virtual_ {
@@ -53197,7 +53197,7 @@ func (printer *PrinterInstance) AcceptsPS() bool {
 func (a *PrinterInstance) Compare(b Printer) int {
 	var carg0 *C.GtkPrinter // in, none, converted
 	var carg1 *C.GtkPrinter // in, none, converted
-	var cret  C.int         // return, none, casted
+	var cret  C.int         // return, none, casted, casted C.gint
 
 	carg0 = (*C.GtkPrinter)(UnsafePrinterToGlibNone(a))
 	carg1 = (*C.GtkPrinter)(UnsafePrinterToGlibNone(b))
@@ -53295,7 +53295,7 @@ func (printer *PrinterInstance) GetDefaultPageSize() PageSetup {
 // Gets the description of the printer.
 func (printer *PrinterInstance) GetDescription() string {
 	var carg0 *C.GtkPrinter // in, none, converted
-	var cret  *C.gchar      // return, none, string
+	var cret  *C.char       // return, none, string, casted *C.gchar
 
 	carg0 = (*C.GtkPrinter)(UnsafePrinterToGlibNone(printer))
 
@@ -53304,7 +53304,7 @@ func (printer *PrinterInstance) GetDescription() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -53328,10 +53328,10 @@ func (printer *PrinterInstance) GetDescription() string {
 // [method@Gtk.Printer.request_details].
 func (printer *PrinterInstance) GetHardMargins() (float64, float64, float64, float64, bool) {
 	var carg0 *C.GtkPrinter // in, none, converted
-	var carg1 C.gdouble     // out, full, casted
-	var carg2 C.gdouble     // out, full, casted
-	var carg3 C.gdouble     // out, full, casted
-	var carg4 C.gdouble     // out, full, casted
+	var carg1 C.double      // out, full, casted, casted C.gdouble
+	var carg2 C.double      // out, full, casted, casted C.gdouble
+	var carg3 C.double      // out, full, casted, casted C.gdouble
+	var carg4 C.double      // out, full, casted, casted C.gdouble
 	var cret  C.gboolean    // return
 
 	carg0 = (*C.GtkPrinter)(UnsafePrinterToGlibNone(printer))
@@ -53381,10 +53381,10 @@ func (printer *PrinterInstance) GetHardMargins() (float64, float64, float64, flo
 func (printer *PrinterInstance) GetHardMarginsForPaperSize(paperSize *PaperSize) (float64, float64, float64, float64, bool) {
 	var carg0 *C.GtkPrinter   // in, none, converted
 	var carg1 *C.GtkPaperSize // in, none, converted
-	var carg2 C.gdouble       // out, full, casted
-	var carg3 C.gdouble       // out, full, casted
-	var carg4 C.gdouble       // out, full, casted
-	var carg5 C.gdouble       // out, full, casted
+	var carg2 C.double        // out, full, casted, casted C.gdouble
+	var carg3 C.double        // out, full, casted, casted C.gdouble
+	var carg4 C.double        // out, full, casted, casted C.gdouble
+	var carg5 C.double        // out, full, casted, casted C.gdouble
 	var cret  C.gboolean      // return
 
 	carg0 = (*C.GtkPrinter)(UnsafePrinterToGlibNone(printer))
@@ -53419,7 +53419,7 @@ func (printer *PrinterInstance) GetHardMarginsForPaperSize(paperSize *PaperSize)
 // Gets the name of the icon to use for the printer.
 func (printer *PrinterInstance) GetIconName() string {
 	var carg0 *C.GtkPrinter // in, none, converted
-	var cret  *C.gchar      // return, none, string
+	var cret  *C.char       // return, none, string, casted *C.gchar
 
 	carg0 = (*C.GtkPrinter)(UnsafePrinterToGlibNone(printer))
 
@@ -53428,7 +53428,7 @@ func (printer *PrinterInstance) GetIconName() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -53441,7 +53441,7 @@ func (printer *PrinterInstance) GetIconName() string {
 // Gets the number of jobs currently queued on the printer.
 func (printer *PrinterInstance) GetJobCount() int {
 	var carg0 *C.GtkPrinter // in, none, converted
-	var cret  C.int         // return, none, casted
+	var cret  C.int         // return, none, casted, casted C.gint
 
 	carg0 = (*C.GtkPrinter)(UnsafePrinterToGlibNone(printer))
 
@@ -53463,7 +53463,7 @@ func (printer *PrinterInstance) GetJobCount() int {
 // Returns a description of the location of the printer.
 func (printer *PrinterInstance) GetLocation() string {
 	var carg0 *C.GtkPrinter // in, none, converted
-	var cret  *C.gchar      // return, none, string
+	var cret  *C.char       // return, none, string, casted *C.gchar
 
 	carg0 = (*C.GtkPrinter)(UnsafePrinterToGlibNone(printer))
 
@@ -53472,7 +53472,7 @@ func (printer *PrinterInstance) GetLocation() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -53485,7 +53485,7 @@ func (printer *PrinterInstance) GetLocation() string {
 // Returns the name of the printer.
 func (printer *PrinterInstance) GetName() string {
 	var carg0 *C.GtkPrinter // in, none, converted
-	var cret  *C.gchar      // return, none, string
+	var cret  *C.char       // return, none, string, casted *C.gchar
 
 	carg0 = (*C.GtkPrinter)(UnsafePrinterToGlibNone(printer))
 
@@ -53494,7 +53494,7 @@ func (printer *PrinterInstance) GetName() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -53508,7 +53508,7 @@ func (printer *PrinterInstance) GetName() string {
 // of the printer.
 func (printer *PrinterInstance) GetStateMessage() string {
 	var carg0 *C.GtkPrinter // in, none, converted
-	var cret  *C.gchar      // return, none, string
+	var cret  *C.char       // return, none, string, casted *C.gchar
 
 	carg0 = (*C.GtkPrinter)(UnsafePrinterToGlibNone(printer))
 
@@ -53517,7 +53517,7 @@ func (printer *PrinterInstance) GetStateMessage() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -53991,12 +53991,12 @@ func RecentManagerInstanceGetDefault() RecentManager {
 // applications that have registered it.
 func (manager *RecentManagerInstance) AddFull(uri string, recentData *RecentData) bool {
 	var carg0 *C.GtkRecentManager // in, none, converted
-	var carg1 *C.gchar            // in, none, string
+	var carg1 *C.char             // in, none, string, casted *C.gchar
 	var carg2 *C.GtkRecentData    // in, none, converted
 	var cret  C.gboolean          // return
 
 	carg0 = (*C.GtkRecentManager)(UnsafeRecentManagerToGlibNone(manager))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(uri)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(uri)))
 	defer C.free(unsafe.Pointer(carg1))
 	carg2 = (*C.GtkRecentData)(UnsafeRecentDataToGlibNone(recentData))
 
@@ -54035,11 +54035,11 @@ func (manager *RecentManagerInstance) AddFull(uri string, recentData *RecentData
 // define the metadata for the resource pointed by @uri.
 func (manager *RecentManagerInstance) AddItem(uri string) bool {
 	var carg0 *C.GtkRecentManager // in, none, converted
-	var carg1 *C.gchar            // in, none, string
+	var carg1 *C.char             // in, none, string, casted *C.gchar
 	var cret  C.gboolean          // return
 
 	carg0 = (*C.GtkRecentManager)(UnsafeRecentManagerToGlibNone(manager))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(uri)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(uri)))
 	defer C.free(unsafe.Pointer(carg1))
 
 	cret = C.gtk_recent_manager_add_item(carg0, carg1)
@@ -54069,11 +54069,11 @@ func (manager *RecentManagerInstance) AddItem(uri string) bool {
 // with @uri inside the recent manager.
 func (manager *RecentManagerInstance) HasItem(uri string) bool {
 	var carg0 *C.GtkRecentManager // in, none, converted
-	var carg1 *C.gchar            // in, none, string
+	var carg1 *C.char             // in, none, string, casted *C.gchar
 	var cret  C.gboolean          // return
 
 	carg0 = (*C.GtkRecentManager)(UnsafeRecentManagerToGlibNone(manager))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(uri)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(uri)))
 	defer C.free(unsafe.Pointer(carg1))
 
 	cret = C.gtk_recent_manager_has_item(carg0, carg1)
@@ -54105,12 +54105,12 @@ func (manager *RecentManagerInstance) HasItem(uri string) bool {
 // like its MIME type, or its display name.
 func (manager *RecentManagerInstance) LookupItem(uri string) (*RecentInfo, error) {
 	var carg0 *C.GtkRecentManager // in, none, converted
-	var carg1 *C.gchar            // in, none, string
+	var carg1 *C.char             // in, none, string, casted *C.gchar
 	var cret  *C.GtkRecentInfo    // return, full, converted
 	var _cerr *C.GError           // out, full, converted, nullable
 
 	carg0 = (*C.GtkRecentManager)(UnsafeRecentManagerToGlibNone(manager))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(uri)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(uri)))
 	defer C.free(unsafe.Pointer(carg1))
 
 	cret = C.gtk_recent_manager_lookup_item(carg0, carg1, &_cerr)
@@ -54147,16 +54147,16 @@ func (manager *RecentManagerInstance) LookupItem(uri string) (*RecentInfo, error
 // by the URIs, but only the URI used in the recently used resources list.
 func (manager *RecentManagerInstance) MoveItem(uri string, newUri string) (bool, error) {
 	var carg0 *C.GtkRecentManager // in, none, converted
-	var carg1 *C.gchar            // in, none, string
-	var carg2 *C.gchar            // in, none, string, nullable-string
+	var carg1 *C.char             // in, none, string, casted *C.gchar
+	var carg2 *C.char             // in, none, string, nullable-string
 	var cret  C.gboolean          // return
 	var _cerr *C.GError           // out, full, converted, nullable
 
 	carg0 = (*C.GtkRecentManager)(UnsafeRecentManagerToGlibNone(manager))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(uri)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(uri)))
 	defer C.free(unsafe.Pointer(carg1))
 	if newUri != "" {
-		carg2 = (*C.gchar)(unsafe.Pointer(C.CString(newUri)))
+		carg2 = (*C.char)(unsafe.Pointer(C.CString(newUri)))
 		defer C.free(unsafe.Pointer(carg2))
 	}
 
@@ -54187,7 +54187,7 @@ func (manager *RecentManagerInstance) MoveItem(uri string, newUri string) (bool,
 // Purges every item from the recently used resources list.
 func (manager *RecentManagerInstance) PurgeItems() (int, error) {
 	var carg0 *C.GtkRecentManager // in, none, converted
-	var cret  C.int               // return, none, casted
+	var cret  C.int               // return, none, casted, casted C.gint
 	var _cerr *C.GError           // out, full, converted, nullable
 
 	carg0 = (*C.GtkRecentManager)(UnsafeRecentManagerToGlibNone(manager))
@@ -54221,12 +54221,12 @@ func (manager *RecentManagerInstance) PurgeItems() (int, error) {
 // list handled by a recent manager.
 func (manager *RecentManagerInstance) RemoveItem(uri string) (bool, error) {
 	var carg0 *C.GtkRecentManager // in, none, converted
-	var carg1 *C.gchar            // in, none, string
+	var carg1 *C.char             // in, none, string, casted *C.gchar
 	var cret  C.gboolean          // return
 	var _cerr *C.GError           // out, full, converted, nullable
 
 	carg0 = (*C.GtkRecentManager)(UnsafeRecentManagerToGlibNone(manager))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(uri)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(uri)))
 	defer C.free(unsafe.Pointer(carg1))
 
 	cret = C.gtk_recent_manager_remove_item(carg0, carg1, &_cerr)
@@ -54553,10 +54553,10 @@ func SettingsInstanceGetForDisplay(display gdk.Display) Settings {
 // value for this setting.
 func (settings *SettingsInstance) ResetProperty(name string) {
 	var carg0 *C.GtkSettings // in, none, converted
-	var carg1 *C.gchar       // in, none, string
+	var carg1 *C.char        // in, none, string, casted *C.gchar
 
 	carg0 = (*C.GtkSettings)(UnsafeSettingsToGlibNone(settings))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(name)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(name)))
 	defer C.free(unsafe.Pointer(carg1))
 
 	C.gtk_settings_reset_property(carg0, carg1)
@@ -54896,10 +54896,10 @@ func UnsafeShortcutActionToGlibFull(c ShortcutAction) unsafe.Pointer {
 // - `action(NAME)`, for a `GtkNamedAction` for the action named `NAME`
 // - `signal(NAME)`, for a `GtkSignalAction` for the signal `NAME`
 func ShortcutActionInstanceParseString(str string) ShortcutAction {
-	var carg1 *C.gchar             // in, none, string
+	var carg1 *C.char              // in, none, string, casted *C.gchar
 	var cret  *C.GtkShortcutAction // return, full, converted
 
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(str)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(str)))
 	defer C.free(unsafe.Pointer(carg1))
 
 	cret = C.gtk_shortcut_action_parse_string(carg1)
@@ -54923,7 +54923,7 @@ func ShortcutActionInstanceParseString(str string) ShortcutAction {
 // to help when debugging.
 func (self *ShortcutActionInstance) ToString() string {
 	var carg0 *C.GtkShortcutAction // in, none, converted
-	var cret  *C.gchar             // return, full, string
+	var cret  *C.char              // return, full, string, casted *C.gchar
 
 	carg0 = (*C.GtkShortcutAction)(UnsafeShortcutActionToGlibNone(self))
 
@@ -54932,7 +54932,7 @@ func (self *ShortcutActionInstance) ToString() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 	defer C.free(unsafe.Pointer(cret))
 
 	return goret
@@ -55429,10 +55429,10 @@ func UnsafeShortcutTriggerToGlibFull(c ShortcutTrigger) unsafe.Pointer {
 // triggers in XML files, such as GtkBuilder ui files. Use `&amp;lt;` instead of
 // `&lt;` and `&amp;gt;` instead of `&gt;`.
 func ShortcutTriggerInstanceParseString(str string) ShortcutTrigger {
-	var carg1 *C.gchar              // in, none, string
+	var carg1 *C.char               // in, none, string, casted *C.gchar
 	var cret  *C.GtkShortcutTrigger // return, full, converted
 
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(str)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(str)))
 	defer C.free(unsafe.Pointer(carg1))
 
 	cret = C.gtk_shortcut_trigger_parse_string(carg1)
@@ -55470,7 +55470,7 @@ func ShortcutTriggerInstanceParseString(str string) ShortcutTrigger {
 func (self *ShortcutTriggerInstance) ToLabel(display gdk.Display) string {
 	var carg0 *C.GtkShortcutTrigger // in, none, converted
 	var carg1 *C.GdkDisplay         // in, none, converted
-	var cret  *C.gchar              // return, full, string
+	var cret  *C.char               // return, full, string, casted *C.gchar
 
 	carg0 = (*C.GtkShortcutTrigger)(UnsafeShortcutTriggerToGlibNone(self))
 	carg1 = (*C.GdkDisplay)(gdk.UnsafeDisplayToGlibNone(display))
@@ -55481,7 +55481,7 @@ func (self *ShortcutTriggerInstance) ToLabel(display gdk.Display) string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 	defer C.free(unsafe.Pointer(cret))
 
 	return goret
@@ -55498,7 +55498,7 @@ func (self *ShortcutTriggerInstance) ToLabel(display gdk.Display) string {
 // to help when debugging.
 func (self *ShortcutTriggerInstance) ToString() string {
 	var carg0 *C.GtkShortcutTrigger // in, none, converted
-	var cret  *C.gchar              // return, full, string
+	var cret  *C.char               // return, full, string, casted *C.gchar
 
 	carg0 = (*C.GtkShortcutTrigger)(UnsafeShortcutTriggerToGlibNone(self))
 
@@ -55507,7 +55507,7 @@ func (self *ShortcutTriggerInstance) ToString() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 	defer C.free(unsafe.Pointer(cret))
 
 	return goret
@@ -55591,10 +55591,10 @@ func UnsafeSignalActionToGlibFull(c SignalAction) unsafe.Pointer {
 // 
 // It will also unpack the args into arguments passed to the signal.
 func NewSignalActionInstance(signalName string) SignalAction {
-	var carg1 *C.gchar             // in, none, string
+	var carg1 *C.char              // in, none, string, casted *C.gchar
 	var cret  *C.GtkShortcutAction // return, full, converted, casted *C.GtkSignalAction
 
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(signalName)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(signalName)))
 	defer C.free(unsafe.Pointer(carg1))
 
 	cret = C.gtk_signal_action_new(carg1)
@@ -55615,7 +55615,7 @@ func NewSignalActionInstance(signalName string) SignalAction {
 // Returns the name of the signal that will be emitted.
 func (self *SignalActionInstance) GetSignalName() string {
 	var carg0 *C.GtkSignalAction // in, none, converted
-	var cret  *C.gchar           // return, none, string
+	var cret  *C.char            // return, none, string, casted *C.gchar
 
 	carg0 = (*C.GtkSignalAction)(UnsafeSignalActionToGlibNone(self))
 
@@ -55624,7 +55624,7 @@ func (self *SignalActionInstance) GetSignalName() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -57499,14 +57499,14 @@ func (snapshot *SnapshotInstance) AppendConicGradient(bounds *graphene.Rect, cen
 	var carg0 *C.GtkSnapshot      // in, none, converted, casted *C.Snapshot
 	var carg1 *C.graphene_rect_t  // in, none, converted
 	var carg2 *C.graphene_point_t // in, none, converted
-	var carg3 C.gfloat            // in, none, casted
+	var carg3 C.float             // in, none, casted, casted C.gfloat
 	var carg4 *C.GskColorStop     // in, transfer: none, C Pointers: 1, Name: array[ColorStop], array (inner: *typesystem.Record, length-by: carg5)
 	var carg5 C.gsize             // implicit
 
 	carg0 = (*C.GtkSnapshot)(UnsafeSnapshotToGlibNone(snapshot))
 	carg1 = (*C.graphene_rect_t)(graphene.UnsafeRectToGlibNone(bounds))
 	carg2 = (*C.graphene_point_t)(graphene.UnsafePointToGlibNone(center))
-	carg3 = C.gfloat(rotation)
+	carg3 = C.float(rotation)
 	_ = stops
 	_ = carg4
 	_ = carg5
@@ -57567,18 +57567,18 @@ func (snapshot *SnapshotInstance) AppendInsetShadow(outline *gsk.RoundedRect, co
 	var carg0 *C.GtkSnapshot    // in, none, converted, casted *C.Snapshot
 	var carg1 *C.GskRoundedRect // in, none, converted
 	var carg2 *C.GdkRGBA        // in, none, converted
-	var carg3 C.gfloat          // in, none, casted
-	var carg4 C.gfloat          // in, none, casted
-	var carg5 C.gfloat          // in, none, casted
-	var carg6 C.gfloat          // in, none, casted
+	var carg3 C.float           // in, none, casted, casted C.gfloat
+	var carg4 C.float           // in, none, casted, casted C.gfloat
+	var carg5 C.float           // in, none, casted, casted C.gfloat
+	var carg6 C.float           // in, none, casted, casted C.gfloat
 
 	carg0 = (*C.GtkSnapshot)(UnsafeSnapshotToGlibNone(snapshot))
 	carg1 = (*C.GskRoundedRect)(gsk.UnsafeRoundedRectToGlibNone(outline))
 	carg2 = (*C.GdkRGBA)(gdk.UnsafeRGBAToGlibNone(color))
-	carg3 = C.gfloat(dx)
-	carg4 = C.gfloat(dy)
-	carg5 = C.gfloat(spread)
-	carg6 = C.gfloat(blurRadius)
+	carg3 = C.float(dx)
+	carg4 = C.float(dy)
+	carg5 = C.float(spread)
+	carg6 = C.float(blurRadius)
 
 	C.gtk_snapshot_append_inset_shadow(carg0, carg1, carg2, carg3, carg4, carg5, carg6)
 	runtime.KeepAlive(snapshot)
@@ -57670,18 +57670,18 @@ func (snapshot *SnapshotInstance) AppendOutsetShadow(outline *gsk.RoundedRect, c
 	var carg0 *C.GtkSnapshot    // in, none, converted, casted *C.Snapshot
 	var carg1 *C.GskRoundedRect // in, none, converted
 	var carg2 *C.GdkRGBA        // in, none, converted
-	var carg3 C.gfloat          // in, none, casted
-	var carg4 C.gfloat          // in, none, casted
-	var carg5 C.gfloat          // in, none, casted
-	var carg6 C.gfloat          // in, none, casted
+	var carg3 C.float           // in, none, casted, casted C.gfloat
+	var carg4 C.float           // in, none, casted, casted C.gfloat
+	var carg5 C.float           // in, none, casted, casted C.gfloat
+	var carg6 C.float           // in, none, casted, casted C.gfloat
 
 	carg0 = (*C.GtkSnapshot)(UnsafeSnapshotToGlibNone(snapshot))
 	carg1 = (*C.GskRoundedRect)(gsk.UnsafeRoundedRectToGlibNone(outline))
 	carg2 = (*C.GdkRGBA)(gdk.UnsafeRGBAToGlibNone(color))
-	carg3 = C.gfloat(dx)
-	carg4 = C.gfloat(dy)
-	carg5 = C.gfloat(spread)
-	carg6 = C.gfloat(blurRadius)
+	carg3 = C.float(dx)
+	carg4 = C.float(dy)
+	carg5 = C.float(spread)
+	carg6 = C.float(blurRadius)
 
 	C.gtk_snapshot_append_outset_shadow(carg0, carg1, carg2, carg3, carg4, carg5, carg6)
 	runtime.KeepAlive(snapshot)
@@ -57710,20 +57710,20 @@ func (snapshot *SnapshotInstance) AppendRadialGradient(bounds *graphene.Rect, ce
 	var carg0 *C.GtkSnapshot      // in, none, converted, casted *C.Snapshot
 	var carg1 *C.graphene_rect_t  // in, none, converted
 	var carg2 *C.graphene_point_t // in, none, converted
-	var carg3 C.gfloat            // in, none, casted
-	var carg4 C.gfloat            // in, none, casted
-	var carg5 C.gfloat            // in, none, casted
-	var carg6 C.gfloat            // in, none, casted
+	var carg3 C.float             // in, none, casted, casted C.gfloat
+	var carg4 C.float             // in, none, casted, casted C.gfloat
+	var carg5 C.float             // in, none, casted, casted C.gfloat
+	var carg6 C.float             // in, none, casted, casted C.gfloat
 	var carg7 *C.GskColorStop     // in, transfer: none, C Pointers: 1, Name: array[ColorStop], array (inner: *typesystem.Record, length-by: carg8)
 	var carg8 C.gsize             // implicit
 
 	carg0 = (*C.GtkSnapshot)(UnsafeSnapshotToGlibNone(snapshot))
 	carg1 = (*C.graphene_rect_t)(graphene.UnsafeRectToGlibNone(bounds))
 	carg2 = (*C.graphene_point_t)(graphene.UnsafePointToGlibNone(center))
-	carg3 = C.gfloat(hradius)
-	carg4 = C.gfloat(vradius)
-	carg5 = C.gfloat(start)
-	carg6 = C.gfloat(end)
+	carg3 = C.float(hradius)
+	carg4 = C.float(vradius)
+	carg5 = C.float(start)
+	carg6 = C.float(end)
 	_ = stops
 	_ = carg7
 	_ = carg8
@@ -57792,20 +57792,20 @@ func (snapshot *SnapshotInstance) AppendRepeatingRadialGradient(bounds *graphene
 	var carg0 *C.GtkSnapshot      // in, none, converted, casted *C.Snapshot
 	var carg1 *C.graphene_rect_t  // in, none, converted
 	var carg2 *C.graphene_point_t // in, none, converted
-	var carg3 C.gfloat            // in, none, casted
-	var carg4 C.gfloat            // in, none, casted
-	var carg5 C.gfloat            // in, none, casted
-	var carg6 C.gfloat            // in, none, casted
+	var carg3 C.float             // in, none, casted, casted C.gfloat
+	var carg4 C.float             // in, none, casted, casted C.gfloat
+	var carg5 C.float             // in, none, casted, casted C.gfloat
+	var carg6 C.float             // in, none, casted, casted C.gfloat
 	var carg7 *C.GskColorStop     // in, transfer: none, C Pointers: 1, Name: array[ColorStop], array (inner: *typesystem.Record, length-by: carg8)
 	var carg8 C.gsize             // implicit
 
 	carg0 = (*C.GtkSnapshot)(UnsafeSnapshotToGlibNone(snapshot))
 	carg1 = (*C.graphene_rect_t)(graphene.UnsafeRectToGlibNone(bounds))
 	carg2 = (*C.graphene_point_t)(graphene.UnsafePointToGlibNone(center))
-	carg3 = C.gfloat(hradius)
-	carg4 = C.gfloat(vradius)
-	carg5 = C.gfloat(start)
-	carg6 = C.gfloat(end)
+	carg3 = C.float(hradius)
+	carg4 = C.float(vradius)
+	carg5 = C.float(start)
+	carg6 = C.float(end)
 	_ = stops
 	_ = carg7
 	_ = carg8
@@ -57947,10 +57947,10 @@ func (snapshot *SnapshotInstance) GLShaderPopTexture() {
 // See [method@Gsk.Transform.perspective] for a discussion on the details.
 func (snapshot *SnapshotInstance) Perspective(depth float32) {
 	var carg0 *C.GtkSnapshot // in, none, converted, casted *C.Snapshot
-	var carg1 C.gfloat       // in, none, casted
+	var carg1 C.float        // in, none, casted, casted C.gfloat
 
 	carg0 = (*C.GtkSnapshot)(UnsafeSnapshotToGlibNone(snapshot))
-	carg1 = C.gfloat(depth)
+	carg1 = C.float(depth)
 
 	C.gtk_snapshot_perspective(carg0, carg1)
 	runtime.KeepAlive(snapshot)
@@ -58008,10 +58008,10 @@ func (snapshot *SnapshotInstance) PushBlend(blendMode gsk.BlendMode) {
 // The image is recorded until the next call to [method@Gtk.Snapshot.pop].
 func (snapshot *SnapshotInstance) PushBlur(radius float64) {
 	var carg0 *C.GtkSnapshot // in, none, converted, casted *C.Snapshot
-	var carg1 C.gdouble      // in, none, casted
+	var carg1 C.double       // in, none, casted, casted C.gdouble
 
 	carg0 = (*C.GtkSnapshot)(UnsafeSnapshotToGlibNone(snapshot))
-	carg1 = C.gdouble(radius)
+	carg1 = C.double(radius)
 
 	C.gtk_snapshot_push_blur(carg0, carg1)
 	runtime.KeepAlive(snapshot)
@@ -58089,10 +58089,10 @@ func (snapshot *SnapshotInstance) PushColorMatrix(colorMatrix *graphene.Matrix, 
 // to [method@Gtk.Snapshot.pop].
 func (snapshot *SnapshotInstance) PushCrossFade(progress float64) {
 	var carg0 *C.GtkSnapshot // in, none, converted, casted *C.Snapshot
-	var carg1 C.gdouble      // in, none, casted
+	var carg1 C.double       // in, none, casted, casted C.gdouble
 
 	carg0 = (*C.GtkSnapshot)(UnsafeSnapshotToGlibNone(snapshot))
-	carg1 = C.gdouble(progress)
+	carg1 = C.double(progress)
 
 	C.gtk_snapshot_push_cross_fade(carg0, carg1)
 	runtime.KeepAlive(snapshot)
@@ -58228,10 +58228,10 @@ func (snapshot *SnapshotInstance) PushMask(maskMode gsk.MaskMode) {
 // The image is recorded until the next call to [method@Gtk.Snapshot.pop].
 func (snapshot *SnapshotInstance) PushOpacity(opacity float64) {
 	var carg0 *C.GtkSnapshot // in, none, converted, casted *C.Snapshot
-	var carg1 C.gdouble      // in, none, casted
+	var carg1 C.double       // in, none, casted, casted C.gdouble
 
 	carg0 = (*C.GtkSnapshot)(UnsafeSnapshotToGlibNone(snapshot))
-	carg1 = C.gdouble(opacity)
+	carg1 = C.double(opacity)
 
 	C.gtk_snapshot_push_opacity(carg0, carg1)
 	runtime.KeepAlive(snapshot)
@@ -58363,17 +58363,17 @@ func (snapshot *SnapshotInstance) PushStroke(path *gsk.Path, stroke *gsk.Stroke)
 func (snapshot *SnapshotInstance) RenderBackground(context StyleContext, x float64, y float64, width float64, height float64) {
 	var carg0 *C.GtkSnapshot     // in, none, converted, casted *C.Snapshot
 	var carg1 *C.GtkStyleContext // in, none, converted
-	var carg2 C.gdouble          // in, none, casted
-	var carg3 C.gdouble          // in, none, casted
-	var carg4 C.gdouble          // in, none, casted
-	var carg5 C.gdouble          // in, none, casted
+	var carg2 C.double           // in, none, casted, casted C.gdouble
+	var carg3 C.double           // in, none, casted, casted C.gdouble
+	var carg4 C.double           // in, none, casted, casted C.gdouble
+	var carg5 C.double           // in, none, casted, casted C.gdouble
 
 	carg0 = (*C.GtkSnapshot)(UnsafeSnapshotToGlibNone(snapshot))
 	carg1 = (*C.GtkStyleContext)(UnsafeStyleContextToGlibNone(context))
-	carg2 = C.gdouble(x)
-	carg3 = C.gdouble(y)
-	carg4 = C.gdouble(width)
-	carg5 = C.gdouble(height)
+	carg2 = C.double(x)
+	carg3 = C.double(y)
+	carg4 = C.double(width)
+	carg5 = C.double(height)
 
 	C.gtk_snapshot_render_background(carg0, carg1, carg2, carg3, carg4, carg5)
 	runtime.KeepAlive(snapshot)
@@ -58402,17 +58402,17 @@ func (snapshot *SnapshotInstance) RenderBackground(context StyleContext, x float
 func (snapshot *SnapshotInstance) RenderFocus(context StyleContext, x float64, y float64, width float64, height float64) {
 	var carg0 *C.GtkSnapshot     // in, none, converted, casted *C.Snapshot
 	var carg1 *C.GtkStyleContext // in, none, converted
-	var carg2 C.gdouble          // in, none, casted
-	var carg3 C.gdouble          // in, none, casted
-	var carg4 C.gdouble          // in, none, casted
-	var carg5 C.gdouble          // in, none, casted
+	var carg2 C.double           // in, none, casted, casted C.gdouble
+	var carg3 C.double           // in, none, casted, casted C.gdouble
+	var carg4 C.double           // in, none, casted, casted C.gdouble
+	var carg5 C.double           // in, none, casted, casted C.gdouble
 
 	carg0 = (*C.GtkSnapshot)(UnsafeSnapshotToGlibNone(snapshot))
 	carg1 = (*C.GtkStyleContext)(UnsafeStyleContextToGlibNone(context))
-	carg2 = C.gdouble(x)
-	carg3 = C.gdouble(y)
-	carg4 = C.gdouble(width)
-	carg5 = C.gdouble(height)
+	carg2 = C.double(x)
+	carg3 = C.double(y)
+	carg4 = C.double(width)
+	carg5 = C.double(height)
 
 	C.gtk_snapshot_render_focus(carg0, carg1, carg2, carg3, carg4, carg5)
 	runtime.KeepAlive(snapshot)
@@ -58441,17 +58441,17 @@ func (snapshot *SnapshotInstance) RenderFocus(context StyleContext, x float64, y
 func (snapshot *SnapshotInstance) RenderFrame(context StyleContext, x float64, y float64, width float64, height float64) {
 	var carg0 *C.GtkSnapshot     // in, none, converted, casted *C.Snapshot
 	var carg1 *C.GtkStyleContext // in, none, converted
-	var carg2 C.gdouble          // in, none, casted
-	var carg3 C.gdouble          // in, none, casted
-	var carg4 C.gdouble          // in, none, casted
-	var carg5 C.gdouble          // in, none, casted
+	var carg2 C.double           // in, none, casted, casted C.gdouble
+	var carg3 C.double           // in, none, casted, casted C.gdouble
+	var carg4 C.double           // in, none, casted, casted C.gdouble
+	var carg5 C.double           // in, none, casted, casted C.gdouble
 
 	carg0 = (*C.GtkSnapshot)(UnsafeSnapshotToGlibNone(snapshot))
 	carg1 = (*C.GtkStyleContext)(UnsafeStyleContextToGlibNone(context))
-	carg2 = C.gdouble(x)
-	carg3 = C.gdouble(y)
-	carg4 = C.gdouble(width)
-	carg5 = C.gdouble(height)
+	carg2 = C.double(x)
+	carg3 = C.double(y)
+	carg4 = C.double(width)
+	carg5 = C.double(height)
 
 	C.gtk_snapshot_render_frame(carg0, carg1, carg2, carg3, carg4, carg5)
 	runtime.KeepAlive(snapshot)
@@ -58479,16 +58479,16 @@ func (snapshot *SnapshotInstance) RenderFrame(context StyleContext, x float64, y
 func (snapshot *SnapshotInstance) RenderInsertionCursor(context StyleContext, x float64, y float64, layout pango.Layout, index int, direction pango.Direction) {
 	var carg0 *C.GtkSnapshot     // in, none, converted, casted *C.Snapshot
 	var carg1 *C.GtkStyleContext // in, none, converted
-	var carg2 C.gdouble          // in, none, casted
-	var carg3 C.gdouble          // in, none, casted
+	var carg2 C.double           // in, none, casted, casted C.gdouble
+	var carg3 C.double           // in, none, casted, casted C.gdouble
 	var carg4 *C.PangoLayout     // in, none, converted
-	var carg5 C.int              // in, none, casted
+	var carg5 C.int              // in, none, casted, casted C.gint
 	var carg6 C.PangoDirection   // in, none, casted
 
 	carg0 = (*C.GtkSnapshot)(UnsafeSnapshotToGlibNone(snapshot))
 	carg1 = (*C.GtkStyleContext)(UnsafeStyleContextToGlibNone(context))
-	carg2 = C.gdouble(x)
-	carg3 = C.gdouble(y)
+	carg2 = C.double(x)
+	carg3 = C.double(y)
 	carg4 = (*C.PangoLayout)(pango.UnsafeLayoutToGlibNone(layout))
 	carg5 = C.int(index)
 	carg6 = C.PangoDirection(direction)
@@ -58520,14 +58520,14 @@ func (snapshot *SnapshotInstance) RenderInsertionCursor(context StyleContext, x 
 func (snapshot *SnapshotInstance) RenderLayout(context StyleContext, x float64, y float64, layout pango.Layout) {
 	var carg0 *C.GtkSnapshot     // in, none, converted, casted *C.Snapshot
 	var carg1 *C.GtkStyleContext // in, none, converted
-	var carg2 C.gdouble          // in, none, casted
-	var carg3 C.gdouble          // in, none, casted
+	var carg2 C.double           // in, none, casted, casted C.gdouble
+	var carg3 C.double           // in, none, casted, casted C.gdouble
 	var carg4 *C.PangoLayout     // in, none, converted
 
 	carg0 = (*C.GtkSnapshot)(UnsafeSnapshotToGlibNone(snapshot))
 	carg1 = (*C.GtkStyleContext)(UnsafeStyleContextToGlibNone(context))
-	carg2 = C.gdouble(x)
-	carg3 = C.gdouble(y)
+	carg2 = C.double(x)
+	carg3 = C.double(y)
 	carg4 = (*C.PangoLayout)(pango.UnsafeLayoutToGlibNone(layout))
 
 	C.gtk_snapshot_render_layout(carg0, carg1, carg2, carg3, carg4)
@@ -58565,10 +58565,10 @@ func (snapshot *SnapshotInstance) Restore() {
 // To rotate around axes other than the Z axis, use [method@Gsk.Transform.rotate_3d].
 func (snapshot *SnapshotInstance) Rotate(angle float32) {
 	var carg0 *C.GtkSnapshot // in, none, converted, casted *C.Snapshot
-	var carg1 C.gfloat       // in, none, casted
+	var carg1 C.float        // in, none, casted, casted C.gfloat
 
 	carg0 = (*C.GtkSnapshot)(UnsafeSnapshotToGlibNone(snapshot))
-	carg1 = C.gfloat(angle)
+	carg1 = C.float(angle)
 
 	C.gtk_snapshot_rotate(carg0, carg1)
 	runtime.KeepAlive(snapshot)
@@ -58587,11 +58587,11 @@ func (snapshot *SnapshotInstance) Rotate(angle float32) {
 // For a rotation in 2D space, use [method@Gsk.Transform.rotate].
 func (snapshot *SnapshotInstance) Rotate3D(angle float32, axis *graphene.Vec3) {
 	var carg0 *C.GtkSnapshot     // in, none, converted, casted *C.Snapshot
-	var carg1 C.gfloat           // in, none, casted
+	var carg1 C.float            // in, none, casted, casted C.gfloat
 	var carg2 *C.graphene_vec3_t // in, none, converted
 
 	carg0 = (*C.GtkSnapshot)(UnsafeSnapshotToGlibNone(snapshot))
-	carg1 = C.gfloat(angle)
+	carg1 = C.float(angle)
 	carg2 = (*C.graphene_vec3_t)(graphene.UnsafeVec3ToGlibNone(axis))
 
 	C.gtk_snapshot_rotate_3d(carg0, carg1, carg2)
@@ -58636,12 +58636,12 @@ func (snapshot *SnapshotInstance) Save() {
 // Use [method@Gtk.Snapshot.scale_3d] to scale in all 3 dimensions.
 func (snapshot *SnapshotInstance) Scale(factorX float32, factorY float32) {
 	var carg0 *C.GtkSnapshot // in, none, converted, casted *C.Snapshot
-	var carg1 C.gfloat       // in, none, casted
-	var carg2 C.gfloat       // in, none, casted
+	var carg1 C.float        // in, none, casted, casted C.gfloat
+	var carg2 C.float        // in, none, casted, casted C.gfloat
 
 	carg0 = (*C.GtkSnapshot)(UnsafeSnapshotToGlibNone(snapshot))
-	carg1 = C.gfloat(factorX)
-	carg2 = C.gfloat(factorY)
+	carg1 = C.float(factorX)
+	carg2 = C.float(factorY)
 
 	C.gtk_snapshot_scale(carg0, carg1, carg2)
 	runtime.KeepAlive(snapshot)
@@ -58660,14 +58660,14 @@ func (snapshot *SnapshotInstance) Scale(factorX float32, factorY float32) {
 // Scales @snapshot's coordinate system by the given factors.
 func (snapshot *SnapshotInstance) Scale3D(factorX float32, factorY float32, factorZ float32) {
 	var carg0 *C.GtkSnapshot // in, none, converted, casted *C.Snapshot
-	var carg1 C.gfloat       // in, none, casted
-	var carg2 C.gfloat       // in, none, casted
-	var carg3 C.gfloat       // in, none, casted
+	var carg1 C.float        // in, none, casted, casted C.gfloat
+	var carg2 C.float        // in, none, casted, casted C.gfloat
+	var carg3 C.float        // in, none, casted, casted C.gfloat
 
 	carg0 = (*C.GtkSnapshot)(UnsafeSnapshotToGlibNone(snapshot))
-	carg1 = C.gfloat(factorX)
-	carg2 = C.gfloat(factorY)
-	carg3 = C.gfloat(factorZ)
+	carg1 = C.float(factorX)
+	carg2 = C.float(factorY)
+	carg3 = C.float(factorZ)
 
 	C.gtk_snapshot_scale_3d(carg0, carg1, carg2, carg3)
 	runtime.KeepAlive(snapshot)
@@ -59652,7 +59652,7 @@ func (self *StackPageInstance) GetChild() Widget {
 // Returns the icon name of the page.
 func (self *StackPageInstance) GetIconName() string {
 	var carg0 *C.GtkStackPage // in, none, converted
-	var cret  *C.gchar        // return, none, string
+	var cret  *C.char         // return, none, string, casted *C.gchar
 
 	carg0 = (*C.GtkStackPage)(UnsafeStackPageToGlibNone(self))
 
@@ -59661,7 +59661,7 @@ func (self *StackPageInstance) GetIconName() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -59674,7 +59674,7 @@ func (self *StackPageInstance) GetIconName() string {
 // Returns the name of the page.
 func (self *StackPageInstance) GetName() string {
 	var carg0 *C.GtkStackPage // in, none, converted
-	var cret  *C.gchar        // return, none, string
+	var cret  *C.char         // return, none, string, casted *C.gchar
 
 	carg0 = (*C.GtkStackPage)(UnsafeStackPageToGlibNone(self))
 
@@ -59683,7 +59683,7 @@ func (self *StackPageInstance) GetName() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -59720,7 +59720,7 @@ func (self *StackPageInstance) GetNeedsAttention() bool {
 // Gets the page title.
 func (self *StackPageInstance) GetTitle() string {
 	var carg0 *C.GtkStackPage // in, none, converted
-	var cret  *C.gchar        // return, none, string
+	var cret  *C.char         // return, none, string, casted *C.gchar
 
 	carg0 = (*C.GtkStackPage)(UnsafeStackPageToGlibNone(self))
 
@@ -59729,7 +59729,7 @@ func (self *StackPageInstance) GetTitle() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -59794,10 +59794,10 @@ func (self *StackPageInstance) GetVisible() bool {
 // Sets the icon name of the page.
 func (self *StackPageInstance) SetIconName(setting string) {
 	var carg0 *C.GtkStackPage // in, none, converted
-	var carg1 *C.gchar        // in, none, string
+	var carg1 *C.char         // in, none, string, casted *C.gchar
 
 	carg0 = (*C.GtkStackPage)(UnsafeStackPageToGlibNone(self))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(setting)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(setting)))
 	defer C.free(unsafe.Pointer(carg1))
 
 	C.gtk_stack_page_set_icon_name(carg0, carg1)
@@ -59814,10 +59814,10 @@ func (self *StackPageInstance) SetIconName(setting string) {
 // Sets the name of the page.
 func (self *StackPageInstance) SetName(setting string) {
 	var carg0 *C.GtkStackPage // in, none, converted
-	var carg1 *C.gchar        // in, none, string
+	var carg1 *C.char         // in, none, string, casted *C.gchar
 
 	carg0 = (*C.GtkStackPage)(UnsafeStackPageToGlibNone(self))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(setting)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(setting)))
 	defer C.free(unsafe.Pointer(carg1))
 
 	C.gtk_stack_page_set_name(carg0, carg1)
@@ -59855,10 +59855,10 @@ func (self *StackPageInstance) SetNeedsAttention(setting bool) {
 // Sets the page title.
 func (self *StackPageInstance) SetTitle(setting string) {
 	var carg0 *C.GtkStackPage // in, none, converted
-	var carg1 *C.gchar        // in, none, string
+	var carg1 *C.char         // in, none, string, casted *C.gchar
 
 	carg0 = (*C.GtkStackPage)(UnsafeStackPageToGlibNone(self))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(setting)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(setting)))
 	defer C.free(unsafe.Pointer(carg1))
 
 	C.gtk_stack_page_set_title(carg0, carg1)
@@ -60073,7 +60073,7 @@ func (self *StringFilterInstance) GetMatchMode() StringFilterMatchMode {
 // Gets the search term.
 func (self *StringFilterInstance) GetSearch() string {
 	var carg0 *C.GtkStringFilter // in, none, converted
-	var cret  *C.gchar           // return, none, string
+	var cret  *C.char            // return, none, string, casted *C.gchar
 
 	carg0 = (*C.GtkStringFilter)(UnsafeStringFilterToGlibNone(self))
 
@@ -60082,7 +60082,7 @@ func (self *StringFilterInstance) GetSearch() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -60137,11 +60137,11 @@ func (self *StringFilterInstance) SetMatchMode(mode StringFilterMatchMode) {
 // Sets the string to search for.
 func (self *StringFilterInstance) SetSearch(search string) {
 	var carg0 *C.GtkStringFilter // in, none, converted
-	var carg1 *C.gchar           // in, none, string, nullable-string
+	var carg1 *C.char            // in, none, string, nullable-string
 
 	carg0 = (*C.GtkStringFilter)(UnsafeStringFilterToGlibNone(self))
 	if search != "" {
-		carg1 = (*C.gchar)(unsafe.Pointer(C.CString(search)))
+		carg1 = (*C.char)(unsafe.Pointer(C.CString(search)))
 		defer C.free(unsafe.Pointer(carg1))
 	}
 
@@ -60350,10 +60350,10 @@ func NewStringListInstance(strings []string) StringList {
 // [method@Gtk.StringList.take] for a way to avoid that.
 func (self *StringListInstance) Append(str string) {
 	var carg0 *C.GtkStringList // in, none, converted
-	var carg1 *C.gchar         // in, none, string
+	var carg1 *C.char          // in, none, string, casted *C.gchar
 
 	carg0 = (*C.GtkStringList)(UnsafeStringListToGlibNone(self))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(str)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(str)))
 	defer C.free(unsafe.Pointer(carg1))
 
 	C.gtk_string_list_append(carg0, carg1)
@@ -60380,7 +60380,7 @@ func (self *StringListInstance) Append(str string) {
 func (self *StringListInstance) GetString(position uint) string {
 	var carg0 *C.GtkStringList // in, none, converted
 	var carg1 C.guint          // in, none, casted
-	var cret  *C.gchar         // return, none, string
+	var cret  *C.char          // return, none, string, casted *C.gchar
 
 	carg0 = (*C.GtkStringList)(UnsafeStringListToGlibNone(self))
 	carg1 = C.guint(position)
@@ -60391,7 +60391,7 @@ func (self *StringListInstance) GetString(position uint) string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -60475,10 +60475,10 @@ func (self *StringListInstance) Splice(position uint, nRemovals uint, additions 
 // ```
 func (self *StringListInstance) Take(str string) {
 	var carg0 *C.GtkStringList // in, none, converted
-	var carg1 *C.gchar         // in, full, string
+	var carg1 *C.char          // in, full, string, casted *C.gchar
 
 	carg0 = (*C.GtkStringList)(UnsafeStringListToGlibNone(self))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(str)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(str)))
 
 	C.gtk_string_list_take(carg0, carg1)
 	runtime.KeepAlive(self)
@@ -60559,10 +60559,10 @@ func UnsafeStringObjectToGlibFull(c StringObject) unsafe.Pointer {
 //
 // Wraps a string in an object for use with `GListModel`.
 func NewStringObjectInstance(str string) StringObject {
-	var carg1 *C.gchar           // in, none, string
+	var carg1 *C.char            // in, none, string, casted *C.gchar
 	var cret  *C.GtkStringObject // return, full, converted
 
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(str)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(str)))
 	defer C.free(unsafe.Pointer(carg1))
 
 	cret = C.gtk_string_object_new(carg1)
@@ -60583,7 +60583,7 @@ func NewStringObjectInstance(str string) StringObject {
 // Returns the string contained in a `GtkStringObject`.
 func (self *StringObjectInstance) GetString() string {
 	var carg0 *C.GtkStringObject // in, none, converted
-	var cret  *C.gchar           // return, none, string
+	var cret  *C.char            // return, none, string, casted *C.gchar
 
 	carg0 = (*C.GtkStringObject)(UnsafeStringObjectToGlibNone(self))
 
@@ -60592,7 +60592,7 @@ func (self *StringObjectInstance) GetString() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -61195,10 +61195,10 @@ func StyleContextInstanceRemoveProviderForDisplay(display gdk.Display, provider 
 // Deprecated: (since 4.10.0) Use [method@Gtk.Widget.add_css_class] instead
 func (context *StyleContextInstance) AddClass(className string) {
 	var carg0 *C.GtkStyleContext // in, none, converted
-	var carg1 *C.gchar           // in, none, string
+	var carg1 *C.char            // in, none, string, casted *C.gchar
 
 	carg0 = (*C.GtkStyleContext)(UnsafeStyleContextToGlibNone(context))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(className)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(className)))
 	defer C.free(unsafe.Pointer(carg1))
 
 	C.gtk_style_context_add_class(carg0, carg1)
@@ -61382,7 +61382,7 @@ func (context *StyleContextInstance) GetPadding() Border {
 // Deprecated: (since 4.10.0) Use [method@Gtk.Widget.get_scale_factor] instead
 func (context *StyleContextInstance) GetScale() int {
 	var carg0 *C.GtkStyleContext // in, none, converted
-	var cret  C.int              // return, none, casted
+	var cret  C.int              // return, none, casted, casted C.gint
 
 	carg0 = (*C.GtkStyleContext)(UnsafeStyleContextToGlibNone(context))
 
@@ -61442,11 +61442,11 @@ func (context *StyleContextInstance) GetState() StateFlags {
 // Deprecated: (since 4.10.0) Use [method@Gtk.Widget.has_css_class] instead
 func (context *StyleContextInstance) HasClass(className string) bool {
 	var carg0 *C.GtkStyleContext // in, none, converted
-	var carg1 *C.gchar           // in, none, string
+	var carg1 *C.char            // in, none, string, casted *C.gchar
 	var cret  C.gboolean         // return
 
 	carg0 = (*C.GtkStyleContext)(UnsafeStyleContextToGlibNone(context))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(className)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(className)))
 	defer C.free(unsafe.Pointer(carg1))
 
 	cret = C.gtk_style_context_has_class(carg0, carg1)
@@ -61478,12 +61478,12 @@ func (context *StyleContextInstance) HasClass(className string) bool {
 // Deprecated: (since 4.10.0) This api will be removed in GTK 5
 func (context *StyleContextInstance) LookupColor(colorName string) (gdk.RGBA, bool) {
 	var carg0 *C.GtkStyleContext // in, none, converted
-	var carg1 *C.gchar           // in, none, string
+	var carg1 *C.char            // in, none, string, casted *C.gchar
 	var carg2 C.GdkRGBA          // out, transfer: none, C Pointers: 0, Name: RGBA, caller-allocates
 	var cret  C.gboolean         // return
 
 	carg0 = (*C.GtkStyleContext)(UnsafeStyleContextToGlibNone(context))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(colorName)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(colorName)))
 	defer C.free(unsafe.Pointer(carg1))
 
 	cret = C.gtk_style_context_lookup_color(carg0, carg1, &carg2)
@@ -61514,10 +61514,10 @@ func (context *StyleContextInstance) LookupColor(colorName string) (gdk.RGBA, bo
 // Deprecated: (since 4.10.0) Use [method@Gtk.Widget.remove_css_class] instead
 func (context *StyleContextInstance) RemoveClass(className string) {
 	var carg0 *C.GtkStyleContext // in, none, converted
-	var carg1 *C.gchar           // in, none, string
+	var carg1 *C.char            // in, none, string, casted *C.gchar
 
 	carg0 = (*C.GtkStyleContext)(UnsafeStyleContextToGlibNone(context))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(className)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(className)))
 	defer C.free(unsafe.Pointer(carg1))
 
 	C.gtk_style_context_remove_class(carg0, carg1)
@@ -61624,7 +61624,7 @@ func (context *StyleContextInstance) SetDisplay(display gdk.Display) {
 // Deprecated: (since 4.10.0) You should not use this api
 func (context *StyleContextInstance) SetScale(scale int) {
 	var carg0 *C.GtkStyleContext // in, none, converted
-	var carg1 C.int              // in, none, casted
+	var carg1 C.int              // in, none, casted, casted C.gint
 
 	carg0 = (*C.GtkStyleContext)(UnsafeStyleContextToGlibNone(context))
 	carg1 = C.int(scale)
@@ -61680,7 +61680,7 @@ func (context *StyleContextInstance) SetState(flags StateFlags) {
 func (context *StyleContextInstance) ToString(flags StyleContextPrintFlags) string {
 	var carg0 *C.GtkStyleContext          // in, none, converted
 	var carg1 C.GtkStyleContextPrintFlags // in, none, casted
-	var cret  *C.gchar                    // return, full, string
+	var cret  *C.char                     // return, full, string, casted *C.gchar
 
 	carg0 = (*C.GtkStyleContext)(UnsafeStyleContextToGlibNone(context))
 	carg1 = C.GtkStyleContextPrintFlags(flags)
@@ -61691,7 +61691,7 @@ func (context *StyleContextInstance) ToString(flags StyleContextPrintFlags) stri
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 	defer C.free(unsafe.Pointer(cret))
 
 	return goret
@@ -62950,12 +62950,12 @@ func (buffer *TextBufferInstance) ApplyTag(tag TextTag, start *TextIter, end *Te
 // [method@Gtk.TextBuffer.apply_tag].
 func (buffer *TextBufferInstance) ApplyTagByName(name string, start *TextIter, end *TextIter) {
 	var carg0 *C.GtkTextBuffer // in, none, converted
-	var carg1 *C.gchar         // in, none, string
+	var carg1 *C.char          // in, none, string, casted *C.gchar
 	var carg2 *C.GtkTextIter   // in, none, converted
 	var carg3 *C.GtkTextIter   // in, none, converted
 
 	carg0 = (*C.GtkTextBuffer)(UnsafeTextBufferToGlibNone(buffer))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(name)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(name)))
 	defer C.free(unsafe.Pointer(carg1))
 	carg2 = (*C.GtkTextIter)(UnsafeTextIterToGlibNone(start))
 	carg3 = (*C.GtkTextIter)(UnsafeTextIterToGlibNone(end))
@@ -63161,14 +63161,14 @@ func (buffer *TextBufferInstance) CreateChildAnchor(iter *TextIter) TextChildAnc
 // of the mark's initial placement.
 func (buffer *TextBufferInstance) CreateMark(markName string, where *TextIter, leftGravity bool) TextMark {
 	var carg0 *C.GtkTextBuffer // in, none, converted
-	var carg1 *C.gchar         // in, none, string, nullable-string
+	var carg1 *C.char          // in, none, string, nullable-string
 	var carg2 *C.GtkTextIter   // in, none, converted
 	var carg3 C.gboolean       // in
 	var cret  *C.GtkTextMark   // return, none, converted
 
 	carg0 = (*C.GtkTextBuffer)(UnsafeTextBufferToGlibNone(buffer))
 	if markName != "" {
-		carg1 = (*C.gchar)(unsafe.Pointer(C.CString(markName)))
+		carg1 = (*C.char)(unsafe.Pointer(C.CString(markName)))
 		defer C.free(unsafe.Pointer(carg1))
 	}
 	carg2 = (*C.GtkTextIter)(UnsafeTextIterToGlibNone(where))
@@ -63335,10 +63335,10 @@ func (buffer *TextBufferInstance) DeleteMark(mark TextMark) {
 // See [method@Gtk.TextBuffer.delete_mark] for details.
 func (buffer *TextBufferInstance) DeleteMarkByName(name string) {
 	var carg0 *C.GtkTextBuffer // in, none, converted
-	var carg1 *C.gchar         // in, none, string
+	var carg1 *C.char          // in, none, string, casted *C.gchar
 
 	carg0 = (*C.GtkTextBuffer)(UnsafeTextBufferToGlibNone(buffer))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(name)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(name)))
 	defer C.free(unsafe.Pointer(carg1))
 
 	C.gtk_text_buffer_delete_mark_by_name(carg0, carg1)
@@ -63521,7 +63521,7 @@ func (buffer *TextBufferInstance) GetCanUndo() bool {
 // The character count is cached, so this function is very fast.
 func (buffer *TextBufferInstance) GetCharCount() int {
 	var carg0 *C.GtkTextBuffer // in, none, converted
-	var cret  C.int            // return, none, casted
+	var cret  C.int            // return, none, casted, casted C.gint
 
 	carg0 = (*C.GtkTextBuffer)(UnsafeTextBufferToGlibNone(buffer))
 
@@ -63694,7 +63694,7 @@ func (buffer *TextBufferInstance) GetIterAtChildAnchor(anchor TextChildAnchor) T
 // in the @buffer, the end iterator is returned.
 func (buffer *TextBufferInstance) GetIterAtLine(lineNumber int) (TextIter, bool) {
 	var carg0 *C.GtkTextBuffer // in, none, converted
-	var carg2 C.int            // in, none, casted
+	var carg2 C.int            // in, none, casted, casted C.gint
 	var carg1 C.GtkTextIter    // out, transfer: none, C Pointers: 0, Name: TextIter, caller-allocates
 	var cret  C.gboolean       // return
 
@@ -63740,8 +63740,8 @@ func (buffer *TextBufferInstance) GetIterAtLine(lineNumber int) (TextIter, bool)
 // end of the line, the iterator at the end of the line is returned.
 func (buffer *TextBufferInstance) GetIterAtLineIndex(lineNumber int, byteIndex int) (TextIter, bool) {
 	var carg0 *C.GtkTextBuffer // in, none, converted
-	var carg2 C.int            // in, none, casted
-	var carg3 C.int            // in, none, casted
+	var carg2 C.int            // in, none, casted, casted C.gint
+	var carg3 C.int            // in, none, casted, casted C.gint
 	var carg1 C.GtkTextIter    // out, transfer: none, C Pointers: 0, Name: TextIter, caller-allocates
 	var cret  C.gboolean       // return
 
@@ -63789,8 +63789,8 @@ func (buffer *TextBufferInstance) GetIterAtLineIndex(lineNumber int, byteIndex i
 // end of the line, the iterator at the end of the line is returned.
 func (buffer *TextBufferInstance) GetIterAtLineOffset(lineNumber int, charOffset int) (TextIter, bool) {
 	var carg0 *C.GtkTextBuffer // in, none, converted
-	var carg2 C.int            // in, none, casted
-	var carg3 C.int            // in, none, casted
+	var carg2 C.int            // in, none, casted, casted C.gint
+	var carg3 C.int            // in, none, casted, casted C.gint
 	var carg1 C.GtkTextIter    // out, transfer: none, C Pointers: 0, Name: TextIter, caller-allocates
 	var cret  C.gboolean       // return
 
@@ -63866,7 +63866,7 @@ func (buffer *TextBufferInstance) GetIterAtMark(mark TextMark) TextIter {
 // the iterator one past the last valid character in the buffer.
 func (buffer *TextBufferInstance) GetIterAtOffset(charOffset int) TextIter {
 	var carg0 *C.GtkTextBuffer // in, none, converted
-	var carg2 C.int            // in, none, casted
+	var carg2 C.int            // in, none, casted, casted C.gint
 	var carg1 C.GtkTextIter    // out, transfer: none, C Pointers: 0, Name: TextIter, caller-allocates
 
 	carg0 = (*C.GtkTextBuffer)(UnsafeTextBufferToGlibNone(buffer))
@@ -63895,7 +63895,7 @@ func (buffer *TextBufferInstance) GetIterAtOffset(charOffset int) TextIter {
 // This value is cached, so the function is very fast.
 func (buffer *TextBufferInstance) GetLineCount() int {
 	var carg0 *C.GtkTextBuffer // in, none, converted
-	var cret  C.int            // return, none, casted
+	var cret  C.int            // return, none, casted, casted C.gint
 
 	carg0 = (*C.GtkTextBuffer)(UnsafeTextBufferToGlibNone(buffer))
 
@@ -63923,11 +63923,11 @@ func (buffer *TextBufferInstance) GetLineCount() int {
 // mark exists in the buffer.
 func (buffer *TextBufferInstance) GetMark(name string) TextMark {
 	var carg0 *C.GtkTextBuffer // in, none, converted
-	var carg1 *C.gchar         // in, none, string
+	var carg1 *C.char          // in, none, string, casted *C.gchar
 	var cret  *C.GtkTextMark   // return, none, converted
 
 	carg0 = (*C.GtkTextBuffer)(UnsafeTextBufferToGlibNone(buffer))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(name)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(name)))
 	defer C.free(unsafe.Pointer(carg1))
 
 	cret = C.gtk_text_buffer_get_mark(carg0, carg1)
@@ -64122,7 +64122,7 @@ func (buffer *TextBufferInstance) GetSlice(start *TextIter, end *TextIter, inclu
 	var carg1 *C.GtkTextIter   // in, none, converted
 	var carg2 *C.GtkTextIter   // in, none, converted
 	var carg3 C.gboolean       // in
-	var cret  *C.gchar         // return, full, string
+	var cret  *C.char          // return, full, string, casted *C.gchar
 
 	carg0 = (*C.GtkTextBuffer)(UnsafeTextBufferToGlibNone(buffer))
 	carg1 = (*C.GtkTextIter)(UnsafeTextIterToGlibNone(start))
@@ -64139,7 +64139,7 @@ func (buffer *TextBufferInstance) GetSlice(start *TextIter, end *TextIter, inclu
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 	defer C.free(unsafe.Pointer(cret))
 
 	return goret
@@ -64219,7 +64219,7 @@ func (buffer *TextBufferInstance) GetText(start *TextIter, end *TextIter, includ
 	var carg1 *C.GtkTextIter   // in, none, converted
 	var carg2 *C.GtkTextIter   // in, none, converted
 	var carg3 C.gboolean       // in
-	var cret  *C.gchar         // return, full, string
+	var cret  *C.char          // return, full, string, casted *C.gchar
 
 	carg0 = (*C.GtkTextBuffer)(UnsafeTextBufferToGlibNone(buffer))
 	carg1 = (*C.GtkTextIter)(UnsafeTextIterToGlibNone(start))
@@ -64236,7 +64236,7 @@ func (buffer *TextBufferInstance) GetText(start *TextIter, end *TextIter, includ
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 	defer C.free(unsafe.Pointer(cret))
 
 	return goret
@@ -64261,12 +64261,12 @@ func (buffer *TextBufferInstance) GetText(start *TextIter, end *TextIter, includ
 func (buffer *TextBufferInstance) Insert(iter *TextIter, text string, len int) {
 	var carg0 *C.GtkTextBuffer // in, none, converted
 	var carg1 *C.GtkTextIter   // in, none, converted
-	var carg2 *C.gchar         // in, none, string
-	var carg3 C.int            // in, none, casted
+	var carg2 *C.char          // in, none, string, casted *C.gchar
+	var carg3 C.int            // in, none, casted, casted C.gint
 
 	carg0 = (*C.GtkTextBuffer)(UnsafeTextBufferToGlibNone(buffer))
 	carg1 = (*C.GtkTextIter)(UnsafeTextIterToGlibNone(iter))
-	carg2 = (*C.gchar)(unsafe.Pointer(C.CString(text)))
+	carg2 = (*C.char)(unsafe.Pointer(C.CString(text)))
 	defer C.free(unsafe.Pointer(carg2))
 	carg3 = C.int(len)
 
@@ -64290,11 +64290,11 @@ func (buffer *TextBufferInstance) Insert(iter *TextIter, text string, len int) {
 // using the current cursor position as the insertion point.
 func (buffer *TextBufferInstance) InsertAtCursor(text string, len int) {
 	var carg0 *C.GtkTextBuffer // in, none, converted
-	var carg1 *C.gchar         // in, none, string
-	var carg2 C.int            // in, none, casted
+	var carg1 *C.char          // in, none, string, casted *C.gchar
+	var carg2 C.int            // in, none, casted, casted C.gint
 
 	carg0 = (*C.GtkTextBuffer)(UnsafeTextBufferToGlibNone(buffer))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(text)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(text)))
 	defer C.free(unsafe.Pointer(carg1))
 	carg2 = C.int(len)
 
@@ -64365,14 +64365,14 @@ func (buffer *TextBufferInstance) InsertChildAnchor(iter *TextIter, anchor TextC
 func (buffer *TextBufferInstance) InsertInteractive(iter *TextIter, text string, len int, defaultEditable bool) bool {
 	var carg0 *C.GtkTextBuffer // in, none, converted
 	var carg1 *C.GtkTextIter   // in, none, converted
-	var carg2 *C.gchar         // in, none, string
-	var carg3 C.int            // in, none, casted
+	var carg2 *C.char          // in, none, string, casted *C.gchar
+	var carg3 C.int            // in, none, casted, casted C.gint
 	var carg4 C.gboolean       // in
 	var cret  C.gboolean       // return
 
 	carg0 = (*C.GtkTextBuffer)(UnsafeTextBufferToGlibNone(buffer))
 	carg1 = (*C.GtkTextIter)(UnsafeTextIterToGlibNone(iter))
-	carg2 = (*C.gchar)(unsafe.Pointer(C.CString(text)))
+	carg2 = (*C.char)(unsafe.Pointer(C.CString(text)))
 	defer C.free(unsafe.Pointer(carg2))
 	carg3 = C.int(len)
 	if defaultEditable {
@@ -64417,13 +64417,13 @@ func (buffer *TextBufferInstance) InsertInteractive(iter *TextIter, text string,
 // result of [method@Gtk.TextView.get_editable] is appropriate here.
 func (buffer *TextBufferInstance) InsertInteractiveAtCursor(text string, len int, defaultEditable bool) bool {
 	var carg0 *C.GtkTextBuffer // in, none, converted
-	var carg1 *C.gchar         // in, none, string
-	var carg2 C.int            // in, none, casted
+	var carg1 *C.char          // in, none, string, casted *C.gchar
+	var carg2 C.int            // in, none, casted, casted C.gint
 	var carg3 C.gboolean       // in
 	var cret  C.gboolean       // return
 
 	carg0 = (*C.GtkTextBuffer)(UnsafeTextBufferToGlibNone(buffer))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(text)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(text)))
 	defer C.free(unsafe.Pointer(carg1))
 	carg2 = C.int(len)
 	if defaultEditable {
@@ -64462,12 +64462,12 @@ func (buffer *TextBufferInstance) InsertInteractiveAtCursor(text string, len int
 func (buffer *TextBufferInstance) InsertMarkup(iter *TextIter, markup string, len int) {
 	var carg0 *C.GtkTextBuffer // in, none, converted
 	var carg1 *C.GtkTextIter   // in, none, converted
-	var carg2 *C.gchar         // in, none, string
-	var carg3 C.int            // in, none, casted
+	var carg2 *C.char          // in, none, string, casted *C.gchar
+	var carg3 C.int            // in, none, casted, casted C.gint
 
 	carg0 = (*C.GtkTextBuffer)(UnsafeTextBufferToGlibNone(buffer))
 	carg1 = (*C.GtkTextIter)(UnsafeTextIterToGlibNone(iter))
-	carg2 = (*C.gchar)(unsafe.Pointer(C.CString(markup)))
+	carg2 = (*C.char)(unsafe.Pointer(C.CString(markup)))
 	defer C.free(unsafe.Pointer(carg2))
 	carg3 = C.int(len)
 
@@ -64637,11 +64637,11 @@ func (buffer *TextBufferInstance) MoveMark(mark TextMark, where *TextIter) {
 // See [method@Gtk.TextBuffer.move_mark] for details.
 func (buffer *TextBufferInstance) MoveMarkByName(name string, where *TextIter) {
 	var carg0 *C.GtkTextBuffer // in, none, converted
-	var carg1 *C.gchar         // in, none, string
+	var carg1 *C.char          // in, none, string, casted *C.gchar
 	var carg2 *C.GtkTextIter   // in, none, converted
 
 	carg0 = (*C.GtkTextBuffer)(UnsafeTextBufferToGlibNone(buffer))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(name)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(name)))
 	defer C.free(unsafe.Pointer(carg1))
 	carg2 = (*C.GtkTextIter)(UnsafeTextIterToGlibNone(where))
 
@@ -64848,12 +64848,12 @@ func (buffer *TextBufferInstance) RemoveTag(tag TextTag, start *TextIter, end *T
 // [method@Gtk.TextBuffer.remove_tag].
 func (buffer *TextBufferInstance) RemoveTagByName(name string, start *TextIter, end *TextIter) {
 	var carg0 *C.GtkTextBuffer // in, none, converted
-	var carg1 *C.gchar         // in, none, string
+	var carg1 *C.char          // in, none, string, casted *C.gchar
 	var carg2 *C.GtkTextIter   // in, none, converted
 	var carg3 *C.GtkTextIter   // in, none, converted
 
 	carg0 = (*C.GtkTextBuffer)(UnsafeTextBufferToGlibNone(buffer))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(name)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(name)))
 	defer C.free(unsafe.Pointer(carg1))
 	carg2 = (*C.GtkTextIter)(UnsafeTextIterToGlibNone(start))
 	carg3 = (*C.GtkTextIter)(UnsafeTextIterToGlibNone(end))
@@ -64995,11 +64995,11 @@ func (buffer *TextBufferInstance) SetModified(setting bool) {
 // @text must be valid UTF-8.
 func (buffer *TextBufferInstance) SetText(text string, len int) {
 	var carg0 *C.GtkTextBuffer // in, none, converted
-	var carg1 *C.gchar         // in, none, string
-	var carg2 C.int            // in, none, casted
+	var carg1 *C.char          // in, none, string, casted *C.gchar
+	var carg2 C.int            // in, none, casted, casted C.gint
 
 	carg0 = (*C.GtkTextBuffer)(UnsafeTextBufferToGlibNone(buffer))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(text)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(text)))
 	defer C.free(unsafe.Pointer(carg1))
 	carg2 = C.int(len)
 
@@ -65137,10 +65137,10 @@ func NewTextChildAnchorInstance() TextChildAnchor {
 // Usually you would then insert it into a `GtkTextBuffer` with
 // [method@Gtk.TextBuffer.insert_child_anchor].
 func NewTextChildAnchorInstanceWithReplacement(character string) TextChildAnchor {
-	var carg1 *C.gchar              // in, none, string
+	var carg1 *C.char               // in, none, string, casted *C.gchar
 	var cret  *C.GtkTextChildAnchor // return, full, converted
 
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(character)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(character)))
 	defer C.free(unsafe.Pointer(carg1))
 
 	cret = C.gtk_text_child_anchor_new_with_replacement(carg1)
@@ -65379,12 +65379,12 @@ func UnsafeTextMarkToGlibFull(c TextMark) unsafe.Pointer {
 // is a mark with right gravity (when you type, the cursor stays on the
 // right side of the text you’re typing).
 func NewTextMarkInstance(name string, leftGravity bool) TextMark {
-	var carg1 *C.gchar       // in, none, string, nullable-string
+	var carg1 *C.char        // in, none, string, nullable-string
 	var carg2 C.gboolean     // in
 	var cret  *C.GtkTextMark // return, full, converted
 
 	if name != "" {
-		carg1 = (*C.gchar)(unsafe.Pointer(C.CString(name)))
+		carg1 = (*C.char)(unsafe.Pointer(C.CString(name)))
 		defer C.free(unsafe.Pointer(carg1))
 	}
 	if leftGravity {
@@ -65487,7 +65487,7 @@ func (mark *TextMarkInstance) GetLeftGravity() bool {
 // Returns %NULL for anonymous marks.
 func (mark *TextMarkInstance) GetName() string {
 	var carg0 *C.GtkTextMark // in, none, converted
-	var cret  *C.gchar       // return, none, string
+	var cret  *C.char        // return, none, string, casted *C.gchar
 
 	carg0 = (*C.GtkTextMark)(UnsafeTextMarkToGlibNone(mark))
 
@@ -65496,7 +65496,7 @@ func (mark *TextMarkInstance) GetName() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -65675,11 +65675,11 @@ func UnsafeTextTagToGlibFull(c TextTag) unsafe.Pointer {
 //
 // Creates a `GtkTextTag`.
 func NewTextTagInstance(name string) TextTag {
-	var carg1 *C.gchar      // in, none, string, nullable-string
+	var carg1 *C.char       // in, none, string, nullable-string
 	var cret  *C.GtkTextTag // return, full, converted
 
 	if name != "" {
-		carg1 = (*C.gchar)(unsafe.Pointer(C.CString(name)))
+		carg1 = (*C.char)(unsafe.Pointer(C.CString(name)))
 		defer C.free(unsafe.Pointer(carg1))
 	}
 
@@ -65726,7 +65726,7 @@ func (tag *TextTagInstance) Changed(sizeChanged bool) {
 // Get the tag priority.
 func (tag *TextTagInstance) GetPriority() int {
 	var carg0 *C.GtkTextTag // in, none, converted
-	var cret  C.int         // return, none, casted
+	var cret  C.int         // return, none, casted, casted C.gint
 
 	carg0 = (*C.GtkTextTag)(UnsafeTextTagToGlibNone(tag))
 
@@ -65762,7 +65762,7 @@ func (tag *TextTagInstance) GetPriority() int {
 // which adds the tag to the buffer’s table automatically.
 func (tag *TextTagInstance) SetPriority(priority int) {
 	var carg0 *C.GtkTextTag // in, none, converted
-	var carg1 C.int         // in, none, casted
+	var carg1 C.int         // in, none, casted, casted C.gint
 
 	carg0 = (*C.GtkTextTag)(UnsafeTextTagToGlibNone(tag))
 	carg1 = C.int(priority)
@@ -65993,7 +65993,7 @@ func (table *TextTagTableInstance) ForEach(fn TextTagTableForEach) {
 // Returns the size of the table (number of tags)
 func (table *TextTagTableInstance) GetSize() int {
 	var carg0 *C.GtkTextTagTable // in, none, converted
-	var cret  C.int              // return, none, casted
+	var cret  C.int              // return, none, casted, casted C.gint
 
 	carg0 = (*C.GtkTextTagTable)(UnsafeTextTagTableToGlibNone(table))
 
@@ -66020,11 +66020,11 @@ func (table *TextTagTableInstance) GetSize() int {
 // Look up a named tag.
 func (table *TextTagTableInstance) Lookup(name string) TextTag {
 	var carg0 *C.GtkTextTagTable // in, none, converted
-	var carg1 *C.gchar           // in, none, string
+	var carg1 *C.char            // in, none, string, casted *C.gchar
 	var cret  *C.GtkTextTag      // return, none, converted
 
 	carg0 = (*C.GtkTextTagTable)(UnsafeTextTagTableToGlibNone(table))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(name)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(name)))
 	defer C.free(unsafe.Pointer(carg1))
 
 	cret = C.gtk_text_tag_table_lookup(carg0, carg1)
@@ -66300,11 +66300,11 @@ func (tooltip *TooltipInstance) SetIconFromGIcon(gicon gio.Icon) {
 // by @size.  If @icon_name is %NULL, the image will be hidden.
 func (tooltip *TooltipInstance) SetIconFromIconName(iconName string) {
 	var carg0 *C.GtkTooltip // in, none, converted
-	var carg1 *C.gchar      // in, none, string, nullable-string
+	var carg1 *C.char       // in, none, string, nullable-string
 
 	carg0 = (*C.GtkTooltip)(UnsafeTooltipToGlibNone(tooltip))
 	if iconName != "" {
-		carg1 = (*C.gchar)(unsafe.Pointer(C.CString(iconName)))
+		carg1 = (*C.char)(unsafe.Pointer(C.CString(iconName)))
 		defer C.free(unsafe.Pointer(carg1))
 	}
 
@@ -66325,11 +66325,11 @@ func (tooltip *TooltipInstance) SetIconFromIconName(iconName string) {
 // If @markup is %NULL, the label will be hidden.
 func (tooltip *TooltipInstance) SetMarkup(markup string) {
 	var carg0 *C.GtkTooltip // in, none, converted
-	var carg1 *C.gchar      // in, none, string, nullable-string
+	var carg1 *C.char       // in, none, string, nullable-string
 
 	carg0 = (*C.GtkTooltip)(UnsafeTooltipToGlibNone(tooltip))
 	if markup != "" {
-		carg1 = (*C.gchar)(unsafe.Pointer(C.CString(markup)))
+		carg1 = (*C.char)(unsafe.Pointer(C.CString(markup)))
 		defer C.free(unsafe.Pointer(carg1))
 	}
 
@@ -66350,11 +66350,11 @@ func (tooltip *TooltipInstance) SetMarkup(markup string) {
 // See also [method@Gtk.Tooltip.set_markup].
 func (tooltip *TooltipInstance) SetText(text string) {
 	var carg0 *C.GtkTooltip // in, none, converted
-	var carg1 *C.gchar      // in, none, string, nullable-string
+	var carg1 *C.char       // in, none, string, nullable-string
 
 	carg0 = (*C.GtkTooltip)(UnsafeTooltipToGlibNone(tooltip))
 	if text != "" {
-		carg1 = (*C.gchar)(unsafe.Pointer(C.CString(text)))
+		carg1 = (*C.char)(unsafe.Pointer(C.CString(text)))
 		defer C.free(unsafe.Pointer(carg1))
 	}
 
@@ -67910,7 +67910,7 @@ func (filter *TreeModelFilterInstance) SetModifyFunc(types []gobject.Type, fn Tr
 // Deprecated: (since 4.10.0) 
 func (filter *TreeModelFilterInstance) SetVisibleColumn(column int) {
 	var carg0 *C.GtkTreeModelFilter // in, none, converted
-	var carg1 C.int                 // in, none, casted
+	var carg1 C.int                 // in, none, casted, casted C.gint
 
 	carg0 = (*C.GtkTreeModelFilter)(UnsafeTreeModelFilterToGlibNone(filter))
 	carg1 = C.int(column)
@@ -68781,7 +68781,7 @@ func UnsafeTreeSelectionToGlibFull(c TreeSelection) unsafe.Pointer {
 // Deprecated: (since 4.10.0) Use GtkListView or GtkColumnView
 func (selection *TreeSelectionInstance) CountSelectedRows() int {
 	var carg0 *C.GtkTreeSelection // in, none, converted
-	var cret  C.int               // return, none, casted
+	var cret  C.int               // return, none, casted, casted C.gint
 
 	carg0 = (*C.GtkTreeSelection)(UnsafeTreeSelectionToGlibNone(selection))
 
@@ -69710,7 +69710,7 @@ func (treeStore *TreeStoreInstance) Clear() {
 func (treeStore *TreeStoreInstance) Insert(parent *TreeIter, position int) TreeIter {
 	var carg0 *C.GtkTreeStore // in, none, converted
 	var carg2 *C.GtkTreeIter  // in, none, converted, nullable
-	var carg3 C.int           // in, none, casted
+	var carg3 C.int           // in, none, casted, casted C.gint
 	var carg1 C.GtkTreeIter   // out, transfer: none, C Pointers: 0, Name: TreeIter, caller-allocates
 
 	carg0 = (*C.GtkTreeStore)(UnsafeTreeStoreToGlibNone(treeStore))
@@ -69863,7 +69863,7 @@ func (treeStore *TreeStoreInstance) InsertBefore(parent *TreeIter, sibling *Tree
 func (treeStore *TreeStoreInstance) InsertWithValuesv(parent *TreeIter, position int, columns []int, values []gobject.Value) TreeIter {
 	var carg0 *C.GtkTreeStore // in, none, converted
 	var carg2 *C.GtkTreeIter  // in, none, converted, nullable
-	var carg3 C.int           // in, none, casted
+	var carg3 C.int           // in, none, casted, casted C.gint
 	var carg4 *C.int          // in, transfer: none, C Pointers: 1, Name: array[gint], array (inner: *typesystem.CastablePrimitive, length-by: carg6)
 	var carg5 *C.GValue       // in, transfer: none, C Pointers: 1, Name: array[Value], array (inner: *typesystem.Record, length-by: carg6)
 	var carg6 C.int           // implicit
@@ -69956,7 +69956,7 @@ func (treeStore *TreeStoreInstance) IsAncestor(iter *TreeIter, descendant *TreeI
 func (treeStore *TreeStoreInstance) IterDepth(iter *TreeIter) int {
 	var carg0 *C.GtkTreeStore // in, none, converted
 	var carg1 *C.GtkTreeIter  // in, none, converted
-	var cret  C.int           // return, none, casted
+	var cret  C.int           // return, none, casted, casted C.gint
 
 	carg0 = (*C.GtkTreeStore)(UnsafeTreeStoreToGlibNone(treeStore))
 	carg1 = (*C.GtkTreeIter)(UnsafeTreeIterToGlibNone(iter))
@@ -70204,7 +70204,7 @@ func (treeStore *TreeStoreInstance) SetColumnTypes(types []gobject.Type) {
 func (treeStore *TreeStoreInstance) SetValue(iter *TreeIter, column int, value *gobject.Value) {
 	var carg0 *C.GtkTreeStore // in, none, converted
 	var carg1 *C.GtkTreeIter  // in, none, converted
-	var carg2 C.int           // in, none, casted
+	var carg2 C.int           // in, none, casted, casted C.gint
 	var carg3 *C.GValue       // in, none, converted
 
 	carg0 = (*C.GtkTreeStore)(UnsafeTreeStoreToGlibNone(treeStore))
@@ -70983,12 +70983,12 @@ func NewTreeViewColumnInstanceWithArea(area CellArea) TreeViewColumn {
 func (treeColumn *TreeViewColumnInstance) AddAttribute(cellRenderer CellRenderer, attribute string, column int) {
 	var carg0 *C.GtkTreeViewColumn // in, none, converted
 	var carg1 *C.GtkCellRenderer   // in, none, converted
-	var carg2 *C.gchar             // in, none, string
-	var carg3 C.int                // in, none, casted
+	var carg2 *C.char              // in, none, string, casted *C.gchar
+	var carg3 C.int                // in, none, casted, casted C.gint
 
 	carg0 = (*C.GtkTreeViewColumn)(UnsafeTreeViewColumnToGlibNone(treeColumn))
 	carg1 = (*C.GtkCellRenderer)(UnsafeCellRendererToGlibNone(cellRenderer))
-	carg2 = (*C.gchar)(unsafe.Pointer(C.CString(attribute)))
+	carg2 = (*C.char)(unsafe.Pointer(C.CString(attribute)))
 	defer C.free(unsafe.Pointer(carg2))
 	carg3 = C.int(column)
 
@@ -71021,8 +71021,8 @@ func (treeColumn *TreeViewColumnInstance) AddAttribute(cellRenderer CellRenderer
 func (treeColumn *TreeViewColumnInstance) CellGetPosition(cellRenderer CellRenderer) (int, int, bool) {
 	var carg0 *C.GtkTreeViewColumn // in, none, converted
 	var carg1 *C.GtkCellRenderer   // in, none, converted
-	var carg2 C.int                // out, full, casted
-	var carg3 C.int                // out, full, casted
+	var carg2 C.int                // out, full, casted, casted C.gint
+	var carg3 C.int                // out, full, casted, casted C.gint
 	var cret  C.gboolean           // return
 
 	carg0 = (*C.GtkTreeViewColumn)(UnsafeTreeViewColumnToGlibNone(treeColumn))
@@ -71059,10 +71059,10 @@ func (treeColumn *TreeViewColumnInstance) CellGetPosition(cellRenderer CellRende
 // Deprecated: (since 4.10.0) Use GtkColumnView instead
 func (treeColumn *TreeViewColumnInstance) CellGetSize() (int, int, int, int) {
 	var carg0 *C.GtkTreeViewColumn // in, none, converted
-	var carg1 C.int                // out, full, casted
-	var carg2 C.int                // out, full, casted
-	var carg3 C.int                // out, full, casted
-	var carg4 C.int                // out, full, casted
+	var carg1 C.int                // out, full, casted, casted C.gint
+	var carg2 C.int                // out, full, casted, casted C.gint
+	var carg3 C.int                // out, full, casted, casted C.gint
+	var carg4 C.int                // out, full, casted, casted C.gint
 
 	carg0 = (*C.GtkTreeViewColumn)(UnsafeTreeViewColumnToGlibNone(treeColumn))
 
@@ -71234,7 +71234,7 @@ func (treeColumn *TreeViewColumnInstance) FocusCell(cell CellRenderer) {
 // Deprecated: (since 4.10.0) Use GtkColumnView instead
 func (treeColumn *TreeViewColumnInstance) GetAlignment() float32 {
 	var carg0 *C.GtkTreeViewColumn // in, none, converted
-	var cret  C.gfloat             // return, none, casted
+	var cret  C.float              // return, none, casted, casted C.gfloat
 
 	carg0 = (*C.GtkTreeViewColumn)(UnsafeTreeViewColumnToGlibNone(treeColumn))
 
@@ -71335,7 +71335,7 @@ func (treeColumn *TreeViewColumnInstance) GetExpand() bool {
 // Deprecated: (since 4.10.0) Use GtkColumnView instead
 func (treeColumn *TreeViewColumnInstance) GetFixedWidth() int {
 	var carg0 *C.GtkTreeViewColumn // in, none, converted
-	var cret  C.int                // return, none, casted
+	var cret  C.int                // return, none, casted, casted C.gint
 
 	carg0 = (*C.GtkTreeViewColumn)(UnsafeTreeViewColumnToGlibNone(treeColumn))
 
@@ -71360,7 +71360,7 @@ func (treeColumn *TreeViewColumnInstance) GetFixedWidth() int {
 // Deprecated: (since 4.10.0) Use GtkColumnView instead
 func (treeColumn *TreeViewColumnInstance) GetMaxWidth() int {
 	var carg0 *C.GtkTreeViewColumn // in, none, converted
-	var cret  C.int                // return, none, casted
+	var cret  C.int                // return, none, casted, casted C.gint
 
 	carg0 = (*C.GtkTreeViewColumn)(UnsafeTreeViewColumnToGlibNone(treeColumn))
 
@@ -71385,7 +71385,7 @@ func (treeColumn *TreeViewColumnInstance) GetMaxWidth() int {
 // Deprecated: (since 4.10.0) Use GtkColumnView instead
 func (treeColumn *TreeViewColumnInstance) GetMinWidth() int {
 	var carg0 *C.GtkTreeViewColumn // in, none, converted
-	var cret  C.int                // return, none, casted
+	var cret  C.int                // return, none, casted, casted C.gint
 
 	carg0 = (*C.GtkTreeViewColumn)(UnsafeTreeViewColumnToGlibNone(treeColumn))
 
@@ -71488,7 +71488,7 @@ func (treeColumn *TreeViewColumnInstance) GetSizing() TreeViewColumnSizing {
 // Deprecated: (since 4.10.0) Use GtkColumnView instead
 func (treeColumn *TreeViewColumnInstance) GetSortColumnID() int {
 	var carg0 *C.GtkTreeViewColumn // in, none, converted
-	var cret  C.int                // return, none, casted
+	var cret  C.int                // return, none, casted, casted C.gint
 
 	carg0 = (*C.GtkTreeViewColumn)(UnsafeTreeViewColumnToGlibNone(treeColumn))
 
@@ -71562,7 +71562,7 @@ func (treeColumn *TreeViewColumnInstance) GetSortOrder() SortType {
 // Deprecated: (since 4.10.0) Use GtkColumnView instead
 func (treeColumn *TreeViewColumnInstance) GetSpacing() int {
 	var carg0 *C.GtkTreeViewColumn // in, none, converted
-	var cret  C.int                // return, none, casted
+	var cret  C.int                // return, none, casted, casted C.gint
 
 	carg0 = (*C.GtkTreeViewColumn)(UnsafeTreeViewColumnToGlibNone(treeColumn))
 
@@ -71586,7 +71586,7 @@ func (treeColumn *TreeViewColumnInstance) GetSpacing() int {
 // Deprecated: (since 4.10.0) Use GtkColumnView instead
 func (treeColumn *TreeViewColumnInstance) GetTitle() string {
 	var carg0 *C.GtkTreeViewColumn // in, none, converted
-	var cret  *C.gchar             // return, none, string
+	var cret  *C.char              // return, none, string, casted *C.gchar
 
 	carg0 = (*C.GtkTreeViewColumn)(UnsafeTreeViewColumnToGlibNone(treeColumn))
 
@@ -71595,7 +71595,7 @@ func (treeColumn *TreeViewColumnInstance) GetTitle() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -71688,7 +71688,7 @@ func (treeColumn *TreeViewColumnInstance) GetWidget() Widget {
 // Deprecated: (since 4.10.0) Use GtkColumnView instead
 func (treeColumn *TreeViewColumnInstance) GetWidth() int {
 	var carg0 *C.GtkTreeViewColumn // in, none, converted
-	var cret  C.int                // return, none, casted
+	var cret  C.int                // return, none, casted, casted C.gint
 
 	carg0 = (*C.GtkTreeViewColumn)(UnsafeTreeViewColumnToGlibNone(treeColumn))
 
@@ -71712,7 +71712,7 @@ func (treeColumn *TreeViewColumnInstance) GetWidth() int {
 // Deprecated: (since 4.10.0) Use GtkColumnView instead
 func (treeColumn *TreeViewColumnInstance) GetXOffset() int {
 	var carg0 *C.GtkTreeViewColumn // in, none, converted
-	var cret  C.int                // return, none, casted
+	var cret  C.int                // return, none, casted, casted C.gint
 
 	carg0 = (*C.GtkTreeViewColumn)(UnsafeTreeViewColumnToGlibNone(treeColumn))
 
@@ -71812,10 +71812,10 @@ func (treeColumn *TreeViewColumnInstance) QueueResize() {
 // Deprecated: (since 4.10.0) Use GtkColumnView instead
 func (treeColumn *TreeViewColumnInstance) SetAlignment(xalign float32) {
 	var carg0 *C.GtkTreeViewColumn // in, none, converted
-	var carg1 C.gfloat             // in, none, casted
+	var carg1 C.float              // in, none, casted, casted C.gfloat
 
 	carg0 = (*C.GtkTreeViewColumn)(UnsafeTreeViewColumnToGlibNone(treeColumn))
-	carg1 = C.gfloat(xalign)
+	carg1 = C.float(xalign)
 
 	C.gtk_tree_view_column_set_alignment(carg0, carg1)
 	runtime.KeepAlive(treeColumn)
@@ -71933,7 +71933,7 @@ func (treeColumn *TreeViewColumnInstance) SetExpand(expand bool) {
 // Deprecated: (since 4.10.0) Use GtkColumnView instead
 func (treeColumn *TreeViewColumnInstance) SetFixedWidth(fixedWidth int) {
 	var carg0 *C.GtkTreeViewColumn // in, none, converted
-	var carg1 C.int                // in, none, casted
+	var carg1 C.int                // in, none, casted, casted C.gint
 
 	carg0 = (*C.GtkTreeViewColumn)(UnsafeTreeViewColumnToGlibNone(treeColumn))
 	carg1 = C.int(fixedWidth)
@@ -71957,7 +71957,7 @@ func (treeColumn *TreeViewColumnInstance) SetFixedWidth(fixedWidth int) {
 // Deprecated: (since 4.10.0) Use GtkColumnView instead
 func (treeColumn *TreeViewColumnInstance) SetMaxWidth(maxWidth int) {
 	var carg0 *C.GtkTreeViewColumn // in, none, converted
-	var carg1 C.int                // in, none, casted
+	var carg1 C.int                // in, none, casted, casted C.gint
 
 	carg0 = (*C.GtkTreeViewColumn)(UnsafeTreeViewColumnToGlibNone(treeColumn))
 	carg1 = C.int(maxWidth)
@@ -71979,7 +71979,7 @@ func (treeColumn *TreeViewColumnInstance) SetMaxWidth(maxWidth int) {
 // Deprecated: (since 4.10.0) Use GtkColumnView instead
 func (treeColumn *TreeViewColumnInstance) SetMinWidth(minWidth int) {
 	var carg0 *C.GtkTreeViewColumn // in, none, converted
-	var carg1 C.int                // in, none, casted
+	var carg1 C.int                // in, none, casted, casted C.gint
 
 	carg0 = (*C.GtkTreeViewColumn)(UnsafeTreeViewColumnToGlibNone(treeColumn))
 	carg1 = C.int(minWidth)
@@ -72074,7 +72074,7 @@ func (treeColumn *TreeViewColumnInstance) SetSizing(typ TreeViewColumnSizing) {
 // Deprecated: (since 4.10.0) Use GtkColumnView instead
 func (treeColumn *TreeViewColumnInstance) SetSortColumnID(sortColumnId int) {
 	var carg0 *C.GtkTreeViewColumn // in, none, converted
-	var carg1 C.int                // in, none, casted
+	var carg1 C.int                // in, none, casted, casted C.gint
 
 	carg0 = (*C.GtkTreeViewColumn)(UnsafeTreeViewColumnToGlibNone(treeColumn))
 	carg1 = C.int(sortColumnId)
@@ -72153,7 +72153,7 @@ func (treeColumn *TreeViewColumnInstance) SetSortOrder(order SortType) {
 // Deprecated: (since 4.10.0) Use GtkColumnView instead
 func (treeColumn *TreeViewColumnInstance) SetSpacing(spacing int) {
 	var carg0 *C.GtkTreeViewColumn // in, none, converted
-	var carg1 C.int                // in, none, casted
+	var carg1 C.int                // in, none, casted, casted C.gint
 
 	carg0 = (*C.GtkTreeViewColumn)(UnsafeTreeViewColumnToGlibNone(treeColumn))
 	carg1 = C.int(spacing)
@@ -72175,10 +72175,10 @@ func (treeColumn *TreeViewColumnInstance) SetSpacing(spacing int) {
 // Deprecated: (since 4.10.0) Use GtkColumnView instead
 func (treeColumn *TreeViewColumnInstance) SetTitle(title string) {
 	var carg0 *C.GtkTreeViewColumn // in, none, converted
-	var carg1 *C.gchar             // in, none, string
+	var carg1 *C.char              // in, none, string, casted *C.gchar
 
 	carg0 = (*C.GtkTreeViewColumn)(UnsafeTreeViewColumnToGlibNone(treeColumn))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(title)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(title)))
 	defer C.free(unsafe.Pointer(carg1))
 
 	C.gtk_tree_view_column_set_title(carg0, carg1)
@@ -72347,11 +72347,11 @@ func UnsafeUriLauncherToGlibFull(c UriLauncher) unsafe.Pointer {
 //
 // Creates a new `GtkUriLauncher` object.
 func NewUriLauncherInstance(uri string) UriLauncher {
-	var carg1 *C.gchar          // in, none, string, nullable-string
+	var carg1 *C.char           // in, none, string, nullable-string
 	var cret  *C.GtkUriLauncher // return, full, converted
 
 	if uri != "" {
-		carg1 = (*C.gchar)(unsafe.Pointer(C.CString(uri)))
+		carg1 = (*C.char)(unsafe.Pointer(C.CString(uri)))
 		defer C.free(unsafe.Pointer(carg1))
 	}
 
@@ -72373,7 +72373,7 @@ func NewUriLauncherInstance(uri string) UriLauncher {
 // Gets the uri that will be opened.
 func (self *UriLauncherInstance) GetURI() string {
 	var carg0 *C.GtkUriLauncher // in, none, converted
-	var cret  *C.gchar          // return, none, string
+	var cret  *C.char           // return, none, string, casted *C.gchar
 
 	carg0 = (*C.GtkUriLauncher)(UnsafeUriLauncherToGlibNone(self))
 
@@ -72382,7 +72382,7 @@ func (self *UriLauncherInstance) GetURI() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -72473,11 +72473,11 @@ func (self *UriLauncherInstance) LaunchFinish(result gio.AsyncResult) (bool, err
 // Sets the uri that will be opened.
 func (self *UriLauncherInstance) SetURI(uri string) {
 	var carg0 *C.GtkUriLauncher // in, none, converted
-	var carg1 *C.gchar          // in, none, string, nullable-string
+	var carg1 *C.char           // in, none, string, nullable-string
 
 	carg0 = (*C.GtkUriLauncher)(UnsafeUriLauncherToGlibNone(self))
 	if uri != "" {
-		carg1 = (*C.gchar)(unsafe.Pointer(C.CString(uri)))
+		carg1 = (*C.char)(unsafe.Pointer(C.CString(uri)))
 		defer C.free(unsafe.Pointer(carg1))
 	}
 
@@ -75179,11 +75179,11 @@ func WidgetInstanceSetDefaultDirection(dir TextDirection) {
 // gtk_widget_class_install_action().
 func (widget *WidgetInstance) ActionSetEnabled(actionName string, enabled bool) {
 	var carg0 *C.GtkWidget // in, none, converted
-	var carg1 *C.gchar     // in, none, string
+	var carg1 *C.char      // in, none, string, casted *C.gchar
 	var carg2 C.gboolean   // in
 
 	carg0 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(widget))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(actionName)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(actionName)))
 	defer C.free(unsafe.Pointer(carg1))
 	if enabled {
 		carg2 = C.TRUE
@@ -75283,10 +75283,10 @@ func (widget *WidgetInstance) AddController(controller EventController) {
 // style again.
 func (widget *WidgetInstance) AddCSSClass(cssClass string) {
 	var carg0 *C.GtkWidget // in, none, converted
-	var carg1 *C.gchar     // in, none, string
+	var carg1 *C.char      // in, none, string, casted *C.gchar
 
 	carg0 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(widget))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(cssClass)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(cssClass)))
 	defer C.free(unsafe.Pointer(carg1))
 
 	C.gtk_widget_add_css_class(carg0, carg1)
@@ -75395,9 +75395,9 @@ func (widget *WidgetInstance) AddTickCallback(callback TickCallback) uint {
 // [method@Gtk.Widget.size_allocate].
 func (widget *WidgetInstance) Allocate(width int, height int, baseline int, transform *gsk.Transform) {
 	var carg0 *C.GtkWidget    // in, none, converted
-	var carg1 C.int           // in, none, casted
-	var carg2 C.int           // in, none, casted
-	var carg3 C.int           // in, none, casted
+	var carg1 C.int           // in, none, casted, casted C.gint
+	var carg2 C.int           // in, none, casted, casted C.gint
+	var carg3 C.int           // in, none, casted, casted C.gint
 	var carg4 *C.GskTransform // in, full, converted, nullable
 
 	carg0 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(widget))
@@ -75671,13 +75671,13 @@ func (widget *WidgetInstance) ComputeTransform(target Widget) (graphene.Matrix, 
 // (0, 0) is assumed to be the top left of @widget's content area.
 func (widget *WidgetInstance) Contains(x float64, y float64) bool {
 	var carg0 *C.GtkWidget // in, none, converted
-	var carg1 C.gdouble    // in, none, casted
-	var carg2 C.gdouble    // in, none, casted
+	var carg1 C.double     // in, none, casted, casted C.gdouble
+	var carg2 C.double     // in, none, casted, casted C.gdouble
 	var cret  C.gboolean   // return
 
 	carg0 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(widget))
-	carg1 = C.gdouble(x)
-	carg2 = C.gdouble(y)
+	carg1 = C.double(x)
+	carg2 = C.double(y)
 
 	cret = C.gtk_widget_contains(carg0, carg1, carg2)
 	runtime.KeepAlive(widget)
@@ -75739,12 +75739,12 @@ func (widget *WidgetInstance) CreatePangoContext() pango.Context {
 // of the [property@Gtk.Widget:root] property on the widget.
 func (widget *WidgetInstance) CreatePangoLayout(text string) pango.Layout {
 	var carg0 *C.GtkWidget   // in, none, converted
-	var carg1 *C.gchar       // in, none, string, nullable-string
+	var carg1 *C.char        // in, none, string, nullable-string
 	var cret  *C.PangoLayout // return, full, converted
 
 	carg0 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(widget))
 	if text != "" {
-		carg1 = (*C.gchar)(unsafe.Pointer(C.CString(text)))
+		carg1 = (*C.char)(unsafe.Pointer(C.CString(text)))
 		defer C.free(unsafe.Pointer(carg1))
 	}
 
@@ -75818,10 +75818,10 @@ func (widget *WidgetInstance) DisposeTemplate(widgetType gobject.Type) {
 // Checks to see if a drag movement has passed the GTK drag threshold.
 func (widget *WidgetInstance) DragCheckThreshold(startX int, startY int, currentX int, currentY int) bool {
 	var carg0 *C.GtkWidget // in, none, converted
-	var carg1 C.int        // in, none, casted
-	var carg2 C.int        // in, none, casted
-	var carg3 C.int        // in, none, casted
-	var carg4 C.int        // in, none, casted
+	var carg1 C.int        // in, none, casted, casted C.gint
+	var carg2 C.int        // in, none, casted, casted C.gint
+	var carg3 C.int        // in, none, casted, casted C.gint
+	var carg4 C.int        // in, none, casted, casted C.gint
 	var cret  C.gboolean   // return
 
 	carg0 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(widget))
@@ -75879,7 +75879,7 @@ func (widget *WidgetInstance) ErrorBell() {
 // Deprecated: (since 4.12.0) Use [method@Gtk.Widget.get_baseline] instead
 func (widget *WidgetInstance) GetAllocatedBaseline() int {
 	var carg0 *C.GtkWidget // in, none, converted
-	var cret  C.int        // return, none, casted
+	var cret  C.int        // return, none, casted, casted C.gint
 
 	carg0 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(widget))
 
@@ -75906,7 +75906,7 @@ func (widget *WidgetInstance) GetAllocatedBaseline() int {
 // Deprecated: (since 4.12.0) Use [method@Gtk.Widget.get_height] instead
 func (widget *WidgetInstance) GetAllocatedHeight() int {
 	var carg0 *C.GtkWidget // in, none, converted
-	var cret  C.int        // return, none, casted
+	var cret  C.int        // return, none, casted, casted C.gint
 
 	carg0 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(widget))
 
@@ -75933,7 +75933,7 @@ func (widget *WidgetInstance) GetAllocatedHeight() int {
 // Deprecated: (since 4.12.0) Use [method@Gtk.Widget.get_width] instead
 func (widget *WidgetInstance) GetAllocatedWidth() int {
 	var carg0 *C.GtkWidget // in, none, converted
-	var cret  C.int        // return, none, casted
+	var cret  C.int        // return, none, casted, casted C.gint
 
 	carg0 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(widget))
 
@@ -76038,7 +76038,7 @@ func (widget *WidgetInstance) GetAncestor(widgetType gobject.Type) Widget {
 // child widgets in `GtkWidget`Class.size_allocate().
 func (widget *WidgetInstance) GetBaseline() int {
 	var carg0 *C.GtkWidget // in, none, converted
-	var cret  C.int        // return, none, casted
+	var cret  C.int        // return, none, casted, casted C.gint
 
 	carg0 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(widget))
 
@@ -76222,7 +76222,7 @@ func (widget *WidgetInstance) GetCSSClasses() []string {
 // Returns the CSS name that is used for @self.
 func (self *WidgetInstance) GetCSSName() string {
 	var carg0 *C.GtkWidget // in, none, converted
-	var cret  *C.gchar     // return, none, string
+	var cret  *C.char      // return, none, string, casted *C.gchar
 
 	carg0 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(self))
 
@@ -76231,7 +76231,7 @@ func (self *WidgetInstance) GetCSSName() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -76549,7 +76549,7 @@ func (widget *WidgetInstance) GetHasTooltip() bool {
 // system [overview](coordinates.html).
 func (widget *WidgetInstance) GetHeight() int {
 	var carg0 *C.GtkWidget // in, none, converted
-	var cret  C.int        // return, none, casted
+	var cret  C.int        // return, none, casted, casted C.gint
 
 	carg0 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(widget))
 
@@ -76715,7 +76715,7 @@ func (widget *WidgetInstance) GetMapped() bool {
 // Gets the bottom margin of @widget.
 func (widget *WidgetInstance) GetMarginBottom() int {
 	var carg0 *C.GtkWidget // in, none, converted
-	var cret  C.int        // return, none, casted
+	var cret  C.int        // return, none, casted, casted C.gint
 
 	carg0 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(widget))
 
@@ -76737,7 +76737,7 @@ func (widget *WidgetInstance) GetMarginBottom() int {
 // Gets the end margin of @widget.
 func (widget *WidgetInstance) GetMarginEnd() int {
 	var carg0 *C.GtkWidget // in, none, converted
-	var cret  C.int        // return, none, casted
+	var cret  C.int        // return, none, casted, casted C.gint
 
 	carg0 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(widget))
 
@@ -76759,7 +76759,7 @@ func (widget *WidgetInstance) GetMarginEnd() int {
 // Gets the start margin of @widget.
 func (widget *WidgetInstance) GetMarginStart() int {
 	var carg0 *C.GtkWidget // in, none, converted
-	var cret  C.int        // return, none, casted
+	var cret  C.int        // return, none, casted, casted C.gint
 
 	carg0 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(widget))
 
@@ -76781,7 +76781,7 @@ func (widget *WidgetInstance) GetMarginStart() int {
 // Gets the top margin of @widget.
 func (widget *WidgetInstance) GetMarginTop() int {
 	var carg0 *C.GtkWidget // in, none, converted
-	var cret  C.int        // return, none, casted
+	var cret  C.int        // return, none, casted, casted C.gint
 
 	carg0 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(widget))
 
@@ -76805,7 +76805,7 @@ func (widget *WidgetInstance) GetMarginTop() int {
 // See [method@Gtk.Widget.set_name] for the significance of widget names.
 func (widget *WidgetInstance) GetName() string {
 	var carg0 *C.GtkWidget // in, none, converted
-	var cret  *C.gchar     // return, none, string
+	var cret  *C.char      // return, none, string, casted *C.gchar
 
 	carg0 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(widget))
 
@@ -76814,7 +76814,7 @@ func (widget *WidgetInstance) GetName() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -76853,7 +76853,7 @@ func (widget *WidgetInstance) GetNextSibling() Widget {
 // See [method@Gtk.Widget.set_opacity].
 func (widget *WidgetInstance) GetOpacity() float64 {
 	var carg0 *C.GtkWidget // in, none, converted
-	var cret  C.gdouble    // return, none, casted
+	var cret  C.double     // return, none, casted, casted C.gdouble
 
 	carg0 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(widget))
 
@@ -77130,7 +77130,7 @@ func (widget *WidgetInstance) GetRequestMode() SizeRequestMode {
 // See [method@Gdk.Surface.get_scale_factor].
 func (widget *WidgetInstance) GetScaleFactor() int {
 	var carg0 *C.GtkWidget // in, none, converted
-	var cret  C.int        // return, none, casted
+	var cret  C.int        // return, none, casted, casted C.gint
 
 	carg0 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(widget))
 
@@ -77227,7 +77227,7 @@ func (widget *WidgetInstance) GetSettings() Settings {
 func (widget *WidgetInstance) GetSize(orientation Orientation) int {
 	var carg0 *C.GtkWidget     // in, none, converted
 	var carg1 C.GtkOrientation // in, none, casted
-	var cret  C.int            // return, none, casted
+	var cret  C.int            // return, none, casted, casted C.gint
 
 	carg0 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(widget))
 	carg1 = C.GtkOrientation(orientation)
@@ -77260,8 +77260,8 @@ func (widget *WidgetInstance) GetSize(orientation Orientation) int {
 // this function.
 func (widget *WidgetInstance) GetSizeRequest() (int, int) {
 	var carg0 *C.GtkWidget // in, none, converted
-	var carg1 C.int        // out, full, casted
-	var carg2 C.int        // out, full, casted
+	var carg1 C.int        // out, full, casted, casted C.gint
+	var carg2 C.int        // out, full, casted, casted C.gint
 
 	carg0 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(widget))
 
@@ -77358,12 +77358,12 @@ func (widget *WidgetInstance) GetStyleContext() StyleContext {
 func (widget *WidgetInstance) GetTemplateChild(widgetType gobject.Type, name string) gobject.Object {
 	var carg0 *C.GtkWidget // in, none, converted
 	var carg1 C.GType      // in, none, casted, alias
-	var carg2 *C.gchar     // in, none, string
+	var carg2 *C.char      // in, none, string, casted *C.gchar
 	var cret  *C.GObject   // return, none, converted
 
 	carg0 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(widget))
 	carg1 = C.GType(widgetType)
-	carg2 = (*C.gchar)(unsafe.Pointer(C.CString(name)))
+	carg2 = (*C.char)(unsafe.Pointer(C.CString(name)))
 	defer C.free(unsafe.Pointer(carg2))
 
 	cret = C.gtk_widget_get_template_child(carg0, carg1, carg2)
@@ -77390,7 +77390,7 @@ func (widget *WidgetInstance) GetTemplateChild(widgetType gobject.Type, name str
 // function returns %NULL.
 func (widget *WidgetInstance) GetTooltipMarkup() string {
 	var carg0 *C.GtkWidget // in, none, converted
-	var cret  *C.gchar     // return, none, string
+	var cret  *C.char      // return, none, string, casted *C.gchar
 
 	carg0 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(widget))
 
@@ -77399,7 +77399,7 @@ func (widget *WidgetInstance) GetTooltipMarkup() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -77416,7 +77416,7 @@ func (widget *WidgetInstance) GetTooltipMarkup() string {
 // this function will return the escaped text.
 func (widget *WidgetInstance) GetTooltipText() string {
 	var carg0 *C.GtkWidget // in, none, converted
-	var cret  *C.gchar     // return, none, string
+	var cret  *C.char      // return, none, string, casted *C.gchar
 
 	carg0 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(widget))
 
@@ -77425,7 +77425,7 @@ func (widget *WidgetInstance) GetTooltipText() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -77556,7 +77556,7 @@ func (widget *WidgetInstance) GetVisible() bool {
 // system [overview](coordinates.html).
 func (widget *WidgetInstance) GetWidth() int {
 	var carg0 *C.GtkWidget // in, none, converted
-	var cret  C.int        // return, none, casted
+	var cret  C.int        // return, none, casted, casted C.gint
 
 	carg0 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(widget))
 
@@ -77615,11 +77615,11 @@ func (widget *WidgetInstance) GrabFocus() bool {
 // Returns whether @css_class is currently applied to @widget.
 func (widget *WidgetInstance) HasCSSClass(cssClass string) bool {
 	var carg0 *C.GtkWidget // in, none, converted
-	var carg1 *C.gchar     // in, none, string
+	var carg1 *C.char      // in, none, string, casted *C.gchar
 	var cret  C.gboolean   // return
 
 	carg0 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(widget))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(cssClass)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(cssClass)))
 	defer C.free(unsafe.Pointer(carg1))
 
 	cret = C.gtk_widget_has_css_class(carg0, carg1)
@@ -77818,11 +77818,11 @@ func (widget *WidgetInstance) InitTemplate() {
 // removed from @widget.
 func (widget *WidgetInstance) InsertActionGroup(name string, group gio.ActionGroup) {
 	var carg0 *C.GtkWidget    // in, none, converted
-	var carg1 *C.gchar        // in, none, string
+	var carg1 *C.char         // in, none, string, casted *C.gchar
 	var carg2 *C.GActionGroup // in, none, converted, nullable
 
 	carg0 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(widget))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(name)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(name)))
 	defer C.free(unsafe.Pointer(carg1))
 	if group != nil {
 		carg2 = (*C.GActionGroup)(gio.UnsafeActionGroupToGlibNone(group))
@@ -78158,11 +78158,11 @@ func (widget *WidgetInstance) Map() {
 func (widget *WidgetInstance) Measure(orientation Orientation, forSize int) (int, int, int, int) {
 	var carg0 *C.GtkWidget     // in, none, converted
 	var carg1 C.GtkOrientation // in, none, casted
-	var carg2 C.int            // in, none, casted
-	var carg3 C.int            // out, full, casted
-	var carg4 C.int            // out, full, casted
-	var carg5 C.int            // out, full, casted
-	var carg6 C.int            // out, full, casted
+	var carg2 C.int            // in, none, casted, casted C.gint
+	var carg3 C.int            // out, full, casted, casted C.gint
+	var carg4 C.int            // out, full, casted, casted C.gint
+	var carg5 C.int            // out, full, casted, casted C.gint
+	var carg6 C.int            // out, full, casted, casted C.gint
 
 	carg0 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(widget))
 	carg1 = C.GtkOrientation(orientation)
@@ -78309,14 +78309,14 @@ func (widget *WidgetInstance) ObserveControllers() gio.ListModel {
 // delivering events.
 func (widget *WidgetInstance) Pick(x float64, y float64, flags PickFlags) Widget {
 	var carg0 *C.GtkWidget   // in, none, converted
-	var carg1 C.gdouble      // in, none, casted
-	var carg2 C.gdouble      // in, none, casted
+	var carg1 C.double       // in, none, casted, casted C.gdouble
+	var carg2 C.double       // in, none, casted, casted C.gdouble
 	var carg3 C.GtkPickFlags // in, none, casted
 	var cret  *C.GtkWidget   // return, none, converted
 
 	carg0 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(widget))
-	carg1 = C.gdouble(x)
-	carg2 = C.gdouble(y)
+	carg1 = C.double(x)
+	carg2 = C.double(y)
 	carg3 = C.GtkPickFlags(flags)
 
 	cret = C.gtk_widget_pick(carg0, carg1, carg2, carg3)
@@ -78457,10 +78457,10 @@ func (widget *WidgetInstance) RemoveController(controller EventController) {
 // After this, the style of @widget will stop matching for @css_class.
 func (widget *WidgetInstance) RemoveCSSClass(cssClass string) {
 	var carg0 *C.GtkWidget // in, none, converted
-	var carg1 *C.gchar     // in, none, string
+	var carg1 *C.char      // in, none, string, casted *C.gchar
 
 	carg0 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(widget))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(cssClass)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(cssClass)))
 	defer C.free(unsafe.Pointer(carg1))
 
 	C.gtk_widget_remove_css_class(carg0, carg1)
@@ -78673,11 +78673,11 @@ func (widget *WidgetInstance) SetCursor(cursor gdk.Cursor) {
 // with a %NULL cursor.
 func (widget *WidgetInstance) SetCursorFromName(name string) {
 	var carg0 *C.GtkWidget // in, none, converted
-	var carg1 *C.gchar     // in, none, string, nullable-string
+	var carg1 *C.char      // in, none, string, nullable-string
 
 	carg0 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(widget))
 	if name != "" {
-		carg1 = (*C.gchar)(unsafe.Pointer(C.CString(name)))
+		carg1 = (*C.char)(unsafe.Pointer(C.CString(name)))
 		defer C.free(unsafe.Pointer(carg1))
 	}
 
@@ -78984,7 +78984,7 @@ func (widget *WidgetInstance) SetLayoutManager(layoutManager LayoutManager) {
 // Sets the bottom margin of @widget.
 func (widget *WidgetInstance) SetMarginBottom(margin int) {
 	var carg0 *C.GtkWidget // in, none, converted
-	var carg1 C.int        // in, none, casted
+	var carg1 C.int        // in, none, casted, casted C.gint
 
 	carg0 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(widget))
 	carg1 = C.int(margin)
@@ -79003,7 +79003,7 @@ func (widget *WidgetInstance) SetMarginBottom(margin int) {
 // Sets the end margin of @widget.
 func (widget *WidgetInstance) SetMarginEnd(margin int) {
 	var carg0 *C.GtkWidget // in, none, converted
-	var carg1 C.int        // in, none, casted
+	var carg1 C.int        // in, none, casted, casted C.gint
 
 	carg0 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(widget))
 	carg1 = C.int(margin)
@@ -79022,7 +79022,7 @@ func (widget *WidgetInstance) SetMarginEnd(margin int) {
 // Sets the start margin of @widget.
 func (widget *WidgetInstance) SetMarginStart(margin int) {
 	var carg0 *C.GtkWidget // in, none, converted
-	var carg1 C.int        // in, none, casted
+	var carg1 C.int        // in, none, casted, casted C.gint
 
 	carg0 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(widget))
 	carg1 = C.int(margin)
@@ -79041,7 +79041,7 @@ func (widget *WidgetInstance) SetMarginStart(margin int) {
 // Sets the top margin of @widget.
 func (widget *WidgetInstance) SetMarginTop(margin int) {
 	var carg0 *C.GtkWidget // in, none, converted
-	var carg1 C.int        // in, none, casted
+	var carg1 C.int        // in, none, casted, casted C.gint
 
 	carg0 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(widget))
 	carg1 = C.int(margin)
@@ -79070,10 +79070,10 @@ func (widget *WidgetInstance) SetMarginTop(margin int) {
 // of alphanumeric symbols, dashes and underscores will suffice.
 func (widget *WidgetInstance) SetName(name string) {
 	var carg0 *C.GtkWidget // in, none, converted
-	var carg1 *C.gchar     // in, none, string
+	var carg1 *C.char      // in, none, string, casted *C.gchar
 
 	carg0 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(widget))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(name)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(name)))
 	defer C.free(unsafe.Pointer(carg1))
 
 	C.gtk_widget_set_name(carg0, carg1)
@@ -79111,10 +79111,10 @@ func (widget *WidgetInstance) SetName(name string) {
 // even if they are attached to a toplevel that is translucent.
 func (widget *WidgetInstance) SetOpacity(opacity float64) {
 	var carg0 *C.GtkWidget // in, none, converted
-	var carg1 C.gdouble    // in, none, casted
+	var carg1 C.double     // in, none, casted, casted C.gdouble
 
 	carg0 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(widget))
-	carg1 = C.gdouble(opacity)
+	carg1 = C.double(opacity)
 
 	C.gtk_widget_set_opacity(carg0, carg1)
 	runtime.KeepAlive(widget)
@@ -79267,8 +79267,8 @@ func (widget *WidgetInstance) SetSensitive(sensitive bool) {
 // of `GtkWidget`.
 func (widget *WidgetInstance) SetSizeRequest(width int, height int) {
 	var carg0 *C.GtkWidget // in, none, converted
-	var carg1 C.int        // in, none, casted
-	var carg2 C.int        // in, none, casted
+	var carg1 C.int        // in, none, casted, casted C.gint
+	var carg2 C.int        // in, none, casted, casted C.gint
 
 	carg0 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(widget))
 	carg1 = C.int(width)
@@ -79329,11 +79329,11 @@ func (widget *WidgetInstance) SetStateFlags(flags StateFlags, clear bool) {
 // See also [method@Gtk.Tooltip.set_markup].
 func (widget *WidgetInstance) SetTooltipMarkup(markup string) {
 	var carg0 *C.GtkWidget // in, none, converted
-	var carg1 *C.gchar     // in, none, string, nullable-string
+	var carg1 *C.char      // in, none, string, nullable-string
 
 	carg0 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(widget))
 	if markup != "" {
-		carg1 = (*C.gchar)(unsafe.Pointer(C.CString(markup)))
+		carg1 = (*C.char)(unsafe.Pointer(C.CString(markup)))
 		defer C.free(unsafe.Pointer(carg1))
 	}
 
@@ -79360,11 +79360,11 @@ func (widget *WidgetInstance) SetTooltipMarkup(markup string) {
 // See also [method@Gtk.Tooltip.set_text].
 func (widget *WidgetInstance) SetTooltipText(text string) {
 	var carg0 *C.GtkWidget // in, none, converted
-	var carg1 *C.gchar     // in, none, string, nullable-string
+	var carg1 *C.char      // in, none, string, nullable-string
 
 	carg0 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(widget))
 	if text != "" {
-		carg1 = (*C.gchar)(unsafe.Pointer(C.CString(text)))
+		carg1 = (*C.char)(unsafe.Pointer(C.CString(text)))
 		defer C.free(unsafe.Pointer(carg1))
 	}
 
@@ -79528,7 +79528,7 @@ func (widget *WidgetInstance) Show() {
 func (widget *WidgetInstance) SizeAllocate(allocation *Allocation, baseline int) {
 	var carg0 *C.GtkWidget     // in, none, converted
 	var carg1 *C.GtkAllocation // in, transfer: none, C Pointers: 1, Name: Allocation
-	var carg2 C.int            // in, none, casted
+	var carg2 C.int            // in, none, casted, casted C.gint
 
 	carg0 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(widget))
 	_ = allocation
@@ -79604,16 +79604,16 @@ func (widget *WidgetInstance) SnapshotChild(child Widget, snapshot Snapshot) {
 func (srcWidget *WidgetInstance) TranslateCoordinates(destWidget Widget, srcX float64, srcY float64) (float64, float64, bool) {
 	var carg0 *C.GtkWidget // in, none, converted
 	var carg1 *C.GtkWidget // in, none, converted
-	var carg2 C.gdouble    // in, none, casted
-	var carg3 C.gdouble    // in, none, casted
-	var carg4 C.gdouble    // out, full, casted
-	var carg5 C.gdouble    // out, full, casted
+	var carg2 C.double     // in, none, casted, casted C.gdouble
+	var carg3 C.double     // in, none, casted, casted C.gdouble
+	var carg4 C.double     // out, full, casted, casted C.gdouble
+	var carg5 C.double     // out, full, casted, casted C.gdouble
 	var cret  C.gboolean   // return
 
 	carg0 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(srcWidget))
 	carg1 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(destWidget))
-	carg2 = C.gdouble(srcX)
-	carg3 = C.gdouble(srcY)
+	carg2 = C.double(srcX)
+	carg3 = C.double(srcY)
 
 	cret = C.gtk_widget_translate_coordinates(carg0, carg1, carg2, carg3, &carg4, &carg5)
 	runtime.KeepAlive(srcWidget)
@@ -80708,13 +80708,13 @@ func NewWindowInstance() Widget {
 // be modified. It is only valid until the next call to
 // [func@Gtk.Window.set_default_icon_name].
 func WindowInstanceGetDefaultIconName() string {
-	var cret *C.gchar // return, none, string
+	var cret *C.char // return, none, string, casted *C.gchar
 
 	cret = C.gtk_window_get_default_icon_name()
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -80782,9 +80782,9 @@ func WindowInstanceSetAutoStartupNotification(setting bool) {
 // haven't had [method@Gtk.Window.set_icon_name]
 // called on them.
 func WindowInstanceSetDefaultIconName(name string) {
-	var carg1 *C.gchar // in, none, string
+	var carg1 *C.char // in, none, string, casted *C.gchar
 
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(name)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(name)))
 	defer C.free(unsafe.Pointer(carg1))
 
 	C.gtk_window_set_default_icon_name(carg1)
@@ -80982,8 +80982,8 @@ func (window *WindowInstance) GetDecorated() bool {
 // across restarts of applications](https://developer.gnome.org/documentation/tutorials/save-state.html).
 func (window *WindowInstance) GetDefaultSize() (int, int) {
 	var carg0 *C.GtkWindow // in, none, converted
-	var carg1 C.int        // out, full, casted
-	var carg2 C.int        // out, full, casted
+	var carg1 C.int        // out, full, casted, casted C.gint
+	var carg2 C.int        // out, full, casted, casted C.gint
 
 	carg0 = (*C.GtkWindow)(UnsafeWindowToGlibNone(window))
 
@@ -81201,7 +81201,7 @@ func (window *WindowInstance) GetHideOnClose() bool {
 // Returns the name of the themed icon for the window.
 func (window *WindowInstance) GetIconName() string {
 	var carg0 *C.GtkWindow // in, none, converted
-	var cret  *C.gchar     // return, none, string
+	var cret  *C.char      // return, none, string, casted *C.gchar
 
 	carg0 = (*C.GtkWindow)(UnsafeWindowToGlibNone(window))
 
@@ -81210,7 +81210,7 @@ func (window *WindowInstance) GetIconName() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -81295,7 +81295,7 @@ func (window *WindowInstance) GetResizable() bool {
 // Retrieves the title of the window.
 func (window *WindowInstance) GetTitle() string {
 	var carg0 *C.GtkWindow // in, none, converted
-	var cret  *C.gchar     // return, none, string
+	var cret  *C.char      // return, none, string, casted *C.gchar
 
 	carg0 = (*C.GtkWindow)(UnsafeWindowToGlibNone(window))
 
@@ -81304,7 +81304,7 @@ func (window *WindowInstance) GetTitle() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -81724,8 +81724,8 @@ func (window *WindowInstance) SetDecorated(setting bool) {
 // or shrinking windows.
 func (window *WindowInstance) SetDefaultSize(width int, height int) {
 	var carg0 *C.GtkWindow // in, none, converted
-	var carg1 C.int        // in, none, casted
-	var carg2 C.int        // in, none, casted
+	var carg1 C.int        // in, none, casted, casted C.gint
+	var carg2 C.int        // in, none, casted, casted C.gint
 
 	carg0 = (*C.GtkWindow)(UnsafeWindowToGlibNone(window))
 	carg1 = C.int(width)
@@ -81952,11 +81952,11 @@ func (window *WindowInstance) SetHideOnClose(setting bool) {
 // property which is mentioned in the ICCCM.
 func (window *WindowInstance) SetIconName(name string) {
 	var carg0 *C.GtkWindow // in, none, converted
-	var carg1 *C.gchar     // in, none, string, nullable-string
+	var carg1 *C.char      // in, none, string, nullable-string
 
 	carg0 = (*C.GtkWindow)(UnsafeWindowToGlibNone(window))
 	if name != "" {
-		carg1 = (*C.gchar)(unsafe.Pointer(C.CString(name)))
+		carg1 = (*C.char)(unsafe.Pointer(C.CString(name)))
 		defer C.free(unsafe.Pointer(carg1))
 	}
 
@@ -82061,10 +82061,10 @@ func (window *WindowInstance) SetResizable(resizable bool) {
 // This function is only useful on X11, not with other GTK targets.
 func (window *WindowInstance) SetStartupID(startupId string) {
 	var carg0 *C.GtkWindow // in, none, converted
-	var carg1 *C.gchar     // in, none, string
+	var carg1 *C.char      // in, none, string, casted *C.gchar
 
 	carg0 = (*C.GtkWindow)(UnsafeWindowToGlibNone(window))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(startupId)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(startupId)))
 	defer C.free(unsafe.Pointer(carg1))
 
 	C.gtk_window_set_startup_id(carg0, carg1)
@@ -82090,11 +82090,11 @@ func (window *WindowInstance) SetStartupID(startupId string) {
 // Passing %NULL does the same as setting the title to an empty string.
 func (window *WindowInstance) SetTitle(title string) {
 	var carg0 *C.GtkWindow // in, none, converted
-	var carg1 *C.gchar     // in, none, string, nullable-string
+	var carg1 *C.char      // in, none, string, nullable-string
 
 	carg0 = (*C.GtkWindow)(UnsafeWindowToGlibNone(window))
 	if title != "" {
-		carg1 = (*C.gchar)(unsafe.Pointer(C.CString(title)))
+		carg1 = (*C.char)(unsafe.Pointer(C.CString(title)))
 		defer C.free(unsafe.Pointer(carg1))
 	}
 
@@ -82423,7 +82423,7 @@ func NewWindowControlsInstance(side PackType) Widget {
 // Gets the decoration layout of this `GtkWindowControls`.
 func (self *WindowControlsInstance) GetDecorationLayout() string {
 	var carg0 *C.GtkWindowControls // in, none, converted
-	var cret  *C.gchar             // return, none, string
+	var cret  *C.char              // return, none, string, casted *C.gchar
 
 	carg0 = (*C.GtkWindowControls)(UnsafeWindowControlsToGlibNone(self))
 
@@ -82432,7 +82432,7 @@ func (self *WindowControlsInstance) GetDecorationLayout() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -82506,11 +82506,11 @@ func (self *WindowControlsInstance) GetSide() PackType {
 // will display the part before the colon, otherwise after that.
 func (self *WindowControlsInstance) SetDecorationLayout(layout string) {
 	var carg0 *C.GtkWindowControls // in, none, converted
-	var carg1 *C.gchar             // in, none, string, nullable-string
+	var carg1 *C.char              // in, none, string, nullable-string
 
 	carg0 = (*C.GtkWindowControls)(UnsafeWindowControlsToGlibNone(self))
 	if layout != "" {
-		carg1 = (*C.gchar)(unsafe.Pointer(C.CString(layout)))
+		carg1 = (*C.char)(unsafe.Pointer(C.CString(layout)))
 		defer C.free(unsafe.Pointer(carg1))
 	}
 
@@ -83280,11 +83280,11 @@ func NewAboutDialogInstance() Widget {
 // Creates a new section in the "Credits" page.
 func (about *AboutDialogInstance) AddCreditSection(sectionName string, people []string) {
 	var carg0 *C.GtkAboutDialog // in, none, converted
-	var carg1 *C.gchar          // in, none, string
+	var carg1 *C.char           // in, none, string, casted *C.gchar
 	var carg2 **C.char          // in, transfer: none, C Pointers: 2, Name: array[utf8], array (inner: *typesystem.StringPrimitive, zero-terminated)
 
 	carg0 = (*C.GtkAboutDialog)(UnsafeAboutDialogToGlibNone(about))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(sectionName)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(sectionName)))
 	defer C.free(unsafe.Pointer(carg1))
 	_ = people
 	_ = carg2
@@ -83354,7 +83354,7 @@ func (about *AboutDialogInstance) GetAuthors() []string {
 // Returns the comments string.
 func (about *AboutDialogInstance) GetComments() string {
 	var carg0 *C.GtkAboutDialog // in, none, converted
-	var cret  *C.gchar          // return, none, string
+	var cret  *C.char           // return, none, string, casted *C.gchar
 
 	carg0 = (*C.GtkAboutDialog)(UnsafeAboutDialogToGlibNone(about))
 
@@ -83363,7 +83363,7 @@ func (about *AboutDialogInstance) GetComments() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -83376,7 +83376,7 @@ func (about *AboutDialogInstance) GetComments() string {
 // Returns the copyright string.
 func (about *AboutDialogInstance) GetCopyright() string {
 	var carg0 *C.GtkAboutDialog // in, none, converted
-	var cret  *C.gchar          // return, none, string
+	var cret  *C.char           // return, none, string, casted *C.gchar
 
 	carg0 = (*C.GtkAboutDialog)(UnsafeAboutDialogToGlibNone(about))
 
@@ -83385,7 +83385,7 @@ func (about *AboutDialogInstance) GetCopyright() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -83423,7 +83423,7 @@ func (about *AboutDialogInstance) GetDocumenters() []string {
 // Returns the license information.
 func (about *AboutDialogInstance) GetLicense() string {
 	var carg0 *C.GtkAboutDialog // in, none, converted
-	var cret  *C.gchar          // return, none, string
+	var cret  *C.char           // return, none, string, casted *C.gchar
 
 	carg0 = (*C.GtkAboutDialog)(UnsafeAboutDialogToGlibNone(about))
 
@@ -83432,7 +83432,7 @@ func (about *AboutDialogInstance) GetLicense() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -83489,7 +83489,7 @@ func (about *AboutDialogInstance) GetLogo() gdk.Paintable {
 // Returns the icon name displayed as logo in the about dialog.
 func (about *AboutDialogInstance) GetLogoIconName() string {
 	var carg0 *C.GtkAboutDialog // in, none, converted
-	var cret  *C.gchar          // return, none, string
+	var cret  *C.char           // return, none, string, casted *C.gchar
 
 	carg0 = (*C.GtkAboutDialog)(UnsafeAboutDialogToGlibNone(about))
 
@@ -83498,7 +83498,7 @@ func (about *AboutDialogInstance) GetLogoIconName() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -83511,7 +83511,7 @@ func (about *AboutDialogInstance) GetLogoIconName() string {
 // Returns the program name displayed in the about dialog.
 func (about *AboutDialogInstance) GetProgramName() string {
 	var carg0 *C.GtkAboutDialog // in, none, converted
-	var cret  *C.gchar          // return, none, string
+	var cret  *C.char           // return, none, string, casted *C.gchar
 
 	carg0 = (*C.GtkAboutDialog)(UnsafeAboutDialogToGlibNone(about))
 
@@ -83520,7 +83520,7 @@ func (about *AboutDialogInstance) GetProgramName() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -83533,7 +83533,7 @@ func (about *AboutDialogInstance) GetProgramName() string {
 // Returns the system information that is shown in the about dialog.
 func (about *AboutDialogInstance) GetSystemInformation() string {
 	var carg0 *C.GtkAboutDialog // in, none, converted
-	var cret  *C.gchar          // return, none, string
+	var cret  *C.char           // return, none, string, casted *C.gchar
 
 	carg0 = (*C.GtkAboutDialog)(UnsafeAboutDialogToGlibNone(about))
 
@@ -83542,7 +83542,7 @@ func (about *AboutDialogInstance) GetSystemInformation() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -83556,7 +83556,7 @@ func (about *AboutDialogInstance) GetSystemInformation() string {
 // in the credits page.
 func (about *AboutDialogInstance) GetTranslatorCredits() string {
 	var carg0 *C.GtkAboutDialog // in, none, converted
-	var cret  *C.gchar          // return, none, string
+	var cret  *C.char           // return, none, string, casted *C.gchar
 
 	carg0 = (*C.GtkAboutDialog)(UnsafeAboutDialogToGlibNone(about))
 
@@ -83565,7 +83565,7 @@ func (about *AboutDialogInstance) GetTranslatorCredits() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -83578,7 +83578,7 @@ func (about *AboutDialogInstance) GetTranslatorCredits() string {
 // Returns the version string.
 func (about *AboutDialogInstance) GetVersion() string {
 	var carg0 *C.GtkAboutDialog // in, none, converted
-	var cret  *C.gchar          // return, none, string
+	var cret  *C.char           // return, none, string, casted *C.gchar
 
 	carg0 = (*C.GtkAboutDialog)(UnsafeAboutDialogToGlibNone(about))
 
@@ -83587,7 +83587,7 @@ func (about *AboutDialogInstance) GetVersion() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -83600,7 +83600,7 @@ func (about *AboutDialogInstance) GetVersion() string {
 // Returns the website URL.
 func (about *AboutDialogInstance) GetWebsite() string {
 	var carg0 *C.GtkAboutDialog // in, none, converted
-	var cret  *C.gchar          // return, none, string
+	var cret  *C.char           // return, none, string, casted *C.gchar
 
 	carg0 = (*C.GtkAboutDialog)(UnsafeAboutDialogToGlibNone(about))
 
@@ -83609,7 +83609,7 @@ func (about *AboutDialogInstance) GetWebsite() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -83622,7 +83622,7 @@ func (about *AboutDialogInstance) GetWebsite() string {
 // Returns the label used for the website link.
 func (about *AboutDialogInstance) GetWebsiteLabel() string {
 	var carg0 *C.GtkAboutDialog // in, none, converted
-	var cret  *C.gchar          // return, none, string
+	var cret  *C.char           // return, none, string, casted *C.gchar
 
 	carg0 = (*C.GtkAboutDialog)(UnsafeAboutDialogToGlibNone(about))
 
@@ -83631,7 +83631,7 @@ func (about *AboutDialogInstance) GetWebsiteLabel() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -83717,11 +83717,11 @@ func (about *AboutDialogInstance) SetAuthors(authors []string) {
 // This should be a short string of one or two lines.
 func (about *AboutDialogInstance) SetComments(comments string) {
 	var carg0 *C.GtkAboutDialog // in, none, converted
-	var carg1 *C.gchar          // in, none, string, nullable-string
+	var carg1 *C.char           // in, none, string, nullable-string
 
 	carg0 = (*C.GtkAboutDialog)(UnsafeAboutDialogToGlibNone(about))
 	if comments != "" {
-		carg1 = (*C.gchar)(unsafe.Pointer(C.CString(comments)))
+		carg1 = (*C.char)(unsafe.Pointer(C.CString(comments)))
 		defer C.free(unsafe.Pointer(carg1))
 	}
 
@@ -83741,11 +83741,11 @@ func (about *AboutDialogInstance) SetComments(comments string) {
 // This should be a short string of one or two lines.
 func (about *AboutDialogInstance) SetCopyright(copyright string) {
 	var carg0 *C.GtkAboutDialog // in, none, converted
-	var carg1 *C.gchar          // in, none, string, nullable-string
+	var carg1 *C.char           // in, none, string, nullable-string
 
 	carg0 = (*C.GtkAboutDialog)(UnsafeAboutDialogToGlibNone(about))
 	if copyright != "" {
-		carg1 = (*C.gchar)(unsafe.Pointer(C.CString(copyright)))
+		carg1 = (*C.char)(unsafe.Pointer(C.CString(copyright)))
 		defer C.free(unsafe.Pointer(carg1))
 	}
 
@@ -83789,11 +83789,11 @@ func (about *AboutDialogInstance) SetDocumenters(documenters []string) {
 // If `license` is `NULL`, the license page is hidden.
 func (about *AboutDialogInstance) SetLicense(license string) {
 	var carg0 *C.GtkAboutDialog // in, none, converted
-	var carg1 *C.gchar          // in, none, string, nullable-string
+	var carg1 *C.char           // in, none, string, nullable-string
 
 	carg0 = (*C.GtkAboutDialog)(UnsafeAboutDialogToGlibNone(about))
 	if license != "" {
-		carg1 = (*C.gchar)(unsafe.Pointer(C.CString(license)))
+		carg1 = (*C.char)(unsafe.Pointer(C.CString(license)))
 		defer C.free(unsafe.Pointer(carg1))
 	}
 
@@ -83855,11 +83855,11 @@ func (about *AboutDialogInstance) SetLogo(logo gdk.Paintable) {
 // Sets the icon name to be displayed as logo in the about dialog.
 func (about *AboutDialogInstance) SetLogoIconName(iconName string) {
 	var carg0 *C.GtkAboutDialog // in, none, converted
-	var carg1 *C.gchar          // in, none, string, nullable-string
+	var carg1 *C.char           // in, none, string, nullable-string
 
 	carg0 = (*C.GtkAboutDialog)(UnsafeAboutDialogToGlibNone(about))
 	if iconName != "" {
-		carg1 = (*C.gchar)(unsafe.Pointer(C.CString(iconName)))
+		carg1 = (*C.char)(unsafe.Pointer(C.CString(iconName)))
 		defer C.free(unsafe.Pointer(carg1))
 	}
 
@@ -83880,11 +83880,11 @@ func (about *AboutDialogInstance) SetLogoIconName(iconName string) {
 // by `g_get_application_name()` is used.
 func (about *AboutDialogInstance) SetProgramName(name string) {
 	var carg0 *C.GtkAboutDialog // in, none, converted
-	var carg1 *C.gchar          // in, none, string, nullable-string
+	var carg1 *C.char           // in, none, string, nullable-string
 
 	carg0 = (*C.GtkAboutDialog)(UnsafeAboutDialogToGlibNone(about))
 	if name != "" {
-		carg1 = (*C.gchar)(unsafe.Pointer(C.CString(name)))
+		carg1 = (*C.char)(unsafe.Pointer(C.CString(name)))
 		defer C.free(unsafe.Pointer(carg1))
 	}
 
@@ -83908,11 +83908,11 @@ func (about *AboutDialogInstance) SetProgramName(name string) {
 // See [property@Gtk.AboutDialog:system-information].
 func (about *AboutDialogInstance) SetSystemInformation(systemInformation string) {
 	var carg0 *C.GtkAboutDialog // in, none, converted
-	var carg1 *C.gchar          // in, none, string, nullable-string
+	var carg1 *C.char           // in, none, string, nullable-string
 
 	carg0 = (*C.GtkAboutDialog)(UnsafeAboutDialogToGlibNone(about))
 	if systemInformation != "" {
-		carg1 = (*C.gchar)(unsafe.Pointer(C.CString(systemInformation)))
+		carg1 = (*C.char)(unsafe.Pointer(C.CString(systemInformation)))
 		defer C.free(unsafe.Pointer(carg1))
 	}
 
@@ -83947,11 +83947,11 @@ func (about *AboutDialogInstance) SetSystemInformation(systemInformation string)
 // is untranslated and omit translator credits.
 func (about *AboutDialogInstance) SetTranslatorCredits(translatorCredits string) {
 	var carg0 *C.GtkAboutDialog // in, none, converted
-	var carg1 *C.gchar          // in, none, string, nullable-string
+	var carg1 *C.char           // in, none, string, nullable-string
 
 	carg0 = (*C.GtkAboutDialog)(UnsafeAboutDialogToGlibNone(about))
 	if translatorCredits != "" {
-		carg1 = (*C.gchar)(unsafe.Pointer(C.CString(translatorCredits)))
+		carg1 = (*C.char)(unsafe.Pointer(C.CString(translatorCredits)))
 		defer C.free(unsafe.Pointer(carg1))
 	}
 
@@ -83969,11 +83969,11 @@ func (about *AboutDialogInstance) SetTranslatorCredits(translatorCredits string)
 // Sets the version string to display in the about dialog.
 func (about *AboutDialogInstance) SetVersion(version string) {
 	var carg0 *C.GtkAboutDialog // in, none, converted
-	var carg1 *C.gchar          // in, none, string, nullable-string
+	var carg1 *C.char           // in, none, string, nullable-string
 
 	carg0 = (*C.GtkAboutDialog)(UnsafeAboutDialogToGlibNone(about))
 	if version != "" {
-		carg1 = (*C.gchar)(unsafe.Pointer(C.CString(version)))
+		carg1 = (*C.char)(unsafe.Pointer(C.CString(version)))
 		defer C.free(unsafe.Pointer(carg1))
 	}
 
@@ -83991,11 +83991,11 @@ func (about *AboutDialogInstance) SetVersion(version string) {
 // Sets the URL to use for the website link.
 func (about *AboutDialogInstance) SetWebsite(website string) {
 	var carg0 *C.GtkAboutDialog // in, none, converted
-	var carg1 *C.gchar          // in, none, string, nullable-string
+	var carg1 *C.char           // in, none, string, nullable-string
 
 	carg0 = (*C.GtkAboutDialog)(UnsafeAboutDialogToGlibNone(about))
 	if website != "" {
-		carg1 = (*C.gchar)(unsafe.Pointer(C.CString(website)))
+		carg1 = (*C.char)(unsafe.Pointer(C.CString(website)))
 		defer C.free(unsafe.Pointer(carg1))
 	}
 
@@ -84013,10 +84013,10 @@ func (about *AboutDialogInstance) SetWebsite(website string) {
 // Sets the label to be used for the website link.
 func (about *AboutDialogInstance) SetWebsiteLabel(websiteLabel string) {
 	var carg0 *C.GtkAboutDialog // in, none, converted
-	var carg1 *C.gchar          // in, none, string
+	var carg1 *C.char           // in, none, string, casted *C.gchar
 
 	carg0 = (*C.GtkAboutDialog)(UnsafeAboutDialogToGlibNone(about))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(websiteLabel)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(websiteLabel)))
 	defer C.free(unsafe.Pointer(carg1))
 
 	C.gtk_about_dialog_set_website_label(carg0, carg1)
@@ -84956,10 +84956,10 @@ func UnsafeAppChooserButtonToGlibFull(c AppChooserButton) unsafe.Pointer {
 //
 // Deprecated: (since 4.10.0) This widget will be removed in GTK 5
 func NewAppChooserButtonInstance(contentType string) Widget {
-	var carg1 *C.gchar     // in, none, string
+	var carg1 *C.char      // in, none, string, casted *C.gchar
 	var cret  *C.GtkWidget // return, none, converted
 
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(contentType)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(contentType)))
 	defer C.free(unsafe.Pointer(carg1))
 
 	cret = C.gtk_app_chooser_button_new(carg1)
@@ -84993,14 +84993,14 @@ func NewAppChooserButtonInstance(contentType string) Widget {
 // Deprecated: (since 4.10.0) This widget will be removed in GTK 5
 func (self *AppChooserButtonInstance) AppendCustomItem(name string, label string, icon gio.Icon) {
 	var carg0 *C.GtkAppChooserButton // in, none, converted
-	var carg1 *C.gchar               // in, none, string
-	var carg2 *C.gchar               // in, none, string
+	var carg1 *C.char                // in, none, string, casted *C.gchar
+	var carg2 *C.char                // in, none, string, casted *C.gchar
 	var carg3 *C.GIcon               // in, none, converted
 
 	carg0 = (*C.GtkAppChooserButton)(UnsafeAppChooserButtonToGlibNone(self))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(name)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(name)))
 	defer C.free(unsafe.Pointer(carg1))
-	carg2 = (*C.gchar)(unsafe.Pointer(C.CString(label)))
+	carg2 = (*C.char)(unsafe.Pointer(C.CString(label)))
 	defer C.free(unsafe.Pointer(carg2))
 	carg3 = (*C.GIcon)(gio.UnsafeIconToGlibNone(icon))
 
@@ -85036,7 +85036,7 @@ func (self *AppChooserButtonInstance) AppendSeparator() {
 // Deprecated: (since 4.10.0) This widget will be removed in GTK 5
 func (self *AppChooserButtonInstance) GetHeading() string {
 	var carg0 *C.GtkAppChooserButton // in, none, converted
-	var cret  *C.gchar               // return, none, string
+	var cret  *C.char                // return, none, string, casted *C.gchar
 
 	carg0 = (*C.GtkAppChooserButton)(UnsafeAppChooserButtonToGlibNone(self))
 
@@ -85045,7 +85045,7 @@ func (self *AppChooserButtonInstance) GetHeading() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -85146,10 +85146,10 @@ func (self *AppChooserButtonInstance) GetShowDialogItem() bool {
 // Deprecated: (since 4.10.0) This widget will be removed in GTK 5
 func (self *AppChooserButtonInstance) SetActiveCustomItem(name string) {
 	var carg0 *C.GtkAppChooserButton // in, none, converted
-	var carg1 *C.gchar               // in, none, string
+	var carg1 *C.char                // in, none, string, casted *C.gchar
 
 	carg0 = (*C.GtkAppChooserButton)(UnsafeAppChooserButtonToGlibNone(self))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(name)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(name)))
 	defer C.free(unsafe.Pointer(carg1))
 
 	C.gtk_app_chooser_button_set_active_custom_item(carg0, carg1)
@@ -85170,10 +85170,10 @@ func (self *AppChooserButtonInstance) SetActiveCustomItem(name string) {
 // Deprecated: (since 4.10.0) This widget will be removed in GTK 5
 func (self *AppChooserButtonInstance) SetHeading(heading string) {
 	var carg0 *C.GtkAppChooserButton // in, none, converted
-	var carg1 *C.gchar               // in, none, string
+	var carg1 *C.char                // in, none, string, casted *C.gchar
 
 	carg0 = (*C.GtkAppChooserButton)(UnsafeAppChooserButtonToGlibNone(self))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(heading)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(heading)))
 	defer C.free(unsafe.Pointer(carg1))
 
 	C.gtk_app_chooser_button_set_heading(carg0, carg1)
@@ -85495,10 +85495,10 @@ func UnsafeAppChooserWidgetToGlibFull(c AppChooserWidget) unsafe.Pointer {
 //
 // Deprecated: (since 4.10.0) This widget will be removed in GTK 5
 func NewAppChooserWidgetInstance(contentType string) Widget {
-	var carg1 *C.gchar     // in, none, string
+	var carg1 *C.char      // in, none, string, casted *C.gchar
 	var cret  *C.GtkWidget // return, none, converted
 
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(contentType)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(contentType)))
 	defer C.free(unsafe.Pointer(carg1))
 
 	cret = C.gtk_app_chooser_widget_new(carg1)
@@ -85522,7 +85522,7 @@ func NewAppChooserWidgetInstance(contentType string) Widget {
 // Deprecated: (since 4.10.0) This widget will be removed in GTK 5
 func (self *AppChooserWidgetInstance) GetDefaultText() string {
 	var carg0 *C.GtkAppChooserWidget // in, none, converted
-	var cret  *C.gchar               // return, none, string
+	var cret  *C.char                // return, none, string, casted *C.gchar
 
 	carg0 = (*C.GtkAppChooserWidget)(UnsafeAppChooserWidgetToGlibNone(self))
 
@@ -85531,7 +85531,7 @@ func (self *AppChooserWidgetInstance) GetDefaultText() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -85683,10 +85683,10 @@ func (self *AppChooserWidgetInstance) GetShowRecommended() bool {
 // Deprecated: (since 4.10.0) This widget will be removed in GTK 5
 func (self *AppChooserWidgetInstance) SetDefaultText(text string) {
 	var carg0 *C.GtkAppChooserWidget // in, none, converted
-	var carg1 *C.gchar               // in, none, string
+	var carg1 *C.char                // in, none, string, casted *C.gchar
 
 	carg0 = (*C.GtkAppChooserWidget)(UnsafeAppChooserWidgetToGlibNone(self))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(text)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(text)))
 	defer C.free(unsafe.Pointer(carg1))
 
 	C.gtk_app_chooser_widget_set_default_text(carg0, carg1)
@@ -86353,15 +86353,15 @@ func UnsafeAspectFrameToGlibFull(c AspectFrame) unsafe.Pointer {
 //
 // Create a new `GtkAspectFrame`.
 func NewAspectFrameInstance(xalign float32, yalign float32, ratio float32, obeyChild bool) Widget {
-	var carg1 C.gfloat     // in, none, casted
-	var carg2 C.gfloat     // in, none, casted
-	var carg3 C.gfloat     // in, none, casted
+	var carg1 C.float      // in, none, casted, casted C.gfloat
+	var carg2 C.float      // in, none, casted, casted C.gfloat
+	var carg3 C.float      // in, none, casted, casted C.gfloat
 	var carg4 C.gboolean   // in
 	var cret  *C.GtkWidget // return, none, converted
 
-	carg1 = C.gfloat(xalign)
-	carg2 = C.gfloat(yalign)
-	carg3 = C.gfloat(ratio)
+	carg1 = C.float(xalign)
+	carg2 = C.float(yalign)
+	carg3 = C.float(ratio)
 	if obeyChild {
 		carg4 = C.TRUE
 	}
@@ -86434,7 +86434,7 @@ func (self *AspectFrameInstance) GetObeyChild() bool {
 // Returns the desired aspect ratio of the child.
 func (self *AspectFrameInstance) GetRatio() float32 {
 	var carg0 *C.GtkAspectFrame // in, none, converted
-	var cret  C.gfloat          // return, none, casted
+	var cret  C.float           // return, none, casted, casted C.gfloat
 
 	carg0 = (*C.GtkAspectFrame)(UnsafeAspectFrameToGlibNone(self))
 
@@ -86457,7 +86457,7 @@ func (self *AspectFrameInstance) GetRatio() float32 {
 // allocation of the `GtkAspectFrame`.
 func (self *AspectFrameInstance) GetXAlign() float32 {
 	var carg0 *C.GtkAspectFrame // in, none, converted
-	var cret  C.gfloat          // return, none, casted
+	var cret  C.float           // return, none, casted, casted C.gfloat
 
 	carg0 = (*C.GtkAspectFrame)(UnsafeAspectFrameToGlibNone(self))
 
@@ -86480,7 +86480,7 @@ func (self *AspectFrameInstance) GetXAlign() float32 {
 // allocation of the `GtkAspectFrame`.
 func (self *AspectFrameInstance) GetYAlign() float32 {
 	var carg0 *C.GtkAspectFrame // in, none, converted
-	var cret  C.gfloat          // return, none, casted
+	var cret  C.float           // return, none, casted, casted C.gfloat
 
 	carg0 = (*C.GtkAspectFrame)(UnsafeAspectFrameToGlibNone(self))
 
@@ -86548,10 +86548,10 @@ func (self *AspectFrameInstance) SetObeyChild(obeyChild bool) {
 // Sets the desired aspect ratio of the child.
 func (self *AspectFrameInstance) SetRatio(ratio float32) {
 	var carg0 *C.GtkAspectFrame // in, none, converted
-	var carg1 C.gfloat          // in, none, casted
+	var carg1 C.float           // in, none, casted, casted C.gfloat
 
 	carg0 = (*C.GtkAspectFrame)(UnsafeAspectFrameToGlibNone(self))
-	carg1 = C.gfloat(ratio)
+	carg1 = C.float(ratio)
 
 	C.gtk_aspect_frame_set_ratio(carg0, carg1)
 	runtime.KeepAlive(self)
@@ -86568,10 +86568,10 @@ func (self *AspectFrameInstance) SetRatio(ratio float32) {
 // of the `GtkAspectFrame`.
 func (self *AspectFrameInstance) SetXAlign(xalign float32) {
 	var carg0 *C.GtkAspectFrame // in, none, converted
-	var carg1 C.gfloat          // in, none, casted
+	var carg1 C.float           // in, none, casted, casted C.gfloat
 
 	carg0 = (*C.GtkAspectFrame)(UnsafeAspectFrameToGlibNone(self))
-	carg1 = C.gfloat(xalign)
+	carg1 = C.float(xalign)
 
 	C.gtk_aspect_frame_set_xalign(carg0, carg1)
 	runtime.KeepAlive(self)
@@ -86588,10 +86588,10 @@ func (self *AspectFrameInstance) SetXAlign(xalign float32) {
 // of the `GtkAspectFrame`.
 func (self *AspectFrameInstance) SetYAlign(yalign float32) {
 	var carg0 *C.GtkAspectFrame // in, none, converted
-	var carg1 C.gfloat          // in, none, casted
+	var carg1 C.float           // in, none, casted, casted C.gfloat
 
 	carg0 = (*C.GtkAspectFrame)(UnsafeAspectFrameToGlibNone(self))
-	carg1 = C.gfloat(yalign)
+	carg1 = C.float(yalign)
 
 	C.gtk_aspect_frame_set_yalign(carg0, carg1)
 	runtime.KeepAlive(self)
@@ -87071,7 +87071,7 @@ func (assistant *AssistantInstance) AddActionWidget(child Widget) {
 func (assistant *AssistantInstance) AppendPage(page Widget) int {
 	var carg0 *C.GtkAssistant // in, none, converted
 	var carg1 *C.GtkWidget    // in, none, converted
-	var cret  C.int           // return, none, casted
+	var cret  C.int           // return, none, casted, casted C.gint
 
 	carg0 = (*C.GtkAssistant)(UnsafeAssistantToGlibNone(assistant))
 	carg1 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(page))
@@ -87120,7 +87120,7 @@ func (assistant *AssistantInstance) Commit() {
 // Deprecated: (since 4.10.0) This widget will be removed in GTK 5
 func (assistant *AssistantInstance) GetCurrentPage() int {
 	var carg0 *C.GtkAssistant // in, none, converted
-	var cret  C.int           // return, none, casted
+	var cret  C.int           // return, none, casted, casted C.gint
 
 	carg0 = (*C.GtkAssistant)(UnsafeAssistantToGlibNone(assistant))
 
@@ -87144,7 +87144,7 @@ func (assistant *AssistantInstance) GetCurrentPage() int {
 // Deprecated: (since 4.10.0) This widget will be removed in GTK 5
 func (assistant *AssistantInstance) GetNPages() int {
 	var carg0 *C.GtkAssistant // in, none, converted
-	var cret  C.int           // return, none, casted
+	var cret  C.int           // return, none, casted, casted C.gint
 
 	carg0 = (*C.GtkAssistant)(UnsafeAssistantToGlibNone(assistant))
 
@@ -87174,7 +87174,7 @@ func (assistant *AssistantInstance) GetNPages() int {
 // Deprecated: (since 4.10.0) This widget will be removed in GTK 5
 func (assistant *AssistantInstance) GetNthPage(pageNum int) Widget {
 	var carg0 *C.GtkAssistant // in, none, converted
-	var carg1 C.int           // in, none, casted
+	var carg1 C.int           // in, none, casted, casted C.gint
 	var cret  *C.GtkWidget    // return, none, converted
 
 	carg0 = (*C.GtkAssistant)(UnsafeAssistantToGlibNone(assistant))
@@ -87273,7 +87273,7 @@ func (assistant *AssistantInstance) GetPageComplete(page Widget) bool {
 func (assistant *AssistantInstance) GetPageTitle(page Widget) string {
 	var carg0 *C.GtkAssistant // in, none, converted
 	var carg1 *C.GtkWidget    // in, none, converted
-	var cret  *C.gchar        // return, none, string
+	var cret  *C.char         // return, none, string, casted *C.gchar
 
 	carg0 = (*C.GtkAssistant)(UnsafeAssistantToGlibNone(assistant))
 	carg1 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(page))
@@ -87284,7 +87284,7 @@ func (assistant *AssistantInstance) GetPageTitle(page Widget) string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -87363,8 +87363,8 @@ func (assistant *AssistantInstance) GetPages() gio.ListModel {
 func (assistant *AssistantInstance) InsertPage(page Widget, position int) int {
 	var carg0 *C.GtkAssistant // in, none, converted
 	var carg1 *C.GtkWidget    // in, none, converted
-	var carg2 C.int           // in, none, casted
-	var cret  C.int           // return, none, casted
+	var carg2 C.int           // in, none, casted, casted C.gint
+	var cret  C.int           // return, none, casted, casted C.gint
 
 	carg0 = (*C.GtkAssistant)(UnsafeAssistantToGlibNone(assistant))
 	carg1 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(page))
@@ -87418,7 +87418,7 @@ func (assistant *AssistantInstance) NextPage() {
 func (assistant *AssistantInstance) PrependPage(page Widget) int {
 	var carg0 *C.GtkAssistant // in, none, converted
 	var carg1 *C.GtkWidget    // in, none, converted
-	var cret  C.int           // return, none, casted
+	var cret  C.int           // return, none, casted, casted C.gint
 
 	carg0 = (*C.GtkAssistant)(UnsafeAssistantToGlibNone(assistant))
 	carg1 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(page))
@@ -87487,7 +87487,7 @@ func (assistant *AssistantInstance) RemoveActionWidget(child Widget) {
 // Deprecated: (since 4.10.0) This widget will be removed in GTK 5
 func (assistant *AssistantInstance) RemovePage(pageNum int) {
 	var carg0 *C.GtkAssistant // in, none, converted
-	var carg1 C.int           // in, none, casted
+	var carg1 C.int           // in, none, casted, casted C.gint
 
 	carg0 = (*C.GtkAssistant)(UnsafeAssistantToGlibNone(assistant))
 	carg1 = C.int(pageNum)
@@ -87515,7 +87515,7 @@ func (assistant *AssistantInstance) RemovePage(pageNum int) {
 // Deprecated: (since 4.10.0) This widget will be removed in GTK 5
 func (assistant *AssistantInstance) SetCurrentPage(pageNum int) {
 	var carg0 *C.GtkAssistant // in, none, converted
-	var carg1 C.int           // in, none, casted
+	var carg1 C.int           // in, none, casted, casted C.gint
 
 	carg0 = (*C.GtkAssistant)(UnsafeAssistantToGlibNone(assistant))
 	carg1 = C.int(pageNum)
@@ -87605,11 +87605,11 @@ func (assistant *AssistantInstance) SetPageComplete(page Widget, complete bool) 
 func (assistant *AssistantInstance) SetPageTitle(page Widget, title string) {
 	var carg0 *C.GtkAssistant // in, none, converted
 	var carg1 *C.GtkWidget    // in, none, converted
-	var carg2 *C.gchar        // in, none, string
+	var carg2 *C.char         // in, none, string, casted *C.gchar
 
 	carg0 = (*C.GtkAssistant)(UnsafeAssistantToGlibNone(assistant))
 	carg1 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(page))
-	carg2 = (*C.gchar)(unsafe.Pointer(C.CString(title)))
+	carg2 = (*C.char)(unsafe.Pointer(C.CString(title)))
 	defer C.free(unsafe.Pointer(carg2))
 
 	C.gtk_assistant_set_page_title(carg0, carg1, carg2)
@@ -88103,7 +88103,7 @@ func UnsafeBoxToGlibFull(c Box) unsafe.Pointer {
 // Creates a new `GtkBox`.
 func NewBoxInstance(orientation Orientation, spacing int) Widget {
 	var carg1 C.GtkOrientation // in, none, casted
-	var carg2 C.int            // in, none, casted
+	var carg2 C.int            // in, none, casted, casted C.gint
 	var cret  *C.GtkWidget     // return, none, converted
 
 	carg1 = C.GtkOrientation(orientation)
@@ -88147,7 +88147,7 @@ func (box *BoxInstance) Append(child Widget) {
 // Gets the value set by gtk_box_set_baseline_child().
 func (box *BoxInstance) GetBaselineChild() int {
 	var carg0 *C.GtkBox // in, none, converted
-	var cret  C.int     // return, none, casted
+	var cret  C.int     // return, none, casted, casted C.gint
 
 	carg0 = (*C.GtkBox)(UnsafeBoxToGlibNone(box))
 
@@ -88216,7 +88216,7 @@ func (box *BoxInstance) GetHomogeneous() bool {
 // Gets the value set by gtk_box_set_spacing().
 func (box *BoxInstance) GetSpacing() int {
 	var carg0 *C.GtkBox // in, none, converted
-	var cret  C.int     // return, none, casted
+	var cret  C.int     // return, none, casted, casted C.gint
 
 	carg0 = (*C.GtkBox)(UnsafeBoxToGlibNone(box))
 
@@ -88339,7 +88339,7 @@ func (box *BoxInstance) ReorderChildAfter(child Widget, sibling Widget) {
 // This affects only vertical boxes.
 func (box *BoxInstance) SetBaselineChild(child int) {
 	var carg0 *C.GtkBox // in, none, converted
-	var carg1 C.int     // in, none, casted
+	var carg1 C.int     // in, none, casted, casted C.gint
 
 	carg0 = (*C.GtkBox)(UnsafeBoxToGlibNone(box))
 	carg1 = C.int(child)
@@ -88406,7 +88406,7 @@ func (box *BoxInstance) SetHomogeneous(homogeneous bool) {
 // Sets the number of pixels to place between children of @box.
 func (box *BoxInstance) SetSpacing(spacing int) {
 	var carg0 *C.GtkBox // in, none, converted
-	var carg1 C.int     // in, none, casted
+	var carg1 C.int     // in, none, casted, casted C.gint
 
 	carg0 = (*C.GtkBox)(UnsafeBoxToGlibNone(box))
 	carg1 = C.int(spacing)
@@ -88591,7 +88591,7 @@ func NewBoxLayoutInstance(orientation Orientation) LayoutManager {
 // Gets the value set by gtk_box_layout_set_baseline_child().
 func (boxLayout *BoxLayoutInstance) GetBaselineChild() int {
 	var carg0 *C.GtkBoxLayout // in, none, converted
-	var cret  C.int           // return, none, casted
+	var cret  C.int           // return, none, casted, casted C.gint
 
 	carg0 = (*C.GtkBoxLayout)(UnsafeBoxLayoutToGlibNone(boxLayout))
 
@@ -88683,7 +88683,7 @@ func (boxLayout *BoxLayoutInstance) GetSpacing() uint {
 // in vertical layout.
 func (boxLayout *BoxLayoutInstance) SetBaselineChild(child int) {
 	var carg0 *C.GtkBoxLayout // in, none, converted
-	var carg1 C.int           // in, none, casted
+	var carg1 C.int           // in, none, casted, casted C.gint
 
 	carg0 = (*C.GtkBoxLayout)(UnsafeBoxLayoutToGlibNone(boxLayout))
 	carg1 = C.int(child)
@@ -88909,13 +88909,13 @@ func NewBuilderListItemFactoryInstanceFromBytes(scope BuilderScope, bytes *glib.
 // using data read from the given @resource_path to pass to `GtkBuilder`.
 func NewBuilderListItemFactoryInstanceFromResource(scope BuilderScope, resourcePath string) ListItemFactory {
 	var carg1 *C.GtkBuilderScope    // in, none, converted, nullable
-	var carg2 *C.gchar              // in, none, string
+	var carg2 *C.char               // in, none, string, casted *C.gchar
 	var cret  *C.GtkListItemFactory // return, full, converted
 
 	if scope != nil {
 		carg1 = (*C.GtkBuilderScope)(UnsafeBuilderScopeToGlibNone(scope))
 	}
-	carg2 = (*C.gchar)(unsafe.Pointer(C.CString(resourcePath)))
+	carg2 = (*C.char)(unsafe.Pointer(C.CString(resourcePath)))
 	defer C.free(unsafe.Pointer(carg2))
 
 	cret = C.gtk_builder_list_item_factory_new_from_resource(carg1, carg2)
@@ -88960,7 +88960,7 @@ func (self *BuilderListItemFactoryInstance) GetBytes() *glib.Bytes {
 // If the data references a resource, gets the path of that resource.
 func (self *BuilderListItemFactoryInstance) GetResource() string {
 	var carg0 *C.GtkBuilderListItemFactory // in, none, converted
-	var cret  *C.gchar                     // return, none, string
+	var cret  *C.char                      // return, none, string, casted *C.gchar
 
 	carg0 = (*C.GtkBuilderListItemFactory)(UnsafeBuilderListItemFactoryToGlibNone(self))
 
@@ -88969,7 +88969,7 @@ func (self *BuilderListItemFactoryInstance) GetResource() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -89265,10 +89265,10 @@ func NewButtonInstance() Widget {
 // displayed instead. If the current icon theme is changed, the icon
 // will be updated appropriately.
 func NewButtonInstanceFromIconName(iconName string) Widget {
-	var carg1 *C.gchar     // in, none, string
+	var carg1 *C.char      // in, none, string, casted *C.gchar
 	var cret  *C.GtkWidget // return, none, converted
 
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(iconName)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(iconName)))
 	defer C.free(unsafe.Pointer(carg1))
 
 	cret = C.gtk_button_new_from_icon_name(carg1)
@@ -89293,10 +89293,10 @@ func NewButtonInstanceFromIconName(iconName string) Widget {
 //
 // Creates a `GtkButton` widget with a `GtkLabel` child.
 func NewButtonInstanceWithLabel(label string) Widget {
-	var carg1 *C.gchar     // in, none, string
+	var carg1 *C.char      // in, none, string, casted *C.gchar
 	var cret  *C.GtkWidget // return, none, converted
 
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(label)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(label)))
 	defer C.free(unsafe.Pointer(carg1))
 
 	cret = C.gtk_button_new_with_label(carg1)
@@ -89328,10 +89328,10 @@ func NewButtonInstanceWithLabel(label string) Widget {
 // accelerator called a mnemonic. Pressing &lt;kbd&gt;Alt&lt;/kbd&gt; and that key
 // activates the button.
 func NewButtonInstanceWithMnemonic(label string) Widget {
-	var carg1 *C.gchar     // in, none, string
+	var carg1 *C.char      // in, none, string, casted *C.gchar
 	var cret  *C.GtkWidget // return, none, converted
 
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(label)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(label)))
 	defer C.free(unsafe.Pointer(carg1))
 
 	cret = C.gtk_button_new_with_mnemonic(carg1)
@@ -89427,7 +89427,7 @@ func (button *ButtonInstance) GetHasFrame() bool {
 // an empty button with [ctor@Gtk.Button.new] to use as a container.
 func (button *ButtonInstance) GetIconName() string {
 	var carg0 *C.GtkButton // in, none, converted
-	var cret  *C.gchar     // return, none, string
+	var cret  *C.char      // return, none, string, casted *C.gchar
 
 	carg0 = (*C.GtkButton)(UnsafeButtonToGlibNone(button))
 
@@ -89436,7 +89436,7 @@ func (button *ButtonInstance) GetIconName() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -89453,7 +89453,7 @@ func (button *ButtonInstance) GetIconName() string {
 // an empty button with [ctor@Gtk.Button.new] to use as a container.
 func (button *ButtonInstance) GetLabel() string {
 	var carg0 *C.GtkButton // in, none, converted
-	var cret  *C.gchar     // return, none, string
+	var cret  *C.char      // return, none, string, casted *C.gchar
 
 	carg0 = (*C.GtkButton)(UnsafeButtonToGlibNone(button))
 
@@ -89462,7 +89462,7 @@ func (button *ButtonInstance) GetLabel() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -89581,10 +89581,10 @@ func (button *ButtonInstance) SetHasFrame(hasFrame bool) {
 // be removed and replaced with the image.
 func (button *ButtonInstance) SetIconName(iconName string) {
 	var carg0 *C.GtkButton // in, none, converted
-	var carg1 *C.gchar     // in, none, string
+	var carg1 *C.char      // in, none, string, casted *C.gchar
 
 	carg0 = (*C.GtkButton)(UnsafeButtonToGlibNone(button))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(iconName)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(iconName)))
 	defer C.free(unsafe.Pointer(carg1))
 
 	C.gtk_button_set_icon_name(carg0, carg1)
@@ -89603,10 +89603,10 @@ func (button *ButtonInstance) SetIconName(iconName string) {
 // This will also clear any previously set labels.
 func (button *ButtonInstance) SetLabel(label string) {
 	var carg0 *C.GtkButton // in, none, converted
-	var carg1 *C.gchar     // in, none, string
+	var carg1 *C.char      // in, none, string, casted *C.gchar
 
 	carg0 = (*C.GtkButton)(UnsafeButtonToGlibNone(button))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(label)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(label)))
 	defer C.free(unsafe.Pointer(carg1))
 
 	C.gtk_button_set_label(carg0, carg1)
@@ -89991,7 +89991,7 @@ func (self *CalendarInstance) GetDate() *glib.DateTime {
 // Gets the day of the selected date.
 func (self *CalendarInstance) GetDay() int {
 	var carg0 *C.GtkCalendar // in, none, converted
-	var cret  C.int          // return, none, casted
+	var cret  C.int          // return, none, casted, casted C.gint
 
 	carg0 = (*C.GtkCalendar)(UnsafeCalendarToGlibNone(self))
 
@@ -90045,7 +90045,7 @@ func (calendar *CalendarInstance) GetDayIsMarked(day uint) bool {
 // Gets the month of the selected date.
 func (self *CalendarInstance) GetMonth() int {
 	var carg0 *C.GtkCalendar // in, none, converted
-	var cret  C.int          // return, none, casted
+	var cret  C.int          // return, none, casted, casted C.gint
 
 	carg0 = (*C.GtkCalendar)(UnsafeCalendarToGlibNone(self))
 
@@ -90150,7 +90150,7 @@ func (self *CalendarInstance) GetShowWeekNumbers() bool {
 // Gets the year of the selected date.
 func (self *CalendarInstance) GetYear() int {
 	var carg0 *C.GtkCalendar // in, none, converted
-	var cret  C.int          // return, none, casted
+	var cret  C.int          // return, none, casted, casted C.gint
 
 	carg0 = (*C.GtkCalendar)(UnsafeCalendarToGlibNone(self))
 
@@ -90214,7 +90214,7 @@ func (self *CalendarInstance) SelectDay(date *glib.DateTime) {
 // month is February, fails.
 func (self *CalendarInstance) SetDay(day int) {
 	var carg0 *C.GtkCalendar // in, none, converted
-	var carg1 C.int          // in, none, casted
+	var carg1 C.int          // in, none, casted, casted C.gint
 
 	carg0 = (*C.GtkCalendar)(UnsafeCalendarToGlibNone(self))
 	carg1 = C.int(day)
@@ -90236,7 +90236,7 @@ func (self *CalendarInstance) SetDay(day int) {
 // when the day is 31, fails.
 func (self *CalendarInstance) SetMonth(month int) {
 	var carg0 *C.GtkCalendar // in, none, converted
-	var carg1 C.int          // in, none, casted
+	var carg1 C.int          // in, none, casted, casted C.gint
 
 	carg0 = (*C.GtkCalendar)(UnsafeCalendarToGlibNone(self))
 	carg1 = C.int(month)
@@ -90325,7 +90325,7 @@ func (self *CalendarInstance) SetShowWeekNumbers(value bool) {
 // the date is 2024-02-29, fails.
 func (self *CalendarInstance) SetYear(year int) {
 	var carg0 *C.GtkCalendar // in, none, converted
-	var carg1 C.int          // in, none, casted
+	var carg1 C.int          // in, none, casted, casted C.gint
 
 	carg0 = (*C.GtkCalendar)(UnsafeCalendarToGlibNone(self))
 	carg1 = C.int(year)
@@ -90949,10 +90949,10 @@ func NewCellViewInstanceWithContext(area CellArea, context CellAreaContext) Widg
 //
 // Deprecated: (since 4.10.0) 
 func NewCellViewInstanceWithMarkup(markup string) Widget {
-	var carg1 *C.gchar     // in, none, string
+	var carg1 *C.char      // in, none, string, casted *C.gchar
 	var cret  *C.GtkWidget // return, none, converted
 
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(markup)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(markup)))
 	defer C.free(unsafe.Pointer(carg1))
 
 	cret = C.gtk_cell_view_new_with_markup(carg1)
@@ -90980,10 +90980,10 @@ func NewCellViewInstanceWithMarkup(markup string) Widget {
 //
 // Deprecated: (since 4.10.0) 
 func NewCellViewInstanceWithText(text string) Widget {
-	var carg1 *C.gchar     // in, none, string
+	var carg1 *C.char      // in, none, string, casted *C.gchar
 	var cret  *C.GtkWidget // return, none, converted
 
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(text)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(text)))
 	defer C.free(unsafe.Pointer(carg1))
 
 	cret = C.gtk_cell_view_new_with_text(carg1)
@@ -92425,11 +92425,11 @@ func NewCheckButtonInstance() Widget {
 //
 // Creates a new `GtkCheckButton` with the given text.
 func NewCheckButtonInstanceWithLabel(label string) Widget {
-	var carg1 *C.gchar     // in, none, string, nullable-string
+	var carg1 *C.char      // in, none, string, nullable-string
 	var cret  *C.GtkWidget // return, none, converted
 
 	if label != "" {
-		carg1 = (*C.gchar)(unsafe.Pointer(C.CString(label)))
+		carg1 = (*C.char)(unsafe.Pointer(C.CString(label)))
 		defer C.free(unsafe.Pointer(carg1))
 	}
 
@@ -92456,11 +92456,11 @@ func NewCheckButtonInstanceWithLabel(label string) Widget {
 //
 // Creates a new `GtkCheckButton` with the given text and a mnemonic.
 func NewCheckButtonInstanceWithMnemonic(label string) Widget {
-	var carg1 *C.gchar     // in, none, string, nullable-string
+	var carg1 *C.char      // in, none, string, nullable-string
 	var cret  *C.GtkWidget // return, none, converted
 
 	if label != "" {
-		carg1 = (*C.gchar)(unsafe.Pointer(C.CString(label)))
+		carg1 = (*C.char)(unsafe.Pointer(C.CString(label)))
 		defer C.free(unsafe.Pointer(carg1))
 	}
 
@@ -92552,7 +92552,7 @@ func (checkButton *CheckButtonInstance) GetInconsistent() bool {
 // Returns the label of the check button or `NULL` if [property@CheckButton:child] is set.
 func (self *CheckButtonInstance) GetLabel() string {
 	var carg0 *C.GtkCheckButton // in, none, converted
-	var cret  *C.gchar          // return, none, string
+	var cret  *C.char           // return, none, string, casted *C.gchar
 
 	carg0 = (*C.GtkCheckButton)(UnsafeCheckButtonToGlibNone(self))
 
@@ -92561,7 +92561,7 @@ func (self *CheckButtonInstance) GetLabel() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -92712,11 +92712,11 @@ func (checkButton *CheckButtonInstance) SetInconsistent(inconsistent bool) {
 // [method@Gtk.CheckButton.set_use_underline] for details on this behavior.
 func (self *CheckButtonInstance) SetLabel(label string) {
 	var carg0 *C.GtkCheckButton // in, none, converted
-	var carg1 *C.gchar          // in, none, string, nullable-string
+	var carg1 *C.char           // in, none, string, nullable-string
 
 	carg0 = (*C.GtkCheckButton)(UnsafeCheckButtonToGlibNone(self))
 	if label != "" {
-		carg1 = (*C.gchar)(unsafe.Pointer(C.CString(label)))
+		carg1 = (*C.char)(unsafe.Pointer(C.CString(label)))
 		defer C.free(unsafe.Pointer(carg1))
 	}
 
@@ -92972,7 +92972,7 @@ func (button *ColorButtonInstance) GetModal() bool {
 // Deprecated: (since 4.10.0) Use [class@Gtk.ColorDialogButton] instead
 func (button *ColorButtonInstance) GetTitle() string {
 	var carg0 *C.GtkColorButton // in, none, converted
-	var cret  *C.gchar          // return, none, string
+	var cret  *C.char           // return, none, string, casted *C.gchar
 
 	carg0 = (*C.GtkColorButton)(UnsafeColorButtonToGlibNone(button))
 
@@ -92981,7 +92981,7 @@ func (button *ColorButtonInstance) GetTitle() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -93020,10 +93020,10 @@ func (button *ColorButtonInstance) SetModal(modal bool) {
 // Deprecated: (since 4.10.0) Use [class@Gtk.ColorDialogButton] instead
 func (button *ColorButtonInstance) SetTitle(title string) {
 	var carg0 *C.GtkColorButton // in, none, converted
-	var carg1 *C.gchar          // in, none, string
+	var carg1 *C.char           // in, none, string, casted *C.gchar
 
 	carg0 = (*C.GtkColorButton)(UnsafeColorButtonToGlibNone(button))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(title)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(title)))
 	defer C.free(unsafe.Pointer(carg1))
 
 	C.gtk_color_button_set_title(carg0, carg1)
@@ -95580,7 +95580,7 @@ func NewComboBoxInstanceWithModelAndEntry(model TreeModel) Widget {
 // Deprecated: (since 4.10.0) Use [class@Gtk.DropDown]
 func (comboBox *ComboBoxInstance) GetActive() int {
 	var carg0 *C.GtkComboBox // in, none, converted
-	var cret  C.int          // return, none, casted
+	var cret  C.int          // return, none, casted, casted C.gint
 
 	carg0 = (*C.GtkComboBox)(UnsafeComboBoxToGlibNone(comboBox))
 
@@ -95616,7 +95616,7 @@ func (comboBox *ComboBoxInstance) GetActive() int {
 // Deprecated: (since 4.10.0) Use [class@Gtk.DropDown]
 func (comboBox *ComboBoxInstance) GetActiveID() string {
 	var carg0 *C.GtkComboBox // in, none, converted
-	var cret  *C.gchar       // return, none, string
+	var cret  *C.char        // return, none, string, casted *C.gchar
 
 	carg0 = (*C.GtkComboBox)(UnsafeComboBoxToGlibNone(comboBox))
 
@@ -95625,7 +95625,7 @@ func (comboBox *ComboBoxInstance) GetActiveID() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -95724,7 +95724,7 @@ func (comboBox *ComboBoxInstance) GetChild() Widget {
 // Deprecated: (since 4.10.0) Use [class@Gtk.DropDown]
 func (comboBox *ComboBoxInstance) GetEntryTextColumn() int {
 	var carg0 *C.GtkComboBox // in, none, converted
-	var cret  C.int          // return, none, casted
+	var cret  C.int          // return, none, casted, casted C.gint
 
 	carg0 = (*C.GtkComboBox)(UnsafeComboBoxToGlibNone(comboBox))
 
@@ -95775,7 +95775,7 @@ func (comboBox *ComboBoxInstance) GetHasEntry() bool {
 // Deprecated: (since 4.10.0) Use [class@Gtk.DropDown]
 func (comboBox *ComboBoxInstance) GetIDColumn() int {
 	var carg0 *C.GtkComboBox // in, none, converted
-	var cret  C.int          // return, none, casted
+	var cret  C.int          // return, none, casted, casted C.gint
 
 	carg0 = (*C.GtkComboBox)(UnsafeComboBoxToGlibNone(comboBox))
 
@@ -95913,7 +95913,7 @@ func (comboBox *ComboBoxInstance) PopupForDevice(device gdk.Device) {
 // Deprecated: (since 4.10.0) Use [class@Gtk.DropDown]
 func (comboBox *ComboBoxInstance) SetActive(index_ int) {
 	var carg0 *C.GtkComboBox // in, none, converted
-	var carg1 C.int          // in, none, casted
+	var carg1 C.int          // in, none, casted, casted C.gint
 
 	carg0 = (*C.GtkComboBox)(UnsafeComboBoxToGlibNone(comboBox))
 	carg1 = C.int(index_)
@@ -95946,12 +95946,12 @@ func (comboBox *ComboBoxInstance) SetActive(index_ int) {
 // Deprecated: (since 4.10.0) Use [class@Gtk.DropDown]
 func (comboBox *ComboBoxInstance) SetActiveID(activeId string) bool {
 	var carg0 *C.GtkComboBox // in, none, converted
-	var carg1 *C.gchar       // in, none, string, nullable-string
+	var carg1 *C.char        // in, none, string, nullable-string
 	var cret  C.gboolean     // return
 
 	carg0 = (*C.GtkComboBox)(UnsafeComboBoxToGlibNone(comboBox))
 	if activeId != "" {
-		carg1 = (*C.gchar)(unsafe.Pointer(C.CString(activeId)))
+		carg1 = (*C.char)(unsafe.Pointer(C.CString(activeId)))
 		defer C.free(unsafe.Pointer(carg1))
 	}
 
@@ -96060,7 +96060,7 @@ func (comboBox *ComboBoxInstance) SetChild(child Widget) {
 // Deprecated: (since 4.10.0) Use [class@Gtk.DropDown]
 func (comboBox *ComboBoxInstance) SetEntryTextColumn(textColumn int) {
 	var carg0 *C.GtkComboBox // in, none, converted
-	var carg1 C.int          // in, none, casted
+	var carg1 C.int          // in, none, casted, casted C.gint
 
 	carg0 = (*C.GtkComboBox)(UnsafeComboBoxToGlibNone(comboBox))
 	carg1 = C.int(textColumn)
@@ -96085,7 +96085,7 @@ func (comboBox *ComboBoxInstance) SetEntryTextColumn(textColumn int) {
 // Deprecated: (since 4.10.0) Use [class@Gtk.DropDown]
 func (comboBox *ComboBoxInstance) SetIDColumn(idColumn int) {
 	var carg0 *C.GtkComboBox // in, none, converted
-	var carg1 C.int          // in, none, casted
+	var carg1 C.int          // in, none, casted, casted C.gint
 
 	carg0 = (*C.GtkComboBox)(UnsafeComboBoxToGlibNone(comboBox))
 	carg1 = C.int(idColumn)
@@ -96489,15 +96489,15 @@ func NewComboBoxTextInstanceWithEntry() Widget {
 // Deprecated: (since 4.10.0) Use [class@Gtk.DropDown]
 func (comboBox *ComboBoxTextInstance) Append(id string, text string) {
 	var carg0 *C.GtkComboBoxText // in, none, converted
-	var carg1 *C.gchar           // in, none, string, nullable-string
-	var carg2 *C.gchar           // in, none, string
+	var carg1 *C.char            // in, none, string, nullable-string
+	var carg2 *C.char            // in, none, string, casted *C.gchar
 
 	carg0 = (*C.GtkComboBoxText)(UnsafeComboBoxTextToGlibNone(comboBox))
 	if id != "" {
-		carg1 = (*C.gchar)(unsafe.Pointer(C.CString(id)))
+		carg1 = (*C.char)(unsafe.Pointer(C.CString(id)))
 		defer C.free(unsafe.Pointer(carg1))
 	}
-	carg2 = (*C.gchar)(unsafe.Pointer(C.CString(text)))
+	carg2 = (*C.char)(unsafe.Pointer(C.CString(text)))
 	defer C.free(unsafe.Pointer(carg2))
 
 	C.gtk_combo_box_text_append(carg0, carg1, carg2)
@@ -96520,10 +96520,10 @@ func (comboBox *ComboBoxTextInstance) Append(id string, text string) {
 // Deprecated: (since 4.10.0) Use [class@Gtk.DropDown]
 func (comboBox *ComboBoxTextInstance) AppendText(text string) {
 	var carg0 *C.GtkComboBoxText // in, none, converted
-	var carg1 *C.gchar           // in, none, string
+	var carg1 *C.char            // in, none, string, casted *C.gchar
 
 	carg0 = (*C.GtkComboBoxText)(UnsafeComboBoxTextToGlibNone(comboBox))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(text)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(text)))
 	defer C.free(unsafe.Pointer(carg1))
 
 	C.gtk_combo_box_text_append_text(carg0, carg1)
@@ -96546,7 +96546,7 @@ func (comboBox *ComboBoxTextInstance) AppendText(text string) {
 // Deprecated: (since 4.10.0) Use [class@Gtk.DropDown]
 func (comboBox *ComboBoxTextInstance) GetActiveText() string {
 	var carg0 *C.GtkComboBoxText // in, none, converted
-	var cret  *C.gchar           // return, full, string
+	var cret  *C.char            // return, full, string, casted *C.gchar
 
 	carg0 = (*C.GtkComboBoxText)(UnsafeComboBoxTextToGlibNone(comboBox))
 
@@ -96555,7 +96555,7 @@ func (comboBox *ComboBoxTextInstance) GetActiveText() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 	defer C.free(unsafe.Pointer(cret))
 
 	return goret
@@ -96579,17 +96579,17 @@ func (comboBox *ComboBoxTextInstance) GetActiveText() string {
 // Deprecated: (since 4.10.0) Use [class@Gtk.DropDown]
 func (comboBox *ComboBoxTextInstance) Insert(position int, id string, text string) {
 	var carg0 *C.GtkComboBoxText // in, none, converted
-	var carg1 C.int              // in, none, casted
-	var carg2 *C.gchar           // in, none, string, nullable-string
-	var carg3 *C.gchar           // in, none, string
+	var carg1 C.int              // in, none, casted, casted C.gint
+	var carg2 *C.char            // in, none, string, nullable-string
+	var carg3 *C.char            // in, none, string, casted *C.gchar
 
 	carg0 = (*C.GtkComboBoxText)(UnsafeComboBoxTextToGlibNone(comboBox))
 	carg1 = C.int(position)
 	if id != "" {
-		carg2 = (*C.gchar)(unsafe.Pointer(C.CString(id)))
+		carg2 = (*C.char)(unsafe.Pointer(C.CString(id)))
 		defer C.free(unsafe.Pointer(carg2))
 	}
-	carg3 = (*C.gchar)(unsafe.Pointer(C.CString(text)))
+	carg3 = (*C.char)(unsafe.Pointer(C.CString(text)))
 	defer C.free(unsafe.Pointer(carg3))
 
 	C.gtk_combo_box_text_insert(carg0, carg1, carg2, carg3)
@@ -96616,12 +96616,12 @@ func (comboBox *ComboBoxTextInstance) Insert(position int, id string, text strin
 // Deprecated: (since 4.10.0) Use [class@Gtk.DropDown]
 func (comboBox *ComboBoxTextInstance) InsertText(position int, text string) {
 	var carg0 *C.GtkComboBoxText // in, none, converted
-	var carg1 C.int              // in, none, casted
-	var carg2 *C.gchar           // in, none, string
+	var carg1 C.int              // in, none, casted, casted C.gint
+	var carg2 *C.char            // in, none, string, casted *C.gchar
 
 	carg0 = (*C.GtkComboBoxText)(UnsafeComboBoxTextToGlibNone(comboBox))
 	carg1 = C.int(position)
-	carg2 = (*C.gchar)(unsafe.Pointer(C.CString(text)))
+	carg2 = (*C.char)(unsafe.Pointer(C.CString(text)))
 	defer C.free(unsafe.Pointer(carg2))
 
 	C.gtk_combo_box_text_insert_text(carg0, carg1, carg2)
@@ -96647,15 +96647,15 @@ func (comboBox *ComboBoxTextInstance) InsertText(position int, text string) {
 // Deprecated: (since 4.10.0) Use [class@Gtk.DropDown]
 func (comboBox *ComboBoxTextInstance) Prepend(id string, text string) {
 	var carg0 *C.GtkComboBoxText // in, none, converted
-	var carg1 *C.gchar           // in, none, string, nullable-string
-	var carg2 *C.gchar           // in, none, string
+	var carg1 *C.char            // in, none, string, nullable-string
+	var carg2 *C.char            // in, none, string, casted *C.gchar
 
 	carg0 = (*C.GtkComboBoxText)(UnsafeComboBoxTextToGlibNone(comboBox))
 	if id != "" {
-		carg1 = (*C.gchar)(unsafe.Pointer(C.CString(id)))
+		carg1 = (*C.char)(unsafe.Pointer(C.CString(id)))
 		defer C.free(unsafe.Pointer(carg1))
 	}
-	carg2 = (*C.gchar)(unsafe.Pointer(C.CString(text)))
+	carg2 = (*C.char)(unsafe.Pointer(C.CString(text)))
 	defer C.free(unsafe.Pointer(carg2))
 
 	C.gtk_combo_box_text_prepend(carg0, carg1, carg2)
@@ -96678,10 +96678,10 @@ func (comboBox *ComboBoxTextInstance) Prepend(id string, text string) {
 // Deprecated: (since 4.10.0) Use [class@Gtk.DropDown]
 func (comboBox *ComboBoxTextInstance) PrependText(text string) {
 	var carg0 *C.GtkComboBoxText // in, none, converted
-	var carg1 *C.gchar           // in, none, string
+	var carg1 *C.char            // in, none, string, casted *C.gchar
 
 	carg0 = (*C.GtkComboBoxText)(UnsafeComboBoxTextToGlibNone(comboBox))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(text)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(text)))
 	defer C.free(unsafe.Pointer(carg1))
 
 	C.gtk_combo_box_text_prepend_text(carg0, carg1)
@@ -96700,7 +96700,7 @@ func (comboBox *ComboBoxTextInstance) PrependText(text string) {
 // Deprecated: (since 4.10.0) Use [class@Gtk.DropDown]
 func (comboBox *ComboBoxTextInstance) Remove(position int) {
 	var carg0 *C.GtkComboBoxText // in, none, converted
-	var carg1 C.int              // in, none, casted
+	var carg1 C.int              // in, none, casted, casted C.gint
 
 	carg0 = (*C.GtkComboBoxText)(UnsafeComboBoxTextToGlibNone(comboBox))
 	carg1 = C.int(position)
@@ -97979,7 +97979,7 @@ func NewDialogInstance() Widget {
 func (dialog *DialogInstance) AddActionWidget(child Widget, responseId int) {
 	var carg0 *C.GtkDialog // in, none, converted
 	var carg1 *C.GtkWidget // in, none, converted
-	var carg2 C.int        // in, none, casted
+	var carg2 C.int        // in, none, casted, casted C.gint
 
 	carg0 = (*C.GtkDialog)(UnsafeDialogToGlibNone(dialog))
 	carg1 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(child))
@@ -98012,12 +98012,12 @@ func (dialog *DialogInstance) AddActionWidget(child Widget, responseId int) {
 // Deprecated: (since 4.10.0) Use [class@Gtk.Window] instead
 func (dialog *DialogInstance) AddButton(buttonText string, responseId int) Widget {
 	var carg0 *C.GtkDialog // in, none, converted
-	var carg1 *C.gchar     // in, none, string
-	var carg2 C.int        // in, none, casted
+	var carg1 *C.char      // in, none, string, casted *C.gchar
+	var carg2 C.int        // in, none, casted, casted C.gint
 	var cret  *C.GtkWidget // return, none, converted
 
 	carg0 = (*C.GtkDialog)(UnsafeDialogToGlibNone(dialog))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(buttonText)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(buttonText)))
 	defer C.free(unsafe.Pointer(carg1))
 	carg2 = C.int(responseId)
 
@@ -98101,7 +98101,7 @@ func (dialog *DialogInstance) GetHeaderBar() HeaderBar {
 func (dialog *DialogInstance) GetResponseForWidget(widget Widget) int {
 	var carg0 *C.GtkDialog // in, none, converted
 	var carg1 *C.GtkWidget // in, none, converted
-	var cret  C.int        // return, none, casted
+	var cret  C.int        // return, none, casted, casted C.gint
 
 	carg0 = (*C.GtkDialog)(UnsafeDialogToGlibNone(dialog))
 	carg1 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(widget))
@@ -98133,7 +98133,7 @@ func (dialog *DialogInstance) GetResponseForWidget(widget Widget) int {
 // Deprecated: (since 4.10.0) Use [class@Gtk.Window] instead
 func (dialog *DialogInstance) GetWidgetForResponse(responseId int) Widget {
 	var carg0 *C.GtkDialog // in, none, converted
-	var carg1 C.int        // in, none, casted
+	var carg1 C.int        // in, none, casted, casted C.gint
 	var cret  *C.GtkWidget // return, none, converted
 
 	carg0 = (*C.GtkDialog)(UnsafeDialogToGlibNone(dialog))
@@ -98163,7 +98163,7 @@ func (dialog *DialogInstance) GetWidgetForResponse(responseId int) Widget {
 // Deprecated: (since 4.10.0) Use [class@Gtk.Window] instead
 func (dialog *DialogInstance) Response(responseId int) {
 	var carg0 *C.GtkDialog // in, none, converted
-	var carg1 C.int        // in, none, casted
+	var carg1 C.int        // in, none, casted, casted C.gint
 
 	carg0 = (*C.GtkDialog)(UnsafeDialogToGlibNone(dialog))
 	carg1 = C.int(responseId)
@@ -98186,7 +98186,7 @@ func (dialog *DialogInstance) Response(responseId int) {
 // Deprecated: (since 4.10.0) Use [class@Gtk.Window] instead
 func (dialog *DialogInstance) SetDefaultResponse(responseId int) {
 	var carg0 *C.GtkDialog // in, none, converted
-	var carg1 C.int        // in, none, casted
+	var carg1 C.int        // in, none, casted, casted C.gint
 
 	carg0 = (*C.GtkDialog)(UnsafeDialogToGlibNone(dialog))
 	carg1 = C.int(responseId)
@@ -98211,7 +98211,7 @@ func (dialog *DialogInstance) SetDefaultResponse(responseId int) {
 // Deprecated: (since 4.10.0) Use [class@Gtk.Window] instead
 func (dialog *DialogInstance) SetResponseSensitive(responseId int, setting bool) {
 	var carg0 *C.GtkDialog // in, none, converted
-	var carg1 C.int        // in, none, casted
+	var carg1 C.int        // in, none, casted, casted C.gint
 	var carg2 C.gboolean   // in
 
 	carg0 = (*C.GtkDialog)(UnsafeDialogToGlibNone(dialog))
@@ -98405,8 +98405,8 @@ func DragIconInstanceCreateWidgetForValue(value *gobject.Value) Widget {
 func DragIconInstanceSetFromPaintable(drag gdk.Drag, paintable gdk.Paintable, hotX int, hotY int) {
 	var carg1 *C.GdkDrag      // in, none, converted
 	var carg2 *C.GdkPaintable // in, none, converted
-	var carg3 C.int           // in, none, casted
-	var carg4 C.int           // in, none, casted
+	var carg3 C.int           // in, none, casted, casted C.gint
+	var carg4 C.int           // in, none, casted, casted C.gint
 
 	carg1 = (*C.GdkDrag)(gdk.UnsafeDragToGlibNone(drag))
 	carg2 = (*C.GdkPaintable)(gdk.UnsafePaintableToGlibNone(paintable))
@@ -98846,8 +98846,8 @@ func (source *DragSourceInstance) SetContent(content gdk.ContentProvider) {
 func (source *DragSourceInstance) SetIcon(paintable gdk.Paintable, hotX int, hotY int) {
 	var carg0 *C.GtkDragSource // in, none, converted
 	var carg1 *C.GdkPaintable  // in, none, converted, nullable
-	var carg2 C.int            // in, none, casted
-	var carg3 C.int            // in, none, casted
+	var carg2 C.int            // in, none, casted, casted C.gint
+	var carg3 C.int            // in, none, casted, casted C.gint
 
 	carg0 = (*C.GtkDragSource)(UnsafeDragSourceToGlibNone(source))
 	if paintable != nil {
@@ -99081,7 +99081,7 @@ func NewDrawingAreaInstance() Widget {
 // Retrieves the content height of the `GtkDrawingArea`.
 func (self *DrawingAreaInstance) GetContentHeight() int {
 	var carg0 *C.GtkDrawingArea // in, none, converted
-	var cret  C.int             // return, none, casted
+	var cret  C.int             // return, none, casted, casted C.gint
 
 	carg0 = (*C.GtkDrawingArea)(UnsafeDrawingAreaToGlibNone(self))
 
@@ -99103,7 +99103,7 @@ func (self *DrawingAreaInstance) GetContentHeight() int {
 // Retrieves the content width of the `GtkDrawingArea`.
 func (self *DrawingAreaInstance) GetContentWidth() int {
 	var carg0 *C.GtkDrawingArea // in, none, converted
-	var cret  C.int             // return, none, casted
+	var cret  C.int             // return, none, casted, casted C.gint
 
 	carg0 = (*C.GtkDrawingArea)(UnsafeDrawingAreaToGlibNone(self))
 
@@ -99133,7 +99133,7 @@ func (self *DrawingAreaInstance) GetContentWidth() int {
 // If the height is set to 0 (the default), the drawing area may disappear.
 func (self *DrawingAreaInstance) SetContentHeight(height int) {
 	var carg0 *C.GtkDrawingArea // in, none, converted
-	var carg1 C.int             // in, none, casted
+	var carg1 C.int             // in, none, casted, casted C.gint
 
 	carg0 = (*C.GtkDrawingArea)(UnsafeDrawingAreaToGlibNone(self))
 	carg1 = C.int(height)
@@ -99159,7 +99159,7 @@ func (self *DrawingAreaInstance) SetContentHeight(height int) {
 // If the width is set to 0 (the default), the drawing area may disappear.
 func (self *DrawingAreaInstance) SetContentWidth(width int) {
 	var carg0 *C.GtkDrawingArea // in, none, converted
-	var carg1 C.int             // in, none, casted
+	var carg1 C.int             // in, none, casted, casted C.gint
 
 	carg0 = (*C.GtkDrawingArea)(UnsafeDrawingAreaToGlibNone(self))
 	carg1 = C.int(width)
@@ -100941,10 +100941,10 @@ func UnsafeEditableLabelToGlibFull(c EditableLabel) unsafe.Pointer {
 //
 // Creates a new `GtkEditableLabel` widget.
 func NewEditableLabelInstance(str string) Widget {
-	var carg1 *C.gchar     // in, none, string
+	var carg1 *C.char      // in, none, string, casted *C.gchar
 	var cret  *C.GtkWidget // return, none, converted
 
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(str)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(str)))
 	defer C.free(unsafe.Pointer(carg1))
 
 	cret = C.gtk_editable_label_new(carg1)
@@ -101921,7 +101921,7 @@ func (entry *EntryInstance) GetActivatesDefault() bool {
 // See also: [property@Gtk.Editable:xalign]
 func (entry *EntryInstance) GetAlignment() float32 {
 	var carg0 *C.GtkEntry // in, none, converted
-	var cret  C.gfloat    // return, none, casted
+	var cret  C.float     // return, none, casted, casted C.gfloat
 
 	carg0 = (*C.GtkEntry)(UnsafeEntryToGlibNone(entry))
 
@@ -102016,7 +102016,7 @@ func (entry *EntryInstance) GetCompletion() EntryCompletion {
 // current  DND operation, or -1.
 func (entry *EntryInstance) GetCurrentIconDragSource() int {
 	var carg0 *C.GtkEntry // in, none, converted
-	var cret  C.int       // return, none, casted
+	var cret  C.int       // return, none, casted, casted C.gint
 
 	carg0 = (*C.GtkEntry)(UnsafeEntryToGlibNone(entry))
 
@@ -102167,9 +102167,9 @@ func (entry *EntryInstance) GetIconArea(iconPos EntryIconPosition) gdk.Rectangle
 //  [signal@Gtk.Widget::query-tooltip] signal handler.
 func (entry *EntryInstance) GetIconAtPos(x int, y int) int {
 	var carg0 *C.GtkEntry // in, none, converted
-	var carg1 C.int       // in, none, casted
-	var carg2 C.int       // in, none, casted
-	var cret  C.int       // return, none, casted
+	var carg1 C.int       // in, none, casted, casted C.gint
+	var carg2 C.int       // in, none, casted, casted C.gint
+	var cret  C.int       // return, none, casted, casted C.gint
 
 	carg0 = (*C.GtkEntry)(UnsafeEntryToGlibNone(entry))
 	carg1 = C.int(x)
@@ -102237,7 +102237,7 @@ func (entry *EntryInstance) GetIconGIcon(iconPos EntryIconPosition) gio.Icon {
 func (entry *EntryInstance) GetIconName(iconPos EntryIconPosition) string {
 	var carg0 *C.GtkEntry            // in, none, converted
 	var carg1 C.GtkEntryIconPosition // in, none, casted
-	var cret  *C.gchar               // return, none, string
+	var cret  *C.char                // return, none, string, casted *C.gchar
 
 	carg0 = (*C.GtkEntry)(UnsafeEntryToGlibNone(entry))
 	carg1 = C.GtkEntryIconPosition(iconPos)
@@ -102248,7 +102248,7 @@ func (entry *EntryInstance) GetIconName(iconPos EntryIconPosition) string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -102366,7 +102366,7 @@ func (entry *EntryInstance) GetIconStorageType(iconPos EntryIconPosition) ImageT
 func (entry *EntryInstance) GetIconTooltipMarkup(iconPos EntryIconPosition) string {
 	var carg0 *C.GtkEntry            // in, none, converted
 	var carg1 C.GtkEntryIconPosition // in, none, casted
-	var cret  *C.gchar               // return, full, string
+	var cret  *C.char                // return, full, string, casted *C.gchar
 
 	carg0 = (*C.GtkEntry)(UnsafeEntryToGlibNone(entry))
 	carg1 = C.GtkEntryIconPosition(iconPos)
@@ -102377,7 +102377,7 @@ func (entry *EntryInstance) GetIconTooltipMarkup(iconPos EntryIconPosition) stri
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 	defer C.free(unsafe.Pointer(cret))
 
 	return goret
@@ -102398,7 +102398,7 @@ func (entry *EntryInstance) GetIconTooltipMarkup(iconPos EntryIconPosition) stri
 func (entry *EntryInstance) GetIconTooltipText(iconPos EntryIconPosition) string {
 	var carg0 *C.GtkEntry            // in, none, converted
 	var carg1 C.GtkEntryIconPosition // in, none, casted
-	var cret  *C.gchar               // return, full, string
+	var cret  *C.char                // return, full, string, casted *C.gchar
 
 	carg0 = (*C.GtkEntry)(UnsafeEntryToGlibNone(entry))
 	carg1 = C.GtkEntryIconPosition(iconPos)
@@ -102409,7 +102409,7 @@ func (entry *EntryInstance) GetIconTooltipText(iconPos EntryIconPosition) string
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 	defer C.free(unsafe.Pointer(cret))
 
 	return goret
@@ -102492,7 +102492,7 @@ func (entry *EntryInstance) GetInvisibleChar() uint32 {
 // See [method@Gtk.Entry.set_max_length].
 func (entry *EntryInstance) GetMaxLength() int {
 	var carg0 *C.GtkEntry // in, none, converted
-	var cret  C.int       // return, none, casted
+	var cret  C.int       // return, none, casted, casted C.gint
 
 	carg0 = (*C.GtkEntry)(UnsafeEntryToGlibNone(entry))
 
@@ -102539,7 +102539,7 @@ func (entry *EntryInstance) GetOverwriteMode() bool {
 // is empty and unfocused
 func (entry *EntryInstance) GetPlaceholderText() string {
 	var carg0 *C.GtkEntry // in, none, converted
-	var cret  *C.gchar    // return, none, string
+	var cret  *C.char     // return, none, string, casted *C.gchar
 
 	carg0 = (*C.GtkEntry)(UnsafeEntryToGlibNone(entry))
 
@@ -102548,7 +102548,7 @@ func (entry *EntryInstance) GetPlaceholderText() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -102563,7 +102563,7 @@ func (entry *EntryInstance) GetPlaceholderText() string {
 // See [method@Gtk.Entry.set_progress_fraction].
 func (entry *EntryInstance) GetProgressFraction() float64 {
 	var carg0 *C.GtkEntry // in, none, converted
-	var cret  C.gdouble   // return, none, casted
+	var cret  C.double    // return, none, casted, casted C.gdouble
 
 	carg0 = (*C.GtkEntry)(UnsafeEntryToGlibNone(entry))
 
@@ -102586,7 +102586,7 @@ func (entry *EntryInstance) GetProgressFraction() float64 {
 // gtk_entry_set_progress_pulse_step().
 func (entry *EntryInstance) GetProgressPulseStep() float64 {
 	var carg0 *C.GtkEntry // in, none, converted
-	var cret  C.gdouble   // return, none, casted
+	var cret  C.double    // return, none, casted, casted C.gdouble
 
 	carg0 = (*C.GtkEntry)(UnsafeEntryToGlibNone(entry))
 
@@ -102778,10 +102778,10 @@ func (entry *EntryInstance) SetActivatesDefault(setting bool) {
 // See also: [property@Gtk.Editable:xalign]
 func (entry *EntryInstance) SetAlignment(xalign float32) {
 	var carg0 *C.GtkEntry // in, none, converted
-	var carg1 C.gfloat    // in, none, casted
+	var carg1 C.float     // in, none, casted, casted C.gfloat
 
 	carg0 = (*C.GtkEntry)(UnsafeEntryToGlibNone(entry))
-	carg1 = C.gfloat(xalign)
+	carg1 = C.float(xalign)
 
 	C.gtk_entry_set_alignment(carg0, carg1)
 	runtime.KeepAlive(entry)
@@ -103009,12 +103009,12 @@ func (entry *EntryInstance) SetIconFromGIcon(iconPos EntryIconPosition, icon gio
 func (entry *EntryInstance) SetIconFromIconName(iconPos EntryIconPosition, iconName string) {
 	var carg0 *C.GtkEntry            // in, none, converted
 	var carg1 C.GtkEntryIconPosition // in, none, casted
-	var carg2 *C.gchar               // in, none, string, nullable-string
+	var carg2 *C.char                // in, none, string, nullable-string
 
 	carg0 = (*C.GtkEntry)(UnsafeEntryToGlibNone(entry))
 	carg1 = C.GtkEntryIconPosition(iconPos)
 	if iconName != "" {
-		carg2 = (*C.gchar)(unsafe.Pointer(C.CString(iconName)))
+		carg2 = (*C.char)(unsafe.Pointer(C.CString(iconName)))
 		defer C.free(unsafe.Pointer(carg2))
 	}
 
@@ -103096,12 +103096,12 @@ func (entry *EntryInstance) SetIconSensitive(iconPos EntryIconPosition, sensitiv
 func (entry *EntryInstance) SetIconTooltipMarkup(iconPos EntryIconPosition, tooltip string) {
 	var carg0 *C.GtkEntry            // in, none, converted
 	var carg1 C.GtkEntryIconPosition // in, none, casted
-	var carg2 *C.gchar               // in, none, string, nullable-string
+	var carg2 *C.char                // in, none, string, nullable-string
 
 	carg0 = (*C.GtkEntry)(UnsafeEntryToGlibNone(entry))
 	carg1 = C.GtkEntryIconPosition(iconPos)
 	if tooltip != "" {
-		carg2 = (*C.gchar)(unsafe.Pointer(C.CString(tooltip)))
+		carg2 = (*C.char)(unsafe.Pointer(C.CString(tooltip)))
 		defer C.free(unsafe.Pointer(carg2))
 	}
 
@@ -103138,12 +103138,12 @@ func (entry *EntryInstance) SetIconTooltipMarkup(iconPos EntryIconPosition, tool
 func (entry *EntryInstance) SetIconTooltipText(iconPos EntryIconPosition, tooltip string) {
 	var carg0 *C.GtkEntry            // in, none, converted
 	var carg1 C.GtkEntryIconPosition // in, none, casted
-	var carg2 *C.gchar               // in, none, string, nullable-string
+	var carg2 *C.char                // in, none, string, nullable-string
 
 	carg0 = (*C.GtkEntry)(UnsafeEntryToGlibNone(entry))
 	carg1 = C.GtkEntryIconPosition(iconPos)
 	if tooltip != "" {
-		carg2 = (*C.gchar)(unsafe.Pointer(C.CString(tooltip)))
+		carg2 = (*C.char)(unsafe.Pointer(C.CString(tooltip)))
 		defer C.free(unsafe.Pointer(carg2))
 	}
 
@@ -103238,7 +103238,7 @@ func (entry *EntryInstance) SetInvisibleChar(ch uint32) {
 // calling [method@Gtk.EntryBuffer.set_max_length] on it.
 func (entry *EntryInstance) SetMaxLength(max int) {
 	var carg0 *C.GtkEntry // in, none, converted
-	var carg1 C.int       // in, none, casted
+	var carg1 C.int       // in, none, casted, casted C.gint
 
 	carg0 = (*C.GtkEntry)(UnsafeEntryToGlibNone(entry))
 	carg1 = C.int(max)
@@ -103281,11 +103281,11 @@ func (entry *EntryInstance) SetOverwriteMode(overwrite bool) {
 // contents of the `GtkEntry`.
 func (entry *EntryInstance) SetPlaceholderText(text string) {
 	var carg0 *C.GtkEntry // in, none, converted
-	var carg1 *C.gchar    // in, none, string, nullable-string
+	var carg1 *C.char     // in, none, string, nullable-string
 
 	carg0 = (*C.GtkEntry)(UnsafeEntryToGlibNone(entry))
 	if text != "" {
-		carg1 = (*C.gchar)(unsafe.Pointer(C.CString(text)))
+		carg1 = (*C.char)(unsafe.Pointer(C.CString(text)))
 		defer C.free(unsafe.Pointer(carg1))
 	}
 
@@ -103306,10 +103306,10 @@ func (entry *EntryInstance) SetPlaceholderText(text string) {
 // The fraction should be between 0.0 and 1.0, inclusive.
 func (entry *EntryInstance) SetProgressFraction(fraction float64) {
 	var carg0 *C.GtkEntry // in, none, converted
-	var carg1 C.gdouble   // in, none, casted
+	var carg1 C.double    // in, none, casted, casted C.gdouble
 
 	carg0 = (*C.GtkEntry)(UnsafeEntryToGlibNone(entry))
-	carg1 = C.gdouble(fraction)
+	carg1 = C.double(fraction)
 
 	C.gtk_entry_set_progress_fraction(carg0, carg1)
 	runtime.KeepAlive(entry)
@@ -103329,10 +103329,10 @@ func (entry *EntryInstance) SetProgressFraction(fraction float64) {
 // the progress.
 func (entry *EntryInstance) SetProgressPulseStep(fraction float64) {
 	var carg0 *C.GtkEntry // in, none, converted
-	var carg1 C.gdouble   // in, none, casted
+	var carg1 C.double    // in, none, casted, casted C.gdouble
 
 	carg0 = (*C.GtkEntry)(UnsafeEntryToGlibNone(entry))
-	carg1 = C.gdouble(fraction)
+	carg1 = C.double(fraction)
 
 	C.gtk_entry_set_progress_pulse_step(carg0, carg1)
 	runtime.KeepAlive(entry)
@@ -103795,11 +103795,11 @@ func UnsafeExpanderToGlibFull(c Expander) unsafe.Pointer {
 //
 // Creates a new expander using @label as the text of the label.
 func NewExpanderInstance(label string) Widget {
-	var carg1 *C.gchar     // in, none, string, nullable-string
+	var carg1 *C.char      // in, none, string, nullable-string
 	var cret  *C.GtkWidget // return, none, converted
 
 	if label != "" {
-		carg1 = (*C.gchar)(unsafe.Pointer(C.CString(label)))
+		carg1 = (*C.char)(unsafe.Pointer(C.CString(label)))
 		defer C.free(unsafe.Pointer(carg1))
 	}
 
@@ -103833,11 +103833,11 @@ func NewExpanderInstance(label string) Widget {
 // 
 // Pressing Alt and that key activates the button.
 func NewExpanderInstanceWithMnemonic(label string) Widget {
-	var carg1 *C.gchar     // in, none, string, nullable-string
+	var carg1 *C.char      // in, none, string, nullable-string
 	var cret  *C.GtkWidget // return, none, converted
 
 	if label != "" {
-		carg1 = (*C.gchar)(unsafe.Pointer(C.CString(label)))
+		carg1 = (*C.char)(unsafe.Pointer(C.CString(label)))
 		defer C.free(unsafe.Pointer(carg1))
 	}
 
@@ -103913,7 +103913,7 @@ func (expander *ExpanderInstance) GetExpanded() bool {
 // container.
 func (expander *ExpanderInstance) GetLabel() string {
 	var carg0 *C.GtkExpander // in, none, converted
-	var cret  *C.gchar       // return, none, string
+	var cret  *C.char        // return, none, string, casted *C.gchar
 
 	carg0 = (*C.GtkExpander)(UnsafeExpanderToGlibNone(expander))
 
@@ -103922,7 +103922,7 @@ func (expander *ExpanderInstance) GetLabel() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -104078,11 +104078,11 @@ func (expander *ExpanderInstance) SetExpanded(expanded bool) {
 // This will also clear any previously set labels.
 func (expander *ExpanderInstance) SetLabel(label string) {
 	var carg0 *C.GtkExpander // in, none, converted
-	var carg1 *C.gchar       // in, none, string, nullable-string
+	var carg1 *C.char        // in, none, string, nullable-string
 
 	carg0 = (*C.GtkExpander)(UnsafeExpanderToGlibNone(expander))
 	if label != "" {
-		carg1 = (*C.gchar)(unsafe.Pointer(C.CString(label)))
+		carg1 = (*C.char)(unsafe.Pointer(C.CString(label)))
 		defer C.free(unsafe.Pointer(carg1))
 	}
 
@@ -104704,15 +104704,15 @@ func UnsafeFileChooserNativeToGlibFull(c FileChooserNative) unsafe.Pointer {
 //
 // Deprecated: (since 4.10.0) Use [class@Gtk.FileDialog] instead
 func NewFileChooserNativeInstance(title string, parent Window, action FileChooserAction, acceptLabel string, cancelLabel string) FileChooserNative {
-	var carg1 *C.gchar                // in, none, string, nullable-string
+	var carg1 *C.char                 // in, none, string, nullable-string
 	var carg2 *C.GtkWindow            // in, none, converted, nullable
 	var carg3 C.GtkFileChooserAction  // in, none, casted
-	var carg4 *C.gchar                // in, none, string, nullable-string
-	var carg5 *C.gchar                // in, none, string, nullable-string
+	var carg4 *C.char                 // in, none, string, nullable-string
+	var carg5 *C.char                 // in, none, string, nullable-string
 	var cret  *C.GtkFileChooserNative // return, full, converted
 
 	if title != "" {
-		carg1 = (*C.gchar)(unsafe.Pointer(C.CString(title)))
+		carg1 = (*C.char)(unsafe.Pointer(C.CString(title)))
 		defer C.free(unsafe.Pointer(carg1))
 	}
 	if parent != nil {
@@ -104720,11 +104720,11 @@ func NewFileChooserNativeInstance(title string, parent Window, action FileChoose
 	}
 	carg3 = C.GtkFileChooserAction(action)
 	if acceptLabel != "" {
-		carg4 = (*C.gchar)(unsafe.Pointer(C.CString(acceptLabel)))
+		carg4 = (*C.char)(unsafe.Pointer(C.CString(acceptLabel)))
 		defer C.free(unsafe.Pointer(carg4))
 	}
 	if cancelLabel != "" {
-		carg5 = (*C.gchar)(unsafe.Pointer(C.CString(cancelLabel)))
+		carg5 = (*C.char)(unsafe.Pointer(C.CString(cancelLabel)))
 		defer C.free(unsafe.Pointer(carg5))
 	}
 
@@ -104752,7 +104752,7 @@ func NewFileChooserNativeInstance(title string, parent Window, action FileChoose
 // Deprecated: (since 4.10.0) Use [class@Gtk.FileDialog] instead
 func (self *FileChooserNativeInstance) GetAcceptLabel() string {
 	var carg0 *C.GtkFileChooserNative // in, none, converted
-	var cret  *C.gchar                // return, none, string
+	var cret  *C.char                 // return, none, string, casted *C.gchar
 
 	carg0 = (*C.GtkFileChooserNative)(UnsafeFileChooserNativeToGlibNone(self))
 
@@ -104761,7 +104761,7 @@ func (self *FileChooserNativeInstance) GetAcceptLabel() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -104776,7 +104776,7 @@ func (self *FileChooserNativeInstance) GetAcceptLabel() string {
 // Deprecated: (since 4.10.0) Use [class@Gtk.FileDialog] instead
 func (self *FileChooserNativeInstance) GetCancelLabel() string {
 	var carg0 *C.GtkFileChooserNative // in, none, converted
-	var cret  *C.gchar                // return, none, string
+	var cret  *C.char                 // return, none, string, casted *C.gchar
 
 	carg0 = (*C.GtkFileChooserNative)(UnsafeFileChooserNativeToGlibNone(self))
 
@@ -104785,7 +104785,7 @@ func (self *FileChooserNativeInstance) GetCancelLabel() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -104808,11 +104808,11 @@ func (self *FileChooserNativeInstance) GetCancelLabel() string {
 // Deprecated: (since 4.10.0) Use [class@Gtk.FileDialog] instead
 func (self *FileChooserNativeInstance) SetAcceptLabel(acceptLabel string) {
 	var carg0 *C.GtkFileChooserNative // in, none, converted
-	var carg1 *C.gchar                // in, none, string, nullable-string
+	var carg1 *C.char                 // in, none, string, nullable-string
 
 	carg0 = (*C.GtkFileChooserNative)(UnsafeFileChooserNativeToGlibNone(self))
 	if acceptLabel != "" {
-		carg1 = (*C.gchar)(unsafe.Pointer(C.CString(acceptLabel)))
+		carg1 = (*C.char)(unsafe.Pointer(C.CString(acceptLabel)))
 		defer C.free(unsafe.Pointer(carg1))
 	}
 
@@ -104839,11 +104839,11 @@ func (self *FileChooserNativeInstance) SetAcceptLabel(acceptLabel string) {
 // Deprecated: (since 4.10.0) Use [class@Gtk.FileDialog] instead
 func (self *FileChooserNativeInstance) SetCancelLabel(cancelLabel string) {
 	var carg0 *C.GtkFileChooserNative // in, none, converted
-	var carg1 *C.gchar                // in, none, string, nullable-string
+	var carg1 *C.char                 // in, none, string, nullable-string
 
 	carg0 = (*C.GtkFileChooserNative)(UnsafeFileChooserNativeToGlibNone(self))
 	if cancelLabel != "" {
-		carg1 = (*C.gchar)(unsafe.Pointer(C.CString(cancelLabel)))
+		carg1 = (*C.char)(unsafe.Pointer(C.CString(cancelLabel)))
 		defer C.free(unsafe.Pointer(carg1))
 	}
 
@@ -105210,10 +105210,10 @@ func NewFileFilterInstance() FileFilter {
 // Adds a rule allowing a given mime type to @filter.
 func (filter *FileFilterInstance) AddMIMEType(mimeType string) {
 	var carg0 *C.GtkFileFilter // in, none, converted
-	var carg1 *C.gchar         // in, none, string
+	var carg1 *C.char          // in, none, string, casted *C.gchar
 
 	carg0 = (*C.GtkFileFilter)(UnsafeFileFilterToGlibNone(filter))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(mimeType)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(mimeType)))
 	defer C.free(unsafe.Pointer(carg1))
 
 	C.gtk_file_filter_add_mime_type(carg0, carg1)
@@ -105234,10 +105234,10 @@ func (filter *FileFilterInstance) AddMIMEType(mimeType string) {
 // other platforms, it doesn't.
 func (filter *FileFilterInstance) AddPattern(pattern string) {
 	var carg0 *C.GtkFileFilter // in, none, converted
-	var carg1 *C.gchar         // in, none, string
+	var carg1 *C.char          // in, none, string, casted *C.gchar
 
 	carg0 = (*C.GtkFileFilter)(UnsafeFileFilterToGlibNone(filter))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(pattern)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(pattern)))
 	defer C.free(unsafe.Pointer(carg1))
 
 	C.gtk_file_filter_add_pattern(carg0, carg1)
@@ -105276,10 +105276,10 @@ func (filter *FileFilterInstance) AddPixbufFormats() {
 // are *always* case-insensitive.
 func (filter *FileFilterInstance) AddSuffix(suffix string) {
 	var carg0 *C.GtkFileFilter // in, none, converted
-	var carg1 *C.gchar         // in, none, string
+	var carg1 *C.char          // in, none, string, casted *C.gchar
 
 	carg0 = (*C.GtkFileFilter)(UnsafeFileFilterToGlibNone(filter))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(suffix)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(suffix)))
 	defer C.free(unsafe.Pointer(carg1))
 
 	C.gtk_file_filter_add_suffix(carg0, carg1)
@@ -105326,7 +105326,7 @@ func (filter *FileFilterInstance) GetAttributes() []string {
 // See [method@Gtk.FileFilter.set_name].
 func (filter *FileFilterInstance) GetName() string {
 	var carg0 *C.GtkFileFilter // in, none, converted
-	var cret  *C.gchar         // return, none, string
+	var cret  *C.char          // return, none, string, casted *C.gchar
 
 	carg0 = (*C.GtkFileFilter)(UnsafeFileFilterToGlibNone(filter))
 
@@ -105335,7 +105335,7 @@ func (filter *FileFilterInstance) GetName() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -105353,11 +105353,11 @@ func (filter *FileFilterInstance) GetName() string {
 // if there is a selectable list of filters.
 func (filter *FileFilterInstance) SetName(name string) {
 	var carg0 *C.GtkFileFilter // in, none, converted
-	var carg1 *C.gchar         // in, none, string, nullable-string
+	var carg1 *C.char          // in, none, string, nullable-string
 
 	carg0 = (*C.GtkFileFilter)(UnsafeFileFilterToGlibNone(filter))
 	if name != "" {
-		carg1 = (*C.gchar)(unsafe.Pointer(C.CString(name)))
+		carg1 = (*C.char)(unsafe.Pointer(C.CString(name)))
 		defer C.free(unsafe.Pointer(carg1))
 	}
 
@@ -105581,8 +105581,8 @@ func NewFixedInstance() Widget {
 func (fixed *FixedInstance) GetChildPosition(widget Widget) (float64, float64) {
 	var carg0 *C.GtkFixed  // in, none, converted
 	var carg1 *C.GtkWidget // in, none, converted
-	var carg2 C.gdouble    // out, full, casted
-	var carg3 C.gdouble    // out, full, casted
+	var carg2 C.double     // out, full, casted, casted C.gdouble
+	var carg3 C.double     // out, full, casted, casted C.gdouble
 
 	carg0 = (*C.GtkFixed)(UnsafeFixedToGlibNone(fixed))
 	carg1 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(widget))
@@ -105644,13 +105644,13 @@ func (fixed *FixedInstance) GetChildTransform(widget Widget) *gsk.Transform {
 func (fixed *FixedInstance) Move(widget Widget, x float64, y float64) {
 	var carg0 *C.GtkFixed  // in, none, converted
 	var carg1 *C.GtkWidget // in, none, converted
-	var carg2 C.gdouble    // in, none, casted
-	var carg3 C.gdouble    // in, none, casted
+	var carg2 C.double     // in, none, casted, casted C.gdouble
+	var carg3 C.double     // in, none, casted, casted C.gdouble
 
 	carg0 = (*C.GtkFixed)(UnsafeFixedToGlibNone(fixed))
 	carg1 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(widget))
-	carg2 = C.gdouble(x)
-	carg3 = C.gdouble(y)
+	carg2 = C.double(x)
+	carg3 = C.double(y)
 
 	C.gtk_fixed_move(carg0, carg1, carg2, carg3)
 	runtime.KeepAlive(fixed)
@@ -105671,13 +105671,13 @@ func (fixed *FixedInstance) Move(widget Widget, x float64, y float64) {
 func (fixed *FixedInstance) Put(widget Widget, x float64, y float64) {
 	var carg0 *C.GtkFixed  // in, none, converted
 	var carg1 *C.GtkWidget // in, none, converted
-	var carg2 C.gdouble    // in, none, casted
-	var carg3 C.gdouble    // in, none, casted
+	var carg2 C.double     // in, none, casted, casted C.gdouble
+	var carg3 C.double     // in, none, casted, casted C.gdouble
 
 	carg0 = (*C.GtkFixed)(UnsafeFixedToGlibNone(fixed))
 	carg1 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(widget))
-	carg2 = C.gdouble(x)
-	carg3 = C.gdouble(y)
+	carg2 = C.double(x)
+	carg3 = C.double(y)
 
 	C.gtk_fixed_put(carg0, carg1, carg2, carg3)
 	runtime.KeepAlive(fixed)
@@ -106550,7 +106550,7 @@ func (box *FlowBoxInstance) GetActivateOnSingleClick() bool {
 // Gets the nth child in the @box.
 func (box *FlowBoxInstance) GetChildAtIndex(idx int) FlowBoxChild {
 	var carg0 *C.GtkFlowBox      // in, none, converted
-	var carg1 C.int              // in, none, casted
+	var carg1 C.int              // in, none, casted, casted C.gint
 	var cret  *C.GtkFlowBoxChild // return, none, converted
 
 	carg0 = (*C.GtkFlowBox)(UnsafeFlowBoxToGlibNone(box))
@@ -106583,8 +106583,8 @@ func (box *FlowBoxInstance) GetChildAtIndex(idx int) FlowBoxChild {
 // Both @x and @y are assumed to be relative to the origin of @box.
 func (box *FlowBoxInstance) GetChildAtPos(x int, y int) FlowBoxChild {
 	var carg0 *C.GtkFlowBox      // in, none, converted
-	var carg1 C.int              // in, none, casted
-	var carg2 C.int              // in, none, casted
+	var carg1 C.int              // in, none, casted, casted C.gint
+	var carg2 C.int              // in, none, casted, casted C.gint
 	var cret  *C.GtkFlowBoxChild // return, none, converted
 
 	carg0 = (*C.GtkFlowBox)(UnsafeFlowBoxToGlibNone(box))
@@ -106754,7 +106754,7 @@ func (box *FlowBoxInstance) GetSelectionMode() SelectionMode {
 func (box *FlowBoxInstance) Insert(widget Widget, position int) {
 	var carg0 *C.GtkFlowBox // in, none, converted
 	var carg1 *C.GtkWidget  // in, none, converted
-	var carg2 C.int         // in, none, casted
+	var carg2 C.int         // in, none, casted, casted C.gint
 
 	carg0 = (*C.GtkFlowBox)(UnsafeFlowBoxToGlibNone(box))
 	carg1 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(widget))
@@ -107429,7 +107429,7 @@ func (self *FlowBoxChildInstance) GetChild() Widget {
 // Gets the current index of the @child in its `GtkFlowBox` container.
 func (child *FlowBoxChildInstance) GetIndex() int {
 	var carg0 *C.GtkFlowBoxChild // in, none, converted
-	var cret  C.int              // return, none, casted
+	var cret  C.int              // return, none, casted, casted C.gint
 
 	carg0 = (*C.GtkFlowBoxChild)(UnsafeFlowBoxChildToGlibNone(child))
 
@@ -107696,10 +107696,10 @@ func NewFontButtonInstance() Widget {
 //
 // Deprecated: (since 4.10.0) Use [class@Gtk.FontDialogButton] instead
 func NewFontButtonInstanceWithFont(fontname string) Widget {
-	var carg1 *C.gchar     // in, none, string
+	var carg1 *C.char      // in, none, string, casted *C.gchar
 	var cret  *C.GtkWidget // return, none, converted
 
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(fontname)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(fontname)))
 	defer C.free(unsafe.Pointer(carg1))
 
 	cret = C.gtk_font_button_new_with_font(carg1)
@@ -107748,7 +107748,7 @@ func (fontButton *FontButtonInstance) GetModal() bool {
 // Deprecated: (since 4.10.0) Use [class@Gtk.FontDialogButton] instead
 func (fontButton *FontButtonInstance) GetTitle() string {
 	var carg0 *C.GtkFontButton // in, none, converted
-	var cret  *C.gchar         // return, none, string
+	var cret  *C.char          // return, none, string, casted *C.gchar
 
 	carg0 = (*C.GtkFontButton)(UnsafeFontButtonToGlibNone(fontButton))
 
@@ -107757,7 +107757,7 @@ func (fontButton *FontButtonInstance) GetTitle() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -107848,10 +107848,10 @@ func (fontButton *FontButtonInstance) SetModal(modal bool) {
 // Deprecated: (since 4.10.0) Use [class@Gtk.FontDialogButton] instead
 func (fontButton *FontButtonInstance) SetTitle(title string) {
 	var carg0 *C.GtkFontButton // in, none, converted
-	var carg1 *C.gchar         // in, none, string
+	var carg1 *C.char          // in, none, string, casted *C.gchar
 
 	carg0 = (*C.GtkFontButton)(UnsafeFontButtonToGlibNone(fontButton))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(title)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(title)))
 	defer C.free(unsafe.Pointer(carg1))
 
 	C.gtk_font_button_set_title(carg0, carg1)
@@ -108019,12 +108019,12 @@ func UnsafeFontChooserDialogToGlibFull(c FontChooserDialog) unsafe.Pointer {
 //
 // Deprecated: (since 4.10.0) Use [class@Gtk.FontDialog] instead
 func NewFontChooserDialogInstance(title string, parent Window) Widget {
-	var carg1 *C.gchar     // in, none, string, nullable-string
+	var carg1 *C.char      // in, none, string, nullable-string
 	var carg2 *C.GtkWindow // in, none, converted, nullable
 	var cret  *C.GtkWidget // return, none, converted
 
 	if title != "" {
-		carg1 = (*C.gchar)(unsafe.Pointer(C.CString(title)))
+		carg1 = (*C.char)(unsafe.Pointer(C.CString(title)))
 		defer C.free(unsafe.Pointer(carg1))
 	}
 	if parent != nil {
@@ -108464,7 +108464,7 @@ func (self *FontDialogButtonInstance) GetFontDesc() *pango.FontDescription {
 // `GTK_FONT_LEVEL_FEATURES`.
 func (self *FontDialogButtonInstance) GetFontFeatures() string {
 	var carg0 *C.GtkFontDialogButton // in, none, converted
-	var cret  *C.gchar               // return, none, string
+	var cret  *C.char                // return, none, string, casted *C.gchar
 
 	carg0 = (*C.GtkFontDialogButton)(UnsafeFontDialogButtonToGlibNone(self))
 
@@ -108473,7 +108473,7 @@ func (self *FontDialogButtonInstance) GetFontFeatures() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -108620,11 +108620,11 @@ func (self *FontDialogButtonInstance) SetFontDesc(fontDesc *pango.FontDescriptio
 // Sets the font features of the button.
 func (self *FontDialogButtonInstance) SetFontFeatures(fontFeatures string) {
 	var carg0 *C.GtkFontDialogButton // in, none, converted
-	var carg1 *C.gchar               // in, none, string, nullable-string
+	var carg1 *C.char                // in, none, string, nullable-string
 
 	carg0 = (*C.GtkFontDialogButton)(UnsafeFontDialogButtonToGlibNone(self))
 	if fontFeatures != "" {
-		carg1 = (*C.gchar)(unsafe.Pointer(C.CString(fontFeatures)))
+		carg1 = (*C.char)(unsafe.Pointer(C.CString(fontFeatures)))
 		defer C.free(unsafe.Pointer(carg1))
 	}
 
@@ -108921,11 +108921,11 @@ func UnsafeFrameToGlibFull(c Frame) unsafe.Pointer {
 // 
 // If @label is %NULL, the label is omitted.
 func NewFrameInstance(label string) Widget {
-	var carg1 *C.gchar     // in, none, string, nullable-string
+	var carg1 *C.char      // in, none, string, nullable-string
 	var cret  *C.GtkWidget // return, none, converted
 
 	if label != "" {
-		carg1 = (*C.gchar)(unsafe.Pointer(C.CString(label)))
+		carg1 = (*C.char)(unsafe.Pointer(C.CString(label)))
 		defer C.free(unsafe.Pointer(carg1))
 	}
 
@@ -108972,7 +108972,7 @@ func (frame *FrameInstance) GetChild() Widget {
 // is returned.
 func (frame *FrameInstance) GetLabel() string {
 	var carg0 *C.GtkFrame // in, none, converted
-	var cret  *C.gchar    // return, none, string
+	var cret  *C.char     // return, none, string, casted *C.gchar
 
 	carg0 = (*C.GtkFrame)(UnsafeFrameToGlibNone(frame))
 
@@ -108981,7 +108981,7 @@ func (frame *FrameInstance) GetLabel() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -108994,7 +108994,7 @@ func (frame *FrameInstance) GetLabel() string {
 // Retrieves the X alignment of the frame’s label.
 func (frame *FrameInstance) GetLabelAlign() float32 {
 	var carg0 *C.GtkFrame // in, none, converted
-	var cret  C.gfloat    // return, none, casted
+	var cret  C.float     // return, none, casted, casted C.gfloat
 
 	carg0 = (*C.GtkFrame)(UnsafeFrameToGlibNone(frame))
 
@@ -109061,11 +109061,11 @@ func (frame *FrameInstance) SetChild(child Widget) {
 // label widget.
 func (frame *FrameInstance) SetLabel(label string) {
 	var carg0 *C.GtkFrame // in, none, converted
-	var carg1 *C.gchar    // in, none, string, nullable-string
+	var carg1 *C.char     // in, none, string, nullable-string
 
 	carg0 = (*C.GtkFrame)(UnsafeFrameToGlibNone(frame))
 	if label != "" {
-		carg1 = (*C.gchar)(unsafe.Pointer(C.CString(label)))
+		carg1 = (*C.char)(unsafe.Pointer(C.CString(label)))
 		defer C.free(unsafe.Pointer(carg1))
 	}
 
@@ -109087,10 +109087,10 @@ func (frame *FrameInstance) SetLabel(label string) {
 // The default value for a newly created frame is 0.0.
 func (frame *FrameInstance) SetLabelAlign(xalign float32) {
 	var carg0 *C.GtkFrame // in, none, converted
-	var carg1 C.gfloat    // in, none, casted
+	var carg1 C.float     // in, none, casted, casted C.gfloat
 
 	carg0 = (*C.GtkFrame)(UnsafeFrameToGlibNone(frame))
-	carg1 = C.gfloat(xalign)
+	carg1 = C.float(xalign)
 
 	C.gtk_frame_set_label_align(carg0, carg1)
 	runtime.KeepAlive(frame)
@@ -109709,8 +109709,8 @@ func (area *GLAreaInstance) GetHasStencilBuffer() bool {
 // See [method@Gtk.GLArea.set_required_version].
 func (area *GLAreaInstance) GetRequiredVersion() (int, int) {
 	var carg0 *C.GtkGLArea // in, none, converted
-	var carg1 C.int        // out, full, casted
-	var carg2 C.int        // out, full, casted
+	var carg1 C.int        // out, full, casted, casted C.gint
+	var carg2 C.int        // out, full, casted, casted C.gint
 
 	carg0 = (*C.GtkGLArea)(UnsafeGLAreaToGlibNone(area))
 
@@ -109934,8 +109934,8 @@ func (area *GLAreaInstance) SetHasStencilBuffer(hasStencilBuffer bool) {
 // This function must be called before the area has been realized.
 func (area *GLAreaInstance) SetRequiredVersion(major int, minor int) {
 	var carg0 *C.GtkGLArea // in, none, converted
-	var carg1 C.int        // in, none, casted
-	var carg2 C.int        // in, none, casted
+	var carg1 C.int        // in, none, casted, casted C.gint
+	var carg2 C.int        // in, none, casted, casted C.gint
 
 	carg0 = (*C.GtkGLArea)(UnsafeGLAreaToGlibNone(area))
 	carg1 = C.int(major)
@@ -110177,8 +110177,8 @@ func NewGestureDragInstance() Gesture {
 // as an offset to the starting drag point.
 func (gesture *GestureDragInstance) GetOffset() (float64, float64, bool) {
 	var carg0 *C.GtkGestureDrag // in, none, converted
-	var carg1 C.gdouble         // out, full, casted
-	var carg2 C.gdouble         // out, full, casted
+	var carg1 C.double          // out, full, casted, casted C.gdouble
+	var carg2 C.double          // out, full, casted, casted C.gdouble
 	var cret  C.gboolean        // return
 
 	carg0 = (*C.GtkGestureDrag)(UnsafeGestureDragToGlibNone(gesture))
@@ -110213,8 +110213,8 @@ func (gesture *GestureDragInstance) GetOffset() (float64, float64, bool) {
 // in widget-relative coordinates.
 func (gesture *GestureDragInstance) GetStartPoint() (float64, float64, bool) {
 	var carg0 *C.GtkGestureDrag // in, none, converted
-	var carg1 C.gdouble         // out, full, casted
-	var carg2 C.gdouble         // out, full, casted
+	var carg1 C.double          // out, full, casted, casted C.gdouble
+	var carg2 C.double          // out, full, casted, casted C.gdouble
 	var cret  C.gboolean        // return
 
 	carg0 = (*C.GtkGestureDrag)(UnsafeGestureDragToGlibNone(gesture))
@@ -110350,7 +110350,7 @@ func NewGestureLongPressInstance() Gesture {
 // Returns the delay factor.
 func (gesture *GestureLongPressInstance) GetDelayFactor() float64 {
 	var carg0 *C.GtkGestureLongPress // in, none, converted
-	var cret  C.gdouble              // return, none, casted
+	var cret  C.double               // return, none, casted, casted C.gdouble
 
 	carg0 = (*C.GtkGestureLongPress)(UnsafeGestureLongPressToGlibNone(gesture))
 
@@ -110376,10 +110376,10 @@ func (gesture *GestureLongPressInstance) GetDelayFactor() float64 {
 // Valid values are in the range [0.5..2.0].
 func (gesture *GestureLongPressInstance) SetDelayFactor(delayFactor float64) {
 	var carg0 *C.GtkGestureLongPress // in, none, converted
-	var carg1 C.gdouble              // in, none, casted
+	var carg1 C.double               // in, none, casted, casted C.gdouble
 
 	carg0 = (*C.GtkGestureLongPress)(UnsafeGestureLongPressToGlibNone(gesture))
-	carg1 = C.gdouble(delayFactor)
+	carg1 = C.double(delayFactor)
 
 	C.gtk_gesture_long_press_set_delay_factor(carg0, carg1)
 	runtime.KeepAlive(gesture)
@@ -111324,10 +111324,10 @@ func NewGridInstance() Widget {
 func (grid *GridInstance) Attach(child Widget, column int, row int, width int, height int) {
 	var carg0 *C.GtkGrid   // in, none, converted
 	var carg1 *C.GtkWidget // in, none, converted
-	var carg2 C.int        // in, none, casted
-	var carg3 C.int        // in, none, casted
-	var carg4 C.int        // in, none, casted
-	var carg5 C.int        // in, none, casted
+	var carg2 C.int        // in, none, casted, casted C.gint
+	var carg3 C.int        // in, none, casted, casted C.gint
+	var carg4 C.int        // in, none, casted, casted C.gint
+	var carg5 C.int        // in, none, casted, casted C.gint
 
 	carg0 = (*C.GtkGrid)(UnsafeGridToGlibNone(grid))
 	carg1 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(child))
@@ -111370,8 +111370,8 @@ func (grid *GridInstance) AttachNextTo(child Widget, sibling Widget, side Positi
 	var carg1 *C.GtkWidget      // in, none, converted
 	var carg2 *C.GtkWidget      // in, none, converted, nullable
 	var carg3 C.GtkPositionType // in, none, casted
-	var carg4 C.int             // in, none, casted
-	var carg5 C.int             // in, none, casted
+	var carg4 C.int             // in, none, casted, casted C.gint
+	var carg5 C.int             // in, none, casted, casted C.gint
 
 	carg0 = (*C.GtkGrid)(UnsafeGridToGlibNone(grid))
 	carg1 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(child))
@@ -111399,7 +111399,7 @@ func (grid *GridInstance) AttachNextTo(child Widget, sibling Widget, side Positi
 // Returns which row defines the global baseline of @grid.
 func (grid *GridInstance) GetBaselineRow() int {
 	var carg0 *C.GtkGrid // in, none, converted
-	var cret  C.int      // return, none, casted
+	var cret  C.int      // return, none, casted, casted C.gint
 
 	carg0 = (*C.GtkGrid)(UnsafeGridToGlibNone(grid))
 
@@ -111428,8 +111428,8 @@ func (grid *GridInstance) GetBaselineRow() int {
 // cell at @column, @row.
 func (grid *GridInstance) GetChildAt(column int, row int) Widget {
 	var carg0 *C.GtkGrid   // in, none, converted
-	var carg1 C.int        // in, none, casted
-	var carg2 C.int        // in, none, casted
+	var carg1 C.int        // in, none, casted, casted C.gint
+	var carg2 C.int        // in, none, casted, casted C.gint
 	var cret  *C.GtkWidget // return, none, converted
 
 	carg0 = (*C.GtkGrid)(UnsafeGridToGlibNone(grid))
@@ -111509,7 +111509,7 @@ func (grid *GridInstance) GetColumnSpacing() uint {
 // See [method@Gtk.Grid.set_row_baseline_position].
 func (grid *GridInstance) GetRowBaselinePosition(row int) BaselinePosition {
 	var carg0 *C.GtkGrid            // in, none, converted
-	var carg1 C.int                 // in, none, casted
+	var carg1 C.int                 // in, none, casted, casted C.gint
 	var cret  C.GtkBaselinePosition // return, none, casted
 
 	carg0 = (*C.GtkGrid)(UnsafeGridToGlibNone(grid))
@@ -111585,7 +111585,7 @@ func (grid *GridInstance) GetRowSpacing() uint {
 // position are grown to span the new column.
 func (grid *GridInstance) InsertColumn(position int) {
 	var carg0 *C.GtkGrid // in, none, converted
-	var carg1 C.int      // in, none, casted
+	var carg1 C.int      // in, none, casted, casted C.gint
 
 	carg0 = (*C.GtkGrid)(UnsafeGridToGlibNone(grid))
 	carg1 = C.int(position)
@@ -111637,7 +111637,7 @@ func (grid *GridInstance) InsertNextTo(sibling Widget, side PositionType) {
 // position are grown to span the new row.
 func (grid *GridInstance) InsertRow(position int) {
 	var carg0 *C.GtkGrid // in, none, converted
-	var carg1 C.int      // in, none, casted
+	var carg1 C.int      // in, none, casted, casted C.gint
 
 	carg0 = (*C.GtkGrid)(UnsafeGridToGlibNone(grid))
 	carg1 = C.int(position)
@@ -111664,10 +111664,10 @@ func (grid *GridInstance) InsertRow(position int) {
 func (grid *GridInstance) QueryChild(child Widget) (int, int, int, int) {
 	var carg0 *C.GtkGrid   // in, none, converted
 	var carg1 *C.GtkWidget // in, none, converted
-	var carg2 C.int        // out, full, casted
-	var carg3 C.int        // out, full, casted
-	var carg4 C.int        // out, full, casted
-	var carg5 C.int        // out, full, casted
+	var carg2 C.int        // out, full, casted, casted C.gint
+	var carg3 C.int        // out, full, casted, casted C.gint
+	var carg4 C.int        // out, full, casted, casted C.gint
+	var carg5 C.int        // out, full, casted, casted C.gint
 
 	carg0 = (*C.GtkGrid)(UnsafeGridToGlibNone(grid))
 	carg1 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(child))
@@ -111725,7 +111725,7 @@ func (grid *GridInstance) Remove(child Widget) {
 // are moved to the left.
 func (grid *GridInstance) RemoveColumn(position int) {
 	var carg0 *C.GtkGrid // in, none, converted
-	var carg1 C.int      // in, none, casted
+	var carg1 C.int      // in, none, casted, casted C.gint
 
 	carg0 = (*C.GtkGrid)(UnsafeGridToGlibNone(grid))
 	carg1 = C.int(position)
@@ -111749,7 +111749,7 @@ func (grid *GridInstance) RemoveColumn(position int) {
 // are moved up.
 func (grid *GridInstance) RemoveRow(position int) {
 	var carg0 *C.GtkGrid // in, none, converted
-	var carg1 C.int      // in, none, casted
+	var carg1 C.int      // in, none, casted, casted C.gint
 
 	carg0 = (*C.GtkGrid)(UnsafeGridToGlibNone(grid))
 	carg1 = C.int(position)
@@ -111772,7 +111772,7 @@ func (grid *GridInstance) RemoveRow(position int) {
 // parent of the @grid.
 func (grid *GridInstance) SetBaselineRow(row int) {
 	var carg0 *C.GtkGrid // in, none, converted
-	var carg1 C.int      // in, none, casted
+	var carg1 C.int      // in, none, casted, casted C.gint
 
 	carg0 = (*C.GtkGrid)(UnsafeGridToGlibNone(grid))
 	carg1 = C.int(row)
@@ -111835,7 +111835,7 @@ func (grid *GridInstance) SetColumnSpacing(spacing uint) {
 // The default baseline position is %GTK_BASELINE_POSITION_CENTER.
 func (grid *GridInstance) SetRowBaselinePosition(row int, pos BaselinePosition) {
 	var carg0 *C.GtkGrid            // in, none, converted
-	var carg1 C.int                 // in, none, casted
+	var carg1 C.int                 // in, none, casted, casted C.gint
 	var carg2 C.GtkBaselinePosition // in, none, casted
 
 	carg0 = (*C.GtkGrid)(UnsafeGridToGlibNone(grid))
@@ -112086,7 +112086,7 @@ func NewGridLayoutInstance() LayoutManager {
 // Retrieves the row set with gtk_grid_layout_set_baseline_row().
 func (grid *GridLayoutInstance) GetBaselineRow() int {
 	var carg0 *C.GtkGridLayout // in, none, converted
-	var cret  C.int            // return, none, casted
+	var cret  C.int            // return, none, casted, casted C.gint
 
 	carg0 = (*C.GtkGridLayout)(UnsafeGridLayoutToGlibNone(grid))
 
@@ -112164,7 +112164,7 @@ func (grid *GridLayoutInstance) GetColumnSpacing() uint {
 // is returned.
 func (grid *GridLayoutInstance) GetRowBaselinePosition(row int) BaselinePosition {
 	var carg0 *C.GtkGridLayout      // in, none, converted
-	var carg1 C.int                 // in, none, casted
+	var carg1 C.int                 // in, none, casted, casted C.gint
 	var cret  C.GtkBaselinePosition // return, none, casted
 
 	carg0 = (*C.GtkGridLayout)(UnsafeGridLayoutToGlibNone(grid))
@@ -112240,7 +112240,7 @@ func (grid *GridLayoutInstance) GetRowSpacing() uint {
 // parent of the @grid.
 func (grid *GridLayoutInstance) SetBaselineRow(row int) {
 	var carg0 *C.GtkGridLayout // in, none, converted
-	var carg1 C.int            // in, none, casted
+	var carg1 C.int            // in, none, casted, casted C.gint
 
 	carg0 = (*C.GtkGridLayout)(UnsafeGridLayoutToGlibNone(grid))
 	carg1 = C.int(row)
@@ -112301,7 +112301,7 @@ func (grid *GridLayoutInstance) SetColumnSpacing(spacing uint) {
 // grid, in case that row is assigned more space than is requested.
 func (grid *GridLayoutInstance) SetRowBaselinePosition(row int, pos BaselinePosition) {
 	var carg0 *C.GtkGridLayout      // in, none, converted
-	var carg1 C.int                 // in, none, casted
+	var carg1 C.int                 // in, none, casted, casted C.gint
 	var carg2 C.GtkBaselinePosition // in, none, casted
 
 	carg0 = (*C.GtkGridLayout)(UnsafeGridLayoutToGlibNone(grid))
@@ -112475,7 +112475,7 @@ func UnsafeGridLayoutChildToGlibFull(c GridLayoutChild) unsafe.Pointer {
 // Retrieves the column number to which @child attaches its left side.
 func (child *GridLayoutChildInstance) GetColumn() int {
 	var carg0 *C.GtkGridLayoutChild // in, none, converted
-	var cret  C.int                 // return, none, casted
+	var cret  C.int                 // return, none, casted, casted C.gint
 
 	carg0 = (*C.GtkGridLayoutChild)(UnsafeGridLayoutChildToGlibNone(child))
 
@@ -112497,7 +112497,7 @@ func (child *GridLayoutChildInstance) GetColumn() int {
 // Retrieves the number of columns that @child spans to.
 func (child *GridLayoutChildInstance) GetColumnSpan() int {
 	var carg0 *C.GtkGridLayoutChild // in, none, converted
-	var cret  C.int                 // return, none, casted
+	var cret  C.int                 // return, none, casted, casted C.gint
 
 	carg0 = (*C.GtkGridLayoutChild)(UnsafeGridLayoutChildToGlibNone(child))
 
@@ -112519,7 +112519,7 @@ func (child *GridLayoutChildInstance) GetColumnSpan() int {
 // Retrieves the row number to which @child attaches its top side.
 func (child *GridLayoutChildInstance) GetRow() int {
 	var carg0 *C.GtkGridLayoutChild // in, none, converted
-	var cret  C.int                 // return, none, casted
+	var cret  C.int                 // return, none, casted, casted C.gint
 
 	carg0 = (*C.GtkGridLayoutChild)(UnsafeGridLayoutChildToGlibNone(child))
 
@@ -112541,7 +112541,7 @@ func (child *GridLayoutChildInstance) GetRow() int {
 // Retrieves the number of rows that @child spans to.
 func (child *GridLayoutChildInstance) GetRowSpan() int {
 	var carg0 *C.GtkGridLayoutChild // in, none, converted
-	var cret  C.int                 // return, none, casted
+	var cret  C.int                 // return, none, casted, casted C.gint
 
 	carg0 = (*C.GtkGridLayoutChild)(UnsafeGridLayoutChildToGlibNone(child))
 
@@ -112564,7 +112564,7 @@ func (child *GridLayoutChildInstance) GetRowSpan() int {
 // Sets the column number to attach the left side of @child.
 func (child *GridLayoutChildInstance) SetColumn(column int) {
 	var carg0 *C.GtkGridLayoutChild // in, none, converted
-	var carg1 C.int                 // in, none, casted
+	var carg1 C.int                 // in, none, casted, casted C.gint
 
 	carg0 = (*C.GtkGridLayoutChild)(UnsafeGridLayoutChildToGlibNone(child))
 	carg1 = C.int(column)
@@ -112583,7 +112583,7 @@ func (child *GridLayoutChildInstance) SetColumn(column int) {
 // Sets the number of columns @child spans to.
 func (child *GridLayoutChildInstance) SetColumnSpan(span int) {
 	var carg0 *C.GtkGridLayoutChild // in, none, converted
-	var carg1 C.int                 // in, none, casted
+	var carg1 C.int                 // in, none, casted, casted C.gint
 
 	carg0 = (*C.GtkGridLayoutChild)(UnsafeGridLayoutChildToGlibNone(child))
 	carg1 = C.int(span)
@@ -112602,7 +112602,7 @@ func (child *GridLayoutChildInstance) SetColumnSpan(span int) {
 // Sets the row to place @child in.
 func (child *GridLayoutChildInstance) SetRow(row int) {
 	var carg0 *C.GtkGridLayoutChild // in, none, converted
-	var carg1 C.int                 // in, none, casted
+	var carg1 C.int                 // in, none, casted, casted C.gint
 
 	carg0 = (*C.GtkGridLayoutChild)(UnsafeGridLayoutChildToGlibNone(child))
 	carg1 = C.int(row)
@@ -112621,7 +112621,7 @@ func (child *GridLayoutChildInstance) SetRow(row int) {
 // Sets the number of rows @child spans to.
 func (child *GridLayoutChildInstance) SetRowSpan(span int) {
 	var carg0 *C.GtkGridLayoutChild // in, none, converted
-	var carg1 C.int                 // in, none, casted
+	var carg1 C.int                 // in, none, casted, casted C.gint
 
 	carg0 = (*C.GtkGridLayoutChild)(UnsafeGridLayoutChildToGlibNone(child))
 	carg1 = C.int(span)
@@ -112904,7 +112904,7 @@ func NewHeaderBarInstance() Widget {
 // Gets the decoration layout of the `GtkHeaderBar`.
 func (bar *HeaderBarInstance) GetDecorationLayout() string {
 	var carg0 *C.GtkHeaderBar // in, none, converted
-	var cret  *C.gchar        // return, none, string
+	var cret  *C.char         // return, none, string, casted *C.gchar
 
 	carg0 = (*C.GtkHeaderBar)(UnsafeHeaderBarToGlibNone(bar))
 
@@ -112913,7 +112913,7 @@ func (bar *HeaderBarInstance) GetDecorationLayout() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -113056,11 +113056,11 @@ func (bar *HeaderBarInstance) Remove(child Widget) {
 // on the left, and minimize, maximize and close buttons on the right.
 func (bar *HeaderBarInstance) SetDecorationLayout(layout string) {
 	var carg0 *C.GtkHeaderBar // in, none, converted
-	var carg1 *C.gchar        // in, none, string, nullable-string
+	var carg1 *C.char         // in, none, string, nullable-string
 
 	carg0 = (*C.GtkHeaderBar)(UnsafeHeaderBarToGlibNone(bar))
 	if layout != "" {
-		carg1 = (*C.gchar)(unsafe.Pointer(C.CString(layout)))
+		carg1 = (*C.char)(unsafe.Pointer(C.CString(layout)))
 		defer C.free(unsafe.Pointer(carg1))
 	}
 
@@ -114211,7 +114211,7 @@ func (iconView *IconViewInstance) GetCellRect(path *TreePath, cell CellRenderer)
 // Deprecated: (since 4.10.0) Use [class@Gtk.GridView] instead
 func (iconView *IconViewInstance) GetColumnSpacing() int {
 	var carg0 *C.GtkIconView // in, none, converted
-	var cret  C.int          // return, none, casted
+	var cret  C.int          // return, none, casted, casted C.gint
 
 	carg0 = (*C.GtkIconView)(UnsafeIconViewToGlibNone(iconView))
 
@@ -114235,7 +114235,7 @@ func (iconView *IconViewInstance) GetColumnSpacing() int {
 // Deprecated: (since 4.10.0) Use [class@Gtk.GridView] instead
 func (iconView *IconViewInstance) GetColumns() int {
 	var carg0 *C.GtkIconView // in, none, converted
-	var cret  C.int          // return, none, casted
+	var cret  C.int          // return, none, casted, casted C.gint
 
 	carg0 = (*C.GtkIconView)(UnsafeIconViewToGlibNone(iconView))
 
@@ -114307,8 +114307,8 @@ func (iconView *IconViewInstance) GetCursor() (*TreePath, CellRenderer, bool) {
 // Deprecated: (since 4.10.0) Use [class@Gtk.GridView] instead
 func (iconView *IconViewInstance) GetDestItemAtPos(dragX int, dragY int) (*TreePath, IconViewDropPosition, bool) {
 	var carg0 *C.GtkIconView            // in, none, converted
-	var carg1 C.int                     // in, none, casted
-	var carg2 C.int                     // in, none, casted
+	var carg1 C.int                     // in, none, casted, casted C.gint
+	var carg2 C.int                     // in, none, casted, casted C.gint
 	var carg3 *C.GtkTreePath            // out, full, converted
 	var carg4 C.GtkIconViewDropPosition // out, full, casted
 	var cret  C.gboolean                // return
@@ -114385,8 +114385,8 @@ func (iconView *IconViewInstance) GetDragDestItem() (*TreePath, IconViewDropPosi
 // Deprecated: (since 4.10.0) Use [class@Gtk.GridView] instead
 func (iconView *IconViewInstance) GetItemAtPos(x int, y int) (*TreePath, CellRenderer, bool) {
 	var carg0 *C.GtkIconView     // in, none, converted
-	var carg1 C.int              // in, none, casted
-	var carg2 C.int              // in, none, casted
+	var carg1 C.int              // in, none, casted, casted C.gint
+	var carg2 C.int              // in, none, casted, casted C.gint
 	var carg3 *C.GtkTreePath     // out, full, converted
 	var carg4 *C.GtkCellRenderer // out, none, converted
 	var cret  C.gboolean         // return
@@ -114430,7 +114430,7 @@ func (iconView *IconViewInstance) GetItemAtPos(x int, y int) (*TreePath, CellRen
 func (iconView *IconViewInstance) GetItemColumn(path *TreePath) int {
 	var carg0 *C.GtkIconView // in, none, converted
 	var carg1 *C.GtkTreePath // in, none, converted
-	var cret  C.int          // return, none, casted
+	var cret  C.int          // return, none, casted, casted C.gint
 
 	carg0 = (*C.GtkIconView)(UnsafeIconViewToGlibNone(iconView))
 	carg1 = (*C.GtkTreePath)(UnsafeTreePathToGlibNone(path))
@@ -114481,7 +114481,7 @@ func (iconView *IconViewInstance) GetItemOrientation() Orientation {
 // Deprecated: (since 4.10.0) Use [class@Gtk.GridView] instead
 func (iconView *IconViewInstance) GetItemPadding() int {
 	var carg0 *C.GtkIconView // in, none, converted
-	var cret  C.int          // return, none, casted
+	var cret  C.int          // return, none, casted, casted C.gint
 
 	carg0 = (*C.GtkIconView)(UnsafeIconViewToGlibNone(iconView))
 
@@ -114512,7 +114512,7 @@ func (iconView *IconViewInstance) GetItemPadding() int {
 func (iconView *IconViewInstance) GetItemRow(path *TreePath) int {
 	var carg0 *C.GtkIconView // in, none, converted
 	var carg1 *C.GtkTreePath // in, none, converted
-	var cret  C.int          // return, none, casted
+	var cret  C.int          // return, none, casted, casted C.gint
 
 	carg0 = (*C.GtkIconView)(UnsafeIconViewToGlibNone(iconView))
 	carg1 = (*C.GtkTreePath)(UnsafeTreePathToGlibNone(path))
@@ -114538,7 +114538,7 @@ func (iconView *IconViewInstance) GetItemRow(path *TreePath) int {
 // Deprecated: (since 4.10.0) Use [class@Gtk.GridView] instead
 func (iconView *IconViewInstance) GetItemWidth() int {
 	var carg0 *C.GtkIconView // in, none, converted
-	var cret  C.int          // return, none, casted
+	var cret  C.int          // return, none, casted, casted C.gint
 
 	carg0 = (*C.GtkIconView)(UnsafeIconViewToGlibNone(iconView))
 
@@ -114562,7 +114562,7 @@ func (iconView *IconViewInstance) GetItemWidth() int {
 // Deprecated: (since 4.10.0) Use [class@Gtk.GridView] instead
 func (iconView *IconViewInstance) GetMargin() int {
 	var carg0 *C.GtkIconView // in, none, converted
-	var cret  C.int          // return, none, casted
+	var cret  C.int          // return, none, casted, casted C.gint
 
 	carg0 = (*C.GtkIconView)(UnsafeIconViewToGlibNone(iconView))
 
@@ -114586,7 +114586,7 @@ func (iconView *IconViewInstance) GetMargin() int {
 // Deprecated: (since 4.10.0) Use [class@Gtk.GridView] instead
 func (iconView *IconViewInstance) GetMarkupColumn() int {
 	var carg0 *C.GtkIconView // in, none, converted
-	var cret  C.int          // return, none, casted
+	var cret  C.int          // return, none, casted, casted C.gint
 
 	carg0 = (*C.GtkIconView)(UnsafeIconViewToGlibNone(iconView))
 
@@ -114641,8 +114641,8 @@ func (iconView *IconViewInstance) GetModel() TreeModel {
 // Deprecated: (since 4.10.0) Use [class@Gtk.GridView] instead
 func (iconView *IconViewInstance) GetPathAtPos(x int, y int) *TreePath {
 	var carg0 *C.GtkIconView // in, none, converted
-	var carg1 C.int          // in, none, casted
-	var carg2 C.int          // in, none, casted
+	var carg1 C.int          // in, none, casted, casted C.gint
+	var carg2 C.int          // in, none, casted, casted C.gint
 	var cret  *C.GtkTreePath // return, full, converted
 
 	carg0 = (*C.GtkIconView)(UnsafeIconViewToGlibNone(iconView))
@@ -114671,7 +114671,7 @@ func (iconView *IconViewInstance) GetPathAtPos(x int, y int) *TreePath {
 // Deprecated: (since 4.10.0) Use [class@Gtk.GridView] instead
 func (iconView *IconViewInstance) GetPixbufColumn() int {
 	var carg0 *C.GtkIconView // in, none, converted
-	var cret  C.int          // return, none, casted
+	var cret  C.int          // return, none, casted, casted C.gint
 
 	carg0 = (*C.GtkIconView)(UnsafeIconViewToGlibNone(iconView))
 
@@ -114722,7 +114722,7 @@ func (iconView *IconViewInstance) GetReorderable() bool {
 // Deprecated: (since 4.10.0) Use [class@Gtk.GridView] instead
 func (iconView *IconViewInstance) GetRowSpacing() int {
 	var carg0 *C.GtkIconView // in, none, converted
-	var cret  C.int          // return, none, casted
+	var cret  C.int          // return, none, casted, casted C.gint
 
 	carg0 = (*C.GtkIconView)(UnsafeIconViewToGlibNone(iconView))
 
@@ -114770,7 +114770,7 @@ func (iconView *IconViewInstance) GetSelectionMode() SelectionMode {
 // Deprecated: (since 4.10.0) Use [class@Gtk.GridView] instead
 func (iconView *IconViewInstance) GetSpacing() int {
 	var carg0 *C.GtkIconView // in, none, converted
-	var cret  C.int          // return, none, casted
+	var cret  C.int          // return, none, casted, casted C.gint
 
 	carg0 = (*C.GtkIconView)(UnsafeIconViewToGlibNone(iconView))
 
@@ -114794,7 +114794,7 @@ func (iconView *IconViewInstance) GetSpacing() int {
 // Deprecated: (since 4.10.0) Use [class@Gtk.GridView] instead
 func (iconView *IconViewInstance) GetTextColumn() int {
 	var carg0 *C.GtkIconView // in, none, converted
-	var cret  C.int          // return, none, casted
+	var cret  C.int          // return, none, casted, casted C.gint
 
 	carg0 = (*C.GtkIconView)(UnsafeIconViewToGlibNone(iconView))
 
@@ -114819,7 +114819,7 @@ func (iconView *IconViewInstance) GetTextColumn() int {
 // Deprecated: (since 4.10.0) Use [class@Gtk.GridView] instead
 func (iconView *IconViewInstance) GetTooltipColumn() int {
 	var carg0 *C.GtkIconView // in, none, converted
-	var cret  C.int          // return, none, casted
+	var cret  C.int          // return, none, casted, casted C.gint
 
 	carg0 = (*C.GtkIconView)(UnsafeIconViewToGlibNone(iconView))
 
@@ -114862,8 +114862,8 @@ func (iconView *IconViewInstance) GetTooltipColumn() int {
 // Deprecated: (since 4.10.0) Use [class@Gtk.GridView] instead
 func (iconView *IconViewInstance) GetTooltipContext(x int, y int, keyboardTip bool) (TreeModel, *TreePath, TreeIter, bool) {
 	var carg0 *C.GtkIconView  // in, none, converted
-	var carg1 C.int           // in, none, casted
-	var carg2 C.int           // in, none, casted
+	var carg1 C.int           // in, none, casted, casted C.gint
+	var carg2 C.int           // in, none, casted, casted C.gint
 	var carg3 C.gboolean      // in
 	var carg4 *C.GtkTreeModel // out, none, converted
 	var carg5 *C.GtkTreePath  // out, full, converted
@@ -115022,16 +115022,16 @@ func (iconView *IconViewInstance) ScrollToPath(path *TreePath, useAlign bool, ro
 	var carg0 *C.GtkIconView // in, none, converted
 	var carg1 *C.GtkTreePath // in, none, converted
 	var carg2 C.gboolean     // in
-	var carg3 C.gfloat       // in, none, casted
-	var carg4 C.gfloat       // in, none, casted
+	var carg3 C.float        // in, none, casted, casted C.gfloat
+	var carg4 C.float        // in, none, casted, casted C.gfloat
 
 	carg0 = (*C.GtkIconView)(UnsafeIconViewToGlibNone(iconView))
 	carg1 = (*C.GtkTreePath)(UnsafeTreePathToGlibNone(path))
 	if useAlign {
 		carg2 = C.TRUE
 	}
-	carg3 = C.gfloat(rowAlign)
-	carg4 = C.gfloat(colAlign)
+	carg3 = C.float(rowAlign)
+	carg4 = C.float(colAlign)
 
 	C.gtk_icon_view_scroll_to_path(carg0, carg1, carg2, carg3, carg4)
 	runtime.KeepAlive(iconView)
@@ -115138,7 +115138,7 @@ func (iconView *IconViewInstance) SetActivateOnSingleClick(single bool) {
 // Deprecated: (since 4.10.0) Use [class@Gtk.GridView] instead
 func (iconView *IconViewInstance) SetColumnSpacing(columnSpacing int) {
 	var carg0 *C.GtkIconView // in, none, converted
-	var carg1 C.int          // in, none, casted
+	var carg1 C.int          // in, none, casted, casted C.gint
 
 	carg0 = (*C.GtkIconView)(UnsafeIconViewToGlibNone(iconView))
 	carg1 = C.int(columnSpacing)
@@ -115162,7 +115162,7 @@ func (iconView *IconViewInstance) SetColumnSpacing(columnSpacing int) {
 // Deprecated: (since 4.10.0) Use [class@Gtk.GridView] instead
 func (iconView *IconViewInstance) SetColumns(columns int) {
 	var carg0 *C.GtkIconView // in, none, converted
-	var carg1 C.int          // in, none, casted
+	var carg1 C.int          // in, none, casted, casted C.gint
 
 	carg0 = (*C.GtkIconView)(UnsafeIconViewToGlibNone(iconView))
 	carg1 = C.int(columns)
@@ -115274,7 +115274,7 @@ func (iconView *IconViewInstance) SetItemOrientation(orientation Orientation) {
 // Deprecated: (since 4.10.0) Use [class@Gtk.GridView] instead
 func (iconView *IconViewInstance) SetItemPadding(itemPadding int) {
 	var carg0 *C.GtkIconView // in, none, converted
-	var carg1 C.int          // in, none, casted
+	var carg1 C.int          // in, none, casted, casted C.gint
 
 	carg0 = (*C.GtkIconView)(UnsafeIconViewToGlibNone(iconView))
 	carg1 = C.int(itemPadding)
@@ -115297,7 +115297,7 @@ func (iconView *IconViewInstance) SetItemPadding(itemPadding int) {
 // Deprecated: (since 4.10.0) Use [class@Gtk.GridView] instead
 func (iconView *IconViewInstance) SetItemWidth(itemWidth int) {
 	var carg0 *C.GtkIconView // in, none, converted
-	var carg1 C.int          // in, none, casted
+	var carg1 C.int          // in, none, casted, casted C.gint
 
 	carg0 = (*C.GtkIconView)(UnsafeIconViewToGlibNone(iconView))
 	carg1 = C.int(itemWidth)
@@ -115320,7 +115320,7 @@ func (iconView *IconViewInstance) SetItemWidth(itemWidth int) {
 // Deprecated: (since 4.10.0) Use [class@Gtk.GridView] instead
 func (iconView *IconViewInstance) SetMargin(margin int) {
 	var carg0 *C.GtkIconView // in, none, converted
-	var carg1 C.int          // in, none, casted
+	var carg1 C.int          // in, none, casted, casted C.gint
 
 	carg0 = (*C.GtkIconView)(UnsafeIconViewToGlibNone(iconView))
 	carg1 = C.int(margin)
@@ -115344,7 +115344,7 @@ func (iconView *IconViewInstance) SetMargin(margin int) {
 // Deprecated: (since 4.10.0) Use [class@Gtk.GridView] instead
 func (iconView *IconViewInstance) SetMarkupColumn(column int) {
 	var carg0 *C.GtkIconView // in, none, converted
-	var carg1 C.int          // in, none, casted
+	var carg1 C.int          // in, none, casted, casted C.gint
 
 	carg0 = (*C.GtkIconView)(UnsafeIconViewToGlibNone(iconView))
 	carg1 = C.int(column)
@@ -115392,7 +115392,7 @@ func (iconView *IconViewInstance) SetModel(model TreeModel) {
 // Deprecated: (since 4.10.0) Use [class@Gtk.GridView] instead
 func (iconView *IconViewInstance) SetPixbufColumn(column int) {
 	var carg0 *C.GtkIconView // in, none, converted
-	var carg1 C.int          // in, none, casted
+	var carg1 C.int          // in, none, casted, casted C.gint
 
 	carg0 = (*C.GtkIconView)(UnsafeIconViewToGlibNone(iconView))
 	carg1 = C.int(column)
@@ -115448,7 +115448,7 @@ func (iconView *IconViewInstance) SetReorderable(reorderable bool) {
 // Deprecated: (since 4.10.0) Use [class@Gtk.GridView] instead
 func (iconView *IconViewInstance) SetRowSpacing(rowSpacing int) {
 	var carg0 *C.GtkIconView // in, none, converted
-	var carg1 C.int          // in, none, casted
+	var carg1 C.int          // in, none, casted, casted C.gint
 
 	carg0 = (*C.GtkIconView)(UnsafeIconViewToGlibNone(iconView))
 	carg1 = C.int(rowSpacing)
@@ -115492,7 +115492,7 @@ func (iconView *IconViewInstance) SetSelectionMode(mode SelectionMode) {
 // Deprecated: (since 4.10.0) Use [class@Gtk.GridView] instead
 func (iconView *IconViewInstance) SetSpacing(spacing int) {
 	var carg0 *C.GtkIconView // in, none, converted
-	var carg1 C.int          // in, none, casted
+	var carg1 C.int          // in, none, casted, casted C.gint
 
 	carg0 = (*C.GtkIconView)(UnsafeIconViewToGlibNone(iconView))
 	carg1 = C.int(spacing)
@@ -115514,7 +115514,7 @@ func (iconView *IconViewInstance) SetSpacing(spacing int) {
 // Deprecated: (since 4.10.0) Use [class@Gtk.GridView] instead
 func (iconView *IconViewInstance) SetTextColumn(column int) {
 	var carg0 *C.GtkIconView // in, none, converted
-	var carg1 C.int          // in, none, casted
+	var carg1 C.int          // in, none, casted, casted C.gint
 
 	carg0 = (*C.GtkIconView)(UnsafeIconViewToGlibNone(iconView))
 	carg1 = C.int(column)
@@ -115578,7 +115578,7 @@ func (iconView *IconViewInstance) SetTooltipCell(tooltip Tooltip, path *TreePath
 // Deprecated: (since 4.10.0) Use [class@Gtk.GridView] instead
 func (iconView *IconViewInstance) SetTooltipColumn(column int) {
 	var carg0 *C.GtkIconView // in, none, converted
-	var carg1 C.int          // in, none, casted
+	var carg1 C.int          // in, none, casted, casted C.gint
 
 	carg0 = (*C.GtkIconView)(UnsafeIconViewToGlibNone(iconView))
 	carg1 = C.int(column)
@@ -115981,10 +115981,10 @@ func NewImageInstance() Widget {
 // of the returned image is not defined, it will be whatever
 // is appropriate for displaying the file.
 func NewImageInstanceFromFile(filename string) Widget {
-	var carg1 *C.gchar     // in, none, string
+	var carg1 *C.char      // in, none, string, casted *C.gchar
 	var cret  *C.GtkWidget // return, none, converted
 
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(filename)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(filename)))
 	defer C.free(unsafe.Pointer(carg1))
 
 	cret = C.gtk_image_new_from_file(carg1)
@@ -116044,11 +116044,11 @@ func NewImageInstanceFromGIcon(icon gio.Icon) Widget {
 // displayed instead. If the current icon theme is changed, the icon
 // will be updated appropriately.
 func NewImageInstanceFromIconName(iconName string) Widget {
-	var carg1 *C.gchar     // in, none, string, nullable-string
+	var carg1 *C.char      // in, none, string, nullable-string
 	var cret  *C.GtkWidget // return, none, converted
 
 	if iconName != "" {
-		carg1 = (*C.gchar)(unsafe.Pointer(C.CString(iconName)))
+		carg1 = (*C.char)(unsafe.Pointer(C.CString(iconName)))
 		defer C.free(unsafe.Pointer(carg1))
 	}
 
@@ -116165,10 +116165,10 @@ func NewImageInstanceFromPixbuf(pixbuf gdkpixbuf.Pixbuf) Widget {
 // the returned image is not defined, it will be whatever is
 // appropriate for displaying the file.
 func NewImageInstanceFromResource(resourcePath string) Widget {
-	var carg1 *C.gchar     // in, none, string
+	var carg1 *C.char      // in, none, string, casted *C.gchar
 	var cret  *C.GtkWidget // return, none, converted
 
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(resourcePath)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(resourcePath)))
 	defer C.free(unsafe.Pointer(carg1))
 
 	cret = C.gtk_image_new_from_resource(carg1)
@@ -116233,7 +116233,7 @@ func (image *ImageInstance) GetGIcon() gio.Icon {
 // be freed.
 func (image *ImageInstance) GetIconName() string {
 	var carg0 *C.GtkImage // in, none, converted
-	var cret  *C.gchar    // return, none, string
+	var cret  *C.char     // return, none, string, casted *C.gchar
 
 	carg0 = (*C.GtkImage)(UnsafeImageToGlibNone(image))
 
@@ -116242,7 +116242,7 @@ func (image *ImageInstance) GetIconName() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -116304,7 +116304,7 @@ func (image *ImageInstance) GetPaintable() gdk.Paintable {
 // Gets the pixel size used for named icons.
 func (image *ImageInstance) GetPixelSize() int {
 	var carg0 *C.GtkImage // in, none, converted
-	var cret  C.int       // return, none, casted
+	var cret  C.int       // return, none, casted, casted C.gint
 
 	carg0 = (*C.GtkImage)(UnsafeImageToGlibNone(image))
 
@@ -116355,11 +116355,11 @@ func (image *ImageInstance) GetStorageType() ImageType {
 // See [ctor@Gtk.Image.new_from_file] for details.
 func (image *ImageInstance) SetFromFile(filename string) {
 	var carg0 *C.GtkImage // in, none, converted
-	var carg1 *C.gchar    // in, none, string, nullable-string
+	var carg1 *C.char     // in, none, string, nullable-string
 
 	carg0 = (*C.GtkImage)(UnsafeImageToGlibNone(image))
 	if filename != "" {
-		carg1 = (*C.gchar)(unsafe.Pointer(C.CString(filename)))
+		carg1 = (*C.char)(unsafe.Pointer(C.CString(filename)))
 		defer C.free(unsafe.Pointer(carg1))
 	}
 
@@ -116400,11 +116400,11 @@ func (image *ImageInstance) SetFromGIcon(icon gio.Icon) {
 // See [ctor@Gtk.Image.new_from_icon_name] for details.
 func (image *ImageInstance) SetFromIconName(iconName string) {
 	var carg0 *C.GtkImage // in, none, converted
-	var carg1 *C.gchar    // in, none, string, nullable-string
+	var carg1 *C.char     // in, none, string, nullable-string
 
 	carg0 = (*C.GtkImage)(UnsafeImageToGlibNone(image))
 	if iconName != "" {
-		carg1 = (*C.gchar)(unsafe.Pointer(C.CString(iconName)))
+		carg1 = (*C.char)(unsafe.Pointer(C.CString(iconName)))
 		defer C.free(unsafe.Pointer(carg1))
 	}
 
@@ -116476,11 +116476,11 @@ func (image *ImageInstance) SetFromPixbuf(pixbuf gdkpixbuf.Pixbuf) {
 // See [ctor@Gtk.Image.new_from_resource] for details.
 func (image *ImageInstance) SetFromResource(resourcePath string) {
 	var carg0 *C.GtkImage // in, none, converted
-	var carg1 *C.gchar    // in, none, string, nullable-string
+	var carg1 *C.char     // in, none, string, nullable-string
 
 	carg0 = (*C.GtkImage)(UnsafeImageToGlibNone(image))
 	if resourcePath != "" {
-		carg1 = (*C.gchar)(unsafe.Pointer(C.CString(resourcePath)))
+		carg1 = (*C.char)(unsafe.Pointer(C.CString(resourcePath)))
 		defer C.free(unsafe.Pointer(carg1))
 	}
 
@@ -116520,7 +116520,7 @@ func (image *ImageInstance) SetIconSize(iconSize IconSize) {
 // of the icon size set by [method@Gtk.Image.set_from_icon_name].
 func (image *ImageInstance) SetPixelSize(pixelSize int) {
 	var carg0 *C.GtkImage // in, none, converted
-	var carg1 C.int       // in, none, casted
+	var carg1 C.int       // in, none, casted, casted C.gint
 
 	carg0 = (*C.GtkImage)(UnsafeImageToGlibNone(image))
 	carg1 = C.int(pixelSize)
@@ -116894,7 +116894,7 @@ func NewInfoBarInstance() Widget {
 func (infoBar *InfoBarInstance) AddActionWidget(child Widget, responseId int) {
 	var carg0 *C.GtkInfoBar // in, none, converted
 	var carg1 *C.GtkWidget  // in, none, converted
-	var carg2 C.int         // in, none, casted
+	var carg2 C.int         // in, none, casted, casted C.gint
 
 	carg0 = (*C.GtkInfoBar)(UnsafeInfoBarToGlibNone(infoBar))
 	carg1 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(child))
@@ -116927,12 +116927,12 @@ func (infoBar *InfoBarInstance) AddActionWidget(child Widget, responseId int) {
 // Deprecated: (since 4.10.0) 
 func (infoBar *InfoBarInstance) AddButton(buttonText string, responseId int) Button {
 	var carg0 *C.GtkInfoBar // in, none, converted
-	var carg1 *C.gchar      // in, none, string
-	var carg2 C.int         // in, none, casted
+	var carg1 *C.char       // in, none, string, casted *C.gchar
+	var carg2 C.int         // in, none, casted, casted C.gint
 	var cret  *C.GtkWidget  // return, none, converted, casted *C.GtkButton
 
 	carg0 = (*C.GtkInfoBar)(UnsafeInfoBarToGlibNone(infoBar))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(buttonText)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(buttonText)))
 	defer C.free(unsafe.Pointer(carg1))
 	carg2 = C.int(responseId)
 
@@ -117101,7 +117101,7 @@ func (infoBar *InfoBarInstance) RemoveChild(widget Widget) {
 // Deprecated: (since 4.10.0) 
 func (infoBar *InfoBarInstance) Response(responseId int) {
 	var carg0 *C.GtkInfoBar // in, none, converted
-	var carg1 C.int         // in, none, casted
+	var carg1 C.int         // in, none, casted, casted C.gint
 
 	carg0 = (*C.GtkInfoBar)(UnsafeInfoBarToGlibNone(infoBar))
 	carg1 = C.int(responseId)
@@ -117128,7 +117128,7 @@ func (infoBar *InfoBarInstance) Response(responseId int) {
 // Deprecated: (since 4.10.0) 
 func (infoBar *InfoBarInstance) SetDefaultResponse(responseId int) {
 	var carg0 *C.GtkInfoBar // in, none, converted
-	var carg1 C.int         // in, none, casted
+	var carg1 C.int         // in, none, casted, casted C.gint
 
 	carg0 = (*C.GtkInfoBar)(UnsafeInfoBarToGlibNone(infoBar))
 	carg1 = C.int(responseId)
@@ -117177,7 +117177,7 @@ func (infoBar *InfoBarInstance) SetMessageType(messageType MessageType) {
 // Deprecated: (since 4.10.0) 
 func (infoBar *InfoBarInstance) SetResponseSensitive(responseId int, setting bool) {
 	var carg0 *C.GtkInfoBar // in, none, converted
-	var carg1 C.int         // in, none, casted
+	var carg1 C.int         // in, none, casted, casted C.gint
 	var carg2 C.gboolean    // in
 
 	carg0 = (*C.GtkInfoBar)(UnsafeInfoBarToGlibNone(infoBar))
@@ -117538,11 +117538,11 @@ func UnsafeInscriptionToGlibFull(c Inscription) unsafe.Pointer {
 //
 // Creates a new `GtkInscription` with the given text.
 func NewInscriptionInstance(text string) Widget {
-	var carg1 *C.gchar     // in, none, string, nullable-string
+	var carg1 *C.char      // in, none, string, nullable-string
 	var cret  *C.GtkWidget // return, none, converted
 
 	if text != "" {
-		carg1 = (*C.gchar)(unsafe.Pointer(C.CString(text)))
+		carg1 = (*C.char)(unsafe.Pointer(C.CString(text)))
 		defer C.free(unsafe.Pointer(carg1))
 	}
 
@@ -117682,7 +117682,7 @@ func (self *InscriptionInstance) GetNatLines() uint {
 // Gets the text that is displayed.
 func (self *InscriptionInstance) GetText() string {
 	var carg0 *C.GtkInscription // in, none, converted
-	var cret  *C.gchar          // return, none, string
+	var cret  *C.char           // return, none, string, casted *C.gchar
 
 	carg0 = (*C.GtkInscription)(UnsafeInscriptionToGlibNone(self))
 
@@ -117691,7 +117691,7 @@ func (self *InscriptionInstance) GetText() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -117752,7 +117752,7 @@ func (self *InscriptionInstance) GetWrapMode() pango.WrapMode {
 // See the [property@Gtk.Inscription:xalign] property.
 func (self *InscriptionInstance) GetXAlign() float32 {
 	var carg0 *C.GtkInscription // in, none, converted
-	var cret  C.gfloat          // return, none, casted
+	var cret  C.float           // return, none, casted, casted C.gfloat
 
 	carg0 = (*C.GtkInscription)(UnsafeInscriptionToGlibNone(self))
 
@@ -117776,7 +117776,7 @@ func (self *InscriptionInstance) GetXAlign() float32 {
 // See the [property@Gtk.Inscription:yalign] property.
 func (self *InscriptionInstance) GetYAlign() float32 {
 	var carg0 *C.GtkInscription // in, none, converted
-	var cret  C.gfloat          // return, none, casted
+	var cret  C.float           // return, none, casted, casted C.gfloat
 
 	carg0 = (*C.GtkInscription)(UnsafeInscriptionToGlibNone(self))
 
@@ -117824,11 +117824,11 @@ func (self *InscriptionInstance) SetAttributes(attrs *pango.AttrList) {
 // See the [property@Gtk.Inscription:markup] property.
 func (self *InscriptionInstance) SetMarkup(markup string) {
 	var carg0 *C.GtkInscription // in, none, converted
-	var carg1 *C.gchar          // in, none, string, nullable-string
+	var carg1 *C.char           // in, none, string, nullable-string
 
 	carg0 = (*C.GtkInscription)(UnsafeInscriptionToGlibNone(self))
 	if markup != "" {
-		carg1 = (*C.gchar)(unsafe.Pointer(C.CString(markup)))
+		carg1 = (*C.char)(unsafe.Pointer(C.CString(markup)))
 		defer C.free(unsafe.Pointer(carg1))
 	}
 
@@ -117930,11 +117930,11 @@ func (self *InscriptionInstance) SetNatLines(natLines uint) {
 // Sets the text to be displayed.
 func (self *InscriptionInstance) SetText(text string) {
 	var carg0 *C.GtkInscription // in, none, converted
-	var carg1 *C.gchar          // in, none, string, nullable-string
+	var carg1 *C.char           // in, none, string, nullable-string
 
 	carg0 = (*C.GtkInscription)(UnsafeInscriptionToGlibNone(self))
 	if text != "" {
-		carg1 = (*C.gchar)(unsafe.Pointer(C.CString(text)))
+		carg1 = (*C.char)(unsafe.Pointer(C.CString(text)))
 		defer C.free(unsafe.Pointer(carg1))
 	}
 
@@ -117992,10 +117992,10 @@ func (self *InscriptionInstance) SetWrapMode(wrapMode pango.WrapMode) {
 // See the [property@Gtk.Inscription:xalign] property.
 func (self *InscriptionInstance) SetXAlign(xalign float32) {
 	var carg0 *C.GtkInscription // in, none, converted
-	var carg1 C.gfloat          // in, none, casted
+	var carg1 C.float           // in, none, casted, casted C.gfloat
 
 	carg0 = (*C.GtkInscription)(UnsafeInscriptionToGlibNone(self))
-	carg1 = C.gfloat(xalign)
+	carg1 = C.float(xalign)
 
 	C.gtk_inscription_set_xalign(carg0, carg1)
 	runtime.KeepAlive(self)
@@ -118013,10 +118013,10 @@ func (self *InscriptionInstance) SetXAlign(xalign float32) {
 // See the [property@Gtk.Inscription:yalign] property.
 func (self *InscriptionInstance) SetYAlign(yalign float32) {
 	var carg0 *C.GtkInscription // in, none, converted
-	var carg1 C.gfloat          // in, none, casted
+	var carg1 C.float           // in, none, casted, casted C.gfloat
 
 	carg0 = (*C.GtkInscription)(UnsafeInscriptionToGlibNone(self))
-	carg1 = C.gfloat(yalign)
+	carg1 = C.float(yalign)
 
 	C.gtk_inscription_set_yalign(carg0, carg1)
 	runtime.KeepAlive(self)
@@ -119040,11 +119040,11 @@ func UnsafeLabelToGlibFull(c Label) unsafe.Pointer {
 // 
 // You can pass %NULL to get an empty label widget.
 func NewLabelInstance(str string) Widget {
-	var carg1 *C.gchar     // in, none, string, nullable-string
+	var carg1 *C.char      // in, none, string, nullable-string
 	var cret  *C.GtkWidget // return, none, converted
 
 	if str != "" {
-		carg1 = (*C.gchar)(unsafe.Pointer(C.CString(str)))
+		carg1 = (*C.char)(unsafe.Pointer(C.CString(str)))
 		defer C.free(unsafe.Pointer(carg1))
 	}
 
@@ -119084,11 +119084,11 @@ func NewLabelInstance(str string) Widget {
 // the button or menu item will automatically become the mnemonic widget
 // and be activated by the mnemonic.
 func NewLabelInstanceWithMnemonic(str string) Widget {
-	var carg1 *C.gchar     // in, none, string, nullable-string
+	var carg1 *C.char      // in, none, string, nullable-string
 	var cret  *C.GtkWidget // return, none, converted
 
 	if str != "" {
-		carg1 = (*C.gchar)(unsafe.Pointer(C.CString(str)))
+		carg1 = (*C.char)(unsafe.Pointer(C.CString(str)))
 		defer C.free(unsafe.Pointer(carg1))
 	}
 
@@ -119146,7 +119146,7 @@ func (self *LabelInstance) GetAttributes() *pango.AttrList {
 // handler or for use in a [signal@Gtk.Widget::query-tooltip] handler.
 func (self *LabelInstance) GetCurrentURI() string {
 	var carg0 *C.GtkLabel // in, none, converted
-	var cret  *C.gchar    // return, none, string
+	var cret  *C.char     // return, none, string, casted *C.gchar
 
 	carg0 = (*C.GtkLabel)(UnsafeLabelToGlibNone(self))
 
@@ -119155,7 +119155,7 @@ func (self *LabelInstance) GetCurrentURI() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -119243,7 +119243,7 @@ func (self *LabelInstance) GetJustify() Justification {
 // mnemonics and Pango markup. (See [method@Gtk.Label.get_text]).
 func (self *LabelInstance) GetLabel() string {
 	var carg0 *C.GtkLabel // in, none, converted
-	var cret  *C.gchar    // return, none, string
+	var cret  *C.char     // return, none, string, casted *C.gchar
 
 	carg0 = (*C.GtkLabel)(UnsafeLabelToGlibNone(self))
 
@@ -119252,7 +119252,7 @@ func (self *LabelInstance) GetLabel() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -119300,8 +119300,8 @@ func (self *LabelInstance) GetLayout() pango.Layout {
 // or [const@Pango.SCALE].
 func (self *LabelInstance) GetLayoutOffsets() (int, int) {
 	var carg0 *C.GtkLabel // in, none, converted
-	var carg1 C.int       // out, full, casted
-	var carg2 C.int       // out, full, casted
+	var carg1 C.int       // out, full, casted, casted C.gint
+	var carg2 C.int       // out, full, casted, casted C.gint
 
 	carg0 = (*C.GtkLabel)(UnsafeLabelToGlibNone(self))
 
@@ -119328,7 +119328,7 @@ func (self *LabelInstance) GetLayoutOffsets() (int, int) {
 // See [method@Gtk.Label.set_lines].
 func (self *LabelInstance) GetLines() int {
 	var carg0 *C.GtkLabel // in, none, converted
-	var cret  C.int       // return, none, casted
+	var cret  C.int       // return, none, casted, casted C.gint
 
 	carg0 = (*C.GtkLabel)(UnsafeLabelToGlibNone(self))
 
@@ -119352,7 +119352,7 @@ func (self *LabelInstance) GetLines() int {
 // See [method@Gtk.Label.set_width_chars].
 func (self *LabelInstance) GetMaxWidthChars() int {
 	var carg0 *C.GtkLabel // in, none, converted
-	var cret  C.int       // return, none, casted
+	var cret  C.int       // return, none, casted, casted C.gint
 
 	carg0 = (*C.GtkLabel)(UnsafeLabelToGlibNone(self))
 
@@ -119475,8 +119475,8 @@ func (self *LabelInstance) GetSelectable() bool {
 // Gets the selected range of characters in the label.
 func (self *LabelInstance) GetSelectionBounds() (int, int, bool) {
 	var carg0 *C.GtkLabel // in, none, converted
-	var carg1 C.int       // out, full, casted
-	var carg2 C.int       // out, full, casted
+	var carg1 C.int       // out, full, casted, casted C.gint
+	var carg2 C.int       // out, full, casted, casted C.gint
 	var cret  C.gboolean  // return
 
 	carg0 = (*C.GtkLabel)(UnsafeLabelToGlibNone(self))
@@ -119558,7 +119558,7 @@ func (self *LabelInstance) GetTabs() *pango.TabArray {
 // [method@Gtk.Label.get_label])
 func (self *LabelInstance) GetText() string {
 	var carg0 *C.GtkLabel // in, none, converted
-	var cret  *C.gchar    // return, none, string
+	var cret  *C.char     // return, none, string, casted *C.gchar
 
 	carg0 = (*C.GtkLabel)(UnsafeLabelToGlibNone(self))
 
@@ -119567,7 +119567,7 @@ func (self *LabelInstance) GetText() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -119634,7 +119634,7 @@ func (self *LabelInstance) GetUseUnderline() bool {
 // See [method@Gtk.Label.set_width_chars].
 func (self *LabelInstance) GetWidthChars() int {
 	var carg0 *C.GtkLabel // in, none, converted
-	var cret  C.int       // return, none, casted
+	var cret  C.int       // return, none, casted, casted C.gint
 
 	carg0 = (*C.GtkLabel)(UnsafeLabelToGlibNone(self))
 
@@ -119708,7 +119708,7 @@ func (self *LabelInstance) GetWrapMode() pango.WrapMode {
 // See the [property@Gtk.Label:xalign] property.
 func (self *LabelInstance) GetXAlign() float32 {
 	var carg0 *C.GtkLabel // in, none, converted
-	var cret  C.gfloat    // return, none, casted
+	var cret  C.float     // return, none, casted, casted C.gfloat
 
 	carg0 = (*C.GtkLabel)(UnsafeLabelToGlibNone(self))
 
@@ -119732,7 +119732,7 @@ func (self *LabelInstance) GetXAlign() float32 {
 // See the [property@Gtk.Label:yalign] property.
 func (self *LabelInstance) GetYAlign() float32 {
 	var carg0 *C.GtkLabel // in, none, converted
-	var cret  C.gfloat    // return, none, casted
+	var cret  C.float     // return, none, casted, casted C.gfloat
 
 	carg0 = (*C.GtkLabel)(UnsafeLabelToGlibNone(self))
 
@@ -119760,8 +119760,8 @@ func (self *LabelInstance) GetYAlign() float32 {
 // @end_offset are -1, then the end of the label will be substituted.
 func (self *LabelInstance) SelectRegion(startOffset int, endOffset int) {
 	var carg0 *C.GtkLabel // in, none, converted
-	var carg1 C.int       // in, none, casted
-	var carg2 C.int       // in, none, casted
+	var carg1 C.int       // in, none, casted, casted C.gint
+	var carg2 C.int       // in, none, casted, casted C.gint
 
 	carg0 = (*C.GtkLabel)(UnsafeLabelToGlibNone(self))
 	carg1 = C.int(startOffset)
@@ -119884,10 +119884,10 @@ func (self *LabelInstance) SetJustify(jtype Justification) {
 // and [property@Gtk.Label:use-markup] properties.
 func (self *LabelInstance) SetLabel(str string) {
 	var carg0 *C.GtkLabel // in, none, converted
-	var carg1 *C.gchar    // in, none, string
+	var carg1 *C.char     // in, none, string, casted *C.gchar
 
 	carg0 = (*C.GtkLabel)(UnsafeLabelToGlibNone(self))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(str)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(str)))
 	defer C.free(unsafe.Pointer(carg1))
 
 	C.gtk_label_set_label(carg0, carg1)
@@ -119908,7 +119908,7 @@ func (self *LabelInstance) SetLabel(str string) {
 // Set this to -1 if you don’t want to limit the number of lines.
 func (self *LabelInstance) SetLines(lines int) {
 	var carg0 *C.GtkLabel // in, none, converted
-	var carg1 C.int       // in, none, casted
+	var carg1 C.int       // in, none, casted, casted C.gint
 
 	carg0 = (*C.GtkLabel)(UnsafeLabelToGlibNone(self))
 	carg1 = C.int(lines)
@@ -119953,10 +119953,10 @@ func (self *LabelInstance) SetLines(lines int) {
 // See also: [method@Gtk.Label.set_text]
 func (self *LabelInstance) SetMarkup(str string) {
 	var carg0 *C.GtkLabel // in, none, converted
-	var carg1 *C.gchar    // in, none, string
+	var carg1 *C.char     // in, none, string, casted *C.gchar
 
 	carg0 = (*C.GtkLabel)(UnsafeLabelToGlibNone(self))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(str)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(str)))
 	defer C.free(unsafe.Pointer(carg1))
 
 	C.gtk_label_set_markup(carg0, carg1)
@@ -119981,10 +119981,10 @@ func (self *LabelInstance) SetMarkup(str string) {
 // automatically, or explicitly using [method@Gtk.Label.set_mnemonic_widget].
 func (self *LabelInstance) SetMarkupWithMnemonic(str string) {
 	var carg0 *C.GtkLabel // in, none, converted
-	var carg1 *C.gchar    // in, none, string
+	var carg1 *C.char     // in, none, string, casted *C.gchar
 
 	carg0 = (*C.GtkLabel)(UnsafeLabelToGlibNone(self))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(str)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(str)))
 	defer C.free(unsafe.Pointer(carg1))
 
 	C.gtk_label_set_markup_with_mnemonic(carg0, carg1)
@@ -120001,7 +120001,7 @@ func (self *LabelInstance) SetMarkupWithMnemonic(str string) {
 // Sets the desired maximum width in characters of @label to @n_chars.
 func (self *LabelInstance) SetMaxWidthChars(nChars int) {
 	var carg0 *C.GtkLabel // in, none, converted
-	var carg1 C.int       // in, none, casted
+	var carg1 C.int       // in, none, casted, casted C.gint
 
 	carg0 = (*C.GtkLabel)(UnsafeLabelToGlibNone(self))
 	carg1 = C.int(nChars)
@@ -120156,10 +120156,10 @@ func (self *LabelInstance) SetTabs(tabs *pango.TabArray) {
 // See also: [method@Gtk.Label.set_markup]
 func (self *LabelInstance) SetText(str string) {
 	var carg0 *C.GtkLabel // in, none, converted
-	var carg1 *C.gchar    // in, none, string
+	var carg1 *C.char     // in, none, string, casted *C.gchar
 
 	carg0 = (*C.GtkLabel)(UnsafeLabelToGlibNone(self))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(str)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(str)))
 	defer C.free(unsafe.Pointer(carg1))
 
 	C.gtk_label_set_text(carg0, carg1)
@@ -120181,10 +120181,10 @@ func (self *LabelInstance) SetText(str string) {
 // automatically, or explicitly using [method@Gtk.Label.set_mnemonic_widget].
 func (self *LabelInstance) SetTextWithMnemonic(str string) {
 	var carg0 *C.GtkLabel // in, none, converted
-	var carg1 *C.gchar    // in, none, string
+	var carg1 *C.char     // in, none, string, casted *C.gchar
 
 	carg0 = (*C.GtkLabel)(UnsafeLabelToGlibNone(self))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(str)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(str)))
 	defer C.free(unsafe.Pointer(carg1))
 
 	C.gtk_label_set_text_with_mnemonic(carg0, carg1)
@@ -120245,7 +120245,7 @@ func (self *LabelInstance) SetUseUnderline(setting bool) {
 // Sets the desired width in characters of @label to @n_chars.
 func (self *LabelInstance) SetWidthChars(nChars int) {
 	var carg0 *C.GtkLabel // in, none, converted
-	var carg1 C.int       // in, none, casted
+	var carg1 C.int       // in, none, casted, casted C.gint
 
 	carg0 = (*C.GtkLabel)(UnsafeLabelToGlibNone(self))
 	carg1 = C.int(nChars)
@@ -120323,10 +120323,10 @@ func (self *LabelInstance) SetWrapMode(wrapMode pango.WrapMode) {
 // See the [property@Gtk.Label:xalign] property.
 func (self *LabelInstance) SetXAlign(xalign float32) {
 	var carg0 *C.GtkLabel // in, none, converted
-	var carg1 C.gfloat    // in, none, casted
+	var carg1 C.float     // in, none, casted, casted C.gfloat
 
 	carg0 = (*C.GtkLabel)(UnsafeLabelToGlibNone(self))
-	carg1 = C.gfloat(xalign)
+	carg1 = C.float(xalign)
 
 	C.gtk_label_set_xalign(carg0, carg1)
 	runtime.KeepAlive(self)
@@ -120344,10 +120344,10 @@ func (self *LabelInstance) SetXAlign(xalign float32) {
 // See the [property@Gtk.Label:yalign] property.
 func (self *LabelInstance) SetYAlign(yalign float32) {
 	var carg0 *C.GtkLabel // in, none, converted
-	var carg1 C.gfloat    // in, none, casted
+	var carg1 C.float     // in, none, casted, casted C.gfloat
 
 	carg0 = (*C.GtkLabel)(UnsafeLabelToGlibNone(self))
-	carg1 = C.gfloat(yalign)
+	carg1 = C.float(yalign)
 
 	C.gtk_label_set_yalign(carg0, carg1)
 	runtime.KeepAlive(self)
@@ -120685,12 +120685,12 @@ func NewLevelBarInstance() Widget {
 //
 // Creates a new `GtkLevelBar` for the specified interval.
 func NewLevelBarInstanceForInterval(minValue float64, maxValue float64) Widget {
-	var carg1 C.gdouble    // in, none, casted
-	var carg2 C.gdouble    // in, none, casted
+	var carg1 C.double     // in, none, casted, casted C.gdouble
+	var carg2 C.double     // in, none, casted, casted C.gdouble
 	var cret  *C.GtkWidget // return, none, converted
 
-	carg1 = C.gdouble(minValue)
-	carg2 = C.gdouble(maxValue)
+	carg1 = C.double(minValue)
+	carg2 = C.double(maxValue)
 
 	cret = C.gtk_level_bar_new_for_interval(carg1, carg2)
 	runtime.KeepAlive(minValue)
@@ -120721,13 +120721,13 @@ func NewLevelBarInstanceForInterval(minValue float64, maxValue float64) Widget {
 // replaced by @value.
 func (self *LevelBarInstance) AddOffsetValue(name string, value float64) {
 	var carg0 *C.GtkLevelBar // in, none, converted
-	var carg1 *C.gchar       // in, none, string
-	var carg2 C.gdouble      // in, none, casted
+	var carg1 *C.char        // in, none, string, casted *C.gchar
+	var carg2 C.double       // in, none, casted, casted C.gdouble
 
 	carg0 = (*C.GtkLevelBar)(UnsafeLevelBarToGlibNone(self))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(name)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(name)))
 	defer C.free(unsafe.Pointer(carg1))
-	carg2 = C.gdouble(value)
+	carg2 = C.double(value)
 
 	C.gtk_level_bar_add_offset_value(carg0, carg1, carg2)
 	runtime.KeepAlive(self)
@@ -120767,7 +120767,7 @@ func (self *LevelBarInstance) GetInverted() bool {
 // Returns the `max-value` of the `GtkLevelBar`.
 func (self *LevelBarInstance) GetMaxValue() float64 {
 	var carg0 *C.GtkLevelBar // in, none, converted
-	var cret  C.gdouble      // return, none, casted
+	var cret  C.double       // return, none, casted, casted C.gdouble
 
 	carg0 = (*C.GtkLevelBar)(UnsafeLevelBarToGlibNone(self))
 
@@ -120789,7 +120789,7 @@ func (self *LevelBarInstance) GetMaxValue() float64 {
 // Returns the `min-value` of the `GtkLevelBar`.
 func (self *LevelBarInstance) GetMinValue() float64 {
 	var carg0 *C.GtkLevelBar // in, none, converted
-	var cret  C.gdouble      // return, none, casted
+	var cret  C.double       // return, none, casted, casted C.gdouble
 
 	carg0 = (*C.GtkLevelBar)(UnsafeLevelBarToGlibNone(self))
 
@@ -120839,13 +120839,13 @@ func (self *LevelBarInstance) GetMode() LevelBarMode {
 // Fetches the value specified for the offset marker @name in @self.
 func (self *LevelBarInstance) GetOffsetValue(name string) (float64, bool) {
 	var carg0 *C.GtkLevelBar // in, none, converted
-	var carg1 *C.gchar       // in, none, string, nullable-string
-	var carg2 C.gdouble      // out, full, casted
+	var carg1 *C.char        // in, none, string, nullable-string
+	var carg2 C.double       // out, full, casted, casted C.gdouble
 	var cret  C.gboolean     // return
 
 	carg0 = (*C.GtkLevelBar)(UnsafeLevelBarToGlibNone(self))
 	if name != "" {
-		carg1 = (*C.gchar)(unsafe.Pointer(C.CString(name)))
+		carg1 = (*C.char)(unsafe.Pointer(C.CString(name)))
 		defer C.free(unsafe.Pointer(carg1))
 	}
 
@@ -120872,7 +120872,7 @@ func (self *LevelBarInstance) GetOffsetValue(name string) (float64, bool) {
 // Returns the `value` of the `GtkLevelBar`.
 func (self *LevelBarInstance) GetValue() float64 {
 	var carg0 *C.GtkLevelBar // in, none, converted
-	var cret  C.gdouble      // return, none, casted
+	var cret  C.double       // return, none, casted, casted C.gdouble
 
 	carg0 = (*C.GtkLevelBar)(UnsafeLevelBarToGlibNone(self))
 
@@ -120898,11 +120898,11 @@ func (self *LevelBarInstance) GetValue() float64 {
 // [method@Gtk.LevelBar.add_offset_value].
 func (self *LevelBarInstance) RemoveOffsetValue(name string) {
 	var carg0 *C.GtkLevelBar // in, none, converted
-	var carg1 *C.gchar       // in, none, string, nullable-string
+	var carg1 *C.char        // in, none, string, nullable-string
 
 	carg0 = (*C.GtkLevelBar)(UnsafeLevelBarToGlibNone(self))
 	if name != "" {
-		carg1 = (*C.gchar)(unsafe.Pointer(C.CString(name)))
+		carg1 = (*C.char)(unsafe.Pointer(C.CString(name)))
 		defer C.free(unsafe.Pointer(carg1))
 	}
 
@@ -120944,10 +120944,10 @@ func (self *LevelBarInstance) SetInverted(inverted bool) {
 // this function.
 func (self *LevelBarInstance) SetMaxValue(value float64) {
 	var carg0 *C.GtkLevelBar // in, none, converted
-	var carg1 C.gdouble      // in, none, casted
+	var carg1 C.double       // in, none, casted, casted C.gdouble
 
 	carg0 = (*C.GtkLevelBar)(UnsafeLevelBarToGlibNone(self))
-	carg1 = C.gdouble(value)
+	carg1 = C.double(value)
 
 	C.gtk_level_bar_set_max_value(carg0, carg1)
 	runtime.KeepAlive(self)
@@ -120966,10 +120966,10 @@ func (self *LevelBarInstance) SetMaxValue(value float64) {
 // this function.
 func (self *LevelBarInstance) SetMinValue(value float64) {
 	var carg0 *C.GtkLevelBar // in, none, converted
-	var carg1 C.gdouble      // in, none, casted
+	var carg1 C.double       // in, none, casted, casted C.gdouble
 
 	carg0 = (*C.GtkLevelBar)(UnsafeLevelBarToGlibNone(self))
-	carg1 = C.gdouble(value)
+	carg1 = C.double(value)
 
 	C.gtk_level_bar_set_min_value(carg0, carg1)
 	runtime.KeepAlive(self)
@@ -121005,10 +121005,10 @@ func (self *LevelBarInstance) SetMode(mode LevelBarMode) {
 // Sets the value of the `GtkLevelBar`.
 func (self *LevelBarInstance) SetValue(value float64) {
 	var carg0 *C.GtkLevelBar // in, none, converted
-	var carg1 C.gdouble      // in, none, casted
+	var carg1 C.double       // in, none, casted, casted C.gdouble
 
 	carg0 = (*C.GtkLevelBar)(UnsafeLevelBarToGlibNone(self))
-	carg1 = C.gdouble(value)
+	carg1 = C.double(value)
 
 	C.gtk_level_bar_set_value(carg0, carg1)
 	runtime.KeepAlive(self)
@@ -121173,10 +121173,10 @@ func UnsafeLinkButtonToGlibFull(c LinkButton) unsafe.Pointer {
 //
 // Creates a new `GtkLinkButton` with the URI as its text.
 func NewLinkButtonInstance(uri string) Widget {
-	var carg1 *C.gchar     // in, none, string
+	var carg1 *C.char      // in, none, string, casted *C.gchar
 	var cret  *C.GtkWidget // return, none, converted
 
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(uri)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(uri)))
 	defer C.free(unsafe.Pointer(carg1))
 
 	cret = C.gtk_link_button_new(carg1)
@@ -121202,14 +121202,14 @@ func NewLinkButtonInstance(uri string) Widget {
 //
 // Creates a new `GtkLinkButton` containing a label.
 func NewLinkButtonInstanceWithLabel(uri string, label string) Widget {
-	var carg1 *C.gchar     // in, none, string
-	var carg2 *C.gchar     // in, none, string, nullable-string
+	var carg1 *C.char      // in, none, string, casted *C.gchar
+	var carg2 *C.char      // in, none, string, nullable-string
 	var cret  *C.GtkWidget // return, none, converted
 
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(uri)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(uri)))
 	defer C.free(unsafe.Pointer(carg1))
 	if label != "" {
-		carg2 = (*C.gchar)(unsafe.Pointer(C.CString(label)))
+		carg2 = (*C.char)(unsafe.Pointer(C.CString(label)))
 		defer C.free(unsafe.Pointer(carg2))
 	}
 
@@ -121232,7 +121232,7 @@ func NewLinkButtonInstanceWithLabel(uri string, label string) Widget {
 // Retrieves the URI of the `GtkLinkButton`.
 func (linkButton *LinkButtonInstance) GetURI() string {
 	var carg0 *C.GtkLinkButton // in, none, converted
-	var cret  *C.gchar         // return, none, string
+	var cret  *C.char          // return, none, string, casted *C.gchar
 
 	carg0 = (*C.GtkLinkButton)(UnsafeLinkButtonToGlibNone(linkButton))
 
@@ -121241,7 +121241,7 @@ func (linkButton *LinkButtonInstance) GetURI() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -121286,10 +121286,10 @@ func (linkButton *LinkButtonInstance) GetVisited() bool {
 // As a side-effect this unsets the “visited” state of the button.
 func (linkButton *LinkButtonInstance) SetURI(uri string) {
 	var carg0 *C.GtkLinkButton // in, none, converted
-	var carg1 *C.gchar         // in, none, string
+	var carg1 *C.char          // in, none, string, casted *C.gchar
 
 	carg0 = (*C.GtkLinkButton)(UnsafeLinkButtonToGlibNone(linkButton))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(uri)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(uri)))
 	defer C.free(unsafe.Pointer(carg1))
 
 	C.gtk_link_button_set_uri(carg0, carg1)
@@ -122113,7 +122113,7 @@ func (box *ListBoxInstance) GetAdjustment() Adjustment {
 // list, %NULL is returned.
 func (box *ListBoxInstance) GetRowAtIndex(index_ int) ListBoxRow {
 	var carg0 *C.GtkListBox    // in, none, converted
-	var carg1 C.int            // in, none, casted
+	var carg1 C.int            // in, none, casted, casted C.gint
 	var cret  *C.GtkListBoxRow // return, none, converted
 
 	carg0 = (*C.GtkListBox)(UnsafeListBoxToGlibNone(box))
@@ -122143,7 +122143,7 @@ func (box *ListBoxInstance) GetRowAtIndex(index_ int) ListBoxRow {
 // Gets the row at the @y position.
 func (box *ListBoxInstance) GetRowAtY(y int) ListBoxRow {
 	var carg0 *C.GtkListBox    // in, none, converted
-	var carg1 C.int            // in, none, casted
+	var carg1 C.int            // in, none, casted, casted C.gint
 	var cret  *C.GtkListBoxRow // return, none, converted
 
 	carg0 = (*C.GtkListBox)(UnsafeListBoxToGlibNone(box))
@@ -122250,7 +122250,7 @@ func (box *ListBoxInstance) GetShowSeparators() bool {
 func (box *ListBoxInstance) Insert(child Widget, position int) {
 	var carg0 *C.GtkListBox // in, none, converted
 	var carg1 *C.GtkWidget  // in, none, converted
-	var carg2 C.int         // in, none, casted
+	var carg2 C.int         // in, none, casted, casted C.gint
 
 	carg0 = (*C.GtkListBox)(UnsafeListBoxToGlibNone(box))
 	carg1 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(child))
@@ -123004,7 +123004,7 @@ func (row *ListBoxRowInstance) GetHeader() Widget {
 // Gets the current index of the @row in its `GtkListBox` container.
 func (row *ListBoxRowInstance) GetIndex() int {
 	var carg0 *C.GtkListBoxRow // in, none, converted
-	var cret  C.int            // return, none, casted
+	var cret  C.int            // return, none, casted, casted C.gint
 
 	carg0 = (*C.GtkListBoxRow)(UnsafeListBoxRowToGlibNone(row))
 
@@ -124411,10 +124411,10 @@ func NewMediaFileInstanceForFile(file gio.File) MediaFile {
 // This is a utility function that converts the given @filename
 // to a `GFile` and calls [ctor@Gtk.MediaFile.new_for_file].
 func NewMediaFileInstanceForFilename(filename string) MediaFile {
-	var carg1 *C.gchar          // in, none, string
+	var carg1 *C.char           // in, none, string, casted *C.gchar
 	var cret  *C.GtkMediaStream // return, full, converted, casted *C.GtkMediaFile
 
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(filename)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(filename)))
 	defer C.free(unsafe.Pointer(carg1))
 
 	cret = C.gtk_media_file_new_for_filename(carg1)
@@ -124472,10 +124472,10 @@ func NewMediaFileInstanceForInputStream(stream gio.InputStream) MediaFile {
 // This is a utility function that converts the given @resource
 // to a `GFile` and calls [ctor@Gtk.MediaFile.new_for_file].
 func NewMediaFileInstanceForResource(resourcePath string) MediaFile {
-	var carg1 *C.gchar          // in, none, string
+	var carg1 *C.char           // in, none, string, casted *C.gchar
 	var cret  *C.GtkMediaStream // return, full, converted, casted *C.GtkMediaFile
 
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(resourcePath)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(resourcePath)))
 	defer C.free(unsafe.Pointer(carg1))
 
 	cret = C.gtk_media_file_new_for_resource(carg1)
@@ -124585,11 +124585,11 @@ func (self *MediaFileInstance) SetFile(file gio.File) {
 // to a `GFile` and calls [method@Gtk.MediaFile.set_file].
 func (self *MediaFileInstance) SetFilename(filename string) {
 	var carg0 *C.GtkMediaFile // in, none, converted
-	var carg1 *C.gchar        // in, none, string, nullable-string
+	var carg1 *C.char         // in, none, string, nullable-string
 
 	carg0 = (*C.GtkMediaFile)(UnsafeMediaFileToGlibNone(self))
 	if filename != "" {
-		carg1 = (*C.gchar)(unsafe.Pointer(C.CString(filename)))
+		carg1 = (*C.char)(unsafe.Pointer(C.CString(filename)))
 		defer C.free(unsafe.Pointer(carg1))
 	}
 
@@ -124636,11 +124636,11 @@ func (self *MediaFileInstance) SetInputStream(stream gio.InputStream) {
 // to a `GFile` and calls [method@Gtk.MediaFile.set_file].
 func (self *MediaFileInstance) SetResource(resourcePath string) {
 	var carg0 *C.GtkMediaFile // in, none, converted
-	var carg1 *C.gchar        // in, none, string, nullable-string
+	var carg1 *C.char         // in, none, string, nullable-string
 
 	carg0 = (*C.GtkMediaFile)(UnsafeMediaFileToGlibNone(self))
 	if resourcePath != "" {
-		carg1 = (*C.gchar)(unsafe.Pointer(C.CString(resourcePath)))
+		carg1 = (*C.char)(unsafe.Pointer(C.CString(resourcePath)))
 		defer C.free(unsafe.Pointer(carg1))
 	}
 
@@ -125221,7 +125221,7 @@ func (menuButton *MenuButtonInstance) GetHasFrame() bool {
 // Gets the name of the icon shown in the button.
 func (menuButton *MenuButtonInstance) GetIconName() string {
 	var carg0 *C.GtkMenuButton // in, none, converted
-	var cret  *C.gchar         // return, none, string
+	var cret  *C.char          // return, none, string, casted *C.gchar
 
 	carg0 = (*C.GtkMenuButton)(UnsafeMenuButtonToGlibNone(menuButton))
 
@@ -125230,7 +125230,7 @@ func (menuButton *MenuButtonInstance) GetIconName() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -125243,7 +125243,7 @@ func (menuButton *MenuButtonInstance) GetIconName() string {
 // Gets the label shown in the button
 func (menuButton *MenuButtonInstance) GetLabel() string {
 	var carg0 *C.GtkMenuButton // in, none, converted
-	var cret  *C.gchar         // return, none, string
+	var cret  *C.char          // return, none, string, casted *C.gchar
 
 	carg0 = (*C.GtkMenuButton)(UnsafeMenuButtonToGlibNone(menuButton))
 
@@ -125252,7 +125252,7 @@ func (menuButton *MenuButtonInstance) GetLabel() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -125578,10 +125578,10 @@ func (menuButton *MenuButtonInstance) SetHasFrame(hasFrame bool) {
 // will be shown next to the icon.
 func (menuButton *MenuButtonInstance) SetIconName(iconName string) {
 	var carg0 *C.GtkMenuButton // in, none, converted
-	var carg1 *C.gchar         // in, none, string
+	var carg1 *C.char          // in, none, string, casted *C.gchar
 
 	carg0 = (*C.GtkMenuButton)(UnsafeMenuButtonToGlibNone(menuButton))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(iconName)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(iconName)))
 	defer C.free(unsafe.Pointer(carg1))
 
 	C.gtk_menu_button_set_icon_name(carg0, carg1)
@@ -125604,10 +125604,10 @@ func (menuButton *MenuButtonInstance) SetIconName(iconName string) {
 // arrow will be shown next to the label.
 func (menuButton *MenuButtonInstance) SetLabel(label string) {
 	var carg0 *C.GtkMenuButton // in, none, converted
-	var carg1 *C.gchar         // in, none, string
+	var carg1 *C.char          // in, none, string, casted *C.gchar
 
 	carg0 = (*C.GtkMenuButton)(UnsafeMenuButtonToGlibNone(menuButton))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(label)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(label)))
 	defer C.free(unsafe.Pointer(carg1))
 
 	C.gtk_menu_button_set_label(carg0, carg1)
@@ -125908,10 +125908,10 @@ func (messageDialog *MessageDialogInstance) GetMessageArea() Widget {
 // Deprecated: (since 4.10.0) Use [class@Gtk.AlertDialog] instead
 func (messageDialog *MessageDialogInstance) SetMarkup(str string) {
 	var carg0 *C.GtkMessageDialog // in, none, converted
-	var carg1 *C.gchar            // in, none, string
+	var carg1 *C.char             // in, none, string, casted *C.gchar
 
 	carg0 = (*C.GtkMessageDialog)(UnsafeMessageDialogToGlibNone(messageDialog))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(str)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(str)))
 	defer C.free(unsafe.Pointer(carg1))
 
 	C.gtk_message_dialog_set_markup(carg0, carg1)
@@ -126343,10 +126343,10 @@ func UnsafeNamedActionToGlibFull(c NamedAction) unsafe.Pointer {
 // See [method@Gtk.Widget.insert_action_group] for
 // how to add actions to widgets.
 func NewNamedActionInstance(name string) NamedAction {
-	var carg1 *C.gchar             // in, none, string
+	var carg1 *C.char              // in, none, string, casted *C.gchar
 	var cret  *C.GtkShortcutAction // return, full, converted, casted *C.GtkNamedAction
 
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(name)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(name)))
 	defer C.free(unsafe.Pointer(carg1))
 
 	cret = C.gtk_named_action_new(carg1)
@@ -126367,7 +126367,7 @@ func NewNamedActionInstance(name string) NamedAction {
 // Returns the name of the action that will be activated.
 func (self *NamedActionInstance) GetActionName() string {
 	var carg0 *C.GtkNamedAction // in, none, converted
-	var cret  *C.gchar          // return, none, string
+	var cret  *C.char           // return, none, string, casted *C.gchar
 
 	carg0 = (*C.GtkNamedAction)(UnsafeNamedActionToGlibNone(self))
 
@@ -126376,7 +126376,7 @@ func (self *NamedActionInstance) GetActionName() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -127215,7 +127215,7 @@ func (notebook *NotebookInstance) AppendPage(child Widget, tabLabel Widget) int 
 	var carg0 *C.GtkNotebook // in, none, converted
 	var carg1 *C.GtkWidget   // in, none, converted
 	var carg2 *C.GtkWidget   // in, none, converted, nullable
-	var cret  C.int          // return, none, casted
+	var cret  C.int          // return, none, casted, casted C.gint
 
 	carg0 = (*C.GtkNotebook)(UnsafeNotebookToGlibNone(notebook))
 	carg1 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(child))
@@ -127260,7 +127260,7 @@ func (notebook *NotebookInstance) AppendPageMenu(child Widget, tabLabel Widget, 
 	var carg1 *C.GtkWidget   // in, none, converted
 	var carg2 *C.GtkWidget   // in, none, converted, nullable
 	var carg3 *C.GtkWidget   // in, none, converted, nullable
-	var cret  C.int          // return, none, casted
+	var cret  C.int          // return, none, casted, casted C.gint
 
 	carg0 = (*C.GtkNotebook)(UnsafeNotebookToGlibNone(notebook))
 	carg1 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(child))
@@ -127348,7 +127348,7 @@ func (notebook *NotebookInstance) GetActionWidget(packType PackType) Widget {
 // Returns the page number of the current page.
 func (notebook *NotebookInstance) GetCurrentPage() int {
 	var carg0 *C.GtkNotebook // in, none, converted
-	var cret  C.int          // return, none, casted
+	var cret  C.int          // return, none, casted, casted C.gint
 
 	carg0 = (*C.GtkNotebook)(UnsafeNotebookToGlibNone(notebook))
 
@@ -127370,7 +127370,7 @@ func (notebook *NotebookInstance) GetCurrentPage() int {
 // Gets the current group name for @notebook.
 func (notebook *NotebookInstance) GetGroupName() string {
 	var carg0 *C.GtkNotebook // in, none, converted
-	var cret  *C.gchar       // return, none, string
+	var cret  *C.char        // return, none, string, casted *C.gchar
 
 	carg0 = (*C.GtkNotebook)(UnsafeNotebookToGlibNone(notebook))
 
@@ -127379,7 +127379,7 @@ func (notebook *NotebookInstance) GetGroupName() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -127429,7 +127429,7 @@ func (notebook *NotebookInstance) GetMenuLabel(child Widget) Widget {
 func (notebook *NotebookInstance) GetMenuLabelText(child Widget) string {
 	var carg0 *C.GtkNotebook // in, none, converted
 	var carg1 *C.GtkWidget   // in, none, converted
-	var cret  *C.gchar       // return, none, string
+	var cret  *C.char        // return, none, string, casted *C.gchar
 
 	carg0 = (*C.GtkNotebook)(UnsafeNotebookToGlibNone(notebook))
 	carg1 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(child))
@@ -127440,7 +127440,7 @@ func (notebook *NotebookInstance) GetMenuLabelText(child Widget) string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -127453,7 +127453,7 @@ func (notebook *NotebookInstance) GetMenuLabelText(child Widget) string {
 // Gets the number of pages in a notebook.
 func (notebook *NotebookInstance) GetNPages() int {
 	var carg0 *C.GtkNotebook // in, none, converted
-	var cret  C.int          // return, none, casted
+	var cret  C.int          // return, none, casted, casted C.gint
 
 	carg0 = (*C.GtkNotebook)(UnsafeNotebookToGlibNone(notebook))
 
@@ -127481,7 +127481,7 @@ func (notebook *NotebookInstance) GetNPages() int {
 // Returns the child widget contained in page number @page_num.
 func (notebook *NotebookInstance) GetNthPage(pageNum int) Widget {
 	var carg0 *C.GtkNotebook // in, none, converted
-	var carg1 C.int          // in, none, casted
+	var carg1 C.int          // in, none, casted, casted C.gint
 	var cret  *C.GtkWidget   // return, none, converted
 
 	carg0 = (*C.GtkNotebook)(UnsafeNotebookToGlibNone(notebook))
@@ -127706,7 +127706,7 @@ func (notebook *NotebookInstance) GetTabLabel(child Widget) Widget {
 func (notebook *NotebookInstance) GetTabLabelText(child Widget) string {
 	var carg0 *C.GtkNotebook // in, none, converted
 	var carg1 *C.GtkWidget   // in, none, converted
-	var cret  *C.gchar       // return, none, string
+	var cret  *C.char        // return, none, string, casted *C.gchar
 
 	carg0 = (*C.GtkNotebook)(UnsafeNotebookToGlibNone(notebook))
 	carg1 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(child))
@@ -127717,7 +127717,7 @@ func (notebook *NotebookInstance) GetTabLabelText(child Widget) string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -127795,8 +127795,8 @@ func (notebook *NotebookInstance) InsertPage(child Widget, tabLabel Widget, posi
 	var carg0 *C.GtkNotebook // in, none, converted
 	var carg1 *C.GtkWidget   // in, none, converted
 	var carg2 *C.GtkWidget   // in, none, converted, nullable
-	var carg3 C.int          // in, none, casted
-	var cret  C.int          // return, none, casted
+	var carg3 C.int          // in, none, casted, casted C.gint
+	var cret  C.int          // return, none, casted, casted C.gint
 
 	carg0 = (*C.GtkNotebook)(UnsafeNotebookToGlibNone(notebook))
 	carg1 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(child))
@@ -127845,8 +127845,8 @@ func (notebook *NotebookInstance) InsertPageMenu(child Widget, tabLabel Widget, 
 	var carg1 *C.GtkWidget   // in, none, converted
 	var carg2 *C.GtkWidget   // in, none, converted, nullable
 	var carg3 *C.GtkWidget   // in, none, converted, nullable
-	var carg4 C.int          // in, none, casted
-	var cret  C.int          // return, none, casted
+	var carg4 C.int          // in, none, casted, casted C.gint
+	var cret  C.int          // return, none, casted, casted C.gint
 
 	carg0 = (*C.GtkNotebook)(UnsafeNotebookToGlibNone(notebook))
 	carg1 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(child))
@@ -127901,7 +127901,7 @@ func (notebook *NotebookInstance) NextPage() {
 func (notebook *NotebookInstance) PageNum(child Widget) int {
 	var carg0 *C.GtkNotebook // in, none, converted
 	var carg1 *C.GtkWidget   // in, none, converted
-	var cret  C.int          // return, none, casted
+	var cret  C.int          // return, none, casted, casted C.gint
 
 	carg0 = (*C.GtkNotebook)(UnsafeNotebookToGlibNone(notebook))
 	carg1 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(child))
@@ -127961,7 +127961,7 @@ func (notebook *NotebookInstance) PrependPage(child Widget, tabLabel Widget) int
 	var carg0 *C.GtkNotebook // in, none, converted
 	var carg1 *C.GtkWidget   // in, none, converted
 	var carg2 *C.GtkWidget   // in, none, converted, nullable
-	var cret  C.int          // return, none, casted
+	var cret  C.int          // return, none, casted, casted C.gint
 
 	carg0 = (*C.GtkNotebook)(UnsafeNotebookToGlibNone(notebook))
 	carg1 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(child))
@@ -128006,7 +128006,7 @@ func (notebook *NotebookInstance) PrependPageMenu(child Widget, tabLabel Widget,
 	var carg1 *C.GtkWidget   // in, none, converted
 	var carg2 *C.GtkWidget   // in, none, converted, nullable
 	var carg3 *C.GtkWidget   // in, none, converted, nullable
-	var cret  C.int          // return, none, casted
+	var cret  C.int          // return, none, casted, casted C.gint
 
 	carg0 = (*C.GtkNotebook)(UnsafeNotebookToGlibNone(notebook))
 	carg1 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(child))
@@ -128055,7 +128055,7 @@ func (notebook *NotebookInstance) PrevPage() {
 // in the notebook.
 func (notebook *NotebookInstance) RemovePage(pageNum int) {
 	var carg0 *C.GtkNotebook // in, none, converted
-	var carg1 C.int          // in, none, casted
+	var carg1 C.int          // in, none, casted, casted C.gint
 
 	carg0 = (*C.GtkNotebook)(UnsafeNotebookToGlibNone(notebook))
 	carg1 = C.int(pageNum)
@@ -128080,7 +128080,7 @@ func (notebook *NotebookInstance) RemovePage(pageNum int) {
 func (notebook *NotebookInstance) ReorderChild(child Widget, position int) {
 	var carg0 *C.GtkNotebook // in, none, converted
 	var carg1 *C.GtkWidget   // in, none, converted
-	var carg2 C.int          // in, none, casted
+	var carg2 C.int          // in, none, casted, casted C.gint
 
 	carg0 = (*C.GtkNotebook)(UnsafeNotebookToGlibNone(notebook))
 	carg1 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(child))
@@ -128136,7 +128136,7 @@ func (notebook *NotebookInstance) SetActionWidget(widget Widget, packType PackTy
 // adding them to a notebook.
 func (notebook *NotebookInstance) SetCurrentPage(pageNum int) {
 	var carg0 *C.GtkNotebook // in, none, converted
-	var carg1 C.int          // in, none, casted
+	var carg1 C.int          // in, none, casted, casted C.gint
 
 	carg0 = (*C.GtkNotebook)(UnsafeNotebookToGlibNone(notebook))
 	carg1 = C.int(pageNum)
@@ -128160,11 +128160,11 @@ func (notebook *NotebookInstance) SetCurrentPage(pageNum int) {
 // not be able to exchange tabs with any other notebook.
 func (notebook *NotebookInstance) SetGroupName(groupName string) {
 	var carg0 *C.GtkNotebook // in, none, converted
-	var carg1 *C.gchar       // in, none, string, nullable-string
+	var carg1 *C.char        // in, none, string, nullable-string
 
 	carg0 = (*C.GtkNotebook)(UnsafeNotebookToGlibNone(notebook))
 	if groupName != "" {
-		carg1 = (*C.gchar)(unsafe.Pointer(C.CString(groupName)))
+		carg1 = (*C.char)(unsafe.Pointer(C.CString(groupName)))
 		defer C.free(unsafe.Pointer(carg1))
 	}
 
@@ -128209,11 +128209,11 @@ func (notebook *NotebookInstance) SetMenuLabel(child Widget, menuLabel Widget) {
 func (notebook *NotebookInstance) SetMenuLabelText(child Widget, menuText string) {
 	var carg0 *C.GtkNotebook // in, none, converted
 	var carg1 *C.GtkWidget   // in, none, converted
-	var carg2 *C.gchar       // in, none, string
+	var carg2 *C.char        // in, none, string, casted *C.gchar
 
 	carg0 = (*C.GtkNotebook)(UnsafeNotebookToGlibNone(notebook))
 	carg1 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(child))
-	carg2 = (*C.gchar)(unsafe.Pointer(C.CString(menuText)))
+	carg2 = (*C.char)(unsafe.Pointer(C.CString(menuText)))
 	defer C.free(unsafe.Pointer(carg2))
 
 	C.gtk_notebook_set_menu_label_text(carg0, carg1, carg2)
@@ -128398,11 +128398,11 @@ func (notebook *NotebookInstance) SetTabLabel(child Widget, tabLabel Widget) {
 func (notebook *NotebookInstance) SetTabLabelText(child Widget, tabText string) {
 	var carg0 *C.GtkNotebook // in, none, converted
 	var carg1 *C.GtkWidget   // in, none, converted
-	var carg2 *C.gchar       // in, none, string
+	var carg2 *C.char        // in, none, string, casted *C.gchar
 
 	carg0 = (*C.GtkNotebook)(UnsafeNotebookToGlibNone(notebook))
 	carg1 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(child))
-	carg2 = (*C.gchar)(unsafe.Pointer(C.CString(tabText)))
+	carg2 = (*C.char)(unsafe.Pointer(C.CString(tabText)))
 	defer C.free(unsafe.Pointer(carg2))
 
 	C.gtk_notebook_set_tab_label_text(carg0, carg1, carg2)
@@ -129181,12 +129181,12 @@ func UnsafePageSetupUnixDialogToGlibFull(c PageSetupUnixDialog) unsafe.Pointer {
 //
 // Creates a new page setup dialog.
 func NewPageSetupUnixDialogInstance(title string, parent Window) Widget {
-	var carg1 *C.gchar     // in, none, string, nullable-string
+	var carg1 *C.char      // in, none, string, nullable-string
 	var carg2 *C.GtkWindow // in, none, converted, nullable
 	var cret  *C.GtkWidget // return, none, converted
 
 	if title != "" {
-		carg1 = (*C.gchar)(unsafe.Pointer(C.CString(title)))
+		carg1 = (*C.char)(unsafe.Pointer(C.CString(title)))
 		defer C.free(unsafe.Pointer(carg1))
 	}
 	if parent != nil {
@@ -129630,7 +129630,7 @@ func (paned *PanedInstance) GetEndChild() Widget {
 // Obtains the position of the divider between the two panes.
 func (paned *PanedInstance) GetPosition() int {
 	var carg0 *C.GtkPaned // in, none, converted
-	var cret  C.int       // return, none, casted
+	var cret  C.int       // return, none, casted, casted C.gint
 
 	carg0 = (*C.GtkPaned)(UnsafePanedToGlibNone(paned))
 
@@ -129819,7 +129819,7 @@ func (paned *PanedInstance) SetEndChild(child Widget) {
 // Sets the position of the divider between the two panes.
 func (paned *PanedInstance) SetPosition(position int) {
 	var carg0 *C.GtkPaned // in, none, converted
-	var carg1 C.int       // in, none, casted
+	var carg1 C.int       // in, none, casted, casted C.gint
 
 	carg0 = (*C.GtkPaned)(UnsafePanedToGlibNone(paned))
 	carg1 = C.int(position)
@@ -130561,11 +130561,11 @@ func NewPictureInstanceForFile(file gio.File) Widget {
 // This is a utility function that calls [ctor@Gtk.Picture.new_for_file].
 // See that function for details.
 func NewPictureInstanceForFilename(filename string) Widget {
-	var carg1 *C.gchar     // in, none, string, nullable-string
+	var carg1 *C.char      // in, none, string, nullable-string
 	var cret  *C.GtkWidget // return, none, converted
 
 	if filename != "" {
-		carg1 = (*C.gchar)(unsafe.Pointer(C.CString(filename)))
+		carg1 = (*C.char)(unsafe.Pointer(C.CString(filename)))
 		defer C.free(unsafe.Pointer(carg1))
 	}
 
@@ -130663,11 +130663,11 @@ func NewPictureInstanceForPixbuf(pixbuf gdkpixbuf.Pixbuf) Widget {
 // This is a utility function that calls [ctor@Gtk.Picture.new_for_file].
 // See that function for details.
 func NewPictureInstanceForResource(resourcePath string) Widget {
-	var carg1 *C.gchar     // in, none, string, nullable-string
+	var carg1 *C.char      // in, none, string, nullable-string
 	var cret  *C.GtkWidget // return, none, converted
 
 	if resourcePath != "" {
-		carg1 = (*C.gchar)(unsafe.Pointer(C.CString(resourcePath)))
+		carg1 = (*C.char)(unsafe.Pointer(C.CString(resourcePath)))
 		defer C.free(unsafe.Pointer(carg1))
 	}
 
@@ -130691,7 +130691,7 @@ func NewPictureInstanceForResource(resourcePath string) Widget {
 // The returned string will be %NULL if the picture cannot be described textually.
 func (self *PictureInstance) GetAlternativeText() string {
 	var carg0 *C.GtkPicture // in, none, converted
-	var cret  *C.gchar      // return, none, string
+	var cret  *C.char       // return, none, string, casted *C.gchar
 
 	carg0 = (*C.GtkPicture)(UnsafePictureToGlibNone(self))
 
@@ -130700,7 +130700,7 @@ func (self *PictureInstance) GetAlternativeText() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -130843,11 +130843,11 @@ func (self *PictureInstance) GetPaintable() gdk.Paintable {
 // If the picture cannot be described textually, set this property to %NULL.
 func (self *PictureInstance) SetAlternativeText(alternativeText string) {
 	var carg0 *C.GtkPicture // in, none, converted
-	var carg1 *C.gchar      // in, none, string, nullable-string
+	var carg1 *C.char       // in, none, string, nullable-string
 
 	carg0 = (*C.GtkPicture)(UnsafePictureToGlibNone(self))
 	if alternativeText != "" {
-		carg1 = (*C.gchar)(unsafe.Pointer(C.CString(alternativeText)))
+		carg1 = (*C.char)(unsafe.Pointer(C.CString(alternativeText)))
 		defer C.free(unsafe.Pointer(carg1))
 	}
 
@@ -130941,11 +130941,11 @@ func (self *PictureInstance) SetFile(file gio.File) {
 // This is a utility function that calls [method@Gtk.Picture.set_file].
 func (self *PictureInstance) SetFilename(filename string) {
 	var carg0 *C.GtkPicture // in, none, converted
-	var carg1 *C.gchar      // in, none, string, nullable-string
+	var carg1 *C.char       // in, none, string, nullable-string
 
 	carg0 = (*C.GtkPicture)(UnsafePictureToGlibNone(self))
 	if filename != "" {
-		carg1 = (*C.gchar)(unsafe.Pointer(C.CString(filename)))
+		carg1 = (*C.char)(unsafe.Pointer(C.CString(filename)))
 		defer C.free(unsafe.Pointer(carg1))
 	}
 
@@ -131051,11 +131051,11 @@ func (self *PictureInstance) SetPixbuf(pixbuf gdkpixbuf.Pixbuf) {
 // This is a utility function that calls [method@Gtk.Picture.set_file].
 func (self *PictureInstance) SetResource(resourcePath string) {
 	var carg0 *C.GtkPicture // in, none, converted
-	var carg1 *C.gchar      // in, none, string, nullable-string
+	var carg1 *C.char       // in, none, string, nullable-string
 
 	carg0 = (*C.GtkPicture)(UnsafePictureToGlibNone(self))
 	if resourcePath != "" {
-		carg1 = (*C.gchar)(unsafe.Pointer(C.CString(resourcePath)))
+		carg1 = (*C.char)(unsafe.Pointer(C.CString(resourcePath)))
 		defer C.free(unsafe.Pointer(carg1))
 	}
 
@@ -131567,8 +131567,8 @@ func (popover *PopoverInstance) GetMnemonicsVisible() bool {
 // Gets the offset previous set with [method@Gtk.Popover.set_offset()].
 func (popover *PopoverInstance) GetOffset() (int, int) {
 	var carg0 *C.GtkPopover // in, none, converted
-	var carg1 C.int         // out, full, casted
-	var carg2 C.int         // out, full, casted
+	var carg1 C.int         // out, full, casted, casted C.gint
+	var carg2 C.int         // out, full, casted, casted C.gint
 
 	carg0 = (*C.GtkPopover)(UnsafePopoverToGlibNone(popover))
 
@@ -131843,8 +131843,8 @@ func (popover *PopoverInstance) SetMnemonicsVisible(mnemonicsVisible bool) {
 // for positioning the popover.
 func (popover *PopoverInstance) SetOffset(xOffset int, yOffset int) {
 	var carg0 *C.GtkPopover // in, none, converted
-	var carg1 C.int         // in, none, casted
-	var carg2 C.int         // in, none, casted
+	var carg1 C.int         // in, none, casted, casted C.gint
+	var carg2 C.int         // in, none, casted, casted C.gint
 
 	carg0 = (*C.GtkPopover)(UnsafePopoverToGlibNone(popover))
 	carg1 = C.int(xOffset)
@@ -132251,12 +132251,12 @@ func NewPopoverMenuInstanceFromModelFull(model gio.MenuModel, flags PopoverMenuF
 func (popover *PopoverMenuInstance) AddChild(child Widget, id string) bool {
 	var carg0 *C.GtkPopoverMenu // in, none, converted
 	var carg1 *C.GtkWidget      // in, none, converted
-	var carg2 *C.gchar          // in, none, string
+	var carg2 *C.char           // in, none, string, casted *C.gchar
 	var cret  C.gboolean        // return
 
 	carg0 = (*C.GtkPopoverMenu)(UnsafePopoverMenuToGlibNone(popover))
 	carg1 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(child))
-	carg2 = (*C.gchar)(unsafe.Pointer(C.CString(id)))
+	carg2 = (*C.char)(unsafe.Pointer(C.CString(id)))
 	defer C.free(unsafe.Pointer(carg2))
 
 	cret = C.gtk_popover_menu_add_child(carg0, carg1, carg2)
@@ -132588,12 +132588,12 @@ func NewPopoverMenuBarInstanceFromModel(model gio.MenuModel) Widget {
 func (bar *PopoverMenuBarInstance) AddChild(child Widget, id string) bool {
 	var carg0 *C.GtkPopoverMenuBar // in, none, converted
 	var carg1 *C.GtkWidget         // in, none, converted
-	var carg2 *C.gchar             // in, none, string
+	var carg2 *C.char              // in, none, string, casted *C.gchar
 	var cret  C.gboolean           // return
 
 	carg0 = (*C.GtkPopoverMenuBar)(UnsafePopoverMenuBarToGlibNone(bar))
 	carg1 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(child))
-	carg2 = (*C.gchar)(unsafe.Pointer(C.CString(id)))
+	carg2 = (*C.char)(unsafe.Pointer(C.CString(id)))
 	defer C.free(unsafe.Pointer(carg2))
 
 	cret = C.gtk_popover_menu_bar_add_child(carg0, carg1, carg2)
@@ -132971,12 +132971,12 @@ func UnsafePrintUnixDialogToGlibFull(c PrintUnixDialog) unsafe.Pointer {
 //
 // Creates a new `GtkPrintUnixDialog`.
 func NewPrintUnixDialogInstance(title string, parent Window) Widget {
-	var carg1 *C.gchar     // in, none, string, nullable-string
+	var carg1 *C.char      // in, none, string, nullable-string
 	var carg2 *C.GtkWindow // in, none, converted, nullable
 	var cret  *C.GtkWidget // return, none, converted
 
 	if title != "" {
-		carg1 = (*C.gchar)(unsafe.Pointer(C.CString(title)))
+		carg1 = (*C.char)(unsafe.Pointer(C.CString(title)))
 		defer C.free(unsafe.Pointer(carg1))
 	}
 	if parent != nil {
@@ -133025,7 +133025,7 @@ func (dialog *PrintUnixDialogInstance) AddCustomTab(child Widget, tabLabel Widge
 // Gets the current page of the `GtkPrintUnixDialog`.
 func (dialog *PrintUnixDialogInstance) GetCurrentPage() int {
 	var carg0 *C.GtkPrintUnixDialog // in, none, converted
-	var cret  C.int                 // return, none, casted
+	var cret  C.int                 // return, none, casted, casted C.gint
 
 	carg0 = (*C.GtkPrintUnixDialog)(UnsafePrintUnixDialogToGlibNone(dialog))
 
@@ -133239,7 +133239,7 @@ func (dialog *PrintUnixDialogInstance) GetSupportSelection() bool {
 // for the range of pages to print.
 func (dialog *PrintUnixDialogInstance) SetCurrentPage(currentPage int) {
 	var carg0 *C.GtkPrintUnixDialog // in, none, converted
-	var carg1 C.int                 // in, none, casted
+	var carg1 C.int                 // in, none, casted, casted C.gint
 
 	carg0 = (*C.GtkPrintUnixDialog)(UnsafePrintUnixDialogToGlibNone(dialog))
 	carg1 = C.int(currentPage)
@@ -133696,7 +133696,7 @@ func (pbar *ProgressBarInstance) GetEllipsize() pango.EllipsizeMode {
 // Returns the current fraction of the task that’s been completed.
 func (pbar *ProgressBarInstance) GetFraction() float64 {
 	var carg0 *C.GtkProgressBar // in, none, converted
-	var cret  C.gdouble         // return, none, casted
+	var cret  C.double          // return, none, casted, casted C.gdouble
 
 	carg0 = (*C.GtkProgressBar)(UnsafeProgressBarToGlibNone(pbar))
 
@@ -133744,7 +133744,7 @@ func (pbar *ProgressBarInstance) GetInverted() bool {
 // See [method@Gtk.ProgressBar.set_pulse_step].
 func (pbar *ProgressBarInstance) GetPulseStep() float64 {
 	var carg0 *C.GtkProgressBar // in, none, converted
-	var cret  C.gdouble         // return, none, casted
+	var cret  C.double          // return, none, casted, casted C.gdouble
 
 	carg0 = (*C.GtkProgressBar)(UnsafeProgressBarToGlibNone(pbar))
 
@@ -133795,7 +133795,7 @@ func (pbar *ProgressBarInstance) GetShowText() bool {
 // so will become invalid if you change the text in the progress bar.
 func (pbar *ProgressBarInstance) GetText() string {
 	var carg0 *C.GtkProgressBar // in, none, converted
-	var cret  *C.gchar          // return, none, string
+	var cret  *C.char           // return, none, string, casted *C.gchar
 
 	carg0 = (*C.GtkProgressBar)(UnsafeProgressBarToGlibNone(pbar))
 
@@ -133804,7 +133804,7 @@ func (pbar *ProgressBarInstance) GetText() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -133860,10 +133860,10 @@ func (pbar *ProgressBarInstance) SetEllipsize(mode pango.EllipsizeMode) {
 // The fraction should be between 0.0 and 1.0, inclusive.
 func (pbar *ProgressBarInstance) SetFraction(fraction float64) {
 	var carg0 *C.GtkProgressBar // in, none, converted
-	var carg1 C.gdouble         // in, none, casted
+	var carg1 C.double          // in, none, casted, casted C.gdouble
 
 	carg0 = (*C.GtkProgressBar)(UnsafeProgressBarToGlibNone(pbar))
-	carg1 = C.gdouble(fraction)
+	carg1 = C.double(fraction)
 
 	C.gtk_progress_bar_set_fraction(carg0, carg1)
 	runtime.KeepAlive(pbar)
@@ -133907,10 +133907,10 @@ func (pbar *ProgressBarInstance) SetInverted(inverted bool) {
 // is called.
 func (pbar *ProgressBarInstance) SetPulseStep(fraction float64) {
 	var carg0 *C.GtkProgressBar // in, none, converted
-	var carg1 C.gdouble         // in, none, casted
+	var carg1 C.double          // in, none, casted, casted C.gdouble
 
 	carg0 = (*C.GtkProgressBar)(UnsafeProgressBarToGlibNone(pbar))
-	carg1 = C.gdouble(fraction)
+	carg1 = C.double(fraction)
 
 	C.gtk_progress_bar_set_pulse_step(carg0, carg1)
 	runtime.KeepAlive(pbar)
@@ -133965,11 +133965,11 @@ func (pbar *ProgressBarInstance) SetShowText(showText bool) {
 // [property@Gtk.ProgressBar:show-text] is %TRUE.
 func (pbar *ProgressBarInstance) SetText(text string) {
 	var carg0 *C.GtkProgressBar // in, none, converted
-	var carg1 *C.gchar          // in, none, string, nullable-string
+	var carg1 *C.char           // in, none, string, nullable-string
 
 	carg0 = (*C.GtkProgressBar)(UnsafeProgressBarToGlibNone(pbar))
 	if text != "" {
-		carg1 = (*C.gchar)(unsafe.Pointer(C.CString(text)))
+		carg1 = (*C.char)(unsafe.Pointer(C.CString(text)))
 		defer C.free(unsafe.Pointer(carg1))
 	}
 
@@ -134344,7 +134344,7 @@ func (_range *RangeInstance) GetAdjustment() Adjustment {
 // Gets the current position of the fill level indicator.
 func (_range *RangeInstance) GetFillLevel() float64 {
 	var carg0 *C.GtkRange // in, none, converted
-	var cret  C.gdouble   // return, none, casted
+	var cret  C.double    // return, none, casted, casted C.gdouble
 
 	carg0 = (*C.GtkRange)(UnsafeRangeToGlibNone(_range))
 
@@ -134472,7 +134472,7 @@ func (_range *RangeInstance) GetRestrictToFillLevel() bool {
 // See [signal@Gtk.Range::change-value].
 func (_range *RangeInstance) GetRoundDigits() int {
 	var carg0 *C.GtkRange // in, none, converted
-	var cret  C.int       // return, none, casted
+	var cret  C.int       // return, none, casted, casted C.gint
 
 	carg0 = (*C.GtkRange)(UnsafeRangeToGlibNone(_range))
 
@@ -134522,8 +134522,8 @@ func (_range *RangeInstance) GetShowFillLevel() bool {
 // This function is useful mainly for `GtkRange` subclasses.
 func (_range *RangeInstance) GetSliderRange() (int, int) {
 	var carg0 *C.GtkRange // in, none, converted
-	var carg1 C.int       // out, full, casted
-	var carg2 C.int       // out, full, casted
+	var carg1 C.int       // out, full, casted, casted C.gint
+	var carg2 C.int       // out, full, casted, casted C.gint
 
 	carg0 = (*C.GtkRange)(UnsafeRangeToGlibNone(_range))
 
@@ -134573,7 +134573,7 @@ func (_range *RangeInstance) GetSliderSizeFixed() bool {
 // Gets the current value of the range.
 func (_range *RangeInstance) GetValue() float64 {
 	var carg0 *C.GtkRange // in, none, converted
-	var cret  C.gdouble   // return, none, casted
+	var cret  C.double    // return, none, casted, casted C.gdouble
 
 	carg0 = (*C.GtkRange)(UnsafeRangeToGlibNone(_range))
 
@@ -134639,10 +134639,10 @@ func (_range *RangeInstance) SetAdjustment(adjustment Adjustment) {
 // enabled.
 func (_range *RangeInstance) SetFillLevel(fillLevel float64) {
 	var carg0 *C.GtkRange // in, none, converted
-	var carg1 C.gdouble   // in, none, casted
+	var carg1 C.double    // in, none, casted, casted C.gdouble
 
 	carg0 = (*C.GtkRange)(UnsafeRangeToGlibNone(_range))
-	carg1 = C.gdouble(fillLevel)
+	carg1 = C.double(fillLevel)
 
 	C.gtk_range_set_fill_level(carg0, carg1)
 	runtime.KeepAlive(_range)
@@ -134689,12 +134689,12 @@ func (_range *RangeInstance) SetFlippable(flippable bool) {
 // is used for example when moving via Page Up or Page Down keys.
 func (_range *RangeInstance) SetIncrements(step float64, page float64) {
 	var carg0 *C.GtkRange // in, none, converted
-	var carg1 C.gdouble   // in, none, casted
-	var carg2 C.gdouble   // in, none, casted
+	var carg1 C.double    // in, none, casted, casted C.gdouble
+	var carg2 C.double    // in, none, casted, casted C.gdouble
 
 	carg0 = (*C.GtkRange)(UnsafeRangeToGlibNone(_range))
-	carg1 = C.gdouble(step)
-	carg2 = C.gdouble(page)
+	carg1 = C.double(step)
+	carg2 = C.double(page)
 
 	C.gtk_range_set_increments(carg0, carg1, carg2)
 	runtime.KeepAlive(_range)
@@ -134742,12 +134742,12 @@ func (_range *RangeInstance) SetInverted(setting bool) {
 // between @min and @max - page-size.)
 func (_range *RangeInstance) SetRange(min float64, max float64) {
 	var carg0 *C.GtkRange // in, none, converted
-	var carg1 C.gdouble   // in, none, casted
-	var carg2 C.gdouble   // in, none, casted
+	var carg1 C.double    // in, none, casted, casted C.gdouble
+	var carg2 C.double    // in, none, casted, casted C.gdouble
 
 	carg0 = (*C.GtkRange)(UnsafeRangeToGlibNone(_range))
-	carg1 = C.gdouble(min)
-	carg2 = C.gdouble(max)
+	carg1 = C.double(min)
+	carg2 = C.double(max)
 
 	C.gtk_range_set_range(carg0, carg1, carg2)
 	runtime.KeepAlive(_range)
@@ -134791,7 +134791,7 @@ func (_range *RangeInstance) SetRestrictToFillLevel(restrictToFillLevel bool) {
 // See [signal@Gtk.Range::change-value].
 func (_range *RangeInstance) SetRoundDigits(roundDigits int) {
 	var carg0 *C.GtkRange // in, none, converted
-	var carg1 C.int       // in, none, casted
+	var carg1 C.int       // in, none, casted, casted C.gint
 
 	carg0 = (*C.GtkRange)(UnsafeRangeToGlibNone(_range))
 	carg1 = C.int(roundDigits)
@@ -134862,10 +134862,10 @@ func (_range *RangeInstance) SetSliderSizeFixed(sizeFixed bool) {
 // [signal@Gtk.Range::value-changed] signal if the value changes.
 func (_range *RangeInstance) SetValue(value float64) {
 	var carg0 *C.GtkRange // in, none, converted
-	var carg1 C.gdouble   // in, none, casted
+	var carg1 C.double    // in, none, casted, casted C.gdouble
 
 	carg0 = (*C.GtkRange)(UnsafeRangeToGlibNone(_range))
-	carg1 = C.gdouble(value)
+	carg1 = C.double(value)
 
 	C.gtk_range_set_value(carg0, carg1)
 	runtime.KeepAlive(_range)
@@ -135639,15 +135639,15 @@ func NewScaleInstance(orientation Orientation, adjustment Adjustment) Widget {
 // for your needs, use [method@Gtk.Scale.set_digits] to correct it.
 func NewScaleInstanceWithRange(orientation Orientation, min float64, max float64, step float64) Widget {
 	var carg1 C.GtkOrientation // in, none, casted
-	var carg2 C.gdouble        // in, none, casted
-	var carg3 C.gdouble        // in, none, casted
-	var carg4 C.gdouble        // in, none, casted
+	var carg2 C.double         // in, none, casted, casted C.gdouble
+	var carg3 C.double         // in, none, casted, casted C.gdouble
+	var carg4 C.double         // in, none, casted, casted C.gdouble
 	var cret  *C.GtkWidget     // return, none, converted
 
 	carg1 = C.GtkOrientation(orientation)
-	carg2 = C.gdouble(min)
-	carg3 = C.gdouble(max)
-	carg4 = C.gdouble(step)
+	carg2 = C.double(min)
+	carg3 = C.double(max)
+	carg4 = C.double(step)
 
 	cret = C.gtk_scale_new_with_range(carg1, carg2, carg3, carg4)
 	runtime.KeepAlive(orientation)
@@ -135685,15 +135685,15 @@ func NewScaleInstanceWithRange(orientation Orientation, min float64, max float64
 // To remove marks from a scale, use [method@Gtk.Scale.clear_marks].
 func (scale *ScaleInstance) AddMark(value float64, position PositionType, markup string) {
 	var carg0 *C.GtkScale       // in, none, converted
-	var carg1 C.gdouble         // in, none, casted
+	var carg1 C.double          // in, none, casted, casted C.gdouble
 	var carg2 C.GtkPositionType // in, none, casted
-	var carg3 *C.gchar          // in, none, string, nullable-string
+	var carg3 *C.char           // in, none, string, nullable-string
 
 	carg0 = (*C.GtkScale)(UnsafeScaleToGlibNone(scale))
-	carg1 = C.gdouble(value)
+	carg1 = C.double(value)
 	carg2 = C.GtkPositionType(position)
 	if markup != "" {
-		carg3 = (*C.gchar)(unsafe.Pointer(C.CString(markup)))
+		carg3 = (*C.char)(unsafe.Pointer(C.CString(markup)))
 		defer C.free(unsafe.Pointer(carg3))
 	}
 
@@ -135724,7 +135724,7 @@ func (scale *ScaleInstance) ClearMarks() {
 // Gets the number of decimal places that are displayed in the value.
 func (scale *ScaleInstance) GetDigits() int {
 	var carg0 *C.GtkScale // in, none, converted
-	var cret  C.int       // return, none, casted
+	var cret  C.int       // return, none, casted, casted C.gint
 
 	carg0 = (*C.GtkScale)(UnsafeScaleToGlibNone(scale))
 
@@ -135828,8 +135828,8 @@ func (scale *ScaleInstance) GetLayout() pango.Layout {
 // values are undefined.
 func (scale *ScaleInstance) GetLayoutOffsets() (int, int) {
 	var carg0 *C.GtkScale // in, none, converted
-	var carg1 C.int       // out, full, casted
-	var carg2 C.int       // out, full, casted
+	var carg1 C.int       // out, full, casted, casted C.gint
+	var carg2 C.int       // out, full, casted, casted C.gint
 
 	carg0 = (*C.GtkScale)(UnsafeScaleToGlibNone(scale))
 
@@ -135888,7 +135888,7 @@ func (scale *ScaleInstance) GetValuePos() PositionType {
 // value yourself.
 func (scale *ScaleInstance) SetDigits(digits int) {
 	var carg0 *C.GtkScale // in, none, converted
-	var carg1 C.int       // in, none, casted
+	var carg1 C.int       // in, none, casted, casted C.gint
 
 	carg0 = (*C.GtkScale)(UnsafeScaleToGlibNone(scale))
 	carg1 = C.int(digits)
@@ -136215,15 +136215,15 @@ func UnsafeScaleButtonToGlibFull(c ScaleButton) unsafe.Pointer {
 // The new scale button has a range between @min and @max,
 // with a stepping of @step.
 func NewScaleButtonInstance(min float64, max float64, step float64, icons []string) Widget {
-	var carg1 C.gdouble    // in, none, casted
-	var carg2 C.gdouble    // in, none, casted
-	var carg3 C.gdouble    // in, none, casted
+	var carg1 C.double     // in, none, casted, casted C.gdouble
+	var carg2 C.double     // in, none, casted, casted C.gdouble
+	var carg3 C.double     // in, none, casted, casted C.gdouble
 	var carg4 **C.char     // in, transfer: none, C Pointers: 2, Name: array[utf8], nullable, array (inner: *typesystem.StringPrimitive, zero-terminated)
 	var cret  *C.GtkWidget // return, none, converted
 
-	carg1 = C.gdouble(min)
-	carg2 = C.gdouble(max)
-	carg3 = C.gdouble(step)
+	carg1 = C.double(min)
+	carg2 = C.double(max)
+	carg3 = C.double(step)
 	_ = icons
 	_ = carg4
 	panic("unimplemented conversion of []string (const char**)")
@@ -136390,7 +136390,7 @@ func (button *ScaleButtonInstance) GetPopup() Widget {
 // Gets the current value of the scale button.
 func (button *ScaleButtonInstance) GetValue() float64 {
 	var carg0 *C.GtkScaleButton // in, none, converted
-	var cret  C.gdouble         // return, none, casted
+	var cret  C.double          // return, none, casted, casted C.gdouble
 
 	carg0 = (*C.GtkScaleButton)(UnsafeScaleButtonToGlibNone(button))
 
@@ -136483,10 +136483,10 @@ func (button *ScaleButtonInstance) SetIcons(icons []string) {
 // signal if the value changes.
 func (button *ScaleButtonInstance) SetValue(value float64) {
 	var carg0 *C.GtkScaleButton // in, none, converted
-	var carg1 C.gdouble         // in, none, casted
+	var carg1 C.double          // in, none, casted, casted C.gdouble
 
 	carg0 = (*C.GtkScaleButton)(UnsafeScaleButtonToGlibNone(button))
-	carg1 = C.gdouble(value)
+	carg1 = C.double(value)
 
 	C.gtk_scale_button_set_value(carg0, carg1)
 	runtime.KeepAlive(button)
@@ -137297,7 +137297,7 @@ func (scrolledWindow *ScrolledWindowInstance) GetKineticScrolling() bool {
 // Returns the maximum content height set.
 func (scrolledWindow *ScrolledWindowInstance) GetMaxContentHeight() int {
 	var carg0 *C.GtkScrolledWindow // in, none, converted
-	var cret  C.int                // return, none, casted
+	var cret  C.int                // return, none, casted, casted C.gint
 
 	carg0 = (*C.GtkScrolledWindow)(UnsafeScrolledWindowToGlibNone(scrolledWindow))
 
@@ -137319,7 +137319,7 @@ func (scrolledWindow *ScrolledWindowInstance) GetMaxContentHeight() int {
 // Returns the maximum content width set.
 func (scrolledWindow *ScrolledWindowInstance) GetMaxContentWidth() int {
 	var carg0 *C.GtkScrolledWindow // in, none, converted
-	var cret  C.int                // return, none, casted
+	var cret  C.int                // return, none, casted, casted C.gint
 
 	carg0 = (*C.GtkScrolledWindow)(UnsafeScrolledWindowToGlibNone(scrolledWindow))
 
@@ -137341,7 +137341,7 @@ func (scrolledWindow *ScrolledWindowInstance) GetMaxContentWidth() int {
 // Gets the minimal content height of @scrolled_window.
 func (scrolledWindow *ScrolledWindowInstance) GetMinContentHeight() int {
 	var carg0 *C.GtkScrolledWindow // in, none, converted
-	var cret  C.int                // return, none, casted
+	var cret  C.int                // return, none, casted, casted C.gint
 
 	carg0 = (*C.GtkScrolledWindow)(UnsafeScrolledWindowToGlibNone(scrolledWindow))
 
@@ -137363,7 +137363,7 @@ func (scrolledWindow *ScrolledWindowInstance) GetMinContentHeight() int {
 // Gets the minimum content width of @scrolled_window.
 func (scrolledWindow *ScrolledWindowInstance) GetMinContentWidth() int {
 	var carg0 *C.GtkScrolledWindow // in, none, converted
-	var cret  C.int                // return, none, casted
+	var cret  C.int                // return, none, casted, casted C.gint
 
 	carg0 = (*C.GtkScrolledWindow)(UnsafeScrolledWindowToGlibNone(scrolledWindow))
 
@@ -137657,7 +137657,7 @@ func (scrolledWindow *ScrolledWindowInstance) SetKineticScrolling(kineticScrolli
 // smaller than [property@Gtk.ScrolledWindow:min-content-height].
 func (scrolledWindow *ScrolledWindowInstance) SetMaxContentHeight(height int) {
 	var carg0 *C.GtkScrolledWindow // in, none, converted
-	var carg1 C.int                // in, none, casted
+	var carg1 C.int                // in, none, casted, casted C.gint
 
 	carg0 = (*C.GtkScrolledWindow)(UnsafeScrolledWindowToGlibNone(scrolledWindow))
 	carg1 = C.int(height)
@@ -137682,7 +137682,7 @@ func (scrolledWindow *ScrolledWindowInstance) SetMaxContentHeight(height int) {
 // value smaller than [property@Gtk.ScrolledWindow:min-content-width].
 func (scrolledWindow *ScrolledWindowInstance) SetMaxContentWidth(width int) {
 	var carg0 *C.GtkScrolledWindow // in, none, converted
-	var carg1 C.int                // in, none, casted
+	var carg1 C.int                // in, none, casted, casted C.gint
 
 	carg0 = (*C.GtkScrolledWindow)(UnsafeScrolledWindowToGlibNone(scrolledWindow))
 	carg1 = C.int(width)
@@ -137707,7 +137707,7 @@ func (scrolledWindow *ScrolledWindowInstance) SetMaxContentWidth(width int) {
 // value greater than [property@Gtk.ScrolledWindow:max-content-height].
 func (scrolledWindow *ScrolledWindowInstance) SetMinContentHeight(height int) {
 	var carg0 *C.GtkScrolledWindow // in, none, converted
-	var carg1 C.int                // in, none, casted
+	var carg1 C.int                // in, none, casted, casted C.gint
 
 	carg0 = (*C.GtkScrolledWindow)(UnsafeScrolledWindowToGlibNone(scrolledWindow))
 	carg1 = C.int(height)
@@ -137732,7 +137732,7 @@ func (scrolledWindow *ScrolledWindowInstance) SetMinContentHeight(height int) {
 // value greater than [property@Gtk.ScrolledWindow:max-content-width].
 func (scrolledWindow *ScrolledWindowInstance) SetMinContentWidth(width int) {
 	var carg0 *C.GtkScrolledWindow // in, none, converted
-	var carg1 C.int                // in, none, casted
+	var carg1 C.int                // in, none, casted, casted C.gint
 
 	carg0 = (*C.GtkScrolledWindow)(UnsafeScrolledWindowToGlibNone(scrolledWindow))
 	carg1 = C.int(width)
@@ -138616,7 +138616,7 @@ func (entry *SearchEntryInstance) GetKeyCaptureWidget() Widget {
 // Gets the placeholder text associated with @entry.
 func (entry *SearchEntryInstance) GetPlaceholderText() string {
 	var carg0 *C.GtkSearchEntry // in, none, converted
-	var cret  *C.gchar          // return, none, string
+	var cret  *C.char           // return, none, string, casted *C.gchar
 
 	carg0 = (*C.GtkSearchEntry)(UnsafeSearchEntryToGlibNone(entry))
 
@@ -138625,7 +138625,7 @@ func (entry *SearchEntryInstance) GetPlaceholderText() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -138737,11 +138737,11 @@ func (entry *SearchEntryInstance) SetKeyCaptureWidget(widget Widget) {
 // Sets the placeholder text associated with @entry.
 func (entry *SearchEntryInstance) SetPlaceholderText(text string) {
 	var carg0 *C.GtkSearchEntry // in, none, converted
-	var carg1 *C.gchar          // in, none, string, nullable-string
+	var carg1 *C.char           // in, none, string, nullable-string
 
 	carg0 = (*C.GtkSearchEntry)(UnsafeSearchEntryToGlibNone(entry))
 	if text != "" {
-		carg1 = (*C.gchar)(unsafe.Pointer(C.CString(text)))
+		carg1 = (*C.char)(unsafe.Pointer(C.CString(text)))
 		defer C.free(unsafe.Pointer(carg1))
 	}
 
@@ -139002,10 +139002,10 @@ func UnsafeShortcutLabelToGlibFull(c ShortcutLabel) unsafe.Pointer {
 //
 // Creates a new `GtkShortcutLabel` with @accelerator set.
 func NewShortcutLabelInstance(accelerator string) Widget {
-	var carg1 *C.gchar     // in, none, string
+	var carg1 *C.char      // in, none, string, casted *C.gchar
 	var cret  *C.GtkWidget // return, none, converted
 
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(accelerator)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(accelerator)))
 	defer C.free(unsafe.Pointer(carg1))
 
 	cret = C.gtk_shortcut_label_new(carg1)
@@ -139026,7 +139026,7 @@ func NewShortcutLabelInstance(accelerator string) Widget {
 // Retrieves the current accelerator of @self.
 func (self *ShortcutLabelInstance) GetAccelerator() string {
 	var carg0 *C.GtkShortcutLabel // in, none, converted
-	var cret  *C.gchar            // return, none, string
+	var cret  *C.char             // return, none, string, casted *C.gchar
 
 	carg0 = (*C.GtkShortcutLabel)(UnsafeShortcutLabelToGlibNone(self))
 
@@ -139035,7 +139035,7 @@ func (self *ShortcutLabelInstance) GetAccelerator() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -139048,7 +139048,7 @@ func (self *ShortcutLabelInstance) GetAccelerator() string {
 // Retrieves the text that is displayed when no accelerator is set.
 func (self *ShortcutLabelInstance) GetDisabledText() string {
 	var carg0 *C.GtkShortcutLabel // in, none, converted
-	var cret  *C.gchar            // return, none, string
+	var cret  *C.char             // return, none, string, casted *C.gchar
 
 	carg0 = (*C.GtkShortcutLabel)(UnsafeShortcutLabelToGlibNone(self))
 
@@ -139057,7 +139057,7 @@ func (self *ShortcutLabelInstance) GetDisabledText() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -139071,10 +139071,10 @@ func (self *ShortcutLabelInstance) GetDisabledText() string {
 // Sets the accelerator to be displayed by @self.
 func (self *ShortcutLabelInstance) SetAccelerator(accelerator string) {
 	var carg0 *C.GtkShortcutLabel // in, none, converted
-	var carg1 *C.gchar            // in, none, string
+	var carg1 *C.char             // in, none, string, casted *C.gchar
 
 	carg0 = (*C.GtkShortcutLabel)(UnsafeShortcutLabelToGlibNone(self))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(accelerator)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(accelerator)))
 	defer C.free(unsafe.Pointer(carg1))
 
 	C.gtk_shortcut_label_set_accelerator(carg0, carg1)
@@ -139091,10 +139091,10 @@ func (self *ShortcutLabelInstance) SetAccelerator(accelerator string) {
 // Sets the text to be displayed by @self when no accelerator is set.
 func (self *ShortcutLabelInstance) SetDisabledText(disabledText string) {
 	var carg0 *C.GtkShortcutLabel // in, none, converted
-	var carg1 *C.gchar            // in, none, string
+	var carg1 *C.char             // in, none, string, casted *C.gchar
 
 	carg0 = (*C.GtkShortcutLabel)(UnsafeShortcutLabelToGlibNone(self))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(disabledText)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(disabledText)))
 	defer C.free(unsafe.Pointer(carg1))
 
 	C.gtk_shortcut_label_set_disabled_text(carg0, carg1)
@@ -140058,14 +140058,14 @@ func UnsafeSpinButtonToGlibFull(c SpinButton) unsafe.Pointer {
 // Creates a new `GtkSpinButton`.
 func NewSpinButtonInstance(adjustment Adjustment, climbRate float64, digits uint) Widget {
 	var carg1 *C.GtkAdjustment // in, none, converted, nullable
-	var carg2 C.gdouble        // in, none, casted
+	var carg2 C.double         // in, none, casted, casted C.gdouble
 	var carg3 C.guint          // in, none, casted
 	var cret  *C.GtkWidget     // return, none, converted
 
 	if adjustment != nil {
 		carg1 = (*C.GtkAdjustment)(UnsafeAdjustmentToGlibNone(adjustment))
 	}
-	carg2 = C.gdouble(climbRate)
+	carg2 = C.double(climbRate)
 	carg3 = C.guint(digits)
 
 	cret = C.gtk_spin_button_new(carg1, carg2, carg3)
@@ -140106,14 +140106,14 @@ func NewSpinButtonInstance(adjustment Adjustment, climbRate float64, digits uint
 // is not suitable for your needs, use
 // [method@Gtk.SpinButton.set_digits] to correct it.
 func NewSpinButtonInstanceWithRange(min float64, max float64, step float64) Widget {
-	var carg1 C.gdouble    // in, none, casted
-	var carg2 C.gdouble    // in, none, casted
-	var carg3 C.gdouble    // in, none, casted
+	var carg1 C.double     // in, none, casted, casted C.gdouble
+	var carg2 C.double     // in, none, casted, casted C.gdouble
+	var carg3 C.double     // in, none, casted, casted C.gdouble
 	var cret  *C.GtkWidget // return, none, converted
 
-	carg1 = C.gdouble(min)
-	carg2 = C.gdouble(max)
-	carg3 = C.gdouble(step)
+	carg1 = C.double(min)
+	carg2 = C.double(max)
+	carg3 = C.double(step)
 
 	cret = C.gtk_spin_button_new_with_range(carg1, carg2, carg3)
 	runtime.KeepAlive(min)
@@ -140143,14 +140143,14 @@ func NewSpinButtonInstanceWithRange(min float64, max float64, step float64) Widg
 func (spinButton *SpinButtonInstance) Configure(adjustment Adjustment, climbRate float64, digits uint) {
 	var carg0 *C.GtkSpinButton // in, none, converted
 	var carg1 *C.GtkAdjustment // in, none, converted, nullable
-	var carg2 C.gdouble        // in, none, casted
+	var carg2 C.double         // in, none, casted, casted C.gdouble
 	var carg3 C.guint          // in, none, casted
 
 	carg0 = (*C.GtkSpinButton)(UnsafeSpinButtonToGlibNone(spinButton))
 	if adjustment != nil {
 		carg1 = (*C.GtkAdjustment)(UnsafeAdjustmentToGlibNone(adjustment))
 	}
-	carg2 = C.gdouble(climbRate)
+	carg2 = C.double(climbRate)
 	carg3 = C.guint(digits)
 
 	C.gtk_spin_button_configure(carg0, carg1, carg2, carg3)
@@ -140214,7 +140214,7 @@ func (spinButton *SpinButtonInstance) GetAdjustment() Adjustment {
 // Returns the acceleration rate for repeated changes.
 func (spinButton *SpinButtonInstance) GetClimbRate() float64 {
 	var carg0 *C.GtkSpinButton // in, none, converted
-	var cret  C.gdouble        // return, none, casted
+	var cret  C.double         // return, none, casted, casted C.gdouble
 
 	carg0 = (*C.GtkSpinButton)(UnsafeSpinButtonToGlibNone(spinButton))
 
@@ -140262,8 +140262,8 @@ func (spinButton *SpinButtonInstance) GetDigits() uint {
 // See [method@Gtk.SpinButton.set_increments].
 func (spinButton *SpinButtonInstance) GetIncrements() (float64, float64) {
 	var carg0 *C.GtkSpinButton // in, none, converted
-	var carg1 C.gdouble        // out, full, casted
-	var carg2 C.gdouble        // out, full, casted
+	var carg1 C.double         // out, full, casted, casted C.gdouble
+	var carg2 C.double         // out, full, casted, casted C.gdouble
 
 	carg0 = (*C.GtkSpinButton)(UnsafeSpinButtonToGlibNone(spinButton))
 
@@ -140314,8 +140314,8 @@ func (spinButton *SpinButtonInstance) GetNumeric() bool {
 // See [method@Gtk.SpinButton.set_range].
 func (spinButton *SpinButtonInstance) GetRange() (float64, float64) {
 	var carg0 *C.GtkSpinButton // in, none, converted
-	var carg1 C.gdouble        // out, full, casted
-	var carg2 C.gdouble        // out, full, casted
+	var carg1 C.double         // out, full, casted, casted C.gdouble
+	var carg2 C.double         // out, full, casted, casted C.gdouble
 
 	carg0 = (*C.GtkSpinButton)(UnsafeSpinButtonToGlibNone(spinButton))
 
@@ -140387,7 +140387,7 @@ func (spinButton *SpinButtonInstance) GetUpdatePolicy() SpinButtonUpdatePolicy {
 // Get the value in the @spin_button.
 func (spinButton *SpinButtonInstance) GetValue() float64 {
 	var carg0 *C.GtkSpinButton // in, none, converted
-	var cret  C.gdouble        // return, none, casted
+	var cret  C.double         // return, none, casted, casted C.gdouble
 
 	carg0 = (*C.GtkSpinButton)(UnsafeSpinButtonToGlibNone(spinButton))
 
@@ -140409,7 +140409,7 @@ func (spinButton *SpinButtonInstance) GetValue() float64 {
 // Get the value @spin_button represented as an integer.
 func (spinButton *SpinButtonInstance) GetValueAsInt() int {
 	var carg0 *C.GtkSpinButton // in, none, converted
-	var cret  C.int            // return, none, casted
+	var cret  C.int            // return, none, casted, casted C.gint
 
 	carg0 = (*C.GtkSpinButton)(UnsafeSpinButtonToGlibNone(spinButton))
 
@@ -140502,10 +140502,10 @@ func (spinButton *SpinButtonInstance) SetAdjustment(adjustment Adjustment) {
 // hold down a button or key.
 func (spinButton *SpinButtonInstance) SetClimbRate(climbRate float64) {
 	var carg0 *C.GtkSpinButton // in, none, converted
-	var carg1 C.gdouble        // in, none, casted
+	var carg1 C.double         // in, none, casted, casted C.gdouble
 
 	carg0 = (*C.GtkSpinButton)(UnsafeSpinButtonToGlibNone(spinButton))
-	carg1 = C.gdouble(climbRate)
+	carg1 = C.double(climbRate)
 
 	C.gtk_spin_button_set_climb_rate(carg0, carg1)
 	runtime.KeepAlive(spinButton)
@@ -140547,12 +140547,12 @@ func (spinButton *SpinButtonInstance) SetDigits(digits uint) {
 // the spin button’s arrows are activated.
 func (spinButton *SpinButtonInstance) SetIncrements(step float64, page float64) {
 	var carg0 *C.GtkSpinButton // in, none, converted
-	var carg1 C.gdouble        // in, none, casted
-	var carg2 C.gdouble        // in, none, casted
+	var carg1 C.double         // in, none, casted, casted C.gdouble
+	var carg2 C.double         // in, none, casted, casted C.gdouble
 
 	carg0 = (*C.GtkSpinButton)(UnsafeSpinButtonToGlibNone(spinButton))
-	carg1 = C.gdouble(step)
-	carg2 = C.gdouble(page)
+	carg1 = C.double(step)
+	carg2 = C.double(page)
 
 	C.gtk_spin_button_set_increments(carg0, carg1, carg2)
 	runtime.KeepAlive(spinButton)
@@ -140595,12 +140595,12 @@ func (spinButton *SpinButtonInstance) SetNumeric(numeric bool) {
 // to fit within the range, otherwise it will remain unchanged.
 func (spinButton *SpinButtonInstance) SetRange(min float64, max float64) {
 	var carg0 *C.GtkSpinButton // in, none, converted
-	var carg1 C.gdouble        // in, none, casted
-	var carg2 C.gdouble        // in, none, casted
+	var carg1 C.double         // in, none, casted, casted C.gdouble
+	var carg2 C.double         // in, none, casted, casted C.gdouble
 
 	carg0 = (*C.GtkSpinButton)(UnsafeSpinButtonToGlibNone(spinButton))
-	carg1 = C.gdouble(min)
-	carg2 = C.gdouble(max)
+	carg1 = C.double(min)
+	carg2 = C.double(max)
 
 	C.gtk_spin_button_set_range(carg0, carg1, carg2)
 	runtime.KeepAlive(spinButton)
@@ -140662,10 +140662,10 @@ func (spinButton *SpinButtonInstance) SetUpdatePolicy(policy SpinButtonUpdatePol
 // Sets the value of @spin_button.
 func (spinButton *SpinButtonInstance) SetValue(value float64) {
 	var carg0 *C.GtkSpinButton // in, none, converted
-	var carg1 C.gdouble        // in, none, casted
+	var carg1 C.double         // in, none, casted, casted C.gdouble
 
 	carg0 = (*C.GtkSpinButton)(UnsafeSpinButtonToGlibNone(spinButton))
-	carg1 = C.gdouble(value)
+	carg1 = C.double(value)
 
 	C.gtk_spin_button_set_value(carg0, carg1)
 	runtime.KeepAlive(spinButton)
@@ -140707,11 +140707,11 @@ func (spinButton *SpinButtonInstance) SetWrap(wrap bool) {
 func (spinButton *SpinButtonInstance) Spin(direction SpinType, increment float64) {
 	var carg0 *C.GtkSpinButton // in, none, converted
 	var carg1 C.GtkSpinType    // in, none, casted
-	var carg2 C.gdouble        // in, none, casted
+	var carg2 C.double         // in, none, casted, casted C.gdouble
 
 	carg0 = (*C.GtkSpinButton)(UnsafeSpinButtonToGlibNone(spinButton))
 	carg1 = C.GtkSpinType(direction)
-	carg2 = C.gdouble(increment)
+	carg2 = C.double(increment)
 
 	C.gtk_spin_button_spin(carg0, carg1, carg2)
 	runtime.KeepAlive(spinButton)
@@ -141369,13 +141369,13 @@ func (stack *StackInstance) AddChild(child Widget) StackPage {
 func (stack *StackInstance) AddNamed(child Widget, name string) StackPage {
 	var carg0 *C.GtkStack     // in, none, converted
 	var carg1 *C.GtkWidget    // in, none, converted
-	var carg2 *C.gchar        // in, none, string, nullable-string
+	var carg2 *C.char         // in, none, string, nullable-string
 	var cret  *C.GtkStackPage // return, none, converted
 
 	carg0 = (*C.GtkStack)(UnsafeStackToGlibNone(stack))
 	carg1 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(child))
 	if name != "" {
-		carg2 = (*C.gchar)(unsafe.Pointer(C.CString(name)))
+		carg2 = (*C.char)(unsafe.Pointer(C.CString(name)))
 		defer C.free(unsafe.Pointer(carg2))
 	}
 
@@ -141411,17 +141411,17 @@ func (stack *StackInstance) AddNamed(child Widget, name string) StackPage {
 func (stack *StackInstance) AddTitled(child Widget, name string, title string) StackPage {
 	var carg0 *C.GtkStack     // in, none, converted
 	var carg1 *C.GtkWidget    // in, none, converted
-	var carg2 *C.gchar        // in, none, string, nullable-string
-	var carg3 *C.gchar        // in, none, string
+	var carg2 *C.char         // in, none, string, nullable-string
+	var carg3 *C.char         // in, none, string, casted *C.gchar
 	var cret  *C.GtkStackPage // return, none, converted
 
 	carg0 = (*C.GtkStack)(UnsafeStackToGlibNone(stack))
 	carg1 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(child))
 	if name != "" {
-		carg2 = (*C.gchar)(unsafe.Pointer(C.CString(name)))
+		carg2 = (*C.char)(unsafe.Pointer(C.CString(name)))
 		defer C.free(unsafe.Pointer(carg2))
 	}
-	carg3 = (*C.gchar)(unsafe.Pointer(C.CString(title)))
+	carg3 = (*C.char)(unsafe.Pointer(C.CString(title)))
 	defer C.free(unsafe.Pointer(carg3))
 
 	cret = C.gtk_stack_add_titled(carg0, carg1, carg2, carg3)
@@ -141452,11 +141452,11 @@ func (stack *StackInstance) AddTitled(child Widget, name string, title string) S
 // Returns %NULL if there is no child with this name.
 func (stack *StackInstance) GetChildByName(name string) Widget {
 	var carg0 *C.GtkStack  // in, none, converted
-	var carg1 *C.gchar     // in, none, string
+	var carg1 *C.char      // in, none, string, casted *C.gchar
 	var cret  *C.GtkWidget // return, none, converted
 
 	carg0 = (*C.GtkStack)(UnsafeStackToGlibNone(stack))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(name)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(name)))
 	defer C.free(unsafe.Pointer(carg1))
 
 	cret = C.gtk_stack_get_child_by_name(carg0, carg1)
@@ -141704,7 +141704,7 @@ func (stack *StackInstance) GetVisibleChild() Widget {
 // Returns %NULL if there is no visible child.
 func (stack *StackInstance) GetVisibleChildName() string {
 	var carg0 *C.GtkStack // in, none, converted
-	var cret  *C.gchar    // return, none, string
+	var cret  *C.char     // return, none, string, casted *C.gchar
 
 	carg0 = (*C.GtkStack)(UnsafeStackToGlibNone(stack))
 
@@ -141713,7 +141713,7 @@ func (stack *StackInstance) GetVisibleChildName() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -141901,11 +141901,11 @@ func (stack *StackInstance) SetVisibleChild(child Widget) {
 // child of @stack.
 func (stack *StackInstance) SetVisibleChildFull(name string, transition StackTransitionType) {
 	var carg0 *C.GtkStack              // in, none, converted
-	var carg1 *C.gchar                 // in, none, string
+	var carg1 *C.char                  // in, none, string, casted *C.gchar
 	var carg2 C.GtkStackTransitionType // in, none, casted
 
 	carg0 = (*C.GtkStack)(UnsafeStackToGlibNone(stack))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(name)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(name)))
 	defer C.free(unsafe.Pointer(carg1))
 	carg2 = C.GtkStackTransitionType(transition)
 
@@ -141932,10 +141932,10 @@ func (stack *StackInstance) SetVisibleChildFull(name string, transition StackTra
 // child of @stack.
 func (stack *StackInstance) SetVisibleChildName(name string) {
 	var carg0 *C.GtkStack // in, none, converted
-	var carg1 *C.gchar    // in, none, string
+	var carg1 *C.char     // in, none, string, casted *C.gchar
 
 	carg0 = (*C.GtkStack)(UnsafeStackToGlibNone(stack))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(name)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(name)))
 	defer C.free(unsafe.Pointer(carg1))
 
 	C.gtk_stack_set_visible_child_name(carg0, carg1)
@@ -142511,11 +142511,11 @@ func NewStatusbarInstance() Widget {
 // Deprecated: (since 4.10.0) This widget will be removed in GTK 5
 func (statusbar *StatusbarInstance) GetContextID(contextDescription string) uint {
 	var carg0 *C.GtkStatusbar // in, none, converted
-	var carg1 *C.gchar        // in, none, string
+	var carg1 *C.char         // in, none, string, casted *C.gchar
 	var cret  C.guint         // return, none, casted
 
 	carg0 = (*C.GtkStatusbar)(UnsafeStatusbarToGlibNone(statusbar))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(contextDescription)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(contextDescription)))
 	defer C.free(unsafe.Pointer(carg1))
 
 	cret = C.gtk_statusbar_get_context_id(carg0, carg1)
@@ -142573,12 +142573,12 @@ func (statusbar *StatusbarInstance) Pop(contextId uint) {
 func (statusbar *StatusbarInstance) Push(contextId uint, text string) uint {
 	var carg0 *C.GtkStatusbar // in, none, converted
 	var carg1 C.guint         // in, none, casted
-	var carg2 *C.gchar        // in, none, string
+	var carg2 *C.char         // in, none, string, casted *C.gchar
 	var cret  C.guint         // return, none, casted
 
 	carg0 = (*C.GtkStatusbar)(UnsafeStatusbarToGlibNone(statusbar))
 	carg1 = C.guint(contextId)
-	carg2 = (*C.gchar)(unsafe.Pointer(C.CString(text)))
+	carg2 = (*C.char)(unsafe.Pointer(C.CString(text)))
 	defer C.free(unsafe.Pointer(carg2))
 
 	cret = C.gtk_statusbar_push(carg0, carg1, carg2)
@@ -143729,7 +143729,7 @@ func (self *TextInstance) GetInvisibleChar() uint32 {
 // calling [method@Gtk.EntryBuffer.get_max_length] on it.
 func (self *TextInstance) GetMaxLength() int {
 	var carg0 *C.GtkText // in, none, converted
-	var cret  C.int      // return, none, casted
+	var cret  C.int      // return, none, casted, casted C.gint
 
 	carg0 = (*C.GtkText)(UnsafeTextToGlibNone(self))
 
@@ -143780,7 +143780,7 @@ func (self *TextInstance) GetOverwriteMode() bool {
 // If no placeholder text has been set, %NULL will be returned.
 func (self *TextInstance) GetPlaceholderText() string {
 	var carg0 *C.GtkText // in, none, converted
-	var cret  *C.gchar   // return, none, string
+	var cret  *C.char    // return, none, string, casted *C.gchar
 
 	carg0 = (*C.GtkText)(UnsafeTextToGlibNone(self))
 
@@ -143789,7 +143789,7 @@ func (self *TextInstance) GetPlaceholderText() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -144144,7 +144144,7 @@ func (self *TextInstance) SetInvisibleChar(ch uint32) {
 // calling [method@Gtk.EntryBuffer.set_max_length] on it.
 func (self *TextInstance) SetMaxLength(length int) {
 	var carg0 *C.GtkText // in, none, converted
-	var carg1 C.int      // in, none, casted
+	var carg1 C.int      // in, none, casted, casted C.gint
 
 	carg0 = (*C.GtkText)(UnsafeTextToGlibNone(self))
 	carg1 = C.int(length)
@@ -144189,11 +144189,11 @@ func (self *TextInstance) SetOverwriteMode(overwrite bool) {
 // contents of the `GtkText`.
 func (self *TextInstance) SetPlaceholderText(text string) {
 	var carg0 *C.GtkText // in, none, converted
-	var carg1 *C.gchar   // in, none, string, nullable-string
+	var carg1 *C.char    // in, none, string, nullable-string
 
 	carg0 = (*C.GtkText)(UnsafeTextToGlibNone(self))
 	if text != "" {
-		carg1 = (*C.gchar)(unsafe.Pointer(C.CString(text)))
+		carg1 = (*C.char)(unsafe.Pointer(C.CString(text)))
 		defer C.free(unsafe.Pointer(carg1))
 	}
 
@@ -145444,8 +145444,8 @@ func (textView *TextViewInstance) AddChildAtAnchor(child Widget, anchor TextChil
 func (textView *TextViewInstance) AddOverlay(child Widget, xpos int, ypos int) {
 	var carg0 *C.GtkTextView // in, none, converted
 	var carg1 *C.GtkWidget   // in, none, converted
-	var carg2 C.int          // in, none, casted
-	var carg3 C.int          // in, none, casted
+	var carg2 C.int          // in, none, casted, casted C.gint
+	var carg3 C.int          // in, none, casted, casted C.gint
 
 	carg0 = (*C.GtkTextView)(UnsafeTextViewToGlibNone(textView))
 	carg1 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(child))
@@ -145556,10 +145556,10 @@ func (textView *TextViewInstance) BackwardDisplayLineStart(iter *TextIter) bool 
 func (textView *TextViewInstance) BufferToWindowCoords(win TextWindowType, bufferX int, bufferY int) (int, int) {
 	var carg0 *C.GtkTextView      // in, none, converted
 	var carg1 C.GtkTextWindowType // in, none, casted
-	var carg2 C.int               // in, none, casted
-	var carg3 C.int               // in, none, casted
-	var carg4 C.int               // out, full, casted
-	var carg5 C.int               // out, full, casted
+	var carg2 C.int               // in, none, casted, casted C.gint
+	var carg3 C.int               // in, none, casted, casted C.gint
+	var carg4 C.int               // out, full, casted, casted C.gint
+	var carg5 C.int               // out, full, casted, casted C.gint
 
 	carg0 = (*C.GtkTextView)(UnsafeTextViewToGlibNone(textView))
 	carg1 = C.GtkTextWindowType(win)
@@ -145695,7 +145695,7 @@ func (textView *TextViewInstance) GetAcceptsTab() bool {
 // Gets the bottom margin for text in the @text_view.
 func (textView *TextViewInstance) GetBottomMargin() int {
 	var carg0 *C.GtkTextView // in, none, converted
-	var cret  C.int          // return, none, casted
+	var cret  C.int          // return, none, casted, casted C.gint
 
 	carg0 = (*C.GtkTextView)(UnsafeTextViewToGlibNone(textView))
 
@@ -145912,7 +145912,7 @@ func (textView *TextViewInstance) GetGutter(win TextWindowType) Widget {
 // The indentation may be negative.
 func (textView *TextViewInstance) GetIndent() int {
 	var carg0 *C.GtkTextView // in, none, converted
-	var cret  C.int          // return, none, casted
+	var cret  C.int          // return, none, casted, casted C.gint
 
 	carg0 = (*C.GtkTextView)(UnsafeTextViewToGlibNone(textView))
 
@@ -145990,8 +145990,8 @@ func (textView *TextViewInstance) GetInputPurpose() InputPurpose {
 // [method@Gtk.TextView.window_to_buffer_coords].
 func (textView *TextViewInstance) GetIterAtLocation(x int, y int) (TextIter, bool) {
 	var carg0 *C.GtkTextView // in, none, converted
-	var carg2 C.int          // in, none, casted
-	var carg3 C.int          // in, none, casted
+	var carg2 C.int          // in, none, casted, casted C.gint
+	var carg3 C.int          // in, none, casted, casted C.gint
 	var carg1 C.GtkTextIter  // out, transfer: none, C Pointers: 0, Name: TextIter, caller-allocates
 	var cret  C.gboolean     // return
 
@@ -146045,10 +146045,10 @@ func (textView *TextViewInstance) GetIterAtLocation(x int, y int) (TextIter, boo
 // which returns cursor locations, i.e. positions between characters.
 func (textView *TextViewInstance) GetIterAtPosition(x int, y int) (TextIter, int, bool) {
 	var carg0 *C.GtkTextView // in, none, converted
-	var carg3 C.int          // in, none, casted
-	var carg4 C.int          // in, none, casted
+	var carg3 C.int          // in, none, casted, casted C.gint
+	var carg4 C.int          // in, none, casted, casted C.gint
 	var carg1 C.GtkTextIter  // out, transfer: none, C Pointers: 0, Name: TextIter, caller-allocates
-	var carg2 C.int          // out, full, casted
+	var carg2 C.int          // out, full, casted, casted C.gint
 	var cret  C.gboolean     // return
 
 	carg0 = (*C.GtkTextView)(UnsafeTextViewToGlibNone(textView))
@@ -146145,7 +146145,7 @@ func (textView *TextViewInstance) GetJustification() Justification {
 // Tags in the buffer may override the default.
 func (textView *TextViewInstance) GetLeftMargin() int {
 	var carg0 *C.GtkTextView // in, none, converted
-	var cret  C.int          // return, none, casted
+	var cret  C.int          // return, none, casted, casted C.gint
 
 	carg0 = (*C.GtkTextView)(UnsafeTextViewToGlibNone(textView))
 
@@ -146179,9 +146179,9 @@ func (textView *TextViewInstance) GetLeftMargin() int {
 // of the line.
 func (textView *TextViewInstance) GetLineAtY(y int) (TextIter, int) {
 	var carg0 *C.GtkTextView // in, none, converted
-	var carg2 C.int          // in, none, casted
+	var carg2 C.int          // in, none, casted, casted C.gint
 	var carg1 C.GtkTextIter  // out, transfer: none, C Pointers: 0, Name: TextIter, caller-allocates
-	var carg3 C.int          // out, full, casted
+	var carg3 C.int          // out, full, casted, casted C.gint
 
 	carg0 = (*C.GtkTextView)(UnsafeTextViewToGlibNone(textView))
 	carg2 = C.int(y)
@@ -146220,8 +146220,8 @@ func (textView *TextViewInstance) GetLineAtY(y int) (TextIter, int) {
 func (textView *TextViewInstance) GetLineYrange(iter *TextIter) (int, int) {
 	var carg0 *C.GtkTextView // in, none, converted
 	var carg1 *C.GtkTextIter // in, none, converted
-	var carg2 C.int          // out, full, casted
-	var carg3 C.int          // out, full, casted
+	var carg2 C.int          // out, full, casted, casted C.gint
+	var carg3 C.int          // out, full, casted, casted C.gint
 
 	carg0 = (*C.GtkTextView)(UnsafeTextViewToGlibNone(textView))
 	carg1 = (*C.GtkTextIter)(UnsafeTextIterToGlibNone(iter))
@@ -146323,7 +146323,7 @@ func (textView *TextViewInstance) GetOverwrite() bool {
 // is equal to the line space between each paragraph.
 func (textView *TextViewInstance) GetPixelsAboveLines() int {
 	var carg0 *C.GtkTextView // in, none, converted
-	var cret  C.int          // return, none, casted
+	var cret  C.int          // return, none, casted, casted C.gint
 
 	carg0 = (*C.GtkTextView)(UnsafeTextViewToGlibNone(textView))
 
@@ -146348,7 +146348,7 @@ func (textView *TextViewInstance) GetPixelsAboveLines() int {
 // the value returned by [method@Gtk.TextView.get_pixels_above_lines].
 func (textView *TextViewInstance) GetPixelsBelowLines() int {
 	var carg0 *C.GtkTextView // in, none, converted
-	var cret  C.int          // return, none, casted
+	var cret  C.int          // return, none, casted, casted C.gint
 
 	carg0 = (*C.GtkTextView)(UnsafeTextViewToGlibNone(textView))
 
@@ -146371,7 +146371,7 @@ func (textView *TextViewInstance) GetPixelsBelowLines() int {
 // inside a paragraph.
 func (textView *TextViewInstance) GetPixelsInsideWrap() int {
 	var carg0 *C.GtkTextView // in, none, converted
-	var cret  C.int          // return, none, casted
+	var cret  C.int          // return, none, casted, casted C.gint
 
 	carg0 = (*C.GtkTextView)(UnsafeTextViewToGlibNone(textView))
 
@@ -146395,7 +146395,7 @@ func (textView *TextViewInstance) GetPixelsInsideWrap() int {
 // Tags in the buffer may override the default.
 func (textView *TextViewInstance) GetRightMargin() int {
 	var carg0 *C.GtkTextView // in, none, converted
-	var cret  C.int          // return, none, casted
+	var cret  C.int          // return, none, casted, casted C.gint
 
 	carg0 = (*C.GtkTextView)(UnsafeTextViewToGlibNone(textView))
 
@@ -146468,7 +146468,7 @@ func (textView *TextViewInstance) GetTabs() *pango.TabArray {
 // Gets the top margin for text in the @text_view.
 func (textView *TextViewInstance) GetTopMargin() int {
 	var carg0 *C.GtkTextView // in, none, converted
-	var cret  C.int          // return, none, casted
+	var cret  C.int          // return, none, casted, casted C.gint
 
 	carg0 = (*C.GtkTextView)(UnsafeTextViewToGlibNone(textView))
 
@@ -146579,8 +146579,8 @@ func (textView *TextViewInstance) MoveMarkOnscreen(mark TextMark) bool {
 func (textView *TextViewInstance) MoveOverlay(child Widget, xpos int, ypos int) {
 	var carg0 *C.GtkTextView // in, none, converted
 	var carg1 *C.GtkWidget   // in, none, converted
-	var carg2 C.int          // in, none, casted
-	var carg3 C.int          // in, none, casted
+	var carg2 C.int          // in, none, casted, casted C.gint
+	var carg3 C.int          // in, none, casted, casted C.gint
 
 	carg0 = (*C.GtkTextView)(UnsafeTextViewToGlibNone(textView))
 	carg1 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(child))
@@ -146621,7 +146621,7 @@ func (textView *TextViewInstance) MoveOverlay(child Widget, xpos int, ypos int) 
 func (textView *TextViewInstance) MoveVisually(iter *TextIter, count int) bool {
 	var carg0 *C.GtkTextView // in, none, converted
 	var carg1 *C.GtkTextIter // in, none, converted
-	var carg2 C.int          // in, none, casted
+	var carg2 C.int          // in, none, casted, casted C.gint
 	var cret  C.gboolean     // return
 
 	carg0 = (*C.GtkTextView)(UnsafeTextViewToGlibNone(textView))
@@ -146773,20 +146773,20 @@ func (textView *TextViewInstance) ScrollMarkOnscreen(mark TextMark) {
 func (textView *TextViewInstance) ScrollToIter(iter *TextIter, withinMargin float64, useAlign bool, xalign float64, yalign float64) bool {
 	var carg0 *C.GtkTextView // in, none, converted
 	var carg1 *C.GtkTextIter // in, none, converted
-	var carg2 C.gdouble      // in, none, casted
+	var carg2 C.double       // in, none, casted, casted C.gdouble
 	var carg3 C.gboolean     // in
-	var carg4 C.gdouble      // in, none, casted
-	var carg5 C.gdouble      // in, none, casted
+	var carg4 C.double       // in, none, casted, casted C.gdouble
+	var carg5 C.double       // in, none, casted, casted C.gdouble
 	var cret  C.gboolean     // return
 
 	carg0 = (*C.GtkTextView)(UnsafeTextViewToGlibNone(textView))
 	carg1 = (*C.GtkTextIter)(UnsafeTextIterToGlibNone(iter))
-	carg2 = C.gdouble(withinMargin)
+	carg2 = C.double(withinMargin)
 	if useAlign {
 		carg3 = C.TRUE
 	}
-	carg4 = C.gdouble(xalign)
-	carg5 = C.gdouble(yalign)
+	carg4 = C.double(xalign)
+	carg5 = C.double(yalign)
 
 	cret = C.gtk_text_view_scroll_to_iter(carg0, carg1, carg2, carg3, carg4, carg5)
 	runtime.KeepAlive(textView)
@@ -146827,19 +146827,19 @@ func (textView *TextViewInstance) ScrollToIter(iter *TextIter, withinMargin floa
 func (textView *TextViewInstance) ScrollToMark(mark TextMark, withinMargin float64, useAlign bool, xalign float64, yalign float64) {
 	var carg0 *C.GtkTextView // in, none, converted
 	var carg1 *C.GtkTextMark // in, none, converted
-	var carg2 C.gdouble      // in, none, casted
+	var carg2 C.double       // in, none, casted, casted C.gdouble
 	var carg3 C.gboolean     // in
-	var carg4 C.gdouble      // in, none, casted
-	var carg5 C.gdouble      // in, none, casted
+	var carg4 C.double       // in, none, casted, casted C.gdouble
+	var carg5 C.double       // in, none, casted, casted C.gdouble
 
 	carg0 = (*C.GtkTextView)(UnsafeTextViewToGlibNone(textView))
 	carg1 = (*C.GtkTextMark)(UnsafeTextMarkToGlibNone(mark))
-	carg2 = C.gdouble(withinMargin)
+	carg2 = C.double(withinMargin)
 	if useAlign {
 		carg3 = C.TRUE
 	}
-	carg4 = C.gdouble(xalign)
-	carg5 = C.gdouble(yalign)
+	carg4 = C.double(xalign)
+	carg5 = C.double(yalign)
 
 	C.gtk_text_view_scroll_to_mark(carg0, carg1, carg2, carg3, carg4, carg5)
 	runtime.KeepAlive(textView)
@@ -146891,7 +146891,7 @@ func (textView *TextViewInstance) SetAcceptsTab(acceptsTab bool) {
 // In CSS terms, the value set here is padding.
 func (textView *TextViewInstance) SetBottomMargin(bottomMargin int) {
 	var carg0 *C.GtkTextView // in, none, converted
-	var carg1 C.int          // in, none, casted
+	var carg1 C.int          // in, none, casted, casted C.gint
 
 	carg0 = (*C.GtkTextView)(UnsafeTextViewToGlibNone(textView))
 	carg1 = C.int(bottomMargin)
@@ -147041,7 +147041,7 @@ func (textView *TextViewInstance) SetGutter(win TextWindowType, widget Widget) {
 // Tags in the buffer may override the default.
 func (textView *TextViewInstance) SetIndent(indent int) {
 	var carg0 *C.GtkTextView // in, none, converted
-	var carg1 C.int          // in, none, casted
+	var carg1 C.int          // in, none, casted, casted C.gint
 
 	carg0 = (*C.GtkTextView)(UnsafeTextViewToGlibNone(textView))
 	carg1 = C.int(indent)
@@ -147130,7 +147130,7 @@ func (textView *TextViewInstance) SetJustification(justification Justification) 
 // In CSS terms, the value set here is padding.
 func (textView *TextViewInstance) SetLeftMargin(leftMargin int) {
 	var carg0 *C.GtkTextView // in, none, converted
-	var carg1 C.int          // in, none, casted
+	var carg1 C.int          // in, none, casted, casted C.gint
 
 	carg0 = (*C.GtkTextView)(UnsafeTextViewToGlibNone(textView))
 	carg1 = C.int(leftMargin)
@@ -147194,7 +147194,7 @@ func (textView *TextViewInstance) SetOverwrite(overwrite bool) {
 // Tags in the buffer for @text_view may override the defaults.
 func (textView *TextViewInstance) SetPixelsAboveLines(pixelsAboveLines int) {
 	var carg0 *C.GtkTextView // in, none, converted
-	var carg1 C.int          // in, none, casted
+	var carg1 C.int          // in, none, casted, casted C.gint
 
 	carg0 = (*C.GtkTextView)(UnsafeTextViewToGlibNone(textView))
 	carg1 = C.int(pixelsAboveLines)
@@ -147216,7 +147216,7 @@ func (textView *TextViewInstance) SetPixelsAboveLines(pixelsAboveLines int) {
 // May be overridden by tags applied to @text_view’s buffer.
 func (textView *TextViewInstance) SetPixelsBelowLines(pixelsBelowLines int) {
 	var carg0 *C.GtkTextView // in, none, converted
-	var carg1 C.int          // in, none, casted
+	var carg1 C.int          // in, none, casted, casted C.gint
 
 	carg0 = (*C.GtkTextView)(UnsafeTextViewToGlibNone(textView))
 	carg1 = C.int(pixelsBelowLines)
@@ -147238,7 +147238,7 @@ func (textView *TextViewInstance) SetPixelsBelowLines(pixelsBelowLines int) {
 // May be overridden by tags in @text_view’s buffer.
 func (textView *TextViewInstance) SetPixelsInsideWrap(pixelsInsideWrap int) {
 	var carg0 *C.GtkTextView // in, none, converted
-	var carg1 C.int          // in, none, casted
+	var carg1 C.int          // in, none, casted, casted C.gint
 
 	carg0 = (*C.GtkTextView)(UnsafeTextViewToGlibNone(textView))
 	carg1 = C.int(pixelsInsideWrap)
@@ -147262,7 +147262,7 @@ func (textView *TextViewInstance) SetPixelsInsideWrap(pixelsInsideWrap int) {
 // In CSS terms, the value set here is padding.
 func (textView *TextViewInstance) SetRightMargin(rightMargin int) {
 	var carg0 *C.GtkTextView // in, none, converted
-	var carg1 C.int          // in, none, casted
+	var carg1 C.int          // in, none, casted, casted C.gint
 
 	carg0 = (*C.GtkTextView)(UnsafeTextViewToGlibNone(textView))
 	carg1 = C.int(rightMargin)
@@ -147305,7 +147305,7 @@ func (textView *TextViewInstance) SetTabs(tabs *pango.TabArray) {
 // In CSS terms, the value set here is padding.
 func (textView *TextViewInstance) SetTopMargin(topMargin int) {
 	var carg0 *C.GtkTextView // in, none, converted
-	var carg1 C.int          // in, none, casted
+	var carg1 C.int          // in, none, casted, casted C.gint
 
 	carg0 = (*C.GtkTextView)(UnsafeTextViewToGlibNone(textView))
 	carg1 = C.int(topMargin)
@@ -147387,10 +147387,10 @@ func (textView *TextViewInstance) StartsDisplayLine(iter *TextIter) bool {
 func (textView *TextViewInstance) WindowToBufferCoords(win TextWindowType, windowX int, windowY int) (int, int) {
 	var carg0 *C.GtkTextView      // in, none, converted
 	var carg1 C.GtkTextWindowType // in, none, casted
-	var carg2 C.int               // in, none, casted
-	var carg3 C.int               // in, none, casted
-	var carg4 C.int               // out, full, casted
-	var carg5 C.int               // out, full, casted
+	var carg2 C.int               // in, none, casted, casted C.gint
+	var carg3 C.int               // in, none, casted, casted C.gint
+	var carg4 C.int               // out, full, casted, casted C.gint
+	var carg5 C.int               // out, full, casted, casted C.gint
 
 	carg0 = (*C.GtkTextView)(UnsafeTextViewToGlibNone(textView))
 	carg1 = C.GtkTextWindowType(win)
@@ -147636,10 +147636,10 @@ func NewToggleButtonInstance() Widget {
 //
 // Creates a new toggle button with a text label.
 func NewToggleButtonInstanceWithLabel(label string) Widget {
-	var carg1 *C.gchar     // in, none, string
+	var carg1 *C.char      // in, none, string, casted *C.gchar
 	var cret  *C.GtkWidget // return, none, converted
 
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(label)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(label)))
 	defer C.free(unsafe.Pointer(carg1))
 
 	cret = C.gtk_toggle_button_new_with_label(carg1)
@@ -147668,10 +147668,10 @@ func NewToggleButtonInstanceWithLabel(label string) Widget {
 // The label will be created using [ctor@Gtk.Label.new_with_mnemonic],
 // so underscores in @label indicate the mnemonic for the button.
 func NewToggleButtonInstanceWithMnemonic(label string) Widget {
-	var carg1 *C.gchar     // in, none, string
+	var carg1 *C.char      // in, none, string, casted *C.gchar
 	var cret  *C.GtkWidget // return, none, converted
 
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(label)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(label)))
 	defer C.free(unsafe.Pointer(carg1))
 
 	cret = C.gtk_toggle_button_new_with_mnemonic(carg1)
@@ -149702,7 +149702,7 @@ func NewTreeViewInstanceWithModel(model TreeModel) Widget {
 func (treeView *TreeViewInstance) AppendColumn(column TreeViewColumn) int {
 	var carg0 *C.GtkTreeView       // in, none, converted
 	var carg1 *C.GtkTreeViewColumn // in, none, converted
-	var cret  C.int                // return, none, casted
+	var cret  C.int                // return, none, casted, casted C.gint
 
 	carg0 = (*C.GtkTreeView)(UnsafeTreeViewToGlibNone(treeView))
 	carg1 = (*C.GtkTreeViewColumn)(UnsafeTreeViewColumnToGlibNone(column))
@@ -149799,10 +149799,10 @@ func (treeView *TreeViewInstance) ColumnsAutosize() {
 // Deprecated: (since 4.10.0) Use [class@Gtk.ListView] or [class@Gtk.ColumnView] instead
 func (treeView *TreeViewInstance) ConvertBinWindowToTreeCoords(bx int, by int) (int, int) {
 	var carg0 *C.GtkTreeView // in, none, converted
-	var carg1 C.int          // in, none, casted
-	var carg2 C.int          // in, none, casted
-	var carg3 C.int          // out, full, casted
-	var carg4 C.int          // out, full, casted
+	var carg1 C.int          // in, none, casted, casted C.gint
+	var carg2 C.int          // in, none, casted, casted C.gint
+	var carg3 C.int          // out, full, casted, casted C.gint
+	var carg4 C.int          // out, full, casted, casted C.gint
 
 	carg0 = (*C.GtkTreeView)(UnsafeTreeViewToGlibNone(treeView))
 	carg1 = C.int(bx)
@@ -149839,10 +149839,10 @@ func (treeView *TreeViewInstance) ConvertBinWindowToTreeCoords(bx int, by int) (
 // Deprecated: (since 4.10.0) Use [class@Gtk.ListView] or [class@Gtk.ColumnView] instead
 func (treeView *TreeViewInstance) ConvertBinWindowToWidgetCoords(bx int, by int) (int, int) {
 	var carg0 *C.GtkTreeView // in, none, converted
-	var carg1 C.int          // in, none, casted
-	var carg2 C.int          // in, none, casted
-	var carg3 C.int          // out, full, casted
-	var carg4 C.int          // out, full, casted
+	var carg1 C.int          // in, none, casted, casted C.gint
+	var carg2 C.int          // in, none, casted, casted C.gint
+	var carg3 C.int          // out, full, casted, casted C.gint
+	var carg4 C.int          // out, full, casted, casted C.gint
 
 	carg0 = (*C.GtkTreeView)(UnsafeTreeViewToGlibNone(treeView))
 	carg1 = C.int(bx)
@@ -149880,10 +149880,10 @@ func (treeView *TreeViewInstance) ConvertBinWindowToWidgetCoords(bx int, by int)
 // Deprecated: (since 4.10.0) Use [class@Gtk.ListView] or [class@Gtk.ColumnView] instead
 func (treeView *TreeViewInstance) ConvertTreeToBinWindowCoords(tx int, ty int) (int, int) {
 	var carg0 *C.GtkTreeView // in, none, converted
-	var carg1 C.int          // in, none, casted
-	var carg2 C.int          // in, none, casted
-	var carg3 C.int          // out, full, casted
-	var carg4 C.int          // out, full, casted
+	var carg1 C.int          // in, none, casted, casted C.gint
+	var carg2 C.int          // in, none, casted, casted C.gint
+	var carg3 C.int          // out, full, casted, casted C.gint
+	var carg4 C.int          // out, full, casted, casted C.gint
 
 	carg0 = (*C.GtkTreeView)(UnsafeTreeViewToGlibNone(treeView))
 	carg1 = C.int(tx)
@@ -149921,10 +149921,10 @@ func (treeView *TreeViewInstance) ConvertTreeToBinWindowCoords(tx int, ty int) (
 // Deprecated: (since 4.10.0) Use [class@Gtk.ListView] or [class@Gtk.ColumnView] instead
 func (treeView *TreeViewInstance) ConvertTreeToWidgetCoords(tx int, ty int) (int, int) {
 	var carg0 *C.GtkTreeView // in, none, converted
-	var carg1 C.int          // in, none, casted
-	var carg2 C.int          // in, none, casted
-	var carg3 C.int          // out, full, casted
-	var carg4 C.int          // out, full, casted
+	var carg1 C.int          // in, none, casted, casted C.gint
+	var carg2 C.int          // in, none, casted, casted C.gint
+	var carg3 C.int          // out, full, casted, casted C.gint
+	var carg4 C.int          // out, full, casted, casted C.gint
 
 	carg0 = (*C.GtkTreeView)(UnsafeTreeViewToGlibNone(treeView))
 	carg1 = C.int(tx)
@@ -149961,10 +149961,10 @@ func (treeView *TreeViewInstance) ConvertTreeToWidgetCoords(tx int, ty int) (int
 // Deprecated: (since 4.10.0) Use [class@Gtk.ListView] or [class@Gtk.ColumnView] instead
 func (treeView *TreeViewInstance) ConvertWidgetToBinWindowCoords(wx int, wy int) (int, int) {
 	var carg0 *C.GtkTreeView // in, none, converted
-	var carg1 C.int          // in, none, casted
-	var carg2 C.int          // in, none, casted
-	var carg3 C.int          // out, full, casted
-	var carg4 C.int          // out, full, casted
+	var carg1 C.int          // in, none, casted, casted C.gint
+	var carg2 C.int          // in, none, casted, casted C.gint
+	var carg3 C.int          // out, full, casted, casted C.gint
+	var carg4 C.int          // out, full, casted, casted C.gint
 
 	carg0 = (*C.GtkTreeView)(UnsafeTreeViewToGlibNone(treeView))
 	carg1 = C.int(wx)
@@ -150002,10 +150002,10 @@ func (treeView *TreeViewInstance) ConvertWidgetToBinWindowCoords(wx int, wy int)
 // Deprecated: (since 4.10.0) Use [class@Gtk.ListView] or [class@Gtk.ColumnView] instead
 func (treeView *TreeViewInstance) ConvertWidgetToTreeCoords(wx int, wy int) (int, int) {
 	var carg0 *C.GtkTreeView // in, none, converted
-	var carg1 C.int          // in, none, casted
-	var carg2 C.int          // in, none, casted
-	var carg3 C.int          // out, full, casted
-	var carg4 C.int          // out, full, casted
+	var carg1 C.int          // in, none, casted, casted C.gint
+	var carg2 C.int          // in, none, casted, casted C.gint
+	var carg3 C.int          // out, full, casted, casted C.gint
+	var carg4 C.int          // out, full, casted, casted C.gint
 
 	carg0 = (*C.GtkTreeView)(UnsafeTreeViewToGlibNone(treeView))
 	carg1 = C.int(wx)
@@ -150333,7 +150333,7 @@ func (treeView *TreeViewInstance) GetCellArea(path *TreePath, column TreeViewCol
 // Deprecated: (since 4.10.0) Use [class@Gtk.ListView] or [class@Gtk.ColumnView] instead
 func (treeView *TreeViewInstance) GetColumn(n int) TreeViewColumn {
 	var carg0 *C.GtkTreeView       // in, none, converted
-	var carg1 C.int                // in, none, casted
+	var carg1 C.int                // in, none, casted, casted C.gint
 	var cret  *C.GtkTreeViewColumn // return, none, converted
 
 	carg0 = (*C.GtkTreeView)(UnsafeTreeViewToGlibNone(treeView))
@@ -150412,8 +150412,8 @@ func (treeView *TreeViewInstance) GetCursor() (*TreePath, TreeViewColumn) {
 // Deprecated: (since 4.10.0) Use [class@Gtk.ListView] or [class@Gtk.ColumnView] instead
 func (treeView *TreeViewInstance) GetDestRowAtPos(dragX int, dragY int) (*TreePath, TreeViewDropPosition, bool) {
 	var carg0 *C.GtkTreeView            // in, none, converted
-	var carg1 C.int                     // in, none, casted
-	var carg2 C.int                     // in, none, casted
+	var carg1 C.int                     // in, none, casted, casted C.gint
+	var carg2 C.int                     // in, none, casted, casted C.gint
 	var carg3 *C.GtkTreePath            // out, full, converted, nullable
 	var carg4 C.GtkTreeViewDropPosition // out, full, casted
 	var cret  C.gboolean                // return
@@ -150716,7 +150716,7 @@ func (treeView *TreeViewInstance) GetHoverSelection() bool {
 // Deprecated: (since 4.10.0) Use [class@Gtk.ListView] or [class@Gtk.ColumnView] instead
 func (treeView *TreeViewInstance) GetLevelIndentation() int {
 	var carg0 *C.GtkTreeView // in, none, converted
-	var cret  C.int          // return, none, casted
+	var cret  C.int          // return, none, casted, casted C.gint
 
 	carg0 = (*C.GtkTreeView)(UnsafeTreeViewToGlibNone(treeView))
 
@@ -150818,12 +150818,12 @@ func (treeView *TreeViewInstance) GetNColumns() uint {
 // Deprecated: (since 4.10.0) Use [class@Gtk.ListView] or [class@Gtk.ColumnView] instead
 func (treeView *TreeViewInstance) GetPathAtPos(x int, y int) (*TreePath, TreeViewColumn, int, int, bool) {
 	var carg0 *C.GtkTreeView       // in, none, converted
-	var carg1 C.int                // in, none, casted
-	var carg2 C.int                // in, none, casted
+	var carg1 C.int                // in, none, casted, casted C.gint
+	var carg2 C.int                // in, none, casted, casted C.gint
 	var carg3 *C.GtkTreePath       // out, full, converted, nullable
 	var carg4 *C.GtkTreeViewColumn // out, none, converted, nullable
-	var carg5 C.int                // out, full, casted
-	var carg6 C.int                // out, full, casted
+	var carg5 C.int                // out, full, casted, casted C.gint
+	var carg6 C.int                // out, full, casted, casted C.gint
 	var cret  C.gboolean           // return
 
 	carg0 = (*C.GtkTreeView)(UnsafeTreeViewToGlibNone(treeView))
@@ -150921,7 +150921,7 @@ func (treeView *TreeViewInstance) GetRubberBanding() bool {
 // Deprecated: (since 4.10.0) Use [class@Gtk.ListView] or [class@Gtk.ColumnView] instead
 func (treeView *TreeViewInstance) GetSearchColumn() int {
 	var carg0 *C.GtkTreeView // in, none, converted
-	var cret  C.int          // return, none, casted
+	var cret  C.int          // return, none, casted, casted C.gint
 
 	carg0 = (*C.GtkTreeView)(UnsafeTreeViewToGlibNone(treeView))
 
@@ -150996,7 +150996,7 @@ func (treeView *TreeViewInstance) GetShowExpanders() bool {
 // Deprecated: (since 4.10.0) Use [class@Gtk.ListView] or [class@Gtk.ColumnView] instead
 func (treeView *TreeViewInstance) GetTooltipColumn() int {
 	var carg0 *C.GtkTreeView // in, none, converted
-	var cret  C.int          // return, none, casted
+	var cret  C.int          // return, none, casted, casted C.gint
 
 	carg0 = (*C.GtkTreeView)(UnsafeTreeViewToGlibNone(treeView))
 
@@ -151041,8 +151041,8 @@ func (treeView *TreeViewInstance) GetTooltipColumn() int {
 // Deprecated: (since 4.10.0) Use [class@Gtk.ListView] or [class@Gtk.ColumnView] instead
 func (treeView *TreeViewInstance) GetTooltipContext(x int, y int, keyboardTip bool) (TreeModel, *TreePath, TreeIter, bool) {
 	var carg0 *C.GtkTreeView  // in, none, converted
-	var carg1 C.int           // in, none, casted
-	var carg2 C.int           // in, none, casted
+	var carg1 C.int           // in, none, casted, casted C.gint
+	var carg2 C.int           // in, none, casted, casted C.gint
 	var carg3 C.gboolean      // in
 	var carg4 *C.GtkTreeModel // out, none, converted, nullable
 	var carg5 *C.GtkTreePath  // out, full, converted
@@ -151168,8 +151168,8 @@ func (treeView *TreeViewInstance) GetVisibleRect() gdk.Rectangle {
 func (treeView *TreeViewInstance) InsertColumn(column TreeViewColumn, position int) int {
 	var carg0 *C.GtkTreeView       // in, none, converted
 	var carg1 *C.GtkTreeViewColumn // in, none, converted
-	var carg2 C.int                // in, none, casted
-	var cret  C.int                // return, none, casted
+	var carg2 C.int                // in, none, casted, casted C.gint
+	var cret  C.int                // return, none, casted, casted C.gint
 
 	carg0 = (*C.GtkTreeView)(UnsafeTreeViewToGlibNone(treeView))
 	carg1 = (*C.GtkTreeViewColumn)(UnsafeTreeViewColumnToGlibNone(column))
@@ -151210,17 +151210,17 @@ func (treeView *TreeViewInstance) InsertColumn(column TreeViewColumn, position i
 // Deprecated: (since 4.10.0) Use [class@Gtk.ListView] or [class@Gtk.ColumnView] instead
 func (treeView *TreeViewInstance) InsertColumnWithDataFunc(position int, title string, cell CellRenderer, fn TreeCellDataFunc) int {
 	var carg0 *C.GtkTreeView        // in, none, converted
-	var carg1 C.int                 // in, none, casted
-	var carg2 *C.gchar              // in, none, string
+	var carg1 C.int                 // in, none, casted, casted C.gint
+	var carg2 *C.char               // in, none, string, casted *C.gchar
 	var carg3 *C.GtkCellRenderer    // in, none, converted
 	var carg4 C.GtkTreeCellDataFunc // callback, scope: notified, closure: carg5, destroy: carg6
 	var carg5 C.gpointer            // implicit
 	var carg6 C.GDestroyNotify      // implicit
-	var cret  C.int                 // return, none, casted
+	var cret  C.int                 // return, none, casted, casted C.gint
 
 	carg0 = (*C.GtkTreeView)(UnsafeTreeViewToGlibNone(treeView))
 	carg1 = C.int(position)
-	carg2 = (*C.gchar)(unsafe.Pointer(C.CString(title)))
+	carg2 = (*C.char)(unsafe.Pointer(C.CString(title)))
 	defer C.free(unsafe.Pointer(carg2))
 	carg3 = (*C.GtkCellRenderer)(UnsafeCellRendererToGlibNone(cell))
 	carg4 = (*[0]byte)(C._gotk4_gtk4_TreeCellDataFunc)
@@ -151281,12 +151281,12 @@ func (treeView *TreeViewInstance) InsertColumnWithDataFunc(position int, title s
 // Deprecated: (since 4.10.0) Use [class@Gtk.ListView] or [class@Gtk.ColumnView] instead
 func (treeView *TreeViewInstance) IsBlankAtPos(x int, y int) (*TreePath, TreeViewColumn, int, int, bool) {
 	var carg0 *C.GtkTreeView       // in, none, converted
-	var carg1 C.int                // in, none, casted
-	var carg2 C.int                // in, none, casted
+	var carg1 C.int                // in, none, casted, casted C.gint
+	var carg2 C.int                // in, none, casted, casted C.gint
 	var carg3 *C.GtkTreePath       // out, full, converted, nullable
 	var carg4 *C.GtkTreeViewColumn // out, none, converted, nullable
-	var carg5 C.int                // out, full, casted
-	var carg6 C.int                // out, full, casted
+	var carg5 C.int                // out, full, casted, casted C.gint
+	var carg6 C.int                // out, full, casted, casted C.gint
 	var cret  C.gboolean           // return
 
 	carg0 = (*C.GtkTreeView)(UnsafeTreeViewToGlibNone(treeView))
@@ -151414,7 +151414,7 @@ func (treeView *TreeViewInstance) MoveColumnAfter(column TreeViewColumn, baseCol
 func (treeView *TreeViewInstance) RemoveColumn(column TreeViewColumn) int {
 	var carg0 *C.GtkTreeView       // in, none, converted
 	var carg1 *C.GtkTreeViewColumn // in, none, converted
-	var cret  C.int                // return, none, casted
+	var cret  C.int                // return, none, casted, casted C.gint
 
 	carg0 = (*C.GtkTreeView)(UnsafeTreeViewToGlibNone(treeView))
 	carg1 = (*C.GtkTreeViewColumn)(UnsafeTreeViewColumnToGlibNone(column))
@@ -151524,8 +151524,8 @@ func (treeView *TreeViewInstance) ScrollToCell(path *TreePath, column TreeViewCo
 	var carg1 *C.GtkTreePath       // in, none, converted, nullable
 	var carg2 *C.GtkTreeViewColumn // in, none, converted, nullable
 	var carg3 C.gboolean           // in
-	var carg4 C.gfloat             // in, none, casted
-	var carg5 C.gfloat             // in, none, casted
+	var carg4 C.float              // in, none, casted, casted C.gfloat
+	var carg5 C.float              // in, none, casted, casted C.gfloat
 
 	carg0 = (*C.GtkTreeView)(UnsafeTreeViewToGlibNone(treeView))
 	if path != nil {
@@ -151537,8 +151537,8 @@ func (treeView *TreeViewInstance) ScrollToCell(path *TreePath, column TreeViewCo
 	if useAlign {
 		carg3 = C.TRUE
 	}
-	carg4 = C.gfloat(rowAlign)
-	carg5 = C.gfloat(colAlign)
+	carg4 = C.float(rowAlign)
+	carg5 = C.float(colAlign)
 
 	C.gtk_tree_view_scroll_to_cell(carg0, carg1, carg2, carg3, carg4, carg5)
 	runtime.KeepAlive(treeView)
@@ -151567,8 +151567,8 @@ func (treeView *TreeViewInstance) ScrollToCell(path *TreePath, column TreeViewCo
 // Deprecated: (since 4.10.0) Use [class@Gtk.ListView] or [class@Gtk.ColumnView] instead
 func (treeView *TreeViewInstance) ScrollToPoint(treeX int, treeY int) {
 	var carg0 *C.GtkTreeView // in, none, converted
-	var carg1 C.int          // in, none, casted
-	var carg2 C.int          // in, none, casted
+	var carg1 C.int          // in, none, casted, casted C.gint
+	var carg2 C.int          // in, none, casted, casted C.gint
 
 	carg0 = (*C.GtkTreeView)(UnsafeTreeViewToGlibNone(treeView))
 	carg1 = C.int(treeX)
@@ -152002,7 +152002,7 @@ func (treeView *TreeViewInstance) SetHoverSelection(hover bool) {
 // Deprecated: (since 4.10.0) Use [class@Gtk.ListView] or [class@Gtk.ColumnView] instead
 func (treeView *TreeViewInstance) SetLevelIndentation(indentation int) {
 	var carg0 *C.GtkTreeView // in, none, converted
-	var carg1 C.int          // in, none, casted
+	var carg1 C.int          // in, none, casted, casted C.gint
 
 	carg0 = (*C.GtkTreeView)(UnsafeTreeViewToGlibNone(treeView))
 	carg1 = C.int(indentation)
@@ -152146,7 +152146,7 @@ func (treeView *TreeViewInstance) SetRubberBanding(enable bool) {
 // Deprecated: (since 4.10.0) Use [class@Gtk.ListView] or [class@Gtk.ColumnView] instead
 func (treeView *TreeViewInstance) SetSearchColumn(column int) {
 	var carg0 *C.GtkTreeView // in, none, converted
-	var carg1 C.int          // in, none, casted
+	var carg1 C.int          // in, none, casted, casted C.gint
 
 	carg0 = (*C.GtkTreeView)(UnsafeTreeViewToGlibNone(treeView))
 	carg1 = C.int(column)
@@ -152281,7 +152281,7 @@ func (treeView *TreeViewInstance) SetTooltipCell(tooltip Tooltip, path *TreePath
 // Deprecated: (since 4.10.0) Use [class@Gtk.ListView] or [class@Gtk.ColumnView] instead
 func (treeView *TreeViewInstance) SetTooltipColumn(column int) {
 	var carg0 *C.GtkTreeView // in, none, converted
-	var carg1 C.int          // in, none, casted
+	var carg1 C.int          // in, none, casted, casted C.gint
 
 	carg0 = (*C.GtkTreeView)(UnsafeTreeViewToGlibNone(treeView))
 	carg1 = C.int(column)
@@ -152604,11 +152604,11 @@ func NewVideoInstanceForFile(file gio.File) Widget {
 // This is a utility function that calls [ctor@Gtk.Video.new_for_file],
 // See that function for details.
 func NewVideoInstanceForFilename(filename string) Widget {
-	var carg1 *C.gchar     // in, none, string, nullable-string
+	var carg1 *C.char      // in, none, string, nullable-string
 	var cret  *C.GtkWidget // return, none, converted
 
 	if filename != "" {
-		carg1 = (*C.gchar)(unsafe.Pointer(C.CString(filename)))
+		carg1 = (*C.char)(unsafe.Pointer(C.CString(filename)))
 		defer C.free(unsafe.Pointer(carg1))
 	}
 
@@ -152666,11 +152666,11 @@ func NewVideoInstanceForMediaStream(stream MediaStream) Widget {
 // 
 // This is a utility function that calls [ctor@Gtk.Video.new_for_file].
 func NewVideoInstanceForResource(resourcePath string) Widget {
-	var carg1 *C.gchar     // in, none, string, nullable-string
+	var carg1 *C.char      // in, none, string, nullable-string
 	var cret  *C.GtkWidget // return, none, converted
 
 	if resourcePath != "" {
-		carg1 = (*C.gchar)(unsafe.Pointer(C.CString(resourcePath)))
+		carg1 = (*C.char)(unsafe.Pointer(C.CString(resourcePath)))
 		defer C.free(unsafe.Pointer(carg1))
 	}
 
@@ -152855,11 +152855,11 @@ func (self *VideoInstance) SetFile(file gio.File) {
 // This is a utility function that calls gtk_video_set_file(),
 func (self *VideoInstance) SetFilename(filename string) {
 	var carg0 *C.GtkVideo // in, none, converted
-	var carg1 *C.gchar    // in, none, string, nullable-string
+	var carg1 *C.char     // in, none, string, nullable-string
 
 	carg0 = (*C.GtkVideo)(UnsafeVideoToGlibNone(self))
 	if filename != "" {
-		carg1 = (*C.gchar)(unsafe.Pointer(C.CString(filename)))
+		carg1 = (*C.char)(unsafe.Pointer(C.CString(filename)))
 		defer C.free(unsafe.Pointer(carg1))
 	}
 
@@ -152949,11 +152949,11 @@ func (self *VideoInstance) SetMediaStream(stream MediaStream) {
 // This is a utility function that calls [method@Gtk.Video.set_file].
 func (self *VideoInstance) SetResource(resourcePath string) {
 	var carg0 *C.GtkVideo // in, none, converted
-	var carg1 *C.gchar    // in, none, string, nullable-string
+	var carg1 *C.char     // in, none, string, nullable-string
 
 	carg0 = (*C.GtkVideo)(UnsafeVideoToGlibNone(self))
 	if resourcePath != "" {
-		carg1 = (*C.gchar)(unsafe.Pointer(C.CString(resourcePath)))
+		carg1 = (*C.char)(unsafe.Pointer(C.CString(resourcePath)))
 		defer C.free(unsafe.Pointer(carg1))
 	}
 
@@ -153545,14 +153545,14 @@ func NewAppChooserDialogInstance(parent Window, flags DialogFlags, file gio.File
 func NewAppChooserDialogInstanceForContentType(parent Window, flags DialogFlags, contentType string) Widget {
 	var carg1 *C.GtkWindow     // in, none, converted, nullable
 	var carg2 C.GtkDialogFlags // in, none, casted
-	var carg3 *C.gchar         // in, none, string
+	var carg3 *C.char          // in, none, string, casted *C.gchar
 	var cret  *C.GtkWidget     // return, none, converted
 
 	if parent != nil {
 		carg1 = (*C.GtkWindow)(UnsafeWindowToGlibNone(parent))
 	}
 	carg2 = C.GtkDialogFlags(flags)
-	carg3 = (*C.gchar)(unsafe.Pointer(C.CString(contentType)))
+	carg3 = (*C.char)(unsafe.Pointer(C.CString(contentType)))
 	defer C.free(unsafe.Pointer(carg3))
 
 	cret = C.gtk_app_chooser_dialog_new_for_content_type(carg1, carg2, carg3)
@@ -153577,7 +153577,7 @@ func NewAppChooserDialogInstanceForContentType(parent Window, flags DialogFlags,
 // Deprecated: (since 4.10.0) This widget will be removed in GTK 5
 func (self *AppChooserDialogInstance) GetHeading() string {
 	var carg0 *C.GtkAppChooserDialog // in, none, converted
-	var cret  *C.gchar               // return, none, string
+	var cret  *C.char                // return, none, string, casted *C.gchar
 
 	carg0 = (*C.GtkAppChooserDialog)(UnsafeAppChooserDialogToGlibNone(self))
 
@@ -153586,7 +153586,7 @@ func (self *AppChooserDialogInstance) GetHeading() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -153628,10 +153628,10 @@ func (self *AppChooserDialogInstance) GetWidget() Widget {
 // Deprecated: (since 4.10.0) This widget will be removed in GTK 5
 func (self *AppChooserDialogInstance) SetHeading(heading string) {
 	var carg0 *C.GtkAppChooserDialog // in, none, converted
-	var carg1 *C.gchar               // in, none, string
+	var carg1 *C.char                // in, none, string, casted *C.gchar
 
 	carg0 = (*C.GtkAppChooserDialog)(UnsafeAppChooserDialogToGlibNone(self))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(heading)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(heading)))
 	defer C.free(unsafe.Pointer(carg1))
 
 	C.gtk_app_chooser_dialog_set_heading(carg0, carg1)
@@ -153750,12 +153750,12 @@ func UnsafeColorChooserDialogToGlibFull(c ColorChooserDialog) unsafe.Pointer {
 //
 // Deprecated: (since 4.10.0) Use [class@Gtk.ColorDialog] instead
 func NewColorChooserDialogInstance(title string, parent Window) Widget {
-	var carg1 *C.gchar     // in, none, string, nullable-string
+	var carg1 *C.char      // in, none, string, nullable-string
 	var carg2 *C.GtkWindow // in, none, converted, nullable
 	var cret  *C.GtkWidget // return, none, converted
 
 	if title != "" {
-		carg1 = (*C.gchar)(unsafe.Pointer(C.CString(title)))
+		carg1 = (*C.char)(unsafe.Pointer(C.CString(title)))
 		defer C.free(unsafe.Pointer(carg1))
 	}
 	if parent != nil {
@@ -157097,7 +157097,7 @@ func UnsafeBuildableParseContextToGlibFull(b *BuildableParseContext) unsafe.Poin
 // elements, see gtk_buildable_parse_context_get_element_stack().
 func (context *BuildableParseContext) GetElement() string {
 	var carg0 *C.GtkBuildableParseContext // in, none, converted
-	var cret  *C.gchar                    // return, none, string
+	var cret  *C.char                     // return, none, string, casted *C.gchar
 
 	carg0 = (*C.GtkBuildableParseContext)(UnsafeBuildableParseContextToGlibNone(context))
 
@@ -157106,7 +157106,7 @@ func (context *BuildableParseContext) GetElement() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -157123,8 +157123,8 @@ func (context *BuildableParseContext) GetElement() string {
 // "the best number we could come up with for error messages."
 func (context *BuildableParseContext) GetPosition() (int, int) {
 	var carg0 *C.GtkBuildableParseContext // in, none, converted
-	var carg1 C.int                       // out, full, casted
-	var carg2 C.int                       // out, full, casted
+	var carg1 C.int                       // out, full, casted, casted C.gint
+	var carg2 C.int                       // out, full, casted, casted C.gint
 
 	carg0 = (*C.GtkBuildableParseContext)(UnsafeBuildableParseContextToGlibNone(context))
 
@@ -159522,7 +159522,7 @@ func (section *CssSection) GetStartLocation() *CssLocation {
 // [method@Gtk.CssSection.print].
 func (section *CssSection) ToString() string {
 	var carg0 *C.GtkCssSection // in, none, converted
-	var cret  *C.gchar         // return, full, string
+	var cret  *C.char          // return, full, string, casted *C.gchar
 
 	carg0 = (*C.GtkCssSection)(UnsafeCssSectionToGlibNone(section))
 
@@ -159531,7 +159531,7 @@ func (section *CssSection) ToString() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 	defer C.free(unsafe.Pointer(cret))
 
 	return goret
@@ -165177,7 +165177,7 @@ func (p *PadActionEntry) Mode() int {
 //   entry.
 func (p *PadActionEntry) SetIndex(index int) {
 	valptr := &p.native.index
-	*valptr = C.int(index)
+	*valptr = C.gint(index)
 }
 
 // mode wraps mode
@@ -165185,7 +165185,7 @@ func (p *PadActionEntry) SetIndex(index int) {
 // the mode that will trigger this action entry, or -1 for all modes.
 func (p *PadActionEntry) SetMode(mode int) {
 	valptr := &p.native.mode
-	*valptr = C.int(mode)
+	*valptr = C.gint(mode)
 }
 
 // PadControllerClass wraps GtkPadControllerClass
@@ -165337,7 +165337,7 @@ func (p *PageRange) End() int {
 // start of page range.
 func (p *PageRange) SetStart(start int) {
 	valptr := &p.native.start
-	*valptr = C.int(start)
+	*valptr = C.gint(start)
 }
 
 // end wraps end
@@ -165345,7 +165345,7 @@ func (p *PageRange) SetStart(start int) {
 // end of page range.
 func (p *PageRange) SetEnd(end int) {
 	valptr := &p.native.end
-	*valptr = C.int(end)
+	*valptr = C.gint(end)
 }
 
 // PaperSize wraps GtkPaperSize
@@ -165449,11 +165449,11 @@ func UnsafePaperSizeToGlibFull(p *PaperSize) unsafe.Pointer {
 // If @name is %NULL, the default paper size is returned,
 // see [func@Gtk.PaperSize.get_default].
 func NewPaperSize(name string) *PaperSize {
-	var carg1 *C.gchar        // in, none, string, nullable-string
+	var carg1 *C.char         // in, none, string, nullable-string
 	var cret  *C.GtkPaperSize // return, full, converted
 
 	if name != "" {
-		carg1 = (*C.gchar)(unsafe.Pointer(C.CString(name)))
+		carg1 = (*C.char)(unsafe.Pointer(C.CString(name)))
 		defer C.free(unsafe.Pointer(carg1))
 	}
 
@@ -165484,19 +165484,19 @@ func NewPaperSize(name string) *PaperSize {
 // Creates a new `GtkPaperSize` object with the
 // given parameters.
 func NewPaperSizeCustom(name string, displayName string, width float64, height float64, unit Unit) *PaperSize {
-	var carg1 *C.gchar        // in, none, string
-	var carg2 *C.gchar        // in, none, string
-	var carg3 C.gdouble       // in, none, casted
-	var carg4 C.gdouble       // in, none, casted
+	var carg1 *C.char         // in, none, string, casted *C.gchar
+	var carg2 *C.char         // in, none, string, casted *C.gchar
+	var carg3 C.double        // in, none, casted, casted C.gdouble
+	var carg4 C.double        // in, none, casted, casted C.gdouble
 	var carg5 C.GtkUnit       // in, none, casted
 	var cret  *C.GtkPaperSize // return, full, converted
 
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(name)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(name)))
 	defer C.free(unsafe.Pointer(carg1))
-	carg2 = (*C.gchar)(unsafe.Pointer(C.CString(displayName)))
+	carg2 = (*C.char)(unsafe.Pointer(C.CString(displayName)))
 	defer C.free(unsafe.Pointer(carg2))
-	carg3 = C.gdouble(width)
-	carg4 = C.gdouble(height)
+	carg3 = C.double(width)
+	carg4 = C.double(height)
 	carg5 = C.GtkUnit(unit)
 
 	cret = C.gtk_paper_size_new_custom(carg1, carg2, carg3, carg4, carg5)
@@ -165532,15 +165532,15 @@ func NewPaperSizeCustom(name string, displayName string, width float64, height f
 // @width and @height are used to
 // construct a custom `GtkPaperSize` object.
 func NewPaperSizeFromIPP(ippName string, width float64, height float64) *PaperSize {
-	var carg1 *C.gchar        // in, none, string
-	var carg2 C.gdouble       // in, none, casted
-	var carg3 C.gdouble       // in, none, casted
+	var carg1 *C.char         // in, none, string, casted *C.gchar
+	var carg2 C.double        // in, none, casted, casted C.gdouble
+	var carg3 C.double        // in, none, casted, casted C.gdouble
 	var cret  *C.GtkPaperSize // return, full, converted
 
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(ippName)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(ippName)))
 	defer C.free(unsafe.Pointer(carg1))
-	carg2 = C.gdouble(width)
-	carg3 = C.gdouble(height)
+	carg2 = C.double(width)
+	carg3 = C.double(height)
 
 	cret = C.gtk_paper_size_new_from_ipp(carg1, carg2, carg3)
 	runtime.KeepAlive(ippName)
@@ -165571,13 +165571,13 @@ func NewPaperSizeFromIPP(ippName string, width float64, height float64) *PaperSi
 // @key_file.
 func NewPaperSizeFromKeyFile(keyFile *glib.KeyFile, groupName string) (*PaperSize, error) {
 	var carg1 *C.GKeyFile     // in, none, converted
-	var carg2 *C.gchar        // in, none, string, nullable-string
+	var carg2 *C.char         // in, none, string, nullable-string
 	var cret  *C.GtkPaperSize // return, full, converted
 	var _cerr *C.GError       // out, full, converted, nullable
 
 	carg1 = (*C.GKeyFile)(glib.UnsafeKeyFileToGlibNone(keyFile))
 	if groupName != "" {
-		carg2 = (*C.gchar)(unsafe.Pointer(C.CString(groupName)))
+		carg2 = (*C.char)(unsafe.Pointer(C.CString(groupName)))
 		defer C.free(unsafe.Pointer(carg2))
 	}
 
@@ -165616,18 +165616,18 @@ func NewPaperSizeFromKeyFile(keyFile *glib.KeyFile, groupName string) (*PaperSiz
 // @ppd_display_name, @width and @height are used to
 // construct a custom `GtkPaperSize` object.
 func NewPaperSizeFromPPD(ppdName string, ppdDisplayName string, width float64, height float64) *PaperSize {
-	var carg1 *C.gchar        // in, none, string
-	var carg2 *C.gchar        // in, none, string
-	var carg3 C.gdouble       // in, none, casted
-	var carg4 C.gdouble       // in, none, casted
+	var carg1 *C.char         // in, none, string, casted *C.gchar
+	var carg2 *C.char         // in, none, string, casted *C.gchar
+	var carg3 C.double        // in, none, casted, casted C.gdouble
+	var carg4 C.double        // in, none, casted, casted C.gdouble
 	var cret  *C.GtkPaperSize // return, full, converted
 
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(ppdName)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(ppdName)))
 	defer C.free(unsafe.Pointer(carg1))
-	carg2 = (*C.gchar)(unsafe.Pointer(C.CString(ppdDisplayName)))
+	carg2 = (*C.char)(unsafe.Pointer(C.CString(ppdDisplayName)))
 	defer C.free(unsafe.Pointer(carg2))
-	carg3 = C.gdouble(width)
-	carg4 = C.gdouble(height)
+	carg3 = C.double(width)
+	carg4 = C.double(height)
 
 	cret = C.gtk_paper_size_new_from_ppd(carg1, carg2, carg3, carg4)
 	runtime.KeepAlive(ppdName)
@@ -165678,7 +165678,7 @@ func (other *PaperSize) Copy() *PaperSize {
 func (size *PaperSize) GetDefaultBottomMargin(unit Unit) float64 {
 	var carg0 *C.GtkPaperSize // in, none, converted
 	var carg1 C.GtkUnit       // in, none, casted
-	var cret  C.gdouble       // return, none, casted
+	var cret  C.double        // return, none, casted, casted C.gdouble
 
 	carg0 = (*C.GtkPaperSize)(UnsafePaperSizeToGlibNone(size))
 	carg1 = C.GtkUnit(unit)
@@ -165708,7 +165708,7 @@ func (size *PaperSize) GetDefaultBottomMargin(unit Unit) float64 {
 func (size *PaperSize) GetDefaultLeftMargin(unit Unit) float64 {
 	var carg0 *C.GtkPaperSize // in, none, converted
 	var carg1 C.GtkUnit       // in, none, casted
-	var cret  C.gdouble       // return, none, casted
+	var cret  C.double        // return, none, casted, casted C.gdouble
 
 	carg0 = (*C.GtkPaperSize)(UnsafePaperSizeToGlibNone(size))
 	carg1 = C.GtkUnit(unit)
@@ -165738,7 +165738,7 @@ func (size *PaperSize) GetDefaultLeftMargin(unit Unit) float64 {
 func (size *PaperSize) GetDefaultRightMargin(unit Unit) float64 {
 	var carg0 *C.GtkPaperSize // in, none, converted
 	var carg1 C.GtkUnit       // in, none, casted
-	var cret  C.gdouble       // return, none, casted
+	var cret  C.double        // return, none, casted, casted C.gdouble
 
 	carg0 = (*C.GtkPaperSize)(UnsafePaperSizeToGlibNone(size))
 	carg1 = C.GtkUnit(unit)
@@ -165768,7 +165768,7 @@ func (size *PaperSize) GetDefaultRightMargin(unit Unit) float64 {
 func (size *PaperSize) GetDefaultTopMargin(unit Unit) float64 {
 	var carg0 *C.GtkPaperSize // in, none, converted
 	var carg1 C.GtkUnit       // in, none, casted
-	var cret  C.gdouble       // return, none, casted
+	var cret  C.double        // return, none, casted, casted C.gdouble
 
 	carg0 = (*C.GtkPaperSize)(UnsafePaperSizeToGlibNone(size))
 	carg1 = C.GtkUnit(unit)
@@ -165792,7 +165792,7 @@ func (size *PaperSize) GetDefaultTopMargin(unit Unit) float64 {
 // Gets the human-readable name of the `GtkPaperSize`.
 func (size *PaperSize) GetDisplayName() string {
 	var carg0 *C.GtkPaperSize // in, none, converted
-	var cret  *C.gchar        // return, none, string
+	var cret  *C.char         // return, none, string, casted *C.gchar
 
 	carg0 = (*C.GtkPaperSize)(UnsafePaperSizeToGlibNone(size))
 
@@ -165801,7 +165801,7 @@ func (size *PaperSize) GetDisplayName() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -165821,7 +165821,7 @@ func (size *PaperSize) GetDisplayName() string {
 func (size *PaperSize) GetHeight(unit Unit) float64 {
 	var carg0 *C.GtkPaperSize // in, none, converted
 	var carg1 C.GtkUnit       // in, none, casted
-	var cret  C.gdouble       // return, none, casted
+	var cret  C.double        // return, none, casted, casted C.gdouble
 
 	carg0 = (*C.GtkPaperSize)(UnsafePaperSizeToGlibNone(size))
 	carg1 = C.GtkUnit(unit)
@@ -165845,7 +165845,7 @@ func (size *PaperSize) GetHeight(unit Unit) float64 {
 // Gets the name of the `GtkPaperSize`.
 func (size *PaperSize) GetName() string {
 	var carg0 *C.GtkPaperSize // in, none, converted
-	var cret  *C.gchar        // return, none, string
+	var cret  *C.char         // return, none, string, casted *C.gchar
 
 	carg0 = (*C.GtkPaperSize)(UnsafePaperSizeToGlibNone(size))
 
@@ -165854,7 +165854,7 @@ func (size *PaperSize) GetName() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -165868,7 +165868,7 @@ func (size *PaperSize) GetName() string {
 // may be %NULL.
 func (size *PaperSize) GetPPDName() string {
 	var carg0 *C.GtkPaperSize // in, none, converted
-	var cret  *C.gchar        // return, none, string
+	var cret  *C.char         // return, none, string, casted *C.gchar
 
 	carg0 = (*C.GtkPaperSize)(UnsafePaperSizeToGlibNone(size))
 
@@ -165877,7 +165877,7 @@ func (size *PaperSize) GetPPDName() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -165897,7 +165897,7 @@ func (size *PaperSize) GetPPDName() string {
 func (size *PaperSize) GetWidth(unit Unit) float64 {
 	var carg0 *C.GtkPaperSize // in, none, converted
 	var carg1 C.GtkUnit       // in, none, casted
-	var cret  C.gdouble       // return, none, casted
+	var cret  C.double        // return, none, casted, casted C.gdouble
 
 	carg0 = (*C.GtkPaperSize)(UnsafePaperSizeToGlibNone(size))
 	carg1 = C.GtkUnit(unit)
@@ -166004,13 +166004,13 @@ func (size *PaperSize) IsIPP() bool {
 // Changes the dimensions of a @size to @width x @height.
 func (size *PaperSize) SetSize(width float64, height float64, unit Unit) {
 	var carg0 *C.GtkPaperSize // in, none, converted
-	var carg1 C.gdouble       // in, none, casted
-	var carg2 C.gdouble       // in, none, casted
+	var carg1 C.double        // in, none, casted, casted C.gdouble
+	var carg2 C.double        // in, none, casted, casted C.gdouble
 	var carg3 C.GtkUnit       // in, none, casted
 
 	carg0 = (*C.GtkPaperSize)(UnsafePaperSizeToGlibNone(size))
-	carg1 = C.gdouble(width)
-	carg2 = C.gdouble(height)
+	carg1 = C.double(width)
+	carg2 = C.double(height)
 	carg3 = C.GtkUnit(unit)
 
 	C.gtk_paper_size_set_size(carg0, carg1, carg2, carg3)
@@ -166031,11 +166031,11 @@ func (size *PaperSize) SetSize(width float64, height float64, unit Unit) {
 func (size *PaperSize) ToKeyFile(keyFile *glib.KeyFile, groupName string) {
 	var carg0 *C.GtkPaperSize // in, none, converted
 	var carg1 *C.GKeyFile     // in, none, converted
-	var carg2 *C.gchar        // in, none, string
+	var carg2 *C.char         // in, none, string, casted *C.gchar
 
 	carg0 = (*C.GtkPaperSize)(UnsafePaperSizeToGlibNone(size))
 	carg1 = (*C.GKeyFile)(glib.UnsafeKeyFileToGlibNone(keyFile))
-	carg2 = (*C.gchar)(unsafe.Pointer(C.CString(groupName)))
+	carg2 = (*C.char)(unsafe.Pointer(C.CString(groupName)))
 	defer C.free(unsafe.Pointer(carg2))
 
 	C.gtk_paper_size_to_key_file(carg0, carg1, carg2)
@@ -166890,13 +166890,13 @@ func UnsafeRecentInfoToGlibFull(r *RecentInfo) unsafe.Pointer {
 // %GTK_RECENT_MANAGER_ERROR or a %G_IO_ERROR
 func (info *RecentInfo) CreateAppInfo(appName string) (gio.AppInfo, error) {
 	var carg0 *C.GtkRecentInfo // in, none, converted
-	var carg1 *C.gchar         // in, none, string, nullable-string
+	var carg1 *C.char          // in, none, string, nullable-string
 	var cret  *C.GAppInfo      // return, full, converted
 	var _cerr *C.GError        // out, full, converted, nullable
 
 	carg0 = (*C.GtkRecentInfo)(UnsafeRecentInfoToGlibNone(info))
 	if appName != "" {
-		carg1 = (*C.gchar)(unsafe.Pointer(C.CString(appName)))
+		carg1 = (*C.char)(unsafe.Pointer(C.CString(appName)))
 		defer C.free(unsafe.Pointer(carg1))
 	}
 
@@ -166973,7 +166973,7 @@ func (info *RecentInfo) GetAdded() *glib.DateTime {
 // of the resource pointed by @info.
 func (info *RecentInfo) GetAge() int {
 	var carg0 *C.GtkRecentInfo // in, none, converted
-	var cret  C.int            // return, none, casted
+	var cret  C.int            // return, none, casted, casted C.gint
 
 	carg0 = (*C.GtkRecentInfo)(UnsafeRecentInfoToGlibNone(info))
 
@@ -167009,14 +167009,14 @@ func (info *RecentInfo) GetAge() int {
 // storage specification, they will be expanded.
 func (info *RecentInfo) GetApplicationInfo(appName string) (string, uint, *glib.DateTime, bool) {
 	var carg0 *C.GtkRecentInfo // in, none, converted
-	var carg1 *C.gchar         // in, none, string
-	var carg2 *C.gchar         // out, none, string
+	var carg1 *C.char          // in, none, string, casted *C.gchar
+	var carg2 *C.char          // out, none, string, casted *C.gchar
 	var carg3 C.guint          // out, full, casted
 	var carg4 *C.GDateTime     // out, none, converted
 	var cret  C.gboolean       // return
 
 	carg0 = (*C.GtkRecentInfo)(UnsafeRecentInfoToGlibNone(info))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(appName)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(appName)))
 	defer C.free(unsafe.Pointer(carg1))
 
 	cret = C.gtk_recent_info_get_application_info(carg0, carg1, &carg2, &carg3, &carg4)
@@ -167028,7 +167028,7 @@ func (info *RecentInfo) GetApplicationInfo(appName string) (string, uint, *glib.
 	var stamp   *glib.DateTime
 	var goret   bool
 
-	appExec = C.GoString((*C.gchar)(unsafe.Pointer(carg2)))
+	appExec = C.GoString((*C.char)(unsafe.Pointer(carg2)))
 	count = uint(carg3)
 	stamp = glib.UnsafeDateTimeFromGlibNone(unsafe.Pointer(carg4))
 	if cret != 0 {
@@ -167074,7 +167074,7 @@ func (info *RecentInfo) GetApplications() (uint, []string) {
 // Gets the (short) description of the resource.
 func (info *RecentInfo) GetDescription() string {
 	var carg0 *C.GtkRecentInfo // in, none, converted
-	var cret  *C.gchar         // return, none, string
+	var cret  *C.char          // return, none, string, casted *C.gchar
 
 	carg0 = (*C.GtkRecentInfo)(UnsafeRecentInfoToGlibNone(info))
 
@@ -167083,7 +167083,7 @@ func (info *RecentInfo) GetDescription() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -167099,7 +167099,7 @@ func (info *RecentInfo) GetDescription() string {
 // of the resource is obtained.
 func (info *RecentInfo) GetDisplayName() string {
 	var carg0 *C.GtkRecentInfo // in, none, converted
-	var cret  *C.gchar         // return, none, string
+	var cret  *C.char          // return, none, string, casted *C.gchar
 
 	carg0 = (*C.GtkRecentInfo)(UnsafeRecentInfoToGlibNone(info))
 
@@ -167108,7 +167108,7 @@ func (info *RecentInfo) GetDisplayName() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -167174,7 +167174,7 @@ func (info *RecentInfo) GetGroups() (uint, []string) {
 // Gets the MIME type of the resource.
 func (info *RecentInfo) GetMIMEType() string {
 	var carg0 *C.GtkRecentInfo // in, none, converted
-	var cret  *C.gchar         // return, none, string
+	var cret  *C.char          // return, none, string, casted *C.gchar
 
 	carg0 = (*C.GtkRecentInfo)(UnsafeRecentInfoToGlibNone(info))
 
@@ -167183,7 +167183,7 @@ func (info *RecentInfo) GetMIMEType() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -167251,7 +167251,7 @@ func (info *RecentInfo) GetPrivateHint() bool {
 // to “file:///foo/bar.txt” will yield “bar.txt”.
 func (info *RecentInfo) GetShortName() string {
 	var carg0 *C.GtkRecentInfo // in, none, converted
-	var cret  *C.gchar         // return, full, string
+	var cret  *C.char          // return, full, string, casted *C.gchar
 
 	carg0 = (*C.GtkRecentInfo)(UnsafeRecentInfoToGlibNone(info))
 
@@ -167260,7 +167260,7 @@ func (info *RecentInfo) GetShortName() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 	defer C.free(unsafe.Pointer(cret))
 
 	return goret
@@ -167274,7 +167274,7 @@ func (info *RecentInfo) GetShortName() string {
 // Gets the URI of the resource.
 func (info *RecentInfo) GetURI() string {
 	var carg0 *C.GtkRecentInfo // in, none, converted
-	var cret  *C.gchar         // return, none, string
+	var cret  *C.char          // return, none, string, casted *C.gchar
 
 	carg0 = (*C.GtkRecentInfo)(UnsafeRecentInfoToGlibNone(info))
 
@@ -167283,7 +167283,7 @@ func (info *RecentInfo) GetURI() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -167300,7 +167300,7 @@ func (info *RecentInfo) GetURI() string {
 // of [method@Gtk.RecentInfo.get_uri].
 func (info *RecentInfo) GetURIDisplay() string {
 	var carg0 *C.GtkRecentInfo // in, none, converted
-	var cret  *C.gchar         // return, full, string
+	var cret  *C.char          // return, full, string, casted *C.gchar
 
 	carg0 = (*C.GtkRecentInfo)(UnsafeRecentInfoToGlibNone(info))
 
@@ -167309,7 +167309,7 @@ func (info *RecentInfo) GetURIDisplay() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 	defer C.free(unsafe.Pointer(cret))
 
 	return goret
@@ -167351,11 +167351,11 @@ func (info *RecentInfo) GetVisited() *glib.DateTime {
 // Checks whether an application registered this resource using @app_name.
 func (info *RecentInfo) HasApplication(appName string) bool {
 	var carg0 *C.GtkRecentInfo // in, none, converted
-	var carg1 *C.gchar         // in, none, string
+	var carg1 *C.char          // in, none, string, casted *C.gchar
 	var cret  C.gboolean       // return
 
 	carg0 = (*C.GtkRecentInfo)(UnsafeRecentInfoToGlibNone(info))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(appName)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(appName)))
 	defer C.free(unsafe.Pointer(carg1))
 
 	cret = C.gtk_recent_info_has_application(carg0, carg1)
@@ -167385,11 +167385,11 @@ func (info *RecentInfo) HasApplication(appName string) bool {
 // registered for the recently used item @info.
 func (info *RecentInfo) HasGroup(groupName string) bool {
 	var carg0 *C.GtkRecentInfo // in, none, converted
-	var carg1 *C.gchar         // in, none, string
+	var carg1 *C.char          // in, none, string, casted *C.gchar
 	var cret  C.gboolean       // return
 
 	carg0 = (*C.GtkRecentInfo)(UnsafeRecentInfoToGlibNone(info))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(groupName)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(groupName)))
 	defer C.free(unsafe.Pointer(carg1))
 
 	cret = C.gtk_recent_info_has_group(carg0, carg1)
@@ -167439,7 +167439,7 @@ func (info *RecentInfo) IsLocal() bool {
 // recently used resource represented by @info.
 func (info *RecentInfo) LastApplication() string {
 	var carg0 *C.GtkRecentInfo // in, none, converted
-	var cret  *C.gchar         // return, full, string
+	var cret  *C.char          // return, full, string, casted *C.gchar
 
 	carg0 = (*C.GtkRecentInfo)(UnsafeRecentInfoToGlibNone(info))
 
@@ -167448,7 +167448,7 @@ func (info *RecentInfo) LastApplication() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 	defer C.free(unsafe.Pointer(cret))
 
 	return goret
@@ -167637,7 +167637,7 @@ func (r *RequestedSize) NaturalSize() int {
 // The minimum size needed for allocation in a given orientation
 func (r *RequestedSize) SetMinimumSize(minimum_size int) {
 	valptr := &r.native.minimum_size
-	*valptr = C.int(minimum_size)
+	*valptr = C.gint(minimum_size)
 }
 
 // natural_size wraps natural_size
@@ -167645,7 +167645,7 @@ func (r *RequestedSize) SetMinimumSize(minimum_size int) {
 // The natural size for allocation in a given orientation
 func (r *RequestedSize) SetNaturalSize(natural_size int) {
 	valptr := &r.native.natural_size
-	*valptr = C.int(natural_size)
+	*valptr = C.gint(natural_size)
 }
 
 // Requisition wraps GtkRequisition
@@ -167769,7 +167769,7 @@ func (r *Requisition) Height() int {
 // the widget’s desired width
 func (r *Requisition) SetWidth(width int) {
 	valptr := &r.native.width
-	*valptr = C.int(width)
+	*valptr = C.gint(width)
 }
 
 // height wraps height
@@ -167777,7 +167777,7 @@ func (r *Requisition) SetWidth(width int) {
 // the widget’s desired height
 func (r *Requisition) SetHeight(height int) {
 	valptr := &r.native.height
-	*valptr = C.int(height)
+	*valptr = C.gint(height)
 }
 
 // Copy wraps gtk_requisition_copy
@@ -170039,7 +170039,7 @@ func (iter *TextIter) BackwardChar() bool {
 // the function does nothing and returns %FALSE.
 func (iter *TextIter) BackwardChars(count int) bool {
 	var carg0 *C.GtkTextIter // in, none, converted
-	var carg1 C.int          // in, none, casted
+	var carg1 C.int          // in, none, casted, casted C.gint
 	var cret  C.gboolean     // return
 
 	carg0 = (*C.GtkTextIter)(UnsafeTextIterToGlibNone(iter))
@@ -170097,7 +170097,7 @@ func (iter *TextIter) BackwardCursorPosition() bool {
 // See [method@Gtk.TextIter.forward_cursor_position] for details.
 func (iter *TextIter) BackwardCursorPositions(count int) bool {
 	var carg0 *C.GtkTextIter // in, none, converted
-	var carg1 C.int          // in, none, casted
+	var carg1 C.int          // in, none, casted, casted C.gint
 	var cret  C.gboolean     // return
 
 	carg0 = (*C.GtkTextIter)(UnsafeTextIterToGlibNone(iter))
@@ -170212,7 +170212,7 @@ func (iter *TextIter) BackwardLine() bool {
 // moves forward by 0 - @count lines.
 func (iter *TextIter) BackwardLines(count int) bool {
 	var carg0 *C.GtkTextIter // in, none, converted
-	var carg1 C.int          // in, none, casted
+	var carg1 C.int          // in, none, casted, casted C.gint
 	var cret  C.gboolean     // return
 
 	carg0 = (*C.GtkTextIter)(UnsafeTextIterToGlibNone(iter))
@@ -170251,7 +170251,7 @@ func (iter *TextIter) BackwardLines(count int) bool {
 // even if there is a possible @match_start before or at @iter.
 func (iter *TextIter) BackwardSearch(str string, flags TextSearchFlags, limit *TextIter) (TextIter, TextIter, bool) {
 	var carg0 *C.GtkTextIter       // in, none, converted
-	var carg1 *C.gchar             // in, none, string
+	var carg1 *C.char              // in, none, string, casted *C.gchar
 	var carg2 C.GtkTextSearchFlags // in, none, casted
 	var carg5 *C.GtkTextIter       // in, none, converted, nullable
 	var carg3 C.GtkTextIter        // out, transfer: none, C Pointers: 0, Name: TextIter, optional, caller-allocates
@@ -170259,7 +170259,7 @@ func (iter *TextIter) BackwardSearch(str string, flags TextSearchFlags, limit *T
 	var cret  C.gboolean           // return
 
 	carg0 = (*C.GtkTextIter)(UnsafeTextIterToGlibNone(iter))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(str)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(str)))
 	defer C.free(unsafe.Pointer(carg1))
 	carg2 = C.GtkTextSearchFlags(flags)
 	if limit != nil {
@@ -170334,7 +170334,7 @@ func (iter *TextIter) BackwardSentenceStart() bool {
 // If @count is negative, moves forward instead of backward.
 func (iter *TextIter) BackwardSentenceStarts(count int) bool {
 	var carg0 *C.GtkTextIter // in, none, converted
-	var carg1 C.int          // in, none, casted
+	var carg1 C.int          // in, none, casted, casted C.gint
 	var cret  C.gboolean     // return
 
 	carg0 = (*C.GtkTextIter)(UnsafeTextIterToGlibNone(iter))
@@ -170436,7 +170436,7 @@ func (iter *TextIter) BackwardVisibleCursorPosition() bool {
 // See [method@Gtk.TextIter.backward_cursor_position] for details.
 func (iter *TextIter) BackwardVisibleCursorPositions(count int) bool {
 	var carg0 *C.GtkTextIter // in, none, converted
-	var carg1 C.int          // in, none, casted
+	var carg1 C.int          // in, none, casted, casted C.gint
 	var cret  C.gboolean     // return
 
 	carg0 = (*C.GtkTextIter)(UnsafeTextIterToGlibNone(iter))
@@ -170509,7 +170509,7 @@ func (iter *TextIter) BackwardVisibleLine() bool {
 // moves forward by 0 - @count lines.
 func (iter *TextIter) BackwardVisibleLines(count int) bool {
 	var carg0 *C.GtkTextIter // in, none, converted
-	var carg1 C.int          // in, none, casted
+	var carg1 C.int          // in, none, casted, casted C.gint
 	var cret  C.gboolean     // return
 
 	carg0 = (*C.GtkTextIter)(UnsafeTextIterToGlibNone(iter))
@@ -170571,7 +170571,7 @@ func (iter *TextIter) BackwardVisibleWordStart() bool {
 // Calls [method@Gtk.TextIter.backward_visible_word_start] up to @count times.
 func (iter *TextIter) BackwardVisibleWordStarts(count int) bool {
 	var carg0 *C.GtkTextIter // in, none, converted
-	var carg1 C.int          // in, none, casted
+	var carg1 C.int          // in, none, casted, casted C.gint
 	var cret  C.gboolean     // return
 
 	carg0 = (*C.GtkTextIter)(UnsafeTextIterToGlibNone(iter))
@@ -170633,7 +170633,7 @@ func (iter *TextIter) BackwardWordStart() bool {
 // Calls [method@Gtk.TextIter.backward_word_start] up to @count times.
 func (iter *TextIter) BackwardWordStarts(count int) bool {
 	var carg0 *C.GtkTextIter // in, none, converted
-	var carg1 C.int          // in, none, casted
+	var carg1 C.int          // in, none, casted, casted C.gint
 	var cret  C.gboolean     // return
 
 	carg0 = (*C.GtkTextIter)(UnsafeTextIterToGlibNone(iter))
@@ -170711,7 +170711,7 @@ func (iter *TextIter) CanInsert(defaultEditability bool) bool {
 func (lhs *TextIter) Compare(rhs *TextIter) int {
 	var carg0 *C.GtkTextIter // in, none, converted
 	var carg1 *C.GtkTextIter // in, none, converted
-	var cret  C.int          // return, none, casted
+	var cret  C.int          // return, none, casted, casted C.gint
 
 	carg0 = (*C.GtkTextIter)(UnsafeTextIterToGlibNone(lhs))
 	carg1 = (*C.GtkTextIter)(UnsafeTextIterToGlibNone(rhs))
@@ -171021,7 +171021,7 @@ func (iter *TextIter) ForwardChar() bool {
 // is 0, the function does nothing and returns %FALSE.
 func (iter *TextIter) ForwardChars(count int) bool {
 	var carg0 *C.GtkTextIter // in, none, converted
-	var carg1 C.int          // in, none, casted
+	var carg1 C.int          // in, none, casted, casted C.gint
 	var cret  C.gboolean     // return
 
 	carg0 = (*C.GtkTextIter)(UnsafeTextIterToGlibNone(iter))
@@ -171093,7 +171093,7 @@ func (iter *TextIter) ForwardCursorPosition() bool {
 // See [method@Gtk.TextIter.forward_cursor_position] for details.
 func (iter *TextIter) ForwardCursorPositions(count int) bool {
 	var carg0 *C.GtkTextIter // in, none, converted
-	var carg1 C.int          // in, none, casted
+	var carg1 C.int          // in, none, casted, casted C.gint
 	var cret  C.gboolean     // return
 
 	carg0 = (*C.GtkTextIter)(UnsafeTextIterToGlibNone(iter))
@@ -171208,7 +171208,7 @@ func (iter *TextIter) ForwardLine() bool {
 // moves backward by 0 - @count lines.
 func (iter *TextIter) ForwardLines(count int) bool {
 	var carg0 *C.GtkTextIter // in, none, converted
-	var carg1 C.int          // in, none, casted
+	var carg1 C.int          // in, none, casted, casted C.gint
 	var cret  C.gboolean     // return
 
 	carg0 = (*C.GtkTextIter)(UnsafeTextIterToGlibNone(iter))
@@ -171253,7 +171253,7 @@ func (iter *TextIter) ForwardLines(count int) bool {
 // even if there is a possible @match_end after or at @iter.
 func (iter *TextIter) ForwardSearch(str string, flags TextSearchFlags, limit *TextIter) (TextIter, TextIter, bool) {
 	var carg0 *C.GtkTextIter       // in, none, converted
-	var carg1 *C.gchar             // in, none, string
+	var carg1 *C.char              // in, none, string, casted *C.gchar
 	var carg2 C.GtkTextSearchFlags // in, none, casted
 	var carg5 *C.GtkTextIter       // in, none, converted, nullable
 	var carg3 C.GtkTextIter        // out, transfer: none, C Pointers: 0, Name: TextIter, optional, caller-allocates
@@ -171261,7 +171261,7 @@ func (iter *TextIter) ForwardSearch(str string, flags TextSearchFlags, limit *Te
 	var cret  C.gboolean           // return
 
 	carg0 = (*C.GtkTextIter)(UnsafeTextIterToGlibNone(iter))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(str)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(str)))
 	defer C.free(unsafe.Pointer(carg1))
 	carg2 = C.GtkTextSearchFlags(flags)
 	if limit != nil {
@@ -171336,7 +171336,7 @@ func (iter *TextIter) ForwardSentenceEnd() bool {
 // If @count is negative, moves backward instead of forward.
 func (iter *TextIter) ForwardSentenceEnds(count int) bool {
 	var carg0 *C.GtkTextIter // in, none, converted
-	var carg1 C.int          // in, none, casted
+	var carg1 C.int          // in, none, casted, casted C.gint
 	var cret  C.gboolean     // return
 
 	carg0 = (*C.GtkTextIter)(UnsafeTextIterToGlibNone(iter))
@@ -171488,7 +171488,7 @@ func (iter *TextIter) ForwardVisibleCursorPosition() bool {
 // See [method@Gtk.TextIter.forward_cursor_position] for details.
 func (iter *TextIter) ForwardVisibleCursorPositions(count int) bool {
 	var carg0 *C.GtkTextIter // in, none, converted
-	var carg1 C.int          // in, none, casted
+	var carg1 C.int          // in, none, casted, casted C.gint
 	var cret  C.gboolean     // return
 
 	carg0 = (*C.GtkTextIter)(UnsafeTextIterToGlibNone(iter))
@@ -171558,7 +171558,7 @@ func (iter *TextIter) ForwardVisibleLine() bool {
 // moves backward by 0 - @count lines.
 func (iter *TextIter) ForwardVisibleLines(count int) bool {
 	var carg0 *C.GtkTextIter // in, none, converted
-	var carg1 C.int          // in, none, casted
+	var carg1 C.int          // in, none, casted, casted C.gint
 	var cret  C.gboolean     // return
 
 	carg0 = (*C.GtkTextIter)(UnsafeTextIterToGlibNone(iter))
@@ -171620,7 +171620,7 @@ func (iter *TextIter) ForwardVisibleWordEnd() bool {
 // Calls [method@Gtk.TextIter.forward_visible_word_end] up to @count times.
 func (iter *TextIter) ForwardVisibleWordEnds(count int) bool {
 	var carg0 *C.GtkTextIter // in, none, converted
-	var carg1 C.int          // in, none, casted
+	var carg1 C.int          // in, none, casted, casted C.gint
 	var cret  C.gboolean     // return
 
 	carg0 = (*C.GtkTextIter)(UnsafeTextIterToGlibNone(iter))
@@ -171682,7 +171682,7 @@ func (iter *TextIter) ForwardWordEnd() bool {
 // Calls [method@Gtk.TextIter.forward_word_end] up to @count times.
 func (iter *TextIter) ForwardWordEnds(count int) bool {
 	var carg0 *C.GtkTextIter // in, none, converted
-	var carg1 C.int          // in, none, casted
+	var carg1 C.int          // in, none, casted, casted C.gint
 	var cret  C.gboolean     // return
 
 	carg0 = (*C.GtkTextIter)(UnsafeTextIterToGlibNone(iter))
@@ -171732,7 +171732,7 @@ func (iter *TextIter) GetBuffer() TextBuffer {
 // including the paragraph delimiters.
 func (iter *TextIter) GetBytesInLine() int {
 	var carg0 *C.GtkTextIter // in, none, converted
-	var cret  C.int          // return, none, casted
+	var cret  C.int          // return, none, casted, casted C.gint
 
 	carg0 = (*C.GtkTextIter)(UnsafeTextIterToGlibNone(iter))
 
@@ -171785,7 +171785,7 @@ func (iter *TextIter) GetChar() uint32 {
 // including the paragraph delimiters.
 func (iter *TextIter) GetCharsInLine() int {
 	var carg0 *C.GtkTextIter // in, none, converted
-	var cret  C.int          // return, none, casted
+	var cret  C.int          // return, none, casted, casted C.gint
 
 	carg0 = (*C.GtkTextIter)(UnsafeTextIterToGlibNone(iter))
 
@@ -171860,7 +171860,7 @@ func (iter *TextIter) GetLanguage() *pango.Language {
 // with 0 for the first line in the buffer.
 func (iter *TextIter) GetLine() int {
 	var carg0 *C.GtkTextIter // in, none, converted
-	var cret  C.int          // return, none, casted
+	var cret  C.int          // return, none, casted, casted C.gint
 
 	carg0 = (*C.GtkTextIter)(UnsafeTextIterToGlibNone(iter))
 
@@ -171887,7 +171887,7 @@ func (iter *TextIter) GetLine() int {
 // number of bytes to represent.
 func (iter *TextIter) GetLineIndex() int {
 	var carg0 *C.GtkTextIter // in, none, converted
-	var cret  C.int          // return, none, casted
+	var cret  C.int          // return, none, casted, casted C.gint
 
 	carg0 = (*C.GtkTextIter)(UnsafeTextIterToGlibNone(iter))
 
@@ -171912,7 +171912,7 @@ func (iter *TextIter) GetLineIndex() int {
 // The first character on the line has offset 0.
 func (iter *TextIter) GetLineOffset() int {
 	var carg0 *C.GtkTextIter // in, none, converted
-	var cret  C.int          // return, none, casted
+	var cret  C.int          // return, none, casted, casted C.gint
 
 	carg0 = (*C.GtkTextIter)(UnsafeTextIterToGlibNone(iter))
 
@@ -171939,7 +171939,7 @@ func (iter *TextIter) GetLineOffset() int {
 // an offset back into an iterator.
 func (iter *TextIter) GetOffset() int {
 	var carg0 *C.GtkTextIter // in, none, converted
-	var cret  C.int          // return, none, casted
+	var cret  C.int          // return, none, casted, casted C.gint
 
 	carg0 = (*C.GtkTextIter)(UnsafeTextIterToGlibNone(iter))
 
@@ -172000,7 +172000,7 @@ func (iter *TextIter) GetPaintable() gdk.Paintable {
 func (start *TextIter) GetSlice(end *TextIter) string {
 	var carg0 *C.GtkTextIter // in, none, converted
 	var carg1 *C.GtkTextIter // in, none, converted
-	var cret  *C.gchar       // return, full, string
+	var cret  *C.char        // return, full, string, casted *C.gchar
 
 	carg0 = (*C.GtkTextIter)(UnsafeTextIterToGlibNone(start))
 	carg1 = (*C.GtkTextIter)(UnsafeTextIterToGlibNone(end))
@@ -172011,7 +172011,7 @@ func (start *TextIter) GetSlice(end *TextIter) string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 	defer C.free(unsafe.Pointer(cret))
 
 	return goret
@@ -172037,7 +172037,7 @@ func (start *TextIter) GetSlice(end *TextIter) string {
 func (start *TextIter) GetText(end *TextIter) string {
 	var carg0 *C.GtkTextIter // in, none, converted
 	var carg1 *C.GtkTextIter // in, none, converted
-	var cret  *C.gchar       // return, full, string
+	var cret  *C.char        // return, full, string, casted *C.gchar
 
 	carg0 = (*C.GtkTextIter)(UnsafeTextIterToGlibNone(start))
 	carg1 = (*C.GtkTextIter)(UnsafeTextIterToGlibNone(end))
@@ -172048,7 +172048,7 @@ func (start *TextIter) GetText(end *TextIter) string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 	defer C.free(unsafe.Pointer(cret))
 
 	return goret
@@ -172065,7 +172065,7 @@ func (start *TextIter) GetText(end *TextIter) string {
 // toggled on.
 func (iter *TextIter) GetVisibleLineIndex() int {
 	var carg0 *C.GtkTextIter // in, none, converted
-	var cret  C.int          // return, none, casted
+	var cret  C.int          // return, none, casted, casted C.gint
 
 	carg0 = (*C.GtkTextIter)(UnsafeTextIterToGlibNone(iter))
 
@@ -172090,7 +172090,7 @@ func (iter *TextIter) GetVisibleLineIndex() int {
 // toggled on.
 func (iter *TextIter) GetVisibleLineOffset() int {
 	var carg0 *C.GtkTextIter // in, none, converted
-	var cret  C.int          // return, none, casted
+	var cret  C.int          // return, none, casted, casted C.gint
 
 	carg0 = (*C.GtkTextIter)(UnsafeTextIterToGlibNone(iter))
 
@@ -172123,7 +172123,7 @@ func (iter *TextIter) GetVisibleLineOffset() int {
 func (start *TextIter) GetVisibleSlice(end *TextIter) string {
 	var carg0 *C.GtkTextIter // in, none, converted
 	var carg1 *C.GtkTextIter // in, none, converted
-	var cret  *C.gchar       // return, full, string
+	var cret  *C.char        // return, full, string, casted *C.gchar
 
 	carg0 = (*C.GtkTextIter)(UnsafeTextIterToGlibNone(start))
 	carg1 = (*C.GtkTextIter)(UnsafeTextIterToGlibNone(end))
@@ -172134,7 +172134,7 @@ func (start *TextIter) GetVisibleSlice(end *TextIter) string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 	defer C.free(unsafe.Pointer(cret))
 
 	return goret
@@ -172159,7 +172159,7 @@ func (start *TextIter) GetVisibleSlice(end *TextIter) string {
 func (start *TextIter) GetVisibleText(end *TextIter) string {
 	var carg0 *C.GtkTextIter // in, none, converted
 	var carg1 *C.GtkTextIter // in, none, converted
-	var cret  *C.gchar       // return, full, string
+	var cret  *C.char        // return, full, string, casted *C.gchar
 
 	carg0 = (*C.GtkTextIter)(UnsafeTextIterToGlibNone(start))
 	carg1 = (*C.GtkTextIter)(UnsafeTextIterToGlibNone(end))
@@ -172170,7 +172170,7 @@ func (start *TextIter) GetVisibleText(end *TextIter) string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 	defer C.free(unsafe.Pointer(cret))
 
 	return goret
@@ -172430,7 +172430,7 @@ func (first *TextIter) Order(second *TextIter) {
 // in the buffer, moves @iter to the start of the last line in the buffer.
 func (iter *TextIter) SetLine(lineNumber int) {
 	var carg0 *C.GtkTextIter // in, none, converted
-	var carg1 C.int          // in, none, casted
+	var carg1 C.int          // in, none, casted, casted C.gint
 
 	carg0 = (*C.GtkTextIter)(UnsafeTextIterToGlibNone(iter))
 	carg1 = C.int(lineNumber)
@@ -172452,7 +172452,7 @@ func (iter *TextIter) SetLine(lineNumber int) {
 // encoded character.
 func (iter *TextIter) SetLineIndex(byteOnLine int) {
 	var carg0 *C.GtkTextIter // in, none, converted
-	var carg1 C.int          // in, none, casted
+	var carg1 C.int          // in, none, casted, casted C.gint
 
 	carg0 = (*C.GtkTextIter)(UnsafeTextIterToGlibNone(iter))
 	carg1 = C.int(byteOnLine)
@@ -172476,7 +172476,7 @@ func (iter *TextIter) SetLineIndex(byteOnLine int) {
 // index rather than a character offset.
 func (iter *TextIter) SetLineOffset(charOnLine int) {
 	var carg0 *C.GtkTextIter // in, none, converted
-	var carg1 C.int          // in, none, casted
+	var carg1 C.int          // in, none, casted, casted C.gint
 
 	carg0 = (*C.GtkTextIter)(UnsafeTextIterToGlibNone(iter))
 	carg1 = C.int(charOnLine)
@@ -172498,7 +172498,7 @@ func (iter *TextIter) SetLineOffset(charOnLine int) {
 // of the entire text buffer, starting with 0.
 func (iter *TextIter) SetOffset(charOffset int) {
 	var carg0 *C.GtkTextIter // in, none, converted
-	var carg1 C.int          // in, none, casted
+	var carg1 C.int          // in, none, casted, casted C.gint
 
 	carg0 = (*C.GtkTextIter)(UnsafeTextIterToGlibNone(iter))
 	carg1 = C.int(charOffset)
@@ -172519,7 +172519,7 @@ func (iter *TextIter) SetOffset(charOffset int) {
 // in the index.
 func (iter *TextIter) SetVisibleLineIndex(byteOnLine int) {
 	var carg0 *C.GtkTextIter // in, none, converted
-	var carg1 C.int          // in, none, casted
+	var carg1 C.int          // in, none, casted, casted C.gint
 
 	carg0 = (*C.GtkTextIter)(UnsafeTextIterToGlibNone(iter))
 	carg1 = C.int(byteOnLine)
@@ -172540,7 +172540,7 @@ func (iter *TextIter) SetVisibleLineIndex(byteOnLine int) {
 // counted in the offset.
 func (iter *TextIter) SetVisibleLineOffset(charOnLine int) {
 	var carg0 *C.GtkTextIter // in, none, converted
-	var carg1 C.int          // in, none, casted
+	var carg1 C.int          // in, none, casted, casted C.gint
 
 	carg0 = (*C.GtkTextIter)(UnsafeTextIterToGlibNone(iter))
 	carg1 = C.int(charOnLine)
@@ -173230,7 +173230,7 @@ func (t *TreeIter) Stamp() int {
 // a unique stamp to catch invalid iterators
 func (t *TreeIter) SetStamp(stamp int) {
 	valptr := &t.native.stamp
-	*valptr = C.int(stamp)
+	*valptr = C.gint(stamp)
 }
 
 // Copy wraps gtk_tree_iter_copy
@@ -173794,10 +173794,10 @@ func NewTreePathFromIndicesv(indices []int) *TreePath {
 //
 // Deprecated: (since 4.10.0) 
 func NewTreePathFromString(path string) *TreePath {
-	var carg1 *C.gchar       // in, none, string
+	var carg1 *C.char        // in, none, string, casted *C.gchar
 	var cret  *C.GtkTreePath // return, full, converted
 
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(path)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(path)))
 	defer C.free(unsafe.Pointer(carg1))
 
 	cret = C.gtk_tree_path_new_from_string(carg1)
@@ -173823,7 +173823,7 @@ func NewTreePathFromString(path string) *TreePath {
 // Deprecated: (since 4.10.0) 
 func (path *TreePath) AppendIndex(index_ int) {
 	var carg0 *C.GtkTreePath // in, none, converted
-	var carg1 C.int          // in, none, casted
+	var carg1 C.int          // in, none, casted, casted C.gint
 
 	carg0 = (*C.GtkTreePath)(UnsafeTreePathToGlibNone(path))
 	carg1 = C.int(index_)
@@ -173853,7 +173853,7 @@ func (path *TreePath) AppendIndex(index_ int) {
 func (a *TreePath) Compare(b *TreePath) int {
 	var carg0 *C.GtkTreePath // in, none, converted
 	var carg1 *C.GtkTreePath // in, none, converted
-	var cret  C.int          // return, none, casted
+	var cret  C.int          // return, none, casted, casted C.gint
 
 	carg0 = (*C.GtkTreePath)(UnsafeTreePathToGlibNone(a))
 	carg1 = (*C.GtkTreePath)(UnsafeTreePathToGlibNone(b))
@@ -173917,7 +173917,7 @@ func (path *TreePath) Down() {
 // Deprecated: (since 4.10.0) 
 func (path *TreePath) GetDepth() int {
 	var carg0 *C.GtkTreePath // in, none, converted
-	var cret  C.int          // return, none, casted
+	var cret  C.int          // return, none, casted, casted C.gint
 
 	carg0 = (*C.GtkTreePath)(UnsafeTreePathToGlibNone(path))
 
@@ -173947,7 +173947,7 @@ func (path *TreePath) GetDepth() int {
 // Deprecated: (since 4.10.0) 
 func (path *TreePath) GetIndicesWithDepth() (int, []int) {
 	var carg0 *C.GtkTreePath // in, none, converted
-	var carg1 C.int          // out, full, casted
+	var carg1 C.int          // out, full, casted, casted C.gint
 	var cret  *C.int         // return, transfer: none, C Pointers: 1, Name: array[gint], scope: , array (inner: *typesystem.CastablePrimitive)
 
 	carg0 = (*C.GtkTreePath)(UnsafeTreePathToGlibNone(path))
@@ -174061,7 +174061,7 @@ func (path *TreePath) Next() {
 // Deprecated: (since 4.10.0) 
 func (path *TreePath) PrependIndex(index_ int) {
 	var carg0 *C.GtkTreePath // in, none, converted
-	var carg1 C.int          // in, none, casted
+	var carg1 C.int          // in, none, casted, casted C.gint
 
 	carg0 = (*C.GtkTreePath)(UnsafeTreePathToGlibNone(path))
 	carg1 = C.int(index_)
@@ -174113,7 +174113,7 @@ func (path *TreePath) Prev() bool {
 // Deprecated: (since 4.10.0) 
 func (path *TreePath) ToString() string {
 	var carg0 *C.GtkTreePath // in, none, converted
-	var cret  *C.gchar       // return, full, string
+	var cret  *C.char        // return, full, string, casted *C.gchar
 
 	carg0 = (*C.GtkTreePath)(UnsafeTreePathToGlibNone(path))
 
@@ -174122,7 +174122,7 @@ func (path *TreePath) ToString() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 	defer C.free(unsafe.Pointer(cret))
 
 	return goret
@@ -174859,12 +174859,12 @@ func (widgetClass *WidgetClass) AddShortcut(shortcut Shortcut) {
 // initializer after calling [method@Gtk.WidgetClass.set_template].
 func (widgetClass *WidgetClass) BindTemplateChildFull(name string, internalChild bool, structOffset int) {
 	var carg0 *C.GtkWidgetClass // in, none, converted
-	var carg1 *C.gchar          // in, none, string
+	var carg1 *C.char           // in, none, string, casted *C.gchar
 	var carg2 C.gboolean        // in
 	var carg3 C.gssize          // in, none, casted
 
 	carg0 = (*C.GtkWidgetClass)(UnsafeWidgetClassToGlibNone(widgetClass))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(name)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(name)))
 	defer C.free(unsafe.Pointer(carg1))
 	if internalChild {
 		carg2 = C.TRUE
@@ -174940,7 +174940,7 @@ func (widgetClass *WidgetClass) GetActivateSignal() uint {
 // See [method@Gtk.WidgetClass.set_css_name] for details.
 func (widgetClass *WidgetClass) GetCSSName() string {
 	var carg0 *C.GtkWidgetClass // in, none, converted
-	var cret  *C.gchar          // return, none, string
+	var cret  *C.char           // return, none, string, casted *C.gchar
 
 	carg0 = (*C.GtkWidgetClass)(UnsafeWidgetClassToGlibNone(widgetClass))
 
@@ -174949,7 +174949,7 @@ func (widgetClass *WidgetClass) GetCSSName() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -175004,13 +175004,13 @@ func (widgetClass *WidgetClass) GetLayoutManagerType() gobject.Type {
 // of the same type as the property.
 func (widgetClass *WidgetClass) InstallPropertyAction(actionName string, propertyName string) {
 	var carg0 *C.GtkWidgetClass // in, none, converted
-	var carg1 *C.gchar          // in, none, string
-	var carg2 *C.gchar          // in, none, string
+	var carg1 *C.char           // in, none, string, casted *C.gchar
+	var carg2 *C.char           // in, none, string, casted *C.gchar
 
 	carg0 = (*C.GtkWidgetClass)(UnsafeWidgetClassToGlibNone(widgetClass))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(actionName)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(actionName)))
 	defer C.free(unsafe.Pointer(carg1))
-	carg2 = (*C.gchar)(unsafe.Pointer(C.CString(propertyName)))
+	carg2 = (*C.char)(unsafe.Pointer(C.CString(propertyName)))
 	defer C.free(unsafe.Pointer(carg2))
 
 	C.gtk_widget_class_install_property_action(carg0, carg1, carg2)
@@ -175046,9 +175046,9 @@ func (widgetClass *WidgetClass) QueryAction(index_ uint) (gobject.Type, string, 
 	var carg0 *C.GtkWidgetClass // in, none, converted
 	var carg1 C.guint           // in, none, casted
 	var carg2 C.GType           // out, none, casted, alias
-	var carg3 *C.gchar          // out, none, string
+	var carg3 *C.char           // out, none, string, casted *C.gchar
 	var carg4 *C.GVariantType   // out, none, converted, nullable
-	var carg5 *C.gchar          // out, none, string, nullable-string
+	var carg5 *C.char           // out, none, string, casted *C.gchar, nullable
 	var cret  C.gboolean        // return
 
 	carg0 = (*C.GtkWidgetClass)(UnsafeWidgetClassToGlibNone(widgetClass))
@@ -175065,12 +175065,12 @@ func (widgetClass *WidgetClass) QueryAction(index_ uint) (gobject.Type, string, 
 	var goret         bool
 
 	owner = gobject.Type(carg2)
-	actionName = C.GoString((*C.gchar)(unsafe.Pointer(carg3)))
+	actionName = C.GoString((*C.char)(unsafe.Pointer(carg3)))
 	if carg4 != nil {
 		parameterType = glib.UnsafeVariantTypeFromGlibNone(unsafe.Pointer(carg4))
 	}
 	if carg5 != nil {
-		propertyName = C.GoString((*C.gchar)(unsafe.Pointer(carg5)))
+		propertyName = C.GoString((*C.char)(unsafe.Pointer(carg5)))
 	}
 	if cret != 0 {
 		goret = true
@@ -175141,10 +175141,10 @@ func (widgetClass *WidgetClass) SetActivateSignal(signalId uint) {
 // g_signal_new() or g_signal_newv() before calling this function.
 func (widgetClass *WidgetClass) SetActivateSignalFromName(signalName string) {
 	var carg0 *C.GtkWidgetClass // in, none, converted
-	var carg1 *C.gchar          // in, none, string
+	var carg1 *C.char           // in, none, string, casted *C.gchar
 
 	carg0 = (*C.GtkWidgetClass)(UnsafeWidgetClassToGlibNone(widgetClass))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(signalName)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(signalName)))
 	defer C.free(unsafe.Pointer(carg1))
 
 	C.gtk_widget_class_set_activate_signal_from_name(carg0, carg1)
@@ -175165,10 +175165,10 @@ func (widgetClass *WidgetClass) SetActivateSignalFromName(signalName string) {
 // uses the name "widget".
 func (widgetClass *WidgetClass) SetCSSName(name string) {
 	var carg0 *C.GtkWidgetClass // in, none, converted
-	var carg1 *C.gchar          // in, none, string
+	var carg1 *C.char           // in, none, string, casted *C.gchar
 
 	carg0 = (*C.GtkWidgetClass)(UnsafeWidgetClassToGlibNone(widgetClass))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(name)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(name)))
 	defer C.free(unsafe.Pointer(carg1))
 
 	C.gtk_widget_class_set_css_name(carg0, carg1)
@@ -175242,10 +175242,10 @@ func (widgetClass *WidgetClass) SetTemplate(templateBytes *glib.Bytes) {
 // initializer.
 func (widgetClass *WidgetClass) SetTemplateFromResource(resourceName string) {
 	var carg0 *C.GtkWidgetClass // in, none, converted
-	var carg1 *C.gchar          // in, none, string
+	var carg1 *C.char           // in, none, string, casted *C.gchar
 
 	carg0 = (*C.GtkWidgetClass)(UnsafeWidgetClassToGlibNone(widgetClass))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(resourceName)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(resourceName)))
 	defer C.free(unsafe.Pointer(carg1))
 
 	C.gtk_widget_class_set_template_from_resource(carg0, carg1)

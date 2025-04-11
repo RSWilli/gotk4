@@ -7886,16 +7886,16 @@ func DragFindWindowForScreen(context DragContext, dragWindow Window, screen Scre
 	var carg1 *C.GdkDragContext // in, none, converted
 	var carg2 *C.GdkWindow      // in, none, converted
 	var carg3 *C.GdkScreen      // in, none, converted
-	var carg4 C.int             // in, none, casted
-	var carg5 C.int             // in, none, casted
+	var carg4 C.gint            // in, none, casted
+	var carg5 C.gint            // in, none, casted
 	var carg6 *C.GdkWindow      // out, full, converted
 	var carg7 C.GdkDragProtocol // out, full, casted
 
 	carg1 = (*C.GdkDragContext)(UnsafeDragContextToGlibNone(context))
 	carg2 = (*C.GdkWindow)(UnsafeWindowToGlibNone(dragWindow))
 	carg3 = (*C.GdkScreen)(UnsafeScreenToGlibNone(screen))
-	carg4 = C.int(xRoot)
-	carg5 = C.int(yRoot)
+	carg4 = C.gint(xRoot)
+	carg5 = C.gint(yRoot)
 
 	C.gdk_drag_find_window_for_screen(carg1, carg2, carg3, carg4, carg5, &carg6, &carg7)
 	runtime.KeepAlive(context)
@@ -7942,8 +7942,8 @@ func DragMotion(context DragContext, destWindow Window, protocol DragProtocol, x
 	var carg1 *C.GdkDragContext // in, none, converted
 	var carg2 *C.GdkWindow      // in, none, converted
 	var carg3 C.GdkDragProtocol // in, none, casted
-	var carg4 C.int             // in, none, casted
-	var carg5 C.int             // in, none, casted
+	var carg4 C.gint            // in, none, casted
+	var carg5 C.gint            // in, none, casted
 	var carg6 C.GdkDragAction   // in, none, casted
 	var carg7 C.GdkDragAction   // in, none, casted
 	var carg8 C.guint32         // in, none, casted
@@ -7952,8 +7952,8 @@ func DragMotion(context DragContext, destWindow Window, protocol DragProtocol, x
 	carg1 = (*C.GdkDragContext)(UnsafeDragContextToGlibNone(context))
 	carg2 = (*C.GdkWindow)(UnsafeWindowToGlibNone(destWindow))
 	carg3 = C.GdkDragProtocol(protocol)
-	carg4 = C.int(xRoot)
-	carg5 = C.int(yRoot)
+	carg4 = C.gint(xRoot)
+	carg5 = C.gint(yRoot)
 	carg6 = C.GdkDragAction(suggestedAction)
 	carg7 = C.GdkDragAction(possibleActions)
 	carg8 = C.guint32(time_)
@@ -8079,7 +8079,7 @@ func DropReply(context DragContext, accepted bool, time_ uint32) {
 // sync for you, so you had to gdk_flush() if your last
 // call to Xlib was not a blocking round trip.
 func ErrorTrapPop() int {
-	var cret C.int // return, none, casted
+	var cret C.gint // return, none, casted
 
 	cret = C.gdk_error_trap_pop()
 
@@ -8192,7 +8192,7 @@ func GetDefaultRootWindow() Window {
 // Gets the display name specified in the command line arguments passed
 // to gdk_init() or gdk_parse_args(), if any.
 func GetDisplayArgName() string {
-	var cret *C.gchar // return, none, string
+	var cret *C.gchar // return, none, string, casted *C.gchar
 
 	cret = C.gdk_get_display_arg_name()
 
@@ -8213,7 +8213,7 @@ func GetDisplayArgName() string {
 // commandline option, the default value is the program name (determined
 // with g_get_prgname()) with the first character converted to uppercase.
 func GetProgramClass() string {
-	var cret *C.gchar // return, none, string
+	var cret *C.gchar // return, none, string, casted *C.gchar
 
 	cret = C.gdk_get_program_class()
 
@@ -8292,7 +8292,7 @@ func KeyvalConvertCase(symbol uint) (uint, uint) {
 // `gdk/gdkkeysyms.h` header file
 // but without the leading “GDK_KEY_”.
 func KeyvalFromName(keyvalName string) uint {
-	var carg1 *C.gchar // in, none, string
+	var carg1 *C.gchar // in, none, string, casted *C.gchar
 	var cret  C.guint  // return, none, casted
 
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(keyvalName)))
@@ -8383,7 +8383,7 @@ func KeyvalIsUpper(keyval uint) bool {
 // but without the leading “GDK_KEY_”.
 func KeyvalName(keyval uint) string {
 	var carg1 C.guint  // in, none, casted
-	var cret  *C.gchar // return, none, string
+	var cret  *C.gchar // return, none, string, casted *C.gchar
 
 	carg1 = C.guint(keyval)
 
@@ -8509,7 +8509,7 @@ func NotifyStartupComplete() {
 // gtk_window_set_auto_startup_notification() is called to
 // disable that feature.
 func NotifyStartupCompleteWithID(startupId string) {
-	var carg1 *C.gchar // in, none, string
+	var carg1 *C.gchar // in, none, string, casted *C.gchar
 
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(startupId)))
 	defer C.free(unsafe.Pointer(carg1))
@@ -8725,17 +8725,17 @@ func PangoContextGetForScreen(screen Screen) pango.Context {
 // You should rarely, if ever, need to call this function.
 func PixbufGetFromWindow(window Window, srcX int, srcY int, width int, height int) gdkpixbuf.Pixbuf {
 	var carg1 *C.GdkWindow // in, none, converted
-	var carg2 C.int        // in, none, casted
-	var carg3 C.int        // in, none, casted
-	var carg4 C.int        // in, none, casted
-	var carg5 C.int        // in, none, casted
+	var carg2 C.gint       // in, none, casted
+	var carg3 C.gint       // in, none, casted
+	var carg4 C.gint       // in, none, casted
+	var carg5 C.gint       // in, none, casted
 	var cret  *C.GdkPixbuf // return, full, converted
 
 	carg1 = (*C.GdkWindow)(UnsafeWindowToGlibNone(window))
-	carg2 = C.int(srcX)
-	carg3 = C.int(srcY)
-	carg4 = C.int(width)
-	carg5 = C.int(height)
+	carg2 = C.gint(srcX)
+	carg3 = C.gint(srcY)
+	carg4 = C.gint(width)
+	carg5 = C.gint(height)
 
 	cret = C.gdk_pixbuf_get_from_window(carg1, carg2, carg3, carg4, carg5)
 	runtime.KeepAlive(window)
@@ -8785,7 +8785,7 @@ func PixbufGetFromWindow(window Window, srcX int, srcY int, width int, height in
 // gtk_init(), gtk_init_with_args() or gtk_init_check()
 // in order to take effect.
 func SetAllowedBackends(backends string) {
-	var carg1 *C.gchar // in, none, string
+	var carg1 *C.gchar // in, none, string, casted *C.gchar
 
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(backends)))
 	defer C.free(unsafe.Pointer(carg1))
@@ -8827,7 +8827,7 @@ func SetDoubleClickTime(msec uint) {
 // The program class can still be overridden with the --class command
 // line option.
 func SetProgramClass(programClass string) {
-	var carg1 *C.gchar // in, none, string
+	var carg1 *C.gchar // in, none, string, casted *C.gchar
 
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(programClass)))
 	defer C.free(unsafe.Pointer(carg1))
@@ -8871,7 +8871,7 @@ func SetShowEvents(showEvents bool) {
 // Obtains a desktop-wide setting, such as the double-click time,
 // for the default screen. See gdk_screen_get_setting().
 func SettingGet(name string, value *gobject.Value) bool {
-	var carg1 *C.gchar   // in, none, string
+	var carg1 *C.gchar   // in, none, string, casted *C.gchar
 	var carg2 *C.GValue  // in, none, converted
 	var cret  C.gboolean // return
 
@@ -8941,16 +8941,16 @@ func TestRenderSync(window Window) {
 // by its accompanying button release event.
 func TestSimulateButton(window Window, x int, y int, button uint, modifiers ModifierType, buttonPressrelease EventType) bool {
 	var carg1 *C.GdkWindow      // in, none, converted
-	var carg2 C.int             // in, none, casted
-	var carg3 C.int             // in, none, casted
+	var carg2 C.gint            // in, none, casted
+	var carg3 C.gint            // in, none, casted
 	var carg4 C.guint           // in, none, casted
 	var carg5 C.GdkModifierType // in, none, casted
 	var carg6 C.GdkEventType    // in, none, casted
 	var cret  C.gboolean        // return
 
 	carg1 = (*C.GdkWindow)(UnsafeWindowToGlibNone(window))
-	carg2 = C.int(x)
-	carg3 = C.int(y)
+	carg2 = C.gint(x)
+	carg3 = C.gint(y)
 	carg4 = C.guint(button)
 	carg5 = C.GdkModifierType(modifiers)
 	carg6 = C.GdkEventType(buttonPressrelease)
@@ -9005,16 +9005,16 @@ func TestSimulateButton(window Window, x int, y int, button uint, modifiers Modi
 // followed by its accompanying key release event.
 func TestSimulateKey(window Window, x int, y int, keyval uint, modifiers ModifierType, keyPressrelease EventType) bool {
 	var carg1 *C.GdkWindow      // in, none, converted
-	var carg2 C.int             // in, none, casted
-	var carg3 C.int             // in, none, casted
+	var carg2 C.gint            // in, none, casted
+	var carg3 C.gint            // in, none, casted
 	var carg4 C.guint           // in, none, casted
 	var carg5 C.GdkModifierType // in, none, casted
 	var carg6 C.GdkEventType    // in, none, casted
 	var cret  C.gboolean        // return
 
 	carg1 = (*C.GdkWindow)(UnsafeWindowToGlibNone(window))
-	carg2 = C.int(x)
-	carg3 = C.int(y)
+	carg2 = C.gint(x)
+	carg3 = C.gint(y)
 	carg4 = C.guint(keyval)
 	carg5 = C.GdkModifierType(modifiers)
 	carg6 = C.GdkEventType(keyPressrelease)
@@ -9090,13 +9090,13 @@ func TestSimulateKey(window Window, x int, y int, keyval uint, modifiers Modifie
 // }
 // ]|
 func ThreadsAddIdleFull(priority int, function glib.SourceFunc) uint {
-	var carg1 C.int            // in, none, casted
+	var carg1 C.gint           // in, none, casted
 	var carg2 C.GSourceFunc    // callback, scope: notified, closure: carg3, destroy: carg4
 	var carg3 C.gpointer       // implicit
 	var carg4 C.GDestroyNotify // implicit
 	var cret  C.guint          // return, none, casted
 
-	carg1 = C.int(priority)
+	carg1 = C.gint(priority)
 	carg2 = (*[0]byte)(C._gotk4_glib2_SourceFunc)
 	carg3 = C.gpointer(gbox.Assign(function))
 	carg4 = (C.GDestroyNotify)((*[0]byte)(C.callbackDelete))
@@ -9170,14 +9170,14 @@ func ThreadsAddIdleFull(priority int, function glib.SourceFunc) uint {
 // }
 // ]|
 func ThreadsAddTimeoutFull(priority int, interval uint, function glib.SourceFunc) uint {
-	var carg1 C.int            // in, none, casted
+	var carg1 C.gint           // in, none, casted
 	var carg2 C.guint          // in, none, casted
 	var carg3 C.GSourceFunc    // callback, scope: notified, closure: carg4, destroy: carg5
 	var carg4 C.gpointer       // implicit
 	var carg5 C.GDestroyNotify // implicit
 	var cret  C.guint          // return, none, casted
 
-	carg1 = C.int(priority)
+	carg1 = C.gint(priority)
 	carg2 = C.guint(interval)
 	carg3 = (*[0]byte)(C._gotk4_glib2_SourceFunc)
 	carg4 = C.gpointer(gbox.Assign(function))
@@ -9212,14 +9212,14 @@ func ThreadsAddTimeoutFull(priority int, interval uint, function glib.SourceFunc
 // See g_timeout_add_seconds_full() for a discussion of why it is
 // a good idea to use this function if you don’t need finer granularity.
 func ThreadsAddTimeoutSecondsFull(priority int, interval uint, function glib.SourceFunc) uint {
-	var carg1 C.int            // in, none, casted
+	var carg1 C.gint           // in, none, casted
 	var carg2 C.guint          // in, none, casted
 	var carg3 C.GSourceFunc    // callback, scope: notified, closure: carg4, destroy: carg5
 	var carg4 C.gpointer       // implicit
 	var carg5 C.GDestroyNotify // implicit
 	var cret  C.guint          // return, none, casted
 
-	carg1 = C.int(priority)
+	carg1 = C.gint(priority)
 	carg2 = C.guint(interval)
 	carg3 = (*[0]byte)(C._gotk4_glib2_SourceFunc)
 	carg4 = C.gpointer(gbox.Assign(function))
@@ -9279,8 +9279,8 @@ func UnicodeToKeyval(wc uint32) uint {
 // is not specified; it may be as pseudo-escape sequences
 // \x{ABCD}, or it may be in some other form of approximation.
 func UTF8ToStringTarget(str string) string {
-	var carg1 *C.gchar // in, none, string
-	var cret  *C.gchar // return, full, string
+	var carg1 *C.gchar // in, none, string, casted *C.gchar
+	var cret  *C.gchar // return, full, string, casted *C.gchar
 
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(str)))
 	defer C.free(unsafe.Pointer(carg1))
@@ -9430,12 +9430,12 @@ func UnsafeDevicePadToGlibFull(c DevicePad) unsafe.Pointer {
 func (pad *DevicePadInstance) GetFeatureGroup(feature DevicePadFeature, featureIdx int) int {
 	var carg0 *C.GdkDevicePad       // in, none, converted
 	var carg1 C.GdkDevicePadFeature // in, none, casted
-	var carg2 C.int                 // in, none, casted
-	var cret  C.int                 // return, none, casted
+	var carg2 C.gint                // in, none, casted
+	var cret  C.gint                // return, none, casted
 
 	carg0 = (*C.GdkDevicePad)(UnsafeDevicePadToGlibNone(pad))
 	carg1 = C.GdkDevicePadFeature(feature)
-	carg2 = C.int(featureIdx)
+	carg2 = C.gint(featureIdx)
 
 	cret = C.gdk_device_pad_get_feature_group(carg0, carg1, carg2)
 	runtime.KeepAlive(pad)
@@ -9462,11 +9462,11 @@ func (pad *DevicePadInstance) GetFeatureGroup(feature DevicePadFeature, featureI
 // Returns the number of modes that @group may have.
 func (pad *DevicePadInstance) GetGroupNModes(groupIdx int) int {
 	var carg0 *C.GdkDevicePad // in, none, converted
-	var carg1 C.int           // in, none, casted
-	var cret  C.int           // return, none, casted
+	var carg1 C.gint          // in, none, casted
+	var cret  C.gint          // return, none, casted
 
 	carg0 = (*C.GdkDevicePad)(UnsafeDevicePadToGlibNone(pad))
-	carg1 = C.int(groupIdx)
+	carg1 = C.gint(groupIdx)
 
 	cret = C.gdk_device_pad_get_group_n_modes(carg0, carg1)
 	runtime.KeepAlive(pad)
@@ -9493,7 +9493,7 @@ func (pad *DevicePadInstance) GetGroupNModes(groupIdx int) int {
 func (pad *DevicePadInstance) GetNFeatures(feature DevicePadFeature) int {
 	var carg0 *C.GdkDevicePad       // in, none, converted
 	var carg1 C.GdkDevicePadFeature // in, none, casted
-	var cret  C.int                 // return, none, casted
+	var cret  C.gint                // return, none, casted
 
 	carg0 = (*C.GdkDevicePad)(UnsafeDevicePadToGlibNone(pad))
 	carg1 = C.GdkDevicePadFeature(feature)
@@ -9520,7 +9520,7 @@ func (pad *DevicePadInstance) GetNFeatures(feature DevicePadFeature) int {
 // current mode.
 func (pad *DevicePadInstance) GetNGroups() int {
 	var carg0 *C.GdkDevicePad // in, none, converted
-	var cret  C.int           // return, none, casted
+	var cret  C.gint          // return, none, casted
 
 	carg0 = (*C.GdkDevicePad)(UnsafeDevicePadToGlibNone(pad))
 
@@ -9696,10 +9696,10 @@ func UnsafeAppLaunchContextToGlibFull(c AppLaunchContext) unsafe.Pointer {
 // be the current workspace.
 func (context *AppLaunchContextInstance) SetDesktop(desktop int) {
 	var carg0 *C.GdkAppLaunchContext // in, none, converted
-	var carg1 C.int                  // in, none, casted
+	var carg1 C.gint                 // in, none, casted
 
 	carg0 = (*C.GdkAppLaunchContext)(UnsafeAppLaunchContextToGlibNone(context))
-	carg1 = C.int(desktop)
+	carg1 = C.gint(desktop)
 
 	C.gdk_app_launch_context_set_desktop(carg0, carg1)
 	runtime.KeepAlive(context)
@@ -9749,11 +9749,11 @@ func (context *AppLaunchContextInstance) SetIcon(icon gio.Icon) {
 // for the launched application itself.
 func (context *AppLaunchContextInstance) SetIconName(iconName string) {
 	var carg0 *C.GdkAppLaunchContext // in, none, converted
-	var carg1 *C.gchar               // in, none, string, nullable-string
+	var carg1 *C.char                // in, none, string, nullable-string
 
 	carg0 = (*C.GdkAppLaunchContext)(UnsafeAppLaunchContextToGlibNone(context))
 	if iconName != "" {
-		carg1 = (*C.gchar)(unsafe.Pointer(C.CString(iconName)))
+		carg1 = (*C.char)(unsafe.Pointer(C.CString(iconName)))
 		defer C.free(unsafe.Pointer(carg1))
 	}
 
@@ -9974,7 +9974,7 @@ func NewCursorInstanceForDisplay(display Display, cursorType CursorType) Cursor 
 // - ![](zoom_out_cursor.png) "zoom-out"
 func NewCursorInstanceFromName(display Display, name string) Cursor {
 	var carg1 *C.GdkDisplay // in, none, converted
-	var carg2 *C.gchar      // in, none, string
+	var carg2 *C.gchar      // in, none, string, casted *C.gchar
 	var cret  *C.GdkCursor  // return, full, converted
 
 	carg1 = (*C.GdkDisplay)(UnsafeDisplayToGlibNone(display))
@@ -10026,14 +10026,14 @@ func NewCursorInstanceFromName(display Display, name string) Cursor {
 func NewCursorInstanceFromPixbuf(display Display, pixbuf gdkpixbuf.Pixbuf, x int, y int) Cursor {
 	var carg1 *C.GdkDisplay // in, none, converted
 	var carg2 *C.GdkPixbuf  // in, none, converted
-	var carg3 C.int         // in, none, casted
-	var carg4 C.int         // in, none, casted
+	var carg3 C.gint        // in, none, casted
+	var carg4 C.gint        // in, none, casted
 	var cret  *C.GdkCursor  // return, full, converted
 
 	carg1 = (*C.GdkDisplay)(UnsafeDisplayToGlibNone(display))
 	carg2 = (*C.GdkPixbuf)(gdkpixbuf.UnsafePixbufToGlibNone(pixbuf))
-	carg3 = C.int(x)
-	carg4 = C.int(y)
+	carg3 = C.gint(x)
+	carg4 = C.gint(y)
 
 	cret = C.gdk_cursor_new_from_pixbuf(carg1, carg2, carg3, carg4)
 	runtime.KeepAlive(display)
@@ -10704,7 +10704,7 @@ func (device *DeviceInstance) GetMode() InputMode {
 // Returns the number of axes the device currently has.
 func (device *DeviceInstance) GetNAxes() int {
 	var carg0 *C.GdkDevice // in, none, converted
-	var cret  C.int        // return, none, casted
+	var cret  C.gint       // return, none, casted
 
 	carg0 = (*C.GdkDevice)(UnsafeDeviceToGlibNone(device))
 
@@ -10726,7 +10726,7 @@ func (device *DeviceInstance) GetNAxes() int {
 // Returns the number of keys the device currently has.
 func (device *DeviceInstance) GetNKeys() int {
 	var carg0 *C.GdkDevice // in, none, converted
-	var cret  C.int        // return, none, casted
+	var cret  C.gint       // return, none, casted
 
 	carg0 = (*C.GdkDevice)(UnsafeDeviceToGlibNone(device))
 
@@ -10748,7 +10748,7 @@ func (device *DeviceInstance) GetNKeys() int {
 // Determines the name of the device.
 func (device *DeviceInstance) GetName() string {
 	var carg0 *C.GdkDevice // in, none, converted
-	var cret  *C.gchar     // return, none, string
+	var cret  *C.gchar     // return, none, string, casted *C.gchar
 
 	carg0 = (*C.GdkDevice)(UnsafeDeviceToGlibNone(device))
 
@@ -10777,8 +10777,8 @@ func (device *DeviceInstance) GetName() string {
 func (device *DeviceInstance) GetPosition() (Screen, int, int) {
 	var carg0 *C.GdkDevice // in, none, converted
 	var carg1 *C.GdkScreen // out, none, converted
-	var carg2 C.int        // out, full, casted
-	var carg3 C.int        // out, full, casted
+	var carg2 C.gint       // out, full, casted
+	var carg3 C.gint       // out, full, casted
 
 	carg0 = (*C.GdkDevice)(UnsafeDeviceToGlibNone(device))
 
@@ -10840,7 +10840,7 @@ func (device *DeviceInstance) GetPositionDouble() (Screen, float64, float64) {
 // it. See gdk_device_get_vendor_id() for more information.
 func (device *DeviceInstance) GetProductID() string {
 	var carg0 *C.GdkDevice // in, none, converted
-	var cret  *C.gchar     // return, none, string
+	var cret  *C.gchar     // return, none, string, casted *C.gchar
 
 	carg0 = (*C.GdkDevice)(UnsafeDeviceToGlibNone(device))
 
@@ -10931,7 +10931,7 @@ func (device *DeviceInstance) GetSource() InputSource {
 // ]|
 func (device *DeviceInstance) GetVendorID() string {
 	var carg0 *C.GdkDevice // in, none, converted
-	var cret  *C.gchar     // return, none, string
+	var cret  *C.gchar     // return, none, string, casted *C.gchar
 
 	carg0 = (*C.GdkDevice)(UnsafeDeviceToGlibNone(device))
 
@@ -10962,8 +10962,8 @@ func (device *DeviceInstance) GetVendorID() string {
 // unless there is an ongoing grab on them, see gdk_device_grab().
 func (device *DeviceInstance) GetWindowAtPosition() (int, int, Window) {
 	var carg0 *C.GdkDevice // in, none, converted
-	var carg1 C.int        // out, full, casted
-	var carg2 C.int        // out, full, casted
+	var carg1 C.gint       // out, full, casted
+	var carg2 C.gint       // out, full, casted
 	var cret  *C.GdkWindow // return, none, converted
 
 	carg0 = (*C.GdkDevice)(UnsafeDeviceToGlibNone(device))
@@ -11131,13 +11131,13 @@ func (device *DeviceInstance) SetMode(mode InputMode) bool {
 func (device *DeviceInstance) Warp(screen Screen, x int, y int) {
 	var carg0 *C.GdkDevice // in, none, converted
 	var carg1 *C.GdkScreen // in, none, converted
-	var carg2 C.int        // in, none, casted
-	var carg3 C.int        // in, none, casted
+	var carg2 C.gint       // in, none, casted
+	var carg3 C.gint       // in, none, casted
 
 	carg0 = (*C.GdkDevice)(UnsafeDeviceToGlibNone(device))
 	carg1 = (*C.GdkScreen)(UnsafeScreenToGlibNone(screen))
-	carg2 = C.int(x)
-	carg3 = C.int(y)
+	carg2 = C.gint(x)
+	carg3 = C.gint(y)
 
 	C.gdk_device_warp(carg0, carg1, carg2, carg3)
 	runtime.KeepAlive(device)
@@ -11858,7 +11858,7 @@ func DisplayInstanceGetDefault() Display {
 //
 // Opens a display.
 func DisplayInstanceOpen(displayName string) Display {
-	var carg1 *C.gchar      // in, none, string
+	var carg1 *C.gchar      // in, none, string, casted *C.gchar
 	var cret  *C.GdkDisplay // return, none, converted
 
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(displayName)))
@@ -12103,7 +12103,7 @@ func (display *DisplayInstance) GetMaximalCursorSize() (uint, uint) {
 // Gets a monitor associated with this display.
 func (display *DisplayInstance) GetMonitor(monitorNum int) Monitor {
 	var carg0 *C.GdkDisplay // in, none, converted
-	var carg1 C.int         // in, none, casted
+	var carg1 C.int         // in, none, casted, casted C.gint
 	var cret  *C.GdkMonitor // return, none, converted
 
 	carg0 = (*C.GdkDisplay)(UnsafeDisplayToGlibNone(display))
@@ -12135,8 +12135,8 @@ func (display *DisplayInstance) GetMonitor(monitorNum int) Monitor {
 // or a nearby monitor if the point is not in any monitor.
 func (display *DisplayInstance) GetMonitorAtPoint(x int, y int) Monitor {
 	var carg0 *C.GdkDisplay // in, none, converted
-	var carg1 C.int         // in, none, casted
-	var carg2 C.int         // in, none, casted
+	var carg1 C.int         // in, none, casted, casted C.gint
+	var carg2 C.int         // in, none, casted, casted C.gint
 	var cret  *C.GdkMonitor // return, none, converted
 
 	carg0 = (*C.GdkDisplay)(UnsafeDisplayToGlibNone(display))
@@ -12198,7 +12198,7 @@ func (display *DisplayInstance) GetMonitorAtWindow(window Window) Monitor {
 // #GdkDisplay::monitor-added or #GdkDisplay::monitor-removed signal.
 func (display *DisplayInstance) GetNMonitors() int {
 	var carg0 *C.GdkDisplay // in, none, converted
-	var cret  C.int         // return, none, casted
+	var cret  C.int         // return, none, casted, casted C.gint
 
 	carg0 = (*C.GdkDisplay)(UnsafeDisplayToGlibNone(display))
 
@@ -12220,7 +12220,7 @@ func (display *DisplayInstance) GetNMonitors() int {
 // Gets the name of the display.
 func (display *DisplayInstance) GetName() string {
 	var carg0 *C.GdkDisplay // in, none, converted
-	var cret  *C.gchar      // return, none, string
+	var cret  *C.gchar      // return, none, string, casted *C.gchar
 
 	carg0 = (*C.GdkDisplay)(UnsafeDisplayToGlibNone(display))
 
@@ -12326,7 +12326,7 @@ func (display *DisplayInstance) IsClosed() bool {
 // disable that feature.
 func (display *DisplayInstance) NotifyStartupComplete(startupId string) {
 	var carg0 *C.GdkDisplay // in, none, converted
-	var carg1 *C.gchar      // in, none, string
+	var carg1 *C.gchar      // in, none, string, casted *C.gchar
 
 	carg0 = (*C.GdkDisplay)(UnsafeDisplayToGlibNone(display))
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(startupId)))
@@ -12731,7 +12731,7 @@ func (manager *DisplayManagerInstance) GetDefaultDisplay() Display {
 // Opens a display.
 func (manager *DisplayManagerInstance) OpenDisplay(name string) Display {
 	var carg0 *C.GdkDisplayManager // in, none, converted
-	var carg1 *C.gchar             // in, none, string
+	var carg1 *C.gchar             // in, none, string, casted *C.gchar
 	var cret  *C.GdkDisplay        // return, none, converted
 
 	carg0 = (*C.GdkDisplayManager)(UnsafeDisplayManagerToGlibNone(manager))
@@ -13192,12 +13192,12 @@ func (context *DragContextInstance) SetDevice(device Device) {
 // top left corner of the drag window.
 func (context *DragContextInstance) SetHotspot(hotX int, hotY int) {
 	var carg0 *C.GdkDragContext // in, none, converted
-	var carg1 C.int             // in, none, casted
-	var carg2 C.int             // in, none, casted
+	var carg1 C.gint            // in, none, casted
+	var carg2 C.gint            // in, none, casted
 
 	carg0 = (*C.GdkDragContext)(UnsafeDragContextToGlibNone(context))
-	carg1 = C.int(hotX)
-	carg2 = C.int(hotY)
+	carg1 = C.gint(hotX)
+	carg2 = C.gint(hotY)
 
 	C.gdk_drag_context_set_hotspot(carg0, carg1, carg2)
 	runtime.KeepAlive(context)
@@ -14116,8 +14116,8 @@ func (context *GLContextInstance) GetForwardCompatible() bool {
 // gdk_gl_context_set_required_version().
 func (context *GLContextInstance) GetRequiredVersion() (int, int) {
 	var carg0 *C.GdkGLContext // in, none, converted
-	var carg1 C.int           // out, full, casted
-	var carg2 C.int           // out, full, casted
+	var carg1 C.int           // out, full, casted, casted C.gint
+	var carg2 C.int           // out, full, casted, casted C.gint
 
 	carg0 = (*C.GdkGLContext)(UnsafeGLContextToGlibNone(context))
 
@@ -14190,8 +14190,8 @@ func (context *GLContextInstance) GetUseES() bool {
 // The @context must be realized prior to calling this function.
 func (context *GLContextInstance) GetVersion() (int, int) {
 	var carg0 *C.GdkGLContext // in, none, converted
-	var carg1 C.int           // out, full, casted
-	var carg2 C.int           // out, full, casted
+	var carg1 C.int           // out, full, casted, casted C.gint
+	var carg2 C.int           // out, full, casted, casted C.gint
 
 	carg0 = (*C.GdkGLContext)(UnsafeGLContextToGlibNone(context))
 
@@ -14382,8 +14382,8 @@ func (context *GLContextInstance) SetForwardCompatible(compatible bool) {
 // this function.
 func (context *GLContextInstance) SetRequiredVersion(major int, minor int) {
 	var carg0 *C.GdkGLContext // in, none, converted
-	var carg1 C.int           // in, none, casted
-	var carg2 C.int           // in, none, casted
+	var carg1 C.int           // in, none, casted, casted C.gint
+	var carg2 C.int           // in, none, casted, casted C.gint
 
 	carg0 = (*C.GdkGLContext)(UnsafeGLContextToGlibNone(context))
 	carg1 = C.int(major)
@@ -14416,7 +14416,7 @@ func (context *GLContextInstance) SetRequiredVersion(major int, minor int) {
 // OpenGL ES API, extensions, or shaders.
 func (context *GLContextInstance) SetUseES(useEs int) {
 	var carg0 *C.GdkGLContext // in, none, converted
-	var carg1 C.int           // in, none, casted
+	var carg1 C.int           // in, none, casted, casted C.gint
 
 	carg0 = (*C.GdkGLContext)(UnsafeGLContextToGlibNone(context))
 	carg1 = C.int(useEs)
@@ -14936,17 +14936,17 @@ func (keymap *KeymapInstance) TranslateKeyboardState(hardwareKeycode uint, state
 	var carg0 *C.GdkKeymap      // in, none, converted
 	var carg1 C.guint           // in, none, casted
 	var carg2 C.GdkModifierType // in, none, casted
-	var carg3 C.int             // in, none, casted
+	var carg3 C.gint            // in, none, casted
 	var carg4 C.guint           // out, full, casted
-	var carg5 C.int             // out, full, casted
-	var carg6 C.int             // out, full, casted
+	var carg5 C.gint            // out, full, casted
+	var carg6 C.gint            // out, full, casted
 	var carg7 C.GdkModifierType // out, full, casted
 	var cret  C.gboolean        // return
 
 	carg0 = (*C.GdkKeymap)(UnsafeKeymapToGlibNone(keymap))
 	carg1 = C.guint(hardwareKeycode)
 	carg2 = C.GdkModifierType(state)
-	carg3 = C.int(group)
+	carg3 = C.gint(group)
 
 	cret = C.gdk_keymap_translate_keyboard_state(carg0, carg1, carg2, carg3, &carg4, &carg5, &carg6, &carg7)
 	runtime.KeepAlive(keymap)
@@ -15192,7 +15192,7 @@ func (monitor *MonitorInstance) GetGeometry() Rectangle {
 // Gets the height in millimeters of the monitor.
 func (monitor *MonitorInstance) GetHeightMm() int {
 	var carg0 *C.GdkMonitor // in, none, converted
-	var cret  C.int         // return, none, casted
+	var cret  C.int         // return, none, casted, casted C.gint
 
 	carg0 = (*C.GdkMonitor)(UnsafeMonitorToGlibNone(monitor))
 
@@ -15219,7 +15219,7 @@ func (monitor *MonitorInstance) GetHeightMm() int {
 // PNP ID registry is located at https://uefi.org/pnp_id_list
 func (monitor *MonitorInstance) GetManufacturer() string {
 	var carg0 *C.GdkMonitor // in, none, converted
-	var cret  *C.gchar      // return, none, string
+	var cret  *C.char       // return, none, string, casted *C.gchar
 
 	carg0 = (*C.GdkMonitor)(UnsafeMonitorToGlibNone(monitor))
 
@@ -15228,7 +15228,7 @@ func (monitor *MonitorInstance) GetManufacturer() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -15241,7 +15241,7 @@ func (monitor *MonitorInstance) GetManufacturer() string {
 // Gets the a string identifying the monitor model, if available.
 func (monitor *MonitorInstance) GetModel() string {
 	var carg0 *C.GdkMonitor // in, none, converted
-	var cret  *C.gchar      // return, none, string
+	var cret  *C.char       // return, none, string, casted *C.gchar
 
 	carg0 = (*C.GdkMonitor)(UnsafeMonitorToGlibNone(monitor))
 
@@ -15250,7 +15250,7 @@ func (monitor *MonitorInstance) GetModel() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -15266,7 +15266,7 @@ func (monitor *MonitorInstance) GetModel() string {
 // is returned as 60000.
 func (monitor *MonitorInstance) GetRefreshRate() int {
 	var carg0 *C.GdkMonitor // in, none, converted
-	var cret  C.int         // return, none, casted
+	var cret  C.int         // return, none, casted, casted C.gint
 
 	carg0 = (*C.GdkMonitor)(UnsafeMonitorToGlibNone(monitor))
 
@@ -15294,7 +15294,7 @@ func (monitor *MonitorInstance) GetRefreshRate() int {
 // where it is better to use gdk_window_get_scale_factor() instead.
 func (monitor *MonitorInstance) GetScaleFactor() int {
 	var carg0 *C.GdkMonitor // in, none, converted
-	var cret  C.int         // return, none, casted
+	var cret  C.int         // return, none, casted, casted C.gint
 
 	carg0 = (*C.GdkMonitor)(UnsafeMonitorToGlibNone(monitor))
 
@@ -15339,7 +15339,7 @@ func (monitor *MonitorInstance) GetSubpixelLayout() SubpixelLayout {
 // Gets the width in millimeters of the monitor.
 func (monitor *MonitorInstance) GetWidthMm() int {
 	var carg0 *C.GdkMonitor // in, none, converted
-	var cret  C.int         // return, none, casted
+	var cret  C.int         // return, none, casted, casted C.gint
 
 	carg0 = (*C.GdkMonitor)(UnsafeMonitorToGlibNone(monitor))
 
@@ -15704,7 +15704,7 @@ func (screen *ScreenInstance) GetRootWindow() Window {
 // more information.
 func (screen *ScreenInstance) GetSetting(name string, value *gobject.Value) bool {
 	var carg0 *C.GdkScreen // in, none, converted
-	var carg1 *C.gchar     // in, none, string
+	var carg1 *C.gchar     // in, none, string, casted *C.gchar
 	var carg2 *C.GValue    // in, none, converted
 	var cret  C.gboolean   // return
 
@@ -16114,8 +16114,8 @@ func UnsafeVisualToGlibFull(c Visual) unsafe.Pointer {
 func (visual *VisualInstance) GetBluePixelDetails() (uint32, int, int) {
 	var carg0 *C.GdkVisual // in, none, converted
 	var carg1 C.guint32    // out, full, casted
-	var carg2 C.int        // out, full, casted
-	var carg3 C.int        // out, full, casted
+	var carg2 C.gint       // out, full, casted
+	var carg3 C.gint       // out, full, casted
 
 	carg0 = (*C.GdkVisual)(UnsafeVisualToGlibNone(visual))
 
@@ -16141,7 +16141,7 @@ func (visual *VisualInstance) GetBluePixelDetails() (uint32, int, int) {
 // Returns the bit depth of this visual.
 func (visual *VisualInstance) GetDepth() int {
 	var carg0 *C.GdkVisual // in, none, converted
-	var cret  C.int        // return, none, casted
+	var cret  C.gint       // return, none, casted
 
 	carg0 = (*C.GdkVisual)(UnsafeVisualToGlibNone(visual))
 
@@ -16170,8 +16170,8 @@ func (visual *VisualInstance) GetDepth() int {
 func (visual *VisualInstance) GetGreenPixelDetails() (uint32, int, int) {
 	var carg0 *C.GdkVisual // in, none, converted
 	var carg1 C.guint32    // out, full, casted
-	var carg2 C.int        // out, full, casted
-	var carg3 C.int        // out, full, casted
+	var carg2 C.gint       // out, full, casted
+	var carg3 C.gint       // out, full, casted
 
 	carg0 = (*C.GdkVisual)(UnsafeVisualToGlibNone(visual))
 
@@ -16204,8 +16204,8 @@ func (visual *VisualInstance) GetGreenPixelDetails() (uint32, int, int) {
 func (visual *VisualInstance) GetRedPixelDetails() (uint32, int, int) {
 	var carg0 *C.GdkVisual // in, none, converted
 	var carg1 C.guint32    // out, full, casted
-	var carg2 C.int        // out, full, casted
-	var carg3 C.int        // out, full, casted
+	var carg2 C.gint       // out, full, casted
+	var carg3 C.gint       // out, full, casted
 
 	carg0 = (*C.GdkVisual)(UnsafeVisualToGlibNone(visual))
 
@@ -17862,14 +17862,14 @@ func UnsafeWindowToGlibFull(c Window) unsafe.Pointer {
 func NewWindowInstance(parent Window, attributes *WindowAttr, attributesMask int) Window {
 	var carg1 *C.GdkWindow     // in, none, converted, nullable
 	var carg2 *C.GdkWindowAttr // in, none, converted
-	var carg3 C.int            // in, none, casted
+	var carg3 C.gint           // in, none, casted
 	var cret  *C.GdkWindow     // return, full, converted
 
 	if parent != nil {
 		carg1 = (*C.GdkWindow)(UnsafeWindowToGlibNone(parent))
 	}
 	carg2 = (*C.GdkWindowAttr)(UnsafeWindowAttrToGlibNone(attributes))
-	carg3 = C.int(attributesMask)
+	carg3 = C.gint(attributesMask)
 
 	cret = C.gdk_window_new(carg1, carg2, carg3)
 	runtime.KeepAlive(parent)
@@ -17902,15 +17902,15 @@ func NewWindowInstance(parent Window, attributes *WindowAttr, attributesMask int
 func WindowInstanceConstrainSize(geometry *Geometry, flags WindowHints, width int, height int) (int, int) {
 	var carg1 *C.GdkGeometry   // in, none, converted
 	var carg2 C.GdkWindowHints // in, none, casted
-	var carg3 C.int            // in, none, casted
-	var carg4 C.int            // in, none, casted
-	var carg5 C.int            // out, full, casted
-	var carg6 C.int            // out, full, casted
+	var carg3 C.gint           // in, none, casted
+	var carg4 C.gint           // in, none, casted
+	var carg5 C.gint           // out, full, casted
+	var carg6 C.gint           // out, full, casted
 
 	carg1 = (*C.GdkGeometry)(UnsafeGeometryToGlibNone(geometry))
 	carg2 = C.GdkWindowHints(flags)
-	carg3 = C.int(width)
-	carg4 = C.int(height)
+	carg3 = C.gint(width)
+	carg4 = C.gint(height)
 
 	C.gdk_window_constrain_size(carg1, carg2, carg3, carg4, &carg5, &carg6)
 	runtime.KeepAlive(geometry)
@@ -17957,15 +17957,15 @@ func (window *WindowInstance) Beep() {
 // to begin a drag with a different device.
 func (window *WindowInstance) BeginMoveDrag(button int, rootX int, rootY int, timestamp uint32) {
 	var carg0 *C.GdkWindow // in, none, converted
-	var carg1 C.int        // in, none, casted
-	var carg2 C.int        // in, none, casted
-	var carg3 C.int        // in, none, casted
+	var carg1 C.gint       // in, none, casted
+	var carg2 C.gint       // in, none, casted
+	var carg3 C.gint       // in, none, casted
 	var carg4 C.guint32    // in, none, casted
 
 	carg0 = (*C.GdkWindow)(UnsafeWindowToGlibNone(window))
-	carg1 = C.int(button)
-	carg2 = C.int(rootX)
-	carg3 = C.int(rootY)
+	carg1 = C.gint(button)
+	carg2 = C.gint(rootX)
+	carg3 = C.gint(rootY)
 	carg4 = C.guint32(timestamp)
 
 	C.gdk_window_begin_move_drag(carg0, carg1, carg2, carg3, carg4)
@@ -17994,16 +17994,16 @@ func (window *WindowInstance) BeginMoveDrag(button int, rootX int, rootY int, ti
 func (window *WindowInstance) BeginMoveDragForDevice(device Device, button int, rootX int, rootY int, timestamp uint32) {
 	var carg0 *C.GdkWindow // in, none, converted
 	var carg1 *C.GdkDevice // in, none, converted
-	var carg2 C.int        // in, none, casted
-	var carg3 C.int        // in, none, casted
-	var carg4 C.int        // in, none, casted
+	var carg2 C.gint       // in, none, casted
+	var carg3 C.gint       // in, none, casted
+	var carg4 C.gint       // in, none, casted
 	var carg5 C.guint32    // in, none, casted
 
 	carg0 = (*C.GdkWindow)(UnsafeWindowToGlibNone(window))
 	carg1 = (*C.GdkDevice)(UnsafeDeviceToGlibNone(device))
-	carg2 = C.int(button)
-	carg3 = C.int(rootX)
-	carg4 = C.int(rootY)
+	carg2 = C.gint(button)
+	carg3 = C.gint(rootX)
+	carg4 = C.gint(rootY)
 	carg5 = C.guint32(timestamp)
 
 	C.gdk_window_begin_move_drag_for_device(carg0, carg1, carg2, carg3, carg4, carg5)
@@ -18033,16 +18033,16 @@ func (window *WindowInstance) BeginMoveDragForDevice(device Device, button int, 
 func (window *WindowInstance) BeginResizeDrag(edge WindowEdge, button int, rootX int, rootY int, timestamp uint32) {
 	var carg0 *C.GdkWindow    // in, none, converted
 	var carg1 C.GdkWindowEdge // in, none, casted
-	var carg2 C.int           // in, none, casted
-	var carg3 C.int           // in, none, casted
-	var carg4 C.int           // in, none, casted
+	var carg2 C.gint          // in, none, casted
+	var carg3 C.gint          // in, none, casted
+	var carg4 C.gint          // in, none, casted
 	var carg5 C.guint32       // in, none, casted
 
 	carg0 = (*C.GdkWindow)(UnsafeWindowToGlibNone(window))
 	carg1 = C.GdkWindowEdge(edge)
-	carg2 = C.int(button)
-	carg3 = C.int(rootX)
-	carg4 = C.int(rootY)
+	carg2 = C.gint(button)
+	carg3 = C.gint(rootX)
+	carg4 = C.gint(rootY)
 	carg5 = C.guint32(timestamp)
 
 	C.gdk_window_begin_resize_drag(carg0, carg1, carg2, carg3, carg4, carg5)
@@ -18075,17 +18075,17 @@ func (window *WindowInstance) BeginResizeDragForDevice(edge WindowEdge, device D
 	var carg0 *C.GdkWindow    // in, none, converted
 	var carg1 C.GdkWindowEdge // in, none, casted
 	var carg2 *C.GdkDevice    // in, none, converted
-	var carg3 C.int           // in, none, casted
-	var carg4 C.int           // in, none, casted
-	var carg5 C.int           // in, none, casted
+	var carg3 C.gint          // in, none, casted
+	var carg4 C.gint          // in, none, casted
+	var carg5 C.gint          // in, none, casted
 	var carg6 C.guint32       // in, none, casted
 
 	carg0 = (*C.GdkWindow)(UnsafeWindowToGlibNone(window))
 	carg1 = C.GdkWindowEdge(edge)
 	carg2 = (*C.GdkDevice)(UnsafeDeviceToGlibNone(device))
-	carg3 = C.int(button)
-	carg4 = C.int(rootX)
-	carg5 = C.int(rootY)
+	carg3 = C.gint(button)
+	carg4 = C.gint(rootX)
+	carg5 = C.gint(rootY)
 	carg6 = C.guint32(timestamp)
 
 	C.gdk_window_begin_resize_drag_for_device(carg0, carg1, carg2, carg3, carg4, carg5, carg6)
@@ -18419,10 +18419,10 @@ func (window *WindowInstance) Fullscreen() {
 // If the window was already fullscreen, then this function does nothing.
 func (window *WindowInstance) FullscreenOnMonitor(monitor int) {
 	var carg0 *C.GdkWindow // in, none, converted
-	var carg1 C.int        // in, none, casted
+	var carg1 C.gint       // in, none, casted
 
 	carg0 = (*C.GdkWindow)(UnsafeWindowToGlibNone(window))
-	carg1 = C.int(monitor)
+	carg1 = C.gint(monitor)
 
 	C.gdk_window_fullscreen_on_monitor(carg0, carg1)
 	runtime.KeepAlive(window)
@@ -18606,8 +18606,8 @@ func (window *WindowInstance) GetDeviceEvents(device Device) EventMask {
 func (window *WindowInstance) GetDevicePosition(device Device) (int, int, ModifierType, Window) {
 	var carg0 *C.GdkWindow      // in, none, converted
 	var carg1 *C.GdkDevice      // in, none, converted
-	var carg2 C.int             // out, full, casted
-	var carg3 C.int             // out, full, casted
+	var carg2 C.gint            // out, full, casted
+	var carg3 C.gint            // out, full, casted
 	var carg4 C.GdkModifierType // out, full, casted
 	var cret  *C.GdkWindow      // return, none, converted
 
@@ -18953,10 +18953,10 @@ func (window *WindowInstance) GetFullscreenMode() FullscreenMode {
 // the 16-bit coordinates of X11.
 func (window *WindowInstance) GetGeometry() (int, int, int, int) {
 	var carg0 *C.GdkWindow // in, none, converted
-	var carg1 C.int        // out, full, casted
-	var carg2 C.int        // out, full, casted
-	var carg3 C.int        // out, full, casted
-	var carg4 C.int        // out, full, casted
+	var carg1 C.gint       // out, full, casted
+	var carg2 C.gint       // out, full, casted
+	var carg3 C.gint       // out, full, casted
+	var carg4 C.gint       // out, full, casted
 
 	carg0 = (*C.GdkWindow)(UnsafeWindowToGlibNone(window))
 
@@ -19010,7 +19010,7 @@ func (window *WindowInstance) GetGroup() Window {
 // size on the X server.
 func (window *WindowInstance) GetHeight() int {
 	var carg0 *C.GdkWindow // in, none, converted
-	var cret  C.int        // return, none, casted
+	var cret  C.int        // return, none, casted, casted C.gint
 
 	carg0 = (*C.GdkWindow)(UnsafeWindowToGlibNone(window))
 
@@ -19062,9 +19062,9 @@ func (window *WindowInstance) GetModalHint() bool {
 // relative to its parent window.)
 func (window *WindowInstance) GetOrigin() (int, int, int) {
 	var carg0 *C.GdkWindow // in, none, converted
-	var carg1 C.int        // out, full, casted
-	var carg2 C.int        // out, full, casted
-	var cret  C.int        // return, none, casted
+	var carg1 C.gint       // out, full, casted
+	var carg2 C.gint       // out, full, casted
+	var cret  C.gint       // return, none, casted
 
 	carg0 = (*C.GdkWindow)(UnsafeWindowToGlibNone(window))
 
@@ -19156,8 +19156,8 @@ func (window *WindowInstance) GetPassThrough() bool {
 // The position coordinates are relative to the window’s parent window.
 func (window *WindowInstance) GetPosition() (int, int) {
 	var carg0 *C.GdkWindow // in, none, converted
-	var carg1 C.int        // out, full, casted
-	var carg2 C.int        // out, full, casted
+	var carg1 C.gint       // out, full, casted
+	var carg2 C.gint       // out, full, casted
 
 	carg0 = (*C.GdkWindow)(UnsafeWindowToGlibNone(window))
 
@@ -19191,14 +19191,14 @@ func (window *WindowInstance) GetPosition() (int, int) {
 // in any position in the window, not just the origin.
 func (window *WindowInstance) GetRootCoords(x int, y int) (int, int) {
 	var carg0 *C.GdkWindow // in, none, converted
-	var carg1 C.int        // in, none, casted
-	var carg2 C.int        // in, none, casted
-	var carg3 C.int        // out, full, casted
-	var carg4 C.int        // out, full, casted
+	var carg1 C.gint       // in, none, casted
+	var carg2 C.gint       // in, none, casted
+	var carg3 C.gint       // out, full, casted
+	var carg4 C.gint       // out, full, casted
 
 	carg0 = (*C.GdkWindow)(UnsafeWindowToGlibNone(window))
-	carg1 = C.int(x)
-	carg2 = C.int(y)
+	carg1 = C.gint(x)
+	carg2 = C.gint(y)
 
 	C.gdk_window_get_root_coords(carg0, carg1, carg2, &carg3, &carg4)
 	runtime.KeepAlive(window)
@@ -19224,8 +19224,8 @@ func (window *WindowInstance) GetRootCoords(x int, y int) (int, int) {
 // window coordinates.
 func (window *WindowInstance) GetRootOrigin() (int, int) {
 	var carg0 *C.GdkWindow // in, none, converted
-	var carg1 C.int        // out, full, casted
-	var carg2 C.int        // out, full, casted
+	var carg1 C.gint       // out, full, casted
+	var carg2 C.gint       // out, full, casted
 
 	carg0 = (*C.GdkWindow)(UnsafeWindowToGlibNone(window))
 
@@ -19260,7 +19260,7 @@ func (window *WindowInstance) GetRootOrigin() (int, int) {
 // a configure event will be sent to the toplevel window.
 func (window *WindowInstance) GetScaleFactor() int {
 	var carg0 *C.GdkWindow // in, none, converted
-	var cret  C.int        // return, none, casted
+	var cret  C.gint       // return, none, casted
 
 	carg0 = (*C.GdkWindow)(UnsafeWindowToGlibNone(window))
 
@@ -19487,7 +19487,7 @@ func (window *WindowInstance) GetVisual() Visual {
 // size on the X server.
 func (window *WindowInstance) GetWidth() int {
 	var carg0 *C.GdkWindow // in, none, converted
-	var cret  C.int        // return, none, casted
+	var cret  C.int        // return, none, casted, casted C.gint
 
 	carg0 = (*C.GdkWindow)(UnsafeWindowToGlibNone(window))
 
@@ -19831,12 +19831,12 @@ func (window *WindowInstance) MergeChildShapes() {
 // to both move and resize simultaneously, for a nicer visual effect.
 func (window *WindowInstance) Move(x int, y int) {
 	var carg0 *C.GdkWindow // in, none, converted
-	var carg1 C.int        // in, none, casted
-	var carg2 C.int        // in, none, casted
+	var carg1 C.gint       // in, none, casted
+	var carg2 C.gint       // in, none, casted
 
 	carg0 = (*C.GdkWindow)(UnsafeWindowToGlibNone(window))
-	carg1 = C.int(x)
-	carg2 = C.int(y)
+	carg1 = C.gint(x)
+	carg2 = C.gint(y)
 
 	C.gdk_window_move(carg0, carg1, carg2)
 	runtime.KeepAlive(window)
@@ -19859,16 +19859,16 @@ func (window *WindowInstance) Move(x int, y int) {
 // move, then resize, if you don’t use gdk_window_move_resize().)
 func (window *WindowInstance) MoveResize(x int, y int, width int, height int) {
 	var carg0 *C.GdkWindow // in, none, converted
-	var carg1 C.int        // in, none, casted
-	var carg2 C.int        // in, none, casted
-	var carg3 C.int        // in, none, casted
-	var carg4 C.int        // in, none, casted
+	var carg1 C.gint       // in, none, casted
+	var carg2 C.gint       // in, none, casted
+	var carg3 C.gint       // in, none, casted
+	var carg4 C.gint       // in, none, casted
 
 	carg0 = (*C.GdkWindow)(UnsafeWindowToGlibNone(window))
-	carg1 = C.int(x)
-	carg2 = C.int(y)
-	carg3 = C.int(width)
-	carg4 = C.int(height)
+	carg1 = C.gint(x)
+	carg2 = C.gint(y)
+	carg3 = C.gint(width)
+	carg4 = C.gint(height)
 
 	C.gdk_window_move_resize(carg0, carg1, carg2, carg3, carg4)
 	runtime.KeepAlive(window)
@@ -19911,16 +19911,16 @@ func (window *WindowInstance) MoveToRect(rect *Rectangle, rectAnchor Gravity, wi
 	var carg2 C.GdkGravity     // in, none, casted
 	var carg3 C.GdkGravity     // in, none, casted
 	var carg4 C.GdkAnchorHints // in, none, casted
-	var carg5 C.int            // in, none, casted
-	var carg6 C.int            // in, none, casted
+	var carg5 C.gint           // in, none, casted
+	var carg6 C.gint           // in, none, casted
 
 	carg0 = (*C.GdkWindow)(UnsafeWindowToGlibNone(window))
 	carg1 = (*C.GdkRectangle)(UnsafeRectangleToGlibNone(rect))
 	carg2 = C.GdkGravity(rectAnchor)
 	carg3 = C.GdkGravity(windowAnchor)
 	carg4 = C.GdkAnchorHints(anchorHints)
-	carg5 = C.int(rectAnchorDx)
-	carg6 = C.int(rectAnchorDy)
+	carg5 = C.gint(rectAnchorDx)
+	carg6 = C.gint(rectAnchorDy)
 
 	C.gdk_window_move_to_rect(carg0, carg1, carg2, carg3, carg4, carg5, carg6)
 	runtime.KeepAlive(window)
@@ -19975,13 +19975,13 @@ func (window *WindowInstance) RegisterDND() {
 func (window *WindowInstance) Reparent(newParent Window, x int, y int) {
 	var carg0 *C.GdkWindow // in, none, converted
 	var carg1 *C.GdkWindow // in, none, converted
-	var carg2 C.int        // in, none, casted
-	var carg3 C.int        // in, none, casted
+	var carg2 C.gint       // in, none, casted
+	var carg3 C.gint       // in, none, casted
 
 	carg0 = (*C.GdkWindow)(UnsafeWindowToGlibNone(window))
 	carg1 = (*C.GdkWindow)(UnsafeWindowToGlibNone(newParent))
-	carg2 = C.int(x)
-	carg3 = C.int(y)
+	carg2 = C.gint(x)
+	carg3 = C.gint(y)
 
 	C.gdk_window_reparent(carg0, carg1, carg2, carg3)
 	runtime.KeepAlive(window)
@@ -20007,12 +20007,12 @@ func (window *WindowInstance) Reparent(newParent Window, x int, y int) {
 // to both move and resize simultaneously, for a nicer visual effect.
 func (window *WindowInstance) Resize(width int, height int) {
 	var carg0 *C.GdkWindow // in, none, converted
-	var carg1 C.int        // in, none, casted
-	var carg2 C.int        // in, none, casted
+	var carg1 C.gint       // in, none, casted
+	var carg2 C.gint       // in, none, casted
 
 	carg0 = (*C.GdkWindow)(UnsafeWindowToGlibNone(window))
-	carg1 = C.int(width)
-	carg2 = C.int(height)
+	carg1 = C.gint(width)
+	carg2 = C.gint(height)
 
 	C.gdk_window_resize(carg0, carg1, carg2)
 	runtime.KeepAlive(window)
@@ -20076,12 +20076,12 @@ func (window *WindowInstance) Restack(sibling Window, above bool) {
 // artifacts and unnecessary invalidations.
 func (window *WindowInstance) Scroll(dx int, dy int) {
 	var carg0 *C.GdkWindow // in, none, converted
-	var carg1 C.int        // in, none, casted
-	var carg2 C.int        // in, none, casted
+	var carg1 C.gint       // in, none, casted
+	var carg2 C.gint       // in, none, casted
 
 	carg0 = (*C.GdkWindow)(UnsafeWindowToGlibNone(window))
-	carg1 = C.int(dx)
-	carg2 = C.int(dy)
+	carg1 = C.gint(dx)
+	carg2 = C.gint(dy)
 
 	C.gdk_window_scroll(carg0, carg1, carg2)
 	runtime.KeepAlive(window)
@@ -20723,7 +20723,7 @@ func (window *WindowInstance) SetPassThrough(passThrough bool) {
 // non-interchangeable kind of window.
 func (window *WindowInstance) SetRole(role string) {
 	var carg0 *C.GdkWindow // in, none, converted
-	var carg1 *C.gchar     // in, none, string
+	var carg1 *C.gchar     // in, none, string, casted *C.gchar
 
 	carg0 = (*C.GdkWindow)(UnsafeWindowToGlibNone(window))
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(role)))
@@ -20754,16 +20754,16 @@ func (window *WindowInstance) SetRole(role string) {
 // to create toplevel windows.
 func (window *WindowInstance) SetShadowWidth(left int, right int, top int, bottom int) {
 	var carg0 *C.GdkWindow // in, none, converted
-	var carg1 C.int        // in, none, casted
-	var carg2 C.int        // in, none, casted
-	var carg3 C.int        // in, none, casted
-	var carg4 C.int        // in, none, casted
+	var carg1 C.gint       // in, none, casted
+	var carg2 C.gint       // in, none, casted
+	var carg3 C.gint       // in, none, casted
+	var carg4 C.gint       // in, none, casted
 
 	carg0 = (*C.GdkWindow)(UnsafeWindowToGlibNone(window))
-	carg1 = C.int(left)
-	carg2 = C.int(right)
-	carg3 = C.int(top)
-	carg4 = C.int(bottom)
+	carg1 = C.gint(left)
+	carg2 = C.gint(right)
+	carg3 = C.gint(top)
+	carg4 = C.gint(bottom)
 
 	C.gdk_window_set_shadow_width(carg0, carg1, carg2, carg3, carg4)
 	runtime.KeepAlive(window)
@@ -20863,7 +20863,7 @@ func (window *WindowInstance) SetSourceEvents(source InputSource, eventMask Even
 // instead of this low-level function.
 func (window *WindowInstance) SetStartupID(startupId string) {
 	var carg0 *C.GdkWindow // in, none, converted
-	var carg1 *C.gchar     // in, none, string
+	var carg1 *C.gchar     // in, none, string, casted *C.gchar
 
 	carg0 = (*C.GdkWindow)(UnsafeWindowToGlibNone(window))
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(startupId)))
@@ -20911,7 +20911,7 @@ func (window *WindowInstance) SetSupportMultidevice(supportMultidevice bool) {
 // user-readable strings in GDK/GTK+). @title may not be %NULL.
 func (window *WindowInstance) SetTitle(title string) {
 	var carg0 *C.GdkWindow // in, none, converted
-	var carg1 *C.gchar     // in, none, string
+	var carg1 *C.gchar     // in, none, string, casted *C.gchar
 
 	carg0 = (*C.GdkWindow)(UnsafeWindowToGlibNone(window))
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(title)))
@@ -21780,7 +21780,7 @@ func (e *EventConfigure) SetSendEvent(send_event int8) {
 // the new x coordinate of the window, relative to its parent.
 func (e *EventConfigure) SetX(x int) {
 	valptr := &e.native.x
-	*valptr = C.int(x)
+	*valptr = C.gint(x)
 }
 
 // y wraps y
@@ -21788,7 +21788,7 @@ func (e *EventConfigure) SetX(x int) {
 // the new y coordinate of the window, relative to its parent.
 func (e *EventConfigure) SetY(y int) {
 	valptr := &e.native.y
-	*valptr = C.int(y)
+	*valptr = C.gint(y)
 }
 
 // width wraps width
@@ -21796,7 +21796,7 @@ func (e *EventConfigure) SetY(y int) {
 // the new width of the window.
 func (e *EventConfigure) SetWidth(width int) {
 	valptr := &e.native.width
-	*valptr = C.int(width)
+	*valptr = C.gint(width)
 }
 
 // height wraps height
@@ -21804,7 +21804,7 @@ func (e *EventConfigure) SetWidth(width int) {
 // the new height of the window.
 func (e *EventConfigure) SetHeight(height int) {
 	valptr := &e.native.height
-	*valptr = C.int(height)
+	*valptr = C.gint(height)
 }
 
 // EventCrossing wraps GdkEventCrossing
@@ -22217,7 +22217,7 @@ func (e *EventExpose) SetSendEvent(send_event int8) {
 //   exposure compression so this is not normally needed.
 func (e *EventExpose) SetCount(count int) {
 	valptr := &e.native.count
-	*valptr = C.int(count)
+	*valptr = C.gint(count)
 }
 
 // EventFocus wraps GdkEventFocus
@@ -22559,7 +22559,7 @@ func (e *EventKey) SetKeyval(keyval uint) {
 // the length of @string.
 func (e *EventKey) SetLength(length int) {
 	valptr := &e.native.length
-	*valptr = C.int(length)
+	*valptr = C.gint(length)
 }
 
 // hardware_keycode wraps hardware_keycode
@@ -25361,7 +25361,7 @@ func (g *Geometry) MaxAspect() float64 {
 //  #GtkWindow only)
 func (g *Geometry) SetMinWidth(min_width int) {
 	valptr := &g.native.min_width
-	*valptr = C.int(min_width)
+	*valptr = C.gint(min_width)
 }
 
 // min_height wraps min_height
@@ -25370,7 +25370,7 @@ func (g *Geometry) SetMinWidth(min_width int) {
 //  #GtkWindow only)
 func (g *Geometry) SetMinHeight(min_height int) {
 	valptr := &g.native.min_height
-	*valptr = C.int(min_height)
+	*valptr = C.gint(min_height)
 }
 
 // max_width wraps max_width
@@ -25379,7 +25379,7 @@ func (g *Geometry) SetMinHeight(min_height int) {
 //  #GtkWindow only)
 func (g *Geometry) SetMaxWidth(max_width int) {
 	valptr := &g.native.max_width
-	*valptr = C.int(max_width)
+	*valptr = C.gint(max_width)
 }
 
 // max_height wraps max_height
@@ -25388,7 +25388,7 @@ func (g *Geometry) SetMaxWidth(max_width int) {
 //  #GtkWindow only)
 func (g *Geometry) SetMaxHeight(max_height int) {
 	valptr := &g.native.max_height
-	*valptr = C.int(max_height)
+	*valptr = C.gint(max_height)
 }
 
 // base_width wraps base_width
@@ -25397,7 +25397,7 @@ func (g *Geometry) SetMaxHeight(max_height int) {
 //  is any integer (-1 allowed with #GtkWindow)
 func (g *Geometry) SetBaseWidth(base_width int) {
 	valptr := &g.native.base_width
-	*valptr = C.int(base_width)
+	*valptr = C.gint(base_width)
 }
 
 // base_height wraps base_height
@@ -25406,7 +25406,7 @@ func (g *Geometry) SetBaseWidth(base_width int) {
 //  N is any integer (-1 allowed with #GtkWindow)
 func (g *Geometry) SetBaseHeight(base_height int) {
 	valptr := &g.native.base_height
-	*valptr = C.int(base_height)
+	*valptr = C.gint(base_height)
 }
 
 // width_inc wraps width_inc
@@ -25414,7 +25414,7 @@ func (g *Geometry) SetBaseHeight(base_height int) {
 // width resize increment
 func (g *Geometry) SetWidthInc(width_inc int) {
 	valptr := &g.native.width_inc
-	*valptr = C.int(width_inc)
+	*valptr = C.gint(width_inc)
 }
 
 // height_inc wraps height_inc
@@ -25422,7 +25422,7 @@ func (g *Geometry) SetWidthInc(width_inc int) {
 // height resize increment
 func (g *Geometry) SetHeightInc(height_inc int) {
 	valptr := &g.native.height_inc
-	*valptr = C.int(height_inc)
+	*valptr = C.gint(height_inc)
 }
 
 // min_aspect wraps min_aspect
@@ -25559,7 +25559,7 @@ func (k *KeymapKey) SetKeycode(keycode uint) {
 //   characters will be printed on the key next to the English characters.
 func (k *KeymapKey) SetGroup(group int) {
 	valptr := &k.native.group
-	*valptr = C.int(group)
+	*valptr = C.gint(group)
 }
 
 // level wraps level
@@ -25572,7 +25572,7 @@ func (k *KeymapKey) SetGroup(group int) {
 //   uppercase letter is printed.
 func (k *KeymapKey) SetLevel(level int) {
 	valptr := &k.native.level
-	*valptr = C.int(level)
+	*valptr = C.gint(level)
 }
 
 // MonitorClass wraps GdkMonitorClass
@@ -25722,7 +25722,7 @@ func (p *Point) Y() int {
 // the x coordinate of the point.
 func (p *Point) SetX(x int) {
 	valptr := &p.native.x
-	*valptr = C.int(x)
+	*valptr = C.gint(x)
 }
 
 // y wraps y
@@ -25730,7 +25730,7 @@ func (p *Point) SetX(x int) {
 // the y coordinate of the point.
 func (p *Point) SetY(y int) {
 	valptr := &p.native.y
-	*valptr = C.int(y)
+	*valptr = C.gint(y)
 }
 
 // RGBA wraps GdkRGBA
@@ -25933,7 +25933,7 @@ func (rgba *RGBA) Copy() *RGBA {
 // a is a floating point value in the range 0 to 1.
 func (rgba *RGBA) Parse(spec string) bool {
 	var carg0 *C.GdkRGBA // in, none, converted
-	var carg1 *C.gchar   // in, none, string
+	var carg1 *C.gchar   // in, none, string, casted *C.gchar
 	var cret  C.gboolean // return
 
 	carg0 = (*C.GdkRGBA)(UnsafeRGBAToGlibNone(rgba))
@@ -25975,7 +25975,7 @@ func (rgba *RGBA) Parse(spec string) bool {
 // different representation.
 func (rgba *RGBA) ToString() string {
 	var carg0 *C.GdkRGBA // in, none, converted
-	var cret  *C.gchar   // return, full, string
+	var cret  *C.gchar   // return, full, string, casted *C.gchar
 
 	carg0 = (*C.GdkRGBA)(UnsafeRGBAToGlibNone(rgba))
 
@@ -26100,25 +26100,25 @@ func (r *Rectangle) Height() int {
 // x wraps x
 func (r *Rectangle) SetX(x int) {
 	valptr := &r.native.x
-	*valptr = C.int(x)
+	*valptr = C.gint(x)
 }
 
 // y wraps y
 func (r *Rectangle) SetY(y int) {
 	valptr := &r.native.y
-	*valptr = C.int(y)
+	*valptr = C.gint(y)
 }
 
 // width wraps width
 func (r *Rectangle) SetWidth(width int) {
 	valptr := &r.native.width
-	*valptr = C.int(width)
+	*valptr = C.gint(width)
 }
 
 // height wraps height
 func (r *Rectangle) SetHeight(height int) {
 	valptr := &r.native.height
-	*valptr = C.int(height)
+	*valptr = C.gint(height)
 }
 
 // Equal wraps gdk_rectangle_equal
@@ -26432,7 +26432,7 @@ func (w *WindowAttr) Height() int {
 // event mask (see gdk_window_set_events())
 func (w *WindowAttr) SetEventMask(event_mask int) {
 	valptr := &w.native.event_mask
-	*valptr = C.int(event_mask)
+	*valptr = C.gint(event_mask)
 }
 
 // x wraps x
@@ -26440,7 +26440,7 @@ func (w *WindowAttr) SetEventMask(event_mask int) {
 // X coordinate relative to parent window (see gdk_window_move())
 func (w *WindowAttr) SetX(x int) {
 	valptr := &w.native.x
-	*valptr = C.int(x)
+	*valptr = C.gint(x)
 }
 
 // y wraps y
@@ -26448,7 +26448,7 @@ func (w *WindowAttr) SetX(x int) {
 // Y coordinate relative to parent window (see gdk_window_move())
 func (w *WindowAttr) SetY(y int) {
 	valptr := &w.native.y
-	*valptr = C.int(y)
+	*valptr = C.gint(y)
 }
 
 // width wraps width
@@ -26456,7 +26456,7 @@ func (w *WindowAttr) SetY(y int) {
 // width of window
 func (w *WindowAttr) SetWidth(width int) {
 	valptr := &w.native.width
-	*valptr = C.int(width)
+	*valptr = C.gint(width)
 }
 
 // height wraps height
@@ -26464,7 +26464,7 @@ func (w *WindowAttr) SetWidth(width int) {
 // height of window
 func (w *WindowAttr) SetHeight(height int) {
 	valptr := &w.native.height
-	*valptr = C.int(height)
+	*valptr = C.gint(height)
 }
 
 // WindowClass wraps GdkWindowClass

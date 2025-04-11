@@ -69,7 +69,7 @@ const (
 // Returns the device ID as seen by XInput2.
 func X11DeviceGetID(device X11DeviceXI2) int {
 	var carg1 *C.GdkDevice // in, none, converted, casted *C.GdkX11DeviceXI2
-	var cret  C.int        // return, none, casted
+	var cret  C.int        // return, none, casted, casted C.gint
 
 	carg1 = (*C.GdkDevice)(UnsafeX11DeviceXI2ToGlibNone(device))
 
@@ -97,7 +97,7 @@ func X11DeviceGetID(device X11DeviceXI2) int {
 // Returns the `GdkDevice` that wraps the given device ID.
 func X11DeviceManagerLookup(deviceManager X11DeviceManagerXI2, deviceId int) X11DeviceXI2 {
 	var carg1 *C.GdkX11DeviceManagerXI2 // in, none, converted
-	var carg2 C.int                     // in, none, casted
+	var carg2 C.int                     // in, none, casted, casted C.gint
 	var cret  *C.GdkDevice              // return, none, converted, casted *C.GdkX11DeviceXI2
 
 	carg1 = (*C.GdkX11DeviceManagerXI2)(UnsafeX11DeviceManagerXI2ToGlibNone(deviceManager))
@@ -123,14 +123,33 @@ func X11DeviceManagerLookup(deviceManager X11DeviceManagerXI2, deviceId int) X11
 //
 // Frees the data returned from gdk_x11_display_string_to_compound_text().
 func X11FreeCompoundText(ctext *uint8) {
-	var carg1 *C.guint8 // in, transfer: none, C Pointers: 1, Name: guint8
+	var carg1 *C.guchar // in, transfer: none, C Pointers: 1, Name: guint8, casted *C.guint8
 
 	_ = ctext
 	_ = carg1
-	panic("unimplemented conversion of *uint8 (guint8*)")
+	panic("unimplemented conversion of *uint8 (guchar*)")
 
 	C.gdk_x11_free_compound_text(carg1)
 	runtime.KeepAlive(ctext)
+}
+
+// X11FreeTextList wraps gdk_x11_free_text_list
+// 
+// The function takes the following parameters:
+// 
+// 	- list string: the value stored in the @list parameter by
+//   a call to gdk_x11_display_text_property_to_text_list(). 
+//
+// Frees the array of strings created by
+// gdk_x11_display_text_property_to_text_list().
+func X11FreeTextList(list string) {
+	var carg1 **C.char // in, none, string, casted *C.gchar
+
+	carg1 = (**C.char)(unsafe.Pointer(C.CString(list)))
+	defer C.free(unsafe.Pointer(carg1))
+
+	C.gdk_x11_free_text_list(carg1)
+	runtime.KeepAlive(list)
 }
 
 // X11GetServerTime wraps gdk_x11_get_server_time
@@ -176,10 +195,10 @@ func X11GetServerTime(surface X11Surface) uint32 {
 // See the X Session Management Library documentation for more information on
 // session management and the Inter-Client Communication Conventions Manual
 func X11SetSmClientID(smClientId string) {
-	var carg1 *C.gchar // in, none, string, nullable-string
+	var carg1 *C.char // in, none, string, nullable-string
 
 	if smClientId != "" {
-		carg1 = (*C.gchar)(unsafe.Pointer(C.CString(smClientId)))
+		carg1 = (*C.char)(unsafe.Pointer(C.CString(smClientId)))
 		defer C.free(unsafe.Pointer(carg1))
 	}
 
@@ -467,6 +486,29 @@ type X11Display interface {
 	// Once the scale is set by this call it will not change in response
 	// to later user configuration changes.
 	SetSurfaceScale(int)
+	// TextPropertyToTextList wraps gdk_x11_display_text_property_to_text_list
+	// 
+	// The function takes the following parameters:
+	// 
+	// 	- encoding string: a string representing the encoding. The most
+	//   common values for this are "STRING", or "COMPOUND_TEXT".
+	//   This is value used as the type for the property 
+	// 	- format int: the format of the property 
+	// 	- text *uint8: The text data 
+	// 	- length int: The number of items to transform 
+	// 	- list string: location to store an  array of strings in
+	//   the encoding of the current locale. This array should be
+	//   freed using gdk_x11_free_text_list(). 
+	// 
+	// The function returns the following values:
+	// 
+	// 	- goret int 
+	//
+	// Convert a text string from the encoding as it is stored
+	// in a property into an array of strings in the encoding of
+	// the current locale. (The elements of the array represent the
+	// nul-separated elements of the original text string.)
+	TextPropertyToTextList(string, int, *uint8, int, string) int
 	// Ungrab wraps gdk_x11_display_ungrab
 	//
 	// Ungrab @display after it has been grabbed with
@@ -525,11 +567,11 @@ func UnsafeX11DisplayToGlibFull(c X11Display) unsafe.Pointer {
 // @display_name. If opening the display fails, %NULL is
 // returned.
 func X11DisplayInstanceOpen(displayName string) gdk.Display {
-	var carg1 *C.gchar      // in, none, string, nullable-string
+	var carg1 *C.char       // in, none, string, nullable-string
 	var cret  *C.GdkDisplay // return, full, converted
 
 	if displayName != "" {
-		carg1 = (*C.gchar)(unsafe.Pointer(C.CString(displayName)))
+		carg1 = (*C.char)(unsafe.Pointer(C.CString(displayName)))
 		defer C.free(unsafe.Pointer(carg1))
 	}
 
@@ -556,10 +598,10 @@ func X11DisplayInstanceOpen(displayName string) gdk.Display {
 // of the `WM_CLASS` property on toplevel windows; see the ICCCM.
 func X11DisplayInstanceSetProgramClass(display gdk.Display, programClass string) {
 	var carg1 *C.GdkDisplay // in, none, converted
-	var carg2 *C.gchar      // in, none, string
+	var carg2 *C.char       // in, none, string, casted *C.gchar
 
 	carg1 = (*C.GdkDisplay)(gdk.UnsafeDisplayToGlibNone(display))
-	carg2 = (*C.gchar)(unsafe.Pointer(C.CString(programClass)))
+	carg2 = (*C.char)(unsafe.Pointer(C.CString(programClass)))
 	defer C.free(unsafe.Pointer(carg2))
 
 	C.gdk_x11_display_set_program_class(carg1, carg2)
@@ -581,7 +623,7 @@ func X11DisplayInstanceSetProgramClass(display gdk.Display, programClass string)
 // gdk_x11_display_error_trap_pop_ignored() would be more efficient.
 func (display *X11DisplayInstance) ErrorTrapPop() int {
 	var carg0 *C.GdkDisplay // in, none, converted, casted *C.GdkX11Display
-	var cret  C.int         // return, none, casted
+	var cret  C.int         // return, none, casted, casted C.gint
 
 	carg0 = (*C.GdkDisplay)(UnsafeX11DisplayToGlibNone(display))
 
@@ -684,8 +726,8 @@ func (display *X11DisplayInstance) GetEglDisplay() unsafe.Pointer {
 // Retrieves the version of the EGL implementation.
 func (display *X11DisplayInstance) GetEglVersion() (int, int, bool) {
 	var carg0 *C.GdkDisplay // in, none, converted, casted *C.GdkX11Display
-	var carg1 C.int         // out, full, casted
-	var carg2 C.int         // out, full, casted
+	var carg1 C.int         // out, full, casted, casted C.gint
+	var carg2 C.int         // out, full, casted, casted C.gint
 	var cret  C.gboolean    // return
 
 	carg0 = (*C.GdkDisplay)(UnsafeX11DisplayToGlibNone(display))
@@ -716,8 +758,8 @@ func (display *X11DisplayInstance) GetEglVersion() (int, int, bool) {
 // Retrieves the version of the GLX implementation.
 func (display *X11DisplayInstance) GetGLXVersion() (int, int, bool) {
 	var carg0 *C.GdkDisplay // in, none, converted, casted *C.GdkX11Display
-	var carg1 C.int         // out, full, casted
-	var carg2 C.int         // out, full, casted
+	var carg1 C.int         // out, full, casted, casted C.gint
+	var carg2 C.int         // out, full, casted, casted C.gint
 	var cret  C.gboolean    // return
 
 	carg0 = (*C.GdkDisplay)(UnsafeX11DisplayToGlibNone(display))
@@ -845,7 +887,7 @@ func (display *X11DisplayInstance) Grab() {
 // to later user configuration changes.
 func (display *X11DisplayInstance) SetSurfaceScale(scale int) {
 	var carg0 *C.GdkDisplay // in, none, converted, casted *C.GdkX11Display
-	var carg1 C.int         // in, none, casted
+	var carg1 C.int         // in, none, casted, casted C.gint
 
 	carg0 = (*C.GdkDisplay)(UnsafeX11DisplayToGlibNone(display))
 	carg1 = C.int(scale)
@@ -853,6 +895,63 @@ func (display *X11DisplayInstance) SetSurfaceScale(scale int) {
 	C.gdk_x11_display_set_surface_scale(carg0, carg1)
 	runtime.KeepAlive(display)
 	runtime.KeepAlive(scale)
+}
+
+// TextPropertyToTextList wraps gdk_x11_display_text_property_to_text_list
+// 
+// The function takes the following parameters:
+// 
+// 	- encoding string: a string representing the encoding. The most
+//   common values for this are "STRING", or "COMPOUND_TEXT".
+//   This is value used as the type for the property 
+// 	- format int: the format of the property 
+// 	- text *uint8: The text data 
+// 	- length int: The number of items to transform 
+// 	- list string: location to store an  array of strings in
+//   the encoding of the current locale. This array should be
+//   freed using gdk_x11_free_text_list(). 
+// 
+// The function returns the following values:
+// 
+// 	- goret int 
+//
+// Convert a text string from the encoding as it is stored
+// in a property into an array of strings in the encoding of
+// the current locale. (The elements of the array represent the
+// nul-separated elements of the original text string.)
+func (display *X11DisplayInstance) TextPropertyToTextList(encoding string, format int, text *uint8, length int, list string) int {
+	var carg0 *C.GdkDisplay // in, none, converted, casted *C.GdkX11Display
+	var carg1 *C.char       // in, none, string, casted *C.gchar
+	var carg2 C.int         // in, none, casted, casted C.gint
+	var carg3 *C.guchar     // in, transfer: none, C Pointers: 1, Name: guint8, casted *C.guint8
+	var carg4 C.int         // in, none, casted, casted C.gint
+	var carg5 ***C.char     // in, none, string, casted *C.gchar
+	var cret  C.int         // return, none, casted, casted C.gint
+
+	carg0 = (*C.GdkDisplay)(UnsafeX11DisplayToGlibNone(display))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(encoding)))
+	defer C.free(unsafe.Pointer(carg1))
+	carg2 = C.int(format)
+	_ = text
+	_ = carg3
+	panic("unimplemented conversion of *uint8 (guchar*)")
+	carg4 = C.int(length)
+	carg5 = (***C.char)(unsafe.Pointer(C.CString(list)))
+	defer C.free(unsafe.Pointer(carg5))
+
+	cret = C.gdk_x11_display_text_property_to_text_list(carg0, carg1, carg2, carg3, carg4, carg5)
+	runtime.KeepAlive(display)
+	runtime.KeepAlive(encoding)
+	runtime.KeepAlive(format)
+	runtime.KeepAlive(text)
+	runtime.KeepAlive(length)
+	runtime.KeepAlive(list)
+
+	var goret int
+
+	goret = int(cret)
+
+	return goret
 }
 
 // Ungrab wraps gdk_x11_display_ungrab
@@ -1224,7 +1323,7 @@ func (screen *X11ScreenInstance) GetNumberOfDesktops() uint32 {
 // Returns the index of a `GdkX11Screen`.
 func (screen *X11ScreenInstance) GetScreenNumber() int {
 	var carg0 *C.GdkX11Screen // in, none, converted
-	var cret  C.int           // return, none, casted
+	var cret  C.int           // return, none, casted, casted C.gint
 
 	carg0 = (*C.GdkX11Screen)(UnsafeX11ScreenToGlibNone(screen))
 
@@ -1246,7 +1345,7 @@ func (screen *X11ScreenInstance) GetScreenNumber() int {
 // Returns the name of the window manager for @screen.
 func (screen *X11ScreenInstance) GetWindowManagerName() string {
 	var carg0 *C.GdkX11Screen // in, none, converted
-	var cret  *C.gchar        // return, none, string
+	var cret  *C.char         // return, none, string, casted *C.gchar
 
 	carg0 = (*C.GdkX11Screen)(UnsafeX11ScreenToGlibNone(screen))
 
@@ -1255,7 +1354,7 @@ func (screen *X11ScreenInstance) GetWindowManagerName() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -1284,11 +1383,11 @@ func (screen *X11ScreenInstance) GetWindowManagerName() string {
 // a window manager change.
 func (screen *X11ScreenInstance) SupportsNetWmHint(propertyName string) bool {
 	var carg0 *C.GdkX11Screen // in, none, converted
-	var carg1 *C.gchar        // in, none, string
+	var carg1 *C.char         // in, none, string, casted *C.gchar
 	var cret  C.gboolean      // return
 
 	carg0 = (*C.GdkX11Screen)(UnsafeX11ScreenToGlibNone(screen))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(propertyName)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(propertyName)))
 	defer C.free(unsafe.Pointer(carg1))
 
 	cret = C.gdk_x11_screen_supports_net_wm_hint(carg0, carg1)
@@ -1668,10 +1767,10 @@ func (surface *X11SurfaceInstance) SetSkipTaskbarHint(skipsTaskbar bool) {
 // to create toplevel surfaces.
 func (surface *X11SurfaceInstance) SetThemeVariant(variant string) {
 	var carg0 *C.GdkSurface // in, none, converted, casted *C.GdkX11Surface
-	var carg1 *C.gchar      // in, none, string
+	var carg1 *C.char       // in, none, string, casted *C.gchar
 
 	carg0 = (*C.GdkSurface)(UnsafeX11SurfaceToGlibNone(surface))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(variant)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(variant)))
 	defer C.free(unsafe.Pointer(carg1))
 
 	C.gdk_x11_surface_set_theme_variant(carg0, carg1)
@@ -1743,14 +1842,14 @@ func (surface *X11SurfaceInstance) SetUserTime(timestamp uint32) {
 // not a toplevel surface, it is ignored.
 func (surface *X11SurfaceInstance) SetUTF8Property(name string, value string) {
 	var carg0 *C.GdkSurface // in, none, converted, casted *C.GdkX11Surface
-	var carg1 *C.gchar      // in, none, string
-	var carg2 *C.gchar      // in, none, string, nullable-string
+	var carg1 *C.char       // in, none, string, casted *C.gchar
+	var carg2 *C.char       // in, none, string, nullable-string
 
 	carg0 = (*C.GdkSurface)(UnsafeX11SurfaceToGlibNone(surface))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(name)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(name)))
 	defer C.free(unsafe.Pointer(carg1))
 	if value != "" {
-		carg2 = (*C.gchar)(unsafe.Pointer(C.CString(value)))
+		carg2 = (*C.char)(unsafe.Pointer(C.CString(value)))
 		defer C.free(unsafe.Pointer(carg2))
 	}
 

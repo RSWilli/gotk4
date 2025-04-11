@@ -43,7 +43,7 @@ func init() {
 // See [func@PangoCairo.context_set_resolution]
 func ContextGetResolution(context pango.Context) float64 {
 	var carg1 *C.PangoContext // in, none, converted
-	var cret  C.gdouble       // return, none, casted
+	var cret  C.double        // return, none, casted, casted C.gdouble
 
 	carg1 = (*C.PangoContext)(pango.UnsafeContextToGlibNone(context))
 
@@ -73,10 +73,10 @@ func ContextGetResolution(context pango.Context) float64 {
 // be 13 units high. (10 * 96. / 72. = 13.3).
 func ContextSetResolution(context pango.Context, dpi float64) {
 	var carg1 *C.PangoContext // in, none, converted
-	var carg2 C.gdouble       // in, none, casted
+	var carg2 C.double        // in, none, casted, casted C.gdouble
 
 	carg1 = (*C.PangoContext)(pango.UnsafeContextToGlibNone(context))
-	carg2 = C.gdouble(dpi)
+	carg2 = C.double(dpi)
 
 	C.pango_cairo_context_set_resolution(carg1, carg2)
 	runtime.KeepAlive(context)
@@ -316,7 +316,7 @@ func NewFontMapInstance() pango.FontMap {
 // See [method@PangoCairo.FontMap.set_resolution].
 func (fontmap *FontMapInstance) GetResolution() float64 {
 	var carg0 *C.PangoCairoFontMap // in, none, converted
-	var cret  C.gdouble            // return, none, casted
+	var cret  C.double             // return, none, casted, casted C.gdouble
 
 	carg0 = (*C.PangoCairoFontMap)(UnsafeFontMapToGlibNone(fontmap))
 
@@ -371,10 +371,10 @@ func (fontmap *FontMapInstance) SetDefault() {
 // units high. (10 * 96. / 72. = 13.3).
 func (fontmap *FontMapInstance) SetResolution(dpi float64) {
 	var carg0 *C.PangoCairoFontMap // in, none, converted
-	var carg1 C.gdouble            // in, none, casted
+	var carg1 C.double             // in, none, casted, casted C.gdouble
 
 	carg0 = (*C.PangoCairoFontMap)(UnsafeFontMapToGlibNone(fontmap))
-	carg1 = C.gdouble(dpi)
+	carg1 = C.double(dpi)
 
 	C.pango_cairo_font_map_set_resolution(carg0, carg1)
 	runtime.KeepAlive(fontmap)

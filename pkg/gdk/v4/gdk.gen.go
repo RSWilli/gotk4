@@ -6592,9 +6592,9 @@ func (f ToplevelState) InitGoValue(v *gobject.Value) {
 func ContentDeserializeAsync(cancellable context.Context, stream gio.InputStream, mimeType string, typ gobject.Type, ioPriority int, callback gio.AsyncReadyCallback) {
 	var carg5 *C.GCancellable       // in, none, converted, nullable
 	var carg1 *C.GInputStream       // in, none, converted
-	var carg2 *C.gchar              // in, none, string
+	var carg2 *C.char               // in, none, string, casted *C.gchar
 	var carg3 C.GType               // in, none, casted, alias
-	var carg4 C.int                 // in, none, casted
+	var carg4 C.int                 // in, none, casted, casted C.gint
 	var carg6 C.GAsyncReadyCallback // callback, scope: async, closure: carg7, nullable
 	var carg7 C.gpointer            // implicit
 
@@ -6602,7 +6602,7 @@ func ContentDeserializeAsync(cancellable context.Context, stream gio.InputStream
 		carg5 = (*C.GCancellable)(gio.UnsafeGCancellableToGlibNone(cancellable))
 	}
 	carg1 = (*C.GInputStream)(gio.UnsafeInputStreamToGlibNone(stream))
-	carg2 = (*C.gchar)(unsafe.Pointer(C.CString(mimeType)))
+	carg2 = (*C.char)(unsafe.Pointer(C.CString(mimeType)))
 	defer C.free(unsafe.Pointer(carg2))
 	carg3 = C.GType(typ)
 	carg4 = C.int(ioPriority)
@@ -6679,9 +6679,9 @@ func ContentDeserializeFinish(result gio.AsyncResult) (gobject.Value, bool, erro
 func ContentSerializeAsync(cancellable context.Context, stream gio.OutputStream, mimeType string, value *gobject.Value, ioPriority int, callback gio.AsyncReadyCallback) {
 	var carg5 *C.GCancellable       // in, none, converted, nullable
 	var carg1 *C.GOutputStream      // in, none, converted
-	var carg2 *C.gchar              // in, none, string
+	var carg2 *C.char               // in, none, string, casted *C.gchar
 	var carg3 *C.GValue             // in, none, converted
-	var carg4 C.int                 // in, none, casted
+	var carg4 C.int                 // in, none, casted, casted C.gint
 	var carg6 C.GAsyncReadyCallback // callback, scope: async, closure: carg7, nullable
 	var carg7 C.gpointer            // implicit
 
@@ -6689,7 +6689,7 @@ func ContentSerializeAsync(cancellable context.Context, stream gio.OutputStream,
 		carg5 = (*C.GCancellable)(gio.UnsafeGCancellableToGlibNone(cancellable))
 	}
 	carg1 = (*C.GOutputStream)(gio.UnsafeOutputStreamToGlibNone(stream))
-	carg2 = (*C.gchar)(unsafe.Pointer(C.CString(mimeType)))
+	carg2 = (*C.char)(unsafe.Pointer(C.CString(mimeType)))
 	defer C.free(unsafe.Pointer(carg2))
 	carg3 = (*C.GValue)(gobject.UnsafeValueToGlibNone(value))
 	carg4 = C.int(ioPriority)
@@ -6757,10 +6757,10 @@ func ContentSerializeFinish(result gio.AsyncResult) (bool, error) {
 // If @string is not a valid mime type, %NULL is returned instead.
 // See RFC 2048 for the syntax if mime types.
 func InternMIMEType(str string) string {
-	var carg1 *C.gchar // in, none, string
-	var cret  *C.gchar // return, none, string
+	var carg1 *C.char // in, none, string, casted *C.gchar
+	var cret  *C.char // return, none, string, casted *C.gchar
 
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(str)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(str)))
 	defer C.free(unsafe.Pointer(carg1))
 
 	cret = C.gdk_intern_mime_type(carg1)
@@ -6768,7 +6768,7 @@ func InternMIMEType(str string) string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -6822,10 +6822,10 @@ func KeyvalConvertCase(symbol uint) (uint, uint) {
 // `gdk/gdkkeysyms.h` header file
 // but without the leading “GDK_KEY_”.
 func KeyvalFromName(keyvalName string) uint {
-	var carg1 *C.gchar // in, none, string
-	var cret  C.guint  // return, none, casted
+	var carg1 *C.char // in, none, string, casted *C.gchar
+	var cret  C.guint // return, none, casted
 
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(keyvalName)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(keyvalName)))
 	defer C.free(unsafe.Pointer(carg1))
 
 	cret = C.gdk_keyval_from_name(carg1)
@@ -6912,8 +6912,8 @@ func KeyvalIsUpper(keyval uint) bool {
 // `gdk/gdkkeysyms.h` header file
 // but without the leading “GDK_KEY_”.
 func KeyvalName(keyval uint) string {
-	var carg1 C.guint  // in, none, casted
-	var cret  *C.gchar // return, none, string
+	var carg1 C.guint // in, none, casted
+	var cret  *C.char // return, none, string, casted *C.gchar
 
 	carg1 = C.guint(keyval)
 
@@ -6922,7 +6922,7 @@ func KeyvalName(keyval uint) string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -7053,9 +7053,9 @@ func KeyvalToUpper(keyval uint) uint {
 // as [func@Gdk.Display.open], `gtk_init()`, or `gtk_init_check()`
 // in order to take effect.
 func SetAllowedBackends(backends string) {
-	var carg1 *C.gchar // in, none, string
+	var carg1 *C.char // in, none, string, casted *C.gchar
 
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(backends)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(backends)))
 	defer C.free(unsafe.Pointer(carg1))
 
 	C.gdk_set_allowed_backends(carg1)
@@ -7226,8 +7226,8 @@ func UnsafeDevicePadToGlibFull(c DevicePad) unsafe.Pointer {
 func (pad *DevicePadInstance) GetFeatureGroup(feature DevicePadFeature, featureIdx int) int {
 	var carg0 *C.GdkDevicePad       // in, none, converted
 	var carg1 C.GdkDevicePadFeature // in, none, casted
-	var carg2 C.int                 // in, none, casted
-	var cret  C.int                 // return, none, casted
+	var carg2 C.int                 // in, none, casted, casted C.gint
+	var cret  C.int                 // return, none, casted, casted C.gint
 
 	carg0 = (*C.GdkDevicePad)(UnsafeDevicePadToGlibNone(pad))
 	carg1 = C.GdkDevicePadFeature(feature)
@@ -7258,8 +7258,8 @@ func (pad *DevicePadInstance) GetFeatureGroup(feature DevicePadFeature, featureI
 // Returns the number of modes that @group may have.
 func (pad *DevicePadInstance) GetGroupNModes(groupIdx int) int {
 	var carg0 *C.GdkDevicePad // in, none, converted
-	var carg1 C.int           // in, none, casted
-	var cret  C.int           // return, none, casted
+	var carg1 C.int           // in, none, casted, casted C.gint
+	var cret  C.int           // return, none, casted, casted C.gint
 
 	carg0 = (*C.GdkDevicePad)(UnsafeDevicePadToGlibNone(pad))
 	carg1 = C.int(groupIdx)
@@ -7289,7 +7289,7 @@ func (pad *DevicePadInstance) GetGroupNModes(groupIdx int) int {
 func (pad *DevicePadInstance) GetNFeatures(feature DevicePadFeature) int {
 	var carg0 *C.GdkDevicePad       // in, none, converted
 	var carg1 C.GdkDevicePadFeature // in, none, casted
-	var cret  C.int                 // return, none, casted
+	var cret  C.int                 // return, none, casted, casted C.gint
 
 	carg0 = (*C.GdkDevicePad)(UnsafeDevicePadToGlibNone(pad))
 	carg1 = C.GdkDevicePadFeature(feature)
@@ -7317,7 +7317,7 @@ func (pad *DevicePadInstance) GetNFeatures(feature DevicePadFeature) int {
 // current mode.
 func (pad *DevicePadInstance) GetNGroups() int {
 	var carg0 *C.GdkDevicePad // in, none, converted
-	var cret  C.int           // return, none, casted
+	var cret  C.int           // return, none, casted, casted C.gint
 
 	carg0 = (*C.GdkDevicePad)(UnsafeDevicePadToGlibNone(pad))
 
@@ -7412,8 +7412,8 @@ func UnsafeDragSurfaceToGlibFull(c DragSurface) unsafe.Pointer {
 // Present @drag_surface.
 func (dragSurface *DragSurfaceInstance) Present(width int, height int) bool {
 	var carg0 *C.GdkDragSurface // in, none, converted
-	var carg1 C.int             // in, none, casted
-	var carg2 C.int             // in, none, casted
+	var carg1 C.int             // in, none, casted, casted C.gint
+	var carg2 C.int             // in, none, casted, casted C.gint
 	var cret  C.gboolean        // return
 
 	carg0 = (*C.GdkDragSurface)(UnsafeDragSurfaceToGlibNone(dragSurface))
@@ -7698,8 +7698,8 @@ func UnsafePaintableToGlibFull(c Paintable) unsafe.Pointer {
 // [GtkMediaStream](../gtk4/class.MediaStream.html) before receiving
 // the first frame).
 func NewPaintableInstanceEmpty(intrinsicWidth int, intrinsicHeight int) Paintable {
-	var carg1 C.int           // in, none, casted
-	var carg2 C.int           // in, none, casted
+	var carg1 C.int           // in, none, casted, casted C.gint
+	var carg2 C.int           // in, none, casted, casted C.gint
 	var cret  *C.GdkPaintable // return, full, converted
 
 	carg1 = C.int(intrinsicWidth)
@@ -7746,18 +7746,18 @@ func NewPaintableInstanceEmpty(intrinsicWidth int, intrinsicHeight int) Paintabl
 // other dimension when only one dimension is given.
 func (paintable *PaintableInstance) ComputeConcreteSize(specifiedWidth float64, specifiedHeight float64, defaultWidth float64, defaultHeight float64) (float64, float64) {
 	var carg0 *C.GdkPaintable // in, none, converted
-	var carg1 C.gdouble       // in, none, casted
-	var carg2 C.gdouble       // in, none, casted
-	var carg3 C.gdouble       // in, none, casted
-	var carg4 C.gdouble       // in, none, casted
-	var carg5 C.gdouble       // out, full, casted
-	var carg6 C.gdouble       // out, full, casted
+	var carg1 C.double        // in, none, casted, casted C.gdouble
+	var carg2 C.double        // in, none, casted, casted C.gdouble
+	var carg3 C.double        // in, none, casted, casted C.gdouble
+	var carg4 C.double        // in, none, casted, casted C.gdouble
+	var carg5 C.double        // out, full, casted, casted C.gdouble
+	var carg6 C.double        // out, full, casted, casted C.gdouble
 
 	carg0 = (*C.GdkPaintable)(UnsafePaintableToGlibNone(paintable))
-	carg1 = C.gdouble(specifiedWidth)
-	carg2 = C.gdouble(specifiedHeight)
-	carg3 = C.gdouble(defaultWidth)
-	carg4 = C.gdouble(defaultHeight)
+	carg1 = C.double(specifiedWidth)
+	carg2 = C.double(specifiedHeight)
+	carg3 = C.double(defaultWidth)
+	carg4 = C.double(defaultHeight)
 
 	C.gdk_paintable_compute_concrete_size(carg0, carg1, carg2, carg3, carg4, &carg5, &carg6)
 	runtime.KeepAlive(paintable)
@@ -7852,7 +7852,7 @@ func (paintable *PaintableInstance) GetFlags() PaintableFlags {
 // it returns 0. Negative values are never returned.
 func (paintable *PaintableInstance) GetIntrinsicAspectRatio() float64 {
 	var carg0 *C.GdkPaintable // in, none, converted
-	var cret  C.gdouble       // return, none, casted
+	var cret  C.double        // return, none, casted, casted C.gdouble
 
 	carg0 = (*C.GdkPaintable)(UnsafePaintableToGlibNone(paintable))
 
@@ -7883,7 +7883,7 @@ func (paintable *PaintableInstance) GetIntrinsicAspectRatio() float64 {
 // Negative values are never returned.
 func (paintable *PaintableInstance) GetIntrinsicHeight() int {
 	var carg0 *C.GdkPaintable // in, none, converted
-	var cret  C.int           // return, none, casted
+	var cret  C.int           // return, none, casted, casted C.gint
 
 	carg0 = (*C.GdkPaintable)(UnsafePaintableToGlibNone(paintable))
 
@@ -7914,7 +7914,7 @@ func (paintable *PaintableInstance) GetIntrinsicHeight() int {
 // Negative values are never returned.
 func (paintable *PaintableInstance) GetIntrinsicWidth() int {
 	var carg0 *C.GdkPaintable // in, none, converted
-	var cret  C.int           // return, none, casted
+	var cret  C.int           // return, none, casted, casted C.gint
 
 	carg0 = (*C.GdkPaintable)(UnsafePaintableToGlibNone(paintable))
 
@@ -7986,13 +7986,13 @@ func (paintable *PaintableInstance) InvalidateSize() {
 func (paintable *PaintableInstance) Snapshot(snapshot Snapshot, width float64, height float64) {
 	var carg0 *C.GdkPaintable // in, none, converted
 	var carg1 *C.GdkSnapshot  // in, none, converted
-	var carg2 C.gdouble       // in, none, casted
-	var carg3 C.gdouble       // in, none, casted
+	var carg2 C.double        // in, none, casted, casted C.gdouble
+	var carg3 C.double        // in, none, casted, casted C.gdouble
 
 	carg0 = (*C.GdkPaintable)(UnsafePaintableToGlibNone(paintable))
 	carg1 = (*C.GdkSnapshot)(UnsafeSnapshotToGlibNone(snapshot))
-	carg2 = C.gdouble(width)
-	carg3 = C.gdouble(height)
+	carg2 = C.double(width)
+	carg3 = C.double(height)
 
 	C.gdk_paintable_snapshot(carg0, carg1, carg2, carg3)
 	runtime.KeepAlive(paintable)
@@ -8191,7 +8191,7 @@ func (popup *PopupInstance) GetParent() Surface {
 // Obtains the position of the popup relative to its parent.
 func (popup *PopupInstance) GetPositionX() int {
 	var carg0 *C.GdkPopup // in, none, converted
-	var cret  C.int       // return, none, casted
+	var cret  C.int       // return, none, casted, casted C.gint
 
 	carg0 = (*C.GdkPopup)(UnsafePopupToGlibNone(popup))
 
@@ -8213,7 +8213,7 @@ func (popup *PopupInstance) GetPositionX() int {
 // Obtains the position of the popup relative to its parent.
 func (popup *PopupInstance) GetPositionY() int {
 	var carg0 *C.GdkPopup // in, none, converted
-	var cret  C.int       // return, none, casted
+	var cret  C.int       // return, none, casted, casted C.gint
 
 	carg0 = (*C.GdkPopup)(UnsafePopupToGlibNone(popup))
 
@@ -8306,8 +8306,8 @@ func (popup *PopupInstance) GetSurfaceAnchor() Gravity {
 // the [signal@Gdk.Surface::layout] signal will not me emitted.
 func (popup *PopupInstance) Present(width int, height int, layout *PopupLayout) bool {
 	var carg0 *C.GdkPopup       // in, none, converted
-	var carg1 C.int             // in, none, casted
-	var carg2 C.int             // in, none, casted
+	var carg1 C.int             // in, none, casted, casted C.gint
+	var carg2 C.int             // in, none, casted, casted C.gint
 	var carg3 *C.GdkPopupLayout // in, none, converted
 	var cret  C.gboolean        // return
 
@@ -8598,16 +8598,16 @@ func UnsafeToplevelToGlibFull(c Toplevel) unsafe.Pointer {
 func (toplevel *ToplevelInstance) BeginMove(device Device, button int, x float64, y float64, timestamp uint32) {
 	var carg0 *C.GdkToplevel // in, none, converted
 	var carg1 *C.GdkDevice   // in, none, converted
-	var carg2 C.int          // in, none, casted
-	var carg3 C.gdouble      // in, none, casted
-	var carg4 C.gdouble      // in, none, casted
+	var carg2 C.int          // in, none, casted, casted C.gint
+	var carg3 C.double       // in, none, casted, casted C.gdouble
+	var carg4 C.double       // in, none, casted, casted C.gdouble
 	var carg5 C.guint32      // in, none, casted
 
 	carg0 = (*C.GdkToplevel)(UnsafeToplevelToGlibNone(toplevel))
 	carg1 = (*C.GdkDevice)(UnsafeDeviceToGlibNone(device))
 	carg2 = C.int(button)
-	carg3 = C.gdouble(x)
-	carg4 = C.gdouble(y)
+	carg3 = C.double(x)
+	carg4 = C.double(y)
 	carg5 = C.guint32(timestamp)
 
 	C.gdk_toplevel_begin_move(carg0, carg1, carg2, carg3, carg4, carg5)
@@ -8638,9 +8638,9 @@ func (toplevel *ToplevelInstance) BeginResize(edge SurfaceEdge, device Device, b
 	var carg0 *C.GdkToplevel   // in, none, converted
 	var carg1 C.GdkSurfaceEdge // in, none, casted
 	var carg2 *C.GdkDevice     // in, none, converted, nullable
-	var carg3 C.int            // in, none, casted
-	var carg4 C.gdouble        // in, none, casted
-	var carg5 C.gdouble        // in, none, casted
+	var carg3 C.int            // in, none, casted, casted C.gint
+	var carg4 C.double         // in, none, casted, casted C.gdouble
+	var carg5 C.double         // in, none, casted, casted C.gdouble
 	var carg6 C.guint32        // in, none, casted
 
 	carg0 = (*C.GdkToplevel)(UnsafeToplevelToGlibNone(toplevel))
@@ -8649,8 +8649,8 @@ func (toplevel *ToplevelInstance) BeginResize(edge SurfaceEdge, device Device, b
 		carg2 = (*C.GdkDevice)(UnsafeDeviceToGlibNone(device))
 	}
 	carg3 = C.int(button)
-	carg4 = C.gdouble(x)
-	carg5 = C.gdouble(y)
+	carg4 = C.double(x)
+	carg5 = C.double(y)
 	carg6 = C.guint32(timestamp)
 
 	C.gdk_toplevel_begin_resize(carg0, carg1, carg2, carg3, carg4, carg5, carg6)
@@ -8896,10 +8896,10 @@ func (toplevel *ToplevelInstance) SetModal(modal bool) {
 // instead of this low-level function.
 func (toplevel *ToplevelInstance) SetStartupID(startupId string) {
 	var carg0 *C.GdkToplevel // in, none, converted
-	var carg1 *C.gchar       // in, none, string
+	var carg1 *C.char        // in, none, string, casted *C.gchar
 
 	carg0 = (*C.GdkToplevel)(UnsafeToplevelToGlibNone(toplevel))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(startupId)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(startupId)))
 	defer C.free(unsafe.Pointer(carg1))
 
 	C.gdk_toplevel_set_startup_id(carg0, carg1)
@@ -8919,10 +8919,10 @@ func (toplevel *ToplevelInstance) SetStartupID(startupId string) {
 // in lists of windows, etc.
 func (toplevel *ToplevelInstance) SetTitle(title string) {
 	var carg0 *C.GdkToplevel // in, none, converted
-	var carg1 *C.gchar       // in, none, string
+	var carg1 *C.char        // in, none, string, casted *C.gchar
 
 	carg0 = (*C.GdkToplevel)(UnsafeToplevelToGlibNone(toplevel))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(title)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(title)))
 	defer C.free(unsafe.Pointer(carg1))
 
 	C.gdk_toplevel_set_title(carg0, carg1)
@@ -9201,7 +9201,7 @@ func (context *AppLaunchContextInstance) GetDisplay() Display {
 // be the current workspace.
 func (context *AppLaunchContextInstance) SetDesktop(desktop int) {
 	var carg0 *C.GdkAppLaunchContext // in, none, converted
-	var carg1 C.int                  // in, none, casted
+	var carg1 C.int                  // in, none, casted, casted C.gint
 
 	carg0 = (*C.GdkAppLaunchContext)(UnsafeAppLaunchContextToGlibNone(context))
 	carg1 = C.int(desktop)
@@ -9255,11 +9255,11 @@ func (context *AppLaunchContextInstance) SetIcon(icon gio.Icon) {
 // for the launched application itself.
 func (context *AppLaunchContextInstance) SetIconName(iconName string) {
 	var carg0 *C.GdkAppLaunchContext // in, none, converted
-	var carg1 *C.gchar               // in, none, string, nullable-string
+	var carg1 *C.char                // in, none, string, nullable-string
 
 	carg0 = (*C.GdkAppLaunchContext)(UnsafeAppLaunchContextToGlibNone(context))
 	if iconName != "" {
-		carg1 = (*C.gchar)(unsafe.Pointer(C.CString(iconName)))
+		carg1 = (*C.char)(unsafe.Pointer(C.CString(iconName)))
 		defer C.free(unsafe.Pointer(carg1))
 	}
 
@@ -10065,7 +10065,7 @@ func (clipboard *ClipboardInstance) ReadAsync(cancellable context.Context, mimeT
 	var carg0 *C.GdkClipboard       // in, none, converted
 	var carg3 *C.GCancellable       // in, none, converted, nullable
 	var carg1 **C.char              // in, transfer: none, C Pointers: 2, Name: array[utf8], array (inner: *typesystem.StringPrimitive, zero-terminated)
-	var carg2 C.int                 // in, none, casted
+	var carg2 C.int                 // in, none, casted, casted C.gint
 	var carg4 C.GAsyncReadyCallback // callback, scope: async, closure: carg5, nullable
 	var carg5 C.gpointer            // implicit
 
@@ -10109,7 +10109,7 @@ func (clipboard *ClipboardInstance) ReadAsync(cancellable context.Context, mimeT
 func (clipboard *ClipboardInstance) ReadFinish(result gio.AsyncResult) (string, gio.InputStream, error) {
 	var carg0 *C.GdkClipboard // in, none, converted
 	var carg1 *C.GAsyncResult // in, none, converted
-	var carg2 *C.gchar        // out, none, string
+	var carg2 *C.char         // out, none, string, casted *C.gchar
 	var cret  *C.GInputStream // return, full, converted
 	var _cerr *C.GError       // out, full, converted, nullable
 
@@ -10124,7 +10124,7 @@ func (clipboard *ClipboardInstance) ReadFinish(result gio.AsyncResult) (string, 
 	var goret       gio.InputStream
 	var _goerr      error
 
-	outMimeType = C.GoString((*C.gchar)(unsafe.Pointer(carg2)))
+	outMimeType = C.GoString((*C.char)(unsafe.Pointer(carg2)))
 	goret = gio.UnsafeInputStreamFromGlibFull(unsafe.Pointer(cret))
 	if _cerr != nil {
 		_goerr = glib.UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
@@ -10183,7 +10183,7 @@ func (clipboard *ClipboardInstance) ReadTextAsync(cancellable context.Context, c
 func (clipboard *ClipboardInstance) ReadTextFinish(result gio.AsyncResult) (string, error) {
 	var carg0 *C.GdkClipboard // in, none, converted
 	var carg1 *C.GAsyncResult // in, none, converted
-	var cret  *C.gchar        // return, full, string
+	var cret  *C.char         // return, full, string, casted *C.gchar
 	var _cerr *C.GError       // out, full, converted, nullable
 
 	carg0 = (*C.GdkClipboard)(UnsafeClipboardToGlibNone(clipboard))
@@ -10196,7 +10196,7 @@ func (clipboard *ClipboardInstance) ReadTextFinish(result gio.AsyncResult) (stri
 	var goret  string
 	var _goerr error
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 	defer C.free(unsafe.Pointer(cret))
 	if _cerr != nil {
 		_goerr = glib.UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
@@ -10295,7 +10295,7 @@ func (clipboard *ClipboardInstance) ReadValueAsync(cancellable context.Context, 
 	var carg0 *C.GdkClipboard       // in, none, converted
 	var carg3 *C.GCancellable       // in, none, converted, nullable
 	var carg1 C.GType               // in, none, casted, alias
-	var carg2 C.int                 // in, none, casted
+	var carg2 C.int                 // in, none, casted, casted C.gint
 	var carg4 C.GAsyncReadyCallback // callback, scope: async, closure: carg5, nullable
 	var carg5 C.gpointer            // implicit
 
@@ -10373,10 +10373,10 @@ func (clipboard *ClipboardInstance) SetContent(provider ContentProvider) bool {
 // Puts the given @text into the clipboard.
 func (clipboard *ClipboardInstance) SetText(text string) {
 	var carg0 *C.GdkClipboard // in, none, converted
-	var carg1 *C.gchar        // in, none, string
+	var carg1 *C.char         // in, none, string, casted *C.gchar
 
 	carg0 = (*C.GdkClipboard)(UnsafeClipboardToGlibNone(clipboard))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(text)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(text)))
 	defer C.free(unsafe.Pointer(carg1))
 
 	C.gdk_clipboard_set_text(carg0, carg1)
@@ -10445,7 +10445,7 @@ func (clipboard *ClipboardInstance) SetValue(value *gobject.Value) {
 func (clipboard *ClipboardInstance) StoreAsync(cancellable context.Context, ioPriority int, callback gio.AsyncReadyCallback) {
 	var carg0 *C.GdkClipboard       // in, none, converted
 	var carg2 *C.GCancellable       // in, none, converted, nullable
-	var carg1 C.int                 // in, none, casted
+	var carg1 C.int                 // in, none, casted, casted C.gint
 	var carg3 C.GAsyncReadyCallback // callback, scope: async, closure: carg4, nullable
 	var carg4 C.gpointer            // implicit
 
@@ -10722,7 +10722,7 @@ func (deserializer *ContentDeserializerInstance) GetInputStream() gio.InputStrea
 // Gets the mime type to deserialize from.
 func (deserializer *ContentDeserializerInstance) GetMIMEType() string {
 	var carg0 *C.GdkContentDeserializer // in, none, converted
-	var cret  *C.gchar                  // return, none, string
+	var cret  *C.char                   // return, none, string, casted *C.gchar
 
 	carg0 = (*C.GdkContentDeserializer)(UnsafeContentDeserializerToGlibNone(deserializer))
 
@@ -10731,7 +10731,7 @@ func (deserializer *ContentDeserializerInstance) GetMIMEType() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -10746,7 +10746,7 @@ func (deserializer *ContentDeserializerInstance) GetMIMEType() string {
 // This is the priority that was passed to [func@Gdk.content_deserialize_async].
 func (deserializer *ContentDeserializerInstance) GetPriority() int {
 	var carg0 *C.GdkContentDeserializer // in, none, converted
-	var cret  C.int                     // return, none, casted
+	var cret  C.int                     // return, none, casted, casted C.gint
 
 	carg0 = (*C.GdkContentDeserializer)(UnsafeContentDeserializerToGlibNone(deserializer))
 
@@ -10984,11 +10984,11 @@ func UnsafeContentProviderToGlibFull(c ContentProvider) unsafe.Pointer {
 // Create a content provider that provides the given @bytes as data for
 // the given @mime_type.
 func NewContentProviderInstanceForBytes(mimeType string, bytes *glib.Bytes) ContentProvider {
-	var carg1 *C.gchar              // in, none, string
+	var carg1 *C.char               // in, none, string, casted *C.gchar
 	var carg2 *C.GBytes             // in, none, converted
 	var cret  *C.GdkContentProvider // return, full, converted
 
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(mimeType)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(mimeType)))
 	defer C.free(unsafe.Pointer(carg1))
 	carg2 = (*C.GBytes)(glib.UnsafeBytesToGlibNone(bytes))
 
@@ -11200,9 +11200,9 @@ func (provider *ContentProviderInstance) RefStorableFormats() *ContentFormats {
 func (provider *ContentProviderInstance) WriteMIMETypeAsync(cancellable context.Context, mimeType string, stream gio.OutputStream, ioPriority int, callback gio.AsyncReadyCallback) {
 	var carg0 *C.GdkContentProvider // in, none, converted
 	var carg4 *C.GCancellable       // in, none, converted, nullable
-	var carg1 *C.gchar              // in, none, string
+	var carg1 *C.char               // in, none, string, casted *C.gchar
 	var carg2 *C.GOutputStream      // in, none, converted
-	var carg3 C.int                 // in, none, casted
+	var carg3 C.int                 // in, none, casted, casted C.gint
 	var carg5 C.GAsyncReadyCallback // callback, scope: async, closure: carg6, nullable
 	var carg6 C.gpointer            // implicit
 
@@ -11210,7 +11210,7 @@ func (provider *ContentProviderInstance) WriteMIMETypeAsync(cancellable context.
 	if cancellable != nil {
 		carg4 = (*C.GCancellable)(gio.UnsafeGCancellableToGlibNone(cancellable))
 	}
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(mimeType)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(mimeType)))
 	defer C.free(unsafe.Pointer(carg1))
 	carg2 = (*C.GOutputStream)(gio.UnsafeOutputStreamToGlibNone(stream))
 	carg3 = C.int(ioPriority)
@@ -11461,7 +11461,7 @@ func (serializer *ContentSerializerInstance) GetGType() gobject.Type {
 // Gets the mime type to serialize to.
 func (serializer *ContentSerializerInstance) GetMIMEType() string {
 	var carg0 *C.GdkContentSerializer // in, none, converted
-	var cret  *C.gchar                // return, none, string
+	var cret  *C.char                 // return, none, string, casted *C.gchar
 
 	carg0 = (*C.GdkContentSerializer)(UnsafeContentSerializerToGlibNone(serializer))
 
@@ -11470,7 +11470,7 @@ func (serializer *ContentSerializerInstance) GetMIMEType() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -11509,7 +11509,7 @@ func (serializer *ContentSerializerInstance) GetOutputStream() gio.OutputStream 
 // This is the priority that was passed to [func@content_serialize_async].
 func (serializer *ContentSerializerInstance) GetPriority() int {
 	var carg0 *C.GdkContentSerializer // in, none, converted
-	var cret  C.int                   // return, none, casted
+	var cret  C.int                   // return, none, casted, casted C.gint
 
 	carg0 = (*C.GdkContentSerializer)(UnsafeContentSerializerToGlibNone(serializer))
 
@@ -11773,11 +11773,11 @@ func UnsafeCursorToGlibFull(c Cursor) unsafe.Pointer {
 // | ![](se_resize_cursor.png) "se-resize" | ![](ew_resize_cursor.png) "ew-resize" | ![](ns_resize_cursor.png) "ns-resize" | ![](nesw_resize_cursor.png) "nesw-resize" |
 // | ![](nwse_resize_cursor.png) "nwse-resize" | ![](zoom_in_cursor.png) "zoom-in" | ![](zoom_out_cursor.png) "zoom-out" | |
 func NewCursorInstanceFromName(name string, fallback Cursor) Cursor {
-	var carg1 *C.gchar     // in, none, string
+	var carg1 *C.char      // in, none, string, casted *C.gchar
 	var carg2 *C.GdkCursor // in, none, converted, nullable
 	var cret  *C.GdkCursor // return, full, converted
 
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(name)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(name)))
 	defer C.free(unsafe.Pointer(carg1))
 	if fallback != nil {
 		carg2 = (*C.GdkCursor)(UnsafeCursorToGlibNone(fallback))
@@ -11811,8 +11811,8 @@ func NewCursorInstanceFromName(name string, fallback Cursor) Cursor {
 // Creates a new cursor from a `GdkTexture`.
 func NewCursorInstanceFromTexture(texture Texture, hotspotX int, hotspotY int, fallback Cursor) Cursor {
 	var carg1 *C.GdkTexture // in, none, converted
-	var carg2 C.int         // in, none, casted
-	var carg3 C.int         // in, none, casted
+	var carg2 C.int         // in, none, casted, casted C.gint
+	var carg3 C.int         // in, none, casted, casted C.gint
 	var carg4 *C.GdkCursor  // in, none, converted, nullable
 	var cret  *C.GdkCursor  // return, full, converted
 
@@ -11878,7 +11878,7 @@ func (cursor *CursorInstance) GetFallback() Cursor {
 // [ctor@Gdk.Cursor.new_from_texture].
 func (cursor *CursorInstance) GetHotspotX() int {
 	var carg0 *C.GdkCursor // in, none, converted
-	var cret  C.int        // return, none, casted
+	var cret  C.int        // return, none, casted, casted C.gint
 
 	carg0 = (*C.GdkCursor)(UnsafeCursorToGlibNone(cursor))
 
@@ -11906,7 +11906,7 @@ func (cursor *CursorInstance) GetHotspotX() int {
 // [ctor@Gdk.Cursor.new_from_texture].
 func (cursor *CursorInstance) GetHotspotY() int {
 	var carg0 *C.GdkCursor // in, none, converted
-	var cret  C.int        // return, none, casted
+	var cret  C.int        // return, none, casted, casted C.gint
 
 	carg0 = (*C.GdkCursor)(UnsafeCursorToGlibNone(cursor))
 
@@ -11930,7 +11930,7 @@ func (cursor *CursorInstance) GetHotspotY() int {
 // If the cursor is not a named cursor, %NULL will be returned.
 func (cursor *CursorInstance) GetName() string {
 	var carg0 *C.GdkCursor // in, none, converted
-	var cret  *C.gchar     // return, none, string
+	var cret  *C.char      // return, none, string, casted *C.gchar
 
 	carg0 = (*C.GdkCursor)(UnsafeCursorToGlibNone(cursor))
 
@@ -11939,7 +11939,7 @@ func (cursor *CursorInstance) GetName() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -12359,7 +12359,7 @@ func (device *DeviceInstance) GetModifierState() ModifierType {
 // The name of the device, suitable for showing in a user interface.
 func (device *DeviceInstance) GetName() string {
 	var carg0 *C.GdkDevice // in, none, converted
-	var cret  *C.gchar     // return, none, string
+	var cret  *C.char      // return, none, string, casted *C.gchar
 
 	carg0 = (*C.GdkDevice)(UnsafeDeviceToGlibNone(device))
 
@@ -12368,7 +12368,7 @@ func (device *DeviceInstance) GetName() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -12432,7 +12432,7 @@ func (device *DeviceInstance) GetNumTouches() uint {
 // See [method@Gdk.Device.get_vendor_id] for more information.
 func (device *DeviceInstance) GetProductID() string {
 	var carg0 *C.GdkDevice // in, none, converted
-	var cret  *C.gchar     // return, none, string
+	var cret  *C.char      // return, none, string, casted *C.gchar
 
 	carg0 = (*C.GdkDevice)(UnsafeDeviceToGlibNone(device))
 
@@ -12441,7 +12441,7 @@ func (device *DeviceInstance) GetProductID() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -12532,8 +12532,8 @@ func (device *DeviceInstance) GetSource() InputSource {
 // (for example, belongs to another application).
 func (device *DeviceInstance) GetSurfaceAtPosition() (float64, float64, Surface) {
 	var carg0 *C.GdkDevice  // in, none, converted
-	var carg1 C.gdouble     // out, full, casted
-	var carg2 C.gdouble     // out, full, casted
+	var carg1 C.double      // out, full, casted, casted C.gdouble
+	var carg2 C.double      // out, full, casted, casted C.gdouble
 	var cret  *C.GdkSurface // return, none, converted
 
 	carg0 = (*C.GdkDevice)(UnsafeDeviceToGlibNone(device))
@@ -12613,7 +12613,7 @@ func (device *DeviceInstance) GetTimestamp() uint32 {
 // ```
 func (device *DeviceInstance) GetVendorID() string {
 	var carg0 *C.GdkDevice // in, none, converted
-	var cret  *C.gchar     // return, none, string
+	var cret  *C.char      // return, none, string, casted *C.gchar
 
 	carg0 = (*C.GdkDevice)(UnsafeDeviceToGlibNone(device))
 
@@ -12622,7 +12622,7 @@ func (device *DeviceInstance) GetVendorID() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -13228,11 +13228,11 @@ func DisplayInstanceGetDefault() Display {
 // 
 // If opening the display fails, `NULL` is returned.
 func DisplayInstanceOpen(displayName string) Display {
-	var carg1 *C.gchar      // in, none, string, nullable-string
+	var carg1 *C.char       // in, none, string, nullable-string
 	var cret  *C.GdkDisplay // return, none, converted
 
 	if displayName != "" {
-		carg1 = (*C.gchar)(unsafe.Pointer(C.CString(displayName)))
+		carg1 = (*C.char)(unsafe.Pointer(C.CString(displayName)))
 		defer C.free(unsafe.Pointer(carg1))
 	}
 
@@ -13528,7 +13528,7 @@ func (self *DisplayInstance) GetMonitors() gio.ListModel {
 // Gets the name of the display.
 func (display *DisplayInstance) GetName() string {
 	var carg0 *C.GdkDisplay // in, none, converted
-	var cret  *C.gchar      // return, none, string
+	var cret  *C.char       // return, none, string, casted *C.gchar
 
 	carg0 = (*C.GdkDisplay)(UnsafeDisplayToGlibNone(display))
 
@@ -13537,7 +13537,7 @@ func (display *DisplayInstance) GetName() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -13582,12 +13582,12 @@ func (display *DisplayInstance) GetPrimaryClipboard() Clipboard {
 // for the @display.
 func (display *DisplayInstance) GetSetting(name string, value *gobject.Value) bool {
 	var carg0 *C.GdkDisplay // in, none, converted
-	var carg1 *C.gchar      // in, none, string
+	var carg1 *C.char       // in, none, string, casted *C.gchar
 	var carg2 *C.GValue     // in, none, converted
 	var cret  C.gboolean    // return
 
 	carg0 = (*C.GdkDisplay)(UnsafeDisplayToGlibNone(display))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(name)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(name)))
 	defer C.free(unsafe.Pointer(carg1))
 	carg2 = (*C.GValue)(gobject.UnsafeValueToGlibNone(value))
 
@@ -13856,10 +13856,10 @@ func (display *DisplayInstance) TranslateKey(keycode uint, state ModifierType, g
 	var carg0 *C.GdkDisplay     // in, none, converted
 	var carg1 C.guint           // in, none, casted
 	var carg2 C.GdkModifierType // in, none, casted
-	var carg3 C.int             // in, none, casted
+	var carg3 C.int             // in, none, casted, casted C.gint
 	var carg4 C.guint           // out, full, casted
-	var carg5 C.int             // out, full, casted
-	var carg6 C.int             // out, full, casted
+	var carg5 C.int             // out, full, casted, casted C.gint
+	var carg6 C.int             // out, full, casted, casted C.gint
 	var carg7 C.GdkModifierType // out, full, casted
 	var cret  C.gboolean        // return
 
@@ -14071,12 +14071,12 @@ func (manager *DisplayManagerInstance) GetDefaultDisplay() Display {
 // Opens a display.
 func (manager *DisplayManagerInstance) OpenDisplay(name string) Display {
 	var carg0 *C.GdkDisplayManager // in, none, converted
-	var carg1 *C.gchar             // in, none, string, nullable-string
+	var carg1 *C.char              // in, none, string, nullable-string
 	var cret  *C.GdkDisplay        // return, none, converted
 
 	carg0 = (*C.GdkDisplayManager)(UnsafeDisplayManagerToGlibNone(manager))
 	if name != "" {
-		carg1 = (*C.gchar)(unsafe.Pointer(C.CString(name)))
+		carg1 = (*C.char)(unsafe.Pointer(C.CString(name)))
 		defer C.free(unsafe.Pointer(carg1))
 	}
 
@@ -14520,11 +14520,11 @@ func (self *DmabufTextureBuilderInstance) GetDisplay() Display {
 // Gets the file descriptor for a plane.
 func (self *DmabufTextureBuilderInstance) GetFd(plane uint) int {
 	var carg0 *C.GdkDmabufTextureBuilder // in, none, converted
-	var carg1 C.guint                    // in, none, casted
-	var cret  C.int                      // return, none, casted
+	var carg1 C.uint                     // in, none, casted, casted C.guint
+	var cret  C.int                      // return, none, casted, casted C.gint
 
 	carg0 = (*C.GdkDmabufTextureBuilder)(UnsafeDmabufTextureBuilderToGlibNone(self))
-	carg1 = C.guint(plane)
+	carg1 = C.uint(plane)
 
 	cret = C.gdk_dmabuf_texture_builder_get_fd(carg0, carg1)
 	runtime.KeepAlive(self)
@@ -14571,7 +14571,7 @@ func (self *DmabufTextureBuilderInstance) GetFourcc() uint32 {
 // 0 if the height wasn't set.
 func (self *DmabufTextureBuilderInstance) GetHeight() uint {
 	var carg0 *C.GdkDmabufTextureBuilder // in, none, converted
-	var cret  C.guint                    // return, none, casted
+	var cret  C.uint                     // return, none, casted, casted C.guint
 
 	carg0 = (*C.GdkDmabufTextureBuilder)(UnsafeDmabufTextureBuilderToGlibNone(self))
 
@@ -14615,7 +14615,7 @@ func (self *DmabufTextureBuilderInstance) GetModifier() uint64 {
 // Gets the number of planes.
 func (self *DmabufTextureBuilderInstance) GetNPlanes() uint {
 	var carg0 *C.GdkDmabufTextureBuilder // in, none, converted
-	var cret  C.guint                    // return, none, casted
+	var cret  C.uint                     // return, none, casted, casted C.guint
 
 	carg0 = (*C.GdkDmabufTextureBuilder)(UnsafeDmabufTextureBuilderToGlibNone(self))
 
@@ -14642,11 +14642,11 @@ func (self *DmabufTextureBuilderInstance) GetNPlanes() uint {
 // Gets the offset value for a plane.
 func (self *DmabufTextureBuilderInstance) GetOffset(plane uint) uint {
 	var carg0 *C.GdkDmabufTextureBuilder // in, none, converted
-	var carg1 C.guint                    // in, none, casted
-	var cret  C.guint                    // return, none, casted
+	var carg1 C.uint                     // in, none, casted, casted C.guint
+	var cret  C.uint                     // return, none, casted, casted C.guint
 
 	carg0 = (*C.GdkDmabufTextureBuilder)(UnsafeDmabufTextureBuilderToGlibNone(self))
-	carg1 = C.guint(plane)
+	carg1 = C.uint(plane)
 
 	cret = C.gdk_dmabuf_texture_builder_get_offset(carg0, carg1)
 	runtime.KeepAlive(self)
@@ -14696,11 +14696,11 @@ func (self *DmabufTextureBuilderInstance) GetPremultiplied() bool {
 // Gets the stride value for a plane.
 func (self *DmabufTextureBuilderInstance) GetStride(plane uint) uint {
 	var carg0 *C.GdkDmabufTextureBuilder // in, none, converted
-	var carg1 C.guint                    // in, none, casted
-	var cret  C.guint                    // return, none, casted
+	var carg1 C.uint                     // in, none, casted, casted C.guint
+	var cret  C.uint                     // return, none, casted, casted C.guint
 
 	carg0 = (*C.GdkDmabufTextureBuilder)(UnsafeDmabufTextureBuilderToGlibNone(self))
-	carg1 = C.guint(plane)
+	carg1 = C.uint(plane)
 
 	cret = C.gdk_dmabuf_texture_builder_get_stride(carg0, carg1)
 	runtime.KeepAlive(self)
@@ -14745,7 +14745,7 @@ func (self *DmabufTextureBuilderInstance) GetUpdateTexture() Texture {
 // 0 if the width wasn't set.
 func (self *DmabufTextureBuilderInstance) GetWidth() uint {
 	var carg0 *C.GdkDmabufTextureBuilder // in, none, converted
-	var cret  C.guint                    // return, none, casted
+	var cret  C.uint                     // return, none, casted, casted C.guint
 
 	carg0 = (*C.GdkDmabufTextureBuilder)(UnsafeDmabufTextureBuilderToGlibNone(self))
 
@@ -14817,11 +14817,11 @@ func (self *DmabufTextureBuilderInstance) SetDisplay(display Display) {
 // Sets the file descriptor for a plane.
 func (self *DmabufTextureBuilderInstance) SetFd(plane uint, fd int) {
 	var carg0 *C.GdkDmabufTextureBuilder // in, none, converted
-	var carg1 C.guint                    // in, none, casted
-	var carg2 C.int                      // in, none, casted
+	var carg1 C.uint                     // in, none, casted, casted C.guint
+	var carg2 C.int                      // in, none, casted, casted C.gint
 
 	carg0 = (*C.GdkDmabufTextureBuilder)(UnsafeDmabufTextureBuilderToGlibNone(self))
-	carg1 = C.guint(plane)
+	carg1 = C.uint(plane)
 	carg2 = C.int(fd)
 
 	C.gdk_dmabuf_texture_builder_set_fd(carg0, carg1, carg2)
@@ -14864,10 +14864,10 @@ func (self *DmabufTextureBuilderInstance) SetFourcc(fourcc uint32) {
 // The height must be set before calling [method@Gdk.DmabufTextureBuilder.build].
 func (self *DmabufTextureBuilderInstance) SetHeight(height uint) {
 	var carg0 *C.GdkDmabufTextureBuilder // in, none, converted
-	var carg1 C.guint                    // in, none, casted
+	var carg1 C.uint                     // in, none, casted, casted C.guint
 
 	carg0 = (*C.GdkDmabufTextureBuilder)(UnsafeDmabufTextureBuilderToGlibNone(self))
-	carg1 = C.guint(height)
+	carg1 = C.uint(height)
 
 	C.gdk_dmabuf_texture_builder_set_height(carg0, carg1)
 	runtime.KeepAlive(self)
@@ -14902,10 +14902,10 @@ func (self *DmabufTextureBuilderInstance) SetModifier(modifier uint64) {
 // Sets the number of planes of the texture.
 func (self *DmabufTextureBuilderInstance) SetNPlanes(nPlanes uint) {
 	var carg0 *C.GdkDmabufTextureBuilder // in, none, converted
-	var carg1 C.guint                    // in, none, casted
+	var carg1 C.uint                     // in, none, casted, casted C.guint
 
 	carg0 = (*C.GdkDmabufTextureBuilder)(UnsafeDmabufTextureBuilderToGlibNone(self))
-	carg1 = C.guint(nPlanes)
+	carg1 = C.uint(nPlanes)
 
 	C.gdk_dmabuf_texture_builder_set_n_planes(carg0, carg1)
 	runtime.KeepAlive(self)
@@ -14922,12 +14922,12 @@ func (self *DmabufTextureBuilderInstance) SetNPlanes(nPlanes uint) {
 // Sets the offset for a plane.
 func (self *DmabufTextureBuilderInstance) SetOffset(plane uint, offset uint) {
 	var carg0 *C.GdkDmabufTextureBuilder // in, none, converted
-	var carg1 C.guint                    // in, none, casted
-	var carg2 C.guint                    // in, none, casted
+	var carg1 C.uint                     // in, none, casted, casted C.guint
+	var carg2 C.uint                     // in, none, casted, casted C.guint
 
 	carg0 = (*C.GdkDmabufTextureBuilder)(UnsafeDmabufTextureBuilderToGlibNone(self))
-	carg1 = C.guint(plane)
-	carg2 = C.guint(offset)
+	carg1 = C.uint(plane)
+	carg2 = C.uint(offset)
 
 	C.gdk_dmabuf_texture_builder_set_offset(carg0, carg1, carg2)
 	runtime.KeepAlive(self)
@@ -14971,12 +14971,12 @@ func (self *DmabufTextureBuilderInstance) SetPremultiplied(premultiplied bool) {
 // The stride must be set for all planes before calling [method@Gdk.DmabufTextureBuilder.build].
 func (self *DmabufTextureBuilderInstance) SetStride(plane uint, stride uint) {
 	var carg0 *C.GdkDmabufTextureBuilder // in, none, converted
-	var carg1 C.guint                    // in, none, casted
-	var carg2 C.guint                    // in, none, casted
+	var carg1 C.uint                     // in, none, casted, casted C.guint
+	var carg2 C.uint                     // in, none, casted, casted C.guint
 
 	carg0 = (*C.GdkDmabufTextureBuilder)(UnsafeDmabufTextureBuilderToGlibNone(self))
-	carg1 = C.guint(plane)
-	carg2 = C.guint(stride)
+	carg1 = C.uint(plane)
+	carg2 = C.uint(stride)
 
 	C.gdk_dmabuf_texture_builder_set_stride(carg0, carg1, carg2)
 	runtime.KeepAlive(self)
@@ -15017,10 +15017,10 @@ func (self *DmabufTextureBuilderInstance) SetUpdateTexture(texture Texture) {
 // The width must be set before calling [method@Gdk.DmabufTextureBuilder.build].
 func (self *DmabufTextureBuilderInstance) SetWidth(width uint) {
 	var carg0 *C.GdkDmabufTextureBuilder // in, none, converted
-	var carg1 C.guint                    // in, none, casted
+	var carg1 C.uint                     // in, none, casted, casted C.guint
 
 	carg0 = (*C.GdkDmabufTextureBuilder)(UnsafeDmabufTextureBuilderToGlibNone(self))
-	carg1 = C.guint(width)
+	carg1 = C.uint(width)
 
 	C.gdk_dmabuf_texture_builder_set_width(carg0, carg1)
 	runtime.KeepAlive(self)
@@ -15213,16 +15213,16 @@ func DragInstanceBegin(surface Surface, device Device, content ContentProvider, 
 	var carg2 *C.GdkDevice          // in, none, converted
 	var carg3 *C.GdkContentProvider // in, none, converted
 	var carg4 C.GdkDragAction       // in, none, casted
-	var carg5 C.gdouble             // in, none, casted
-	var carg6 C.gdouble             // in, none, casted
+	var carg5 C.double              // in, none, casted, casted C.gdouble
+	var carg6 C.double              // in, none, casted, casted C.gdouble
 	var cret  *C.GdkDrag            // return, full, converted
 
 	carg1 = (*C.GdkSurface)(UnsafeSurfaceToGlibNone(surface))
 	carg2 = (*C.GdkDevice)(UnsafeDeviceToGlibNone(device))
 	carg3 = (*C.GdkContentProvider)(UnsafeContentProviderToGlibNone(content))
 	carg4 = C.GdkDragAction(actions)
-	carg5 = C.gdouble(dx)
-	carg6 = C.gdouble(dy)
+	carg5 = C.double(dx)
+	carg6 = C.double(dy)
 
 	cret = C.gdk_drag_begin(carg1, carg2, carg3, carg4, carg5, carg6)
 	runtime.KeepAlive(surface)
@@ -15465,8 +15465,8 @@ func (drag *DragInstance) GetSurface() Surface {
 // Initially, the hotspot is at the top left corner of the drag surface.
 func (drag *DragInstance) SetHotspot(hotX int, hotY int) {
 	var carg0 *C.GdkDrag // in, none, converted
-	var carg1 C.int      // in, none, casted
-	var carg2 C.int      // in, none, casted
+	var carg1 C.int      // in, none, casted, casted C.gint
+	var carg2 C.int      // in, none, casted, casted C.gint
 
 	carg0 = (*C.GdkDrag)(UnsafeDragToGlibNone(drag))
 	carg1 = C.int(hotX)
@@ -15991,7 +15991,7 @@ func (self *DropInstance) ReadAsync(cancellable context.Context, mimeTypes []str
 	var carg0 *C.GdkDrop            // in, none, converted
 	var carg3 *C.GCancellable       // in, none, converted, nullable
 	var carg1 **C.char              // in, transfer: none, C Pointers: 2, Name: array[utf8], array (inner: *typesystem.StringPrimitive, zero-terminated)
-	var carg2 C.int                 // in, none, casted
+	var carg2 C.int                 // in, none, casted, casted C.gint
 	var carg4 C.GAsyncReadyCallback // callback, scope: async, closure: carg5, nullable
 	var carg5 C.gpointer            // implicit
 
@@ -16039,7 +16039,7 @@ func (self *DropInstance) ReadAsync(cancellable context.Context, mimeTypes []str
 func (self *DropInstance) ReadFinish(result gio.AsyncResult) (string, gio.InputStream, error) {
 	var carg0 *C.GdkDrop      // in, none, converted
 	var carg1 *C.GAsyncResult // in, none, converted
-	var carg2 *C.gchar        // out, none, string
+	var carg2 *C.char         // out, none, string, casted *C.gchar
 	var cret  *C.GInputStream // return, full, converted
 	var _cerr *C.GError       // out, full, converted, nullable
 
@@ -16054,7 +16054,7 @@ func (self *DropInstance) ReadFinish(result gio.AsyncResult) (string, gio.InputS
 	var goret       gio.InputStream
 	var _goerr      error
 
-	outMimeType = C.GoString((*C.gchar)(unsafe.Pointer(carg2)))
+	outMimeType = C.GoString((*C.char)(unsafe.Pointer(carg2)))
 	goret = gio.UnsafeInputStreamFromGlibFull(unsafe.Pointer(cret))
 	if _cerr != nil {
 		_goerr = glib.UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
@@ -16082,7 +16082,7 @@ func (self *DropInstance) ReadValueAsync(cancellable context.Context, typ gobjec
 	var carg0 *C.GdkDrop            // in, none, converted
 	var carg3 *C.GCancellable       // in, none, converted, nullable
 	var carg1 C.GType               // in, none, casted, alias
-	var carg2 C.int                 // in, none, casted
+	var carg2 C.int                 // in, none, casted, casted C.gint
 	var carg4 C.GAsyncReadyCallback // callback, scope: async, closure: carg5, nullable
 	var carg5 C.gpointer            // implicit
 
@@ -16413,7 +16413,7 @@ func (frameClock *FrameClockInstance) GetCurrentTimings() *FrameTimings {
 // frame timings of @frame_clock.
 func (frameClock *FrameClockInstance) GetFPS() float64 {
 	var carg0 *C.GdkFrameClock // in, none, converted
-	var cret  C.gdouble        // return, none, casted
+	var cret  C.double         // return, none, casted, casted C.gdouble
 
 	carg0 = (*C.GdkFrameClock)(UnsafeFrameClockToGlibNone(frameClock))
 
@@ -17099,8 +17099,8 @@ func (context *GLContextInstance) GetForwardCompatible() bool {
 // See [method@Gdk.GLContext.set_required_version].
 func (context *GLContextInstance) GetRequiredVersion() (int, int) {
 	var carg0 *C.GdkGLContext // in, none, converted
-	var carg1 C.int           // out, full, casted
-	var carg2 C.int           // out, full, casted
+	var carg1 C.int           // out, full, casted, casted C.gint
+	var carg2 C.int           // out, full, casted, casted C.gint
 
 	carg0 = (*C.GdkGLContext)(UnsafeGLContextToGlibNone(context))
 
@@ -17173,8 +17173,8 @@ func (context *GLContextInstance) GetUseES() bool {
 // The @context must be realized prior to calling this function.
 func (context *GLContextInstance) GetVersion() (int, int) {
 	var carg0 *C.GdkGLContext // in, none, converted
-	var carg1 C.int           // out, full, casted
-	var carg2 C.int           // out, full, casted
+	var carg1 C.int           // out, full, casted, casted C.gint
+	var carg2 C.int           // out, full, casted, casted C.gint
 
 	carg0 = (*C.GdkGLContext)(UnsafeGLContextToGlibNone(context))
 
@@ -17415,8 +17415,8 @@ func (context *GLContextInstance) SetForwardCompatible(compatible bool) {
 // this function.
 func (context *GLContextInstance) SetRequiredVersion(major int, minor int) {
 	var carg0 *C.GdkGLContext // in, none, converted
-	var carg1 C.int           // in, none, casted
-	var carg2 C.int           // in, none, casted
+	var carg1 C.int           // in, none, casted, casted C.gint
+	var carg2 C.int           // in, none, casted, casted C.gint
 
 	carg0 = (*C.GdkGLContext)(UnsafeGLContextToGlibNone(context))
 	carg1 = C.int(major)
@@ -17450,7 +17450,7 @@ func (context *GLContextInstance) SetRequiredVersion(major int, minor int) {
 // the OpenGL or OpenGL ES API, extensions, or shaders.
 func (context *GLContextInstance) SetUseES(useEs int) {
 	var carg0 *C.GdkGLContext // in, none, converted
-	var carg1 C.int           // in, none, casted
+	var carg1 C.int           // in, none, casted, casted C.gint
 
 	carg0 = (*C.GdkGLContext)(UnsafeGLContextToGlibNone(context))
 	carg1 = C.int(useEs)
@@ -17819,7 +17819,7 @@ func (self *GLTextureBuilderInstance) GetHasMipmap() bool {
 // 0 if the height wasn't set.
 func (self *GLTextureBuilderInstance) GetHeight() int {
 	var carg0 *C.GdkGLTextureBuilder // in, none, converted
-	var cret  C.int                  // return, none, casted
+	var cret  C.int                  // return, none, casted, casted C.gint
 
 	carg0 = (*C.GdkGLTextureBuilder)(UnsafeGLTextureBuilderToGlibNone(self))
 
@@ -17910,7 +17910,7 @@ func (self *GLTextureBuilderInstance) GetUpdateTexture() Texture {
 // 0 if the width wasn't set.
 func (self *GLTextureBuilderInstance) GetWidth() int {
 	var carg0 *C.GdkGLTextureBuilder // in, none, converted
-	var cret  C.int                  // return, none, casted
+	var cret  C.int                  // return, none, casted, casted C.gint
 
 	carg0 = (*C.GdkGLTextureBuilder)(UnsafeGLTextureBuilderToGlibNone(self))
 
@@ -18039,7 +18039,7 @@ func (self *GLTextureBuilderInstance) SetHasMipmap(hasMipmap bool) {
 // The height must be set before calling [method@Gdk.GLTextureBuilder.build].
 func (self *GLTextureBuilderInstance) SetHeight(height int) {
 	var carg0 *C.GdkGLTextureBuilder // in, none, converted
-	var carg1 C.int                  // in, none, casted
+	var carg1 C.int                  // in, none, casted, casted C.gint
 
 	carg0 = (*C.GdkGLTextureBuilder)(UnsafeGLTextureBuilderToGlibNone(self))
 	carg1 = C.int(height)
@@ -18133,7 +18133,7 @@ func (self *GLTextureBuilderInstance) SetUpdateTexture(texture Texture) {
 // The width must be set before calling [method@Gdk.GLTextureBuilder.build].
 func (self *GLTextureBuilderInstance) SetWidth(width int) {
 	var carg0 *C.GdkGLTextureBuilder // in, none, converted
-	var carg1 C.int                  // in, none, casted
+	var carg1 C.int                  // in, none, casted, casted C.gint
 
 	carg0 = (*C.GdkGLTextureBuilder)(UnsafeGLTextureBuilderToGlibNone(self))
 	carg1 = C.int(width)
@@ -18463,7 +18463,7 @@ func (self *MemoryTextureBuilderInstance) GetFormat() MemoryFormat {
 // or 0 if the height wasn't set.
 func (self *MemoryTextureBuilderInstance) GetHeight() int {
 	var carg0 *C.GdkMemoryTextureBuilder // in, none, converted
-	var cret  C.int                      // return, none, casted
+	var cret  C.int                      // return, none, casted, casted C.gint
 
 	carg0 = (*C.GdkMemoryTextureBuilder)(UnsafeMemoryTextureBuilderToGlibNone(self))
 
@@ -18531,7 +18531,7 @@ func (self *MemoryTextureBuilderInstance) GetUpdateTexture() Texture {
 // or 0 if the width wasn't set.
 func (self *MemoryTextureBuilderInstance) GetWidth() int {
 	var carg0 *C.GdkMemoryTextureBuilder // in, none, converted
-	var cret  C.int                      // return, none, casted
+	var cret  C.int                      // return, none, casted, casted C.gint
 
 	carg0 = (*C.GdkMemoryTextureBuilder)(UnsafeMemoryTextureBuilderToGlibNone(self))
 
@@ -18624,7 +18624,7 @@ func (self *MemoryTextureBuilderInstance) SetFormat(format MemoryFormat) {
 // The height must be set before calling [method@Gdk.MemoryTextureBuilder.build].
 func (self *MemoryTextureBuilderInstance) SetHeight(height int) {
 	var carg0 *C.GdkMemoryTextureBuilder // in, none, converted
-	var carg1 C.int                      // in, none, casted
+	var carg1 C.int                      // in, none, casted, casted C.gint
 
 	carg0 = (*C.GdkMemoryTextureBuilder)(UnsafeMemoryTextureBuilderToGlibNone(self))
 	carg1 = C.int(height)
@@ -18689,7 +18689,7 @@ func (self *MemoryTextureBuilderInstance) SetUpdateTexture(texture Texture) {
 // The width must be set before calling [method@Gdk.MemoryTextureBuilder.build].
 func (self *MemoryTextureBuilderInstance) SetWidth(width int) {
 	var carg0 *C.GdkMemoryTextureBuilder // in, none, converted
-	var carg1 C.int                      // in, none, casted
+	var carg1 C.int                      // in, none, casted, casted C.gint
 
 	carg0 = (*C.GdkMemoryTextureBuilder)(UnsafeMemoryTextureBuilderToGlibNone(self))
 	carg1 = C.int(width)
@@ -18896,7 +18896,7 @@ func UnsafeMonitorToGlibFull(c Monitor) unsafe.Pointer {
 // relied on as stable identifiers of a specific monitor.
 func (monitor *MonitorInstance) GetConnector() string {
 	var carg0 *C.GdkMonitor // in, none, converted
-	var cret  *C.gchar      // return, none, string
+	var cret  *C.char       // return, none, string, casted *C.gchar
 
 	carg0 = (*C.GdkMonitor)(UnsafeMonitorToGlibNone(monitor))
 
@@ -18905,7 +18905,7 @@ func (monitor *MonitorInstance) GetConnector() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -18920,7 +18920,7 @@ func (monitor *MonitorInstance) GetConnector() string {
 // This can be used to identify a monitor in the UI.
 func (monitor *MonitorInstance) GetDescription() string {
 	var carg0 *C.GdkMonitor // in, none, converted
-	var cret  *C.gchar      // return, none, string
+	var cret  *C.char       // return, none, string, casted *C.gchar
 
 	carg0 = (*C.GdkMonitor)(UnsafeMonitorToGlibNone(monitor))
 
@@ -18929,7 +18929,7 @@ func (monitor *MonitorInstance) GetDescription() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -18992,7 +18992,7 @@ func (monitor *MonitorInstance) GetGeometry() Rectangle {
 // Gets the height in millimeters of the monitor.
 func (monitor *MonitorInstance) GetHeightMm() int {
 	var carg0 *C.GdkMonitor // in, none, converted
-	var cret  C.int         // return, none, casted
+	var cret  C.int         // return, none, casted, casted C.gint
 
 	carg0 = (*C.GdkMonitor)(UnsafeMonitorToGlibNone(monitor))
 
@@ -19020,7 +19020,7 @@ func (monitor *MonitorInstance) GetHeightMm() int {
 // [https://uefi.org/pnp_id_list](https://uefi.org/pnp_id_list).
 func (monitor *MonitorInstance) GetManufacturer() string {
 	var carg0 *C.GdkMonitor // in, none, converted
-	var cret  *C.gchar      // return, none, string
+	var cret  *C.char       // return, none, string, casted *C.gchar
 
 	carg0 = (*C.GdkMonitor)(UnsafeMonitorToGlibNone(monitor))
 
@@ -19029,7 +19029,7 @@ func (monitor *MonitorInstance) GetManufacturer() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -19042,7 +19042,7 @@ func (monitor *MonitorInstance) GetManufacturer() string {
 // Gets the string identifying the monitor model, if available.
 func (monitor *MonitorInstance) GetModel() string {
 	var carg0 *C.GdkMonitor // in, none, converted
-	var cret  *C.gchar      // return, none, string
+	var cret  *C.char       // return, none, string, casted *C.gchar
 
 	carg0 = (*C.GdkMonitor)(UnsafeMonitorToGlibNone(monitor))
 
@@ -19051,7 +19051,7 @@ func (monitor *MonitorInstance) GetModel() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -19067,7 +19067,7 @@ func (monitor *MonitorInstance) GetModel() string {
 // is returned as 60000.
 func (monitor *MonitorInstance) GetRefreshRate() int {
 	var carg0 *C.GdkMonitor // in, none, converted
-	var cret  C.int         // return, none, casted
+	var cret  C.int         // return, none, casted, casted C.gint
 
 	carg0 = (*C.GdkMonitor)(UnsafeMonitorToGlibNone(monitor))
 
@@ -19094,7 +19094,7 @@ func (monitor *MonitorInstance) GetRefreshRate() int {
 // where it is better to use [method@Gdk.Surface.get_scale] instead.
 func (monitor *MonitorInstance) GetScale() float64 {
 	var carg0 *C.GdkMonitor // in, none, converted
-	var cret  C.gdouble     // return, none, casted
+	var cret  C.double      // return, none, casted, casted C.gdouble
 
 	carg0 = (*C.GdkMonitor)(UnsafeMonitorToGlibNone(monitor))
 
@@ -19124,7 +19124,7 @@ func (monitor *MonitorInstance) GetScale() float64 {
 // where it is better to use [method@Gdk.Surface.get_scale_factor] instead.
 func (monitor *MonitorInstance) GetScaleFactor() int {
 	var carg0 *C.GdkMonitor // in, none, converted
-	var cret  C.int         // return, none, casted
+	var cret  C.int         // return, none, casted, casted C.gint
 
 	carg0 = (*C.GdkMonitor)(UnsafeMonitorToGlibNone(monitor))
 
@@ -19169,7 +19169,7 @@ func (monitor *MonitorInstance) GetSubpixelLayout() SubpixelLayout {
 // Gets the width in millimeters of the monitor.
 func (monitor *MonitorInstance) GetWidthMm() int {
 	var carg0 *C.GdkMonitor // in, none, converted
-	var cret  C.int         // return, none, casted
+	var cret  C.int         // return, none, casted, casted C.gint
 
 	carg0 = (*C.GdkMonitor)(UnsafeMonitorToGlibNone(monitor))
 
@@ -19956,8 +19956,8 @@ func (surface *SurfaceInstance) GetDeviceCursor(device Device) Cursor {
 func (surface *SurfaceInstance) GetDevicePosition(device Device) (float64, float64, ModifierType, bool) {
 	var carg0 *C.GdkSurface     // in, none, converted
 	var carg1 *C.GdkDevice      // in, none, converted
-	var carg2 C.gdouble         // out, full, casted
-	var carg3 C.gdouble         // out, full, casted
+	var carg2 C.double          // out, full, casted, casted C.gdouble
+	var carg3 C.double          // out, full, casted, casted C.gdouble
 	var carg4 C.GdkModifierType // out, full, casted
 	var cret  C.gboolean        // return
 
@@ -20041,7 +20041,7 @@ func (surface *SurfaceInstance) GetFrameClock() FrameClock {
 // ”device pixels” (see [method@Gdk.Surface.get_scale_factor]).
 func (surface *SurfaceInstance) GetHeight() int {
 	var carg0 *C.GdkSurface // in, none, converted
-	var cret  C.int         // return, none, casted
+	var cret  C.int         // return, none, casted, casted C.gint
 
 	carg0 = (*C.GdkSurface)(UnsafeSurfaceToGlibNone(surface))
 
@@ -20100,7 +20100,7 @@ func (surface *SurfaceInstance) GetMapped() bool {
 // The scale may change during the lifetime of the surface.
 func (surface *SurfaceInstance) GetScale() float64 {
 	var carg0 *C.GdkSurface // in, none, converted
-	var cret  C.gdouble     // return, none, casted
+	var cret  C.double      // return, none, casted, casted C.gdouble
 
 	carg0 = (*C.GdkSurface)(UnsafeSurfaceToGlibNone(surface))
 
@@ -20132,7 +20132,7 @@ func (surface *SurfaceInstance) GetScale() float64 {
 // The scale factor may change during the lifetime of the surface.
 func (surface *SurfaceInstance) GetScaleFactor() int {
 	var carg0 *C.GdkSurface // in, none, converted
-	var cret  C.int         // return, none, casted
+	var cret  C.int         // return, none, casted, casted C.gint
 
 	carg0 = (*C.GdkSurface)(UnsafeSurfaceToGlibNone(surface))
 
@@ -20157,7 +20157,7 @@ func (surface *SurfaceInstance) GetScaleFactor() int {
 // ”device pixels” (see [method@Gdk.Surface.get_scale_factor]).
 func (surface *SurfaceInstance) GetWidth() int {
 	var carg0 *C.GdkSurface // in, none, converted
-	var cret  C.int         // return, none, casted
+	var cret  C.int         // return, none, casted, casted C.gint
 
 	carg0 = (*C.GdkSurface)(UnsafeSurfaceToGlibNone(surface))
 
@@ -20629,11 +20629,11 @@ func NewTextureInstanceFromFile(file gio.File) (Texture, error) {
 // and [method@Gio.Task.run_in_thread] to avoid blocking the main thread
 // while loading a big image.
 func NewTextureInstanceFromFilename(path string) (Texture, error) {
-	var carg1 *C.gchar      // in, none, string
+	var carg1 *C.char       // in, none, string, casted *C.gchar
 	var cret  *C.GdkTexture // return, full, converted
 	var _cerr *C.GError     // out, full, converted, nullable
 
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(path)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(path)))
 	defer C.free(unsafe.Pointer(carg1))
 
 	cret = C.gdk_texture_new_from_filename(carg1, &_cerr)
@@ -20674,10 +20674,10 @@ func NewTextureInstanceFromFilename(path string) (Texture, error) {
 // and [method@Gio.Task.run_in_thread] to avoid blocking the main thread
 // while loading a big image.
 func NewTextureInstanceFromResource(resourcePath string) Texture {
-	var carg1 *C.gchar      // in, none, string
+	var carg1 *C.char       // in, none, string, casted *C.gchar
 	var cret  *C.GdkTexture // return, full, converted
 
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(resourcePath)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(resourcePath)))
 	defer C.free(unsafe.Pointer(carg1))
 
 	cret = C.gdk_texture_new_from_resource(carg1)
@@ -20750,7 +20750,7 @@ func (self *TextureInstance) GetFormat() MemoryFormat {
 // Returns the height of the @texture, in pixels.
 func (texture *TextureInstance) GetHeight() int {
 	var carg0 *C.GdkTexture // in, none, converted
-	var cret  C.int         // return, none, casted
+	var cret  C.int         // return, none, casted, casted C.gint
 
 	carg0 = (*C.GdkTexture)(UnsafeTextureToGlibNone(texture))
 
@@ -20772,7 +20772,7 @@ func (texture *TextureInstance) GetHeight() int {
 // Returns the width of @texture, in pixels.
 func (texture *TextureInstance) GetWidth() int {
 	var carg0 *C.GdkTexture // in, none, converted
-	var cret  C.int         // return, none, casted
+	var cret  C.int         // return, none, casted, casted C.gint
 
 	carg0 = (*C.GdkTexture)(UnsafeTextureToGlibNone(texture))
 
@@ -20805,11 +20805,11 @@ func (texture *TextureInstance) GetWidth() int {
 // gdk-pixbuf library.
 func (texture *TextureInstance) SaveToPNG(filename string) bool {
 	var carg0 *C.GdkTexture // in, none, converted
-	var carg1 *C.gchar      // in, none, string
+	var carg1 *C.char       // in, none, string, casted *C.gchar
 	var cret  C.gboolean    // return
 
 	carg0 = (*C.GdkTexture)(UnsafeTextureToGlibNone(texture))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(filename)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(filename)))
 	defer C.free(unsafe.Pointer(carg1))
 
 	cret = C.gdk_texture_save_to_png(carg0, carg1)
@@ -20875,11 +20875,11 @@ func (texture *TextureInstance) SaveToPNGBytes() *glib.Bytes {
 // GTK will attempt to store data without loss.
 func (texture *TextureInstance) SaveToTIFF(filename string) bool {
 	var carg0 *C.GdkTexture // in, none, converted
-	var carg1 *C.gchar      // in, none, string
+	var carg1 *C.char       // in, none, string, casted *C.gchar
 	var cret  C.gboolean    // return
 
 	carg0 = (*C.GdkTexture)(UnsafeTextureToGlibNone(texture))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(filename)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(filename)))
 	defer C.free(unsafe.Pointer(carg1))
 
 	cret = C.gdk_texture_save_to_tiff(carg0, carg1)
@@ -21226,8 +21226,8 @@ func UnsafeMemoryTextureToGlibFull(c MemoryTexture) unsafe.Pointer {
 // The `GBytes` must contain @stride × @height pixels
 // in the given format.
 func NewMemoryTextureInstance(width int, height int, format MemoryFormat, bytes *glib.Bytes, stride uint) MemoryTexture {
-	var carg1 C.int             // in, none, casted
-	var carg2 C.int             // in, none, casted
+	var carg1 C.int             // in, none, casted, casted C.gint
+	var carg2 C.int             // in, none, casted, casted C.gint
 	var carg3 C.GdkMemoryFormat // in, none, casted
 	var carg4 *C.GBytes         // in, none, converted
 	var carg5 C.gsize           // in, none, casted
@@ -21685,11 +21685,11 @@ func (formats *ContentFormats) ContainGType(typ gobject.Type) bool {
 // Checks if a given mime type is part of the given @formats.
 func (formats *ContentFormats) ContainMIMEType(mimeType string) bool {
 	var carg0 *C.GdkContentFormats // in, none, converted
-	var carg1 *C.gchar             // in, none, string
+	var carg1 *C.char              // in, none, string, casted *C.gchar
 	var cret  C.gboolean           // return
 
 	carg0 = (*C.GdkContentFormats)(UnsafeContentFormatsToGlibNone(formats))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(mimeType)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(mimeType)))
 	defer C.free(unsafe.Pointer(carg1))
 
 	cret = C.gdk_content_formats_contain_mime_type(carg0, carg1)
@@ -21851,7 +21851,7 @@ func (first *ContentFormats) MatchGType(second *ContentFormats) gobject.Type {
 func (first *ContentFormats) MatchMIMEType(second *ContentFormats) string {
 	var carg0 *C.GdkContentFormats // in, none, converted
 	var carg1 *C.GdkContentFormats // in, none, converted
-	var cret  *C.gchar             // return, none, string
+	var cret  *C.char              // return, none, string, casted *C.gchar
 
 	carg0 = (*C.GdkContentFormats)(UnsafeContentFormatsToGlibNone(first))
 	carg1 = (*C.GdkContentFormats)(UnsafeContentFormatsToGlibNone(second))
@@ -21862,7 +21862,7 @@ func (first *ContentFormats) MatchMIMEType(second *ContentFormats) string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -21880,7 +21880,7 @@ func (first *ContentFormats) MatchMIMEType(second *ContentFormats) string {
 // to help when debugging.
 func (formats *ContentFormats) ToString() string {
 	var carg0 *C.GdkContentFormats // in, none, converted
-	var cret  *C.gchar             // return, full, string
+	var cret  *C.char              // return, full, string, casted *C.gchar
 
 	carg0 = (*C.GdkContentFormats)(UnsafeContentFormatsToGlibNone(formats))
 
@@ -21889,7 +21889,7 @@ func (formats *ContentFormats) ToString() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 	defer C.free(unsafe.Pointer(cret))
 
 	return goret
@@ -22169,10 +22169,10 @@ func (builder *ContentFormatsBuilder) AddGType(typ gobject.Type) {
 // Appends @mime_type to @builder if it has not already been added.
 func (builder *ContentFormatsBuilder) AddMIMEType(mimeType string) {
 	var carg0 *C.GdkContentFormatsBuilder // in, none, converted
-	var carg1 *C.gchar                    // in, none, string
+	var carg1 *C.char                     // in, none, string, casted *C.gchar
 
 	carg0 = (*C.GdkContentFormatsBuilder)(UnsafeContentFormatsBuilderToGlibNone(builder))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(mimeType)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(mimeType)))
 	defer C.free(unsafe.Pointer(carg1))
 
 	C.gdk_content_formats_builder_add_mime_type(carg0, carg1)
@@ -22830,8 +22830,8 @@ func UnsafeDragSurfaceSizeToGlibFull(d *DragSurfaceSize) unsafe.Pointer {
 // Sets the size the drag surface prefers to be resized to.
 func (size *DragSurfaceSize) SetSize(width int, height int) {
 	var carg0 *C.GdkDragSurfaceSize // in, none, converted
-	var carg1 C.int                 // in, none, casted
-	var carg2 C.int                 // in, none, casted
+	var carg1 C.int                 // in, none, casted, casted C.gint
+	var carg2 C.int                 // in, none, casted, casted C.gint
 
 	carg0 = (*C.GdkDragSurfaceSize)(UnsafeDragSurfaceSizeToGlibNone(size))
 	carg1 = C.int(width)
@@ -23578,7 +23578,7 @@ func (k *KeymapKey) SetKeycode(keycode uint) {
 //   characters will be printed on the key next to the English characters.
 func (k *KeymapKey) SetGroup(group int) {
 	valptr := &k.native.group
-	*valptr = C.int(group)
+	*valptr = C.gint(group)
 }
 
 // level wraps level
@@ -23591,7 +23591,7 @@ func (k *KeymapKey) SetGroup(group int) {
 //   uppercase letter is printed.
 func (k *KeymapKey) SetLevel(level int) {
 	valptr := &k.native.level
-	*valptr = C.int(level)
+	*valptr = C.gint(level)
 }
 
 // MemoryTextureBuilderClass wraps GdkMemoryTextureBuilderClass
@@ -24170,8 +24170,8 @@ func (layout *PopupLayout) GetAnchorRect() *Rectangle {
 // Retrieves the offset for the anchor rectangle.
 func (layout *PopupLayout) GetOffset() (int, int) {
 	var carg0 *C.GdkPopupLayout // in, none, converted
-	var carg1 C.int             // out, full, casted
-	var carg2 C.int             // out, full, casted
+	var carg1 C.int             // out, full, casted, casted C.gint
+	var carg2 C.int             // out, full, casted, casted C.gint
 
 	carg0 = (*C.GdkPopupLayout)(UnsafePopupLayoutToGlibNone(layout))
 
@@ -24220,10 +24220,10 @@ func (layout *PopupLayout) GetRectAnchor() Gravity {
 // Obtains the shadow widths of this layout.
 func (layout *PopupLayout) GetShadowWidth() (int, int, int, int) {
 	var carg0 *C.GdkPopupLayout // in, none, converted
-	var carg1 C.int             // out, full, casted
-	var carg2 C.int             // out, full, casted
-	var carg3 C.int             // out, full, casted
-	var carg4 C.int             // out, full, casted
+	var carg1 C.int             // out, full, casted, casted C.gint
+	var carg2 C.int             // out, full, casted, casted C.gint
+	var carg3 C.int             // out, full, casted, casted C.gint
+	var carg4 C.int             // out, full, casted, casted C.gint
 
 	carg0 = (*C.GdkPopupLayout)(UnsafePopupLayoutToGlibNone(layout))
 
@@ -24319,8 +24319,8 @@ func (layout *PopupLayout) SetAnchorRect(anchorRect *Rectangle) {
 // Offset the position of the anchor rectangle with the given delta.
 func (layout *PopupLayout) SetOffset(dx int, dy int) {
 	var carg0 *C.GdkPopupLayout // in, none, converted
-	var carg1 C.int             // in, none, casted
-	var carg2 C.int             // in, none, casted
+	var carg1 C.int             // in, none, casted, casted C.gint
+	var carg2 C.int             // in, none, casted, casted C.gint
 
 	carg0 = (*C.GdkPopupLayout)(UnsafePopupLayoutToGlibNone(layout))
 	carg1 = C.int(dx)
@@ -24367,10 +24367,10 @@ func (layout *PopupLayout) SetRectAnchor(anchor Gravity) {
 // surrounding the window, would there be any.
 func (layout *PopupLayout) SetShadowWidth(left int, right int, top int, bottom int) {
 	var carg0 *C.GdkPopupLayout // in, none, converted
-	var carg1 C.int             // in, none, casted
-	var carg2 C.int             // in, none, casted
-	var carg3 C.int             // in, none, casted
-	var carg4 C.int             // in, none, casted
+	var carg1 C.int             // in, none, casted, casted C.gint
+	var carg2 C.int             // in, none, casted, casted C.gint
+	var carg3 C.int             // in, none, casted, casted C.gint
+	var carg4 C.int             // in, none, casted, casted C.gint
 
 	carg0 = (*C.GdkPopupLayout)(UnsafePopupLayoutToGlibNone(layout))
 	carg1 = C.int(left)
@@ -24670,11 +24670,11 @@ func (rgba *RGBA) IsOpaque() bool {
 // in the range 0 to 1.
 func (rgba *RGBA) Parse(spec string) bool {
 	var carg0 *C.GdkRGBA // in, none, converted
-	var carg1 *C.gchar   // in, none, string
+	var carg1 *C.char    // in, none, string, casted *C.gchar
 	var cret  C.gboolean // return
 
 	carg0 = (*C.GdkRGBA)(UnsafeRGBAToGlibNone(rgba))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(spec)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(spec)))
 	defer C.free(unsafe.Pointer(carg1))
 
 	cret = C.gdk_rgba_parse(carg0, carg1)
@@ -24710,7 +24710,7 @@ func (rgba *RGBA) Parse(spec string) bool {
 // this is a concern, you should use a different representation.
 func (rgba *RGBA) ToString() string {
 	var carg0 *C.GdkRGBA // in, none, converted
-	var cret  *C.gchar   // return, full, string
+	var cret  *C.char    // return, full, string, casted *C.gchar
 
 	carg0 = (*C.GdkRGBA)(UnsafeRGBAToGlibNone(rgba))
 
@@ -24719,7 +24719,7 @@ func (rgba *RGBA) ToString() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 	defer C.free(unsafe.Pointer(cret))
 
 	return goret
@@ -24858,7 +24858,7 @@ func (r *Rectangle) Height() int {
 // the x coordinate of the top left corner
 func (r *Rectangle) SetX(x int) {
 	valptr := &r.native.x
-	*valptr = C.int(x)
+	*valptr = C.gint(x)
 }
 
 // y wraps y
@@ -24866,7 +24866,7 @@ func (r *Rectangle) SetX(x int) {
 // the y coordinate of the top left corner
 func (r *Rectangle) SetY(y int) {
 	valptr := &r.native.y
-	*valptr = C.int(y)
+	*valptr = C.gint(y)
 }
 
 // width wraps width
@@ -24874,7 +24874,7 @@ func (r *Rectangle) SetY(y int) {
 // the width of the rectangle
 func (r *Rectangle) SetWidth(width int) {
 	valptr := &r.native.width
-	*valptr = C.int(width)
+	*valptr = C.gint(width)
 }
 
 // height wraps height
@@ -24882,7 +24882,7 @@ func (r *Rectangle) SetWidth(width int) {
 // the height of the rectangle
 func (r *Rectangle) SetHeight(height int) {
 	valptr := &r.native.height
-	*valptr = C.int(height)
+	*valptr = C.gint(height)
 }
 
 // ContainsPoint wraps gdk_rectangle_contains_point
@@ -24899,8 +24899,8 @@ func (r *Rectangle) SetHeight(height int) {
 // Returns %TRUE if @rect contains the point described by @x and @y.
 func (rect *Rectangle) ContainsPoint(x int, y int) bool {
 	var carg0 *C.GdkRectangle // in, none, converted
-	var carg1 C.int           // in, none, casted
-	var carg2 C.int           // in, none, casted
+	var carg1 C.int           // in, none, casted, casted C.gint
+	var carg2 C.int           // in, none, casted, casted C.gint
 	var cret  C.gboolean      // return
 
 	carg0 = (*C.GdkRectangle)(UnsafeRectangleToGlibNone(rect))
@@ -26100,8 +26100,8 @@ func UnsafeToplevelSizeToGlibFull(t *ToplevelSize) unsafe.Pointer {
 // toplevel can be presented.
 func (size *ToplevelSize) GetBounds() (int, int) {
 	var carg0 *C.GdkToplevelSize // in, none, converted
-	var carg1 C.int              // out, full, casted
-	var carg2 C.int              // out, full, casted
+	var carg1 C.int              // out, full, casted, casted C.gint
+	var carg2 C.int              // out, full, casted, casted C.gint
 
 	carg0 = (*C.GdkToplevelSize)(UnsafeToplevelSizeToGlibNone(size))
 
@@ -26135,8 +26135,8 @@ func (size *ToplevelSize) GetBounds() (int, int) {
 // [method@Gdk.ToplevelSize.get_bounds]).
 func (size *ToplevelSize) SetMinSize(minWidth int, minHeight int) {
 	var carg0 *C.GdkToplevelSize // in, none, converted
-	var carg1 C.int              // in, none, casted
-	var carg2 C.int              // in, none, casted
+	var carg1 C.int              // in, none, casted, casted C.gint
+	var carg2 C.int              // in, none, casted, casted C.gint
 
 	carg0 = (*C.GdkToplevelSize)(UnsafeToplevelSizeToGlibNone(size))
 	carg1 = C.int(minWidth)
@@ -26167,10 +26167,10 @@ func (size *ToplevelSize) SetMinSize(minWidth int, minHeight int) {
 // [method@Gtk.Display.supports_shadow_width] is %TRUE.
 func (size *ToplevelSize) SetShadowWidth(left int, right int, top int, bottom int) {
 	var carg0 *C.GdkToplevelSize // in, none, converted
-	var carg1 C.int              // in, none, casted
-	var carg2 C.int              // in, none, casted
-	var carg3 C.int              // in, none, casted
-	var carg4 C.int              // in, none, casted
+	var carg1 C.int              // in, none, casted, casted C.gint
+	var carg2 C.int              // in, none, casted, casted C.gint
+	var carg3 C.int              // in, none, casted, casted C.gint
+	var carg4 C.int              // in, none, casted, casted C.gint
 
 	carg0 = (*C.GdkToplevelSize)(UnsafeToplevelSizeToGlibNone(size))
 	carg1 = C.int(left)
@@ -26201,8 +26201,8 @@ func (size *ToplevelSize) SetShadowWidth(left int, right int, top int, bottom in
 // respected by the windowing system, or backend.
 func (size *ToplevelSize) SetSize(width int, height int) {
 	var carg0 *C.GdkToplevelSize // in, none, converted
-	var carg1 C.int              // in, none, casted
-	var carg2 C.int              // in, none, casted
+	var carg1 C.int              // in, none, casted, casted C.gint
+	var carg2 C.int              // in, none, casted, casted C.gint
 
 	carg0 = (*C.GdkToplevelSize)(UnsafeToplevelSizeToGlibNone(size))
 	carg1 = C.int(width)

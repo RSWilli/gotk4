@@ -2191,7 +2191,7 @@ func NewAttrBackground(red uint16, green uint16, blue uint16) *Attribute {
 //   &lt;img alt="Baseline Shift" src="baseline-shift-light.png"&gt;
 // &lt;/picture&gt;
 func NewAttrBaselineShift(shift int) *Attribute {
-	var carg1 C.int             // in, none, casted
+	var carg1 C.int             // in, none, casted, casted C.gint
 	var cret  *C.PangoAttribute // return, full, converted
 
 	carg1 = C.int(shift)
@@ -2222,14 +2222,14 @@ func NewAttrBaselineShift(shift int) *Attribute {
 // The line breaks are assumed to have been produced
 // by [func@Pango.default_break] and [func@Pango.tailor_break].
 func AttrBreak(text string, length int, attrList *AttrList, offset int, attrs []LogAttr) {
-	var carg1 *C.gchar         // in, none, string
-	var carg2 C.int            // in, none, casted
+	var carg1 *C.char          // in, none, string, casted *C.gchar
+	var carg2 C.int            // in, none, casted, casted C.gint
 	var carg3 *C.PangoAttrList // in, none, converted
-	var carg4 C.int            // in, none, casted
+	var carg4 C.int            // in, none, casted, casted C.gint
 	var carg5 *C.PangoLogAttr  // in, transfer: none, C Pointers: 1, Name: array[LogAttr], array (inner: *typesystem.Record, length-by: carg6)
 	var carg6 C.int            // implicit
 
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(text)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(text)))
 	defer C.free(unsafe.Pointer(carg1))
 	carg2 = C.int(length)
 	carg3 = (*C.PangoAttrList)(UnsafeAttrListToGlibNone(attrList))
@@ -2294,10 +2294,10 @@ func NewAttrFallback(enableFallback bool) *Attribute {
 //
 // Create a new font family attribute.
 func NewAttrFamily(family string) *Attribute {
-	var carg1 *C.gchar          // in, none, string
+	var carg1 *C.char           // in, none, string, casted *C.gchar
 	var cret  *C.PangoAttribute // return, full, converted
 
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(family)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(family)))
 	defer C.free(unsafe.Pointer(carg1))
 
 	cret = C.pango_attr_family_new(carg1)
@@ -2503,7 +2503,7 @@ func NewAttrInsertHyphens(insertHyphens bool) *Attribute {
 //
 // Create a new letter-spacing attribute.
 func NewAttrLetterSpacing(letterSpacing int) *Attribute {
-	var carg1 C.int             // in, none, casted
+	var carg1 C.int             // in, none, casted, casted C.gint
 	var cret  *C.PangoAttribute // return, full, converted
 
 	carg1 = C.int(letterSpacing)
@@ -2535,10 +2535,10 @@ func NewAttrLetterSpacing(letterSpacing int) *Attribute {
 // [method@Pango.LayoutLine.get_pixel_extents] and
 // [method@Pango.LayoutIter.get_line_extents].
 func NewAttrLineHeight(factor float64) *Attribute {
-	var carg1 C.gdouble         // in, none, casted
+	var carg1 C.double          // in, none, casted, casted C.gdouble
 	var cret  *C.PangoAttribute // return, full, converted
 
-	carg1 = C.gdouble(factor)
+	carg1 = C.double(factor)
 
 	cret = C.pango_attr_line_height_new(carg1)
 	runtime.KeepAlive(factor)
@@ -2567,7 +2567,7 @@ func NewAttrLineHeight(factor float64) *Attribute {
 // [method@Pango.LayoutLine.get_pixel_extents] and
 // [method@Pango.LayoutIter.get_line_extents].
 func AttrLineHeightNewAbsolute(height int) *Attribute {
-	var carg1 C.int             // in, none, casted
+	var carg1 C.int             // in, none, casted, casted C.gint
 	var cret  *C.PangoAttribute // return, full, converted
 
 	carg1 = C.int(height)
@@ -2660,7 +2660,7 @@ func NewAttrOverline(overline Overline) *Attribute {
 //
 // Create a new baseline displacement attribute.
 func NewAttrRise(rise int) *Attribute {
-	var carg1 C.int             // in, none, casted
+	var carg1 C.int             // in, none, casted, casted C.gint
 	var cret  *C.PangoAttribute // return, full, converted
 
 	carg1 = C.int(rise)
@@ -2690,10 +2690,10 @@ func NewAttrRise(rise int) *Attribute {
 // The base font for the affected text will have
 // its size multiplied by @scale_factor.
 func NewAttrScale(scaleFactor float64) *Attribute {
-	var carg1 C.gdouble         // in, none, casted
+	var carg1 C.double          // in, none, casted, casted C.gdouble
 	var cret  *C.PangoAttribute // return, full, converted
 
-	carg1 = C.gdouble(scaleFactor)
+	carg1 = C.double(scaleFactor)
 
 	cret = C.pango_attr_scale_new(carg1)
 	runtime.KeepAlive(scaleFactor)
@@ -3060,13 +3060,13 @@ func NewAttrWord() *Attribute {
 // Deprecated: (since 1.44.0) Use [func@Pango.default_break],
 //   [func@Pango.tailor_break] and [func@Pango.attr_break].
 func Break(text string, length int, analysis *Analysis, attrs []LogAttr) {
-	var carg1 *C.gchar         // in, none, string
-	var carg2 C.int            // in, none, casted
+	var carg1 *C.char          // in, none, string, casted *C.gchar
+	var carg2 C.int            // in, none, casted, casted C.gint
 	var carg3 *C.PangoAnalysis // in, none, converted
 	var carg4 *C.PangoLogAttr  // in, transfer: none, C Pointers: 1, Name: array[LogAttr], array (inner: *typesystem.Record, length-by: carg5)
 	var carg5 C.int            // implicit
 
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(text)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(text)))
 	defer C.free(unsafe.Pointer(carg1))
 	carg2 = C.int(length)
 	carg3 = (*C.PangoAnalysis)(UnsafeAnalysisToGlibNone(analysis))
@@ -3102,13 +3102,13 @@ func Break(text string, length int, analysis *Analysis, attrs []LogAttr) {
 // 
 // See [func@Pango.attr_break] for attribute-based customization.
 func DefaultBreak(text string, length int, analysis *Analysis, attrs *LogAttr, attrsLen int) {
-	var carg1 *C.gchar         // in, none, string
-	var carg2 C.int            // in, none, casted
+	var carg1 *C.char          // in, none, string, casted *C.gchar
+	var carg2 C.int            // in, none, casted, casted C.gint
 	var carg3 *C.PangoAnalysis // in, none, converted, nullable
 	var carg4 *C.PangoLogAttr  // in, none, converted
-	var carg5 C.int            // in, none, casted
+	var carg5 C.int            // in, none, casted, casted C.gint
 
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(text)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(text)))
 	defer C.free(unsafe.Pointer(carg1))
 	carg2 = C.int(length)
 	if analysis != nil {
@@ -3179,13 +3179,13 @@ func ExtentsToPixels(inclusive *Rectangle, nearest *Rectangle) {
 // Searches a string the first character that has a strong
 // direction, according to the Unicode bidirectional algorithm.
 func FindBaseDir(text string, length int) Direction {
-	var carg1 *C.gchar         // in, none, string
-	var carg2 C.int            // in, none, casted
+	var carg1 *C.gchar         // in, none, string, casted *C.gchar
+	var carg2 C.gint           // in, none, casted
 	var cret  C.PangoDirection // return, none, casted
 
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(text)))
 	defer C.free(unsafe.Pointer(carg1))
-	carg2 = C.int(length)
+	carg2 = C.gint(length)
 
 	cret = C.pango_find_base_dir(carg1, carg2)
 	runtime.KeepAlive(text)
@@ -3227,12 +3227,12 @@ func FindBaseDir(text string, length int) Direction {
 // and @next_paragraph_start are filled with the length of @text
 // (an index one off the end).
 func FindParagraphBoundary(text string, length int) (int, int) {
-	var carg1 *C.gchar // in, none, string
-	var carg2 C.int    // in, none, casted
-	var carg3 C.int    // out, full, casted
-	var carg4 C.int    // out, full, casted
+	var carg1 *C.char // in, none, string, casted *C.gchar
+	var carg2 C.int   // in, none, casted, casted C.gint
+	var carg3 C.int   // out, full, casted, casted C.gint
+	var carg4 C.int   // out, full, casted, casted C.gint
 
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(text)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(text)))
 	defer C.free(unsafe.Pointer(carg1))
 	carg2 = C.int(length)
 
@@ -3270,14 +3270,14 @@ func FindParagraphBoundary(text string, length int) (int, int) {
 // (for example you need to see spaces on either side of
 // a word to know the word is a word).
 func GetLogAttrs(text string, length int, level int, language *Language, attrs []LogAttr) {
-	var carg1 *C.gchar         // in, none, string
-	var carg2 C.int            // in, none, casted
-	var carg3 C.int            // in, none, casted
+	var carg1 *C.char          // in, none, string, casted *C.gchar
+	var carg2 C.int            // in, none, casted, casted C.gint
+	var carg3 C.int            // in, none, casted, casted C.gint
 	var carg4 *C.PangoLanguage // in, none, converted
 	var carg5 *C.PangoLogAttr  // in, transfer: none, C Pointers: 1, Name: array[LogAttr], array (inner: *typesystem.Record, length-by: carg6)
 	var carg6 C.int            // implicit
 
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(text)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(text)))
 	defer C.free(unsafe.Pointer(carg1))
 	carg2 = C.int(length)
 	carg3 = C.int(level)
@@ -3392,7 +3392,7 @@ func IsZeroWidth(ch uint32) bool {
 func MarkupParserFinish(context *glib.MarkupParseContext) (*AttrList, string, uint32, bool, error) {
 	var carg1 *C.GMarkupParseContext // in, none, converted
 	var carg2 *C.PangoAttrList       // out, full, converted
-	var carg3 *C.gchar               // out, full, string
+	var carg3 *C.char                // out, full, string, casted *C.gchar
 	var carg4 C.gunichar             // out, full, casted
 	var cret  C.gboolean             // return
 	var _cerr *C.GError              // out, full, converted, nullable
@@ -3409,7 +3409,7 @@ func MarkupParserFinish(context *glib.MarkupParseContext) (*AttrList, string, ui
 	var _goerr    error
 
 	attrList = UnsafeAttrListFromGlibFull(unsafe.Pointer(carg2))
-	text = C.GoString((*C.gchar)(unsafe.Pointer(carg3)))
+	text = C.GoString((*C.char)(unsafe.Pointer(carg3)))
 	defer C.free(unsafe.Pointer(carg3))
 	accelChar = uint32(carg4)
 	if cret != 0 {
@@ -3499,15 +3499,15 @@ func NewMarkupParser(accelMarker uint32) *glib.MarkupParseContext {
 // Deprecated: (since 1.38.0) 
 func ParseEnum(typ gobject.Type, str string, warn bool) (int, string, bool) {
 	var carg1 C.GType    // in, none, casted, alias
-	var carg2 *C.gchar   // in, none, string, nullable-string
+	var carg2 *C.char    // in, none, string, nullable-string
 	var carg4 C.gboolean // in
-	var carg3 C.int      // out, full, casted
-	var carg5 *C.gchar   // out, full, string
+	var carg3 C.int      // out, full, casted, casted C.gint
+	var carg5 *C.char    // out, full, string, casted *C.gchar
 	var cret  C.gboolean // return
 
 	carg1 = C.GType(typ)
 	if str != "" {
-		carg2 = (*C.gchar)(unsafe.Pointer(C.CString(str)))
+		carg2 = (*C.char)(unsafe.Pointer(C.CString(str)))
 		defer C.free(unsafe.Pointer(carg2))
 	}
 	if warn {
@@ -3524,7 +3524,7 @@ func ParseEnum(typ gobject.Type, str string, warn bool) (int, string, bool) {
 	var goret          bool
 
 	value = int(carg3)
-	possibleValues = C.GoString((*C.gchar)(unsafe.Pointer(carg5)))
+	possibleValues = C.GoString((*C.char)(unsafe.Pointer(carg5)))
 	defer C.free(unsafe.Pointer(carg5))
 	if cret != 0 {
 		goret = true
@@ -3567,16 +3567,16 @@ func ParseEnum(typ gobject.Type, str string, warn bool) (int, string, bool) {
 // If any error happens, none of the output arguments are touched except
 // for @error.
 func ParseMarkup(markupText string, length int, accelMarker uint32) (*AttrList, string, uint32, bool, error) {
-	var carg1 *C.gchar         // in, none, string
-	var carg2 C.int            // in, none, casted
+	var carg1 *C.char          // in, none, string, casted *C.gchar
+	var carg2 C.int            // in, none, casted, casted C.gint
 	var carg3 C.gunichar       // in, none, casted
 	var carg4 *C.PangoAttrList // out, full, converted
-	var carg5 *C.gchar         // out, full, string
+	var carg5 *C.char          // out, full, string, casted *C.gchar
 	var carg6 C.gunichar       // out, full, casted
 	var cret  C.gboolean       // return
 	var _cerr *C.GError        // out, full, converted, nullable
 
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(markupText)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(markupText)))
 	defer C.free(unsafe.Pointer(carg1))
 	carg2 = C.int(length)
 	carg3 = C.gunichar(accelMarker)
@@ -3593,7 +3593,7 @@ func ParseMarkup(markupText string, length int, accelMarker uint32) (*AttrList, 
 	var _goerr    error
 
 	attrList = UnsafeAttrListFromGlibFull(unsafe.Pointer(carg4))
-	text = C.GoString((*C.gchar)(unsafe.Pointer(carg5)))
+	text = C.GoString((*C.char)(unsafe.Pointer(carg5)))
 	defer C.free(unsafe.Pointer(carg5))
 	accelChar = uint32(carg6)
 	if cret != 0 {
@@ -3626,12 +3626,12 @@ func ParseMarkup(markupText string, length int, accelMarker uint32) (*AttrList, 
 // "extra_expanded" and "ultra_expanded". Case variations are
 // ignored and the '_' characters may be omitted.
 func ParseStretch(str string, warn bool) (Stretch, bool) {
-	var carg1 *C.gchar       // in, none, string
+	var carg1 *C.char        // in, none, string, casted *C.gchar
 	var carg3 C.gboolean     // in
 	var carg2 C.PangoStretch // out, full, casted
 	var cret  C.gboolean     // return
 
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(str)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(str)))
 	defer C.free(unsafe.Pointer(carg1))
 	if warn {
 		carg3 = C.TRUE
@@ -3670,12 +3670,12 @@ func ParseStretch(str string, warn bool) (Stretch, bool) {
 // variations being
 // ignored.
 func ParseStyle(str string, warn bool) (Style, bool) {
-	var carg1 *C.gchar     // in, none, string
+	var carg1 *C.char      // in, none, string, casted *C.gchar
 	var carg3 C.gboolean   // in
 	var carg2 C.PangoStyle // out, full, casted
 	var cret  C.gboolean   // return
 
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(str)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(str)))
 	defer C.free(unsafe.Pointer(carg1))
 	if warn {
 		carg3 = C.TRUE
@@ -3714,12 +3714,12 @@ func ParseStyle(str string, warn bool) (Style, bool) {
 // "petite-caps", "all-petite-caps", "unicase" and "title-caps",
 // case variations being ignored.
 func ParseVariant(str string, warn bool) (Variant, bool) {
-	var carg1 *C.gchar       // in, none, string
+	var carg1 *C.char        // in, none, string, casted *C.gchar
 	var carg3 C.gboolean     // in
 	var carg2 C.PangoVariant // out, full, casted
 	var cret  C.gboolean     // return
 
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(str)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(str)))
 	defer C.free(unsafe.Pointer(carg1))
 	if warn {
 		carg3 = C.TRUE
@@ -3758,12 +3758,12 @@ func ParseVariant(str string, warn bool) (Variant, bool) {
 // "ultrabold", "bold", "normal", "light", "ultraleight"
 // and integers. Case variations are ignored.
 func ParseWeight(str string, warn bool) (Weight, bool) {
-	var carg1 *C.gchar      // in, none, string
+	var carg1 *C.char       // in, none, string, casted *C.gchar
 	var carg3 C.gboolean    // in
 	var carg2 C.PangoWeight // out, full, casted
 	var cret  C.gboolean    // return
 
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(str)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(str)))
 	defer C.free(unsafe.Pointer(carg1))
 	if warn {
 		carg3 = C.TRUE
@@ -3812,12 +3812,12 @@ func ParseWeight(str string, warn bool) (Weight, bool) {
 // so you need to subtract the item offset from their indices before
 // calling [func@Pango.shape].
 func Shape(text string, length int, analysis *Analysis, glyphs *GlyphString) {
-	var carg1 *C.gchar            // in, none, string
-	var carg2 C.int               // in, none, casted
+	var carg1 *C.char             // in, none, string, casted *C.gchar
+	var carg2 C.int               // in, none, casted, casted C.gint
 	var carg3 *C.PangoAnalysis    // in, none, converted
 	var carg4 *C.PangoGlyphString // in, none, converted
 
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(text)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(text)))
 	defer C.free(unsafe.Pointer(carg1))
 	carg2 = C.int(length)
 	carg3 = (*C.PangoAnalysis)(UnsafeAnalysisToGlibNone(analysis))
@@ -3863,18 +3863,18 @@ func Shape(text string, length int, analysis *Analysis, glyphs *GlyphString) {
 // to subtract the item offset from their indices before calling
 // [func@Pango.shape_full].
 func ShapeFull(itemText string, itemLength int, paragraphText string, paragraphLength int, analysis *Analysis, glyphs *GlyphString) {
-	var carg1 *C.gchar            // in, none, string
-	var carg2 C.int               // in, none, casted
-	var carg3 *C.gchar            // in, none, string, nullable-string
-	var carg4 C.int               // in, none, casted
+	var carg1 *C.char             // in, none, string, casted *C.gchar
+	var carg2 C.int               // in, none, casted, casted C.gint
+	var carg3 *C.char             // in, none, string, nullable-string
+	var carg4 C.int               // in, none, casted, casted C.gint
 	var carg5 *C.PangoAnalysis    // in, none, converted
 	var carg6 *C.PangoGlyphString // in, none, converted
 
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(itemText)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(itemText)))
 	defer C.free(unsafe.Pointer(carg1))
 	carg2 = C.int(itemLength)
 	if paragraphText != "" {
-		carg3 = (*C.gchar)(unsafe.Pointer(C.CString(paragraphText)))
+		carg3 = (*C.char)(unsafe.Pointer(C.CString(paragraphText)))
 		defer C.free(unsafe.Pointer(carg3))
 	}
 	carg4 = C.int(paragraphLength)
@@ -3917,15 +3917,15 @@ func ShapeFull(itemText string, itemLength int, paragraphText string, paragraphL
 // [func@Pango.shape_with_flags].
 func ShapeItem(item *Item, paragraphText string, paragraphLength int, logAttrs *LogAttr, glyphs *GlyphString, flags ShapeFlags) {
 	var carg1 *C.PangoItem        // in, none, converted
-	var carg2 *C.gchar            // in, none, string, nullable-string
-	var carg3 C.int               // in, none, casted
+	var carg2 *C.char             // in, none, string, nullable-string
+	var carg3 C.int               // in, none, casted, casted C.gint
 	var carg4 *C.PangoLogAttr     // in, none, converted, nullable
 	var carg5 *C.PangoGlyphString // in, none, converted
 	var carg6 C.PangoShapeFlags   // in, none, casted
 
 	carg1 = (*C.PangoItem)(UnsafeItemToGlibNone(item))
 	if paragraphText != "" {
-		carg2 = (*C.gchar)(unsafe.Pointer(C.CString(paragraphText)))
+		carg2 = (*C.char)(unsafe.Pointer(C.CString(paragraphText)))
 		defer C.free(unsafe.Pointer(carg2))
 	}
 	carg3 = C.int(paragraphLength)
@@ -3977,19 +3977,19 @@ func ShapeItem(item *Item, paragraphText string, paragraphLength int, logAttrs *
 // to subtract the item offset from their indices before calling
 // [func@Pango.shape_with_flags].
 func ShapeWithFlags(itemText string, itemLength int, paragraphText string, paragraphLength int, analysis *Analysis, glyphs *GlyphString, flags ShapeFlags) {
-	var carg1 *C.gchar            // in, none, string
-	var carg2 C.int               // in, none, casted
-	var carg3 *C.gchar            // in, none, string, nullable-string
-	var carg4 C.int               // in, none, casted
+	var carg1 *C.char             // in, none, string, casted *C.gchar
+	var carg2 C.int               // in, none, casted, casted C.gint
+	var carg3 *C.char             // in, none, string, nullable-string
+	var carg4 C.int               // in, none, casted, casted C.gint
 	var carg5 *C.PangoAnalysis    // in, none, converted
 	var carg6 *C.PangoGlyphString // in, none, converted
 	var carg7 C.PangoShapeFlags   // in, none, casted
 
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(itemText)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(itemText)))
 	defer C.free(unsafe.Pointer(carg1))
 	carg2 = C.int(itemLength)
 	if paragraphText != "" {
-		carg3 = (*C.gchar)(unsafe.Pointer(C.CString(paragraphText)))
+		carg3 = (*C.char)(unsafe.Pointer(C.CString(paragraphText)))
 		defer C.free(unsafe.Pointer(carg3))
 	}
 	carg4 = C.int(paragraphLength)
@@ -4022,10 +4022,10 @@ func ShapeWithFlags(itemText string, itemLength int, paragraphText string, parag
 //
 // Deprecated: (since 1.38.0) 
 func SplitFileList(str string) []string {
-	var carg1 *C.gchar // in, none, string
+	var carg1 *C.char  // in, none, string, casted *C.gchar
 	var cret  **C.char // return, transfer: full, C Pointers: 2, Name: array[utf8], scope: , array (inner: *typesystem.StringPrimitive, zero-terminated)
 
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(str)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(str)))
 	defer C.free(unsafe.Pointer(carg1))
 
 	cret = C.pango_split_file_list(carg1)
@@ -4062,14 +4062,14 @@ func SplitFileList(str string) []string {
 // Note that it is better to pass -1 for @offset and use [func@Pango.attr_break]
 // to apply attributes to the whole paragraph.
 func TailorBreak(text string, length int, analysis *Analysis, offset int, attrs []LogAttr) {
-	var carg1 *C.gchar         // in, none, string
-	var carg2 C.int            // in, none, casted
+	var carg1 *C.char          // in, none, string, casted *C.gchar
+	var carg2 C.int            // in, none, casted, casted C.gint
 	var carg3 *C.PangoAnalysis // in, none, converted
-	var carg4 C.int            // in, none, casted
+	var carg4 C.int            // in, none, casted, casted C.gint
 	var carg5 *C.PangoLogAttr  // in, transfer: none, C Pointers: 1, Name: array[LogAttr], array (inner: *typesystem.Record, length-by: carg6)
 	var carg6 C.int            // implicit
 
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(text)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(text)))
 	defer C.free(unsafe.Pointer(carg1))
 	carg2 = C.int(length)
 	carg3 = (*C.PangoAnalysis)(UnsafeAnalysisToGlibNone(analysis))
@@ -4101,10 +4101,10 @@ func TailorBreak(text string, length int, analysis *Analysis, offset int, attrs 
 //
 // Deprecated: (since 1.38.0) 
 func TrimString(str string) string {
-	var carg1 *C.gchar // in, none, string
-	var cret  *C.gchar // return, full, string
+	var carg1 *C.char // in, none, string, casted *C.gchar
+	var cret  *C.char // return, full, string, casted *C.gchar
 
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(str)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(str)))
 	defer C.free(unsafe.Pointer(carg1))
 
 	cret = C.pango_trim_string(carg1)
@@ -4112,7 +4112,7 @@ func TrimString(str string) string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 	defer C.free(unsafe.Pointer(cret))
 
 	return goret
@@ -4168,10 +4168,10 @@ func UnicharDirection(ch uint32) Direction {
 // The conversion is done by multiplying @d by %PANGO_SCALE and
 // rounding the result to nearest integer.
 func UnitsFromDouble(d float64) int {
-	var carg1 C.gdouble // in, none, casted
-	var cret  C.int     // return, none, casted
+	var carg1 C.double // in, none, casted, casted C.gdouble
+	var cret  C.int    // return, none, casted, casted C.gint
 
-	carg1 = C.gdouble(d)
+	carg1 = C.double(d)
 
 	cret = C.pango_units_from_double(carg1)
 	runtime.KeepAlive(d)
@@ -4197,8 +4197,8 @@ func UnitsFromDouble(d float64) int {
 // 
 // The conversion is done by dividing @i by %PANGO_SCALE.
 func UnitsToDouble(i int) float64 {
-	var carg1 C.int     // in, none, casted
-	var cret  C.gdouble // return, none, casted
+	var carg1 C.int    // in, none, casted, casted C.gint
+	var cret  C.double // return, none, casted, casted C.gdouble
 
 	carg1 = C.int(i)
 
@@ -4223,7 +4223,7 @@ func UnitsToDouble(i int) float64 {
 // returns the encoded version available at compile-time. A version
 // number can be encoded into an integer using PANGO_VERSION_ENCODE().
 func Version() int {
-	var cret C.int // return, none, casted
+	var cret C.int // return, none, casted, casted C.gint
 
 	cret = C.pango_version()
 
@@ -4264,10 +4264,10 @@ func Version() int {
 // 
 // For compile-time version checking use PANGO_VERSION_CHECK().
 func VersionCheck(requiredMajor int, requiredMinor int, requiredMicro int) string {
-	var carg1 C.int    // in, none, casted
-	var carg2 C.int    // in, none, casted
-	var carg3 C.int    // in, none, casted
-	var cret  *C.gchar // return, none, string
+	var carg1 C.int   // in, none, casted, casted C.gint
+	var carg2 C.int   // in, none, casted, casted C.gint
+	var carg3 C.int   // in, none, casted, casted C.gint
+	var cret  *C.char // return, none, string, casted *C.gchar
 
 	carg1 = C.int(requiredMajor)
 	carg2 = C.int(requiredMinor)
@@ -4280,7 +4280,7 @@ func VersionCheck(requiredMajor int, requiredMinor int, requiredMicro int) strin
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -4295,13 +4295,13 @@ func VersionCheck(requiredMajor int, requiredMinor int, requiredMicro int) strin
 // This is similar to the macro %PANGO_VERSION_STRING except that the
 // macro returns the version available at compile-time.
 func VersionString() string {
-	var cret *C.gchar // return, none, string
+	var cret *C.char // return, none, string, casted *C.gchar
 
 	cret = C.pango_version_string()
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -5437,7 +5437,7 @@ func (coverage *CoverageInstance) Copy() Coverage {
 // Determine whether a particular index is covered by @coverage.
 func (coverage *CoverageInstance) Get(index_ int) CoverageLevel {
 	var carg0 *C.PangoCoverage     // in, none, converted
-	var carg1 C.int                // in, none, casted
+	var carg1 C.int                // in, none, casted, casted C.gint
 	var cret  C.PangoCoverageLevel // return, none, casted
 
 	carg0 = (*C.PangoCoverage)(UnsafeCoverageToGlibNone(coverage))
@@ -5487,7 +5487,7 @@ func (coverage *CoverageInstance) Max(other Coverage) {
 // Modify a particular index within @coverage
 func (coverage *CoverageInstance) Set(index_ int, level CoverageLevel) {
 	var carg0 *C.PangoCoverage     // in, none, converted
-	var carg1 C.int                // in, none, casted
+	var carg1 C.int                // in, none, casted, casted C.gint
 	var carg2 C.PangoCoverageLevel // in, none, casted
 
 	carg0 = (*C.PangoCoverage)(UnsafeCoverageToGlibNone(coverage))
@@ -6188,7 +6188,7 @@ func (face *FontFaceInstance) Describe() *FontDescription {
 // face for the same style).
 func (face *FontFaceInstance) GetFaceName() string {
 	var carg0 *C.PangoFontFace // in, none, converted
-	var cret  *C.gchar         // return, none, string
+	var cret  *C.char          // return, none, string, casted *C.gchar
 
 	carg0 = (*C.PangoFontFace)(UnsafeFontFaceToGlibNone(face))
 
@@ -6197,7 +6197,7 @@ func (face *FontFaceInstance) GetFaceName() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -6384,12 +6384,12 @@ func UnsafeFontFamilyToGlibFull(c FontFamily) unsafe.Pointer {
 // Gets the `PangoFontFace` of @family with the given name.
 func (family *FontFamilyInstance) GetFace(name string) FontFace {
 	var carg0 *C.PangoFontFamily // in, none, converted
-	var carg1 *C.gchar           // in, none, string, nullable-string
+	var carg1 *C.char            // in, none, string, nullable-string
 	var cret  *C.PangoFontFace   // return, none, converted
 
 	carg0 = (*C.PangoFontFamily)(UnsafeFontFamilyToGlibNone(family))
 	if name != "" {
-		carg1 = (*C.gchar)(unsafe.Pointer(C.CString(name)))
+		carg1 = (*C.char)(unsafe.Pointer(C.CString(name)))
 		defer C.free(unsafe.Pointer(carg1))
 	}
 
@@ -6416,7 +6416,7 @@ func (family *FontFamilyInstance) GetFace(name string) FontFace {
 // this family is desired.
 func (family *FontFamilyInstance) GetName() string {
 	var carg0 *C.PangoFontFamily // in, none, converted
-	var cret  *C.gchar           // return, none, string
+	var cret  *C.char            // return, none, string, casted *C.gchar
 
 	carg0 = (*C.PangoFontFamily)(UnsafeFontFamilyToGlibNone(family))
 
@@ -6425,7 +6425,7 @@ func (family *FontFamilyInstance) GetName() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -6690,12 +6690,12 @@ func UnsafeFontMapToGlibFull(c FontMap) unsafe.Pointer {
 // fonts with the same name.
 func (fontmap *FontMapInstance) AddFontFile(filename string) (bool, error) {
 	var carg0 *C.PangoFontMap // in, none, converted
-	var carg1 *C.gchar        // in, none, string
+	var carg1 *C.char         // in, none, string, casted *C.gchar
 	var cret  C.gboolean      // return
 	var _cerr *C.GError       // out, full, converted, nullable
 
 	carg0 = (*C.PangoFontMap)(UnsafeFontMapToGlibNone(fontmap))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(filename)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(filename)))
 	defer C.free(unsafe.Pointer(carg1))
 
 	cret = C.pango_font_map_add_font_file(carg0, carg1, &_cerr)
@@ -6776,11 +6776,11 @@ func (fontmap *FontMapInstance) CreateContext() Context {
 // Gets a font family by name.
 func (fontmap *FontMapInstance) GetFamily(name string) FontFamily {
 	var carg0 *C.PangoFontMap    // in, none, converted
-	var carg1 *C.gchar           // in, none, string
+	var carg1 *C.char            // in, none, string, casted *C.gchar
 	var cret  *C.PangoFontFamily // return, none, converted
 
 	carg0 = (*C.PangoFontMap)(UnsafeFontMapToGlibNone(fontmap))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(name)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(name)))
 	defer C.free(unsafe.Pointer(carg1))
 
 	cret = C.pango_font_map_get_family(carg0, carg1)
@@ -6920,19 +6920,19 @@ func (fontmap *FontMapInstance) LoadFontset(context Context, desc *FontDescripti
 func (fontmap *FontMapInstance) ReloadFont(font Font, scale float64, context Context, variations string) Font {
 	var carg0 *C.PangoFontMap // in, none, converted
 	var carg1 *C.PangoFont    // in, none, converted
-	var carg2 C.gdouble       // in, none, casted
+	var carg2 C.double        // in, none, casted, casted C.gdouble
 	var carg3 *C.PangoContext // in, none, converted, nullable
-	var carg4 *C.gchar        // in, none, string, nullable-string
+	var carg4 *C.char         // in, none, string, nullable-string
 	var cret  *C.PangoFont    // return, full, converted
 
 	carg0 = (*C.PangoFontMap)(UnsafeFontMapToGlibNone(fontmap))
 	carg1 = (*C.PangoFont)(UnsafeFontToGlibNone(font))
-	carg2 = C.gdouble(scale)
+	carg2 = C.double(scale)
 	if context != nil {
 		carg3 = (*C.PangoContext)(UnsafeContextToGlibNone(context))
 	}
 	if variations != "" {
-		carg4 = (*C.gchar)(unsafe.Pointer(C.CString(variations)))
+		carg4 = (*C.char)(unsafe.Pointer(C.CString(variations)))
 		defer C.free(unsafe.Pointer(carg4))
 	}
 
@@ -7245,7 +7245,7 @@ func (fontset *FontsetSimpleInstance) Append(font Font) {
 // Returns the number of fonts in the fontset.
 func (fontset *FontsetSimpleInstance) Size() int {
 	var carg0 *C.PangoFontsetSimple // in, none, converted
-	var cret  C.int                 // return, none, casted
+	var cret  C.int                 // return, none, casted, casted C.gint
 
 	carg0 = (*C.PangoFontsetSimple)(UnsafeFontsetSimpleToGlibNone(fontset))
 
@@ -8463,7 +8463,7 @@ func (layout *LayoutInstance) GetAutoDir() bool {
 // Gets the Y position of baseline of the first line in @layout.
 func (layout *LayoutInstance) GetBaseline() int {
 	var carg0 *C.PangoLayout // in, none, converted
-	var cret  C.int          // return, none, casted
+	var cret  C.int          // return, none, casted, casted C.gint
 
 	carg0 = (*C.PangoLayout)(UnsafeLayoutToGlibNone(layout))
 
@@ -8501,7 +8501,7 @@ func (layout *LayoutInstance) GetBaseline() int {
 // &lt;/picture&gt;
 func (layout *LayoutInstance) GetCaretPos(index_ int) (Rectangle, Rectangle) {
 	var carg0 *C.PangoLayout   // in, none, converted
-	var carg1 C.int            // in, none, casted
+	var carg1 C.int            // in, none, casted, casted C.gint
 	var carg2 C.PangoRectangle // out, transfer: none, C Pointers: 0, Name: Rectangle, optional, caller-allocates
 	var carg3 C.PangoRectangle // out, transfer: none, C Pointers: 0, Name: Rectangle, optional, caller-allocates
 
@@ -8534,7 +8534,7 @@ func (layout *LayoutInstance) GetCaretPos(index_ int) (Rectangle, Rectangle) {
 // the text of @layout.
 func (layout *LayoutInstance) GetCharacterCount() int {
 	var carg0 *C.PangoLayout // in, none, converted
-	var cret  C.int          // return, none, casted
+	var cret  C.gint         // return, none, casted
 
 	carg0 = (*C.PangoLayout)(UnsafeLayoutToGlibNone(layout))
 
@@ -8610,7 +8610,7 @@ func (layout *LayoutInstance) GetContext() Context {
 // will insert it at the end.
 func (layout *LayoutInstance) GetCursorPos(index_ int) (Rectangle, Rectangle) {
 	var carg0 *C.PangoLayout   // in, none, converted
-	var carg1 C.int            // in, none, casted
+	var carg1 C.int            // in, none, casted, casted C.gint
 	var carg2 C.PangoRectangle // out, transfer: none, C Pointers: 0, Name: Rectangle, optional, caller-allocates
 	var carg3 C.PangoRectangle // out, transfer: none, C Pointers: 0, Name: Rectangle, optional, caller-allocates
 
@@ -8647,7 +8647,7 @@ func (layout *LayoutInstance) GetCursorPos(index_ int) (Rectangle, Rectangle) {
 // Gets the text direction at the given character position in @layout.
 func (layout *LayoutInstance) GetDirection(index int) Direction {
 	var carg0 *C.PangoLayout   // in, none, converted
-	var carg1 C.int            // in, none, casted
+	var carg1 C.int            // in, none, casted, casted C.gint
 	var cret  C.PangoDirection // return, none, casted
 
 	carg0 = (*C.PangoLayout)(UnsafeLayoutToGlibNone(layout))
@@ -8764,7 +8764,7 @@ func (layout *LayoutInstance) GetFontDescription() *FontDescription {
 // See [method@Pango.Layout.set_height] for details.
 func (layout *LayoutInstance) GetHeight() int {
 	var carg0 *C.PangoLayout // in, none, converted
-	var cret  C.int          // return, none, casted
+	var cret  C.int          // return, none, casted, casted C.gint
 
 	carg0 = (*C.PangoLayout)(UnsafeLayoutToGlibNone(layout))
 
@@ -8788,7 +8788,7 @@ func (layout *LayoutInstance) GetHeight() int {
 // A negative value indicates a hanging indentation.
 func (layout *LayoutInstance) GetIndent() int {
 	var carg0 *C.PangoLayout // in, none, converted
-	var cret  C.int          // return, none, casted
+	var cret  C.int          // return, none, casted, casted C.gint
 
 	carg0 = (*C.PangoLayout)(UnsafeLayoutToGlibNone(layout))
 
@@ -8891,7 +8891,7 @@ func (layout *LayoutInstance) GetJustifyLastLine() bool {
 // plan to modify the contents of the line (glyphs, glyph widths, etc.).
 func (layout *LayoutInstance) GetLine(line int) *LayoutLine {
 	var carg0 *C.PangoLayout     // in, none, converted
-	var carg1 C.int              // in, none, casted
+	var carg1 C.int              // in, none, casted, casted C.gint
 	var cret  *C.PangoLayoutLine // return, none, converted
 
 	carg0 = (*C.PangoLayout)(UnsafeLayoutToGlibNone(layout))
@@ -8916,7 +8916,7 @@ func (layout *LayoutInstance) GetLine(line int) *LayoutLine {
 // Retrieves the count of lines for the @layout.
 func (layout *LayoutInstance) GetLineCount() int {
 	var carg0 *C.PangoLayout // in, none, converted
-	var cret  C.int          // return, none, casted
+	var cret  C.int          // return, none, casted, casted C.gint
 
 	carg0 = (*C.PangoLayout)(UnsafeLayoutToGlibNone(layout))
 
@@ -8948,7 +8948,7 @@ func (layout *LayoutInstance) GetLineCount() int {
 // (glyphs, glyph widths, etc.).
 func (layout *LayoutInstance) GetLineReadonly(line int) *LayoutLine {
 	var carg0 *C.PangoLayout     // in, none, converted
-	var carg1 C.int              // in, none, casted
+	var carg1 C.int              // in, none, casted, casted C.gint
 	var cret  *C.PangoLayoutLine // return, none, converted
 
 	carg0 = (*C.PangoLayout)(UnsafeLayoutToGlibNone(layout))
@@ -8975,7 +8975,7 @@ func (layout *LayoutInstance) GetLineReadonly(line int) *LayoutLine {
 // See [method@Pango.Layout.set_line_spacing].
 func (layout *LayoutInstance) GetLineSpacing() float32 {
 	var carg0 *C.PangoLayout // in, none, converted
-	var cret  C.gfloat       // return, none, casted
+	var cret  C.float        // return, none, casted, casted C.gfloat
 
 	carg0 = (*C.PangoLayout)(UnsafeLayoutToGlibNone(layout))
 
@@ -9009,7 +9009,7 @@ func (layout *LayoutInstance) GetLineSpacing() float32 {
 // the first character and the position after the last character.
 func (layout *LayoutInstance) GetLogAttrsReadonly() (int, []LogAttr) {
 	var carg0 *C.PangoLayout  // in, none, converted
-	var carg1 C.int           // out, full, casted
+	var carg1 C.gint          // out, full, casted
 	var cret  *C.PangoLogAttr // return, transfer: none, C Pointers: 1, Name: array[LogAttr], scope: , array (inner: *typesystem.Record)
 
 	carg0 = (*C.PangoLayout)(UnsafeLayoutToGlibNone(layout))
@@ -9079,8 +9079,8 @@ func (layout *LayoutInstance) GetPixelExtents() (Rectangle, Rectangle) {
 // around [method@Pango.Layout.get_pixel_extents].
 func (layout *LayoutInstance) GetPixelSize() (int, int) {
 	var carg0 *C.PangoLayout // in, none, converted
-	var carg1 C.int          // out, full, casted
-	var carg2 C.int          // out, full, casted
+	var carg1 C.int          // out, full, casted, casted C.gint
+	var carg2 C.int          // out, full, casted, casted C.gint
 
 	carg0 = (*C.PangoLayout)(UnsafeLayoutToGlibNone(layout))
 
@@ -9167,8 +9167,8 @@ func (layout *LayoutInstance) GetSingleParagraphMode() bool {
 // This is simply a convenience function around [method@Pango.Layout.get_extents].
 func (layout *LayoutInstance) GetSize() (int, int) {
 	var carg0 *C.PangoLayout // in, none, converted
-	var carg1 C.int          // out, full, casted
-	var carg2 C.int          // out, full, casted
+	var carg1 C.int          // out, full, casted, casted C.gint
+	var carg2 C.int          // out, full, casted, casted C.gint
 
 	carg0 = (*C.PangoLayout)(UnsafeLayoutToGlibNone(layout))
 
@@ -9192,7 +9192,7 @@ func (layout *LayoutInstance) GetSize() (int, int) {
 // Gets the amount of spacing between the lines of the layout.
 func (layout *LayoutInstance) GetSpacing() int {
 	var carg0 *C.PangoLayout // in, none, converted
-	var cret  C.int          // return, none, casted
+	var cret  C.int          // return, none, casted, casted C.gint
 
 	carg0 = (*C.PangoLayout)(UnsafeLayoutToGlibNone(layout))
 
@@ -9243,7 +9243,7 @@ func (layout *LayoutInstance) GetTabs() *TabArray {
 // The returned text should not be freed or modified.
 func (layout *LayoutInstance) GetText() string {
 	var carg0 *C.PangoLayout // in, none, converted
-	var cret  *C.gchar       // return, none, string
+	var cret  *C.char        // return, none, string, casted *C.gchar
 
 	carg0 = (*C.PangoLayout)(UnsafeLayoutToGlibNone(layout))
 
@@ -9252,7 +9252,7 @@ func (layout *LayoutInstance) GetText() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -9270,7 +9270,7 @@ func (layout *LayoutInstance) GetText() string {
 // certain font supports all the characters in the string.
 func (layout *LayoutInstance) GetUnknownGlyphsCount() int {
 	var carg0 *C.PangoLayout // in, none, converted
-	var cret  C.int          // return, none, casted
+	var cret  C.int          // return, none, casted, casted C.gint
 
 	carg0 = (*C.PangoLayout)(UnsafeLayoutToGlibNone(layout))
 
@@ -9292,7 +9292,7 @@ func (layout *LayoutInstance) GetUnknownGlyphsCount() int {
 // Gets the width to which the lines of the `PangoLayout` should wrap.
 func (layout *LayoutInstance) GetWidth() int {
 	var carg0 *C.PangoLayout // in, none, converted
-	var cret  C.int          // return, none, casted
+	var cret  C.int          // return, none, casted, casted C.gint
 
 	carg0 = (*C.PangoLayout)(UnsafeLayoutToGlibNone(layout))
 
@@ -9352,10 +9352,10 @@ func (layout *LayoutInstance) GetWrap() WrapMode {
 // The X position is measured from the left edge of the line.
 func (layout *LayoutInstance) IndexToLineX(index_ int, trailing bool) (int, int) {
 	var carg0 *C.PangoLayout // in, none, converted
-	var carg1 C.int          // in, none, casted
+	var carg1 C.int          // in, none, casted, casted C.gint
 	var carg2 C.gboolean     // in
-	var carg3 C.int          // out, full, casted
-	var carg4 C.int          // out, full, casted
+	var carg3 C.int          // out, full, casted, casted C.gint
+	var carg4 C.int          // out, full, casted, casted C.gint
 
 	carg0 = (*C.PangoLayout)(UnsafeLayoutToGlibNone(layout))
 	carg1 = C.int(index_)
@@ -9396,7 +9396,7 @@ func (layout *LayoutInstance) IndexToLineX(index_ int, trailing bool) (int, int)
 // is right-to-left, then `pos-&gt;width` will be negative.
 func (layout *LayoutInstance) IndexToPos(index_ int) Rectangle {
 	var carg0 *C.PangoLayout   // in, none, converted
-	var carg1 C.int            // in, none, casted
+	var carg1 C.int            // in, none, casted, casted C.gint
 	var carg2 C.PangoRectangle // out, transfer: none, C Pointers: 0, Name: Rectangle, caller-allocates
 
 	carg0 = (*C.PangoLayout)(UnsafeLayoutToGlibNone(layout))
@@ -9517,11 +9517,11 @@ func (layout *LayoutInstance) IsWrapped() bool {
 func (layout *LayoutInstance) MoveCursorVisually(strong bool, oldIndex int, oldTrailing int, direction int) (int, int) {
 	var carg0 *C.PangoLayout // in, none, converted
 	var carg1 C.gboolean     // in
-	var carg2 C.int          // in, none, casted
-	var carg3 C.int          // in, none, casted
-	var carg4 C.int          // in, none, casted
-	var carg5 C.int          // out, full, casted
-	var carg6 C.int          // out, full, casted
+	var carg2 C.int          // in, none, casted, casted C.gint
+	var carg3 C.int          // in, none, casted, casted C.gint
+	var carg4 C.int          // in, none, casted, casted C.gint
+	var carg5 C.int          // out, full, casted, casted C.gint
+	var carg6 C.int          // out, full, casted, casted C.gint
 
 	carg0 = (*C.PangoLayout)(UnsafeLayoutToGlibNone(layout))
 	if strong {
@@ -9758,7 +9758,7 @@ func (layout *LayoutInstance) SetFontDescription(desc *FontDescription) {
 // future.
 func (layout *LayoutInstance) SetHeight(height int) {
 	var carg0 *C.PangoLayout // in, none, converted
-	var carg1 C.int          // in, none, casted
+	var carg1 C.int          // in, none, casted, casted C.gint
 
 	carg0 = (*C.PangoLayout)(UnsafeLayoutToGlibNone(layout))
 	carg1 = C.int(height)
@@ -9786,7 +9786,7 @@ func (layout *LayoutInstance) SetHeight(height int) {
 // The default value is 0.
 func (layout *LayoutInstance) SetIndent(indent int) {
 	var carg0 *C.PangoLayout // in, none, converted
-	var carg1 C.int          // in, none, casted
+	var carg1 C.int          // in, none, casted, casted C.gint
 
 	carg0 = (*C.PangoLayout)(UnsafeLayoutToGlibNone(layout))
 	carg1 = C.int(indent)
@@ -9884,10 +9884,10 @@ func (layout *LayoutInstance) SetJustifyLastLine(justify bool) {
 // property, see [func@Pango.attr_line_height_new].
 func (layout *LayoutInstance) SetLineSpacing(factor float32) {
 	var carg0 *C.PangoLayout // in, none, converted
-	var carg1 C.gfloat       // in, none, casted
+	var carg1 C.float        // in, none, casted, casted C.gfloat
 
 	carg0 = (*C.PangoLayout)(UnsafeLayoutToGlibNone(layout))
-	carg1 = C.gfloat(factor)
+	carg1 = C.float(factor)
 
 	C.pango_layout_set_line_spacing(carg0, carg1)
 	runtime.KeepAlive(layout)
@@ -9912,11 +9912,11 @@ func (layout *LayoutInstance) SetLineSpacing(factor float32) {
 // but the markup text isn't scanned for accelerators.
 func (layout *LayoutInstance) SetMarkup(markup string, length int) {
 	var carg0 *C.PangoLayout // in, none, converted
-	var carg1 *C.gchar       // in, none, string
-	var carg2 C.int          // in, none, casted
+	var carg1 *C.char        // in, none, string, casted *C.gchar
+	var carg2 C.int          // in, none, casted, casted C.gint
 
 	carg0 = (*C.PangoLayout)(UnsafeLayoutToGlibNone(layout))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(markup)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(markup)))
 	defer C.free(unsafe.Pointer(carg1))
 	carg2 = C.int(length)
 
@@ -9955,13 +9955,13 @@ func (layout *LayoutInstance) SetMarkup(markup string, length int) {
 // literal @accel_marker character.
 func (layout *LayoutInstance) SetMarkupWithAccel(markup string, length int, accelMarker uint32) uint32 {
 	var carg0 *C.PangoLayout // in, none, converted
-	var carg1 *C.gchar       // in, none, string
-	var carg2 C.int          // in, none, casted
+	var carg1 *C.char        // in, none, string, casted *C.gchar
+	var carg2 C.int          // in, none, casted, casted C.gint
 	var carg3 C.gunichar     // in, none, casted
 	var carg4 C.gunichar     // out, full, casted
 
 	carg0 = (*C.PangoLayout)(UnsafeLayoutToGlibNone(layout))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(markup)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(markup)))
 	defer C.free(unsafe.Pointer(carg1))
 	carg2 = C.int(length)
 	carg3 = C.gunichar(accelMarker)
@@ -10031,7 +10031,7 @@ func (layout *LayoutInstance) SetSingleParagraphMode(setting bool) {
 // property, see [func@Pango.attr_line_height_new].
 func (layout *LayoutInstance) SetSpacing(spacing int) {
 	var carg0 *C.PangoLayout // in, none, converted
-	var carg1 C.int          // in, none, casted
+	var carg1 C.int          // in, none, casted, casted C.gint
 
 	carg0 = (*C.PangoLayout)(UnsafeLayoutToGlibNone(layout))
 	carg1 = C.int(spacing)
@@ -10096,11 +10096,11 @@ func (layout *LayoutInstance) SetTabs(tabs *TabArray) {
 // not clear attributes.
 func (layout *LayoutInstance) SetText(text string, length int) {
 	var carg0 *C.PangoLayout // in, none, converted
-	var carg1 *C.gchar       // in, none, string
-	var carg2 C.int          // in, none, casted
+	var carg1 *C.char        // in, none, string, casted *C.gchar
+	var carg2 C.int          // in, none, casted, casted C.gint
 
 	carg0 = (*C.PangoLayout)(UnsafeLayoutToGlibNone(layout))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(text)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(text)))
 	defer C.free(unsafe.Pointer(carg1))
 	carg2 = C.int(length)
 
@@ -10123,7 +10123,7 @@ func (layout *LayoutInstance) SetText(text string, length int) {
 // The default value is -1: no width set.
 func (layout *LayoutInstance) SetWidth(width int) {
 	var carg0 *C.PangoLayout // in, none, converted
-	var carg1 C.int          // in, none, casted
+	var carg1 C.int          // in, none, casted, casted C.gint
 
 	carg0 = (*C.PangoLayout)(UnsafeLayoutToGlibNone(layout))
 	carg1 = C.int(width)
@@ -10182,13 +10182,13 @@ func (layout *LayoutInstance) SetWrap(wrap WrapMode) {
 func (layout *LayoutInstance) WriteToFile(flags LayoutSerializeFlags, filename string) (bool, error) {
 	var carg0 *C.PangoLayout              // in, none, converted
 	var carg1 C.PangoLayoutSerializeFlags // in, none, casted
-	var carg2 *C.gchar                    // in, none, string
+	var carg2 *C.char                     // in, none, string, casted *C.gchar
 	var cret  C.gboolean                  // return
 	var _cerr *C.GError                   // out, full, converted, nullable
 
 	carg0 = (*C.PangoLayout)(UnsafeLayoutToGlibNone(layout))
 	carg1 = C.PangoLayoutSerializeFlags(flags)
-	carg2 = (*C.gchar)(unsafe.Pointer(C.CString(filename)))
+	carg2 = (*C.char)(unsafe.Pointer(C.CString(filename)))
 	defer C.free(unsafe.Pointer(carg2))
 
 	cret = C.pango_layout_write_to_file(carg0, carg1, carg2, &_cerr)
@@ -10236,10 +10236,10 @@ func (layout *LayoutInstance) WriteToFile(flags LayoutSerializeFlags, filename s
 // %FALSE; on an exact hit, it returns %TRUE.
 func (layout *LayoutInstance) XYToIndex(x int, y int) (int, int, bool) {
 	var carg0 *C.PangoLayout // in, none, converted
-	var carg1 C.int          // in, none, casted
-	var carg2 C.int          // in, none, casted
-	var carg3 C.int          // out, full, casted
-	var carg4 C.int          // out, full, casted
+	var carg1 C.int          // in, none, casted, casted C.gint
+	var carg2 C.int          // in, none, casted, casted C.gint
+	var carg3 C.int          // out, full, casted, casted C.gint
+	var carg4 C.int          // out, full, casted, casted C.gint
 	var cret  C.gboolean     // return
 
 	carg0 = (*C.PangoLayout)(UnsafeLayoutToGlibNone(layout))
@@ -10643,10 +10643,10 @@ func (renderer *RendererInstance) Deactivate() {
 // Use [method@Pango.Renderer.activate] to activate a renderer.
 func (renderer *RendererInstance) DrawErrorUnderline(x int, y int, width int, height int) {
 	var carg0 *C.PangoRenderer // in, none, converted
-	var carg1 C.int            // in, none, casted
-	var carg2 C.int            // in, none, casted
-	var carg3 C.int            // in, none, casted
-	var carg4 C.int            // in, none, casted
+	var carg1 C.int            // in, none, casted, casted C.gint
+	var carg2 C.int            // in, none, casted, casted C.gint
+	var carg3 C.int            // in, none, casted, casted C.gint
+	var carg4 C.int            // in, none, casted, casted C.gint
 
 	carg0 = (*C.PangoRenderer)(UnsafeRendererToGlibNone(renderer))
 	carg1 = C.int(x)
@@ -10676,14 +10676,14 @@ func (renderer *RendererInstance) DrawGlyph(font Font, glyph Glyph, x float64, y
 	var carg0 *C.PangoRenderer // in, none, converted
 	var carg1 *C.PangoFont     // in, none, converted
 	var carg2 C.PangoGlyph     // in, none, casted, alias
-	var carg3 C.gdouble        // in, none, casted
-	var carg4 C.gdouble        // in, none, casted
+	var carg3 C.double         // in, none, casted, casted C.gdouble
+	var carg4 C.double         // in, none, casted, casted C.gdouble
 
 	carg0 = (*C.PangoRenderer)(UnsafeRendererToGlibNone(renderer))
 	carg1 = (*C.PangoFont)(UnsafeFontToGlibNone(font))
 	carg2 = C.PangoGlyph(glyph)
-	carg3 = C.gdouble(x)
-	carg4 = C.gdouble(y)
+	carg3 = C.double(x)
+	carg4 = C.double(y)
 
 	C.pango_renderer_draw_glyph(carg0, carg1, carg2, carg3, carg4)
 	runtime.KeepAlive(renderer)
@@ -10724,14 +10724,14 @@ func (renderer *RendererInstance) DrawGlyph(font Font, glyph Glyph, x float64, y
 // [method@Pango.Renderer.draw_glyphs].
 func (renderer *RendererInstance) DrawGlyphItem(text string, glyphItem *GlyphItem, x int, y int) {
 	var carg0 *C.PangoRenderer  // in, none, converted
-	var carg1 *C.gchar          // in, none, string, nullable-string
+	var carg1 *C.char           // in, none, string, nullable-string
 	var carg2 *C.PangoGlyphItem // in, none, converted
-	var carg3 C.int             // in, none, casted
-	var carg4 C.int             // in, none, casted
+	var carg3 C.int             // in, none, casted, casted C.gint
+	var carg4 C.int             // in, none, casted, casted C.gint
 
 	carg0 = (*C.PangoRenderer)(UnsafeRendererToGlibNone(renderer))
 	if text != "" {
-		carg1 = (*C.gchar)(unsafe.Pointer(C.CString(text)))
+		carg1 = (*C.char)(unsafe.Pointer(C.CString(text)))
 		defer C.free(unsafe.Pointer(carg1))
 	}
 	carg2 = (*C.PangoGlyphItem)(UnsafeGlyphItemToGlibNone(glyphItem))
@@ -10762,8 +10762,8 @@ func (renderer *RendererInstance) DrawGlyphs(font Font, glyphs *GlyphString, x i
 	var carg0 *C.PangoRenderer    // in, none, converted
 	var carg1 *C.PangoFont        // in, none, converted
 	var carg2 *C.PangoGlyphString // in, none, converted
-	var carg3 C.int               // in, none, casted
-	var carg4 C.int               // in, none, casted
+	var carg3 C.int               // in, none, casted, casted C.gint
+	var carg4 C.int               // in, none, casted, casted C.gint
 
 	carg0 = (*C.PangoRenderer)(UnsafeRendererToGlibNone(renderer))
 	carg1 = (*C.PangoFont)(UnsafeFontToGlibNone(font))
@@ -10796,8 +10796,8 @@ func (renderer *RendererInstance) DrawGlyphs(font Font, glyphs *GlyphString, x i
 func (renderer *RendererInstance) DrawLayout(layout Layout, x int, y int) {
 	var carg0 *C.PangoRenderer // in, none, converted
 	var carg1 *C.PangoLayout   // in, none, converted
-	var carg2 C.int            // in, none, casted
-	var carg3 C.int            // in, none, casted
+	var carg2 C.int            // in, none, casted, casted C.gint
+	var carg3 C.int            // in, none, casted, casted C.gint
 
 	carg0 = (*C.PangoRenderer)(UnsafeRendererToGlibNone(renderer))
 	carg1 = (*C.PangoLayout)(UnsafeLayoutToGlibNone(layout))
@@ -10829,8 +10829,8 @@ func (renderer *RendererInstance) DrawLayout(layout Layout, x int, y int) {
 func (renderer *RendererInstance) DrawLayoutLine(line *LayoutLine, x int, y int) {
 	var carg0 *C.PangoRenderer   // in, none, converted
 	var carg1 *C.PangoLayoutLine // in, none, converted
-	var carg2 C.int              // in, none, casted
-	var carg3 C.int              // in, none, casted
+	var carg2 C.int              // in, none, casted, casted C.gint
+	var carg3 C.int              // in, none, casted, casted C.gint
 
 	carg0 = (*C.PangoRenderer)(UnsafeRendererToGlibNone(renderer))
 	carg1 = (*C.PangoLayoutLine)(UnsafeLayoutLineToGlibNone(line))
@@ -10864,10 +10864,10 @@ func (renderer *RendererInstance) DrawLayoutLine(line *LayoutLine, x int, y int)
 func (renderer *RendererInstance) DrawRectangle(part RenderPart, x int, y int, width int, height int) {
 	var carg0 *C.PangoRenderer  // in, none, converted
 	var carg1 C.PangoRenderPart // in, none, casted
-	var carg2 C.int             // in, none, casted
-	var carg3 C.int             // in, none, casted
-	var carg4 C.int             // in, none, casted
-	var carg5 C.int             // in, none, casted
+	var carg2 C.int             // in, none, casted, casted C.gint
+	var carg3 C.int             // in, none, casted, casted C.gint
+	var carg4 C.int             // in, none, casted, casted C.gint
+	var carg5 C.int             // in, none, casted, casted C.gint
 
 	carg0 = (*C.PangoRenderer)(UnsafeRendererToGlibNone(renderer))
 	carg1 = C.PangoRenderPart(part)
@@ -10902,21 +10902,21 @@ func (renderer *RendererInstance) DrawRectangle(part RenderPart, x int, y int, w
 func (renderer *RendererInstance) DrawTrapezoid(part RenderPart, y1 float64, x11 float64, x21 float64, y2 float64, x12 float64, x22 float64) {
 	var carg0 *C.PangoRenderer  // in, none, converted
 	var carg1 C.PangoRenderPart // in, none, casted
-	var carg2 C.gdouble         // in, none, casted
-	var carg3 C.gdouble         // in, none, casted
-	var carg4 C.gdouble         // in, none, casted
-	var carg5 C.gdouble         // in, none, casted
-	var carg6 C.gdouble         // in, none, casted
-	var carg7 C.gdouble         // in, none, casted
+	var carg2 C.double          // in, none, casted, casted C.gdouble
+	var carg3 C.double          // in, none, casted, casted C.gdouble
+	var carg4 C.double          // in, none, casted, casted C.gdouble
+	var carg5 C.double          // in, none, casted, casted C.gdouble
+	var carg6 C.double          // in, none, casted, casted C.gdouble
+	var carg7 C.double          // in, none, casted, casted C.gdouble
 
 	carg0 = (*C.PangoRenderer)(UnsafeRendererToGlibNone(renderer))
 	carg1 = C.PangoRenderPart(part)
-	carg2 = C.gdouble(y1)
-	carg3 = C.gdouble(x11)
-	carg4 = C.gdouble(x21)
-	carg5 = C.gdouble(y2)
-	carg6 = C.gdouble(x12)
-	carg7 = C.gdouble(x22)
+	carg2 = C.double(y1)
+	carg3 = C.double(x11)
+	carg4 = C.double(x21)
+	carg5 = C.double(y2)
+	carg6 = C.double(x12)
+	carg7 = C.double(x22)
 
 	C.pango_renderer_draw_trapezoid(carg0, carg1, carg2, carg3, carg4, carg5, carg6, carg7)
 	runtime.KeepAlive(renderer)
@@ -11727,7 +11727,7 @@ func (a *AttrInt) Value() int {
 // the value of the attribute
 func (a *AttrInt) SetValue(value int) {
 	valptr := &a.native.value
-	*valptr = C.int(value)
+	*valptr = C.gint(value)
 }
 
 // AttrIterator wraps PangoAttrIterator
@@ -11905,8 +11905,8 @@ func (iterator *AttrIterator) Next() bool {
 // a signed integer are clamped to %G_MAXINT.
 func (iterator *AttrIterator) Range() (int, int) {
 	var carg0 *C.PangoAttrIterator // in, none, converted
-	var carg1 C.int                // out, full, casted
-	var carg2 C.int                // out, full, casted
+	var carg1 C.int                // out, full, casted, casted C.gint
+	var carg2 C.int                // out, full, casted, casted C.gint
 
 	carg0 = (*C.PangoAttrIterator)(UnsafeAttrIteratorToGlibNone(iterator))
 
@@ -12319,8 +12319,8 @@ func (list *AttrList) InsertBefore(attr *Attribute) {
 func (list *AttrList) Splice(other *AttrList, pos int, len int) {
 	var carg0 *C.PangoAttrList // in, none, converted
 	var carg1 *C.PangoAttrList // in, none, converted
-	var carg2 C.int            // in, none, casted
-	var carg3 C.int            // in, none, casted
+	var carg2 C.int            // in, none, casted, casted C.gint
+	var carg3 C.int            // in, none, casted, casted C.gint
 
 	carg0 = (*C.PangoAttrList)(UnsafeAttrListToGlibNone(list))
 	carg1 = (*C.PangoAttrList)(UnsafeAttrListToGlibNone(other))
@@ -12375,7 +12375,7 @@ func (list *AttrList) Splice(other *AttrList, pos int, len int) {
 // Note that shape attributes can not be serialized.
 func (list *AttrList) ToString() string {
 	var carg0 *C.PangoAttrList // in, none, converted
-	var cret  *C.gchar         // return, full, string
+	var cret  *C.char          // return, full, string, casted *C.gchar
 
 	carg0 = (*C.PangoAttrList)(UnsafeAttrListToGlibNone(list))
 
@@ -12384,7 +12384,7 @@ func (list *AttrList) ToString() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 	defer C.free(unsafe.Pointer(cret))
 
 	return goret
@@ -12414,9 +12414,9 @@ func (list *AttrList) ToString() string {
 // behind @pos + @remove.
 func (list *AttrList) Update(pos int, remove int, add int) {
 	var carg0 *C.PangoAttrList // in, none, converted
-	var carg1 C.int            // in, none, casted
-	var carg2 C.int            // in, none, casted
-	var carg3 C.int            // in, none, casted
+	var carg1 C.int            // in, none, casted, casted C.gint
+	var carg2 C.int            // in, none, casted, casted C.gint
+	var carg3 C.int            // in, none, casted, casted C.gint
 
 	carg0 = (*C.PangoAttrList)(UnsafeAttrListToGlibNone(list))
 	carg1 = C.int(pos)
@@ -12573,7 +12573,7 @@ func (a *AttrSize) Size() int {
 //   %PANGO_ATTR_SIZE) or of a device unit (for %PANGO_ATTR_ABSOLUTE_SIZE)
 func (a *AttrSize) SetSize(size int) {
 	valptr := &a.native.size
-	*valptr = C.int(size)
+	*valptr = C.gint(size)
 }
 
 // AttrString wraps PangoAttrString
@@ -13231,11 +13231,11 @@ func (src *Color) Copy() *Color {
 // `#fff`, `#ffffff`, `#fffffffff` and `#ffffffffffff`.)
 func (color *Color) Parse(spec string) bool {
 	var carg0 *C.PangoColor // in, none, converted
-	var carg1 *C.gchar      // in, none, string
+	var carg1 *C.char       // in, none, string, casted *C.gchar
 	var cret  C.gboolean    // return
 
 	carg0 = (*C.PangoColor)(UnsafeColorToGlibNone(color))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(spec)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(spec)))
 	defer C.free(unsafe.Pointer(carg1))
 
 	cret = C.pango_color_parse(carg0, carg1)
@@ -13279,12 +13279,12 @@ func (color *Color) Parse(spec string) bool {
 // solid color).
 func (color *Color) ParseWithAlpha(spec string) (uint16, bool) {
 	var carg0 *C.PangoColor // in, none, converted
-	var carg2 *C.gchar      // in, none, string
+	var carg2 *C.char       // in, none, string, casted *C.gchar
 	var carg1 C.guint16     // out, full, casted
 	var cret  C.gboolean    // return
 
 	carg0 = (*C.PangoColor)(UnsafeColorToGlibNone(color))
-	carg2 = (*C.gchar)(unsafe.Pointer(C.CString(spec)))
+	carg2 = (*C.char)(unsafe.Pointer(C.CString(spec)))
 	defer C.free(unsafe.Pointer(carg2))
 
 	cret = C.pango_color_parse_with_alpha(carg0, &carg1, carg2)
@@ -13314,7 +13314,7 @@ func (color *Color) ParseWithAlpha(spec string) (uint16, bool) {
 // red, green, and blue components respectively.
 func (color *Color) ToString() string {
 	var carg0 *C.PangoColor // in, none, converted
-	var cret  *C.gchar      // return, full, string
+	var cret  *C.char       // return, full, string, casted *C.gchar
 
 	carg0 = (*C.PangoColor)(UnsafeColorToGlibNone(color))
 
@@ -13323,7 +13323,7 @@ func (color *Color) ToString() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 	defer C.free(unsafe.Pointer(cret))
 
 	return goret
@@ -13691,7 +13691,7 @@ func (desc1 *FontDescription) Equal(desc2 *FontDescription) bool {
 // See [method@Pango.FontDescription.set_family].
 func (desc *FontDescription) GetFamily() string {
 	var carg0 *C.PangoFontDescription // in, none, converted
-	var cret  *C.gchar                // return, none, string
+	var cret  *C.char                 // return, none, string, casted *C.gchar
 
 	carg0 = (*C.PangoFontDescription)(UnsafeFontDescriptionToGlibNone(desc))
 
@@ -13700,7 +13700,7 @@ func (desc *FontDescription) GetFamily() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -13715,7 +13715,7 @@ func (desc *FontDescription) GetFamily() string {
 // See [method@Pango.FontDescription.set_features].
 func (desc *FontDescription) GetFeatures() string {
 	var carg0 *C.PangoFontDescription // in, none, converted
-	var cret  *C.gchar                // return, none, string
+	var cret  *C.char                 // return, none, string, casted *C.gchar
 
 	carg0 = (*C.PangoFontDescription)(UnsafeFontDescriptionToGlibNone(desc))
 
@@ -13724,7 +13724,7 @@ func (desc *FontDescription) GetFeatures() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -13785,7 +13785,7 @@ func (desc *FontDescription) GetSetFields() FontMask {
 // See [method@Pango.FontDescription.set_size].
 func (desc *FontDescription) GetSize() int {
 	var carg0 *C.PangoFontDescription // in, none, converted
-	var cret  C.int                   // return, none, casted
+	var cret  C.gint                  // return, none, casted
 
 	carg0 = (*C.PangoFontDescription)(UnsafeFontDescriptionToGlibNone(desc))
 
@@ -13909,7 +13909,7 @@ func (desc *FontDescription) GetVariant() Variant {
 // See [method@Pango.FontDescription.set_variations].
 func (desc *FontDescription) GetVariations() string {
 	var carg0 *C.PangoFontDescription // in, none, converted
-	var cret  *C.gchar                // return, none, string
+	var cret  *C.char                 // return, none, string, casted *C.gchar
 
 	carg0 = (*C.PangoFontDescription)(UnsafeFontDescriptionToGlibNone(desc))
 
@@ -13918,7 +13918,7 @@ func (desc *FontDescription) GetVariations() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -14056,10 +14056,10 @@ func (desc *FontDescription) MergeStatic(descToMerge *FontDescription, replaceEx
 // which sets the font size in points.
 func (desc *FontDescription) SetAbsoluteSize(size float64) {
 	var carg0 *C.PangoFontDescription // in, none, converted
-	var carg1 C.gdouble               // in, none, casted
+	var carg1 C.double                // in, none, casted, casted C.gdouble
 
 	carg0 = (*C.PangoFontDescription)(UnsafeFontDescriptionToGlibNone(desc))
-	carg1 = C.gdouble(size)
+	carg1 = C.double(size)
 
 	C.pango_font_description_set_absolute_size(carg0, carg1)
 	runtime.KeepAlive(desc)
@@ -14081,10 +14081,10 @@ func (desc *FontDescription) SetAbsoluteSize(size float64) {
 // separated list of family names for this field.
 func (desc *FontDescription) SetFamily(family string) {
 	var carg0 *C.PangoFontDescription // in, none, converted
-	var carg1 *C.gchar                // in, none, string
+	var carg1 *C.char                 // in, none, string, casted *C.gchar
 
 	carg0 = (*C.PangoFontDescription)(UnsafeFontDescriptionToGlibNone(desc))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(family)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(family)))
 	defer C.free(unsafe.Pointer(carg1))
 
 	C.pango_font_description_set_family(carg0, carg1)
@@ -14107,10 +14107,10 @@ func (desc *FontDescription) SetFamily(family string) {
 // string such as a C string literal, or if @desc is only needed temporarily.
 func (desc *FontDescription) SetFamilyStatic(family string) {
 	var carg0 *C.PangoFontDescription // in, none, converted
-	var carg1 *C.gchar                // in, none, string
+	var carg1 *C.char                 // in, none, string, casted *C.gchar
 
 	carg0 = (*C.PangoFontDescription)(UnsafeFontDescriptionToGlibNone(desc))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(family)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(family)))
 	defer C.free(unsafe.Pointer(carg1))
 
 	C.pango_font_description_set_family_static(carg0, carg1)
@@ -14150,11 +14150,11 @@ func (desc *FontDescription) SetFamilyStatic(family string) {
 // Features that are not supported by the font are silently ignored.
 func (desc *FontDescription) SetFeatures(features string) {
 	var carg0 *C.PangoFontDescription // in, none, converted
-	var carg1 *C.gchar                // in, none, string, nullable-string
+	var carg1 *C.char                 // in, none, string, nullable-string
 
 	carg0 = (*C.PangoFontDescription)(UnsafeFontDescriptionToGlibNone(desc))
 	if features != "" {
-		carg1 = (*C.gchar)(unsafe.Pointer(C.CString(features)))
+		carg1 = (*C.char)(unsafe.Pointer(C.CString(features)))
 		defer C.free(unsafe.Pointer(carg1))
 	}
 
@@ -14179,10 +14179,10 @@ func (desc *FontDescription) SetFeatures(features string) {
 // or if @desc is only needed temporarily.
 func (desc *FontDescription) SetFeaturesStatic(features string) {
 	var carg0 *C.PangoFontDescription // in, none, converted
-	var carg1 *C.gchar                // in, none, string
+	var carg1 *C.char                 // in, none, string, casted *C.gchar
 
 	carg0 = (*C.PangoFontDescription)(UnsafeFontDescriptionToGlibNone(desc))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(features)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(features)))
 	defer C.free(unsafe.Pointer(carg1))
 
 	C.pango_font_description_set_features_static(carg0, carg1)
@@ -14236,10 +14236,10 @@ func (desc *FontDescription) SetGravity(gravity Gravity) {
 // [method@Pango.FontDescription.set_absolute_size].
 func (desc *FontDescription) SetSize(size int) {
 	var carg0 *C.PangoFontDescription // in, none, converted
-	var carg1 C.int                   // in, none, casted
+	var carg1 C.gint                  // in, none, casted
 
 	carg0 = (*C.PangoFontDescription)(UnsafeFontDescriptionToGlibNone(desc))
-	carg1 = C.int(size)
+	carg1 = C.gint(size)
 
 	C.pango_font_description_set_size(carg0, carg1)
 	runtime.KeepAlive(desc)
@@ -14342,11 +14342,11 @@ func (desc *FontDescription) SetVariant(variant Variant) {
 // for example [hb_ot_var_get_axis_infos](https://harfbuzz.github.io/harfbuzz-hb-ot-var.html#hb-ot-var-get-axis-infos).
 func (desc *FontDescription) SetVariations(variations string) {
 	var carg0 *C.PangoFontDescription // in, none, converted
-	var carg1 *C.gchar                // in, none, string, nullable-string
+	var carg1 *C.char                 // in, none, string, nullable-string
 
 	carg0 = (*C.PangoFontDescription)(UnsafeFontDescriptionToGlibNone(desc))
 	if variations != "" {
-		carg1 = (*C.gchar)(unsafe.Pointer(C.CString(variations)))
+		carg1 = (*C.char)(unsafe.Pointer(C.CString(variations)))
 		defer C.free(unsafe.Pointer(carg1))
 	}
 
@@ -14371,10 +14371,10 @@ func (desc *FontDescription) SetVariations(variations string) {
 // or if @desc is only needed temporarily.
 func (desc *FontDescription) SetVariationsStatic(variations string) {
 	var carg0 *C.PangoFontDescription // in, none, converted
-	var carg1 *C.gchar                // in, none, string
+	var carg1 *C.char                 // in, none, string, casted *C.gchar
 
 	carg0 = (*C.PangoFontDescription)(UnsafeFontDescriptionToGlibNone(desc))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(variations)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(variations)))
 	defer C.free(unsafe.Pointer(carg1))
 
 	C.pango_font_description_set_variations_static(carg0, carg1)
@@ -14419,7 +14419,7 @@ func (desc *FontDescription) SetWeight(weight Weight) {
 // lower case only.
 func (desc *FontDescription) ToFilename() string {
 	var carg0 *C.PangoFontDescription // in, none, converted
-	var cret  *C.gchar                // return, full, string
+	var cret  *C.char                 // return, full, string, casted *C.gchar
 
 	carg0 = (*C.PangoFontDescription)(UnsafeFontDescriptionToGlibNone(desc))
 
@@ -14428,7 +14428,7 @@ func (desc *FontDescription) ToFilename() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 	defer C.free(unsafe.Pointer(cret))
 
 	return goret
@@ -14447,7 +14447,7 @@ func (desc *FontDescription) ToFilename() string {
 // the last word of the list is a valid style option.
 func (desc *FontDescription) ToString() string {
 	var carg0 *C.PangoFontDescription // in, none, converted
-	var cret  *C.gchar                // return, full, string
+	var cret  *C.char                 // return, full, string, casted *C.gchar
 
 	carg0 = (*C.PangoFontDescription)(UnsafeFontDescriptionToGlibNone(desc))
 
@@ -14456,7 +14456,7 @@ func (desc *FontDescription) ToString() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 	defer C.free(unsafe.Pointer(cret))
 
 	return goret
@@ -14772,7 +14772,7 @@ func UnsafeFontMetricsToGlibFull(f *FontMetrics) unsafe.Pointer {
 // text will be wider and narrower than this.
 func (metrics *FontMetrics) GetApproximateCharWidth() int {
 	var carg0 *C.PangoFontMetrics // in, none, converted
-	var cret  C.int               // return, none, casted
+	var cret  C.int               // return, none, casted, casted C.gint
 
 	carg0 = (*C.PangoFontMetrics)(UnsafeFontMetricsToGlibNone(metrics))
 
@@ -14800,7 +14800,7 @@ func (metrics *FontMetrics) GetApproximateCharWidth() int {
 // pango_font_metrics_get_approximate_char_width() for digits.
 func (metrics *FontMetrics) GetApproximateDigitWidth() int {
 	var carg0 *C.PangoFontMetrics // in, none, converted
-	var cret  C.int               // return, none, casted
+	var cret  C.int               // return, none, casted, casted C.gint
 
 	carg0 = (*C.PangoFontMetrics)(UnsafeFontMetricsToGlibNone(metrics))
 
@@ -14827,7 +14827,7 @@ func (metrics *FontMetrics) GetApproximateDigitWidth() int {
 // figure where the ink will be.)
 func (metrics *FontMetrics) GetAscent() int {
 	var carg0 *C.PangoFontMetrics // in, none, converted
-	var cret  C.int               // return, none, casted
+	var cret  C.int               // return, none, casted, casted C.gint
 
 	carg0 = (*C.PangoFontMetrics)(UnsafeFontMetricsToGlibNone(metrics))
 
@@ -14854,7 +14854,7 @@ func (metrics *FontMetrics) GetAscent() int {
 // to figure where the ink will be.)
 func (metrics *FontMetrics) GetDescent() int {
 	var carg0 *C.PangoFontMetrics // in, none, converted
-	var cret  C.int               // return, none, casted
+	var cret  C.int               // return, none, casted, casted C.gint
 
 	carg0 = (*C.PangoFontMetrics)(UnsafeFontMetricsToGlibNone(metrics))
 
@@ -14881,7 +14881,7 @@ func (metrics *FontMetrics) GetDescent() int {
 // If the line height is not available, 0 is returned.
 func (metrics *FontMetrics) GetHeight() int {
 	var carg0 *C.PangoFontMetrics // in, none, converted
-	var cret  C.int               // return, none, casted
+	var cret  C.int               // return, none, casted, casted C.gint
 
 	carg0 = (*C.PangoFontMetrics)(UnsafeFontMetricsToGlibNone(metrics))
 
@@ -14906,7 +14906,7 @@ func (metrics *FontMetrics) GetHeight() int {
 // baseline of the top of the strikethrough.
 func (metrics *FontMetrics) GetStrikethroughPosition() int {
 	var carg0 *C.PangoFontMetrics // in, none, converted
-	var cret  C.int               // return, none, casted
+	var cret  C.int               // return, none, casted, casted C.gint
 
 	carg0 = (*C.PangoFontMetrics)(UnsafeFontMetricsToGlibNone(metrics))
 
@@ -14928,7 +14928,7 @@ func (metrics *FontMetrics) GetStrikethroughPosition() int {
 // Gets the suggested thickness to draw for the strikethrough.
 func (metrics *FontMetrics) GetStrikethroughThickness() int {
 	var carg0 *C.PangoFontMetrics // in, none, converted
-	var cret  C.int               // return, none, casted
+	var cret  C.int               // return, none, casted, casted C.gint
 
 	carg0 = (*C.PangoFontMetrics)(UnsafeFontMetricsToGlibNone(metrics))
 
@@ -14954,7 +14954,7 @@ func (metrics *FontMetrics) GetStrikethroughThickness() int {
 // the baseline, this value is typically negative.
 func (metrics *FontMetrics) GetUnderlinePosition() int {
 	var carg0 *C.PangoFontMetrics // in, none, converted
-	var cret  C.int               // return, none, casted
+	var cret  C.int               // return, none, casted, casted C.gint
 
 	carg0 = (*C.PangoFontMetrics)(UnsafeFontMetricsToGlibNone(metrics))
 
@@ -14976,7 +14976,7 @@ func (metrics *FontMetrics) GetUnderlinePosition() int {
 // Gets the suggested thickness to draw for the underline.
 func (metrics *FontMetrics) GetUnderlineThickness() int {
 	var carg0 *C.PangoFontMetrics // in, none, converted
-	var cret  C.int               // return, none, casted
+	var cret  C.int               // return, none, casted, casted C.gint
 
 	carg0 = (*C.PangoFontMetrics)(UnsafeFontMetricsToGlibNone(metrics))
 
@@ -15370,7 +15370,7 @@ func (g *GlyphItem) EndXOffset() int {
 //   of the containing line. Positive values shift upwards
 func (g *GlyphItem) SetYOffset(y_offset int) {
 	valptr := &g.native.y_offset
-	*valptr = C.int(y_offset)
+	*valptr = C.gint(y_offset)
 }
 
 // start_x_offset wraps start_x_offset
@@ -15379,7 +15379,7 @@ func (g *GlyphItem) SetYOffset(y_offset int) {
 //   glyph item. Positive values shift right
 func (g *GlyphItem) SetStartXOffset(start_x_offset int) {
 	valptr := &g.native.start_x_offset
-	*valptr = C.int(start_x_offset)
+	*valptr = C.gint(start_x_offset)
 }
 
 // end_x_offset wraps end_x_offset
@@ -15388,7 +15388,7 @@ func (g *GlyphItem) SetStartXOffset(start_x_offset int) {
 //   glyph item. Positive values shift right
 func (g *GlyphItem) SetEndXOffset(end_x_offset int) {
 	valptr := &g.native.end_x_offset
-	*valptr = C.int(end_x_offset)
+	*valptr = C.gint(end_x_offset)
 }
 
 // Copy wraps pango_glyph_item_copy
@@ -15438,12 +15438,12 @@ func (orig *GlyphItem) Copy() *GlyphItem {
 // it internally.)
 func (orig *GlyphItem) Split(text string, splitIndex int) *GlyphItem {
 	var carg0 *C.PangoGlyphItem // in, none, converted
-	var carg1 *C.gchar          // in, none, string
-	var carg2 C.int             // in, none, casted
+	var carg1 *C.char           // in, none, string, casted *C.gchar
+	var carg2 C.int             // in, none, casted, casted C.gint
 	var cret  *C.PangoGlyphItem // return, full, converted
 
 	carg0 = (*C.PangoGlyphItem)(UnsafeGlyphItemToGlibNone(orig))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(text)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(text)))
 	defer C.free(unsafe.Pointer(carg1))
 	carg2 = C.int(splitIndex)
 
@@ -15623,37 +15623,37 @@ func (g *GlyphItemIter) EndChar() int {
 // start_glyph wraps start_glyph
 func (g *GlyphItemIter) SetStartGlyph(start_glyph int) {
 	valptr := &g.native.start_glyph
-	*valptr = C.int(start_glyph)
+	*valptr = C.gint(start_glyph)
 }
 
 // start_index wraps start_index
 func (g *GlyphItemIter) SetStartIndex(start_index int) {
 	valptr := &g.native.start_index
-	*valptr = C.int(start_index)
+	*valptr = C.gint(start_index)
 }
 
 // start_char wraps start_char
 func (g *GlyphItemIter) SetStartChar(start_char int) {
 	valptr := &g.native.start_char
-	*valptr = C.int(start_char)
+	*valptr = C.gint(start_char)
 }
 
 // end_glyph wraps end_glyph
 func (g *GlyphItemIter) SetEndGlyph(end_glyph int) {
 	valptr := &g.native.end_glyph
-	*valptr = C.int(end_glyph)
+	*valptr = C.gint(end_glyph)
 }
 
 // end_index wraps end_index
 func (g *GlyphItemIter) SetEndIndex(end_index int) {
 	valptr := &g.native.end_index
-	*valptr = C.int(end_index)
+	*valptr = C.gint(end_index)
 }
 
 // end_char wraps end_char
 func (g *GlyphItemIter) SetEndChar(end_char int) {
 	valptr := &g.native.end_char
-	*valptr = C.int(end_char)
+	*valptr = C.gint(end_char)
 }
 
 // Copy wraps pango_glyph_item_iter_copy
@@ -15696,12 +15696,12 @@ func (orig *GlyphItemIter) Copy() *GlyphItemIter {
 func (iter *GlyphItemIter) InitEnd(glyphItem *GlyphItem, text string) bool {
 	var carg0 *C.PangoGlyphItemIter // in, none, converted
 	var carg1 *C.PangoGlyphItem     // in, none, converted
-	var carg2 *C.gchar              // in, none, string
+	var carg2 *C.char               // in, none, string, casted *C.gchar
 	var cret  C.gboolean            // return
 
 	carg0 = (*C.PangoGlyphItemIter)(UnsafeGlyphItemIterToGlibNone(iter))
 	carg1 = (*C.PangoGlyphItem)(UnsafeGlyphItemToGlibNone(glyphItem))
-	carg2 = (*C.gchar)(unsafe.Pointer(C.CString(text)))
+	carg2 = (*C.char)(unsafe.Pointer(C.CString(text)))
 	defer C.free(unsafe.Pointer(carg2))
 
 	cret = C.pango_glyph_item_iter_init_end(carg0, carg1, carg2)
@@ -15736,12 +15736,12 @@ func (iter *GlyphItemIter) InitEnd(glyphItem *GlyphItem, text string) bool {
 func (iter *GlyphItemIter) InitStart(glyphItem *GlyphItem, text string) bool {
 	var carg0 *C.PangoGlyphItemIter // in, none, converted
 	var carg1 *C.PangoGlyphItem     // in, none, converted
-	var carg2 *C.gchar              // in, none, string
+	var carg2 *C.char               // in, none, string, casted *C.gchar
 	var cret  C.gboolean            // return
 
 	carg0 = (*C.PangoGlyphItemIter)(UnsafeGlyphItemIterToGlibNone(iter))
 	carg1 = (*C.PangoGlyphItem)(UnsafeGlyphItemToGlibNone(glyphItem))
-	carg2 = (*C.gchar)(unsafe.Pointer(C.CString(text)))
+	carg2 = (*C.char)(unsafe.Pointer(C.CString(text)))
 	defer C.free(unsafe.Pointer(carg2))
 
 	cret = C.pango_glyph_item_iter_init_start(carg0, carg1, carg2)
@@ -15920,7 +15920,7 @@ func (g *GlyphString) NumGlyphs() int {
 // number of glyphs in this glyph string
 func (g *GlyphString) SetNumGlyphs(num_glyphs int) {
 	valptr := &g.native.num_glyphs
-	*valptr = C.int(num_glyphs)
+	*valptr = C.gint(num_glyphs)
 }
 
 // Copy wraps pango_glyph_string_copy
@@ -16013,8 +16013,8 @@ func (glyphs *GlyphString) Extents(font Font) (Rectangle, Rectangle) {
 // not at the start of the entire glyph string).
 func (glyphs *GlyphString) ExtentsRange(start int, end int, font Font) (Rectangle, Rectangle) {
 	var carg0 *C.PangoGlyphString // in, none, converted
-	var carg1 C.int               // in, none, casted
-	var carg2 C.int               // in, none, casted
+	var carg1 C.int               // in, none, casted, casted C.gint
+	var carg2 C.int               // in, none, casted, casted C.gint
 	var carg3 *C.PangoFont        // in, none, converted
 	var carg4 C.PangoRectangle    // out, transfer: none, C Pointers: 0, Name: Rectangle, optional, caller-allocates
 	var carg5 C.PangoRectangle    // out, transfer: none, C Pointers: 0, Name: Rectangle, optional, caller-allocates
@@ -16056,7 +16056,7 @@ func (glyphs *GlyphString) ExtentsRange(start int, end int, font Font) (Rectangl
 // @geometry.width for each glyph in the @glyphs.
 func (glyphs *GlyphString) GetWidth() int {
 	var carg0 *C.PangoGlyphString // in, none, converted
-	var cret  C.int               // return, none, casted
+	var cret  C.int               // return, none, casted, casted C.gint
 
 	carg0 = (*C.PangoGlyphString)(UnsafeGlyphStringToGlibNone(glyphs))
 
@@ -16098,15 +16098,15 @@ func (glyphs *GlyphString) GetWidth() int {
 // &lt;/picture&gt;
 func (glyphs *GlyphString) IndexToX(text string, length int, analysis *Analysis, index_ int, trailing bool) int {
 	var carg0 *C.PangoGlyphString // in, none, converted
-	var carg1 *C.gchar            // in, none, string
-	var carg2 C.int               // in, none, casted
+	var carg1 *C.char             // in, none, string, casted *C.gchar
+	var carg2 C.int               // in, none, casted, casted C.gint
 	var carg3 *C.PangoAnalysis    // in, none, converted
-	var carg4 C.int               // in, none, casted
+	var carg4 C.int               // in, none, casted, casted C.gint
 	var carg5 C.gboolean          // in
-	var carg6 C.int               // out, full, casted
+	var carg6 C.int               // out, full, casted, casted C.gint
 
 	carg0 = (*C.PangoGlyphString)(UnsafeGlyphStringToGlibNone(glyphs))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(text)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(text)))
 	defer C.free(unsafe.Pointer(carg1))
 	carg2 = C.int(length)
 	carg3 = (*C.PangoAnalysis)(UnsafeAnalysisToGlibNone(analysis))
@@ -16154,16 +16154,16 @@ func (glyphs *GlyphString) IndexToX(text string, length int, analysis *Analysis,
 // clusters.
 func (glyphs *GlyphString) IndexToXFull(text string, length int, analysis *Analysis, attrs *LogAttr, index_ int, trailing bool) int {
 	var carg0 *C.PangoGlyphString // in, none, converted
-	var carg1 *C.gchar            // in, none, string
-	var carg2 C.int               // in, none, casted
+	var carg1 *C.char             // in, none, string, casted *C.gchar
+	var carg2 C.int               // in, none, casted, casted C.gint
 	var carg3 *C.PangoAnalysis    // in, none, converted
 	var carg4 *C.PangoLogAttr     // in, none, converted, nullable
-	var carg5 C.int               // in, none, casted
+	var carg5 C.int               // in, none, casted, casted C.gint
 	var carg6 C.gboolean          // in
-	var carg7 C.int               // out, full, casted
+	var carg7 C.int               // out, full, casted, casted C.gint
 
 	carg0 = (*C.PangoGlyphString)(UnsafeGlyphStringToGlibNone(glyphs))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(text)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(text)))
 	defer C.free(unsafe.Pointer(carg1))
 	carg2 = C.int(length)
 	carg3 = (*C.PangoAnalysis)(UnsafeAnalysisToGlibNone(analysis))
@@ -16200,7 +16200,7 @@ func (glyphs *GlyphString) IndexToXFull(text string, length int, analysis *Analy
 // Resize a glyph string to the given length.
 func (str *GlyphString) SetSize(newLen int) {
 	var carg0 *C.PangoGlyphString // in, none, converted
-	var carg1 C.int               // in, none, casted
+	var carg1 C.int               // in, none, casted, casted C.gint
 
 	carg0 = (*C.PangoGlyphString)(UnsafeGlyphStringToGlibNone(str))
 	carg1 = C.int(newLen)
@@ -16234,15 +16234,15 @@ func (str *GlyphString) SetSize(newLen int) {
 // attributes for the text to compute the valid cursor position.
 func (glyphs *GlyphString) XToIndex(text string, length int, analysis *Analysis, xPos int) (int, int) {
 	var carg0 *C.PangoGlyphString // in, none, converted
-	var carg1 *C.gchar            // in, none, string
-	var carg2 C.int               // in, none, casted
+	var carg1 *C.char             // in, none, string, casted *C.gchar
+	var carg2 C.int               // in, none, casted, casted C.gint
 	var carg3 *C.PangoAnalysis    // in, none, converted
-	var carg4 C.int               // in, none, casted
-	var carg5 C.int               // out, full, casted
-	var carg6 C.int               // out, full, casted
+	var carg4 C.int               // in, none, casted, casted C.gint
+	var carg5 C.int               // out, full, casted, casted C.gint
+	var carg6 C.int               // out, full, casted, casted C.gint
 
 	carg0 = (*C.PangoGlyphString)(UnsafeGlyphStringToGlibNone(glyphs))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(text)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(text)))
 	defer C.free(unsafe.Pointer(carg1))
 	carg2 = C.int(length)
 	carg3 = (*C.PangoAnalysis)(UnsafeAnalysisToGlibNone(analysis))
@@ -16465,7 +16465,7 @@ func (i *Item) NumChars() int {
 // byte offset of the start of this item in text.
 func (i *Item) SetOffset(offset int) {
 	valptr := &i.native.offset
-	*valptr = C.int(offset)
+	*valptr = C.gint(offset)
 }
 
 // length wraps length
@@ -16473,7 +16473,7 @@ func (i *Item) SetOffset(offset int) {
 // length of this item in bytes.
 func (i *Item) SetLength(length int) {
 	valptr := &i.native.length
-	*valptr = C.int(length)
+	*valptr = C.gint(length)
 }
 
 // num_chars wraps num_chars
@@ -16481,7 +16481,7 @@ func (i *Item) SetLength(length int) {
 // number of Unicode characters in the item.
 func (i *Item) SetNumChars(num_chars int) {
 	valptr := &i.native.num_chars
-	*valptr = C.int(num_chars)
+	*valptr = C.gint(num_chars)
 }
 
 // ApplyAttrs wraps pango_item_apply_attrs
@@ -16548,7 +16548,7 @@ func (item *Item) Copy() *Item {
 // that case, this function returns -1.
 func (item *Item) GetCharOffset() int {
 	var carg0 *C.PangoItem // in, none, converted
-	var cret  C.int        // return, none, casted
+	var cret  C.int        // return, none, casted, casted C.gint
 
 	carg0 = (*C.PangoItem)(UnsafeItemToGlibNone(item))
 
@@ -16588,8 +16588,8 @@ func (item *Item) GetCharOffset() int {
 // itself.
 func (orig *Item) Split(splitIndex int, splitOffset int) *Item {
 	var carg0 *C.PangoItem // in, none, converted
-	var carg1 C.int        // in, none, casted
-	var carg2 C.int        // in, none, casted
+	var carg1 C.int        // in, none, casted, casted C.gint
+	var carg2 C.int        // in, none, casted, casted C.gint
 	var cret  *C.PangoItem // return, full, converted
 
 	carg0 = (*C.PangoItem)(UnsafeItemToGlibNone(orig))
@@ -16712,7 +16712,7 @@ func UnsafeLanguageToGlibFull(l *Language) unsafe.Pointer {
 // ```
 func (language *Language) GetSampleString() string {
 	var carg0 *C.PangoLanguage // in, none, converted
-	var cret  *C.gchar         // return, none, string
+	var cret  *C.char          // return, none, string, casted *C.gchar
 
 	carg0 = (*C.PangoLanguage)(UnsafeLanguageToGlibNone(language))
 
@@ -16721,7 +16721,7 @@ func (language *Language) GetSampleString() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -16757,7 +16757,7 @@ func (language *Language) GetSampleString() string {
 // may have more values. Callers need to handle unknown values.
 func (language *Language) GetScripts() (int, []Script) {
 	var carg0 *C.PangoLanguage // in, none, converted
-	var carg1 C.int            // out, full, casted
+	var carg1 C.int            // out, full, casted, casted C.gint
 	var cret  *C.PangoScript   // return, transfer: none, C Pointers: 1, Name: array[Script], scope: , array (inner: *typesystem.Enum)
 
 	carg0 = (*C.PangoLanguage)(UnsafeLanguageToGlibNone(language))
@@ -16841,11 +16841,11 @@ func (language *Language) IncludesScript(script Script) bool {
 // of the tag, and the character after it in the tag is '-'.
 func (language *Language) Matches(rangeList string) bool {
 	var carg0 *C.PangoLanguage // in, none, converted
-	var carg1 *C.gchar         // in, none, string
+	var carg1 *C.char          // in, none, string, casted *C.gchar
 	var cret  C.gboolean       // return
 
 	carg0 = (*C.PangoLanguage)(UnsafeLanguageToGlibNone(language))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(rangeList)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(rangeList)))
 	defer C.free(unsafe.Pointer(carg1))
 
 	cret = C.pango_language_matches(carg0, carg1)
@@ -16871,7 +16871,7 @@ func (language *Language) Matches(rangeList string) bool {
 // Returns (transfer none): a string representing the language tag
 func (language *Language) ToString() string {
 	var carg0 *C.PangoLanguage // in, none, converted
-	var cret  *C.gchar         // return, none, string
+	var cret  *C.char          // return, none, string, casted *C.gchar
 
 	carg0 = (*C.PangoLanguage)(UnsafeLanguageToGlibNone(language))
 
@@ -16880,7 +16880,7 @@ func (language *Language) ToString() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -17081,7 +17081,7 @@ func (iter *LayoutIter) Copy() *LayoutIter {
 // Layout coordinates have the origin at the top left of the entire layout.
 func (iter *LayoutIter) GetBaseline() int {
 	var carg0 *C.PangoLayoutIter // in, none, converted
-	var cret  C.int              // return, none, casted
+	var cret  C.int              // return, none, casted, casted C.gint
 
 	carg0 = (*C.PangoLayoutIter)(UnsafeLayoutIterToGlibNone(iter))
 
@@ -17170,7 +17170,7 @@ func (iter *LayoutIter) GetClusterExtents() (Rectangle, Rectangle) {
 // layout, if on the %NULL run (see [method@Pango.LayoutIter.get_run]).
 func (iter *LayoutIter) GetIndex() int {
 	var carg0 *C.PangoLayoutIter // in, none, converted
-	var cret  C.int              // return, none, casted
+	var cret  C.int              // return, none, casted, casted C.gint
 
 	carg0 = (*C.PangoLayoutIter)(UnsafeLayoutIterToGlibNone(iter))
 
@@ -17342,8 +17342,8 @@ func (iter *LayoutIter) GetLineReadonly() *LayoutLine {
 // may be gaps between the ranges returned by this function.
 func (iter *LayoutIter) GetLineYrange() (int, int) {
 	var carg0 *C.PangoLayoutIter // in, none, converted
-	var carg1 C.int              // out, full, casted
-	var carg2 C.int              // out, full, casted
+	var carg1 C.int              // out, full, casted, casted C.gint
+	var carg2 C.int              // out, full, casted, casted C.gint
 
 	carg0 = (*C.PangoLayoutIter)(UnsafeLayoutIterToGlibNone(iter))
 
@@ -17405,7 +17405,7 @@ func (iter *LayoutIter) GetRun() *LayoutRun {
 // example due to superscript or subscript positioning.
 func (iter *LayoutIter) GetRunBaseline() int {
 	var carg0 *C.PangoLayoutIter // in, none, converted
-	var cret  C.int              // return, none, casted
+	var cret  C.int              // return, none, casted, casted C.gint
 
 	carg0 = (*C.PangoLayoutIter)(UnsafeLayoutIterToGlibNone(iter))
 
@@ -17699,7 +17699,7 @@ func (l *LayoutLine) Length() int {
 // start of line as byte index into layout-&gt;text
 func (l *LayoutLine) SetStartIndex(start_index int) {
 	valptr := &l.native.start_index
-	*valptr = C.int(start_index)
+	*valptr = C.gint(start_index)
 }
 
 // length wraps length
@@ -17707,7 +17707,7 @@ func (l *LayoutLine) SetStartIndex(start_index int) {
 // length of line in bytes
 func (l *LayoutLine) SetLength(length int) {
 	valptr := &l.native.length
-	*valptr = C.int(length)
+	*valptr = C.gint(length)
 }
 
 // GetExtents wraps pango_layout_line_get_extents
@@ -17759,7 +17759,7 @@ func (line *LayoutLine) GetExtents() (Rectangle, Rectangle) {
 // [method@Pango.Layout.set_line_spacing].
 func (line *LayoutLine) GetHeight() int {
 	var carg0 *C.PangoLayoutLine // in, none, converted
-	var carg1 C.int              // out, full, casted
+	var carg1 C.int              // out, full, casted, casted C.gint
 
 	carg0 = (*C.PangoLayoutLine)(UnsafeLayoutLineToGlibNone(line))
 
@@ -17781,7 +17781,7 @@ func (line *LayoutLine) GetHeight() int {
 // Returns the length of the line, in bytes.
 func (line *LayoutLine) GetLength() int {
 	var carg0 *C.PangoLayoutLine // in, none, converted
-	var cret  C.int              // return, none, casted
+	var cret  C.int              // return, none, casted, casted C.gint
 
 	carg0 = (*C.PangoLayoutLine)(UnsafeLayoutLineToGlibNone(line))
 
@@ -17863,7 +17863,7 @@ func (line *LayoutLine) GetResolvedDirection() Direction {
 // into the text of the layout.
 func (line *LayoutLine) GetStartIndex() int {
 	var carg0 *C.PangoLayoutLine // in, none, converted
-	var cret  C.int              // return, none, casted
+	var cret  C.int              // return, none, casted, casted C.gint
 
 	carg0 = (*C.PangoLayoutLine)(UnsafeLayoutLineToGlibNone(line))
 
@@ -17893,9 +17893,9 @@ func (line *LayoutLine) GetStartIndex() int {
 // Converts an index within a line to a X position.
 func (line *LayoutLine) IndexToX(index_ int, trailing bool) int {
 	var carg0 *C.PangoLayoutLine // in, none, converted
-	var carg1 C.int              // in, none, casted
+	var carg1 C.int              // in, none, casted, casted C.gint
 	var carg2 C.gboolean         // in
-	var carg3 C.int              // out, full, casted
+	var carg3 C.int              // out, full, casted, casted C.gint
 
 	carg0 = (*C.PangoLayoutLine)(UnsafeLayoutLineToGlibNone(line))
 	carg1 = C.int(index_)
@@ -17967,9 +17967,9 @@ func (line *LayoutLine) IsParagraphStart() bool {
 // grapheme. The reverse is true for a left-to-right line.
 func (line *LayoutLine) XToIndex(xPos int) (int, int, bool) {
 	var carg0 *C.PangoLayoutLine // in, none, converted
-	var carg1 C.int              // in, none, casted
-	var carg2 C.int              // out, full, casted
-	var carg3 C.int              // out, full, casted
+	var carg1 C.int              // in, none, casted, casted C.gint
+	var carg2 C.int              // out, full, casted, casted C.gint
+	var carg3 C.int              // out, full, casted, casted C.gint
 	var cret  C.gboolean         // return
 
 	carg0 = (*C.PangoLayoutLine)(UnsafeLayoutLineToGlibNone(line))
@@ -18300,7 +18300,7 @@ func (matrix *Matrix) Copy() *Matrix {
 // coordinate is needed as well, use [method@Pango.Matrix.get_font_scale_factors].
 func (matrix *Matrix) GetFontScaleFactor() float64 {
 	var carg0 *C.PangoMatrix // in, none, converted
-	var cret  C.gdouble      // return, none, casted
+	var cret  C.double       // return, none, casted, casted C.gdouble
 
 	carg0 = (*C.PangoMatrix)(UnsafeMatrixToGlibNone(matrix))
 
@@ -18329,8 +18329,8 @@ func (matrix *Matrix) GetFontScaleFactor() float64 {
 // Note that output numbers will always be non-negative.
 func (matrix *Matrix) GetFontScaleFactors() (float64, float64) {
 	var carg0 *C.PangoMatrix // in, none, converted
-	var carg1 C.gdouble      // out, full, casted
-	var carg2 C.gdouble      // out, full, casted
+	var carg1 C.double       // out, full, casted, casted C.gdouble
+	var carg2 C.double       // out, full, casted, casted C.gdouble
 
 	carg0 = (*C.PangoMatrix)(UnsafeMatrixToGlibNone(matrix))
 
@@ -18361,7 +18361,7 @@ func (matrix *Matrix) GetFontScaleFactors() (float64, float64) {
 // this is simply λ.
 func (matrix *Matrix) GetSlantRatio() float64 {
 	var carg0 *C.PangoMatrix // in, none, converted
-	var cret  C.gdouble      // return, none, casted
+	var cret  C.double       // return, none, casted, casted C.gdouble
 
 	carg0 = (*C.PangoMatrix)(UnsafeMatrixToGlibNone(matrix))
 
@@ -18386,10 +18386,10 @@ func (matrix *Matrix) GetSlantRatio() float64 {
 // counter-clockwise then applying the original transformation.
 func (matrix *Matrix) Rotate(degrees float64) {
 	var carg0 *C.PangoMatrix // in, none, converted
-	var carg1 C.gdouble      // in, none, casted
+	var carg1 C.double       // in, none, casted, casted C.gdouble
 
 	carg0 = (*C.PangoMatrix)(UnsafeMatrixToGlibNone(matrix))
-	carg1 = C.gdouble(degrees)
+	carg1 = C.double(degrees)
 
 	C.pango_matrix_rotate(carg0, carg1)
 	runtime.KeepAlive(matrix)
@@ -18409,12 +18409,12 @@ func (matrix *Matrix) Rotate(degrees float64) {
 // transformation.
 func (matrix *Matrix) Scale(scaleX float64, scaleY float64) {
 	var carg0 *C.PangoMatrix // in, none, converted
-	var carg1 C.gdouble      // in, none, casted
-	var carg2 C.gdouble      // in, none, casted
+	var carg1 C.double       // in, none, casted, casted C.gdouble
+	var carg2 C.double       // in, none, casted, casted C.gdouble
 
 	carg0 = (*C.PangoMatrix)(UnsafeMatrixToGlibNone(matrix))
-	carg1 = C.gdouble(scaleX)
-	carg2 = C.gdouble(scaleY)
+	carg1 = C.double(scaleX)
+	carg2 = C.double(scaleY)
 
 	C.pango_matrix_scale(carg0, carg1, carg2)
 	runtime.KeepAlive(matrix)
@@ -18434,12 +18434,12 @@ func (matrix *Matrix) Scale(scaleX float64, scaleY float64) {
 // then applying the original transformation.
 func (matrix *Matrix) Translate(tx float64, ty float64) {
 	var carg0 *C.PangoMatrix // in, none, converted
-	var carg1 C.gdouble      // in, none, casted
-	var carg2 C.gdouble      // in, none, casted
+	var carg1 C.double       // in, none, casted, casted C.gdouble
+	var carg2 C.double       // in, none, casted, casted C.gdouble
 
 	carg0 = (*C.PangoMatrix)(UnsafeMatrixToGlibNone(matrix))
-	carg1 = C.gdouble(tx)
-	carg2 = C.gdouble(ty)
+	carg1 = C.double(tx)
+	carg2 = C.double(ty)
 
 	C.pango_matrix_translate(carg0, carg1, carg2)
 	runtime.KeepAlive(matrix)
@@ -18558,7 +18558,7 @@ func (r *Rectangle) Height() int {
 // X coordinate of the left side of the rectangle.
 func (r *Rectangle) SetX(x int) {
 	valptr := &r.native.x
-	*valptr = C.int(x)
+	*valptr = C.gint(x)
 }
 
 // y wraps y
@@ -18566,7 +18566,7 @@ func (r *Rectangle) SetX(x int) {
 // Y coordinate of the the top side of the rectangle.
 func (r *Rectangle) SetY(y int) {
 	valptr := &r.native.y
-	*valptr = C.int(y)
+	*valptr = C.gint(y)
 }
 
 // width wraps width
@@ -18574,7 +18574,7 @@ func (r *Rectangle) SetY(y int) {
 // width of the rectangle.
 func (r *Rectangle) SetWidth(width int) {
 	valptr := &r.native.width
-	*valptr = C.int(width)
+	*valptr = C.gint(width)
 }
 
 // height wraps height
@@ -18582,7 +18582,7 @@ func (r *Rectangle) SetWidth(width int) {
 // height of the rectangle.
 func (r *Rectangle) SetHeight(height int) {
 	valptr := &r.native.height
-	*valptr = C.int(height)
+	*valptr = C.gint(height)
 }
 
 // RendererClass wraps PangoRendererClass
@@ -18755,11 +18755,11 @@ func UnsafeScriptIterToGlibFull(s *ScriptIter) unsafe.Pointer {
 // sure it remains valid until the iterator is freed with
 // [method@Pango.ScriptIter.free].
 func NewScriptIter(text string, length int) *ScriptIter {
-	var carg1 *C.gchar           // in, none, string
-	var carg2 C.int              // in, none, casted
+	var carg1 *C.char            // in, none, string, casted *C.gchar
+	var carg2 C.int              // in, none, casted, casted C.gint
 	var cret  *C.PangoScriptIter // return, full, converted
 
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(text)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(text)))
 	defer C.free(unsafe.Pointer(carg1))
 	carg2 = C.int(length)
 
@@ -18792,8 +18792,8 @@ func NewScriptIter(text string, length int) *ScriptIter {
 // values.
 func (iter *ScriptIter) GetRange() (string, string, Script) {
 	var carg0 *C.PangoScriptIter // in, none, converted
-	var carg1 *C.gchar           // out, full, string
-	var carg2 *C.gchar           // out, full, string
+	var carg1 *C.char            // out, full, string, casted *C.gchar
+	var carg2 *C.char            // out, full, string, casted *C.gchar
 	var carg3 C.PangoScript      // out, full, casted
 
 	carg0 = (*C.PangoScriptIter)(UnsafeScriptIterToGlibNone(iter))
@@ -18805,9 +18805,9 @@ func (iter *ScriptIter) GetRange() (string, string, Script) {
 	var end    string
 	var script Script
 
-	start = C.GoString((*C.gchar)(unsafe.Pointer(carg1)))
+	start = C.GoString((*C.char)(unsafe.Pointer(carg1)))
 	defer C.free(unsafe.Pointer(carg1))
-	end = C.GoString((*C.gchar)(unsafe.Pointer(carg2)))
+	end = C.GoString((*C.char)(unsafe.Pointer(carg2)))
 	defer C.free(unsafe.Pointer(carg2))
 	script = Script(carg3)
 
@@ -18935,11 +18935,11 @@ func UnsafeTabArrayToGlibFull(t *TabArray) unsafe.Pointer {
 // Tab stops are specified in pixel units if @positions_in_pixels is %TRUE,
 // otherwise in Pango units. All stops are initially at position 0.
 func NewTabArray(initialSize int, positionsInPixels bool) *TabArray {
-	var carg1 C.int            // in, none, casted
+	var carg1 C.gint           // in, none, casted
 	var carg2 C.gboolean       // in
 	var cret  *C.PangoTabArray // return, full, converted
 
-	carg1 = C.int(initialSize)
+	carg1 = C.gint(initialSize)
 	if positionsInPixels {
 		carg2 = C.TRUE
 	}
@@ -18997,7 +18997,7 @@ func (src *TabArray) Copy() *TabArray {
 // decimal point according to the current locale.
 func (tabArray *TabArray) GetDecimalPoint(tabIndex int) uint32 {
 	var carg0 *C.PangoTabArray // in, none, converted
-	var carg1 C.int            // in, none, casted
+	var carg1 C.int            // in, none, casted, casted C.gint
 	var cret  C.gunichar       // return, none, casted
 
 	carg0 = (*C.PangoTabArray)(UnsafeTabArrayToGlibNone(tabArray))
@@ -19047,7 +19047,7 @@ func (tabArray *TabArray) GetPositionsInPixels() bool {
 // Gets the number of tab stops in @tab_array.
 func (tabArray *TabArray) GetSize() int {
 	var carg0 *C.PangoTabArray // in, none, converted
-	var cret  C.int            // return, none, casted
+	var cret  C.gint           // return, none, casted
 
 	carg0 = (*C.PangoTabArray)(UnsafeTabArrayToGlibNone(tabArray))
 
@@ -19075,12 +19075,12 @@ func (tabArray *TabArray) GetSize() int {
 // Gets the alignment and position of a tab stop.
 func (tabArray *TabArray) GetTab(tabIndex int) (TabAlign, int) {
 	var carg0 *C.PangoTabArray // in, none, converted
-	var carg1 C.int            // in, none, casted
+	var carg1 C.gint           // in, none, casted
 	var carg2 C.PangoTabAlign  // out, full, casted
-	var carg3 C.int            // out, full, casted
+	var carg3 C.gint           // out, full, casted
 
 	carg0 = (*C.PangoTabArray)(UnsafeTabArrayToGlibNone(tabArray))
-	carg1 = C.int(tabIndex)
+	carg1 = C.gint(tabIndex)
 
 	C.pango_tab_array_get_tab(carg0, carg1, &carg2, &carg3)
 	runtime.KeepAlive(tabArray)
@@ -19107,10 +19107,10 @@ func (tabArray *TabArray) GetTab(tabIndex int) (TabAlign, int) {
 // that were added as a result of growing the array.
 func (tabArray *TabArray) Resize(newSize int) {
 	var carg0 *C.PangoTabArray // in, none, converted
-	var carg1 C.int            // in, none, casted
+	var carg1 C.gint           // in, none, casted
 
 	carg0 = (*C.PangoTabArray)(UnsafeTabArrayToGlibNone(tabArray))
-	carg1 = C.int(newSize)
+	carg1 = C.gint(newSize)
 
 	C.pango_tab_array_resize(carg0, carg1)
 	runtime.KeepAlive(tabArray)
@@ -19134,7 +19134,7 @@ func (tabArray *TabArray) Resize(newSize int) {
 // to the current locale.
 func (tabArray *TabArray) SetDecimalPoint(tabIndex int, decimalPoint uint32) {
 	var carg0 *C.PangoTabArray // in, none, converted
-	var carg1 C.int            // in, none, casted
+	var carg1 C.int            // in, none, casted, casted C.gint
 	var carg2 C.gunichar       // in, none, casted
 
 	carg0 = (*C.PangoTabArray)(UnsafeTabArrayToGlibNone(tabArray))
@@ -19180,14 +19180,14 @@ func (tabArray *TabArray) SetPositionsInPixels(positionsInPixels bool) {
 // Sets the alignment and location of a tab stop.
 func (tabArray *TabArray) SetTab(tabIndex int, alignment TabAlign, location int) {
 	var carg0 *C.PangoTabArray // in, none, converted
-	var carg1 C.int            // in, none, casted
+	var carg1 C.gint           // in, none, casted
 	var carg2 C.PangoTabAlign  // in, none, casted
-	var carg3 C.int            // in, none, casted
+	var carg3 C.gint           // in, none, casted
 
 	carg0 = (*C.PangoTabArray)(UnsafeTabArrayToGlibNone(tabArray))
-	carg1 = C.int(tabIndex)
+	carg1 = C.gint(tabIndex)
 	carg2 = C.PangoTabAlign(alignment)
-	carg3 = C.int(location)
+	carg3 = C.gint(location)
 
 	C.pango_tab_array_set_tab(carg0, carg1, carg2, carg3)
 	runtime.KeepAlive(tabArray)
@@ -19233,7 +19233,7 @@ func (tabArray *TabArray) Sort() {
 //     100px 200px center:300px right:400px
 func (tabArray *TabArray) ToString() string {
 	var carg0 *C.PangoTabArray // in, none, converted
-	var cret  *C.gchar         // return, full, string
+	var cret  *C.char          // return, full, string, casted *C.gchar
 
 	carg0 = (*C.PangoTabArray)(UnsafeTabArrayToGlibNone(tabArray))
 
@@ -19242,7 +19242,7 @@ func (tabArray *TabArray) ToString() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 	defer C.free(unsafe.Pointer(cret))
 
 	return goret

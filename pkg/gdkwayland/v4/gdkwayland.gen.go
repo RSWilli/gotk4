@@ -14,7 +14,7 @@ import (
 // #cgo pkg-config: gtk4-wayland
 // #cgo CFLAGS: -Wno-deprecated-declarations
 // #include <gdk/wayland/gdkwayland.h>
-// extern void _gotk4_gdkwayland4_WaylandToplevelExported(GdkToplevel*, gchar*, gpointer);
+// extern void _gotk4_gdkwayland4_WaylandToplevelExported(GdkToplevel*, char*, gpointer);
 // extern void callbackDelete(guintptr);
 import "C"
 
@@ -142,7 +142,7 @@ func UnsafeWaylandDeviceToGlibFull(c WaylandDevice) unsafe.Pointer {
 // %GDK_SOURCE_PEN, %GDK_SOURCE_TABLET_PAD.
 func (device *WaylandDeviceInstance) GetNodePath() string {
 	var carg0 *C.GdkDevice // in, none, converted, casted *C.GdkWaylandDevice
-	var cret  *C.gchar     // return, none, string
+	var cret  *C.char      // return, none, string, casted *C.gchar
 
 	carg0 = (*C.GdkDevice)(UnsafeWaylandDeviceToGlibNone(device))
 
@@ -151,7 +151,7 @@ func (device *WaylandDeviceInstance) GetNodePath() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -273,11 +273,11 @@ func (display *WaylandDisplayInstance) GetEglDisplay() unsafe.Pointer {
 // `wl_registry.global` handler.
 func (display *WaylandDisplayInstance) QueryRegistry(global string) bool {
 	var carg0 *C.GdkDisplay // in, none, converted, casted *C.GdkWaylandDisplay
-	var carg1 *C.gchar      // in, none, string
+	var carg1 *C.char       // in, none, string, casted *C.gchar
 	var cret  C.gboolean    // return
 
 	carg0 = (*C.GdkDisplay)(UnsafeWaylandDisplayToGlibNone(display))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(global)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(global)))
 	defer C.free(unsafe.Pointer(carg1))
 
 	cret = C.gdk_wayland_display_query_registry(carg0, carg1)
@@ -665,10 +665,10 @@ func UnsafeWaylandToplevelToGlibFull(c WaylandToplevel) unsafe.Pointer {
 // and thus may require changes in the future.
 func (toplevel *WaylandToplevelInstance) DropExportedHandle(handle string) {
 	var carg0 *C.GdkToplevel // in, none, converted, casted *C.GdkWaylandToplevel
-	var carg1 *C.gchar       // in, none, string
+	var carg1 *C.char        // in, none, string, casted *C.gchar
 
 	carg0 = (*C.GdkToplevel)(UnsafeWaylandToplevelToGlibNone(toplevel))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(handle)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(handle)))
 	defer C.free(unsafe.Pointer(carg1))
 
 	C.gdk_wayland_toplevel_drop_exported_handle(carg0, carg1)
@@ -743,10 +743,10 @@ func (toplevel *WaylandToplevelInstance) ExportHandle(callback WaylandToplevelEx
 // Sets the application id on a `GdkToplevel`.
 func (toplevel *WaylandToplevelInstance) SetApplicationID(applicationId string) {
 	var carg0 *C.GdkToplevel // in, none, converted, casted *C.GdkWaylandToplevel
-	var carg1 *C.gchar       // in, none, string
+	var carg1 *C.char        // in, none, string, casted *C.gchar
 
 	carg0 = (*C.GdkToplevel)(UnsafeWaylandToplevelToGlibNone(toplevel))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(applicationId)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(applicationId)))
 	defer C.free(unsafe.Pointer(carg1))
 
 	C.gdk_wayland_toplevel_set_application_id(carg0, carg1)
@@ -774,11 +774,11 @@ func (toplevel *WaylandToplevelInstance) SetApplicationID(applicationId string) 
 // and thus may require changes in the future.
 func (toplevel *WaylandToplevelInstance) SetTransientForExported(parentHandleStr string) bool {
 	var carg0 *C.GdkToplevel // in, none, converted, casted *C.GdkWaylandToplevel
-	var carg1 *C.gchar       // in, none, string
+	var carg1 *C.char        // in, none, string, casted *C.gchar
 	var cret  C.gboolean     // return
 
 	carg0 = (*C.GdkToplevel)(UnsafeWaylandToplevelToGlibNone(toplevel))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(parentHandleStr)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(parentHandleStr)))
 	defer C.free(unsafe.Pointer(carg1))
 
 	cret = C.gdk_wayland_toplevel_set_transient_for_exported(carg0, carg1)

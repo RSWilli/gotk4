@@ -19,7 +19,7 @@ import (
 import "C"
 
 //export _gotk4_gtk3_AssistantPageFunc
-func _gotk4_gtk3_AssistantPageFunc(carg1 C.int, carg2 C.gpointer) (cret C.int) {
+func _gotk4_gtk3_AssistantPageFunc(carg1 C.gint, carg2 C.gpointer) (cret C.gint) {
 	var fn AssistantPageFunc
 	{
 		v := gbox.Get(uintptr(carg2))
@@ -36,7 +36,7 @@ func _gotk4_gtk3_AssistantPageFunc(carg1 C.int, carg2 C.gpointer) (cret C.int) {
 
 	goret = fn(currentPage)
 
-	cret = C.int(goret)
+	cret = C.gint(goret)
 
 	return cret
 }
@@ -54,8 +54,8 @@ func _gotk4_gtk3_BuilderConnectFunc(carg1 *C.GtkBuilder, carg2 *C.GObject, carg3
 
 	var builder       Builder              // in, none, converted
 	var object        gobject.Object       // in, none, converted
-	var signalName    string               // in, none, string
-	var handlerName   string               // in, none, string
+	var signalName    string               // in, none, string, casted *C.gchar
+	var handlerName   string               // in, none, string, casted *C.gchar
 	var connectObject gobject.Object       // in, none, converted, nullable
 	var flags         gobject.ConnectFlags // in, none, casted
 
@@ -219,7 +219,7 @@ func _gotk4_gtk3_ClipboardTextReceivedFunc(carg1 *C.GtkClipboard, carg2 *C.gchar
 	}
 
 	var clipboard Clipboard // in, none, converted
-	var text      string    // in, none, string, nullable-string
+	var text      string    // in, none, string, casted *C.gchar, nullable
 
 	clipboard = UnsafeClipboardFromGlibNone(unsafe.Pointer(carg1))
 	if carg2 != nil {
@@ -263,7 +263,7 @@ func _gotk4_gtk3_EntryCompletionMatchFunc(carg1 *C.GtkEntryCompletion, carg2 *C.
 	}
 
 	var completion EntryCompletion // in, none, converted
-	var key        string          // in, none, string
+	var key        string          // in, none, string, casted *C.gchar
 	var iter       *TreeIter       // in, none, converted
 	var goret      bool            // return
 
@@ -356,7 +356,7 @@ func _gotk4_gtk3_FontFilterFunc(carg1 *C.PangoFontFamily, carg2 *C.PangoFontFace
 }
 
 //export _gotk4_gtk3_KeySnoopFunc
-func _gotk4_gtk3_KeySnoopFunc(carg1 *C.GtkWidget, carg2 *C.GdkEventKey, carg3 C.gpointer) (cret C.int) {
+func _gotk4_gtk3_KeySnoopFunc(carg1 *C.GtkWidget, carg2 *C.GdkEventKey, carg3 C.gpointer) (cret C.gint) {
 	var fn KeySnoopFunc
 	{
 		v := gbox.Get(uintptr(carg3))
@@ -375,7 +375,7 @@ func _gotk4_gtk3_KeySnoopFunc(carg1 *C.GtkWidget, carg2 *C.GdkEventKey, carg3 C.
 
 	goret = fn(grabWidget, event)
 
-	cret = C.int(goret)
+	cret = C.gint(goret)
 
 	return cret
 }
@@ -432,8 +432,8 @@ func _gotk4_gtk3_PrintSettingsFunc(carg1 *C.gchar, carg2 *C.gchar, carg3 C.gpoin
 		fn = v.(PrintSettingsFunc)
 	}
 
-	var key   string // in, none, string
-	var value string // in, none, string
+	var key   string // in, none, string, casted *C.gchar
+	var value string // in, none, string, casted *C.gchar
 
 	key = C.GoString((*C.gchar)(unsafe.Pointer(carg1)))
 	value = C.GoString((*C.gchar)(unsafe.Pointer(carg2)))
@@ -467,7 +467,7 @@ func _gotk4_gtk3_RecentFilterFunc(carg1 *C.GtkRecentFilterInfo, carg2 C.gpointer
 }
 
 //export _gotk4_gtk3_RecentSortFunc
-func _gotk4_gtk3_RecentSortFunc(carg1 *C.GtkRecentInfo, carg2 *C.GtkRecentInfo, carg3 C.gpointer) (cret C.int) {
+func _gotk4_gtk3_RecentSortFunc(carg1 *C.GtkRecentInfo, carg2 *C.GtkRecentInfo, carg3 C.gpointer) (cret C.gint) {
 	var fn RecentSortFunc
 	{
 		v := gbox.Get(uintptr(carg3))
@@ -486,7 +486,7 @@ func _gotk4_gtk3_RecentSortFunc(carg1 *C.GtkRecentInfo, carg2 *C.GtkRecentInfo, 
 
 	goret = fn(a, b)
 
-	cret = C.int(goret)
+	cret = C.gint(goret)
 
 	return cret
 }
@@ -645,8 +645,8 @@ func _gotk4_gtk3_TranslateFunc(carg1 *C.gchar, carg2 C.gpointer) (cret *C.gchar)
 		fn = v.(TranslateFunc)
 	}
 
-	var path  string // in, none, string
-	var goret string // return, full, string
+	var path  string // in, none, string, casted *C.gchar
+	var goret string // return, full, string, casted *C.gchar
 
 	path = C.GoString((*C.gchar)(unsafe.Pointer(carg1)))
 
@@ -682,7 +682,7 @@ func _gotk4_gtk3_TreeCellDataFunc(carg1 *C.GtkTreeViewColumn, carg2 *C.GtkCellRe
 }
 
 //export _gotk4_gtk3_TreeIterCompareFunc
-func _gotk4_gtk3_TreeIterCompareFunc(carg1 *C.GtkTreeModel, carg2 *C.GtkTreeIter, carg3 *C.GtkTreeIter, carg4 C.gpointer) (cret C.int) {
+func _gotk4_gtk3_TreeIterCompareFunc(carg1 *C.GtkTreeModel, carg2 *C.GtkTreeIter, carg3 *C.GtkTreeIter, carg4 C.gpointer) (cret C.gint) {
 	var fn TreeIterCompareFunc
 	{
 		v := gbox.Get(uintptr(carg4))
@@ -703,13 +703,13 @@ func _gotk4_gtk3_TreeIterCompareFunc(carg1 *C.GtkTreeModel, carg2 *C.GtkTreeIter
 
 	goret = fn(model, a, b)
 
-	cret = C.int(goret)
+	cret = C.gint(goret)
 
 	return cret
 }
 
 //export _gotk4_gtk3_TreeModelFilterModifyFunc
-func _gotk4_gtk3_TreeModelFilterModifyFunc(carg1 *C.GtkTreeModel, carg2 *C.GtkTreeIter, carg3 *C.GValue, carg4 C.int, carg5 C.gpointer) {
+func _gotk4_gtk3_TreeModelFilterModifyFunc(carg1 *C.GtkTreeModel, carg2 *C.GtkTreeIter, carg3 *C.GValue, carg4 C.gint, carg5 C.gpointer) {
 	var fn TreeModelFilterModifyFunc
 	{
 		v := gbox.Get(uintptr(carg5))
@@ -874,7 +874,7 @@ func _gotk4_gtk3_TreeViewRowSeparatorFunc(carg1 *C.GtkTreeModel, carg2 *C.GtkTre
 }
 
 //export _gotk4_gtk3_TreeViewSearchEqualFunc
-func _gotk4_gtk3_TreeViewSearchEqualFunc(carg1 *C.GtkTreeModel, carg2 C.int, carg3 *C.gchar, carg4 *C.GtkTreeIter, carg5 C.gpointer) (cret C.gboolean) {
+func _gotk4_gtk3_TreeViewSearchEqualFunc(carg1 *C.GtkTreeModel, carg2 C.gint, carg3 *C.gchar, carg4 *C.GtkTreeIter, carg5 C.gpointer) (cret C.gboolean) {
 	var fn TreeViewSearchEqualFunc
 	{
 		v := gbox.Get(uintptr(carg5))
@@ -886,7 +886,7 @@ func _gotk4_gtk3_TreeViewSearchEqualFunc(carg1 *C.GtkTreeModel, carg2 C.int, car
 
 	var model  TreeModel // in, none, converted
 	var column int       // in, none, casted
-	var key    string    // in, none, string
+	var key    string    // in, none, string, casted *C.gchar
 	var iter   *TreeIter // in, none, converted
 	var goret  bool      // return
 
@@ -919,7 +919,7 @@ func _gotk4_gtk3_CalendarDetailFunc(carg1 *C.GtkCalendar, carg2 C.guint, carg3 C
 	var year     uint     // in, none, casted
 	var month    uint     // in, none, casted
 	var day      uint     // in, none, casted
-	var goret    string   // return, full, string
+	var goret    string   // return, full, string, casted *C.gchar
 
 	calendar = UnsafeCalendarFromGlibNone(unsafe.Pointer(carg1))
 	year = uint(carg2)
@@ -954,7 +954,7 @@ func _gotk4_gtk3_IconViewForEachFunc(carg1 *C.GtkIconView, carg2 *C.GtkTreePath,
 }
 
 //export _gotk4_gtk3_TreeDestroyCountFunc
-func _gotk4_gtk3_TreeDestroyCountFunc(carg1 *C.GtkTreeView, carg2 *C.GtkTreePath, carg3 C.int, carg4 C.gpointer) {
+func _gotk4_gtk3_TreeDestroyCountFunc(carg1 *C.GtkTreeView, carg2 *C.GtkTreePath, carg3 C.gint, carg4 C.gpointer) {
 	var fn TreeDestroyCountFunc
 	{
 		v := gbox.Get(uintptr(carg4))
@@ -1092,7 +1092,7 @@ func _gotk4_gtk3_FlowBoxForEachFunc(carg1 *C.GtkFlowBox, carg2 *C.GtkFlowBoxChil
 }
 
 //export _gotk4_gtk3_FlowBoxSortFunc
-func _gotk4_gtk3_FlowBoxSortFunc(carg1 *C.GtkFlowBoxChild, carg2 *C.GtkFlowBoxChild, carg3 C.gpointer) (cret C.int) {
+func _gotk4_gtk3_FlowBoxSortFunc(carg1 *C.GtkFlowBoxChild, carg2 *C.GtkFlowBoxChild, carg3 C.gpointer) (cret C.gint) {
 	var fn FlowBoxSortFunc
 	{
 		v := gbox.Get(uintptr(carg3))
@@ -1111,7 +1111,7 @@ func _gotk4_gtk3_FlowBoxSortFunc(carg1 *C.GtkFlowBoxChild, carg2 *C.GtkFlowBoxCh
 
 	goret = fn(child1, child2)
 
-	cret = C.int(goret)
+	cret = C.gint(goret)
 
 	return cret
 }
@@ -1162,7 +1162,7 @@ func _gotk4_gtk3_ListBoxForEachFunc(carg1 *C.GtkListBox, carg2 *C.GtkListBoxRow,
 }
 
 //export _gotk4_gtk3_ListBoxSortFunc
-func _gotk4_gtk3_ListBoxSortFunc(carg1 *C.GtkListBoxRow, carg2 *C.GtkListBoxRow, carg3 C.gpointer) (cret C.int) {
+func _gotk4_gtk3_ListBoxSortFunc(carg1 *C.GtkListBoxRow, carg2 *C.GtkListBoxRow, carg3 C.gpointer) (cret C.gint) {
 	var fn ListBoxSortFunc
 	{
 		v := gbox.Get(uintptr(carg3))
@@ -1181,7 +1181,7 @@ func _gotk4_gtk3_ListBoxSortFunc(carg1 *C.GtkListBoxRow, carg2 *C.GtkListBoxRow,
 
 	goret = fn(row1, row2)
 
-	cret = C.int(goret)
+	cret = C.gint(goret)
 
 	return cret
 }

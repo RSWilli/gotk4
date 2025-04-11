@@ -74,7 +74,7 @@ func init() {
 // &gt; those managed via XInput 1.x), will return 0.
 func X11DeviceGetID(device X11DeviceCore) int {
 	var carg1 *C.GdkDevice // in, none, converted, casted *C.GdkX11DeviceCore
-	var cret  C.int        // return, none, casted
+	var cret  C.gint       // return, none, casted
 
 	carg1 = (*C.GdkDevice)(UnsafeX11DeviceCoreToGlibNone(device))
 
@@ -102,11 +102,11 @@ func X11DeviceGetID(device X11DeviceCore) int {
 // Returns the #GdkDevice that wraps the given device ID.
 func X11DeviceManagerLookup(deviceManager X11DeviceManagerCore, deviceId int) X11DeviceCore {
 	var carg1 *C.GdkDeviceManager // in, none, converted, casted *C.GdkX11DeviceManagerCore
-	var carg2 C.int               // in, none, casted
+	var carg2 C.gint              // in, none, casted
 	var cret  *C.GdkDevice        // return, none, converted, casted *C.GdkX11DeviceCore
 
 	carg1 = (*C.GdkDeviceManager)(UnsafeX11DeviceManagerCoreToGlibNone(deviceManager))
-	carg2 = C.int(deviceId)
+	carg2 = C.gint(deviceId)
 
 	cret = C.gdk_x11_device_manager_lookup(carg1, carg2)
 	runtime.KeepAlive(deviceManager)
@@ -128,14 +128,33 @@ func X11DeviceManagerLookup(deviceManager X11DeviceManagerCore, deviceId int) X1
 //
 // Frees the data returned from gdk_x11_display_string_to_compound_text().
 func X11FreeCompoundText(ctext *uint8) {
-	var carg1 *C.guint8 // in, transfer: none, C Pointers: 1, Name: guint8
+	var carg1 *C.guchar // in, transfer: none, C Pointers: 1, Name: guint8, casted *C.guint8
 
 	_ = ctext
 	_ = carg1
-	panic("unimplemented conversion of *uint8 (guint8*)")
+	panic("unimplemented conversion of *uint8 (guchar*)")
 
 	C.gdk_x11_free_compound_text(carg1)
 	runtime.KeepAlive(ctext)
+}
+
+// X11FreeTextList wraps gdk_x11_free_text_list
+// 
+// The function takes the following parameters:
+// 
+// 	- list string: the value stored in the @list parameter by
+//   a call to gdk_x11_display_text_property_to_text_list(). 
+//
+// Frees the array of strings created by
+// gdk_x11_display_text_property_to_text_list().
+func X11FreeTextList(list string) {
+	var carg1 **C.gchar // in, none, string, casted *C.gchar
+
+	carg1 = (**C.gchar)(unsafe.Pointer(C.CString(list)))
+	defer C.free(unsafe.Pointer(carg1))
+
+	C.gdk_x11_free_text_list(carg1)
+	runtime.KeepAlive(list)
 }
 
 // X11GetDefaultScreen wraps gdk_x11_get_default_screen
@@ -145,7 +164,7 @@ func X11FreeCompoundText(ctext *uint8) {
 //
 // Gets the default GTK+ screen number.
 func X11GetDefaultScreen() int {
-	var cret C.int // return, none, casted
+	var cret C.gint // return, none, casted
 
 	cret = C.gdk_x11_get_default_screen()
 
@@ -219,12 +238,12 @@ func X11GrabServer() {
 // when filtering XInput extension events on the root window.
 func X11RegisterStandardEventType(display X11Display, eventBase int, nEvents int) {
 	var carg1 *C.GdkDisplay // in, none, converted, casted *C.GdkX11Display
-	var carg2 C.int         // in, none, casted
-	var carg3 C.int         // in, none, casted
+	var carg2 C.gint        // in, none, casted
+	var carg3 C.gint        // in, none, casted
 
 	carg1 = (*C.GdkDisplay)(UnsafeX11DisplayToGlibNone(display))
-	carg2 = C.int(eventBase)
-	carg3 = C.int(nEvents)
+	carg2 = C.gint(eventBase)
+	carg3 = C.gint(nEvents)
 
 	C.gdk_x11_register_standard_event_type(carg1, carg2, carg3)
 	runtime.KeepAlive(display)
@@ -756,8 +775,8 @@ func UnsafeX11DisplayToGlibFull(c X11Display) unsafe.Pointer {
 // Retrieves the version of the GLX implementation.
 func X11DisplayInstanceGetGLXVersion(display gdk.Display) (int, int, bool) {
 	var carg1 *C.GdkDisplay // in, none, converted
-	var carg2 C.int         // out, full, casted
-	var carg3 C.int         // out, full, casted
+	var carg2 C.gint        // out, full, casted
+	var carg3 C.gint        // out, full, casted
 	var cret  C.gboolean    // return
 
 	carg1 = (*C.GdkDisplay)(gdk.UnsafeDisplayToGlibNone(display))
@@ -795,7 +814,7 @@ func X11DisplayInstanceGetGLXVersion(display gdk.Display) (int, int, bool) {
 // equivalent.
 func (display *X11DisplayInstance) ErrorTrapPop() int {
 	var carg0 *C.GdkDisplay // in, none, converted, casted *C.GdkX11Display
-	var cret  C.int         // return, none, casted
+	var cret  C.gint        // return, none, casted
 
 	carg0 = (*C.GdkDisplay)(UnsafeX11DisplayToGlibNone(display))
 
@@ -853,7 +872,7 @@ func (display *X11DisplayInstance) ErrorTrapPush() {
 // Gets the startup notification ID for a display.
 func (display *X11DisplayInstance) GetStartupNotificationID() string {
 	var carg0 *C.GdkDisplay // in, none, converted, casted *C.GdkX11Display
-	var cret  *C.gchar      // return, none, string
+	var cret  *C.gchar      // return, none, string, casted *C.gchar
 
 	carg0 = (*C.GdkDisplay)(UnsafeX11DisplayToGlibNone(display))
 
@@ -929,14 +948,14 @@ func (display *X11DisplayInstance) Grab() {
 func (display *X11DisplayInstance) SetCursorTheme(theme string, size int) {
 	var carg0 *C.GdkDisplay // in, none, converted, casted *C.GdkX11Display
 	var carg1 *C.gchar      // in, none, string, nullable-string
-	var carg2 C.int         // in, none, casted
+	var carg2 C.gint        // in, none, casted
 
 	carg0 = (*C.GdkDisplay)(UnsafeX11DisplayToGlibNone(display))
 	if theme != "" {
 		carg1 = (*C.gchar)(unsafe.Pointer(C.CString(theme)))
 		defer C.free(unsafe.Pointer(carg1))
 	}
-	carg2 = C.int(size)
+	carg2 = C.gint(size)
 
 	C.gdk_x11_display_set_cursor_theme(carg0, carg1, carg2)
 	runtime.KeepAlive(display)
@@ -966,7 +985,7 @@ func (display *X11DisplayInstance) SetCursorTheme(theme string, size int) {
 // gdk_notify_startup_complete()).
 func (display *X11DisplayInstance) SetStartupNotificationID(startupId string) {
 	var carg0 *C.GdkDisplay // in, none, converted, casted *C.GdkX11Display
-	var carg1 *C.gchar      // in, none, string
+	var carg1 *C.gchar      // in, none, string, casted *C.gchar
 
 	carg0 = (*C.GdkDisplay)(UnsafeX11DisplayToGlibNone(display))
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(startupId)))
@@ -992,10 +1011,10 @@ func (display *X11DisplayInstance) SetStartupNotificationID(startupId string) {
 // to later user configuration changes.
 func (display *X11DisplayInstance) SetWindowScale(scale int) {
 	var carg0 *C.GdkDisplay // in, none, converted, casted *C.GdkX11Display
-	var carg1 C.int         // in, none, casted
+	var carg1 C.gint        // in, none, casted
 
 	carg0 = (*C.GdkDisplay)(UnsafeX11DisplayToGlibNone(display))
-	carg1 = C.int(scale)
+	carg1 = C.gint(scale)
 
 	C.gdk_x11_display_set_window_scale(carg0, carg1)
 	runtime.KeepAlive(display)
@@ -1263,7 +1282,7 @@ func UnsafeX11KeymapToGlibFull(c X11Keymap) unsafe.Pointer {
 func (keymap *X11KeymapInstance) GetGroupForState(state uint) int {
 	var carg0 *C.GdkKeymap // in, none, converted, casted *C.GdkX11Keymap
 	var carg1 C.guint      // in, none, casted
-	var cret  C.int        // return, none, casted
+	var cret  C.gint       // return, none, casted
 
 	carg0 = (*C.GdkKeymap)(UnsafeX11KeymapToGlibNone(keymap))
 	carg1 = C.guint(state)
@@ -1509,7 +1528,7 @@ func (screen *X11ScreenInstance) GetNumberOfDesktops() uint32 {
 // Returns the index of a #GdkScreen.
 func (screen *X11ScreenInstance) GetScreenNumber() int {
 	var carg0 *C.GdkScreen // in, none, converted, casted *C.GdkX11Screen
-	var cret  C.int        // return, none, casted
+	var cret  C.int        // return, none, casted, casted C.gint
 
 	carg0 = (*C.GdkScreen)(UnsafeX11ScreenToGlibNone(screen))
 
@@ -1531,7 +1550,7 @@ func (screen *X11ScreenInstance) GetScreenNumber() int {
 // Returns the name of the window manager for @screen.
 func (screen *X11ScreenInstance) GetWindowManagerName() string {
 	var carg0 *C.GdkScreen // in, none, converted, casted *C.GdkX11Screen
-	var cret  *C.gchar     // return, none, string
+	var cret  *C.char      // return, none, string, casted *C.gchar
 
 	carg0 = (*C.GdkScreen)(UnsafeX11ScreenToGlibNone(screen))
 
@@ -1540,7 +1559,7 @@ func (screen *X11ScreenInstance) GetWindowManagerName() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -1830,10 +1849,10 @@ func (window *X11WindowInstance) MoveToDesktop(desktop uint32) {
 // Deprecated: (since 3.12.0) Use gdk_window_set_shadow_width() instead.
 func (window *X11WindowInstance) SetFrameExtents(left int, right int, top int, bottom int) {
 	var carg0 *C.GdkWindow // in, none, converted, casted *C.GdkX11Window
-	var carg1 C.int        // in, none, casted
-	var carg2 C.int        // in, none, casted
-	var carg3 C.int        // in, none, casted
-	var carg4 C.int        // in, none, casted
+	var carg1 C.int        // in, none, casted, casted C.gint
+	var carg2 C.int        // in, none, casted, casted C.gint
+	var carg3 C.int        // in, none, casted, casted C.gint
+	var carg4 C.int        // in, none, casted, casted C.gint
 
 	carg0 = (*C.GdkWindow)(UnsafeX11WindowToGlibNone(window))
 	carg1 = C.int(left)
@@ -1919,10 +1938,10 @@ func (window *X11WindowInstance) SetHideTitlebarWhenMaximized(hideTitlebarWhenMa
 // to create toplevel windows.
 func (window *X11WindowInstance) SetThemeVariant(variant string) {
 	var carg0 *C.GdkWindow // in, none, converted, casted *C.GdkX11Window
-	var carg1 *C.gchar     // in, none, string
+	var carg1 *C.char      // in, none, string, casted *C.gchar
 
 	carg0 = (*C.GdkWindow)(UnsafeX11WindowToGlibNone(window))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(variant)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(variant)))
 	defer C.free(unsafe.Pointer(carg1))
 
 	C.gdk_x11_window_set_theme_variant(carg0, carg1)
@@ -1972,7 +1991,7 @@ func (window *X11WindowInstance) SetUserTime(timestamp uint32) {
 // not a toplevel window, it is ignored.
 func (window *X11WindowInstance) SetUTF8Property(name string, value string) {
 	var carg0 *C.GdkWindow // in, none, converted, casted *C.GdkX11Window
-	var carg1 *C.gchar     // in, none, string
+	var carg1 *C.gchar     // in, none, string, casted *C.gchar
 	var carg2 *C.gchar     // in, none, string, nullable-string
 
 	carg0 = (*C.GdkWindow)(UnsafeX11WindowToGlibNone(window))

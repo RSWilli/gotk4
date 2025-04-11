@@ -4046,20 +4046,20 @@ type ChildWatchFunc func(pid Pid, waitStatus int)
 // 	- prettyFunction string 
 // 	- expression string 
 func AssertWarning(logDomain string, file string, line int, prettyFunction string, expression string) {
-	var carg1 *C.gchar // in, none, string
-	var carg2 *C.gchar // in, none, string
-	var carg3 C.int    // in, none, casted
-	var carg4 *C.gchar // in, none, string
-	var carg5 *C.gchar // in, none, string
+	var carg1 *C.char // in, none, string, casted *C.gchar
+	var carg2 *C.char // in, none, string, casted *C.gchar
+	var carg3 C.int   // in, none, casted, casted C.gint
+	var carg4 *C.char // in, none, string, casted *C.gchar
+	var carg5 *C.char // in, none, string, casted *C.gchar
 
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(logDomain)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(logDomain)))
 	defer C.free(unsafe.Pointer(carg1))
-	carg2 = (*C.gchar)(unsafe.Pointer(C.CString(file)))
+	carg2 = (*C.char)(unsafe.Pointer(C.CString(file)))
 	defer C.free(unsafe.Pointer(carg2))
 	carg3 = C.int(line)
-	carg4 = (*C.gchar)(unsafe.Pointer(C.CString(prettyFunction)))
+	carg4 = (*C.char)(unsafe.Pointer(C.CString(prettyFunction)))
 	defer C.free(unsafe.Pointer(carg4))
-	carg5 = (*C.gchar)(unsafe.Pointer(C.CString(expression)))
+	carg5 = (*C.char)(unsafe.Pointer(C.CString(expression)))
 	defer C.free(unsafe.Pointer(carg5))
 
 	C.g_assert_warning(carg1, carg2, carg3, carg4, carg5)
@@ -4087,11 +4087,11 @@ func AssertWarning(logDomain string, file string, line int, prettyFunction strin
 // usually). To start searching from the 0th bit, set @nth_bit to -1.
 func BitNthLSF(mask uint32, nthBit int) int {
 	var carg1 C.gulong // in, none, casted
-	var carg2 C.int    // in, none, casted
-	var cret  C.int    // return, none, casted
+	var carg2 C.gint   // in, none, casted
+	var cret  C.gint   // return, none, casted
 
 	carg1 = C.gulong(mask)
-	carg2 = C.int(nthBit)
+	carg2 = C.gint(nthBit)
 
 	cret = C.g_bit_nth_lsf(carg1, carg2)
 	runtime.KeepAlive(mask)
@@ -4122,11 +4122,11 @@ func BitNthLSF(mask uint32, nthBit int) int {
 // -1 or GLIB_SIZEOF_LONG * 8.
 func BitNthMSF(mask uint32, nthBit int) int {
 	var carg1 C.gulong // in, none, casted
-	var carg2 C.int    // in, none, casted
-	var cret  C.int    // return, none, casted
+	var carg2 C.gint   // in, none, casted
+	var cret  C.gint   // return, none, casted
 
 	carg1 = C.gulong(mask)
-	carg2 = C.int(nthBit)
+	carg2 = C.gint(nthBit)
 
 	cret = C.g_bit_nth_msf(carg1, carg2)
 	runtime.KeepAlive(mask)
@@ -4189,7 +4189,7 @@ func BitStorage(number uint32) uint {
 // #GPathBuf instead.
 func BuildFilenamev(args []string) string {
 	var carg1 **C.gchar // in, transfer: none, C Pointers: 2, Name: array[filename], array (inner: *typesystem.StringPrimitive, zero-terminated)
-	var cret  *C.gchar  // return, full, string
+	var cret  *C.gchar  // return, full, string, casted *C.gchar
 
 	_ = args
 	_ = carg1
@@ -4223,9 +4223,9 @@ func BuildFilenamev(args []string) string {
 // 
 // This function is mainly meant for language bindings.
 func BuildPathv(separator string, args []string) string {
-	var carg1 *C.gchar  // in, none, string
+	var carg1 *C.gchar  // in, none, string, casted *C.gchar
 	var carg2 **C.gchar // in, transfer: none, C Pointers: 2, Name: array[filename], array (inner: *typesystem.StringPrimitive, zero-terminated)
-	var cret  *C.gchar  // return, full, string
+	var cret  *C.gchar  // return, full, string, casted *C.gchar
 
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(separator)))
 	defer C.free(unsafe.Pointer(carg1))
@@ -4272,9 +4272,9 @@ func BuildPathv(separator string, args []string) string {
 // 
 // No file system I/O is done.
 func CanonicalizeFilename(filename string, relativeTo string) string {
-	var carg1 *C.gchar // in, none, string
+	var carg1 *C.gchar // in, none, string, casted *C.gchar
 	var carg2 *C.gchar // in, none, string, nullable-string
-	var cret  *C.gchar // return, full, string
+	var cret  *C.gchar // return, full, string, casted *C.gchar
 
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(filename)))
 	defer C.free(unsafe.Pointer(carg1))
@@ -4326,7 +4326,7 @@ func CheckVersion(requiredMajor uint, requiredMinor uint, requiredMicro uint) st
 	var carg1 C.guint  // in, none, casted
 	var carg2 C.guint  // in, none, casted
 	var carg3 C.guint  // in, none, casted
-	var cret  *C.gchar // return, none, string
+	var cret  *C.gchar // return, none, string, casted *C.gchar
 
 	carg1 = C.guint(requiredMajor)
 	carg2 = C.guint(requiredMinor)
@@ -4385,14 +4385,14 @@ func CheckVersion(requiredMajor uint, requiredMinor uint, requiredMicro uint) st
 // using [method@GLib.Source.attach]. You can do these steps manually if you
 // need greater control.
 func ChildWatchAddFull(priority int, pid Pid, function ChildWatchFunc) uint {
-	var carg1 C.int             // in, none, casted
+	var carg1 C.gint            // in, none, casted
 	var carg2 C.GPid            // in, none, casted, alias
 	var carg3 C.GChildWatchFunc // callback, scope: notified, closure: carg4, destroy: carg5
 	var carg4 C.gpointer        // implicit
 	var carg5 C.GDestroyNotify  // implicit
 	var cret  C.guint           // return, none, casted
 
-	carg1 = C.int(priority)
+	carg1 = C.gint(priority)
 	carg2 = C.GPid(pid)
 	carg3 = (*[0]byte)(C._gotk4_glib2_ChildWatchFunc)
 	carg4 = C.gpointer(gbox.Assign(function))
@@ -4496,7 +4496,7 @@ func NewChildWatchSource(pid Pid) *Source {
 func ComputeChecksumForBytes(checksumType ChecksumType, data *Bytes) string {
 	var carg1 C.GChecksumType // in, none, casted
 	var carg2 *C.GBytes       // in, none, converted
-	var cret  *C.gchar        // return, full, string
+	var cret  *C.gchar        // return, full, string, casted *C.gchar
 
 	carg1 = C.GChecksumType(checksumType)
 	carg2 = (*C.GBytes)(UnsafeBytesToGlibNone(data))
@@ -4533,7 +4533,7 @@ func ComputeChecksumForData(checksumType ChecksumType, data []uint8) string {
 	var carg1 C.GChecksumType // in, none, casted
 	var carg2 *C.guchar       // in, transfer: none, C Pointers: 1, Name: array[guint8], array (inner: *typesystem.CastablePrimitive, length-by: carg3)
 	var carg3 C.gsize         // implicit
-	var cret  *C.gchar        // return, full, string
+	var cret  *C.gchar        // return, full, string, casted *C.gchar
 
 	carg1 = C.GChecksumType(checksumType)
 	_ = data
@@ -4570,9 +4570,9 @@ func ComputeChecksumForData(checksumType ChecksumType, data []uint8) string {
 // The hexadecimal string returned will be in lower case.
 func ComputeChecksumForString(checksumType ChecksumType, str string, length int) string {
 	var carg1 C.GChecksumType // in, none, casted
-	var carg2 *C.gchar        // in, none, string
+	var carg2 *C.gchar        // in, none, string, casted *C.gchar
 	var carg3 C.gssize        // in, none, casted
-	var cret  *C.gchar        // return, full, string
+	var cret  *C.gchar        // return, full, string, casted *C.gchar
 
 	carg1 = C.GChecksumType(checksumType)
 	carg2 = (*C.gchar)(unsafe.Pointer(C.CString(str)))
@@ -4613,7 +4613,7 @@ func ComputeHMACForBytes(digestType ChecksumType, key *Bytes, data *Bytes) strin
 	var carg1 C.GChecksumType // in, none, casted
 	var carg2 *C.GBytes       // in, none, converted
 	var carg3 *C.GBytes       // in, none, converted
-	var cret  *C.gchar        // return, full, string
+	var cret  *C.gchar        // return, full, string, casted *C.gchar
 
 	carg1 = C.GChecksumType(digestType)
 	carg2 = (*C.GBytes)(UnsafeBytesToGlibNone(key))
@@ -4655,7 +4655,7 @@ func ComputeHMACForData(digestType ChecksumType, key []byte, data []byte) string
 	var carg3 C.gsize         // implicit
 	var carg4 *C.guchar       // in, transfer: none, C Pointers: 1, Name: array[guchar], array (inner: *typesystem.CastablePrimitive, length-by: carg5)
 	var carg5 C.gsize         // implicit
-	var cret  *C.gchar        // return, full, string
+	var cret  *C.gchar        // return, full, string, casted *C.gchar
 
 	carg1 = C.GChecksumType(digestType)
 	_ = key
@@ -4700,9 +4700,9 @@ func ComputeHMACForString(digestType ChecksumType, key []byte, str string, lengt
 	var carg1 C.GChecksumType // in, none, casted
 	var carg2 *C.guchar       // in, transfer: none, C Pointers: 1, Name: array[guchar], array (inner: *typesystem.CastablePrimitive, length-by: carg3)
 	var carg3 C.gsize         // implicit
-	var carg4 *C.gchar        // in, none, string
+	var carg4 *C.gchar        // in, none, string, casted *C.gchar
 	var carg5 C.gssize        // in, none, casted
-	var cret  *C.gchar        // return, full, string
+	var cret  *C.gchar        // return, full, string, casted *C.gchar
 
 	carg1 = C.GChecksumType(digestType)
 	_ = key
@@ -4768,8 +4768,8 @@ func ComputeHMACForString(digestType ChecksumType, key []byte, str string, lengt
 func Convert(str string, toCodeset string, fromCodeset string) (uint, uint, string, error) {
 	var carg1 *C.gchar  // in, transfer: none, C Pointers: 1, Name: array[unknown], array (inner: <nil>, length-by: carg2)
 	var carg2 C.gssize  // implicit
-	var carg3 *C.gchar  // in, none, string
-	var carg4 *C.gchar  // in, none, string
+	var carg3 *C.gchar  // in, none, string, casted *C.gchar
+	var carg4 *C.gchar  // in, none, string, casted *C.gchar
 	var carg5 C.gsize   // out, full, casted
 	var carg6 C.gsize   // out, full, casted
 	var cret  *C.gchar  // return, transfer: full, C Pointers: 1, Name: array[unknown], scope: , array (inner: <nil>)
@@ -4868,9 +4868,9 @@ func ConvertErrorQuark() Quark {
 func ConvertWithFallback(str string, toCodeset string, fromCodeset string, fallback string) (uint, uint, string, error) {
 	var carg1 *C.gchar  // in, transfer: none, C Pointers: 1, Name: array[unknown], array (inner: <nil>, length-by: carg2)
 	var carg2 C.gssize  // implicit
-	var carg3 *C.gchar  // in, none, string
-	var carg4 *C.gchar  // in, none, string
-	var carg5 *C.gchar  // in, none, string
+	var carg3 *C.gchar  // in, none, string, casted *C.gchar
+	var carg4 *C.gchar  // in, none, string, casted *C.gchar
+	var carg5 *C.gchar  // in, none, string, casted *C.gchar
 	var carg6 C.gsize   // out, full, casted
 	var carg7 C.gsize   // out, full, casted
 	var cret  *C.gchar  // return, transfer: full, C Pointers: 1, Name: array[unknown], scope: , array (inner: <nil>)
@@ -4929,9 +4929,9 @@ func ConvertWithFallback(str string, toCodeset string, fromCodeset string, fallb
 // dcgettext() directly.
 func Dcgettext(domain string, msgid string, category int) string {
 	var carg1 *C.gchar // in, none, string, nullable-string
-	var carg2 *C.gchar // in, none, string
-	var carg3 C.int    // in, none, casted
-	var cret  *C.gchar // return, none, string
+	var carg2 *C.gchar // in, none, string, casted *C.gchar
+	var carg3 C.gint   // in, none, casted
+	var cret  *C.gchar // return, none, string, casted *C.gchar
 
 	if domain != "" {
 		carg1 = (*C.gchar)(unsafe.Pointer(C.CString(domain)))
@@ -4939,7 +4939,7 @@ func Dcgettext(domain string, msgid string, category int) string {
 	}
 	carg2 = (*C.gchar)(unsafe.Pointer(C.CString(msgid)))
 	defer C.free(unsafe.Pointer(carg2))
-	carg3 = C.int(category)
+	carg3 = C.gint(category)
 
 	cret = C.g_dcgettext(carg1, carg2, carg3)
 	runtime.KeepAlive(domain)
@@ -4999,8 +4999,8 @@ func Dcgettext(domain string, msgid string, category int) string {
 // but use the _() macro for translations.
 func Dgettext(domain string, msgid string) string {
 	var carg1 *C.gchar // in, none, string, nullable-string
-	var carg2 *C.gchar // in, none, string
-	var cret  *C.gchar // return, none, string
+	var carg2 *C.gchar // in, none, string, casted *C.gchar
+	var cret  *C.gchar // return, none, string, casted *C.gchar
 
 	if domain != "" {
 		carg1 = (*C.gchar)(unsafe.Pointer(C.CString(domain)))
@@ -5120,10 +5120,10 @@ func DirectHash(v unsafe.Pointer) uint {
 // proper.
 func Dngettext(domain string, msgid string, msgidPlural string, n uint32) string {
 	var carg1 *C.gchar // in, none, string, nullable-string
-	var carg2 *C.gchar // in, none, string
-	var carg3 *C.gchar // in, none, string
+	var carg2 *C.gchar // in, none, string, casted *C.gchar
+	var carg3 *C.gchar // in, none, string, casted *C.gchar
 	var carg4 C.gulong // in, none, casted
-	var cret  *C.gchar // return, none, string
+	var cret  *C.gchar // return, none, string, casted *C.gchar
 
 	if domain != "" {
 		carg1 = (*C.gchar)(unsafe.Pointer(C.CString(domain)))
@@ -5244,9 +5244,9 @@ func DoubleHash(v unsafe.Pointer) uint {
 // but use the C_() macro for translations with context.
 func Dpgettext(domain string, msgctxtid string, msgidoffset uint) string {
 	var carg1 *C.gchar // in, none, string, nullable-string
-	var carg2 *C.gchar // in, none, string
+	var carg2 *C.gchar // in, none, string, casted *C.gchar
 	var carg3 C.gsize  // in, none, casted
-	var cret  *C.gchar // return, none, string
+	var cret  *C.gchar // return, none, string, casted *C.gchar
 
 	if domain != "" {
 		carg1 = (*C.gchar)(unsafe.Pointer(C.CString(domain)))
@@ -5293,9 +5293,9 @@ func Dpgettext(domain string, msgctxtid string, msgidoffset uint) string {
 // thus you may use non-string-literals as context and msgid arguments.
 func Dpgettext2(domain string, context string, msgid string) string {
 	var carg1 *C.gchar // in, none, string, nullable-string
-	var carg2 *C.gchar // in, none, string
-	var carg3 *C.gchar // in, none, string
-	var cret  *C.gchar // return, none, string
+	var carg2 *C.gchar // in, none, string, casted *C.gchar
+	var carg3 *C.gchar // in, none, string, casted *C.gchar
+	var cret  *C.gchar // return, none, string, casted *C.gchar
 
 	if domain != "" {
 		carg1 = (*C.gchar)(unsafe.Pointer(C.CString(domain)))
@@ -5335,8 +5335,8 @@ func Dpgettext2(domain string, context string, msgid string) string {
 // provided list @envp.
 func EnvironGetenv(envp []string, variable string) string {
 	var carg1 **C.gchar // in, transfer: none, C Pointers: 2, Name: array[filename], nullable, array (inner: *typesystem.StringPrimitive, zero-terminated)
-	var carg2 *C.gchar  // in, none, string
-	var cret  *C.gchar  // return, none, string
+	var carg2 *C.gchar  // in, none, string, casted *C.gchar
+	var cret  *C.gchar  // return, none, string, casted *C.gchar
 
 	_ = envp
 	_ = carg1
@@ -5376,8 +5376,8 @@ func EnvironGetenv(envp []string, variable string) string {
 // @envp to @value.
 func EnvironSetenv(envp []string, variable string, value string, overwrite bool) []string {
 	var carg1 **C.gchar  // in, transfer: full, C Pointers: 2, Name: array[filename], nullable, array (inner: *typesystem.StringPrimitive, zero-terminated)
-	var carg2 *C.gchar   // in, none, string
-	var carg3 *C.gchar   // in, none, string
+	var carg2 *C.gchar   // in, none, string, casted *C.gchar
+	var carg3 *C.gchar   // in, none, string, casted *C.gchar
 	var carg4 C.gboolean // in
 	var cret  **C.gchar  // return, transfer: full, C Pointers: 2, Name: array[filename], scope: , array (inner: *typesystem.StringPrimitive, zero-terminated)
 
@@ -5425,7 +5425,7 @@ func EnvironSetenv(envp []string, variable string, value string, overwrite bool)
 // environment @envp.
 func EnvironUnsetenv(envp []string, variable string) []string {
 	var carg1 **C.gchar // in, transfer: full, C Pointers: 2, Name: array[filename], nullable, array (inner: *typesystem.StringPrimitive, zero-terminated)
-	var carg2 *C.gchar  // in, none, string
+	var carg2 *C.gchar  // in, none, string, casted *C.gchar
 	var cret  **C.gchar // return, transfer: full, C Pointers: 2, Name: array[filename], scope: , array (inner: *typesystem.StringPrimitive, zero-terminated)
 
 	_ = envp
@@ -5467,10 +5467,10 @@ func EnvironUnsetenv(envp []string, variable string) []string {
 // from a function that manipulates files. So you would use
 // g_file_error_from_errno() when constructing a #GError.
 func FileErrorFromErrno(errNo int) FileError {
-	var carg1 C.int        // in, none, casted
+	var carg1 C.gint       // in, none, casted
 	var cret  C.GFileError // return, none, casted
 
-	carg1 = C.int(errNo)
+	carg1 = C.gint(errNo)
 
 	cret = C.g_file_error_from_errno(carg1)
 	runtime.KeepAlive(errNo)
@@ -5523,7 +5523,7 @@ func FileErrorQuark() Quark {
 // codes are those in the #GFileError enumeration. In the error case,
 // @contents is set to %NULL and @length is set to zero.
 func FileGetContents(filename string) (string, bool, error) {
-	var carg1 *C.gchar   // in, none, string
+	var carg1 *C.gchar   // in, none, string, casted *C.gchar
 	var carg2 *C.gchar   // out, transfer: full, C Pointers: 1, Name: array[unknown], array (inner: <nil>, length-by: carg3)
 	var carg3 C.gsize    // implicit
 	var cret  C.gboolean // return
@@ -5585,8 +5585,8 @@ func FileGetContents(filename string) (string, bool, error) {
 // name encoding.
 func FileOpenTmp(tmpl string) (string, int, error) {
 	var carg1 *C.gchar  // in, none, string, nullable-string
-	var carg2 *C.gchar  // out, full, string
-	var cret  C.int     // return, none, casted
+	var carg2 *C.gchar  // out, full, string, casted *C.gchar
+	var cret  C.gint    // return, none, casted
 	var _cerr *C.GError // out, full, converted, nullable
 
 	if tmpl != "" {
@@ -5646,8 +5646,8 @@ func FileOpenTmp(tmpl string) (string, int, error) {
 //   }
 // ]|
 func FileReadLink(filename string) (string, error) {
-	var carg1 *C.gchar  // in, none, string
-	var cret  *C.gchar  // return, full, string
+	var carg1 *C.gchar  // in, none, string, casted *C.gchar
+	var cret  *C.gchar  // return, full, string, casted *C.gchar
 	var _cerr *C.GError // out, full, converted, nullable
 
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(filename)))
@@ -5686,7 +5686,7 @@ func FileReadLink(filename string) (string, error) {
 // `G_FILE_SET_CONTENTS_CONSISTENT | G_FILE_SET_CONTENTS_ONLY_EXISTING` and
 // `mode` set to `0666`.
 func FileSetContents(filename string, contents string) (bool, error) {
-	var carg1 *C.gchar   // in, none, string
+	var carg1 *C.gchar   // in, none, string, casted *C.gchar
 	var carg2 *C.gchar   // in, transfer: none, C Pointers: 1, Name: array[unknown], array (inner: <nil>, length-by: carg3)
 	var carg3 C.gssize   // implicit
 	var cret  C.gboolean // return
@@ -5786,11 +5786,11 @@ func FileSetContents(filename string, contents string) (bool, error) {
 // permissions from @mode. Otherwise, the permissions of the existing file may
 // be changed to @mode depending on @flags, or they may remain unchanged.
 func FileSetContentsFull(filename string, contents string, flags FileSetContentsFlags, mode int) (bool, error) {
-	var carg1 *C.gchar                // in, none, string
+	var carg1 *C.gchar                // in, none, string, casted *C.gchar
 	var carg2 *C.gchar                // in, transfer: none, C Pointers: 1, Name: array[unknown], array (inner: <nil>, length-by: carg3)
 	var carg3 C.gssize                // implicit
 	var carg4 C.GFileSetContentsFlags // in, none, casted
-	var carg5 C.int                   // in, none, casted
+	var carg5 C.int                   // in, none, casted, casted C.gint
 	var cret  C.gboolean              // return
 	var _cerr *C.GError               // out, full, converted, nullable
 
@@ -5896,7 +5896,7 @@ func FileSetContentsFull(filename string, contents string, flags FileSetContents
 // 
 // This type has been renamed from file_test.
 func TestFile(filename string, test FileTest) bool {
-	var carg1 *C.gchar    // in, none, string
+	var carg1 *C.gchar    // in, none, string, casted *C.gchar
 	var carg2 C.GFileTest // in, none, casted
 	var cret  C.gboolean  // return
 
@@ -5945,8 +5945,8 @@ func TestFile(filename string, test FileTest) bool {
 // This function is preferred over g_filename_display_name() if you know the
 // whole path, as it allows translation.
 func FilenameDisplayBasename(filename string) string {
-	var carg1 *C.gchar // in, none, string
-	var cret  *C.gchar // return, full, string
+	var carg1 *C.gchar // in, none, string, casted *C.gchar
+	var cret  *C.gchar // return, full, string, casted *C.gchar
 
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(filename)))
 	defer C.free(unsafe.Pointer(carg1))
@@ -5989,8 +5989,8 @@ func FilenameDisplayBasename(filename string) string {
 // g_filename_display_basename(), since that allows location-based
 // translation of filenames.
 func FilenameDisplayName(filename string) string {
-	var carg1 *C.gchar // in, none, string
-	var cret  *C.gchar // return, full, string
+	var carg1 *C.gchar // in, none, string, casted *C.gchar
+	var cret  *C.gchar // return, full, string, casted *C.gchar
 
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(filename)))
 	defer C.free(unsafe.Pointer(carg1))
@@ -6028,9 +6028,9 @@ func FilenameDisplayName(filename string) string {
 // We take inspiration from https://url.spec.whatwg.org/#file-state,
 // but we don't support the entire standard.
 func FilenameFromURI(uri string) (string, string, error) {
-	var carg1 *C.gchar  // in, none, string
-	var carg2 *C.gchar  // out, full, string, nullable-string
-	var cret  *C.gchar  // return, full, string
+	var carg1 *C.gchar  // in, none, string, casted *C.gchar
+	var carg2 *C.gchar  // out, full, string, casted *C.gchar, nullable
+	var cret  *C.gchar  // return, full, string, casted *C.gchar
 	var _cerr *C.GError // out, full, converted, nullable
 
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(uri)))
@@ -6090,11 +6090,11 @@ func FilenameFromURI(uri string) (string, string, error) {
 // not UTF-8 and the conversion output contains a nul character, the error
 // %G_CONVERT_ERROR_EMBEDDED_NUL is set and the function returns %NULL.
 func FilenameFromUTF8(utf8String string, len int) (uint, uint, string, error) {
-	var carg1 *C.gchar  // in, none, string
+	var carg1 *C.gchar  // in, none, string, casted *C.gchar
 	var carg2 C.gssize  // in, none, casted
 	var carg3 C.gsize   // out, full, casted
 	var carg4 C.gsize   // out, full, casted
-	var cret  *C.gchar  // return, full, string
+	var cret  *C.gchar  // return, full, string, casted *C.gchar
 	var _cerr *C.GError // out, full, converted, nullable
 
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(utf8String)))
@@ -6138,9 +6138,9 @@ func FilenameFromUTF8(utf8String string, len int) (uint, uint, string, error) {
 // Converts an absolute filename to an escaped ASCII-encoded URI, with the path
 // component following Section 3.3. of RFC 2396.
 func FilenameToURI(filename string, hostname string) (string, error) {
-	var carg1 *C.gchar  // in, none, string
+	var carg1 *C.gchar  // in, none, string, casted *C.gchar
 	var carg2 *C.gchar  // in, none, string, nullable-string
-	var cret  *C.gchar  // return, full, string
+	var cret  *C.gchar  // return, full, string, casted *C.gchar
 	var _cerr *C.GError // out, full, converted, nullable
 
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(filename)))
@@ -6204,11 +6204,11 @@ func FilenameToURI(filename string, hostname string) (string, error) {
 // function returns %NULL. Use g_convert() to produce output that
 // may contain embedded nul characters.
 func FilenameToUTF8(opsysstring string, len int) (uint, uint, string, error) {
-	var carg1 *C.gchar  // in, none, string
+	var carg1 *C.gchar  // in, none, string, casted *C.gchar
 	var carg2 C.gssize  // in, none, casted
 	var carg3 C.gsize   // out, full, casted
 	var carg4 C.gsize   // out, full, casted
-	var cret  *C.gchar  // return, full, string
+	var cret  *C.gchar  // return, full, string, casted *C.gchar
 	var _cerr *C.GError // out, full, converted, nullable
 
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(opsysstring)))
@@ -6263,8 +6263,8 @@ func FilenameToUTF8(opsysstring string, len int) (uint, uint, string, error) {
 // the program is found, the return value contains the full name
 // including the type suffix.
 func FindProgramInPath(program string) string {
-	var carg1 *C.gchar // in, none, string
-	var cret  *C.gchar // return, full, string
+	var carg1 *C.gchar // in, none, string, casted *C.gchar
+	var cret  *C.gchar // return, full, string, casted *C.gchar
 
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(program)))
 	defer C.free(unsafe.Pointer(carg1))
@@ -6305,7 +6305,7 @@ func FindProgramInPath(program string) string {
 // formatted.
 func FormatSize(size uint64) string {
 	var carg1 C.guint64 // in, none, casted
-	var cret  *C.gchar  // return, full, string
+	var cret  *C.gchar  // return, full, string, casted *C.gchar
 
 	carg1 = C.guint64(size)
 
@@ -6338,7 +6338,7 @@ func FormatSize(size uint64) string {
 func FormatSizeFull(size uint64, flags FormatSizeFlags) string {
 	var carg1 C.guint64          // in, none, casted
 	var carg2 C.GFormatSizeFlags // in, none, casted
-	var cret  *C.gchar           // return, full, string
+	var cret  *C.gchar           // return, full, string, casted *C.gchar
 
 	carg1 = C.guint64(size)
 	carg2 = C.GFormatSizeFlags(flags)
@@ -6368,7 +6368,7 @@ func FormatSizeFull(size uint64, flags FormatSizeFlags) string {
 // g_get_prgname() (which may be %NULL if g_set_prgname() has also not
 // been called).
 func GetApplicationName() string {
-	var cret *C.gchar // return, none, string
+	var cret *C.gchar // return, none, string, casted *C.gchar
 
 	cret = C.g_get_application_name()
 
@@ -6408,7 +6408,7 @@ func GetApplicationName() string {
 // The string returned in @charset is not allocated, and should not be
 // freed.
 func GetCharset() (string, bool) {
-	var carg1 *C.gchar   // out, none, string
+	var carg1 *C.char    // out, none, string, casted *C.gchar
 	var cret  C.gboolean // return
 
 	cret = C.g_get_charset(&carg1)
@@ -6416,7 +6416,7 @@ func GetCharset() (string, bool) {
 	var charset string
 	var goret   bool
 
-	charset = C.GoString((*C.gchar)(unsafe.Pointer(carg1)))
+	charset = C.GoString((*C.char)(unsafe.Pointer(carg1)))
 	if cret != 0 {
 		goret = true
 	}
@@ -6431,7 +6431,7 @@ func GetCharset() (string, bool) {
 //
 // Gets the character set for the current locale.
 func GetCodeset() string {
-	var cret *C.gchar // return, full, string
+	var cret *C.gchar // return, full, string, casted *C.gchar
 
 	cret = C.g_get_codeset()
 
@@ -6468,7 +6468,7 @@ func GetCodeset() string {
 // The string returned in @charset is not allocated, and should not be
 // freed.
 func GetConsoleCharset() (string, bool) {
-	var carg1 *C.gchar   // out, none, string
+	var carg1 *C.char    // out, none, string, casted *C.gchar
 	var cret  C.gboolean // return
 
 	cret = C.g_get_console_charset(&carg1)
@@ -6476,7 +6476,7 @@ func GetConsoleCharset() (string, bool) {
 	var charset string
 	var goret   bool
 
-	charset = C.GoString((*C.gchar)(unsafe.Pointer(carg1)))
+	charset = C.GoString((*C.char)(unsafe.Pointer(carg1)))
 	if cret != 0 {
 		goret = true
 	}
@@ -6500,7 +6500,7 @@ func GetConsoleCharset() (string, bool) {
 // the current directory.  This can make a difference in the case that
 // the current directory is the target of a symbolic link.
 func GetCurrentDir() string {
-	var cret *C.gchar // return, full, string
+	var cret *C.gchar // return, full, string, casted *C.gchar
 
 	cret = C.g_get_current_dir()
 
@@ -6567,7 +6567,7 @@ func GetEnviron() []string {
 // should either directly check the `HOME` environment variable yourself
 // or unset it before calling any functions in GLib.
 func GetHomeDir() string {
-	var cret *C.gchar // return, none, string
+	var cret *C.gchar // return, none, string, casted *C.gchar
 
 	cret = C.g_get_home_dir()
 
@@ -6598,7 +6598,7 @@ func GetHomeDir() string {
 // 
 // The encoding of the returned string is UTF-8.
 func GetHostName() string {
-	var cret *C.gchar // return, none, string
+	var cret *C.gchar // return, none, string, casted *C.gchar
 
 	cret = C.g_get_host_name()
 
@@ -6660,7 +6660,7 @@ func GetLanguageNames() []string {
 // 
 // g_get_language_names() returns g_get_language_names_with_category("LC_MESSAGES").
 func GetLanguageNamesWithCategory(categoryName string) []string {
-	var carg1 *C.gchar  // in, none, string
+	var carg1 *C.gchar  // in, none, string, casted *C.gchar
 	var cret  **C.gchar // return, transfer: none, C Pointers: 2, Name: array[utf8], scope: , array (inner: *typesystem.StringPrimitive, zero-terminated)
 
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(categoryName)))
@@ -6704,7 +6704,7 @@ func GetLanguageNamesWithCategory(categoryName string) []string {
 // If you need the list of variants for the current locale,
 // use g_get_language_names().
 func GetLocaleVariants(locale string) []string {
-	var carg1 *C.gchar  // in, none, string
+	var carg1 *C.gchar  // in, none, string, casted *C.gchar
 	var cret  **C.gchar // return, transfer: full, C Pointers: 2, Name: array[utf8], scope: , array (inner: *typesystem.StringPrimitive, zero-terminated)
 
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(locale)))
@@ -6768,8 +6768,8 @@ func GetMonotonicTime() int64 {
 // be useful. No key is guaranteed to be provided, so the caller should always
 // check if the result is %NULL.
 func GetOsInfo(keyName string) string {
-	var carg1 *C.gchar // in, none, string
-	var cret  *C.gchar // return, full, string
+	var carg1 *C.gchar // in, none, string, casted *C.gchar
+	var cret  *C.gchar // return, full, string, casted *C.gchar
 
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(keyName)))
 	defer C.free(unsafe.Pointer(carg1))
@@ -6799,7 +6799,7 @@ func GetOsInfo(keyName string) string {
 // #GtkApplication::startup handler. The program name is found by
 // taking the last component of @argv[0].
 func GetPrgname() string {
-	var cret *C.gchar // return, none, string
+	var cret *C.gchar // return, none, string, casted *C.gchar
 
 	cret = C.g_get_prgname()
 
@@ -6821,7 +6821,7 @@ func GetPrgname() string {
 // real user name cannot be determined, the string "Unknown" is
 // returned.
 func GetRealName() string {
-	var cret *C.gchar // return, none, string
+	var cret *C.gchar // return, none, string, casted *C.gchar
 
 	cret = C.g_get_real_name()
 
@@ -6970,7 +6970,7 @@ func GetSystemDataDirs() []string {
 // it is always UTF-8. The return value is never %NULL or the empty
 // string.
 func GetTmpDir() string {
-	var cret *C.gchar // return, none, string
+	var cret *C.gchar // return, none, string, casted *C.gchar
 
 	cret = C.g_get_tmp_dir()
 
@@ -7003,7 +7003,7 @@ func GetTmpDir() string {
 // The return value is cached and modifying it at runtime is not supported, as
 // it’s not thread-safe to modify environment variables at runtime.
 func GetUserCacheDir() string {
-	var cret *C.gchar // return, none, string
+	var cret *C.gchar // return, none, string, casted *C.gchar
 
 	cret = C.g_get_user_cache_dir()
 
@@ -7037,7 +7037,7 @@ func GetUserCacheDir() string {
 // The return value is cached and modifying it at runtime is not supported, as
 // it’s not thread-safe to modify environment variables at runtime.
 func GetUserConfigDir() string {
-	var cret *C.gchar // return, none, string
+	var cret *C.gchar // return, none, string, casted *C.gchar
 
 	cret = C.g_get_user_config_dir()
 
@@ -7071,7 +7071,7 @@ func GetUserConfigDir() string {
 // The return value is cached and modifying it at runtime is not supported, as
 // it’s not thread-safe to modify environment variables at runtime.
 func GetUserDataDir() string {
-	var cret *C.gchar // return, none, string
+	var cret *C.gchar // return, none, string, casted *C.gchar
 
 	cret = C.g_get_user_data_dir()
 
@@ -7092,7 +7092,7 @@ func GetUserDataDir() string {
 // encoding, or something else, and there is no guarantee that it is even
 // consistent on a machine. On Windows, it is always UTF-8.
 func GetUserName() string {
-	var cret *C.gchar // return, none, string
+	var cret *C.gchar // return, none, string, casted *C.gchar
 
 	cret = C.g_get_user_name()
 
@@ -7122,7 +7122,7 @@ func GetUserName() string {
 // The return value is cached and modifying it at runtime is not supported, as
 // it’s not thread-safe to modify environment variables at runtime.
 func GetUserRuntimeDir() string {
-	var cret *C.gchar // return, none, string
+	var cret *C.gchar // return, none, string, casted *C.gchar
 
 	cret = C.g_get_user_runtime_dir()
 
@@ -7155,7 +7155,7 @@ func GetUserRuntimeDir() string {
 // will not reflect any change once the special directories are loaded.
 func GetUserSpecialDir(directory UserDirectory) string {
 	var carg1 C.GUserDirectory // in, none, casted
-	var cret  *C.gchar         // return, none, string
+	var cret  *C.gchar         // return, none, string, casted *C.gchar
 
 	carg1 = C.GUserDirectory(directory)
 
@@ -7192,7 +7192,7 @@ func GetUserSpecialDir(directory UserDirectory) string {
 // The return value is cached and modifying it at runtime is not supported, as
 // it’s not thread-safe to modify environment variables at runtime.
 func GetUserStateDir() string {
-	var cret *C.gchar // return, none, string
+	var cret *C.gchar // return, none, string, casted *C.gchar
 
 	cret = C.g_get_user_state_dir()
 
@@ -7221,8 +7221,8 @@ func GetUserStateDir() string {
 // On Windows, in case the environment variable's value contains
 // references to other environment variables, they are expanded.
 func Getenv(variable string) string {
-	var carg1 *C.gchar // in, none, string
-	var cret  *C.gchar // return, none, string
+	var carg1 *C.gchar // in, none, string, casted *C.gchar
+	var cret  *C.gchar // return, none, string, casted *C.gchar
 
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(variable)))
 	defer C.free(unsafe.Pointer(carg1))
@@ -7256,7 +7256,7 @@ func Getenv(variable string) string {
 // segments, and so it is possible for g_hostname_is_non_ascii() and
 // g_hostname_is_ascii_encoded() to both return %TRUE for a name.
 func HostnameIsASCIIEncoded(hostname string) bool {
-	var carg1 *C.gchar   // in, none, string
+	var carg1 *C.gchar   // in, none, string, casted *C.gchar
 	var cret  C.gboolean // return
 
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(hostname)))
@@ -7289,7 +7289,7 @@ func HostnameIsASCIIEncoded(hostname string) bool {
 // 
 // Since 2.66, IPv6 addresses with a zone-id are accepted (RFC6874).
 func HostnameIsIPAddress(hostname string) bool {
-	var carg1 *C.gchar   // in, none, string
+	var carg1 *C.gchar   // in, none, string, casted *C.gchar
 	var cret  C.gboolean // return
 
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(hostname)))
@@ -7325,7 +7325,7 @@ func HostnameIsIPAddress(hostname string) bool {
 // segments, and so it is possible for g_hostname_is_non_ascii() and
 // g_hostname_is_ascii_encoded() to both return %TRUE for a name.
 func HostnameIsNonASCII(hostname string) bool {
-	var carg1 *C.gchar   // in, none, string
+	var carg1 *C.gchar   // in, none, string, casted *C.gchar
 	var cret  C.gboolean // return
 
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(hostname)))
@@ -7357,8 +7357,8 @@ func HostnameIsNonASCII(hostname string) bool {
 // string containing no uppercase letters and not ending with a
 // trailing dot.
 func HostnameToASCII(hostname string) string {
-	var carg1 *C.gchar // in, none, string
-	var cret  *C.gchar // return, full, string
+	var carg1 *C.gchar // in, none, string, casted *C.gchar
+	var cret  *C.gchar // return, full, string, casted *C.gchar
 
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(hostname)))
 	defer C.free(unsafe.Pointer(carg1))
@@ -7392,8 +7392,8 @@ func HostnameToASCII(hostname string) string {
 // Of course if @hostname is not an internationalized hostname, then
 // the canonical presentation form will be entirely ASCII.
 func HostnameToUnicode(hostname string) string {
-	var carg1 *C.gchar // in, none, string
-	var cret  *C.gchar // return, full, string
+	var carg1 *C.gchar // in, none, string, casted *C.gchar
+	var cret  *C.gchar // return, full, string, casted *C.gchar
 
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(hostname)))
 	defer C.free(unsafe.Pointer(carg1))
@@ -7437,13 +7437,13 @@ func HostnameToUnicode(hostname string) string {
 // thread is running that main context. You can do these steps manually if you
 // need greater control or to use a custom main context.
 func IdleAddFull(priority int, function SourceFunc) uint {
-	var carg1 C.int            // in, none, casted
+	var carg1 C.gint           // in, none, casted
 	var carg2 C.GSourceFunc    // callback, scope: notified, closure: carg3, destroy: carg4
 	var carg3 C.gpointer       // implicit
 	var carg4 C.GDestroyNotify // implicit
 	var cret  C.guint          // return, none, casted
 
-	carg1 = C.int(priority)
+	carg1 = C.gint(priority)
 	carg2 = (*[0]byte)(C._gotk4_glib2_SourceFunc)
 	carg3 = C.gpointer(gbox.Assign(function))
 	carg4 = (C.GDestroyNotify)((*[0]byte)(C.callbackDelete))
@@ -7677,7 +7677,7 @@ func IntHash(v unsafe.Pointer) uint {
 // variables in C++.
 func InternStaticString(str string) string {
 	var carg1 *C.gchar // in, none, string, nullable-string
-	var cret  *C.gchar // return, none, string
+	var cret  *C.gchar // return, none, string, casted *C.gchar
 
 	if str != "" {
 		carg1 = (*C.gchar)(unsafe.Pointer(C.CString(str)))
@@ -7713,7 +7713,7 @@ func InternStaticString(str string) string {
 // variables in C++.
 func InternString(str string) string {
 	var carg1 *C.gchar // in, none, string, nullable-string
-	var cret  *C.gchar // return, none, string
+	var cret  *C.gchar // return, none, string, casted *C.gchar
 
 	if str != "" {
 		carg1 = (*C.gchar)(unsafe.Pointer(C.CString(str)))
@@ -7834,7 +7834,7 @@ func Listenv() []string {
 // in error %G_CONVERT_ERROR_ILLEGAL_SEQUENCE. Use g_convert() to convert
 // input that may contain embedded nul characters.
 func LocaleFromUTF8(utf8String string, len int) (uint, uint, string, error) {
-	var carg1 *C.gchar  // in, none, string
+	var carg1 *C.gchar  // in, none, string, casted *C.gchar
 	var carg2 C.gssize  // in, none, casted
 	var carg3 C.gsize   // out, full, casted
 	var carg4 C.gsize   // out, full, casted
@@ -7905,7 +7905,7 @@ func LocaleToUTF8(opsysstring string) (uint, uint, string, error) {
 	var carg2 C.gssize  // implicit
 	var carg3 C.gsize   // out, full, casted
 	var carg4 C.gsize   // out, full, casted
-	var cret  *C.gchar  // return, full, string
+	var cret  *C.gchar  // return, full, string, casted *C.gchar
 	var _cerr *C.GError // out, full, converted, nullable
 
 	_ = opsysstring
@@ -8036,7 +8036,7 @@ func LogGetDebugEnabled() bool {
 // This has no effect if structured logging is enabled; see
 // [Using Structured Logging](logging.html#using-structured-logging).
 func LogRemoveHandler(logDomain string, handlerId uint) {
-	var carg1 *C.gchar // in, none, string
+	var carg1 *C.gchar // in, none, string, casted *C.gchar
 	var carg2 C.guint  // in, none, casted
 
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(logDomain)))
@@ -8143,7 +8143,7 @@ func LogSetDebugEnabled(enabled bool) {
 // [flags@GLib.LogLevelFlags.LEVEL_WARNING], [flags@GLib.LogLevelFlags.LEVEL_MESSAGE], [flags@GLib.LogLevelFlags.LEVEL_INFO] or
 // [flags@GLib.LogLevelFlags.LEVEL_DEBUG] as fatal except inside of test programs.
 func LogSetFatalMask(logDomain string, fatalMask LogLevelFlags) LogLevelFlags {
-	var carg1 *C.gchar         // in, none, string
+	var carg1 *C.gchar         // in, none, string, casted *C.gchar
 	var carg2 C.GLogLevelFlags // in, none, casted
 	var cret  C.GLogLevelFlags // return, none, casted
 
@@ -8334,6 +8334,29 @@ func LogWriterDefault(logLevel LogLevelFlags, fields []LogField, userData unsafe
 	return goret
 }
 
+// LogWriterDefaultSetDebugDomains wraps g_log_writer_default_set_debug_domains
+// 
+// The function takes the following parameters:
+// 
+// 	- domains string (nullable): `NULL`-terminated array with domains to be printed.
+//   `NULL` or an array with no values means none. Array with a single value `"all"` means all. 
+//
+// Reset the list of domains to be logged, that might be initially set by the
+// `G_MESSAGES_DEBUG` environment variable.
+// 
+// This function is thread-safe.
+func LogWriterDefaultSetDebugDomains(domains string) {
+	var carg1 **C.gchar // in, none, string, nullable-string
+
+	if domains != "" {
+		carg1 = (**C.gchar)(unsafe.Pointer(C.CString(domains)))
+		defer C.free(unsafe.Pointer(carg1))
+	}
+
+	C.g_log_writer_default_set_debug_domains(carg1)
+	runtime.KeepAlive(domains)
+}
+
 // LogWriterDefaultSetUseStderr wraps g_log_writer_default_set_use_stderr
 // 
 // The function takes the following parameters:
@@ -8407,12 +8430,12 @@ func LogWriterDefaultSetUseStderr(useStderr bool) {
 // ```
 func LogWriterDefaultWouldDrop(logLevel LogLevelFlags, logDomain string) bool {
 	var carg1 C.GLogLevelFlags // in, none, casted
-	var carg2 *C.gchar         // in, none, string, nullable-string
+	var carg2 *C.char          // in, none, string, nullable-string
 	var cret  C.gboolean       // return
 
 	carg1 = C.GLogLevelFlags(logLevel)
 	if logDomain != "" {
-		carg2 = (*C.gchar)(unsafe.Pointer(C.CString(logDomain)))
+		carg2 = (*C.char)(unsafe.Pointer(C.CString(logDomain)))
 		defer C.free(unsafe.Pointer(carg2))
 	}
 
@@ -8461,7 +8484,7 @@ func LogWriterFormatFields(logLevel LogLevelFlags, fields []LogField, useColor b
 	var carg2 *C.GLogField     // in, transfer: none, C Pointers: 1, Name: array[LogField], array (inner: *typesystem.Record, length-by: carg3)
 	var carg3 C.gsize          // implicit
 	var carg4 C.gboolean       // in
-	var cret  *C.gchar         // return, full, string
+	var cret  *C.gchar         // return, full, string, casted *C.gchar
 
 	carg1 = C.GLogLevelFlags(logLevel)
 	_ = fields
@@ -8505,10 +8528,10 @@ func LogWriterFormatFields(logLevel LogLevelFlags, fields []LogField, useColor b
 // is_journald = g_log_writer_is_journald (fileno (stderr));
 // ```
 func LogWriterIsJournald(outputFd int) bool {
-	var carg1 C.int      // in, none, casted
+	var carg1 C.gint     // in, none, casted
 	var cret  C.gboolean // return
 
-	carg1 = C.int(outputFd)
+	carg1 = C.gint(outputFd)
 
 	cret = C.g_log_writer_is_journald(carg1)
 	runtime.KeepAlive(outputFd)
@@ -8649,10 +8672,10 @@ func LogWriterStandardStreams(logLevel LogLevelFlags, fields []LogField, userDat
 // 
 // If so, they can safely be used when formatting log messages.
 func LogWriterSupportsColor(outputFd int) bool {
-	var carg1 C.int      // in, none, casted
+	var carg1 C.gint     // in, none, casted
 	var cret  C.gboolean // return
 
-	carg1 = C.int(outputFd)
+	carg1 = C.gint(outputFd)
 
 	cret = C.g_log_writer_supports_color(carg1)
 	runtime.KeepAlive(outputFd)
@@ -8845,7 +8868,7 @@ func MainCurrentSource() *Source {
 //    simply return to the main loop and then get called again when
 //    there is more work to do.
 func MainDepth() int {
-	var cret C.int // return, none, casted
+	var cret C.gint // return, none, casted
 
 	cret = C.g_main_depth()
 
@@ -8898,9 +8921,9 @@ func MarkupErrorQuark() Quark {
 // references in this range are not valid XML 1.0, but they are
 // valid XML 1.1 and will be accepted by the GMarkup parser.
 func MarkupEscapeText(text string, length int) string {
-	var carg1 *C.gchar // in, none, string
+	var carg1 *C.gchar // in, none, string, casted *C.gchar
 	var carg2 C.gssize // in, none, casted
-	var cret  *C.gchar // return, full, string
+	var cret  *C.gchar // return, full, string, casted *C.gchar
 
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(text)))
 	defer C.free(unsafe.Pointer(carg1))
@@ -8932,13 +8955,13 @@ func MarkupEscapeText(text string, length int) string {
 // Create a directory if it doesn't already exist. Create intermediate
 // parent directories as needed, too.
 func MkdirWithParents(pathname string, mode int) int {
-	var carg1 *C.gchar // in, none, string
-	var carg2 C.int    // in, none, casted
-	var cret  C.int    // return, none, casted
+	var carg1 *C.gchar // in, none, string, casted *C.gchar
+	var carg2 C.gint   // in, none, casted
+	var cret  C.gint   // return, none, casted
 
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(pathname)))
 	defer C.free(unsafe.Pointer(carg1))
-	carg2 = C.int(mode)
+	carg2 = C.gint(mode)
 
 	cret = C.g_mkdir_with_parents(carg1, carg2)
 	runtime.KeepAlive(pathname)
@@ -9069,8 +9092,8 @@ func ParseDebugString(str string, keys []DebugKey) uint {
 // separators (and on Windows, possibly a drive letter), a single
 // separator is returned. If @file_name is empty, it gets ".".
 func PathGetBasename(fileName string) string {
-	var carg1 *C.gchar // in, none, string
-	var cret  *C.gchar // return, full, string
+	var carg1 *C.gchar // in, none, string, casted *C.gchar
+	var cret  *C.gchar // return, full, string, casted *C.gchar
 
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(fileName)))
 	defer C.free(unsafe.Pointer(carg1))
@@ -9103,8 +9126,8 @@ func PathGetBasename(fileName string) string {
 // If the file name has no directory components "." is returned.
 // The returned string should be freed when no longer needed.
 func PathGetDirname(fileName string) string {
-	var carg1 *C.gchar // in, none, string
-	var cret  *C.gchar // return, full, string
+	var carg1 *C.gchar // in, none, string, casted *C.gchar
+	var cret  *C.gchar // return, full, string, casted *C.gchar
 
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(fileName)))
 	defer C.free(unsafe.Pointer(carg1))
@@ -9155,7 +9178,7 @@ func PathGetDirname(fileName string) string {
 // either. Such paths should be avoided, or need to be handled using
 // Windows-specific code.
 func PathIsAbsolute(fileName string) bool {
-	var carg1 *C.gchar   // in, none, string
+	var carg1 *C.gchar   // in, none, string, casted *C.gchar
 	var cret  C.gboolean // return
 
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(fileName)))
@@ -9187,8 +9210,8 @@ func PathIsAbsolute(fileName string) bool {
 // i.e. after the "/" in UNIX or "C:\" under Windows. If @file_name
 // is not an absolute path it returns %NULL.
 func PathSkipRoot(fileName string) string {
-	var carg1 *C.gchar // in, none, string
-	var cret  *C.gchar // return, none, string
+	var carg1 *C.gchar // in, none, string, casted *C.gchar
+	var cret  *C.gchar // return, none, string, casted *C.gchar
 
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(fileName)))
 	defer C.free(unsafe.Pointer(carg1))
@@ -9221,8 +9244,8 @@ func PathSkipRoot(fileName string) string {
 // the pattern once with [ctor@GLib.PatternSpec.new] and call
 // [method@GLib.PatternSpec.match_string] repeatedly.
 func PatternMatchSimple(pattern string, str string) bool {
-	var carg1 *C.gchar   // in, none, string
-	var carg2 *C.gchar   // in, none, string
+	var carg1 *C.gchar   // in, none, string, casted *C.gchar
+	var carg2 *C.gchar   // in, none, string, casted *C.gchar
 	var cret  C.gboolean // return
 
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(pattern)))
@@ -9275,12 +9298,12 @@ func PatternMatchSimple(pattern string, str string) bool {
 func Poll(fds *PollFD, nfds uint, timeout int) int {
 	var carg1 *C.GPollFD // in, none, converted
 	var carg2 C.guint    // in, none, casted
-	var carg3 C.int      // in, none, casted
-	var cret  C.int      // return, none, casted
+	var carg3 C.gint     // in, none, casted
+	var cret  C.gint     // return, none, casted
 
 	carg1 = (*C.GPollFD)(UnsafePollFDToGlibNone(fds))
 	carg2 = C.guint(nfds)
-	carg3 = C.int(timeout)
+	carg3 = C.gint(timeout)
 
 	cret = C.g_poll(carg1, carg2, carg3)
 	runtime.KeepAlive(fds)
@@ -9313,13 +9336,13 @@ func Poll(fds *PollFD, nfds uint, timeout int) int {
 //   [func@GLib.sort_array] instead
 func QsortWithData(pbase unsafe.Pointer, totalElems int, size uint, compareFunc CompareDataFunc) {
 	var carg1 C.gconstpointer    // in, none, casted
-	var carg2 C.int              // in, none, casted
+	var carg2 C.gint             // in, none, casted
 	var carg3 C.gsize            // in, none, casted
 	var carg4 C.GCompareDataFunc // callback, scope: call, closure: carg5
 	var carg5 C.gpointer         // implicit
 
 	carg1 = C.gconstpointer(pbase)
-	carg2 = C.int(totalElems)
+	carg2 = C.gint(totalElems)
 	carg3 = C.gsize(size)
 	carg4 = (*[0]byte)(C._gotk4_glib2_CompareDataFunc)
 	carg5 = C.gpointer(gbox.Assign(compareFunc))
@@ -9426,7 +9449,7 @@ func QuarkFromString(str string) Quark {
 // Gets the string associated with the given #GQuark.
 func QuarkToString(quark Quark) string {
 	var carg1 C.GQuark // in, none, casted, alias
-	var cret  *C.gchar // return, none, string
+	var cret  *C.gchar // return, none, string, casted *C.gchar
 
 	carg1 = C.GQuark(quark)
 
@@ -9628,7 +9651,7 @@ func ReloadUserSpecialDirsCache() {
 // The application name will be used in contexts such as error messages,
 // or when displaying an application's name in the task list.
 func SetApplicationName(applicationName string) {
-	var carg1 *C.gchar // in, none, string
+	var carg1 *C.gchar // in, none, string, casted *C.gchar
 
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(applicationName)))
 	defer C.free(unsafe.Pointer(carg1))
@@ -9656,7 +9679,7 @@ func SetApplicationName(applicationName string) {
 // and is fully thread safe. Prior to GLib 2.72, this function
 // could only be called once per process.
 func SetPrgname(prgname string) {
-	var carg1 *C.gchar // in, none, string
+	var carg1 *C.gchar // in, none, string, casted *C.gchar
 
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(prgname)))
 	defer C.free(unsafe.Pointer(carg1))
@@ -9698,8 +9721,8 @@ func SetPrgname(prgname string) {
 // g_environ_setenv() and g_environ_unsetenv(), and then pass that
 // array directly to execvpe(), g_spawn_async(), or the like.
 func Setenv(variable string, value string, overwrite bool) bool {
-	var carg1 *C.gchar   // in, none, string
-	var carg2 *C.gchar   // in, none, string
+	var carg1 *C.gchar   // in, none, string, casted *C.gchar
+	var carg2 *C.gchar   // in, none, string, casted *C.gchar
 	var carg3 C.gboolean // in
 	var cret  C.gboolean // return
 
@@ -9774,8 +9797,8 @@ func ShellErrorQuark() Quark {
 // 
 // Free the returned vector with g_strfreev().
 func ShellParseArgv(commandLine string) ([]string, bool, error) {
-	var carg1 *C.gchar   // in, none, string
-	var carg2 C.int      // implicit
+	var carg1 *C.gchar   // in, none, string, casted *C.gchar
+	var carg2 C.gint     // implicit
 	var carg3 **C.gchar  // out, transfer: full, C Pointers: 2, Name: array[filename], optional, array (inner: *typesystem.StringPrimitive, zero-terminated, length-by: carg2)
 	var cret  C.gboolean // return
 	var _cerr *C.GError  // out, full, converted, nullable
@@ -9825,8 +9848,8 @@ func ShellParseArgv(commandLine string) ([]string, bool, error) {
 // The quoting style used is undefined (single or double quotes may be
 // used).
 func ShellQuote(unquotedString string) string {
-	var carg1 *C.gchar // in, none, string
-	var cret  *C.gchar // return, full, string
+	var carg1 *C.gchar // in, none, string, casted *C.gchar
+	var cret  *C.gchar // return, full, string, casted *C.gchar
 
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(unquotedString)))
 	defer C.free(unsafe.Pointer(carg1))
@@ -9881,8 +9904,8 @@ func ShellQuote(unquotedString string) string {
 // newline to be escaped with backslash. Otherwise double quotes
 // preserve things literally.
 func ShellUnquote(quotedString string) (string, error) {
-	var carg1 *C.gchar  // in, none, string
-	var cret  *C.gchar  // return, full, string
+	var carg1 *C.gchar  // in, none, string, casted *C.gchar
+	var cret  *C.gchar  // return, full, string, casted *C.gchar
 	var _cerr *C.GError // out, full, converted, nullable
 
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(quotedString)))
@@ -9986,11 +10009,11 @@ func SpacedPrimesClosest(num uint) uint {
 // Prior to version 2.70, g_spawn_check_exit_status() provides the same
 // functionality, although under a misleading name.
 func SpawnCheckWaitStatus(waitStatus int) (bool, error) {
-	var carg1 C.int      // in, none, casted
+	var carg1 C.gint     // in, none, casted
 	var cret  C.gboolean // return
 	var _cerr *C.GError  // out, full, converted, nullable
 
-	carg1 = C.int(waitStatus)
+	carg1 = C.gint(waitStatus)
 
 	cret = C.g_spawn_check_wait_status(carg1, &_cerr)
 	runtime.KeepAlive(waitStatus)
@@ -10049,7 +10072,7 @@ func SpawnClosePid(pid Pid) {
 // 
 // The same concerns on Windows apply as for g_spawn_command_line_sync().
 func SpawnCommandLineAsync(commandLine string) (bool, error) {
-	var carg1 *C.gchar   // in, none, string
+	var carg1 *C.gchar   // in, none, string, casted *C.gchar
 	var cret  C.gboolean // return
 	var _cerr *C.GError  // out, full, converted, nullable
 
@@ -10116,10 +10139,10 @@ func SpawnCommandLineAsync(commandLine string) (bool, error) {
 // separator. You need to enclose such paths with single quotes, like
 // "'c:\\program files\\app\\app.exe' 'e:\\folder\\argument.txt'".
 func SpawnCommandLineSync(commandLine string) (string, string, int, bool, error) {
-	var carg1 *C.gchar   // in, none, string
+	var carg1 *C.gchar   // in, none, string, casted *C.gchar
 	var carg2 *C.gchar   // out, transfer: full, C Pointers: 1, Name: array[unknown], optional, array (inner: <nil>, zero-terminated)
 	var carg3 *C.gchar   // out, transfer: full, C Pointers: 1, Name: array[unknown], optional, array (inner: <nil>, zero-terminated)
-	var carg4 C.int      // out, full, casted
+	var carg4 C.gint     // out, full, casted
 	var cret  C.gboolean // return
 	var _cerr *C.GError  // out, full, converted, nullable
 
@@ -10277,9 +10300,9 @@ func StrHash(v unsafe.Pointer) uint {
 //
 // An auxiliary function for gettext() support (see Q_()).
 func StripContext(msgid string, msgval string) string {
-	var carg1 *C.gchar // in, none, string
-	var carg2 *C.gchar // in, none, string
-	var cret  *C.gchar // return, none, string
+	var carg1 *C.gchar // in, none, string, casted *C.gchar
+	var carg2 *C.gchar // in, none, string, casted *C.gchar
+	var cret  *C.gchar // return, none, string, casted *C.gchar
 
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(msgid)))
 	defer C.free(unsafe.Pointer(carg1))
@@ -10338,14 +10361,14 @@ func StripContext(msgid string, msgval string) string {
 // The interval given is in terms of monotonic time, not wall clock time.
 // See [func@GLib.get_monotonic_time].
 func TimeoutAddFull(priority int, interval uint, function SourceFunc) uint {
-	var carg1 C.int            // in, none, casted
+	var carg1 C.gint           // in, none, casted
 	var carg2 C.guint          // in, none, casted
 	var carg3 C.GSourceFunc    // callback, scope: notified, closure: carg4, destroy: carg5
 	var carg4 C.gpointer       // implicit
 	var carg5 C.GDestroyNotify // implicit
 	var cret  C.guint          // return, none, casted
 
-	carg1 = C.int(priority)
+	carg1 = C.gint(priority)
 	carg2 = C.guint(interval)
 	carg3 = (*[0]byte)(C._gotk4_glib2_SourceFunc)
 	carg4 = C.gpointer(gbox.Assign(function))
@@ -10418,14 +10441,14 @@ func TimeoutAddFull(priority int, interval uint, function SourceFunc) uint {
 // The interval given is in terms of monotonic time, not wall clock
 // time. See [func@GLib.get_monotonic_time].
 func TimeoutAddSecondsFull(priority int, interval uint, function SourceFunc) uint {
-	var carg1 C.int            // in, none, casted
+	var carg1 C.gint           // in, none, casted
 	var carg2 C.guint          // in, none, casted
 	var carg3 C.GSourceFunc    // callback, scope: notified, closure: carg4, destroy: carg5
 	var carg4 C.gpointer       // implicit
 	var carg5 C.GDestroyNotify // implicit
 	var cret  C.guint          // return, none, casted
 
-	carg1 = C.int(priority)
+	carg1 = C.gint(priority)
 	carg2 = C.guint(interval)
 	carg3 = (*[0]byte)(C._gotk4_glib2_SourceFunc)
 	carg4 = C.gpointer(gbox.Assign(function))
@@ -10537,7 +10560,7 @@ func UCS4ToUTF8(str []uint32) (int32, int32, string, error) {
 	var carg2 C.glong     // implicit
 	var carg3 C.glong     // out, full, casted
 	var carg4 C.glong     // out, full, casted
-	var cret  *C.gchar    // return, full, string
+	var cret  *C.gchar    // return, full, string, casted *C.gchar
 	var _cerr *C.GError   // out, full, converted, nullable
 
 	_ = str
@@ -10609,7 +10632,7 @@ func UnicharBreakType(c uint32) UnicodeBreakType {
 // Determines the canonical combining class of a Unicode character.
 func UnicharCombiningClass(uc uint32) int {
 	var carg1 C.gunichar // in, none, casted
-	var cret  C.int      // return, none, casted
+	var cret  C.gint     // return, none, casted
 
 	carg1 = C.gunichar(uc)
 
@@ -10748,7 +10771,7 @@ func UnicharDecompose(ch uint32) (uint32, uint32, bool) {
 // digit.
 func UnicharDigitValue(c uint32) int {
 	var carg1 C.gunichar // in, none, casted
-	var cret  C.int      // return, none, casted
+	var cret  C.gint     // return, none, casted
 
 	carg1 = C.gunichar(c)
 
@@ -11464,7 +11487,7 @@ func UnicharIszerowidth(c uint32) bool {
 func UnicharToUTF8(c uint32) (byte, int) {
 	var carg1 C.gunichar // in, none, casted
 	var carg2 C.char     // out, transfer: none, C Pointers: 0, Name: gchar, optional, caller-allocates
-	var cret  C.int      // return, none, casted
+	var cret  C.gint     // return, none, casted
 
 	carg1 = C.gunichar(c)
 
@@ -11635,7 +11658,7 @@ func UnicharValidate(ch uint32) bool {
 // digit.
 func UnicharXDigitValue(c uint32) int {
 	var carg1 C.gunichar // in, none, casted
-	var cret  C.int      // return, none, casted
+	var cret  C.gint     // return, none, casted
 
 	carg1 = C.gunichar(c)
 
@@ -11697,7 +11720,7 @@ func UnicodeCanonicalOrdering(str []uint32) {
 // g_environ_setenv() and g_environ_unsetenv(), and then pass that
 // array directly to execvpe(), g_spawn_async(), or the like.
 func Unsetenv(variable string) {
-	var carg1 *C.gchar // in, none, string
+	var carg1 *C.gchar // in, none, string, casted *C.gchar
 
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(variable)))
 	defer C.free(unsafe.Pointer(carg1))
@@ -11817,7 +11840,7 @@ func UTF16ToUTF8(str []uint16) (int32, int32, string, error) {
 	var carg2 C.glong      // implicit
 	var carg3 C.glong      // out, full, casted
 	var carg4 C.glong      // out, full, casted
-	var cret  *C.gchar     // return, full, string
+	var cret  *C.gchar     // return, full, string, casted *C.gchar
 	var _cerr *C.GError    // out, full, converted, nullable
 
 	_ = str
@@ -11867,9 +11890,9 @@ func UTF16ToUTF8(str []uint16) (int32, int32, string, error) {
 // takes case sensitivity into account. GLib does not currently
 // provide such a function.
 func UTF8Casefold(str string, len int) string {
-	var carg1 *C.gchar // in, none, string
+	var carg1 *C.gchar // in, none, string, casted *C.gchar
 	var carg2 C.gssize // in, none, casted
-	var cret  *C.gchar // return, full, string
+	var cret  *C.gchar // return, full, string, casted *C.gchar
 
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(str)))
 	defer C.free(unsafe.Pointer(carg1))
@@ -11909,9 +11932,9 @@ func UTF8Casefold(str string, len int) string {
 // sequences, the result is undefined. This can happen if the strings are in
 // different language scripts, for example.
 func UTF8Collate(str1 string, str2 string) int {
-	var carg1 *C.gchar // in, none, string
-	var carg2 *C.gchar // in, none, string
-	var cret  C.int    // return, none, casted
+	var carg1 *C.gchar // in, none, string, casted *C.gchar
+	var carg2 *C.gchar // in, none, string, casted *C.gchar
+	var cret  C.gint   // return, none, casted
 
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(str1)))
 	defer C.free(unsafe.Pointer(carg1))
@@ -11950,9 +11973,9 @@ func UTF8Collate(str1 string, str2 string) int {
 // 
 // Note that this function depends on the [current locale][setlocale].
 func UTF8CollateKey(str string, len int) string {
-	var carg1 *C.gchar // in, none, string
+	var carg1 *C.gchar // in, none, string, casted *C.gchar
 	var carg2 C.gssize // in, none, casted
-	var cret  *C.gchar // return, full, string
+	var cret  *C.gchar // return, full, string, casted *C.gchar
 
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(str)))
 	defer C.free(unsafe.Pointer(carg1))
@@ -11993,9 +12016,9 @@ func UTF8CollateKey(str string, len int) string {
 // 
 // Note that this function depends on the [current locale][setlocale].
 func UTF8CollateKeyForFilename(str string, len int) string {
-	var carg1 *C.gchar // in, none, string
+	var carg1 *C.gchar // in, none, string, casted *C.gchar
 	var carg2 C.gssize // in, none, casted
-	var cret  *C.gchar // return, full, string
+	var cret  *C.gchar // return, full, string, casted *C.gchar
 
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(str)))
 	defer C.free(unsafe.Pointer(carg1))
@@ -12036,9 +12059,9 @@ func UTF8CollateKeyForFilename(str string, len int) string {
 // @end is non-%NULL, the return value will be %NULL if the end of the string
 // is reached.
 func UTF8FindNextChar(p string, end string) string {
-	var carg1 *C.gchar // in, none, string
+	var carg1 *C.gchar // in, none, string, casted *C.gchar
 	var carg2 *C.gchar // in, none, string, nullable-string
-	var cret  *C.gchar // return, none, string
+	var cret  *C.gchar // return, none, string, casted *C.gchar
 
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(p)))
 	defer C.free(unsafe.Pointer(carg1))
@@ -12077,9 +12100,9 @@ func UTF8FindNextChar(p string, end string) string {
 // is made to see if the character found is actually valid other than
 // it starts with an appropriate byte.
 func UTF8FindPrevChar(str string, p string) string {
-	var carg1 *C.gchar // in, none, string
-	var carg2 *C.gchar // in, none, string
-	var cret  *C.gchar // return, none, string
+	var carg1 *C.gchar // in, none, string, casted *C.gchar
+	var carg2 *C.gchar // in, none, string, casted *C.gchar
+	var cret  *C.gchar // return, none, string, casted *C.gchar
 
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(str)))
 	defer C.free(unsafe.Pointer(carg1))
@@ -12114,7 +12137,7 @@ func UTF8FindPrevChar(str string, p string) string {
 // valid Unicode characters, you should use g_utf8_get_char_validated()
 // instead.
 func UTF8GetChar(p string) uint32 {
-	var carg1 *C.gchar   // in, none, string
+	var carg1 *C.gchar   // in, none, string, casted *C.gchar
 	var cret  C.gunichar // return, none, casted
 
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(p)))
@@ -12150,7 +12173,7 @@ func UTF8GetChar(p string) uint32 {
 // @max_len is positive and any of the bytes in the first UTF-8 character
 // sequence are nul.
 func UTF8GetCharValidated(p string, maxLen int) uint32 {
-	var carg1 *C.gchar   // in, none, string
+	var carg1 *C.gchar   // in, none, string, casted *C.gchar
 	var carg2 C.gssize   // in, none, casted
 	var cret  C.gunichar // return, none, casted
 
@@ -12191,9 +12214,9 @@ func UTF8GetCharValidated(p string, maxLen int) uint32 {
 // assumption that it is close enough to ASCII or UTF-8 to be mostly
 // readable as-is.
 func UTF8MakeValid(str string, len int) string {
-	var carg1 *C.gchar // in, none, string
+	var carg1 *C.gchar // in, none, string, casted *C.gchar
 	var carg2 C.gssize // in, none, casted
-	var cret  *C.gchar // return, full, string
+	var cret  *C.gchar // return, full, string, casted *C.gchar
 
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(str)))
 	defer C.free(unsafe.Pointer(carg1))
@@ -12249,10 +12272,10 @@ func UTF8MakeValid(str string, len int) string {
 // a legacy encoding or pass it to a system with
 // less capable Unicode handling.
 func UTF8Normalize(str string, len int, mode NormalizeMode) string {
-	var carg1 *C.gchar         // in, none, string
+	var carg1 *C.gchar         // in, none, string, casted *C.gchar
 	var carg2 C.gssize         // in, none, casted
 	var carg3 C.GNormalizeMode // in, none, casted
-	var cret  *C.gchar         // return, full, string
+	var cret  *C.gchar         // return, full, string, casted *C.gchar
 
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(str)))
 	defer C.free(unsafe.Pointer(carg1))
@@ -12297,9 +12320,9 @@ func UTF8Normalize(str string, len int, mode NormalizeMode) string {
 // This limitation exists as this function is called frequently during
 // text rendering and therefore has to be as fast as possible.
 func UTF8OffsetToPointer(str string, offset int32) string {
-	var carg1 *C.gchar // in, none, string
+	var carg1 *C.gchar // in, none, string, casted *C.gchar
 	var carg2 C.glong  // in, none, casted
-	var cret  *C.gchar // return, none, string
+	var cret  *C.gchar // return, none, string, casted *C.gchar
 
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(str)))
 	defer C.free(unsafe.Pointer(carg1))
@@ -12333,8 +12356,8 @@ func UTF8OffsetToPointer(str string, offset int32) string {
 // Since 2.10, this function allows @pos to be before @str, and returns
 // a negative offset in this case.
 func UTF8PointerToOffset(str string, pos string) int32 {
-	var carg1 *C.gchar // in, none, string
-	var carg2 *C.gchar // in, none, string
+	var carg1 *C.gchar // in, none, string, casted *C.gchar
+	var carg2 *C.gchar // in, none, string, casted *C.gchar
 	var cret  C.glong  // return, none, casted
 
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(str)))
@@ -12370,8 +12393,8 @@ func UTF8PointerToOffset(str string, pos string) int32 {
 // it starts with an appropriate byte. If @p might be the first
 // character of the string, you must use g_utf8_find_prev_char() instead.
 func UTF8PrevChar(p string) string {
-	var carg1 *C.gchar // in, none, string
-	var cret  *C.gchar // return, none, string
+	var carg1 *C.gchar // in, none, string, casted *C.gchar
+	var cret  *C.gchar // return, none, string, casted *C.gchar
 
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(p)))
 	defer C.free(unsafe.Pointer(carg1))
@@ -12402,10 +12425,10 @@ func UTF8PrevChar(p string) string {
 // in a UTF-8 encoded string, while limiting the search to @len bytes.
 // If @len is -1, allow unbounded search.
 func UTF8Strchr(p string, len int, c uint32) string {
-	var carg1 *C.gchar   // in, none, string
+	var carg1 *C.gchar   // in, none, string, casted *C.gchar
 	var carg2 C.gssize   // in, none, casted
 	var carg3 C.gunichar // in, none, casted
-	var cret  *C.gchar   // return, none, string
+	var cret  *C.gchar   // return, none, string, casted *C.gchar
 
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(p)))
 	defer C.free(unsafe.Pointer(carg1))
@@ -12440,9 +12463,9 @@ func UTF8Strchr(p string, len int, c uint32) string {
 // on the current locale, and may result in the number of
 // characters in the string changing.
 func UTF8Strdown(str string, len int) string {
-	var carg1 *C.gchar // in, none, string
+	var carg1 *C.gchar // in, none, string, casted *C.gchar
 	var carg2 C.gssize // in, none, casted
-	var cret  *C.gchar // return, full, string
+	var cret  *C.gchar // return, full, string, casted *C.gchar
 
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(str)))
 	defer C.free(unsafe.Pointer(carg1))
@@ -12479,7 +12502,7 @@ func UTF8Strdown(str string, len int) string {
 // the terminating nul character. If the @max'th byte falls in the
 // middle of a character, the last (partial) character is not counted.
 func UTF8Strlen(p string, max int) int32 {
-	var carg1 *C.gchar // in, none, string
+	var carg1 *C.gchar // in, none, string, casted *C.gchar
 	var carg2 C.gssize // in, none, casted
 	var cret  C.glong  // return, none, casted
 
@@ -12518,10 +12541,10 @@ func UTF8Strlen(p string, max int) int32 {
 // Note you must ensure @dest is at least 4 * @n + 1 to fit the
 // largest possible UTF-8 characters
 func UTF8Strncpy(dest string, src string, n uint) string {
-	var carg1 *C.gchar // in, none, string
-	var carg2 *C.gchar // in, none, string
+	var carg1 *C.gchar // in, none, string, casted *C.gchar
+	var carg2 *C.gchar // in, none, string, casted *C.gchar
 	var carg3 C.gsize  // in, none, casted
-	var cret  *C.gchar // return, none, string
+	var cret  *C.gchar // return, none, string, casted *C.gchar
 
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(dest)))
 	defer C.free(unsafe.Pointer(carg1))
@@ -12557,10 +12580,10 @@ func UTF8Strncpy(dest string, src string, n uint) string {
 // in a UTF-8 encoded string, while limiting the search to @len bytes.
 // If @len is -1, allow unbounded search.
 func UTF8Strrchr(p string, len int, c uint32) string {
-	var carg1 *C.gchar   // in, none, string
+	var carg1 *C.gchar   // in, none, string, casted *C.gchar
 	var carg2 C.gssize   // in, none, casted
 	var carg3 C.gunichar // in, none, casted
-	var cret  *C.gchar   // return, none, string
+	var cret  *C.gchar   // return, none, string, casted *C.gchar
 
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(p)))
 	defer C.free(unsafe.Pointer(carg1))
@@ -12605,9 +12628,9 @@ func UTF8Strrchr(p string, len int, c uint32) string {
 // newly-allocated memory, which should be freed with g_free() when
 // no longer needed.
 func UTF8Strreverse(str string, len int) string {
-	var carg1 *C.gchar // in, none, string
+	var carg1 *C.gchar // in, none, string, casted *C.gchar
 	var carg2 C.gssize // in, none, casted
-	var cret  *C.gchar // return, full, string
+	var cret  *C.gchar // return, full, string, casted *C.gchar
 
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(str)))
 	defer C.free(unsafe.Pointer(carg1))
@@ -12642,9 +12665,9 @@ func UTF8Strreverse(str string, len int) string {
 // characters in the string increasing. (For instance, the
 // German ess-zet will be changed to SS.)
 func UTF8Strup(str string, len int) string {
-	var carg1 *C.gchar // in, none, string
+	var carg1 *C.gchar // in, none, string, casted *C.gchar
 	var carg2 C.gssize // in, none, casted
-	var cret  *C.gchar // return, full, string
+	var cret  *C.gchar // return, full, string, casted *C.gchar
 
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(str)))
 	defer C.free(unsafe.Pointer(carg1))
@@ -12681,10 +12704,10 @@ func UTF8Strup(str string, len int) string {
 // Since GLib 2.72, `-1` can be passed to @end_pos to indicate the
 // end of the string.
 func UTF8Substring(str string, startPos int32, endPos int32) string {
-	var carg1 *C.gchar // in, none, string
+	var carg1 *C.gchar // in, none, string, casted *C.gchar
 	var carg2 C.glong  // in, none, casted
 	var carg3 C.glong  // in, none, casted
-	var cret  *C.gchar // return, full, string
+	var cret  *C.gchar // return, full, string, casted *C.gchar
 
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(str)))
 	defer C.free(unsafe.Pointer(carg1))
@@ -12730,7 +12753,7 @@ func UTF8Substring(str string, startPos int32, endPos int32) string {
 // representation as UCS-4. A trailing 0 character will be added to the
 // string after the converted text.
 func UTF8ToUCS4(str string, len int32) (int32, int32, *uint32, error) {
-	var carg1 *C.gchar    // in, none, string
+	var carg1 *C.gchar    // in, none, string, casted *C.gchar
 	var carg2 C.glong     // in, none, casted
 	var carg3 C.glong     // out, full, casted
 	var carg4 C.glong     // out, full, casted
@@ -12782,7 +12805,7 @@ func UTF8ToUCS4(str string, len int32) (int32, int32, *uint32, error) {
 // but does no error checking on the input. A trailing 0 character
 // will be added to the string after the converted text.
 func UTF8ToUCS4Fast(str string, len int32) (int32, *uint32) {
-	var carg1 *C.gchar    // in, none, string
+	var carg1 *C.gchar    // in, none, string, casted *C.gchar
 	var carg2 C.glong     // in, none, casted
 	var carg3 C.glong     // out, full, casted
 	var cret  *C.gunichar // return, transfer: full, C Pointers: 1, Name: gunichar, scope: 
@@ -12829,12 +12852,12 @@ func UTF8ToUCS4Fast(str string, len int32) (int32, *uint32) {
 // Convert a string from UTF-8 to UTF-16. A 0 character will be
 // added to the result after the converted text.
 func UTF8ToUTF16(str string, len int32) (int32, int32, *uint16, error) {
-	var carg1 *C.gchar   // in, none, string
-	var carg2 C.glong    // in, none, casted
-	var carg3 C.glong    // out, full, casted
-	var carg4 C.glong    // out, full, casted
-	var cret  *C.guint16 // return, transfer: full, C Pointers: 1, Name: guint16, scope: 
-	var _cerr *C.GError  // out, full, converted, nullable
+	var carg1 *C.gchar     // in, none, string, casted *C.gchar
+	var carg2 C.glong      // in, none, casted
+	var carg3 C.glong      // out, full, casted
+	var carg4 C.glong      // out, full, casted
+	var cret  *C.gunichar2 // return, transfer: full, C Pointers: 1, Name: guint16, scope: , casted *C.guint16
+	var _cerr *C.GError    // out, full, converted, nullable
 
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(str)))
 	defer C.free(unsafe.Pointer(carg1))
@@ -12853,7 +12876,7 @@ func UTF8ToUTF16(str string, len int32) (int32, int32, *uint16, error) {
 	itemsWritten = int32(carg4)
 	_ = goret
 	_ = cret
-	panic("unimplemented conversion of *uint16 (guint16*)")
+	panic("unimplemented conversion of *uint16 (gunichar2*)")
 	if _cerr != nil {
 		_goerr = UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
 	}
@@ -12878,9 +12901,9 @@ func UTF8ToUTF16(str string, len int32) (int32, int32, *uint16, error) {
 // If @string is already short enough, this returns a copy of @string.
 // If @truncate_length is `0`, an empty string is returned.
 func UTF8TruncateMiddle(str string, truncateLength uint) string {
-	var carg1 *C.gchar // in, none, string
+	var carg1 *C.gchar // in, none, string, casted *C.gchar
 	var carg2 C.gsize  // in, none, casted
-	var cret  *C.gchar // return, full, string
+	var cret  *C.gchar // return, full, string, casted *C.gchar
 
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(str)))
 	defer C.free(unsafe.Pointer(carg1))
@@ -12927,7 +12950,7 @@ func UTF8TruncateMiddle(str string, truncateLength uint) string {
 func UTF8Validate(str string) (string, bool) {
 	var carg1 *C.gchar   // in, transfer: none, C Pointers: 1, Name: array[unknown], array (inner: <nil>, length-by: carg2)
 	var carg2 C.gssize   // implicit
-	var carg3 *C.gchar   // out, none, string
+	var carg3 *C.gchar   // out, none, string, casted *C.gchar
 	var cret  C.gboolean // return
 
 	_ = str
@@ -12967,7 +12990,7 @@ func UTF8Validate(str string) (string, bool) {
 func UTF8ValidateLen(str string) (string, bool) {
 	var carg1 *C.gchar   // in, transfer: none, C Pointers: 1, Name: array[unknown], array (inner: <nil>, length-by: carg2)
 	var carg2 C.gsize    // implicit
-	var carg3 *C.gchar   // out, none, string
+	var carg3 *C.gchar   // out, none, string, casted *C.gchar
 	var cret  C.gboolean // return
 
 	_ = str
@@ -13008,7 +13031,7 @@ func UTF8ValidateLen(str string) (string, bool) {
 // Note that hyphens are required within the UUID string itself,
 // as per the aforementioned RFC.
 func UUIDStringIsValid(str string) bool {
-	var carg1 *C.gchar   // in, none, string
+	var carg1 *C.gchar   // in, none, string, casted *C.gchar
 	var cret  C.gboolean // return
 
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(str)))
@@ -13035,7 +13058,7 @@ func UUIDStringIsValid(str string) bool {
 // randomness guarantees as #GRand, so must not be used for cryptographic
 // purposes such as key generation, nonces, salts or one-time pads.
 func UUIDStringRandom() string {
-	var cret *C.gchar // return, full, string
+	var cret *C.gchar // return, full, string, casted *C.gchar
 
 	cret = C.g_uuid_string_random()
 
@@ -13200,7 +13223,7 @@ func NewBookmarkFile() *BookmarkFile {
 // If no bookmark for @uri is found, one is created.
 func (bookmark *BookmarkFile) AddApplication(uri string, name string, exec string) {
 	var carg0 *C.GBookmarkFile // in, none, converted
-	var carg1 *C.gchar         // in, none, string
+	var carg1 *C.gchar         // in, none, string, casted *C.gchar
 	var carg2 *C.gchar         // in, none, string, nullable-string
 	var carg3 *C.gchar         // in, none, string, nullable-string
 
@@ -13236,8 +13259,8 @@ func (bookmark *BookmarkFile) AddApplication(uri string, name string, exec strin
 // If no bookmark for @uri is found then it is created.
 func (bookmark *BookmarkFile) AddGroup(uri string, group string) {
 	var carg0 *C.GBookmarkFile // in, none, converted
-	var carg1 *C.gchar         // in, none, string
-	var carg2 *C.gchar         // in, none, string
+	var carg1 *C.gchar         // in, none, string, casted *C.gchar
+	var carg2 *C.gchar         // in, none, string, casted *C.gchar
 
 	carg0 = (*C.GBookmarkFile)(UnsafeBookmarkFileToGlibNone(bookmark))
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(uri)))
@@ -13290,12 +13313,12 @@ func (bookmark *BookmarkFile) Copy() *BookmarkFile {
 // @error is set to %G_BOOKMARK_FILE_ERROR_URI_NOT_FOUND.
 func (bookmark *BookmarkFile) GetAddedDateTime(uri string) (*DateTime, error) {
 	var carg0 *C.GBookmarkFile // in, none, converted
-	var carg1 *C.gchar         // in, none, string
+	var carg1 *C.char          // in, none, string, casted *C.gchar
 	var cret  *C.GDateTime     // return, none, converted
 	var _cerr *C.GError        // out, full, converted, nullable
 
 	carg0 = (*C.GBookmarkFile)(UnsafeBookmarkFileToGlibNone(bookmark))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(uri)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(uri)))
 	defer C.free(unsafe.Pointer(carg1))
 
 	cret = C.g_bookmark_file_get_added_date_time(carg0, carg1, &_cerr)
@@ -13343,18 +13366,18 @@ func (bookmark *BookmarkFile) GetAddedDateTime(uri string) (*DateTime, error) {
 // set and %FALSE is returned.
 func (bookmark *BookmarkFile) GetApplicationInfo(uri string, name string) (string, uint, *DateTime, bool, error) {
 	var carg0 *C.GBookmarkFile // in, none, converted
-	var carg1 *C.gchar         // in, none, string
-	var carg2 *C.gchar         // in, none, string
-	var carg3 *C.gchar         // out, full, string
-	var carg4 C.guint          // out, full, casted
+	var carg1 *C.char          // in, none, string, casted *C.gchar
+	var carg2 *C.char          // in, none, string, casted *C.gchar
+	var carg3 *C.char          // out, full, string, casted *C.gchar
+	var carg4 C.uint           // out, full, casted, casted C.guint
 	var carg5 *C.GDateTime     // out, none, converted
 	var cret  C.gboolean       // return
 	var _cerr *C.GError        // out, full, converted, nullable
 
 	carg0 = (*C.GBookmarkFile)(UnsafeBookmarkFileToGlibNone(bookmark))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(uri)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(uri)))
 	defer C.free(unsafe.Pointer(carg1))
-	carg2 = (*C.gchar)(unsafe.Pointer(C.CString(name)))
+	carg2 = (*C.char)(unsafe.Pointer(C.CString(name)))
 	defer C.free(unsafe.Pointer(carg2))
 
 	cret = C.g_bookmark_file_get_application_info(carg0, carg1, carg2, &carg3, &carg4, &carg5, &_cerr)
@@ -13368,7 +13391,7 @@ func (bookmark *BookmarkFile) GetApplicationInfo(uri string, name string) (strin
 	var goret  bool
 	var _goerr error
 
-	exec = C.GoString((*C.gchar)(unsafe.Pointer(carg3)))
+	exec = C.GoString((*C.char)(unsafe.Pointer(carg3)))
 	defer C.free(unsafe.Pointer(carg3))
 	count = uint(carg4)
 	stamp = UnsafeDateTimeFromGlibNone(unsafe.Pointer(carg5))
@@ -13401,7 +13424,7 @@ func (bookmark *BookmarkFile) GetApplicationInfo(uri string, name string) (strin
 // @error is set to %G_BOOKMARK_FILE_ERROR_URI_NOT_FOUND.
 func (bookmark *BookmarkFile) GetApplications(uri string) (uint, []string, error) {
 	var carg0 *C.GBookmarkFile // in, none, converted
-	var carg1 *C.gchar         // in, none, string
+	var carg1 *C.gchar         // in, none, string, casted *C.gchar
 	var carg2 C.gsize          // out, full, casted
 	var cret  **C.gchar        // return, transfer: full, C Pointers: 2, Name: array[utf8], scope: , array (inner: *typesystem.StringPrimitive)
 	var _cerr *C.GError        // out, full, converted, nullable
@@ -13446,8 +13469,8 @@ func (bookmark *BookmarkFile) GetApplications(uri string) (uint, []string, error
 // @error is set to %G_BOOKMARK_FILE_ERROR_URI_NOT_FOUND.
 func (bookmark *BookmarkFile) GetDescription(uri string) (string, error) {
 	var carg0 *C.GBookmarkFile // in, none, converted
-	var carg1 *C.gchar         // in, none, string
-	var cret  *C.gchar         // return, full, string
+	var carg1 *C.gchar         // in, none, string, casted *C.gchar
+	var cret  *C.gchar         // return, full, string, casted *C.gchar
 	var _cerr *C.GError        // out, full, converted, nullable
 
 	carg0 = (*C.GBookmarkFile)(UnsafeBookmarkFileToGlibNone(bookmark))
@@ -13491,7 +13514,7 @@ func (bookmark *BookmarkFile) GetDescription(uri string) (string, error) {
 // be %NULL.
 func (bookmark *BookmarkFile) GetGroups(uri string) (uint, []string, error) {
 	var carg0 *C.GBookmarkFile // in, none, converted
-	var carg1 *C.gchar         // in, none, string
+	var carg1 *C.gchar         // in, none, string, casted *C.gchar
 	var carg2 C.gsize          // out, full, casted
 	var cret  **C.gchar        // return, transfer: full, C Pointers: 2, Name: array[utf8], scope: , array (inner: *typesystem.StringPrimitive)
 	var _cerr *C.GError        // out, full, converted, nullable
@@ -13538,9 +13561,9 @@ func (bookmark *BookmarkFile) GetGroups(uri string) (uint, []string, error) {
 // @error is set to %G_BOOKMARK_FILE_ERROR_URI_NOT_FOUND.
 func (bookmark *BookmarkFile) GetIcon(uri string) (string, string, bool, error) {
 	var carg0 *C.GBookmarkFile // in, none, converted
-	var carg1 *C.gchar         // in, none, string
-	var carg2 *C.gchar         // out, full, string
-	var carg3 *C.gchar         // out, full, string
+	var carg1 *C.gchar         // in, none, string, casted *C.gchar
+	var carg2 *C.gchar         // out, full, string, casted *C.gchar
+	var carg3 *C.gchar         // out, full, string, casted *C.gchar
 	var cret  C.gboolean       // return
 	var _cerr *C.GError        // out, full, converted, nullable
 
@@ -13590,7 +13613,7 @@ func (bookmark *BookmarkFile) GetIcon(uri string) (string, string, bool, error) 
 // @error is set to %G_BOOKMARK_FILE_ERROR_INVALID_VALUE.
 func (bookmark *BookmarkFile) GetIsPrivate(uri string) (bool, error) {
 	var carg0 *C.GBookmarkFile // in, none, converted
-	var carg1 *C.gchar         // in, none, string
+	var carg1 *C.gchar         // in, none, string, casted *C.gchar
 	var cret  C.gboolean       // return
 	var _cerr *C.GError        // out, full, converted, nullable
 
@@ -13634,8 +13657,8 @@ func (bookmark *BookmarkFile) GetIsPrivate(uri string) (bool, error) {
 // @error is set to %G_BOOKMARK_FILE_ERROR_INVALID_VALUE.
 func (bookmark *BookmarkFile) GetMIMEType(uri string) (string, error) {
 	var carg0 *C.GBookmarkFile // in, none, converted
-	var carg1 *C.gchar         // in, none, string
-	var cret  *C.gchar         // return, full, string
+	var carg1 *C.gchar         // in, none, string, casted *C.gchar
+	var cret  *C.gchar         // return, full, string, casted *C.gchar
 	var _cerr *C.GError        // out, full, converted, nullable
 
 	carg0 = (*C.GBookmarkFile)(UnsafeBookmarkFileToGlibNone(bookmark))
@@ -13675,12 +13698,12 @@ func (bookmark *BookmarkFile) GetMIMEType(uri string) (string, error) {
 // @error is set to %G_BOOKMARK_FILE_ERROR_URI_NOT_FOUND.
 func (bookmark *BookmarkFile) GetModifiedDateTime(uri string) (*DateTime, error) {
 	var carg0 *C.GBookmarkFile // in, none, converted
-	var carg1 *C.gchar         // in, none, string
+	var carg1 *C.char          // in, none, string, casted *C.gchar
 	var cret  *C.GDateTime     // return, none, converted
 	var _cerr *C.GError        // out, full, converted, nullable
 
 	carg0 = (*C.GBookmarkFile)(UnsafeBookmarkFileToGlibNone(bookmark))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(uri)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(uri)))
 	defer C.free(unsafe.Pointer(carg1))
 
 	cret = C.g_bookmark_file_get_modified_date_time(carg0, carg1, &_cerr)
@@ -13706,7 +13729,7 @@ func (bookmark *BookmarkFile) GetModifiedDateTime(uri string) (*DateTime, error)
 // Gets the number of bookmarks inside @bookmark.
 func (bookmark *BookmarkFile) GetSize() int {
 	var carg0 *C.GBookmarkFile // in, none, converted
-	var cret  C.int            // return, none, casted
+	var cret  C.gint           // return, none, casted
 
 	carg0 = (*C.GBookmarkFile)(UnsafeBookmarkFileToGlibNone(bookmark))
 
@@ -13740,7 +13763,7 @@ func (bookmark *BookmarkFile) GetSize() int {
 func (bookmark *BookmarkFile) GetTitle(uri string) (string, error) {
 	var carg0 *C.GBookmarkFile // in, none, converted
 	var carg1 *C.gchar         // in, none, string, nullable-string
-	var cret  *C.gchar         // return, full, string
+	var cret  *C.gchar         // return, full, string, casted *C.gchar
 	var _cerr *C.GError        // out, full, converted, nullable
 
 	carg0 = (*C.GBookmarkFile)(UnsafeBookmarkFileToGlibNone(bookmark))
@@ -13812,12 +13835,12 @@ func (bookmark *BookmarkFile) GetURIs() (uint, []string) {
 // @error is set to %G_BOOKMARK_FILE_ERROR_URI_NOT_FOUND.
 func (bookmark *BookmarkFile) GetVisitedDateTime(uri string) (*DateTime, error) {
 	var carg0 *C.GBookmarkFile // in, none, converted
-	var carg1 *C.gchar         // in, none, string
+	var carg1 *C.char          // in, none, string, casted *C.gchar
 	var cret  *C.GDateTime     // return, none, converted
 	var _cerr *C.GError        // out, full, converted, nullable
 
 	carg0 = (*C.GBookmarkFile)(UnsafeBookmarkFileToGlibNone(bookmark))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(uri)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(uri)))
 	defer C.free(unsafe.Pointer(carg1))
 
 	cret = C.g_bookmark_file_get_visited_date_time(carg0, carg1, &_cerr)
@@ -13854,8 +13877,8 @@ func (bookmark *BookmarkFile) GetVisitedDateTime(uri string) (*DateTime, error) 
 // @error is set to %G_BOOKMARK_FILE_ERROR_URI_NOT_FOUND.
 func (bookmark *BookmarkFile) HasApplication(uri string, name string) (bool, error) {
 	var carg0 *C.GBookmarkFile // in, none, converted
-	var carg1 *C.gchar         // in, none, string
-	var carg2 *C.gchar         // in, none, string
+	var carg1 *C.gchar         // in, none, string, casted *C.gchar
+	var carg2 *C.gchar         // in, none, string, casted *C.gchar
 	var cret  C.gboolean       // return
 	var _cerr *C.GError        // out, full, converted, nullable
 
@@ -13902,8 +13925,8 @@ func (bookmark *BookmarkFile) HasApplication(uri string, name string) (bool, err
 // @error is set to %G_BOOKMARK_FILE_ERROR_URI_NOT_FOUND.
 func (bookmark *BookmarkFile) HasGroup(uri string, group string) (bool, error) {
 	var carg0 *C.GBookmarkFile // in, none, converted
-	var carg1 *C.gchar         // in, none, string
-	var carg2 *C.gchar         // in, none, string
+	var carg1 *C.gchar         // in, none, string, casted *C.gchar
+	var carg2 *C.gchar         // in, none, string, casted *C.gchar
 	var cret  C.gboolean       // return
 	var _cerr *C.GError        // out, full, converted, nullable
 
@@ -13944,7 +13967,7 @@ func (bookmark *BookmarkFile) HasGroup(uri string, group string) (bool, error) {
 // Looks whether the desktop bookmark has an item with its URI set to @uri.
 func (bookmark *BookmarkFile) HasItem(uri string) bool {
 	var carg0 *C.GBookmarkFile // in, none, converted
-	var carg1 *C.gchar         // in, none, string
+	var carg1 *C.gchar         // in, none, string, casted *C.gchar
 	var cret  C.gboolean       // return
 
 	carg0 = (*C.GBookmarkFile)(UnsafeBookmarkFileToGlibNone(bookmark))
@@ -14029,8 +14052,8 @@ func (bookmark *BookmarkFile) LoadFromData(data string) (bool, error) {
 // set to either a #GFileError or #GBookmarkFileError.
 func (bookmark *BookmarkFile) LoadFromDataDirs(file string) (string, bool, error) {
 	var carg0 *C.GBookmarkFile // in, none, converted
-	var carg1 *C.gchar         // in, none, string
-	var carg2 *C.gchar         // out, full, string
+	var carg1 *C.gchar         // in, none, string, casted *C.gchar
+	var carg2 *C.gchar         // out, full, string, casted *C.gchar
 	var cret  C.gboolean       // return
 	var _cerr *C.GError        // out, full, converted, nullable
 
@@ -14075,7 +14098,7 @@ func (bookmark *BookmarkFile) LoadFromDataDirs(file string) (string, bool, error
 // or #GBookmarkFileError.
 func (bookmark *BookmarkFile) LoadFromFile(filename string) (bool, error) {
 	var carg0 *C.GBookmarkFile // in, none, converted
-	var carg1 *C.gchar         // in, none, string
+	var carg1 *C.gchar         // in, none, string, casted *C.gchar
 	var cret  C.gboolean       // return
 	var _cerr *C.GError        // out, full, converted, nullable
 
@@ -14120,7 +14143,7 @@ func (bookmark *BookmarkFile) LoadFromFile(filename string) (bool, error) {
 // @error is set to %G_BOOKMARK_FILE_ERROR_URI_NOT_FOUND.
 func (bookmark *BookmarkFile) MoveItem(oldUri string, newUri string) (bool, error) {
 	var carg0 *C.GBookmarkFile // in, none, converted
-	var carg1 *C.gchar         // in, none, string
+	var carg1 *C.gchar         // in, none, string, casted *C.gchar
 	var carg2 *C.gchar         // in, none, string, nullable-string
 	var cret  C.gboolean       // return
 	var _cerr *C.GError        // out, full, converted, nullable
@@ -14173,8 +14196,8 @@ func (bookmark *BookmarkFile) MoveItem(oldUri string, newUri string) (bool, erro
 // %G_BOOKMARK_FILE_ERROR_APP_NOT_REGISTERED.
 func (bookmark *BookmarkFile) RemoveApplication(uri string, name string) (bool, error) {
 	var carg0 *C.GBookmarkFile // in, none, converted
-	var carg1 *C.gchar         // in, none, string
-	var carg2 *C.gchar         // in, none, string
+	var carg1 *C.gchar         // in, none, string, casted *C.gchar
+	var carg2 *C.gchar         // in, none, string, casted *C.gchar
 	var cret  C.gboolean       // return
 	var _cerr *C.GError        // out, full, converted, nullable
 
@@ -14223,8 +14246,8 @@ func (bookmark *BookmarkFile) RemoveApplication(uri string, name string) (bool, 
 // @error is set to %G_BOOKMARK_FILE_ERROR_INVALID_VALUE.
 func (bookmark *BookmarkFile) RemoveGroup(uri string, group string) (bool, error) {
 	var carg0 *C.GBookmarkFile // in, none, converted
-	var carg1 *C.gchar         // in, none, string
-	var carg2 *C.gchar         // in, none, string
+	var carg1 *C.gchar         // in, none, string, casted *C.gchar
+	var carg2 *C.gchar         // in, none, string, casted *C.gchar
 	var cret  C.gboolean       // return
 	var _cerr *C.GError        // out, full, converted, nullable
 
@@ -14266,7 +14289,7 @@ func (bookmark *BookmarkFile) RemoveGroup(uri string, group string) (bool, error
 // Removes the bookmark for @uri from the bookmark file @bookmark.
 func (bookmark *BookmarkFile) RemoveItem(uri string) (bool, error) {
 	var carg0 *C.GBookmarkFile // in, none, converted
-	var carg1 *C.gchar         // in, none, string
+	var carg1 *C.gchar         // in, none, string, casted *C.gchar
 	var cret  C.gboolean       // return
 	var _cerr *C.GError        // out, full, converted, nullable
 
@@ -14303,11 +14326,11 @@ func (bookmark *BookmarkFile) RemoveItem(uri string) (bool, error) {
 // If no bookmark for @uri is found then it is created.
 func (bookmark *BookmarkFile) SetAddedDateTime(uri string, added *DateTime) {
 	var carg0 *C.GBookmarkFile // in, none, converted
-	var carg1 *C.gchar         // in, none, string
+	var carg1 *C.char          // in, none, string, casted *C.gchar
 	var carg2 *C.GDateTime     // in, none, converted
 
 	carg0 = (*C.GBookmarkFile)(UnsafeBookmarkFileToGlibNone(bookmark))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(uri)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(uri)))
 	defer C.free(unsafe.Pointer(carg1))
 	carg2 = (*C.GDateTime)(UnsafeDateTimeToGlibNone(added))
 
@@ -14362,20 +14385,20 @@ func (bookmark *BookmarkFile) SetAddedDateTime(uri string, added *DateTime) {
 // for @uri is found, one is created.
 func (bookmark *BookmarkFile) SetApplicationInfo(uri string, name string, exec string, count int, stamp *DateTime) (bool, error) {
 	var carg0 *C.GBookmarkFile // in, none, converted
-	var carg1 *C.gchar         // in, none, string
-	var carg2 *C.gchar         // in, none, string
-	var carg3 *C.gchar         // in, none, string
-	var carg4 C.int            // in, none, casted
+	var carg1 *C.char          // in, none, string, casted *C.gchar
+	var carg2 *C.char          // in, none, string, casted *C.gchar
+	var carg3 *C.char          // in, none, string, casted *C.gchar
+	var carg4 C.int            // in, none, casted, casted C.gint
 	var carg5 *C.GDateTime     // in, none, converted, nullable
 	var cret  C.gboolean       // return
 	var _cerr *C.GError        // out, full, converted, nullable
 
 	carg0 = (*C.GBookmarkFile)(UnsafeBookmarkFileToGlibNone(bookmark))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(uri)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(uri)))
 	defer C.free(unsafe.Pointer(carg1))
-	carg2 = (*C.gchar)(unsafe.Pointer(C.CString(name)))
+	carg2 = (*C.char)(unsafe.Pointer(C.CString(name)))
 	defer C.free(unsafe.Pointer(carg2))
-	carg3 = (*C.gchar)(unsafe.Pointer(C.CString(exec)))
+	carg3 = (*C.char)(unsafe.Pointer(C.CString(exec)))
 	defer C.free(unsafe.Pointer(carg3))
 	carg4 = C.int(count)
 	if stamp != nil {
@@ -14418,7 +14441,7 @@ func (bookmark *BookmarkFile) SetApplicationInfo(uri string, name string, exec s
 func (bookmark *BookmarkFile) SetDescription(uri string, description string) {
 	var carg0 *C.GBookmarkFile // in, none, converted
 	var carg1 *C.gchar         // in, none, string, nullable-string
-	var carg2 *C.gchar         // in, none, string
+	var carg2 *C.gchar         // in, none, string, casted *C.gchar
 
 	carg0 = (*C.GBookmarkFile)(UnsafeBookmarkFileToGlibNone(bookmark))
 	if uri != "" {
@@ -14448,7 +14471,7 @@ func (bookmark *BookmarkFile) SetDescription(uri string, description string) {
 // If @uri cannot be found then an item for it is created.
 func (bookmark *BookmarkFile) SetGroups(uri string, groups []string) {
 	var carg0 *C.GBookmarkFile // in, none, converted
-	var carg1 *C.gchar         // in, none, string
+	var carg1 *C.gchar         // in, none, string, casted *C.gchar
 	var carg2 **C.gchar        // in, transfer: none, C Pointers: 2, Name: array[utf8], nullable, array (inner: *typesystem.StringPrimitive, length-by: carg3)
 	var carg3 C.gsize          // implicit
 
@@ -14481,9 +14504,9 @@ func (bookmark *BookmarkFile) SetGroups(uri string, groups []string) {
 // If no bookmark for @uri is found one is created.
 func (bookmark *BookmarkFile) SetIcon(uri string, href string, mimeType string) {
 	var carg0 *C.GBookmarkFile // in, none, converted
-	var carg1 *C.gchar         // in, none, string
+	var carg1 *C.gchar         // in, none, string, casted *C.gchar
 	var carg2 *C.gchar         // in, none, string, nullable-string
-	var carg3 *C.gchar         // in, none, string
+	var carg3 *C.gchar         // in, none, string, casted *C.gchar
 
 	carg0 = (*C.GBookmarkFile)(UnsafeBookmarkFileToGlibNone(bookmark))
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(uri)))
@@ -14514,7 +14537,7 @@ func (bookmark *BookmarkFile) SetIcon(uri string, href string, mimeType string) 
 // If a bookmark for @uri cannot be found then it is created.
 func (bookmark *BookmarkFile) SetIsPrivate(uri string, isPrivate bool) {
 	var carg0 *C.GBookmarkFile // in, none, converted
-	var carg1 *C.gchar         // in, none, string
+	var carg1 *C.gchar         // in, none, string, casted *C.gchar
 	var carg2 C.gboolean       // in
 
 	carg0 = (*C.GBookmarkFile)(UnsafeBookmarkFileToGlibNone(bookmark))
@@ -14542,8 +14565,8 @@ func (bookmark *BookmarkFile) SetIsPrivate(uri string, isPrivate bool) {
 // If a bookmark for @uri cannot be found then it is created.
 func (bookmark *BookmarkFile) SetMIMEType(uri string, mimeType string) {
 	var carg0 *C.GBookmarkFile // in, none, converted
-	var carg1 *C.gchar         // in, none, string
-	var carg2 *C.gchar         // in, none, string
+	var carg1 *C.gchar         // in, none, string, casted *C.gchar
+	var carg2 *C.gchar         // in, none, string, casted *C.gchar
 
 	carg0 = (*C.GBookmarkFile)(UnsafeBookmarkFileToGlibNone(bookmark))
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(uri)))
@@ -14574,11 +14597,11 @@ func (bookmark *BookmarkFile) SetMIMEType(uri string, mimeType string) {
 // g_bookmark_file_set_visited_date_time().
 func (bookmark *BookmarkFile) SetModifiedDateTime(uri string, modified *DateTime) {
 	var carg0 *C.GBookmarkFile // in, none, converted
-	var carg1 *C.gchar         // in, none, string
+	var carg1 *C.char          // in, none, string, casted *C.gchar
 	var carg2 *C.GDateTime     // in, none, converted
 
 	carg0 = (*C.GBookmarkFile)(UnsafeBookmarkFileToGlibNone(bookmark))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(uri)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(uri)))
 	defer C.free(unsafe.Pointer(carg1))
 	carg2 = (*C.GDateTime)(UnsafeDateTimeToGlibNone(modified))
 
@@ -14604,7 +14627,7 @@ func (bookmark *BookmarkFile) SetModifiedDateTime(uri string, modified *DateTime
 func (bookmark *BookmarkFile) SetTitle(uri string, title string) {
 	var carg0 *C.GBookmarkFile // in, none, converted
 	var carg1 *C.gchar         // in, none, string, nullable-string
-	var carg2 *C.gchar         // in, none, string
+	var carg2 *C.gchar         // in, none, string, casted *C.gchar
 
 	carg0 = (*C.GBookmarkFile)(UnsafeBookmarkFileToGlibNone(bookmark))
 	if uri != "" {
@@ -14638,11 +14661,11 @@ func (bookmark *BookmarkFile) SetTitle(uri string, title string) {
 // does not affect the "modified" time.
 func (bookmark *BookmarkFile) SetVisitedDateTime(uri string, visited *DateTime) {
 	var carg0 *C.GBookmarkFile // in, none, converted
-	var carg1 *C.gchar         // in, none, string
+	var carg1 *C.char          // in, none, string, casted *C.gchar
 	var carg2 *C.GDateTime     // in, none, converted
 
 	carg0 = (*C.GBookmarkFile)(UnsafeBookmarkFileToGlibNone(bookmark))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(uri)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(uri)))
 	defer C.free(unsafe.Pointer(carg1))
 	carg2 = (*C.GDateTime)(UnsafeDateTimeToGlibNone(visited))
 
@@ -14701,7 +14724,7 @@ func (bookmark *BookmarkFile) ToData() (uint, string, error) {
 // guaranteed to be atomic by using g_file_set_contents() internally.
 func (bookmark *BookmarkFile) ToFile(filename string) (bool, error) {
 	var carg0 *C.GBookmarkFile // in, none, converted
-	var carg1 *C.gchar         // in, none, string
+	var carg1 *C.gchar         // in, none, string, casted *C.gchar
 	var cret  C.gboolean       // return
 	var _cerr *C.GError        // out, full, converted, nullable
 
@@ -15176,7 +15199,7 @@ func (checksum *Checksum) Copy() *Checksum {
 // The hexadecimal characters will be lower case.
 func (checksum *Checksum) GetString() string {
 	var carg0 *C.GChecksum // in, none, converted
-	var cret  *C.gchar     // return, none, string
+	var cret  *C.gchar     // return, none, string, casted *C.gchar
 
 	carg0 = (*C.GChecksum)(UnsafeChecksumToGlibNone(checksum))
 
@@ -15366,20 +15389,20 @@ func UnsafeDateTimeToGlibFull(d *DateTime) unsafe.Pointer {
 // when you are done with it.
 func NewDateTime(tz *TimeZone, year int, month int, day int, hour int, minute int, seconds float64) *DateTime {
 	var carg1 *C.GTimeZone // in, none, converted
-	var carg2 C.int        // in, none, casted
-	var carg3 C.int        // in, none, casted
-	var carg4 C.int        // in, none, casted
-	var carg5 C.int        // in, none, casted
-	var carg6 C.int        // in, none, casted
+	var carg2 C.gint       // in, none, casted
+	var carg3 C.gint       // in, none, casted
+	var carg4 C.gint       // in, none, casted
+	var carg5 C.gint       // in, none, casted
+	var carg6 C.gint       // in, none, casted
 	var carg7 C.gdouble    // in, none, casted
 	var cret  *C.GDateTime // return, full, converted
 
 	carg1 = (*C.GTimeZone)(UnsafeTimeZoneToGlibNone(tz))
-	carg2 = C.int(year)
-	carg3 = C.int(month)
-	carg4 = C.int(day)
-	carg5 = C.int(hour)
-	carg6 = C.int(minute)
+	carg2 = C.gint(year)
+	carg3 = C.gint(month)
+	carg4 = C.gint(day)
+	carg5 = C.gint(hour)
+	carg6 = C.gint(minute)
 	carg7 = C.gdouble(seconds)
 
 	cret = C.g_date_time_new(carg1, carg2, carg3, carg4, carg5, carg6, carg7)
@@ -15454,7 +15477,7 @@ func NewDateTime(tz *TimeZone, year int, month int, day int, hour int, minute in
 // You should release the return value by calling g_date_time_unref()
 // when you are done with it.
 func NewDateTimeFromISO8601(text string, defaultTz *TimeZone) *DateTime {
-	var carg1 *C.gchar     // in, none, string
+	var carg1 *C.gchar     // in, none, string, casted *C.gchar
 	var carg2 *C.GTimeZone // in, none, converted, nullable
 	var cret  *C.GDateTime // return, full, converted
 
@@ -15496,19 +15519,19 @@ func NewDateTimeFromISO8601(text string, defaultTz *TimeZone) *DateTime {
 // This call is equivalent to calling g_date_time_new() with the time
 // zone returned by g_time_zone_new_local().
 func NewDateTimeLocal(year int, month int, day int, hour int, minute int, seconds float64) *DateTime {
-	var carg1 C.int        // in, none, casted
-	var carg2 C.int        // in, none, casted
-	var carg3 C.int        // in, none, casted
-	var carg4 C.int        // in, none, casted
-	var carg5 C.int        // in, none, casted
+	var carg1 C.gint       // in, none, casted
+	var carg2 C.gint       // in, none, casted
+	var carg3 C.gint       // in, none, casted
+	var carg4 C.gint       // in, none, casted
+	var carg5 C.gint       // in, none, casted
 	var carg6 C.gdouble    // in, none, casted
 	var cret  *C.GDateTime // return, full, converted
 
-	carg1 = C.int(year)
-	carg2 = C.int(month)
-	carg3 = C.int(day)
-	carg4 = C.int(hour)
-	carg5 = C.int(minute)
+	carg1 = C.gint(year)
+	carg2 = C.gint(month)
+	carg3 = C.gint(day)
+	carg4 = C.gint(hour)
+	carg5 = C.gint(minute)
 	carg6 = C.gdouble(seconds)
 
 	cret = C.g_date_time_new_local(carg1, carg2, carg3, carg4, carg5, carg6)
@@ -15625,19 +15648,19 @@ func NewDateTimeNowUTC() *DateTime {
 // This call is equivalent to calling g_date_time_new() with the time
 // zone returned by g_time_zone_new_utc().
 func NewDateTimeUTC(year int, month int, day int, hour int, minute int, seconds float64) *DateTime {
-	var carg1 C.int        // in, none, casted
-	var carg2 C.int        // in, none, casted
-	var carg3 C.int        // in, none, casted
-	var carg4 C.int        // in, none, casted
-	var carg5 C.int        // in, none, casted
+	var carg1 C.gint       // in, none, casted
+	var carg2 C.gint       // in, none, casted
+	var carg3 C.gint       // in, none, casted
+	var carg4 C.gint       // in, none, casted
+	var carg5 C.gint       // in, none, casted
 	var carg6 C.gdouble    // in, none, casted
 	var cret  *C.GDateTime // return, full, converted
 
-	carg1 = C.int(year)
-	carg2 = C.int(month)
-	carg3 = C.int(day)
-	carg4 = C.int(hour)
-	carg5 = C.int(minute)
+	carg1 = C.gint(year)
+	carg2 = C.gint(month)
+	carg3 = C.gint(day)
+	carg4 = C.gint(hour)
+	carg5 = C.gint(minute)
 	carg6 = C.gdouble(seconds)
 
 	cret = C.g_date_time_new_utc(carg1, carg2, carg3, carg4, carg5, carg6)
@@ -15699,11 +15722,11 @@ func (datetime *DateTime) Add(timespan TimeSpan) *DateTime {
 // copy. Add negative values to subtract days.
 func (datetime *DateTime) AddDays(days int) *DateTime {
 	var carg0 *C.GDateTime // in, none, converted
-	var carg1 C.int        // in, none, casted
+	var carg1 C.gint       // in, none, casted
 	var cret  *C.GDateTime // return, full, converted
 
 	carg0 = (*C.GDateTime)(UnsafeDateTimeToGlibNone(datetime))
-	carg1 = C.int(days)
+	carg1 = C.gint(days)
 
 	cret = C.g_date_time_add_days(carg0, carg1)
 	runtime.KeepAlive(datetime)
@@ -15735,20 +15758,20 @@ func (datetime *DateTime) AddDays(days int) *DateTime {
 // time in @datetime. Add negative values to subtract.
 func (datetime *DateTime) AddFull(years int, months int, days int, hours int, minutes int, seconds float64) *DateTime {
 	var carg0 *C.GDateTime // in, none, converted
-	var carg1 C.int        // in, none, casted
-	var carg2 C.int        // in, none, casted
-	var carg3 C.int        // in, none, casted
-	var carg4 C.int        // in, none, casted
-	var carg5 C.int        // in, none, casted
+	var carg1 C.gint       // in, none, casted
+	var carg2 C.gint       // in, none, casted
+	var carg3 C.gint       // in, none, casted
+	var carg4 C.gint       // in, none, casted
+	var carg5 C.gint       // in, none, casted
 	var carg6 C.gdouble    // in, none, casted
 	var cret  *C.GDateTime // return, full, converted
 
 	carg0 = (*C.GDateTime)(UnsafeDateTimeToGlibNone(datetime))
-	carg1 = C.int(years)
-	carg2 = C.int(months)
-	carg3 = C.int(days)
-	carg4 = C.int(hours)
-	carg5 = C.int(minutes)
+	carg1 = C.gint(years)
+	carg2 = C.gint(months)
+	carg3 = C.gint(days)
+	carg4 = C.gint(hours)
+	carg5 = C.gint(minutes)
 	carg6 = C.gdouble(seconds)
 
 	cret = C.g_date_time_add_full(carg0, carg1, carg2, carg3, carg4, carg5, carg6)
@@ -15781,11 +15804,11 @@ func (datetime *DateTime) AddFull(years int, months int, days int, hours int, mi
 // Add negative values to subtract hours.
 func (datetime *DateTime) AddHours(hours int) *DateTime {
 	var carg0 *C.GDateTime // in, none, converted
-	var carg1 C.int        // in, none, casted
+	var carg1 C.gint       // in, none, casted
 	var cret  *C.GDateTime // return, full, converted
 
 	carg0 = (*C.GDateTime)(UnsafeDateTimeToGlibNone(datetime))
-	carg1 = C.int(hours)
+	carg1 = C.gint(hours)
 
 	cret = C.g_date_time_add_hours(carg0, carg1)
 	runtime.KeepAlive(datetime)
@@ -15812,11 +15835,11 @@ func (datetime *DateTime) AddHours(hours int) *DateTime {
 // Add negative values to subtract minutes.
 func (datetime *DateTime) AddMinutes(minutes int) *DateTime {
 	var carg0 *C.GDateTime // in, none, converted
-	var carg1 C.int        // in, none, casted
+	var carg1 C.gint       // in, none, casted
 	var cret  *C.GDateTime // return, full, converted
 
 	carg0 = (*C.GDateTime)(UnsafeDateTimeToGlibNone(datetime))
-	carg1 = C.int(minutes)
+	carg1 = C.gint(minutes)
 
 	cret = C.g_date_time_add_minutes(carg0, carg1)
 	runtime.KeepAlive(datetime)
@@ -15848,11 +15871,11 @@ func (datetime *DateTime) AddMinutes(minutes int) *DateTime {
 // year), the result would be 29th February.
 func (datetime *DateTime) AddMonths(months int) *DateTime {
 	var carg0 *C.GDateTime // in, none, converted
-	var carg1 C.int        // in, none, casted
+	var carg1 C.gint       // in, none, casted
 	var cret  *C.GDateTime // return, full, converted
 
 	carg0 = (*C.GDateTime)(UnsafeDateTimeToGlibNone(datetime))
-	carg1 = C.int(months)
+	carg1 = C.gint(months)
 
 	cret = C.g_date_time_add_months(carg0, carg1)
 	runtime.KeepAlive(datetime)
@@ -15910,11 +15933,11 @@ func (datetime *DateTime) AddSeconds(seconds float64) *DateTime {
 // copy. Add negative values to subtract weeks.
 func (datetime *DateTime) AddWeeks(weeks int) *DateTime {
 	var carg0 *C.GDateTime // in, none, converted
-	var carg1 C.int        // in, none, casted
+	var carg1 C.gint       // in, none, casted
 	var cret  *C.GDateTime // return, full, converted
 
 	carg0 = (*C.GDateTime)(UnsafeDateTimeToGlibNone(datetime))
-	carg1 = C.int(weeks)
+	carg1 = C.gint(weeks)
 
 	cret = C.g_date_time_add_weeks(carg0, carg1)
 	runtime.KeepAlive(datetime)
@@ -15944,11 +15967,11 @@ func (datetime *DateTime) AddWeeks(weeks int) *DateTime {
 // February on a non-leap year, the day will be clamped to 28th February.
 func (datetime *DateTime) AddYears(years int) *DateTime {
 	var carg0 *C.GDateTime // in, none, converted
-	var carg1 C.int        // in, none, casted
+	var carg1 C.gint       // in, none, casted
 	var cret  *C.GDateTime // return, full, converted
 
 	carg0 = (*C.GDateTime)(UnsafeDateTimeToGlibNone(datetime))
-	carg1 = C.int(years)
+	carg1 = C.gint(years)
 
 	cret = C.g_date_time_add_years(carg0, carg1)
 	runtime.KeepAlive(datetime)
@@ -16130,8 +16153,8 @@ func (end *DateTime) Difference(begin *DateTime) TimeSpan {
 // - `%EY`: the full alternative year representation
 func (datetime *DateTime) Format(format string) string {
 	var carg0 *C.GDateTime // in, none, converted
-	var carg1 *C.gchar     // in, none, string
-	var cret  *C.gchar     // return, full, string
+	var carg1 *C.gchar     // in, none, string, casted *C.gchar
+	var cret  *C.gchar     // return, full, string, casted *C.gchar
 
 	carg0 = (*C.GDateTime)(UnsafeDateTimeToGlibNone(datetime))
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(format)))
@@ -16161,7 +16184,7 @@ func (datetime *DateTime) Format(format string) string {
 // Since GLib 2.66, this will output to sub-second precision if needed.
 func (datetime *DateTime) FormatISO8601() string {
 	var carg0 *C.GDateTime // in, none, converted
-	var cret  *C.gchar     // return, full, string
+	var cret  *C.gchar     // return, full, string, casted *C.gchar
 
 	carg0 = (*C.GDateTime)(UnsafeDateTimeToGlibNone(datetime))
 
@@ -16185,7 +16208,7 @@ func (datetime *DateTime) FormatISO8601() string {
 // calendar.
 func (datetime *DateTime) GetDayOfMonth() int {
 	var carg0 *C.GDateTime // in, none, converted
-	var cret  C.int        // return, none, casted
+	var cret  C.gint       // return, none, casted
 
 	carg0 = (*C.GDateTime)(UnsafeDateTimeToGlibNone(datetime))
 
@@ -16208,7 +16231,7 @@ func (datetime *DateTime) GetDayOfMonth() int {
 // Monday, 2 is Tuesday... 7 is Sunday).
 func (datetime *DateTime) GetDayOfWeek() int {
 	var carg0 *C.GDateTime // in, none, converted
-	var cret  C.int        // return, none, casted
+	var cret  C.gint       // return, none, casted
 
 	carg0 = (*C.GDateTime)(UnsafeDateTimeToGlibNone(datetime))
 
@@ -16231,7 +16254,7 @@ func (datetime *DateTime) GetDayOfWeek() int {
 // calendar.
 func (datetime *DateTime) GetDayOfYear() int {
 	var carg0 *C.GDateTime // in, none, converted
-	var cret  C.int        // return, none, casted
+	var cret  C.gint       // return, none, casted
 
 	carg0 = (*C.GDateTime)(UnsafeDateTimeToGlibNone(datetime))
 
@@ -16253,7 +16276,7 @@ func (datetime *DateTime) GetDayOfYear() int {
 // Retrieves the hour of the day represented by @datetime
 func (datetime *DateTime) GetHour() int {
 	var carg0 *C.GDateTime // in, none, converted
-	var cret  C.int        // return, none, casted
+	var cret  C.gint       // return, none, casted
 
 	carg0 = (*C.GDateTime)(UnsafeDateTimeToGlibNone(datetime))
 
@@ -16275,7 +16298,7 @@ func (datetime *DateTime) GetHour() int {
 // Retrieves the microsecond of the date represented by @datetime
 func (datetime *DateTime) GetMicrosecond() int {
 	var carg0 *C.GDateTime // in, none, converted
-	var cret  C.int        // return, none, casted
+	var cret  C.gint       // return, none, casted
 
 	carg0 = (*C.GDateTime)(UnsafeDateTimeToGlibNone(datetime))
 
@@ -16297,7 +16320,7 @@ func (datetime *DateTime) GetMicrosecond() int {
 // Retrieves the minute of the hour represented by @datetime
 func (datetime *DateTime) GetMinute() int {
 	var carg0 *C.GDateTime // in, none, converted
-	var cret  C.int        // return, none, casted
+	var cret  C.gint       // return, none, casted
 
 	carg0 = (*C.GDateTime)(UnsafeDateTimeToGlibNone(datetime))
 
@@ -16320,7 +16343,7 @@ func (datetime *DateTime) GetMinute() int {
 // calendar.
 func (datetime *DateTime) GetMonth() int {
 	var carg0 *C.GDateTime // in, none, converted
-	var cret  C.int        // return, none, casted
+	var cret  C.gint       // return, none, casted
 
 	carg0 = (*C.GDateTime)(UnsafeDateTimeToGlibNone(datetime))
 
@@ -16342,7 +16365,7 @@ func (datetime *DateTime) GetMonth() int {
 // Retrieves the second of the minute represented by @datetime
 func (datetime *DateTime) GetSecond() int {
 	var carg0 *C.GDateTime // in, none, converted
-	var cret  C.int        // return, none, casted
+	var cret  C.gint       // return, none, casted
 
 	carg0 = (*C.GDateTime)(UnsafeDateTimeToGlibNone(datetime))
 
@@ -16414,7 +16437,7 @@ func (datetime *DateTime) GetTimezone() *TimeZone {
 // time is in effect.
 func (datetime *DateTime) GetTimezoneAbbreviation() string {
 	var carg0 *C.GDateTime // in, none, converted
-	var cret  *C.gchar     // return, none, string
+	var cret  *C.gchar     // return, none, string, casted *C.gchar
 
 	carg0 = (*C.GDateTime)(UnsafeDateTimeToGlibNone(datetime))
 
@@ -16495,7 +16518,7 @@ func (datetime *DateTime) GetUTCOffset() TimeSpan {
 // Monday, so this function never returns 0.
 func (datetime *DateTime) GetWeekNumberingYear() int {
 	var carg0 *C.GDateTime // in, none, converted
-	var cret  C.int        // return, none, casted
+	var cret  C.gint       // return, none, casted
 
 	carg0 = (*C.GDateTime)(UnsafeDateTimeToGlibNone(datetime))
 
@@ -16531,7 +16554,7 @@ func (datetime *DateTime) GetWeekNumberingYear() int {
 // if 4 or more days of that week are contained within the new year.
 func (datetime *DateTime) GetWeekOfYear() int {
 	var carg0 *C.GDateTime // in, none, converted
-	var cret  C.int        // return, none, casted
+	var cret  C.gint       // return, none, casted
 
 	carg0 = (*C.GDateTime)(UnsafeDateTimeToGlibNone(datetime))
 
@@ -16553,7 +16576,7 @@ func (datetime *DateTime) GetWeekOfYear() int {
 // Retrieves the year represented by @datetime in the Gregorian calendar.
 func (datetime *DateTime) GetYear() int {
 	var carg0 *C.GDateTime // in, none, converted
-	var cret  C.int        // return, none, casted
+	var cret  C.gint       // return, none, casted
 
 	carg0 = (*C.GDateTime)(UnsafeDateTimeToGlibNone(datetime))
 
@@ -16577,9 +16600,9 @@ func (datetime *DateTime) GetYear() int {
 // Retrieves the Gregorian day, month, and year of a given #GDateTime.
 func (datetime *DateTime) GetYmd() (int, int, int) {
 	var carg0 *C.GDateTime // in, none, converted
-	var carg1 C.int        // out, full, casted
-	var carg2 C.int        // out, full, casted
-	var carg3 C.int        // out, full, casted
+	var carg1 C.gint       // out, full, casted
+	var carg2 C.gint       // out, full, casted
+	var carg3 C.gint       // out, full, casted
 
 	carg0 = (*C.GDateTime)(UnsafeDateTimeToGlibNone(datetime))
 
@@ -16876,7 +16899,7 @@ func UnsafeDirToGlibFull(d *Dir) unsafe.Pointer {
 // directory can then be retrieved using g_dir_read_name().  Note
 // that the ordering is not defined.
 func DirOpen(path string, flags uint) (*Dir, error) {
-	var carg1 *C.gchar  // in, none, string
+	var carg1 *C.gchar  // in, none, string, casted *C.gchar
 	var carg2 C.guint   // in, none, casted
 	var cret  *C.GDir   // return, full, converted
 	var _cerr *C.GError // out, full, converted, nullable
@@ -16939,7 +16962,7 @@ func (dir *Dir) Close() {
 // filenames, the returned name is in UTF-8.
 func (dir *Dir) ReadName() string {
 	var carg0 *C.GDir  // in, none, converted
-	var cret  *C.gchar // return, none, string
+	var cret  *C.gchar // return, none, string, casted *C.gchar
 
 	carg0 = (*C.GDir)(UnsafeDirToGlibNone(dir))
 
@@ -17313,7 +17336,7 @@ func (hmac *Hmac) Copy() *Hmac {
 // The hexadecimal characters will be lower case.
 func (hmac *Hmac) GetString() string {
 	var carg0 *C.GHmac // in, none, converted
-	var cret  *C.gchar // return, none, string
+	var cret  *C.gchar // return, none, string, casted *C.gchar
 
 	carg0 = (*C.GHmac)(UnsafeHmacToGlibNone(hmac))
 
@@ -17476,8 +17499,8 @@ func UnsafeIOChannelToGlibFull(i *IOChannel) unsafe.Pointer {
 // so will not cause problems, as long as no attempt is made to
 // access the channel after it is closed).
 func NewIOChannelFile(filename string, mode string) (*IOChannel, error) {
-	var carg1 *C.gchar      // in, none, string
-	var carg2 *C.gchar      // in, none, string
+	var carg1 *C.gchar      // in, none, string, casted *C.gchar
+	var carg2 *C.gchar      // in, none, string, casted *C.gchar
 	var cret  *C.GIOChannel // return, full, converted
 	var _cerr *C.GError     // out, full, converted, nullable
 
@@ -17636,7 +17659,7 @@ func (channel *IOChannel) GetCloseOnUnref() bool {
 // makes the channel safe for binary data.
 func (channel *IOChannel) GetEncoding() string {
 	var carg0 *C.GIOChannel // in, none, converted
-	var cret  *C.gchar      // return, none, string
+	var cret  *C.gchar      // return, none, string, casted *C.gchar
 
 	carg0 = (*C.GIOChannel)(UnsafeIOChannelToGlibNone(channel))
 
@@ -17691,8 +17714,8 @@ func (channel *IOChannel) GetFlags() IOFlags {
 // indicates autodetection.
 func (channel *IOChannel) GetLineTerm() (int, string) {
 	var carg0 *C.GIOChannel // in, none, converted
-	var carg1 C.int         // out, full, casted
-	var cret  *C.gchar      // return, none, string
+	var carg1 C.gint        // out, full, casted
+	var cret  *C.gchar      // return, none, string, casted *C.gchar
 
 	carg0 = (*C.GIOChannel)(UnsafeIOChannelToGlibNone(channel))
 
@@ -17742,7 +17765,7 @@ func (channel *IOChannel) Init() {
 // is %G_IO_STATUS_NORMAL.
 func (channel *IOChannel) ReadLine() (string, uint, uint, IOStatus, error) {
 	var carg0 *C.GIOChannel // in, none, converted
-	var carg1 *C.gchar      // out, full, string
+	var carg1 *C.gchar      // out, full, string, casted *C.gchar
 	var carg2 C.gsize       // out, full, casted
 	var carg3 C.gsize       // out, full, casted
 	var cret  C.GIOStatus   // return, none, casted
@@ -18098,14 +18121,14 @@ func (channel *IOChannel) SetFlags(flags IOFlags) (IOStatus, error) {
 func (channel *IOChannel) SetLineTerm(lineTerm string, length int) {
 	var carg0 *C.GIOChannel // in, none, converted
 	var carg1 *C.gchar      // in, none, string, nullable-string
-	var carg2 C.int         // in, none, casted
+	var carg2 C.gint        // in, none, casted
 
 	carg0 = (*C.GIOChannel)(UnsafeIOChannelToGlibNone(channel))
 	if lineTerm != "" {
 		carg1 = (*C.gchar)(unsafe.Pointer(C.CString(lineTerm)))
 		defer C.free(unsafe.Pointer(carg1))
 	}
-	carg2 = C.int(length)
+	carg2 = C.gint(length)
 
 	C.g_io_channel_set_line_term(carg0, carg1, carg2)
 	runtime.KeepAlive(channel)
@@ -18494,8 +18517,8 @@ func NewKeyFile() *KeyFile {
 // is returned and @error is set to %G_KEY_FILE_ERROR_INVALID_VALUE.
 func (keyFile *KeyFile) GetBoolean(groupName string, key string) (bool, error) {
 	var carg0 *C.GKeyFile // in, none, converted
-	var carg1 *C.gchar    // in, none, string
-	var carg2 *C.gchar    // in, none, string
+	var carg1 *C.gchar    // in, none, string, casted *C.gchar
+	var carg2 *C.gchar    // in, none, string, casted *C.gchar
 	var cret  C.gboolean  // return
 	var _cerr *C.GError   // out, full, converted, nullable
 
@@ -18545,8 +18568,8 @@ func (keyFile *KeyFile) GetBoolean(groupName string, key string) (bool, error) {
 // and @error is set to %G_KEY_FILE_ERROR_INVALID_VALUE.
 func (keyFile *KeyFile) GetBooleanList(groupName string, key string) (uint, []bool, error) {
 	var carg0 *C.GKeyFile // in, none, converted
-	var carg1 *C.gchar    // in, none, string
-	var carg2 *C.gchar    // in, none, string
+	var carg1 *C.gchar    // in, none, string, casted *C.gchar
+	var carg2 *C.gchar    // in, none, string, casted *C.gchar
 	var carg3 C.gsize     // out, full, casted
 	var cret  *C.gboolean // return, transfer: container, C Pointers: 1, Name: array[gboolean], scope: , array (inner: *typesystem.BooleanPrimitive)
 	var _cerr *C.GError   // out, full, converted, nullable
@@ -18601,7 +18624,7 @@ func (keyFile *KeyFile) GetComment(groupName string, key string) (string, error)
 	var carg0 *C.GKeyFile // in, none, converted
 	var carg1 *C.gchar    // in, none, string, nullable-string
 	var carg2 *C.gchar    // in, none, string, nullable-string
-	var cret  *C.gchar    // return, full, string
+	var cret  *C.gchar    // return, full, string, casted *C.gchar
 	var _cerr *C.GError   // out, full, converted, nullable
 
 	carg0 = (*C.GKeyFile)(UnsafeKeyFileToGlibNone(keyFile))
@@ -18652,8 +18675,8 @@ func (keyFile *KeyFile) GetComment(groupName string, key string) (string, error)
 // and @error is set to %G_KEY_FILE_ERROR_INVALID_VALUE.
 func (keyFile *KeyFile) GetDouble(groupName string, key string) (float64, error) {
 	var carg0 *C.GKeyFile // in, none, converted
-	var carg1 *C.gchar    // in, none, string
-	var carg2 *C.gchar    // in, none, string
+	var carg1 *C.gchar    // in, none, string, casted *C.gchar
+	var carg2 *C.gchar    // in, none, string, casted *C.gchar
 	var cret  C.gdouble   // return, none, casted
 	var _cerr *C.GError   // out, full, converted, nullable
 
@@ -18701,8 +18724,8 @@ func (keyFile *KeyFile) GetDouble(groupName string, key string) (float64, error)
 // and @error is set to %G_KEY_FILE_ERROR_INVALID_VALUE.
 func (keyFile *KeyFile) GetDoubleList(groupName string, key string) (uint, []float64, error) {
 	var carg0 *C.GKeyFile // in, none, converted
-	var carg1 *C.gchar    // in, none, string
-	var carg2 *C.gchar    // in, none, string
+	var carg1 *C.gchar    // in, none, string, casted *C.gchar
+	var carg2 *C.gchar    // in, none, string, casted *C.gchar
 	var carg3 C.gsize     // out, full, casted
 	var cret  *C.gdouble  // return, transfer: container, C Pointers: 1, Name: array[gdouble], scope: , array (inner: *typesystem.CastablePrimitive)
 	var _cerr *C.GError   // out, full, converted, nullable
@@ -18780,8 +18803,8 @@ func (keyFile *KeyFile) GetGroups() (uint, []string) {
 // 64-bit results without truncation.
 func (keyFile *KeyFile) GetInt64(groupName string, key string) (int64, error) {
 	var carg0 *C.GKeyFile // in, none, converted
-	var carg1 *C.gchar    // in, none, string
-	var carg2 *C.gchar    // in, none, string
+	var carg1 *C.gchar    // in, none, string, casted *C.gchar
+	var carg2 *C.gchar    // in, none, string, casted *C.gchar
 	var cret  C.gint64    // return, none, casted
 	var _cerr *C.GError   // out, full, converted, nullable
 
@@ -18829,9 +18852,9 @@ func (keyFile *KeyFile) GetInt64(groupName string, key string) (int64, error) {
 // and @error is set to %G_KEY_FILE_ERROR_INVALID_VALUE.
 func (keyFile *KeyFile) GetInteger(groupName string, key string) (int, error) {
 	var carg0 *C.GKeyFile // in, none, converted
-	var carg1 *C.gchar    // in, none, string
-	var carg2 *C.gchar    // in, none, string
-	var cret  C.int       // return, none, casted
+	var carg1 *C.gchar    // in, none, string, casted *C.gchar
+	var carg2 *C.gchar    // in, none, string, casted *C.gchar
+	var cret  C.gint      // return, none, casted
 	var _cerr *C.GError   // out, full, converted, nullable
 
 	carg0 = (*C.GKeyFile)(UnsafeKeyFileToGlibNone(keyFile))
@@ -18879,8 +18902,8 @@ func (keyFile *KeyFile) GetInteger(groupName string, key string) (int, error) {
 // and @error is set to %G_KEY_FILE_ERROR_INVALID_VALUE.
 func (keyFile *KeyFile) GetIntegerList(groupName string, key string) (uint, []int, error) {
 	var carg0 *C.GKeyFile // in, none, converted
-	var carg1 *C.gchar    // in, none, string
-	var carg2 *C.gchar    // in, none, string
+	var carg1 *C.gchar    // in, none, string, casted *C.gchar
+	var carg2 *C.gchar    // in, none, string, casted *C.gchar
 	var carg3 C.gsize     // out, full, casted
 	var cret  *C.gint     // return, transfer: container, C Pointers: 1, Name: array[gint], scope: , array (inner: *typesystem.CastablePrimitive)
 	var _cerr *C.GError   // out, full, converted, nullable
@@ -18930,7 +18953,7 @@ func (keyFile *KeyFile) GetIntegerList(groupName string, key string) (uint, []in
 // %G_KEY_FILE_ERROR_GROUP_NOT_FOUND.
 func (keyFile *KeyFile) GetKeys(groupName string) (uint, []string, error) {
 	var carg0 *C.GKeyFile // in, none, converted
-	var carg1 *C.gchar    // in, none, string
+	var carg1 *C.gchar    // in, none, string, casted *C.gchar
 	var carg2 C.gsize     // out, full, casted
 	var cret  **C.gchar   // return, transfer: full, C Pointers: 2, Name: array[utf8], scope: , array (inner: *typesystem.StringPrimitive, zero-terminated)
 	var _cerr *C.GError   // out, full, converted, nullable
@@ -18981,10 +19004,10 @@ func (keyFile *KeyFile) GetKeys(groupName string) (uint, []string, error) {
 // this function.
 func (keyFile *KeyFile) GetLocaleForKey(groupName string, key string, locale string) string {
 	var carg0 *C.GKeyFile // in, none, converted
-	var carg1 *C.gchar    // in, none, string
-	var carg2 *C.gchar    // in, none, string
+	var carg1 *C.gchar    // in, none, string, casted *C.gchar
+	var carg2 *C.gchar    // in, none, string, casted *C.gchar
 	var carg3 *C.gchar    // in, none, string, nullable-string
-	var cret  *C.gchar    // return, full, string
+	var cret  *C.gchar    // return, full, string, casted *C.gchar
 
 	carg0 = (*C.GKeyFile)(UnsafeKeyFileToGlibNone(keyFile))
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(groupName)))
@@ -19037,10 +19060,10 @@ func (keyFile *KeyFile) GetLocaleForKey(groupName string, key string, locale str
 // be found then the untranslated value is returned.
 func (keyFile *KeyFile) GetLocaleString(groupName string, key string, locale string) (string, error) {
 	var carg0 *C.GKeyFile // in, none, converted
-	var carg1 *C.gchar    // in, none, string
-	var carg2 *C.gchar    // in, none, string
+	var carg1 *C.gchar    // in, none, string, casted *C.gchar
+	var carg2 *C.gchar    // in, none, string, casted *C.gchar
 	var carg3 *C.gchar    // in, none, string, nullable-string
-	var cret  *C.gchar    // return, full, string
+	var cret  *C.gchar    // return, full, string, casted *C.gchar
 	var _cerr *C.GError   // out, full, converted, nullable
 
 	carg0 = (*C.GKeyFile)(UnsafeKeyFileToGlibNone(keyFile))
@@ -19101,8 +19124,8 @@ func (keyFile *KeyFile) GetLocaleString(groupName string, key string, locale str
 // be %NULL.
 func (keyFile *KeyFile) GetLocaleStringList(groupName string, key string, locale string) (uint, []string, error) {
 	var carg0 *C.GKeyFile // in, none, converted
-	var carg1 *C.gchar    // in, none, string
-	var carg2 *C.gchar    // in, none, string
+	var carg1 *C.gchar    // in, none, string, casted *C.gchar
+	var carg2 *C.gchar    // in, none, string, casted *C.gchar
 	var carg3 *C.gchar    // in, none, string, nullable-string
 	var carg4 C.gsize     // out, full, casted
 	var cret  **C.gchar   // return, transfer: full, C Pointers: 2, Name: array[utf8], scope: , array (inner: *typesystem.StringPrimitive, zero-terminated)
@@ -19147,7 +19170,7 @@ func (keyFile *KeyFile) GetLocaleStringList(groupName string, key string, locale
 // Returns the name of the start group of the file.
 func (keyFile *KeyFile) GetStartGroup() string {
 	var carg0 *C.GKeyFile // in, none, converted
-	var cret  *C.gchar    // return, full, string
+	var cret  *C.gchar    // return, full, string, casted *C.gchar
 
 	carg0 = (*C.GKeyFile)(UnsafeKeyFileToGlibNone(keyFile))
 
@@ -19184,9 +19207,9 @@ func (keyFile *KeyFile) GetStartGroup() string {
 // and @error is set to %G_KEY_FILE_ERROR_GROUP_NOT_FOUND.
 func (keyFile *KeyFile) GetString(groupName string, key string) (string, error) {
 	var carg0 *C.GKeyFile // in, none, converted
-	var carg1 *C.gchar    // in, none, string
-	var carg2 *C.gchar    // in, none, string
-	var cret  *C.gchar    // return, full, string
+	var carg1 *C.gchar    // in, none, string, casted *C.gchar
+	var carg2 *C.gchar    // in, none, string, casted *C.gchar
+	var cret  *C.gchar    // return, full, string, casted *C.gchar
 	var _cerr *C.GError   // out, full, converted, nullable
 
 	carg0 = (*C.GKeyFile)(UnsafeKeyFileToGlibNone(keyFile))
@@ -19233,8 +19256,8 @@ func (keyFile *KeyFile) GetString(groupName string, key string) (string, error) 
 // and @error is set to %G_KEY_FILE_ERROR_GROUP_NOT_FOUND.
 func (keyFile *KeyFile) GetStringList(groupName string, key string) (uint, []string, error) {
 	var carg0 *C.GKeyFile // in, none, converted
-	var carg1 *C.gchar    // in, none, string
-	var carg2 *C.gchar    // in, none, string
+	var carg1 *C.gchar    // in, none, string, casted *C.gchar
+	var carg2 *C.gchar    // in, none, string, casted *C.gchar
 	var carg3 C.gsize     // out, full, casted
 	var cret  **C.gchar   // return, transfer: full, C Pointers: 2, Name: array[utf8], scope: , array (inner: *typesystem.StringPrimitive, zero-terminated)
 	var _cerr *C.GError   // out, full, converted, nullable
@@ -19282,8 +19305,8 @@ func (keyFile *KeyFile) GetStringList(groupName string, key string) (uint, []str
 // large positive results without truncation.
 func (keyFile *KeyFile) GetUint64(groupName string, key string) (uint64, error) {
 	var carg0 *C.GKeyFile // in, none, converted
-	var carg1 *C.gchar    // in, none, string
-	var carg2 *C.gchar    // in, none, string
+	var carg1 *C.gchar    // in, none, string, casted *C.gchar
+	var carg2 *C.gchar    // in, none, string, casted *C.gchar
 	var cret  C.guint64   // return, none, casted
 	var _cerr *C.GError   // out, full, converted, nullable
 
@@ -19330,9 +19353,9 @@ func (keyFile *KeyFile) GetUint64(groupName string, key string) (uint64, error) 
 // and @error is set to %G_KEY_FILE_ERROR_GROUP_NOT_FOUND.
 func (keyFile *KeyFile) GetValue(groupName string, key string) (string, error) {
 	var carg0 *C.GKeyFile // in, none, converted
-	var carg1 *C.gchar    // in, none, string
-	var carg2 *C.gchar    // in, none, string
-	var cret  *C.gchar    // return, full, string
+	var carg1 *C.gchar    // in, none, string, casted *C.gchar
+	var carg2 *C.gchar    // in, none, string, casted *C.gchar
+	var cret  *C.gchar    // return, full, string, casted *C.gchar
 	var _cerr *C.GError   // out, full, converted, nullable
 
 	carg0 = (*C.GKeyFile)(UnsafeKeyFileToGlibNone(keyFile))
@@ -19371,7 +19394,7 @@ func (keyFile *KeyFile) GetValue(groupName string, key string) (string, error) {
 // Looks whether the key file has the group @group_name.
 func (keyFile *KeyFile) HasGroup(groupName string) bool {
 	var carg0 *C.GKeyFile // in, none, converted
-	var carg1 *C.gchar    // in, none, string
+	var carg1 *C.gchar    // in, none, string, casted *C.gchar
 	var cret  C.gboolean  // return
 
 	carg0 = (*C.GKeyFile)(UnsafeKeyFileToGlibNone(keyFile))
@@ -19451,7 +19474,7 @@ func (keyFile *KeyFile) LoadFromBytes(bytes *Bytes, flags KeyFileFlags) (bool, e
 // If the object cannot be created then %error is set to a #GKeyFileError.
 func (keyFile *KeyFile) LoadFromData(data string, length uint, flags KeyFileFlags) (bool, error) {
 	var carg0 *C.GKeyFile     // in, none, converted
-	var carg1 *C.gchar        // in, none, string
+	var carg1 *C.gchar        // in, none, string, casted *C.gchar
 	var carg2 C.gsize         // in, none, casted
 	var carg3 C.GKeyFileFlags // in, none, casted
 	var cret  C.gboolean      // return
@@ -19503,9 +19526,9 @@ func (keyFile *KeyFile) LoadFromData(data string, length uint, flags KeyFileFlag
 // set to either a #GFileError or #GKeyFileError.
 func (keyFile *KeyFile) LoadFromDataDirs(file string, flags KeyFileFlags) (string, bool, error) {
 	var carg0 *C.GKeyFile     // in, none, converted
-	var carg1 *C.gchar        // in, none, string
+	var carg1 *C.gchar        // in, none, string, casted *C.gchar
 	var carg3 C.GKeyFileFlags // in, none, casted
-	var carg2 *C.gchar        // out, full, string
+	var carg2 *C.gchar        // out, full, string, casted *C.gchar
 	var cret  C.gboolean      // return
 	var _cerr *C.GError       // out, full, converted, nullable
 
@@ -19561,10 +19584,10 @@ func (keyFile *KeyFile) LoadFromDataDirs(file string, flags KeyFileFlags) (strin
 // %G_KEY_FILE_ERROR is returned.
 func (keyFile *KeyFile) LoadFromDirs(file string, searchDirs []string, flags KeyFileFlags) (string, bool, error) {
 	var carg0 *C.GKeyFile     // in, none, converted
-	var carg1 *C.gchar        // in, none, string
+	var carg1 *C.gchar        // in, none, string, casted *C.gchar
 	var carg2 **C.gchar       // in, transfer: none, C Pointers: 2, Name: array[filename], array (inner: *typesystem.StringPrimitive, zero-terminated)
 	var carg4 C.GKeyFileFlags // in, none, casted
-	var carg3 *C.gchar        // out, full, string
+	var carg3 *C.gchar        // out, full, string, casted *C.gchar
 	var cret  C.gboolean      // return
 	var _cerr *C.GError       // out, full, converted, nullable
 
@@ -19620,7 +19643,7 @@ func (keyFile *KeyFile) LoadFromDirs(file string, searchDirs []string, flags Key
 // @file is not found, %G_FILE_ERROR_NOENT is returned.
 func (keyFile *KeyFile) LoadFromFile(file string, flags KeyFileFlags) (bool, error) {
 	var carg0 *C.GKeyFile     // in, none, converted
-	var carg1 *C.gchar        // in, none, string
+	var carg1 *C.gchar        // in, none, string, casted *C.gchar
 	var carg2 C.GKeyFileFlags // in, none, casted
 	var cret  C.gboolean      // return
 	var _cerr *C.GError       // out, full, converted, nullable
@@ -19714,7 +19737,7 @@ func (keyFile *KeyFile) RemoveComment(groupName string, key string) (bool, error
 // from the key file.
 func (keyFile *KeyFile) RemoveGroup(groupName string) (bool, error) {
 	var carg0 *C.GKeyFile // in, none, converted
-	var carg1 *C.gchar    // in, none, string
+	var carg1 *C.gchar    // in, none, string, casted *C.gchar
 	var cret  C.gboolean  // return
 	var _cerr *C.GError   // out, full, converted, nullable
 
@@ -19754,8 +19777,8 @@ func (keyFile *KeyFile) RemoveGroup(groupName string) (bool, error) {
 // Removes @key in @group_name from the key file.
 func (keyFile *KeyFile) RemoveKey(groupName string, key string) (bool, error) {
 	var carg0 *C.GKeyFile // in, none, converted
-	var carg1 *C.gchar    // in, none, string
-	var carg2 *C.gchar    // in, none, string
+	var carg1 *C.gchar    // in, none, string, casted *C.gchar
+	var carg2 *C.gchar    // in, none, string, casted *C.gchar
 	var cret  C.gboolean  // return
 	var _cerr *C.GError   // out, full, converted, nullable
 
@@ -19803,7 +19826,7 @@ func (keyFile *KeyFile) RemoveKey(groupName string, key string) (bool, error) {
 // g_file_set_contents() may fail.
 func (keyFile *KeyFile) SaveToFile(filename string) (bool, error) {
 	var carg0 *C.GKeyFile // in, none, converted
-	var carg1 *C.gchar    // in, none, string
+	var carg1 *C.gchar    // in, none, string, casted *C.gchar
 	var cret  C.gboolean  // return
 	var _cerr *C.GError   // out, full, converted, nullable
 
@@ -19840,8 +19863,8 @@ func (keyFile *KeyFile) SaveToFile(filename string) (bool, error) {
 // If @key cannot be found then it is created.
 func (keyFile *KeyFile) SetBoolean(groupName string, key string, value bool) {
 	var carg0 *C.GKeyFile // in, none, converted
-	var carg1 *C.gchar    // in, none, string
-	var carg2 *C.gchar    // in, none, string
+	var carg1 *C.gchar    // in, none, string, casted *C.gchar
+	var carg2 *C.gchar    // in, none, string, casted *C.gchar
 	var carg3 C.gboolean  // in
 
 	carg0 = (*C.GKeyFile)(UnsafeKeyFileToGlibNone(keyFile))
@@ -19873,8 +19896,8 @@ func (keyFile *KeyFile) SetBoolean(groupName string, key string, value bool) {
 // If @group_name is %NULL, the start_group is used.
 func (keyFile *KeyFile) SetBooleanList(groupName string, key string, list []bool) {
 	var carg0 *C.GKeyFile // in, none, converted
-	var carg1 *C.gchar    // in, none, string
-	var carg2 *C.gchar    // in, none, string
+	var carg1 *C.gchar    // in, none, string, casted *C.gchar
+	var carg2 *C.gchar    // in, none, string, casted *C.gchar
 	var carg3 *C.gboolean // in, transfer: none, C Pointers: 1, Name: array[gboolean], array (inner: *typesystem.BooleanPrimitive, length-by: carg4)
 	var carg4 C.gsize     // implicit
 
@@ -19920,7 +19943,7 @@ func (keyFile *KeyFile) SetComment(groupName string, key string, comment string)
 	var carg0 *C.GKeyFile // in, none, converted
 	var carg1 *C.gchar    // in, none, string, nullable-string
 	var carg2 *C.gchar    // in, none, string, nullable-string
-	var carg3 *C.gchar    // in, none, string
+	var carg3 *C.gchar    // in, none, string, casted *C.gchar
 	var cret  C.gboolean  // return
 	var _cerr *C.GError   // out, full, converted, nullable
 
@@ -19967,8 +19990,8 @@ func (keyFile *KeyFile) SetComment(groupName string, key string, comment string)
 // If @key cannot be found then it is created.
 func (keyFile *KeyFile) SetDouble(groupName string, key string, value float64) {
 	var carg0 *C.GKeyFile // in, none, converted
-	var carg1 *C.gchar    // in, none, string
-	var carg2 *C.gchar    // in, none, string
+	var carg1 *C.gchar    // in, none, string, casted *C.gchar
+	var carg2 *C.gchar    // in, none, string, casted *C.gchar
 	var carg3 C.gdouble   // in, none, casted
 
 	carg0 = (*C.GKeyFile)(UnsafeKeyFileToGlibNone(keyFile))
@@ -19997,8 +20020,8 @@ func (keyFile *KeyFile) SetDouble(groupName string, key string, value float64) {
 // @group_name.  If @key cannot be found then it is created.
 func (keyFile *KeyFile) SetDoubleList(groupName string, key string, list []float64) {
 	var carg0 *C.GKeyFile // in, none, converted
-	var carg1 *C.gchar    // in, none, string
-	var carg2 *C.gchar    // in, none, string
+	var carg1 *C.gchar    // in, none, string, casted *C.gchar
+	var carg2 *C.gchar    // in, none, string, casted *C.gchar
 	var carg3 *C.gdouble  // in, transfer: none, C Pointers: 1, Name: array[gdouble], array (inner: *typesystem.CastablePrimitive, length-by: carg4)
 	var carg4 C.gsize     // implicit
 
@@ -20031,8 +20054,8 @@ func (keyFile *KeyFile) SetDoubleList(groupName string, key string, list []float
 // If @key cannot be found then it is created.
 func (keyFile *KeyFile) SetInt64(groupName string, key string, value int64) {
 	var carg0 *C.GKeyFile // in, none, converted
-	var carg1 *C.gchar    // in, none, string
-	var carg2 *C.gchar    // in, none, string
+	var carg1 *C.gchar    // in, none, string, casted *C.gchar
+	var carg2 *C.gchar    // in, none, string, casted *C.gchar
 	var carg3 C.gint64    // in, none, casted
 
 	carg0 = (*C.GKeyFile)(UnsafeKeyFileToGlibNone(keyFile))
@@ -20061,16 +20084,16 @@ func (keyFile *KeyFile) SetInt64(groupName string, key string, value int64) {
 // If @key cannot be found then it is created.
 func (keyFile *KeyFile) SetInteger(groupName string, key string, value int) {
 	var carg0 *C.GKeyFile // in, none, converted
-	var carg1 *C.gchar    // in, none, string
-	var carg2 *C.gchar    // in, none, string
-	var carg3 C.int       // in, none, casted
+	var carg1 *C.gchar    // in, none, string, casted *C.gchar
+	var carg2 *C.gchar    // in, none, string, casted *C.gchar
+	var carg3 C.gint      // in, none, casted
 
 	carg0 = (*C.GKeyFile)(UnsafeKeyFileToGlibNone(keyFile))
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(groupName)))
 	defer C.free(unsafe.Pointer(carg1))
 	carg2 = (*C.gchar)(unsafe.Pointer(C.CString(key)))
 	defer C.free(unsafe.Pointer(carg2))
-	carg3 = C.int(value)
+	carg3 = C.gint(value)
 
 	C.g_key_file_set_integer(carg0, carg1, carg2, carg3)
 	runtime.KeepAlive(keyFile)
@@ -20091,8 +20114,8 @@ func (keyFile *KeyFile) SetInteger(groupName string, key string, value int) {
 // If @key cannot be found then it is created.
 func (keyFile *KeyFile) SetIntegerList(groupName string, key string, list []int) {
 	var carg0 *C.GKeyFile // in, none, converted
-	var carg1 *C.gchar    // in, none, string
-	var carg2 *C.gchar    // in, none, string
+	var carg1 *C.gchar    // in, none, string, casted *C.gchar
+	var carg2 *C.gchar    // in, none, string, casted *C.gchar
 	var carg3 *C.gint     // in, transfer: none, C Pointers: 1, Name: array[gint], array (inner: *typesystem.CastablePrimitive, length-by: carg4)
 	var carg4 C.gsize     // implicit
 
@@ -20147,10 +20170,10 @@ func (keyFile *KeyFile) SetListSeparator(separator byte) {
 // If the translation for @key cannot be found then it is created.
 func (keyFile *KeyFile) SetLocaleString(groupName string, key string, locale string, str string) {
 	var carg0 *C.GKeyFile // in, none, converted
-	var carg1 *C.gchar    // in, none, string
-	var carg2 *C.gchar    // in, none, string
-	var carg3 *C.gchar    // in, none, string
-	var carg4 *C.gchar    // in, none, string
+	var carg1 *C.gchar    // in, none, string, casted *C.gchar
+	var carg2 *C.gchar    // in, none, string, casted *C.gchar
+	var carg3 *C.gchar    // in, none, string, casted *C.gchar
+	var carg4 *C.gchar    // in, none, string, casted *C.gchar
 
 	carg0 = (*C.GKeyFile)(UnsafeKeyFileToGlibNone(keyFile))
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(groupName)))
@@ -20184,9 +20207,9 @@ func (keyFile *KeyFile) SetLocaleString(groupName string, key string, locale str
 // it is created.
 func (keyFile *KeyFile) SetLocaleStringList(groupName string, key string, locale string, list []string) {
 	var carg0 *C.GKeyFile // in, none, converted
-	var carg1 *C.gchar    // in, none, string
-	var carg2 *C.gchar    // in, none, string
-	var carg3 *C.gchar    // in, none, string
+	var carg1 *C.gchar    // in, none, string, casted *C.gchar
+	var carg2 *C.gchar    // in, none, string, casted *C.gchar
+	var carg3 *C.gchar    // in, none, string, casted *C.gchar
 	var carg4 **C.gchar   // in, transfer: none, C Pointers: 2, Name: array[utf8], array (inner: *typesystem.StringPrimitive, zero-terminated, length-by: carg5)
 	var carg5 C.gsize     // implicit
 
@@ -20225,9 +20248,9 @@ func (keyFile *KeyFile) SetLocaleStringList(groupName string, key string, locale
 // that need escaping, such as newlines.
 func (keyFile *KeyFile) SetString(groupName string, key string, str string) {
 	var carg0 *C.GKeyFile // in, none, converted
-	var carg1 *C.gchar    // in, none, string
-	var carg2 *C.gchar    // in, none, string
-	var carg3 *C.gchar    // in, none, string
+	var carg1 *C.gchar    // in, none, string, casted *C.gchar
+	var carg2 *C.gchar    // in, none, string, casted *C.gchar
+	var carg3 *C.gchar    // in, none, string, casted *C.gchar
 
 	carg0 = (*C.GKeyFile)(UnsafeKeyFileToGlibNone(keyFile))
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(groupName)))
@@ -20257,8 +20280,8 @@ func (keyFile *KeyFile) SetString(groupName string, key string, str string) {
 // If @group_name cannot be found then it is created.
 func (keyFile *KeyFile) SetStringList(groupName string, key string, list []string) {
 	var carg0 *C.GKeyFile // in, none, converted
-	var carg1 *C.gchar    // in, none, string
-	var carg2 *C.gchar    // in, none, string
+	var carg1 *C.gchar    // in, none, string, casted *C.gchar
+	var carg2 *C.gchar    // in, none, string, casted *C.gchar
 	var carg3 **C.gchar   // in, transfer: none, C Pointers: 2, Name: array[utf8], array (inner: *typesystem.StringPrimitive, zero-terminated, length-by: carg4)
 	var carg4 C.gsize     // implicit
 
@@ -20291,8 +20314,8 @@ func (keyFile *KeyFile) SetStringList(groupName string, key string, list []strin
 // If @key cannot be found then it is created.
 func (keyFile *KeyFile) SetUint64(groupName string, key string, value uint64) {
 	var carg0 *C.GKeyFile // in, none, converted
-	var carg1 *C.gchar    // in, none, string
-	var carg2 *C.gchar    // in, none, string
+	var carg1 *C.gchar    // in, none, string, casted *C.gchar
+	var carg2 *C.gchar    // in, none, string, casted *C.gchar
 	var carg3 C.guint64   // in, none, casted
 
 	carg0 = (*C.GKeyFile)(UnsafeKeyFileToGlibNone(keyFile))
@@ -20325,9 +20348,9 @@ func (keyFile *KeyFile) SetUint64(groupName string, key string, value uint64) {
 // g_key_file_set_string().
 func (keyFile *KeyFile) SetValue(groupName string, key string, value string) {
 	var carg0 *C.GKeyFile // in, none, converted
-	var carg1 *C.gchar    // in, none, string
-	var carg2 *C.gchar    // in, none, string
-	var carg3 *C.gchar    // in, none, string
+	var carg1 *C.gchar    // in, none, string, casted *C.gchar
+	var carg2 *C.gchar    // in, none, string, casted *C.gchar
+	var carg3 *C.gchar    // in, none, string, casted *C.gchar
 
 	carg0 = (*C.GKeyFile)(UnsafeKeyFileToGlibNone(keyFile))
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(groupName)))
@@ -20359,7 +20382,7 @@ func (keyFile *KeyFile) SetValue(groupName string, key string, value string) {
 func (keyFile *KeyFile) ToData() (uint, string, error) {
 	var carg0 *C.GKeyFile // in, none, converted
 	var carg1 C.gsize     // out, full, casted
-	var cret  *C.gchar    // return, full, string
+	var cret  *C.gchar    // return, full, string, casted *C.gchar
 	var _cerr *C.GError   // out, full, converted, nullable
 
 	carg0 = (*C.GKeyFile)(UnsafeKeyFileToGlibNone(keyFile))
@@ -20618,11 +20641,11 @@ func (context *MainContext) Acquire() bool {
 func (context *MainContext) AddPoll(fd *PollFD, priority int) {
 	var carg0 *C.GMainContext // in, none, converted
 	var carg1 *C.GPollFD      // in, none, converted
-	var carg2 C.int           // in, none, casted
+	var carg2 C.gint          // in, none, casted
 
 	carg0 = (*C.GMainContext)(UnsafeMainContextToGlibNone(context))
 	carg1 = (*C.GPollFD)(UnsafePollFDToGlibNone(fd))
-	carg2 = C.int(priority)
+	carg2 = C.gint(priority)
 
 	C.g_main_context_add_poll(carg0, carg1, carg2)
 	runtime.KeepAlive(context)
@@ -20654,13 +20677,13 @@ func (context *MainContext) AddPoll(fd *PollFD, priority int) {
 // main context.
 func (context *MainContext) Check(maxPriority int, fds []PollFD) bool {
 	var carg0 *C.GMainContext // in, none, converted
-	var carg1 C.int           // in, none, casted
+	var carg1 C.gint          // in, none, casted
 	var carg2 *C.GPollFD      // in, transfer: none, C Pointers: 1, Name: array[PollFD], array (inner: *typesystem.Record, length-by: carg3)
-	var carg3 C.int           // implicit
+	var carg3 C.gint          // implicit
 	var cret  C.gboolean      // return
 
 	carg0 = (*C.GMainContext)(UnsafeMainContextToGlibNone(context))
-	carg1 = C.int(maxPriority)
+	carg1 = C.gint(maxPriority)
 	_ = fds
 	_ = carg2
 	_ = carg3
@@ -20829,13 +20852,13 @@ func (context *MainContext) FindSourceByUserData(userData unsafe.Pointer) *Sourc
 // thread or with any particular context acquired.
 func (context *MainContext) InvokeFull(priority int, function SourceFunc) {
 	var carg0 *C.GMainContext  // in, none, converted
-	var carg1 C.int            // in, none, casted
+	var carg1 C.gint           // in, none, casted
 	var carg2 C.GSourceFunc    // callback, scope: notified, closure: carg3, destroy: carg4
 	var carg3 C.gpointer       // implicit
 	var carg4 C.GDestroyNotify // implicit
 
 	carg0 = (*C.GMainContext)(UnsafeMainContextToGlibNone(context))
-	carg1 = C.int(priority)
+	carg1 = C.gint(priority)
 	carg2 = (*[0]byte)(C._gotk4_glib2_SourceFunc)
 	carg3 = C.gpointer(gbox.Assign(function))
 	carg4 = (C.GDestroyNotify)((*[0]byte)(C.callbackDelete))
@@ -20969,7 +20992,7 @@ func (context *MainContext) PopThreadDefault() {
 // [method@GLib.MainContext.acquire] before you may call this function.
 func (context *MainContext) Prepare() (int, bool) {
 	var carg0 *C.GMainContext // in, none, converted
-	var carg1 C.int           // out, full, casted
+	var carg1 C.gint          // out, full, casted
 	var cret  C.gboolean      // return
 
 	carg0 = (*C.GMainContext)(UnsafeMainContextToGlibNone(context))
@@ -21403,7 +21426,7 @@ func UnsafeMappedFileToGlibFull(m *MappedFile) unsafe.Pointer {
 // size 0 (e.g. device files such as /dev/null), @error will be set
 // to the #GFileError value %G_FILE_ERROR_INVAL.
 func NewMappedFile(filename string, writable bool) (*MappedFile, error) {
-	var carg1 *C.gchar       // in, none, string
+	var carg1 *C.gchar       // in, none, string, casted *C.gchar
 	var carg2 C.gboolean     // in
 	var cret  *C.GMappedFile // return, full, converted
 	var _cerr *C.GError      // out, full, converted, nullable
@@ -21453,12 +21476,12 @@ func NewMappedFile(filename string, writable bool) (*MappedFile, error) {
 // will not be modified, or if all modifications of the file are done
 // atomically (e.g. using g_file_set_contents()).
 func NewMappedFileFromFd(fd int, writable bool) (*MappedFile, error) {
-	var carg1 C.int          // in, none, casted
+	var carg1 C.gint         // in, none, casted
 	var carg2 C.gboolean     // in
 	var cret  *C.GMappedFile // return, full, converted
 	var _cerr *C.GError      // out, full, converted, nullable
 
-	carg1 = C.int(fd)
+	carg1 = C.gint(fd)
 	if writable {
 		carg2 = C.TRUE
 	}
@@ -21515,7 +21538,7 @@ func (file *MappedFile) GetBytes() *Bytes {
 // If the file is empty then %NULL is returned.
 func (file *MappedFile) GetContents() string {
 	var carg0 *C.GMappedFile // in, none, converted
-	var cret  *C.gchar       // return, none, string
+	var cret  *C.gchar       // return, none, string, casted *C.gchar
 
 	carg0 = (*C.GMappedFile)(UnsafeMappedFileToGlibNone(file))
 
@@ -21670,7 +21693,7 @@ func (context *MarkupParseContext) EndParse() (bool, error) {
 // elements, see g_markup_parse_context_get_element_stack().
 func (context *MarkupParseContext) GetElement() string {
 	var carg0 *C.GMarkupParseContext // in, none, converted
-	var cret  *C.gchar               // return, none, string
+	var cret  *C.gchar               // return, none, string, casted *C.gchar
 
 	carg0 = (*C.GMarkupParseContext)(UnsafeMarkupParseContextToGlibNone(context))
 
@@ -21696,8 +21719,8 @@ func (context *MarkupParseContext) GetElement() string {
 // "the best number we could come up with for error messages."
 func (context *MarkupParseContext) GetPosition() (int, int) {
 	var carg0 *C.GMarkupParseContext // in, none, converted
-	var carg1 C.int                  // out, full, casted
-	var carg2 C.int                  // out, full, casted
+	var carg1 C.gint                 // out, full, casted
+	var carg2 C.gint                 // out, full, casted
 
 	carg0 = (*C.GMarkupParseContext)(UnsafeMarkupParseContextToGlibNone(context))
 
@@ -21763,7 +21786,7 @@ func (context *MarkupParseContext) GetUserData() unsafe.Pointer {
 // all errors are fatal.
 func (context *MarkupParseContext) Parse(text string, textLen int) (bool, error) {
 	var carg0 *C.GMarkupParseContext // in, none, converted
-	var carg1 *C.gchar               // in, none, string
+	var carg1 *C.gchar               // in, none, string, casted *C.gchar
 	var carg2 C.gssize               // in, none, casted
 	var cret  C.gboolean             // return
 	var _cerr *C.GError              // out, full, converted, nullable
@@ -22131,8 +22154,8 @@ func UnsafeMatchInfoToGlibFull(m *MatchInfo) unsafe.Pointer {
 // contains references.
 func (matchInfo *MatchInfo) ExpandReferences(stringToExpand string) (string, error) {
 	var carg0 *C.GMatchInfo // in, none, converted
-	var carg1 *C.gchar      // in, none, string
-	var cret  *C.gchar      // return, full, string
+	var carg1 *C.gchar      // in, none, string, casted *C.gchar
+	var cret  *C.gchar      // return, full, string, casted *C.gchar
 	var _cerr *C.GError     // out, full, converted, nullable
 
 	carg0 = (*C.GMatchInfo)(UnsafeMatchInfoToGlibNone(matchInfo))
@@ -22183,11 +22206,11 @@ func (matchInfo *MatchInfo) ExpandReferences(stringToExpand string) (string, err
 // so you cannot call this function after freeing the string.
 func (matchInfo *MatchInfo) Fetch(matchNum int) string {
 	var carg0 *C.GMatchInfo // in, none, converted
-	var carg1 C.int         // in, none, casted
-	var cret  *C.gchar      // return, full, string
+	var carg1 C.gint        // in, none, casted
+	var cret  *C.gchar      // return, full, string, casted *C.gchar
 
 	carg0 = (*C.GMatchInfo)(UnsafeMatchInfoToGlibNone(matchInfo))
-	carg1 = C.int(matchNum)
+	carg1 = C.gint(matchNum)
 
 	cret = C.g_match_info_fetch(carg0, carg1)
 	runtime.KeepAlive(matchInfo)
@@ -22260,8 +22283,8 @@ func (matchInfo *MatchInfo) FetchAll() []string {
 // so you cannot call this function after freeing the string.
 func (matchInfo *MatchInfo) FetchNamed(name string) string {
 	var carg0 *C.GMatchInfo // in, none, converted
-	var carg1 *C.gchar      // in, none, string
-	var cret  *C.gchar      // return, full, string
+	var carg1 *C.gchar      // in, none, string, casted *C.gchar
+	var cret  *C.gchar      // return, full, string, casted *C.gchar
 
 	carg0 = (*C.GMatchInfo)(UnsafeMatchInfoToGlibNone(matchInfo))
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(name)))
@@ -22300,9 +22323,9 @@ func (matchInfo *MatchInfo) FetchNamed(name string) string {
 // then @start_pos and @end_pos are set to -1 and %TRUE is returned.
 func (matchInfo *MatchInfo) FetchNamedPos(name string) (int, int, bool) {
 	var carg0 *C.GMatchInfo // in, none, converted
-	var carg1 *C.gchar      // in, none, string
-	var carg2 C.int         // out, full, casted
-	var carg3 C.int         // out, full, casted
+	var carg1 *C.gchar      // in, none, string, casted *C.gchar
+	var carg2 C.gint        // out, full, casted
+	var carg3 C.gint        // out, full, casted
 	var cret  C.gboolean    // return
 
 	carg0 = (*C.GMatchInfo)(UnsafeMatchInfoToGlibNone(matchInfo))
@@ -22355,13 +22378,13 @@ func (matchInfo *MatchInfo) FetchNamedPos(name string) (int, int, bool) {
 // 0 is the longest match.
 func (matchInfo *MatchInfo) FetchPos(matchNum int) (int, int, bool) {
 	var carg0 *C.GMatchInfo // in, none, converted
-	var carg1 C.int         // in, none, casted
-	var carg2 C.int         // out, full, casted
-	var carg3 C.int         // out, full, casted
+	var carg1 C.gint        // in, none, casted
+	var carg2 C.gint        // out, full, casted
+	var carg3 C.gint        // out, full, casted
 	var cret  C.gboolean    // return
 
 	carg0 = (*C.GMatchInfo)(UnsafeMatchInfoToGlibNone(matchInfo))
-	carg1 = C.int(matchNum)
+	carg1 = C.gint(matchNum)
 
 	cret = C.g_match_info_fetch_pos(carg0, carg1, &carg2, &carg3)
 	runtime.KeepAlive(matchInfo)
@@ -22395,7 +22418,7 @@ func (matchInfo *MatchInfo) FetchPos(matchNum int) (int, int, bool) {
 // the number of matched substrings.
 func (matchInfo *MatchInfo) GetMatchCount() int {
 	var carg0 *C.GMatchInfo // in, none, converted
-	var cret  C.int         // return, none, casted
+	var cret  C.gint        // return, none, casted
 
 	carg0 = (*C.GMatchInfo)(UnsafeMatchInfoToGlibNone(matchInfo))
 
@@ -22443,7 +22466,7 @@ func (matchInfo *MatchInfo) GetRegex() *Regex {
 // you may not free it before calling this function.
 func (matchInfo *MatchInfo) GetString() string {
 	var carg0 *C.GMatchInfo // in, none, converted
-	var cret  *C.gchar      // return, none, string
+	var cret  *C.gchar      // return, none, string, casted *C.gchar
 
 	carg0 = (*C.GMatchInfo)(UnsafeMatchInfoToGlibNone(matchInfo))
 
@@ -22649,7 +22672,7 @@ func UnsafeNodeToGlibFull(n *Node) unsafe.Pointer {
 func (node *Node) ChildIndex(data unsafe.Pointer) int {
 	var carg0 *C.GNode   // in, none, converted
 	var carg1 C.gpointer // in, none, casted, nullable
-	var cret  C.int      // return, none, casted
+	var cret  C.gint     // return, none, casted
 
 	carg0 = (*C.GNode)(UnsafeNodeToGlibNone(node))
 	if data != nil {
@@ -22683,7 +22706,7 @@ func (node *Node) ChildIndex(data unsafe.Pointer) int {
 func (node *Node) ChildPosition(child *Node) int {
 	var carg0 *C.GNode // in, none, converted
 	var carg1 *C.GNode // in, none, converted
-	var cret  C.int    // return, none, casted
+	var cret  C.gint   // return, none, casted
 
 	carg0 = (*C.GNode)(UnsafeNodeToGlibNone(node))
 	carg1 = (*C.GNode)(UnsafeNodeToGlibNone(child))
@@ -22986,7 +23009,7 @@ func (context *OptionContext) AddMainEntries(entries []OptionEntry, translationD
 // Returns the description. See g_option_context_set_description().
 func (context *OptionContext) GetDescription() string {
 	var carg0 *C.GOptionContext // in, none, converted
-	var cret  *C.gchar          // return, none, string
+	var cret  *C.gchar          // return, none, string, casted *C.gchar
 
 	carg0 = (*C.GOptionContext)(UnsafeOptionContextToGlibNone(context))
 
@@ -23022,7 +23045,7 @@ func (context *OptionContext) GetHelp(mainHelp bool, group *OptionGroup) string 
 	var carg0 *C.GOptionContext // in, none, converted
 	var carg1 C.gboolean        // in
 	var carg2 *C.GOptionGroup   // in, none, converted, nullable
-	var cret  *C.gchar          // return, full, string
+	var cret  *C.gchar          // return, full, string, casted *C.gchar
 
 	carg0 = (*C.GOptionContext)(UnsafeOptionContextToGlibNone(context))
 	if mainHelp {
@@ -23151,7 +23174,7 @@ func (context *OptionContext) GetStrictPosix() bool {
 // Returns the summary. See g_option_context_set_summary().
 func (context *OptionContext) GetSummary() string {
 	var carg0 *C.GOptionContext // in, none, converted
-	var cret  *C.gchar          // return, none, string
+	var cret  *C.gchar          // return, none, string, casted *C.gchar
 
 	carg0 = (*C.GOptionContext)(UnsafeOptionContextToGlibNone(context))
 
@@ -23348,7 +23371,7 @@ func (context *OptionContext) SetSummary(summary string) {
 // user-visible strings.
 func (context *OptionContext) SetTranslationDomain(domain string) {
 	var carg0 *C.GOptionContext // in, none, converted
-	var carg1 *C.gchar          // in, none, string
+	var carg1 *C.gchar          // in, none, string, casted *C.gchar
 
 	carg0 = (*C.GOptionContext)(UnsafeOptionContextToGlibNone(context))
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(domain)))
@@ -23462,7 +23485,7 @@ func (o *OptionEntry) SetShortName(short_name byte) {
 // Flags from #GOptionFlags
 func (o *OptionEntry) SetFlags(flags int) {
 	valptr := &o.native.flags
-	*valptr = C.int(flags)
+	*valptr = C.gint(flags)
 }
 
 // OptionGroup wraps GOptionGroup
@@ -23571,7 +23594,7 @@ func (group *OptionGroup) AddEntries(entries []OptionEntry) {
 // user-visible strings.
 func (group *OptionGroup) SetTranslationDomain(domain string) {
 	var carg0 *C.GOptionGroup // in, none, converted
-	var carg1 *C.gchar        // in, none, string
+	var carg1 *C.gchar        // in, none, string, casted *C.gchar
 
 	carg0 = (*C.GOptionGroup)(UnsafeOptionGroupToGlibNone(group))
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(domain)))
@@ -23701,7 +23724,7 @@ func (buf *PathBuf) Clear() {
 // See also: g_path_buf_to_path()
 func (buf *PathBuf) ClearToPath() string {
 	var carg0 *C.GPathBuf // in, none, converted
-	var cret  *C.gchar    // return, full, string
+	var cret  *C.char     // return, full, string, casted *C.gchar
 
 	carg0 = (*C.GPathBuf)(UnsafePathBufToGlibNone(buf))
 
@@ -23710,7 +23733,7 @@ func (buf *PathBuf) ClearToPath() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 	defer C.free(unsafe.Pointer(cret))
 
 	return goret
@@ -23729,7 +23752,7 @@ func (buf *PathBuf) ClearToPath() string {
 // See also: g_path_buf_to_path()
 func (buf *PathBuf) FreeToPath() string {
 	var carg0 *C.GPathBuf // in, none, converted
-	var cret  *C.gchar    // return, full, string
+	var cret  *C.char     // return, full, string, casted *C.gchar
 
 	carg0 = (*C.GPathBuf)(UnsafePathBufToGlibNone(buf))
 
@@ -23738,7 +23761,7 @@ func (buf *PathBuf) FreeToPath() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 	defer C.free(unsafe.Pointer(cret))
 
 	return goret
@@ -23779,12 +23802,12 @@ func (buf *PathBuf) Init() *PathBuf {
 // Initializes a `GPathBuf` instance with the given path.
 func (buf *PathBuf) InitFromPath(path string) *PathBuf {
 	var carg0 *C.GPathBuf // in, none, converted
-	var carg1 *C.gchar    // in, none, string, nullable-string
+	var carg1 *C.char     // in, none, string, nullable-string
 	var cret  *C.GPathBuf // return, none, converted
 
 	carg0 = (*C.GPathBuf)(UnsafePathBufToGlibNone(buf))
 	if path != "" {
-		carg1 = (*C.gchar)(unsafe.Pointer(C.CString(path)))
+		carg1 = (*C.char)(unsafe.Pointer(C.CString(path)))
 		defer C.free(unsafe.Pointer(carg1))
 	}
 
@@ -23884,11 +23907,11 @@ func (buf *PathBuf) Pop() bool {
 // ]|
 func (buf *PathBuf) Push(path string) *PathBuf {
 	var carg0 *C.GPathBuf // in, none, converted
-	var carg1 *C.gchar    // in, none, string
+	var carg1 *C.char     // in, none, string, casted *C.gchar
 	var cret  *C.GPathBuf // return, none, converted
 
 	carg0 = (*C.GPathBuf)(UnsafePathBufToGlibNone(buf))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(path)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(path)))
 	defer C.free(unsafe.Pointer(carg1))
 
 	cret = C.g_path_buf_push(carg0, carg1)
@@ -23920,12 +23943,12 @@ func (buf *PathBuf) Push(path string) *PathBuf {
 // `FALSE` and leaves the path buffer unmodified.
 func (buf *PathBuf) SetExtension(extension string) bool {
 	var carg0 *C.GPathBuf // in, none, converted
-	var carg1 *C.gchar    // in, none, string, nullable-string
+	var carg1 *C.char     // in, none, string, nullable-string
 	var cret  C.gboolean  // return
 
 	carg0 = (*C.GPathBuf)(UnsafePathBufToGlibNone(buf))
 	if extension != "" {
-		carg1 = (*C.gchar)(unsafe.Pointer(C.CString(extension)))
+		carg1 = (*C.char)(unsafe.Pointer(C.CString(extension)))
 		defer C.free(unsafe.Pointer(carg1))
 	}
 
@@ -23984,11 +24007,11 @@ func (buf *PathBuf) SetExtension(extension string) bool {
 // ]|
 func (buf *PathBuf) SetFilename(fileName string) bool {
 	var carg0 *C.GPathBuf // in, none, converted
-	var carg1 *C.gchar    // in, none, string
+	var carg1 *C.char     // in, none, string, casted *C.gchar
 	var cret  C.gboolean  // return
 
 	carg0 = (*C.GPathBuf)(UnsafePathBufToGlibNone(buf))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(fileName)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(fileName)))
 	defer C.free(unsafe.Pointer(carg1))
 
 	cret = C.g_path_buf_set_filename(carg0, carg1)
@@ -24017,7 +24040,7 @@ func (buf *PathBuf) SetFilename(fileName string) bool {
 // If the path buffer is empty, this function returns `NULL`.
 func (buf *PathBuf) ToPath() string {
 	var carg0 *C.GPathBuf // in, none, converted
-	var cret  *C.gchar    // return, full, string
+	var cret  *C.char     // return, full, string, casted *C.gchar
 
 	carg0 = (*C.GPathBuf)(UnsafePathBufToGlibNone(buf))
 
@@ -24026,7 +24049,7 @@ func (buf *PathBuf) ToPath() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 	defer C.free(unsafe.Pointer(cret))
 
 	return goret
@@ -24121,7 +24144,7 @@ func UnsafePatternSpecToGlibFull(p *PatternSpec) unsafe.Pointer {
 //
 // Compiles a pattern to a [type@GLib.PatternSpec].
 func NewPatternSpec(pattern string) *PatternSpec {
-	var carg1 *C.gchar        // in, none, string
+	var carg1 *C.gchar        // in, none, string, casted *C.gchar
 	var cret  *C.GPatternSpec // return, full, converted
 
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(pattern)))
@@ -24227,7 +24250,7 @@ func (pspec1 *PatternSpec) Equal(pspec2 *PatternSpec) bool {
 func (pspec *PatternSpec) Match(stringLength uint, str string, stringReversed string) bool {
 	var carg0 *C.GPatternSpec // in, none, converted
 	var carg1 C.gsize         // in, none, casted
-	var carg2 *C.gchar        // in, none, string
+	var carg2 *C.gchar        // in, none, string, casted *C.gchar
 	var carg3 *C.gchar        // in, none, string, nullable-string
 	var cret  C.gboolean      // return
 
@@ -24272,7 +24295,7 @@ func (pspec *PatternSpec) Match(stringLength uint, str string, stringReversed st
 // [method@GLib.PatternSpec.match] instead while supplying the reversed string.
 func (pspec *PatternSpec) MatchString(str string) bool {
 	var carg0 *C.GPatternSpec // in, none, converted
-	var carg1 *C.gchar        // in, none, string
+	var carg1 *C.gchar        // in, none, string, casted *C.gchar
 	var cret  C.gboolean      // return
 
 	carg0 = (*C.GPatternSpec)(UnsafePatternSpecToGlibNone(pspec))
@@ -24394,7 +24417,7 @@ func (p *PollFD) Revents() uint16 {
 // the file descriptor to poll (or a HANDLE on Win32)
 func (p *PollFD) SetFd(fd int) {
 	valptr := &p.native.fd
-	*valptr = C.int(fd)
+	*valptr = C.gint(fd)
 }
 
 // events wraps events
@@ -24573,7 +24596,7 @@ func (queue *Queue) GetLength() uint {
 func (queue *Queue) Index(data unsafe.Pointer) int {
 	var carg0 *C.GQueue       // in, none, converted
 	var carg1 C.gconstpointer // in, none, casted, nullable
-	var cret  C.int           // return, none, casted
+	var cret  C.gint          // return, none, casted
 
 	carg0 = (*C.GQueue)(UnsafeQueueToGlibNone(queue))
 	if data != nil {
@@ -24844,13 +24867,13 @@ func (queue *Queue) PushHead(data unsafe.Pointer) {
 func (queue *Queue) PushNth(data unsafe.Pointer, n int) {
 	var carg0 *C.GQueue  // in, none, converted
 	var carg1 C.gpointer // in, none, casted, nullable
-	var carg2 C.int      // in, none, casted
+	var carg2 C.gint     // in, none, casted
 
 	carg0 = (*C.GQueue)(UnsafeQueueToGlibNone(queue))
 	if data != nil {
 		carg1 = C.gpointer(data)
 	}
-	carg2 = C.int(n)
+	carg2 = C.gint(n)
 
 	C.g_queue_push_nth(carg0, carg1, carg2)
 	runtime.KeepAlive(queue)
@@ -25453,7 +25476,7 @@ func UnsafeRegexToGlibFull(r *Regex) unsafe.Pointer {
 // Compiles the regular expression to an internal form, and does
 // the initial setup of the #GRegex structure.
 func NewRegex(pattern string, compileOptions RegexCompileFlags, matchOptions RegexMatchFlags) (*Regex, error) {
-	var carg1 *C.gchar             // in, none, string
+	var carg1 *C.gchar             // in, none, string, casted *C.gchar
 	var carg2 C.GRegexCompileFlags // in, none, casted
 	var carg3 C.GRegexMatchFlags   // in, none, casted
 	var cret  *C.GRegex            // return, full, converted
@@ -25488,7 +25511,7 @@ func NewRegex(pattern string, compileOptions RegexCompileFlags, matchOptions Reg
 // Returns the number of capturing subpatterns in the pattern.
 func (regex *Regex) GetCaptureCount() int {
 	var carg0 *C.GRegex // in, none, converted
-	var cret  C.int     // return, none, casted
+	var cret  C.gint    // return, none, casted
 
 	carg0 = (*C.GRegex)(UnsafeRegexToGlibNone(regex))
 
@@ -25584,7 +25607,7 @@ func (regex *Regex) GetMatchFlags() RegexMatchFlags {
 // back references.
 func (regex *Regex) GetMaxBackref() int {
 	var carg0 *C.GRegex // in, none, converted
-	var cret  C.int     // return, none, casted
+	var cret  C.gint    // return, none, casted
 
 	carg0 = (*C.GRegex)(UnsafeRegexToGlibNone(regex))
 
@@ -25608,7 +25631,7 @@ func (regex *Regex) GetMaxBackref() int {
 // the partial matching facilities.
 func (regex *Regex) GetMaxLookbehind() int {
 	var carg0 *C.GRegex // in, none, converted
-	var cret  C.int     // return, none, casted
+	var cret  C.gint    // return, none, casted
 
 	carg0 = (*C.GRegex)(UnsafeRegexToGlibNone(regex))
 
@@ -25631,7 +25654,7 @@ func (regex *Regex) GetMaxLookbehind() int {
 // the string passed to g_regex_new().
 func (regex *Regex) GetPattern() string {
 	var carg0 *C.GRegex // in, none, converted
-	var cret  *C.gchar  // return, none, string
+	var cret  *C.gchar  // return, none, string, casted *C.gchar
 
 	carg0 = (*C.GRegex)(UnsafeRegexToGlibNone(regex))
 
@@ -25658,8 +25681,8 @@ func (regex *Regex) GetPattern() string {
 // Retrieves the number of the subexpression named @name.
 func (regex *Regex) GetStringNumber(name string) int {
 	var carg0 *C.GRegex // in, none, converted
-	var carg1 *C.gchar  // in, none, string
-	var cret  C.int     // return, none, casted
+	var carg1 *C.gchar  // in, none, string, casted *C.gchar
+	var cret  C.gint    // return, none, casted
 
 	carg0 = (*C.GRegex)(UnsafeRegexToGlibNone(regex))
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(name)))
@@ -25731,7 +25754,7 @@ func (regex *Regex) GetStringNumber(name string) int {
 // freeing or modifying @string then the behaviour is undefined.
 func (regex *Regex) Match(str string, matchOptions RegexMatchFlags) (*MatchInfo, bool) {
 	var carg0 *C.GRegex          // in, none, converted
-	var carg1 *C.gchar           // in, none, string
+	var carg1 *C.gchar           // in, none, string, casted *C.gchar
 	var carg2 C.GRegexMatchFlags // in, none, casted
 	var carg3 *C.GMatchInfo      // out, full, converted
 	var cret  C.gboolean         // return
@@ -25786,7 +25809,7 @@ func (regex *Regex) Match(str string, matchOptions RegexMatchFlags) (*MatchInfo,
 // freeing or modifying @string then the behaviour is undefined.
 func (regex *Regex) MatchAll(str string, matchOptions RegexMatchFlags) (*MatchInfo, bool) {
 	var carg0 *C.GRegex          // in, none, converted
-	var carg1 *C.gchar           // in, none, string
+	var carg1 *C.gchar           // in, none, string, casted *C.gchar
 	var carg2 C.GRegexMatchFlags // in, none, casted
 	var carg3 *C.GMatchInfo      // out, full, converted
 	var cret  C.gboolean         // return
@@ -25869,7 +25892,7 @@ func (regex *Regex) MatchAllFull(str string, startPosition int, matchOptions Reg
 	var carg0 *C.GRegex          // in, none, converted
 	var carg1 *C.gchar           // in, transfer: none, C Pointers: 1, Name: array[unknown], array (inner: <nil>, length-by: carg2)
 	var carg2 C.gssize           // implicit
-	var carg3 C.int              // in, none, casted
+	var carg3 C.gint             // in, none, casted
 	var carg4 C.GRegexMatchFlags // in, none, casted
 	var carg5 *C.GMatchInfo      // out, full, converted
 	var cret  C.gboolean         // return
@@ -25880,7 +25903,7 @@ func (regex *Regex) MatchAllFull(str string, startPosition int, matchOptions Reg
 	_ = carg1
 	_ = carg2
 	panic("unimplemented conversion of string (const gchar*)")
-	carg3 = C.int(startPosition)
+	carg3 = C.gint(startPosition)
 	carg4 = C.GRegexMatchFlags(matchOptions)
 
 	cret = C.g_regex_match_all_full(carg0, carg1, carg2, carg3, carg4, &carg5, &_cerr)
@@ -25974,7 +25997,7 @@ func (regex *Regex) MatchFull(str string, startPosition int, matchOptions RegexM
 	var carg0 *C.GRegex          // in, none, converted
 	var carg1 *C.gchar           // in, transfer: none, C Pointers: 1, Name: array[unknown], array (inner: <nil>, length-by: carg2)
 	var carg2 C.gssize           // implicit
-	var carg3 C.int              // in, none, casted
+	var carg3 C.gint             // in, none, casted
 	var carg4 C.GRegexMatchFlags // in, none, casted
 	var carg5 *C.GMatchInfo      // out, full, converted
 	var cret  C.gboolean         // return
@@ -25985,7 +26008,7 @@ func (regex *Regex) MatchFull(str string, startPosition int, matchOptions RegexM
 	_ = carg1
 	_ = carg2
 	panic("unimplemented conversion of string (const gchar*)")
-	carg3 = C.int(startPosition)
+	carg3 = C.gint(startPosition)
 	carg4 = C.GRegexMatchFlags(matchOptions)
 
 	cret = C.g_regex_match_full(carg0, carg1, carg2, carg3, carg4, &carg5, &_cerr)
@@ -26053,10 +26076,10 @@ func (regex *Regex) Replace(str string, startPosition int, replacement string, m
 	var carg0 *C.GRegex          // in, none, converted
 	var carg1 *C.gchar           // in, transfer: none, C Pointers: 1, Name: array[unknown], array (inner: <nil>, length-by: carg2)
 	var carg2 C.gssize           // implicit
-	var carg3 C.int              // in, none, casted
-	var carg4 *C.gchar           // in, none, string
+	var carg3 C.gint             // in, none, casted
+	var carg4 *C.gchar           // in, none, string, casted *C.gchar
 	var carg5 C.GRegexMatchFlags // in, none, casted
-	var cret  *C.gchar           // return, full, string
+	var cret  *C.gchar           // return, full, string, casted *C.gchar
 	var _cerr *C.GError          // out, full, converted, nullable
 
 	carg0 = (*C.GRegex)(UnsafeRegexToGlibNone(regex))
@@ -26064,7 +26087,7 @@ func (regex *Regex) Replace(str string, startPosition int, replacement string, m
 	_ = carg1
 	_ = carg2
 	panic("unimplemented conversion of string (const gchar*)")
-	carg3 = C.int(startPosition)
+	carg3 = C.gint(startPosition)
 	carg4 = (*C.gchar)(unsafe.Pointer(C.CString(replacement)))
 	defer C.free(unsafe.Pointer(carg4))
 	carg5 = C.GRegexMatchFlags(matchOptions)
@@ -26114,10 +26137,10 @@ func (regex *Regex) ReplaceLiteral(str string, startPosition int, replacement st
 	var carg0 *C.GRegex          // in, none, converted
 	var carg1 *C.gchar           // in, transfer: none, C Pointers: 1, Name: array[unknown], array (inner: <nil>, length-by: carg2)
 	var carg2 C.gssize           // implicit
-	var carg3 C.int              // in, none, casted
-	var carg4 *C.gchar           // in, none, string
+	var carg3 C.gint             // in, none, casted
+	var carg4 *C.gchar           // in, none, string, casted *C.gchar
 	var carg5 C.GRegexMatchFlags // in, none, casted
-	var cret  *C.gchar           // return, full, string
+	var cret  *C.gchar           // return, full, string, casted *C.gchar
 	var _cerr *C.GError          // out, full, converted, nullable
 
 	carg0 = (*C.GRegex)(UnsafeRegexToGlibNone(regex))
@@ -26125,7 +26148,7 @@ func (regex *Regex) ReplaceLiteral(str string, startPosition int, replacement st
 	_ = carg1
 	_ = carg2
 	panic("unimplemented conversion of string (const gchar*)")
-	carg3 = C.int(startPosition)
+	carg3 = C.gint(startPosition)
 	carg4 = (*C.gchar)(unsafe.Pointer(C.CString(replacement)))
 	defer C.free(unsafe.Pointer(carg4))
 	carg5 = C.GRegexMatchFlags(matchOptions)
@@ -26179,7 +26202,7 @@ func (regex *Regex) ReplaceLiteral(str string, startPosition int, replacement st
 // "a", "b" and "c".
 func (regex *Regex) Split(str string, matchOptions RegexMatchFlags) []string {
 	var carg0 *C.GRegex          // in, none, converted
-	var carg1 *C.gchar           // in, none, string
+	var carg1 *C.gchar           // in, none, string, casted *C.gchar
 	var carg2 C.GRegexMatchFlags // in, none, casted
 	var cret  **C.gchar          // return, transfer: full, C Pointers: 2, Name: array[utf8], scope: , array (inner: *typesystem.StringPrimitive, zero-terminated)
 
@@ -26242,9 +26265,9 @@ func (regex *Regex) SplitFull(str string, startPosition int, matchOptions RegexM
 	var carg0 *C.GRegex          // in, none, converted
 	var carg1 *C.gchar           // in, transfer: none, C Pointers: 1, Name: array[unknown], array (inner: <nil>, length-by: carg2)
 	var carg2 C.gssize           // implicit
-	var carg3 C.int              // in, none, casted
+	var carg3 C.gint             // in, none, casted
 	var carg4 C.GRegexMatchFlags // in, none, casted
-	var carg5 C.int              // in, none, casted
+	var carg5 C.gint             // in, none, casted
 	var cret  **C.gchar          // return, transfer: full, C Pointers: 2, Name: array[utf8], scope: , array (inner: *typesystem.StringPrimitive, zero-terminated)
 	var _cerr *C.GError          // out, full, converted, nullable
 
@@ -26253,9 +26276,9 @@ func (regex *Regex) SplitFull(str string, startPosition int, matchOptions RegexM
 	_ = carg1
 	_ = carg2
 	panic("unimplemented conversion of string (const gchar*)")
-	carg3 = C.int(startPosition)
+	carg3 = C.gint(startPosition)
 	carg4 = C.GRegexMatchFlags(matchOptions)
-	carg5 = C.int(maxTokens)
+	carg5 = C.gint(maxTokens)
 
 	cret = C.g_regex_split_full(carg0, carg1, carg2, carg3, carg4, carg5, &_cerr)
 	runtime.KeepAlive(regex)
@@ -26590,10 +26613,10 @@ func (scanner *Scanner) GetNextToken() TokenType {
 // Prepares to scan a file.
 func (scanner *Scanner) InputFile(inputFd int) {
 	var carg0 *C.GScanner // in, none, converted
-	var carg1 C.int       // in, none, casted
+	var carg1 C.gint      // in, none, casted
 
 	carg0 = (*C.GScanner)(UnsafeScannerToGlibNone(scanner))
-	carg1 = C.int(inputFd)
+	carg1 = C.gint(inputFd)
 
 	C.g_scanner_input_file(carg0, carg1)
 	runtime.KeepAlive(scanner)
@@ -26610,7 +26633,7 @@ func (scanner *Scanner) InputFile(inputFd int) {
 // Prepares to scan a text buffer.
 func (scanner *Scanner) InputText(text string, textLen uint) {
 	var carg0 *C.GScanner // in, none, converted
-	var carg1 *C.gchar    // in, none, string
+	var carg1 *C.gchar    // in, none, string, casted *C.gchar
 	var carg2 C.guint     // in, none, casted
 
 	carg0 = (*C.GScanner)(UnsafeScannerToGlibNone(scanner))
@@ -26639,7 +26662,7 @@ func (scanner *Scanner) InputText(text string, textLen uint) {
 // returned.
 func (scanner *Scanner) LookupSymbol(symbol string) unsafe.Pointer {
 	var carg0 *C.GScanner // in, none, converted
-	var carg1 *C.gchar    // in, none, string
+	var carg1 *C.gchar    // in, none, string, casted *C.gchar
 	var cret  C.gpointer  // return, none, casted
 
 	carg0 = (*C.GScanner)(UnsafeScannerToGlibNone(scanner))
@@ -26701,7 +26724,7 @@ func (scanner *Scanner) PeekNextToken() TokenType {
 func (scanner *Scanner) ScopeAddSymbol(scopeId uint, symbol string, value unsafe.Pointer) {
 	var carg0 *C.GScanner // in, none, converted
 	var carg1 C.guint     // in, none, casted
-	var carg2 *C.gchar    // in, none, string
+	var carg2 *C.gchar    // in, none, string, casted *C.gchar
 	var carg3 C.gpointer  // in, none, casted, nullable
 
 	carg0 = (*C.GScanner)(UnsafeScannerToGlibNone(scanner))
@@ -26764,7 +26787,7 @@ func (scanner *Scanner) ScopeForEachSymbol(scopeId uint, fn HFunc) {
 func (scanner *Scanner) ScopeLookupSymbol(scopeId uint, symbol string) unsafe.Pointer {
 	var carg0 *C.GScanner // in, none, converted
 	var carg1 C.guint     // in, none, casted
-	var carg2 *C.gchar    // in, none, string
+	var carg2 *C.gchar    // in, none, string, casted *C.gchar
 	var cret  C.gpointer  // return, none, casted
 
 	carg0 = (*C.GScanner)(UnsafeScannerToGlibNone(scanner))
@@ -26795,7 +26818,7 @@ func (scanner *Scanner) ScopeLookupSymbol(scopeId uint, symbol string) unsafe.Po
 func (scanner *Scanner) ScopeRemoveSymbol(scopeId uint, symbol string) {
 	var carg0 *C.GScanner // in, none, converted
 	var carg1 C.guint     // in, none, casted
-	var carg2 *C.gchar    // in, none, string
+	var carg2 *C.gchar    // in, none, string, casted *C.gchar
 
 	carg0 = (*C.GScanner)(UnsafeScannerToGlibNone(scanner))
 	carg1 = C.guint(scopeId)
@@ -26883,11 +26906,11 @@ func (scanner *Scanner) SyncFileOffset() {
 func (scanner *Scanner) UnexpToken(expectedToken TokenType, identifierSpec string, symbolSpec string, symbolName string, message string, isError int) {
 	var carg0 *C.GScanner  // in, none, converted
 	var carg1 C.GTokenType // in, none, casted
-	var carg2 *C.gchar     // in, none, string
-	var carg3 *C.gchar     // in, none, string
-	var carg4 *C.gchar     // in, none, string
-	var carg5 *C.gchar     // in, none, string
-	var carg6 C.int        // in, none, casted
+	var carg2 *C.gchar     // in, none, string, casted *C.gchar
+	var carg3 *C.gchar     // in, none, string, casted *C.gchar
+	var carg4 *C.gchar     // in, none, string, casted *C.gchar
+	var carg5 *C.gchar     // in, none, string, casted *C.gchar
+	var carg6 C.gint       // in, none, casted
 
 	carg0 = (*C.GScanner)(UnsafeScannerToGlibNone(scanner))
 	carg1 = C.GTokenType(expectedToken)
@@ -26899,7 +26922,7 @@ func (scanner *Scanner) UnexpToken(expectedToken TokenType, identifierSpec strin
 	defer C.free(unsafe.Pointer(carg4))
 	carg5 = (*C.gchar)(unsafe.Pointer(C.CString(message)))
 	defer C.free(unsafe.Pointer(carg5))
-	carg6 = C.int(isError)
+	carg6 = C.gint(isError)
 
 	C.g_scanner_unexp_token(carg0, carg1, carg2, carg3, carg4, carg5, carg6)
 	runtime.KeepAlive(scanner)
@@ -27151,11 +27174,11 @@ func (seq *Sequence) GetEndIter() *SequenceIter {
 // than the number of items in @seq, the end iterator is returned.
 func (seq *Sequence) GetIterAtPos(pos int) *SequenceIter {
 	var carg0 *C.GSequence     // in, none, converted
-	var carg1 C.int            // in, none, casted
+	var carg1 C.gint           // in, none, casted
 	var cret  *C.GSequenceIter // return, none, converted
 
 	carg0 = (*C.GSequence)(UnsafeSequenceToGlibNone(seq))
-	carg1 = C.int(pos)
+	carg1 = C.gint(pos)
 
 	cret = C.g_sequence_get_iter_at_pos(carg0, carg1)
 	runtime.KeepAlive(seq)
@@ -27178,7 +27201,7 @@ func (seq *Sequence) GetIterAtPos(pos int) *SequenceIter {
 // to use g_sequence_is_empty() when comparing the length to zero.
 func (seq *Sequence) GetLength() int {
 	var carg0 *C.GSequence // in, none, converted
-	var cret  C.int        // return, none, casted
+	var cret  C.gint       // return, none, casted
 
 	carg0 = (*C.GSequence)(UnsafeSequenceToGlibNone(seq))
 
@@ -27511,7 +27534,7 @@ func UnsafeSequenceIterToGlibFull(s *SequenceIter) unsafe.Pointer {
 func (a *SequenceIter) Compare(b *SequenceIter) int {
 	var carg0 *C.GSequenceIter // in, none, converted
 	var carg1 *C.GSequenceIter // in, none, converted
-	var cret  C.int            // return, none, casted
+	var cret  C.gint           // return, none, casted
 
 	carg0 = (*C.GSequenceIter)(UnsafeSequenceIterToGlibNone(a))
 	carg1 = (*C.GSequenceIter)(UnsafeSequenceIterToGlibNone(b))
@@ -27535,7 +27558,7 @@ func (a *SequenceIter) Compare(b *SequenceIter) int {
 // Returns the position of @iter
 func (iter *SequenceIter) GetPosition() int {
 	var carg0 *C.GSequenceIter // in, none, converted
-	var cret  C.int            // return, none, casted
+	var cret  C.gint           // return, none, casted
 
 	carg0 = (*C.GSequenceIter)(UnsafeSequenceIterToGlibNone(iter))
 
@@ -27636,11 +27659,11 @@ func (iter *SequenceIter) IsEnd() bool {
 // to the end of the sequence, the end iterator is returned.
 func (iter *SequenceIter) Move(delta int) *SequenceIter {
 	var carg0 *C.GSequenceIter // in, none, converted
-	var carg1 C.int            // in, none, casted
+	var carg1 C.gint           // in, none, casted
 	var cret  *C.GSequenceIter // return, none, converted
 
 	carg0 = (*C.GSequenceIter)(UnsafeSequenceIterToGlibNone(iter))
-	carg1 = C.int(delta)
+	carg1 = C.gint(delta)
 
 	cret = C.g_sequence_iter_move(carg0, carg1)
 	runtime.KeepAlive(iter)
@@ -28006,7 +28029,7 @@ func (source *Source) GetID() uint {
 // name may be #NULL if it has never been set with [method@GLib.Source.set_name].
 func (source *Source) GetName() string {
 	var carg0 *C.GSource // in, none, converted
-	var cret  *C.gchar   // return, none, string
+	var cret  *C.char    // return, none, string, casted *C.gchar
 
 	carg0 = (*C.GSource)(UnsafeSourceToGlibNone(source))
 
@@ -28015,7 +28038,7 @@ func (source *Source) GetName() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
 }
@@ -28028,7 +28051,7 @@ func (source *Source) GetName() string {
 // Gets the priority of a source.
 func (source *Source) GetPriority() int {
 	var carg0 *C.GSource // in, none, converted
-	var cret  C.int      // return, none, casted
+	var cret  C.gint     // return, none, casted
 
 	carg0 = (*C.GSource)(UnsafeSourceToGlibNone(source))
 
@@ -28391,10 +28414,10 @@ func (source *Source) SetFuncs(funcs *SourceFuncs) {
 // Also see [method@GLib.Source.set_static_name].
 func (source *Source) SetName(name string) {
 	var carg0 *C.GSource // in, none, converted
-	var carg1 *C.gchar   // in, none, string
+	var carg1 *C.char    // in, none, string, casted *C.gchar
 
 	carg0 = (*C.GSource)(UnsafeSourceToGlibNone(source))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(name)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(name)))
 	defer C.free(unsafe.Pointer(carg1))
 
 	C.g_source_set_name(carg0, carg1)
@@ -28418,10 +28441,10 @@ func (source *Source) SetName(name string) {
 // as a child of another source.
 func (source *Source) SetPriority(priority int) {
 	var carg0 *C.GSource // in, none, converted
-	var carg1 C.int      // in, none, casted
+	var carg1 C.gint     // in, none, casted
 
 	carg0 = (*C.GSource)(UnsafeSourceToGlibNone(source))
-	carg1 = C.int(priority)
+	carg1 = C.gint(priority)
 
 	C.g_source_set_priority(carg0, carg1)
 	runtime.KeepAlive(source)
@@ -28480,10 +28503,10 @@ func (source *Source) SetReadyTime(readyTime int64) {
 // string literals.
 func (source *Source) SetStaticName(name string) {
 	var carg0 *C.GSource // in, none, converted
-	var carg1 *C.gchar   // in, none, string
+	var carg1 *C.char    // in, none, string, casted *C.gchar
 
 	carg0 = (*C.GSource)(UnsafeSourceToGlibNone(source))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(name)))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(name)))
 	defer C.free(unsafe.Pointer(carg1))
 
 	C.g_source_set_static_name(carg0, carg1)
@@ -28942,7 +28965,7 @@ func (tz *TimeZone) FindInterval(typ TimeType, time_ int64) int {
 	var carg0 *C.GTimeZone // in, none, converted
 	var carg1 C.GTimeType  // in, none, casted
 	var carg2 C.gint64     // in, none, casted
-	var cret  C.int        // return, none, casted
+	var cret  C.gint       // return, none, casted
 
 	carg0 = (*C.GTimeZone)(UnsafeTimeZoneToGlibNone(tz))
 	carg1 = C.GTimeType(typ)
@@ -28978,11 +29001,11 @@ func (tz *TimeZone) FindInterval(typ TimeType, time_ int64) int {
 // is in effect.
 func (tz *TimeZone) GetAbbreviation(interval int) string {
 	var carg0 *C.GTimeZone // in, none, converted
-	var carg1 C.int        // in, none, casted
-	var cret  *C.gchar     // return, none, string
+	var carg1 C.gint       // in, none, casted
+	var cret  *C.gchar     // return, none, string, casted *C.gchar
 
 	carg0 = (*C.GTimeZone)(UnsafeTimeZoneToGlibNone(tz))
-	carg1 = C.int(interval)
+	carg1 = C.gint(interval)
 
 	cret = C.g_time_zone_get_abbreviation(carg0, carg1)
 	runtime.KeepAlive(tz)
@@ -29010,7 +29033,7 @@ func (tz *TimeZone) GetAbbreviation(interval int) string {
 // this function.
 func (tz *TimeZone) GetIdentifier() string {
 	var carg0 *C.GTimeZone // in, none, converted
-	var cret  *C.gchar     // return, none, string
+	var cret  *C.gchar     // return, none, string, casted *C.gchar
 
 	carg0 = (*C.GTimeZone)(UnsafeTimeZoneToGlibNone(tz))
 
@@ -29042,11 +29065,11 @@ func (tz *TimeZone) GetIdentifier() string {
 // west of GMT, positive numbers for east).
 func (tz *TimeZone) GetOffset(interval int) int32 {
 	var carg0 *C.GTimeZone // in, none, converted
-	var carg1 C.int        // in, none, casted
+	var carg1 C.gint       // in, none, casted
 	var cret  C.gint32     // return, none, casted
 
 	carg0 = (*C.GTimeZone)(UnsafeTimeZoneToGlibNone(tz))
-	carg1 = C.int(interval)
+	carg1 = C.gint(interval)
 
 	cret = C.g_time_zone_get_offset(carg0, carg1)
 	runtime.KeepAlive(tz)
@@ -29073,11 +29096,11 @@ func (tz *TimeZone) GetOffset(interval int) int32 {
 // @interval of time in the time zone @tz.
 func (tz *TimeZone) IsDst(interval int) bool {
 	var carg0 *C.GTimeZone // in, none, converted
-	var carg1 C.int        // in, none, casted
+	var carg1 C.gint       // in, none, casted
 	var cret  C.gboolean   // return
 
 	carg0 = (*C.GTimeZone)(UnsafeTimeZoneToGlibNone(tz))
-	carg1 = C.int(interval)
+	carg1 = C.gint(interval)
 
 	cret = C.g_time_zone_is_dst(carg0, carg1)
 	runtime.KeepAlive(tz)
@@ -29360,7 +29383,7 @@ func UnsafeTreeToGlibFull(t *Tree) unsafe.Pointer {
 // If the root node has children the height is 2, etc.
 func (tree *Tree) Height() int {
 	var carg0 *C.GTree // in, none, converted
-	var cret  C.int    // return, none, casted
+	var cret  C.gint   // return, none, casted
 
 	carg0 = (*C.GTree)(UnsafeTreeToGlibNone(tree))
 
@@ -29616,7 +29639,7 @@ func (tree *Tree) LowerBound(key unsafe.Pointer) *TreeNode {
 // Gets the number of nodes in a #GTree.
 func (tree *Tree) Nnodes() int {
 	var carg0 *C.GTree // in, none, converted
-	var cret  C.int    // return, none, casted
+	var cret  C.gint   // return, none, casted
 
 	carg0 = (*C.GTree)(UnsafeTreeToGlibNone(tree))
 
@@ -30275,7 +30298,7 @@ func UnsafeUriToGlibFull(u *Uri) unsafe.Pointer {
 // further parsing this information.
 func (uri *Uri) GetAuthParams() string {
 	var carg0 *C.GUri  // in, none, converted
-	var cret  *C.gchar // return, none, string
+	var cret  *C.gchar // return, none, string, casted *C.gchar
 
 	carg0 = (*C.GUri)(UnsafeUriToGlibNone(uri))
 
@@ -30320,7 +30343,7 @@ func (uri *Uri) GetFlags() URIFlags {
 // the flags with which @uri was created.
 func (uri *Uri) GetFragment() string {
 	var carg0 *C.GUri  // in, none, converted
-	var cret  *C.gchar // return, none, string
+	var cret  *C.gchar // return, none, string, casted *C.gchar
 
 	carg0 = (*C.GUri)(UnsafeUriToGlibNone(uri))
 
@@ -30350,7 +30373,7 @@ func (uri *Uri) GetFragment() string {
 // `fe80::1234%``25em1` if the string is still encoded).
 func (uri *Uri) GetHost() string {
 	var carg0 *C.GUri  // in, none, converted
-	var cret  *C.gchar // return, none, string
+	var cret  *C.gchar // return, none, string, casted *C.gchar
 
 	carg0 = (*C.GUri)(UnsafeUriToGlibNone(uri))
 
@@ -30374,7 +30397,7 @@ func (uri *Uri) GetHost() string {
 // with %G_URI_FLAGS_HAS_PASSWORD then this will be %NULL.)
 func (uri *Uri) GetPassword() string {
 	var carg0 *C.GUri  // in, none, converted
-	var cret  *C.gchar // return, none, string
+	var cret  *C.gchar // return, none, string, casted *C.gchar
 
 	carg0 = (*C.GUri)(UnsafeUriToGlibNone(uri))
 
@@ -30397,7 +30420,7 @@ func (uri *Uri) GetPassword() string {
 // flags with which @uri was created.
 func (uri *Uri) GetPath() string {
 	var carg0 *C.GUri  // in, none, converted
-	var cret  *C.gchar // return, none, string
+	var cret  *C.gchar // return, none, string, casted *C.gchar
 
 	carg0 = (*C.GUri)(UnsafeUriToGlibNone(uri))
 
@@ -30419,7 +30442,7 @@ func (uri *Uri) GetPath() string {
 // Gets @uri's port.
 func (uri *Uri) GetPort() int {
 	var carg0 *C.GUri // in, none, converted
-	var cret  C.int   // return, none, casted
+	var cret  C.gint  // return, none, casted
 
 	carg0 = (*C.GUri)(UnsafeUriToGlibNone(uri))
 
@@ -30445,7 +30468,7 @@ func (uri *Uri) GetPort() int {
 // #GUriParamsIter or g_uri_parse_params() may be useful.
 func (uri *Uri) GetQuery() string {
 	var carg0 *C.GUri  // in, none, converted
-	var cret  *C.gchar // return, none, string
+	var cret  *C.gchar // return, none, string, casted *C.gchar
 
 	carg0 = (*C.GUri)(UnsafeUriToGlibNone(uri))
 
@@ -30468,7 +30491,7 @@ func (uri *Uri) GetQuery() string {
 // regardless of the string or strings that @uri was created from.
 func (uri *Uri) GetScheme() string {
 	var carg0 *C.GUri  // in, none, converted
-	var cret  *C.gchar // return, none, string
+	var cret  *C.gchar // return, none, string, casted *C.gchar
 
 	carg0 = (*C.GUri)(UnsafeUriToGlibNone(uri))
 
@@ -30493,7 +30516,7 @@ func (uri *Uri) GetScheme() string {
 // %G_URI_FLAGS_HAS_AUTH_PARAMS, this is the same as g_uri_get_userinfo().
 func (uri *Uri) GetUser() string {
 	var carg0 *C.GUri  // in, none, converted
-	var cret  *C.gchar // return, none, string
+	var cret  *C.gchar // return, none, string, casted *C.gchar
 
 	carg0 = (*C.GUri)(UnsafeUriToGlibNone(uri))
 
@@ -30516,7 +30539,7 @@ func (uri *Uri) GetUser() string {
 // the flags with which @uri was created.
 func (uri *Uri) GetUserinfo() string {
 	var carg0 *C.GUri  // in, none, converted
-	var cret  *C.gchar // return, none, string
+	var cret  *C.gchar // return, none, string, casted *C.gchar
 
 	carg0 = (*C.GUri)(UnsafeUriToGlibNone(uri))
 
@@ -30548,7 +30571,7 @@ func (uri *Uri) GetUserinfo() string {
 // returned.
 func (baseUri *Uri) ParseRelative(uriRef string, flags URIFlags) (*Uri, error) {
 	var carg0 *C.GUri     // in, none, converted
-	var carg1 *C.gchar    // in, none, string
+	var carg1 *C.gchar    // in, none, string, casted *C.gchar
 	var carg2 C.GUriFlags // in, none, casted
 	var cret  *C.GUri     // return, full, converted
 	var _cerr *C.GError   // out, full, converted, nullable
@@ -30592,8 +30615,8 @@ func (baseUri *Uri) ParseRelative(uriRef string, flags URIFlags) (*Uri, error) {
 // or private data in its query string, and the returned string is going to be
 // logged, then consider using g_uri_to_string_partial() to redact parts.
 func (uri *Uri) ToString() string {
-	var carg0 *C.GUri  // in, none, converted
-	var cret  *C.gchar // return, full, string
+	var carg0 *C.GUri // in, none, converted
+	var cret  *C.char // return, full, string, casted *C.gchar
 
 	carg0 = (*C.GUri)(UnsafeUriToGlibNone(uri))
 
@@ -30602,7 +30625,7 @@ func (uri *Uri) ToString() string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 	defer C.free(unsafe.Pointer(cret))
 
 	return goret
@@ -30623,7 +30646,7 @@ func (uri *Uri) ToString() string {
 func (uri *Uri) ToStringPartial(flags URIHideFlags) string {
 	var carg0 *C.GUri         // in, none, converted
 	var carg1 C.GUriHideFlags // in, none, casted
-	var cret  *C.gchar        // return, full, string
+	var cret  *C.char         // return, full, string, casted *C.gchar
 
 	carg0 = (*C.GUri)(UnsafeUriToGlibNone(uri))
 	carg1 = C.GUriHideFlags(flags)
@@ -30634,7 +30657,7 @@ func (uri *Uri) ToStringPartial(flags URIHideFlags) string {
 
 	var goret string
 
-	goret = C.GoString((*C.gchar)(unsafe.Pointer(cret)))
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 	defer C.free(unsafe.Pointer(cret))
 
 	return goret
@@ -30759,9 +30782,9 @@ func UnsafeUriParamsIterToGlibFull(u *UriParamsIter) unsafe.Pointer {
 // ]|
 func (iter *UriParamsIter) Init(params string, length int, separators string, flags URIParamsFlags) {
 	var carg0 *C.GUriParamsIter // in, none, converted
-	var carg1 *C.gchar          // in, none, string
+	var carg1 *C.gchar          // in, none, string, casted *C.gchar
 	var carg2 C.gssize          // in, none, casted
-	var carg3 *C.gchar          // in, none, string
+	var carg3 *C.gchar          // in, none, string, casted *C.gchar
 	var carg4 C.GUriParamsFlags // in, none, casted
 
 	carg0 = (*C.GUriParamsIter)(UnsafeUriParamsIterToGlibNone(iter))
@@ -30801,8 +30824,8 @@ func (iter *UriParamsIter) Init(params string, length int, separators string, fl
 // allow repeated attributes.
 func (iter *UriParamsIter) Next() (string, string, bool, error) {
 	var carg0 *C.GUriParamsIter // in, none, converted
-	var carg1 *C.gchar          // out, full, string, nullable-string
-	var carg2 *C.gchar          // out, full, string, nullable-string
+	var carg1 *C.gchar          // out, full, string, casted *C.gchar, nullable
+	var carg2 *C.gchar          // out, full, string, casted *C.gchar, nullable
 	var cret  C.gboolean        // return
 	var _cerr *C.GError         // out, full, converted, nullable
 
@@ -31210,7 +31233,7 @@ func (dict *VariantDict) Clear() {
 // Checks if @key exists in @dict.
 func (dict *VariantDict) Contains(key string) bool {
 	var carg0 *C.GVariantDict // in, none, converted
-	var carg1 *C.gchar        // in, none, string
+	var carg1 *C.gchar        // in, none, string, casted *C.gchar
 	var cret  C.gboolean      // return
 
 	carg0 = (*C.GVariantDict)(UnsafeVariantDictToGlibNone(dict))
@@ -31243,7 +31266,7 @@ func (dict *VariantDict) Contains(key string) bool {
 // Removes a key and its associated value from a #GVariantDict.
 func (dict *VariantDict) Remove(key string) bool {
 	var carg0 *C.GVariantDict // in, none, converted
-	var carg1 *C.gchar        // in, none, string
+	var carg1 *C.gchar        // in, none, string, casted *C.gchar
 	var cret  C.gboolean      // return
 
 	carg0 = (*C.GVariantDict)(UnsafeVariantDictToGlibNone(dict))
@@ -31492,7 +31515,7 @@ func UnsafeVariantTypeToGlibFull(v *VariantType) unsafe.Pointer {
 // It is a programmer error to call this function with an invalid type
 // string.  Use g_variant_type_string_is_valid() if you are unsure.
 func NewVariantType(typeString string) *VariantType {
-	var carg1 *C.gchar        // in, none, string
+	var carg1 *C.gchar        // in, none, string, casted *C.gchar
 	var cret  *C.GVariantType // return, full, converted
 
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(typeString)))
@@ -31620,7 +31643,7 @@ func NewVariantTypeMaybe(element *VariantType) *VariantType {
 // It is appropriate to call g_variant_type_free() on the return value.
 func NewVariantTypeTuple(items []*VariantType) *VariantType {
 	var carg1 **C.GVariantType // in, transfer: none, C Pointers: 2, Name: array[VariantType], array (inner: *typesystem.Record, length-by: carg2)
-	var carg2 C.int            // implicit
+	var carg2 C.gint           // implicit
 	var cret  *C.GVariantType  // return, full, converted
 
 	_ = items
@@ -31671,7 +31694,7 @@ func (typ *VariantType) Copy() *VariantType {
 // call g_free() on the return value.
 func (typ *VariantType) DupString() string {
 	var carg0 *C.GVariantType // in, none, converted
-	var cret  *C.gchar        // return, full, string
+	var cret  *C.gchar        // return, full, string, casted *C.gchar
 
 	carg0 = (*C.GVariantType)(UnsafeVariantTypeToGlibNone(typ))
 

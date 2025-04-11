@@ -330,7 +330,7 @@ var Main = genmain.Data{
 			"GdkWayland-4": {
 				MinVersion: "4.19",
 				IgnoredDefinitions: []typesystem.IgnoreFunc{
-					// FIXME: returned type is converted to *gpointer? https://docs.gtk.org/gdk4-wayland/method.WaylandDevice.get_xkb_keymap.html
+					// FIXME: returned type is converted to *unsafe.Pointer? https://docs.gtk.org/gdk4-wayland/method.WaylandDevice.get_xkb_keymap.html
 					typesystem.IgnoreMatching("WaylandDevice.get_xkb_keymap"),
 				},
 			},

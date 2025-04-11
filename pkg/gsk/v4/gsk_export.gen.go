@@ -36,7 +36,7 @@ func _gotk4_gsk4_ParseErrorFunc(carg1 *C.GskParseLocation, carg2 *C.GskParseLoca
 }
 
 //export _gotk4_gsk4_PathForEachFunc
-func _gotk4_gsk4_PathForEachFunc(carg1 C.GskPathOperation, carg2 *C.graphene_point_t, carg3 C.gsize, carg4 C.gfloat, carg5 C.gpointer) (cret C.gboolean) {
+func _gotk4_gsk4_PathForEachFunc(carg1 C.GskPathOperation, carg2 *C.graphene_point_t, carg3 C.gsize, carg4 C.float, carg5 C.gpointer) (cret C.gboolean) {
 	var fn PathForEachFunc
 	{
 		v := gbox.Get(uintptr(carg5))
@@ -49,7 +49,7 @@ func _gotk4_gsk4_PathForEachFunc(carg1 C.GskPathOperation, carg2 *C.graphene_poi
 	var op     PathOperation   // in, none, casted
 	var pts    *graphene.Point // in, none, converted
 	var nPts   uint            // in, none, casted
-	var weight float32         // in, none, casted
+	var weight float32         // in, none, casted, casted C.gfloat
 	var goret  bool            // return
 
 	op = PathOperation(carg1)
