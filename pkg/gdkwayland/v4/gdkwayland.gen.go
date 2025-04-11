@@ -8,7 +8,6 @@ import (
 
 	"github.com/diamondburned/gotk4/pkg/core/gbox"
 	"github.com/diamondburned/gotk4/pkg/gdk/v4"
-	"github.com/diamondburned/gotk4/pkg/glib/v2"
 	"github.com/diamondburned/gotk4/pkg/gobject/v2"
 )
 

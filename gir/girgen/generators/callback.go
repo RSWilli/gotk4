@@ -77,6 +77,22 @@ func (c *CallbackGenerator) generateGo(w *file.Package) {
 		ret = " (" + ret + ")"
 	}
 
+	for _, param := range c.GoParameters {
+		if param.Skip || param.Implicit {
+			continue
+		}
+		
+		w.GoImportType(param.Type)
+	}
+
+	for _, param := range c.GoReturns {
+		if param.Skip || param.Implicit {
+			continue
+		}
+
+		w.GoImportType(param.Type)
+	}
+
 	fmt.Fprintf(w.Go(), "type %s func(%s)%s\n", c.GoType(0), c.GoParameters.GoDeclarations(), ret)
 
 	fmt.Fprintln(w.Go())

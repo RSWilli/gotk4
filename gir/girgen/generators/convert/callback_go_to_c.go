@@ -32,7 +32,6 @@ func (c *GoToCCallbackConverter) Convert(w file.File) {
 	if c.Param.Scope == typesystem.CallbackParamScopeAsync {
 		assignFunc = "AssignOnce"
 	}
-	// TODO: declare the extern function in the C preamble
 
 	fmt.Fprintf(w.Go(), "%s = (*[0]byte)(C.%s)\n", c.Param.CName, cb.TrampolineName)
 	fmt.Fprintf(w.Go(), "%s = %s(gbox.%s(%s))\n", closure.CName, closure.CGoType(), assignFunc, c.Param.GoName)

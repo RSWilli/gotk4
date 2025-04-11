@@ -78,8 +78,11 @@ type CallableGenerator struct {
 	Signature *typesystem.CallableSignature
 }
 
-func (m *CallableGenerator) importReferencedTypes(w file.File) {
+func (m *CallableGenerator) importReferencedTypes(w file.File, allowSkipped bool) {
 	for _, param := range m.Signature.CParameters() {
+		if (param.Skip || param.Implicit) && !allowSkipped {
+			continue
+		}
 		w.GoImportType(param.Type)
 	}
 
@@ -92,7 +95,7 @@ func (m *CallableGenerator) importReferencedTypes(w file.File) {
 func (m *CallableGenerator) GenerateInterfaceSignature(w file.File) {
 	m.Doc.Generate(w.Go())
 
-	m.importReferencedTypes(w)
+	m.importReferencedTypes(w, false)
 
 	fmt.Fprintln(w.Go(), m.GoInterfaceDeclaration())
 }
@@ -108,7 +111,7 @@ func (m *CallableGenerator) Generate(w *file.Package) {
 		}
 	}
 
-	m.importReferencedTypes(w)
+	m.importReferencedTypes(w, false)
 
 	w.GoImport("runtime")
 
@@ -124,13 +127,13 @@ func (m *CallableGenerator) Generate(w *file.Package) {
 		conv := m.ParamConverters[i]
 		fmt.Fprintf(&decls, "var\t%s\t%s\t// %s\n", param.CName, param.CGoType(), conv.Metadata())
 
-		w.GoImportType(param.Type)
+		// w.GoImportType(param.Type) // don't import here, as the CGo type does not reference the namespace
 	}
 	for i, ret := range m.Signature.GoReturns {
 		conv := m.ReturnConverters[i]
 		fmt.Fprintf(&decls, "var\t%s\t%s\t// %s\n", ret.CName, ret.CGoType(), conv.Metadata())
 
-		w.GoImportType(ret.Type)
+		// w.GoImportType(ret.Type) // don't import here, as the CGo type does not reference the namespace
 	}
 
 	decls.WriteTo(w.Go())
