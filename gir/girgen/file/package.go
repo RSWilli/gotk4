@@ -55,6 +55,9 @@ func (p *Package) RegisterGType(t typesystem.Marshalable) {
 		return
 	}
 	p.registeredTypes = append(p.registeredTypes, t)
+
+	// if the type is registered then we need gobject:
+	p.GoImportNamespace(t.Type().Namespace)
 }
 
 func (p *Package) Commit() error {

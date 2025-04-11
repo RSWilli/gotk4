@@ -5,6 +5,8 @@ package graphene
 import (
 	"runtime"
 	"unsafe"
+
+	"github.com/diamondburned/gotk4/pkg/gobject/v2"
 )
 
 // #cgo pkg-config: graphene-gobject-1.0
