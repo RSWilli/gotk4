@@ -1,6 +1,8 @@
 package typesystem
 
 import (
+	"fmt"
+	"strconv"
 	"strings"
 	"unicode"
 	"unicode/utf8"
@@ -43,8 +45,7 @@ func NewMember(e *env, parent Type, m gir.Member) *Member {
 			goIndentifier:  formatMember(m),
 			cGoIndentifier: "C." + m.CIdentifier,
 		},
-		// FIXME: go doesn't like it when the value overflows int32
-		Value: m.Value,
+		Value: valueToInt32(m.Value),
 	}
 }
 
@@ -77,4 +78,20 @@ func formatMember(member gir.Member) string {
 	}
 
 	return memberName
+}
+
+// valueToInt32 parses the value as an int64 integer and casts the value to
+// int32, overflowing it if necessary. If the value is not a valid integer, this panics.
+//
+// This is needed because we generate int32 values for the enum members, but
+// the C values may sometimes exceed the int32 range. This is not a problem in C, but
+// it is in Go, so we need to cast the value to int32.
+func valueToInt32(value string) string {
+	v, err := strconv.ParseInt(value, 0, 64)
+
+	if err != nil {
+		panic("value is not a valid integer")
+	}
+
+	return fmt.Sprintf("%d", int32(v))
 }
