@@ -220,7 +220,7 @@ func (e *env) findType(t *gir.Type) (*Namespace, Type) {
 		return foreignNS, typ
 	}
 
-	typ = ns.findLocalTypeByGIRName(girName)
+	typ = ns.FindLocalTypeByGIRName(girName)
 
 	if typ != nil {
 		return foreignNS, typ
@@ -259,7 +259,7 @@ func (e *env) findTypeByGIRName(t string) (*Namespace, Type) {
 		foreignNS = ns
 	}
 
-	typ = ns.findLocalTypeByGIRName(girName)
+	typ = ns.FindLocalTypeByGIRName(girName)
 
 	if typ != nil {
 		return foreignNS, typ

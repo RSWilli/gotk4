@@ -46,6 +46,9 @@ func (g *InterfaceGenerator) Generate(w *file.Package) {
 	g.Doc.Generate(w.Go())
 	fmt.Fprintf(w.Go(), "type %s interface {\n", g.GoInterfaceName)
 	w.Go().Indent()
+	if g.ManuallyExtended {
+		fmt.Fprintf(w.Go(), "%sExtManual // handwritten functions\n", g.GoInterfaceName)
+	}
 
 	fmt.Fprintf(w.Go(), "%s() *%s\n", g.GoPrivateUpcastMethod, g.GoType(0))
 	// fmt.Fprintln(w.Go(), g.Parent.WithForeignNamespace(g.Parent.Type.GoInterfaceName))

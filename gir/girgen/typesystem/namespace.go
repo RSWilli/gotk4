@@ -49,7 +49,7 @@ func (reg *Registry) newNamespace(cfg Config, ns *namespaceWithIncludes) *Namesp
 	}
 
 	for ident, incl := range ns.includes {
-		reffedNS := reg.findNS(incl.versionedName)
+		reffedNS := reg.FindNamespace(incl.versionedName)
 
 		if reffedNS == nil {
 			log.Printf("could not find referenced namespace %s for %s\n", incl.versionedName, ns.versionedName)
@@ -243,8 +243,8 @@ func (n *Namespace) resolveAll(e *env, unresolvedClasses []*Class, unresolvedInt
 	}
 }
 
-// findLocalTypeByGIRName returns the [Type] for the named type
-func (n *Namespace) findLocalTypeByGIRName(girname string) Type {
+// FindLocalTypeByGIRName returns the [Type] for the named type
+func (n *Namespace) FindLocalTypeByGIRName(girname string) Type {
 	return n.findLocalTypeWith(func(t Type) bool {
 		return t.GIRName() == girname
 	})

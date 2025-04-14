@@ -42,6 +42,12 @@ type Class struct {
 	Constructors   []*CallableSignature
 	Fields         []*Field
 	Signals        []*Signal
+
+	// ManuallyExtended is true if the class is manually extended by the user
+	// this will embed an extra (not generated) interface with the naming scheme `<GoInterfaceName>ExtManual` in the classes interface.
+	//
+	// This must be set by a post-processing step.
+	ManuallyExtended bool
 }
 
 // GoType implements Type. Use the interface type if a pointer is needed

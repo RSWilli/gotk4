@@ -48,6 +48,9 @@ func (g *ClassGenerator) Generate(w *file.Package) {
 	g.Doc.Generate(w.Go())
 	fmt.Fprintf(w.Go(), "type %s interface {\n", g.GoInterfaceName)
 	w.Go().Indent()
+	if g.ManuallyExtended {
+		fmt.Fprintf(w.Go(), "%sExtManual // handwritten functions\n", g.GoInterfaceName)
+	}
 	fmt.Fprintln(w.Go(), g.ParentGoInterfaceName())
 	for inter := range g.ImplementedGoInterfaceNames() {
 		fmt.Fprintln(w.Go(), inter)

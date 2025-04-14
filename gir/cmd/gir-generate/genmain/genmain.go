@@ -86,7 +86,11 @@ type Data struct {
 	// will use. It's mostly used for renaming colliding types/identifiers.
 	Preprocessors []types.Preprocessor
 
+	// Config is the typesystem.Config that will be used for resolving all types.
 	Config typesystem.Config
+
+	// Postprocessors will run on the resolved typesystem before the files are written
+	Postprocessors []typesystem.PostProcessor
 }
 
 // Overlay joins the given list of data into a single Data. The last Data in the
@@ -155,7 +159,7 @@ func Generate(repos gir.Repositories, data Data) {
 
 	ts := typesystem.FromRepositories(data.Config, repos)
 
-	// TODO: add a hook stage here, where the user can modify the chosen names of the typesystem
+	ts.Postprocess(data.Postprocessors)
 
 	var reposToGenerate []*typesystem.Repository
 
