@@ -128,9 +128,15 @@ func UnsafeValueToGlibNone(v *Value) unsafe.Pointer {
 	return unsafe.Pointer(v.native())
 }
 
+// UnsafeValueToGlibUseAnyInstead panics. It is used to be able to generate code that uses
+// GValue that should be handwritten instead and use "any" instead.
+func UnsafeValueToGlibUseAnyInstead(v *Value) unsafe.Pointer {
+	panic("this function must be handwritten. Please open an issue about it if you need it.")
+}
+
 // UseAnyInstead panics. It is used to be able to generate code that uses
 // GValue that should be handwritten instead and use "any" instead.
-func UseAnyInstead(v *Value) unsafe.Pointer {
+func UnsafeValueFromGlibUseAnyInstead(unsafe.Pointer) *Value {
 	panic("this function must be handwritten. Please open an issue about it if you need it.")
 }
 

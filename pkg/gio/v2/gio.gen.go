@@ -68115,7 +68115,7 @@ func (task *TaskInstance) ReturnValue(result *gobject.Value) {
 
 	carg0 = (*C.GTask)(UnsafeTaskToGlibNone(task))
 	if result != nil {
-		carg1 = (*C.GValue)(gobject.UnsafeValueToGlibNone(result))
+		carg1 = (*C.GValue)(gobject.UnsafeValueToGlibUseAnyInstead(result))
 	}
 
 	C.g_task_return_value(carg0, carg1)

@@ -65018,7 +65018,7 @@ func DragIconInstanceCreateWidgetForValue(value *gobject.Value) Widget {
 	var carg1 *C.GValue    // in, none, converted
 	var cret  *C.GtkWidget // return, full, converted
 
-	carg1 = (*C.GValue)(gobject.UnsafeValueToGlibNone(value))
+	carg1 = (*C.GValue)(gobject.UnsafeValueToGlibUseAnyInstead(value))
 
 	cret = C.gtk_drag_icon_create_widget_for_value(carg1)
 	runtime.KeepAlive(value)
@@ -67038,7 +67038,7 @@ func (self *DropTargetInstance) GetValue() *gobject.Value {
 
 	var goret *gobject.Value
 
-	goret = gobject.UseAnyInstead(unsafe.Pointer(cret))
+	goret = gobject.UnsafeValueFromGlibUseAnyInstead(unsafe.Pointer(cret))
 
 	return goret
 }
@@ -116112,7 +116112,7 @@ func (watch *ExpressionWatch) Evaluate(value *gobject.Value) bool {
 	var cret  C.gboolean            // return
 
 	carg0 = (*C.GtkExpressionWatch)(UnsafeExpressionWatchToGlibNone(watch))
-	carg1 = (*C.GValue)(gobject.UnsafeValueToGlibNone(value))
+	carg1 = (*C.GValue)(gobject.UnsafeValueToGlibUseAnyInstead(value))
 
 	cret = C.gtk_expression_watch_evaluate(carg0, carg1)
 	runtime.KeepAlive(watch)

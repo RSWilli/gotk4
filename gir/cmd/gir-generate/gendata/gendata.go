@@ -242,12 +242,12 @@ var Main = genmain.Data{
 						},
 						BaseConversions: typesystem.BaseConversions{
 							FromGlibBorrowFunction: "ValueFromNative",
-							FromGlibFullFunction:   "ValueFromNativeOwned",
-							ToGlibNoneFunction:     "UnsafeValueToGlibNone",
-							// these should get implemented manually, because borrowing
-							// values is not safe and "any" would be a better match
-							FromGlibNoneFunction: "UseAnyInstead",
-							ToGlibFullFunction:   "UseAnyInstead",
+
+							// these should get implemented manually, because "any" would be a better match
+							FromGlibFullFunction: "UnsafeValueFromGlibUseAnyInstead",
+							FromGlibNoneFunction: "UnsafeValueFromGlibUseAnyInstead",
+							ToGlibNoneFunction:   "UnsafeValueToGlibUseAnyInstead",
+							ToGlibFullFunction:   "UnsafeValueToGlibUseAnyInstead",
 						},
 					},
 				},

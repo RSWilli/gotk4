@@ -9055,7 +9055,7 @@ func (buildable *BuildableInstance) SetBuildableProperty(builder Builder, name s
 	carg1 = (*C.GtkBuilder)(UnsafeBuilderToGlibNone(builder))
 	carg2 = (*C.gchar)(unsafe.Pointer(C.CString(name)))
 	defer C.free(unsafe.Pointer(carg2))
-	carg3 = (*C.GValue)(gobject.UnsafeValueToGlibNone(value))
+	carg3 = (*C.GValue)(gobject.UnsafeValueToGlibUseAnyInstead(value))
 
 	C.gtk_buildable_set_buildable_property(carg0, carg1, carg2, carg3)
 	runtime.KeepAlive(buildable)
@@ -23617,7 +23617,7 @@ func (area *CellAreaInstance) CellGetProperty(renderer CellRenderer, propertyNam
 	carg1 = (*C.GtkCellRenderer)(UnsafeCellRendererToGlibNone(renderer))
 	carg2 = (*C.gchar)(unsafe.Pointer(C.CString(propertyName)))
 	defer C.free(unsafe.Pointer(carg2))
-	carg3 = (*C.GValue)(gobject.UnsafeValueToGlibNone(value))
+	carg3 = (*C.GValue)(gobject.UnsafeValueToGlibUseAnyInstead(value))
 
 	C.gtk_cell_area_cell_get_property(carg0, carg1, carg2, carg3)
 	runtime.KeepAlive(area)
@@ -23645,7 +23645,7 @@ func (area *CellAreaInstance) CellSetProperty(renderer CellRenderer, propertyNam
 	carg1 = (*C.GtkCellRenderer)(UnsafeCellRendererToGlibNone(renderer))
 	carg2 = (*C.gchar)(unsafe.Pointer(C.CString(propertyName)))
 	defer C.free(unsafe.Pointer(carg2))
-	carg3 = (*C.GValue)(gobject.UnsafeValueToGlibNone(value))
+	carg3 = (*C.GValue)(gobject.UnsafeValueToGlibUseAnyInstead(value))
 
 	C.gtk_cell_area_cell_set_property(carg0, carg1, carg2, carg3)
 	runtime.KeepAlive(area)
@@ -36349,7 +36349,7 @@ func (listStore *ListStoreInstance) SetValue(iter *TreeIter, column int, value *
 	carg0 = (*C.GtkListStore)(UnsafeListStoreToGlibNone(listStore))
 	carg1 = (*C.GtkTreeIter)(UnsafeTreeIterToGlibNone(iter))
 	carg2 = C.gint(column)
-	carg3 = (*C.GValue)(gobject.UnsafeValueToGlibNone(value))
+	carg3 = (*C.GValue)(gobject.UnsafeValueToGlibUseAnyInstead(value))
 
 	C.gtk_list_store_set_value(carg0, carg1, carg2, carg3)
 	runtime.KeepAlive(listStore)
@@ -45815,7 +45815,7 @@ func (context *StyleContextInstance) GetStyleProperty(propertyName string, value
 	carg0 = (*C.GtkStyleContext)(UnsafeStyleContextToGlibNone(context))
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(propertyName)))
 	defer C.free(unsafe.Pointer(carg1))
-	carg2 = (*C.GValue)(gobject.UnsafeValueToGlibNone(value))
+	carg2 = (*C.GValue)(gobject.UnsafeValueToGlibUseAnyInstead(value))
 
 	C.gtk_style_context_get_style_property(carg0, carg1, carg2)
 	runtime.KeepAlive(context)
@@ -53061,7 +53061,7 @@ func (treeStore *TreeStoreInstance) SetValue(iter *TreeIter, column int, value *
 	carg0 = (*C.GtkTreeStore)(UnsafeTreeStoreToGlibNone(treeStore))
 	carg1 = (*C.GtkTreeIter)(UnsafeTreeIterToGlibNone(iter))
 	carg2 = C.gint(column)
-	carg3 = (*C.GValue)(gobject.UnsafeValueToGlibNone(value))
+	carg3 = (*C.GValue)(gobject.UnsafeValueToGlibUseAnyInstead(value))
 
 	C.gtk_tree_store_set_value(carg0, carg1, carg2, carg3)
 	runtime.KeepAlive(treeStore)
@@ -63590,7 +63590,7 @@ func (widget *WidgetInstance) StyleGetProperty(propertyName string, value *gobje
 	carg0 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(widget))
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(propertyName)))
 	defer C.free(unsafe.Pointer(carg1))
-	carg2 = (*C.GValue)(gobject.UnsafeValueToGlibNone(value))
+	carg2 = (*C.GValue)(gobject.UnsafeValueToGlibUseAnyInstead(value))
 
 	C.gtk_widget_style_get_property(carg0, carg1, carg2)
 	runtime.KeepAlive(widget)
@@ -66053,7 +66053,7 @@ func (container *ContainerInstance) ChildGetProperty(child Widget, propertyName 
 	carg1 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(child))
 	carg2 = (*C.gchar)(unsafe.Pointer(C.CString(propertyName)))
 	defer C.free(unsafe.Pointer(carg2))
-	carg3 = (*C.GValue)(gobject.UnsafeValueToGlibNone(value))
+	carg3 = (*C.GValue)(gobject.UnsafeValueToGlibUseAnyInstead(value))
 
 	C.gtk_container_child_get_property(carg0, carg1, carg2, carg3)
 	runtime.KeepAlive(container)
@@ -66112,7 +66112,7 @@ func (container *ContainerInstance) ChildSetProperty(child Widget, propertyName 
 	carg1 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(child))
 	carg2 = (*C.gchar)(unsafe.Pointer(C.CString(propertyName)))
 	defer C.free(unsafe.Pointer(carg2))
-	carg3 = (*C.GValue)(gobject.UnsafeValueToGlibNone(value))
+	carg3 = (*C.GValue)(gobject.UnsafeValueToGlibUseAnyInstead(value))
 
 	C.gtk_container_child_set_property(carg0, carg1, carg2, carg3)
 	runtime.KeepAlive(container)

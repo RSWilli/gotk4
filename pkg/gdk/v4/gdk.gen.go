@@ -6691,7 +6691,7 @@ func ContentSerializeAsync(cancellable context.Context, stream gio.OutputStream,
 	carg1 = (*C.GOutputStream)(gio.UnsafeOutputStreamToGlibNone(stream))
 	carg2 = (*C.char)(unsafe.Pointer(C.CString(mimeType)))
 	defer C.free(unsafe.Pointer(carg2))
-	carg3 = (*C.GValue)(gobject.UnsafeValueToGlibNone(value))
+	carg3 = (*C.GValue)(gobject.UnsafeValueToGlibUseAnyInstead(value))
 	carg4 = C.int(ioPriority)
 	if callback != nil {
 		carg6 = (*[0]byte)(C._gotk4_gio2_AsyncReadyCallback)
@@ -10415,7 +10415,7 @@ func (clipboard *ClipboardInstance) SetValue(value *gobject.Value) {
 	var carg1 *C.GValue       // in, none, converted
 
 	carg0 = (*C.GdkClipboard)(UnsafeClipboardToGlibNone(clipboard))
-	carg1 = (*C.GValue)(gobject.UnsafeValueToGlibNone(value))
+	carg1 = (*C.GValue)(gobject.UnsafeValueToGlibUseAnyInstead(value))
 
 	C.gdk_clipboard_set_value(carg0, carg1)
 	runtime.KeepAlive(clipboard)
@@ -11018,7 +11018,7 @@ func NewContentProviderInstanceForValue(value *gobject.Value) ContentProvider {
 	var carg1 *C.GValue             // in, none, converted
 	var cret  *C.GdkContentProvider // return, full, converted
 
-	carg1 = (*C.GValue)(gobject.UnsafeValueToGlibNone(value))
+	carg1 = (*C.GValue)(gobject.UnsafeValueToGlibUseAnyInstead(value))
 
 	cret = C.gdk_content_provider_new_for_value(carg1)
 	runtime.KeepAlive(value)
@@ -13589,7 +13589,7 @@ func (display *DisplayInstance) GetSetting(name string, value *gobject.Value) bo
 	carg0 = (*C.GdkDisplay)(UnsafeDisplayToGlibNone(display))
 	carg1 = (*C.char)(unsafe.Pointer(C.CString(name)))
 	defer C.free(unsafe.Pointer(carg1))
-	carg2 = (*C.GValue)(gobject.UnsafeValueToGlibNone(value))
+	carg2 = (*C.GValue)(gobject.UnsafeValueToGlibUseAnyInstead(value))
 
 	cret = C.gdk_display_get_setting(carg0, carg1, carg2)
 	runtime.KeepAlive(display)

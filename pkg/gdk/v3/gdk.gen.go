@@ -8877,7 +8877,7 @@ func SettingGet(name string, value *gobject.Value) bool {
 
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(name)))
 	defer C.free(unsafe.Pointer(carg1))
-	carg2 = (*C.GValue)(gobject.UnsafeValueToGlibNone(value))
+	carg2 = (*C.GValue)(gobject.UnsafeValueToGlibUseAnyInstead(value))
 
 	cret = C.gdk_setting_get(carg1, carg2)
 	runtime.KeepAlive(name)
@@ -15711,7 +15711,7 @@ func (screen *ScreenInstance) GetSetting(name string, value *gobject.Value) bool
 	carg0 = (*C.GdkScreen)(UnsafeScreenToGlibNone(screen))
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(name)))
 	defer C.free(unsafe.Pointer(carg1))
-	carg2 = (*C.GValue)(gobject.UnsafeValueToGlibNone(value))
+	carg2 = (*C.GValue)(gobject.UnsafeValueToGlibUseAnyInstead(value))
 
 	cret = C.gdk_screen_get_setting(carg0, carg1, carg2)
 	runtime.KeepAlive(screen)
