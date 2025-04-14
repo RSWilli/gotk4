@@ -66,11 +66,11 @@ func newCToGoBasicConverter(p *typesystem.Param) Converter {
 		return &CToGoStringConverter{Param: p}
 	}
 
-	if p.Type.Type.CType(0) == "_Bool" { // needed for e.g. graphene
+	if p.CTypePointers == 0 && p.Type.Type.CType(0) == "_Bool" { // needed for e.g. graphene
 		return &CToGoCastingConverter{Param: p}
 	}
 
-	if p.Type.Type.GoType(0) == "bool" {
+	if p.CTypePointers == 0 && p.Type.Type.GoType(0) == "bool" {
 		return &CToGoBooleanConverter{Param: p}
 	}
 

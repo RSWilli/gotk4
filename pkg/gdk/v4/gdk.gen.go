@@ -6620,6 +6620,47 @@ func ContentDeserializeAsync(cancellable context.Context, stream gio.InputStream
 	runtime.KeepAlive(callback)
 }
 
+// ContentDeserializeFinish wraps gdk_content_deserialize_finish
+// 
+// The function takes the following parameters:
+// 
+// 	- result gio.AsyncResult: the `GAsyncResult` 
+// 
+// The function returns the following values:
+// 
+// 	- value gobject.Value: return location for the result of the operation 
+// 	- goret bool 
+// 	- _goerr error (nullable): an error 
+//
+// Finishes a content deserialization operation.
+func ContentDeserializeFinish(result gio.AsyncResult) (gobject.Value, bool, error) {
+	var carg1 *C.GAsyncResult // in, none, converted
+	var carg2 C.GValue        // out, transfer: none, C Pointers: 0, Name: Value, caller-allocates
+	var cret  C.gboolean      // return
+	var _cerr *C.GError       // out, full, converted, nullable
+
+	carg1 = (*C.GAsyncResult)(gio.UnsafeAsyncResultToGlibNone(result))
+
+	cret = C.gdk_content_deserialize_finish(carg1, &carg2, &_cerr)
+	runtime.KeepAlive(result)
+
+	var value  gobject.Value
+	var goret  bool
+	var _goerr error
+
+	_ = value
+	_ = carg2
+	panic("unimplemented conversion of gobject.Value (GValue)")
+	if cret != 0 {
+		goret = true
+	}
+	if _cerr != nil {
+		_goerr = glib.UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
+	}
+
+	return value, goret, _goerr
+}
+
 // ContentSerializeAsync wraps gdk_content_serialize_async
 // 
 // The function takes the following parameters:
@@ -10825,6 +10866,21 @@ type ContentProvider interface {
 	//
 	// Emits the ::content-changed signal.
 	ContentChanged()
+	// GetValue wraps gdk_content_provider_get_value
+	// The function returns the following values:
+	// 
+	// 	- value gobject.Value: the `GValue` to fill 
+	// 	- goret bool 
+	// 	- _goerr error (nullable): an error 
+	//
+	// Gets the contents of @provider stored in @value.
+	// 
+	// The @value will have been initialized to the `GType` the value should be
+	// provided in. This given `GType` does not need to be listed in the formats
+	// returned by [method@Gdk.ContentProvider.ref_formats]. However, if the
+	// given `GType` is not supported, this operation can fail and
+	// `G_IO_ERROR_NOT_SUPPORTED` will be reported.
+	GetValue() (gobject.Value, bool, error)
 	// RefFormats wraps gdk_content_provider_ref_formats
 	// The function returns the following values:
 	// 
@@ -11030,6 +11086,48 @@ func (provider *ContentProviderInstance) ContentChanged() {
 
 	C.gdk_content_provider_content_changed(carg0)
 	runtime.KeepAlive(provider)
+}
+
+// GetValue wraps gdk_content_provider_get_value
+// The function returns the following values:
+// 
+// 	- value gobject.Value: the `GValue` to fill 
+// 	- goret bool 
+// 	- _goerr error (nullable): an error 
+//
+// Gets the contents of @provider stored in @value.
+// 
+// The @value will have been initialized to the `GType` the value should be
+// provided in. This given `GType` does not need to be listed in the formats
+// returned by [method@Gdk.ContentProvider.ref_formats]. However, if the
+// given `GType` is not supported, this operation can fail and
+// `G_IO_ERROR_NOT_SUPPORTED` will be reported.
+func (provider *ContentProviderInstance) GetValue() (gobject.Value, bool, error) {
+	var carg0 *C.GdkContentProvider // in, none, converted
+	var carg1 C.GValue              // out, transfer: none, C Pointers: 0, Name: Value, caller-allocates
+	var cret  C.gboolean            // return
+	var _cerr *C.GError             // out, full, converted, nullable
+
+	carg0 = (*C.GdkContentProvider)(UnsafeContentProviderToGlibNone(provider))
+
+	cret = C.gdk_content_provider_get_value(carg0, &carg1, &_cerr)
+	runtime.KeepAlive(provider)
+
+	var value  gobject.Value
+	var goret  bool
+	var _goerr error
+
+	_ = value
+	_ = carg1
+	panic("unimplemented conversion of gobject.Value (GValue)")
+	if cret != 0 {
+		goret = true
+	}
+	if _cerr != nil {
+		_goerr = glib.UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
+	}
+
+	return value, goret, _goerr
 }
 
 // RefFormats wraps gdk_content_provider_ref_formats

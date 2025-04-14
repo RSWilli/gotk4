@@ -20,6 +20,8 @@ var capitalizedTXT string
 var replacedTXT string
 
 var (
+	// goIdentRegex matches valid go identifiers (must not start with a number)
+	goIdentRegex   = regexp.MustCompile(`^[_A-Za-z]\w+`)
 	snakeRegex     = regexp.MustCompile(`[_0-9]+\w`)
 	pascalSpecials = strings.Split(capitalizedTXT, "\n")
 	pascalWords    = map[string]string{}
@@ -157,6 +159,15 @@ func PascalToGo(pascal string) string {
 	}
 
 	pascal = pascalPostReplacer.Replace(pascal)
+
+	if pascal == "" {
+		panic("empty pascal string")
+	}
+
+	if !goIdentRegex.MatchString(pascal) {
+		// This is a last resort to ensure that the string is a valid Go
+		pascal = "Gotk" + pascal
+	}
 
 	return pascal
 }

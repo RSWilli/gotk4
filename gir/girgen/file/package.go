@@ -25,12 +25,15 @@ type Package struct {
 	registeredTypes gTypes
 
 	externCallbacks externCallbacks
+
+	cDefines cDefines
 }
 
 func NewPackage(basepath string, importOverrides map[string]string) *Package {
 	return &Package{
 		basepath:        basepath,
 		externCallbacks: make(externCallbacks),
+		cDefines:        make(cDefines),
 		file: file{
 			importBaseURIs: importOverrides,
 		},
@@ -48,6 +51,12 @@ func (w *Package) SetNamespace(namespace *typesystem.Namespace) {
 
 func (p *Package) RegisterExternCallback(cb *typesystem.Callback) {
 	p.externCallbacks[cb] = struct{}{}
+}
+
+// DefineC is used to declare #define macros in the C code. These will be output before any
+// included headers.
+func (p *Package) DefineC(def string) {
+	p.cDefines[def] = struct{}{}
 }
 
 func (p *Package) RegisterGType(t typesystem.Marshalable) {
@@ -128,6 +137,7 @@ func (w *Package) mainFileReader() io.Reader {
 		str("\n"),
 		w.cPackagesFormatted(),
 		str("// #cgo CFLAGS: -Wno-deprecated-declarations\n"),
+		w.cDefines.reader(),
 		cIncludesReader(w.namespace.CIncludes),
 		w.externCallbacks.reader(),
 		w.c(),

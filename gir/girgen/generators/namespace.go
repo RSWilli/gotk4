@@ -6,39 +6,18 @@ import (
 )
 
 type NamespaceGenerator struct {
-	ns *typesystem.Namespace
+	Namespace *typesystem.Namespace
 
 	// Sub generators:
-	Constants  GeneratorList
-	Aliases    GeneratorList
-	Enums      GeneratorList
-	Bitfields  GeneratorList
-	Callbacks  GeneratorList
-	Functions  GeneratorList
-	Interfaces GeneratorList
-	Classes    GeneratorList
-	Records    GeneratorList
-	Unions     GeneratorList
+	SubGenerators GeneratorList
 }
 
 // Generate implements Generator.
 func (g *NamespaceGenerator) Generate(w *file.Package) {
-	w.SetNamespace(g.ns)
+	w.SetNamespace(g.Namespace)
 
 	// run sub generators
-	GenerateAll(
-		w,
-		g.Constants,
-		g.Aliases,
-		g.Enums,
-		g.Bitfields,
-		g.Callbacks,
-		g.Functions,
-		g.Interfaces,
-		g.Classes,
-		g.Records,
-		g.Unions,
-	)
+	g.SubGenerators.Generate(w)
 }
 
 func NewNamespaceGenerator(
@@ -46,53 +25,53 @@ func NewNamespaceGenerator(
 ) *NamespaceGenerator {
 	// namespace := ctx.Namespace(ns)
 	gen := &NamespaceGenerator{
-		ns: ns,
+		Namespace: ns,
 	}
 
 	for _, c := range ns.Constants {
 		if cgen := NewConstantGenerator(c); cgen != nil {
-			gen.Constants = append(gen.Constants, cgen)
+			gen.SubGenerators = append(gen.SubGenerators, cgen)
 		}
 	}
 
 	for _, a := range ns.Aliases {
 		if agen := NewAliasGenerator(a); agen != nil {
-			gen.Aliases = append(gen.Aliases, agen)
+			gen.SubGenerators = append(gen.SubGenerators, agen)
 		}
 	}
 	for _, e := range ns.Enums {
 		if egen := NewEnumGenerator(e); egen != nil {
-			gen.Enums = append(gen.Enums, egen)
+			gen.SubGenerators = append(gen.SubGenerators, egen)
 		}
 	}
 	for _, b := range ns.Bitfields {
 		if bgen := NewBitfieldGenerator(b); bgen != nil {
-			gen.Bitfields = append(gen.Bitfields, bgen)
+			gen.SubGenerators = append(gen.SubGenerators, bgen)
 		}
 	}
 	for _, cb := range ns.Callbacks {
 		if cbgen := NewCallbackGenerator(cb); cbgen != nil {
-			gen.Callbacks = append(gen.Callbacks, cbgen)
+			gen.SubGenerators = append(gen.SubGenerators, cbgen)
 		}
 	}
 	for _, f := range ns.Functions {
 		if fgen := NewCallableGenerator(f); fgen != nil {
-			gen.Functions = append(gen.Functions, fgen)
+			gen.SubGenerators = append(gen.SubGenerators, fgen)
 		}
 	}
 	for _, inter := range ns.Interfaces {
 		if intergen := NewInterfaceGenerator(inter); intergen != nil {
-			gen.Interfaces = append(gen.Interfaces, intergen)
+			gen.SubGenerators = append(gen.SubGenerators, intergen)
 		}
 	}
 	for _, class := range ns.Classes {
 		if classgen := NewClassGenerator(class); classgen != nil {
-			gen.Classes = append(gen.Classes, classgen)
+			gen.SubGenerators = append(gen.SubGenerators, classgen)
 		}
 	}
 	for _, r := range ns.Records {
 		if rgen := NewRecordGenerator(r); rgen != nil {
-			gen.Records = append(gen.Records, rgen)
+			gen.SubGenerators = append(gen.SubGenerators, rgen)
 		}
 	}
 	// for _, v := range ns.Unions {

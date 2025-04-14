@@ -128,6 +128,22 @@ func UnsafeValueToGlibNone(v *Value) unsafe.Pointer {
 	return unsafe.Pointer(v.native())
 }
 
+// UseAnyInstead panics. It is used to be able to generate code that uses
+// GValue that should be handwritten instead and use "any" instead.
+func UseAnyInstead(v *Value) unsafe.Pointer {
+	panic("this function must be handwritten. Please open an issue about it if you need it.")
+}
+
+// UnsafeValueToGlibFull returns the C pointer to the value and clears the finalizer. This function should only be used for
+// manually written bindings, because "any" is often a better fit.
+func UnsafeValueToGlibFull(v *Value) unsafe.Pointer {
+	ptr := UnsafeValueToGlibNone(v)
+
+	runtime.SetFinalizer(v.gvalue, nil)
+
+	return ptr
+}
+
 // NewValue converts a Go type to a comparable GValue. It will panic if the
 // given type is unknown. Most Go primitive types and all Object types are
 // supported.

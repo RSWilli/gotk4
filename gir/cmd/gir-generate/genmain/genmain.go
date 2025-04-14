@@ -91,6 +91,10 @@ type Data struct {
 
 	// Postprocessors will run on the resolved typesystem before the files are written
 	Postprocessors []typesystem.PostProcessor
+
+	//  GeneratorHooks are functions that are called after all generators are instanciated, but before
+	// they are run. This is useful for modifying the generators.
+	GeneratorHooks []GeneratorHook
 }
 
 // Overlay joins the given list of data into a single Data. The last Data in the
@@ -172,17 +176,15 @@ func Generate(repos gir.Repositories, data Data) {
 		}
 	}
 
-	var gen []generators.Generator
-
-	if !CgoLink {
-		gen = generators.WithDynamicLinking(reposToGenerate)
-	} else {
-		gen = generators.WithRuntimeLinking(reposToGenerate)
+	gens := Generators{
+		Namespaces: generators.WithDynamicLinking(reposToGenerate),
 	}
 
-	// TODO: add a hook stage here, where the user can modify all generators in "gen"
+	for _, hook := range data.GeneratorHooks {
+		hook(&gens)
+	}
 
-	for _, g := range gen {
+	for _, g := range gens.Namespaces {
 		w := file.NewPackage(Output, importBaseURIs)
 
 		g.Generate(w)

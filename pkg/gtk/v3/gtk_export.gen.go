@@ -685,6 +685,33 @@ func _gotk4_gtk3_TreeIterCompareFunc(carg1 *C.GtkTreeModel, carg2 *C.GtkTreeIter
 	return cret
 }
 
+//export _gotk4_gtk3_TreeModelFilterModifyFunc
+func _gotk4_gtk3_TreeModelFilterModifyFunc(carg1 *C.GtkTreeModel, carg2 *C.GtkTreeIter, carg3 *C.GValue, carg4 C.gint, carg5 C.gpointer) {
+	var fn TreeModelFilterModifyFunc
+	{
+		v := userdata.Load(unsafe.Pointer(carg5))
+		if v == nil {
+			panic(`callback not found`)
+		}
+		fn = v.(TreeModelFilterModifyFunc)
+	}
+
+	var model  TreeModel     // in, none, converted
+	var iter   *TreeIter     // in, none, converted
+	var column int           // in, none, casted
+	var value  gobject.Value // out, transfer: none, C Pointers: 0, Name: Value, caller-allocates
+
+	model = UnsafeTreeModelFromGlibNone(unsafe.Pointer(carg1))
+	iter = UnsafeTreeIterFromGlibNone(unsafe.Pointer(carg2))
+	column = int(carg4)
+
+	value = fn(model, iter, column)
+
+	_ = value
+	_ = carg3
+	panic("unimplemented conversion of gobject.Value (GValue)")
+}
+
 //export _gotk4_gtk3_TreeModelFilterVisibleFunc
 func _gotk4_gtk3_TreeModelFilterVisibleFunc(carg1 *C.GtkTreeModel, carg2 *C.GtkTreeIter, carg3 C.gpointer) (cret C.gboolean) {
 	var fn TreeModelFilterVisibleFunc

@@ -63,7 +63,7 @@ func newGoToCBasicConverter(p *typesystem.Param) Converter {
 		return &GoToCStringConverter{Param: p}
 	}
 
-	if p.Type.Type.GoType(0) == "bool" {
+	if p.CTypePointers == 0 && p.Type.Type.GoType(0) == "bool" {
 		return &GoToCBooleanConverter{Param: p}
 	}
 

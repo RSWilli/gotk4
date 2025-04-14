@@ -111,6 +111,7 @@ func (c *CallbackGenerator) generateExport(pkg *file.Package) {
 
 	fmt.Fprintf(w.Go(), "var fn %s\n", c.GoType(0)) // declare fn as the callback itself
 
+	w.GoImport("unsafe")
 	w.GoImportCore("userdata")
 
 	fmt.Fprintf(w.Go(), "{\n")

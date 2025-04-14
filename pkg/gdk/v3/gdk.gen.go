@@ -5510,21 +5510,21 @@ const (
 	//
 	// a mouse button has been pressed.
 	ButtonPressType EventType = 4
-	// TwoButtonPressType wraps GDK_2BUTTON_PRESS_TYPE
+	// Gotk2ButtonPressType wraps GDK_2BUTTON_PRESS_TYPE
 	//
 	// a mouse button has been double-clicked (clicked twice
 	//   within a short period of time). Note that each click also generates a
 	//   %GDK_BUTTON_PRESS event.
-	TwoButtonPressType EventType = 5
+	Gotk2ButtonPressType EventType = 5
 	// DoubleButtonPressType wraps GDK_DOUBLE_BUTTON_PRESS_TYPE
 	//
 	// alias for %GDK_2BUTTON_PRESS, added in 3.6.
 	DoubleButtonPressType EventType = 5
-	// ThreeButtonPressType wraps GDK_3BUTTON_PRESS_TYPE
+	// Gotk3ButtonPressType wraps GDK_3BUTTON_PRESS_TYPE
 	//
 	// a mouse button has been clicked 3 times in a short period
 	//   of time. Note that each click also generates a %GDK_BUTTON_PRESS event.
-	ThreeButtonPressType EventType = 6
+	Gotk3ButtonPressType EventType = 6
 	// TripleButtonPressType wraps GDK_TRIPLE_BUTTON_PRESS_TYPE
 	//
 	// alias for %GDK_3BUTTON_PRESS, added in 3.6.

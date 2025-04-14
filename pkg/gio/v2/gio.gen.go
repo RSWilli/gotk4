@@ -67150,6 +67150,24 @@ type Task interface {
 	// Since this method transfers ownership of the return value (or
 	// error) to the caller, you may only call it once.
 	PropagatePointer() (unsafe.Pointer, error)
+	// PropagateValue wraps g_task_propagate_value
+	// The function returns the following values:
+	// 
+	// 	- value gobject.Value: return location for the #GValue 
+	// 	- goret bool 
+	// 	- _goerr error (nullable): an error 
+	//
+	// Gets the result of @task as a #GValue, and transfers ownership of
+	// that value to the caller. As with g_task_return_value(), this is
+	// a generic low-level method; g_task_propagate_pointer() and the like
+	// will usually be more useful for C code.
+	// 
+	// If the task resulted in an error, or was cancelled, then this will
+	// instead set @error and return %FALSE.
+	// 
+	// Since this method transfers ownership of the return value (or
+	// error) to the caller, you may only call it once.
+	PropagateValue() (gobject.Value, bool, error)
 	// ReturnBoolean wraps g_task_return_boolean
 	// 
 	// The function takes the following parameters:
@@ -67894,6 +67912,51 @@ func (task *TaskInstance) PropagatePointer() (unsafe.Pointer, error) {
 	}
 
 	return goret, _goerr
+}
+
+// PropagateValue wraps g_task_propagate_value
+// The function returns the following values:
+// 
+// 	- value gobject.Value: return location for the #GValue 
+// 	- goret bool 
+// 	- _goerr error (nullable): an error 
+//
+// Gets the result of @task as a #GValue, and transfers ownership of
+// that value to the caller. As with g_task_return_value(), this is
+// a generic low-level method; g_task_propagate_pointer() and the like
+// will usually be more useful for C code.
+// 
+// If the task resulted in an error, or was cancelled, then this will
+// instead set @error and return %FALSE.
+// 
+// Since this method transfers ownership of the return value (or
+// error) to the caller, you may only call it once.
+func (task *TaskInstance) PropagateValue() (gobject.Value, bool, error) {
+	var carg0 *C.GTask   // in, none, converted
+	var carg1 C.GValue   // out, transfer: none, C Pointers: 0, Name: Value, caller-allocates
+	var cret  C.gboolean // return
+	var _cerr *C.GError  // out, full, converted, nullable
+
+	carg0 = (*C.GTask)(UnsafeTaskToGlibNone(task))
+
+	cret = C.g_task_propagate_value(carg0, &carg1, &_cerr)
+	runtime.KeepAlive(task)
+
+	var value  gobject.Value
+	var goret  bool
+	var _goerr error
+
+	_ = value
+	_ = carg1
+	panic("unimplemented conversion of gobject.Value (GValue)")
+	if cret != 0 {
+		goret = true
+	}
+	if _cerr != nil {
+		_goerr = glib.UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
+	}
+
+	return value, goret, _goerr
 }
 
 // ReturnBoolean wraps g_task_return_boolean

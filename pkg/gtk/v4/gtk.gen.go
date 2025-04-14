@@ -14034,6 +14034,30 @@ type Builder interface {
 	//
 	// Sets the translation domain of @builder.
 	SetTranslationDomain(string)
+	// ValueFromStringType wraps gtk_builder_value_from_string_type
+	// 
+	// The function takes the following parameters:
+	// 
+	// 	- typ gobject.Type: the `GType` of the value 
+	// 	- str string: the string representation of the value 
+	// 
+	// The function returns the following values:
+	// 
+	// 	- value gobject.Value: the `GValue` to store the result in 
+	// 	- goret bool 
+	// 	- _goerr error (nullable): an error 
+	//
+	// Demarshals a value from a string.
+	// 
+	// Unlike [method@Gtk.Builder.value_from_string], this function
+	// takes a `GType` instead of `GParamSpec`.
+	// 
+	// Calls g_value_init() on the @value argument, so it
+	// need not be initialised beforehand.
+	// 
+	// Upon errors %FALSE will be returned and @error will be
+	// assigned a `GError` from the %GTK_BUILDER_ERROR domain.
+	ValueFromStringType(gobject.Type, string) (gobject.Value, bool, error)
 }
 
 func unsafeWrapBuilder(base *gobject.ObjectInstance) *BuilderInstance {
@@ -14821,6 +14845,64 @@ func (builder *BuilderInstance) SetTranslationDomain(domain string) {
 	C.gtk_builder_set_translation_domain(carg0, carg1)
 	runtime.KeepAlive(builder)
 	runtime.KeepAlive(domain)
+}
+
+// ValueFromStringType wraps gtk_builder_value_from_string_type
+// 
+// The function takes the following parameters:
+// 
+// 	- typ gobject.Type: the `GType` of the value 
+// 	- str string: the string representation of the value 
+// 
+// The function returns the following values:
+// 
+// 	- value gobject.Value: the `GValue` to store the result in 
+// 	- goret bool 
+// 	- _goerr error (nullable): an error 
+//
+// Demarshals a value from a string.
+// 
+// Unlike [method@Gtk.Builder.value_from_string], this function
+// takes a `GType` instead of `GParamSpec`.
+// 
+// Calls g_value_init() on the @value argument, so it
+// need not be initialised beforehand.
+// 
+// Upon errors %FALSE will be returned and @error will be
+// assigned a `GError` from the %GTK_BUILDER_ERROR domain.
+func (builder *BuilderInstance) ValueFromStringType(typ gobject.Type, str string) (gobject.Value, bool, error) {
+	var carg0 *C.GtkBuilder // in, none, converted
+	var carg1 C.GType       // in, none, casted, alias
+	var carg2 *C.char       // in, none, string, casted *C.gchar
+	var carg3 C.GValue      // out, transfer: none, C Pointers: 0, Name: Value, caller-allocates
+	var cret  C.gboolean    // return
+	var _cerr *C.GError     // out, full, converted, nullable
+
+	carg0 = (*C.GtkBuilder)(UnsafeBuilderToGlibNone(builder))
+	carg1 = C.GType(typ)
+	carg2 = (*C.char)(unsafe.Pointer(C.CString(str)))
+	defer C.free(unsafe.Pointer(carg2))
+
+	cret = C.gtk_builder_value_from_string_type(carg0, carg1, carg2, &carg3, &_cerr)
+	runtime.KeepAlive(builder)
+	runtime.KeepAlive(typ)
+	runtime.KeepAlive(str)
+
+	var value  gobject.Value
+	var goret  bool
+	var _goerr error
+
+	_ = value
+	_ = carg3
+	panic("unimplemented conversion of gobject.Value (GValue)")
+	if cret != 0 {
+		goret = true
+	}
+	if _cerr != nil {
+		_goerr = glib.UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
+	}
+
+	return value, goret, _goerr
 }
 
 // BuilderCScopeInstance is the instance type used by all types extending GtkBuilderCScope. It is used internally by the bindings. Users should use the interface [BuilderCScope] instead.
@@ -66698,6 +66780,13 @@ type DropTarget interface {
 	//
 	// Gets whether data should be preloaded on hover.
 	GetPreload() bool
+	// GetValue wraps gtk_drop_target_get_value
+	// The function returns the following values:
+	// 
+	// 	- goret *gobject.Value 
+	//
+	// Gets the current drop data, as a `GValue`.
+	GetValue() *gobject.Value
 	// Reject wraps gtk_drop_target_reject
 	//
 	// Rejects the ongoing drop operation.
@@ -66928,6 +67017,28 @@ func (self *DropTargetInstance) GetPreload() bool {
 	if cret != 0 {
 		goret = true
 	}
+
+	return goret
+}
+
+// GetValue wraps gtk_drop_target_get_value
+// The function returns the following values:
+// 
+// 	- goret *gobject.Value 
+//
+// Gets the current drop data, as a `GValue`.
+func (self *DropTargetInstance) GetValue() *gobject.Value {
+	var carg0 *C.GtkDropTarget // in, none, converted
+	var cret  *C.GValue        // return, none, converted
+
+	carg0 = (*C.GtkDropTarget)(UnsafeDropTargetToGlibNone(self))
+
+	cret = C.gtk_drop_target_get_value(carg0)
+	runtime.KeepAlive(self)
+
+	var goret *gobject.Value
+
+	goret = gobject.UseAnyInstead(unsafe.Pointer(cret))
 
 	return goret
 }
