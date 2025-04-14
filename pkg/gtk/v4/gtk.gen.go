@@ -109978,42 +109978,6 @@ func UnsafeAccessibleTextRangeToGlibFull(a *AccessibleTextRange) unsafe.Pointer 
 	a.native = nil // AccessibleTextRange is invalid from here on
 	return _p
 }
-// start wraps start
-//
-// the start of the range, in characters
-func (a *AccessibleTextRange) Start() uint {
-	valptr := &a.native.start
-	var _v uint
-	_v = uint(*valptr)
-	return _v
-}
-
-// length wraps length
-//
-// the length of the range, in characters
-func (a *AccessibleTextRange) Length() uint {
-	valptr := &a.native.length
-	var _v uint
-	_v = uint(*valptr)
-	return _v
-}
-
-// start wraps start
-//
-// the start of the range, in characters
-func (a *AccessibleTextRange) SetStart(start uint) {
-	valptr := &a.native.start
-	*valptr = C.gsize(start)
-}
-
-// length wraps length
-//
-// the length of the range, in characters
-func (a *AccessibleTextRange) SetLength(length uint) {
-	valptr := &a.native.length
-	*valptr = C.gsize(length)
-}
-
 // ActionableInterface wraps GtkActionableInterface
 //
 // The interface vtable for `GtkActionable`.
@@ -111772,78 +111736,6 @@ func NewBorder() *Border {
 	goret = UnsafeBorderFromGlibFull(unsafe.Pointer(cret))
 
 	return goret
-}
-
-// left wraps left
-//
-// The width of the left border
-func (b *Border) Left() int16 {
-	valptr := &b.native.left
-	var _v int16
-	_v = int16(*valptr)
-	return _v
-}
-
-// right wraps right
-//
-// The width of the right border
-func (b *Border) Right() int16 {
-	valptr := &b.native.right
-	var _v int16
-	_v = int16(*valptr)
-	return _v
-}
-
-// top wraps top
-//
-// The width of the top border
-func (b *Border) Top() int16 {
-	valptr := &b.native.top
-	var _v int16
-	_v = int16(*valptr)
-	return _v
-}
-
-// bottom wraps bottom
-//
-// The width of the bottom border
-func (b *Border) Bottom() int16 {
-	valptr := &b.native.bottom
-	var _v int16
-	_v = int16(*valptr)
-	return _v
-}
-
-// left wraps left
-//
-// The width of the left border
-func (b *Border) SetLeft(left int16) {
-	valptr := &b.native.left
-	*valptr = C.gint16(left)
-}
-
-// right wraps right
-//
-// The width of the right border
-func (b *Border) SetRight(right int16) {
-	valptr := &b.native.right
-	*valptr = C.gint16(right)
-}
-
-// top wraps top
-//
-// The width of the top border
-func (b *Border) SetTop(top int16) {
-	valptr := &b.native.top
-	*valptr = C.gint16(top)
-}
-
-// bottom wraps bottom
-//
-// The width of the bottom border
-func (b *Border) SetBottom(bottom int16) {
-	valptr := &b.native.bottom
-	*valptr = C.gint16(bottom)
 }
 
 // Copy wraps gtk_border_copy
@@ -114124,76 +114016,6 @@ func UnsafeCssLocationToGlibFull(c *CssLocation) unsafe.Pointer {
 	c.native = nil // CssLocation is invalid from here on
 	return _p
 }
-// bytes wraps bytes
-func (c *CssLocation) Bytes() uint {
-	valptr := &c.native.bytes
-	var _v uint
-	_v = uint(*valptr)
-	return _v
-}
-
-// chars wraps chars
-func (c *CssLocation) Chars() uint {
-	valptr := &c.native.chars
-	var _v uint
-	_v = uint(*valptr)
-	return _v
-}
-
-// lines wraps lines
-func (c *CssLocation) Lines() uint {
-	valptr := &c.native.lines
-	var _v uint
-	_v = uint(*valptr)
-	return _v
-}
-
-// line_bytes wraps line_bytes
-func (c *CssLocation) LineBytes() uint {
-	valptr := &c.native.line_bytes
-	var _v uint
-	_v = uint(*valptr)
-	return _v
-}
-
-// line_chars wraps line_chars
-func (c *CssLocation) LineChars() uint {
-	valptr := &c.native.line_chars
-	var _v uint
-	_v = uint(*valptr)
-	return _v
-}
-
-// bytes wraps bytes
-func (c *CssLocation) SetBytes(bytes uint) {
-	valptr := &c.native.bytes
-	*valptr = C.gsize(bytes)
-}
-
-// chars wraps chars
-func (c *CssLocation) SetChars(chars uint) {
-	valptr := &c.native.chars
-	*valptr = C.gsize(chars)
-}
-
-// lines wraps lines
-func (c *CssLocation) SetLines(lines uint) {
-	valptr := &c.native.lines
-	*valptr = C.gsize(lines)
-}
-
-// line_bytes wraps line_bytes
-func (c *CssLocation) SetLineBytes(line_bytes uint) {
-	valptr := &c.native.line_bytes
-	*valptr = C.gsize(line_bytes)
-}
-
-// line_chars wraps line_chars
-func (c *CssLocation) SetLineChars(line_chars uint) {
-	valptr := &c.native.line_chars
-	*valptr = C.gsize(line_chars)
-}
-
 // CssProviderClass wraps GtkCssProviderClass
 type CssProviderClass struct {
 	*cssProviderClass
@@ -120179,44 +120001,6 @@ func UnsafePadActionEntryToGlibFull(p *PadActionEntry) unsafe.Pointer {
 	p.native = nil // PadActionEntry is invalid from here on
 	return _p
 }
-// index wraps index
-//
-// the 0-indexed button/ring/strip number that will trigger this action
-//   entry.
-func (p *PadActionEntry) Index() int {
-	valptr := &p.native.index
-	var _v int
-	_v = int(*valptr)
-	return _v
-}
-
-// mode wraps mode
-//
-// the mode that will trigger this action entry, or -1 for all modes.
-func (p *PadActionEntry) Mode() int {
-	valptr := &p.native.mode
-	var _v int
-	_v = int(*valptr)
-	return _v
-}
-
-// index wraps index
-//
-// the 0-indexed button/ring/strip number that will trigger this action
-//   entry.
-func (p *PadActionEntry) SetIndex(index int) {
-	valptr := &p.native.index
-	*valptr = C.gint(index)
-}
-
-// mode wraps mode
-//
-// the mode that will trigger this action entry, or -1 for all modes.
-func (p *PadActionEntry) SetMode(mode int) {
-	valptr := &p.native.mode
-	*valptr = C.gint(mode)
-}
-
 // PadControllerClass wraps GtkPadControllerClass
 type PadControllerClass struct {
 	*padControllerClass
@@ -120341,42 +120125,6 @@ func UnsafePageRangeToGlibFull(p *PageRange) unsafe.Pointer {
 	p.native = nil // PageRange is invalid from here on
 	return _p
 }
-// start wraps start
-//
-// start of page range.
-func (p *PageRange) Start() int {
-	valptr := &p.native.start
-	var _v int
-	_v = int(*valptr)
-	return _v
-}
-
-// end wraps end
-//
-// end of page range.
-func (p *PageRange) End() int {
-	valptr := &p.native.end
-	var _v int
-	_v = int(*valptr)
-	return _v
-}
-
-// start wraps start
-//
-// start of page range.
-func (p *PageRange) SetStart(start int) {
-	valptr := &p.native.start
-	*valptr = C.gint(start)
-}
-
-// end wraps end
-//
-// end of page range.
-func (p *PageRange) SetEnd(end int) {
-	valptr := &p.native.end
-	*valptr = C.gint(end)
-}
-
 // PaperSize wraps GtkPaperSize
 //
 // `GtkPaperSize` handles paper sizes.
@@ -122259,42 +122007,6 @@ func UnsafeRequestedSizeToGlibFull(r *RequestedSize) unsafe.Pointer {
 	r.native = nil // RequestedSize is invalid from here on
 	return _p
 }
-// minimum_size wraps minimum_size
-//
-// The minimum size needed for allocation in a given orientation
-func (r *RequestedSize) MinimumSize() int {
-	valptr := &r.native.minimum_size
-	var _v int
-	_v = int(*valptr)
-	return _v
-}
-
-// natural_size wraps natural_size
-//
-// The natural size for allocation in a given orientation
-func (r *RequestedSize) NaturalSize() int {
-	valptr := &r.native.natural_size
-	var _v int
-	_v = int(*valptr)
-	return _v
-}
-
-// minimum_size wraps minimum_size
-//
-// The minimum size needed for allocation in a given orientation
-func (r *RequestedSize) SetMinimumSize(minimum_size int) {
-	valptr := &r.native.minimum_size
-	*valptr = C.gint(minimum_size)
-}
-
-// natural_size wraps natural_size
-//
-// The natural size for allocation in a given orientation
-func (r *RequestedSize) SetNaturalSize(natural_size int) {
-	valptr := &r.native.natural_size
-	*valptr = C.gint(natural_size)
-}
-
 // Requisition wraps GtkRequisition
 //
 // A `GtkRequisition` represents the desired size of a widget. See
@@ -122389,42 +122101,6 @@ func NewRequisition() *Requisition {
 	goret = UnsafeRequisitionFromGlibFull(unsafe.Pointer(cret))
 
 	return goret
-}
-
-// width wraps width
-//
-// the widget’s desired width
-func (r *Requisition) Width() int {
-	valptr := &r.native.width
-	var _v int
-	_v = int(*valptr)
-	return _v
-}
-
-// height wraps height
-//
-// the widget’s desired height
-func (r *Requisition) Height() int {
-	valptr := &r.native.height
-	var _v int
-	_v = int(*valptr)
-	return _v
-}
-
-// width wraps width
-//
-// the widget’s desired width
-func (r *Requisition) SetWidth(width int) {
-	valptr := &r.native.width
-	*valptr = C.gint(width)
-}
-
-// height wraps height
-//
-// the widget’s desired height
-func (r *Requisition) SetHeight(height int) {
-	valptr := &r.native.height
-	*valptr = C.gint(height)
 }
 
 // Copy wraps gtk_requisition_copy

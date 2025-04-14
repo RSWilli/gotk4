@@ -81145,24 +81145,6 @@ func UnsafeDBusAnnotationInfoToGlibFull(d *DBusAnnotationInfo) unsafe.Pointer {
 	d.native = nil // DBusAnnotationInfo is invalid from here on
 	return _p
 }
-// ref_count wraps ref_count
-//
-// The reference count or -1 if statically allocated.
-func (d *DBusAnnotationInfo) RefCount() int {
-	valptr := &d.native.ref_count
-	var _v int
-	_v = int(*valptr)
-	return _v
-}
-
-// ref_count wraps ref_count
-//
-// The reference count or -1 if statically allocated.
-func (d *DBusAnnotationInfo) SetRefCount(ref_count int) {
-	valptr := &d.native.ref_count
-	*valptr = C.gint(ref_count)
-}
-
 // DBusArgInfo wraps GDBusArgInfo
 //
 // Information about an argument for a method or a signal.
@@ -81244,24 +81226,6 @@ func UnsafeDBusArgInfoToGlibFull(d *DBusArgInfo) unsafe.Pointer {
 	d.native = nil // DBusArgInfo is invalid from here on
 	return _p
 }
-// ref_count wraps ref_count
-//
-// The reference count or -1 if statically allocated.
-func (d *DBusArgInfo) RefCount() int {
-	valptr := &d.native.ref_count
-	var _v int
-	_v = int(*valptr)
-	return _v
-}
-
-// ref_count wraps ref_count
-//
-// The reference count or -1 if statically allocated.
-func (d *DBusArgInfo) SetRefCount(ref_count int) {
-	valptr := &d.native.ref_count
-	*valptr = C.gint(ref_count)
-}
-
 // DBusErrorEntry wraps GDBusErrorEntry
 //
 // Struct used in g_dbus_error_register_error_domain().
@@ -81324,24 +81288,6 @@ func UnsafeDBusErrorEntryToGlibFull(d *DBusErrorEntry) unsafe.Pointer {
 	d.native = nil // DBusErrorEntry is invalid from here on
 	return _p
 }
-// error_code wraps error_code
-//
-// An error code.
-func (d *DBusErrorEntry) ErrorCode() int {
-	valptr := &d.native.error_code
-	var _v int
-	_v = int(*valptr)
-	return _v
-}
-
-// error_code wraps error_code
-//
-// An error code.
-func (d *DBusErrorEntry) SetErrorCode(error_code int) {
-	valptr := &d.native.error_code
-	*valptr = C.gint(error_code)
-}
-
 // DBusInterfaceIface wraps GDBusInterfaceIface
 //
 // Base type for D-Bus interfaces.
@@ -81485,24 +81431,6 @@ func UnsafeDBusInterfaceInfoToGlibFull(d *DBusInterfaceInfo) unsafe.Pointer {
 	d.native = nil // DBusInterfaceInfo is invalid from here on
 	return _p
 }
-// ref_count wraps ref_count
-//
-// The reference count or -1 if statically allocated.
-func (d *DBusInterfaceInfo) RefCount() int {
-	valptr := &d.native.ref_count
-	var _v int
-	_v = int(*valptr)
-	return _v
-}
-
-// ref_count wraps ref_count
-//
-// The reference count or -1 if statically allocated.
-func (d *DBusInterfaceInfo) SetRefCount(ref_count int) {
-	valptr := &d.native.ref_count
-	*valptr = C.gint(ref_count)
-}
-
 // CacheBuild wraps g_dbus_interface_info_cache_build
 //
 // Builds a lookup-cache to speed up
@@ -81885,24 +81813,6 @@ func UnsafeDBusMethodInfoToGlibFull(d *DBusMethodInfo) unsafe.Pointer {
 	d.native = nil // DBusMethodInfo is invalid from here on
 	return _p
 }
-// ref_count wraps ref_count
-//
-// The reference count or -1 if statically allocated.
-func (d *DBusMethodInfo) RefCount() int {
-	valptr := &d.native.ref_count
-	var _v int
-	_v = int(*valptr)
-	return _v
-}
-
-// ref_count wraps ref_count
-//
-// The reference count or -1 if statically allocated.
-func (d *DBusMethodInfo) SetRefCount(ref_count int) {
-	valptr := &d.native.ref_count
-	*valptr = C.gint(ref_count)
-}
-
 // DBusNodeInfo wraps GDBusNodeInfo
 //
 // Information about nodes in a remote object hierarchy.
@@ -82023,24 +81933,6 @@ func NewDBusNodeInfoForXML(xmlData string) (*DBusNodeInfo, error) {
 	}
 
 	return goret, _goerr
-}
-
-// ref_count wraps ref_count
-//
-// The reference count or -1 if statically allocated.
-func (d *DBusNodeInfo) RefCount() int {
-	valptr := &d.native.ref_count
-	var _v int
-	_v = int(*valptr)
-	return _v
-}
-
-// ref_count wraps ref_count
-//
-// The reference count or -1 if statically allocated.
-func (d *DBusNodeInfo) SetRefCount(ref_count int) {
-	valptr := &d.native.ref_count
-	*valptr = C.gint(ref_count)
 }
 
 // LookupInterface wraps g_dbus_node_info_lookup_interface
@@ -82529,24 +82421,6 @@ func UnsafeDBusPropertyInfoToGlibFull(d *DBusPropertyInfo) unsafe.Pointer {
 	d.native = nil // DBusPropertyInfo is invalid from here on
 	return _p
 }
-// ref_count wraps ref_count
-//
-// The reference count or -1 if statically allocated.
-func (d *DBusPropertyInfo) RefCount() int {
-	valptr := &d.native.ref_count
-	var _v int
-	_v = int(*valptr)
-	return _v
-}
-
-// ref_count wraps ref_count
-//
-// The reference count or -1 if statically allocated.
-func (d *DBusPropertyInfo) SetRefCount(ref_count int) {
-	valptr := &d.native.ref_count
-	*valptr = C.gint(ref_count)
-}
-
 // DBusProxyClass wraps GDBusProxyClass
 //
 // Class structure for #GDBusProxy.
@@ -82690,24 +82564,6 @@ func UnsafeDBusSignalInfoToGlibFull(d *DBusSignalInfo) unsafe.Pointer {
 	d.native = nil // DBusSignalInfo is invalid from here on
 	return _p
 }
-// ref_count wraps ref_count
-//
-// The reference count or -1 if statically allocated.
-func (d *DBusSignalInfo) RefCount() int {
-	valptr := &d.native.ref_count
-	var _v int
-	_v = int(*valptr)
-	return _v
-}
-
-// ref_count wraps ref_count
-//
-// The reference count or -1 if statically allocated.
-func (d *DBusSignalInfo) SetRefCount(ref_count int) {
-	valptr := &d.native.ref_count
-	*valptr = C.gint(ref_count)
-}
-
 // DBusSubtreeVTable wraps GDBusSubtreeVTable
 //
 // Virtual table for handling subtrees registered with g_dbus_connection_register_subtree().
@@ -83608,24 +83464,6 @@ func NewFileAttributeInfoList() *FileAttributeInfoList {
 	goret = UnsafeFileAttributeInfoListFromGlibFull(unsafe.Pointer(cret))
 
 	return goret
-}
-
-// n_infos wraps n_infos
-//
-// the number of values in the array.
-func (f *FileAttributeInfoList) NInfos() int {
-	valptr := &f.native.n_infos
-	var _v int
-	_v = int(*valptr)
-	return _v
-}
-
-// n_infos wraps n_infos
-//
-// the number of values in the array.
-func (f *FileAttributeInfoList) SetNInfos(n_infos int) {
-	valptr := &f.native.n_infos
-	*valptr = C.gint(n_infos)
 }
 
 // Add wraps g_file_attribute_info_list_add
@@ -85803,64 +85641,6 @@ func UnsafeInputMessageToGlibFull(i *InputMessage) unsafe.Pointer {
 	i.native = nil // InputMessage is invalid from here on
 	return _p
 }
-// num_vectors wraps num_vectors
-//
-// the number of input vectors pointed to by @vectors
-func (i *InputMessage) NumVectors() uint {
-	valptr := &i.native.num_vectors
-	var _v uint
-	_v = uint(*valptr)
-	return _v
-}
-
-// bytes_received wraps bytes_received
-//
-// will be set to the number of bytes that have been
-//   received
-func (i *InputMessage) BytesReceived() uint {
-	valptr := &i.native.bytes_received
-	var _v uint
-	_v = uint(*valptr)
-	return _v
-}
-
-// flags wraps flags
-//
-// collection of #GSocketMsgFlags for the received message,
-//   outputted by the call
-func (i *InputMessage) Flags() int {
-	valptr := &i.native.flags
-	var _v int
-	_v = int(*valptr)
-	return _v
-}
-
-// num_vectors wraps num_vectors
-//
-// the number of input vectors pointed to by @vectors
-func (i *InputMessage) SetNumVectors(num_vectors uint) {
-	valptr := &i.native.num_vectors
-	*valptr = C.guint(num_vectors)
-}
-
-// bytes_received wraps bytes_received
-//
-// will be set to the number of bytes that have been
-//   received
-func (i *InputMessage) SetBytesReceived(bytes_received uint) {
-	valptr := &i.native.bytes_received
-	*valptr = C.gsize(bytes_received)
-}
-
-// flags wraps flags
-//
-// collection of #GSocketMsgFlags for the received message,
-//   outputted by the call
-func (i *InputMessage) SetFlags(flags int) {
-	valptr := &i.native.flags
-	*valptr = C.gint(flags)
-}
-
 // InputStreamClass wraps GInputStreamClass
 type InputStreamClass struct {
 	*inputStreamClass
@@ -85986,24 +85766,6 @@ func UnsafeInputVectorToGlibFull(i *InputVector) unsafe.Pointer {
 	i.native = nil // InputVector is invalid from here on
 	return _p
 }
-// size wraps size
-//
-// the available size in @buffer.
-func (i *InputVector) Size() uint {
-	valptr := &i.native.size
-	var _v uint
-	_v = uint(*valptr)
-	return _v
-}
-
-// size wraps size
-//
-// the available size in @buffer.
-func (i *InputVector) SetSize(size uint) {
-	valptr := &i.native.size
-	*valptr = C.gsize(size)
-}
-
 // ListModelInterface wraps GListModelInterface
 //
 // The virtual function table for #GListModel.
@@ -87042,62 +86804,6 @@ func UnsafeOutputMessageToGlibFull(o *OutputMessage) unsafe.Pointer {
 	o.native = nil // OutputMessage is invalid from here on
 	return _p
 }
-// num_vectors wraps num_vectors
-//
-// the number of output vectors pointed to by @vectors.
-func (o *OutputMessage) NumVectors() uint {
-	valptr := &o.native.num_vectors
-	var _v uint
-	_v = uint(*valptr)
-	return _v
-}
-
-// bytes_sent wraps bytes_sent
-//
-// initialize to 0. Will be set to the number of bytes
-//     that have been sent
-func (o *OutputMessage) BytesSent() uint {
-	valptr := &o.native.bytes_sent
-	var _v uint
-	_v = uint(*valptr)
-	return _v
-}
-
-// num_control_messages wraps num_control_messages
-//
-// number of elements in @control_messages.
-func (o *OutputMessage) NumControlMessages() uint {
-	valptr := &o.native.num_control_messages
-	var _v uint
-	_v = uint(*valptr)
-	return _v
-}
-
-// num_vectors wraps num_vectors
-//
-// the number of output vectors pointed to by @vectors.
-func (o *OutputMessage) SetNumVectors(num_vectors uint) {
-	valptr := &o.native.num_vectors
-	*valptr = C.guint(num_vectors)
-}
-
-// bytes_sent wraps bytes_sent
-//
-// initialize to 0. Will be set to the number of bytes
-//     that have been sent
-func (o *OutputMessage) SetBytesSent(bytes_sent uint) {
-	valptr := &o.native.bytes_sent
-	*valptr = C.guint(bytes_sent)
-}
-
-// num_control_messages wraps num_control_messages
-//
-// number of elements in @control_messages.
-func (o *OutputMessage) SetNumControlMessages(num_control_messages uint) {
-	valptr := &o.native.num_control_messages
-	*valptr = C.guint(num_control_messages)
-}
-
 // OutputStreamClass wraps GOutputStreamClass
 type OutputStreamClass struct {
 	*outputStreamClass
@@ -87223,42 +86929,6 @@ func UnsafeOutputVectorToGlibFull(o *OutputVector) unsafe.Pointer {
 	o.native = nil // OutputVector is invalid from here on
 	return _p
 }
-// buffer wraps buffer
-//
-// Pointer to a buffer of data to read.
-func (o *OutputVector) Buffer() unsafe.Pointer {
-	valptr := &o.native.buffer
-	var _v unsafe.Pointer
-	_v = unsafe.Pointer(*valptr)
-	return _v
-}
-
-// size wraps size
-//
-// the size of @buffer.
-func (o *OutputVector) Size() uint {
-	valptr := &o.native.size
-	var _v uint
-	_v = uint(*valptr)
-	return _v
-}
-
-// buffer wraps buffer
-//
-// Pointer to a buffer of data to read.
-func (o *OutputVector) SetBuffer(buffer unsafe.Pointer) {
-	valptr := &o.native.buffer
-	*valptr = C.gconstpointer(buffer)
-}
-
-// size wraps size
-//
-// the size of @buffer.
-func (o *OutputVector) SetSize(size uint) {
-	valptr := &o.native.size
-	*valptr = C.gsize(size)
-}
-
 // PermissionClass wraps GPermissionClass
 type PermissionClass struct {
 	*permissionClass

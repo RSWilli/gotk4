@@ -23424,78 +23424,6 @@ func UnsafeKeymapKeyToGlibFull(k *KeymapKey) unsafe.Pointer {
 	k.native = nil // KeymapKey is invalid from here on
 	return _p
 }
-// keycode wraps keycode
-//
-// the hardware keycode. This is an identifying number for a
-//   physical key.
-func (k *KeymapKey) Keycode() uint {
-	valptr := &k.native.keycode
-	var _v uint
-	_v = uint(*valptr)
-	return _v
-}
-
-// group wraps group
-//
-// indicates movement in a horizontal direction. Usually groups are used
-//   for two different languages. In group 0, a key might have two English
-//   characters, and in group 1 it might have two Hebrew characters. The Hebrew
-//   characters will be printed on the key next to the English characters.
-func (k *KeymapKey) Group() int {
-	valptr := &k.native.group
-	var _v int
-	_v = int(*valptr)
-	return _v
-}
-
-// level wraps level
-//
-// indicates which symbol on the key will be used, in a vertical direction.
-//   So on a standard US keyboard, the key with the number “1” on it also has the
-//   exclamation point ("!") character on it. The level indicates whether to use
-//   the “1” or the “!” symbol. The letter keys are considered to have a lowercase
-//   letter at level 0, and an uppercase letter at level 1, though only the
-//   uppercase letter is printed.
-func (k *KeymapKey) Level() int {
-	valptr := &k.native.level
-	var _v int
-	_v = int(*valptr)
-	return _v
-}
-
-// keycode wraps keycode
-//
-// the hardware keycode. This is an identifying number for a
-//   physical key.
-func (k *KeymapKey) SetKeycode(keycode uint) {
-	valptr := &k.native.keycode
-	*valptr = C.guint(keycode)
-}
-
-// group wraps group
-//
-// indicates movement in a horizontal direction. Usually groups are used
-//   for two different languages. In group 0, a key might have two English
-//   characters, and in group 1 it might have two Hebrew characters. The Hebrew
-//   characters will be printed on the key next to the English characters.
-func (k *KeymapKey) SetGroup(group int) {
-	valptr := &k.native.group
-	*valptr = C.gint(group)
-}
-
-// level wraps level
-//
-// indicates which symbol on the key will be used, in a vertical direction.
-//   So on a standard US keyboard, the key with the number “1” on it also has the
-//   exclamation point ("!") character on it. The level indicates whether to use
-//   the “1” or the “!” symbol. The letter keys are considered to have a lowercase
-//   letter at level 0, and an uppercase letter at level 1, though only the
-//   uppercase letter is printed.
-func (k *KeymapKey) SetLevel(level int) {
-	valptr := &k.native.level
-	*valptr = C.gint(level)
-}
-
 // MemoryTextureBuilderClass wraps GdkMemoryTextureBuilderClass
 type MemoryTextureBuilderClass struct {
 	*memoryTextureBuilderClass
@@ -24389,80 +24317,6 @@ func UnsafeRGBAToGlibFull(r *RGBA) unsafe.Pointer {
 	r.native = nil // RGBA is invalid from here on
 	return _p
 }
-// red wraps red
-//
-// The intensity of the red channel from 0.0 to 1.0 inclusive
-func (r *RGBA) Red() float32 {
-	valptr := &r.native.red
-	var _v float32
-	_v = float32(*valptr)
-	return _v
-}
-
-// green wraps green
-//
-// The intensity of the green channel from 0.0 to 1.0 inclusive
-func (r *RGBA) Green() float32 {
-	valptr := &r.native.green
-	var _v float32
-	_v = float32(*valptr)
-	return _v
-}
-
-// blue wraps blue
-//
-// The intensity of the blue channel from 0.0 to 1.0 inclusive
-func (r *RGBA) Blue() float32 {
-	valptr := &r.native.blue
-	var _v float32
-	_v = float32(*valptr)
-	return _v
-}
-
-// alpha wraps alpha
-//
-// The opacity of the color from 0.0 for completely translucent to
-//   1.0 for opaque
-func (r *RGBA) Alpha() float32 {
-	valptr := &r.native.alpha
-	var _v float32
-	_v = float32(*valptr)
-	return _v
-}
-
-// red wraps red
-//
-// The intensity of the red channel from 0.0 to 1.0 inclusive
-func (r *RGBA) SetRed(red float32) {
-	valptr := &r.native.red
-	*valptr = C.gfloat(red)
-}
-
-// green wraps green
-//
-// The intensity of the green channel from 0.0 to 1.0 inclusive
-func (r *RGBA) SetGreen(green float32) {
-	valptr := &r.native.green
-	*valptr = C.gfloat(green)
-}
-
-// blue wraps blue
-//
-// The intensity of the blue channel from 0.0 to 1.0 inclusive
-func (r *RGBA) SetBlue(blue float32) {
-	valptr := &r.native.blue
-	*valptr = C.gfloat(blue)
-}
-
-// alpha wraps alpha
-//
-// The opacity of the color from 0.0 for completely translucent to
-//   1.0 for opaque
-func (r *RGBA) SetAlpha(alpha float32) {
-	valptr := &r.native.alpha
-	*valptr = C.gfloat(alpha)
-}
-
 // Copy wraps gdk_rgba_copy
 // The function returns the following values:
 // 
@@ -24715,78 +24569,6 @@ func UnsafeRectangleToGlibFull(r *Rectangle) unsafe.Pointer {
 	r.native = nil // Rectangle is invalid from here on
 	return _p
 }
-// x wraps x
-//
-// the x coordinate of the top left corner
-func (r *Rectangle) X() int {
-	valptr := &r.native.x
-	var _v int
-	_v = int(*valptr)
-	return _v
-}
-
-// y wraps y
-//
-// the y coordinate of the top left corner
-func (r *Rectangle) Y() int {
-	valptr := &r.native.y
-	var _v int
-	_v = int(*valptr)
-	return _v
-}
-
-// width wraps width
-//
-// the width of the rectangle
-func (r *Rectangle) Width() int {
-	valptr := &r.native.width
-	var _v int
-	_v = int(*valptr)
-	return _v
-}
-
-// height wraps height
-//
-// the height of the rectangle
-func (r *Rectangle) Height() int {
-	valptr := &r.native.height
-	var _v int
-	_v = int(*valptr)
-	return _v
-}
-
-// x wraps x
-//
-// the x coordinate of the top left corner
-func (r *Rectangle) SetX(x int) {
-	valptr := &r.native.x
-	*valptr = C.gint(x)
-}
-
-// y wraps y
-//
-// the y coordinate of the top left corner
-func (r *Rectangle) SetY(y int) {
-	valptr := &r.native.y
-	*valptr = C.gint(y)
-}
-
-// width wraps width
-//
-// the width of the rectangle
-func (r *Rectangle) SetWidth(width int) {
-	valptr := &r.native.width
-	*valptr = C.gint(width)
-}
-
-// height wraps height
-//
-// the height of the rectangle
-func (r *Rectangle) SetHeight(height int) {
-	valptr := &r.native.height
-	*valptr = C.gint(height)
-}
-
 // ContainsPoint wraps gdk_rectangle_contains_point
 // 
 // The function takes the following parameters:
@@ -25483,24 +25265,6 @@ func UnsafeTimeCoordToGlibFull(t *TimeCoord) unsafe.Pointer {
 	t.native = nil // TimeCoord is invalid from here on
 	return _p
 }
-// time wraps time
-//
-// The timestamp for this event
-func (t *TimeCoord) Time() uint32 {
-	valptr := &t.native.time
-	var _v uint32
-	_v = uint32(*valptr)
-	return _v
-}
-
-// time wraps time
-//
-// The timestamp for this event
-func (t *TimeCoord) SetTime(time uint32) {
-	valptr := &t.native.time
-	*valptr = C.guint32(time)
-}
-
 // ToplevelInterface wraps GdkToplevelInterface
 type ToplevelInterface struct {
 	*toplevelInterface

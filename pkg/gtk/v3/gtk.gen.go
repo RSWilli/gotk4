@@ -134078,24 +134078,6 @@ func UnsafeAccelKeyToGlibFull(a *AccelKey) unsafe.Pointer {
 	a.native = nil // AccelKey is invalid from here on
 	return _p
 }
-// accel_key wraps accel_key
-//
-// The accelerator keyval
-func (a *AccelKey) AccelKey() uint {
-	valptr := &a.native.accel_key
-	var _v uint
-	_v = uint(*valptr)
-	return _v
-}
-
-// accel_key wraps accel_key
-//
-// The accelerator keyval
-func (a *AccelKey) SetAccelKey(accel_key uint) {
-	valptr := &a.native.accel_key
-	*valptr = C.guint(accel_key)
-}
-
 // AccelLabelClass wraps GtkAccelLabelClass
 type AccelLabelClass struct {
 	*accelLabelClass
@@ -135365,24 +135347,6 @@ func UnsafeBindingEntryToGlibFull(b *BindingEntry) unsafe.Pointer {
 	b.native = nil // BindingEntry is invalid from here on
 	return _p
 }
-// keyval wraps keyval
-//
-// key value to match
-func (b *BindingEntry) Keyval() uint {
-	valptr := &b.native.keyval
-	var _v uint
-	_v = uint(*valptr)
-	return _v
-}
-
-// keyval wraps keyval
-//
-// key value to match
-func (b *BindingEntry) SetKeyval(keyval uint) {
-	valptr := &b.native.keyval
-	*valptr = C.guint(keyval)
-}
-
 // BindingSet wraps GtkBindingSet
 //
 // A binding set maintains a list of activatable key bindings.
@@ -135450,24 +135414,6 @@ func UnsafeBindingSetToGlibFull(b *BindingSet) unsafe.Pointer {
 	b.native = nil // BindingSet is invalid from here on
 	return _p
 }
-// priority wraps priority
-//
-// unused
-func (b *BindingSet) Priority() int {
-	valptr := &b.native.priority
-	var _v int
-	_v = int(*valptr)
-	return _v
-}
-
-// priority wraps priority
-//
-// unused
-func (b *BindingSet) SetPriority(priority int) {
-	valptr := &b.native.priority
-	*valptr = C.gint(priority)
-}
-
 // Activate wraps gtk_binding_set_activate
 // 
 // The function takes the following parameters:
@@ -135573,24 +135519,6 @@ func UnsafeBindingSignalToGlibFull(b *BindingSignal) unsafe.Pointer {
 	b.native = nil // BindingSignal is invalid from here on
 	return _p
 }
-// n_args wraps n_args
-//
-// number of arguments specified for the signal
-func (b *BindingSignal) NArgs() uint {
-	valptr := &b.native.n_args
-	var _v uint
-	_v = uint(*valptr)
-	return _v
-}
-
-// n_args wraps n_args
-//
-// number of arguments specified for the signal
-func (b *BindingSignal) SetNArgs(n_args uint) {
-	valptr := &b.native.n_args
-	*valptr = C.guint(n_args)
-}
-
 // BooleanCellAccessibleClass wraps GtkBooleanCellAccessibleClass
 type BooleanCellAccessibleClass struct {
 	*booleanCellAccessibleClass
@@ -135742,78 +135670,6 @@ func NewBorder() *Border {
 	goret = UnsafeBorderFromGlibFull(unsafe.Pointer(cret))
 
 	return goret
-}
-
-// left wraps left
-//
-// The width of the left border
-func (b *Border) Left() int16 {
-	valptr := &b.native.left
-	var _v int16
-	_v = int16(*valptr)
-	return _v
-}
-
-// right wraps right
-//
-// The width of the right border
-func (b *Border) Right() int16 {
-	valptr := &b.native.right
-	var _v int16
-	_v = int16(*valptr)
-	return _v
-}
-
-// top wraps top
-//
-// The width of the top border
-func (b *Border) Top() int16 {
-	valptr := &b.native.top
-	var _v int16
-	_v = int16(*valptr)
-	return _v
-}
-
-// bottom wraps bottom
-//
-// The width of the bottom border
-func (b *Border) Bottom() int16 {
-	valptr := &b.native.bottom
-	var _v int16
-	_v = int16(*valptr)
-	return _v
-}
-
-// left wraps left
-//
-// The width of the left border
-func (b *Border) SetLeft(left int16) {
-	valptr := &b.native.left
-	*valptr = C.gint16(left)
-}
-
-// right wraps right
-//
-// The width of the right border
-func (b *Border) SetRight(right int16) {
-	valptr := &b.native.right
-	*valptr = C.gint16(right)
-}
-
-// top wraps top
-//
-// The width of the top border
-func (b *Border) SetTop(top int16) {
-	valptr := &b.native.top
-	*valptr = C.gint16(top)
-}
-
-// bottom wraps bottom
-//
-// The width of the bottom border
-func (b *Border) SetBottom(bottom int16) {
-	valptr := &b.native.bottom
-	*valptr = C.gint16(bottom)
 }
 
 // Copy wraps gtk_border_copy
@@ -139762,34 +139618,6 @@ func UnsafeFixedChildToGlibFull(f *FixedChild) unsafe.Pointer {
 	f.native = nil // FixedChild is invalid from here on
 	return _p
 }
-// x wraps x
-func (f *FixedChild) X() int {
-	valptr := &f.native.x
-	var _v int
-	_v = int(*valptr)
-	return _v
-}
-
-// y wraps y
-func (f *FixedChild) Y() int {
-	valptr := &f.native.y
-	var _v int
-	_v = int(*valptr)
-	return _v
-}
-
-// x wraps x
-func (f *FixedChild) SetX(x int) {
-	valptr := &f.native.x
-	*valptr = C.gint(x)
-}
-
-// y wraps y
-func (f *FixedChild) SetY(y int) {
-	valptr := &f.native.y
-	*valptr = C.gint(y)
-}
-
 // FixedClass wraps GtkFixedClass
 type FixedClass struct {
 	*fixedClass
@@ -145206,44 +145034,6 @@ func UnsafePadActionEntryToGlibFull(p *PadActionEntry) unsafe.Pointer {
 	p.native = nil // PadActionEntry is invalid from here on
 	return _p
 }
-// index wraps index
-//
-// the 0-indexed button/ring/strip number that will trigger this action
-//   entry.
-func (p *PadActionEntry) Index() int {
-	valptr := &p.native.index
-	var _v int
-	_v = int(*valptr)
-	return _v
-}
-
-// mode wraps mode
-//
-// the mode that will trigger this action entry, or -1 for all modes.
-func (p *PadActionEntry) Mode() int {
-	valptr := &p.native.mode
-	var _v int
-	_v = int(*valptr)
-	return _v
-}
-
-// index wraps index
-//
-// the 0-indexed button/ring/strip number that will trigger this action
-//   entry.
-func (p *PadActionEntry) SetIndex(index int) {
-	valptr := &p.native.index
-	*valptr = C.gint(index)
-}
-
-// mode wraps mode
-//
-// the mode that will trigger this action entry, or -1 for all modes.
-func (p *PadActionEntry) SetMode(mode int) {
-	valptr := &p.native.mode
-	*valptr = C.gint(mode)
-}
-
 // PadControllerClass wraps GtkPadControllerClass
 type PadControllerClass struct {
 	*padControllerClass
@@ -145366,42 +145156,6 @@ func UnsafePageRangeToGlibFull(p *PageRange) unsafe.Pointer {
 	p.native = nil // PageRange is invalid from here on
 	return _p
 }
-// start wraps start
-//
-// start of page range.
-func (p *PageRange) Start() int {
-	valptr := &p.native.start
-	var _v int
-	_v = int(*valptr)
-	return _v
-}
-
-// end wraps end
-//
-// end of page range.
-func (p *PageRange) End() int {
-	valptr := &p.native.end
-	var _v int
-	_v = int(*valptr)
-	return _v
-}
-
-// start wraps start
-//
-// start of page range.
-func (p *PageRange) SetStart(start int) {
-	valptr := &p.native.start
-	*valptr = C.gint(start)
-}
-
-// end wraps end
-//
-// end of page range.
-func (p *PageRange) SetEnd(end int) {
-	valptr := &p.native.end
-	*valptr = C.gint(end)
-}
-
 // PanedAccessibleClass wraps GtkPanedAccessibleClass
 type PanedAccessibleClass struct {
 	*panedAccessibleClass
@@ -147906,26 +147660,6 @@ func UnsafeRecentFilterInfoToGlibFull(r *RecentFilterInfo) unsafe.Pointer {
 	r.native = nil // RecentFilterInfo is invalid from here on
 	return _p
 }
-// age wraps age
-//
-// The number of days elapsed since the file has been
-//    registered.
-func (r *RecentFilterInfo) Age() int {
-	valptr := &r.native.age
-	var _v int
-	_v = int(*valptr)
-	return _v
-}
-
-// age wraps age
-//
-// The number of days elapsed since the file has been
-//    registered.
-func (r *RecentFilterInfo) SetAge(age int) {
-	valptr := &r.native.age
-	*valptr = C.gint(age)
-}
-
 // RecentInfo wraps GtkRecentInfo
 //
 // #GtkRecentInfo-struct contains private data only, and should
@@ -148832,42 +148566,6 @@ func UnsafeRequestedSizeToGlibFull(r *RequestedSize) unsafe.Pointer {
 	r.native = nil // RequestedSize is invalid from here on
 	return _p
 }
-// minimum_size wraps minimum_size
-//
-// The minimum size needed for allocation in a given orientation
-func (r *RequestedSize) MinimumSize() int {
-	valptr := &r.native.minimum_size
-	var _v int
-	_v = int(*valptr)
-	return _v
-}
-
-// natural_size wraps natural_size
-//
-// The natural size for allocation in a given orientation
-func (r *RequestedSize) NaturalSize() int {
-	valptr := &r.native.natural_size
-	var _v int
-	_v = int(*valptr)
-	return _v
-}
-
-// minimum_size wraps minimum_size
-//
-// The minimum size needed for allocation in a given orientation
-func (r *RequestedSize) SetMinimumSize(minimum_size int) {
-	valptr := &r.native.minimum_size
-	*valptr = C.gint(minimum_size)
-}
-
-// natural_size wraps natural_size
-//
-// The natural size for allocation in a given orientation
-func (r *RequestedSize) SetNaturalSize(natural_size int) {
-	valptr := &r.native.natural_size
-	*valptr = C.gint(natural_size)
-}
-
 // Requisition wraps GtkRequisition
 //
 // A #GtkRequisition-struct represents the desired size of a widget. See
@@ -148960,42 +148658,6 @@ func NewRequisition() *Requisition {
 	goret = UnsafeRequisitionFromGlibFull(unsafe.Pointer(cret))
 
 	return goret
-}
-
-// width wraps width
-//
-// the widget’s desired width
-func (r *Requisition) Width() int {
-	valptr := &r.native.width
-	var _v int
-	_v = int(*valptr)
-	return _v
-}
-
-// height wraps height
-//
-// the widget’s desired height
-func (r *Requisition) Height() int {
-	valptr := &r.native.height
-	var _v int
-	_v = int(*valptr)
-	return _v
-}
-
-// width wraps width
-//
-// the widget’s desired width
-func (r *Requisition) SetWidth(width int) {
-	valptr := &r.native.width
-	*valptr = C.gint(width)
-}
-
-// height wraps height
-//
-// the widget’s desired height
-func (r *Requisition) SetHeight(height int) {
-	valptr := &r.native.height
-	*valptr = C.gint(height)
 }
 
 // Copy wraps gtk_requisition_copy
@@ -149560,14 +149222,6 @@ func UnsafeScrolledWindowClassToGlibFull(s *ScrolledWindowClass) unsafe.Pointer 
 	s.native = nil // ScrolledWindowClass is invalid from here on
 	return _p
 }
-// scrollbar_spacing wraps scrollbar_spacing
-func (s *ScrolledWindowClass) ScrollbarSpacing() int {
-	valptr := &s.native.scrollbar_spacing
-	var _v int
-	_v = int(*valptr)
-	return _v
-}
-
 // SearchBarClass wraps GtkSearchBarClass
 type SearchBarClass struct {
 	*searchBarClass
@@ -152139,90 +151793,6 @@ func UnsafeTableChildToGlibFull(t *TableChild) unsafe.Pointer {
 	t.native = nil // TableChild is invalid from here on
 	return _p
 }
-// left_attach wraps left_attach
-func (t *TableChild) LeftAttach() uint16 {
-	valptr := &t.native.left_attach
-	var _v uint16
-	_v = uint16(*valptr)
-	return _v
-}
-
-// right_attach wraps right_attach
-func (t *TableChild) RightAttach() uint16 {
-	valptr := &t.native.right_attach
-	var _v uint16
-	_v = uint16(*valptr)
-	return _v
-}
-
-// top_attach wraps top_attach
-func (t *TableChild) TopAttach() uint16 {
-	valptr := &t.native.top_attach
-	var _v uint16
-	_v = uint16(*valptr)
-	return _v
-}
-
-// bottom_attach wraps bottom_attach
-func (t *TableChild) BottomAttach() uint16 {
-	valptr := &t.native.bottom_attach
-	var _v uint16
-	_v = uint16(*valptr)
-	return _v
-}
-
-// xpadding wraps xpadding
-func (t *TableChild) Xpadding() uint16 {
-	valptr := &t.native.xpadding
-	var _v uint16
-	_v = uint16(*valptr)
-	return _v
-}
-
-// ypadding wraps ypadding
-func (t *TableChild) Ypadding() uint16 {
-	valptr := &t.native.ypadding
-	var _v uint16
-	_v = uint16(*valptr)
-	return _v
-}
-
-// left_attach wraps left_attach
-func (t *TableChild) SetLeftAttach(left_attach uint16) {
-	valptr := &t.native.left_attach
-	*valptr = C.guint16(left_attach)
-}
-
-// right_attach wraps right_attach
-func (t *TableChild) SetRightAttach(right_attach uint16) {
-	valptr := &t.native.right_attach
-	*valptr = C.guint16(right_attach)
-}
-
-// top_attach wraps top_attach
-func (t *TableChild) SetTopAttach(top_attach uint16) {
-	valptr := &t.native.top_attach
-	*valptr = C.guint16(top_attach)
-}
-
-// bottom_attach wraps bottom_attach
-func (t *TableChild) SetBottomAttach(bottom_attach uint16) {
-	valptr := &t.native.bottom_attach
-	*valptr = C.guint16(bottom_attach)
-}
-
-// xpadding wraps xpadding
-func (t *TableChild) SetXpadding(xpadding uint16) {
-	valptr := &t.native.xpadding
-	*valptr = C.guint16(xpadding)
-}
-
-// ypadding wraps ypadding
-func (t *TableChild) SetYpadding(ypadding uint16) {
-	valptr := &t.native.ypadding
-	*valptr = C.guint16(ypadding)
-}
-
 // TableClass wraps GtkTableClass
 type TableClass struct {
 	*tableClass
@@ -152343,48 +151913,6 @@ func UnsafeTableRowColToGlibFull(t *TableRowCol) unsafe.Pointer {
 	t.native = nil // TableRowCol is invalid from here on
 	return _p
 }
-// requisition wraps requisition
-func (t *TableRowCol) Requisition() uint16 {
-	valptr := &t.native.requisition
-	var _v uint16
-	_v = uint16(*valptr)
-	return _v
-}
-
-// allocation wraps allocation
-func (t *TableRowCol) Allocation() uint16 {
-	valptr := &t.native.allocation
-	var _v uint16
-	_v = uint16(*valptr)
-	return _v
-}
-
-// spacing wraps spacing
-func (t *TableRowCol) Spacing() uint16 {
-	valptr := &t.native.spacing
-	var _v uint16
-	_v = uint16(*valptr)
-	return _v
-}
-
-// requisition wraps requisition
-func (t *TableRowCol) SetRequisition(requisition uint16) {
-	valptr := &t.native.requisition
-	*valptr = C.guint16(requisition)
-}
-
-// allocation wraps allocation
-func (t *TableRowCol) SetAllocation(allocation uint16) {
-	valptr := &t.native.allocation
-	*valptr = C.guint16(allocation)
-}
-
-// spacing wraps spacing
-func (t *TableRowCol) SetSpacing(spacing uint16) {
-	valptr := &t.native.spacing
-	*valptr = C.guint16(spacing)
-}
-
 // TargetEntry wraps GtkTargetEntry
 //
 // A #GtkTargetEntry represents a single type of
@@ -152495,48 +152023,6 @@ func NewTargetEntry(target string, flags uint, info uint) *TargetEntry {
 	goret = UnsafeTargetEntryFromGlibFull(unsafe.Pointer(cret))
 
 	return goret
-}
-
-// flags wraps flags
-//
-// #GtkTargetFlags for DND
-func (t *TargetEntry) Flags() uint {
-	valptr := &t.native.flags
-	var _v uint
-	_v = uint(*valptr)
-	return _v
-}
-
-// info wraps info
-//
-// an application-assigned integer ID which will
-//     get passed as a parameter to e.g the #GtkWidget::selection-get
-//     signal. It allows the application to identify the target
-//     type without extensive string compares.
-func (t *TargetEntry) Info() uint {
-	valptr := &t.native.info
-	var _v uint
-	_v = uint(*valptr)
-	return _v
-}
-
-// flags wraps flags
-//
-// #GtkTargetFlags for DND
-func (t *TargetEntry) SetFlags(flags uint) {
-	valptr := &t.native.flags
-	*valptr = C.guint(flags)
-}
-
-// info wraps info
-//
-// an application-assigned integer ID which will
-//     get passed as a parameter to e.g the #GtkWidget::selection-get
-//     signal. It allows the application to identify the target
-//     type without extensive string compares.
-func (t *TargetEntry) SetInfo(info uint) {
-	valptr := &t.native.info
-	*valptr = C.guint(info)
 }
 
 // Copy wraps gtk_target_entry_copy
@@ -152867,48 +152353,6 @@ func UnsafeTargetPairToGlibFull(t *TargetPair) unsafe.Pointer {
 	t.native = nil // TargetPair is invalid from here on
 	return _p
 }
-// flags wraps flags
-//
-// #GtkTargetFlags for DND
-func (t *TargetPair) Flags() uint {
-	valptr := &t.native.flags
-	var _v uint
-	_v = uint(*valptr)
-	return _v
-}
-
-// info wraps info
-//
-// an application-assigned integer ID which will
-//     get passed as a parameter to e.g the #GtkWidget::selection-get
-//     signal. It allows the application to identify the target
-//     type without extensive string compares.
-func (t *TargetPair) Info() uint {
-	valptr := &t.native.info
-	var _v uint
-	_v = uint(*valptr)
-	return _v
-}
-
-// flags wraps flags
-//
-// #GtkTargetFlags for DND
-func (t *TargetPair) SetFlags(flags uint) {
-	valptr := &t.native.flags
-	*valptr = C.guint(flags)
-}
-
-// info wraps info
-//
-// an application-assigned integer ID which will
-//     get passed as a parameter to e.g the #GtkWidget::selection-get
-//     signal. It allows the application to identify the target
-//     type without extensive string compares.
-func (t *TargetPair) SetInfo(info uint) {
-	valptr := &t.native.info
-	*valptr = C.guint(info)
-}
-
 // TearoffMenuItemClass wraps GtkTearoffMenuItemClass
 type TearoffMenuItemClass struct {
 	*tearoffMenuItemClass
@@ -153029,24 +152473,6 @@ func UnsafeTextAppearanceToGlibFull(t *TextAppearance) unsafe.Pointer {
 	t.native = nil // TextAppearance is invalid from here on
 	return _p
 }
-// rise wraps rise
-//
-// Super/subscript rise, can be negative.
-func (t *TextAppearance) Rise() int {
-	valptr := &t.native.rise
-	var _v int
-	_v = int(*valptr)
-	return _v
-}
-
-// rise wraps rise
-//
-// Super/subscript rise, can be negative.
-func (t *TextAppearance) SetRise(rise int) {
-	valptr := &t.native.rise
-	*valptr = C.gint(rise)
-}
-
 // TextAttributes wraps GtkTextAttributes
 //
 // Using #GtkTextAttributes directly should rarely be necessary.
@@ -153148,152 +152574,6 @@ func NewTextAttributes() *TextAttributes {
 	goret = UnsafeTextAttributesFromGlibFull(unsafe.Pointer(cret))
 
 	return goret
-}
-
-// font_scale wraps font_scale
-//
-// Font scale factor.
-func (t *TextAttributes) FontScale() float64 {
-	valptr := &t.native.font_scale
-	var _v float64
-	_v = float64(*valptr)
-	return _v
-}
-
-// left_margin wraps left_margin
-//
-// Width of the left margin in pixels.
-func (t *TextAttributes) LeftMargin() int {
-	valptr := &t.native.left_margin
-	var _v int
-	_v = int(*valptr)
-	return _v
-}
-
-// right_margin wraps right_margin
-//
-// Width of the right margin in pixels.
-func (t *TextAttributes) RightMargin() int {
-	valptr := &t.native.right_margin
-	var _v int
-	_v = int(*valptr)
-	return _v
-}
-
-// indent wraps indent
-//
-// Amount to indent the paragraph, in pixels.
-func (t *TextAttributes) Indent() int {
-	valptr := &t.native.indent
-	var _v int
-	_v = int(*valptr)
-	return _v
-}
-
-// pixels_above_lines wraps pixels_above_lines
-//
-// Pixels of blank space above paragraphs.
-func (t *TextAttributes) PixelsAboveLines() int {
-	valptr := &t.native.pixels_above_lines
-	var _v int
-	_v = int(*valptr)
-	return _v
-}
-
-// pixels_below_lines wraps pixels_below_lines
-//
-// Pixels of blank space below paragraphs.
-func (t *TextAttributes) PixelsBelowLines() int {
-	valptr := &t.native.pixels_below_lines
-	var _v int
-	_v = int(*valptr)
-	return _v
-}
-
-// pixels_inside_wrap wraps pixels_inside_wrap
-//
-// Pixels of blank space between wrapped lines in
-//   a paragraph.
-func (t *TextAttributes) PixelsInsideWrap() int {
-	valptr := &t.native.pixels_inside_wrap
-	var _v int
-	_v = int(*valptr)
-	return _v
-}
-
-// letter_spacing wraps letter_spacing
-//
-// Extra space to insert between graphemes, in Pango units
-func (t *TextAttributes) LetterSpacing() int {
-	valptr := &t.native.letter_spacing
-	var _v int
-	_v = int(*valptr)
-	return _v
-}
-
-// font_scale wraps font_scale
-//
-// Font scale factor.
-func (t *TextAttributes) SetFontScale(font_scale float64) {
-	valptr := &t.native.font_scale
-	*valptr = C.gdouble(font_scale)
-}
-
-// left_margin wraps left_margin
-//
-// Width of the left margin in pixels.
-func (t *TextAttributes) SetLeftMargin(left_margin int) {
-	valptr := &t.native.left_margin
-	*valptr = C.gint(left_margin)
-}
-
-// right_margin wraps right_margin
-//
-// Width of the right margin in pixels.
-func (t *TextAttributes) SetRightMargin(right_margin int) {
-	valptr := &t.native.right_margin
-	*valptr = C.gint(right_margin)
-}
-
-// indent wraps indent
-//
-// Amount to indent the paragraph, in pixels.
-func (t *TextAttributes) SetIndent(indent int) {
-	valptr := &t.native.indent
-	*valptr = C.gint(indent)
-}
-
-// pixels_above_lines wraps pixels_above_lines
-//
-// Pixels of blank space above paragraphs.
-func (t *TextAttributes) SetPixelsAboveLines(pixels_above_lines int) {
-	valptr := &t.native.pixels_above_lines
-	*valptr = C.gint(pixels_above_lines)
-}
-
-// pixels_below_lines wraps pixels_below_lines
-//
-// Pixels of blank space below paragraphs.
-func (t *TextAttributes) SetPixelsBelowLines(pixels_below_lines int) {
-	valptr := &t.native.pixels_below_lines
-	*valptr = C.gint(pixels_below_lines)
-}
-
-// pixels_inside_wrap wraps pixels_inside_wrap
-//
-// Pixels of blank space between wrapped lines in
-//   a paragraph.
-func (t *TextAttributes) SetPixelsInsideWrap(pixels_inside_wrap int) {
-	valptr := &t.native.pixels_inside_wrap
-	*valptr = C.gint(pixels_inside_wrap)
-}
-
-// letter_spacing wraps letter_spacing
-//
-// Extra space to insert between graphemes, in Pango units
-func (t *TextAttributes) SetLetterSpacing(letter_spacing int) {
-	valptr := &t.native.letter_spacing
-	*valptr = C.gint(letter_spacing)
 }
 
 // Copy wraps gtk_text_attributes_copy
@@ -157607,24 +156887,6 @@ func UnsafeTreeIterToGlibFull(t *TreeIter) unsafe.Pointer {
 	t.native = nil // TreeIter is invalid from here on
 	return _p
 }
-// stamp wraps stamp
-//
-// a unique stamp to catch invalid iterators
-func (t *TreeIter) Stamp() int {
-	valptr := &t.native.stamp
-	var _v int
-	_v = int(*valptr)
-	return _v
-}
-
-// stamp wraps stamp
-//
-// a unique stamp to catch invalid iterators
-func (t *TreeIter) SetStamp(stamp int) {
-	valptr := &t.native.stamp
-	*valptr = C.gint(stamp)
-}
-
 // Copy wraps gtk_tree_iter_copy
 // The function returns the following values:
 // 
@@ -159607,18 +158869,6 @@ func UnsafeWidgetClassToGlibFull(w *WidgetClass) unsafe.Pointer {
 	w.native = nil // WidgetClass is invalid from here on
 	return _p
 }
-// activate_signal wraps activate_signal
-//
-// The signal to emit when a widget of this class is
-//   activated, gtk_widget_activate() handles the emission.
-//   Implementation of this signal is optional.
-func (w *WidgetClass) ActivateSignal() uint {
-	valptr := &w.native.activate_signal
-	var _v uint
-	_v = uint(*valptr)
-	return _v
-}
-
 // BindTemplateChildFull wraps gtk_widget_class_bind_template_child_full
 // 
 // The function takes the following parameters:

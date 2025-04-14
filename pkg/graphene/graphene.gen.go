@@ -4806,42 +4806,6 @@ func PointAlloc() *Point {
 	return goret
 }
 
-// x wraps x
-//
-// the X coordinate of the point
-func (p *Point) X() float32 {
-	valptr := &p.native.x
-	var _v float32
-	_v = float32(*valptr)
-	return _v
-}
-
-// y wraps y
-//
-// the Y coordinate of the point
-func (p *Point) Y() float32 {
-	valptr := &p.native.y
-	var _v float32
-	_v = float32(*valptr)
-	return _v
-}
-
-// x wraps x
-//
-// the X coordinate of the point
-func (p *Point) SetX(x float32) {
-	valptr := &p.native.x
-	*valptr = C.gfloat(x)
-}
-
-// y wraps y
-//
-// the Y coordinate of the point
-func (p *Point) SetY(y float32) {
-	valptr := &p.native.y
-	*valptr = C.gfloat(y)
-}
-
 // Distance wraps graphene_point_distance
 // 
 // The function takes the following parameters:
@@ -5199,60 +5163,6 @@ func Point3DAlloc() *Point3D {
 	goret = UnsafePoint3DFromGlibFull(unsafe.Pointer(cret))
 
 	return goret
-}
-
-// x wraps x
-//
-// the X coordinate
-func (p *Point3D) X() float32 {
-	valptr := &p.native.x
-	var _v float32
-	_v = float32(*valptr)
-	return _v
-}
-
-// y wraps y
-//
-// the Y coordinate
-func (p *Point3D) Y() float32 {
-	valptr := &p.native.y
-	var _v float32
-	_v = float32(*valptr)
-	return _v
-}
-
-// z wraps z
-//
-// the Z coordinate
-func (p *Point3D) Z() float32 {
-	valptr := &p.native.z
-	var _v float32
-	_v = float32(*valptr)
-	return _v
-}
-
-// x wraps x
-//
-// the X coordinate
-func (p *Point3D) SetX(x float32) {
-	valptr := &p.native.x
-	*valptr = C.gfloat(x)
-}
-
-// y wraps y
-//
-// the Y coordinate
-func (p *Point3D) SetY(y float32) {
-	valptr := &p.native.y
-	*valptr = C.gfloat(y)
-}
-
-// z wraps z
-//
-// the Z coordinate
-func (p *Point3D) SetZ(z float32) {
-	valptr := &p.native.z
-	*valptr = C.gfloat(z)
 }
 
 // Cross wraps graphene_point3d_cross
@@ -8635,42 +8545,6 @@ func SizeAlloc() *Size {
 	goret = UnsafeSizeFromGlibFull(unsafe.Pointer(cret))
 
 	return goret
-}
-
-// width wraps width
-//
-// the width
-func (s *Size) Width() float32 {
-	valptr := &s.native.width
-	var _v float32
-	_v = float32(*valptr)
-	return _v
-}
-
-// height wraps height
-//
-// the height
-func (s *Size) Height() float32 {
-	valptr := &s.native.height
-	var _v float32
-	_v = float32(*valptr)
-	return _v
-}
-
-// width wraps width
-//
-// the width
-func (s *Size) SetWidth(width float32) {
-	valptr := &s.native.width
-	*valptr = C.gfloat(width)
-}
-
-// height wraps height
-//
-// the height
-func (s *Size) SetHeight(height float32) {
-	valptr := &s.native.height
-	*valptr = C.gfloat(height)
 }
 
 // Equal wraps graphene_size_equal

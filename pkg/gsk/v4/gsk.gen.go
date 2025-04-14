@@ -1780,24 +1780,6 @@ func UnsafeColorStopToGlibFull(c *ColorStop) unsafe.Pointer {
 	c.native = nil // ColorStop is invalid from here on
 	return _p
 }
-// offset wraps offset
-//
-// the offset of the color stop
-func (c *ColorStop) Offset() float32 {
-	valptr := &c.native.offset
-	var _v float32
-	_v = float32(*valptr)
-	return _v
-}
-
-// offset wraps offset
-//
-// the offset of the color stop
-func (c *ColorStop) SetOffset(offset float32) {
-	valptr := &c.native.offset
-	*valptr = C.gfloat(offset)
-}
-
 // GLRendererClass wraps GskGLRendererClass
 type GLRendererClass struct {
 	*glRendererClass
@@ -1980,96 +1962,6 @@ func UnsafeParseLocationToGlibFull(p *ParseLocation) unsafe.Pointer {
 	p.native = nil // ParseLocation is invalid from here on
 	return _p
 }
-// bytes wraps bytes
-//
-// the offset of the location in the parse buffer, as bytes
-func (p *ParseLocation) Bytes() uint {
-	valptr := &p.native.bytes
-	var _v uint
-	_v = uint(*valptr)
-	return _v
-}
-
-// chars wraps chars
-//
-// the offset of the location in the parse buffer, as characters
-func (p *ParseLocation) Chars() uint {
-	valptr := &p.native.chars
-	var _v uint
-	_v = uint(*valptr)
-	return _v
-}
-
-// lines wraps lines
-//
-// the line of the location in the parse buffer
-func (p *ParseLocation) Lines() uint {
-	valptr := &p.native.lines
-	var _v uint
-	_v = uint(*valptr)
-	return _v
-}
-
-// line_bytes wraps line_bytes
-//
-// the position in the line, as bytes
-func (p *ParseLocation) LineBytes() uint {
-	valptr := &p.native.line_bytes
-	var _v uint
-	_v = uint(*valptr)
-	return _v
-}
-
-// line_chars wraps line_chars
-//
-// the position in the line, as characters
-func (p *ParseLocation) LineChars() uint {
-	valptr := &p.native.line_chars
-	var _v uint
-	_v = uint(*valptr)
-	return _v
-}
-
-// bytes wraps bytes
-//
-// the offset of the location in the parse buffer, as bytes
-func (p *ParseLocation) SetBytes(bytes uint) {
-	valptr := &p.native.bytes
-	*valptr = C.gsize(bytes)
-}
-
-// chars wraps chars
-//
-// the offset of the location in the parse buffer, as characters
-func (p *ParseLocation) SetChars(chars uint) {
-	valptr := &p.native.chars
-	*valptr = C.gsize(chars)
-}
-
-// lines wraps lines
-//
-// the line of the location in the parse buffer
-func (p *ParseLocation) SetLines(lines uint) {
-	valptr := &p.native.lines
-	*valptr = C.gsize(lines)
-}
-
-// line_bytes wraps line_bytes
-//
-// the position in the line, as bytes
-func (p *ParseLocation) SetLineBytes(line_bytes uint) {
-	valptr := &p.native.line_bytes
-	*valptr = C.gsize(line_bytes)
-}
-
-// line_chars wraps line_chars
-//
-// the position in the line, as characters
-func (p *ParseLocation) SetLineChars(line_chars uint) {
-	valptr := &p.native.line_chars
-	*valptr = C.gsize(line_chars)
-}
-
 // Path wraps GskPath
 //
 // A `GskPath` describes lines and curves that are more complex
@@ -4857,60 +4749,6 @@ func UnsafeShadowToGlibFull(s *Shadow) unsafe.Pointer {
 	s.native = nil // Shadow is invalid from here on
 	return _p
 }
-// dx wraps dx
-//
-// the horizontal offset of the shadow
-func (s *Shadow) Dx() float32 {
-	valptr := &s.native.dx
-	var _v float32
-	_v = float32(*valptr)
-	return _v
-}
-
-// dy wraps dy
-//
-// the vertical offset of the shadow
-func (s *Shadow) Dy() float32 {
-	valptr := &s.native.dy
-	var _v float32
-	_v = float32(*valptr)
-	return _v
-}
-
-// radius wraps radius
-//
-// the radius of the shadow
-func (s *Shadow) Radius() float32 {
-	valptr := &s.native.radius
-	var _v float32
-	_v = float32(*valptr)
-	return _v
-}
-
-// dx wraps dx
-//
-// the horizontal offset of the shadow
-func (s *Shadow) SetDx(dx float32) {
-	valptr := &s.native.dx
-	*valptr = C.gfloat(dx)
-}
-
-// dy wraps dy
-//
-// the vertical offset of the shadow
-func (s *Shadow) SetDy(dy float32) {
-	valptr := &s.native.dy
-	*valptr = C.gfloat(dy)
-}
-
-// radius wraps radius
-//
-// the radius of the shadow
-func (s *Shadow) SetRadius(radius float32) {
-	valptr := &s.native.radius
-	*valptr = C.gfloat(radius)
-}
-
 // Stroke wraps GskStroke
 //
 // A `GskStroke` struct collects the parameters that influence

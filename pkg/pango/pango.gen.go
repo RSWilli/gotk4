@@ -11241,78 +11241,6 @@ func UnsafeAnalysisToGlibFull(a *Analysis) unsafe.Pointer {
 	a.native = nil // Analysis is invalid from here on
 	return _p
 }
-// level wraps level
-//
-// the bidirectional level for this segment.
-func (a *Analysis) Level() uint8 {
-	valptr := &a.native.level
-	var _v uint8
-	_v = uint8(*valptr)
-	return _v
-}
-
-// gravity wraps gravity
-//
-// the glyph orientation for this segment (A `PangoGravity`).
-func (a *Analysis) Gravity() uint8 {
-	valptr := &a.native.gravity
-	var _v uint8
-	_v = uint8(*valptr)
-	return _v
-}
-
-// flags wraps flags
-//
-// boolean flags for this segment (Since: 1.16).
-func (a *Analysis) Flags() uint8 {
-	valptr := &a.native.flags
-	var _v uint8
-	_v = uint8(*valptr)
-	return _v
-}
-
-// script wraps script
-//
-// the detected script for this segment (A `PangoScript`) (Since: 1.18).
-func (a *Analysis) Script() uint8 {
-	valptr := &a.native.script
-	var _v uint8
-	_v = uint8(*valptr)
-	return _v
-}
-
-// level wraps level
-//
-// the bidirectional level for this segment.
-func (a *Analysis) SetLevel(level uint8) {
-	valptr := &a.native.level
-	*valptr = C.guint8(level)
-}
-
-// gravity wraps gravity
-//
-// the glyph orientation for this segment (A `PangoGravity`).
-func (a *Analysis) SetGravity(gravity uint8) {
-	valptr := &a.native.gravity
-	*valptr = C.guint8(gravity)
-}
-
-// flags wraps flags
-//
-// boolean flags for this segment (Since: 1.16).
-func (a *Analysis) SetFlags(flags uint8) {
-	valptr := &a.native.flags
-	*valptr = C.guint8(flags)
-}
-
-// script wraps script
-//
-// the detected script for this segment (A `PangoScript`) (Since: 1.18).
-func (a *Analysis) SetScript(script uint8) {
-	valptr := &a.native.script
-	*valptr = C.guint8(script)
-}
-
 // AttrClass wraps PangoAttrClass
 //
 // The `PangoAttrClass` structure stores the type and operations for
@@ -11505,24 +11433,6 @@ func UnsafeAttrFloatToGlibFull(a *AttrFloat) unsafe.Pointer {
 	a.native = nil // AttrFloat is invalid from here on
 	return _p
 }
-// value wraps value
-//
-// the value of the attribute
-func (a *AttrFloat) Value() float64 {
-	valptr := &a.native.value
-	var _v float64
-	_v = float64(*valptr)
-	return _v
-}
-
-// value wraps value
-//
-// the value of the attribute
-func (a *AttrFloat) SetValue(value float64) {
-	valptr := &a.native.value
-	*valptr = C.gdouble(value)
-}
-
 // AttrFontDesc wraps PangoAttrFontDesc
 //
 // The `PangoAttrFontDesc` structure is used to store an attribute that
@@ -11712,24 +11622,6 @@ func UnsafeAttrIntToGlibFull(a *AttrInt) unsafe.Pointer {
 	a.native = nil // AttrInt is invalid from here on
 	return _p
 }
-// value wraps value
-//
-// the value of the attribute
-func (a *AttrInt) Value() int {
-	valptr := &a.native.value
-	var _v int
-	_v = int(*valptr)
-	return _v
-}
-
-// value wraps value
-//
-// the value of the attribute
-func (a *AttrInt) SetValue(value int) {
-	valptr := &a.native.value
-	*valptr = C.gint(value)
-}
-
 // AttrIterator wraps PangoAttrIterator
 //
 // A `PangoAttrIterator` is used to iterate through a `PangoAttrList`.
@@ -12556,26 +12448,6 @@ func UnsafeAttrSizeToGlibFull(a *AttrSize) unsafe.Pointer {
 	a.native = nil // AttrSize is invalid from here on
 	return _p
 }
-// size wraps size
-//
-// size of font, in units of 1/%PANGO_SCALE of a point (for
-//   %PANGO_ATTR_SIZE) or of a device unit (for %PANGO_ATTR_ABSOLUTE_SIZE)
-func (a *AttrSize) Size() int {
-	valptr := &a.native.size
-	var _v int
-	_v = int(*valptr)
-	return _v
-}
-
-// size wraps size
-//
-// size of font, in units of 1/%PANGO_SCALE of a point (for
-//   %PANGO_ATTR_SIZE) or of a device unit (for %PANGO_ATTR_ABSOLUTE_SIZE)
-func (a *AttrSize) SetSize(size int) {
-	valptr := &a.native.size
-	*valptr = C.gint(size)
-}
-
 // AttrString wraps PangoAttrString
 //
 // The `PangoAttrString` structure is used to represent attributes with
@@ -12720,44 +12592,6 @@ func UnsafeAttributeToGlibFull(a *Attribute) unsafe.Pointer {
 	a.native = nil // Attribute is invalid from here on
 	return _p
 }
-// start_index wraps start_index
-//
-// the start index of the range (in bytes).
-func (a *Attribute) StartIndex() uint {
-	valptr := &a.native.start_index
-	var _v uint
-	_v = uint(*valptr)
-	return _v
-}
-
-// end_index wraps end_index
-//
-// end index of the range (in bytes). The character at this index
-//   is not included in the range.
-func (a *Attribute) EndIndex() uint {
-	valptr := &a.native.end_index
-	var _v uint
-	_v = uint(*valptr)
-	return _v
-}
-
-// start_index wraps start_index
-//
-// the start index of the range (in bytes).
-func (a *Attribute) SetStartIndex(start_index uint) {
-	valptr := &a.native.start_index
-	*valptr = C.guint(start_index)
-}
-
-// end_index wraps end_index
-//
-// end index of the range (in bytes). The character at this index
-//   is not included in the range.
-func (a *Attribute) SetEndIndex(end_index uint) {
-	valptr := &a.native.end_index
-	*valptr = C.guint(end_index)
-}
-
 // AsColor wraps pango_attribute_as_color
 // The function returns the following values:
 // 
@@ -13129,60 +12963,6 @@ func UnsafeColorToGlibFull(c *Color) unsafe.Pointer {
 	c.native = nil // Color is invalid from here on
 	return _p
 }
-// red wraps red
-//
-// value of red component
-func (c *Color) Red() uint16 {
-	valptr := &c.native.red
-	var _v uint16
-	_v = uint16(*valptr)
-	return _v
-}
-
-// green wraps green
-//
-// value of green component
-func (c *Color) Green() uint16 {
-	valptr := &c.native.green
-	var _v uint16
-	_v = uint16(*valptr)
-	return _v
-}
-
-// blue wraps blue
-//
-// value of blue component
-func (c *Color) Blue() uint16 {
-	valptr := &c.native.blue
-	var _v uint16
-	_v = uint16(*valptr)
-	return _v
-}
-
-// red wraps red
-//
-// value of red component
-func (c *Color) SetRed(red uint16) {
-	valptr := &c.native.red
-	*valptr = C.guint16(red)
-}
-
-// green wraps green
-//
-// value of green component
-func (c *Color) SetGreen(green uint16) {
-	valptr := &c.native.green
-	*valptr = C.guint16(green)
-}
-
-// blue wraps blue
-//
-// value of blue component
-func (c *Color) SetBlue(blue uint16) {
-	valptr := &c.native.blue
-	*valptr = C.guint16(blue)
-}
-
 // Copy wraps pango_color_copy
 // The function returns the following values:
 // 
@@ -15331,66 +15111,6 @@ func UnsafeGlyphItemToGlibFull(g *GlyphItem) unsafe.Pointer {
 	g.native = nil // GlyphItem is invalid from here on
 	return _p
 }
-// y_offset wraps y_offset
-//
-// shift of the baseline, relative to the baseline
-//   of the containing line. Positive values shift upwards
-func (g *GlyphItem) YOffset() int {
-	valptr := &g.native.y_offset
-	var _v int
-	_v = int(*valptr)
-	return _v
-}
-
-// start_x_offset wraps start_x_offset
-//
-// horizontal displacement to apply before the
-//   glyph item. Positive values shift right
-func (g *GlyphItem) StartXOffset() int {
-	valptr := &g.native.start_x_offset
-	var _v int
-	_v = int(*valptr)
-	return _v
-}
-
-// end_x_offset wraps end_x_offset
-//
-// horizontal displacement to apply after th
-//   glyph item. Positive values shift right
-func (g *GlyphItem) EndXOffset() int {
-	valptr := &g.native.end_x_offset
-	var _v int
-	_v = int(*valptr)
-	return _v
-}
-
-// y_offset wraps y_offset
-//
-// shift of the baseline, relative to the baseline
-//   of the containing line. Positive values shift upwards
-func (g *GlyphItem) SetYOffset(y_offset int) {
-	valptr := &g.native.y_offset
-	*valptr = C.gint(y_offset)
-}
-
-// start_x_offset wraps start_x_offset
-//
-// horizontal displacement to apply before the
-//   glyph item. Positive values shift right
-func (g *GlyphItem) SetStartXOffset(start_x_offset int) {
-	valptr := &g.native.start_x_offset
-	*valptr = C.gint(start_x_offset)
-}
-
-// end_x_offset wraps end_x_offset
-//
-// horizontal displacement to apply after th
-//   glyph item. Positive values shift right
-func (g *GlyphItem) SetEndXOffset(end_x_offset int) {
-	valptr := &g.native.end_x_offset
-	*valptr = C.gint(end_x_offset)
-}
-
 // Copy wraps pango_glyph_item_copy
 // The function returns the following values:
 // 
@@ -15572,90 +15292,6 @@ func UnsafeGlyphItemIterToGlibFull(g *GlyphItemIter) unsafe.Pointer {
 	g.native = nil // GlyphItemIter is invalid from here on
 	return _p
 }
-// start_glyph wraps start_glyph
-func (g *GlyphItemIter) StartGlyph() int {
-	valptr := &g.native.start_glyph
-	var _v int
-	_v = int(*valptr)
-	return _v
-}
-
-// start_index wraps start_index
-func (g *GlyphItemIter) StartIndex() int {
-	valptr := &g.native.start_index
-	var _v int
-	_v = int(*valptr)
-	return _v
-}
-
-// start_char wraps start_char
-func (g *GlyphItemIter) StartChar() int {
-	valptr := &g.native.start_char
-	var _v int
-	_v = int(*valptr)
-	return _v
-}
-
-// end_glyph wraps end_glyph
-func (g *GlyphItemIter) EndGlyph() int {
-	valptr := &g.native.end_glyph
-	var _v int
-	_v = int(*valptr)
-	return _v
-}
-
-// end_index wraps end_index
-func (g *GlyphItemIter) EndIndex() int {
-	valptr := &g.native.end_index
-	var _v int
-	_v = int(*valptr)
-	return _v
-}
-
-// end_char wraps end_char
-func (g *GlyphItemIter) EndChar() int {
-	valptr := &g.native.end_char
-	var _v int
-	_v = int(*valptr)
-	return _v
-}
-
-// start_glyph wraps start_glyph
-func (g *GlyphItemIter) SetStartGlyph(start_glyph int) {
-	valptr := &g.native.start_glyph
-	*valptr = C.gint(start_glyph)
-}
-
-// start_index wraps start_index
-func (g *GlyphItemIter) SetStartIndex(start_index int) {
-	valptr := &g.native.start_index
-	*valptr = C.gint(start_index)
-}
-
-// start_char wraps start_char
-func (g *GlyphItemIter) SetStartChar(start_char int) {
-	valptr := &g.native.start_char
-	*valptr = C.gint(start_char)
-}
-
-// end_glyph wraps end_glyph
-func (g *GlyphItemIter) SetEndGlyph(end_glyph int) {
-	valptr := &g.native.end_glyph
-	*valptr = C.gint(end_glyph)
-}
-
-// end_index wraps end_index
-func (g *GlyphItemIter) SetEndIndex(end_index int) {
-	valptr := &g.native.end_index
-	*valptr = C.gint(end_index)
-}
-
-// end_char wraps end_char
-func (g *GlyphItemIter) SetEndChar(end_char int) {
-	valptr := &g.native.end_char
-	*valptr = C.gint(end_char)
-}
-
 // Copy wraps pango_glyph_item_iter_copy
 // The function returns the following values:
 // 
@@ -15903,24 +15539,6 @@ func NewGlyphString() *GlyphString {
 	goret = UnsafeGlyphStringFromGlibFull(unsafe.Pointer(cret))
 
 	return goret
-}
-
-// num_glyphs wraps num_glyphs
-//
-// number of glyphs in this glyph string
-func (g *GlyphString) NumGlyphs() int {
-	valptr := &g.native.num_glyphs
-	var _v int
-	_v = int(*valptr)
-	return _v
-}
-
-// num_glyphs wraps num_glyphs
-//
-// number of glyphs in this glyph string
-func (g *GlyphString) SetNumGlyphs(num_glyphs int) {
-	valptr := &g.native.num_glyphs
-	*valptr = C.gint(num_glyphs)
 }
 
 // Copy wraps pango_glyph_string_copy
@@ -16428,60 +16046,6 @@ func NewItem() *Item {
 	goret = UnsafeItemFromGlibFull(unsafe.Pointer(cret))
 
 	return goret
-}
-
-// offset wraps offset
-//
-// byte offset of the start of this item in text.
-func (i *Item) Offset() int {
-	valptr := &i.native.offset
-	var _v int
-	_v = int(*valptr)
-	return _v
-}
-
-// length wraps length
-//
-// length of this item in bytes.
-func (i *Item) Length() int {
-	valptr := &i.native.length
-	var _v int
-	_v = int(*valptr)
-	return _v
-}
-
-// num_chars wraps num_chars
-//
-// number of Unicode characters in the item.
-func (i *Item) NumChars() int {
-	valptr := &i.native.num_chars
-	var _v int
-	_v = int(*valptr)
-	return _v
-}
-
-// offset wraps offset
-//
-// byte offset of the start of this item in text.
-func (i *Item) SetOffset(offset int) {
-	valptr := &i.native.offset
-	*valptr = C.gint(offset)
-}
-
-// length wraps length
-//
-// length of this item in bytes.
-func (i *Item) SetLength(length int) {
-	valptr := &i.native.length
-	*valptr = C.gint(length)
-}
-
-// num_chars wraps num_chars
-//
-// number of Unicode characters in the item.
-func (i *Item) SetNumChars(num_chars int) {
-	valptr := &i.native.num_chars
-	*valptr = C.gint(num_chars)
 }
 
 // ApplyAttrs wraps pango_item_apply_attrs
@@ -17674,42 +17238,6 @@ func UnsafeLayoutLineToGlibFull(l *LayoutLine) unsafe.Pointer {
 	l.native = nil // LayoutLine is invalid from here on
 	return _p
 }
-// start_index wraps start_index
-//
-// start of line as byte index into layout-&gt;text
-func (l *LayoutLine) StartIndex() int {
-	valptr := &l.native.start_index
-	var _v int
-	_v = int(*valptr)
-	return _v
-}
-
-// length wraps length
-//
-// length of line in bytes
-func (l *LayoutLine) Length() int {
-	valptr := &l.native.length
-	var _v int
-	_v = int(*valptr)
-	return _v
-}
-
-// start_index wraps start_index
-//
-// start of line as byte index into layout-&gt;text
-func (l *LayoutLine) SetStartIndex(start_index int) {
-	valptr := &l.native.start_index
-	*valptr = C.gint(start_index)
-}
-
-// length wraps length
-//
-// length of line in bytes
-func (l *LayoutLine) SetLength(length int) {
-	valptr := &l.native.length
-	*valptr = C.gint(length)
-}
-
 // GetExtents wraps pango_layout_line_get_extents
 // The function returns the following values:
 // 
@@ -18137,114 +17665,6 @@ func UnsafeMatrixToGlibFull(m *Matrix) unsafe.Pointer {
 	m.native = nil // Matrix is invalid from here on
 	return _p
 }
-// xx wraps xx
-//
-// 1st component of the transformation matrix
-func (m *Matrix) XX() float64 {
-	valptr := &m.native.xx
-	var _v float64
-	_v = float64(*valptr)
-	return _v
-}
-
-// xy wraps xy
-//
-// 2nd component of the transformation matrix
-func (m *Matrix) XY() float64 {
-	valptr := &m.native.xy
-	var _v float64
-	_v = float64(*valptr)
-	return _v
-}
-
-// yx wraps yx
-//
-// 3rd component of the transformation matrix
-func (m *Matrix) YX() float64 {
-	valptr := &m.native.yx
-	var _v float64
-	_v = float64(*valptr)
-	return _v
-}
-
-// yy wraps yy
-//
-// 4th component of the transformation matrix
-func (m *Matrix) YY() float64 {
-	valptr := &m.native.yy
-	var _v float64
-	_v = float64(*valptr)
-	return _v
-}
-
-// x0 wraps x0
-//
-// x translation
-func (m *Matrix) X0() float64 {
-	valptr := &m.native.x0
-	var _v float64
-	_v = float64(*valptr)
-	return _v
-}
-
-// y0 wraps y0
-//
-// y translation
-func (m *Matrix) Y0() float64 {
-	valptr := &m.native.y0
-	var _v float64
-	_v = float64(*valptr)
-	return _v
-}
-
-// xx wraps xx
-//
-// 1st component of the transformation matrix
-func (m *Matrix) SetXX(xx float64) {
-	valptr := &m.native.xx
-	*valptr = C.gdouble(xx)
-}
-
-// xy wraps xy
-//
-// 2nd component of the transformation matrix
-func (m *Matrix) SetXY(xy float64) {
-	valptr := &m.native.xy
-	*valptr = C.gdouble(xy)
-}
-
-// yx wraps yx
-//
-// 3rd component of the transformation matrix
-func (m *Matrix) SetYX(yx float64) {
-	valptr := &m.native.yx
-	*valptr = C.gdouble(yx)
-}
-
-// yy wraps yy
-//
-// 4th component of the transformation matrix
-func (m *Matrix) SetYY(yy float64) {
-	valptr := &m.native.yy
-	*valptr = C.gdouble(yy)
-}
-
-// x0 wraps x0
-//
-// x translation
-func (m *Matrix) SetX0(x0 float64) {
-	valptr := &m.native.x0
-	*valptr = C.gdouble(x0)
-}
-
-// y0 wraps y0
-//
-// y translation
-func (m *Matrix) SetY0(y0 float64) {
-	valptr := &m.native.y0
-	*valptr = C.gdouble(y0)
-}
-
 // Concat wraps pango_matrix_concat
 // 
 // The function takes the following parameters:
@@ -18513,78 +17933,6 @@ func UnsafeRectangleToGlibFull(r *Rectangle) unsafe.Pointer {
 	r.native = nil // Rectangle is invalid from here on
 	return _p
 }
-// x wraps x
-//
-// X coordinate of the left side of the rectangle.
-func (r *Rectangle) X() int {
-	valptr := &r.native.x
-	var _v int
-	_v = int(*valptr)
-	return _v
-}
-
-// y wraps y
-//
-// Y coordinate of the the top side of the rectangle.
-func (r *Rectangle) Y() int {
-	valptr := &r.native.y
-	var _v int
-	_v = int(*valptr)
-	return _v
-}
-
-// width wraps width
-//
-// width of the rectangle.
-func (r *Rectangle) Width() int {
-	valptr := &r.native.width
-	var _v int
-	_v = int(*valptr)
-	return _v
-}
-
-// height wraps height
-//
-// height of the rectangle.
-func (r *Rectangle) Height() int {
-	valptr := &r.native.height
-	var _v int
-	_v = int(*valptr)
-	return _v
-}
-
-// x wraps x
-//
-// X coordinate of the left side of the rectangle.
-func (r *Rectangle) SetX(x int) {
-	valptr := &r.native.x
-	*valptr = C.gint(x)
-}
-
-// y wraps y
-//
-// Y coordinate of the the top side of the rectangle.
-func (r *Rectangle) SetY(y int) {
-	valptr := &r.native.y
-	*valptr = C.gint(y)
-}
-
-// width wraps width
-//
-// width of the rectangle.
-func (r *Rectangle) SetWidth(width int) {
-	valptr := &r.native.width
-	*valptr = C.gint(width)
-}
-
-// height wraps height
-//
-// height of the rectangle.
-func (r *Rectangle) SetHeight(height int) {
-	valptr := &r.native.height
-	*valptr = C.gint(height)
-}
-
 // RendererClass wraps PangoRendererClass
 //
 // Class structure for `PangoRenderer`.

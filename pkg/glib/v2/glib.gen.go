@@ -14811,24 +14811,6 @@ func UnsafeByteArrayToGlibFull(b *ByteArray) unsafe.Pointer {
 	b.native = nil // ByteArray is invalid from here on
 	return _p
 }
-// len wraps len
-//
-// the number of elements in the #GByteArray
-func (b *ByteArray) Len() uint {
-	valptr := &b.native.len
-	var _v uint
-	_v = uint(*valptr)
-	return _v
-}
-
-// len wraps len
-//
-// the number of elements in the #GByteArray
-func (b *ByteArray) SetLen(len uint) {
-	valptr := &b.native.len
-	*valptr = C.guint(len)
-}
-
 // Bytes wraps GBytes
 //
 // A simple refcounted data type representing an immutable sequence of zero or
@@ -16795,24 +16777,6 @@ func UnsafeDebugKeyToGlibFull(d *DebugKey) unsafe.Pointer {
 	d.native = nil // DebugKey is invalid from here on
 	return _p
 }
-// value wraps value
-//
-// the flag
-func (d *DebugKey) Value() uint {
-	valptr := &d.native.value
-	var _v uint
-	_v = uint(*valptr)
-	return _v
-}
-
-// value wraps value
-//
-// the flag
-func (d *DebugKey) SetValue(value uint) {
-	valptr := &d.native.value
-	*valptr = C.guint(value)
-}
-
 // Dir wraps GDir
 //
 // An opaque structure representing an opened directory.
@@ -23446,48 +23410,6 @@ func UnsafeOptionEntryToGlibFull(o *OptionEntry) unsafe.Pointer {
 	o.native = nil // OptionEntry is invalid from here on
 	return _p
 }
-// short_name wraps short_name
-//
-// If an option has a short name, it can be specified
-//     `-short_name` in a commandline. @short_name must be  a printable
-//     ASCII character different from '-', or zero if the option has no
-//     short name.
-func (o *OptionEntry) ShortName() byte {
-	valptr := &o.native.short_name
-	var _v byte
-	_v = byte(*valptr)
-	return _v
-}
-
-// flags wraps flags
-//
-// Flags from #GOptionFlags
-func (o *OptionEntry) Flags() int {
-	valptr := &o.native.flags
-	var _v int
-	_v = int(*valptr)
-	return _v
-}
-
-// short_name wraps short_name
-//
-// If an option has a short name, it can be specified
-//     `-short_name` in a commandline. @short_name must be  a printable
-//     ASCII character different from '-', or zero if the option has no
-//     short name.
-func (o *OptionEntry) SetShortName(short_name byte) {
-	valptr := &o.native.short_name
-	*valptr = C.char(short_name)
-}
-
-// flags wraps flags
-//
-// Flags from #GOptionFlags
-func (o *OptionEntry) SetFlags(flags int) {
-	valptr := &o.native.flags
-	*valptr = C.gint(flags)
-}
-
 // OptionGroup wraps GOptionGroup
 //
 // A `GOptionGroup` struct defines the options in a single
@@ -24378,68 +24300,6 @@ func UnsafePollFDToGlibFull(p *PollFD) unsafe.Pointer {
 	p.native = nil // PollFD is invalid from here on
 	return _p
 }
-// fd wraps fd
-//
-// the file descriptor to poll (or a HANDLE on Win32)
-func (p *PollFD) Fd() int {
-	valptr := &p.native.fd
-	var _v int
-	_v = int(*valptr)
-	return _v
-}
-
-// events wraps events
-//
-// a bitwise combination from #GIOCondition, specifying which
-//     events should be polled for. Typically for reading from a file
-//     descriptor you would use %G_IO_IN | %G_IO_HUP | %G_IO_ERR, and
-//     for writing you would use %G_IO_OUT | %G_IO_ERR.
-func (p *PollFD) Events() uint16 {
-	valptr := &p.native.events
-	var _v uint16
-	_v = uint16(*valptr)
-	return _v
-}
-
-// revents wraps revents
-//
-// a bitwise combination of flags from #GIOCondition, returned
-//     from the poll() function to indicate which events occurred.
-func (p *PollFD) Revents() uint16 {
-	valptr := &p.native.revents
-	var _v uint16
-	_v = uint16(*valptr)
-	return _v
-}
-
-// fd wraps fd
-//
-// the file descriptor to poll (or a HANDLE on Win32)
-func (p *PollFD) SetFd(fd int) {
-	valptr := &p.native.fd
-	*valptr = C.gint(fd)
-}
-
-// events wraps events
-//
-// a bitwise combination from #GIOCondition, specifying which
-//     events should be polled for. Typically for reading from a file
-//     descriptor you would use %G_IO_IN | %G_IO_HUP | %G_IO_ERR, and
-//     for writing you would use %G_IO_OUT | %G_IO_ERR.
-func (p *PollFD) SetEvents(events uint16) {
-	valptr := &p.native.events
-	*valptr = C.gushort(events)
-}
-
-// revents wraps revents
-//
-// a bitwise combination of flags from #GIOCondition, returned
-//     from the poll() function to indicate which events occurred.
-func (p *PollFD) SetRevents(revents uint16) {
-	valptr := &p.native.revents
-	*valptr = C.gushort(revents)
-}
-
 // Queue wraps GQueue
 //
 // Contains the public fields of a
@@ -24503,24 +24363,6 @@ func UnsafeQueueToGlibFull(q *Queue) unsafe.Pointer {
 	q.native = nil // Queue is invalid from here on
 	return _p
 }
-// length wraps length
-//
-// the number of elements in the queue
-func (q *Queue) Length() uint {
-	valptr := &q.native.length
-	var _v uint
-	_v = uint(*valptr)
-	return _v
-}
-
-// length wraps length
-//
-// the number of elements in the queue
-func (q *Queue) SetLength(length uint) {
-	valptr := &q.native.length
-	*valptr = C.guint(length)
-}
-
 // Clear wraps g_queue_clear
 //
 // Removes all the elements in @queue. If queue elements contain
@@ -26375,114 +26217,6 @@ func UnsafeScannerToGlibFull(s *Scanner) unsafe.Pointer {
 	s.native = nil // Scanner is invalid from here on
 	return _p
 }
-// max_parse_errors wraps max_parse_errors
-//
-// unused
-func (s *Scanner) MaxParseErrors() uint {
-	valptr := &s.native.max_parse_errors
-	var _v uint
-	_v = uint(*valptr)
-	return _v
-}
-
-// parse_errors wraps parse_errors
-//
-// g_scanner_error() increments this field
-func (s *Scanner) ParseErrors() uint {
-	valptr := &s.native.parse_errors
-	var _v uint
-	_v = uint(*valptr)
-	return _v
-}
-
-// line wraps line
-//
-// line number of the last token from g_scanner_get_next_token()
-func (s *Scanner) Line() uint {
-	valptr := &s.native.line
-	var _v uint
-	_v = uint(*valptr)
-	return _v
-}
-
-// position wraps position
-//
-// char number of the last token from g_scanner_get_next_token()
-func (s *Scanner) Position() uint {
-	valptr := &s.native.position
-	var _v uint
-	_v = uint(*valptr)
-	return _v
-}
-
-// next_line wraps next_line
-//
-// line number of the last token from g_scanner_peek_next_token()
-func (s *Scanner) NextLine() uint {
-	valptr := &s.native.next_line
-	var _v uint
-	_v = uint(*valptr)
-	return _v
-}
-
-// next_position wraps next_position
-//
-// char number of the last token from g_scanner_peek_next_token()
-func (s *Scanner) NextPosition() uint {
-	valptr := &s.native.next_position
-	var _v uint
-	_v = uint(*valptr)
-	return _v
-}
-
-// max_parse_errors wraps max_parse_errors
-//
-// unused
-func (s *Scanner) SetMaxParseErrors(max_parse_errors uint) {
-	valptr := &s.native.max_parse_errors
-	*valptr = C.guint(max_parse_errors)
-}
-
-// parse_errors wraps parse_errors
-//
-// g_scanner_error() increments this field
-func (s *Scanner) SetParseErrors(parse_errors uint) {
-	valptr := &s.native.parse_errors
-	*valptr = C.guint(parse_errors)
-}
-
-// line wraps line
-//
-// line number of the last token from g_scanner_get_next_token()
-func (s *Scanner) SetLine(line uint) {
-	valptr := &s.native.line
-	*valptr = C.guint(line)
-}
-
-// position wraps position
-//
-// char number of the last token from g_scanner_get_next_token()
-func (s *Scanner) SetPosition(position uint) {
-	valptr := &s.native.position
-	*valptr = C.guint(position)
-}
-
-// next_line wraps next_line
-//
-// line number of the last token from g_scanner_peek_next_token()
-func (s *Scanner) SetNextLine(next_line uint) {
-	valptr := &s.native.next_line
-	*valptr = C.guint(next_line)
-}
-
-// next_position wraps next_position
-//
-// char number of the last token from g_scanner_peek_next_token()
-func (s *Scanner) SetNextPosition(next_position uint) {
-	valptr := &s.native.next_position
-	*valptr = C.guint(next_position)
-}
-
 // CurLine wraps g_scanner_cur_line
 // The function returns the following values:
 // 

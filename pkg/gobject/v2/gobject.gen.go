@@ -3757,60 +3757,6 @@ func UnsafeEnumClassToGlibFull(e *EnumClass) unsafe.Pointer {
 	e.native = nil // EnumClass is invalid from here on
 	return _p
 }
-// minimum wraps minimum
-//
-// the smallest possible value.
-func (e *EnumClass) Minimum() int {
-	valptr := &e.native.minimum
-	var _v int
-	_v = int(*valptr)
-	return _v
-}
-
-// maximum wraps maximum
-//
-// the largest possible value.
-func (e *EnumClass) Maximum() int {
-	valptr := &e.native.maximum
-	var _v int
-	_v = int(*valptr)
-	return _v
-}
-
-// n_values wraps n_values
-//
-// the number of possible values.
-func (e *EnumClass) NValues() uint {
-	valptr := &e.native.n_values
-	var _v uint
-	_v = uint(*valptr)
-	return _v
-}
-
-// minimum wraps minimum
-//
-// the smallest possible value.
-func (e *EnumClass) SetMinimum(minimum int) {
-	valptr := &e.native.minimum
-	*valptr = C.gint(minimum)
-}
-
-// maximum wraps maximum
-//
-// the largest possible value.
-func (e *EnumClass) SetMaximum(maximum int) {
-	valptr := &e.native.maximum
-	*valptr = C.gint(maximum)
-}
-
-// n_values wraps n_values
-//
-// the number of possible values.
-func (e *EnumClass) SetNValues(n_values uint) {
-	valptr := &e.native.n_values
-	*valptr = C.guint(n_values)
-}
-
 // EnumValue wraps GEnumValue
 //
 // A structure which contains a single enum value, its name, and its
@@ -3874,24 +3820,6 @@ func UnsafeEnumValueToGlibFull(e *EnumValue) unsafe.Pointer {
 	e.native = nil // EnumValue is invalid from here on
 	return _p
 }
-// value wraps value
-//
-// the enum value
-func (e *EnumValue) Value() int {
-	valptr := &e.native.value
-	var _v int
-	_v = int(*valptr)
-	return _v
-}
-
-// value wraps value
-//
-// the enum value
-func (e *EnumValue) SetValue(value int) {
-	valptr := &e.native.value
-	*valptr = C.gint(value)
-}
-
 // FlagsClass wraps GFlagsClass
 //
 // The class of a flags type holds information about its
@@ -3955,42 +3883,6 @@ func UnsafeFlagsClassToGlibFull(f *FlagsClass) unsafe.Pointer {
 	f.native = nil // FlagsClass is invalid from here on
 	return _p
 }
-// mask wraps mask
-//
-// a mask covering all possible values.
-func (f *FlagsClass) Mask() uint {
-	valptr := &f.native.mask
-	var _v uint
-	_v = uint(*valptr)
-	return _v
-}
-
-// n_values wraps n_values
-//
-// the number of possible values.
-func (f *FlagsClass) NValues() uint {
-	valptr := &f.native.n_values
-	var _v uint
-	_v = uint(*valptr)
-	return _v
-}
-
-// mask wraps mask
-//
-// a mask covering all possible values.
-func (f *FlagsClass) SetMask(mask uint) {
-	valptr := &f.native.mask
-	*valptr = C.guint(mask)
-}
-
-// n_values wraps n_values
-//
-// the number of possible values.
-func (f *FlagsClass) SetNValues(n_values uint) {
-	valptr := &f.native.n_values
-	*valptr = C.guint(n_values)
-}
-
 // FlagsValue wraps GFlagsValue
 //
 // A structure which contains a single flags value, its name, and its
@@ -4054,24 +3946,6 @@ func UnsafeFlagsValueToGlibFull(f *FlagsValue) unsafe.Pointer {
 	f.native = nil // FlagsValue is invalid from here on
 	return _p
 }
-// value wraps value
-//
-// the flags value
-func (f *FlagsValue) Value() uint {
-	valptr := &f.native.value
-	var _v uint
-	_v = uint(*valptr)
-	return _v
-}
-
-// value wraps value
-//
-// the flags value
-func (f *FlagsValue) SetValue(value uint) {
-	valptr := &f.native.value
-	*valptr = C.guint(value)
-}
-
 // InitiallyUnownedClass wraps GInitiallyUnownedClass
 //
 // The class structure for the GInitiallyUnowned type.
@@ -4459,42 +4333,6 @@ func UnsafeParamSpecTypeInfoToGlibFull(p *ParamSpecTypeInfo) unsafe.Pointer {
 	p.native = nil // ParamSpecTypeInfo is invalid from here on
 	return _p
 }
-// instance_size wraps instance_size
-//
-// Size of the instance (object) structure.
-func (p *ParamSpecTypeInfo) InstanceSize() uint16 {
-	valptr := &p.native.instance_size
-	var _v uint16
-	_v = uint16(*valptr)
-	return _v
-}
-
-// n_preallocs wraps n_preallocs
-//
-// Prior to GLib 2.10, it specified the number of pre-allocated (cached) instances to reserve memory for (0 indicates no caching). Since GLib 2.10, it is ignored, since instances are allocated with the [slice allocator][glib-Memory-Slices] now.
-func (p *ParamSpecTypeInfo) NPreallocs() uint16 {
-	valptr := &p.native.n_preallocs
-	var _v uint16
-	_v = uint16(*valptr)
-	return _v
-}
-
-// instance_size wraps instance_size
-//
-// Size of the instance (object) structure.
-func (p *ParamSpecTypeInfo) SetInstanceSize(instance_size uint16) {
-	valptr := &p.native.instance_size
-	*valptr = C.guint16(instance_size)
-}
-
-// n_preallocs wraps n_preallocs
-//
-// Prior to GLib 2.10, it specified the number of pre-allocated (cached) instances to reserve memory for (0 indicates no caching). Since GLib 2.10, it is ignored, since instances are allocated with the [slice allocator][glib-Memory-Slices] now.
-func (p *ParamSpecTypeInfo) SetNPreallocs(n_preallocs uint16) {
-	valptr := &p.native.n_preallocs
-	*valptr = C.guint16(n_preallocs)
-}
-
 // SignalInvocationHint wraps GSignalInvocationHint
 //
 // The #GSignalInvocationHint structure is used to pass on additional information
@@ -4558,24 +4396,6 @@ func UnsafeSignalInvocationHintToGlibFull(s *SignalInvocationHint) unsafe.Pointe
 	s.native = nil // SignalInvocationHint is invalid from here on
 	return _p
 }
-// signal_id wraps signal_id
-//
-// The signal id of the signal invoking the callback
-func (s *SignalInvocationHint) SignalID() uint {
-	valptr := &s.native.signal_id
-	var _v uint
-	_v = uint(*valptr)
-	return _v
-}
-
-// signal_id wraps signal_id
-//
-// The signal id of the signal invoking the callback
-func (s *SignalInvocationHint) SetSignalID(signal_id uint) {
-	valptr := &s.native.signal_id
-	*valptr = C.guint(signal_id)
-}
-
 // TypeFundamentalInfo wraps GTypeFundamentalInfo
 //
 // A structure that provides information to the type system which is
@@ -4709,78 +4529,6 @@ func UnsafeTypeInfoToGlibFull(t *TypeInfo) unsafe.Pointer {
 	t.native = nil // TypeInfo is invalid from here on
 	return _p
 }
-// class_size wraps class_size
-//
-// Size of the class structure (required for interface, classed and instantiatable types)
-func (t *TypeInfo) ClassSize() uint16 {
-	valptr := &t.native.class_size
-	var _v uint16
-	_v = uint16(*valptr)
-	return _v
-}
-
-// class_data wraps class_data
-//
-// User-supplied data passed to the class init/finalize functions
-func (t *TypeInfo) ClassData() unsafe.Pointer {
-	valptr := &t.native.class_data
-	var _v unsafe.Pointer
-	_v = unsafe.Pointer(*valptr)
-	return _v
-}
-
-// instance_size wraps instance_size
-//
-// Size of the instance (object) structure (required for instantiatable types only)
-func (t *TypeInfo) InstanceSize() uint16 {
-	valptr := &t.native.instance_size
-	var _v uint16
-	_v = uint16(*valptr)
-	return _v
-}
-
-// n_preallocs wraps n_preallocs
-//
-// Prior to GLib 2.10, it specified the number of pre-allocated (cached) instances to reserve memory for (0 indicates no caching). Since GLib 2.10 this field is ignored.
-func (t *TypeInfo) NPreallocs() uint16 {
-	valptr := &t.native.n_preallocs
-	var _v uint16
-	_v = uint16(*valptr)
-	return _v
-}
-
-// class_size wraps class_size
-//
-// Size of the class structure (required for interface, classed and instantiatable types)
-func (t *TypeInfo) SetClassSize(class_size uint16) {
-	valptr := &t.native.class_size
-	*valptr = C.guint16(class_size)
-}
-
-// class_data wraps class_data
-//
-// User-supplied data passed to the class init/finalize functions
-func (t *TypeInfo) SetClassData(class_data unsafe.Pointer) {
-	valptr := &t.native.class_data
-	*valptr = C.gconstpointer(class_data)
-}
-
-// instance_size wraps instance_size
-//
-// Size of the instance (object) structure (required for instantiatable types only)
-func (t *TypeInfo) SetInstanceSize(instance_size uint16) {
-	valptr := &t.native.instance_size
-	*valptr = C.guint16(instance_size)
-}
-
-// n_preallocs wraps n_preallocs
-//
-// Prior to GLib 2.10, it specified the number of pre-allocated (cached) instances to reserve memory for (0 indicates no caching). Since GLib 2.10 this field is ignored.
-func (t *TypeInfo) SetNPreallocs(n_preallocs uint16) {
-	valptr := &t.native.n_preallocs
-	*valptr = C.guint16(n_preallocs)
-}
-
 // TypeInstance wraps GTypeInstance
 //
 // An opaque structure used as the base of all type instances.
