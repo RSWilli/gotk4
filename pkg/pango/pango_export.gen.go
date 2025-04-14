@@ -5,7 +5,7 @@ package pango
 import (
 	"unsafe"
 
-	"github.com/diamondburned/gotk4/pkg/core/gbox"
+	"github.com/diamondburned/gotk4/pkg/core/userdata"
 )
 
 // #include <pango/pango.h>
@@ -15,7 +15,7 @@ import "C"
 func _gotk4_pango1_AttrDataCopyFunc(carg1 C.gconstpointer) (cret C.gpointer) {
 	var fn AttrDataCopyFunc
 	{
-		v := gbox.Get(uintptr(carg1))
+		v := userdata.Load(unsafe.Pointer(carg1))
 		if v == nil {
 			panic(`callback not found`)
 		}
@@ -35,7 +35,7 @@ func _gotk4_pango1_AttrDataCopyFunc(carg1 C.gconstpointer) (cret C.gpointer) {
 func _gotk4_pango1_AttrFilterFunc(carg1 *C.PangoAttribute, carg2 C.gpointer) (cret C.gboolean) {
 	var fn AttrFilterFunc
 	{
-		v := gbox.Get(uintptr(carg2))
+		v := userdata.Load(unsafe.Pointer(carg2))
 		if v == nil {
 			panic(`callback not found`)
 		}
@@ -60,7 +60,7 @@ func _gotk4_pango1_AttrFilterFunc(carg1 *C.PangoAttribute, carg2 C.gpointer) (cr
 func _gotk4_pango1_FontsetForEachFunc(carg1 *C.PangoFontset, carg2 *C.PangoFont, carg3 C.gpointer) (cret C.gboolean) {
 	var fn FontsetForEachFunc
 	{
-		v := gbox.Get(uintptr(carg3))
+		v := userdata.Load(unsafe.Pointer(carg3))
 		if v == nil {
 			panic(`callback not found`)
 		}

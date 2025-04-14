@@ -25,22 +25,23 @@ func (c *GoToCCallbackConverter) Convert(w file.File) {
 	closure := c.Param.Closure
 	destroy := c.Param.Destroy
 
-	w.GoImportCore("gbox")
+	w.GoImportCore("userdata")
 
-	assignFunc := "Assign"
+	assignFunc := "Register"
 
 	if c.Param.Scope == typesystem.CallbackParamScopeAsync {
-		assignFunc = "AssignOnce"
+		assignFunc = "RegisterOnce"
 	}
 
 	fmt.Fprintf(w.Go(), "%s = (*[0]byte)(C.%s)\n", c.Param.CName, cb.TrampolineName)
-	fmt.Fprintf(w.Go(), "%s = %s(gbox.%s(%s))\n", closure.CName, closure.CGoType(), assignFunc, c.Param.GoName)
+	fmt.Fprintf(w.Go(), "%s = %s(userdata.%s(%s))\n", closure.CName, closure.CGoType(), assignFunc, c.Param.GoName)
 
 	switch c.Param.Scope {
 	case typesystem.CallbackParamScopeAsync, typesystem.CallbackParamScopeForever:
 		// nothing
 	case typesystem.CallbackParamScopeCall:
-		fmt.Fprintf(w.Go(), "defer gbox.Delete(uintptr(%s))\n", closure.CName)
+		w.GoImport("unsafe")
+		fmt.Fprintf(w.Go(), "defer userdata.Delete(unsafe.Pointer(%s))\n", closure.CName)
 	case typesystem.CallbackParamScopeNotified:
 		destroyTrampoline := destroy.Type.Type.(*typesystem.Callback).TrampolineName
 		fmt.Fprintf(w.Go(), "%s = (%s)((*[0]byte)(C.%s))\n", destroy.CName, destroy.CGoType(), destroyTrampoline)

@@ -5,7 +5,7 @@ package gio
 import (
 	"unsafe"
 
-	"github.com/diamondburned/gotk4/pkg/core/gbox"
+	"github.com/diamondburned/gotk4/pkg/core/userdata"
 	"github.com/diamondburned/gotk4/pkg/gobject/v2"
 )
 
@@ -16,7 +16,7 @@ import "C"
 func _gotk4_gio2_AsyncReadyCallback(carg1 *C.GObject, carg2 *C.GAsyncResult, carg3 C.gpointer) {
 	var fn AsyncReadyCallback
 	{
-		v := gbox.Get(uintptr(carg3))
+		v := userdata.Load(unsafe.Pointer(carg3))
 		if v == nil {
 			panic(`callback not found`)
 		}
@@ -38,7 +38,7 @@ func _gotk4_gio2_AsyncReadyCallback(carg1 *C.GObject, carg2 *C.GAsyncResult, car
 func _gotk4_gio2_BusAcquiredCallback(carg1 *C.GDBusConnection, carg2 *C.gchar, carg3 C.gpointer) {
 	var fn BusAcquiredCallback
 	{
-		v := gbox.Get(uintptr(carg3))
+		v := userdata.Load(unsafe.Pointer(carg3))
 		if v == nil {
 			panic(`callback not found`)
 		}
@@ -58,7 +58,7 @@ func _gotk4_gio2_BusAcquiredCallback(carg1 *C.GDBusConnection, carg2 *C.gchar, c
 func _gotk4_gio2_BusNameAcquiredCallback(carg1 *C.GDBusConnection, carg2 *C.gchar, carg3 C.gpointer) {
 	var fn BusNameAcquiredCallback
 	{
-		v := gbox.Get(uintptr(carg3))
+		v := userdata.Load(unsafe.Pointer(carg3))
 		if v == nil {
 			panic(`callback not found`)
 		}
@@ -78,7 +78,7 @@ func _gotk4_gio2_BusNameAcquiredCallback(carg1 *C.GDBusConnection, carg2 *C.gcha
 func _gotk4_gio2_BusNameAppearedCallback(carg1 *C.GDBusConnection, carg2 *C.gchar, carg3 *C.gchar, carg4 C.gpointer) {
 	var fn BusNameAppearedCallback
 	{
-		v := gbox.Get(uintptr(carg4))
+		v := userdata.Load(unsafe.Pointer(carg4))
 		if v == nil {
 			panic(`callback not found`)
 		}
@@ -100,7 +100,7 @@ func _gotk4_gio2_BusNameAppearedCallback(carg1 *C.GDBusConnection, carg2 *C.gcha
 func _gotk4_gio2_BusNameLostCallback(carg1 *C.GDBusConnection, carg2 *C.gchar, carg3 C.gpointer) {
 	var fn BusNameLostCallback
 	{
-		v := gbox.Get(uintptr(carg3))
+		v := userdata.Load(unsafe.Pointer(carg3))
 		if v == nil {
 			panic(`callback not found`)
 		}
@@ -120,7 +120,7 @@ func _gotk4_gio2_BusNameLostCallback(carg1 *C.GDBusConnection, carg2 *C.gchar, c
 func _gotk4_gio2_BusNameVanishedCallback(carg1 *C.GDBusConnection, carg2 *C.gchar, carg3 C.gpointer) {
 	var fn BusNameVanishedCallback
 	{
-		v := gbox.Get(uintptr(carg3))
+		v := userdata.Load(unsafe.Pointer(carg3))
 		if v == nil {
 			panic(`callback not found`)
 		}
@@ -140,7 +140,7 @@ func _gotk4_gio2_BusNameVanishedCallback(carg1 *C.GDBusConnection, carg2 *C.gcha
 func _gotk4_gio2_DBusMessageFilterFunction(carg1 *C.GDBusConnection, carg2 *C.GDBusMessage, carg3 C.gboolean, carg4 C.gpointer) (cret *C.GDBusMessage) {
 	var fn DBusMessageFilterFunction
 	{
-		v := gbox.Get(uintptr(carg4))
+		v := userdata.Load(unsafe.Pointer(carg4))
 		if v == nil {
 			panic(`callback not found`)
 		}
@@ -169,7 +169,7 @@ func _gotk4_gio2_DBusMessageFilterFunction(carg1 *C.GDBusConnection, carg2 *C.GD
 func _gotk4_gio2_DBusSubtreeDispatchFunc(carg1 *C.GDBusConnection, carg2 *C.gchar, carg3 *C.gchar, carg4 *C.gchar, carg5 *C.gchar, carg6 *C.gpointer, carg7 C.gpointer) (cret *C.GDBusInterfaceVTable) {
 	var fn DBusSubtreeDispatchFunc
 	{
-		v := gbox.Get(uintptr(carg7))
+		v := userdata.Load(unsafe.Pointer(carg7))
 		if v == nil {
 			panic(`callback not found`)
 		}
@@ -204,7 +204,7 @@ func _gotk4_gio2_DBusSubtreeDispatchFunc(carg1 *C.GDBusConnection, carg2 *C.gcha
 func _gotk4_gio2_DBusSubtreeEnumerateFunc(carg1 *C.GDBusConnection, carg2 *C.gchar, carg3 *C.gchar, carg4 C.gpointer) (cret **C.gchar) {
 	var fn DBusSubtreeEnumerateFunc
 	{
-		v := gbox.Get(uintptr(carg4))
+		v := userdata.Load(unsafe.Pointer(carg4))
 		if v == nil {
 			panic(`callback not found`)
 		}
@@ -233,7 +233,7 @@ func _gotk4_gio2_DBusSubtreeEnumerateFunc(carg1 *C.GDBusConnection, carg2 *C.gch
 func _gotk4_gio2_DBusSubtreeIntrospectFunc(carg1 *C.GDBusConnection, carg2 *C.gchar, carg3 *C.gchar, carg4 *C.gchar, carg5 C.gpointer) (cret **C.GDBusInterfaceInfo) {
 	var fn DBusSubtreeIntrospectFunc
 	{
-		v := gbox.Get(uintptr(carg5))
+		v := userdata.Load(unsafe.Pointer(carg5))
 		if v == nil {
 			panic(`callback not found`)
 		}
@@ -264,7 +264,7 @@ func _gotk4_gio2_DBusSubtreeIntrospectFunc(carg1 *C.GDBusConnection, carg2 *C.gc
 func _gotk4_gio2_VFSFileLookupFunc(carg1 *C.GVfs, carg2 *C.char, carg3 C.gpointer) (cret *C.GFile) {
 	var fn VFSFileLookupFunc
 	{
-		v := gbox.Get(uintptr(carg3))
+		v := userdata.Load(unsafe.Pointer(carg3))
 		if v == nil {
 			panic(`callback not found`)
 		}

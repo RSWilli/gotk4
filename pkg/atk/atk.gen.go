@@ -7657,7 +7657,7 @@ type HyperlinkInstance struct {
 
 var _ Hyperlink = (*HyperlinkInstance)(nil)
 
-// HyperlinkInstance wraps AtkHyperlink
+// Hyperlink wraps AtkHyperlink
 //
 // An ATK object which encapsulates a link or set of links in a hypertext document.
 // 
@@ -7975,7 +7975,7 @@ type MiscInstance struct {
 
 var _ Misc = (*MiscInstance)(nil)
 
-// MiscInstance wraps AtkMisc
+// Misc wraps AtkMisc
 //
 // A set of ATK utility functions for thread locking
 // 
@@ -8028,7 +8028,7 @@ type ObjectInstance struct {
 
 var _ Object = (*ObjectInstance)(nil)
 
-// ObjectInstance wraps AtkObject
+// Object wraps AtkObject
 //
 // The base object class for the Accessibility Toolkit API.
 // 
@@ -8893,7 +8893,7 @@ type ObjectFactoryInstance struct {
 
 var _ ObjectFactory = (*ObjectFactoryInstance)(nil)
 
-// ObjectFactoryInstance wraps AtkObjectFactory
+// ObjectFactory wraps AtkObjectFactory
 //
 // The base object class for a factory used to
 //  create accessible objects for objects of a specific GType.
@@ -9048,7 +9048,7 @@ type PlugInstance struct {
 
 var _ Plug = (*PlugInstance)(nil)
 
-// PlugInstance wraps AtkPlug
+// Plug wraps AtkPlug
 //
 // Toplevel for embedding into other processes
 // 
@@ -9208,7 +9208,7 @@ type RegistryInstance struct {
 
 var _ Registry = (*RegistryInstance)(nil)
 
-// RegistryInstance wraps AtkRegistry
+// Registry wraps AtkRegistry
 //
 // An object used to store the GType of the
 // factories used to create an accessible object for an object of a
@@ -9398,7 +9398,7 @@ type RelationInstance struct {
 
 var _ Relation = (*RelationInstance)(nil)
 
-// RelationInstance wraps AtkRelation
+// Relation wraps AtkRelation
 //
 // An object used to describe a relation between a
 //  object and one or more other objects.
@@ -9595,7 +9595,7 @@ type RelationSetInstance struct {
 
 var _ RelationSet = (*RelationSetInstance)(nil)
 
-// RelationSetInstance wraps AtkRelationSet
+// RelationSet wraps AtkRelationSet
 //
 // A set of AtkRelations, normally the set of
 //  AtkRelations which an AtkObject has.
@@ -9990,7 +9990,7 @@ type SocketInstance struct {
 
 var _ Socket = (*SocketInstance)(nil)
 
-// SocketInstance wraps AtkSocket
+// Socket wraps AtkSocket
 //
 // Container for AtkPlug objects from other processes
 // 
@@ -10163,7 +10163,7 @@ type StateSetInstance struct {
 
 var _ StateSet = (*StateSetInstance)(nil)
 
-// StateSetInstance wraps AtkStateSet
+// StateSet wraps AtkStateSet
 //
 // An AtkStateSet contains the states of an object.
 // 
@@ -10660,7 +10660,7 @@ type UtilInstance struct {
 
 var _ Util = (*UtilInstance)(nil)
 
-// UtilInstance wraps AtkUtil
+// Util wraps AtkUtil
 //
 // A set of ATK utility functions for event and toolkit support.
 // 
@@ -10715,7 +10715,7 @@ type GObjectAccessibleInstance struct {
 
 var _ GObjectAccessible = (*GObjectAccessibleInstance)(nil)
 
-// GObjectAccessibleInstance wraps AtkGObjectAccessible
+// GObjectAccessible wraps AtkGObjectAccessible
 //
 // This object class is derived from AtkObject and can be used as a basis implementing accessible objects.
 // 
@@ -10842,7 +10842,7 @@ type NoOpObjectInstance struct {
 
 var _ NoOpObject = (*NoOpObjectInstance)(nil)
 
-// NoOpObjectInstance wraps AtkNoOpObject
+// NoOpObject wraps AtkNoOpObject
 //
 // An AtkObject which purports to implement all ATK interfaces.
 // 
@@ -10975,7 +10975,7 @@ type NoOpObjectFactoryInstance struct {
 
 var _ NoOpObjectFactory = (*NoOpObjectFactoryInstance)(nil)
 
-// NoOpObjectFactoryInstance wraps AtkNoOpObjectFactory
+// NoOpObjectFactory wraps AtkNoOpObjectFactory
 //
 // The AtkObjectFactory which creates an AtkNoOpObject.
 // 

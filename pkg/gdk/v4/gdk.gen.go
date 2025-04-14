@@ -7,7 +7,7 @@ import (
 	"runtime"
 	"unsafe"
 
-	"github.com/diamondburned/gotk4/pkg/core/gbox"
+	"github.com/diamondburned/gotk4/pkg/core/userdata"
 	"github.com/diamondburned/gotk4/pkg/gdkpixbuf/v2"
 	"github.com/diamondburned/gotk4/pkg/gio/v2"
 	"github.com/diamondburned/gotk4/pkg/glib/v2"
@@ -6608,7 +6608,7 @@ func ContentDeserializeAsync(cancellable context.Context, stream gio.InputStream
 	carg4 = C.int(ioPriority)
 	if callback != nil {
 		carg6 = (*[0]byte)(C._gotk4_gio2_AsyncReadyCallback)
-		carg7 = C.gpointer(gbox.AssignOnce(callback))
+		carg7 = C.gpointer(userdata.RegisterOnce(callback))
 	}
 
 	C.gdk_content_deserialize_async(carg1, carg2, carg3, carg4, carg5, carg6, carg7)
@@ -6654,7 +6654,7 @@ func ContentSerializeAsync(cancellable context.Context, stream gio.OutputStream,
 	carg4 = C.int(ioPriority)
 	if callback != nil {
 		carg6 = (*[0]byte)(C._gotk4_gio2_AsyncReadyCallback)
-		carg7 = C.gpointer(gbox.AssignOnce(callback))
+		carg7 = C.gpointer(userdata.RegisterOnce(callback))
 	}
 
 	C.gdk_content_serialize_async(carg1, carg2, carg3, carg4, carg5, carg6, carg7)
@@ -8981,7 +8981,7 @@ type AppLaunchContextInstance struct {
 
 var _ AppLaunchContext = (*AppLaunchContextInstance)(nil)
 
-// AppLaunchContextInstance wraps GdkAppLaunchContext
+// AppLaunchContext wraps GdkAppLaunchContext
 //
 // `GdkAppLaunchContext` handles launching an application in a graphical context.
 // 
@@ -9262,7 +9262,7 @@ type CicpParamsInstance struct {
 
 var _ CicpParams = (*CicpParamsInstance)(nil)
 
-// CicpParamsInstance wraps GdkCicpParams
+// CicpParams wraps GdkCicpParams
 //
 // The `GdkCicpParams` struct contains the parameters that define
 // a colorstate according to the ITU-T H.273
@@ -9623,7 +9623,7 @@ type ClipboardInstance struct {
 
 var _ Clipboard = (*ClipboardInstance)(nil)
 
-// ClipboardInstance wraps GdkClipboard
+// Clipboard wraps GdkClipboard
 //
 // The `GdkClipboard` object represents data shared between applications or
 // inside an application.
@@ -10038,7 +10038,7 @@ func (clipboard *ClipboardInstance) ReadAsync(cancellable context.Context, mimeT
 	carg2 = C.int(ioPriority)
 	if callback != nil {
 		carg4 = (*[0]byte)(C._gotk4_gio2_AsyncReadyCallback)
-		carg5 = C.gpointer(gbox.AssignOnce(callback))
+		carg5 = C.gpointer(userdata.RegisterOnce(callback))
 	}
 
 	C.gdk_clipboard_read_async(carg0, carg1, carg2, carg3, carg4, carg5)
@@ -10116,7 +10116,7 @@ func (clipboard *ClipboardInstance) ReadTextAsync(cancellable context.Context, c
 	}
 	if callback != nil {
 		carg2 = (*[0]byte)(C._gotk4_gio2_AsyncReadyCallback)
-		carg3 = C.gpointer(gbox.AssignOnce(callback))
+		carg3 = C.gpointer(userdata.RegisterOnce(callback))
 	}
 
 	C.gdk_clipboard_read_text_async(carg0, carg1, carg2, carg3)
@@ -10188,7 +10188,7 @@ func (clipboard *ClipboardInstance) ReadTextureAsync(cancellable context.Context
 	}
 	if callback != nil {
 		carg2 = (*[0]byte)(C._gotk4_gio2_AsyncReadyCallback)
-		carg3 = C.gpointer(gbox.AssignOnce(callback))
+		carg3 = C.gpointer(userdata.RegisterOnce(callback))
 	}
 
 	C.gdk_clipboard_read_texture_async(carg0, carg1, carg2, carg3)
@@ -10266,7 +10266,7 @@ func (clipboard *ClipboardInstance) ReadValueAsync(cancellable context.Context, 
 	carg2 = C.int(ioPriority)
 	if callback != nil {
 		carg4 = (*[0]byte)(C._gotk4_gio2_AsyncReadyCallback)
-		carg5 = C.gpointer(gbox.AssignOnce(callback))
+		carg5 = C.gpointer(userdata.RegisterOnce(callback))
 	}
 
 	C.gdk_clipboard_read_value_async(carg0, carg1, carg2, carg3, carg4, carg5)
@@ -10415,7 +10415,7 @@ func (clipboard *ClipboardInstance) StoreAsync(cancellable context.Context, ioPr
 	carg1 = C.int(ioPriority)
 	if callback != nil {
 		carg3 = (*[0]byte)(C._gotk4_gio2_AsyncReadyCallback)
-		carg4 = C.gpointer(gbox.AssignOnce(callback))
+		carg4 = C.gpointer(userdata.RegisterOnce(callback))
 	}
 
 	C.gdk_clipboard_store_async(carg0, carg1, carg2, carg3, carg4)
@@ -10475,7 +10475,7 @@ type ContentDeserializerInstance struct {
 
 var _ ContentDeserializer = (*ContentDeserializerInstance)(nil)
 
-// ContentDeserializerInstance wraps GdkContentDeserializer
+// ContentDeserializer wraps GdkContentDeserializer
 //
 // A `GdkContentDeserializer` is used to deserialize content received via
 // inter-application data transfers.
@@ -10806,7 +10806,7 @@ type ContentProviderInstance struct {
 
 var _ ContentProvider = (*ContentProviderInstance)(nil)
 
-// ContentProviderInstance wraps GdkContentProvider
+// ContentProvider wraps GdkContentProvider
 //
 // A `GdkContentProvider` is used to provide content for the clipboard or
 // for drag-and-drop operations in a number of formats.
@@ -11118,7 +11118,7 @@ func (provider *ContentProviderInstance) WriteMIMETypeAsync(cancellable context.
 	carg3 = C.int(ioPriority)
 	if callback != nil {
 		carg5 = (*[0]byte)(C._gotk4_gio2_AsyncReadyCallback)
-		carg6 = C.gpointer(gbox.AssignOnce(callback))
+		carg6 = C.gpointer(userdata.RegisterOnce(callback))
 	}
 
 	C.gdk_content_provider_write_mime_type_async(carg0, carg1, carg2, carg3, carg4, carg5, carg6)
@@ -11180,7 +11180,7 @@ type ContentSerializerInstance struct {
 
 var _ ContentSerializer = (*ContentSerializerInstance)(nil)
 
-// ContentSerializerInstance wraps GdkContentSerializer
+// ContentSerializer wraps GdkContentSerializer
 //
 // A `GdkContentSerializer` is used to serialize content for
 // inter-application data transfers.
@@ -11512,7 +11512,7 @@ type CursorInstance struct {
 
 var _ Cursor = (*CursorInstance)(nil)
 
-// CursorInstance wraps GdkCursor
+// Cursor wraps GdkCursor
 //
 // `GdkCursor` is used to create and destroy cursors.
 // 
@@ -11878,7 +11878,7 @@ type DeviceInstance struct {
 
 var _ Device = (*DeviceInstance)(nil)
 
-// DeviceInstance wraps GdkDevice
+// Device wraps GdkDevice
 //
 // The `GdkDevice` object represents an input device, such
 // as a keyboard, a mouse, or a touchpad.
@@ -12564,7 +12564,7 @@ type DeviceToolInstance struct {
 
 var _ DeviceTool = (*DeviceToolInstance)(nil)
 
-// DeviceToolInstance wraps GdkDeviceTool
+// DeviceTool wraps GdkDeviceTool
 //
 // A physical tool associated to a `GdkDevice`.
 type DeviceTool interface {
@@ -12757,7 +12757,7 @@ type DisplayInstance struct {
 
 var _ Display = (*DisplayInstance)(nil)
 
-// DisplayInstance wraps GdkDisplay
+// Display wraps GdkDisplay
 //
 // `GdkDisplay` objects are the GDK representation of a workstation.
 // 
@@ -13801,7 +13801,7 @@ type DisplayManagerInstance struct {
 
 var _ DisplayManager = (*DisplayManagerInstance)(nil)
 
-// DisplayManagerInstance wraps GdkDisplayManager
+// DisplayManager wraps GdkDisplayManager
 //
 // A singleton object that offers notification when displays appear or
 // disappear.
@@ -14020,7 +14020,7 @@ type DmabufTextureBuilderInstance struct {
 
 var _ DmabufTextureBuilder = (*DmabufTextureBuilderInstance)(nil)
 
-// DmabufTextureBuilderInstance wraps GdkDmabufTextureBuilder
+// DmabufTextureBuilder wraps GdkDmabufTextureBuilder
 //
 // `GdkDmabufTextureBuilder` is a builder used to construct [class@Gdk.Texture]
 // objects from DMA buffers.
@@ -14937,7 +14937,7 @@ type DragInstance struct {
 
 var _ Drag = (*DragInstance)(nil)
 
-// DragInstance wraps GdkDrag
+// Drag wraps GdkDrag
 //
 // The `GdkDrag` object represents the source of an ongoing DND operation.
 // 
@@ -15388,7 +15388,7 @@ type DrawContextInstance struct {
 
 var _ DrawContext = (*DrawContextInstance)(nil)
 
-// DrawContextInstance wraps GdkDrawContext
+// DrawContext wraps GdkDrawContext
 //
 // Base class for objects implementing different rendering methods.
 // 
@@ -15505,7 +15505,7 @@ type DropInstance struct {
 
 var _ Drop = (*DropInstance)(nil)
 
-// DropInstance wraps GdkDrop
+// Drop wraps GdkDrop
 //
 // The `GdkDrop` object represents the target of an ongoing DND operation.
 // 
@@ -15907,7 +15907,7 @@ func (self *DropInstance) ReadAsync(cancellable context.Context, mimeTypes []str
 	carg2 = C.int(ioPriority)
 	if callback != nil {
 		carg4 = (*[0]byte)(C._gotk4_gio2_AsyncReadyCallback)
-		carg5 = C.gpointer(gbox.AssignOnce(callback))
+		carg5 = C.gpointer(userdata.RegisterOnce(callback))
 	}
 
 	C.gdk_drop_read_async(carg0, carg1, carg2, carg3, carg4, carg5)
@@ -15996,7 +15996,7 @@ func (self *DropInstance) ReadValueAsync(cancellable context.Context, typ gobjec
 	carg2 = C.int(ioPriority)
 	if callback != nil {
 		carg4 = (*[0]byte)(C._gotk4_gio2_AsyncReadyCallback)
-		carg5 = C.gpointer(gbox.AssignOnce(callback))
+		carg5 = C.gpointer(userdata.RegisterOnce(callback))
 	}
 
 	C.gdk_drop_read_value_async(carg0, carg1, carg2, carg3, carg4, carg5)
@@ -16052,7 +16052,7 @@ type FrameClockInstance struct {
 
 var _ FrameClock = (*FrameClockInstance)(nil)
 
-// FrameClockInstance wraps GdkFrameClock
+// FrameClock wraps GdkFrameClock
 //
 // A `GdkFrameClock` tells the application when to update and repaint
 // a surface.
@@ -16526,7 +16526,7 @@ type GLContextInstance struct {
 
 var _ GLContext = (*GLContextInstance)(nil)
 
-// GLContextInstance wraps GdkGLContext
+// GLContext wraps GdkGLContext
 //
 // `GdkGLContext` is an object representing a platform-specific
 // OpenGL draw context.
@@ -17370,7 +17370,7 @@ type GLTextureBuilderInstance struct {
 
 var _ GLTextureBuilder = (*GLTextureBuilderInstance)(nil)
 
-// GLTextureBuilderInstance wraps GdkGLTextureBuilder
+// GLTextureBuilder wraps GdkGLTextureBuilder
 //
 // `GdkGLTextureBuilder` is a builder used to construct [class@Gdk.Texture] objects from
 // GL textures.
@@ -18053,7 +18053,7 @@ type MemoryTextureBuilderInstance struct {
 
 var _ MemoryTextureBuilder = (*MemoryTextureBuilderInstance)(nil)
 
-// MemoryTextureBuilderInstance wraps GdkMemoryTextureBuilder
+// MemoryTextureBuilder wraps GdkMemoryTextureBuilder
 //
 // `GdkMemoryTextureBuilder` is a builder used to construct [class@Gdk.Texture] objects
 // from system memory provided via [struct@GLib.Bytes].
@@ -18609,7 +18609,7 @@ type MonitorInstance struct {
 
 var _ Monitor = (*MonitorInstance)(nil)
 
-// MonitorInstance wraps GdkMonitor
+// Monitor wraps GdkMonitor
 //
 // `GdkMonitor` objects represent the individual outputs that are
 // associated with a `GdkDisplay`.
@@ -19121,7 +19121,7 @@ type SeatInstance struct {
 
 var _ Seat = (*SeatInstance)(nil)
 
-// SeatInstance wraps GdkSeat
+// Seat wraps GdkSeat
 //
 // The `GdkSeat` object represents a collection of input devices
 // that belong to a user.
@@ -19289,7 +19289,7 @@ type SnapshotInstance struct {
 
 var _ Snapshot = (*SnapshotInstance)(nil)
 
-// SnapshotInstance wraps GdkSnapshot
+// Snapshot wraps GdkSnapshot
 //
 // Base type for snapshot operations.
 // 
@@ -19341,7 +19341,7 @@ type SurfaceInstance struct {
 
 var _ Surface = (*SurfaceInstance)(nil)
 
-// SurfaceInstance wraps GdkSurface
+// Surface wraps GdkSurface
 //
 // A `GdkSurface` is a rectangular region on the screen.
 // 
@@ -20212,7 +20212,7 @@ type TextureInstance struct {
 
 var _ Texture = (*TextureInstance)(nil)
 
-// TextureInstance wraps GdkTexture
+// Texture wraps GdkTexture
 //
 // `GdkTexture` is the basic element used to refer to pixel data.
 // 
@@ -20838,7 +20838,7 @@ type CairoContextInstance struct {
 
 var _ CairoContext = (*CairoContextInstance)(nil)
 
-// CairoContextInstance wraps GdkCairoContext
+// CairoContext wraps GdkCairoContext
 //
 // `GdkCairoContext` is an object representing the platform-specific
 // draw context.
@@ -20897,7 +20897,7 @@ type DmabufTextureInstance struct {
 
 var _ DmabufTexture = (*DmabufTextureInstance)(nil)
 
-// DmabufTextureInstance wraps GdkDmabufTexture
+// DmabufTexture wraps GdkDmabufTexture
 //
 // A `GdkTexture` representing a DMA buffer.
 // 
@@ -20966,7 +20966,7 @@ type GLTextureInstance struct {
 
 var _ GLTexture = (*GLTextureInstance)(nil)
 
-// GLTextureInstance wraps GdkGLTexture
+// GLTexture wraps GdkGLTexture
 //
 // A GdkTexture representing a GL texture object.
 type GLTexture interface {
@@ -21055,7 +21055,7 @@ type MemoryTextureInstance struct {
 
 var _ MemoryTexture = (*MemoryTextureInstance)(nil)
 
-// MemoryTextureInstance wraps GdkMemoryTexture
+// MemoryTexture wraps GdkMemoryTexture
 //
 // A `GdkTexture` representing image data in memory.
 type MemoryTexture interface {

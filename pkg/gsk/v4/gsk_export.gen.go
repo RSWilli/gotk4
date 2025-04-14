@@ -5,7 +5,7 @@ package gsk
 import (
 	"unsafe"
 
-	"github.com/diamondburned/gotk4/pkg/core/gbox"
+	"github.com/diamondburned/gotk4/pkg/core/userdata"
 	"github.com/diamondburned/gotk4/pkg/glib/v2"
 	"github.com/diamondburned/gotk4/pkg/graphene"
 )
@@ -17,7 +17,7 @@ import "C"
 func _gotk4_gsk4_ParseErrorFunc(carg1 *C.GskParseLocation, carg2 *C.GskParseLocation, carg3 *C.GError, carg4 C.gpointer) {
 	var fn ParseErrorFunc
 	{
-		v := gbox.Get(uintptr(carg4))
+		v := userdata.Load(unsafe.Pointer(carg4))
 		if v == nil {
 			panic(`callback not found`)
 		}
@@ -39,7 +39,7 @@ func _gotk4_gsk4_ParseErrorFunc(carg1 *C.GskParseLocation, carg2 *C.GskParseLoca
 func _gotk4_gsk4_PathForEachFunc(carg1 C.GskPathOperation, carg2 *C.graphene_point_t, carg3 C.gsize, carg4 C.float, carg5 C.gpointer) (cret C.gboolean) {
 	var fn PathForEachFunc
 	{
-		v := gbox.Get(uintptr(carg5))
+		v := userdata.Load(unsafe.Pointer(carg5))
 		if v == nil {
 			panic(`callback not found`)
 		}

@@ -5,7 +5,7 @@ package glib
 import (
 	"unsafe"
 
-	"github.com/diamondburned/gotk4/pkg/core/gbox"
+	"github.com/diamondburned/gotk4/pkg/core/userdata"
 )
 
 // #include <glib.h>
@@ -15,7 +15,7 @@ import "C"
 func _gotk4_glib2_CompareDataFunc(carg1 C.gconstpointer, carg2 C.gconstpointer, carg3 C.gpointer) (cret C.gint) {
 	var fn CompareDataFunc
 	{
-		v := gbox.Get(uintptr(carg3))
+		v := userdata.Load(unsafe.Pointer(carg3))
 		if v == nil {
 			panic(`callback not found`)
 		}
@@ -44,7 +44,7 @@ func _gotk4_glib2_CompareDataFunc(carg1 C.gconstpointer, carg2 C.gconstpointer, 
 func _gotk4_glib2_EqualFuncFull(carg1 C.gconstpointer, carg2 C.gconstpointer, carg3 C.gpointer) (cret C.gboolean) {
 	var fn EqualFuncFull
 	{
-		v := gbox.Get(uintptr(carg3))
+		v := userdata.Load(unsafe.Pointer(carg3))
 		if v == nil {
 			panic(`callback not found`)
 		}
@@ -75,7 +75,7 @@ func _gotk4_glib2_EqualFuncFull(carg1 C.gconstpointer, carg2 C.gconstpointer, ca
 func _gotk4_glib2_Func(carg1 C.gpointer, carg2 C.gpointer) {
 	var fn Func
 	{
-		v := gbox.Get(uintptr(carg2))
+		v := userdata.Load(unsafe.Pointer(carg2))
 		if v == nil {
 			panic(`callback not found`)
 		}
@@ -95,7 +95,7 @@ func _gotk4_glib2_Func(carg1 C.gpointer, carg2 C.gpointer) {
 func _gotk4_glib2_HFunc(carg1 C.gpointer, carg2 C.gpointer, carg3 C.gpointer) {
 	var fn HFunc
 	{
-		v := gbox.Get(uintptr(carg3))
+		v := userdata.Load(unsafe.Pointer(carg3))
 		if v == nil {
 			panic(`callback not found`)
 		}
@@ -119,7 +119,7 @@ func _gotk4_glib2_HFunc(carg1 C.gpointer, carg2 C.gpointer, carg3 C.gpointer) {
 func _gotk4_glib2_HRFunc(carg1 C.gpointer, carg2 C.gpointer, carg3 C.gpointer) (cret C.gboolean) {
 	var fn HRFunc
 	{
-		v := gbox.Get(uintptr(carg3))
+		v := userdata.Load(unsafe.Pointer(carg3))
 		if v == nil {
 			panic(`callback not found`)
 		}
@@ -150,7 +150,7 @@ func _gotk4_glib2_HRFunc(carg1 C.gpointer, carg2 C.gpointer, carg3 C.gpointer) (
 func _gotk4_glib2_LogFunc(carg1 *C.gchar, carg2 C.GLogLevelFlags, carg3 *C.gchar, carg4 C.gpointer) {
 	var fn LogFunc
 	{
-		v := gbox.Get(uintptr(carg4))
+		v := userdata.Load(unsafe.Pointer(carg4))
 		if v == nil {
 			panic(`callback not found`)
 		}
@@ -172,7 +172,7 @@ func _gotk4_glib2_LogFunc(carg1 *C.gchar, carg2 C.GLogLevelFlags, carg3 *C.gchar
 func _gotk4_glib2_LogWriterFunc(carg1 C.GLogLevelFlags, carg2 *C.GLogField, carg3 C.gsize, carg4 C.gpointer) (cret C.GLogWriterOutput) {
 	var fn LogWriterFunc
 	{
-		v := gbox.Get(uintptr(carg4))
+		v := userdata.Load(unsafe.Pointer(carg4))
 		if v == nil {
 			panic(`callback not found`)
 		}
@@ -200,7 +200,7 @@ func _gotk4_glib2_LogWriterFunc(carg1 C.GLogLevelFlags, carg2 *C.GLogField, carg
 func _gotk4_glib2_SourceFunc(carg1 C.gpointer) (cret C.gboolean) {
 	var fn SourceFunc
 	{
-		v := gbox.Get(uintptr(carg1))
+		v := userdata.Load(unsafe.Pointer(carg1))
 		if v == nil {
 			panic(`callback not found`)
 		}
@@ -222,7 +222,7 @@ func _gotk4_glib2_SourceFunc(carg1 C.gpointer) (cret C.gboolean) {
 func _gotk4_glib2_SourceOnceFunc(carg1 C.gpointer) {
 	var fn SourceOnceFunc
 	{
-		v := gbox.Get(uintptr(carg1))
+		v := userdata.Load(unsafe.Pointer(carg1))
 		if v == nil {
 			panic(`callback not found`)
 		}
@@ -236,7 +236,7 @@ func _gotk4_glib2_SourceOnceFunc(carg1 C.gpointer) {
 func _gotk4_glib2_ChildWatchFunc(carg1 C.GPid, carg2 C.gint, carg3 C.gpointer) {
 	var fn ChildWatchFunc
 	{
-		v := gbox.Get(uintptr(carg3))
+		v := userdata.Load(unsafe.Pointer(carg3))
 		if v == nil {
 			panic(`callback not found`)
 		}

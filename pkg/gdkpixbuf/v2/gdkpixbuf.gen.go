@@ -7,7 +7,7 @@ import (
 	"runtime"
 	"unsafe"
 
-	"github.com/diamondburned/gotk4/pkg/core/gbox"
+	"github.com/diamondburned/gotk4/pkg/core/userdata"
 	"github.com/diamondburned/gotk4/pkg/gio/v2"
 	"github.com/diamondburned/gotk4/pkg/glib/v2"
 	"github.com/diamondburned/gotk4/pkg/gobject/v2"
@@ -357,7 +357,7 @@ type PixbufInstance struct {
 
 var _ Pixbuf = (*PixbufInstance)(nil)
 
-// PixbufInstance wraps GdkPixbuf
+// Pixbuf wraps GdkPixbuf
 //
 // A pixel buffer.
 // 
@@ -1807,7 +1807,7 @@ func PixbufInstanceGetFileInfoAsync(cancellable context.Context, filename string
 	defer C.free(unsafe.Pointer(carg1))
 	if callback != nil {
 		carg3 = (*[0]byte)(C._gotk4_gio2_AsyncReadyCallback)
-		carg4 = C.gpointer(gbox.AssignOnce(callback))
+		carg4 = C.gpointer(userdata.RegisterOnce(callback))
 	}
 
 	C.gdk_pixbuf_get_file_info_async(carg1, carg2, carg3, carg4)
@@ -1934,7 +1934,7 @@ func NewPixbufInstanceFromStreamAsync(cancellable context.Context, stream gio.In
 	carg1 = (*C.GInputStream)(gio.UnsafeInputStreamToGlibNone(stream))
 	if callback != nil {
 		carg3 = (*[0]byte)(C._gotk4_gio2_AsyncReadyCallback)
-		carg4 = C.gpointer(gbox.AssignOnce(callback))
+		carg4 = C.gpointer(userdata.RegisterOnce(callback))
 	}
 
 	C.gdk_pixbuf_new_from_stream_async(carg1, carg2, carg3, carg4)
@@ -1981,7 +1981,7 @@ func NewPixbufInstanceFromStreamAtScaleAsync(cancellable context.Context, stream
 	}
 	if callback != nil {
 		carg6 = (*[0]byte)(C._gotk4_gio2_AsyncReadyCallback)
-		carg7 = C.gpointer(gbox.AssignOnce(callback))
+		carg7 = C.gpointer(userdata.RegisterOnce(callback))
 	}
 
 	C.gdk_pixbuf_new_from_stream_at_scale_async(carg1, carg2, carg3, carg4, carg5, carg6, carg7)
@@ -3072,8 +3072,8 @@ func (pixbuf *PixbufInstance) SaveToCallbackv(saveFunc PixbufSaveFunc, typ strin
 
 	carg0 = (*C.GdkPixbuf)(UnsafePixbufToGlibNone(pixbuf))
 	carg1 = (*[0]byte)(C._gotk4_gdkpixbuf2_PixbufSaveFunc)
-	carg2 = C.gpointer(gbox.Assign(saveFunc))
-	defer gbox.Delete(uintptr(carg2))
+	carg2 = C.gpointer(userdata.Register(saveFunc))
+	defer userdata.Delete(unsafe.Pointer(carg2))
 	carg3 = (*C.char)(unsafe.Pointer(C.CString(typ)))
 	defer C.free(unsafe.Pointer(carg3))
 	_ = optionKeys
@@ -3214,7 +3214,7 @@ func (pixbuf *PixbufInstance) SaveToStreamvAsync(cancellable context.Context, st
 	panic("unimplemented conversion of []string (gchar**)")
 	if callback != nil {
 		carg6 = (*[0]byte)(C._gotk4_gio2_AsyncReadyCallback)
-		carg7 = C.gpointer(gbox.AssignOnce(callback))
+		carg7 = C.gpointer(userdata.RegisterOnce(callback))
 	}
 
 	C.gdk_pixbuf_save_to_streamv_async(carg0, carg1, carg2, carg3, carg4, carg5, carg6, carg7)
@@ -3460,7 +3460,7 @@ type PixbufLoaderInstance struct {
 
 var _ PixbufLoader = (*PixbufLoaderInstance)(nil)
 
-// PixbufLoaderInstance wraps GdkPixbufLoader
+// PixbufLoader wraps GdkPixbufLoader
 //
 // Incremental image loader.
 // 

@@ -6,7 +6,7 @@ import (
 	"runtime"
 	"unsafe"
 
-	"github.com/diamondburned/gotk4/pkg/core/gbox"
+	"github.com/diamondburned/gotk4/pkg/core/userdata"
 	"github.com/diamondburned/gotk4/pkg/gdk/v4"
 	"github.com/diamondburned/gotk4/pkg/glib/v2"
 	"github.com/diamondburned/gotk4/pkg/gobject/v2"
@@ -889,7 +889,7 @@ type GLShaderInstance struct {
 
 var _ GLShader = (*GLShaderInstance)(nil)
 
-// GLShaderInstance wraps GskGLShader
+// GLShader wraps GskGLShader
 //
 // A `GskGLShader` is a snippet of GLSL that is meant to run in the
 // fragment shader of the rendering pipeline.
@@ -1060,7 +1060,7 @@ type RendererInstance struct {
 
 var _ Renderer = (*RendererInstance)(nil)
 
-// RendererInstance wraps GskRenderer
+// Renderer wraps GskRenderer
 //
 // `GskRenderer` is a class that renders a scene graph defined via a
 // tree of [class@Gsk.RenderNode] instances.
@@ -1364,7 +1364,7 @@ type VulkanRendererInstance struct {
 
 var _ VulkanRenderer = (*VulkanRendererInstance)(nil)
 
-// VulkanRendererInstance wraps GskVulkanRenderer
+// VulkanRenderer wraps GskVulkanRenderer
 //
 // A GSK renderer that is using Vulkan.
 // 
@@ -1442,7 +1442,7 @@ type CairoRendererInstance struct {
 
 var _ CairoRenderer = (*CairoRendererInstance)(nil)
 
-// CairoRendererInstance wraps GskCairoRenderer
+// CairoRenderer wraps GskCairoRenderer
 //
 // A GSK renderer that is using cairo.
 // 
@@ -1522,7 +1522,7 @@ type GLRendererInstance struct {
 
 var _ GLRenderer = (*GLRendererInstance)(nil)
 
-// GLRendererInstance wraps GskGLRenderer
+// GLRenderer wraps GskGLRenderer
 //
 // A GL based renderer.
 // 
@@ -1594,7 +1594,7 @@ type NglRendererInstance struct {
 
 var _ NglRenderer = (*NglRendererInstance)(nil)
 
-// NglRendererInstance wraps NglRenderer
+// NglRenderer wraps NglRenderer
 //
 // A GL based renderer.
 // 
@@ -2204,8 +2204,8 @@ func (self *Path) ForEach(flags PathForEachFlags, fn PathForEachFunc) bool {
 	carg0 = (*C.GskPath)(UnsafePathToGlibNone(self))
 	carg1 = C.GskPathForeachFlags(flags)
 	carg2 = (*[0]byte)(C._gotk4_gsk4_PathForEachFunc)
-	carg3 = C.gpointer(gbox.Assign(fn))
-	defer gbox.Delete(uintptr(carg3))
+	carg3 = C.gpointer(userdata.Register(fn))
+	defer userdata.Delete(unsafe.Pointer(carg3))
 
 	cret = C.gsk_path_foreach(carg0, carg1, carg2, carg3)
 	runtime.KeepAlive(self)

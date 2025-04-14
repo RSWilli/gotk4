@@ -5,7 +5,7 @@ package gdkwayland
 import (
 	"unsafe"
 
-	"github.com/diamondburned/gotk4/pkg/core/gbox"
+	"github.com/diamondburned/gotk4/pkg/core/userdata"
 )
 
 // #include <gdk/wayland/gdkwayland.h>
@@ -15,7 +15,7 @@ import "C"
 func _gotk4_gdkwayland4_WaylandToplevelExported(carg1 *C.GdkToplevel, carg2 *C.char, carg3 C.gpointer) {
 	var fn WaylandToplevelExported
 	{
-		v := gbox.Get(uintptr(carg3))
+		v := userdata.Load(unsafe.Pointer(carg3))
 		if v == nil {
 			panic(`callback not found`)
 		}

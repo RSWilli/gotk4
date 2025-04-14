@@ -6,7 +6,7 @@ import (
 	"runtime"
 	"unsafe"
 
-	"github.com/diamondburned/gotk4/pkg/core/gbox"
+	"github.com/diamondburned/gotk4/pkg/core/userdata"
 	"github.com/diamondburned/gotk4/pkg/gio/v2"
 	"github.com/diamondburned/gotk4/pkg/glib/v2"
 	"github.com/diamondburned/gotk4/pkg/gobject/v2"
@@ -4314,7 +4314,7 @@ type ContextInstance struct {
 
 var _ Context = (*ContextInstance)(nil)
 
-// ContextInstance wraps PangoContext
+// Context wraps PangoContext
 //
 // A `PangoContext` stores global information used to control the
 // itemization process.
@@ -5248,7 +5248,7 @@ type CoverageInstance struct {
 
 var _ Coverage = (*CoverageInstance)(nil)
 
-// CoverageInstance wraps PangoCoverage
+// Coverage wraps PangoCoverage
 //
 // A `PangoCoverage` structure is a map from Unicode characters
 // to [enum@Pango.CoverageLevel] values.
@@ -5538,7 +5538,7 @@ type FontInstance struct {
 
 var _ Font = (*FontInstance)(nil)
 
-// FontInstance wraps PangoFont
+// Font wraps PangoFont
 //
 // A `PangoFont` is used to represent a font in a
 // rendering-system-independent manner.
@@ -6066,7 +6066,7 @@ type FontFaceInstance struct {
 
 var _ FontFace = (*FontFaceInstance)(nil)
 
-// FontFaceInstance wraps PangoFontFace
+// FontFace wraps PangoFontFace
 //
 // A `PangoFontFace` is used to represent a group of fonts with
 // the same family, slant, weight, and width, but varying sizes.
@@ -6262,7 +6262,7 @@ type FontFamilyInstance struct {
 
 var _ FontFamily = (*FontFamilyInstance)(nil)
 
-// FontFamilyInstance wraps PangoFontFamily
+// FontFamily wraps PangoFontFamily
 //
 // A `PangoFontFamily` is used to represent a family of related
 // font faces.
@@ -6505,7 +6505,7 @@ type FontMapInstance struct {
 
 var _ FontMap = (*FontMapInstance)(nil)
 
-// FontMapInstance wraps PangoFontMap
+// FontMap wraps PangoFontMap
 //
 // A `PangoFontMap` represents the set of fonts available for a
 // particular rendering system.
@@ -6958,7 +6958,7 @@ type FontsetInstance struct {
 
 var _ Fontset = (*FontsetInstance)(nil)
 
-// FontsetInstance wraps PangoFontset
+// Fontset wraps PangoFontset
 //
 // A `PangoFontset` represents a set of `PangoFont` to use when rendering text.
 // 
@@ -7054,8 +7054,8 @@ func (fontset *FontsetInstance) ForEach(fn FontsetForEachFunc) {
 
 	carg0 = (*C.PangoFontset)(UnsafeFontsetToGlibNone(fontset))
 	carg1 = (*[0]byte)(C._gotk4_pango1_FontsetForEachFunc)
-	carg2 = C.gpointer(gbox.Assign(fn))
-	defer gbox.Delete(uintptr(carg2))
+	carg2 = C.gpointer(userdata.Register(fn))
+	defer userdata.Delete(unsafe.Pointer(carg2))
 
 	C.pango_fontset_foreach(carg0, carg1, carg2)
 	runtime.KeepAlive(fontset)
@@ -7123,7 +7123,7 @@ type FontsetSimpleInstance struct {
 
 var _ FontsetSimple = (*FontsetSimpleInstance)(nil)
 
-// FontsetSimpleInstance wraps PangoFontsetSimple
+// FontsetSimple wraps PangoFontsetSimple
 //
 // `PangoFontsetSimple` is a implementation of the abstract
 // `PangoFontset` base class as an array of fonts.
@@ -7267,7 +7267,7 @@ type LayoutInstance struct {
 
 var _ Layout = (*LayoutInstance)(nil)
 
-// LayoutInstance wraps PangoLayout
+// Layout wraps PangoLayout
 //
 // A `PangoLayout` structure represents an entire paragraph of text.
 // 
@@ -10272,7 +10272,7 @@ type RendererInstance struct {
 
 var _ Renderer = (*RendererInstance)(nil)
 
-// RendererInstance wraps PangoRenderer
+// Renderer wraps PangoRenderer
 //
 // `PangoRenderer` is a base class for objects that can render text
 // provided as `PangoGlyphString` or `PangoLayout`.
@@ -12206,8 +12206,8 @@ func (list *AttrList) Filter(fn AttrFilterFunc) *AttrList {
 
 	carg0 = (*C.PangoAttrList)(UnsafeAttrListToGlibNone(list))
 	carg1 = (*[0]byte)(C._gotk4_pango1_AttrFilterFunc)
-	carg2 = C.gpointer(gbox.Assign(fn))
-	defer gbox.Delete(uintptr(carg2))
+	carg2 = C.gpointer(userdata.Register(fn))
+	defer userdata.Delete(unsafe.Pointer(carg2))
 
 	cret = C.pango_attr_list_filter(carg0, carg1, carg2)
 	runtime.KeepAlive(list)

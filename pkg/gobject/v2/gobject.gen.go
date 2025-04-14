@@ -2667,7 +2667,7 @@ type BindingGroupInstance struct {
 
 var _ BindingGroup = (*BindingGroupInstance)(nil)
 
-// BindingGroupInstance wraps GBindingGroup
+// BindingGroup wraps GBindingGroup
 //
 // `GBindingGroup` can be used to bind multiple properties
 // from an object collectively.
@@ -2864,7 +2864,7 @@ type InitiallyUnownedInstance struct {
 
 var _ InitiallyUnowned = (*InitiallyUnownedInstance)(nil)
 
-// InitiallyUnownedInstance wraps GInitiallyUnowned
+// InitiallyUnowned wraps GInitiallyUnowned
 //
 // A type for objects that have an initially floating reference.
 // 
@@ -2917,7 +2917,7 @@ type SignalGroupInstance struct {
 
 var _ SignalGroup = (*SignalGroupInstance)(nil)
 
-// SignalGroupInstance wraps GSignalGroup
+// SignalGroup wraps GSignalGroup
 //
 // `GSignalGroup` manages a collection of signals on a `GObject`.
 // 
@@ -3129,7 +3129,7 @@ type TypeModuleInstance struct {
 
 var _ TypeModule = (*TypeModuleInstance)(nil)
 
-// TypeModuleInstance wraps GTypeModule
+// TypeModule wraps GTypeModule
 //
 // `GTypeModule` provides a simple implementation of the `GTypePlugin`
 // interface.

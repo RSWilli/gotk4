@@ -81,7 +81,7 @@ func (c *CallbackGenerator) generateGo(w *file.Package) {
 		if param.Skip || param.Implicit {
 			continue
 		}
-		
+
 		w.GoImportType(param.Type)
 	}
 
@@ -111,11 +111,11 @@ func (c *CallbackGenerator) generateExport(pkg *file.Package) {
 
 	fmt.Fprintf(w.Go(), "var fn %s\n", c.GoType(0)) // declare fn as the callback itself
 
-	w.GoImportCore("gbox")
+	w.GoImportCore("userdata")
 
 	fmt.Fprintf(w.Go(), "{\n")
 	w.Go().Indent()
-	fmt.Fprintf(w.Go(), "v := gbox.Get(uintptr(%s))\n", c.UserdataParam.CName)
+	fmt.Fprintf(w.Go(), "v := userdata.Load(unsafe.Pointer(%s))\n", c.UserdataParam.CName)
 	fmt.Fprintf(w.Go(), "if v == nil {\n")
 	fmt.Fprintf(w.Go(), "\tpanic(`callback not found`)\n")
 	fmt.Fprintf(w.Go(), "}\n")

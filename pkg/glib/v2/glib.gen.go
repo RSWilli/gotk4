@@ -6,7 +6,7 @@ import (
 	"runtime"
 	"unsafe"
 
-	"github.com/diamondburned/gotk4/pkg/core/gbox"
+	"github.com/diamondburned/gotk4/pkg/core/userdata"
 )
 
 // #cgo pkg-config: glib-2.0
@@ -19,7 +19,7 @@ import (
 // extern void _gotk4_glib2_Func(gpointer, gpointer);
 // extern void _gotk4_glib2_HFunc(gpointer, gpointer, gpointer);
 // extern void _gotk4_glib2_LogFunc(gchar*, GLogLevelFlags, gchar*, gpointer);
-// extern void callbackDelete(guintptr);
+// extern void destroyUserdata(gpointer);
 import "C"
 
 
@@ -4395,8 +4395,8 @@ func ChildWatchAddFull(priority int, pid Pid, function ChildWatchFunc) uint {
 	carg1 = C.gint(priority)
 	carg2 = C.GPid(pid)
 	carg3 = (*[0]byte)(C._gotk4_glib2_ChildWatchFunc)
-	carg4 = C.gpointer(gbox.Assign(function))
-	carg5 = (C.GDestroyNotify)((*[0]byte)(C.callbackDelete))
+	carg4 = C.gpointer(userdata.Register(function))
+	carg5 = (C.GDestroyNotify)((*[0]byte)(C.destroyUserdata))
 
 	cret = C.g_child_watch_add_full(carg1, carg2, carg3, carg4, carg5)
 	runtime.KeepAlive(priority)
@@ -7445,8 +7445,8 @@ func IdleAddFull(priority int, function SourceFunc) uint {
 
 	carg1 = C.gint(priority)
 	carg2 = (*[0]byte)(C._gotk4_glib2_SourceFunc)
-	carg3 = C.gpointer(gbox.Assign(function))
-	carg4 = (C.GDestroyNotify)((*[0]byte)(C.callbackDelete))
+	carg3 = C.gpointer(userdata.Register(function))
+	carg4 = (C.GDestroyNotify)((*[0]byte)(C.destroyUserdata))
 
 	cret = C.g_idle_add_full(carg1, carg2, carg3, carg4)
 	runtime.KeepAlive(priority)
@@ -8196,8 +8196,8 @@ func LogSetHandlerFull(logDomain string, logLevels LogLevelFlags, logFunc LogFun
 	}
 	carg2 = C.GLogLevelFlags(logLevels)
 	carg3 = (*[0]byte)(C._gotk4_glib2_LogFunc)
-	carg4 = C.gpointer(gbox.Assign(logFunc))
-	carg5 = (C.GDestroyNotify)((*[0]byte)(C.callbackDelete))
+	carg4 = C.gpointer(userdata.Register(logFunc))
+	carg5 = (C.GDestroyNotify)((*[0]byte)(C.destroyUserdata))
 
 	cret = C.g_log_set_handler_full(carg1, carg2, carg3, carg4, carg5)
 	runtime.KeepAlive(logDomain)
@@ -9345,8 +9345,8 @@ func QsortWithData(pbase unsafe.Pointer, totalElems int, size uint, compareFunc 
 	carg2 = C.gint(totalElems)
 	carg3 = C.gsize(size)
 	carg4 = (*[0]byte)(C._gotk4_glib2_CompareDataFunc)
-	carg5 = C.gpointer(gbox.Assign(compareFunc))
-	defer gbox.Delete(uintptr(carg5))
+	carg5 = C.gpointer(userdata.Register(compareFunc))
+	defer userdata.Delete(unsafe.Pointer(carg5))
 
 	C.g_qsort_with_data(carg1, carg2, carg3, carg4, carg5)
 	runtime.KeepAlive(pbase)
@@ -10371,8 +10371,8 @@ func TimeoutAddFull(priority int, interval uint, function SourceFunc) uint {
 	carg1 = C.gint(priority)
 	carg2 = C.guint(interval)
 	carg3 = (*[0]byte)(C._gotk4_glib2_SourceFunc)
-	carg4 = C.gpointer(gbox.Assign(function))
-	carg5 = (C.GDestroyNotify)((*[0]byte)(C.callbackDelete))
+	carg4 = C.gpointer(userdata.Register(function))
+	carg5 = (C.GDestroyNotify)((*[0]byte)(C.destroyUserdata))
 
 	cret = C.g_timeout_add_full(carg1, carg2, carg3, carg4, carg5)
 	runtime.KeepAlive(priority)
@@ -10451,8 +10451,8 @@ func TimeoutAddSecondsFull(priority int, interval uint, function SourceFunc) uin
 	carg1 = C.gint(priority)
 	carg2 = C.guint(interval)
 	carg3 = (*[0]byte)(C._gotk4_glib2_SourceFunc)
-	carg4 = C.gpointer(gbox.Assign(function))
-	carg5 = (C.GDestroyNotify)((*[0]byte)(C.callbackDelete))
+	carg4 = C.gpointer(userdata.Register(function))
+	carg5 = (C.GDestroyNotify)((*[0]byte)(C.destroyUserdata))
 
 	cret = C.g_timeout_add_seconds_full(carg1, carg2, carg3, carg4, carg5)
 	runtime.KeepAlive(priority)
@@ -20860,8 +20860,8 @@ func (context *MainContext) InvokeFull(priority int, function SourceFunc) {
 	carg0 = (*C.GMainContext)(UnsafeMainContextToGlibNone(context))
 	carg1 = C.gint(priority)
 	carg2 = (*[0]byte)(C._gotk4_glib2_SourceFunc)
-	carg3 = C.gpointer(gbox.Assign(function))
-	carg4 = (C.GDestroyNotify)((*[0]byte)(C.callbackDelete))
+	carg3 = C.gpointer(userdata.Register(function))
+	carg4 = (C.GDestroyNotify)((*[0]byte)(C.destroyUserdata))
 
 	C.g_main_context_invoke_full(carg0, carg1, carg2, carg3, carg4)
 	runtime.KeepAlive(context)
@@ -24552,8 +24552,8 @@ func (queue *Queue) ForEach(fn Func) {
 
 	carg0 = (*C.GQueue)(UnsafeQueueToGlibNone(queue))
 	carg1 = (*[0]byte)(C._gotk4_glib2_Func)
-	carg2 = C.gpointer(gbox.Assign(fn))
-	defer gbox.Delete(uintptr(carg2))
+	carg2 = C.gpointer(userdata.Register(fn))
+	defer userdata.Delete(unsafe.Pointer(carg2))
 
 	C.g_queue_foreach(carg0, carg1, carg2)
 	runtime.KeepAlive(queue)
@@ -24652,8 +24652,8 @@ func (queue *Queue) InsertSorted(data unsafe.Pointer, fn CompareDataFunc) {
 		carg1 = C.gpointer(data)
 	}
 	carg2 = (*[0]byte)(C._gotk4_glib2_CompareDataFunc)
-	carg3 = C.gpointer(gbox.Assign(fn))
-	defer gbox.Delete(uintptr(carg3))
+	carg3 = C.gpointer(userdata.Register(fn))
+	defer userdata.Delete(unsafe.Pointer(carg3))
 
 	C.g_queue_insert_sorted(carg0, carg1, carg2, carg3)
 	runtime.KeepAlive(queue)
@@ -24997,8 +24997,8 @@ func (queue *Queue) Sort(compareFunc CompareDataFunc) {
 
 	carg0 = (*C.GQueue)(UnsafeQueueToGlibNone(queue))
 	carg1 = (*[0]byte)(C._gotk4_glib2_CompareDataFunc)
-	carg2 = C.gpointer(gbox.Assign(compareFunc))
-	defer gbox.Delete(uintptr(carg2))
+	carg2 = C.gpointer(userdata.Register(compareFunc))
+	defer userdata.Delete(unsafe.Pointer(carg2))
 
 	C.g_queue_sort(carg0, carg1, carg2)
 	runtime.KeepAlive(queue)
@@ -26762,8 +26762,8 @@ func (scanner *Scanner) ScopeForEachSymbol(scopeId uint, fn HFunc) {
 	carg0 = (*C.GScanner)(UnsafeScannerToGlibNone(scanner))
 	carg1 = C.guint(scopeId)
 	carg2 = (*[0]byte)(C._gotk4_glib2_HFunc)
-	carg3 = C.gpointer(gbox.Assign(fn))
-	defer gbox.Delete(uintptr(carg3))
+	carg3 = C.gpointer(userdata.Register(fn))
+	defer userdata.Delete(unsafe.Pointer(carg3))
 
 	C.g_scanner_scope_foreach_symbol(carg0, carg1, carg2, carg3)
 	runtime.KeepAlive(scanner)
@@ -27108,8 +27108,8 @@ func (seq *Sequence) ForEach(fn Func) {
 
 	carg0 = (*C.GSequence)(UnsafeSequenceToGlibNone(seq))
 	carg1 = (*[0]byte)(C._gotk4_glib2_Func)
-	carg2 = C.gpointer(gbox.Assign(fn))
-	defer gbox.Delete(uintptr(carg2))
+	carg2 = C.gpointer(userdata.Register(fn))
+	defer userdata.Delete(unsafe.Pointer(carg2))
 
 	C.g_sequence_foreach(carg0, carg1, carg2)
 	runtime.KeepAlive(seq)
@@ -27250,8 +27250,8 @@ func (seq *Sequence) InsertSorted(data unsafe.Pointer, cmpFunc CompareDataFunc) 
 		carg1 = C.gpointer(data)
 	}
 	carg2 = (*[0]byte)(C._gotk4_glib2_CompareDataFunc)
-	carg3 = C.gpointer(gbox.Assign(cmpFunc))
-	defer gbox.Delete(uintptr(carg3))
+	carg3 = C.gpointer(userdata.Register(cmpFunc))
+	defer userdata.Delete(unsafe.Pointer(carg3))
 
 	cret = C.g_sequence_insert_sorted(carg0, carg1, carg2, carg3)
 	runtime.KeepAlive(seq)
@@ -27329,8 +27329,8 @@ func (seq *Sequence) Lookup(data unsafe.Pointer, cmpFunc CompareDataFunc) *Seque
 		carg1 = C.gpointer(data)
 	}
 	carg2 = (*[0]byte)(C._gotk4_glib2_CompareDataFunc)
-	carg3 = C.gpointer(gbox.Assign(cmpFunc))
-	defer gbox.Delete(uintptr(carg3))
+	carg3 = C.gpointer(userdata.Register(cmpFunc))
+	defer userdata.Delete(unsafe.Pointer(carg3))
 
 	cret = C.g_sequence_lookup(carg0, carg1, carg2, carg3)
 	runtime.KeepAlive(seq)
@@ -27412,8 +27412,8 @@ func (seq *Sequence) Search(data unsafe.Pointer, cmpFunc CompareDataFunc) *Seque
 		carg1 = C.gpointer(data)
 	}
 	carg2 = (*[0]byte)(C._gotk4_glib2_CompareDataFunc)
-	carg3 = C.gpointer(gbox.Assign(cmpFunc))
-	defer gbox.Delete(uintptr(carg3))
+	carg3 = C.gpointer(userdata.Register(cmpFunc))
+	defer userdata.Delete(unsafe.Pointer(carg3))
 
 	cret = C.g_sequence_search(carg0, carg1, carg2, carg3)
 	runtime.KeepAlive(seq)
@@ -27446,8 +27446,8 @@ func (seq *Sequence) Sort(cmpFunc CompareDataFunc) {
 
 	carg0 = (*C.GSequence)(UnsafeSequenceToGlibNone(seq))
 	carg1 = (*[0]byte)(C._gotk4_glib2_CompareDataFunc)
-	carg2 = C.gpointer(gbox.Assign(cmpFunc))
-	defer gbox.Delete(uintptr(carg2))
+	carg2 = C.gpointer(userdata.Register(cmpFunc))
+	defer userdata.Delete(unsafe.Pointer(carg2))
 
 	C.g_sequence_sort(carg0, carg1, carg2)
 	runtime.KeepAlive(seq)
@@ -28301,8 +28301,8 @@ func (source *Source) SetCallback(fn SourceFunc) {
 
 	carg0 = (*C.GSource)(UnsafeSourceToGlibNone(source))
 	carg1 = (*[0]byte)(C._gotk4_glib2_SourceFunc)
-	carg2 = C.gpointer(gbox.Assign(fn))
-	carg3 = (C.GDestroyNotify)((*[0]byte)(C.callbackDelete))
+	carg2 = C.gpointer(userdata.Register(fn))
+	carg3 = (C.GDestroyNotify)((*[0]byte)(C.destroyUserdata))
 
 	C.g_source_set_callback(carg0, carg1, carg2, carg3)
 	runtime.KeepAlive(source)

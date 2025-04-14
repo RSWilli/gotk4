@@ -293,7 +293,7 @@ type X11AppLaunchContextInstance struct {
 
 var _ X11AppLaunchContext = (*X11AppLaunchContextInstance)(nil)
 
-// X11AppLaunchContextInstance wraps GdkX11AppLaunchContext
+// X11AppLaunchContext wraps GdkX11AppLaunchContext
 type X11AppLaunchContext interface {
 	gdk.AppLaunchContext
 	upcastToGdkX11AppLaunchContext() *X11AppLaunchContextInstance
@@ -345,7 +345,7 @@ type X11CursorInstance struct {
 
 var _ X11Cursor = (*X11CursorInstance)(nil)
 
-// X11CursorInstance wraps GdkX11Cursor
+// X11Cursor wraps GdkX11Cursor
 type X11Cursor interface {
 	gdk.Cursor
 	upcastToGdkX11Cursor() *X11CursorInstance
@@ -395,7 +395,7 @@ type X11DeviceCoreInstance struct {
 
 var _ X11DeviceCore = (*X11DeviceCoreInstance)(nil)
 
-// X11DeviceCoreInstance wraps GdkX11DeviceCore
+// X11DeviceCore wraps GdkX11DeviceCore
 type X11DeviceCore interface {
 	gdk.Device
 	upcastToGdkX11DeviceCore() *X11DeviceCoreInstance
@@ -445,7 +445,7 @@ type X11DeviceManagerCoreInstance struct {
 
 var _ X11DeviceManagerCore = (*X11DeviceManagerCoreInstance)(nil)
 
-// X11DeviceManagerCoreInstance wraps GdkX11DeviceManagerCore
+// X11DeviceManagerCore wraps GdkX11DeviceManagerCore
 type X11DeviceManagerCore interface {
 	gdk.DeviceManager
 	upcastToGdkX11DeviceManagerCore() *X11DeviceManagerCoreInstance
@@ -495,7 +495,7 @@ type X11DeviceManagerXI2Instance struct {
 
 var _ X11DeviceManagerXI2 = (*X11DeviceManagerXI2Instance)(nil)
 
-// X11DeviceManagerXI2Instance wraps GdkX11DeviceManagerXI2
+// X11DeviceManagerXI2 wraps GdkX11DeviceManagerXI2
 type X11DeviceManagerXI2 interface {
 	X11DeviceManagerCore
 	upcastToGdkX11DeviceManagerXI2() *X11DeviceManagerXI2Instance
@@ -547,7 +547,7 @@ type X11DeviceXI2Instance struct {
 
 var _ X11DeviceXI2 = (*X11DeviceXI2Instance)(nil)
 
-// X11DeviceXI2Instance wraps GdkX11DeviceXI2
+// X11DeviceXI2 wraps GdkX11DeviceXI2
 type X11DeviceXI2 interface {
 	gdk.Device
 	upcastToGdkX11DeviceXI2() *X11DeviceXI2Instance
@@ -597,7 +597,7 @@ type X11DisplayInstance struct {
 
 var _ X11Display = (*X11DisplayInstance)(nil)
 
-// X11DisplayInstance wraps GdkX11Display
+// X11Display wraps GdkX11Display
 type X11Display interface {
 	gdk.Display
 	upcastToGdkX11Display() *X11DisplayInstance
@@ -1042,7 +1042,7 @@ type X11DisplayManagerInstance struct {
 
 var _ X11DisplayManager = (*X11DisplayManagerInstance)(nil)
 
-// X11DisplayManagerInstance wraps GdkX11DisplayManager
+// X11DisplayManager wraps GdkX11DisplayManager
 type X11DisplayManager interface {
 	gdk.DisplayManager
 	upcastToGdkX11DisplayManager() *X11DisplayManagerInstance
@@ -1092,7 +1092,7 @@ type X11DragContextInstance struct {
 
 var _ X11DragContext = (*X11DragContextInstance)(nil)
 
-// X11DragContextInstance wraps GdkX11DragContext
+// X11DragContext wraps GdkX11DragContext
 type X11DragContext interface {
 	gdk.DragContext
 	upcastToGdkX11DragContext() *X11DragContextInstance
@@ -1142,7 +1142,7 @@ type X11GLContextInstance struct {
 
 var _ X11GLContext = (*X11GLContextInstance)(nil)
 
-// X11GLContextInstance wraps GdkX11GLContext
+// X11GLContext wraps GdkX11GLContext
 type X11GLContext interface {
 	gdk.GLContext
 	upcastToGdkX11GLContext() *X11GLContextInstance
@@ -1192,7 +1192,7 @@ type X11KeymapInstance struct {
 
 var _ X11Keymap = (*X11KeymapInstance)(nil)
 
-// X11KeymapInstance wraps GdkX11Keymap
+// X11Keymap wraps GdkX11Keymap
 type X11Keymap interface {
 	gdk.Keymap
 	upcastToGdkX11Keymap() *X11KeymapInstance
@@ -1343,7 +1343,7 @@ type X11MonitorInstance struct {
 
 var _ X11Monitor = (*X11MonitorInstance)(nil)
 
-// X11MonitorInstance wraps GdkX11Monitor
+// X11Monitor wraps GdkX11Monitor
 type X11Monitor interface {
 	gdk.Monitor
 	upcastToGdkX11Monitor() *X11MonitorInstance
@@ -1393,7 +1393,7 @@ type X11ScreenInstance struct {
 
 var _ X11Screen = (*X11ScreenInstance)(nil)
 
-// X11ScreenInstance wraps GdkX11Screen
+// X11Screen wraps GdkX11Screen
 type X11Screen interface {
 	gdk.Screen
 	upcastToGdkX11Screen() *X11ScreenInstance
@@ -1572,7 +1572,7 @@ type X11VisualInstance struct {
 
 var _ X11Visual = (*X11VisualInstance)(nil)
 
-// X11VisualInstance wraps GdkX11Visual
+// X11Visual wraps GdkX11Visual
 type X11Visual interface {
 	gdk.Visual
 	upcastToGdkX11Visual() *X11VisualInstance
@@ -1622,7 +1622,7 @@ type X11WindowInstance struct {
 
 var _ X11Window = (*X11WindowInstance)(nil)
 
-// X11WindowInstance wraps GdkX11Window
+// X11Window wraps GdkX11Window
 type X11Window interface {
 	gdk.Window
 	upcastToGdkX11Window() *X11WindowInstance

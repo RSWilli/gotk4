@@ -5,7 +5,7 @@ package atk
 import (
 	"unsafe"
 
-	"github.com/diamondburned/gotk4/pkg/core/gbox"
+	"github.com/diamondburned/gotk4/pkg/core/userdata"
 )
 
 // #include <atk/atk.h>
@@ -15,7 +15,7 @@ import "C"
 func _gotk4_atk1_Function(carg1 C.gpointer) (cret C.gboolean) {
 	var fn Function
 	{
-		v := gbox.Get(uintptr(carg1))
+		v := userdata.Load(unsafe.Pointer(carg1))
 		if v == nil {
 			panic(`callback not found`)
 		}
@@ -37,7 +37,7 @@ func _gotk4_atk1_Function(carg1 C.gpointer) (cret C.gboolean) {
 func _gotk4_atk1_KeySnoopFunc(carg1 *C.AtkKeyEventStruct, carg2 C.gpointer) (cret C.gint) {
 	var fn KeySnoopFunc
 	{
-		v := gbox.Get(uintptr(carg2))
+		v := userdata.Load(unsafe.Pointer(carg2))
 		if v == nil {
 			panic(`callback not found`)
 		}

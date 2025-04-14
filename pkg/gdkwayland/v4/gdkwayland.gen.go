@@ -6,7 +6,7 @@ import (
 	"runtime"
 	"unsafe"
 
-	"github.com/diamondburned/gotk4/pkg/core/gbox"
+	"github.com/diamondburned/gotk4/pkg/core/userdata"
 	"github.com/diamondburned/gotk4/pkg/gdk/v4"
 	"github.com/diamondburned/gotk4/pkg/gobject/v2"
 )
@@ -15,7 +15,7 @@ import (
 // #cgo CFLAGS: -Wno-deprecated-declarations
 // #include <gdk/wayland/gdkwayland.h>
 // extern void _gotk4_gdkwayland4_WaylandToplevelExported(GdkToplevel*, char*, gpointer);
-// extern void callbackDelete(guintptr);
+// extern void destroyUserdata(gpointer);
 import "C"
 
 // GType values.
@@ -62,7 +62,7 @@ type WaylandDeviceInstance struct {
 
 var _ WaylandDevice = (*WaylandDeviceInstance)(nil)
 
-// WaylandDeviceInstance wraps GdkWaylandDevice
+// WaylandDevice wraps GdkWaylandDevice
 //
 // The Wayland implementation of `GdkDevice`.
 // 
@@ -164,7 +164,7 @@ type WaylandDisplayInstance struct {
 
 var _ WaylandDisplay = (*WaylandDisplayInstance)(nil)
 
-// WaylandDisplayInstance wraps GdkWaylandDisplay
+// WaylandDisplay wraps GdkWaylandDisplay
 //
 // The Wayland implementation of `GdkDisplay`.
 // 
@@ -301,7 +301,7 @@ type WaylandGLContextInstance struct {
 
 var _ WaylandGLContext = (*WaylandGLContextInstance)(nil)
 
-// WaylandGLContextInstance wraps GdkWaylandGLContext
+// WaylandGLContext wraps GdkWaylandGLContext
 //
 // The Wayland implementation of `GdkGLContext`.
 type WaylandGLContext interface {
@@ -355,7 +355,7 @@ type WaylandMonitorInstance struct {
 
 var _ WaylandMonitor = (*WaylandMonitorInstance)(nil)
 
-// WaylandMonitorInstance wraps GdkWaylandMonitor
+// WaylandMonitor wraps GdkWaylandMonitor
 //
 // The Wayland implementation of `GdkMonitor`.
 // 
@@ -411,7 +411,7 @@ type WaylandSeatInstance struct {
 
 var _ WaylandSeat = (*WaylandSeatInstance)(nil)
 
-// WaylandSeatInstance wraps GdkWaylandSeat
+// WaylandSeat wraps GdkWaylandSeat
 //
 // The Wayland implementation of `GdkSeat`.
 // 
@@ -467,7 +467,7 @@ type WaylandSurfaceInstance struct {
 
 var _ WaylandSurface = (*WaylandSurfaceInstance)(nil)
 
-// WaylandSurfaceInstance wraps GdkWaylandSurface
+// WaylandSurface wraps GdkWaylandSurface
 //
 // The Wayland implementation of `GdkSurface`.
 // 
@@ -525,7 +525,7 @@ type WaylandToplevelInstance struct {
 
 var _ WaylandToplevel = (*WaylandToplevelInstance)(nil)
 
-// WaylandToplevelInstance wraps GdkWaylandToplevel
+// WaylandToplevel wraps GdkWaylandToplevel
 //
 // The Wayland implementation of `GdkToplevel`.
 // 
@@ -718,8 +718,8 @@ func (toplevel *WaylandToplevelInstance) ExportHandle(callback WaylandToplevelEx
 
 	carg0 = (*C.GdkToplevel)(UnsafeWaylandToplevelToGlibNone(toplevel))
 	carg1 = (*[0]byte)(C._gotk4_gdkwayland4_WaylandToplevelExported)
-	carg2 = C.gpointer(gbox.Assign(callback))
-	carg3 = (C.GDestroyNotify)((*[0]byte)(C.callbackDelete))
+	carg2 = C.gpointer(userdata.Register(callback))
+	carg3 = (C.GDestroyNotify)((*[0]byte)(C.destroyUserdata))
 
 	cret = C.gdk_wayland_toplevel_export_handle(carg0, carg1, carg2, carg3)
 	runtime.KeepAlive(toplevel)
@@ -804,7 +804,7 @@ type WaylandPopupInstance struct {
 
 var _ WaylandPopup = (*WaylandPopupInstance)(nil)
 
-// WaylandPopupInstance wraps GdkWaylandPopup
+// WaylandPopup wraps GdkWaylandPopup
 //
 // The Wayland implementation of `GdkPopup`.
 type WaylandPopup interface {

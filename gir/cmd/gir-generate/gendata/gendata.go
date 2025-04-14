@@ -57,10 +57,10 @@ var Main = genmain.Data{
 						Parameters: &typesystem.Parameters{
 							CReturn: typesystem.NewManualParam("cret", "goret", typesystem.Void, 0),
 							GIRParameters: typesystem.ParamList{
-								typesystem.NewManualParam("arg0", "goarg0", typesystem.Guintptr, 0),
+								typesystem.NewManualParam("arg0", "goarg0", typesystem.Gpointer, 0),
 							},
 						},
-						TrampolineName: "callbackDelete",
+						TrampolineName: "destroyUserdata",
 					},
 					// &typesystem.Record{
 					// 	BaseType: typesystem.BaseType{

@@ -5,7 +5,7 @@ package gtk
 import (
 	"unsafe"
 
-	"github.com/diamondburned/gotk4/pkg/core/gbox"
+	"github.com/diamondburned/gotk4/pkg/core/userdata"
 	"github.com/diamondburned/gotk4/pkg/gdk/v4"
 	"github.com/diamondburned/gotk4/pkg/gio/v2"
 	"github.com/diamondburned/gotk4/pkg/pango"
@@ -18,7 +18,7 @@ import "C"
 func _gotk4_gtk4_AssistantPageFunc(carg1 C.int, carg2 C.gpointer) (cret C.int) {
 	var fn AssistantPageFunc
 	{
-		v := gbox.Get(uintptr(carg2))
+		v := userdata.Load(unsafe.Pointer(carg2))
 		if v == nil {
 			panic(`callback not found`)
 		}
@@ -41,7 +41,7 @@ func _gotk4_gtk4_AssistantPageFunc(carg1 C.int, carg2 C.gpointer) (cret C.int) {
 func _gotk4_gtk4_CustomFilterFunc(carg1 C.gpointer, carg2 C.gpointer) (cret C.gboolean) {
 	var fn CustomFilterFunc
 	{
-		v := gbox.Get(uintptr(carg2))
+		v := userdata.Load(unsafe.Pointer(carg2))
 		if v == nil {
 			panic(`callback not found`)
 		}
@@ -66,7 +66,7 @@ func _gotk4_gtk4_CustomFilterFunc(carg1 C.gpointer, carg2 C.gpointer) (cret C.gb
 func _gotk4_gtk4_ExpressionNotify(carg1 C.gpointer) {
 	var fn ExpressionNotify
 	{
-		v := gbox.Get(uintptr(carg1))
+		v := userdata.Load(unsafe.Pointer(carg1))
 		if v == nil {
 			panic(`callback not found`)
 		}
@@ -80,7 +80,7 @@ func _gotk4_gtk4_ExpressionNotify(carg1 C.gpointer) {
 func _gotk4_gtk4_FlowBoxCreateWidgetFunc(carg1 C.gpointer, carg2 C.gpointer) (cret *C.GtkWidget) {
 	var fn FlowBoxCreateWidgetFunc
 	{
-		v := gbox.Get(uintptr(carg2))
+		v := userdata.Load(unsafe.Pointer(carg2))
 		if v == nil {
 			panic(`callback not found`)
 		}
@@ -103,7 +103,7 @@ func _gotk4_gtk4_FlowBoxCreateWidgetFunc(carg1 C.gpointer, carg2 C.gpointer) (cr
 func _gotk4_gtk4_FontFilterFunc(carg1 *C.PangoFontFamily, carg2 *C.PangoFontFace, carg3 C.gpointer) (cret C.gboolean) {
 	var fn FontFilterFunc
 	{
-		v := gbox.Get(uintptr(carg3))
+		v := userdata.Load(unsafe.Pointer(carg3))
 		if v == nil {
 			panic(`callback not found`)
 		}
@@ -130,7 +130,7 @@ func _gotk4_gtk4_FontFilterFunc(carg1 *C.PangoFontFamily, carg2 *C.PangoFontFace
 func _gotk4_gtk4_ListBoxCreateWidgetFunc(carg1 C.gpointer, carg2 C.gpointer) (cret *C.GtkWidget) {
 	var fn ListBoxCreateWidgetFunc
 	{
-		v := gbox.Get(uintptr(carg2))
+		v := userdata.Load(unsafe.Pointer(carg2))
 		if v == nil {
 			panic(`callback not found`)
 		}
@@ -153,7 +153,7 @@ func _gotk4_gtk4_ListBoxCreateWidgetFunc(carg1 C.gpointer, carg2 C.gpointer) (cr
 func _gotk4_gtk4_MapListModelMapFunc(carg1 C.gpointer, carg2 C.gpointer) (cret C.gpointer) {
 	var fn MapListModelMapFunc
 	{
-		v := gbox.Get(uintptr(carg2))
+		v := userdata.Load(unsafe.Pointer(carg2))
 		if v == nil {
 			panic(`callback not found`)
 		}
@@ -176,7 +176,7 @@ func _gotk4_gtk4_MapListModelMapFunc(carg1 C.gpointer, carg2 C.gpointer) (cret C
 func _gotk4_gtk4_PageSetupDoneFunc(carg1 *C.GtkPageSetup, carg2 C.gpointer) {
 	var fn PageSetupDoneFunc
 	{
-		v := gbox.Get(uintptr(carg2))
+		v := userdata.Load(unsafe.Pointer(carg2))
 		if v == nil {
 			panic(`callback not found`)
 		}
@@ -194,7 +194,7 @@ func _gotk4_gtk4_PageSetupDoneFunc(carg1 *C.GtkPageSetup, carg2 C.gpointer) {
 func _gotk4_gtk4_TextBufferCommitNotify(carg1 *C.GtkTextBuffer, carg2 C.GtkTextBufferNotifyFlags, carg3 C.guint, carg4 C.guint, carg5 C.gpointer) {
 	var fn TextBufferCommitNotify
 	{
-		v := gbox.Get(uintptr(carg5))
+		v := userdata.Load(unsafe.Pointer(carg5))
 		if v == nil {
 			panic(`callback not found`)
 		}
@@ -218,7 +218,7 @@ func _gotk4_gtk4_TextBufferCommitNotify(carg1 *C.GtkTextBuffer, carg2 C.GtkTextB
 func _gotk4_gtk4_TextCharPredicate(carg1 C.gunichar, carg2 C.gpointer) (cret C.gboolean) {
 	var fn TextCharPredicate
 	{
-		v := gbox.Get(uintptr(carg2))
+		v := userdata.Load(unsafe.Pointer(carg2))
 		if v == nil {
 			panic(`callback not found`)
 		}
@@ -243,7 +243,7 @@ func _gotk4_gtk4_TextCharPredicate(carg1 C.gunichar, carg2 C.gpointer) (cret C.g
 func _gotk4_gtk4_TextTagTableForEach(carg1 *C.GtkTextTag, carg2 C.gpointer) {
 	var fn TextTagTableForEach
 	{
-		v := gbox.Get(uintptr(carg2))
+		v := userdata.Load(unsafe.Pointer(carg2))
 		if v == nil {
 			panic(`callback not found`)
 		}
@@ -261,7 +261,7 @@ func _gotk4_gtk4_TextTagTableForEach(carg1 *C.GtkTextTag, carg2 C.gpointer) {
 func _gotk4_gtk4_TickCallback(carg1 *C.GtkWidget, carg2 *C.GdkFrameClock, carg3 C.gpointer) (cret C.gboolean) {
 	var fn TickCallback
 	{
-		v := gbox.Get(uintptr(carg3))
+		v := userdata.Load(unsafe.Pointer(carg3))
 		if v == nil {
 			panic(`callback not found`)
 		}
@@ -288,7 +288,7 @@ func _gotk4_gtk4_TickCallback(carg1 *C.GtkWidget, carg2 *C.GdkFrameClock, carg3 
 func _gotk4_gtk4_TreeListModelCreateModelFunc(carg1 C.gpointer, carg2 C.gpointer) (cret *C.GListModel) {
 	var fn TreeListModelCreateModelFunc
 	{
-		v := gbox.Get(uintptr(carg2))
+		v := userdata.Load(unsafe.Pointer(carg2))
 		if v == nil {
 			panic(`callback not found`)
 		}
@@ -311,7 +311,7 @@ func _gotk4_gtk4_TreeListModelCreateModelFunc(carg1 C.gpointer, carg2 C.gpointer
 func _gotk4_gtk4_FlowBoxFilterFunc(carg1 *C.GtkFlowBoxChild, carg2 C.gpointer) (cret C.gboolean) {
 	var fn FlowBoxFilterFunc
 	{
-		v := gbox.Get(uintptr(carg2))
+		v := userdata.Load(unsafe.Pointer(carg2))
 		if v == nil {
 			panic(`callback not found`)
 		}
@@ -336,7 +336,7 @@ func _gotk4_gtk4_FlowBoxFilterFunc(carg1 *C.GtkFlowBoxChild, carg2 C.gpointer) (
 func _gotk4_gtk4_FlowBoxForEachFunc(carg1 *C.GtkFlowBox, carg2 *C.GtkFlowBoxChild, carg3 C.gpointer) {
 	var fn FlowBoxForEachFunc
 	{
-		v := gbox.Get(uintptr(carg3))
+		v := userdata.Load(unsafe.Pointer(carg3))
 		if v == nil {
 			panic(`callback not found`)
 		}
@@ -356,7 +356,7 @@ func _gotk4_gtk4_FlowBoxForEachFunc(carg1 *C.GtkFlowBox, carg2 *C.GtkFlowBoxChil
 func _gotk4_gtk4_FlowBoxSortFunc(carg1 *C.GtkFlowBoxChild, carg2 *C.GtkFlowBoxChild, carg3 C.gpointer) (cret C.int) {
 	var fn FlowBoxSortFunc
 	{
-		v := gbox.Get(uintptr(carg3))
+		v := userdata.Load(unsafe.Pointer(carg3))
 		if v == nil {
 			panic(`callback not found`)
 		}
@@ -381,7 +381,7 @@ func _gotk4_gtk4_FlowBoxSortFunc(carg1 *C.GtkFlowBoxChild, carg2 *C.GtkFlowBoxCh
 func _gotk4_gtk4_ListBoxFilterFunc(carg1 *C.GtkListBoxRow, carg2 C.gpointer) (cret C.gboolean) {
 	var fn ListBoxFilterFunc
 	{
-		v := gbox.Get(uintptr(carg2))
+		v := userdata.Load(unsafe.Pointer(carg2))
 		if v == nil {
 			panic(`callback not found`)
 		}
@@ -406,7 +406,7 @@ func _gotk4_gtk4_ListBoxFilterFunc(carg1 *C.GtkListBoxRow, carg2 C.gpointer) (cr
 func _gotk4_gtk4_ListBoxForEachFunc(carg1 *C.GtkListBox, carg2 *C.GtkListBoxRow, carg3 C.gpointer) {
 	var fn ListBoxForEachFunc
 	{
-		v := gbox.Get(uintptr(carg3))
+		v := userdata.Load(unsafe.Pointer(carg3))
 		if v == nil {
 			panic(`callback not found`)
 		}
@@ -426,7 +426,7 @@ func _gotk4_gtk4_ListBoxForEachFunc(carg1 *C.GtkListBox, carg2 *C.GtkListBoxRow,
 func _gotk4_gtk4_ListBoxSortFunc(carg1 *C.GtkListBoxRow, carg2 *C.GtkListBoxRow, carg3 C.gpointer) (cret C.int) {
 	var fn ListBoxSortFunc
 	{
-		v := gbox.Get(uintptr(carg3))
+		v := userdata.Load(unsafe.Pointer(carg3))
 		if v == nil {
 			panic(`callback not found`)
 		}
@@ -451,7 +451,7 @@ func _gotk4_gtk4_ListBoxSortFunc(carg1 *C.GtkListBoxRow, carg2 *C.GtkListBoxRow,
 func _gotk4_gtk4_ListBoxUpdateHeaderFunc(carg1 *C.GtkListBoxRow, carg2 *C.GtkListBoxRow, carg3 C.gpointer) {
 	var fn ListBoxUpdateHeaderFunc
 	{
-		v := gbox.Get(uintptr(carg3))
+		v := userdata.Load(unsafe.Pointer(carg3))
 		if v == nil {
 			panic(`callback not found`)
 		}
@@ -473,7 +473,7 @@ func _gotk4_gtk4_ListBoxUpdateHeaderFunc(carg1 *C.GtkListBoxRow, carg2 *C.GtkLis
 func _gotk4_gtk4_MenuButtonCreatePopupFunc(carg1 *C.GtkMenuButton, carg2 C.gpointer) {
 	var fn MenuButtonCreatePopupFunc
 	{
-		v := gbox.Get(uintptr(carg2))
+		v := userdata.Load(unsafe.Pointer(carg2))
 		if v == nil {
 			panic(`callback not found`)
 		}
@@ -491,7 +491,7 @@ func _gotk4_gtk4_MenuButtonCreatePopupFunc(carg1 *C.GtkMenuButton, carg2 C.gpoin
 func _gotk4_gtk4_ScaleFormatValueFunc(carg1 *C.GtkScale, carg2 C.double, carg3 C.gpointer) (cret *C.char) {
 	var fn ScaleFormatValueFunc
 	{
-		v := gbox.Get(uintptr(carg3))
+		v := userdata.Load(unsafe.Pointer(carg3))
 		if v == nil {
 			panic(`callback not found`)
 		}

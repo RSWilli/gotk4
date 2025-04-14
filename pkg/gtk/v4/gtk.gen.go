@@ -7,7 +7,7 @@ import (
 	"runtime"
 	"unsafe"
 
-	"github.com/diamondburned/gotk4/pkg/core/gbox"
+	"github.com/diamondburned/gotk4/pkg/core/userdata"
 	"github.com/diamondburned/gotk4/pkg/gdk/v4"
 	"github.com/diamondburned/gotk4/pkg/gio/v2"
 	"github.com/diamondburned/gotk4/pkg/glib/v2"
@@ -40,7 +40,7 @@ import (
 // extern void _gotk4_gtk4_MenuButtonCreatePopupFunc(GtkMenuButton*, gpointer);
 // extern void _gotk4_gtk4_TextBufferCommitNotify(GtkTextBuffer*, GtkTextBufferNotifyFlags, guint, guint, gpointer);
 // extern void _gotk4_gtk4_TextTagTableForEach(GtkTextTag*, gpointer);
-// extern void callbackDelete(guintptr);
+// extern void destroyUserdata(gpointer);
 import "C"
 
 // GType values.
@@ -10860,7 +10860,7 @@ type ATContextInstance struct {
 
 var _ ATContext = (*ATContextInstance)(nil)
 
-// ATContextInstance wraps GtkATContext
+// ATContext wraps GtkATContext
 //
 // `GtkATContext` is an abstract class provided by GTK to communicate to
 // platform-specific assistive technologies API.
@@ -11013,7 +11013,7 @@ type AdjustmentInstance struct {
 
 var _ Adjustment = (*AdjustmentInstance)(nil)
 
-// AdjustmentInstance wraps GtkAdjustment
+// Adjustment wraps GtkAdjustment
 //
 // `GtkAdjustment` is a model for a numeric value.
 // 
@@ -11678,7 +11678,7 @@ type AlertDialogInstance struct {
 
 var _ AlertDialog = (*AlertDialogInstance)(nil)
 
-// AlertDialogInstance wraps GtkAlertDialog
+// AlertDialog wraps GtkAlertDialog
 //
 // A `GtkAlertDialog` object collects the arguments that
 // are needed to present a message to the user.
@@ -11899,7 +11899,7 @@ func (self *AlertDialogInstance) Choose(cancellable context.Context, parent Wind
 	}
 	if callback != nil {
 		carg3 = (*[0]byte)(C._gotk4_gio2_AsyncReadyCallback)
-		carg4 = C.gpointer(gbox.AssignOnce(callback))
+		carg4 = C.gpointer(userdata.RegisterOnce(callback))
 	}
 
 	C.gtk_alert_dialog_choose(carg0, carg1, carg2, carg3, carg4)
@@ -12248,7 +12248,7 @@ type ApplicationInstance struct {
 
 var _ Application = (*ApplicationInstance)(nil)
 
-// ApplicationInstance wraps GtkApplication
+// Application wraps GtkApplication
 //
 // `GtkApplication` is a high-level API for writing applications.
 // 
@@ -13116,7 +13116,7 @@ type BookmarkListInstance struct {
 
 var _ BookmarkList = (*BookmarkListInstance)(nil)
 
-// BookmarkListInstance wraps GtkBookmarkList
+// BookmarkList wraps GtkBookmarkList
 //
 // `GtkBookmarkList` is a list model that wraps `GBookmarkFile`.
 // 
@@ -13410,7 +13410,7 @@ type BuilderInstance struct {
 
 var _ Builder = (*BuilderInstance)(nil)
 
-// BuilderInstance wraps GtkBuilder
+// Builder wraps GtkBuilder
 //
 // A `GtkBuilder` reads XML descriptions of a user interface and
 // instantiates the described objects.
@@ -14831,7 +14831,7 @@ type BuilderCScopeInstance struct {
 
 var _ BuilderCScope = (*BuilderCScopeInstance)(nil)
 
-// BuilderCScopeInstance wraps GtkBuilderCScope
+// BuilderCScope wraps GtkBuilderCScope
 //
 // A `GtkBuilderScope` implementation for the C language.
 // 
@@ -14918,7 +14918,7 @@ type ColorDialogInstance struct {
 
 var _ ColorDialog = (*ColorDialogInstance)(nil)
 
-// ColorDialogInstance wraps GtkColorDialog
+// ColorDialog wraps GtkColorDialog
 //
 // A `GtkColorDialog` object collects the arguments that
 // are needed to present a color chooser dialog to the
@@ -15098,7 +15098,7 @@ func (self *ColorDialogInstance) ChooseRGBA(cancellable context.Context, parent 
 	}
 	if callback != nil {
 		carg4 = (*[0]byte)(C._gotk4_gio2_AsyncReadyCallback)
-		carg5 = C.gpointer(gbox.AssignOnce(callback))
+		carg5 = C.gpointer(userdata.RegisterOnce(callback))
 	}
 
 	C.gtk_color_dialog_choose_rgba(carg0, carg1, carg2, carg3, carg4, carg5)
@@ -15292,7 +15292,7 @@ type ColumnViewColumnInstance struct {
 
 var _ ColumnViewColumn = (*ColumnViewColumnInstance)(nil)
 
-// ColumnViewColumnInstance wraps GtkColumnViewColumn
+// ColumnViewColumn wraps GtkColumnViewColumn
 //
 // `GtkColumnViewColumn` represents the columns being added to a `GtkColumnView`.
 // 
@@ -16019,7 +16019,7 @@ type ColumnViewRowInstance struct {
 
 var _ ColumnViewRow = (*ColumnViewRowInstance)(nil)
 
-// ColumnViewRowInstance wraps GtkColumnViewRow
+// ColumnViewRow wraps GtkColumnViewRow
 //
 // `GtkColumnViewRow` is used by [class@Gtk.ColumnView] to allow configuring
 // how rows are displayed.
@@ -16535,7 +16535,7 @@ type ConstraintInstance struct {
 
 var _ Constraint = (*ConstraintInstance)(nil)
 
-// ConstraintInstance wraps GtkConstraint
+// Constraint wraps GtkConstraint
 //
 // `GtkConstraint` describes a constraint between attributes of two widgets,
 //  expressed as a linear equation.
@@ -17055,7 +17055,7 @@ type ConstraintGuideInstance struct {
 
 var _ ConstraintGuide = (*ConstraintGuideInstance)(nil)
 
-// ConstraintGuideInstance wraps GtkConstraintGuide
+// ConstraintGuide wraps GtkConstraintGuide
 //
 // A `GtkConstraintGuide` is an invisible layout element in a
 // `GtkConstraintLayout`.
@@ -17472,7 +17472,7 @@ type CssProviderInstance struct {
 
 var _ CssProvider = (*CssProviderInstance)(nil)
 
-// CssProviderInstance wraps GtkCssProvider
+// CssProvider wraps GtkCssProvider
 //
 // `GtkCssProvider` is an object implementing the `GtkStyleProvider` interface
 // for CSS.
@@ -17819,7 +17819,7 @@ type DirectoryListInstance struct {
 
 var _ DirectoryList = (*DirectoryListInstance)(nil)
 
-// DirectoryListInstance wraps GtkDirectoryList
+// DirectoryList wraps GtkDirectoryList
 //
 // `GtkDirectoryList` is a list model that wraps g_file_enumerate_children_async().
 // 
@@ -18299,7 +18299,7 @@ type EntryBufferInstance struct {
 
 var _ EntryBuffer = (*EntryBufferInstance)(nil)
 
-// EntryBufferInstance wraps GtkEntryBuffer
+// EntryBuffer wraps GtkEntryBuffer
 //
 // A `GtkEntryBuffer` hold the text displayed in a `GtkText` widget.
 // 
@@ -18809,7 +18809,7 @@ type EventControllerInstance struct {
 
 var _ EventController = (*EventControllerInstance)(nil)
 
-// EventControllerInstance wraps GtkEventController
+// EventController wraps GtkEventController
 //
 // `GtkEventController` is the base class for event controllers.
 // 
@@ -19236,7 +19236,7 @@ type EventControllerFocusInstance struct {
 
 var _ EventControllerFocus = (*EventControllerFocusInstance)(nil)
 
-// EventControllerFocusInstance wraps GtkEventControllerFocus
+// EventControllerFocus wraps GtkEventControllerFocus
 //
 // `GtkEventControllerFocus` is an event controller to keep track of
 // keyboard focus.
@@ -19377,7 +19377,7 @@ type EventControllerKeyInstance struct {
 
 var _ EventControllerKey = (*EventControllerKeyInstance)(nil)
 
-// EventControllerKeyInstance wraps GtkEventControllerKey
+// EventControllerKey wraps GtkEventControllerKey
 //
 // `GtkEventControllerKey` is an event controller that provides access
 // to key events.
@@ -19594,7 +19594,7 @@ type EventControllerLegacyInstance struct {
 
 var _ EventControllerLegacy = (*EventControllerLegacyInstance)(nil)
 
-// EventControllerLegacyInstance wraps GtkEventControllerLegacy
+// EventControllerLegacy wraps GtkEventControllerLegacy
 //
 // `GtkEventControllerLegacy` is an event controller that provides raw
 // access to the event stream.
@@ -19668,7 +19668,7 @@ type EventControllerMotionInstance struct {
 
 var _ EventControllerMotion = (*EventControllerMotionInstance)(nil)
 
-// EventControllerMotionInstance wraps GtkEventControllerMotion
+// EventControllerMotion wraps GtkEventControllerMotion
 //
 // `GtkEventControllerMotion` is an event controller tracking the pointer
 // position.
@@ -19809,7 +19809,7 @@ type EventControllerScrollInstance struct {
 
 var _ EventControllerScroll = (*EventControllerScrollInstance)(nil)
 
-// EventControllerScrollInstance wraps GtkEventControllerScroll
+// EventControllerScroll wraps GtkEventControllerScroll
 //
 // `GtkEventControllerScroll` is an event controller that handles scroll
 // events.
@@ -20015,7 +20015,7 @@ type FileDialogInstance struct {
 
 var _ FileDialog = (*FileDialogInstance)(nil)
 
-// FileDialogInstance wraps GtkFileDialog
+// FileDialog wraps GtkFileDialog
 //
 // A `GtkFileDialog` object collects the arguments that
 // are needed to present a file chooser dialog to the
@@ -20596,7 +20596,7 @@ func (self *FileDialogInstance) Open(cancellable context.Context, parent Window,
 	}
 	if callback != nil {
 		carg3 = (*[0]byte)(C._gotk4_gio2_AsyncReadyCallback)
-		carg4 = C.gpointer(gbox.AssignOnce(callback))
+		carg4 = C.gpointer(userdata.RegisterOnce(callback))
 	}
 
 	C.gtk_file_dialog_open(carg0, carg1, carg2, carg3, carg4)
@@ -20675,7 +20675,7 @@ func (self *FileDialogInstance) OpenMultiple(cancellable context.Context, parent
 	}
 	if callback != nil {
 		carg3 = (*[0]byte)(C._gotk4_gio2_AsyncReadyCallback)
-		carg4 = C.gpointer(gbox.AssignOnce(callback))
+		carg4 = C.gpointer(userdata.RegisterOnce(callback))
 	}
 
 	C.gtk_file_dialog_open_multiple(carg0, carg1, carg2, carg3, carg4)
@@ -20751,7 +20751,7 @@ func (self *FileDialogInstance) Save(cancellable context.Context, parent Window,
 	}
 	if callback != nil {
 		carg3 = (*[0]byte)(C._gotk4_gio2_AsyncReadyCallback)
-		carg4 = C.gpointer(gbox.AssignOnce(callback))
+		carg4 = C.gpointer(userdata.RegisterOnce(callback))
 	}
 
 	C.gtk_file_dialog_save(carg0, carg1, carg2, carg3, carg4)
@@ -20831,7 +20831,7 @@ func (self *FileDialogInstance) SelectFolder(cancellable context.Context, parent
 	}
 	if callback != nil {
 		carg3 = (*[0]byte)(C._gotk4_gio2_AsyncReadyCallback)
-		carg4 = C.gpointer(gbox.AssignOnce(callback))
+		carg4 = C.gpointer(userdata.RegisterOnce(callback))
 	}
 
 	C.gtk_file_dialog_select_folder(carg0, carg1, carg2, carg3, carg4)
@@ -20910,7 +20910,7 @@ func (self *FileDialogInstance) SelectMultipleFolders(cancellable context.Contex
 	}
 	if callback != nil {
 		carg3 = (*[0]byte)(C._gotk4_gio2_AsyncReadyCallback)
-		carg4 = C.gpointer(gbox.AssignOnce(callback))
+		carg4 = C.gpointer(userdata.RegisterOnce(callback))
 	}
 
 	C.gtk_file_dialog_select_multiple_folders(carg0, carg1, carg2, carg3, carg4)
@@ -21157,7 +21157,7 @@ type FileLauncherInstance struct {
 
 var _ FileLauncher = (*FileLauncherInstance)(nil)
 
-// FileLauncherInstance wraps GtkFileLauncher
+// FileLauncher wraps GtkFileLauncher
 //
 // A `GtkFileLauncher` object collects the arguments that are needed to open a
 // file with an application.
@@ -21437,7 +21437,7 @@ func (self *FileLauncherInstance) Launch(cancellable context.Context, parent Win
 	}
 	if callback != nil {
 		carg3 = (*[0]byte)(C._gotk4_gio2_AsyncReadyCallback)
-		carg4 = C.gpointer(gbox.AssignOnce(callback))
+		carg4 = C.gpointer(userdata.RegisterOnce(callback))
 	}
 
 	C.gtk_file_launcher_launch(carg0, carg1, carg2, carg3, carg4)
@@ -21515,7 +21515,7 @@ func (self *FileLauncherInstance) OpenContainingFolder(cancellable context.Conte
 	}
 	if callback != nil {
 		carg3 = (*[0]byte)(C._gotk4_gio2_AsyncReadyCallback)
-		carg4 = C.gpointer(gbox.AssignOnce(callback))
+		carg4 = C.gpointer(userdata.RegisterOnce(callback))
 	}
 
 	C.gtk_file_launcher_open_containing_folder(carg0, carg1, carg2, carg3, carg4)
@@ -21636,7 +21636,7 @@ type FilterInstance struct {
 
 var _ Filter = (*FilterInstance)(nil)
 
-// FilterInstance wraps GtkFilter
+// Filter wraps GtkFilter
 //
 // A `GtkFilter` object describes the filtering to be performed by a
 // [class@Gtk.FilterListModel].
@@ -21844,7 +21844,7 @@ type FilterListModelInstance struct {
 
 var _ FilterListModel = (*FilterListModelInstance)(nil)
 
-// FilterListModelInstance wraps GtkFilterListModel
+// FilterListModel wraps GtkFilterListModel
 //
 // `GtkFilterListModel` is a list model that filters the elements of
 // the underlying model according to a `GtkFilter`.
@@ -22226,7 +22226,7 @@ type FlattenListModelInstance struct {
 
 var _ FlattenListModel = (*FlattenListModelInstance)(nil)
 
-// FlattenListModelInstance wraps GtkFlattenListModel
+// FlattenListModel wraps GtkFlattenListModel
 //
 // `GtkFlattenListModel` is a list model that concatenates other list models.
 // 
@@ -22413,7 +22413,7 @@ type FontDialogInstance struct {
 
 var _ FontDialog = (*FontDialogInstance)(nil)
 
-// FontDialogInstance wraps GtkFontDialog
+// FontDialog wraps GtkFontDialog
 //
 // A `GtkFontDialog` object collects the arguments that
 // are needed to present a font chooser dialog to the
@@ -22728,7 +22728,7 @@ func (self *FontDialogInstance) ChooseFace(cancellable context.Context, parent W
 	}
 	if callback != nil {
 		carg4 = (*[0]byte)(C._gotk4_gio2_AsyncReadyCallback)
-		carg5 = C.gpointer(gbox.AssignOnce(callback))
+		carg5 = C.gpointer(userdata.RegisterOnce(callback))
 	}
 
 	C.gtk_font_dialog_choose_face(carg0, carg1, carg2, carg3, carg4, carg5)
@@ -22808,7 +22808,7 @@ func (self *FontDialogInstance) ChooseFamily(cancellable context.Context, parent
 	}
 	if callback != nil {
 		carg4 = (*[0]byte)(C._gotk4_gio2_AsyncReadyCallback)
-		carg5 = C.gpointer(gbox.AssignOnce(callback))
+		carg5 = C.gpointer(userdata.RegisterOnce(callback))
 	}
 
 	C.gtk_font_dialog_choose_family(carg0, carg1, carg2, carg3, carg4, carg5)
@@ -22895,7 +22895,7 @@ func (self *FontDialogInstance) ChooseFont(cancellable context.Context, parent W
 	}
 	if callback != nil {
 		carg4 = (*[0]byte)(C._gotk4_gio2_AsyncReadyCallback)
-		carg5 = C.gpointer(gbox.AssignOnce(callback))
+		carg5 = C.gpointer(userdata.RegisterOnce(callback))
 	}
 
 	C.gtk_font_dialog_choose_font(carg0, carg1, carg2, carg3, carg4, carg5)
@@ -22942,7 +22942,7 @@ func (self *FontDialogInstance) ChooseFontAndFeatures(cancellable context.Contex
 	}
 	if callback != nil {
 		carg4 = (*[0]byte)(C._gotk4_gio2_AsyncReadyCallback)
-		carg5 = C.gpointer(gbox.AssignOnce(callback))
+		carg5 = C.gpointer(userdata.RegisterOnce(callback))
 	}
 
 	C.gtk_font_dialog_choose_font_and_features(carg0, carg1, carg2, carg3, carg4, carg5)
@@ -23278,7 +23278,7 @@ type GestureInstance struct {
 
 var _ Gesture = (*GestureInstance)(nil)
 
-// GestureInstance wraps GtkGesture
+// Gesture wraps GtkGesture
 //
 // `GtkGesture` is the base class for gesture recognition.
 // 
@@ -24065,7 +24065,7 @@ type GestureRotateInstance struct {
 
 var _ GestureRotate = (*GestureRotateInstance)(nil)
 
-// GestureRotateInstance wraps GtkGestureRotate
+// GestureRotate wraps GtkGestureRotate
 //
 // `GtkGestureRotate` is a `GtkGesture` for 2-finger rotations.
 // 
@@ -24179,7 +24179,7 @@ type GestureSingleInstance struct {
 
 var _ GestureSingle = (*GestureSingleInstance)(nil)
 
-// GestureSingleInstance wraps GtkGestureSingle
+// GestureSingle wraps GtkGestureSingle
 //
 // `GtkGestureSingle` is a `GtkGestures` subclass optimized for singe-touch
 // and mouse gestures.
@@ -24521,7 +24521,7 @@ type GestureStylusInstance struct {
 
 var _ GestureStylus = (*GestureStylusInstance)(nil)
 
-// GestureStylusInstance wraps GtkGestureStylus
+// GestureStylus wraps GtkGestureStylus
 //
 // `GtkGestureStylus` is a `GtkGesture` specific to stylus input.
 // 
@@ -24769,7 +24769,7 @@ type GestureSwipeInstance struct {
 
 var _ GestureSwipe = (*GestureSwipeInstance)(nil)
 
-// GestureSwipeInstance wraps GtkGestureSwipe
+// GestureSwipe wraps GtkGestureSwipe
 //
 // `GtkGestureSwipe` is a `GtkGesture` for swipe gestures.
 // 
@@ -24904,7 +24904,7 @@ type GestureZoomInstance struct {
 
 var _ GestureZoom = (*GestureZoomInstance)(nil)
 
-// GestureZoomInstance wraps GtkGestureZoom
+// GestureZoom wraps GtkGestureZoom
 //
 // `GtkGestureZoom` is a `GtkGesture` for 2-finger pinch/zoom gestures.
 // 
@@ -25021,7 +25021,7 @@ type IMContextInstance struct {
 
 var _ IMContext = (*IMContextInstance)(nil)
 
-// IMContextInstance wraps GtkIMContext
+// IMContext wraps GtkIMContext
 //
 // `GtkIMContext` defines the interface for GTK input methods.
 // 
@@ -25634,7 +25634,7 @@ type IMContextSimpleInstance struct {
 
 var _ IMContextSimple = (*IMContextSimpleInstance)(nil)
 
-// IMContextSimpleInstance wraps GtkIMContextSimple
+// IMContextSimple wraps GtkIMContextSimple
 //
 // `GtkIMContextSimple` is an input method supporting table-based input methods.
 // 
@@ -25770,7 +25770,7 @@ type IMMulticontextInstance struct {
 
 var _ IMMulticontext = (*IMMulticontextInstance)(nil)
 
-// IMMulticontextInstance wraps GtkIMMulticontext
+// IMMulticontext wraps GtkIMMulticontext
 //
 // `GtkIMMulticontext` is an input method context supporting multiple,
 // switchable input methods.
@@ -25921,7 +25921,7 @@ type IconPaintableInstance struct {
 
 var _ IconPaintable = (*IconPaintableInstance)(nil)
 
-// IconPaintableInstance wraps GtkIconPaintable
+// IconPaintable wraps GtkIconPaintable
 //
 // Contains information found when looking up an icon in `GtkIconTheme`.
 // 
@@ -26136,7 +26136,7 @@ type IconThemeInstance struct {
 
 var _ IconTheme = (*IconThemeInstance)(nil)
 
-// IconThemeInstance wraps GtkIconTheme
+// IconTheme wraps GtkIconTheme
 //
 // `GtkIconTheme` provides a facility for loading themed icons.
 // 
@@ -26975,7 +26975,7 @@ type LayoutChildInstance struct {
 
 var _ LayoutChild = (*LayoutChildInstance)(nil)
 
-// LayoutChildInstance wraps GtkLayoutChild
+// LayoutChild wraps GtkLayoutChild
 //
 // `GtkLayoutChild` is the base class for objects that are meant to hold
 // layout properties.
@@ -27094,7 +27094,7 @@ type LayoutManagerInstance struct {
 
 var _ LayoutManager = (*LayoutManagerInstance)(nil)
 
-// LayoutManagerInstance wraps GtkLayoutManager
+// LayoutManager wraps GtkLayoutManager
 //
 // Layout managers are delegate classes that handle the preferred size
 // and the allocation of a widget.
@@ -27467,7 +27467,7 @@ type ListHeaderInstance struct {
 
 var _ ListHeader = (*ListHeaderInstance)(nil)
 
-// ListHeaderInstance wraps GtkListHeader
+// ListHeader wraps GtkListHeader
 //
 // `GtkListHeader` is used by list widgets to represent the headers they
 // display.
@@ -27731,7 +27731,7 @@ type ListItemInstance struct {
 
 var _ ListItem = (*ListItemInstance)(nil)
 
-// ListItemInstance wraps GtkListItem
+// ListItem wraps GtkListItem
 //
 // `GtkListItem` is used by list widgets to represent items in a
 // [iface@Gio.ListModel].
@@ -28329,7 +28329,7 @@ type ListItemFactoryInstance struct {
 
 var _ ListItemFactory = (*ListItemFactoryInstance)(nil)
 
-// ListItemFactoryInstance wraps GtkListItemFactory
+// ListItemFactory wraps GtkListItemFactory
 //
 // A `GtkListItemFactory` creates widgets for the items taken from a `GListModel`.
 // 
@@ -28428,7 +28428,7 @@ type MapListModelInstance struct {
 
 var _ MapListModel = (*MapListModelInstance)(nil)
 
-// MapListModelInstance wraps GtkMapListModel
+// MapListModel wraps GtkMapListModel
 //
 // A `GtkMapListModel` maps the items in a list model to different items.
 // 
@@ -28571,8 +28571,8 @@ func NewMapListModelInstance(model gio.ListModel, mapFunc MapListModelMapFunc) M
 	}
 	if mapFunc != nil {
 		carg2 = (*[0]byte)(C._gotk4_gtk4_MapListModelMapFunc)
-		carg3 = C.gpointer(gbox.Assign(mapFunc))
-		carg4 = (C.GDestroyNotify)((*[0]byte)(C.callbackDelete))
+		carg3 = C.gpointer(userdata.Register(mapFunc))
+		carg4 = (C.GDestroyNotify)((*[0]byte)(C.destroyUserdata))
 	}
 
 	cret = C.gtk_map_list_model_new(carg1, carg2, carg3, carg4)
@@ -28658,8 +28658,8 @@ func (self *MapListModelInstance) SetMapFunc(mapFunc MapListModelMapFunc) {
 	carg0 = (*C.GtkMapListModel)(UnsafeMapListModelToGlibNone(self))
 	if mapFunc != nil {
 		carg1 = (*[0]byte)(C._gotk4_gtk4_MapListModelMapFunc)
-		carg2 = C.gpointer(gbox.Assign(mapFunc))
-		carg3 = (C.GDestroyNotify)((*[0]byte)(C.callbackDelete))
+		carg2 = C.gpointer(userdata.Register(mapFunc))
+		carg3 = (C.GDestroyNotify)((*[0]byte)(C.destroyUserdata))
 	}
 
 	C.gtk_map_list_model_set_map_func(carg0, carg1, carg2, carg3)
@@ -28702,7 +28702,7 @@ type MediaStreamInstance struct {
 
 var _ MediaStream = (*MediaStreamInstance)(nil)
 
-// MediaStreamInstance wraps GtkMediaStream
+// MediaStream wraps GtkMediaStream
 //
 // `GtkMediaStream` is the integration point for media playback inside GTK.
 // 
@@ -29829,7 +29829,7 @@ type MountOperationInstance struct {
 
 var _ MountOperation = (*MountOperationInstance)(nil)
 
-// MountOperationInstance wraps GtkMountOperation
+// MountOperation wraps GtkMountOperation
 //
 // `GtkMountOperation` is an implementation of `GMountOperation`.
 // 
@@ -30076,7 +30076,7 @@ type MultiFilterInstance struct {
 
 var _ MultiFilter = (*MultiFilterInstance)(nil)
 
-// MultiFilterInstance wraps GtkMultiFilter
+// MultiFilter wraps GtkMultiFilter
 //
 // `GtkMultiFilter` is the base class for filters that combine multiple filters.
 type MultiFilter interface {
@@ -30197,7 +30197,7 @@ type MultiSelectionInstance struct {
 
 var _ MultiSelection = (*MultiSelectionInstance)(nil)
 
-// MultiSelectionInstance wraps GtkMultiSelection
+// MultiSelection wraps GtkMultiSelection
 //
 // `GtkMultiSelection` is a `GtkSelectionModel` that allows selecting multiple
 // elements.
@@ -30344,7 +30344,7 @@ type NativeDialogInstance struct {
 
 var _ NativeDialog = (*NativeDialogInstance)(nil)
 
-// NativeDialogInstance wraps GtkNativeDialog
+// NativeDialog wraps GtkNativeDialog
 //
 // Native dialogs are platform dialogs that don't use `GtkDialog`.
 // 
@@ -30735,7 +30735,7 @@ type NoSelectionInstance struct {
 
 var _ NoSelection = (*NoSelectionInstance)(nil)
 
-// NoSelectionInstance wraps GtkNoSelection
+// NoSelection wraps GtkNoSelection
 //
 // `GtkNoSelection` is a `GtkSelectionModel` that does not allow selecting
 // anything.
@@ -30887,7 +30887,7 @@ type NotebookPageInstance struct {
 
 var _ NotebookPage = (*NotebookPageInstance)(nil)
 
-// NotebookPageInstance wraps GtkNotebookPage
+// NotebookPage wraps GtkNotebookPage
 //
 // `GtkNotebookPage` is an auxiliary object used by `GtkNotebook`.
 type NotebookPage interface {
@@ -30967,7 +30967,7 @@ type OverlayLayoutInstance struct {
 
 var _ OverlayLayout = (*OverlayLayoutInstance)(nil)
 
-// OverlayLayoutInstance wraps GtkOverlayLayout
+// OverlayLayout wraps GtkOverlayLayout
 //
 // `GtkOverlayLayout` is the layout manager used by [class@Gtk.Overlay].
 // 
@@ -31043,7 +31043,7 @@ type OverlayLayoutChildInstance struct {
 
 var _ OverlayLayoutChild = (*OverlayLayoutChildInstance)(nil)
 
-// OverlayLayoutChildInstance wraps GtkOverlayLayoutChild
+// OverlayLayoutChild wraps GtkOverlayLayoutChild
 //
 // `GtkLayoutChild` subclass for children in a `GtkOverlayLayout`.
 type OverlayLayoutChild interface {
@@ -31216,7 +31216,7 @@ type PadControllerInstance struct {
 
 var _ PadController = (*PadControllerInstance)(nil)
 
-// PadControllerInstance wraps GtkPadController
+// PadController wraps GtkPadController
 //
 // `GtkPadController` is an event controller for the pads found in drawing
 // tablets.
@@ -31465,7 +31465,7 @@ type PageSetupInstance struct {
 
 var _ PageSetup = (*PageSetupInstance)(nil)
 
-// PageSetupInstance wraps GtkPageSetup
+// PageSetup wraps GtkPageSetup
 //
 // A `GtkPageSetup` object stores the page size, orientation and margins.
 // 
@@ -32538,7 +32538,7 @@ type PasswordEntryBufferInstance struct {
 
 var _ PasswordEntryBuffer = (*PasswordEntryBufferInstance)(nil)
 
-// PasswordEntryBufferInstance wraps GtkPasswordEntryBuffer
+// PasswordEntryBuffer wraps GtkPasswordEntryBuffer
 //
 // A `GtkEntryBuffer` that locks the underlying memory to prevent it
 // from being swapped to disk.
@@ -32611,7 +32611,7 @@ type RecentManagerInstance struct {
 
 var _ RecentManager = (*RecentManagerInstance)(nil)
 
-// RecentManagerInstance wraps GtkRecentManager
+// RecentManager wraps GtkRecentManager
 //
 // `GtkRecentManager` manages and looks up recently used files.
 // 
@@ -33171,7 +33171,7 @@ type SelectionFilterModelInstance struct {
 
 var _ SelectionFilterModel = (*SelectionFilterModelInstance)(nil)
 
-// SelectionFilterModelInstance wraps GtkSelectionFilterModel
+// SelectionFilterModel wraps GtkSelectionFilterModel
 //
 // `GtkSelectionFilterModel` is a list model that presents the selection from
 // a `GtkSelectionModel`.
@@ -33325,7 +33325,7 @@ type SettingsInstance struct {
 
 var _ Settings = (*SettingsInstance)(nil)
 
-// SettingsInstance wraps GtkSettings
+// Settings wraps GtkSettings
 //
 // `GtkSettings` provides a mechanism to share global settings between
 // applications.
@@ -33487,7 +33487,7 @@ type ShortcutInstance struct {
 
 var _ Shortcut = (*ShortcutInstance)(nil)
 
-// ShortcutInstance wraps GtkShortcut
+// Shortcut wraps GtkShortcut
 //
 // A `GtkShortcut` describes a keyboard shortcut.
 // 
@@ -33709,7 +33709,7 @@ type ShortcutActionInstance struct {
 
 var _ ShortcutAction = (*ShortcutActionInstance)(nil)
 
-// ShortcutActionInstance wraps GtkShortcutAction
+// ShortcutAction wraps GtkShortcutAction
 //
 // `GtkShortcutAction` encodes an action that can be triggered by a
 // keyboard shortcut.
@@ -33863,7 +33863,7 @@ type ShortcutControllerInstance struct {
 
 var _ ShortcutController = (*ShortcutControllerInstance)(nil)
 
-// ShortcutControllerInstance wraps GtkShortcutController
+// ShortcutController wraps GtkShortcutController
 //
 // `GtkShortcutController` is an event controller that manages shortcuts.
 // 
@@ -34231,7 +34231,7 @@ type ShortcutTriggerInstance struct {
 
 var _ ShortcutTrigger = (*ShortcutTriggerInstance)(nil)
 
-// ShortcutTriggerInstance wraps GtkShortcutTrigger
+// ShortcutTrigger wraps GtkShortcutTrigger
 //
 // `GtkShortcutTrigger` tracks how a `GtkShortcut` should be activated.
 // 
@@ -34436,7 +34436,7 @@ type SignalActionInstance struct {
 
 var _ SignalAction = (*SignalActionInstance)(nil)
 
-// SignalActionInstance wraps GtkSignalAction
+// SignalAction wraps GtkSignalAction
 //
 // A `GtkShortcut`Action that emits a signal.
 // 
@@ -34552,7 +34552,7 @@ type SignalListItemFactoryInstance struct {
 
 var _ SignalListItemFactory = (*SignalListItemFactoryInstance)(nil)
 
-// SignalListItemFactoryInstance wraps GtkSignalListItemFactory
+// SignalListItemFactory wraps GtkSignalListItemFactory
 //
 // `GtkSignalListItemFactory` is a `GtkListItemFactory` that emits signals
 // to manage listitems.
@@ -34665,7 +34665,7 @@ type SingleSelectionInstance struct {
 
 var _ SingleSelection = (*SingleSelectionInstance)(nil)
 
-// SingleSelectionInstance wraps GtkSingleSelection
+// SingleSelection wraps GtkSingleSelection
 //
 // `GtkSingleSelection` is a `GtkSelectionModel` that allows selecting a single
 // item.
@@ -35068,7 +35068,7 @@ type SizeGroupInstance struct {
 
 var _ SizeGroup = (*SizeGroupInstance)(nil)
 
-// SizeGroupInstance wraps GtkSizeGroup
+// SizeGroup wraps GtkSizeGroup
 //
 // `GtkSizeGroup` groups widgets together so they all request the same size.
 // 
@@ -35353,7 +35353,7 @@ type SliceListModelInstance struct {
 
 var _ SliceListModel = (*SliceListModelInstance)(nil)
 
-// SliceListModelInstance wraps GtkSliceListModel
+// SliceListModel wraps GtkSliceListModel
 //
 // `GtkSliceListModel` is a list model that presents a slice of another model.
 // 
@@ -35642,7 +35642,7 @@ type SnapshotInstance struct {
 
 var _ Snapshot = (*SnapshotInstance)(nil)
 
-// SnapshotInstance wraps Snapshot
+// Snapshot wraps Snapshot
 //
 // `GtkSnapshot` assists in creating [class@Gsk.RenderNode]s for widgets.
 // 
@@ -37301,7 +37301,7 @@ type SortListModelInstance struct {
 
 var _ SortListModel = (*SortListModelInstance)(nil)
 
-// SortListModelInstance wraps GtkSortListModel
+// SortListModel wraps GtkSortListModel
 //
 // A `GListModel` that sorts the elements of an underlying model
 // according to a `GtkSorter`.
@@ -37751,7 +37751,7 @@ type SorterInstance struct {
 
 var _ Sorter = (*SorterInstance)(nil)
 
-// SorterInstance wraps GtkSorter
+// Sorter wraps GtkSorter
 //
 // `GtkSorter` is an object to describe sorting criteria.
 // 
@@ -37978,7 +37978,7 @@ type StackPageInstance struct {
 
 var _ StackPage = (*StackPageInstance)(nil)
 
-// StackPageInstance wraps GtkStackPage
+// StackPage wraps GtkStackPage
 //
 // `GtkStackPage` is an auxiliary class used by `GtkStack`.
 type StackPage interface {
@@ -38415,7 +38415,7 @@ type StringFilterInstance struct {
 
 var _ StringFilter = (*StringFilterInstance)(nil)
 
-// StringFilterInstance wraps GtkStringFilter
+// StringFilter wraps GtkStringFilter
 //
 // `GtkStringFilter` determines whether to include items by comparing
 // strings to a fixed search term.
@@ -38659,7 +38659,7 @@ type StringListInstance struct {
 
 var _ StringList = (*StringListInstance)(nil)
 
-// StringListInstance wraps GtkStringList
+// StringList wraps GtkStringList
 //
 // `GtkStringList` is a list model that wraps an array of strings.
 // 
@@ -38992,7 +38992,7 @@ type StringObjectInstance struct {
 
 var _ StringObject = (*StringObjectInstance)(nil)
 
-// StringObjectInstance wraps GtkStringObject
+// StringObject wraps GtkStringObject
 //
 // `GtkStringObject` is the type of items in a `GtkStringList`.
 // 
@@ -39104,7 +39104,7 @@ type StringSorterInstance struct {
 
 var _ StringSorter = (*StringSorterInstance)(nil)
 
-// StringSorterInstance wraps GtkStringSorter
+// StringSorter wraps GtkStringSorter
 //
 // `GtkStringSorter` is a `GtkSorter` that compares strings.
 // 
@@ -39280,7 +39280,7 @@ type TextBufferInstance struct {
 
 var _ TextBuffer = (*TextBufferInstance)(nil)
 
-// TextBufferInstance wraps GtkTextBuffer
+// TextBuffer wraps GtkTextBuffer
 //
 // Stores text and attributes for display in a `GtkTextView`.
 // 
@@ -40411,8 +40411,8 @@ func (buffer *TextBufferInstance) AddCommitNotify(flags TextBufferNotifyFlags, c
 	carg0 = (*C.GtkTextBuffer)(UnsafeTextBufferToGlibNone(buffer))
 	carg1 = C.GtkTextBufferNotifyFlags(flags)
 	carg2 = (*[0]byte)(C._gotk4_gtk4_TextBufferCommitNotify)
-	carg3 = C.gpointer(gbox.Assign(commitNotify))
-	carg4 = (C.GDestroyNotify)((*[0]byte)(C.callbackDelete))
+	carg3 = C.gpointer(userdata.Register(commitNotify))
+	carg4 = (C.GDestroyNotify)((*[0]byte)(C.destroyUserdata))
 
 	cret = C.gtk_text_buffer_add_commit_notify(carg0, carg1, carg2, carg3, carg4)
 	runtime.KeepAlive(buffer)
@@ -42604,7 +42604,7 @@ type TextChildAnchorInstance struct {
 
 var _ TextChildAnchor = (*TextChildAnchorInstance)(nil)
 
-// TextChildAnchorInstance wraps GtkTextChildAnchor
+// TextChildAnchor wraps GtkTextChildAnchor
 //
 // A `GtkTextChildAnchor` is a spot in a `GtkTextBuffer` where child widgets can
 // be “anchored”.
@@ -42797,7 +42797,7 @@ type TextMarkInstance struct {
 
 var _ TextMark = (*TextMarkInstance)(nil)
 
-// TextMarkInstance wraps GtkTextMark
+// TextMark wraps GtkTextMark
 //
 // A `GtkTextMark` is a position in a `GtkTextbuffer` that is preserved
 // across modifications.
@@ -43138,7 +43138,7 @@ type TextTagInstance struct {
 
 var _ TextTag = (*TextTagInstance)(nil)
 
-// TextTagInstance wraps GtkTextTag
+// TextTag wraps GtkTextTag
 //
 // A tag that can be applied to text contained in a `GtkTextBuffer`.
 // 
@@ -43355,7 +43355,7 @@ type TextTagTableInstance struct {
 
 var _ TextTagTable = (*TextTagTableInstance)(nil)
 
-// TextTagTableInstance wraps GtkTextTagTable
+// TextTagTable wraps GtkTextTagTable
 //
 // The collection of tags in a `GtkTextBuffer`
 // 
@@ -43552,8 +43552,8 @@ func (table *TextTagTableInstance) ForEach(fn TextTagTableForEach) {
 
 	carg0 = (*C.GtkTextTagTable)(UnsafeTextTagTableToGlibNone(table))
 	carg1 = (*[0]byte)(C._gotk4_gtk4_TextTagTableForEach)
-	carg2 = C.gpointer(gbox.Assign(fn))
-	defer gbox.Delete(uintptr(carg2))
+	carg2 = C.gpointer(userdata.Register(fn))
+	defer userdata.Delete(unsafe.Pointer(carg2))
 
 	C.gtk_text_tag_table_foreach(carg0, carg1, carg2)
 	runtime.KeepAlive(table)
@@ -43645,7 +43645,7 @@ type TooltipInstance struct {
 
 var _ Tooltip = (*TooltipInstance)(nil)
 
-// TooltipInstance wraps GtkTooltip
+// Tooltip wraps GtkTooltip
 //
 // `GtkTooltip` is an object representing a widget tooltip.
 // 
@@ -43974,7 +43974,7 @@ type TreeListModelInstance struct {
 
 var _ TreeListModel = (*TreeListModelInstance)(nil)
 
-// TreeListModelInstance wraps GtkTreeListModel
+// TreeListModel wraps GtkTreeListModel
 //
 // `GtkTreeListModel` is a list model that can create child models on demand.
 type TreeListModel interface {
@@ -44146,8 +44146,8 @@ func NewTreeListModelInstance(root gio.ListModel, passthrough bool, autoexpand b
 		carg3 = C.TRUE
 	}
 	carg4 = (*[0]byte)(C._gotk4_gtk4_TreeListModelCreateModelFunc)
-	carg5 = C.gpointer(gbox.Assign(createFunc))
-	carg6 = (C.GDestroyNotify)((*[0]byte)(C.callbackDelete))
+	carg5 = C.gpointer(userdata.Register(createFunc))
+	carg6 = (C.GDestroyNotify)((*[0]byte)(C.destroyUserdata))
 
 	cret = C.gtk_tree_list_model_new(carg1, carg2, carg3, carg4, carg5, carg6)
 	runtime.KeepAlive(root)
@@ -44360,7 +44360,7 @@ type TreeListRowInstance struct {
 
 var _ TreeListRow = (*TreeListRowInstance)(nil)
 
-// TreeListRowInstance wraps GtkTreeListRow
+// TreeListRow wraps GtkTreeListRow
 //
 // `GtkTreeListRow` is used by `GtkTreeListModel` to represent items.
 // 
@@ -44773,7 +44773,7 @@ type TreeListRowSorterInstance struct {
 
 var _ TreeListRowSorter = (*TreeListRowSorterInstance)(nil)
 
-// TreeListRowSorterInstance wraps GtkTreeListRowSorter
+// TreeListRowSorter wraps GtkTreeListRowSorter
 //
 // `GtkTreeListRowSorter` is a special-purpose sorter that will apply a given
 // sorter to the levels in a tree.
@@ -44935,7 +44935,7 @@ type UriLauncherInstance struct {
 
 var _ UriLauncher = (*UriLauncherInstance)(nil)
 
-// UriLauncherInstance wraps GtkUriLauncher
+// UriLauncher wraps GtkUriLauncher
 //
 // A `GtkUriLauncher` object collects the arguments that are needed to open a uri
 // with an application.
@@ -45109,7 +45109,7 @@ func (self *UriLauncherInstance) Launch(cancellable context.Context, parent Wind
 	}
 	if callback != nil {
 		carg3 = (*[0]byte)(C._gotk4_gio2_AsyncReadyCallback)
-		carg4 = C.gpointer(gbox.AssignOnce(callback))
+		carg4 = C.gpointer(userdata.RegisterOnce(callback))
 	}
 
 	C.gtk_uri_launcher_launch(carg0, carg1, carg2, carg3, carg4)
@@ -45188,7 +45188,7 @@ type WidgetInstance struct {
 
 var _ Widget = (*WidgetInstance)(nil)
 
-// WidgetInstance wraps GtkWidget
+// Widget wraps GtkWidget
 //
 // The base class for all widgets.
 // 
@@ -47936,8 +47936,8 @@ func (widget *WidgetInstance) AddTickCallback(callback TickCallback) uint {
 
 	carg0 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(widget))
 	carg1 = (*[0]byte)(C._gotk4_gtk4_TickCallback)
-	carg2 = C.gpointer(gbox.Assign(callback))
-	carg3 = (C.GDestroyNotify)((*[0]byte)(C.callbackDelete))
+	carg2 = C.gpointer(userdata.Register(callback))
+	carg3 = (C.GDestroyNotify)((*[0]byte)(C.destroyUserdata))
 
 	cret = C.gtk_widget_add_tick_callback(carg0, carg1, carg2, carg3)
 	runtime.KeepAlive(widget)
@@ -52057,7 +52057,7 @@ type WidgetPaintableInstance struct {
 
 var _ WidgetPaintable = (*WidgetPaintableInstance)(nil)
 
-// WidgetPaintableInstance wraps GtkWidgetPaintable
+// WidgetPaintable wraps GtkWidgetPaintable
 //
 // `GtkWidgetPaintable` is a `GdkPaintable` that displays the contents
 // of a widget.
@@ -52218,7 +52218,7 @@ type WindowInstance struct {
 
 var _ Window = (*WindowInstance)(nil)
 
-// WindowInstance wraps GtkWindow
+// Window wraps GtkWindow
 //
 // A `GtkWindow` is a toplevel window which can contain other widgets.
 // 
@@ -54527,7 +54527,7 @@ type WindowControlsInstance struct {
 
 var _ WindowControls = (*WindowControlsInstance)(nil)
 
-// WindowControlsInstance wraps GtkWindowControls
+// WindowControls wraps GtkWindowControls
 //
 // `GtkWindowControls` shows window frame controls.
 // 
@@ -54836,7 +54836,7 @@ type WindowGroupInstance struct {
 
 var _ WindowGroup = (*WindowGroupInstance)(nil)
 
-// WindowGroupInstance wraps GtkWindowGroup
+// WindowGroup wraps GtkWindowGroup
 //
 // `GtkWindowGroup` makes group of windows behave like separate applications.
 // 
@@ -54977,7 +54977,7 @@ type WindowHandleInstance struct {
 
 var _ WindowHandle = (*WindowHandleInstance)(nil)
 
-// WindowHandleInstance wraps GtkWindowHandle
+// WindowHandle wraps GtkWindowHandle
 //
 // `GtkWindowHandle` is a titlebar area widget.
 // 
@@ -55126,7 +55126,7 @@ type AboutDialogInstance struct {
 
 var _ AboutDialog = (*AboutDialogInstance)(nil)
 
-// AboutDialogInstance wraps GtkAboutDialog
+// AboutDialog wraps GtkAboutDialog
 //
 // The `GtkAboutDialog` offers a simple way to display information about
 // a program.
@@ -56346,7 +56346,7 @@ type ActionBarInstance struct {
 
 var _ ActionBar = (*ActionBarInstance)(nil)
 
-// ActionBarInstance wraps GtkActionBar
+// ActionBar wraps GtkActionBar
 //
 // `GtkActionBar` is designed to present contextual actions.
 // 
@@ -56679,7 +56679,7 @@ type ActivateActionInstance struct {
 
 var _ ActivateAction = (*ActivateActionInstance)(nil)
 
-// ActivateActionInstance wraps GtkActivateAction
+// ActivateAction wraps GtkActivateAction
 //
 // A `GtkShortcutAction` that calls gtk_widget_activate().
 type ActivateAction interface {
@@ -56752,7 +56752,7 @@ type AlternativeTriggerInstance struct {
 
 var _ AlternativeTrigger = (*AlternativeTriggerInstance)(nil)
 
-// AlternativeTriggerInstance wraps GtkAlternativeTrigger
+// AlternativeTrigger wraps GtkAlternativeTrigger
 //
 // A `GtkShortcutTrigger` that combines two triggers.
 // 
@@ -56920,7 +56920,7 @@ type AnyFilterInstance struct {
 
 var _ AnyFilter = (*AnyFilterInstance)(nil)
 
-// AnyFilterInstance wraps GtkAnyFilter
+// AnyFilter wraps GtkAnyFilter
 //
 // `GtkAnyFilter` matches an item when at least one of its filters matches.
 // 
@@ -57014,7 +57014,7 @@ type ApplicationWindowInstance struct {
 
 var _ ApplicationWindow = (*ApplicationWindowInstance)(nil)
 
-// ApplicationWindowInstance wraps GtkApplicationWindow
+// ApplicationWindow wraps GtkApplicationWindow
 //
 // `GtkApplicationWindow` is a `GtkWindow` subclass that integrates with
 // `GtkApplication`.
@@ -57365,7 +57365,7 @@ type AspectFrameInstance struct {
 
 var _ AspectFrame = (*AspectFrameInstance)(nil)
 
-// AspectFrameInstance wraps GtkAspectFrame
+// AspectFrame wraps GtkAspectFrame
 //
 // `GtkAspectFrame` preserves the aspect ratio of its child.
 // 
@@ -57791,7 +57791,7 @@ type BinLayoutInstance struct {
 
 var _ BinLayout = (*BinLayoutInstance)(nil)
 
-// BinLayoutInstance wraps GtkBinLayout
+// BinLayout wraps GtkBinLayout
 //
 // `GtkBinLayout` is a `GtkLayoutManager` subclass useful for create "bins" of
 // widgets.
@@ -57867,7 +57867,7 @@ type BoolFilterInstance struct {
 
 var _ BoolFilter = (*BoolFilterInstance)(nil)
 
-// BoolFilterInstance wraps GtkBoolFilter
+// BoolFilter wraps GtkBoolFilter
 //
 // `GtkBoolFilter` evaluates a boolean `GtkExpression`
 // to determine whether to include items.
@@ -57986,7 +57986,7 @@ type BoxInstance struct {
 
 var _ Box = (*BoxInstance)(nil)
 
-// BoxInstance wraps GtkBox
+// Box wraps GtkBox
 //
 // The `GtkBox` widget arranges child widgets into a single row or column.
 // 
@@ -58542,7 +58542,7 @@ type BoxLayoutInstance struct {
 
 var _ BoxLayout = (*BoxLayoutInstance)(nil)
 
-// BoxLayoutInstance wraps GtkBoxLayout
+// BoxLayout wraps GtkBoxLayout
 //
 // `GtkBoxLayout` is a layout manager that arranges children in a single
 // row or column.
@@ -58883,7 +58883,7 @@ type BuilderListItemFactoryInstance struct {
 
 var _ BuilderListItemFactory = (*BuilderListItemFactoryInstance)(nil)
 
-// BuilderListItemFactoryInstance wraps GtkBuilderListItemFactory
+// BuilderListItemFactory wraps GtkBuilderListItemFactory
 //
 // `GtkBuilderListItemFactory` is a `GtkListItemFactory` that creates
 // widgets by instantiating `GtkBuilder` UI templates.
@@ -59125,7 +59125,7 @@ type ButtonInstance struct {
 
 var _ Button = (*ButtonInstance)(nil)
 
-// ButtonInstance wraps GtkButton
+// Button wraps GtkButton
 //
 // The `GtkButton` widget is generally used to trigger a callback function that is
 // called when the button is pressed.
@@ -59766,7 +59766,7 @@ type CalendarInstance struct {
 
 var _ Calendar = (*CalendarInstance)(nil)
 
-// CalendarInstance wraps GtkCalendar
+// Calendar wraps GtkCalendar
 //
 // `GtkCalendar` is a widget that displays a Gregorian calendar, one month
 // at a time.
@@ -60478,7 +60478,7 @@ type CallbackActionInstance struct {
 
 var _ CallbackAction = (*CallbackActionInstance)(nil)
 
-// CallbackActionInstance wraps GtkCallbackAction
+// CallbackAction wraps GtkCallbackAction
 //
 // A `GtkShortcutAction` that invokes a callback.
 type CallbackAction interface {
@@ -60535,7 +60535,7 @@ type CenterBoxInstance struct {
 
 var _ CenterBox = (*CenterBoxInstance)(nil)
 
-// CenterBoxInstance wraps GtkCenterBox
+// CenterBox wraps GtkCenterBox
 //
 // `GtkCenterBox` arranges three children in a row, keeping the middle child
 // centered as well as possible.
@@ -60985,7 +60985,7 @@ type CenterLayoutInstance struct {
 
 var _ CenterLayout = (*CenterLayoutInstance)(nil)
 
-// CenterLayoutInstance wraps GtkCenterLayout
+// CenterLayout wraps GtkCenterLayout
 //
 // `GtkCenterLayout` is a layout manager that manages up to three children.
 // 
@@ -61439,7 +61439,7 @@ type CheckButtonInstance struct {
 
 var _ CheckButton = (*CheckButtonInstance)(nil)
 
-// CheckButtonInstance wraps GtkCheckButton
+// CheckButton wraps GtkCheckButton
 //
 // A `GtkCheckButton` places a label next to an indicator.
 // 
@@ -62047,7 +62047,7 @@ type ColorDialogButtonInstance struct {
 
 var _ ColorDialogButton = (*ColorDialogButtonInstance)(nil)
 
-// ColorDialogButtonInstance wraps GtkColorDialogButton
+// ColorDialogButton wraps GtkColorDialogButton
 //
 // The `GtkColorDialogButton` is a wrapped around a [class@Gtk.ColorDialog]
 // and allows to open a color chooser dialog to change the color.
@@ -62293,7 +62293,7 @@ type ColumnViewInstance struct {
 
 var _ ColumnView = (*ColumnViewInstance)(nil)
 
-// ColumnViewInstance wraps GtkColumnView
+// ColumnView wraps GtkColumnView
 //
 // `GtkColumnView` presents a large dynamic list of items using multiple columns
 // with headers.
@@ -63336,7 +63336,7 @@ type ColumnViewCellInstance struct {
 
 var _ ColumnViewCell = (*ColumnViewCellInstance)(nil)
 
-// ColumnViewCellInstance wraps GtkColumnViewCell
+// ColumnViewCell wraps GtkColumnViewCell
 //
 // `GtkColumnViewCell` is used by [class@Gtk.ColumnViewColumn] to represent items
 // in a cell in [class@Gtk.ColumnView].
@@ -63652,7 +63652,7 @@ type ColumnViewSorterInstance struct {
 
 var _ ColumnViewSorter = (*ColumnViewSorterInstance)(nil)
 
-// ColumnViewSorterInstance wraps GtkColumnViewSorter
+// ColumnViewSorter wraps GtkColumnViewSorter
 //
 // `GtkColumnViewSorter` is a sorter implementation that
 // is geared towards the needs of `GtkColumnView`.
@@ -63914,7 +63914,7 @@ type ConstraintLayoutInstance struct {
 
 var _ ConstraintLayout = (*ConstraintLayoutInstance)(nil)
 
-// ConstraintLayoutInstance wraps GtkConstraintLayout
+// ConstraintLayout wraps GtkConstraintLayout
 //
 // A layout manager using constraints to describe relations between widgets.
 // 
@@ -64405,7 +64405,7 @@ type ConstraintLayoutChildInstance struct {
 
 var _ ConstraintLayoutChild = (*ConstraintLayoutChildInstance)(nil)
 
-// ConstraintLayoutChildInstance wraps GtkConstraintLayoutChild
+// ConstraintLayoutChild wraps GtkConstraintLayoutChild
 //
 // `GtkLayoutChild` subclass for children in a `GtkConstraintLayout`.
 type ConstraintLayoutChild interface {
@@ -64457,7 +64457,7 @@ type CustomFilterInstance struct {
 
 var _ CustomFilter = (*CustomFilterInstance)(nil)
 
-// CustomFilterInstance wraps GtkCustomFilter
+// CustomFilter wraps GtkCustomFilter
 //
 // `GtkCustomFilter` determines whether to include items with a callback.
 type CustomFilter interface {
@@ -64543,8 +64543,8 @@ func NewCustomFilterInstance(matchFunc CustomFilterFunc) CustomFilter {
 
 	if matchFunc != nil {
 		carg1 = (*[0]byte)(C._gotk4_gtk4_CustomFilterFunc)
-		carg2 = C.gpointer(gbox.Assign(matchFunc))
-		carg3 = (C.GDestroyNotify)((*[0]byte)(C.callbackDelete))
+		carg2 = C.gpointer(userdata.Register(matchFunc))
+		carg3 = (C.GDestroyNotify)((*[0]byte)(C.destroyUserdata))
 	}
 
 	cret = C.gtk_custom_filter_new(carg1, carg2, carg3)
@@ -64581,8 +64581,8 @@ func (self *CustomFilterInstance) SetFilterFunc(matchFunc CustomFilterFunc) {
 	carg0 = (*C.GtkCustomFilter)(UnsafeCustomFilterToGlibNone(self))
 	if matchFunc != nil {
 		carg1 = (*[0]byte)(C._gotk4_gtk4_CustomFilterFunc)
-		carg2 = C.gpointer(gbox.Assign(matchFunc))
-		carg3 = (C.GDestroyNotify)((*[0]byte)(C.callbackDelete))
+		carg2 = C.gpointer(userdata.Register(matchFunc))
+		carg3 = (C.GDestroyNotify)((*[0]byte)(C.destroyUserdata))
 	}
 
 	C.gtk_custom_filter_set_filter_func(carg0, carg1, carg2, carg3)
@@ -64598,7 +64598,7 @@ type CustomLayoutInstance struct {
 
 var _ CustomLayout = (*CustomLayoutInstance)(nil)
 
-// CustomLayoutInstance wraps GtkCustomLayout
+// CustomLayout wraps GtkCustomLayout
 //
 // `GtkCustomLayout` uses closures for size negotiation.
 // 
@@ -64655,7 +64655,7 @@ type CustomSorterInstance struct {
 
 var _ CustomSorter = (*CustomSorterInstance)(nil)
 
-// CustomSorterInstance wraps GtkCustomSorter
+// CustomSorter wraps GtkCustomSorter
 //
 // `GtkCustomSorter` is a `GtkSorter` implementation that sorts via a callback
 // function.
@@ -64739,8 +64739,8 @@ func NewCustomSorterInstance(sortFunc glib.CompareDataFunc) CustomSorter {
 
 	if sortFunc != nil {
 		carg1 = (*[0]byte)(C._gotk4_glib2_CompareDataFunc)
-		carg2 = C.gpointer(gbox.Assign(sortFunc))
-		carg3 = (C.GDestroyNotify)((*[0]byte)(C.callbackDelete))
+		carg2 = C.gpointer(userdata.Register(sortFunc))
+		carg3 = (C.GDestroyNotify)((*[0]byte)(C.destroyUserdata))
 	}
 
 	cret = C.gtk_custom_sorter_new(carg1, carg2, carg3)
@@ -64777,8 +64777,8 @@ func (self *CustomSorterInstance) SetSortFunc(sortFunc glib.CompareDataFunc) {
 	carg0 = (*C.GtkCustomSorter)(UnsafeCustomSorterToGlibNone(self))
 	if sortFunc != nil {
 		carg1 = (*[0]byte)(C._gotk4_glib2_CompareDataFunc)
-		carg2 = C.gpointer(gbox.Assign(sortFunc))
-		carg3 = (C.GDestroyNotify)((*[0]byte)(C.callbackDelete))
+		carg2 = C.gpointer(userdata.Register(sortFunc))
+		carg3 = (C.GDestroyNotify)((*[0]byte)(C.destroyUserdata))
 	}
 
 	C.gtk_custom_sorter_set_sort_func(carg0, carg1, carg2, carg3)
@@ -64798,7 +64798,7 @@ type DragIconInstance struct {
 
 var _ DragIcon = (*DragIconInstance)(nil)
 
-// DragIconInstance wraps GtkDragIcon
+// DragIcon wraps GtkDragIcon
 //
 // `GtkDragIcon` is a `GtkRoot` implementation for drag icons.
 // 
@@ -65031,7 +65031,7 @@ type DragSourceInstance struct {
 
 var _ DragSource = (*DragSourceInstance)(nil)
 
-// DragSourceInstance wraps GtkDragSource
+// DragSource wraps GtkDragSource
 //
 // `GtkDragSource` is an event controller to initiate Drag-And-Drop operations.
 // 
@@ -65435,7 +65435,7 @@ type DrawingAreaInstance struct {
 
 var _ DrawingArea = (*DrawingAreaInstance)(nil)
 
-// DrawingAreaInstance wraps GtkDrawingArea
+// DrawingArea wraps GtkDrawingArea
 //
 // `GtkDrawingArea` is a widget that allows drawing with cairo.
 // 
@@ -65737,7 +65737,7 @@ type DropControllerMotionInstance struct {
 
 var _ DropControllerMotion = (*DropControllerMotionInstance)(nil)
 
-// DropControllerMotionInstance wraps GtkDropControllerMotion
+// DropControllerMotion wraps GtkDropControllerMotion
 //
 // `GtkDropControllerMotion` is an event controller tracking
 // the pointer during Drag-and-Drop operations.
@@ -65917,7 +65917,7 @@ type DropDownInstance struct {
 
 var _ DropDown = (*DropDownInstance)(nil)
 
-// DropDownInstance wraps GtkDropDown
+// DropDown wraps GtkDropDown
 //
 // `GtkDropDown` is a widget that allows the user to choose an item
 // from a list of options.
@@ -66578,7 +66578,7 @@ type DropTargetInstance struct {
 
 var _ DropTarget = (*DropTargetInstance)(nil)
 
-// DropTargetInstance wraps GtkDropTarget
+// DropTarget wraps GtkDropTarget
 //
 // `GtkDropTarget` is an event controller to receive Drag-and-Drop operations.
 // 
@@ -67023,7 +67023,7 @@ type DropTargetAsyncInstance struct {
 
 var _ DropTargetAsync = (*DropTargetAsyncInstance)(nil)
 
-// DropTargetAsyncInstance wraps GtkDropTargetAsync
+// DropTargetAsync wraps GtkDropTargetAsync
 //
 // `GtkDropTargetAsync` is an event controller to receive Drag-and-Drop
 // operations, asynchronously.
@@ -67299,7 +67299,7 @@ type EditableLabelInstance struct {
 
 var _ EditableLabel = (*EditableLabelInstance)(nil)
 
-// EditableLabelInstance wraps GtkEditableLabel
+// EditableLabel wraps GtkEditableLabel
 //
 // A `GtkEditableLabel` is a label that allows users to
 // edit the text by switching to an “edit mode”.
@@ -67525,7 +67525,7 @@ type EntryInstance struct {
 
 var _ Entry = (*EntryInstance)(nil)
 
-// EntryInstance wraps GtkEntry
+// Entry wraps GtkEntry
 //
 // `GtkEntry` is a single line text entry widget.
 // 
@@ -69830,7 +69830,7 @@ type EveryFilterInstance struct {
 
 var _ EveryFilter = (*EveryFilterInstance)(nil)
 
-// EveryFilterInstance wraps GtkEveryFilter
+// EveryFilter wraps GtkEveryFilter
 //
 // `GtkEveryFilter` matches an item when each of its filters matches.
 // 
@@ -69921,7 +69921,7 @@ type ExpanderInstance struct {
 
 var _ Expander = (*ExpanderInstance)(nil)
 
-// ExpanderInstance wraps GtkExpander
+// Expander wraps GtkExpander
 //
 // `GtkExpander` allows the user to reveal its child by clicking
 // on an expander triangle.
@@ -70600,7 +70600,7 @@ type FileFilterInstance struct {
 
 var _ FileFilter = (*FileFilterInstance)(nil)
 
-// FileFilterInstance wraps GtkFileFilter
+// FileFilter wraps GtkFileFilter
 //
 // `GtkFileFilter` filters files by name or mime type.
 // 
@@ -70977,7 +70977,7 @@ type FixedInstance struct {
 
 var _ Fixed = (*FixedInstance)(nil)
 
-// FixedInstance wraps GtkFixed
+// Fixed wraps GtkFixed
 //
 // `GtkFixed` places its child widgets at fixed positions and with fixed sizes.
 // 
@@ -71342,7 +71342,7 @@ type FixedLayoutInstance struct {
 
 var _ FixedLayout = (*FixedLayoutInstance)(nil)
 
-// FixedLayoutInstance wraps GtkFixedLayout
+// FixedLayout wraps GtkFixedLayout
 //
 // `GtkFixedLayout` is a layout manager which can place child widgets
 // at fixed positions.
@@ -71442,7 +71442,7 @@ type FixedLayoutChildInstance struct {
 
 var _ FixedLayoutChild = (*FixedLayoutChildInstance)(nil)
 
-// FixedLayoutChildInstance wraps GtkFixedLayoutChild
+// FixedLayoutChild wraps GtkFixedLayoutChild
 //
 // `GtkLayoutChild` subclass for children in a `GtkFixedLayout`.
 type FixedLayoutChild interface {
@@ -71556,7 +71556,7 @@ type FlowBoxInstance struct {
 
 var _ FlowBox = (*FlowBoxInstance)(nil)
 
-// FlowBoxInstance wraps GtkFlowBox
+// FlowBox wraps GtkFlowBox
 //
 // A `GtkFlowBox` puts child widgets in reflowing grid.
 // 
@@ -72103,8 +72103,8 @@ func (box *FlowBoxInstance) BindModel(model gio.ListModel, createWidgetFunc Flow
 		carg1 = (*C.GListModel)(gio.UnsafeListModelToGlibNone(model))
 	}
 	carg2 = (*[0]byte)(C._gotk4_gtk4_FlowBoxCreateWidgetFunc)
-	carg3 = C.gpointer(gbox.Assign(createWidgetFunc))
-	carg4 = (C.GDestroyNotify)((*[0]byte)(C.callbackDelete))
+	carg3 = C.gpointer(userdata.Register(createWidgetFunc))
+	carg4 = (C.GDestroyNotify)((*[0]byte)(C.destroyUserdata))
 
 	C.gtk_flow_box_bind_model(carg0, carg1, carg2, carg3, carg4)
 	runtime.KeepAlive(box)
@@ -72505,8 +72505,8 @@ func (box *FlowBoxInstance) SelectedForEach(fn FlowBoxForEachFunc) {
 
 	carg0 = (*C.GtkFlowBox)(UnsafeFlowBoxToGlibNone(box))
 	carg1 = (*[0]byte)(C._gotk4_gtk4_FlowBoxForEachFunc)
-	carg2 = C.gpointer(gbox.Assign(fn))
-	defer gbox.Delete(uintptr(carg2))
+	carg2 = C.gpointer(userdata.Register(fn))
+	defer userdata.Delete(unsafe.Pointer(carg2))
 
 	C.gtk_flow_box_selected_foreach(carg0, carg1, carg2)
 	runtime.KeepAlive(box)
@@ -72583,8 +72583,8 @@ func (box *FlowBoxInstance) SetFilterFunc(filterFunc FlowBoxFilterFunc) {
 	carg0 = (*C.GtkFlowBox)(UnsafeFlowBoxToGlibNone(box))
 	if filterFunc != nil {
 		carg1 = (*[0]byte)(C._gotk4_gtk4_FlowBoxFilterFunc)
-		carg2 = C.gpointer(gbox.Assign(filterFunc))
-		carg3 = (C.GDestroyNotify)((*[0]byte)(C.callbackDelete))
+		carg2 = C.gpointer(userdata.Register(filterFunc))
+		carg3 = (C.GDestroyNotify)((*[0]byte)(C.destroyUserdata))
 	}
 
 	C.gtk_flow_box_set_filter_func(carg0, carg1, carg2, carg3)
@@ -72753,8 +72753,8 @@ func (box *FlowBoxInstance) SetSortFunc(sortFunc FlowBoxSortFunc) {
 	carg0 = (*C.GtkFlowBox)(UnsafeFlowBoxToGlibNone(box))
 	if sortFunc != nil {
 		carg1 = (*[0]byte)(C._gotk4_gtk4_FlowBoxSortFunc)
-		carg2 = C.gpointer(gbox.Assign(sortFunc))
-		carg3 = (C.GDestroyNotify)((*[0]byte)(C.callbackDelete))
+		carg2 = C.gpointer(userdata.Register(sortFunc))
+		carg3 = (C.GDestroyNotify)((*[0]byte)(C.destroyUserdata))
 	}
 
 	C.gtk_flow_box_set_sort_func(carg0, carg1, carg2, carg3)
@@ -72837,7 +72837,7 @@ type FlowBoxChildInstance struct {
 
 var _ FlowBoxChild = (*FlowBoxChildInstance)(nil)
 
-// FlowBoxChildInstance wraps GtkFlowBoxChild
+// FlowBoxChild wraps GtkFlowBoxChild
 //
 // `GtkFlowBoxChild` is the kind of widget that can be added to a `GtkFlowBox`.
 type FlowBoxChild interface {
@@ -73100,7 +73100,7 @@ type FontDialogButtonInstance struct {
 
 var _ FontDialogButton = (*FontDialogButtonInstance)(nil)
 
-// FontDialogButtonInstance wraps GtkFontDialogButton
+// FontDialogButton wraps GtkFontDialogButton
 //
 // The `GtkFontDialogButton` is wrapped around a [class@Gtk.FontDialog]
 // and allows to open a font chooser dialog to change the font.
@@ -73665,7 +73665,7 @@ type FrameInstance struct {
 
 var _ Frame = (*FrameInstance)(nil)
 
-// FrameInstance wraps GtkFrame
+// Frame wraps GtkFrame
 //
 // `GtkFrame` is a widget that surrounds its child with a decorative
 // frame and an optional label.
@@ -74066,7 +74066,7 @@ type GLAreaInstance struct {
 
 var _ GLArea = (*GLAreaInstance)(nil)
 
-// GLAreaInstance wraps GtkGLArea
+// GLArea wraps GtkGLArea
 //
 // `GtkGLArea` is a widget that allows drawing with OpenGL.
 // 
@@ -74836,7 +74836,7 @@ type GestureClickInstance struct {
 
 var _ GestureClick = (*GestureClickInstance)(nil)
 
-// GestureClickInstance wraps GtkGestureClick
+// GestureClick wraps GtkGestureClick
 //
 // `GtkGestureClick` is a `GtkGesture` implementation for clicks.
 // 
@@ -74917,7 +74917,7 @@ type GestureDragInstance struct {
 
 var _ GestureDrag = (*GestureDragInstance)(nil)
 
-// GestureDragInstance wraps GtkGestureDrag
+// GestureDrag wraps GtkGestureDrag
 //
 // `GtkGestureDrag` is a `GtkGesture` implementation for drags.
 // 
@@ -75098,7 +75098,7 @@ type GestureLongPressInstance struct {
 
 var _ GestureLongPress = (*GestureLongPressInstance)(nil)
 
-// GestureLongPressInstance wraps GtkGestureLongPress
+// GestureLongPress wraps GtkGestureLongPress
 //
 // `GtkGestureLongPress` is a `GtkGesture` for long presses.
 // 
@@ -75249,7 +75249,7 @@ type GesturePanInstance struct {
 
 var _ GesturePan = (*GesturePanInstance)(nil)
 
-// GesturePanInstance wraps GtkGesturePan
+// GesturePan wraps GtkGesturePan
 //
 // `GtkGesturePan` is a `GtkGesture` for pan gestures.
 // 
@@ -75408,7 +75408,7 @@ type GraphicsOffloadInstance struct {
 
 var _ GraphicsOffload = (*GraphicsOffloadInstance)(nil)
 
-// GraphicsOffloadInstance wraps GtkGraphicsOffload
+// GraphicsOffload wraps GtkGraphicsOffload
 //
 // A widget that allows to bypass gsk rendering for its child by passing the content
 // directly to the compositor.
@@ -75750,7 +75750,7 @@ type GridInstance struct {
 
 var _ Grid = (*GridInstance)(nil)
 
-// GridInstance wraps GtkGrid
+// Grid wraps GtkGrid
 //
 // `GtkGrid` is a container which arranges its child widgets in
 // rows and columns.
@@ -76751,7 +76751,7 @@ type GridLayoutInstance struct {
 
 var _ GridLayout = (*GridLayoutInstance)(nil)
 
-// GridLayoutInstance wraps GtkGridLayout
+// GridLayout wraps GtkGridLayout
 //
 // `GtkGridLayout` is a layout manager which arranges child widgets in
 // rows and columns.
@@ -77217,7 +77217,7 @@ type GridLayoutChildInstance struct {
 
 var _ GridLayoutChild = (*GridLayoutChildInstance)(nil)
 
-// GridLayoutChildInstance wraps GtkGridLayoutChild
+// GridLayoutChild wraps GtkGridLayoutChild
 //
 // `GtkLayoutChild` subclass for children in a `GtkGridLayout`.
 type GridLayoutChild interface {
@@ -77498,7 +77498,7 @@ type HeaderBarInstance struct {
 
 var _ HeaderBar = (*HeaderBarInstance)(nil)
 
-// HeaderBarInstance wraps GtkHeaderBar
+// HeaderBar wraps GtkHeaderBar
 //
 // `GtkHeaderBar` is a widget for creating custom title bars for windows.
 // 
@@ -77989,7 +77989,7 @@ type ImageInstance struct {
 
 var _ Image = (*ImageInstance)(nil)
 
-// ImageInstance wraps GtkImage
+// Image wraps GtkImage
 //
 // The `GtkImage` widget displays an image.
 // 
@@ -78752,7 +78752,7 @@ type InscriptionInstance struct {
 
 var _ Inscription = (*InscriptionInstance)(nil)
 
-// InscriptionInstance wraps GtkInscription
+// Inscription wraps GtkInscription
 //
 // `GtkInscription` is a widget to show text in a predefined area.
 // 
@@ -79523,7 +79523,7 @@ type KeyvalTriggerInstance struct {
 
 var _ KeyvalTrigger = (*KeyvalTriggerInstance)(nil)
 
-// KeyvalTriggerInstance wraps GtkKeyvalTrigger
+// KeyvalTrigger wraps GtkKeyvalTrigger
 //
 // A `GtkShortcutTrigger` that triggers when a specific keyval and modifiers are pressed.
 type KeyvalTrigger interface {
@@ -79675,7 +79675,7 @@ type LabelInstance struct {
 
 var _ Label = (*LabelInstance)(nil)
 
-// LabelInstance wraps GtkLabel
+// Label wraps GtkLabel
 //
 // The `GtkLabel` widget displays a small amount of text.
 // 
@@ -81860,7 +81860,7 @@ type LevelBarInstance struct {
 
 var _ LevelBar = (*LevelBarInstance)(nil)
 
-// LevelBarInstance wraps GtkLevelBar
+// LevelBar wraps GtkLevelBar
 //
 // `GtkLevelBar` is a widget that can be used as a level indicator.
 // 
@@ -82515,7 +82515,7 @@ type LinkButtonInstance struct {
 
 var _ LinkButton = (*LinkButtonInstance)(nil)
 
-// LinkButtonInstance wraps GtkLinkButton
+// LinkButton wraps GtkLinkButton
 //
 // A `GtkLinkButton` is a button with a hyperlink.
 // 
@@ -82826,7 +82826,7 @@ type ListBaseInstance struct {
 
 var _ ListBase = (*ListBaseInstance)(nil)
 
-// ListBaseInstance wraps GtkListBase
+// ListBase wraps GtkListBase
 //
 // `GtkListBase` is the abstract base class for GTK's list widgets.
 // 
@@ -82947,7 +82947,7 @@ type ListBoxInstance struct {
 
 var _ ListBox = (*ListBoxInstance)(nil)
 
-// ListBoxInstance wraps GtkListBox
+// ListBox wraps GtkListBox
 //
 // `GtkListBox` is a vertical list.
 // 
@@ -83492,8 +83492,8 @@ func (box *ListBoxInstance) BindModel(model gio.ListModel, createWidgetFunc List
 	}
 	if createWidgetFunc != nil {
 		carg2 = (*[0]byte)(C._gotk4_gtk4_ListBoxCreateWidgetFunc)
-		carg3 = C.gpointer(gbox.Assign(createWidgetFunc))
-		carg4 = (C.GDestroyNotify)((*[0]byte)(C.callbackDelete))
+		carg3 = C.gpointer(userdata.Register(createWidgetFunc))
+		carg4 = (C.GDestroyNotify)((*[0]byte)(C.destroyUserdata))
 	}
 
 	C.gtk_list_box_bind_model(carg0, carg1, carg2, carg3, carg4)
@@ -83908,8 +83908,8 @@ func (box *ListBoxInstance) SelectedForEach(fn ListBoxForEachFunc) {
 
 	carg0 = (*C.GtkListBox)(UnsafeListBoxToGlibNone(box))
 	carg1 = (*[0]byte)(C._gotk4_gtk4_ListBoxForEachFunc)
-	carg2 = C.gpointer(gbox.Assign(fn))
-	defer gbox.Delete(uintptr(carg2))
+	carg2 = C.gpointer(userdata.Register(fn))
+	defer userdata.Delete(unsafe.Pointer(carg2))
 
 	C.gtk_list_box_selected_foreach(carg0, carg1, carg2)
 	runtime.KeepAlive(box)
@@ -83997,8 +83997,8 @@ func (box *ListBoxInstance) SetFilterFunc(filterFunc ListBoxFilterFunc) {
 	carg0 = (*C.GtkListBox)(UnsafeListBoxToGlibNone(box))
 	if filterFunc != nil {
 		carg1 = (*[0]byte)(C._gotk4_gtk4_ListBoxFilterFunc)
-		carg2 = C.gpointer(gbox.Assign(filterFunc))
-		carg3 = (C.GDestroyNotify)((*[0]byte)(C.callbackDelete))
+		carg2 = C.gpointer(userdata.Register(filterFunc))
+		carg3 = (C.GDestroyNotify)((*[0]byte)(C.destroyUserdata))
 	}
 
 	C.gtk_list_box_set_filter_func(carg0, carg1, carg2, carg3)
@@ -84047,8 +84047,8 @@ func (box *ListBoxInstance) SetHeaderFunc(updateHeader ListBoxUpdateHeaderFunc) 
 	carg0 = (*C.GtkListBox)(UnsafeListBoxToGlibNone(box))
 	if updateHeader != nil {
 		carg1 = (*[0]byte)(C._gotk4_gtk4_ListBoxUpdateHeaderFunc)
-		carg2 = C.gpointer(gbox.Assign(updateHeader))
-		carg3 = (C.GDestroyNotify)((*[0]byte)(C.callbackDelete))
+		carg2 = C.gpointer(userdata.Register(updateHeader))
+		carg3 = (C.GDestroyNotify)((*[0]byte)(C.destroyUserdata))
 	}
 
 	C.gtk_list_box_set_header_func(carg0, carg1, carg2, carg3)
@@ -84146,8 +84146,8 @@ func (box *ListBoxInstance) SetSortFunc(sortFunc ListBoxSortFunc) {
 	carg0 = (*C.GtkListBox)(UnsafeListBoxToGlibNone(box))
 	if sortFunc != nil {
 		carg1 = (*[0]byte)(C._gotk4_gtk4_ListBoxSortFunc)
-		carg2 = C.gpointer(gbox.Assign(sortFunc))
-		carg3 = (C.GDestroyNotify)((*[0]byte)(C.callbackDelete))
+		carg2 = C.gpointer(userdata.Register(sortFunc))
+		carg3 = (C.GDestroyNotify)((*[0]byte)(C.destroyUserdata))
 	}
 
 	C.gtk_list_box_set_sort_func(carg0, carg1, carg2, carg3)
@@ -84199,7 +84199,7 @@ type ListBoxRowInstance struct {
 
 var _ ListBoxRow = (*ListBoxRowInstance)(nil)
 
-// ListBoxRowInstance wraps GtkListBoxRow
+// ListBoxRow wraps GtkListBoxRow
 //
 // `GtkListBoxRow` is the kind of widget that can be added to a `GtkListBox`.
 type ListBoxRow interface {
@@ -84656,7 +84656,7 @@ type ListViewInstance struct {
 
 var _ ListView = (*ListViewInstance)(nil)
 
-// ListViewInstance wraps GtkListView
+// ListView wraps GtkListView
 //
 // `GtkListView` presents a large dynamic list of items.
 // 
@@ -85357,7 +85357,7 @@ type MediaControlsInstance struct {
 
 var _ MediaControls = (*MediaControlsInstance)(nil)
 
-// MediaControlsInstance wraps GtkMediaControls
+// MediaControls wraps GtkMediaControls
 //
 // `GtkMediaControls` is a widget to show controls for a video.
 // 
@@ -85515,7 +85515,7 @@ type MediaFileInstance struct {
 
 var _ MediaFile = (*MediaFileInstance)(nil)
 
-// MediaFileInstance wraps GtkMediaFile
+// MediaFile wraps GtkMediaFile
 //
 // `GtkMediaFile` implements `GtkMediaStream` for files.
 // 
@@ -85949,7 +85949,7 @@ type MenuButtonInstance struct {
 
 var _ MenuButton = (*MenuButtonInstance)(nil)
 
-// MenuButtonInstance wraps GtkMenuButton
+// MenuButton wraps GtkMenuButton
 //
 // The `GtkMenuButton` widget is used to display a popup when clicked.
 // 
@@ -86792,8 +86792,8 @@ func (menuButton *MenuButtonInstance) SetCreatePopupFunc(fn MenuButtonCreatePopu
 	carg0 = (*C.GtkMenuButton)(UnsafeMenuButtonToGlibNone(menuButton))
 	if fn != nil {
 		carg1 = (*[0]byte)(C._gotk4_gtk4_MenuButtonCreatePopupFunc)
-		carg2 = C.gpointer(gbox.Assign(fn))
-		carg3 = (C.GDestroyNotify)((*[0]byte)(C.callbackDelete))
+		carg2 = C.gpointer(userdata.Register(fn))
+		carg3 = (C.GDestroyNotify)((*[0]byte)(C.destroyUserdata))
 	}
 
 	C.gtk_menu_button_set_create_popup_func(carg0, carg1, carg2, carg3)
@@ -87012,7 +87012,7 @@ type MnemonicActionInstance struct {
 
 var _ MnemonicAction = (*MnemonicActionInstance)(nil)
 
-// MnemonicActionInstance wraps GtkMnemonicAction
+// MnemonicAction wraps GtkMnemonicAction
 //
 // A `GtkShortcutAction` that calls gtk_widget_mnemonic_activate().
 type MnemonicAction interface {
@@ -87085,7 +87085,7 @@ type MnemonicTriggerInstance struct {
 
 var _ MnemonicTrigger = (*MnemonicTriggerInstance)(nil)
 
-// MnemonicTriggerInstance wraps GtkMnemonicTrigger
+// MnemonicTrigger wraps GtkMnemonicTrigger
 //
 // A `GtkShortcutTrigger` that triggers when a specific mnemonic is pressed.
 // 
@@ -87204,7 +87204,7 @@ type MultiSorterInstance struct {
 
 var _ MultiSorter = (*MultiSorterInstance)(nil)
 
-// MultiSorterInstance wraps GtkMultiSorter
+// MultiSorter wraps GtkMultiSorter
 //
 // `GtkMultiSorter` combines multiple sorters by trying them
 // in turn.
@@ -87358,7 +87358,7 @@ type NamedActionInstance struct {
 
 var _ NamedAction = (*NamedActionInstance)(nil)
 
-// NamedActionInstance wraps GtkNamedAction
+// NamedAction wraps GtkNamedAction
 //
 // A `GtkShortcutAction` that activates an action by name.
 type NamedAction interface {
@@ -87474,7 +87474,7 @@ type NeverTriggerInstance struct {
 
 var _ NeverTrigger = (*NeverTriggerInstance)(nil)
 
-// NeverTriggerInstance wraps GtkNeverTrigger
+// NeverTrigger wraps GtkNeverTrigger
 //
 // A `GtkShortcutTrigger` that never triggers.
 type NeverTrigger interface {
@@ -87552,7 +87552,7 @@ type NotebookInstance struct {
 
 var _ Notebook = (*NotebookInstance)(nil)
 
-// NotebookInstance wraps GtkNotebook
+// Notebook wraps GtkNotebook
 //
 // `GtkNotebook` is a container whose children are pages switched
 // between using tabs.
@@ -89549,7 +89549,7 @@ type NothingActionInstance struct {
 
 var _ NothingAction = (*NothingActionInstance)(nil)
 
-// NothingActionInstance wraps GtkNothingAction
+// NothingAction wraps GtkNothingAction
 //
 // A `GtkShortcutAction` that does nothing.
 type NothingAction interface {
@@ -89622,7 +89622,7 @@ type NumericSorterInstance struct {
 
 var _ NumericSorter = (*NumericSorterInstance)(nil)
 
-// NumericSorterInstance wraps GtkNumericSorter
+// NumericSorter wraps GtkNumericSorter
 //
 // `GtkNumericSorter` is a `GtkSorter` that compares numbers.
 // 
@@ -89738,7 +89738,7 @@ type OverlayInstance struct {
 
 var _ Overlay = (*OverlayInstance)(nil)
 
-// OverlayInstance wraps GtkOverlay
+// Overlay wraps GtkOverlay
 //
 // `GtkOverlay` is a container which contains a single main child, on top
 // of which it can place “overlay” widgets.
@@ -90152,7 +90152,7 @@ type PanedInstance struct {
 
 var _ Paned = (*PanedInstance)(nil)
 
-// PanedInstance wraps GtkPaned
+// Paned wraps GtkPaned
 //
 // A widget with two panes, arranged either horizontally or vertically.
 // 
@@ -90817,7 +90817,7 @@ type PasswordEntryInstance struct {
 
 var _ PasswordEntry = (*PasswordEntryInstance)(nil)
 
-// PasswordEntryInstance wraps GtkPasswordEntry
+// PasswordEntry wraps GtkPasswordEntry
 //
 // `GtkPasswordEntry` is an entry that has been tailored for entering secrets.
 // 
@@ -91065,7 +91065,7 @@ type PictureInstance struct {
 
 var _ Picture = (*PictureInstance)(nil)
 
-// PictureInstance wraps GtkPicture
+// Picture wraps GtkPicture
 //
 // The `GtkPicture` widget displays a `GdkPaintable`.
 // 
@@ -91755,7 +91755,7 @@ type PopoverInstance struct {
 
 var _ Popover = (*PopoverInstance)(nil)
 
-// PopoverInstance wraps GtkPopover
+// Popover wraps GtkPopover
 //
 // `GtkPopover` is a bubble-like context popup.
 // 
@@ -92591,7 +92591,7 @@ type PopoverMenuInstance struct {
 
 var _ PopoverMenu = (*PopoverMenuInstance)(nil)
 
-// PopoverMenuInstance wraps GtkPopoverMenu
+// PopoverMenu wraps GtkPopoverMenu
 //
 // `GtkPopoverMenu` is a subclass of `GtkPopover` that implements menu
 // behavior.
@@ -93087,7 +93087,7 @@ type PopoverMenuBarInstance struct {
 
 var _ PopoverMenuBar = (*PopoverMenuBarInstance)(nil)
 
-// PopoverMenuBarInstance wraps GtkPopoverMenuBar
+// PopoverMenuBar wraps GtkPopoverMenuBar
 //
 // `GtkPopoverMenuBar` presents a horizontal bar of items that pop
 // up popover menus when clicked.
@@ -93379,7 +93379,7 @@ type ProgressBarInstance struct {
 
 var _ ProgressBar = (*ProgressBarInstance)(nil)
 
-// ProgressBarInstance wraps GtkProgressBar
+// ProgressBar wraps GtkProgressBar
 //
 // `GtkProgressBar` is typically used to display the progress of a long
 // running operation.
@@ -93976,7 +93976,7 @@ type RangeInstance struct {
 
 var _ Range = (*RangeInstance)(nil)
 
-// RangeInstance wraps GtkRange
+// Range wraps GtkRange
 //
 // `GtkRange` is the common base class for widgets which visualize an
 // adjustment.
@@ -94868,7 +94868,7 @@ type RevealerInstance struct {
 
 var _ Revealer = (*RevealerInstance)(nil)
 
-// RevealerInstance wraps GtkRevealer
+// Revealer wraps GtkRevealer
 //
 // A `GtkRevealer` animates the transition of its child from invisible to visible.
 // 
@@ -95266,7 +95266,7 @@ type ScaleInstance struct {
 
 var _ Scale = (*ScaleInstance)(nil)
 
-// ScaleInstance wraps GtkScale
+// Scale wraps GtkScale
 //
 // A `GtkScale` is a slider control used to select a numeric value.
 // 
@@ -95928,8 +95928,8 @@ func (scale *ScaleInstance) SetFormatValueFunc(fn ScaleFormatValueFunc) {
 	carg0 = (*C.GtkScale)(UnsafeScaleToGlibNone(scale))
 	if fn != nil {
 		carg1 = (*[0]byte)(C._gotk4_gtk4_ScaleFormatValueFunc)
-		carg2 = C.gpointer(gbox.Assign(fn))
-		carg3 = (C.GDestroyNotify)((*[0]byte)(C.callbackDelete))
+		carg2 = C.gpointer(userdata.Register(fn))
+		carg3 = (C.GDestroyNotify)((*[0]byte)(C.destroyUserdata))
 	}
 
 	C.gtk_scale_set_format_value_func(carg0, carg1, carg2, carg3)
@@ -95995,7 +95995,7 @@ type ScaleButtonInstance struct {
 
 var _ ScaleButton = (*ScaleButtonInstance)(nil)
 
-// ScaleButtonInstance wraps GtkScaleButton
+// ScaleButton wraps GtkScaleButton
 //
 // `GtkScaleButton` provides a button which pops up a scale widget.
 // 
@@ -96491,7 +96491,7 @@ type ScrollbarInstance struct {
 
 var _ Scrollbar = (*ScrollbarInstance)(nil)
 
-// ScrollbarInstance wraps GtkScrollbar
+// Scrollbar wraps GtkScrollbar
 //
 // The `GtkScrollbar` widget is a horizontal or vertical scrollbar.
 // 
@@ -96703,7 +96703,7 @@ type ScrolledWindowInstance struct {
 
 var _ ScrolledWindow = (*ScrolledWindowInstance)(nil)
 
-// ScrolledWindowInstance wraps GtkScrolledWindow
+// ScrolledWindow wraps GtkScrolledWindow
 //
 // `GtkScrolledWindow` is a container that makes its child scrollable.
 // 
@@ -97897,7 +97897,7 @@ type SearchBarInstance struct {
 
 var _ SearchBar = (*SearchBarInstance)(nil)
 
-// SearchBarInstance wraps GtkSearchBar
+// SearchBar wraps GtkSearchBar
 //
 // `GtkSearchBar` is a container made to have a search entry.
 // 
@@ -98304,7 +98304,7 @@ type SearchEntryInstance struct {
 
 var _ SearchEntry = (*SearchEntryInstance)(nil)
 
-// SearchEntryInstance wraps GtkSearchEntry
+// SearchEntry wraps GtkSearchEntry
 //
 // `GtkSearchEntry` is an entry widget that has been tailored for use
 // as a search entry.
@@ -98767,7 +98767,7 @@ type SeparatorInstance struct {
 
 var _ Separator = (*SeparatorInstance)(nil)
 
-// SeparatorInstance wraps GtkSeparator
+// Separator wraps GtkSeparator
 //
 // `GtkSeparator` is a horizontal or vertical separator widget.
 // 
@@ -98883,7 +98883,7 @@ type ShortcutLabelInstance struct {
 
 var _ ShortcutLabel = (*ShortcutLabelInstance)(nil)
 
-// ShortcutLabelInstance wraps GtkShortcutLabel
+// ShortcutLabel wraps GtkShortcutLabel
 //
 // `GtkShortcutLabel` displays a single keyboard shortcut or gesture.
 // 
@@ -99094,7 +99094,7 @@ type ShortcutsGroupInstance struct {
 
 var _ ShortcutsGroup = (*ShortcutsGroupInstance)(nil)
 
-// ShortcutsGroupInstance wraps GtkShortcutsGroup
+// ShortcutsGroup wraps GtkShortcutsGroup
 //
 // A `GtkShortcutsGroup` represents a group of related keyboard shortcuts
 // or gestures.
@@ -99213,7 +99213,7 @@ type ShortcutsSectionInstance struct {
 
 var _ ShortcutsSection = (*ShortcutsSectionInstance)(nil)
 
-// ShortcutsSectionInstance wraps GtkShortcutsSection
+// ShortcutsSection wraps GtkShortcutsSection
 //
 // A `GtkShortcutsSection` collects all the keyboard shortcuts and gestures
 // for a major application mode.
@@ -99354,7 +99354,7 @@ type ShortcutsShortcutInstance struct {
 
 var _ ShortcutsShortcut = (*ShortcutsShortcutInstance)(nil)
 
-// ShortcutsShortcutInstance wraps GtkShortcutsShortcut
+// ShortcutsShortcut wraps GtkShortcutsShortcut
 //
 // A `GtkShortcutsShortcut` represents a single keyboard shortcut or gesture
 // with a short text.
@@ -99428,7 +99428,7 @@ type ShortcutsWindowInstance struct {
 
 var _ ShortcutsWindow = (*ShortcutsWindowInstance)(nil)
 
-// ShortcutsWindowInstance wraps GtkShortcutsWindow
+// ShortcutsWindow wraps GtkShortcutsWindow
 //
 // A `GtkShortcutsWindow` shows information about the keyboard shortcuts
 // and gestures of an application.
@@ -99603,7 +99603,7 @@ type SpinButtonInstance struct {
 
 var _ SpinButton = (*SpinButtonInstance)(nil)
 
-// SpinButtonInstance wraps GtkSpinButton
+// SpinButton wraps GtkSpinButton
 //
 // A `GtkSpinButton` is an ideal way to allow the user to set the
 // value of some attribute.
@@ -100722,7 +100722,7 @@ type SpinnerInstance struct {
 
 var _ Spinner = (*SpinnerInstance)(nil)
 
-// SpinnerInstance wraps GtkSpinner
+// Spinner wraps GtkSpinner
 //
 // A `GtkSpinner` widget displays an icon-size spinning animation.
 // 
@@ -100917,7 +100917,7 @@ type StackInstance struct {
 
 var _ Stack = (*StackInstance)(nil)
 
-// StackInstance wraps GtkStack
+// Stack wraps GtkStack
 //
 // `GtkStack` is a container which only shows one of its children
 // at a time.
@@ -101934,7 +101934,7 @@ type StackSidebarInstance struct {
 
 var _ StackSidebar = (*StackSidebarInstance)(nil)
 
-// StackSidebarInstance wraps GtkStackSidebar
+// StackSidebar wraps GtkStackSidebar
 //
 // A `GtkStackSidebar` uses a sidebar to switch between `GtkStack` pages.
 // 
@@ -102100,7 +102100,7 @@ type StackSwitcherInstance struct {
 
 var _ StackSwitcher = (*StackSwitcherInstance)(nil)
 
-// StackSwitcherInstance wraps GtkStackSwitcher
+// StackSwitcher wraps GtkStackSwitcher
 //
 // The `GtkStackSwitcher` shows a row of buttons to switch between `GtkStack`
 // pages.
@@ -102284,7 +102284,7 @@ type SwitchInstance struct {
 
 var _ Switch = (*SwitchInstance)(nil)
 
-// SwitchInstance wraps GtkSwitch
+// Switch wraps GtkSwitch
 //
 // `GtkSwitch` is a "light switch" that has two states: on or off.
 // 
@@ -102544,7 +102544,7 @@ type TextInstance struct {
 
 var _ Text = (*TextInstance)(nil)
 
-// TextInstance wraps GtkText
+// Text wraps GtkText
 //
 // The `GtkText` widget is a single-line text entry widget.
 // 
@@ -103960,7 +103960,7 @@ type TextViewInstance struct {
 
 var _ TextView = (*TextViewInstance)(nil)
 
-// TextViewInstance wraps GtkTextView
+// TextView wraps GtkTextView
 //
 // A widget that displays the contents of a [class@Gtk.TextBuffer].
 // 
@@ -107050,7 +107050,7 @@ type ToggleButtonInstance struct {
 
 var _ ToggleButton = (*ToggleButtonInstance)(nil)
 
-// ToggleButtonInstance wraps GtkToggleButton
+// ToggleButton wraps GtkToggleButton
 //
 // A `GtkToggleButton` is a button which remains “pressed-in” when
 // clicked.
@@ -107406,7 +107406,7 @@ type TreeExpanderInstance struct {
 
 var _ TreeExpander = (*TreeExpanderInstance)(nil)
 
-// TreeExpanderInstance wraps GtkTreeExpander
+// TreeExpander wraps GtkTreeExpander
 //
 // `GtkTreeExpander` is a widget that provides an expander for a list.
 // 
@@ -107907,7 +107907,7 @@ type VideoInstance struct {
 
 var _ Video = (*VideoInstance)(nil)
 
-// VideoInstance wraps GtkVideo
+// Video wraps GtkVideo
 //
 // `GtkVideo` is a widget to show a `GtkMediaStream` with media controls.
 // 
@@ -108520,7 +108520,7 @@ type ViewportInstance struct {
 
 var _ Viewport = (*ViewportInstance)(nil)
 
-// ViewportInstance wraps GtkViewport
+// Viewport wraps GtkViewport
 //
 // `GtkViewport` implements scrollability for widgets that lack their
 // own scrolling capabilities.
@@ -108810,7 +108810,7 @@ type EmojiChooserInstance struct {
 
 var _ EmojiChooser = (*EmojiChooserInstance)(nil)
 
-// EmojiChooserInstance wraps GtkEmojiChooser
+// EmojiChooser wraps GtkEmojiChooser
 //
 // The `GtkEmojiChooser` is used by text widgets such as `GtkEntry` or
 // `GtkTextView` to let users insert Emoji characters.
@@ -108936,7 +108936,7 @@ type GridViewInstance struct {
 
 var _ GridView = (*GridViewInstance)(nil)
 
-// GridViewInstance wraps GtkGridView
+// GridView wraps GtkGridView
 //
 // `GtkGridView` presents a large dynamic grid of items.
 // 
@@ -124785,8 +124785,8 @@ func (iter *TextIter) BackwardFindChar(pred TextCharPredicate, limit *TextIter) 
 
 	carg0 = (*C.GtkTextIter)(UnsafeTextIterToGlibNone(iter))
 	carg1 = (*[0]byte)(C._gotk4_gtk4_TextCharPredicate)
-	carg2 = C.gpointer(gbox.Assign(pred))
-	defer gbox.Delete(uintptr(carg2))
+	carg2 = C.gpointer(userdata.Register(pred))
+	defer userdata.Delete(unsafe.Pointer(carg2))
 	if limit != nil {
 		carg3 = (*C.GtkTextIter)(UnsafeTextIterToGlibNone(limit))
 	}
@@ -125784,8 +125784,8 @@ func (iter *TextIter) ForwardFindChar(pred TextCharPredicate, limit *TextIter) b
 
 	carg0 = (*C.GtkTextIter)(UnsafeTextIterToGlibNone(iter))
 	carg1 = (*[0]byte)(C._gotk4_gtk4_TextCharPredicate)
-	carg2 = C.gpointer(gbox.Assign(pred))
-	defer gbox.Delete(uintptr(carg2))
+	carg2 = C.gpointer(userdata.Register(pred))
+	defer userdata.Delete(unsafe.Pointer(carg2))
 	if limit != nil {
 		carg3 = (*C.GtkTextIter)(UnsafeTextIterToGlibNone(limit))
 	}

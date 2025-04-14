@@ -6,7 +6,7 @@ import (
 	"runtime"
 	"unsafe"
 
-	"github.com/diamondburned/gotk4/pkg/core/gbox"
+	"github.com/diamondburned/gotk4/pkg/core/userdata"
 	"github.com/diamondburned/gotk4/pkg/gdkpixbuf/v2"
 	"github.com/diamondburned/gotk4/pkg/gio/v2"
 	"github.com/diamondburned/gotk4/pkg/glib/v2"
@@ -18,7 +18,7 @@ import (
 // #cgo CFLAGS: -Wno-deprecated-declarations
 // #include <gdk/gdk.h>
 // extern gboolean _gotk4_glib2_SourceFunc(gpointer);
-// extern void callbackDelete(guintptr);
+// extern void destroyUserdata(gpointer);
 import "C"
 
 // GType values.
@@ -9098,8 +9098,8 @@ func ThreadsAddIdleFull(priority int, function glib.SourceFunc) uint {
 
 	carg1 = C.gint(priority)
 	carg2 = (*[0]byte)(C._gotk4_glib2_SourceFunc)
-	carg3 = C.gpointer(gbox.Assign(function))
-	carg4 = (C.GDestroyNotify)((*[0]byte)(C.callbackDelete))
+	carg3 = C.gpointer(userdata.Register(function))
+	carg4 = (C.GDestroyNotify)((*[0]byte)(C.destroyUserdata))
 
 	cret = C.gdk_threads_add_idle_full(carg1, carg2, carg3, carg4)
 	runtime.KeepAlive(priority)
@@ -9180,8 +9180,8 @@ func ThreadsAddTimeoutFull(priority int, interval uint, function glib.SourceFunc
 	carg1 = C.gint(priority)
 	carg2 = C.guint(interval)
 	carg3 = (*[0]byte)(C._gotk4_glib2_SourceFunc)
-	carg4 = C.gpointer(gbox.Assign(function))
-	carg5 = (C.GDestroyNotify)((*[0]byte)(C.callbackDelete))
+	carg4 = C.gpointer(userdata.Register(function))
+	carg5 = (C.GDestroyNotify)((*[0]byte)(C.destroyUserdata))
 
 	cret = C.gdk_threads_add_timeout_full(carg1, carg2, carg3, carg4, carg5)
 	runtime.KeepAlive(priority)
@@ -9222,8 +9222,8 @@ func ThreadsAddTimeoutSecondsFull(priority int, interval uint, function glib.Sou
 	carg1 = C.gint(priority)
 	carg2 = C.guint(interval)
 	carg3 = (*[0]byte)(C._gotk4_glib2_SourceFunc)
-	carg4 = C.gpointer(gbox.Assign(function))
-	carg5 = (C.GDestroyNotify)((*[0]byte)(C.callbackDelete))
+	carg4 = C.gpointer(userdata.Register(function))
+	carg5 = (C.GDestroyNotify)((*[0]byte)(C.destroyUserdata))
 
 	cret = C.gdk_threads_add_timeout_seconds_full(carg1, carg2, carg3, carg4, carg5)
 	runtime.KeepAlive(priority)
@@ -9542,7 +9542,7 @@ type AppLaunchContextInstance struct {
 
 var _ AppLaunchContext = (*AppLaunchContextInstance)(nil)
 
-// AppLaunchContextInstance wraps GdkAppLaunchContext
+// AppLaunchContext wraps GdkAppLaunchContext
 //
 // GdkAppLaunchContext is an implementation of #GAppLaunchContext that
 // handles launching an application in a graphical context. It provides
@@ -9822,7 +9822,7 @@ type CursorInstance struct {
 
 var _ Cursor = (*CursorInstance)(nil)
 
-// CursorInstance wraps GdkCursor
+// Cursor wraps GdkCursor
 //
 // A #GdkCursor represents a cursor. Its contents are private.
 type Cursor interface {
@@ -10126,7 +10126,7 @@ type DeviceInstance struct {
 
 var _ Device = (*DeviceInstance)(nil)
 
-// DeviceInstance wraps GdkDevice
+// Device wraps GdkDevice
 //
 // The #GdkDevice object represents a single input device, such
 // as a keyboard, a mouse, a touchpad, etc.
@@ -11154,7 +11154,7 @@ type DeviceManagerInstance struct {
 
 var _ DeviceManager = (*DeviceManagerInstance)(nil)
 
-// DeviceManagerInstance wraps GdkDeviceManager
+// DeviceManager wraps GdkDeviceManager
 //
 // In addition to a single pointer and keyboard for user interface input,
 // GDK contains support for a variety of input devices, including graphics
@@ -11347,7 +11347,7 @@ type DeviceToolInstance struct {
 
 var _ DeviceTool = (*DeviceToolInstance)(nil)
 
-// DeviceToolInstance wraps GdkDeviceTool
+// DeviceTool wraps GdkDeviceTool
 type DeviceTool interface {
 	gobject.Object
 	upcastToGdkDeviceTool() *DeviceToolInstance
@@ -11501,7 +11501,7 @@ type DisplayInstance struct {
 
 var _ Display = (*DisplayInstance)(nil)
 
-// DisplayInstance wraps GdkDisplay
+// Display wraps GdkDisplay
 //
 // #GdkDisplay objects purpose are two fold:
 // 
@@ -12564,7 +12564,7 @@ type DisplayManagerInstance struct {
 
 var _ DisplayManager = (*DisplayManagerInstance)(nil)
 
-// DisplayManagerInstance wraps GdkDisplayManager
+// DisplayManager wraps GdkDisplayManager
 //
 // The purpose of the #GdkDisplayManager singleton object is to offer
 // notification when displays appear or disappear or the default display
@@ -12776,7 +12776,7 @@ type DragContextInstance struct {
 
 var _ DragContext = (*DragContextInstance)(nil)
 
-// DragContextInstance wraps GdkDragContext
+// DragContext wraps GdkDragContext
 type DragContext interface {
 	gobject.Object
 	upcastToGdkDragContext() *DragContextInstance
@@ -13213,7 +13213,7 @@ type DrawingContextInstance struct {
 
 var _ DrawingContext = (*DrawingContextInstance)(nil)
 
-// DrawingContextInstance wraps GdkDrawingContext
+// DrawingContext wraps GdkDrawingContext
 //
 // #GdkDrawingContext is an object that represents the current drawing
 // state of a #GdkWindow.
@@ -13333,7 +13333,7 @@ type FrameClockInstance struct {
 
 var _ FrameClock = (*FrameClockInstance)(nil)
 
-// FrameClockInstance wraps GdkFrameClock
+// FrameClock wraps GdkFrameClock
 //
 // A #GdkFrameClock tells the application when to update and repaint a
 // window. This may be synced to the vertical refresh rate of the
@@ -13754,7 +13754,7 @@ type GLContextInstance struct {
 
 var _ GLContext = (*GLContextInstance)(nil)
 
-// GLContextInstance wraps GdkGLContext
+// GLContext wraps GdkGLContext
 //
 // #GdkGLContext is an object representing the platform-specific
 // OpenGL drawing context.
@@ -14434,7 +14434,7 @@ type KeymapInstance struct {
 
 var _ Keymap = (*KeymapInstance)(nil)
 
-// KeymapInstance wraps GdkKeymap
+// Keymap wraps GdkKeymap
 //
 // A #GdkKeymap defines the translation from keyboard state
 // (including a hardware key, a modifier mask, and active keyboard group)
@@ -14979,7 +14979,7 @@ type MonitorInstance struct {
 
 var _ Monitor = (*MonitorInstance)(nil)
 
-// MonitorInstance wraps GdkMonitor
+// Monitor wraps GdkMonitor
 //
 // GdkMonitor objects represent the individual outputs that are
 // associated with a #GdkDisplay. GdkDisplay has APIs to enumerate
@@ -15422,7 +15422,7 @@ type ScreenInstance struct {
 
 var _ Screen = (*ScreenInstance)(nil)
 
-// ScreenInstance wraps GdkScreen
+// Screen wraps GdkScreen
 //
 // #GdkScreen objects are the GDK representation of the screen on
 // which windows can be displayed and on which the pointer moves.
@@ -15811,7 +15811,7 @@ type SeatInstance struct {
 
 var _ Seat = (*SeatInstance)(nil)
 
-// SeatInstance wraps GdkSeat
+// Seat wraps GdkSeat
 //
 // The #GdkSeat object represents a collection of input devices
 // that belong to a user.
@@ -15995,7 +15995,7 @@ type VisualInstance struct {
 
 var _ Visual = (*VisualInstance)(nil)
 
-// VisualInstance wraps GdkVisual
+// Visual wraps GdkVisual
 //
 // A #GdkVisual contains information about
 // a particular visual.
@@ -16275,7 +16275,7 @@ type WindowInstance struct {
 
 var _ Window = (*WindowInstance)(nil)
 
-// WindowInstance wraps GdkWindow
+// Window wraps GdkWindow
 type Window interface {
 	gobject.Object
 	upcastToGdkWindow() *WindowInstance

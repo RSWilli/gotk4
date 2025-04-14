@@ -7,7 +7,7 @@ import (
 	"runtime"
 	"unsafe"
 
-	"github.com/diamondburned/gotk4/pkg/core/gbox"
+	"github.com/diamondburned/gotk4/pkg/core/userdata"
 	"github.com/diamondburned/gotk4/pkg/glib/v2"
 	"github.com/diamondburned/gotk4/pkg/gobject/v2"
 )
@@ -21,7 +21,7 @@ import (
 // extern gboolean _gotk4_glib2_SourceFunc(gpointer);
 // extern gint _gotk4_glib2_CompareDataFunc(gconstpointer, gconstpointer, gpointer);
 // extern void _gotk4_gio2_AsyncReadyCallback(GObject*, GAsyncResult*, gpointer);
-// extern void callbackDelete(guintptr);
+// extern void destroyUserdata(gpointer);
 import "C"
 
 // GType values.
@@ -4386,7 +4386,7 @@ func BusGet(cancellable context.Context, busType BusType, callback AsyncReadyCal
 	carg1 = C.GBusType(busType)
 	if callback != nil {
 		carg3 = (*[0]byte)(C._gotk4_gio2_AsyncReadyCallback)
-		carg4 = C.gpointer(gbox.AssignOnce(callback))
+		carg4 = C.gpointer(userdata.RegisterOnce(callback))
 	}
 
 	C.g_bus_get(carg1, carg2, carg3, carg4)
@@ -5153,7 +5153,7 @@ func DBusAddressGetStream(cancellable context.Context, address string, callback 
 	defer C.free(unsafe.Pointer(carg1))
 	if callback != nil {
 		carg3 = (*[0]byte)(C._gotk4_gio2_AsyncReadyCallback)
-		carg4 = C.gpointer(gbox.AssignOnce(callback))
+		carg4 = C.gpointer(userdata.RegisterOnce(callback))
 	}
 
 	C.g_dbus_address_get_stream(carg1, carg2, carg3, carg4)
@@ -6353,7 +6353,7 @@ func SimpleAsyncReportGErrorInIdle(object gobject.Object, callback AsyncReadyCal
 	}
 	if callback != nil {
 		carg2 = (*[0]byte)(C._gotk4_gio2_AsyncReadyCallback)
-		carg3 = C.gpointer(gbox.AssignOnce(callback))
+		carg3 = C.gpointer(userdata.RegisterOnce(callback))
 	}
 	carg4 = (*C.GError)(glib.UnsafeErrorToGlibNone(err))
 
@@ -7936,7 +7936,7 @@ func AppInfoInstanceGetDefaultForTypeAsync(cancellable context.Context, contentT
 	}
 	if callback != nil {
 		carg4 = (*[0]byte)(C._gotk4_gio2_AsyncReadyCallback)
-		carg5 = C.gpointer(gbox.AssignOnce(callback))
+		carg5 = C.gpointer(userdata.RegisterOnce(callback))
 	}
 
 	C.g_app_info_get_default_for_type_async(carg1, carg2, carg3, carg4, carg5)
@@ -8040,7 +8040,7 @@ func AppInfoInstanceGetDefaultForURISchemeAsync(cancellable context.Context, uri
 	defer C.free(unsafe.Pointer(carg1))
 	if callback != nil {
 		carg3 = (*[0]byte)(C._gotk4_gio2_AsyncReadyCallback)
-		carg4 = C.gpointer(gbox.AssignOnce(callback))
+		carg4 = C.gpointer(userdata.RegisterOnce(callback))
 	}
 
 	C.g_app_info_get_default_for_uri_scheme_async(carg1, carg2, carg3, carg4)
@@ -8170,7 +8170,7 @@ func AppInfoInstanceLaunchDefaultForURIAsync(cancellable context.Context, uri st
 	}
 	if callback != nil {
 		carg4 = (*[0]byte)(C._gotk4_gio2_AsyncReadyCallback)
-		carg5 = C.gpointer(gbox.AssignOnce(callback))
+		carg5 = C.gpointer(userdata.RegisterOnce(callback))
 	}
 
 	C.g_app_info_launch_default_for_uri_async(carg1, carg2, carg3, carg4, carg5)
@@ -9162,7 +9162,7 @@ func (initable *AsyncInitableInstance) InitAsync(cancellable context.Context, io
 	carg1 = C.int(ioPriority)
 	if callback != nil {
 		carg3 = (*[0]byte)(C._gotk4_gio2_AsyncReadyCallback)
-		carg4 = C.gpointer(gbox.AssignOnce(callback))
+		carg4 = C.gpointer(userdata.RegisterOnce(callback))
 	}
 
 	C.g_async_initable_init_async(carg0, carg1, carg2, carg3, carg4)
@@ -11579,7 +11579,7 @@ func (drive *DriveInstance) Eject(cancellable context.Context, flags MountUnmoun
 	carg1 = C.GMountUnmountFlags(flags)
 	if callback != nil {
 		carg3 = (*[0]byte)(C._gotk4_gio2_AsyncReadyCallback)
-		carg4 = C.gpointer(gbox.AssignOnce(callback))
+		carg4 = C.gpointer(userdata.RegisterOnce(callback))
 	}
 
 	C.g_drive_eject(carg0, carg1, carg2, carg3, carg4)
@@ -11660,7 +11660,7 @@ func (drive *DriveInstance) EjectWithOperation(cancellable context.Context, flag
 	}
 	if callback != nil {
 		carg4 = (*[0]byte)(C._gotk4_gio2_AsyncReadyCallback)
-		carg5 = C.gpointer(gbox.AssignOnce(callback))
+		carg5 = C.gpointer(userdata.RegisterOnce(callback))
 	}
 
 	C.g_drive_eject_with_operation(carg0, carg1, carg2, carg3, carg4, carg5)
@@ -12028,7 +12028,7 @@ func (drive *DriveInstance) PollForMedia(cancellable context.Context, callback A
 	}
 	if callback != nil {
 		carg2 = (*[0]byte)(C._gotk4_gio2_AsyncReadyCallback)
-		carg3 = C.gpointer(gbox.AssignOnce(callback))
+		carg3 = C.gpointer(userdata.RegisterOnce(callback))
 	}
 
 	C.g_drive_poll_for_media(carg0, carg1, carg2, carg3)
@@ -12108,7 +12108,7 @@ func (drive *DriveInstance) Start(cancellable context.Context, flags DriveStartF
 	}
 	if callback != nil {
 		carg4 = (*[0]byte)(C._gotk4_gio2_AsyncReadyCallback)
-		carg5 = C.gpointer(gbox.AssignOnce(callback))
+		carg5 = C.gpointer(userdata.RegisterOnce(callback))
 	}
 
 	C.g_drive_start(carg0, carg1, carg2, carg3, carg4, carg5)
@@ -12190,7 +12190,7 @@ func (drive *DriveInstance) Stop(cancellable context.Context, flags MountUnmount
 	}
 	if callback != nil {
 		carg4 = (*[0]byte)(C._gotk4_gio2_AsyncReadyCallback)
-		carg5 = C.gpointer(gbox.AssignOnce(callback))
+		carg5 = C.gpointer(userdata.RegisterOnce(callback))
 	}
 
 	C.g_drive_stop(carg0, carg1, carg2, carg3, carg4, carg5)
@@ -12807,7 +12807,7 @@ func (conn *DtlsConnectionInstance) CloseAsync(cancellable context.Context, ioPr
 	carg1 = C.int(ioPriority)
 	if callback != nil {
 		carg3 = (*[0]byte)(C._gotk4_gio2_AsyncReadyCallback)
-		carg4 = C.gpointer(gbox.AssignOnce(callback))
+		carg4 = C.gpointer(userdata.RegisterOnce(callback))
 	}
 
 	C.g_dtls_connection_close_async(carg0, carg1, carg2, carg3, carg4)
@@ -13236,7 +13236,7 @@ func (conn *DtlsConnectionInstance) HandshakeAsync(cancellable context.Context, 
 	carg1 = C.int(ioPriority)
 	if callback != nil {
 		carg3 = (*[0]byte)(C._gotk4_gio2_AsyncReadyCallback)
-		carg4 = C.gpointer(gbox.AssignOnce(callback))
+		carg4 = C.gpointer(userdata.RegisterOnce(callback))
 	}
 
 	C.g_dtls_connection_handshake_async(carg0, carg1, carg2, carg3, carg4)
@@ -13581,7 +13581,7 @@ func (conn *DtlsConnectionInstance) ShutdownAsync(cancellable context.Context, s
 	carg3 = C.int(ioPriority)
 	if callback != nil {
 		carg5 = (*[0]byte)(C._gotk4_gio2_AsyncReadyCallback)
-		carg6 = C.gpointer(gbox.AssignOnce(callback))
+		carg6 = C.gpointer(userdata.RegisterOnce(callback))
 	}
 
 	C.g_dtls_connection_shutdown_async(carg0, carg1, carg2, carg3, carg4, carg5, carg6)
@@ -16616,7 +16616,7 @@ func NewFileInstanceTmpAsync(cancellable context.Context, tmpl string, ioPriorit
 	carg2 = C.int(ioPriority)
 	if callback != nil {
 		carg4 = (*[0]byte)(C._gotk4_gio2_AsyncReadyCallback)
-		carg5 = C.gpointer(gbox.AssignOnce(callback))
+		carg5 = C.gpointer(userdata.RegisterOnce(callback))
 	}
 
 	C.g_file_new_tmp_async(carg1, carg2, carg3, carg4, carg5)
@@ -16659,7 +16659,7 @@ func NewFileInstanceTmpDirAsync(cancellable context.Context, tmpl string, ioPrio
 	carg2 = C.int(ioPriority)
 	if callback != nil {
 		carg4 = (*[0]byte)(C._gotk4_gio2_AsyncReadyCallback)
-		carg5 = C.gpointer(gbox.AssignOnce(callback))
+		carg5 = C.gpointer(userdata.RegisterOnce(callback))
 	}
 
 	C.g_file_new_tmp_dir_async(carg1, carg2, carg3, carg4, carg5)
@@ -16865,7 +16865,7 @@ func (file *FileInstance) AppendToAsync(cancellable context.Context, flags FileC
 	carg2 = C.int(ioPriority)
 	if callback != nil {
 		carg4 = (*[0]byte)(C._gotk4_gio2_AsyncReadyCallback)
-		carg5 = C.gpointer(gbox.AssignOnce(callback))
+		carg5 = C.gpointer(userdata.RegisterOnce(callback))
 	}
 
 	C.g_file_append_to_async(carg0, carg1, carg2, carg3, carg4, carg5)
@@ -17156,7 +17156,7 @@ func (file *FileInstance) CreateAsync(cancellable context.Context, flags FileCre
 	carg2 = C.int(ioPriority)
 	if callback != nil {
 		carg4 = (*[0]byte)(C._gotk4_gio2_AsyncReadyCallback)
-		carg5 = C.gpointer(gbox.AssignOnce(callback))
+		carg5 = C.gpointer(userdata.RegisterOnce(callback))
 	}
 
 	C.g_file_create_async(carg0, carg1, carg2, carg3, carg4, carg5)
@@ -17305,7 +17305,7 @@ func (file *FileInstance) CreateReadwriteAsync(cancellable context.Context, flag
 	carg2 = C.int(ioPriority)
 	if callback != nil {
 		carg4 = (*[0]byte)(C._gotk4_gio2_AsyncReadyCallback)
-		carg5 = C.gpointer(gbox.AssignOnce(callback))
+		carg5 = C.gpointer(userdata.RegisterOnce(callback))
 	}
 
 	C.g_file_create_readwrite_async(carg0, carg1, carg2, carg3, carg4, carg5)
@@ -17441,7 +17441,7 @@ func (file *FileInstance) DeleteAsync(cancellable context.Context, ioPriority in
 	carg1 = C.int(ioPriority)
 	if callback != nil {
 		carg3 = (*[0]byte)(C._gotk4_gio2_AsyncReadyCallback)
-		carg4 = C.gpointer(gbox.AssignOnce(callback))
+		carg4 = C.gpointer(userdata.RegisterOnce(callback))
 	}
 
 	C.g_file_delete_async(carg0, carg1, carg2, carg3, carg4)
@@ -17554,7 +17554,7 @@ func (file *FileInstance) EjectMountable(cancellable context.Context, flags Moun
 	carg1 = C.GMountUnmountFlags(flags)
 	if callback != nil {
 		carg3 = (*[0]byte)(C._gotk4_gio2_AsyncReadyCallback)
-		carg4 = C.gpointer(gbox.AssignOnce(callback))
+		carg4 = C.gpointer(userdata.RegisterOnce(callback))
 	}
 
 	C.g_file_eject_mountable(carg0, carg1, carg2, carg3, carg4)
@@ -17644,7 +17644,7 @@ func (file *FileInstance) EjectMountableWithOperation(cancellable context.Contex
 	}
 	if callback != nil {
 		carg4 = (*[0]byte)(C._gotk4_gio2_AsyncReadyCallback)
-		carg5 = C.gpointer(gbox.AssignOnce(callback))
+		carg5 = C.gpointer(userdata.RegisterOnce(callback))
 	}
 
 	C.g_file_eject_mountable_with_operation(carg0, carg1, carg2, carg3, carg4, carg5)
@@ -17807,7 +17807,7 @@ func (file *FileInstance) EnumerateChildrenAsync(cancellable context.Context, at
 	carg3 = C.int(ioPriority)
 	if callback != nil {
 		carg5 = (*[0]byte)(C._gotk4_gio2_AsyncReadyCallback)
-		carg6 = C.gpointer(gbox.AssignOnce(callback))
+		carg6 = C.gpointer(userdata.RegisterOnce(callback))
 	}
 
 	C.g_file_enumerate_children_async(carg0, carg1, carg2, carg3, carg4, carg5, carg6)
@@ -17973,7 +17973,7 @@ func (file *FileInstance) FindEnclosingMountAsync(cancellable context.Context, i
 	carg1 = C.int(ioPriority)
 	if callback != nil {
 		carg3 = (*[0]byte)(C._gotk4_gio2_AsyncReadyCallback)
-		carg4 = C.gpointer(gbox.AssignOnce(callback))
+		carg4 = C.gpointer(userdata.RegisterOnce(callback))
 	}
 
 	C.g_file_find_enclosing_mount_async(carg0, carg1, carg2, carg3, carg4)
@@ -18553,7 +18553,7 @@ func (file *FileInstance) LoadBytesAsync(cancellable context.Context, callback A
 	}
 	if callback != nil {
 		carg2 = (*[0]byte)(C._gotk4_gio2_AsyncReadyCallback)
-		carg3 = C.gpointer(gbox.AssignOnce(callback))
+		carg3 = C.gpointer(userdata.RegisterOnce(callback))
 	}
 
 	C.g_file_load_bytes_async(carg0, carg1, carg2, carg3)
@@ -18711,7 +18711,7 @@ func (file *FileInstance) LoadContentsAsync(cancellable context.Context, callbac
 	}
 	if callback != nil {
 		carg2 = (*[0]byte)(C._gotk4_gio2_AsyncReadyCallback)
-		carg3 = C.gpointer(gbox.AssignOnce(callback))
+		carg3 = C.gpointer(userdata.RegisterOnce(callback))
 	}
 
 	C.g_file_load_contents_async(carg0, carg1, carg2, carg3)
@@ -18919,7 +18919,7 @@ func (file *FileInstance) MakeDirectoryAsync(cancellable context.Context, ioPrio
 	carg1 = C.int(ioPriority)
 	if callback != nil {
 		carg3 = (*[0]byte)(C._gotk4_gio2_AsyncReadyCallback)
-		carg4 = C.gpointer(gbox.AssignOnce(callback))
+		carg4 = C.gpointer(userdata.RegisterOnce(callback))
 	}
 
 	C.g_file_make_directory_async(carg0, carg1, carg2, carg3, carg4)
@@ -19104,7 +19104,7 @@ func (file *FileInstance) MakeSymbolicLinkAsync(cancellable context.Context, sym
 	carg2 = C.int(ioPriority)
 	if callback != nil {
 		carg4 = (*[0]byte)(C._gotk4_gio2_AsyncReadyCallback)
-		carg5 = C.gpointer(gbox.AssignOnce(callback))
+		carg5 = C.gpointer(userdata.RegisterOnce(callback))
 	}
 
 	C.g_file_make_symbolic_link_async(carg0, carg1, carg2, carg3, carg4, carg5)
@@ -19404,7 +19404,7 @@ func (location *FileInstance) MountEnclosingVolume(cancellable context.Context, 
 	}
 	if callback != nil {
 		carg4 = (*[0]byte)(C._gotk4_gio2_AsyncReadyCallback)
-		carg5 = C.gpointer(gbox.AssignOnce(callback))
+		carg5 = C.gpointer(userdata.RegisterOnce(callback))
 	}
 
 	C.g_file_mount_enclosing_volume(carg0, carg1, carg2, carg3, carg4, carg5)
@@ -19494,7 +19494,7 @@ func (file *FileInstance) MountMountable(cancellable context.Context, flags Moun
 	}
 	if callback != nil {
 		carg4 = (*[0]byte)(C._gotk4_gio2_AsyncReadyCallback)
-		carg5 = C.gpointer(gbox.AssignOnce(callback))
+		carg5 = C.gpointer(userdata.RegisterOnce(callback))
 	}
 
 	C.g_file_mount_mountable(carg0, carg1, carg2, carg3, carg4, carg5)
@@ -19668,7 +19668,7 @@ func (file *FileInstance) OpenReadwriteAsync(cancellable context.Context, ioPrio
 	carg1 = C.int(ioPriority)
 	if callback != nil {
 		carg3 = (*[0]byte)(C._gotk4_gio2_AsyncReadyCallback)
-		carg4 = C.gpointer(gbox.AssignOnce(callback))
+		carg4 = C.gpointer(userdata.RegisterOnce(callback))
 	}
 
 	C.g_file_open_readwrite_async(carg0, carg1, carg2, carg3, carg4)
@@ -19772,7 +19772,7 @@ func (file *FileInstance) PollMountable(cancellable context.Context, callback As
 	}
 	if callback != nil {
 		carg2 = (*[0]byte)(C._gotk4_gio2_AsyncReadyCallback)
-		carg3 = C.gpointer(gbox.AssignOnce(callback))
+		carg3 = C.gpointer(userdata.RegisterOnce(callback))
 	}
 
 	C.g_file_poll_mountable(carg0, carg1, carg2, carg3)
@@ -19888,7 +19888,7 @@ func (file *FileInstance) QueryDefaultHandlerAsync(cancellable context.Context, 
 	carg1 = C.int(ioPriority)
 	if callback != nil {
 		carg3 = (*[0]byte)(C._gotk4_gio2_AsyncReadyCallback)
-		carg4 = C.gpointer(gbox.AssignOnce(callback))
+		carg4 = C.gpointer(userdata.RegisterOnce(callback))
 	}
 
 	C.g_file_query_default_handler_async(carg0, carg1, carg2, carg3, carg4)
@@ -20138,7 +20138,7 @@ func (file *FileInstance) QueryFilesystemInfoAsync(cancellable context.Context, 
 	carg2 = C.int(ioPriority)
 	if callback != nil {
 		carg4 = (*[0]byte)(C._gotk4_gio2_AsyncReadyCallback)
-		carg5 = C.gpointer(gbox.AssignOnce(callback))
+		carg5 = C.gpointer(userdata.RegisterOnce(callback))
 	}
 
 	C.g_file_query_filesystem_info_async(carg0, carg1, carg2, carg3, carg4, carg5)
@@ -20303,7 +20303,7 @@ func (file *FileInstance) QueryInfoAsync(cancellable context.Context, attributes
 	carg3 = C.int(ioPriority)
 	if callback != nil {
 		carg5 = (*[0]byte)(C._gotk4_gio2_AsyncReadyCallback)
-		carg6 = C.gpointer(gbox.AssignOnce(callback))
+		carg6 = C.gpointer(userdata.RegisterOnce(callback))
 	}
 
 	C.g_file_query_info_async(carg0, carg1, carg2, carg3, carg4, carg5, carg6)
@@ -20525,7 +20525,7 @@ func (file *FileInstance) ReadAsync(cancellable context.Context, ioPriority int,
 	carg1 = C.int(ioPriority)
 	if callback != nil {
 		carg3 = (*[0]byte)(C._gotk4_gio2_AsyncReadyCallback)
-		carg4 = C.gpointer(gbox.AssignOnce(callback))
+		carg4 = C.gpointer(userdata.RegisterOnce(callback))
 	}
 
 	C.g_file_read_async(carg0, carg1, carg2, carg3, carg4)
@@ -20717,7 +20717,7 @@ func (file *FileInstance) ReplaceAsync(cancellable context.Context, etag string,
 	carg4 = C.int(ioPriority)
 	if callback != nil {
 		carg6 = (*[0]byte)(C._gotk4_gio2_AsyncReadyCallback)
-		carg7 = C.gpointer(gbox.AssignOnce(callback))
+		carg7 = C.gpointer(userdata.RegisterOnce(callback))
 	}
 
 	C.g_file_replace_async(carg0, carg1, carg2, carg3, carg4, carg5, carg6, carg7)
@@ -20879,7 +20879,7 @@ func (file *FileInstance) ReplaceContentsAsync(cancellable context.Context, cont
 	carg5 = C.GFileCreateFlags(flags)
 	if callback != nil {
 		carg7 = (*[0]byte)(C._gotk4_gio2_AsyncReadyCallback)
-		carg8 = C.gpointer(gbox.AssignOnce(callback))
+		carg8 = C.gpointer(userdata.RegisterOnce(callback))
 	}
 
 	C.g_file_replace_contents_async(carg0, carg1, carg2, carg3, carg4, carg5, carg6, carg7, carg8)
@@ -20936,7 +20936,7 @@ func (file *FileInstance) ReplaceContentsBytesAsync(cancellable context.Context,
 	carg4 = C.GFileCreateFlags(flags)
 	if callback != nil {
 		carg6 = (*[0]byte)(C._gotk4_gio2_AsyncReadyCallback)
-		carg7 = C.gpointer(gbox.AssignOnce(callback))
+		carg7 = C.gpointer(userdata.RegisterOnce(callback))
 	}
 
 	C.g_file_replace_contents_bytes_async(carg0, carg1, carg2, carg3, carg4, carg5, carg6, carg7)
@@ -21150,7 +21150,7 @@ func (file *FileInstance) ReplaceReadwriteAsync(cancellable context.Context, eta
 	carg4 = C.int(ioPriority)
 	if callback != nil {
 		carg6 = (*[0]byte)(C._gotk4_gio2_AsyncReadyCallback)
-		carg7 = C.gpointer(gbox.AssignOnce(callback))
+		carg7 = C.gpointer(userdata.RegisterOnce(callback))
 	}
 
 	C.g_file_replace_readwrite_async(carg0, carg1, carg2, carg3, carg4, carg5, carg6, carg7)
@@ -21699,7 +21699,7 @@ func (file *FileInstance) SetAttributesAsync(cancellable context.Context, info F
 	carg3 = C.int(ioPriority)
 	if callback != nil {
 		carg5 = (*[0]byte)(C._gotk4_gio2_AsyncReadyCallback)
-		carg6 = C.gpointer(gbox.AssignOnce(callback))
+		carg6 = C.gpointer(userdata.RegisterOnce(callback))
 	}
 
 	C.g_file_set_attributes_async(carg0, carg1, carg2, carg3, carg4, carg5, carg6)
@@ -21907,7 +21907,7 @@ func (file *FileInstance) SetDisplayNameAsync(cancellable context.Context, displ
 	carg2 = C.int(ioPriority)
 	if callback != nil {
 		carg4 = (*[0]byte)(C._gotk4_gio2_AsyncReadyCallback)
-		carg5 = C.gpointer(gbox.AssignOnce(callback))
+		carg5 = C.gpointer(userdata.RegisterOnce(callback))
 	}
 
 	C.g_file_set_display_name_async(carg0, carg1, carg2, carg3, carg4, carg5)
@@ -21993,7 +21993,7 @@ func (file *FileInstance) StartMountable(cancellable context.Context, flags Driv
 	}
 	if callback != nil {
 		carg4 = (*[0]byte)(C._gotk4_gio2_AsyncReadyCallback)
-		carg5 = C.gpointer(gbox.AssignOnce(callback))
+		carg5 = C.gpointer(userdata.RegisterOnce(callback))
 	}
 
 	C.g_file_start_mountable(carg0, carg1, carg2, carg3, carg4, carg5)
@@ -22084,7 +22084,7 @@ func (file *FileInstance) StopMountable(cancellable context.Context, flags Mount
 	}
 	if callback != nil {
 		carg4 = (*[0]byte)(C._gotk4_gio2_AsyncReadyCallback)
-		carg5 = C.gpointer(gbox.AssignOnce(callback))
+		carg5 = C.gpointer(userdata.RegisterOnce(callback))
 	}
 
 	C.g_file_stop_mountable(carg0, carg1, carg2, carg3, carg4, carg5)
@@ -22241,7 +22241,7 @@ func (file *FileInstance) TrashAsync(cancellable context.Context, ioPriority int
 	carg1 = C.int(ioPriority)
 	if callback != nil {
 		carg3 = (*[0]byte)(C._gotk4_gio2_AsyncReadyCallback)
-		carg4 = C.gpointer(gbox.AssignOnce(callback))
+		carg4 = C.gpointer(userdata.RegisterOnce(callback))
 	}
 
 	C.g_file_trash_async(carg0, carg1, carg2, carg3, carg4)
@@ -22325,7 +22325,7 @@ func (file *FileInstance) UnmountMountable(cancellable context.Context, flags Mo
 	carg1 = C.GMountUnmountFlags(flags)
 	if callback != nil {
 		carg3 = (*[0]byte)(C._gotk4_gio2_AsyncReadyCallback)
-		carg4 = C.gpointer(gbox.AssignOnce(callback))
+		carg4 = C.gpointer(userdata.RegisterOnce(callback))
 	}
 
 	C.g_file_unmount_mountable(carg0, carg1, carg2, carg3, carg4)
@@ -22418,7 +22418,7 @@ func (file *FileInstance) UnmountMountableWithOperation(cancellable context.Cont
 	}
 	if callback != nil {
 		carg4 = (*[0]byte)(C._gotk4_gio2_AsyncReadyCallback)
-		carg5 = C.gpointer(gbox.AssignOnce(callback))
+		carg5 = C.gpointer(userdata.RegisterOnce(callback))
 	}
 
 	C.g_file_unmount_mountable_with_operation(carg0, carg1, carg2, carg3, carg4, carg5)
@@ -23416,7 +23416,7 @@ func (icon *LoadableIconInstance) LoadAsync(cancellable context.Context, size in
 	carg1 = C.int(size)
 	if callback != nil {
 		carg3 = (*[0]byte)(C._gotk4_gio2_AsyncReadyCallback)
-		carg4 = C.gpointer(gbox.AssignOnce(callback))
+		carg4 = C.gpointer(userdata.RegisterOnce(callback))
 	}
 
 	C.g_loadable_icon_load_async(carg0, carg1, carg2, carg3, carg4)
@@ -24078,7 +24078,7 @@ func (mount *MountInstance) Eject(cancellable context.Context, flags MountUnmoun
 	carg1 = C.GMountUnmountFlags(flags)
 	if callback != nil {
 		carg3 = (*[0]byte)(C._gotk4_gio2_AsyncReadyCallback)
-		carg4 = C.gpointer(gbox.AssignOnce(callback))
+		carg4 = C.gpointer(userdata.RegisterOnce(callback))
 	}
 
 	C.g_mount_eject(carg0, carg1, carg2, carg3, carg4)
@@ -24160,7 +24160,7 @@ func (mount *MountInstance) EjectWithOperation(cancellable context.Context, flag
 	}
 	if callback != nil {
 		carg4 = (*[0]byte)(C._gotk4_gio2_AsyncReadyCallback)
-		carg5 = C.gpointer(gbox.AssignOnce(callback))
+		carg5 = C.gpointer(userdata.RegisterOnce(callback))
 	}
 
 	C.g_mount_eject_with_operation(carg0, carg1, carg2, carg3, carg4, carg5)
@@ -24454,7 +24454,7 @@ func (mount *MountInstance) GuessContentType(cancellable context.Context, forceR
 	}
 	if callback != nil {
 		carg3 = (*[0]byte)(C._gotk4_gio2_AsyncReadyCallback)
-		carg4 = C.gpointer(gbox.AssignOnce(callback))
+		carg4 = C.gpointer(userdata.RegisterOnce(callback))
 	}
 
 	C.g_mount_guess_content_type(carg0, carg1, carg2, carg3, carg4)
@@ -24644,7 +24644,7 @@ func (mount *MountInstance) Remount(cancellable context.Context, flags MountMoun
 	}
 	if callback != nil {
 		carg4 = (*[0]byte)(C._gotk4_gio2_AsyncReadyCallback)
-		carg5 = C.gpointer(gbox.AssignOnce(callback))
+		carg5 = C.gpointer(userdata.RegisterOnce(callback))
 	}
 
 	C.g_mount_remount(carg0, carg1, carg2, carg3, carg4, carg5)
@@ -24736,7 +24736,7 @@ func (mount *MountInstance) Unmount(cancellable context.Context, flags MountUnmo
 	carg1 = C.GMountUnmountFlags(flags)
 	if callback != nil {
 		carg3 = (*[0]byte)(C._gotk4_gio2_AsyncReadyCallback)
-		carg4 = C.gpointer(gbox.AssignOnce(callback))
+		carg4 = C.gpointer(userdata.RegisterOnce(callback))
 	}
 
 	C.g_mount_unmount(carg0, carg1, carg2, carg3, carg4)
@@ -24818,7 +24818,7 @@ func (mount *MountInstance) UnmountWithOperation(cancellable context.Context, fl
 	}
 	if callback != nil {
 		carg4 = (*[0]byte)(C._gotk4_gio2_AsyncReadyCallback)
-		carg5 = C.gpointer(gbox.AssignOnce(callback))
+		carg5 = C.gpointer(userdata.RegisterOnce(callback))
 	}
 
 	C.g_mount_unmount_with_operation(carg0, carg1, carg2, carg3, carg4, carg5)
@@ -25158,7 +25158,7 @@ func (monitor *NetworkMonitorInstance) CanReachAsync(cancellable context.Context
 	carg1 = (*C.GSocketConnectable)(UnsafeSocketConnectableToGlibNone(connectable))
 	if callback != nil {
 		carg3 = (*[0]byte)(C._gotk4_gio2_AsyncReadyCallback)
-		carg4 = C.gpointer(gbox.AssignOnce(callback))
+		carg4 = C.gpointer(userdata.RegisterOnce(callback))
 	}
 
 	C.g_network_monitor_can_reach_async(carg0, carg1, carg2, carg3, carg4)
@@ -26289,7 +26289,7 @@ func (proxy *ProxyInstance) ConnectAsync(cancellable context.Context, connection
 	carg2 = (*C.GProxyAddress)(UnsafeProxyAddressToGlibNone(proxyAddress))
 	if callback != nil {
 		carg4 = (*[0]byte)(C._gotk4_gio2_AsyncReadyCallback)
-		carg5 = C.gpointer(gbox.AssignOnce(callback))
+		carg5 = C.gpointer(userdata.RegisterOnce(callback))
 	}
 
 	C.g_proxy_connect_async(carg0, carg1, carg2, carg3, carg4, carg5)
@@ -26618,7 +26618,7 @@ func (resolver *ProxyResolverInstance) LookupAsync(cancellable context.Context, 
 	defer C.free(unsafe.Pointer(carg1))
 	if callback != nil {
 		carg3 = (*[0]byte)(C._gotk4_gio2_AsyncReadyCallback)
-		carg4 = C.gpointer(gbox.AssignOnce(callback))
+		carg4 = C.gpointer(userdata.RegisterOnce(callback))
 	}
 
 	C.g_proxy_resolver_lookup_async(carg0, carg1, carg2, carg3, carg4)
@@ -28669,7 +28669,7 @@ func (volume *VolumeInstance) Eject(cancellable context.Context, flags MountUnmo
 	carg1 = C.GMountUnmountFlags(flags)
 	if callback != nil {
 		carg3 = (*[0]byte)(C._gotk4_gio2_AsyncReadyCallback)
-		carg4 = C.gpointer(gbox.AssignOnce(callback))
+		carg4 = C.gpointer(userdata.RegisterOnce(callback))
 	}
 
 	C.g_volume_eject(carg0, carg1, carg2, carg3, carg4)
@@ -28751,7 +28751,7 @@ func (volume *VolumeInstance) EjectWithOperation(cancellable context.Context, fl
 	}
 	if callback != nil {
 		carg4 = (*[0]byte)(C._gotk4_gio2_AsyncReadyCallback)
-		carg5 = C.gpointer(gbox.AssignOnce(callback))
+		carg5 = C.gpointer(userdata.RegisterOnce(callback))
 	}
 
 	C.g_volume_eject_with_operation(carg0, carg1, carg2, carg3, carg4, carg5)
@@ -29096,7 +29096,7 @@ func (volume *VolumeInstance) Mount(cancellable context.Context, flags MountMoun
 	}
 	if callback != nil {
 		carg4 = (*[0]byte)(C._gotk4_gio2_AsyncReadyCallback)
-		carg5 = C.gpointer(gbox.AssignOnce(callback))
+		carg5 = C.gpointer(userdata.RegisterOnce(callback))
 	}
 
 	C.g_volume_mount(carg0, carg1, carg2, carg3, carg4, carg5)
@@ -29553,7 +29553,7 @@ type AppInfoMonitorInstance struct {
 
 var _ AppInfoMonitor = (*AppInfoMonitorInstance)(nil)
 
-// AppInfoMonitorInstance wraps GAppInfoMonitor
+// AppInfoMonitor wraps GAppInfoMonitor
 //
 // `GAppInfoMonitor` monitors application information for changes.
 // 
@@ -29671,7 +29671,7 @@ type AppLaunchContextInstance struct {
 
 var _ AppLaunchContext = (*AppLaunchContextInstance)(nil)
 
-// AppLaunchContextInstance wraps GAppLaunchContext
+// AppLaunchContext wraps GAppLaunchContext
 //
 // Integrating the launch with the launching application. This is used to
 // handle for instance startup notification and launching the new application
@@ -29881,7 +29881,7 @@ type ApplicationInstance struct {
 
 var _ Application = (*ApplicationInstance)(nil)
 
-// ApplicationInstance wraps GApplication
+// Application wraps GApplication
 //
 // `GApplication` is the core class for application support.
 // 
@@ -32089,7 +32089,7 @@ type ApplicationCommandLineInstance struct {
 
 var _ ApplicationCommandLine = (*ApplicationCommandLineInstance)(nil)
 
-// ApplicationCommandLineInstance wraps GApplicationCommandLine
+// ApplicationCommandLine wraps GApplicationCommandLine
 //
 // `GApplicationCommandLine` represents a command-line invocation of
 // an application.
@@ -32930,7 +32930,7 @@ type BytesIconInstance struct {
 
 var _ BytesIcon = (*BytesIconInstance)(nil)
 
-// BytesIconInstance wraps GBytesIcon
+// BytesIcon wraps GBytesIcon
 //
 // `GBytesIcon` specifies an image held in memory in a common format (usually
 // PNG) to be used as icon.
@@ -33041,7 +33041,7 @@ type CharsetConverterInstance struct {
 
 var _ CharsetConverter = (*CharsetConverterInstance)(nil)
 
-// CharsetConverterInstance wraps GCharsetConverter
+// CharsetConverter wraps GCharsetConverter
 //
 // `GCharsetConverter` is an implementation of [iface@Gio.Converter] based on
 // [struct@GLib.IConv].
@@ -33221,7 +33221,7 @@ type CredentialsInstance struct {
 
 var _ Credentials = (*CredentialsInstance)(nil)
 
-// CredentialsInstance wraps GCredentials
+// Credentials wraps GCredentials
 //
 // The `GCredentials` type is a reference-counted wrapper for native
 // credentials.
@@ -33458,7 +33458,7 @@ type DBusActionGroupInstance struct {
 
 var _ DBusActionGroup = (*DBusActionGroupInstance)(nil)
 
-// DBusActionGroupInstance wraps GDBusActionGroup
+// DBusActionGroup wraps GDBusActionGroup
 //
 // `GDBusActionGroup` is an implementation of the [iface@Gio.ActionGroup]
 // interface.
@@ -33564,7 +33564,7 @@ type DBusAuthObserverInstance struct {
 
 var _ DBusAuthObserver = (*DBusAuthObserverInstance)(nil)
 
-// DBusAuthObserverInstance wraps GDBusAuthObserver
+// DBusAuthObserver wraps GDBusAuthObserver
 //
 // `GDBusAuthObserver` provides a mechanism for participating
 // in how a [class@Gio.DBusServer] (or a [class@Gio.DBusConnection])
@@ -33791,7 +33791,7 @@ type DBusConnectionInstance struct {
 
 var _ DBusConnection = (*DBusConnectionInstance)(nil)
 
-// DBusConnectionInstance wraps GDBusConnection
+// DBusConnection wraps GDBusConnection
 //
 // The `GDBusConnection` type is used for D-Bus connections to remote
 // peers such as a message buses.
@@ -34710,7 +34710,7 @@ func NewDBusConnectionInstance(cancellable context.Context, stream IOStream, gui
 	}
 	if callback != nil {
 		carg6 = (*[0]byte)(C._gotk4_gio2_AsyncReadyCallback)
-		carg7 = C.gpointer(gbox.AssignOnce(callback))
+		carg7 = C.gpointer(userdata.RegisterOnce(callback))
 	}
 
 	C.g_dbus_connection_new(carg1, carg2, carg3, carg4, carg5, carg6, carg7)
@@ -34773,7 +34773,7 @@ func NewDBusConnectionInstanceForAddress(cancellable context.Context, address st
 	}
 	if callback != nil {
 		carg5 = (*[0]byte)(C._gotk4_gio2_AsyncReadyCallback)
-		carg6 = C.gpointer(gbox.AssignOnce(callback))
+		carg6 = C.gpointer(userdata.RegisterOnce(callback))
 	}
 
 	C.g_dbus_connection_new_for_address(carg1, carg2, carg3, carg4, carg5, carg6)
@@ -34830,8 +34830,8 @@ func (connection *DBusConnectionInstance) AddFilter(filterFunction DBusMessageFi
 
 	carg0 = (*C.GDBusConnection)(UnsafeDBusConnectionToGlibNone(connection))
 	carg1 = (*[0]byte)(C._gotk4_gio2_DBusMessageFilterFunction)
-	carg2 = C.gpointer(gbox.Assign(filterFunction))
-	carg3 = (C.GDestroyNotify)((*[0]byte)(C.callbackDelete))
+	carg2 = C.gpointer(userdata.Register(filterFunction))
+	carg3 = (C.GDestroyNotify)((*[0]byte)(C.destroyUserdata))
 
 	cret = C.g_dbus_connection_add_filter(carg0, carg1, carg2, carg3)
 	runtime.KeepAlive(connection)
@@ -34888,7 +34888,7 @@ func (connection *DBusConnectionInstance) Close(cancellable context.Context, cal
 	}
 	if callback != nil {
 		carg2 = (*[0]byte)(C._gotk4_gio2_AsyncReadyCallback)
-		carg3 = C.gpointer(gbox.AssignOnce(callback))
+		carg3 = C.gpointer(userdata.RegisterOnce(callback))
 	}
 
 	C.g_dbus_connection_close(carg0, carg1, carg2, carg3)
@@ -35130,7 +35130,7 @@ func (connection *DBusConnectionInstance) Flush(cancellable context.Context, cal
 	}
 	if callback != nil {
 		carg2 = (*[0]byte)(C._gotk4_gio2_AsyncReadyCallback)
-		carg3 = C.gpointer(gbox.AssignOnce(callback))
+		carg3 = C.gpointer(userdata.RegisterOnce(callback))
 	}
 
 	C.g_dbus_connection_flush(carg0, carg1, carg2, carg3)
@@ -35602,7 +35602,7 @@ func (connection *DBusConnectionInstance) SendMessageWithReply(cancellable conte
 	carg3 = C.gint(timeoutMsec)
 	if callback != nil {
 		carg6 = (*[0]byte)(C._gotk4_gio2_AsyncReadyCallback)
-		carg7 = C.gpointer(gbox.AssignOnce(callback))
+		carg7 = C.gpointer(userdata.RegisterOnce(callback))
 	}
 
 	C.g_dbus_connection_send_message_with_reply(carg0, carg1, carg2, carg3, &carg4, carg5, carg6, carg7)
@@ -35950,7 +35950,7 @@ type DBusInterfaceSkeletonInstance struct {
 
 var _ DBusInterfaceSkeleton = (*DBusInterfaceSkeletonInstance)(nil)
 
-// DBusInterfaceSkeletonInstance wraps GDBusInterfaceSkeleton
+// DBusInterfaceSkeleton wraps GDBusInterfaceSkeleton
 //
 // Abstract base class for D-Bus interfaces on the service side.
 type DBusInterfaceSkeleton interface {
@@ -36379,7 +36379,7 @@ type DBusMessageInstance struct {
 
 var _ DBusMessage = (*DBusMessageInstance)(nil)
 
-// DBusMessageInstance wraps GDBusMessage
+// DBusMessage wraps GDBusMessage
 //
 // A type for representing D-Bus messages that can be sent or received
 // on a [class@Gio.DBusConnection].
@@ -37802,7 +37802,7 @@ type DBusMethodInvocationInstance struct {
 
 var _ DBusMethodInvocation = (*DBusMethodInvocationInstance)(nil)
 
-// DBusMethodInvocationInstance wraps GDBusMethodInvocation
+// DBusMethodInvocation wraps GDBusMethodInvocation
 //
 // Instances of the `GDBusMethodInvocation` class are used when
 // handling D-Bus method calls. It provides a way to asynchronously
@@ -38271,7 +38271,7 @@ type DBusObjectManagerClientInstance struct {
 
 var _ DBusObjectManagerClient = (*DBusObjectManagerClientInstance)(nil)
 
-// DBusObjectManagerClientInstance wraps GDBusObjectManagerClient
+// DBusObjectManagerClient wraps GDBusObjectManagerClient
 //
 // `GDBusObjectManagerClient` is used to create, monitor and delete object
 // proxies for remote objects exported by a [class@Gio.DBusObjectManagerServer]
@@ -38590,7 +38590,7 @@ type DBusObjectManagerServerInstance struct {
 
 var _ DBusObjectManagerServer = (*DBusObjectManagerServerInstance)(nil)
 
-// DBusObjectManagerServerInstance wraps GDBusObjectManagerServer
+// DBusObjectManagerServer wraps GDBusObjectManagerServer
 //
 // `GDBusObjectManagerServer` is used to export [iface@Gio.DBusObject] instances
 // using the standardized
@@ -38930,7 +38930,7 @@ type DBusObjectProxyInstance struct {
 
 var _ DBusObjectProxy = (*DBusObjectProxyInstance)(nil)
 
-// DBusObjectProxyInstance wraps GDBusObjectProxy
+// DBusObjectProxy wraps GDBusObjectProxy
 //
 // A `GDBusObjectProxy` is an object used to represent a remote object
 // with one or more D-Bus interfaces. Normally, you don’t instantiate
@@ -39046,7 +39046,7 @@ type DBusObjectSkeletonInstance struct {
 
 var _ DBusObjectSkeleton = (*DBusObjectSkeletonInstance)(nil)
 
-// DBusObjectSkeletonInstance wraps GDBusObjectSkeleton
+// DBusObjectSkeleton wraps GDBusObjectSkeleton
 //
 // A `GDBusObjectSkeleton` instance is essentially a group of D-Bus
 // interfaces. The set of exported interfaces on the object may be
@@ -39277,7 +39277,7 @@ type DBusProxyInstance struct {
 
 var _ DBusProxy = (*DBusProxyInstance)(nil)
 
-// DBusProxyInstance wraps GDBusProxy
+// DBusProxy wraps GDBusProxy
 //
 // `GDBusProxy` is a base class used for proxies to access a D-Bus
 // interface on a remote object. A `GDBusProxy` can be constructed for
@@ -39753,7 +39753,7 @@ func NewDBusProxyInstance(cancellable context.Context, connection DBusConnection
 	defer C.free(unsafe.Pointer(carg6))
 	if callback != nil {
 		carg8 = (*[0]byte)(C._gotk4_gio2_AsyncReadyCallback)
-		carg9 = C.gpointer(gbox.AssignOnce(callback))
+		carg9 = C.gpointer(userdata.RegisterOnce(callback))
 	}
 
 	C.g_dbus_proxy_new(carg1, carg2, carg3, carg4, carg5, carg6, carg7, carg8, carg9)
@@ -39810,7 +39810,7 @@ func NewDBusProxyInstanceForBus(cancellable context.Context, busType BusType, fl
 	defer C.free(unsafe.Pointer(carg6))
 	if callback != nil {
 		carg8 = (*[0]byte)(C._gotk4_gio2_AsyncReadyCallback)
-		carg9 = C.gpointer(gbox.AssignOnce(callback))
+		carg9 = C.gpointer(userdata.RegisterOnce(callback))
 	}
 
 	C.g_dbus_proxy_new_for_bus(carg1, carg2, carg3, carg4, carg5, carg6, carg7, carg8, carg9)
@@ -40093,7 +40093,7 @@ type DBusServerInstance struct {
 
 var _ DBusServer = (*DBusServerInstance)(nil)
 
-// DBusServerInstance wraps GDBusServer
+// DBusServer wraps GDBusServer
 //
 // `GDBusServer` is a helper for listening to and accepting D-Bus
 // connections. This can be used to create a new D-Bus server, allowing two
@@ -40395,7 +40395,7 @@ type DebugControllerDBusInstance struct {
 
 var _ DebugControllerDBus = (*DebugControllerDBusInstance)(nil)
 
-// DebugControllerDBusInstance wraps GDebugControllerDBus
+// DebugControllerDBus wraps GDebugControllerDBus
 //
 // `GDebugControllerDBus` is an implementation of [iface@Gio.DebugController]
 // which exposes debug settings as a D-Bus object.
@@ -40646,7 +40646,7 @@ type EmblemInstance struct {
 
 var _ Emblem = (*EmblemInstance)(nil)
 
-// EmblemInstance wraps GEmblem
+// Emblem wraps GEmblem
 //
 // `GEmblem` is an implementation of [iface@Gio.Icon] that supports
 // having an emblem, which is an icon with additional properties.
@@ -40818,7 +40818,7 @@ type EmblemedIconInstance struct {
 
 var _ EmblemedIcon = (*EmblemedIconInstance)(nil)
 
-// EmblemedIconInstance wraps GEmblemedIcon
+// EmblemedIcon wraps GEmblemedIcon
 //
 // `GEmblemedIcon` is an implementation of [iface@Gio.Icon] that supports
 // adding an emblem to an icon. Adding multiple emblems to an
@@ -40979,7 +40979,7 @@ type FileEnumeratorInstance struct {
 
 var _ FileEnumerator = (*FileEnumeratorInstance)(nil)
 
-// FileEnumeratorInstance wraps GFileEnumerator
+// FileEnumerator wraps GFileEnumerator
 //
 // `GFileEnumerator` allows you to operate on a set of [iface@Gio.File] objects,
 // returning a [class@Gio.FileInfo] structure for each file enumerated (e.g.
@@ -41381,7 +41381,7 @@ func (enumerator *FileEnumeratorInstance) CloseAsync(cancellable context.Context
 	carg1 = C.int(ioPriority)
 	if callback != nil {
 		carg3 = (*[0]byte)(C._gotk4_gio2_AsyncReadyCallback)
-		carg4 = C.gpointer(gbox.AssignOnce(callback))
+		carg4 = C.gpointer(userdata.RegisterOnce(callback))
 	}
 
 	C.g_file_enumerator_close_async(carg0, carg1, carg2, carg3, carg4)
@@ -41774,7 +41774,7 @@ func (enumerator *FileEnumeratorInstance) NextFilesAsync(cancellable context.Con
 	carg2 = C.int(ioPriority)
 	if callback != nil {
 		carg4 = (*[0]byte)(C._gotk4_gio2_AsyncReadyCallback)
-		carg5 = C.gpointer(gbox.AssignOnce(callback))
+		carg5 = C.gpointer(userdata.RegisterOnce(callback))
 	}
 
 	C.g_file_enumerator_next_files_async(carg0, carg1, carg2, carg3, carg4, carg5)
@@ -41814,7 +41814,7 @@ type FileIconInstance struct {
 
 var _ FileIcon = (*FileIconInstance)(nil)
 
-// FileIconInstance wraps GFileIcon
+// FileIcon wraps GFileIcon
 //
 // `GFileIcon` specifies an icon by pointing to an image file
 // to be used as icon.
@@ -41924,7 +41924,7 @@ type FileInfoInstance struct {
 
 var _ FileInfo = (*FileInfoInstance)(nil)
 
-// FileInfoInstance wraps GFileInfo
+// FileInfo wraps GFileInfo
 //
 // Stores information about a file system object referenced by a [iface@Gio.File].
 // 
@@ -44593,7 +44593,7 @@ type FileMonitorInstance struct {
 
 var _ FileMonitor = (*FileMonitorInstance)(nil)
 
-// FileMonitorInstance wraps GFileMonitor
+// FileMonitor wraps GFileMonitor
 //
 // Monitors a file or directory for changes.
 // 
@@ -44798,7 +44798,7 @@ type FilenameCompleterInstance struct {
 
 var _ FilenameCompleter = (*FilenameCompleterInstance)(nil)
 
-// FilenameCompleterInstance wraps GFilenameCompleter
+// FilenameCompleter wraps GFilenameCompleter
 //
 // Completes partial file and directory names given a partial string by
 // looking in the file system for clues. Can return a list of possible
@@ -44991,7 +44991,7 @@ type IOModuleInstance struct {
 
 var _ IOModule = (*IOModuleInstance)(nil)
 
-// IOModuleInstance wraps GIOModule
+// IOModule wraps GIOModule
 //
 // Provides an interface and default functions for loading and unloading
 // modules. This is used internally to make GIO extensible, but can also
@@ -45128,7 +45128,7 @@ type IOStreamInstance struct {
 
 var _ IOStream = (*IOStreamInstance)(nil)
 
-// IOStreamInstance wraps GIOStream
+// IOStream wraps GIOStream
 //
 // `GIOStream` represents an object that has both read and write streams.
 // Generally the two streams act as separate input and output streams,
@@ -45511,7 +45511,7 @@ func (stream *IOStreamInstance) CloseAsync(cancellable context.Context, ioPriori
 	carg1 = C.int(ioPriority)
 	if callback != nil {
 		carg3 = (*[0]byte)(C._gotk4_gio2_AsyncReadyCallback)
-		carg4 = C.gpointer(gbox.AssignOnce(callback))
+		carg4 = C.gpointer(userdata.RegisterOnce(callback))
 	}
 
 	C.g_io_stream_close_async(carg0, carg1, carg2, carg3, carg4)
@@ -45721,7 +45721,7 @@ func (stream1 *IOStreamInstance) SpliceAsync(cancellable context.Context, stream
 	carg3 = C.int(ioPriority)
 	if callback != nil {
 		carg5 = (*[0]byte)(C._gotk4_gio2_AsyncReadyCallback)
-		carg6 = C.gpointer(gbox.AssignOnce(callback))
+		carg6 = C.gpointer(userdata.RegisterOnce(callback))
 	}
 
 	C.g_io_stream_splice_async(carg0, carg1, carg2, carg3, carg4, carg5, carg6)
@@ -45741,7 +45741,7 @@ type InetAddressInstance struct {
 
 var _ InetAddress = (*InetAddressInstance)(nil)
 
-// InetAddressInstance wraps GInetAddress
+// InetAddress wraps GInetAddress
 //
 // `GInetAddress` represents an IPv4 or IPv6 internet address. Use
 // [method@Gio.Resolver.lookup_by_name] or
@@ -46338,7 +46338,7 @@ type InetAddressMaskInstance struct {
 
 var _ InetAddressMask = (*InetAddressMaskInstance)(nil)
 
-// InetAddressMaskInstance wraps GInetAddressMask
+// InetAddressMask wraps GInetAddressMask
 //
 // `GInetAddressMask` represents a range of IPv4 or IPv6 addresses
 // described by a base address and a length indicating how many bits
@@ -46672,7 +46672,7 @@ type InputStreamInstance struct {
 
 var _ InputStream = (*InputStreamInstance)(nil)
 
-// InputStreamInstance wraps GInputStream
+// InputStream wraps GInputStream
 //
 // `GInputStream` is a base class for implementing streaming input.
 // 
@@ -47247,7 +47247,7 @@ func (stream *InputStreamInstance) CloseAsync(cancellable context.Context, ioPri
 	carg1 = C.int(ioPriority)
 	if callback != nil {
 		carg3 = (*[0]byte)(C._gotk4_gio2_AsyncReadyCallback)
-		carg4 = C.gpointer(gbox.AssignOnce(callback))
+		carg4 = C.gpointer(userdata.RegisterOnce(callback))
 	}
 
 	C.g_input_stream_close_async(carg0, carg1, carg2, carg3, carg4)
@@ -47522,7 +47522,7 @@ func (stream *InputStreamInstance) ReadAllAsync(cancellable context.Context, buf
 	carg3 = C.int(ioPriority)
 	if callback != nil {
 		carg5 = (*[0]byte)(C._gotk4_gio2_AsyncReadyCallback)
-		carg6 = C.gpointer(gbox.AssignOnce(callback))
+		carg6 = C.gpointer(userdata.RegisterOnce(callback))
 	}
 
 	C.g_input_stream_read_all_async(carg0, carg1, carg2, carg3, carg4, carg5, carg6)
@@ -47638,7 +47638,7 @@ func (stream *InputStreamInstance) ReadAsync(cancellable context.Context, buffer
 	carg3 = C.int(ioPriority)
 	if callback != nil {
 		carg5 = (*[0]byte)(C._gotk4_gio2_AsyncReadyCallback)
-		carg6 = C.gpointer(gbox.AssignOnce(callback))
+		carg6 = C.gpointer(userdata.RegisterOnce(callback))
 	}
 
 	C.g_input_stream_read_async(carg0, carg1, carg2, carg3, carg4, carg5, carg6)
@@ -47760,7 +47760,7 @@ func (stream *InputStreamInstance) ReadBytesAsync(cancellable context.Context, c
 	carg2 = C.int(ioPriority)
 	if callback != nil {
 		carg4 = (*[0]byte)(C._gotk4_gio2_AsyncReadyCallback)
-		carg5 = C.gpointer(gbox.AssignOnce(callback))
+		carg5 = C.gpointer(userdata.RegisterOnce(callback))
 	}
 
 	C.g_input_stream_read_bytes_async(carg0, carg1, carg2, carg3, carg4, carg5)
@@ -47979,7 +47979,7 @@ func (stream *InputStreamInstance) SkipAsync(cancellable context.Context, count 
 	carg2 = C.int(ioPriority)
 	if callback != nil {
 		carg4 = (*[0]byte)(C._gotk4_gio2_AsyncReadyCallback)
-		carg5 = C.gpointer(gbox.AssignOnce(callback))
+		carg5 = C.gpointer(userdata.RegisterOnce(callback))
 	}
 
 	C.g_input_stream_skip_async(carg0, carg1, carg2, carg3, carg4, carg5)
@@ -48034,7 +48034,7 @@ type ListStoreInstance struct {
 
 var _ ListStore = (*ListStoreInstance)(nil)
 
-// ListStoreInstance wraps GListStore
+// ListStore wraps GListStore
 //
 // `GListStore` is a simple implementation of [iface@Gio.ListModel] that stores
 // all items in memory.
@@ -48315,8 +48315,8 @@ func (store *ListStoreInstance) FindWithEqualFuncFull(item unsafe.Pointer, equal
 		carg1 = C.gpointer(item)
 	}
 	carg2 = (*[0]byte)(C._gotk4_glib2_EqualFuncFull)
-	carg3 = C.gpointer(gbox.Assign(equalFunc))
-	defer gbox.Delete(uintptr(carg3))
+	carg3 = C.gpointer(userdata.Register(equalFunc))
+	defer userdata.Delete(unsafe.Pointer(carg3))
 
 	cret = C.g_list_store_find_with_equal_func_full(carg0, carg1, carg2, carg3, &carg4)
 	runtime.KeepAlive(store)
@@ -48393,8 +48393,8 @@ func (store *ListStoreInstance) InsertSorted(item unsafe.Pointer, compareFunc gl
 	carg0 = (*C.GListStore)(UnsafeListStoreToGlibNone(store))
 	carg1 = C.gpointer(item)
 	carg2 = (*[0]byte)(C._gotk4_glib2_CompareDataFunc)
-	carg3 = C.gpointer(gbox.Assign(compareFunc))
-	defer gbox.Delete(uintptr(carg3))
+	carg3 = C.gpointer(userdata.Register(compareFunc))
+	defer userdata.Delete(unsafe.Pointer(carg3))
 
 	cret = C.g_list_store_insert_sorted(carg0, carg1, carg2, carg3)
 	runtime.KeepAlive(store)
@@ -48457,8 +48457,8 @@ func (store *ListStoreInstance) Sort(compareFunc glib.CompareDataFunc) {
 
 	carg0 = (*C.GListStore)(UnsafeListStoreToGlibNone(store))
 	carg1 = (*[0]byte)(C._gotk4_glib2_CompareDataFunc)
-	carg2 = C.gpointer(gbox.Assign(compareFunc))
-	defer gbox.Delete(uintptr(carg2))
+	carg2 = C.gpointer(userdata.Register(compareFunc))
+	defer userdata.Delete(unsafe.Pointer(carg2))
 
 	C.g_list_store_sort(carg0, carg1, carg2)
 	runtime.KeepAlive(store)
@@ -48473,7 +48473,7 @@ type MemoryInputStreamInstance struct {
 
 var _ MemoryInputStream = (*MemoryInputStreamInstance)(nil)
 
-// MemoryInputStreamInstance wraps GMemoryInputStream
+// MemoryInputStream wraps GMemoryInputStream
 //
 // `GMemoryInputStream` is a class for using arbitrary
 // memory chunks as input for GIO streaming input operations.
@@ -48602,7 +48602,7 @@ type MenuAttributeIterInstance struct {
 
 var _ MenuAttributeIter = (*MenuAttributeIterInstance)(nil)
 
-// MenuAttributeIterInstance wraps GMenuAttributeIter
+// MenuAttributeIter wraps GMenuAttributeIter
 //
 // #GMenuAttributeIter is an opaque structure type.  You must access it
 // using the functions below.
@@ -48736,7 +48736,7 @@ type MenuItemInstance struct {
 
 var _ MenuItem = (*MenuItemInstance)(nil)
 
-// MenuItemInstance wraps GMenuItem
+// MenuItem wraps GMenuItem
 //
 // #GMenuItem is an opaque structure type.  You must access it using the
 // functions below.
@@ -49308,7 +49308,7 @@ type MenuLinkIterInstance struct {
 
 var _ MenuLinkIter = (*MenuLinkIterInstance)(nil)
 
-// MenuLinkIterInstance wraps GMenuLinkIter
+// MenuLinkIter wraps GMenuLinkIter
 //
 // #GMenuLinkIter is an opaque structure type.  You must access it using
 // the functions below.
@@ -49538,7 +49538,7 @@ type MenuModelInstance struct {
 
 var _ MenuModel = (*MenuModelInstance)(nil)
 
-// MenuModelInstance wraps GMenuModel
+// MenuModel wraps GMenuModel
 //
 // `GMenuModel` represents the contents of a menu — an ordered list of
 // menu items. The items are associated with actions, which can be
@@ -49990,7 +49990,7 @@ type MountOperationInstance struct {
 
 var _ MountOperation = (*MountOperationInstance)(nil)
 
-// MountOperationInstance wraps GMountOperation
+// MountOperation wraps GMountOperation
 //
 // `GMountOperation` provides a mechanism for interacting with the user.
 // It can be used for authenticating mountable operations, such as loop
@@ -50638,7 +50638,7 @@ type NetworkAddressInstance struct {
 
 var _ NetworkAddress = (*NetworkAddressInstance)(nil)
 
-// NetworkAddressInstance wraps GNetworkAddress
+// NetworkAddress wraps GNetworkAddress
 //
 // `GNetworkAddress` provides an easy way to resolve a hostname and
 // then attempt to connect to that host, handling the possibility of
@@ -50965,7 +50965,7 @@ type NetworkServiceInstance struct {
 
 var _ NetworkService = (*NetworkServiceInstance)(nil)
 
-// NetworkServiceInstance wraps GNetworkService
+// NetworkService wraps GNetworkService
 //
 // Like [class@Gio.NetworkAddress] does with hostnames, `GNetworkService`
 // provides an easy way to resolve a SRV record, and then attempt to
@@ -51214,7 +51214,7 @@ type NotificationInstance struct {
 
 var _ Notification = (*NotificationInstance)(nil)
 
-// NotificationInstance wraps GNotification
+// Notification wraps GNotification
 //
 // `GNotification` is a mechanism for creating a notification to be shown
 // to the user — typically as a pop-up notification presented by the
@@ -51627,7 +51627,7 @@ type OutputStreamInstance struct {
 
 var _ OutputStream = (*OutputStreamInstance)(nil)
 
-// OutputStreamInstance wraps GOutputStream
+// OutputStream wraps GOutputStream
 //
 // `GOutputStream` is a base class for implementing streaming output.
 // 
@@ -52425,7 +52425,7 @@ func (stream *OutputStreamInstance) CloseAsync(cancellable context.Context, ioPr
 	carg1 = C.int(ioPriority)
 	if callback != nil {
 		carg3 = (*[0]byte)(C._gotk4_gio2_AsyncReadyCallback)
-		carg4 = C.gpointer(gbox.AssignOnce(callback))
+		carg4 = C.gpointer(userdata.RegisterOnce(callback))
 	}
 
 	C.g_output_stream_close_async(carg0, carg1, carg2, carg3, carg4)
@@ -52551,7 +52551,7 @@ func (stream *OutputStreamInstance) FlushAsync(cancellable context.Context, ioPr
 	carg1 = C.int(ioPriority)
 	if callback != nil {
 		carg3 = (*[0]byte)(C._gotk4_gio2_AsyncReadyCallback)
-		carg4 = C.gpointer(gbox.AssignOnce(callback))
+		carg4 = C.gpointer(userdata.RegisterOnce(callback))
 	}
 
 	C.g_output_stream_flush_async(carg0, carg1, carg2, carg3, carg4)
@@ -52788,7 +52788,7 @@ func (stream *OutputStreamInstance) SpliceAsync(cancellable context.Context, sou
 	carg3 = C.int(ioPriority)
 	if callback != nil {
 		carg5 = (*[0]byte)(C._gotk4_gio2_AsyncReadyCallback)
-		carg6 = C.gpointer(gbox.AssignOnce(callback))
+		carg6 = C.gpointer(userdata.RegisterOnce(callback))
 	}
 
 	C.g_output_stream_splice_async(carg0, carg1, carg2, carg3, carg4, carg5, carg6)
@@ -53017,7 +53017,7 @@ func (stream *OutputStreamInstance) WriteAllAsync(cancellable context.Context, b
 	carg3 = C.int(ioPriority)
 	if callback != nil {
 		carg5 = (*[0]byte)(C._gotk4_gio2_AsyncReadyCallback)
-		carg6 = C.gpointer(gbox.AssignOnce(callback))
+		carg6 = C.gpointer(userdata.RegisterOnce(callback))
 	}
 
 	C.g_output_stream_write_all_async(carg0, carg1, carg2, carg3, carg4, carg5, carg6)
@@ -53144,7 +53144,7 @@ func (stream *OutputStreamInstance) WriteAsync(cancellable context.Context, buff
 	carg3 = C.int(ioPriority)
 	if callback != nil {
 		carg5 = (*[0]byte)(C._gotk4_gio2_AsyncReadyCallback)
-		carg6 = C.gpointer(gbox.AssignOnce(callback))
+		carg6 = C.gpointer(userdata.RegisterOnce(callback))
 	}
 
 	C.g_output_stream_write_async(carg0, carg1, carg2, carg3, carg4, carg5, carg6)
@@ -53246,7 +53246,7 @@ func (stream *OutputStreamInstance) WriteBytesAsync(cancellable context.Context,
 	carg2 = C.int(ioPriority)
 	if callback != nil {
 		carg4 = (*[0]byte)(C._gotk4_gio2_AsyncReadyCallback)
-		carg5 = C.gpointer(gbox.AssignOnce(callback))
+		carg5 = C.gpointer(userdata.RegisterOnce(callback))
 	}
 
 	C.g_output_stream_write_bytes_async(carg0, carg1, carg2, carg3, carg4, carg5)
@@ -53524,7 +53524,7 @@ func (stream *OutputStreamInstance) WritevAllAsync(cancellable context.Context, 
 	carg3 = C.int(ioPriority)
 	if callback != nil {
 		carg5 = (*[0]byte)(C._gotk4_gio2_AsyncReadyCallback)
-		carg6 = C.gpointer(gbox.AssignOnce(callback))
+		carg6 = C.gpointer(userdata.RegisterOnce(callback))
 	}
 
 	C.g_output_stream_writev_all_async(carg0, carg1, carg2, carg3, carg4, carg5, carg6)
@@ -53646,7 +53646,7 @@ func (stream *OutputStreamInstance) WritevAsync(cancellable context.Context, vec
 	carg3 = C.int(ioPriority)
 	if callback != nil {
 		carg5 = (*[0]byte)(C._gotk4_gio2_AsyncReadyCallback)
-		carg6 = C.gpointer(gbox.AssignOnce(callback))
+		carg6 = C.gpointer(userdata.RegisterOnce(callback))
 	}
 
 	C.g_output_stream_writev_async(carg0, carg1, carg2, carg3, carg4, carg5, carg6)
@@ -53707,7 +53707,7 @@ type PermissionInstance struct {
 
 var _ Permission = (*PermissionInstance)(nil)
 
-// PermissionInstance wraps GPermission
+// Permission wraps GPermission
 //
 // A `GPermission` represents the status of the caller’s permission to
 // perform a certain action.
@@ -53994,7 +53994,7 @@ func (permission *PermissionInstance) AcquireAsync(cancellable context.Context, 
 	}
 	if callback != nil {
 		carg2 = (*[0]byte)(C._gotk4_gio2_AsyncReadyCallback)
-		carg3 = C.gpointer(gbox.AssignOnce(callback))
+		carg3 = C.gpointer(userdata.RegisterOnce(callback))
 	}
 
 	C.g_permission_acquire_async(carg0, carg1, carg2, carg3)
@@ -54237,7 +54237,7 @@ func (permission *PermissionInstance) ReleaseAsync(cancellable context.Context, 
 	}
 	if callback != nil {
 		carg2 = (*[0]byte)(C._gotk4_gio2_AsyncReadyCallback)
-		carg3 = C.gpointer(gbox.AssignOnce(callback))
+		carg3 = C.gpointer(userdata.RegisterOnce(callback))
 	}
 
 	C.g_permission_release_async(carg0, carg1, carg2, carg3)
@@ -54296,7 +54296,7 @@ type PropertyActionInstance struct {
 
 var _ PropertyAction = (*PropertyActionInstance)(nil)
 
-// PropertyActionInstance wraps GPropertyAction
+// PropertyAction wraps GPropertyAction
 //
 // A `GPropertyAction` is a way to get a [iface@Gio.Action] with a state value
 // reflecting and controlling the value of a [class@GObject.Object] property.
@@ -54442,7 +54442,7 @@ type ResolverInstance struct {
 
 var _ Resolver = (*ResolverInstance)(nil)
 
-// ResolverInstance wraps GResolver
+// Resolver wraps GResolver
 //
 // The object that handles DNS resolution. Use [func@Gio.Resolver.get_default]
 // to get the default resolver.
@@ -54757,7 +54757,7 @@ func (resolver *ResolverInstance) LookupByAddressAsync(cancellable context.Conte
 	carg1 = (*C.GInetAddress)(UnsafeInetAddressToGlibNone(address))
 	if callback != nil {
 		carg3 = (*[0]byte)(C._gotk4_gio2_AsyncReadyCallback)
-		carg4 = C.gpointer(gbox.AssignOnce(callback))
+		carg4 = C.gpointer(userdata.RegisterOnce(callback))
 	}
 
 	C.g_resolver_lookup_by_address_async(carg0, carg1, carg2, carg3, carg4)
@@ -54836,7 +54836,7 @@ func (resolver *ResolverInstance) LookupByNameAsync(cancellable context.Context,
 	defer C.free(unsafe.Pointer(carg1))
 	if callback != nil {
 		carg3 = (*[0]byte)(C._gotk4_gio2_AsyncReadyCallback)
-		carg4 = C.gpointer(gbox.AssignOnce(callback))
+		carg4 = C.gpointer(userdata.RegisterOnce(callback))
 	}
 
 	C.g_resolver_lookup_by_name_async(carg0, carg1, carg2, carg3, carg4)
@@ -54876,7 +54876,7 @@ func (resolver *ResolverInstance) LookupByNameWithFlagsAsync(cancellable context
 	carg2 = C.GResolverNameLookupFlags(flags)
 	if callback != nil {
 		carg4 = (*[0]byte)(C._gotk4_gio2_AsyncReadyCallback)
-		carg5 = C.gpointer(gbox.AssignOnce(callback))
+		carg5 = C.gpointer(userdata.RegisterOnce(callback))
 	}
 
 	C.g_resolver_lookup_by_name_with_flags_async(carg0, carg1, carg2, carg3, carg4, carg5)
@@ -54917,7 +54917,7 @@ func (resolver *ResolverInstance) LookupRecordsAsync(cancellable context.Context
 	carg2 = C.GResolverRecordType(recordType)
 	if callback != nil {
 		carg4 = (*[0]byte)(C._gotk4_gio2_AsyncReadyCallback)
-		carg5 = C.gpointer(gbox.AssignOnce(callback))
+		carg5 = C.gpointer(userdata.RegisterOnce(callback))
 	}
 
 	C.g_resolver_lookup_records_async(carg0, carg1, carg2, carg3, carg4, carg5)
@@ -54964,7 +54964,7 @@ func (resolver *ResolverInstance) LookupServiceAsync(cancellable context.Context
 	defer C.free(unsafe.Pointer(carg3))
 	if callback != nil {
 		carg5 = (*[0]byte)(C._gotk4_gio2_AsyncReadyCallback)
-		carg6 = C.gpointer(gbox.AssignOnce(callback))
+		carg6 = C.gpointer(userdata.RegisterOnce(callback))
 	}
 
 	C.g_resolver_lookup_service_async(carg0, carg1, carg2, carg3, carg4, carg5, carg6)
@@ -55023,7 +55023,7 @@ type SettingsInstance struct {
 
 var _ Settings = (*SettingsInstance)(nil)
 
-// SettingsInstance wraps GSettings
+// Settings wraps GSettings
 //
 // The `GSettings` class provides a convenient API for storing and retrieving
 // application settings.
@@ -57294,7 +57294,7 @@ type SimpleActionInstance struct {
 
 var _ SimpleAction = (*SimpleActionInstance)(nil)
 
-// SimpleActionInstance wraps GSimpleAction
+// SimpleAction wraps GSimpleAction
 //
 // A `GSimpleAction` is the obvious simple implementation of the
 // [iface@Gio.Action] interface. This is the easiest way to create an action for
@@ -57426,7 +57426,7 @@ type SimpleActionGroupInstance struct {
 
 var _ SimpleActionGroup = (*SimpleActionGroupInstance)(nil)
 
-// SimpleActionGroupInstance wraps GSimpleActionGroup
+// SimpleActionGroup wraps GSimpleActionGroup
 //
 // `GSimpleActionGroup` is a hash table filled with [iface@Gio.Action] objects,
 // implementing the [iface@Gio.ActionGroup] and [iface@Gio.ActionMap]
@@ -57671,7 +57671,7 @@ type SimpleAsyncResultInstance struct {
 
 var _ SimpleAsyncResult = (*SimpleAsyncResultInstance)(nil)
 
-// SimpleAsyncResultInstance wraps GSimpleAsyncResult
+// SimpleAsyncResult wraps GSimpleAsyncResult
 //
 // As of GLib 2.46, `GSimpleAsyncResult` is deprecated in favor of
 // [class@Gio.Task], which provides a simpler API.
@@ -58041,7 +58041,7 @@ func NewSimpleAsyncResultInstance(sourceObject gobject.Object, callback AsyncRea
 	}
 	if callback != nil {
 		carg2 = (*[0]byte)(C._gotk4_gio2_AsyncReadyCallback)
-		carg3 = C.gpointer(gbox.AssignOnce(callback))
+		carg3 = C.gpointer(userdata.RegisterOnce(callback))
 	}
 	if sourceTag != nil {
 		carg4 = C.gpointer(sourceTag)
@@ -58086,7 +58086,7 @@ func NewSimpleAsyncResultInstanceFromError(sourceObject gobject.Object, callback
 	}
 	if callback != nil {
 		carg2 = (*[0]byte)(C._gotk4_gio2_AsyncReadyCallback)
-		carg3 = C.gpointer(gbox.AssignOnce(callback))
+		carg3 = C.gpointer(userdata.RegisterOnce(callback))
 	}
 	carg4 = (*C.GError)(glib.UnsafeErrorToGlibNone(err))
 
@@ -58421,7 +58421,7 @@ type SimpleIOStreamInstance struct {
 
 var _ SimpleIOStream = (*SimpleIOStreamInstance)(nil)
 
-// SimpleIOStreamInstance wraps GSimpleIOStream
+// SimpleIOStream wraps GSimpleIOStream
 //
 // `GSimpleIOStream` creates a [class@Gio.IOStream] from an arbitrary
 // [class@Gio.InputStream] and [class@Gio.OutputStream]. This allows any pair of
@@ -58514,7 +58514,7 @@ type SimplePermissionInstance struct {
 
 var _ SimplePermission = (*SimplePermissionInstance)(nil)
 
-// SimplePermissionInstance wraps GSimplePermission
+// SimplePermission wraps GSimplePermission
 //
 // `GSimplePermission` is a trivial implementation of [class@Gio.Permission]
 // that represents a permission that is either always or never allowed.  The
@@ -58601,7 +58601,7 @@ type SimpleProxyResolverInstance struct {
 
 var _ SimpleProxyResolver = (*SimpleProxyResolverInstance)(nil)
 
-// SimpleProxyResolverInstance wraps GSimpleProxyResolver
+// SimpleProxyResolver wraps GSimpleProxyResolver
 //
 // `GSimpleProxyResolver` is a simple [iface@Gio.ProxyResolver] implementation
 // that handles a single default proxy, multiple URI-scheme-specific
@@ -58827,7 +58827,7 @@ type SocketInstance struct {
 
 var _ Socket = (*SocketInstance)(nil)
 
-// SocketInstance wraps GSocket
+// Socket wraps GSocket
 //
 // A `GSocket` is a low-level networking primitive. It is a more or less
 // direct mapping of the BSD socket API in a portable GObject based API.
@@ -62647,7 +62647,7 @@ type SocketAddressInstance struct {
 
 var _ SocketAddress = (*SocketAddressInstance)(nil)
 
-// SocketAddressInstance wraps GSocketAddress
+// SocketAddress wraps GSocketAddress
 //
 // `GSocketAddress` is the equivalent of
 // [`struct sockaddr`](man:sockaddr(3type)) and its subtypes in the BSD sockets
@@ -62867,7 +62867,7 @@ type SocketAddressEnumeratorInstance struct {
 
 var _ SocketAddressEnumerator = (*SocketAddressEnumeratorInstance)(nil)
 
-// SocketAddressEnumeratorInstance wraps GSocketAddressEnumerator
+// SocketAddressEnumerator wraps GSocketAddressEnumerator
 //
 // `GSocketAddressEnumerator` is an enumerator type for
 // [class@Gio.SocketAddress] instances. It is returned by enumeration functions
@@ -63054,7 +63054,7 @@ func (enumerator *SocketAddressEnumeratorInstance) NextAsync(cancellable context
 	}
 	if callback != nil {
 		carg2 = (*[0]byte)(C._gotk4_gio2_AsyncReadyCallback)
-		carg3 = C.gpointer(gbox.AssignOnce(callback))
+		carg3 = C.gpointer(userdata.RegisterOnce(callback))
 	}
 
 	C.g_socket_address_enumerator_next_async(carg0, carg1, carg2, carg3)
@@ -63110,7 +63110,7 @@ type SocketClientInstance struct {
 
 var _ SocketClient = (*SocketClientInstance)(nil)
 
-// SocketClientInstance wraps GSocketClient
+// SocketClient wraps GSocketClient
 //
 // `GSocketClient` is a lightweight high-level utility class for connecting to
 // a network host using a connection oriented socket type.
@@ -63816,7 +63816,7 @@ func (client *SocketClientInstance) ConnectAsync(cancellable context.Context, co
 	carg1 = (*C.GSocketConnectable)(UnsafeSocketConnectableToGlibNone(connectable))
 	if callback != nil {
 		carg3 = (*[0]byte)(C._gotk4_gio2_AsyncReadyCallback)
-		carg4 = C.gpointer(gbox.AssignOnce(callback))
+		carg4 = C.gpointer(userdata.RegisterOnce(callback))
 	}
 
 	C.g_socket_client_connect_async(carg0, carg1, carg2, carg3, carg4)
@@ -63969,7 +63969,7 @@ func (client *SocketClientInstance) ConnectToHostAsync(cancellable context.Conte
 	carg2 = C.guint16(defaultPort)
 	if callback != nil {
 		carg4 = (*[0]byte)(C._gotk4_gio2_AsyncReadyCallback)
-		carg5 = C.gpointer(gbox.AssignOnce(callback))
+		carg5 = C.gpointer(userdata.RegisterOnce(callback))
 	}
 
 	C.g_socket_client_connect_to_host_async(carg0, carg1, carg2, carg3, carg4, carg5)
@@ -64106,7 +64106,7 @@ func (client *SocketClientInstance) ConnectToServiceAsync(cancellable context.Co
 	defer C.free(unsafe.Pointer(carg2))
 	if callback != nil {
 		carg4 = (*[0]byte)(C._gotk4_gio2_AsyncReadyCallback)
-		carg5 = C.gpointer(gbox.AssignOnce(callback))
+		carg5 = C.gpointer(userdata.RegisterOnce(callback))
 	}
 
 	C.g_socket_client_connect_to_service_async(carg0, carg1, carg2, carg3, carg4, carg5)
@@ -64251,7 +64251,7 @@ func (client *SocketClientInstance) ConnectToURIAsync(cancellable context.Contex
 	carg2 = C.guint16(defaultPort)
 	if callback != nil {
 		carg4 = (*[0]byte)(C._gotk4_gio2_AsyncReadyCallback)
-		carg5 = C.gpointer(gbox.AssignOnce(callback))
+		carg5 = C.gpointer(userdata.RegisterOnce(callback))
 	}
 
 	C.g_socket_client_connect_to_uri_async(carg0, carg1, carg2, carg3, carg4, carg5)
@@ -64771,7 +64771,7 @@ type SocketConnectionInstance struct {
 
 var _ SocketConnection = (*SocketConnectionInstance)(nil)
 
-// SocketConnectionInstance wraps GSocketConnection
+// SocketConnection wraps GSocketConnection
 //
 // `GSocketConnection` is a [class@Gio.IOStream] for a connected socket. They
 // can be created either by [class@Gio.SocketClient] when connecting to a host,
@@ -65062,7 +65062,7 @@ func (connection *SocketConnectionInstance) ConnectAsync(cancellable context.Con
 	carg1 = (*C.GSocketAddress)(UnsafeSocketAddressToGlibNone(address))
 	if callback != nil {
 		carg3 = (*[0]byte)(C._gotk4_gio2_AsyncReadyCallback)
-		carg4 = C.gpointer(gbox.AssignOnce(callback))
+		carg4 = C.gpointer(userdata.RegisterOnce(callback))
 	}
 
 	C.g_socket_connection_connect_async(carg0, carg1, carg2, carg3, carg4)
@@ -65230,7 +65230,7 @@ type SocketControlMessageInstance struct {
 
 var _ SocketControlMessage = (*SocketControlMessageInstance)(nil)
 
-// SocketControlMessageInstance wraps GSocketControlMessage
+// SocketControlMessage wraps GSocketControlMessage
 //
 // A `GSocketControlMessage` is a special-purpose utility message that
 // can be sent to or received from a [class@Gio.Socket]. These types of
@@ -65430,7 +65430,7 @@ type SocketListenerInstance struct {
 
 var _ SocketListener = (*SocketListenerInstance)(nil)
 
-// SocketListenerInstance wraps GSocketListener
+// SocketListener wraps GSocketListener
 //
 // A `GSocketListener` is an object that keeps track of a set
 // of server sockets and helps you accept sockets from any of the
@@ -65818,7 +65818,7 @@ func (listener *SocketListenerInstance) AcceptAsync(cancellable context.Context,
 	}
 	if callback != nil {
 		carg2 = (*[0]byte)(C._gotk4_gio2_AsyncReadyCallback)
-		carg3 = C.gpointer(gbox.AssignOnce(callback))
+		carg3 = C.gpointer(userdata.RegisterOnce(callback))
 	}
 
 	C.g_socket_listener_accept_async(carg0, carg1, carg2, carg3)
@@ -65950,7 +65950,7 @@ func (listener *SocketListenerInstance) AcceptSocketAsync(cancellable context.Co
 	}
 	if callback != nil {
 		carg2 = (*[0]byte)(C._gotk4_gio2_AsyncReadyCallback)
-		carg3 = C.gpointer(gbox.AssignOnce(callback))
+		carg3 = C.gpointer(userdata.RegisterOnce(callback))
 	}
 
 	C.g_socket_listener_accept_socket_async(carg0, carg1, carg2, carg3)
@@ -66280,7 +66280,7 @@ type SocketServiceInstance struct {
 
 var _ SocketService = (*SocketServiceInstance)(nil)
 
-// SocketServiceInstance wraps GSocketService
+// SocketService wraps GSocketService
 //
 // A `GSocketService` is an object that represents a service that
 // is provided to the network or over local sockets.  When a new
@@ -66491,7 +66491,7 @@ type TaskInstance struct {
 
 var _ Task = (*TaskInstance)(nil)
 
-// TaskInstance wraps GTask
+// Task wraps GTask
 //
 // A `GTask` represents and manages a cancellable ‘task’.
 // 
@@ -67433,7 +67433,7 @@ func NewTaskInstance(cancellable context.Context, sourceObject unsafe.Pointer, c
 	}
 	if callback != nil {
 		carg3 = (*[0]byte)(C._gotk4_gio2_AsyncReadyCallback)
-		carg4 = C.gpointer(gbox.AssignOnce(callback))
+		carg4 = C.gpointer(userdata.RegisterOnce(callback))
 	}
 
 	cret = C.g_task_new(carg1, carg2, carg3, carg4)
@@ -67516,7 +67516,7 @@ func TaskInstanceReportError(sourceObject unsafe.Pointer, callback AsyncReadyCal
 	}
 	if callback != nil {
 		carg2 = (*[0]byte)(C._gotk4_gio2_AsyncReadyCallback)
-		carg3 = C.gpointer(gbox.AssignOnce(callback))
+		carg3 = C.gpointer(userdata.RegisterOnce(callback))
 	}
 	if sourceTag != nil {
 		carg4 = C.gpointer(sourceTag)
@@ -68277,7 +68277,7 @@ type TcpConnectionInstance struct {
 
 var _ TcpConnection = (*TcpConnectionInstance)(nil)
 
-// TcpConnectionInstance wraps GTcpConnection
+// TcpConnection wraps GTcpConnection
 //
 // This is the subclass of [class@Gio.SocketConnection] that is created
 // for TCP/IP sockets.
@@ -68411,7 +68411,7 @@ type TcpWrapperConnectionInstance struct {
 
 var _ TcpWrapperConnection = (*TcpWrapperConnectionInstance)(nil)
 
-// TcpWrapperConnectionInstance wraps GTcpWrapperConnection
+// TcpWrapperConnection wraps GTcpWrapperConnection
 //
 // A `GTcpWrapperConnection` can be used to wrap a [class@Gio.IOStream] that is
 // based on a [class@Gio.Socket], but which is not actually a
@@ -68533,7 +68533,7 @@ type TestDBusInstance struct {
 
 var _ TestDBus = (*TestDBusInstance)(nil)
 
-// TestDBusInstance wraps GTestDBus
+// TestDBus wraps GTestDBus
 //
 // A helper class for testing code which uses D-Bus without touching the user’s
 // session bus.
@@ -68874,7 +68874,7 @@ type ThemedIconInstance struct {
 
 var _ ThemedIcon = (*ThemedIconInstance)(nil)
 
-// ThemedIconInstance wraps GThemedIcon
+// ThemedIcon wraps GThemedIcon
 //
 // `GThemedIcon` is an implementation of [iface@Gio.Icon] that supports icon
 // themes.
@@ -69133,7 +69133,7 @@ type ThreadedSocketServiceInstance struct {
 
 var _ ThreadedSocketService = (*ThreadedSocketServiceInstance)(nil)
 
-// ThreadedSocketServiceInstance wraps GThreadedSocketService
+// ThreadedSocketService wraps GThreadedSocketService
 //
 // A `GThreadedSocketService` is a simple subclass of [class@Gio.SocketService]
 // that handles incoming connections by creating a worker thread and
@@ -69231,7 +69231,7 @@ type TlsCertificateInstance struct {
 
 var _ TlsCertificate = (*TlsCertificateInstance)(nil)
 
-// TlsCertificateInstance wraps GTlsCertificate
+// TlsCertificate wraps GTlsCertificate
 //
 // A certificate used for TLS authentication and encryption.
 // This can represent either a certificate only (eg, the certificate
@@ -69917,7 +69917,7 @@ type TlsConnectionInstance struct {
 
 var _ TlsConnection = (*TlsConnectionInstance)(nil)
 
-// TlsConnectionInstance wraps GTlsConnection
+// TlsConnection wraps GTlsConnection
 //
 // `GTlsConnection` is the base TLS connection class type, which wraps
 // a [class@Gio.IOStream] and provides TLS encryption on top of it. Its
@@ -70716,7 +70716,7 @@ func (conn *TlsConnectionInstance) HandshakeAsync(cancellable context.Context, i
 	carg1 = C.int(ioPriority)
 	if callback != nil {
 		carg3 = (*[0]byte)(C._gotk4_gio2_AsyncReadyCallback)
-		carg4 = C.gpointer(gbox.AssignOnce(callback))
+		carg4 = C.gpointer(userdata.RegisterOnce(callback))
 	}
 
 	C.g_tls_connection_handshake_async(carg0, carg1, carg2, carg3, carg4)
@@ -70999,7 +70999,7 @@ type TlsDatabaseInstance struct {
 
 var _ TlsDatabase = (*TlsDatabaseInstance)(nil)
 
-// TlsDatabaseInstance wraps GTlsDatabase
+// TlsDatabase wraps GTlsDatabase
 //
 // `GTlsDatabase` is used to look up certificates and other information
 // from a certificate or key store. It is an abstract base class which
@@ -71439,7 +71439,7 @@ func (self *TlsDatabaseInstance) LookupCertificateForHandleAsync(cancellable con
 	carg3 = C.GTlsDatabaseLookupFlags(flags)
 	if callback != nil {
 		carg5 = (*[0]byte)(C._gotk4_gio2_AsyncReadyCallback)
-		carg6 = C.gpointer(gbox.AssignOnce(callback))
+		carg6 = C.gpointer(userdata.RegisterOnce(callback))
 	}
 
 	C.g_tls_database_lookup_certificate_for_handle_async(carg0, carg1, carg2, carg3, carg4, carg5, carg6)
@@ -71594,7 +71594,7 @@ func (self *TlsDatabaseInstance) LookupCertificateIssuerAsync(cancellable contex
 	carg3 = C.GTlsDatabaseLookupFlags(flags)
 	if callback != nil {
 		carg5 = (*[0]byte)(C._gotk4_gio2_AsyncReadyCallback)
-		carg6 = C.gpointer(gbox.AssignOnce(callback))
+		carg6 = C.gpointer(userdata.RegisterOnce(callback))
 	}
 
 	C.g_tls_database_lookup_certificate_issuer_async(carg0, carg1, carg2, carg3, carg4, carg5, carg6)
@@ -71807,7 +71807,7 @@ func (self *TlsDatabaseInstance) VerifyChainAsync(cancellable context.Context, c
 	carg5 = C.GTlsDatabaseVerifyFlags(flags)
 	if callback != nil {
 		carg7 = (*[0]byte)(C._gotk4_gio2_AsyncReadyCallback)
-		carg8 = C.gpointer(gbox.AssignOnce(callback))
+		carg8 = C.gpointer(userdata.RegisterOnce(callback))
 	}
 
 	C.g_tls_database_verify_chain_async(carg0, carg1, carg2, carg3, carg4, carg5, carg6, carg7, carg8)
@@ -71875,7 +71875,7 @@ type TlsInteractionInstance struct {
 
 var _ TlsInteraction = (*TlsInteractionInstance)(nil)
 
-// TlsInteractionInstance wraps GTlsInteraction
+// TlsInteraction wraps GTlsInteraction
 //
 // `GTlsInteraction` provides a mechanism for the TLS connection and database
 // code to interact with the user. It can be used to ask the user for passwords.
@@ -72235,7 +72235,7 @@ func (interaction *TlsInteractionInstance) AskPasswordAsync(cancellable context.
 	carg1 = (*C.GTlsPassword)(UnsafeTlsPasswordToGlibNone(password))
 	if callback != nil {
 		carg3 = (*[0]byte)(C._gotk4_gio2_AsyncReadyCallback)
-		carg4 = C.gpointer(gbox.AssignOnce(callback))
+		carg4 = C.gpointer(userdata.RegisterOnce(callback))
 	}
 
 	C.g_tls_interaction_ask_password_async(carg0, carg1, carg2, carg3, carg4)
@@ -72508,7 +72508,7 @@ func (interaction *TlsInteractionInstance) RequestCertificateAsync(cancellable c
 	carg2 = C.GTlsCertificateRequestFlags(flags)
 	if callback != nil {
 		carg4 = (*[0]byte)(C._gotk4_gio2_AsyncReadyCallback)
-		carg5 = C.gpointer(gbox.AssignOnce(callback))
+		carg5 = C.gpointer(userdata.RegisterOnce(callback))
 	}
 
 	C.g_tls_interaction_request_certificate_async(carg0, carg1, carg2, carg3, carg4, carg5)
@@ -72572,7 +72572,7 @@ type TlsPasswordInstance struct {
 
 var _ TlsPassword = (*TlsPasswordInstance)(nil)
 
-// TlsPasswordInstance wraps GTlsPassword
+// TlsPassword wraps GTlsPassword
 //
 // An abstract interface representing a password used in TLS. Often used in
 // user interaction such as unlocking a key storage token.
@@ -72923,7 +72923,7 @@ type VfsInstance struct {
 
 var _ Vfs = (*VfsInstance)(nil)
 
-// VfsInstance wraps GVfs
+// Vfs wraps GVfs
 //
 // Entry point for using GIO functionality.
 type Vfs interface {
@@ -73299,13 +73299,13 @@ func (vfs *VfsInstance) RegisterURIScheme(scheme string, uriFunc VFSFileLookupFu
 	defer C.free(unsafe.Pointer(carg1))
 	if uriFunc != nil {
 		carg2 = (*[0]byte)(C._gotk4_gio2_VFSFileLookupFunc)
-		carg3 = C.gpointer(gbox.Assign(uriFunc))
-		carg4 = (C.GDestroyNotify)((*[0]byte)(C.callbackDelete))
+		carg3 = C.gpointer(userdata.Register(uriFunc))
+		carg4 = (C.GDestroyNotify)((*[0]byte)(C.destroyUserdata))
 	}
 	if parseNameFunc != nil {
 		carg5 = (*[0]byte)(C._gotk4_gio2_VFSFileLookupFunc)
-		carg6 = C.gpointer(gbox.Assign(parseNameFunc))
-		carg7 = (C.GDestroyNotify)((*[0]byte)(C.callbackDelete))
+		carg6 = C.gpointer(userdata.Register(parseNameFunc))
+		carg7 = (C.GDestroyNotify)((*[0]byte)(C.destroyUserdata))
 	}
 
 	cret = C.g_vfs_register_uri_scheme(carg0, carg1, carg2, carg3, carg4, carg5, carg6, carg7)
@@ -73365,7 +73365,7 @@ type VolumeMonitorInstance struct {
 
 var _ VolumeMonitor = (*VolumeMonitorInstance)(nil)
 
-// VolumeMonitorInstance wraps GVolumeMonitor
+// VolumeMonitor wraps GVolumeMonitor
 //
 // `GVolumeMonitor` is for listing the user interesting devices and volumes
 // on the computer. In other words, what a file selector or file manager
@@ -73590,7 +73590,7 @@ type ZlibCompressorInstance struct {
 
 var _ ZlibCompressor = (*ZlibCompressorInstance)(nil)
 
-// ZlibCompressorInstance wraps GZlibCompressor
+// ZlibCompressor wraps GZlibCompressor
 //
 // `GZlibCompressor` is an implementation of [iface@Gio.Converter] that
 // compresses data using zlib.
@@ -73745,7 +73745,7 @@ type ZlibDecompressorInstance struct {
 
 var _ ZlibDecompressor = (*ZlibDecompressorInstance)(nil)
 
-// ZlibDecompressorInstance wraps GZlibDecompressor
+// ZlibDecompressor wraps GZlibDecompressor
 //
 // `GZlibDecompressor` is an implementation of [iface@Gio.Converter] that
 // decompresses data compressed with zlib.
@@ -73861,7 +73861,7 @@ type DBusMenuModelInstance struct {
 
 var _ DBusMenuModel = (*DBusMenuModelInstance)(nil)
 
-// DBusMenuModelInstance wraps GDBusMenuModel
+// DBusMenuModel wraps GDBusMenuModel
 //
 // `GDBusMenuModel` is an implementation of [class@Gio.MenuModel] that can be
 // used as a proxy for a menu model that is exported over D-Bus with
@@ -73964,7 +73964,7 @@ type FileIOStreamInstance struct {
 
 var _ FileIOStream = (*FileIOStreamInstance)(nil)
 
-// FileIOStreamInstance wraps GFileIOStream
+// FileIOStream wraps GFileIOStream
 //
 // `GFileIOStream` provides I/O streams that both read and write to the same
 // file handle.
@@ -74220,7 +74220,7 @@ func (stream *FileIOStreamInstance) QueryInfoAsync(cancellable context.Context, 
 	carg2 = C.int(ioPriority)
 	if callback != nil {
 		carg4 = (*[0]byte)(C._gotk4_gio2_AsyncReadyCallback)
-		carg5 = C.gpointer(gbox.AssignOnce(callback))
+		carg5 = C.gpointer(userdata.RegisterOnce(callback))
 	}
 
 	C.g_file_io_stream_query_info_async(carg0, carg1, carg2, carg3, carg4, carg5)
@@ -74278,7 +74278,7 @@ type FileInputStreamInstance struct {
 
 var _ FileInputStream = (*FileInputStreamInstance)(nil)
 
-// FileInputStreamInstance wraps GFileInputStream
+// FileInputStream wraps GFileInputStream
 //
 // `GFileInputStream` provides input streams that take their
 // content from a file.
@@ -74473,7 +74473,7 @@ func (stream *FileInputStreamInstance) QueryInfoAsync(cancellable context.Contex
 	carg2 = C.int(ioPriority)
 	if callback != nil {
 		carg4 = (*[0]byte)(C._gotk4_gio2_AsyncReadyCallback)
-		carg5 = C.gpointer(gbox.AssignOnce(callback))
+		carg5 = C.gpointer(userdata.RegisterOnce(callback))
 	}
 
 	C.g_file_input_stream_query_info_async(carg0, carg1, carg2, carg3, carg4, carg5)
@@ -74530,7 +74530,7 @@ type FileOutputStreamInstance struct {
 
 var _ FileOutputStream = (*FileOutputStreamInstance)(nil)
 
-// FileOutputStreamInstance wraps GFileOutputStream
+// FileOutputStream wraps GFileOutputStream
 //
 // `GFileOutputStream` provides output streams that write their
 // content to a file.
@@ -74779,7 +74779,7 @@ func (stream *FileOutputStreamInstance) QueryInfoAsync(cancellable context.Conte
 	carg2 = C.int(ioPriority)
 	if callback != nil {
 		carg4 = (*[0]byte)(C._gotk4_gio2_AsyncReadyCallback)
-		carg5 = C.gpointer(gbox.AssignOnce(callback))
+		carg5 = C.gpointer(userdata.RegisterOnce(callback))
 	}
 
 	C.g_file_output_stream_query_info_async(carg0, carg1, carg2, carg3, carg4, carg5)
@@ -74835,7 +74835,7 @@ type FilterInputStreamInstance struct {
 
 var _ FilterInputStream = (*FilterInputStreamInstance)(nil)
 
-// FilterInputStreamInstance wraps GFilterInputStream
+// FilterInputStream wraps GFilterInputStream
 //
 // Base class for input stream implementations that perform some
 // kind of filtering operation on a base stream. Typical examples
@@ -74982,7 +74982,7 @@ type FilterOutputStreamInstance struct {
 
 var _ FilterOutputStream = (*FilterOutputStreamInstance)(nil)
 
-// FilterOutputStreamInstance wraps GFilterOutputStream
+// FilterOutputStream wraps GFilterOutputStream
 //
 // Base class for output stream implementations that perform some
 // kind of filtering operation on a base stream. Typical examples
@@ -75131,7 +75131,7 @@ type InetSocketAddressInstance struct {
 
 var _ InetSocketAddress = (*InetSocketAddressInstance)(nil)
 
-// InetSocketAddressInstance wraps GInetSocketAddress
+// InetSocketAddress wraps GInetSocketAddress
 //
 // An IPv4 or IPv6 socket address. That is, the combination of a
 // [class@Gio.InetAddress] and a port number.
@@ -75381,7 +75381,7 @@ type MemoryOutputStreamInstance struct {
 
 var _ MemoryOutputStream = (*MemoryOutputStreamInstance)(nil)
 
-// MemoryOutputStreamInstance wraps GMemoryOutputStream
+// MemoryOutputStream wraps GMemoryOutputStream
 //
 // `GMemoryOutputStream` is a class for using arbitrary
 // memory chunks as output for GIO streaming output operations.
@@ -75658,7 +75658,7 @@ type MenuInstance struct {
 
 var _ Menu = (*MenuInstance)(nil)
 
-// MenuInstance wraps GMenu
+// Menu wraps GMenu
 //
 // `GMenu` is a simple implementation of [class@Gio.MenuModel].
 // You populate a `GMenu` by adding [class@Gio.MenuItem] instances to it.
@@ -76332,7 +76332,7 @@ type NativeSocketAddressInstance struct {
 
 var _ NativeSocketAddress = (*NativeSocketAddressInstance)(nil)
 
-// NativeSocketAddressInstance wraps GNativeSocketAddress
+// NativeSocketAddress wraps GNativeSocketAddress
 //
 // A socket address of some unknown native type.
 // 
@@ -76424,7 +76424,7 @@ type NativeVolumeMonitorInstance struct {
 
 var _ NativeVolumeMonitor = (*NativeVolumeMonitorInstance)(nil)
 
-// NativeVolumeMonitorInstance wraps GNativeVolumeMonitor
+// NativeVolumeMonitor wraps GNativeVolumeMonitor
 type NativeVolumeMonitor interface {
 	VolumeMonitor
 	upcastToGNativeVolumeMonitor() *NativeVolumeMonitorInstance
@@ -76474,7 +76474,7 @@ type ProxyAddressInstance struct {
 
 var _ ProxyAddress = (*ProxyAddressInstance)(nil)
 
-// ProxyAddressInstance wraps GProxyAddress
+// ProxyAddress wraps GProxyAddress
 //
 // A [class@Gio.InetSocketAddress] representing a connection via a proxy server.
 type ProxyAddress interface {
@@ -76811,7 +76811,7 @@ type ProxyAddressEnumeratorInstance struct {
 
 var _ ProxyAddressEnumerator = (*ProxyAddressEnumeratorInstance)(nil)
 
-// ProxyAddressEnumeratorInstance wraps GProxyAddressEnumerator
+// ProxyAddressEnumerator wraps GProxyAddressEnumerator
 //
 // `GProxyAddressEnumerator` is a wrapper around
 // [class@Gio.SocketAddressEnumerator] which takes the [class@Gio.SocketAddress]
@@ -76874,7 +76874,7 @@ type BufferedInputStreamInstance struct {
 
 var _ BufferedInputStream = (*BufferedInputStreamInstance)(nil)
 
-// BufferedInputStreamInstance wraps GBufferedInputStream
+// BufferedInputStream wraps GBufferedInputStream
 //
 // Buffered input stream implements [class@Gio.FilterInputStream] and provides
 // for buffered reads.
@@ -77235,7 +77235,7 @@ func (stream *BufferedInputStreamInstance) FillAsync(cancellable context.Context
 	carg2 = C.int(ioPriority)
 	if callback != nil {
 		carg4 = (*[0]byte)(C._gotk4_gio2_AsyncReadyCallback)
-		carg5 = C.gpointer(gbox.AssignOnce(callback))
+		carg5 = C.gpointer(userdata.RegisterOnce(callback))
 	}
 
 	C.g_buffered_input_stream_fill_async(carg0, carg1, carg2, carg3, carg4, carg5)
@@ -77477,7 +77477,7 @@ type BufferedOutputStreamInstance struct {
 
 var _ BufferedOutputStream = (*BufferedOutputStreamInstance)(nil)
 
-// BufferedOutputStreamInstance wraps GBufferedOutputStream
+// BufferedOutputStream wraps GBufferedOutputStream
 //
 // Buffered output stream implements [class@Gio.FilterOutputStream] and provides
 // for buffered writes.
@@ -77730,7 +77730,7 @@ type ConverterInputStreamInstance struct {
 
 var _ ConverterInputStream = (*ConverterInputStreamInstance)(nil)
 
-// ConverterInputStreamInstance wraps GConverterInputStream
+// ConverterInputStream wraps GConverterInputStream
 //
 // Converter input stream implements [class@Gio.InputStream] and allows
 // conversion of data of various types during reading.
@@ -77855,7 +77855,7 @@ type ConverterOutputStreamInstance struct {
 
 var _ ConverterOutputStream = (*ConverterOutputStreamInstance)(nil)
 
-// ConverterOutputStreamInstance wraps GConverterOutputStream
+// ConverterOutputStream wraps GConverterOutputStream
 //
 // Converter output stream implements [class@Gio.OutputStream] and allows
 // conversion of data of various types during reading.
@@ -77978,7 +77978,7 @@ type DataInputStreamInstance struct {
 
 var _ DataInputStream = (*DataInputStreamInstance)(nil)
 
-// DataInputStreamInstance wraps GDataInputStream
+// DataInputStream wraps GDataInputStream
 //
 // Data input stream implements [class@Gio.InputStream] and includes functions
 // for reading structured data directly from a binary input stream.
@@ -78692,7 +78692,7 @@ func (stream *DataInputStreamInstance) ReadLineAsync(cancellable context.Context
 	carg1 = C.gint(ioPriority)
 	if callback != nil {
 		carg3 = (*[0]byte)(C._gotk4_gio2_AsyncReadyCallback)
-		carg4 = C.gpointer(gbox.AssignOnce(callback))
+		carg4 = C.gpointer(userdata.RegisterOnce(callback))
 	}
 
 	C.g_data_input_stream_read_line_async(carg0, carg1, carg2, carg3, carg4)
@@ -79072,7 +79072,7 @@ func (stream *DataInputStreamInstance) ReadUntilAsync(cancellable context.Contex
 	carg2 = C.gint(ioPriority)
 	if callback != nil {
 		carg4 = (*[0]byte)(C._gotk4_gio2_AsyncReadyCallback)
-		carg5 = C.gpointer(gbox.AssignOnce(callback))
+		carg5 = C.gpointer(userdata.RegisterOnce(callback))
 	}
 
 	C.g_data_input_stream_read_until_async(carg0, carg1, carg2, carg3, carg4, carg5)
@@ -79236,7 +79236,7 @@ func (stream *DataInputStreamInstance) ReadUptoAsync(cancellable context.Context
 	carg3 = C.gint(ioPriority)
 	if callback != nil {
 		carg5 = (*[0]byte)(C._gotk4_gio2_AsyncReadyCallback)
-		carg6 = C.gpointer(gbox.AssignOnce(callback))
+		carg6 = C.gpointer(userdata.RegisterOnce(callback))
 	}
 
 	C.g_data_input_stream_read_upto_async(carg0, carg1, carg2, carg3, carg4, carg5, carg6)
@@ -79349,7 +79349,7 @@ type DataOutputStreamInstance struct {
 
 var _ DataOutputStream = (*DataOutputStreamInstance)(nil)
 
-// DataOutputStreamInstance wraps GDataOutputStream
+// DataOutputStream wraps GDataOutputStream
 //
 // Data output stream implements [class@Gio.OutputStream] and includes functions
 // for writing data directly to an output stream.
@@ -85247,8 +85247,8 @@ func (job *IOSchedulerJob) SendToMainloop(fn glib.SourceFunc) bool {
 
 	carg0 = (*C.GIOSchedulerJob)(UnsafeIOSchedulerJobToGlibNone(job))
 	carg1 = (*[0]byte)(C._gotk4_glib2_SourceFunc)
-	carg2 = C.gpointer(gbox.Assign(fn))
-	carg3 = (C.GDestroyNotify)((*[0]byte)(C.callbackDelete))
+	carg2 = C.gpointer(userdata.Register(fn))
+	carg3 = (C.GDestroyNotify)((*[0]byte)(C.destroyUserdata))
 
 	cret = C.g_io_scheduler_job_send_to_mainloop(carg0, carg1, carg2, carg3)
 	runtime.KeepAlive(job)
@@ -85288,8 +85288,8 @@ func (job *IOSchedulerJob) SendToMainloopAsync(fn glib.SourceFunc) {
 
 	carg0 = (*C.GIOSchedulerJob)(UnsafeIOSchedulerJobToGlibNone(job))
 	carg1 = (*[0]byte)(C._gotk4_glib2_SourceFunc)
-	carg2 = C.gpointer(gbox.Assign(fn))
-	carg3 = (C.GDestroyNotify)((*[0]byte)(C.callbackDelete))
+	carg2 = C.gpointer(userdata.Register(fn))
+	carg3 = (C.GDestroyNotify)((*[0]byte)(C.destroyUserdata))
 
 	C.g_io_scheduler_job_send_to_mainloop_async(carg0, carg1, carg2, carg3)
 	runtime.KeepAlive(job)

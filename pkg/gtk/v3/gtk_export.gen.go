@@ -5,7 +5,7 @@ package gtk
 import (
 	"unsafe"
 
-	"github.com/diamondburned/gotk4/pkg/core/gbox"
+	"github.com/diamondburned/gotk4/pkg/core/userdata"
 	"github.com/diamondburned/gotk4/pkg/gdk/v3"
 	"github.com/diamondburned/gotk4/pkg/gdkpixbuf/v2"
 	"github.com/diamondburned/gotk4/pkg/glib/v2"
@@ -22,7 +22,7 @@ import "C"
 func _gotk4_gtk3_AssistantPageFunc(carg1 C.gint, carg2 C.gpointer) (cret C.gint) {
 	var fn AssistantPageFunc
 	{
-		v := gbox.Get(uintptr(carg2))
+		v := userdata.Load(unsafe.Pointer(carg2))
 		if v == nil {
 			panic(`callback not found`)
 		}
@@ -45,7 +45,7 @@ func _gotk4_gtk3_AssistantPageFunc(carg1 C.gint, carg2 C.gpointer) (cret C.gint)
 func _gotk4_gtk3_BuilderConnectFunc(carg1 *C.GtkBuilder, carg2 *C.GObject, carg3 *C.gchar, carg4 *C.gchar, carg5 *C.GObject, carg6 C.GConnectFlags, carg7 C.gpointer) {
 	var fn BuilderConnectFunc
 	{
-		v := gbox.Get(uintptr(carg7))
+		v := userdata.Load(unsafe.Pointer(carg7))
 		if v == nil {
 			panic(`callback not found`)
 		}
@@ -75,7 +75,7 @@ func _gotk4_gtk3_BuilderConnectFunc(carg1 *C.GtkBuilder, carg2 *C.GObject, carg3
 func _gotk4_gtk3_Callback(carg1 *C.GtkWidget, carg2 C.gpointer) {
 	var fn Callback
 	{
-		v := gbox.Get(uintptr(carg2))
+		v := userdata.Load(unsafe.Pointer(carg2))
 		if v == nil {
 			panic(`callback not found`)
 		}
@@ -93,7 +93,7 @@ func _gotk4_gtk3_Callback(carg1 *C.GtkWidget, carg2 C.gpointer) {
 func _gotk4_gtk3_CellAllocCallback(carg1 *C.GtkCellRenderer, carg2 *C.GdkRectangle, carg3 *C.GdkRectangle, carg4 C.gpointer) (cret C.gboolean) {
 	var fn CellAllocCallback
 	{
-		v := gbox.Get(uintptr(carg4))
+		v := userdata.Load(unsafe.Pointer(carg4))
 		if v == nil {
 			panic(`callback not found`)
 		}
@@ -122,7 +122,7 @@ func _gotk4_gtk3_CellAllocCallback(carg1 *C.GtkCellRenderer, carg2 *C.GdkRectang
 func _gotk4_gtk3_CellCallback(carg1 *C.GtkCellRenderer, carg2 C.gpointer) (cret C.gboolean) {
 	var fn CellCallback
 	{
-		v := gbox.Get(uintptr(carg2))
+		v := userdata.Load(unsafe.Pointer(carg2))
 		if v == nil {
 			panic(`callback not found`)
 		}
@@ -147,7 +147,7 @@ func _gotk4_gtk3_CellCallback(carg1 *C.GtkCellRenderer, carg2 C.gpointer) (cret 
 func _gotk4_gtk3_CellLayoutDataFunc(carg1 *C.GtkCellLayout, carg2 *C.GtkCellRenderer, carg3 *C.GtkTreeModel, carg4 *C.GtkTreeIter, carg5 C.gpointer) {
 	var fn CellLayoutDataFunc
 	{
-		v := gbox.Get(uintptr(carg5))
+		v := userdata.Load(unsafe.Pointer(carg5))
 		if v == nil {
 			panic(`callback not found`)
 		}
@@ -171,7 +171,7 @@ func _gotk4_gtk3_CellLayoutDataFunc(carg1 *C.GtkCellLayout, carg2 *C.GtkCellRend
 func _gotk4_gtk3_ClipboardImageReceivedFunc(carg1 *C.GtkClipboard, carg2 *C.GdkPixbuf, carg3 C.gpointer) {
 	var fn ClipboardImageReceivedFunc
 	{
-		v := gbox.Get(uintptr(carg3))
+		v := userdata.Load(unsafe.Pointer(carg3))
 		if v == nil {
 			panic(`callback not found`)
 		}
@@ -191,7 +191,7 @@ func _gotk4_gtk3_ClipboardImageReceivedFunc(carg1 *C.GtkClipboard, carg2 *C.GdkP
 func _gotk4_gtk3_ClipboardReceivedFunc(carg1 *C.GtkClipboard, carg2 *C.GtkSelectionData, carg3 C.gpointer) {
 	var fn ClipboardReceivedFunc
 	{
-		v := gbox.Get(uintptr(carg3))
+		v := userdata.Load(unsafe.Pointer(carg3))
 		if v == nil {
 			panic(`callback not found`)
 		}
@@ -211,7 +211,7 @@ func _gotk4_gtk3_ClipboardReceivedFunc(carg1 *C.GtkClipboard, carg2 *C.GtkSelect
 func _gotk4_gtk3_ClipboardTextReceivedFunc(carg1 *C.GtkClipboard, carg2 *C.gchar, carg3 C.gpointer) {
 	var fn ClipboardTextReceivedFunc
 	{
-		v := gbox.Get(uintptr(carg3))
+		v := userdata.Load(unsafe.Pointer(carg3))
 		if v == nil {
 			panic(`callback not found`)
 		}
@@ -233,7 +233,7 @@ func _gotk4_gtk3_ClipboardTextReceivedFunc(carg1 *C.GtkClipboard, carg2 *C.gchar
 func _gotk4_gtk3_ClipboardURIReceivedFunc(carg1 *C.GtkClipboard, carg2 **C.gchar, carg3 C.gpointer) {
 	var fn ClipboardURIReceivedFunc
 	{
-		v := gbox.Get(uintptr(carg3))
+		v := userdata.Load(unsafe.Pointer(carg3))
 		if v == nil {
 			panic(`callback not found`)
 		}
@@ -255,7 +255,7 @@ func _gotk4_gtk3_ClipboardURIReceivedFunc(carg1 *C.GtkClipboard, carg2 **C.gchar
 func _gotk4_gtk3_EntryCompletionMatchFunc(carg1 *C.GtkEntryCompletion, carg2 *C.gchar, carg3 *C.GtkTreeIter, carg4 C.gpointer) (cret C.gboolean) {
 	var fn EntryCompletionMatchFunc
 	{
-		v := gbox.Get(uintptr(carg4))
+		v := userdata.Load(unsafe.Pointer(carg4))
 		if v == nil {
 			panic(`callback not found`)
 		}
@@ -284,7 +284,7 @@ func _gotk4_gtk3_EntryCompletionMatchFunc(carg1 *C.GtkEntryCompletion, carg2 *C.
 func _gotk4_gtk3_FileFilterFunc(carg1 *C.GtkFileFilterInfo, carg2 C.gpointer) (cret C.gboolean) {
 	var fn FileFilterFunc
 	{
-		v := gbox.Get(uintptr(carg2))
+		v := userdata.Load(unsafe.Pointer(carg2))
 		if v == nil {
 			panic(`callback not found`)
 		}
@@ -309,7 +309,7 @@ func _gotk4_gtk3_FileFilterFunc(carg1 *C.GtkFileFilterInfo, carg2 C.gpointer) (c
 func _gotk4_gtk3_FlowBoxCreateWidgetFunc(carg1 C.gpointer, carg2 C.gpointer) (cret *C.GtkWidget) {
 	var fn FlowBoxCreateWidgetFunc
 	{
-		v := gbox.Get(uintptr(carg2))
+		v := userdata.Load(unsafe.Pointer(carg2))
 		if v == nil {
 			panic(`callback not found`)
 		}
@@ -332,7 +332,7 @@ func _gotk4_gtk3_FlowBoxCreateWidgetFunc(carg1 C.gpointer, carg2 C.gpointer) (cr
 func _gotk4_gtk3_FontFilterFunc(carg1 *C.PangoFontFamily, carg2 *C.PangoFontFace, carg3 C.gpointer) (cret C.gboolean) {
 	var fn FontFilterFunc
 	{
-		v := gbox.Get(uintptr(carg3))
+		v := userdata.Load(unsafe.Pointer(carg3))
 		if v == nil {
 			panic(`callback not found`)
 		}
@@ -359,7 +359,7 @@ func _gotk4_gtk3_FontFilterFunc(carg1 *C.PangoFontFamily, carg2 *C.PangoFontFace
 func _gotk4_gtk3_KeySnoopFunc(carg1 *C.GtkWidget, carg2 *C.GdkEventKey, carg3 C.gpointer) (cret C.gint) {
 	var fn KeySnoopFunc
 	{
-		v := gbox.Get(uintptr(carg3))
+		v := userdata.Load(unsafe.Pointer(carg3))
 		if v == nil {
 			panic(`callback not found`)
 		}
@@ -384,7 +384,7 @@ func _gotk4_gtk3_KeySnoopFunc(carg1 *C.GtkWidget, carg2 *C.GdkEventKey, carg3 C.
 func _gotk4_gtk3_ListBoxCreateWidgetFunc(carg1 C.gpointer, carg2 C.gpointer) (cret *C.GtkWidget) {
 	var fn ListBoxCreateWidgetFunc
 	{
-		v := gbox.Get(uintptr(carg2))
+		v := userdata.Load(unsafe.Pointer(carg2))
 		if v == nil {
 			panic(`callback not found`)
 		}
@@ -407,7 +407,7 @@ func _gotk4_gtk3_ListBoxCreateWidgetFunc(carg1 C.gpointer, carg2 C.gpointer) (cr
 func _gotk4_gtk3_PageSetupDoneFunc(carg1 *C.GtkPageSetup, carg2 C.gpointer) {
 	var fn PageSetupDoneFunc
 	{
-		v := gbox.Get(uintptr(carg2))
+		v := userdata.Load(unsafe.Pointer(carg2))
 		if v == nil {
 			panic(`callback not found`)
 		}
@@ -425,7 +425,7 @@ func _gotk4_gtk3_PageSetupDoneFunc(carg1 *C.GtkPageSetup, carg2 C.gpointer) {
 func _gotk4_gtk3_PrintSettingsFunc(carg1 *C.gchar, carg2 *C.gchar, carg3 C.gpointer) {
 	var fn PrintSettingsFunc
 	{
-		v := gbox.Get(uintptr(carg3))
+		v := userdata.Load(unsafe.Pointer(carg3))
 		if v == nil {
 			panic(`callback not found`)
 		}
@@ -445,7 +445,7 @@ func _gotk4_gtk3_PrintSettingsFunc(carg1 *C.gchar, carg2 *C.gchar, carg3 C.gpoin
 func _gotk4_gtk3_RecentFilterFunc(carg1 *C.GtkRecentFilterInfo, carg2 C.gpointer) (cret C.gboolean) {
 	var fn RecentFilterFunc
 	{
-		v := gbox.Get(uintptr(carg2))
+		v := userdata.Load(unsafe.Pointer(carg2))
 		if v == nil {
 			panic(`callback not found`)
 		}
@@ -470,7 +470,7 @@ func _gotk4_gtk3_RecentFilterFunc(carg1 *C.GtkRecentFilterInfo, carg2 C.gpointer
 func _gotk4_gtk3_RecentSortFunc(carg1 *C.GtkRecentInfo, carg2 *C.GtkRecentInfo, carg3 C.gpointer) (cret C.gint) {
 	var fn RecentSortFunc
 	{
-		v := gbox.Get(uintptr(carg3))
+		v := userdata.Load(unsafe.Pointer(carg3))
 		if v == nil {
 			panic(`callback not found`)
 		}
@@ -495,7 +495,7 @@ func _gotk4_gtk3_RecentSortFunc(carg1 *C.GtkRecentInfo, carg2 *C.GtkRecentInfo, 
 func _gotk4_gtk3_TextBufferDeserializeFunc(carg1 *C.GtkTextBuffer, carg2 *C.GtkTextBuffer, carg3 *C.GtkTextIter, carg4 *C.guint8, carg5 C.gsize, carg6 C.gboolean, carg7 C.gpointer, _cerr **C.GError) (cret C.gboolean) {
 	var fn TextBufferDeserializeFunc
 	{
-		v := gbox.Get(uintptr(carg7))
+		v := userdata.Load(unsafe.Pointer(carg7))
 		if v == nil {
 			panic(`callback not found`)
 		}
@@ -535,7 +535,7 @@ func _gotk4_gtk3_TextBufferDeserializeFunc(carg1 *C.GtkTextBuffer, carg2 *C.GtkT
 func _gotk4_gtk3_TextBufferSerializeFunc(carg1 *C.GtkTextBuffer, carg2 *C.GtkTextBuffer, carg3 *C.GtkTextIter, carg4 *C.GtkTextIter, carg5 *C.gsize, carg6 C.gpointer) (cret *C.guint8) {
 	var fn TextBufferSerializeFunc
 	{
-		v := gbox.Get(uintptr(carg6))
+		v := userdata.Load(unsafe.Pointer(carg6))
 		if v == nil {
 			panic(`callback not found`)
 		}
@@ -568,7 +568,7 @@ func _gotk4_gtk3_TextBufferSerializeFunc(carg1 *C.GtkTextBuffer, carg2 *C.GtkTex
 func _gotk4_gtk3_TextCharPredicate(carg1 C.gunichar, carg2 C.gpointer) (cret C.gboolean) {
 	var fn TextCharPredicate
 	{
-		v := gbox.Get(uintptr(carg2))
+		v := userdata.Load(unsafe.Pointer(carg2))
 		if v == nil {
 			panic(`callback not found`)
 		}
@@ -593,7 +593,7 @@ func _gotk4_gtk3_TextCharPredicate(carg1 C.gunichar, carg2 C.gpointer) (cret C.g
 func _gotk4_gtk3_TextTagTableForEach(carg1 *C.GtkTextTag, carg2 C.gpointer) {
 	var fn TextTagTableForEach
 	{
-		v := gbox.Get(uintptr(carg2))
+		v := userdata.Load(unsafe.Pointer(carg2))
 		if v == nil {
 			panic(`callback not found`)
 		}
@@ -611,7 +611,7 @@ func _gotk4_gtk3_TextTagTableForEach(carg1 *C.GtkTextTag, carg2 C.gpointer) {
 func _gotk4_gtk3_TickCallback(carg1 *C.GtkWidget, carg2 *C.GdkFrameClock, carg3 C.gpointer) (cret C.gboolean) {
 	var fn TickCallback
 	{
-		v := gbox.Get(uintptr(carg3))
+		v := userdata.Load(unsafe.Pointer(carg3))
 		if v == nil {
 			panic(`callback not found`)
 		}
@@ -638,7 +638,7 @@ func _gotk4_gtk3_TickCallback(carg1 *C.GtkWidget, carg2 *C.GdkFrameClock, carg3 
 func _gotk4_gtk3_TreeCellDataFunc(carg1 *C.GtkTreeViewColumn, carg2 *C.GtkCellRenderer, carg3 *C.GtkTreeModel, carg4 *C.GtkTreeIter, carg5 C.gpointer) {
 	var fn TreeCellDataFunc
 	{
-		v := gbox.Get(uintptr(carg5))
+		v := userdata.Load(unsafe.Pointer(carg5))
 		if v == nil {
 			panic(`callback not found`)
 		}
@@ -662,7 +662,7 @@ func _gotk4_gtk3_TreeCellDataFunc(carg1 *C.GtkTreeViewColumn, carg2 *C.GtkCellRe
 func _gotk4_gtk3_TreeIterCompareFunc(carg1 *C.GtkTreeModel, carg2 *C.GtkTreeIter, carg3 *C.GtkTreeIter, carg4 C.gpointer) (cret C.gint) {
 	var fn TreeIterCompareFunc
 	{
-		v := gbox.Get(uintptr(carg4))
+		v := userdata.Load(unsafe.Pointer(carg4))
 		if v == nil {
 			panic(`callback not found`)
 		}
@@ -689,7 +689,7 @@ func _gotk4_gtk3_TreeIterCompareFunc(carg1 *C.GtkTreeModel, carg2 *C.GtkTreeIter
 func _gotk4_gtk3_TreeModelFilterVisibleFunc(carg1 *C.GtkTreeModel, carg2 *C.GtkTreeIter, carg3 C.gpointer) (cret C.gboolean) {
 	var fn TreeModelFilterVisibleFunc
 	{
-		v := gbox.Get(uintptr(carg3))
+		v := userdata.Load(unsafe.Pointer(carg3))
 		if v == nil {
 			panic(`callback not found`)
 		}
@@ -716,7 +716,7 @@ func _gotk4_gtk3_TreeModelFilterVisibleFunc(carg1 *C.GtkTreeModel, carg2 *C.GtkT
 func _gotk4_gtk3_TreeModelForEachFunc(carg1 *C.GtkTreeModel, carg2 *C.GtkTreePath, carg3 *C.GtkTreeIter, carg4 C.gpointer) (cret C.gboolean) {
 	var fn TreeModelForEachFunc
 	{
-		v := gbox.Get(uintptr(carg4))
+		v := userdata.Load(unsafe.Pointer(carg4))
 		if v == nil {
 			panic(`callback not found`)
 		}
@@ -745,7 +745,7 @@ func _gotk4_gtk3_TreeModelForEachFunc(carg1 *C.GtkTreeModel, carg2 *C.GtkTreePat
 func _gotk4_gtk3_TreeSelectionForEachFunc(carg1 *C.GtkTreeModel, carg2 *C.GtkTreePath, carg3 *C.GtkTreeIter, carg4 C.gpointer) {
 	var fn TreeSelectionForEachFunc
 	{
-		v := gbox.Get(uintptr(carg4))
+		v := userdata.Load(unsafe.Pointer(carg4))
 		if v == nil {
 			panic(`callback not found`)
 		}
@@ -767,7 +767,7 @@ func _gotk4_gtk3_TreeSelectionForEachFunc(carg1 *C.GtkTreeModel, carg2 *C.GtkTre
 func _gotk4_gtk3_TreeSelectionFunc(carg1 *C.GtkTreeSelection, carg2 *C.GtkTreeModel, carg3 *C.GtkTreePath, carg4 C.gboolean, carg5 C.gpointer) (cret C.gboolean) {
 	var fn TreeSelectionFunc
 	{
-		v := gbox.Get(uintptr(carg5))
+		v := userdata.Load(unsafe.Pointer(carg5))
 		if v == nil {
 			panic(`callback not found`)
 		}
@@ -800,7 +800,7 @@ func _gotk4_gtk3_TreeSelectionFunc(carg1 *C.GtkTreeSelection, carg2 *C.GtkTreeMo
 func _gotk4_gtk3_TreeViewRowSeparatorFunc(carg1 *C.GtkTreeModel, carg2 *C.GtkTreeIter, carg3 C.gpointer) (cret C.gboolean) {
 	var fn TreeViewRowSeparatorFunc
 	{
-		v := gbox.Get(uintptr(carg3))
+		v := userdata.Load(unsafe.Pointer(carg3))
 		if v == nil {
 			panic(`callback not found`)
 		}
@@ -827,7 +827,7 @@ func _gotk4_gtk3_TreeViewRowSeparatorFunc(carg1 *C.GtkTreeModel, carg2 *C.GtkTre
 func _gotk4_gtk3_TreeViewSearchEqualFunc(carg1 *C.GtkTreeModel, carg2 C.gint, carg3 *C.gchar, carg4 *C.GtkTreeIter, carg5 C.gpointer) (cret C.gboolean) {
 	var fn TreeViewSearchEqualFunc
 	{
-		v := gbox.Get(uintptr(carg5))
+		v := userdata.Load(unsafe.Pointer(carg5))
 		if v == nil {
 			panic(`callback not found`)
 		}
@@ -858,7 +858,7 @@ func _gotk4_gtk3_TreeViewSearchEqualFunc(carg1 *C.GtkTreeModel, carg2 C.gint, ca
 func _gotk4_gtk3_CalendarDetailFunc(carg1 *C.GtkCalendar, carg2 C.guint, carg3 C.guint, carg4 C.guint, carg5 C.gpointer) (cret *C.gchar) {
 	var fn CalendarDetailFunc
 	{
-		v := gbox.Get(uintptr(carg5))
+		v := userdata.Load(unsafe.Pointer(carg5))
 		if v == nil {
 			panic(`callback not found`)
 		}
@@ -887,7 +887,7 @@ func _gotk4_gtk3_CalendarDetailFunc(carg1 *C.GtkCalendar, carg2 C.guint, carg3 C
 func _gotk4_gtk3_IconViewForEachFunc(carg1 *C.GtkIconView, carg2 *C.GtkTreePath, carg3 C.gpointer) {
 	var fn IconViewForEachFunc
 	{
-		v := gbox.Get(uintptr(carg3))
+		v := userdata.Load(unsafe.Pointer(carg3))
 		if v == nil {
 			panic(`callback not found`)
 		}
@@ -907,7 +907,7 @@ func _gotk4_gtk3_IconViewForEachFunc(carg1 *C.GtkIconView, carg2 *C.GtkTreePath,
 func _gotk4_gtk3_TreeDestroyCountFunc(carg1 *C.GtkTreeView, carg2 *C.GtkTreePath, carg3 C.gint, carg4 C.gpointer) {
 	var fn TreeDestroyCountFunc
 	{
-		v := gbox.Get(uintptr(carg4))
+		v := userdata.Load(unsafe.Pointer(carg4))
 		if v == nil {
 			panic(`callback not found`)
 		}
@@ -929,7 +929,7 @@ func _gotk4_gtk3_TreeDestroyCountFunc(carg1 *C.GtkTreeView, carg2 *C.GtkTreePath
 func _gotk4_gtk3_TreeViewColumnDropFunc(carg1 *C.GtkTreeView, carg2 *C.GtkTreeViewColumn, carg3 *C.GtkTreeViewColumn, carg4 *C.GtkTreeViewColumn, carg5 C.gpointer) (cret C.gboolean) {
 	var fn TreeViewColumnDropFunc
 	{
-		v := gbox.Get(uintptr(carg5))
+		v := userdata.Load(unsafe.Pointer(carg5))
 		if v == nil {
 			panic(`callback not found`)
 		}
@@ -960,7 +960,7 @@ func _gotk4_gtk3_TreeViewColumnDropFunc(carg1 *C.GtkTreeView, carg2 *C.GtkTreeVi
 func _gotk4_gtk3_TreeViewMappingFunc(carg1 *C.GtkTreeView, carg2 *C.GtkTreePath, carg3 C.gpointer) {
 	var fn TreeViewMappingFunc
 	{
-		v := gbox.Get(uintptr(carg3))
+		v := userdata.Load(unsafe.Pointer(carg3))
 		if v == nil {
 			panic(`callback not found`)
 		}
@@ -980,7 +980,7 @@ func _gotk4_gtk3_TreeViewMappingFunc(carg1 *C.GtkTreeView, carg2 *C.GtkTreePath,
 func _gotk4_gtk3_TreeViewSearchPositionFunc(carg1 *C.GtkTreeView, carg2 *C.GtkWidget, carg3 C.gpointer) {
 	var fn TreeViewSearchPositionFunc
 	{
-		v := gbox.Get(uintptr(carg3))
+		v := userdata.Load(unsafe.Pointer(carg3))
 		if v == nil {
 			panic(`callback not found`)
 		}
@@ -1000,7 +1000,7 @@ func _gotk4_gtk3_TreeViewSearchPositionFunc(carg1 *C.GtkTreeView, carg2 *C.GtkWi
 func _gotk4_gtk3_FlowBoxFilterFunc(carg1 *C.GtkFlowBoxChild, carg2 C.gpointer) (cret C.gboolean) {
 	var fn FlowBoxFilterFunc
 	{
-		v := gbox.Get(uintptr(carg2))
+		v := userdata.Load(unsafe.Pointer(carg2))
 		if v == nil {
 			panic(`callback not found`)
 		}
@@ -1025,7 +1025,7 @@ func _gotk4_gtk3_FlowBoxFilterFunc(carg1 *C.GtkFlowBoxChild, carg2 C.gpointer) (
 func _gotk4_gtk3_FlowBoxForEachFunc(carg1 *C.GtkFlowBox, carg2 *C.GtkFlowBoxChild, carg3 C.gpointer) {
 	var fn FlowBoxForEachFunc
 	{
-		v := gbox.Get(uintptr(carg3))
+		v := userdata.Load(unsafe.Pointer(carg3))
 		if v == nil {
 			panic(`callback not found`)
 		}
@@ -1045,7 +1045,7 @@ func _gotk4_gtk3_FlowBoxForEachFunc(carg1 *C.GtkFlowBox, carg2 *C.GtkFlowBoxChil
 func _gotk4_gtk3_FlowBoxSortFunc(carg1 *C.GtkFlowBoxChild, carg2 *C.GtkFlowBoxChild, carg3 C.gpointer) (cret C.gint) {
 	var fn FlowBoxSortFunc
 	{
-		v := gbox.Get(uintptr(carg3))
+		v := userdata.Load(unsafe.Pointer(carg3))
 		if v == nil {
 			panic(`callback not found`)
 		}
@@ -1070,7 +1070,7 @@ func _gotk4_gtk3_FlowBoxSortFunc(carg1 *C.GtkFlowBoxChild, carg2 *C.GtkFlowBoxCh
 func _gotk4_gtk3_ListBoxFilterFunc(carg1 *C.GtkListBoxRow, carg2 C.gpointer) (cret C.gboolean) {
 	var fn ListBoxFilterFunc
 	{
-		v := gbox.Get(uintptr(carg2))
+		v := userdata.Load(unsafe.Pointer(carg2))
 		if v == nil {
 			panic(`callback not found`)
 		}
@@ -1095,7 +1095,7 @@ func _gotk4_gtk3_ListBoxFilterFunc(carg1 *C.GtkListBoxRow, carg2 C.gpointer) (cr
 func _gotk4_gtk3_ListBoxForEachFunc(carg1 *C.GtkListBox, carg2 *C.GtkListBoxRow, carg3 C.gpointer) {
 	var fn ListBoxForEachFunc
 	{
-		v := gbox.Get(uintptr(carg3))
+		v := userdata.Load(unsafe.Pointer(carg3))
 		if v == nil {
 			panic(`callback not found`)
 		}
@@ -1115,7 +1115,7 @@ func _gotk4_gtk3_ListBoxForEachFunc(carg1 *C.GtkListBox, carg2 *C.GtkListBoxRow,
 func _gotk4_gtk3_ListBoxSortFunc(carg1 *C.GtkListBoxRow, carg2 *C.GtkListBoxRow, carg3 C.gpointer) (cret C.gint) {
 	var fn ListBoxSortFunc
 	{
-		v := gbox.Get(uintptr(carg3))
+		v := userdata.Load(unsafe.Pointer(carg3))
 		if v == nil {
 			panic(`callback not found`)
 		}
@@ -1140,7 +1140,7 @@ func _gotk4_gtk3_ListBoxSortFunc(carg1 *C.GtkListBoxRow, carg2 *C.GtkListBoxRow,
 func _gotk4_gtk3_ListBoxUpdateHeaderFunc(carg1 *C.GtkListBoxRow, carg2 *C.GtkListBoxRow, carg3 C.gpointer) {
 	var fn ListBoxUpdateHeaderFunc
 	{
-		v := gbox.Get(uintptr(carg3))
+		v := userdata.Load(unsafe.Pointer(carg3))
 		if v == nil {
 			panic(`callback not found`)
 		}

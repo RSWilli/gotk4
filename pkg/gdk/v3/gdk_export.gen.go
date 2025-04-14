@@ -5,7 +5,7 @@ package gdk
 import (
 	"unsafe"
 
-	"github.com/diamondburned/gotk4/pkg/core/gbox"
+	"github.com/diamondburned/gotk4/pkg/core/userdata"
 )
 
 // #include <gdk/gdk.h>
@@ -15,7 +15,7 @@ import "C"
 func _gotk4_gdk3_SeatGrabPrepareFunc(carg1 *C.GdkSeat, carg2 *C.GdkWindow, carg3 C.gpointer) {
 	var fn SeatGrabPrepareFunc
 	{
-		v := gbox.Get(uintptr(carg3))
+		v := userdata.Load(unsafe.Pointer(carg3))
 		if v == nil {
 			panic(`callback not found`)
 		}
@@ -35,7 +35,7 @@ func _gotk4_gdk3_SeatGrabPrepareFunc(carg1 *C.GdkSeat, carg2 *C.GdkWindow, carg3
 func _gotk4_gdk3_WindowChildFunc(carg1 *C.GdkWindow, carg2 C.gpointer) (cret C.gboolean) {
 	var fn WindowChildFunc
 	{
-		v := gbox.Get(uintptr(carg2))
+		v := userdata.Load(unsafe.Pointer(carg2))
 		if v == nil {
 			panic(`callback not found`)
 		}

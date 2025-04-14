@@ -5,7 +5,7 @@ package gdkpixbuf
 import (
 	"unsafe"
 
-	"github.com/diamondburned/gotk4/pkg/core/gbox"
+	"github.com/diamondburned/gotk4/pkg/core/userdata"
 	"github.com/diamondburned/gotk4/pkg/glib/v2"
 )
 
@@ -16,7 +16,7 @@ import "C"
 func _gotk4_gdkpixbuf2_PixbufModuleSizeFunc(carg1 *C.gint, carg2 *C.gint, carg3 C.gpointer) {
 	var fn PixbufModuleSizeFunc
 	{
-		v := gbox.Get(uintptr(carg3))
+		v := userdata.Load(unsafe.Pointer(carg3))
 		if v == nil {
 			panic(`callback not found`)
 		}
@@ -40,7 +40,7 @@ func _gotk4_gdkpixbuf2_PixbufModuleSizeFunc(carg1 *C.gint, carg2 *C.gint, carg3 
 func _gotk4_gdkpixbuf2_PixbufModuleUpdatedFunc(carg1 *C.GdkPixbuf, carg2 C.int, carg3 C.int, carg4 C.int, carg5 C.int, carg6 C.gpointer) {
 	var fn PixbufModuleUpdatedFunc
 	{
-		v := gbox.Get(uintptr(carg6))
+		v := userdata.Load(unsafe.Pointer(carg6))
 		if v == nil {
 			panic(`callback not found`)
 		}
@@ -66,7 +66,7 @@ func _gotk4_gdkpixbuf2_PixbufModuleUpdatedFunc(carg1 *C.GdkPixbuf, carg2 C.int, 
 func _gotk4_gdkpixbuf2_PixbufSaveFunc(carg1 *C.gchar, carg2 C.gsize, carg3 **C.GError, carg4 C.gpointer) (cret C.gboolean) {
 	var fn PixbufSaveFunc
 	{
-		v := gbox.Get(uintptr(carg4))
+		v := userdata.Load(unsafe.Pointer(carg4))
 		if v == nil {
 			panic(`callback not found`)
 		}
