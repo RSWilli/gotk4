@@ -1122,7 +1122,7 @@ func UnsafePixbufToGlibFull(c Pixbuf) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewPixbufInstance wraps gdk_pixbuf_new
+// NewPixbuf wraps gdk_pixbuf_new
 // 
 // The function takes the following parameters:
 // 
@@ -1142,7 +1142,7 @@ func UnsafePixbufToGlibFull(c Pixbuf) unsafe.Pointer {
 // 
 // The buffer has an optimal rowstride. Note that the buffer is not cleared;
 // you will have to fill it completely yourself.
-func NewPixbufInstance(colorspace Colorspace, hasAlpha bool, bitsPerSample int, width int, height int) Pixbuf {
+func NewPixbuf(colorspace Colorspace, hasAlpha bool, bitsPerSample int, width int, height int) Pixbuf {
 	var carg1 C.GdkColorspace // in, none, casted
 	var carg2 C.gboolean      // in
 	var carg3 C.int           // in, none, casted, casted C.gint
@@ -1172,7 +1172,7 @@ func NewPixbufInstance(colorspace Colorspace, hasAlpha bool, bitsPerSample int, 
 	return goret
 }
 
-// NewPixbufInstanceFromBytes wraps gdk_pixbuf_new_from_bytes
+// NewPixbufFromBytes wraps gdk_pixbuf_new_from_bytes
 // 
 // The function takes the following parameters:
 // 
@@ -1194,7 +1194,7 @@ func NewPixbufInstance(colorspace Colorspace, hasAlpha bool, bitsPerSample int, 
 // 
 // This is the `GBytes` variant of gdk_pixbuf_new_from_data(), useful
 // for language bindings.
-func NewPixbufInstanceFromBytes(data *glib.Bytes, colorspace Colorspace, hasAlpha bool, bitsPerSample int, width int, height int, rowstride int) Pixbuf {
+func NewPixbufFromBytes(data *glib.Bytes, colorspace Colorspace, hasAlpha bool, bitsPerSample int, width int, height int, rowstride int) Pixbuf {
 	var carg1 *C.GBytes       // in, none, converted
 	var carg2 C.GdkColorspace // in, none, casted
 	var carg3 C.gboolean      // in
@@ -1230,7 +1230,7 @@ func NewPixbufInstanceFromBytes(data *glib.Bytes, colorspace Colorspace, hasAlph
 	return goret
 }
 
-// NewPixbufInstanceFromFile wraps gdk_pixbuf_new_from_file
+// NewPixbufFromFile wraps gdk_pixbuf_new_from_file
 // 
 // The function takes the following parameters:
 // 
@@ -1254,7 +1254,7 @@ func NewPixbufInstanceFromBytes(data *glib.Bytes, colorspace Colorspace, hasAlph
 //  - the image buffer contains invalid data
 // 
 // The error domains are `GDK_PIXBUF_ERROR` and `G_FILE_ERROR`.
-func NewPixbufInstanceFromFile(filename string) (Pixbuf, error) {
+func NewPixbufFromFile(filename string) (Pixbuf, error) {
 	var carg1 *C.char      // in, none, string, casted *C.gchar
 	var cret  *C.GdkPixbuf // return, full, converted
 	var _cerr *C.GError    // out, full, converted, nullable
@@ -1276,7 +1276,7 @@ func NewPixbufInstanceFromFile(filename string) (Pixbuf, error) {
 	return goret, _goerr
 }
 
-// NewPixbufInstanceFromFileAtScale wraps gdk_pixbuf_new_from_file_at_scale
+// NewPixbufFromFileAtScale wraps gdk_pixbuf_new_from_file_at_scale
 // 
 // The function takes the following parameters:
 // 
@@ -1313,7 +1313,7 @@ func NewPixbufInstanceFromFile(filename string) (Pixbuf, error) {
 // aspect ratio, a `width` or `height` of -1 means to not scale the image
 // at all in that dimension. Negative values for `width` and `height` are
 // allowed since 2.8.
-func NewPixbufInstanceFromFileAtScale(filename string, width int, height int, preserveAspectRatio bool) (Pixbuf, error) {
+func NewPixbufFromFileAtScale(filename string, width int, height int, preserveAspectRatio bool) (Pixbuf, error) {
 	var carg1 *C.char      // in, none, string, casted *C.gchar
 	var carg2 C.int        // in, none, casted, casted C.gint
 	var carg3 C.int        // in, none, casted, casted C.gint
@@ -1346,7 +1346,7 @@ func NewPixbufInstanceFromFileAtScale(filename string, width int, height int, pr
 	return goret, _goerr
 }
 
-// NewPixbufInstanceFromFileAtSize wraps gdk_pixbuf_new_from_file_at_size
+// NewPixbufFromFileAtSize wraps gdk_pixbuf_new_from_file_at_size
 // 
 // The function takes the following parameters:
 // 
@@ -1378,7 +1378,7 @@ func NewPixbufInstanceFromFileAtScale(filename string, width int, height int, pr
 // than `width` x `height`, if the aspect ratio requires it. To load
 // and image at the requested size, regardless of aspect ratio, use
 // [ctor@GdkPixbuf.Pixbuf.new_from_file_at_scale].
-func NewPixbufInstanceFromFileAtSize(filename string, width int, height int) (Pixbuf, error) {
+func NewPixbufFromFileAtSize(filename string, width int, height int) (Pixbuf, error) {
 	var carg1 *C.char      // in, none, string, casted *C.gchar
 	var carg2 C.int        // in, none, casted, casted C.gint
 	var carg3 C.int        // in, none, casted, casted C.gint
@@ -1406,7 +1406,7 @@ func NewPixbufInstanceFromFileAtSize(filename string, width int, height int) (Pi
 	return goret, _goerr
 }
 
-// NewPixbufInstanceFromResource wraps gdk_pixbuf_new_from_resource
+// NewPixbufFromResource wraps gdk_pixbuf_new_from_resource
 // 
 // The function takes the following parameters:
 // 
@@ -1421,7 +1421,7 @@ func NewPixbufInstanceFromFileAtSize(filename string, width int, height int) (Pi
 // 
 // The file format is detected automatically. If `NULL` is returned, then
 // @error will be set.
-func NewPixbufInstanceFromResource(resourcePath string) (Pixbuf, error) {
+func NewPixbufFromResource(resourcePath string) (Pixbuf, error) {
 	var carg1 *C.char      // in, none, string, casted *C.gchar
 	var cret  *C.GdkPixbuf // return, full, converted
 	var _cerr *C.GError    // out, full, converted, nullable
@@ -1443,7 +1443,7 @@ func NewPixbufInstanceFromResource(resourcePath string) (Pixbuf, error) {
 	return goret, _goerr
 }
 
-// NewPixbufInstanceFromResourceAtScale wraps gdk_pixbuf_new_from_resource_at_scale
+// NewPixbufFromResourceAtScale wraps gdk_pixbuf_new_from_resource_at_scale
 // 
 // The function takes the following parameters:
 // 
@@ -1470,7 +1470,7 @@ func NewPixbufInstanceFromResource(resourcePath string) (Pixbuf, error) {
 // @height of -1 means to not scale the image at all in that dimension.
 // 
 // The stream is not closed.
-func NewPixbufInstanceFromResourceAtScale(resourcePath string, width int, height int, preserveAspectRatio bool) (Pixbuf, error) {
+func NewPixbufFromResourceAtScale(resourcePath string, width int, height int, preserveAspectRatio bool) (Pixbuf, error) {
 	var carg1 *C.char      // in, none, string, casted *C.gchar
 	var carg2 C.int        // in, none, casted, casted C.gint
 	var carg3 C.int        // in, none, casted, casted C.gint
@@ -1503,7 +1503,7 @@ func NewPixbufInstanceFromResourceAtScale(resourcePath string, width int, height
 	return goret, _goerr
 }
 
-// NewPixbufInstanceFromStream wraps gdk_pixbuf_new_from_stream
+// NewPixbufFromStream wraps gdk_pixbuf_new_from_stream
 // 
 // The function takes the following parameters:
 // 
@@ -1527,7 +1527,7 @@ func NewPixbufInstanceFromResourceAtScale(resourcePath string, width int, height
 // `G_IO_ERROR` domains.
 // 
 // The stream is not closed.
-func NewPixbufInstanceFromStream(cancellable context.Context, stream gio.InputStream) (Pixbuf, error) {
+func NewPixbufFromStream(cancellable context.Context, stream gio.InputStream) (Pixbuf, error) {
 	var carg2 *C.GCancellable // in, none, converted, nullable
 	var carg1 *C.GInputStream // in, none, converted
 	var cret  *C.GdkPixbuf    // return, full, converted
@@ -1553,7 +1553,7 @@ func NewPixbufInstanceFromStream(cancellable context.Context, stream gio.InputSt
 	return goret, _goerr
 }
 
-// NewPixbufInstanceFromStreamAtScale wraps gdk_pixbuf_new_from_stream_at_scale
+// NewPixbufFromStreamAtScale wraps gdk_pixbuf_new_from_stream_at_scale
 // 
 // The function takes the following parameters:
 // 
@@ -1589,7 +1589,7 @@ func NewPixbufInstanceFromStream(cancellable context.Context, stream gio.InputSt
 // scale the image at all in that dimension.
 // 
 // The stream is not closed.
-func NewPixbufInstanceFromStreamAtScale(cancellable context.Context, stream gio.InputStream, width int, height int, preserveAspectRatio bool) (Pixbuf, error) {
+func NewPixbufFromStreamAtScale(cancellable context.Context, stream gio.InputStream, width int, height int, preserveAspectRatio bool) (Pixbuf, error) {
 	var carg5 *C.GCancellable // in, none, converted, nullable
 	var carg1 *C.GInputStream // in, none, converted
 	var carg2 C.gint          // in, none, casted
@@ -1626,7 +1626,7 @@ func NewPixbufInstanceFromStreamAtScale(cancellable context.Context, stream gio.
 	return goret, _goerr
 }
 
-// NewPixbufInstanceFromStreamFinish wraps gdk_pixbuf_new_from_stream_finish
+// NewPixbufFromStreamFinish wraps gdk_pixbuf_new_from_stream_finish
 // 
 // The function takes the following parameters:
 // 
@@ -1639,7 +1639,7 @@ func NewPixbufInstanceFromStreamAtScale(cancellable context.Context, stream gio.
 //
 // Finishes an asynchronous pixbuf creation operation started with
 // gdk_pixbuf_new_from_stream_async().
-func NewPixbufInstanceFromStreamFinish(asyncResult gio.AsyncResult) (Pixbuf, error) {
+func NewPixbufFromStreamFinish(asyncResult gio.AsyncResult) (Pixbuf, error) {
 	var carg1 *C.GAsyncResult // in, none, converted
 	var cret  *C.GdkPixbuf    // return, full, converted
 	var _cerr *C.GError       // out, full, converted, nullable
@@ -1660,7 +1660,7 @@ func NewPixbufInstanceFromStreamFinish(asyncResult gio.AsyncResult) (Pixbuf, err
 	return goret, _goerr
 }
 
-// NewPixbufInstanceFromXPMData wraps gdk_pixbuf_new_from_xpm_data
+// NewPixbufFromXPMData wraps gdk_pixbuf_new_from_xpm_data
 // 
 // The function takes the following parameters:
 // 
@@ -1674,7 +1674,7 @@ func NewPixbufInstanceFromStreamFinish(asyncResult gio.AsyncResult) (Pixbuf, err
 // 
 // This data is commonly the result of including an XPM file into a
 // program's C source.
-func NewPixbufInstanceFromXPMData(data []string) Pixbuf {
+func NewPixbufFromXPMData(data []string) Pixbuf {
 	var carg1 **C.char     // in, transfer: none, C Pointers: 2, Name: array[utf8], array (inner: *typesystem.StringPrimitive, zero-terminated)
 	var cret  *C.GdkPixbuf // return, full, converted
 
@@ -1692,7 +1692,7 @@ func NewPixbufInstanceFromXPMData(data []string) Pixbuf {
 	return goret
 }
 
-// PixbufInstanceCalculateRowstride wraps gdk_pixbuf_calculate_rowstride
+// PixbufCalculateRowstride wraps gdk_pixbuf_calculate_rowstride
 // 
 // The function takes the following parameters:
 // 
@@ -1711,7 +1711,7 @@ func NewPixbufInstanceFromXPMData(data []string) Pixbuf {
 // 
 // This function is useful for front-ends and backends that want to check
 // image values without needing to create a `GdkPixbuf`.
-func PixbufInstanceCalculateRowstride(colorspace Colorspace, hasAlpha bool, bitsPerSample int, width int, height int) int {
+func PixbufCalculateRowstride(colorspace Colorspace, hasAlpha bool, bitsPerSample int, width int, height int) int {
 	var carg1 C.GdkColorspace // in, none, casted
 	var carg2 C.gboolean      // in
 	var carg3 C.int           // in, none, casted, casted C.gint
@@ -1741,7 +1741,7 @@ func PixbufInstanceCalculateRowstride(colorspace Colorspace, hasAlpha bool, bits
 	return goret
 }
 
-// PixbufInstanceGetFileInfo wraps gdk_pixbuf_get_file_info
+// PixbufGetFileInfo wraps gdk_pixbuf_get_file_info
 // 
 // The function takes the following parameters:
 // 
@@ -1754,7 +1754,7 @@ func PixbufInstanceCalculateRowstride(colorspace Colorspace, hasAlpha bool, bits
 // 	- goret *PixbufFormat 
 //
 // Parses an image file far enough to determine its format and size.
-func PixbufInstanceGetFileInfo(filename string) (int, int, *PixbufFormat) {
+func PixbufGetFileInfo(filename string) (int, int, *PixbufFormat) {
 	var carg1 *C.gchar           // in, none, string, casted *C.gchar
 	var carg2 C.gint             // out, full, casted
 	var carg3 C.gint             // out, full, casted
@@ -1777,7 +1777,7 @@ func PixbufInstanceGetFileInfo(filename string) (int, int, *PixbufFormat) {
 	return width, height, goret
 }
 
-// PixbufInstanceGetFileInfoAsync wraps gdk_pixbuf_get_file_info_async
+// PixbufGetFileInfoAsync wraps gdk_pixbuf_get_file_info_async
 // 
 // The function takes the following parameters:
 // 
@@ -1794,7 +1794,7 @@ func PixbufInstanceGetFileInfo(filename string) (int, int, *PixbufFormat) {
 // When the operation is finished, @callback will be called in the
 // main thread. You can then call gdk_pixbuf_get_file_info_finish() to
 // get the result of the operation.
-func PixbufInstanceGetFileInfoAsync(cancellable context.Context, filename string, callback gio.AsyncReadyCallback) {
+func PixbufGetFileInfoAsync(cancellable context.Context, filename string, callback gio.AsyncReadyCallback) {
 	var carg2 *C.GCancellable       // in, none, converted, nullable
 	var carg1 *C.gchar              // in, none, string, casted *C.gchar
 	var carg3 C.GAsyncReadyCallback // callback, scope: async, closure: carg4, nullable
@@ -1816,7 +1816,7 @@ func PixbufInstanceGetFileInfoAsync(cancellable context.Context, filename string
 	runtime.KeepAlive(callback)
 }
 
-// PixbufInstanceGetFileInfoFinish wraps gdk_pixbuf_get_file_info_finish
+// PixbufGetFileInfoFinish wraps gdk_pixbuf_get_file_info_finish
 // 
 // The function takes the following parameters:
 // 
@@ -1831,7 +1831,7 @@ func PixbufInstanceGetFileInfoAsync(cancellable context.Context, filename string
 //
 // Finishes an asynchronous pixbuf parsing operation started with
 // gdk_pixbuf_get_file_info_async().
-func PixbufInstanceGetFileInfoFinish(asyncResult gio.AsyncResult) (int, int, *PixbufFormat, error) {
+func PixbufGetFileInfoFinish(asyncResult gio.AsyncResult) (int, int, *PixbufFormat, error) {
 	var carg1 *C.GAsyncResult    // in, none, converted
 	var carg2 C.gint             // out, full, casted
 	var carg3 C.gint             // out, full, casted
@@ -1858,7 +1858,7 @@ func PixbufInstanceGetFileInfoFinish(asyncResult gio.AsyncResult) (int, int, *Pi
 	return width, height, goret, _goerr
 }
 
-// PixbufInstanceInitModules wraps gdk_pixbuf_init_modules
+// PixbufInitModules wraps gdk_pixbuf_init_modules
 // 
 // The function takes the following parameters:
 // 
@@ -1882,7 +1882,7 @@ func PixbufInstanceGetFileInfoFinish(asyncResult gio.AsyncResult) (int, int, *Pi
 // expected to ship the gdk-pixbuf modules in a separate location, bundled
 // with the application in a separate directory from the OS or runtime-
 // provided modules.
-func PixbufInstanceInitModules(path string) (bool, error) {
+func PixbufInitModules(path string) (bool, error) {
 	var carg1 *C.char    // in, none, string, casted *C.gchar
 	var cret  C.gboolean // return
 	var _cerr *C.GError  // out, full, converted, nullable
@@ -1906,7 +1906,7 @@ func PixbufInstanceInitModules(path string) (bool, error) {
 	return goret, _goerr
 }
 
-// NewPixbufInstanceFromStreamAsync wraps gdk_pixbuf_new_from_stream_async
+// NewPixbufFromStreamAsync wraps gdk_pixbuf_new_from_stream_async
 // 
 // The function takes the following parameters:
 // 
@@ -1922,7 +1922,7 @@ func PixbufInstanceInitModules(path string) (bool, error) {
 // When the operation is finished, @callback will be called in the main thread.
 // You can then call gdk_pixbuf_new_from_stream_finish() to get the result of
 // the operation.
-func NewPixbufInstanceFromStreamAsync(cancellable context.Context, stream gio.InputStream, callback gio.AsyncReadyCallback) {
+func NewPixbufFromStreamAsync(cancellable context.Context, stream gio.InputStream, callback gio.AsyncReadyCallback) {
 	var carg2 *C.GCancellable       // in, none, converted, nullable
 	var carg1 *C.GInputStream       // in, none, converted
 	var carg3 C.GAsyncReadyCallback // callback, scope: async, closure: carg4, nullable
@@ -1943,7 +1943,7 @@ func NewPixbufInstanceFromStreamAsync(cancellable context.Context, stream gio.In
 	runtime.KeepAlive(callback)
 }
 
-// NewPixbufInstanceFromStreamAtScaleAsync wraps gdk_pixbuf_new_from_stream_at_scale_async
+// NewPixbufFromStreamAtScaleAsync wraps gdk_pixbuf_new_from_stream_at_scale_async
 // 
 // The function takes the following parameters:
 // 
@@ -1961,7 +1961,7 @@ func NewPixbufInstanceFromStreamAsync(cancellable context.Context, stream gio.In
 // 
 // When the operation is finished, @callback will be called in the main thread.
 // You can then call gdk_pixbuf_new_from_stream_finish() to get the result of the operation.
-func NewPixbufInstanceFromStreamAtScaleAsync(cancellable context.Context, stream gio.InputStream, width int, height int, preserveAspectRatio bool, callback gio.AsyncReadyCallback) {
+func NewPixbufFromStreamAtScaleAsync(cancellable context.Context, stream gio.InputStream, width int, height int, preserveAspectRatio bool, callback gio.AsyncReadyCallback) {
 	var carg5 *C.GCancellable       // in, none, converted, nullable
 	var carg1 *C.GInputStream       // in, none, converted
 	var carg2 C.gint                // in, none, casted
@@ -1993,7 +1993,7 @@ func NewPixbufInstanceFromStreamAtScaleAsync(cancellable context.Context, stream
 	runtime.KeepAlive(callback)
 }
 
-// PixbufInstanceSaveToStreamFinish wraps gdk_pixbuf_save_to_stream_finish
+// PixbufSaveToStreamFinish wraps gdk_pixbuf_save_to_stream_finish
 // 
 // The function takes the following parameters:
 // 
@@ -2006,7 +2006,7 @@ func NewPixbufInstanceFromStreamAtScaleAsync(cancellable context.Context, stream
 //
 // Finishes an asynchronous pixbuf save operation started with
 // gdk_pixbuf_save_to_stream_async().
-func PixbufInstanceSaveToStreamFinish(asyncResult gio.AsyncResult) (bool, error) {
+func PixbufSaveToStreamFinish(asyncResult gio.AsyncResult) (bool, error) {
 	var carg1 *C.GAsyncResult // in, none, converted
 	var cret  C.gboolean      // return
 	var _cerr *C.GError       // out, full, converted, nullable
@@ -3640,13 +3640,13 @@ func UnsafePixbufLoaderToGlibFull(c PixbufLoader) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewPixbufLoaderInstance wraps gdk_pixbuf_loader_new
+// NewPixbufLoader wraps gdk_pixbuf_loader_new
 // The function returns the following values:
 // 
 // 	- goret PixbufLoader 
 //
 // Creates a new pixbuf loader object.
-func NewPixbufLoaderInstance() PixbufLoader {
+func NewPixbufLoader() PixbufLoader {
 	var cret *C.GdkPixbufLoader // return, full, converted
 
 	cret = C.gdk_pixbuf_loader_new()
@@ -3658,7 +3658,7 @@ func NewPixbufLoaderInstance() PixbufLoader {
 	return goret
 }
 
-// NewPixbufLoaderInstanceWithMIMEType wraps gdk_pixbuf_loader_new_with_mime_type
+// NewPixbufLoaderWithMIMEType wraps gdk_pixbuf_loader_new_with_mime_type
 // 
 // The function takes the following parameters:
 // 
@@ -3684,7 +3684,7 @@ func NewPixbufLoaderInstance() PixbufLoader {
 // To obtain the full list of supported mime types, call
 // gdk_pixbuf_format_get_mime_types() on each of the #GdkPixbufFormat
 // structs returned by gdk_pixbuf_get_formats().
-func NewPixbufLoaderInstanceWithMIMEType(mimeType string) (PixbufLoader, error) {
+func NewPixbufLoaderWithMIMEType(mimeType string) (PixbufLoader, error) {
 	var carg1 *C.char            // in, none, string, casted *C.gchar
 	var cret  *C.GdkPixbufLoader // return, full, converted
 	var _cerr *C.GError          // out, full, converted, nullable
@@ -3706,7 +3706,7 @@ func NewPixbufLoaderInstanceWithMIMEType(mimeType string) (PixbufLoader, error) 
 	return goret, _goerr
 }
 
-// NewPixbufLoaderInstanceWithType wraps gdk_pixbuf_loader_new_with_type
+// NewPixbufLoaderWithType wraps gdk_pixbuf_loader_new_with_type
 // 
 // The function takes the following parameters:
 // 
@@ -3731,7 +3731,7 @@ func NewPixbufLoaderInstanceWithMIMEType(mimeType string) (PixbufLoader, error) 
 // "xpm" are among the supported formats. To obtain the full list of
 // supported image formats, call gdk_pixbuf_format_get_name() on each
 // of the #GdkPixbufFormat structs returned by gdk_pixbuf_get_formats().
-func NewPixbufLoaderInstanceWithType(imageType string) (PixbufLoader, error) {
+func NewPixbufLoaderWithType(imageType string) (PixbufLoader, error) {
 	var carg1 *C.char            // in, none, string, casted *C.gchar
 	var cret  *C.GdkPixbufLoader // return, full, converted
 	var _cerr *C.GError          // out, full, converted, nullable

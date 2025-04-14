@@ -18387,13 +18387,13 @@ func UnsafeAccelGroupToGlibFull(c AccelGroup) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewAccelGroupInstance wraps gtk_accel_group_new
+// NewAccelGroup wraps gtk_accel_group_new
 // The function returns the following values:
 // 
 // 	- goret AccelGroup 
 //
 // Creates a new #GtkAccelGroup.
-func NewAccelGroupInstance() AccelGroup {
+func NewAccelGroup() AccelGroup {
 	var cret *C.GtkAccelGroup // return, full, converted
 
 	cret = C.gtk_accel_group_new()
@@ -18712,7 +18712,7 @@ func UnsafeAccelMapToGlibFull(c AccelMap) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// AccelMapInstanceAddEntry wraps gtk_accel_map_add_entry
+// AccelMapAddEntry wraps gtk_accel_map_add_entry
 // 
 // The function takes the following parameters:
 // 
@@ -18732,7 +18732,7 @@ func UnsafeAccelMapToGlibFull(c AccelMap) unsafe.Pointer {
 // Note that @accel_path string will be stored in a #GQuark. Therefore, if you
 // pass a static string, you can save some memory by interning it first with
 // g_intern_static_string().
-func AccelMapInstanceAddEntry(accelPath string, accelKey uint, accelMods gdk.ModifierType) {
+func AccelMapAddEntry(accelPath string, accelKey uint, accelMods gdk.ModifierType) {
 	var carg1 *C.gchar          // in, none, string, casted *C.gchar
 	var carg2 C.guint           // in, none, casted
 	var carg3 C.GdkModifierType // in, none, casted
@@ -18748,7 +18748,7 @@ func AccelMapInstanceAddEntry(accelPath string, accelKey uint, accelMods gdk.Mod
 	runtime.KeepAlive(accelMods)
 }
 
-// AccelMapInstanceAddFilter wraps gtk_accel_map_add_filter
+// AccelMapAddFilter wraps gtk_accel_map_add_filter
 // 
 // The function takes the following parameters:
 // 
@@ -18762,7 +18762,7 @@ func AccelMapInstanceAddEntry(accelPath string, accelKey uint, accelMods gdk.Mod
 // This function is intended for GTK+ modules that create their own
 // menus, but don’t want them to be saved into the applications accelerator
 // map dump.
-func AccelMapInstanceAddFilter(filterPattern string) {
+func AccelMapAddFilter(filterPattern string) {
 	var carg1 *C.gchar // in, none, string, casted *C.gchar
 
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(filterPattern)))
@@ -18772,7 +18772,7 @@ func AccelMapInstanceAddFilter(filterPattern string) {
 	runtime.KeepAlive(filterPattern)
 }
 
-// AccelMapInstanceChangeEntry wraps gtk_accel_map_change_entry
+// AccelMapChangeEntry wraps gtk_accel_map_change_entry
 // 
 // The function takes the following parameters:
 // 
@@ -18795,7 +18795,7 @@ func AccelMapInstanceAddFilter(filterPattern string) {
 // Note that @accel_path string will be stored in a #GQuark. Therefore, if you
 // pass a static string, you can save some memory by interning it first with
 // g_intern_static_string().
-func AccelMapInstanceChangeEntry(accelPath string, accelKey uint, accelMods gdk.ModifierType, replace bool) bool {
+func AccelMapChangeEntry(accelPath string, accelKey uint, accelMods gdk.ModifierType, replace bool) bool {
 	var carg1 *C.gchar          // in, none, string, casted *C.gchar
 	var carg2 C.guint           // in, none, casted
 	var carg3 C.GdkModifierType // in, none, casted
@@ -18825,7 +18825,7 @@ func AccelMapInstanceChangeEntry(accelPath string, accelKey uint, accelMods gdk.
 	return goret
 }
 
-// AccelMapInstanceGet wraps gtk_accel_map_get
+// AccelMapGet wraps gtk_accel_map_get
 // The function returns the following values:
 // 
 // 	- goret AccelMap 
@@ -18834,7 +18834,7 @@ func AccelMapInstanceChangeEntry(accelPath string, accelKey uint, accelMods gdk.
 // is useful only for notification of changes to the accelerator
 // map via the ::changed signal; it isn’t a parameter to the
 // other accelerator map functions.
-func AccelMapInstanceGet() AccelMap {
+func AccelMapGet() AccelMap {
 	var cret *C.GtkAccelMap // return, none, converted
 
 	cret = C.gtk_accel_map_get()
@@ -18846,7 +18846,7 @@ func AccelMapInstanceGet() AccelMap {
 	return goret
 }
 
-// AccelMapInstanceLoad wraps gtk_accel_map_load
+// AccelMapLoad wraps gtk_accel_map_load
 // 
 // The function takes the following parameters:
 // 
@@ -18855,7 +18855,7 @@ func AccelMapInstanceGet() AccelMap {
 //
 // Parses a file previously saved with gtk_accel_map_save() for
 // accelerator specifications, and propagates them accordingly.
-func AccelMapInstanceLoad(fileName string) {
+func AccelMapLoad(fileName string) {
 	var carg1 *C.gchar // in, none, string, casted *C.gchar
 
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(fileName)))
@@ -18865,7 +18865,7 @@ func AccelMapInstanceLoad(fileName string) {
 	runtime.KeepAlive(fileName)
 }
 
-// AccelMapInstanceLoadFd wraps gtk_accel_map_load_fd
+// AccelMapLoadFd wraps gtk_accel_map_load_fd
 // 
 // The function takes the following parameters:
 // 
@@ -18874,7 +18874,7 @@ func AccelMapInstanceLoad(fileName string) {
 // Filedescriptor variant of gtk_accel_map_load().
 // 
 // Note that the file descriptor will not be closed by this function.
-func AccelMapInstanceLoadFd(fd int) {
+func AccelMapLoadFd(fd int) {
 	var carg1 C.gint // in, none, casted
 
 	carg1 = C.gint(fd)
@@ -18883,14 +18883,14 @@ func AccelMapInstanceLoadFd(fd int) {
 	runtime.KeepAlive(fd)
 }
 
-// AccelMapInstanceLoadScanner wraps gtk_accel_map_load_scanner
+// AccelMapLoadScanner wraps gtk_accel_map_load_scanner
 // 
 // The function takes the following parameters:
 // 
 // 	- scanner *glib.Scanner: a #GScanner which has already been provided with an input file 
 //
 // #GScanner variant of gtk_accel_map_load().
-func AccelMapInstanceLoadScanner(scanner *glib.Scanner) {
+func AccelMapLoadScanner(scanner *glib.Scanner) {
 	var carg1 *C.GScanner // in, none, converted
 
 	carg1 = (*C.GScanner)(glib.UnsafeScannerToGlibNone(scanner))
@@ -18899,7 +18899,7 @@ func AccelMapInstanceLoadScanner(scanner *glib.Scanner) {
 	runtime.KeepAlive(scanner)
 }
 
-// AccelMapInstanceLockPath wraps gtk_accel_map_lock_path
+// AccelMapLockPath wraps gtk_accel_map_lock_path
 // 
 // The function takes the following parameters:
 // 
@@ -18921,7 +18921,7 @@ func AccelMapInstanceLoadScanner(scanner *glib.Scanner) {
 // locking the #GtkAccelGroup containing them. For runtime accelerator
 // changes to be possible, both the accelerator path and its #GtkAccelGroup
 // have to be unlocked.
-func AccelMapInstanceLockPath(accelPath string) {
+func AccelMapLockPath(accelPath string) {
 	var carg1 *C.gchar // in, none, string, casted *C.gchar
 
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(accelPath)))
@@ -18931,7 +18931,7 @@ func AccelMapInstanceLockPath(accelPath string) {
 	runtime.KeepAlive(accelPath)
 }
 
-// AccelMapInstanceLookupEntry wraps gtk_accel_map_lookup_entry
+// AccelMapLookupEntry wraps gtk_accel_map_lookup_entry
 // 
 // The function takes the following parameters:
 // 
@@ -18943,7 +18943,7 @@ func AccelMapInstanceLockPath(accelPath string) {
 // 	- goret bool 
 //
 // Looks up the accelerator entry for @accel_path and fills in @key.
-func AccelMapInstanceLookupEntry(accelPath string) (AccelKey, bool) {
+func AccelMapLookupEntry(accelPath string) (AccelKey, bool) {
 	var carg1 *C.gchar      // in, none, string, casted *C.gchar
 	var carg2 C.GtkAccelKey // out, transfer: none, C Pointers: 0, Name: AccelKey, optional, caller-allocates
 	var cret  C.gboolean    // return
@@ -18967,7 +18967,7 @@ func AccelMapInstanceLookupEntry(accelPath string) (AccelKey, bool) {
 	return key, goret
 }
 
-// AccelMapInstanceSave wraps gtk_accel_map_save
+// AccelMapSave wraps gtk_accel_map_save
 // 
 // The function takes the following parameters:
 // 
@@ -18978,7 +18978,7 @@ func AccelMapInstanceLookupEntry(accelPath string) (AccelKey, bool) {
 // and modifiers) to @file_name.
 // The file is written in a format suitable to be read back in by
 // gtk_accel_map_load().
-func AccelMapInstanceSave(fileName string) {
+func AccelMapSave(fileName string) {
 	var carg1 *C.gchar // in, none, string, casted *C.gchar
 
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(fileName)))
@@ -18988,7 +18988,7 @@ func AccelMapInstanceSave(fileName string) {
 	runtime.KeepAlive(fileName)
 }
 
-// AccelMapInstanceSaveFd wraps gtk_accel_map_save_fd
+// AccelMapSaveFd wraps gtk_accel_map_save_fd
 // 
 // The function takes the following parameters:
 // 
@@ -18997,7 +18997,7 @@ func AccelMapInstanceSave(fileName string) {
 // Filedescriptor variant of gtk_accel_map_save().
 // 
 // Note that the file descriptor will not be closed by this function.
-func AccelMapInstanceSaveFd(fd int) {
+func AccelMapSaveFd(fd int) {
 	var carg1 C.gint // in, none, casted
 
 	carg1 = C.gint(fd)
@@ -19006,7 +19006,7 @@ func AccelMapInstanceSaveFd(fd int) {
 	runtime.KeepAlive(fd)
 }
 
-// AccelMapInstanceUnlockPath wraps gtk_accel_map_unlock_path
+// AccelMapUnlockPath wraps gtk_accel_map_unlock_path
 // 
 // The function takes the following parameters:
 // 
@@ -19014,7 +19014,7 @@ func AccelMapInstanceSaveFd(fd int) {
 //
 // Undoes the last call to gtk_accel_map_lock_path() on this @accel_path.
 // Refer to gtk_accel_map_lock_path() for information about accelerator path locking.
-func AccelMapInstanceUnlockPath(accelPath string) {
+func AccelMapUnlockPath(accelPath string) {
 	var carg1 *C.gchar // in, none, string, casted *C.gchar
 
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(accelPath)))
@@ -19580,7 +19580,7 @@ func UnsafeAdjustmentToGlibFull(c Adjustment) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewAdjustmentInstance wraps gtk_adjustment_new
+// NewAdjustment wraps gtk_adjustment_new
 // 
 // The function takes the following parameters:
 // 
@@ -19596,7 +19596,7 @@ func UnsafeAdjustmentToGlibFull(c Adjustment) unsafe.Pointer {
 // 	- goret Adjustment 
 //
 // Creates a new #GtkAdjustment.
-func NewAdjustmentInstance(value float64, lower float64, upper float64, stepIncrement float64, pageIncrement float64, pageSize float64) Adjustment {
+func NewAdjustment(value float64, lower float64, upper float64, stepIncrement float64, pageIncrement float64, pageSize float64) Adjustment {
 	var carg1 C.gdouble        // in, none, casted
 	var carg2 C.gdouble        // in, none, casted
 	var carg3 C.gdouble        // in, none, casted
@@ -20454,7 +20454,7 @@ func UnsafeApplicationToGlibFull(c Application) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewApplicationInstance wraps gtk_application_new
+// NewApplication wraps gtk_application_new
 // 
 // The function takes the following parameters:
 // 
@@ -20489,7 +20489,7 @@ func UnsafeApplicationToGlibFull(c Application) unsafe.Pointer {
 // If no application ID is given then some features (most notably application
 // uniqueness) will be disabled. A null application ID is only allowed with
 // GTK+ 3.6 or later.
-func NewApplicationInstance(applicationId string, flags gio.ApplicationFlags) Application {
+func NewApplication(applicationId string, flags gio.ApplicationFlags) Application {
 	var carg1 *C.gchar            // in, none, string, nullable-string
 	var carg2 C.GApplicationFlags // in, none, casted
 	var cret  *C.GtkApplication   // return, full, converted
@@ -21641,7 +21641,7 @@ func UnsafeBuilderToGlibFull(c Builder) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewBuilderInstance wraps gtk_builder_new
+// NewBuilder wraps gtk_builder_new
 // The function returns the following values:
 // 
 // 	- goret Builder 
@@ -21655,7 +21655,7 @@ func UnsafeBuilderToGlibFull(c Builder) unsafe.Pointer {
 // 
 // Most users will probably want to use gtk_builder_new_from_file(),
 // gtk_builder_new_from_resource() or gtk_builder_new_from_string().
-func NewBuilderInstance() Builder {
+func NewBuilder() Builder {
 	var cret *C.GtkBuilder // return, full, converted
 
 	cret = C.gtk_builder_new()
@@ -21667,7 +21667,7 @@ func NewBuilderInstance() Builder {
 	return goret
 }
 
-// NewBuilderInstanceFromFile wraps gtk_builder_new_from_file
+// NewBuilderFromFile wraps gtk_builder_new_from_file
 // 
 // The function takes the following parameters:
 // 
@@ -21683,7 +21683,7 @@ func NewBuilderInstance() Builder {
 // If there is an error opening the file or parsing the description then
 // the program will be aborted.  You should only ever attempt to parse
 // user interface descriptions that are shipped as part of your program.
-func NewBuilderInstanceFromFile(filename string) Builder {
+func NewBuilderFromFile(filename string) Builder {
 	var carg1 *C.gchar      // in, none, string, casted *C.gchar
 	var cret  *C.GtkBuilder // return, full, converted
 
@@ -21700,7 +21700,7 @@ func NewBuilderInstanceFromFile(filename string) Builder {
 	return goret
 }
 
-// NewBuilderInstanceFromResource wraps gtk_builder_new_from_resource
+// NewBuilderFromResource wraps gtk_builder_new_from_resource
 // 
 // The function takes the following parameters:
 // 
@@ -21715,7 +21715,7 @@ func NewBuilderInstanceFromFile(filename string) Builder {
 // 
 // If there is an error locating the resource or parsing the
 // description, then the program will be aborted.
-func NewBuilderInstanceFromResource(resourcePath string) Builder {
+func NewBuilderFromResource(resourcePath string) Builder {
 	var carg1 *C.gchar      // in, none, string, casted *C.gchar
 	var cret  *C.GtkBuilder // return, full, converted
 
@@ -21732,7 +21732,7 @@ func NewBuilderInstanceFromResource(resourcePath string) Builder {
 	return goret
 }
 
-// NewBuilderInstanceFromString wraps gtk_builder_new_from_string
+// NewBuilderFromString wraps gtk_builder_new_from_string
 // 
 // The function takes the following parameters:
 // 
@@ -21752,7 +21752,7 @@ func NewBuilderInstanceFromResource(resourcePath string) Builder {
 // If there is an error parsing @string then the program will be
 // aborted. You should not attempt to parse user interface description
 // from untrusted sources.
-func NewBuilderInstanceFromString(str string, length int) Builder {
+func NewBuilderFromString(str string, length int) Builder {
 	var carg1 *C.gchar      // in, none, string, casted *C.gchar
 	var carg2 C.gssize      // in, none, casted
 	var cret  *C.GtkBuilder // return, full, converted
@@ -24667,13 +24667,13 @@ func UnsafeCellAreaBoxToGlibFull(c CellAreaBox) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewCellAreaBoxInstance wraps gtk_cell_area_box_new
+// NewCellAreaBox wraps gtk_cell_area_box_new
 // The function returns the following values:
 // 
 // 	- goret CellArea 
 //
 // Creates a new #GtkCellAreaBox.
-func NewCellAreaBoxInstance() CellArea {
+func NewCellAreaBox() CellArea {
 	var cret *C.GtkCellArea // return, none, converted
 
 	cret = C.gtk_cell_area_box_new()
@@ -26314,7 +26314,7 @@ func UnsafeCellRendererPixbufToGlibFull(c CellRendererPixbuf) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewCellRendererPixbufInstance wraps gtk_cell_renderer_pixbuf_new
+// NewCellRendererPixbuf wraps gtk_cell_renderer_pixbuf_new
 // The function returns the following values:
 // 
 // 	- goret CellRenderer 
@@ -26326,7 +26326,7 @@ func UnsafeCellRendererPixbufToGlibFull(c CellRendererPixbuf) unsafe.Pointer {
 // can bind the “pixbuf” property on the cell renderer to a pixbuf value
 // in the model, thus rendering a different image in each row of the
 // #GtkTreeView.
-func NewCellRendererPixbufInstance() CellRenderer {
+func NewCellRendererPixbuf() CellRenderer {
 	var cret *C.GtkCellRenderer // return, none, converted
 
 	cret = C.gtk_cell_renderer_pixbuf_new()
@@ -26395,13 +26395,13 @@ func UnsafeCellRendererProgressToGlibFull(c CellRendererProgress) unsafe.Pointer
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewCellRendererProgressInstance wraps gtk_cell_renderer_progress_new
+// NewCellRendererProgress wraps gtk_cell_renderer_progress_new
 // The function returns the following values:
 // 
 // 	- goret CellRenderer 
 //
 // Creates a new #GtkCellRendererProgress.
-func NewCellRendererProgressInstance() CellRenderer {
+func NewCellRendererProgress() CellRenderer {
 	var cret *C.GtkCellRenderer // return, none, converted
 
 	cret = C.gtk_cell_renderer_progress_new()
@@ -26476,14 +26476,14 @@ func UnsafeCellRendererSpinnerToGlibFull(c CellRendererSpinner) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewCellRendererSpinnerInstance wraps gtk_cell_renderer_spinner_new
+// NewCellRendererSpinner wraps gtk_cell_renderer_spinner_new
 // The function returns the following values:
 // 
 // 	- goret CellRenderer 
 //
 // Returns a new cell renderer which will show a spinner to indicate
 // activity.
-func NewCellRendererSpinnerInstance() CellRenderer {
+func NewCellRendererSpinner() CellRenderer {
 	var cret *C.GtkCellRenderer // return, none, converted
 
 	cret = C.gtk_cell_renderer_spinner_new()
@@ -26569,7 +26569,7 @@ func UnsafeCellRendererTextToGlibFull(c CellRendererText) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewCellRendererTextInstance wraps gtk_cell_renderer_text_new
+// NewCellRendererText wraps gtk_cell_renderer_text_new
 // The function returns the following values:
 // 
 // 	- goret CellRenderer 
@@ -26581,7 +26581,7 @@ func UnsafeCellRendererTextToGlibFull(c CellRendererText) unsafe.Pointer {
 // you can bind the “text” property on the cell renderer to a string
 // value in the model, thus rendering a different string in each row
 // of the #GtkTreeView
-func NewCellRendererTextInstance() CellRenderer {
+func NewCellRendererText() CellRenderer {
 	var cret *C.GtkCellRenderer // return, none, converted
 
 	cret = C.gtk_cell_renderer_text_new()
@@ -26729,7 +26729,7 @@ func UnsafeCellRendererToggleToGlibFull(c CellRendererToggle) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewCellRendererToggleInstance wraps gtk_cell_renderer_toggle_new
+// NewCellRendererToggle wraps gtk_cell_renderer_toggle_new
 // The function returns the following values:
 // 
 // 	- goret CellRenderer 
@@ -26741,7 +26741,7 @@ func UnsafeCellRendererToggleToGlibFull(c CellRendererToggle) unsafe.Pointer {
 // can bind the “active” property on the cell renderer to a boolean value
 // in the model, thus causing the check button to reflect the state of
 // the model.
-func NewCellRendererToggleInstance() CellRenderer {
+func NewCellRendererToggle() CellRenderer {
 	var cret *C.GtkCellRenderer // return, none, converted
 
 	cret = C.gtk_cell_renderer_toggle_new()
@@ -27214,7 +27214,7 @@ func UnsafeClipboardToGlibFull(c Clipboard) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// ClipboardInstanceGetDefault wraps gtk_clipboard_get_default
+// ClipboardGetDefault wraps gtk_clipboard_get_default
 // 
 // The function takes the following parameters:
 // 
@@ -27226,7 +27226,7 @@ func UnsafeClipboardToGlibFull(c Clipboard) unsafe.Pointer {
 //
 // Returns the default clipboard object for use with cut/copy/paste menu items
 // and keyboard shortcuts.
-func ClipboardInstanceGetDefault(display gdk.Display) Clipboard {
+func ClipboardGetDefault(display gdk.Display) Clipboard {
 	var carg1 *C.GdkDisplay   // in, none, converted
 	var cret  *C.GtkClipboard // return, none, converted
 
@@ -27774,11 +27774,11 @@ func UnsafeContainerCellAccessibleToGlibFull(c ContainerCellAccessible) unsafe.P
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewContainerCellAccessibleInstance wraps gtk_container_cell_accessible_new
+// NewContainerCellAccessible wraps gtk_container_cell_accessible_new
 // The function returns the following values:
 // 
 // 	- goret ContainerCellAccessible 
-func NewContainerCellAccessibleInstance() ContainerCellAccessible {
+func NewContainerCellAccessible() ContainerCellAccessible {
 	var cret *C.GtkContainerCellAccessible // return, full, converted
 
 	cret = C.gtk_container_cell_accessible_new()
@@ -27964,13 +27964,13 @@ func UnsafeCssProviderToGlibFull(c CssProvider) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewCssProviderInstance wraps gtk_css_provider_new
+// NewCssProvider wraps gtk_css_provider_new
 // The function returns the following values:
 // 
 // 	- goret CssProvider 
 //
 // Returns a newly created #GtkCssProvider.
-func NewCssProviderInstance() CssProvider {
+func NewCssProvider() CssProvider {
 	var cret *C.GtkCssProvider // return, full, converted
 
 	cret = C.gtk_css_provider_new()
@@ -27982,7 +27982,7 @@ func NewCssProviderInstance() CssProvider {
 	return goret
 }
 
-// CssProviderInstanceGetDefault wraps gtk_css_provider_get_default
+// CssProviderGetDefault wraps gtk_css_provider_get_default
 // The function returns the following values:
 // 
 // 	- goret CssProvider 
@@ -27991,7 +27991,7 @@ func NewCssProviderInstance() CssProvider {
 // fallback for all widgets.
 //
 // Deprecated: (since 3.24.0) Use gtk_css_provider_new() instead.
-func CssProviderInstanceGetDefault() CssProvider {
+func CssProviderGetDefault() CssProvider {
 	var cret *C.GtkCssProvider // return, none, converted
 
 	cret = C.gtk_css_provider_get_default()
@@ -28003,7 +28003,7 @@ func CssProviderInstanceGetDefault() CssProvider {
 	return goret
 }
 
-// CssProviderInstanceGetNamed wraps gtk_css_provider_get_named
+// CssProviderGetNamed wraps gtk_css_provider_get_named
 // 
 // The function takes the following parameters:
 // 
@@ -28016,7 +28016,7 @@ func CssProviderInstanceGetDefault() CssProvider {
 // 	- goret CssProvider 
 //
 // Loads a theme from the usual theme paths
-func CssProviderInstanceGetNamed(name string, variant string) CssProvider {
+func CssProviderGetNamed(name string, variant string) CssProvider {
 	var carg1 *C.gchar          // in, none, string, casted *C.gchar
 	var carg2 *C.gchar          // in, none, string, nullable-string
 	var cret  *C.GtkCssProvider // return, none, converted
@@ -28395,7 +28395,7 @@ func UnsafeEntryBufferToGlibFull(c EntryBuffer) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewEntryBufferInstance wraps gtk_entry_buffer_new
+// NewEntryBuffer wraps gtk_entry_buffer_new
 // 
 // The function takes the following parameters:
 // 
@@ -28409,7 +28409,7 @@ func UnsafeEntryBufferToGlibFull(c EntryBuffer) unsafe.Pointer {
 // Create a new GtkEntryBuffer object.
 // 
 // Optionally, specify initial text to set in the buffer.
-func NewEntryBufferInstance(initialChars string, nInitialChars int) EntryBuffer {
+func NewEntryBuffer(initialChars string, nInitialChars int) EntryBuffer {
 	var carg1 *C.gchar          // in, none, string, nullable-string
 	var carg2 C.gint            // in, none, casted
 	var cret  *C.GtkEntryBuffer // return, full, converted
@@ -29033,13 +29033,13 @@ func UnsafeEntryCompletionToGlibFull(c EntryCompletion) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewEntryCompletionInstance wraps gtk_entry_completion_new
+// NewEntryCompletion wraps gtk_entry_completion_new
 // The function returns the following values:
 // 
 // 	- goret EntryCompletion 
 //
 // Creates a new #GtkEntryCompletion object.
-func NewEntryCompletionInstance() EntryCompletion {
+func NewEntryCompletion() EntryCompletion {
 	var cret *C.GtkEntryCompletion // return, full, converted
 
 	cret = C.gtk_entry_completion_new()
@@ -29051,7 +29051,7 @@ func NewEntryCompletionInstance() EntryCompletion {
 	return goret
 }
 
-// NewEntryCompletionInstanceWithArea wraps gtk_entry_completion_new_with_area
+// NewEntryCompletionWithArea wraps gtk_entry_completion_new_with_area
 // 
 // The function takes the following parameters:
 // 
@@ -29064,7 +29064,7 @@ func NewEntryCompletionInstance() EntryCompletion {
 // Creates a new #GtkEntryCompletion object using the
 // specified @area to layout cells in the underlying
 // #GtkTreeViewColumn for the drop-down menu.
-func NewEntryCompletionInstanceWithArea(area CellArea) EntryCompletion {
+func NewEntryCompletionWithArea(area CellArea) EntryCompletion {
 	var carg1 *C.GtkCellArea        // in, none, converted
 	var cret  *C.GtkEntryCompletion // return, full, converted
 
@@ -29971,7 +29971,7 @@ func UnsafeEventControllerKeyToGlibFull(c EventControllerKey) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewEventControllerKeyInstance wraps gtk_event_controller_key_new
+// NewEventControllerKey wraps gtk_event_controller_key_new
 // 
 // The function takes the following parameters:
 // 
@@ -29980,7 +29980,7 @@ func UnsafeEventControllerKeyToGlibFull(c EventControllerKey) unsafe.Pointer {
 // The function returns the following values:
 // 
 // 	- goret EventController 
-func NewEventControllerKeyInstance(widget Widget) EventController {
+func NewEventControllerKey(widget Widget) EventController {
 	var carg1 *C.GtkWidget          // in, none, converted
 	var cret  *C.GtkEventController // return, full, converted
 
@@ -30140,7 +30140,7 @@ func UnsafeEventControllerMotionToGlibFull(c EventControllerMotion) unsafe.Point
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewEventControllerMotionInstance wraps gtk_event_controller_motion_new
+// NewEventControllerMotion wraps gtk_event_controller_motion_new
 // 
 // The function takes the following parameters:
 // 
@@ -30152,7 +30152,7 @@ func UnsafeEventControllerMotionToGlibFull(c EventControllerMotion) unsafe.Point
 //
 // Creates a new event controller that will handle motion events
 // for the given @widget.
-func NewEventControllerMotionInstance(widget Widget) EventController {
+func NewEventControllerMotion(widget Widget) EventController {
 	var carg1 *C.GtkWidget          // in, none, converted
 	var cret  *C.GtkEventController // return, full, converted
 
@@ -30269,7 +30269,7 @@ func UnsafeEventControllerScrollToGlibFull(c EventControllerScroll) unsafe.Point
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewEventControllerScrollInstance wraps gtk_event_controller_scroll_new
+// NewEventControllerScroll wraps gtk_event_controller_scroll_new
 // 
 // The function takes the following parameters:
 // 
@@ -30282,7 +30282,7 @@ func UnsafeEventControllerScrollToGlibFull(c EventControllerScroll) unsafe.Point
 //
 // Creates a new event controller that will handle scroll events
 // for the given @widget.
-func NewEventControllerScrollInstance(widget Widget, flags EventControllerScrollFlags) EventController {
+func NewEventControllerScroll(widget Widget, flags EventControllerScrollFlags) EventController {
 	var carg1 *C.GtkWidget                    // in, none, converted
 	var carg2 C.GtkEventControllerScrollFlags // in, none, casted
 	var cret  *C.GtkEventController           // return, full, converted
@@ -30518,7 +30518,7 @@ func UnsafeFileFilterToGlibFull(c FileFilter) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewFileFilterInstance wraps gtk_file_filter_new
+// NewFileFilter wraps gtk_file_filter_new
 // The function returns the following values:
 // 
 // 	- goret FileFilter 
@@ -30533,7 +30533,7 @@ func UnsafeFileFilterToGlibFull(c FileFilter) unsafe.Pointer {
 // GtkFileFilter *filter = gtk_file_filter_new ();
 // gtk_file_filter_add_pattern (filter, "*");
 // ]|
-func NewFileFilterInstance() FileFilter {
+func NewFileFilter() FileFilter {
 	var cret *C.GtkFileFilter // return, none, converted
 
 	cret = C.gtk_file_filter_new()
@@ -31690,7 +31690,7 @@ func UnsafeGestureRotateToGlibFull(c GestureRotate) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewGestureRotateInstance wraps gtk_gesture_rotate_new
+// NewGestureRotate wraps gtk_gesture_rotate_new
 // 
 // The function takes the following parameters:
 // 
@@ -31702,7 +31702,7 @@ func UnsafeGestureRotateToGlibFull(c GestureRotate) unsafe.Pointer {
 //
 // Returns a newly created #GtkGesture that recognizes 2-touch
 // rotation gestures.
-func NewGestureRotateInstance(widget Widget) Gesture {
+func NewGestureRotate(widget Widget) Gesture {
 	var carg1 *C.GtkWidget  // in, none, converted
 	var cret  *C.GtkGesture // return, full, converted
 
@@ -32148,7 +32148,7 @@ func UnsafeGestureStylusToGlibFull(c GestureStylus) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewGestureStylusInstance wraps gtk_gesture_stylus_new
+// NewGestureStylus wraps gtk_gesture_stylus_new
 // 
 // The function takes the following parameters:
 // 
@@ -32159,7 +32159,7 @@ func UnsafeGestureStylusToGlibFull(c GestureStylus) unsafe.Pointer {
 // 	- goret Gesture 
 //
 // Creates a new #GtkGestureStylus.
-func NewGestureStylusInstance(widget Widget) Gesture {
+func NewGestureStylus(widget Widget) Gesture {
 	var carg1 *C.GtkWidget  // in, none, converted
 	var cret  *C.GtkGesture // return, full, converted
 
@@ -32316,7 +32316,7 @@ func UnsafeGestureSwipeToGlibFull(c GestureSwipe) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewGestureSwipeInstance wraps gtk_gesture_swipe_new
+// NewGestureSwipe wraps gtk_gesture_swipe_new
 // 
 // The function takes the following parameters:
 // 
@@ -32327,7 +32327,7 @@ func UnsafeGestureSwipeToGlibFull(c GestureSwipe) unsafe.Pointer {
 // 	- goret Gesture 
 //
 // Returns a newly created #GtkGesture that recognizes swipes.
-func NewGestureSwipeInstance(widget Widget) Gesture {
+func NewGestureSwipe(widget Widget) Gesture {
 	var carg1 *C.GtkWidget  // in, none, converted
 	var cret  *C.GtkGesture // return, full, converted
 
@@ -32444,7 +32444,7 @@ func UnsafeGestureZoomToGlibFull(c GestureZoom) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewGestureZoomInstance wraps gtk_gesture_zoom_new
+// NewGestureZoom wraps gtk_gesture_zoom_new
 // 
 // The function takes the following parameters:
 // 
@@ -32456,7 +32456,7 @@ func UnsafeGestureZoomToGlibFull(c GestureZoom) unsafe.Pointer {
 //
 // Returns a newly created #GtkGesture that recognizes zoom
 // in/out gestures (usually known as pinch/zoom).
-func NewGestureZoomInstance(widget Widget) Gesture {
+func NewGestureZoom(widget Widget) Gesture {
 	var carg1 *C.GtkWidget  // in, none, converted
 	var cret  *C.GtkGesture // return, full, converted
 
@@ -33158,13 +33158,13 @@ func UnsafeIMContextSimpleToGlibFull(c IMContextSimple) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewIMContextSimpleInstance wraps gtk_im_context_simple_new
+// NewIMContextSimple wraps gtk_im_context_simple_new
 // The function returns the following values:
 // 
 // 	- goret IMContext 
 //
 // Creates a new #GtkIMContextSimple.
-func NewIMContextSimpleInstance() IMContext {
+func NewIMContextSimple() IMContext {
 	var cret *C.GtkIMContext // return, full, converted
 
 	cret = C.gtk_im_context_simple_new()
@@ -33265,13 +33265,13 @@ func UnsafeIMMulticontextToGlibFull(c IMMulticontext) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewIMMulticontextInstance wraps gtk_im_multicontext_new
+// NewIMMulticontext wraps gtk_im_multicontext_new
 // The function returns the following values:
 // 
 // 	- goret IMContext 
 //
 // Creates a new #GtkIMMulticontext.
-func NewIMMulticontextInstance() IMContext {
+func NewIMMulticontext() IMContext {
 	var cret *C.GtkIMContext // return, full, converted
 
 	cret = C.gtk_im_multicontext_new()
@@ -33723,7 +33723,7 @@ func UnsafeIconInfoToGlibFull(c IconInfo) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewIconInfoInstanceForPixbuf wraps gtk_icon_info_new_for_pixbuf
+// NewIconInfoForPixbuf wraps gtk_icon_info_new_for_pixbuf
 // 
 // The function takes the following parameters:
 // 
@@ -33735,7 +33735,7 @@ func UnsafeIconInfoToGlibFull(c IconInfo) unsafe.Pointer {
 // 	- goret IconInfo 
 //
 // Creates a #GtkIconInfo for a #GdkPixbuf.
-func NewIconInfoInstanceForPixbuf(iconTheme IconTheme, pixbuf gdkpixbuf.Pixbuf) IconInfo {
+func NewIconInfoForPixbuf(iconTheme IconTheme, pixbuf gdkpixbuf.Pixbuf) IconInfo {
 	var carg1 *C.GtkIconTheme // in, none, converted
 	var carg2 *C.GdkPixbuf    // in, none, converted
 	var cret  *C.GtkIconInfo  // return, full, converted
@@ -34730,7 +34730,7 @@ func UnsafeIconThemeToGlibFull(c IconTheme) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewIconThemeInstance wraps gtk_icon_theme_new
+// NewIconTheme wraps gtk_icon_theme_new
 // The function returns the following values:
 // 
 // 	- goret IconTheme 
@@ -34740,7 +34740,7 @@ func UnsafeIconThemeToGlibFull(c IconTheme) unsafe.Pointer {
 // Usually, you’ll want to use gtk_icon_theme_get_default()
 // or gtk_icon_theme_get_for_screen() rather than creating
 // a new icon theme object for scratch.
-func NewIconThemeInstance() IconTheme {
+func NewIconTheme() IconTheme {
 	var cret *C.GtkIconTheme // return, full, converted
 
 	cret = C.gtk_icon_theme_new()
@@ -34752,14 +34752,14 @@ func NewIconThemeInstance() IconTheme {
 	return goret
 }
 
-// IconThemeInstanceGetDefault wraps gtk_icon_theme_get_default
+// IconThemeGetDefault wraps gtk_icon_theme_get_default
 // The function returns the following values:
 // 
 // 	- goret IconTheme 
 //
 // Gets the icon theme for the default screen. See
 // gtk_icon_theme_get_for_screen().
-func IconThemeInstanceGetDefault() IconTheme {
+func IconThemeGetDefault() IconTheme {
 	var cret *C.GtkIconTheme // return, none, converted
 
 	cret = C.gtk_icon_theme_get_default()
@@ -34771,7 +34771,7 @@ func IconThemeInstanceGetDefault() IconTheme {
 	return goret
 }
 
-// IconThemeInstanceGetForScreen wraps gtk_icon_theme_get_for_screen
+// IconThemeGetForScreen wraps gtk_icon_theme_get_for_screen
 // 
 // The function takes the following parameters:
 // 
@@ -34789,7 +34789,7 @@ func IconThemeInstanceGetDefault() IconTheme {
 // is usually a better choice than calling than gtk_icon_theme_new()
 // and setting the screen yourself; by using this function
 // a single icon theme object will be shared between users.
-func IconThemeInstanceGetForScreen(screen gdk.Screen) IconTheme {
+func IconThemeGetForScreen(screen gdk.Screen) IconTheme {
 	var carg1 *C.GdkScreen    // in, none, converted
 	var cret  *C.GtkIconTheme // return, none, converted
 
@@ -35900,7 +35900,7 @@ func UnsafeListStoreToGlibFull(c ListStore) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewListStoreInstancev wraps gtk_list_store_newv
+// NewListStorev wraps gtk_list_store_newv
 // 
 // The function takes the following parameters:
 // 
@@ -35911,7 +35911,7 @@ func UnsafeListStoreToGlibFull(c ListStore) unsafe.Pointer {
 // 	- goret ListStore 
 //
 // Non-vararg creation function.  Used primarily by language bindings.
-func NewListStoreInstancev(types []gobject.Type) ListStore {
+func NewListStorev(types []gobject.Type) ListStore {
 	var carg1 C.gint          // implicit
 	var carg2 *C.GType        // in, transfer: none, C Pointers: 1, Name: array[Type], array (inner: *typesystem.Alias, length-by: carg1)
 	var cret  *C.GtkListStore // return, full, converted
@@ -36513,7 +36513,7 @@ func UnsafeMountOperationToGlibFull(c MountOperation) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewMountOperationInstance wraps gtk_mount_operation_new
+// NewMountOperation wraps gtk_mount_operation_new
 // 
 // The function takes the following parameters:
 // 
@@ -36524,7 +36524,7 @@ func UnsafeMountOperationToGlibFull(c MountOperation) unsafe.Pointer {
 // 	- goret gio.MountOperation 
 //
 // Creates a new #GtkMountOperation
-func NewMountOperationInstance(parent Window) gio.MountOperation {
+func NewMountOperation(parent Window) gio.MountOperation {
 	var carg1 *C.GtkWindow       // in, none, converted, nullable
 	var cret  *C.GMountOperation // return, full, converted
 
@@ -37174,7 +37174,7 @@ func UnsafeNotebookPageAccessibleToGlibFull(c NotebookPageAccessible) unsafe.Poi
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewNotebookPageAccessibleInstance wraps gtk_notebook_page_accessible_new
+// NewNotebookPageAccessible wraps gtk_notebook_page_accessible_new
 // 
 // The function takes the following parameters:
 // 
@@ -37184,7 +37184,7 @@ func UnsafeNotebookPageAccessibleToGlibFull(c NotebookPageAccessible) unsafe.Poi
 // The function returns the following values:
 // 
 // 	- goret atk.Object 
-func NewNotebookPageAccessibleInstance(notebook NotebookAccessible, child Widget) atk.Object {
+func NewNotebookPageAccessible(notebook NotebookAccessible, child Widget) atk.Object {
 	var carg1 *C.GtkNotebookAccessible // in, none, converted
 	var carg2 *C.GtkWidget             // in, none, converted
 	var cret  *C.AtkObject             // return, full, converted
@@ -37404,7 +37404,7 @@ func UnsafePadControllerToGlibFull(c PadController) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewPadControllerInstance wraps gtk_pad_controller_new
+// NewPadController wraps gtk_pad_controller_new
 // 
 // The function takes the following parameters:
 // 
@@ -37425,7 +37425,7 @@ func UnsafePadControllerToGlibFull(c PadController) unsafe.Pointer {
 // The #GtkPadController is created with no mapped actions. In order to map pad
 // events to actions, use gtk_pad_controller_set_action_entries() or
 // gtk_pad_controller_set_action().
-func NewPadControllerInstance(window Window, group gio.ActionGroup, pad gdk.Device) PadController {
+func NewPadController(window Window, group gio.ActionGroup, pad gdk.Device) PadController {
 	var carg1 *C.GtkWindow        // in, none, converted
 	var carg2 *C.GActionGroup     // in, none, converted
 	var carg3 *C.GdkDevice        // in, none, converted, nullable
@@ -37860,13 +37860,13 @@ func UnsafePageSetupToGlibFull(c PageSetup) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewPageSetupInstance wraps gtk_page_setup_new
+// NewPageSetup wraps gtk_page_setup_new
 // The function returns the following values:
 // 
 // 	- goret PageSetup 
 //
 // Creates a new #GtkPageSetup.
-func NewPageSetupInstance() PageSetup {
+func NewPageSetup() PageSetup {
 	var cret *C.GtkPageSetup // return, full, converted
 
 	cret = C.gtk_page_setup_new()
@@ -37878,7 +37878,7 @@ func NewPageSetupInstance() PageSetup {
 	return goret
 }
 
-// NewPageSetupInstanceFromFile wraps gtk_page_setup_new_from_file
+// NewPageSetupFromFile wraps gtk_page_setup_new_from_file
 // 
 // The function takes the following parameters:
 // 
@@ -37892,7 +37892,7 @@ func NewPageSetupInstance() PageSetup {
 // Reads the page setup from the file @file_name. Returns a
 // new #GtkPageSetup object with the restored page setup,
 // or %NULL if an error occurred. See gtk_page_setup_to_file().
-func NewPageSetupInstanceFromFile(fileName string) (PageSetup, error) {
+func NewPageSetupFromFile(fileName string) (PageSetup, error) {
 	var carg1 *C.gchar        // in, none, string, casted *C.gchar
 	var cret  *C.GtkPageSetup // return, full, converted
 	var _cerr *C.GError       // out, full, converted, nullable
@@ -37914,7 +37914,7 @@ func NewPageSetupInstanceFromFile(fileName string) (PageSetup, error) {
 	return goret, _goerr
 }
 
-// NewPageSetupInstanceFromKeyFile wraps gtk_page_setup_new_from_key_file
+// NewPageSetupFromKeyFile wraps gtk_page_setup_new_from_key_file
 // 
 // The function takes the following parameters:
 // 
@@ -37930,7 +37930,7 @@ func NewPageSetupInstanceFromFile(fileName string) (PageSetup, error) {
 // Reads the page setup from the group @group_name in the key file
 // @key_file. Returns a new #GtkPageSetup object with the restored
 // page setup, or %NULL if an error occurred.
-func NewPageSetupInstanceFromKeyFile(keyFile *glib.KeyFile, groupName string) (PageSetup, error) {
+func NewPageSetupFromKeyFile(keyFile *glib.KeyFile, groupName string) (PageSetup, error) {
 	var carg1 *C.GKeyFile     // in, none, converted
 	var carg2 *C.gchar        // in, none, string, nullable-string
 	var cret  *C.GtkPageSetup // return, full, converted
@@ -39472,13 +39472,13 @@ func UnsafePrintOperationToGlibFull(c PrintOperation) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewPrintOperationInstance wraps gtk_print_operation_new
+// NewPrintOperation wraps gtk_print_operation_new
 // The function returns the following values:
 // 
 // 	- goret PrintOperation 
 //
 // Creates a new #GtkPrintOperation.
-func NewPrintOperationInstance() PrintOperation {
+func NewPrintOperation() PrintOperation {
 	var cret *C.GtkPrintOperation // return, full, converted
 
 	cret = C.gtk_print_operation_new()
@@ -40965,13 +40965,13 @@ func UnsafePrintSettingsToGlibFull(c PrintSettings) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewPrintSettingsInstance wraps gtk_print_settings_new
+// NewPrintSettings wraps gtk_print_settings_new
 // The function returns the following values:
 // 
 // 	- goret PrintSettings 
 //
 // Creates a new #GtkPrintSettings object.
-func NewPrintSettingsInstance() PrintSettings {
+func NewPrintSettings() PrintSettings {
 	var cret *C.GtkPrintSettings // return, full, converted
 
 	cret = C.gtk_print_settings_new()
@@ -40983,7 +40983,7 @@ func NewPrintSettingsInstance() PrintSettings {
 	return goret
 }
 
-// NewPrintSettingsInstanceFromFile wraps gtk_print_settings_new_from_file
+// NewPrintSettingsFromFile wraps gtk_print_settings_new_from_file
 // 
 // The function takes the following parameters:
 // 
@@ -40998,7 +40998,7 @@ func NewPrintSettingsInstance() PrintSettings {
 // object with the restored settings, or %NULL if an error occurred. If the
 // file could not be loaded then error is set to either a #GFileError or
 // #GKeyFileError.  See gtk_print_settings_to_file().
-func NewPrintSettingsInstanceFromFile(fileName string) (PrintSettings, error) {
+func NewPrintSettingsFromFile(fileName string) (PrintSettings, error) {
 	var carg1 *C.gchar            // in, none, string, casted *C.gchar
 	var cret  *C.GtkPrintSettings // return, full, converted
 	var _cerr *C.GError           // out, full, converted, nullable
@@ -41020,7 +41020,7 @@ func NewPrintSettingsInstanceFromFile(fileName string) (PrintSettings, error) {
 	return goret, _goerr
 }
 
-// NewPrintSettingsInstanceFromKeyFile wraps gtk_print_settings_new_from_key_file
+// NewPrintSettingsFromKeyFile wraps gtk_print_settings_new_from_key_file
 // 
 // The function takes the following parameters:
 // 
@@ -41037,7 +41037,7 @@ func NewPrintSettingsInstanceFromFile(fileName string) (PrintSettings, error) {
 // new #GtkPrintSettings object with the restored settings, or %NULL if an
 // error occurred. If the file could not be loaded then error is set to either
 // a #GFileError or #GKeyFileError.
-func NewPrintSettingsInstanceFromKeyFile(keyFile *glib.KeyFile, groupName string) (PrintSettings, error) {
+func NewPrintSettingsFromKeyFile(keyFile *glib.KeyFile, groupName string) (PrintSettings, error) {
 	var carg1 *C.GKeyFile         // in, none, converted
 	var carg2 *C.gchar            // in, none, string, nullable-string
 	var cret  *C.GtkPrintSettings // return, full, converted
@@ -43135,7 +43135,7 @@ func UnsafeRecentFilterToGlibFull(c RecentFilter) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewRecentFilterInstance wraps gtk_recent_filter_new
+// NewRecentFilter wraps gtk_recent_filter_new
 // The function returns the following values:
 // 
 // 	- goret RecentFilter 
@@ -43150,7 +43150,7 @@ func UnsafeRecentFilterToGlibFull(c RecentFilter) unsafe.Pointer {
 // GtkRecentFilter *filter = gtk_recent_filter_new ();
 // gtk_recent_filter_add_pattern (filter, "*");
 // ]|
-func NewRecentFilterInstance() RecentFilter {
+func NewRecentFilter() RecentFilter {
 	var cret *C.GtkRecentFilter // return, none, converted
 
 	cret = C.gtk_recent_filter_new()
@@ -43653,7 +43653,7 @@ func UnsafeRecentManagerToGlibFull(c RecentManager) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewRecentManagerInstance wraps gtk_recent_manager_new
+// NewRecentManager wraps gtk_recent_manager_new
 // The function returns the following values:
 // 
 // 	- goret RecentManager 
@@ -43665,7 +43665,7 @@ func UnsafeRecentManagerToGlibFull(c RecentManager) unsafe.Pointer {
 // 
 // #GtkRecentManager objects are expensive: be sure to create them only when
 // needed. You should use gtk_recent_manager_get_default() instead.
-func NewRecentManagerInstance() RecentManager {
+func NewRecentManager() RecentManager {
 	var cret *C.GtkRecentManager // return, full, converted
 
 	cret = C.gtk_recent_manager_new()
@@ -43677,14 +43677,14 @@ func NewRecentManagerInstance() RecentManager {
 	return goret
 }
 
-// RecentManagerInstanceGetDefault wraps gtk_recent_manager_get_default
+// RecentManagerGetDefault wraps gtk_recent_manager_get_default
 // The function returns the following values:
 // 
 // 	- goret RecentManager 
 //
 // Gets a unique instance of #GtkRecentManager, that you can share
 // in your application without caring about memory management.
-func RecentManagerInstanceGetDefault() RecentManager {
+func RecentManagerGetDefault() RecentManager {
 	var cret *C.GtkRecentManager // return, none, converted
 
 	cret = C.gtk_recent_manager_get_default()
@@ -44046,7 +44046,7 @@ func UnsafeRendererCellAccessibleToGlibFull(c RendererCellAccessible) unsafe.Poi
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewRendererCellAccessibleInstance wraps gtk_renderer_cell_accessible_new
+// NewRendererCellAccessible wraps gtk_renderer_cell_accessible_new
 // 
 // The function takes the following parameters:
 // 
@@ -44055,7 +44055,7 @@ func UnsafeRendererCellAccessibleToGlibFull(c RendererCellAccessible) unsafe.Poi
 // The function returns the following values:
 // 
 // 	- goret atk.Object 
-func NewRendererCellAccessibleInstance(renderer CellRenderer) atk.Object {
+func NewRendererCellAccessible(renderer CellRenderer) atk.Object {
 	var carg1 *C.GtkCellRenderer // in, none, converted
 	var cret  *C.AtkObject       // return, full, converted
 
@@ -44168,14 +44168,14 @@ func UnsafeSettingsToGlibFull(c Settings) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// SettingsInstanceGetDefault wraps gtk_settings_get_default
+// SettingsGetDefault wraps gtk_settings_get_default
 // The function returns the following values:
 // 
 // 	- goret Settings 
 //
 // Gets the #GtkSettings object for the default GDK screen, creating
 // it if necessary. See gtk_settings_get_for_screen().
-func SettingsInstanceGetDefault() Settings {
+func SettingsGetDefault() Settings {
 	var cret *C.GtkSettings // return, none, converted
 
 	cret = C.gtk_settings_get_default()
@@ -44187,7 +44187,7 @@ func SettingsInstanceGetDefault() Settings {
 	return goret
 }
 
-// SettingsInstanceGetForScreen wraps gtk_settings_get_for_screen
+// SettingsGetForScreen wraps gtk_settings_get_for_screen
 // 
 // The function takes the following parameters:
 // 
@@ -44198,7 +44198,7 @@ func SettingsInstanceGetDefault() Settings {
 // 	- goret Settings 
 //
 // Gets the #GtkSettings object for @screen, creating it if necessary.
-func SettingsInstanceGetForScreen(screen gdk.Screen) Settings {
+func SettingsGetForScreen(screen gdk.Screen) Settings {
 	var carg1 *C.GdkScreen   // in, none, converted
 	var cret  *C.GtkSettings // return, none, converted
 
@@ -44396,7 +44396,7 @@ func UnsafeSizeGroupToGlibFull(c SizeGroup) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewSizeGroupInstance wraps gtk_size_group_new
+// NewSizeGroup wraps gtk_size_group_new
 // 
 // The function takes the following parameters:
 // 
@@ -44407,7 +44407,7 @@ func UnsafeSizeGroupToGlibFull(c SizeGroup) unsafe.Pointer {
 // 	- goret SizeGroup 
 //
 // Create a new #GtkSizeGroup.
-func NewSizeGroupInstance(mode SizeGroupMode) SizeGroup {
+func NewSizeGroup(mode SizeGroupMode) SizeGroup {
 	var carg1 C.GtkSizeGroupMode // in, none, casted
 	var cret  *C.GtkSizeGroup    // return, full, converted
 
@@ -45235,7 +45235,7 @@ func UnsafeStyleContextToGlibFull(c StyleContext) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewStyleContextInstance wraps gtk_style_context_new
+// NewStyleContext wraps gtk_style_context_new
 // The function returns the following values:
 // 
 // 	- goret StyleContext 
@@ -45248,7 +45248,7 @@ func UnsafeStyleContextToGlibFull(c StyleContext) unsafe.Pointer {
 // separated from GTK+, if you are using #GtkStyleContext to
 // theme #GtkWidgets, use gtk_widget_get_style_context()
 // in order to get a style context ready to theme the widget.
-func NewStyleContextInstance() StyleContext {
+func NewStyleContext() StyleContext {
 	var cret *C.GtkStyleContext // return, full, converted
 
 	cret = C.gtk_style_context_new()
@@ -45260,7 +45260,7 @@ func NewStyleContextInstance() StyleContext {
 	return goret
 }
 
-// StyleContextInstanceAddProviderForScreen wraps gtk_style_context_add_provider_for_screen
+// StyleContextAddProviderForScreen wraps gtk_style_context_add_provider_for_screen
 // 
 // The function takes the following parameters:
 // 
@@ -45281,7 +45281,7 @@ func NewStyleContextInstance() StyleContext {
 // Note: If both priorities are the same, A #GtkStyleProvider
 // added through gtk_style_context_add_provider() takes precedence
 // over another added through this function.
-func StyleContextInstanceAddProviderForScreen(screen gdk.Screen, provider StyleProvider, priority uint) {
+func StyleContextAddProviderForScreen(screen gdk.Screen, provider StyleProvider, priority uint) {
 	var carg1 *C.GdkScreen        // in, none, converted
 	var carg2 *C.GtkStyleProvider // in, none, converted
 	var carg3 C.guint             // in, none, casted
@@ -45296,7 +45296,7 @@ func StyleContextInstanceAddProviderForScreen(screen gdk.Screen, provider StyleP
 	runtime.KeepAlive(priority)
 }
 
-// StyleContextInstanceRemoveProviderForScreen wraps gtk_style_context_remove_provider_for_screen
+// StyleContextRemoveProviderForScreen wraps gtk_style_context_remove_provider_for_screen
 // 
 // The function takes the following parameters:
 // 
@@ -45304,7 +45304,7 @@ func StyleContextInstanceAddProviderForScreen(screen gdk.Screen, provider StyleP
 // 	- provider StyleProvider: a #GtkStyleProvider 
 //
 // Removes @provider from the global style providers list in @screen.
-func StyleContextInstanceRemoveProviderForScreen(screen gdk.Screen, provider StyleProvider) {
+func StyleContextRemoveProviderForScreen(screen gdk.Screen, provider StyleProvider) {
 	var carg1 *C.GdkScreen        // in, none, converted
 	var carg2 *C.GtkStyleProvider // in, none, converted
 
@@ -45316,7 +45316,7 @@ func StyleContextInstanceRemoveProviderForScreen(screen gdk.Screen, provider Sty
 	runtime.KeepAlive(provider)
 }
 
-// StyleContextInstanceResetWidgets wraps gtk_style_context_reset_widgets
+// StyleContextResetWidgets wraps gtk_style_context_reset_widgets
 // 
 // The function takes the following parameters:
 // 
@@ -45328,7 +45328,7 @@ func StyleContextInstanceRemoveProviderForScreen(screen gdk.Screen, provider Sty
 // style, it will both redraw and recompute any cached information about
 // its appearance. As an example, it is used when the color scheme changes
 // in the related #GtkSettings object.
-func StyleContextInstanceResetWidgets(screen gdk.Screen) {
+func StyleContextResetWidgets(screen gdk.Screen) {
 	var carg1 *C.GdkScreen // in, none, converted
 
 	carg1 = (*C.GdkScreen)(gdk.UnsafeScreenToGlibNone(screen))
@@ -47096,7 +47096,7 @@ func UnsafeTextBufferToGlibFull(c TextBuffer) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewTextBufferInstance wraps gtk_text_buffer_new
+// NewTextBuffer wraps gtk_text_buffer_new
 // 
 // The function takes the following parameters:
 // 
@@ -47107,7 +47107,7 @@ func UnsafeTextBufferToGlibFull(c TextBuffer) unsafe.Pointer {
 // 	- goret TextBuffer 
 //
 // Creates a new text buffer.
-func NewTextBufferInstance(table TextTagTable) TextBuffer {
+func NewTextBuffer(table TextTagTable) TextBuffer {
 	var carg1 *C.GtkTextTagTable // in, none, converted, nullable
 	var cret  *C.GtkTextBuffer   // return, full, converted
 
@@ -49107,7 +49107,7 @@ func UnsafeTextChildAnchorToGlibFull(c TextChildAnchor) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewTextChildAnchorInstance wraps gtk_text_child_anchor_new
+// NewTextChildAnchor wraps gtk_text_child_anchor_new
 // The function returns the following values:
 // 
 // 	- goret TextChildAnchor 
@@ -49116,7 +49116,7 @@ func UnsafeTextChildAnchorToGlibFull(c TextChildAnchor) unsafe.Pointer {
 // it into a #GtkTextBuffer with gtk_text_buffer_insert_child_anchor().
 // To perform the creation and insertion in one step, use the
 // convenience function gtk_text_buffer_create_child_anchor().
-func NewTextChildAnchorInstance() TextChildAnchor {
+func NewTextChildAnchor() TextChildAnchor {
 	var cret *C.GtkTextChildAnchor // return, full, converted
 
 	cret = C.gtk_text_child_anchor_new()
@@ -49287,7 +49287,7 @@ func UnsafeTextMarkToGlibFull(c TextMark) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewTextMarkInstance wraps gtk_text_mark_new
+// NewTextMark wraps gtk_text_mark_new
 // 
 // The function takes the following parameters:
 // 
@@ -49307,7 +49307,7 @@ func UnsafeTextMarkToGlibFull(c TextMark) unsafe.Pointer {
 // right of newly-inserted text. The standard left-to-right cursor is a
 // mark with right gravity (when you type, the cursor stays on the right
 // side of the text you’re typing).
-func NewTextMarkInstance(name string, leftGravity bool) TextMark {
+func NewTextMark(name string, leftGravity bool) TextMark {
 	var carg1 *C.gchar       // in, none, string, nullable-string
 	var carg2 C.gboolean     // in
 	var cret  *C.GtkTextMark // return, full, converted
@@ -49578,7 +49578,7 @@ func UnsafeTextTagToGlibFull(c TextTag) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewTextTagInstance wraps gtk_text_tag_new
+// NewTextTag wraps gtk_text_tag_new
 // 
 // The function takes the following parameters:
 // 
@@ -49590,7 +49590,7 @@ func UnsafeTextTagToGlibFull(c TextTag) unsafe.Pointer {
 //
 // Creates a #GtkTextTag. Configure the tag using object arguments,
 // i.e. using g_object_set().
-func NewTextTagInstance(name string) TextTag {
+func NewTextTag(name string) TextTag {
 	var carg1 *C.gchar      // in, none, string, nullable-string
 	var cret  *C.GtkTextTag // return, full, converted
 
@@ -49811,14 +49811,14 @@ func UnsafeTextTagTableToGlibFull(c TextTagTable) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewTextTagTableInstance wraps gtk_text_tag_table_new
+// NewTextTagTable wraps gtk_text_tag_table_new
 // The function returns the following values:
 // 
 // 	- goret TextTagTable 
 //
 // Creates a new #GtkTextTagTable. The table contains no tags by
 // default.
-func NewTextTagTableInstance() TextTagTable {
+func NewTextTagTable() TextTagTable {
 	var cret *C.GtkTextTagTable // return, full, converted
 
 	cret = C.gtk_text_tag_table_new()
@@ -50238,7 +50238,7 @@ func UnsafeTooltipToGlibFull(c Tooltip) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// TooltipInstanceTriggerTooltipQuery wraps gtk_tooltip_trigger_tooltip_query
+// TooltipTriggerTooltipQuery wraps gtk_tooltip_trigger_tooltip_query
 // 
 // The function takes the following parameters:
 // 
@@ -50248,7 +50248,7 @@ func UnsafeTooltipToGlibFull(c Tooltip) unsafe.Pointer {
 // visible tooltip, or to show/hide the current tooltip.  This function is
 // useful to call when, for example, the state of the widget changed by a
 // key press.
-func TooltipInstanceTriggerTooltipQuery(display gdk.Display) {
+func TooltipTriggerTooltipQuery(display gdk.Display) {
 	var carg1 *C.GdkDisplay // in, none, converted
 
 	carg1 = (*C.GdkDisplay)(gdk.UnsafeDisplayToGlibNone(display))
@@ -51306,7 +51306,7 @@ func UnsafeTreeModelSortToGlibFull(c TreeModelSort) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewTreeModelSortInstanceWithModel wraps gtk_tree_model_sort_new_with_model
+// NewTreeModelSortWithModel wraps gtk_tree_model_sort_new_with_model
 // 
 // The function takes the following parameters:
 // 
@@ -51317,7 +51317,7 @@ func UnsafeTreeModelSortToGlibFull(c TreeModelSort) unsafe.Pointer {
 // 	- goret TreeModelSort 
 //
 // Creates a new #GtkTreeModelSort, with @child_model as the child model.
-func NewTreeModelSortInstanceWithModel(childModel TreeModel) TreeModelSort {
+func NewTreeModelSortWithModel(childModel TreeModel) TreeModelSort {
 	var carg1 *C.GtkTreeModel // in, none, converted
 	var cret  *C.GtkTreeModel // return, full, converted, casted *C.GtkTreeModelSort
 
@@ -52508,7 +52508,7 @@ func UnsafeTreeStoreToGlibFull(c TreeStore) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewTreeStoreInstancev wraps gtk_tree_store_newv
+// NewTreeStorev wraps gtk_tree_store_newv
 // 
 // The function takes the following parameters:
 // 
@@ -52519,7 +52519,7 @@ func UnsafeTreeStoreToGlibFull(c TreeStore) unsafe.Pointer {
 // 	- goret TreeStore 
 //
 // Non vararg creation function.  Used primarily by language bindings.
-func NewTreeStoreInstancev(types []gobject.Type) TreeStore {
+func NewTreeStorev(types []gobject.Type) TreeStore {
 	var carg1 C.gint          // implicit
 	var carg2 *C.GType        // in, transfer: none, C Pointers: 1, Name: array[Type], array (inner: *typesystem.Alias, length-by: carg1)
 	var cret  *C.GtkTreeStore // return, full, converted
@@ -53650,13 +53650,13 @@ func UnsafeTreeViewColumnToGlibFull(c TreeViewColumn) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewTreeViewColumnInstance wraps gtk_tree_view_column_new
+// NewTreeViewColumn wraps gtk_tree_view_column_new
 // The function returns the following values:
 // 
 // 	- goret TreeViewColumn 
 //
 // Creates a new #GtkTreeViewColumn.
-func NewTreeViewColumnInstance() TreeViewColumn {
+func NewTreeViewColumn() TreeViewColumn {
 	var cret *C.GtkTreeViewColumn // return, none, converted
 
 	cret = C.gtk_tree_view_column_new()
@@ -53668,7 +53668,7 @@ func NewTreeViewColumnInstance() TreeViewColumn {
 	return goret
 }
 
-// NewTreeViewColumnInstanceWithArea wraps gtk_tree_view_column_new_with_area
+// NewTreeViewColumnWithArea wraps gtk_tree_view_column_new_with_area
 // 
 // The function takes the following parameters:
 // 
@@ -53679,7 +53679,7 @@ func NewTreeViewColumnInstance() TreeViewColumn {
 // 	- goret TreeViewColumn 
 //
 // Creates a new #GtkTreeViewColumn using @area to render its cells.
-func NewTreeViewColumnInstanceWithArea(area CellArea) TreeViewColumn {
+func NewTreeViewColumnWithArea(area CellArea) TreeViewColumn {
 	var carg1 *C.GtkCellArea       // in, none, converted
 	var cret  *C.GtkTreeViewColumn // return, none, converted
 
@@ -58198,14 +58198,14 @@ func UnsafeWidgetToGlibFull(c Widget) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// WidgetInstanceGetDefaultDirection wraps gtk_widget_get_default_direction
+// WidgetGetDefaultDirection wraps gtk_widget_get_default_direction
 // The function returns the following values:
 // 
 // 	- goret TextDirection 
 //
 // Obtains the current default reading direction. See
 // gtk_widget_set_default_direction().
-func WidgetInstanceGetDefaultDirection() TextDirection {
+func WidgetGetDefaultDirection() TextDirection {
 	var cret C.GtkTextDirection // return, none, casted
 
 	cret = C.gtk_widget_get_default_direction()
@@ -58217,7 +58217,7 @@ func WidgetInstanceGetDefaultDirection() TextDirection {
 	return goret
 }
 
-// WidgetInstanceSetDefaultDirection wraps gtk_widget_set_default_direction
+// WidgetSetDefaultDirection wraps gtk_widget_set_default_direction
 // 
 // The function takes the following parameters:
 // 
@@ -58226,7 +58226,7 @@ func WidgetInstanceGetDefaultDirection() TextDirection {
 //
 // Sets the default reading direction for widgets where the
 // direction has not been explicitly set by gtk_widget_set_direction().
-func WidgetInstanceSetDefaultDirection(dir TextDirection) {
+func WidgetSetDefaultDirection(dir TextDirection) {
 	var carg1 C.GtkTextDirection // in, none, casted
 
 	carg1 = C.GtkTextDirection(dir)
@@ -63919,14 +63919,14 @@ func UnsafeWindowGroupToGlibFull(c WindowGroup) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewWindowGroupInstance wraps gtk_window_group_new
+// NewWindowGroup wraps gtk_window_group_new
 // The function returns the following values:
 // 
 // 	- goret WindowGroup 
 //
 // Creates a new #GtkWindowGroup object. Grabs added with
 // gtk_grab_add() only affect windows within the same #GtkWindowGroup.
-func NewWindowGroupInstance() WindowGroup {
+func NewWindowGroup() WindowGroup {
 	var cret *C.GtkWindowGroup // return, full, converted
 
 	cret = C.gtk_window_group_new()
@@ -64370,13 +64370,13 @@ func UnsafeCalendarToGlibFull(c Calendar) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewCalendarInstance wraps gtk_calendar_new
+// NewCalendar wraps gtk_calendar_new
 // The function returns the following values:
 // 
 // 	- goret Widget 
 //
 // Creates a new calendar, with the current date being selected.
-func NewCalendarInstance() Widget {
+func NewCalendar() Widget {
 	var cret *C.GtkWidget // return, none, converted
 
 	cret = C.gtk_calendar_new()
@@ -64766,13 +64766,13 @@ func UnsafeCellRendererAccelToGlibFull(c CellRendererAccel) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewCellRendererAccelInstance wraps gtk_cell_renderer_accel_new
+// NewCellRendererAccel wraps gtk_cell_renderer_accel_new
 // The function returns the following values:
 // 
 // 	- goret CellRenderer 
 //
 // Creates a new #GtkCellRendererAccel.
-func NewCellRendererAccelInstance() CellRenderer {
+func NewCellRendererAccel() CellRenderer {
 	var cret *C.GtkCellRenderer // return, none, converted
 
 	cret = C.gtk_cell_renderer_accel_new()
@@ -64851,7 +64851,7 @@ func UnsafeCellRendererComboToGlibFull(c CellRendererCombo) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewCellRendererComboInstance wraps gtk_cell_renderer_combo_new
+// NewCellRendererCombo wraps gtk_cell_renderer_combo_new
 // The function returns the following values:
 // 
 // 	- goret CellRenderer 
@@ -64863,7 +64863,7 @@ func UnsafeCellRendererComboToGlibFull(c CellRendererCombo) unsafe.Pointer {
 // in a #GtkTreeModel. For example, you can bind the “text” property
 // on the cell renderer to a string value in the model, thus rendering
 // a different string in each row of the #GtkTreeView.
-func NewCellRendererComboInstance() CellRenderer {
+func NewCellRendererCombo() CellRenderer {
 	var cret *C.GtkCellRenderer // return, none, converted
 
 	cret = C.gtk_cell_renderer_combo_new()
@@ -64943,13 +64943,13 @@ func UnsafeCellRendererSpinToGlibFull(c CellRendererSpin) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewCellRendererSpinInstance wraps gtk_cell_renderer_spin_new
+// NewCellRendererSpin wraps gtk_cell_renderer_spin_new
 // The function returns the following values:
 // 
 // 	- goret CellRenderer 
 //
 // Creates a new #GtkCellRendererSpin.
-func NewCellRendererSpinInstance() CellRenderer {
+func NewCellRendererSpin() CellRenderer {
 	var cret *C.GtkCellRenderer // return, none, converted
 
 	cret = C.gtk_cell_renderer_spin_new()
@@ -65138,13 +65138,13 @@ func UnsafeCellViewToGlibFull(c CellView) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewCellViewInstance wraps gtk_cell_view_new
+// NewCellView wraps gtk_cell_view_new
 // The function returns the following values:
 // 
 // 	- goret Widget 
 //
 // Creates a new #GtkCellView widget.
-func NewCellViewInstance() Widget {
+func NewCellView() Widget {
 	var cret *C.GtkWidget // return, none, converted
 
 	cret = C.gtk_cell_view_new()
@@ -65156,7 +65156,7 @@ func NewCellViewInstance() Widget {
 	return goret
 }
 
-// NewCellViewInstanceWithContext wraps gtk_cell_view_new_with_context
+// NewCellViewWithContext wraps gtk_cell_view_new_with_context
 // 
 // The function takes the following parameters:
 // 
@@ -65174,7 +65174,7 @@ func NewCellViewInstance() Widget {
 // the underlying area synchronize the geometry for those cells,
 // in this way alignments with cellviews for other rows are
 // possible.
-func NewCellViewInstanceWithContext(area CellArea, context CellAreaContext) Widget {
+func NewCellViewWithContext(area CellArea, context CellAreaContext) Widget {
 	var carg1 *C.GtkCellArea        // in, none, converted
 	var carg2 *C.GtkCellAreaContext // in, none, converted
 	var cret  *C.GtkWidget          // return, none, converted
@@ -65193,7 +65193,7 @@ func NewCellViewInstanceWithContext(area CellArea, context CellAreaContext) Widg
 	return goret
 }
 
-// NewCellViewInstanceWithMarkup wraps gtk_cell_view_new_with_markup
+// NewCellViewWithMarkup wraps gtk_cell_view_new_with_markup
 // 
 // The function takes the following parameters:
 // 
@@ -65206,7 +65206,7 @@ func NewCellViewInstanceWithContext(area CellArea, context CellAreaContext) Widg
 // Creates a new #GtkCellView widget, adds a #GtkCellRendererText
 // to it, and makes it show @markup. The text can be
 // marked up with the [Pango text markup language][PangoMarkupFormat].
-func NewCellViewInstanceWithMarkup(markup string) Widget {
+func NewCellViewWithMarkup(markup string) Widget {
 	var carg1 *C.gchar     // in, none, string, casted *C.gchar
 	var cret  *C.GtkWidget // return, none, converted
 
@@ -65223,7 +65223,7 @@ func NewCellViewInstanceWithMarkup(markup string) Widget {
 	return goret
 }
 
-// NewCellViewInstanceWithPixbuf wraps gtk_cell_view_new_with_pixbuf
+// NewCellViewWithPixbuf wraps gtk_cell_view_new_with_pixbuf
 // 
 // The function takes the following parameters:
 // 
@@ -65235,7 +65235,7 @@ func NewCellViewInstanceWithMarkup(markup string) Widget {
 //
 // Creates a new #GtkCellView widget, adds a #GtkCellRendererPixbuf
 // to it, and makes it show @pixbuf.
-func NewCellViewInstanceWithPixbuf(pixbuf gdkpixbuf.Pixbuf) Widget {
+func NewCellViewWithPixbuf(pixbuf gdkpixbuf.Pixbuf) Widget {
 	var carg1 *C.GdkPixbuf // in, none, converted
 	var cret  *C.GtkWidget // return, none, converted
 
@@ -65251,7 +65251,7 @@ func NewCellViewInstanceWithPixbuf(pixbuf gdkpixbuf.Pixbuf) Widget {
 	return goret
 }
 
-// NewCellViewInstanceWithText wraps gtk_cell_view_new_with_text
+// NewCellViewWithText wraps gtk_cell_view_new_with_text
 // 
 // The function takes the following parameters:
 // 
@@ -65263,7 +65263,7 @@ func NewCellViewInstanceWithPixbuf(pixbuf gdkpixbuf.Pixbuf) Widget {
 //
 // Creates a new #GtkCellView widget, adds a #GtkCellRendererText
 // to it, and makes it show @text.
-func NewCellViewInstanceWithText(text string) Widget {
+func NewCellViewWithText(text string) Widget {
 	var carg1 *C.gchar     // in, none, string, casted *C.gchar
 	var cret  *C.GtkWidget // return, none, converted
 
@@ -66688,13 +66688,13 @@ func UnsafeDrawingAreaToGlibFull(c DrawingArea) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewDrawingAreaInstance wraps gtk_drawing_area_new
+// NewDrawingArea wraps gtk_drawing_area_new
 // The function returns the following values:
 // 
 // 	- goret Widget 
 //
 // Creates a new drawing area.
-func NewDrawingAreaInstance() Widget {
+func NewDrawingArea() Widget {
 	var cret *C.GtkWidget // return, none, converted
 
 	cret = C.gtk_drawing_area_new()
@@ -67659,13 +67659,13 @@ func UnsafeEntryToGlibFull(c Entry) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewEntryInstance wraps gtk_entry_new
+// NewEntry wraps gtk_entry_new
 // The function returns the following values:
 // 
 // 	- goret Widget 
 //
 // Creates a new entry.
-func NewEntryInstance() Widget {
+func NewEntry() Widget {
 	var cret *C.GtkWidget // return, none, converted
 
 	cret = C.gtk_entry_new()
@@ -67677,7 +67677,7 @@ func NewEntryInstance() Widget {
 	return goret
 }
 
-// NewEntryInstanceWithBuffer wraps gtk_entry_new_with_buffer
+// NewEntryWithBuffer wraps gtk_entry_new_with_buffer
 // 
 // The function takes the following parameters:
 // 
@@ -67688,7 +67688,7 @@ func NewEntryInstance() Widget {
 // 	- goret Widget 
 //
 // Creates a new entry with the specified text buffer.
-func NewEntryInstanceWithBuffer(buffer EntryBuffer) Widget {
+func NewEntryWithBuffer(buffer EntryBuffer) Widget {
 	var carg1 *C.GtkEntryBuffer // in, none, converted
 	var cret  *C.GtkWidget      // return, none, converted
 
@@ -69941,7 +69941,7 @@ func UnsafeFileChooserNativeToGlibFull(c FileChooserNative) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewFileChooserNativeInstance wraps gtk_file_chooser_native_new
+// NewFileChooserNative wraps gtk_file_chooser_native_new
 // 
 // The function takes the following parameters:
 // 
@@ -69956,7 +69956,7 @@ func UnsafeFileChooserNativeToGlibFull(c FileChooserNative) unsafe.Pointer {
 // 	- goret FileChooserNative 
 //
 // Creates a new #GtkFileChooserNative.
-func NewFileChooserNativeInstance(title string, parent Window, action FileChooserAction, acceptLabel string, cancelLabel string) FileChooserNative {
+func NewFileChooserNative(title string, parent Window, action FileChooserAction, acceptLabel string, cancelLabel string) FileChooserNative {
 	var carg1 *C.gchar                // in, none, string, nullable-string
 	var carg2 *C.GtkWindow            // in, none, converted, nullable
 	var carg3 C.GtkFileChooserAction  // in, none, casted
@@ -70217,13 +70217,13 @@ func UnsafeFixedToGlibFull(c Fixed) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewFixedInstance wraps gtk_fixed_new
+// NewFixed wraps gtk_fixed_new
 // The function returns the following values:
 // 
 // 	- goret Widget 
 //
 // Creates a new #GtkFixed.
-func NewFixedInstance() Widget {
+func NewFixed() Widget {
 	var cret *C.GtkWidget // return, none, converted
 
 	cret = C.gtk_fixed_new()
@@ -70713,13 +70713,13 @@ func UnsafeFlowBoxToGlibFull(c FlowBox) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewFlowBoxInstance wraps gtk_flow_box_new
+// NewFlowBox wraps gtk_flow_box_new
 // The function returns the following values:
 // 
 // 	- goret Widget 
 //
 // Creates a GtkFlowBox.
-func NewFlowBoxInstance() Widget {
+func NewFlowBox() Widget {
 	var cret *C.GtkWidget // return, none, converted
 
 	cret = C.gtk_flow_box_new()
@@ -71945,13 +71945,13 @@ func UnsafeGLAreaToGlibFull(c GLArea) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewGLAreaInstance wraps gtk_gl_area_new
+// NewGLArea wraps gtk_gl_area_new
 // The function returns the following values:
 // 
 // 	- goret Widget 
 //
 // Creates a new #GtkGLArea widget.
-func NewGLAreaInstance() Widget {
+func NewGLArea() Widget {
 	var cret *C.GtkWidget // return, none, converted
 
 	cret = C.gtk_gl_area_new()
@@ -72465,7 +72465,7 @@ func UnsafeGestureDragToGlibFull(c GestureDrag) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewGestureDragInstance wraps gtk_gesture_drag_new
+// NewGestureDrag wraps gtk_gesture_drag_new
 // 
 // The function takes the following parameters:
 // 
@@ -72476,7 +72476,7 @@ func UnsafeGestureDragToGlibFull(c GestureDrag) unsafe.Pointer {
 // 	- goret Gesture 
 //
 // Returns a newly created #GtkGesture that recognizes drags.
-func NewGestureDragInstance(widget Widget) Gesture {
+func NewGestureDrag(widget Widget) Gesture {
 	var carg1 *C.GtkWidget  // in, none, converted
 	var cret  *C.GtkGesture // return, full, converted
 
@@ -72622,7 +72622,7 @@ func UnsafeGestureLongPressToGlibFull(c GestureLongPress) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewGestureLongPressInstance wraps gtk_gesture_long_press_new
+// NewGestureLongPress wraps gtk_gesture_long_press_new
 // 
 // The function takes the following parameters:
 // 
@@ -72633,7 +72633,7 @@ func UnsafeGestureLongPressToGlibFull(c GestureLongPress) unsafe.Pointer {
 // 	- goret Gesture 
 //
 // Returns a newly created #GtkGesture that recognizes long presses.
-func NewGestureLongPressInstance(widget Widget) Gesture {
+func NewGestureLongPress(widget Widget) Gesture {
 	var carg1 *C.GtkWidget  // in, none, converted
 	var cret  *C.GtkGesture // return, full, converted
 
@@ -72742,7 +72742,7 @@ func UnsafeGestureMultiPressToGlibFull(c GestureMultiPress) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewGestureMultiPressInstance wraps gtk_gesture_multi_press_new
+// NewGestureMultiPress wraps gtk_gesture_multi_press_new
 // 
 // The function takes the following parameters:
 // 
@@ -72754,7 +72754,7 @@ func UnsafeGestureMultiPressToGlibFull(c GestureMultiPress) unsafe.Pointer {
 //
 // Returns a newly created #GtkGesture that recognizes single and multiple
 // presses.
-func NewGestureMultiPressInstance(widget Widget) Gesture {
+func NewGestureMultiPress(widget Widget) Gesture {
 	var carg1 *C.GtkWidget  // in, none, converted
 	var cret  *C.GtkGesture // return, full, converted
 
@@ -72919,7 +72919,7 @@ func UnsafeGesturePanToGlibFull(c GesturePan) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewGesturePanInstance wraps gtk_gesture_pan_new
+// NewGesturePan wraps gtk_gesture_pan_new
 // 
 // The function takes the following parameters:
 // 
@@ -72931,7 +72931,7 @@ func UnsafeGesturePanToGlibFull(c GesturePan) unsafe.Pointer {
 // 	- goret Gesture 
 //
 // Returns a newly created #GtkGesture that recognizes pan gestures.
-func NewGesturePanInstance(widget Widget, orientation Orientation) Gesture {
+func NewGesturePan(widget Widget, orientation Orientation) Gesture {
 	var carg1 *C.GtkWidget     // in, none, converted
 	var carg2 C.GtkOrientation // in, none, casted
 	var cret  *C.GtkGesture    // return, full, converted
@@ -73293,13 +73293,13 @@ func UnsafeGridToGlibFull(c Grid) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewGridInstance wraps gtk_grid_new
+// NewGrid wraps gtk_grid_new
 // The function returns the following values:
 // 
 // 	- goret Widget 
 //
 // Creates a new grid widget.
-func NewGridInstance() Widget {
+func NewGrid() Widget {
 	var cret *C.GtkWidget // return, none, converted
 
 	cret = C.gtk_grid_new()
@@ -73945,13 +73945,13 @@ func UnsafeHSVToGlibFull(c HSV) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewHSVInstance wraps gtk_hsv_new
+// NewHSV wraps gtk_hsv_new
 // The function returns the following values:
 // 
 // 	- goret Widget 
 //
 // Creates a new HSV color selector.
-func NewHSVInstance() Widget {
+func NewHSV() Widget {
 	var cret *C.GtkWidget // return, none, converted
 
 	cret = C.gtk_hsv_new()
@@ -73963,7 +73963,7 @@ func NewHSVInstance() Widget {
 	return goret
 }
 
-// HSVInstanceToRGB wraps gtk_hsv_to_rgb
+// HSVToRGB wraps gtk_hsv_to_rgb
 // 
 // The function takes the following parameters:
 // 
@@ -73981,7 +73981,7 @@ func NewHSVInstance() Widget {
 // 
 // Input values must be in the [0.0, 1.0] range;
 // output values will be in the same range.
-func HSVInstanceToRGB(h float64, s float64, v float64) (float64, float64, float64) {
+func HSVToRGB(h float64, s float64, v float64) (float64, float64, float64) {
 	var carg1 C.gdouble // in, none, casted
 	var carg2 C.gdouble // in, none, casted
 	var carg3 C.gdouble // in, none, casted
@@ -74368,13 +74368,13 @@ func UnsafeHeaderBarToGlibFull(c HeaderBar) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewHeaderBarInstance wraps gtk_header_bar_new
+// NewHeaderBar wraps gtk_header_bar_new
 // The function returns the following values:
 // 
 // 	- goret Widget 
 //
 // Creates a new #GtkHeaderBar widget.
-func NewHeaderBarInstance() Widget {
+func NewHeaderBar() Widget {
 	var cret *C.GtkWidget // return, none, converted
 
 	cret = C.gtk_header_bar_new()
@@ -75424,13 +75424,13 @@ func UnsafeIconViewToGlibFull(c IconView) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewIconViewInstance wraps gtk_icon_view_new
+// NewIconView wraps gtk_icon_view_new
 // The function returns the following values:
 // 
 // 	- goret Widget 
 //
 // Creates a new #GtkIconView widget
-func NewIconViewInstance() Widget {
+func NewIconView() Widget {
 	var cret *C.GtkWidget // return, none, converted
 
 	cret = C.gtk_icon_view_new()
@@ -75442,7 +75442,7 @@ func NewIconViewInstance() Widget {
 	return goret
 }
 
-// NewIconViewInstanceWithArea wraps gtk_icon_view_new_with_area
+// NewIconViewWithArea wraps gtk_icon_view_new_with_area
 // 
 // The function takes the following parameters:
 // 
@@ -75454,7 +75454,7 @@ func NewIconViewInstance() Widget {
 //
 // Creates a new #GtkIconView widget using the
 // specified @area to layout cells inside the icons.
-func NewIconViewInstanceWithArea(area CellArea) Widget {
+func NewIconViewWithArea(area CellArea) Widget {
 	var carg1 *C.GtkCellArea // in, none, converted
 	var cret  *C.GtkWidget   // return, none, converted
 
@@ -75470,7 +75470,7 @@ func NewIconViewInstanceWithArea(area CellArea) Widget {
 	return goret
 }
 
-// NewIconViewInstanceWithModel wraps gtk_icon_view_new_with_model
+// NewIconViewWithModel wraps gtk_icon_view_new_with_model
 // 
 // The function takes the following parameters:
 // 
@@ -75481,7 +75481,7 @@ func NewIconViewInstanceWithArea(area CellArea) Widget {
 // 	- goret Widget 
 //
 // Creates a new #GtkIconView widget with the model @model.
-func NewIconViewInstanceWithModel(model TreeModel) Widget {
+func NewIconViewWithModel(model TreeModel) Widget {
 	var carg1 *C.GtkTreeModel // in, none, converted
 	var cret  *C.GtkWidget    // return, none, converted
 
@@ -77268,13 +77268,13 @@ func UnsafeInvisibleToGlibFull(c Invisible) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewInvisibleInstance wraps gtk_invisible_new
+// NewInvisible wraps gtk_invisible_new
 // The function returns the following values:
 // 
 // 	- goret Widget 
 //
 // Creates a new #GtkInvisible.
-func NewInvisibleInstance() Widget {
+func NewInvisible() Widget {
 	var cret *C.GtkWidget // return, none, converted
 
 	cret = C.gtk_invisible_new()
@@ -77286,7 +77286,7 @@ func NewInvisibleInstance() Widget {
 	return goret
 }
 
-// NewInvisibleInstanceForScreen wraps gtk_invisible_new_for_screen
+// NewInvisibleForScreen wraps gtk_invisible_new_for_screen
 // 
 // The function takes the following parameters:
 // 
@@ -77298,7 +77298,7 @@ func NewInvisibleInstance() Widget {
 // 	- goret Widget 
 //
 // Creates a new #GtkInvisible object for a specified screen
-func NewInvisibleInstanceForScreen(screen gdk.Screen) Widget {
+func NewInvisibleForScreen(screen gdk.Screen) Widget {
 	var carg1 *C.GdkScreen // in, none, converted
 	var cret  *C.GtkWidget // return, none, converted
 
@@ -77552,7 +77552,7 @@ func UnsafeLayoutToGlibFull(c Layout) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewLayoutInstance wraps gtk_layout_new
+// NewLayout wraps gtk_layout_new
 // 
 // The function takes the following parameters:
 // 
@@ -77566,7 +77566,7 @@ func UnsafeLayoutToGlibFull(c Layout) unsafe.Pointer {
 // Creates a new #GtkLayout. Unless you have a specific adjustment
 // you’d like the layout to use for scrolling, pass %NULL for
 // @hadjustment and @vadjustment.
-func NewLayoutInstance(hadjustment Adjustment, vadjustment Adjustment) Widget {
+func NewLayout(hadjustment Adjustment, vadjustment Adjustment) Widget {
 	var carg1 *C.GtkAdjustment // in, none, converted, nullable
 	var carg2 *C.GtkAdjustment // in, none, converted, nullable
 	var cret  *C.GtkWidget     // return, none, converted
@@ -78000,13 +78000,13 @@ func UnsafeLevelBarToGlibFull(c LevelBar) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewLevelBarInstance wraps gtk_level_bar_new
+// NewLevelBar wraps gtk_level_bar_new
 // The function returns the following values:
 // 
 // 	- goret Widget 
 //
 // Creates a new #GtkLevelBar.
-func NewLevelBarInstance() Widget {
+func NewLevelBar() Widget {
 	var cret *C.GtkWidget // return, none, converted
 
 	cret = C.gtk_level_bar_new()
@@ -78018,7 +78018,7 @@ func NewLevelBarInstance() Widget {
 	return goret
 }
 
-// NewLevelBarInstanceForInterval wraps gtk_level_bar_new_for_interval
+// NewLevelBarForInterval wraps gtk_level_bar_new_for_interval
 // 
 // The function takes the following parameters:
 // 
@@ -78031,7 +78031,7 @@ func NewLevelBarInstance() Widget {
 //
 // Utility constructor that creates a new #GtkLevelBar for the specified
 // interval.
-func NewLevelBarInstanceForInterval(minValue float64, maxValue float64) Widget {
+func NewLevelBarForInterval(minValue float64, maxValue float64) Widget {
 	var carg1 C.gdouble    // in, none, casted
 	var carg2 C.gdouble    // in, none, casted
 	var cret  *C.GtkWidget // return, none, converted
@@ -78802,13 +78802,13 @@ func UnsafeListBoxToGlibFull(c ListBox) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewListBoxInstance wraps gtk_list_box_new
+// NewListBox wraps gtk_list_box_new
 // The function returns the following values:
 // 
 // 	- goret Widget 
 //
 // Creates a new #GtkListBox container.
-func NewListBoxInstance() Widget {
+func NewListBox() Widget {
 	var cret *C.GtkWidget // return, none, converted
 
 	cret = C.gtk_list_box_new()
@@ -81066,13 +81066,13 @@ func UnsafeNotebookToGlibFull(c Notebook) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewNotebookInstance wraps gtk_notebook_new
+// NewNotebook wraps gtk_notebook_new
 // The function returns the following values:
 // 
 // 	- goret Widget 
 //
 // Creates a new #GtkNotebook widget with no pages.
-func NewNotebookInstance() Widget {
+func NewNotebook() Widget {
 	var cret *C.GtkWidget // return, none, converted
 
 	cret = C.gtk_notebook_new()
@@ -82576,7 +82576,7 @@ func UnsafePanedToGlibFull(c Paned) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewPanedInstance wraps gtk_paned_new
+// NewPaned wraps gtk_paned_new
 // 
 // The function takes the following parameters:
 // 
@@ -82587,7 +82587,7 @@ func UnsafePanedToGlibFull(c Paned) unsafe.Pointer {
 // 	- goret Widget 
 //
 // Creates a new #GtkPaned widget.
-func NewPanedInstance(orientation Orientation) Widget {
+func NewPaned(orientation Orientation) Widget {
 	var carg1 C.GtkOrientation // in, none, casted
 	var cret  *C.GtkWidget     // return, none, converted
 
@@ -83218,13 +83218,13 @@ func UnsafeProgressBarToGlibFull(c ProgressBar) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewProgressBarInstance wraps gtk_progress_bar_new
+// NewProgressBar wraps gtk_progress_bar_new
 // The function returns the following values:
 // 
 // 	- goret Widget 
 //
 // Creates a new #GtkProgressBar.
-func NewProgressBarInstance() Widget {
+func NewProgressBar() Widget {
 	var cret *C.GtkWidget // return, none, converted
 
 	cret = C.gtk_progress_bar_new()
@@ -84947,7 +84947,7 @@ func UnsafeScaleToGlibFull(c Scale) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewScaleInstance wraps gtk_scale_new
+// NewScale wraps gtk_scale_new
 // 
 // The function takes the following parameters:
 // 
@@ -84960,7 +84960,7 @@ func UnsafeScaleToGlibFull(c Scale) unsafe.Pointer {
 // 	- goret Widget 
 //
 // Creates a new #GtkScale.
-func NewScaleInstance(orientation Orientation, adjustment Adjustment) Widget {
+func NewScale(orientation Orientation, adjustment Adjustment) Widget {
 	var carg1 C.GtkOrientation // in, none, casted
 	var carg2 *C.GtkAdjustment // in, none, converted, nullable
 	var cret  *C.GtkWidget     // return, none, converted
@@ -84981,7 +84981,7 @@ func NewScaleInstance(orientation Orientation, adjustment Adjustment) Widget {
 	return goret
 }
 
-// NewScaleInstanceWithRange wraps gtk_scale_new_with_range
+// NewScaleWithRange wraps gtk_scale_new_with_range
 // 
 // The function takes the following parameters:
 // 
@@ -85003,7 +85003,7 @@ func NewScaleInstance(orientation Orientation, adjustment Adjustment) Widget {
 // Note that the way in which the precision is derived works best if @step
 // is a power of ten. If the resulting precision is not suitable for your
 // needs, use gtk_scale_set_digits() to correct it.
-func NewScaleInstanceWithRange(orientation Orientation, min float64, max float64, step float64) Widget {
+func NewScaleWithRange(orientation Orientation, min float64, max float64, step float64) Widget {
 	var carg1 C.GtkOrientation // in, none, casted
 	var carg2 C.gdouble        // in, none, casted
 	var carg3 C.gdouble        // in, none, casted
@@ -85489,7 +85489,7 @@ func UnsafeScrollbarToGlibFull(c Scrollbar) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewScrollbarInstance wraps gtk_scrollbar_new
+// NewScrollbar wraps gtk_scrollbar_new
 // 
 // The function takes the following parameters:
 // 
@@ -85501,7 +85501,7 @@ func UnsafeScrollbarToGlibFull(c Scrollbar) unsafe.Pointer {
 // 	- goret Widget 
 //
 // Creates a new scrollbar with the given orientation.
-func NewScrollbarInstance(orientation Orientation, adjustment Adjustment) Widget {
+func NewScrollbar(orientation Orientation, adjustment Adjustment) Widget {
 	var carg1 C.GtkOrientation // in, none, casted
 	var carg2 *C.GtkAdjustment // in, none, converted, nullable
 	var cret  *C.GtkWidget     // return, none, converted
@@ -85672,14 +85672,14 @@ func UnsafeSearchEntryToGlibFull(c SearchEntry) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewSearchEntryInstance wraps gtk_search_entry_new
+// NewSearchEntry wraps gtk_search_entry_new
 // The function returns the following values:
 // 
 // 	- goret Widget 
 //
 // Creates a #GtkSearchEntry, with a find icon when the search field is
 // empty, and a clear icon when it isn't.
-func NewSearchEntryInstance() Widget {
+func NewSearchEntry() Widget {
 	var cret *C.GtkWidget // return, none, converted
 
 	cret = C.gtk_search_entry_new()
@@ -85767,7 +85767,7 @@ func UnsafeSeparatorToGlibFull(c Separator) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewSeparatorInstance wraps gtk_separator_new
+// NewSeparator wraps gtk_separator_new
 // 
 // The function takes the following parameters:
 // 
@@ -85778,7 +85778,7 @@ func UnsafeSeparatorToGlibFull(c Separator) unsafe.Pointer {
 // 	- goret Widget 
 //
 // Creates a new #GtkSeparator with the given orientation.
-func NewSeparatorInstance(orientation Orientation) Widget {
+func NewSeparator(orientation Orientation) Widget {
 	var carg1 C.GtkOrientation // in, none, casted
 	var cret  *C.GtkWidget     // return, none, converted
 
@@ -85915,13 +85915,13 @@ func UnsafeSocketToGlibFull(c Socket) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewSocketInstance wraps gtk_socket_new
+// NewSocket wraps gtk_socket_new
 // The function returns the following values:
 // 
 // 	- goret Widget 
 //
 // Create a new empty #GtkSocket.
-func NewSocketInstance() Widget {
+func NewSocket() Widget {
 	var cret *C.GtkWidget // return, none, converted
 
 	cret = C.gtk_socket_new()
@@ -86412,7 +86412,7 @@ func UnsafeSpinButtonToGlibFull(c SpinButton) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewSpinButtonInstance wraps gtk_spin_button_new
+// NewSpinButton wraps gtk_spin_button_new
 // 
 // The function takes the following parameters:
 // 
@@ -86427,7 +86427,7 @@ func UnsafeSpinButtonToGlibFull(c SpinButton) unsafe.Pointer {
 // 	- goret Widget 
 //
 // Creates a new #GtkSpinButton.
-func NewSpinButtonInstance(adjustment Adjustment, climbRate float64, digits uint) Widget {
+func NewSpinButton(adjustment Adjustment, climbRate float64, digits uint) Widget {
 	var carg1 *C.GtkAdjustment // in, none, converted, nullable
 	var carg2 C.gdouble        // in, none, casted
 	var carg3 C.guint          // in, none, casted
@@ -86451,7 +86451,7 @@ func NewSpinButtonInstance(adjustment Adjustment, climbRate float64, digits uint
 	return goret
 }
 
-// NewSpinButtonInstanceWithRange wraps gtk_spin_button_new_with_range
+// NewSpinButtonWithRange wraps gtk_spin_button_new_with_range
 // 
 // The function takes the following parameters:
 // 
@@ -86472,7 +86472,7 @@ func NewSpinButtonInstance(adjustment Adjustment, climbRate float64, digits uint
 // Note that the way in which the precision is derived works best if @step
 // is a power of ten. If the resulting precision is not suitable for your
 // needs, use gtk_spin_button_set_digits() to correct it.
-func NewSpinButtonInstanceWithRange(min float64, max float64, step float64) Widget {
+func NewSpinButtonWithRange(min float64, max float64, step float64) Widget {
 	var carg1 C.gdouble    // in, none, casted
 	var carg2 C.gdouble    // in, none, casted
 	var carg3 C.gdouble    // in, none, casted
@@ -87155,13 +87155,13 @@ func UnsafeSpinnerToGlibFull(c Spinner) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewSpinnerInstance wraps gtk_spinner_new
+// NewSpinner wraps gtk_spinner_new
 // The function returns the following values:
 // 
 // 	- goret Widget 
 //
 // Returns a new spinner widget. Not yet started.
-func NewSpinnerInstance() Widget {
+func NewSpinner() Widget {
 	var cret *C.GtkWidget // return, none, converted
 
 	cret = C.gtk_spinner_new()
@@ -87566,13 +87566,13 @@ func UnsafeStackToGlibFull(c Stack) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewStackInstance wraps gtk_stack_new
+// NewStack wraps gtk_stack_new
 // The function returns the following values:
 // 
 // 	- goret Widget 
 //
 // Creates a new #GtkStack container.
-func NewStackInstance() Widget {
+func NewStack() Widget {
 	var cret *C.GtkWidget // return, none, converted
 
 	cret = C.gtk_stack_new()
@@ -88360,13 +88360,13 @@ func UnsafeSwitchToGlibFull(c Switch) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewSwitchInstance wraps gtk_switch_new
+// NewSwitch wraps gtk_switch_new
 // The function returns the following values:
 // 
 // 	- goret Widget 
 //
 // Creates a new #GtkSwitch widget.
-func NewSwitchInstance() Widget {
+func NewSwitch() Widget {
 	var cret *C.GtkWidget // return, none, converted
 
 	cret = C.gtk_switch_new()
@@ -89598,7 +89598,7 @@ func UnsafeTextViewToGlibFull(c TextView) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewTextViewInstance wraps gtk_text_view_new
+// NewTextView wraps gtk_text_view_new
 // The function returns the following values:
 // 
 // 	- goret Widget 
@@ -89607,7 +89607,7 @@ func UnsafeTextViewToGlibFull(c TextView) unsafe.Pointer {
 // before using the text view, an empty default buffer will be created
 // for you. Get the buffer with gtk_text_view_get_buffer(). If you want
 // to specify your own buffer, consider gtk_text_view_new_with_buffer().
-func NewTextViewInstance() Widget {
+func NewTextView() Widget {
 	var cret *C.GtkWidget // return, none, converted
 
 	cret = C.gtk_text_view_new()
@@ -89619,7 +89619,7 @@ func NewTextViewInstance() Widget {
 	return goret
 }
 
-// NewTextViewInstanceWithBuffer wraps gtk_text_view_new_with_buffer
+// NewTextViewWithBuffer wraps gtk_text_view_new_with_buffer
 // 
 // The function takes the following parameters:
 // 
@@ -89635,7 +89635,7 @@ func NewTextViewInstance() Widget {
 // this function is equivalent to gtk_text_view_new(). The
 // text view adds its own reference count to the buffer; it does not
 // take over an existing reference.
-func NewTextViewInstanceWithBuffer(buffer TextBuffer) Widget {
+func NewTextViewWithBuffer(buffer TextBuffer) Widget {
 	var carg1 *C.GtkTextBuffer // in, none, converted
 	var cret  *C.GtkWidget     // return, none, converted
 
@@ -91964,7 +91964,7 @@ func UnsafeToolItemGroupToGlibFull(c ToolItemGroup) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewToolItemGroupInstance wraps gtk_tool_item_group_new
+// NewToolItemGroup wraps gtk_tool_item_group_new
 // 
 // The function takes the following parameters:
 // 
@@ -91975,7 +91975,7 @@ func UnsafeToolItemGroupToGlibFull(c ToolItemGroup) unsafe.Pointer {
 // 	- goret Widget 
 //
 // Creates a new tool item group with label @label.
-func NewToolItemGroupInstance(label string) Widget {
+func NewToolItemGroup(label string) Widget {
 	var carg1 *C.gchar     // in, none, string, casted *C.gchar
 	var cret  *C.GtkWidget // return, none, converted
 
@@ -92692,13 +92692,13 @@ func UnsafeToolPaletteToGlibFull(c ToolPalette) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewToolPaletteInstance wraps gtk_tool_palette_new
+// NewToolPalette wraps gtk_tool_palette_new
 // The function returns the following values:
 // 
 // 	- goret Widget 
 //
 // Creates a new tool palette.
-func NewToolPaletteInstance() Widget {
+func NewToolPalette() Widget {
 	var cret *C.GtkWidget // return, none, converted
 
 	cret = C.gtk_tool_palette_new()
@@ -92710,13 +92710,13 @@ func NewToolPaletteInstance() Widget {
 	return goret
 }
 
-// ToolPaletteInstanceGetDragTargetGroup wraps gtk_tool_palette_get_drag_target_group
+// ToolPaletteGetDragTargetGroup wraps gtk_tool_palette_get_drag_target_group
 // The function returns the following values:
 // 
 // 	- goret *TargetEntry 
 //
 // Get the target entry for a dragged #GtkToolItemGroup.
-func ToolPaletteInstanceGetDragTargetGroup() *TargetEntry {
+func ToolPaletteGetDragTargetGroup() *TargetEntry {
 	var cret *C.GtkTargetEntry // return, none, converted
 
 	cret = C.gtk_tool_palette_get_drag_target_group()
@@ -92728,13 +92728,13 @@ func ToolPaletteInstanceGetDragTargetGroup() *TargetEntry {
 	return goret
 }
 
-// ToolPaletteInstanceGetDragTargetItem wraps gtk_tool_palette_get_drag_target_item
+// ToolPaletteGetDragTargetItem wraps gtk_tool_palette_get_drag_target_item
 // The function returns the following values:
 // 
 // 	- goret *TargetEntry 
 //
 // Gets the target entry for a dragged #GtkToolItem.
-func ToolPaletteInstanceGetDragTargetItem() *TargetEntry {
+func ToolPaletteGetDragTargetItem() *TargetEntry {
 	var cret *C.GtkTargetEntry // return, none, converted
 
 	cret = C.gtk_tool_palette_get_drag_target_item()
@@ -93439,13 +93439,13 @@ func UnsafeToolbarToGlibFull(c Toolbar) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewToolbarInstance wraps gtk_toolbar_new
+// NewToolbar wraps gtk_toolbar_new
 // The function returns the following values:
 // 
 // 	- goret Widget 
 //
 // Creates a new toolbar.
-func NewToolbarInstance() Widget {
+func NewToolbar() Widget {
 	var cret *C.GtkWidget // return, none, converted
 
 	cret = C.gtk_toolbar_new()
@@ -94992,13 +94992,13 @@ func UnsafeTreeViewToGlibFull(c TreeView) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewTreeViewInstance wraps gtk_tree_view_new
+// NewTreeView wraps gtk_tree_view_new
 // The function returns the following values:
 // 
 // 	- goret Widget 
 //
 // Creates a new #GtkTreeView widget.
-func NewTreeViewInstance() Widget {
+func NewTreeView() Widget {
 	var cret *C.GtkWidget // return, none, converted
 
 	cret = C.gtk_tree_view_new()
@@ -95010,7 +95010,7 @@ func NewTreeViewInstance() Widget {
 	return goret
 }
 
-// NewTreeViewInstanceWithModel wraps gtk_tree_view_new_with_model
+// NewTreeViewWithModel wraps gtk_tree_view_new_with_model
 // 
 // The function takes the following parameters:
 // 
@@ -95021,7 +95021,7 @@ func NewTreeViewInstance() Widget {
 // 	- goret Widget 
 //
 // Creates a new #GtkTreeView widget with the model initialized to @model.
-func NewTreeViewInstanceWithModel(model TreeModel) Widget {
+func NewTreeViewWithModel(model TreeModel) Widget {
 	var carg1 *C.GtkTreeModel // in, none, converted
 	var cret  *C.GtkWidget    // return, none, converted
 
@@ -98440,7 +98440,7 @@ func UnsafeBoxToGlibFull(c Box) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewBoxInstance wraps gtk_box_new
+// NewBox wraps gtk_box_new
 // 
 // The function takes the following parameters:
 // 
@@ -98452,7 +98452,7 @@ func UnsafeBoxToGlibFull(c Box) unsafe.Pointer {
 // 	- goret Widget 
 //
 // Creates a new #GtkBox.
-func NewBoxInstance(orientation Orientation, spacing int) Widget {
+func NewBox(orientation Orientation, spacing int) Widget {
 	var carg1 C.GtkOrientation // in, none, casted
 	var carg2 C.gint           // in, none, casted
 	var cret  *C.GtkWidget     // return, none, converted
@@ -99090,14 +99090,14 @@ func UnsafeButtonToGlibFull(c Button) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewButtonInstance wraps gtk_button_new
+// NewButton wraps gtk_button_new
 // The function returns the following values:
 // 
 // 	- goret Widget 
 //
 // Creates a new #GtkButton widget. To add a child widget to the button,
 // use gtk_container_add().
-func NewButtonInstance() Widget {
+func NewButton() Widget {
 	var cret *C.GtkWidget // return, none, converted
 
 	cret = C.gtk_button_new()
@@ -99109,7 +99109,7 @@ func NewButtonInstance() Widget {
 	return goret
 }
 
-// NewButtonInstanceFromIconName wraps gtk_button_new_from_icon_name
+// NewButtonFromIconName wraps gtk_button_new_from_icon_name
 // 
 // The function takes the following parameters:
 // 
@@ -99128,7 +99128,7 @@ func NewButtonInstance() Widget {
 // 
 // This function is a convenience wrapper around gtk_button_new() and
 // gtk_button_set_image().
-func NewButtonInstanceFromIconName(iconName string, size int) Widget {
+func NewButtonFromIconName(iconName string, size int) Widget {
 	var carg1 *C.gchar      // in, none, string, nullable-string
 	var carg2 C.GtkIconSize // in, none, casted, casted C.gint
 	var cret  *C.GtkWidget  // return, none, converted
@@ -99150,7 +99150,7 @@ func NewButtonInstanceFromIconName(iconName string, size int) Widget {
 	return goret
 }
 
-// NewButtonInstanceWithLabel wraps gtk_button_new_with_label
+// NewButtonWithLabel wraps gtk_button_new_with_label
 // 
 // The function takes the following parameters:
 // 
@@ -99162,7 +99162,7 @@ func NewButtonInstanceFromIconName(iconName string, size int) Widget {
 //
 // Creates a #GtkButton widget with a #GtkLabel child containing the given
 // text.
-func NewButtonInstanceWithLabel(label string) Widget {
+func NewButtonWithLabel(label string) Widget {
 	var carg1 *C.gchar     // in, none, string, casted *C.gchar
 	var cret  *C.GtkWidget // return, none, converted
 
@@ -99179,7 +99179,7 @@ func NewButtonInstanceWithLabel(label string) Widget {
 	return goret
 }
 
-// NewButtonInstanceWithMnemonic wraps gtk_button_new_with_mnemonic
+// NewButtonWithMnemonic wraps gtk_button_new_with_mnemonic
 // 
 // The function takes the following parameters:
 // 
@@ -99196,7 +99196,7 @@ func NewButtonInstanceWithLabel(label string) Widget {
 // underscores). The first underlined character represents a keyboard
 // accelerator called a mnemonic.
 // Pressing Alt and that key activates the button.
-func NewButtonInstanceWithMnemonic(label string) Widget {
+func NewButtonWithMnemonic(label string) Widget {
 	var carg1 *C.gchar     // in, none, string, casted *C.gchar
 	var cret  *C.GtkWidget // return, none, converted
 
@@ -99737,7 +99737,7 @@ func UnsafeButtonBoxToGlibFull(c ButtonBox) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewButtonBoxInstance wraps gtk_button_box_new
+// NewButtonBox wraps gtk_button_box_new
 // 
 // The function takes the following parameters:
 // 
@@ -99748,7 +99748,7 @@ func UnsafeButtonBoxToGlibFull(c ButtonBox) unsafe.Pointer {
 // 	- goret Widget 
 //
 // Creates a new #GtkButtonBox.
-func NewButtonBoxInstance(orientation Orientation) Widget {
+func NewButtonBox(orientation Orientation) Widget {
 	var carg1 C.GtkOrientation // in, none, casted
 	var cret  *C.GtkWidget     // return, none, converted
 
@@ -100097,7 +100097,7 @@ func UnsafeColorButtonToGlibFull(c ColorButton) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewColorButtonInstance wraps gtk_color_button_new
+// NewColorButton wraps gtk_color_button_new
 // The function returns the following values:
 // 
 // 	- goret Widget 
@@ -100109,7 +100109,7 @@ func UnsafeColorButtonToGlibFull(c ColorButton) unsafe.Pointer {
 // is clicked, a color-selection dialog will open, allowing the user
 // to select a color. The swatch will be updated to reflect the new
 // color when the user finishes.
-func NewColorButtonInstance() Widget {
+func NewColorButton() Widget {
 	var cret *C.GtkWidget // return, none, converted
 
 	cret = C.gtk_color_button_new()
@@ -100121,7 +100121,7 @@ func NewColorButtonInstance() Widget {
 	return goret
 }
 
-// NewColorButtonInstanceWithRGBA wraps gtk_color_button_new_with_rgba
+// NewColorButtonWithRGBA wraps gtk_color_button_new_with_rgba
 // 
 // The function takes the following parameters:
 // 
@@ -100132,7 +100132,7 @@ func NewColorButtonInstance() Widget {
 // 	- goret Widget 
 //
 // Creates a new color button.
-func NewColorButtonInstanceWithRGBA(rgba *gdk.RGBA) Widget {
+func NewColorButtonWithRGBA(rgba *gdk.RGBA) Widget {
 	var carg1 *C.GdkRGBA   // in, none, converted
 	var cret  *C.GtkWidget // return, none, converted
 
@@ -100282,13 +100282,13 @@ func UnsafeColorChooserWidgetToGlibFull(c ColorChooserWidget) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewColorChooserWidgetInstance wraps gtk_color_chooser_widget_new
+// NewColorChooserWidget wraps gtk_color_chooser_widget_new
 // The function returns the following values:
 // 
 // 	- goret Widget 
 //
 // Creates a new #GtkColorChooserWidget.
-func NewColorChooserWidgetInstance() Widget {
+func NewColorChooserWidget() Widget {
 	var cret *C.GtkWidget // return, none, converted
 
 	cret = C.gtk_color_chooser_widget_new()
@@ -100477,13 +100477,13 @@ func UnsafeColorSelectionToGlibFull(c ColorSelection) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewColorSelectionInstance wraps gtk_color_selection_new
+// NewColorSelection wraps gtk_color_selection_new
 // The function returns the following values:
 // 
 // 	- goret Widget 
 //
 // Creates a new GtkColorSelection.
-func NewColorSelectionInstance() Widget {
+func NewColorSelection() Widget {
 	var cret *C.GtkWidget // return, none, converted
 
 	cret = C.gtk_color_selection_new()
@@ -101193,13 +101193,13 @@ func UnsafeComboBoxToGlibFull(c ComboBox) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewComboBoxInstance wraps gtk_combo_box_new
+// NewComboBox wraps gtk_combo_box_new
 // The function returns the following values:
 // 
 // 	- goret Widget 
 //
 // Creates a new empty #GtkComboBox.
-func NewComboBoxInstance() Widget {
+func NewComboBox() Widget {
 	var cret *C.GtkWidget // return, none, converted
 
 	cret = C.gtk_combo_box_new()
@@ -101211,7 +101211,7 @@ func NewComboBoxInstance() Widget {
 	return goret
 }
 
-// NewComboBoxInstanceWithArea wraps gtk_combo_box_new_with_area
+// NewComboBoxWithArea wraps gtk_combo_box_new_with_area
 // 
 // The function takes the following parameters:
 // 
@@ -101222,7 +101222,7 @@ func NewComboBoxInstance() Widget {
 // 	- goret Widget 
 //
 // Creates a new empty #GtkComboBox using @area to layout cells.
-func NewComboBoxInstanceWithArea(area CellArea) Widget {
+func NewComboBoxWithArea(area CellArea) Widget {
 	var carg1 *C.GtkCellArea // in, none, converted
 	var cret  *C.GtkWidget   // return, none, converted
 
@@ -101238,7 +101238,7 @@ func NewComboBoxInstanceWithArea(area CellArea) Widget {
 	return goret
 }
 
-// NewComboBoxInstanceWithAreaAndEntry wraps gtk_combo_box_new_with_area_and_entry
+// NewComboBoxWithAreaAndEntry wraps gtk_combo_box_new_with_area_and_entry
 // 
 // The function takes the following parameters:
 // 
@@ -101251,7 +101251,7 @@ func NewComboBoxInstanceWithArea(area CellArea) Widget {
 // Creates a new empty #GtkComboBox with an entry.
 // 
 // The new combo box will use @area to layout cells.
-func NewComboBoxInstanceWithAreaAndEntry(area CellArea) Widget {
+func NewComboBoxWithAreaAndEntry(area CellArea) Widget {
 	var carg1 *C.GtkCellArea // in, none, converted
 	var cret  *C.GtkWidget   // return, none, converted
 
@@ -101267,13 +101267,13 @@ func NewComboBoxInstanceWithAreaAndEntry(area CellArea) Widget {
 	return goret
 }
 
-// NewComboBoxInstanceWithEntry wraps gtk_combo_box_new_with_entry
+// NewComboBoxWithEntry wraps gtk_combo_box_new_with_entry
 // The function returns the following values:
 // 
 // 	- goret Widget 
 //
 // Creates a new empty #GtkComboBox with an entry.
-func NewComboBoxInstanceWithEntry() Widget {
+func NewComboBoxWithEntry() Widget {
 	var cret *C.GtkWidget // return, none, converted
 
 	cret = C.gtk_combo_box_new_with_entry()
@@ -101285,7 +101285,7 @@ func NewComboBoxInstanceWithEntry() Widget {
 	return goret
 }
 
-// NewComboBoxInstanceWithModel wraps gtk_combo_box_new_with_model
+// NewComboBoxWithModel wraps gtk_combo_box_new_with_model
 // 
 // The function takes the following parameters:
 // 
@@ -101296,7 +101296,7 @@ func NewComboBoxInstanceWithEntry() Widget {
 // 	- goret Widget 
 //
 // Creates a new #GtkComboBox with the model initialized to @model.
-func NewComboBoxInstanceWithModel(model TreeModel) Widget {
+func NewComboBoxWithModel(model TreeModel) Widget {
 	var carg1 *C.GtkTreeModel // in, none, converted
 	var cret  *C.GtkWidget    // return, none, converted
 
@@ -101312,7 +101312,7 @@ func NewComboBoxInstanceWithModel(model TreeModel) Widget {
 	return goret
 }
 
-// NewComboBoxInstanceWithModelAndEntry wraps gtk_combo_box_new_with_model_and_entry
+// NewComboBoxWithModelAndEntry wraps gtk_combo_box_new_with_model_and_entry
 // 
 // The function takes the following parameters:
 // 
@@ -101324,7 +101324,7 @@ func NewComboBoxInstanceWithModel(model TreeModel) Widget {
 //
 // Creates a new empty #GtkComboBox with an entry
 // and with the model initialized to @model.
-func NewComboBoxInstanceWithModelAndEntry(model TreeModel) Widget {
+func NewComboBoxWithModelAndEntry(model TreeModel) Widget {
 	var carg1 *C.GtkTreeModel // in, none, converted
 	var cret  *C.GtkWidget    // return, none, converted
 
@@ -102292,14 +102292,14 @@ func UnsafeComboBoxTextToGlibFull(c ComboBoxText) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewComboBoxTextInstance wraps gtk_combo_box_text_new
+// NewComboBoxText wraps gtk_combo_box_text_new
 // The function returns the following values:
 // 
 // 	- goret Widget 
 //
 // Creates a new #GtkComboBoxText, which is a #GtkComboBox just displaying
 // strings.
-func NewComboBoxTextInstance() Widget {
+func NewComboBoxText() Widget {
 	var cret *C.GtkWidget // return, none, converted
 
 	cret = C.gtk_combo_box_text_new()
@@ -102311,14 +102311,14 @@ func NewComboBoxTextInstance() Widget {
 	return goret
 }
 
-// NewComboBoxTextInstanceWithEntry wraps gtk_combo_box_text_new_with_entry
+// NewComboBoxTextWithEntry wraps gtk_combo_box_text_new_with_entry
 // The function returns the following values:
 // 
 // 	- goret Widget 
 //
 // Creates a new #GtkComboBoxText, which is a #GtkComboBox just displaying
 // strings. The combo box created by this function has an entry.
-func NewComboBoxTextInstanceWithEntry() Widget {
+func NewComboBoxTextWithEntry() Widget {
 	var cret *C.GtkWidget // return, none, converted
 
 	cret = C.gtk_combo_box_text_new_with_entry()
@@ -102697,13 +102697,13 @@ func UnsafeEventBoxToGlibFull(c EventBox) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewEventBoxInstance wraps gtk_event_box_new
+// NewEventBox wraps gtk_event_box_new
 // The function returns the following values:
 // 
 // 	- goret Widget 
 //
 // Creates a new #GtkEventBox.
-func NewEventBoxInstance() Widget {
+func NewEventBox() Widget {
 	var cret *C.GtkWidget // return, none, converted
 
 	cret = C.gtk_event_box_new()
@@ -103129,7 +103129,7 @@ func UnsafeExpanderToGlibFull(c Expander) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewExpanderInstance wraps gtk_expander_new
+// NewExpander wraps gtk_expander_new
 // 
 // The function takes the following parameters:
 // 
@@ -103140,7 +103140,7 @@ func UnsafeExpanderToGlibFull(c Expander) unsafe.Pointer {
 // 	- goret Widget 
 //
 // Creates a new expander using @label as the text of the label.
-func NewExpanderInstance(label string) Widget {
+func NewExpander(label string) Widget {
 	var carg1 *C.gchar     // in, none, string, nullable-string
 	var cret  *C.GtkWidget // return, none, converted
 
@@ -103159,7 +103159,7 @@ func NewExpanderInstance(label string) Widget {
 	return goret
 }
 
-// NewExpanderInstanceWithMnemonic wraps gtk_expander_new_with_mnemonic
+// NewExpanderWithMnemonic wraps gtk_expander_new_with_mnemonic
 // 
 // The function takes the following parameters:
 // 
@@ -103176,7 +103176,7 @@ func NewExpanderInstance(label string) Widget {
 // underscores). The first underlined character represents a keyboard
 // accelerator called a mnemonic.
 // Pressing Alt and that key activates the button.
-func NewExpanderInstanceWithMnemonic(label string) Widget {
+func NewExpanderWithMnemonic(label string) Widget {
 	var carg1 *C.gchar     // in, none, string, nullable-string
 	var cret  *C.GtkWidget // return, none, converted
 
@@ -103677,7 +103677,7 @@ func UnsafeFileChooserButtonToGlibFull(c FileChooserButton) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewFileChooserButtonInstance wraps gtk_file_chooser_button_new
+// NewFileChooserButton wraps gtk_file_chooser_button_new
 // 
 // The function takes the following parameters:
 // 
@@ -103689,7 +103689,7 @@ func UnsafeFileChooserButtonToGlibFull(c FileChooserButton) unsafe.Pointer {
 // 	- goret Widget 
 //
 // Creates a new file-selecting button widget.
-func NewFileChooserButtonInstance(title string, action FileChooserAction) Widget {
+func NewFileChooserButton(title string, action FileChooserAction) Widget {
 	var carg1 *C.gchar               // in, none, string, casted *C.gchar
 	var carg2 C.GtkFileChooserAction // in, none, casted
 	var cret  *C.GtkWidget           // return, none, converted
@@ -103709,7 +103709,7 @@ func NewFileChooserButtonInstance(title string, action FileChooserAction) Widget
 	return goret
 }
 
-// NewFileChooserButtonInstanceWithDialog wraps gtk_file_chooser_button_new_with_dialog
+// NewFileChooserButtonWithDialog wraps gtk_file_chooser_button_new_with_dialog
 // 
 // The function takes the following parameters:
 // 
@@ -103729,7 +103729,7 @@ func NewFileChooserButtonInstance(title string, action FileChooserAction) Widget
 // Also note that the dialog needs to have its confirmative button
 // added with response %GTK_RESPONSE_ACCEPT or %GTK_RESPONSE_OK in
 // order for the button to take over the file selected in the dialog.
-func NewFileChooserButtonInstanceWithDialog(dialog Dialog) Widget {
+func NewFileChooserButtonWithDialog(dialog Dialog) Widget {
 	var carg1 *C.GtkWidget // in, none, converted, casted *C.GtkDialog
 	var cret  *C.GtkWidget // return, none, converted
 
@@ -103909,7 +103909,7 @@ func UnsafeFileChooserWidgetToGlibFull(c FileChooserWidget) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewFileChooserWidgetInstance wraps gtk_file_chooser_widget_new
+// NewFileChooserWidget wraps gtk_file_chooser_widget_new
 // 
 // The function takes the following parameters:
 // 
@@ -103922,7 +103922,7 @@ func UnsafeFileChooserWidgetToGlibFull(c FileChooserWidget) unsafe.Pointer {
 // Creates a new #GtkFileChooserWidget. This is a file chooser widget that can
 // be embedded in custom windows, and it is the same widget that is used by
 // #GtkFileChooserDialog.
-func NewFileChooserWidgetInstance(action FileChooserAction) Widget {
+func NewFileChooserWidget(action FileChooserAction) Widget {
 	var carg1 C.GtkFileChooserAction // in, none, casted
 	var cret  *C.GtkWidget           // return, none, converted
 
@@ -104035,14 +104035,14 @@ func UnsafeFlowBoxChildToGlibFull(c FlowBoxChild) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewFlowBoxChildInstance wraps gtk_flow_box_child_new
+// NewFlowBoxChild wraps gtk_flow_box_child_new
 // The function returns the following values:
 // 
 // 	- goret Widget 
 //
 // Creates a new #GtkFlowBoxChild, to be used as a child
 // of a #GtkFlowBox.
-func NewFlowBoxChildInstance() Widget {
+func NewFlowBoxChild() Widget {
 	var cret *C.GtkWidget // return, none, converted
 
 	cret = C.gtk_flow_box_child_new()
@@ -104285,13 +104285,13 @@ func UnsafeFontButtonToGlibFull(c FontButton) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewFontButtonInstance wraps gtk_font_button_new
+// NewFontButton wraps gtk_font_button_new
 // The function returns the following values:
 // 
 // 	- goret Widget 
 //
 // Creates a new font picker widget.
-func NewFontButtonInstance() Widget {
+func NewFontButton() Widget {
 	var cret *C.GtkWidget // return, none, converted
 
 	cret = C.gtk_font_button_new()
@@ -104303,7 +104303,7 @@ func NewFontButtonInstance() Widget {
 	return goret
 }
 
-// NewFontButtonInstanceWithFont wraps gtk_font_button_new_with_font
+// NewFontButtonWithFont wraps gtk_font_button_new_with_font
 // 
 // The function takes the following parameters:
 // 
@@ -104314,7 +104314,7 @@ func NewFontButtonInstance() Widget {
 // 	- goret Widget 
 //
 // Creates a new font picker widget.
-func NewFontButtonInstanceWithFont(fontname string) Widget {
+func NewFontButtonWithFont(fontname string) Widget {
 	var carg1 *C.gchar     // in, none, string, casted *C.gchar
 	var cret  *C.GtkWidget // return, none, converted
 
@@ -104642,13 +104642,13 @@ func UnsafeFontChooserWidgetToGlibFull(c FontChooserWidget) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewFontChooserWidgetInstance wraps gtk_font_chooser_widget_new
+// NewFontChooserWidget wraps gtk_font_chooser_widget_new
 // The function returns the following values:
 // 
 // 	- goret Widget 
 //
 // Creates a new #GtkFontChooserWidget.
-func NewFontChooserWidgetInstance() Widget {
+func NewFontChooserWidget() Widget {
 	var cret *C.GtkWidget // return, none, converted
 
 	cret = C.gtk_font_chooser_widget_new()
@@ -104912,7 +104912,7 @@ func UnsafeFrameToGlibFull(c Frame) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewFrameInstance wraps gtk_frame_new
+// NewFrame wraps gtk_frame_new
 // 
 // The function takes the following parameters:
 // 
@@ -104924,7 +104924,7 @@ func UnsafeFrameToGlibFull(c Frame) unsafe.Pointer {
 //
 // Creates a new #GtkFrame, with optional label @label.
 // If @label is %NULL, the label is omitted.
-func NewFrameInstance(label string) Widget {
+func NewFrame(label string) Widget {
 	var carg1 *C.gchar     // in, none, string, nullable-string
 	var cret  *C.GtkWidget // return, none, converted
 
@@ -105928,13 +105928,13 @@ func UnsafeImageToGlibFull(c Image) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewImageInstance wraps gtk_image_new
+// NewImage wraps gtk_image_new
 // The function returns the following values:
 // 
 // 	- goret Widget 
 //
 // Creates a new empty #GtkImage widget.
-func NewImageInstance() Widget {
+func NewImage() Widget {
 	var cret *C.GtkWidget // return, none, converted
 
 	cret = C.gtk_image_new()
@@ -105946,7 +105946,7 @@ func NewImageInstance() Widget {
 	return goret
 }
 
-// NewImageInstanceFromFile wraps gtk_image_new_from_file
+// NewImageFromFile wraps gtk_image_new_from_file
 // 
 // The function takes the following parameters:
 // 
@@ -105972,7 +105972,7 @@ func NewImageInstance() Widget {
 // The storage type (gtk_image_get_storage_type()) of the returned
 // image is not defined, it will be whatever is appropriate for
 // displaying the file.
-func NewImageInstanceFromFile(filename string) Widget {
+func NewImageFromFile(filename string) Widget {
 	var carg1 *C.gchar     // in, none, string, casted *C.gchar
 	var cret  *C.GtkWidget // return, none, converted
 
@@ -105989,7 +105989,7 @@ func NewImageInstanceFromFile(filename string) Widget {
 	return goret
 }
 
-// NewImageInstanceFromGIcon wraps gtk_image_new_from_gicon
+// NewImageFromGIcon wraps gtk_image_new_from_gicon
 // 
 // The function takes the following parameters:
 // 
@@ -106004,7 +106004,7 @@ func NewImageInstanceFromFile(filename string) Widget {
 // If the icon name isn’t known, a “broken image” icon will be
 // displayed instead.  If the current icon theme is changed, the icon
 // will be updated appropriately.
-func NewImageInstanceFromGIcon(icon gio.Icon, size int) Widget {
+func NewImageFromGIcon(icon gio.Icon, size int) Widget {
 	var carg1 *C.GIcon      // in, none, converted
 	var carg2 C.GtkIconSize // in, none, casted, casted C.gint
 	var cret  *C.GtkWidget  // return, none, converted
@@ -106023,7 +106023,7 @@ func NewImageInstanceFromGIcon(icon gio.Icon, size int) Widget {
 	return goret
 }
 
-// NewImageInstanceFromIconName wraps gtk_image_new_from_icon_name
+// NewImageFromIconName wraps gtk_image_new_from_icon_name
 // 
 // The function takes the following parameters:
 // 
@@ -106038,7 +106038,7 @@ func NewImageInstanceFromGIcon(icon gio.Icon, size int) Widget {
 // If the icon name isn’t known, a “broken image” icon will be
 // displayed instead.  If the current icon theme is changed, the icon
 // will be updated appropriately.
-func NewImageInstanceFromIconName(iconName string, size int) Widget {
+func NewImageFromIconName(iconName string, size int) Widget {
 	var carg1 *C.gchar      // in, none, string, nullable-string
 	var carg2 C.GtkIconSize // in, none, casted, casted C.gint
 	var cret  *C.GtkWidget  // return, none, converted
@@ -106060,7 +106060,7 @@ func NewImageInstanceFromIconName(iconName string, size int) Widget {
 	return goret
 }
 
-// NewImageInstanceFromPixbuf wraps gtk_image_new_from_pixbuf
+// NewImageFromPixbuf wraps gtk_image_new_from_pixbuf
 // 
 // The function takes the following parameters:
 // 
@@ -106078,7 +106078,7 @@ func NewImageInstanceFromIconName(iconName string, size int) Widget {
 // Note that this function just creates an #GtkImage from the pixbuf. The
 // #GtkImage created will not react to state changes. Should you want that,
 // you should use gtk_image_new_from_icon_name().
-func NewImageInstanceFromPixbuf(pixbuf gdkpixbuf.Pixbuf) Widget {
+func NewImageFromPixbuf(pixbuf gdkpixbuf.Pixbuf) Widget {
 	var carg1 *C.GdkPixbuf // in, none, converted, nullable
 	var cret  *C.GtkWidget // return, none, converted
 
@@ -106096,7 +106096,7 @@ func NewImageInstanceFromPixbuf(pixbuf gdkpixbuf.Pixbuf) Widget {
 	return goret
 }
 
-// NewImageInstanceFromResource wraps gtk_image_new_from_resource
+// NewImageFromResource wraps gtk_image_new_from_resource
 // 
 // The function takes the following parameters:
 // 
@@ -106122,7 +106122,7 @@ func NewImageInstanceFromPixbuf(pixbuf gdkpixbuf.Pixbuf) Widget {
 // The storage type (gtk_image_get_storage_type()) of the returned
 // image is not defined, it will be whatever is appropriate for
 // displaying the file.
-func NewImageInstanceFromResource(resourcePath string) Widget {
+func NewImageFromResource(resourcePath string) Widget {
 	var carg1 *C.gchar     // in, none, string, casted *C.gchar
 	var cret  *C.GtkWidget // return, none, converted
 
@@ -106684,13 +106684,13 @@ func UnsafeInfoBarToGlibFull(c InfoBar) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewInfoBarInstance wraps gtk_info_bar_new
+// NewInfoBar wraps gtk_info_bar_new
 // The function returns the following values:
 // 
 // 	- goret Widget 
 //
 // Creates a new #GtkInfoBar object.
-func NewInfoBarInstance() Widget {
+func NewInfoBar() Widget {
 	var cret *C.GtkWidget // return, none, converted
 
 	cret = C.gtk_info_bar_new()
@@ -107765,7 +107765,7 @@ func UnsafeLabelToGlibFull(c Label) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewLabelInstance wraps gtk_label_new
+// NewLabel wraps gtk_label_new
 // 
 // The function takes the following parameters:
 // 
@@ -107777,7 +107777,7 @@ func UnsafeLabelToGlibFull(c Label) unsafe.Pointer {
 //
 // Creates a new label with the given text inside it. You can
 // pass %NULL to get an empty label widget.
-func NewLabelInstance(str string) Widget {
+func NewLabel(str string) Widget {
 	var carg1 *C.gchar     // in, none, string, nullable-string
 	var cret  *C.GtkWidget // return, none, converted
 
@@ -107796,7 +107796,7 @@ func NewLabelInstance(str string) Widget {
 	return goret
 }
 
-// NewLabelInstanceWithMnemonic wraps gtk_label_new_with_mnemonic
+// NewLabelWithMnemonic wraps gtk_label_new_with_mnemonic
 // 
 // The function takes the following parameters:
 // 
@@ -107821,7 +107821,7 @@ func NewLabelInstance(str string) Widget {
 // widget. For instance, if the label is inside a button or menu item,
 // the button or menu item will automatically become the mnemonic widget
 // and be activated by the mnemonic.
-func NewLabelInstanceWithMnemonic(str string) Widget {
+func NewLabelWithMnemonic(str string) Widget {
 	var carg1 *C.gchar     // in, none, string, nullable-string
 	var cret  *C.GtkWidget // return, none, converted
 
@@ -109146,7 +109146,7 @@ func UnsafeLinkButtonToGlibFull(c LinkButton) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewLinkButtonInstance wraps gtk_link_button_new
+// NewLinkButton wraps gtk_link_button_new
 // 
 // The function takes the following parameters:
 // 
@@ -109157,7 +109157,7 @@ func UnsafeLinkButtonToGlibFull(c LinkButton) unsafe.Pointer {
 // 	- goret Widget 
 //
 // Creates a new #GtkLinkButton with the URI as its text.
-func NewLinkButtonInstance(uri string) Widget {
+func NewLinkButton(uri string) Widget {
 	var carg1 *C.gchar     // in, none, string, casted *C.gchar
 	var cret  *C.GtkWidget // return, none, converted
 
@@ -109174,7 +109174,7 @@ func NewLinkButtonInstance(uri string) Widget {
 	return goret
 }
 
-// NewLinkButtonInstanceWithLabel wraps gtk_link_button_new_with_label
+// NewLinkButtonWithLabel wraps gtk_link_button_new_with_label
 // 
 // The function takes the following parameters:
 // 
@@ -109186,7 +109186,7 @@ func NewLinkButtonInstance(uri string) Widget {
 // 	- goret Widget 
 //
 // Creates a new #GtkLinkButton containing a label.
-func NewLinkButtonInstanceWithLabel(uri string, label string) Widget {
+func NewLinkButtonWithLabel(uri string, label string) Widget {
 	var carg1 *C.gchar     // in, none, string, casted *C.gchar
 	var carg2 *C.gchar     // in, none, string, nullable-string
 	var cret  *C.GtkWidget // return, none, converted
@@ -109529,13 +109529,13 @@ func UnsafeListBoxRowToGlibFull(c ListBoxRow) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewListBoxRowInstance wraps gtk_list_box_row_new
+// NewListBoxRow wraps gtk_list_box_row_new
 // The function returns the following values:
 // 
 // 	- goret Widget 
 //
 // Creates a new #GtkListBoxRow, to be used as a child of a #GtkListBox.
-func NewListBoxRowInstance() Widget {
+func NewListBoxRow() Widget {
 	var cret *C.GtkWidget // return, none, converted
 
 	cret = C.gtk_list_box_row_new()
@@ -109874,7 +109874,7 @@ func UnsafeLockButtonToGlibFull(c LockButton) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewLockButtonInstance wraps gtk_lock_button_new
+// NewLockButton wraps gtk_lock_button_new
 // 
 // The function takes the following parameters:
 // 
@@ -109885,7 +109885,7 @@ func UnsafeLockButtonToGlibFull(c LockButton) unsafe.Pointer {
 // 	- goret Widget 
 //
 // Creates a new lock button which reflects the @permission.
-func NewLockButtonInstance(permission gio.Permission) Widget {
+func NewLockButton(permission gio.Permission) Widget {
 	var carg1 *C.GPermission // in, none, converted, nullable
 	var cret  *C.GtkWidget   // return, none, converted
 
@@ -110329,13 +110329,13 @@ func UnsafeMenuToGlibFull(c Menu) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewMenuInstance wraps gtk_menu_new
+// NewMenu wraps gtk_menu_new
 // The function returns the following values:
 // 
 // 	- goret Widget 
 //
 // Creates a new #GtkMenu
-func NewMenuInstance() Widget {
+func NewMenu() Widget {
 	var cret *C.GtkWidget // return, none, converted
 
 	cret = C.gtk_menu_new()
@@ -110347,7 +110347,7 @@ func NewMenuInstance() Widget {
 	return goret
 }
 
-// NewMenuInstanceFromModel wraps gtk_menu_new_from_model
+// NewMenuFromModel wraps gtk_menu_new_from_model
 // 
 // The function takes the following parameters:
 // 
@@ -110367,7 +110367,7 @@ func NewMenuInstance() Widget {
 // 
 // Actions can also be added using gtk_widget_insert_action_group() on the menu's
 // attach widget or on any of its parent widgets.
-func NewMenuInstanceFromModel(model gio.MenuModel) Widget {
+func NewMenuFromModel(model gio.MenuModel) Widget {
 	var carg1 *C.GMenuModel // in, none, converted
 	var cret  *C.GtkWidget  // return, none, converted
 
@@ -110971,13 +110971,13 @@ func UnsafeMenuBarToGlibFull(c MenuBar) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewMenuBarInstance wraps gtk_menu_bar_new
+// NewMenuBar wraps gtk_menu_bar_new
 // The function returns the following values:
 // 
 // 	- goret Widget 
 //
 // Creates a new #GtkMenuBar
-func NewMenuBarInstance() Widget {
+func NewMenuBar() Widget {
 	var cret *C.GtkWidget // return, none, converted
 
 	cret = C.gtk_menu_bar_new()
@@ -110989,7 +110989,7 @@ func NewMenuBarInstance() Widget {
 	return goret
 }
 
-// NewMenuBarInstanceFromModel wraps gtk_menu_bar_new_from_model
+// NewMenuBarFromModel wraps gtk_menu_bar_new_from_model
 // 
 // The function takes the following parameters:
 // 
@@ -111006,7 +111006,7 @@ func NewMenuBarInstance() Widget {
 // #GtkApplicationWindow to which the menu bar belongs - typically
 // by means of being contained within the #GtkApplicationWindows
 // widget hierarchy.
-func NewMenuBarInstanceFromModel(model gio.MenuModel) Widget {
+func NewMenuBarFromModel(model gio.MenuModel) Widget {
 	var carg1 *C.GMenuModel // in, none, converted
 	var cret  *C.GtkWidget  // return, none, converted
 
@@ -111351,13 +111351,13 @@ func UnsafeMenuItemToGlibFull(c MenuItem) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewMenuItemInstance wraps gtk_menu_item_new
+// NewMenuItem wraps gtk_menu_item_new
 // The function returns the following values:
 // 
 // 	- goret Widget 
 //
 // Creates a new #GtkMenuItem.
-func NewMenuItemInstance() Widget {
+func NewMenuItem() Widget {
 	var cret *C.GtkWidget // return, none, converted
 
 	cret = C.gtk_menu_item_new()
@@ -111369,7 +111369,7 @@ func NewMenuItemInstance() Widget {
 	return goret
 }
 
-// NewMenuItemInstanceWithLabel wraps gtk_menu_item_new_with_label
+// NewMenuItemWithLabel wraps gtk_menu_item_new_with_label
 // 
 // The function takes the following parameters:
 // 
@@ -111380,7 +111380,7 @@ func NewMenuItemInstance() Widget {
 // 	- goret Widget 
 //
 // Creates a new #GtkMenuItem whose child is a #GtkLabel.
-func NewMenuItemInstanceWithLabel(label string) Widget {
+func NewMenuItemWithLabel(label string) Widget {
 	var carg1 *C.gchar     // in, none, string, casted *C.gchar
 	var cret  *C.GtkWidget // return, none, converted
 
@@ -111397,7 +111397,7 @@ func NewMenuItemInstanceWithLabel(label string) Widget {
 	return goret
 }
 
-// NewMenuItemInstanceWithMnemonic wraps gtk_menu_item_new_with_mnemonic
+// NewMenuItemWithMnemonic wraps gtk_menu_item_new_with_mnemonic
 // 
 // The function takes the following parameters:
 // 
@@ -111412,7 +111412,7 @@ func NewMenuItemInstanceWithLabel(label string) Widget {
 // 
 // The label will be created using gtk_label_new_with_mnemonic(),
 // so underscores in @label indicate the mnemonic for the menu item.
-func NewMenuItemInstanceWithMnemonic(label string) Widget {
+func NewMenuItemWithMnemonic(label string) Widget {
 	var carg1 *C.gchar     // in, none, string, casted *C.gchar
 	var cret  *C.GtkWidget // return, none, converted
 
@@ -111902,13 +111902,13 @@ func UnsafeModelButtonToGlibFull(c ModelButton) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewModelButtonInstance wraps gtk_model_button_new
+// NewModelButton wraps gtk_model_button_new
 // The function returns the following values:
 // 
 // 	- goret Widget 
 //
 // Creates a new GtkModelButton.
-func NewModelButtonInstance() Widget {
+func NewModelButton() Widget {
 	var cret *C.GtkWidget // return, none, converted
 
 	cret = C.gtk_model_button_new()
@@ -112065,13 +112065,13 @@ func UnsafeOverlayToGlibFull(c Overlay) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewOverlayInstance wraps gtk_overlay_new
+// NewOverlay wraps gtk_overlay_new
 // The function returns the following values:
 // 
 // 	- goret Widget 
 //
 // Creates a new #GtkOverlay.
-func NewOverlayInstance() Widget {
+func NewOverlay() Widget {
 	var cret *C.GtkWidget // return, none, converted
 
 	cret = C.gtk_overlay_new()
@@ -112578,7 +112578,7 @@ func UnsafePopoverToGlibFull(c Popover) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewPopoverInstance wraps gtk_popover_new
+// NewPopover wraps gtk_popover_new
 // 
 // The function takes the following parameters:
 // 
@@ -112589,7 +112589,7 @@ func UnsafePopoverToGlibFull(c Popover) unsafe.Pointer {
 // 	- goret Widget 
 //
 // Creates a new popover to point to @relative_to
-func NewPopoverInstance(relativeTo Widget) Widget {
+func NewPopover(relativeTo Widget) Widget {
 	var carg1 *C.GtkWidget // in, none, converted, nullable
 	var cret  *C.GtkWidget // return, none, converted
 
@@ -112607,7 +112607,7 @@ func NewPopoverInstance(relativeTo Widget) Widget {
 	return goret
 }
 
-// NewPopoverInstanceFromModel wraps gtk_popover_new_from_model
+// NewPopoverFromModel wraps gtk_popover_new_from_model
 // 
 // The function takes the following parameters:
 // 
@@ -112628,7 +112628,7 @@ func NewPopoverInstance(relativeTo Widget) Widget {
 // 
 // Actions can also be added using gtk_widget_insert_action_group()
 // on the menus attach widget or on any of its parent widgets.
-func NewPopoverInstanceFromModel(relativeTo Widget, model gio.MenuModel) Widget {
+func NewPopoverFromModel(relativeTo Widget, model gio.MenuModel) Widget {
 	var carg1 *C.GtkWidget  // in, none, converted, nullable
 	var carg2 *C.GMenuModel // in, none, converted
 	var cret  *C.GtkWidget  // return, none, converted
@@ -113173,13 +113173,13 @@ func UnsafePopoverMenuToGlibFull(c PopoverMenu) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewPopoverMenuInstance wraps gtk_popover_menu_new
+// NewPopoverMenu wraps gtk_popover_menu_new
 // The function returns the following values:
 // 
 // 	- goret Widget 
 //
 // Creates a new popover menu.
-func NewPopoverMenuInstance() Widget {
+func NewPopoverMenu() Widget {
 	var cret *C.GtkWidget // return, none, converted
 
 	cret = C.gtk_popover_menu_new()
@@ -113396,7 +113396,7 @@ func UnsafeRecentChooserMenuToGlibFull(c RecentChooserMenu) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewRecentChooserMenuInstance wraps gtk_recent_chooser_menu_new
+// NewRecentChooserMenu wraps gtk_recent_chooser_menu_new
 // The function returns the following values:
 // 
 // 	- goret Widget 
@@ -113413,7 +113413,7 @@ func UnsafeRecentChooserMenuToGlibFull(c RecentChooserMenu) unsafe.Pointer {
 // This widget creates its own #GtkRecentManager object.  See the
 // gtk_recent_chooser_menu_new_for_manager() function to know how to create
 // a #GtkRecentChooserMenu widget bound to another #GtkRecentManager object.
-func NewRecentChooserMenuInstance() Widget {
+func NewRecentChooserMenu() Widget {
 	var cret *C.GtkWidget // return, none, converted
 
 	cret = C.gtk_recent_chooser_menu_new()
@@ -113425,7 +113425,7 @@ func NewRecentChooserMenuInstance() Widget {
 	return goret
 }
 
-// NewRecentChooserMenuInstanceForManager wraps gtk_recent_chooser_menu_new_for_manager
+// NewRecentChooserMenuForManager wraps gtk_recent_chooser_menu_new_for_manager
 // 
 // The function takes the following parameters:
 // 
@@ -113442,7 +113442,7 @@ func NewRecentChooserMenuInstance() Widget {
 // or if you have a customized instance of a #GtkRecentManager
 // object or if you wish to share a common #GtkRecentManager object
 // among multiple #GtkRecentChooser widgets.
-func NewRecentChooserMenuInstanceForManager(manager RecentManager) Widget {
+func NewRecentChooserMenuForManager(manager RecentManager) Widget {
 	var carg1 *C.GtkRecentManager // in, none, converted
 	var cret  *C.GtkWidget        // return, none, converted
 
@@ -113587,14 +113587,14 @@ func UnsafeRecentChooserWidgetToGlibFull(c RecentChooserWidget) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewRecentChooserWidgetInstance wraps gtk_recent_chooser_widget_new
+// NewRecentChooserWidget wraps gtk_recent_chooser_widget_new
 // The function returns the following values:
 // 
 // 	- goret Widget 
 //
 // Creates a new #GtkRecentChooserWidget object.  This is an embeddable widget
 // used to access the recently used resources list.
-func NewRecentChooserWidgetInstance() Widget {
+func NewRecentChooserWidget() Widget {
 	var cret *C.GtkWidget // return, none, converted
 
 	cret = C.gtk_recent_chooser_widget_new()
@@ -113606,7 +113606,7 @@ func NewRecentChooserWidgetInstance() Widget {
 	return goret
 }
 
-// NewRecentChooserWidgetInstanceForManager wraps gtk_recent_chooser_widget_new_for_manager
+// NewRecentChooserWidgetForManager wraps gtk_recent_chooser_widget_new_for_manager
 // 
 // The function takes the following parameters:
 // 
@@ -113620,7 +113620,7 @@ func NewRecentChooserWidgetInstance() Widget {
 // 
 // This is useful if you have implemented your own recent manager, or if you
 // have a customized instance of a #GtkRecentManager object.
-func NewRecentChooserWidgetInstanceForManager(manager RecentManager) Widget {
+func NewRecentChooserWidgetForManager(manager RecentManager) Widget {
 	var carg1 *C.GtkRecentManager // in, none, converted
 	var cret  *C.GtkWidget        // return, none, converted
 
@@ -113780,13 +113780,13 @@ func UnsafeRevealerToGlibFull(c Revealer) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewRevealerInstance wraps gtk_revealer_new
+// NewRevealer wraps gtk_revealer_new
 // The function returns the following values:
 // 
 // 	- goret Widget 
 //
 // Creates a new #GtkRevealer.
-func NewRevealerInstance() Widget {
+func NewRevealer() Widget {
 	var cret *C.GtkWidget // return, none, converted
 
 	cret = C.gtk_revealer_new()
@@ -114115,7 +114115,7 @@ func UnsafeScaleButtonToGlibFull(c ScaleButton) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewScaleButtonInstance wraps gtk_scale_button_new
+// NewScaleButton wraps gtk_scale_button_new
 // 
 // The function takes the following parameters:
 // 
@@ -114134,7 +114134,7 @@ func UnsafeScaleButtonToGlibFull(c ScaleButton) unsafe.Pointer {
 //
 // Creates a #GtkScaleButton, with a range between @min and @max, with
 // a stepping of @step.
-func NewScaleButtonInstance(size int, min float64, max float64, step float64, icons []string) Widget {
+func NewScaleButton(size int, min float64, max float64, step float64, icons []string) Widget {
 	var carg1 C.GtkIconSize // in, none, casted, casted C.gint
 	var carg2 C.gdouble     // in, none, casted
 	var carg3 C.gdouble     // in, none, casted
@@ -114851,7 +114851,7 @@ func UnsafeScrolledWindowToGlibFull(c ScrolledWindow) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewScrolledWindowInstance wraps gtk_scrolled_window_new
+// NewScrolledWindow wraps gtk_scrolled_window_new
 // 
 // The function takes the following parameters:
 // 
@@ -114868,7 +114868,7 @@ func UnsafeScrolledWindowToGlibFull(c ScrolledWindow) unsafe.Pointer {
 // shared with the scrollbars and the child widget to keep the bars in sync
 // with the child. Usually you want to pass %NULL for the adjustments, which
 // will cause the scrolled window to create them for you.
-func NewScrolledWindowInstance(hadjustment Adjustment, vadjustment Adjustment) Widget {
+func NewScrolledWindow(hadjustment Adjustment, vadjustment Adjustment) Widget {
 	var carg1 *C.GtkAdjustment // in, none, converted, nullable
 	var carg2 *C.GtkAdjustment // in, none, converted, nullable
 	var cret  *C.GtkWidget     // return, none, converted
@@ -115751,7 +115751,7 @@ func UnsafeSearchBarToGlibFull(c SearchBar) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewSearchBarInstance wraps gtk_search_bar_new
+// NewSearchBar wraps gtk_search_bar_new
 // The function returns the following values:
 // 
 // 	- goret Widget 
@@ -115759,7 +115759,7 @@ func UnsafeSearchBarToGlibFull(c SearchBar) unsafe.Pointer {
 // Creates a #GtkSearchBar. You will need to tell it about
 // which widget is going to be your text entry using
 // gtk_search_bar_connect_entry().
-func NewSearchBarInstance() Widget {
+func NewSearchBar() Widget {
 	var cret *C.GtkWidget // return, none, converted
 
 	cret = C.gtk_search_bar_new()
@@ -115961,13 +115961,13 @@ func UnsafeSeparatorMenuItemToGlibFull(c SeparatorMenuItem) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewSeparatorMenuItemInstance wraps gtk_separator_menu_item_new
+// NewSeparatorMenuItem wraps gtk_separator_menu_item_new
 // The function returns the following values:
 // 
 // 	- goret Widget 
 //
 // Creates a new #GtkSeparatorMenuItem.
-func NewSeparatorMenuItemInstance() Widget {
+func NewSeparatorMenuItem() Widget {
 	var cret *C.GtkWidget // return, none, converted
 
 	cret = C.gtk_separator_menu_item_new()
@@ -116078,7 +116078,7 @@ func UnsafeShortcutLabelToGlibFull(c ShortcutLabel) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewShortcutLabelInstance wraps gtk_shortcut_label_new
+// NewShortcutLabel wraps gtk_shortcut_label_new
 // 
 // The function takes the following parameters:
 // 
@@ -116089,7 +116089,7 @@ func UnsafeShortcutLabelToGlibFull(c ShortcutLabel) unsafe.Pointer {
 // 	- goret Widget 
 //
 // Creates a new #GtkShortcutLabel with @accelerator set.
-func NewShortcutLabelInstance(accelerator string) Widget {
+func NewShortcutLabel(accelerator string) Widget {
 	var carg1 *C.gchar     // in, none, string, casted *C.gchar
 	var cret  *C.GtkWidget // return, full, converted
 
@@ -116505,13 +116505,13 @@ func UnsafeStackSidebarToGlibFull(c StackSidebar) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewStackSidebarInstance wraps gtk_stack_sidebar_new
+// NewStackSidebar wraps gtk_stack_sidebar_new
 // The function returns the following values:
 // 
 // 	- goret Widget 
 //
 // Creates a new sidebar.
-func NewStackSidebarInstance() Widget {
+func NewStackSidebar() Widget {
 	var cret *C.GtkWidget // return, none, converted
 
 	cret = C.gtk_stack_sidebar_new()
@@ -116673,13 +116673,13 @@ func UnsafeStackSwitcherToGlibFull(c StackSwitcher) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewStackSwitcherInstance wraps gtk_stack_switcher_new
+// NewStackSwitcher wraps gtk_stack_switcher_new
 // The function returns the following values:
 // 
 // 	- goret Widget 
 //
 // Create a new #GtkStackSwitcher.
-func NewStackSwitcherInstance() Widget {
+func NewStackSwitcher() Widget {
 	var cret *C.GtkWidget // return, none, converted
 
 	cret = C.gtk_stack_switcher_new()
@@ -116903,13 +116903,13 @@ func UnsafeStatusbarToGlibFull(c Statusbar) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewStatusbarInstance wraps gtk_statusbar_new
+// NewStatusbar wraps gtk_statusbar_new
 // The function returns the following values:
 // 
 // 	- goret Widget 
 //
 // Creates a new #GtkStatusbar ready for messages.
-func NewStatusbarInstance() Widget {
+func NewStatusbar() Widget {
 	var cret *C.GtkWidget // return, none, converted
 
 	cret = C.gtk_statusbar_new()
@@ -117366,13 +117366,13 @@ func UnsafeToggleButtonToGlibFull(c ToggleButton) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewToggleButtonInstance wraps gtk_toggle_button_new
+// NewToggleButton wraps gtk_toggle_button_new
 // The function returns the following values:
 // 
 // 	- goret Widget 
 //
 // Creates a new toggle button. A widget should be packed into the button, as in gtk_button_new().
-func NewToggleButtonInstance() Widget {
+func NewToggleButton() Widget {
 	var cret *C.GtkWidget // return, none, converted
 
 	cret = C.gtk_toggle_button_new()
@@ -117384,7 +117384,7 @@ func NewToggleButtonInstance() Widget {
 	return goret
 }
 
-// NewToggleButtonInstanceWithLabel wraps gtk_toggle_button_new_with_label
+// NewToggleButtonWithLabel wraps gtk_toggle_button_new_with_label
 // 
 // The function takes the following parameters:
 // 
@@ -117395,7 +117395,7 @@ func NewToggleButtonInstance() Widget {
 // 	- goret Widget 
 //
 // Creates a new toggle button with a text label.
-func NewToggleButtonInstanceWithLabel(label string) Widget {
+func NewToggleButtonWithLabel(label string) Widget {
 	var carg1 *C.gchar     // in, none, string, casted *C.gchar
 	var cret  *C.GtkWidget // return, none, converted
 
@@ -117412,7 +117412,7 @@ func NewToggleButtonInstanceWithLabel(label string) Widget {
 	return goret
 }
 
-// NewToggleButtonInstanceWithMnemonic wraps gtk_toggle_button_new_with_mnemonic
+// NewToggleButtonWithMnemonic wraps gtk_toggle_button_new_with_mnemonic
 // 
 // The function takes the following parameters:
 // 
@@ -117426,7 +117426,7 @@ func NewToggleButtonInstanceWithLabel(label string) Widget {
 // Creates a new #GtkToggleButton containing a label. The label
 // will be created using gtk_label_new_with_mnemonic(), so underscores
 // in @label indicate the mnemonic for the button.
-func NewToggleButtonInstanceWithMnemonic(label string) Widget {
+func NewToggleButtonWithMnemonic(label string) Widget {
 	var carg1 *C.gchar     // in, none, string, casted *C.gchar
 	var cret  *C.GtkWidget // return, none, converted
 
@@ -118023,13 +118023,13 @@ func UnsafeToolItemToGlibFull(c ToolItem) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewToolItemInstance wraps gtk_tool_item_new
+// NewToolItem wraps gtk_tool_item_new
 // The function returns the following values:
 // 
 // 	- goret ToolItem 
 //
 // Creates a new #GtkToolItem
-func NewToolItemInstance() ToolItem {
+func NewToolItem() ToolItem {
 	var cret *C.GtkToolItem // return, none, converted
 
 	cret = C.gtk_tool_item_new()
@@ -118977,7 +118977,7 @@ func UnsafeViewportToGlibFull(c Viewport) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewViewportInstance wraps gtk_viewport_new
+// NewViewport wraps gtk_viewport_new
 // 
 // The function takes the following parameters:
 // 
@@ -118990,7 +118990,7 @@ func UnsafeViewportToGlibFull(c Viewport) unsafe.Pointer {
 //
 // Creates a new #GtkViewport with the given adjustments, or with default
 // adjustments if none are given.
-func NewViewportInstance(hadjustment Adjustment, vadjustment Adjustment) Widget {
+func NewViewport(hadjustment Adjustment, vadjustment Adjustment) Widget {
 	var carg1 *C.GtkAdjustment // in, none, converted, nullable
 	var carg2 *C.GtkAdjustment // in, none, converted, nullable
 	var cret  *C.GtkWidget     // return, none, converted
@@ -119175,7 +119175,7 @@ func UnsafeVolumeButtonToGlibFull(c VolumeButton) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewVolumeButtonInstance wraps gtk_volume_button_new
+// NewVolumeButton wraps gtk_volume_button_new
 // The function returns the following values:
 // 
 // 	- goret Widget 
@@ -119183,7 +119183,7 @@ func UnsafeVolumeButtonToGlibFull(c VolumeButton) unsafe.Pointer {
 // Creates a #GtkVolumeButton, with a range between 0.0 and 1.0, with
 // a stepping of 0.02. Volume values can be obtained and modified using
 // the functions from #GtkScaleButton.
-func NewVolumeButtonInstance() Widget {
+func NewVolumeButton() Widget {
 	var cret *C.GtkWidget // return, none, converted
 
 	cret = C.gtk_volume_button_new()
@@ -120634,7 +120634,7 @@ func UnsafeWindowToGlibFull(c Window) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewWindowInstance wraps gtk_window_new
+// NewWindow wraps gtk_window_new
 // 
 // The function takes the following parameters:
 // 
@@ -120664,7 +120664,7 @@ func UnsafeWindowToGlibFull(c Window) unsafe.Pointer {
 // to the caller.
 // 
 // To delete a #GtkWindow, call gtk_widget_destroy().
-func NewWindowInstance(typ WindowType) Widget {
+func NewWindow(typ WindowType) Widget {
 	var carg1 C.GtkWindowType // in, none, casted
 	var cret  *C.GtkWidget    // return, none, converted
 
@@ -120680,7 +120680,7 @@ func NewWindowInstance(typ WindowType) Widget {
 	return goret
 }
 
-// WindowInstanceGetDefaultIconName wraps gtk_window_get_default_icon_name
+// WindowGetDefaultIconName wraps gtk_window_get_default_icon_name
 // The function returns the following values:
 // 
 // 	- goret string 
@@ -120690,7 +120690,7 @@ func NewWindowInstance(typ WindowType) Widget {
 // string is owned by GTK+ and should not be modified. It
 // is only valid until the next call to
 // gtk_window_set_default_icon_name().
-func WindowInstanceGetDefaultIconName() string {
+func WindowGetDefaultIconName() string {
 	var cret *C.gchar // return, none, string, casted *C.gchar
 
 	cret = C.gtk_window_get_default_icon_name()
@@ -120702,7 +120702,7 @@ func WindowInstanceGetDefaultIconName() string {
 	return goret
 }
 
-// WindowInstanceSetAutoStartupNotification wraps gtk_window_set_auto_startup_notification
+// WindowSetAutoStartupNotification wraps gtk_window_set_auto_startup_notification
 // 
 // The function takes the following parameters:
 // 
@@ -120717,7 +120717,7 @@ func WindowInstanceGetDefaultIconName() string {
 // In that example, you would disable startup notification
 // temporarily, show your splash screen, then re-enable it so that
 // showing the main window would automatically result in notification.
-func WindowInstanceSetAutoStartupNotification(setting bool) {
+func WindowSetAutoStartupNotification(setting bool) {
 	var carg1 C.gboolean // in
 
 	if setting {
@@ -120728,7 +120728,7 @@ func WindowInstanceSetAutoStartupNotification(setting bool) {
 	runtime.KeepAlive(setting)
 }
 
-// WindowInstanceSetDefaultIcon wraps gtk_window_set_default_icon
+// WindowSetDefaultIcon wraps gtk_window_set_default_icon
 // 
 // The function takes the following parameters:
 // 
@@ -120736,7 +120736,7 @@ func WindowInstanceSetAutoStartupNotification(setting bool) {
 //
 // Sets an icon to be used as fallback for windows that haven't
 // had gtk_window_set_icon() called on them from a pixbuf.
-func WindowInstanceSetDefaultIcon(icon gdkpixbuf.Pixbuf) {
+func WindowSetDefaultIcon(icon gdkpixbuf.Pixbuf) {
 	var carg1 *C.GdkPixbuf // in, none, converted
 
 	carg1 = (*C.GdkPixbuf)(gdkpixbuf.UnsafePixbufToGlibNone(icon))
@@ -120745,7 +120745,7 @@ func WindowInstanceSetDefaultIcon(icon gdkpixbuf.Pixbuf) {
 	runtime.KeepAlive(icon)
 }
 
-// WindowInstanceSetDefaultIconFromFile wraps gtk_window_set_default_icon_from_file
+// WindowSetDefaultIconFromFile wraps gtk_window_set_default_icon_from_file
 // 
 // The function takes the following parameters:
 // 
@@ -120759,7 +120759,7 @@ func WindowInstanceSetDefaultIcon(icon gdkpixbuf.Pixbuf) {
 // Sets an icon to be used as fallback for windows that haven't
 // had gtk_window_set_icon_list() called on them from a file
 // on disk. Warns on failure if @err is %NULL.
-func WindowInstanceSetDefaultIconFromFile(filename string) (bool, error) {
+func WindowSetDefaultIconFromFile(filename string) (bool, error) {
 	var carg1 *C.gchar   // in, none, string, casted *C.gchar
 	var cret  C.gboolean // return
 	var _cerr *C.GError  // out, full, converted, nullable
@@ -120783,7 +120783,7 @@ func WindowInstanceSetDefaultIconFromFile(filename string) (bool, error) {
 	return goret, _goerr
 }
 
-// WindowInstanceSetDefaultIconName wraps gtk_window_set_default_icon_name
+// WindowSetDefaultIconName wraps gtk_window_set_default_icon_name
 // 
 // The function takes the following parameters:
 // 
@@ -120792,7 +120792,7 @@ func WindowInstanceSetDefaultIconFromFile(filename string) (bool, error) {
 // Sets an icon to be used as fallback for windows that haven't
 // had gtk_window_set_icon_list() called on them from a named
 // themed icon, see gtk_window_set_icon_name().
-func WindowInstanceSetDefaultIconName(name string) {
+func WindowSetDefaultIconName(name string) {
 	var carg1 *C.gchar // in, none, string, casted *C.gchar
 
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(name)))
@@ -120802,7 +120802,7 @@ func WindowInstanceSetDefaultIconName(name string) {
 	runtime.KeepAlive(name)
 }
 
-// WindowInstanceSetInteractiveDebugging wraps gtk_window_set_interactive_debugging
+// WindowSetInteractiveDebugging wraps gtk_window_set_interactive_debugging
 // 
 // The function takes the following parameters:
 // 
@@ -120811,7 +120811,7 @@ func WindowInstanceSetDefaultIconName(name string) {
 // Opens or closes the [interactive debugger][interactive-debugging],
 // which offers access to the widget hierarchy of the application
 // and to useful debugging tools.
-func WindowInstanceSetInteractiveDebugging(enable bool) {
+func WindowSetInteractiveDebugging(enable bool) {
 	var carg1 C.gboolean // in
 
 	if enable {
@@ -123695,7 +123695,7 @@ func UnsafeAccelLabelToGlibFull(c AccelLabel) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewAccelLabelInstance wraps gtk_accel_label_new
+// NewAccelLabel wraps gtk_accel_label_new
 // 
 // The function takes the following parameters:
 // 
@@ -123706,7 +123706,7 @@ func UnsafeAccelLabelToGlibFull(c AccelLabel) unsafe.Pointer {
 // 	- goret Widget 
 //
 // Creates a new #GtkAccelLabel.
-func NewAccelLabelInstance(str string) Widget {
+func NewAccelLabel(str string) Widget {
 	var carg1 *C.gchar     // in, none, string, casted *C.gchar
 	var cret  *C.GtkWidget // return, none, converted
 
@@ -123983,13 +123983,13 @@ func UnsafeActionBarToGlibFull(c ActionBar) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewActionBarInstance wraps gtk_action_bar_new
+// NewActionBar wraps gtk_action_bar_new
 // The function returns the following values:
 // 
 // 	- goret Widget 
 //
 // Creates a new #GtkActionBar widget.
-func NewActionBarInstance() Widget {
+func NewActionBar() Widget {
 	var cret *C.GtkWidget // return, none, converted
 
 	cret = C.gtk_action_bar_new()
@@ -124346,7 +124346,7 @@ func UnsafeAppChooserButtonToGlibFull(c AppChooserButton) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewAppChooserButtonInstance wraps gtk_app_chooser_button_new
+// NewAppChooserButton wraps gtk_app_chooser_button_new
 // 
 // The function takes the following parameters:
 // 
@@ -124358,7 +124358,7 @@ func UnsafeAppChooserButtonToGlibFull(c AppChooserButton) unsafe.Pointer {
 //
 // Creates a new #GtkAppChooserButton for applications
 // that can handle content of the given type.
-func NewAppChooserButtonInstance(contentType string) Widget {
+func NewAppChooserButton(contentType string) Widget {
 	var carg1 *C.gchar     // in, none, string, casted *C.gchar
 	var cret  *C.GtkWidget // return, none, converted
 
@@ -124779,7 +124779,7 @@ func UnsafeAppChooserWidgetToGlibFull(c AppChooserWidget) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewAppChooserWidgetInstance wraps gtk_app_chooser_widget_new
+// NewAppChooserWidget wraps gtk_app_chooser_widget_new
 // 
 // The function takes the following parameters:
 // 
@@ -124791,7 +124791,7 @@ func UnsafeAppChooserWidgetToGlibFull(c AppChooserWidget) unsafe.Pointer {
 //
 // Creates a new #GtkAppChooserWidget for applications
 // that can handle content of the given type.
-func NewAppChooserWidgetInstance(contentType string) Widget {
+func NewAppChooserWidget(contentType string) Widget {
 	var carg1 *C.gchar     // in, none, string, casted *C.gchar
 	var cret  *C.GtkWidget // return, none, converted
 
@@ -125312,7 +125312,7 @@ func UnsafeApplicationWindowToGlibFull(c ApplicationWindow) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewApplicationWindowInstance wraps gtk_application_window_new
+// NewApplicationWindow wraps gtk_application_window_new
 // 
 // The function takes the following parameters:
 // 
@@ -125323,7 +125323,7 @@ func UnsafeApplicationWindowToGlibFull(c ApplicationWindow) unsafe.Pointer {
 // 	- goret Widget 
 //
 // Creates a new #GtkApplicationWindow.
-func NewApplicationWindowInstance(application Application) Widget {
+func NewApplicationWindow(application Application) Widget {
 	var carg1 *C.GtkApplication // in, none, converted
 	var cret  *C.GtkWidget      // return, none, converted
 
@@ -125550,7 +125550,7 @@ func UnsafeAspectFrameToGlibFull(c AspectFrame) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewAspectFrameInstance wraps gtk_aspect_frame_new
+// NewAspectFrame wraps gtk_aspect_frame_new
 // 
 // The function takes the following parameters:
 // 
@@ -125570,7 +125570,7 @@ func UnsafeAspectFrameToGlibFull(c AspectFrame) unsafe.Pointer {
 // 	- goret Widget 
 //
 // Create a new #GtkAspectFrame.
-func NewAspectFrameInstance(label string, xalign float32, yalign float32, ratio float32, obeyChild bool) Widget {
+func NewAspectFrame(label string, xalign float32, yalign float32, ratio float32, obeyChild bool) Widget {
 	var carg1 *C.gchar     // in, none, string, nullable-string
 	var carg2 C.gfloat     // in, none, casted
 	var carg3 C.gfloat     // in, none, casted
@@ -125992,13 +125992,13 @@ func UnsafeAssistantToGlibFull(c Assistant) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewAssistantInstance wraps gtk_assistant_new
+// NewAssistant wraps gtk_assistant_new
 // The function returns the following values:
 // 
 // 	- goret Widget 
 //
 // Creates a new #GtkAssistant.
-func NewAssistantInstance() Widget {
+func NewAssistant() Widget {
 	var cret *C.GtkWidget // return, none, converted
 
 	cret = C.gtk_assistant_new()
@@ -126699,13 +126699,13 @@ func UnsafeCheckButtonToGlibFull(c CheckButton) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewCheckButtonInstance wraps gtk_check_button_new
+// NewCheckButton wraps gtk_check_button_new
 // The function returns the following values:
 // 
 // 	- goret Widget 
 //
 // Creates a new #GtkCheckButton.
-func NewCheckButtonInstance() Widget {
+func NewCheckButton() Widget {
 	var cret *C.GtkWidget // return, none, converted
 
 	cret = C.gtk_check_button_new()
@@ -126717,7 +126717,7 @@ func NewCheckButtonInstance() Widget {
 	return goret
 }
 
-// NewCheckButtonInstanceWithLabel wraps gtk_check_button_new_with_label
+// NewCheckButtonWithLabel wraps gtk_check_button_new_with_label
 // 
 // The function takes the following parameters:
 // 
@@ -126728,7 +126728,7 @@ func NewCheckButtonInstance() Widget {
 // 	- goret Widget 
 //
 // Creates a new #GtkCheckButton with a #GtkLabel to the right of it.
-func NewCheckButtonInstanceWithLabel(label string) Widget {
+func NewCheckButtonWithLabel(label string) Widget {
 	var carg1 *C.gchar     // in, none, string, casted *C.gchar
 	var cret  *C.GtkWidget // return, none, converted
 
@@ -126745,7 +126745,7 @@ func NewCheckButtonInstanceWithLabel(label string) Widget {
 	return goret
 }
 
-// NewCheckButtonInstanceWithMnemonic wraps gtk_check_button_new_with_mnemonic
+// NewCheckButtonWithMnemonic wraps gtk_check_button_new_with_mnemonic
 // 
 // The function takes the following parameters:
 // 
@@ -126759,7 +126759,7 @@ func NewCheckButtonInstanceWithLabel(label string) Widget {
 // Creates a new #GtkCheckButton containing a label. The label
 // will be created using gtk_label_new_with_mnemonic(), so underscores
 // in @label indicate the mnemonic for the check button.
-func NewCheckButtonInstanceWithMnemonic(label string) Widget {
+func NewCheckButtonWithMnemonic(label string) Widget {
 	var carg1 *C.gchar     // in, none, string, casted *C.gchar
 	var cret  *C.GtkWidget // return, none, converted
 
@@ -126920,13 +126920,13 @@ func UnsafeCheckMenuItemToGlibFull(c CheckMenuItem) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewCheckMenuItemInstance wraps gtk_check_menu_item_new
+// NewCheckMenuItem wraps gtk_check_menu_item_new
 // The function returns the following values:
 // 
 // 	- goret Widget 
 //
 // Creates a new #GtkCheckMenuItem.
-func NewCheckMenuItemInstance() Widget {
+func NewCheckMenuItem() Widget {
 	var cret *C.GtkWidget // return, none, converted
 
 	cret = C.gtk_check_menu_item_new()
@@ -126938,7 +126938,7 @@ func NewCheckMenuItemInstance() Widget {
 	return goret
 }
 
-// NewCheckMenuItemInstanceWithLabel wraps gtk_check_menu_item_new_with_label
+// NewCheckMenuItemWithLabel wraps gtk_check_menu_item_new_with_label
 // 
 // The function takes the following parameters:
 // 
@@ -126949,7 +126949,7 @@ func NewCheckMenuItemInstance() Widget {
 // 	- goret Widget 
 //
 // Creates a new #GtkCheckMenuItem with a label.
-func NewCheckMenuItemInstanceWithLabel(label string) Widget {
+func NewCheckMenuItemWithLabel(label string) Widget {
 	var carg1 *C.gchar     // in, none, string, casted *C.gchar
 	var cret  *C.GtkWidget // return, none, converted
 
@@ -126966,7 +126966,7 @@ func NewCheckMenuItemInstanceWithLabel(label string) Widget {
 	return goret
 }
 
-// NewCheckMenuItemInstanceWithMnemonic wraps gtk_check_menu_item_new_with_mnemonic
+// NewCheckMenuItemWithMnemonic wraps gtk_check_menu_item_new_with_mnemonic
 // 
 // The function takes the following parameters:
 // 
@@ -126980,7 +126980,7 @@ func NewCheckMenuItemInstanceWithLabel(label string) Widget {
 // Creates a new #GtkCheckMenuItem containing a label. The label
 // will be created using gtk_label_new_with_mnemonic(), so underscores
 // in @label indicate the mnemonic for the menu item.
-func NewCheckMenuItemInstanceWithMnemonic(label string) Widget {
+func NewCheckMenuItemWithMnemonic(label string) Widget {
 	var carg1 *C.gchar     // in, none, string, casted *C.gchar
 	var cret  *C.GtkWidget // return, none, converted
 
@@ -127492,7 +127492,7 @@ func UnsafeDialogToGlibFull(c Dialog) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewDialogInstance wraps gtk_dialog_new
+// NewDialog wraps gtk_dialog_new
 // The function returns the following values:
 // 
 // 	- goret Widget 
@@ -127501,7 +127501,7 @@ func UnsafeDialogToGlibFull(c Dialog) unsafe.Pointer {
 // 
 // Widgets should not be packed into this #GtkWindow
 // directly, but into the @vbox and @action_area, as described above.
-func NewDialogInstance() Widget {
+func NewDialog() Widget {
 	var cret *C.GtkWidget // return, none, converted
 
 	cret = C.gtk_dialog_new()
@@ -128133,7 +128133,7 @@ func UnsafeFontChooserDialogToGlibFull(c FontChooserDialog) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewFontChooserDialogInstance wraps gtk_font_chooser_dialog_new
+// NewFontChooserDialog wraps gtk_font_chooser_dialog_new
 // 
 // The function takes the following parameters:
 // 
@@ -128145,7 +128145,7 @@ func UnsafeFontChooserDialogToGlibFull(c FontChooserDialog) unsafe.Pointer {
 // 	- goret Widget 
 //
 // Creates a new #GtkFontChooserDialog.
-func NewFontChooserDialogInstance(title string, parent Window) Widget {
+func NewFontChooserDialog(title string, parent Window) Widget {
 	var carg1 *C.gchar     // in, none, string, nullable-string
 	var carg2 *C.GtkWindow // in, none, converted, nullable
 	var cret  *C.GtkWidget // return, none, converted
@@ -128649,7 +128649,7 @@ func UnsafeMenuButtonToGlibFull(c MenuButton) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewMenuButtonInstance wraps gtk_menu_button_new
+// NewMenuButton wraps gtk_menu_button_new
 // The function returns the following values:
 // 
 // 	- goret Widget 
@@ -128657,7 +128657,7 @@ func UnsafeMenuButtonToGlibFull(c MenuButton) unsafe.Pointer {
 // Creates a new #GtkMenuButton widget with downwards-pointing
 // arrow as the only child. You can replace the child widget
 // with another #GtkWidget should you wish to.
-func NewMenuButtonInstance() Widget {
+func NewMenuButton() Widget {
 	var cret *C.GtkWidget // return, none, converted
 
 	cret = C.gtk_menu_button_new()
@@ -129317,14 +129317,14 @@ func UnsafeOffscreenWindowToGlibFull(c OffscreenWindow) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewOffscreenWindowInstance wraps gtk_offscreen_window_new
+// NewOffscreenWindow wraps gtk_offscreen_window_new
 // The function returns the following values:
 // 
 // 	- goret Widget 
 //
 // Creates a toplevel container widget that is used to retrieve
 // snapshots of widgets without showing them on the screen.
-func NewOffscreenWindowInstance() Widget {
+func NewOffscreenWindow() Widget {
 	var cret *C.GtkWidget // return, none, converted
 
 	cret = C.gtk_offscreen_window_new()
@@ -129699,7 +129699,7 @@ func UnsafePlacesSidebarToGlibFull(c PlacesSidebar) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewPlacesSidebarInstance wraps gtk_places_sidebar_new
+// NewPlacesSidebar wraps gtk_places_sidebar_new
 // The function returns the following values:
 // 
 // 	- goret Widget 
@@ -129709,7 +129709,7 @@ func UnsafePlacesSidebarToGlibFull(c PlacesSidebar) unsafe.Pointer {
 // The application should connect to at least the
 // #GtkPlacesSidebar::open-location signal to be notified
 // when the user makes a selection in the sidebar.
-func NewPlacesSidebarInstance() Widget {
+func NewPlacesSidebar() Widget {
 	var cret *C.GtkWidget // return, none, converted
 
 	cret = C.gtk_places_sidebar_new()
@@ -130607,7 +130607,7 @@ func UnsafeRadioButtonToGlibFull(c RadioButton) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewRadioButtonInstanceFromWidget wraps gtk_radio_button_new_from_widget
+// NewRadioButtonFromWidget wraps gtk_radio_button_new_from_widget
 // 
 // The function takes the following parameters:
 // 
@@ -130620,7 +130620,7 @@ func UnsafeRadioButtonToGlibFull(c RadioButton) unsafe.Pointer {
 // Creates a new #GtkRadioButton, adding it to the same group as
 // @radio_group_member. As with gtk_radio_button_new(), a widget
 // should be packed into the radio button.
-func NewRadioButtonInstanceFromWidget(radioGroupMember RadioButton) Widget {
+func NewRadioButtonFromWidget(radioGroupMember RadioButton) Widget {
 	var carg1 *C.GtkRadioButton // in, none, converted, nullable
 	var cret  *C.GtkWidget      // return, none, converted
 
@@ -130638,7 +130638,7 @@ func NewRadioButtonInstanceFromWidget(radioGroupMember RadioButton) Widget {
 	return goret
 }
 
-// NewRadioButtonInstanceWithLabelFromWidget wraps gtk_radio_button_new_with_label_from_widget
+// NewRadioButtonWithLabelFromWidget wraps gtk_radio_button_new_with_label_from_widget
 // 
 // The function takes the following parameters:
 // 
@@ -130651,7 +130651,7 @@ func NewRadioButtonInstanceFromWidget(radioGroupMember RadioButton) Widget {
 //
 // Creates a new #GtkRadioButton with a text label, adding it to
 // the same group as @radio_group_member.
-func NewRadioButtonInstanceWithLabelFromWidget(radioGroupMember RadioButton, label string) Widget {
+func NewRadioButtonWithLabelFromWidget(radioGroupMember RadioButton, label string) Widget {
 	var carg1 *C.GtkRadioButton // in, none, converted, nullable
 	var carg2 *C.gchar          // in, none, string, casted *C.gchar
 	var cret  *C.GtkWidget      // return, none, converted
@@ -130673,7 +130673,7 @@ func NewRadioButtonInstanceWithLabelFromWidget(radioGroupMember RadioButton, lab
 	return goret
 }
 
-// NewRadioButtonInstanceWithMnemonicFromWidget wraps gtk_radio_button_new_with_mnemonic_from_widget
+// NewRadioButtonWithMnemonicFromWidget wraps gtk_radio_button_new_with_mnemonic_from_widget
 // 
 // The function takes the following parameters:
 // 
@@ -130688,7 +130688,7 @@ func NewRadioButtonInstanceWithLabelFromWidget(radioGroupMember RadioButton, lab
 // Creates a new #GtkRadioButton containing a label. The label
 // will be created using gtk_label_new_with_mnemonic(), so underscores
 // in @label indicate the mnemonic for the button.
-func NewRadioButtonInstanceWithMnemonicFromWidget(radioGroupMember RadioButton, label string) Widget {
+func NewRadioButtonWithMnemonicFromWidget(radioGroupMember RadioButton, label string) Widget {
 	var carg1 *C.GtkRadioButton // in, none, converted, nullable
 	var carg2 *C.gchar          // in, none, string, casted *C.gchar
 	var cret  *C.GtkWidget      // return, none, converted
@@ -130955,7 +130955,7 @@ func UnsafeRadioMenuItemToGlibFull(c RadioMenuItem) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewRadioMenuItemInstanceFromWidget wraps gtk_radio_menu_item_new_from_widget
+// NewRadioMenuItemFromWidget wraps gtk_radio_menu_item_new_from_widget
 // 
 // The function takes the following parameters:
 // 
@@ -130966,7 +130966,7 @@ func UnsafeRadioMenuItemToGlibFull(c RadioMenuItem) unsafe.Pointer {
 // 	- goret Widget 
 //
 // Creates a new #GtkRadioMenuItem adding it to the same group as @group.
-func NewRadioMenuItemInstanceFromWidget(group RadioMenuItem) Widget {
+func NewRadioMenuItemFromWidget(group RadioMenuItem) Widget {
 	var carg1 *C.GtkRadioMenuItem // in, none, converted, nullable
 	var cret  *C.GtkWidget        // return, none, converted
 
@@ -130984,7 +130984,7 @@ func NewRadioMenuItemInstanceFromWidget(group RadioMenuItem) Widget {
 	return goret
 }
 
-// NewRadioMenuItemInstanceWithLabelFromWidget wraps gtk_radio_menu_item_new_with_label_from_widget
+// NewRadioMenuItemWithLabelFromWidget wraps gtk_radio_menu_item_new_with_label_from_widget
 // 
 // The function takes the following parameters:
 // 
@@ -130997,7 +130997,7 @@ func NewRadioMenuItemInstanceFromWidget(group RadioMenuItem) Widget {
 //
 // Creates a new GtkRadioMenuItem whose child is a simple GtkLabel.
 // The new #GtkRadioMenuItem is added to the same group as @group.
-func NewRadioMenuItemInstanceWithLabelFromWidget(group RadioMenuItem, label string) Widget {
+func NewRadioMenuItemWithLabelFromWidget(group RadioMenuItem, label string) Widget {
 	var carg1 *C.GtkRadioMenuItem // in, none, converted, nullable
 	var carg2 *C.gchar            // in, none, string, nullable-string
 	var cret  *C.GtkWidget        // return, none, converted
@@ -131021,7 +131021,7 @@ func NewRadioMenuItemInstanceWithLabelFromWidget(group RadioMenuItem, label stri
 	return goret
 }
 
-// NewRadioMenuItemInstanceWithMnemonicFromWidget wraps gtk_radio_menu_item_new_with_mnemonic_from_widget
+// NewRadioMenuItemWithMnemonicFromWidget wraps gtk_radio_menu_item_new_with_mnemonic_from_widget
 // 
 // The function takes the following parameters:
 // 
@@ -131038,7 +131038,7 @@ func NewRadioMenuItemInstanceWithLabelFromWidget(group RadioMenuItem, label stri
 // indicate the mnemonic for the menu item.
 // 
 // The new #GtkRadioMenuItem is added to the same group as @group.
-func NewRadioMenuItemInstanceWithMnemonicFromWidget(group RadioMenuItem, label string) Widget {
+func NewRadioMenuItemWithMnemonicFromWidget(group RadioMenuItem, label string) Widget {
 	var carg1 *C.GtkRadioMenuItem // in, none, converted, nullable
 	var carg2 *C.gchar            // in, none, string, nullable-string
 	var cret  *C.GtkWidget        // return, none, converted
@@ -131317,13 +131317,13 @@ func UnsafeSeparatorToolItemToGlibFull(c SeparatorToolItem) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewSeparatorToolItemInstance wraps gtk_separator_tool_item_new
+// NewSeparatorToolItem wraps gtk_separator_tool_item_new
 // The function returns the following values:
 // 
 // 	- goret ToolItem 
 //
 // Create a new #GtkSeparatorToolItem
-func NewSeparatorToolItemInstance() ToolItem {
+func NewSeparatorToolItem() ToolItem {
 	var cret *C.GtkToolItem // return, none, converted
 
 	cret = C.gtk_separator_tool_item_new()
@@ -131685,7 +131685,7 @@ func UnsafeToolButtonToGlibFull(c ToolButton) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewToolButtonInstance wraps gtk_tool_button_new
+// NewToolButton wraps gtk_tool_button_new
 // 
 // The function takes the following parameters:
 // 
@@ -131698,7 +131698,7 @@ func UnsafeToolButtonToGlibFull(c ToolButton) unsafe.Pointer {
 //
 // Creates a new #GtkToolButton using @icon_widget as contents and @label as
 // label.
-func NewToolButtonInstance(iconWidget Widget, label string) ToolItem {
+func NewToolButton(iconWidget Widget, label string) ToolItem {
 	var carg1 *C.GtkWidget   // in, none, converted, nullable
 	var carg2 *C.gchar       // in, none, string, nullable-string
 	var cret  *C.GtkToolItem // return, none, converted
@@ -132345,13 +132345,13 @@ func UnsafeAboutDialogToGlibFull(c AboutDialog) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewAboutDialogInstance wraps gtk_about_dialog_new
+// NewAboutDialog wraps gtk_about_dialog_new
 // The function returns the following values:
 // 
 // 	- goret Widget 
 //
 // Creates a new #GtkAboutDialog.
-func NewAboutDialogInstance() Widget {
+func NewAboutDialog() Widget {
 	var cret *C.GtkWidget // return, none, converted
 
 	cret = C.gtk_about_dialog_new()
@@ -133188,7 +133188,7 @@ func UnsafeAppChooserDialogToGlibFull(c AppChooserDialog) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewAppChooserDialogInstance wraps gtk_app_chooser_dialog_new
+// NewAppChooserDialog wraps gtk_app_chooser_dialog_new
 // 
 // The function takes the following parameters:
 // 
@@ -133202,7 +133202,7 @@ func UnsafeAppChooserDialogToGlibFull(c AppChooserDialog) unsafe.Pointer {
 //
 // Creates a new #GtkAppChooserDialog for the provided #GFile,
 // to allow the user to select an application for it.
-func NewAppChooserDialogInstance(parent Window, flags DialogFlags, file gio.File) Widget {
+func NewAppChooserDialog(parent Window, flags DialogFlags, file gio.File) Widget {
 	var carg1 *C.GtkWindow     // in, none, converted, nullable
 	var carg2 C.GtkDialogFlags // in, none, casted
 	var carg3 *C.GFile         // in, none, converted
@@ -133226,7 +133226,7 @@ func NewAppChooserDialogInstance(parent Window, flags DialogFlags, file gio.File
 	return goret
 }
 
-// NewAppChooserDialogInstanceForContentType wraps gtk_app_chooser_dialog_new_for_content_type
+// NewAppChooserDialogForContentType wraps gtk_app_chooser_dialog_new_for_content_type
 // 
 // The function takes the following parameters:
 // 
@@ -133240,7 +133240,7 @@ func NewAppChooserDialogInstance(parent Window, flags DialogFlags, file gio.File
 //
 // Creates a new #GtkAppChooserDialog for the provided content type,
 // to allow the user to select an application for it.
-func NewAppChooserDialogInstanceForContentType(parent Window, flags DialogFlags, contentType string) Widget {
+func NewAppChooserDialogForContentType(parent Window, flags DialogFlags, contentType string) Widget {
 	var carg1 *C.GtkWindow     // in, none, converted, nullable
 	var carg2 C.GtkDialogFlags // in, none, casted
 	var carg3 *C.gchar         // in, none, string, casted *C.gchar
@@ -133405,7 +133405,7 @@ func UnsafeColorChooserDialogToGlibFull(c ColorChooserDialog) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewColorChooserDialogInstance wraps gtk_color_chooser_dialog_new
+// NewColorChooserDialog wraps gtk_color_chooser_dialog_new
 // 
 // The function takes the following parameters:
 // 
@@ -133417,7 +133417,7 @@ func UnsafeColorChooserDialogToGlibFull(c ColorChooserDialog) unsafe.Pointer {
 // 	- goret Widget 
 //
 // Creates a new #GtkColorChooserDialog.
-func NewColorChooserDialogInstance(title string, parent Window) Widget {
+func NewColorChooserDialog(title string, parent Window) Widget {
 	var carg1 *C.gchar     // in, none, string, nullable-string
 	var carg2 *C.GtkWindow // in, none, converted, nullable
 	var cret  *C.GtkWidget // return, none, converted
@@ -133515,7 +133515,7 @@ func UnsafeColorSelectionDialogToGlibFull(c ColorSelectionDialog) unsafe.Pointer
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewColorSelectionDialogInstance wraps gtk_color_selection_dialog_new
+// NewColorSelectionDialog wraps gtk_color_selection_dialog_new
 // 
 // The function takes the following parameters:
 // 
@@ -133526,7 +133526,7 @@ func UnsafeColorSelectionDialogToGlibFull(c ColorSelectionDialog) unsafe.Pointer
 // 	- goret Widget 
 //
 // Creates a new #GtkColorSelectionDialog.
-func NewColorSelectionDialogInstance(title string) Widget {
+func NewColorSelectionDialog(title string) Widget {
 	var carg1 *C.gchar     // in, none, string, casted *C.gchar
 	var cret  *C.GtkWidget // return, none, converted
 
@@ -133694,7 +133694,7 @@ func UnsafeMenuToolButtonToGlibFull(c MenuToolButton) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewMenuToolButtonInstance wraps gtk_menu_tool_button_new
+// NewMenuToolButton wraps gtk_menu_tool_button_new
 // 
 // The function takes the following parameters:
 // 
@@ -133707,7 +133707,7 @@ func UnsafeMenuToolButtonToGlibFull(c MenuToolButton) unsafe.Pointer {
 //
 // Creates a new #GtkMenuToolButton using @icon_widget as icon and
 // @label as label.
-func NewMenuToolButtonInstance(iconWidget Widget, label string) ToolItem {
+func NewMenuToolButton(iconWidget Widget, label string) ToolItem {
 	var carg1 *C.GtkWidget   // in, none, converted, nullable
 	var carg2 *C.gchar       // in, none, string, nullable-string
 	var cret  *C.GtkToolItem // return, none, converted
@@ -133914,13 +133914,13 @@ func UnsafeToggleToolButtonToGlibFull(c ToggleToolButton) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewToggleToolButtonInstance wraps gtk_toggle_tool_button_new
+// NewToggleToolButton wraps gtk_toggle_tool_button_new
 // The function returns the following values:
 // 
 // 	- goret ToolItem 
 //
 // Returns a new #GtkToggleToolButton
-func NewToggleToolButtonInstance() ToolItem {
+func NewToggleToolButton() ToolItem {
 	var cret *C.GtkToolItem // return, none, converted
 
 	cret = C.gtk_toggle_tool_button_new()
@@ -134063,7 +134063,7 @@ func UnsafeRadioToolButtonToGlibFull(c RadioToolButton) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewRadioToolButtonInstanceFromWidget wraps gtk_radio_tool_button_new_from_widget
+// NewRadioToolButtonFromWidget wraps gtk_radio_tool_button_new_from_widget
 // 
 // The function takes the following parameters:
 // 
@@ -134074,7 +134074,7 @@ func UnsafeRadioToolButtonToGlibFull(c RadioToolButton) unsafe.Pointer {
 // 	- goret ToolItem 
 //
 // Creates a new #GtkRadioToolButton adding it to the same group as @gruup
-func NewRadioToolButtonInstanceFromWidget(group RadioToolButton) ToolItem {
+func NewRadioToolButtonFromWidget(group RadioToolButton) ToolItem {
 	var carg1 *C.GtkRadioToolButton // in, none, converted, nullable
 	var cret  *C.GtkToolItem        // return, none, converted
 

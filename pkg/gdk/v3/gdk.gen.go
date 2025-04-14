@@ -9890,7 +9890,7 @@ func UnsafeCursorToGlibFull(c Cursor) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewCursorInstanceForDisplay wraps gdk_cursor_new_for_display
+// NewCursorForDisplay wraps gdk_cursor_new_for_display
 // 
 // The function takes the following parameters:
 // 
@@ -9902,7 +9902,7 @@ func UnsafeCursorToGlibFull(c Cursor) unsafe.Pointer {
 // 	- goret Cursor 
 //
 // Creates a new cursor from the set of builtin cursors.
-func NewCursorInstanceForDisplay(display Display, cursorType CursorType) Cursor {
+func NewCursorForDisplay(display Display, cursorType CursorType) Cursor {
 	var carg1 *C.GdkDisplay   // in, none, converted
 	var carg2 C.GdkCursorType // in, none, casted
 	var cret  *C.GdkCursor    // return, full, converted
@@ -9921,7 +9921,7 @@ func NewCursorInstanceForDisplay(display Display, cursorType CursorType) Cursor 
 	return goret
 }
 
-// NewCursorInstanceFromName wraps gdk_cursor_new_from_name
+// NewCursorFromName wraps gdk_cursor_new_from_name
 // 
 // The function takes the following parameters:
 // 
@@ -9972,7 +9972,7 @@ func NewCursorInstanceForDisplay(display Display, cursorType CursorType) Cursor 
 // - ![](nwse_resize_cursor.png) "nwse-resize"
 // - ![](zoom_in_cursor.png) "zoom-in"
 // - ![](zoom_out_cursor.png) "zoom-out"
-func NewCursorInstanceFromName(display Display, name string) Cursor {
+func NewCursorFromName(display Display, name string) Cursor {
 	var carg1 *C.GdkDisplay // in, none, converted
 	var carg2 *C.gchar      // in, none, string, casted *C.gchar
 	var cret  *C.GdkCursor  // return, full, converted
@@ -9992,7 +9992,7 @@ func NewCursorInstanceFromName(display Display, name string) Cursor {
 	return goret
 }
 
-// NewCursorInstanceFromPixbuf wraps gdk_cursor_new_from_pixbuf
+// NewCursorFromPixbuf wraps gdk_cursor_new_from_pixbuf
 // 
 // The function takes the following parameters:
 // 
@@ -10023,7 +10023,7 @@ func NewCursorInstanceFromName(display Display, name string) Cursor {
 // 
 // On the X backend, support for RGBA cursors requires a
 // sufficently new version of the X Render extension.
-func NewCursorInstanceFromPixbuf(display Display, pixbuf gdkpixbuf.Pixbuf, x int, y int) Cursor {
+func NewCursorFromPixbuf(display Display, pixbuf gdkpixbuf.Pixbuf, x int, y int) Cursor {
 	var carg1 *C.GdkDisplay // in, none, converted
 	var carg2 *C.GdkPixbuf  // in, none, converted
 	var carg3 C.gint        // in, none, casted
@@ -11826,7 +11826,7 @@ func UnsafeDisplayToGlibFull(c Display) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// DisplayInstanceGetDefault wraps gdk_display_get_default
+// DisplayGetDefault wraps gdk_display_get_default
 // The function returns the following values:
 // 
 // 	- goret Display 
@@ -11834,7 +11834,7 @@ func UnsafeDisplayToGlibFull(c Display) unsafe.Pointer {
 // Gets the default #GdkDisplay. This is a convenience
 // function for:
 // `gdk_display_manager_get_default_display (gdk_display_manager_get ())`.
-func DisplayInstanceGetDefault() Display {
+func DisplayGetDefault() Display {
 	var cret *C.GdkDisplay // return, none, converted
 
 	cret = C.gdk_display_get_default()
@@ -11846,7 +11846,7 @@ func DisplayInstanceGetDefault() Display {
 	return goret
 }
 
-// DisplayInstanceOpen wraps gdk_display_open
+// DisplayOpen wraps gdk_display_open
 // 
 // The function takes the following parameters:
 // 
@@ -11857,7 +11857,7 @@ func DisplayInstanceGetDefault() Display {
 // 	- goret Display 
 //
 // Opens a display.
-func DisplayInstanceOpen(displayName string) Display {
+func DisplayOpen(displayName string) Display {
 	var carg1 *C.gchar      // in, none, string, casted *C.gchar
 	var cret  *C.GdkDisplay // return, none, converted
 
@@ -12672,7 +12672,7 @@ func UnsafeDisplayManagerToGlibFull(c DisplayManager) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// DisplayManagerInstanceGet wraps gdk_display_manager_get
+// DisplayManagerGet wraps gdk_display_manager_get
 // The function returns the following values:
 // 
 // 	- goret DisplayManager 
@@ -12684,7 +12684,7 @@ func UnsafeDisplayManagerToGlibFull(c DisplayManager) unsafe.Pointer {
 // of the supported GDK backends to use (in case GDK has been compiled
 // with multiple backends). Applications can use gdk_set_allowed_backends()
 // to limit what backends can be used.
-func DisplayManagerInstanceGet() DisplayManager {
+func DisplayManagerGet() DisplayManager {
 	var cret *C.GdkDisplayManager // return, none, converted
 
 	cret = C.gdk_display_manager_get()
@@ -14007,24 +14007,24 @@ func UnsafeGLContextToGlibFull(c GLContext) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// GLContextInstanceClearCurrent wraps gdk_gl_context_clear_current
+// GLContextClearCurrent wraps gdk_gl_context_clear_current
 //
 // Clears the current #GdkGLContext.
 // 
 // Any OpenGL call after this function returns will be ignored
 // until gdk_gl_context_make_current() is called.
-func GLContextInstanceClearCurrent() {
+func GLContextClearCurrent() {
 
 	C.gdk_gl_context_clear_current()
 }
 
-// GLContextInstanceGetCurrent wraps gdk_gl_context_get_current
+// GLContextGetCurrent wraps gdk_gl_context_get_current
 // The function returns the following values:
 // 
 // 	- goret GLContext 
 //
 // Retrieves the current #GdkGLContext.
-func GLContextInstanceGetCurrent() GLContext {
+func GLContextGetCurrent() GLContext {
 	var cret *C.GdkGLContext // return, none, converted
 
 	cret = C.gdk_gl_context_get_current()
@@ -14627,7 +14627,7 @@ func UnsafeKeymapToGlibFull(c Keymap) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// KeymapInstanceGetForDisplay wraps gdk_keymap_get_for_display
+// KeymapGetForDisplay wraps gdk_keymap_get_for_display
 // 
 // The function takes the following parameters:
 // 
@@ -14638,7 +14638,7 @@ func UnsafeKeymapToGlibFull(c Keymap) unsafe.Pointer {
 // 	- goret Keymap 
 //
 // Returns the #GdkKeymap attached to @display.
-func KeymapInstanceGetForDisplay(display Display) Keymap {
+func KeymapGetForDisplay(display Display) Keymap {
 	var carg1 *C.GdkDisplay // in, none, converted
 	var cret  *C.GdkKeymap  // return, none, converted
 
@@ -15566,14 +15566,14 @@ func UnsafeScreenToGlibFull(c Screen) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// ScreenInstanceGetDefault wraps gdk_screen_get_default
+// ScreenGetDefault wraps gdk_screen_get_default
 // The function returns the following values:
 // 
 // 	- goret Screen 
 //
 // Gets the default screen for the default display. (See
 // gdk_display_get_default ()).
-func ScreenInstanceGetDefault() Screen {
+func ScreenGetDefault() Screen {
 	var cret *C.GdkScreen // return, none, converted
 
 	cret = C.gdk_screen_get_default()
@@ -17841,7 +17841,7 @@ func UnsafeWindowToGlibFull(c Window) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewWindowInstance wraps gdk_window_new
+// NewWindow wraps gdk_window_new
 // 
 // The function takes the following parameters:
 // 
@@ -17859,7 +17859,7 @@ func UnsafeWindowToGlibFull(c Window) unsafe.Pointer {
 // @attributes. See #GdkWindowAttr and #GdkWindowAttributesType for
 // more details.  Note: to use this on displays other than the default
 // display, @parent must be specified.
-func NewWindowInstance(parent Window, attributes *WindowAttr, attributesMask int) Window {
+func NewWindow(parent Window, attributes *WindowAttr, attributesMask int) Window {
 	var carg1 *C.GdkWindow     // in, none, converted, nullable
 	var carg2 *C.GdkWindowAttr // in, none, converted
 	var carg3 C.gint           // in, none, casted
@@ -17883,7 +17883,7 @@ func NewWindowInstance(parent Window, attributes *WindowAttr, attributesMask int
 	return goret
 }
 
-// WindowInstanceConstrainSize wraps gdk_window_constrain_size
+// WindowConstrainSize wraps gdk_window_constrain_size
 // 
 // The function takes the following parameters:
 // 
@@ -17899,7 +17899,7 @@ func NewWindowInstance(parent Window, attributes *WindowAttr, attributesMask int
 //
 // Constrains a desired width and height according to a
 // set of geometry hints (such as minimum and maximum size).
-func WindowInstanceConstrainSize(geometry *Geometry, flags WindowHints, width int, height int) (int, int) {
+func WindowConstrainSize(geometry *Geometry, flags WindowHints, width int, height int) (int, int) {
 	var carg1 *C.GdkGeometry   // in, none, converted
 	var carg2 C.GdkWindowHints // in, none, casted
 	var carg3 C.gint           // in, none, casted

@@ -7679,7 +7679,7 @@ func UnsafePaintableToGlibFull(c Paintable) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(&i.Instance)
 }
 
-// NewPaintableInstanceEmpty wraps gdk_paintable_new_empty
+// NewPaintableEmpty wraps gdk_paintable_new_empty
 // 
 // The function takes the following parameters:
 // 
@@ -7697,7 +7697,7 @@ func UnsafePaintableToGlibFull(c Paintable) unsafe.Pointer {
 // when the paintable is in an incomplete state (like a
 // [GtkMediaStream](../gtk4/class.MediaStream.html) before receiving
 // the first frame).
-func NewPaintableInstanceEmpty(intrinsicWidth int, intrinsicHeight int) Paintable {
+func NewPaintableEmpty(intrinsicWidth int, intrinsicHeight int) Paintable {
 	var carg1 C.int           // in, none, casted, casted C.gint
 	var carg2 C.int           // in, none, casted, casted C.gint
 	var cret  *C.GdkPaintable // return, full, converted
@@ -9437,7 +9437,7 @@ func UnsafeCicpParamsToGlibFull(c CicpParams) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewCicpParamsInstance wraps gdk_cicp_params_new
+// NewCicpParams wraps gdk_cicp_params_new
 // The function returns the following values:
 // 
 // 	- goret CicpParams 
@@ -9446,7 +9446,7 @@ func UnsafeCicpParamsToGlibFull(c CicpParams) unsafe.Pointer {
 // 
 // The initial values of the properties are the values for "undefined"
 // and need to be set before a color state object can be built.
-func NewCicpParamsInstance() CicpParams {
+func NewCicpParams() CicpParams {
 	var cret *C.GdkCicpParams // return, full, converted
 
 	cret = C.gdk_cicp_params_new()
@@ -10970,7 +10970,7 @@ func UnsafeContentProviderToGlibFull(c ContentProvider) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewContentProviderInstanceForBytes wraps gdk_content_provider_new_for_bytes
+// NewContentProviderForBytes wraps gdk_content_provider_new_for_bytes
 // 
 // The function takes the following parameters:
 // 
@@ -10983,7 +10983,7 @@ func UnsafeContentProviderToGlibFull(c ContentProvider) unsafe.Pointer {
 //
 // Create a content provider that provides the given @bytes as data for
 // the given @mime_type.
-func NewContentProviderInstanceForBytes(mimeType string, bytes *glib.Bytes) ContentProvider {
+func NewContentProviderForBytes(mimeType string, bytes *glib.Bytes) ContentProvider {
 	var carg1 *C.char               // in, none, string, casted *C.gchar
 	var carg2 *C.GBytes             // in, none, converted
 	var cret  *C.GdkContentProvider // return, full, converted
@@ -11003,7 +11003,7 @@ func NewContentProviderInstanceForBytes(mimeType string, bytes *glib.Bytes) Cont
 	return goret
 }
 
-// NewContentProviderInstanceForValue wraps gdk_content_provider_new_for_value
+// NewContentProviderForValue wraps gdk_content_provider_new_for_value
 // 
 // The function takes the following parameters:
 // 
@@ -11014,7 +11014,7 @@ func NewContentProviderInstanceForBytes(mimeType string, bytes *glib.Bytes) Cont
 // 	- goret ContentProvider 
 //
 // Create a content provider that provides the given @value.
-func NewContentProviderInstanceForValue(value *gobject.Value) ContentProvider {
+func NewContentProviderForValue(value *gobject.Value) ContentProvider {
 	var carg1 *C.GValue             // in, none, converted
 	var cret  *C.GdkContentProvider // return, full, converted
 
@@ -11030,7 +11030,7 @@ func NewContentProviderInstanceForValue(value *gobject.Value) ContentProvider {
 	return goret
 }
 
-// NewContentProviderInstanceUnion wraps gdk_content_provider_new_union
+// NewContentProviderUnion wraps gdk_content_provider_new_union
 // 
 // The function takes the following parameters:
 // 
@@ -11056,7 +11056,7 @@ func NewContentProviderInstanceForValue(value *gobject.Value) ContentProvider {
 //                                   gdk_content_provider_new_typed (GDK_TYPE_TEXTURE, texture)
 //                                 }, 2);
 // ```
-func NewContentProviderInstanceUnion(providers []ContentProvider) ContentProvider {
+func NewContentProviderUnion(providers []ContentProvider) ContentProvider {
 	var carg1 **C.GdkContentProvider // in, transfer: full, C Pointers: 2, Name: array[ContentProvider], nullable, array (inner: *typesystem.Class, length-by: carg2)
 	var carg2 C.gsize                // implicit
 	var cret  *C.GdkContentProvider  // return, full, converted
@@ -11743,7 +11743,7 @@ func UnsafeCursorToGlibFull(c Cursor) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewCursorInstanceFromName wraps gdk_cursor_new_from_name
+// NewCursorFromName wraps gdk_cursor_new_from_name
 // 
 // The function takes the following parameters:
 // 
@@ -11772,7 +11772,7 @@ func UnsafeCursorToGlibFull(c Cursor) unsafe.Pointer {
 // | ![](w_resize_cursor.png) "w-resize" | ![](ne_resize_cursor.png) "ne-resize" | ![](nw_resize_cursor.png) "nw-resize" | ![](sw_resize_cursor.png) "sw-resize" |
 // | ![](se_resize_cursor.png) "se-resize" | ![](ew_resize_cursor.png) "ew-resize" | ![](ns_resize_cursor.png) "ns-resize" | ![](nesw_resize_cursor.png) "nesw-resize" |
 // | ![](nwse_resize_cursor.png) "nwse-resize" | ![](zoom_in_cursor.png) "zoom-in" | ![](zoom_out_cursor.png) "zoom-out" | |
-func NewCursorInstanceFromName(name string, fallback Cursor) Cursor {
+func NewCursorFromName(name string, fallback Cursor) Cursor {
 	var carg1 *C.char      // in, none, string, casted *C.gchar
 	var carg2 *C.GdkCursor // in, none, converted, nullable
 	var cret  *C.GdkCursor // return, full, converted
@@ -11794,7 +11794,7 @@ func NewCursorInstanceFromName(name string, fallback Cursor) Cursor {
 	return goret
 }
 
-// NewCursorInstanceFromTexture wraps gdk_cursor_new_from_texture
+// NewCursorFromTexture wraps gdk_cursor_new_from_texture
 // 
 // The function takes the following parameters:
 // 
@@ -11809,7 +11809,7 @@ func NewCursorInstanceFromName(name string, fallback Cursor) Cursor {
 // 	- goret Cursor 
 //
 // Creates a new cursor from a `GdkTexture`.
-func NewCursorInstanceFromTexture(texture Texture, hotspotX int, hotspotY int, fallback Cursor) Cursor {
+func NewCursorFromTexture(texture Texture, hotspotX int, hotspotY int, fallback Cursor) Cursor {
 	var carg1 *C.GdkTexture // in, none, converted
 	var carg2 C.int         // in, none, casted, casted C.gint
 	var carg3 C.int         // in, none, casted, casted C.gint
@@ -13192,7 +13192,7 @@ func UnsafeDisplayToGlibFull(c Display) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// DisplayInstanceGetDefault wraps gdk_display_get_default
+// DisplayGetDefault wraps gdk_display_get_default
 // The function returns the following values:
 // 
 // 	- goret Display 
@@ -13202,7 +13202,7 @@ func UnsafeDisplayToGlibFull(c Display) unsafe.Pointer {
 // This is a convenience function for:
 // 
 //     gdk_display_manager_get_default_display (gdk_display_manager_get ())
-func DisplayInstanceGetDefault() Display {
+func DisplayGetDefault() Display {
 	var cret *C.GdkDisplay // return, none, converted
 
 	cret = C.gdk_display_get_default()
@@ -13214,7 +13214,7 @@ func DisplayInstanceGetDefault() Display {
 	return goret
 }
 
-// DisplayInstanceOpen wraps gdk_display_open
+// DisplayOpen wraps gdk_display_open
 // 
 // The function takes the following parameters:
 // 
@@ -13227,7 +13227,7 @@ func DisplayInstanceGetDefault() Display {
 // Opens a display.
 // 
 // If opening the display fails, `NULL` is returned.
-func DisplayInstanceOpen(displayName string) Display {
+func DisplayOpen(displayName string) Display {
 	var carg1 *C.char       // in, none, string, nullable-string
 	var cret  *C.GdkDisplay // return, none, converted
 
@@ -14010,7 +14010,7 @@ func UnsafeDisplayManagerToGlibFull(c DisplayManager) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// DisplayManagerInstanceGet wraps gdk_display_manager_get
+// DisplayManagerGet wraps gdk_display_manager_get
 // The function returns the following values:
 // 
 // 	- goret DisplayManager 
@@ -14024,7 +14024,7 @@ func UnsafeDisplayManagerToGlibFull(c DisplayManager) unsafe.Pointer {
 // 
 // Applications can use [func@set_allowed_backends] to limit what
 // backends will be used.
-func DisplayManagerInstanceGet() DisplayManager {
+func DisplayManagerGet() DisplayManager {
 	var cret *C.GdkDisplayManager // return, none, converted
 
 	cret = C.gdk_display_manager_get()
@@ -14444,13 +14444,13 @@ func UnsafeDmabufTextureBuilderToGlibFull(c DmabufTextureBuilder) unsafe.Pointer
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewDmabufTextureBuilderInstance wraps gdk_dmabuf_texture_builder_new
+// NewDmabufTextureBuilder wraps gdk_dmabuf_texture_builder_new
 // The function returns the following values:
 // 
 // 	- goret DmabufTextureBuilder 
 //
 // Creates a new texture builder.
-func NewDmabufTextureBuilderInstance() DmabufTextureBuilder {
+func NewDmabufTextureBuilder() DmabufTextureBuilder {
 	var cret *C.GdkDmabufTextureBuilder // return, full, converted
 
 	cret = C.gdk_dmabuf_texture_builder_new()
@@ -15179,7 +15179,7 @@ func UnsafeDragToGlibFull(c Drag) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// DragInstanceBegin wraps gdk_drag_begin
+// DragBegin wraps gdk_drag_begin
 // 
 // The function takes the following parameters:
 // 
@@ -15208,7 +15208,7 @@ func UnsafeDragToGlibFull(c Drag) unsafe.Pointer {
 // the [signal@Gdk.Drag::dnd-finished] signal and delete the data at
 // the source if [method@Gdk.Drag.get_selected_action] returns
 // %GDK_ACTION_MOVE.
-func DragInstanceBegin(surface Surface, device Device, content ContentProvider, actions DragAction, dx float64, dy float64) Drag {
+func DragBegin(surface Surface, device Device, content ContentProvider, actions DragAction, dx float64, dy float64) Drag {
 	var carg1 *C.GdkSurface         // in, none, converted
 	var carg2 *C.GdkDevice          // in, none, converted
 	var carg3 *C.GdkContentProvider // in, none, converted
@@ -16936,24 +16936,24 @@ func UnsafeGLContextToGlibFull(c GLContext) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// GLContextInstanceClearCurrent wraps gdk_gl_context_clear_current
+// GLContextClearCurrent wraps gdk_gl_context_clear_current
 //
 // Clears the current `GdkGLContext`.
 // 
 // Any OpenGL call after this function returns will be ignored
 // until [method@Gdk.GLContext.make_current] is called.
-func GLContextInstanceClearCurrent() {
+func GLContextClearCurrent() {
 
 	C.gdk_gl_context_clear_current()
 }
 
-// GLContextInstanceGetCurrent wraps gdk_gl_context_get_current
+// GLContextGetCurrent wraps gdk_gl_context_get_current
 // The function returns the following values:
 // 
 // 	- goret GLContext 
 //
 // Retrieves the current `GdkGLContext`.
-func GLContextInstanceGetCurrent() GLContext {
+func GLContextGetCurrent() GLContext {
 	var cret *C.GdkGLContext // return, none, converted
 
 	cret = C.gdk_gl_context_get_current()
@@ -17701,13 +17701,13 @@ func UnsafeGLTextureBuilderToGlibFull(c GLTextureBuilder) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewGLTextureBuilderInstance wraps gdk_gl_texture_builder_new
+// NewGLTextureBuilder wraps gdk_gl_texture_builder_new
 // The function returns the following values:
 // 
 // 	- goret GLTextureBuilder 
 //
 // Creates a new texture builder.
-func NewGLTextureBuilderInstance() GLTextureBuilder {
+func NewGLTextureBuilder() GLTextureBuilder {
 	var cret *C.GdkGLTextureBuilder // return, full, converted
 
 	cret = C.gdk_gl_texture_builder_new()
@@ -18341,13 +18341,13 @@ func UnsafeMemoryTextureBuilderToGlibFull(c MemoryTextureBuilder) unsafe.Pointer
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewMemoryTextureBuilderInstance wraps gdk_memory_texture_builder_new
+// NewMemoryTextureBuilder wraps gdk_memory_texture_builder_new
 // The function returns the following values:
 // 
 // 	- goret MemoryTextureBuilder 
 //
 // Creates a new texture builder.
-func NewMemoryTextureBuilderInstance() MemoryTextureBuilder {
+func NewMemoryTextureBuilder() MemoryTextureBuilder {
 	var cret *C.GdkMemoryTextureBuilder // return, full, converted
 
 	cret = C.gdk_memory_texture_builder_new()
@@ -19719,7 +19719,7 @@ func UnsafeSurfaceToGlibFull(c Surface) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewSurfaceInstancePopup wraps gdk_surface_new_popup
+// NewSurfacePopup wraps gdk_surface_new_popup
 // 
 // The function takes the following parameters:
 // 
@@ -19734,7 +19734,7 @@ func UnsafeSurfaceToGlibFull(c Surface) unsafe.Pointer {
 // 
 // The surface will be attached to @parent and can be positioned
 // relative to it using [method@Gdk.Popup.present].
-func NewSurfaceInstancePopup(parent Surface, autohide bool) Surface {
+func NewSurfacePopup(parent Surface, autohide bool) Surface {
 	var carg1 *C.GdkSurface // in, none, converted
 	var carg2 C.gboolean    // in
 	var cret  *C.GdkSurface // return, full, converted
@@ -19755,7 +19755,7 @@ func NewSurfaceInstancePopup(parent Surface, autohide bool) Surface {
 	return goret
 }
 
-// NewSurfaceInstanceToplevel wraps gdk_surface_new_toplevel
+// NewSurfaceToplevel wraps gdk_surface_new_toplevel
 // 
 // The function takes the following parameters:
 // 
@@ -19766,7 +19766,7 @@ func NewSurfaceInstancePopup(parent Surface, autohide bool) Surface {
 // 	- goret Surface 
 //
 // Creates a new toplevel surface.
-func NewSurfaceInstanceToplevel(display Display) Surface {
+func NewSurfaceToplevel(display Display) Surface {
 	var carg1 *C.GdkDisplay // in, none, converted
 	var cret  *C.GdkSurface // return, full, converted
 
@@ -20492,7 +20492,7 @@ func UnsafeTextureToGlibFull(c Texture) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewTextureInstanceForPixbuf wraps gdk_texture_new_for_pixbuf
+// NewTextureForPixbuf wraps gdk_texture_new_for_pixbuf
 // 
 // The function takes the following parameters:
 // 
@@ -20507,7 +20507,7 @@ func UnsafeTextureToGlibFull(c Texture) unsafe.Pointer {
 // This function is threadsafe, so that you can e.g. use GTask
 // and [method@Gio.Task.run_in_thread] to avoid blocking the main thread
 // while loading a big image.
-func NewTextureInstanceForPixbuf(pixbuf gdkpixbuf.Pixbuf) Texture {
+func NewTextureForPixbuf(pixbuf gdkpixbuf.Pixbuf) Texture {
 	var carg1 *C.GdkPixbuf  // in, none, converted
 	var cret  *C.GdkTexture // return, full, converted
 
@@ -20523,7 +20523,7 @@ func NewTextureInstanceForPixbuf(pixbuf gdkpixbuf.Pixbuf) Texture {
 	return goret
 }
 
-// NewTextureInstanceFromBytes wraps gdk_texture_new_from_bytes
+// NewTextureFromBytes wraps gdk_texture_new_from_bytes
 // 
 // The function takes the following parameters:
 // 
@@ -20544,7 +20544,7 @@ func NewTextureInstanceForPixbuf(pixbuf gdkpixbuf.Pixbuf) Texture {
 // This function is threadsafe, so that you can e.g. use GTask
 // and [method@Gio.Task.run_in_thread] to avoid blocking the main thread
 // while loading a big image.
-func NewTextureInstanceFromBytes(bytes *glib.Bytes) (Texture, error) {
+func NewTextureFromBytes(bytes *glib.Bytes) (Texture, error) {
 	var carg1 *C.GBytes     // in, none, converted
 	var cret  *C.GdkTexture // return, full, converted
 	var _cerr *C.GError     // out, full, converted, nullable
@@ -20565,7 +20565,7 @@ func NewTextureInstanceFromBytes(bytes *glib.Bytes) (Texture, error) {
 	return goret, _goerr
 }
 
-// NewTextureInstanceFromFile wraps gdk_texture_new_from_file
+// NewTextureFromFile wraps gdk_texture_new_from_file
 // 
 // The function takes the following parameters:
 // 
@@ -20586,7 +20586,7 @@ func NewTextureInstanceFromBytes(bytes *glib.Bytes) (Texture, error) {
 // This function is threadsafe, so that you can e.g. use GTask
 // and [method@Gio.Task.run_in_thread] to avoid blocking the main thread
 // while loading a big image.
-func NewTextureInstanceFromFile(file gio.File) (Texture, error) {
+func NewTextureFromFile(file gio.File) (Texture, error) {
 	var carg1 *C.GFile      // in, none, converted
 	var cret  *C.GdkTexture // return, full, converted
 	var _cerr *C.GError     // out, full, converted, nullable
@@ -20607,7 +20607,7 @@ func NewTextureInstanceFromFile(file gio.File) (Texture, error) {
 	return goret, _goerr
 }
 
-// NewTextureInstanceFromFilename wraps gdk_texture_new_from_filename
+// NewTextureFromFilename wraps gdk_texture_new_from_filename
 // 
 // The function takes the following parameters:
 // 
@@ -20628,7 +20628,7 @@ func NewTextureInstanceFromFile(file gio.File) (Texture, error) {
 // This function is threadsafe, so that you can e.g. use GTask
 // and [method@Gio.Task.run_in_thread] to avoid blocking the main thread
 // while loading a big image.
-func NewTextureInstanceFromFilename(path string) (Texture, error) {
+func NewTextureFromFilename(path string) (Texture, error) {
 	var carg1 *C.char       // in, none, string, casted *C.gchar
 	var cret  *C.GdkTexture // return, full, converted
 	var _cerr *C.GError     // out, full, converted, nullable
@@ -20650,7 +20650,7 @@ func NewTextureInstanceFromFilename(path string) (Texture, error) {
 	return goret, _goerr
 }
 
-// NewTextureInstanceFromResource wraps gdk_texture_new_from_resource
+// NewTextureFromResource wraps gdk_texture_new_from_resource
 // 
 // The function takes the following parameters:
 // 
@@ -20673,7 +20673,7 @@ func NewTextureInstanceFromFilename(path string) (Texture, error) {
 // This function is threadsafe, so that you can e.g. use GTask
 // and [method@Gio.Task.run_in_thread] to avoid blocking the main thread
 // while loading a big image.
-func NewTextureInstanceFromResource(resourcePath string) Texture {
+func NewTextureFromResource(resourcePath string) Texture {
 	var carg1 *C.char       // in, none, string, casted *C.gchar
 	var cret  *C.GdkTexture // return, full, converted
 
@@ -21207,7 +21207,7 @@ func UnsafeMemoryTextureToGlibFull(c MemoryTexture) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewMemoryTextureInstance wraps gdk_memory_texture_new
+// NewMemoryTexture wraps gdk_memory_texture_new
 // 
 // The function takes the following parameters:
 // 
@@ -21225,7 +21225,7 @@ func UnsafeMemoryTextureToGlibFull(c MemoryTexture) unsafe.Pointer {
 // 
 // The `GBytes` must contain @stride × @height pixels
 // in the given format.
-func NewMemoryTextureInstance(width int, height int, format MemoryFormat, bytes *glib.Bytes, stride uint) MemoryTexture {
+func NewMemoryTexture(width int, height int, format MemoryFormat, bytes *glib.Bytes, stride uint) MemoryTexture {
 	var carg1 C.int             // in, none, casted, casted C.gint
 	var carg2 C.int             // in, none, casted, casted C.gint
 	var carg3 C.GdkMemoryFormat // in, none, casted

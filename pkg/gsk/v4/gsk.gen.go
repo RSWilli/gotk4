@@ -1172,7 +1172,7 @@ func UnsafeRendererToGlibFull(c Renderer) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewRendererInstanceForSurface wraps gsk_renderer_new_for_surface
+// NewRendererForSurface wraps gsk_renderer_new_for_surface
 // 
 // The function takes the following parameters:
 // 
@@ -1189,7 +1189,7 @@ func UnsafeRendererToGlibFull(c Renderer) unsafe.Pointer {
 // default. The ultimate fallback is the cairo renderer.
 // 
 // The renderer will be realized before it is returned.
-func NewRendererInstanceForSurface(surface gdk.Surface) Renderer {
+func NewRendererForSurface(surface gdk.Surface) Renderer {
 	var carg1 *C.GdkSurface  // in, none, converted
 	var cret  *C.GskRenderer // return, full, converted
 
@@ -1410,7 +1410,7 @@ func UnsafeVulkanRendererToGlibFull(c VulkanRenderer) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewVulkanRendererInstance wraps gsk_vulkan_renderer_new
+// NewVulkanRenderer wraps gsk_vulkan_renderer_new
 // The function returns the following values:
 // 
 // 	- goret Renderer 
@@ -1422,7 +1422,7 @@ func UnsafeVulkanRendererToGlibFull(c VulkanRenderer) unsafe.Pointer {
 // 
 // This renderer will fail to realize when GTK was not compiled with
 // Vulkan support.
-func NewVulkanRendererInstance() Renderer {
+func NewVulkanRenderer() Renderer {
 	var cret *C.GskRenderer // return, full, converted
 
 	cret = C.gsk_vulkan_renderer_new()
@@ -1489,7 +1489,7 @@ func UnsafeCairoRendererToGlibFull(c CairoRenderer) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewCairoRendererInstance wraps gsk_cairo_renderer_new
+// NewCairoRenderer wraps gsk_cairo_renderer_new
 // The function returns the following values:
 // 
 // 	- goret Renderer 
@@ -1502,7 +1502,7 @@ func UnsafeCairoRendererToGlibFull(c CairoRenderer) unsafe.Pointer {
 // The Cairo renderer is incomplete. It cannot render 3D transformed
 // content and will instead render an error marker. Its usage should be
 // avoided.
-func NewCairoRendererInstance() Renderer {
+func NewCairoRenderer() Renderer {
 	var cret *C.GskRenderer // return, full, converted
 
 	cret = C.gsk_cairo_renderer_new()
@@ -1568,13 +1568,13 @@ func UnsafeGLRendererToGlibFull(c GLRenderer) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewGLRendererInstance wraps gsk_gl_renderer_new
+// NewGLRenderer wraps gsk_gl_renderer_new
 // The function returns the following values:
 // 
 // 	- goret Renderer 
 //
 // Creates a new `GskRenderer` using the new OpenGL renderer.
-func NewGLRendererInstance() Renderer {
+func NewGLRenderer() Renderer {
 	var cret *C.GskRenderer // return, full, converted
 
 	cret = C.gsk_gl_renderer_new()
@@ -1640,13 +1640,13 @@ func UnsafeNglRendererToGlibFull(c NglRenderer) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewNglRendererInstance wraps gsk_ngl_renderer_new
+// NewNglRenderer wraps gsk_ngl_renderer_new
 // The function returns the following values:
 // 
 // 	- goret Renderer 
 //
 // Creates an instance of the new experimental GL renderer.
-func NewNglRendererInstance() Renderer {
+func NewNglRenderer() Renderer {
 	var cret *C.GskRenderer // return, full, converted
 
 	cret = C.gsk_ngl_renderer_new()

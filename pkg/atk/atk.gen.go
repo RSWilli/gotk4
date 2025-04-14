@@ -9125,13 +9125,13 @@ func UnsafePlugToGlibFull(c Plug) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewPlugInstance wraps atk_plug_new
+// NewPlug wraps atk_plug_new
 // The function returns the following values:
 // 
 // 	- goret Object 
 //
 // Creates a new #AtkPlug instance.
-func NewPlugInstance() Object {
+func NewPlug() Object {
 	var cret *C.AtkObject // return, full, converted
 
 	cret = C.atk_plug_new()
@@ -9475,7 +9475,7 @@ func UnsafeRelationToGlibFull(c Relation) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewRelationInstance wraps atk_relation_new
+// NewRelation wraps atk_relation_new
 // 
 // The function takes the following parameters:
 // 
@@ -9490,7 +9490,7 @@ func UnsafeRelationToGlibFull(c Relation) unsafe.Pointer {
 //
 // Create a new relation for the specified key and the specified list
 // of targets.  See also atk_object_add_relationship().
-func NewRelationInstance(targets []Object, relationship RelationType) Relation {
+func NewRelation(targets []Object, relationship RelationType) Relation {
 	var carg1 **C.AtkObject     // in, transfer: none, C Pointers: 2, Name: array[Object], array (inner: *typesystem.Class, length-by: carg2)
 	var carg2 C.gint            // implicit
 	var carg3 C.AtkRelationType // in, none, casted
@@ -9741,13 +9741,13 @@ func UnsafeRelationSetToGlibFull(c RelationSet) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewRelationSetInstance wraps atk_relation_set_new
+// NewRelationSet wraps atk_relation_set_new
 // The function returns the following values:
 // 
 // 	- goret RelationSet 
 //
 // Creates a new empty relation set.
-func NewRelationSetInstance() RelationSet {
+func NewRelationSet() RelationSet {
 	var cret *C.AtkRelationSet // return, full, converted
 
 	cret = C.atk_relation_set_new()
@@ -10084,13 +10084,13 @@ func UnsafeSocketToGlibFull(c Socket) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewSocketInstance wraps atk_socket_new
+// NewSocket wraps atk_socket_new
 // The function returns the following values:
 // 
 // 	- goret Object 
 //
 // Creates a new #AtkSocket.
-func NewSocketInstance() Object {
+func NewSocket() Object {
 	var cret *C.AtkObject // return, full, converted
 
 	cret = C.atk_socket_new()
@@ -10333,13 +10333,13 @@ func UnsafeStateSetToGlibFull(c StateSet) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewStateSetInstance wraps atk_state_set_new
+// NewStateSet wraps atk_state_set_new
 // The function returns the following values:
 // 
 // 	- goret StateSet 
 //
 // Creates a new empty state set.
-func NewStateSetInstance() StateSet {
+func NewStateSet() StateSet {
 	var cret *C.AtkStateSet // return, full, converted
 
 	cret = C.atk_state_set_new()
@@ -10772,7 +10772,7 @@ func UnsafeGObjectAccessibleToGlibFull(c GObjectAccessible) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// GObjectAccessibleInstanceForObject wraps atk_gobject_accessible_for_object
+// GObjectAccessibleForObject wraps atk_gobject_accessible_for_object
 // 
 // The function takes the following parameters:
 // 
@@ -10783,7 +10783,7 @@ func UnsafeGObjectAccessibleToGlibFull(c GObjectAccessible) unsafe.Pointer {
 // 	- goret Object 
 //
 // Gets the accessible object for the specified @obj.
-func GObjectAccessibleInstanceForObject(obj gobject.Object) Object {
+func GObjectAccessibleForObject(obj gobject.Object) Object {
 	var carg1 *C.GObject   // in, none, converted
 	var cret  *C.AtkObject // return, none, converted
 
@@ -10939,7 +10939,7 @@ func UnsafeNoOpObjectToGlibFull(c NoOpObject) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewNoOpObjectInstance wraps atk_no_op_object_new
+// NewNoOpObject wraps atk_no_op_object_new
 // 
 // The function takes the following parameters:
 // 
@@ -10951,7 +10951,7 @@ func UnsafeNoOpObjectToGlibFull(c NoOpObject) unsafe.Pointer {
 //
 // Provides a default (non-functioning stub) #AtkObject.
 // Application maintainers should not use this method.
-func NewNoOpObjectInstance(obj gobject.Object) Object {
+func NewNoOpObject(obj gobject.Object) Object {
 	var carg1 *C.GObject   // in, none, converted
 	var cret  *C.AtkObject // return, full, converted
 
@@ -11023,14 +11023,14 @@ func UnsafeNoOpObjectFactoryToGlibFull(c NoOpObjectFactory) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewNoOpObjectFactoryInstance wraps atk_no_op_object_factory_new
+// NewNoOpObjectFactory wraps atk_no_op_object_factory_new
 // The function returns the following values:
 // 
 // 	- goret ObjectFactory 
 //
 // Creates an instance of an #AtkObjectFactory which generates primitive
 // (non-functioning) #AtkObjects.
-func NewNoOpObjectFactoryInstance() ObjectFactory {
+func NewNoOpObjectFactory() ObjectFactory {
 	var cret *C.AtkObjectFactory // return, full, converted
 
 	cret = C.atk_no_op_object_factory_new()

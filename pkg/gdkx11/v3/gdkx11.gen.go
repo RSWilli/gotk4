@@ -760,7 +760,7 @@ func UnsafeX11DisplayToGlibFull(c X11Display) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// X11DisplayInstanceGetGLXVersion wraps gdk_x11_display_get_glx_version
+// X11DisplayGetGLXVersion wraps gdk_x11_display_get_glx_version
 // 
 // The function takes the following parameters:
 // 
@@ -773,7 +773,7 @@ func UnsafeX11DisplayToGlibFull(c X11Display) unsafe.Pointer {
 // 	- goret bool 
 //
 // Retrieves the version of the GLX implementation.
-func X11DisplayInstanceGetGLXVersion(display gdk.Display) (int, int, bool) {
+func X11DisplayGetGLXVersion(display gdk.Display) (int, int, bool) {
 	var carg1 *C.GdkDisplay // in, none, converted
 	var carg2 C.gint        // out, full, casted
 	var carg3 C.gint        // out, full, casted

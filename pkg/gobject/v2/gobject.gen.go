@@ -2752,13 +2752,13 @@ func UnsafeBindingGroupToGlibFull(c BindingGroup) unsafe.Pointer {
 	return UnsafeObjectToGlibFull(c)
 }
 
-// NewBindingGroupInstance wraps g_binding_group_new
+// NewBindingGroup wraps g_binding_group_new
 // The function returns the following values:
 // 
 // 	- goret BindingGroup 
 //
 // Creates a new #GBindingGroup.
-func NewBindingGroupInstance() BindingGroup {
+func NewBindingGroup() BindingGroup {
 	var cret *C.GBindingGroup // return, full, converted
 
 	cret = C.g_binding_group_new()
@@ -3014,7 +3014,7 @@ func UnsafeSignalGroupToGlibFull(c SignalGroup) unsafe.Pointer {
 	return UnsafeObjectToGlibFull(c)
 }
 
-// NewSignalGroupInstance wraps g_signal_group_new
+// NewSignalGroup wraps g_signal_group_new
 // 
 // The function takes the following parameters:
 // 
@@ -3025,7 +3025,7 @@ func UnsafeSignalGroupToGlibFull(c SignalGroup) unsafe.Pointer {
 // 	- goret SignalGroup 
 //
 // Creates a new #GSignalGroup for target instances of @target_type.
-func NewSignalGroupInstance(targetType Type) SignalGroup {
+func NewSignalGroup(targetType Type) SignalGroup {
 	var carg1 C.GType         // in, none, casted, alias
 	var cret  *C.GSignalGroup // return, full, converted
 

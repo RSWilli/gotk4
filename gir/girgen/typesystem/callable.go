@@ -73,6 +73,13 @@ func (c *PrefixedIdentifier) GoIndentifier() string {
 
 	parentTypeName := c.Parent.GoType(0)
 
+	switch p := c.Parent.(type) {
+	case *Class:
+		parentTypeName = p.GoInterfaceName
+	case *Interface:
+		parentTypeName = p.GoInterfaceName
+	}
+
 	if ok {
 		return "New" + parentTypeName + noNew
 	}

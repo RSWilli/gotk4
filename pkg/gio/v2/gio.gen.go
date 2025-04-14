@@ -6495,7 +6495,7 @@ func UnsafeActionToGlibFull(c Action) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(&i.Instance)
 }
 
-// ActionInstanceNameIsValid wraps g_action_name_is_valid
+// ActionNameIsValid wraps g_action_name_is_valid
 // 
 // The function takes the following parameters:
 // 
@@ -6512,7 +6512,7 @@ func UnsafeActionToGlibFull(c Action) unsafe.Pointer {
 // 
 // It is an error to call this function with a non-UTF-8 @action_name.
 // @action_name must not be `NULL`.
-func ActionInstanceNameIsValid(actionName string) bool {
+func ActionNameIsValid(actionName string) bool {
 	var carg1 *C.gchar   // in, none, string, casted *C.gchar
 	var cret  C.gboolean // return
 
@@ -7818,7 +7818,7 @@ func UnsafeAppInfoToGlibFull(c AppInfo) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(&i.Instance)
 }
 
-// AppInfoInstanceCreateFromCommandline wraps g_app_info_create_from_commandline
+// AppInfoCreateFromCommandline wraps g_app_info_create_from_commandline
 // 
 // The function takes the following parameters:
 // 
@@ -7840,7 +7840,7 @@ func UnsafeAppInfoToGlibFull(c AppInfo) unsafe.Pointer {
 // being swallowed by `Exec` key unquoting. See
 // [the specification](https://specifications.freedesktop.org/desktop-entry-spec/latest/ar01s07.html)
 // for exact quoting rules.
-func AppInfoInstanceCreateFromCommandline(commandline string, applicationName string, flags AppInfoCreateFlags) (AppInfo, error) {
+func AppInfoCreateFromCommandline(commandline string, applicationName string, flags AppInfoCreateFlags) (AppInfo, error) {
 	var carg1 *C.char               // in, none, string, casted *C.gchar
 	var carg2 *C.char               // in, none, string, nullable-string
 	var carg3 C.GAppInfoCreateFlags // in, none, casted
@@ -7871,7 +7871,7 @@ func AppInfoInstanceCreateFromCommandline(commandline string, applicationName st
 	return goret, _goerr
 }
 
-// AppInfoInstanceGetDefaultForType wraps g_app_info_get_default_for_type
+// AppInfoGetDefaultForType wraps g_app_info_get_default_for_type
 // 
 // The function takes the following parameters:
 // 
@@ -7884,7 +7884,7 @@ func AppInfoInstanceCreateFromCommandline(commandline string, applicationName st
 // 	- goret AppInfo 
 //
 // Gets the default [iface@Gio.AppInfo] for a given content type.
-func AppInfoInstanceGetDefaultForType(contentType string, mustSupportUris bool) AppInfo {
+func AppInfoGetDefaultForType(contentType string, mustSupportUris bool) AppInfo {
 	var carg1 *C.char     // in, none, string, casted *C.gchar
 	var carg2 C.gboolean  // in
 	var cret  *C.GAppInfo // return, full, converted
@@ -7906,7 +7906,7 @@ func AppInfoInstanceGetDefaultForType(contentType string, mustSupportUris bool) 
 	return goret
 }
 
-// AppInfoInstanceGetDefaultForTypeAsync wraps g_app_info_get_default_for_type_async
+// AppInfoGetDefaultForTypeAsync wraps g_app_info_get_default_for_type_async
 // 
 // The function takes the following parameters:
 // 
@@ -7919,7 +7919,7 @@ func AppInfoInstanceGetDefaultForType(contentType string, mustSupportUris bool) 
 //
 // Asynchronously gets the default [iface@Gio.AppInfo] for a given content
 // type.
-func AppInfoInstanceGetDefaultForTypeAsync(cancellable context.Context, contentType string, mustSupportUris bool, callback AsyncReadyCallback) {
+func AppInfoGetDefaultForTypeAsync(cancellable context.Context, contentType string, mustSupportUris bool, callback AsyncReadyCallback) {
 	var carg3 *C.GCancellable       // in, none, converted, nullable
 	var carg1 *C.char               // in, none, string, casted *C.gchar
 	var carg2 C.gboolean            // in
@@ -7946,7 +7946,7 @@ func AppInfoInstanceGetDefaultForTypeAsync(cancellable context.Context, contentT
 	runtime.KeepAlive(callback)
 }
 
-// AppInfoInstanceGetDefaultForTypeFinish wraps g_app_info_get_default_for_type_finish
+// AppInfoGetDefaultForTypeFinish wraps g_app_info_get_default_for_type_finish
 // 
 // The function takes the following parameters:
 // 
@@ -7962,7 +7962,7 @@ func AppInfoInstanceGetDefaultForTypeAsync(cancellable context.Context, contentT
 // 
 // If no #[iface@Gio.AppInfo] is found, then @error will be set to
 // [error@Gio.IOErrorEnum.NOT_FOUND].
-func AppInfoInstanceGetDefaultForTypeFinish(result AsyncResult) (AppInfo, error) {
+func AppInfoGetDefaultForTypeFinish(result AsyncResult) (AppInfo, error) {
 	var carg1 *C.GAsyncResult // in, none, converted
 	var cret  *C.GAppInfo     // return, full, converted
 	var _cerr *C.GError       // out, full, converted, nullable
@@ -7983,7 +7983,7 @@ func AppInfoInstanceGetDefaultForTypeFinish(result AsyncResult) (AppInfo, error)
 	return goret, _goerr
 }
 
-// AppInfoInstanceGetDefaultForURIScheme wraps g_app_info_get_default_for_uri_scheme
+// AppInfoGetDefaultForURIScheme wraps g_app_info_get_default_for_uri_scheme
 // 
 // The function takes the following parameters:
 // 
@@ -7997,7 +7997,7 @@ func AppInfoInstanceGetDefaultForTypeFinish(result AsyncResult) (AppInfo, error)
 // 
 // A URI scheme is the initial part of the URI, up to but not including the `:`.
 // For example, `http`, `ftp` or `sip`.
-func AppInfoInstanceGetDefaultForURIScheme(uriScheme string) AppInfo {
+func AppInfoGetDefaultForURIScheme(uriScheme string) AppInfo {
 	var carg1 *C.char     // in, none, string, casted *C.gchar
 	var cret  *C.GAppInfo // return, full, converted
 
@@ -8014,7 +8014,7 @@ func AppInfoInstanceGetDefaultForURIScheme(uriScheme string) AppInfo {
 	return goret
 }
 
-// AppInfoInstanceGetDefaultForURISchemeAsync wraps g_app_info_get_default_for_uri_scheme_async
+// AppInfoGetDefaultForURISchemeAsync wraps g_app_info_get_default_for_uri_scheme_async
 // 
 // The function takes the following parameters:
 // 
@@ -8027,7 +8027,7 @@ func AppInfoInstanceGetDefaultForURIScheme(uriScheme string) AppInfo {
 // the given URI scheme. A URI scheme is the initial part
 // of the URI, up to but not including the `:`, e.g. `http`,
 // `ftp` or `sip`.
-func AppInfoInstanceGetDefaultForURISchemeAsync(cancellable context.Context, uriScheme string, callback AsyncReadyCallback) {
+func AppInfoGetDefaultForURISchemeAsync(cancellable context.Context, uriScheme string, callback AsyncReadyCallback) {
 	var carg2 *C.GCancellable       // in, none, converted, nullable
 	var carg1 *C.char               // in, none, string, casted *C.gchar
 	var carg3 C.GAsyncReadyCallback // callback, scope: async, closure: carg4, nullable
@@ -8049,7 +8049,7 @@ func AppInfoInstanceGetDefaultForURISchemeAsync(cancellable context.Context, uri
 	runtime.KeepAlive(callback)
 }
 
-// AppInfoInstanceGetDefaultForURISchemeFinish wraps g_app_info_get_default_for_uri_scheme_finish
+// AppInfoGetDefaultForURISchemeFinish wraps g_app_info_get_default_for_uri_scheme_finish
 // 
 // The function takes the following parameters:
 // 
@@ -8065,7 +8065,7 @@ func AppInfoInstanceGetDefaultForURISchemeAsync(cancellable context.Context, uri
 // 
 // If no [iface@Gio.AppInfo] is found, then @error will be set to
 // [error@Gio.IOErrorEnum.NOT_FOUND].
-func AppInfoInstanceGetDefaultForURISchemeFinish(result AsyncResult) (AppInfo, error) {
+func AppInfoGetDefaultForURISchemeFinish(result AsyncResult) (AppInfo, error) {
 	var carg1 *C.GAsyncResult // in, none, converted
 	var cret  *C.GAppInfo     // return, full, converted
 	var _cerr *C.GError       // out, full, converted, nullable
@@ -8086,7 +8086,7 @@ func AppInfoInstanceGetDefaultForURISchemeFinish(result AsyncResult) (AppInfo, e
 	return goret, _goerr
 }
 
-// AppInfoInstanceLaunchDefaultForURI wraps g_app_info_launch_default_for_uri
+// AppInfoLaunchDefaultForURI wraps g_app_info_launch_default_for_uri
 // 
 // The function takes the following parameters:
 // 
@@ -8105,7 +8105,7 @@ func AppInfoInstanceGetDefaultForURISchemeFinish(result AsyncResult) (AppInfo, e
 // The D-Bus–activated applications don’t have to be started if your application
 // terminates too soon after this function. To prevent this, use
 // [func@Gio.AppInfo.launch_default_for_uri_async] instead.
-func AppInfoInstanceLaunchDefaultForURI(uri string, context AppLaunchContext) (bool, error) {
+func AppInfoLaunchDefaultForURI(uri string, context AppLaunchContext) (bool, error) {
 	var carg1 *C.char              // in, none, string, casted *C.gchar
 	var carg2 *C.GAppLaunchContext // in, none, converted, nullable
 	var cret  C.gboolean           // return
@@ -8134,7 +8134,7 @@ func AppInfoInstanceLaunchDefaultForURI(uri string, context AppLaunchContext) (b
 	return goret, _goerr
 }
 
-// AppInfoInstanceLaunchDefaultForURIAsync wraps g_app_info_launch_default_for_uri_async
+// AppInfoLaunchDefaultForURIAsync wraps g_app_info_launch_default_for_uri_async
 // 
 // The function takes the following parameters:
 // 
@@ -8153,7 +8153,7 @@ func AppInfoInstanceLaunchDefaultForURI(uri string, context AppLaunchContext) (b
 // This is also useful if you want to be sure that the D-Bus–activated
 // applications are really started before termination and if you are interested
 // in receiving error information from their activation.
-func AppInfoInstanceLaunchDefaultForURIAsync(cancellable context.Context, uri string, context AppLaunchContext, callback AsyncReadyCallback) {
+func AppInfoLaunchDefaultForURIAsync(cancellable context.Context, uri string, context AppLaunchContext, callback AsyncReadyCallback) {
 	var carg3 *C.GCancellable       // in, none, converted, nullable
 	var carg1 *C.char               // in, none, string, casted *C.gchar
 	var carg2 *C.GAppLaunchContext  // in, none, converted, nullable
@@ -8180,7 +8180,7 @@ func AppInfoInstanceLaunchDefaultForURIAsync(cancellable context.Context, uri st
 	runtime.KeepAlive(callback)
 }
 
-// AppInfoInstanceLaunchDefaultForURIFinish wraps g_app_info_launch_default_for_uri_finish
+// AppInfoLaunchDefaultForURIFinish wraps g_app_info_launch_default_for_uri_finish
 // 
 // The function takes the following parameters:
 // 
@@ -8192,7 +8192,7 @@ func AppInfoInstanceLaunchDefaultForURIAsync(cancellable context.Context, uri st
 // 	- _goerr error (nullable): an error 
 //
 // Finishes an asynchronous launch-default-for-uri operation.
-func AppInfoInstanceLaunchDefaultForURIFinish(result AsyncResult) (bool, error) {
+func AppInfoLaunchDefaultForURIFinish(result AsyncResult) (bool, error) {
 	var carg1 *C.GAsyncResult // in, none, converted
 	var cret  C.gboolean      // return
 	var _cerr *C.GError       // out, full, converted, nullable
@@ -8215,7 +8215,7 @@ func AppInfoInstanceLaunchDefaultForURIFinish(result AsyncResult) (bool, error) 
 	return goret, _goerr
 }
 
-// AppInfoInstanceResetTypeAssociations wraps g_app_info_reset_type_associations
+// AppInfoResetTypeAssociations wraps g_app_info_reset_type_associations
 // 
 // The function takes the following parameters:
 // 
@@ -8226,7 +8226,7 @@ func AppInfoInstanceLaunchDefaultForURIFinish(result AsyncResult) (bool, error) 
 // [method@Gio.AppInfo.set_as_default_for_extension],
 // [method@Gio.AppInfo.add_supports_type] or
 // [method@Gio.AppInfo.remove_supports_type].
-func AppInfoInstanceResetTypeAssociations(contentType string) {
+func AppInfoResetTypeAssociations(contentType string) {
 	var carg1 *C.char // in, none, string, casted *C.gchar
 
 	carg1 = (*C.char)(unsafe.Pointer(C.CString(contentType)))
@@ -13686,7 +13686,7 @@ func UnsafeDtlsServerConnectionToGlibFull(c DtlsServerConnection) unsafe.Pointer
 	return gobject.UnsafeObjectToGlibFull(&i.Instance)
 }
 
-// NewDtlsServerConnectionInstance wraps g_dtls_server_connection_new
+// NewDtlsServerConnection wraps g_dtls_server_connection_new
 // 
 // The function takes the following parameters:
 // 
@@ -13699,7 +13699,7 @@ func UnsafeDtlsServerConnectionToGlibFull(c DtlsServerConnection) unsafe.Pointer
 // 	- _goerr error (nullable): an error 
 //
 // Creates a new #GDtlsServerConnection wrapping @base_socket.
-func NewDtlsServerConnectionInstance(baseSocket DatagramBased, certificate TlsCertificate) (DtlsServerConnection, error) {
+func NewDtlsServerConnection(baseSocket DatagramBased, certificate TlsCertificate) (DtlsServerConnection, error) {
 	var carg1 *C.GDatagramBased  // in, none, converted
 	var carg2 *C.GTlsCertificate // in, none, converted, nullable
 	var cret  *C.GDatagramBased  // return, full, converted, casted *C.GDtlsServerConnection
@@ -16353,7 +16353,7 @@ func UnsafeFileToGlibFull(c File) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(&i.Instance)
 }
 
-// NewFileInstanceBuildFilenamev wraps g_file_new_build_filenamev
+// NewFileBuildFilenamev wraps g_file_new_build_filenamev
 // 
 // The function takes the following parameters:
 // 
@@ -16369,7 +16369,7 @@ func UnsafeFileToGlibFull(c File) unsafe.Pointer {
 // 
 // Using this function is equivalent to calling g_build_filenamev(),
 // followed by g_file_new_for_path() on the result.
-func NewFileInstanceBuildFilenamev(args []string) File {
+func NewFileBuildFilenamev(args []string) File {
 	var carg1 **C.gchar // in, transfer: none, C Pointers: 2, Name: array[filename], array (inner: *typesystem.StringPrimitive, zero-terminated)
 	var cret  *C.GFile  // return, full, converted
 
@@ -16387,7 +16387,7 @@ func NewFileInstanceBuildFilenamev(args []string) File {
 	return goret
 }
 
-// NewFileInstanceForCommandlineArg wraps g_file_new_for_commandline_arg
+// NewFileForCommandlineArg wraps g_file_new_for_commandline_arg
 // 
 // The function takes the following parameters:
 // 
@@ -16411,7 +16411,7 @@ func NewFileInstanceBuildFilenamev(args []string) File {
 // g_application_command_line_create_file_for_arg() may be more useful
 // for you there.  It is also always possible to use this function with
 // #GOptionContext arguments of type %G_OPTION_ARG_FILENAME.
-func NewFileInstanceForCommandlineArg(arg string) File {
+func NewFileForCommandlineArg(arg string) File {
 	var carg1 *C.char  // in, none, string, casted *C.gchar
 	var cret  *C.GFile // return, full, converted
 
@@ -16428,7 +16428,7 @@ func NewFileInstanceForCommandlineArg(arg string) File {
 	return goret
 }
 
-// NewFileInstanceForCommandlineArgAndCwd wraps g_file_new_for_commandline_arg_and_cwd
+// NewFileForCommandlineArgAndCwd wraps g_file_new_for_commandline_arg_and_cwd
 // 
 // The function takes the following parameters:
 // 
@@ -16450,7 +16450,7 @@ func NewFileInstanceForCommandlineArg(arg string) File {
 // other than the invocation of the current process.
 // 
 // See also g_application_command_line_create_file_for_arg().
-func NewFileInstanceForCommandlineArgAndCwd(arg string, cwd string) File {
+func NewFileForCommandlineArgAndCwd(arg string, cwd string) File {
 	var carg1 *C.gchar // in, none, string, casted *C.gchar
 	var carg2 *C.gchar // in, none, string, casted *C.gchar
 	var cret  *C.GFile // return, full, converted
@@ -16471,7 +16471,7 @@ func NewFileInstanceForCommandlineArgAndCwd(arg string, cwd string) File {
 	return goret
 }
 
-// NewFileInstanceForPath wraps g_file_new_for_path
+// NewFileForPath wraps g_file_new_for_path
 // 
 // The function takes the following parameters:
 // 
@@ -16485,7 +16485,7 @@ func NewFileInstanceForCommandlineArgAndCwd(arg string, cwd string) File {
 // Constructs a #GFile for a given path. This operation never
 // fails, but the returned object might not support any I/O
 // operation if @path is malformed.
-func NewFileInstanceForPath(path string) File {
+func NewFileForPath(path string) File {
 	var carg1 *C.char  // in, none, string, casted *C.gchar
 	var cret  *C.GFile // return, full, converted
 
@@ -16502,7 +16502,7 @@ func NewFileInstanceForPath(path string) File {
 	return goret
 }
 
-// NewFileInstanceForURI wraps g_file_new_for_uri
+// NewFileForURI wraps g_file_new_for_uri
 // 
 // The function takes the following parameters:
 // 
@@ -16516,7 +16516,7 @@ func NewFileInstanceForPath(path string) File {
 // fails, but the returned object might not support any I/O
 // operation if @uri is malformed or if the uri type is
 // not supported.
-func NewFileInstanceForURI(uri string) File {
+func NewFileForURI(uri string) File {
 	var carg1 *C.char  // in, none, string, casted *C.gchar
 	var cret  *C.GFile // return, full, converted
 
@@ -16533,7 +16533,7 @@ func NewFileInstanceForURI(uri string) File {
 	return goret
 }
 
-// NewFileInstanceTmp wraps g_file_new_tmp
+// NewFileTmp wraps g_file_new_tmp
 // 
 // The function takes the following parameters:
 // 
@@ -16556,7 +16556,7 @@ func NewFileInstanceForURI(uri string) File {
 // 
 // Unlike the other #GFile constructors, this will return %NULL if
 // a temporary file could not be created.
-func NewFileInstanceTmp(tmpl string) (FileIOStream, File, error) {
+func NewFileTmp(tmpl string) (FileIOStream, File, error) {
 	var carg1 *C.char          // in, none, string, nullable-string
 	var carg2 *C.GFileIOStream // out, full, converted
 	var cret  *C.GFile         // return, full, converted
@@ -16583,7 +16583,7 @@ func NewFileInstanceTmp(tmpl string) (FileIOStream, File, error) {
 	return iostream, goret, _goerr
 }
 
-// NewFileInstanceTmpAsync wraps g_file_new_tmp_async
+// NewFileTmpAsync wraps g_file_new_tmp_async
 // 
 // The function takes the following parameters:
 // 
@@ -16599,7 +16599,7 @@ func NewFileInstanceTmp(tmpl string) (FileIOStream, File, error) {
 // @tmpl should be a string in the GLib file name encoding
 // containing a sequence of six 'X' characters, and containing no
 // directory components. If it is %NULL, a default template is used.
-func NewFileInstanceTmpAsync(cancellable context.Context, tmpl string, ioPriority int, callback AsyncReadyCallback) {
+func NewFileTmpAsync(cancellable context.Context, tmpl string, ioPriority int, callback AsyncReadyCallback) {
 	var carg3 *C.GCancellable       // in, none, converted, nullable
 	var carg1 *C.char               // in, none, string, nullable-string
 	var carg2 C.int                 // in, none, casted, casted C.gint
@@ -16626,7 +16626,7 @@ func NewFileInstanceTmpAsync(cancellable context.Context, tmpl string, ioPriorit
 	runtime.KeepAlive(callback)
 }
 
-// NewFileInstanceTmpDirAsync wraps g_file_new_tmp_dir_async
+// NewFileTmpDirAsync wraps g_file_new_tmp_dir_async
 // 
 // The function takes the following parameters:
 // 
@@ -16642,7 +16642,7 @@ func NewFileInstanceTmpAsync(cancellable context.Context, tmpl string, ioPriorit
 // @tmpl should be a string in the GLib file name encoding
 // containing a sequence of six 'X' characters, and containing no
 // directory components. If it is %NULL, a default template is used.
-func NewFileInstanceTmpDirAsync(cancellable context.Context, tmpl string, ioPriority int, callback AsyncReadyCallback) {
+func NewFileTmpDirAsync(cancellable context.Context, tmpl string, ioPriority int, callback AsyncReadyCallback) {
 	var carg3 *C.GCancellable       // in, none, converted, nullable
 	var carg1 *C.char               // in, none, string, nullable-string
 	var carg2 C.int                 // in, none, casted, casted C.gint
@@ -16669,7 +16669,7 @@ func NewFileInstanceTmpDirAsync(cancellable context.Context, tmpl string, ioPrio
 	runtime.KeepAlive(callback)
 }
 
-// NewFileInstanceTmpDirFinish wraps g_file_new_tmp_dir_finish
+// NewFileTmpDirFinish wraps g_file_new_tmp_dir_finish
 // 
 // The function takes the following parameters:
 // 
@@ -16682,7 +16682,7 @@ func NewFileInstanceTmpDirAsync(cancellable context.Context, tmpl string, ioPrio
 //
 // Finishes a temporary directory creation started by
 // g_file_new_tmp_dir_async().
-func NewFileInstanceTmpDirFinish(result AsyncResult) (File, error) {
+func NewFileTmpDirFinish(result AsyncResult) (File, error) {
 	var carg1 *C.GAsyncResult // in, none, converted
 	var cret  *C.GFile        // return, full, converted
 	var _cerr *C.GError       // out, full, converted, nullable
@@ -16703,7 +16703,7 @@ func NewFileInstanceTmpDirFinish(result AsyncResult) (File, error) {
 	return goret, _goerr
 }
 
-// NewFileInstanceTmpFinish wraps g_file_new_tmp_finish
+// NewFileTmpFinish wraps g_file_new_tmp_finish
 // 
 // The function takes the following parameters:
 // 
@@ -16716,7 +16716,7 @@ func NewFileInstanceTmpDirFinish(result AsyncResult) (File, error) {
 // 	- _goerr error (nullable): an error 
 //
 // Finishes a temporary file creation started by g_file_new_tmp_async().
-func NewFileInstanceTmpFinish(result AsyncResult) (FileIOStream, File, error) {
+func NewFileTmpFinish(result AsyncResult) (FileIOStream, File, error) {
 	var carg1 *C.GAsyncResult  // in, none, converted
 	var carg2 *C.GFileIOStream // out, full, converted
 	var cret  *C.GFile         // return, full, converted
@@ -16740,7 +16740,7 @@ func NewFileInstanceTmpFinish(result AsyncResult) (FileIOStream, File, error) {
 	return iostream, goret, _goerr
 }
 
-// FileInstanceParseName wraps g_file_parse_name
+// FileParseName wraps g_file_parse_name
 // 
 // The function takes the following parameters:
 // 
@@ -16754,7 +16754,7 @@ func NewFileInstanceTmpFinish(result AsyncResult) (FileIOStream, File, error) {
 // given by g_file_get_parse_name()). This operation never fails,
 // but the returned object might not support any I/O operation if
 // the @parse_name cannot be parsed.
-func FileInstanceParseName(parseName string) File {
+func FileParseName(parseName string) File {
 	var carg1 *C.char  // in, none, string, casted *C.gchar
 	var cret  *C.GFile // return, full, converted
 
@@ -22588,7 +22588,7 @@ func UnsafeIconToGlibFull(c Icon) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(&i.Instance)
 }
 
-// NewIconInstanceForString wraps g_icon_new_for_string
+// NewIconForString wraps g_icon_new_for_string
 // 
 // The function takes the following parameters:
 // 
@@ -22605,7 +22605,7 @@ func UnsafeIconToGlibFull(c Icon) unsafe.Pointer {
 // If your application or library provides one or more #GIcon
 // implementations you need to ensure that each #GType is registered
 // with the type system prior to calling g_icon_new_for_string().
-func NewIconInstanceForString(str string) (Icon, error) {
+func NewIconForString(str string) (Icon, error) {
 	var carg1 *C.gchar  // in, none, string, casted *C.gchar
 	var cret  *C.GIcon  // return, full, converted
 	var _cerr *C.GError // out, full, converted, nullable
@@ -23568,13 +23568,13 @@ func UnsafeMemoryMonitorToGlibFull(c MemoryMonitor) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(&i.Instance)
 }
 
-// MemoryMonitorInstanceDupDefault wraps g_memory_monitor_dup_default
+// MemoryMonitorDupDefault wraps g_memory_monitor_dup_default
 // The function returns the following values:
 // 
 // 	- goret MemoryMonitor 
 //
 // Gets a reference to the default #GMemoryMonitor for the system.
-func MemoryMonitorInstanceDupDefault() MemoryMonitor {
+func MemoryMonitorDupDefault() MemoryMonitor {
 	var cret *C.GMemoryMonitor // return, full, converted
 
 	cret = C.g_memory_monitor_dup_default()
@@ -25048,13 +25048,13 @@ func UnsafeNetworkMonitorToGlibFull(c NetworkMonitor) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(&i.Instance)
 }
 
-// NetworkMonitorInstanceGetDefault wraps g_network_monitor_get_default
+// NetworkMonitorGetDefault wraps g_network_monitor_get_default
 // The function returns the following values:
 // 
 // 	- goret NetworkMonitor 
 //
 // Gets the default #GNetworkMonitor for the system.
-func NetworkMonitorInstanceGetDefault() NetworkMonitor {
+func NetworkMonitorGetDefault() NetworkMonitor {
 	var cret *C.GNetworkMonitor // return, none, converted
 
 	cret = C.g_network_monitor_get_default()
@@ -26025,13 +26025,13 @@ func UnsafePowerProfileMonitorToGlibFull(c PowerProfileMonitor) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(&i.Instance)
 }
 
-// PowerProfileMonitorInstanceDupDefault wraps g_power_profile_monitor_dup_default
+// PowerProfileMonitorDupDefault wraps g_power_profile_monitor_dup_default
 // The function returns the following values:
 // 
 // 	- goret PowerProfileMonitor 
 //
 // Gets a reference to the default #GPowerProfileMonitor for the system.
-func PowerProfileMonitorInstanceDupDefault() PowerProfileMonitor {
+func PowerProfileMonitorDupDefault() PowerProfileMonitor {
 	var cret *C.GPowerProfileMonitor // return, full, converted
 
 	cret = C.g_power_profile_monitor_dup_default()
@@ -26185,7 +26185,7 @@ func UnsafeProxyToGlibFull(c Proxy) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(&i.Instance)
 }
 
-// ProxyInstanceGetDefaultForProtocol wraps g_proxy_get_default_for_protocol
+// ProxyGetDefaultForProtocol wraps g_proxy_get_default_for_protocol
 // 
 // The function takes the following parameters:
 // 
@@ -26197,7 +26197,7 @@ func UnsafeProxyToGlibFull(c Proxy) unsafe.Pointer {
 //
 // Find the `gio-proxy` extension point for a proxy implementation that supports
 // the specified protocol.
-func ProxyInstanceGetDefaultForProtocol(protocol string) Proxy {
+func ProxyGetDefaultForProtocol(protocol string) Proxy {
 	var carg1 *C.gchar  // in, none, string, casted *C.gchar
 	var cret  *C.GProxy // return, full, converted
 
@@ -26490,13 +26490,13 @@ func UnsafeProxyResolverToGlibFull(c ProxyResolver) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(&i.Instance)
 }
 
-// ProxyResolverInstanceGetDefault wraps g_proxy_resolver_get_default
+// ProxyResolverGetDefault wraps g_proxy_resolver_get_default
 // The function returns the following values:
 // 
 // 	- goret ProxyResolver 
 //
 // Gets the default #GProxyResolver for the system.
-func ProxyResolverInstanceGetDefault() ProxyResolver {
+func ProxyResolverGetDefault() ProxyResolver {
 	var cret *C.GProxyResolver // return, none, converted
 
 	cret = C.g_proxy_resolver_get_default()
@@ -27422,13 +27422,13 @@ func UnsafeTlsBackendToGlibFull(c TlsBackend) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(&i.Instance)
 }
 
-// TlsBackendInstanceGetDefault wraps g_tls_backend_get_default
+// TlsBackendGetDefault wraps g_tls_backend_get_default
 // The function returns the following values:
 // 
 // 	- goret TlsBackend 
 //
 // Gets the default #GTlsBackend for the system.
-func TlsBackendInstanceGetDefault() TlsBackend {
+func TlsBackendGetDefault() TlsBackend {
 	var cret *C.GTlsBackend // return, none, converted
 
 	cret = C.g_tls_backend_get_default()
@@ -27838,7 +27838,7 @@ func UnsafeTlsClientConnectionToGlibFull(c TlsClientConnection) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(&i.Instance)
 }
 
-// NewTlsClientConnectionInstance wraps g_tls_client_connection_new
+// NewTlsClientConnection wraps g_tls_client_connection_new
 // 
 // The function takes the following parameters:
 // 
@@ -27857,7 +27857,7 @@ func UnsafeTlsClientConnectionToGlibFull(c TlsClientConnection) unsafe.Pointer {
 // See the documentation for #GTlsConnection:base-io-stream for restrictions
 // on when application code can run operations on the @base_io_stream after
 // this function has returned.
-func NewTlsClientConnectionInstance(baseIoStream IOStream, serverIdentity SocketConnectable) (TlsClientConnection, error) {
+func NewTlsClientConnection(baseIoStream IOStream, serverIdentity SocketConnectable) (TlsClientConnection, error) {
 	var carg1 *C.GIOStream          // in, none, converted
 	var carg2 *C.GSocketConnectable // in, none, converted, nullable
 	var cret  *C.GIOStream          // return, full, converted, casted *C.GTlsClientConnection
@@ -28142,7 +28142,7 @@ func UnsafeTlsFileDatabaseToGlibFull(c TlsFileDatabase) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(&i.Instance)
 }
 
-// NewTlsFileDatabaseInstance wraps g_tls_file_database_new
+// NewTlsFileDatabase wraps g_tls_file_database_new
 // 
 // The function takes the following parameters:
 // 
@@ -28157,7 +28157,7 @@ func UnsafeTlsFileDatabaseToGlibFull(c TlsFileDatabase) unsafe.Pointer {
 // in @anchors to verify certificate chains.
 // 
 // The certificates in @anchors must be PEM encoded.
-func NewTlsFileDatabaseInstance(anchors string) (TlsFileDatabase, error) {
+func NewTlsFileDatabase(anchors string) (TlsFileDatabase, error) {
 	var carg1 *C.gchar        // in, none, string, casted *C.gchar
 	var cret  *C.GTlsDatabase // return, full, converted, casted *C.GTlsFileDatabase
 	var _cerr *C.GError       // out, full, converted, nullable
@@ -28233,7 +28233,7 @@ func UnsafeTlsServerConnectionToGlibFull(c TlsServerConnection) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(&i.Instance)
 }
 
-// NewTlsServerConnectionInstance wraps g_tls_server_connection_new
+// NewTlsServerConnection wraps g_tls_server_connection_new
 // 
 // The function takes the following parameters:
 // 
@@ -28251,7 +28251,7 @@ func UnsafeTlsServerConnectionToGlibFull(c TlsServerConnection) unsafe.Pointer {
 // See the documentation for #GTlsConnection:base-io-stream for restrictions
 // on when application code can run operations on the @base_io_stream after
 // this function has returned.
-func NewTlsServerConnectionInstance(baseIoStream IOStream, certificate TlsCertificate) (TlsServerConnection, error) {
+func NewTlsServerConnection(baseIoStream IOStream, certificate TlsCertificate) (TlsServerConnection, error) {
 	var carg1 *C.GIOStream       // in, none, converted
 	var carg2 *C.GTlsCertificate // in, none, converted, nullable
 	var cret  *C.GIOStream       // return, full, converted, casted *C.GTlsServerConnection
@@ -29406,7 +29406,7 @@ func UnsafeDtlsClientConnectionToGlibFull(c DtlsClientConnection) unsafe.Pointer
 	return gobject.UnsafeObjectToGlibFull(&i.Instance)
 }
 
-// NewDtlsClientConnectionInstance wraps g_dtls_client_connection_new
+// NewDtlsClientConnection wraps g_dtls_client_connection_new
 // 
 // The function takes the following parameters:
 // 
@@ -29420,7 +29420,7 @@ func UnsafeDtlsClientConnectionToGlibFull(c DtlsClientConnection) unsafe.Pointer
 //
 // Creates a new #GDtlsClientConnection wrapping @base_socket which is
 // assumed to communicate with the server identified by @server_identity.
-func NewDtlsClientConnectionInstance(baseSocket DatagramBased, serverIdentity SocketConnectable) (DtlsClientConnection, error) {
+func NewDtlsClientConnection(baseSocket DatagramBased, serverIdentity SocketConnectable) (DtlsClientConnection, error) {
 	var carg1 *C.GDatagramBased     // in, none, converted
 	var carg2 *C.GSocketConnectable // in, none, converted, nullable
 	var cret  *C.GDatagramBased     // return, full, converted, casted *C.GDtlsClientConnection
@@ -29633,7 +29633,7 @@ func UnsafeAppInfoMonitorToGlibFull(c AppInfoMonitor) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// AppInfoMonitorInstanceGet wraps g_app_info_monitor_get
+// AppInfoMonitorGet wraps g_app_info_monitor_get
 // The function returns the following values:
 // 
 // 	- goret AppInfoMonitor 
@@ -29651,7 +29651,7 @@ func UnsafeAppInfoMonitorToGlibFull(c AppInfoMonitor) unsafe.Pointer {
 // 
 // You must only call g_object_unref() on the return value from under
 // the same main context as you created it.
-func AppInfoMonitorInstanceGet() AppInfoMonitor {
+func AppInfoMonitorGet() AppInfoMonitor {
 	var cret *C.GAppInfoMonitor // return, full, converted
 
 	cret = C.g_app_info_monitor_get()
@@ -29756,7 +29756,7 @@ func UnsafeAppLaunchContextToGlibFull(c AppLaunchContext) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewAppLaunchContextInstance wraps g_app_launch_context_new
+// NewAppLaunchContext wraps g_app_launch_context_new
 // The function returns the following values:
 // 
 // 	- goret AppLaunchContext 
@@ -29764,7 +29764,7 @@ func UnsafeAppLaunchContextToGlibFull(c AppLaunchContext) unsafe.Pointer {
 // Creates a new application launch context. This is not normally used,
 // instead you instantiate a subclass of this, such as
 // [`GdkAppLaunchContext`](https://docs.gtk.org/gdk4/class.AppLaunchContext.html).
-func NewAppLaunchContextInstance() AppLaunchContext {
+func NewAppLaunchContext() AppLaunchContext {
 	var cret *C.GAppLaunchContext // return, full, converted
 
 	cret = C.g_app_launch_context_new()
@@ -30739,7 +30739,7 @@ func UnsafeApplicationToGlibFull(c Application) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewApplicationInstance wraps g_application_new
+// NewApplication wraps g_application_new
 // 
 // The function takes the following parameters:
 // 
@@ -30757,7 +30757,7 @@ func UnsafeApplicationToGlibFull(c Application) unsafe.Pointer {
 // 
 // If no application ID is given then some features of #GApplication
 // (most notably application uniqueness) will be disabled.
-func NewApplicationInstance(applicationId string, flags ApplicationFlags) Application {
+func NewApplication(applicationId string, flags ApplicationFlags) Application {
 	var carg1 *C.gchar            // in, none, string, nullable-string
 	var carg2 C.GApplicationFlags // in, none, casted
 	var cret  *C.GApplication     // return, full, converted
@@ -30779,7 +30779,7 @@ func NewApplicationInstance(applicationId string, flags ApplicationFlags) Applic
 	return goret
 }
 
-// ApplicationInstanceGetDefault wraps g_application_get_default
+// ApplicationGetDefault wraps g_application_get_default
 // The function returns the following values:
 // 
 // 	- goret Application 
@@ -30791,7 +30791,7 @@ func NewApplicationInstance(applicationId string, flags ApplicationFlags) Applic
 // this by using g_application_set_default().
 // 
 // If there is no default application then %NULL is returned.
-func ApplicationInstanceGetDefault() Application {
+func ApplicationGetDefault() Application {
 	var cret *C.GApplication // return, none, converted
 
 	cret = C.g_application_get_default()
@@ -30803,7 +30803,7 @@ func ApplicationInstanceGetDefault() Application {
 	return goret
 }
 
-// ApplicationInstanceIDIsValid wraps g_application_id_is_valid
+// ApplicationIDIsValid wraps g_application_id_is_valid
 // 
 // The function takes the following parameters:
 // 
@@ -30858,7 +30858,7 @@ func ApplicationInstanceGetDefault() Application {
 // contains leading digits they should be escaped by prepending an underscore.
 // For example, if the owner of 7-zip.org used an application identifier for an
 // archiving application, it might be named `org._7_zip.Archiver`.
-func ApplicationInstanceIDIsValid(applicationId string) bool {
+func ApplicationIDIsValid(applicationId string) bool {
 	var carg1 *C.gchar   // in, none, string, casted *C.gchar
 	var cret  C.gboolean // return
 
@@ -32981,7 +32981,7 @@ func UnsafeBytesIconToGlibFull(c BytesIcon) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewBytesIconInstance wraps g_bytes_icon_new
+// NewBytesIcon wraps g_bytes_icon_new
 // 
 // The function takes the following parameters:
 // 
@@ -32995,7 +32995,7 @@ func UnsafeBytesIconToGlibFull(c BytesIcon) unsafe.Pointer {
 // 
 // This cannot fail, but loading and interpreting the bytes may fail later on
 // (for example, if g_loadable_icon_load() is called) if the image is invalid.
-func NewBytesIconInstance(bytes *glib.Bytes) BytesIcon {
+func NewBytesIcon(bytes *glib.Bytes) BytesIcon {
 	var carg1 *C.GBytes // in, none, converted
 	var cret  *C.GIcon  // return, full, converted, casted *C.GBytesIcon
 
@@ -33107,7 +33107,7 @@ func UnsafeCharsetConverterToGlibFull(c CharsetConverter) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewCharsetConverterInstance wraps g_charset_converter_new
+// NewCharsetConverter wraps g_charset_converter_new
 // 
 // The function takes the following parameters:
 // 
@@ -33120,7 +33120,7 @@ func UnsafeCharsetConverterToGlibFull(c CharsetConverter) unsafe.Pointer {
 // 	- _goerr error (nullable): an error 
 //
 // Creates a new #GCharsetConverter.
-func NewCharsetConverterInstance(toCharset string, fromCharset string) (CharsetConverter, error) {
+func NewCharsetConverter(toCharset string, fromCharset string) (CharsetConverter, error) {
 	var carg1 *C.gchar             // in, none, string, casted *C.gchar
 	var carg2 *C.gchar             // in, none, string, casted *C.gchar
 	var cret  *C.GCharsetConverter // return, full, converted
@@ -33337,14 +33337,14 @@ func UnsafeCredentialsToGlibFull(c Credentials) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewCredentialsInstance wraps g_credentials_new
+// NewCredentials wraps g_credentials_new
 // The function returns the following values:
 // 
 // 	- goret Credentials 
 //
 // Creates a new #GCredentials object with credentials matching the
 // the current process.
-func NewCredentialsInstance() Credentials {
+func NewCredentials() Credentials {
 	var cret *C.GCredentials // return, full, converted
 
 	cret = C.g_credentials_new()
@@ -33504,7 +33504,7 @@ func UnsafeDBusActionGroupToGlibFull(c DBusActionGroup) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// DBusActionGroupInstanceGet wraps g_dbus_action_group_get
+// DBusActionGroupGet wraps g_dbus_action_group_get
 // 
 // The function takes the following parameters:
 // 
@@ -33530,7 +33530,7 @@ func UnsafeDBusActionGroupToGlibFull(c DBusActionGroup) unsafe.Pointer {
 // already be filled in.  The correct thing to do is connect the signals
 // for the action group to monitor for changes and then to call
 // g_action_group_list_actions() to get the initial list.
-func DBusActionGroupInstanceGet(connection DBusConnection, busName string, objectPath string) DBusActionGroup {
+func DBusActionGroupGet(connection DBusConnection, busName string, objectPath string) DBusActionGroup {
 	var carg1 *C.GDBusConnection  // in, none, converted
 	var carg2 *C.gchar            // in, none, string, nullable-string
 	var carg3 *C.gchar            // in, none, string, casted *C.gchar
@@ -33694,13 +33694,13 @@ func UnsafeDBusAuthObserverToGlibFull(c DBusAuthObserver) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewDBusAuthObserverInstance wraps g_dbus_auth_observer_new
+// NewDBusAuthObserver wraps g_dbus_auth_observer_new
 // The function returns the following values:
 // 
 // 	- goret DBusAuthObserver 
 //
 // Creates a new #GDBusAuthObserver object.
-func NewDBusAuthObserverInstance() DBusAuthObserver {
+func NewDBusAuthObserver() DBusAuthObserver {
 	var cret *C.GDBusAuthObserver // return, full, converted
 
 	cret = C.g_dbus_auth_observer_new()
@@ -34452,7 +34452,7 @@ func UnsafeDBusConnectionToGlibFull(c DBusConnection) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewDBusConnectionInstanceFinish wraps g_dbus_connection_new_finish
+// NewDBusConnectionFinish wraps g_dbus_connection_new_finish
 // 
 // The function takes the following parameters:
 // 
@@ -34465,7 +34465,7 @@ func UnsafeDBusConnectionToGlibFull(c DBusConnection) unsafe.Pointer {
 // 	- _goerr error (nullable): an error 
 //
 // Finishes an operation started with g_dbus_connection_new().
-func NewDBusConnectionInstanceFinish(res AsyncResult) (DBusConnection, error) {
+func NewDBusConnectionFinish(res AsyncResult) (DBusConnection, error) {
 	var carg1 *C.GAsyncResult    // in, none, converted
 	var cret  *C.GDBusConnection // return, full, converted
 	var _cerr *C.GError          // out, full, converted, nullable
@@ -34486,7 +34486,7 @@ func NewDBusConnectionInstanceFinish(res AsyncResult) (DBusConnection, error) {
 	return goret, _goerr
 }
 
-// NewDBusConnectionInstanceForAddressFinish wraps g_dbus_connection_new_for_address_finish
+// NewDBusConnectionForAddressFinish wraps g_dbus_connection_new_for_address_finish
 // 
 // The function takes the following parameters:
 // 
@@ -34499,7 +34499,7 @@ func NewDBusConnectionInstanceFinish(res AsyncResult) (DBusConnection, error) {
 // 	- _goerr error (nullable): an error 
 //
 // Finishes an operation started with g_dbus_connection_new_for_address().
-func NewDBusConnectionInstanceForAddressFinish(res AsyncResult) (DBusConnection, error) {
+func NewDBusConnectionForAddressFinish(res AsyncResult) (DBusConnection, error) {
 	var carg1 *C.GAsyncResult    // in, none, converted
 	var cret  *C.GDBusConnection // return, full, converted
 	var _cerr *C.GError          // out, full, converted, nullable
@@ -34520,7 +34520,7 @@ func NewDBusConnectionInstanceForAddressFinish(res AsyncResult) (DBusConnection,
 	return goret, _goerr
 }
 
-// NewDBusConnectionInstanceForAddressSync wraps g_dbus_connection_new_for_address_sync
+// NewDBusConnectionForAddressSync wraps g_dbus_connection_new_for_address_sync
 // 
 // The function takes the following parameters:
 // 
@@ -34551,7 +34551,7 @@ func NewDBusConnectionInstanceForAddressFinish(res AsyncResult) (DBusConnection,
 // 
 // If @observer is not %NULL it may be used to control the
 // authentication process.
-func NewDBusConnectionInstanceForAddressSync(cancellable context.Context, address string, flags DBusConnectionFlags, observer DBusAuthObserver) (DBusConnection, error) {
+func NewDBusConnectionForAddressSync(cancellable context.Context, address string, flags DBusConnectionFlags, observer DBusAuthObserver) (DBusConnection, error) {
 	var carg4 *C.GCancellable        // in, none, converted, nullable
 	var carg1 *C.gchar               // in, none, string, casted *C.gchar
 	var carg2 C.GDBusConnectionFlags // in, none, casted
@@ -34586,7 +34586,7 @@ func NewDBusConnectionInstanceForAddressSync(cancellable context.Context, addres
 	return goret, _goerr
 }
 
-// NewDBusConnectionInstanceSync wraps g_dbus_connection_new_sync
+// NewDBusConnectionSync wraps g_dbus_connection_new_sync
 // 
 // The function takes the following parameters:
 // 
@@ -34616,7 +34616,7 @@ func NewDBusConnectionInstanceForAddressSync(cancellable context.Context, addres
 // 
 // This is a synchronous failable constructor. See
 // g_dbus_connection_new() for the asynchronous version.
-func NewDBusConnectionInstanceSync(cancellable context.Context, stream IOStream, guid string, flags DBusConnectionFlags, observer DBusAuthObserver) (DBusConnection, error) {
+func NewDBusConnectionSync(cancellable context.Context, stream IOStream, guid string, flags DBusConnectionFlags, observer DBusAuthObserver) (DBusConnection, error) {
 	var carg5 *C.GCancellable        // in, none, converted, nullable
 	var carg1 *C.GIOStream           // in, none, converted
 	var carg2 *C.gchar               // in, none, string, nullable-string
@@ -34656,7 +34656,7 @@ func NewDBusConnectionInstanceSync(cancellable context.Context, stream IOStream,
 	return goret, _goerr
 }
 
-// NewDBusConnectionInstance wraps g_dbus_connection_new
+// NewDBusConnection wraps g_dbus_connection_new
 // 
 // The function takes the following parameters:
 // 
@@ -34687,7 +34687,7 @@ func NewDBusConnectionInstanceSync(cancellable context.Context, stream IOStream,
 // This is an asynchronous failable constructor. See
 // g_dbus_connection_new_sync() for the synchronous
 // version.
-func NewDBusConnectionInstance(cancellable context.Context, stream IOStream, guid string, flags DBusConnectionFlags, observer DBusAuthObserver, callback AsyncReadyCallback) {
+func NewDBusConnection(cancellable context.Context, stream IOStream, guid string, flags DBusConnectionFlags, observer DBusAuthObserver, callback AsyncReadyCallback) {
 	var carg5 *C.GCancellable        // in, none, converted, nullable
 	var carg1 *C.GIOStream           // in, none, converted
 	var carg2 *C.gchar               // in, none, string, nullable-string
@@ -34722,7 +34722,7 @@ func NewDBusConnectionInstance(cancellable context.Context, stream IOStream, gui
 	runtime.KeepAlive(callback)
 }
 
-// NewDBusConnectionInstanceForAddress wraps g_dbus_connection_new_for_address
+// NewDBusConnectionForAddress wraps g_dbus_connection_new_for_address
 // 
 // The function takes the following parameters:
 // 
@@ -34754,7 +34754,7 @@ func NewDBusConnectionInstance(cancellable context.Context, stream IOStream, gui
 // This is an asynchronous failable constructor. See
 // g_dbus_connection_new_for_address_sync() for the synchronous
 // version.
-func NewDBusConnectionInstanceForAddress(cancellable context.Context, address string, flags DBusConnectionFlags, observer DBusAuthObserver, callback AsyncReadyCallback) {
+func NewDBusConnectionForAddress(cancellable context.Context, address string, flags DBusConnectionFlags, observer DBusAuthObserver, callback AsyncReadyCallback) {
 	var carg4 *C.GCancellable        // in, none, converted, nullable
 	var carg1 *C.gchar               // in, none, string, casted *C.gchar
 	var carg2 C.GDBusConnectionFlags // in, none, casted
@@ -36750,13 +36750,13 @@ func UnsafeDBusMessageToGlibFull(c DBusMessage) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewDBusMessageInstance wraps g_dbus_message_new
+// NewDBusMessage wraps g_dbus_message_new
 // The function returns the following values:
 // 
 // 	- goret DBusMessage 
 //
 // Creates a new empty #GDBusMessage.
-func NewDBusMessageInstance() DBusMessage {
+func NewDBusMessage() DBusMessage {
 	var cret *C.GDBusMessage // return, full, converted
 
 	cret = C.g_dbus_message_new()
@@ -36768,7 +36768,7 @@ func NewDBusMessageInstance() DBusMessage {
 	return goret
 }
 
-// NewDBusMessageInstanceFromBlob wraps g_dbus_message_new_from_blob
+// NewDBusMessageFromBlob wraps g_dbus_message_new_from_blob
 // 
 // The function takes the following parameters:
 // 
@@ -36786,7 +36786,7 @@ func NewDBusMessageInstance() DBusMessage {
 // 
 // If the @blob cannot be parsed, contains invalid fields, or contains invalid
 // headers, %G_IO_ERROR_INVALID_ARGUMENT will be returned.
-func NewDBusMessageInstanceFromBlob(blob []uint8, capabilities DBusCapabilityFlags) (DBusMessage, error) {
+func NewDBusMessageFromBlob(blob []uint8, capabilities DBusCapabilityFlags) (DBusMessage, error) {
 	var carg1 *C.guchar              // in, transfer: none, C Pointers: 1, Name: array[guint8], array (inner: *typesystem.CastablePrimitive, length-by: carg2)
 	var carg2 C.gsize                // implicit
 	var carg3 C.GDBusCapabilityFlags // in, none, casted
@@ -36814,7 +36814,7 @@ func NewDBusMessageInstanceFromBlob(blob []uint8, capabilities DBusCapabilityFla
 	return goret, _goerr
 }
 
-// NewDBusMessageInstanceMethodCall wraps g_dbus_message_new_method_call
+// NewDBusMessageMethodCall wraps g_dbus_message_new_method_call
 // 
 // The function takes the following parameters:
 // 
@@ -36828,7 +36828,7 @@ func NewDBusMessageInstanceFromBlob(blob []uint8, capabilities DBusCapabilityFla
 // 	- goret DBusMessage 
 //
 // Creates a new #GDBusMessage for a method call.
-func NewDBusMessageInstanceMethodCall(name string, path string, interface_ string, method string) DBusMessage {
+func NewDBusMessageMethodCall(name string, path string, interface_ string, method string) DBusMessage {
 	var carg1 *C.gchar        // in, none, string, nullable-string
 	var carg2 *C.gchar        // in, none, string, casted *C.gchar
 	var carg3 *C.gchar        // in, none, string, nullable-string
@@ -36861,7 +36861,7 @@ func NewDBusMessageInstanceMethodCall(name string, path string, interface_ strin
 	return goret
 }
 
-// NewDBusMessageInstanceSignal wraps g_dbus_message_new_signal
+// NewDBusMessageSignal wraps g_dbus_message_new_signal
 // 
 // The function takes the following parameters:
 // 
@@ -36874,7 +36874,7 @@ func NewDBusMessageInstanceMethodCall(name string, path string, interface_ strin
 // 	- goret DBusMessage 
 //
 // Creates a new #GDBusMessage for a signal emission.
-func NewDBusMessageInstanceSignal(path string, interface_ string, signal string) DBusMessage {
+func NewDBusMessageSignal(path string, interface_ string, signal string) DBusMessage {
 	var carg1 *C.gchar        // in, none, string, casted *C.gchar
 	var carg2 *C.gchar        // in, none, string, casted *C.gchar
 	var carg3 *C.gchar        // in, none, string, casted *C.gchar
@@ -36899,7 +36899,7 @@ func NewDBusMessageInstanceSignal(path string, interface_ string, signal string)
 	return goret
 }
 
-// DBusMessageInstanceBytesNeeded wraps g_dbus_message_bytes_needed
+// DBusMessageBytesNeeded wraps g_dbus_message_bytes_needed
 // 
 // The function takes the following parameters:
 // 
@@ -36912,7 +36912,7 @@ func NewDBusMessageInstanceSignal(path string, interface_ string, signal string)
 //
 // Utility function to calculate how many bytes are needed to
 // completely deserialize the D-Bus message stored at @blob.
-func DBusMessageInstanceBytesNeeded(blob []uint8) (int, error) {
+func DBusMessageBytesNeeded(blob []uint8) (int, error) {
 	var carg1 *C.guchar // in, transfer: none, C Pointers: 1, Name: array[guint8], array (inner: *typesystem.CastablePrimitive, length-by: carg2)
 	var carg2 C.gsize   // implicit
 	var cret  C.gssize  // return, none, casted
@@ -38423,7 +38423,7 @@ func UnsafeDBusObjectManagerClientToGlibFull(c DBusObjectManagerClient) unsafe.P
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewDBusObjectManagerClientInstanceFinish wraps g_dbus_object_manager_client_new_finish
+// NewDBusObjectManagerClientFinish wraps g_dbus_object_manager_client_new_finish
 // 
 // The function takes the following parameters:
 // 
@@ -38435,7 +38435,7 @@ func UnsafeDBusObjectManagerClientToGlibFull(c DBusObjectManagerClient) unsafe.P
 // 	- _goerr error (nullable): an error 
 //
 // Finishes an operation started with g_dbus_object_manager_client_new().
-func NewDBusObjectManagerClientInstanceFinish(res AsyncResult) (DBusObjectManagerClient, error) {
+func NewDBusObjectManagerClientFinish(res AsyncResult) (DBusObjectManagerClient, error) {
 	var carg1 *C.GAsyncResult       // in, none, converted
 	var cret  *C.GDBusObjectManager // return, full, converted, casted *C.GDBusObjectManagerClient
 	var _cerr *C.GError             // out, full, converted, nullable
@@ -38456,7 +38456,7 @@ func NewDBusObjectManagerClientInstanceFinish(res AsyncResult) (DBusObjectManage
 	return goret, _goerr
 }
 
-// NewDBusObjectManagerClientInstanceForBusFinish wraps g_dbus_object_manager_client_new_for_bus_finish
+// NewDBusObjectManagerClientForBusFinish wraps g_dbus_object_manager_client_new_for_bus_finish
 // 
 // The function takes the following parameters:
 // 
@@ -38468,7 +38468,7 @@ func NewDBusObjectManagerClientInstanceFinish(res AsyncResult) (DBusObjectManage
 // 	- _goerr error (nullable): an error 
 //
 // Finishes an operation started with g_dbus_object_manager_client_new_for_bus().
-func NewDBusObjectManagerClientInstanceForBusFinish(res AsyncResult) (DBusObjectManagerClient, error) {
+func NewDBusObjectManagerClientForBusFinish(res AsyncResult) (DBusObjectManagerClient, error) {
 	var carg1 *C.GAsyncResult       // in, none, converted
 	var cret  *C.GDBusObjectManager // return, full, converted, casted *C.GDBusObjectManagerClient
 	var _cerr *C.GError             // out, full, converted, nullable
@@ -38725,7 +38725,7 @@ func UnsafeDBusObjectManagerServerToGlibFull(c DBusObjectManagerServer) unsafe.P
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewDBusObjectManagerServerInstance wraps g_dbus_object_manager_server_new
+// NewDBusObjectManagerServer wraps g_dbus_object_manager_server_new
 // 
 // The function takes the following parameters:
 // 
@@ -38742,7 +38742,7 @@ func UnsafeDBusObjectManagerServerToGlibFull(c DBusObjectManagerServer) unsafe.P
 // want to export all of your objects before doing so to avoid
 // [InterfacesAdded](http://dbus.freedesktop.org/doc/dbus-specification.html#standard-interfaces-objectmanager)
 // signals being emitted.
-func NewDBusObjectManagerServerInstance(objectPath string) DBusObjectManagerServer {
+func NewDBusObjectManagerServer(objectPath string) DBusObjectManagerServer {
 	var carg1 *C.gchar                    // in, none, string, casted *C.gchar
 	var cret  *C.GDBusObjectManagerServer // return, full, converted
 
@@ -38983,7 +38983,7 @@ func UnsafeDBusObjectProxyToGlibFull(c DBusObjectProxy) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewDBusObjectProxyInstance wraps g_dbus_object_proxy_new
+// NewDBusObjectProxy wraps g_dbus_object_proxy_new
 // 
 // The function takes the following parameters:
 // 
@@ -38996,7 +38996,7 @@ func UnsafeDBusObjectProxyToGlibFull(c DBusObjectProxy) unsafe.Pointer {
 //
 // Creates a new #GDBusObjectProxy for the given connection and
 // object path.
-func NewDBusObjectProxyInstance(connection DBusConnection, objectPath string) DBusObjectProxy {
+func NewDBusObjectProxy(connection DBusConnection, objectPath string) DBusObjectProxy {
 	var carg1 *C.GDBusConnection  // in, none, converted
 	var carg2 *C.gchar            // in, none, string, casted *C.gchar
 	var cret  *C.GDBusObjectProxy // return, full, converted
@@ -39140,7 +39140,7 @@ func UnsafeDBusObjectSkeletonToGlibFull(c DBusObjectSkeleton) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewDBusObjectSkeletonInstance wraps g_dbus_object_skeleton_new
+// NewDBusObjectSkeleton wraps g_dbus_object_skeleton_new
 // 
 // The function takes the following parameters:
 // 
@@ -39151,7 +39151,7 @@ func UnsafeDBusObjectSkeletonToGlibFull(c DBusObjectSkeleton) unsafe.Pointer {
 // 	- goret DBusObjectSkeleton 
 //
 // Creates a new #GDBusObjectSkeleton.
-func NewDBusObjectSkeletonInstance(objectPath string) DBusObjectSkeleton {
+func NewDBusObjectSkeleton(objectPath string) DBusObjectSkeleton {
 	var carg1 *C.gchar               // in, none, string, casted *C.gchar
 	var cret  *C.GDBusObjectSkeleton // return, full, converted
 
@@ -39464,7 +39464,7 @@ func UnsafeDBusProxyToGlibFull(c DBusProxy) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewDBusProxyInstanceFinish wraps g_dbus_proxy_new_finish
+// NewDBusProxyFinish wraps g_dbus_proxy_new_finish
 // 
 // The function takes the following parameters:
 // 
@@ -39476,7 +39476,7 @@ func UnsafeDBusProxyToGlibFull(c DBusProxy) unsafe.Pointer {
 // 	- _goerr error (nullable): an error 
 //
 // Finishes creating a #GDBusProxy.
-func NewDBusProxyInstanceFinish(res AsyncResult) (DBusProxy, error) {
+func NewDBusProxyFinish(res AsyncResult) (DBusProxy, error) {
 	var carg1 *C.GAsyncResult // in, none, converted
 	var cret  *C.GDBusProxy   // return, full, converted
 	var _cerr *C.GError       // out, full, converted, nullable
@@ -39497,7 +39497,7 @@ func NewDBusProxyInstanceFinish(res AsyncResult) (DBusProxy, error) {
 	return goret, _goerr
 }
 
-// NewDBusProxyInstanceForBusFinish wraps g_dbus_proxy_new_for_bus_finish
+// NewDBusProxyForBusFinish wraps g_dbus_proxy_new_for_bus_finish
 // 
 // The function takes the following parameters:
 // 
@@ -39509,7 +39509,7 @@ func NewDBusProxyInstanceFinish(res AsyncResult) (DBusProxy, error) {
 // 	- _goerr error (nullable): an error 
 //
 // Finishes creating a #GDBusProxy.
-func NewDBusProxyInstanceForBusFinish(res AsyncResult) (DBusProxy, error) {
+func NewDBusProxyForBusFinish(res AsyncResult) (DBusProxy, error) {
 	var carg1 *C.GAsyncResult // in, none, converted
 	var cret  *C.GDBusProxy   // return, full, converted
 	var _cerr *C.GError       // out, full, converted, nullable
@@ -39530,7 +39530,7 @@ func NewDBusProxyInstanceForBusFinish(res AsyncResult) (DBusProxy, error) {
 	return goret, _goerr
 }
 
-// NewDBusProxyInstanceForBusSync wraps g_dbus_proxy_new_for_bus_sync
+// NewDBusProxyForBusSync wraps g_dbus_proxy_new_for_bus_sync
 // 
 // The function takes the following parameters:
 // 
@@ -39551,7 +39551,7 @@ func NewDBusProxyInstanceForBusFinish(res AsyncResult) (DBusProxy, error) {
 // Like g_dbus_proxy_new_sync() but takes a #GBusType instead of a #GDBusConnection.
 // 
 // #GDBusProxy is used in this [example][gdbus-wellknown-proxy].
-func NewDBusProxyInstanceForBusSync(cancellable context.Context, busType BusType, flags DBusProxyFlags, info *DBusInterfaceInfo, name string, objectPath string, interfaceName string) (DBusProxy, error) {
+func NewDBusProxyForBusSync(cancellable context.Context, busType BusType, flags DBusProxyFlags, info *DBusInterfaceInfo, name string, objectPath string, interfaceName string) (DBusProxy, error) {
 	var carg7 *C.GCancellable       // in, none, converted, nullable
 	var carg1 C.GBusType            // in, none, casted
 	var carg2 C.GDBusProxyFlags     // in, none, casted
@@ -39597,7 +39597,7 @@ func NewDBusProxyInstanceForBusSync(cancellable context.Context, busType BusType
 	return goret, _goerr
 }
 
-// NewDBusProxyInstanceSync wraps g_dbus_proxy_new_sync
+// NewDBusProxySync wraps g_dbus_proxy_new_sync
 // 
 // The function takes the following parameters:
 // 
@@ -39636,7 +39636,7 @@ func NewDBusProxyInstanceForBusSync(cancellable context.Context, busType BusType
 // and g_dbus_proxy_new_finish() for the asynchronous version.
 // 
 // #GDBusProxy is used in this [example][gdbus-wellknown-proxy].
-func NewDBusProxyInstanceSync(cancellable context.Context, connection DBusConnection, flags DBusProxyFlags, info *DBusInterfaceInfo, name string, objectPath string, interfaceName string) (DBusProxy, error) {
+func NewDBusProxySync(cancellable context.Context, connection DBusConnection, flags DBusProxyFlags, info *DBusInterfaceInfo, name string, objectPath string, interfaceName string) (DBusProxy, error) {
 	var carg7 *C.GCancellable       // in, none, converted, nullable
 	var carg1 *C.GDBusConnection    // in, none, converted
 	var carg2 C.GDBusProxyFlags     // in, none, casted
@@ -39684,7 +39684,7 @@ func NewDBusProxyInstanceSync(cancellable context.Context, connection DBusConnec
 	return goret, _goerr
 }
 
-// NewDBusProxyInstance wraps g_dbus_proxy_new
+// NewDBusProxy wraps g_dbus_proxy_new
 // 
 // The function takes the following parameters:
 // 
@@ -39724,7 +39724,7 @@ func NewDBusProxyInstanceSync(cancellable context.Context, connection DBusConnec
 // See g_dbus_proxy_new_sync() and for a synchronous version of this constructor.
 // 
 // #GDBusProxy is used in this [example][gdbus-wellknown-proxy].
-func NewDBusProxyInstance(cancellable context.Context, connection DBusConnection, flags DBusProxyFlags, info *DBusInterfaceInfo, name string, objectPath string, interfaceName string, callback AsyncReadyCallback) {
+func NewDBusProxy(cancellable context.Context, connection DBusConnection, flags DBusProxyFlags, info *DBusInterfaceInfo, name string, objectPath string, interfaceName string, callback AsyncReadyCallback) {
 	var carg7 *C.GCancellable       // in, none, converted, nullable
 	var carg1 *C.GDBusConnection    // in, none, converted
 	var carg2 C.GDBusProxyFlags     // in, none, casted
@@ -39767,7 +39767,7 @@ func NewDBusProxyInstance(cancellable context.Context, connection DBusConnection
 	runtime.KeepAlive(callback)
 }
 
-// NewDBusProxyInstanceForBus wraps g_dbus_proxy_new_for_bus
+// NewDBusProxyForBus wraps g_dbus_proxy_new_for_bus
 // 
 // The function takes the following parameters:
 // 
@@ -39783,7 +39783,7 @@ func NewDBusProxyInstance(cancellable context.Context, connection DBusConnection
 // Like g_dbus_proxy_new() but takes a #GBusType instead of a #GDBusConnection.
 // 
 // #GDBusProxy is used in this [example][gdbus-wellknown-proxy].
-func NewDBusProxyInstanceForBus(cancellable context.Context, busType BusType, flags DBusProxyFlags, info *DBusInterfaceInfo, name string, objectPath string, interfaceName string, callback AsyncReadyCallback) {
+func NewDBusProxyForBus(cancellable context.Context, busType BusType, flags DBusProxyFlags, info *DBusInterfaceInfo, name string, objectPath string, interfaceName string, callback AsyncReadyCallback) {
 	var carg7 *C.GCancellable       // in, none, converted, nullable
 	var carg1 C.GBusType            // in, none, casted
 	var carg2 C.GDBusProxyFlags     // in, none, casted
@@ -40195,7 +40195,7 @@ func UnsafeDBusServerToGlibFull(c DBusServer) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewDBusServerInstanceSync wraps g_dbus_server_new_sync
+// NewDBusServerSync wraps g_dbus_server_new_sync
 // 
 // The function takes the following parameters:
 // 
@@ -40230,7 +40230,7 @@ func UnsafeDBusServerToGlibFull(c DBusServer) unsafe.Pointer {
 // 
 // This is a synchronous failable constructor. There is currently no
 // asynchronous version.
-func NewDBusServerInstanceSync(cancellable context.Context, address string, flags DBusServerFlags, guid string, observer DBusAuthObserver) (DBusServer, error) {
+func NewDBusServerSync(cancellable context.Context, address string, flags DBusServerFlags, guid string, observer DBusAuthObserver) (DBusServer, error) {
 	var carg5 *C.GCancellable      // in, none, converted, nullable
 	var carg1 *C.gchar             // in, none, string, casted *C.gchar
 	var carg2 C.GDBusServerFlags   // in, none, casted
@@ -40566,7 +40566,7 @@ func UnsafeDebugControllerDBusToGlibFull(c DebugControllerDBus) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewDebugControllerDBusInstance wraps g_debug_controller_dbus_new
+// NewDebugControllerDBus wraps g_debug_controller_dbus_new
 // 
 // The function takes the following parameters:
 // 
@@ -40585,7 +40585,7 @@ func UnsafeDebugControllerDBusToGlibFull(c DebugControllerDBus) unsafe.Pointer {
 // #GDebugControllerDBus is dropped.
 // 
 // Initialization may fail if registering the object on @connection fails.
-func NewDebugControllerDBusInstance(cancellable context.Context, connection DBusConnection) (DebugControllerDBus, error) {
+func NewDebugControllerDBus(cancellable context.Context, connection DBusConnection) (DebugControllerDBus, error) {
 	var carg2 *C.GCancellable         // in, none, converted, nullable
 	var carg1 *C.GDBusConnection      // in, none, converted
 	var cret  *C.GDebugControllerDBus // return, full, converted
@@ -40708,7 +40708,7 @@ func UnsafeEmblemToGlibFull(c Emblem) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewEmblemInstance wraps g_emblem_new
+// NewEmblem wraps g_emblem_new
 // 
 // The function takes the following parameters:
 // 
@@ -40719,7 +40719,7 @@ func UnsafeEmblemToGlibFull(c Emblem) unsafe.Pointer {
 // 	- goret Emblem 
 //
 // Creates a new emblem for @icon.
-func NewEmblemInstance(icon Icon) Emblem {
+func NewEmblem(icon Icon) Emblem {
 	var carg1 *C.GIcon   // in, none, converted
 	var cret  *C.GEmblem // return, full, converted
 
@@ -40735,7 +40735,7 @@ func NewEmblemInstance(icon Icon) Emblem {
 	return goret
 }
 
-// NewEmblemInstanceWithOrigin wraps g_emblem_new_with_origin
+// NewEmblemWithOrigin wraps g_emblem_new_with_origin
 // 
 // The function takes the following parameters:
 // 
@@ -40747,7 +40747,7 @@ func NewEmblemInstance(icon Icon) Emblem {
 // 	- goret Emblem 
 //
 // Creates a new emblem for @icon.
-func NewEmblemInstanceWithOrigin(icon Icon, origin EmblemOrigin) Emblem {
+func NewEmblemWithOrigin(icon Icon, origin EmblemOrigin) Emblem {
 	var carg1 *C.GIcon        // in, none, converted
 	var carg2 C.GEmblemOrigin // in, none, casted
 	var cret  *C.GEmblem      // return, full, converted
@@ -40885,7 +40885,7 @@ func UnsafeEmblemedIconToGlibFull(c EmblemedIcon) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewEmblemedIconInstance wraps g_emblemed_icon_new
+// NewEmblemedIcon wraps g_emblemed_icon_new
 // 
 // The function takes the following parameters:
 // 
@@ -40897,7 +40897,7 @@ func UnsafeEmblemedIconToGlibFull(c EmblemedIcon) unsafe.Pointer {
 // 	- goret EmblemedIcon 
 //
 // Creates a new emblemed icon for @icon with the emblem @emblem.
-func NewEmblemedIconInstance(icon Icon, emblem Emblem) EmblemedIcon {
+func NewEmblemedIcon(icon Icon, emblem Emblem) EmblemedIcon {
 	var carg1 *C.GIcon   // in, none, converted
 	var carg2 *C.GEmblem // in, none, converted, nullable
 	var cret  *C.GIcon   // return, full, converted, casted *C.GEmblemedIcon
@@ -41867,7 +41867,7 @@ func UnsafeFileIconToGlibFull(c FileIcon) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewFileIconInstance wraps g_file_icon_new
+// NewFileIcon wraps g_file_icon_new
 // 
 // The function takes the following parameters:
 // 
@@ -41878,7 +41878,7 @@ func UnsafeFileIconToGlibFull(c FileIcon) unsafe.Pointer {
 // 	- goret FileIcon 
 //
 // Creates a new icon for a file.
-func NewFileIconInstance(file File) FileIcon {
+func NewFileIcon(file File) FileIcon {
 	var carg1 *C.GFile // in, none, converted
 	var cret  *C.GIcon // return, full, converted, casted *C.GFileIcon
 
@@ -42754,13 +42754,13 @@ func UnsafeFileInfoToGlibFull(c FileInfo) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewFileInfoInstance wraps g_file_info_new
+// NewFileInfo wraps g_file_info_new
 // The function returns the following values:
 // 
 // 	- goret FileInfo 
 //
 // Creates a new file info structure.
-func NewFileInfoInstance() FileInfo {
+func NewFileInfo() FileInfo {
 	var cret *C.GFileInfo // return, full, converted
 
 	cret = C.g_file_info_new()
@@ -44876,13 +44876,13 @@ func UnsafeFilenameCompleterToGlibFull(c FilenameCompleter) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewFilenameCompleterInstance wraps g_filename_completer_new
+// NewFilenameCompleter wraps g_filename_completer_new
 // The function returns the following values:
 // 
 // 	- goret FilenameCompleter 
 //
 // Creates a new filename completer.
-func NewFilenameCompleterInstance() FilenameCompleter {
+func NewFilenameCompleter() FilenameCompleter {
 	var cret *C.GFilenameCompleter // return, full, converted
 
 	cret = C.g_filename_completer_new()
@@ -45041,7 +45041,7 @@ func UnsafeIOModuleToGlibFull(c IOModule) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewIOModuleInstance wraps g_io_module_new
+// NewIOModule wraps g_io_module_new
 // 
 // The function takes the following parameters:
 // 
@@ -45053,7 +45053,7 @@ func UnsafeIOModuleToGlibFull(c IOModule) unsafe.Pointer {
 //
 // Creates a new GIOModule that will load the specific
 // shared library when in use.
-func NewIOModuleInstance(filename string) IOModule {
+func NewIOModule(filename string) IOModule {
 	var carg1 *C.gchar     // in, none, string, casted *C.gchar
 	var cret  *C.GIOModule // return, full, converted
 
@@ -45070,7 +45070,7 @@ func NewIOModuleInstance(filename string) IOModule {
 	return goret
 }
 
-// IOModuleInstanceQuery wraps g_io_module_query
+// IOModuleQuery wraps g_io_module_query
 // The function returns the following values:
 // 
 // 	- goret []string 
@@ -45106,7 +45106,7 @@ func NewIOModuleInstance(filename string) IOModule {
 // Using the new symbol names avoids name clashes when building modules
 // statically. The old symbol names continue to be supported, but cannot be used
 // for static builds.
-func IOModuleInstanceQuery() []string {
+func IOModuleQuery() []string {
 	var cret **C.char // return, transfer: full, C Pointers: 2, Name: array[utf8], scope: , array (inner: *typesystem.StringPrimitive, zero-terminated)
 
 	cret = C.g_io_module_query()
@@ -45359,7 +45359,7 @@ func UnsafeIOStreamToGlibFull(c IOStream) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// IOStreamInstanceSpliceFinish wraps g_io_stream_splice_finish
+// IOStreamSpliceFinish wraps g_io_stream_splice_finish
 // 
 // The function takes the following parameters:
 // 
@@ -45371,7 +45371,7 @@ func UnsafeIOStreamToGlibFull(c IOStream) unsafe.Pointer {
 // 	- _goerr error (nullable): an error 
 //
 // Finishes an asynchronous io stream splice operation.
-func IOStreamInstanceSpliceFinish(result AsyncResult) (bool, error) {
+func IOStreamSpliceFinish(result AsyncResult) (bool, error) {
 	var carg1 *C.GAsyncResult // in, none, converted
 	var cret  C.gboolean      // return
 	var _cerr *C.GError       // out, full, converted, nullable
@@ -45902,7 +45902,7 @@ func UnsafeInetAddressToGlibFull(c InetAddress) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewInetAddressInstanceAny wraps g_inet_address_new_any
+// NewInetAddressAny wraps g_inet_address_new_any
 // 
 // The function takes the following parameters:
 // 
@@ -45914,7 +45914,7 @@ func UnsafeInetAddressToGlibFull(c InetAddress) unsafe.Pointer {
 //
 // Creates a #GInetAddress for the "any" address (unassigned/"don't
 // care") for @family.
-func NewInetAddressInstanceAny(family SocketFamily) InetAddress {
+func NewInetAddressAny(family SocketFamily) InetAddress {
 	var carg1 C.GSocketFamily // in, none, casted
 	var cret  *C.GInetAddress // return, full, converted
 
@@ -45930,7 +45930,7 @@ func NewInetAddressInstanceAny(family SocketFamily) InetAddress {
 	return goret
 }
 
-// NewInetAddressInstanceFromString wraps g_inet_address_new_from_string
+// NewInetAddressFromString wraps g_inet_address_new_from_string
 // 
 // The function takes the following parameters:
 // 
@@ -45941,7 +45941,7 @@ func NewInetAddressInstanceAny(family SocketFamily) InetAddress {
 // 	- goret InetAddress 
 //
 // Parses @string as an IP address and creates a new #GInetAddress.
-func NewInetAddressInstanceFromString(str string) InetAddress {
+func NewInetAddressFromString(str string) InetAddress {
 	var carg1 *C.gchar        // in, none, string, casted *C.gchar
 	var cret  *C.GInetAddress // return, full, converted
 
@@ -45958,7 +45958,7 @@ func NewInetAddressInstanceFromString(str string) InetAddress {
 	return goret
 }
 
-// NewInetAddressInstanceLoopback wraps g_inet_address_new_loopback
+// NewInetAddressLoopback wraps g_inet_address_new_loopback
 // 
 // The function takes the following parameters:
 // 
@@ -45969,7 +45969,7 @@ func NewInetAddressInstanceFromString(str string) InetAddress {
 // 	- goret InetAddress 
 //
 // Creates a #GInetAddress for the loopback address for @family.
-func NewInetAddressInstanceLoopback(family SocketFamily) InetAddress {
+func NewInetAddressLoopback(family SocketFamily) InetAddress {
 	var carg1 C.GSocketFamily // in, none, casted
 	var cret  *C.GInetAddress // return, full, converted
 
@@ -46436,7 +46436,7 @@ func UnsafeInetAddressMaskToGlibFull(c InetAddressMask) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewInetAddressMaskInstance wraps g_inet_address_mask_new
+// NewInetAddressMask wraps g_inet_address_mask_new
 // 
 // The function takes the following parameters:
 // 
@@ -46450,7 +46450,7 @@ func UnsafeInetAddressMaskToGlibFull(c InetAddressMask) unsafe.Pointer {
 //
 // Creates a new #GInetAddressMask representing all addresses whose
 // first @length bits match @addr.
-func NewInetAddressMaskInstance(addr InetAddress, length uint) (InetAddressMask, error) {
+func NewInetAddressMask(addr InetAddress, length uint) (InetAddressMask, error) {
 	var carg1 *C.GInetAddress     // in, none, converted
 	var carg2 C.guint             // in, none, casted
 	var cret  *C.GInetAddressMask // return, full, converted
@@ -46474,7 +46474,7 @@ func NewInetAddressMaskInstance(addr InetAddress, length uint) (InetAddressMask,
 	return goret, _goerr
 }
 
-// NewInetAddressMaskInstanceFromString wraps g_inet_address_mask_new_from_string
+// NewInetAddressMaskFromString wraps g_inet_address_mask_new_from_string
 // 
 // The function takes the following parameters:
 // 
@@ -46489,7 +46489,7 @@ func NewInetAddressMaskInstance(addr InetAddress, length uint) (InetAddressMask,
 // creates a new #GInetAddressMask. The length, if present, is
 // delimited by a "/". If it is not present, then the length is
 // assumed to be the full length of the address.
-func NewInetAddressMaskInstanceFromString(maskString string) (InetAddressMask, error) {
+func NewInetAddressMaskFromString(maskString string) (InetAddressMask, error) {
 	var carg1 *C.gchar            // in, none, string, casted *C.gchar
 	var cret  *C.GInetAddressMask // return, full, converted
 	var _cerr *C.GError           // out, full, converted, nullable
@@ -48191,7 +48191,7 @@ func UnsafeListStoreToGlibFull(c ListStore) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewListStoreInstance wraps g_list_store_new
+// NewListStore wraps g_list_store_new
 // 
 // The function takes the following parameters:
 // 
@@ -48203,7 +48203,7 @@ func UnsafeListStoreToGlibFull(c ListStore) unsafe.Pointer {
 //
 // Creates a new #GListStore with items of type @item_type. @item_type
 // must be a subclass of #GObject.
-func NewListStoreInstance(itemType gobject.Type) ListStore {
+func NewListStore(itemType gobject.Type) ListStore {
 	var carg1 C.GType       // in, none, casted, alias
 	var cret  *C.GListStore // return, full, converted
 
@@ -48530,13 +48530,13 @@ func UnsafeMemoryInputStreamToGlibFull(c MemoryInputStream) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewMemoryInputStreamInstance wraps g_memory_input_stream_new
+// NewMemoryInputStream wraps g_memory_input_stream_new
 // The function returns the following values:
 // 
 // 	- goret InputStream 
 //
 // Creates a new empty #GMemoryInputStream.
-func NewMemoryInputStreamInstance() InputStream {
+func NewMemoryInputStream() InputStream {
 	var cret *C.GInputStream // return, full, converted
 
 	cret = C.g_memory_input_stream_new()
@@ -48548,7 +48548,7 @@ func NewMemoryInputStreamInstance() InputStream {
 	return goret
 }
 
-// NewMemoryInputStreamInstanceFromBytes wraps g_memory_input_stream_new_from_bytes
+// NewMemoryInputStreamFromBytes wraps g_memory_input_stream_new_from_bytes
 // 
 // The function takes the following parameters:
 // 
@@ -48559,7 +48559,7 @@ func NewMemoryInputStreamInstance() InputStream {
 // 	- goret InputStream 
 //
 // Creates a new #GMemoryInputStream with data from the given @bytes.
-func NewMemoryInputStreamInstanceFromBytes(bytes *glib.Bytes) InputStream {
+func NewMemoryInputStreamFromBytes(bytes *glib.Bytes) InputStream {
 	var carg1 *C.GBytes       // in, none, converted
 	var cret  *C.GInputStream // return, full, converted
 
@@ -48886,7 +48886,7 @@ func UnsafeMenuItemToGlibFull(c MenuItem) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewMenuItemInstance wraps g_menu_item_new
+// NewMenuItem wraps g_menu_item_new
 // 
 // The function takes the following parameters:
 // 
@@ -48905,7 +48905,7 @@ func UnsafeMenuItemToGlibFull(c MenuItem) unsafe.Pointer {
 // If @detailed_action is non-%NULL it is used to set the "action" and
 // possibly the "target" attribute of the new item.  See
 // g_menu_item_set_detailed_action() for more information.
-func NewMenuItemInstance(label string, detailedAction string) MenuItem {
+func NewMenuItem(label string, detailedAction string) MenuItem {
 	var carg1 *C.gchar     // in, none, string, nullable-string
 	var carg2 *C.gchar     // in, none, string, nullable-string
 	var cret  *C.GMenuItem // return, full, converted
@@ -48930,7 +48930,7 @@ func NewMenuItemInstance(label string, detailedAction string) MenuItem {
 	return goret
 }
 
-// NewMenuItemInstanceFromModel wraps g_menu_item_new_from_model
+// NewMenuItemFromModel wraps g_menu_item_new_from_model
 // 
 // The function takes the following parameters:
 // 
@@ -48946,7 +48946,7 @@ func NewMenuItemInstance(label string, detailedAction string) MenuItem {
 // 
 // @item_index must be valid (ie: be sure to call
 // g_menu_model_get_n_items() first).
-func NewMenuItemInstanceFromModel(model MenuModel, itemIndex int) MenuItem {
+func NewMenuItemFromModel(model MenuModel, itemIndex int) MenuItem {
 	var carg1 *C.GMenuModel // in, none, converted
 	var carg2 C.gint        // in, none, casted
 	var cret  *C.GMenuItem  // return, full, converted
@@ -48965,7 +48965,7 @@ func NewMenuItemInstanceFromModel(model MenuModel, itemIndex int) MenuItem {
 	return goret
 }
 
-// NewMenuItemInstanceSection wraps g_menu_item_new_section
+// NewMenuItemSection wraps g_menu_item_new_section
 // 
 // The function takes the following parameters:
 // 
@@ -49036,7 +49036,7 @@ func NewMenuItemInstanceFromModel(model MenuModel, itemIndex int) MenuItem {
 //   &lt;/item&gt;
 // &lt;/menu&gt;
 // ]|
-func NewMenuItemInstanceSection(label string, section MenuModel) MenuItem {
+func NewMenuItemSection(label string, section MenuModel) MenuItem {
 	var carg1 *C.gchar      // in, none, string, nullable-string
 	var carg2 *C.GMenuModel // in, none, converted
 	var cret  *C.GMenuItem  // return, full, converted
@@ -49058,7 +49058,7 @@ func NewMenuItemInstanceSection(label string, section MenuModel) MenuItem {
 	return goret
 }
 
-// NewMenuItemInstanceSubmenu wraps g_menu_item_new_submenu
+// NewMenuItemSubmenu wraps g_menu_item_new_submenu
 // 
 // The function takes the following parameters:
 // 
@@ -49073,7 +49073,7 @@ func NewMenuItemInstanceSection(label string, section MenuModel) MenuItem {
 // 
 // This is a convenience API around g_menu_item_new() and
 // g_menu_item_set_submenu().
-func NewMenuItemInstanceSubmenu(label string, submenu MenuModel) MenuItem {
+func NewMenuItemSubmenu(label string, submenu MenuModel) MenuItem {
 	var carg1 *C.gchar      // in, none, string, nullable-string
 	var carg2 *C.GMenuModel // in, none, converted
 	var cret  *C.GMenuItem  // return, full, converted
@@ -50200,13 +50200,13 @@ func UnsafeMountOperationToGlibFull(c MountOperation) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewMountOperationInstance wraps g_mount_operation_new
+// NewMountOperation wraps g_mount_operation_new
 // The function returns the following values:
 // 
 // 	- goret MountOperation 
 //
 // Creates a new mount operation.
-func NewMountOperationInstance() MountOperation {
+func NewMountOperation() MountOperation {
 	var cret *C.GMountOperation // return, full, converted
 
 	cret = C.g_mount_operation_new()
@@ -50712,7 +50712,7 @@ func UnsafeNetworkAddressToGlibFull(c NetworkAddress) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewNetworkAddressInstance wraps g_network_address_new
+// NewNetworkAddress wraps g_network_address_new
 // 
 // The function takes the following parameters:
 // 
@@ -50731,7 +50731,7 @@ func UnsafeNetworkAddressToGlibFull(c NetworkAddress) unsafe.Pointer {
 // only, or to both IPv4 and IPv6; use
 // g_network_address_new_loopback() to create a #GNetworkAddress that
 // is guaranteed to resolve to both addresses.
-func NewNetworkAddressInstance(hostname string, port uint16) NetworkAddress {
+func NewNetworkAddress(hostname string, port uint16) NetworkAddress {
 	var carg1 *C.gchar              // in, none, string, casted *C.gchar
 	var carg2 C.guint16             // in, none, casted
 	var cret  *C.GSocketConnectable // return, full, converted, casted *C.GNetworkAddress
@@ -50751,7 +50751,7 @@ func NewNetworkAddressInstance(hostname string, port uint16) NetworkAddress {
 	return goret
 }
 
-// NewNetworkAddressInstanceLoopback wraps g_network_address_new_loopback
+// NewNetworkAddressLoopback wraps g_network_address_new_loopback
 // 
 // The function takes the following parameters:
 // 
@@ -50773,7 +50773,7 @@ func NewNetworkAddressInstance(hostname string, port uint16) NetworkAddress {
 // 
 // g_network_address_get_hostname() will always return `localhost` for
 // a #GNetworkAddress created with this constructor.
-func NewNetworkAddressInstanceLoopback(port uint16) NetworkAddress {
+func NewNetworkAddressLoopback(port uint16) NetworkAddress {
 	var carg1 C.guint16             // in, none, casted
 	var cret  *C.GSocketConnectable // return, full, converted, casted *C.GNetworkAddress
 
@@ -50789,7 +50789,7 @@ func NewNetworkAddressInstanceLoopback(port uint16) NetworkAddress {
 	return goret
 }
 
-// NetworkAddressInstanceParse wraps g_network_address_parse
+// NetworkAddressParse wraps g_network_address_parse
 // 
 // The function takes the following parameters:
 // 
@@ -50822,7 +50822,7 @@ func NewNetworkAddressInstanceLoopback(port uint16) NetworkAddress {
 // service name rather than as a numeric port, but this functionality
 // is deprecated, because it depends on the contents of /etc/services,
 // which is generally quite sparse on platforms other than Linux.)
-func NetworkAddressInstanceParse(hostAndPort string, defaultPort uint16) (NetworkAddress, error) {
+func NetworkAddressParse(hostAndPort string, defaultPort uint16) (NetworkAddress, error) {
 	var carg1 *C.gchar              // in, none, string, casted *C.gchar
 	var carg2 C.guint16             // in, none, casted
 	var cret  *C.GSocketConnectable // return, full, converted, casted *C.GNetworkAddress
@@ -50847,7 +50847,7 @@ func NetworkAddressInstanceParse(hostAndPort string, defaultPort uint16) (Networ
 	return goret, _goerr
 }
 
-// NetworkAddressInstanceParseURI wraps g_network_address_parse_uri
+// NetworkAddressParseURI wraps g_network_address_parse_uri
 // 
 // The function takes the following parameters:
 // 
@@ -50865,7 +50865,7 @@ func NetworkAddressInstanceParse(hostAndPort string, defaultPort uint16) (Networ
 // Using this rather than g_network_address_new() or
 // g_network_address_parse() allows #GSocketClient to determine
 // when to use application-specific proxy protocols.
-func NetworkAddressInstanceParseURI(uri string, defaultPort uint16) (NetworkAddress, error) {
+func NetworkAddressParseURI(uri string, defaultPort uint16) (NetworkAddress, error) {
 	var carg1 *C.gchar              // in, none, string, casted *C.gchar
 	var carg2 C.guint16             // in, none, casted
 	var cret  *C.GSocketConnectable // return, full, converted, casted *C.GNetworkAddress
@@ -51055,7 +51055,7 @@ func UnsafeNetworkServiceToGlibFull(c NetworkService) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewNetworkServiceInstance wraps g_network_service_new
+// NewNetworkService wraps g_network_service_new
 // 
 // The function takes the following parameters:
 // 
@@ -51070,7 +51070,7 @@ func UnsafeNetworkServiceToGlibFull(c NetworkService) unsafe.Pointer {
 // Creates a new #GNetworkService representing the given @service,
 // @protocol, and @domain. This will initially be unresolved; use the
 // #GSocketConnectable interface to resolve it.
-func NewNetworkServiceInstance(service string, protocol string, domain string) NetworkService {
+func NewNetworkService(service string, protocol string, domain string) NetworkService {
 	var carg1 *C.gchar              // in, none, string, casted *C.gchar
 	var carg2 *C.gchar              // in, none, string, casted *C.gchar
 	var carg3 *C.gchar              // in, none, string, casted *C.gchar
@@ -51392,7 +51392,7 @@ func UnsafeNotificationToGlibFull(c Notification) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewNotificationInstance wraps g_notification_new
+// NewNotification wraps g_notification_new
 // 
 // The function takes the following parameters:
 // 
@@ -51408,7 +51408,7 @@ func UnsafeNotificationToGlibFull(c Notification) unsafe.Pointer {
 // the desktop shell with g_application_send_notification(). Changing
 // any properties after this call will not have any effect until
 // resending @notification.
-func NewNotificationInstance(title string) Notification {
+func NewNotification(title string) Notification {
 	var carg1 *C.gchar         // in, none, string, casted *C.gchar
 	var cret  *C.GNotification // return, full, converted
 
@@ -54389,7 +54389,7 @@ func UnsafePropertyActionToGlibFull(c PropertyAction) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewPropertyActionInstance wraps g_property_action_new
+// NewPropertyAction wraps g_property_action_new
 // 
 // The function takes the following parameters:
 // 
@@ -54410,7 +54410,7 @@ func UnsafePropertyActionToGlibFull(c PropertyAction) unsafe.Pointer {
 // 
 // This function takes a reference on @object and doesn't release it
 // until the action is destroyed.
-func NewPropertyActionInstance(name string, object unsafe.Pointer, propertyName string) PropertyAction {
+func NewPropertyAction(name string, object unsafe.Pointer, propertyName string) PropertyAction {
 	var carg1 *C.gchar           // in, none, string, casted *C.gchar
 	var carg2 C.gpointer         // in, none, casted
 	var carg3 *C.gchar           // in, none, string, casted *C.gchar
@@ -54639,7 +54639,7 @@ func UnsafeResolverToGlibFull(c Resolver) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// ResolverInstanceGetDefault wraps g_resolver_get_default
+// ResolverGetDefault wraps g_resolver_get_default
 // The function returns the following values:
 // 
 // 	- goret Resolver 
@@ -54647,7 +54647,7 @@ func UnsafeResolverToGlibFull(c Resolver) unsafe.Pointer {
 // Gets the default #GResolver. You should unref it when you are done
 // with it. #GResolver may use its reference count as a hint about how
 // many threads it should allocate for concurrent DNS resolutions.
-func ResolverInstanceGetDefault() Resolver {
+func ResolverGetDefault() Resolver {
 	var cret *C.GResolver // return, full, converted
 
 	cret = C.g_resolver_get_default()
@@ -55917,7 +55917,7 @@ func UnsafeSettingsToGlibFull(c Settings) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewSettingsInstance wraps g_settings_new
+// NewSettings wraps g_settings_new
 // 
 // The function takes the following parameters:
 // 
@@ -55940,7 +55940,7 @@ func UnsafeSettingsToGlibFull(c Settings) unsafe.Pointer {
 // via the thread-default #GMainContext in effect at the time of the
 // call to g_settings_new().  The new #GSettings will hold a reference
 // on the context.  See g_main_context_push_thread_default().
-func NewSettingsInstance(schemaId string) Settings {
+func NewSettings(schemaId string) Settings {
 	var carg1 *C.gchar     // in, none, string, casted *C.gchar
 	var cret  *C.GSettings // return, full, converted
 
@@ -55957,7 +55957,7 @@ func NewSettingsInstance(schemaId string) Settings {
 	return goret
 }
 
-// NewSettingsInstanceWithPath wraps g_settings_new_with_path
+// NewSettingsWithPath wraps g_settings_new_with_path
 // 
 // The function takes the following parameters:
 // 
@@ -55981,7 +55981,7 @@ func NewSettingsInstance(schemaId string) Settings {
 // It is a programmer error if @path is not a valid path.  A valid path
 // begins and ends with '/' and does not contain two consecutive '/'
 // characters.
-func NewSettingsInstanceWithPath(schemaId string, path string) Settings {
+func NewSettingsWithPath(schemaId string, path string) Settings {
 	var carg1 *C.gchar     // in, none, string, casted *C.gchar
 	var carg2 *C.gchar     // in, none, string, casted *C.gchar
 	var cret  *C.GSettings // return, full, converted
@@ -56002,7 +56002,7 @@ func NewSettingsInstanceWithPath(schemaId string, path string) Settings {
 	return goret
 }
 
-// SettingsInstanceListRelocatableSchemas wraps g_settings_list_relocatable_schemas
+// SettingsListRelocatableSchemas wraps g_settings_list_relocatable_schemas
 // The function returns the following values:
 // 
 // 	- goret []string 
@@ -56010,7 +56010,7 @@ func NewSettingsInstanceWithPath(schemaId string, path string) Settings {
 // Deprecated.
 //
 // Deprecated: (since 2.40.0) Use g_settings_schema_source_list_schemas() instead
-func SettingsInstanceListRelocatableSchemas() []string {
+func SettingsListRelocatableSchemas() []string {
 	var cret **C.gchar // return, transfer: none, C Pointers: 2, Name: array[utf8], scope: , array (inner: *typesystem.StringPrimitive, zero-terminated)
 
 	cret = C.g_settings_list_relocatable_schemas()
@@ -56024,7 +56024,7 @@ func SettingsInstanceListRelocatableSchemas() []string {
 	return goret
 }
 
-// SettingsInstanceListSchemas wraps g_settings_list_schemas
+// SettingsListSchemas wraps g_settings_list_schemas
 // The function returns the following values:
 // 
 // 	- goret []string 
@@ -56035,7 +56035,7 @@ func SettingsInstanceListRelocatableSchemas() []string {
 // If you used g_settings_list_schemas() to check for the presence of
 // a particular schema, use g_settings_schema_source_lookup() instead
 // of your whole loop.
-func SettingsInstanceListSchemas() []string {
+func SettingsListSchemas() []string {
 	var cret **C.gchar // return, transfer: none, C Pointers: 2, Name: array[utf8], scope: , array (inner: *typesystem.StringPrimitive, zero-terminated)
 
 	cret = C.g_settings_list_schemas()
@@ -56049,7 +56049,7 @@ func SettingsInstanceListSchemas() []string {
 	return goret
 }
 
-// SettingsInstanceSync wraps g_settings_sync
+// SettingsSync wraps g_settings_sync
 //
 // Ensures that all pending operations are complete for the default backend.
 // 
@@ -56061,12 +56061,12 @@ func SettingsInstanceListSchemas() []string {
 // backend.  Since the mainloop is not running, no change notifications
 // will be dispatched during this call (but some may be queued by the
 // time the call is done).
-func SettingsInstanceSync() {
+func SettingsSync() {
 
 	C.g_settings_sync()
 }
 
-// SettingsInstanceUnbind wraps g_settings_unbind
+// SettingsUnbind wraps g_settings_unbind
 // 
 // The function takes the following parameters:
 // 
@@ -56078,7 +56078,7 @@ func SettingsInstanceSync() {
 // Note that bindings are automatically removed when the
 // object is finalized, so it is rarely necessary to call this
 // function.
-func SettingsInstanceUnbind(object unsafe.Pointer, property string) {
+func SettingsUnbind(object unsafe.Pointer, property string) {
 	var carg1 C.gpointer // in, none, casted
 	var carg2 *C.gchar   // in, none, string, casted *C.gchar
 
@@ -57353,7 +57353,7 @@ func UnsafeSimpleActionToGlibFull(c SimpleAction) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewSimpleActionInstance wraps g_simple_action_new
+// NewSimpleAction wraps g_simple_action_new
 // 
 // The function takes the following parameters:
 // 
@@ -57369,7 +57369,7 @@ func UnsafeSimpleActionToGlibFull(c SimpleAction) unsafe.Pointer {
 // 
 // The created action is stateless. See g_simple_action_new_stateful() to create
 // an action that has state.
-func NewSimpleActionInstance(name string, parameterType *glib.VariantType) SimpleAction {
+func NewSimpleAction(name string, parameterType *glib.VariantType) SimpleAction {
 	var carg1 *C.gchar         // in, none, string, casted *C.gchar
 	var carg2 *C.GVariantType  // in, none, converted, nullable
 	var cret  *C.GSimpleAction // return, full, converted
@@ -57527,13 +57527,13 @@ func UnsafeSimpleActionGroupToGlibFull(c SimpleActionGroup) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewSimpleActionGroupInstance wraps g_simple_action_group_new
+// NewSimpleActionGroup wraps g_simple_action_group_new
 // The function returns the following values:
 // 
 // 	- goret SimpleActionGroup 
 //
 // Creates a new, empty, #GSimpleActionGroup.
-func NewSimpleActionGroupInstance() SimpleActionGroup {
+func NewSimpleActionGroup() SimpleActionGroup {
 	var cret *C.GSimpleActionGroup // return, full, converted
 
 	cret = C.g_simple_action_group_new()
@@ -58005,7 +58005,7 @@ func UnsafeSimpleAsyncResultToGlibFull(c SimpleAsyncResult) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewSimpleAsyncResultInstance wraps g_simple_async_result_new
+// NewSimpleAsyncResult wraps g_simple_async_result_new
 // 
 // The function takes the following parameters:
 // 
@@ -58029,7 +58029,7 @@ func UnsafeSimpleAsyncResultToGlibFull(c SimpleAsyncResult) unsafe.Pointer {
 // this function returns.
 //
 // Deprecated: (since 2.46.0) Use g_task_new() instead.
-func NewSimpleAsyncResultInstance(sourceObject gobject.Object, callback AsyncReadyCallback, sourceTag unsafe.Pointer) SimpleAsyncResult {
+func NewSimpleAsyncResult(sourceObject gobject.Object, callback AsyncReadyCallback, sourceTag unsafe.Pointer) SimpleAsyncResult {
 	var carg1 *C.GObject            // in, none, converted, nullable
 	var carg2 C.GAsyncReadyCallback // callback, scope: async, closure: carg3, nullable
 	var carg3 C.gpointer            // implicit
@@ -58059,7 +58059,7 @@ func NewSimpleAsyncResultInstance(sourceObject gobject.Object, callback AsyncRea
 	return goret
 }
 
-// NewSimpleAsyncResultInstanceFromError wraps g_simple_async_result_new_from_error
+// NewSimpleAsyncResultFromError wraps g_simple_async_result_new_from_error
 // 
 // The function takes the following parameters:
 // 
@@ -58074,7 +58074,7 @@ func NewSimpleAsyncResultInstance(sourceObject gobject.Object, callback AsyncRea
 // Creates a #GSimpleAsyncResult from an error condition.
 //
 // Deprecated: (since 2.46.0) Use g_task_new() and g_task_return_error() instead.
-func NewSimpleAsyncResultInstanceFromError(sourceObject gobject.Object, callback AsyncReadyCallback, err error) SimpleAsyncResult {
+func NewSimpleAsyncResultFromError(sourceObject gobject.Object, callback AsyncReadyCallback, err error) SimpleAsyncResult {
 	var carg1 *C.GObject            // in, none, converted, nullable
 	var carg2 C.GAsyncReadyCallback // callback, scope: async, closure: carg3, nullable
 	var carg3 C.gpointer            // implicit
@@ -58102,7 +58102,7 @@ func NewSimpleAsyncResultInstanceFromError(sourceObject gobject.Object, callback
 	return goret
 }
 
-// SimpleAsyncResultInstanceIsValid wraps g_simple_async_result_is_valid
+// SimpleAsyncResultIsValid wraps g_simple_async_result_is_valid
 // 
 // The function takes the following parameters:
 // 
@@ -58128,7 +58128,7 @@ func NewSimpleAsyncResultInstanceFromError(sourceObject gobject.Object, callback
 // check is skipped.)
 //
 // Deprecated: (since 2.46.0) Use #GTask and g_task_is_valid() instead.
-func SimpleAsyncResultInstanceIsValid(result AsyncResult, source gobject.Object, sourceTag unsafe.Pointer) bool {
+func SimpleAsyncResultIsValid(result AsyncResult, source gobject.Object, sourceTag unsafe.Pointer) bool {
 	var carg1 *C.GAsyncResult // in, none, converted
 	var carg2 *C.GObject      // in, none, converted, nullable
 	var carg3 C.gpointer      // in, none, casted, nullable
@@ -58474,7 +58474,7 @@ func UnsafeSimpleIOStreamToGlibFull(c SimpleIOStream) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewSimpleIOStreamInstance wraps g_simple_io_stream_new
+// NewSimpleIOStream wraps g_simple_io_stream_new
 // 
 // The function takes the following parameters:
 // 
@@ -58487,7 +58487,7 @@ func UnsafeSimpleIOStreamToGlibFull(c SimpleIOStream) unsafe.Pointer {
 //
 // Creates a new #GSimpleIOStream wrapping @input_stream and @output_stream.
 // See also #GIOStream.
-func NewSimpleIOStreamInstance(inputStream InputStream, outputStream OutputStream) IOStream {
+func NewSimpleIOStream(inputStream InputStream, outputStream OutputStream) IOStream {
 	var carg1 *C.GInputStream  // in, none, converted
 	var carg2 *C.GOutputStream // in, none, converted
 	var cret  *C.GIOStream     // return, full, converted
@@ -58563,7 +58563,7 @@ func UnsafeSimplePermissionToGlibFull(c SimplePermission) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewSimplePermissionInstance wraps g_simple_permission_new
+// NewSimplePermission wraps g_simple_permission_new
 // 
 // The function takes the following parameters:
 // 
@@ -58575,7 +58575,7 @@ func UnsafeSimplePermissionToGlibFull(c SimplePermission) unsafe.Pointer {
 //
 // Creates a new #GPermission instance that represents an action that is
 // either always or never allowed.
-func NewSimplePermissionInstance(allowed bool) Permission {
+func NewSimplePermission(allowed bool) Permission {
 	var carg1 C.gboolean     // in
 	var cret  *C.GPermission // return, full, converted
 
@@ -58693,7 +58693,7 @@ func UnsafeSimpleProxyResolverToGlibFull(c SimpleProxyResolver) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewSimpleProxyResolverInstance wraps g_simple_proxy_resolver_new
+// NewSimpleProxyResolver wraps g_simple_proxy_resolver_new
 // 
 // The function takes the following parameters:
 // 
@@ -58710,7 +58710,7 @@ func UnsafeSimpleProxyResolverToGlibFull(c SimpleProxyResolver) unsafe.Pointer {
 // #GSimpleProxyResolver:default-proxy and
 // #GSimpleProxyResolver:ignore-hosts for more details on how the
 // arguments are interpreted.
-func NewSimpleProxyResolverInstance(defaultProxy string, ignoreHosts []string) ProxyResolver {
+func NewSimpleProxyResolver(defaultProxy string, ignoreHosts []string) ProxyResolver {
 	var carg1 *C.gchar          // in, none, string, nullable-string
 	var carg2 **C.gchar         // in, transfer: none, C Pointers: 2, Name: array[utf8], nullable, array (inner: *typesystem.StringPrimitive, zero-terminated)
 	var cret  *C.GProxyResolver // return, full, converted
@@ -60070,7 +60070,7 @@ func UnsafeSocketToGlibFull(c Socket) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewSocketInstance wraps g_socket_new
+// NewSocket wraps g_socket_new
 // 
 // The function takes the following parameters:
 // 
@@ -60096,7 +60096,7 @@ func UnsafeSocketToGlibFull(c Socket) unsafe.Pointer {
 // The protocol id is passed directly to the operating
 // system, so you can use protocols not listed in #GSocketProtocol if you
 // know the protocol number used for it.
-func NewSocketInstance(family SocketFamily, typ SocketType, protocol SocketProtocol) (Socket, error) {
+func NewSocket(family SocketFamily, typ SocketType, protocol SocketProtocol) (Socket, error) {
 	var carg1 C.GSocketFamily   // in, none, casted
 	var carg2 C.GSocketType     // in, none, casted
 	var carg3 C.GSocketProtocol // in, none, casted
@@ -60123,7 +60123,7 @@ func NewSocketInstance(family SocketFamily, typ SocketType, protocol SocketProto
 	return goret, _goerr
 }
 
-// NewSocketInstanceFromFd wraps g_socket_new_from_fd
+// NewSocketFromFd wraps g_socket_new_from_fd
 // 
 // The function takes the following parameters:
 // 
@@ -60147,7 +60147,7 @@ func NewSocketInstance(family SocketFamily, typ SocketType, protocol SocketProto
 // 
 // Since GLib 2.46, it is no longer a fatal error to call this on a non-socket
 // descriptor.  Instead, a GError will be set with code %G_IO_ERROR_FAILED
-func NewSocketInstanceFromFd(fd int) (Socket, error) {
+func NewSocketFromFd(fd int) (Socket, error) {
 	var carg1 C.gint     // in, none, casted
 	var cret  *C.GSocket // return, full, converted
 	var _cerr *C.GError  // out, full, converted, nullable
@@ -62730,7 +62730,7 @@ func UnsafeSocketAddressToGlibFull(c SocketAddress) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewSocketAddressInstanceFromNative wraps g_socket_address_new_from_native
+// NewSocketAddressFromNative wraps g_socket_address_new_from_native
 // 
 // The function takes the following parameters:
 // 
@@ -62743,7 +62743,7 @@ func UnsafeSocketAddressToGlibFull(c SocketAddress) unsafe.Pointer {
 //
 // Creates a #GSocketAddress subclass corresponding to the native
 // struct sockaddr @native.
-func NewSocketAddressInstanceFromNative(native unsafe.Pointer, len uint) SocketAddress {
+func NewSocketAddressFromNative(native unsafe.Pointer, len uint) SocketAddress {
 	var carg1 C.gpointer        // in, none, casted
 	var carg2 C.gsize           // in, none, casted
 	var cret  *C.GSocketAddress // return, full, converted
@@ -63665,13 +63665,13 @@ func UnsafeSocketClientToGlibFull(c SocketClient) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewSocketClientInstance wraps g_socket_client_new
+// NewSocketClient wraps g_socket_client_new
 // The function returns the following values:
 // 
 // 	- goret SocketClient 
 //
 // Creates a new #GSocketClient with the default options.
-func NewSocketClientInstance() SocketClient {
+func NewSocketClient() SocketClient {
 	var cret *C.GSocketClient // return, full, converted
 
 	cret = C.g_socket_client_new()
@@ -64917,7 +64917,7 @@ func UnsafeSocketConnectionToGlibFull(c SocketConnection) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// SocketConnectionInstanceFactoryLookupType wraps g_socket_connection_factory_lookup_type
+// SocketConnectionFactoryLookupType wraps g_socket_connection_factory_lookup_type
 // 
 // The function takes the following parameters:
 // 
@@ -64933,7 +64933,7 @@ func UnsafeSocketConnectionToGlibFull(c SocketConnection) unsafe.Pointer {
 // sockets with the specified @family, @type and @protocol_id.
 // 
 // If no type is registered, the #GSocketConnection base type is returned.
-func SocketConnectionInstanceFactoryLookupType(family SocketFamily, typ SocketType, protocolId int) gobject.Type {
+func SocketConnectionFactoryLookupType(family SocketFamily, typ SocketType, protocolId int) gobject.Type {
 	var carg1 C.GSocketFamily // in, none, casted
 	var carg2 C.GSocketType   // in, none, casted
 	var carg3 C.gint          // in, none, casted
@@ -64955,7 +64955,7 @@ func SocketConnectionInstanceFactoryLookupType(family SocketFamily, typ SocketTy
 	return goret
 }
 
-// SocketConnectionInstanceFactoryRegisterType wraps g_socket_connection_factory_register_type
+// SocketConnectionFactoryRegisterType wraps g_socket_connection_factory_register_type
 // 
 // The function takes the following parameters:
 // 
@@ -64968,7 +64968,7 @@ func SocketConnectionInstanceFactoryLookupType(family SocketFamily, typ SocketTy
 // sockets with the specified @family, @type and @protocol.
 // 
 // If no type is registered, the #GSocketConnection base type is returned.
-func SocketConnectionInstanceFactoryRegisterType(gType gobject.Type, family SocketFamily, typ SocketType, protocol int) {
+func SocketConnectionFactoryRegisterType(gType gobject.Type, family SocketFamily, typ SocketType, protocol int) {
 	var carg1 C.GType         // in, none, casted, alias
 	var carg2 C.GSocketFamily // in, none, casted
 	var carg3 C.GSocketType   // in, none, casted
@@ -65720,7 +65720,7 @@ func UnsafeSocketListenerToGlibFull(c SocketListener) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewSocketListenerInstance wraps g_socket_listener_new
+// NewSocketListener wraps g_socket_listener_new
 // The function returns the following values:
 // 
 // 	- goret SocketListener 
@@ -65728,7 +65728,7 @@ func UnsafeSocketListenerToGlibFull(c SocketListener) unsafe.Pointer {
 // Creates a new #GSocketListener with no sockets to listen for.
 // New listeners can be added with e.g. g_socket_listener_add_address()
 // or g_socket_listener_add_inet_port().
-func NewSocketListenerInstance() SocketListener {
+func NewSocketListener() SocketListener {
 	var cret *C.GSocketListener // return, full, converted
 
 	cret = C.g_socket_listener_new()
@@ -66388,7 +66388,7 @@ func UnsafeSocketServiceToGlibFull(c SocketService) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewSocketServiceInstance wraps g_socket_service_new
+// NewSocketService wraps g_socket_service_new
 // The function returns the following values:
 // 
 // 	- goret SocketService 
@@ -66400,7 +66400,7 @@ func UnsafeSocketServiceToGlibFull(c SocketService) unsafe.Pointer {
 // New services are created active, there is no need to call
 // g_socket_service_start(), unless g_socket_service_stop() has been
 // called before.
-func NewSocketServiceInstance() SocketService {
+func NewSocketService() SocketService {
 	var cret *C.GSocketService // return, full, converted
 
 	cret = C.g_socket_service_new()
@@ -67407,7 +67407,7 @@ func UnsafeTaskToGlibFull(c Task) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewTaskInstance wraps g_task_new
+// NewTask wraps g_task_new
 // 
 // The function takes the following parameters:
 // 
@@ -67436,7 +67436,7 @@ func UnsafeTaskToGlibFull(c Task) unsafe.Pointer {
 // other objects that the task depends on have been destroyed. If you
 // do not want this behavior, you can use
 // g_task_set_check_cancellable() to change it.
-func NewTaskInstance(cancellable context.Context, sourceObject unsafe.Pointer, callback AsyncReadyCallback) Task {
+func NewTask(cancellable context.Context, sourceObject unsafe.Pointer, callback AsyncReadyCallback) Task {
 	var carg2 *C.GCancellable       // in, none, converted, nullable
 	var carg1 C.gpointer            // in, none, casted, nullable
 	var carg3 C.GAsyncReadyCallback // callback, scope: async, closure: carg4, nullable
@@ -67466,7 +67466,7 @@ func NewTaskInstance(cancellable context.Context, sourceObject unsafe.Pointer, c
 	return goret
 }
 
-// TaskInstanceIsValid wraps g_task_is_valid
+// TaskIsValid wraps g_task_is_valid
 // 
 // The function takes the following parameters:
 // 
@@ -67481,7 +67481,7 @@ func NewTaskInstance(cancellable context.Context, sourceObject unsafe.Pointer, c
 // Checks that @result is a #GTask, and that @source_object is its
 // source object (or that @source_object is %NULL and @result has no
 // source object). This can be used in g_return_if_fail() checks.
-func TaskInstanceIsValid(result unsafe.Pointer, sourceObject unsafe.Pointer) bool {
+func TaskIsValid(result unsafe.Pointer, sourceObject unsafe.Pointer) bool {
 	var carg1 C.gpointer // in, none, casted
 	var carg2 C.gpointer // in, none, casted, nullable
 	var cret  C.gboolean // return
@@ -67504,7 +67504,7 @@ func TaskInstanceIsValid(result unsafe.Pointer, sourceObject unsafe.Pointer) boo
 	return goret
 }
 
-// TaskInstanceReportError wraps g_task_report_error
+// TaskReportError wraps g_task_report_error
 // 
 // The function takes the following parameters:
 // 
@@ -67522,7 +67522,7 @@ func TaskInstanceIsValid(result unsafe.Pointer, sourceObject unsafe.Pointer) boo
 // wrapper method, and deal with it appropriately if so.
 // 
 // See also g_task_report_new_error().
-func TaskInstanceReportError(sourceObject unsafe.Pointer, callback AsyncReadyCallback, sourceTag unsafe.Pointer, err error) {
+func TaskReportError(sourceObject unsafe.Pointer, callback AsyncReadyCallback, sourceTag unsafe.Pointer, err error) {
 	var carg1 C.gpointer            // in, none, casted, nullable
 	var carg2 C.GAsyncReadyCallback // callback, scope: async, closure: carg3, nullable
 	var carg3 C.gpointer            // implicit
@@ -68535,7 +68535,7 @@ func UnsafeTcpWrapperConnectionToGlibFull(c TcpWrapperConnection) unsafe.Pointer
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewTcpWrapperConnectionInstance wraps g_tcp_wrapper_connection_new
+// NewTcpWrapperConnection wraps g_tcp_wrapper_connection_new
 // 
 // The function takes the following parameters:
 // 
@@ -68547,7 +68547,7 @@ func UnsafeTcpWrapperConnectionToGlibFull(c TcpWrapperConnection) unsafe.Pointer
 // 	- goret SocketConnection 
 //
 // Wraps @base_io_stream and @socket together as a #GSocketConnection.
-func NewTcpWrapperConnectionInstance(baseIoStream IOStream, socket Socket) SocketConnection {
+func NewTcpWrapperConnection(baseIoStream IOStream, socket Socket) SocketConnection {
 	var carg1 *C.GIOStream         // in, none, converted
 	var carg2 *C.GSocket           // in, none, converted
 	var cret  *C.GSocketConnection // return, full, converted
@@ -68770,7 +68770,7 @@ func UnsafeTestDBusToGlibFull(c TestDBus) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewTestDBusInstance wraps g_test_dbus_new
+// NewTestDBus wraps g_test_dbus_new
 // 
 // The function takes the following parameters:
 // 
@@ -68781,7 +68781,7 @@ func UnsafeTestDBusToGlibFull(c TestDBus) unsafe.Pointer {
 // 	- goret TestDBus 
 //
 // Create a new #GTestDBus object.
-func NewTestDBusInstance(flags TestDBusFlags) TestDBus {
+func NewTestDBus(flags TestDBusFlags) TestDBus {
 	var carg1 C.GTestDBusFlags // in, none, casted
 	var cret  *C.GTestDBus     // return, full, converted
 
@@ -68797,7 +68797,7 @@ func NewTestDBusInstance(flags TestDBusFlags) TestDBus {
 	return goret
 }
 
-// TestDBusInstanceUnset wraps g_test_dbus_unset
+// TestDBusUnset wraps g_test_dbus_unset
 //
 // Unset DISPLAY and DBUS_SESSION_BUS_ADDRESS env variables to ensure the test
 // won't use user's session bus.
@@ -68805,7 +68805,7 @@ func NewTestDBusInstance(flags TestDBusFlags) TestDBus {
 // This is useful for unit tests that want to verify behaviour when no session
 // bus is running. It is not necessary to call this if unit test already calls
 // g_test_dbus_up() before acquiring the session bus.
-func TestDBusInstanceUnset() {
+func TestDBusUnset() {
 
 	C.g_test_dbus_unset()
 }
@@ -69017,7 +69017,7 @@ func UnsafeThemedIconToGlibFull(c ThemedIcon) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewThemedIconInstance wraps g_themed_icon_new
+// NewThemedIcon wraps g_themed_icon_new
 // 
 // The function takes the following parameters:
 // 
@@ -69028,7 +69028,7 @@ func UnsafeThemedIconToGlibFull(c ThemedIcon) unsafe.Pointer {
 // 	- goret ThemedIcon 
 //
 // Creates a new themed icon for @iconname.
-func NewThemedIconInstance(iconname string) ThemedIcon {
+func NewThemedIcon(iconname string) ThemedIcon {
 	var carg1 *C.char  // in, none, string, casted *C.gchar
 	var cret  *C.GIcon // return, full, converted, casted *C.GThemedIcon
 
@@ -69045,7 +69045,7 @@ func NewThemedIconInstance(iconname string) ThemedIcon {
 	return goret
 }
 
-// NewThemedIconInstanceFromNames wraps g_themed_icon_new_from_names
+// NewThemedIconFromNames wraps g_themed_icon_new_from_names
 // 
 // The function takes the following parameters:
 // 
@@ -69056,7 +69056,7 @@ func NewThemedIconInstance(iconname string) ThemedIcon {
 // 	- goret ThemedIcon 
 //
 // Creates a new themed icon for @iconnames.
-func NewThemedIconInstanceFromNames(iconnames []string) ThemedIcon {
+func NewThemedIconFromNames(iconnames []string) ThemedIcon {
 	var carg1 **C.char // in, transfer: none, C Pointers: 2, Name: array[utf8], array (inner: *typesystem.StringPrimitive, length-by: carg2)
 	var carg2 C.int    // implicit
 	var cret  *C.GIcon // return, full, converted, casted *C.GThemedIcon
@@ -69076,7 +69076,7 @@ func NewThemedIconInstanceFromNames(iconnames []string) ThemedIcon {
 	return goret
 }
 
-// NewThemedIconInstanceWithDefaultFallbacks wraps g_themed_icon_new_with_default_fallbacks
+// NewThemedIconWithDefaultFallbacks wraps g_themed_icon_new_with_default_fallbacks
 // 
 // The function takes the following parameters:
 // 
@@ -69101,7 +69101,7 @@ func NewThemedIconInstanceFromNames(iconnames []string) ThemedIcon {
 // icon1 = g_themed_icon_new_from_names (names, 4);
 // icon2 = g_themed_icon_new_with_default_fallbacks ("gnome-dev-cdrom-audio");
 // ]|
-func NewThemedIconInstanceWithDefaultFallbacks(iconname string) ThemedIcon {
+func NewThemedIconWithDefaultFallbacks(iconname string) ThemedIcon {
 	var carg1 *C.char  // in, none, string, casted *C.gchar
 	var cret  *C.GIcon // return, full, converted, casted *C.GThemedIcon
 
@@ -69257,7 +69257,7 @@ func UnsafeThreadedSocketServiceToGlibFull(c ThreadedSocketService) unsafe.Point
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewThreadedSocketServiceInstance wraps g_threaded_socket_service_new
+// NewThreadedSocketService wraps g_threaded_socket_service_new
 // 
 // The function takes the following parameters:
 // 
@@ -69270,7 +69270,7 @@ func UnsafeThreadedSocketServiceToGlibFull(c ThreadedSocketService) unsafe.Point
 //
 // Creates a new #GThreadedSocketService with no listeners. Listeners
 // must be added with one of the #GSocketListener "add" methods.
-func NewThreadedSocketServiceInstance(maxThreads int) SocketService {
+func NewThreadedSocketService(maxThreads int) SocketService {
 	var carg1 C.int             // in, none, casted, casted C.gint
 	var cret  *C.GSocketService // return, full, converted
 
@@ -69437,7 +69437,7 @@ func UnsafeTlsCertificateToGlibFull(c TlsCertificate) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewTlsCertificateInstanceFromFile wraps g_tls_certificate_new_from_file
+// NewTlsCertificateFromFile wraps g_tls_certificate_new_from_file
 // 
 // The function takes the following parameters:
 // 
@@ -69457,7 +69457,7 @@ func UnsafeTlsCertificateToGlibFull(c TlsCertificate) unsafe.Pointer {
 // 
 // If @file cannot be read or parsed, the function will return %NULL and
 // set @error.
-func NewTlsCertificateInstanceFromFile(file string) (TlsCertificate, error) {
+func NewTlsCertificateFromFile(file string) (TlsCertificate, error) {
 	var carg1 *C.gchar           // in, none, string, casted *C.gchar
 	var cret  *C.GTlsCertificate // return, full, converted
 	var _cerr *C.GError          // out, full, converted, nullable
@@ -69479,7 +69479,7 @@ func NewTlsCertificateInstanceFromFile(file string) (TlsCertificate, error) {
 	return goret, _goerr
 }
 
-// NewTlsCertificateInstanceFromFileWithPassword wraps g_tls_certificate_new_from_file_with_password
+// NewTlsCertificateFromFileWithPassword wraps g_tls_certificate_new_from_file_with_password
 // 
 // The function takes the following parameters:
 // 
@@ -69499,7 +69499,7 @@ func NewTlsCertificateInstanceFromFile(file string) (TlsCertificate, error) {
 // Any unknown file types will error with %G_IO_ERROR_NOT_SUPPORTED.
 // Currently only `.p12` and `.pfx` files are supported.
 // See g_tls_certificate_new_from_pkcs12() for more details.
-func NewTlsCertificateInstanceFromFileWithPassword(file string, password string) (TlsCertificate, error) {
+func NewTlsCertificateFromFileWithPassword(file string, password string) (TlsCertificate, error) {
 	var carg1 *C.gchar           // in, none, string, casted *C.gchar
 	var carg2 *C.gchar           // in, none, string, casted *C.gchar
 	var cret  *C.GTlsCertificate // return, full, converted
@@ -69525,7 +69525,7 @@ func NewTlsCertificateInstanceFromFileWithPassword(file string, password string)
 	return goret, _goerr
 }
 
-// NewTlsCertificateInstanceFromFiles wraps g_tls_certificate_new_from_files
+// NewTlsCertificateFromFiles wraps g_tls_certificate_new_from_files
 // 
 // The function takes the following parameters:
 // 
@@ -69553,7 +69553,7 @@ func NewTlsCertificateInstanceFromFileWithPassword(file string, password string)
 // If either file cannot be read or parsed, the function will return
 // %NULL and set @error. Otherwise, this behaves like
 // g_tls_certificate_new_from_pem().
-func NewTlsCertificateInstanceFromFiles(certFile string, keyFile string) (TlsCertificate, error) {
+func NewTlsCertificateFromFiles(certFile string, keyFile string) (TlsCertificate, error) {
 	var carg1 *C.gchar           // in, none, string, casted *C.gchar
 	var carg2 *C.gchar           // in, none, string, casted *C.gchar
 	var cret  *C.GTlsCertificate // return, full, converted
@@ -69579,7 +69579,7 @@ func NewTlsCertificateInstanceFromFiles(certFile string, keyFile string) (TlsCer
 	return goret, _goerr
 }
 
-// NewTlsCertificateInstanceFromPem wraps g_tls_certificate_new_from_pem
+// NewTlsCertificateFromPem wraps g_tls_certificate_new_from_pem
 // 
 // The function takes the following parameters:
 // 
@@ -69605,7 +69605,7 @@ func NewTlsCertificateInstanceFromFiles(certFile string, keyFile string) (TlsCer
 // will be set accordingly if the verification succeeds. If any
 // certificate in the chain cannot be verified, the first certificate in
 // the file will still be returned.
-func NewTlsCertificateInstanceFromPem(data string, length int) (TlsCertificate, error) {
+func NewTlsCertificateFromPem(data string, length int) (TlsCertificate, error) {
 	var carg1 *C.gchar           // in, none, string, casted *C.gchar
 	var carg2 C.gssize           // in, none, casted
 	var cret  *C.GTlsCertificate // return, full, converted
@@ -69630,7 +69630,7 @@ func NewTlsCertificateInstanceFromPem(data string, length int) (TlsCertificate, 
 	return goret, _goerr
 }
 
-// NewTlsCertificateInstanceFromPKCS11URIs wraps g_tls_certificate_new_from_pkcs11_uris
+// NewTlsCertificateFromPKCS11URIs wraps g_tls_certificate_new_from_pkcs11_uris
 // 
 // The function takes the following parameters:
 // 
@@ -69666,7 +69666,7 @@ func NewTlsCertificateInstanceFromPem(data string, length int) (TlsCertificate, 
 // @private_key_pkcs11_uri allows using a private key exposed under a different URI.
 // 
 // Note that the private key is not accessed until usage and may fail or require a PIN later.
-func NewTlsCertificateInstanceFromPKCS11URIs(pkcs11Uri string, privateKeyPkcs11Uri string) (TlsCertificate, error) {
+func NewTlsCertificateFromPKCS11URIs(pkcs11Uri string, privateKeyPkcs11Uri string) (TlsCertificate, error) {
 	var carg1 *C.gchar           // in, none, string, casted *C.gchar
 	var carg2 *C.gchar           // in, none, string, nullable-string
 	var cret  *C.GTlsCertificate // return, full, converted
@@ -69694,7 +69694,7 @@ func NewTlsCertificateInstanceFromPKCS11URIs(pkcs11Uri string, privateKeyPkcs11U
 	return goret, _goerr
 }
 
-// NewTlsCertificateInstanceFromPKCS12 wraps g_tls_certificate_new_from_pkcs12
+// NewTlsCertificateFromPKCS12 wraps g_tls_certificate_new_from_pkcs12
 // 
 // The function takes the following parameters:
 // 
@@ -69723,7 +69723,7 @@ func NewTlsCertificateInstanceFromPKCS11URIs(pkcs11Uri string, privateKeyPkcs11U
 // %G_IO_ERROR_NOT_SUPPORTED.
 // 
 // Other parsing failures will error with %G_TLS_ERROR_BAD_CERTIFICATE.
-func NewTlsCertificateInstanceFromPKCS12(data []uint8, password string) (TlsCertificate, error) {
+func NewTlsCertificateFromPKCS12(data []uint8, password string) (TlsCertificate, error) {
 	var carg1 *C.guint8          // in, transfer: none, C Pointers: 1, Name: array[guint8], array (inner: *typesystem.CastablePrimitive, length-by: carg2)
 	var carg2 C.gsize            // implicit
 	var carg3 *C.gchar           // in, none, string, nullable-string
@@ -72754,7 +72754,7 @@ func UnsafeTlsPasswordToGlibFull(c TlsPassword) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewTlsPasswordInstance wraps g_tls_password_new
+// NewTlsPassword wraps g_tls_password_new
 // 
 // The function takes the following parameters:
 // 
@@ -72766,7 +72766,7 @@ func UnsafeTlsPasswordToGlibFull(c TlsPassword) unsafe.Pointer {
 // 	- goret TlsPassword 
 //
 // Create a new #GTlsPassword object.
-func NewTlsPasswordInstance(flags TLSPasswordFlags, description string) TlsPassword {
+func NewTlsPassword(flags TLSPasswordFlags, description string) TlsPassword {
 	var carg1 C.GTlsPasswordFlags // in, none, casted
 	var carg2 *C.gchar            // in, none, string, casted *C.gchar
 	var cret  *C.GTlsPassword     // return, full, converted
@@ -73131,13 +73131,13 @@ func UnsafeVfsToGlibFull(c Vfs) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// VfsInstanceGetDefault wraps g_vfs_get_default
+// VfsGetDefault wraps g_vfs_get_default
 // The function returns the following values:
 // 
 // 	- goret Vfs 
 //
 // Gets the default #GVfs for the system.
-func VfsInstanceGetDefault() Vfs {
+func VfsGetDefault() Vfs {
 	var cret *C.GVfs // return, none, converted
 
 	cret = C.g_vfs_get_default()
@@ -73149,13 +73149,13 @@ func VfsInstanceGetDefault() Vfs {
 	return goret
 }
 
-// VfsInstanceGetLocal wraps g_vfs_get_local
+// VfsGetLocal wraps g_vfs_get_local
 // The function returns the following values:
 // 
 // 	- goret Vfs 
 //
 // Gets the local #GVfs for the system.
-func VfsInstanceGetLocal() Vfs {
+func VfsGetLocal() Vfs {
 	var cret *C.GVfs // return, none, converted
 
 	cret = C.g_vfs_get_local()
@@ -73505,7 +73505,7 @@ func UnsafeVolumeMonitorToGlibFull(c VolumeMonitor) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// VolumeMonitorInstanceAdoptOrphanMount wraps g_volume_monitor_adopt_orphan_mount
+// VolumeMonitorAdoptOrphanMount wraps g_volume_monitor_adopt_orphan_mount
 // 
 // The function takes the following parameters:
 // 
@@ -73549,7 +73549,7 @@ func UnsafeVolumeMonitorToGlibFull(c VolumeMonitor) unsafe.Pointer {
 // the mount they intend to adopt. See the proxy volume monitor in
 // gvfs for an example of this. Also see g_mount_is_shadowed(),
 // g_mount_shadow() and g_mount_unshadow() functions.
-func VolumeMonitorInstanceAdoptOrphanMount(mount Mount) Volume {
+func VolumeMonitorAdoptOrphanMount(mount Mount) Volume {
 	var carg1 *C.GMount  // in, none, converted
 	var cret  *C.GVolume // return, full, converted
 
@@ -73565,13 +73565,13 @@ func VolumeMonitorInstanceAdoptOrphanMount(mount Mount) Volume {
 	return goret
 }
 
-// VolumeMonitorInstanceGet wraps g_volume_monitor_get
+// VolumeMonitorGet wraps g_volume_monitor_get
 // The function returns the following values:
 // 
 // 	- goret VolumeMonitor 
 //
 // Gets the volume monitor used by gio.
-func VolumeMonitorInstanceGet() VolumeMonitor {
+func VolumeMonitorGet() VolumeMonitor {
 	var cret *C.GVolumeMonitor // return, full, converted
 
 	cret = C.g_volume_monitor_get()
@@ -73719,7 +73719,7 @@ func UnsafeZlibCompressorToGlibFull(c ZlibCompressor) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewZlibCompressorInstance wraps g_zlib_compressor_new
+// NewZlibCompressor wraps g_zlib_compressor_new
 // 
 // The function takes the following parameters:
 // 
@@ -73731,7 +73731,7 @@ func UnsafeZlibCompressorToGlibFull(c ZlibCompressor) unsafe.Pointer {
 // 	- goret ZlibCompressor 
 //
 // Creates a new #GZlibCompressor.
-func NewZlibCompressorInstance(format ZlibCompressorFormat, level int) ZlibCompressor {
+func NewZlibCompressor(format ZlibCompressorFormat, level int) ZlibCompressor {
 	var carg1 C.GZlibCompressorFormat // in, none, casted
 	var carg2 C.int                   // in, none, casted, casted C.gint
 	var cret  *C.GZlibCompressor      // return, full, converted
@@ -73863,7 +73863,7 @@ func UnsafeZlibDecompressorToGlibFull(c ZlibDecompressor) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewZlibDecompressorInstance wraps g_zlib_decompressor_new
+// NewZlibDecompressor wraps g_zlib_decompressor_new
 // 
 // The function takes the following parameters:
 // 
@@ -73874,7 +73874,7 @@ func UnsafeZlibDecompressorToGlibFull(c ZlibDecompressor) unsafe.Pointer {
 // 	- goret ZlibDecompressor 
 //
 // Creates a new #GZlibDecompressor.
-func NewZlibDecompressorInstance(format ZlibCompressorFormat) ZlibDecompressor {
+func NewZlibDecompressor(format ZlibCompressorFormat) ZlibDecompressor {
 	var carg1 C.GZlibCompressorFormat // in, none, casted
 	var cret  *C.GZlibDecompressor    // return, full, converted
 
@@ -73970,7 +73970,7 @@ func UnsafeDBusMenuModelToGlibFull(c DBusMenuModel) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// DBusMenuModelInstanceGet wraps g_dbus_menu_model_get
+// DBusMenuModelGet wraps g_dbus_menu_model_get
 // 
 // The function takes the following parameters:
 // 
@@ -73991,7 +73991,7 @@ func UnsafeDBusMenuModelToGlibFull(c DBusMenuModel) unsafe.Pointer {
 // with respect to this context.  All calls on the returned menu model
 // (and linked models) must also originate from this same context, with
 // the thread default main context unchanged.
-func DBusMenuModelInstanceGet(connection DBusConnection, busName string, objectPath string) DBusMenuModel {
+func DBusMenuModelGet(connection DBusConnection, busName string, objectPath string) DBusMenuModel {
 	var carg1 *C.GDBusConnection // in, none, converted
 	var carg2 *C.gchar           // in, none, string, nullable-string
 	var carg3 *C.gchar           // in, none, string, casted *C.gchar
@@ -75277,7 +75277,7 @@ func UnsafeInetSocketAddressToGlibFull(c InetSocketAddress) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewInetSocketAddressInstance wraps g_inet_socket_address_new
+// NewInetSocketAddress wraps g_inet_socket_address_new
 // 
 // The function takes the following parameters:
 // 
@@ -75289,7 +75289,7 @@ func UnsafeInetSocketAddressToGlibFull(c InetSocketAddress) unsafe.Pointer {
 // 	- goret SocketAddress 
 //
 // Creates a new #GInetSocketAddress for @address and @port.
-func NewInetSocketAddressInstance(address InetAddress, port uint16) SocketAddress {
+func NewInetSocketAddress(address InetAddress, port uint16) SocketAddress {
 	var carg1 *C.GInetAddress   // in, none, converted
 	var carg2 C.guint16         // in, none, casted
 	var cret  *C.GSocketAddress // return, full, converted
@@ -75308,7 +75308,7 @@ func NewInetSocketAddressInstance(address InetAddress, port uint16) SocketAddres
 	return goret
 }
 
-// NewInetSocketAddressInstanceFromString wraps g_inet_socket_address_new_from_string
+// NewInetSocketAddressFromString wraps g_inet_socket_address_new_from_string
 // 
 // The function takes the following parameters:
 // 
@@ -75323,7 +75323,7 @@ func NewInetSocketAddressInstance(address InetAddress, port uint16) SocketAddres
 // 
 // If @address is an IPv6 address, it can also contain a scope ID
 // (separated from the address by a `%`).
-func NewInetSocketAddressInstanceFromString(address string, port uint) SocketAddress {
+func NewInetSocketAddressFromString(address string, port uint) SocketAddress {
 	var carg1 *C.char           // in, none, string, casted *C.gchar
 	var carg2 C.guint           // in, none, casted
 	var cret  *C.GSocketAddress // return, full, converted
@@ -75560,14 +75560,14 @@ func UnsafeMemoryOutputStreamToGlibFull(c MemoryOutputStream) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewMemoryOutputStreamInstanceResizable wraps g_memory_output_stream_new_resizable
+// NewMemoryOutputStreamResizable wraps g_memory_output_stream_new_resizable
 // The function returns the following values:
 // 
 // 	- goret OutputStream 
 //
 // Creates a new #GMemoryOutputStream, using g_realloc() and g_free()
 // for memory allocation.
-func NewMemoryOutputStreamInstanceResizable() OutputStream {
+func NewMemoryOutputStreamResizable() OutputStream {
 	var cret *C.GOutputStream // return, full, converted
 
 	cret = C.g_memory_output_stream_new_resizable()
@@ -75952,7 +75952,7 @@ func UnsafeMenuToGlibFull(c Menu) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewMenuInstance wraps g_menu_new
+// NewMenu wraps g_menu_new
 // The function returns the following values:
 // 
 // 	- goret Menu 
@@ -75960,7 +75960,7 @@ func UnsafeMenuToGlibFull(c Menu) unsafe.Pointer {
 // Creates a new #GMenu.
 // 
 // The new menu has no items.
-func NewMenuInstance() Menu {
+func NewMenu() Menu {
 	var cret *C.GMenu // return, full, converted
 
 	cret = C.g_menu_new()
@@ -76446,7 +76446,7 @@ func UnsafeNativeSocketAddressToGlibFull(c NativeSocketAddress) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewNativeSocketAddressInstance wraps g_native_socket_address_new
+// NewNativeSocketAddress wraps g_native_socket_address_new
 // 
 // The function takes the following parameters:
 // 
@@ -76458,7 +76458,7 @@ func UnsafeNativeSocketAddressToGlibFull(c NativeSocketAddress) unsafe.Pointer {
 // 	- goret SocketAddress 
 //
 // Creates a new #GNativeSocketAddress for @native and @len.
-func NewNativeSocketAddressInstance(native unsafe.Pointer, len uint) SocketAddress {
+func NewNativeSocketAddress(native unsafe.Pointer, len uint) SocketAddress {
 	var carg1 C.gpointer        // in, none, casted, nullable
 	var carg2 C.gsize           // in, none, casted
 	var cret  *C.GSocketAddress // return, full, converted
@@ -76641,7 +76641,7 @@ func UnsafeProxyAddressToGlibFull(c ProxyAddress) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewProxyAddressInstance wraps g_proxy_address_new
+// NewProxyAddress wraps g_proxy_address_new
 // 
 // The function takes the following parameters:
 // 
@@ -76665,7 +76665,7 @@ func UnsafeProxyAddressToGlibFull(c ProxyAddress) unsafe.Pointer {
 // (Note that this method doesn't set the #GProxyAddress:uri or
 // #GProxyAddress:destination-protocol fields; use g_object_new()
 // directly if you want to set those.)
-func NewProxyAddressInstance(inetaddr InetAddress, port uint16, protocol string, destHostname string, destPort uint16, username string, password string) SocketAddress {
+func NewProxyAddress(inetaddr InetAddress, port uint16, protocol string, destHostname string, destPort uint16, username string, password string) SocketAddress {
 	var carg1 *C.GInetAddress   // in, none, converted
 	var carg2 C.guint16         // in, none, casted
 	var carg3 *C.gchar          // in, none, string, casted *C.gchar
@@ -77141,7 +77141,7 @@ func UnsafeBufferedInputStreamToGlibFull(c BufferedInputStream) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewBufferedInputStreamInstance wraps g_buffered_input_stream_new
+// NewBufferedInputStream wraps g_buffered_input_stream_new
 // 
 // The function takes the following parameters:
 // 
@@ -77153,7 +77153,7 @@ func UnsafeBufferedInputStreamToGlibFull(c BufferedInputStream) unsafe.Pointer {
 //
 // Creates a new [class@Gio.InputStream] from the given @base_stream, with
 // a buffer set to the default size (4 kilobytes).
-func NewBufferedInputStreamInstance(baseStream InputStream) InputStream {
+func NewBufferedInputStream(baseStream InputStream) InputStream {
 	var carg1 *C.GInputStream // in, none, converted
 	var cret  *C.GInputStream // return, full, converted
 
@@ -77169,7 +77169,7 @@ func NewBufferedInputStreamInstance(baseStream InputStream) InputStream {
 	return goret
 }
 
-// NewBufferedInputStreamInstanceSized wraps g_buffered_input_stream_new_sized
+// NewBufferedInputStreamSized wraps g_buffered_input_stream_new_sized
 // 
 // The function takes the following parameters:
 // 
@@ -77182,7 +77182,7 @@ func NewBufferedInputStreamInstance(baseStream InputStream) InputStream {
 //
 // Creates a new [class@Gio.BufferedInputStream] from the given @base_stream,
 // with a buffer set to @size.
-func NewBufferedInputStreamInstanceSized(baseStream InputStream, size uint) InputStream {
+func NewBufferedInputStreamSized(baseStream InputStream, size uint) InputStream {
 	var carg1 *C.GInputStream // in, none, converted
 	var carg2 C.gsize         // in, none, casted
 	var cret  *C.GInputStream // return, full, converted
@@ -77636,7 +77636,7 @@ func UnsafeBufferedOutputStreamToGlibFull(c BufferedOutputStream) unsafe.Pointer
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewBufferedOutputStreamInstance wraps g_buffered_output_stream_new
+// NewBufferedOutputStream wraps g_buffered_output_stream_new
 // 
 // The function takes the following parameters:
 // 
@@ -77647,7 +77647,7 @@ func UnsafeBufferedOutputStreamToGlibFull(c BufferedOutputStream) unsafe.Pointer
 // 	- goret OutputStream 
 //
 // Creates a new buffered output stream for a base stream.
-func NewBufferedOutputStreamInstance(baseStream OutputStream) OutputStream {
+func NewBufferedOutputStream(baseStream OutputStream) OutputStream {
 	var carg1 *C.GOutputStream // in, none, converted
 	var cret  *C.GOutputStream // return, full, converted
 
@@ -77663,7 +77663,7 @@ func NewBufferedOutputStreamInstance(baseStream OutputStream) OutputStream {
 	return goret
 }
 
-// NewBufferedOutputStreamInstanceSized wraps g_buffered_output_stream_new_sized
+// NewBufferedOutputStreamSized wraps g_buffered_output_stream_new_sized
 // 
 // The function takes the following parameters:
 // 
@@ -77675,7 +77675,7 @@ func NewBufferedOutputStreamInstance(baseStream OutputStream) OutputStream {
 // 	- goret OutputStream 
 //
 // Creates a new buffered output stream with a given buffer size.
-func NewBufferedOutputStreamInstanceSized(baseStream OutputStream, size uint) OutputStream {
+func NewBufferedOutputStreamSized(baseStream OutputStream, size uint) OutputStream {
 	var carg1 *C.GOutputStream // in, none, converted
 	var carg2 C.gsize          // in, none, casted
 	var cret  *C.GOutputStream // return, full, converted
@@ -77855,7 +77855,7 @@ func UnsafeConverterInputStreamToGlibFull(c ConverterInputStream) unsafe.Pointer
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewConverterInputStreamInstance wraps g_converter_input_stream_new
+// NewConverterInputStream wraps g_converter_input_stream_new
 // 
 // The function takes the following parameters:
 // 
@@ -77867,7 +77867,7 @@ func UnsafeConverterInputStreamToGlibFull(c ConverterInputStream) unsafe.Pointer
 // 	- goret InputStream 
 //
 // Creates a new converter input stream for the @base_stream.
-func NewConverterInputStreamInstance(baseStream InputStream, converter Converter) InputStream {
+func NewConverterInputStream(baseStream InputStream, converter Converter) InputStream {
 	var carg1 *C.GInputStream // in, none, converted
 	var carg2 *C.GConverter   // in, none, converted
 	var cret  *C.GInputStream // return, full, converted
@@ -77980,7 +77980,7 @@ func UnsafeConverterOutputStreamToGlibFull(c ConverterOutputStream) unsafe.Point
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewConverterOutputStreamInstance wraps g_converter_output_stream_new
+// NewConverterOutputStream wraps g_converter_output_stream_new
 // 
 // The function takes the following parameters:
 // 
@@ -77992,7 +77992,7 @@ func UnsafeConverterOutputStreamToGlibFull(c ConverterOutputStream) unsafe.Point
 // 	- goret OutputStream 
 //
 // Creates a new converter output stream for the @base_stream.
-func NewConverterOutputStreamInstance(baseStream OutputStream, converter Converter) OutputStream {
+func NewConverterOutputStream(baseStream OutputStream, converter Converter) OutputStream {
 	var carg1 *C.GOutputStream // in, none, converted
 	var carg2 *C.GConverter    // in, none, converted
 	var cret  *C.GOutputStream // return, full, converted
@@ -78475,7 +78475,7 @@ func UnsafeDataInputStreamToGlibFull(c DataInputStream) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewDataInputStreamInstance wraps g_data_input_stream_new
+// NewDataInputStream wraps g_data_input_stream_new
 // 
 // The function takes the following parameters:
 // 
@@ -78486,7 +78486,7 @@ func UnsafeDataInputStreamToGlibFull(c DataInputStream) unsafe.Pointer {
 // 	- goret DataInputStream 
 //
 // Creates a new data input stream for the @base_stream.
-func NewDataInputStreamInstance(baseStream InputStream) DataInputStream {
+func NewDataInputStream(baseStream InputStream) DataInputStream {
 	var carg1 *C.GInputStream     // in, none, converted
 	var cret  *C.GDataInputStream // return, full, converted
 
@@ -79591,7 +79591,7 @@ func UnsafeDataOutputStreamToGlibFull(c DataOutputStream) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewDataOutputStreamInstance wraps g_data_output_stream_new
+// NewDataOutputStream wraps g_data_output_stream_new
 // 
 // The function takes the following parameters:
 // 
@@ -79602,7 +79602,7 @@ func UnsafeDataOutputStreamToGlibFull(c DataOutputStream) unsafe.Pointer {
 // 	- goret DataOutputStream 
 //
 // Creates a new data output stream for @base_stream.
-func NewDataOutputStreamInstance(baseStream OutputStream) DataOutputStream {
+func NewDataOutputStream(baseStream OutputStream) DataOutputStream {
 	var carg1 *C.GOutputStream     // in, none, converted
 	var cret  *C.GDataOutputStream // return, full, converted
 

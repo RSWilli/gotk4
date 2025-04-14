@@ -239,7 +239,7 @@ func UnsafeFontMapToGlibFull(c FontMap) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(&i.Instance)
 }
 
-// FontMapInstanceGetDefault wraps pango_cairo_font_map_get_default
+// FontMapGetDefault wraps pango_cairo_font_map_get_default
 // The function returns the following values:
 // 
 // 	- goret pango.FontMap 
@@ -259,7 +259,7 @@ func UnsafeFontMapToGlibFull(c FontMap) unsafe.Pointer {
 // Note that since Pango 1.32.6, the default fontmap is per-thread.
 // Each thread gets its own default fontmap. In this way, PangoCairo
 // can be used safely from multiple threads.
-func FontMapInstanceGetDefault() pango.FontMap {
+func FontMapGetDefault() pango.FontMap {
 	var cret *C.PangoFontMap // return, none, converted
 
 	cret = C.pango_cairo_font_map_get_default()
@@ -271,7 +271,7 @@ func FontMapInstanceGetDefault() pango.FontMap {
 	return goret
 }
 
-// NewFontMapInstance wraps pango_cairo_font_map_new
+// NewFontMap wraps pango_cairo_font_map_new
 // The function returns the following values:
 // 
 // 	- goret pango.FontMap 
@@ -294,7 +294,7 @@ func FontMapInstanceGetDefault() pango.FontMap {
 // If requested type is not available, NULL is returned. Ie.
 // this is only useful for testing, when at least two backends
 // are compiled in.
-func NewFontMapInstance() pango.FontMap {
+func NewFontMap() pango.FontMap {
 	var cret *C.PangoFontMap // return, full, converted
 
 	cret = C.pango_cairo_font_map_new()

@@ -552,7 +552,7 @@ func UnsafeX11DisplayToGlibFull(c X11Display) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// X11DisplayInstanceOpen wraps gdk_x11_display_open
+// X11DisplayOpen wraps gdk_x11_display_open
 // 
 // The function takes the following parameters:
 // 
@@ -566,7 +566,7 @@ func UnsafeX11DisplayToGlibFull(c X11Display) unsafe.Pointer {
 // Tries to open a new display to the X server given by
 // @display_name. If opening the display fails, %NULL is
 // returned.
-func X11DisplayInstanceOpen(displayName string) gdk.Display {
+func X11DisplayOpen(displayName string) gdk.Display {
 	var carg1 *C.char       // in, none, string, nullable-string
 	var cret  *C.GdkDisplay // return, full, converted
 
@@ -585,7 +585,7 @@ func X11DisplayInstanceOpen(displayName string) gdk.Display {
 	return goret
 }
 
-// X11DisplayInstanceSetProgramClass wraps gdk_x11_display_set_program_class
+// X11DisplaySetProgramClass wraps gdk_x11_display_set_program_class
 // 
 // The function takes the following parameters:
 // 
@@ -596,7 +596,7 @@ func X11DisplayInstanceOpen(displayName string) gdk.Display {
 // 
 // The X11 backend uses the program class to set the class name part
 // of the `WM_CLASS` property on toplevel windows; see the ICCCM.
-func X11DisplayInstanceSetProgramClass(display gdk.Display, programClass string) {
+func X11DisplaySetProgramClass(display gdk.Display, programClass string) {
 	var carg1 *C.GdkDisplay // in, none, converted
 	var carg2 *C.char       // in, none, string, casted *C.gchar
 

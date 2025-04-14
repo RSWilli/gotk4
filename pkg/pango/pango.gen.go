@@ -4627,7 +4627,7 @@ func UnsafeContextToGlibFull(c Context) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewContextInstance wraps pango_context_new
+// NewContext wraps pango_context_new
 // The function returns the following values:
 // 
 // 	- goret Context 
@@ -4643,7 +4643,7 @@ func UnsafeContextToGlibFull(c Context) unsafe.Pointer {
 // that system may have it's own way of create a `PangoContext`.
 // For instance, the GTK toolkit has, among others,
 // `gtk_widget_get_pango_context()`. Use those instead.
-func NewContextInstance() Context {
+func NewContext() Context {
 	var cret *C.PangoContext // return, full, converted
 
 	cret = C.pango_context_new()
@@ -5349,13 +5349,13 @@ func UnsafeCoverageToGlibFull(c Coverage) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewCoverageInstance wraps pango_coverage_new
+// NewCoverage wraps pango_coverage_new
 // The function returns the following values:
 // 
 // 	- goret Coverage 
 //
 // Create a new `PangoCoverage`
-func NewCoverageInstance() Coverage {
+func NewCoverage() Coverage {
 	var cret *C.PangoCoverage // return, full, converted
 
 	cret = C.pango_coverage_new()
@@ -5367,7 +5367,7 @@ func NewCoverageInstance() Coverage {
 	return goret
 }
 
-// CoverageInstanceFromBytes wraps pango_coverage_from_bytes
+// CoverageFromBytes wraps pango_coverage_from_bytes
 // 
 // The function takes the following parameters:
 // 
@@ -5382,7 +5382,7 @@ func NewCoverageInstance() Coverage {
 // back to a `PangoCoverage`.
 //
 // Deprecated: (since 1.44.0) This returns %NULL
-func CoverageInstanceFromBytes(bytes []uint8) Coverage {
+func CoverageFromBytes(bytes []uint8) Coverage {
 	var carg1 *C.guchar        // in, transfer: none, C Pointers: 1, Name: array[guint8], array (inner: *typesystem.CastablePrimitive, length-by: carg2)
 	var carg2 C.int            // implicit
 	var cret  *C.PangoCoverage // return, full, converted
@@ -5709,7 +5709,7 @@ func UnsafeFontToGlibFull(c Font) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// FontInstanceDescriptionsFree wraps pango_font_descriptions_free
+// FontDescriptionsFree wraps pango_font_descriptions_free
 // 
 // The function takes the following parameters:
 // 
@@ -5717,7 +5717,7 @@ func UnsafeFontToGlibFull(c Font) unsafe.Pointer {
 //   to an array of `PangoFontDescription`, may be %NULL 
 //
 // Frees an array of font descriptions.
-func FontInstanceDescriptionsFree(descs []*FontDescription) {
+func FontDescriptionsFree(descs []*FontDescription) {
 	var carg1 **C.PangoFontDescription // in, transfer: full, C Pointers: 2, Name: array[FontDescription], nullable, array (inner: *typesystem.Record, length-by: carg2)
 	var carg2 C.int                    // implicit
 
@@ -5730,7 +5730,7 @@ func FontInstanceDescriptionsFree(descs []*FontDescription) {
 	runtime.KeepAlive(descs)
 }
 
-// FontInstanceDeserialize wraps pango_font_deserialize
+// FontDeserialize wraps pango_font_deserialize
 // 
 // The function takes the following parameters:
 // 
@@ -5749,7 +5749,7 @@ func FontInstanceDescriptionsFree(descs []*FontDescription) {
 // Note: to verify that the returned font is identical to
 // the one that was serialized, you can compare @bytes to the
 // result of serializing the font again.
-func FontInstanceDeserialize(context Context, bytes *glib.Bytes) (Font, error) {
+func FontDeserialize(context Context, bytes *glib.Bytes) (Font, error) {
 	var carg1 *C.PangoContext // in, none, converted
 	var carg2 *C.GBytes       // in, none, converted
 	var cret  *C.PangoFont    // return, full, converted
@@ -7189,7 +7189,7 @@ func UnsafeFontsetSimpleToGlibFull(c FontsetSimple) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewFontsetSimpleInstance wraps pango_fontset_simple_new
+// NewFontsetSimple wraps pango_fontset_simple_new
 // 
 // The function takes the following parameters:
 // 
@@ -7200,7 +7200,7 @@ func UnsafeFontsetSimpleToGlibFull(c FontsetSimple) unsafe.Pointer {
 // 	- goret FontsetSimple 
 //
 // Creates a new `PangoFontsetSimple` for the given language.
-func NewFontsetSimpleInstance(language *Language) FontsetSimple {
+func NewFontsetSimple(language *Language) FontsetSimple {
 	var carg1 *C.PangoLanguage      // in, none, converted
 	var cret  *C.PangoFontsetSimple // return, full, converted
 
@@ -8267,7 +8267,7 @@ func UnsafeLayoutToGlibFull(c Layout) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewLayoutInstance wraps pango_layout_new
+// NewLayout wraps pango_layout_new
 // 
 // The function takes the following parameters:
 // 
@@ -8279,7 +8279,7 @@ func UnsafeLayoutToGlibFull(c Layout) unsafe.Pointer {
 //
 // Create a new `PangoLayout` object with attributes initialized to
 // default values for a particular `PangoContext`.
-func NewLayoutInstance(context Context) Layout {
+func NewLayout(context Context) Layout {
 	var carg1 *C.PangoContext // in, none, converted
 	var cret  *C.PangoLayout  // return, full, converted
 
@@ -8295,7 +8295,7 @@ func NewLayoutInstance(context Context) Layout {
 	return goret
 }
 
-// LayoutInstanceDeserialize wraps pango_layout_deserialize
+// LayoutDeserialize wraps pango_layout_deserialize
 // 
 // The function takes the following parameters:
 // 
@@ -8315,7 +8315,7 @@ func NewLayoutInstance(context Context) Layout {
 // Note: to verify that the returned layout is identical to
 // the one that was serialized, you can compare @bytes to the
 // result of serializing the layout again.
-func LayoutInstanceDeserialize(context Context, bytes *glib.Bytes, flags LayoutDeserializeFlags) (Layout, error) {
+func LayoutDeserialize(context Context, bytes *glib.Bytes, flags LayoutDeserializeFlags) (Layout, error) {
 	var carg1 *C.PangoContext               // in, none, converted
 	var carg2 *C.GBytes                     // in, none, converted
 	var carg3 C.PangoLayoutDeserializeFlags // in, none, casted
