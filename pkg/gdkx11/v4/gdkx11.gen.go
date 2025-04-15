@@ -416,15 +416,6 @@ type X11Display interface {
 	// on @display. This surface is implicitly created by GDK.
 	// See gdk_x11_surface_set_group().
 	GetDefaultGroup() gdk.Surface
-	// GetEglDisplay wraps gdk_x11_display_get_egl_display
-	// The function returns the following values:
-	// 
-	// 	- goret unsafe.Pointer 
-	//
-	// Retrieves the EGL display connection object for the given GDK display.
-	// 
-	// This function returns `NULL` if GDK is using GLX.
-	GetEglDisplay() unsafe.Pointer
 	// GetEglVersion wraps gdk_x11_display_get_egl_version
 	// The function returns the following values:
 	// 
@@ -524,6 +515,24 @@ type X11Display interface {
 	// Ungrab @display after it has been grabbed with
 	// gdk_x11_display_grab().
 	Ungrab()
+	// ConnectXevent connects the provided callback to the "xevent" signal
+	//
+	// The ::xevent signal is a low level signal that is emitted
+	// whenever an XEvent has been received.
+	// 
+	// When handlers to this signal return %TRUE, no other handlers will be
+	// invoked. In particular, the default handler for this function is
+	// GDK's own event handling mechanism, so by returning %TRUE for an event
+	// that GDK expects to translate, you may break GDK and/or GTK+ in
+	// interesting ways. You have been warned.
+	// 
+	// If you want this signal handler to queue a `GdkEvent`, you can use
+	// gdk_display_put_event().
+	// 
+	// If you are interested in X GenericEvents, bear in mind that
+	// XGetEventData() has been already called on the event, and
+	// XFreeEventData() will be called afterwards.
+	ConnectXevent(func(X11Display, unsafe.Pointer) bool) gobject.SignalHandle
 }
 
 func unsafeWrapX11Display(base *gobject.ObjectInstance) *X11DisplayInstance {
@@ -698,30 +707,6 @@ func (display *X11DisplayInstance) GetDefaultGroup() gdk.Surface {
 	var goret gdk.Surface
 
 	goret = gdk.UnsafeSurfaceFromGlibNone(unsafe.Pointer(cret))
-
-	return goret
-}
-
-// GetEglDisplay wraps gdk_x11_display_get_egl_display
-// The function returns the following values:
-// 
-// 	- goret unsafe.Pointer 
-//
-// Retrieves the EGL display connection object for the given GDK display.
-// 
-// This function returns `NULL` if GDK is using GLX.
-func (display *X11DisplayInstance) GetEglDisplay() unsafe.Pointer {
-	var carg0 *C.GdkDisplay // in, none, converted, casted *C.GdkX11Display
-	var cret  C.gpointer    // return, none, casted
-
-	carg0 = (*C.GdkDisplay)(UnsafeX11DisplayToGlibNone(display))
-
-	cret = C.gdk_x11_display_get_egl_display(carg0)
-	runtime.KeepAlive(display)
-
-	var goret unsafe.Pointer
-
-	goret = unsafe.Pointer(cret)
 
 	return goret
 }
@@ -977,6 +962,26 @@ func (display *X11DisplayInstance) Ungrab() {
 	runtime.KeepAlive(display)
 }
 
+// ConnectXevent connects the provided callback to the "xevent" signal
+//
+// The ::xevent signal is a low level signal that is emitted
+// whenever an XEvent has been received.
+// 
+// When handlers to this signal return %TRUE, no other handlers will be
+// invoked. In particular, the default handler for this function is
+// GDK's own event handling mechanism, so by returning %TRUE for an event
+// that GDK expects to translate, you may break GDK and/or GTK+ in
+// interesting ways. You have been warned.
+// 
+// If you want this signal handler to queue a `GdkEvent`, you can use
+// gdk_display_put_event().
+// 
+// If you are interested in X GenericEvents, bear in mind that
+// XGetEventData() has been already called on the event, and
+// XFreeEventData() will be called afterwards.
+func (o *X11DisplayInstance) ConnectXevent(fn func(X11Display, unsafe.Pointer) bool) gobject.SignalHandle {
+	return o.Connect("xevent", fn)
+}
 // X11DragInstance is the instance type used by all types extending GdkX11Drag. It is used internally by the bindings. Users should use the interface [X11Drag] instead.
 type X11DragInstance struct {
 	_ [0]func() // equal guard
@@ -1239,6 +1244,8 @@ type X11Screen interface {
 	// You can monitor the window_manager_changed signal on `GdkX11Screen` to detect
 	// a window manager change.
 	SupportsNetWmHint(string) bool
+	// ConnectWindowManagerChanged connects the provided callback to the "window-manager-changed" signal
+	ConnectWindowManagerChanged(func(X11Screen)) gobject.SignalHandle
 }
 
 func unsafeWrapX11Screen(base *gobject.ObjectInstance) *X11ScreenInstance {
@@ -1413,6 +1420,10 @@ func (screen *X11ScreenInstance) SupportsNetWmHint(propertyName string) bool {
 	return goret
 }
 
+// ConnectWindowManagerChanged connects the provided callback to the "window-manager-changed" signal
+func (o *X11ScreenInstance) ConnectWindowManagerChanged(fn func(X11Screen)) gobject.SignalHandle {
+	return o.Connect("window-manager-changed", fn)
+}
 // X11SurfaceInstance is the instance type used by all types extending GdkX11Surface. It is used internally by the bindings. Users should use the interface [X11Surface] instead.
 type X11SurfaceInstance struct {
 	_ [0]func() // equal guard

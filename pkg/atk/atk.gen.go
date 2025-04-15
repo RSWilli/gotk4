@@ -2421,7 +2421,7 @@ type ActionInstance struct {
 
 var _ Action = (*ActionInstance)(nil)
 
-// ActionInstance wraps AtkAction
+// Action wraps AtkAction
 //
 // The ATK interface provided by UI components
 // which the user can activate/interact with.
@@ -2857,7 +2857,7 @@ type ComponentInstance struct {
 
 var _ Component = (*ComponentInstance)(nil)
 
-// ComponentInstance wraps AtkComponent
+// Component wraps AtkComponent
 //
 // The ATK interface provided by UI components
 // which occupy a physical area on the screen.
@@ -3041,6 +3041,11 @@ type Component interface {
 	//
 	// Set the size of the @component in terms of width and height.
 	SetSize(int, int) bool
+	// ConnectBoundsChanged connects the provided callback to the "bounds-changed" signal
+	//
+	// The 'bounds-changed" signal is emitted when the position or
+	// size of the component changes.
+	ConnectBoundsChanged(func(Component, Rectangle)) gobject.SignalHandle
 }
 
 var _ Component = (*ComponentInstance)(nil)
@@ -3512,6 +3517,13 @@ func (component *ComponentInstance) SetSize(width int, height int) bool {
 	return goret
 }
 
+// ConnectBoundsChanged connects the provided callback to the "bounds-changed" signal
+//
+// The 'bounds-changed" signal is emitted when the position or
+// size of the component changes.
+func (o *ComponentInstance) ConnectBoundsChanged(fn func(Component, Rectangle)) gobject.SignalHandle {
+	return o.Instance.Connect("bounds-changed", fn)
+}
 // DocumentInstance is the instance type used by all types implementing AtkDocument. It is used internally by the bindings. Users should use the interface [Document] instead.
 type DocumentInstance struct {
 	_ [0]func() // equal guard
@@ -3520,7 +3532,7 @@ type DocumentInstance struct {
 
 var _ Document = (*DocumentInstance)(nil)
 
-// DocumentInstance wraps AtkDocument
+// Document wraps AtkDocument
 //
 // The ATK interface which represents the toplevel
 //  container for document content.
@@ -3576,6 +3588,47 @@ type Document interface {
 	//
 	// Sets the value for the given @attribute_name inside @document.
 	SetAttributeValue(string, string) bool
+	// ConnectDocumentAttributeChanged connects the provided callback to the "document-attribute-changed" signal
+	//
+	// The "document-attribute-changed" signal should be emitted when there is a
+	// change to one of the document attributes returned by
+	// atk_document_get_attributes.
+	ConnectDocumentAttributeChanged(func(Document, string, string)) gobject.SignalHandle
+	// ConnectLoadComplete connects the provided callback to the "load-complete" signal
+	//
+	// The 'load-complete' signal is emitted when a pending load of
+	// a static document has completed.  This signal is to be
+	// expected by ATK clients if and when AtkDocument implementors
+	// expose ATK_STATE_BUSY.  If the state of an AtkObject which
+	// implements AtkDocument does not include ATK_STATE_BUSY, it
+	// should be safe for clients to assume that the AtkDocument's
+	// static contents are fully loaded into the container.
+	// (Dynamic document contents should be exposed via other
+	// signals.)
+	ConnectLoadComplete(func(Document)) gobject.SignalHandle
+	// ConnectLoadStopped connects the provided callback to the "load-stopped" signal
+	//
+	// The 'load-stopped' signal is emitted when a pending load of
+	// document contents is cancelled, paused, or otherwise
+	// interrupted by the user or application logic.  It should not
+	// however be emitted while waiting for a resource (for instance
+	// while blocking on a file or network read) unless a
+	// user-significant timeout has occurred.
+	ConnectLoadStopped(func(Document)) gobject.SignalHandle
+	// ConnectPageChanged connects the provided callback to the "page-changed" signal
+	//
+	// The 'page-changed' signal is emitted when the current page of
+	// a document changes, e.g. pressing page up/down in a document
+	// viewer.
+	ConnectPageChanged(func(Document, int)) gobject.SignalHandle
+	// ConnectReload connects the provided callback to the "reload" signal
+	//
+	// The 'reload' signal is emitted when the contents of a
+	// document is refreshed from its source.  Once 'reload' has
+	// been emitted, a matching 'load-complete' or 'load-stopped'
+	// signal should follow, which clients may await before
+	// interrogating ATK for the latest document content.
+	ConnectReload(func(Document)) gobject.SignalHandle
 }
 
 var _ Document = (*DocumentInstance)(nil)
@@ -3731,6 +3784,57 @@ func (document *DocumentInstance) SetAttributeValue(attributeName string, attrib
 	return goret
 }
 
+// ConnectDocumentAttributeChanged connects the provided callback to the "document-attribute-changed" signal
+//
+// The "document-attribute-changed" signal should be emitted when there is a
+// change to one of the document attributes returned by
+// atk_document_get_attributes.
+func (o *DocumentInstance) ConnectDocumentAttributeChanged(fn func(Document, string, string)) gobject.SignalHandle {
+	return o.Instance.Connect("document-attribute-changed", fn)
+}
+// ConnectLoadComplete connects the provided callback to the "load-complete" signal
+//
+// The 'load-complete' signal is emitted when a pending load of
+// a static document has completed.  This signal is to be
+// expected by ATK clients if and when AtkDocument implementors
+// expose ATK_STATE_BUSY.  If the state of an AtkObject which
+// implements AtkDocument does not include ATK_STATE_BUSY, it
+// should be safe for clients to assume that the AtkDocument's
+// static contents are fully loaded into the container.
+// (Dynamic document contents should be exposed via other
+// signals.)
+func (o *DocumentInstance) ConnectLoadComplete(fn func(Document)) gobject.SignalHandle {
+	return o.Instance.Connect("load-complete", fn)
+}
+// ConnectLoadStopped connects the provided callback to the "load-stopped" signal
+//
+// The 'load-stopped' signal is emitted when a pending load of
+// document contents is cancelled, paused, or otherwise
+// interrupted by the user or application logic.  It should not
+// however be emitted while waiting for a resource (for instance
+// while blocking on a file or network read) unless a
+// user-significant timeout has occurred.
+func (o *DocumentInstance) ConnectLoadStopped(fn func(Document)) gobject.SignalHandle {
+	return o.Instance.Connect("load-stopped", fn)
+}
+// ConnectPageChanged connects the provided callback to the "page-changed" signal
+//
+// The 'page-changed' signal is emitted when the current page of
+// a document changes, e.g. pressing page up/down in a document
+// viewer.
+func (o *DocumentInstance) ConnectPageChanged(fn func(Document, int)) gobject.SignalHandle {
+	return o.Instance.Connect("page-changed", fn)
+}
+// ConnectReload connects the provided callback to the "reload" signal
+//
+// The 'reload' signal is emitted when the contents of a
+// document is refreshed from its source.  Once 'reload' has
+// been emitted, a matching 'load-complete' or 'load-stopped'
+// signal should follow, which clients may await before
+// interrogating ATK for the latest document content.
+func (o *DocumentInstance) ConnectReload(fn func(Document)) gobject.SignalHandle {
+	return o.Instance.Connect("reload", fn)
+}
 // EditableTextInstance is the instance type used by all types implementing AtkEditableText. It is used internally by the bindings. Users should use the interface [EditableText] instead.
 type EditableTextInstance struct {
 	_ [0]func() // equal guard
@@ -3739,7 +3843,7 @@ type EditableTextInstance struct {
 
 var _ EditableText = (*EditableTextInstance)(nil)
 
-// EditableTextInstance wraps AtkEditableText
+// EditableText wraps AtkEditableText
 //
 // The ATK interface implemented by components containing user-editable text content.
 // 
@@ -4002,7 +4106,7 @@ type HyperlinkImplInstance struct {
 
 var _ HyperlinkImpl = (*HyperlinkImplInstance)(nil)
 
-// HyperlinkImplInstance wraps AtkHyperlinkImpl
+// HyperlinkImpl wraps AtkHyperlinkImpl
 //
 // A queryable interface which allows AtkHyperlink instances
 // associated with an AtkObject to be obtained.  AtkHyperlinkImpl
@@ -4089,7 +4193,7 @@ type HypertextInstance struct {
 
 var _ Hypertext = (*HypertextInstance)(nil)
 
-// HypertextInstance wraps AtkHypertext
+// Hypertext wraps AtkHypertext
 //
 // The ATK interface which provides standard mechanism for manipulating hyperlinks.
 // 
@@ -4137,6 +4241,12 @@ type Hypertext interface {
 	//
 	// Gets the number of links within this hypertext document.
 	GetNLinks() int
+	// ConnectLinkSelected connects the provided callback to the "link-selected" signal
+	//
+	// The "link-selected" signal is emitted by an AtkHyperText
+	// object when one of the hyperlinks associated with the object
+	// is selected.
+	ConnectLinkSelected(func(Hypertext, int)) gobject.SignalHandle
 }
 
 var _ Hypertext = (*HypertextInstance)(nil)
@@ -4261,6 +4371,14 @@ func (hypertext *HypertextInstance) GetNLinks() int {
 	return goret
 }
 
+// ConnectLinkSelected connects the provided callback to the "link-selected" signal
+//
+// The "link-selected" signal is emitted by an AtkHyperText
+// object when one of the hyperlinks associated with the object
+// is selected.
+func (o *HypertextInstance) ConnectLinkSelected(fn func(Hypertext, int)) gobject.SignalHandle {
+	return o.Instance.Connect("link-selected", fn)
+}
 // ImageInstance is the instance type used by all types implementing AtkImage. It is used internally by the bindings. Users should use the interface [Image] instead.
 type ImageInstance struct {
 	_ [0]func() // equal guard
@@ -4269,7 +4387,7 @@ type ImageInstance struct {
 
 var _ Image = (*ImageInstance)(nil)
 
-// ImageInstance wraps AtkImage
+// Image wraps AtkImage
 //
 // The ATK Interface implemented by components
 //  which expose image or pixmap content on-screen.
@@ -4542,7 +4660,7 @@ type ImplementorIfaceInstance struct {
 
 var _ ImplementorIface = (*ImplementorIfaceInstance)(nil)
 
-// ImplementorIfaceInstance wraps AtkImplementorIface
+// ImplementorIface wraps AtkImplementorIface
 //
 // The AtkImplementor interface is implemented by objects for which
 // AtkObject peers may be obtained via calls to
@@ -4597,7 +4715,7 @@ type SelectionInstance struct {
 
 var _ Selection = (*SelectionInstance)(nil)
 
-// SelectionInstance wraps AtkSelection
+// Selection wraps AtkSelection
 //
 // The ATK interface implemented by container objects whose #AtkObject children can be selected.
 // 
@@ -4701,6 +4819,11 @@ type Selection interface {
 	// Causes every child of the object to be selected if the object
 	// supports multiple selections.
 	SelectAllSelection() bool
+	// ConnectSelectionChanged connects the provided callback to the "selection-changed" signal
+	//
+	// The "selection-changed" signal is emitted by an object which
+	// implements AtkSelection interface when the selection changes.
+	ConnectSelectionChanged(func(Selection)) gobject.SignalHandle
 }
 
 var _ Selection = (*SelectionInstance)(nil)
@@ -4955,6 +5078,13 @@ func (selection *SelectionInstance) SelectAllSelection() bool {
 	return goret
 }
 
+// ConnectSelectionChanged connects the provided callback to the "selection-changed" signal
+//
+// The "selection-changed" signal is emitted by an object which
+// implements AtkSelection interface when the selection changes.
+func (o *SelectionInstance) ConnectSelectionChanged(fn func(Selection)) gobject.SignalHandle {
+	return o.Instance.Connect("selection-changed", fn)
+}
 // StreamableContentInstance is the instance type used by all types implementing AtkStreamableContent. It is used internally by the bindings. Users should use the interface [StreamableContent] instead.
 type StreamableContentInstance struct {
 	_ [0]func() // equal guard
@@ -4963,7 +5093,7 @@ type StreamableContentInstance struct {
 
 var _ StreamableContent = (*StreamableContentInstance)(nil)
 
-// StreamableContentInstance wraps AtkStreamableContent
+// StreamableContent wraps AtkStreamableContent
 //
 // The ATK interface which provides access to streamable content.
 // 
@@ -5209,7 +5339,7 @@ type TableInstance struct {
 
 var _ Table = (*TableInstance)(nil)
 
-// TableInstance wraps AtkTable
+// Table wraps AtkTable
 //
 // The ATK interface implemented for UI components which contain tabular or row/column information.
 // 
@@ -5531,6 +5661,44 @@ type Table interface {
 	//
 	// Sets the summary description of the table.
 	SetSummary(Object)
+	// ConnectColumnDeleted connects the provided callback to the "column-deleted" signal
+	//
+	// The "column-deleted" signal is emitted by an object which
+	// implements the AtkTable interface when a column is deleted.
+	ConnectColumnDeleted(func(Table, int, int)) gobject.SignalHandle
+	// ConnectColumnInserted connects the provided callback to the "column-inserted" signal
+	//
+	// The "column-inserted" signal is emitted by an object which
+	// implements the AtkTable interface when a column is inserted.
+	ConnectColumnInserted(func(Table, int, int)) gobject.SignalHandle
+	// ConnectColumnReordered connects the provided callback to the "column-reordered" signal
+	//
+	// The "column-reordered" signal is emitted by an object which
+	// implements the AtkTable interface when the columns are
+	// reordered.
+	ConnectColumnReordered(func(Table)) gobject.SignalHandle
+	// ConnectModelChanged connects the provided callback to the "model-changed" signal
+	//
+	// The "model-changed" signal is emitted by an object which
+	// implements the AtkTable interface when the model displayed by
+	// the table changes.
+	ConnectModelChanged(func(Table)) gobject.SignalHandle
+	// ConnectRowDeleted connects the provided callback to the "row-deleted" signal
+	//
+	// The "row-deleted" signal is emitted by an object which
+	// implements the AtkTable interface when a row is deleted.
+	ConnectRowDeleted(func(Table, int, int)) gobject.SignalHandle
+	// ConnectRowInserted connects the provided callback to the "row-inserted" signal
+	//
+	// The "row-inserted" signal is emitted by an object which
+	// implements the AtkTable interface when a row is inserted.
+	ConnectRowInserted(func(Table, int, int)) gobject.SignalHandle
+	// ConnectRowReordered connects the provided callback to the "row-reordered" signal
+	//
+	// The "row-reordered" signal is emitted by an object which
+	// implements the AtkTable interface when the rows are
+	// reordered.
+	ConnectRowReordered(func(Table)) gobject.SignalHandle
 }
 
 var _ Table = (*TableInstance)(nil)
@@ -6316,6 +6484,58 @@ func (table *TableInstance) SetSummary(accessible Object) {
 	runtime.KeepAlive(accessible)
 }
 
+// ConnectColumnDeleted connects the provided callback to the "column-deleted" signal
+//
+// The "column-deleted" signal is emitted by an object which
+// implements the AtkTable interface when a column is deleted.
+func (o *TableInstance) ConnectColumnDeleted(fn func(Table, int, int)) gobject.SignalHandle {
+	return o.Instance.Connect("column-deleted", fn)
+}
+// ConnectColumnInserted connects the provided callback to the "column-inserted" signal
+//
+// The "column-inserted" signal is emitted by an object which
+// implements the AtkTable interface when a column is inserted.
+func (o *TableInstance) ConnectColumnInserted(fn func(Table, int, int)) gobject.SignalHandle {
+	return o.Instance.Connect("column-inserted", fn)
+}
+// ConnectColumnReordered connects the provided callback to the "column-reordered" signal
+//
+// The "column-reordered" signal is emitted by an object which
+// implements the AtkTable interface when the columns are
+// reordered.
+func (o *TableInstance) ConnectColumnReordered(fn func(Table)) gobject.SignalHandle {
+	return o.Instance.Connect("column-reordered", fn)
+}
+// ConnectModelChanged connects the provided callback to the "model-changed" signal
+//
+// The "model-changed" signal is emitted by an object which
+// implements the AtkTable interface when the model displayed by
+// the table changes.
+func (o *TableInstance) ConnectModelChanged(fn func(Table)) gobject.SignalHandle {
+	return o.Instance.Connect("model-changed", fn)
+}
+// ConnectRowDeleted connects the provided callback to the "row-deleted" signal
+//
+// The "row-deleted" signal is emitted by an object which
+// implements the AtkTable interface when a row is deleted.
+func (o *TableInstance) ConnectRowDeleted(fn func(Table, int, int)) gobject.SignalHandle {
+	return o.Instance.Connect("row-deleted", fn)
+}
+// ConnectRowInserted connects the provided callback to the "row-inserted" signal
+//
+// The "row-inserted" signal is emitted by an object which
+// implements the AtkTable interface when a row is inserted.
+func (o *TableInstance) ConnectRowInserted(fn func(Table, int, int)) gobject.SignalHandle {
+	return o.Instance.Connect("row-inserted", fn)
+}
+// ConnectRowReordered connects the provided callback to the "row-reordered" signal
+//
+// The "row-reordered" signal is emitted by an object which
+// implements the AtkTable interface when the rows are
+// reordered.
+func (o *TableInstance) ConnectRowReordered(fn func(Table)) gobject.SignalHandle {
+	return o.Instance.Connect("row-reordered", fn)
+}
 // TableCellInstance is the instance type used by all types implementing AtkTableCell. It is used internally by the bindings. Users should use the interface [TableCell] instead.
 type TableCellInstance struct {
 	_ [0]func() // equal guard
@@ -6324,7 +6544,7 @@ type TableCellInstance struct {
 
 var _ TableCell = (*TableCellInstance)(nil)
 
-// TableCellInstance wraps AtkTableCell
+// TableCell wraps AtkTableCell
 //
 // The ATK interface implemented for a cell inside a two-dimentional #AtkTable
 // 
@@ -6571,7 +6791,7 @@ type TextInstance struct {
 
 var _ Text = (*TextInstance)(nil)
 
-// TextInstance wraps AtkText
+// Text wraps AtkText
 //
 // The ATK interface implemented by components with text content.
 // 
@@ -6887,6 +7107,45 @@ type Text interface {
 	//
 	// Changes the start and end offset of the specified selection.
 	SetSelection(int, int, int) bool
+	// ConnectTextAttributesChanged connects the provided callback to the "text-attributes-changed" signal
+	//
+	// The "text-attributes-changed" signal is emitted when the text
+	// attributes of the text of an object which implements AtkText
+	// changes.
+	ConnectTextAttributesChanged(func(Text)) gobject.SignalHandle
+	// ConnectTextCaretMoved connects the provided callback to the "text-caret-moved" signal
+	//
+	// The "text-caret-moved" signal is emitted when the caret
+	// position of the text of an object which implements AtkText
+	// changes.
+	ConnectTextCaretMoved(func(Text, int)) gobject.SignalHandle
+	// ConnectTextChanged connects the provided callback to the "text-changed" signal
+	//
+	// The "text-changed" signal is emitted when the text of the
+	// object which implements the AtkText interface changes, This
+	// signal will have a detail which is either "insert" or
+	// "delete" which identifies whether the text change was an
+	// insertion or a deletion.
+	ConnectTextChanged(func(Text, int, int)) gobject.SignalHandle
+	// ConnectTextInsert connects the provided callback to the "text-insert" signal
+	//
+	// The "text-insert" signal is emitted when a new text is
+	// inserted. If the signal was not triggered by the user
+	// (e.g. typing or pasting text), the "system" detail should be
+	// included.
+	ConnectTextInsert(func(Text, int, int, string)) gobject.SignalHandle
+	// ConnectTextRemove connects the provided callback to the "text-remove" signal
+	//
+	// The "text-remove" signal is emitted when a new text is
+	// removed. If the signal was not triggered by the user
+	// (e.g. typing or pasting text), the "system" detail should be
+	// included.
+	ConnectTextRemove(func(Text, int, int, string)) gobject.SignalHandle
+	// ConnectTextSelectionChanged connects the provided callback to the "text-selection-changed" signal
+	//
+	// The "text-selection-changed" signal is emitted when the
+	// selected text of an object which implements AtkText changes.
+	ConnectTextSelectionChanged(func(Text)) gobject.SignalHandle
 }
 
 var _ Text = (*TextInstance)(nil)
@@ -7611,6 +7870,57 @@ func (text *TextInstance) SetSelection(selectionNum int, startOffset int, endOff
 	return goret
 }
 
+// ConnectTextAttributesChanged connects the provided callback to the "text-attributes-changed" signal
+//
+// The "text-attributes-changed" signal is emitted when the text
+// attributes of the text of an object which implements AtkText
+// changes.
+func (o *TextInstance) ConnectTextAttributesChanged(fn func(Text)) gobject.SignalHandle {
+	return o.Instance.Connect("text-attributes-changed", fn)
+}
+// ConnectTextCaretMoved connects the provided callback to the "text-caret-moved" signal
+//
+// The "text-caret-moved" signal is emitted when the caret
+// position of the text of an object which implements AtkText
+// changes.
+func (o *TextInstance) ConnectTextCaretMoved(fn func(Text, int)) gobject.SignalHandle {
+	return o.Instance.Connect("text-caret-moved", fn)
+}
+// ConnectTextChanged connects the provided callback to the "text-changed" signal
+//
+// The "text-changed" signal is emitted when the text of the
+// object which implements the AtkText interface changes, This
+// signal will have a detail which is either "insert" or
+// "delete" which identifies whether the text change was an
+// insertion or a deletion.
+func (o *TextInstance) ConnectTextChanged(fn func(Text, int, int)) gobject.SignalHandle {
+	return o.Instance.Connect("text-changed", fn)
+}
+// ConnectTextInsert connects the provided callback to the "text-insert" signal
+//
+// The "text-insert" signal is emitted when a new text is
+// inserted. If the signal was not triggered by the user
+// (e.g. typing or pasting text), the "system" detail should be
+// included.
+func (o *TextInstance) ConnectTextInsert(fn func(Text, int, int, string)) gobject.SignalHandle {
+	return o.Instance.Connect("text-insert", fn)
+}
+// ConnectTextRemove connects the provided callback to the "text-remove" signal
+//
+// The "text-remove" signal is emitted when a new text is
+// removed. If the signal was not triggered by the user
+// (e.g. typing or pasting text), the "system" detail should be
+// included.
+func (o *TextInstance) ConnectTextRemove(fn func(Text, int, int, string)) gobject.SignalHandle {
+	return o.Instance.Connect("text-remove", fn)
+}
+// ConnectTextSelectionChanged connects the provided callback to the "text-selection-changed" signal
+//
+// The "text-selection-changed" signal is emitted when the
+// selected text of an object which implements AtkText changes.
+func (o *TextInstance) ConnectTextSelectionChanged(fn func(Text)) gobject.SignalHandle {
+	return o.Instance.Connect("text-selection-changed", fn)
+}
 // ValueInstance is the instance type used by all types implementing AtkValue. It is used internally by the bindings. Users should use the interface [Value] instead.
 type ValueInstance struct {
 	_ [0]func() // equal guard
@@ -7619,7 +7929,7 @@ type ValueInstance struct {
 
 var _ Value = (*ValueInstance)(nil)
 
-// ValueInstance wraps AtkValue
+// Value wraps AtkValue
 //
 // The ATK interface implemented by valuators and components which display or select a value from a bounded range of values.
 // 
@@ -7815,6 +8125,21 @@ type Value interface {
 	// required anymore to return if the value was properly assigned or
 	// not.
 	SetValue(float64)
+	// ConnectValueChanged connects the provided callback to the "value-changed" signal
+	//
+	// The 'value-changed' signal is emitted when the current value
+	// that represent the object changes. @value is the numerical
+	// representation of this new value.  @text is the human
+	// readable text alternative of @value, and can be NULL if it is
+	// not available. Note that if there is a textual description
+	// associated with the new numeric value, that description
+	// should be included regardless of whether or not it has also
+	// changed.
+	// 
+	// Example: a password meter whose value changes as the user
+	// types their new password. Appropiate value text would be
+	// "weak", "acceptable" and "strong".
+	ConnectValueChanged(func(Value, float64, string)) gobject.SignalHandle
 }
 
 var _ Value = (*ValueInstance)(nil)
@@ -7964,6 +8289,23 @@ func (obj *ValueInstance) SetValue(newValue float64) {
 	runtime.KeepAlive(newValue)
 }
 
+// ConnectValueChanged connects the provided callback to the "value-changed" signal
+//
+// The 'value-changed' signal is emitted when the current value
+// that represent the object changes. @value is the numerical
+// representation of this new value.  @text is the human
+// readable text alternative of @value, and can be NULL if it is
+// not available. Note that if there is a textual description
+// associated with the new numeric value, that description
+// should be included regardless of whether or not it has also
+// changed.
+// 
+// Example: a password meter whose value changes as the user
+// types their new password. Appropiate value text would be
+// "weak", "acceptable" and "strong".
+func (o *ValueInstance) ConnectValueChanged(fn func(Value, float64, string)) gobject.SignalHandle {
+	return o.Instance.Connect("value-changed", fn)
+}
 // WindowInstance is the instance type used by all types implementing AtkWindow. It is used internally by the bindings. Users should use the interface [Window] instead.
 type WindowInstance struct {
 	_ [0]func() // equal guard
@@ -7972,7 +8314,7 @@ type WindowInstance struct {
 
 var _ Window = (*WindowInstance)(nil)
 
-// WindowInstance wraps AtkWindow
+// Window wraps AtkWindow
 //
 // The ATK Interface provided by UI components that represent a top-level window.
 // 
@@ -7983,6 +8325,52 @@ var _ Window = (*WindowInstance)(nil)
 // See [class@AtkObject]
 type Window interface {
 	upcastToAtkWindow() *WindowInstance
+
+	// ConnectActivate connects the provided callback to the "activate" signal
+	//
+	// The signal #AtkWindow::activate is emitted when a window
+	// becomes the active window of the application or session.
+	ConnectActivate(func(Window)) gobject.SignalHandle
+	// ConnectCreate connects the provided callback to the "create" signal
+	//
+	// The signal #AtkWindow::create is emitted when a new window
+	// is created.
+	ConnectCreate(func(Window)) gobject.SignalHandle
+	// ConnectDeactivate connects the provided callback to the "deactivate" signal
+	//
+	// The signal #AtkWindow::deactivate is emitted when a window is
+	// no longer the active window of the application or session.
+	ConnectDeactivate(func(Window)) gobject.SignalHandle
+	// ConnectDestroy connects the provided callback to the "destroy" signal
+	//
+	// The signal #AtkWindow::destroy is emitted when a window is
+	// destroyed.
+	ConnectDestroy(func(Window)) gobject.SignalHandle
+	// ConnectMaximize connects the provided callback to the "maximize" signal
+	//
+	// The signal #AtkWindow::maximize is emitted when a window
+	// is maximized.
+	ConnectMaximize(func(Window)) gobject.SignalHandle
+	// ConnectMinimize connects the provided callback to the "minimize" signal
+	//
+	// The signal #AtkWindow::minimize is emitted when a window
+	// is minimized.
+	ConnectMinimize(func(Window)) gobject.SignalHandle
+	// ConnectMove connects the provided callback to the "move" signal
+	//
+	// The signal #AtkWindow::move is emitted when a window
+	// is moved.
+	ConnectMove(func(Window)) gobject.SignalHandle
+	// ConnectResize connects the provided callback to the "resize" signal
+	//
+	// The signal #AtkWindow::resize is emitted when a window
+	// is resized.
+	ConnectResize(func(Window)) gobject.SignalHandle
+	// ConnectRestore connects the provided callback to the "restore" signal
+	//
+	// The signal #AtkWindow::restore is emitted when a window
+	// is restored.
+	ConnectRestore(func(Window)) gobject.SignalHandle
 }
 
 var _ Window = (*WindowInstance)(nil)
@@ -8023,6 +8411,69 @@ func UnsafeWindowToGlibFull(c Window) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(&i.Instance)
 }
 
+// ConnectActivate connects the provided callback to the "activate" signal
+//
+// The signal #AtkWindow::activate is emitted when a window
+// becomes the active window of the application or session.
+func (o *WindowInstance) ConnectActivate(fn func(Window)) gobject.SignalHandle {
+	return o.Instance.Connect("activate", fn)
+}
+// ConnectCreate connects the provided callback to the "create" signal
+//
+// The signal #AtkWindow::create is emitted when a new window
+// is created.
+func (o *WindowInstance) ConnectCreate(fn func(Window)) gobject.SignalHandle {
+	return o.Instance.Connect("create", fn)
+}
+// ConnectDeactivate connects the provided callback to the "deactivate" signal
+//
+// The signal #AtkWindow::deactivate is emitted when a window is
+// no longer the active window of the application or session.
+func (o *WindowInstance) ConnectDeactivate(fn func(Window)) gobject.SignalHandle {
+	return o.Instance.Connect("deactivate", fn)
+}
+// ConnectDestroy connects the provided callback to the "destroy" signal
+//
+// The signal #AtkWindow::destroy is emitted when a window is
+// destroyed.
+func (o *WindowInstance) ConnectDestroy(fn func(Window)) gobject.SignalHandle {
+	return o.Instance.Connect("destroy", fn)
+}
+// ConnectMaximize connects the provided callback to the "maximize" signal
+//
+// The signal #AtkWindow::maximize is emitted when a window
+// is maximized.
+func (o *WindowInstance) ConnectMaximize(fn func(Window)) gobject.SignalHandle {
+	return o.Instance.Connect("maximize", fn)
+}
+// ConnectMinimize connects the provided callback to the "minimize" signal
+//
+// The signal #AtkWindow::minimize is emitted when a window
+// is minimized.
+func (o *WindowInstance) ConnectMinimize(fn func(Window)) gobject.SignalHandle {
+	return o.Instance.Connect("minimize", fn)
+}
+// ConnectMove connects the provided callback to the "move" signal
+//
+// The signal #AtkWindow::move is emitted when a window
+// is moved.
+func (o *WindowInstance) ConnectMove(fn func(Window)) gobject.SignalHandle {
+	return o.Instance.Connect("move", fn)
+}
+// ConnectResize connects the provided callback to the "resize" signal
+//
+// The signal #AtkWindow::resize is emitted when a window
+// is resized.
+func (o *WindowInstance) ConnectResize(fn func(Window)) gobject.SignalHandle {
+	return o.Instance.Connect("resize", fn)
+}
+// ConnectRestore connects the provided callback to the "restore" signal
+//
+// The signal #AtkWindow::restore is emitted when a window
+// is restored.
+func (o *WindowInstance) ConnectRestore(fn func(Window)) gobject.SignalHandle {
+	return o.Instance.Connect("restore", fn)
+}
 // HyperlinkInstance is the instance type used by all types extending AtkHyperlink. It is used internally by the bindings. Users should use the interface [Hyperlink] instead.
 type HyperlinkInstance struct {
 	_ [0]func() // equal guard
@@ -8117,6 +8568,10 @@ type Hyperlink interface {
 	// this method returns %TRUE if the link is still valid (with
 	// respect to the document it references) and %FALSE otherwise.
 	IsValid() bool
+	// ConnectLinkActivated connects the provided callback to the "link-activated" signal
+	//
+	// The signal link-activated is emitted when a link is activated.
+	ConnectLinkActivated(func(Hyperlink)) gobject.SignalHandle
 }
 
 func unsafeWrapHyperlink(base *gobject.ObjectInstance) *HyperlinkInstance {
@@ -8341,6 +8796,12 @@ func (link_ *HyperlinkInstance) IsValid() bool {
 	return goret
 }
 
+// ConnectLinkActivated connects the provided callback to the "link-activated" signal
+//
+// The signal link-activated is emitted when a link is activated.
+func (o *HyperlinkInstance) ConnectLinkActivated(fn func(Hyperlink)) gobject.SignalHandle {
+	return o.Connect("link-activated", fn)
+}
 // MiscInstance is the instance type used by all types extending AtkMisc. It is used internally by the bindings. Users should use the interface [Misc] instead.
 type MiscInstance struct {
 	_ [0]func() // equal guard
@@ -8515,17 +8976,6 @@ type Object interface {
 	//
 	// Gets the role of the accessible.
 	GetRole() Role
-	// Initialize wraps atk_object_initialize
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- data unsafe.Pointer (nullable): a #gpointer which identifies the object for which the AtkObject was created. 
-	//
-	// This function is called when implementing subclasses of #AtkObject.
-	// It does initialization required for the new object. It is intended
-	// that this function should called only in the ..._new() functions used
-	// to create an instance of a subclass of #AtkObject
-	Initialize(unsafe.Pointer)
 	// NotifyStateChange wraps atk_object_notify_state_change
 	// 
 	// The function takes the following parameters:
@@ -8655,6 +9105,68 @@ type Object interface {
 	//
 	// Sets the role of the accessible.
 	SetRole(Role)
+	// ConnectActiveDescendantChanged connects the provided callback to the "active-descendant-changed" signal
+	//
+	// The "active-descendant-changed" signal is emitted by an object
+	// which has the state ATK_STATE_MANAGES_DESCENDANTS when the focus
+	// object in the object changes. For instance, a table will emit the
+	// signal when the cell in the table which has focus changes.
+	ConnectActiveDescendantChanged(func(Object, unsafe.Pointer)) gobject.SignalHandle
+	// ConnectAnnouncement connects the provided callback to the "announcement" signal
+	//
+	// The "announcement" signal can be emitted to pass an announcement on to
+	// be read by a screen reader.
+	// 
+	// Depcrecated (2.50): Use AtkObject::notification instead.
+	ConnectAnnouncement(func(Object, string)) gobject.SignalHandle
+	// ConnectAttributeChanged connects the provided callback to the "attribute-changed" signal
+	//
+	// The "attribute-changed" signal should be emitted when one of an object's
+	// attributes changes.
+	ConnectAttributeChanged(func(Object, string, string)) gobject.SignalHandle
+	// ConnectChildrenChanged connects the provided callback to the "children-changed" signal
+	//
+	// The signal "children-changed" is emitted when a child is added or
+	// removed from an object. It supports two details: "add" and
+	// "remove"
+	ConnectChildrenChanged(func(Object, uint, unsafe.Pointer)) gobject.SignalHandle
+	// ConnectFocusEvent connects the provided callback to the "focus-event" signal
+	//
+	// The signal "focus-event" is emitted when an object gained or lost
+	// focus.
+	ConnectFocusEvent(func(Object, bool)) gobject.SignalHandle
+	// ConnectNotification connects the provided callback to the "notification" signal
+	//
+	// The "notification" signal can be emitted to pass an announcement on to
+	// be read by a screen reader.
+	ConnectNotification(func(Object, string, int)) gobject.SignalHandle
+	// ConnectPropertyChange connects the provided callback to the "property-change" signal
+	//
+	// The signal "property-change" is emitted when an object's property
+	// value changes. @arg1 contains an #AtkPropertyValues with the name
+	// and the new value of the property whose value has changed. Note
+	// that, as with GObject notify, getting this signal does not
+	// guarantee that the value of the property has actually changed; it
+	// may also be emitted when the setter of the property is called to
+	// reinstate the previous value.
+	// 
+	// Toolkit implementor note: ATK implementors should use
+	// g_object_notify() to emit property-changed
+	// notifications. #AtkObject::property-changed is needed by the
+	// implementation of atk_add_global_event_listener() because GObject
+	// notify doesn't support emission hooks.
+	ConnectPropertyChange(func(Object, unsafe.Pointer)) gobject.SignalHandle
+	// ConnectStateChange connects the provided callback to the "state-change" signal
+	//
+	// The "state-change" signal is emitted when an object's state
+	// changes.  The detail value identifies the state type which has
+	// changed.
+	ConnectStateChange(func(Object, string, bool)) gobject.SignalHandle
+	// ConnectVisibleDataChanged connects the provided callback to the "visible-data-changed" signal
+	//
+	// The "visible-data-changed" signal is emitted when the visual
+	// appearance of the object changed.
+	ConnectVisibleDataChanged(func(Object)) gobject.SignalHandle
 }
 
 func unsafeWrapObject(base *gobject.ObjectInstance) *ObjectInstance {
@@ -8932,30 +9444,6 @@ func (accessible *ObjectInstance) GetRole() Role {
 	goret = Role(cret)
 
 	return goret
-}
-
-// Initialize wraps atk_object_initialize
-// 
-// The function takes the following parameters:
-// 
-// 	- data unsafe.Pointer (nullable): a #gpointer which identifies the object for which the AtkObject was created. 
-//
-// This function is called when implementing subclasses of #AtkObject.
-// It does initialization required for the new object. It is intended
-// that this function should called only in the ..._new() functions used
-// to create an instance of a subclass of #AtkObject
-func (accessible *ObjectInstance) Initialize(data unsafe.Pointer) {
-	var carg0 *C.AtkObject // in, none, converted
-	var carg1 C.gpointer   // in, none, casted, nullable
-
-	carg0 = (*C.AtkObject)(UnsafeObjectToGlibNone(accessible))
-	if data != nil {
-		carg1 = C.gpointer(data)
-	}
-
-	C.atk_object_initialize(carg0, carg1)
-	runtime.KeepAlive(accessible)
-	runtime.KeepAlive(data)
 }
 
 // NotifyStateChange wraps atk_object_notify_state_change
@@ -9259,6 +9747,86 @@ func (accessible *ObjectInstance) SetRole(role Role) {
 	runtime.KeepAlive(role)
 }
 
+// ConnectActiveDescendantChanged connects the provided callback to the "active-descendant-changed" signal
+//
+// The "active-descendant-changed" signal is emitted by an object
+// which has the state ATK_STATE_MANAGES_DESCENDANTS when the focus
+// object in the object changes. For instance, a table will emit the
+// signal when the cell in the table which has focus changes.
+func (o *ObjectInstance) ConnectActiveDescendantChanged(fn func(Object, unsafe.Pointer)) gobject.SignalHandle {
+	return o.Connect("active-descendant-changed", fn)
+}
+// ConnectAnnouncement connects the provided callback to the "announcement" signal
+//
+// The "announcement" signal can be emitted to pass an announcement on to
+// be read by a screen reader.
+// 
+// Depcrecated (2.50): Use AtkObject::notification instead.
+func (o *ObjectInstance) ConnectAnnouncement(fn func(Object, string)) gobject.SignalHandle {
+	return o.Connect("announcement", fn)
+}
+// ConnectAttributeChanged connects the provided callback to the "attribute-changed" signal
+//
+// The "attribute-changed" signal should be emitted when one of an object's
+// attributes changes.
+func (o *ObjectInstance) ConnectAttributeChanged(fn func(Object, string, string)) gobject.SignalHandle {
+	return o.Connect("attribute-changed", fn)
+}
+// ConnectChildrenChanged connects the provided callback to the "children-changed" signal
+//
+// The signal "children-changed" is emitted when a child is added or
+// removed from an object. It supports two details: "add" and
+// "remove"
+func (o *ObjectInstance) ConnectChildrenChanged(fn func(Object, uint, unsafe.Pointer)) gobject.SignalHandle {
+	return o.Connect("children-changed", fn)
+}
+// ConnectFocusEvent connects the provided callback to the "focus-event" signal
+//
+// The signal "focus-event" is emitted when an object gained or lost
+// focus.
+func (o *ObjectInstance) ConnectFocusEvent(fn func(Object, bool)) gobject.SignalHandle {
+	return o.Connect("focus-event", fn)
+}
+// ConnectNotification connects the provided callback to the "notification" signal
+//
+// The "notification" signal can be emitted to pass an announcement on to
+// be read by a screen reader.
+func (o *ObjectInstance) ConnectNotification(fn func(Object, string, int)) gobject.SignalHandle {
+	return o.Connect("notification", fn)
+}
+// ConnectPropertyChange connects the provided callback to the "property-change" signal
+//
+// The signal "property-change" is emitted when an object's property
+// value changes. @arg1 contains an #AtkPropertyValues with the name
+// and the new value of the property whose value has changed. Note
+// that, as with GObject notify, getting this signal does not
+// guarantee that the value of the property has actually changed; it
+// may also be emitted when the setter of the property is called to
+// reinstate the previous value.
+// 
+// Toolkit implementor note: ATK implementors should use
+// g_object_notify() to emit property-changed
+// notifications. #AtkObject::property-changed is needed by the
+// implementation of atk_add_global_event_listener() because GObject
+// notify doesn't support emission hooks.
+func (o *ObjectInstance) ConnectPropertyChange(fn func(Object, unsafe.Pointer)) gobject.SignalHandle {
+	return o.Connect("property-change", fn)
+}
+// ConnectStateChange connects the provided callback to the "state-change" signal
+//
+// The "state-change" signal is emitted when an object's state
+// changes.  The detail value identifies the state type which has
+// changed.
+func (o *ObjectInstance) ConnectStateChange(fn func(Object, string, bool)) gobject.SignalHandle {
+	return o.Connect("state-change", fn)
+}
+// ConnectVisibleDataChanged connects the provided callback to the "visible-data-changed" signal
+//
+// The "visible-data-changed" signal is emitted when the visual
+// appearance of the object changed.
+func (o *ObjectInstance) ConnectVisibleDataChanged(fn func(Object)) gobject.SignalHandle {
+	return o.Connect("visible-data-changed", fn)
+}
 // ObjectFactoryInstance is the instance type used by all types extending AtkObjectFactory. It is used internally by the bindings. Users should use the interface [ObjectFactory] instead.
 type ObjectFactoryInstance struct {
 	_ [0]func() // equal guard

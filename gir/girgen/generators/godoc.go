@@ -75,6 +75,21 @@ type DocumentedIdentifier interface {
 	typesystem.Documented
 }
 
+func NewSignalGoDocGenerator(sig *typesystem.Signal) *GoDocGenerator {
+	var docstring string
+
+	if sig.Action {
+		docstring = fmt.Sprintf("%s emits the \"%s\" signal", sig.GoName, sig.Name)
+	} else {
+		docstring = fmt.Sprintf("%s connects the provided callback to the \"%s\" signal", sig.GoName, sig.Name)
+	}
+
+	return &GoDocGenerator{
+		DocString: docstring,
+		GIRDoc:    sig.Doc,
+	}
+}
+
 func NewIdentifierGoDocGenerator(identifier DocumentedIdentifier) *GoDocGenerator {
 	return &GoDocGenerator{
 		DocString: fmt.Sprintf("%s wraps %s", identifier.GoIndentifier(), identifier.CIndentifier()),
@@ -83,11 +98,12 @@ func NewIdentifierGoDocGenerator(identifier DocumentedIdentifier) *GoDocGenerato
 }
 
 func NewTypeGoDocGenerator(typ DocumentedType) *GoDocGenerator {
-	// info := GetInfoFields(girWithDoc)
-
 	gotype := typ.GoType(0)
 
-	if t, ok := typ.(*typesystem.Class); ok {
+	switch t := typ.(type) {
+	case *typesystem.Class:
+		gotype = t.GoInterfaceName
+	case *typesystem.Interface:
 		gotype = t.GoInterfaceName
 	}
 

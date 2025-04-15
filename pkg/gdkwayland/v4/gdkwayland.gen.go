@@ -179,13 +179,6 @@ type WaylandDisplay interface {
 	gdk.Display
 	upcastToGdkWaylandDisplay() *WaylandDisplayInstance
 
-	// GetEglDisplay wraps gdk_wayland_display_get_egl_display
-	// The function returns the following values:
-	// 
-	// 	- goret unsafe.Pointer 
-	//
-	// Retrieves the EGL display connection object for the given GDK display.
-	GetEglDisplay() unsafe.Pointer
 	// QueryRegistry wraps gdk_wayland_display_query_registry
 	// 
 	// The function takes the following parameters:
@@ -235,28 +228,6 @@ func UnsafeWaylandDisplayToGlibNone(c WaylandDisplay) unsafe.Pointer {
 // UnsafeWaylandDisplayToGlibFull is used to convert the instance to it's C value GdkWaylandDisplay, while removeing the finalizer. This is used by the bindings internally.
 func UnsafeWaylandDisplayToGlibFull(c WaylandDisplay) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
-}
-
-// GetEglDisplay wraps gdk_wayland_display_get_egl_display
-// The function returns the following values:
-// 
-// 	- goret unsafe.Pointer 
-//
-// Retrieves the EGL display connection object for the given GDK display.
-func (display *WaylandDisplayInstance) GetEglDisplay() unsafe.Pointer {
-	var carg0 *C.GdkDisplay // in, none, converted, casted *C.GdkWaylandDisplay
-	var cret  C.gpointer    // return, none, casted
-
-	carg0 = (*C.GdkDisplay)(UnsafeWaylandDisplayToGlibNone(display))
-
-	cret = C.gdk_wayland_display_get_egl_display(carg0)
-	runtime.KeepAlive(display)
-
-	var goret unsafe.Pointer
-
-	goret = unsafe.Pointer(cret)
-
-	return goret
 }
 
 // QueryRegistry wraps gdk_wayland_display_query_registry

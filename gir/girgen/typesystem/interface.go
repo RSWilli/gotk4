@@ -62,7 +62,10 @@ func (a *Interface) maxPointersAllowed() int {
 }
 
 func DeclareInterface(e *env, v gir.Interface) *Interface {
+	e = e.sub("interface", v.CType)
+
 	if !v.IsIntrospectable() {
+		e.logger.Warn("skipping because not introspectable")
 		return nil
 	}
 

@@ -12,7 +12,10 @@ type Constant struct {
 }
 
 func DeclareConstant(e *env, v gir.Constant) *Constant {
+	e = e.sub("constant", v.CType)
+
 	if !v.IsIntrospectable() {
+		e.logger.Warn("skipping because not introspectable")
 		return nil
 	}
 
@@ -35,6 +38,7 @@ func DeclareConstant(e *env, v gir.Constant) *Constant {
 	}
 
 	if _, ok := underlying.(*CastablePrimitive); !ok {
+		e.logger.Warn("skipping because not a castable primitive")
 		return nil
 	}
 

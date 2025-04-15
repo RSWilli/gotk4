@@ -7,7 +7,6 @@ import (
 
 	"github.com/diamondburned/gotk4/pkg/core/userdata"
 	"github.com/diamondburned/gotk4/pkg/gdk/v4"
-	"github.com/diamondburned/gotk4/pkg/gio/v2"
 	"github.com/diamondburned/gotk4/pkg/pango"
 )
 
@@ -37,31 +36,6 @@ func _gotk4_gtk4_AssistantPageFunc(carg1 C.int, carg2 C.gpointer) (cret C.int) {
 	return cret
 }
 
-//export _gotk4_gtk4_CustomFilterFunc
-func _gotk4_gtk4_CustomFilterFunc(carg1 C.gpointer, carg2 C.gpointer) (cret C.gboolean) {
-	var fn CustomFilterFunc
-	{
-		v := userdata.Load(unsafe.Pointer(carg2))
-		if v == nil {
-			panic(`callback not found`)
-		}
-		fn = v.(CustomFilterFunc)
-	}
-
-	var item  unsafe.Pointer // in, none, casted
-	var goret bool           // return
-
-	item = unsafe.Pointer(carg1)
-
-	goret = fn(item)
-
-	if goret {
-		cret = C.TRUE
-	}
-
-	return cret
-}
-
 //export _gotk4_gtk4_ExpressionNotify
 func _gotk4_gtk4_ExpressionNotify(carg1 C.gpointer) {
 	var fn ExpressionNotify
@@ -74,29 +48,6 @@ func _gotk4_gtk4_ExpressionNotify(carg1 C.gpointer) {
 	}
 
 	fn()
-}
-
-//export _gotk4_gtk4_FlowBoxCreateWidgetFunc
-func _gotk4_gtk4_FlowBoxCreateWidgetFunc(carg1 C.gpointer, carg2 C.gpointer) (cret *C.GtkWidget) {
-	var fn FlowBoxCreateWidgetFunc
-	{
-		v := userdata.Load(unsafe.Pointer(carg2))
-		if v == nil {
-			panic(`callback not found`)
-		}
-		fn = v.(FlowBoxCreateWidgetFunc)
-	}
-
-	var item  unsafe.Pointer // in, none, casted
-	var goret Widget         // return, full, converted
-
-	item = unsafe.Pointer(carg1)
-
-	goret = fn(item)
-
-	cret = (*C.GtkWidget)(UnsafeWidgetToGlibFull(goret))
-
-	return cret
 }
 
 //export _gotk4_gtk4_FontFilterFunc
@@ -122,52 +73,6 @@ func _gotk4_gtk4_FontFilterFunc(carg1 *C.PangoFontFamily, carg2 *C.PangoFontFace
 	if goret {
 		cret = C.TRUE
 	}
-
-	return cret
-}
-
-//export _gotk4_gtk4_ListBoxCreateWidgetFunc
-func _gotk4_gtk4_ListBoxCreateWidgetFunc(carg1 C.gpointer, carg2 C.gpointer) (cret *C.GtkWidget) {
-	var fn ListBoxCreateWidgetFunc
-	{
-		v := userdata.Load(unsafe.Pointer(carg2))
-		if v == nil {
-			panic(`callback not found`)
-		}
-		fn = v.(ListBoxCreateWidgetFunc)
-	}
-
-	var item  unsafe.Pointer // in, none, casted
-	var goret Widget         // return, full, converted
-
-	item = unsafe.Pointer(carg1)
-
-	goret = fn(item)
-
-	cret = (*C.GtkWidget)(UnsafeWidgetToGlibFull(goret))
-
-	return cret
-}
-
-//export _gotk4_gtk4_MapListModelMapFunc
-func _gotk4_gtk4_MapListModelMapFunc(carg1 C.gpointer, carg2 C.gpointer) (cret C.gpointer) {
-	var fn MapListModelMapFunc
-	{
-		v := userdata.Load(unsafe.Pointer(carg2))
-		if v == nil {
-			panic(`callback not found`)
-		}
-		fn = v.(MapListModelMapFunc)
-	}
-
-	var item  unsafe.Pointer // in, full, casted
-	var goret unsafe.Pointer // return, full, casted
-
-	item = unsafe.Pointer(carg1)
-
-	goret = fn(item)
-
-	cret = C.gpointer(goret)
 
 	return cret
 }
@@ -280,29 +185,6 @@ func _gotk4_gtk4_TickCallback(carg1 *C.GtkWidget, carg2 *C.GdkFrameClock, carg3 
 	if goret {
 		cret = C.TRUE
 	}
-
-	return cret
-}
-
-//export _gotk4_gtk4_TreeListModelCreateModelFunc
-func _gotk4_gtk4_TreeListModelCreateModelFunc(carg1 C.gpointer, carg2 C.gpointer) (cret *C.GListModel) {
-	var fn TreeListModelCreateModelFunc
-	{
-		v := userdata.Load(unsafe.Pointer(carg2))
-		if v == nil {
-			panic(`callback not found`)
-		}
-		fn = v.(TreeListModelCreateModelFunc)
-	}
-
-	var item  unsafe.Pointer // in, none, casted
-	var goret gio.ListModel  // return, full, converted
-
-	item = unsafe.Pointer(carg1)
-
-	goret = fn(item)
-
-	cret = (*C.GListModel)(gio.UnsafeListModelToGlibFull(goret))
 
 	return cret
 }

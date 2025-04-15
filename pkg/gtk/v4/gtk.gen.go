@@ -22,17 +22,12 @@ import (
 // #cgo pkg-config: gtk4
 // #cgo CFLAGS: -Wno-deprecated-declarations
 // #include <gtk/gtk.h>
-// extern GListModel* _gotk4_gtk4_TreeListModelCreateModelFunc(gpointer, gpointer);
-// extern GtkWidget* _gotk4_gtk4_FlowBoxCreateWidgetFunc(gpointer, gpointer);
-// extern GtkWidget* _gotk4_gtk4_ListBoxCreateWidgetFunc(gpointer, gpointer);
 // extern char* _gotk4_gtk4_ScaleFormatValueFunc(GtkScale*, double, gpointer);
-// extern gboolean _gotk4_gtk4_CustomFilterFunc(gpointer, gpointer);
 // extern gboolean _gotk4_gtk4_FlowBoxFilterFunc(GtkFlowBoxChild*, gpointer);
 // extern gboolean _gotk4_gtk4_ListBoxFilterFunc(GtkListBoxRow*, gpointer);
 // extern gboolean _gotk4_gtk4_TextCharPredicate(gunichar, gpointer);
 // extern gboolean _gotk4_gtk4_TickCallback(GtkWidget*, GdkFrameClock*, gpointer);
 // extern gint _gotk4_glib2_CompareDataFunc(gconstpointer, gconstpointer, gpointer);
-// extern gpointer _gotk4_gtk4_MapListModelMapFunc(gpointer, gpointer);
 // extern int _gotk4_gtk4_FlowBoxSortFunc(GtkFlowBoxChild*, GtkFlowBoxChild*, gpointer);
 // extern int _gotk4_gtk4_ListBoxSortFunc(GtkListBoxRow*, GtkListBoxRow*, gpointer);
 // extern void _gotk4_gio2_AsyncReadyCallback(GObject*, GAsyncResult*, gpointer);
@@ -8057,26 +8052,11 @@ func (f TextSearchFlags) String() string {
 // See [method@Gtk.Assistant.set_forward_page_func].
 type AssistantPageFunc func(currentPage int) (goret int)
 
-// CustomFilterFunc wraps GtkCustomFilterFunc
-//
-// User function that is called to determine if the @item should be matched.
-// 
-// If the filter matches the item, this function must return %TRUE. If the
-// item should be filtered out, %FALSE must be returned.
-type CustomFilterFunc func(item unsafe.Pointer) (goret bool)
-
 // ExpressionNotify wraps GtkExpressionNotify
 //
 // Callback called by gtk_expression_watch() when the
 // expression value changes.
 type ExpressionNotify func()
-
-// FlowBoxCreateWidgetFunc wraps GtkFlowBoxCreateWidgetFunc
-//
-// Called for flow boxes that are bound to a `GListModel`.
-// 
-// This function is called for each item that gets added to the model.
-type FlowBoxCreateWidgetFunc func(item unsafe.Pointer) (goret Widget)
 
 // FontFilterFunc wraps GtkFontFilterFunc
 //
@@ -8085,24 +8065,6 @@ type FlowBoxCreateWidgetFunc func(item unsafe.Pointer) (goret Widget)
 // 
 // See [method@Gtk.FontChooser.set_filter_func].
 type FontFilterFunc func(family pango.FontFamily, face pango.FontFace) (goret bool)
-
-// ListBoxCreateWidgetFunc wraps GtkListBoxCreateWidgetFunc
-//
-// Called for list boxes that are bound to a `GListModel` with
-// gtk_list_box_bind_model() for each item that gets added to the model.
-// 
-// If the widget returned is not a #GtkListBoxRow widget, then the widget
-// will be inserted as the child of an intermediate #GtkListBoxRow.
-type ListBoxCreateWidgetFunc func(item unsafe.Pointer) (goret Widget)
-
-// MapListModelMapFunc wraps GtkMapListModelMapFunc
-//
-// User function that is called to map an @item of the original model to
-// an item expected by the map model.
-// 
-// The returned items must conform to the item type of the model they are
-// used with.
-type MapListModelMapFunc func(item unsafe.Pointer) (goret unsafe.Pointer)
 
 // PageSetupDoneFunc wraps GtkPageSetupDoneFunc
 //
@@ -8165,17 +8127,6 @@ type TextTagTableForEach func(tag TextTag)
 //
 // Callback type for adding a function to update animations. See gtk_widget_add_tick_callback().
 type TickCallback func(widget Widget, frameClock gdk.FrameClock) (goret bool)
-
-// TreeListModelCreateModelFunc wraps GtkTreeListModelCreateModelFunc
-//
-// Prototype of the function called to create new child models when
-// gtk_tree_list_row_set_expanded() is called.
-// 
-// This function can return %NULL to indicate that @item is guaranteed to be
-// a leaf node and will never have children. If it does not have children but
-// may get children later, it should return an empty model that is filled once
-// children arrive.
-type TreeListModelCreateModelFunc func(item unsafe.Pointer) (goret gio.ListModel)
 
 // FlowBoxFilterFunc wraps GtkFlowBoxFilterFunc
 //
@@ -9320,7 +9271,7 @@ type AccessibleInstance struct {
 
 var _ Accessible = (*AccessibleInstance)(nil)
 
-// AccessibleInstance wraps GtkAccessible
+// Accessible wraps GtkAccessible
 //
 // `GtkAccessible` is an interface for describing UI elements for
 // Assistive Technologies.
@@ -10030,7 +9981,7 @@ type AccessibleRangeInstance struct {
 
 var _ AccessibleRange = (*AccessibleRangeInstance)(nil)
 
-// AccessibleRangeInstance wraps GtkAccessibleRange
+// AccessibleRange wraps GtkAccessibleRange
 //
 // This interface describes ranged controls, e.g. controls which have a single
 // value within an allowed range and that can optionally be changed by the user.
@@ -10103,7 +10054,7 @@ type AccessibleTextInstance struct {
 
 var _ AccessibleText = (*AccessibleTextInstance)(nil)
 
-// AccessibleTextInstance wraps GtkAccessibleText
+// AccessibleText wraps GtkAccessibleText
 //
 // An interface for accessible objects containing formatted text.
 // 
@@ -10265,7 +10216,7 @@ type ActionableInstance struct {
 
 var _ Actionable = (*ActionableInstance)(nil)
 
-// ActionableInstance wraps GtkActionable
+// Actionable wraps GtkActionable
 //
 // The `GtkActionable` interface provides a convenient way of associating
 // widgets with actions.
@@ -10450,7 +10401,7 @@ type BuildableInstance struct {
 
 var _ Buildable = (*BuildableInstance)(nil)
 
-// BuildableInstance wraps GtkBuildable
+// Buildable wraps GtkBuildable
 //
 // `GtkBuildable` allows objects to extend and customize their deserialization
 // from ui files.
@@ -10551,7 +10502,7 @@ type BuilderScopeInstance struct {
 
 var _ BuilderScope = (*BuilderScopeInstance)(nil)
 
-// BuilderScopeInstance wraps GtkBuilderScope
+// BuilderScope wraps GtkBuilderScope
 //
 // `GtkBuilderScope` is an interface to provide language binding support
 // to `GtkBuilder`.
@@ -10621,7 +10572,7 @@ type ConstraintTargetInstance struct {
 
 var _ ConstraintTarget = (*ConstraintTargetInstance)(nil)
 
-// ConstraintTargetInstance wraps GtkConstraintTarget
+// ConstraintTarget wraps GtkConstraintTarget
 //
 // The `GtkConstraintTarget` interface is implemented by objects that
 // can be used as source or target in `GtkConstraint`s.
@@ -10677,7 +10628,7 @@ type EditableTextWidgetInstance struct {
 
 var _ EditableTextWidget = (*EditableTextWidgetInstance)(nil)
 
-// EditableTextWidgetInstance wraps GtkEditable
+// EditableTextWidget wraps GtkEditable
 //
 // `GtkEditable` is an interface for text editing widgets.
 // 
@@ -10811,6 +10762,39 @@ var _ EditableTextWidget = (*EditableTextWidgetInstance)(nil)
 // This type has been renamed from Editable.
 type EditableTextWidget interface {
 	upcastToGtkEditable() *EditableTextWidgetInstance
+
+	// ConnectChanged connects the provided callback to the "changed" signal
+	//
+	// Emitted at the end of a single user-visible operation on the
+	// contents.
+	// 
+	// E.g., a paste operation that replaces the contents of the
+	// selection will cause only one signal emission (even though it
+	// is implemented by first deleting the selection, then inserting
+	// the new content, and may cause multiple ::notify::text signals
+	// to be emitted).
+	ConnectChanged(func(EditableTextWidget)) gobject.SignalHandle
+	// ConnectDeleteText connects the provided callback to the "delete-text" signal
+	//
+	// Emitted when text is deleted from the widget by the user.
+	// 
+	// The default handler for this signal will normally be responsible for
+	// deleting the text, so by connecting to this signal and then stopping
+	// the signal with g_signal_stop_emission(), it is possible to modify the
+	// range of deleted text, or prevent it from being deleted entirely.
+	// 
+	// The @start_pos and @end_pos parameters are interpreted as for
+	// [method@Gtk.Editable.delete_text].
+	ConnectDeleteText(func(EditableTextWidget, int, int)) gobject.SignalHandle
+	// ConnectInsertText connects the provided callback to the "insert-text" signal
+	//
+	// Emitted when text is inserted into the widget by the user.
+	// 
+	// The default handler for this signal will normally be responsible
+	// for inserting the text, so by connecting to this signal and then
+	// stopping the signal with g_signal_stop_emission(), it is possible
+	// to modify the inserted text, or prevent it from being inserted entirely.
+	ConnectInsertText(func(EditableTextWidget, string, int, unsafe.Pointer)) gobject.SignalHandle
 }
 
 var _ EditableTextWidget = (*EditableTextWidgetInstance)(nil)
@@ -10851,6 +10835,44 @@ func UnsafeEditableTextWidgetToGlibFull(c EditableTextWidget) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(&i.Instance)
 }
 
+// ConnectChanged connects the provided callback to the "changed" signal
+//
+// Emitted at the end of a single user-visible operation on the
+// contents.
+// 
+// E.g., a paste operation that replaces the contents of the
+// selection will cause only one signal emission (even though it
+// is implemented by first deleting the selection, then inserting
+// the new content, and may cause multiple ::notify::text signals
+// to be emitted).
+func (o *EditableTextWidgetInstance) ConnectChanged(fn func(EditableTextWidget)) gobject.SignalHandle {
+	return o.Instance.Connect("changed", fn)
+}
+// ConnectDeleteText connects the provided callback to the "delete-text" signal
+//
+// Emitted when text is deleted from the widget by the user.
+// 
+// The default handler for this signal will normally be responsible for
+// deleting the text, so by connecting to this signal and then stopping
+// the signal with g_signal_stop_emission(), it is possible to modify the
+// range of deleted text, or prevent it from being deleted entirely.
+// 
+// The @start_pos and @end_pos parameters are interpreted as for
+// [method@Gtk.Editable.delete_text].
+func (o *EditableTextWidgetInstance) ConnectDeleteText(fn func(EditableTextWidget, int, int)) gobject.SignalHandle {
+	return o.Instance.Connect("delete-text", fn)
+}
+// ConnectInsertText connects the provided callback to the "insert-text" signal
+//
+// Emitted when text is inserted into the widget by the user.
+// 
+// The default handler for this signal will normally be responsible
+// for inserting the text, so by connecting to this signal and then
+// stopping the signal with g_signal_stop_emission(), it is possible
+// to modify the inserted text, or prevent it from being inserted entirely.
+func (o *EditableTextWidgetInstance) ConnectInsertText(fn func(EditableTextWidget, string, int, unsafe.Pointer)) gobject.SignalHandle {
+	return o.Instance.Connect("insert-text", fn)
+}
 // NativeSurfaceInstance is the instance type used by all types implementing GtkNative. It is used internally by the bindings. Users should use the interface [NativeSurface] instead.
 type NativeSurfaceInstance struct {
 	_ [0]func() // equal guard
@@ -10859,7 +10881,7 @@ type NativeSurfaceInstance struct {
 
 var _ NativeSurface = (*NativeSurfaceInstance)(nil)
 
-// NativeSurfaceInstance wraps GtkNative
+// NativeSurface wraps GtkNative
 //
 // `GtkNative` is the interface implemented by all widgets that have
 // their own `GdkSurface`.
@@ -10928,7 +10950,7 @@ type OrientableInstance struct {
 
 var _ Orientable = (*OrientableInstance)(nil)
 
-// OrientableInstance wraps GtkOrientable
+// Orientable wraps GtkOrientable
 //
 // The `GtkOrientable` interface is implemented by all widgets that can be
 // oriented horizontally or vertically.
@@ -11048,7 +11070,7 @@ type ScrollableInstance struct {
 
 var _ Scrollable = (*ScrollableInstance)(nil)
 
-// ScrollableInstance wraps GtkScrollable
+// Scrollable wraps GtkScrollable
 //
 // `GtkScrollable` is an interface for widgets with native scrolling ability.
 // 
@@ -11417,7 +11439,7 @@ type SectionModelInstance struct {
 
 var _ SectionModel = (*SectionModelInstance)(nil)
 
-// SectionModelInstance wraps GtkSectionModel
+// SectionModel wraps GtkSectionModel
 //
 // `GtkSectionModel` is an interface that adds support for sections to list models.
 // 
@@ -11478,6 +11500,19 @@ type SectionModel interface {
 	// of the [signal@Gio.ListModel::items-changed] instead of emitting
 	// two signals.
 	SectionsChanged(uint, uint)
+	// ConnectSectionsChanged connects the provided callback to the "sections-changed" signal
+	//
+	// Emitted when the start-of-section state of some of the items in @model changes.
+	// 
+	// Note that this signal does not specify the new section state of the
+	// items, they need to be queried manually. It is also not necessary for
+	// a model to change the section state of any of the items in the section
+	// model, though it would be rather useless to emit such a signal.
+	// 
+	// The [signal@Gio.ListModel::items-changed] implies the effect of the
+	// [signal@Gtk.SectionModel::sections-changed] signal for all the items
+	// it covers.
+	ConnectSectionsChanged(func(SectionModel, uint, uint)) gobject.SignalHandle
 }
 
 var _ SectionModel = (*SectionModelInstance)(nil)
@@ -11594,6 +11629,21 @@ func (self *SectionModelInstance) SectionsChanged(position uint, nItems uint) {
 	runtime.KeepAlive(nItems)
 }
 
+// ConnectSectionsChanged connects the provided callback to the "sections-changed" signal
+//
+// Emitted when the start-of-section state of some of the items in @model changes.
+// 
+// Note that this signal does not specify the new section state of the
+// items, they need to be queried manually. It is also not necessary for
+// a model to change the section state of any of the items in the section
+// model, though it would be rather useless to emit such a signal.
+// 
+// The [signal@Gio.ListModel::items-changed] implies the effect of the
+// [signal@Gtk.SectionModel::sections-changed] signal for all the items
+// it covers.
+func (o *SectionModelInstance) ConnectSectionsChanged(fn func(SectionModel, uint, uint)) gobject.SignalHandle {
+	return o.Instance.Connect("sections-changed", fn)
+}
 // SelectionModelInstance is the instance type used by all types implementing GtkSelectionModel. It is used internally by the bindings. Users should use the interface [SelectionModel] instead.
 type SelectionModelInstance struct {
 	_ [0]func() // equal guard
@@ -11602,7 +11652,7 @@ type SelectionModelInstance struct {
 
 var _ SelectionModel = (*SelectionModelInstance)(nil)
 
-// SelectionModelInstance wraps GtkSelectionModel
+// SelectionModel wraps GtkSelectionModel
 //
 // `GtkSelectionModel` is an interface that add support for selection to list models.
 // 
@@ -11809,6 +11859,15 @@ type SelectionModel interface {
 	//
 	// Requests to unselect a range of items in the model.
 	UnselectRange(uint, uint) bool
+	// ConnectSelectionChanged connects the provided callback to the "selection-changed" signal
+	//
+	// Emitted when the selection state of some of the items in @model changes.
+	// 
+	// Note that this signal does not specify the new selection state of the
+	// items, they need to be queried manually. It is also not necessary for
+	// a model to change the selection state of any of the items in the selection
+	// model, though it would be rather useless to emit such a signal.
+	ConnectSelectionChanged(func(SelectionModel, uint, uint)) gobject.SignalHandle
 }
 
 var _ SelectionModel = (*SelectionModelInstance)(nil)
@@ -12237,6 +12296,17 @@ func (model *SelectionModelInstance) UnselectRange(position uint, nItems uint) b
 	return goret
 }
 
+// ConnectSelectionChanged connects the provided callback to the "selection-changed" signal
+//
+// Emitted when the selection state of some of the items in @model changes.
+// 
+// Note that this signal does not specify the new selection state of the
+// items, they need to be queried manually. It is also not necessary for
+// a model to change the selection state of any of the items in the selection
+// model, though it would be rather useless to emit such a signal.
+func (o *SelectionModelInstance) ConnectSelectionChanged(fn func(SelectionModel, uint, uint)) gobject.SignalHandle {
+	return o.Instance.Connect("selection-changed", fn)
+}
 // ShortcutManagerInstance is the instance type used by all types implementing GtkShortcutManager. It is used internally by the bindings. Users should use the interface [ShortcutManager] instead.
 type ShortcutManagerInstance struct {
 	_ [0]func() // equal guard
@@ -12245,7 +12315,7 @@ type ShortcutManagerInstance struct {
 
 var _ ShortcutManager = (*ShortcutManagerInstance)(nil)
 
-// ShortcutManagerInstance wraps GtkShortcutManager
+// ShortcutManager wraps GtkShortcutManager
 //
 // The `GtkShortcutManager` interface is used to implement
 // shortcut scopes.
@@ -12309,7 +12379,7 @@ type StyleProviderInstance struct {
 
 var _ StyleProvider = (*StyleProviderInstance)(nil)
 
-// StyleProviderInstance wraps GtkStyleProvider
+// StyleProvider wraps GtkStyleProvider
 //
 // `GtkStyleProvider` is an interface for style information used by
 // `GtkStyleContext`.
@@ -12322,6 +12392,9 @@ var _ StyleProvider = (*StyleProviderInstance)(nil)
 // [class@Gtk.CssProvider].
 type StyleProvider interface {
 	upcastToGtkStyleProvider() *StyleProviderInstance
+
+	// ConnectGTKPrivateChanged connects the provided callback to the "gtk-private-changed" signal
+	ConnectGTKPrivateChanged(func(StyleProvider)) gobject.SignalHandle
 }
 
 var _ StyleProvider = (*StyleProviderInstance)(nil)
@@ -12362,6 +12435,10 @@ func UnsafeStyleProviderToGlibFull(c StyleProvider) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(&i.Instance)
 }
 
+// ConnectGTKPrivateChanged connects the provided callback to the "gtk-private-changed" signal
+func (o *StyleProviderInstance) ConnectGTKPrivateChanged(fn func(StyleProvider)) gobject.SignalHandle {
+	return o.Instance.Connect("gtk-private-changed", fn)
+}
 // SymbolicPaintableInstance is the instance type used by all types implementing GtkSymbolicPaintable. It is used internally by the bindings. Users should use the interface [SymbolicPaintable] instead.
 type SymbolicPaintableInstance struct {
 	_ [0]func() // equal guard
@@ -12370,7 +12447,7 @@ type SymbolicPaintableInstance struct {
 
 var _ SymbolicPaintable = (*SymbolicPaintableInstance)(nil)
 
-// SymbolicPaintableInstance wraps GtkSymbolicPaintable
+// SymbolicPaintable wraps GtkSymbolicPaintable
 //
 // `GtkSymbolicPaintable` is an interface that support symbolic colors in
 // paintables.
@@ -12513,6 +12590,11 @@ type ATContext interface {
 	//
 	// Retrieves the accessible role of this context.
 	GetAccessibleRole() AccessibleRole
+	// ConnectStateChange connects the provided callback to the "state-change" signal
+	//
+	// Emitted when the attributes of the accessible for the
+	// `GtkATContext` instance change.
+	ConnectStateChange(func(ATContext)) gobject.SignalHandle
 }
 
 func unsafeWrapATContext(base *gobject.ObjectInstance) *ATContextInstance {
@@ -12632,6 +12714,13 @@ func (self *ATContextInstance) GetAccessibleRole() AccessibleRole {
 	return goret
 }
 
+// ConnectStateChange connects the provided callback to the "state-change" signal
+//
+// Emitted when the attributes of the accessible for the
+// `GtkATContext` instance change.
+func (o *ATContextInstance) ConnectStateChange(fn func(ATContext)) gobject.SignalHandle {
+	return o.Connect("state-change", fn)
+}
 // AdjustmentInstance is the instance type used by all types extending GtkAdjustment. It is used internally by the bindings. Users should use the interface [Adjustment] instead.
 type AdjustmentInstance struct {
 	_ [0]func() // equal guard
@@ -12829,6 +12918,18 @@ type Adjustment interface {
 	// [property@Gtk.Adjustment:lower] to
 	// [property@Gtk.Adjustment:upper] - [property@Gtk.Adjustment:page-size].
 	SetValue(float64)
+	// ConnectChanged connects the provided callback to the "changed" signal
+	//
+	// Emitted when one or more of the `GtkAdjustment` properties have been
+	// changed.
+	// 
+	// Note that the [property@Gtk.Adjustment:value] property is
+	// covered by the [signal@Gtk.Adjustment::value-changed] signal.
+	ConnectChanged(func(Adjustment)) gobject.SignalHandle
+	// ConnectValueChanged connects the provided callback to the "value-changed" signal
+	//
+	// Emitted when the value has been changed.
+	ConnectValueChanged(func(Adjustment)) gobject.SignalHandle
 }
 
 func unsafeWrapAdjustment(base *gobject.ObjectInstance) *AdjustmentInstance {
@@ -13297,6 +13398,22 @@ func (adjustment *AdjustmentInstance) SetValue(value float64) {
 	runtime.KeepAlive(value)
 }
 
+// ConnectChanged connects the provided callback to the "changed" signal
+//
+// Emitted when one or more of the `GtkAdjustment` properties have been
+// changed.
+// 
+// Note that the [property@Gtk.Adjustment:value] property is
+// covered by the [signal@Gtk.Adjustment::value-changed] signal.
+func (o *AdjustmentInstance) ConnectChanged(fn func(Adjustment)) gobject.SignalHandle {
+	return o.Connect("changed", fn)
+}
+// ConnectValueChanged connects the provided callback to the "value-changed" signal
+//
+// Emitted when the value has been changed.
+func (o *AdjustmentInstance) ConnectValueChanged(fn func(Adjustment)) gobject.SignalHandle {
+	return o.Connect("value-changed", fn)
+}
 // AlertDialogInstance is the instance type used by all types extending GtkAlertDialog. It is used internally by the bindings. Users should use the interface [AlertDialog] instead.
 type AlertDialogInstance struct {
 	_ [0]func() // equal guard
@@ -14187,6 +14304,27 @@ type Application interface {
 	// 
 	// Inhibitors are also cleared when the application exits.
 	Uninhibit(uint)
+	// ConnectQueryEnd connects the provided callback to the "query-end" signal
+	//
+	// Emitted when the session manager is about to end the session.
+	// 
+	// This signal is only emitted if [property@Gtk.Application:register-session]
+	// is `TRUE`. Applications can connect to this signal and call
+	// [method@Gtk.Application.inhibit] with `GTK_APPLICATION_INHIBIT_LOGOUT`
+	// to delay the end of the session until state has been saved.
+	ConnectQueryEnd(func(Application)) gobject.SignalHandle
+	// ConnectWindowAdded connects the provided callback to the "window-added" signal
+	//
+	// Emitted when a [class@Gtk.Window] is added to `application` through
+	// [method@Gtk.Application.add_window].
+	ConnectWindowAdded(func(Application, Window)) gobject.SignalHandle
+	// ConnectWindowRemoved connects the provided callback to the "window-removed" signal
+	//
+	// Emitted when a [class@Gtk.Window] is removed from `application`.
+	// 
+	// This can happen as a side-effect of the window being destroyed
+	// or explicitly through [method@Gtk.Application.remove_window].
+	ConnectWindowRemoved(func(Application, Window)) gobject.SignalHandle
 }
 
 func unsafeWrapApplication(base *gobject.ObjectInstance) *ApplicationInstance {
@@ -14733,6 +14871,33 @@ func (application *ApplicationInstance) Uninhibit(cookie uint) {
 	runtime.KeepAlive(cookie)
 }
 
+// ConnectQueryEnd connects the provided callback to the "query-end" signal
+//
+// Emitted when the session manager is about to end the session.
+// 
+// This signal is only emitted if [property@Gtk.Application:register-session]
+// is `TRUE`. Applications can connect to this signal and call
+// [method@Gtk.Application.inhibit] with `GTK_APPLICATION_INHIBIT_LOGOUT`
+// to delay the end of the session until state has been saved.
+func (o *ApplicationInstance) ConnectQueryEnd(fn func(Application)) gobject.SignalHandle {
+	return o.Connect("query-end", fn)
+}
+// ConnectWindowAdded connects the provided callback to the "window-added" signal
+//
+// Emitted when a [class@Gtk.Window] is added to `application` through
+// [method@Gtk.Application.add_window].
+func (o *ApplicationInstance) ConnectWindowAdded(fn func(Application, Window)) gobject.SignalHandle {
+	return o.Connect("window-added", fn)
+}
+// ConnectWindowRemoved connects the provided callback to the "window-removed" signal
+//
+// Emitted when a [class@Gtk.Window] is removed from `application`.
+// 
+// This can happen as a side-effect of the window being destroyed
+// or explicitly through [method@Gtk.Application.remove_window].
+func (o *ApplicationInstance) ConnectWindowRemoved(fn func(Application, Window)) gobject.SignalHandle {
+	return o.Connect("window-removed", fn)
+}
 // BookmarkListInstance is the instance type used by all types extending GtkBookmarkList. It is used internally by the bindings. Users should use the interface [BookmarkList] instead.
 type BookmarkListInstance struct {
 	_ [0]func() // equal guard
@@ -17769,15 +17934,6 @@ type ColumnViewRow interface {
 	// Checks if a row item has been set to be focusable via
 	// gtk_column_view_row_set_focusable().
 	GetFocusable() bool
-	// GetItem wraps gtk_column_view_row_get_item
-	// The function returns the following values:
-	// 
-	// 	- goret unsafe.Pointer 
-	//
-	// Gets the model item that associated with @self.
-	// 
-	// If @self is unbound, this function returns %NULL.
-	GetItem() unsafe.Pointer
 	// GetPosition wraps gtk_column_view_row_get_position
 	// The function returns the following values:
 	// 
@@ -18000,30 +18156,6 @@ func (self *ColumnViewRowInstance) GetFocusable() bool {
 	if cret != 0 {
 		goret = true
 	}
-
-	return goret
-}
-
-// GetItem wraps gtk_column_view_row_get_item
-// The function returns the following values:
-// 
-// 	- goret unsafe.Pointer 
-//
-// Gets the model item that associated with @self.
-// 
-// If @self is unbound, this function returns %NULL.
-func (self *ColumnViewRowInstance) GetItem() unsafe.Pointer {
-	var carg0 *C.GtkColumnViewRow // in, none, converted
-	var cret  C.gpointer          // return, none, casted
-
-	carg0 = (*C.GtkColumnViewRow)(UnsafeColumnViewRowToGlibNone(self))
-
-	cret = C.gtk_column_view_row_get_item(carg0)
-	runtime.KeepAlive(self)
-
-	var goret unsafe.Pointer
-
-	goret = unsafe.Pointer(cret)
 
 	return goret
 }
@@ -18388,112 +18520,6 @@ func UnsafeConstraintToGlibNone(c Constraint) unsafe.Pointer {
 // UnsafeConstraintToGlibFull is used to convert the instance to it's C value GtkConstraint, while removeing the finalizer. This is used by the bindings internally.
 func UnsafeConstraintToGlibFull(c Constraint) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
-}
-
-// NewConstraint wraps gtk_constraint_new
-// 
-// The function takes the following parameters:
-// 
-// 	- target unsafe.Pointer (nullable): the target of the constraint 
-// 	- targetAttribute ConstraintAttribute: the attribute of `target` to be set 
-// 	- relation ConstraintRelation: the relation equivalence between `target_attribute` and `source_attribute` 
-// 	- source unsafe.Pointer (nullable): the source of the constraint 
-// 	- sourceAttribute ConstraintAttribute: the attribute of `source` to be read 
-// 	- multiplier float64: a multiplication factor to be applied to `source_attribute` 
-// 	- constant float64: a constant factor to be added to `source_attribute` 
-// 	- strength int: the strength of the constraint 
-// 
-// The function returns the following values:
-// 
-// 	- goret Constraint 
-//
-// Creates a new constraint representing a relation between a layout
-// attribute on a source and a layout attribute on a target.
-func NewConstraint(target unsafe.Pointer, targetAttribute ConstraintAttribute, relation ConstraintRelation, source unsafe.Pointer, sourceAttribute ConstraintAttribute, multiplier float64, constant float64, strength int) Constraint {
-	var carg1 C.gpointer               // in, none, casted, nullable
-	var carg2 C.GtkConstraintAttribute // in, none, casted
-	var carg3 C.GtkConstraintRelation  // in, none, casted
-	var carg4 C.gpointer               // in, none, casted, nullable
-	var carg5 C.GtkConstraintAttribute // in, none, casted
-	var carg6 C.double                 // in, none, casted, casted C.gdouble
-	var carg7 C.double                 // in, none, casted, casted C.gdouble
-	var carg8 C.int                    // in, none, casted, casted C.gint
-	var cret  *C.GtkConstraint         // return, full, converted
-
-	if target != nil {
-		carg1 = C.gpointer(target)
-	}
-	carg2 = C.GtkConstraintAttribute(targetAttribute)
-	carg3 = C.GtkConstraintRelation(relation)
-	if source != nil {
-		carg4 = C.gpointer(source)
-	}
-	carg5 = C.GtkConstraintAttribute(sourceAttribute)
-	carg6 = C.double(multiplier)
-	carg7 = C.double(constant)
-	carg8 = C.int(strength)
-
-	cret = C.gtk_constraint_new(carg1, carg2, carg3, carg4, carg5, carg6, carg7, carg8)
-	runtime.KeepAlive(target)
-	runtime.KeepAlive(targetAttribute)
-	runtime.KeepAlive(relation)
-	runtime.KeepAlive(source)
-	runtime.KeepAlive(sourceAttribute)
-	runtime.KeepAlive(multiplier)
-	runtime.KeepAlive(constant)
-	runtime.KeepAlive(strength)
-
-	var goret Constraint
-
-	goret = UnsafeConstraintFromGlibFull(unsafe.Pointer(cret))
-
-	return goret
-}
-
-// NewConstraintConstant wraps gtk_constraint_new_constant
-// 
-// The function takes the following parameters:
-// 
-// 	- target unsafe.Pointer (nullable): a the target of the constraint 
-// 	- targetAttribute ConstraintAttribute: the attribute of `target` to be set 
-// 	- relation ConstraintRelation: the relation equivalence between `target_attribute` and `constant` 
-// 	- constant float64: a constant factor to be set on `target_attribute` 
-// 	- strength int: the strength of the constraint 
-// 
-// The function returns the following values:
-// 
-// 	- goret Constraint 
-//
-// Creates a new constraint representing a relation between a layout
-// attribute on a target and a constant value.
-func NewConstraintConstant(target unsafe.Pointer, targetAttribute ConstraintAttribute, relation ConstraintRelation, constant float64, strength int) Constraint {
-	var carg1 C.gpointer               // in, none, casted, nullable
-	var carg2 C.GtkConstraintAttribute // in, none, casted
-	var carg3 C.GtkConstraintRelation  // in, none, casted
-	var carg4 C.double                 // in, none, casted, casted C.gdouble
-	var carg5 C.int                    // in, none, casted, casted C.gint
-	var cret  *C.GtkConstraint         // return, full, converted
-
-	if target != nil {
-		carg1 = C.gpointer(target)
-	}
-	carg2 = C.GtkConstraintAttribute(targetAttribute)
-	carg3 = C.GtkConstraintRelation(relation)
-	carg4 = C.double(constant)
-	carg5 = C.int(strength)
-
-	cret = C.gtk_constraint_new_constant(carg1, carg2, carg3, carg4, carg5)
-	runtime.KeepAlive(target)
-	runtime.KeepAlive(targetAttribute)
-	runtime.KeepAlive(relation)
-	runtime.KeepAlive(constant)
-	runtime.KeepAlive(strength)
-
-	var goret Constraint
-
-	goret = UnsafeConstraintFromGlibFull(unsafe.Pointer(cret))
-
-	return goret
 }
 
 // GetConstant wraps gtk_constraint_get_constant
@@ -19294,6 +19320,28 @@ type CssProvider interface {
 	// [ctor@Gtk.CssProvider.new] will basically create a duplicate
 	// of this @provider.
 	ToString() string
+	// ConnectParsingError connects the provided callback to the "parsing-error" signal
+	//
+	// Signals that a parsing error occurred.
+	// 
+	// The expected error values are in the [error@Gtk.CssParserError]
+	// and [enum@Gtk.CssParserWarning] enumerations.
+	// 
+	// The @path, @line and @position describe the actual location of
+	// the error as accurately as possible.
+	// 
+	// Parsing errors are never fatal, so the parsing will resume after
+	// the error. Errors may however cause parts of the given data or
+	// even all of it to not be parsed at all. So it is a useful idea
+	// to check that the parsing succeeds by connecting to this signal.
+	// 
+	// Errors in the [enum@Gtk.CssParserWarning] enumeration should not
+	// be treated as fatal errors.
+	// 
+	// Note that this signal may be emitted at any time as the css provider
+	// may opt to defer parsing parts or all of the input to a later time
+	// than when a loading function was called.
+	ConnectParsingError(func(CssProvider, CssSection, error)) gobject.SignalHandle
 }
 
 func unsafeWrapCssProvider(base *gobject.ObjectInstance) *CssProviderInstance {
@@ -19518,6 +19566,30 @@ func (provider *CssProviderInstance) ToString() string {
 	return goret
 }
 
+// ConnectParsingError connects the provided callback to the "parsing-error" signal
+//
+// Signals that a parsing error occurred.
+// 
+// The expected error values are in the [error@Gtk.CssParserError]
+// and [enum@Gtk.CssParserWarning] enumerations.
+// 
+// The @path, @line and @position describe the actual location of
+// the error as accurately as possible.
+// 
+// Parsing errors are never fatal, so the parsing will resume after
+// the error. Errors may however cause parts of the given data or
+// even all of it to not be parsed at all. So it is a useful idea
+// to check that the parsing succeeds by connecting to this signal.
+// 
+// Errors in the [enum@Gtk.CssParserWarning] enumeration should not
+// be treated as fatal errors.
+// 
+// Note that this signal may be emitted at any time as the css provider
+// may opt to defer parsing parts or all of the input to a later time
+// than when a loading function was called.
+func (o *CssProviderInstance) ConnectParsingError(fn func(CssProvider, CssSection, error)) gobject.SignalHandle {
+	return o.Connect("parsing-error", fn)
+}
 // DirectoryListInstance is the instance type used by all types extending GtkDirectoryList. It is used internally by the bindings. Users should use the interface [DirectoryList] instead.
 type DirectoryListInstance struct {
 	_ [0]func() // equal guard
@@ -20149,6 +20221,17 @@ type EntryBuffer interface {
 	// 
 	// Note that @n_chars is in characters, not in bytes.
 	SetText(string, int)
+	// ConnectDeletedText connects the provided callback to the "deleted-text" signal
+	//
+	// The text is altered in the default handler for this signal.
+	// 
+	// If you want access to the text after the text has been modified,
+	// use %G_CONNECT_AFTER.
+	ConnectDeletedText(func(EntryBuffer, uint, uint)) gobject.SignalHandle
+	// ConnectInsertedText connects the provided callback to the "inserted-text" signal
+	//
+	// This signal is emitted after text is inserted into the buffer.
+	ConnectInsertedText(func(EntryBuffer, uint, string, uint)) gobject.SignalHandle
 }
 
 func unsafeWrapEntryBuffer(base *gobject.ObjectInstance) *EntryBufferInstance {
@@ -20510,6 +20593,21 @@ func (buffer *EntryBufferInstance) SetText(chars string, nChars int) {
 	runtime.KeepAlive(nChars)
 }
 
+// ConnectDeletedText connects the provided callback to the "deleted-text" signal
+//
+// The text is altered in the default handler for this signal.
+// 
+// If you want access to the text after the text has been modified,
+// use %G_CONNECT_AFTER.
+func (o *EntryBufferInstance) ConnectDeletedText(fn func(EntryBuffer, uint, uint)) gobject.SignalHandle {
+	return o.Connect("deleted-text", fn)
+}
+// ConnectInsertedText connects the provided callback to the "inserted-text" signal
+//
+// This signal is emitted after text is inserted into the buffer.
+func (o *EntryBufferInstance) ConnectInsertedText(fn func(EntryBuffer, uint, string, uint)) gobject.SignalHandle {
+	return o.Connect("inserted-text", fn)
+}
 // EventControllerInstance is the instance type used by all types extending GtkEventController. It is used internally by the bindings. Users should use the interface [EventController] instead.
 type EventControllerInstance struct {
 	_ [0]func() // equal guard
@@ -20974,6 +21072,31 @@ type EventControllerFocus interface {
 	//
 	// Returns %TRUE if focus is within @self, but not one of its children.
 	IsFocus() bool
+	// ConnectEnter connects the provided callback to the "enter" signal
+	//
+	// Emitted whenever the focus enters into the widget or one
+	// of its descendents.
+	// 
+	// Note that this means you may not get an ::enter signal
+	// even though the widget becomes the focus location, in
+	// certain cases (such as when the focus moves from a descendent
+	// of the widget to the widget itself). If you are interested
+	// in these cases, you can monitor the
+	// [property@Gtk.EventControllerFocus:is-focus]
+	// property for changes.
+	ConnectEnter(func(EventControllerFocus)) gobject.SignalHandle
+	// ConnectLeave connects the provided callback to the "leave" signal
+	//
+	// Emitted whenever the focus leaves the widget hierarchy
+	// that is rooted at the widget that the controller is attached to.
+	// 
+	// Note that this means you may not get a ::leave signal
+	// even though the focus moves away from the widget, in
+	// certain cases (such as when the focus moves from the widget
+	// to a descendent). If you are interested in these cases, you
+	// can monitor the [property@Gtk.EventControllerFocus:is-focus]
+	// property for changes.
+	ConnectLeave(func(EventControllerFocus)) gobject.SignalHandle
 }
 
 func unsafeWrapEventControllerFocus(base *gobject.ObjectInstance) *EventControllerFocusInstance {
@@ -21078,6 +21201,35 @@ func (self *EventControllerFocusInstance) IsFocus() bool {
 	return goret
 }
 
+// ConnectEnter connects the provided callback to the "enter" signal
+//
+// Emitted whenever the focus enters into the widget or one
+// of its descendents.
+// 
+// Note that this means you may not get an ::enter signal
+// even though the widget becomes the focus location, in
+// certain cases (such as when the focus moves from a descendent
+// of the widget to the widget itself). If you are interested
+// in these cases, you can monitor the
+// [property@Gtk.EventControllerFocus:is-focus]
+// property for changes.
+func (o *EventControllerFocusInstance) ConnectEnter(fn func(EventControllerFocus)) gobject.SignalHandle {
+	return o.Connect("enter", fn)
+}
+// ConnectLeave connects the provided callback to the "leave" signal
+//
+// Emitted whenever the focus leaves the widget hierarchy
+// that is rooted at the widget that the controller is attached to.
+// 
+// Note that this means you may not get a ::leave signal
+// even though the focus moves away from the widget, in
+// certain cases (such as when the focus moves from the widget
+// to a descendent). If you are interested in these cases, you
+// can monitor the [property@Gtk.EventControllerFocus:is-focus]
+// property for changes.
+func (o *EventControllerFocusInstance) ConnectLeave(fn func(EventControllerFocus)) gobject.SignalHandle {
+	return o.Connect("leave", fn)
+}
 // EventControllerKeyInstance is the instance type used by all types extending GtkEventControllerKey. It is used internally by the bindings. Users should use the interface [EventControllerKey] instead.
 type EventControllerKeyInstance struct {
 	_ [0]func() // equal guard
@@ -21135,6 +21287,26 @@ type EventControllerKey interface {
 	//
 	// Sets the input method context of the key @controller.
 	SetIMContext(IMContext)
+	// ConnectIMUpdate connects the provided callback to the "im-update" signal
+	//
+	// Emitted whenever the input method context filters away
+	// a keypress and prevents the @controller receiving it.
+	// 
+	// See [method@Gtk.EventControllerKey.set_im_context] and
+	// [method@Gtk.IMContext.filter_keypress].
+	ConnectIMUpdate(func(EventControllerKey)) gobject.SignalHandle
+	// ConnectKeyPressed connects the provided callback to the "key-pressed" signal
+	//
+	// Emitted whenever a key is pressed.
+	ConnectKeyPressed(func(EventControllerKey, uint, uint, gdk.ModifierType) bool) gobject.SignalHandle
+	// ConnectKeyReleased connects the provided callback to the "key-released" signal
+	//
+	// Emitted whenever a key is released.
+	ConnectKeyReleased(func(EventControllerKey, uint, uint, gdk.ModifierType)) gobject.SignalHandle
+	// ConnectModifiers connects the provided callback to the "modifiers" signal
+	//
+	// Emitted whenever the state of modifier keys and pointer buttons change.
+	ConnectModifiers(func(EventControllerKey, gdk.ModifierType) bool) gobject.SignalHandle
 }
 
 func unsafeWrapEventControllerKey(base *gobject.ObjectInstance) *EventControllerKeyInstance {
@@ -21295,6 +21467,34 @@ func (controller *EventControllerKeyInstance) SetIMContext(imContext IMContext) 
 	runtime.KeepAlive(imContext)
 }
 
+// ConnectIMUpdate connects the provided callback to the "im-update" signal
+//
+// Emitted whenever the input method context filters away
+// a keypress and prevents the @controller receiving it.
+// 
+// See [method@Gtk.EventControllerKey.set_im_context] and
+// [method@Gtk.IMContext.filter_keypress].
+func (o *EventControllerKeyInstance) ConnectIMUpdate(fn func(EventControllerKey)) gobject.SignalHandle {
+	return o.Connect("im-update", fn)
+}
+// ConnectKeyPressed connects the provided callback to the "key-pressed" signal
+//
+// Emitted whenever a key is pressed.
+func (o *EventControllerKeyInstance) ConnectKeyPressed(fn func(EventControllerKey, uint, uint, gdk.ModifierType) bool) gobject.SignalHandle {
+	return o.Connect("key-pressed", fn)
+}
+// ConnectKeyReleased connects the provided callback to the "key-released" signal
+//
+// Emitted whenever a key is released.
+func (o *EventControllerKeyInstance) ConnectKeyReleased(fn func(EventControllerKey, uint, uint, gdk.ModifierType)) gobject.SignalHandle {
+	return o.Connect("key-released", fn)
+}
+// ConnectModifiers connects the provided callback to the "modifiers" signal
+//
+// Emitted whenever the state of modifier keys and pointer buttons change.
+func (o *EventControllerKeyInstance) ConnectModifiers(fn func(EventControllerKey, gdk.ModifierType) bool) gobject.SignalHandle {
+	return o.Connect("modifiers", fn)
+}
 // EventControllerLegacyInstance is the instance type used by all types extending GtkEventControllerLegacy. It is used internally by the bindings. Users should use the interface [EventControllerLegacy] instead.
 type EventControllerLegacyInstance struct {
 	_ [0]func() // equal guard
@@ -21406,6 +21606,18 @@ type EventControllerMotion interface {
 	//
 	// Returns if a pointer is within @self, but not one of its children.
 	IsPointer() bool
+	// ConnectEnter connects the provided callback to the "enter" signal
+	//
+	// Signals that the pointer has entered the widget.
+	ConnectEnter(func(EventControllerMotion, float64, float64)) gobject.SignalHandle
+	// ConnectLeave connects the provided callback to the "leave" signal
+	//
+	// Signals that the pointer has left the widget.
+	ConnectLeave(func(EventControllerMotion)) gobject.SignalHandle
+	// ConnectMotion connects the provided callback to the "motion" signal
+	//
+	// Emitted when the pointer moves inside the widget.
+	ConnectMotion(func(EventControllerMotion, float64, float64)) gobject.SignalHandle
 }
 
 func unsafeWrapEventControllerMotion(base *gobject.ObjectInstance) *EventControllerMotionInstance {
@@ -21510,6 +21722,24 @@ func (self *EventControllerMotionInstance) IsPointer() bool {
 	return goret
 }
 
+// ConnectEnter connects the provided callback to the "enter" signal
+//
+// Signals that the pointer has entered the widget.
+func (o *EventControllerMotionInstance) ConnectEnter(fn func(EventControllerMotion, float64, float64)) gobject.SignalHandle {
+	return o.Connect("enter", fn)
+}
+// ConnectLeave connects the provided callback to the "leave" signal
+//
+// Signals that the pointer has left the widget.
+func (o *EventControllerMotionInstance) ConnectLeave(fn func(EventControllerMotion)) gobject.SignalHandle {
+	return o.Connect("leave", fn)
+}
+// ConnectMotion connects the provided callback to the "motion" signal
+//
+// Emitted when the pointer moves inside the widget.
+func (o *EventControllerMotionInstance) ConnectMotion(fn func(EventControllerMotion, float64, float64)) gobject.SignalHandle {
+	return o.Connect("motion", fn)
+}
 // EventControllerScrollInstance is the instance type used by all types extending GtkEventControllerScroll. It is used internally by the bindings. Users should use the interface [EventControllerScroll] instead.
 type EventControllerScrollInstance struct {
 	_ [0]func() // equal guard
@@ -21584,6 +21814,35 @@ type EventControllerScroll interface {
 	//
 	// Sets the flags conditioning scroll controller behavior.
 	SetFlags(EventControllerScrollFlags)
+	// ConnectDecelerate connects the provided callback to the "decelerate" signal
+	//
+	// Emitted after scroll is finished if the
+	// %GTK_EVENT_CONTROLLER_SCROLL_KINETIC flag is set.
+	// 
+	// @vel_x and @vel_y express the initial velocity that was
+	// imprinted by the scroll events. @vel_x and @vel_y are expressed in
+	// pixels/ms.
+	ConnectDecelerate(func(EventControllerScroll, float64, float64)) gobject.SignalHandle
+	// ConnectScroll connects the provided callback to the "scroll" signal
+	//
+	// Signals that the widget should scroll by the
+	// amount specified by @dx and @dy.
+	// 
+	// For the representation unit of the deltas, see
+	// [method@Gtk.EventControllerScroll.get_unit].
+	ConnectScroll(func(EventControllerScroll, float64, float64) bool) gobject.SignalHandle
+	// ConnectScrollBegin connects the provided callback to the "scroll-begin" signal
+	//
+	// Signals that a new scrolling operation has begun.
+	// 
+	// It will only be emitted on devices capable of it.
+	ConnectScrollBegin(func(EventControllerScroll)) gobject.SignalHandle
+	// ConnectScrollEnd connects the provided callback to the "scroll-end" signal
+	//
+	// Signals that a scrolling operation has finished.
+	// 
+	// It will only be emitted on devices capable of it.
+	ConnectScrollEnd(func(EventControllerScroll)) gobject.SignalHandle
 }
 
 func unsafeWrapEventControllerScroll(base *gobject.ObjectInstance) *EventControllerScrollInstance {
@@ -21716,6 +21975,43 @@ func (scroll *EventControllerScrollInstance) SetFlags(flags EventControllerScrol
 	runtime.KeepAlive(flags)
 }
 
+// ConnectDecelerate connects the provided callback to the "decelerate" signal
+//
+// Emitted after scroll is finished if the
+// %GTK_EVENT_CONTROLLER_SCROLL_KINETIC flag is set.
+// 
+// @vel_x and @vel_y express the initial velocity that was
+// imprinted by the scroll events. @vel_x and @vel_y are expressed in
+// pixels/ms.
+func (o *EventControllerScrollInstance) ConnectDecelerate(fn func(EventControllerScroll, float64, float64)) gobject.SignalHandle {
+	return o.Connect("decelerate", fn)
+}
+// ConnectScroll connects the provided callback to the "scroll" signal
+//
+// Signals that the widget should scroll by the
+// amount specified by @dx and @dy.
+// 
+// For the representation unit of the deltas, see
+// [method@Gtk.EventControllerScroll.get_unit].
+func (o *EventControllerScrollInstance) ConnectScroll(fn func(EventControllerScroll, float64, float64) bool) gobject.SignalHandle {
+	return o.Connect("scroll", fn)
+}
+// ConnectScrollBegin connects the provided callback to the "scroll-begin" signal
+//
+// Signals that a new scrolling operation has begun.
+// 
+// It will only be emitted on devices capable of it.
+func (o *EventControllerScrollInstance) ConnectScrollBegin(fn func(EventControllerScroll)) gobject.SignalHandle {
+	return o.Connect("scroll-begin", fn)
+}
+// ConnectScrollEnd connects the provided callback to the "scroll-end" signal
+//
+// Signals that a scrolling operation has finished.
+// 
+// It will only be emitted on devices capable of it.
+func (o *EventControllerScrollInstance) ConnectScrollEnd(fn func(EventControllerScroll)) gobject.SignalHandle {
+	return o.Connect("scroll-end", fn)
+}
 // FileDialogInstance is the instance type used by all types extending GtkFileDialog. It is used internally by the bindings. Users should use the interface [FileDialog] instead.
 type FileDialogInstance struct {
 	_ [0]func() // equal guard
@@ -23403,18 +23699,19 @@ type Filter interface {
 	// This function is meant purely for optimization purposes, filters can
 	// choose to omit implementing it, but `GtkFilterListModel` uses it.
 	GetStrictness() FilterMatch
-	// Match wraps gtk_filter_match
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- item unsafe.Pointer: The item to check 
-	// 
-	// The function returns the following values:
-	// 
-	// 	- goret bool 
+	// ConnectChanged connects the provided callback to the "changed" signal
 	//
-	// Checks if the given @item is matched by the filter or not.
-	Match(unsafe.Pointer) bool
+	// Emitted whenever the filter changed.
+	// 
+	// Users of the filter should then check items again via
+	// [method@Gtk.Filter.match].
+	// 
+	// `GtkFilterListModel` handles this signal automatically.
+	// 
+	// Depending on the @change parameter, not all items need
+	// to be checked, but only some. Refer to the [enum@Gtk.FilterChange]
+	// documentation for details.
+	ConnectChanged(func(Filter, FilterChange)) gobject.SignalHandle
 }
 
 func unsafeWrapFilter(base *gobject.ObjectInstance) *FilterInstance {
@@ -23511,38 +23808,21 @@ func (self *FilterInstance) GetStrictness() FilterMatch {
 	return goret
 }
 
-// Match wraps gtk_filter_match
-// 
-// The function takes the following parameters:
-// 
-// 	- item unsafe.Pointer: The item to check 
-// 
-// The function returns the following values:
-// 
-// 	- goret bool 
+// ConnectChanged connects the provided callback to the "changed" signal
 //
-// Checks if the given @item is matched by the filter or not.
-func (self *FilterInstance) Match(item unsafe.Pointer) bool {
-	var carg0 *C.GtkFilter // in, none, converted
-	var carg1 C.gpointer   // in, none, casted
-	var cret  C.gboolean   // return
-
-	carg0 = (*C.GtkFilter)(UnsafeFilterToGlibNone(self))
-	carg1 = C.gpointer(item)
-
-	cret = C.gtk_filter_match(carg0, carg1)
-	runtime.KeepAlive(self)
-	runtime.KeepAlive(item)
-
-	var goret bool
-
-	if cret != 0 {
-		goret = true
-	}
-
-	return goret
+// Emitted whenever the filter changed.
+// 
+// Users of the filter should then check items again via
+// [method@Gtk.Filter.match].
+// 
+// `GtkFilterListModel` handles this signal automatically.
+// 
+// Depending on the @change parameter, not all items need
+// to be checked, but only some. Refer to the [enum@Gtk.FilterChange]
+// documentation for details.
+func (o *FilterInstance) ConnectChanged(fn func(Filter, FilterChange)) gobject.SignalHandle {
+	return o.Connect("changed", fn)
 }
-
 // FilterListModelInstance is the instance type used by all types extending GtkFilterListModel. It is used internally by the bindings. Users should use the interface [FilterListModel] instead.
 type FilterListModelInstance struct {
 	_ [0]func() // equal guard
@@ -25287,6 +25567,56 @@ type Gesture interface {
 	//
 	// Separates @gesture into an isolated group.
 	Ungroup()
+	// ConnectBegin connects the provided callback to the "begin" signal
+	//
+	// Emitted when the gesture is recognized.
+	// 
+	// This means the number of touch sequences matches
+	// [property@Gtk.Gesture:n-points].
+	// 
+	// Note: These conditions may also happen when an extra touch
+	// (eg. a third touch on a 2-touches gesture) is lifted, in that
+	// situation @sequence won't pertain to the current set of active
+	// touches, so don't rely on this being true.
+	ConnectBegin(func(Gesture, gdk.EventSequence)) gobject.SignalHandle
+	// ConnectCancel connects the provided callback to the "cancel" signal
+	//
+	// Emitted whenever a sequence is cancelled.
+	// 
+	// This usually happens on active touches when
+	// [method@Gtk.EventController.reset] is called on @gesture
+	// (manually, due to grabs...), or the individual @sequence
+	// was claimed by parent widgets' controllers (see
+	// [method@Gtk.Gesture.set_sequence_state]).
+	// 
+	// @gesture must forget everything about @sequence as in
+	// response to this signal.
+	ConnectCancel(func(Gesture, gdk.EventSequence)) gobject.SignalHandle
+	// ConnectEnd connects the provided callback to the "end" signal
+	//
+	// Emitted when @gesture either stopped recognizing the event
+	// sequences as something to be handled, or the number of touch
+	// sequences became higher or lower than [property@Gtk.Gesture:n-points].
+	// 
+	// Note: @sequence might not pertain to the group of sequences that
+	// were previously triggering recognition on @gesture (ie. a just
+	// pressed touch sequence that exceeds [property@Gtk.Gesture:n-points]).
+	// This situation may be detected by checking through
+	// [method@Gtk.Gesture.handles_sequence].
+	ConnectEnd(func(Gesture, gdk.EventSequence)) gobject.SignalHandle
+	// ConnectSequenceStateChanged connects the provided callback to the "sequence-state-changed" signal
+	//
+	// Emitted whenever a sequence state changes.
+	// 
+	// See [method@Gtk.Gesture.set_sequence_state] to know
+	// more about the expectable sequence lifetimes.
+	ConnectSequenceStateChanged(func(Gesture, gdk.EventSequence, EventSequenceState)) gobject.SignalHandle
+	// ConnectUpdate connects the provided callback to the "update" signal
+	//
+	// Emitted whenever an event is handled while the gesture is recognized.
+	// 
+	// @sequence is guaranteed to pertain to the set of active touches.
+	ConnectUpdate(func(Gesture, gdk.EventSequence)) gobject.SignalHandle
 }
 
 func unsafeWrapGesture(base *gobject.ObjectInstance) *GestureInstance {
@@ -25766,6 +26096,66 @@ func (gesture *GestureInstance) Ungroup() {
 	runtime.KeepAlive(gesture)
 }
 
+// ConnectBegin connects the provided callback to the "begin" signal
+//
+// Emitted when the gesture is recognized.
+// 
+// This means the number of touch sequences matches
+// [property@Gtk.Gesture:n-points].
+// 
+// Note: These conditions may also happen when an extra touch
+// (eg. a third touch on a 2-touches gesture) is lifted, in that
+// situation @sequence won't pertain to the current set of active
+// touches, so don't rely on this being true.
+func (o *GestureInstance) ConnectBegin(fn func(Gesture, gdk.EventSequence)) gobject.SignalHandle {
+	return o.Connect("begin", fn)
+}
+// ConnectCancel connects the provided callback to the "cancel" signal
+//
+// Emitted whenever a sequence is cancelled.
+// 
+// This usually happens on active touches when
+// [method@Gtk.EventController.reset] is called on @gesture
+// (manually, due to grabs...), or the individual @sequence
+// was claimed by parent widgets' controllers (see
+// [method@Gtk.Gesture.set_sequence_state]).
+// 
+// @gesture must forget everything about @sequence as in
+// response to this signal.
+func (o *GestureInstance) ConnectCancel(fn func(Gesture, gdk.EventSequence)) gobject.SignalHandle {
+	return o.Connect("cancel", fn)
+}
+// ConnectEnd connects the provided callback to the "end" signal
+//
+// Emitted when @gesture either stopped recognizing the event
+// sequences as something to be handled, or the number of touch
+// sequences became higher or lower than [property@Gtk.Gesture:n-points].
+// 
+// Note: @sequence might not pertain to the group of sequences that
+// were previously triggering recognition on @gesture (ie. a just
+// pressed touch sequence that exceeds [property@Gtk.Gesture:n-points]).
+// This situation may be detected by checking through
+// [method@Gtk.Gesture.handles_sequence].
+func (o *GestureInstance) ConnectEnd(fn func(Gesture, gdk.EventSequence)) gobject.SignalHandle {
+	return o.Connect("end", fn)
+}
+// ConnectSequenceStateChanged connects the provided callback to the "sequence-state-changed" signal
+//
+// Emitted whenever a sequence state changes.
+// 
+// See [method@Gtk.Gesture.set_sequence_state] to know
+// more about the expectable sequence lifetimes.
+func (o *GestureInstance) ConnectSequenceStateChanged(fn func(Gesture, gdk.EventSequence, EventSequenceState)) gobject.SignalHandle {
+	return o.Connect("sequence-state-changed", fn)
+}
+// ConnectUpdate connects the provided callback to the "update" signal
+//
+// Emitted whenever an event is handled while the gesture is recognized.
+// 
+// @sequence is guaranteed to pertain to the set of active touches.
+func (o *GestureInstance) ConnectUpdate(fn func(Gesture, gdk.EventSequence)) gobject.SignalHandle {
+	return o.Connect("update", fn)
+}
 // GestureRotateInstance is the instance type used by all types extending GtkGestureRotate. It is used internally by the bindings. Users should use the interface [GestureRotate] instead.
 type GestureRotateInstance struct {
 	_ [0]func() // equal guard
@@ -25795,6 +26185,10 @@ type GestureRotate interface {
 	// in radians since the gesture was first recognized. If @gesture is
 	// not active, 0 is returned.
 	GetAngleDelta() float64
+	// ConnectAngleChanged connects the provided callback to the "angle-changed" signal
+	//
+	// Emitted when the angle between both tracked points changes.
+	ConnectAngleChanged(func(GestureRotate, float64, float64)) gobject.SignalHandle
 }
 
 func unsafeWrapGestureRotate(base *gobject.ObjectInstance) *GestureRotateInstance {
@@ -25880,6 +26274,12 @@ func (gesture *GestureRotateInstance) GetAngleDelta() float64 {
 	return goret
 }
 
+// ConnectAngleChanged connects the provided callback to the "angle-changed" signal
+//
+// Emitted when the angle between both tracked points changes.
+func (o *GestureRotateInstance) ConnectAngleChanged(fn func(GestureRotate, float64, float64)) gobject.SignalHandle {
+	return o.Connect("angle-changed", fn)
+}
 // GestureSingleInstance is the instance type used by all types extending GtkGestureSingle. It is used internally by the bindings. Users should use the interface [GestureSingle] instead.
 type GestureSingleInstance struct {
 	_ [0]func() // equal guard
@@ -26291,6 +26691,22 @@ type GestureStylus interface {
 	// If true, the gesture will exclusively handle events from stylus input devices,
 	// otherwise it'll handle events from any pointing device.
 	SetStylusOnly(bool)
+	// ConnectDown connects the provided callback to the "down" signal
+	//
+	// Emitted when the stylus touches the device.
+	ConnectDown(func(GestureStylus, float64, float64)) gobject.SignalHandle
+	// ConnectMotion connects the provided callback to the "motion" signal
+	//
+	// Emitted when the stylus moves while touching the device.
+	ConnectMotion(func(GestureStylus, float64, float64)) gobject.SignalHandle
+	// ConnectProximity connects the provided callback to the "proximity" signal
+	//
+	// Emitted when the stylus is in proximity of the device.
+	ConnectProximity(func(GestureStylus, float64, float64)) gobject.SignalHandle
+	// ConnectUp connects the provided callback to the "up" signal
+	//
+	// Emitted when the stylus no longer touches the device.
+	ConnectUp(func(GestureStylus, float64, float64)) gobject.SignalHandle
 }
 
 func unsafeWrapGestureStylus(base *gobject.ObjectInstance) *GestureStylusInstance {
@@ -26470,6 +26886,30 @@ func (gesture *GestureStylusInstance) SetStylusOnly(stylusOnly bool) {
 	runtime.KeepAlive(stylusOnly)
 }
 
+// ConnectDown connects the provided callback to the "down" signal
+//
+// Emitted when the stylus touches the device.
+func (o *GestureStylusInstance) ConnectDown(fn func(GestureStylus, float64, float64)) gobject.SignalHandle {
+	return o.Connect("down", fn)
+}
+// ConnectMotion connects the provided callback to the "motion" signal
+//
+// Emitted when the stylus moves while touching the device.
+func (o *GestureStylusInstance) ConnectMotion(fn func(GestureStylus, float64, float64)) gobject.SignalHandle {
+	return o.Connect("motion", fn)
+}
+// ConnectProximity connects the provided callback to the "proximity" signal
+//
+// Emitted when the stylus is in proximity of the device.
+func (o *GestureStylusInstance) ConnectProximity(fn func(GestureStylus, float64, float64)) gobject.SignalHandle {
+	return o.Connect("proximity", fn)
+}
+// ConnectUp connects the provided callback to the "up" signal
+//
+// Emitted when the stylus no longer touches the device.
+func (o *GestureStylusInstance) ConnectUp(fn func(GestureStylus, float64, float64)) gobject.SignalHandle {
+	return o.Connect("up", fn)
+}
 // GestureSwipeInstance is the instance type used by all types extending GtkGestureSwipe. It is used internally by the bindings. Users should use the interface [GestureSwipe] instead.
 type GestureSwipeInstance struct {
 	_ [0]func() // equal guard
@@ -26509,6 +26949,12 @@ type GestureSwipe interface {
 	// in @velocity_x and @velocity_y with the recorded velocity, as per the
 	// last events processed.
 	GetVelocity() (float64, float64, bool)
+	// ConnectSwipe connects the provided callback to the "swipe" signal
+	//
+	// Emitted when the recognized gesture is finished.
+	// 
+	// Velocity and direction are a product of previously recorded events.
+	ConnectSwipe(func(GestureSwipe, float64, float64)) gobject.SignalHandle
 }
 
 func unsafeWrapGestureSwipe(base *gobject.ObjectInstance) *GestureSwipeInstance {
@@ -26605,6 +27051,14 @@ func (gesture *GestureSwipeInstance) GetVelocity() (float64, float64, bool) {
 	return velocityX, velocityY, goret
 }
 
+// ConnectSwipe connects the provided callback to the "swipe" signal
+//
+// Emitted when the recognized gesture is finished.
+// 
+// Velocity and direction are a product of previously recorded events.
+func (o *GestureSwipeInstance) ConnectSwipe(fn func(GestureSwipe, float64, float64)) gobject.SignalHandle {
+	return o.Connect("swipe", fn)
+}
 // GestureZoomInstance is the instance type used by all types extending GtkGestureZoom. It is used internally by the bindings. Users should use the interface [GestureZoom] instead.
 type GestureZoomInstance struct {
 	_ [0]func() // equal guard
@@ -26636,6 +27090,10 @@ type GestureZoom interface {
 	// starting point is considered 1:1). If @gesture is not
 	// active, 1 is returned.
 	GetScaleDelta() float64
+	// ConnectScaleChanged connects the provided callback to the "scale-changed" signal
+	//
+	// Emitted whenever the distance between both tracked sequences changes.
+	ConnectScaleChanged(func(GestureZoom, float64)) gobject.SignalHandle
 }
 
 func unsafeWrapGestureZoom(base *gobject.ObjectInstance) *GestureZoomInstance {
@@ -26722,6 +27180,12 @@ func (gesture *GestureZoomInstance) GetScaleDelta() float64 {
 	return goret
 }
 
+// ConnectScaleChanged connects the provided callback to the "scale-changed" signal
+//
+// Emitted whenever the distance between both tracked sequences changes.
+func (o *GestureZoomInstance) ConnectScaleChanged(fn func(GestureZoom, float64)) gobject.SignalHandle {
+	return o.Connect("scale-changed", fn)
+}
 // IMContextInstance is the instance type used by all types extending GtkIMContext. It is used internally by the bindings. Users should use the interface [IMContext] instead.
 type IMContextInstance struct {
 	_ [0]func() // equal guard
@@ -26935,6 +27399,48 @@ type IMContext interface {
 	// may use some other method to display feedback, such as displaying
 	// it in a child of the root window.
 	SetUsePreedit(bool)
+	// ConnectCommit connects the provided callback to the "commit" signal
+	//
+	// The ::commit signal is emitted when a complete input sequence
+	// has been entered by the user.
+	// 
+	// If the commit comes after a preediting sequence, the
+	// ::commit signal is emitted after ::preedit-end.
+	// 
+	// This can be a single character immediately after a key press or
+	// the final result of preediting.
+	ConnectCommit(func(IMContext, string)) gobject.SignalHandle
+	// ConnectDeleteSurrounding connects the provided callback to the "delete-surrounding" signal
+	//
+	// The ::delete-surrounding signal is emitted when the input method
+	// needs to delete all or part of the context surrounding the cursor.
+	ConnectDeleteSurrounding(func(IMContext, int, int) bool) gobject.SignalHandle
+	// ConnectPreeditChanged connects the provided callback to the "preedit-changed" signal
+	//
+	// The ::preedit-changed signal is emitted whenever the preedit sequence
+	// currently being entered has changed.
+	// 
+	// It is also emitted at the end of a preedit sequence, in which case
+	// [method@Gtk.IMContext.get_preedit_string] returns the empty string.
+	ConnectPreeditChanged(func(IMContext)) gobject.SignalHandle
+	// ConnectPreeditEnd connects the provided callback to the "preedit-end" signal
+	//
+	// The ::preedit-end signal is emitted when a preediting sequence
+	// has been completed or canceled.
+	ConnectPreeditEnd(func(IMContext)) gobject.SignalHandle
+	// ConnectPreeditStart connects the provided callback to the "preedit-start" signal
+	//
+	// The ::preedit-start signal is emitted when a new preediting sequence
+	// starts.
+	ConnectPreeditStart(func(IMContext)) gobject.SignalHandle
+	// ConnectRetrieveSurrounding connects the provided callback to the "retrieve-surrounding" signal
+	//
+	// The ::retrieve-surrounding signal is emitted when the input method
+	// requires the context surrounding the cursor.
+	// 
+	// The callback should set the input method surrounding context by
+	// calling the [method@Gtk.IMContext.set_surrounding] method.
+	ConnectRetrieveSurrounding(func(IMContext) bool) gobject.SignalHandle
 }
 
 func unsafeWrapIMContext(base *gobject.ObjectInstance) *IMContextInstance {
@@ -27000,18 +27506,18 @@ func UnsafeIMContextToGlibFull(c IMContext) unsafe.Pointer {
 // This function is used by an input method that wants to make
 // substitutions in the existing text in response to new input.
 // It is not useful for applications.
-func (context *IMContextInstance) DeleteSurrounding(offset int, nChars int) bool {
+func (_context *IMContextInstance) DeleteSurrounding(offset int, nChars int) bool {
 	var carg0 *C.GtkIMContext // in, none, converted
 	var carg1 C.int           // in, none, casted, casted C.gint
 	var carg2 C.int           // in, none, casted, casted C.gint
 	var cret  C.gboolean      // return
 
-	carg0 = (*C.GtkIMContext)(UnsafeIMContextToGlibNone(context))
+	carg0 = (*C.GtkIMContext)(UnsafeIMContextToGlibNone(_context))
 	carg1 = C.int(offset)
 	carg2 = C.int(nChars)
 
 	cret = C.gtk_im_context_delete_surrounding(carg0, carg1, carg2)
-	runtime.KeepAlive(context)
+	runtime.KeepAlive(_context)
 	runtime.KeepAlive(offset)
 	runtime.KeepAlive(nChars)
 
@@ -27043,7 +27549,7 @@ func (context *IMContextInstance) DeleteSurrounding(offset int, nChars int) bool
 // Allow an input method to forward key press and release events
 // to another input method without necessarily having a `GdkEvent`
 // available.
-func (context *IMContextInstance) FilterKey(press bool, surface gdk.Surface, device gdk.Device, time uint32, keycode uint, state gdk.ModifierType, group int) bool {
+func (_context *IMContextInstance) FilterKey(press bool, surface gdk.Surface, device gdk.Device, time uint32, keycode uint, state gdk.ModifierType, group int) bool {
 	var carg0 *C.GtkIMContext   // in, none, converted
 	var carg1 C.gboolean        // in
 	var carg2 *C.GdkSurface     // in, none, converted
@@ -27054,7 +27560,7 @@ func (context *IMContextInstance) FilterKey(press bool, surface gdk.Surface, dev
 	var carg7 C.int             // in, none, casted, casted C.gint
 	var cret  C.gboolean        // return
 
-	carg0 = (*C.GtkIMContext)(UnsafeIMContextToGlibNone(context))
+	carg0 = (*C.GtkIMContext)(UnsafeIMContextToGlibNone(_context))
 	if press {
 		carg1 = C.TRUE
 	}
@@ -27066,7 +27572,7 @@ func (context *IMContextInstance) FilterKey(press bool, surface gdk.Surface, dev
 	carg7 = C.int(group)
 
 	cret = C.gtk_im_context_filter_key(carg0, carg1, carg2, carg3, carg4, carg5, carg6, carg7)
-	runtime.KeepAlive(context)
+	runtime.KeepAlive(_context)
 	runtime.KeepAlive(press)
 	runtime.KeepAlive(surface)
 	runtime.KeepAlive(device)
@@ -27091,13 +27597,13 @@ func (context *IMContextInstance) FilterKey(press bool, surface gdk.Surface, dev
 // 
 // The input method may, for example, change the displayed
 // feedback to reflect this change.
-func (context *IMContextInstance) FocusIn() {
+func (_context *IMContextInstance) FocusIn() {
 	var carg0 *C.GtkIMContext // in, none, converted
 
-	carg0 = (*C.GtkIMContext)(UnsafeIMContextToGlibNone(context))
+	carg0 = (*C.GtkIMContext)(UnsafeIMContextToGlibNone(_context))
 
 	C.gtk_im_context_focus_in(carg0)
-	runtime.KeepAlive(context)
+	runtime.KeepAlive(_context)
 }
 
 // FocusOut wraps gtk_im_context_focus_out
@@ -27107,13 +27613,13 @@ func (context *IMContextInstance) FocusIn() {
 // 
 // The input method may, for example, change the displayed
 // feedback or reset the contexts state to reflect this change.
-func (context *IMContextInstance) FocusOut() {
+func (_context *IMContextInstance) FocusOut() {
 	var carg0 *C.GtkIMContext // in, none, converted
 
-	carg0 = (*C.GtkIMContext)(UnsafeIMContextToGlibNone(context))
+	carg0 = (*C.GtkIMContext)(UnsafeIMContextToGlibNone(_context))
 
 	C.gtk_im_context_focus_out(carg0)
-	runtime.KeepAlive(context)
+	runtime.KeepAlive(_context)
 }
 
 // GetPreeditString wraps gtk_im_context_get_preedit_string
@@ -27131,16 +27637,16 @@ func (context *IMContextInstance) FocusOut() {
 // and a list of attributes to apply to the string.
 // 
 // This string should be displayed inserted at the insertion point.
-func (context *IMContextInstance) GetPreeditString() (string, *pango.AttrList, int) {
+func (_context *IMContextInstance) GetPreeditString() (string, *pango.AttrList, int) {
 	var carg0 *C.GtkIMContext  // in, none, converted
 	var carg1 *C.char          // out, full, string, casted *C.gchar
 	var carg2 *C.PangoAttrList // out, full, converted
 	var carg3 C.int            // out, full, casted, casted C.gint
 
-	carg0 = (*C.GtkIMContext)(UnsafeIMContextToGlibNone(context))
+	carg0 = (*C.GtkIMContext)(UnsafeIMContextToGlibNone(_context))
 
 	C.gtk_im_context_get_preedit_string(carg0, &carg1, &carg2, &carg3)
-	runtime.KeepAlive(context)
+	runtime.KeepAlive(_context)
 
 	var str       string
 	var attrs     *pango.AttrList
@@ -27182,17 +27688,17 @@ func (context *IMContextInstance) GetPreeditString() (string, *pango.AttrList, i
 // Note that there is no obligation for a widget to respond to the
 // `::retrieve-surrounding` signal, so input methods must be prepared to
 // function without context.
-func (context *IMContextInstance) GetSurroundingWithSelection() (string, int, int, bool) {
+func (_context *IMContextInstance) GetSurroundingWithSelection() (string, int, int, bool) {
 	var carg0 *C.GtkIMContext // in, none, converted
 	var carg1 *C.char         // out, full, string, casted *C.gchar
 	var carg2 C.int           // out, full, casted, casted C.gint
 	var carg3 C.int           // out, full, casted, casted C.gint
 	var cret  C.gboolean      // return
 
-	carg0 = (*C.GtkIMContext)(UnsafeIMContextToGlibNone(context))
+	carg0 = (*C.GtkIMContext)(UnsafeIMContextToGlibNone(_context))
 
 	cret = C.gtk_im_context_get_surrounding_with_selection(carg0, &carg1, &carg2, &carg3)
-	runtime.KeepAlive(context)
+	runtime.KeepAlive(_context)
 
 	var text        string
 	var cursorIndex int
@@ -27216,13 +27722,13 @@ func (context *IMContextInstance) GetSurroundingWithSelection() (string, int, in
 // position has been made.
 // 
 // This will typically cause the input method to clear the preedit state.
-func (context *IMContextInstance) Reset() {
+func (_context *IMContextInstance) Reset() {
 	var carg0 *C.GtkIMContext // in, none, converted
 
-	carg0 = (*C.GtkIMContext)(UnsafeIMContextToGlibNone(context))
+	carg0 = (*C.GtkIMContext)(UnsafeIMContextToGlibNone(_context))
 
 	C.gtk_im_context_reset(carg0)
-	runtime.KeepAlive(context)
+	runtime.KeepAlive(_context)
 }
 
 // SetClientWidget wraps gtk_im_context_set_client_widget
@@ -27237,17 +27743,17 @@ func (context *IMContextInstance) Reset() {
 // This is the `GtkWidget` holding the input focus. This widget is
 // used in order to correctly position status windows, and may
 // also be used for purposes internal to the input method.
-func (context *IMContextInstance) SetClientWidget(widget Widget) {
+func (_context *IMContextInstance) SetClientWidget(widget Widget) {
 	var carg0 *C.GtkIMContext // in, none, converted
 	var carg1 *C.GtkWidget    // in, none, converted, nullable
 
-	carg0 = (*C.GtkIMContext)(UnsafeIMContextToGlibNone(context))
+	carg0 = (*C.GtkIMContext)(UnsafeIMContextToGlibNone(_context))
 	if widget != nil {
 		carg1 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(widget))
 	}
 
 	C.gtk_im_context_set_client_widget(carg0, carg1)
-	runtime.KeepAlive(context)
+	runtime.KeepAlive(_context)
 	runtime.KeepAlive(widget)
 }
 
@@ -27261,15 +27767,15 @@ func (context *IMContextInstance) SetClientWidget(widget Widget) {
 // position has been made.
 // 
 // The location is relative to the client widget.
-func (context *IMContextInstance) SetCursorLocation(area *gdk.Rectangle) {
+func (_context *IMContextInstance) SetCursorLocation(area *gdk.Rectangle) {
 	var carg0 *C.GtkIMContext // in, none, converted
 	var carg1 *C.GdkRectangle // in, none, converted
 
-	carg0 = (*C.GtkIMContext)(UnsafeIMContextToGlibNone(context))
+	carg0 = (*C.GtkIMContext)(UnsafeIMContextToGlibNone(_context))
 	carg1 = (*C.GdkRectangle)(gdk.UnsafeRectangleToGlibNone(area))
 
 	C.gtk_im_context_set_cursor_location(carg0, carg1)
-	runtime.KeepAlive(context)
+	runtime.KeepAlive(_context)
 	runtime.KeepAlive(area)
 }
 
@@ -27287,14 +27793,14 @@ func (context *IMContextInstance) SetCursorLocation(area *gdk.Rectangle) {
 // string. This function is expected to be called in response to the
 // [signal@Gtk.IMContext::retrieve_surrounding] signal, and will likely
 // have no effect if called at other times.
-func (context *IMContextInstance) SetSurroundingWithSelection(text string, len int, cursorIndex int, anchorIndex int) {
+func (_context *IMContextInstance) SetSurroundingWithSelection(text string, len int, cursorIndex int, anchorIndex int) {
 	var carg0 *C.GtkIMContext // in, none, converted
 	var carg1 *C.char         // in, none, string, casted *C.gchar
 	var carg2 C.int           // in, none, casted, casted C.gint
 	var carg3 C.int           // in, none, casted, casted C.gint
 	var carg4 C.int           // in, none, casted, casted C.gint
 
-	carg0 = (*C.GtkIMContext)(UnsafeIMContextToGlibNone(context))
+	carg0 = (*C.GtkIMContext)(UnsafeIMContextToGlibNone(_context))
 	carg1 = (*C.char)(unsafe.Pointer(C.CString(text)))
 	defer C.free(unsafe.Pointer(carg1))
 	carg2 = C.int(len)
@@ -27302,7 +27808,7 @@ func (context *IMContextInstance) SetSurroundingWithSelection(text string, len i
 	carg4 = C.int(anchorIndex)
 
 	C.gtk_im_context_set_surrounding_with_selection(carg0, carg1, carg2, carg3, carg4)
-	runtime.KeepAlive(context)
+	runtime.KeepAlive(_context)
 	runtime.KeepAlive(text)
 	runtime.KeepAlive(len)
 	runtime.KeepAlive(cursorIndex)
@@ -27321,20 +27827,74 @@ func (context *IMContextInstance) SetSurroundingWithSelection(text string, len i
 // If @use_preedit is %FALSE (default is %TRUE), then the IM context
 // may use some other method to display feedback, such as displaying
 // it in a child of the root window.
-func (context *IMContextInstance) SetUsePreedit(usePreedit bool) {
+func (_context *IMContextInstance) SetUsePreedit(usePreedit bool) {
 	var carg0 *C.GtkIMContext // in, none, converted
 	var carg1 C.gboolean      // in
 
-	carg0 = (*C.GtkIMContext)(UnsafeIMContextToGlibNone(context))
+	carg0 = (*C.GtkIMContext)(UnsafeIMContextToGlibNone(_context))
 	if usePreedit {
 		carg1 = C.TRUE
 	}
 
 	C.gtk_im_context_set_use_preedit(carg0, carg1)
-	runtime.KeepAlive(context)
+	runtime.KeepAlive(_context)
 	runtime.KeepAlive(usePreedit)
 }
 
+// ConnectCommit connects the provided callback to the "commit" signal
+//
+// The ::commit signal is emitted when a complete input sequence
+// has been entered by the user.
+// 
+// If the commit comes after a preediting sequence, the
+// ::commit signal is emitted after ::preedit-end.
+// 
+// This can be a single character immediately after a key press or
+// the final result of preediting.
+func (o *IMContextInstance) ConnectCommit(fn func(IMContext, string)) gobject.SignalHandle {
+	return o.Connect("commit", fn)
+}
+// ConnectDeleteSurrounding connects the provided callback to the "delete-surrounding" signal
+//
+// The ::delete-surrounding signal is emitted when the input method
+// needs to delete all or part of the context surrounding the cursor.
+func (o *IMContextInstance) ConnectDeleteSurrounding(fn func(IMContext, int, int) bool) gobject.SignalHandle {
+	return o.Connect("delete-surrounding", fn)
+}
+// ConnectPreeditChanged connects the provided callback to the "preedit-changed" signal
+//
+// The ::preedit-changed signal is emitted whenever the preedit sequence
+// currently being entered has changed.
+// 
+// It is also emitted at the end of a preedit sequence, in which case
+// [method@Gtk.IMContext.get_preedit_string] returns the empty string.
+func (o *IMContextInstance) ConnectPreeditChanged(fn func(IMContext)) gobject.SignalHandle {
+	return o.Connect("preedit-changed", fn)
+}
+// ConnectPreeditEnd connects the provided callback to the "preedit-end" signal
+//
+// The ::preedit-end signal is emitted when a preediting sequence
+// has been completed or canceled.
+func (o *IMContextInstance) ConnectPreeditEnd(fn func(IMContext)) gobject.SignalHandle {
+	return o.Connect("preedit-end", fn)
+}
+// ConnectPreeditStart connects the provided callback to the "preedit-start" signal
+//
+// The ::preedit-start signal is emitted when a new preediting sequence
+// starts.
+func (o *IMContextInstance) ConnectPreeditStart(fn func(IMContext)) gobject.SignalHandle {
+	return o.Connect("preedit-start", fn)
+}
+// ConnectRetrieveSurrounding connects the provided callback to the "retrieve-surrounding" signal
+//
+// The ::retrieve-surrounding signal is emitted when the input method
+// requires the context surrounding the cursor.
+// 
+// The callback should set the input method surrounding context by
+// calling the [method@Gtk.IMContext.set_surrounding] method.
+func (o *IMContextInstance) ConnectRetrieveSurrounding(fn func(IMContext) bool) gobject.SignalHandle {
+	return o.Connect("retrieve-surrounding", fn)
+}
 // IMContextSimpleInstance is the instance type used by all types extending GtkIMContextSimple. It is used internally by the bindings. Users should use the interface [IMContextSimple] instead.
 type IMContextSimpleInstance struct {
 	_ [0]func() // equal guard
@@ -27575,14 +28135,14 @@ func NewIMMulticontext() IMContext {
 // 	- goret string 
 //
 // Gets the id of the currently active delegate of the @context.
-func (context *IMMulticontextInstance) GetContextID() string {
+func (_context *IMMulticontextInstance) GetContextID() string {
 	var carg0 *C.GtkIMMulticontext // in, none, converted
 	var cret  *C.char              // return, none, string, casted *C.gchar
 
-	carg0 = (*C.GtkIMMulticontext)(UnsafeIMMulticontextToGlibNone(context))
+	carg0 = (*C.GtkIMMulticontext)(UnsafeIMMulticontextToGlibNone(_context))
 
 	cret = C.gtk_im_multicontext_get_context_id(carg0)
-	runtime.KeepAlive(context)
+	runtime.KeepAlive(_context)
 
 	var goret string
 
@@ -27605,18 +28165,18 @@ func (context *IMMulticontextInstance) GetContextID() string {
 // Setting this to a non-%NULL value overrides the system-wide
 // IM module setting. See the [property@Gtk.Settings:gtk-im-module]
 // property.
-func (context *IMMulticontextInstance) SetContextID(contextId string) {
+func (_context *IMMulticontextInstance) SetContextID(contextId string) {
 	var carg0 *C.GtkIMMulticontext // in, none, converted
 	var carg1 *C.char              // in, none, string, nullable-string
 
-	carg0 = (*C.GtkIMMulticontext)(UnsafeIMMulticontextToGlibNone(context))
+	carg0 = (*C.GtkIMMulticontext)(UnsafeIMMulticontextToGlibNone(_context))
 	if contextId != "" {
 		carg1 = (*C.char)(unsafe.Pointer(C.CString(contextId)))
 		defer C.free(unsafe.Pointer(carg1))
 	}
 
 	C.gtk_im_multicontext_set_context_id(carg0, carg1)
-	runtime.KeepAlive(context)
+	runtime.KeepAlive(_context)
 	runtime.KeepAlive(contextId)
 }
 
@@ -28096,6 +28656,14 @@ type IconTheme interface {
 	// This function cannot be called on the icon theme objects returned
 	// from [func@Gtk.IconTheme.get_for_display].
 	SetThemeName(string)
+	// ConnectChanged connects the provided callback to the "changed" signal
+	//
+	// Emitted when the icon theme changes.
+	// 
+	// This can happen because current icon theme is switched or
+	// because GTK detects that a change has occurred in the
+	// contents of the current icon theme.
+	ConnectChanged(func(IconTheme)) gobject.SignalHandle
 }
 
 func unsafeWrapIconTheme(base *gobject.ObjectInstance) *IconThemeInstance {
@@ -28676,6 +29244,16 @@ func (self *IconThemeInstance) SetThemeName(themeName string) {
 	runtime.KeepAlive(themeName)
 }
 
+// ConnectChanged connects the provided callback to the "changed" signal
+//
+// Emitted when the icon theme changes.
+// 
+// This can happen because current icon theme is switched or
+// because GTK detects that a change has occurred in the
+// contents of the current icon theme.
+func (o *IconThemeInstance) ConnectChanged(fn func(IconTheme)) gobject.SignalHandle {
+	return o.Connect("changed", fn)
+}
 // LayoutChildInstance is the instance type used by all types extending GtkLayoutChild. It is used internally by the bindings. Users should use the interface [LayoutChild] instead.
 type LayoutChildInstance struct {
 	_ [0]func() // equal guard
@@ -29206,17 +29784,6 @@ type ListHeader interface {
 	// 
 	// If @self is unbound, %GTK_INVALID_LIST_POSITION is returned.
 	GetEnd() uint
-	// GetItem wraps gtk_list_header_get_item
-	// The function returns the following values:
-	// 
-	// 	- goret unsafe.Pointer 
-	//
-	// Gets the model item at the start of the section.
-	// This is the item that occupies the list model at position
-	// [property@Gtk.ListHeader:start].
-	// 
-	// If @self is unbound, this function returns %NULL.
-	GetItem() unsafe.Pointer
 	// GetNItems wraps gtk_list_header_get_n_items
 	// The function returns the following values:
 	// 
@@ -29328,32 +29895,6 @@ func (self *ListHeaderInstance) GetEnd() uint {
 	var goret uint
 
 	goret = uint(cret)
-
-	return goret
-}
-
-// GetItem wraps gtk_list_header_get_item
-// The function returns the following values:
-// 
-// 	- goret unsafe.Pointer 
-//
-// Gets the model item at the start of the section.
-// This is the item that occupies the list model at position
-// [property@Gtk.ListHeader:start].
-// 
-// If @self is unbound, this function returns %NULL.
-func (self *ListHeaderInstance) GetItem() unsafe.Pointer {
-	var carg0 *C.GtkListHeader // in, none, converted
-	var cret  C.gpointer       // return, none, casted
-
-	carg0 = (*C.GtkListHeader)(UnsafeListHeaderToGlibNone(self))
-
-	cret = C.gtk_list_header_get_item(carg0)
-	runtime.KeepAlive(self)
-
-	var goret unsafe.Pointer
-
-	goret = unsafe.Pointer(cret)
 
 	return goret
 }
@@ -29499,15 +30040,6 @@ type ListItem interface {
 	// Checks if a list item has been set to be focusable via
 	// gtk_list_item_set_focusable().
 	GetFocusable() bool
-	// GetItem wraps gtk_list_item_get_item
-	// The function returns the following values:
-	// 
-	// 	- goret unsafe.Pointer 
-	//
-	// Gets the model item that associated with @self.
-	// 
-	// If @self is unbound, this function returns %NULL.
-	GetItem() unsafe.Pointer
 	// GetPosition wraps gtk_list_item_get_position
 	// The function returns the following values:
 	// 
@@ -29767,30 +30299,6 @@ func (self *ListItemInstance) GetFocusable() bool {
 	if cret != 0 {
 		goret = true
 	}
-
-	return goret
-}
-
-// GetItem wraps gtk_list_item_get_item
-// The function returns the following values:
-// 
-// 	- goret unsafe.Pointer 
-//
-// Gets the model item that associated with @self.
-// 
-// If @self is unbound, this function returns %NULL.
-func (self *ListItemInstance) GetItem() unsafe.Pointer {
-	var carg0 *C.GtkListItem // in, none, converted
-	var cret  C.gpointer     // return, none, casted
-
-	carg0 = (*C.GtkListItem)(UnsafeListItemToGlibNone(self))
-
-	cret = C.gtk_list_item_get_item(carg0)
-	runtime.KeepAlive(self)
-
-	var goret unsafe.Pointer
-
-	goret = unsafe.Pointer(cret)
 
 	return goret
 }
@@ -30187,24 +30695,6 @@ type MapListModel interface {
 	//
 	// Checks if a map function is currently set on @self.
 	HasMap() bool
-	// SetMapFunc wraps gtk_map_list_model_set_map_func
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- mapFunc MapListModelMapFunc (nullable): map function 
-	//
-	// Sets the function used to map items.
-	// 
-	// The function will be called whenever an item needs to be mapped
-	// and must return the item to use for the given input item.
-	// 
-	// Note that `GtkMapListModel` may call this function multiple times
-	// on the same item, because it may delete items it doesn't need anymore.
-	// 
-	// GTK makes no effort to ensure that @map_func conforms to the item type
-	// of @self. It assumes that the caller knows what they are doing and the map
-	// function returns items of the appropriate type.
-	SetMapFunc(MapListModelMapFunc)
 	// SetModel wraps gtk_map_list_model_set_model
 	// 
 	// The function takes the following parameters:
@@ -30256,45 +30746,6 @@ func UnsafeMapListModelToGlibFull(c MapListModel) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewMapListModel wraps gtk_map_list_model_new
-// 
-// The function takes the following parameters:
-// 
-// 	- model gio.ListModel (nullable): The model to map 
-// 	- mapFunc MapListModelMapFunc (nullable): map function 
-// 
-// The function returns the following values:
-// 
-// 	- goret MapListModel 
-//
-// Creates a new `GtkMapListModel` for the given arguments.
-func NewMapListModel(model gio.ListModel, mapFunc MapListModelMapFunc) MapListModel {
-	var carg1 *C.GListModel            // in, full, converted, nullable
-	var carg2 C.GtkMapListModelMapFunc // callback, scope: notified, closure: carg3, destroy: carg4, nullable
-	var carg3 C.gpointer               // implicit
-	var carg4 C.GDestroyNotify         // implicit
-	var cret  *C.GtkMapListModel       // return, full, converted
-
-	if model != nil {
-		carg1 = (*C.GListModel)(gio.UnsafeListModelToGlibFull(model))
-	}
-	if mapFunc != nil {
-		carg2 = (*[0]byte)(C._gotk4_gtk4_MapListModelMapFunc)
-		carg3 = C.gpointer(userdata.Register(mapFunc))
-		carg4 = (C.GDestroyNotify)((*[0]byte)(C.destroyUserdata))
-	}
-
-	cret = C.gtk_map_list_model_new(carg1, carg2, carg3, carg4)
-	runtime.KeepAlive(model)
-	runtime.KeepAlive(mapFunc)
-
-	var goret MapListModel
-
-	goret = UnsafeMapListModelFromGlibFull(unsafe.Pointer(cret))
-
-	return goret
-}
-
 // GetModel wraps gtk_map_list_model_get_model
 // The function returns the following values:
 // 
@@ -30339,41 +30790,6 @@ func (self *MapListModelInstance) HasMap() bool {
 	}
 
 	return goret
-}
-
-// SetMapFunc wraps gtk_map_list_model_set_map_func
-// 
-// The function takes the following parameters:
-// 
-// 	- mapFunc MapListModelMapFunc (nullable): map function 
-//
-// Sets the function used to map items.
-// 
-// The function will be called whenever an item needs to be mapped
-// and must return the item to use for the given input item.
-// 
-// Note that `GtkMapListModel` may call this function multiple times
-// on the same item, because it may delete items it doesn't need anymore.
-// 
-// GTK makes no effort to ensure that @map_func conforms to the item type
-// of @self. It assumes that the caller knows what they are doing and the map
-// function returns items of the appropriate type.
-func (self *MapListModelInstance) SetMapFunc(mapFunc MapListModelMapFunc) {
-	var carg0 *C.GtkMapListModel       // in, none, converted
-	var carg1 C.GtkMapListModelMapFunc // callback, scope: notified, closure: carg2, destroy: carg3, nullable
-	var carg2 C.gpointer               // implicit
-	var carg3 C.GDestroyNotify         // implicit
-
-	carg0 = (*C.GtkMapListModel)(UnsafeMapListModelToGlibNone(self))
-	if mapFunc != nil {
-		carg1 = (*[0]byte)(C._gotk4_gtk4_MapListModelMapFunc)
-		carg2 = C.gpointer(userdata.Register(mapFunc))
-		carg3 = (C.GDestroyNotify)((*[0]byte)(C.destroyUserdata))
-	}
-
-	C.gtk_map_list_model_set_map_func(carg0, carg1, carg2, carg3)
-	runtime.KeepAlive(self)
-	runtime.KeepAlive(mapFunc)
 }
 
 // SetModel wraps gtk_map_list_model_set_model
@@ -32174,6 +32590,15 @@ type NativeDialog interface {
 	// 
 	// Multiple calls while the dialog is visible will be ignored.
 	Show()
+	// ConnectResponse connects the provided callback to the "response" signal
+	//
+	// Emitted when the user responds to the dialog.
+	// 
+	// When this is called the dialog has been hidden.
+	// 
+	// If you call [method@Gtk.NativeDialog.hide] before the user
+	// responds to the dialog this signal will not be emitted.
+	ConnectResponse(func(NativeDialog, int)) gobject.SignalHandle
 }
 
 func unsafeWrapNativeDialog(base *gobject.ObjectInstance) *NativeDialogInstance {
@@ -32434,6 +32859,17 @@ func (self *NativeDialogInstance) Show() {
 	runtime.KeepAlive(self)
 }
 
+// ConnectResponse connects the provided callback to the "response" signal
+//
+// Emitted when the user responds to the dialog.
+// 
+// When this is called the dialog has been hidden.
+// 
+// If you call [method@Gtk.NativeDialog.hide] before the user
+// responds to the dialog this signal will not be emitted.
+func (o *NativeDialogInstance) ConnectResponse(fn func(NativeDialog, int)) gobject.SignalHandle {
+	return o.Connect("response", fn)
+}
 // NoSelectionInstance is the instance type used by all types extending GtkNoSelection. It is used internally by the bindings. Users should use the interface [NoSelection] instead.
 type NoSelectionInstance struct {
 	_ [0]func() // equal guard
@@ -34501,6 +34937,14 @@ type RecentManager interface {
 	// Removes a resource pointed by @uri from the recently used resources
 	// list handled by a recent manager.
 	RemoveItem(string) (bool, error)
+	// ConnectChanged connects the provided callback to the "changed" signal
+	//
+	// Emitted when the current recently used resources manager changes
+	// its contents.
+	// 
+	// This can happen either by calling [method@Gtk.RecentManager.add_item]
+	// or by another application.
+	ConnectChanged(func(RecentManager)) gobject.SignalHandle
 }
 
 func unsafeWrapRecentManager(base *gobject.ObjectInstance) *RecentManagerInstance {
@@ -34870,6 +35314,16 @@ func (manager *RecentManagerInstance) RemoveItem(uri string) (bool, error) {
 	return goret, _goerr
 }
 
+// ConnectChanged connects the provided callback to the "changed" signal
+//
+// Emitted when the current recently used resources manager changes
+// its contents.
+// 
+// This can happen either by calling [method@Gtk.RecentManager.add_item]
+// or by another application.
+func (o *RecentManagerInstance) ConnectChanged(fn func(RecentManager)) gobject.SignalHandle {
+	return o.Connect("changed", fn)
+}
 // SelectionFilterModelInstance is the instance type used by all types extending GtkSelectionFilterModel. It is used internally by the bindings. Users should use the interface [SelectionFilterModel] instead.
 type SelectionFilterModelInstance struct {
 	_ [0]func() // equal guard
@@ -36306,6 +36760,47 @@ var _ SignalListItemFactory = (*SignalListItemFactoryInstance)(nil)
 type SignalListItemFactory interface {
 	ListItemFactory
 	upcastToGtkSignalListItemFactory() *SignalListItemFactoryInstance
+
+	// ConnectBind connects the provided callback to the "bind" signal
+	//
+	// Emitted when an object has been bound, for example when a
+	// new [property@Gtk.ListItem:item] has been set on a
+	// listitem and should be bound for use.
+	// 
+	// After this signal was emitted, the object might be shown in
+	// a [class@Gtk.ListView] or other widget.
+	// 
+	// The [signal@Gtk.SignalListItemFactory::unbind] signal is the
+	// opposite of this signal and can be used to undo everything done
+	// in this signal.
+	ConnectBind(func(SignalListItemFactory, gobject.Object)) gobject.SignalHandle
+	// ConnectSetup connects the provided callback to the "setup" signal
+	//
+	// Emitted when a new listitem has been created and needs to be setup for use.
+	// 
+	// It is the first signal emitted for every listitem.
+	// 
+	// The [signal@Gtk.SignalListItemFactory::teardown] signal is the opposite
+	// of this signal and can be used to undo everything done in this signal.
+	ConnectSetup(func(SignalListItemFactory, gobject.Object)) gobject.SignalHandle
+	// ConnectTeardown connects the provided callback to the "teardown" signal
+	//
+	// Emitted when an object is about to be destroyed.
+	// 
+	// It is the last signal ever emitted for this @object.
+	// 
+	// This signal is the opposite of the [signal@Gtk.SignalListItemFactory::setup]
+	// signal and should be used to undo everything done in that signal.
+	ConnectTeardown(func(SignalListItemFactory, gobject.Object)) gobject.SignalHandle
+	// ConnectUnbind connects the provided callback to the "unbind" signal
+	//
+	// Emitted when an object has been unbound from its item, for example when
+	// a listitem was removed from use in a list widget
+	// and its [property@Gtk.ListItem:item] is about to be unset.
+	// 
+	// This signal is the opposite of the [signal@Gtk.SignalListItemFactory::bind]
+	// signal and should be used to undo everything done in that signal.
+	ConnectUnbind(func(SignalListItemFactory, gobject.Object)) gobject.SignalHandle
 }
 
 func unsafeWrapSignalListItemFactory(base *gobject.ObjectInstance) *SignalListItemFactoryInstance {
@@ -36364,6 +36859,54 @@ func NewSignalListItemFactory() ListItemFactory {
 	return goret
 }
 
+// ConnectBind connects the provided callback to the "bind" signal
+//
+// Emitted when an object has been bound, for example when a
+// new [property@Gtk.ListItem:item] has been set on a
+// listitem and should be bound for use.
+// 
+// After this signal was emitted, the object might be shown in
+// a [class@Gtk.ListView] or other widget.
+// 
+// The [signal@Gtk.SignalListItemFactory::unbind] signal is the
+// opposite of this signal and can be used to undo everything done
+// in this signal.
+func (o *SignalListItemFactoryInstance) ConnectBind(fn func(SignalListItemFactory, gobject.Object)) gobject.SignalHandle {
+	return o.Connect("bind", fn)
+}
+// ConnectSetup connects the provided callback to the "setup" signal
+//
+// Emitted when a new listitem has been created and needs to be setup for use.
+// 
+// It is the first signal emitted for every listitem.
+// 
+// The [signal@Gtk.SignalListItemFactory::teardown] signal is the opposite
+// of this signal and can be used to undo everything done in this signal.
+func (o *SignalListItemFactoryInstance) ConnectSetup(fn func(SignalListItemFactory, gobject.Object)) gobject.SignalHandle {
+	return o.Connect("setup", fn)
+}
+// ConnectTeardown connects the provided callback to the "teardown" signal
+//
+// Emitted when an object is about to be destroyed.
+// 
+// It is the last signal ever emitted for this @object.
+// 
+// This signal is the opposite of the [signal@Gtk.SignalListItemFactory::setup]
+// signal and should be used to undo everything done in that signal.
+func (o *SignalListItemFactoryInstance) ConnectTeardown(fn func(SignalListItemFactory, gobject.Object)) gobject.SignalHandle {
+	return o.Connect("teardown", fn)
+}
+// ConnectUnbind connects the provided callback to the "unbind" signal
+//
+// Emitted when an object has been unbound from its item, for example when
+// a listitem was removed from use in a list widget
+// and its [property@Gtk.ListItem:item] is about to be unset.
+// 
+// This signal is the opposite of the [signal@Gtk.SignalListItemFactory::bind]
+// signal and should be used to undo everything done in that signal.
+func (o *SignalListItemFactoryInstance) ConnectUnbind(fn func(SignalListItemFactory, gobject.Object)) gobject.SignalHandle {
+	return o.Connect("unbind", fn)
+}
 // SingleSelectionInstance is the instance type used by all types extending GtkSingleSelection. It is used internally by the bindings. Users should use the interface [SingleSelection] instead.
 type SingleSelectionInstance struct {
 	_ [0]func() // equal guard
@@ -36420,15 +36963,6 @@ type SingleSelection interface {
 	// 
 	// If no item is selected, %GTK_INVALID_LIST_POSITION is returned.
 	GetSelected() uint
-	// GetSelectedItem wraps gtk_single_selection_get_selected_item
-	// The function returns the following values:
-	// 
-	// 	- goret unsafe.Pointer 
-	//
-	// Gets the selected item.
-	// 
-	// If no item is selected, %NULL is returned.
-	GetSelectedItem() unsafe.Pointer
 	// SetAutoselect wraps gtk_single_selection_set_autoselect
 	// 
 	// The function takes the following parameters:
@@ -36640,30 +37174,6 @@ func (self *SingleSelectionInstance) GetSelected() uint {
 	var goret uint
 
 	goret = uint(cret)
-
-	return goret
-}
-
-// GetSelectedItem wraps gtk_single_selection_get_selected_item
-// The function returns the following values:
-// 
-// 	- goret unsafe.Pointer 
-//
-// Gets the selected item.
-// 
-// If no item is selected, %NULL is returned.
-func (self *SingleSelectionInstance) GetSelectedItem() unsafe.Pointer {
-	var carg0 *C.GtkSingleSelection // in, none, converted
-	var cret  C.gpointer            // return, none, casted
-
-	carg0 = (*C.GtkSingleSelection)(UnsafeSingleSelectionToGlibNone(self))
-
-	cret = C.gtk_single_selection_get_selected_item(carg0)
-	runtime.KeepAlive(self)
-
-	var goret unsafe.Pointer
-
-	goret = unsafe.Pointer(cret)
 
 	return goret
 }
@@ -39505,30 +40015,6 @@ type Sorter interface {
 	// This function is intended for implementers of `GtkSorter`
 	// subclasses and should not be called from other functions.
 	Changed(SorterChange)
-	// Compare wraps gtk_sorter_compare
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- item1 unsafe.Pointer: first item to compare 
-	// 	- item2 unsafe.Pointer: second item to compare 
-	// 
-	// The function returns the following values:
-	// 
-	// 	- goret Ordering 
-	//
-	// Compares two given items according to the sort order implemented
-	// by the sorter.
-	// 
-	// Sorters implement a partial order:
-	// 
-	// * It is reflexive, ie a = a
-	// * It is antisymmetric, ie if a &lt; b and b &lt; a, then a = b
-	// * It is transitive, ie given any 3 items with a ≤ b and b ≤ c,
-	//   then a ≤ c
-	// 
-	// The sorter may signal it conforms to additional constraints
-	// via the return value of [method@Gtk.Sorter.get_order].
-	Compare(unsafe.Pointer, unsafe.Pointer) Ordering
 	// GetOrder wraps gtk_sorter_get_order
 	// The function returns the following values:
 	// 
@@ -39541,6 +40027,19 @@ type Sorter interface {
 	// 
 	// This function is intended to allow optimizations.
 	GetOrder() SorterOrder
+	// ConnectChanged connects the provided callback to the "changed" signal
+	//
+	// Emitted whenever the sorter changed.
+	// 
+	// Users of the sorter should then update the sort order
+	// again via gtk_sorter_compare().
+	// 
+	// [class@Gtk.SortListModel] handles this signal automatically.
+	// 
+	// Depending on the @change parameter, it may be possible to update
+	// the sort order without a full resorting. Refer to the
+	// [enum@Gtk.SorterChange] documentation for details.
+	ConnectChanged(func(Sorter, SorterChange)) gobject.SignalHandle
 }
 
 func unsafeWrapSorter(base *gobject.ObjectInstance) *SorterInstance {
@@ -39607,51 +40106,6 @@ func (self *SorterInstance) Changed(change SorterChange) {
 	runtime.KeepAlive(change)
 }
 
-// Compare wraps gtk_sorter_compare
-// 
-// The function takes the following parameters:
-// 
-// 	- item1 unsafe.Pointer: first item to compare 
-// 	- item2 unsafe.Pointer: second item to compare 
-// 
-// The function returns the following values:
-// 
-// 	- goret Ordering 
-//
-// Compares two given items according to the sort order implemented
-// by the sorter.
-// 
-// Sorters implement a partial order:
-// 
-// * It is reflexive, ie a = a
-// * It is antisymmetric, ie if a &lt; b and b &lt; a, then a = b
-// * It is transitive, ie given any 3 items with a ≤ b and b ≤ c,
-//   then a ≤ c
-// 
-// The sorter may signal it conforms to additional constraints
-// via the return value of [method@Gtk.Sorter.get_order].
-func (self *SorterInstance) Compare(item1 unsafe.Pointer, item2 unsafe.Pointer) Ordering {
-	var carg0 *C.GtkSorter  // in, none, converted
-	var carg1 C.gpointer    // in, none, casted
-	var carg2 C.gpointer    // in, none, casted
-	var cret  C.GtkOrdering // return, none, casted
-
-	carg0 = (*C.GtkSorter)(UnsafeSorterToGlibNone(self))
-	carg1 = C.gpointer(item1)
-	carg2 = C.gpointer(item2)
-
-	cret = C.gtk_sorter_compare(carg0, carg1, carg2)
-	runtime.KeepAlive(self)
-	runtime.KeepAlive(item1)
-	runtime.KeepAlive(item2)
-
-	var goret Ordering
-
-	goret = Ordering(cret)
-
-	return goret
-}
-
 // GetOrder wraps gtk_sorter_get_order
 // The function returns the following values:
 // 
@@ -39679,6 +40133,21 @@ func (self *SorterInstance) GetOrder() SorterOrder {
 	return goret
 }
 
+// ConnectChanged connects the provided callback to the "changed" signal
+//
+// Emitted whenever the sorter changed.
+// 
+// Users of the sorter should then update the sort order
+// again via gtk_sorter_compare().
+// 
+// [class@Gtk.SortListModel] handles this signal automatically.
+// 
+// Depending on the @change parameter, it may be possible to update
+// the sort order without a full resorting. Refer to the
+// [enum@Gtk.SorterChange] documentation for details.
+func (o *SorterInstance) ConnectChanged(fn func(Sorter, SorterChange)) gobject.SignalHandle {
+	return o.Connect("changed", fn)
+}
 // StackPageInstance is the instance type used by all types extending GtkStackPage. It is used internally by the bindings. Users should use the interface [StackPage] instead.
 type StackPageInstance struct {
 	_ [0]func() // equal guard
@@ -40521,23 +40990,23 @@ func UnsafeStringListToGlibFull(c StringList) unsafe.Pointer {
 // 
 // The function takes the following parameters:
 // 
-// 	- strings []string (nullable): The strings to put in the model 
+// 	- _strings []string (nullable): The strings to put in the model 
 // 
 // The function returns the following values:
 // 
 // 	- goret StringList 
 //
 // Creates a new `GtkStringList` with the given @strings.
-func NewStringList(strings []string) StringList {
+func NewStringList(_strings []string) StringList {
 	var carg1 **C.char         // in, transfer: none, C Pointers: 2, Name: array[utf8], nullable, array (inner: *typesystem.StringPrimitive, zero-terminated)
 	var cret  *C.GtkStringList // return, full, converted
 
-	_ = strings
+	_ = _strings
 	_ = carg1
 	panic("unimplemented conversion of []string (const char* const*)")
 
 	cret = C.gtk_string_list_new(carg1)
-	runtime.KeepAlive(strings)
+	runtime.KeepAlive(_strings)
 
 	var goret StringList
 
@@ -42021,6 +42490,158 @@ type TextBuffer interface {
 	//
 	// Undoes the last undoable action on the buffer, if there is one.
 	Undo()
+	// ConnectApplyTag connects the provided callback to the "apply-tag" signal
+	//
+	// Emitted to apply a tag to a range of text in a `GtkTextBuffer`.
+	// 
+	// Applying actually occurs in the default handler.
+	// 
+	// Note that if your handler runs before the default handler
+	// it must not invalidate the @start and @end iters (or has to
+	// revalidate them).
+	// 
+	// See also:
+	// [method@Gtk.TextBuffer.apply_tag],
+	// [method@Gtk.TextBuffer.insert_with_tags],
+	// [method@Gtk.TextBuffer.insert_range].
+	ConnectApplyTag(func(TextBuffer, TextTag, TextIter, TextIter)) gobject.SignalHandle
+	// ConnectBeginUserAction connects the provided callback to the "begin-user-action" signal
+	//
+	// Emitted at the beginning of a single user-visible
+	// operation on a `GtkTextBuffer`.
+	// 
+	// See also:
+	// [method@Gtk.TextBuffer.begin_user_action],
+	// [method@Gtk.TextBuffer.insert_interactive],
+	// [method@Gtk.TextBuffer.insert_range_interactive],
+	// [method@Gtk.TextBuffer.delete_interactive],
+	// [method@Gtk.TextBuffer.backspace],
+	// [method@Gtk.TextBuffer.delete_selection].
+	ConnectBeginUserAction(func(TextBuffer)) gobject.SignalHandle
+	// ConnectChanged connects the provided callback to the "changed" signal
+	//
+	// Emitted when the content of a `GtkTextBuffer` has changed.
+	ConnectChanged(func(TextBuffer)) gobject.SignalHandle
+	// ConnectDeleteRange connects the provided callback to the "delete-range" signal
+	//
+	// Emitted to delete a range from a `GtkTextBuffer`.
+	// 
+	// Note that if your handler runs before the default handler
+	// it must not invalidate the @start and @end iters (or has
+	// to revalidate them). The default signal handler revalidates
+	// the @start and @end iters to both point to the location
+	// where text was deleted. Handlers which run after the default
+	// handler (see g_signal_connect_after()) do not have access to
+	// the deleted text.
+	// 
+	// See also: [method@Gtk.TextBuffer.delete].
+	ConnectDeleteRange(func(TextBuffer, TextIter, TextIter)) gobject.SignalHandle
+	// ConnectEndUserAction connects the provided callback to the "end-user-action" signal
+	//
+	// Emitted at the end of a single user-visible
+	// operation on the `GtkTextBuffer`.
+	// 
+	// See also:
+	// [method@Gtk.TextBuffer.end_user_action],
+	// [method@Gtk.TextBuffer.insert_interactive],
+	// [method@Gtk.TextBuffer.insert_range_interactive],
+	// [method@Gtk.TextBuffer.delete_interactive],
+	// [method@Gtk.TextBuffer.backspace],
+	// [method@Gtk.TextBuffer.delete_selection],
+	// [method@Gtk.TextBuffer.backspace].
+	ConnectEndUserAction(func(TextBuffer)) gobject.SignalHandle
+	// ConnectInsertChildAnchor connects the provided callback to the "insert-child-anchor" signal
+	//
+	// Emitted to insert a `GtkTextChildAnchor` in a `GtkTextBuffer`.
+	// 
+	// Insertion actually occurs in the default handler.
+	// 
+	// Note that if your handler runs before the default handler
+	// it must not invalidate the @location iter (or has to
+	// revalidate it). The default signal handler revalidates
+	// it to be placed after the inserted @anchor.
+	// 
+	// See also: [method@Gtk.TextBuffer.insert_child_anchor].
+	ConnectInsertChildAnchor(func(TextBuffer, TextIter, TextChildAnchor)) gobject.SignalHandle
+	// ConnectInsertPaintable connects the provided callback to the "insert-paintable" signal
+	//
+	// Emitted to insert a `GdkPaintable` in a `GtkTextBuffer`.
+	// 
+	// Insertion actually occurs in the default handler.
+	// 
+	// Note that if your handler runs before the default handler
+	// it must not invalidate the @location iter (or has to
+	// revalidate it). The default signal handler revalidates
+	// it to be placed after the inserted @paintable.
+	// 
+	// See also: [method@Gtk.TextBuffer.insert_paintable].
+	ConnectInsertPaintable(func(TextBuffer, TextIter, gdk.Paintable)) gobject.SignalHandle
+	// ConnectInsertText connects the provided callback to the "insert-text" signal
+	//
+	// Emitted to insert text in a `GtkTextBuffer`.
+	// 
+	// Insertion actually occurs in the default handler.
+	// 
+	// Note that if your handler runs before the default handler
+	// it must not invalidate the @location iter (or has to
+	// revalidate it). The default signal handler revalidates
+	// it to point to the end of the inserted text.
+	// 
+	// See also: [method@Gtk.TextBuffer.insert],
+	// [method@Gtk.TextBuffer.insert_range].
+	ConnectInsertText(func(TextBuffer, TextIter, string, int)) gobject.SignalHandle
+	// ConnectMarkDeleted connects the provided callback to the "mark-deleted" signal
+	//
+	// Emitted as notification after a `GtkTextMark` is deleted.
+	// 
+	// See also: [method@Gtk.TextBuffer.delete_mark].
+	ConnectMarkDeleted(func(TextBuffer, TextMark)) gobject.SignalHandle
+	// ConnectMarkSet connects the provided callback to the "mark-set" signal
+	//
+	// Emitted as notification after a `GtkTextMark` is set.
+	// 
+	// See also:
+	// [method@Gtk.TextBuffer.create_mark],
+	// [method@Gtk.TextBuffer.move_mark].
+	ConnectMarkSet(func(TextBuffer, TextIter, TextMark)) gobject.SignalHandle
+	// ConnectModifiedChanged connects the provided callback to the "modified-changed" signal
+	//
+	// Emitted when the modified bit of a `GtkTextBuffer` flips.
+	// 
+	// See also: [method@Gtk.TextBuffer.set_modified].
+	ConnectModifiedChanged(func(TextBuffer)) gobject.SignalHandle
+	// ConnectPasteDone connects the provided callback to the "paste-done" signal
+	//
+	// Emitted after paste operation has been completed.
+	// 
+	// This is useful to properly scroll the view to the end
+	// of the pasted text. See [method@Gtk.TextBuffer.paste_clipboard]
+	// for more details.
+	ConnectPasteDone(func(TextBuffer, gdk.Clipboard)) gobject.SignalHandle
+	// ConnectRedo connects the provided callback to the "redo" signal
+	//
+	// Emitted when a request has been made to redo the
+	// previously undone operation.
+	ConnectRedo(func(TextBuffer)) gobject.SignalHandle
+	// ConnectRemoveTag connects the provided callback to the "remove-tag" signal
+	//
+	// Emitted to remove all occurrences of @tag from a range
+	// of text in a `GtkTextBuffer`.
+	// 
+	// Removal actually occurs in the default handler.
+	// 
+	// Note that if your handler runs before the default handler
+	// it must not invalidate the @start and @end iters (or has
+	// to revalidate them).
+	// 
+	// See also: [method@Gtk.TextBuffer.remove_tag].
+	ConnectRemoveTag(func(TextBuffer, TextTag, TextIter, TextIter)) gobject.SignalHandle
+	// ConnectUndo connects the provided callback to the "undo" signal
+	//
+	// Emitted when a request has been made to undo the
+	// previous operation or set of operations that have
+	// been grouped together.
+	ConnectUndo(func(TextBuffer)) gobject.SignalHandle
 }
 
 func unsafeWrapTextBuffer(base *gobject.ObjectInstance) *TextBufferInstance {
@@ -44305,6 +44926,188 @@ func (buffer *TextBufferInstance) Undo() {
 	runtime.KeepAlive(buffer)
 }
 
+// ConnectApplyTag connects the provided callback to the "apply-tag" signal
+//
+// Emitted to apply a tag to a range of text in a `GtkTextBuffer`.
+// 
+// Applying actually occurs in the default handler.
+// 
+// Note that if your handler runs before the default handler
+// it must not invalidate the @start and @end iters (or has to
+// revalidate them).
+// 
+// See also:
+// [method@Gtk.TextBuffer.apply_tag],
+// [method@Gtk.TextBuffer.insert_with_tags],
+// [method@Gtk.TextBuffer.insert_range].
+func (o *TextBufferInstance) ConnectApplyTag(fn func(TextBuffer, TextTag, TextIter, TextIter)) gobject.SignalHandle {
+	return o.Connect("apply-tag", fn)
+}
+// ConnectBeginUserAction connects the provided callback to the "begin-user-action" signal
+//
+// Emitted at the beginning of a single user-visible
+// operation on a `GtkTextBuffer`.
+// 
+// See also:
+// [method@Gtk.TextBuffer.begin_user_action],
+// [method@Gtk.TextBuffer.insert_interactive],
+// [method@Gtk.TextBuffer.insert_range_interactive],
+// [method@Gtk.TextBuffer.delete_interactive],
+// [method@Gtk.TextBuffer.backspace],
+// [method@Gtk.TextBuffer.delete_selection].
+func (o *TextBufferInstance) ConnectBeginUserAction(fn func(TextBuffer)) gobject.SignalHandle {
+	return o.Connect("begin-user-action", fn)
+}
+// ConnectChanged connects the provided callback to the "changed" signal
+//
+// Emitted when the content of a `GtkTextBuffer` has changed.
+func (o *TextBufferInstance) ConnectChanged(fn func(TextBuffer)) gobject.SignalHandle {
+	return o.Connect("changed", fn)
+}
+// ConnectDeleteRange connects the provided callback to the "delete-range" signal
+//
+// Emitted to delete a range from a `GtkTextBuffer`.
+// 
+// Note that if your handler runs before the default handler
+// it must not invalidate the @start and @end iters (or has
+// to revalidate them). The default signal handler revalidates
+// the @start and @end iters to both point to the location
+// where text was deleted. Handlers which run after the default
+// handler (see g_signal_connect_after()) do not have access to
+// the deleted text.
+// 
+// See also: [method@Gtk.TextBuffer.delete].
+func (o *TextBufferInstance) ConnectDeleteRange(fn func(TextBuffer, TextIter, TextIter)) gobject.SignalHandle {
+	return o.Connect("delete-range", fn)
+}
+// ConnectEndUserAction connects the provided callback to the "end-user-action" signal
+//
+// Emitted at the end of a single user-visible
+// operation on the `GtkTextBuffer`.
+// 
+// See also:
+// [method@Gtk.TextBuffer.end_user_action],
+// [method@Gtk.TextBuffer.insert_interactive],
+// [method@Gtk.TextBuffer.insert_range_interactive],
+// [method@Gtk.TextBuffer.delete_interactive],
+// [method@Gtk.TextBuffer.backspace],
+// [method@Gtk.TextBuffer.delete_selection],
+// [method@Gtk.TextBuffer.backspace].
+func (o *TextBufferInstance) ConnectEndUserAction(fn func(TextBuffer)) gobject.SignalHandle {
+	return o.Connect("end-user-action", fn)
+}
+// ConnectInsertChildAnchor connects the provided callback to the "insert-child-anchor" signal
+//
+// Emitted to insert a `GtkTextChildAnchor` in a `GtkTextBuffer`.
+// 
+// Insertion actually occurs in the default handler.
+// 
+// Note that if your handler runs before the default handler
+// it must not invalidate the @location iter (or has to
+// revalidate it). The default signal handler revalidates
+// it to be placed after the inserted @anchor.
+// 
+// See also: [method@Gtk.TextBuffer.insert_child_anchor].
+func (o *TextBufferInstance) ConnectInsertChildAnchor(fn func(TextBuffer, TextIter, TextChildAnchor)) gobject.SignalHandle {
+	return o.Connect("insert-child-anchor", fn)
+}
+// ConnectInsertPaintable connects the provided callback to the "insert-paintable" signal
+//
+// Emitted to insert a `GdkPaintable` in a `GtkTextBuffer`.
+// 
+// Insertion actually occurs in the default handler.
+// 
+// Note that if your handler runs before the default handler
+// it must not invalidate the @location iter (or has to
+// revalidate it). The default signal handler revalidates
+// it to be placed after the inserted @paintable.
+// 
+// See also: [method@Gtk.TextBuffer.insert_paintable].
+func (o *TextBufferInstance) ConnectInsertPaintable(fn func(TextBuffer, TextIter, gdk.Paintable)) gobject.SignalHandle {
+	return o.Connect("insert-paintable", fn)
+}
+// ConnectInsertText connects the provided callback to the "insert-text" signal
+//
+// Emitted to insert text in a `GtkTextBuffer`.
+// 
+// Insertion actually occurs in the default handler.
+// 
+// Note that if your handler runs before the default handler
+// it must not invalidate the @location iter (or has to
+// revalidate it). The default signal handler revalidates
+// it to point to the end of the inserted text.
+// 
+// See also: [method@Gtk.TextBuffer.insert],
+// [method@Gtk.TextBuffer.insert_range].
+func (o *TextBufferInstance) ConnectInsertText(fn func(TextBuffer, TextIter, string, int)) gobject.SignalHandle {
+	return o.Connect("insert-text", fn)
+}
+// ConnectMarkDeleted connects the provided callback to the "mark-deleted" signal
+//
+// Emitted as notification after a `GtkTextMark` is deleted.
+// 
+// See also: [method@Gtk.TextBuffer.delete_mark].
+func (o *TextBufferInstance) ConnectMarkDeleted(fn func(TextBuffer, TextMark)) gobject.SignalHandle {
+	return o.Connect("mark-deleted", fn)
+}
+// ConnectMarkSet connects the provided callback to the "mark-set" signal
+//
+// Emitted as notification after a `GtkTextMark` is set.
+// 
+// See also:
+// [method@Gtk.TextBuffer.create_mark],
+// [method@Gtk.TextBuffer.move_mark].
+func (o *TextBufferInstance) ConnectMarkSet(fn func(TextBuffer, TextIter, TextMark)) gobject.SignalHandle {
+	return o.Connect("mark-set", fn)
+}
+// ConnectModifiedChanged connects the provided callback to the "modified-changed" signal
+//
+// Emitted when the modified bit of a `GtkTextBuffer` flips.
+// 
+// See also: [method@Gtk.TextBuffer.set_modified].
+func (o *TextBufferInstance) ConnectModifiedChanged(fn func(TextBuffer)) gobject.SignalHandle {
+	return o.Connect("modified-changed", fn)
+}
+// ConnectPasteDone connects the provided callback to the "paste-done" signal
+//
+// Emitted after paste operation has been completed.
+// 
+// This is useful to properly scroll the view to the end
+// of the pasted text. See [method@Gtk.TextBuffer.paste_clipboard]
+// for more details.
+func (o *TextBufferInstance) ConnectPasteDone(fn func(TextBuffer, gdk.Clipboard)) gobject.SignalHandle {
+	return o.Connect("paste-done", fn)
+}
+// ConnectRedo connects the provided callback to the "redo" signal
+//
+// Emitted when a request has been made to redo the
+// previously undone operation.
+func (o *TextBufferInstance) ConnectRedo(fn func(TextBuffer)) gobject.SignalHandle {
+	return o.Connect("redo", fn)
+}
+// ConnectRemoveTag connects the provided callback to the "remove-tag" signal
+//
+// Emitted to remove all occurrences of @tag from a range
+// of text in a `GtkTextBuffer`.
+// 
+// Removal actually occurs in the default handler.
+// 
+// Note that if your handler runs before the default handler
+// it must not invalidate the @start and @end iters (or has
+// to revalidate them).
+// 
+// See also: [method@Gtk.TextBuffer.remove_tag].
+func (o *TextBufferInstance) ConnectRemoveTag(fn func(TextBuffer, TextTag, TextIter, TextIter)) gobject.SignalHandle {
+	return o.Connect("remove-tag", fn)
+}
+// ConnectUndo connects the provided callback to the "undo" signal
+//
+// Emitted when a request has been made to undo the
+// previous operation or set of operations that have
+// been grouped together.
+func (o *TextBufferInstance) ConnectUndo(fn func(TextBuffer)) gobject.SignalHandle {
+	return o.Connect("undo", fn)
+}
 // TextChildAnchorInstance is the instance type used by all types extending GtkTextChildAnchor. It is used internally by the bindings. Users should use the interface [TextChildAnchor] instead.
 type TextChildAnchorInstance struct {
 	_ [0]func() // equal guard
@@ -45151,6 +45954,21 @@ type TextTagTable interface {
 	// removed, so the tag will end up destroyed if you don’t have
 	// a reference to it.
 	Remove(TextTag)
+	// ConnectTagAdded connects the provided callback to the "tag-added" signal
+	//
+	// Emitted every time a new tag is added in the `GtkTextTagTable`.
+	ConnectTagAdded(func(TextTagTable, TextTag)) gobject.SignalHandle
+	// ConnectTagChanged connects the provided callback to the "tag-changed" signal
+	//
+	// Emitted every time a tag in the `GtkTextTagTable` changes.
+	ConnectTagChanged(func(TextTagTable, TextTag, bool)) gobject.SignalHandle
+	// ConnectTagRemoved connects the provided callback to the "tag-removed" signal
+	//
+	// Emitted every time a tag is removed from the `GtkTextTagTable`.
+	// 
+	// The @tag is still valid by the time the signal is emitted, but
+	// it is not associated with a tag table any more.
+	ConnectTagRemoved(func(TextTagTable, TextTag)) gobject.SignalHandle
 }
 
 func unsafeWrapTextTagTable(base *gobject.ObjectInstance) *TextTagTableInstance {
@@ -45346,6 +46164,27 @@ func (table *TextTagTableInstance) Remove(tag TextTag) {
 	runtime.KeepAlive(tag)
 }
 
+// ConnectTagAdded connects the provided callback to the "tag-added" signal
+//
+// Emitted every time a new tag is added in the `GtkTextTagTable`.
+func (o *TextTagTableInstance) ConnectTagAdded(fn func(TextTagTable, TextTag)) gobject.SignalHandle {
+	return o.Connect("tag-added", fn)
+}
+// ConnectTagChanged connects the provided callback to the "tag-changed" signal
+//
+// Emitted every time a tag in the `GtkTextTagTable` changes.
+func (o *TextTagTableInstance) ConnectTagChanged(fn func(TextTagTable, TextTag, bool)) gobject.SignalHandle {
+	return o.Connect("tag-changed", fn)
+}
+// ConnectTagRemoved connects the provided callback to the "tag-removed" signal
+//
+// Emitted every time a tag is removed from the `GtkTextTagTable`.
+// 
+// The @tag is still valid by the time the signal is emitted, but
+// it is not associated with a tag table any more.
+func (o *TextTagTableInstance) ConnectTagRemoved(fn func(TextTagTable, TextTag)) gobject.SignalHandle {
+	return o.Connect("tag-removed", fn)
+}
 // TooltipInstance is the instance type used by all types extending GtkTooltip. It is used internally by the bindings. Users should use the interface [Tooltip] instead.
 type TooltipInstance struct {
 	_ [0]func() // equal guard
@@ -45822,55 +46661,6 @@ func UnsafeTreeListModelToGlibFull(c TreeListModel) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewTreeListModel wraps gtk_tree_list_model_new
-// 
-// The function takes the following parameters:
-// 
-// 	- root gio.ListModel: The `GListModel` to use as root 
-// 	- passthrough bool: %TRUE to pass through items from the models 
-// 	- autoexpand bool: %TRUE to set the autoexpand property and expand the @root model 
-// 	- createFunc TreeListModelCreateModelFunc: function to
-//   call to create the `GListModel` for the children of an item 
-// 
-// The function returns the following values:
-// 
-// 	- goret TreeListModel 
-//
-// Creates a new empty `GtkTreeListModel` displaying @root
-// with all rows collapsed.
-func NewTreeListModel(root gio.ListModel, passthrough bool, autoexpand bool, createFunc TreeListModelCreateModelFunc) TreeListModel {
-	var carg1 *C.GListModel                     // in, full, converted
-	var carg2 C.gboolean                        // in
-	var carg3 C.gboolean                        // in
-	var carg4 C.GtkTreeListModelCreateModelFunc // callback, scope: notified, closure: carg5, destroy: carg6
-	var carg5 C.gpointer                        // implicit
-	var carg6 C.GDestroyNotify                  // implicit
-	var cret  *C.GtkTreeListModel               // return, full, converted
-
-	carg1 = (*C.GListModel)(gio.UnsafeListModelToGlibFull(root))
-	if passthrough {
-		carg2 = C.TRUE
-	}
-	if autoexpand {
-		carg3 = C.TRUE
-	}
-	carg4 = (*[0]byte)(C._gotk4_gtk4_TreeListModelCreateModelFunc)
-	carg5 = C.gpointer(userdata.Register(createFunc))
-	carg6 = (C.GDestroyNotify)((*[0]byte)(C.destroyUserdata))
-
-	cret = C.gtk_tree_list_model_new(carg1, carg2, carg3, carg4, carg5, carg6)
-	runtime.KeepAlive(root)
-	runtime.KeepAlive(passthrough)
-	runtime.KeepAlive(autoexpand)
-	runtime.KeepAlive(createFunc)
-
-	var goret TreeListModel
-
-	goret = UnsafeTreeListModelFromGlibFull(unsafe.Pointer(cret))
-
-	return goret
-}
-
 // GetAutoexpand wraps gtk_tree_list_model_get_autoexpand
 // The function returns the following values:
 // 
@@ -46132,13 +46922,6 @@ type TreeListRow interface {
 	//
 	// Gets if a row is currently expanded.
 	GetExpanded() bool
-	// GetItem wraps gtk_tree_list_row_get_item
-	// The function returns the following values:
-	// 
-	// 	- goret unsafe.Pointer 
-	//
-	// Gets the item corresponding to this row,
-	GetItem() unsafe.Pointer
 	// GetParent wraps gtk_tree_list_row_get_parent
 	// The function returns the following values:
 	// 
@@ -46335,28 +47118,6 @@ func (self *TreeListRowInstance) GetExpanded() bool {
 	if cret != 0 {
 		goret = true
 	}
-
-	return goret
-}
-
-// GetItem wraps gtk_tree_list_row_get_item
-// The function returns the following values:
-// 
-// 	- goret unsafe.Pointer 
-//
-// Gets the item corresponding to this row,
-func (self *TreeListRowInstance) GetItem() unsafe.Pointer {
-	var carg0 *C.GtkTreeListRow // in, none, converted
-	var cret  C.gpointer        // return, full, casted
-
-	carg0 = (*C.GtkTreeListRow)(UnsafeTreeListRowToGlibNone(self))
-
-	cret = C.gtk_tree_list_row_get_item(carg0)
-	runtime.KeepAlive(self)
-
-	var goret unsafe.Pointer
-
-	goret = unsafe.Pointer(cret)
 
 	return goret
 }
@@ -49377,6 +50138,108 @@ type Widget interface {
 	// 
 	// This function is for use in widget implementations.
 	UnsetStateFlags(StateFlags)
+	// ConnectDestroy connects the provided callback to the "destroy" signal
+	//
+	// Signals that all holders of a reference to the widget should release
+	// the reference that they hold.
+	// 
+	// May result in finalization of the widget if all references are released.
+	// 
+	// This signal is not suitable for saving widget state.
+	ConnectDestroy(func(Widget)) gobject.SignalHandle
+	// ConnectDirectionChanged connects the provided callback to the "direction-changed" signal
+	//
+	// Emitted when the text direction of a widget changes.
+	ConnectDirectionChanged(func(Widget, TextDirection)) gobject.SignalHandle
+	// ConnectHide connects the provided callback to the "hide" signal
+	//
+	// Emitted when @widget is hidden.
+	ConnectHide(func(Widget)) gobject.SignalHandle
+	// ConnectKeynavFailed connects the provided callback to the "keynav-failed" signal
+	//
+	// Emitted if keyboard navigation fails.
+	// 
+	// See [method@Gtk.Widget.keynav_failed] for details.
+	ConnectKeynavFailed(func(Widget, DirectionType) bool) gobject.SignalHandle
+	// ConnectMap connects the provided callback to the "map" signal
+	//
+	// Emitted when @widget is going to be mapped.
+	// 
+	// A widget is mapped when the widget is visible (which is controlled with
+	// [property@Gtk.Widget:visible]) and all its parents up to the toplevel widget
+	// are also visible.
+	// 
+	// The ::map signal can be used to determine whether a widget will be drawn,
+	// for instance it can resume an animation that was stopped during the
+	// emission of [signal@Gtk.Widget::unmap].
+	ConnectMap(func(Widget)) gobject.SignalHandle
+	// ConnectMnemonicActivate connects the provided callback to the "mnemonic-activate" signal
+	//
+	// Emitted when a widget is activated via a mnemonic.
+	// 
+	// The default handler for this signal activates @widget if @group_cycling
+	// is %FALSE, or just makes @widget grab focus if @group_cycling is %TRUE.
+	ConnectMnemonicActivate(func(Widget, bool) bool) gobject.SignalHandle
+	// EmitMoveFocus emits the "move-focus" signal
+	//
+	// Emitted when the focus is moved.
+	// 
+	// The ::move-focus signal is a [keybinding signal](class.SignalAction.html).
+	// 
+	// The default bindings for this signal are &lt;kbd&gt;Tab&lt;/kbd&gt; to move forward,
+	// and &lt;kbd&gt;Shift&lt;/kbd&gt;+&lt;kbd&gt;Tab&lt;/kbd&gt; to move backward.
+	EmitMoveFocus(DirectionType)
+	// ConnectQueryTooltip connects the provided callback to the "query-tooltip" signal
+	//
+	// Emitted when the widget’s tooltip is about to be shown.
+	// 
+	// This happens when the [property@Gtk.Widget:has-tooltip] property
+	// is %TRUE and the hover timeout has expired with the cursor hovering
+	// "above" @widget; or emitted when @widget got focus in keyboard mode.
+	// 
+	// Using the given coordinates, the signal handler should determine
+	// whether a tooltip should be shown for @widget. If this is the case
+	// %TRUE should be returned, %FALSE otherwise.  Note that if
+	// @keyboard_mode is %TRUE, the values of @x and @y are undefined and
+	// should not be used.
+	// 
+	// The signal handler is free to manipulate @tooltip with the therefore
+	// destined function calls.
+	ConnectQueryTooltip(func(Widget, int, int, bool, Tooltip) bool) gobject.SignalHandle
+	// ConnectRealize connects the provided callback to the "realize" signal
+	//
+	// Emitted when @widget is associated with a `GdkSurface`.
+	// 
+	// This means that [method@Gtk.Widget.realize] has been called
+	// or the widget has been mapped (that is, it is going to be drawn).
+	ConnectRealize(func(Widget)) gobject.SignalHandle
+	// ConnectShow connects the provided callback to the "show" signal
+	//
+	// Emitted when @widget is shown.
+	ConnectShow(func(Widget)) gobject.SignalHandle
+	// ConnectStateFlagsChanged connects the provided callback to the "state-flags-changed" signal
+	//
+	// Emitted when the widget state changes.
+	// 
+	// See [method@Gtk.Widget.get_state_flags].
+	ConnectStateFlagsChanged(func(Widget, StateFlags)) gobject.SignalHandle
+	// ConnectUnmap connects the provided callback to the "unmap" signal
+	//
+	// Emitted when @widget is going to be unmapped.
+	// 
+	// A widget is unmapped when either it or any of its parents up to the
+	// toplevel widget have been set as hidden.
+	// 
+	// As ::unmap indicates that a widget will not be shown any longer,
+	// it can be used to, for example, stop an animation on the widget.
+	ConnectUnmap(func(Widget)) gobject.SignalHandle
+	// ConnectUnrealize connects the provided callback to the "unrealize" signal
+	//
+	// Emitted when the `GdkSurface` associated with @widget is destroyed.
+	// 
+	// This means that [method@Gtk.Widget.unrealize] has been called
+	// or the widget has been unmapped (that is, it is going to be hidden).
+	ConnectUnrealize(func(Widget)) gobject.SignalHandle
 }
 
 func unsafeWrapWidget(base *gobject.ObjectInstance) *WidgetInstance {
@@ -53756,6 +54619,134 @@ func (widget *WidgetInstance) UnsetStateFlags(flags StateFlags) {
 	runtime.KeepAlive(flags)
 }
 
+// ConnectDestroy connects the provided callback to the "destroy" signal
+//
+// Signals that all holders of a reference to the widget should release
+// the reference that they hold.
+// 
+// May result in finalization of the widget if all references are released.
+// 
+// This signal is not suitable for saving widget state.
+func (o *WidgetInstance) ConnectDestroy(fn func(Widget)) gobject.SignalHandle {
+	return o.Connect("destroy", fn)
+}
+// ConnectDirectionChanged connects the provided callback to the "direction-changed" signal
+//
+// Emitted when the text direction of a widget changes.
+func (o *WidgetInstance) ConnectDirectionChanged(fn func(Widget, TextDirection)) gobject.SignalHandle {
+	return o.Connect("direction-changed", fn)
+}
+// ConnectHide connects the provided callback to the "hide" signal
+//
+// Emitted when @widget is hidden.
+func (o *WidgetInstance) ConnectHide(fn func(Widget)) gobject.SignalHandle {
+	return o.Connect("hide", fn)
+}
+// ConnectKeynavFailed connects the provided callback to the "keynav-failed" signal
+//
+// Emitted if keyboard navigation fails.
+// 
+// See [method@Gtk.Widget.keynav_failed] for details.
+func (o *WidgetInstance) ConnectKeynavFailed(fn func(Widget, DirectionType) bool) gobject.SignalHandle {
+	return o.Connect("keynav-failed", fn)
+}
+// ConnectMap connects the provided callback to the "map" signal
+//
+// Emitted when @widget is going to be mapped.
+// 
+// A widget is mapped when the widget is visible (which is controlled with
+// [property@Gtk.Widget:visible]) and all its parents up to the toplevel widget
+// are also visible.
+// 
+// The ::map signal can be used to determine whether a widget will be drawn,
+// for instance it can resume an animation that was stopped during the
+// emission of [signal@Gtk.Widget::unmap].
+func (o *WidgetInstance) ConnectMap(fn func(Widget)) gobject.SignalHandle {
+	return o.Connect("map", fn)
+}
+// ConnectMnemonicActivate connects the provided callback to the "mnemonic-activate" signal
+//
+// Emitted when a widget is activated via a mnemonic.
+// 
+// The default handler for this signal activates @widget if @group_cycling
+// is %FALSE, or just makes @widget grab focus if @group_cycling is %TRUE.
+func (o *WidgetInstance) ConnectMnemonicActivate(fn func(Widget, bool) bool) gobject.SignalHandle {
+	return o.Connect("mnemonic-activate", fn)
+}
+// EmitMoveFocus emits the "move-focus" signal
+//
+// Emitted when the focus is moved.
+// 
+// The ::move-focus signal is a [keybinding signal](class.SignalAction.html).
+// 
+// The default bindings for this signal are &lt;kbd&gt;Tab&lt;/kbd&gt; to move forward,
+// and &lt;kbd&gt;Shift&lt;/kbd&gt;+&lt;kbd&gt;Tab&lt;/kbd&gt; to move backward.
+func (o *WidgetInstance) EmitMoveFocus(arg0 DirectionType) {
+	o.Emit("move-focus", arg0)
+}
+// ConnectQueryTooltip connects the provided callback to the "query-tooltip" signal
+//
+// Emitted when the widget’s tooltip is about to be shown.
+// 
+// This happens when the [property@Gtk.Widget:has-tooltip] property
+// is %TRUE and the hover timeout has expired with the cursor hovering
+// "above" @widget; or emitted when @widget got focus in keyboard mode.
+// 
+// Using the given coordinates, the signal handler should determine
+// whether a tooltip should be shown for @widget. If this is the case
+// %TRUE should be returned, %FALSE otherwise.  Note that if
+// @keyboard_mode is %TRUE, the values of @x and @y are undefined and
+// should not be used.
+// 
+// The signal handler is free to manipulate @tooltip with the therefore
+// destined function calls.
+func (o *WidgetInstance) ConnectQueryTooltip(fn func(Widget, int, int, bool, Tooltip) bool) gobject.SignalHandle {
+	return o.Connect("query-tooltip", fn)
+}
+// ConnectRealize connects the provided callback to the "realize" signal
+//
+// Emitted when @widget is associated with a `GdkSurface`.
+// 
+// This means that [method@Gtk.Widget.realize] has been called
+// or the widget has been mapped (that is, it is going to be drawn).
+func (o *WidgetInstance) ConnectRealize(fn func(Widget)) gobject.SignalHandle {
+	return o.Connect("realize", fn)
+}
+// ConnectShow connects the provided callback to the "show" signal
+//
+// Emitted when @widget is shown.
+func (o *WidgetInstance) ConnectShow(fn func(Widget)) gobject.SignalHandle {
+	return o.Connect("show", fn)
+}
+// ConnectStateFlagsChanged connects the provided callback to the "state-flags-changed" signal
+//
+// Emitted when the widget state changes.
+// 
+// See [method@Gtk.Widget.get_state_flags].
+func (o *WidgetInstance) ConnectStateFlagsChanged(fn func(Widget, StateFlags)) gobject.SignalHandle {
+	return o.Connect("state-flags-changed", fn)
+}
+// ConnectUnmap connects the provided callback to the "unmap" signal
+//
+// Emitted when @widget is going to be unmapped.
+// 
+// A widget is unmapped when either it or any of its parents up to the
+// toplevel widget have been set as hidden.
+// 
+// As ::unmap indicates that a widget will not be shown any longer,
+// it can be used to, for example, stop an animation on the widget.
+func (o *WidgetInstance) ConnectUnmap(fn func(Widget)) gobject.SignalHandle {
+	return o.Connect("unmap", fn)
+}
+// ConnectUnrealize connects the provided callback to the "unrealize" signal
+//
+// Emitted when the `GdkSurface` associated with @widget is destroyed.
+// 
+// This means that [method@Gtk.Widget.unrealize] has been called
+// or the widget has been unmapped (that is, it is going to be hidden).
+func (o *WidgetInstance) ConnectUnrealize(fn func(Widget)) gobject.SignalHandle {
+	return o.Connect("unrealize", fn)
+}
 // WidgetPaintableInstance is the instance type used by all types extending GtkWidgetPaintable. It is used internally by the bindings. Users should use the interface [WidgetPaintable] instead.
 type WidgetPaintableInstance struct {
 	_ [0]func() // equal guard
@@ -54653,6 +55644,47 @@ type Window interface {
 	// You can track result of this operation via the
 	// [property@Gdk.Toplevel:state] property.
 	Unminimize()
+	// EmitActivateDefault emits the "activate-default" signal
+	//
+	// Emitted when the user activates the default widget
+	// of @window.
+	// 
+	// This is a [keybinding signal](class.SignalAction.html).
+	// 
+	// The keybindings for this signal are all forms of the &lt;kbd&gt;Enter&lt;/kbd&gt; key.
+	EmitActivateDefault()
+	// EmitActivateFocus emits the "activate-focus" signal
+	//
+	// Emitted when the user activates the currently focused
+	// widget of @window.
+	// 
+	// This is a [keybinding signal](class.SignalAction.html).
+	// 
+	// The default binding for this signal is &lt;kbd&gt;␣&lt;/kbd&gt;.
+	EmitActivateFocus()
+	// ConnectCloseRequest connects the provided callback to the "close-request" signal
+	//
+	// Emitted when the user clicks on the close button of the window.
+	ConnectCloseRequest(func(Window) bool) gobject.SignalHandle
+	// EmitEnableDebugging emits the "enable-debugging" signal
+	//
+	// Emitted when the user enables or disables interactive debugging.
+	// 
+	// When @toggle is %TRUE, interactive debugging is toggled on or off,
+	// when it is %FALSE, the debugger will be pointed at the widget
+	// under the pointer.
+	// 
+	// This is a [keybinding signal](class.SignalAction.html).
+	// 
+	// The default bindings for this signal are
+	// &lt;kbd&gt;Ctrl&lt;/kbd&gt;+&lt;kbd&gt;Shift&lt;/kbd&gt;+&lt;kbd&gt;I&lt;/kbd&gt; and
+	// &lt;kbd&gt;Ctrl&lt;/kbd&gt;+&lt;kbd&gt;Shift&lt;/kbd&gt;+&lt;kbd&gt;D&lt;/kbd&gt;.
+	EmitEnableDebugging(bool) bool
+	// ConnectKeysChanged connects the provided callback to the "keys-changed" signal
+	//
+	// emitted when the set of accelerators or mnemonics that
+	// are associated with @window changes.
+	ConnectKeysChanged(func(Window)) gobject.SignalHandle
 }
 
 func unsafeWrapWindow(base *gobject.ObjectInstance) *WindowInstance {
@@ -56228,6 +57260,58 @@ func (window *WindowInstance) Unminimize() {
 	runtime.KeepAlive(window)
 }
 
+// EmitActivateDefault emits the "activate-default" signal
+//
+// Emitted when the user activates the default widget
+// of @window.
+// 
+// This is a [keybinding signal](class.SignalAction.html).
+// 
+// The keybindings for this signal are all forms of the &lt;kbd&gt;Enter&lt;/kbd&gt; key.
+func (o *WindowInstance) EmitActivateDefault() {
+	o.Emit("activate-default")
+}
+// EmitActivateFocus emits the "activate-focus" signal
+//
+// Emitted when the user activates the currently focused
+// widget of @window.
+// 
+// This is a [keybinding signal](class.SignalAction.html).
+// 
+// The default binding for this signal is &lt;kbd&gt;␣&lt;/kbd&gt;.
+func (o *WindowInstance) EmitActivateFocus() {
+	o.Emit("activate-focus")
+}
+// ConnectCloseRequest connects the provided callback to the "close-request" signal
+//
+// Emitted when the user clicks on the close button of the window.
+func (o *WindowInstance) ConnectCloseRequest(fn func(Window) bool) gobject.SignalHandle {
+	return o.Connect("close-request", fn)
+}
+// EmitEnableDebugging emits the "enable-debugging" signal
+//
+// Emitted when the user enables or disables interactive debugging.
+// 
+// When @toggle is %TRUE, interactive debugging is toggled on or off,
+// when it is %FALSE, the debugger will be pointed at the widget
+// under the pointer.
+// 
+// This is a [keybinding signal](class.SignalAction.html).
+// 
+// The default bindings for this signal are
+// &lt;kbd&gt;Ctrl&lt;/kbd&gt;+&lt;kbd&gt;Shift&lt;/kbd&gt;+&lt;kbd&gt;I&lt;/kbd&gt; and
+// &lt;kbd&gt;Ctrl&lt;/kbd&gt;+&lt;kbd&gt;Shift&lt;/kbd&gt;+&lt;kbd&gt;D&lt;/kbd&gt;.
+func (o *WindowInstance) EmitEnableDebugging(arg0 bool) bool {
+	return 
+	o.Emit("enable-debugging", arg0)
+}
+// ConnectKeysChanged connects the provided callback to the "keys-changed" signal
+//
+// emitted when the set of accelerators or mnemonics that
+// are associated with @window changes.
+func (o *WindowInstance) ConnectKeysChanged(fn func(Window)) gobject.SignalHandle {
+	return o.Connect("keys-changed", fn)
+}
 // WindowControlsInstance is the instance type used by all types extending GtkWindowControls. It is used internally by the bindings. Users should use the interface [WindowControls] instead.
 type WindowControlsInstance struct {
 	_ [0]func() // equal guard
@@ -57195,6 +58279,13 @@ type AboutDialog interface {
 	// Sets whether the license text in the about dialog should be
 	// automatically wrapped.
 	SetWrapLicense(bool)
+	// ConnectActivateLink connects the provided callback to the "activate-link" signal
+	//
+	// Emitted every time a URL is activated.
+	// 
+	// Applications may connect to it to override the default behaviour,
+	// which is to call [method@Gtk.FileLauncher.launch].
+	ConnectActivateLink(func(AboutDialog, string) bool) gobject.SignalHandle
 }
 
 func unsafeWrapAboutDialog(base *gobject.ObjectInstance) *AboutDialogInstance {
@@ -58043,6 +59134,15 @@ func (about *AboutDialogInstance) SetWrapLicense(wrapLicense bool) {
 	runtime.KeepAlive(wrapLicense)
 }
 
+// ConnectActivateLink connects the provided callback to the "activate-link" signal
+//
+// Emitted every time a URL is activated.
+// 
+// Applications may connect to it to override the default behaviour,
+// which is to call [method@Gtk.FileLauncher.launch].
+func (o *AboutDialogInstance) ConnectActivateLink(fn func(AboutDialog, string) bool) gobject.SignalHandle {
+	return o.Connect("activate-link", fn)
+}
 // ActionBarInstance is the instance type used by all types extending GtkActionBar. It is used internally by the bindings. Users should use the interface [ActionBar] instead.
 type ActionBarInstance struct {
 	_ [0]func() // equal guard
@@ -61002,6 +62102,20 @@ type Button interface {
 	// If true, an underline in the text of the button label indicates
 	// the next character should be used for the mnemonic accelerator key.
 	SetUseUnderline(bool)
+	// EmitActivate emits the "activate" signal
+	//
+	// Emitted to animate press then release.
+	// 
+	// This is an action signal. Applications should never connect
+	// to this signal, but use the [signal@Gtk.Button::clicked] signal.
+	// 
+	// The default bindings for this signal are all forms of the
+	// &lt;kbd&gt;␣&lt;/kbd&gt; and &lt;kbd&gt;Enter&lt;/kbd&gt; keys.
+	EmitActivate()
+	// EmitClicked emits the "clicked" signal
+	//
+	// Emitted when the button has been activated (pressed and released).
+	EmitClicked()
 }
 
 func unsafeWrapButton(base *gobject.ObjectInstance) *ButtonInstance {
@@ -61463,6 +62577,24 @@ func (button *ButtonInstance) SetUseUnderline(useUnderline bool) {
 	runtime.KeepAlive(useUnderline)
 }
 
+// EmitActivate emits the "activate" signal
+//
+// Emitted to animate press then release.
+// 
+// This is an action signal. Applications should never connect
+// to this signal, but use the [signal@Gtk.Button::clicked] signal.
+// 
+// The default bindings for this signal are all forms of the
+// &lt;kbd&gt;␣&lt;/kbd&gt; and &lt;kbd&gt;Enter&lt;/kbd&gt; keys.
+func (o *ButtonInstance) EmitActivate() {
+	o.Emit("activate")
+}
+// EmitClicked emits the "clicked" signal
+//
+// Emitted when the button has been activated (pressed and released).
+func (o *ButtonInstance) EmitClicked() {
+	o.Emit("clicked")
+}
 // CalendarInstance is the instance type used by all types extending GtkCalendar. It is used internally by the bindings. Users should use the interface [Calendar] instead.
 type CalendarInstance struct {
 	_ [0]func() // equal guard
@@ -61704,6 +62836,26 @@ type Calendar interface {
 	//
 	// Removes the visual marker from a particular day.
 	UnmarkDay(uint)
+	// ConnectDaySelected connects the provided callback to the "day-selected" signal
+	//
+	// Emitted when the user selects a day.
+	ConnectDaySelected(func(Calendar)) gobject.SignalHandle
+	// ConnectNextMonth connects the provided callback to the "next-month" signal
+	//
+	// Emitted when the user switched to the next month.
+	ConnectNextMonth(func(Calendar)) gobject.SignalHandle
+	// ConnectNextYear connects the provided callback to the "next-year" signal
+	//
+	// Emitted when user switched to the next year.
+	ConnectNextYear(func(Calendar)) gobject.SignalHandle
+	// ConnectPrevMonth connects the provided callback to the "prev-month" signal
+	//
+	// Emitted when the user switched to the previous month.
+	ConnectPrevMonth(func(Calendar)) gobject.SignalHandle
+	// ConnectPrevYear connects the provided callback to the "prev-year" signal
+	//
+	// Emitted when user switched to the previous year.
+	ConnectPrevYear(func(Calendar)) gobject.SignalHandle
 }
 
 func unsafeWrapCalendar(base *gobject.ObjectInstance) *CalendarInstance {
@@ -62179,6 +63331,36 @@ func (calendar *CalendarInstance) UnmarkDay(day uint) {
 	runtime.KeepAlive(day)
 }
 
+// ConnectDaySelected connects the provided callback to the "day-selected" signal
+//
+// Emitted when the user selects a day.
+func (o *CalendarInstance) ConnectDaySelected(fn func(Calendar)) gobject.SignalHandle {
+	return o.Connect("day-selected", fn)
+}
+// ConnectNextMonth connects the provided callback to the "next-month" signal
+//
+// Emitted when the user switched to the next month.
+func (o *CalendarInstance) ConnectNextMonth(fn func(Calendar)) gobject.SignalHandle {
+	return o.Connect("next-month", fn)
+}
+// ConnectNextYear connects the provided callback to the "next-year" signal
+//
+// Emitted when user switched to the next year.
+func (o *CalendarInstance) ConnectNextYear(fn func(Calendar)) gobject.SignalHandle {
+	return o.Connect("next-year", fn)
+}
+// ConnectPrevMonth connects the provided callback to the "prev-month" signal
+//
+// Emitted when the user switched to the previous month.
+func (o *CalendarInstance) ConnectPrevMonth(fn func(Calendar)) gobject.SignalHandle {
+	return o.Connect("prev-month", fn)
+}
+// ConnectPrevYear connects the provided callback to the "prev-year" signal
+//
+// Emitted when user switched to the previous year.
+func (o *CalendarInstance) ConnectPrevYear(fn func(Calendar)) gobject.SignalHandle {
+	return o.Connect("prev-year", fn)
+}
 // CallbackActionInstance is the instance type used by all types extending GtkCallbackAction. It is used internally by the bindings. Users should use the interface [CallbackAction] instead.
 type CallbackActionInstance struct {
 	_ [0]func() // equal guard
@@ -63337,6 +64519,24 @@ type CheckButton interface {
 	// indicates a mnemonic accelerator key. This behavior is similar
 	// to [property@Gtk.Label:use-underline].
 	SetUseUnderline(bool)
+	// EmitActivate emits the "activate" signal
+	//
+	// Emitted to when the check button is activated.
+	// 
+	// The `::activate` signal on `GtkCheckButton` is an action signal and
+	// emitting it causes the button to animate press then release.
+	// 
+	// Applications should never connect to this signal, but use the
+	// [signal@Gtk.CheckButton::toggled] signal.
+	// 
+	// The default bindings for this signal are all forms of the
+	// &lt;kbd&gt;␣&lt;/kbd&gt; and &lt;kbd&gt;Enter&lt;/kbd&gt; keys.
+	EmitActivate()
+	// ConnectToggled connects the provided callback to the "toggled" signal
+	//
+	// Emitted when the buttons's [property@Gtk.CheckButton:active]
+	// property changes.
+	ConnectToggled(func(CheckButton)) gobject.SignalHandle
 }
 
 func unsafeWrapCheckButton(base *gobject.ObjectInstance) *CheckButtonInstance {
@@ -63744,6 +64944,28 @@ func (self *CheckButtonInstance) SetUseUnderline(setting bool) {
 	runtime.KeepAlive(setting)
 }
 
+// EmitActivate emits the "activate" signal
+//
+// Emitted to when the check button is activated.
+// 
+// The `::activate` signal on `GtkCheckButton` is an action signal and
+// emitting it causes the button to animate press then release.
+// 
+// Applications should never connect to this signal, but use the
+// [signal@Gtk.CheckButton::toggled] signal.
+// 
+// The default bindings for this signal are all forms of the
+// &lt;kbd&gt;␣&lt;/kbd&gt; and &lt;kbd&gt;Enter&lt;/kbd&gt; keys.
+func (o *CheckButtonInstance) EmitActivate() {
+	o.Emit("activate")
+}
+// ConnectToggled connects the provided callback to the "toggled" signal
+//
+// Emitted when the buttons's [property@Gtk.CheckButton:active]
+// property changes.
+func (o *CheckButtonInstance) ConnectToggled(fn func(CheckButton)) gobject.SignalHandle {
+	return o.Connect("toggled", fn)
+}
 // ColorDialogButtonInstance is the instance type used by all types extending GtkColorDialogButton. It is used internally by the bindings. Users should use the interface [ColorDialogButton] instead.
 type ColorDialogButtonInstance struct {
 	_ [0]func() // equal guard
@@ -63819,6 +65041,13 @@ type ColorDialogButton interface {
 	//
 	// Sets the color of the button.
 	SetRGBA(*gdk.RGBA)
+	// EmitActivate emits the "activate" signal
+	//
+	// Emitted when the color dialog button is activated.
+	// 
+	// The `::activate` signal on `GtkColorDialogButton` is an action signal
+	// and emitting it causes the button to pop up its dialog.
+	EmitActivate()
 }
 
 func unsafeWrapColorDialogButton(base *gobject.ObjectInstance) *ColorDialogButtonInstance {
@@ -63989,6 +65218,15 @@ func (self *ColorDialogButtonInstance) SetRGBA(color *gdk.RGBA) {
 	runtime.KeepAlive(color)
 }
 
+// EmitActivate emits the "activate" signal
+//
+// Emitted when the color dialog button is activated.
+// 
+// The `::activate` signal on `GtkColorDialogButton` is an action signal
+// and emitting it causes the button to pop up its dialog.
+func (o *ColorDialogButtonInstance) EmitActivate() {
+	o.Emit("activate")
+}
 // ColumnViewInstance is the instance type used by all types extending GtkColumnView. It is used internally by the bindings. Users should use the interface [ColumnView] instead.
 type ColumnViewInstance struct {
 	_ [0]func() // equal guard
@@ -64332,6 +65570,15 @@ type ColumnView interface {
 	// 
 	// If @column is %NULL, the view will be unsorted.
 	SortByColumn(ColumnViewColumn, SortType)
+	// ConnectActivate connects the provided callback to the "activate" signal
+	//
+	// Emitted when a row has been activated by the user, usually via activating
+	// the GtkListBase|list.activate-item action.
+	// 
+	// This allows for a convenient way to handle activation in a columnview.
+	// See [method@Gtk.ListItem.set_activatable] for details on how to use this
+	// signal.
+	ConnectActivate(func(ColumnView, uint)) gobject.SignalHandle
 }
 
 func unsafeWrapColumnView(base *gobject.ObjectInstance) *ColumnViewInstance {
@@ -65037,6 +66284,17 @@ func (self *ColumnViewInstance) SortByColumn(column ColumnViewColumn, direction 
 	runtime.KeepAlive(direction)
 }
 
+// ConnectActivate connects the provided callback to the "activate" signal
+//
+// Emitted when a row has been activated by the user, usually via activating
+// the GtkListBase|list.activate-item action.
+// 
+// This allows for a convenient way to handle activation in a columnview.
+// See [method@Gtk.ListItem.set_activatable] for details on how to use this
+// signal.
+func (o *ColumnViewInstance) ConnectActivate(fn func(ColumnView, uint)) gobject.SignalHandle {
+	return o.Connect("activate", fn)
+}
 // ColumnViewCellInstance is the instance type used by all types extending GtkColumnViewCell. It is used internally by the bindings. Users should use the interface [ColumnViewCell] instead.
 type ColumnViewCellInstance struct {
 	_ [0]func() // equal guard
@@ -65082,15 +66340,6 @@ type ColumnViewCell interface {
 	// Checks if a list item has been set to be focusable via
 	// gtk_column_view_cell_set_focusable().
 	GetFocusable() bool
-	// GetItem wraps gtk_column_view_cell_get_item
-	// The function returns the following values:
-	// 
-	// 	- goret unsafe.Pointer 
-	//
-	// Gets the model item that associated with @self.
-	// 
-	// If @self is unbound, this function returns %NULL.
-	GetItem() unsafe.Pointer
 	// GetPosition wraps gtk_column_view_cell_get_position
 	// The function returns the following values:
 	// 
@@ -65220,30 +66469,6 @@ func (self *ColumnViewCellInstance) GetFocusable() bool {
 	if cret != 0 {
 		goret = true
 	}
-
-	return goret
-}
-
-// GetItem wraps gtk_column_view_cell_get_item
-// The function returns the following values:
-// 
-// 	- goret unsafe.Pointer 
-//
-// Gets the model item that associated with @self.
-// 
-// If @self is unbound, this function returns %NULL.
-func (self *ColumnViewCellInstance) GetItem() unsafe.Pointer {
-	var carg0 *C.GtkColumnViewCell // in, none, converted
-	var cret  C.gpointer           // return, none, casted
-
-	carg0 = (*C.GtkColumnViewCell)(UnsafeColumnViewCellToGlibNone(self))
-
-	cret = C.gtk_column_view_cell_get_item(carg0)
-	runtime.KeepAlive(self)
-
-	var goret unsafe.Pointer
-
-	goret = unsafe.Pointer(cret)
 
 	return goret
 }
@@ -66172,23 +67397,6 @@ var _ CustomFilter = (*CustomFilterInstance)(nil)
 type CustomFilter interface {
 	Filter
 	upcastToGtkCustomFilter() *CustomFilterInstance
-
-	// SetFilterFunc wraps gtk_custom_filter_set_filter_func
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- matchFunc CustomFilterFunc (nullable): function to filter items 
-	//
-	// Sets the function used for filtering items.
-	// 
-	// If @match_func is %NULL, the filter matches all items.
-	// 
-	// If the filter func changes its filtering behavior,
-	// gtk_filter_changed() needs to be called.
-	// 
-	// If a previous function was set, its @user_destroy will be
-	// called now.
-	SetFilterFunc(CustomFilterFunc)
 }
 
 func unsafeWrapCustomFilter(base *gobject.ObjectInstance) *CustomFilterInstance {
@@ -66225,78 +67433,6 @@ func UnsafeCustomFilterToGlibNone(c CustomFilter) unsafe.Pointer {
 // UnsafeCustomFilterToGlibFull is used to convert the instance to it's C value GtkCustomFilter, while removeing the finalizer. This is used by the bindings internally.
 func UnsafeCustomFilterToGlibFull(c CustomFilter) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
-}
-
-// NewCustomFilter wraps gtk_custom_filter_new
-// 
-// The function takes the following parameters:
-// 
-// 	- matchFunc CustomFilterFunc (nullable): function to filter items 
-// 
-// The function returns the following values:
-// 
-// 	- goret CustomFilter 
-//
-// Creates a new filter using the given @match_func to filter
-// items.
-// 
-// If @match_func is %NULL, the filter matches all items.
-// 
-// If the filter func changes its filtering behavior,
-// gtk_filter_changed() needs to be called.
-func NewCustomFilter(matchFunc CustomFilterFunc) CustomFilter {
-	var carg1 C.GtkCustomFilterFunc // callback, scope: notified, closure: carg2, destroy: carg3, nullable
-	var carg2 C.gpointer            // implicit
-	var carg3 C.GDestroyNotify      // implicit
-	var cret  *C.GtkCustomFilter    // return, full, converted
-
-	if matchFunc != nil {
-		carg1 = (*[0]byte)(C._gotk4_gtk4_CustomFilterFunc)
-		carg2 = C.gpointer(userdata.Register(matchFunc))
-		carg3 = (C.GDestroyNotify)((*[0]byte)(C.destroyUserdata))
-	}
-
-	cret = C.gtk_custom_filter_new(carg1, carg2, carg3)
-	runtime.KeepAlive(matchFunc)
-
-	var goret CustomFilter
-
-	goret = UnsafeCustomFilterFromGlibFull(unsafe.Pointer(cret))
-
-	return goret
-}
-
-// SetFilterFunc wraps gtk_custom_filter_set_filter_func
-// 
-// The function takes the following parameters:
-// 
-// 	- matchFunc CustomFilterFunc (nullable): function to filter items 
-//
-// Sets the function used for filtering items.
-// 
-// If @match_func is %NULL, the filter matches all items.
-// 
-// If the filter func changes its filtering behavior,
-// gtk_filter_changed() needs to be called.
-// 
-// If a previous function was set, its @user_destroy will be
-// called now.
-func (self *CustomFilterInstance) SetFilterFunc(matchFunc CustomFilterFunc) {
-	var carg0 *C.GtkCustomFilter    // in, none, converted
-	var carg1 C.GtkCustomFilterFunc // callback, scope: notified, closure: carg2, destroy: carg3, nullable
-	var carg2 C.gpointer            // implicit
-	var carg3 C.GDestroyNotify      // implicit
-
-	carg0 = (*C.GtkCustomFilter)(UnsafeCustomFilterToGlibNone(self))
-	if matchFunc != nil {
-		carg1 = (*[0]byte)(C._gotk4_gtk4_CustomFilterFunc)
-		carg2 = C.gpointer(userdata.Register(matchFunc))
-		carg3 = (C.GDestroyNotify)((*[0]byte)(C.destroyUserdata))
-	}
-
-	C.gtk_custom_filter_set_filter_func(carg0, carg1, carg2, carg3)
-	runtime.KeepAlive(self)
-	runtime.KeepAlive(matchFunc)
 }
 
 // CustomLayoutInstance is the instance type used by all types extending GtkCustomLayout. It is used internally by the bindings. Users should use the interface [CustomLayout] instead.
@@ -66899,6 +68035,38 @@ type DragSource interface {
 	// a [signal@Gtk.DragSource::prepare] or
 	// [signal@Gtk.DragSource::drag-begin] signal handler.
 	SetIcon(gdk.Paintable, int, int)
+	// ConnectDragBegin connects the provided callback to the "drag-begin" signal
+	//
+	// Emitted on the drag source when a drag is started.
+	// 
+	// It can be used to e.g. set a custom drag icon with
+	// [method@Gtk.DragSource.set_icon].
+	ConnectDragBegin(func(DragSource, gdk.Drag)) gobject.SignalHandle
+	// ConnectDragCancel connects the provided callback to the "drag-cancel" signal
+	//
+	// Emitted on the drag source when a drag has failed.
+	// 
+	// The signal handler may handle a failed drag operation based on
+	// the type of error. It should return %TRUE if the failure has been handled
+	// and the default "drag operation failed" animation should not be shown.
+	ConnectDragCancel(func(DragSource, gdk.Drag, gdk.DragCancelReason) bool) gobject.SignalHandle
+	// ConnectDragEnd connects the provided callback to the "drag-end" signal
+	//
+	// Emitted on the drag source when a drag is finished.
+	// 
+	// A typical reason to connect to this signal is to undo
+	// things done in [signal@Gtk.DragSource::prepare] or
+	// [signal@Gtk.DragSource::drag-begin] handlers.
+	ConnectDragEnd(func(DragSource, gdk.Drag, bool)) gobject.SignalHandle
+	// ConnectPrepare connects the provided callback to the "prepare" signal
+	//
+	// Emitted when a drag is about to be initiated.
+	// 
+	// It returns the `GdkContentProvider` to use for the drag that is about
+	// to start. The default handler for this signal returns the value of
+	// the [property@Gtk.DragSource:content] property, so if you set up that
+	// property ahead of time, you don't need to connect to this signal.
+	ConnectPrepare(func(DragSource, float64, float64) gdk.ContentProviderInstance) gobject.SignalHandle
 }
 
 func unsafeWrapDragSource(base *gobject.ObjectInstance) *DragSourceInstance {
@@ -67132,6 +68300,46 @@ func (source *DragSourceInstance) SetIcon(paintable gdk.Paintable, hotX int, hot
 	runtime.KeepAlive(hotY)
 }
 
+// ConnectDragBegin connects the provided callback to the "drag-begin" signal
+//
+// Emitted on the drag source when a drag is started.
+// 
+// It can be used to e.g. set a custom drag icon with
+// [method@Gtk.DragSource.set_icon].
+func (o *DragSourceInstance) ConnectDragBegin(fn func(DragSource, gdk.Drag)) gobject.SignalHandle {
+	return o.Connect("drag-begin", fn)
+}
+// ConnectDragCancel connects the provided callback to the "drag-cancel" signal
+//
+// Emitted on the drag source when a drag has failed.
+// 
+// The signal handler may handle a failed drag operation based on
+// the type of error. It should return %TRUE if the failure has been handled
+// and the default "drag operation failed" animation should not be shown.
+func (o *DragSourceInstance) ConnectDragCancel(fn func(DragSource, gdk.Drag, gdk.DragCancelReason) bool) gobject.SignalHandle {
+	return o.Connect("drag-cancel", fn)
+}
+// ConnectDragEnd connects the provided callback to the "drag-end" signal
+//
+// Emitted on the drag source when a drag is finished.
+// 
+// A typical reason to connect to this signal is to undo
+// things done in [signal@Gtk.DragSource::prepare] or
+// [signal@Gtk.DragSource::drag-begin] handlers.
+func (o *DragSourceInstance) ConnectDragEnd(fn func(DragSource, gdk.Drag, bool)) gobject.SignalHandle {
+	return o.Connect("drag-end", fn)
+}
+// ConnectPrepare connects the provided callback to the "prepare" signal
+//
+// Emitted when a drag is about to be initiated.
+// 
+// It returns the `GdkContentProvider` to use for the drag that is about
+// to start. The default handler for this signal returns the value of
+// the [property@Gtk.DragSource:content] property, so if you set up that
+// property ahead of time, you don't need to connect to this signal.
+func (o *DragSourceInstance) ConnectPrepare(fn func(DragSource, float64, float64) gdk.ContentProviderInstance) gobject.SignalHandle {
+	return o.Connect("prepare", fn)
+}
 // DrawingAreaInstance is the instance type used by all types extending GtkDrawingArea. It is used internally by the bindings. Users should use the interface [DrawingArea] instead.
 type DrawingAreaInstance struct {
 	_ [0]func() // equal guard
@@ -67275,6 +68483,14 @@ type DrawingArea interface {
 	// 
 	// If the width is set to 0 (the default), the drawing area may disappear.
 	SetContentWidth(int)
+	// ConnectResize connects the provided callback to the "resize" signal
+	//
+	// Emitted once when the widget is realized, and then each time the widget
+	// is changed while realized.
+	// 
+	// This is useful in order to keep state up to date with the widget size,
+	// like for instance a backing surface.
+	ConnectResize(func(DrawingArea, int, int)) gobject.SignalHandle
 }
 
 func unsafeWrapDrawingArea(base *gobject.ObjectInstance) *DrawingAreaInstance {
@@ -67438,6 +68654,16 @@ func (self *DrawingAreaInstance) SetContentWidth(width int) {
 	runtime.KeepAlive(width)
 }
 
+// ConnectResize connects the provided callback to the "resize" signal
+//
+// Emitted once when the widget is realized, and then each time the widget
+// is changed while realized.
+// 
+// This is useful in order to keep state up to date with the widget size,
+// like for instance a backing surface.
+func (o *DrawingAreaInstance) ConnectResize(fn func(DrawingArea, int, int)) gobject.SignalHandle {
+	return o.Connect("resize", fn)
+}
 // DropControllerMotionInstance is the instance type used by all types extending GtkDropControllerMotion. It is used internally by the bindings. Users should use the interface [DropControllerMotion] instead.
 type DropControllerMotionInstance struct {
 	_ [0]func() // equal guard
@@ -67484,6 +68710,18 @@ type DropControllerMotion interface {
 	// Returns if a Drag-and-Drop operation is within the widget
 	// @self, not one of its children.
 	IsPointer() bool
+	// ConnectEnter connects the provided callback to the "enter" signal
+	//
+	// Signals that the pointer has entered the widget.
+	ConnectEnter(func(DropControllerMotion, float64, float64)) gobject.SignalHandle
+	// ConnectLeave connects the provided callback to the "leave" signal
+	//
+	// Signals that the pointer has left the widget.
+	ConnectLeave(func(DropControllerMotion)) gobject.SignalHandle
+	// ConnectMotion connects the provided callback to the "motion" signal
+	//
+	// Emitted when the pointer moves inside the widget.
+	ConnectMotion(func(DropControllerMotion, float64, float64)) gobject.SignalHandle
 }
 
 func unsafeWrapDropControllerMotion(base *gobject.ObjectInstance) *DropControllerMotionInstance {
@@ -67614,6 +68852,24 @@ func (self *DropControllerMotionInstance) IsPointer() bool {
 	return goret
 }
 
+// ConnectEnter connects the provided callback to the "enter" signal
+//
+// Signals that the pointer has entered the widget.
+func (o *DropControllerMotionInstance) ConnectEnter(fn func(DropControllerMotion, float64, float64)) gobject.SignalHandle {
+	return o.Connect("enter", fn)
+}
+// ConnectLeave connects the provided callback to the "leave" signal
+//
+// Signals that the pointer has left the widget.
+func (o *DropControllerMotionInstance) ConnectLeave(fn func(DropControllerMotion)) gobject.SignalHandle {
+	return o.Connect("leave", fn)
+}
+// ConnectMotion connects the provided callback to the "motion" signal
+//
+// Emitted when the pointer moves inside the widget.
+func (o *DropControllerMotionInstance) ConnectMotion(fn func(DropControllerMotion, float64, float64)) gobject.SignalHandle {
+	return o.Connect("motion", fn)
+}
 // DropDownInstance is the instance type used by all types extending GtkDropDown. It is used internally by the bindings. Users should use the interface [DropDown] instead.
 type DropDownInstance struct {
 	_ [0]func() // equal guard
@@ -67744,13 +69000,6 @@ type DropDown interface {
 	//
 	// Gets the position of the selected item.
 	GetSelected() uint
-	// GetSelectedItem wraps gtk_drop_down_get_selected_item
-	// The function returns the following values:
-	// 
-	// 	- goret unsafe.Pointer 
-	//
-	// Gets the selected item. If no item is selected, %NULL is returned.
-	GetSelectedItem() unsafe.Pointer
 	// GetShowArrow wraps gtk_drop_down_get_show_arrow
 	// The function returns the following values:
 	// 
@@ -67826,6 +69075,13 @@ type DropDown interface {
 	//
 	// Sets whether an arrow will be displayed within the widget.
 	SetShowArrow(bool)
+	// EmitActivate emits the "activate" signal
+	//
+	// Emitted to when the drop down is activated.
+	// 
+	// The `::activate` signal on `GtkDropDown` is an action signal and
+	// emitting it causes the drop down to pop up its dropdown.
+	EmitActivate()
 }
 
 func unsafeWrapDropDown(base *gobject.ObjectInstance) *DropDownInstance {
@@ -67879,7 +69135,7 @@ func UnsafeDropDownToGlibFull(c DropDown) unsafe.Pointer {
 // 
 // The function takes the following parameters:
 // 
-// 	- strings []string: The strings to put in the dropdown 
+// 	- _strings []string: The strings to put in the dropdown 
 // 
 // The function returns the following values:
 // 
@@ -67887,16 +69143,16 @@ func UnsafeDropDownToGlibFull(c DropDown) unsafe.Pointer {
 //
 // Creates a new `GtkDropDown` that is populated with
 // the strings.
-func NewDropDownFromStrings(strings []string) Widget {
+func NewDropDownFromStrings(_strings []string) Widget {
 	var carg1 **C.char     // in, transfer: none, C Pointers: 2, Name: array[utf8], array (inner: *typesystem.StringPrimitive, zero-terminated)
 	var cret  *C.GtkWidget // return, none, converted
 
-	_ = strings
+	_ = _strings
 	_ = carg1
 	panic("unimplemented conversion of []string (const char* const*)")
 
 	cret = C.gtk_drop_down_new_from_strings(carg1)
-	runtime.KeepAlive(strings)
+	runtime.KeepAlive(_strings)
 
 	var goret Widget
 
@@ -68061,28 +69317,6 @@ func (self *DropDownInstance) GetSelected() uint {
 	var goret uint
 
 	goret = uint(cret)
-
-	return goret
-}
-
-// GetSelectedItem wraps gtk_drop_down_get_selected_item
-// The function returns the following values:
-// 
-// 	- goret unsafe.Pointer 
-//
-// Gets the selected item. If no item is selected, %NULL is returned.
-func (self *DropDownInstance) GetSelectedItem() unsafe.Pointer {
-	var carg0 *C.GtkDropDown // in, none, converted
-	var cret  C.gpointer     // return, none, casted
-
-	carg0 = (*C.GtkDropDown)(UnsafeDropDownToGlibNone(self))
-
-	cret = C.gtk_drop_down_get_selected_item(carg0)
-	runtime.KeepAlive(self)
-
-	var goret unsafe.Pointer
-
-	goret = unsafe.Pointer(cret)
 
 	return goret
 }
@@ -68279,6 +69513,15 @@ func (self *DropDownInstance) SetShowArrow(showArrow bool) {
 	runtime.KeepAlive(showArrow)
 }
 
+// EmitActivate emits the "activate" signal
+//
+// Emitted to when the drop down is activated.
+// 
+// The `::activate` signal on `GtkDropDown` is an action signal and
+// emitting it causes the drop down to pop up its dropdown.
+func (o *DropDownInstance) EmitActivate() {
+	o.Emit("activate")
+}
 // DropTargetInstance is the instance type used by all types extending GtkDropTarget. It is used internally by the bindings. Users should use the interface [DropTarget] instead.
 type DropTargetInstance struct {
 	_ [0]func() // equal guard
@@ -68450,6 +69693,54 @@ type DropTarget interface {
 	//
 	// Sets whether data should be preloaded on hover.
 	SetPreload(bool)
+	// ConnectAccept connects the provided callback to the "accept" signal
+	//
+	// Emitted on the drop site when a drop operation is about to begin.
+	// 
+	// If the drop is not accepted, %FALSE will be returned and the drop target
+	// will ignore the drop. If %TRUE is returned, the drop is accepted for now
+	// but may be rejected later via a call to [method@Gtk.DropTarget.reject]
+	// or ultimately by returning %FALSE from a [signal@Gtk.DropTarget::drop]
+	// handler.
+	// 
+	// The default handler for this signal decides whether to accept the drop
+	// based on the formats provided by the @drop.
+	// 
+	// If the decision whether the drop will be accepted or rejected depends
+	// on the data, this function should return %TRUE, the
+	// [property@Gtk.DropTarget:preload] property should be set and the value
+	// should be inspected via the ::notify:value signal, calling
+	// [method@Gtk.DropTarget.reject] if required.
+	ConnectAccept(func(DropTarget, gdk.Drop) bool) gobject.SignalHandle
+	// ConnectDrop connects the provided callback to the "drop" signal
+	//
+	// Emitted on the drop site when the user drops the data onto the widget.
+	// 
+	// The signal handler must determine whether the pointer position is in
+	// a drop zone or not. If it is not in a drop zone, it returns %FALSE
+	// and no further processing is necessary.
+	// 
+	// Otherwise, the handler returns %TRUE. In this case, this handler will
+	// accept the drop. The handler is responsible for using the given @value
+	// and performing the drop operation.
+	ConnectDrop(func(DropTarget, gobject.Value, float64, float64) bool) gobject.SignalHandle
+	// ConnectEnter connects the provided callback to the "enter" signal
+	//
+	// Emitted on the drop site when the pointer enters the widget.
+	// 
+	// It can be used to set up custom highlighting.
+	ConnectEnter(func(DropTarget, float64, float64) gdk.DragAction) gobject.SignalHandle
+	// ConnectLeave connects the provided callback to the "leave" signal
+	//
+	// Emitted on the drop site when the pointer leaves the widget.
+	// 
+	// Its main purpose it to undo things done in
+	// [signal@Gtk.DropTarget::enter].
+	ConnectLeave(func(DropTarget)) gobject.SignalHandle
+	// ConnectMotion connects the provided callback to the "motion" signal
+	//
+	// Emitted while the pointer is moving over the drop target.
+	ConnectMotion(func(DropTarget, float64, float64) gdk.DragAction) gobject.SignalHandle
 }
 
 func unsafeWrapDropTarget(base *gobject.ObjectInstance) *DropTargetInstance {
@@ -68753,6 +70044,64 @@ func (self *DropTargetInstance) SetPreload(preload bool) {
 	runtime.KeepAlive(preload)
 }
 
+// ConnectAccept connects the provided callback to the "accept" signal
+//
+// Emitted on the drop site when a drop operation is about to begin.
+// 
+// If the drop is not accepted, %FALSE will be returned and the drop target
+// will ignore the drop. If %TRUE is returned, the drop is accepted for now
+// but may be rejected later via a call to [method@Gtk.DropTarget.reject]
+// or ultimately by returning %FALSE from a [signal@Gtk.DropTarget::drop]
+// handler.
+// 
+// The default handler for this signal decides whether to accept the drop
+// based on the formats provided by the @drop.
+// 
+// If the decision whether the drop will be accepted or rejected depends
+// on the data, this function should return %TRUE, the
+// [property@Gtk.DropTarget:preload] property should be set and the value
+// should be inspected via the ::notify:value signal, calling
+// [method@Gtk.DropTarget.reject] if required.
+func (o *DropTargetInstance) ConnectAccept(fn func(DropTarget, gdk.Drop) bool) gobject.SignalHandle {
+	return o.Connect("accept", fn)
+}
+// ConnectDrop connects the provided callback to the "drop" signal
+//
+// Emitted on the drop site when the user drops the data onto the widget.
+// 
+// The signal handler must determine whether the pointer position is in
+// a drop zone or not. If it is not in a drop zone, it returns %FALSE
+// and no further processing is necessary.
+// 
+// Otherwise, the handler returns %TRUE. In this case, this handler will
+// accept the drop. The handler is responsible for using the given @value
+// and performing the drop operation.
+func (o *DropTargetInstance) ConnectDrop(fn func(DropTarget, gobject.Value, float64, float64) bool) gobject.SignalHandle {
+	return o.Connect("drop", fn)
+}
+// ConnectEnter connects the provided callback to the "enter" signal
+//
+// Emitted on the drop site when the pointer enters the widget.
+// 
+// It can be used to set up custom highlighting.
+func (o *DropTargetInstance) ConnectEnter(fn func(DropTarget, float64, float64) gdk.DragAction) gobject.SignalHandle {
+	return o.Connect("enter", fn)
+}
+// ConnectLeave connects the provided callback to the "leave" signal
+//
+// Emitted on the drop site when the pointer leaves the widget.
+// 
+// Its main purpose it to undo things done in
+// [signal@Gtk.DropTarget::enter].
+func (o *DropTargetInstance) ConnectLeave(fn func(DropTarget)) gobject.SignalHandle {
+	return o.Connect("leave", fn)
+}
+// ConnectMotion connects the provided callback to the "motion" signal
+//
+// Emitted while the pointer is moving over the drop target.
+func (o *DropTargetInstance) ConnectMotion(fn func(DropTarget, float64, float64) gdk.DragAction) gobject.SignalHandle {
+	return o.Connect("motion", fn)
+}
 // DropTargetAsyncInstance is the instance type used by all types extending GtkDropTargetAsync. It is used internally by the bindings. Users should use the interface [DropTargetAsync] instead.
 type DropTargetAsyncInstance struct {
 	_ [0]func() // equal guard
@@ -68845,6 +70194,58 @@ type DropTargetAsync interface {
 	//
 	// Sets the data formats that this drop target will accept.
 	SetFormats(*gdk.ContentFormats)
+	// ConnectAccept connects the provided callback to the "accept" signal
+	//
+	// Emitted on the drop site when a drop operation is about to begin.
+	// 
+	// If the drop is not accepted, %FALSE will be returned and the drop target
+	// will ignore the drop. If %TRUE is returned, the drop is accepted for now
+	// but may be rejected later via a call to [method@Gtk.DropTargetAsync.reject_drop]
+	// or ultimately by returning %FALSE from a [signal@Gtk.DropTargetAsync::drop]
+	// handler.
+	// 
+	// The default handler for this signal decides whether to accept the drop
+	// based on the formats provided by the @drop.
+	// 
+	// If the decision whether the drop will be accepted or rejected needs
+	// further processing, such as inspecting the data, this function should
+	// return %TRUE and proceed as is @drop was accepted and if it decides to
+	// reject the drop later, it should call [method@Gtk.DropTargetAsync.reject_drop].
+	ConnectAccept(func(DropTargetAsync, gdk.Drop) bool) gobject.SignalHandle
+	// ConnectDragEnter connects the provided callback to the "drag-enter" signal
+	//
+	// Emitted on the drop site when the pointer enters the widget.
+	// 
+	// It can be used to set up custom highlighting.
+	ConnectDragEnter(func(DropTargetAsync, gdk.Drop, float64, float64) gdk.DragAction) gobject.SignalHandle
+	// ConnectDragLeave connects the provided callback to the "drag-leave" signal
+	//
+	// Emitted on the drop site when the pointer leaves the widget.
+	// 
+	// Its main purpose it to undo things done in
+	// `GtkDropTargetAsync`::drag-enter.
+	ConnectDragLeave(func(DropTargetAsync, gdk.Drop)) gobject.SignalHandle
+	// ConnectDragMotion connects the provided callback to the "drag-motion" signal
+	//
+	// Emitted while the pointer is moving over the drop target.
+	ConnectDragMotion(func(DropTargetAsync, gdk.Drop, float64, float64) gdk.DragAction) gobject.SignalHandle
+	// ConnectDrop connects the provided callback to the "drop" signal
+	//
+	// Emitted on the drop site when the user drops the data onto the widget.
+	// 
+	// The signal handler must determine whether the pointer position is in a
+	// drop zone or not. If it is not in a drop zone, it returns %FALSE and no
+	// further processing is necessary.
+	// 
+	// Otherwise, the handler returns %TRUE. In this case, this handler will
+	// accept the drop. The handler must ensure that [method@Gdk.Drop.finish]
+	// is called to let the source know that the drop is done. The call to
+	// [method@Gdk.Drop.finish] must only be done when all data has been received.
+	// 
+	// To receive the data, use one of the read functions provided by
+	// [class@Gdk.Drop] such as [method@Gdk.Drop.read_async] or
+	// [method@Gdk.Drop.read_value_async].
+	ConnectDrop(func(DropTargetAsync, gdk.Drop, float64, float64) bool) gobject.SignalHandle
 }
 
 func unsafeWrapDropTargetAsync(base *gobject.ObjectInstance) *DropTargetAsyncInstance {
@@ -69025,6 +70426,68 @@ func (self *DropTargetAsyncInstance) SetFormats(formats *gdk.ContentFormats) {
 	runtime.KeepAlive(formats)
 }
 
+// ConnectAccept connects the provided callback to the "accept" signal
+//
+// Emitted on the drop site when a drop operation is about to begin.
+// 
+// If the drop is not accepted, %FALSE will be returned and the drop target
+// will ignore the drop. If %TRUE is returned, the drop is accepted for now
+// but may be rejected later via a call to [method@Gtk.DropTargetAsync.reject_drop]
+// or ultimately by returning %FALSE from a [signal@Gtk.DropTargetAsync::drop]
+// handler.
+// 
+// The default handler for this signal decides whether to accept the drop
+// based on the formats provided by the @drop.
+// 
+// If the decision whether the drop will be accepted or rejected needs
+// further processing, such as inspecting the data, this function should
+// return %TRUE and proceed as is @drop was accepted and if it decides to
+// reject the drop later, it should call [method@Gtk.DropTargetAsync.reject_drop].
+func (o *DropTargetAsyncInstance) ConnectAccept(fn func(DropTargetAsync, gdk.Drop) bool) gobject.SignalHandle {
+	return o.Connect("accept", fn)
+}
+// ConnectDragEnter connects the provided callback to the "drag-enter" signal
+//
+// Emitted on the drop site when the pointer enters the widget.
+// 
+// It can be used to set up custom highlighting.
+func (o *DropTargetAsyncInstance) ConnectDragEnter(fn func(DropTargetAsync, gdk.Drop, float64, float64) gdk.DragAction) gobject.SignalHandle {
+	return o.Connect("drag-enter", fn)
+}
+// ConnectDragLeave connects the provided callback to the "drag-leave" signal
+//
+// Emitted on the drop site when the pointer leaves the widget.
+// 
+// Its main purpose it to undo things done in
+// `GtkDropTargetAsync`::drag-enter.
+func (o *DropTargetAsyncInstance) ConnectDragLeave(fn func(DropTargetAsync, gdk.Drop)) gobject.SignalHandle {
+	return o.Connect("drag-leave", fn)
+}
+// ConnectDragMotion connects the provided callback to the "drag-motion" signal
+//
+// Emitted while the pointer is moving over the drop target.
+func (o *DropTargetAsyncInstance) ConnectDragMotion(fn func(DropTargetAsync, gdk.Drop, float64, float64) gdk.DragAction) gobject.SignalHandle {
+	return o.Connect("drag-motion", fn)
+}
+// ConnectDrop connects the provided callback to the "drop" signal
+//
+// Emitted on the drop site when the user drops the data onto the widget.
+// 
+// The signal handler must determine whether the pointer position is in a
+// drop zone or not. If it is not in a drop zone, it returns %FALSE and no
+// further processing is necessary.
+// 
+// Otherwise, the handler returns %TRUE. In this case, this handler will
+// accept the drop. The handler must ensure that [method@Gdk.Drop.finish]
+// is called to let the source know that the drop is done. The call to
+// [method@Gdk.Drop.finish] must only be done when all data has been received.
+// 
+// To receive the data, use one of the read functions provided by
+// [class@Gdk.Drop] such as [method@Gdk.Drop.read_async] or
+// [method@Gdk.Drop.read_value_async].
+func (o *DropTargetAsyncInstance) ConnectDrop(fn func(DropTargetAsync, gdk.Drop, float64, float64) bool) gobject.SignalHandle {
+	return o.Connect("drop", fn)
+}
 // EditableLabelInstance is the instance type used by all types extending GtkEditableLabel. It is used internally by the bindings. Users should use the interface [EditableLabel] instead.
 type EditableLabelInstance struct {
 	_ [0]func() // equal guard
@@ -69995,6 +71458,21 @@ type Entry interface {
 	// Unsets the invisible char, so that the default invisible char
 	// is used again. See [method@Gtk.Entry.set_invisible_char].
 	UnsetInvisibleChar()
+	// EmitActivate emits the "activate" signal
+	//
+	// Emitted when the entry is activated.
+	// 
+	// The keybindings for this signal are all forms of the Enter key.
+	EmitActivate()
+	// ConnectIconPress connects the provided callback to the "icon-press" signal
+	//
+	// Emitted when an activatable icon is clicked.
+	ConnectIconPress(func(Entry, EntryIconPosition)) gobject.SignalHandle
+	// ConnectIconRelease connects the provided callback to the "icon-release" signal
+	//
+	// Emitted on the button release from a mouse click
+	// over an activatable icon.
+	ConnectIconRelease(func(Entry, EntryIconPosition)) gobject.SignalHandle
 }
 
 func unsafeWrapEntry(base *gobject.ObjectInstance) *EntryInstance {
@@ -71558,6 +73036,27 @@ func (entry *EntryInstance) UnsetInvisibleChar() {
 	runtime.KeepAlive(entry)
 }
 
+// EmitActivate emits the "activate" signal
+//
+// Emitted when the entry is activated.
+// 
+// The keybindings for this signal are all forms of the Enter key.
+func (o *EntryInstance) EmitActivate() {
+	o.Emit("activate")
+}
+// ConnectIconPress connects the provided callback to the "icon-press" signal
+//
+// Emitted when an activatable icon is clicked.
+func (o *EntryInstance) ConnectIconPress(fn func(Entry, EntryIconPosition)) gobject.SignalHandle {
+	return o.Connect("icon-press", fn)
+}
+// ConnectIconRelease connects the provided callback to the "icon-release" signal
+//
+// Emitted on the button release from a mouse click
+// over an activatable icon.
+func (o *EntryInstance) ConnectIconRelease(fn func(Entry, EntryIconPosition)) gobject.SignalHandle {
+	return o.Connect("icon-release", fn)
+}
 // EveryFilterInstance is the instance type used by all types extending GtkEveryFilter. It is used internally by the bindings. Users should use the interface [EveryFilter] instead.
 type EveryFilterInstance struct {
 	_ [0]func() // equal guard
@@ -71883,6 +73382,10 @@ type Expander interface {
 	//
 	// If true, an underline in the text indicates a mnemonic.
 	SetUseUnderline(bool)
+	// EmitActivate emits the "activate" signal
+	//
+	// Activates the `GtkExpander`.
+	EmitActivate()
 }
 
 func unsafeWrapExpander(base *gobject.ObjectInstance) *ExpanderInstance {
@@ -72328,6 +73831,12 @@ func (expander *ExpanderInstance) SetUseUnderline(useUnderline bool) {
 	runtime.KeepAlive(useUnderline)
 }
 
+// EmitActivate emits the "activate" signal
+//
+// Activates the `GtkExpander`.
+func (o *ExpanderInstance) EmitActivate() {
+	o.Emit("activate")
+}
 // FileFilterInstance is the instance type used by all types extending GtkFileFilter. It is used internally by the bindings. Users should use the interface [FileFilter] instead.
 type FileFilterInstance struct {
 	_ [0]func() // equal guard
@@ -73372,30 +74881,6 @@ type FlowBox interface {
 	// 
 	// See also: [method@Gtk.FlowBox.insert].
 	Append(Widget)
-	// BindModel wraps gtk_flow_box_bind_model
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- model gio.ListModel (nullable): the `GListModel` to be bound to @box 
-	// 	- createWidgetFunc FlowBoxCreateWidgetFunc: a function
-	//   that creates widgets for items 
-	//
-	// Binds @model to @box.
-	// 
-	// If @box was already bound to a model, that previous binding is
-	// destroyed.
-	// 
-	// The contents of @box are cleared and then filled with widgets that
-	// represent items from @model. @box is updated whenever @model changes.
-	// If @model is %NULL, @box is left empty.
-	// 
-	// It is undefined to add or remove widgets directly (for example, with
-	// [method@Gtk.FlowBox.insert]) while @box is bound to a model.
-	// 
-	// Note that using a model is incompatible with the filtering and sorting
-	// functionality in `GtkFlowBox`. When using a model, filtering and sorting
-	// should be implemented by the model.
-	BindModel(gio.ListModel, FlowBoxCreateWidgetFunc)
 	// GetActivateOnSingleClick wraps gtk_flow_box_get_activate_on_single_click
 	// The function returns the following values:
 	// 
@@ -73712,6 +75197,69 @@ type FlowBox interface {
 	// Unselects a single child of @box, if the selection
 	// mode allows it.
 	UnselectChild(FlowBoxChild)
+	// EmitActivateCursorChild emits the "activate-cursor-child" signal
+	//
+	// Emitted when the user activates the @box.
+	// 
+	// This is a [keybinding signal](class.SignalAction.html).
+	EmitActivateCursorChild()
+	// ConnectChildActivated connects the provided callback to the "child-activated" signal
+	//
+	// Emitted when a child has been activated by the user.
+	ConnectChildActivated(func(FlowBox, FlowBoxChild)) gobject.SignalHandle
+	// EmitMoveCursor emits the "move-cursor" signal
+	//
+	// Emitted when the user initiates a cursor movement.
+	// 
+	// This is a [keybinding signal](class.SignalAction.html).
+	// Applications should not connect to it, but may emit it with
+	// g_signal_emit_by_name() if they need to control the cursor
+	// programmatically.
+	// 
+	// The default bindings for this signal come in two variants,
+	// the variant with the Shift modifier extends the selection,
+	// the variant without the Shift modifier does not.
+	// There are too many key combinations to list them all here.
+	// 
+	// - &lt;kbd&gt;←&lt;/kbd&gt;, &lt;kbd&gt;→&lt;/kbd&gt;, &lt;kbd&gt;↑&lt;/kbd&gt;, &lt;kbd&gt;↓&lt;/kbd&gt;
+	//   move by individual children
+	// - &lt;kbd&gt;Home&lt;/kbd&gt;, &lt;kbd&gt;End&lt;/kbd&gt; move to the ends of the box
+	// - &lt;kbd&gt;PgUp&lt;/kbd&gt;, &lt;kbd&gt;PgDn&lt;/kbd&gt; move vertically by pages
+	EmitMoveCursor(MovementStep, int, bool, bool) bool
+	// EmitSelectAll emits the "select-all" signal
+	//
+	// Emitted to select all children of the box,
+	// if the selection mode permits it.
+	// 
+	// This is a [keybinding signal](class.SignalAction.html).
+	// 
+	// The default bindings for this signal is &lt;kbd&gt;Ctrl&lt;/kbd&gt;-&lt;kbd&gt;a&lt;/kbd&gt;.
+	EmitSelectAll()
+	// ConnectSelectedChildrenChanged connects the provided callback to the "selected-children-changed" signal
+	//
+	// Emitted when the set of selected children changes.
+	// 
+	// Use [method@Gtk.FlowBox.selected_foreach] or
+	// [method@Gtk.FlowBox.get_selected_children] to obtain the
+	// selected children.
+	ConnectSelectedChildrenChanged(func(FlowBox)) gobject.SignalHandle
+	// EmitToggleCursorChild emits the "toggle-cursor-child" signal
+	//
+	// Emitted to toggle the selection of the child that has the focus.
+	// 
+	// This is a [keybinding signal](class.SignalAction.html).
+	// 
+	// The default binding for this signal is &lt;kbd&gt;Ctrl&lt;/kbd&gt;-&lt;kbd&gt;Space&lt;/kbd&gt;.
+	EmitToggleCursorChild()
+	// EmitUnselectAll emits the "unselect-all" signal
+	//
+	// Emitted to unselect all children of the box,
+	// if the selection mode permits it.
+	// 
+	// This is a [keybinding signal](class.SignalAction.html).
+	// 
+	// The default bindings for this signal is &lt;kbd&gt;Ctrl&lt;/kbd&gt;-&lt;kbd&gt;Shift&lt;/kbd&gt;-&lt;kbd&gt;a&lt;/kbd&gt;.
+	EmitUnselectAll()
 }
 
 func unsafeWrapFlowBox(base *gobject.ObjectInstance) *FlowBoxInstance {
@@ -73804,50 +75352,6 @@ func (self *FlowBoxInstance) Append(child Widget) {
 	C.gtk_flow_box_append(carg0, carg1)
 	runtime.KeepAlive(self)
 	runtime.KeepAlive(child)
-}
-
-// BindModel wraps gtk_flow_box_bind_model
-// 
-// The function takes the following parameters:
-// 
-// 	- model gio.ListModel (nullable): the `GListModel` to be bound to @box 
-// 	- createWidgetFunc FlowBoxCreateWidgetFunc: a function
-//   that creates widgets for items 
-//
-// Binds @model to @box.
-// 
-// If @box was already bound to a model, that previous binding is
-// destroyed.
-// 
-// The contents of @box are cleared and then filled with widgets that
-// represent items from @model. @box is updated whenever @model changes.
-// If @model is %NULL, @box is left empty.
-// 
-// It is undefined to add or remove widgets directly (for example, with
-// [method@Gtk.FlowBox.insert]) while @box is bound to a model.
-// 
-// Note that using a model is incompatible with the filtering and sorting
-// functionality in `GtkFlowBox`. When using a model, filtering and sorting
-// should be implemented by the model.
-func (box *FlowBoxInstance) BindModel(model gio.ListModel, createWidgetFunc FlowBoxCreateWidgetFunc) {
-	var carg0 *C.GtkFlowBox                // in, none, converted
-	var carg1 *C.GListModel                // in, none, converted, nullable
-	var carg2 C.GtkFlowBoxCreateWidgetFunc // callback, scope: notified, closure: carg3, destroy: carg4
-	var carg3 C.gpointer                   // implicit
-	var carg4 C.GDestroyNotify             // implicit
-
-	carg0 = (*C.GtkFlowBox)(UnsafeFlowBoxToGlibNone(box))
-	if model != nil {
-		carg1 = (*C.GListModel)(gio.UnsafeListModelToGlibNone(model))
-	}
-	carg2 = (*[0]byte)(C._gotk4_gtk4_FlowBoxCreateWidgetFunc)
-	carg3 = C.gpointer(userdata.Register(createWidgetFunc))
-	carg4 = (C.GDestroyNotify)((*[0]byte)(C.destroyUserdata))
-
-	C.gtk_flow_box_bind_model(carg0, carg1, carg2, carg3, carg4)
-	runtime.KeepAlive(box)
-	runtime.KeepAlive(model)
-	runtime.KeepAlive(createWidgetFunc)
 }
 
 // GetActivateOnSingleClick wraps gtk_flow_box_get_activate_on_single_click
@@ -74563,6 +76067,84 @@ func (box *FlowBoxInstance) UnselectChild(child FlowBoxChild) {
 	runtime.KeepAlive(child)
 }
 
+// EmitActivateCursorChild emits the "activate-cursor-child" signal
+//
+// Emitted when the user activates the @box.
+// 
+// This is a [keybinding signal](class.SignalAction.html).
+func (o *FlowBoxInstance) EmitActivateCursorChild() {
+	o.Emit("activate-cursor-child")
+}
+// ConnectChildActivated connects the provided callback to the "child-activated" signal
+//
+// Emitted when a child has been activated by the user.
+func (o *FlowBoxInstance) ConnectChildActivated(fn func(FlowBox, FlowBoxChild)) gobject.SignalHandle {
+	return o.Connect("child-activated", fn)
+}
+// EmitMoveCursor emits the "move-cursor" signal
+//
+// Emitted when the user initiates a cursor movement.
+// 
+// This is a [keybinding signal](class.SignalAction.html).
+// Applications should not connect to it, but may emit it with
+// g_signal_emit_by_name() if they need to control the cursor
+// programmatically.
+// 
+// The default bindings for this signal come in two variants,
+// the variant with the Shift modifier extends the selection,
+// the variant without the Shift modifier does not.
+// There are too many key combinations to list them all here.
+// 
+// - &lt;kbd&gt;←&lt;/kbd&gt;, &lt;kbd&gt;→&lt;/kbd&gt;, &lt;kbd&gt;↑&lt;/kbd&gt;, &lt;kbd&gt;↓&lt;/kbd&gt;
+//   move by individual children
+// - &lt;kbd&gt;Home&lt;/kbd&gt;, &lt;kbd&gt;End&lt;/kbd&gt; move to the ends of the box
+// - &lt;kbd&gt;PgUp&lt;/kbd&gt;, &lt;kbd&gt;PgDn&lt;/kbd&gt; move vertically by pages
+func (o *FlowBoxInstance) EmitMoveCursor(arg0 MovementStep, arg1 int, arg2 bool, arg3 bool) bool {
+	return 
+	o.Emit("move-cursor", arg0, arg1, arg2, arg3)
+}
+// EmitSelectAll emits the "select-all" signal
+//
+// Emitted to select all children of the box,
+// if the selection mode permits it.
+// 
+// This is a [keybinding signal](class.SignalAction.html).
+// 
+// The default bindings for this signal is &lt;kbd&gt;Ctrl&lt;/kbd&gt;-&lt;kbd&gt;a&lt;/kbd&gt;.
+func (o *FlowBoxInstance) EmitSelectAll() {
+	o.Emit("select-all")
+}
+// ConnectSelectedChildrenChanged connects the provided callback to the "selected-children-changed" signal
+//
+// Emitted when the set of selected children changes.
+// 
+// Use [method@Gtk.FlowBox.selected_foreach] or
+// [method@Gtk.FlowBox.get_selected_children] to obtain the
+// selected children.
+func (o *FlowBoxInstance) ConnectSelectedChildrenChanged(fn func(FlowBox)) gobject.SignalHandle {
+	return o.Connect("selected-children-changed", fn)
+}
+// EmitToggleCursorChild emits the "toggle-cursor-child" signal
+//
+// Emitted to toggle the selection of the child that has the focus.
+// 
+// This is a [keybinding signal](class.SignalAction.html).
+// 
+// The default binding for this signal is &lt;kbd&gt;Ctrl&lt;/kbd&gt;-&lt;kbd&gt;Space&lt;/kbd&gt;.
+func (o *FlowBoxInstance) EmitToggleCursorChild() {
+	o.Emit("toggle-cursor-child")
+}
+// EmitUnselectAll emits the "unselect-all" signal
+//
+// Emitted to unselect all children of the box,
+// if the selection mode permits it.
+// 
+// This is a [keybinding signal](class.SignalAction.html).
+// 
+// The default bindings for this signal is &lt;kbd&gt;Ctrl&lt;/kbd&gt;-&lt;kbd&gt;Shift&lt;/kbd&gt;-&lt;kbd&gt;a&lt;/kbd&gt;.
+func (o *FlowBoxInstance) EmitUnselectAll() {
+	o.Emit("unselect-all")
+}
 // FlowBoxChildInstance is the instance type used by all types extending GtkFlowBoxChild. It is used internally by the bindings. Users should use the interface [FlowBoxChild] instead.
 type FlowBoxChildInstance struct {
 	_ [0]func() // equal guard
@@ -74637,6 +76219,18 @@ type FlowBoxChild interface {
 	//
 	// Sets the child widget of @self.
 	SetChild(Widget)
+	// EmitActivate emits the "activate" signal
+	//
+	// Emitted when the user activates a child widget in a `GtkFlowBox`.
+	// 
+	// This can happen either by clicking or double-clicking,
+	// or via a keybinding.
+	// 
+	// This is a [keybinding signal](class.SignalAction.html),
+	// but it can be used by applications for their own purposes.
+	// 
+	// The default bindings are &lt;kbd&gt;Space&lt;/kbd&gt; and &lt;kbd&gt;Enter&lt;/kbd&gt;.
+	EmitActivate()
 }
 
 func unsafeWrapFlowBoxChild(base *gobject.ObjectInstance) *FlowBoxChildInstance {
@@ -74826,6 +76420,20 @@ func (self *FlowBoxChildInstance) SetChild(child Widget) {
 	runtime.KeepAlive(child)
 }
 
+// EmitActivate emits the "activate" signal
+//
+// Emitted when the user activates a child widget in a `GtkFlowBox`.
+// 
+// This can happen either by clicking or double-clicking,
+// or via a keybinding.
+// 
+// This is a [keybinding signal](class.SignalAction.html),
+// but it can be used by applications for their own purposes.
+// 
+// The default bindings are &lt;kbd&gt;Space&lt;/kbd&gt; and &lt;kbd&gt;Enter&lt;/kbd&gt;.
+func (o *FlowBoxChildInstance) EmitActivate() {
+	o.Emit("activate")
+}
 // FontDialogButtonInstance is the instance type used by all types extending GtkFontDialogButton. It is used internally by the bindings. Users should use the interface [FontDialogButton] instead.
 type FontDialogButtonInstance struct {
 	_ [0]func() // equal guard
@@ -74989,6 +76597,13 @@ type FontDialogButton interface {
 	// If @use_size is `TRUE`, the font name will be written
 	// using the selected font size.
 	SetUseSize(bool)
+	// EmitActivate emits the "activate" signal
+	//
+	// Emitted when the font dialog button is activated.
+	// 
+	// The `::activate` signal on `GtkFontDialogButton` is an action signal
+	// and emitting it causes the button to pop up its dialog.
+	EmitActivate()
 }
 
 func unsafeWrapFontDialogButton(base *gobject.ObjectInstance) *FontDialogButtonInstance {
@@ -75391,6 +77006,15 @@ func (self *FontDialogButtonInstance) SetUseSize(useSize bool) {
 	runtime.KeepAlive(useSize)
 }
 
+// EmitActivate emits the "activate" signal
+//
+// Emitted when the font dialog button is activated.
+// 
+// The `::activate` signal on `GtkFontDialogButton` is an action signal
+// and emitting it causes the button to pop up its dialog.
+func (o *FontDialogButtonInstance) EmitActivate() {
+	o.Emit("activate")
+}
 // FrameInstance is the instance type used by all types extending GtkFrame. It is used internally by the bindings. Users should use the interface [Frame] instead.
 type FrameInstance struct {
 	_ [0]func() // equal guard
@@ -76094,6 +77718,39 @@ type GLArea interface {
 	// 
 	// This function must be called before the area has been realized.
 	SetRequiredVersion(int, int)
+	// ConnectCreateContext connects the provided callback to the "create-context" signal
+	//
+	// Emitted when the widget is being realized.
+	// 
+	// This allows you to override how the GL context is created.
+	// This is useful when you want to reuse an existing GL context,
+	// or if you want to try creating different kinds of GL options.
+	// 
+	// If context creation fails then the signal handler can use
+	// [method@Gtk.GLArea.set_error] to register a more detailed error
+	// of how the construction failed.
+	ConnectCreateContext(func(GLArea) gdk.GLContextInstance) gobject.SignalHandle
+	// ConnectRender connects the provided callback to the "render" signal
+	//
+	// Emitted every time the contents of the `GtkGLArea` should be redrawn.
+	// 
+	// The @context is bound to the @area prior to emitting this function,
+	// and the buffers are painted to the window once the emission terminates.
+	ConnectRender(func(GLArea, gdk.GLContext) bool) gobject.SignalHandle
+	// ConnectResize connects the provided callback to the "resize" signal
+	//
+	// Emitted once when the widget is realized, and then each time the widget
+	// is changed while realized.
+	// 
+	// This is useful in order to keep GL state up to date with the widget size,
+	// like for instance camera properties which may depend on the width/height
+	// ratio.
+	// 
+	// The GL context for the area is guaranteed to be current when this signal
+	// is emitted.
+	// 
+	// The default handler sets up the GL viewport.
+	ConnectResize(func(GLArea, int, int)) gobject.SignalHandle
 }
 
 func unsafeWrapGLArea(base *gobject.ObjectInstance) *GLAreaInstance {
@@ -76566,6 +78223,45 @@ func (area *GLAreaInstance) SetRequiredVersion(major int, minor int) {
 	runtime.KeepAlive(minor)
 }
 
+// ConnectCreateContext connects the provided callback to the "create-context" signal
+//
+// Emitted when the widget is being realized.
+// 
+// This allows you to override how the GL context is created.
+// This is useful when you want to reuse an existing GL context,
+// or if you want to try creating different kinds of GL options.
+// 
+// If context creation fails then the signal handler can use
+// [method@Gtk.GLArea.set_error] to register a more detailed error
+// of how the construction failed.
+func (o *GLAreaInstance) ConnectCreateContext(fn func(GLArea) gdk.GLContextInstance) gobject.SignalHandle {
+	return o.Connect("create-context", fn)
+}
+// ConnectRender connects the provided callback to the "render" signal
+//
+// Emitted every time the contents of the `GtkGLArea` should be redrawn.
+// 
+// The @context is bound to the @area prior to emitting this function,
+// and the buffers are painted to the window once the emission terminates.
+func (o *GLAreaInstance) ConnectRender(fn func(GLArea, gdk.GLContext) bool) gobject.SignalHandle {
+	return o.Connect("render", fn)
+}
+// ConnectResize connects the provided callback to the "resize" signal
+//
+// Emitted once when the widget is realized, and then each time the widget
+// is changed while realized.
+// 
+// This is useful in order to keep GL state up to date with the widget size,
+// like for instance camera properties which may depend on the width/height
+// ratio.
+// 
+// The GL context for the area is guaranteed to be current when this signal
+// is emitted.
+// 
+// The default handler sets up the GL viewport.
+func (o *GLAreaInstance) ConnectResize(fn func(GLArea, int, int)) gobject.SignalHandle {
+	return o.Connect("resize", fn)
+}
 // GestureClickInstance is the instance type used by all types extending GtkGestureClick. It is used internally by the bindings. Users should use the interface [GestureClick] instead.
 type GestureClickInstance struct {
 	_ [0]func() // equal guard
@@ -76586,6 +78282,33 @@ var _ GestureClick = (*GestureClickInstance)(nil)
 type GestureClick interface {
 	GestureSingle
 	upcastToGtkGestureClick() *GestureClickInstance
+
+	// ConnectPressed connects the provided callback to the "pressed" signal
+	//
+	// Emitted whenever a button or touch press happens.
+	ConnectPressed(func(GestureClick, int, float64, float64)) gobject.SignalHandle
+	// ConnectReleased connects the provided callback to the "released" signal
+	//
+	// Emitted when a button or touch is released.
+	// 
+	// @n_press will report the number of press that is paired to
+	// this event, note that [signal@Gtk.GestureClick::stopped] may
+	// have been emitted between the press and its release, @n_press
+	// will only start over at the next press.
+	ConnectReleased(func(GestureClick, int, float64, float64)) gobject.SignalHandle
+	// ConnectStopped connects the provided callback to the "stopped" signal
+	//
+	// Emitted whenever any time/distance threshold has been exceeded.
+	ConnectStopped(func(GestureClick)) gobject.SignalHandle
+	// ConnectUnpairedRelease connects the provided callback to the "unpaired-release" signal
+	//
+	// Emitted whenever the gesture receives a release
+	// event that had no previous corresponding press.
+	// 
+	// Due to implicit grabs, this can only happen on situations
+	// where input is grabbed elsewhere mid-press or the pressed
+	// widget voluntarily relinquishes its implicit grab.
+	ConnectUnpairedRelease(func(GestureClick, float64, float64, uint, gdk.EventSequence)) gobject.SignalHandle
 }
 
 func unsafeWrapGestureClick(base *gobject.ObjectInstance) *GestureClickInstance {
@@ -76647,6 +78370,40 @@ func NewGestureClick() Gesture {
 	return goret
 }
 
+// ConnectPressed connects the provided callback to the "pressed" signal
+//
+// Emitted whenever a button or touch press happens.
+func (o *GestureClickInstance) ConnectPressed(fn func(GestureClick, int, float64, float64)) gobject.SignalHandle {
+	return o.Connect("pressed", fn)
+}
+// ConnectReleased connects the provided callback to the "released" signal
+//
+// Emitted when a button or touch is released.
+// 
+// @n_press will report the number of press that is paired to
+// this event, note that [signal@Gtk.GestureClick::stopped] may
+// have been emitted between the press and its release, @n_press
+// will only start over at the next press.
+func (o *GestureClickInstance) ConnectReleased(fn func(GestureClick, int, float64, float64)) gobject.SignalHandle {
+	return o.Connect("released", fn)
+}
+// ConnectStopped connects the provided callback to the "stopped" signal
+//
+// Emitted whenever any time/distance threshold has been exceeded.
+func (o *GestureClickInstance) ConnectStopped(fn func(GestureClick)) gobject.SignalHandle {
+	return o.Connect("stopped", fn)
+}
+// ConnectUnpairedRelease connects the provided callback to the "unpaired-release" signal
+//
+// Emitted whenever the gesture receives a release
+// event that had no previous corresponding press.
+// 
+// Due to implicit grabs, this can only happen on situations
+// where input is grabbed elsewhere mid-press or the pressed
+// widget voluntarily relinquishes its implicit grab.
+func (o *GestureClickInstance) ConnectUnpairedRelease(fn func(GestureClick, float64, float64, uint, gdk.EventSequence)) gobject.SignalHandle {
+	return o.Connect("unpaired-release", fn)
+}
 // GestureDragInstance is the instance type used by all types extending GtkGestureDrag. It is used internally by the bindings. Users should use the interface [GestureDrag] instead.
 type GestureDragInstance struct {
 	_ [0]func() // equal guard
@@ -76696,6 +78453,18 @@ type GestureDrag interface {
 	// and fills in @x and @y with the drag start coordinates,
 	// in widget-relative coordinates.
 	GetStartPoint() (float64, float64, bool)
+	// ConnectDragBegin connects the provided callback to the "drag-begin" signal
+	//
+	// Emitted whenever dragging starts.
+	ConnectDragBegin(func(GestureDrag, float64, float64)) gobject.SignalHandle
+	// ConnectDragEnd connects the provided callback to the "drag-end" signal
+	//
+	// Emitted whenever the dragging is finished.
+	ConnectDragEnd(func(GestureDrag, float64, float64)) gobject.SignalHandle
+	// ConnectDragUpdate connects the provided callback to the "drag-update" signal
+	//
+	// Emitted whenever the dragging point moves.
+	ConnectDragUpdate(func(GestureDrag, float64, float64)) gobject.SignalHandle
 }
 
 func unsafeWrapGestureDrag(base *gobject.ObjectInstance) *GestureDragInstance {
@@ -76828,6 +78597,24 @@ func (gesture *GestureDragInstance) GetStartPoint() (float64, float64, bool) {
 	return x, y, goret
 }
 
+// ConnectDragBegin connects the provided callback to the "drag-begin" signal
+//
+// Emitted whenever dragging starts.
+func (o *GestureDragInstance) ConnectDragBegin(fn func(GestureDrag, float64, float64)) gobject.SignalHandle {
+	return o.Connect("drag-begin", fn)
+}
+// ConnectDragEnd connects the provided callback to the "drag-end" signal
+//
+// Emitted whenever the dragging is finished.
+func (o *GestureDragInstance) ConnectDragEnd(fn func(GestureDrag, float64, float64)) gobject.SignalHandle {
+	return o.Connect("drag-end", fn)
+}
+// ConnectDragUpdate connects the provided callback to the "drag-update" signal
+//
+// Emitted whenever the dragging point moves.
+func (o *GestureDragInstance) ConnectDragUpdate(fn func(GestureDrag, float64, float64)) gobject.SignalHandle {
+	return o.Connect("drag-update", fn)
+}
 // GestureLongPressInstance is the instance type used by all types extending GtkGestureLongPress. It is used internally by the bindings. Users should use the interface [GestureLongPress] instead.
 type GestureLongPressInstance struct {
 	_ [0]func() // equal guard
@@ -76875,6 +78662,16 @@ type GestureLongPress interface {
 	// The default long press time will be multiplied by this value.
 	// Valid values are in the range [0.5..2.0].
 	SetDelayFactor(float64)
+	// ConnectCancelled connects the provided callback to the "cancelled" signal
+	//
+	// Emitted whenever a press moved too far, or was released
+	// before [signal@Gtk.GestureLongPress::pressed] happened.
+	ConnectCancelled(func(GestureLongPress)) gobject.SignalHandle
+	// ConnectPressed connects the provided callback to the "pressed" signal
+	//
+	// Emitted whenever a press goes unmoved/unreleased longer than
+	// what the GTK defaults tell.
+	ConnectPressed(func(GestureLongPress, float64, float64)) gobject.SignalHandle
 }
 
 func unsafeWrapGestureLongPress(base *gobject.ObjectInstance) *GestureLongPressInstance {
@@ -76979,6 +78776,20 @@ func (gesture *GestureLongPressInstance) SetDelayFactor(delayFactor float64) {
 	runtime.KeepAlive(delayFactor)
 }
 
+// ConnectCancelled connects the provided callback to the "cancelled" signal
+//
+// Emitted whenever a press moved too far, or was released
+// before [signal@Gtk.GestureLongPress::pressed] happened.
+func (o *GestureLongPressInstance) ConnectCancelled(fn func(GestureLongPress)) gobject.SignalHandle {
+	return o.Connect("cancelled", fn)
+}
+// ConnectPressed connects the provided callback to the "pressed" signal
+//
+// Emitted whenever a press goes unmoved/unreleased longer than
+// what the GTK defaults tell.
+func (o *GestureLongPressInstance) ConnectPressed(fn func(GestureLongPress, float64, float64)) gobject.SignalHandle {
+	return o.Connect("pressed", fn)
+}
 // GesturePanInstance is the instance type used by all types extending GtkGesturePan. It is used internally by the bindings. Users should use the interface [GesturePan] instead.
 type GesturePanInstance struct {
 	_ [0]func() // equal guard
@@ -77022,6 +78833,10 @@ type GesturePan interface {
 	//
 	// Sets the orientation to be expected on pan gestures.
 	SetOrientation(Orientation)
+	// ConnectPan connects the provided callback to the "pan" signal
+	//
+	// Emitted once a panning gesture along the expected axis is detected.
+	ConnectPan(func(GesturePan, PanDirection, float64)) gobject.SignalHandle
 }
 
 func unsafeWrapGesturePan(base *gobject.ObjectInstance) *GesturePanInstance {
@@ -77134,6 +78949,12 @@ func (gesture *GesturePanInstance) SetOrientation(orientation Orientation) {
 	runtime.KeepAlive(orientation)
 }
 
+// ConnectPan connects the provided callback to the "pan" signal
+//
+// Emitted once a panning gesture along the expected axis is detected.
+func (o *GesturePanInstance) ConnectPan(fn func(GesturePan, PanDirection, float64)) gobject.SignalHandle {
+	return o.Connect("pan", fn)
+}
 // GraphicsOffloadInstance is the instance type used by all types extending GtkGraphicsOffload. It is used internally by the bindings. Users should use the interface [GraphicsOffload] instead.
 type GraphicsOffloadInstance struct {
 	_ [0]func() // equal guard
@@ -82204,6 +84025,54 @@ type Label interface {
 	// 
 	// See the [property@Gtk.Label:yalign] property.
 	SetYAlign(float32)
+	// EmitActivateCurrentLink emits the "activate-current-link" signal
+	//
+	// Gets emitted when the user activates a link in the label.
+	// 
+	// The ::activate-current-link is a [keybinding signal](class.SignalAction.html).
+	// 
+	// Applications may also emit the signal with g_signal_emit_by_name()
+	// if they need to control activation of URIs programmatically.
+	// 
+	// The default bindings for this signal are all forms of the &lt;kbd&gt;Enter&lt;/kbd&gt; key.
+	EmitActivateCurrentLink()
+	// ConnectActivateLink connects the provided callback to the "activate-link" signal
+	//
+	// Gets emitted to activate a URI.
+	// 
+	// Applications may connect to it to override the default behaviour,
+	// which is to call [method@Gtk.FileLauncher.launch].
+	ConnectActivateLink(func(Label, string) bool) gobject.SignalHandle
+	// EmitCopyClipboard emits the "copy-clipboard" signal
+	//
+	// Gets emitted to copy the selection to the clipboard.
+	// 
+	// The ::copy-clipboard signal is a [keybinding signal](class.SignalAction.html).
+	// 
+	// The default binding for this signal is &lt;kbd&gt;Ctrl&lt;/kbd&gt;+&lt;kbd&gt;c&lt;/kbd&gt;.
+	EmitCopyClipboard()
+	// EmitMoveCursor emits the "move-cursor" signal
+	//
+	// Gets emitted when the user initiates a cursor movement.
+	// 
+	// The ::move-cursor signal is a [keybinding signal](class.SignalAction.html).
+	// If the cursor is not visible in @entry, this signal causes the viewport to
+	// be moved instead.
+	// 
+	// Applications should not connect to it, but may emit it with
+	// g_signal_emit_by_name() if they need to control the cursor
+	// programmatically.
+	// 
+	// The default bindings for this signal come in two variants,
+	// the variant with the &lt;kbd&gt;Shift&lt;/kbd&gt; modifier extends the selection,
+	// the variant without the &lt;kbd&gt;Shift&lt;/kbd&gt; modifier does not.
+	// There are too many key combinations to list them all here.
+	// 
+	// - &lt;kbd&gt;←&lt;/kbd&gt;, &lt;kbd&gt;→&lt;/kbd&gt;, &lt;kbd&gt;↑&lt;/kbd&gt;, &lt;kbd&gt;↓&lt;/kbd&gt;
+	//   move by individual characters/lines
+	// - &lt;kbd&gt;Ctrl&lt;/kbd&gt;+&lt;kbd&gt;←&lt;/kbd&gt;, etc. move by words/paragraphs
+	// - &lt;kbd&gt;Home&lt;/kbd&gt; and &lt;kbd&gt;End&lt;/kbd&gt; move to the ends of the buffer
+	EmitMoveCursor(MovementStep, int, bool)
 }
 
 func unsafeWrapLabel(base *gobject.ObjectInstance) *LabelInstance {
@@ -83584,6 +85453,62 @@ func (self *LabelInstance) SetYAlign(yalign float32) {
 	runtime.KeepAlive(yalign)
 }
 
+// EmitActivateCurrentLink emits the "activate-current-link" signal
+//
+// Gets emitted when the user activates a link in the label.
+// 
+// The ::activate-current-link is a [keybinding signal](class.SignalAction.html).
+// 
+// Applications may also emit the signal with g_signal_emit_by_name()
+// if they need to control activation of URIs programmatically.
+// 
+// The default bindings for this signal are all forms of the &lt;kbd&gt;Enter&lt;/kbd&gt; key.
+func (o *LabelInstance) EmitActivateCurrentLink() {
+	o.Emit("activate-current-link")
+}
+// ConnectActivateLink connects the provided callback to the "activate-link" signal
+//
+// Gets emitted to activate a URI.
+// 
+// Applications may connect to it to override the default behaviour,
+// which is to call [method@Gtk.FileLauncher.launch].
+func (o *LabelInstance) ConnectActivateLink(fn func(Label, string) bool) gobject.SignalHandle {
+	return o.Connect("activate-link", fn)
+}
+// EmitCopyClipboard emits the "copy-clipboard" signal
+//
+// Gets emitted to copy the selection to the clipboard.
+// 
+// The ::copy-clipboard signal is a [keybinding signal](class.SignalAction.html).
+// 
+// The default binding for this signal is &lt;kbd&gt;Ctrl&lt;/kbd&gt;+&lt;kbd&gt;c&lt;/kbd&gt;.
+func (o *LabelInstance) EmitCopyClipboard() {
+	o.Emit("copy-clipboard")
+}
+// EmitMoveCursor emits the "move-cursor" signal
+//
+// Gets emitted when the user initiates a cursor movement.
+// 
+// The ::move-cursor signal is a [keybinding signal](class.SignalAction.html).
+// If the cursor is not visible in @entry, this signal causes the viewport to
+// be moved instead.
+// 
+// Applications should not connect to it, but may emit it with
+// g_signal_emit_by_name() if they need to control the cursor
+// programmatically.
+// 
+// The default bindings for this signal come in two variants,
+// the variant with the &lt;kbd&gt;Shift&lt;/kbd&gt; modifier extends the selection,
+// the variant without the &lt;kbd&gt;Shift&lt;/kbd&gt; modifier does not.
+// There are too many key combinations to list them all here.
+// 
+// - &lt;kbd&gt;←&lt;/kbd&gt;, &lt;kbd&gt;→&lt;/kbd&gt;, &lt;kbd&gt;↑&lt;/kbd&gt;, &lt;kbd&gt;↓&lt;/kbd&gt;
+//   move by individual characters/lines
+// - &lt;kbd&gt;Ctrl&lt;/kbd&gt;+&lt;kbd&gt;←&lt;/kbd&gt;, etc. move by words/paragraphs
+// - &lt;kbd&gt;Home&lt;/kbd&gt; and &lt;kbd&gt;End&lt;/kbd&gt; move to the ends of the buffer
+func (o *LabelInstance) EmitMoveCursor(arg0 MovementStep, arg1 int, arg2 bool) {
+	o.Emit("move-cursor", arg0, arg1, arg2)
+}
 // LevelBarInstance is the instance type used by all types extending GtkLevelBar. It is used internally by the bindings. Users should use the interface [LevelBar] instead.
 type LevelBarInstance struct {
 	_ [0]func() // equal guard
@@ -83829,6 +85754,17 @@ type LevelBar interface {
 	//
 	// Sets the value of the `GtkLevelBar`.
 	SetValue(float64)
+	// ConnectOffsetChanged connects the provided callback to the "offset-changed" signal
+	//
+	// Emitted when an offset specified on the bar changes value.
+	// 
+	// This typically is the result of a [method@Gtk.LevelBar.add_offset_value]
+	// call.
+	// 
+	// The signal supports detailed connections; you can connect to the
+	// detailed signal "changed::x" in order to only receive callbacks when
+	// the value of offset "x" changes.
+	ConnectOffsetChanged(func(LevelBar, string)) gobject.SignalHandle
 }
 
 func unsafeWrapLevelBar(base *gobject.ObjectInstance) *LevelBarInstance {
@@ -84245,6 +86181,19 @@ func (self *LevelBarInstance) SetValue(value float64) {
 	runtime.KeepAlive(value)
 }
 
+// ConnectOffsetChanged connects the provided callback to the "offset-changed" signal
+//
+// Emitted when an offset specified on the bar changes value.
+// 
+// This typically is the result of a [method@Gtk.LevelBar.add_offset_value]
+// call.
+// 
+// The signal supports detailed connections; you can connect to the
+// detailed signal "changed::x" in order to only receive callbacks when
+// the value of offset "x" changes.
+func (o *LevelBarInstance) ConnectOffsetChanged(fn func(LevelBar, string)) gobject.SignalHandle {
+	return o.Connect("offset-changed", fn)
+}
 // LinkButtonInstance is the instance type used by all types extending GtkLinkButton. It is used internally by the bindings. Users should use the interface [LinkButton] instead.
 type LinkButtonInstance struct {
 	_ [0]func() // equal guard
@@ -84337,6 +86286,17 @@ type LinkButton interface {
 	// 
 	// See [method@Gtk.LinkButton.get_visited] for more details.
 	SetVisited(bool)
+	// ConnectActivateLink connects the provided callback to the "activate-link" signal
+	//
+	// Emitted each time the `GtkLinkButton` is clicked.
+	// 
+	// The default handler will call [method@Gtk.FileLauncher.launch] with the URI
+	// stored inside the [property@Gtk.LinkButton:uri] property.
+	// 
+	// To override the default behavior, you can connect to the
+	// ::activate-link signal and stop the propagation of the signal
+	// by returning %TRUE from your handler.
+	ConnectActivateLink(func(LinkButton) bool) gobject.SignalHandle
 }
 
 func unsafeWrapLinkButton(base *gobject.ObjectInstance) *LinkButtonInstance {
@@ -84550,6 +86510,19 @@ func (linkButton *LinkButtonInstance) SetVisited(visited bool) {
 	runtime.KeepAlive(visited)
 }
 
+// ConnectActivateLink connects the provided callback to the "activate-link" signal
+//
+// Emitted each time the `GtkLinkButton` is clicked.
+// 
+// The default handler will call [method@Gtk.FileLauncher.launch] with the URI
+// stored inside the [property@Gtk.LinkButton:uri] property.
+// 
+// To override the default behavior, you can connect to the
+// ::activate-link signal and stop the propagation of the signal
+// by returning %TRUE from your handler.
+func (o *LinkButtonInstance) ConnectActivateLink(fn func(LinkButton) bool) gobject.SignalHandle {
+	return o.Connect("activate-link", fn)
+}
 // ListBaseInstance is the instance type used by all types extending GtkListBase. It is used internally by the bindings. Users should use the interface [ListBase] instead.
 type ListBaseInstance struct {
 	_ [0]func() // equal guard
@@ -84767,30 +86740,6 @@ type ListBox interface {
 	// If a sort function is set, the widget will
 	// actually be inserted at the calculated position.
 	Append(Widget)
-	// BindModel wraps gtk_list_box_bind_model
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- model gio.ListModel (nullable): the `GListModel` to be bound to @box 
-	// 	- createWidgetFunc ListBoxCreateWidgetFunc (nullable): a function
-	//   that creates widgets for items or %NULL in case you also passed %NULL as @model 
-	//
-	// Binds @model to @box.
-	// 
-	// If @box was already bound to a model, that previous binding is
-	// destroyed.
-	// 
-	// The contents of @box are cleared and then filled with widgets that
-	// represent items from @model. @box is updated whenever @model changes.
-	// If @model is %NULL, @box is left empty.
-	// 
-	// It is undefined to add or remove widgets directly (for example, with
-	// [method@Gtk.ListBox.insert]) while @box is bound to a model.
-	// 
-	// Note that using a model is incompatible with the filtering and sorting
-	// functionality in `GtkListBox`. When using a model, filtering and sorting
-	// should be implemented by the model.
-	BindModel(gio.ListModel, ListBoxCreateWidgetFunc)
 	// DragHighlightRow wraps gtk_list_box_drag_highlight_row
 	// 
 	// The function takes the following parameters:
@@ -85105,6 +87054,66 @@ type ListBox interface {
 	//
 	// Unselects a single row of @box, if the selection mode allows it.
 	UnselectRow(ListBoxRow)
+	// EmitActivateCursorRow emits the "activate-cursor-row" signal
+	//
+	// Emitted when the cursor row is activated.
+	EmitActivateCursorRow()
+	// EmitMoveCursor emits the "move-cursor" signal
+	//
+	// Emitted when the user initiates a cursor movement.
+	// 
+	// The default bindings for this signal come in two variants, the variant with
+	// the Shift modifier extends the selection, the variant without the Shift
+	// modifier does not. There are too many key combinations to list them all
+	// here.
+	// 
+	// - &lt;kbd&gt;←&lt;/kbd&gt;, &lt;kbd&gt;→&lt;/kbd&gt;, &lt;kbd&gt;↑&lt;/kbd&gt;, &lt;kbd&gt;↓&lt;/kbd&gt;
+	//   move by individual children
+	// - &lt;kbd&gt;Home&lt;/kbd&gt;, &lt;kbd&gt;End&lt;/kbd&gt; move to the ends of the box
+	// - &lt;kbd&gt;PgUp&lt;/kbd&gt;, &lt;kbd&gt;PgDn&lt;/kbd&gt; move vertically by pages
+	EmitMoveCursor(MovementStep, int, bool, bool)
+	// ConnectRowActivated connects the provided callback to the "row-activated" signal
+	//
+	// Emitted when a row has been activated by the user.
+	ConnectRowActivated(func(ListBox, ListBoxRow)) gobject.SignalHandle
+	// ConnectRowSelected connects the provided callback to the "row-selected" signal
+	//
+	// Emitted when a new row is selected, or (with a %NULL @row)
+	// when the selection is cleared.
+	// 
+	// When the @box is using %GTK_SELECTION_MULTIPLE, this signal will not
+	// give you the full picture of selection changes, and you should use
+	// the [signal@Gtk.ListBox::selected-rows-changed] signal instead.
+	ConnectRowSelected(func(ListBox, ListBoxRow)) gobject.SignalHandle
+	// EmitSelectAll emits the "select-all" signal
+	//
+	// Emitted to select all children of the box, if the selection
+	// mode permits it.
+	// 
+	// This is a [keybinding signal](class.SignalAction.html).
+	// 
+	// The default binding for this signal is &lt;kbd&gt;Ctrl&lt;/kbd&gt;-&lt;kbd&gt;a&lt;/kbd&gt;.
+	EmitSelectAll()
+	// ConnectSelectedRowsChanged connects the provided callback to the "selected-rows-changed" signal
+	//
+	// Emitted when the set of selected rows changes.
+	ConnectSelectedRowsChanged(func(ListBox)) gobject.SignalHandle
+	// EmitToggleCursorRow emits the "toggle-cursor-row" signal
+	//
+	// Emitted when the cursor row is toggled.
+	// 
+	// The default bindings for this signal is &lt;kbd&gt;Ctrl&lt;/kbd&gt;+&lt;kbd&gt;␣&lt;/kbd&gt;.
+	EmitToggleCursorRow()
+	// EmitUnselectAll emits the "unselect-all" signal
+	//
+	// Emitted to unselect all children of the box, if the selection
+	// mode permits it.
+	// 
+	// This is a [keybinding signal](class.SignalAction.html).
+	// 
+	// The default binding for this signal is
+	// &lt;kbd&gt;Ctrl&lt;/kbd&gt;-&lt;kbd&gt;Shift&lt;/kbd&gt;-&lt;kbd&gt;a&lt;/kbd&gt;.
+	EmitUnselectAll()
 }
 
 func unsafeWrapListBox(base *gobject.ObjectInstance) *ListBoxInstance {
@@ -85192,52 +87201,6 @@ func (box *ListBoxInstance) Append(child Widget) {
 	C.gtk_list_box_append(carg0, carg1)
 	runtime.KeepAlive(box)
 	runtime.KeepAlive(child)
-}
-
-// BindModel wraps gtk_list_box_bind_model
-// 
-// The function takes the following parameters:
-// 
-// 	- model gio.ListModel (nullable): the `GListModel` to be bound to @box 
-// 	- createWidgetFunc ListBoxCreateWidgetFunc (nullable): a function
-//   that creates widgets for items or %NULL in case you also passed %NULL as @model 
-//
-// Binds @model to @box.
-// 
-// If @box was already bound to a model, that previous binding is
-// destroyed.
-// 
-// The contents of @box are cleared and then filled with widgets that
-// represent items from @model. @box is updated whenever @model changes.
-// If @model is %NULL, @box is left empty.
-// 
-// It is undefined to add or remove widgets directly (for example, with
-// [method@Gtk.ListBox.insert]) while @box is bound to a model.
-// 
-// Note that using a model is incompatible with the filtering and sorting
-// functionality in `GtkListBox`. When using a model, filtering and sorting
-// should be implemented by the model.
-func (box *ListBoxInstance) BindModel(model gio.ListModel, createWidgetFunc ListBoxCreateWidgetFunc) {
-	var carg0 *C.GtkListBox                // in, none, converted
-	var carg1 *C.GListModel                // in, none, converted, nullable
-	var carg2 C.GtkListBoxCreateWidgetFunc // callback, scope: notified, closure: carg3, destroy: carg4, nullable
-	var carg3 C.gpointer                   // implicit
-	var carg4 C.GDestroyNotify             // implicit
-
-	carg0 = (*C.GtkListBox)(UnsafeListBoxToGlibNone(box))
-	if model != nil {
-		carg1 = (*C.GListModel)(gio.UnsafeListModelToGlibNone(model))
-	}
-	if createWidgetFunc != nil {
-		carg2 = (*[0]byte)(C._gotk4_gtk4_ListBoxCreateWidgetFunc)
-		carg3 = C.gpointer(userdata.Register(createWidgetFunc))
-		carg4 = (C.GDestroyNotify)((*[0]byte)(C.destroyUserdata))
-	}
-
-	C.gtk_list_box_bind_model(carg0, carg1, carg2, carg3, carg4)
-	runtime.KeepAlive(box)
-	runtime.KeepAlive(model)
-	runtime.KeepAlive(createWidgetFunc)
 }
 
 // DragHighlightRow wraps gtk_list_box_drag_highlight_row
@@ -85924,6 +87887,82 @@ func (box *ListBoxInstance) UnselectRow(row ListBoxRow) {
 	runtime.KeepAlive(row)
 }
 
+// EmitActivateCursorRow emits the "activate-cursor-row" signal
+//
+// Emitted when the cursor row is activated.
+func (o *ListBoxInstance) EmitActivateCursorRow() {
+	o.Emit("activate-cursor-row")
+}
+// EmitMoveCursor emits the "move-cursor" signal
+//
+// Emitted when the user initiates a cursor movement.
+// 
+// The default bindings for this signal come in two variants, the variant with
+// the Shift modifier extends the selection, the variant without the Shift
+// modifier does not. There are too many key combinations to list them all
+// here.
+// 
+// - &lt;kbd&gt;←&lt;/kbd&gt;, &lt;kbd&gt;→&lt;/kbd&gt;, &lt;kbd&gt;↑&lt;/kbd&gt;, &lt;kbd&gt;↓&lt;/kbd&gt;
+//   move by individual children
+// - &lt;kbd&gt;Home&lt;/kbd&gt;, &lt;kbd&gt;End&lt;/kbd&gt; move to the ends of the box
+// - &lt;kbd&gt;PgUp&lt;/kbd&gt;, &lt;kbd&gt;PgDn&lt;/kbd&gt; move vertically by pages
+func (o *ListBoxInstance) EmitMoveCursor(arg0 MovementStep, arg1 int, arg2 bool, arg3 bool) {
+	o.Emit("move-cursor", arg0, arg1, arg2, arg3)
+}
+// ConnectRowActivated connects the provided callback to the "row-activated" signal
+//
+// Emitted when a row has been activated by the user.
+func (o *ListBoxInstance) ConnectRowActivated(fn func(ListBox, ListBoxRow)) gobject.SignalHandle {
+	return o.Connect("row-activated", fn)
+}
+// ConnectRowSelected connects the provided callback to the "row-selected" signal
+//
+// Emitted when a new row is selected, or (with a %NULL @row)
+// when the selection is cleared.
+// 
+// When the @box is using %GTK_SELECTION_MULTIPLE, this signal will not
+// give you the full picture of selection changes, and you should use
+// the [signal@Gtk.ListBox::selected-rows-changed] signal instead.
+func (o *ListBoxInstance) ConnectRowSelected(fn func(ListBox, ListBoxRow)) gobject.SignalHandle {
+	return o.Connect("row-selected", fn)
+}
+// EmitSelectAll emits the "select-all" signal
+//
+// Emitted to select all children of the box, if the selection
+// mode permits it.
+// 
+// This is a [keybinding signal](class.SignalAction.html).
+// 
+// The default binding for this signal is &lt;kbd&gt;Ctrl&lt;/kbd&gt;-&lt;kbd&gt;a&lt;/kbd&gt;.
+func (o *ListBoxInstance) EmitSelectAll() {
+	o.Emit("select-all")
+}
+// ConnectSelectedRowsChanged connects the provided callback to the "selected-rows-changed" signal
+//
+// Emitted when the set of selected rows changes.
+func (o *ListBoxInstance) ConnectSelectedRowsChanged(fn func(ListBox)) gobject.SignalHandle {
+	return o.Connect("selected-rows-changed", fn)
+}
+// EmitToggleCursorRow emits the "toggle-cursor-row" signal
+//
+// Emitted when the cursor row is toggled.
+// 
+// The default bindings for this signal is &lt;kbd&gt;Ctrl&lt;/kbd&gt;+&lt;kbd&gt;␣&lt;/kbd&gt;.
+func (o *ListBoxInstance) EmitToggleCursorRow() {
+	o.Emit("toggle-cursor-row")
+}
+// EmitUnselectAll emits the "unselect-all" signal
+//
+// Emitted to unselect all children of the box, if the selection
+// mode permits it.
+// 
+// This is a [keybinding signal](class.SignalAction.html).
+// 
+// The default binding for this signal is
+// &lt;kbd&gt;Ctrl&lt;/kbd&gt;-&lt;kbd&gt;Shift&lt;/kbd&gt;-&lt;kbd&gt;a&lt;/kbd&gt;.
+func (o *ListBoxInstance) EmitUnselectAll() {
+	o.Emit("unselect-all")
+}
 // ListBoxRowInstance is the instance type used by all types extending GtkListBoxRow. It is used internally by the bindings. Users should use the interface [ListBoxRow] instead.
 type ListBoxRowInstance struct {
 	_ [0]func() // equal guard
@@ -86054,6 +88093,14 @@ type ListBoxRow interface {
 	//
 	// Set whether the row can be selected.
 	SetSelectable(bool)
+	// EmitActivate emits the "activate" signal
+	//
+	// This is a keybinding signal, which will cause this row to be activated.
+	// 
+	// If you want to be notified when the user activates a row (by key or not),
+	// use the [signal@Gtk.ListBox::row-activated] signal on the row’s parent
+	// `GtkListBox`.
+	EmitActivate()
 }
 
 func unsafeWrapListBoxRow(base *gobject.ObjectInstance) *ListBoxRowInstance {
@@ -86386,6 +88433,16 @@ func (row *ListBoxRowInstance) SetSelectable(selectable bool) {
 	runtime.KeepAlive(selectable)
 }
 
+// EmitActivate emits the "activate" signal
+//
+// This is a keybinding signal, which will cause this row to be activated.
+// 
+// If you want to be notified when the user activates a row (by key or not),
+// use the [signal@Gtk.ListBox::row-activated] signal on the row’s parent
+// `GtkListBox`.
+func (o *ListBoxRowInstance) EmitActivate() {
+	o.Emit("activate")
+}
 // ListViewInstance is the instance type used by all types extending GtkListView. It is used internally by the bindings. Users should use the interface [ListView] instead.
 type ListViewInstance struct {
 	_ [0]func() // equal guard
@@ -86634,6 +88691,15 @@ type ListView interface {
 	//
 	// Sets the behavior of the &lt;kbd&gt;Tab&lt;/kbd&gt; and &lt;kbd&gt;Shift&lt;/kbd&gt;+&lt;kbd&gt;Tab&lt;/kbd&gt; keys.
 	SetTabBehavior(ListTabBehavior)
+	// ConnectActivate connects the provided callback to the "activate" signal
+	//
+	// Emitted when a row has been activated by the user,
+	// usually via activating the GtkListView|list.activate-item action.
+	// 
+	// This allows for a convenient way to handle activation in a listview.
+	// See [method@Gtk.ListItem.set_activatable] for details on how to use
+	// this signal.
+	ConnectActivate(func(ListView, uint)) gobject.SignalHandle
 }
 
 func unsafeWrapListView(base *gobject.ObjectInstance) *ListViewInstance {
@@ -87083,6 +89149,17 @@ func (self *ListViewInstance) SetTabBehavior(tabBehavior ListTabBehavior) {
 	runtime.KeepAlive(tabBehavior)
 }
 
+// ConnectActivate connects the provided callback to the "activate" signal
+//
+// Emitted when a row has been activated by the user,
+// usually via activating the GtkListView|list.activate-item action.
+// 
+// This allows for a convenient way to handle activation in a listview.
+// See [method@Gtk.ListItem.set_activatable] for details on how to use
+// this signal.
+func (o *ListViewInstance) ConnectActivate(fn func(ListView, uint)) gobject.SignalHandle {
+	return o.Connect("activate", fn)
+}
 // MediaControlsInstance is the instance type used by all types extending GtkMediaControls. It is used internally by the bindings. Users should use the interface [MediaControls] instead.
 type MediaControlsInstance struct {
 	_ [0]func() // equal guard
@@ -88026,6 +90103,13 @@ type MenuButton interface {
 	//
 	// If true, an underline in the text indicates a mnemonic.
 	SetUseUnderline(bool)
+	// EmitActivate emits the "activate" signal
+	//
+	// Emitted to when the menu button is activated.
+	// 
+	// The `::activate` signal on `GtkMenuButton` is an action signal and
+	// emitting it causes the button to pop up its menu.
+	EmitActivate()
 }
 
 func unsafeWrapMenuButton(base *gobject.ObjectInstance) *MenuButtonInstance {
@@ -88742,6 +90826,15 @@ func (menuButton *MenuButtonInstance) SetUseUnderline(useUnderline bool) {
 	runtime.KeepAlive(useUnderline)
 }
 
+// EmitActivate emits the "activate" signal
+//
+// Emitted to when the menu button is activated.
+// 
+// The `::activate` signal on `GtkMenuButton` is an action signal and
+// emitting it causes the button to pop up its menu.
+func (o *MenuButtonInstance) EmitActivate() {
+	o.Emit("activate")
+}
 // MnemonicActionInstance is the instance type used by all types extending GtkMnemonicAction. It is used internally by the bindings. Users should use the interface [MnemonicAction] instead.
 type MnemonicActionInstance struct {
 	_ [0]func() // equal guard
@@ -89954,6 +92047,75 @@ type Notebook interface {
 	// Sets whether the notebook tab can be reordered
 	// via drag and drop or not.
 	SetTabReorderable(Widget, bool)
+	// EmitChangeCurrentPage emits the "change-current-page" signal
+	//
+	// Emitted when the current page should be changed.
+	// 
+	// The default bindings for this signal are
+	// &lt;kbd&gt;Ctrl&lt;/kbd&gt;+&lt;kbd&gt;Alt&lt;/kbd&gt;+&lt;kbd&gt;PgUp&lt;/kbd&gt;,
+	// &lt;kbd&gt;Ctrl&lt;/kbd&gt;+&lt;kbd&gt;Alt&lt;/kbd&gt;+&lt;kbd&gt;PgDn&lt;/kbd&gt;,
+	// &lt;kbd&gt;Ctrl&lt;/kbd&gt;+&lt;kbd&gt;PgUp&lt;/kbd&gt; and &lt;kbd&gt;Ctrl&lt;/kbd&gt;+&lt;kbd&gt;PgDn&lt;/kbd&gt;.
+	EmitChangeCurrentPage(int) bool
+	// ConnectCreateWindow connects the provided callback to the "create-window" signal
+	//
+	// The ::create-window signal is emitted when a detachable
+	// tab is dropped on the root window.
+	// 
+	// A handler for this signal can create a window containing
+	// a notebook where the tab will be attached. It is also
+	// responsible for moving/resizing the window and adding the
+	// necessary properties to the notebook (e.g. the
+	// `GtkNotebook`:group-name ).
+	ConnectCreateWindow(func(Notebook, Widget) NotebookInstance) gobject.SignalHandle
+	// EmitFocusTab emits the "focus-tab" signal
+	//
+	// Emitted when a tab should be focused.
+	EmitFocusTab(NotebookTab) bool
+	// EmitMoveFocusOut emits the "move-focus-out" signal
+	//
+	// Emitted when focus was moved out.
+	// 
+	// The default bindings for this signal are
+	// &lt;kbd&gt;Ctrl&lt;/kbd&gt;+&lt;kbd&gt;Tab&lt;/kbd&gt;,
+	// &lt;kbd&gt;Ctrl&lt;/kbd&gt;+&lt;kbd&gt;Shift&lt;/kbd&gt;+&lt;kbd&gt;Tab&lt;/kbd&gt;,
+	// &lt;kbd&gt;Ctrl&lt;/kbd&gt;+&lt;kbd&gt;←&lt;/kbd&gt;, &lt;kbd&gt;Ctrl&lt;/kbd&gt;+&lt;kbd&gt;→&lt;/kbd&gt;,
+	// &lt;kbd&gt;Ctrl&lt;/kbd&gt;+&lt;kbd&gt;↑&lt;/kbd&gt; and &lt;kbd&gt;Ctrl&lt;/kbd&gt;+&lt;kbd&gt;↓&lt;/kbd&gt;.
+	EmitMoveFocusOut(DirectionType)
+	// ConnectPageAdded connects the provided callback to the "page-added" signal
+	//
+	// the ::page-added signal is emitted in the notebook
+	// right after a page is added to the notebook.
+	ConnectPageAdded(func(Notebook, Widget, uint)) gobject.SignalHandle
+	// ConnectPageRemoved connects the provided callback to the "page-removed" signal
+	//
+	// the ::page-removed signal is emitted in the notebook
+	// right after a page is removed from the notebook.
+	ConnectPageRemoved(func(Notebook, Widget, uint)) gobject.SignalHandle
+	// ConnectPageReordered connects the provided callback to the "page-reordered" signal
+	//
+	// the ::page-reordered signal is emitted in the notebook
+	// right after a page has been reordered.
+	ConnectPageReordered(func(Notebook, Widget, uint)) gobject.SignalHandle
+	// EmitReorderTab emits the "reorder-tab" signal
+	//
+	// Emitted when the tab should be reordered.
+	// 
+	// The default bindings for this signal are
+	// &lt;kbd&gt;Alt&lt;/kbd&gt;+&lt;kbd&gt;Home&lt;/kbd&gt;, &lt;kbd&gt;Alt&lt;/kbd&gt;+&lt;kbd&gt;End&lt;/kbd&gt;,
+	// &lt;kbd&gt;Alt&lt;/kbd&gt;+&lt;kbd&gt;PgUp&lt;/kbd&gt;, &lt;kbd&gt;Alt&lt;/kbd&gt;+&lt;kbd&gt;PgDn&lt;/kbd&gt;,
+	// &lt;kbd&gt;Alt&lt;/kbd&gt;+&lt;kbd&gt;←&lt;/kbd&gt;, &lt;kbd&gt;Alt&lt;/kbd&gt;+&lt;kbd&gt;→&lt;/kbd&gt;,
+	// &lt;kbd&gt;Alt&lt;/kbd&gt;+&lt;kbd&gt;↑&lt;/kbd&gt; and &lt;kbd&gt;Alt&lt;/kbd&gt;+&lt;kbd&gt;↓&lt;/kbd&gt;.
+	EmitReorderTab(DirectionType, bool) bool
+	// EmitSelectPage emits the "select-page" signal
+	//
+	// Emitted when a page should be selected.
+	// 
+	// The default binding for this signal is &lt;kbd&gt;␣&lt;/kbd&gt;.
+	EmitSelectPage(bool) bool
+	// ConnectSwitchPage connects the provided callback to the "switch-page" signal
+	//
+	// Emitted when the user or a function changes the current page.
+	ConnectSwitchPage(func(Notebook, Widget, uint)) gobject.SignalHandle
 }
 
 func unsafeWrapNotebook(base *gobject.ObjectInstance) *NotebookInstance {
@@ -91279,6 +93441,99 @@ func (notebook *NotebookInstance) SetTabReorderable(child Widget, reorderable bo
 	runtime.KeepAlive(reorderable)
 }
 
+// EmitChangeCurrentPage emits the "change-current-page" signal
+//
+// Emitted when the current page should be changed.
+// 
+// The default bindings for this signal are
+// &lt;kbd&gt;Ctrl&lt;/kbd&gt;+&lt;kbd&gt;Alt&lt;/kbd&gt;+&lt;kbd&gt;PgUp&lt;/kbd&gt;,
+// &lt;kbd&gt;Ctrl&lt;/kbd&gt;+&lt;kbd&gt;Alt&lt;/kbd&gt;+&lt;kbd&gt;PgDn&lt;/kbd&gt;,
+// &lt;kbd&gt;Ctrl&lt;/kbd&gt;+&lt;kbd&gt;PgUp&lt;/kbd&gt; and &lt;kbd&gt;Ctrl&lt;/kbd&gt;+&lt;kbd&gt;PgDn&lt;/kbd&gt;.
+func (o *NotebookInstance) EmitChangeCurrentPage(arg0 int) bool {
+	return 
+	o.Emit("change-current-page", arg0)
+}
+// ConnectCreateWindow connects the provided callback to the "create-window" signal
+//
+// The ::create-window signal is emitted when a detachable
+// tab is dropped on the root window.
+// 
+// A handler for this signal can create a window containing
+// a notebook where the tab will be attached. It is also
+// responsible for moving/resizing the window and adding the
+// necessary properties to the notebook (e.g. the
+// `GtkNotebook`:group-name ).
+func (o *NotebookInstance) ConnectCreateWindow(fn func(Notebook, Widget) NotebookInstance) gobject.SignalHandle {
+	return o.Connect("create-window", fn)
+}
+// EmitFocusTab emits the "focus-tab" signal
+//
+// Emitted when a tab should be focused.
+func (o *NotebookInstance) EmitFocusTab(arg0 NotebookTab) bool {
+	return 
+	o.Emit("focus-tab", arg0)
+}
+// EmitMoveFocusOut emits the "move-focus-out" signal
+//
+// Emitted when focus was moved out.
+// 
+// The default bindings for this signal are
+// &lt;kbd&gt;Ctrl&lt;/kbd&gt;+&lt;kbd&gt;Tab&lt;/kbd&gt;,
+// &lt;kbd&gt;Ctrl&lt;/kbd&gt;+&lt;kbd&gt;Shift&lt;/kbd&gt;+&lt;kbd&gt;Tab&lt;/kbd&gt;,
+// &lt;kbd&gt;Ctrl&lt;/kbd&gt;+&lt;kbd&gt;←&lt;/kbd&gt;, &lt;kbd&gt;Ctrl&lt;/kbd&gt;+&lt;kbd&gt;→&lt;/kbd&gt;,
+// &lt;kbd&gt;Ctrl&lt;/kbd&gt;+&lt;kbd&gt;↑&lt;/kbd&gt; and &lt;kbd&gt;Ctrl&lt;/kbd&gt;+&lt;kbd&gt;↓&lt;/kbd&gt;.
+func (o *NotebookInstance) EmitMoveFocusOut(arg0 DirectionType) {
+	o.Emit("move-focus-out", arg0)
+}
+// ConnectPageAdded connects the provided callback to the "page-added" signal
+//
+// the ::page-added signal is emitted in the notebook
+// right after a page is added to the notebook.
+func (o *NotebookInstance) ConnectPageAdded(fn func(Notebook, Widget, uint)) gobject.SignalHandle {
+	return o.Connect("page-added", fn)
+}
+// ConnectPageRemoved connects the provided callback to the "page-removed" signal
+//
+// the ::page-removed signal is emitted in the notebook
+// right after a page is removed from the notebook.
+func (o *NotebookInstance) ConnectPageRemoved(fn func(Notebook, Widget, uint)) gobject.SignalHandle {
+	return o.Connect("page-removed", fn)
+}
+// ConnectPageReordered connects the provided callback to the "page-reordered" signal
+//
+// the ::page-reordered signal is emitted in the notebook
+// right after a page has been reordered.
+func (o *NotebookInstance) ConnectPageReordered(fn func(Notebook, Widget, uint)) gobject.SignalHandle {
+	return o.Connect("page-reordered", fn)
+}
+// EmitReorderTab emits the "reorder-tab" signal
+//
+// Emitted when the tab should be reordered.
+// 
+// The default bindings for this signal are
+// &lt;kbd&gt;Alt&lt;/kbd&gt;+&lt;kbd&gt;Home&lt;/kbd&gt;, &lt;kbd&gt;Alt&lt;/kbd&gt;+&lt;kbd&gt;End&lt;/kbd&gt;,
+// &lt;kbd&gt;Alt&lt;/kbd&gt;+&lt;kbd&gt;PgUp&lt;/kbd&gt;, &lt;kbd&gt;Alt&lt;/kbd&gt;+&lt;kbd&gt;PgDn&lt;/kbd&gt;,
+// &lt;kbd&gt;Alt&lt;/kbd&gt;+&lt;kbd&gt;←&lt;/kbd&gt;, &lt;kbd&gt;Alt&lt;/kbd&gt;+&lt;kbd&gt;→&lt;/kbd&gt;,
+// &lt;kbd&gt;Alt&lt;/kbd&gt;+&lt;kbd&gt;↑&lt;/kbd&gt; and &lt;kbd&gt;Alt&lt;/kbd&gt;+&lt;kbd&gt;↓&lt;/kbd&gt;.
+func (o *NotebookInstance) EmitReorderTab(arg0 DirectionType, arg1 bool) bool {
+	return 
+	o.Emit("reorder-tab", arg0, arg1)
+}
+// EmitSelectPage emits the "select-page" signal
+//
+// Emitted when a page should be selected.
+// 
+// The default binding for this signal is &lt;kbd&gt;␣&lt;/kbd&gt;.
+func (o *NotebookInstance) EmitSelectPage(arg0 bool) bool {
+	return 
+	o.Emit("select-page", arg0)
+}
+// ConnectSwitchPage connects the provided callback to the "switch-page" signal
+//
+// Emitted when the user or a function changes the current page.
+func (o *NotebookInstance) ConnectSwitchPage(fn func(Notebook, Widget, uint)) gobject.SignalHandle {
+	return o.Connect("switch-page", fn)
+}
 // NothingActionInstance is the instance type used by all types extending GtkNothingAction. It is used internally by the bindings. Users should use the interface [NothingAction] instead.
 type NothingActionInstance struct {
 	_ [0]func() // equal guard
@@ -91602,6 +93857,23 @@ type Overlay interface {
 	// this property set to %TRUE. Children who are not included may
 	// be drawn outside of @overlay's allocation if they are too large.
 	SetMeasureOverlay(Widget, bool)
+	// ConnectGetChildPosition connects the provided callback to the "get-child-position" signal
+	//
+	// Emitted to determine the position and size of any overlay
+	// child widgets.
+	// 
+	// A handler for this signal should fill @allocation with
+	// the desired position and size for @widget, relative to
+	// the 'main' child of @overlay.
+	// 
+	// The default handler for this signal uses the @widget's
+	// halign and valign properties to determine the position
+	// and gives the widget its natural size (except that an
+	// alignment of %GTK_ALIGN_FILL will cause the overlay to
+	// be full-width/height). If the main child is a
+	// `GtkScrolledWindow`, the overlays are placed relative
+	// to its contents.
+	ConnectGetChildPosition(func(Overlay, Widget, gdk.Rectangle) bool) gobject.SignalHandle
 }
 
 func unsafeWrapOverlay(base *gobject.ObjectInstance) *OverlayInstance {
@@ -91876,6 +94148,25 @@ func (overlay *OverlayInstance) SetMeasureOverlay(widget Widget, measure bool) {
 	runtime.KeepAlive(measure)
 }
 
+// ConnectGetChildPosition connects the provided callback to the "get-child-position" signal
+//
+// Emitted to determine the position and size of any overlay
+// child widgets.
+// 
+// A handler for this signal should fill @allocation with
+// the desired position and size for @widget, relative to
+// the 'main' child of @overlay.
+// 
+// The default handler for this signal uses the @widget's
+// halign and valign properties to determine the position
+// and gives the widget its natural size (except that an
+// alignment of %GTK_ALIGN_FILL will cause the overlay to
+// be full-width/height). If the main child is a
+// `GtkScrolledWindow`, the overlays are placed relative
+// to its contents.
+func (o *OverlayInstance) ConnectGetChildPosition(fn func(Overlay, Widget, gdk.Rectangle) bool) gobject.SignalHandle {
+	return o.Connect("get-child-position", fn)
+}
 // PanedInstance is the instance type used by all types extending GtkPaned. It is used internally by the bindings. Users should use the interface [Paned] instead.
 type PanedInstance struct {
 	_ [0]func() // equal guard
@@ -92104,6 +94395,67 @@ type Paned interface {
 	//
 	// Sets whether the separator should be wide.
 	SetWideHandle(bool)
+	// EmitAcceptPosition emits the "accept-position" signal
+	//
+	// Emitted to accept the current position of the handle when
+	// moving it using key bindings.
+	// 
+	// This is a [keybinding signal](class.SignalAction.html).
+	// 
+	// The default binding for this signal is &lt;kbd&gt;Return&lt;/kbd&gt; or
+	// &lt;kbd&gt;Space&lt;/kbd&gt;.
+	EmitAcceptPosition() bool
+	// EmitCancelPosition emits the "cancel-position" signal
+	//
+	// Emitted to cancel moving the position of the handle using key
+	// bindings.
+	// 
+	// The position of the handle will be reset to the value prior to
+	// moving it.
+	// 
+	// This is a [keybinding signal](class.SignalAction.html).
+	// 
+	// The default binding for this signal is &lt;kbd&gt;Escape&lt;/kbd&gt;.
+	EmitCancelPosition() bool
+	// EmitCycleChildFocus emits the "cycle-child-focus" signal
+	//
+	// Emitted to cycle the focus between the children of the paned.
+	// 
+	// This is a [keybinding signal](class.SignalAction.html).
+	// 
+	// The default binding is &lt;kbd&gt;F6&lt;/kbd&gt;.
+	EmitCycleChildFocus(bool) bool
+	// EmitCycleHandleFocus emits the "cycle-handle-focus" signal
+	//
+	// Emitted to cycle whether the paned should grab focus to allow
+	// the user to change position of the handle by using key bindings.
+	// 
+	// This is a [keybinding signal](class.SignalAction.html).
+	// 
+	// The default binding for this signal is &lt;kbd&gt;F8&lt;/kbd&gt;.
+	EmitCycleHandleFocus(bool) bool
+	// EmitMoveHandle emits the "move-handle" signal
+	//
+	// Emitted to move the handle with key bindings.
+	// 
+	// This is a [keybinding signal](class.SignalAction.html).
+	// 
+	// The default bindings for this signal are
+	// &lt;kbd&gt;Ctrl&lt;/kbd&gt;+&lt;kbd&gt;←&lt;/kbd&gt;, &lt;kbd&gt;←&lt;/kbd&gt;,
+	// &lt;kbd&gt;Ctrl&lt;/kbd&gt;+&lt;kbd&gt;→&lt;/kbd&gt;, &lt;kbd&gt;→&lt;/kbd&gt;,
+	// &lt;kbd&gt;Ctrl&lt;/kbd&gt;+&lt;kbd&gt;↑&lt;/kbd&gt;, &lt;kbd&gt;↑&lt;/kbd&gt;,
+	// &lt;kbd&gt;Ctrl&lt;/kbd&gt;+&lt;kbd&gt;↓&lt;/kbd&gt;, &lt;kbd&gt;↓&lt;/kbd&gt;,
+	// &lt;kbd&gt;PgUp&lt;/kbd&gt;, &lt;kbd&gt;PgDn&lt;/kbd&gt;, &lt;kbd&gt;Home&lt;/kbd&gt;, &lt;kbd&gt;End&lt;/kbd&gt;.
+	EmitMoveHandle(ScrollType) bool
+	// EmitToggleHandleFocus emits the "toggle-handle-focus" signal
+	//
+	// Emitted to accept the current position of the handle and then
+	// move focus to the next widget in the focus chain.
+	// 
+	// This is a [keybinding signal](class.SignalAction.html).
+	// 
+	// The default binding is &lt;kbd&gt;Tab&lt;/kbd&gt;.
+	EmitToggleHandleFocus() bool
 }
 
 func unsafeWrapPaned(base *gobject.ObjectInstance) *PanedInstance {
@@ -92543,6 +94895,85 @@ func (paned *PanedInstance) SetWideHandle(wide bool) {
 	runtime.KeepAlive(wide)
 }
 
+// EmitAcceptPosition emits the "accept-position" signal
+//
+// Emitted to accept the current position of the handle when
+// moving it using key bindings.
+// 
+// This is a [keybinding signal](class.SignalAction.html).
+// 
+// The default binding for this signal is &lt;kbd&gt;Return&lt;/kbd&gt; or
+// &lt;kbd&gt;Space&lt;/kbd&gt;.
+func (o *PanedInstance) EmitAcceptPosition() bool {
+	return 
+	o.Emit("accept-position")
+}
+// EmitCancelPosition emits the "cancel-position" signal
+//
+// Emitted to cancel moving the position of the handle using key
+// bindings.
+// 
+// The position of the handle will be reset to the value prior to
+// moving it.
+// 
+// This is a [keybinding signal](class.SignalAction.html).
+// 
+// The default binding for this signal is &lt;kbd&gt;Escape&lt;/kbd&gt;.
+func (o *PanedInstance) EmitCancelPosition() bool {
+	return 
+	o.Emit("cancel-position")
+}
+// EmitCycleChildFocus emits the "cycle-child-focus" signal
+//
+// Emitted to cycle the focus between the children of the paned.
+// 
+// This is a [keybinding signal](class.SignalAction.html).
+// 
+// The default binding is &lt;kbd&gt;F6&lt;/kbd&gt;.
+func (o *PanedInstance) EmitCycleChildFocus(arg0 bool) bool {
+	return 
+	o.Emit("cycle-child-focus", arg0)
+}
+// EmitCycleHandleFocus emits the "cycle-handle-focus" signal
+//
+// Emitted to cycle whether the paned should grab focus to allow
+// the user to change position of the handle by using key bindings.
+// 
+// This is a [keybinding signal](class.SignalAction.html).
+// 
+// The default binding for this signal is &lt;kbd&gt;F8&lt;/kbd&gt;.
+func (o *PanedInstance) EmitCycleHandleFocus(arg0 bool) bool {
+	return 
+	o.Emit("cycle-handle-focus", arg0)
+}
+// EmitMoveHandle emits the "move-handle" signal
+//
+// Emitted to move the handle with key bindings.
+// 
+// This is a [keybinding signal](class.SignalAction.html).
+// 
+// The default bindings for this signal are
+// &lt;kbd&gt;Ctrl&lt;/kbd&gt;+&lt;kbd&gt;←&lt;/kbd&gt;, &lt;kbd&gt;←&lt;/kbd&gt;,
+// &lt;kbd&gt;Ctrl&lt;/kbd&gt;+&lt;kbd&gt;→&lt;/kbd&gt;, &lt;kbd&gt;→&lt;/kbd&gt;,
+// &lt;kbd&gt;Ctrl&lt;/kbd&gt;+&lt;kbd&gt;↑&lt;/kbd&gt;, &lt;kbd&gt;↑&lt;/kbd&gt;,
+// &lt;kbd&gt;Ctrl&lt;/kbd&gt;+&lt;kbd&gt;↓&lt;/kbd&gt;, &lt;kbd&gt;↓&lt;/kbd&gt;,
+// &lt;kbd&gt;PgUp&lt;/kbd&gt;, &lt;kbd&gt;PgDn&lt;/kbd&gt;, &lt;kbd&gt;Home&lt;/kbd&gt;, &lt;kbd&gt;End&lt;/kbd&gt;.
+func (o *PanedInstance) EmitMoveHandle(arg0 ScrollType) bool {
+	return 
+	o.Emit("move-handle", arg0)
+}
+// EmitToggleHandleFocus emits the "toggle-handle-focus" signal
+//
+// Emitted to accept the current position of the handle and then
+// move focus to the next widget in the focus chain.
+// 
+// This is a [keybinding signal](class.SignalAction.html).
+// 
+// The default binding is &lt;kbd&gt;Tab&lt;/kbd&gt;.
+func (o *PanedInstance) EmitToggleHandleFocus() bool {
+	return 
+	o.Emit("toggle-handle-focus")
+}
 // PasswordEntryInstance is the instance type used by all types extending GtkPasswordEntry. It is used internally by the bindings. Users should use the interface [PasswordEntry] instead.
 type PasswordEntryInstance struct {
 	_ [0]func() // equal guard
@@ -92631,6 +95062,12 @@ type PasswordEntry interface {
 	// 
 	// Setting this to %FALSE also hides the text again.
 	SetShowPeekIcon(bool)
+	// EmitActivate emits the "activate" signal
+	//
+	// Emitted when the entry is activated.
+	// 
+	// The keybindings for this signal are all forms of the Enter key.
+	EmitActivate()
 }
 
 func unsafeWrapPasswordEntry(base *gobject.ObjectInstance) *PasswordEntryInstance {
@@ -92791,6 +95228,14 @@ func (entry *PasswordEntryInstance) SetShowPeekIcon(showPeekIcon bool) {
 	runtime.KeepAlive(showPeekIcon)
 }
 
+// EmitActivate emits the "activate" signal
+//
+// Emitted when the entry is activated.
+// 
+// The keybindings for this signal are all forms of the Enter key.
+func (o *PasswordEntryInstance) EmitActivate() {
+	o.Emit("activate")
+}
 // PictureInstance is the instance type used by all types extending GtkPicture. It is used internally by the bindings. Users should use the interface [Picture] instead.
 type PictureInstance struct {
 	_ [0]func() // equal guard
@@ -93782,6 +96227,18 @@ type Popover interface {
 	// on lack of space (eg. if close to the window edges), the
 	// `GtkPopover` may choose to appear on the opposite side.
 	SetPosition(PositionType)
+	// EmitActivateDefault emits the "activate-default" signal
+	//
+	// Emitted whend the user activates the default widget.
+	// 
+	// This is a [keybinding signal](class.SignalAction.html).
+	// 
+	// The default binding for this signal is &lt;kbd&gt;Enter&lt;/kbd&gt;.
+	EmitActivateDefault()
+	// ConnectClosed connects the provided callback to the "closed" signal
+	//
+	// Emitted when the popover is closed.
+	ConnectClosed(func(Popover)) gobject.SignalHandle
 }
 
 func unsafeWrapPopover(base *gobject.ObjectInstance) *PopoverInstance {
@@ -94321,6 +96778,22 @@ func (popover *PopoverInstance) SetPosition(position PositionType) {
 	runtime.KeepAlive(position)
 }
 
+// EmitActivateDefault emits the "activate-default" signal
+//
+// Emitted whend the user activates the default widget.
+// 
+// This is a [keybinding signal](class.SignalAction.html).
+// 
+// The default binding for this signal is &lt;kbd&gt;Enter&lt;/kbd&gt;.
+func (o *PopoverInstance) EmitActivateDefault() {
+	o.Emit("activate-default")
+}
+// ConnectClosed connects the provided callback to the "closed" signal
+//
+// Emitted when the popover is closed.
+func (o *PopoverInstance) ConnectClosed(fn func(Popover)) gobject.SignalHandle {
+	return o.Connect("closed", fn)
+}
 // PopoverMenuInstance is the instance type used by all types extending GtkPopoverMenu. It is used internally by the bindings. Users should use the interface [PopoverMenu] instead.
 type PopoverMenuInstance struct {
 	_ [0]func() // equal guard
@@ -95981,6 +98454,36 @@ type Range interface {
 	// it will be clamped to fit inside them. The range emits the
 	// [signal@Gtk.Range::value-changed] signal if the value changes.
 	SetValue(float64)
+	// ConnectAdjustBounds connects the provided callback to the "adjust-bounds" signal
+	//
+	// Emitted before clamping a value, to give the application a
+	// chance to adjust the bounds.
+	ConnectAdjustBounds(func(Range, float64)) gobject.SignalHandle
+	// ConnectChangeValue connects the provided callback to the "change-value" signal
+	//
+	// Emitted when a scroll action is performed on a range.
+	// 
+	// It allows an application to determine the type of scroll event
+	// that occurred and the resultant new value. The application can
+	// handle the event itself and return %TRUE to prevent further
+	// processing. Or, by returning %FALSE, it can pass the event to
+	// other handlers until the default GTK handler is reached.
+	// 
+	// The value parameter is unrounded. An application that overrides
+	// the ::change-value signal is responsible for clamping the value
+	// to the desired number of decimal digits; the default GTK
+	// handler clamps the value based on [property@Gtk.Range:round-digits].
+	ConnectChangeValue(func(Range, ScrollType, float64) bool) gobject.SignalHandle
+	// EmitMoveSlider emits the "move-slider" signal
+	//
+	// Virtual function that moves the slider.
+	// 
+	// Used for keybindings.
+	EmitMoveSlider(ScrollType)
+	// ConnectValueChanged connects the provided callback to the "value-changed" signal
+	//
+	// Emitted when the range value changes.
+	ConnectValueChanged(func(Range)) gobject.SignalHandle
 }
 
 func unsafeWrapRange(base *gobject.ObjectInstance) *RangeInstance {
@@ -96594,6 +99097,44 @@ func (_range *RangeInstance) SetValue(value float64) {
 	runtime.KeepAlive(value)
 }
 
+// ConnectAdjustBounds connects the provided callback to the "adjust-bounds" signal
+//
+// Emitted before clamping a value, to give the application a
+// chance to adjust the bounds.
+func (o *RangeInstance) ConnectAdjustBounds(fn func(Range, float64)) gobject.SignalHandle {
+	return o.Connect("adjust-bounds", fn)
+}
+// ConnectChangeValue connects the provided callback to the "change-value" signal
+//
+// Emitted when a scroll action is performed on a range.
+// 
+// It allows an application to determine the type of scroll event
+// that occurred and the resultant new value. The application can
+// handle the event itself and return %TRUE to prevent further
+// processing. Or, by returning %FALSE, it can pass the event to
+// other handlers until the default GTK handler is reached.
+// 
+// The value parameter is unrounded. An application that overrides
+// the ::change-value signal is responsible for clamping the value
+// to the desired number of decimal digits; the default GTK
+// handler clamps the value based on [property@Gtk.Range:round-digits].
+func (o *RangeInstance) ConnectChangeValue(fn func(Range, ScrollType, float64) bool) gobject.SignalHandle {
+	return o.Connect("change-value", fn)
+}
+// EmitMoveSlider emits the "move-slider" signal
+//
+// Virtual function that moves the slider.
+// 
+// Used for keybindings.
+func (o *RangeInstance) EmitMoveSlider(arg0 ScrollType) {
+	o.Emit("move-slider", arg0)
+}
+// ConnectValueChanged connects the provided callback to the "value-changed" signal
+//
+// Emitted when the range value changes.
+func (o *RangeInstance) ConnectValueChanged(fn func(Range)) gobject.SignalHandle {
+	return o.Connect("value-changed", fn)
+}
 // RevealerInstance is the instance type used by all types extending GtkRevealer. It is used internally by the bindings. Users should use the interface [Revealer] instead.
 type RevealerInstance struct {
 	_ [0]func() // equal guard
@@ -97861,6 +100402,27 @@ type ScaleButton interface {
 	// The scale button emits the [signal@Gtk.ScaleButton::value-changed]
 	// signal if the value changes.
 	SetValue(float64)
+	// EmitPopdown emits the "popdown" signal
+	//
+	// Emitted to dismiss the popup.
+	// 
+	// This is a [keybinding signal](class.SignalAction.html).
+	// 
+	// The default binding for this signal is &lt;kbd&gt;Escape&lt;/kbd&gt;.
+	EmitPopdown()
+	// EmitPopup emits the "popup" signal
+	//
+	// Emitted to popup the scale widget.
+	// 
+	// This is a [keybinding signal](class.SignalAction.html).
+	// 
+	// The default bindings for this signal are &lt;kbd&gt;Space&lt;/kbd&gt;,
+	// &lt;kbd&gt;Enter&lt;/kbd&gt; and &lt;kbd&gt;Return&lt;/kbd&gt;.
+	EmitPopup()
+	// ConnectValueChanged connects the provided callback to the "value-changed" signal
+	//
+	// Emitted when the value field has changed.
+	ConnectValueChanged(func(ScaleButton, float64)) gobject.SignalHandle
 }
 
 func unsafeWrapScaleButton(base *gobject.ObjectInstance) *ScaleButtonInstance {
@@ -98215,6 +100777,33 @@ func (button *ScaleButtonInstance) SetValue(value float64) {
 	runtime.KeepAlive(value)
 }
 
+// EmitPopdown emits the "popdown" signal
+//
+// Emitted to dismiss the popup.
+// 
+// This is a [keybinding signal](class.SignalAction.html).
+// 
+// The default binding for this signal is &lt;kbd&gt;Escape&lt;/kbd&gt;.
+func (o *ScaleButtonInstance) EmitPopdown() {
+	o.Emit("popdown")
+}
+// EmitPopup emits the "popup" signal
+//
+// Emitted to popup the scale widget.
+// 
+// This is a [keybinding signal](class.SignalAction.html).
+// 
+// The default bindings for this signal are &lt;kbd&gt;Space&lt;/kbd&gt;,
+// &lt;kbd&gt;Enter&lt;/kbd&gt; and &lt;kbd&gt;Return&lt;/kbd&gt;.
+func (o *ScaleButtonInstance) EmitPopup() {
+	o.Emit("popup")
+}
+// ConnectValueChanged connects the provided callback to the "value-changed" signal
+//
+// Emitted when the value field has changed.
+func (o *ScaleButtonInstance) ConnectValueChanged(fn func(ScaleButton, float64)) gobject.SignalHandle {
+	return o.Connect("value-changed", fn)
+}
 // ScrollbarInstance is the instance type used by all types extending GtkScrollbar. It is used internally by the bindings. Users should use the interface [Scrollbar] instead.
 type ScrollbarInstance struct {
 	_ [0]func() // equal guard
@@ -98823,6 +101412,50 @@ type ScrolledWindow interface {
 	// If no window placement is set for a scrolled window,
 	// it defaults to %GTK_CORNER_TOP_LEFT.
 	UnsetPlacement()
+	// ConnectEdgeOvershot connects the provided callback to the "edge-overshot" signal
+	//
+	// Emitted whenever user initiated scrolling makes the scrolled
+	// window firmly surpass the limits defined by the adjustment
+	// in that orientation.
+	// 
+	// A similar behavior without edge resistance is provided by the
+	// [signal@Gtk.ScrolledWindow::edge-reached] signal.
+	// 
+	// Note: The @pos argument is LTR/RTL aware, so callers should be
+	// aware too if intending to provide behavior on horizontal edges.
+	ConnectEdgeOvershot(func(ScrolledWindow, PositionType)) gobject.SignalHandle
+	// ConnectEdgeReached connects the provided callback to the "edge-reached" signal
+	//
+	// Emitted whenever user-initiated scrolling makes the scrolled
+	// window exactly reach the lower or upper limits defined by the
+	// adjustment in that orientation.
+	// 
+	// A similar behavior with edge resistance is provided by the
+	// [signal@Gtk.ScrolledWindow::edge-overshot] signal.
+	// 
+	// Note: The @pos argument is LTR/RTL aware, so callers should be
+	// aware too if intending to provide behavior on horizontal edges.
+	ConnectEdgeReached(func(ScrolledWindow, PositionType)) gobject.SignalHandle
+	// EmitMoveFocusOut emits the "move-focus-out" signal
+	//
+	// Emitted when focus is moved away from the scrolled window by a
+	// keybinding.
+	// 
+	// This is a [keybinding signal](class.SignalAction.html).
+	// 
+	// The default bindings for this signal are
+	// &lt;kbd&gt;Ctrl&lt;/kbd&gt;+&lt;kbd&gt;Tab&lt;/kbd&gt; to move forward and
+	// &lt;kbd&gt;Ctrl&lt;/kbd&gt;+&lt;kbd&gt;Shift&lt;/kbd&gt;+&lt;kbd&gt;Tab&lt;/kbd&gt;` to move backward.
+	EmitMoveFocusOut(DirectionType)
+	// EmitScrollChild emits the "scroll-child" signal
+	//
+	// Emitted when a keybinding that scrolls is pressed.
+	// 
+	// This is a [keybinding signal](class.SignalAction.html).
+	// 
+	// The horizontal or vertical adjustment is updated which triggers a
+	// signal that the scrolled window’s child may listen to and scroll itself.
+	EmitScrollChild(ScrollType, bool) bool
 }
 
 func unsafeWrapScrolledWindow(base *gobject.ObjectInstance) *ScrolledWindowInstance {
@@ -99623,6 +102256,59 @@ func (scrolledWindow *ScrolledWindowInstance) UnsetPlacement() {
 	runtime.KeepAlive(scrolledWindow)
 }
 
+// ConnectEdgeOvershot connects the provided callback to the "edge-overshot" signal
+//
+// Emitted whenever user initiated scrolling makes the scrolled
+// window firmly surpass the limits defined by the adjustment
+// in that orientation.
+// 
+// A similar behavior without edge resistance is provided by the
+// [signal@Gtk.ScrolledWindow::edge-reached] signal.
+// 
+// Note: The @pos argument is LTR/RTL aware, so callers should be
+// aware too if intending to provide behavior on horizontal edges.
+func (o *ScrolledWindowInstance) ConnectEdgeOvershot(fn func(ScrolledWindow, PositionType)) gobject.SignalHandle {
+	return o.Connect("edge-overshot", fn)
+}
+// ConnectEdgeReached connects the provided callback to the "edge-reached" signal
+//
+// Emitted whenever user-initiated scrolling makes the scrolled
+// window exactly reach the lower or upper limits defined by the
+// adjustment in that orientation.
+// 
+// A similar behavior with edge resistance is provided by the
+// [signal@Gtk.ScrolledWindow::edge-overshot] signal.
+// 
+// Note: The @pos argument is LTR/RTL aware, so callers should be
+// aware too if intending to provide behavior on horizontal edges.
+func (o *ScrolledWindowInstance) ConnectEdgeReached(fn func(ScrolledWindow, PositionType)) gobject.SignalHandle {
+	return o.Connect("edge-reached", fn)
+}
+// EmitMoveFocusOut emits the "move-focus-out" signal
+//
+// Emitted when focus is moved away from the scrolled window by a
+// keybinding.
+// 
+// This is a [keybinding signal](class.SignalAction.html).
+// 
+// The default bindings for this signal are
+// &lt;kbd&gt;Ctrl&lt;/kbd&gt;+&lt;kbd&gt;Tab&lt;/kbd&gt; to move forward and
+// &lt;kbd&gt;Ctrl&lt;/kbd&gt;+&lt;kbd&gt;Shift&lt;/kbd&gt;+&lt;kbd&gt;Tab&lt;/kbd&gt;` to move backward.
+func (o *ScrolledWindowInstance) EmitMoveFocusOut(arg0 DirectionType) {
+	o.Emit("move-focus-out", arg0)
+}
+// EmitScrollChild emits the "scroll-child" signal
+//
+// Emitted when a keybinding that scrolls is pressed.
+// 
+// This is a [keybinding signal](class.SignalAction.html).
+// 
+// The horizontal or vertical adjustment is updated which triggers a
+// signal that the scrolled window’s child may listen to and scroll itself.
+func (o *ScrolledWindowInstance) EmitScrollChild(arg0 ScrollType, arg1 bool) bool {
+	return 
+	o.Emit("scroll-child", arg0, arg1)
+}
 // SearchBarInstance is the instance type used by all types extending GtkSearchBar. It is used internally by the bindings. Users should use the interface [SearchBar] instead.
 type SearchBarInstance struct {
 	_ [0]func() // equal guard
@@ -100197,6 +102883,58 @@ type SearchEntry interface {
 	// Set the delay to be used between the last keypress and the
 	// [signal@Gtk.SearchEntry::search-changed] signal being emitted.
 	SetSearchDelay(uint)
+	// EmitActivate emits the "activate" signal
+	//
+	// Emitted when the entry is activated.
+	// 
+	// The keybindings for this signal are all forms of the &lt;kbd&gt;Enter&lt;/kbd&gt; key.
+	EmitActivate()
+	// EmitNextMatch emits the "next-match" signal
+	//
+	// Emitted when the user initiates a move to the next match
+	// for the current search string.
+	// 
+	// This is a [keybinding signal](class.SignalAction.html).
+	// 
+	// Applications should connect to it, to implement moving
+	// between matches.
+	// 
+	// The default bindings for this signal is &lt;kbd&gt;Ctrl&lt;/kbd&gt;+&lt;kbd&gt;g&lt;/kbd&gt;.
+	EmitNextMatch()
+	// EmitPreviousMatch emits the "previous-match" signal
+	//
+	// Emitted when the user initiates a move to the previous match
+	// for the current search string.
+	// 
+	// This is a [keybinding signal](class.SignalAction.html).
+	// 
+	// Applications should connect to it, to implement moving
+	// between matches.
+	// 
+	// The default bindings for this signal is
+	// &lt;kbd&gt;Ctrl&lt;/kbd&gt;+&lt;kbd&gt;Shift&lt;/kbd&gt;+&lt;kbd&gt;g&lt;/kbd&gt;.
+	EmitPreviousMatch()
+	// ConnectSearchChanged connects the provided callback to the "search-changed" signal
+	//
+	// Emitted with a delay. The length of the delay can be
+	// changed with the [property@Gtk.SearchEntry:search-delay]
+	// property.
+	ConnectSearchChanged(func(SearchEntry)) gobject.SignalHandle
+	// ConnectSearchStarted connects the provided callback to the "search-started" signal
+	//
+	// Emitted when the user initiated a search on the entry.
+	ConnectSearchStarted(func(SearchEntry)) gobject.SignalHandle
+	// EmitStopSearch emits the "stop-search" signal
+	//
+	// Emitted when the user stops a search via keyboard input.
+	// 
+	// This is a [keybinding signal](class.SignalAction.html).
+	// 
+	// Applications should connect to it, to implement hiding
+	// the search entry in this case.
+	// 
+	// The default bindings for this signal is &lt;kbd&gt;Escape&lt;/kbd&gt;.
+	EmitStopSearch()
 }
 
 func unsafeWrapSearchEntry(base *gobject.ObjectInstance) *SearchEntryInstance {
@@ -100492,6 +103230,70 @@ func (entry *SearchEntryInstance) SetSearchDelay(delay uint) {
 	runtime.KeepAlive(delay)
 }
 
+// EmitActivate emits the "activate" signal
+//
+// Emitted when the entry is activated.
+// 
+// The keybindings for this signal are all forms of the &lt;kbd&gt;Enter&lt;/kbd&gt; key.
+func (o *SearchEntryInstance) EmitActivate() {
+	o.Emit("activate")
+}
+// EmitNextMatch emits the "next-match" signal
+//
+// Emitted when the user initiates a move to the next match
+// for the current search string.
+// 
+// This is a [keybinding signal](class.SignalAction.html).
+// 
+// Applications should connect to it, to implement moving
+// between matches.
+// 
+// The default bindings for this signal is &lt;kbd&gt;Ctrl&lt;/kbd&gt;+&lt;kbd&gt;g&lt;/kbd&gt;.
+func (o *SearchEntryInstance) EmitNextMatch() {
+	o.Emit("next-match")
+}
+// EmitPreviousMatch emits the "previous-match" signal
+//
+// Emitted when the user initiates a move to the previous match
+// for the current search string.
+// 
+// This is a [keybinding signal](class.SignalAction.html).
+// 
+// Applications should connect to it, to implement moving
+// between matches.
+// 
+// The default bindings for this signal is
+// &lt;kbd&gt;Ctrl&lt;/kbd&gt;+&lt;kbd&gt;Shift&lt;/kbd&gt;+&lt;kbd&gt;g&lt;/kbd&gt;.
+func (o *SearchEntryInstance) EmitPreviousMatch() {
+	o.Emit("previous-match")
+}
+// ConnectSearchChanged connects the provided callback to the "search-changed" signal
+//
+// Emitted with a delay. The length of the delay can be
+// changed with the [property@Gtk.SearchEntry:search-delay]
+// property.
+func (o *SearchEntryInstance) ConnectSearchChanged(fn func(SearchEntry)) gobject.SignalHandle {
+	return o.Connect("search-changed", fn)
+}
+// ConnectSearchStarted connects the provided callback to the "search-started" signal
+//
+// Emitted when the user initiated a search on the entry.
+func (o *SearchEntryInstance) ConnectSearchStarted(fn func(SearchEntry)) gobject.SignalHandle {
+	return o.Connect("search-started", fn)
+}
+// EmitStopSearch emits the "stop-search" signal
+//
+// Emitted when the user stops a search via keyboard input.
+// 
+// This is a [keybinding signal](class.SignalAction.html).
+// 
+// Applications should connect to it, to implement hiding
+// the search entry in this case.
+// 
+// The default bindings for this signal is &lt;kbd&gt;Escape&lt;/kbd&gt;.
+func (o *SearchEntryInstance) EmitStopSearch() {
+	o.Emit("stop-search")
+}
 // SeparatorInstance is the instance type used by all types extending GtkSeparator. It is used internally by the bindings. Users should use the interface [Separator] instead.
 type SeparatorInstance struct {
 	_ [0]func() // equal guard
@@ -101001,6 +103803,14 @@ type ShortcutsSection interface {
 	// Adding children with the `GtkBox` API is not appropriate, as
 	// `GtkShortcutsSection` manages its children internally.
 	AddGroup(ShortcutsGroup)
+	// EmitChangeCurrentPage emits the "change-current-page" signal
+	//
+	// Emitted when we change the current page.
+	// 
+	// The default bindings for this signal are
+	// &lt;kbd&gt;Ctrl&lt;/kbd&gt;+&lt;kbd&gt;PgUp&lt;/kbd&gt;, &lt;kbd&gt;PgUp&lt;/kbd&gt;,
+	// &lt;kbd&gt;Ctrl&lt;/kbd&gt;+&lt;kbd&gt;PgDn&lt;/kbd&gt;, &lt;kbd&gt;PgDn&lt;/kbd&gt;.
+	EmitChangeCurrentPage(int) bool
 }
 
 func unsafeWrapShortcutsSection(base *gobject.ObjectInstance) *ShortcutsSectionInstance {
@@ -101080,6 +103890,17 @@ func (self *ShortcutsSectionInstance) AddGroup(group ShortcutsGroup) {
 	runtime.KeepAlive(group)
 }
 
+// EmitChangeCurrentPage emits the "change-current-page" signal
+//
+// Emitted when we change the current page.
+// 
+// The default bindings for this signal are
+// &lt;kbd&gt;Ctrl&lt;/kbd&gt;+&lt;kbd&gt;PgUp&lt;/kbd&gt;, &lt;kbd&gt;PgUp&lt;/kbd&gt;,
+// &lt;kbd&gt;Ctrl&lt;/kbd&gt;+&lt;kbd&gt;PgDn&lt;/kbd&gt;, &lt;kbd&gt;PgDn&lt;/kbd&gt;.
+func (o *ShortcutsSectionInstance) EmitChangeCurrentPage(arg0 int) bool {
+	return 
+	o.Emit("change-current-page", arg0)
+}
 // ShortcutsShortcutInstance is the instance type used by all types extending GtkShortcutsShortcut. It is used internally by the bindings. Users should use the interface [ShortcutsShortcut] instead.
 type ShortcutsShortcutInstance struct {
 	_ [0]func() // equal guard
@@ -101248,6 +104069,22 @@ type ShortcutsWindow interface {
 	// Using [method@Gtk.Window.set_child] is not appropriate as the shortcuts
 	// window manages its children internally.
 	AddSection(ShortcutsSection)
+	// EmitClose emits the "close" signal
+	//
+	// Emitted when the user uses a keybinding to close the window.
+	// 
+	// This is a [keybinding signal](class.SignalAction.html).
+	// 
+	// The default binding for this signal is the &lt;kbd&gt;Escape&lt;/kbd&gt; key.
+	EmitClose()
+	// EmitSearch emits the "search" signal
+	//
+	// Emitted when the user uses a keybinding to start a search.
+	// 
+	// This is a [keybinding signal](class.SignalAction.html).
+	// 
+	// The default binding for this signal is &lt;kbd&gt;Control&lt;/kbd&gt;+&lt;kbd&gt;F&lt;/kbd&gt;.
+	EmitSearch()
 }
 
 func unsafeWrapShortcutsWindow(base *gobject.ObjectInstance) *ShortcutsWindowInstance {
@@ -101327,6 +104164,26 @@ func (self *ShortcutsWindowInstance) AddSection(section ShortcutsSection) {
 	runtime.KeepAlive(section)
 }
 
+// EmitClose emits the "close" signal
+//
+// Emitted when the user uses a keybinding to close the window.
+// 
+// This is a [keybinding signal](class.SignalAction.html).
+// 
+// The default binding for this signal is the &lt;kbd&gt;Escape&lt;/kbd&gt; key.
+func (o *ShortcutsWindowInstance) EmitClose() {
+	o.Emit("close")
+}
+// EmitSearch emits the "search" signal
+//
+// Emitted when the user uses a keybinding to start a search.
+// 
+// This is a [keybinding signal](class.SignalAction.html).
+// 
+// The default binding for this signal is &lt;kbd&gt;Control&lt;/kbd&gt;+&lt;kbd&gt;F&lt;/kbd&gt;.
+func (o *ShortcutsWindowInstance) EmitSearch() {
+	o.Emit("search")
+}
 // SpinButtonInstance is the instance type used by all types extending GtkSpinButton. It is used internally by the bindings. Users should use the interface [SpinButton] instead.
 type SpinButtonInstance struct {
 	_ [0]func() // equal guard
@@ -101704,6 +104561,71 @@ type SpinButton interface {
 	//
 	// Manually force an update of the spin button.
 	Update()
+	// EmitActivate emits the "activate" signal
+	//
+	// Emitted when the spin button is activated.
+	// 
+	// The keybindings for this signal are all forms of the &lt;kbd&gt;Enter&lt;/kbd&gt; key.
+	// 
+	// If the &lt;kbd&gt;Enter&lt;/kbd&gt; key results in the value being committed to the
+	// spin button, then activation does not occur until &lt;kbd&gt;Enter&lt;/kbd&gt; is
+	// pressed again.
+	EmitActivate()
+	// EmitChangeValue emits the "change-value" signal
+	//
+	// Emitted when the user initiates a value change.
+	// 
+	// This is a [keybinding signal](class.SignalAction.html).
+	// 
+	// Applications should not connect to it, but may emit it with
+	// g_signal_emit_by_name() if they need to control the cursor
+	// programmatically.
+	// 
+	// The default bindings for this signal are Up/Down and PageUp/PageDown.
+	EmitChangeValue(ScrollType)
+	// ConnectInput connects the provided callback to the "input" signal
+	//
+	// Emitted to convert the users input into a double value.
+	// 
+	// The signal handler is expected to use [method@Gtk.Editable.get_text]
+	// to retrieve the text of the spinbutton and set @new_value to the
+	// new value.
+	// 
+	// The default conversion uses g_strtod().
+	ConnectInput(func(SpinButton, unsafe.Pointer) int) gobject.SignalHandle
+	// ConnectOutput connects the provided callback to the "output" signal
+	//
+	// Emitted to tweak the formatting of the value for display.
+	// 
+	// ```c
+	// // show leading zeros
+	// static gboolean
+	// on_output (GtkSpinButton *spin,
+	//            gpointer       data)
+	// {
+	//    char *text;
+	//    int value;
+	// 
+	//    value = gtk_spin_button_get_value_as_int (spin);
+	//    text = g_strdup_printf ("%02d", value);
+	//    gtk_editable_set_text (GTK_EDITABLE (spin), text):
+	//    g_free (text);
+	// 
+	//    return TRUE;
+	// }
+	// ```
+	ConnectOutput(func(SpinButton) bool) gobject.SignalHandle
+	// ConnectValueChanged connects the provided callback to the "value-changed" signal
+	//
+	// Emitted when the value is changed.
+	// 
+	// Also see the [signal@Gtk.SpinButton::output] signal.
+	ConnectValueChanged(func(SpinButton)) gobject.SignalHandle
+	// ConnectWrapped connects the provided callback to the "wrapped" signal
+	//
+	// Emitted right after the spinbutton wraps from its maximum
+	// to its minimum value or vice-versa.
+	ConnectWrapped(func(SpinButton)) gobject.SignalHandle
 }
 
 func unsafeWrapSpinButton(base *gobject.ObjectInstance) *SpinButtonInstance {
@@ -102448,6 +105370,83 @@ func (spinButton *SpinButtonInstance) Update() {
 	runtime.KeepAlive(spinButton)
 }
 
+// EmitActivate emits the "activate" signal
+//
+// Emitted when the spin button is activated.
+// 
+// The keybindings for this signal are all forms of the &lt;kbd&gt;Enter&lt;/kbd&gt; key.
+// 
+// If the &lt;kbd&gt;Enter&lt;/kbd&gt; key results in the value being committed to the
+// spin button, then activation does not occur until &lt;kbd&gt;Enter&lt;/kbd&gt; is
+// pressed again.
+func (o *SpinButtonInstance) EmitActivate() {
+	o.Emit("activate")
+}
+// EmitChangeValue emits the "change-value" signal
+//
+// Emitted when the user initiates a value change.
+// 
+// This is a [keybinding signal](class.SignalAction.html).
+// 
+// Applications should not connect to it, but may emit it with
+// g_signal_emit_by_name() if they need to control the cursor
+// programmatically.
+// 
+// The default bindings for this signal are Up/Down and PageUp/PageDown.
+func (o *SpinButtonInstance) EmitChangeValue(arg0 ScrollType) {
+	o.Emit("change-value", arg0)
+}
+// ConnectInput connects the provided callback to the "input" signal
+//
+// Emitted to convert the users input into a double value.
+// 
+// The signal handler is expected to use [method@Gtk.Editable.get_text]
+// to retrieve the text of the spinbutton and set @new_value to the
+// new value.
+// 
+// The default conversion uses g_strtod().
+func (o *SpinButtonInstance) ConnectInput(fn func(SpinButton, unsafe.Pointer) int) gobject.SignalHandle {
+	return o.Connect("input", fn)
+}
+// ConnectOutput connects the provided callback to the "output" signal
+//
+// Emitted to tweak the formatting of the value for display.
+// 
+// ```c
+// // show leading zeros
+// static gboolean
+// on_output (GtkSpinButton *spin,
+//            gpointer       data)
+// {
+//    char *text;
+//    int value;
+// 
+//    value = gtk_spin_button_get_value_as_int (spin);
+//    text = g_strdup_printf ("%02d", value);
+//    gtk_editable_set_text (GTK_EDITABLE (spin), text):
+//    g_free (text);
+// 
+//    return TRUE;
+// }
+// ```
+func (o *SpinButtonInstance) ConnectOutput(fn func(SpinButton) bool) gobject.SignalHandle {
+	return o.Connect("output", fn)
+}
+// ConnectValueChanged connects the provided callback to the "value-changed" signal
+//
+// Emitted when the value is changed.
+// 
+// Also see the [signal@Gtk.SpinButton::output] signal.
+func (o *SpinButtonInstance) ConnectValueChanged(fn func(SpinButton)) gobject.SignalHandle {
+	return o.Connect("value-changed", fn)
+}
+// ConnectWrapped connects the provided callback to the "wrapped" signal
+//
+// Emitted right after the spinbutton wraps from its maximum
+// to its minimum value or vice-versa.
+func (o *SpinButtonInstance) ConnectWrapped(fn func(SpinButton)) gobject.SignalHandle {
+	return o.Connect("wrapped", fn)
+}
 // SpinnerInstance is the instance type used by all types extending GtkSpinner. It is used internally by the bindings. Users should use the interface [Spinner] instead.
 type SpinnerInstance struct {
 	_ [0]func() // equal guard
@@ -104104,6 +107103,27 @@ type Switch interface {
 	// 
 	// See [signal@Gtk.Switch::state-set] for details.
 	SetState(bool)
+	// EmitActivate emits the "activate" signal
+	//
+	// Emitted to animate the switch.
+	// 
+	// Applications should never connect to this signal,
+	// but use the [property@Gtk.Switch:active] property.
+	EmitActivate()
+	// ConnectStateSet connects the provided callback to the "state-set" signal
+	//
+	// Emitted to change the underlying state.
+	// 
+	// The ::state-set signal is emitted when the user changes the switch
+	// position. The default handler calls [method@Gtk.Switch.set_state] with the
+	// value of @state.
+	// 
+	// To implement delayed state change, applications can connect to this
+	// signal, initiate the change of the underlying state, and call
+	// [method@Gtk.Switch.set_state] when the underlying state change is
+	// complete. The signal handler should return %TRUE to prevent the
+	// default handler from running.
+	ConnectStateSet(func(Switch, bool) bool) gobject.SignalHandle
 }
 
 func unsafeWrapSwitch(base *gobject.ObjectInstance) *SwitchInstance {
@@ -104269,6 +107289,31 @@ func (self *SwitchInstance) SetState(state bool) {
 	runtime.KeepAlive(state)
 }
 
+// EmitActivate emits the "activate" signal
+//
+// Emitted to animate the switch.
+// 
+// Applications should never connect to this signal,
+// but use the [property@Gtk.Switch:active] property.
+func (o *SwitchInstance) EmitActivate() {
+	o.Emit("activate")
+}
+// ConnectStateSet connects the provided callback to the "state-set" signal
+//
+// Emitted to change the underlying state.
+// 
+// The ::state-set signal is emitted when the user changes the switch
+// position. The default handler calls [method@Gtk.Switch.set_state] with the
+// value of @state.
+// 
+// To implement delayed state change, applications can connect to this
+// signal, initiate the change of the underlying state, and call
+// [method@Gtk.Switch.set_state] when the underlying state change is
+// complete. The signal handler should return %TRUE to prevent the
+// default handler from running.
+func (o *SwitchInstance) ConnectStateSet(fn func(Switch, bool) bool) gobject.SignalHandle {
+	return o.Connect("state-set", fn)
+}
 // TextInstance is the instance type used by all types extending GtkText. It is used internally by the bindings. Users should use the interface [Text] instead.
 type TextInstance struct {
 	_ [0]func() // equal guard
@@ -104747,6 +107792,123 @@ type Text interface {
 	// After calling this, the default invisible
 	// char is used again.
 	UnsetInvisibleChar()
+	// EmitActivate emits the "activate" signal
+	//
+	// Emitted when the user hits the &lt;kbd&gt;Enter&lt;/kbd&gt; key.
+	// 
+	// The default bindings for this signal are all forms
+	// of the &lt;kbd&gt;Enter&lt;/kbd&gt; key.
+	EmitActivate()
+	// EmitBackspace emits the "backspace" signal
+	//
+	// Emitted when the user asks for it.
+	// 
+	// This is a [keybinding signal](class.SignalAction.html).
+	// 
+	// The default bindings for this signal are
+	// &lt;kbd&gt;Backspace&lt;/kbd&gt; and &lt;kbd&gt;Shift&lt;/kbd&gt;+&lt;kbd&gt;Backspace&lt;/kbd&gt;.
+	EmitBackspace()
+	// EmitCopyClipboard emits the "copy-clipboard" signal
+	//
+	// Emitted to copy the selection to the clipboard.
+	// 
+	// This is a [keybinding signal](class.SignalAction.html).
+	// 
+	// The default bindings for this signal are
+	// &lt;kbd&gt;Ctrl&lt;/kbd&gt;+&lt;kbd&gt;c&lt;/kbd&gt; and
+	// &lt;kbd&gt;Ctrl&lt;/kbd&gt;+&lt;kbd&gt;Insert&lt;/kbd&gt;.
+	EmitCopyClipboard()
+	// EmitCutClipboard emits the "cut-clipboard" signal
+	//
+	// Emitted to cut the selection to the clipboard.
+	// 
+	// This is a [keybinding signal](class.SignalAction.html).
+	// 
+	// The default bindings for this signal are
+	// &lt;kbd&gt;Ctrl&lt;/kbd&gt;+&lt;kbd&gt;x&lt;/kbd&gt; and
+	// &lt;kbd&gt;Shift&lt;/kbd&gt;+&lt;kbd&gt;Delete&lt;/kbd&gt;.
+	EmitCutClipboard()
+	// EmitDeleteFromCursor emits the "delete-from-cursor" signal
+	//
+	// Emitted when the user initiates a text deletion.
+	// 
+	// This is a [keybinding signal](class.SignalAction.html).
+	// 
+	// If the @type is %GTK_DELETE_CHARS, GTK deletes the selection
+	// if there is one, otherwise it deletes the requested number
+	// of characters.
+	// 
+	// The default bindings for this signal are &lt;kbd&gt;Delete&lt;/kbd&gt;
+	// for deleting a character and &lt;kbd&gt;Ctrl&lt;/kbd&gt;+&lt;kbd&gt;Delete&lt;/kbd&gt;
+	// for deleting a word.
+	EmitDeleteFromCursor(DeleteType, int)
+	// EmitInsertAtCursor emits the "insert-at-cursor" signal
+	//
+	// Emitted when the user initiates the insertion of a
+	// fixed string at the cursor.
+	// 
+	// This is a [keybinding signal](class.SignalAction.html).
+	// 
+	// This signal has no default bindings.
+	EmitInsertAtCursor(string)
+	// EmitInsertEmoji emits the "insert-emoji" signal
+	//
+	// Emitted to present the Emoji chooser for the widget.
+	// 
+	// This is a [keybinding signal](class.SignalAction.html).
+	// 
+	// The default bindings for this signal are
+	// &lt;kbd&gt;Ctrl&lt;/kbd&gt;+&lt;kbd&gt;.&lt;/kbd&gt; and
+	// &lt;kbd&gt;Ctrl&lt;/kbd&gt;+&lt;kbd&gt;;&lt;/kbd&gt;
+	EmitInsertEmoji()
+	// EmitMoveCursor emits the "move-cursor" signal
+	//
+	// Emitted when the user initiates a cursor movement.
+	// 
+	// If the cursor is not visible in @self, this signal causes
+	// the viewport to be moved instead.
+	// 
+	// This is a [keybinding signal](class.SignalAction.html).
+	// 
+	// Applications should not connect to it, but may emit it with
+	// g_signal_emit_by_name() if they need to control the cursor
+	// programmatically.
+	// 
+	// The default bindings for this signal come in two variants,
+	// the variant with the &lt;kbd&gt;Shift&lt;/kbd&gt; modifier extends the
+	// selection, the variant without it does not.
+	// There are too many key combinations to list them all here.
+	// 
+	// - &lt;kbd&gt;←&lt;/kbd&gt;, &lt;kbd&gt;→&lt;/kbd&gt;, &lt;kbd&gt;↑&lt;/kbd&gt;, &lt;kbd&gt;↓&lt;/kbd&gt;
+	//   move by individual characters/lines
+	// - &lt;kbd&gt;Ctrl&lt;/kbd&gt;+&lt;kbd&gt;←&lt;/kbd&gt;, etc. move by words/paragraphs
+	// - &lt;kbd&gt;Home&lt;/kbd&gt; and &lt;kbd&gt;End&lt;/kbd&gt; move to the ends of the buffer
+	EmitMoveCursor(MovementStep, int, bool)
+	// EmitPasteClipboard emits the "paste-clipboard" signal
+	//
+	// Emitted to paste the contents of the clipboard.
+	// 
+	// This is a [keybinding signal](class.SignalAction.html).
+	// 
+	// The default bindings for this signal are
+	// &lt;kbd&gt;Ctrl&lt;/kbd&gt;+&lt;kbd&gt;v&lt;/kbd&gt; and &lt;kbd&gt;Shift&lt;/kbd&gt;+&lt;kbd&gt;Insert&lt;/kbd&gt;.
+	EmitPasteClipboard()
+	// EmitPreeditChanged emits the "preedit-changed" signal
+	//
+	// Emitted when the preedit text changes.
+	// 
+	// If an input method is used, the typed text will not immediately
+	// be committed to the buffer. So if you are interested in the text,
+	// connect to this signal.
+	EmitPreeditChanged(string)
+	// EmitToggleOverwrite emits the "toggle-overwrite" signal
+	//
+	// Emitted to toggle the overwrite mode of the `GtkText`.
+	// 
+	// This is a [keybinding signal](class.SignalAction.html).
+	// 
+	// The default bindings for this signal is &lt;kbd&gt;Insert&lt;/kbd&gt;.
+	EmitToggleOverwrite()
 }
 
 func unsafeWrapText(base *gobject.ObjectInstance) *TextInstance {
@@ -105684,6 +108846,145 @@ func (self *TextInstance) UnsetInvisibleChar() {
 	runtime.KeepAlive(self)
 }
 
+// EmitActivate emits the "activate" signal
+//
+// Emitted when the user hits the &lt;kbd&gt;Enter&lt;/kbd&gt; key.
+// 
+// The default bindings for this signal are all forms
+// of the &lt;kbd&gt;Enter&lt;/kbd&gt; key.
+func (o *TextInstance) EmitActivate() {
+	o.Emit("activate")
+}
+// EmitBackspace emits the "backspace" signal
+//
+// Emitted when the user asks for it.
+// 
+// This is a [keybinding signal](class.SignalAction.html).
+// 
+// The default bindings for this signal are
+// &lt;kbd&gt;Backspace&lt;/kbd&gt; and &lt;kbd&gt;Shift&lt;/kbd&gt;+&lt;kbd&gt;Backspace&lt;/kbd&gt;.
+func (o *TextInstance) EmitBackspace() {
+	o.Emit("backspace")
+}
+// EmitCopyClipboard emits the "copy-clipboard" signal
+//
+// Emitted to copy the selection to the clipboard.
+// 
+// This is a [keybinding signal](class.SignalAction.html).
+// 
+// The default bindings for this signal are
+// &lt;kbd&gt;Ctrl&lt;/kbd&gt;+&lt;kbd&gt;c&lt;/kbd&gt; and
+// &lt;kbd&gt;Ctrl&lt;/kbd&gt;+&lt;kbd&gt;Insert&lt;/kbd&gt;.
+func (o *TextInstance) EmitCopyClipboard() {
+	o.Emit("copy-clipboard")
+}
+// EmitCutClipboard emits the "cut-clipboard" signal
+//
+// Emitted to cut the selection to the clipboard.
+// 
+// This is a [keybinding signal](class.SignalAction.html).
+// 
+// The default bindings for this signal are
+// &lt;kbd&gt;Ctrl&lt;/kbd&gt;+&lt;kbd&gt;x&lt;/kbd&gt; and
+// &lt;kbd&gt;Shift&lt;/kbd&gt;+&lt;kbd&gt;Delete&lt;/kbd&gt;.
+func (o *TextInstance) EmitCutClipboard() {
+	o.Emit("cut-clipboard")
+}
+// EmitDeleteFromCursor emits the "delete-from-cursor" signal
+//
+// Emitted when the user initiates a text deletion.
+// 
+// This is a [keybinding signal](class.SignalAction.html).
+// 
+// If the @type is %GTK_DELETE_CHARS, GTK deletes the selection
+// if there is one, otherwise it deletes the requested number
+// of characters.
+// 
+// The default bindings for this signal are &lt;kbd&gt;Delete&lt;/kbd&gt;
+// for deleting a character and &lt;kbd&gt;Ctrl&lt;/kbd&gt;+&lt;kbd&gt;Delete&lt;/kbd&gt;
+// for deleting a word.
+func (o *TextInstance) EmitDeleteFromCursor(arg0 DeleteType, arg1 int) {
+	o.Emit("delete-from-cursor", arg0, arg1)
+}
+// EmitInsertAtCursor emits the "insert-at-cursor" signal
+//
+// Emitted when the user initiates the insertion of a
+// fixed string at the cursor.
+// 
+// This is a [keybinding signal](class.SignalAction.html).
+// 
+// This signal has no default bindings.
+func (o *TextInstance) EmitInsertAtCursor(arg0 string) {
+	o.Emit("insert-at-cursor", arg0)
+}
+// EmitInsertEmoji emits the "insert-emoji" signal
+//
+// Emitted to present the Emoji chooser for the widget.
+// 
+// This is a [keybinding signal](class.SignalAction.html).
+// 
+// The default bindings for this signal are
+// &lt;kbd&gt;Ctrl&lt;/kbd&gt;+&lt;kbd&gt;.&lt;/kbd&gt; and
+// &lt;kbd&gt;Ctrl&lt;/kbd&gt;+&lt;kbd&gt;;&lt;/kbd&gt;
+func (o *TextInstance) EmitInsertEmoji() {
+	o.Emit("insert-emoji")
+}
+// EmitMoveCursor emits the "move-cursor" signal
+//
+// Emitted when the user initiates a cursor movement.
+// 
+// If the cursor is not visible in @self, this signal causes
+// the viewport to be moved instead.
+// 
+// This is a [keybinding signal](class.SignalAction.html).
+// 
+// Applications should not connect to it, but may emit it with
+// g_signal_emit_by_name() if they need to control the cursor
+// programmatically.
+// 
+// The default bindings for this signal come in two variants,
+// the variant with the &lt;kbd&gt;Shift&lt;/kbd&gt; modifier extends the
+// selection, the variant without it does not.
+// There are too many key combinations to list them all here.
+// 
+// - &lt;kbd&gt;←&lt;/kbd&gt;, &lt;kbd&gt;→&lt;/kbd&gt;, &lt;kbd&gt;↑&lt;/kbd&gt;, &lt;kbd&gt;↓&lt;/kbd&gt;
+//   move by individual characters/lines
+// - &lt;kbd&gt;Ctrl&lt;/kbd&gt;+&lt;kbd&gt;←&lt;/kbd&gt;, etc. move by words/paragraphs
+// - &lt;kbd&gt;Home&lt;/kbd&gt; and &lt;kbd&gt;End&lt;/kbd&gt; move to the ends of the buffer
+func (o *TextInstance) EmitMoveCursor(arg0 MovementStep, arg1 int, arg2 bool) {
+	o.Emit("move-cursor", arg0, arg1, arg2)
+}
+// EmitPasteClipboard emits the "paste-clipboard" signal
+//
+// Emitted to paste the contents of the clipboard.
+// 
+// This is a [keybinding signal](class.SignalAction.html).
+// 
+// The default bindings for this signal are
+// &lt;kbd&gt;Ctrl&lt;/kbd&gt;+&lt;kbd&gt;v&lt;/kbd&gt; and &lt;kbd&gt;Shift&lt;/kbd&gt;+&lt;kbd&gt;Insert&lt;/kbd&gt;.
+func (o *TextInstance) EmitPasteClipboard() {
+	o.Emit("paste-clipboard")
+}
+// EmitPreeditChanged emits the "preedit-changed" signal
+//
+// Emitted when the preedit text changes.
+// 
+// If an input method is used, the typed text will not immediately
+// be committed to the buffer. So if you are interested in the text,
+// connect to this signal.
+func (o *TextInstance) EmitPreeditChanged(arg0 string) {
+	o.Emit("preedit-changed", arg0)
+}
+// EmitToggleOverwrite emits the "toggle-overwrite" signal
+//
+// Emitted to toggle the overwrite mode of the `GtkText`.
+// 
+// This is a [keybinding signal](class.SignalAction.html).
+// 
+// The default bindings for this signal is &lt;kbd&gt;Insert&lt;/kbd&gt;.
+func (o *TextInstance) EmitToggleOverwrite() {
+	o.Emit("toggle-overwrite")
+}
 // TextViewInstance is the instance type used by all types extending GtkTextView. It is used internally by the bindings. Users should use the interface [TextView] instead.
 type TextViewInstance struct {
 	_ [0]func() // equal guard
@@ -106658,6 +109959,172 @@ type TextView interface {
 	// Converts coordinates on the window identified by @win to buffer
 	// coordinates.
 	WindowToBufferCoords(TextWindowType, int, int) (int, int)
+	// EmitBackspace emits the "backspace" signal
+	//
+	// Gets emitted when the user asks for it.
+	// 
+	// The ::backspace signal is a [keybinding signal](class.SignalAction.html).
+	// 
+	// The default bindings for this signal are
+	// &lt;kbd&gt;Backspace&lt;/kbd&gt; and &lt;kbd&gt;Shift&lt;/kbd&gt;+&lt;kbd&gt;Backspace&lt;/kbd&gt;.
+	EmitBackspace()
+	// EmitCopyClipboard emits the "copy-clipboard" signal
+	//
+	// Gets emitted to copy the selection to the clipboard.
+	// 
+	// The ::copy-clipboard signal is a [keybinding signal](class.SignalAction.html).
+	// 
+	// The default bindings for this signal are
+	// &lt;kbd&gt;Ctrl&lt;/kbd&gt;+&lt;kbd&gt;c&lt;/kbd&gt; and
+	// &lt;kbd&gt;Ctrl&lt;/kbd&gt;+&lt;kbd&gt;Insert&lt;/kbd&gt;.
+	EmitCopyClipboard()
+	// EmitCutClipboard emits the "cut-clipboard" signal
+	//
+	// Gets emitted to cut the selection to the clipboard.
+	// 
+	// The ::cut-clipboard signal is a [keybinding signal](class.SignalAction.html).
+	// 
+	// The default bindings for this signal are
+	// &lt;kbd&gt;Ctrl&lt;/kbd&gt;+&lt;kbd&gt;x&lt;/kbd&gt; and
+	// &lt;kbd&gt;Shift&lt;/kbd&gt;+&lt;kbd&gt;Delete&lt;/kbd&gt;.
+	EmitCutClipboard()
+	// EmitDeleteFromCursor emits the "delete-from-cursor" signal
+	//
+	// Gets emitted when the user initiates a text deletion.
+	// 
+	// The ::delete-from-cursor signal is a [keybinding signal](class.SignalAction.html).
+	// 
+	// If the @type is %GTK_DELETE_CHARS, GTK deletes the selection
+	// if there is one, otherwise it deletes the requested number
+	// of characters.
+	// 
+	// The default bindings for this signal are &lt;kbd&gt;Delete&lt;/kbd&gt; for
+	// deleting a character, &lt;kbd&gt;Ctrl&lt;/kbd&gt;+&lt;kbd&gt;Delete&lt;/kbd&gt; for
+	// deleting a word and &lt;kbd&gt;Ctrl&lt;/kbd&gt;+&lt;kbd&gt;Backspace&lt;/kbd&gt; for
+	// deleting a word backwards.
+	EmitDeleteFromCursor(DeleteType, int)
+	// ConnectExtendSelection connects the provided callback to the "extend-selection" signal
+	//
+	// Emitted when the selection needs to be extended at @location.
+	ConnectExtendSelection(func(TextView, TextExtendSelection, TextIter, TextIter, TextIter) bool) gobject.SignalHandle
+	// EmitInsertAtCursor emits the "insert-at-cursor" signal
+	//
+	// Gets emitted when the user initiates the insertion of a
+	// fixed string at the cursor.
+	// 
+	// The ::insert-at-cursor signal is a [keybinding signal](class.SignalAction.html).
+	// 
+	// This signal has no default bindings.
+	EmitInsertAtCursor(string)
+	// EmitInsertEmoji emits the "insert-emoji" signal
+	//
+	// Gets emitted to present the Emoji chooser for the @text_view.
+	// 
+	// The ::insert-emoji signal is a [keybinding signal](class.SignalAction.html).
+	// 
+	// The default bindings for this signal are
+	// &lt;kbd&gt;Ctrl&lt;/kbd&gt;+&lt;kbd&gt;.&lt;/kbd&gt; and
+	// &lt;kbd&gt;Ctrl&lt;/kbd&gt;+&lt;kbd&gt;;&lt;/kbd&gt;
+	EmitInsertEmoji()
+	// EmitMoveCursor emits the "move-cursor" signal
+	//
+	// Gets emitted when the user initiates a cursor movement.
+	// 
+	// The ::move-cursor signal is a [keybinding signal](class.SignalAction.html).
+	// If the cursor is not visible in @text_view, this signal causes
+	// the viewport to be moved instead.
+	// 
+	// Applications should not connect to it, but may emit it with
+	// g_signal_emit_by_name() if they need to control the cursor
+	// programmatically.
+	// 
+	// 
+	// The default bindings for this signal come in two variants,
+	// the variant with the &lt;kbd&gt;Shift&lt;/kbd&gt; modifier extends the
+	// selection, the variant without it does not.
+	// There are too many key combinations to list them all here.
+	// 
+	// - &lt;kbd&gt;←&lt;/kbd&gt;, &lt;kbd&gt;→&lt;/kbd&gt;, &lt;kbd&gt;↑&lt;/kbd&gt;, &lt;kbd&gt;↓&lt;/kbd&gt;
+	//   move by individual characters/lines
+	// - &lt;kbd&gt;Ctrl&lt;/kbd&gt;+&lt;kbd&gt;←&lt;/kbd&gt;, etc. move by words/paragraphs
+	// - &lt;kbd&gt;Home&lt;/kbd&gt; and &lt;kbd&gt;End&lt;/kbd&gt; move to the ends of the buffer
+	// - &lt;kbd&gt;PgUp&lt;/kbd&gt; and &lt;kbd&gt;PgDn&lt;/kbd&gt; move vertically by pages
+	// - &lt;kbd&gt;Ctrl&lt;/kbd&gt;+&lt;kbd&gt;PgUp&lt;/kbd&gt; and &lt;kbd&gt;Ctrl&lt;/kbd&gt;+&lt;kbd&gt;PgDn&lt;/kbd&gt;
+	//   move horizontally by pages
+	EmitMoveCursor(MovementStep, int, bool)
+	// EmitMoveViewport emits the "move-viewport" signal
+	//
+	// Gets emitted to move the viewport.
+	// 
+	// The ::move-viewport signal is a [keybinding signal](class.SignalAction.html),
+	// which can be bound to key combinations to allow the user to move the viewport,
+	// i.e. change what part of the text view is visible in a containing scrolled
+	// window.
+	// 
+	// There are no default bindings for this signal.
+	EmitMoveViewport(ScrollStep, int)
+	// EmitPasteClipboard emits the "paste-clipboard" signal
+	//
+	// Gets emitted to paste the contents of the clipboard
+	// into the text view.
+	// 
+	// The ::paste-clipboard signal is a [keybinding signal](class.SignalAction.html).
+	// 
+	// The default bindings for this signal are
+	// &lt;kbd&gt;Ctrl&lt;/kbd&gt;+&lt;kbd&gt;v&lt;/kbd&gt; and
+	// &lt;kbd&gt;Shift&lt;/kbd&gt;+&lt;kbd&gt;Insert&lt;/kbd&gt;.
+	EmitPasteClipboard()
+	// EmitPreeditChanged emits the "preedit-changed" signal
+	//
+	// Emitted when preedit text of the active IM changes.
+	// 
+	// If an input method is used, the typed text will not immediately
+	// be committed to the buffer. So if you are interested in the text,
+	// connect to this signal.
+	// 
+	// This signal is only emitted if the text at the given position
+	// is actually editable.
+	EmitPreeditChanged(string)
+	// EmitSelectAll emits the "select-all" signal
+	//
+	// Gets emitted to select or unselect the complete contents of the text view.
+	// 
+	// The ::select-all signal is a [keybinding signal](class.SignalAction.html).
+	// 
+	// The default bindings for this signal are
+	// &lt;kbd&gt;Ctrl&lt;/kbd&gt;+&lt;kbd&gt;a&lt;/kbd&gt; and
+	// &lt;kbd&gt;Ctrl&lt;/kbd&gt;+&lt;kbd&gt;/&lt;/kbd&gt; for selecting and
+	// &lt;kbd&gt;Shift&lt;/kbd&gt;+&lt;kbd&gt;Ctrl&lt;/kbd&gt;+&lt;kbd&gt;a&lt;/kbd&gt; and
+	// &lt;kbd&gt;Ctrl&lt;/kbd&gt;+&lt;kbd&gt;\&lt;/kbd&gt; for unselecting.
+	EmitSelectAll(bool)
+	// EmitSetAnchor emits the "set-anchor" signal
+	//
+	// Gets emitted when the user initiates settings the "anchor" mark.
+	// 
+	// The ::set-anchor signal is a [keybinding signal](class.SignalAction.html)
+	// which gets emitted when the user initiates setting the "anchor"
+	// mark. The "anchor" mark gets placed at the same position as the
+	// "insert" mark.
+	// 
+	// This signal has no default bindings.
+	EmitSetAnchor()
+	// EmitToggleCursorVisible emits the "toggle-cursor-visible" signal
+	//
+	// Gets emitted to toggle the `cursor-visible` property.
+	// 
+	// The ::toggle-cursor-visible signal is a
+	// [keybinding signal](class.SignalAction.html).
+	// 
+	// The default binding for this signal is &lt;kbd&gt;F7&lt;/kbd&gt;.
+	EmitToggleCursorVisible()
+	// EmitToggleOverwrite emits the "toggle-overwrite" signal
+	//
+	// Gets emitted to toggle the overwrite mode of the text view.
+	// 
+	// The ::toggle-overwrite signal is a [keybinding signal](class.SignalAction.html).
+	// 
+	// The default binding for this signal is &lt;kbd&gt;Insert&lt;/kbd&gt;.
+	EmitToggleOverwrite()
 }
 
 func unsafeWrapTextView(base *gobject.ObjectInstance) *TextViewInstance {
@@ -108780,6 +112247,202 @@ func (textView *TextViewInstance) WindowToBufferCoords(win TextWindowType, windo
 	return bufferX, bufferY
 }
 
+// EmitBackspace emits the "backspace" signal
+//
+// Gets emitted when the user asks for it.
+// 
+// The ::backspace signal is a [keybinding signal](class.SignalAction.html).
+// 
+// The default bindings for this signal are
+// &lt;kbd&gt;Backspace&lt;/kbd&gt; and &lt;kbd&gt;Shift&lt;/kbd&gt;+&lt;kbd&gt;Backspace&lt;/kbd&gt;.
+func (o *TextViewInstance) EmitBackspace() {
+	o.Emit("backspace")
+}
+// EmitCopyClipboard emits the "copy-clipboard" signal
+//
+// Gets emitted to copy the selection to the clipboard.
+// 
+// The ::copy-clipboard signal is a [keybinding signal](class.SignalAction.html).
+// 
+// The default bindings for this signal are
+// &lt;kbd&gt;Ctrl&lt;/kbd&gt;+&lt;kbd&gt;c&lt;/kbd&gt; and
+// &lt;kbd&gt;Ctrl&lt;/kbd&gt;+&lt;kbd&gt;Insert&lt;/kbd&gt;.
+func (o *TextViewInstance) EmitCopyClipboard() {
+	o.Emit("copy-clipboard")
+}
+// EmitCutClipboard emits the "cut-clipboard" signal
+//
+// Gets emitted to cut the selection to the clipboard.
+// 
+// The ::cut-clipboard signal is a [keybinding signal](class.SignalAction.html).
+// 
+// The default bindings for this signal are
+// &lt;kbd&gt;Ctrl&lt;/kbd&gt;+&lt;kbd&gt;x&lt;/kbd&gt; and
+// &lt;kbd&gt;Shift&lt;/kbd&gt;+&lt;kbd&gt;Delete&lt;/kbd&gt;.
+func (o *TextViewInstance) EmitCutClipboard() {
+	o.Emit("cut-clipboard")
+}
+// EmitDeleteFromCursor emits the "delete-from-cursor" signal
+//
+// Gets emitted when the user initiates a text deletion.
+// 
+// The ::delete-from-cursor signal is a [keybinding signal](class.SignalAction.html).
+// 
+// If the @type is %GTK_DELETE_CHARS, GTK deletes the selection
+// if there is one, otherwise it deletes the requested number
+// of characters.
+// 
+// The default bindings for this signal are &lt;kbd&gt;Delete&lt;/kbd&gt; for
+// deleting a character, &lt;kbd&gt;Ctrl&lt;/kbd&gt;+&lt;kbd&gt;Delete&lt;/kbd&gt; for
+// deleting a word and &lt;kbd&gt;Ctrl&lt;/kbd&gt;+&lt;kbd&gt;Backspace&lt;/kbd&gt; for
+// deleting a word backwards.
+func (o *TextViewInstance) EmitDeleteFromCursor(arg0 DeleteType, arg1 int) {
+	o.Emit("delete-from-cursor", arg0, arg1)
+}
+// ConnectExtendSelection connects the provided callback to the "extend-selection" signal
+//
+// Emitted when the selection needs to be extended at @location.
+func (o *TextViewInstance) ConnectExtendSelection(fn func(TextView, TextExtendSelection, TextIter, TextIter, TextIter) bool) gobject.SignalHandle {
+	return o.Connect("extend-selection", fn)
+}
+// EmitInsertAtCursor emits the "insert-at-cursor" signal
+//
+// Gets emitted when the user initiates the insertion of a
+// fixed string at the cursor.
+// 
+// The ::insert-at-cursor signal is a [keybinding signal](class.SignalAction.html).
+// 
+// This signal has no default bindings.
+func (o *TextViewInstance) EmitInsertAtCursor(arg0 string) {
+	o.Emit("insert-at-cursor", arg0)
+}
+// EmitInsertEmoji emits the "insert-emoji" signal
+//
+// Gets emitted to present the Emoji chooser for the @text_view.
+// 
+// The ::insert-emoji signal is a [keybinding signal](class.SignalAction.html).
+// 
+// The default bindings for this signal are
+// &lt;kbd&gt;Ctrl&lt;/kbd&gt;+&lt;kbd&gt;.&lt;/kbd&gt; and
+// &lt;kbd&gt;Ctrl&lt;/kbd&gt;+&lt;kbd&gt;;&lt;/kbd&gt;
+func (o *TextViewInstance) EmitInsertEmoji() {
+	o.Emit("insert-emoji")
+}
+// EmitMoveCursor emits the "move-cursor" signal
+//
+// Gets emitted when the user initiates a cursor movement.
+// 
+// The ::move-cursor signal is a [keybinding signal](class.SignalAction.html).
+// If the cursor is not visible in @text_view, this signal causes
+// the viewport to be moved instead.
+// 
+// Applications should not connect to it, but may emit it with
+// g_signal_emit_by_name() if they need to control the cursor
+// programmatically.
+// 
+// 
+// The default bindings for this signal come in two variants,
+// the variant with the &lt;kbd&gt;Shift&lt;/kbd&gt; modifier extends the
+// selection, the variant without it does not.
+// There are too many key combinations to list them all here.
+// 
+// - &lt;kbd&gt;←&lt;/kbd&gt;, &lt;kbd&gt;→&lt;/kbd&gt;, &lt;kbd&gt;↑&lt;/kbd&gt;, &lt;kbd&gt;↓&lt;/kbd&gt;
+//   move by individual characters/lines
+// - &lt;kbd&gt;Ctrl&lt;/kbd&gt;+&lt;kbd&gt;←&lt;/kbd&gt;, etc. move by words/paragraphs
+// - &lt;kbd&gt;Home&lt;/kbd&gt; and &lt;kbd&gt;End&lt;/kbd&gt; move to the ends of the buffer
+// - &lt;kbd&gt;PgUp&lt;/kbd&gt; and &lt;kbd&gt;PgDn&lt;/kbd&gt; move vertically by pages
+// - &lt;kbd&gt;Ctrl&lt;/kbd&gt;+&lt;kbd&gt;PgUp&lt;/kbd&gt; and &lt;kbd&gt;Ctrl&lt;/kbd&gt;+&lt;kbd&gt;PgDn&lt;/kbd&gt;
+//   move horizontally by pages
+func (o *TextViewInstance) EmitMoveCursor(arg0 MovementStep, arg1 int, arg2 bool) {
+	o.Emit("move-cursor", arg0, arg1, arg2)
+}
+// EmitMoveViewport emits the "move-viewport" signal
+//
+// Gets emitted to move the viewport.
+// 
+// The ::move-viewport signal is a [keybinding signal](class.SignalAction.html),
+// which can be bound to key combinations to allow the user to move the viewport,
+// i.e. change what part of the text view is visible in a containing scrolled
+// window.
+// 
+// There are no default bindings for this signal.
+func (o *TextViewInstance) EmitMoveViewport(arg0 ScrollStep, arg1 int) {
+	o.Emit("move-viewport", arg0, arg1)
+}
+// EmitPasteClipboard emits the "paste-clipboard" signal
+//
+// Gets emitted to paste the contents of the clipboard
+// into the text view.
+// 
+// The ::paste-clipboard signal is a [keybinding signal](class.SignalAction.html).
+// 
+// The default bindings for this signal are
+// &lt;kbd&gt;Ctrl&lt;/kbd&gt;+&lt;kbd&gt;v&lt;/kbd&gt; and
+// &lt;kbd&gt;Shift&lt;/kbd&gt;+&lt;kbd&gt;Insert&lt;/kbd&gt;.
+func (o *TextViewInstance) EmitPasteClipboard() {
+	o.Emit("paste-clipboard")
+}
+// EmitPreeditChanged emits the "preedit-changed" signal
+//
+// Emitted when preedit text of the active IM changes.
+// 
+// If an input method is used, the typed text will not immediately
+// be committed to the buffer. So if you are interested in the text,
+// connect to this signal.
+// 
+// This signal is only emitted if the text at the given position
+// is actually editable.
+func (o *TextViewInstance) EmitPreeditChanged(arg0 string) {
+	o.Emit("preedit-changed", arg0)
+}
+// EmitSelectAll emits the "select-all" signal
+//
+// Gets emitted to select or unselect the complete contents of the text view.
+// 
+// The ::select-all signal is a [keybinding signal](class.SignalAction.html).
+// 
+// The default bindings for this signal are
+// &lt;kbd&gt;Ctrl&lt;/kbd&gt;+&lt;kbd&gt;a&lt;/kbd&gt; and
+// &lt;kbd&gt;Ctrl&lt;/kbd&gt;+&lt;kbd&gt;/&lt;/kbd&gt; for selecting and
+// &lt;kbd&gt;Shift&lt;/kbd&gt;+&lt;kbd&gt;Ctrl&lt;/kbd&gt;+&lt;kbd&gt;a&lt;/kbd&gt; and
+// &lt;kbd&gt;Ctrl&lt;/kbd&gt;+&lt;kbd&gt;\&lt;/kbd&gt; for unselecting.
+func (o *TextViewInstance) EmitSelectAll(arg0 bool) {
+	o.Emit("select-all", arg0)
+}
+// EmitSetAnchor emits the "set-anchor" signal
+//
+// Gets emitted when the user initiates settings the "anchor" mark.
+// 
+// The ::set-anchor signal is a [keybinding signal](class.SignalAction.html)
+// which gets emitted when the user initiates setting the "anchor"
+// mark. The "anchor" mark gets placed at the same position as the
+// "insert" mark.
+// 
+// This signal has no default bindings.
+func (o *TextViewInstance) EmitSetAnchor() {
+	o.Emit("set-anchor")
+}
+// EmitToggleCursorVisible emits the "toggle-cursor-visible" signal
+//
+// Gets emitted to toggle the `cursor-visible` property.
+// 
+// The ::toggle-cursor-visible signal is a
+// [keybinding signal](class.SignalAction.html).
+// 
+// The default binding for this signal is &lt;kbd&gt;F7&lt;/kbd&gt;.
+func (o *TextViewInstance) EmitToggleCursorVisible() {
+	o.Emit("toggle-cursor-visible")
+}
+// EmitToggleOverwrite emits the "toggle-overwrite" signal
+//
+// Gets emitted to toggle the overwrite mode of the text view.
+// 
+// The ::toggle-overwrite signal is a [keybinding signal](class.SignalAction.html).
+// 
+// The default binding for this signal is &lt;kbd&gt;Insert&lt;/kbd&gt;.
+func (o *TextViewInstance) EmitToggleOverwrite() {
+	o.Emit("toggle-overwrite")
+}
 // ToggleButtonInstance is the instance type used by all types extending GtkToggleButton. It is used internally by the bindings. Users should use the interface [ToggleButton] instead.
 type ToggleButtonInstance struct {
 	_ [0]func() // equal guard
@@ -108912,6 +112575,10 @@ type ToggleButton interface {
 	// for all buttons in the group, and giving each button its own target
 	// value.
 	SetGroup(ToggleButton)
+	// ConnectToggled connects the provided callback to the "toggled" signal
+	//
+	// Emitted whenever the `GtkToggleButton`'s state is changed.
+	ConnectToggled(func(ToggleButton)) gobject.SignalHandle
 }
 
 func unsafeWrapToggleButton(base *gobject.ObjectInstance) *ToggleButtonInstance {
@@ -109132,6 +112799,12 @@ func (toggleButton *ToggleButtonInstance) SetGroup(group ToggleButton) {
 	runtime.KeepAlive(group)
 }
 
+// ConnectToggled connects the provided callback to the "toggled" signal
+//
+// Emitted whenever the `GtkToggleButton`'s state is changed.
+func (o *ToggleButtonInstance) ConnectToggled(fn func(ToggleButton)) gobject.SignalHandle {
+	return o.Connect("toggled", fn)
+}
 // TreeExpanderInstance is the instance type used by all types extending GtkTreeExpander. It is used internally by the bindings. Users should use the interface [TreeExpander] instead.
 type TreeExpanderInstance struct {
 	_ [0]func() // equal guard
@@ -109257,19 +112930,6 @@ type TreeExpander interface {
 	//
 	// TreeExpander indents the child by the width of an expander-icon if it is not expandable.
 	GetIndentForIcon() bool
-	// GetItem wraps gtk_tree_expander_get_item
-	// The function returns the following values:
-	// 
-	// 	- goret unsafe.Pointer 
-	//
-	// Forwards the item set on the `GtkTreeListRow` that @self is managing.
-	// 
-	// This call is essentially equivalent to calling:
-	// 
-	// ```c
-	// gtk_tree_list_row_get_item (gtk_tree_expander_get_list_row (@self));
-	// ```
-	GetItem() unsafe.Pointer
 	// GetListRow wraps gtk_tree_expander_get_list_row
 	// The function returns the following values:
 	// 
@@ -109474,34 +113134,6 @@ func (self *TreeExpanderInstance) GetIndentForIcon() bool {
 	if cret != 0 {
 		goret = true
 	}
-
-	return goret
-}
-
-// GetItem wraps gtk_tree_expander_get_item
-// The function returns the following values:
-// 
-// 	- goret unsafe.Pointer 
-//
-// Forwards the item set on the `GtkTreeListRow` that @self is managing.
-// 
-// This call is essentially equivalent to calling:
-// 
-// ```c
-// gtk_tree_list_row_get_item (gtk_tree_expander_get_list_row (@self));
-// ```
-func (self *TreeExpanderInstance) GetItem() unsafe.Pointer {
-	var carg0 *C.GtkTreeExpander // in, none, converted
-	var cret  C.gpointer         // return, full, casted
-
-	carg0 = (*C.GtkTreeExpander)(UnsafeTreeExpanderToGlibNone(self))
-
-	cret = C.gtk_tree_expander_get_item(carg0)
-	runtime.KeepAlive(self)
-
-	var goret unsafe.Pointer
-
-	goret = unsafe.Pointer(cret)
 
 	return goret
 }
@@ -110594,6 +114226,11 @@ var _ EmojiChooser = (*EmojiChooserInstance)(nil)
 type EmojiChooser interface {
 	Popover
 	upcastToGtkEmojiChooser() *EmojiChooserInstance
+
+	// ConnectEmojiPicked connects the provided callback to the "emoji-picked" signal
+	//
+	// Emitted when the user selects an Emoji.
+	ConnectEmojiPicked(func(EmojiChooser, string)) gobject.SignalHandle
 }
 
 func unsafeWrapEmojiChooser(base *gobject.ObjectInstance) *EmojiChooserInstance {
@@ -110666,6 +114303,12 @@ func NewEmojiChooser() Widget {
 	return goret
 }
 
+// ConnectEmojiPicked connects the provided callback to the "emoji-picked" signal
+//
+// Emitted when the user selects an Emoji.
+func (o *EmojiChooserInstance) ConnectEmojiPicked(fn func(EmojiChooser, string)) gobject.SignalHandle {
+	return o.Connect("emoji-picked", fn)
+}
 // GridViewInstance is the instance type used by all types extending GtkGridView. It is used internally by the bindings. Users should use the interface [GridView] instead.
 type GridViewInstance struct {
 	_ [0]func() // equal guard
@@ -110857,6 +114500,15 @@ type GridView interface {
 	//
 	// Sets the behavior of the &lt;kbd&gt;Tab&lt;/kbd&gt; and &lt;kbd&gt;Shift&lt;/kbd&gt;+&lt;kbd&gt;Tab&lt;/kbd&gt; keys.
 	SetTabBehavior(ListTabBehavior)
+	// ConnectActivate connects the provided callback to the "activate" signal
+	//
+	// Emitted when a cell has been activated by the user,
+	// usually via activating the GtkGridView|list.activate-item action.
+	// 
+	// This allows for a convenient way to handle activation in a gridview.
+	// See [property@Gtk.ListItem:activatable] for details on how to use
+	// this signal.
+	ConnectActivate(func(GridView, uint)) gobject.SignalHandle
 }
 
 func unsafeWrapGridView(base *gobject.ObjectInstance) *GridViewInstance {
@@ -111305,6 +114957,17 @@ func (self *GridViewInstance) SetTabBehavior(tabBehavior ListTabBehavior) {
 	runtime.KeepAlive(tabBehavior)
 }
 
+// ConnectActivate connects the provided callback to the "activate" signal
+//
+// Emitted when a cell has been activated by the user,
+// usually via activating the GtkGridView|list.activate-item action.
+// 
+// This allows for a convenient way to handle activation in a gridview.
+// See [property@Gtk.ListItem:activatable] for details on how to use
+// this signal.
+func (o *GridViewInstance) ConnectActivate(fn func(GridView, uint)) gobject.SignalHandle {
+	return o.Connect("activate", fn)
+}
 // ATContextClass wraps GtkATContextClass
 type ATContextClass struct {
 	*atContextClass
@@ -113754,14 +117417,14 @@ func UnsafeBuildableParseContextToGlibFull(b *BuildableParseContext) unsafe.Poin
 // If called from the start_element or end_element handlers this will
 // give the element_name as passed to those functions. For the parent
 // elements, see gtk_buildable_parse_context_get_element_stack().
-func (context *BuildableParseContext) GetElement() string {
+func (_context *BuildableParseContext) GetElement() string {
 	var carg0 *C.GtkBuildableParseContext // in, none, converted
 	var cret  *C.char                     // return, none, string, casted *C.gchar
 
-	carg0 = (*C.GtkBuildableParseContext)(UnsafeBuildableParseContextToGlibNone(context))
+	carg0 = (*C.GtkBuildableParseContext)(UnsafeBuildableParseContextToGlibNone(_context))
 
 	cret = C.gtk_buildable_parse_context_get_element(carg0)
-	runtime.KeepAlive(context)
+	runtime.KeepAlive(_context)
 
 	var goret string
 
@@ -113780,15 +117443,15 @@ func (context *BuildableParseContext) GetElement() string {
 // that line. Intended for use in error messages; there are no strict
 // semantics for what constitutes the "current" line number other than
 // "the best number we could come up with for error messages."
-func (context *BuildableParseContext) GetPosition() (int, int) {
+func (_context *BuildableParseContext) GetPosition() (int, int) {
 	var carg0 *C.GtkBuildableParseContext // in, none, converted
 	var carg1 C.int                       // out, full, casted, casted C.gint
 	var carg2 C.int                       // out, full, casted, casted C.gint
 
-	carg0 = (*C.GtkBuildableParseContext)(UnsafeBuildableParseContextToGlibNone(context))
+	carg0 = (*C.GtkBuildableParseContext)(UnsafeBuildableParseContextToGlibNone(_context))
 
 	C.gtk_buildable_parse_context_get_position(carg0, &carg1, &carg2)
-	runtime.KeepAlive(context)
+	runtime.KeepAlive(_context)
 
 	var lineNumber int
 	var charNumber int
@@ -113797,93 +117460,6 @@ func (context *BuildableParseContext) GetPosition() (int, int) {
 	charNumber = int(carg2)
 
 	return lineNumber, charNumber
-}
-
-// Pop wraps gtk_buildable_parse_context_pop
-// The function returns the following values:
-// 
-// 	- goret unsafe.Pointer 
-//
-// Completes the process of a temporary sub-parser redirection.
-// 
-// This function exists to collect the user_data allocated by a
-// matching call to gtk_buildable_parse_context_push(). It must be called
-// in the end_element handler corresponding to the start_element
-// handler during which gtk_buildable_parse_context_push() was called.
-// You must not call this function from the error callback -- the
-// @user_data is provided directly to the callback in that case.
-// 
-// This function is not intended to be directly called by users
-// interested in invoking subparsers. Instead, it is intended to
-// be used by the subparsers themselves to implement a higher-level
-// interface.
-func (context *BuildableParseContext) Pop() unsafe.Pointer {
-	var carg0 *C.GtkBuildableParseContext // in, none, converted
-	var cret  C.gpointer                  // return, none, casted
-
-	carg0 = (*C.GtkBuildableParseContext)(UnsafeBuildableParseContextToGlibNone(context))
-
-	cret = C.gtk_buildable_parse_context_pop(carg0)
-	runtime.KeepAlive(context)
-
-	var goret unsafe.Pointer
-
-	goret = unsafe.Pointer(cret)
-
-	return goret
-}
-
-// Push wraps gtk_buildable_parse_context_push
-// 
-// The function takes the following parameters:
-// 
-// 	- parser *BuildableParser: a `GtkBuildableParser` 
-// 	- userData unsafe.Pointer (nullable): user data to pass to `GtkBuildableParser` functions 
-//
-// Temporarily redirects markup data to a sub-parser.
-// 
-// This function may only be called from the start_element handler of
-// a `GtkBuildableParser`. It must be matched with a corresponding call to
-// gtk_buildable_parse_context_pop() in the matching end_element handler
-// (except in the case that the parser aborts due to an error).
-// 
-// All tags, text and other data between the matching tags is
-// redirected to the subparser given by @parser. @user_data is used
-// as the user_data for that parser. @user_data is also passed to the
-// error callback in the event that an error occurs. This includes
-// errors that occur in subparsers of the subparser.
-// 
-// The end tag matching the start tag for which this call was made is
-// handled by the previous parser (which is given its own user_data)
-// which is why gtk_buildable_parse_context_pop() is provided to allow "one
-// last access" to the @user_data provided to this function. In the
-// case of error, the @user_data provided here is passed directly to
-// the error callback of the subparser and gtk_buildable_parse_context_pop()
-// should not be called. In either case, if @user_data was allocated
-// then it ought to be freed from both of these locations.
-// 
-// This function is not intended to be directly called by users
-// interested in invoking subparsers. Instead, it is intended to be
-// used by the subparsers themselves to implement a higher-level
-// interface.
-// 
-// For an example of how to use this, see g_markup_parse_context_push() which
-// has the same kind of API.
-func (context *BuildableParseContext) Push(parser *BuildableParser, userData unsafe.Pointer) {
-	var carg0 *C.GtkBuildableParseContext // in, none, converted
-	var carg1 *C.GtkBuildableParser       // in, none, converted
-	var carg2 C.gpointer                  // in, none, casted, nullable
-
-	carg0 = (*C.GtkBuildableParseContext)(UnsafeBuildableParseContextToGlibNone(context))
-	carg1 = (*C.GtkBuildableParser)(UnsafeBuildableParserToGlibNone(parser))
-	if userData != nil {
-		carg2 = C.gpointer(userData)
-	}
-
-	C.gtk_buildable_parse_context_push(carg0, carg1, carg2)
-	runtime.KeepAlive(context)
-	runtime.KeepAlive(parser)
-	runtime.KeepAlive(userData)
 }
 
 // BuildableParser wraps GtkBuildableParser

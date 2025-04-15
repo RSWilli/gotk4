@@ -18,8 +18,6 @@ import (
 // extern gboolean _gotk4_glib2_SourceFunc(gpointer);
 // extern gint _gotk4_glib2_CompareDataFunc(gconstpointer, gconstpointer, gpointer);
 // extern void _gotk4_glib2_ChildWatchFunc(GPid, gint, gpointer);
-// extern void _gotk4_glib2_Func(gpointer, gpointer);
-// extern void _gotk4_glib2_HFunc(gpointer, gpointer, gpointer);
 // extern void _gotk4_glib2_LogFunc(gchar*, GLogLevelFlags, gchar*, gpointer);
 // extern void destroyUserdata(gpointer);
 import "C"
@@ -5204,33 +5202,6 @@ type CompareDataFunc func(a unsafe.Pointer, b unsafe.Pointer) (goret int)
 // the caller.
 type EqualFuncFull func(a unsafe.Pointer, b unsafe.Pointer) (goret bool)
 
-// Func wraps GFunc
-//
-// Specifies the type of functions passed to g_list_foreach() and
-// g_slist_foreach().
-type Func func(data unsafe.Pointer)
-
-// HFunc wraps GHFunc
-//
-// Specifies the type of the function passed to g_hash_table_foreach().
-// It is called with each key/value pair, together with the @user_data
-// parameter which is passed to g_hash_table_foreach().
-type HFunc func(key unsafe.Pointer, value unsafe.Pointer)
-
-// HRFunc wraps GHRFunc
-//
-// Specifies the type of the function passed to
-// [func@GLib.HashTable.find], [func@GLib.HashTable.foreach_remove], and
-// [func@GLib.HashTable.foreach_steal].
-// 
-// The function is called with each key/value pair, together with
-// the @user_data parameter passed to the calling function.
-// 
-// The function should return true if the key/value pair should be
-// selected, meaning it has been found or it should be removed from the
-// [struct@GLib.HashTable], depending on the calling function.
-type HRFunc func(key unsafe.Pointer, value unsafe.Pointer) (goret bool)
-
 // LogFunc wraps GLogFunc
 //
 // Specifies the prototype of log handler functions.
@@ -6535,7 +6506,7 @@ func Dpgettext(domain string, msgctxtid string, msgidoffset uint) string {
 // 
 // 	- domain string (nullable): the translation domain to use, or %NULL to use
 //   the domain set with textdomain() 
-// 	- context string: the message context 
+// 	- _context string: the message context 
 // 	- msgid string: the message 
 // 
 // The function returns the following values:
@@ -6552,7 +6523,7 @@ func Dpgettext(domain string, msgctxtid string, msgidoffset uint) string {
 // 
 // This function differs from C_() in that it is not a macro and
 // thus you may use non-string-literals as context and msgid arguments.
-func Dpgettext2(domain string, context string, msgid string) string {
+func Dpgettext2(domain string, _context string, msgid string) string {
 	var carg1 *C.gchar // in, none, string, nullable-string
 	var carg2 *C.gchar // in, none, string, casted *C.gchar
 	var carg3 *C.gchar // in, none, string, casted *C.gchar
@@ -6562,14 +6533,14 @@ func Dpgettext2(domain string, context string, msgid string) string {
 		carg1 = (*C.gchar)(unsafe.Pointer(C.CString(domain)))
 		defer C.free(unsafe.Pointer(carg1))
 	}
-	carg2 = (*C.gchar)(unsafe.Pointer(C.CString(context)))
+	carg2 = (*C.gchar)(unsafe.Pointer(C.CString(_context)))
 	defer C.free(unsafe.Pointer(carg2))
 	carg3 = (*C.gchar)(unsafe.Pointer(C.CString(msgid)))
 	defer C.free(unsafe.Pointer(carg3))
 
 	cret = C.g_dpgettext2(carg1, carg2, carg3)
 	runtime.KeepAlive(domain)
-	runtime.KeepAlive(context)
+	runtime.KeepAlive(_context)
 	runtime.KeepAlive(msgid)
 
 	var goret string
@@ -8720,37 +8691,6 @@ func IdleAddFull(priority int, function SourceFunc) uint {
 	return goret
 }
 
-// IdleRemoveByData wraps g_idle_remove_by_data
-// 
-// The function takes the following parameters:
-// 
-// 	- data unsafe.Pointer (nullable): the data for the idle source's callback. 
-// 
-// The function returns the following values:
-// 
-// 	- goret bool 
-//
-// Removes the idle function with the given data.
-func IdleRemoveByData(data unsafe.Pointer) bool {
-	var carg1 C.gpointer // in, none, casted, nullable
-	var cret  C.gboolean // return
-
-	if data != nil {
-		carg1 = C.gpointer(data)
-	}
-
-	cret = C.g_idle_remove_by_data(carg1)
-	runtime.KeepAlive(data)
-
-	var goret bool
-
-	if cret != 0 {
-		goret = true
-	}
-
-	return goret
-}
-
 // NewIdleSource wraps g_idle_source_new
 // The function returns the following values:
 // 
@@ -9193,70 +9133,6 @@ func LocaleToUTF8(opsysstring string) (uint, uint, string, error) {
 	return bytesRead, bytesWritten, goret, _goerr
 }
 
-// LogDefaultHandler wraps g_log_default_handler
-// 
-// The function takes the following parameters:
-// 
-// 	- logDomain string (nullable): the log domain of the message, or `NULL` for the
-//   default `""` application domain 
-// 	- logLevel LogLevelFlags: the level of the message 
-// 	- message string (nullable): the message 
-// 	- unusedData unsafe.Pointer (nullable): data passed from [func@GLib.log] which is unused 
-//
-// The default log handler set up by GLib; [func@GLib.log_set_default_handler]
-// allows to install an alternate default log handler.
-// 
-// This is used if no log handler has been set for the particular log
-// domain and log level combination. It outputs the message to `stderr`
-// or `stdout` and if the log level is fatal it calls [func@GLib.BREAKPOINT]. It automatically
-// prints a new-line character after the message, so one does not need to be
-// manually included in @message.
-// 
-// The behavior of this log handler can be influenced by a number of
-// environment variables:
-// 
-//   - `G_MESSAGES_PREFIXED`: A `:`-separated list of log levels for which
-//     messages should be prefixed by the program name and PID of the
-//     application.
-//   - `G_MESSAGES_DEBUG`: A space-separated list of log domains for
-//     which debug and informational messages are printed. By default
-//     these messages are not printed. If you need to set the allowed
-//     domains at runtime, use [func@GLib.log_writer_default_set_debug_domains].
-// 
-// `stderr` is used for levels [flags@GLib.LogLevelFlags.LEVEL_ERROR],
-// [flags@GLib.LogLevelFlags.LEVEL_CRITICAL], [flags@GLib.LogLevelFlags.LEVEL_WARNING] and
-// [flags@GLib.LogLevelFlags.LEVEL_MESSAGE]. `stdout` is used for
-// the rest, unless `stderr` was requested by
-// [func@GLib.log_writer_default_set_use_stderr].
-// 
-// This has no effect if structured logging is enabled; see
-// [Using Structured Logging](logging.html#using-structured-logging).
-func LogDefaultHandler(logDomain string, logLevel LogLevelFlags, message string, unusedData unsafe.Pointer) {
-	var carg1 *C.gchar         // in, none, string, nullable-string
-	var carg2 C.GLogLevelFlags // in, none, casted
-	var carg3 *C.gchar         // in, none, string, nullable-string
-	var carg4 C.gpointer       // in, none, casted, nullable
-
-	if logDomain != "" {
-		carg1 = (*C.gchar)(unsafe.Pointer(C.CString(logDomain)))
-		defer C.free(unsafe.Pointer(carg1))
-	}
-	carg2 = C.GLogLevelFlags(logLevel)
-	if message != "" {
-		carg3 = (*C.gchar)(unsafe.Pointer(C.CString(message)))
-		defer C.free(unsafe.Pointer(carg3))
-	}
-	if unusedData != nil {
-		carg4 = C.gpointer(unusedData)
-	}
-
-	C.g_log_default_handler(carg1, carg2, carg3, carg4)
-	runtime.KeepAlive(logDomain)
-	runtime.KeepAlive(logLevel)
-	runtime.KeepAlive(message)
-	runtime.KeepAlive(unusedData)
-}
-
 // LogGetDebugEnabled wraps g_log_get_debug_enabled
 // The function returns the following values:
 // 
@@ -9532,69 +9408,6 @@ func LogStructuredArray(logLevel LogLevelFlags, fields []LogField) {
 	runtime.KeepAlive(fields)
 }
 
-// LogWriterDefault wraps g_log_writer_default
-// 
-// The function takes the following parameters:
-// 
-// 	- logLevel LogLevelFlags: log level, either from [type@GLib.LogLevelFlags], or a user-defined
-//    level 
-// 	- fields []LogField: key–value pairs of structured data forming
-//    the log message 
-// 	- userData unsafe.Pointer (nullable): user data passed to [func@GLib.log_set_writer_func] 
-// 
-// The function returns the following values:
-// 
-// 	- goret LogWriterOutput 
-//
-// Format a structured log message and output it to the default log destination
-// for the platform.
-// 
-// On Linux, this is typically the systemd journal, falling
-// back to `stdout` or `stderr` if running from the terminal or if output is
-// being redirected to a file.
-// 
-// Support for other platform-specific logging mechanisms may be added in
-// future. Distributors of GLib may modify this function to impose their own
-// (documented) platform-specific log writing policies.
-// 
-// This is suitable for use as a [type@GLib.LogWriterFunc], and is the default writer used
-// if no other is set using [func@GLib.log_set_writer_func].
-// 
-// As with [func@GLib.log_default_handler], this function drops debug and informational
-// messages unless their log domain (or `all`) is listed in the space-separated
-// `G_MESSAGES_DEBUG` environment variable, or set at runtime by [func@GLib.log_writer_default_set_debug_domains].
-// 
-// [func@GLib.log_writer_default] uses the mask set by [func@GLib.log_set_always_fatal] to
-// determine which messages are fatal. When using a custom writer function instead it is
-// up to the writer function to determine which log messages are fatal.
-func LogWriterDefault(logLevel LogLevelFlags, fields []LogField, userData unsafe.Pointer) LogWriterOutput {
-	var carg1 C.GLogLevelFlags   // in, none, casted
-	var carg2 *C.GLogField       // in, transfer: none, C Pointers: 1, Name: array[LogField], array (inner: *typesystem.Record, length-by: carg3)
-	var carg3 C.gsize            // implicit
-	var carg4 C.gpointer         // in, none, casted, nullable
-	var cret  C.GLogWriterOutput // return, none, casted
-
-	carg1 = C.GLogLevelFlags(logLevel)
-	_ = fields
-	_ = carg2
-	_ = carg3
-	panic("unimplemented conversion of []LogField (const GLogField*)")
-	if userData != nil {
-		carg4 = C.gpointer(userData)
-	}
-
-	cret = C.g_log_writer_default(carg1, carg2, carg3, carg4)
-	runtime.KeepAlive(logLevel)
-	runtime.KeepAlive(fields)
-	runtime.KeepAlive(userData)
-
-	var goret LogWriterOutput
-
-	goret = LogWriterOutput(cret)
-
-	return goret
-}
-
 // LogWriterDefaultSetDebugDomains wraps g_log_writer_default_set_debug_domains
 // 
 // The function takes the following parameters:
@@ -9806,118 +9619,6 @@ func LogWriterIsJournald(outputFd int) bool {
 	return goret
 }
 
-// LogWriterJournald wraps g_log_writer_journald
-// 
-// The function takes the following parameters:
-// 
-// 	- logLevel LogLevelFlags: log level, either from [type@GLib.LogLevelFlags], or a user-defined
-//    level 
-// 	- fields []LogField: key–value pairs of structured data forming
-//    the log message 
-// 	- userData unsafe.Pointer (nullable): user data passed to [func@GLib.log_set_writer_func] 
-// 
-// The function returns the following values:
-// 
-// 	- goret LogWriterOutput 
-//
-// Format a structured log message and send it to the systemd journal as a set
-// of key–value pairs.
-// 
-// All fields are sent to the journal, but if a field has
-// length zero (indicating program-specific data) then only its key will be
-// sent.
-// 
-// This is suitable for use as a [type@GLib.LogWriterFunc].
-// 
-// If GLib has been compiled without systemd support, this function is still
-// defined, but will always return [enum@GLib.LogWriterOutput.UNHANDLED].
-func LogWriterJournald(logLevel LogLevelFlags, fields []LogField, userData unsafe.Pointer) LogWriterOutput {
-	var carg1 C.GLogLevelFlags   // in, none, casted
-	var carg2 *C.GLogField       // in, transfer: none, C Pointers: 1, Name: array[LogField], array (inner: *typesystem.Record, length-by: carg3)
-	var carg3 C.gsize            // implicit
-	var carg4 C.gpointer         // in, none, casted, nullable
-	var cret  C.GLogWriterOutput // return, none, casted
-
-	carg1 = C.GLogLevelFlags(logLevel)
-	_ = fields
-	_ = carg2
-	_ = carg3
-	panic("unimplemented conversion of []LogField (const GLogField*)")
-	if userData != nil {
-		carg4 = C.gpointer(userData)
-	}
-
-	cret = C.g_log_writer_journald(carg1, carg2, carg3, carg4)
-	runtime.KeepAlive(logLevel)
-	runtime.KeepAlive(fields)
-	runtime.KeepAlive(userData)
-
-	var goret LogWriterOutput
-
-	goret = LogWriterOutput(cret)
-
-	return goret
-}
-
-// LogWriterStandardStreams wraps g_log_writer_standard_streams
-// 
-// The function takes the following parameters:
-// 
-// 	- logLevel LogLevelFlags: log level, either from [type@GLib.LogLevelFlags], or a user-defined
-//    level 
-// 	- fields []LogField: key–value pairs of structured data forming
-//    the log message 
-// 	- userData unsafe.Pointer (nullable): user data passed to [func@GLib.log_set_writer_func] 
-// 
-// The function returns the following values:
-// 
-// 	- goret LogWriterOutput 
-//
-// Format a structured log message and print it to either `stdout` or `stderr`,
-// depending on its log level.
-// 
-// [flags@GLib.LogLevelFlags.LEVEL_INFO] and [flags@GLib.LogLevelFlags.LEVEL_DEBUG] messages
-// are sent to `stdout`, or to `stderr` if requested by
-// [func@GLib.log_writer_default_set_use_stderr];
-// all other log levels are sent to `stderr`. Only fields
-// which are understood by this function are included in the formatted string
-// which is printed.
-// 
-// If the output stream supports
-// [ANSI color escape sequences](https://en.wikipedia.org/wiki/ANSI_escape_code),
-// they will be used in the output.
-// 
-// A trailing new-line character is added to the log message when it is printed.
-// 
-// This is suitable for use as a [type@GLib.LogWriterFunc].
-func LogWriterStandardStreams(logLevel LogLevelFlags, fields []LogField, userData unsafe.Pointer) LogWriterOutput {
-	var carg1 C.GLogLevelFlags   // in, none, casted
-	var carg2 *C.GLogField       // in, transfer: none, C Pointers: 1, Name: array[LogField], array (inner: *typesystem.Record, length-by: carg3)
-	var carg3 C.gsize            // implicit
-	var carg4 C.gpointer         // in, none, casted, nullable
-	var cret  C.GLogWriterOutput // return, none, casted
-
-	carg1 = C.GLogLevelFlags(logLevel)
-	_ = fields
-	_ = carg2
-	_ = carg3
-	panic("unimplemented conversion of []LogField (const GLogField*)")
-	if userData != nil {
-		carg4 = C.gpointer(userData)
-	}
-
-	cret = C.g_log_writer_standard_streams(carg1, carg2, carg3, carg4)
-	runtime.KeepAlive(logLevel)
-	runtime.KeepAlive(fields)
-	runtime.KeepAlive(userData)
-
-	var goret LogWriterOutput
-
-	goret = LogWriterOutput(cret)
-
-	return goret
-}
-
 // LogWriterSupportsColor wraps g_log_writer_supports_color
 // 
 // The function takes the following parameters:
@@ -9946,60 +9647,6 @@ func LogWriterSupportsColor(outputFd int) bool {
 	if cret != 0 {
 		goret = true
 	}
-
-	return goret
-}
-
-// LogWriterSyslog wraps g_log_writer_syslog
-// 
-// The function takes the following parameters:
-// 
-// 	- logLevel LogLevelFlags: log level, either from [type@GLib.LogLevelFlags], or a user-defined
-//    level 
-// 	- fields []LogField: key–value pairs of structured data forming
-//    the log message 
-// 	- userData unsafe.Pointer (nullable): user data passed to [func@GLib.log_set_writer_func] 
-// 
-// The function returns the following values:
-// 
-// 	- goret LogWriterOutput 
-//
-// Format a structured log message and send it to the syslog daemon. Only fields
-// which are understood by this function are included in the formatted string
-// which is printed.
-// 
-// Log facility will be defined via the SYSLOG_FACILITY field and accepts the following
-// values: "auth", "daemon", and "user". If SYSLOG_FACILITY is not specified, LOG_USER
-// facility will be used.
-// 
-// This is suitable for use as a [type@GLib.LogWriterFunc].
-// 
-// If syslog is not supported, this function is still defined, but will always
-// return [enum@GLib.LogWriterOutput.UNHANDLED].
-func LogWriterSyslog(logLevel LogLevelFlags, fields []LogField, userData unsafe.Pointer) LogWriterOutput {
-	var carg1 C.GLogLevelFlags   // in, none, casted
-	var carg2 *C.GLogField       // in, transfer: none, C Pointers: 1, Name: array[LogField], array (inner: *typesystem.Record, length-by: carg3)
-	var carg3 C.gsize            // implicit
-	var carg4 C.gpointer         // in, none, casted, nullable
-	var cret  C.GLogWriterOutput // return, none, casted
-
-	carg1 = C.GLogLevelFlags(logLevel)
-	_ = fields
-	_ = carg2
-	_ = carg3
-	panic("unimplemented conversion of []LogField (const GLogField*)")
-	if userData != nil {
-		carg4 = C.gpointer(userData)
-	}
-
-	cret = C.g_log_writer_syslog(carg1, carg2, carg3, carg4)
-	runtime.KeepAlive(logLevel)
-	runtime.KeepAlive(fields)
-	runtime.KeepAlive(userData)
-
-	var goret LogWriterOutput
-
-	goret = LogWriterOutput(cret)
 
 	return goret
 }
@@ -10233,24 +9880,6 @@ func MkdirWithParents(pathname string, mode int) int {
 	goret = int(cret)
 
 	return goret
-}
-
-// NullifyPointer wraps g_nullify_pointer
-// 
-// The function takes the following parameters:
-// 
-// 	- nullifyLocation *unsafe.Pointer: the memory address of the pointer. 
-//
-// Set the pointer at the specified location to %NULL.
-func NullifyPointer(nullifyLocation *unsafe.Pointer) {
-	var carg1 *C.gpointer // in, transfer: none, C Pointers: 1, Name: gpointer
-
-	_ = nullifyLocation
-	_ = carg1
-	panic("unimplemented conversion of *unsafe.Pointer (gpointer*)")
-
-	C.g_nullify_pointer(carg1)
-	runtime.KeepAlive(nullifyLocation)
 }
 
 // NumberParserErrorQuark wraps g_number_parser_error_quark
@@ -18282,44 +17911,6 @@ func UnsafeHashTableIterToGlibFull(h *HashTableIter) unsafe.Pointer {
 	h.native = nil // HashTableIter is invalid from here on
 	return _p
 }
-// Next wraps g_hash_table_iter_next
-// The function returns the following values:
-// 
-// 	- key unsafe.Pointer (nullable): a location to store the key 
-// 	- value unsafe.Pointer (nullable): a location to store the value 
-// 	- goret bool 
-//
-// Advances @iter and retrieves the key and/or value that are now
-// pointed to as a result of this advancement. If %FALSE is returned,
-// @key and @value are not set, and the iterator becomes invalid.
-func (iter *HashTableIter) Next() (unsafe.Pointer, unsafe.Pointer, bool) {
-	var carg0 *C.GHashTableIter // in, none, converted
-	var carg1 C.gpointer        // out, full, casted, nullable
-	var carg2 C.gpointer        // out, full, casted, nullable
-	var cret  C.gboolean        // return
-
-	carg0 = (*C.GHashTableIter)(UnsafeHashTableIterToGlibNone(iter))
-
-	cret = C.g_hash_table_iter_next(carg0, &carg1, &carg2)
-	runtime.KeepAlive(iter)
-
-	var key   unsafe.Pointer
-	var value unsafe.Pointer
-	var goret bool
-
-	if carg1 != nil {
-		key = unsafe.Pointer(carg1)
-	}
-	if carg2 != nil {
-		value = unsafe.Pointer(carg2)
-	}
-	if cret != 0 {
-		goret = true
-	}
-
-	return key, value, goret
-}
-
 // Remove wraps g_hash_table_iter_remove
 //
 // Removes the key/value pair currently pointed to by the iterator
@@ -18347,32 +17938,6 @@ func (iter *HashTableIter) Remove() {
 
 	C.g_hash_table_iter_remove(carg0)
 	runtime.KeepAlive(iter)
-}
-
-// Replace wraps g_hash_table_iter_replace
-// 
-// The function takes the following parameters:
-// 
-// 	- value unsafe.Pointer (nullable): the value to replace with 
-//
-// Replaces the value currently pointed to by the iterator
-// from its associated #GHashTable. Can only be called after
-// g_hash_table_iter_next() returned %TRUE.
-// 
-// If you supplied a @value_destroy_func when creating the
-// #GHashTable, the old value is freed using that function.
-func (iter *HashTableIter) Replace(value unsafe.Pointer) {
-	var carg0 *C.GHashTableIter // in, none, converted
-	var carg1 C.gpointer        // in, none, casted, nullable
-
-	carg0 = (*C.GHashTableIter)(UnsafeHashTableIterToGlibNone(iter))
-	if value != nil {
-		carg1 = C.gpointer(value)
-	}
-
-	C.g_hash_table_iter_replace(carg0, carg1)
-	runtime.KeepAlive(iter)
-	runtime.KeepAlive(value)
 }
 
 // Steal wraps g_hash_table_iter_steal
@@ -21832,14 +21397,14 @@ func NewMainContextWithFlags(flags MainContextFlags) *MainContext {
 // 
 // Since 2.76 @context can be %NULL to use the global-default
 // main context.
-func (context *MainContext) Acquire() bool {
+func (_context *MainContext) Acquire() bool {
 	var carg0 *C.GMainContext // in, none, converted
 	var cret  C.gboolean      // return
 
-	carg0 = (*C.GMainContext)(UnsafeMainContextToGlibNone(context))
+	carg0 = (*C.GMainContext)(UnsafeMainContextToGlibNone(_context))
 
 	cret = C.g_main_context_acquire(carg0)
-	runtime.KeepAlive(context)
+	runtime.KeepAlive(_context)
 
 	var goret bool
 
@@ -21863,17 +21428,17 @@ func (context *MainContext) Acquire() bool {
 // Adds a file descriptor to the set of file descriptors polled for
 // this context. This will very seldom be used directly. Instead
 // a typical event source will use `g_source_add_unix_fd` instead.
-func (context *MainContext) AddPoll(fd *PollFD, priority int) {
+func (_context *MainContext) AddPoll(fd *PollFD, priority int) {
 	var carg0 *C.GMainContext // in, none, converted
 	var carg1 *C.GPollFD      // in, none, converted
 	var carg2 C.gint          // in, none, casted
 
-	carg0 = (*C.GMainContext)(UnsafeMainContextToGlibNone(context))
+	carg0 = (*C.GMainContext)(UnsafeMainContextToGlibNone(_context))
 	carg1 = (*C.GPollFD)(UnsafePollFDToGlibNone(fd))
 	carg2 = C.gint(priority)
 
 	C.g_main_context_add_poll(carg0, carg1, carg2)
-	runtime.KeepAlive(context)
+	runtime.KeepAlive(_context)
 	runtime.KeepAlive(fd)
 	runtime.KeepAlive(priority)
 }
@@ -21900,14 +21465,14 @@ func (context *MainContext) AddPoll(fd *PollFD, priority int) {
 // 
 // Since 2.76 @context can be %NULL to use the global-default
 // main context.
-func (context *MainContext) Check(maxPriority int, fds []PollFD) bool {
+func (_context *MainContext) Check(maxPriority int, fds []PollFD) bool {
 	var carg0 *C.GMainContext // in, none, converted
 	var carg1 C.gint          // in, none, casted
 	var carg2 *C.GPollFD      // in, transfer: none, C Pointers: 1, Name: array[PollFD], array (inner: *typesystem.Record, length-by: carg3)
 	var carg3 C.gint          // implicit
 	var cret  C.gboolean      // return
 
-	carg0 = (*C.GMainContext)(UnsafeMainContextToGlibNone(context))
+	carg0 = (*C.GMainContext)(UnsafeMainContextToGlibNone(_context))
 	carg1 = C.gint(maxPriority)
 	_ = fds
 	_ = carg2
@@ -21915,7 +21480,7 @@ func (context *MainContext) Check(maxPriority int, fds []PollFD) bool {
 	panic("unimplemented conversion of []PollFD (GPollFD*)")
 
 	cret = C.g_main_context_check(carg0, carg1, carg2, carg3)
-	runtime.KeepAlive(context)
+	runtime.KeepAlive(_context)
 	runtime.KeepAlive(maxPriority)
 	runtime.KeepAlive(fds)
 
@@ -21937,51 +21502,13 @@ func (context *MainContext) Check(maxPriority int, fds []PollFD) bool {
 // 
 // Since 2.76 @context can be %NULL to use the global-default
 // main context.
-func (context *MainContext) Dispatch() {
+func (_context *MainContext) Dispatch() {
 	var carg0 *C.GMainContext // in, none, converted
 
-	carg0 = (*C.GMainContext)(UnsafeMainContextToGlibNone(context))
+	carg0 = (*C.GMainContext)(UnsafeMainContextToGlibNone(_context))
 
 	C.g_main_context_dispatch(carg0)
-	runtime.KeepAlive(context)
-}
-
-// FindSourceByFuncsUserData wraps g_main_context_find_source_by_funcs_user_data
-// 
-// The function takes the following parameters:
-// 
-// 	- funcs *SourceFuncs: the @source_funcs passed to [ctor@GLib.Source.new]. 
-// 	- userData unsafe.Pointer (nullable): the user data from the callback. 
-// 
-// The function returns the following values:
-// 
-// 	- goret *Source 
-//
-// Finds a source with the given source functions and user data.  If
-// multiple sources exist with the same source function and user data,
-// the first one found will be returned.
-func (context *MainContext) FindSourceByFuncsUserData(funcs *SourceFuncs, userData unsafe.Pointer) *Source {
-	var carg0 *C.GMainContext // in, none, converted
-	var carg1 *C.GSourceFuncs // in, none, converted
-	var carg2 C.gpointer      // in, none, casted, nullable
-	var cret  *C.GSource      // return, none, converted
-
-	carg0 = (*C.GMainContext)(UnsafeMainContextToGlibNone(context))
-	carg1 = (*C.GSourceFuncs)(UnsafeSourceFuncsToGlibNone(funcs))
-	if userData != nil {
-		carg2 = C.gpointer(userData)
-	}
-
-	cret = C.g_main_context_find_source_by_funcs_user_data(carg0, carg1, carg2)
-	runtime.KeepAlive(context)
-	runtime.KeepAlive(funcs)
-	runtime.KeepAlive(userData)
-
-	var goret *Source
-
-	goret = UnsafeSourceFromGlibNone(unsafe.Pointer(cret))
-
-	return goret
+	runtime.KeepAlive(_context)
 }
 
 // FindSourceByID wraps g_main_context_find_source_by_id
@@ -22006,51 +21533,17 @@ func (context *MainContext) FindSourceByFuncsUserData(funcs *SourceFuncs, userDa
 // is called on its (now invalid) source ID.  This source ID may have
 // been reissued, leading to the operation being performed against the
 // wrong source.
-func (context *MainContext) FindSourceByID(sourceId uint) *Source {
+func (_context *MainContext) FindSourceByID(sourceId uint) *Source {
 	var carg0 *C.GMainContext // in, none, converted
 	var carg1 C.guint         // in, none, casted
 	var cret  *C.GSource      // return, none, converted
 
-	carg0 = (*C.GMainContext)(UnsafeMainContextToGlibNone(context))
+	carg0 = (*C.GMainContext)(UnsafeMainContextToGlibNone(_context))
 	carg1 = C.guint(sourceId)
 
 	cret = C.g_main_context_find_source_by_id(carg0, carg1)
-	runtime.KeepAlive(context)
+	runtime.KeepAlive(_context)
 	runtime.KeepAlive(sourceId)
-
-	var goret *Source
-
-	goret = UnsafeSourceFromGlibNone(unsafe.Pointer(cret))
-
-	return goret
-}
-
-// FindSourceByUserData wraps g_main_context_find_source_by_user_data
-// 
-// The function takes the following parameters:
-// 
-// 	- userData unsafe.Pointer (nullable): the user_data for the callback. 
-// 
-// The function returns the following values:
-// 
-// 	- goret *Source 
-//
-// Finds a source with the given user data for the callback.  If
-// multiple sources exist with the same user data, the first
-// one found will be returned.
-func (context *MainContext) FindSourceByUserData(userData unsafe.Pointer) *Source {
-	var carg0 *C.GMainContext // in, none, converted
-	var carg1 C.gpointer      // in, none, casted, nullable
-	var cret  *C.GSource      // return, none, converted
-
-	carg0 = (*C.GMainContext)(UnsafeMainContextToGlibNone(context))
-	if userData != nil {
-		carg1 = C.gpointer(userData)
-	}
-
-	cret = C.g_main_context_find_source_by_user_data(carg0, carg1)
-	runtime.KeepAlive(context)
-	runtime.KeepAlive(userData)
 
 	var goret *Source
 
@@ -22075,21 +21568,21 @@ func (context *MainContext) FindSourceByUserData(userData unsafe.Pointer) *Sourc
 // 
 // @notify should not assume that it is called from any particular
 // thread or with any particular context acquired.
-func (context *MainContext) InvokeFull(priority int, function SourceFunc) {
+func (_context *MainContext) InvokeFull(priority int, function SourceFunc) {
 	var carg0 *C.GMainContext  // in, none, converted
 	var carg1 C.gint           // in, none, casted
 	var carg2 C.GSourceFunc    // callback, scope: notified, closure: carg3, destroy: carg4
 	var carg3 C.gpointer       // implicit
 	var carg4 C.GDestroyNotify // implicit
 
-	carg0 = (*C.GMainContext)(UnsafeMainContextToGlibNone(context))
+	carg0 = (*C.GMainContext)(UnsafeMainContextToGlibNone(_context))
 	carg1 = C.gint(priority)
 	carg2 = (*[0]byte)(C._gotk4_glib2_SourceFunc)
 	carg3 = C.gpointer(userdata.Register(function))
 	carg4 = (C.GDestroyNotify)((*[0]byte)(C.destroyUserdata))
 
 	C.g_main_context_invoke_full(carg0, carg1, carg2, carg3, carg4)
-	runtime.KeepAlive(context)
+	runtime.KeepAlive(_context)
 	runtime.KeepAlive(priority)
 	runtime.KeepAlive(function)
 }
@@ -22103,14 +21596,14 @@ func (context *MainContext) InvokeFull(priority int, function SourceFunc) {
 // ownership of this [struct@GLib.MainContext]. This is useful to
 // know before waiting on another thread that may be
 // blocking to get ownership of @context.
-func (context *MainContext) IsOwner() bool {
+func (_context *MainContext) IsOwner() bool {
 	var carg0 *C.GMainContext // in, none, converted
 	var cret  C.gboolean      // return
 
-	carg0 = (*C.GMainContext)(UnsafeMainContextToGlibNone(context))
+	carg0 = (*C.GMainContext)(UnsafeMainContextToGlibNone(_context))
 
 	cret = C.g_main_context_is_owner(carg0)
-	runtime.KeepAlive(context)
+	runtime.KeepAlive(_context)
 
 	var goret bool
 
@@ -22143,18 +21636,18 @@ func (context *MainContext) IsOwner() bool {
 // Note that even when @may_block is %TRUE, it is still possible for
 // [method@GLib.MainContext.iteration] to return %FALSE, since the wait may
 // be interrupted for other reasons than an event source becoming ready.
-func (context *MainContext) Iteration(mayBlock bool) bool {
+func (_context *MainContext) Iteration(mayBlock bool) bool {
 	var carg0 *C.GMainContext // in, none, converted
 	var carg1 C.gboolean      // in
 	var cret  C.gboolean      // return
 
-	carg0 = (*C.GMainContext)(UnsafeMainContextToGlibNone(context))
+	carg0 = (*C.GMainContext)(UnsafeMainContextToGlibNone(_context))
 	if mayBlock {
 		carg1 = C.TRUE
 	}
 
 	cret = C.g_main_context_iteration(carg0, carg1)
-	runtime.KeepAlive(context)
+	runtime.KeepAlive(_context)
 	runtime.KeepAlive(mayBlock)
 
 	var goret bool
@@ -22172,14 +21665,14 @@ func (context *MainContext) Iteration(mayBlock bool) bool {
 // 	- goret bool 
 //
 // Checks if any sources have pending events for the given context.
-func (context *MainContext) Pending() bool {
+func (_context *MainContext) Pending() bool {
 	var carg0 *C.GMainContext // in, none, converted
 	var cret  C.gboolean      // return
 
-	carg0 = (*C.GMainContext)(UnsafeMainContextToGlibNone(context))
+	carg0 = (*C.GMainContext)(UnsafeMainContextToGlibNone(_context))
 
 	cret = C.g_main_context_pending(carg0)
-	runtime.KeepAlive(context)
+	runtime.KeepAlive(_context)
 
 	var goret bool
 
@@ -22194,13 +21687,13 @@ func (context *MainContext) Pending() bool {
 //
 // Pops @context off the thread-default context stack (verifying that
 // it was on the top of the stack).
-func (context *MainContext) PopThreadDefault() {
+func (_context *MainContext) PopThreadDefault() {
 	var carg0 *C.GMainContext // in, none, converted
 
-	carg0 = (*C.GMainContext)(UnsafeMainContextToGlibNone(context))
+	carg0 = (*C.GMainContext)(UnsafeMainContextToGlibNone(_context))
 
 	C.g_main_context_pop_thread_default(carg0)
-	runtime.KeepAlive(context)
+	runtime.KeepAlive(_context)
 }
 
 // Prepare wraps g_main_context_prepare
@@ -22215,15 +21708,15 @@ func (context *MainContext) PopThreadDefault() {
 // 
 // You must have successfully acquired the context with
 // [method@GLib.MainContext.acquire] before you may call this function.
-func (context *MainContext) Prepare() (int, bool) {
+func (_context *MainContext) Prepare() (int, bool) {
 	var carg0 *C.GMainContext // in, none, converted
 	var carg1 C.gint          // out, full, casted
 	var cret  C.gboolean      // return
 
-	carg0 = (*C.GMainContext)(UnsafeMainContextToGlibNone(context))
+	carg0 = (*C.GMainContext)(UnsafeMainContextToGlibNone(_context))
 
 	cret = C.g_main_context_prepare(carg0, &carg1)
-	runtime.KeepAlive(context)
+	runtime.KeepAlive(_context)
 
 	var priority int
 	var goret    bool
@@ -22277,13 +21770,13 @@ func (context *MainContext) Prepare() (int, bool) {
 // Beware that libraries that predate this function may not correctly
 // handle being used from a thread with a thread-default context. Eg,
 // see g_file_supports_thread_contexts().
-func (context *MainContext) PushThreadDefault() {
+func (_context *MainContext) PushThreadDefault() {
 	var carg0 *C.GMainContext // in, none, converted
 
-	carg0 = (*C.GMainContext)(UnsafeMainContextToGlibNone(context))
+	carg0 = (*C.GMainContext)(UnsafeMainContextToGlibNone(_context))
 
 	C.g_main_context_push_thread_default(carg0)
-	runtime.KeepAlive(context)
+	runtime.KeepAlive(_context)
 }
 
 // Release wraps g_main_context_release
@@ -22295,13 +21788,13 @@ func (context *MainContext) PushThreadDefault() {
 // 
 // You must have successfully acquired the context with
 // [method@GLib.MainContext.acquire] before you may call this function.
-func (context *MainContext) Release() {
+func (_context *MainContext) Release() {
 	var carg0 *C.GMainContext // in, none, converted
 
-	carg0 = (*C.GMainContext)(UnsafeMainContextToGlibNone(context))
+	carg0 = (*C.GMainContext)(UnsafeMainContextToGlibNone(_context))
 
 	C.g_main_context_release(carg0)
-	runtime.KeepAlive(context)
+	runtime.KeepAlive(_context)
 }
 
 // RemovePoll wraps g_main_context_remove_poll
@@ -22313,15 +21806,15 @@ func (context *MainContext) Release() {
 //
 // Removes file descriptor from the set of file descriptors to be
 // polled for a particular context.
-func (context *MainContext) RemovePoll(fd *PollFD) {
+func (_context *MainContext) RemovePoll(fd *PollFD) {
 	var carg0 *C.GMainContext // in, none, converted
 	var carg1 *C.GPollFD      // in, none, converted
 
-	carg0 = (*C.GMainContext)(UnsafeMainContextToGlibNone(context))
+	carg0 = (*C.GMainContext)(UnsafeMainContextToGlibNone(_context))
 	carg1 = (*C.GPollFD)(UnsafePollFDToGlibNone(fd))
 
 	C.g_main_context_remove_poll(carg0, carg1)
-	runtime.KeepAlive(context)
+	runtime.KeepAlive(_context)
 	runtime.KeepAlive(fd)
 }
 
@@ -22355,13 +21848,13 @@ func (context *MainContext) RemovePoll(fd *PollFD) {
 //   if (g_atomic_int_dec_and_test (&amp;tasks_remaining))
 //     g_main_context_wakeup (NULL);
 // ]|
-func (context *MainContext) Wakeup() {
+func (_context *MainContext) Wakeup() {
 	var carg0 *C.GMainContext // in, none, converted
 
-	carg0 = (*C.GMainContext)(UnsafeMainContextToGlibNone(context))
+	carg0 = (*C.GMainContext)(UnsafeMainContextToGlibNone(_context))
 
 	C.g_main_context_wakeup(carg0)
-	runtime.KeepAlive(context)
+	runtime.KeepAlive(_context)
 }
 
 // MainLoop wraps GMainLoop
@@ -22438,7 +21931,7 @@ func UnsafeMainLoopToGlibFull(m *MainLoop) unsafe.Pointer {
 // 
 // The function takes the following parameters:
 // 
-// 	- context *MainContext (nullable): a #GMainContext  (if %NULL, the global-default
+// 	- _context *MainContext (nullable): a #GMainContext  (if %NULL, the global-default
 //   main context will be used). 
 // 	- isRunning bool: set to %TRUE to indicate that the loop is running. This
 // is not very important since calling [method@GLib.MainLoop.run] will set this
@@ -22449,20 +21942,20 @@ func UnsafeMainLoopToGlibFull(m *MainLoop) unsafe.Pointer {
 // 	- goret *MainLoop 
 //
 // Creates a new [struct@GLib.MainLoop] structure.
-func NewMainLoop(context *MainContext, isRunning bool) *MainLoop {
+func NewMainLoop(_context *MainContext, isRunning bool) *MainLoop {
 	var carg1 *C.GMainContext // in, none, converted, nullable
 	var carg2 C.gboolean      // in
 	var cret  *C.GMainLoop    // return, full, converted
 
-	if context != nil {
-		carg1 = (*C.GMainContext)(UnsafeMainContextToGlibNone(context))
+	if _context != nil {
+		carg1 = (*C.GMainContext)(UnsafeMainContextToGlibNone(_context))
 	}
 	if isRunning {
 		carg2 = C.TRUE
 	}
 
 	cret = C.g_main_loop_new(carg1, carg2)
-	runtime.KeepAlive(context)
+	runtime.KeepAlive(_context)
 	runtime.KeepAlive(isRunning)
 
 	var goret *MainLoop
@@ -22883,15 +22376,15 @@ func UnsafeMarkupParseContextToGlibFull(m *MarkupParseContext) unsafe.Pointer {
 // 
 // This function reports an error if the document isn't complete,
 // for example if elements are still open.
-func (context *MarkupParseContext) EndParse() (bool, error) {
+func (_context *MarkupParseContext) EndParse() (bool, error) {
 	var carg0 *C.GMarkupParseContext // in, none, converted
 	var cret  C.gboolean             // return
 	var _cerr *C.GError              // out, full, converted, nullable
 
-	carg0 = (*C.GMarkupParseContext)(UnsafeMarkupParseContextToGlibNone(context))
+	carg0 = (*C.GMarkupParseContext)(UnsafeMarkupParseContextToGlibNone(_context))
 
 	cret = C.g_markup_parse_context_end_parse(carg0, &_cerr)
-	runtime.KeepAlive(context)
+	runtime.KeepAlive(_context)
 
 	var goret  bool
 	var _goerr error
@@ -22916,14 +22409,14 @@ func (context *MarkupParseContext) EndParse() (bool, error) {
 // If called from the start_element or end_element handlers this will
 // give the element_name as passed to those functions. For the parent
 // elements, see g_markup_parse_context_get_element_stack().
-func (context *MarkupParseContext) GetElement() string {
+func (_context *MarkupParseContext) GetElement() string {
 	var carg0 *C.GMarkupParseContext // in, none, converted
 	var cret  *C.gchar               // return, none, string, casted *C.gchar
 
-	carg0 = (*C.GMarkupParseContext)(UnsafeMarkupParseContextToGlibNone(context))
+	carg0 = (*C.GMarkupParseContext)(UnsafeMarkupParseContextToGlibNone(_context))
 
 	cret = C.g_markup_parse_context_get_element(carg0)
-	runtime.KeepAlive(context)
+	runtime.KeepAlive(_context)
 
 	var goret string
 
@@ -22942,15 +22435,15 @@ func (context *MarkupParseContext) GetElement() string {
 // that line. Intended for use in error messages; there are no strict
 // semantics for what constitutes the "current" line number other than
 // "the best number we could come up with for error messages."
-func (context *MarkupParseContext) GetPosition() (int, int) {
+func (_context *MarkupParseContext) GetPosition() (int, int) {
 	var carg0 *C.GMarkupParseContext // in, none, converted
 	var carg1 C.gint                 // out, full, casted
 	var carg2 C.gint                 // out, full, casted
 
-	carg0 = (*C.GMarkupParseContext)(UnsafeMarkupParseContextToGlibNone(context))
+	carg0 = (*C.GMarkupParseContext)(UnsafeMarkupParseContextToGlibNone(_context))
 
 	C.g_markup_parse_context_get_position(carg0, &carg1, &carg2)
-	runtime.KeepAlive(context)
+	runtime.KeepAlive(_context)
 
 	var lineNumber int
 	var charNumber int
@@ -22959,32 +22452,6 @@ func (context *MarkupParseContext) GetPosition() (int, int) {
 	charNumber = int(carg2)
 
 	return lineNumber, charNumber
-}
-
-// GetUserData wraps g_markup_parse_context_get_user_data
-// The function returns the following values:
-// 
-// 	- goret unsafe.Pointer 
-//
-// Returns the user_data associated with @context.
-// 
-// This will either be the user_data that was provided to
-// g_markup_parse_context_new() or to the most recent call
-// of g_markup_parse_context_push().
-func (context *MarkupParseContext) GetUserData() unsafe.Pointer {
-	var carg0 *C.GMarkupParseContext // in, none, converted
-	var cret  C.gpointer             // return, none, casted
-
-	carg0 = (*C.GMarkupParseContext)(UnsafeMarkupParseContextToGlibNone(context))
-
-	cret = C.g_markup_parse_context_get_user_data(carg0)
-	runtime.KeepAlive(context)
-
-	var goret unsafe.Pointer
-
-	goret = unsafe.Pointer(cret)
-
-	return goret
 }
 
 // Parse wraps g_markup_parse_context_parse
@@ -23009,20 +22476,20 @@ func (context *MarkupParseContext) GetUserData() unsafe.Pointer {
 // function, aborting the process if an error occurs. Once an error
 // is reported, no further data may be fed to the #GMarkupParseContext;
 // all errors are fatal.
-func (context *MarkupParseContext) Parse(text string, textLen int) (bool, error) {
+func (_context *MarkupParseContext) Parse(text string, textLen int) (bool, error) {
 	var carg0 *C.GMarkupParseContext // in, none, converted
 	var carg1 *C.gchar               // in, none, string, casted *C.gchar
 	var carg2 C.gssize               // in, none, casted
 	var cret  C.gboolean             // return
 	var _cerr *C.GError              // out, full, converted, nullable
 
-	carg0 = (*C.GMarkupParseContext)(UnsafeMarkupParseContextToGlibNone(context))
+	carg0 = (*C.GMarkupParseContext)(UnsafeMarkupParseContextToGlibNone(_context))
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(text)))
 	defer C.free(unsafe.Pointer(carg1))
 	carg2 = C.gssize(textLen)
 
 	cret = C.g_markup_parse_context_parse(carg0, carg1, carg2, &_cerr)
-	runtime.KeepAlive(context)
+	runtime.KeepAlive(_context)
 	runtime.KeepAlive(text)
 	runtime.KeepAlive(textLen)
 
@@ -23037,178 +22504,6 @@ func (context *MarkupParseContext) Parse(text string, textLen int) (bool, error)
 	}
 
 	return goret, _goerr
-}
-
-// Pop wraps g_markup_parse_context_pop
-// The function returns the following values:
-// 
-// 	- goret unsafe.Pointer 
-//
-// Completes the process of a temporary sub-parser redirection.
-// 
-// This function exists to collect the user_data allocated by a
-// matching call to g_markup_parse_context_push(). It must be called
-// in the end_element handler corresponding to the start_element
-// handler during which g_markup_parse_context_push() was called.
-// You must not call this function from the error callback -- the
-// @user_data is provided directly to the callback in that case.
-// 
-// This function is not intended to be directly called by users
-// interested in invoking subparsers. Instead, it is intended to
-// be used by the subparsers themselves to implement a higher-level
-// interface.
-func (context *MarkupParseContext) Pop() unsafe.Pointer {
-	var carg0 *C.GMarkupParseContext // in, none, converted
-	var cret  C.gpointer             // return, none, casted
-
-	carg0 = (*C.GMarkupParseContext)(UnsafeMarkupParseContextToGlibNone(context))
-
-	cret = C.g_markup_parse_context_pop(carg0)
-	runtime.KeepAlive(context)
-
-	var goret unsafe.Pointer
-
-	goret = unsafe.Pointer(cret)
-
-	return goret
-}
-
-// Push wraps g_markup_parse_context_push
-// 
-// The function takes the following parameters:
-// 
-// 	- parser *MarkupParser: a #GMarkupParser 
-// 	- userData unsafe.Pointer (nullable): user data to pass to #GMarkupParser functions 
-//
-// Temporarily redirects markup data to a sub-parser.
-// 
-// This function may only be called from the start_element handler of
-// a #GMarkupParser. It must be matched with a corresponding call to
-// g_markup_parse_context_pop() in the matching end_element handler
-// (except in the case that the parser aborts due to an error).
-// 
-// All tags, text and other data between the matching tags is
-// redirected to the subparser given by @parser. @user_data is used
-// as the user_data for that parser. @user_data is also passed to the
-// error callback in the event that an error occurs. This includes
-// errors that occur in subparsers of the subparser.
-// 
-// The end tag matching the start tag for which this call was made is
-// handled by the previous parser (which is given its own user_data)
-// which is why g_markup_parse_context_pop() is provided to allow "one
-// last access" to the @user_data provided to this function. In the
-// case of error, the @user_data provided here is passed directly to
-// the error callback of the subparser and g_markup_parse_context_pop()
-// should not be called. In either case, if @user_data was allocated
-// then it ought to be freed from both of these locations.
-// 
-// This function is not intended to be directly called by users
-// interested in invoking subparsers. Instead, it is intended to be
-// used by the subparsers themselves to implement a higher-level
-// interface.
-// 
-// As an example, see the following implementation of a simple
-// parser that counts the number of tags encountered.
-// 
-// |[&lt;!-- language="C" --&gt;
-// typedef struct
-// {
-//   gint tag_count;
-// } CounterData;
-// 
-// static void
-// counter_start_element (GMarkupParseContext  *context,
-//                        const gchar          *element_name,
-//                        const gchar         **attribute_names,
-//                        const gchar         **attribute_values,
-//                        gpointer              user_data,
-//                        GError              **error)
-// {
-//   CounterData *data = user_data;
-// 
-//   data-&gt;tag_count++;
-// }
-// 
-// static void
-// counter_error (GMarkupParseContext *context,
-//                GError              *error,
-//                gpointer             user_data)
-// {
-//   CounterData *data = user_data;
-// 
-//   g_slice_free (CounterData, data);
-// }
-// 
-// static GMarkupParser counter_subparser =
-// {
-//   counter_start_element,
-//   NULL,
-//   NULL,
-//   NULL,
-//   counter_error
-// };
-// ]|
-// 
-// In order to allow this parser to be easily used as a subparser, the
-// following interface is provided:
-// 
-// |[&lt;!-- language="C" --&gt;
-// void
-// start_counting (GMarkupParseContext *context)
-// {
-//   CounterData *data = g_slice_new (CounterData);
-// 
-//   data-&gt;tag_count = 0;
-//   g_markup_parse_context_push (context, &amp;counter_subparser, data);
-// }
-// 
-// gint
-// end_counting (GMarkupParseContext *context)
-// {
-//   CounterData *data = g_markup_parse_context_pop (context);
-//   int result;
-// 
-//   result = data-&gt;tag_count;
-//   g_slice_free (CounterData, data);
-// 
-//   return result;
-// }
-// ]|
-// 
-// The subparser would then be used as follows:
-// 
-// |[&lt;!-- language="C" --&gt;
-// static void start_element (context, element_name, ...)
-// {
-//   if (strcmp (element_name, "count-these") == 0)
-//     start_counting (context);
-// 
-//   // else, handle other tags...
-// }
-// 
-// static void end_element (context, element_name, ...)
-// {
-//   if (strcmp (element_name, "count-these") == 0)
-//     g_print ("Counted %d tags\n", end_counting (context));
-// 
-//   // else, handle other tags...
-// }
-// ]|
-func (context *MarkupParseContext) Push(parser *MarkupParser, userData unsafe.Pointer) {
-	var carg0 *C.GMarkupParseContext // in, none, converted
-	var carg1 *C.GMarkupParser       // in, none, converted
-	var carg2 C.gpointer             // in, none, casted, nullable
-
-	carg0 = (*C.GMarkupParseContext)(UnsafeMarkupParseContextToGlibNone(context))
-	carg1 = (*C.GMarkupParser)(UnsafeMarkupParserToGlibNone(parser))
-	if userData != nil {
-		carg2 = C.gpointer(userData)
-	}
-
-	C.g_markup_parse_context_push(carg0, carg1, carg2)
-	runtime.KeepAlive(context)
-	runtime.KeepAlive(parser)
-	runtime.KeepAlive(userData)
 }
 
 // MarkupParser wraps GMarkupParser
@@ -23882,39 +23177,6 @@ func UnsafeNodeToGlibFull(n *Node) unsafe.Pointer {
 	n.native = nil // Node is invalid from here on
 	return _p
 }
-// ChildIndex wraps g_node_child_index
-// 
-// The function takes the following parameters:
-// 
-// 	- data unsafe.Pointer (nullable): the data to find 
-// 
-// The function returns the following values:
-// 
-// 	- goret int 
-//
-// Gets the position of the first child of a #GNode
-// which contains the given data.
-func (node *Node) ChildIndex(data unsafe.Pointer) int {
-	var carg0 *C.GNode   // in, none, converted
-	var carg1 C.gpointer // in, none, casted, nullable
-	var cret  C.gint     // return, none, casted
-
-	carg0 = (*C.GNode)(UnsafeNodeToGlibNone(node))
-	if data != nil {
-		carg1 = C.gpointer(data)
-	}
-
-	cret = C.g_node_child_index(carg0, carg1)
-	runtime.KeepAlive(node)
-	runtime.KeepAlive(data)
-
-	var goret int
-
-	goret = int(cret)
-
-	return goret
-}
-
 // ChildPosition wraps g_node_child_position
 // 
 // The function takes the following parameters:
@@ -24183,15 +23445,15 @@ func UnsafeOptionContextToGlibFull(o *OptionContext) unsafe.Pointer {
 // Adds a #GOptionGroup to the @context, so that parsing with @context
 // will recognize the options in the group. Note that this will take
 // ownership of the @group and thus the @group should not be freed.
-func (context *OptionContext) AddGroup(group *OptionGroup) {
+func (_context *OptionContext) AddGroup(group *OptionGroup) {
 	var carg0 *C.GOptionContext // in, none, converted
 	var carg1 *C.GOptionGroup   // in, full, converted
 
-	carg0 = (*C.GOptionContext)(UnsafeOptionContextToGlibNone(context))
+	carg0 = (*C.GOptionContext)(UnsafeOptionContextToGlibNone(_context))
 	carg1 = (*C.GOptionGroup)(UnsafeOptionGroupToGlibFull(group))
 
 	C.g_option_context_add_group(carg0, carg1)
-	runtime.KeepAlive(context)
+	runtime.KeepAlive(_context)
 	runtime.KeepAlive(group)
 }
 
@@ -24206,12 +23468,12 @@ func (context *OptionContext) AddGroup(group *OptionGroup) {
 //
 // A convenience function which creates a main group if it doesn't
 // exist, adds the @entries to it and sets the translation domain.
-func (context *OptionContext) AddMainEntries(entries []OptionEntry, translationDomain string) {
+func (_context *OptionContext) AddMainEntries(entries []OptionEntry, translationDomain string) {
 	var carg0 *C.GOptionContext // in, none, converted
 	var carg1 *C.GOptionEntry   // in, transfer: none, C Pointers: 1, Name: array[OptionEntry], array (inner: *typesystem.Record, zero-terminated)
 	var carg2 *C.gchar          // in, none, string, nullable-string
 
-	carg0 = (*C.GOptionContext)(UnsafeOptionContextToGlibNone(context))
+	carg0 = (*C.GOptionContext)(UnsafeOptionContextToGlibNone(_context))
 	_ = entries
 	_ = carg1
 	panic("unimplemented conversion of []OptionEntry (const GOptionEntry*)")
@@ -24221,7 +23483,7 @@ func (context *OptionContext) AddMainEntries(entries []OptionEntry, translationD
 	}
 
 	C.g_option_context_add_main_entries(carg0, carg1, carg2)
-	runtime.KeepAlive(context)
+	runtime.KeepAlive(_context)
 	runtime.KeepAlive(entries)
 	runtime.KeepAlive(translationDomain)
 }
@@ -24232,14 +23494,14 @@ func (context *OptionContext) AddMainEntries(entries []OptionEntry, translationD
 // 	- goret string 
 //
 // Returns the description. See g_option_context_set_description().
-func (context *OptionContext) GetDescription() string {
+func (_context *OptionContext) GetDescription() string {
 	var carg0 *C.GOptionContext // in, none, converted
 	var cret  *C.gchar          // return, none, string, casted *C.gchar
 
-	carg0 = (*C.GOptionContext)(UnsafeOptionContextToGlibNone(context))
+	carg0 = (*C.GOptionContext)(UnsafeOptionContextToGlibNone(_context))
 
 	cret = C.g_option_context_get_description(carg0)
-	runtime.KeepAlive(context)
+	runtime.KeepAlive(_context)
 
 	var goret string
 
@@ -24266,13 +23528,13 @@ func (context *OptionContext) GetDescription() string {
 // `g_option_context_get_help (context, FALSE, NULL)`.
 // To obtain the help text for an option group, call
 // `g_option_context_get_help (context, FALSE, group)`.
-func (context *OptionContext) GetHelp(mainHelp bool, group *OptionGroup) string {
+func (_context *OptionContext) GetHelp(mainHelp bool, group *OptionGroup) string {
 	var carg0 *C.GOptionContext // in, none, converted
 	var carg1 C.gboolean        // in
 	var carg2 *C.GOptionGroup   // in, none, converted, nullable
 	var cret  *C.gchar          // return, full, string, casted *C.gchar
 
-	carg0 = (*C.GOptionContext)(UnsafeOptionContextToGlibNone(context))
+	carg0 = (*C.GOptionContext)(UnsafeOptionContextToGlibNone(_context))
 	if mainHelp {
 		carg1 = C.TRUE
 	}
@@ -24281,7 +23543,7 @@ func (context *OptionContext) GetHelp(mainHelp bool, group *OptionGroup) string 
 	}
 
 	cret = C.g_option_context_get_help(carg0, carg1, carg2)
-	runtime.KeepAlive(context)
+	runtime.KeepAlive(_context)
 	runtime.KeepAlive(mainHelp)
 	runtime.KeepAlive(group)
 
@@ -24300,14 +23562,14 @@ func (context *OptionContext) GetHelp(mainHelp bool, group *OptionGroup) string 
 //
 // Returns whether automatic `--help` generation
 // is turned on for @context. See g_option_context_set_help_enabled().
-func (context *OptionContext) GetHelpEnabled() bool {
+func (_context *OptionContext) GetHelpEnabled() bool {
 	var carg0 *C.GOptionContext // in, none, converted
 	var cret  C.gboolean        // return
 
-	carg0 = (*C.GOptionContext)(UnsafeOptionContextToGlibNone(context))
+	carg0 = (*C.GOptionContext)(UnsafeOptionContextToGlibNone(_context))
 
 	cret = C.g_option_context_get_help_enabled(carg0)
-	runtime.KeepAlive(context)
+	runtime.KeepAlive(_context)
 
 	var goret bool
 
@@ -24325,14 +23587,14 @@ func (context *OptionContext) GetHelpEnabled() bool {
 //
 // Returns whether unknown options are ignored or not. See
 // g_option_context_set_ignore_unknown_options().
-func (context *OptionContext) GetIgnoreUnknownOptions() bool {
+func (_context *OptionContext) GetIgnoreUnknownOptions() bool {
 	var carg0 *C.GOptionContext // in, none, converted
 	var cret  C.gboolean        // return
 
-	carg0 = (*C.GOptionContext)(UnsafeOptionContextToGlibNone(context))
+	carg0 = (*C.GOptionContext)(UnsafeOptionContextToGlibNone(_context))
 
 	cret = C.g_option_context_get_ignore_unknown_options(carg0)
-	runtime.KeepAlive(context)
+	runtime.KeepAlive(_context)
 
 	var goret bool
 
@@ -24349,14 +23611,14 @@ func (context *OptionContext) GetIgnoreUnknownOptions() bool {
 // 	- goret *OptionGroup 
 //
 // Returns a pointer to the main group of @context.
-func (context *OptionContext) GetMainGroup() *OptionGroup {
+func (_context *OptionContext) GetMainGroup() *OptionGroup {
 	var carg0 *C.GOptionContext // in, none, converted
 	var cret  *C.GOptionGroup   // return, none, converted
 
-	carg0 = (*C.GOptionContext)(UnsafeOptionContextToGlibNone(context))
+	carg0 = (*C.GOptionContext)(UnsafeOptionContextToGlibNone(_context))
 
 	cret = C.g_option_context_get_main_group(carg0)
-	runtime.KeepAlive(context)
+	runtime.KeepAlive(_context)
 
 	var goret *OptionGroup
 
@@ -24373,14 +23635,14 @@ func (context *OptionContext) GetMainGroup() *OptionGroup {
 // Returns whether strict POSIX code is enabled.
 // 
 // See g_option_context_set_strict_posix() for more information.
-func (context *OptionContext) GetStrictPosix() bool {
+func (_context *OptionContext) GetStrictPosix() bool {
 	var carg0 *C.GOptionContext // in, none, converted
 	var cret  C.gboolean        // return
 
-	carg0 = (*C.GOptionContext)(UnsafeOptionContextToGlibNone(context))
+	carg0 = (*C.GOptionContext)(UnsafeOptionContextToGlibNone(_context))
 
 	cret = C.g_option_context_get_strict_posix(carg0)
-	runtime.KeepAlive(context)
+	runtime.KeepAlive(_context)
 
 	var goret bool
 
@@ -24397,14 +23659,14 @@ func (context *OptionContext) GetStrictPosix() bool {
 // 	- goret string 
 //
 // Returns the summary. See g_option_context_set_summary().
-func (context *OptionContext) GetSummary() string {
+func (_context *OptionContext) GetSummary() string {
 	var carg0 *C.GOptionContext // in, none, converted
 	var cret  *C.gchar          // return, none, string, casted *C.gchar
 
-	carg0 = (*C.GOptionContext)(UnsafeOptionContextToGlibNone(context))
+	carg0 = (*C.GOptionContext)(UnsafeOptionContextToGlibNone(_context))
 
 	cret = C.g_option_context_get_summary(carg0)
-	runtime.KeepAlive(context)
+	runtime.KeepAlive(_context)
 
 	var goret string
 
@@ -24425,18 +23687,18 @@ func (context *OptionContext) GetSummary() string {
 // 
 // Note that the summary is translated (see
 // g_option_context_set_translate_func()).
-func (context *OptionContext) SetDescription(description string) {
+func (_context *OptionContext) SetDescription(description string) {
 	var carg0 *C.GOptionContext // in, none, converted
 	var carg1 *C.gchar          // in, none, string, nullable-string
 
-	carg0 = (*C.GOptionContext)(UnsafeOptionContextToGlibNone(context))
+	carg0 = (*C.GOptionContext)(UnsafeOptionContextToGlibNone(_context))
 	if description != "" {
 		carg1 = (*C.gchar)(unsafe.Pointer(C.CString(description)))
 		defer C.free(unsafe.Pointer(carg1))
 	}
 
 	C.g_option_context_set_description(carg0, carg1)
-	runtime.KeepAlive(context)
+	runtime.KeepAlive(_context)
 	runtime.KeepAlive(description)
 }
 
@@ -24450,17 +23712,17 @@ func (context *OptionContext) SetDescription(description string) {
 // By default, g_option_context_parse() recognizes `--help`, `-h`,
 // `-?`, `--help-all` and `--help-groupname` and creates suitable
 // output to stdout.
-func (context *OptionContext) SetHelpEnabled(helpEnabled bool) {
+func (_context *OptionContext) SetHelpEnabled(helpEnabled bool) {
 	var carg0 *C.GOptionContext // in, none, converted
 	var carg1 C.gboolean        // in
 
-	carg0 = (*C.GOptionContext)(UnsafeOptionContextToGlibNone(context))
+	carg0 = (*C.GOptionContext)(UnsafeOptionContextToGlibNone(_context))
 	if helpEnabled {
 		carg1 = C.TRUE
 	}
 
 	C.g_option_context_set_help_enabled(carg0, carg1)
-	runtime.KeepAlive(context)
+	runtime.KeepAlive(_context)
 	runtime.KeepAlive(helpEnabled)
 }
 
@@ -24478,17 +23740,17 @@ func (context *OptionContext) SetHelpEnabled(helpEnabled bool) {
 // This setting does not affect non-option arguments (i.e. arguments
 // which don't start with a dash). But note that GOption cannot reliably
 // determine whether a non-option belongs to a preceding unknown option.
-func (context *OptionContext) SetIgnoreUnknownOptions(ignoreUnknown bool) {
+func (_context *OptionContext) SetIgnoreUnknownOptions(ignoreUnknown bool) {
 	var carg0 *C.GOptionContext // in, none, converted
 	var carg1 C.gboolean        // in
 
-	carg0 = (*C.GOptionContext)(UnsafeOptionContextToGlibNone(context))
+	carg0 = (*C.GOptionContext)(UnsafeOptionContextToGlibNone(_context))
 	if ignoreUnknown {
 		carg1 = C.TRUE
 	}
 
 	C.g_option_context_set_ignore_unknown_options(carg0, carg1)
-	runtime.KeepAlive(context)
+	runtime.KeepAlive(_context)
 	runtime.KeepAlive(ignoreUnknown)
 }
 
@@ -24502,15 +23764,15 @@ func (context *OptionContext) SetIgnoreUnknownOptions(ignoreUnknown bool) {
 // This has the same effect as calling g_option_context_add_group(),
 // the only difference is that the options in the main group are
 // treated differently when generating `--help` output.
-func (context *OptionContext) SetMainGroup(group *OptionGroup) {
+func (_context *OptionContext) SetMainGroup(group *OptionGroup) {
 	var carg0 *C.GOptionContext // in, none, converted
 	var carg1 *C.GOptionGroup   // in, full, converted
 
-	carg0 = (*C.GOptionContext)(UnsafeOptionContextToGlibNone(context))
+	carg0 = (*C.GOptionContext)(UnsafeOptionContextToGlibNone(_context))
 	carg1 = (*C.GOptionGroup)(UnsafeOptionGroupToGlibFull(group))
 
 	C.g_option_context_set_main_group(carg0, carg1)
-	runtime.KeepAlive(context)
+	runtime.KeepAlive(_context)
 	runtime.KeepAlive(group)
 }
 
@@ -24544,17 +23806,17 @@ func (context *OptionContext) SetMainGroup(group *OptionGroup) {
 // parsed by the relevant subcommand (which can be determined by
 // examining the verb name, which should be present in argv[1] after
 // parsing).
-func (context *OptionContext) SetStrictPosix(strictPosix bool) {
+func (_context *OptionContext) SetStrictPosix(strictPosix bool) {
 	var carg0 *C.GOptionContext // in, none, converted
 	var carg1 C.gboolean        // in
 
-	carg0 = (*C.GOptionContext)(UnsafeOptionContextToGlibNone(context))
+	carg0 = (*C.GOptionContext)(UnsafeOptionContextToGlibNone(_context))
 	if strictPosix {
 		carg1 = C.TRUE
 	}
 
 	C.g_option_context_set_strict_posix(carg0, carg1)
-	runtime.KeepAlive(context)
+	runtime.KeepAlive(_context)
 	runtime.KeepAlive(strictPosix)
 }
 
@@ -24571,18 +23833,18 @@ func (context *OptionContext) SetStrictPosix(strictPosix bool) {
 // Note that the summary is translated (see
 // g_option_context_set_translate_func() and
 // g_option_context_set_translation_domain()).
-func (context *OptionContext) SetSummary(summary string) {
+func (_context *OptionContext) SetSummary(summary string) {
 	var carg0 *C.GOptionContext // in, none, converted
 	var carg1 *C.gchar          // in, none, string, nullable-string
 
-	carg0 = (*C.GOptionContext)(UnsafeOptionContextToGlibNone(context))
+	carg0 = (*C.GOptionContext)(UnsafeOptionContextToGlibNone(_context))
 	if summary != "" {
 		carg1 = (*C.gchar)(unsafe.Pointer(C.CString(summary)))
 		defer C.free(unsafe.Pointer(carg1))
 	}
 
 	C.g_option_context_set_summary(carg0, carg1)
-	runtime.KeepAlive(context)
+	runtime.KeepAlive(_context)
 	runtime.KeepAlive(summary)
 }
 
@@ -24594,16 +23856,16 @@ func (context *OptionContext) SetSummary(summary string) {
 //
 // A convenience function to use gettext() for translating
 // user-visible strings.
-func (context *OptionContext) SetTranslationDomain(domain string) {
+func (_context *OptionContext) SetTranslationDomain(domain string) {
 	var carg0 *C.GOptionContext // in, none, converted
 	var carg1 *C.gchar          // in, none, string, casted *C.gchar
 
-	carg0 = (*C.GOptionContext)(UnsafeOptionContextToGlibNone(context))
+	carg0 = (*C.GOptionContext)(UnsafeOptionContextToGlibNone(_context))
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(domain)))
 	defer C.free(unsafe.Pointer(carg1))
 
 	C.g_option_context_set_translation_domain(carg0, carg1)
-	runtime.KeepAlive(context)
+	runtime.KeepAlive(_context)
 	runtime.KeepAlive(domain)
 }
 
@@ -25637,32 +24899,6 @@ func (queue *Queue) Clear() {
 	runtime.KeepAlive(queue)
 }
 
-// ForEach wraps g_queue_foreach
-// 
-// The function takes the following parameters:
-// 
-// 	- fn Func: the function to call for each element's data 
-//
-// Calls @func for each element in the queue passing @user_data to the
-// function.
-// 
-// It is safe for @func to remove the element from @queue, but it must
-// not modify any part of the queue after that element.
-func (queue *Queue) ForEach(fn Func) {
-	var carg0 *C.GQueue  // in, none, converted
-	var carg1 C.GFunc    // callback, scope: call, closure: carg2
-	var carg2 C.gpointer // implicit
-
-	carg0 = (*C.GQueue)(UnsafeQueueToGlibNone(queue))
-	carg1 = (*[0]byte)(C._gotk4_glib2_Func)
-	carg2 = C.gpointer(userdata.Register(fn))
-	defer userdata.Delete(unsafe.Pointer(carg2))
-
-	C.g_queue_foreach(carg0, carg1, carg2)
-	runtime.KeepAlive(queue)
-	runtime.KeepAlive(fn)
-}
-
 // GetLength wraps g_queue_get_length
 // The function returns the following values:
 // 
@@ -25732,38 +24968,6 @@ func (queue *Queue) Init() {
 	runtime.KeepAlive(queue)
 }
 
-// InsertSorted wraps g_queue_insert_sorted
-// 
-// The function takes the following parameters:
-// 
-// 	- data unsafe.Pointer (nullable): the data to insert 
-// 	- fn CompareDataFunc: the #GCompareDataFunc used to compare elements in the queue. It is
-//     called with two elements of the @queue and @user_data. It should
-//     return 0 if the elements are equal, a negative value if the first
-//     element comes before the second, and a positive value if the second
-//     element comes before the first. 
-//
-// Inserts @data into @queue using @func to determine the new position.
-func (queue *Queue) InsertSorted(data unsafe.Pointer, fn CompareDataFunc) {
-	var carg0 *C.GQueue          // in, none, converted
-	var carg1 C.gpointer         // in, none, casted, nullable
-	var carg2 C.GCompareDataFunc // callback, scope: call, closure: carg3
-	var carg3 C.gpointer         // implicit
-
-	carg0 = (*C.GQueue)(UnsafeQueueToGlibNone(queue))
-	if data != nil {
-		carg1 = C.gpointer(data)
-	}
-	carg2 = (*[0]byte)(C._gotk4_glib2_CompareDataFunc)
-	carg3 = C.gpointer(userdata.Register(fn))
-	defer userdata.Delete(unsafe.Pointer(carg3))
-
-	C.g_queue_insert_sorted(carg0, carg1, carg2, carg3)
-	runtime.KeepAlive(queue)
-	runtime.KeepAlive(data)
-	runtime.KeepAlive(fn)
-}
-
 // IsEmpty wraps g_queue_is_empty
 // The function returns the following values:
 // 
@@ -25786,223 +24990,6 @@ func (queue *Queue) IsEmpty() bool {
 	}
 
 	return goret
-}
-
-// PeekHead wraps g_queue_peek_head
-// The function returns the following values:
-// 
-// 	- goret unsafe.Pointer 
-//
-// Returns the first element of the queue.
-func (queue *Queue) PeekHead() unsafe.Pointer {
-	var carg0 *C.GQueue  // in, none, converted
-	var cret  C.gpointer // return, none, casted
-
-	carg0 = (*C.GQueue)(UnsafeQueueToGlibNone(queue))
-
-	cret = C.g_queue_peek_head(carg0)
-	runtime.KeepAlive(queue)
-
-	var goret unsafe.Pointer
-
-	goret = unsafe.Pointer(cret)
-
-	return goret
-}
-
-// PeekNth wraps g_queue_peek_nth
-// 
-// The function takes the following parameters:
-// 
-// 	- n uint: the position of the element 
-// 
-// The function returns the following values:
-// 
-// 	- goret unsafe.Pointer 
-//
-// Returns the @n'th element of @queue.
-func (queue *Queue) PeekNth(n uint) unsafe.Pointer {
-	var carg0 *C.GQueue  // in, none, converted
-	var carg1 C.guint    // in, none, casted
-	var cret  C.gpointer // return, none, casted
-
-	carg0 = (*C.GQueue)(UnsafeQueueToGlibNone(queue))
-	carg1 = C.guint(n)
-
-	cret = C.g_queue_peek_nth(carg0, carg1)
-	runtime.KeepAlive(queue)
-	runtime.KeepAlive(n)
-
-	var goret unsafe.Pointer
-
-	goret = unsafe.Pointer(cret)
-
-	return goret
-}
-
-// PeekTail wraps g_queue_peek_tail
-// The function returns the following values:
-// 
-// 	- goret unsafe.Pointer 
-//
-// Returns the last element of the queue.
-func (queue *Queue) PeekTail() unsafe.Pointer {
-	var carg0 *C.GQueue  // in, none, converted
-	var cret  C.gpointer // return, none, casted
-
-	carg0 = (*C.GQueue)(UnsafeQueueToGlibNone(queue))
-
-	cret = C.g_queue_peek_tail(carg0)
-	runtime.KeepAlive(queue)
-
-	var goret unsafe.Pointer
-
-	goret = unsafe.Pointer(cret)
-
-	return goret
-}
-
-// PopHead wraps g_queue_pop_head
-// The function returns the following values:
-// 
-// 	- goret unsafe.Pointer 
-//
-// Removes the first element of the queue and returns its data.
-func (queue *Queue) PopHead() unsafe.Pointer {
-	var carg0 *C.GQueue  // in, none, converted
-	var cret  C.gpointer // return, none, casted
-
-	carg0 = (*C.GQueue)(UnsafeQueueToGlibNone(queue))
-
-	cret = C.g_queue_pop_head(carg0)
-	runtime.KeepAlive(queue)
-
-	var goret unsafe.Pointer
-
-	goret = unsafe.Pointer(cret)
-
-	return goret
-}
-
-// PopNth wraps g_queue_pop_nth
-// 
-// The function takes the following parameters:
-// 
-// 	- n uint: the position of the element 
-// 
-// The function returns the following values:
-// 
-// 	- goret unsafe.Pointer 
-//
-// Removes the @n'th element of @queue and returns its data.
-func (queue *Queue) PopNth(n uint) unsafe.Pointer {
-	var carg0 *C.GQueue  // in, none, converted
-	var carg1 C.guint    // in, none, casted
-	var cret  C.gpointer // return, none, casted
-
-	carg0 = (*C.GQueue)(UnsafeQueueToGlibNone(queue))
-	carg1 = C.guint(n)
-
-	cret = C.g_queue_pop_nth(carg0, carg1)
-	runtime.KeepAlive(queue)
-	runtime.KeepAlive(n)
-
-	var goret unsafe.Pointer
-
-	goret = unsafe.Pointer(cret)
-
-	return goret
-}
-
-// PopTail wraps g_queue_pop_tail
-// The function returns the following values:
-// 
-// 	- goret unsafe.Pointer 
-//
-// Removes the last element of the queue and returns its data.
-func (queue *Queue) PopTail() unsafe.Pointer {
-	var carg0 *C.GQueue  // in, none, converted
-	var cret  C.gpointer // return, none, casted
-
-	carg0 = (*C.GQueue)(UnsafeQueueToGlibNone(queue))
-
-	cret = C.g_queue_pop_tail(carg0)
-	runtime.KeepAlive(queue)
-
-	var goret unsafe.Pointer
-
-	goret = unsafe.Pointer(cret)
-
-	return goret
-}
-
-// PushHead wraps g_queue_push_head
-// 
-// The function takes the following parameters:
-// 
-// 	- data unsafe.Pointer (nullable): the data for the new element. 
-//
-// Adds a new element at the head of the queue.
-func (queue *Queue) PushHead(data unsafe.Pointer) {
-	var carg0 *C.GQueue  // in, none, converted
-	var carg1 C.gpointer // in, none, casted, nullable
-
-	carg0 = (*C.GQueue)(UnsafeQueueToGlibNone(queue))
-	if data != nil {
-		carg1 = C.gpointer(data)
-	}
-
-	C.g_queue_push_head(carg0, carg1)
-	runtime.KeepAlive(queue)
-	runtime.KeepAlive(data)
-}
-
-// PushNth wraps g_queue_push_nth
-// 
-// The function takes the following parameters:
-// 
-// 	- data unsafe.Pointer (nullable): the data for the new element 
-// 	- n int: the position to insert the new element. If @n is negative or
-//     larger than the number of elements in the @queue, the element is
-//     added to the end of the queue. 
-//
-// Inserts a new element into @queue at the given position.
-func (queue *Queue) PushNth(data unsafe.Pointer, n int) {
-	var carg0 *C.GQueue  // in, none, converted
-	var carg1 C.gpointer // in, none, casted, nullable
-	var carg2 C.gint     // in, none, casted
-
-	carg0 = (*C.GQueue)(UnsafeQueueToGlibNone(queue))
-	if data != nil {
-		carg1 = C.gpointer(data)
-	}
-	carg2 = C.gint(n)
-
-	C.g_queue_push_nth(carg0, carg1, carg2)
-	runtime.KeepAlive(queue)
-	runtime.KeepAlive(data)
-	runtime.KeepAlive(n)
-}
-
-// PushTail wraps g_queue_push_tail
-// 
-// The function takes the following parameters:
-// 
-// 	- data unsafe.Pointer (nullable): the data for the new element 
-//
-// Adds a new element at the tail of the queue.
-func (queue *Queue) PushTail(data unsafe.Pointer) {
-	var carg0 *C.GQueue  // in, none, converted
-	var carg1 C.gpointer // in, none, casted, nullable
-
-	carg0 = (*C.GQueue)(UnsafeQueueToGlibNone(queue))
-	if data != nil {
-		carg1 = C.gpointer(data)
-	}
-
-	C.g_queue_push_tail(carg0, carg1)
-	runtime.KeepAlive(queue)
-	runtime.KeepAlive(data)
 }
 
 // Remove wraps g_queue_remove
@@ -27642,39 +26629,6 @@ func (scanner *Scanner) InputText(text string, textLen uint) {
 	runtime.KeepAlive(textLen)
 }
 
-// LookupSymbol wraps g_scanner_lookup_symbol
-// 
-// The function takes the following parameters:
-// 
-// 	- symbol string: the symbol to look up 
-// 
-// The function returns the following values:
-// 
-// 	- goret unsafe.Pointer 
-//
-// Looks up a symbol in the current scope and return its value.
-// If the symbol is not bound in the current scope, %NULL is
-// returned.
-func (scanner *Scanner) LookupSymbol(symbol string) unsafe.Pointer {
-	var carg0 *C.GScanner // in, none, converted
-	var carg1 *C.gchar    // in, none, string, casted *C.gchar
-	var cret  C.gpointer  // return, none, casted
-
-	carg0 = (*C.GScanner)(UnsafeScannerToGlibNone(scanner))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(symbol)))
-	defer C.free(unsafe.Pointer(carg1))
-
-	cret = C.g_scanner_lookup_symbol(carg0, carg1)
-	runtime.KeepAlive(scanner)
-	runtime.KeepAlive(symbol)
-
-	var goret unsafe.Pointer
-
-	goret = unsafe.Pointer(cret)
-
-	return goret
-}
-
 // PeekNextToken wraps g_scanner_peek_next_token
 // The function returns the following values:
 // 
@@ -27703,101 +26657,6 @@ func (scanner *Scanner) PeekNextToken() TokenType {
 	var goret TokenType
 
 	goret = TokenType(cret)
-
-	return goret
-}
-
-// ScopeAddSymbol wraps g_scanner_scope_add_symbol
-// 
-// The function takes the following parameters:
-// 
-// 	- scopeId uint: the scope id 
-// 	- symbol string: the symbol to add 
-// 	- value unsafe.Pointer (nullable): the value of the symbol 
-//
-// Adds a symbol to the given scope.
-func (scanner *Scanner) ScopeAddSymbol(scopeId uint, symbol string, value unsafe.Pointer) {
-	var carg0 *C.GScanner // in, none, converted
-	var carg1 C.guint     // in, none, casted
-	var carg2 *C.gchar    // in, none, string, casted *C.gchar
-	var carg3 C.gpointer  // in, none, casted, nullable
-
-	carg0 = (*C.GScanner)(UnsafeScannerToGlibNone(scanner))
-	carg1 = C.guint(scopeId)
-	carg2 = (*C.gchar)(unsafe.Pointer(C.CString(symbol)))
-	defer C.free(unsafe.Pointer(carg2))
-	if value != nil {
-		carg3 = C.gpointer(value)
-	}
-
-	C.g_scanner_scope_add_symbol(carg0, carg1, carg2, carg3)
-	runtime.KeepAlive(scanner)
-	runtime.KeepAlive(scopeId)
-	runtime.KeepAlive(symbol)
-	runtime.KeepAlive(value)
-}
-
-// ScopeForEachSymbol wraps g_scanner_scope_foreach_symbol
-// 
-// The function takes the following parameters:
-// 
-// 	- scopeId uint: the scope id 
-// 	- fn HFunc: the function to call for each symbol/value pair 
-//
-// Calls the given function for each of the symbol/value pairs
-// in the given scope of the #GScanner. The function is passed
-// the symbol and value of each pair, and the given @user_data
-// parameter.
-func (scanner *Scanner) ScopeForEachSymbol(scopeId uint, fn HFunc) {
-	var carg0 *C.GScanner // in, none, converted
-	var carg1 C.guint     // in, none, casted
-	var carg2 C.GHFunc    // callback, scope: call, closure: carg3
-	var carg3 C.gpointer  // implicit
-
-	carg0 = (*C.GScanner)(UnsafeScannerToGlibNone(scanner))
-	carg1 = C.guint(scopeId)
-	carg2 = (*[0]byte)(C._gotk4_glib2_HFunc)
-	carg3 = C.gpointer(userdata.Register(fn))
-	defer userdata.Delete(unsafe.Pointer(carg3))
-
-	C.g_scanner_scope_foreach_symbol(carg0, carg1, carg2, carg3)
-	runtime.KeepAlive(scanner)
-	runtime.KeepAlive(scopeId)
-	runtime.KeepAlive(fn)
-}
-
-// ScopeLookupSymbol wraps g_scanner_scope_lookup_symbol
-// 
-// The function takes the following parameters:
-// 
-// 	- scopeId uint: the scope id 
-// 	- symbol string: the symbol to look up 
-// 
-// The function returns the following values:
-// 
-// 	- goret unsafe.Pointer 
-//
-// Looks up a symbol in a scope and return its value. If the
-// symbol is not bound in the scope, %NULL is returned.
-func (scanner *Scanner) ScopeLookupSymbol(scopeId uint, symbol string) unsafe.Pointer {
-	var carg0 *C.GScanner // in, none, converted
-	var carg1 C.guint     // in, none, casted
-	var carg2 *C.gchar    // in, none, string, casted *C.gchar
-	var cret  C.gpointer  // return, none, casted
-
-	carg0 = (*C.GScanner)(UnsafeScannerToGlibNone(scanner))
-	carg1 = C.guint(scopeId)
-	carg2 = (*C.gchar)(unsafe.Pointer(C.CString(symbol)))
-	defer C.free(unsafe.Pointer(carg2))
-
-	cret = C.g_scanner_scope_lookup_symbol(carg0, carg1, carg2)
-	runtime.KeepAlive(scanner)
-	runtime.KeepAlive(scopeId)
-	runtime.KeepAlive(symbol)
-
-	var goret unsafe.Pointer
-
-	goret = unsafe.Pointer(cret)
 
 	return goret
 }
@@ -28056,61 +26915,6 @@ func UnsafeSequenceToGlibFull(s *Sequence) unsafe.Pointer {
 	s.native = nil // Sequence is invalid from here on
 	return _p
 }
-// Append wraps g_sequence_append
-// 
-// The function takes the following parameters:
-// 
-// 	- data unsafe.Pointer (nullable): the data for the new item 
-// 
-// The function returns the following values:
-// 
-// 	- goret *SequenceIter 
-//
-// Adds a new item to the end of @seq.
-func (seq *Sequence) Append(data unsafe.Pointer) *SequenceIter {
-	var carg0 *C.GSequence     // in, none, converted
-	var carg1 C.gpointer       // in, none, casted, nullable
-	var cret  *C.GSequenceIter // return, none, converted
-
-	carg0 = (*C.GSequence)(UnsafeSequenceToGlibNone(seq))
-	if data != nil {
-		carg1 = C.gpointer(data)
-	}
-
-	cret = C.g_sequence_append(carg0, carg1)
-	runtime.KeepAlive(seq)
-	runtime.KeepAlive(data)
-
-	var goret *SequenceIter
-
-	goret = UnsafeSequenceIterFromGlibNone(unsafe.Pointer(cret))
-
-	return goret
-}
-
-// ForEach wraps g_sequence_foreach
-// 
-// The function takes the following parameters:
-// 
-// 	- fn Func: the function to call for each item in @seq 
-//
-// Calls @func for each item in the sequence passing @user_data
-// to the function. @func must not modify the sequence itself.
-func (seq *Sequence) ForEach(fn Func) {
-	var carg0 *C.GSequence // in, none, converted
-	var carg1 C.GFunc      // callback, scope: call, closure: carg2
-	var carg2 C.gpointer   // implicit
-
-	carg0 = (*C.GSequence)(UnsafeSequenceToGlibNone(seq))
-	carg1 = (*[0]byte)(C._gotk4_glib2_Func)
-	carg2 = C.gpointer(userdata.Register(fn))
-	defer userdata.Delete(unsafe.Pointer(carg2))
-
-	C.g_sequence_foreach(carg0, carg1, carg2)
-	runtime.KeepAlive(seq)
-	runtime.KeepAlive(fn)
-}
-
 // GetBeginIter wraps g_sequence_get_begin_iter
 // The function returns the following values:
 // 
@@ -28210,56 +27014,6 @@ func (seq *Sequence) GetLength() int {
 	return goret
 }
 
-// InsertSorted wraps g_sequence_insert_sorted
-// 
-// The function takes the following parameters:
-// 
-// 	- data unsafe.Pointer (nullable): the data to insert 
-// 	- cmpFunc CompareDataFunc: the function used to compare items in the sequence 
-// 
-// The function returns the following values:
-// 
-// 	- goret *SequenceIter 
-//
-// Inserts @data into @seq using @cmp_func to determine the new
-// position. The sequence must already be sorted according to @cmp_func;
-// otherwise the new position of @data is undefined.
-// 
-// @cmp_func is called with two items of the @seq, and @cmp_data.
-// It should return 0 if the items are equal, a negative value
-// if the first item comes before the second, and a positive value
-// if the second item comes before the first.
-// 
-// Note that when adding a large amount of data to a #GSequence,
-// it is more efficient to do unsorted insertions and then call
-// g_sequence_sort() or g_sequence_sort_iter().
-func (seq *Sequence) InsertSorted(data unsafe.Pointer, cmpFunc CompareDataFunc) *SequenceIter {
-	var carg0 *C.GSequence       // in, none, converted
-	var carg1 C.gpointer         // in, none, casted, nullable
-	var carg2 C.GCompareDataFunc // callback, scope: call, closure: carg3
-	var carg3 C.gpointer         // implicit
-	var cret  *C.GSequenceIter   // return, none, converted
-
-	carg0 = (*C.GSequence)(UnsafeSequenceToGlibNone(seq))
-	if data != nil {
-		carg1 = C.gpointer(data)
-	}
-	carg2 = (*[0]byte)(C._gotk4_glib2_CompareDataFunc)
-	carg3 = C.gpointer(userdata.Register(cmpFunc))
-	defer userdata.Delete(unsafe.Pointer(carg3))
-
-	cret = C.g_sequence_insert_sorted(carg0, carg1, carg2, carg3)
-	runtime.KeepAlive(seq)
-	runtime.KeepAlive(data)
-	runtime.KeepAlive(cmpFunc)
-
-	var goret *SequenceIter
-
-	goret = UnsafeSequenceIterFromGlibNone(unsafe.Pointer(cret))
-
-	return goret
-}
-
 // IsEmpty wraps g_sequence_is_empty
 // The function returns the following values:
 // 
@@ -28284,140 +27038,6 @@ func (seq *Sequence) IsEmpty() bool {
 	if cret != 0 {
 		goret = true
 	}
-
-	return goret
-}
-
-// Lookup wraps g_sequence_lookup
-// 
-// The function takes the following parameters:
-// 
-// 	- data unsafe.Pointer (nullable): data to look up 
-// 	- cmpFunc CompareDataFunc: the function used to compare items in the sequence 
-// 
-// The function returns the following values:
-// 
-// 	- goret *SequenceIter 
-//
-// Returns an iterator pointing to the position of the first item found
-// equal to @data according to @cmp_func and @cmp_data. If more than one
-// item is equal, it is not guaranteed that it is the first which is
-// returned. In that case, you can use g_sequence_iter_next() and
-// g_sequence_iter_prev() to get others.
-// 
-// @cmp_func is called with two items of the @seq, and @cmp_data.
-// It should return 0 if the items are equal, a negative value if
-// the first item comes before the second, and a positive value if
-// the second item comes before the first.
-// 
-// This function will fail if the data contained in the sequence is
-// unsorted.
-func (seq *Sequence) Lookup(data unsafe.Pointer, cmpFunc CompareDataFunc) *SequenceIter {
-	var carg0 *C.GSequence       // in, none, converted
-	var carg1 C.gpointer         // in, none, casted, nullable
-	var carg2 C.GCompareDataFunc // callback, scope: call, closure: carg3
-	var carg3 C.gpointer         // implicit
-	var cret  *C.GSequenceIter   // return, none, converted
-
-	carg0 = (*C.GSequence)(UnsafeSequenceToGlibNone(seq))
-	if data != nil {
-		carg1 = C.gpointer(data)
-	}
-	carg2 = (*[0]byte)(C._gotk4_glib2_CompareDataFunc)
-	carg3 = C.gpointer(userdata.Register(cmpFunc))
-	defer userdata.Delete(unsafe.Pointer(carg3))
-
-	cret = C.g_sequence_lookup(carg0, carg1, carg2, carg3)
-	runtime.KeepAlive(seq)
-	runtime.KeepAlive(data)
-	runtime.KeepAlive(cmpFunc)
-
-	var goret *SequenceIter
-
-	goret = UnsafeSequenceIterFromGlibNone(unsafe.Pointer(cret))
-
-	return goret
-}
-
-// Prepend wraps g_sequence_prepend
-// 
-// The function takes the following parameters:
-// 
-// 	- data unsafe.Pointer (nullable): the data for the new item 
-// 
-// The function returns the following values:
-// 
-// 	- goret *SequenceIter 
-//
-// Adds a new item to the front of @seq
-func (seq *Sequence) Prepend(data unsafe.Pointer) *SequenceIter {
-	var carg0 *C.GSequence     // in, none, converted
-	var carg1 C.gpointer       // in, none, casted, nullable
-	var cret  *C.GSequenceIter // return, none, converted
-
-	carg0 = (*C.GSequence)(UnsafeSequenceToGlibNone(seq))
-	if data != nil {
-		carg1 = C.gpointer(data)
-	}
-
-	cret = C.g_sequence_prepend(carg0, carg1)
-	runtime.KeepAlive(seq)
-	runtime.KeepAlive(data)
-
-	var goret *SequenceIter
-
-	goret = UnsafeSequenceIterFromGlibNone(unsafe.Pointer(cret))
-
-	return goret
-}
-
-// Search wraps g_sequence_search
-// 
-// The function takes the following parameters:
-// 
-// 	- data unsafe.Pointer (nullable): data for the new item 
-// 	- cmpFunc CompareDataFunc: the function used to compare items in the sequence 
-// 
-// The function returns the following values:
-// 
-// 	- goret *SequenceIter 
-//
-// Returns an iterator pointing to the position where @data would
-// be inserted according to @cmp_func and @cmp_data.
-// 
-// @cmp_func is called with two items of the @seq, and @cmp_data.
-// It should return 0 if the items are equal, a negative value if
-// the first item comes before the second, and a positive value if
-// the second item comes before the first.
-// 
-// If you are simply searching for an existing element of the sequence,
-// consider using g_sequence_lookup().
-// 
-// This function will fail if the data contained in the sequence is
-// unsorted.
-func (seq *Sequence) Search(data unsafe.Pointer, cmpFunc CompareDataFunc) *SequenceIter {
-	var carg0 *C.GSequence       // in, none, converted
-	var carg1 C.gpointer         // in, none, casted, nullable
-	var carg2 C.GCompareDataFunc // callback, scope: call, closure: carg3
-	var carg3 C.gpointer         // implicit
-	var cret  *C.GSequenceIter   // return, none, converted
-
-	carg0 = (*C.GSequence)(UnsafeSequenceToGlibNone(seq))
-	if data != nil {
-		carg1 = C.gpointer(data)
-	}
-	carg2 = (*[0]byte)(C._gotk4_glib2_CompareDataFunc)
-	carg3 = C.gpointer(userdata.Register(cmpFunc))
-	defer userdata.Delete(unsafe.Pointer(carg3))
-
-	cret = C.g_sequence_search(carg0, carg1, carg2, carg3)
-	runtime.KeepAlive(seq)
-	runtime.KeepAlive(data)
-	runtime.KeepAlive(cmpFunc)
-
-	var goret *SequenceIter
-
-	goret = UnsafeSequenceIterFromGlibNone(unsafe.Pointer(cret))
 
 	return goret
 }
@@ -28897,7 +27517,7 @@ func (source *Source) AddPoll(fd *PollFD) {
 // 
 // The function takes the following parameters:
 // 
-// 	- context *MainContext (nullable): a #GMainContext (if %NULL, the global-default
+// 	- _context *MainContext (nullable): a #GMainContext (if %NULL, the global-default
 //   main context will be used) 
 // 
 // The function returns the following values:
@@ -28909,19 +27529,19 @@ func (source *Source) AddPoll(fd *PollFD) {
 // 
 // This function is safe to call from any thread, regardless of which thread
 // the @context is running in.
-func (source *Source) Attach(context *MainContext) uint {
+func (source *Source) Attach(_context *MainContext) uint {
 	var carg0 *C.GSource      // in, none, converted
 	var carg1 *C.GMainContext // in, none, converted, nullable
 	var cret  C.guint         // return, none, casted
 
 	carg0 = (*C.GSource)(UnsafeSourceToGlibNone(source))
-	if context != nil {
-		carg1 = (*C.GMainContext)(UnsafeMainContextToGlibNone(context))
+	if _context != nil {
+		carg1 = (*C.GMainContext)(UnsafeMainContextToGlibNone(_context))
 	}
 
 	cret = C.g_source_attach(carg0, carg1)
 	runtime.KeepAlive(source)
-	runtime.KeepAlive(context)
+	runtime.KeepAlive(_context)
 
 	var goret uint
 
@@ -29302,41 +27922,6 @@ func (source *Source) SetCallback(fn SourceFunc) {
 	C.g_source_set_callback(carg0, carg1, carg2, carg3)
 	runtime.KeepAlive(source)
 	runtime.KeepAlive(fn)
-}
-
-// SetCallbackIndirect wraps g_source_set_callback_indirect
-// 
-// The function takes the following parameters:
-// 
-// 	- callbackData unsafe.Pointer (nullable): pointer to callback data "object" 
-// 	- callbackFuncs *SourceCallbackFuncs: functions for reference counting @callback_data
-//                  and getting the callback and data 
-//
-// Sets the callback function storing the data as a refcounted callback
-// "object". This is used internally. Note that calling
-// [method@GLib.Source.set_callback_indirect] assumes
-// an initial reference count on @callback_data, and thus
-// @callback_funcs-&gt;unref will eventually be called once more
-// than @callback_funcs-&gt;ref.
-// 
-// It is safe to call this function multiple times on a source which has already
-// been attached to a context. The changes will take effect for the next time
-// the source is dispatched after this call returns.
-func (source *Source) SetCallbackIndirect(callbackData unsafe.Pointer, callbackFuncs *SourceCallbackFuncs) {
-	var carg0 *C.GSource              // in, none, converted
-	var carg1 C.gpointer              // in, none, casted, nullable
-	var carg2 *C.GSourceCallbackFuncs // in, none, converted
-
-	carg0 = (*C.GSource)(UnsafeSourceToGlibNone(source))
-	if callbackData != nil {
-		carg1 = C.gpointer(callbackData)
-	}
-	carg2 = (*C.GSourceCallbackFuncs)(UnsafeSourceCallbackFuncsToGlibNone(callbackFuncs))
-
-	C.g_source_set_callback_indirect(carg0, carg1, carg2)
-	runtime.KeepAlive(source)
-	runtime.KeepAlive(callbackData)
-	runtime.KeepAlive(callbackFuncs)
 }
 
 // SetCanRecurse wraps g_source_set_can_recurse
@@ -30392,169 +28977,6 @@ func (tree *Tree) Height() int {
 	return goret
 }
 
-// Insert wraps g_tree_insert
-// 
-// The function takes the following parameters:
-// 
-// 	- key unsafe.Pointer (nullable): the key to insert 
-// 	- value unsafe.Pointer (nullable): the value corresponding to the key 
-//
-// Inserts a key/value pair into a #GTree.
-// 
-// Inserts a new key and value into a #GTree as g_tree_insert_node() does,
-// only this function does not return the inserted or set node.
-func (tree *Tree) Insert(key unsafe.Pointer, value unsafe.Pointer) {
-	var carg0 *C.GTree   // in, none, converted
-	var carg1 C.gpointer // in, none, casted, nullable
-	var carg2 C.gpointer // in, none, casted, nullable
-
-	carg0 = (*C.GTree)(UnsafeTreeToGlibNone(tree))
-	if key != nil {
-		carg1 = C.gpointer(key)
-	}
-	if value != nil {
-		carg2 = C.gpointer(value)
-	}
-
-	C.g_tree_insert(carg0, carg1, carg2)
-	runtime.KeepAlive(tree)
-	runtime.KeepAlive(key)
-	runtime.KeepAlive(value)
-}
-
-// InsertNode wraps g_tree_insert_node
-// 
-// The function takes the following parameters:
-// 
-// 	- key unsafe.Pointer (nullable): the key to insert 
-// 	- value unsafe.Pointer (nullable): the value corresponding to the key 
-// 
-// The function returns the following values:
-// 
-// 	- goret *TreeNode 
-//
-// Inserts a key/value pair into a #GTree.
-// 
-// If the given key already exists in the #GTree its corresponding value
-// is set to the new value. If you supplied a @value_destroy_func when
-// creating the #GTree, the old value is freed using that function. If
-// you supplied a @key_destroy_func when creating the #GTree, the passed
-// key is freed using that function.
-// 
-// The tree is automatically 'balanced' as new key/value pairs are added,
-// so that the distance from the root to every leaf is as small as possible.
-// The cost of maintaining a balanced tree while inserting new key/value
-// result in a O(n log(n)) operation where most of the other operations
-// are O(log(n)).
-func (tree *Tree) InsertNode(key unsafe.Pointer, value unsafe.Pointer) *TreeNode {
-	var carg0 *C.GTree     // in, none, converted
-	var carg1 C.gpointer   // in, none, casted, nullable
-	var carg2 C.gpointer   // in, none, casted, nullable
-	var cret  *C.GTreeNode // return, none, converted
-
-	carg0 = (*C.GTree)(UnsafeTreeToGlibNone(tree))
-	if key != nil {
-		carg1 = C.gpointer(key)
-	}
-	if value != nil {
-		carg2 = C.gpointer(value)
-	}
-
-	cret = C.g_tree_insert_node(carg0, carg1, carg2)
-	runtime.KeepAlive(tree)
-	runtime.KeepAlive(key)
-	runtime.KeepAlive(value)
-
-	var goret *TreeNode
-
-	goret = UnsafeTreeNodeFromGlibNone(unsafe.Pointer(cret))
-
-	return goret
-}
-
-// Lookup wraps g_tree_lookup
-// 
-// The function takes the following parameters:
-// 
-// 	- key unsafe.Pointer (nullable): the key to look up 
-// 
-// The function returns the following values:
-// 
-// 	- goret unsafe.Pointer 
-//
-// Gets the value corresponding to the given key. Since a #GTree is
-// automatically balanced as key/value pairs are added, key lookup
-// is O(log n) (where n is the number of key/value pairs in the tree).
-func (tree *Tree) Lookup(key unsafe.Pointer) unsafe.Pointer {
-	var carg0 *C.GTree        // in, none, converted
-	var carg1 C.gconstpointer // in, none, casted, nullable
-	var cret  C.gpointer      // return, none, casted
-
-	carg0 = (*C.GTree)(UnsafeTreeToGlibNone(tree))
-	if key != nil {
-		carg1 = C.gconstpointer(key)
-	}
-
-	cret = C.g_tree_lookup(carg0, carg1)
-	runtime.KeepAlive(tree)
-	runtime.KeepAlive(key)
-
-	var goret unsafe.Pointer
-
-	goret = unsafe.Pointer(cret)
-
-	return goret
-}
-
-// LookupExtended wraps g_tree_lookup_extended
-// 
-// The function takes the following parameters:
-// 
-// 	- lookupKey unsafe.Pointer (nullable): the key to look up 
-// 
-// The function returns the following values:
-// 
-// 	- origKey unsafe.Pointer (nullable): returns the original key 
-// 	- value unsafe.Pointer (nullable): returns the value associated with the key 
-// 	- goret bool 
-//
-// Looks up a key in the #GTree, returning the original key and the
-// associated value. This is useful if you need to free the memory
-// allocated for the original key, for example before calling
-// g_tree_remove().
-func (tree *Tree) LookupExtended(lookupKey unsafe.Pointer) (unsafe.Pointer, unsafe.Pointer, bool) {
-	var carg0 *C.GTree        // in, none, converted
-	var carg1 C.gconstpointer // in, none, casted, nullable
-	var carg2 C.gpointer      // out, full, casted, nullable
-	var carg3 C.gpointer      // out, full, casted, nullable
-	var cret  C.gboolean      // return
-
-	carg0 = (*C.GTree)(UnsafeTreeToGlibNone(tree))
-	if lookupKey != nil {
-		carg1 = C.gconstpointer(lookupKey)
-	}
-
-	cret = C.g_tree_lookup_extended(carg0, carg1, &carg2, &carg3)
-	runtime.KeepAlive(tree)
-	runtime.KeepAlive(lookupKey)
-
-	var origKey unsafe.Pointer
-	var value   unsafe.Pointer
-	var goret   bool
-
-	if carg2 != nil {
-		origKey = unsafe.Pointer(carg2)
-	}
-	if carg3 != nil {
-		value = unsafe.Pointer(carg3)
-	}
-	if cret != 0 {
-		goret = true
-	}
-
-	return origKey, value, goret
-}
-
 // LookupNode wraps g_tree_lookup_node
 // 
 // The function takes the following parameters:
@@ -30750,80 +29172,6 @@ func (tree *Tree) RemoveAll() {
 	runtime.KeepAlive(tree)
 }
 
-// Replace wraps g_tree_replace
-// 
-// The function takes the following parameters:
-// 
-// 	- key unsafe.Pointer (nullable): the key to insert 
-// 	- value unsafe.Pointer (nullable): the value corresponding to the key 
-//
-// Inserts a new key and value into a #GTree as g_tree_replace_node() does,
-// only this function does not return the inserted or set node.
-func (tree *Tree) Replace(key unsafe.Pointer, value unsafe.Pointer) {
-	var carg0 *C.GTree   // in, none, converted
-	var carg1 C.gpointer // in, none, casted, nullable
-	var carg2 C.gpointer // in, none, casted, nullable
-
-	carg0 = (*C.GTree)(UnsafeTreeToGlibNone(tree))
-	if key != nil {
-		carg1 = C.gpointer(key)
-	}
-	if value != nil {
-		carg2 = C.gpointer(value)
-	}
-
-	C.g_tree_replace(carg0, carg1, carg2)
-	runtime.KeepAlive(tree)
-	runtime.KeepAlive(key)
-	runtime.KeepAlive(value)
-}
-
-// ReplaceNode wraps g_tree_replace_node
-// 
-// The function takes the following parameters:
-// 
-// 	- key unsafe.Pointer (nullable): the key to insert 
-// 	- value unsafe.Pointer (nullable): the value corresponding to the key 
-// 
-// The function returns the following values:
-// 
-// 	- goret *TreeNode 
-//
-// Inserts a new key and value into a #GTree similar to g_tree_insert_node().
-// The difference is that if the key already exists in the #GTree, it gets
-// replaced by the new key. If you supplied a @value_destroy_func when
-// creating the #GTree, the old value is freed using that function. If you
-// supplied a @key_destroy_func when creating the #GTree, the old key is
-// freed using that function.
-// 
-// The tree is automatically 'balanced' as new key/value pairs are added,
-// so that the distance from the root to every leaf is as small as possible.
-func (tree *Tree) ReplaceNode(key unsafe.Pointer, value unsafe.Pointer) *TreeNode {
-	var carg0 *C.GTree     // in, none, converted
-	var carg1 C.gpointer   // in, none, casted, nullable
-	var carg2 C.gpointer   // in, none, casted, nullable
-	var cret  *C.GTreeNode // return, none, converted
-
-	carg0 = (*C.GTree)(UnsafeTreeToGlibNone(tree))
-	if key != nil {
-		carg1 = C.gpointer(key)
-	}
-	if value != nil {
-		carg2 = C.gpointer(value)
-	}
-
-	cret = C.g_tree_replace_node(carg0, carg1, carg2)
-	runtime.KeepAlive(tree)
-	runtime.KeepAlive(key)
-	runtime.KeepAlive(value)
-
-	var goret *TreeNode
-
-	goret = UnsafeTreeNodeFromGlibNone(unsafe.Pointer(cret))
-
-	return goret
-}
-
 // Steal wraps g_tree_steal
 // 
 // The function takes the following parameters:
@@ -30960,28 +29308,6 @@ func UnsafeTreeNodeToGlibFull(t *TreeNode) unsafe.Pointer {
 	t.native = nil // TreeNode is invalid from here on
 	return _p
 }
-// Key wraps g_tree_node_key
-// The function returns the following values:
-// 
-// 	- goret unsafe.Pointer 
-//
-// Gets the key stored at a particular tree node.
-func (node *TreeNode) Key() unsafe.Pointer {
-	var carg0 *C.GTreeNode // in, none, converted
-	var cret  C.gpointer   // return, none, casted
-
-	carg0 = (*C.GTreeNode)(UnsafeTreeNodeToGlibNone(node))
-
-	cret = C.g_tree_node_key(carg0)
-	runtime.KeepAlive(node)
-
-	var goret unsafe.Pointer
-
-	goret = unsafe.Pointer(cret)
-
-	return goret
-}
-
 // Next wraps g_tree_node_next
 // The function returns the following values:
 // 
@@ -31024,28 +29350,6 @@ func (node *TreeNode) Previous() *TreeNode {
 	var goret *TreeNode
 
 	goret = UnsafeTreeNodeFromGlibNone(unsafe.Pointer(cret))
-
-	return goret
-}
-
-// Value wraps g_tree_node_value
-// The function returns the following values:
-// 
-// 	- goret unsafe.Pointer 
-//
-// Gets the value stored at a particular tree node.
-func (node *TreeNode) Value() unsafe.Pointer {
-	var carg0 *C.GTreeNode // in, none, converted
-	var cret  C.gpointer   // return, none, casted
-
-	carg0 = (*C.GTreeNode)(UnsafeTreeNodeToGlibNone(node))
-
-	cret = C.g_tree_node_value(carg0)
-	runtime.KeepAlive(node)
-
-	var goret unsafe.Pointer
-
-	goret = unsafe.Pointer(cret)
 
 	return goret
 }

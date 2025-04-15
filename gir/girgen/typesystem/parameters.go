@@ -168,6 +168,11 @@ func (param *Param) valid(e *env) bool {
 		}
 	}
 
+	if param.Type.Type == Gpointer || param.Type.Type == Guintptr {
+		e.logger.Warn("unsafe pointer is not a valid param type", "ctype", param.Type.Type.GIRName(), "gotype", param.GoType(), "ctype", param.CType())
+		return false
+	}
+
 	switch t := param.Type.Type.(type) {
 	case checkedParameterType:
 		return t.allowedTypeForParam(param)

@@ -14,9 +14,10 @@ type Enum struct {
 }
 
 func DeclareEnum(e *env, v gir.Enum) *Enum {
-	e = e.sub("bitfield", v.CType)
+	e = e.sub("enum", v.Name)
 
 	if !v.IsIntrospectable() {
+		e.logger.Warn("skipping because not introspectable")
 		return nil
 	}
 

@@ -39,7 +39,10 @@ type Record struct {
 }
 
 func DeclareRecord(e *env, v gir.Record) *Record {
+	e = e.sub("record", v.CType)
+
 	if !v.IsIntrospectable() {
+		e.logger.Warn("skipping because not introspectable")
 		return nil
 	}
 
@@ -74,8 +77,7 @@ func DeclareRecord(e *env, v gir.Record) *Record {
 }
 
 func (r *Record) declareNested(e *env) {
-
-	e = e.sub("record", r.gir.Name)
+	e = e.sub("record", r.CType(0))
 
 	for _, v := range r.gir.Functions {
 		if t := DeclarePrefixedFunction(e, r, v.CallableAttrs); t != nil {

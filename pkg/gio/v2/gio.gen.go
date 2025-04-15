@@ -19,7 +19,6 @@ import (
 // #include <gio/gio.h>
 // extern GDBusMessage* _gotk4_gio2_DBusMessageFilterFunction(GDBusConnection*, GDBusMessage*, gboolean, gpointer);
 // extern GFile* _gotk4_gio2_VFSFileLookupFunc(GVfs*, char*, gpointer);
-// extern gboolean _gotk4_glib2_EqualFuncFull(gconstpointer, gconstpointer, gpointer);
 // extern gboolean _gotk4_glib2_SourceFunc(gpointer);
 // extern gint _gotk4_glib2_CompareDataFunc(gconstpointer, gconstpointer, gpointer);
 // extern void _gotk4_gio2_AsyncReadyCallback(GObject*, GAsyncResult*, gpointer);
@@ -5598,14 +5597,6 @@ type BusNameVanishedCallback func(connection DBusConnection, name string)
 // #GDBusCapabilityFlags value obtained from @connection.
 type DBusMessageFilterFunction func(connection DBusConnection, message DBusMessage, incoming bool) (goret DBusMessage)
 
-// DBusSubtreeDispatchFunc wraps GDBusSubtreeDispatchFunc
-//
-// The type of the @dispatch function in #GDBusSubtreeVTable.
-// 
-// Subtrees are flat.  @node, if non-%NULL, is always exactly one
-// segment of the object path (ie: it never contains a slash).
-type DBusSubtreeDispatchFunc func(connection DBusConnection, sender string, objectPath string, interfaceName string, node string, outUserData *unsafe.Pointer) (goret *DBusInterfaceVTable)
-
 // DBusSubtreeEnumerateFunc wraps GDBusSubtreeEnumerateFunc
 //
 // The type of the @enumerate function in #GDBusSubtreeVTable.
@@ -7152,49 +7143,6 @@ func NewPollableSource(pollableStream gobject.Object) *glib.Source {
 	return goret
 }
 
-// PollableSourceNewFull wraps g_pollable_source_new_full
-// 
-// The function takes the following parameters:
-// 
-// 	- cancellable context.Context (nullable): optional #GCancellable to attach 
-// 	- pollableStream unsafe.Pointer: the stream associated with the
-//   new source 
-// 	- childSource *glib.Source (nullable): optional child source to attach 
-// 
-// The function returns the following values:
-// 
-// 	- goret *glib.Source 
-//
-// Utility method for #GPollableInputStream and #GPollableOutputStream
-// implementations. Creates a new #GSource, as with
-// g_pollable_source_new(), but also attaching @child_source (with a
-// dummy callback), and @cancellable, if they are non-%NULL.
-func PollableSourceNewFull(cancellable context.Context, pollableStream unsafe.Pointer, childSource *glib.Source) *glib.Source {
-	var carg3 *C.GCancellable // in, none, converted, nullable
-	var carg1 C.gpointer      // in, none, casted
-	var carg2 *C.GSource      // in, none, converted, nullable
-	var cret  *C.GSource      // return, full, converted
-
-	if cancellable != nil {
-		carg3 = (*C.GCancellable)(UnsafeGCancellableToGlibNone(cancellable))
-	}
-	carg1 = C.gpointer(pollableStream)
-	if childSource != nil {
-		carg2 = (*C.GSource)(glib.UnsafeSourceToGlibNone(childSource))
-	}
-
-	cret = C.g_pollable_source_new_full(carg1, carg2, carg3)
-	runtime.KeepAlive(cancellable)
-	runtime.KeepAlive(pollableStream)
-	runtime.KeepAlive(childSource)
-
-	var goret *glib.Source
-
-	goret = glib.UnsafeSourceFromGlibFull(unsafe.Pointer(cret))
-
-	return goret
-}
-
 // PollableStreamRead wraps g_pollable_stream_read
 // 
 // The function takes the following parameters:
@@ -7665,7 +7613,7 @@ type ActionInstance struct {
 
 var _ Action = (*ActionInstance)(nil)
 
-// ActionInstance wraps GAction
+// Action wraps GAction
 //
 // `GAction` represents a single named action.
 // 
@@ -7945,7 +7893,7 @@ type ActionGroupInstance struct {
 
 var _ ActionGroup = (*ActionGroupInstance)(nil)
 
-// ActionGroupInstance wraps GActionGroup
+// ActionGroup wraps GActionGroup
 //
 // `GActionGroup` represents a group of actions.
 // 
@@ -8113,6 +8061,24 @@ type ActionGroup interface {
 	// The caller is responsible for freeing the list with [func@GLib.strfreev] when
 	// it is no longer required.
 	ListActions() []string
+	// ConnectActionAdded connects the provided callback to the "action-added" signal
+	//
+	// Signals that a new action was just added to the group.
+	// 
+	// This signal is emitted after the action has been added
+	// and is now visible.
+	ConnectActionAdded(func(ActionGroup, string)) gobject.SignalHandle
+	// ConnectActionEnabledChanged connects the provided callback to the "action-enabled-changed" signal
+	//
+	// Signals that the enabled status of the named action has changed.
+	ConnectActionEnabledChanged(func(ActionGroup, string, bool)) gobject.SignalHandle
+	// ConnectActionRemoved connects the provided callback to the "action-removed" signal
+	//
+	// Signals that an action is just about to be removed from the group.
+	// 
+	// This signal is emitted before the action is removed, so the action
+	// is still visible and can be queried from the signal handler.
+	ConnectActionRemoved(func(ActionGroup, string)) gobject.SignalHandle
 }
 
 var _ ActionGroup = (*ActionGroupInstance)(nil)
@@ -8410,6 +8376,30 @@ func (actionGroup *ActionGroupInstance) ListActions() []string {
 	return goret
 }
 
+// ConnectActionAdded connects the provided callback to the "action-added" signal
+//
+// Signals that a new action was just added to the group.
+// 
+// This signal is emitted after the action has been added
+// and is now visible.
+func (o *ActionGroupInstance) ConnectActionAdded(fn func(ActionGroup, string)) gobject.SignalHandle {
+	return o.Instance.Connect("action-added", fn)
+}
+// ConnectActionEnabledChanged connects the provided callback to the "action-enabled-changed" signal
+//
+// Signals that the enabled status of the named action has changed.
+func (o *ActionGroupInstance) ConnectActionEnabledChanged(fn func(ActionGroup, string, bool)) gobject.SignalHandle {
+	return o.Instance.Connect("action-enabled-changed", fn)
+}
+// ConnectActionRemoved connects the provided callback to the "action-removed" signal
+//
+// Signals that an action is just about to be removed from the group.
+// 
+// This signal is emitted before the action is removed, so the action
+// is still visible and can be queried from the signal handler.
+func (o *ActionGroupInstance) ConnectActionRemoved(fn func(ActionGroup, string)) gobject.SignalHandle {
+	return o.Instance.Connect("action-removed", fn)
+}
 // ActionMapInstance is the instance type used by all types implementing GActionMap. It is used internally by the bindings. Users should use the interface [ActionMap] instead.
 type ActionMapInstance struct {
 	_ [0]func() // equal guard
@@ -8418,7 +8408,7 @@ type ActionMapInstance struct {
 
 var _ ActionMap = (*ActionMapInstance)(nil)
 
-// ActionMapInstance wraps GActionMap
+// ActionMap wraps GActionMap
 //
 // `GActionMap` is an interface for action containers.
 // 
@@ -8447,52 +8437,6 @@ type ActionMap interface {
 	// 
 	// The action map takes its own reference on @action.
 	AddAction(Action)
-	// AddActionEntries wraps g_action_map_add_action_entries
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- entries []ActionEntry: a pointer to
-	//   the first item in an array of [struct@Gio.ActionEntry] structs 
-	// 	- userData unsafe.Pointer (nullable): the user data for signal connections 
-	//
-	// A convenience function for creating multiple [class@Gio.SimpleAction]
-	// instances and adding them to a [iface@Gio.ActionMap].
-	// 
-	// Each action is constructed as per one [struct@Gio.ActionEntry].
-	// 
-	// ```c
-	// static void
-	// activate_quit (GSimpleAction *simple,
-	//                GVariant      *parameter,
-	//                gpointer       user_data)
-	// {
-	//   exit (0);
-	// }
-	// 
-	// static void
-	// activate_print_string (GSimpleAction *simple,
-	//                        GVariant      *parameter,
-	//                        gpointer       user_data)
-	// {
-	//   g_print ("%s\n", g_variant_get_string (parameter, NULL));
-	// }
-	// 
-	// static GActionGroup *
-	// create_action_group (void)
-	// {
-	//   const GActionEntry entries[] = {
-	//     { "quit",         activate_quit              },
-	//     { "print-string", activate_print_string, "s" }
-	//   };
-	//   GSimpleActionGroup *group;
-	// 
-	//   group = g_simple_action_group_new ();
-	//   g_action_map_add_action_entries (G_ACTION_MAP (group), entries, G_N_ELEMENTS (entries), NULL);
-	// 
-	//   return G_ACTION_GROUP (group);
-	// }
-	// ```
-	AddActionEntries([]ActionEntry, unsafe.Pointer)
 	// LookupAction wraps g_action_map_lookup_action
 	// 
 	// The function takes the following parameters:
@@ -8611,72 +8555,6 @@ func (actionMap *ActionMapInstance) AddAction(action Action) {
 	runtime.KeepAlive(action)
 }
 
-// AddActionEntries wraps g_action_map_add_action_entries
-// 
-// The function takes the following parameters:
-// 
-// 	- entries []ActionEntry: a pointer to
-//   the first item in an array of [struct@Gio.ActionEntry] structs 
-// 	- userData unsafe.Pointer (nullable): the user data for signal connections 
-//
-// A convenience function for creating multiple [class@Gio.SimpleAction]
-// instances and adding them to a [iface@Gio.ActionMap].
-// 
-// Each action is constructed as per one [struct@Gio.ActionEntry].
-// 
-// ```c
-// static void
-// activate_quit (GSimpleAction *simple,
-//                GVariant      *parameter,
-//                gpointer       user_data)
-// {
-//   exit (0);
-// }
-// 
-// static void
-// activate_print_string (GSimpleAction *simple,
-//                        GVariant      *parameter,
-//                        gpointer       user_data)
-// {
-//   g_print ("%s\n", g_variant_get_string (parameter, NULL));
-// }
-// 
-// static GActionGroup *
-// create_action_group (void)
-// {
-//   const GActionEntry entries[] = {
-//     { "quit",         activate_quit              },
-//     { "print-string", activate_print_string, "s" }
-//   };
-//   GSimpleActionGroup *group;
-// 
-//   group = g_simple_action_group_new ();
-//   g_action_map_add_action_entries (G_ACTION_MAP (group), entries, G_N_ELEMENTS (entries), NULL);
-// 
-//   return G_ACTION_GROUP (group);
-// }
-// ```
-func (actionMap *ActionMapInstance) AddActionEntries(entries []ActionEntry, userData unsafe.Pointer) {
-	var carg0 *C.GActionMap   // in, none, converted
-	var carg1 *C.GActionEntry // in, transfer: none, C Pointers: 1, Name: array[ActionEntry], array (inner: *typesystem.Record, length-by: carg2)
-	var carg2 C.gint          // implicit
-	var carg3 C.gpointer      // in, none, casted, nullable
-
-	carg0 = (*C.GActionMap)(UnsafeActionMapToGlibNone(actionMap))
-	_ = entries
-	_ = carg1
-	_ = carg2
-	panic("unimplemented conversion of []ActionEntry (const GActionEntry*)")
-	if userData != nil {
-		carg3 = C.gpointer(userData)
-	}
-
-	C.g_action_map_add_action_entries(carg0, carg1, carg2, carg3)
-	runtime.KeepAlive(actionMap)
-	runtime.KeepAlive(entries)
-	runtime.KeepAlive(userData)
-}
-
 // LookupAction wraps g_action_map_lookup_action
 // 
 // The function takes the following parameters:
@@ -8785,7 +8663,7 @@ type AppInfoInstance struct {
 
 var _ AppInfo = (*AppInfoInstance)(nil)
 
-// AppInfoInstance wraps GAppInfo
+// AppInfo wraps GAppInfo
 //
 // Information about an installed application and methods to launch
 // it (with file arguments).
@@ -9385,7 +9263,7 @@ func AppInfoGetDefaultForURISchemeFinish(result AsyncResult) (AppInfo, error) {
 // The function takes the following parameters:
 // 
 // 	- uri string: the uri to show 
-// 	- context AppLaunchContext (nullable): optional launch context 
+// 	- _context AppLaunchContext (nullable): optional launch context 
 // 
 // The function returns the following values:
 // 
@@ -9399,7 +9277,7 @@ func AppInfoGetDefaultForURISchemeFinish(result AsyncResult) (AppInfo, error) {
 // The D-Bus–activated applications don’t have to be started if your application
 // terminates too soon after this function. To prevent this, use
 // [func@Gio.AppInfo.launch_default_for_uri_async] instead.
-func AppInfoLaunchDefaultForURI(uri string, context AppLaunchContext) (bool, error) {
+func AppInfoLaunchDefaultForURI(uri string, _context AppLaunchContext) (bool, error) {
 	var carg1 *C.char              // in, none, string, casted *C.gchar
 	var carg2 *C.GAppLaunchContext // in, none, converted, nullable
 	var cret  C.gboolean           // return
@@ -9407,13 +9285,13 @@ func AppInfoLaunchDefaultForURI(uri string, context AppLaunchContext) (bool, err
 
 	carg1 = (*C.char)(unsafe.Pointer(C.CString(uri)))
 	defer C.free(unsafe.Pointer(carg1))
-	if context != nil {
-		carg2 = (*C.GAppLaunchContext)(UnsafeAppLaunchContextToGlibNone(context))
+	if _context != nil {
+		carg2 = (*C.GAppLaunchContext)(UnsafeAppLaunchContextToGlibNone(_context))
 	}
 
 	cret = C.g_app_info_launch_default_for_uri(carg1, carg2, &_cerr)
 	runtime.KeepAlive(uri)
-	runtime.KeepAlive(context)
+	runtime.KeepAlive(_context)
 
 	var goret  bool
 	var _goerr error
@@ -9434,7 +9312,7 @@ func AppInfoLaunchDefaultForURI(uri string, context AppLaunchContext) (bool, err
 // 
 // 	- cancellable context.Context (nullable): a [class@Gio.Cancellable] 
 // 	- uri string: the uri to show 
-// 	- context AppLaunchContext (nullable): optional launch context 
+// 	- _context AppLaunchContext (nullable): optional launch context 
 // 	- callback AsyncReadyCallback (nullable): a [type@Gio.AsyncReadyCallback] to call
 //   when the request is done 
 //
@@ -9447,7 +9325,7 @@ func AppInfoLaunchDefaultForURI(uri string, context AppLaunchContext) (bool, err
 // This is also useful if you want to be sure that the D-Bus–activated
 // applications are really started before termination and if you are interested
 // in receiving error information from their activation.
-func AppInfoLaunchDefaultForURIAsync(cancellable context.Context, uri string, context AppLaunchContext, callback AsyncReadyCallback) {
+func AppInfoLaunchDefaultForURIAsync(cancellable context.Context, uri string, _context AppLaunchContext, callback AsyncReadyCallback) {
 	var carg3 *C.GCancellable       // in, none, converted, nullable
 	var carg1 *C.char               // in, none, string, casted *C.gchar
 	var carg2 *C.GAppLaunchContext  // in, none, converted, nullable
@@ -9459,8 +9337,8 @@ func AppInfoLaunchDefaultForURIAsync(cancellable context.Context, uri string, co
 	}
 	carg1 = (*C.char)(unsafe.Pointer(C.CString(uri)))
 	defer C.free(unsafe.Pointer(carg1))
-	if context != nil {
-		carg2 = (*C.GAppLaunchContext)(UnsafeAppLaunchContextToGlibNone(context))
+	if _context != nil {
+		carg2 = (*C.GAppLaunchContext)(UnsafeAppLaunchContextToGlibNone(_context))
 	}
 	if callback != nil {
 		carg4 = (*[0]byte)(C._gotk4_gio2_AsyncReadyCallback)
@@ -9470,7 +9348,7 @@ func AppInfoLaunchDefaultForURIAsync(cancellable context.Context, uri string, co
 	C.g_app_info_launch_default_for_uri_async(carg1, carg2, carg3, carg4, carg5)
 	runtime.KeepAlive(cancellable)
 	runtime.KeepAlive(uri)
-	runtime.KeepAlive(context)
+	runtime.KeepAlive(_context)
 	runtime.KeepAlive(callback)
 }
 
@@ -10179,7 +10057,7 @@ type AsyncInitableInstance struct {
 
 var _ AsyncInitable = (*AsyncInitableInstance)(nil)
 
-// AsyncInitableInstance wraps GAsyncInitable
+// AsyncInitable wraps GAsyncInitable
 //
 // `GAsyncInitable` is an interface for asynchronously initializable objects.
 // 
@@ -10550,7 +10428,7 @@ type AsyncResultInstance struct {
 
 var _ AsyncResult = (*AsyncResultInstance)(nil)
 
-// AsyncResultInstance wraps GAsyncResult
+// AsyncResult wraps GAsyncResult
 //
 // `GAsyncResult` provides a base class for implementing asynchronous function results.
 // 
@@ -10647,26 +10525,6 @@ type AsyncResult interface {
 	//
 	// Gets the source object from a [iface@Gio.AsyncResult].
 	GetSourceObject() gobject.Object
-	// GetUserData wraps g_async_result_get_user_data
-	// The function returns the following values:
-	// 
-	// 	- goret unsafe.Pointer 
-	//
-	// Gets the user data from a [iface@Gio.AsyncResult].
-	GetUserData() unsafe.Pointer
-	// IsTagged wraps g_async_result_is_tagged
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- sourceTag unsafe.Pointer (nullable): an application-defined tag 
-	// 
-	// The function returns the following values:
-	// 
-	// 	- goret bool 
-	//
-	// Checks if @res has the given @source_tag (generally a function
-	// pointer indicating the function @res was created by).
-	IsTagged(unsafe.Pointer) bool
 	// LegacyPropagateError wraps g_async_result_legacy_propagate_error
 	// The function returns the following values:
 	// 
@@ -10746,63 +10604,6 @@ func (res *AsyncResultInstance) GetSourceObject() gobject.Object {
 	return goret
 }
 
-// GetUserData wraps g_async_result_get_user_data
-// The function returns the following values:
-// 
-// 	- goret unsafe.Pointer 
-//
-// Gets the user data from a [iface@Gio.AsyncResult].
-func (res *AsyncResultInstance) GetUserData() unsafe.Pointer {
-	var carg0 *C.GAsyncResult // in, none, converted
-	var cret  C.gpointer      // return, full, casted
-
-	carg0 = (*C.GAsyncResult)(UnsafeAsyncResultToGlibNone(res))
-
-	cret = C.g_async_result_get_user_data(carg0)
-	runtime.KeepAlive(res)
-
-	var goret unsafe.Pointer
-
-	goret = unsafe.Pointer(cret)
-
-	return goret
-}
-
-// IsTagged wraps g_async_result_is_tagged
-// 
-// The function takes the following parameters:
-// 
-// 	- sourceTag unsafe.Pointer (nullable): an application-defined tag 
-// 
-// The function returns the following values:
-// 
-// 	- goret bool 
-//
-// Checks if @res has the given @source_tag (generally a function
-// pointer indicating the function @res was created by).
-func (res *AsyncResultInstance) IsTagged(sourceTag unsafe.Pointer) bool {
-	var carg0 *C.GAsyncResult // in, none, converted
-	var carg1 C.gpointer      // in, none, casted, nullable
-	var cret  C.gboolean      // return
-
-	carg0 = (*C.GAsyncResult)(UnsafeAsyncResultToGlibNone(res))
-	if sourceTag != nil {
-		carg1 = C.gpointer(sourceTag)
-	}
-
-	cret = C.g_async_result_is_tagged(carg0, carg1)
-	runtime.KeepAlive(res)
-	runtime.KeepAlive(sourceTag)
-
-	var goret bool
-
-	if cret != 0 {
-		goret = true
-	}
-
-	return goret
-}
-
 // LegacyPropagateError wraps g_async_result_legacy_propagate_error
 // The function returns the following values:
 // 
@@ -10850,7 +10651,7 @@ type ConverterInstance struct {
 
 var _ Converter = (*ConverterInstance)(nil)
 
-// ConverterInstance wraps GConverter
+// Converter wraps GConverter
 //
 // `GConverter` is an interface for streaming conversions.
 // 
@@ -11228,7 +11029,7 @@ type DBusInterfaceInstance struct {
 
 var _ DBusInterface = (*DBusInterfaceInstance)(nil)
 
-// DBusInterfaceInstance wraps GDBusInterface
+// DBusInterface wraps GDBusInterface
 //
 // Base type for D-Bus interfaces.
 // 
@@ -11379,7 +11180,7 @@ type DBusObjectInstance struct {
 
 var _ DBusObject = (*DBusObjectInstance)(nil)
 
-// DBusObjectInstance wraps GDBusObject
+// DBusObject wraps GDBusObject
 //
 // The `GDBusObject` type is the base type for D-Bus objects on both
 // the service side (see [class@Gio.DBusObjectSkeleton]) and the client side
@@ -11408,6 +11209,14 @@ type DBusObject interface {
 	//
 	// Gets the object path for @object.
 	GetObjectPath() string
+	// ConnectInterfaceAdded connects the provided callback to the "interface-added" signal
+	//
+	// Emitted when @interface is added to @object.
+	ConnectInterfaceAdded(func(DBusObject, DBusInterface)) gobject.SignalHandle
+	// ConnectInterfaceRemoved connects the provided callback to the "interface-removed" signal
+	//
+	// Emitted when @interface is removed from @object.
+	ConnectInterfaceRemoved(func(DBusObject, DBusInterface)) gobject.SignalHandle
 }
 
 var _ DBusObject = (*DBusObjectInstance)(nil)
@@ -11502,6 +11311,18 @@ func (object *DBusObjectInstance) GetObjectPath() string {
 	return goret
 }
 
+// ConnectInterfaceAdded connects the provided callback to the "interface-added" signal
+//
+// Emitted when @interface is added to @object.
+func (o *DBusObjectInstance) ConnectInterfaceAdded(fn func(DBusObject, DBusInterface)) gobject.SignalHandle {
+	return o.Instance.Connect("interface-added", fn)
+}
+// ConnectInterfaceRemoved connects the provided callback to the "interface-removed" signal
+//
+// Emitted when @interface is removed from @object.
+func (o *DBusObjectInstance) ConnectInterfaceRemoved(fn func(DBusObject, DBusInterface)) gobject.SignalHandle {
+	return o.Instance.Connect("interface-removed", fn)
+}
 // DBusObjectManagerInstance is the instance type used by all types implementing GDBusObjectManager. It is used internally by the bindings. Users should use the interface [DBusObjectManager] instead.
 type DBusObjectManagerInstance struct {
 	_ [0]func() // equal guard
@@ -11510,7 +11331,7 @@ type DBusObjectManagerInstance struct {
 
 var _ DBusObjectManager = (*DBusObjectManagerInstance)(nil)
 
-// DBusObjectManagerInstance wraps GDBusObjectManager
+// DBusObjectManager wraps GDBusObjectManager
 //
 // The `GDBusObjectManager` type is the base type for service- and
 // client-side implementations of the standardized
@@ -11555,6 +11376,28 @@ type DBusObjectManager interface {
 	//
 	// Gets the object path that @manager is for.
 	GetObjectPath() string
+	// ConnectInterfaceAdded connects the provided callback to the "interface-added" signal
+	//
+	// Emitted when @interface is added to @object.
+	// 
+	// This signal exists purely as a convenience to avoid having to
+	// connect signals to all objects managed by @manager.
+	ConnectInterfaceAdded(func(DBusObjectManager, DBusObject, DBusInterface)) gobject.SignalHandle
+	// ConnectInterfaceRemoved connects the provided callback to the "interface-removed" signal
+	//
+	// Emitted when @interface has been removed from @object.
+	// 
+	// This signal exists purely as a convenience to avoid having to
+	// connect signals to all objects managed by @manager.
+	ConnectInterfaceRemoved(func(DBusObjectManager, DBusObject, DBusInterface)) gobject.SignalHandle
+	// ConnectObjectAdded connects the provided callback to the "object-added" signal
+	//
+	// Emitted when @object is added to @manager.
+	ConnectObjectAdded(func(DBusObjectManager, DBusObject)) gobject.SignalHandle
+	// ConnectObjectRemoved connects the provided callback to the "object-removed" signal
+	//
+	// Emitted when @object is removed from @manager.
+	ConnectObjectRemoved(func(DBusObjectManager, DBusObject)) gobject.SignalHandle
 }
 
 var _ DBusObjectManager = (*DBusObjectManagerInstance)(nil)
@@ -11685,6 +11528,36 @@ func (manager *DBusObjectManagerInstance) GetObjectPath() string {
 	return goret
 }
 
+// ConnectInterfaceAdded connects the provided callback to the "interface-added" signal
+//
+// Emitted when @interface is added to @object.
+// 
+// This signal exists purely as a convenience to avoid having to
+// connect signals to all objects managed by @manager.
+func (o *DBusObjectManagerInstance) ConnectInterfaceAdded(fn func(DBusObjectManager, DBusObject, DBusInterface)) gobject.SignalHandle {
+	return o.Instance.Connect("interface-added", fn)
+}
+// ConnectInterfaceRemoved connects the provided callback to the "interface-removed" signal
+//
+// Emitted when @interface has been removed from @object.
+// 
+// This signal exists purely as a convenience to avoid having to
+// connect signals to all objects managed by @manager.
+func (o *DBusObjectManagerInstance) ConnectInterfaceRemoved(fn func(DBusObjectManager, DBusObject, DBusInterface)) gobject.SignalHandle {
+	return o.Instance.Connect("interface-removed", fn)
+}
+// ConnectObjectAdded connects the provided callback to the "object-added" signal
+//
+// Emitted when @object is added to @manager.
+func (o *DBusObjectManagerInstance) ConnectObjectAdded(fn func(DBusObjectManager, DBusObject)) gobject.SignalHandle {
+	return o.Instance.Connect("object-added", fn)
+}
+// ConnectObjectRemoved connects the provided callback to the "object-removed" signal
+//
+// Emitted when @object is removed from @manager.
+func (o *DBusObjectManagerInstance) ConnectObjectRemoved(fn func(DBusObjectManager, DBusObject)) gobject.SignalHandle {
+	return o.Instance.Connect("object-removed", fn)
+}
 // DatagramBasedInstance is the instance type used by all types implementing GDatagramBased. It is used internally by the bindings. Users should use the interface [DatagramBased] instead.
 type DatagramBasedInstance struct {
 	_ [0]func() // equal guard
@@ -11693,7 +11566,7 @@ type DatagramBasedInstance struct {
 
 var _ DatagramBased = (*DatagramBasedInstance)(nil)
 
-// DatagramBasedInstance wraps GDatagramBased
+// DatagramBased wraps GDatagramBased
 //
 // Interface for socket-like objects with datagram semantics.
 // 
@@ -12379,7 +12252,7 @@ type DriveInstance struct {
 
 var _ Drive = (*DriveInstance)(nil)
 
-// DriveInstance wraps GDrive
+// Drive wraps GDrive
 //
 // `GDrive` represents a piece of hardware connected to the machine.
 // It’s generally only created for removable hardware or hardware with
@@ -12684,6 +12557,27 @@ type Drive interface {
 	//
 	// Finishes stopping a drive.
 	StopFinish(AsyncResult) (bool, error)
+	// ConnectChanged connects the provided callback to the "changed" signal
+	//
+	// Emitted when the drive's state has changed.
+	ConnectChanged(func(Drive)) gobject.SignalHandle
+	// ConnectDisconnected connects the provided callback to the "disconnected" signal
+	//
+	// This signal is emitted when the #GDrive have been
+	// disconnected. If the recipient is holding references to the
+	// object they should release them so the object can be
+	// finalized.
+	ConnectDisconnected(func(Drive)) gobject.SignalHandle
+	// ConnectEjectButton connects the provided callback to the "eject-button" signal
+	//
+	// Emitted when the physical eject button (if any) of a drive has
+	// been pressed.
+	ConnectEjectButton(func(Drive)) gobject.SignalHandle
+	// ConnectStopButton connects the provided callback to the "stop-button" signal
+	//
+	// Emitted when the physical stop button (if any) of a drive has
+	// been pressed.
+	ConnectStopButton(func(Drive)) gobject.SignalHandle
 }
 
 var _ Drive = (*DriveInstance)(nil)
@@ -13533,6 +13427,35 @@ func (drive *DriveInstance) StopFinish(result AsyncResult) (bool, error) {
 	return goret, _goerr
 }
 
+// ConnectChanged connects the provided callback to the "changed" signal
+//
+// Emitted when the drive's state has changed.
+func (o *DriveInstance) ConnectChanged(fn func(Drive)) gobject.SignalHandle {
+	return o.Instance.Connect("changed", fn)
+}
+// ConnectDisconnected connects the provided callback to the "disconnected" signal
+//
+// This signal is emitted when the #GDrive have been
+// disconnected. If the recipient is holding references to the
+// object they should release them so the object can be
+// finalized.
+func (o *DriveInstance) ConnectDisconnected(fn func(Drive)) gobject.SignalHandle {
+	return o.Instance.Connect("disconnected", fn)
+}
+// ConnectEjectButton connects the provided callback to the "eject-button" signal
+//
+// Emitted when the physical eject button (if any) of a drive has
+// been pressed.
+func (o *DriveInstance) ConnectEjectButton(fn func(Drive)) gobject.SignalHandle {
+	return o.Instance.Connect("eject-button", fn)
+}
+// ConnectStopButton connects the provided callback to the "stop-button" signal
+//
+// Emitted when the physical stop button (if any) of a drive has
+// been pressed.
+func (o *DriveInstance) ConnectStopButton(fn func(Drive)) gobject.SignalHandle {
+	return o.Instance.Connect("stop-button", fn)
+}
 // DtlsConnectionInstance is the instance type used by all types implementing GDtlsConnection. It is used internally by the bindings. Users should use the interface [DtlsConnection] instead.
 type DtlsConnectionInstance struct {
 	_ [0]func() // equal guard
@@ -13541,7 +13464,7 @@ type DtlsConnectionInstance struct {
 
 var _ DtlsConnection = (*DtlsConnectionInstance)(nil)
 
-// DtlsConnectionInstance wraps GDtlsConnection
+// DtlsConnection wraps GDtlsConnection
 //
 // `GDtlsConnection` is the base DTLS connection class type, which wraps
 // a [iface@Gio.DatagramBased] and provides DTLS encryption on top of it. Its
@@ -13979,6 +13902,51 @@ type DtlsConnection interface {
 	// Finish an asynchronous TLS shutdown operation. See
 	// g_dtls_connection_shutdown() for more information.
 	ShutdownFinish(AsyncResult) (bool, error)
+	// ConnectAcceptCertificate connects the provided callback to the "accept-certificate" signal
+	//
+	// Emitted during the TLS handshake after the peer certificate has
+	// been received. You can examine @peer_cert's certification path by
+	// calling g_tls_certificate_get_issuer() on it.
+	// 
+	// For a client-side connection, @peer_cert is the server's
+	// certificate, and the signal will only be emitted if the
+	// certificate was not acceptable according to @conn's
+	// #GDtlsClientConnection:validation_flags. If you would like the
+	// certificate to be accepted despite @errors, return %TRUE from the
+	// signal handler. Otherwise, if no handler accepts the certificate,
+	// the handshake will fail with %G_TLS_ERROR_BAD_CERTIFICATE.
+	// 
+	// GLib guarantees that if certificate verification fails, this signal
+	// will be emitted with at least one error will be set in @errors, but
+	// it does not guarantee that all possible errors will be set.
+	// Accordingly, you may not safely decide to ignore any particular
+	// type of error. For example, it would be incorrect to ignore
+	// %G_TLS_CERTIFICATE_EXPIRED if you want to allow expired
+	// certificates, because this could potentially be the only error flag
+	// set even if other problems exist with the certificate.
+	// 
+	// For a server-side connection, @peer_cert is the certificate
+	// presented by the client, if this was requested via the server's
+	// #GDtlsServerConnection:authentication_mode. On the server side,
+	// the signal is always emitted when the client presents a
+	// certificate, and the certificate will only be accepted if a
+	// handler returns %TRUE.
+	// 
+	// Note that if this signal is emitted as part of asynchronous I/O
+	// in the main thread, then you should not attempt to interact with
+	// the user before returning from the signal handler. If you want to
+	// let the user decide whether or not to accept the certificate, you
+	// would have to return %FALSE from the signal handler on the first
+	// attempt, and then after the connection attempt returns a
+	// %G_TLS_ERROR_BAD_CERTIFICATE, you can interact with the user, and
+	// if the user decides to accept the certificate, remember that fact,
+	// create a new connection, and return %TRUE from the signal handler
+	// the next time.
+	// 
+	// If you are doing I/O in another thread, you do not
+	// need to worry about this, and can simply block in the signal
+	// handler until the UI thread returns an answer.
+	ConnectAcceptCertificate(func(DtlsConnection, TlsCertificate, TLSCertificateFlags) bool) gobject.SignalHandle
 }
 
 var _ DtlsConnection = (*DtlsConnectionInstance)(nil)
@@ -14926,6 +14894,53 @@ func (conn *DtlsConnectionInstance) ShutdownFinish(result AsyncResult) (bool, er
 	return goret, _goerr
 }
 
+// ConnectAcceptCertificate connects the provided callback to the "accept-certificate" signal
+//
+// Emitted during the TLS handshake after the peer certificate has
+// been received. You can examine @peer_cert's certification path by
+// calling g_tls_certificate_get_issuer() on it.
+// 
+// For a client-side connection, @peer_cert is the server's
+// certificate, and the signal will only be emitted if the
+// certificate was not acceptable according to @conn's
+// #GDtlsClientConnection:validation_flags. If you would like the
+// certificate to be accepted despite @errors, return %TRUE from the
+// signal handler. Otherwise, if no handler accepts the certificate,
+// the handshake will fail with %G_TLS_ERROR_BAD_CERTIFICATE.
+// 
+// GLib guarantees that if certificate verification fails, this signal
+// will be emitted with at least one error will be set in @errors, but
+// it does not guarantee that all possible errors will be set.
+// Accordingly, you may not safely decide to ignore any particular
+// type of error. For example, it would be incorrect to ignore
+// %G_TLS_CERTIFICATE_EXPIRED if you want to allow expired
+// certificates, because this could potentially be the only error flag
+// set even if other problems exist with the certificate.
+// 
+// For a server-side connection, @peer_cert is the certificate
+// presented by the client, if this was requested via the server's
+// #GDtlsServerConnection:authentication_mode. On the server side,
+// the signal is always emitted when the client presents a
+// certificate, and the certificate will only be accepted if a
+// handler returns %TRUE.
+// 
+// Note that if this signal is emitted as part of asynchronous I/O
+// in the main thread, then you should not attempt to interact with
+// the user before returning from the signal handler. If you want to
+// let the user decide whether or not to accept the certificate, you
+// would have to return %FALSE from the signal handler on the first
+// attempt, and then after the connection attempt returns a
+// %G_TLS_ERROR_BAD_CERTIFICATE, you can interact with the user, and
+// if the user decides to accept the certificate, remember that fact,
+// create a new connection, and return %TRUE from the signal handler
+// the next time.
+// 
+// If you are doing I/O in another thread, you do not
+// need to worry about this, and can simply block in the signal
+// handler until the UI thread returns an answer.
+func (o *DtlsConnectionInstance) ConnectAcceptCertificate(fn func(DtlsConnection, TlsCertificate, TLSCertificateFlags) bool) gobject.SignalHandle {
+	return o.Instance.Connect("accept-certificate", fn)
+}
 // DtlsServerConnectionInstance is the instance type used by all types implementing GDtlsServerConnection. It is used internally by the bindings. Users should use the interface [DtlsServerConnection] instead.
 type DtlsServerConnectionInstance struct {
 	_ [0]func() // equal guard
@@ -14934,7 +14949,7 @@ type DtlsServerConnectionInstance struct {
 
 var _ DtlsServerConnection = (*DtlsServerConnectionInstance)(nil)
 
-// DtlsServerConnectionInstance wraps GDtlsServerConnection
+// DtlsServerConnection wraps GDtlsServerConnection
 //
 // `GDtlsServerConnection` is the server-side subclass of
 // [iface@Gio.DtlsConnection], representing a server-side DTLS connection.
@@ -15027,7 +15042,7 @@ type FileInstance struct {
 
 var _ File = (*FileInstance)(nil)
 
-// FileInstance wraps GFile
+// File wraps GFile
 //
 // `GFile` is a high level abstraction for manipulating files on a
 // virtual file system. `GFile`s are lightweight, immutable objects
@@ -17106,32 +17121,6 @@ type File interface {
 	// If the @relative_path is an absolute path name, the resolution
 	// is done absolutely (without taking @file path as base).
 	ResolveRelativePath(string) File
-	// SetAttribute wraps g_file_set_attribute
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- cancellable context.Context (nullable): optional #GCancellable object,
-	//   %NULL to ignore 
-	// 	- attribute string: a string containing the attribute's name 
-	// 	- typ FileAttributeType: The type of the attribute 
-	// 	- valueP unsafe.Pointer (nullable): a pointer to the value (or the pointer
-	//   itself if the type is a pointer type) 
-	// 	- flags FileQueryInfoFlags: a set of #GFileQueryInfoFlags 
-	// 
-	// The function returns the following values:
-	// 
-	// 	- goret bool 
-	// 	- _goerr error (nullable): an error 
-	//
-	// Sets an attribute in the file with attribute name @attribute to @value_p.
-	// 
-	// Some attributes can be unset by setting @type to
-	// %G_FILE_ATTRIBUTE_TYPE_INVALID and @value_p to %NULL.
-	// 
-	// If @cancellable is not %NULL, then the operation can be cancelled by
-	// triggering the cancellable object from another thread. If the operation
-	// was cancelled, the error %G_IO_ERROR_CANCELLED will be returned.
-	SetAttribute(context.Context, string, FileAttributeType, unsafe.Pointer, FileQueryInfoFlags) (bool, error)
 	// SetAttributeByteString wraps g_file_set_attribute_byte_string
 	// 
 	// The function takes the following parameters:
@@ -22530,74 +22519,6 @@ func (file *FileInstance) ResolveRelativePath(relativePath string) File {
 	return goret
 }
 
-// SetAttribute wraps g_file_set_attribute
-// 
-// The function takes the following parameters:
-// 
-// 	- cancellable context.Context (nullable): optional #GCancellable object,
-//   %NULL to ignore 
-// 	- attribute string: a string containing the attribute's name 
-// 	- typ FileAttributeType: The type of the attribute 
-// 	- valueP unsafe.Pointer (nullable): a pointer to the value (or the pointer
-//   itself if the type is a pointer type) 
-// 	- flags FileQueryInfoFlags: a set of #GFileQueryInfoFlags 
-// 
-// The function returns the following values:
-// 
-// 	- goret bool 
-// 	- _goerr error (nullable): an error 
-//
-// Sets an attribute in the file with attribute name @attribute to @value_p.
-// 
-// Some attributes can be unset by setting @type to
-// %G_FILE_ATTRIBUTE_TYPE_INVALID and @value_p to %NULL.
-// 
-// If @cancellable is not %NULL, then the operation can be cancelled by
-// triggering the cancellable object from another thread. If the operation
-// was cancelled, the error %G_IO_ERROR_CANCELLED will be returned.
-func (file *FileInstance) SetAttribute(cancellable context.Context, attribute string, typ FileAttributeType, valueP unsafe.Pointer, flags FileQueryInfoFlags) (bool, error) {
-	var carg0 *C.GFile              // in, none, converted
-	var carg5 *C.GCancellable       // in, none, converted, nullable
-	var carg1 *C.char               // in, none, string, casted *C.gchar
-	var carg2 C.GFileAttributeType  // in, none, casted
-	var carg3 C.gpointer            // in, none, casted, nullable
-	var carg4 C.GFileQueryInfoFlags // in, none, casted
-	var cret  C.gboolean            // return
-	var _cerr *C.GError             // out, full, converted, nullable
-
-	carg0 = (*C.GFile)(UnsafeFileToGlibNone(file))
-	if cancellable != nil {
-		carg5 = (*C.GCancellable)(UnsafeGCancellableToGlibNone(cancellable))
-	}
-	carg1 = (*C.char)(unsafe.Pointer(C.CString(attribute)))
-	defer C.free(unsafe.Pointer(carg1))
-	carg2 = C.GFileAttributeType(typ)
-	if valueP != nil {
-		carg3 = C.gpointer(valueP)
-	}
-	carg4 = C.GFileQueryInfoFlags(flags)
-
-	cret = C.g_file_set_attribute(carg0, carg1, carg2, carg3, carg4, carg5, &_cerr)
-	runtime.KeepAlive(file)
-	runtime.KeepAlive(cancellable)
-	runtime.KeepAlive(attribute)
-	runtime.KeepAlive(typ)
-	runtime.KeepAlive(valueP)
-	runtime.KeepAlive(flags)
-
-	var goret  bool
-	var _goerr error
-
-	if cret != 0 {
-		goret = true
-	}
-	if _cerr != nil {
-		_goerr = glib.UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
-	}
-
-	return goret, _goerr
-}
-
 // SetAttributeByteString wraps g_file_set_attribute_byte_string
 // 
 // The function takes the following parameters:
@@ -23773,7 +23694,7 @@ type IconInstance struct {
 
 var _ Icon = (*IconInstance)(nil)
 
-// IconInstance wraps GIcon
+// Icon wraps GIcon
 //
 // `GIcon` is a very minimal interface for icons. It provides functions
 // for checking the equality of two icons, hashing of icons and
@@ -24001,7 +23922,7 @@ type InitableInstance struct {
 
 var _ Initable = (*InitableInstance)(nil)
 
-// InitableInstance wraps GInitable
+// Initable wraps GInitable
 //
 // `GInitable` is implemented by objects that can fail during
 // initialization. If an object implements this interface then
@@ -24205,7 +24126,7 @@ type ListModelInstance struct {
 
 var _ ListModel = (*ListModelInstance)(nil)
 
-// ListModelInstance wraps GListModel
+// ListModel wraps GListModel
 //
 // `GListModel` is an interface that represents a mutable list of
 // [class@GObject.Object]. Its main intention is as a model for various widgets
@@ -24351,6 +24272,15 @@ type ListModel interface {
 	// mainloop, and without calling other code, will continue to view the
 	// same contents of the model.
 	ItemsChanged(uint, uint, uint)
+	// ConnectItemsChanged connects the provided callback to the "items-changed" signal
+	//
+	// This signal is emitted whenever items were added to or removed
+	// from @list. At @position, @removed items were removed and @added
+	// items were added in their place.
+	// 
+	// Note: If `removed != added`, the positions of all later items
+	// in the model change.
+	ConnectItemsChanged(func(ListModel, uint, uint, uint)) gobject.SignalHandle
 }
 
 var _ ListModel = (*ListModelInstance)(nil)
@@ -24533,6 +24463,17 @@ func (list *ListModelInstance) ItemsChanged(position uint, removed uint, added u
 	runtime.KeepAlive(added)
 }
 
+// ConnectItemsChanged connects the provided callback to the "items-changed" signal
+//
+// This signal is emitted whenever items were added to or removed
+// from @list. At @position, @removed items were removed and @added
+// items were added in their place.
+// 
+// Note: If `removed != added`, the positions of all later items
+// in the model change.
+func (o *ListModelInstance) ConnectItemsChanged(fn func(ListModel, uint, uint, uint)) gobject.SignalHandle {
+	return o.Instance.Connect("items-changed", fn)
+}
 // LoadableIconInstance is the instance type used by all types implementing GLoadableIcon. It is used internally by the bindings. Users should use the interface [LoadableIcon] instead.
 type LoadableIconInstance struct {
 	_ [0]func() // equal guard
@@ -24541,7 +24482,7 @@ type LoadableIconInstance struct {
 
 var _ LoadableIcon = (*LoadableIconInstance)(nil)
 
-// LoadableIconInstance wraps GLoadableIcon
+// LoadableIcon wraps GLoadableIcon
 //
 // `GLoadableIcon` extends the [iface@Gio.Icon] interface and adds the ability
 // to load icons from streams.
@@ -24770,7 +24711,7 @@ type MemoryMonitorInstance struct {
 
 var _ MemoryMonitor = (*MemoryMonitorInstance)(nil)
 
-// MemoryMonitorInstance wraps GMemoryMonitor
+// MemoryMonitor wraps GMemoryMonitor
 //
 // `GMemoryMonitor` will monitor system memory and suggest to the application
 // when to free memory so as to leave more room for other applications.
@@ -24822,6 +24763,14 @@ var _ MemoryMonitor = (*MemoryMonitorInstance)(nil)
 // signal, and unref the `GMemoryMonitor` itself when exiting.
 type MemoryMonitor interface {
 	upcastToGMemoryMonitor() *MemoryMonitorInstance
+
+	// ConnectLowMemoryWarning connects the provided callback to the "low-memory-warning" signal
+	//
+	// Emitted when the system is running low on free memory. The signal
+	// handler should then take the appropriate action depending on the
+	// warning level. See the #GMemoryMonitorWarningLevel documentation for
+	// details.
+	ConnectLowMemoryWarning(func(MemoryMonitor, MemoryMonitorWarningLevel)) gobject.SignalHandle
 }
 
 var _ MemoryMonitor = (*MemoryMonitorInstance)(nil)
@@ -24880,6 +24829,15 @@ func MemoryMonitorDupDefault() MemoryMonitor {
 	return goret
 }
 
+// ConnectLowMemoryWarning connects the provided callback to the "low-memory-warning" signal
+//
+// Emitted when the system is running low on free memory. The signal
+// handler should then take the appropriate action depending on the
+// warning level. See the #GMemoryMonitorWarningLevel documentation for
+// details.
+func (o *MemoryMonitorInstance) ConnectLowMemoryWarning(fn func(MemoryMonitor, MemoryMonitorWarningLevel)) gobject.SignalHandle {
+	return o.Instance.Connect("low-memory-warning", fn)
+}
 // MountInstance is the instance type used by all types implementing GMount. It is used internally by the bindings. Users should use the interface [Mount] instead.
 type MountInstance struct {
 	_ [0]func() // equal guard
@@ -24888,7 +24846,7 @@ type MountInstance struct {
 
 var _ Mount = (*MountInstance)(nil)
 
-// MountInstance wraps GMount
+// Mount wraps GMount
 //
 // The `GMount` interface represents a user-visible mount, such as a mounted
 // file system.
@@ -25257,6 +25215,25 @@ type Mount interface {
 	// @mount, see g_mount_is_shadowed() for more information. The caller
 	// will need to emit the #GMount::changed signal on @mount manually.
 	Unshadow()
+	// ConnectChanged connects the provided callback to the "changed" signal
+	//
+	// Emitted when the mount has been changed.
+	ConnectChanged(func(Mount)) gobject.SignalHandle
+	// ConnectPreUnmount connects the provided callback to the "pre-unmount" signal
+	//
+	// This signal may be emitted when the #GMount is about to be
+	// unmounted.
+	// 
+	// This signal depends on the backend and is only emitted if
+	// GIO was used to unmount.
+	ConnectPreUnmount(func(Mount)) gobject.SignalHandle
+	// ConnectUnmounted connects the provided callback to the "unmounted" signal
+	//
+	// This signal is emitted when the #GMount have been
+	// unmounted. If the recipient is holding references to the
+	// object they should release them so the object can be
+	// finalized.
+	ConnectUnmounted(func(Mount)) gobject.SignalHandle
 }
 
 var _ Mount = (*MountInstance)(nil)
@@ -26177,6 +26154,31 @@ func (mount *MountInstance) Unshadow() {
 	runtime.KeepAlive(mount)
 }
 
+// ConnectChanged connects the provided callback to the "changed" signal
+//
+// Emitted when the mount has been changed.
+func (o *MountInstance) ConnectChanged(fn func(Mount)) gobject.SignalHandle {
+	return o.Instance.Connect("changed", fn)
+}
+// ConnectPreUnmount connects the provided callback to the "pre-unmount" signal
+//
+// This signal may be emitted when the #GMount is about to be
+// unmounted.
+// 
+// This signal depends on the backend and is only emitted if
+// GIO was used to unmount.
+func (o *MountInstance) ConnectPreUnmount(fn func(Mount)) gobject.SignalHandle {
+	return o.Instance.Connect("pre-unmount", fn)
+}
+// ConnectUnmounted connects the provided callback to the "unmounted" signal
+//
+// This signal is emitted when the #GMount have been
+// unmounted. If the recipient is holding references to the
+// object they should release them so the object can be
+// finalized.
+func (o *MountInstance) ConnectUnmounted(fn func(Mount)) gobject.SignalHandle {
+	return o.Instance.Connect("unmounted", fn)
+}
 // NetworkMonitorInstance is the instance type used by all types implementing GNetworkMonitor. It is used internally by the bindings. Users should use the interface [NetworkMonitor] instead.
 type NetworkMonitorInstance struct {
 	_ [0]func() // equal guard
@@ -26185,7 +26187,7 @@ type NetworkMonitorInstance struct {
 
 var _ NetworkMonitor = (*NetworkMonitorInstance)(nil)
 
-// NetworkMonitorInstance wraps GNetworkMonitor
+// NetworkMonitor wraps GNetworkMonitor
 //
 // `GNetworkMonitor` provides an easy-to-use cross-platform API
 // for monitoring network connectivity. On Linux, the available
@@ -26302,6 +26304,10 @@ type NetworkMonitor interface {
 	// Checks if the network is metered.
 	// See #GNetworkMonitor:network-metered for more details.
 	GetNetworkMetered() bool
+	// ConnectNetworkChanged connects the provided callback to the "network-changed" signal
+	//
+	// Emitted when the network configuration changes.
+	ConnectNetworkChanged(func(NetworkMonitor, bool)) gobject.SignalHandle
 }
 
 var _ NetworkMonitor = (*NetworkMonitorInstance)(nil)
@@ -26593,6 +26599,12 @@ func (monitor *NetworkMonitorInstance) GetNetworkMetered() bool {
 	return goret
 }
 
+// ConnectNetworkChanged connects the provided callback to the "network-changed" signal
+//
+// Emitted when the network configuration changes.
+func (o *NetworkMonitorInstance) ConnectNetworkChanged(fn func(NetworkMonitor, bool)) gobject.SignalHandle {
+	return o.Instance.Connect("network-changed", fn)
+}
 // PollableInputStreamInstance is the instance type used by all types implementing GPollableInputStream. It is used internally by the bindings. Users should use the interface [PollableInputStream] instead.
 type PollableInputStreamInstance struct {
 	_ [0]func() // equal guard
@@ -26601,7 +26613,7 @@ type PollableInputStreamInstance struct {
 
 var _ PollableInputStream = (*PollableInputStreamInstance)(nil)
 
-// PollableInputStreamInstance wraps GPollableInputStream
+// PollableInputStream wraps GPollableInputStream
 //
 // `GPollableInputStream` is implemented by [class@Gio.InputStream]s that
 // can be polled for readiness to read. This can be used when
@@ -26821,7 +26833,7 @@ type PollableOutputStreamInstance struct {
 
 var _ PollableOutputStream = (*PollableOutputStreamInstance)(nil)
 
-// PollableOutputStreamInstance wraps GPollableOutputStream
+// PollableOutputStream wraps GPollableOutputStream
 //
 // `GPollableOutputStream` is implemented by [class@Gio.OutputStream]s that
 // can be polled for readiness to write. This can be used when
@@ -27240,7 +27252,7 @@ type PowerProfileMonitorInstance struct {
 
 var _ PowerProfileMonitor = (*PowerProfileMonitorInstance)(nil)
 
-// PowerProfileMonitorInstance wraps GPowerProfileMonitor
+// PowerProfileMonitor wraps GPowerProfileMonitor
 //
 // `GPowerProfileMonitor` makes it possible for applications as well as OS
 // components to monitor system power profiles and act upon them. It currently
@@ -27373,7 +27385,7 @@ type ProxyInstance struct {
 
 var _ Proxy = (*ProxyInstance)(nil)
 
-// ProxyInstance wraps GProxy
+// Proxy wraps GProxy
 //
 // A `GProxy` handles connecting to a remote host via a given type of
 // proxy server. It is implemented by the `gio-proxy` extension point.
@@ -27384,7 +27396,7 @@ var _ Proxy = (*ProxyInstance)(nil)
 type Proxy interface {
 	upcastToGProxy() *ProxyInstance
 
-	// Connect wraps g_proxy_connect
+	// ConnectProxy wraps g_proxy_connect
 	// 
 	// The function takes the following parameters:
 	// 
@@ -27401,7 +27413,7 @@ type Proxy interface {
 	// #GSocketConnection that is connected to the proxy server), this
 	// does the necessary handshake to connect to @proxy_address, and if
 	// required, wraps the #GIOStream to handle proxy payload.
-	Connect(context.Context, IOStream, ProxyAddress) (IOStream, error)
+	ConnectProxy(context.Context, IOStream, ProxyAddress) (IOStream, error)
 	// ConnectAsync wraps g_proxy_connect_async
 	// 
 	// The function takes the following parameters:
@@ -27508,7 +27520,7 @@ func ProxyGetDefaultForProtocol(protocol string) Proxy {
 	return goret
 }
 
-// Connect wraps g_proxy_connect
+// ConnectProxy wraps g_proxy_connect
 // 
 // The function takes the following parameters:
 // 
@@ -27525,7 +27537,7 @@ func ProxyGetDefaultForProtocol(protocol string) Proxy {
 // #GSocketConnection that is connected to the proxy server), this
 // does the necessary handshake to connect to @proxy_address, and if
 // required, wraps the #GIOStream to handle proxy payload.
-func (proxy *ProxyInstance) Connect(cancellable context.Context, connection IOStream, proxyAddress ProxyAddress) (IOStream, error) {
+func (proxy *ProxyInstance) ConnectProxy(cancellable context.Context, connection IOStream, proxyAddress ProxyAddress) (IOStream, error) {
 	var carg0 *C.GProxy        // in, none, converted
 	var carg3 *C.GCancellable  // in, none, converted, nullable
 	var carg1 *C.GIOStream     // in, none, converted
@@ -27668,7 +27680,7 @@ type ProxyResolverInstance struct {
 
 var _ ProxyResolver = (*ProxyResolverInstance)(nil)
 
-// ProxyResolverInstance wraps GProxyResolver
+// ProxyResolver wraps GProxyResolver
 //
 // `GProxyResolver` provides synchronous and asynchronous network proxy
 // resolution. `GProxyResolver` is used within [class@Gio.SocketClient] through
@@ -27970,7 +27982,7 @@ type RemoteActionGroupInstance struct {
 
 var _ RemoteActionGroup = (*RemoteActionGroupInstance)(nil)
 
-// RemoteActionGroupInstance wraps GRemoteActionGroup
+// RemoteActionGroup wraps GRemoteActionGroup
 //
 // The `GRemoteActionGroup` interface is implemented by [iface@Gio.ActionGroup]
 // instances that either transmit action invocations to other processes
@@ -28043,7 +28055,7 @@ type SeekableInstance struct {
 
 var _ Seekable = (*SeekableInstance)(nil)
 
-// SeekableInstance wraps GSeekable
+// Seekable wraps GSeekable
 //
 // `GSeekable` is implemented by streams (implementations of
 // [class@Gio.InputStream] or [class@Gio.OutputStream]) that support seeking.
@@ -28366,7 +28378,7 @@ type SocketConnectableInstance struct {
 
 var _ SocketConnectable = (*SocketConnectableInstance)(nil)
 
-// SocketConnectableInstance wraps GSocketConnectable
+// SocketConnectable wraps GSocketConnectable
 //
 // Objects that describe one or more potential socket endpoints
 // implement `GSocketConnectable`. Callers can then use
@@ -28588,7 +28600,7 @@ type TlsBackendInstance struct {
 
 var _ TlsBackend = (*TlsBackendInstance)(nil)
 
-// TlsBackendInstance wraps GTlsBackend
+// TlsBackend wraps GTlsBackend
 //
 // TLS (Transport Layer Security, aka SSL) and DTLS backend. This is an
 // internal type used to coordinate the different classes implemented
@@ -28974,7 +28986,7 @@ type TlsClientConnectionInstance struct {
 
 var _ TlsClientConnection = (*TlsClientConnectionInstance)(nil)
 
-// TlsClientConnectionInstance wraps GTlsClientConnection
+// TlsClientConnection wraps GTlsClientConnection
 //
 // `GTlsClientConnection` is the client-side subclass of
 // [class@Gio.TlsConnection], representing a client-side TLS connection.
@@ -29389,7 +29401,7 @@ type TlsFileDatabaseInstance struct {
 
 var _ TlsFileDatabase = (*TlsFileDatabaseInstance)(nil)
 
-// TlsFileDatabaseInstance wraps GTlsFileDatabase
+// TlsFileDatabase wraps GTlsFileDatabase
 //
 // `GTlsFileDatabase` is implemented by [class@Gio.TlsDatabase] objects which
 // load their certificate information from a file. It is an interface which
@@ -29481,7 +29493,7 @@ type TlsServerConnectionInstance struct {
 
 var _ TlsServerConnection = (*TlsServerConnectionInstance)(nil)
 
-// TlsServerConnectionInstance wraps GTlsServerConnection
+// TlsServerConnection wraps GTlsServerConnection
 //
 // `GTlsServerConnection` is the server-side subclass of
 // [class@Gio.TlsConnection], representing a server-side TLS connection.
@@ -29579,7 +29591,7 @@ type VolumeInstance struct {
 
 var _ Volume = (*VolumeInstance)(nil)
 
-// VolumeInstance wraps GVolume
+// Volume wraps GVolume
 //
 // The `GVolume` interface represents user-visible objects that can be
 // mounted. For example, a file system partition on a USB flash drive, or an
@@ -29848,6 +29860,16 @@ type Volume interface {
 	//
 	// Returns whether the volume should be automatically mounted.
 	ShouldAutomount() bool
+	// ConnectChanged connects the provided callback to the "changed" signal
+	//
+	// Emitted when the volume has been changed.
+	ConnectChanged(func(Volume)) gobject.SignalHandle
+	// ConnectRemoved connects the provided callback to the "removed" signal
+	//
+	// This signal is emitted when the #GVolume have been removed. If
+	// the recipient is holding references to the object they should
+	// release them so the object can be finalized.
+	ConnectRemoved(func(Volume)) gobject.SignalHandle
 }
 
 var _ Volume = (*VolumeInstance)(nil)
@@ -30469,6 +30491,20 @@ func (volume *VolumeInstance) ShouldAutomount() bool {
 	return goret
 }
 
+// ConnectChanged connects the provided callback to the "changed" signal
+//
+// Emitted when the volume has been changed.
+func (o *VolumeInstance) ConnectChanged(fn func(Volume)) gobject.SignalHandle {
+	return o.Instance.Connect("changed", fn)
+}
+// ConnectRemoved connects the provided callback to the "removed" signal
+//
+// This signal is emitted when the #GVolume have been removed. If
+// the recipient is holding references to the object they should
+// release them so the object can be finalized.
+func (o *VolumeInstance) ConnectRemoved(fn func(Volume)) gobject.SignalHandle {
+	return o.Instance.Connect("removed", fn)
+}
 // DebugControllerInstance is the instance type used by all types implementing GDebugController. It is used internally by the bindings. Users should use the interface [DebugController] instead.
 type DebugControllerInstance struct {
 	_ [0]func() // equal guard
@@ -30477,7 +30513,7 @@ type DebugControllerInstance struct {
 
 var _ DebugController = (*DebugControllerInstance)(nil)
 
-// DebugControllerInstance wraps GDebugController
+// DebugController wraps GDebugController
 //
 // `GDebugController` is an interface to expose control of debugging features and
 // debug output.
@@ -30606,7 +30642,7 @@ type DtlsClientConnectionInstance struct {
 
 var _ DtlsClientConnection = (*DtlsClientConnectionInstance)(nil)
 
-// DtlsClientConnectionInstance wraps GDtlsClientConnection
+// DtlsClientConnection wraps GDtlsClientConnection
 //
 // `GDtlsClientConnection` is the client-side subclass of
 // [iface@Gio.DtlsConnection], representing a client-side DTLS connection.
@@ -30891,6 +30927,12 @@ var _ AppInfoMonitor = (*AppInfoMonitorInstance)(nil)
 type AppInfoMonitor interface {
 	gobject.Object
 	upcastToGAppInfoMonitor() *AppInfoMonitorInstance
+
+	// ConnectChanged connects the provided callback to the "changed" signal
+	//
+	// Signal emitted when the app info database changes, when applications are
+	// installed or removed.
+	ConnectChanged(func(AppInfoMonitor)) gobject.SignalHandle
 }
 
 func unsafeWrapAppInfoMonitor(base *gobject.ObjectInstance) *AppInfoMonitorInstance {
@@ -30957,6 +30999,13 @@ func AppInfoMonitorGet() AppInfoMonitor {
 	return goret
 }
 
+// ConnectChanged connects the provided callback to the "changed" signal
+//
+// Signal emitted when the app info database changes, when applications are
+// installed or removed.
+func (o *AppInfoMonitorInstance) ConnectChanged(fn func(AppInfoMonitor)) gobject.SignalHandle {
+	return o.Connect("changed", fn)
+}
 // AppLaunchContextInstance is the instance type used by all types extending GAppLaunchContext. It is used internally by the bindings. Users should use the interface [AppLaunchContext] instead.
 type AppLaunchContextInstance struct {
 	_ [0]func() // equal guard
@@ -31014,6 +31063,16 @@ type AppLaunchContext interface {
 	// Arranges for @variable to be unset in the child’s environment when @context
 	// is used to launch an application.
 	Unsetenv(string)
+	// ConnectLaunchFailed connects the provided callback to the "launch-failed" signal
+	//
+	// The [signal@Gio.AppLaunchContext::launch-failed] signal is emitted when a
+	// [iface@Gio.AppInfo] launch fails. The startup notification id is provided,
+	// so that the launcher can cancel the startup notification.
+	// 
+	// Because a launch operation may involve spawning multiple instances of the
+	// target application, you should expect this signal to be emitted multiple
+	// times, one for each spawned instance.
+	ConnectLaunchFailed(func(AppLaunchContext, string)) gobject.SignalHandle
 }
 
 func unsafeWrapAppLaunchContext(base *gobject.ObjectInstance) *AppLaunchContextInstance {
@@ -31079,14 +31138,14 @@ func NewAppLaunchContext() AppLaunchContext {
 // the child process when @context is used to launch an application.
 // This is a `NULL`-terminated array of strings, where each string has
 // the form `KEY=VALUE`.
-func (context *AppLaunchContextInstance) GetEnvironment() []string {
+func (_context *AppLaunchContextInstance) GetEnvironment() []string {
 	var carg0 *C.GAppLaunchContext // in, none, converted
 	var cret  **C.char             // return, transfer: full, C Pointers: 2, Name: array[filename], scope: , array (inner: *typesystem.StringPrimitive, zero-terminated)
 
-	carg0 = (*C.GAppLaunchContext)(UnsafeAppLaunchContextToGlibNone(context))
+	carg0 = (*C.GAppLaunchContext)(UnsafeAppLaunchContextToGlibNone(_context))
 
 	cret = C.g_app_launch_context_get_environment(carg0)
-	runtime.KeepAlive(context)
+	runtime.KeepAlive(_context)
 
 	var goret []string
 
@@ -31107,16 +31166,16 @@ func (context *AppLaunchContextInstance) GetEnvironment() []string {
 // Called when an application has failed to launch, so that it can cancel
 // the application startup notification started in
 // [method@Gio.AppLaunchContext.get_startup_notify_id].
-func (context *AppLaunchContextInstance) LaunchFailed(startupNotifyId string) {
+func (_context *AppLaunchContextInstance) LaunchFailed(startupNotifyId string) {
 	var carg0 *C.GAppLaunchContext // in, none, converted
 	var carg1 *C.char              // in, none, string, casted *C.gchar
 
-	carg0 = (*C.GAppLaunchContext)(UnsafeAppLaunchContextToGlibNone(context))
+	carg0 = (*C.GAppLaunchContext)(UnsafeAppLaunchContextToGlibNone(_context))
 	carg1 = (*C.char)(unsafe.Pointer(C.CString(startupNotifyId)))
 	defer C.free(unsafe.Pointer(carg1))
 
 	C.g_app_launch_context_launch_failed(carg0, carg1)
-	runtime.KeepAlive(context)
+	runtime.KeepAlive(_context)
 	runtime.KeepAlive(startupNotifyId)
 }
 
@@ -31129,19 +31188,19 @@ func (context *AppLaunchContextInstance) LaunchFailed(startupNotifyId string) {
 //
 // Arranges for @variable to be set to @value in the child’s environment when
 // @context is used to launch an application.
-func (context *AppLaunchContextInstance) Setenv(variable string, value string) {
+func (_context *AppLaunchContextInstance) Setenv(variable string, value string) {
 	var carg0 *C.GAppLaunchContext // in, none, converted
 	var carg1 *C.char              // in, none, string, casted *C.gchar
 	var carg2 *C.char              // in, none, string, casted *C.gchar
 
-	carg0 = (*C.GAppLaunchContext)(UnsafeAppLaunchContextToGlibNone(context))
+	carg0 = (*C.GAppLaunchContext)(UnsafeAppLaunchContextToGlibNone(_context))
 	carg1 = (*C.char)(unsafe.Pointer(C.CString(variable)))
 	defer C.free(unsafe.Pointer(carg1))
 	carg2 = (*C.char)(unsafe.Pointer(C.CString(value)))
 	defer C.free(unsafe.Pointer(carg2))
 
 	C.g_app_launch_context_setenv(carg0, carg1, carg2)
-	runtime.KeepAlive(context)
+	runtime.KeepAlive(_context)
 	runtime.KeepAlive(variable)
 	runtime.KeepAlive(value)
 }
@@ -31154,19 +31213,31 @@ func (context *AppLaunchContextInstance) Setenv(variable string, value string) {
 //
 // Arranges for @variable to be unset in the child’s environment when @context
 // is used to launch an application.
-func (context *AppLaunchContextInstance) Unsetenv(variable string) {
+func (_context *AppLaunchContextInstance) Unsetenv(variable string) {
 	var carg0 *C.GAppLaunchContext // in, none, converted
 	var carg1 *C.char              // in, none, string, casted *C.gchar
 
-	carg0 = (*C.GAppLaunchContext)(UnsafeAppLaunchContextToGlibNone(context))
+	carg0 = (*C.GAppLaunchContext)(UnsafeAppLaunchContextToGlibNone(_context))
 	carg1 = (*C.char)(unsafe.Pointer(C.CString(variable)))
 	defer C.free(unsafe.Pointer(carg1))
 
 	C.g_app_launch_context_unsetenv(carg0, carg1)
-	runtime.KeepAlive(context)
+	runtime.KeepAlive(_context)
 	runtime.KeepAlive(variable)
 }
 
+// ConnectLaunchFailed connects the provided callback to the "launch-failed" signal
+//
+// The [signal@Gio.AppLaunchContext::launch-failed] signal is emitted when a
+// [iface@Gio.AppInfo] launch fails. The startup notification id is provided,
+// so that the launcher can cancel the startup notification.
+// 
+// Because a launch operation may involve spawning multiple instances of the
+// target application, you should expect this signal to be emitted multiple
+// times, one for each spawned instance.
+func (o *AppLaunchContextInstance) ConnectLaunchFailed(fn func(AppLaunchContext, string)) gobject.SignalHandle {
+	return o.Connect("launch-failed", fn)
+}
 // ApplicationInstance is the instance type used by all types extending GApplication. It is used internally by the bindings. Users should use the interface [Application] instead.
 type ApplicationInstance struct {
 	_ [0]func() // equal guard
@@ -31435,20 +31506,6 @@ type Application interface {
 	// new functionality whereby unrecognized options are rejected even if
 	// %G_APPLICATION_HANDLES_COMMAND_LINE was given.
 	AddOptionGroup(*glib.OptionGroup)
-	// BindBusyProperty wraps g_application_bind_busy_property
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- object unsafe.Pointer: a #GObject 
-	// 	- property string: the name of a boolean property of @object 
-	//
-	// Marks @application as busy (see g_application_mark_busy()) while
-	// @property on @object is %TRUE.
-	// 
-	// The binding holds a reference to @application while it is active, but
-	// not to @object. Instead, the binding is destroyed when @object is
-	// finalized.
-	BindBusyProperty(unsafe.Pointer, string)
 	// GetApplicationID wraps g_application_get_application_id
 	// The function returns the following values:
 	// 
@@ -31956,17 +32013,6 @@ type Application interface {
 	// The application version can only be modified if @application has not yet
 	// been registered.
 	SetVersion(string)
-	// UnbindBusyProperty wraps g_application_unbind_busy_property
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- object unsafe.Pointer: a #GObject 
-	// 	- property string: the name of a boolean property of @object 
-	//
-	// Destroys a binding between @property and the busy state of
-	// @application that was previously created with
-	// g_application_bind_busy_property().
-	UnbindBusyProperty(unsafe.Pointer, string)
 	// UnmarkBusy wraps g_application_unmark_busy
 	//
 	// Decreases the busy count of @application.
@@ -31997,6 +32043,84 @@ type Application interface {
 	// of the buttons in a notification or triggers its default action, so
 	// there is no need to explicitly withdraw the notification in that case.
 	WithdrawNotification(string)
+	// ConnectActivate connects the provided callback to the "activate" signal
+	//
+	// The ::activate signal is emitted on the primary instance when an
+	// activation occurs. See g_application_activate().
+	ConnectActivate(func(Application)) gobject.SignalHandle
+	// ConnectCommandLine connects the provided callback to the "command-line" signal
+	//
+	// The ::command-line signal is emitted on the primary instance when
+	// a commandline is not handled locally. See g_application_run() and
+	// the #GApplicationCommandLine documentation for more information.
+	ConnectCommandLine(func(Application, ApplicationCommandLine) int) gobject.SignalHandle
+	// ConnectHandleLocalOptions connects the provided callback to the "handle-local-options" signal
+	//
+	// The ::handle-local-options signal is emitted on the local instance
+	// after the parsing of the commandline options has occurred.
+	// 
+	// You can add options to be recognised during commandline option
+	// parsing using g_application_add_main_option_entries() and
+	// g_application_add_option_group().
+	// 
+	// Signal handlers can inspect @options (along with values pointed to
+	// from the @arg_data of an installed #GOptionEntrys) in order to
+	// decide to perform certain actions, including direct local handling
+	// (which may be useful for options like --version).
+	// 
+	// In the event that the application is marked
+	// %G_APPLICATION_HANDLES_COMMAND_LINE the "normal processing" will
+	// send the @options dictionary to the primary instance where it can be
+	// read with g_application_command_line_get_options_dict().  The signal
+	// handler can modify the dictionary before returning, and the
+	// modified dictionary will be sent.
+	// 
+	// In the event that %G_APPLICATION_HANDLES_COMMAND_LINE is not set,
+	// "normal processing" will treat the remaining uncollected command
+	// line arguments as filenames or URIs.  If there are no arguments,
+	// the application is activated by g_application_activate().  One or
+	// more arguments results in a call to g_application_open().
+	// 
+	// If you want to handle the local commandline arguments for yourself
+	// by converting them to calls to g_application_open() or
+	// g_action_group_activate_action() then you must be sure to register
+	// the application first.  You should probably not call
+	// g_application_activate() for yourself, however: just return -1 and
+	// allow the default handler to do it for you.  This will ensure that
+	// the `--gapplication-service` switch works properly (i.e. no activation
+	// in that case).
+	// 
+	// Note that this signal is emitted from the default implementation of
+	// local_command_line().  If you override that function and don't
+	// chain up then this signal will never be emitted.
+	// 
+	// You can override local_command_line() if you need more powerful
+	// capabilities than what is provided here, but this should not
+	// normally be required.
+	ConnectHandleLocalOptions(func(Application, glib.VariantDict) int) gobject.SignalHandle
+	// ConnectNameLost connects the provided callback to the "name-lost" signal
+	//
+	// The ::name-lost signal is emitted only on the registered primary instance
+	// when a new instance has taken over. This can only happen if the application
+	// is using the %G_APPLICATION_ALLOW_REPLACEMENT flag.
+	// 
+	// The default handler for this signal calls g_application_quit().
+	ConnectNameLost(func(Application) bool) gobject.SignalHandle
+	// ConnectOpen connects the provided callback to the "open" signal
+	//
+	// The ::open signal is emitted on the primary instance when there are
+	// files to open. See g_application_open() for more information.
+	ConnectOpen(func(Application, []File, int, string)) gobject.SignalHandle
+	// ConnectShutdown connects the provided callback to the "shutdown" signal
+	//
+	// The ::shutdown signal is emitted only on the registered primary instance
+	// immediately after the main loop terminates.
+	ConnectShutdown(func(Application)) gobject.SignalHandle
+	// ConnectStartup connects the provided callback to the "startup" signal
+	//
+	// The ::startup signal is emitted on the primary instance immediately
+	// after registration. See g_application_register().
+	ConnectStartup(func(Application)) gobject.SignalHandle
 }
 
 func unsafeWrapApplication(base *gobject.ObjectInstance) *ApplicationInstance {
@@ -32363,35 +32487,6 @@ func (application *ApplicationInstance) AddOptionGroup(group *glib.OptionGroup) 
 	C.g_application_add_option_group(carg0, carg1)
 	runtime.KeepAlive(application)
 	runtime.KeepAlive(group)
-}
-
-// BindBusyProperty wraps g_application_bind_busy_property
-// 
-// The function takes the following parameters:
-// 
-// 	- object unsafe.Pointer: a #GObject 
-// 	- property string: the name of a boolean property of @object 
-//
-// Marks @application as busy (see g_application_mark_busy()) while
-// @property on @object is %TRUE.
-// 
-// The binding holds a reference to @application while it is active, but
-// not to @object. Instead, the binding is destroyed when @object is
-// finalized.
-func (application *ApplicationInstance) BindBusyProperty(object unsafe.Pointer, property string) {
-	var carg0 *C.GApplication // in, none, converted
-	var carg1 C.gpointer      // in, none, casted
-	var carg2 *C.gchar        // in, none, string, casted *C.gchar
-
-	carg0 = (*C.GApplication)(UnsafeApplicationToGlibNone(application))
-	carg1 = C.gpointer(object)
-	carg2 = (*C.gchar)(unsafe.Pointer(C.CString(property)))
-	defer C.free(unsafe.Pointer(carg2))
-
-	C.g_application_bind_busy_property(carg0, carg1, carg2)
-	runtime.KeepAlive(application)
-	runtime.KeepAlive(object)
-	runtime.KeepAlive(property)
 }
 
 // GetApplicationID wraps g_application_get_application_id
@@ -33299,32 +33394,6 @@ func (application *ApplicationInstance) SetVersion(version string) {
 	runtime.KeepAlive(version)
 }
 
-// UnbindBusyProperty wraps g_application_unbind_busy_property
-// 
-// The function takes the following parameters:
-// 
-// 	- object unsafe.Pointer: a #GObject 
-// 	- property string: the name of a boolean property of @object 
-//
-// Destroys a binding between @property and the busy state of
-// @application that was previously created with
-// g_application_bind_busy_property().
-func (application *ApplicationInstance) UnbindBusyProperty(object unsafe.Pointer, property string) {
-	var carg0 *C.GApplication // in, none, converted
-	var carg1 C.gpointer      // in, none, casted
-	var carg2 *C.gchar        // in, none, string, casted *C.gchar
-
-	carg0 = (*C.GApplication)(UnsafeApplicationToGlibNone(application))
-	carg1 = C.gpointer(object)
-	carg2 = (*C.gchar)(unsafe.Pointer(C.CString(property)))
-	defer C.free(unsafe.Pointer(carg2))
-
-	C.g_application_unbind_busy_property(carg0, carg1, carg2)
-	runtime.KeepAlive(application)
-	runtime.KeepAlive(object)
-	runtime.KeepAlive(property)
-}
-
 // UnmarkBusy wraps g_application_unmark_busy
 //
 // Decreases the busy count of @application.
@@ -33375,6 +33444,98 @@ func (application *ApplicationInstance) WithdrawNotification(id string) {
 	runtime.KeepAlive(id)
 }
 
+// ConnectActivate connects the provided callback to the "activate" signal
+//
+// The ::activate signal is emitted on the primary instance when an
+// activation occurs. See g_application_activate().
+func (o *ApplicationInstance) ConnectActivate(fn func(Application)) gobject.SignalHandle {
+	return o.Connect("activate", fn)
+}
+// ConnectCommandLine connects the provided callback to the "command-line" signal
+//
+// The ::command-line signal is emitted on the primary instance when
+// a commandline is not handled locally. See g_application_run() and
+// the #GApplicationCommandLine documentation for more information.
+func (o *ApplicationInstance) ConnectCommandLine(fn func(Application, ApplicationCommandLine) int) gobject.SignalHandle {
+	return o.Connect("command-line", fn)
+}
+// ConnectHandleLocalOptions connects the provided callback to the "handle-local-options" signal
+//
+// The ::handle-local-options signal is emitted on the local instance
+// after the parsing of the commandline options has occurred.
+// 
+// You can add options to be recognised during commandline option
+// parsing using g_application_add_main_option_entries() and
+// g_application_add_option_group().
+// 
+// Signal handlers can inspect @options (along with values pointed to
+// from the @arg_data of an installed #GOptionEntrys) in order to
+// decide to perform certain actions, including direct local handling
+// (which may be useful for options like --version).
+// 
+// In the event that the application is marked
+// %G_APPLICATION_HANDLES_COMMAND_LINE the "normal processing" will
+// send the @options dictionary to the primary instance where it can be
+// read with g_application_command_line_get_options_dict().  The signal
+// handler can modify the dictionary before returning, and the
+// modified dictionary will be sent.
+// 
+// In the event that %G_APPLICATION_HANDLES_COMMAND_LINE is not set,
+// "normal processing" will treat the remaining uncollected command
+// line arguments as filenames or URIs.  If there are no arguments,
+// the application is activated by g_application_activate().  One or
+// more arguments results in a call to g_application_open().
+// 
+// If you want to handle the local commandline arguments for yourself
+// by converting them to calls to g_application_open() or
+// g_action_group_activate_action() then you must be sure to register
+// the application first.  You should probably not call
+// g_application_activate() for yourself, however: just return -1 and
+// allow the default handler to do it for you.  This will ensure that
+// the `--gapplication-service` switch works properly (i.e. no activation
+// in that case).
+// 
+// Note that this signal is emitted from the default implementation of
+// local_command_line().  If you override that function and don't
+// chain up then this signal will never be emitted.
+// 
+// You can override local_command_line() if you need more powerful
+// capabilities than what is provided here, but this should not
+// normally be required.
+func (o *ApplicationInstance) ConnectHandleLocalOptions(fn func(Application, glib.VariantDict) int) gobject.SignalHandle {
+	return o.Connect("handle-local-options", fn)
+}
+// ConnectNameLost connects the provided callback to the "name-lost" signal
+//
+// The ::name-lost signal is emitted only on the registered primary instance
+// when a new instance has taken over. This can only happen if the application
+// is using the %G_APPLICATION_ALLOW_REPLACEMENT flag.
+// 
+// The default handler for this signal calls g_application_quit().
+func (o *ApplicationInstance) ConnectNameLost(fn func(Application) bool) gobject.SignalHandle {
+	return o.Connect("name-lost", fn)
+}
+// ConnectOpen connects the provided callback to the "open" signal
+//
+// The ::open signal is emitted on the primary instance when there are
+// files to open. See g_application_open() for more information.
+func (o *ApplicationInstance) ConnectOpen(fn func(Application, []File, int, string)) gobject.SignalHandle {
+	return o.Connect("open", fn)
+}
+// ConnectShutdown connects the provided callback to the "shutdown" signal
+//
+// The ::shutdown signal is emitted only on the registered primary instance
+// immediately after the main loop terminates.
+func (o *ApplicationInstance) ConnectShutdown(fn func(Application)) gobject.SignalHandle {
+	return o.Connect("shutdown", fn)
+}
+// ConnectStartup connects the provided callback to the "startup" signal
+//
+// The ::startup signal is emitted on the primary instance immediately
+// after registration. See g_application_register().
+func (o *ApplicationInstance) ConnectStartup(fn func(Application)) gobject.SignalHandle {
+	return o.Connect("startup", fn)
+}
 // ApplicationCommandLineInstance is the instance type used by all types extending GApplicationCommandLine. It is used internally by the bindings. Users should use the interface [ApplicationCommandLine] instead.
 type ApplicationCommandLineInstance struct {
 	_ [0]func() // equal guard
@@ -34572,20 +34733,6 @@ type Credentials interface {
 	// This operation can fail if #GCredentials is not supported on the
 	// the OS.
 	IsSameUser(Credentials) (bool, error)
-	// SetNative wraps g_credentials_set_native
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- nativeType CredentialsType: The type of native credentials to set. 
-	// 	- native unsafe.Pointer: A pointer to native credentials. 
-	//
-	// Copies the native credentials of type @native_type from @native
-	// into @credentials.
-	// 
-	// It is a programming error (which will cause a warning to be
-	// logged) to use this method if there is no #GCredentials support for
-	// the OS or if @native_type isn't supported by the OS.
-	SetNative(CredentialsType, unsafe.Pointer)
 	// ToString wraps g_credentials_to_string
 	// The function returns the following values:
 	// 
@@ -34689,34 +34836,6 @@ func (credentials *CredentialsInstance) IsSameUser(otherCredentials Credentials)
 	}
 
 	return goret, _goerr
-}
-
-// SetNative wraps g_credentials_set_native
-// 
-// The function takes the following parameters:
-// 
-// 	- nativeType CredentialsType: The type of native credentials to set. 
-// 	- native unsafe.Pointer: A pointer to native credentials. 
-//
-// Copies the native credentials of type @native_type from @native
-// into @credentials.
-// 
-// It is a programming error (which will cause a warning to be
-// logged) to use this method if there is no #GCredentials support for
-// the OS or if @native_type isn't supported by the OS.
-func (credentials *CredentialsInstance) SetNative(nativeType CredentialsType, native unsafe.Pointer) {
-	var carg0 *C.GCredentials    // in, none, converted
-	var carg1 C.GCredentialsType // in, none, casted
-	var carg2 C.gpointer         // in, none, casted
-
-	carg0 = (*C.GCredentials)(UnsafeCredentialsToGlibNone(credentials))
-	carg1 = C.GCredentialsType(nativeType)
-	carg2 = C.gpointer(native)
-
-	C.g_credentials_set_native(carg0, carg1, carg2)
-	runtime.KeepAlive(credentials)
-	runtime.KeepAlive(nativeType)
-	runtime.KeepAlive(native)
 }
 
 // ToString wraps g_credentials_to_string
@@ -34952,6 +35071,15 @@ type DBusAuthObserver interface {
 	//
 	// Emits the #GDBusAuthObserver::authorize-authenticated-peer signal on @observer.
 	AuthorizeAuthenticatedPeer(IOStream, Credentials) bool
+	// ConnectAllowMechanism connects the provided callback to the "allow-mechanism" signal
+	//
+	// Emitted to check if @mechanism is allowed to be used.
+	ConnectAllowMechanism(func(DBusAuthObserver, string) bool) gobject.SignalHandle
+	// ConnectAuthorizeAuthenticatedPeer connects the provided callback to the "authorize-authenticated-peer" signal
+	//
+	// Emitted to check if a peer that is successfully authenticated
+	// is authorized.
+	ConnectAuthorizeAuthenticatedPeer(func(DBusAuthObserver, IOStream, Credentials) bool) gobject.SignalHandle
 }
 
 func unsafeWrapDBusAuthObserver(base *gobject.ObjectInstance) *DBusAuthObserverInstance {
@@ -35077,6 +35205,19 @@ func (observer *DBusAuthObserverInstance) AuthorizeAuthenticatedPeer(stream IOSt
 	return goret
 }
 
+// ConnectAllowMechanism connects the provided callback to the "allow-mechanism" signal
+//
+// Emitted to check if @mechanism is allowed to be used.
+func (o *DBusAuthObserverInstance) ConnectAllowMechanism(fn func(DBusAuthObserver, string) bool) gobject.SignalHandle {
+	return o.Connect("allow-mechanism", fn)
+}
+// ConnectAuthorizeAuthenticatedPeer connects the provided callback to the "authorize-authenticated-peer" signal
+//
+// Emitted to check if a peer that is successfully authenticated
+// is authorized.
+func (o *DBusAuthObserverInstance) ConnectAuthorizeAuthenticatedPeer(fn func(DBusAuthObserver, IOStream, Credentials) bool) gobject.SignalHandle {
+	return o.Connect("authorize-authenticated-peer", fn)
+}
 // DBusConnectionInstance is the instance type used by all types extending GDBusConnection. It is used internally by the bindings. Users should use the interface [DBusConnection] instead.
 type DBusConnectionInstance struct {
 	_ [0]func() // equal guard
@@ -35710,6 +35851,25 @@ type DBusConnection interface {
 	//
 	// Unregisters a subtree.
 	UnregisterSubtree(uint) bool
+	// ConnectClosed connects the provided callback to the "closed" signal
+	//
+	// Emitted when the connection is closed.
+	// 
+	// The cause of this event can be
+	// 
+	// - If g_dbus_connection_close() is called. In this case
+	//   @remote_peer_vanished is set to %FALSE and @error is %NULL.
+	// 
+	// - If the remote peer closes the connection. In this case
+	//   @remote_peer_vanished is set to %TRUE and @error is set.
+	// 
+	// - If the remote peer sends invalid or malformed data. In this
+	//   case @remote_peer_vanished is set to %FALSE and @error is set.
+	// 
+	// Upon receiving this signal, you should give up your reference to
+	// @connection. You are guaranteed that this signal is emitted only
+	// once.
+	ConnectClosed(func(DBusConnection, bool, error)) gobject.SignalHandle
 }
 
 func unsafeWrapDBusConnection(base *gobject.ObjectInstance) *DBusConnectionInstance {
@@ -37236,6 +37396,27 @@ func (connection *DBusConnectionInstance) UnregisterSubtree(registrationId uint)
 	return goret
 }
 
+// ConnectClosed connects the provided callback to the "closed" signal
+//
+// Emitted when the connection is closed.
+// 
+// The cause of this event can be
+// 
+// - If g_dbus_connection_close() is called. In this case
+//   @remote_peer_vanished is set to %FALSE and @error is %NULL.
+// 
+// - If the remote peer closes the connection. In this case
+//   @remote_peer_vanished is set to %TRUE and @error is set.
+// 
+// - If the remote peer sends invalid or malformed data. In this
+//   case @remote_peer_vanished is set to %FALSE and @error is set.
+// 
+// Upon receiving this signal, you should give up your reference to
+// @connection. You are guaranteed that this signal is emitted only
+// once.
+func (o *DBusConnectionInstance) ConnectClosed(fn func(DBusConnection, bool, error)) gobject.SignalHandle {
+	return o.Connect("closed", fn)
+}
 // DBusInterfaceSkeletonInstance is the instance type used by all types extending GDBusInterfaceSkeleton. It is used internally by the bindings. Users should use the interface [DBusInterfaceSkeleton] instead.
 type DBusInterfaceSkeletonInstance struct {
 	_ [0]func() // equal guard
@@ -37359,6 +37540,42 @@ type DBusInterfaceSkeleton interface {
 	// To stop exporting on all connections the interface is exported on,
 	// use g_dbus_interface_skeleton_unexport().
 	UnexportFromConnection(DBusConnection)
+	// ConnectGAuthorizeMethod connects the provided callback to the "g-authorize-method" signal
+	//
+	// Emitted when a method is invoked by a remote caller and used to
+	// determine if the method call is authorized.
+	// 
+	// Note that this signal is emitted in a thread dedicated to
+	// handling the method call so handlers are allowed to perform
+	// blocking IO. This means that it is appropriate to call e.g.
+	// [polkit_authority_check_authorization_sync()](http://hal.freedesktop.org/docs/polkit/PolkitAuthority.html#polkit-authority-check-authorization-sync)
+	// with the
+	// [POLKIT_CHECK_AUTHORIZATION_FLAGS_ALLOW_USER_INTERACTION](http://hal.freedesktop.org/docs/polkit/PolkitAuthority.html#POLKIT-CHECK-AUTHORIZATION-FLAGS-ALLOW-USER-INTERACTION:CAPS)
+	// flag set.
+	// 
+	// If %FALSE is returned then no further handlers are run and the
+	// signal handler must take a reference to @invocation and finish
+	// handling the call (e.g. return an error via
+	// g_dbus_method_invocation_return_error()).
+	// 
+	// Otherwise, if %TRUE is returned, signal emission continues. If no
+	// handlers return %FALSE, then the method is dispatched. If
+	// @interface has an enclosing #GDBusObjectSkeleton, then the
+	// #GDBusObjectSkeleton::authorize-method signal handlers run before
+	// the handlers for this signal.
+	// 
+	// The default class handler just returns %TRUE.
+	// 
+	// Please note that the common case is optimized: if no signals
+	// handlers are connected and the default class handler isn't
+	// overridden (for both @interface and the enclosing
+	// #GDBusObjectSkeleton, if any) and #GDBusInterfaceSkeleton:g-flags does
+	// not have the
+	// %G_DBUS_INTERFACE_SKELETON_FLAGS_HANDLE_METHOD_INVOCATIONS_IN_THREAD
+	// flags set, no dedicated thread is ever used and the call will be
+	// handled in the same thread as the object that @interface belongs
+	// to was exported in.
+	ConnectGAuthorizeMethod(func(DBusInterfaceSkeleton, DBusMethodInvocation) bool) gobject.SignalHandle
 }
 
 func unsafeWrapDBusInterfaceSkeleton(base *gobject.ObjectInstance) *DBusInterfaceSkeletonInstance {
@@ -37665,6 +37882,44 @@ func (interface_ *DBusInterfaceSkeletonInstance) UnexportFromConnection(connecti
 	runtime.KeepAlive(connection)
 }
 
+// ConnectGAuthorizeMethod connects the provided callback to the "g-authorize-method" signal
+//
+// Emitted when a method is invoked by a remote caller and used to
+// determine if the method call is authorized.
+// 
+// Note that this signal is emitted in a thread dedicated to
+// handling the method call so handlers are allowed to perform
+// blocking IO. This means that it is appropriate to call e.g.
+// [polkit_authority_check_authorization_sync()](http://hal.freedesktop.org/docs/polkit/PolkitAuthority.html#polkit-authority-check-authorization-sync)
+// with the
+// [POLKIT_CHECK_AUTHORIZATION_FLAGS_ALLOW_USER_INTERACTION](http://hal.freedesktop.org/docs/polkit/PolkitAuthority.html#POLKIT-CHECK-AUTHORIZATION-FLAGS-ALLOW-USER-INTERACTION:CAPS)
+// flag set.
+// 
+// If %FALSE is returned then no further handlers are run and the
+// signal handler must take a reference to @invocation and finish
+// handling the call (e.g. return an error via
+// g_dbus_method_invocation_return_error()).
+// 
+// Otherwise, if %TRUE is returned, signal emission continues. If no
+// handlers return %FALSE, then the method is dispatched. If
+// @interface has an enclosing #GDBusObjectSkeleton, then the
+// #GDBusObjectSkeleton::authorize-method signal handlers run before
+// the handlers for this signal.
+// 
+// The default class handler just returns %TRUE.
+// 
+// Please note that the common case is optimized: if no signals
+// handlers are connected and the default class handler isn't
+// overridden (for both @interface and the enclosing
+// #GDBusObjectSkeleton, if any) and #GDBusInterfaceSkeleton:g-flags does
+// not have the
+// %G_DBUS_INTERFACE_SKELETON_FLAGS_HANDLE_METHOD_INVOCATIONS_IN_THREAD
+// flags set, no dedicated thread is ever used and the call will be
+// handled in the same thread as the object that @interface belongs
+// to was exported in.
+func (o *DBusInterfaceSkeletonInstance) ConnectGAuthorizeMethod(fn func(DBusInterfaceSkeleton, DBusMethodInvocation) bool) gobject.SignalHandle {
+	return o.Connect("g-authorize-method", fn)
+}
 // DBusMessageInstance is the instance type used by all types extending GDBusMessage. It is used internally by the bindings. Users should use the interface [DBusMessage] instead.
 type DBusMessageInstance struct {
 	_ [0]func() // equal guard
@@ -40398,6 +40653,17 @@ type DBusObjectSkeleton interface {
 	//
 	// Sets the object path for @object.
 	SetObjectPath(string)
+	// ConnectAuthorizeMethod connects the provided callback to the "authorize-method" signal
+	//
+	// Emitted when a method is invoked by a remote caller and used to
+	// determine if the method call is authorized.
+	// 
+	// This signal is like #GDBusInterfaceSkeleton's
+	// #GDBusInterfaceSkeleton::g-authorize-method signal,
+	// except that it is for the enclosing object.
+	// 
+	// The default class handler just returns %TRUE.
+	ConnectAuthorizeMethod(func(DBusObjectSkeleton, DBusInterfaceSkeleton, DBusMethodInvocation) bool) gobject.SignalHandle
 }
 
 func unsafeWrapDBusObjectSkeleton(base *gobject.ObjectInstance) *DBusObjectSkeletonInstance {
@@ -40563,6 +40829,19 @@ func (object *DBusObjectSkeletonInstance) SetObjectPath(objectPath string) {
 	runtime.KeepAlive(objectPath)
 }
 
+// ConnectAuthorizeMethod connects the provided callback to the "authorize-method" signal
+//
+// Emitted when a method is invoked by a remote caller and used to
+// determine if the method call is authorized.
+// 
+// This signal is like #GDBusInterfaceSkeleton's
+// #GDBusInterfaceSkeleton::g-authorize-method signal,
+// except that it is for the enclosing object.
+// 
+// The default class handler just returns %TRUE.
+func (o *DBusObjectSkeletonInstance) ConnectAuthorizeMethod(fn func(DBusObjectSkeleton, DBusInterfaceSkeleton, DBusMethodInvocation) bool) gobject.SignalHandle {
+	return o.Connect("authorize-method", fn)
+}
 // DBusProxyInstance is the instance type used by all types extending GDBusProxy. It is used internally by the bindings. Users should use the interface [DBusProxy] instead.
 type DBusProxyInstance struct {
 	_ [0]func() // equal guard
@@ -41453,6 +41732,30 @@ type DBusServer interface {
 	//
 	// Stops @server.
 	Stop()
+	// ConnectNewConnection connects the provided callback to the "new-connection" signal
+	//
+	// Emitted when a new authenticated connection has been made. Use
+	// g_dbus_connection_get_peer_credentials() to figure out what
+	// identity (if any), was authenticated.
+	// 
+	// If you want to accept the connection, take a reference to the
+	// @connection object and return %TRUE. When you are done with the
+	// connection call g_dbus_connection_close() and give up your
+	// reference. Note that the other peer may disconnect at any time -
+	// a typical thing to do when accepting a connection is to listen to
+	// the #GDBusConnection::closed signal.
+	// 
+	// If #GDBusServer:flags contains %G_DBUS_SERVER_FLAGS_RUN_IN_THREAD
+	// then the signal is emitted in a new thread dedicated to the
+	// connection. Otherwise the signal is emitted in the
+	// [thread-default main context][g-main-context-push-thread-default]
+	// of the thread that @server was constructed in.
+	// 
+	// You are guaranteed that signal handlers for this signal runs
+	// before incoming messages on @connection are processed. This means
+	// that it's suitable to call g_dbus_connection_register_object() or
+	// similar from the signal handler.
+	ConnectNewConnection(func(DBusServer, DBusConnection) bool) gobject.SignalHandle
 }
 
 func unsafeWrapDBusServer(base *gobject.ObjectInstance) *DBusServerInstance {
@@ -41681,6 +41984,32 @@ func (server *DBusServerInstance) Stop() {
 	runtime.KeepAlive(server)
 }
 
+// ConnectNewConnection connects the provided callback to the "new-connection" signal
+//
+// Emitted when a new authenticated connection has been made. Use
+// g_dbus_connection_get_peer_credentials() to figure out what
+// identity (if any), was authenticated.
+// 
+// If you want to accept the connection, take a reference to the
+// @connection object and return %TRUE. When you are done with the
+// connection call g_dbus_connection_close() and give up your
+// reference. Note that the other peer may disconnect at any time -
+// a typical thing to do when accepting a connection is to listen to
+// the #GDBusConnection::closed signal.
+// 
+// If #GDBusServer:flags contains %G_DBUS_SERVER_FLAGS_RUN_IN_THREAD
+// then the signal is emitted in a new thread dedicated to the
+// connection. Otherwise the signal is emitted in the
+// [thread-default main context][g-main-context-push-thread-default]
+// of the thread that @server was constructed in.
+// 
+// You are guaranteed that signal handlers for this signal runs
+// before incoming messages on @connection are processed. This means
+// that it's suitable to call g_dbus_connection_register_object() or
+// similar from the signal handler.
+func (o *DBusServerInstance) ConnectNewConnection(fn func(DBusServer, DBusConnection) bool) gobject.SignalHandle {
+	return o.Connect("new-connection", fn)
+}
 // DebugControllerDBusInstance is the instance type used by all types extending GDebugControllerDBus. It is used internally by the bindings. Users should use the interface [DebugControllerDBus] instead.
 type DebugControllerDBusInstance struct {
 	_ [0]func() // equal guard
@@ -41824,6 +42153,26 @@ type DebugControllerDBus interface {
 	// Calling this method from within a #GDebugControllerDBus::authorize signal
 	// handler will cause a deadlock and must not be done.
 	Stop()
+	// ConnectAuthorize connects the provided callback to the "authorize" signal
+	//
+	// Emitted when a D-Bus peer is trying to change the debug settings and used
+	// to determine if that is authorized.
+	// 
+	// This signal is emitted in a dedicated worker thread, so handlers are
+	// allowed to perform blocking I/O. This means that, for example, it is
+	// appropriate to call `polkit_authority_check_authorization_sync()` to check
+	// authorization using polkit.
+	// 
+	// If %FALSE is returned then no further handlers are run and the request to
+	// change the debug settings is rejected.
+	// 
+	// Otherwise, if %TRUE is returned, signal emission continues. If no handlers
+	// return %FALSE, then the debug settings are allowed to be changed.
+	// 
+	// Signal handlers must not modify @invocation, or cause it to return a value.
+	// 
+	// The default class handler just returns %TRUE.
+	ConnectAuthorize(func(DebugControllerDBus, DBusMethodInvocation) bool) gobject.SignalHandle
 }
 
 func unsafeWrapDebugControllerDBus(base *gobject.ObjectInstance) *DebugControllerDBusInstance {
@@ -41932,6 +42281,28 @@ func (self *DebugControllerDBusInstance) Stop() {
 	runtime.KeepAlive(self)
 }
 
+// ConnectAuthorize connects the provided callback to the "authorize" signal
+//
+// Emitted when a D-Bus peer is trying to change the debug settings and used
+// to determine if that is authorized.
+// 
+// This signal is emitted in a dedicated worker thread, so handlers are
+// allowed to perform blocking I/O. This means that, for example, it is
+// appropriate to call `polkit_authority_check_authorization_sync()` to check
+// authorization using polkit.
+// 
+// If %FALSE is returned then no further handlers are run and the request to
+// change the debug settings is rejected.
+// 
+// Otherwise, if %TRUE is returned, signal emission continues. If no handlers
+// return %FALSE, then the debug settings are allowed to be changed.
+// 
+// Signal handlers must not modify @invocation, or cause it to return a value.
+// 
+// The default class handler just returns %TRUE.
+func (o *DebugControllerDBusInstance) ConnectAuthorize(fn func(DebugControllerDBus, DBusMethodInvocation) bool) gobject.SignalHandle {
+	return o.Connect("authorize", fn)
+}
 // EmblemInstance is the instance type used by all types extending GEmblem. It is used internally by the bindings. Users should use the interface [Emblem] instead.
 type EmblemInstance struct {
 	_ [0]func() // equal guard
@@ -43336,22 +43707,6 @@ type FileInfo interface {
 	// Gets the value of a byte string attribute. If the attribute does
 	// not contain a byte string, %NULL will be returned.
 	GetAttributeByteString(string) string
-	// GetAttributeData wraps g_file_info_get_attribute_data
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- attribute string: a file attribute key 
-	// 
-	// The function returns the following values:
-	// 
-	// 	- typ FileAttributeType: return location for the attribute type, or %NULL 
-	// 	- valuePp unsafe.Pointer: return location for the
-	//    attribute value, or %NULL; the attribute value will not be %NULL 
-	// 	- status FileAttributeStatus: return location for the attribute status, or %NULL 
-	// 	- goret bool 
-	//
-	// Gets the attribute type, value and status for an attribute key.
-	GetAttributeData(string) (FileAttributeType, unsafe.Pointer, FileAttributeStatus, bool)
 	// GetAttributeFilePath wraps g_file_info_get_attribute_file_path
 	// 
 	// The function takes the following parameters:
@@ -43732,17 +44087,6 @@ type FileInfo interface {
 	// 
 	// %G_FILE_ATTRIBUTE_TIME_ACCESS_NSEC will be cleared.
 	SetAccessDateTime(*glib.DateTime)
-	// SetAttribute wraps g_file_info_set_attribute
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- attribute string: a file attribute key. 
-	// 	- typ FileAttributeType: a #GFileAttributeType 
-	// 	- valueP unsafe.Pointer: pointer to the value 
-	//
-	// Sets the @attribute to contain the given value, if possible. To unset the
-	// attribute, use %G_FILE_ATTRIBUTE_TYPE_INVALID for @type.
-	SetAttribute(string, FileAttributeType, unsafe.Pointer)
 	// SetAttributeBoolean wraps g_file_info_set_attribute_boolean
 	// 
 	// The function takes the following parameters:
@@ -44249,52 +44593,6 @@ func (info *FileInfoInstance) GetAttributeByteString(attribute string) string {
 	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
-}
-
-// GetAttributeData wraps g_file_info_get_attribute_data
-// 
-// The function takes the following parameters:
-// 
-// 	- attribute string: a file attribute key 
-// 
-// The function returns the following values:
-// 
-// 	- typ FileAttributeType: return location for the attribute type, or %NULL 
-// 	- valuePp unsafe.Pointer: return location for the
-//    attribute value, or %NULL; the attribute value will not be %NULL 
-// 	- status FileAttributeStatus: return location for the attribute status, or %NULL 
-// 	- goret bool 
-//
-// Gets the attribute type, value and status for an attribute key.
-func (info *FileInfoInstance) GetAttributeData(attribute string) (FileAttributeType, unsafe.Pointer, FileAttributeStatus, bool) {
-	var carg0 *C.GFileInfo           // in, none, converted
-	var carg1 *C.char                // in, none, string, casted *C.gchar
-	var carg2 C.GFileAttributeType   // out, full, casted
-	var carg3 C.gpointer             // out, full, casted
-	var carg4 C.GFileAttributeStatus // out, full, casted
-	var cret  C.gboolean             // return
-
-	carg0 = (*C.GFileInfo)(UnsafeFileInfoToGlibNone(info))
-	carg1 = (*C.char)(unsafe.Pointer(C.CString(attribute)))
-	defer C.free(unsafe.Pointer(carg1))
-
-	cret = C.g_file_info_get_attribute_data(carg0, carg1, &carg2, &carg3, &carg4)
-	runtime.KeepAlive(info)
-	runtime.KeepAlive(attribute)
-
-	var typ     FileAttributeType
-	var valuePp unsafe.Pointer
-	var status  FileAttributeStatus
-	var goret   bool
-
-	typ = FileAttributeType(carg2)
-	valuePp = unsafe.Pointer(carg3)
-	status = FileAttributeStatus(carg4)
-	if cret != 0 {
-		goret = true
-	}
-
-	return typ, valuePp, status, goret
 }
 
 // GetAttributeFilePath wraps g_file_info_get_attribute_file_path
@@ -45218,35 +45516,6 @@ func (info *FileInfoInstance) SetAccessDateTime(atime *glib.DateTime) {
 	runtime.KeepAlive(atime)
 }
 
-// SetAttribute wraps g_file_info_set_attribute
-// 
-// The function takes the following parameters:
-// 
-// 	- attribute string: a file attribute key. 
-// 	- typ FileAttributeType: a #GFileAttributeType 
-// 	- valueP unsafe.Pointer: pointer to the value 
-//
-// Sets the @attribute to contain the given value, if possible. To unset the
-// attribute, use %G_FILE_ATTRIBUTE_TYPE_INVALID for @type.
-func (info *FileInfoInstance) SetAttribute(attribute string, typ FileAttributeType, valueP unsafe.Pointer) {
-	var carg0 *C.GFileInfo         // in, none, converted
-	var carg1 *C.char              // in, none, string, casted *C.gchar
-	var carg2 C.GFileAttributeType // in, none, casted
-	var carg3 C.gpointer           // in, none, casted
-
-	carg0 = (*C.GFileInfo)(UnsafeFileInfoToGlibNone(info))
-	carg1 = (*C.char)(unsafe.Pointer(C.CString(attribute)))
-	defer C.free(unsafe.Pointer(carg1))
-	carg2 = C.GFileAttributeType(typ)
-	carg3 = C.gpointer(valueP)
-
-	C.g_file_info_set_attribute(carg0, carg1, carg2, carg3)
-	runtime.KeepAlive(info)
-	runtime.KeepAlive(attribute)
-	runtime.KeepAlive(typ)
-	runtime.KeepAlive(valueP)
-}
-
 // SetAttributeBoolean wraps g_file_info_set_attribute_boolean
 // 
 // The function takes the following parameters:
@@ -45946,6 +46215,37 @@ type FileMonitor interface {
 	// Sets the rate limit to which the @monitor will report
 	// consecutive change events to the same file.
 	SetRateLimit(int)
+	// ConnectChanged connects the provided callback to the "changed" signal
+	//
+	// Emitted when @file has been changed.
+	// 
+	// If using %G_FILE_MONITOR_WATCH_MOVES on a directory monitor, and
+	// the information is available (and if supported by the backend),
+	// @event_type may be %G_FILE_MONITOR_EVENT_RENAMED,
+	// %G_FILE_MONITOR_EVENT_MOVED_IN or %G_FILE_MONITOR_EVENT_MOVED_OUT.
+	// 
+	// In all cases @file will be a child of the monitored directory.  For
+	// renames, @file will be the old name and @other_file is the new
+	// name.  For "moved in" events, @file is the name of the file that
+	// appeared and @other_file is the old name that it was moved from (in
+	// another directory).  For "moved out" events, @file is the name of
+	// the file that used to be in this directory and @other_file is the
+	// name of the file at its new location.
+	// 
+	// It makes sense to treat %G_FILE_MONITOR_EVENT_MOVED_IN as
+	// equivalent to %G_FILE_MONITOR_EVENT_CREATED and
+	// %G_FILE_MONITOR_EVENT_MOVED_OUT as equivalent to
+	// %G_FILE_MONITOR_EVENT_DELETED, with extra information.
+	// %G_FILE_MONITOR_EVENT_RENAMED is equivalent to a delete/create
+	// pair.  This is exactly how the events will be reported in the case
+	// that the %G_FILE_MONITOR_WATCH_MOVES flag is not in use.
+	// 
+	// If using the deprecated flag %G_FILE_MONITOR_SEND_MOVED flag and @event_type is
+	// %G_FILE_MONITOR_EVENT_MOVED, @file will be set to a #GFile containing the
+	// old path, and @other_file will be set to a #GFile containing the new path.
+	// 
+	// In all the other cases, @other_file will be set to #NULL.
+	ConnectChanged(func(FileMonitor, File, File, FileMonitorEvent)) gobject.SignalHandle
 }
 
 func unsafeWrapFileMonitor(base *gobject.ObjectInstance) *FileMonitorInstance {
@@ -46084,6 +46384,39 @@ func (monitor *FileMonitorInstance) SetRateLimit(limitMsecs int) {
 	runtime.KeepAlive(limitMsecs)
 }
 
+// ConnectChanged connects the provided callback to the "changed" signal
+//
+// Emitted when @file has been changed.
+// 
+// If using %G_FILE_MONITOR_WATCH_MOVES on a directory monitor, and
+// the information is available (and if supported by the backend),
+// @event_type may be %G_FILE_MONITOR_EVENT_RENAMED,
+// %G_FILE_MONITOR_EVENT_MOVED_IN or %G_FILE_MONITOR_EVENT_MOVED_OUT.
+// 
+// In all cases @file will be a child of the monitored directory.  For
+// renames, @file will be the old name and @other_file is the new
+// name.  For "moved in" events, @file is the name of the file that
+// appeared and @other_file is the old name that it was moved from (in
+// another directory).  For "moved out" events, @file is the name of
+// the file that used to be in this directory and @other_file is the
+// name of the file at its new location.
+// 
+// It makes sense to treat %G_FILE_MONITOR_EVENT_MOVED_IN as
+// equivalent to %G_FILE_MONITOR_EVENT_CREATED and
+// %G_FILE_MONITOR_EVENT_MOVED_OUT as equivalent to
+// %G_FILE_MONITOR_EVENT_DELETED, with extra information.
+// %G_FILE_MONITOR_EVENT_RENAMED is equivalent to a delete/create
+// pair.  This is exactly how the events will be reported in the case
+// that the %G_FILE_MONITOR_WATCH_MOVES flag is not in use.
+// 
+// If using the deprecated flag %G_FILE_MONITOR_SEND_MOVED flag and @event_type is
+// %G_FILE_MONITOR_EVENT_MOVED, @file will be set to a #GFile containing the
+// old path, and @other_file will be set to a #GFile containing the new path.
+// 
+// In all the other cases, @other_file will be set to #NULL.
+func (o *FileMonitorInstance) ConnectChanged(fn func(FileMonitor, File, File, FileMonitorEvent)) gobject.SignalHandle {
+	return o.Connect("changed", fn)
+}
 // FilenameCompleterInstance is the instance type used by all types extending GFilenameCompleter. It is used internally by the bindings. Users should use the interface [FilenameCompleter] instead.
 type FilenameCompleterInstance struct {
 	_ [0]func() // equal guard
@@ -46134,6 +46467,10 @@ type FilenameCompleter interface {
 	// If @dirs_only is %TRUE, @completer will only
 	// complete directory names, and not file names.
 	SetDirsOnly(bool)
+	// ConnectGotCompletionData connects the provided callback to the "got-completion-data" signal
+	//
+	// Emitted when the file name completion information comes available.
+	ConnectGotCompletionData(func(FilenameCompleter)) gobject.SignalHandle
 }
 
 func unsafeWrapFilenameCompleter(base *gobject.ObjectInstance) *FilenameCompleterInstance {
@@ -46275,6 +46612,12 @@ func (completer *FilenameCompleterInstance) SetDirsOnly(dirsOnly bool) {
 	runtime.KeepAlive(dirsOnly)
 }
 
+// ConnectGotCompletionData connects the provided callback to the "got-completion-data" signal
+//
+// Emitted when the file name completion information comes available.
+func (o *FilenameCompleterInstance) ConnectGotCompletionData(fn func(FilenameCompleter)) gobject.SignalHandle {
+	return o.Connect("got-completion-data", fn)
+}
 // IOModuleInstance is the instance type used by all types extending GIOModule. It is used internally by the bindings. Users should use the interface [IOModule] instead.
 type IOModuleInstance struct {
 	_ [0]func() // equal guard
@@ -49339,92 +49682,6 @@ type ListStore interface {
 	gobject.Object
 	upcastToGListStore() *ListStoreInstance
 
-	// Append wraps g_list_store_append
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- item unsafe.Pointer: the new item 
-	//
-	// Appends @item to @store. @item must be of type #GListStore:item-type.
-	// 
-	// This function takes a ref on @item.
-	// 
-	// Use g_list_store_splice() to append multiple items at the same time
-	// efficiently.
-	Append(unsafe.Pointer)
-	// Find wraps g_list_store_find
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- item unsafe.Pointer: an item 
-	// 
-	// The function returns the following values:
-	// 
-	// 	- position uint: the first position of @item, if it was found. 
-	// 	- goret bool 
-	//
-	// Looks up the given @item in the list store by looping over the items until
-	// the first occurrence of @item. If @item was not found, then @position will
-	// not be set, and this method will return %FALSE.
-	// 
-	// If you need to compare the two items with a custom comparison function, use
-	// g_list_store_find_with_equal_func() with a custom #GEqualFunc instead.
-	Find(unsafe.Pointer) (uint, bool)
-	// FindWithEqualFuncFull wraps g_list_store_find_with_equal_func_full
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- item unsafe.Pointer (nullable): an item 
-	// 	- equalFunc glib.EqualFuncFull: A custom equality check function 
-	// 
-	// The function returns the following values:
-	// 
-	// 	- position uint: the first position of @item, if it was found. 
-	// 	- goret bool 
-	//
-	// Like g_list_store_find_with_equal_func() but with an additional @user_data
-	// that is passed to @equal_func.
-	// 
-	// @item is always passed as second parameter to @equal_func.
-	// 
-	// Since GLib 2.76 it is possible to pass `NULL` for @item.
-	FindWithEqualFuncFull(unsafe.Pointer, glib.EqualFuncFull) (uint, bool)
-	// Insert wraps g_list_store_insert
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- position uint: the position at which to insert the new item 
-	// 	- item unsafe.Pointer: the new item 
-	//
-	// Inserts @item into @store at @position. @item must be of type
-	// #GListStore:item-type or derived from it. @position must be smaller
-	// than the length of the list, or equal to it to append.
-	// 
-	// This function takes a ref on @item.
-	// 
-	// Use g_list_store_splice() to insert multiple items at the same time
-	// efficiently.
-	Insert(uint, unsafe.Pointer)
-	// InsertSorted wraps g_list_store_insert_sorted
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- item unsafe.Pointer: the new item 
-	// 	- compareFunc glib.CompareDataFunc: pairwise comparison function for sorting 
-	// 
-	// The function returns the following values:
-	// 
-	// 	- goret uint 
-	//
-	// Inserts @item into @store at a position to be determined by the
-	// @compare_func.
-	// 
-	// The list must already be sorted before calling this function or the
-	// result is undefined.  Usually you would approach this by only ever
-	// inserting items by way of this function.
-	// 
-	// This function takes a ref on @item.
-	InsertSorted(unsafe.Pointer, glib.CompareDataFunc) uint
 	// Remove wraps g_list_store_remove
 	// 
 	// The function takes the following parameters:
@@ -49509,195 +49766,6 @@ func NewListStore(itemType gobject.Type) ListStore {
 	var goret ListStore
 
 	goret = UnsafeListStoreFromGlibFull(unsafe.Pointer(cret))
-
-	return goret
-}
-
-// Append wraps g_list_store_append
-// 
-// The function takes the following parameters:
-// 
-// 	- item unsafe.Pointer: the new item 
-//
-// Appends @item to @store. @item must be of type #GListStore:item-type.
-// 
-// This function takes a ref on @item.
-// 
-// Use g_list_store_splice() to append multiple items at the same time
-// efficiently.
-func (store *ListStoreInstance) Append(item unsafe.Pointer) {
-	var carg0 *C.GListStore // in, none, converted
-	var carg1 C.gpointer    // in, none, casted
-
-	carg0 = (*C.GListStore)(UnsafeListStoreToGlibNone(store))
-	carg1 = C.gpointer(item)
-
-	C.g_list_store_append(carg0, carg1)
-	runtime.KeepAlive(store)
-	runtime.KeepAlive(item)
-}
-
-// Find wraps g_list_store_find
-// 
-// The function takes the following parameters:
-// 
-// 	- item unsafe.Pointer: an item 
-// 
-// The function returns the following values:
-// 
-// 	- position uint: the first position of @item, if it was found. 
-// 	- goret bool 
-//
-// Looks up the given @item in the list store by looping over the items until
-// the first occurrence of @item. If @item was not found, then @position will
-// not be set, and this method will return %FALSE.
-// 
-// If you need to compare the two items with a custom comparison function, use
-// g_list_store_find_with_equal_func() with a custom #GEqualFunc instead.
-func (store *ListStoreInstance) Find(item unsafe.Pointer) (uint, bool) {
-	var carg0 *C.GListStore // in, none, converted
-	var carg1 C.gpointer    // in, none, casted
-	var carg2 C.guint       // out, full, casted
-	var cret  C.gboolean    // return
-
-	carg0 = (*C.GListStore)(UnsafeListStoreToGlibNone(store))
-	carg1 = C.gpointer(item)
-
-	cret = C.g_list_store_find(carg0, carg1, &carg2)
-	runtime.KeepAlive(store)
-	runtime.KeepAlive(item)
-
-	var position uint
-	var goret    bool
-
-	position = uint(carg2)
-	if cret != 0 {
-		goret = true
-	}
-
-	return position, goret
-}
-
-// FindWithEqualFuncFull wraps g_list_store_find_with_equal_func_full
-// 
-// The function takes the following parameters:
-// 
-// 	- item unsafe.Pointer (nullable): an item 
-// 	- equalFunc glib.EqualFuncFull: A custom equality check function 
-// 
-// The function returns the following values:
-// 
-// 	- position uint: the first position of @item, if it was found. 
-// 	- goret bool 
-//
-// Like g_list_store_find_with_equal_func() but with an additional @user_data
-// that is passed to @equal_func.
-// 
-// @item is always passed as second parameter to @equal_func.
-// 
-// Since GLib 2.76 it is possible to pass `NULL` for @item.
-func (store *ListStoreInstance) FindWithEqualFuncFull(item unsafe.Pointer, equalFunc glib.EqualFuncFull) (uint, bool) {
-	var carg0 *C.GListStore    // in, none, converted
-	var carg1 C.gpointer       // in, none, casted, nullable
-	var carg2 C.GEqualFuncFull // callback, scope: call, closure: carg3
-	var carg3 C.gpointer       // implicit
-	var carg4 C.guint          // out, full, casted
-	var cret  C.gboolean       // return
-
-	carg0 = (*C.GListStore)(UnsafeListStoreToGlibNone(store))
-	if item != nil {
-		carg1 = C.gpointer(item)
-	}
-	carg2 = (*[0]byte)(C._gotk4_glib2_EqualFuncFull)
-	carg3 = C.gpointer(userdata.Register(equalFunc))
-	defer userdata.Delete(unsafe.Pointer(carg3))
-
-	cret = C.g_list_store_find_with_equal_func_full(carg0, carg1, carg2, carg3, &carg4)
-	runtime.KeepAlive(store)
-	runtime.KeepAlive(item)
-	runtime.KeepAlive(equalFunc)
-
-	var position uint
-	var goret    bool
-
-	position = uint(carg4)
-	if cret != 0 {
-		goret = true
-	}
-
-	return position, goret
-}
-
-// Insert wraps g_list_store_insert
-// 
-// The function takes the following parameters:
-// 
-// 	- position uint: the position at which to insert the new item 
-// 	- item unsafe.Pointer: the new item 
-//
-// Inserts @item into @store at @position. @item must be of type
-// #GListStore:item-type or derived from it. @position must be smaller
-// than the length of the list, or equal to it to append.
-// 
-// This function takes a ref on @item.
-// 
-// Use g_list_store_splice() to insert multiple items at the same time
-// efficiently.
-func (store *ListStoreInstance) Insert(position uint, item unsafe.Pointer) {
-	var carg0 *C.GListStore // in, none, converted
-	var carg1 C.guint       // in, none, casted
-	var carg2 C.gpointer    // in, none, casted
-
-	carg0 = (*C.GListStore)(UnsafeListStoreToGlibNone(store))
-	carg1 = C.guint(position)
-	carg2 = C.gpointer(item)
-
-	C.g_list_store_insert(carg0, carg1, carg2)
-	runtime.KeepAlive(store)
-	runtime.KeepAlive(position)
-	runtime.KeepAlive(item)
-}
-
-// InsertSorted wraps g_list_store_insert_sorted
-// 
-// The function takes the following parameters:
-// 
-// 	- item unsafe.Pointer: the new item 
-// 	- compareFunc glib.CompareDataFunc: pairwise comparison function for sorting 
-// 
-// The function returns the following values:
-// 
-// 	- goret uint 
-//
-// Inserts @item into @store at a position to be determined by the
-// @compare_func.
-// 
-// The list must already be sorted before calling this function or the
-// result is undefined.  Usually you would approach this by only ever
-// inserting items by way of this function.
-// 
-// This function takes a ref on @item.
-func (store *ListStoreInstance) InsertSorted(item unsafe.Pointer, compareFunc glib.CompareDataFunc) uint {
-	var carg0 *C.GListStore      // in, none, converted
-	var carg1 C.gpointer         // in, none, casted
-	var carg2 C.GCompareDataFunc // callback, scope: call, closure: carg3
-	var carg3 C.gpointer         // implicit
-	var cret  C.guint            // return, none, casted
-
-	carg0 = (*C.GListStore)(UnsafeListStoreToGlibNone(store))
-	carg1 = C.gpointer(item)
-	carg2 = (*[0]byte)(C._gotk4_glib2_CompareDataFunc)
-	carg3 = C.gpointer(userdata.Register(compareFunc))
-	defer userdata.Delete(unsafe.Pointer(carg3))
-
-	cret = C.g_list_store_insert_sorted(carg0, carg1, carg2, carg3)
-	runtime.KeepAlive(store)
-	runtime.KeepAlive(item)
-	runtime.KeepAlive(compareFunc)
-
-	var goret uint
-
-	goret = uint(cret)
 
 	return goret
 }
@@ -51045,6 +51113,29 @@ type MenuModel interface {
 	// 
 	// You must free the iterator with g_object_unref() when you are done.
 	IterateItemLinks(int) MenuLinkIter
+	// ConnectItemsChanged connects the provided callback to the "items-changed" signal
+	//
+	// Emitted when a change has occurred to the menu.
+	// 
+	// The only changes that can occur to a menu is that items are removed
+	// or added.  Items may not change (except by being removed and added
+	// back in the same location).  This signal is capable of describing
+	// both of those changes (at the same time).
+	// 
+	// The signal means that starting at the index @position, @removed
+	// items were removed and @added items were added in their place.  If
+	// @removed is zero then only items were added.  If @added is zero
+	// then only items were removed.
+	// 
+	// As an example, if the menu contains items a, b, c, d (in that
+	// order) and the signal (2, 1, 3) occurs then the new composition of
+	// the menu will be a, b, _, _, _, d (with each _ representing some
+	// new item).
+	// 
+	// Signal handlers may query the model (particularly the added items)
+	// and expect to see the results of the modification that is being
+	// reported.  The signal is emitted after the modification.
+	ConnectItemsChanged(func(MenuModel, int, int, int)) gobject.SignalHandle
 }
 
 func unsafeWrapMenuModel(base *gobject.ObjectInstance) *MenuModelInstance {
@@ -51276,6 +51367,31 @@ func (model *MenuModelInstance) IterateItemLinks(itemIndex int) MenuLinkIter {
 	return goret
 }
 
+// ConnectItemsChanged connects the provided callback to the "items-changed" signal
+//
+// Emitted when a change has occurred to the menu.
+// 
+// The only changes that can occur to a menu is that items are removed
+// or added.  Items may not change (except by being removed and added
+// back in the same location).  This signal is capable of describing
+// both of those changes (at the same time).
+// 
+// The signal means that starting at the index @position, @removed
+// items were removed and @added items were added in their place.  If
+// @removed is zero then only items were added.  If @added is zero
+// then only items were removed.
+// 
+// As an example, if the menu contains items a, b, c, d (in that
+// order) and the signal (2, 1, 3) occurs then the new composition of
+// the menu will be a, b, _, _, _, d (with each _ representing some
+// new item).
+// 
+// Signal handlers may query the model (particularly the added items)
+// and expect to see the results of the modification that is being
+// reported.  The signal is emitted after the modification.
+func (o *MenuModelInstance) ConnectItemsChanged(fn func(MenuModel, int, int, int)) gobject.SignalHandle {
+	return o.Connect("items-changed", fn)
+}
 // MountOperationInstance is the instance type used by all types extending GMountOperation. It is used internally by the bindings. Users should use the interface [MountOperation] instead.
 type MountOperationInstance struct {
 	_ [0]func() // equal guard
@@ -51458,6 +51574,45 @@ type MountOperation interface {
 	//
 	// Sets the user name within @op to @username.
 	SetUsername(string)
+	// ConnectAborted connects the provided callback to the "aborted" signal
+	//
+	// Emitted by the backend when e.g. a device becomes unavailable
+	// while a mount operation is in progress.
+	// 
+	// Implementations of GMountOperation should handle this signal
+	// by dismissing open password dialogs.
+	ConnectAborted(func(MountOperation)) gobject.SignalHandle
+	// ConnectAskPassword connects the provided callback to the "ask-password" signal
+	//
+	// Emitted when a mount operation asks the user for a password.
+	// 
+	// If the message contains a line break, the first line should be
+	// presented as a heading. For example, it may be used as the
+	// primary text in a #GtkMessageDialog.
+	ConnectAskPassword(func(MountOperation, string, string, string, AskPasswordFlags)) gobject.SignalHandle
+	// ConnectReply connects the provided callback to the "reply" signal
+	//
+	// Emitted when the user has replied to the mount operation.
+	ConnectReply(func(MountOperation, MountOperationResult)) gobject.SignalHandle
+	// ConnectShowUnmountProgress connects the provided callback to the "show-unmount-progress" signal
+	//
+	// Emitted when an unmount operation has been busy for more than some time
+	// (typically 1.5 seconds).
+	// 
+	// When unmounting or ejecting a volume, the kernel might need to flush
+	// pending data in its buffers to the volume stable storage, and this operation
+	// can take a considerable amount of time. This signal may be emitted several
+	// times as long as the unmount operation is outstanding, and then one
+	// last time when the operation is completed, with @bytes_left set to zero.
+	// 
+	// Implementations of GMountOperation should handle this signal by
+	// showing an UI notification, and then dismiss it, or show another notification
+	// of completion, when @bytes_left reaches zero.
+	// 
+	// If the message contains a line break, the first line should be
+	// presented as a heading. For example, it may be used as the
+	// primary text in a #GtkMessageDialog.
+	ConnectShowUnmountProgress(func(MountOperation, string, int64, int64)) gobject.SignalHandle
 }
 
 func unsafeWrapMountOperation(base *gobject.ObjectInstance) *MountOperationInstance {
@@ -51924,6 +52079,53 @@ func (op *MountOperationInstance) SetUsername(username string) {
 	runtime.KeepAlive(username)
 }
 
+// ConnectAborted connects the provided callback to the "aborted" signal
+//
+// Emitted by the backend when e.g. a device becomes unavailable
+// while a mount operation is in progress.
+// 
+// Implementations of GMountOperation should handle this signal
+// by dismissing open password dialogs.
+func (o *MountOperationInstance) ConnectAborted(fn func(MountOperation)) gobject.SignalHandle {
+	return o.Connect("aborted", fn)
+}
+// ConnectAskPassword connects the provided callback to the "ask-password" signal
+//
+// Emitted when a mount operation asks the user for a password.
+// 
+// If the message contains a line break, the first line should be
+// presented as a heading. For example, it may be used as the
+// primary text in a #GtkMessageDialog.
+func (o *MountOperationInstance) ConnectAskPassword(fn func(MountOperation, string, string, string, AskPasswordFlags)) gobject.SignalHandle {
+	return o.Connect("ask-password", fn)
+}
+// ConnectReply connects the provided callback to the "reply" signal
+//
+// Emitted when the user has replied to the mount operation.
+func (o *MountOperationInstance) ConnectReply(fn func(MountOperation, MountOperationResult)) gobject.SignalHandle {
+	return o.Connect("reply", fn)
+}
+// ConnectShowUnmountProgress connects the provided callback to the "show-unmount-progress" signal
+//
+// Emitted when an unmount operation has been busy for more than some time
+// (typically 1.5 seconds).
+// 
+// When unmounting or ejecting a volume, the kernel might need to flush
+// pending data in its buffers to the volume stable storage, and this operation
+// can take a considerable amount of time. This signal may be emitted several
+// times as long as the unmount operation is outstanding, and then one
+// last time when the operation is completed, with @bytes_left set to zero.
+// 
+// Implementations of GMountOperation should handle this signal by
+// showing an UI notification, and then dismiss it, or show another notification
+// of completion, when @bytes_left reaches zero.
+// 
+// If the message contains a line break, the first line should be
+// presented as a heading. For example, it may be used as the
+// primary text in a #GtkMessageDialog.
+func (o *MountOperationInstance) ConnectShowUnmountProgress(fn func(MountOperation, string, int64, int64)) gobject.SignalHandle {
+	return o.Connect("show-unmount-progress", fn)
+}
 // NetworkAddressInstance is the instance type used by all types extending GNetworkAddress. It is used internally by the bindings. Users should use the interface [NetworkAddress] instead.
 type NetworkAddressInstance struct {
 	_ [0]func() // equal guard
@@ -55683,51 +55885,6 @@ func UnsafePropertyActionToGlibFull(c PropertyAction) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewPropertyAction wraps g_property_action_new
-// 
-// The function takes the following parameters:
-// 
-// 	- name string: the name of the action to create 
-// 	- object unsafe.Pointer: the object that has the property
-//   to wrap 
-// 	- propertyName string: the name of the property 
-// 
-// The function returns the following values:
-// 
-// 	- goret PropertyAction 
-//
-// Creates a #GAction corresponding to the value of property
-// @property_name on @object.
-// 
-// The property must be existent and readable and writable (and not
-// construct-only).
-// 
-// This function takes a reference on @object and doesn't release it
-// until the action is destroyed.
-func NewPropertyAction(name string, object unsafe.Pointer, propertyName string) PropertyAction {
-	var carg1 *C.gchar           // in, none, string, casted *C.gchar
-	var carg2 C.gpointer         // in, none, casted
-	var carg3 *C.gchar           // in, none, string, casted *C.gchar
-	var cret  *C.GPropertyAction // return, full, converted
-
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(name)))
-	defer C.free(unsafe.Pointer(carg1))
-	carg2 = C.gpointer(object)
-	carg3 = (*C.gchar)(unsafe.Pointer(C.CString(propertyName)))
-	defer C.free(unsafe.Pointer(carg3))
-
-	cret = C.g_property_action_new(carg1, carg2, carg3)
-	runtime.KeepAlive(name)
-	runtime.KeepAlive(object)
-	runtime.KeepAlive(propertyName)
-
-	var goret PropertyAction
-
-	goret = UnsafePropertyActionFromGlibFull(unsafe.Pointer(cret))
-
-	return goret
-}
-
 // ResolverInstance is the instance type used by all types extending GResolver. It is used internally by the bindings. Users should use the interface [Resolver] instead.
 type ResolverInstance struct {
 	_ [0]func() // equal guard
@@ -55897,6 +56054,11 @@ type Resolver interface {
 	//
 	// Set the timeout applied to all resolver lookups. See #GResolver:timeout.
 	SetTimeout(uint)
+	// ConnectReload connects the provided callback to the "reload" signal
+	//
+	// Emitted when the resolver notices that the system resolver
+	// configuration has changed.
+	ConnectReload(func(Resolver)) gobject.SignalHandle
 }
 
 func unsafeWrapResolver(base *gobject.ObjectInstance) *ResolverInstance {
@@ -56309,6 +56471,13 @@ func (resolver *ResolverInstance) SetTimeout(timeoutMs uint) {
 	runtime.KeepAlive(timeoutMs)
 }
 
+// ConnectReload connects the provided callback to the "reload" signal
+//
+// Emitted when the resolver notices that the system resolver
+// configuration has changed.
+func (o *ResolverInstance) ConnectReload(fn func(Resolver)) gobject.SignalHandle {
+	return o.Connect("reload", fn)
+}
 // SettingsInstance is the instance type used by all types extending GSettings. It is used internally by the bindings. Users should use the interface [Settings] instead.
 type SettingsInstance struct {
 	_ [0]func() // equal guard
@@ -56619,63 +56788,6 @@ type Settings interface {
 	// see g_settings_delay().  In the normal case settings are always
 	// applied immediately.
 	Apply()
-	// Bind wraps g_settings_bind
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- key string: the key to bind 
-	// 	- object unsafe.Pointer: a #GObject 
-	// 	- property string: the name of the property to bind 
-	// 	- flags SettingsBindFlags: flags for the binding 
-	//
-	// Create a binding between the @key in the @settings object
-	// and the property @property of @object.
-	// 
-	// The binding uses the default GIO mapping functions to map
-	// between the settings and property values. These functions
-	// handle booleans, numeric types and string types in a
-	// straightforward way. Use g_settings_bind_with_mapping() if
-	// you need a custom mapping, or map between types that are not
-	// supported by the default mapping functions.
-	// 
-	// Unless the @flags include %G_SETTINGS_BIND_NO_SENSITIVITY, this
-	// function also establishes a binding between the writability of
-	// @key and the "sensitive" property of @object (if @object has
-	// a boolean property by that name). See g_settings_bind_writable()
-	// for more details about writable bindings.
-	// 
-	// Note that the lifecycle of the binding is tied to @object,
-	// and that you can have only one binding per object property.
-	// If you bind the same property twice on the same object, the second
-	// binding overrides the first one.
-	Bind(string, unsafe.Pointer, string, SettingsBindFlags)
-	// BindWritable wraps g_settings_bind_writable
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- key string: the key to bind 
-	// 	- object unsafe.Pointer: a #GObject 
-	// 	- property string: the name of a boolean property to bind 
-	// 	- inverted bool: whether to 'invert' the value 
-	//
-	// Create a binding between the writability of @key in the
-	// @settings object and the property @property of @object.
-	// The property must be boolean; "sensitive" or "visible"
-	// properties of widgets are the most likely candidates.
-	// 
-	// Writable bindings are always uni-directional; changes of the
-	// writability of the setting will be propagated to the object
-	// property, not the other way.
-	// 
-	// When the @inverted argument is %TRUE, the binding inverts the
-	// value as it passes from the setting to the object, i.e. @property
-	// will be set to %TRUE if the key is not writable.
-	// 
-	// Note that the lifecycle of the binding is tied to @object,
-	// and that you can have only one binding per object property.
-	// If you bind the same property twice on the same object, the second
-	// binding overrides the first one.
-	BindWritable(string, unsafe.Pointer, string, bool)
 	// CreateAction wraps g_settings_create_action
 	// 
 	// The function takes the following parameters:
@@ -57175,6 +57287,68 @@ type Settings interface {
 	// It is a programmer error to give a @key that isn't specified as
 	// having a uint64 type in the schema for @settings.
 	SetUint64(string, uint64) bool
+	// ConnectChangeEvent connects the provided callback to the "change-event" signal
+	//
+	// The "change-event" signal is emitted once per change event that
+	// affects this settings object.  You should connect to this signal
+	// only if you are interested in viewing groups of changes before they
+	// are split out into multiple emissions of the "changed" signal.
+	// For most use cases it is more appropriate to use the "changed" signal.
+	// 
+	// In the event that the change event applies to one or more specified
+	// keys, @keys will be an array of #GQuark of length @n_keys.  In the
+	// event that the change event applies to the #GSettings object as a
+	// whole (ie: potentially every key has been changed) then @keys will
+	// be %NULL and @n_keys will be 0.
+	// 
+	// The default handler for this signal invokes the "changed" signal
+	// for each affected key.  If any other connected handler returns
+	// %TRUE then this default functionality will be suppressed.
+	ConnectChangeEvent(func(Settings, []byte, int) bool) gobject.SignalHandle
+	// ConnectChanged connects the provided callback to the "changed" signal
+	//
+	// The "changed" signal is emitted when a key has potentially changed.
+	// You should call one of the g_settings_get() calls to check the new
+	// value.
+	// 
+	// This signal supports detailed connections.  You can connect to the
+	// detailed signal "changed::x" in order to only receive callbacks
+	// when key "x" changes.
+	// 
+	// Note that @settings only emits this signal if you have read @key at
+	// least once while a signal handler was already connected for @key.
+	ConnectChanged(func(Settings, string)) gobject.SignalHandle
+	// ConnectWritableChangeEvent connects the provided callback to the "writable-change-event" signal
+	//
+	// The "writable-change-event" signal is emitted once per writability
+	// change event that affects this settings object.  You should connect
+	// to this signal if you are interested in viewing groups of changes
+	// before they are split out into multiple emissions of the
+	// "writable-changed" signal.  For most use cases it is more
+	// appropriate to use the "writable-changed" signal.
+	// 
+	// In the event that the writability change applies only to a single
+	// key, @key will be set to the #GQuark for that key.  In the event
+	// that the writability change affects the entire settings object,
+	// @key will be 0.
+	// 
+	// The default handler for this signal invokes the "writable-changed"
+	// and "changed" signals for each affected key.  This is done because
+	// changes in writability might also imply changes in value (if for
+	// example, a new mandatory setting is introduced).  If any other
+	// connected handler returns %TRUE then this default functionality
+	// will be suppressed.
+	ConnectWritableChangeEvent(func(Settings, uint) bool) gobject.SignalHandle
+	// ConnectWritableChanged connects the provided callback to the "writable-changed" signal
+	//
+	// The "writable-changed" signal is emitted when the writability of a
+	// key has potentially changed.  You should call
+	// g_settings_is_writable() in order to determine the new status.
+	// 
+	// This signal supports detailed connections.  You can connect to the
+	// detailed signal "writable-changed::x" in order to only receive
+	// callbacks when the writability of "x" changes.
+	ConnectWritableChanged(func(Settings, string)) gobject.SignalHandle
 }
 
 func unsafeWrapSettings(base *gobject.ObjectInstance) *SettingsInstance {
@@ -57360,31 +57534,6 @@ func SettingsSync() {
 	C.g_settings_sync()
 }
 
-// SettingsUnbind wraps g_settings_unbind
-// 
-// The function takes the following parameters:
-// 
-// 	- object unsafe.Pointer: the object 
-// 	- property string: the property whose binding is removed 
-//
-// Removes an existing binding for @property on @object.
-// 
-// Note that bindings are automatically removed when the
-// object is finalized, so it is rarely necessary to call this
-// function.
-func SettingsUnbind(object unsafe.Pointer, property string) {
-	var carg1 C.gpointer // in, none, casted
-	var carg2 *C.gchar   // in, none, string, casted *C.gchar
-
-	carg1 = C.gpointer(object)
-	carg2 = (*C.gchar)(unsafe.Pointer(C.CString(property)))
-	defer C.free(unsafe.Pointer(carg2))
-
-	C.g_settings_unbind(carg1, carg2)
-	runtime.KeepAlive(object)
-	runtime.KeepAlive(property)
-}
-
 // Apply wraps g_settings_apply
 //
 // Applies any changes that have been made to the settings.  This
@@ -57398,109 +57547,6 @@ func (settings *SettingsInstance) Apply() {
 
 	C.g_settings_apply(carg0)
 	runtime.KeepAlive(settings)
-}
-
-// Bind wraps g_settings_bind
-// 
-// The function takes the following parameters:
-// 
-// 	- key string: the key to bind 
-// 	- object unsafe.Pointer: a #GObject 
-// 	- property string: the name of the property to bind 
-// 	- flags SettingsBindFlags: flags for the binding 
-//
-// Create a binding between the @key in the @settings object
-// and the property @property of @object.
-// 
-// The binding uses the default GIO mapping functions to map
-// between the settings and property values. These functions
-// handle booleans, numeric types and string types in a
-// straightforward way. Use g_settings_bind_with_mapping() if
-// you need a custom mapping, or map between types that are not
-// supported by the default mapping functions.
-// 
-// Unless the @flags include %G_SETTINGS_BIND_NO_SENSITIVITY, this
-// function also establishes a binding between the writability of
-// @key and the "sensitive" property of @object (if @object has
-// a boolean property by that name). See g_settings_bind_writable()
-// for more details about writable bindings.
-// 
-// Note that the lifecycle of the binding is tied to @object,
-// and that you can have only one binding per object property.
-// If you bind the same property twice on the same object, the second
-// binding overrides the first one.
-func (settings *SettingsInstance) Bind(key string, object unsafe.Pointer, property string, flags SettingsBindFlags) {
-	var carg0 *C.GSettings         // in, none, converted
-	var carg1 *C.gchar             // in, none, string, casted *C.gchar
-	var carg2 C.gpointer           // in, none, casted
-	var carg3 *C.gchar             // in, none, string, casted *C.gchar
-	var carg4 C.GSettingsBindFlags // in, none, casted
-
-	carg0 = (*C.GSettings)(UnsafeSettingsToGlibNone(settings))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(key)))
-	defer C.free(unsafe.Pointer(carg1))
-	carg2 = C.gpointer(object)
-	carg3 = (*C.gchar)(unsafe.Pointer(C.CString(property)))
-	defer C.free(unsafe.Pointer(carg3))
-	carg4 = C.GSettingsBindFlags(flags)
-
-	C.g_settings_bind(carg0, carg1, carg2, carg3, carg4)
-	runtime.KeepAlive(settings)
-	runtime.KeepAlive(key)
-	runtime.KeepAlive(object)
-	runtime.KeepAlive(property)
-	runtime.KeepAlive(flags)
-}
-
-// BindWritable wraps g_settings_bind_writable
-// 
-// The function takes the following parameters:
-// 
-// 	- key string: the key to bind 
-// 	- object unsafe.Pointer: a #GObject 
-// 	- property string: the name of a boolean property to bind 
-// 	- inverted bool: whether to 'invert' the value 
-//
-// Create a binding between the writability of @key in the
-// @settings object and the property @property of @object.
-// The property must be boolean; "sensitive" or "visible"
-// properties of widgets are the most likely candidates.
-// 
-// Writable bindings are always uni-directional; changes of the
-// writability of the setting will be propagated to the object
-// property, not the other way.
-// 
-// When the @inverted argument is %TRUE, the binding inverts the
-// value as it passes from the setting to the object, i.e. @property
-// will be set to %TRUE if the key is not writable.
-// 
-// Note that the lifecycle of the binding is tied to @object,
-// and that you can have only one binding per object property.
-// If you bind the same property twice on the same object, the second
-// binding overrides the first one.
-func (settings *SettingsInstance) BindWritable(key string, object unsafe.Pointer, property string, inverted bool) {
-	var carg0 *C.GSettings // in, none, converted
-	var carg1 *C.gchar     // in, none, string, casted *C.gchar
-	var carg2 C.gpointer   // in, none, casted
-	var carg3 *C.gchar     // in, none, string, casted *C.gchar
-	var carg4 C.gboolean   // in
-
-	carg0 = (*C.GSettings)(UnsafeSettingsToGlibNone(settings))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(key)))
-	defer C.free(unsafe.Pointer(carg1))
-	carg2 = C.gpointer(object)
-	carg3 = (*C.gchar)(unsafe.Pointer(C.CString(property)))
-	defer C.free(unsafe.Pointer(carg3))
-	if inverted {
-		carg4 = C.TRUE
-	}
-
-	C.g_settings_bind_writable(carg0, carg1, carg2, carg3, carg4)
-	runtime.KeepAlive(settings)
-	runtime.KeepAlive(key)
-	runtime.KeepAlive(object)
-	runtime.KeepAlive(property)
-	runtime.KeepAlive(inverted)
 }
 
 // CreateAction wraps g_settings_create_action
@@ -58580,6 +58626,76 @@ func (settings *SettingsInstance) SetUint64(key string, value uint64) bool {
 	return goret
 }
 
+// ConnectChangeEvent connects the provided callback to the "change-event" signal
+//
+// The "change-event" signal is emitted once per change event that
+// affects this settings object.  You should connect to this signal
+// only if you are interested in viewing groups of changes before they
+// are split out into multiple emissions of the "changed" signal.
+// For most use cases it is more appropriate to use the "changed" signal.
+// 
+// In the event that the change event applies to one or more specified
+// keys, @keys will be an array of #GQuark of length @n_keys.  In the
+// event that the change event applies to the #GSettings object as a
+// whole (ie: potentially every key has been changed) then @keys will
+// be %NULL and @n_keys will be 0.
+// 
+// The default handler for this signal invokes the "changed" signal
+// for each affected key.  If any other connected handler returns
+// %TRUE then this default functionality will be suppressed.
+func (o *SettingsInstance) ConnectChangeEvent(fn func(Settings, []byte, int) bool) gobject.SignalHandle {
+	return o.Connect("change-event", fn)
+}
+// ConnectChanged connects the provided callback to the "changed" signal
+//
+// The "changed" signal is emitted when a key has potentially changed.
+// You should call one of the g_settings_get() calls to check the new
+// value.
+// 
+// This signal supports detailed connections.  You can connect to the
+// detailed signal "changed::x" in order to only receive callbacks
+// when key "x" changes.
+// 
+// Note that @settings only emits this signal if you have read @key at
+// least once while a signal handler was already connected for @key.
+func (o *SettingsInstance) ConnectChanged(fn func(Settings, string)) gobject.SignalHandle {
+	return o.Connect("changed", fn)
+}
+// ConnectWritableChangeEvent connects the provided callback to the "writable-change-event" signal
+//
+// The "writable-change-event" signal is emitted once per writability
+// change event that affects this settings object.  You should connect
+// to this signal if you are interested in viewing groups of changes
+// before they are split out into multiple emissions of the
+// "writable-changed" signal.  For most use cases it is more
+// appropriate to use the "writable-changed" signal.
+// 
+// In the event that the writability change applies only to a single
+// key, @key will be set to the #GQuark for that key.  In the event
+// that the writability change affects the entire settings object,
+// @key will be 0.
+// 
+// The default handler for this signal invokes the "writable-changed"
+// and "changed" signals for each affected key.  This is done because
+// changes in writability might also imply changes in value (if for
+// example, a new mandatory setting is introduced).  If any other
+// connected handler returns %TRUE then this default functionality
+// will be suppressed.
+func (o *SettingsInstance) ConnectWritableChangeEvent(fn func(Settings, uint) bool) gobject.SignalHandle {
+	return o.Connect("writable-change-event", fn)
+}
+// ConnectWritableChanged connects the provided callback to the "writable-changed" signal
+//
+// The "writable-changed" signal is emitted when the writability of a
+// key has potentially changed.  You should call
+// g_settings_is_writable() in order to determine the new status.
+// 
+// This signal supports detailed connections.  You can connect to the
+// detailed signal "writable-changed::x" in order to only receive
+// callbacks when the writability of "x" changes.
+func (o *SettingsInstance) ConnectWritableChanged(fn func(Settings, string)) gobject.SignalHandle {
+	return o.Connect("writable-changed", fn)
+}
 // SimpleActionInstance is the instance type used by all types extending GSimpleAction. It is used internally by the bindings. Users should use the interface [SimpleAction] instead.
 type SimpleActionInstance struct {
 	_ [0]func() // equal guard
@@ -58729,19 +58845,6 @@ type SimpleActionGroup interface {
 	gobject.Object
 	upcastToGSimpleActionGroup() *SimpleActionGroupInstance
 
-	// AddEntries wraps g_simple_action_group_add_entries
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- entries []ActionEntry: a pointer to the first item in
-	//           an array of #GActionEntry structs 
-	// 	- userData unsafe.Pointer (nullable): the user data for signal connections 
-	//
-	// A convenience function for creating multiple #GSimpleAction instances
-	// and adding them to the action group.
-	//
-	// Deprecated: (since 2.38.0) Use g_action_map_add_action_entries()
-	AddEntries([]ActionEntry, unsafe.Pointer)
 	// Insert wraps g_simple_action_group_insert
 	// 
 	// The function takes the following parameters:
@@ -58837,39 +58940,6 @@ func NewSimpleActionGroup() SimpleActionGroup {
 	goret = UnsafeSimpleActionGroupFromGlibFull(unsafe.Pointer(cret))
 
 	return goret
-}
-
-// AddEntries wraps g_simple_action_group_add_entries
-// 
-// The function takes the following parameters:
-// 
-// 	- entries []ActionEntry: a pointer to the first item in
-//           an array of #GActionEntry structs 
-// 	- userData unsafe.Pointer (nullable): the user data for signal connections 
-//
-// A convenience function for creating multiple #GSimpleAction instances
-// and adding them to the action group.
-//
-// Deprecated: (since 2.38.0) Use g_action_map_add_action_entries()
-func (simple *SimpleActionGroupInstance) AddEntries(entries []ActionEntry, userData unsafe.Pointer) {
-	var carg0 *C.GSimpleActionGroup // in, none, converted
-	var carg1 *C.GActionEntry       // in, transfer: none, C Pointers: 1, Name: array[ActionEntry], array (inner: *typesystem.Record, length-by: carg2)
-	var carg2 C.gint                // implicit
-	var carg3 C.gpointer            // in, none, casted, nullable
-
-	carg0 = (*C.GSimpleActionGroup)(UnsafeSimpleActionGroupToGlibNone(simple))
-	_ = entries
-	_ = carg1
-	_ = carg2
-	panic("unimplemented conversion of []ActionEntry (const GActionEntry*)")
-	if userData != nil {
-		carg3 = C.gpointer(userData)
-	}
-
-	C.g_simple_action_group_add_entries(carg0, carg1, carg2, carg3)
-	runtime.KeepAlive(simple)
-	runtime.KeepAlive(entries)
-	runtime.KeepAlive(userData)
 }
 
 // Insert wraps g_simple_action_group_insert
@@ -59299,60 +59369,6 @@ func UnsafeSimpleAsyncResultToGlibFull(c SimpleAsyncResult) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// NewSimpleAsyncResult wraps g_simple_async_result_new
-// 
-// The function takes the following parameters:
-// 
-// 	- sourceObject gobject.Object (nullable): a #GObject, or %NULL. 
-// 	- callback AsyncReadyCallback (nullable): a #GAsyncReadyCallback. 
-// 	- sourceTag unsafe.Pointer (nullable): the asynchronous function. 
-// 
-// The function returns the following values:
-// 
-// 	- goret SimpleAsyncResult 
-//
-// Creates a #GSimpleAsyncResult.
-// 
-// The common convention is to create the #GSimpleAsyncResult in the
-// function that starts the asynchronous operation and use that same
-// function as the @source_tag.
-// 
-// If your operation supports cancellation with #GCancellable (which it
-// probably should) then you should provide the user's cancellable to
-// g_simple_async_result_set_check_cancellable() immediately after
-// this function returns.
-//
-// Deprecated: (since 2.46.0) Use g_task_new() instead.
-func NewSimpleAsyncResult(sourceObject gobject.Object, callback AsyncReadyCallback, sourceTag unsafe.Pointer) SimpleAsyncResult {
-	var carg1 *C.GObject            // in, none, converted, nullable
-	var carg2 C.GAsyncReadyCallback // callback, scope: async, closure: carg3, nullable
-	var carg3 C.gpointer            // implicit
-	var carg4 C.gpointer            // in, none, casted, nullable
-	var cret  *C.GSimpleAsyncResult // return, full, converted
-
-	if sourceObject != nil {
-		carg1 = (*C.GObject)(gobject.UnsafeObjectToGlibNone(sourceObject))
-	}
-	if callback != nil {
-		carg2 = (*[0]byte)(C._gotk4_gio2_AsyncReadyCallback)
-		carg3 = C.gpointer(userdata.RegisterOnce(callback))
-	}
-	if sourceTag != nil {
-		carg4 = C.gpointer(sourceTag)
-	}
-
-	cret = C.g_simple_async_result_new(carg1, carg2, carg3, carg4)
-	runtime.KeepAlive(sourceObject)
-	runtime.KeepAlive(callback)
-	runtime.KeepAlive(sourceTag)
-
-	var goret SimpleAsyncResult
-
-	goret = UnsafeSimpleAsyncResultFromGlibFull(unsafe.Pointer(cret))
-
-	return goret
-}
-
 // NewSimpleAsyncResultFromError wraps g_simple_async_result_new_from_error
 // 
 // The function takes the following parameters:
@@ -59392,60 +59408,6 @@ func NewSimpleAsyncResultFromError(sourceObject gobject.Object, callback AsyncRe
 	var goret SimpleAsyncResult
 
 	goret = UnsafeSimpleAsyncResultFromGlibFull(unsafe.Pointer(cret))
-
-	return goret
-}
-
-// SimpleAsyncResultIsValid wraps g_simple_async_result_is_valid
-// 
-// The function takes the following parameters:
-// 
-// 	- result AsyncResult: the #GAsyncResult passed to the _finish function. 
-// 	- source gobject.Object (nullable): the #GObject passed to the _finish function. 
-// 	- sourceTag unsafe.Pointer (nullable): the asynchronous function. 
-// 
-// The function returns the following values:
-// 
-// 	- goret bool 
-//
-// Ensures that the data passed to the _finish function of an async
-// operation is consistent.  Three checks are performed.
-// 
-// First, @result is checked to ensure that it is really a
-// #GSimpleAsyncResult.  Second, @source is checked to ensure that it
-// matches the source object of @result.  Third, @source_tag is
-// checked to ensure that it is equal to the @source_tag argument given
-// to g_simple_async_result_new() (which, by convention, is a pointer
-// to the _async function corresponding to the _finish function from
-// which this function is called).  (Alternatively, if either
-// @source_tag or @result's source tag is %NULL, then the source tag
-// check is skipped.)
-//
-// Deprecated: (since 2.46.0) Use #GTask and g_task_is_valid() instead.
-func SimpleAsyncResultIsValid(result AsyncResult, source gobject.Object, sourceTag unsafe.Pointer) bool {
-	var carg1 *C.GAsyncResult // in, none, converted
-	var carg2 *C.GObject      // in, none, converted, nullable
-	var carg3 C.gpointer      // in, none, casted, nullable
-	var cret  C.gboolean      // return
-
-	carg1 = (*C.GAsyncResult)(UnsafeAsyncResultToGlibNone(result))
-	if source != nil {
-		carg2 = (*C.GObject)(gobject.UnsafeObjectToGlibNone(source))
-	}
-	if sourceTag != nil {
-		carg3 = C.gpointer(sourceTag)
-	}
-
-	cret = C.g_simple_async_result_is_valid(carg1, carg2, carg3)
-	runtime.KeepAlive(result)
-	runtime.KeepAlive(source)
-	runtime.KeepAlive(sourceTag)
-
-	var goret bool
-
-	if cret != 0 {
-		goret = true
-	}
 
 	return goret
 }
@@ -60382,7 +60344,7 @@ type Socket interface {
 	// 
 	// See also g_socket_condition_timed_wait().
 	ConditionWait(context.Context, glib.IOCondition) (bool, error)
-	// Connect wraps g_socket_connect
+	// ConnectSocket wraps g_socket_connect
 	// 
 	// The function takes the following parameters:
 	// 
@@ -60410,7 +60372,7 @@ type Socket interface {
 	// and the user can be notified of the connection finishing by waiting
 	// for the G_IO_OUT condition. The result of the connection must then be
 	// checked with g_socket_check_connect_result().
-	Connect(context.Context, SocketAddress) (bool, error)
+	ConnectSocket(context.Context, SocketAddress) (bool, error)
 	// ConnectionFactoryCreateConnection wraps g_socket_connection_factory_create_connection
 	// The function returns the following values:
 	// 
@@ -61827,7 +61789,7 @@ func (socket *SocketInstance) ConditionWait(cancellable context.Context, conditi
 	return goret, _goerr
 }
 
-// Connect wraps g_socket_connect
+// ConnectSocket wraps g_socket_connect
 // 
 // The function takes the following parameters:
 // 
@@ -61855,7 +61817,7 @@ func (socket *SocketInstance) ConditionWait(cancellable context.Context, conditi
 // and the user can be notified of the connection finishing by waiting
 // for the G_IO_OUT condition. The result of the connection must then be
 // checked with g_socket_check_connect_result().
-func (socket *SocketInstance) Connect(cancellable context.Context, address SocketAddress) (bool, error) {
+func (socket *SocketInstance) ConnectSocket(cancellable context.Context, address SocketAddress) (bool, error) {
 	var carg0 *C.GSocket        // in, none, converted
 	var carg2 *C.GCancellable   // in, none, converted, nullable
 	var carg1 *C.GSocketAddress // in, none, converted
@@ -63967,27 +63929,6 @@ type SocketAddress interface {
 	// You can use this to allocate memory to pass to
 	// g_socket_address_to_native().
 	GetNativeSize() int
-	// ToNative wraps g_socket_address_to_native
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- dest unsafe.Pointer (nullable): a pointer to a memory location that will contain the native
-	// struct sockaddr 
-	// 	- destlen uint: the size of @dest. Must be at least as large as
-	//     g_socket_address_get_native_size() 
-	// 
-	// The function returns the following values:
-	// 
-	// 	- goret bool 
-	// 	- _goerr error (nullable): an error 
-	//
-	// Converts a #GSocketAddress to a native struct sockaddr, which can
-	// be passed to low-level functions like connect() or bind().
-	// 
-	// If not enough space is available, a %G_IO_ERROR_NO_SPACE error
-	// is returned. If the address type is not known on the system
-	// then a %G_IO_ERROR_NOT_SUPPORTED error is returned.
-	ToNative(unsafe.Pointer, uint) (bool, error)
 }
 
 func unsafeWrapSocketAddress(base *gobject.ObjectInstance) *SocketAddressInstance {
@@ -64022,38 +63963,6 @@ func UnsafeSocketAddressToGlibNone(c SocketAddress) unsafe.Pointer {
 // UnsafeSocketAddressToGlibFull is used to convert the instance to it's C value GSocketAddress, while removeing the finalizer. This is used by the bindings internally.
 func UnsafeSocketAddressToGlibFull(c SocketAddress) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
-}
-
-// NewSocketAddressFromNative wraps g_socket_address_new_from_native
-// 
-// The function takes the following parameters:
-// 
-// 	- native unsafe.Pointer: a pointer to a struct sockaddr 
-// 	- len uint: the size of the memory location pointed to by @native 
-// 
-// The function returns the following values:
-// 
-// 	- goret SocketAddress 
-//
-// Creates a #GSocketAddress subclass corresponding to the native
-// struct sockaddr @native.
-func NewSocketAddressFromNative(native unsafe.Pointer, len uint) SocketAddress {
-	var carg1 C.gpointer        // in, none, casted
-	var carg2 C.gsize           // in, none, casted
-	var cret  *C.GSocketAddress // return, full, converted
-
-	carg1 = C.gpointer(native)
-	carg2 = C.gsize(len)
-
-	cret = C.g_socket_address_new_from_native(carg1, carg2)
-	runtime.KeepAlive(native)
-	runtime.KeepAlive(len)
-
-	var goret SocketAddress
-
-	goret = UnsafeSocketAddressFromGlibFull(unsafe.Pointer(cret))
-
-	return goret
 }
 
 // GetFamily wraps g_socket_address_get_family
@@ -64100,57 +64009,6 @@ func (address *SocketAddressInstance) GetNativeSize() int {
 	goret = int(cret)
 
 	return goret
-}
-
-// ToNative wraps g_socket_address_to_native
-// 
-// The function takes the following parameters:
-// 
-// 	- dest unsafe.Pointer (nullable): a pointer to a memory location that will contain the native
-// struct sockaddr 
-// 	- destlen uint: the size of @dest. Must be at least as large as
-//     g_socket_address_get_native_size() 
-// 
-// The function returns the following values:
-// 
-// 	- goret bool 
-// 	- _goerr error (nullable): an error 
-//
-// Converts a #GSocketAddress to a native struct sockaddr, which can
-// be passed to low-level functions like connect() or bind().
-// 
-// If not enough space is available, a %G_IO_ERROR_NO_SPACE error
-// is returned. If the address type is not known on the system
-// then a %G_IO_ERROR_NOT_SUPPORTED error is returned.
-func (address *SocketAddressInstance) ToNative(dest unsafe.Pointer, destlen uint) (bool, error) {
-	var carg0 *C.GSocketAddress // in, none, converted
-	var carg1 C.gpointer        // in, none, casted, nullable
-	var carg2 C.gsize           // in, none, casted
-	var cret  C.gboolean        // return
-	var _cerr *C.GError         // out, full, converted, nullable
-
-	carg0 = (*C.GSocketAddress)(UnsafeSocketAddressToGlibNone(address))
-	if dest != nil {
-		carg1 = C.gpointer(dest)
-	}
-	carg2 = C.gsize(destlen)
-
-	cret = C.g_socket_address_to_native(carg0, carg1, carg2, &_cerr)
-	runtime.KeepAlive(address)
-	runtime.KeepAlive(dest)
-	runtime.KeepAlive(destlen)
-
-	var goret  bool
-	var _goerr error
-
-	if cret != 0 {
-		goret = true
-	}
-	if _cerr != nil {
-		_goerr = glib.UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
-	}
-
-	return goret, _goerr
 }
 
 // SocketAddressEnumeratorInstance is the instance type used by all types extending GSocketAddressEnumerator. It is used internally by the bindings. Users should use the interface [SocketAddressEnumerator] instead.
@@ -64449,7 +64307,7 @@ type SocketClient interface {
 	// will be skipped. This is required to let the application do the proxy
 	// specific handshake.
 	AddApplicationProxy(string)
-	// Connect wraps g_socket_client_connect
+	// ConnectSocketClient wraps g_socket_client_connect
 	// 
 	// The function takes the following parameters:
 	// 
@@ -64479,7 +64337,7 @@ type SocketClient interface {
 	// 
 	// If a local address is specified with g_socket_client_set_local_address() the
 	// socket will be bound to this address before connecting.
-	Connect(context.Context, SocketConnectable) (SocketConnection, error)
+	ConnectSocketClient(context.Context, SocketConnectable) (SocketConnection, error)
 	// ConnectAsync wraps g_socket_client_connect_async
 	// 
 	// The function takes the following parameters:
@@ -64923,6 +64781,58 @@ type SocketClient interface {
 	//
 	// Deprecated: (since 2.72.0) Do not attempt to ignore validation errors.
 	SetTLSValidationFlags(TLSCertificateFlags)
+	// ConnectEvent connects the provided callback to the "event" signal
+	//
+	// Emitted when @client's activity on @connectable changes state.
+	// Among other things, this can be used to provide progress
+	// information about a network connection in the UI. The meanings of
+	// the different @event values are as follows:
+	// 
+	// - %G_SOCKET_CLIENT_RESOLVING: @client is about to look up @connectable
+	//   in DNS. @connection will be %NULL.
+	// 
+	// - %G_SOCKET_CLIENT_RESOLVED:  @client has successfully resolved
+	//   @connectable in DNS. @connection will be %NULL.
+	// 
+	// - %G_SOCKET_CLIENT_CONNECTING: @client is about to make a connection
+	//   to a remote host; either a proxy server or the destination server
+	//   itself. @connection is the #GSocketConnection, which is not yet
+	//   connected.  Since GLib 2.40, you can access the remote
+	//   address via g_socket_connection_get_remote_address().
+	// 
+	// - %G_SOCKET_CLIENT_CONNECTED: @client has successfully connected
+	//   to a remote host. @connection is the connected #GSocketConnection.
+	// 
+	// - %G_SOCKET_CLIENT_PROXY_NEGOTIATING: @client is about to negotiate
+	//   with a proxy to get it to connect to @connectable. @connection is
+	//   the #GSocketConnection to the proxy server.
+	// 
+	// - %G_SOCKET_CLIENT_PROXY_NEGOTIATED: @client has negotiated a
+	//   connection to @connectable through a proxy server. @connection is
+	//   the stream returned from g_proxy_connect(), which may or may not
+	//   be a #GSocketConnection.
+	// 
+	// - %G_SOCKET_CLIENT_TLS_HANDSHAKING: @client is about to begin a TLS
+	//   handshake. @connection is a #GTlsClientConnection.
+	// 
+	// - %G_SOCKET_CLIENT_TLS_HANDSHAKED: @client has successfully completed
+	//   the TLS handshake. @connection is a #GTlsClientConnection.
+	// 
+	// - %G_SOCKET_CLIENT_COMPLETE: @client has either successfully connected
+	//   to @connectable (in which case @connection is the #GSocketConnection
+	//   that it will be returning to the caller) or has failed (in which
+	//   case @connection is %NULL and the client is about to return an error).
+	// 
+	// Each event except %G_SOCKET_CLIENT_COMPLETE may be emitted
+	// multiple times (or not at all) for a given connectable (in
+	// particular, if @client ends up attempting to connect to more than
+	// one address). However, if @client emits the #GSocketClient::event
+	// signal at all for a given connectable, then it will always emit
+	// it with %G_SOCKET_CLIENT_COMPLETE when it is done.
+	// 
+	// Note that there may be additional #GSocketClientEvent values in
+	// the future; unrecognized @event values should be ignored.
+	ConnectEvent(func(SocketClient, SocketClientEvent, SocketConnectable, IOStream)) gobject.SignalHandle
 }
 
 func unsafeWrapSocketClient(base *gobject.ObjectInstance) *SocketClientInstance {
@@ -65015,7 +64925,7 @@ func (client *SocketClientInstance) AddApplicationProxy(protocol string) {
 	runtime.KeepAlive(protocol)
 }
 
-// Connect wraps g_socket_client_connect
+// ConnectSocketClient wraps g_socket_client_connect
 // 
 // The function takes the following parameters:
 // 
@@ -65045,7 +64955,7 @@ func (client *SocketClientInstance) AddApplicationProxy(protocol string) {
 // 
 // If a local address is specified with g_socket_client_set_local_address() the
 // socket will be bound to this address before connecting.
-func (client *SocketClientInstance) Connect(cancellable context.Context, connectable SocketConnectable) (SocketConnection, error) {
+func (client *SocketClientInstance) ConnectSocketClient(cancellable context.Context, connectable SocketConnectable) (SocketConnection, error) {
 	var carg0 *C.GSocketClient      // in, none, converted
 	var carg2 *C.GCancellable       // in, none, converted, nullable
 	var carg1 *C.GSocketConnectable // in, none, converted
@@ -66057,6 +65967,60 @@ func (client *SocketClientInstance) SetTLSValidationFlags(flags TLSCertificateFl
 	runtime.KeepAlive(flags)
 }
 
+// ConnectEvent connects the provided callback to the "event" signal
+//
+// Emitted when @client's activity on @connectable changes state.
+// Among other things, this can be used to provide progress
+// information about a network connection in the UI. The meanings of
+// the different @event values are as follows:
+// 
+// - %G_SOCKET_CLIENT_RESOLVING: @client is about to look up @connectable
+//   in DNS. @connection will be %NULL.
+// 
+// - %G_SOCKET_CLIENT_RESOLVED:  @client has successfully resolved
+//   @connectable in DNS. @connection will be %NULL.
+// 
+// - %G_SOCKET_CLIENT_CONNECTING: @client is about to make a connection
+//   to a remote host; either a proxy server or the destination server
+//   itself. @connection is the #GSocketConnection, which is not yet
+//   connected.  Since GLib 2.40, you can access the remote
+//   address via g_socket_connection_get_remote_address().
+// 
+// - %G_SOCKET_CLIENT_CONNECTED: @client has successfully connected
+//   to a remote host. @connection is the connected #GSocketConnection.
+// 
+// - %G_SOCKET_CLIENT_PROXY_NEGOTIATING: @client is about to negotiate
+//   with a proxy to get it to connect to @connectable. @connection is
+//   the #GSocketConnection to the proxy server.
+// 
+// - %G_SOCKET_CLIENT_PROXY_NEGOTIATED: @client has negotiated a
+//   connection to @connectable through a proxy server. @connection is
+//   the stream returned from g_proxy_connect(), which may or may not
+//   be a #GSocketConnection.
+// 
+// - %G_SOCKET_CLIENT_TLS_HANDSHAKING: @client is about to begin a TLS
+//   handshake. @connection is a #GTlsClientConnection.
+// 
+// - %G_SOCKET_CLIENT_TLS_HANDSHAKED: @client has successfully completed
+//   the TLS handshake. @connection is a #GTlsClientConnection.
+// 
+// - %G_SOCKET_CLIENT_COMPLETE: @client has either successfully connected
+//   to @connectable (in which case @connection is the #GSocketConnection
+//   that it will be returning to the caller) or has failed (in which
+//   case @connection is %NULL and the client is about to return an error).
+// 
+// Each event except %G_SOCKET_CLIENT_COMPLETE may be emitted
+// multiple times (or not at all) for a given connectable (in
+// particular, if @client ends up attempting to connect to more than
+// one address). However, if @client emits the #GSocketClient::event
+// signal at all for a given connectable, then it will always emit
+// it with %G_SOCKET_CLIENT_COMPLETE when it is done.
+// 
+// Note that there may be additional #GSocketClientEvent values in
+// the future; unrecognized @event values should be ignored.
+func (o *SocketClientInstance) ConnectEvent(fn func(SocketClient, SocketClientEvent, SocketConnectable, IOStream)) gobject.SignalHandle {
+	return o.Connect("event", fn)
+}
 // SocketConnectionInstance is the instance type used by all types extending GSocketConnection. It is used internally by the bindings. Users should use the interface [SocketConnection] instead.
 type SocketConnectionInstance struct {
 	_ [0]func() // equal guard
@@ -66087,7 +66051,7 @@ type SocketConnection interface {
 	IOStream
 	upcastToGSocketConnection() *SocketConnectionInstance
 
-	// Connect wraps g_socket_connection_connect
+	// ConnectSocketConnection wraps g_socket_connection_connect
 	// 
 	// The function takes the following parameters:
 	// 
@@ -66100,7 +66064,7 @@ type SocketConnection interface {
 	// 	- _goerr error (nullable): an error 
 	//
 	// Connect @connection to the specified remote address.
-	Connect(context.Context, SocketAddress) (bool, error)
+	ConnectSocketConnection(context.Context, SocketAddress) (bool, error)
 	// ConnectAsync wraps g_socket_connection_connect_async
 	// 
 	// The function takes the following parameters:
@@ -66280,7 +66244,7 @@ func SocketConnectionFactoryRegisterType(gType gobject.Type, family SocketFamily
 	runtime.KeepAlive(protocol)
 }
 
-// Connect wraps g_socket_connection_connect
+// ConnectSocketConnection wraps g_socket_connection_connect
 // 
 // The function takes the following parameters:
 // 
@@ -66293,7 +66257,7 @@ func SocketConnectionFactoryRegisterType(gType gobject.Type, family SocketFamily
 // 	- _goerr error (nullable): an error 
 //
 // Connect @connection to the specified remote address.
-func (connection *SocketConnectionInstance) Connect(cancellable context.Context, address SocketAddress) (bool, error) {
+func (connection *SocketConnectionInstance) ConnectSocketConnection(cancellable context.Context, address SocketAddress) (bool, error) {
 	var carg0 *C.GSocketConnection // in, none, converted
 	var carg2 *C.GCancellable      // in, none, converted, nullable
 	var carg1 *C.GSocketAddress    // in, none, converted
@@ -66574,19 +66538,6 @@ type SocketControlMessage interface {
 	// Returns the space required for the control message, not including
 	// headers or alignment.
 	GetSize() uint
-	// Serialize wraps g_socket_control_message_serialize
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- data unsafe.Pointer: A buffer to write data to 
-	//
-	// Converts the data in the message to bytes placed in the
-	// message.
-	// 
-	// @data is guaranteed to have enough space to fit the size
-	// returned by g_socket_control_message_get_size() on this
-	// object.
-	Serialize(unsafe.Pointer)
 }
 
 func unsafeWrapSocketControlMessage(base *gobject.ObjectInstance) *SocketControlMessageInstance {
@@ -66690,30 +66641,6 @@ func (message *SocketControlMessageInstance) GetSize() uint {
 	goret = uint(cret)
 
 	return goret
-}
-
-// Serialize wraps g_socket_control_message_serialize
-// 
-// The function takes the following parameters:
-// 
-// 	- data unsafe.Pointer: A buffer to write data to 
-//
-// Converts the data in the message to bytes placed in the
-// message.
-// 
-// @data is guaranteed to have enough space to fit the size
-// returned by g_socket_control_message_get_size() on this
-// object.
-func (message *SocketControlMessageInstance) Serialize(data unsafe.Pointer) {
-	var carg0 *C.GSocketControlMessage // in, none, converted
-	var carg1 C.gpointer               // in, none, casted
-
-	carg0 = (*C.GSocketControlMessage)(UnsafeSocketControlMessageToGlibNone(message))
-	carg1 = C.gpointer(data)
-
-	C.g_socket_control_message_serialize(carg0, carg1)
-	runtime.KeepAlive(message)
-	runtime.KeepAlive(data)
 }
 
 // SocketListenerInstance is the instance type used by all types extending GSocketListener. It is used internally by the bindings. Users should use the interface [SocketListener] instead.
@@ -66978,6 +66905,13 @@ type SocketListener interface {
 	// 
 	// See g_socket_set_listen_backlog() for details
 	SetBacklog(int)
+	// ConnectEvent connects the provided callback to the "event" signal
+	//
+	// Emitted when @listener's activity on @socket changes state.
+	// Note that when @listener is used to listen on both IPv4 and
+	// IPv6, a separate set of signals will be emitted for each, and
+	// the order they happen in is undefined.
+	ConnectEvent(func(SocketListener, SocketListenerEvent, Socket)) gobject.SignalHandle
 }
 
 func unsafeWrapSocketListener(base *gobject.ObjectInstance) *SocketListenerInstance {
@@ -67566,6 +67500,15 @@ func (listener *SocketListenerInstance) SetBacklog(listenBacklog int) {
 	runtime.KeepAlive(listenBacklog)
 }
 
+// ConnectEvent connects the provided callback to the "event" signal
+//
+// Emitted when @listener's activity on @socket changes state.
+// Note that when @listener is used to listen on both IPv4 and
+// IPv6, a separate set of signals will be emitted for each, and
+// the order they happen in is undefined.
+func (o *SocketListenerInstance) ConnectEvent(fn func(SocketListener, SocketListenerEvent, Socket)) gobject.SignalHandle {
+	return o.Connect("event", fn)
+}
 // SocketServiceInstance is the instance type used by all types extending GSocketService. It is used internally by the bindings. Users should use the interface [SocketService] instead.
 type SocketServiceInstance struct {
 	_ [0]func() // equal guard
@@ -67644,6 +67587,16 @@ type SocketService interface {
 	// the socket service will start accepting connections immediately
 	// when a new socket is added.
 	Stop()
+	// ConnectIncoming connects the provided callback to the "incoming" signal
+	//
+	// The ::incoming signal is emitted when a new incoming connection
+	// to @service needs to be handled. The handler must initiate the
+	// handling of @connection, but may not block; in essence,
+	// asynchronous operations must be used.
+	// 
+	// @connection will be unreffed once the signal handler returns,
+	// so you need to ref it yourself if you are planning to use it.
+	ConnectIncoming(func(SocketService, SocketConnection, gobject.Object) bool) gobject.SignalHandle
 }
 
 func unsafeWrapSocketService(base *gobject.ObjectInstance) *SocketServiceInstance {
@@ -67777,6 +67730,18 @@ func (service *SocketServiceInstance) Stop() {
 	runtime.KeepAlive(service)
 }
 
+// ConnectIncoming connects the provided callback to the "incoming" signal
+//
+// The ::incoming signal is emitted when a new incoming connection
+// to @service needs to be handled. The handler must initiate the
+// handling of @connection, but may not block; in essence,
+// asynchronous operations must be used.
+// 
+// @connection will be unreffed once the signal handler returns,
+// so you need to ref it yourself if you are planning to use it.
+func (o *SocketServiceInstance) ConnectIncoming(fn func(SocketService, SocketConnection, gobject.Object) bool) gobject.SignalHandle {
+	return o.Connect("incoming", fn)
+}
 // TaskInstance is the instance type used by all types extending GTask. It is used internally by the bindings. Users should use the interface [Task] instead.
 type TaskInstance struct {
 	_ [0]func() // equal guard
@@ -68372,28 +68337,6 @@ type Task interface {
 	// Gets @task's return-on-cancel flag. See
 	// g_task_set_return_on_cancel() for more details.
 	GetReturnOnCancel() bool
-	// GetSourceObject wraps g_task_get_source_object
-	// The function returns the following values:
-	// 
-	// 	- goret unsafe.Pointer 
-	//
-	// Gets the source object from @task. Like
-	// g_async_result_get_source_object(), but does not ref the object.
-	GetSourceObject() unsafe.Pointer
-	// GetSourceTag wraps g_task_get_source_tag
-	// The function returns the following values:
-	// 
-	// 	- goret unsafe.Pointer 
-	//
-	// Gets @task's source tag. See g_task_set_source_tag().
-	GetSourceTag() unsafe.Pointer
-	// GetTaskData wraps g_task_get_task_data
-	// The function returns the following values:
-	// 
-	// 	- goret unsafe.Pointer 
-	//
-	// Gets @task's `task_data`.
-	GetTaskData() unsafe.Pointer
 	// HadError wraps g_task_had_error
 	// The function returns the following values:
 	// 
@@ -68429,21 +68372,6 @@ type Task interface {
 	// Since this method transfers ownership of the return value (or
 	// error) to the caller, you may only call it once.
 	PropagateInt() (int, error)
-	// PropagatePointer wraps g_task_propagate_pointer
-	// The function returns the following values:
-	// 
-	// 	- goret unsafe.Pointer 
-	// 	- _goerr error (nullable): an error 
-	//
-	// Gets the result of @task as a pointer, and transfers ownership
-	// of that value to the caller.
-	// 
-	// If the task resulted in an error, or was cancelled, then this will
-	// instead return %NULL and set @error.
-	// 
-	// Since this method transfers ownership of the return value (or
-	// error) to the caller, you may only call it once.
-	PropagatePointer() (unsafe.Pointer, error)
 	// PropagateValue wraps g_task_propagate_value
 	// The function returns the following values:
 	// 
@@ -68636,25 +68564,6 @@ type Task interface {
 	// #GTaskThreadFunc will still be run (for consistency), but the task
 	// will also be completed right away.
 	SetReturnOnCancel(bool) bool
-	// SetSourceTag wraps g_task_set_source_tag
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- sourceTag unsafe.Pointer (nullable): an opaque pointer indicating the source of this task 
-	//
-	// Sets @task's source tag.
-	// 
-	// You can use this to tag a task return
-	// value with a particular pointer (usually a pointer to the function
-	// doing the tagging) and then later check it using
-	// g_task_get_source_tag() (or g_async_result_is_tagged()) in the
-	// task's "finish" function, to figure out if the response came from a
-	// particular place.
-	// 
-	// A macro wrapper around this function will automatically set the
-	// task’s name to the string form of @source_tag if it’s not already
-	// set, for convenience.
-	SetSourceTag(unsafe.Pointer)
 	// SetStaticName wraps g_task_set_static_name
 	// 
 	// The function takes the following parameters:
@@ -68699,147 +68608,6 @@ func UnsafeTaskToGlibNone(c Task) unsafe.Pointer {
 // UnsafeTaskToGlibFull is used to convert the instance to it's C value GTask, while removeing the finalizer. This is used by the bindings internally.
 func UnsafeTaskToGlibFull(c Task) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
-}
-
-// NewTask wraps g_task_new
-// 
-// The function takes the following parameters:
-// 
-// 	- cancellable context.Context (nullable): optional #GCancellable object, %NULL to ignore. 
-// 	- sourceObject unsafe.Pointer (nullable): the #GObject that owns
-//   this task, or %NULL. 
-// 	- callback AsyncReadyCallback (nullable): a #GAsyncReadyCallback. 
-// 
-// The function returns the following values:
-// 
-// 	- goret Task 
-//
-// Creates a #GTask acting on @source_object, which will eventually be
-// used to invoke @callback in the current
-// [thread-default main context][g-main-context-push-thread-default].
-// 
-// Call this in the "start" method of your asynchronous method, and
-// pass the #GTask around throughout the asynchronous operation. You
-// can use g_task_set_task_data() to attach task-specific data to the
-// object, which you can retrieve later via g_task_get_task_data().
-// 
-// By default, if @cancellable is cancelled, then the return value of
-// the task will always be %G_IO_ERROR_CANCELLED, even if the task had
-// already completed before the cancellation. This allows for
-// simplified handling in cases where cancellation may imply that
-// other objects that the task depends on have been destroyed. If you
-// do not want this behavior, you can use
-// g_task_set_check_cancellable() to change it.
-func NewTask(cancellable context.Context, sourceObject unsafe.Pointer, callback AsyncReadyCallback) Task {
-	var carg2 *C.GCancellable       // in, none, converted, nullable
-	var carg1 C.gpointer            // in, none, casted, nullable
-	var carg3 C.GAsyncReadyCallback // callback, scope: async, closure: carg4, nullable
-	var carg4 C.gpointer            // implicit
-	var cret  *C.GTask              // return, full, converted
-
-	if cancellable != nil {
-		carg2 = (*C.GCancellable)(UnsafeGCancellableToGlibNone(cancellable))
-	}
-	if sourceObject != nil {
-		carg1 = C.gpointer(sourceObject)
-	}
-	if callback != nil {
-		carg3 = (*[0]byte)(C._gotk4_gio2_AsyncReadyCallback)
-		carg4 = C.gpointer(userdata.RegisterOnce(callback))
-	}
-
-	cret = C.g_task_new(carg1, carg2, carg3, carg4)
-	runtime.KeepAlive(cancellable)
-	runtime.KeepAlive(sourceObject)
-	runtime.KeepAlive(callback)
-
-	var goret Task
-
-	goret = UnsafeTaskFromGlibFull(unsafe.Pointer(cret))
-
-	return goret
-}
-
-// TaskIsValid wraps g_task_is_valid
-// 
-// The function takes the following parameters:
-// 
-// 	- result unsafe.Pointer: A #GAsyncResult 
-// 	- sourceObject unsafe.Pointer (nullable): the source object
-//   expected to be associated with the task 
-// 
-// The function returns the following values:
-// 
-// 	- goret bool 
-//
-// Checks that @result is a #GTask, and that @source_object is its
-// source object (or that @source_object is %NULL and @result has no
-// source object). This can be used in g_return_if_fail() checks.
-func TaskIsValid(result unsafe.Pointer, sourceObject unsafe.Pointer) bool {
-	var carg1 C.gpointer // in, none, casted
-	var carg2 C.gpointer // in, none, casted, nullable
-	var cret  C.gboolean // return
-
-	carg1 = C.gpointer(result)
-	if sourceObject != nil {
-		carg2 = C.gpointer(sourceObject)
-	}
-
-	cret = C.g_task_is_valid(carg1, carg2)
-	runtime.KeepAlive(result)
-	runtime.KeepAlive(sourceObject)
-
-	var goret bool
-
-	if cret != 0 {
-		goret = true
-	}
-
-	return goret
-}
-
-// TaskReportError wraps g_task_report_error
-// 
-// The function takes the following parameters:
-// 
-// 	- sourceObject unsafe.Pointer (nullable): the #GObject that owns
-//   this task, or %NULL. 
-// 	- callback AsyncReadyCallback (nullable): a #GAsyncReadyCallback. 
-// 	- sourceTag unsafe.Pointer (nullable): an opaque pointer indicating the source of this task 
-// 	- err error: error to report 
-//
-// Creates a #GTask and then immediately calls g_task_return_error()
-// on it. Use this in the wrapper function of an asynchronous method
-// when you want to avoid even calling the virtual method. You can
-// then use g_async_result_is_tagged() in the finish method wrapper to
-// check if the result there is tagged as having been created by the
-// wrapper method, and deal with it appropriately if so.
-// 
-// See also g_task_report_new_error().
-func TaskReportError(sourceObject unsafe.Pointer, callback AsyncReadyCallback, sourceTag unsafe.Pointer, err error) {
-	var carg1 C.gpointer            // in, none, casted, nullable
-	var carg2 C.GAsyncReadyCallback // callback, scope: async, closure: carg3, nullable
-	var carg3 C.gpointer            // implicit
-	var carg4 C.gpointer            // in, none, casted, nullable
-	var carg5 *C.GError             // in, full, converted
-
-	if sourceObject != nil {
-		carg1 = C.gpointer(sourceObject)
-	}
-	if callback != nil {
-		carg2 = (*[0]byte)(C._gotk4_gio2_AsyncReadyCallback)
-		carg3 = C.gpointer(userdata.RegisterOnce(callback))
-	}
-	if sourceTag != nil {
-		carg4 = C.gpointer(sourceTag)
-	}
-	carg5 = (*C.GError)(glib.UnsafeErrorToGlibFull(err))
-
-	C.g_task_report_error(carg1, carg2, carg3, carg4, carg5)
-	runtime.KeepAlive(sourceObject)
-	runtime.KeepAlive(callback)
-	runtime.KeepAlive(sourceTag)
-	runtime.KeepAlive(err)
 }
 
 // GetCancellable wraps g_task_get_cancellable
@@ -69012,73 +68780,6 @@ func (task *TaskInstance) GetReturnOnCancel() bool {
 	return goret
 }
 
-// GetSourceObject wraps g_task_get_source_object
-// The function returns the following values:
-// 
-// 	- goret unsafe.Pointer 
-//
-// Gets the source object from @task. Like
-// g_async_result_get_source_object(), but does not ref the object.
-func (task *TaskInstance) GetSourceObject() unsafe.Pointer {
-	var carg0 *C.GTask   // in, none, converted
-	var cret  C.gpointer // return, none, casted
-
-	carg0 = (*C.GTask)(UnsafeTaskToGlibNone(task))
-
-	cret = C.g_task_get_source_object(carg0)
-	runtime.KeepAlive(task)
-
-	var goret unsafe.Pointer
-
-	goret = unsafe.Pointer(cret)
-
-	return goret
-}
-
-// GetSourceTag wraps g_task_get_source_tag
-// The function returns the following values:
-// 
-// 	- goret unsafe.Pointer 
-//
-// Gets @task's source tag. See g_task_set_source_tag().
-func (task *TaskInstance) GetSourceTag() unsafe.Pointer {
-	var carg0 *C.GTask   // in, none, converted
-	var cret  C.gpointer // return, none, casted
-
-	carg0 = (*C.GTask)(UnsafeTaskToGlibNone(task))
-
-	cret = C.g_task_get_source_tag(carg0)
-	runtime.KeepAlive(task)
-
-	var goret unsafe.Pointer
-
-	goret = unsafe.Pointer(cret)
-
-	return goret
-}
-
-// GetTaskData wraps g_task_get_task_data
-// The function returns the following values:
-// 
-// 	- goret unsafe.Pointer 
-//
-// Gets @task's `task_data`.
-func (task *TaskInstance) GetTaskData() unsafe.Pointer {
-	var carg0 *C.GTask   // in, none, converted
-	var cret  C.gpointer // return, none, casted
-
-	carg0 = (*C.GTask)(UnsafeTaskToGlibNone(task))
-
-	cret = C.g_task_get_task_data(carg0)
-	runtime.KeepAlive(task)
-
-	var goret unsafe.Pointer
-
-	goret = unsafe.Pointer(cret)
-
-	return goret
-}
-
 // HadError wraps g_task_had_error
 // The function returns the following values:
 // 
@@ -69166,41 +68867,6 @@ func (task *TaskInstance) PropagateInt() (int, error) {
 	var _goerr error
 
 	goret = int(cret)
-	if _cerr != nil {
-		_goerr = glib.UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
-	}
-
-	return goret, _goerr
-}
-
-// PropagatePointer wraps g_task_propagate_pointer
-// The function returns the following values:
-// 
-// 	- goret unsafe.Pointer 
-// 	- _goerr error (nullable): an error 
-//
-// Gets the result of @task as a pointer, and transfers ownership
-// of that value to the caller.
-// 
-// If the task resulted in an error, or was cancelled, then this will
-// instead return %NULL and set @error.
-// 
-// Since this method transfers ownership of the return value (or
-// error) to the caller, you may only call it once.
-func (task *TaskInstance) PropagatePointer() (unsafe.Pointer, error) {
-	var carg0 *C.GTask   // in, none, converted
-	var cret  C.gpointer // return, full, casted
-	var _cerr *C.GError  // out, full, converted, nullable
-
-	carg0 = (*C.GTask)(UnsafeTaskToGlibNone(task))
-
-	cret = C.g_task_propagate_pointer(carg0, &_cerr)
-	runtime.KeepAlive(task)
-
-	var goret  unsafe.Pointer
-	var _goerr error
-
-	goret = unsafe.Pointer(cret)
 	if _cerr != nil {
 		_goerr = glib.UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
 	}
@@ -69568,38 +69234,6 @@ func (task *TaskInstance) SetReturnOnCancel(returnOnCancel bool) bool {
 	}
 
 	return goret
-}
-
-// SetSourceTag wraps g_task_set_source_tag
-// 
-// The function takes the following parameters:
-// 
-// 	- sourceTag unsafe.Pointer (nullable): an opaque pointer indicating the source of this task 
-//
-// Sets @task's source tag.
-// 
-// You can use this to tag a task return
-// value with a particular pointer (usually a pointer to the function
-// doing the tagging) and then later check it using
-// g_task_get_source_tag() (or g_async_result_is_tagged()) in the
-// task's "finish" function, to figure out if the response came from a
-// particular place.
-// 
-// A macro wrapper around this function will automatically set the
-// task’s name to the string form of @source_tag if it’s not already
-// set, for convenience.
-func (task *TaskInstance) SetSourceTag(sourceTag unsafe.Pointer) {
-	var carg0 *C.GTask   // in, none, converted
-	var carg1 C.gpointer // in, none, casted, nullable
-
-	carg0 = (*C.GTask)(UnsafeTaskToGlibNone(task))
-	if sourceTag != nil {
-		carg1 = C.gpointer(sourceTag)
-	}
-
-	C.g_task_set_source_tag(carg0, carg1)
-	runtime.KeepAlive(task)
-	runtime.KeepAlive(sourceTag)
 }
 
 // SetStaticName wraps g_task_set_static_name
@@ -70511,6 +70145,14 @@ var _ ThreadedSocketService = (*ThreadedSocketServiceInstance)(nil)
 type ThreadedSocketService interface {
 	SocketService
 	upcastToGThreadedSocketService() *ThreadedSocketServiceInstance
+
+	// ConnectRun connects the provided callback to the "run" signal
+	//
+	// The ::run signal is emitted in a worker thread in response to an
+	// incoming connection. This thread is dedicated to handling
+	// @connection and may perform blocking IO. The signal handler need
+	// not return until the connection is closed.
+	ConnectRun(func(ThreadedSocketService, SocketConnection, gobject.Object) bool) gobject.SignalHandle
 }
 
 func unsafeWrapThreadedSocketService(base *gobject.ObjectInstance) *ThreadedSocketServiceInstance {
@@ -70580,6 +70222,15 @@ func NewThreadedSocketService(maxThreads int) SocketService {
 	return goret
 }
 
+// ConnectRun connects the provided callback to the "run" signal
+//
+// The ::run signal is emitted in a worker thread in response to an
+// incoming connection. This thread is dedicated to handling
+// @connection and may perform blocking IO. The signal handler need
+// not return until the connection is closed.
+func (o *ThreadedSocketServiceInstance) ConnectRun(fn func(ThreadedSocketService, SocketConnection, gobject.Object) bool) gobject.SignalHandle {
+	return o.Connect("run", fn)
+}
 // TlsCertificateInstance is the instance type used by all types extending GTlsCertificate. It is used internally by the bindings. Users should use the interface [TlsCertificate] instead.
 type TlsCertificateInstance struct {
 	_ [0]func() // equal guard
@@ -71621,6 +71272,51 @@ type TlsConnection interface {
 	//
 	// Deprecated: (since 2.30.0) Use g_tls_connection_set_database() instead
 	SetUseSystemCertDB(bool)
+	// ConnectAcceptCertificate connects the provided callback to the "accept-certificate" signal
+	//
+	// Emitted during the TLS handshake after the peer certificate has
+	// been received. You can examine @peer_cert's certification path by
+	// calling g_tls_certificate_get_issuer() on it.
+	// 
+	// For a client-side connection, @peer_cert is the server's
+	// certificate, and the signal will only be emitted if the
+	// certificate was not acceptable according to @conn's
+	// #GTlsClientConnection:validation_flags. If you would like the
+	// certificate to be accepted despite @errors, return %TRUE from the
+	// signal handler. Otherwise, if no handler accepts the certificate,
+	// the handshake will fail with %G_TLS_ERROR_BAD_CERTIFICATE.
+	// 
+	// GLib guarantees that if certificate verification fails, this signal
+	// will be emitted with at least one error will be set in @errors, but
+	// it does not guarantee that all possible errors will be set.
+	// Accordingly, you may not safely decide to ignore any particular
+	// type of error. For example, it would be incorrect to ignore
+	// %G_TLS_CERTIFICATE_EXPIRED if you want to allow expired
+	// certificates, because this could potentially be the only error flag
+	// set even if other problems exist with the certificate.
+	// 
+	// For a server-side connection, @peer_cert is the certificate
+	// presented by the client, if this was requested via the server's
+	// #GTlsServerConnection:authentication_mode. On the server side,
+	// the signal is always emitted when the client presents a
+	// certificate, and the certificate will only be accepted if a
+	// handler returns %TRUE.
+	// 
+	// Note that if this signal is emitted as part of asynchronous I/O
+	// in the main thread, then you should not attempt to interact with
+	// the user before returning from the signal handler. If you want to
+	// let the user decide whether or not to accept the certificate, you
+	// would have to return %FALSE from the signal handler on the first
+	// attempt, and then after the connection attempt returns a
+	// %G_TLS_ERROR_BAD_CERTIFICATE, you can interact with the user, and
+	// if the user decides to accept the certificate, remember that fact,
+	// create a new connection, and return %TRUE from the signal handler
+	// the next time.
+	// 
+	// If you are doing I/O in another thread, you do not
+	// need to worry about this, and can simply block in the signal
+	// handler until the UI thread returns an answer.
+	ConnectAcceptCertificate(func(TlsConnection, TlsCertificate, TLSCertificateFlags) bool) gobject.SignalHandle
 }
 
 func unsafeWrapTlsConnection(base *gobject.ObjectInstance) *TlsConnectionInstance {
@@ -72348,6 +72044,53 @@ func (conn *TlsConnectionInstance) SetUseSystemCertDB(useSystemCertdb bool) {
 	runtime.KeepAlive(useSystemCertdb)
 }
 
+// ConnectAcceptCertificate connects the provided callback to the "accept-certificate" signal
+//
+// Emitted during the TLS handshake after the peer certificate has
+// been received. You can examine @peer_cert's certification path by
+// calling g_tls_certificate_get_issuer() on it.
+// 
+// For a client-side connection, @peer_cert is the server's
+// certificate, and the signal will only be emitted if the
+// certificate was not acceptable according to @conn's
+// #GTlsClientConnection:validation_flags. If you would like the
+// certificate to be accepted despite @errors, return %TRUE from the
+// signal handler. Otherwise, if no handler accepts the certificate,
+// the handshake will fail with %G_TLS_ERROR_BAD_CERTIFICATE.
+// 
+// GLib guarantees that if certificate verification fails, this signal
+// will be emitted with at least one error will be set in @errors, but
+// it does not guarantee that all possible errors will be set.
+// Accordingly, you may not safely decide to ignore any particular
+// type of error. For example, it would be incorrect to ignore
+// %G_TLS_CERTIFICATE_EXPIRED if you want to allow expired
+// certificates, because this could potentially be the only error flag
+// set even if other problems exist with the certificate.
+// 
+// For a server-side connection, @peer_cert is the certificate
+// presented by the client, if this was requested via the server's
+// #GTlsServerConnection:authentication_mode. On the server side,
+// the signal is always emitted when the client presents a
+// certificate, and the certificate will only be accepted if a
+// handler returns %TRUE.
+// 
+// Note that if this signal is emitted as part of asynchronous I/O
+// in the main thread, then you should not attempt to interact with
+// the user before returning from the signal handler. If you want to
+// let the user decide whether or not to accept the certificate, you
+// would have to return %FALSE from the signal handler on the first
+// attempt, and then after the connection attempt returns a
+// %G_TLS_ERROR_BAD_CERTIFICATE, you can interact with the user, and
+// if the user decides to accept the certificate, remember that fact,
+// create a new connection, and return %TRUE from the signal handler
+// the next time.
+// 
+// If you are doing I/O in another thread, you do not
+// need to worry about this, and can simply block in the signal
+// handler until the UI thread returns an answer.
+func (o *TlsConnectionInstance) ConnectAcceptCertificate(fn func(TlsConnection, TlsCertificate, TLSCertificateFlags) bool) gobject.SignalHandle {
+	return o.Connect("accept-certificate", fn)
+}
 // TlsDatabaseInstance is the instance type used by all types extending GTlsDatabase. It is used internally by the bindings. Users should use the interface [TlsDatabase] instead.
 type TlsDatabaseInstance struct {
 	_ [0]func() // equal guard
@@ -74763,6 +74506,57 @@ type VolumeMonitor interface {
 	//
 	// Finds a #GVolume object by its UUID (see g_volume_get_uuid())
 	GetVolumeForUUID(string) Volume
+	// ConnectDriveChanged connects the provided callback to the "drive-changed" signal
+	//
+	// Emitted when a drive changes.
+	ConnectDriveChanged(func(VolumeMonitor, Drive)) gobject.SignalHandle
+	// ConnectDriveConnected connects the provided callback to the "drive-connected" signal
+	//
+	// Emitted when a drive is connected to the system.
+	ConnectDriveConnected(func(VolumeMonitor, Drive)) gobject.SignalHandle
+	// ConnectDriveDisconnected connects the provided callback to the "drive-disconnected" signal
+	//
+	// Emitted when a drive is disconnected from the system.
+	ConnectDriveDisconnected(func(VolumeMonitor, Drive)) gobject.SignalHandle
+	// ConnectDriveEjectButton connects the provided callback to the "drive-eject-button" signal
+	//
+	// Emitted when the eject button is pressed on @drive.
+	ConnectDriveEjectButton(func(VolumeMonitor, Drive)) gobject.SignalHandle
+	// ConnectDriveStopButton connects the provided callback to the "drive-stop-button" signal
+	//
+	// Emitted when the stop button is pressed on @drive.
+	ConnectDriveStopButton(func(VolumeMonitor, Drive)) gobject.SignalHandle
+	// ConnectMountAdded connects the provided callback to the "mount-added" signal
+	//
+	// Emitted when a mount is added.
+	ConnectMountAdded(func(VolumeMonitor, Mount)) gobject.SignalHandle
+	// ConnectMountChanged connects the provided callback to the "mount-changed" signal
+	//
+	// Emitted when a mount changes.
+	ConnectMountChanged(func(VolumeMonitor, Mount)) gobject.SignalHandle
+	// ConnectMountPreUnmount connects the provided callback to the "mount-pre-unmount" signal
+	//
+	// May be emitted when a mount is about to be removed.
+	// 
+	// This signal depends on the backend and is only emitted if
+	// GIO was used to unmount.
+	ConnectMountPreUnmount(func(VolumeMonitor, Mount)) gobject.SignalHandle
+	// ConnectMountRemoved connects the provided callback to the "mount-removed" signal
+	//
+	// Emitted when a mount is removed.
+	ConnectMountRemoved(func(VolumeMonitor, Mount)) gobject.SignalHandle
+	// ConnectVolumeAdded connects the provided callback to the "volume-added" signal
+	//
+	// Emitted when a mountable volume is added to the system.
+	ConnectVolumeAdded(func(VolumeMonitor, Volume)) gobject.SignalHandle
+	// ConnectVolumeChanged connects the provided callback to the "volume-changed" signal
+	//
+	// Emitted when mountable volume is changed.
+	ConnectVolumeChanged(func(VolumeMonitor, Volume)) gobject.SignalHandle
+	// ConnectVolumeRemoved connects the provided callback to the "volume-removed" signal
+	//
+	// Emitted when a mountable volume is removed from the system.
+	ConnectVolumeRemoved(func(VolumeMonitor, Volume)) gobject.SignalHandle
 }
 
 func unsafeWrapVolumeMonitor(base *gobject.ObjectInstance) *VolumeMonitorInstance {
@@ -74939,6 +74733,81 @@ func (volumeMonitor *VolumeMonitorInstance) GetVolumeForUUID(uuid string) Volume
 	return goret
 }
 
+// ConnectDriveChanged connects the provided callback to the "drive-changed" signal
+//
+// Emitted when a drive changes.
+func (o *VolumeMonitorInstance) ConnectDriveChanged(fn func(VolumeMonitor, Drive)) gobject.SignalHandle {
+	return o.Connect("drive-changed", fn)
+}
+// ConnectDriveConnected connects the provided callback to the "drive-connected" signal
+//
+// Emitted when a drive is connected to the system.
+func (o *VolumeMonitorInstance) ConnectDriveConnected(fn func(VolumeMonitor, Drive)) gobject.SignalHandle {
+	return o.Connect("drive-connected", fn)
+}
+// ConnectDriveDisconnected connects the provided callback to the "drive-disconnected" signal
+//
+// Emitted when a drive is disconnected from the system.
+func (o *VolumeMonitorInstance) ConnectDriveDisconnected(fn func(VolumeMonitor, Drive)) gobject.SignalHandle {
+	return o.Connect("drive-disconnected", fn)
+}
+// ConnectDriveEjectButton connects the provided callback to the "drive-eject-button" signal
+//
+// Emitted when the eject button is pressed on @drive.
+func (o *VolumeMonitorInstance) ConnectDriveEjectButton(fn func(VolumeMonitor, Drive)) gobject.SignalHandle {
+	return o.Connect("drive-eject-button", fn)
+}
+// ConnectDriveStopButton connects the provided callback to the "drive-stop-button" signal
+//
+// Emitted when the stop button is pressed on @drive.
+func (o *VolumeMonitorInstance) ConnectDriveStopButton(fn func(VolumeMonitor, Drive)) gobject.SignalHandle {
+	return o.Connect("drive-stop-button", fn)
+}
+// ConnectMountAdded connects the provided callback to the "mount-added" signal
+//
+// Emitted when a mount is added.
+func (o *VolumeMonitorInstance) ConnectMountAdded(fn func(VolumeMonitor, Mount)) gobject.SignalHandle {
+	return o.Connect("mount-added", fn)
+}
+// ConnectMountChanged connects the provided callback to the "mount-changed" signal
+//
+// Emitted when a mount changes.
+func (o *VolumeMonitorInstance) ConnectMountChanged(fn func(VolumeMonitor, Mount)) gobject.SignalHandle {
+	return o.Connect("mount-changed", fn)
+}
+// ConnectMountPreUnmount connects the provided callback to the "mount-pre-unmount" signal
+//
+// May be emitted when a mount is about to be removed.
+// 
+// This signal depends on the backend and is only emitted if
+// GIO was used to unmount.
+func (o *VolumeMonitorInstance) ConnectMountPreUnmount(fn func(VolumeMonitor, Mount)) gobject.SignalHandle {
+	return o.Connect("mount-pre-unmount", fn)
+}
+// ConnectMountRemoved connects the provided callback to the "mount-removed" signal
+//
+// Emitted when a mount is removed.
+func (o *VolumeMonitorInstance) ConnectMountRemoved(fn func(VolumeMonitor, Mount)) gobject.SignalHandle {
+	return o.Connect("mount-removed", fn)
+}
+// ConnectVolumeAdded connects the provided callback to the "volume-added" signal
+//
+// Emitted when a mountable volume is added to the system.
+func (o *VolumeMonitorInstance) ConnectVolumeAdded(fn func(VolumeMonitor, Volume)) gobject.SignalHandle {
+	return o.Connect("volume-added", fn)
+}
+// ConnectVolumeChanged connects the provided callback to the "volume-changed" signal
+//
+// Emitted when mountable volume is changed.
+func (o *VolumeMonitorInstance) ConnectVolumeChanged(fn func(VolumeMonitor, Volume)) gobject.SignalHandle {
+	return o.Connect("volume-changed", fn)
+}
+// ConnectVolumeRemoved connects the provided callback to the "volume-removed" signal
+//
+// Emitted when a mountable volume is removed from the system.
+func (o *VolumeMonitorInstance) ConnectVolumeRemoved(fn func(VolumeMonitor, Volume)) gobject.SignalHandle {
+	return o.Connect("volume-removed", fn)
+}
 // ZlibCompressorInstance is the instance type used by all types extending GZlibCompressor. It is used internally by the bindings. Users should use the interface [ZlibCompressor] instead.
 type ZlibCompressorInstance struct {
 	_ [0]func() // equal guard
@@ -76751,16 +76620,6 @@ type MemoryOutputStream interface {
 	Seekable
 	upcastToGMemoryOutputStream() *MemoryOutputStreamInstance
 
-	// GetData wraps g_memory_output_stream_get_data
-	// The function returns the following values:
-	// 
-	// 	- goret unsafe.Pointer 
-	//
-	// Gets any loaded data from the @ostream.
-	// 
-	// Note that the returned pointer may become invalid on the next
-	// write or truncate operation on the stream.
-	GetData() unsafe.Pointer
 	// GetDataSize wraps g_memory_output_stream_get_data_size
 	// The function returns the following values:
 	// 
@@ -76798,18 +76657,6 @@ type MemoryOutputStream interface {
 	// Returns data from the @ostream as a #GBytes. @ostream must be
 	// closed before calling this function.
 	StealAsBytes() *glib.Bytes
-	// StealData wraps g_memory_output_stream_steal_data
-	// The function returns the following values:
-	// 
-	// 	- goret unsafe.Pointer 
-	//
-	// Gets any loaded data from the @ostream. Ownership of the data
-	// is transferred to the caller; when no longer needed it must be
-	// freed using the free function set in @ostream's
-	// #GMemoryOutputStream:destroy-function property.
-	// 
-	// @ostream must be closed before calling this function.
-	StealData() unsafe.Pointer
 }
 
 func unsafeWrapMemoryOutputStream(base *gobject.ObjectInstance) *MemoryOutputStreamInstance {
@@ -76869,31 +76716,6 @@ func NewMemoryOutputStreamResizable() OutputStream {
 	var goret OutputStream
 
 	goret = UnsafeOutputStreamFromGlibFull(unsafe.Pointer(cret))
-
-	return goret
-}
-
-// GetData wraps g_memory_output_stream_get_data
-// The function returns the following values:
-// 
-// 	- goret unsafe.Pointer 
-//
-// Gets any loaded data from the @ostream.
-// 
-// Note that the returned pointer may become invalid on the next
-// write or truncate operation on the stream.
-func (ostream *MemoryOutputStreamInstance) GetData() unsafe.Pointer {
-	var carg0 *C.GMemoryOutputStream // in, none, converted
-	var cret  C.gpointer             // return, none, casted
-
-	carg0 = (*C.GMemoryOutputStream)(UnsafeMemoryOutputStreamToGlibNone(ostream))
-
-	cret = C.g_memory_output_stream_get_data(carg0)
-	runtime.KeepAlive(ostream)
-
-	var goret unsafe.Pointer
-
-	goret = unsafe.Pointer(cret)
 
 	return goret
 }
@@ -76976,33 +76798,6 @@ func (ostream *MemoryOutputStreamInstance) StealAsBytes() *glib.Bytes {
 	var goret *glib.Bytes
 
 	goret = glib.UnsafeBytesFromGlibFull(unsafe.Pointer(cret))
-
-	return goret
-}
-
-// StealData wraps g_memory_output_stream_steal_data
-// The function returns the following values:
-// 
-// 	- goret unsafe.Pointer 
-//
-// Gets any loaded data from the @ostream. Ownership of the data
-// is transferred to the caller; when no longer needed it must be
-// freed using the free function set in @ostream's
-// #GMemoryOutputStream:destroy-function property.
-// 
-// @ostream must be closed before calling this function.
-func (ostream *MemoryOutputStreamInstance) StealData() unsafe.Pointer {
-	var carg0 *C.GMemoryOutputStream // in, none, converted
-	var cret  C.gpointer             // return, full, casted
-
-	carg0 = (*C.GMemoryOutputStream)(UnsafeMemoryOutputStreamToGlibNone(ostream))
-
-	cret = C.g_memory_output_stream_steal_data(carg0)
-	runtime.KeepAlive(ostream)
-
-	var goret unsafe.Pointer
-
-	goret = unsafe.Pointer(cret)
 
 	return goret
 }
@@ -77738,39 +77533,6 @@ func UnsafeNativeSocketAddressToGlibNone(c NativeSocketAddress) unsafe.Pointer {
 // UnsafeNativeSocketAddressToGlibFull is used to convert the instance to it's C value GNativeSocketAddress, while removeing the finalizer. This is used by the bindings internally.
 func UnsafeNativeSocketAddressToGlibFull(c NativeSocketAddress) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
-}
-
-// NewNativeSocketAddress wraps g_native_socket_address_new
-// 
-// The function takes the following parameters:
-// 
-// 	- native unsafe.Pointer (nullable): a native address object 
-// 	- len uint: the length of @native, in bytes 
-// 
-// The function returns the following values:
-// 
-// 	- goret SocketAddress 
-//
-// Creates a new #GNativeSocketAddress for @native and @len.
-func NewNativeSocketAddress(native unsafe.Pointer, len uint) SocketAddress {
-	var carg1 C.gpointer        // in, none, casted, nullable
-	var carg2 C.gsize           // in, none, casted
-	var cret  *C.GSocketAddress // return, full, converted
-
-	if native != nil {
-		carg1 = C.gpointer(native)
-	}
-	carg2 = C.gsize(len)
-
-	cret = C.g_native_socket_address_new(carg1, carg2)
-	runtime.KeepAlive(native)
-	runtime.KeepAlive(len)
-
-	var goret SocketAddress
-
-	goret = UnsafeSocketAddressFromGlibFull(unsafe.Pointer(cret))
-
-	return goret
 }
 
 // NativeVolumeMonitorInstance is the instance type used by all types extending GNativeVolumeMonitor. It is used internally by the bindings. Users should use the interface [NativeVolumeMonitor] instead.

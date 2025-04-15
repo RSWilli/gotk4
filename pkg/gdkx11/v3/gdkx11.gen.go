@@ -1432,6 +1432,8 @@ type X11Screen interface {
 	//
 	// Returns the name of the window manager for @screen.
 	GetWindowManagerName() string
+	// ConnectWindowManagerChanged connects the provided callback to the "window-manager-changed" signal
+	ConnectWindowManagerChanged(func(X11Screen)) gobject.SignalHandle
 }
 
 func unsafeWrapX11Screen(base *gobject.ObjectInstance) *X11ScreenInstance {
@@ -1564,6 +1566,10 @@ func (screen *X11ScreenInstance) GetWindowManagerName() string {
 	return goret
 }
 
+// ConnectWindowManagerChanged connects the provided callback to the "window-manager-changed" signal
+func (o *X11ScreenInstance) ConnectWindowManagerChanged(fn func(X11Screen)) gobject.SignalHandle {
+	return o.Connect("window-manager-changed", fn)
+}
 // X11VisualInstance is the instance type used by all types extending GdkX11Visual. It is used internally by the bindings. Users should use the interface [X11Visual] instead.
 type X11VisualInstance struct {
 	_ [0]func() // equal guard

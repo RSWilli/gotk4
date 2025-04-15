@@ -305,29 +305,6 @@ func _gotk4_gtk3_FileFilterFunc(carg1 *C.GtkFileFilterInfo, carg2 C.gpointer) (c
 	return cret
 }
 
-//export _gotk4_gtk3_FlowBoxCreateWidgetFunc
-func _gotk4_gtk3_FlowBoxCreateWidgetFunc(carg1 C.gpointer, carg2 C.gpointer) (cret *C.GtkWidget) {
-	var fn FlowBoxCreateWidgetFunc
-	{
-		v := userdata.Load(unsafe.Pointer(carg2))
-		if v == nil {
-			panic(`callback not found`)
-		}
-		fn = v.(FlowBoxCreateWidgetFunc)
-	}
-
-	var item  unsafe.Pointer // in, none, casted
-	var goret Widget         // return, full, converted
-
-	item = unsafe.Pointer(carg1)
-
-	goret = fn(item)
-
-	cret = (*C.GtkWidget)(UnsafeWidgetToGlibFull(goret))
-
-	return cret
-}
-
 //export _gotk4_gtk3_FontFilterFunc
 func _gotk4_gtk3_FontFilterFunc(carg1 *C.PangoFontFamily, carg2 *C.PangoFontFace, carg3 C.gpointer) (cret C.gboolean) {
 	var fn FontFilterFunc
@@ -376,29 +353,6 @@ func _gotk4_gtk3_KeySnoopFunc(carg1 *C.GtkWidget, carg2 *C.GdkEventKey, carg3 C.
 	goret = fn(grabWidget, event)
 
 	cret = C.gint(goret)
-
-	return cret
-}
-
-//export _gotk4_gtk3_ListBoxCreateWidgetFunc
-func _gotk4_gtk3_ListBoxCreateWidgetFunc(carg1 C.gpointer, carg2 C.gpointer) (cret *C.GtkWidget) {
-	var fn ListBoxCreateWidgetFunc
-	{
-		v := userdata.Load(unsafe.Pointer(carg2))
-		if v == nil {
-			panic(`callback not found`)
-		}
-		fn = v.(ListBoxCreateWidgetFunc)
-	}
-
-	var item  unsafe.Pointer // in, none, casted
-	var goret Widget         // return, full, converted
-
-	item = unsafe.Pointer(carg1)
-
-	goret = fn(item)
-
-	cret = (*C.GtkWidget)(UnsafeWidgetToGlibFull(goret))
 
 	return cret
 }

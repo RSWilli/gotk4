@@ -73,6 +73,7 @@ func DeclareClass(e *env, v gir.Class) *Class {
 	e = e.sub("class", v.CType)
 
 	if !v.IsIntrospectable() {
+		e.logger.Warn("skipping because not introspectable")
 		return nil
 	}
 

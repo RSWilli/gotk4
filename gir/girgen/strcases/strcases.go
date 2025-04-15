@@ -266,6 +266,11 @@ var GoKeywords = map[string]string{
 	"import":      "",
 	"return":      "ret",
 	"var":         "",
+
+	// words that may collide with go stdlib packages
+	"context": "_context",
+	"strings": "_strings",
+	"fmt":     "_fmt",
 }
 
 // GoBuiltinTypes contains Go built-in types.

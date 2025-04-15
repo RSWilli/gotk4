@@ -13,14 +13,15 @@ type CallableSignature struct {
 }
 
 func DeclareFunction(e *env, v gir.CallableAttrs) *CallableSignature {
+	e = e.sub("function", v.CIdentifier)
+
 	if !v.IsIntrospectable() {
+		e.logger.Warn("skipping because not introspectable")
 		return nil
 	}
 
-	e = e.sub("function", v.CIdentifier)
-
 	if v.ShadowedBy != "" || v.MovedTo != "" {
-		e.logger.Debug("skipping because shadowed or moved")
+		e.logger.Warn("skipping because shadowed or moved")
 		return nil
 	}
 
@@ -90,14 +91,15 @@ func (c *PrefixedIdentifier) GoIndentifier() string {
 var _ Identifier = &PrefixedIdentifier{}
 
 func DeclarePrefixedFunction(e *env, parent Type, v gir.CallableAttrs) *CallableSignature {
+	e = e.sub("function", v.CIdentifier)
+
 	if !v.IsIntrospectable() {
+		e.logger.Warn("skipping because not introspectable")
 		return nil
 	}
 
-	e = e.sub("function", v.CIdentifier)
-
 	if v.ShadowedBy != "" || v.MovedTo != "" {
-		e.logger.Debug("skipping because shadowed or moved")
+		e.logger.Warn("skipping because shadowed or moved")
 		return nil
 	}
 

@@ -32,7 +32,7 @@ func init() {
 // 
 // The function takes the following parameters:
 // 
-// 	- context pango.Context: a `PangoContext`, from a pangocairo font map 
+// 	- _context pango.Context: a `PangoContext`, from a pangocairo font map 
 // 
 // The function returns the following values:
 // 
@@ -41,14 +41,14 @@ func init() {
 // Gets the resolution for the context.
 // 
 // See [func@PangoCairo.context_set_resolution]
-func ContextGetResolution(context pango.Context) float64 {
+func ContextGetResolution(_context pango.Context) float64 {
 	var carg1 *C.PangoContext // in, none, converted
 	var cret  C.double        // return, none, casted, casted C.gdouble
 
-	carg1 = (*C.PangoContext)(pango.UnsafeContextToGlibNone(context))
+	carg1 = (*C.PangoContext)(pango.UnsafeContextToGlibNone(_context))
 
 	cret = C.pango_cairo_context_get_resolution(carg1)
-	runtime.KeepAlive(context)
+	runtime.KeepAlive(_context)
 
 	var goret float64
 
@@ -61,7 +61,7 @@ func ContextGetResolution(context pango.Context) float64 {
 // 
 // The function takes the following parameters:
 // 
-// 	- context pango.Context: a `PangoContext`, from a pangocairo font map 
+// 	- _context pango.Context: a `PangoContext`, from a pangocairo font map 
 // 	- dpi float64: the resolution in "dots per inch". (Physical inches aren't actually
 //   involved; the terminology is conventional.) A 0 or negative value
 //   means to use the resolution from the font map. 
@@ -71,15 +71,15 @@ func ContextGetResolution(context pango.Context) float64 {
 // This is a scale factor between points specified in a `PangoFontDescription`
 // and Cairo units. The default value is 96, meaning that a 10 point font will
 // be 13 units high. (10 * 96. / 72. = 13.3).
-func ContextSetResolution(context pango.Context, dpi float64) {
+func ContextSetResolution(_context pango.Context, dpi float64) {
 	var carg1 *C.PangoContext // in, none, converted
 	var carg2 C.double        // in, none, casted, casted C.gdouble
 
-	carg1 = (*C.PangoContext)(pango.UnsafeContextToGlibNone(context))
+	carg1 = (*C.PangoContext)(pango.UnsafeContextToGlibNone(_context))
 	carg2 = C.double(dpi)
 
 	C.pango_cairo_context_set_resolution(carg1, carg2)
-	runtime.KeepAlive(context)
+	runtime.KeepAlive(_context)
 	runtime.KeepAlive(dpi)
 }
 
@@ -91,7 +91,7 @@ type FontInstance struct {
 
 var _ Font = (*FontInstance)(nil)
 
-// FontInstance wraps PangoCairoFont
+// Font wraps PangoCairoFont
 //
 // `PangoCairoFont` is an interface exported by fonts for
 // use with Cairo.
@@ -148,7 +148,7 @@ type FontMapInstance struct {
 
 var _ FontMap = (*FontMapInstance)(nil)
 
-// FontMapInstance wraps PangoCairoFontMap
+// FontMap wraps PangoCairoFontMap
 //
 // `PangoCairoFontMap` is an interface exported by font maps for
 // use with Cairo.

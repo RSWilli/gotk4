@@ -15,10 +15,11 @@ type ClassGenerator struct {
 
 	Marshaler Generator
 
-	// sub generators:
-	Constructors GeneratorList
-	Functions    GeneratorList
-	Methods      MethodGeneratorList
+	SubGenerators GeneratorList
+
+	// Methods contains all generated methods for the interface of the class
+	// This includes generated signal connect and emit methods
+	Methods MethodGeneratorList
 }
 
 func (g *ClassGenerator) Generate(w *file.Package) {
@@ -100,8 +101,7 @@ func (g *ClassGenerator) Generate(w *file.Package) {
 
 	GenerateAll(
 		w,
-		g.Constructors,
-		g.Functions,
+		g.SubGenerators,
 		g.Methods,
 	)
 }
@@ -140,16 +140,24 @@ func NewClassGenerator(c *typesystem.Class) *ClassGenerator {
 	}
 
 	for _, constructor := range c.Constructors {
-		g.Constructors = append(g.Constructors, NewCallableGenerator(constructor))
+		g.SubGenerators = append(g.SubGenerators, NewCallableGenerator(constructor))
 	}
 
 	for _, fn := range c.Functions {
-		g.Functions = append(g.Functions, NewCallableGenerator(fn))
-
+		g.SubGenerators = append(g.SubGenerators, NewCallableGenerator(fn))
 	}
 
 	for _, method := range c.Methods {
 		g.Methods = append(g.Methods, NewCallableGenerator(method))
+	}
+
+	for _, sig := range c.Signals {
+		if sig.Action {
+			// action signals are only emitted:
+			g.Methods = append(g.Methods, NewSignalEmitGenerator(sig))
+		} else {
+			g.Methods = append(g.Methods, NewSignalConnectGenerator(sig))
+		}
 	}
 
 	return g

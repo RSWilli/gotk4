@@ -19,6 +19,7 @@ func DeclareBitfield(e *env, v gir.Bitfield) *Bitfield {
 	e = e.sub("bitfield", v.CType)
 
 	if !v.IsIntrospectable() {
+		e.logger.Warn("skipping because not introspectable")
 		return nil
 	}
 

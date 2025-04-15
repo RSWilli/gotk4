@@ -533,6 +533,12 @@ var Preprocessors = []Preprocessor{
 	// Collide in Gtk-4 when implementing interface:
 	RenameCallable("Gtk-4.MenuButton.get_direction", "get_menu_button_direction"),
 	RenameCallable("Gtk-4.MenuButton.set_direction", "set_menu_button_direction"),
+
+	// Collide with GObject.Connect:
+	RenameCallable("Gio-2.Socket.connect", "connect_socket"),
+	RenameCallable("Gio-2.SocketClient.connect", "connect_socket_client"),
+	RenameCallable("Gio-2.SocketConnection.connect", "connect_socket_connection"),
+	RenameCallable("Gio-2.Proxy.connect", "connect_proxy"),
 }
 
 // FIXME: override or manually implement this

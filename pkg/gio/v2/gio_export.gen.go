@@ -165,41 +165,6 @@ func _gotk4_gio2_DBusMessageFilterFunction(carg1 *C.GDBusConnection, carg2 *C.GD
 	return cret
 }
 
-//export _gotk4_gio2_DBusSubtreeDispatchFunc
-func _gotk4_gio2_DBusSubtreeDispatchFunc(carg1 *C.GDBusConnection, carg2 *C.gchar, carg3 *C.gchar, carg4 *C.gchar, carg5 *C.gchar, carg6 *C.gpointer, carg7 C.gpointer) (cret *C.GDBusInterfaceVTable) {
-	var fn DBusSubtreeDispatchFunc
-	{
-		v := userdata.Load(unsafe.Pointer(carg7))
-		if v == nil {
-			panic(`callback not found`)
-		}
-		fn = v.(DBusSubtreeDispatchFunc)
-	}
-
-	var connection    DBusConnection       // in, none, converted
-	var sender        string               // in, none, string, casted *C.gchar
-	var objectPath    string               // in, none, string, casted *C.gchar
-	var interfaceName string               // in, none, string, casted *C.gchar
-	var node          string               // in, none, string, casted *C.gchar
-	var outUserData   *unsafe.Pointer      // in, transfer: none, C Pointers: 1, Name: gpointer
-	var goret         *DBusInterfaceVTable // return, none, converted
-
-	connection = UnsafeDBusConnectionFromGlibNone(unsafe.Pointer(carg1))
-	sender = C.GoString((*C.char)(unsafe.Pointer(carg2)))
-	objectPath = C.GoString((*C.char)(unsafe.Pointer(carg3)))
-	interfaceName = C.GoString((*C.char)(unsafe.Pointer(carg4)))
-	node = C.GoString((*C.char)(unsafe.Pointer(carg5)))
-	_ = outUserData
-	_ = carg6
-	panic("unimplemented conversion of *unsafe.Pointer (gpointer*)")
-
-	goret = fn(connection, sender, objectPath, interfaceName, node, outUserData)
-
-	cret = (*C.GDBusInterfaceVTable)(UnsafeDBusInterfaceVTableToGlibNone(goret))
-
-	return cret
-}
-
 //export _gotk4_gio2_DBusSubtreeEnumerateFunc
 func _gotk4_gio2_DBusSubtreeEnumerateFunc(carg1 *C.GDBusConnection, carg2 *C.gchar, carg3 *C.gchar, carg4 C.gpointer) (cret **C.gchar) {
 	var fn DBusSubtreeEnumerateFunc

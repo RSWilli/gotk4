@@ -25,7 +25,10 @@ var _ checkedParameterType = (*Callback)(nil)
 // DeclareCallback declares a new callback. This way the type can be resolved by others, but the referenced parameters
 // have to be resolved later, because the callback params could be referencing other record types
 func DeclareCallback(e *env, v gir.Callback) *Callback {
+	e = e.sub("callback", v.CType)
+
 	if !v.IsIntrospectable() {
+		e.logger.Warn("skipping because not introspectable")
 		return nil
 	}
 

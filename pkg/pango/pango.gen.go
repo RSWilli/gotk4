@@ -2570,11 +2570,6 @@ func (f ShowFlags) String() string {
 	return "ShowFlags(" + strings.Join(parts, "|") + ")"
 }
 
-// AttrDataCopyFunc wraps PangoAttrDataCopyFunc
-//
-// Type of a function that can duplicate user data for an attribute.
-type AttrDataCopyFunc func() (goret unsafe.Pointer)
-
 // AttrFilterFunc wraps PangoAttrFilterFunc
 //
 // Type of a function filtering a list of attributes.
@@ -3885,7 +3880,7 @@ func IsZeroWidth(ch uint32) bool {
 // 
 // The function takes the following parameters:
 // 
-// 	- context *glib.MarkupParseContext: A valid parse context that was returned from [func@markup_parser_new] 
+// 	- _context *glib.MarkupParseContext: A valid parse context that was returned from [func@markup_parser_new] 
 // 
 // The function returns the following values:
 // 
@@ -3901,7 +3896,7 @@ func IsZeroWidth(ch uint32) bool {
 // use this function to get the list of attributes and text out of the
 // markup. This function will not free @context, use [method@GLib.MarkupParseContext.free]
 // to do so.
-func MarkupParserFinish(context *glib.MarkupParseContext) (*AttrList, string, uint32, bool, error) {
+func MarkupParserFinish(_context *glib.MarkupParseContext) (*AttrList, string, uint32, bool, error) {
 	var carg1 *C.GMarkupParseContext // in, none, converted
 	var carg2 *C.PangoAttrList       // out, full, converted
 	var carg3 *C.char                // out, full, string, casted *C.gchar
@@ -3909,10 +3904,10 @@ func MarkupParserFinish(context *glib.MarkupParseContext) (*AttrList, string, ui
 	var cret  C.gboolean             // return
 	var _cerr *C.GError              // out, full, converted, nullable
 
-	carg1 = (*C.GMarkupParseContext)(glib.UnsafeMarkupParseContextToGlibNone(context))
+	carg1 = (*C.GMarkupParseContext)(glib.UnsafeMarkupParseContextToGlibNone(_context))
 
 	cret = C.pango_markup_parser_finish(carg1, &carg2, &carg3, &carg4, &_cerr)
-	runtime.KeepAlive(context)
+	runtime.KeepAlive(_context)
 
 	var attrList  *AttrList
 	var text      string
@@ -5176,13 +5171,13 @@ func NewContext() Context {
 // for Pango, something applications won't do. Backends should
 // call this function if they have attached extra data to the context
 // and such data is changed.
-func (context *ContextInstance) Changed() {
+func (_context *ContextInstance) Changed() {
 	var carg0 *C.PangoContext // in, none, converted
 
-	carg0 = (*C.PangoContext)(UnsafeContextToGlibNone(context))
+	carg0 = (*C.PangoContext)(UnsafeContextToGlibNone(_context))
 
 	C.pango_context_changed(carg0)
-	runtime.KeepAlive(context)
+	runtime.KeepAlive(_context)
 }
 
 // GetBaseDir wraps pango_context_get_base_dir
@@ -5193,14 +5188,14 @@ func (context *ContextInstance) Changed() {
 // Retrieves the base direction for the context.
 // 
 // See [method@Pango.Context.set_base_dir].
-func (context *ContextInstance) GetBaseDir() Direction {
+func (_context *ContextInstance) GetBaseDir() Direction {
 	var carg0 *C.PangoContext  // in, none, converted
 	var cret  C.PangoDirection // return, none, casted
 
-	carg0 = (*C.PangoContext)(UnsafeContextToGlibNone(context))
+	carg0 = (*C.PangoContext)(UnsafeContextToGlibNone(_context))
 
 	cret = C.pango_context_get_base_dir(carg0)
-	runtime.KeepAlive(context)
+	runtime.KeepAlive(_context)
 
 	var goret Direction
 
@@ -5217,14 +5212,14 @@ func (context *ContextInstance) GetBaseDir() Direction {
 // Retrieves the base gravity for the context.
 // 
 // See [method@Pango.Context.set_base_gravity].
-func (context *ContextInstance) GetBaseGravity() Gravity {
+func (_context *ContextInstance) GetBaseGravity() Gravity {
 	var carg0 *C.PangoContext // in, none, converted
 	var cret  C.PangoGravity  // return, none, casted
 
-	carg0 = (*C.PangoContext)(UnsafeContextToGlibNone(context))
+	carg0 = (*C.PangoContext)(UnsafeContextToGlibNone(_context))
 
 	cret = C.pango_context_get_base_gravity(carg0)
-	runtime.KeepAlive(context)
+	runtime.KeepAlive(_context)
 
 	var goret Gravity
 
@@ -5239,14 +5234,14 @@ func (context *ContextInstance) GetBaseGravity() Gravity {
 // 	- goret *FontDescription 
 //
 // Retrieve the default font description for the context.
-func (context *ContextInstance) GetFontDescription() *FontDescription {
+func (_context *ContextInstance) GetFontDescription() *FontDescription {
 	var carg0 *C.PangoContext         // in, none, converted
 	var cret  *C.PangoFontDescription // return, none, converted
 
-	carg0 = (*C.PangoContext)(UnsafeContextToGlibNone(context))
+	carg0 = (*C.PangoContext)(UnsafeContextToGlibNone(_context))
 
 	cret = C.pango_context_get_font_description(carg0)
-	runtime.KeepAlive(context)
+	runtime.KeepAlive(_context)
 
 	var goret *FontDescription
 
@@ -5261,14 +5256,14 @@ func (context *ContextInstance) GetFontDescription() *FontDescription {
 // 	- goret FontMap 
 //
 // Gets the `PangoFontMap` used to look up fonts for this context.
-func (context *ContextInstance) GetFontMap() FontMap {
+func (_context *ContextInstance) GetFontMap() FontMap {
 	var carg0 *C.PangoContext // in, none, converted
 	var cret  *C.PangoFontMap // return, none, converted
 
-	carg0 = (*C.PangoContext)(UnsafeContextToGlibNone(context))
+	carg0 = (*C.PangoContext)(UnsafeContextToGlibNone(_context))
 
 	cret = C.pango_context_get_font_map(carg0)
-	runtime.KeepAlive(context)
+	runtime.KeepAlive(_context)
 
 	var goret FontMap
 
@@ -5288,14 +5283,14 @@ func (context *ContextInstance) GetFontMap() FontMap {
 // except for when the base gravity is %PANGO_GRAVITY_AUTO for
 // which [func@Pango.Gravity.get_for_matrix] is used to return the
 // gravity from the current context matrix.
-func (context *ContextInstance) GetGravity() Gravity {
+func (_context *ContextInstance) GetGravity() Gravity {
 	var carg0 *C.PangoContext // in, none, converted
 	var cret  C.PangoGravity  // return, none, casted
 
-	carg0 = (*C.PangoContext)(UnsafeContextToGlibNone(context))
+	carg0 = (*C.PangoContext)(UnsafeContextToGlibNone(_context))
 
 	cret = C.pango_context_get_gravity(carg0)
-	runtime.KeepAlive(context)
+	runtime.KeepAlive(_context)
 
 	var goret Gravity
 
@@ -5312,14 +5307,14 @@ func (context *ContextInstance) GetGravity() Gravity {
 // Retrieves the gravity hint for the context.
 // 
 // See [method@Pango.Context.set_gravity_hint] for details.
-func (context *ContextInstance) GetGravityHint() GravityHint {
+func (_context *ContextInstance) GetGravityHint() GravityHint {
 	var carg0 *C.PangoContext    // in, none, converted
 	var cret  C.PangoGravityHint // return, none, casted
 
-	carg0 = (*C.PangoContext)(UnsafeContextToGlibNone(context))
+	carg0 = (*C.PangoContext)(UnsafeContextToGlibNone(_context))
 
 	cret = C.pango_context_get_gravity_hint(carg0)
-	runtime.KeepAlive(context)
+	runtime.KeepAlive(_context)
 
 	var goret GravityHint
 
@@ -5334,14 +5329,14 @@ func (context *ContextInstance) GetGravityHint() GravityHint {
 // 	- goret *Language 
 //
 // Retrieves the global language tag for the context.
-func (context *ContextInstance) GetLanguage() *Language {
+func (_context *ContextInstance) GetLanguage() *Language {
 	var carg0 *C.PangoContext  // in, none, converted
 	var cret  *C.PangoLanguage // return, none, converted
 
-	carg0 = (*C.PangoContext)(UnsafeContextToGlibNone(context))
+	carg0 = (*C.PangoContext)(UnsafeContextToGlibNone(_context))
 
 	cret = C.pango_context_get_language(carg0)
-	runtime.KeepAlive(context)
+	runtime.KeepAlive(_context)
 
 	var goret *Language
 
@@ -5359,14 +5354,14 @@ func (context *ContextInstance) GetLanguage() *Language {
 // rendering with this context.
 // 
 // See [method@Pango.Context.set_matrix].
-func (context *ContextInstance) GetMatrix() *Matrix {
+func (_context *ContextInstance) GetMatrix() *Matrix {
 	var carg0 *C.PangoContext // in, none, converted
 	var cret  *C.PangoMatrix  // return, none, converted
 
-	carg0 = (*C.PangoContext)(UnsafeContextToGlibNone(context))
+	carg0 = (*C.PangoContext)(UnsafeContextToGlibNone(_context))
 
 	cret = C.pango_context_get_matrix(carg0)
-	runtime.KeepAlive(context)
+	runtime.KeepAlive(_context)
 
 	var goret *Matrix
 
@@ -5402,13 +5397,13 @@ func (context *ContextInstance) GetMatrix() *Matrix {
 // from multiple of these families would be used to render the string, then
 // the returned fonts would be a composite of the metrics for the fonts loaded
 // for the individual families.
-func (context *ContextInstance) GetMetrics(desc *FontDescription, language *Language) *FontMetrics {
+func (_context *ContextInstance) GetMetrics(desc *FontDescription, language *Language) *FontMetrics {
 	var carg0 *C.PangoContext         // in, none, converted
 	var carg1 *C.PangoFontDescription // in, none, converted, nullable
 	var carg2 *C.PangoLanguage        // in, none, converted, nullable
 	var cret  *C.PangoFontMetrics     // return, full, converted
 
-	carg0 = (*C.PangoContext)(UnsafeContextToGlibNone(context))
+	carg0 = (*C.PangoContext)(UnsafeContextToGlibNone(_context))
 	if desc != nil {
 		carg1 = (*C.PangoFontDescription)(UnsafeFontDescriptionToGlibNone(desc))
 	}
@@ -5417,7 +5412,7 @@ func (context *ContextInstance) GetMetrics(desc *FontDescription, language *Lang
 	}
 
 	cret = C.pango_context_get_metrics(carg0, carg1, carg2)
-	runtime.KeepAlive(context)
+	runtime.KeepAlive(_context)
 	runtime.KeepAlive(desc)
 	runtime.KeepAlive(language)
 
@@ -5435,14 +5430,14 @@ func (context *ContextInstance) GetMetrics(desc *FontDescription, language *Lang
 //
 // Returns whether font rendering with this context should
 // round glyph positions and widths.
-func (context *ContextInstance) GetRoundGlyphPositions() bool {
+func (_context *ContextInstance) GetRoundGlyphPositions() bool {
 	var carg0 *C.PangoContext // in, none, converted
 	var cret  C.gboolean      // return
 
-	carg0 = (*C.PangoContext)(UnsafeContextToGlibNone(context))
+	carg0 = (*C.PangoContext)(UnsafeContextToGlibNone(_context))
 
 	cret = C.pango_context_get_round_glyph_positions(carg0)
-	runtime.KeepAlive(context)
+	runtime.KeepAlive(_context)
 
 	var goret bool
 
@@ -5470,14 +5465,14 @@ func (context *ContextInstance) GetRoundGlyphPositions() bool {
 // This can be used to automatically detect changes to a `PangoContext`,
 // and is only useful when implementing objects that need update when their
 // `PangoContext` changes, like `PangoLayout`.
-func (context *ContextInstance) GetSerial() uint {
+func (_context *ContextInstance) GetSerial() uint {
 	var carg0 *C.PangoContext // in, none, converted
 	var cret  C.guint         // return, none, casted
 
-	carg0 = (*C.PangoContext)(UnsafeContextToGlibNone(context))
+	carg0 = (*C.PangoContext)(UnsafeContextToGlibNone(_context))
 
 	cret = C.pango_context_get_serial(carg0)
-	runtime.KeepAlive(context)
+	runtime.KeepAlive(_context)
 
 	var goret uint
 
@@ -5498,16 +5493,16 @@ func (context *ContextInstance) GetSerial() uint {
 //
 // Loads the font in one of the fontmaps in the context
 // that is the closest match for @desc.
-func (context *ContextInstance) LoadFont(desc *FontDescription) Font {
+func (_context *ContextInstance) LoadFont(desc *FontDescription) Font {
 	var carg0 *C.PangoContext         // in, none, converted
 	var carg1 *C.PangoFontDescription // in, none, converted
 	var cret  *C.PangoFont            // return, full, converted
 
-	carg0 = (*C.PangoContext)(UnsafeContextToGlibNone(context))
+	carg0 = (*C.PangoContext)(UnsafeContextToGlibNone(_context))
 	carg1 = (*C.PangoFontDescription)(UnsafeFontDescriptionToGlibNone(desc))
 
 	cret = C.pango_context_load_font(carg0, carg1)
-	runtime.KeepAlive(context)
+	runtime.KeepAlive(_context)
 	runtime.KeepAlive(desc)
 
 	var goret Font
@@ -5530,18 +5525,18 @@ func (context *ContextInstance) LoadFont(desc *FontDescription) Font {
 //
 // Load a set of fonts in the context that can be used to render
 // a font matching @desc.
-func (context *ContextInstance) LoadFontset(desc *FontDescription, language *Language) Fontset {
+func (_context *ContextInstance) LoadFontset(desc *FontDescription, language *Language) Fontset {
 	var carg0 *C.PangoContext         // in, none, converted
 	var carg1 *C.PangoFontDescription // in, none, converted
 	var carg2 *C.PangoLanguage        // in, none, converted
 	var cret  *C.PangoFontset         // return, full, converted
 
-	carg0 = (*C.PangoContext)(UnsafeContextToGlibNone(context))
+	carg0 = (*C.PangoContext)(UnsafeContextToGlibNone(_context))
 	carg1 = (*C.PangoFontDescription)(UnsafeFontDescriptionToGlibNone(desc))
 	carg2 = (*C.PangoLanguage)(UnsafeLanguageToGlibNone(language))
 
 	cret = C.pango_context_load_fontset(carg0, carg1, carg2)
-	runtime.KeepAlive(context)
+	runtime.KeepAlive(_context)
 	runtime.KeepAlive(desc)
 	runtime.KeepAlive(language)
 
@@ -5566,15 +5561,15 @@ func (context *ContextInstance) LoadFontset(desc *FontDescription, language *Lan
 // direction in the Unicode bidirectional algorithm. A value of
 // %PANGO_DIRECTION_WEAK_LTR or %PANGO_DIRECTION_WEAK_RTL is used only
 // for paragraphs that do not contain any strong characters themselves.
-func (context *ContextInstance) SetBaseDir(direction Direction) {
+func (_context *ContextInstance) SetBaseDir(direction Direction) {
 	var carg0 *C.PangoContext  // in, none, converted
 	var carg1 C.PangoDirection // in, none, casted
 
-	carg0 = (*C.PangoContext)(UnsafeContextToGlibNone(context))
+	carg0 = (*C.PangoContext)(UnsafeContextToGlibNone(_context))
 	carg1 = C.PangoDirection(direction)
 
 	C.pango_context_set_base_dir(carg0, carg1)
-	runtime.KeepAlive(context)
+	runtime.KeepAlive(_context)
 	runtime.KeepAlive(direction)
 }
 
@@ -5587,15 +5582,15 @@ func (context *ContextInstance) SetBaseDir(direction Direction) {
 // Sets the base gravity for the context.
 // 
 // The base gravity is used in laying vertical text out.
-func (context *ContextInstance) SetBaseGravity(gravity Gravity) {
+func (_context *ContextInstance) SetBaseGravity(gravity Gravity) {
 	var carg0 *C.PangoContext // in, none, converted
 	var carg1 C.PangoGravity  // in, none, casted
 
-	carg0 = (*C.PangoContext)(UnsafeContextToGlibNone(context))
+	carg0 = (*C.PangoContext)(UnsafeContextToGlibNone(_context))
 	carg1 = C.PangoGravity(gravity)
 
 	C.pango_context_set_base_gravity(carg0, carg1)
-	runtime.KeepAlive(context)
+	runtime.KeepAlive(_context)
 	runtime.KeepAlive(gravity)
 }
 
@@ -5606,17 +5601,17 @@ func (context *ContextInstance) SetBaseGravity(gravity Gravity) {
 // 	- desc *FontDescription (nullable): the new pango font description 
 //
 // Set the default font description for the context
-func (context *ContextInstance) SetFontDescription(desc *FontDescription) {
+func (_context *ContextInstance) SetFontDescription(desc *FontDescription) {
 	var carg0 *C.PangoContext         // in, none, converted
 	var carg1 *C.PangoFontDescription // in, none, converted, nullable
 
-	carg0 = (*C.PangoContext)(UnsafeContextToGlibNone(context))
+	carg0 = (*C.PangoContext)(UnsafeContextToGlibNone(_context))
 	if desc != nil {
 		carg1 = (*C.PangoFontDescription)(UnsafeFontDescriptionToGlibNone(desc))
 	}
 
 	C.pango_context_set_font_description(carg0, carg1)
-	runtime.KeepAlive(context)
+	runtime.KeepAlive(_context)
 	runtime.KeepAlive(desc)
 }
 
@@ -5632,17 +5627,17 @@ func (context *ContextInstance) SetFontDescription(desc *FontDescription) {
 // This is only for internal use by Pango backends, a `PangoContext`
 // obtained via one of the recommended methods should already have a
 // suitable font map.
-func (context *ContextInstance) SetFontMap(fontMap FontMap) {
+func (_context *ContextInstance) SetFontMap(fontMap FontMap) {
 	var carg0 *C.PangoContext // in, none, converted
 	var carg1 *C.PangoFontMap // in, none, converted, nullable
 
-	carg0 = (*C.PangoContext)(UnsafeContextToGlibNone(context))
+	carg0 = (*C.PangoContext)(UnsafeContextToGlibNone(_context))
 	if fontMap != nil {
 		carg1 = (*C.PangoFontMap)(UnsafeFontMapToGlibNone(fontMap))
 	}
 
 	C.pango_context_set_font_map(carg0, carg1)
-	runtime.KeepAlive(context)
+	runtime.KeepAlive(_context)
 	runtime.KeepAlive(fontMap)
 }
 
@@ -5658,15 +5653,15 @@ func (context *ContextInstance) SetFontMap(fontMap FontMap) {
 // is only relevant if gravity of the context as returned by
 // [method@Pango.Context.get_gravity] is set to %PANGO_GRAVITY_EAST
 // or %PANGO_GRAVITY_WEST.
-func (context *ContextInstance) SetGravityHint(hint GravityHint) {
+func (_context *ContextInstance) SetGravityHint(hint GravityHint) {
 	var carg0 *C.PangoContext    // in, none, converted
 	var carg1 C.PangoGravityHint // in, none, casted
 
-	carg0 = (*C.PangoContext)(UnsafeContextToGlibNone(context))
+	carg0 = (*C.PangoContext)(UnsafeContextToGlibNone(_context))
 	carg1 = C.PangoGravityHint(hint)
 
 	C.pango_context_set_gravity_hint(carg0, carg1)
-	runtime.KeepAlive(context)
+	runtime.KeepAlive(_context)
 	runtime.KeepAlive(hint)
 }
 
@@ -5680,17 +5675,17 @@ func (context *ContextInstance) SetGravityHint(hint GravityHint) {
 // 
 // The default language for the locale of the running process
 // can be found using [func@Pango.Language.get_default].
-func (context *ContextInstance) SetLanguage(language *Language) {
+func (_context *ContextInstance) SetLanguage(language *Language) {
 	var carg0 *C.PangoContext  // in, none, converted
 	var carg1 *C.PangoLanguage // in, none, converted, nullable
 
-	carg0 = (*C.PangoContext)(UnsafeContextToGlibNone(context))
+	carg0 = (*C.PangoContext)(UnsafeContextToGlibNone(_context))
 	if language != nil {
 		carg1 = (*C.PangoLanguage)(UnsafeLanguageToGlibNone(language))
 	}
 
 	C.pango_context_set_language(carg0, carg1)
-	runtime.KeepAlive(context)
+	runtime.KeepAlive(_context)
 	runtime.KeepAlive(language)
 }
 
@@ -5709,17 +5704,17 @@ func (context *ContextInstance) SetLanguage(language *Language) {
 // application of the matrix. So, they don't scale with the matrix, though
 // they may change slightly for different matrices, depending on how the
 // text is fit to the pixel grid.
-func (context *ContextInstance) SetMatrix(matrix *Matrix) {
+func (_context *ContextInstance) SetMatrix(matrix *Matrix) {
 	var carg0 *C.PangoContext // in, none, converted
 	var carg1 *C.PangoMatrix  // in, none, converted, nullable
 
-	carg0 = (*C.PangoContext)(UnsafeContextToGlibNone(context))
+	carg0 = (*C.PangoContext)(UnsafeContextToGlibNone(_context))
 	if matrix != nil {
 		carg1 = (*C.PangoMatrix)(UnsafeMatrixToGlibNone(matrix))
 	}
 
 	C.pango_context_set_matrix(carg0, carg1)
-	runtime.KeepAlive(context)
+	runtime.KeepAlive(_context)
 	runtime.KeepAlive(matrix)
 }
 
@@ -5738,17 +5733,17 @@ func (context *ContextInstance) SetMatrix(matrix *Matrix) {
 // 
 // The default value is to round glyph positions, to remain
 // compatible with previous Pango behavior.
-func (context *ContextInstance) SetRoundGlyphPositions(roundPositions bool) {
+func (_context *ContextInstance) SetRoundGlyphPositions(roundPositions bool) {
 	var carg0 *C.PangoContext // in, none, converted
 	var carg1 C.gboolean      // in
 
-	carg0 = (*C.PangoContext)(UnsafeContextToGlibNone(context))
+	carg0 = (*C.PangoContext)(UnsafeContextToGlibNone(_context))
 	if roundPositions {
 		carg1 = C.TRUE
 	}
 
 	C.pango_context_set_round_glyph_positions(carg0, carg1)
-	runtime.KeepAlive(context)
+	runtime.KeepAlive(_context)
 	runtime.KeepAlive(roundPositions)
 }
 
@@ -6246,7 +6241,7 @@ func FontDescriptionsFree(descs []*FontDescription) {
 // 
 // The function takes the following parameters:
 // 
-// 	- context Context: a `PangoContext` 
+// 	- _context Context: a `PangoContext` 
 // 	- bytes *glib.Bytes: the bytes containing the data 
 // 
 // The function returns the following values:
@@ -6261,17 +6256,17 @@ func FontDescriptionsFree(descs []*FontDescription) {
 // Note: to verify that the returned font is identical to
 // the one that was serialized, you can compare @bytes to the
 // result of serializing the font again.
-func FontDeserialize(context Context, bytes *glib.Bytes) (Font, error) {
+func FontDeserialize(_context Context, bytes *glib.Bytes) (Font, error) {
 	var carg1 *C.PangoContext // in, none, converted
 	var carg2 *C.GBytes       // in, none, converted
 	var cret  *C.PangoFont    // return, full, converted
 	var _cerr *C.GError       // out, full, converted, nullable
 
-	carg1 = (*C.PangoContext)(UnsafeContextToGlibNone(context))
+	carg1 = (*C.PangoContext)(UnsafeContextToGlibNone(_context))
 	carg2 = (*C.GBytes)(glib.UnsafeBytesToGlibNone(bytes))
 
 	cret = C.pango_font_deserialize(carg1, carg2, &_cerr)
-	runtime.KeepAlive(context)
+	runtime.KeepAlive(_context)
 	runtime.KeepAlive(bytes)
 
 	var goret  Font
@@ -7104,7 +7099,7 @@ type FontMap interface {
 	// 
 	// The function takes the following parameters:
 	// 
-	// 	- context Context: the `PangoContext` the font will be used with 
+	// 	- _context Context: the `PangoContext` the font will be used with 
 	// 	- desc *FontDescription: a `PangoFontDescription` describing the font to load 
 	// 
 	// The function returns the following values:
@@ -7117,7 +7112,7 @@ type FontMap interface {
 	// 
 	// The function takes the following parameters:
 	// 
-	// 	- context Context: the `PangoContext` the font will be used with 
+	// 	- _context Context: the `PangoContext` the font will be used with 
 	// 	- desc *FontDescription: a `PangoFontDescription` describing the font to load 
 	// 	- language *Language: a `PangoLanguage` the fonts will be used for 
 	// 
@@ -7134,7 +7129,7 @@ type FontMap interface {
 	// 
 	// 	- font Font: a font in @fontmap 
 	// 	- scale float64: the scale factor to apply 
-	// 	- context Context (nullable): a `PangoContext` 
+	// 	- _context Context (nullable): a `PangoContext` 
 	// 	- variations string (nullable): font variations to use 
 	// 
 	// The function returns the following values:
@@ -7343,7 +7338,7 @@ func (fontmap *FontMapInstance) GetSerial() uint {
 // 
 // The function takes the following parameters:
 // 
-// 	- context Context: the `PangoContext` the font will be used with 
+// 	- _context Context: the `PangoContext` the font will be used with 
 // 	- desc *FontDescription: a `PangoFontDescription` describing the font to load 
 // 
 // The function returns the following values:
@@ -7351,19 +7346,19 @@ func (fontmap *FontMapInstance) GetSerial() uint {
 // 	- goret Font 
 //
 // Load the font in the fontmap that is the closest match for @desc.
-func (fontmap *FontMapInstance) LoadFont(context Context, desc *FontDescription) Font {
+func (fontmap *FontMapInstance) LoadFont(_context Context, desc *FontDescription) Font {
 	var carg0 *C.PangoFontMap         // in, none, converted
 	var carg1 *C.PangoContext         // in, none, converted
 	var carg2 *C.PangoFontDescription // in, none, converted
 	var cret  *C.PangoFont            // return, full, converted
 
 	carg0 = (*C.PangoFontMap)(UnsafeFontMapToGlibNone(fontmap))
-	carg1 = (*C.PangoContext)(UnsafeContextToGlibNone(context))
+	carg1 = (*C.PangoContext)(UnsafeContextToGlibNone(_context))
 	carg2 = (*C.PangoFontDescription)(UnsafeFontDescriptionToGlibNone(desc))
 
 	cret = C.pango_font_map_load_font(carg0, carg1, carg2)
 	runtime.KeepAlive(fontmap)
-	runtime.KeepAlive(context)
+	runtime.KeepAlive(_context)
 	runtime.KeepAlive(desc)
 
 	var goret Font
@@ -7377,7 +7372,7 @@ func (fontmap *FontMapInstance) LoadFont(context Context, desc *FontDescription)
 // 
 // The function takes the following parameters:
 // 
-// 	- context Context: the `PangoContext` the font will be used with 
+// 	- _context Context: the `PangoContext` the font will be used with 
 // 	- desc *FontDescription: a `PangoFontDescription` describing the font to load 
 // 	- language *Language: a `PangoLanguage` the fonts will be used for 
 // 
@@ -7387,7 +7382,7 @@ func (fontmap *FontMapInstance) LoadFont(context Context, desc *FontDescription)
 //
 // Load a set of fonts in the fontmap that can be used to render
 // a font matching @desc.
-func (fontmap *FontMapInstance) LoadFontset(context Context, desc *FontDescription, language *Language) Fontset {
+func (fontmap *FontMapInstance) LoadFontset(_context Context, desc *FontDescription, language *Language) Fontset {
 	var carg0 *C.PangoFontMap         // in, none, converted
 	var carg1 *C.PangoContext         // in, none, converted
 	var carg2 *C.PangoFontDescription // in, none, converted
@@ -7395,13 +7390,13 @@ func (fontmap *FontMapInstance) LoadFontset(context Context, desc *FontDescripti
 	var cret  *C.PangoFontset         // return, full, converted
 
 	carg0 = (*C.PangoFontMap)(UnsafeFontMapToGlibNone(fontmap))
-	carg1 = (*C.PangoContext)(UnsafeContextToGlibNone(context))
+	carg1 = (*C.PangoContext)(UnsafeContextToGlibNone(_context))
 	carg2 = (*C.PangoFontDescription)(UnsafeFontDescriptionToGlibNone(desc))
 	carg3 = (*C.PangoLanguage)(UnsafeLanguageToGlibNone(language))
 
 	cret = C.pango_font_map_load_fontset(carg0, carg1, carg2, carg3)
 	runtime.KeepAlive(fontmap)
-	runtime.KeepAlive(context)
+	runtime.KeepAlive(_context)
 	runtime.KeepAlive(desc)
 	runtime.KeepAlive(language)
 
@@ -7418,7 +7413,7 @@ func (fontmap *FontMapInstance) LoadFontset(context Context, desc *FontDescripti
 // 
 // 	- font Font: a font in @fontmap 
 // 	- scale float64: the scale factor to apply 
-// 	- context Context (nullable): a `PangoContext` 
+// 	- _context Context (nullable): a `PangoContext` 
 // 	- variations string (nullable): font variations to use 
 // 
 // The function returns the following values:
@@ -7429,7 +7424,7 @@ func (fontmap *FontMapInstance) LoadFontset(context Context, desc *FontDescripti
 // is multiplied by @scale, its backend-dependent configuration
 // (e.g. cairo font options) is replaced by the one in @context,
 // and its variations are replaced by @variations.
-func (fontmap *FontMapInstance) ReloadFont(font Font, scale float64, context Context, variations string) Font {
+func (fontmap *FontMapInstance) ReloadFont(font Font, scale float64, _context Context, variations string) Font {
 	var carg0 *C.PangoFontMap // in, none, converted
 	var carg1 *C.PangoFont    // in, none, converted
 	var carg2 C.double        // in, none, casted, casted C.gdouble
@@ -7440,8 +7435,8 @@ func (fontmap *FontMapInstance) ReloadFont(font Font, scale float64, context Con
 	carg0 = (*C.PangoFontMap)(UnsafeFontMapToGlibNone(fontmap))
 	carg1 = (*C.PangoFont)(UnsafeFontToGlibNone(font))
 	carg2 = C.double(scale)
-	if context != nil {
-		carg3 = (*C.PangoContext)(UnsafeContextToGlibNone(context))
+	if _context != nil {
+		carg3 = (*C.PangoContext)(UnsafeContextToGlibNone(_context))
 	}
 	if variations != "" {
 		carg4 = (*C.char)(unsafe.Pointer(C.CString(variations)))
@@ -7452,7 +7447,7 @@ func (fontmap *FontMapInstance) ReloadFont(font Font, scale float64, context Con
 	runtime.KeepAlive(fontmap)
 	runtime.KeepAlive(font)
 	runtime.KeepAlive(scale)
-	runtime.KeepAlive(context)
+	runtime.KeepAlive(_context)
 	runtime.KeepAlive(variations)
 
 	var goret Font
@@ -8783,7 +8778,7 @@ func UnsafeLayoutToGlibFull(c Layout) unsafe.Pointer {
 // 
 // The function takes the following parameters:
 // 
-// 	- context Context: a `PangoContext` 
+// 	- _context Context: a `PangoContext` 
 // 
 // The function returns the following values:
 // 
@@ -8791,14 +8786,14 @@ func UnsafeLayoutToGlibFull(c Layout) unsafe.Pointer {
 //
 // Create a new `PangoLayout` object with attributes initialized to
 // default values for a particular `PangoContext`.
-func NewLayout(context Context) Layout {
+func NewLayout(_context Context) Layout {
 	var carg1 *C.PangoContext // in, none, converted
 	var cret  *C.PangoLayout  // return, full, converted
 
-	carg1 = (*C.PangoContext)(UnsafeContextToGlibNone(context))
+	carg1 = (*C.PangoContext)(UnsafeContextToGlibNone(_context))
 
 	cret = C.pango_layout_new(carg1)
-	runtime.KeepAlive(context)
+	runtime.KeepAlive(_context)
 
 	var goret Layout
 
@@ -8811,7 +8806,7 @@ func NewLayout(context Context) Layout {
 // 
 // The function takes the following parameters:
 // 
-// 	- context Context: a `PangoContext` 
+// 	- _context Context: a `PangoContext` 
 // 	- bytes *glib.Bytes: the bytes containing the data 
 // 	- flags LayoutDeserializeFlags: `PangoLayoutDeserializeFlags` 
 // 
@@ -8827,19 +8822,19 @@ func NewLayout(context Context) Layout {
 // Note: to verify that the returned layout is identical to
 // the one that was serialized, you can compare @bytes to the
 // result of serializing the layout again.
-func LayoutDeserialize(context Context, bytes *glib.Bytes, flags LayoutDeserializeFlags) (Layout, error) {
+func LayoutDeserialize(_context Context, bytes *glib.Bytes, flags LayoutDeserializeFlags) (Layout, error) {
 	var carg1 *C.PangoContext               // in, none, converted
 	var carg2 *C.GBytes                     // in, none, converted
 	var carg3 C.PangoLayoutDeserializeFlags // in, none, casted
 	var cret  *C.PangoLayout                // return, full, converted
 	var _cerr *C.GError                     // out, full, converted, nullable
 
-	carg1 = (*C.PangoContext)(UnsafeContextToGlibNone(context))
+	carg1 = (*C.PangoContext)(UnsafeContextToGlibNone(_context))
 	carg2 = (*C.GBytes)(glib.UnsafeBytesToGlibNone(bytes))
 	carg3 = C.PangoLayoutDeserializeFlags(flags)
 
 	cret = C.pango_layout_deserialize(carg1, carg2, carg3, &_cerr)
-	runtime.KeepAlive(context)
+	runtime.KeepAlive(_context)
 	runtime.KeepAlive(bytes)
 	runtime.KeepAlive(flags)
 

@@ -11,26 +11,6 @@ import (
 // #include <pango/pango.h>
 import "C"
 
-//export _gotk4_pango1_AttrDataCopyFunc
-func _gotk4_pango1_AttrDataCopyFunc(carg1 C.gconstpointer) (cret C.gpointer) {
-	var fn AttrDataCopyFunc
-	{
-		v := userdata.Load(unsafe.Pointer(carg1))
-		if v == nil {
-			panic(`callback not found`)
-		}
-		fn = v.(AttrDataCopyFunc)
-	}
-
-	var goret unsafe.Pointer // return, none, casted
-
-	goret = fn()
-
-	cret = C.gpointer(goret)
-
-	return cret
-}
-
 //export _gotk4_pango1_AttrFilterFunc
 func _gotk4_pango1_AttrFilterFunc(carg1 *C.PangoAttribute, carg2 C.gpointer) (cret C.gboolean) {
 	var fn AttrFilterFunc

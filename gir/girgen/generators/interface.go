@@ -19,9 +19,11 @@ type InterfaceGenerator struct {
 	ReceiverName string
 
 	// sub generators:
-	Constructors GeneratorList
-	Functions    GeneratorList
-	Methods      MethodGeneratorList
+	SubGenerators GeneratorList
+
+	// Methods contains all generated methods for the go interface of the interface
+	// This includes generated signal connect and emit methods
+	Methods MethodGeneratorList
 }
 
 func (g *InterfaceGenerator) Generate(w *file.Package) {
@@ -118,8 +120,7 @@ func (g *InterfaceGenerator) Generate(w *file.Package) {
 
 	GenerateAll(
 		w,
-		g.Constructors,
-		g.Functions,
+		g.SubGenerators,
 		g.Methods,
 	)
 }
@@ -139,13 +140,22 @@ func NewInterfaceGenerator(c *typesystem.Interface) *InterfaceGenerator {
 
 	for _, fn := range c.Functions {
 		if fGen := NewCallableGenerator(fn); fGen != nil {
-			g.Functions = append(g.Functions, fGen)
+			g.SubGenerators = append(g.SubGenerators, fGen)
 		}
 	}
 
 	for _, method := range c.Methods {
 		if methGen := NewCallableGenerator(method); methGen != nil {
 			g.Methods = append(g.Methods, methGen)
+		}
+	}
+
+	for _, sig := range c.Signals {
+		if sig.Action {
+			// action signals are only emitted:
+			g.Methods = append(g.Methods, NewSignalEmitGenerator(sig))
+		} else {
+			g.Methods = append(g.Methods, NewSignalConnectGenerator(sig))
 		}
 	}
 

@@ -580,87 +580,6 @@ func (f TypeFundamentalFlags) String() string {
 	return "TypeFundamentalFlags(" + strings.Join(parts, "|") + ")"
 }
 
-// BoxedCopy wraps g_boxed_copy
-// 
-// The function takes the following parameters:
-// 
-// 	- boxedType Type: The type of @src_boxed. 
-// 	- srcBoxed unsafe.Pointer: The boxed structure to be copied. 
-// 
-// The function returns the following values:
-// 
-// 	- goret unsafe.Pointer 
-//
-// Provide a copy of a boxed structure @src_boxed which is of type @boxed_type.
-func BoxedCopy(boxedType Type, srcBoxed unsafe.Pointer) unsafe.Pointer {
-	var carg1 C.GType         // in, none, casted, alias
-	var carg2 C.gconstpointer // in, none, casted
-	var cret  C.gpointer      // return, full, casted
-
-	carg1 = C.GType(boxedType)
-	carg2 = C.gconstpointer(srcBoxed)
-
-	cret = C.g_boxed_copy(carg1, carg2)
-	runtime.KeepAlive(boxedType)
-	runtime.KeepAlive(srcBoxed)
-
-	var goret unsafe.Pointer
-
-	goret = unsafe.Pointer(cret)
-
-	return goret
-}
-
-// BoxedFree wraps g_boxed_free
-// 
-// The function takes the following parameters:
-// 
-// 	- boxedType Type: The type of @boxed. 
-// 	- boxed unsafe.Pointer: The boxed structure to be freed. 
-//
-// Free the boxed structure @boxed which is of type @boxed_type.
-func BoxedFree(boxedType Type, boxed unsafe.Pointer) {
-	var carg1 C.GType    // in, none, casted, alias
-	var carg2 C.gpointer // in, none, casted
-
-	carg1 = C.GType(boxedType)
-	carg2 = C.gpointer(boxed)
-
-	C.g_boxed_free(carg1, carg2)
-	runtime.KeepAlive(boxedType)
-	runtime.KeepAlive(boxed)
-}
-
-// ClearSignalHandler wraps g_clear_signal_handler
-// 
-// The function takes the following parameters:
-// 
-// 	- handlerIdPtr *uint32: A pointer to a handler ID (of type #gulong) of the handler to be disconnected. 
-// 	- instance unsafe.Pointer: The instance to remove the signal handler from.
-//   This pointer may be %NULL or invalid, if the handler ID is zero. 
-//
-// Disconnects a handler from @instance so it will not be called during
-// any future or currently ongoing emissions of the signal it has been
-// connected to. The @handler_id_ptr is then set to zero, which is never a valid handler ID value (see g_signal_connect()).
-// 
-// If the handler ID is 0 then this function does nothing.
-// 
-// There is also a macro version of this function so that the code
-// will be inlined.
-func ClearSignalHandler(handlerIdPtr *uint32, instance unsafe.Pointer) {
-	var carg1 *C.gulong  // in, transfer: none, C Pointers: 1, Name: gulong
-	var carg2 C.gpointer // in, none, casted
-
-	_ = handlerIdPtr
-	_ = carg1
-	panic("unimplemented conversion of *uint32 (gulong*)")
-	carg2 = C.gpointer(instance)
-
-	C.g_clear_signal_handler(carg1, carg2)
-	runtime.KeepAlive(handlerIdPtr)
-	runtime.KeepAlive(instance)
-}
-
 // EnumCompleteTypeInfo wraps g_enum_complete_type_info
 // 
 // The function takes the following parameters:
@@ -1172,226 +1091,6 @@ func PointerTypeRegisterStatic(name string) Type {
 	return goret
 }
 
-// SignalGetInvocationHint wraps g_signal_get_invocation_hint
-// 
-// The function takes the following parameters:
-// 
-// 	- instance unsafe.Pointer: the instance to query 
-// 
-// The function returns the following values:
-// 
-// 	- goret *SignalInvocationHint 
-//
-// Returns the invocation hint of the innermost signal emission of instance.
-func SignalGetInvocationHint(instance unsafe.Pointer) *SignalInvocationHint {
-	var carg1 C.gpointer               // in, none, casted
-	var cret  *C.GSignalInvocationHint // return, none, converted
-
-	carg1 = C.gpointer(instance)
-
-	cret = C.g_signal_get_invocation_hint(carg1)
-	runtime.KeepAlive(instance)
-
-	var goret *SignalInvocationHint
-
-	goret = UnsafeSignalInvocationHintFromGlibNone(unsafe.Pointer(cret))
-
-	return goret
-}
-
-// SignalHandlerBlock wraps g_signal_handler_block
-// 
-// The function takes the following parameters:
-// 
-// 	- instance unsafe.Pointer: The instance to block the signal handler of. 
-// 	- handlerId uint32: Handler id of the handler to be blocked. 
-//
-// Blocks a handler of an instance so it will not be called during any
-// signal emissions unless it is unblocked again. Thus "blocking" a
-// signal handler means to temporarily deactivate it, a signal handler
-// has to be unblocked exactly the same amount of times it has been
-// blocked before to become active again.
-// 
-// The @handler_id has to be a valid signal handler id, connected to a
-// signal of @instance.
-func SignalHandlerBlock(instance unsafe.Pointer, handlerId uint32) {
-	var carg1 C.gpointer // in, none, casted
-	var carg2 C.gulong   // in, none, casted
-
-	carg1 = C.gpointer(instance)
-	carg2 = C.gulong(handlerId)
-
-	C.g_signal_handler_block(carg1, carg2)
-	runtime.KeepAlive(instance)
-	runtime.KeepAlive(handlerId)
-}
-
-// SignalHandlerDisconnect wraps g_signal_handler_disconnect
-// 
-// The function takes the following parameters:
-// 
-// 	- instance unsafe.Pointer: The instance to remove the signal handler from. 
-// 	- handlerId uint32: Handler id of the handler to be disconnected. 
-//
-// Disconnects a handler from an instance so it will not be called during
-// any future or currently ongoing emissions of the signal it has been
-// connected to. The @handler_id becomes invalid and may be reused.
-// 
-// The @handler_id has to be a valid signal handler id, connected to a
-// signal of @instance.
-func SignalHandlerDisconnect(instance unsafe.Pointer, handlerId uint32) {
-	var carg1 C.gpointer // in, none, casted
-	var carg2 C.gulong   // in, none, casted
-
-	carg1 = C.gpointer(instance)
-	carg2 = C.gulong(handlerId)
-
-	C.g_signal_handler_disconnect(carg1, carg2)
-	runtime.KeepAlive(instance)
-	runtime.KeepAlive(handlerId)
-}
-
-// SignalHandlerIsConnected wraps g_signal_handler_is_connected
-// 
-// The function takes the following parameters:
-// 
-// 	- instance unsafe.Pointer: The instance where a signal handler is sought. 
-// 	- handlerId uint32: the handler ID. 
-// 
-// The function returns the following values:
-// 
-// 	- goret bool 
-//
-// Returns whether @handler_id is the ID of a handler connected to @instance.
-func SignalHandlerIsConnected(instance unsafe.Pointer, handlerId uint32) bool {
-	var carg1 C.gpointer // in, none, casted
-	var carg2 C.gulong   // in, none, casted
-	var cret  C.gboolean // return
-
-	carg1 = C.gpointer(instance)
-	carg2 = C.gulong(handlerId)
-
-	cret = C.g_signal_handler_is_connected(carg1, carg2)
-	runtime.KeepAlive(instance)
-	runtime.KeepAlive(handlerId)
-
-	var goret bool
-
-	if cret != 0 {
-		goret = true
-	}
-
-	return goret
-}
-
-// SignalHandlerUnblock wraps g_signal_handler_unblock
-// 
-// The function takes the following parameters:
-// 
-// 	- instance unsafe.Pointer: The instance to unblock the signal handler of. 
-// 	- handlerId uint32: Handler id of the handler to be unblocked. 
-//
-// Undoes the effect of a previous g_signal_handler_block() call.  A
-// blocked handler is skipped during signal emissions and will not be
-// invoked, unblocking it (for exactly the amount of times it has been
-// blocked before) reverts its "blocked" state, so the handler will be
-// recognized by the signal system and is called upon future or
-// currently ongoing signal emissions (since the order in which
-// handlers are called during signal emissions is deterministic,
-// whether the unblocked handler in question is called as part of a
-// currently ongoing emission depends on how far that emission has
-// proceeded yet).
-// 
-// The @handler_id has to be a valid id of a signal handler that is
-// connected to a signal of @instance and is currently blocked.
-func SignalHandlerUnblock(instance unsafe.Pointer, handlerId uint32) {
-	var carg1 C.gpointer // in, none, casted
-	var carg2 C.gulong   // in, none, casted
-
-	carg1 = C.gpointer(instance)
-	carg2 = C.gulong(handlerId)
-
-	C.g_signal_handler_unblock(carg1, carg2)
-	runtime.KeepAlive(instance)
-	runtime.KeepAlive(handlerId)
-}
-
-// SignalHandlersDestroy wraps g_signal_handlers_destroy
-// 
-// The function takes the following parameters:
-// 
-// 	- instance unsafe.Pointer: The instance whose signal handlers are destroyed 
-//
-// Destroy all signal handlers of a type instance. This function is
-// an implementation detail of the #GObject dispose implementation,
-// and should not be used outside of the type system.
-func SignalHandlersDestroy(instance unsafe.Pointer) {
-	var carg1 C.gpointer // in, none, casted
-
-	carg1 = C.gpointer(instance)
-
-	C.g_signal_handlers_destroy(carg1)
-	runtime.KeepAlive(instance)
-}
-
-// SignalHasHandlerPending wraps g_signal_has_handler_pending
-// 
-// The function takes the following parameters:
-// 
-// 	- instance unsafe.Pointer: the object whose signal handlers are sought. 
-// 	- signalId uint: the signal id. 
-// 	- detail glib.Quark: the detail. 
-// 	- mayBeBlocked bool: whether blocked handlers should count as match. 
-// 
-// The function returns the following values:
-// 
-// 	- goret bool 
-//
-// Returns whether there are any handlers connected to @instance for the
-// given signal id and detail.
-// 
-// If @detail is 0 then it will only match handlers that were connected
-// without detail.  If @detail is non-zero then it will match handlers
-// connected both without detail and with the given detail.  This is
-// consistent with how a signal emitted with @detail would be delivered
-// to those handlers.
-// 
-// Since 2.46 this also checks for a non-default class closure being
-// installed, as this is basically always what you want.
-// 
-// One example of when you might use this is when the arguments to the
-// signal are difficult to compute. A class implementor may opt to not
-// emit the signal if no one is attached anyway, thus saving the cost
-// of building the arguments.
-func SignalHasHandlerPending(instance unsafe.Pointer, signalId uint, detail glib.Quark, mayBeBlocked bool) bool {
-	var carg1 C.gpointer // in, none, casted
-	var carg2 C.guint    // in, none, casted
-	var carg3 C.GQuark   // in, none, casted, alias
-	var carg4 C.gboolean // in
-	var cret  C.gboolean // return
-
-	carg1 = C.gpointer(instance)
-	carg2 = C.guint(signalId)
-	carg3 = C.GQuark(detail)
-	if mayBeBlocked {
-		carg4 = C.TRUE
-	}
-
-	cret = C.g_signal_has_handler_pending(carg1, carg2, carg3, carg4)
-	runtime.KeepAlive(instance)
-	runtime.KeepAlive(signalId)
-	runtime.KeepAlive(detail)
-	runtime.KeepAlive(mayBeBlocked)
-
-	var goret bool
-
-	if cret != 0 {
-		goret = true
-	}
-
-	return goret
-}
-
 // SignalIsValidName wraps g_signal_is_valid_name
 // 
 // The function takes the following parameters:
@@ -1600,60 +1299,6 @@ func SignalRemoveEmissionHook(signalId uint, hookId uint32) {
 	C.g_signal_remove_emission_hook(carg1, carg2)
 	runtime.KeepAlive(signalId)
 	runtime.KeepAlive(hookId)
-}
-
-// SignalStopEmission wraps g_signal_stop_emission
-// 
-// The function takes the following parameters:
-// 
-// 	- instance unsafe.Pointer: the object whose signal handlers you wish to stop. 
-// 	- signalId uint: the signal identifier, as returned by g_signal_lookup(). 
-// 	- detail glib.Quark: the detail which the signal was emitted with. 
-//
-// Stops a signal's current emission.
-// 
-// This will prevent the default method from running, if the signal was
-// %G_SIGNAL_RUN_LAST and you connected normally (i.e. without the "after"
-// flag).
-// 
-// Prints a warning if used on a signal which isn't being emitted.
-func SignalStopEmission(instance unsafe.Pointer, signalId uint, detail glib.Quark) {
-	var carg1 C.gpointer // in, none, casted
-	var carg2 C.guint    // in, none, casted
-	var carg3 C.GQuark   // in, none, casted, alias
-
-	carg1 = C.gpointer(instance)
-	carg2 = C.guint(signalId)
-	carg3 = C.GQuark(detail)
-
-	C.g_signal_stop_emission(carg1, carg2, carg3)
-	runtime.KeepAlive(instance)
-	runtime.KeepAlive(signalId)
-	runtime.KeepAlive(detail)
-}
-
-// SignalStopEmissionByName wraps g_signal_stop_emission_by_name
-// 
-// The function takes the following parameters:
-// 
-// 	- instance unsafe.Pointer: the object whose signal handlers you wish to stop. 
-// 	- detailedSignal string: a string of the form "signal-name::detail". 
-//
-// Stops a signal's current emission.
-// 
-// This is just like g_signal_stop_emission() except it will look up the
-// signal id for you.
-func SignalStopEmissionByName(instance unsafe.Pointer, detailedSignal string) {
-	var carg1 C.gpointer // in, none, casted
-	var carg2 *C.gchar   // in, none, string, casted *C.gchar
-
-	carg1 = C.gpointer(instance)
-	carg2 = (*C.gchar)(unsafe.Pointer(C.CString(detailedSignal)))
-	defer C.free(unsafe.Pointer(carg2))
-
-	C.g_signal_stop_emission_by_name(carg1, carg2)
-	runtime.KeepAlive(instance)
-	runtime.KeepAlive(detailedSignal)
 }
 
 // TypeAddClassPrivate wraps g_type_add_class_private
@@ -1921,91 +1566,6 @@ func TypeChildren(typ Type) (uint, []Type) {
 	return nChildren, goret
 }
 
-// TypeDefaultInterfacePeek wraps g_type_default_interface_peek
-// 
-// The function takes the following parameters:
-// 
-// 	- gType Type: an interface type 
-// 
-// The function returns the following values:
-// 
-// 	- goret unsafe.Pointer 
-//
-// If the interface type @g_type is currently in use, returns its
-// default interface vtable.
-func TypeDefaultInterfacePeek(gType Type) unsafe.Pointer {
-	var carg1 C.GType    // in, none, casted, alias
-	var cret  C.gpointer // return, none, casted
-
-	carg1 = C.GType(gType)
-
-	cret = C.g_type_default_interface_peek(carg1)
-	runtime.KeepAlive(gType)
-
-	var goret unsafe.Pointer
-
-	goret = unsafe.Pointer(cret)
-
-	return goret
-}
-
-// TypeDefaultInterfaceRef wraps g_type_default_interface_ref
-// 
-// The function takes the following parameters:
-// 
-// 	- gType Type: an interface type 
-// 
-// The function returns the following values:
-// 
-// 	- goret unsafe.Pointer 
-//
-// Increments the reference count for the interface type @g_type,
-// and returns the default interface vtable for the type.
-// 
-// If the type is not currently in use, then the default vtable
-// for the type will be created and initialized by calling
-// the base interface init and default vtable init functions for
-// the type (the @base_init and @class_init members of #GTypeInfo).
-// Calling g_type_default_interface_ref() is useful when you
-// want to make sure that signals and properties for an interface
-// have been installed.
-func TypeDefaultInterfaceRef(gType Type) unsafe.Pointer {
-	var carg1 C.GType    // in, none, casted, alias
-	var cret  C.gpointer // return, none, casted
-
-	carg1 = C.GType(gType)
-
-	cret = C.g_type_default_interface_ref(carg1)
-	runtime.KeepAlive(gType)
-
-	var goret unsafe.Pointer
-
-	goret = unsafe.Pointer(cret)
-
-	return goret
-}
-
-// TypeDefaultInterfaceUnref wraps g_type_default_interface_unref
-// 
-// The function takes the following parameters:
-// 
-// 	- gIface unsafe.Pointer: the default vtable
-//     structure for an interface, as returned by g_type_default_interface_ref() 
-//
-// Decrements the reference count for the type corresponding to the
-// interface default vtable @g_iface. If the type is dynamic, then
-// when no one is using the interface and all references have
-// been released, the finalize function for the interface's default
-// vtable (the @class_finalize member of #GTypeInfo) will be called.
-func TypeDefaultInterfaceUnref(gIface unsafe.Pointer) {
-	var carg1 C.gpointer // in, none, casted
-
-	carg1 = C.gpointer(gIface)
-
-	C.g_type_default_interface_unref(carg1)
-	runtime.KeepAlive(gIface)
-}
-
 // TypeDepth wraps g_type_depth
 // 
 // The function takes the following parameters:
@@ -2214,42 +1774,6 @@ func TypeGetPlugin(typ Type) TypePlugin {
 	var goret TypePlugin
 
 	goret = UnsafeTypePluginFromGlibNone(unsafe.Pointer(cret))
-
-	return goret
-}
-
-// TypeGetQdata wraps g_type_get_qdata
-// 
-// The function takes the following parameters:
-// 
-// 	- typ Type: a #GType 
-// 	- quark glib.Quark: a #GQuark id to identify the data 
-// 
-// The function returns the following values:
-// 
-// 	- goret unsafe.Pointer 
-//
-// Obtains data which has previously been attached to @type
-// with g_type_set_qdata().
-// 
-// Note that this does not take subtyping into account; data
-// attached to one type with g_type_set_qdata() cannot
-// be retrieved from a subtype using g_type_get_qdata().
-func TypeGetQdata(typ Type, quark glib.Quark) unsafe.Pointer {
-	var carg1 C.GType    // in, none, casted, alias
-	var carg2 C.GQuark   // in, none, casted, alias
-	var cret  C.gpointer // return, none, casted
-
-	carg1 = C.GType(typ)
-	carg2 = C.GQuark(quark)
-
-	cret = C.g_type_get_qdata(carg1, carg2)
-	runtime.KeepAlive(typ)
-	runtime.KeepAlive(quark)
-
-	var goret unsafe.Pointer
-
-	goret = unsafe.Pointer(cret)
 
 	return goret
 }
@@ -2539,32 +2063,6 @@ func TypeRegisterDynamic(parentType Type, typeName string, plugin TypePlugin, fl
 	return goret
 }
 
-// TypeSetQdata wraps g_type_set_qdata
-// 
-// The function takes the following parameters:
-// 
-// 	- typ Type: a #GType 
-// 	- quark glib.Quark: a #GQuark id to identify the data 
-// 	- data unsafe.Pointer (nullable): the data 
-//
-// Attaches arbitrary data to a type.
-func TypeSetQdata(typ Type, quark glib.Quark, data unsafe.Pointer) {
-	var carg1 C.GType    // in, none, casted, alias
-	var carg2 C.GQuark   // in, none, casted, alias
-	var carg3 C.gpointer // in, none, casted, nullable
-
-	carg1 = C.GType(typ)
-	carg2 = C.GQuark(quark)
-	if data != nil {
-		carg3 = C.gpointer(data)
-	}
-
-	C.g_type_set_qdata(carg1, carg2, carg3)
-	runtime.KeepAlive(typ)
-	runtime.KeepAlive(quark)
-	runtime.KeepAlive(data)
-}
-
 // TypeTestFlags wraps g_type_test_flags
 // 
 // The function takes the following parameters:
@@ -2620,7 +2118,7 @@ type TypePluginInstance struct {
 
 var _ TypePlugin = (*TypePluginInstance)(nil)
 
-// TypePluginInstance wraps GTypePlugin
+// TypePlugin wraps GTypePlugin
 //
 // An interface that handles the lifecycle of dynamically loaded types.
 // 
@@ -2857,43 +2355,6 @@ var _ BindingGroup = (*BindingGroupInstance)(nil)
 type BindingGroup interface {
 	Object
 	upcastToGBindingGroup() *BindingGroupInstance
-
-	// Bind wraps g_binding_group_bind
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- sourceProperty string: the property on the source to bind 
-	// 	- target unsafe.Pointer: the target #GObject 
-	// 	- targetProperty string: the property on @target to bind 
-	// 	- flags BindingFlags: the flags used to create the #GBinding 
-	//
-	// Creates a binding between @source_property on the source object
-	// and @target_property on @target. Whenever the @source_property
-	// is changed the @target_property is updated using the same value.
-	// The binding flag %G_BINDING_SYNC_CREATE is automatically specified.
-	// 
-	// See g_object_bind_property() for more information.
-	Bind(string, unsafe.Pointer, string, BindingFlags)
-	// DupSource wraps g_binding_group_dup_source
-	// The function returns the following values:
-	// 
-	// 	- goret unsafe.Pointer 
-	//
-	// Gets the source object used for binding properties.
-	DupSource() unsafe.Pointer
-	// SetSource wraps g_binding_group_set_source
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- source unsafe.Pointer (nullable): the source #GObject,
-	//   or %NULL to clear it 
-	//
-	// Sets @source as the source object used for creating property
-	// bindings. If there is already a source object all bindings from it
-	// will be removed.
-	// 
-	// Note that all properties that have been bound must exist on @source.
-	SetSource(unsafe.Pointer)
 }
 
 func unsafeWrapBindingGroup(base *ObjectInstance) *BindingGroupInstance {
@@ -2946,92 +2407,6 @@ func NewBindingGroup() BindingGroup {
 	goret = UnsafeBindingGroupFromGlibFull(unsafe.Pointer(cret))
 
 	return goret
-}
-
-// Bind wraps g_binding_group_bind
-// 
-// The function takes the following parameters:
-// 
-// 	- sourceProperty string: the property on the source to bind 
-// 	- target unsafe.Pointer: the target #GObject 
-// 	- targetProperty string: the property on @target to bind 
-// 	- flags BindingFlags: the flags used to create the #GBinding 
-//
-// Creates a binding between @source_property on the source object
-// and @target_property on @target. Whenever the @source_property
-// is changed the @target_property is updated using the same value.
-// The binding flag %G_BINDING_SYNC_CREATE is automatically specified.
-// 
-// See g_object_bind_property() for more information.
-func (self *BindingGroupInstance) Bind(sourceProperty string, target unsafe.Pointer, targetProperty string, flags BindingFlags) {
-	var carg0 *C.GBindingGroup // in, none, converted
-	var carg1 *C.gchar         // in, none, string, casted *C.gchar
-	var carg2 C.gpointer       // in, none, casted
-	var carg3 *C.gchar         // in, none, string, casted *C.gchar
-	var carg4 C.GBindingFlags  // in, none, casted
-
-	carg0 = (*C.GBindingGroup)(UnsafeBindingGroupToGlibNone(self))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(sourceProperty)))
-	defer C.free(unsafe.Pointer(carg1))
-	carg2 = C.gpointer(target)
-	carg3 = (*C.gchar)(unsafe.Pointer(C.CString(targetProperty)))
-	defer C.free(unsafe.Pointer(carg3))
-	carg4 = C.GBindingFlags(flags)
-
-	C.g_binding_group_bind(carg0, carg1, carg2, carg3, carg4)
-	runtime.KeepAlive(self)
-	runtime.KeepAlive(sourceProperty)
-	runtime.KeepAlive(target)
-	runtime.KeepAlive(targetProperty)
-	runtime.KeepAlive(flags)
-}
-
-// DupSource wraps g_binding_group_dup_source
-// The function returns the following values:
-// 
-// 	- goret unsafe.Pointer 
-//
-// Gets the source object used for binding properties.
-func (self *BindingGroupInstance) DupSource() unsafe.Pointer {
-	var carg0 *C.GBindingGroup // in, none, converted
-	var cret  C.gpointer       // return, none, casted
-
-	carg0 = (*C.GBindingGroup)(UnsafeBindingGroupToGlibNone(self))
-
-	cret = C.g_binding_group_dup_source(carg0)
-	runtime.KeepAlive(self)
-
-	var goret unsafe.Pointer
-
-	goret = unsafe.Pointer(cret)
-
-	return goret
-}
-
-// SetSource wraps g_binding_group_set_source
-// 
-// The function takes the following parameters:
-// 
-// 	- source unsafe.Pointer (nullable): the source #GObject,
-//   or %NULL to clear it 
-//
-// Sets @source as the source object used for creating property
-// bindings. If there is already a source object all bindings from it
-// will be removed.
-// 
-// Note that all properties that have been bound must exist on @source.
-func (self *BindingGroupInstance) SetSource(source unsafe.Pointer) {
-	var carg0 *C.GBindingGroup // in, none, converted
-	var carg1 C.gpointer       // in, none, casted, nullable
-
-	carg0 = (*C.GBindingGroup)(UnsafeBindingGroupToGlibNone(self))
-	if source != nil {
-		carg1 = C.gpointer(source)
-	}
-
-	C.g_binding_group_set_source(carg0, carg1)
-	runtime.KeepAlive(self)
-	runtime.KeepAlive(source)
 }
 
 // InitiallyUnownedInstance is the instance type used by all types extending GInitiallyUnowned. It is used internally by the bindings. Users should use the interface [InitiallyUnowned] instead.
@@ -3128,27 +2503,6 @@ type SignalGroup interface {
 	// 
 	// This blocked state will be kept across changes of the target instance.
 	Block()
-	// DupTarget wraps g_signal_group_dup_target
-	// The function returns the following values:
-	// 
-	// 	- goret unsafe.Pointer 
-	//
-	// Gets the target instance used when connecting signals.
-	DupTarget() unsafe.Pointer
-	// SetTarget wraps g_signal_group_set_target
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- target unsafe.Pointer (nullable): The target instance used
-	//     when connecting signals. 
-	//
-	// Sets the target instance used when connecting signals. Any signal
-	// that has been registered with g_signal_group_connect_object() or
-	// similar functions will be connected to this object.
-	// 
-	// If the target instance was previously set, signals will be
-	// disconnected from that object prior to connecting to @target.
-	SetTarget(unsafe.Pointer)
 	// Unblock wraps g_signal_group_unblock
 	//
 	// Unblocks all signal handlers managed by @self so they will be
@@ -3156,6 +2510,21 @@ type SignalGroup interface {
 	// again. Must be unblocked exactly the same number of times it
 	// has been blocked to become active again.
 	Unblock()
+	// ConnectBind connects the provided callback to the "bind" signal
+	//
+	// This signal is emitted when #GSignalGroup:target is set to a new value
+	// other than %NULL. It is similar to #GObject::notify on `target` except it
+	// will not emit when #GSignalGroup:target is %NULL and also allows for
+	// receiving the #GObject without a data-race.
+	ConnectBind(func(SignalGroup, Object)) SignalHandle
+	// ConnectUnbind connects the provided callback to the "unbind" signal
+	//
+	// This signal is emitted when the target instance of @self is set to a
+	// new #GObject.
+	// 
+	// This signal will only be emitted if the previous target of @self is
+	// non-%NULL.
+	ConnectUnbind(func(SignalGroup)) SignalHandle
 }
 
 func unsafeWrapSignalGroup(base *ObjectInstance) *SignalGroupInstance {
@@ -3235,55 +2604,6 @@ func (self *SignalGroupInstance) Block() {
 	runtime.KeepAlive(self)
 }
 
-// DupTarget wraps g_signal_group_dup_target
-// The function returns the following values:
-// 
-// 	- goret unsafe.Pointer 
-//
-// Gets the target instance used when connecting signals.
-func (self *SignalGroupInstance) DupTarget() unsafe.Pointer {
-	var carg0 *C.GSignalGroup // in, none, converted
-	var cret  C.gpointer      // return, full, casted
-
-	carg0 = (*C.GSignalGroup)(UnsafeSignalGroupToGlibNone(self))
-
-	cret = C.g_signal_group_dup_target(carg0)
-	runtime.KeepAlive(self)
-
-	var goret unsafe.Pointer
-
-	goret = unsafe.Pointer(cret)
-
-	return goret
-}
-
-// SetTarget wraps g_signal_group_set_target
-// 
-// The function takes the following parameters:
-// 
-// 	- target unsafe.Pointer (nullable): The target instance used
-//     when connecting signals. 
-//
-// Sets the target instance used when connecting signals. Any signal
-// that has been registered with g_signal_group_connect_object() or
-// similar functions will be connected to this object.
-// 
-// If the target instance was previously set, signals will be
-// disconnected from that object prior to connecting to @target.
-func (self *SignalGroupInstance) SetTarget(target unsafe.Pointer) {
-	var carg0 *C.GSignalGroup // in, none, converted
-	var carg1 C.gpointer      // in, none, casted, nullable
-
-	carg0 = (*C.GSignalGroup)(UnsafeSignalGroupToGlibNone(self))
-	if target != nil {
-		carg1 = C.gpointer(target)
-	}
-
-	C.g_signal_group_set_target(carg0, carg1)
-	runtime.KeepAlive(self)
-	runtime.KeepAlive(target)
-}
-
 // Unblock wraps g_signal_group_unblock
 //
 // Unblocks all signal handlers managed by @self so they will be
@@ -3299,6 +2619,25 @@ func (self *SignalGroupInstance) Unblock() {
 	runtime.KeepAlive(self)
 }
 
+// ConnectBind connects the provided callback to the "bind" signal
+//
+// This signal is emitted when #GSignalGroup:target is set to a new value
+// other than %NULL. It is similar to #GObject::notify on `target` except it
+// will not emit when #GSignalGroup:target is %NULL and also allows for
+// receiving the #GObject without a data-race.
+func (o *SignalGroupInstance) ConnectBind(fn func(SignalGroup, Object)) SignalHandle {
+	return o.Connect("bind", fn)
+}
+// ConnectUnbind connects the provided callback to the "unbind" signal
+//
+// This signal is emitted when the target instance of @self is set to a
+// new #GObject.
+// 
+// This signal will only be emitted if the previous target of @self is
+// non-%NULL.
+func (o *SignalGroupInstance) ConnectUnbind(fn func(SignalGroup)) SignalHandle {
+	return o.Connect("unbind", fn)
+}
 // TypeModuleInstance is the instance type used by all types extending GTypeModule. It is used internally by the bindings. Users should use the interface [TypeModule] instead.
 type TypeModuleInstance struct {
 	_ [0]func() // equal guard
@@ -4769,34 +4108,6 @@ func UnsafeTypeInstanceToGlibFull(t *TypeInstance) unsafe.Pointer {
 	t.native = nil // TypeInstance is invalid from here on
 	return _p
 }
-// GetPrivate wraps g_type_instance_get_private
-// 
-// The function takes the following parameters:
-// 
-// 	- privateType Type 
-// 
-// The function returns the following values:
-// 
-// 	- goret unsafe.Pointer 
-func (instance *TypeInstance) GetPrivate(privateType Type) unsafe.Pointer {
-	var carg0 *C.GTypeInstance // in, none, converted
-	var carg1 C.GType          // in, none, casted, alias
-	var cret  C.gpointer       // return, none, casted
-
-	carg0 = (*C.GTypeInstance)(UnsafeTypeInstanceToGlibNone(instance))
-	carg1 = C.GType(privateType)
-
-	cret = C.g_type_instance_get_private(carg0, carg1)
-	runtime.KeepAlive(instance)
-	runtime.KeepAlive(privateType)
-
-	var goret unsafe.Pointer
-
-	goret = unsafe.Pointer(cret)
-
-	return goret
-}
-
 // TypeModuleClass wraps GTypeModuleClass
 //
 // In order to implement dynamic loading of types based on #GTypeModule,

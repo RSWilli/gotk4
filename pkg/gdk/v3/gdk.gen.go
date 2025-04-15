@@ -8797,7 +8797,7 @@ func DisableMultidevice() {
 // 
 // The function takes the following parameters:
 // 
-// 	- context DragContext: a #GdkDragContext 
+// 	- _context DragContext: a #GdkDragContext 
 // 	- time_ uint32: the timestamp for this operation 
 //
 // Aborts a drag without dropping.
@@ -8806,15 +8806,15 @@ func DisableMultidevice() {
 // 
 // This function does not need to be called in managed drag and drop
 // operations. See gdk_drag_context_manage_dnd() for more information.
-func DragAbort(context DragContext, time_ uint32) {
+func DragAbort(_context DragContext, time_ uint32) {
 	var carg1 *C.GdkDragContext // in, none, converted
 	var carg2 C.guint32         // in, none, casted
 
-	carg1 = (*C.GdkDragContext)(UnsafeDragContextToGlibNone(context))
+	carg1 = (*C.GdkDragContext)(UnsafeDragContextToGlibNone(_context))
 	carg2 = C.guint32(time_)
 
 	C.gdk_drag_abort(carg1, carg2)
-	runtime.KeepAlive(context)
+	runtime.KeepAlive(_context)
 	runtime.KeepAlive(time_)
 }
 
@@ -8822,7 +8822,7 @@ func DragAbort(context DragContext, time_ uint32) {
 // 
 // The function takes the following parameters:
 // 
-// 	- context DragContext: a #GdkDragContext 
+// 	- _context DragContext: a #GdkDragContext 
 // 	- time_ uint32: the timestamp for this operation 
 //
 // Drops on the current destination.
@@ -8831,15 +8831,15 @@ func DragAbort(context DragContext, time_ uint32) {
 // 
 // This function does not need to be called in managed drag and drop
 // operations. See gdk_drag_context_manage_dnd() for more information.
-func DragDrop(context DragContext, time_ uint32) {
+func DragDrop(_context DragContext, time_ uint32) {
 	var carg1 *C.GdkDragContext // in, none, converted
 	var carg2 C.guint32         // in, none, casted
 
-	carg1 = (*C.GdkDragContext)(UnsafeDragContextToGlibNone(context))
+	carg1 = (*C.GdkDragContext)(UnsafeDragContextToGlibNone(_context))
 	carg2 = C.guint32(time_)
 
 	C.gdk_drag_drop(carg1, carg2)
-	runtime.KeepAlive(context)
+	runtime.KeepAlive(_context)
 	runtime.KeepAlive(time_)
 }
 
@@ -8847,7 +8847,7 @@ func DragDrop(context DragContext, time_ uint32) {
 // 
 // The function takes the following parameters:
 // 
-// 	- context DragContext: a #GdkDragContext 
+// 	- _context DragContext: a #GdkDragContext 
 // 	- success bool: whether the drag was ultimatively successful 
 //
 // Inform GDK if the drop ended successfully. Passing %FALSE
@@ -8860,17 +8860,17 @@ func DragDrop(context DragContext, time_ uint32) {
 // The #GdkDragContext will only take the first gdk_drag_drop_done()
 // call as effective, if this function is called multiple times,
 // all subsequent calls will be ignored.
-func DragDropDone(context DragContext, success bool) {
+func DragDropDone(_context DragContext, success bool) {
 	var carg1 *C.GdkDragContext // in, none, converted
 	var carg2 C.gboolean        // in
 
-	carg1 = (*C.GdkDragContext)(UnsafeDragContextToGlibNone(context))
+	carg1 = (*C.GdkDragContext)(UnsafeDragContextToGlibNone(_context))
 	if success {
 		carg2 = C.TRUE
 	}
 
 	C.gdk_drag_drop_done(carg1, carg2)
-	runtime.KeepAlive(context)
+	runtime.KeepAlive(_context)
 	runtime.KeepAlive(success)
 }
 
@@ -8878,7 +8878,7 @@ func DragDropDone(context DragContext, success bool) {
 // 
 // The function takes the following parameters:
 // 
-// 	- context DragContext: a #GdkDragContext 
+// 	- _context DragContext: a #GdkDragContext 
 // 
 // The function returns the following values:
 // 
@@ -8888,14 +8888,14 @@ func DragDropDone(context DragContext, success bool) {
 // transferred. This function is intended to be used while
 // handling a %GDK_DROP_FINISHED event, its return value is
 // meaningless at other times.
-func DragDropSucceeded(context DragContext) bool {
+func DragDropSucceeded(_context DragContext) bool {
 	var carg1 *C.GdkDragContext // in, none, converted
 	var cret  C.gboolean        // return
 
-	carg1 = (*C.GdkDragContext)(UnsafeDragContextToGlibNone(context))
+	carg1 = (*C.GdkDragContext)(UnsafeDragContextToGlibNone(_context))
 
 	cret = C.gdk_drag_drop_succeeded(carg1)
-	runtime.KeepAlive(context)
+	runtime.KeepAlive(_context)
 
 	var goret bool
 
@@ -8910,7 +8910,7 @@ func DragDropSucceeded(context DragContext) bool {
 // 
 // The function takes the following parameters:
 // 
-// 	- context DragContext: a #GdkDragContext 
+// 	- _context DragContext: a #GdkDragContext 
 // 	- dragWindow Window: a window which may be at the pointer position, but
 //     should be ignored, since it is put up by the drag source as an icon 
 // 	- screen Screen: the screen where the destination window is sought 
@@ -8927,7 +8927,7 @@ func DragDropSucceeded(context DragContext) bool {
 // 
 // This function is called by the drag source to obtain the
 // @dest_window and @protocol parameters for gdk_drag_motion().
-func DragFindWindowForScreen(context DragContext, dragWindow Window, screen Screen, xRoot int, yRoot int) (Window, DragProtocol) {
+func DragFindWindowForScreen(_context DragContext, dragWindow Window, screen Screen, xRoot int, yRoot int) (Window, DragProtocol) {
 	var carg1 *C.GdkDragContext // in, none, converted
 	var carg2 *C.GdkWindow      // in, none, converted
 	var carg3 *C.GdkScreen      // in, none, converted
@@ -8936,14 +8936,14 @@ func DragFindWindowForScreen(context DragContext, dragWindow Window, screen Scre
 	var carg6 *C.GdkWindow      // out, full, converted
 	var carg7 C.GdkDragProtocol // out, full, casted
 
-	carg1 = (*C.GdkDragContext)(UnsafeDragContextToGlibNone(context))
+	carg1 = (*C.GdkDragContext)(UnsafeDragContextToGlibNone(_context))
 	carg2 = (*C.GdkWindow)(UnsafeWindowToGlibNone(dragWindow))
 	carg3 = (*C.GdkScreen)(UnsafeScreenToGlibNone(screen))
 	carg4 = C.gint(xRoot)
 	carg5 = C.gint(yRoot)
 
 	C.gdk_drag_find_window_for_screen(carg1, carg2, carg3, carg4, carg5, &carg6, &carg7)
-	runtime.KeepAlive(context)
+	runtime.KeepAlive(_context)
 	runtime.KeepAlive(dragWindow)
 	runtime.KeepAlive(screen)
 	runtime.KeepAlive(xRoot)
@@ -8962,7 +8962,7 @@ func DragFindWindowForScreen(context DragContext, dragWindow Window, screen Scre
 // 
 // The function takes the following parameters:
 // 
-// 	- context DragContext: a #GdkDragContext 
+// 	- _context DragContext: a #GdkDragContext 
 // 	- destWindow Window: the new destination window, obtained by
 //     gdk_drag_find_window() 
 // 	- protocol DragProtocol: the DND protocol in use, obtained by gdk_drag_find_window() 
@@ -8983,7 +8983,7 @@ func DragFindWindowForScreen(context DragContext, dragWindow Window, screen Scre
 // 
 // This function does not need to be called in managed drag and drop
 // operations. See gdk_drag_context_manage_dnd() for more information.
-func DragMotion(context DragContext, destWindow Window, protocol DragProtocol, xRoot int, yRoot int, suggestedAction DragAction, possibleActions DragAction, time_ uint32) bool {
+func DragMotion(_context DragContext, destWindow Window, protocol DragProtocol, xRoot int, yRoot int, suggestedAction DragAction, possibleActions DragAction, time_ uint32) bool {
 	var carg1 *C.GdkDragContext // in, none, converted
 	var carg2 *C.GdkWindow      // in, none, converted
 	var carg3 C.GdkDragProtocol // in, none, casted
@@ -8994,7 +8994,7 @@ func DragMotion(context DragContext, destWindow Window, protocol DragProtocol, x
 	var carg8 C.guint32         // in, none, casted
 	var cret  C.gboolean        // return
 
-	carg1 = (*C.GdkDragContext)(UnsafeDragContextToGlibNone(context))
+	carg1 = (*C.GdkDragContext)(UnsafeDragContextToGlibNone(_context))
 	carg2 = (*C.GdkWindow)(UnsafeWindowToGlibNone(destWindow))
 	carg3 = C.GdkDragProtocol(protocol)
 	carg4 = C.gint(xRoot)
@@ -9004,7 +9004,7 @@ func DragMotion(context DragContext, destWindow Window, protocol DragProtocol, x
 	carg8 = C.guint32(time_)
 
 	cret = C.gdk_drag_motion(carg1, carg2, carg3, carg4, carg5, carg6, carg7, carg8)
-	runtime.KeepAlive(context)
+	runtime.KeepAlive(_context)
 	runtime.KeepAlive(destWindow)
 	runtime.KeepAlive(protocol)
 	runtime.KeepAlive(xRoot)
@@ -9026,7 +9026,7 @@ func DragMotion(context DragContext, destWindow Window, protocol DragProtocol, x
 // 
 // The function takes the following parameters:
 // 
-// 	- context DragContext: a #GdkDragContext 
+// 	- _context DragContext: a #GdkDragContext 
 // 	- action DragAction: the selected action which will be taken when a drop happens,
 //    or 0 to indicate that a drop will not be accepted 
 // 	- time_ uint32: the timestamp for this operation 
@@ -9035,17 +9035,17 @@ func DragMotion(context DragContext, destWindow Window, protocol DragProtocol, x
 // 
 // This function is called by the drag destination in response to
 // gdk_drag_motion() called by the drag source.
-func DragStatus(context DragContext, action DragAction, time_ uint32) {
+func DragStatus(_context DragContext, action DragAction, time_ uint32) {
 	var carg1 *C.GdkDragContext // in, none, converted
 	var carg2 C.GdkDragAction   // in, none, casted
 	var carg3 C.guint32         // in, none, casted
 
-	carg1 = (*C.GdkDragContext)(UnsafeDragContextToGlibNone(context))
+	carg1 = (*C.GdkDragContext)(UnsafeDragContextToGlibNone(_context))
 	carg2 = C.GdkDragAction(action)
 	carg3 = C.guint32(time_)
 
 	C.gdk_drag_status(carg1, carg2, carg3)
-	runtime.KeepAlive(context)
+	runtime.KeepAlive(_context)
 	runtime.KeepAlive(action)
 	runtime.KeepAlive(time_)
 }
@@ -9054,26 +9054,26 @@ func DragStatus(context DragContext, action DragAction, time_ uint32) {
 // 
 // The function takes the following parameters:
 // 
-// 	- context DragContext: a #GdkDragContext 
+// 	- _context DragContext: a #GdkDragContext 
 // 	- success bool: %TRUE if the data was successfully received 
 // 	- time_ uint32: the timestamp for this operation 
 //
 // Ends the drag operation after a drop.
 // 
 // This function is called by the drag destination.
-func DropFinish(context DragContext, success bool, time_ uint32) {
+func DropFinish(_context DragContext, success bool, time_ uint32) {
 	var carg1 *C.GdkDragContext // in, none, converted
 	var carg2 C.gboolean        // in
 	var carg3 C.guint32         // in, none, casted
 
-	carg1 = (*C.GdkDragContext)(UnsafeDragContextToGlibNone(context))
+	carg1 = (*C.GdkDragContext)(UnsafeDragContextToGlibNone(_context))
 	if success {
 		carg2 = C.TRUE
 	}
 	carg3 = C.guint32(time_)
 
 	C.gdk_drop_finish(carg1, carg2, carg3)
-	runtime.KeepAlive(context)
+	runtime.KeepAlive(_context)
 	runtime.KeepAlive(success)
 	runtime.KeepAlive(time_)
 }
@@ -9082,7 +9082,7 @@ func DropFinish(context DragContext, success bool, time_ uint32) {
 // 
 // The function takes the following parameters:
 // 
-// 	- context DragContext: a #GdkDragContext 
+// 	- _context DragContext: a #GdkDragContext 
 // 	- accepted bool: %TRUE if the drop is accepted 
 // 	- time_ uint32: the timestamp for this operation 
 //
@@ -9090,19 +9090,19 @@ func DropFinish(context DragContext, success bool, time_ uint32) {
 // 
 // This function is called by the drag destination in response
 // to a drop initiated by the drag source.
-func DropReply(context DragContext, accepted bool, time_ uint32) {
+func DropReply(_context DragContext, accepted bool, time_ uint32) {
 	var carg1 *C.GdkDragContext // in, none, converted
 	var carg2 C.gboolean        // in
 	var carg3 C.guint32         // in, none, casted
 
-	carg1 = (*C.GdkDragContext)(UnsafeDragContextToGlibNone(context))
+	carg1 = (*C.GdkDragContext)(UnsafeDragContextToGlibNone(_context))
 	if accepted {
 		carg2 = C.TRUE
 	}
 	carg3 = C.guint32(time_)
 
 	C.gdk_drop_reply(carg1, carg2, carg3)
-	runtime.KeepAlive(context)
+	runtime.KeepAlive(_context)
 	runtime.KeepAlive(accepted)
 	runtime.KeepAlive(time_)
 }
@@ -10349,7 +10349,7 @@ type DevicePadInstance struct {
 
 var _ DevicePad = (*DevicePadInstance)(nil)
 
-// DevicePadInstance wraps GdkDevicePad
+// DevicePad wraps GdkDevicePad
 //
 // #GdkDevicePad is an interface implemented by devices of type
 // %GDK_SOURCE_TABLET_PAD, it allows querying the features provided
@@ -10739,15 +10739,15 @@ func UnsafeAppLaunchContextToGlibFull(c AppLaunchContext) unsafe.Pointer {
 // When the workspace is not specified or @desktop is set to -1,
 // it is up to the window manager to pick one, typically it will
 // be the current workspace.
-func (context *AppLaunchContextInstance) SetDesktop(desktop int) {
+func (_context *AppLaunchContextInstance) SetDesktop(desktop int) {
 	var carg0 *C.GdkAppLaunchContext // in, none, converted
 	var carg1 C.gint                 // in, none, casted
 
-	carg0 = (*C.GdkAppLaunchContext)(UnsafeAppLaunchContextToGlibNone(context))
+	carg0 = (*C.GdkAppLaunchContext)(UnsafeAppLaunchContextToGlibNone(_context))
 	carg1 = C.gint(desktop)
 
 	C.gdk_app_launch_context_set_desktop(carg0, carg1)
-	runtime.KeepAlive(context)
+	runtime.KeepAlive(_context)
 	runtime.KeepAlive(desktop)
 }
 
@@ -10764,17 +10764,17 @@ func (context *AppLaunchContextInstance) SetDesktop(desktop int) {
 // notification.
 // 
 // See also gdk_app_launch_context_set_icon_name().
-func (context *AppLaunchContextInstance) SetIcon(icon gio.Icon) {
+func (_context *AppLaunchContextInstance) SetIcon(icon gio.Icon) {
 	var carg0 *C.GdkAppLaunchContext // in, none, converted
 	var carg1 *C.GIcon               // in, none, converted, nullable
 
-	carg0 = (*C.GdkAppLaunchContext)(UnsafeAppLaunchContextToGlibNone(context))
+	carg0 = (*C.GdkAppLaunchContext)(UnsafeAppLaunchContextToGlibNone(_context))
 	if icon != nil {
 		carg1 = (*C.GIcon)(gio.UnsafeIconToGlibNone(icon))
 	}
 
 	C.gdk_app_launch_context_set_icon(carg0, carg1)
-	runtime.KeepAlive(context)
+	runtime.KeepAlive(_context)
 	runtime.KeepAlive(icon)
 }
 
@@ -10792,18 +10792,18 @@ func (context *AppLaunchContextInstance) SetIcon(icon gio.Icon) {
 // If neither @icon or @icon_name is set, the icon is taken from either
 // the file that is passed to launched application or from the #GAppInfo
 // for the launched application itself.
-func (context *AppLaunchContextInstance) SetIconName(iconName string) {
+func (_context *AppLaunchContextInstance) SetIconName(iconName string) {
 	var carg0 *C.GdkAppLaunchContext // in, none, converted
 	var carg1 *C.char                // in, none, string, nullable-string
 
-	carg0 = (*C.GdkAppLaunchContext)(UnsafeAppLaunchContextToGlibNone(context))
+	carg0 = (*C.GdkAppLaunchContext)(UnsafeAppLaunchContextToGlibNone(_context))
 	if iconName != "" {
 		carg1 = (*C.char)(unsafe.Pointer(C.CString(iconName)))
 		defer C.free(unsafe.Pointer(carg1))
 	}
 
 	C.gdk_app_launch_context_set_icon_name(carg0, carg1)
-	runtime.KeepAlive(context)
+	runtime.KeepAlive(_context)
 	runtime.KeepAlive(iconName)
 }
 
@@ -10822,15 +10822,15 @@ func (context *AppLaunchContextInstance) SetIconName(iconName string) {
 // If both @screen and @display are set, the @screen takes priority.
 // If neither @screen or @display are set, the default screen and
 // display are used.
-func (context *AppLaunchContextInstance) SetScreen(screen Screen) {
+func (_context *AppLaunchContextInstance) SetScreen(screen Screen) {
 	var carg0 *C.GdkAppLaunchContext // in, none, converted
 	var carg1 *C.GdkScreen           // in, none, converted
 
-	carg0 = (*C.GdkAppLaunchContext)(UnsafeAppLaunchContextToGlibNone(context))
+	carg0 = (*C.GdkAppLaunchContext)(UnsafeAppLaunchContextToGlibNone(_context))
 	carg1 = (*C.GdkScreen)(UnsafeScreenToGlibNone(screen))
 
 	C.gdk_app_launch_context_set_screen(carg0, carg1)
-	runtime.KeepAlive(context)
+	runtime.KeepAlive(_context)
 	runtime.KeepAlive(screen)
 }
 
@@ -10847,15 +10847,15 @@ func (context *AppLaunchContextInstance) SetScreen(screen Screen) {
 // focus to the newly launched application when the user is busy
 // typing in another window. This is also known as 'focus stealing
 // prevention'.
-func (context *AppLaunchContextInstance) SetTimestamp(timestamp uint32) {
+func (_context *AppLaunchContextInstance) SetTimestamp(timestamp uint32) {
 	var carg0 *C.GdkAppLaunchContext // in, none, converted
 	var carg1 C.guint32              // in, none, casted
 
-	carg0 = (*C.GdkAppLaunchContext)(UnsafeAppLaunchContextToGlibNone(context))
+	carg0 = (*C.GdkAppLaunchContext)(UnsafeAppLaunchContextToGlibNone(_context))
 	carg1 = C.guint32(timestamp)
 
 	C.gdk_app_launch_context_set_timestamp(carg0, carg1)
-	runtime.KeepAlive(context)
+	runtime.KeepAlive(_context)
 	runtime.KeepAlive(timestamp)
 }
 
@@ -11465,6 +11465,21 @@ type Device interface {
 	// some rare use cases like keyboard navigation support
 	// for the color picker in the #GtkColorSelectionDialog.
 	Warp(Screen, int, int)
+	// ConnectChanged connects the provided callback to the "changed" signal
+	//
+	// The ::changed signal is emitted either when the #GdkDevice
+	// has changed the number of either axes or keys. For example
+	// In X this will normally happen when the slave device routing
+	// events through the master device changes (for example, user
+	// switches from the USB mouse to a tablet), in that case the
+	// master device will change to reflect the new slave device
+	// axes and keys.
+	ConnectChanged(func(Device)) gobject.SignalHandle
+	// ConnectToolChanged connects the provided callback to the "tool-changed" signal
+	//
+	// The ::tool-changed signal is emitted on pen/eraser
+	// #GdkDevices whenever tools enter or leave proximity.
+	ConnectToolChanged(func(Device, DeviceTool)) gobject.SignalHandle
 }
 
 func unsafeWrapDevice(base *gobject.ObjectInstance) *DeviceInstance {
@@ -12191,6 +12206,25 @@ func (device *DeviceInstance) Warp(screen Screen, x int, y int) {
 	runtime.KeepAlive(y)
 }
 
+// ConnectChanged connects the provided callback to the "changed" signal
+//
+// The ::changed signal is emitted either when the #GdkDevice
+// has changed the number of either axes or keys. For example
+// In X this will normally happen when the slave device routing
+// events through the master device changes (for example, user
+// switches from the USB mouse to a tablet), in that case the
+// master device will change to reflect the new slave device
+// axes and keys.
+func (o *DeviceInstance) ConnectChanged(fn func(Device)) gobject.SignalHandle {
+	return o.Connect("changed", fn)
+}
+// ConnectToolChanged connects the provided callback to the "tool-changed" signal
+//
+// The ::tool-changed signal is emitted on pen/eraser
+// #GdkDevices whenever tools enter or leave proximity.
+func (o *DeviceInstance) ConnectToolChanged(fn func(Device, DeviceTool)) gobject.SignalHandle {
+	return o.Connect("tool-changed", fn)
+}
 // DeviceManagerInstance is the instance type used by all types extending GdkDeviceManager. It is used internally by the bindings. Users should use the interface [DeviceManager] instead.
 type DeviceManagerInstance struct {
 	_ [0]func() // equal guard
@@ -12326,6 +12360,31 @@ type DeviceManager interface {
 	//
 	// Gets the #GdkDisplay associated to @device_manager.
 	GetDisplay() Display
+	// ConnectDeviceAdded connects the provided callback to the "device-added" signal
+	//
+	// The ::device-added signal is emitted either when a new master
+	// pointer is created, or when a slave (Hardware) input device
+	// is plugged in.
+	ConnectDeviceAdded(func(DeviceManager, Device)) gobject.SignalHandle
+	// ConnectDeviceChanged connects the provided callback to the "device-changed" signal
+	//
+	// The ::device-changed signal is emitted whenever a device
+	// has changed in the hierarchy, either slave devices being
+	// disconnected from their master device or connected to
+	// another one, or master devices being added or removed
+	// a slave device.
+	// 
+	// If a slave device is detached from all master devices
+	// (gdk_device_get_associated_device() returns %NULL), its
+	// #GdkDeviceType will change to %GDK_DEVICE_TYPE_FLOATING,
+	// if it's attached, it will change to %GDK_DEVICE_TYPE_SLAVE.
+	ConnectDeviceChanged(func(DeviceManager, Device)) gobject.SignalHandle
+	// ConnectDeviceRemoved connects the provided callback to the "device-removed" signal
+	//
+	// The ::device-removed signal is emitted either when a master
+	// pointer is removed, or when a slave (Hardware) input device
+	// is unplugged.
+	ConnectDeviceRemoved(func(DeviceManager, Device)) gobject.SignalHandle
 }
 
 func unsafeWrapDeviceManager(base *gobject.ObjectInstance) *DeviceManagerInstance {
@@ -12384,6 +12443,37 @@ func (deviceManager *DeviceManagerInstance) GetDisplay() Display {
 	return goret
 }
 
+// ConnectDeviceAdded connects the provided callback to the "device-added" signal
+//
+// The ::device-added signal is emitted either when a new master
+// pointer is created, or when a slave (Hardware) input device
+// is plugged in.
+func (o *DeviceManagerInstance) ConnectDeviceAdded(fn func(DeviceManager, Device)) gobject.SignalHandle {
+	return o.Connect("device-added", fn)
+}
+// ConnectDeviceChanged connects the provided callback to the "device-changed" signal
+//
+// The ::device-changed signal is emitted whenever a device
+// has changed in the hierarchy, either slave devices being
+// disconnected from their master device or connected to
+// another one, or master devices being added or removed
+// a slave device.
+// 
+// If a slave device is detached from all master devices
+// (gdk_device_get_associated_device() returns %NULL), its
+// #GdkDeviceType will change to %GDK_DEVICE_TYPE_FLOATING,
+// if it's attached, it will change to %GDK_DEVICE_TYPE_SLAVE.
+func (o *DeviceManagerInstance) ConnectDeviceChanged(fn func(DeviceManager, Device)) gobject.SignalHandle {
+	return o.Connect("device-changed", fn)
+}
+// ConnectDeviceRemoved connects the provided callback to the "device-removed" signal
+//
+// The ::device-removed signal is emitted either when a master
+// pointer is removed, or when a slave (Hardware) input device
+// is unplugged.
+func (o *DeviceManagerInstance) ConnectDeviceRemoved(fn func(DeviceManager, Device)) gobject.SignalHandle {
+	return o.Connect("device-removed", fn)
+}
 // DeviceToolInstance is the instance type used by all types extending GdkDeviceTool. It is used internally by the bindings. Users should use the interface [DeviceTool] instead.
 type DeviceToolInstance struct {
 	_ [0]func() // equal guard
@@ -12835,6 +12925,36 @@ type Display interface {
 	// This is most useful for X11. On windowing systems where requests are
 	// handled synchronously, this function will do nothing.
 	Sync()
+	// ConnectClosed connects the provided callback to the "closed" signal
+	//
+	// The ::closed signal is emitted when the connection to the windowing
+	// system for @display is closed.
+	ConnectClosed(func(Display, bool)) gobject.SignalHandle
+	// ConnectMonitorAdded connects the provided callback to the "monitor-added" signal
+	//
+	// The ::monitor-added signal is emitted whenever a monitor is
+	// added.
+	ConnectMonitorAdded(func(Display, Monitor)) gobject.SignalHandle
+	// ConnectMonitorRemoved connects the provided callback to the "monitor-removed" signal
+	//
+	// The ::monitor-removed signal is emitted whenever a monitor is
+	// removed.
+	ConnectMonitorRemoved(func(Display, Monitor)) gobject.SignalHandle
+	// ConnectOpened connects the provided callback to the "opened" signal
+	//
+	// The ::opened signal is emitted when the connection to the windowing
+	// system for @display is opened.
+	ConnectOpened(func(Display)) gobject.SignalHandle
+	// ConnectSeatAdded connects the provided callback to the "seat-added" signal
+	//
+	// The ::seat-added signal is emitted whenever a new seat is made
+	// known to the windowing system.
+	ConnectSeatAdded(func(Display, Seat)) gobject.SignalHandle
+	// ConnectSeatRemoved connects the provided callback to the "seat-removed" signal
+	//
+	// The ::seat-removed signal is emitted whenever a seat is removed
+	// by the windowing system.
+	ConnectSeatRemoved(func(Display, Seat)) gobject.SignalHandle
 }
 
 func unsafeWrapDisplay(base *gobject.ObjectInstance) *DisplayInstance {
@@ -13601,6 +13721,48 @@ func (display *DisplayInstance) Sync() {
 	runtime.KeepAlive(display)
 }
 
+// ConnectClosed connects the provided callback to the "closed" signal
+//
+// The ::closed signal is emitted when the connection to the windowing
+// system for @display is closed.
+func (o *DisplayInstance) ConnectClosed(fn func(Display, bool)) gobject.SignalHandle {
+	return o.Connect("closed", fn)
+}
+// ConnectMonitorAdded connects the provided callback to the "monitor-added" signal
+//
+// The ::monitor-added signal is emitted whenever a monitor is
+// added.
+func (o *DisplayInstance) ConnectMonitorAdded(fn func(Display, Monitor)) gobject.SignalHandle {
+	return o.Connect("monitor-added", fn)
+}
+// ConnectMonitorRemoved connects the provided callback to the "monitor-removed" signal
+//
+// The ::monitor-removed signal is emitted whenever a monitor is
+// removed.
+func (o *DisplayInstance) ConnectMonitorRemoved(fn func(Display, Monitor)) gobject.SignalHandle {
+	return o.Connect("monitor-removed", fn)
+}
+// ConnectOpened connects the provided callback to the "opened" signal
+//
+// The ::opened signal is emitted when the connection to the windowing
+// system for @display is opened.
+func (o *DisplayInstance) ConnectOpened(fn func(Display)) gobject.SignalHandle {
+	return o.Connect("opened", fn)
+}
+// ConnectSeatAdded connects the provided callback to the "seat-added" signal
+//
+// The ::seat-added signal is emitted whenever a new seat is made
+// known to the windowing system.
+func (o *DisplayInstance) ConnectSeatAdded(fn func(Display, Seat)) gobject.SignalHandle {
+	return o.Connect("seat-added", fn)
+}
+// ConnectSeatRemoved connects the provided callback to the "seat-removed" signal
+//
+// The ::seat-removed signal is emitted whenever a seat is removed
+// by the windowing system.
+func (o *DisplayInstance) ConnectSeatRemoved(fn func(Display, Seat)) gobject.SignalHandle {
+	return o.Connect("seat-removed", fn)
+}
 // DisplayManagerInstance is the instance type used by all types extending GdkDisplayManager. It is used internally by the bindings. Users should use the interface [DisplayManager] instead.
 type DisplayManagerInstance struct {
 	_ [0]func() // equal guard
@@ -13681,6 +13843,10 @@ type DisplayManager interface {
 	//
 	// Sets @display as the default display.
 	SetDefaultDisplay(Display)
+	// ConnectDisplayOpened connects the provided callback to the "display-opened" signal
+	//
+	// The ::display-opened signal is emitted when a display is opened.
+	ConnectDisplayOpened(func(DisplayManager, Display)) gobject.SignalHandle
 }
 
 func unsafeWrapDisplayManager(base *gobject.ObjectInstance) *DisplayManagerInstance {
@@ -13813,6 +13979,12 @@ func (manager *DisplayManagerInstance) SetDefaultDisplay(display Display) {
 	runtime.KeepAlive(display)
 }
 
+// ConnectDisplayOpened connects the provided callback to the "display-opened" signal
+//
+// The ::display-opened signal is emitted when a display is opened.
+func (o *DisplayManagerInstance) ConnectDisplayOpened(fn func(DisplayManager, Display)) gobject.SignalHandle {
+	return o.Connect("display-opened", fn)
+}
 // DragContextInstance is the instance type used by all types extending GdkDragContext. It is used internally by the bindings. Users should use the interface [DragContext] instead.
 type DragContextInstance struct {
 	_ [0]func() // equal guard
@@ -13936,6 +14108,40 @@ type DragContext interface {
 	// under the cursor hotspot. Initially, the hotspot is at the
 	// top left corner of the drag window.
 	SetHotspot(int, int)
+	// ConnectActionChanged connects the provided callback to the "action-changed" signal
+	//
+	// A new action is being chosen for the drag and drop operation.
+	// 
+	// This signal will only be emitted if the #GdkDragContext manages
+	// the drag and drop operation. See gdk_drag_context_manage_dnd()
+	// for more information.
+	ConnectActionChanged(func(DragContext, DragAction)) gobject.SignalHandle
+	// ConnectCancel connects the provided callback to the "cancel" signal
+	//
+	// The drag and drop operation was cancelled.
+	// 
+	// This signal will only be emitted if the #GdkDragContext manages
+	// the drag and drop operation. See gdk_drag_context_manage_dnd()
+	// for more information.
+	ConnectCancel(func(DragContext, DragCancelReason)) gobject.SignalHandle
+	// ConnectDNDFinished connects the provided callback to the "dnd-finished" signal
+	//
+	// The drag and drop operation was finished, the drag destination
+	// finished reading all data. The drag source can now free all
+	// miscellaneous data.
+	// 
+	// This signal will only be emitted if the #GdkDragContext manages
+	// the drag and drop operation. See gdk_drag_context_manage_dnd()
+	// for more information.
+	ConnectDNDFinished(func(DragContext)) gobject.SignalHandle
+	// ConnectDropPerformed connects the provided callback to the "drop-performed" signal
+	//
+	// The drag and drop operation was performed on an accepting client.
+	// 
+	// This signal will only be emitted if the #GdkDragContext manages
+	// the drag and drop operation. See gdk_drag_context_manage_dnd()
+	// for more information.
+	ConnectDropPerformed(func(DragContext, int)) gobject.SignalHandle
 }
 
 func unsafeWrapDragContext(base *gobject.ObjectInstance) *DragContextInstance {
@@ -13979,14 +14185,14 @@ func UnsafeDragContextToGlibFull(c DragContext) unsafe.Pointer {
 //
 // Determines the bitmask of actions proposed by the source if
 // gdk_drag_context_get_suggested_action() returns %GDK_ACTION_ASK.
-func (context *DragContextInstance) GetActions() DragAction {
+func (_context *DragContextInstance) GetActions() DragAction {
 	var carg0 *C.GdkDragContext // in, none, converted
 	var cret  C.GdkDragAction   // return, none, casted
 
-	carg0 = (*C.GdkDragContext)(UnsafeDragContextToGlibNone(context))
+	carg0 = (*C.GdkDragContext)(UnsafeDragContextToGlibNone(_context))
 
 	cret = C.gdk_drag_context_get_actions(carg0)
-	runtime.KeepAlive(context)
+	runtime.KeepAlive(_context)
 
 	var goret DragAction
 
@@ -14001,14 +14207,14 @@ func (context *DragContextInstance) GetActions() DragAction {
 // 	- goret Window 
 //
 // Returns the destination window for the DND operation.
-func (context *DragContextInstance) GetDestWindow() Window {
+func (_context *DragContextInstance) GetDestWindow() Window {
 	var carg0 *C.GdkDragContext // in, none, converted
 	var cret  *C.GdkWindow      // return, none, converted
 
-	carg0 = (*C.GdkDragContext)(UnsafeDragContextToGlibNone(context))
+	carg0 = (*C.GdkDragContext)(UnsafeDragContextToGlibNone(_context))
 
 	cret = C.gdk_drag_context_get_dest_window(carg0)
-	runtime.KeepAlive(context)
+	runtime.KeepAlive(_context)
 
 	var goret Window
 
@@ -14023,14 +14229,14 @@ func (context *DragContextInstance) GetDestWindow() Window {
 // 	- goret Device 
 //
 // Returns the #GdkDevice associated to the drag context.
-func (context *DragContextInstance) GetDevice() Device {
+func (_context *DragContextInstance) GetDevice() Device {
 	var carg0 *C.GdkDragContext // in, none, converted
 	var cret  *C.GdkDevice      // return, none, converted
 
-	carg0 = (*C.GdkDragContext)(UnsafeDragContextToGlibNone(context))
+	carg0 = (*C.GdkDragContext)(UnsafeDragContextToGlibNone(_context))
 
 	cret = C.gdk_drag_context_get_device(carg0)
-	runtime.KeepAlive(context)
+	runtime.KeepAlive(_context)
 
 	var goret Device
 
@@ -14050,14 +14256,14 @@ func (context *DragContextInstance) GetDevice() Device {
 // the window in accordance with the ongoing drag operation.
 // The window is owned by @context and will be destroyed when
 // the drag operation is over.
-func (context *DragContextInstance) GetDragWindow() Window {
+func (_context *DragContextInstance) GetDragWindow() Window {
 	var carg0 *C.GdkDragContext // in, none, converted
 	var cret  *C.GdkWindow      // return, none, converted
 
-	carg0 = (*C.GdkDragContext)(UnsafeDragContextToGlibNone(context))
+	carg0 = (*C.GdkDragContext)(UnsafeDragContextToGlibNone(_context))
 
 	cret = C.gdk_drag_context_get_drag_window(carg0)
-	runtime.KeepAlive(context)
+	runtime.KeepAlive(_context)
 
 	var goret Window
 
@@ -14072,14 +14278,14 @@ func (context *DragContextInstance) GetDragWindow() Window {
 // 	- goret DragProtocol 
 //
 // Returns the drag protocol that is used by this context.
-func (context *DragContextInstance) GetProtocol() DragProtocol {
+func (_context *DragContextInstance) GetProtocol() DragProtocol {
 	var carg0 *C.GdkDragContext // in, none, converted
 	var cret  C.GdkDragProtocol // return, none, casted
 
-	carg0 = (*C.GdkDragContext)(UnsafeDragContextToGlibNone(context))
+	carg0 = (*C.GdkDragContext)(UnsafeDragContextToGlibNone(_context))
 
 	cret = C.gdk_drag_context_get_protocol(carg0)
-	runtime.KeepAlive(context)
+	runtime.KeepAlive(_context)
 
 	var goret DragProtocol
 
@@ -14094,14 +14300,14 @@ func (context *DragContextInstance) GetProtocol() DragProtocol {
 // 	- goret DragAction 
 //
 // Determines the action chosen by the drag destination.
-func (context *DragContextInstance) GetSelectedAction() DragAction {
+func (_context *DragContextInstance) GetSelectedAction() DragAction {
 	var carg0 *C.GdkDragContext // in, none, converted
 	var cret  C.GdkDragAction   // return, none, casted
 
-	carg0 = (*C.GdkDragContext)(UnsafeDragContextToGlibNone(context))
+	carg0 = (*C.GdkDragContext)(UnsafeDragContextToGlibNone(_context))
 
 	cret = C.gdk_drag_context_get_selected_action(carg0)
-	runtime.KeepAlive(context)
+	runtime.KeepAlive(_context)
 
 	var goret DragAction
 
@@ -14116,14 +14322,14 @@ func (context *DragContextInstance) GetSelectedAction() DragAction {
 // 	- goret Window 
 //
 // Returns the #GdkWindow where the DND operation started.
-func (context *DragContextInstance) GetSourceWindow() Window {
+func (_context *DragContextInstance) GetSourceWindow() Window {
 	var carg0 *C.GdkDragContext // in, none, converted
 	var cret  *C.GdkWindow      // return, none, converted
 
-	carg0 = (*C.GdkDragContext)(UnsafeDragContextToGlibNone(context))
+	carg0 = (*C.GdkDragContext)(UnsafeDragContextToGlibNone(_context))
 
 	cret = C.gdk_drag_context_get_source_window(carg0)
-	runtime.KeepAlive(context)
+	runtime.KeepAlive(_context)
 
 	var goret Window
 
@@ -14138,14 +14344,14 @@ func (context *DragContextInstance) GetSourceWindow() Window {
 // 	- goret DragAction 
 //
 // Determines the suggested drag action of the context.
-func (context *DragContextInstance) GetSuggestedAction() DragAction {
+func (_context *DragContextInstance) GetSuggestedAction() DragAction {
 	var carg0 *C.GdkDragContext // in, none, converted
 	var cret  C.GdkDragAction   // return, none, casted
 
-	carg0 = (*C.GdkDragContext)(UnsafeDragContextToGlibNone(context))
+	carg0 = (*C.GdkDragContext)(UnsafeDragContextToGlibNone(_context))
 
 	cret = C.gdk_drag_context_get_suggested_action(carg0)
-	runtime.KeepAlive(context)
+	runtime.KeepAlive(_context)
 
 	var goret DragAction
 
@@ -14181,18 +14387,18 @@ func (context *DragContextInstance) GetSuggestedAction() DragAction {
 // - The #GdkDragContext::cancel signal if the drag and drop operation is
 //   finished but doesn't happen over an accepting destination, or is
 //   cancelled through other means.
-func (context *DragContextInstance) ManageDND(ipcWindow Window, actions DragAction) bool {
+func (_context *DragContextInstance) ManageDND(ipcWindow Window, actions DragAction) bool {
 	var carg0 *C.GdkDragContext // in, none, converted
 	var carg1 *C.GdkWindow      // in, none, converted
 	var carg2 C.GdkDragAction   // in, none, casted
 	var cret  C.gboolean        // return
 
-	carg0 = (*C.GdkDragContext)(UnsafeDragContextToGlibNone(context))
+	carg0 = (*C.GdkDragContext)(UnsafeDragContextToGlibNone(_context))
 	carg1 = (*C.GdkWindow)(UnsafeWindowToGlibNone(ipcWindow))
 	carg2 = C.GdkDragAction(actions)
 
 	cret = C.gdk_drag_context_manage_dnd(carg0, carg1, carg2)
-	runtime.KeepAlive(context)
+	runtime.KeepAlive(_context)
 	runtime.KeepAlive(ipcWindow)
 	runtime.KeepAlive(actions)
 
@@ -14213,15 +14419,15 @@ func (context *DragContextInstance) ManageDND(ipcWindow Window, actions DragActi
 //
 // Associates a #GdkDevice to @context, so all Drag and Drop events
 // for @context are emitted as if they came from this device.
-func (context *DragContextInstance) SetDevice(device Device) {
+func (_context *DragContextInstance) SetDevice(device Device) {
 	var carg0 *C.GdkDragContext // in, none, converted
 	var carg1 *C.GdkDevice      // in, none, converted
 
-	carg0 = (*C.GdkDragContext)(UnsafeDragContextToGlibNone(context))
+	carg0 = (*C.GdkDragContext)(UnsafeDragContextToGlibNone(_context))
 	carg1 = (*C.GdkDevice)(UnsafeDeviceToGlibNone(device))
 
 	C.gdk_drag_context_set_device(carg0, carg1)
-	runtime.KeepAlive(context)
+	runtime.KeepAlive(_context)
 	runtime.KeepAlive(device)
 }
 
@@ -14235,21 +14441,63 @@ func (context *DragContextInstance) SetDevice(device Device) {
 // Sets the position of the drag window that will be kept
 // under the cursor hotspot. Initially, the hotspot is at the
 // top left corner of the drag window.
-func (context *DragContextInstance) SetHotspot(hotX int, hotY int) {
+func (_context *DragContextInstance) SetHotspot(hotX int, hotY int) {
 	var carg0 *C.GdkDragContext // in, none, converted
 	var carg1 C.gint            // in, none, casted
 	var carg2 C.gint            // in, none, casted
 
-	carg0 = (*C.GdkDragContext)(UnsafeDragContextToGlibNone(context))
+	carg0 = (*C.GdkDragContext)(UnsafeDragContextToGlibNone(_context))
 	carg1 = C.gint(hotX)
 	carg2 = C.gint(hotY)
 
 	C.gdk_drag_context_set_hotspot(carg0, carg1, carg2)
-	runtime.KeepAlive(context)
+	runtime.KeepAlive(_context)
 	runtime.KeepAlive(hotX)
 	runtime.KeepAlive(hotY)
 }
 
+// ConnectActionChanged connects the provided callback to the "action-changed" signal
+//
+// A new action is being chosen for the drag and drop operation.
+// 
+// This signal will only be emitted if the #GdkDragContext manages
+// the drag and drop operation. See gdk_drag_context_manage_dnd()
+// for more information.
+func (o *DragContextInstance) ConnectActionChanged(fn func(DragContext, DragAction)) gobject.SignalHandle {
+	return o.Connect("action-changed", fn)
+}
+// ConnectCancel connects the provided callback to the "cancel" signal
+//
+// The drag and drop operation was cancelled.
+// 
+// This signal will only be emitted if the #GdkDragContext manages
+// the drag and drop operation. See gdk_drag_context_manage_dnd()
+// for more information.
+func (o *DragContextInstance) ConnectCancel(fn func(DragContext, DragCancelReason)) gobject.SignalHandle {
+	return o.Connect("cancel", fn)
+}
+// ConnectDNDFinished connects the provided callback to the "dnd-finished" signal
+//
+// The drag and drop operation was finished, the drag destination
+// finished reading all data. The drag source can now free all
+// miscellaneous data.
+// 
+// This signal will only be emitted if the #GdkDragContext manages
+// the drag and drop operation. See gdk_drag_context_manage_dnd()
+// for more information.
+func (o *DragContextInstance) ConnectDNDFinished(fn func(DragContext)) gobject.SignalHandle {
+	return o.Connect("dnd-finished", fn)
+}
+// ConnectDropPerformed connects the provided callback to the "drop-performed" signal
+//
+// The drag and drop operation was performed on an accepting client.
+// 
+// This signal will only be emitted if the #GdkDragContext manages
+// the drag and drop operation. See gdk_drag_context_manage_dnd()
+// for more information.
+func (o *DragContextInstance) ConnectDropPerformed(fn func(DragContext, int)) gobject.SignalHandle {
+	return o.Connect("drop-performed", fn)
+}
 // DrawingContextInstance is the instance type used by all types extending GdkDrawingContext. It is used internally by the bindings. Users should use the interface [DrawingContext] instead.
 type DrawingContextInstance struct {
 	_ [0]func() // equal guard
@@ -14330,14 +14578,14 @@ func UnsafeDrawingContextToGlibFull(c DrawingContext) unsafe.Pointer {
 // 	- goret Window 
 //
 // Retrieves the window that created the drawing @context.
-func (context *DrawingContextInstance) GetWindow() Window {
+func (_context *DrawingContextInstance) GetWindow() Window {
 	var carg0 *C.GdkDrawingContext // in, none, converted
 	var cret  *C.GdkWindow         // return, none, converted
 
-	carg0 = (*C.GdkDrawingContext)(UnsafeDrawingContextToGlibNone(context))
+	carg0 = (*C.GdkDrawingContext)(UnsafeDrawingContextToGlibNone(_context))
 
 	cret = C.gdk_drawing_context_get_window(carg0)
-	runtime.KeepAlive(context)
+	runtime.KeepAlive(_context)
 
 	var goret Window
 
@@ -14352,14 +14600,14 @@ func (context *DrawingContextInstance) GetWindow() Window {
 // 	- goret bool 
 //
 // Checks whether the given #GdkDrawingContext is valid.
-func (context *DrawingContextInstance) IsValid() bool {
+func (_context *DrawingContextInstance) IsValid() bool {
 	var carg0 *C.GdkDrawingContext // in, none, converted
 	var cret  C.gboolean           // return
 
-	carg0 = (*C.GdkDrawingContext)(UnsafeDrawingContextToGlibNone(context))
+	carg0 = (*C.GdkDrawingContext)(UnsafeDrawingContextToGlibNone(_context))
 
 	cret = C.gdk_drawing_context_is_valid(carg0)
-	runtime.KeepAlive(context)
+	runtime.KeepAlive(_context)
 
 	var goret bool
 
@@ -14523,6 +14771,52 @@ type FrameClock interface {
 	// this allows GTK+ to adjust system parameters to get maximally
 	// smooth animations.
 	RequestPhase(FrameClockPhase)
+	// ConnectAfterPaint connects the provided callback to the "after-paint" signal
+	//
+	// This signal ends processing of the frame. Applications
+	// should generally not handle this signal.
+	ConnectAfterPaint(func(FrameClock)) gobject.SignalHandle
+	// ConnectBeforePaint connects the provided callback to the "before-paint" signal
+	//
+	// This signal begins processing of the frame. Applications
+	// should generally not handle this signal.
+	ConnectBeforePaint(func(FrameClock)) gobject.SignalHandle
+	// ConnectFlushEvents connects the provided callback to the "flush-events" signal
+	//
+	// This signal is used to flush pending motion events that
+	// are being batched up and compressed together. Applications
+	// should not handle this signal.
+	ConnectFlushEvents(func(FrameClock)) gobject.SignalHandle
+	// ConnectLayout connects the provided callback to the "layout" signal
+	//
+	// This signal is emitted as the second step of toolkit and
+	// application processing of the frame. Any work to update
+	// sizes and positions of application elements should be
+	// performed. GTK+ normally handles this internally.
+	ConnectLayout(func(FrameClock)) gobject.SignalHandle
+	// ConnectPaint connects the provided callback to the "paint" signal
+	//
+	// This signal is emitted as the third step of toolkit and
+	// application processing of the frame. The frame is
+	// repainted. GDK normally handles this internally and
+	// produces expose events, which are turned into GTK+
+	// #GtkWidget::draw signals.
+	ConnectPaint(func(FrameClock)) gobject.SignalHandle
+	// ConnectResumeEvents connects the provided callback to the "resume-events" signal
+	//
+	// This signal is emitted after processing of the frame is
+	// finished, and is handled internally by GTK+ to resume normal
+	// event processing. Applications should not handle this signal.
+	ConnectResumeEvents(func(FrameClock)) gobject.SignalHandle
+	// ConnectUpdate connects the provided callback to the "update" signal
+	//
+	// This signal is emitted as the first step of toolkit and
+	// application processing of the frame. Animations should
+	// be updated using gdk_frame_clock_get_frame_time().
+	// Applications can connect directly to this signal, or
+	// use gtk_widget_add_tick_callback() as a more convenient
+	// interface.
+	ConnectUpdate(func(FrameClock)) gobject.SignalHandle
 }
 
 func unsafeWrapFrameClock(base *gobject.ObjectInstance) *FrameClockInstance {
@@ -14791,6 +15085,66 @@ func (frameClock *FrameClockInstance) RequestPhase(phase FrameClockPhase) {
 	runtime.KeepAlive(phase)
 }
 
+// ConnectAfterPaint connects the provided callback to the "after-paint" signal
+//
+// This signal ends processing of the frame. Applications
+// should generally not handle this signal.
+func (o *FrameClockInstance) ConnectAfterPaint(fn func(FrameClock)) gobject.SignalHandle {
+	return o.Connect("after-paint", fn)
+}
+// ConnectBeforePaint connects the provided callback to the "before-paint" signal
+//
+// This signal begins processing of the frame. Applications
+// should generally not handle this signal.
+func (o *FrameClockInstance) ConnectBeforePaint(fn func(FrameClock)) gobject.SignalHandle {
+	return o.Connect("before-paint", fn)
+}
+// ConnectFlushEvents connects the provided callback to the "flush-events" signal
+//
+// This signal is used to flush pending motion events that
+// are being batched up and compressed together. Applications
+// should not handle this signal.
+func (o *FrameClockInstance) ConnectFlushEvents(fn func(FrameClock)) gobject.SignalHandle {
+	return o.Connect("flush-events", fn)
+}
+// ConnectLayout connects the provided callback to the "layout" signal
+//
+// This signal is emitted as the second step of toolkit and
+// application processing of the frame. Any work to update
+// sizes and positions of application elements should be
+// performed. GTK+ normally handles this internally.
+func (o *FrameClockInstance) ConnectLayout(fn func(FrameClock)) gobject.SignalHandle {
+	return o.Connect("layout", fn)
+}
+// ConnectPaint connects the provided callback to the "paint" signal
+//
+// This signal is emitted as the third step of toolkit and
+// application processing of the frame. The frame is
+// repainted. GDK normally handles this internally and
+// produces expose events, which are turned into GTK+
+// #GtkWidget::draw signals.
+func (o *FrameClockInstance) ConnectPaint(fn func(FrameClock)) gobject.SignalHandle {
+	return o.Connect("paint", fn)
+}
+// ConnectResumeEvents connects the provided callback to the "resume-events" signal
+//
+// This signal is emitted after processing of the frame is
+// finished, and is handled internally by GTK+ to resume normal
+// event processing. Applications should not handle this signal.
+func (o *FrameClockInstance) ConnectResumeEvents(fn func(FrameClock)) gobject.SignalHandle {
+	return o.Connect("resume-events", fn)
+}
+// ConnectUpdate connects the provided callback to the "update" signal
+//
+// This signal is emitted as the first step of toolkit and
+// application processing of the frame. Animations should
+// be updated using gdk_frame_clock_get_frame_time().
+// Applications can connect directly to this signal, or
+// use gtk_widget_add_tick_callback() as a more convenient
+// interface.
+func (o *FrameClockInstance) ConnectUpdate(fn func(FrameClock)) gobject.SignalHandle {
+	return o.Connect("update", fn)
+}
 // GLContextInstance is the instance type used by all types extending GdkGLContext. It is used internally by the bindings. Users should use the interface [GLContext] instead.
 type GLContextInstance struct {
 	_ [0]func() // equal guard
@@ -15087,14 +15441,14 @@ func GLContextGetCurrent() GLContext {
 // 	- goret bool 
 //
 // Retrieves the value set using gdk_gl_context_set_debug_enabled().
-func (context *GLContextInstance) GetDebugEnabled() bool {
+func (_context *GLContextInstance) GetDebugEnabled() bool {
 	var carg0 *C.GdkGLContext // in, none, converted
 	var cret  C.gboolean      // return
 
-	carg0 = (*C.GdkGLContext)(UnsafeGLContextToGlibNone(context))
+	carg0 = (*C.GdkGLContext)(UnsafeGLContextToGlibNone(_context))
 
 	cret = C.gdk_gl_context_get_debug_enabled(carg0)
-	runtime.KeepAlive(context)
+	runtime.KeepAlive(_context)
 
 	var goret bool
 
@@ -15111,14 +15465,14 @@ func (context *GLContextInstance) GetDebugEnabled() bool {
 // 	- goret Display 
 //
 // Retrieves the #GdkDisplay the @context is created for
-func (context *GLContextInstance) GetDisplay() Display {
+func (_context *GLContextInstance) GetDisplay() Display {
 	var carg0 *C.GdkGLContext // in, none, converted
 	var cret  *C.GdkDisplay   // return, none, converted
 
-	carg0 = (*C.GdkGLContext)(UnsafeGLContextToGlibNone(context))
+	carg0 = (*C.GdkGLContext)(UnsafeGLContextToGlibNone(_context))
 
 	cret = C.gdk_gl_context_get_display(carg0)
-	runtime.KeepAlive(context)
+	runtime.KeepAlive(_context)
 
 	var goret Display
 
@@ -15133,14 +15487,14 @@ func (context *GLContextInstance) GetDisplay() Display {
 // 	- goret bool 
 //
 // Retrieves the value set using gdk_gl_context_set_forward_compatible().
-func (context *GLContextInstance) GetForwardCompatible() bool {
+func (_context *GLContextInstance) GetForwardCompatible() bool {
 	var carg0 *C.GdkGLContext // in, none, converted
 	var cret  C.gboolean      // return
 
-	carg0 = (*C.GdkGLContext)(UnsafeGLContextToGlibNone(context))
+	carg0 = (*C.GdkGLContext)(UnsafeGLContextToGlibNone(_context))
 
 	cret = C.gdk_gl_context_get_forward_compatible(carg0)
-	runtime.KeepAlive(context)
+	runtime.KeepAlive(_context)
 
 	var goret bool
 
@@ -15159,15 +15513,15 @@ func (context *GLContextInstance) GetForwardCompatible() bool {
 //
 // Retrieves the major and minor version requested by calling
 // gdk_gl_context_set_required_version().
-func (context *GLContextInstance) GetRequiredVersion() (int, int) {
+func (_context *GLContextInstance) GetRequiredVersion() (int, int) {
 	var carg0 *C.GdkGLContext // in, none, converted
 	var carg1 C.int           // out, full, casted, casted C.gint
 	var carg2 C.int           // out, full, casted, casted C.gint
 
-	carg0 = (*C.GdkGLContext)(UnsafeGLContextToGlibNone(context))
+	carg0 = (*C.GdkGLContext)(UnsafeGLContextToGlibNone(_context))
 
 	C.gdk_gl_context_get_required_version(carg0, &carg1, &carg2)
-	runtime.KeepAlive(context)
+	runtime.KeepAlive(_context)
 
 	var major int
 	var minor int
@@ -15184,14 +15538,14 @@ func (context *GLContextInstance) GetRequiredVersion() (int, int) {
 // 	- goret GLContext 
 //
 // Retrieves the #GdkGLContext that this @context share data with.
-func (context *GLContextInstance) GetSharedContext() GLContext {
+func (_context *GLContextInstance) GetSharedContext() GLContext {
 	var carg0 *C.GdkGLContext // in, none, converted
 	var cret  *C.GdkGLContext // return, none, converted
 
-	carg0 = (*C.GdkGLContext)(UnsafeGLContextToGlibNone(context))
+	carg0 = (*C.GdkGLContext)(UnsafeGLContextToGlibNone(_context))
 
 	cret = C.gdk_gl_context_get_shared_context(carg0)
-	runtime.KeepAlive(context)
+	runtime.KeepAlive(_context)
 
 	var goret GLContext
 
@@ -15206,14 +15560,14 @@ func (context *GLContextInstance) GetSharedContext() GLContext {
 // 	- goret bool 
 //
 // Checks whether the @context is using an OpenGL or OpenGL ES profile.
-func (context *GLContextInstance) GetUseES() bool {
+func (_context *GLContextInstance) GetUseES() bool {
 	var carg0 *C.GdkGLContext // in, none, converted
 	var cret  C.gboolean      // return
 
-	carg0 = (*C.GdkGLContext)(UnsafeGLContextToGlibNone(context))
+	carg0 = (*C.GdkGLContext)(UnsafeGLContextToGlibNone(_context))
 
 	cret = C.gdk_gl_context_get_use_es(carg0)
-	runtime.KeepAlive(context)
+	runtime.KeepAlive(_context)
 
 	var goret bool
 
@@ -15233,15 +15587,15 @@ func (context *GLContextInstance) GetUseES() bool {
 // Retrieves the OpenGL version of the @context.
 // 
 // The @context must be realized prior to calling this function.
-func (context *GLContextInstance) GetVersion() (int, int) {
+func (_context *GLContextInstance) GetVersion() (int, int) {
 	var carg0 *C.GdkGLContext // in, none, converted
 	var carg1 C.int           // out, full, casted, casted C.gint
 	var carg2 C.int           // out, full, casted, casted C.gint
 
-	carg0 = (*C.GdkGLContext)(UnsafeGLContextToGlibNone(context))
+	carg0 = (*C.GdkGLContext)(UnsafeGLContextToGlibNone(_context))
 
 	C.gdk_gl_context_get_version(carg0, &carg1, &carg2)
-	runtime.KeepAlive(context)
+	runtime.KeepAlive(_context)
 
 	var major int
 	var minor int
@@ -15258,14 +15612,14 @@ func (context *GLContextInstance) GetVersion() (int, int) {
 // 	- goret Window 
 //
 // Retrieves the #GdkWindow used by the @context.
-func (context *GLContextInstance) GetWindow() Window {
+func (_context *GLContextInstance) GetWindow() Window {
 	var carg0 *C.GdkGLContext // in, none, converted
 	var cret  *C.GdkWindow    // return, none, converted
 
-	carg0 = (*C.GdkGLContext)(UnsafeGLContextToGlibNone(context))
+	carg0 = (*C.GdkGLContext)(UnsafeGLContextToGlibNone(_context))
 
 	cret = C.gdk_gl_context_get_window(carg0)
-	runtime.KeepAlive(context)
+	runtime.KeepAlive(_context)
 
 	var goret Window
 
@@ -15295,14 +15649,14 @@ func (context *GLContextInstance) GetWindow() Window {
 // You can use the value returned by this function to decide which kind
 // of OpenGL API to use, or whether to do extension discovery, or what
 // kind of shader programs to load.
-func (context *GLContextInstance) IsLegacy() bool {
+func (_context *GLContextInstance) IsLegacy() bool {
 	var carg0 *C.GdkGLContext // in, none, converted
 	var cret  C.gboolean      // return
 
-	carg0 = (*C.GdkGLContext)(UnsafeGLContextToGlibNone(context))
+	carg0 = (*C.GdkGLContext)(UnsafeGLContextToGlibNone(_context))
 
 	cret = C.gdk_gl_context_is_legacy(carg0)
-	runtime.KeepAlive(context)
+	runtime.KeepAlive(_context)
 
 	var goret bool
 
@@ -15316,13 +15670,13 @@ func (context *GLContextInstance) IsLegacy() bool {
 // MakeCurrent wraps gdk_gl_context_make_current
 //
 // Makes the @context the current one.
-func (context *GLContextInstance) MakeCurrent() {
+func (_context *GLContextInstance) MakeCurrent() {
 	var carg0 *C.GdkGLContext // in, none, converted
 
-	carg0 = (*C.GdkGLContext)(UnsafeGLContextToGlibNone(context))
+	carg0 = (*C.GdkGLContext)(UnsafeGLContextToGlibNone(_context))
 
 	C.gdk_gl_context_make_current(carg0)
-	runtime.KeepAlive(context)
+	runtime.KeepAlive(_context)
 }
 
 // Realize wraps gdk_gl_context_realize
@@ -15334,15 +15688,15 @@ func (context *GLContextInstance) MakeCurrent() {
 // Realizes the given #GdkGLContext.
 // 
 // It is safe to call this function on a realized #GdkGLContext.
-func (context *GLContextInstance) Realize() (bool, error) {
+func (_context *GLContextInstance) Realize() (bool, error) {
 	var carg0 *C.GdkGLContext // in, none, converted
 	var cret  C.gboolean      // return
 	var _cerr *C.GError       // out, full, converted, nullable
 
-	carg0 = (*C.GdkGLContext)(UnsafeGLContextToGlibNone(context))
+	carg0 = (*C.GdkGLContext)(UnsafeGLContextToGlibNone(_context))
 
 	cret = C.gdk_gl_context_realize(carg0, &_cerr)
-	runtime.KeepAlive(context)
+	runtime.KeepAlive(_context)
 
 	var goret  bool
 	var _goerr error
@@ -15369,17 +15723,17 @@ func (context *GLContextInstance) Realize() (bool, error) {
 // 
 // The #GdkGLContext must not be realized or made current prior to
 // calling this function.
-func (context *GLContextInstance) SetDebugEnabled(enabled bool) {
+func (_context *GLContextInstance) SetDebugEnabled(enabled bool) {
 	var carg0 *C.GdkGLContext // in, none, converted
 	var carg1 C.gboolean      // in
 
-	carg0 = (*C.GdkGLContext)(UnsafeGLContextToGlibNone(context))
+	carg0 = (*C.GdkGLContext)(UnsafeGLContextToGlibNone(_context))
 	if enabled {
 		carg1 = C.TRUE
 	}
 
 	C.gdk_gl_context_set_debug_enabled(carg0, carg1)
-	runtime.KeepAlive(context)
+	runtime.KeepAlive(_context)
 	runtime.KeepAlive(enabled)
 }
 
@@ -15398,17 +15752,17 @@ func (context *GLContextInstance) SetDebugEnabled(enabled bool) {
 // 
 // The #GdkGLContext must not be realized or made current prior to calling
 // this function.
-func (context *GLContextInstance) SetForwardCompatible(compatible bool) {
+func (_context *GLContextInstance) SetForwardCompatible(compatible bool) {
 	var carg0 *C.GdkGLContext // in, none, converted
 	var carg1 C.gboolean      // in
 
-	carg0 = (*C.GdkGLContext)(UnsafeGLContextToGlibNone(context))
+	carg0 = (*C.GdkGLContext)(UnsafeGLContextToGlibNone(_context))
 	if compatible {
 		carg1 = C.TRUE
 	}
 
 	C.gdk_gl_context_set_forward_compatible(carg0, carg1)
-	runtime.KeepAlive(context)
+	runtime.KeepAlive(_context)
 	runtime.KeepAlive(compatible)
 }
 
@@ -15425,17 +15779,17 @@ func (context *GLContextInstance) SetForwardCompatible(compatible bool) {
 // 
 // The #GdkGLContext must not be realized or made current prior to calling
 // this function.
-func (context *GLContextInstance) SetRequiredVersion(major int, minor int) {
+func (_context *GLContextInstance) SetRequiredVersion(major int, minor int) {
 	var carg0 *C.GdkGLContext // in, none, converted
 	var carg1 C.int           // in, none, casted, casted C.gint
 	var carg2 C.int           // in, none, casted, casted C.gint
 
-	carg0 = (*C.GdkGLContext)(UnsafeGLContextToGlibNone(context))
+	carg0 = (*C.GdkGLContext)(UnsafeGLContextToGlibNone(_context))
 	carg1 = C.int(major)
 	carg2 = C.int(minor)
 
 	C.gdk_gl_context_set_required_version(carg0, carg1, carg2)
-	runtime.KeepAlive(context)
+	runtime.KeepAlive(_context)
 	runtime.KeepAlive(major)
 	runtime.KeepAlive(minor)
 }
@@ -15459,15 +15813,15 @@ func (context *GLContextInstance) SetRequiredVersion(major int, minor int) {
 // You should check the return value of gdk_gl_context_get_use_es() after
 // calling gdk_gl_context_realize() to decide whether to use the OpenGL or
 // OpenGL ES API, extensions, or shaders.
-func (context *GLContextInstance) SetUseES(useEs int) {
+func (_context *GLContextInstance) SetUseES(useEs int) {
 	var carg0 *C.GdkGLContext // in, none, converted
 	var carg1 C.int           // in, none, casted, casted C.gint
 
-	carg0 = (*C.GdkGLContext)(UnsafeGLContextToGlibNone(context))
+	carg0 = (*C.GdkGLContext)(UnsafeGLContextToGlibNone(_context))
 	carg1 = C.int(useEs)
 
 	C.gdk_gl_context_set_use_es(carg0, carg1)
-	runtime.KeepAlive(context)
+	runtime.KeepAlive(_context)
 	runtime.KeepAlive(useEs)
 }
 
@@ -15636,6 +15990,22 @@ type Keymap interface {
 	// you store accelerators, you should always store them with consumed
 	// modifiers removed. Store `&lt;Control&gt;plus`, not `&lt;Control&gt;&lt;Shift&gt;plus`,
 	TranslateKeyboardState(uint, ModifierType, int) (uint, int, int, ModifierType, bool)
+	// ConnectDirectionChanged connects the provided callback to the "direction-changed" signal
+	//
+	// The ::direction-changed signal gets emitted when the direction of
+	// the keymap changes.
+	ConnectDirectionChanged(func(Keymap)) gobject.SignalHandle
+	// ConnectKeysChanged connects the provided callback to the "keys-changed" signal
+	//
+	// The ::keys-changed signal is emitted when the mapping represented by
+	// @keymap changes.
+	ConnectKeysChanged(func(Keymap)) gobject.SignalHandle
+	// ConnectStateChanged connects the provided callback to the "state-changed" signal
+	//
+	// The ::state-changed signal is emitted when the state of the
+	// keyboard changes, e.g when Caps Lock is turned on or off.
+	// See gdk_keymap_get_caps_lock_state().
+	ConnectStateChanged(func(Keymap)) gobject.SignalHandle
 }
 
 func unsafeWrapKeymap(base *gobject.ObjectInstance) *KeymapInstance {
@@ -16016,6 +16386,28 @@ func (keymap *KeymapInstance) TranslateKeyboardState(hardwareKeycode uint, state
 	return keyval, effectiveGroup, level, consumedModifiers, goret
 }
 
+// ConnectDirectionChanged connects the provided callback to the "direction-changed" signal
+//
+// The ::direction-changed signal gets emitted when the direction of
+// the keymap changes.
+func (o *KeymapInstance) ConnectDirectionChanged(fn func(Keymap)) gobject.SignalHandle {
+	return o.Connect("direction-changed", fn)
+}
+// ConnectKeysChanged connects the provided callback to the "keys-changed" signal
+//
+// The ::keys-changed signal is emitted when the mapping represented by
+// @keymap changes.
+func (o *KeymapInstance) ConnectKeysChanged(fn func(Keymap)) gobject.SignalHandle {
+	return o.Connect("keys-changed", fn)
+}
+// ConnectStateChanged connects the provided callback to the "state-changed" signal
+//
+// The ::state-changed signal is emitted when the state of the
+// keyboard changes, e.g when Caps Lock is turned on or off.
+// See gdk_keymap_get_caps_lock_state().
+func (o *KeymapInstance) ConnectStateChanged(fn func(Keymap)) gobject.SignalHandle {
+	return o.Connect("state-changed", fn)
+}
 // MonitorInstance is the instance type used by all types extending GdkMonitor. It is used internally by the bindings. Users should use the interface [Monitor] instead.
 type MonitorInstance struct {
 	_ [0]func() // equal guard
@@ -16145,6 +16537,8 @@ type Monitor interface {
 	// Gets whether this monitor should be considered primary
 	// (see gdk_display_get_primary_monitor()).
 	IsPrimary() bool
+	// ConnectInvalidate connects the provided callback to the "invalidate" signal
+	ConnectInvalidate(func(Monitor)) gobject.SignalHandle
 }
 
 func unsafeWrapMonitor(base *gobject.ObjectInstance) *MonitorInstance {
@@ -16459,6 +16853,10 @@ func (monitor *MonitorInstance) IsPrimary() bool {
 	return goret
 }
 
+// ConnectInvalidate connects the provided callback to the "invalidate" signal
+func (o *MonitorInstance) ConnectInvalidate(fn func(Monitor)) gobject.SignalHandle {
+	return o.Connect("invalidate", fn)
+}
 // ScreenInstance is the instance type used by all types extending GdkScreen. It is used internally by the bindings. Users should use the interface [Screen] instead.
 type ScreenInstance struct {
 	_ [0]func() // equal guard
@@ -16575,6 +16973,24 @@ type Screen interface {
 	// and cairo units. The default value is 96, meaning that a 10 point
 	// font will be 13 units high. (10 * 96. / 72. = 13.3).
 	SetResolution(float64)
+	// ConnectCompositedChanged connects the provided callback to the "composited-changed" signal
+	//
+	// The ::composited-changed signal is emitted when the composited
+	// status of the screen changes
+	ConnectCompositedChanged(func(Screen)) gobject.SignalHandle
+	// ConnectMonitorsChanged connects the provided callback to the "monitors-changed" signal
+	//
+	// The ::monitors-changed signal is emitted when the number, size
+	// or position of the monitors attached to the screen change.
+	// 
+	// Only for X11 and OS X for now. A future implementation for Win32
+	// may be a possibility.
+	ConnectMonitorsChanged(func(Screen)) gobject.SignalHandle
+	// ConnectSizeChanged connects the provided callback to the "size-changed" signal
+	//
+	// The ::size-changed signal is emitted when the pixel width or
+	// height of a screen changes.
+	ConnectSizeChanged(func(Screen)) gobject.SignalHandle
 }
 
 func unsafeWrapScreen(base *gobject.ObjectInstance) *ScreenInstance {
@@ -16848,6 +17264,30 @@ func (screen *ScreenInstance) SetResolution(dpi float64) {
 	runtime.KeepAlive(dpi)
 }
 
+// ConnectCompositedChanged connects the provided callback to the "composited-changed" signal
+//
+// The ::composited-changed signal is emitted when the composited
+// status of the screen changes
+func (o *ScreenInstance) ConnectCompositedChanged(fn func(Screen)) gobject.SignalHandle {
+	return o.Connect("composited-changed", fn)
+}
+// ConnectMonitorsChanged connects the provided callback to the "monitors-changed" signal
+//
+// The ::monitors-changed signal is emitted when the number, size
+// or position of the monitors attached to the screen change.
+// 
+// Only for X11 and OS X for now. A future implementation for Win32
+// may be a possibility.
+func (o *ScreenInstance) ConnectMonitorsChanged(fn func(Screen)) gobject.SignalHandle {
+	return o.Connect("monitors-changed", fn)
+}
+// ConnectSizeChanged connects the provided callback to the "size-changed" signal
+//
+// The ::size-changed signal is emitted when the pixel width or
+// height of a screen changes.
+func (o *ScreenInstance) ConnectSizeChanged(fn func(Screen)) gobject.SignalHandle {
+	return o.Connect("size-changed", fn)
+}
 // SeatInstance is the instance type used by all types extending GdkSeat. It is used internally by the bindings. Users should use the interface [Seat] instead.
 type SeatInstance struct {
 	_ [0]func() // equal guard
@@ -16896,6 +17336,30 @@ type Seat interface {
 	//
 	// Releases a grab added through gdk_seat_grab().
 	Ungrab()
+	// ConnectDeviceAdded connects the provided callback to the "device-added" signal
+	//
+	// The ::device-added signal is emitted when a new input
+	// device is related to this seat.
+	ConnectDeviceAdded(func(Seat, Device)) gobject.SignalHandle
+	// ConnectDeviceRemoved connects the provided callback to the "device-removed" signal
+	//
+	// The ::device-removed signal is emitted when an
+	// input device is removed (e.g. unplugged).
+	ConnectDeviceRemoved(func(Seat, Device)) gobject.SignalHandle
+	// ConnectToolAdded connects the provided callback to the "tool-added" signal
+	//
+	// The ::tool-added signal is emitted whenever a new tool
+	// is made known to the seat. The tool may later be assigned
+	// to a device (i.e. on proximity with a tablet). The device
+	// will emit the #GdkDevice::tool-changed signal accordingly.
+	// 
+	// A same tool may be used by several devices.
+	ConnectToolAdded(func(Seat, DeviceTool)) gobject.SignalHandle
+	// ConnectToolRemoved connects the provided callback to the "tool-removed" signal
+	//
+	// This signal is emitted whenever a tool is no longer known
+	// to this @seat.
+	ConnectToolRemoved(func(Seat, DeviceTool)) gobject.SignalHandle
 }
 
 func unsafeWrapSeat(base *gobject.ObjectInstance) *SeatInstance {
@@ -17032,6 +17496,38 @@ func (seat *SeatInstance) Ungrab() {
 	runtime.KeepAlive(seat)
 }
 
+// ConnectDeviceAdded connects the provided callback to the "device-added" signal
+//
+// The ::device-added signal is emitted when a new input
+// device is related to this seat.
+func (o *SeatInstance) ConnectDeviceAdded(fn func(Seat, Device)) gobject.SignalHandle {
+	return o.Connect("device-added", fn)
+}
+// ConnectDeviceRemoved connects the provided callback to the "device-removed" signal
+//
+// The ::device-removed signal is emitted when an
+// input device is removed (e.g. unplugged).
+func (o *SeatInstance) ConnectDeviceRemoved(fn func(Seat, Device)) gobject.SignalHandle {
+	return o.Connect("device-removed", fn)
+}
+// ConnectToolAdded connects the provided callback to the "tool-added" signal
+//
+// The ::tool-added signal is emitted whenever a new tool
+// is made known to the seat. The tool may later be assigned
+// to a device (i.e. on proximity with a tablet). The device
+// will emit the #GdkDevice::tool-changed signal accordingly.
+// 
+// A same tool may be used by several devices.
+func (o *SeatInstance) ConnectToolAdded(fn func(Seat, DeviceTool)) gobject.SignalHandle {
+	return o.Connect("tool-added", fn)
+}
+// ConnectToolRemoved connects the provided callback to the "tool-removed" signal
+//
+// This signal is emitted whenever a tool is no longer known
+// to this @seat.
+func (o *SeatInstance) ConnectToolRemoved(fn func(Seat, DeviceTool)) gobject.SignalHandle {
+	return o.Connect("tool-removed", fn)
+}
 // VisualInstance is the instance type used by all types extending GdkVisual. It is used internally by the bindings. Users should use the interface [Visual] instead.
 type VisualInstance struct {
 	_ [0]func() // equal guard
@@ -17492,7 +17988,7 @@ type Window interface {
 	// 
 	// The function takes the following parameters:
 	// 
-	// 	- context DrawingContext: the #GdkDrawingContext created by gdk_window_begin_draw_frame() 
+	// 	- _context DrawingContext: the #GdkDrawingContext created by gdk_window_begin_draw_frame() 
 	//
 	// Indicates that the drawing of the contents of @window started with
 	// gdk_window_begin_frame() has been completed.
@@ -17965,14 +18461,6 @@ type Window interface {
 	//
 	// This function returns the type hint set for a window.
 	GetTypeHint() WindowTypeHint
-	// GetUserData wraps gdk_window_get_user_data
-	// The function returns the following values:
-	// 
-	// 	- data unsafe.Pointer (nullable): return location for user data 
-	//
-	// Retrieves the user data for @window, which is normally the widget
-	// that @window belongs to. See gdk_window_set_user_data().
-	GetUserData() unsafe.Pointer
 	// GetVisual wraps gdk_window_get_visual
 	// The function returns the following values:
 	// 
@@ -18760,20 +19248,6 @@ type Window interface {
 	// Toggles whether a window needs the user's
 	// urgent attention.
 	SetUrgencyHint(bool)
-	// SetUserData wraps gdk_window_set_user_data
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- userData unsafe.Pointer (nullable): user data 
-	//
-	// For most purposes this function is deprecated in favor of
-	// g_object_set_data(). However, for historical reasons GTK+ stores
-	// the #GtkWidget that owns a #GdkWindow as user data on the
-	// #GdkWindow. So, custom widget implementations should use
-	// this function for that. If GTK+ receives an event for a #GdkWindow,
-	// and the user data for the window is non-%NULL, GTK+ will assume the
-	// user data is a #GtkWidget, and forward the event to that widget.
-	SetUserData(unsafe.Pointer)
 	// Show wraps gdk_window_show
 	//
 	// Like gdk_window_show_unraised(), but also raises the window to the
@@ -18850,6 +19324,39 @@ type Window interface {
 	// This function is not really useful as gdk_window_hide() automatically
 	// withdraws toplevel windows before hiding them.
 	Withdraw()
+	// ConnectFromEmbedder connects the provided callback to the "from-embedder" signal
+	//
+	// The ::from-embedder signal is emitted to translate coordinates
+	// in the embedder of an offscreen window to the offscreen window.
+	// 
+	// See also #GdkWindow::to-embedder.
+	ConnectFromEmbedder(func(Window, float64, float64, unsafe.Pointer, unsafe.Pointer)) gobject.SignalHandle
+	// ConnectMovedToRect connects the provided callback to the "moved-to-rect" signal
+	//
+	// Emitted when the position of @window is finalized after being moved to a
+	// destination rectangle.
+	// 
+	// @window might be flipped over the destination rectangle in order to keep
+	// it on-screen, in which case @flipped_x and @flipped_y will be set to %TRUE
+	// accordingly.
+	// 
+	// @flipped_rect is the ideal position of @window after any possible
+	// flipping, but before any possible sliding. @final_rect is @flipped_rect,
+	// but possibly translated in the case that flipping is still ineffective in
+	// keeping @window on-screen.
+	ConnectMovedToRect(func(Window, unsafe.Pointer, unsafe.Pointer, bool, bool)) gobject.SignalHandle
+	// ConnectPickEmbeddedChild connects the provided callback to the "pick-embedded-child" signal
+	//
+	// The ::pick-embedded-child signal is emitted to find an embedded
+	// child at the given position.
+	ConnectPickEmbeddedChild(func(Window, float64, float64) WindowInstance) gobject.SignalHandle
+	// ConnectToEmbedder connects the provided callback to the "to-embedder" signal
+	//
+	// The ::to-embedder signal is emitted to translate coordinates
+	// in an offscreen window to its embedder.
+	// 
+	// See also #GdkWindow::from-embedder.
+	ConnectToEmbedder(func(Window, float64, float64, unsafe.Pointer, unsafe.Pointer)) gobject.SignalHandle
 }
 
 func unsafeWrapWindow(base *gobject.ObjectInstance) *WindowInstance {
@@ -19323,7 +19830,7 @@ func (window *WindowInstance) Destroy() {
 // 
 // The function takes the following parameters:
 // 
-// 	- context DrawingContext: the #GdkDrawingContext created by gdk_window_begin_draw_frame() 
+// 	- _context DrawingContext: the #GdkDrawingContext created by gdk_window_begin_draw_frame() 
 //
 // Indicates that the drawing of the contents of @window started with
 // gdk_window_begin_frame() has been completed.
@@ -19332,16 +19839,16 @@ func (window *WindowInstance) Destroy() {
 // 
 // It is an error to call this function without a matching
 // gdk_window_begin_frame() first.
-func (window *WindowInstance) EndDrawFrame(context DrawingContext) {
+func (window *WindowInstance) EndDrawFrame(_context DrawingContext) {
 	var carg0 *C.GdkWindow         // in, none, converted
 	var carg1 *C.GdkDrawingContext // in, none, converted
 
 	carg0 = (*C.GdkWindow)(UnsafeWindowToGlibNone(window))
-	carg1 = (*C.GdkDrawingContext)(UnsafeDrawingContextToGlibNone(context))
+	carg1 = (*C.GdkDrawingContext)(UnsafeDrawingContextToGlibNone(_context))
 
 	C.gdk_window_end_draw_frame(carg0, carg1)
 	runtime.KeepAlive(window)
-	runtime.KeepAlive(context)
+	runtime.KeepAlive(_context)
 }
 
 // EndPaint wraps gdk_window_end_paint
@@ -20471,31 +20978,6 @@ func (window *WindowInstance) GetTypeHint() WindowTypeHint {
 	goret = WindowTypeHint(cret)
 
 	return goret
-}
-
-// GetUserData wraps gdk_window_get_user_data
-// The function returns the following values:
-// 
-// 	- data unsafe.Pointer (nullable): return location for user data 
-//
-// Retrieves the user data for @window, which is normally the widget
-// that @window belongs to. See gdk_window_set_user_data().
-func (window *WindowInstance) GetUserData() unsafe.Pointer {
-	var carg0 *C.GdkWindow // in, none, converted
-	var carg1 C.gpointer   // out, full, casted, nullable
-
-	carg0 = (*C.GdkWindow)(UnsafeWindowToGlibNone(window))
-
-	C.gdk_window_get_user_data(carg0, &carg1)
-	runtime.KeepAlive(window)
-
-	var data unsafe.Pointer
-
-	if carg1 != nil {
-		data = unsafe.Pointer(carg1)
-	}
-
-	return data
 }
 
 // GetVisual wraps gdk_window_get_visual
@@ -22038,33 +22520,6 @@ func (window *WindowInstance) SetUrgencyHint(urgent bool) {
 	runtime.KeepAlive(urgent)
 }
 
-// SetUserData wraps gdk_window_set_user_data
-// 
-// The function takes the following parameters:
-// 
-// 	- userData unsafe.Pointer (nullable): user data 
-//
-// For most purposes this function is deprecated in favor of
-// g_object_set_data(). However, for historical reasons GTK+ stores
-// the #GtkWidget that owns a #GdkWindow as user data on the
-// #GdkWindow. So, custom widget implementations should use
-// this function for that. If GTK+ receives an event for a #GdkWindow,
-// and the user data for the window is non-%NULL, GTK+ will assume the
-// user data is a #GtkWidget, and forward the event to that widget.
-func (window *WindowInstance) SetUserData(userData unsafe.Pointer) {
-	var carg0 *C.GdkWindow // in, none, converted
-	var carg1 C.gpointer   // in, none, casted, nullable
-
-	carg0 = (*C.GdkWindow)(UnsafeWindowToGlibNone(window))
-	if userData != nil {
-		carg1 = C.gpointer(userData)
-	}
-
-	C.gdk_window_set_user_data(carg0, carg1)
-	runtime.KeepAlive(window)
-	runtime.KeepAlive(userData)
-}
-
 // Show wraps gdk_window_show
 //
 // Like gdk_window_show_unraised(), but also raises the window to the
@@ -22205,6 +22660,47 @@ func (window *WindowInstance) Withdraw() {
 	runtime.KeepAlive(window)
 }
 
+// ConnectFromEmbedder connects the provided callback to the "from-embedder" signal
+//
+// The ::from-embedder signal is emitted to translate coordinates
+// in the embedder of an offscreen window to the offscreen window.
+// 
+// See also #GdkWindow::to-embedder.
+func (o *WindowInstance) ConnectFromEmbedder(fn func(Window, float64, float64, unsafe.Pointer, unsafe.Pointer)) gobject.SignalHandle {
+	return o.Connect("from-embedder", fn)
+}
+// ConnectMovedToRect connects the provided callback to the "moved-to-rect" signal
+//
+// Emitted when the position of @window is finalized after being moved to a
+// destination rectangle.
+// 
+// @window might be flipped over the destination rectangle in order to keep
+// it on-screen, in which case @flipped_x and @flipped_y will be set to %TRUE
+// accordingly.
+// 
+// @flipped_rect is the ideal position of @window after any possible
+// flipping, but before any possible sliding. @final_rect is @flipped_rect,
+// but possibly translated in the case that flipping is still ineffective in
+// keeping @window on-screen.
+func (o *WindowInstance) ConnectMovedToRect(fn func(Window, unsafe.Pointer, unsafe.Pointer, bool, bool)) gobject.SignalHandle {
+	return o.Connect("moved-to-rect", fn)
+}
+// ConnectPickEmbeddedChild connects the provided callback to the "pick-embedded-child" signal
+//
+// The ::pick-embedded-child signal is emitted to find an embedded
+// child at the given position.
+func (o *WindowInstance) ConnectPickEmbeddedChild(fn func(Window, float64, float64) WindowInstance) gobject.SignalHandle {
+	return o.Connect("pick-embedded-child", fn)
+}
+// ConnectToEmbedder connects the provided callback to the "to-embedder" signal
+//
+// The ::to-embedder signal is emitted to translate coordinates
+// in an offscreen window to its embedder.
+// 
+// See also #GdkWindow::from-embedder.
+func (o *WindowInstance) ConnectToEmbedder(fn func(Window, float64, float64, unsafe.Pointer, unsafe.Pointer)) gobject.SignalHandle {
+	return o.Connect("to-embedder", fn)
+}
 // Atom wraps GdkAtom
 //
 // An opaque type representing a string as an index into a table

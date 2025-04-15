@@ -7712,7 +7712,7 @@ type DevicePadInstance struct {
 
 var _ DevicePad = (*DevicePadInstance)(nil)
 
-// DevicePadInstance wraps GdkDevicePad
+// DevicePad wraps GdkDevicePad
 //
 // `GdkDevicePad` is an interface implemented by devices of type
 // %GDK_SOURCE_TABLET_PAD
@@ -7954,7 +7954,7 @@ type DragSurfaceInstance struct {
 
 var _ DragSurface = (*DragSurfaceInstance)(nil)
 
-// DragSurfaceInstance wraps GdkDragSurface
+// DragSurface wraps GdkDragSurface
 //
 // A `GdkDragSurface` is an interface for surfaces used during DND.
 type DragSurface interface {
@@ -7973,6 +7973,22 @@ type DragSurface interface {
 	//
 	// Present @drag_surface.
 	Present(int, int) bool
+	// ConnectComputeSize connects the provided callback to the "compute-size" signal
+	//
+	// Emitted when the size for the surface needs to be computed, when it is
+	// present.
+	// 
+	// This signal will normally be emitted during the native surface layout
+	// cycle when the surface size needs to be recomputed.
+	// 
+	// It is the responsibility of the drag surface user to handle this signal
+	// and compute the desired size of the surface, storing the computed size
+	// in the [struct@Gdk.DragSurfaceSize] object that is passed to the signal
+	// handler, using [method@Gdk.DragSurfaceSize.set_size].
+	// 
+	// Failing to set a size so will result in an arbitrary size being used as
+	// a result.
+	ConnectComputeSize(func(DragSurface, *DragSurfaceSize)) gobject.SignalHandle
 }
 
 var _ DragSurface = (*DragSurfaceInstance)(nil)
@@ -8049,6 +8065,24 @@ func (dragSurface *DragSurfaceInstance) Present(width int, height int) bool {
 	return goret
 }
 
+// ConnectComputeSize connects the provided callback to the "compute-size" signal
+//
+// Emitted when the size for the surface needs to be computed, when it is
+// present.
+// 
+// This signal will normally be emitted during the native surface layout
+// cycle when the surface size needs to be recomputed.
+// 
+// It is the responsibility of the drag surface user to handle this signal
+// and compute the desired size of the surface, storing the computed size
+// in the [struct@Gdk.DragSurfaceSize] object that is passed to the signal
+// handler, using [method@Gdk.DragSurfaceSize.set_size].
+// 
+// Failing to set a size so will result in an arbitrary size being used as
+// a result.
+func (o *DragSurfaceInstance) ConnectComputeSize(fn func(DragSurface, *DragSurfaceSize)) gobject.SignalHandle {
+	return o.Instance.Connect("compute-size", fn)
+}
 // PaintableInstance is the instance type used by all types implementing GdkPaintable. It is used internally by the bindings. Users should use the interface [Paintable] instead.
 type PaintableInstance struct {
 	_ [0]func() // equal guard
@@ -8057,7 +8091,7 @@ type PaintableInstance struct {
 
 var _ Paintable = (*PaintableInstance)(nil)
 
-// PaintableInstance wraps GdkPaintable
+// Paintable wraps GdkPaintable
 //
 // `GdkPaintable` is a simple interface used by GTK to represent content that
 // can be painted.
@@ -8254,6 +8288,26 @@ type Paintable interface {
 	// If @width and @height are not larger than zero, this function will
 	// do nothing.
 	Snapshot(Snapshot, float64, float64)
+	// ConnectInvalidateContents connects the provided callback to the "invalidate-contents" signal
+	//
+	// Emitted when the contents of the @paintable change.
+	// 
+	// Examples for such an event would be videos changing to the next frame or
+	// the icon theme for an icon changing.
+	ConnectInvalidateContents(func(Paintable)) gobject.SignalHandle
+	// ConnectInvalidateSize connects the provided callback to the "invalidate-size" signal
+	//
+	// Emitted when the intrinsic size of the @paintable changes.
+	// 
+	// This means the values reported by at least one of
+	// [method@Gdk.Paintable.get_intrinsic_width],
+	// [method@Gdk.Paintable.get_intrinsic_height] or
+	// [method@Gdk.Paintable.get_intrinsic_aspect_ratio]
+	// has changed.
+	// 
+	// Examples for such an event would be a paintable displaying
+	// the contents of a toplevel surface being resized.
+	ConnectInvalidateSize(func(Paintable)) gobject.SignalHandle
 }
 
 var _ Paintable = (*PaintableInstance)(nil)
@@ -8616,6 +8670,30 @@ func (paintable *PaintableInstance) Snapshot(snapshot Snapshot, width float64, h
 	runtime.KeepAlive(height)
 }
 
+// ConnectInvalidateContents connects the provided callback to the "invalidate-contents" signal
+//
+// Emitted when the contents of the @paintable change.
+// 
+// Examples for such an event would be videos changing to the next frame or
+// the icon theme for an icon changing.
+func (o *PaintableInstance) ConnectInvalidateContents(fn func(Paintable)) gobject.SignalHandle {
+	return o.Instance.Connect("invalidate-contents", fn)
+}
+// ConnectInvalidateSize connects the provided callback to the "invalidate-size" signal
+//
+// Emitted when the intrinsic size of the @paintable changes.
+// 
+// This means the values reported by at least one of
+// [method@Gdk.Paintable.get_intrinsic_width],
+// [method@Gdk.Paintable.get_intrinsic_height] or
+// [method@Gdk.Paintable.get_intrinsic_aspect_ratio]
+// has changed.
+// 
+// Examples for such an event would be a paintable displaying
+// the contents of a toplevel surface being resized.
+func (o *PaintableInstance) ConnectInvalidateSize(fn func(Paintable)) gobject.SignalHandle {
+	return o.Instance.Connect("invalidate-size", fn)
+}
 // PopupInstance is the instance type used by all types implementing GdkPopup. It is used internally by the bindings. Users should use the interface [Popup] instead.
 type PopupInstance struct {
 	_ [0]func() // equal guard
@@ -8624,7 +8702,7 @@ type PopupInstance struct {
 
 var _ Popup = (*PopupInstance)(nil)
 
-// PopupInstance wraps GdkPopup
+// Popup wraps GdkPopup
 //
 // A `GdkPopup` is a surface that is attached to another surface.
 // 
@@ -8954,7 +9032,7 @@ type ToplevelInstance struct {
 
 var _ Toplevel = (*ToplevelInstance)(nil)
 
-// ToplevelInstance wraps GdkToplevel
+// Toplevel wraps GdkToplevel
 //
 // A `GdkToplevel` is a freestanding toplevel surface.
 // 
@@ -9156,6 +9234,22 @@ type Toplevel interface {
 	//
 	// Performs a title bar gesture.
 	TitlebarGesture(TitlebarGesture) bool
+	// ConnectComputeSize connects the provided callback to the "compute-size" signal
+	//
+	// Emitted when the size for the surface needs to be computed, when
+	// it is present.
+	// 
+	// This signal will normally be emitted during or after a call to
+	// [method@Gdk.Toplevel.present], depending on the configuration
+	// received by the windowing system. It may also be emitted at any
+	// other point in time, in response to the windowing system
+	// spontaneously changing the configuration of the toplevel surface.
+	// 
+	// It is the responsibility of the toplevel user to handle this signal
+	// and compute the desired size of the toplevel, given the information
+	// passed via the [struct@Gdk.ToplevelSize] object. Failing to do so
+	// will result in an arbitrary size being used as a result.
+	ConnectComputeSize(func(Toplevel, *ToplevelSize)) gobject.SignalHandle
 }
 
 var _ Toplevel = (*ToplevelInstance)(nil)
@@ -9629,6 +9723,24 @@ func (toplevel *ToplevelInstance) TitlebarGesture(gesture TitlebarGesture) bool 
 	return goret
 }
 
+// ConnectComputeSize connects the provided callback to the "compute-size" signal
+//
+// Emitted when the size for the surface needs to be computed, when
+// it is present.
+// 
+// This signal will normally be emitted during or after a call to
+// [method@Gdk.Toplevel.present], depending on the configuration
+// received by the windowing system. It may also be emitted at any
+// other point in time, in response to the windowing system
+// spontaneously changing the configuration of the toplevel surface.
+// 
+// It is the responsibility of the toplevel user to handle this signal
+// and compute the desired size of the toplevel, given the information
+// passed via the [struct@Gdk.ToplevelSize] object. Failing to do so
+// will result in an arbitrary size being used as a result.
+func (o *ToplevelInstance) ConnectComputeSize(fn func(Toplevel, *ToplevelSize)) gobject.SignalHandle {
+	return o.Instance.Connect("compute-size", fn)
+}
 // AppLaunchContextInstance is the instance type used by all types extending GdkAppLaunchContext. It is used internally by the bindings. Users should use the interface [AppLaunchContext] instead.
 type AppLaunchContextInstance struct {
 	_ [0]func() // equal guard
@@ -9779,14 +9891,14 @@ func UnsafeAppLaunchContextToGlibFull(c AppLaunchContext) unsafe.Pointer {
 // 	- goret Display 
 //
 // Gets the `GdkDisplay` that @context is for.
-func (context *AppLaunchContextInstance) GetDisplay() Display {
+func (_context *AppLaunchContextInstance) GetDisplay() Display {
 	var carg0 *C.GdkAppLaunchContext // in, none, converted
 	var cret  *C.GdkDisplay          // return, none, converted
 
-	carg0 = (*C.GdkAppLaunchContext)(UnsafeAppLaunchContextToGlibNone(context))
+	carg0 = (*C.GdkAppLaunchContext)(UnsafeAppLaunchContextToGlibNone(_context))
 
 	cret = C.gdk_app_launch_context_get_display(carg0)
-	runtime.KeepAlive(context)
+	runtime.KeepAlive(_context)
 
 	var goret Display
 
@@ -9814,15 +9926,15 @@ func (context *AppLaunchContextInstance) GetDisplay() Display {
 // When the workspace is not specified or @desktop is set to -1,
 // it is up to the window manager to pick one, typically it will
 // be the current workspace.
-func (context *AppLaunchContextInstance) SetDesktop(desktop int) {
+func (_context *AppLaunchContextInstance) SetDesktop(desktop int) {
 	var carg0 *C.GdkAppLaunchContext // in, none, converted
 	var carg1 C.int                  // in, none, casted, casted C.gint
 
-	carg0 = (*C.GdkAppLaunchContext)(UnsafeAppLaunchContextToGlibNone(context))
+	carg0 = (*C.GdkAppLaunchContext)(UnsafeAppLaunchContextToGlibNone(_context))
 	carg1 = C.int(desktop)
 
 	C.gdk_app_launch_context_set_desktop(carg0, carg1)
-	runtime.KeepAlive(context)
+	runtime.KeepAlive(_context)
 	runtime.KeepAlive(desktop)
 }
 
@@ -9839,17 +9951,17 @@ func (context *AppLaunchContextInstance) SetDesktop(desktop int) {
 // notification.
 // 
 // See also [method@Gdk.AppLaunchContext.set_icon_name].
-func (context *AppLaunchContextInstance) SetIcon(icon gio.Icon) {
+func (_context *AppLaunchContextInstance) SetIcon(icon gio.Icon) {
 	var carg0 *C.GdkAppLaunchContext // in, none, converted
 	var carg1 *C.GIcon               // in, none, converted, nullable
 
-	carg0 = (*C.GdkAppLaunchContext)(UnsafeAppLaunchContextToGlibNone(context))
+	carg0 = (*C.GdkAppLaunchContext)(UnsafeAppLaunchContextToGlibNone(_context))
 	if icon != nil {
 		carg1 = (*C.GIcon)(gio.UnsafeIconToGlibNone(icon))
 	}
 
 	C.gdk_app_launch_context_set_icon(carg0, carg1)
-	runtime.KeepAlive(context)
+	runtime.KeepAlive(_context)
 	runtime.KeepAlive(icon)
 }
 
@@ -9868,18 +9980,18 @@ func (context *AppLaunchContextInstance) SetIcon(icon gio.Icon) {
 // If neither @icon or @icon_name is set, the icon is taken from either
 // the file that is passed to launched application or from the `GAppInfo`
 // for the launched application itself.
-func (context *AppLaunchContextInstance) SetIconName(iconName string) {
+func (_context *AppLaunchContextInstance) SetIconName(iconName string) {
 	var carg0 *C.GdkAppLaunchContext // in, none, converted
 	var carg1 *C.char                // in, none, string, nullable-string
 
-	carg0 = (*C.GdkAppLaunchContext)(UnsafeAppLaunchContextToGlibNone(context))
+	carg0 = (*C.GdkAppLaunchContext)(UnsafeAppLaunchContextToGlibNone(_context))
 	if iconName != "" {
 		carg1 = (*C.char)(unsafe.Pointer(C.CString(iconName)))
 		defer C.free(unsafe.Pointer(carg1))
 	}
 
 	C.gdk_app_launch_context_set_icon_name(carg0, carg1)
-	runtime.KeepAlive(context)
+	runtime.KeepAlive(_context)
 	runtime.KeepAlive(iconName)
 }
 
@@ -9898,15 +10010,15 @@ func (context *AppLaunchContextInstance) SetIconName(iconName string) {
 // focus to the newly launched application when the user is busy
 // typing in another window. This is also known as 'focus stealing
 // prevention'.
-func (context *AppLaunchContextInstance) SetTimestamp(timestamp uint32) {
+func (_context *AppLaunchContextInstance) SetTimestamp(timestamp uint32) {
 	var carg0 *C.GdkAppLaunchContext // in, none, converted
 	var carg1 C.guint32              // in, none, casted
 
-	carg0 = (*C.GdkAppLaunchContext)(UnsafeAppLaunchContextToGlibNone(context))
+	carg0 = (*C.GdkAppLaunchContext)(UnsafeAppLaunchContextToGlibNone(_context))
 	carg1 = C.guint32(timestamp)
 
 	C.gdk_app_launch_context_set_timestamp(carg0, carg1)
-	runtime.KeepAlive(context)
+	runtime.KeepAlive(_context)
 	runtime.KeepAlive(timestamp)
 }
 
@@ -10527,6 +10639,10 @@ type Clipboard interface {
 	// 
 	// See [method@Gdk.Clipboard.store_async].
 	StoreFinish(gio.AsyncResult) (bool, error)
+	// ConnectChanged connects the provided callback to the "changed" signal
+	//
+	// Emitted when the clipboard changes ownership.
+	ConnectChanged(func(Clipboard)) gobject.SignalHandle
 }
 
 func unsafeWrapClipboard(base *gobject.ObjectInstance) *ClipboardInstance {
@@ -11121,6 +11237,12 @@ func (clipboard *ClipboardInstance) StoreFinish(result gio.AsyncResult) (bool, e
 	return goret, _goerr
 }
 
+// ConnectChanged connects the provided callback to the "changed" signal
+//
+// Emitted when the clipboard changes ownership.
+func (o *ClipboardInstance) ConnectChanged(fn func(Clipboard)) gobject.SignalHandle {
+	return o.Connect("changed", fn)
+}
 // ContentDeserializerInstance is the instance type used by all types extending GdkContentDeserializer. It is used internally by the bindings. Users should use the interface [ContentDeserializer] instead.
 type ContentDeserializerInstance struct {
 	_ [0]func() // equal guard
@@ -11190,22 +11312,6 @@ type ContentDeserializer interface {
 	// 
 	// This is the priority that was passed to [func@Gdk.content_deserialize_async].
 	GetPriority() int
-	// GetTaskData wraps gdk_content_deserializer_get_task_data
-	// The function returns the following values:
-	// 
-	// 	- goret unsafe.Pointer 
-	//
-	// Gets the data that was associated with the current operation.
-	// 
-	// See [method@Gdk.ContentDeserializer.set_task_data].
-	GetTaskData() unsafe.Pointer
-	// GetUserData wraps gdk_content_deserializer_get_user_data
-	// The function returns the following values:
-	// 
-	// 	- goret unsafe.Pointer 
-	//
-	// Gets the user data that was passed when the deserializer was registered.
-	GetUserData() unsafe.Pointer
 	// ReturnError wraps gdk_content_deserializer_return_error
 	// 
 	// The function takes the following parameters:
@@ -11375,52 +11481,6 @@ func (deserializer *ContentDeserializerInstance) GetPriority() int {
 	return goret
 }
 
-// GetTaskData wraps gdk_content_deserializer_get_task_data
-// The function returns the following values:
-// 
-// 	- goret unsafe.Pointer 
-//
-// Gets the data that was associated with the current operation.
-// 
-// See [method@Gdk.ContentDeserializer.set_task_data].
-func (deserializer *ContentDeserializerInstance) GetTaskData() unsafe.Pointer {
-	var carg0 *C.GdkContentDeserializer // in, none, converted
-	var cret  C.gpointer                // return, none, casted
-
-	carg0 = (*C.GdkContentDeserializer)(UnsafeContentDeserializerToGlibNone(deserializer))
-
-	cret = C.gdk_content_deserializer_get_task_data(carg0)
-	runtime.KeepAlive(deserializer)
-
-	var goret unsafe.Pointer
-
-	goret = unsafe.Pointer(cret)
-
-	return goret
-}
-
-// GetUserData wraps gdk_content_deserializer_get_user_data
-// The function returns the following values:
-// 
-// 	- goret unsafe.Pointer 
-//
-// Gets the user data that was passed when the deserializer was registered.
-func (deserializer *ContentDeserializerInstance) GetUserData() unsafe.Pointer {
-	var carg0 *C.GdkContentDeserializer // in, none, converted
-	var cret  C.gpointer                // return, none, casted
-
-	carg0 = (*C.GdkContentDeserializer)(UnsafeContentDeserializerToGlibNone(deserializer))
-
-	cret = C.gdk_content_deserializer_get_user_data(carg0)
-	runtime.KeepAlive(deserializer)
-
-	var goret unsafe.Pointer
-
-	goret = unsafe.Pointer(cret)
-
-	return goret
-}
-
 // ReturnError wraps gdk_content_deserializer_return_error
 // 
 // The function takes the following parameters:
@@ -11549,6 +11609,10 @@ type ContentProvider interface {
 	// 
 	// See [method@Gdk.ContentProvider.write_mime_type_async].
 	WriteMIMETypeFinish(gio.AsyncResult) (bool, error)
+	// ConnectContentChanged connects the provided callback to the "content-changed" signal
+	//
+	// Emitted whenever the content provided by this provider has changed.
+	ConnectContentChanged(func(ContentProvider)) gobject.SignalHandle
 }
 
 func unsafeWrapContentProvider(base *gobject.ObjectInstance) *ContentProviderInstance {
@@ -11883,6 +11947,12 @@ func (provider *ContentProviderInstance) WriteMIMETypeFinish(result gio.AsyncRes
 	return goret, _goerr
 }
 
+// ConnectContentChanged connects the provided callback to the "content-changed" signal
+//
+// Emitted whenever the content provided by this provider has changed.
+func (o *ContentProviderInstance) ConnectContentChanged(fn func(ContentProvider)) gobject.SignalHandle {
+	return o.Connect("content-changed", fn)
+}
 // ContentSerializerInstance is the instance type used by all types extending GdkContentSerializer. It is used internally by the bindings. Users should use the interface [ContentSerializer] instead.
 type ContentSerializerInstance struct {
 	_ [0]func() // equal guard
@@ -11953,22 +12023,6 @@ type ContentSerializer interface {
 	// 
 	// This is the priority that was passed to [func@content_serialize_async].
 	GetPriority() int
-	// GetTaskData wraps gdk_content_serializer_get_task_data
-	// The function returns the following values:
-	// 
-	// 	- goret unsafe.Pointer 
-	//
-	// Gets the data that was associated with the current operation.
-	// 
-	// See [method@Gdk.ContentSerializer.set_task_data].
-	GetTaskData() unsafe.Pointer
-	// GetUserData wraps gdk_content_serializer_get_user_data
-	// The function returns the following values:
-	// 
-	// 	- goret unsafe.Pointer 
-	//
-	// Gets the user data that was passed when the serializer was registered.
-	GetUserData() unsafe.Pointer
 	// ReturnError wraps gdk_content_serializer_return_error
 	// 
 	// The function takes the following parameters:
@@ -12134,52 +12188,6 @@ func (serializer *ContentSerializerInstance) GetPriority() int {
 	var goret int
 
 	goret = int(cret)
-
-	return goret
-}
-
-// GetTaskData wraps gdk_content_serializer_get_task_data
-// The function returns the following values:
-// 
-// 	- goret unsafe.Pointer 
-//
-// Gets the data that was associated with the current operation.
-// 
-// See [method@Gdk.ContentSerializer.set_task_data].
-func (serializer *ContentSerializerInstance) GetTaskData() unsafe.Pointer {
-	var carg0 *C.GdkContentSerializer // in, none, converted
-	var cret  C.gpointer              // return, none, casted
-
-	carg0 = (*C.GdkContentSerializer)(UnsafeContentSerializerToGlibNone(serializer))
-
-	cret = C.gdk_content_serializer_get_task_data(carg0)
-	runtime.KeepAlive(serializer)
-
-	var goret unsafe.Pointer
-
-	goret = unsafe.Pointer(cret)
-
-	return goret
-}
-
-// GetUserData wraps gdk_content_serializer_get_user_data
-// The function returns the following values:
-// 
-// 	- goret unsafe.Pointer 
-//
-// Gets the user data that was passed when the serializer was registered.
-func (serializer *ContentSerializerInstance) GetUserData() unsafe.Pointer {
-	var carg0 *C.GdkContentSerializer // in, none, converted
-	var cret  C.gpointer              // return, none, casted
-
-	carg0 = (*C.GdkContentSerializer)(UnsafeContentSerializerToGlibNone(serializer))
-
-	cret = C.gdk_content_serializer_get_user_data(carg0)
-	runtime.KeepAlive(serializer)
-
-	var goret unsafe.Pointer
-
-	goret = unsafe.Pointer(cret)
 
 	return goret
 }
@@ -12782,6 +12790,20 @@ type Device interface {
 	// 
 	// This is only relevant for keyboard devices.
 	HasBidiLayouts() bool
+	// ConnectChanged connects the provided callback to the "changed" signal
+	//
+	// Emitted either when the number of either axes or keys changes.
+	// 
+	// On X11 this will normally happen when the physical device
+	// routing events through the logical device changes (for
+	// example, user switches from the USB mouse to a tablet); in
+	// that case the logical device will change to reflect the axes
+	// and keys on the new physical device.
+	ConnectChanged(func(Device)) gobject.SignalHandle
+	// ConnectToolChanged connects the provided callback to the "tool-changed" signal
+	//
+	// Emitted on pen/eraser devices whenever tools enter or leave proximity.
+	ConnectToolChanged(func(Device, DeviceTool)) gobject.SignalHandle
 }
 
 func unsafeWrapDevice(base *gobject.ObjectInstance) *DeviceInstance {
@@ -13269,6 +13291,24 @@ func (device *DeviceInstance) HasBidiLayouts() bool {
 	return goret
 }
 
+// ConnectChanged connects the provided callback to the "changed" signal
+//
+// Emitted either when the number of either axes or keys changes.
+// 
+// On X11 this will normally happen when the physical device
+// routing events through the logical device changes (for
+// example, user switches from the USB mouse to a tablet); in
+// that case the logical device will change to reflect the axes
+// and keys on the new physical device.
+func (o *DeviceInstance) ConnectChanged(fn func(Device)) gobject.SignalHandle {
+	return o.Connect("changed", fn)
+}
+// ConnectToolChanged connects the provided callback to the "tool-changed" signal
+//
+// Emitted on pen/eraser devices whenever tools enter or leave proximity.
+func (o *DeviceInstance) ConnectToolChanged(fn func(Device, DeviceTool)) gobject.SignalHandle {
+	return o.Connect("tool-changed", fn)
+}
 // DeviceToolInstance is the instance type used by all types extending GdkDeviceTool. It is used internally by the bindings. Users should use the interface [DeviceTool] instead.
 type DeviceToolInstance struct {
 	_ [0]func() // equal guard
@@ -13771,6 +13811,26 @@ type Display interface {
 	// contains the translated keyval. It is exported for the benefit of
 	// virtualized test environments.
 	TranslateKey(uint, ModifierType, int) (uint, int, int, ModifierType, bool)
+	// ConnectClosed connects the provided callback to the "closed" signal
+	//
+	// Emitted when the connection to the windowing system for @display is closed.
+	ConnectClosed(func(Display, bool)) gobject.SignalHandle
+	// ConnectOpened connects the provided callback to the "opened" signal
+	//
+	// Emitted when the connection to the windowing system for @display is opened.
+	ConnectOpened(func(Display)) gobject.SignalHandle
+	// ConnectSeatAdded connects the provided callback to the "seat-added" signal
+	//
+	// Emitted whenever a new seat is made known to the windowing system.
+	ConnectSeatAdded(func(Display, Seat)) gobject.SignalHandle
+	// ConnectSeatRemoved connects the provided callback to the "seat-removed" signal
+	//
+	// Emitted whenever a seat is removed by the windowing system.
+	ConnectSeatRemoved(func(Display, Seat)) gobject.SignalHandle
+	// ConnectSettingChanged connects the provided callback to the "setting-changed" signal
+	//
+	// Emitted whenever a setting changes its value.
+	ConnectSettingChanged(func(Display, string)) gobject.SignalHandle
 }
 
 func unsafeWrapDisplay(base *gobject.ObjectInstance) *DisplayInstance {
@@ -14506,6 +14566,36 @@ func (display *DisplayInstance) TranslateKey(keycode uint, state ModifierType, g
 	return keyval, effectiveGroup, level, consumed, goret
 }
 
+// ConnectClosed connects the provided callback to the "closed" signal
+//
+// Emitted when the connection to the windowing system for @display is closed.
+func (o *DisplayInstance) ConnectClosed(fn func(Display, bool)) gobject.SignalHandle {
+	return o.Connect("closed", fn)
+}
+// ConnectOpened connects the provided callback to the "opened" signal
+//
+// Emitted when the connection to the windowing system for @display is opened.
+func (o *DisplayInstance) ConnectOpened(fn func(Display)) gobject.SignalHandle {
+	return o.Connect("opened", fn)
+}
+// ConnectSeatAdded connects the provided callback to the "seat-added" signal
+//
+// Emitted whenever a new seat is made known to the windowing system.
+func (o *DisplayInstance) ConnectSeatAdded(fn func(Display, Seat)) gobject.SignalHandle {
+	return o.Connect("seat-added", fn)
+}
+// ConnectSeatRemoved connects the provided callback to the "seat-removed" signal
+//
+// Emitted whenever a seat is removed by the windowing system.
+func (o *DisplayInstance) ConnectSeatRemoved(fn func(Display, Seat)) gobject.SignalHandle {
+	return o.Connect("seat-removed", fn)
+}
+// ConnectSettingChanged connects the provided callback to the "setting-changed" signal
+//
+// Emitted whenever a setting changes its value.
+func (o *DisplayInstance) ConnectSettingChanged(fn func(Display, string)) gobject.SignalHandle {
+	return o.Connect("setting-changed", fn)
+}
 // DisplayManagerInstance is the instance type used by all types extending GdkDisplayManager. It is used internally by the bindings. Users should use the interface [DisplayManager] instead.
 type DisplayManagerInstance struct {
 	_ [0]func() // equal guard
@@ -14589,6 +14679,10 @@ type DisplayManager interface {
 	//
 	// Sets @display as the default display.
 	SetDefaultDisplay(Display)
+	// ConnectDisplayOpened connects the provided callback to the "display-opened" signal
+	//
+	// Emitted when a display is opened.
+	ConnectDisplayOpened(func(DisplayManager, Display)) gobject.SignalHandle
 }
 
 func unsafeWrapDisplayManager(base *gobject.ObjectInstance) *DisplayManagerInstance {
@@ -14725,6 +14819,12 @@ func (manager *DisplayManagerInstance) SetDefaultDisplay(display Display) {
 	runtime.KeepAlive(display)
 }
 
+// ConnectDisplayOpened connects the provided callback to the "display-opened" signal
+//
+// Emitted when a display is opened.
+func (o *DisplayManagerInstance) ConnectDisplayOpened(fn func(DisplayManager, Display)) gobject.SignalHandle {
+	return o.Connect("display-opened", fn)
+}
 // DmabufTextureBuilderInstance is the instance type used by all types extending GdkDmabufTextureBuilder. It is used internally by the bindings. Users should use the interface [DmabufTextureBuilder] instead.
 type DmabufTextureBuilderInstance struct {
 	_ [0]func() // equal guard
@@ -15758,6 +15858,20 @@ type Drag interface {
 	// 
 	// Initially, the hotspot is at the top left corner of the drag surface.
 	SetHotspot(int, int)
+	// ConnectCancel connects the provided callback to the "cancel" signal
+	//
+	// Emitted when the drag operation is cancelled.
+	ConnectCancel(func(Drag, DragCancelReason)) gobject.SignalHandle
+	// ConnectDNDFinished connects the provided callback to the "dnd-finished" signal
+	//
+	// Emitted when the destination side has finished reading all data.
+	// 
+	// The drag object can now free all miscellaneous data.
+	ConnectDNDFinished(func(Drag)) gobject.SignalHandle
+	// ConnectDropPerformed connects the provided callback to the "drop-performed" signal
+	//
+	// Emitted when the drop operation is performed on an accepting client.
+	ConnectDropPerformed(func(Drag)) gobject.SignalHandle
 }
 
 func unsafeWrapDrag(base *gobject.ObjectInstance) *DragInstance {
@@ -16093,6 +16207,26 @@ func (drag *DragInstance) SetHotspot(hotX int, hotY int) {
 	runtime.KeepAlive(hotY)
 }
 
+// ConnectCancel connects the provided callback to the "cancel" signal
+//
+// Emitted when the drag operation is cancelled.
+func (o *DragInstance) ConnectCancel(fn func(Drag, DragCancelReason)) gobject.SignalHandle {
+	return o.Connect("cancel", fn)
+}
+// ConnectDNDFinished connects the provided callback to the "dnd-finished" signal
+//
+// Emitted when the destination side has finished reading all data.
+// 
+// The drag object can now free all miscellaneous data.
+func (o *DragInstance) ConnectDNDFinished(fn func(Drag)) gobject.SignalHandle {
+	return o.Connect("dnd-finished", fn)
+}
+// ConnectDropPerformed connects the provided callback to the "drop-performed" signal
+//
+// Emitted when the drop operation is performed on an accepting client.
+func (o *DragInstance) ConnectDropPerformed(fn func(Drag)) gobject.SignalHandle {
+	return o.Connect("drop-performed", fn)
+}
 // DrawContextInstance is the instance type used by all types extending GdkDrawContext. It is used internally by the bindings. Users should use the interface [DrawContext] instead.
 type DrawContextInstance struct {
 	_ [0]func() // equal guard
@@ -16172,14 +16306,14 @@ func UnsafeDrawContextToGlibFull(c DrawContext) unsafe.Pointer {
 // 	- goret Display 
 //
 // Retrieves the `GdkDisplay` the @context is created for
-func (context *DrawContextInstance) GetDisplay() Display {
+func (_context *DrawContextInstance) GetDisplay() Display {
 	var carg0 *C.GdkDrawContext // in, none, converted
 	var cret  *C.GdkDisplay     // return, none, converted
 
-	carg0 = (*C.GdkDrawContext)(UnsafeDrawContextToGlibNone(context))
+	carg0 = (*C.GdkDrawContext)(UnsafeDrawContextToGlibNone(_context))
 
 	cret = C.gdk_draw_context_get_display(carg0)
-	runtime.KeepAlive(context)
+	runtime.KeepAlive(_context)
 
 	var goret Display
 
@@ -16194,14 +16328,14 @@ func (context *DrawContextInstance) GetDisplay() Display {
 // 	- goret Surface 
 //
 // Retrieves the surface that @context is bound to.
-func (context *DrawContextInstance) GetSurface() Surface {
+func (_context *DrawContextInstance) GetSurface() Surface {
 	var carg0 *C.GdkDrawContext // in, none, converted
 	var cret  *C.GdkSurface     // return, none, converted
 
-	carg0 = (*C.GdkDrawContext)(UnsafeDrawContextToGlibNone(context))
+	carg0 = (*C.GdkDrawContext)(UnsafeDrawContextToGlibNone(_context))
 
 	cret = C.gdk_draw_context_get_surface(carg0)
-	runtime.KeepAlive(context)
+	runtime.KeepAlive(_context)
 
 	var goret Surface
 
@@ -16929,6 +17063,60 @@ type FrameClock interface {
 	// since this allows GTK to adjust system parameters to get maximally
 	// smooth animations.
 	RequestPhase(FrameClockPhase)
+	// ConnectAfterPaint connects the provided callback to the "after-paint" signal
+	//
+	// This signal ends processing of the frame.
+	// 
+	// Applications should generally not handle this signal.
+	ConnectAfterPaint(func(FrameClock)) gobject.SignalHandle
+	// ConnectBeforePaint connects the provided callback to the "before-paint" signal
+	//
+	// Begins processing of the frame.
+	// 
+	// Applications should generally not handle this signal.
+	ConnectBeforePaint(func(FrameClock)) gobject.SignalHandle
+	// ConnectFlushEvents connects the provided callback to the "flush-events" signal
+	//
+	// Used to flush pending motion events that are being batched up and
+	// compressed together.
+	// 
+	// Applications should not handle this signal.
+	ConnectFlushEvents(func(FrameClock)) gobject.SignalHandle
+	// ConnectLayout connects the provided callback to the "layout" signal
+	//
+	// Emitted as the second step of toolkit and application processing
+	// of the frame.
+	// 
+	// Any work to update sizes and positions of application elements
+	// should be performed. GTK normally handles this internally.
+	ConnectLayout(func(FrameClock)) gobject.SignalHandle
+	// ConnectPaint connects the provided callback to the "paint" signal
+	//
+	// Emitted as the third step of toolkit and application processing
+	// of the frame.
+	// 
+	// The frame is repainted. GDK normally handles this internally and
+	// emits [signal@Gdk.Surface::render] signals which are turned into
+	// [GtkWidget::snapshot](../gtk4/signal.Widget.snapshot.html) signals
+	// by GTK.
+	ConnectPaint(func(FrameClock)) gobject.SignalHandle
+	// ConnectResumeEvents connects the provided callback to the "resume-events" signal
+	//
+	// Emitted after processing of the frame is finished.
+	// 
+	// This signal is handled internally by GTK to resume normal
+	// event processing. Applications should not handle this signal.
+	ConnectResumeEvents(func(FrameClock)) gobject.SignalHandle
+	// ConnectUpdate connects the provided callback to the "update" signal
+	//
+	// Emitted as the first step of toolkit and application processing
+	// of the frame.
+	// 
+	// Animations should be updated using [method@Gdk.FrameClock.get_frame_time].
+	// Applications can connect directly to this signal, or use
+	// [gtk_widget_add_tick_callback()](../gtk4/method.Widget.add_tick_callback.html)
+	// as a more convenient interface.
+	ConnectUpdate(func(FrameClock)) gobject.SignalHandle
 }
 
 func unsafeWrapFrameClock(base *gobject.ObjectInstance) *FrameClockInstance {
@@ -17231,6 +17419,74 @@ func (frameClock *FrameClockInstance) RequestPhase(phase FrameClockPhase) {
 	runtime.KeepAlive(phase)
 }
 
+// ConnectAfterPaint connects the provided callback to the "after-paint" signal
+//
+// This signal ends processing of the frame.
+// 
+// Applications should generally not handle this signal.
+func (o *FrameClockInstance) ConnectAfterPaint(fn func(FrameClock)) gobject.SignalHandle {
+	return o.Connect("after-paint", fn)
+}
+// ConnectBeforePaint connects the provided callback to the "before-paint" signal
+//
+// Begins processing of the frame.
+// 
+// Applications should generally not handle this signal.
+func (o *FrameClockInstance) ConnectBeforePaint(fn func(FrameClock)) gobject.SignalHandle {
+	return o.Connect("before-paint", fn)
+}
+// ConnectFlushEvents connects the provided callback to the "flush-events" signal
+//
+// Used to flush pending motion events that are being batched up and
+// compressed together.
+// 
+// Applications should not handle this signal.
+func (o *FrameClockInstance) ConnectFlushEvents(fn func(FrameClock)) gobject.SignalHandle {
+	return o.Connect("flush-events", fn)
+}
+// ConnectLayout connects the provided callback to the "layout" signal
+//
+// Emitted as the second step of toolkit and application processing
+// of the frame.
+// 
+// Any work to update sizes and positions of application elements
+// should be performed. GTK normally handles this internally.
+func (o *FrameClockInstance) ConnectLayout(fn func(FrameClock)) gobject.SignalHandle {
+	return o.Connect("layout", fn)
+}
+// ConnectPaint connects the provided callback to the "paint" signal
+//
+// Emitted as the third step of toolkit and application processing
+// of the frame.
+// 
+// The frame is repainted. GDK normally handles this internally and
+// emits [signal@Gdk.Surface::render] signals which are turned into
+// [GtkWidget::snapshot](../gtk4/signal.Widget.snapshot.html) signals
+// by GTK.
+func (o *FrameClockInstance) ConnectPaint(fn func(FrameClock)) gobject.SignalHandle {
+	return o.Connect("paint", fn)
+}
+// ConnectResumeEvents connects the provided callback to the "resume-events" signal
+//
+// Emitted after processing of the frame is finished.
+// 
+// This signal is handled internally by GTK to resume normal
+// event processing. Applications should not handle this signal.
+func (o *FrameClockInstance) ConnectResumeEvents(fn func(FrameClock)) gobject.SignalHandle {
+	return o.Connect("resume-events", fn)
+}
+// ConnectUpdate connects the provided callback to the "update" signal
+//
+// Emitted as the first step of toolkit and application processing
+// of the frame.
+// 
+// Animations should be updated using [method@Gdk.FrameClock.get_frame_time].
+// Applications can connect directly to this signal, or use
+// [gtk_widget_add_tick_callback()](../gtk4/method.Widget.add_tick_callback.html)
+// as a more convenient interface.
+func (o *FrameClockInstance) ConnectUpdate(fn func(FrameClock)) gobject.SignalHandle {
+	return o.Connect("update", fn)
+}
 // GLContextInstance is the instance type used by all types extending GdkGLContext. It is used internally by the bindings. Users should use the interface [GLContext] instead.
 type GLContextInstance struct {
 	_ [0]func() // equal guard
@@ -17634,14 +17890,14 @@ func (self *GLContextInstance) GetApi() GLAPI {
 // Retrieves whether the context is doing extra validations and runtime checking.
 // 
 // See [method@Gdk.GLContext.set_debug_enabled].
-func (context *GLContextInstance) GetDebugEnabled() bool {
+func (_context *GLContextInstance) GetDebugEnabled() bool {
 	var carg0 *C.GdkGLContext // in, none, converted
 	var cret  C.gboolean      // return
 
-	carg0 = (*C.GdkGLContext)(UnsafeGLContextToGlibNone(context))
+	carg0 = (*C.GdkGLContext)(UnsafeGLContextToGlibNone(_context))
 
 	cret = C.gdk_gl_context_get_debug_enabled(carg0)
-	runtime.KeepAlive(context)
+	runtime.KeepAlive(_context)
 
 	var goret bool
 
@@ -17658,14 +17914,14 @@ func (context *GLContextInstance) GetDebugEnabled() bool {
 // 	- goret Display 
 //
 // Retrieves the display the @context is created for
-func (context *GLContextInstance) GetDisplay() Display {
+func (_context *GLContextInstance) GetDisplay() Display {
 	var carg0 *C.GdkGLContext // in, none, converted
 	var cret  *C.GdkDisplay   // return, none, converted
 
-	carg0 = (*C.GdkGLContext)(UnsafeGLContextToGlibNone(context))
+	carg0 = (*C.GdkGLContext)(UnsafeGLContextToGlibNone(_context))
 
 	cret = C.gdk_gl_context_get_display(carg0)
-	runtime.KeepAlive(context)
+	runtime.KeepAlive(_context)
 
 	var goret Display
 
@@ -17682,14 +17938,14 @@ func (context *GLContextInstance) GetDisplay() Display {
 // Retrieves whether the context is forward-compatible.
 // 
 // See [method@Gdk.GLContext.set_forward_compatible].
-func (context *GLContextInstance) GetForwardCompatible() bool {
+func (_context *GLContextInstance) GetForwardCompatible() bool {
 	var carg0 *C.GdkGLContext // in, none, converted
 	var cret  C.gboolean      // return
 
-	carg0 = (*C.GdkGLContext)(UnsafeGLContextToGlibNone(context))
+	carg0 = (*C.GdkGLContext)(UnsafeGLContextToGlibNone(_context))
 
 	cret = C.gdk_gl_context_get_forward_compatible(carg0)
-	runtime.KeepAlive(context)
+	runtime.KeepAlive(_context)
 
 	var goret bool
 
@@ -17712,15 +17968,15 @@ func (context *GLContextInstance) GetForwardCompatible() bool {
 // [method@Gdk.GLContext.get_version] for the real version in use.
 // 
 // See [method@Gdk.GLContext.set_required_version].
-func (context *GLContextInstance) GetRequiredVersion() (int, int) {
+func (_context *GLContextInstance) GetRequiredVersion() (int, int) {
 	var carg0 *C.GdkGLContext // in, none, converted
 	var carg1 C.int           // out, full, casted, casted C.gint
 	var carg2 C.int           // out, full, casted, casted C.gint
 
-	carg0 = (*C.GdkGLContext)(UnsafeGLContextToGlibNone(context))
+	carg0 = (*C.GdkGLContext)(UnsafeGLContextToGlibNone(_context))
 
 	C.gdk_gl_context_get_required_version(carg0, &carg1, &carg2)
-	runtime.KeepAlive(context)
+	runtime.KeepAlive(_context)
 
 	var major int
 	var minor int
@@ -17737,14 +17993,14 @@ func (context *GLContextInstance) GetRequiredVersion() (int, int) {
 // 	- goret Surface 
 //
 // Retrieves the surface used by the @context.
-func (context *GLContextInstance) GetSurface() Surface {
+func (_context *GLContextInstance) GetSurface() Surface {
 	var carg0 *C.GdkGLContext // in, none, converted
 	var cret  *C.GdkSurface   // return, none, converted
 
-	carg0 = (*C.GdkGLContext)(UnsafeGLContextToGlibNone(context))
+	carg0 = (*C.GdkGLContext)(UnsafeGLContextToGlibNone(_context))
 
 	cret = C.gdk_gl_context_get_surface(carg0)
-	runtime.KeepAlive(context)
+	runtime.KeepAlive(_context)
 
 	var goret Surface
 
@@ -17759,14 +18015,14 @@ func (context *GLContextInstance) GetSurface() Surface {
 // 	- goret bool 
 //
 // Checks whether the @context is using an OpenGL or OpenGL ES profile.
-func (context *GLContextInstance) GetUseES() bool {
+func (_context *GLContextInstance) GetUseES() bool {
 	var carg0 *C.GdkGLContext // in, none, converted
 	var cret  C.gboolean      // return
 
-	carg0 = (*C.GdkGLContext)(UnsafeGLContextToGlibNone(context))
+	carg0 = (*C.GdkGLContext)(UnsafeGLContextToGlibNone(_context))
 
 	cret = C.gdk_gl_context_get_use_es(carg0)
-	runtime.KeepAlive(context)
+	runtime.KeepAlive(_context)
 
 	var goret bool
 
@@ -17786,15 +18042,15 @@ func (context *GLContextInstance) GetUseES() bool {
 // Retrieves the OpenGL version of the @context.
 // 
 // The @context must be realized prior to calling this function.
-func (context *GLContextInstance) GetVersion() (int, int) {
+func (_context *GLContextInstance) GetVersion() (int, int) {
 	var carg0 *C.GdkGLContext // in, none, converted
 	var carg1 C.int           // out, full, casted, casted C.gint
 	var carg2 C.int           // out, full, casted, casted C.gint
 
-	carg0 = (*C.GdkGLContext)(UnsafeGLContextToGlibNone(context))
+	carg0 = (*C.GdkGLContext)(UnsafeGLContextToGlibNone(_context))
 
 	C.gdk_gl_context_get_version(carg0, &carg1, &carg2)
-	runtime.KeepAlive(context)
+	runtime.KeepAlive(_context)
 
 	var major int
 	var minor int
@@ -17826,14 +18082,14 @@ func (context *GLContextInstance) GetVersion() (int, int) {
 // You can use the value returned by this function to decide which kind
 // of OpenGL API to use, or whether to do extension discovery, or what
 // kind of shader programs to load.
-func (context *GLContextInstance) IsLegacy() bool {
+func (_context *GLContextInstance) IsLegacy() bool {
 	var carg0 *C.GdkGLContext // in, none, converted
 	var cret  C.gboolean      // return
 
-	carg0 = (*C.GdkGLContext)(UnsafeGLContextToGlibNone(context))
+	carg0 = (*C.GdkGLContext)(UnsafeGLContextToGlibNone(_context))
 
 	cret = C.gdk_gl_context_is_legacy(carg0)
-	runtime.KeepAlive(context)
+	runtime.KeepAlive(_context)
 
 	var goret bool
 
@@ -17890,13 +18146,13 @@ func (self *GLContextInstance) IsShared(other GLContext) bool {
 // MakeCurrent wraps gdk_gl_context_make_current
 //
 // Makes the @context the current one.
-func (context *GLContextInstance) MakeCurrent() {
+func (_context *GLContextInstance) MakeCurrent() {
 	var carg0 *C.GdkGLContext // in, none, converted
 
-	carg0 = (*C.GdkGLContext)(UnsafeGLContextToGlibNone(context))
+	carg0 = (*C.GdkGLContext)(UnsafeGLContextToGlibNone(_context))
 
 	C.gdk_gl_context_make_current(carg0)
-	runtime.KeepAlive(context)
+	runtime.KeepAlive(_context)
 }
 
 // Realize wraps gdk_gl_context_realize
@@ -17908,15 +18164,15 @@ func (context *GLContextInstance) MakeCurrent() {
 // Realizes the given `GdkGLContext`.
 // 
 // It is safe to call this function on a realized `GdkGLContext`.
-func (context *GLContextInstance) Realize() (bool, error) {
+func (_context *GLContextInstance) Realize() (bool, error) {
 	var carg0 *C.GdkGLContext // in, none, converted
 	var cret  C.gboolean      // return
 	var _cerr *C.GError       // out, full, converted, nullable
 
-	carg0 = (*C.GdkGLContext)(UnsafeGLContextToGlibNone(context))
+	carg0 = (*C.GdkGLContext)(UnsafeGLContextToGlibNone(_context))
 
 	cret = C.gdk_gl_context_realize(carg0, &_cerr)
-	runtime.KeepAlive(context)
+	runtime.KeepAlive(_context)
 
 	var goret  bool
 	var _goerr error
@@ -17969,17 +18225,17 @@ func (self *GLContextInstance) SetAllowedApis(apis GLAPI) {
 // 
 // The `GdkGLContext` must not be realized or made current prior to
 // calling this function.
-func (context *GLContextInstance) SetDebugEnabled(enabled bool) {
+func (_context *GLContextInstance) SetDebugEnabled(enabled bool) {
 	var carg0 *C.GdkGLContext // in, none, converted
 	var carg1 C.gboolean      // in
 
-	carg0 = (*C.GdkGLContext)(UnsafeGLContextToGlibNone(context))
+	carg0 = (*C.GdkGLContext)(UnsafeGLContextToGlibNone(_context))
 	if enabled {
 		carg1 = C.TRUE
 	}
 
 	C.gdk_gl_context_set_debug_enabled(carg0, carg1)
-	runtime.KeepAlive(context)
+	runtime.KeepAlive(_context)
 	runtime.KeepAlive(enabled)
 }
 
@@ -17998,17 +18254,17 @@ func (context *GLContextInstance) SetDebugEnabled(enabled bool) {
 // 
 // The `GdkGLContext` must not be realized or made current prior to calling
 // this function.
-func (context *GLContextInstance) SetForwardCompatible(compatible bool) {
+func (_context *GLContextInstance) SetForwardCompatible(compatible bool) {
 	var carg0 *C.GdkGLContext // in, none, converted
 	var carg1 C.gboolean      // in
 
-	carg0 = (*C.GdkGLContext)(UnsafeGLContextToGlibNone(context))
+	carg0 = (*C.GdkGLContext)(UnsafeGLContextToGlibNone(_context))
 	if compatible {
 		carg1 = C.TRUE
 	}
 
 	C.gdk_gl_context_set_forward_compatible(carg0, carg1)
-	runtime.KeepAlive(context)
+	runtime.KeepAlive(_context)
 	runtime.KeepAlive(compatible)
 }
 
@@ -18028,17 +18284,17 @@ func (context *GLContextInstance) SetForwardCompatible(compatible bool) {
 // 
 // The @context must not be realized or made current prior to calling
 // this function.
-func (context *GLContextInstance) SetRequiredVersion(major int, minor int) {
+func (_context *GLContextInstance) SetRequiredVersion(major int, minor int) {
 	var carg0 *C.GdkGLContext // in, none, converted
 	var carg1 C.int           // in, none, casted, casted C.gint
 	var carg2 C.int           // in, none, casted, casted C.gint
 
-	carg0 = (*C.GdkGLContext)(UnsafeGLContextToGlibNone(context))
+	carg0 = (*C.GdkGLContext)(UnsafeGLContextToGlibNone(_context))
 	carg1 = C.int(major)
 	carg2 = C.int(minor)
 
 	C.gdk_gl_context_set_required_version(carg0, carg1, carg2)
-	runtime.KeepAlive(context)
+	runtime.KeepAlive(_context)
 	runtime.KeepAlive(major)
 	runtime.KeepAlive(minor)
 }
@@ -18063,15 +18319,15 @@ func (context *GLContextInstance) SetRequiredVersion(major int, minor int) {
 // You should check the return value of [method@Gdk.GLContext.get_use_es]
 // after calling [method@Gdk.GLContext.realize] to decide whether to use
 // the OpenGL or OpenGL ES API, extensions, or shaders.
-func (context *GLContextInstance) SetUseES(useEs int) {
+func (_context *GLContextInstance) SetUseES(useEs int) {
 	var carg0 *C.GdkGLContext // in, none, converted
 	var carg1 C.int           // in, none, casted, casted C.gint
 
-	carg0 = (*C.GdkGLContext)(UnsafeGLContextToGlibNone(context))
+	carg0 = (*C.GdkGLContext)(UnsafeGLContextToGlibNone(_context))
 	carg1 = C.int(useEs)
 
 	C.gdk_gl_context_set_use_es(carg0, carg1)
-	runtime.KeepAlive(context)
+	runtime.KeepAlive(_context)
 	runtime.KeepAlive(useEs)
 }
 
@@ -18145,13 +18401,6 @@ type GLTextureBuilder interface {
 	// Gets the texture id previously set via gdk_gl_texture_builder_set_id() or
 	// 0 if the id wasn't set.
 	GetID() uint
-	// GetSync wraps gdk_gl_texture_builder_get_sync
-	// The function returns the following values:
-	// 
-	// 	- goret unsafe.Pointer 
-	//
-	// Gets the `GLsync` previously set via gdk_gl_texture_builder_set_sync().
-	GetSync() unsafe.Pointer
 	// GetUpdateTexture wraps gdk_gl_texture_builder_get_update_texture
 	// The function returns the following values:
 	// 
@@ -18183,7 +18432,7 @@ type GLTextureBuilder interface {
 	// 
 	// The function takes the following parameters:
 	// 
-	// 	- context GLContext (nullable): The context the texture belongs to or %NULL to unset 
+	// 	- _context GLContext (nullable): The context the texture belongs to or %NULL to unset 
 	//
 	// Sets the context to be used for the texture. This is the context that owns
 	// the texture.
@@ -18246,21 +18495,6 @@ type GLTextureBuilder interface {
 	// 
 	// The id must be set before calling [method@Gdk.GLTextureBuilder.build].
 	SetID(uint)
-	// SetSync wraps gdk_gl_texture_builder_set_sync
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- sync unsafe.Pointer (nullable): the GLSync object 
-	//
-	// Sets the GLSync object to use for the texture.
-	// 
-	// GTK will wait on this object before using the created `GdkTexture`.
-	// 
-	// The `destroy` function that is passed to [method@Gdk.GLTextureBuilder.build]
-	// is responsible for freeing the sync object when it is no longer needed.
-	// The texture builder does not destroy it and it is the callers
-	// responsibility to make sure it doesn't leak.
-	SetSync(unsafe.Pointer)
 	// SetUpdateTexture wraps gdk_gl_texture_builder_set_update_texture
 	// 
 	// The function takes the following parameters:
@@ -18471,28 +18705,6 @@ func (self *GLTextureBuilderInstance) GetID() uint {
 	return goret
 }
 
-// GetSync wraps gdk_gl_texture_builder_get_sync
-// The function returns the following values:
-// 
-// 	- goret unsafe.Pointer 
-//
-// Gets the `GLsync` previously set via gdk_gl_texture_builder_set_sync().
-func (self *GLTextureBuilderInstance) GetSync() unsafe.Pointer {
-	var carg0 *C.GdkGLTextureBuilder // in, none, converted
-	var cret  C.gpointer             // return, none, casted
-
-	carg0 = (*C.GdkGLTextureBuilder)(UnsafeGLTextureBuilderToGlibNone(self))
-
-	cret = C.gdk_gl_texture_builder_get_sync(carg0)
-	runtime.KeepAlive(self)
-
-	var goret unsafe.Pointer
-
-	goret = unsafe.Pointer(cret)
-
-	return goret
-}
-
 // GetUpdateTexture wraps gdk_gl_texture_builder_get_update_texture
 // The function returns the following values:
 // 
@@ -18565,24 +18777,24 @@ func (self *GLTextureBuilderInstance) SetColorState(colorState *ColorState) {
 // 
 // The function takes the following parameters:
 // 
-// 	- context GLContext (nullable): The context the texture belongs to or %NULL to unset 
+// 	- _context GLContext (nullable): The context the texture belongs to or %NULL to unset 
 //
 // Sets the context to be used for the texture. This is the context that owns
 // the texture.
 // 
 // The context must be set before calling [method@Gdk.GLTextureBuilder.build].
-func (self *GLTextureBuilderInstance) SetContext(context GLContext) {
+func (self *GLTextureBuilderInstance) SetContext(_context GLContext) {
 	var carg0 *C.GdkGLTextureBuilder // in, none, converted
 	var carg1 *C.GdkGLContext        // in, none, converted, nullable
 
 	carg0 = (*C.GdkGLTextureBuilder)(UnsafeGLTextureBuilderToGlibNone(self))
-	if context != nil {
-		carg1 = (*C.GdkGLContext)(UnsafeGLContextToGlibNone(context))
+	if _context != nil {
+		carg1 = (*C.GdkGLContext)(UnsafeGLContextToGlibNone(_context))
 	}
 
 	C.gdk_gl_texture_builder_set_context(carg0, carg1)
 	runtime.KeepAlive(self)
-	runtime.KeepAlive(context)
+	runtime.KeepAlive(_context)
 }
 
 // SetFormat wraps gdk_gl_texture_builder_set_format
@@ -18685,34 +18897,6 @@ func (self *GLTextureBuilderInstance) SetID(id uint) {
 	C.gdk_gl_texture_builder_set_id(carg0, carg1)
 	runtime.KeepAlive(self)
 	runtime.KeepAlive(id)
-}
-
-// SetSync wraps gdk_gl_texture_builder_set_sync
-// 
-// The function takes the following parameters:
-// 
-// 	- sync unsafe.Pointer (nullable): the GLSync object 
-//
-// Sets the GLSync object to use for the texture.
-// 
-// GTK will wait on this object before using the created `GdkTexture`.
-// 
-// The `destroy` function that is passed to [method@Gdk.GLTextureBuilder.build]
-// is responsible for freeing the sync object when it is no longer needed.
-// The texture builder does not destroy it and it is the callers
-// responsibility to make sure it doesn't leak.
-func (self *GLTextureBuilderInstance) SetSync(sync unsafe.Pointer) {
-	var carg0 *C.GdkGLTextureBuilder // in, none, converted
-	var carg1 C.gpointer             // in, none, casted, nullable
-
-	carg0 = (*C.GdkGLTextureBuilder)(UnsafeGLTextureBuilderToGlibNone(self))
-	if sync != nil {
-		carg1 = C.gpointer(sync)
-	}
-
-	C.gdk_gl_texture_builder_set_sync(carg0, carg1)
-	runtime.KeepAlive(self)
-	runtime.KeepAlive(sync)
 }
 
 // SetUpdateTexture wraps gdk_gl_texture_builder_set_update_texture
@@ -19463,6 +19647,10 @@ type Monitor interface {
 	// The @monitor becomes invalid when the physical monitor
 	// is unplugged or removed.
 	IsValid() bool
+	// ConnectInvalidate connects the provided callback to the "invalidate" signal
+	//
+	// Emitted when the output represented by @monitor gets disconnected.
+	ConnectInvalidate(func(Monitor)) gobject.SignalHandle
 }
 
 func unsafeWrapMonitor(base *gobject.ObjectInstance) *MonitorInstance {
@@ -19826,6 +20014,12 @@ func (monitor *MonitorInstance) IsValid() bool {
 	return goret
 }
 
+// ConnectInvalidate connects the provided callback to the "invalidate" signal
+//
+// Emitted when the output represented by @monitor gets disconnected.
+func (o *MonitorInstance) ConnectInvalidate(fn func(Monitor)) gobject.SignalHandle {
+	return o.Connect("invalidate", fn)
+}
 // SeatInstance is the instance type used by all types extending GdkSeat. It is used internally by the bindings. Users should use the interface [Seat] instead.
 type SeatInstance struct {
 	_ [0]func() // equal guard
@@ -19870,6 +20064,28 @@ type Seat interface {
 	//
 	// Returns the device that routes pointer events.
 	GetPointer() Device
+	// ConnectDeviceAdded connects the provided callback to the "device-added" signal
+	//
+	// Emitted when a new input device is related to this seat.
+	ConnectDeviceAdded(func(Seat, Device)) gobject.SignalHandle
+	// ConnectDeviceRemoved connects the provided callback to the "device-removed" signal
+	//
+	// Emitted when an input device is removed (e.g. unplugged).
+	ConnectDeviceRemoved(func(Seat, Device)) gobject.SignalHandle
+	// ConnectToolAdded connects the provided callback to the "tool-added" signal
+	//
+	// Emitted whenever a new tool is made known to the seat.
+	// 
+	// The tool may later be assigned to a device (i.e. on
+	// proximity with a tablet). The device will emit the
+	// [signal@Gdk.Device::tool-changed] signal accordingly.
+	// 
+	// A same tool may be used by several devices.
+	ConnectToolAdded(func(Seat, DeviceTool)) gobject.SignalHandle
+	// ConnectToolRemoved connects the provided callback to the "tool-removed" signal
+	//
+	// Emitted whenever a tool is no longer known to this @seat.
+	ConnectToolRemoved(func(Seat, DeviceTool)) gobject.SignalHandle
 }
 
 func unsafeWrapSeat(base *gobject.ObjectInstance) *SeatInstance {
@@ -19994,6 +20210,36 @@ func (seat *SeatInstance) GetPointer() Device {
 	return goret
 }
 
+// ConnectDeviceAdded connects the provided callback to the "device-added" signal
+//
+// Emitted when a new input device is related to this seat.
+func (o *SeatInstance) ConnectDeviceAdded(fn func(Seat, Device)) gobject.SignalHandle {
+	return o.Connect("device-added", fn)
+}
+// ConnectDeviceRemoved connects the provided callback to the "device-removed" signal
+//
+// Emitted when an input device is removed (e.g. unplugged).
+func (o *SeatInstance) ConnectDeviceRemoved(fn func(Seat, Device)) gobject.SignalHandle {
+	return o.Connect("device-removed", fn)
+}
+// ConnectToolAdded connects the provided callback to the "tool-added" signal
+//
+// Emitted whenever a new tool is made known to the seat.
+// 
+// The tool may later be assigned to a device (i.e. on
+// proximity with a tablet). The device will emit the
+// [signal@Gdk.Device::tool-changed] signal accordingly.
+// 
+// A same tool may be used by several devices.
+func (o *SeatInstance) ConnectToolAdded(fn func(Seat, DeviceTool)) gobject.SignalHandle {
+	return o.Connect("tool-added", fn)
+}
+// ConnectToolRemoved connects the provided callback to the "tool-removed" signal
+//
+// Emitted whenever a tool is no longer known to this @seat.
+func (o *SeatInstance) ConnectToolRemoved(fn func(Seat, DeviceTool)) gobject.SignalHandle {
+	return o.Connect("tool-removed", fn)
+}
 // SnapshotInstance is the instance type used by all types extending GdkSnapshot. It is used internally by the bindings. Users should use the interface [Snapshot] instead.
 type SnapshotInstance struct {
 	_ [0]func() // equal guard
@@ -20298,6 +20544,26 @@ type Surface interface {
 	// Use [ctor@Gdk.Cursor.new_from_name] or [ctor@Gdk.Cursor.new_from_texture]
 	// to create the cursor. To make the cursor invisible, use %GDK_BLANK_CURSOR.
 	SetDeviceCursor(Device, Cursor)
+	// ConnectEnterMonitor connects the provided callback to the "enter-monitor" signal
+	//
+	// Emitted when @surface starts being present on the monitor.
+	ConnectEnterMonitor(func(Surface, Monitor)) gobject.SignalHandle
+	// ConnectEvent connects the provided callback to the "event" signal
+	//
+	// Emitted when GDK receives an input event for @surface.
+	ConnectEvent(func(Surface, unsafe.Pointer) bool) gobject.SignalHandle
+	// ConnectLayout connects the provided callback to the "layout" signal
+	//
+	// Emitted when the size of @surface is changed, or when relayout should
+	// be performed.
+	// 
+	// Surface size is reported in ”application pixels”, not
+	// ”device pixels” (see gdk_surface_get_scale_factor()).
+	ConnectLayout(func(Surface, int, int)) gobject.SignalHandle
+	// ConnectLeaveMonitor connects the provided callback to the "leave-monitor" signal
+	//
+	// Emitted when @surface stops being present on the monitor.
+	ConnectLeaveMonitor(func(Surface, Monitor)) gobject.SignalHandle
 }
 
 func unsafeWrapSurface(base *gobject.ObjectInstance) *SurfaceInstance {
@@ -20914,6 +21180,34 @@ func (surface *SurfaceInstance) SetDeviceCursor(device Device, cursor Cursor) {
 	runtime.KeepAlive(cursor)
 }
 
+// ConnectEnterMonitor connects the provided callback to the "enter-monitor" signal
+//
+// Emitted when @surface starts being present on the monitor.
+func (o *SurfaceInstance) ConnectEnterMonitor(fn func(Surface, Monitor)) gobject.SignalHandle {
+	return o.Connect("enter-monitor", fn)
+}
+// ConnectEvent connects the provided callback to the "event" signal
+//
+// Emitted when GDK receives an input event for @surface.
+func (o *SurfaceInstance) ConnectEvent(fn func(Surface, unsafe.Pointer) bool) gobject.SignalHandle {
+	return o.Connect("event", fn)
+}
+// ConnectLayout connects the provided callback to the "layout" signal
+//
+// Emitted when the size of @surface is changed, or when relayout should
+// be performed.
+// 
+// Surface size is reported in ”application pixels”, not
+// ”device pixels” (see gdk_surface_get_scale_factor()).
+func (o *SurfaceInstance) ConnectLayout(fn func(Surface, int, int)) gobject.SignalHandle {
+	return o.Connect("layout", fn)
+}
+// ConnectLeaveMonitor connects the provided callback to the "leave-monitor" signal
+//
+// Emitted when @surface stops being present on the monitor.
+func (o *SurfaceInstance) ConnectLeaveMonitor(fn func(Surface, Monitor)) gobject.SignalHandle {
+	return o.Connect("leave-monitor", fn)
+}
 // TextureInstance is the instance type used by all types extending GdkTexture. It is used internally by the bindings. Users should use the interface [Texture] instead.
 type TextureInstance struct {
 	_ [0]func() // equal guard

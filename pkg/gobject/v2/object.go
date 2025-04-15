@@ -11,6 +11,9 @@ import (
 // static GObjectClass *_g_object_get_class(GObject *object) {
 //   return (G_OBJECT_GET_CLASS(object));
 // }
+// static GType _g_type_from_instance(gpointer instance) {
+//   return (G_TYPE_FROM_INSTANCE(instance));
+// }
 import "C"
 
 // The base object type.
@@ -18,6 +21,11 @@ import "C"
 // This is an interface because the actual type will almost always extend
 type Object interface {
 	GoValueInitializer
+
+	Emit(detailedSignal string, args ...any) any
+
+	Connect(detailedSignal string, f interface{}) SignalHandle
+	ConnectAfter(detailedSignal string, f interface{}) SignalHandle
 
 	HandlerBlock(SignalHandle)
 	HandlerUnblock(SignalHandle)
@@ -260,6 +268,13 @@ func (v *ObjectInstance) propertyType(cstr *C.gchar) Type {
 	}
 
 	return Type(paramSpec.value_type)
+}
+
+// TypeFromInstance is a wrapper around g_type_from_instance().
+// This is needed to lookup the signals in a signalquery for the object.
+func (v *ObjectInstance) typeFromInstance() Type {
+	c := C._g_type_from_instance(C.gpointer(v.unsafe()))
+	return Type(c)
 }
 
 // cast casts v to the concrete Go type (e.g. *Object to *gtk.Entry).
