@@ -68745,8 +68745,7 @@ func (o *WidgetInstance) ConnectParentSet(fn func(Widget, Widget)) gobject.Signa
 // [Popup Menu Migration Checklist][checklist-popup-menu]
 // for an example of how to use this signal.
 func (o *WidgetInstance) EmitPopupMenu() bool {
-	return 
-	o.Emit("popup-menu")
+	return o.Emit("popup-menu").(bool)
 }
 // ConnectPropertyNotifyEvent connects the provided callback to the "property-notify-event" signal
 //
@@ -68857,8 +68856,7 @@ func (o *WidgetInstance) ConnectShow(fn func(Widget)) gobject.SignalHandle {
 }
 // EmitShowHelp emits the "show-help" signal
 func (o *WidgetInstance) EmitShowHelp(arg0 WidgetHelpType) bool {
-	return 
-	o.Emit("show-help", arg0)
+	return o.Emit("show-help", arg0).(bool)
 }
 // ConnectSizeAllocate connects the provided callback to the "size-allocate" signal
 func (o *WidgetInstance) ConnectSizeAllocate(fn func(Widget, Allocation)) gobject.SignalHandle {
@@ -77072,8 +77070,7 @@ func (o *FlowBoxInstance) ConnectChildActivated(fn func(FlowBox, FlowBoxChild)) 
 // - Home/End keys move to the ends of the box
 // - PageUp/PageDown keys move vertically by pages
 func (o *FlowBoxInstance) EmitMoveCursor(arg0 MovementStep, arg1 int) bool {
-	return 
-	o.Emit("move-cursor", arg0, arg1)
+	return o.Emit("move-cursor", arg0, arg1).(bool)
 }
 // EmitSelectAll emits the "select-all" signal
 //
@@ -82963,8 +82960,7 @@ func (iconView *IconViewInstance) UnsetModelDragSource() {
 // 
 // The default bindings for this signal are Space, Return and Enter.
 func (o *IconViewInstance) EmitActivateCursorItem() bool {
-	return 
-	o.Emit("activate-cursor-item")
+	return o.Emit("activate-cursor-item").(bool)
 }
 // ConnectItemActivated connects the provided callback to the "item-activated" signal
 //
@@ -82995,8 +82991,7 @@ func (o *IconViewInstance) ConnectItemActivated(fn func(IconView, TreePath)) gob
 // All of these will extend the selection when combined with
 // the Shift modifier.
 func (o *IconViewInstance) EmitMoveCursor(arg0 MovementStep, arg1 int) bool {
-	return 
-	o.Emit("move-cursor", arg0, arg1)
+	return o.Emit("move-cursor", arg0, arg1).(bool)
 }
 // EmitSelectAll emits the "select-all" signal
 //
@@ -88546,8 +88541,7 @@ func (notebook *NotebookInstance) SetTabReorderable(child Widget, reorderable bo
 
 // EmitChangeCurrentPage emits the "change-current-page" signal
 func (o *NotebookInstance) EmitChangeCurrentPage(arg0 int) bool {
-	return 
-	o.Emit("change-current-page", arg0)
+	return o.Emit("change-current-page", arg0).(bool)
 }
 // ConnectCreateWindow connects the provided callback to the "create-window" signal
 //
@@ -88564,8 +88558,7 @@ func (o *NotebookInstance) ConnectCreateWindow(fn func(Notebook, Widget, int, in
 }
 // EmitFocusTab emits the "focus-tab" signal
 func (o *NotebookInstance) EmitFocusTab(arg0 NotebookTab) bool {
-	return 
-	o.Emit("focus-tab", arg0)
+	return o.Emit("focus-tab", arg0).(bool)
 }
 // EmitMoveFocusOut emits the "move-focus-out" signal
 func (o *NotebookInstance) EmitMoveFocusOut(arg0 DirectionType) {
@@ -88594,13 +88587,11 @@ func (o *NotebookInstance) ConnectPageReordered(fn func(Notebook, Widget, uint))
 }
 // EmitReorderTab emits the "reorder-tab" signal
 func (o *NotebookInstance) EmitReorderTab(arg0 DirectionType, arg1 bool) bool {
-	return 
-	o.Emit("reorder-tab", arg0, arg1)
+	return o.Emit("reorder-tab", arg0, arg1).(bool)
 }
 // EmitSelectPage emits the "select-page" signal
 func (o *NotebookInstance) EmitSelectPage(arg0 bool) bool {
-	return 
-	o.Emit("select-page", arg0)
+	return o.Emit("select-page", arg0).(bool)
 }
 // ConnectSwitchPage connects the provided callback to the "switch-page" signal
 //
@@ -89248,8 +89239,7 @@ func (paned *PanedInstance) SetWideHandle(wide bool) {
 // 
 // The default binding for this signal is Return or Space.
 func (o *PanedInstance) EmitAcceptPosition() bool {
-	return 
-	o.Emit("accept-position")
+	return o.Emit("accept-position").(bool)
 }
 // EmitCancelPosition emits the "cancel-position" signal
 //
@@ -89261,8 +89251,7 @@ func (o *PanedInstance) EmitAcceptPosition() bool {
 // 
 // The default binding for this signal is Escape.
 func (o *PanedInstance) EmitCancelPosition() bool {
-	return 
-	o.Emit("cancel-position")
+	return o.Emit("cancel-position").(bool)
 }
 // EmitCycleChildFocus emits the "cycle-child-focus" signal
 //
@@ -89272,8 +89261,7 @@ func (o *PanedInstance) EmitCancelPosition() bool {
 // 
 // The default binding is f6.
 func (o *PanedInstance) EmitCycleChildFocus(arg0 bool) bool {
-	return 
-	o.Emit("cycle-child-focus", arg0)
+	return o.Emit("cycle-child-focus", arg0).(bool)
 }
 // EmitCycleHandleFocus emits the "cycle-handle-focus" signal
 //
@@ -89284,8 +89272,7 @@ func (o *PanedInstance) EmitCycleChildFocus(arg0 bool) bool {
 // 
 // The default binding for this signal is f8.
 func (o *PanedInstance) EmitCycleHandleFocus(arg0 bool) bool {
-	return 
-	o.Emit("cycle-handle-focus", arg0)
+	return o.Emit("cycle-handle-focus", arg0).(bool)
 }
 // EmitMoveHandle emits the "move-handle" signal
 //
@@ -89294,8 +89281,7 @@ func (o *PanedInstance) EmitCycleHandleFocus(arg0 bool) bool {
 // which gets emitted to move the handle when the user is using key bindings
 // to move it.
 func (o *PanedInstance) EmitMoveHandle(arg0 ScrollType) bool {
-	return 
-	o.Emit("move-handle", arg0)
+	return o.Emit("move-handle", arg0).(bool)
 }
 // EmitToggleHandleFocus emits the "toggle-handle-focus" signal
 //
@@ -89306,8 +89292,7 @@ func (o *PanedInstance) EmitMoveHandle(arg0 ScrollType) bool {
 // 
 // The default binding is Tab.
 func (o *PanedInstance) EmitToggleHandleFocus() bool {
-	return 
-	o.Emit("toggle-handle-focus")
+	return o.Emit("toggle-handle-focus").(bool)
 }
 // PanedAccessibleInstance is the instance type used by all types extending GtkPanedAccessible. It is used internally by the bindings. Users should use the interface [PanedAccessible] instead.
 type PanedAccessibleInstance struct {
@@ -101073,8 +101058,7 @@ func (toolbar *ToolbarInstance) UnsetStyle() {
 // A keybinding signal used internally by GTK+. This signal can't
 // be used in application code
 func (o *ToolbarInstance) EmitFocusHomeOrEnd(arg0 bool) bool {
-	return 
-	o.Emit("focus-home-or-end", arg0)
+	return o.Emit("focus-home-or-end", arg0).(bool)
 }
 // ConnectOrientationChanged connects the provided callback to the "orientation-changed" signal
 //
@@ -104899,8 +104883,7 @@ func (o *TreeViewInstance) ConnectCursorChanged(fn func(TreeView)) gobject.Signa
 }
 // EmitExpandCollapseCursorRow emits the "expand-collapse-cursor-row" signal
 func (o *TreeViewInstance) EmitExpandCollapseCursorRow(arg0 bool, arg1 bool, arg2 bool) bool {
-	return 
-	o.Emit("expand-collapse-cursor-row", arg0, arg1, arg2)
+	return o.Emit("expand-collapse-cursor-row", arg0, arg1, arg2).(bool)
 }
 // EmitMoveCursor emits the "move-cursor" signal
 //
@@ -104914,8 +104897,7 @@ func (o *TreeViewInstance) EmitExpandCollapseCursorRow(arg0 bool, arg1 bool, arg
 // gtk_tree_view_set_cursor_on_cell() when moving horizontally
 // #GtkTreeView::move-cursor does not reset the current selection.
 func (o *TreeViewInstance) EmitMoveCursor(arg0 MovementStep, arg1 int) bool {
-	return 
-	o.Emit("move-cursor", arg0, arg1)
+	return o.Emit("move-cursor", arg0, arg1).(bool)
 }
 // EmitRowActivated emits the "row-activated" signal
 //
@@ -104947,23 +104929,19 @@ func (o *TreeViewInstance) ConnectRowExpanded(fn func(TreeView, TreeIter, TreePa
 }
 // EmitSelectAll emits the "select-all" signal
 func (o *TreeViewInstance) EmitSelectAll() bool {
-	return 
-	o.Emit("select-all")
+	return o.Emit("select-all").(bool)
 }
 // EmitSelectCursorParent emits the "select-cursor-parent" signal
 func (o *TreeViewInstance) EmitSelectCursorParent() bool {
-	return 
-	o.Emit("select-cursor-parent")
+	return o.Emit("select-cursor-parent").(bool)
 }
 // EmitSelectCursorRow emits the "select-cursor-row" signal
 func (o *TreeViewInstance) EmitSelectCursorRow(arg0 bool) bool {
-	return 
-	o.Emit("select-cursor-row", arg0)
+	return o.Emit("select-cursor-row", arg0).(bool)
 }
 // EmitStartInteractiveSearch emits the "start-interactive-search" signal
 func (o *TreeViewInstance) EmitStartInteractiveSearch() bool {
-	return 
-	o.Emit("start-interactive-search")
+	return o.Emit("start-interactive-search").(bool)
 }
 // ConnectTestCollapseRow connects the provided callback to the "test-collapse-row" signal
 //
@@ -104981,13 +104959,11 @@ func (o *TreeViewInstance) ConnectTestExpandRow(fn func(TreeView, TreeIter, Tree
 }
 // EmitToggleCursorRow emits the "toggle-cursor-row" signal
 func (o *TreeViewInstance) EmitToggleCursorRow() bool {
-	return 
-	o.Emit("toggle-cursor-row")
+	return o.Emit("toggle-cursor-row").(bool)
 }
 // EmitUnselectAll emits the "unselect-all" signal
 func (o *TreeViewInstance) EmitUnselectAll() bool {
-	return 
-	o.Emit("unselect-all")
+	return o.Emit("unselect-all").(bool)
 }
 // TreeViewAccessibleInstance is the instance type used by all types extending GtkTreeViewAccessible. It is used internally by the bindings. Users should use the interface [TreeViewAccessible] instead.
 type TreeViewAccessibleInstance struct {
@@ -109673,8 +109649,7 @@ func (o *ComboBoxInstance) EmitMoveActive(arg0 ScrollType) {
 // 
 // The default bindings for this signal are Alt+Up and Escape.
 func (o *ComboBoxInstance) EmitPopdown() bool {
-	return 
-	o.Emit("popdown")
+	return o.Emit("popdown").(bool)
 }
 // EmitPopup emits the "popup" signal
 //
@@ -124160,8 +124135,7 @@ func (o *ScrolledWindowInstance) EmitMoveFocusOut(arg0 DirectionType) {
 // The horizontal or vertical adjustment is updated which triggers a
 // signal that the scrolled window’s child may listen to and scroll itself.
 func (o *ScrolledWindowInstance) EmitScrollChild(arg0 ScrollType, arg1 bool) bool {
-	return 
-	o.Emit("scroll-child", arg0, arg1)
+	return o.Emit("scroll-child", arg0, arg1).(bool)
 }
 // SearchBarInstance is the instance type used by all types extending GtkSearchBar. It is used internally by the bindings. Users should use the interface [SearchBar] instead.
 type SearchBarInstance struct {
@@ -124886,8 +124860,7 @@ func UnsafeShortcutsSectionToGlibFull(c ShortcutsSection) unsafe.Pointer {
 
 // EmitChangeCurrentPage emits the "change-current-page" signal
 func (o *ShortcutsSectionInstance) EmitChangeCurrentPage(arg0 int) bool {
-	return 
-	o.Emit("change-current-page", arg0)
+	return o.Emit("change-current-page", arg0).(bool)
 }
 // ShortcutsShortcutInstance is the instance type used by all types extending GtkShortcutsShortcut. It is used internally by the bindings. Users should use the interface [ShortcutsShortcut] instead.
 type ShortcutsShortcutInstance struct {
@@ -132231,8 +132204,7 @@ func (o *WindowInstance) EmitActivateFocus() {
 // The default bindings for this signal are Ctrl-Shift-I
 // and Ctrl-Shift-D.
 func (o *WindowInstance) EmitEnableDebugging(arg0 bool) bool {
-	return 
-	o.Emit("enable-debugging", arg0)
+	return o.Emit("enable-debugging", arg0).(bool)
 }
 // ConnectKeysChanged connects the provided callback to the "keys-changed" signal
 //

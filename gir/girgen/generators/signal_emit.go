@@ -30,7 +30,7 @@ func (s *SignalEmitGenerator) Generate(w *file.Package) {
 	w.Go().Indent()
 	returnCast := ""
 	if ret != "" {
-		fmt.Fprintln(w.Go(), "return ")
+		fmt.Fprint(w.Go(), "return ")
 
 		returnCast = fmt.Sprintf(".(%s)", s.Signal.GoReturn().GoType())
 	}

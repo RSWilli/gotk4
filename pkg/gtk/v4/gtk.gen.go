@@ -57302,8 +57302,7 @@ func (o *WindowInstance) ConnectCloseRequest(fn func(Window) bool) gobject.Signa
 // &lt;kbd&gt;Ctrl&lt;/kbd&gt;+&lt;kbd&gt;Shift&lt;/kbd&gt;+&lt;kbd&gt;I&lt;/kbd&gt; and
 // &lt;kbd&gt;Ctrl&lt;/kbd&gt;+&lt;kbd&gt;Shift&lt;/kbd&gt;+&lt;kbd&gt;D&lt;/kbd&gt;.
 func (o *WindowInstance) EmitEnableDebugging(arg0 bool) bool {
-	return 
-	o.Emit("enable-debugging", arg0)
+	return o.Emit("enable-debugging", arg0).(bool)
 }
 // ConnectKeysChanged connects the provided callback to the "keys-changed" signal
 //
@@ -76100,8 +76099,7 @@ func (o *FlowBoxInstance) ConnectChildActivated(fn func(FlowBox, FlowBoxChild)) 
 // - &lt;kbd&gt;Home&lt;/kbd&gt;, &lt;kbd&gt;End&lt;/kbd&gt; move to the ends of the box
 // - &lt;kbd&gt;PgUp&lt;/kbd&gt;, &lt;kbd&gt;PgDn&lt;/kbd&gt; move vertically by pages
 func (o *FlowBoxInstance) EmitMoveCursor(arg0 MovementStep, arg1 int, arg2 bool, arg3 bool) bool {
-	return 
-	o.Emit("move-cursor", arg0, arg1, arg2, arg3)
+	return o.Emit("move-cursor", arg0, arg1, arg2, arg3).(bool)
 }
 // EmitSelectAll emits the "select-all" signal
 //
@@ -93450,8 +93448,7 @@ func (notebook *NotebookInstance) SetTabReorderable(child Widget, reorderable bo
 // &lt;kbd&gt;Ctrl&lt;/kbd&gt;+&lt;kbd&gt;Alt&lt;/kbd&gt;+&lt;kbd&gt;PgDn&lt;/kbd&gt;,
 // &lt;kbd&gt;Ctrl&lt;/kbd&gt;+&lt;kbd&gt;PgUp&lt;/kbd&gt; and &lt;kbd&gt;Ctrl&lt;/kbd&gt;+&lt;kbd&gt;PgDn&lt;/kbd&gt;.
 func (o *NotebookInstance) EmitChangeCurrentPage(arg0 int) bool {
-	return 
-	o.Emit("change-current-page", arg0)
+	return o.Emit("change-current-page", arg0).(bool)
 }
 // ConnectCreateWindow connects the provided callback to the "create-window" signal
 //
@@ -93470,8 +93467,7 @@ func (o *NotebookInstance) ConnectCreateWindow(fn func(Notebook, Widget) Noteboo
 //
 // Emitted when a tab should be focused.
 func (o *NotebookInstance) EmitFocusTab(arg0 NotebookTab) bool {
-	return 
-	o.Emit("focus-tab", arg0)
+	return o.Emit("focus-tab", arg0).(bool)
 }
 // EmitMoveFocusOut emits the "move-focus-out" signal
 //
@@ -93516,8 +93512,7 @@ func (o *NotebookInstance) ConnectPageReordered(fn func(Notebook, Widget, uint))
 // &lt;kbd&gt;Alt&lt;/kbd&gt;+&lt;kbd&gt;←&lt;/kbd&gt;, &lt;kbd&gt;Alt&lt;/kbd&gt;+&lt;kbd&gt;→&lt;/kbd&gt;,
 // &lt;kbd&gt;Alt&lt;/kbd&gt;+&lt;kbd&gt;↑&lt;/kbd&gt; and &lt;kbd&gt;Alt&lt;/kbd&gt;+&lt;kbd&gt;↓&lt;/kbd&gt;.
 func (o *NotebookInstance) EmitReorderTab(arg0 DirectionType, arg1 bool) bool {
-	return 
-	o.Emit("reorder-tab", arg0, arg1)
+	return o.Emit("reorder-tab", arg0, arg1).(bool)
 }
 // EmitSelectPage emits the "select-page" signal
 //
@@ -93525,8 +93520,7 @@ func (o *NotebookInstance) EmitReorderTab(arg0 DirectionType, arg1 bool) bool {
 // 
 // The default binding for this signal is &lt;kbd&gt;␣&lt;/kbd&gt;.
 func (o *NotebookInstance) EmitSelectPage(arg0 bool) bool {
-	return 
-	o.Emit("select-page", arg0)
+	return o.Emit("select-page", arg0).(bool)
 }
 // ConnectSwitchPage connects the provided callback to the "switch-page" signal
 //
@@ -94905,8 +94899,7 @@ func (paned *PanedInstance) SetWideHandle(wide bool) {
 // The default binding for this signal is &lt;kbd&gt;Return&lt;/kbd&gt; or
 // &lt;kbd&gt;Space&lt;/kbd&gt;.
 func (o *PanedInstance) EmitAcceptPosition() bool {
-	return 
-	o.Emit("accept-position")
+	return o.Emit("accept-position").(bool)
 }
 // EmitCancelPosition emits the "cancel-position" signal
 //
@@ -94920,8 +94913,7 @@ func (o *PanedInstance) EmitAcceptPosition() bool {
 // 
 // The default binding for this signal is &lt;kbd&gt;Escape&lt;/kbd&gt;.
 func (o *PanedInstance) EmitCancelPosition() bool {
-	return 
-	o.Emit("cancel-position")
+	return o.Emit("cancel-position").(bool)
 }
 // EmitCycleChildFocus emits the "cycle-child-focus" signal
 //
@@ -94931,8 +94923,7 @@ func (o *PanedInstance) EmitCancelPosition() bool {
 // 
 // The default binding is &lt;kbd&gt;F6&lt;/kbd&gt;.
 func (o *PanedInstance) EmitCycleChildFocus(arg0 bool) bool {
-	return 
-	o.Emit("cycle-child-focus", arg0)
+	return o.Emit("cycle-child-focus", arg0).(bool)
 }
 // EmitCycleHandleFocus emits the "cycle-handle-focus" signal
 //
@@ -94943,8 +94934,7 @@ func (o *PanedInstance) EmitCycleChildFocus(arg0 bool) bool {
 // 
 // The default binding for this signal is &lt;kbd&gt;F8&lt;/kbd&gt;.
 func (o *PanedInstance) EmitCycleHandleFocus(arg0 bool) bool {
-	return 
-	o.Emit("cycle-handle-focus", arg0)
+	return o.Emit("cycle-handle-focus", arg0).(bool)
 }
 // EmitMoveHandle emits the "move-handle" signal
 //
@@ -94959,8 +94949,7 @@ func (o *PanedInstance) EmitCycleHandleFocus(arg0 bool) bool {
 // &lt;kbd&gt;Ctrl&lt;/kbd&gt;+&lt;kbd&gt;↓&lt;/kbd&gt;, &lt;kbd&gt;↓&lt;/kbd&gt;,
 // &lt;kbd&gt;PgUp&lt;/kbd&gt;, &lt;kbd&gt;PgDn&lt;/kbd&gt;, &lt;kbd&gt;Home&lt;/kbd&gt;, &lt;kbd&gt;End&lt;/kbd&gt;.
 func (o *PanedInstance) EmitMoveHandle(arg0 ScrollType) bool {
-	return 
-	o.Emit("move-handle", arg0)
+	return o.Emit("move-handle", arg0).(bool)
 }
 // EmitToggleHandleFocus emits the "toggle-handle-focus" signal
 //
@@ -94971,8 +94960,7 @@ func (o *PanedInstance) EmitMoveHandle(arg0 ScrollType) bool {
 // 
 // The default binding is &lt;kbd&gt;Tab&lt;/kbd&gt;.
 func (o *PanedInstance) EmitToggleHandleFocus() bool {
-	return 
-	o.Emit("toggle-handle-focus")
+	return o.Emit("toggle-handle-focus").(bool)
 }
 // PasswordEntryInstance is the instance type used by all types extending GtkPasswordEntry. It is used internally by the bindings. Users should use the interface [PasswordEntry] instead.
 type PasswordEntryInstance struct {
@@ -102306,8 +102294,7 @@ func (o *ScrolledWindowInstance) EmitMoveFocusOut(arg0 DirectionType) {
 // The horizontal or vertical adjustment is updated which triggers a
 // signal that the scrolled window’s child may listen to and scroll itself.
 func (o *ScrolledWindowInstance) EmitScrollChild(arg0 ScrollType, arg1 bool) bool {
-	return 
-	o.Emit("scroll-child", arg0, arg1)
+	return o.Emit("scroll-child", arg0, arg1).(bool)
 }
 // SearchBarInstance is the instance type used by all types extending GtkSearchBar. It is used internally by the bindings. Users should use the interface [SearchBar] instead.
 type SearchBarInstance struct {
@@ -103898,8 +103885,7 @@ func (self *ShortcutsSectionInstance) AddGroup(group ShortcutsGroup) {
 // &lt;kbd&gt;Ctrl&lt;/kbd&gt;+&lt;kbd&gt;PgUp&lt;/kbd&gt;, &lt;kbd&gt;PgUp&lt;/kbd&gt;,
 // &lt;kbd&gt;Ctrl&lt;/kbd&gt;+&lt;kbd&gt;PgDn&lt;/kbd&gt;, &lt;kbd&gt;PgDn&lt;/kbd&gt;.
 func (o *ShortcutsSectionInstance) EmitChangeCurrentPage(arg0 int) bool {
-	return 
-	o.Emit("change-current-page", arg0)
+	return o.Emit("change-current-page", arg0).(bool)
 }
 // ShortcutsShortcutInstance is the instance type used by all types extending GtkShortcutsShortcut. It is used internally by the bindings. Users should use the interface [ShortcutsShortcut] instead.
 type ShortcutsShortcutInstance struct {
