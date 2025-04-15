@@ -3,7 +3,9 @@
 package glib
 
 import (
+	"fmt"
 	"runtime"
+	"strings"
 	"unsafe"
 
 	"github.com/diamondburned/gotk4/pkg/core/userdata"
@@ -139,7 +141,7 @@ const MAXUINT8 = 255
 // Like #gtk_micro_version, but from the headers used at
 // application compile time, rather than from the library
 // linked against at application run time.
-const MICRO_VERSION = 4
+const MICRO_VERSION = 5
 // MININT16 wraps G_MININT16
 //
 // The minimum value which can be held in a #gint16.
@@ -383,6 +385,20 @@ const (
 )
 
 
+func (e BookmarkFileError) String() string {
+	switch e {
+		case BookmarkFileErrorInvalidValue: return "BookmarkFileErrorInvalidValue"
+		case BookmarkFileErrorAppNotRegistered: return "BookmarkFileErrorAppNotRegistered"
+		case BookmarkFileErrorURINotFound: return "BookmarkFileErrorURINotFound"
+		case BookmarkFileErrorRead: return "BookmarkFileErrorRead"
+		case BookmarkFileErrorUnknownEncoding: return "BookmarkFileErrorUnknownEncoding"
+		case BookmarkFileErrorWrite: return "BookmarkFileErrorWrite"
+		case BookmarkFileErrorFileNotFound: return "BookmarkFileErrorFileNotFound"
+		case BookmarkFileErrorInvalidURI: return "BookmarkFileErrorInvalidURI"
+		default: return fmt.Sprintf("BookmarkFileError(%d)", e)
+	}
+}
+
 // ChecksumType wraps GChecksumType
 //
 // The hashing algorithm to be used by #GChecksum when performing the
@@ -415,6 +431,17 @@ const (
 	ChecksumSHA384 ChecksumType = 4
 )
 
+
+func (e ChecksumType) String() string {
+	switch e {
+		case ChecksumSHA256: return "ChecksumSHA256"
+		case ChecksumSHA512: return "ChecksumSHA512"
+		case ChecksumSHA384: return "ChecksumSHA384"
+		case ChecksumMD5: return "ChecksumMD5"
+		case ChecksumSHA1: return "ChecksumSHA1"
+		default: return fmt.Sprintf("ChecksumType(%d)", e)
+	}
+}
 
 // ConvertError wraps GConvertError
 //
@@ -462,6 +489,20 @@ const (
 )
 
 
+func (e ConvertError) String() string {
+	switch e {
+		case ConvertErrorNoConversion: return "ConvertErrorNoConversion"
+		case ConvertErrorIllegalSequence: return "ConvertErrorIllegalSequence"
+		case ConvertErrorFailed: return "ConvertErrorFailed"
+		case ConvertErrorPartialInput: return "ConvertErrorPartialInput"
+		case ConvertErrorBadURI: return "ConvertErrorBadURI"
+		case ConvertErrorNotAbsolutePath: return "ConvertErrorNotAbsolutePath"
+		case ConvertErrorNoMemory: return "ConvertErrorNoMemory"
+		case ConvertErrorEmbeddedNUL: return "ConvertErrorEmbeddedNUL"
+		default: return fmt.Sprintf("ConvertError(%d)", e)
+	}
+}
+
 // ErrorType wraps GErrorType
 //
 // The possible errors, used in the @v_error field
@@ -503,6 +544,20 @@ const (
 	ErrFloatMalformed ErrorType = 7
 )
 
+
+func (e ErrorType) String() string {
+	switch e {
+		case ErrUnknown: return "ErrUnknown"
+		case ErrUnexpEOF: return "ErrUnexpEOF"
+		case ErrUnexpEOFInString: return "ErrUnexpEOFInString"
+		case ErrUnexpEOFInComment: return "ErrUnexpEOFInComment"
+		case ErrNonDigitInConst: return "ErrNonDigitInConst"
+		case ErrDigitRadix: return "ErrDigitRadix"
+		case ErrFloatRadix: return "ErrFloatRadix"
+		case ErrFloatMalformed: return "ErrFloatMalformed"
+		default: return fmt.Sprintf("ErrorType(%d)", e)
+	}
+}
 
 // FileError wraps GFileError
 //
@@ -666,6 +721,37 @@ const (
 )
 
 
+func (e FileError) String() string {
+	switch e {
+		case FileErrorNospc: return "FileErrorNospc"
+		case FileErrorMfile: return "FileErrorMfile"
+		case FileErrorPipe: return "FileErrorPipe"
+		case FileErrorAgain: return "FileErrorAgain"
+		case FileErrorAcces: return "FileErrorAcces"
+		case FileErrorNametoolong: return "FileErrorNametoolong"
+		case FileErrorNxio: return "FileErrorNxio"
+		case FileErrorTxtbsy: return "FileErrorTxtbsy"
+		case FileErrorFault: return "FileErrorFault"
+		case FileErrorInval: return "FileErrorInval"
+		case FileErrorPerm: return "FileErrorPerm"
+		case FileErrorNotdir: return "FileErrorNotdir"
+		case FileErrorNodev: return "FileErrorNodev"
+		case FileErrorNOMEM: return "FileErrorNOMEM"
+		case FileErrorIO: return "FileErrorIO"
+		case FileErrorNosys: return "FileErrorNosys"
+		case FileErrorFailed: return "FileErrorFailed"
+		case FileErrorNoent: return "FileErrorNoent"
+		case FileErrorRofs: return "FileErrorRofs"
+		case FileErrorLoop: return "FileErrorLoop"
+		case FileErrorNfile: return "FileErrorNfile"
+		case FileErrorBadf: return "FileErrorBadf"
+		case FileErrorIntr: return "FileErrorIntr"
+		case FileErrorExist: return "FileErrorExist"
+		case FileErrorIsdir: return "FileErrorIsdir"
+		default: return fmt.Sprintf("FileError(%d)", e)
+	}
+}
+
 // IOChannelError wraps GIOChannelError
 //
 // Error codes returned by #GIOChannel operations.
@@ -711,6 +797,21 @@ const (
 )
 
 
+func (e IOChannelError) String() string {
+	switch e {
+		case IOChannelErrorIO: return "IOChannelErrorIO"
+		case IOChannelErrorOverflow: return "IOChannelErrorOverflow"
+		case IOChannelErrorPipe: return "IOChannelErrorPipe"
+		case IOChannelErrorFbig: return "IOChannelErrorFbig"
+		case IOChannelErrorInval: return "IOChannelErrorInval"
+		case IOChannelErrorIsdir: return "IOChannelErrorIsdir"
+		case IOChannelErrorNospc: return "IOChannelErrorNospc"
+		case IOChannelErrorNxio: return "IOChannelErrorNxio"
+		case IOChannelErrorFailed: return "IOChannelErrorFailed"
+		default: return fmt.Sprintf("IOChannelError(%d)", e)
+	}
+}
+
 // IOError wraps GIOError
 //
 // #GIOError is only used by the deprecated functions
@@ -737,6 +838,16 @@ const (
 )
 
 
+func (e IOError) String() string {
+	switch e {
+		case IOErrorInval: return "IOErrorInval"
+		case IOErrorUnknown: return "IOErrorUnknown"
+		case IOErrorNone: return "IOErrorNone"
+		case IOErrorAgain: return "IOErrorAgain"
+		default: return fmt.Sprintf("IOError(%d)", e)
+	}
+}
+
 // IOStatus wraps GIOStatus
 //
 // Statuses returned by most of the #GIOFuncs functions.
@@ -761,6 +872,16 @@ const (
 	IOStatusAgain IOStatus = 3
 )
 
+
+func (e IOStatus) String() string {
+	switch e {
+		case IOStatusError: return "IOStatusError"
+		case IOStatusNormal: return "IOStatusNormal"
+		case IOStatusEOF: return "IOStatusEOF"
+		case IOStatusAgain: return "IOStatusAgain"
+		default: return fmt.Sprintf("IOStatus(%d)", e)
+	}
+}
 
 // KeyFileError wraps GKeyFileError
 //
@@ -796,6 +917,18 @@ const (
 )
 
 
+func (e KeyFileError) String() string {
+	switch e {
+		case KeyFileErrorParse: return "KeyFileErrorParse"
+		case KeyFileErrorNotFound: return "KeyFileErrorNotFound"
+		case KeyFileErrorKeyNotFound: return "KeyFileErrorKeyNotFound"
+		case KeyFileErrorGroupNotFound: return "KeyFileErrorGroupNotFound"
+		case KeyFileErrorInvalidValue: return "KeyFileErrorInvalidValue"
+		case KeyFileErrorUnknownEncoding: return "KeyFileErrorUnknownEncoding"
+		default: return fmt.Sprintf("KeyFileError(%d)", e)
+	}
+}
+
 // LogWriterOutput wraps GLogWriterOutput
 //
 // Return values from #GLogWriterFuncs to indicate whether the given log entry
@@ -817,6 +950,14 @@ const (
 	LogWriterUnhandled LogWriterOutput = 0
 )
 
+
+func (e LogWriterOutput) String() string {
+	switch e {
+		case LogWriterHandled: return "LogWriterHandled"
+		case LogWriterUnhandled: return "LogWriterUnhandled"
+		default: return fmt.Sprintf("LogWriterOutput(%d)", e)
+	}
+}
 
 // MarkupError wraps GMarkupError
 //
@@ -858,6 +999,19 @@ const (
 	MarkupErrorMissingAttribute MarkupError = 6
 )
 
+
+func (e MarkupError) String() string {
+	switch e {
+		case MarkupErrorUnknownAttribute: return "MarkupErrorUnknownAttribute"
+		case MarkupErrorInvalidContent: return "MarkupErrorInvalidContent"
+		case MarkupErrorMissingAttribute: return "MarkupErrorMissingAttribute"
+		case MarkupErrorBadUTF8: return "MarkupErrorBadUTF8"
+		case MarkupErrorEmpty: return "MarkupErrorEmpty"
+		case MarkupErrorParse: return "MarkupErrorParse"
+		case MarkupErrorUnknownElement: return "MarkupErrorUnknownElement"
+		default: return fmt.Sprintf("MarkupError(%d)", e)
+	}
+}
 
 // NormalizeMode wraps GNormalizeMode
 //
@@ -910,6 +1064,16 @@ const (
 	NormalizeNFKC NormalizeMode = 3
 )
 
+
+func (e NormalizeMode) String() string {
+	switch e {
+		case NormalizeDefaultCompose: return "NormalizeDefaultCompose"
+		case NormalizeAll: return "NormalizeAll"
+		case NormalizeAllCompose: return "NormalizeAllCompose"
+		case NormalizeDefault: return "NormalizeDefault"
+		default: return fmt.Sprintf("NormalizeMode(%d)", e)
+	}
+}
 
 // OptionArg wraps GOptionArg
 //
@@ -968,6 +1132,21 @@ const (
 )
 
 
+func (e OptionArg) String() string {
+	switch e {
+		case OptionArgNone: return "OptionArgNone"
+		case OptionArgString: return "OptionArgString"
+		case OptionArgInt: return "OptionArgInt"
+		case OptionArgCallback: return "OptionArgCallback"
+		case OptionArgFilename: return "OptionArgFilename"
+		case OptionArgFilenameArray: return "OptionArgFilenameArray"
+		case OptionArgDouble: return "OptionArgDouble"
+		case OptionArgInt64: return "OptionArgInt64"
+		case OptionArgStringArray: return "OptionArgStringArray"
+		default: return fmt.Sprintf("OptionArg(%d)", e)
+	}
+}
+
 // OptionError wraps GOptionError
 //
 // Error codes returned by option parsing.
@@ -990,6 +1169,15 @@ const (
 	OptionErrorFailed OptionError = 2
 )
 
+
+func (e OptionError) String() string {
+	switch e {
+		case OptionErrorUnknownOption: return "OptionErrorUnknownOption"
+		case OptionErrorBadValue: return "OptionErrorBadValue"
+		case OptionErrorFailed: return "OptionErrorFailed"
+		default: return fmt.Sprintf("OptionError(%d)", e)
+	}
+}
 
 // RegexError wraps GRegexError
 //
@@ -1271,6 +1459,69 @@ const (
 )
 
 
+func (e RegexError) String() string {
+	switch e {
+		case RegexErrorInvalidRelativeReference: return "RegexErrorInvalidRelativeReference"
+		case RegexErrorMissingName: return "RegexErrorMissingName"
+		case RegexErrorInternal: return "RegexErrorInternal"
+		case RegexErrorUnrecognizedEscape: return "RegexErrorUnrecognizedEscape"
+		case RegexErrorHexCodeTooLarge: return "RegexErrorHexCodeTooLarge"
+		case RegexErrorUnknownProperty: return "RegexErrorUnknownProperty"
+		case RegexErrorStrayBackslash: return "RegexErrorStrayBackslash"
+		case RegexErrorUnterminatedCharacterClass: return "RegexErrorUnterminatedCharacterClass"
+		case RegexErrorInvalidDataCharacter: return "RegexErrorInvalidDataCharacter"
+		case RegexErrorBacktrackingControlVerbArgumentRequired: return "RegexErrorBacktrackingControlVerbArgumentRequired"
+		case RegexErrorMatch: return "RegexErrorMatch"
+		case RegexErrorInvalidEscapeInCharacterClass: return "RegexErrorInvalidEscapeInCharacterClass"
+		case RegexErrorBacktrackingControlVerbArgumentForbidden: return "RegexErrorBacktrackingControlVerbArgumentForbidden"
+		case RegexErrorMissingSubpatternName: return "RegexErrorMissingSubpatternName"
+		case RegexErrorUnknownBacktrackingControlVerb: return "RegexErrorUnknownBacktrackingControlVerb"
+		case RegexErrorOptimize: return "RegexErrorOptimize"
+		case RegexErrorMissingSubpatternNameTerminator: return "RegexErrorMissingSubpatternNameTerminator"
+		case RegexErrorSubpatternNameTooLong: return "RegexErrorSubpatternNameTooLong"
+		case RegexErrorCompile: return "RegexErrorCompile"
+		case RegexErrorQuantifierTooBig: return "RegexErrorQuantifierTooBig"
+		case RegexErrorInvalidCondition: return "RegexErrorInvalidCondition"
+		case RegexErrorSingleByteMatchInLookbehind: return "RegexErrorSingleByteMatchInLookbehind"
+		case RegexErrorDefineRepetion: return "RegexErrorDefineRepetion"
+		case RegexErrorMissingControlChar: return "RegexErrorMissingControlChar"
+		case RegexErrorNotSupportedInClass: return "RegexErrorNotSupportedInClass"
+		case RegexErrorExpressionTooLarge: return "RegexErrorExpressionTooLarge"
+		case RegexErrorTooManySubpatterns: return "RegexErrorTooManySubpatterns"
+		case RegexErrorTooManyForwardReferences: return "RegexErrorTooManyForwardReferences"
+		case RegexErrorUnrecognizedCharacter: return "RegexErrorUnrecognizedCharacter"
+		case RegexErrorUnknownPosixClassName: return "RegexErrorUnknownPosixClassName"
+		case RegexErrorDuplicateSubpatternName: return "RegexErrorDuplicateSubpatternName"
+		case RegexErrorMalformedProperty: return "RegexErrorMalformedProperty"
+		case RegexErrorExtraSubpatternName: return "RegexErrorExtraSubpatternName"
+		case RegexErrorInvalidControlChar: return "RegexErrorInvalidControlChar"
+		case RegexErrorCharacterValueTooLarge: return "RegexErrorCharacterValueTooLarge"
+		case RegexErrorAssertionExpected: return "RegexErrorAssertionExpected"
+		case RegexErrorInvalidOctalValue: return "RegexErrorInvalidOctalValue"
+		case RegexErrorRangeOutOfOrder: return "RegexErrorRangeOutOfOrder"
+		case RegexErrorInexistentSubpatternReference: return "RegexErrorInexistentSubpatternReference"
+		case RegexErrorMissingDigit: return "RegexErrorMissingDigit"
+		case RegexErrorUnterminatedComment: return "RegexErrorUnterminatedComment"
+		case RegexErrorInfiniteLoop: return "RegexErrorInfiniteLoop"
+		case RegexErrorNothingToRepeat: return "RegexErrorNothingToRepeat"
+		case RegexErrorVariableLengthLookbehind: return "RegexErrorVariableLengthLookbehind"
+		case RegexErrorMalformedCondition: return "RegexErrorMalformedCondition"
+		case RegexErrorTooManyConditionalBranches: return "RegexErrorTooManyConditionalBranches"
+		case RegexErrorInconsistentNewlineOptions: return "RegexErrorInconsistentNewlineOptions"
+		case RegexErrorReplace: return "RegexErrorReplace"
+		case RegexErrorMemoryError: return "RegexErrorMemoryError"
+		case RegexErrorNameTooLong: return "RegexErrorNameTooLong"
+		case RegexErrorQuantifiersOutOfOrder: return "RegexErrorQuantifiersOutOfOrder"
+		case RegexErrorPosixNamedClassOutsideClass: return "RegexErrorPosixNamedClassOutsideClass"
+		case RegexErrorUnmatchedParenthesis: return "RegexErrorUnmatchedParenthesis"
+		case RegexErrorPosixCollatingElementsNotSupported: return "RegexErrorPosixCollatingElementsNotSupported"
+		case RegexErrorTooManyBranchesInDefine: return "RegexErrorTooManyBranchesInDefine"
+		case RegexErrorMissingBackReference: return "RegexErrorMissingBackReference"
+		case RegexErrorNumberTooBig: return "RegexErrorNumberTooBig"
+		default: return fmt.Sprintf("RegexError(%d)", e)
+	}
+}
+
 // SeekType wraps GSeekType
 //
 // An enumeration specifying the base position for a
@@ -1293,6 +1544,15 @@ const (
 )
 
 
+func (e SeekType) String() string {
+	switch e {
+		case SeekEnd: return "SeekEnd"
+		case SeekCur: return "SeekCur"
+		case SeekSet: return "SeekSet"
+		default: return fmt.Sprintf("SeekType(%d)", e)
+	}
+}
+
 // ShellError wraps GShellError
 //
 // Error codes returned by shell functions.
@@ -1313,6 +1573,15 @@ const (
 	ShellErrorFailed ShellError = 2
 )
 
+
+func (e ShellError) String() string {
+	switch e {
+		case ShellErrorBadQuoting: return "ShellErrorBadQuoting"
+		case ShellErrorEmptyString: return "ShellErrorEmptyString"
+		case ShellErrorFailed: return "ShellErrorFailed"
+		default: return fmt.Sprintf("ShellError(%d)", e)
+	}
+}
 
 // SpawnError wraps GSpawnError
 //
@@ -1408,6 +1677,32 @@ const (
 )
 
 
+func (e SpawnError) String() string {
+	switch e {
+		case SpawnErrorFork: return "SpawnErrorFork"
+		case SpawnErrorPerm: return "SpawnErrorPerm"
+		case SpawnErrorNoexec: return "SpawnErrorNoexec"
+		case SpawnErrorNOMEM: return "SpawnErrorNOMEM"
+		case SpawnErrorLoop: return "SpawnErrorLoop"
+		case SpawnErrorTxtbusy: return "SpawnErrorTxtbusy"
+		case SpawnErrorInval: return "SpawnErrorInval"
+		case SpawnErrorLibbad: return "SpawnErrorLibbad"
+		case SpawnErrorNametoolong: return "SpawnErrorNametoolong"
+		case SpawnErrorNotdir: return "SpawnErrorNotdir"
+		case SpawnErrorNfile: return "SpawnErrorNfile"
+		case SpawnErrorMfile: return "SpawnErrorMfile"
+		case SpawnErrorIsdir: return "SpawnErrorIsdir"
+		case SpawnErrorFailed: return "SpawnErrorFailed"
+		case SpawnErrorAcces: return "SpawnErrorAcces"
+		case SpawnErrorTooBig: return "SpawnErrorTooBig"
+		case SpawnErrorRead: return "SpawnErrorRead"
+		case SpawnErrorChdir: return "SpawnErrorChdir"
+		case SpawnErrorNoent: return "SpawnErrorNoent"
+		case SpawnErrorIO: return "SpawnErrorIO"
+		default: return fmt.Sprintf("SpawnError(%d)", e)
+	}
+}
+
 // TimeType wraps GTimeType
 //
 // Disambiguates a given time in two ways.
@@ -1435,6 +1730,15 @@ const (
 	TimeTypeUniversal TimeType = 2
 )
 
+
+func (e TimeType) String() string {
+	switch e {
+		case TimeTypeStandard: return "TimeTypeStandard"
+		case TimeTypeDaylight: return "TimeTypeDaylight"
+		case TimeTypeUniversal: return "TimeTypeUniversal"
+		default: return fmt.Sprintf("TimeType(%d)", e)
+	}
+}
 
 // TokenType wraps GTokenType
 //
@@ -1538,6 +1842,35 @@ const (
 )
 
 
+func (e TokenType) String() string {
+	switch e {
+		case TokenCommentMulti: return "TokenCommentMulti"
+		case TokenRightParen: return "TokenRightParen"
+		case TokenLeftCurly: return "TokenLeftCurly"
+		case TokenNone: return "TokenNone"
+		case TokenOctal: return "TokenOctal"
+		case TokenString: return "TokenString"
+		case TokenIdentifier: return "TokenIdentifier"
+		case TokenCommentSingle: return "TokenCommentSingle"
+		case TokenRightCurly: return "TokenRightCurly"
+		case TokenLeftBrace: return "TokenLeftBrace"
+		case TokenComma: return "TokenComma"
+		case TokenError: return "TokenError"
+		case TokenHex: return "TokenHex"
+		case TokenEOF: return "TokenEOF"
+		case TokenLeftParen: return "TokenLeftParen"
+		case TokenEqualSign: return "TokenEqualSign"
+		case TokenChar: return "TokenChar"
+		case TokenBinary: return "TokenBinary"
+		case TokenInt: return "TokenInt"
+		case TokenIdentifierNull: return "TokenIdentifierNull"
+		case TokenRightBrace: return "TokenRightBrace"
+		case TokenFloat: return "TokenFloat"
+		case TokenSymbol: return "TokenSymbol"
+		default: return fmt.Sprintf("TokenType(%d)", e)
+	}
+}
+
 // TraverseType wraps GTraverseType
 //
 // Specifies the type of traversal performed by g_tree_traverse(),
@@ -1602,6 +1935,16 @@ const (
 	LevelOrder TraverseType = 3
 )
 
+
+func (e TraverseType) String() string {
+	switch e {
+		case LevelOrder: return "LevelOrder"
+		case InOrder: return "InOrder"
+		case PreOrder: return "PreOrder"
+		case PostOrder: return "PostOrder"
+		default: return fmt.Sprintf("TraverseType(%d)", e)
+	}
+}
 
 // UnicodeBreakType wraps GUnicodeBreakType
 //
@@ -1808,6 +2151,60 @@ const (
 	UnicodeBreakVirama UnicodeBreakType = 47
 )
 
+
+func (e UnicodeBreakType) String() string {
+	switch e {
+		case UnicodeBreakSpace: return "UnicodeBreakSpace"
+		case UnicodeBreakOpenPunctuation: return "UnicodeBreakOpenPunctuation"
+		case UnicodeBreakHangulLJamo: return "UnicodeBreakHangulLJamo"
+		case UnicodeBreakMandatory: return "UnicodeBreakMandatory"
+		case UnicodeBreakQuotation: return "UnicodeBreakQuotation"
+		case UnicodeBreakHangulVJamo: return "UnicodeBreakHangulVJamo"
+		case UnicodeBreakHangulTJamo: return "UnicodeBreakHangulTJamo"
+		case UnicodeBreakCloseParanthesis: return "UnicodeBreakCloseParanthesis"
+		case UnicodeBreakRegionalIndicator: return "UnicodeBreakRegionalIndicator"
+		case UnicodeBreakLineFeed: return "UnicodeBreakLineFeed"
+		case UnicodeBreakBefore: return "UnicodeBreakBefore"
+		case UnicodeBreakPrefix: return "UnicodeBreakPrefix"
+		case UnicodeBreakPostfix: return "UnicodeBreakPostfix"
+		case UnicodeBreakComplexContext: return "UnicodeBreakComplexContext"
+		case UnicodeBreakConditionalJapaneseStarter: return "UnicodeBreakConditionalJapaneseStarter"
+		case UnicodeBreakAksaraStart: return "UnicodeBreakAksaraStart"
+		case UnicodeBreakZeroWidthSpace: return "UnicodeBreakZeroWidthSpace"
+		case UnicodeBreakInseparable: return "UnicodeBreakInseparable"
+		case UnicodeBreakNonBreakingGlue: return "UnicodeBreakNonBreakingGlue"
+		case UnicodeBreakAfter: return "UnicodeBreakAfter"
+		case UnicodeBreakSymbol: return "UnicodeBreakSymbol"
+		case UnicodeBreakWordJoiner: return "UnicodeBreakWordJoiner"
+		case UnicodeBreakZeroWidthJoiner: return "UnicodeBreakZeroWidthJoiner"
+		case UnicodeBreakViramaFinal: return "UnicodeBreakViramaFinal"
+		case UnicodeBreakSurrogate: return "UnicodeBreakSurrogate"
+		case UnicodeBreakBeforeAndAfter: return "UnicodeBreakBeforeAndAfter"
+		case UnicodeBreakNonStarter: return "UnicodeBreakNonStarter"
+		case UnicodeBreakInfixSeparator: return "UnicodeBreakInfixSeparator"
+		case UnicodeBreakAmbiguous: return "UnicodeBreakAmbiguous"
+		case UnicodeBreakUnknown: return "UnicodeBreakUnknown"
+		case UnicodeBreakHangulLvtSyllable: return "UnicodeBreakHangulLvtSyllable"
+		case UnicodeBreakHebrewLetter: return "UnicodeBreakHebrewLetter"
+		case UnicodeBreakCarriageReturn: return "UnicodeBreakCarriageReturn"
+		case UnicodeBreakCombiningMark: return "UnicodeBreakCombiningMark"
+		case UnicodeBreakIdeographic: return "UnicodeBreakIdeographic"
+		case UnicodeBreakAlphabetic: return "UnicodeBreakAlphabetic"
+		case UnicodeBreakHangulLvSyllable: return "UnicodeBreakHangulLvSyllable"
+		case UnicodeBreakEmojiModifier: return "UnicodeBreakEmojiModifier"
+		case UnicodeBreakAksara: return "UnicodeBreakAksara"
+		case UnicodeBreakAksaraPreBase: return "UnicodeBreakAksaraPreBase"
+		case UnicodeBreakContingent: return "UnicodeBreakContingent"
+		case UnicodeBreakExclamation: return "UnicodeBreakExclamation"
+		case UnicodeBreakNextLine: return "UnicodeBreakNextLine"
+		case UnicodeBreakEmojiBase: return "UnicodeBreakEmojiBase"
+		case UnicodeBreakVirama: return "UnicodeBreakVirama"
+		case UnicodeBreakHyphen: return "UnicodeBreakHyphen"
+		case UnicodeBreakClosePunctuation: return "UnicodeBreakClosePunctuation"
+		case UnicodeBreakNumeric: return "UnicodeBreakNumeric"
+		default: return fmt.Sprintf("UnicodeBreakType(%d)", e)
+	}
+}
 
 // UnicodeScript wraps GUnicodeScript
 //
@@ -2490,6 +2887,178 @@ const (
 )
 
 
+func (e UnicodeScript) String() string {
+	switch e {
+		case UnicodeScriptCommon: return "UnicodeScriptCommon"
+		case UnicodeScriptHiragana: return "UnicodeScriptHiragana"
+		case UnicodeScriptThaana: return "UnicodeScriptThaana"
+		case UnicodeScriptLimbu: return "UnicodeScriptLimbu"
+		case UnicodeScriptUgaritic: return "UnicodeScriptUgaritic"
+		case UnicodeScriptElymaic: return "UnicodeScriptElymaic"
+		case UnicodeScriptToto: return "UnicodeScriptToto"
+		case UnicodeScriptThai: return "UnicodeScriptThai"
+		case UnicodeScriptBhaiksuki: return "UnicodeScriptBhaiksuki"
+		case UnicodeScriptDivesAkuru: return "UnicodeScriptDivesAkuru"
+		case UnicodeScriptInherited: return "UnicodeScriptInherited"
+		case UnicodeScriptDeseret: return "UnicodeScriptDeseret"
+		case UnicodeScriptKannada: return "UnicodeScriptKannada"
+		case UnicodeScriptBuginese: return "UnicodeScriptBuginese"
+		case UnicodeScriptLydian: return "UnicodeScriptLydian"
+		case UnicodeScriptKhitanSmallScript: return "UnicodeScriptKhitanSmallScript"
+		case UnicodeScriptArmenian: return "UnicodeScriptArmenian"
+		case UnicodeScriptPahawhHmong: return "UnicodeScriptPahawhHmong"
+		case UnicodeScriptGurmukhi: return "UnicodeScriptGurmukhi"
+		case UnicodeScriptOsmanya: return "UnicodeScriptOsmanya"
+		case UnicodeScriptSaurashtra: return "UnicodeScriptSaurashtra"
+		case UnicodeScriptLinearA: return "UnicodeScriptLinearA"
+		case UnicodeScriptOsage: return "UnicodeScriptOsage"
+		case UnicodeScriptGujarati: return "UnicodeScriptGujarati"
+		case UnicodeScriptKhmer: return "UnicodeScriptKhmer"
+		case UnicodeScriptJavanese: return "UnicodeScriptJavanese"
+		case UnicodeScriptSiddham: return "UnicodeScriptSiddham"
+		case UnicodeScriptWarangCiti: return "UnicodeScriptWarangCiti"
+		case UnicodeScriptAnatolianHieroglyphs: return "UnicodeScriptAnatolianHieroglyphs"
+		case UnicodeScriptNushu: return "UnicodeScriptNushu"
+		case UnicodeScriptCyproMinoan: return "UnicodeScriptCyproMinoan"
+		case UnicodeScriptTagalog: return "UnicodeScriptTagalog"
+		case UnicodeScriptDuployan: return "UnicodeScriptDuployan"
+		case UnicodeScriptOldSogdian: return "UnicodeScriptOldSogdian"
+		case UnicodeScriptTangsa: return "UnicodeScriptTangsa"
+		case UnicodeScriptLao: return "UnicodeScriptLao"
+		case UnicodeScriptMyanmar: return "UnicodeScriptMyanmar"
+		case UnicodeScriptBalinese: return "UnicodeScriptBalinese"
+		case UnicodeScriptBassaVah: return "UnicodeScriptBassaVah"
+		case UnicodeScriptSogdian: return "UnicodeScriptSogdian"
+		case UnicodeScriptGrantha: return "UnicodeScriptGrantha"
+		case UnicodeScriptMalayalam: return "UnicodeScriptMalayalam"
+		case UnicodeScriptMongolian: return "UnicodeScriptMongolian"
+		case UnicodeScriptOriya: return "UnicodeScriptOriya"
+		case UnicodeScriptMeroiticHieroglyphs: return "UnicodeScriptMeroiticHieroglyphs"
+		case UnicodeScriptCherokee: return "UnicodeScriptCherokee"
+		case UnicodeScriptHangul: return "UnicodeScriptHangul"
+		case UnicodeScriptTibetan: return "UnicodeScriptTibetan"
+		case UnicodeScriptHanunoo: return "UnicodeScriptHanunoo"
+		case UnicodeScriptBuhid: return "UnicodeScriptBuhid"
+		case UnicodeScriptLepcha: return "UnicodeScriptLepcha"
+		case UnicodeScriptInscriptionalParthian: return "UnicodeScriptInscriptionalParthian"
+		case UnicodeScriptHanifiRohingya: return "UnicodeScriptHanifiRohingya"
+		case UnicodeScriptTakri: return "UnicodeScriptTakri"
+		case UnicodeScriptTelugu: return "UnicodeScriptTelugu"
+		case UnicodeScriptOldNorthArabian: return "UnicodeScriptOldNorthArabian"
+		case UnicodeScriptTirhuta: return "UnicodeScriptTirhuta"
+		case UnicodeScriptMultani: return "UnicodeScriptMultani"
+		case UnicodeScriptMasaramGondi: return "UnicodeScriptMasaramGondi"
+		case UnicodeScriptInvalidCode: return "UnicodeScriptInvalidCode"
+		case UnicodeScriptRunic: return "UnicodeScriptRunic"
+		case UnicodeScriptUnknown: return "UnicodeScriptUnknown"
+		case UnicodeScriptLisu: return "UnicodeScriptLisu"
+		case UnicodeScriptOldSouthArabian: return "UnicodeScriptOldSouthArabian"
+		case UnicodeScriptSamaritan: return "UnicodeScriptSamaritan"
+		case UnicodeScriptBatak: return "UnicodeScriptBatak"
+		case UnicodeScriptMandaic: return "UnicodeScriptMandaic"
+		case UnicodeScriptArabic: return "UnicodeScriptArabic"
+		case UnicodeScriptModi: return "UnicodeScriptModi"
+		case UnicodeScriptNabataean: return "UnicodeScriptNabataean"
+		case UnicodeScriptNewa: return "UnicodeScriptNewa"
+		case UnicodeScriptMedefaidrin: return "UnicodeScriptMedefaidrin"
+		case UnicodeScriptMath: return "UnicodeScriptMath"
+		case UnicodeScriptKawi: return "UnicodeScriptKawi"
+		case UnicodeScriptHebrew: return "UnicodeScriptHebrew"
+		case UnicodeScriptSundanese: return "UnicodeScriptSundanese"
+		case UnicodeScriptImperialAramaic: return "UnicodeScriptImperialAramaic"
+		case UnicodeScriptZanabazarSquare: return "UnicodeScriptZanabazarSquare"
+		case UnicodeScriptOldItalic: return "UnicodeScriptOldItalic"
+		case UnicodeScriptTamil: return "UnicodeScriptTamil"
+		case UnicodeScriptBraille: return "UnicodeScriptBraille"
+		case UnicodeScriptCypriot: return "UnicodeScriptCypriot"
+		case UnicodeScriptOldPersian: return "UnicodeScriptOldPersian"
+		case UnicodeScriptCham: return "UnicodeScriptCham"
+		case UnicodeScriptBopomofo: return "UnicodeScriptBopomofo"
+		case UnicodeScriptKatakana: return "UnicodeScriptKatakana"
+		case UnicodeScriptTagbanwa: return "UnicodeScriptTagbanwa"
+		case UnicodeScriptKayahLi: return "UnicodeScriptKayahLi"
+		case UnicodeScriptGunjalaGondi: return "UnicodeScriptGunjalaGondi"
+		case UnicodeScriptWancho: return "UnicodeScriptWancho"
+		case UnicodeScriptDevanagari: return "UnicodeScriptDevanagari"
+		case UnicodeScriptOldTurkic: return "UnicodeScriptOldTurkic"
+		case UnicodeScriptSignwriting: return "UnicodeScriptSignwriting"
+		case UnicodeScriptBengali: return "UnicodeScriptBengali"
+		case UnicodeScriptSylotiNagri: return "UnicodeScriptSylotiNagri"
+		case UnicodeScriptYezidi: return "UnicodeScriptYezidi"
+		case UnicodeScriptCoptic: return "UnicodeScriptCoptic"
+		case UnicodeScriptSinhala: return "UnicodeScriptSinhala"
+		case UnicodeScriptLinearB: return "UnicodeScriptLinearB"
+		case UnicodeScriptAvestan: return "UnicodeScriptAvestan"
+		case UnicodeScriptKaithi: return "UnicodeScriptKaithi"
+		case UnicodeScriptBrahmi: return "UnicodeScriptBrahmi"
+		case UnicodeScriptMendeKikakui: return "UnicodeScriptMendeKikakui"
+		case UnicodeScriptPauCinHau: return "UnicodeScriptPauCinHau"
+		case UnicodeScriptGreek: return "UnicodeScriptGreek"
+		case UnicodeScriptHan: return "UnicodeScriptHan"
+		case UnicodeScriptMiao: return "UnicodeScriptMiao"
+		case UnicodeScriptManichaean: return "UnicodeScriptManichaean"
+		case UnicodeScriptOldPermic: return "UnicodeScriptOldPermic"
+		case UnicodeScriptAdlam: return "UnicodeScriptAdlam"
+		case UnicodeScriptChorasmian: return "UnicodeScriptChorasmian"
+		case UnicodeScriptLatin: return "UnicodeScriptLatin"
+		case UnicodeScriptCarian: return "UnicodeScriptCarian"
+		case UnicodeScriptElbasan: return "UnicodeScriptElbasan"
+		case UnicodeScriptEthiopic: return "UnicodeScriptEthiopic"
+		case UnicodeScriptPhagsPa: return "UnicodeScriptPhagsPa"
+		case UnicodeScriptMeroiticCursive: return "UnicodeScriptMeroiticCursive"
+		case UnicodeScriptMahajani: return "UnicodeScriptMahajani"
+		case UnicodeScriptNyiakengPuachueHmong: return "UnicodeScriptNyiakengPuachueHmong"
+		case UnicodeScriptSyriac: return "UnicodeScriptSyriac"
+		case UnicodeScriptPsalterPahlavi: return "UnicodeScriptPsalterPahlavi"
+		case UnicodeScriptGlagolitic: return "UnicodeScriptGlagolitic"
+		case UnicodeScriptKharoshthi: return "UnicodeScriptKharoshthi"
+		case UnicodeScriptRejang: return "UnicodeScriptRejang"
+		case UnicodeScriptInscriptionalPahlavi: return "UnicodeScriptInscriptionalPahlavi"
+		case UnicodeScriptHatran: return "UnicodeScriptHatran"
+		case UnicodeScriptSoyombo: return "UnicodeScriptSoyombo"
+		case UnicodeScriptOldUyghur: return "UnicodeScriptOldUyghur"
+		case UnicodeScriptVithkuqi: return "UnicodeScriptVithkuqi"
+		case UnicodeScriptGeorgian: return "UnicodeScriptGeorgian"
+		case UnicodeScriptGothic: return "UnicodeScriptGothic"
+		case UnicodeScriptOgham: return "UnicodeScriptOgham"
+		case UnicodeScriptPhoenician: return "UnicodeScriptPhoenician"
+		case UnicodeScriptAhom: return "UnicodeScriptAhom"
+		case UnicodeScriptTangut: return "UnicodeScriptTangut"
+		case UnicodeScriptNagMundari: return "UnicodeScriptNagMundari"
+		case UnicodeScriptSoraSompeng: return "UnicodeScriptSoraSompeng"
+		case UnicodeScriptKhojki: return "UnicodeScriptKhojki"
+		case UnicodeScriptTaiLe: return "UnicodeScriptTaiLe"
+		case UnicodeScriptLycian: return "UnicodeScriptLycian"
+		case UnicodeScriptSharada: return "UnicodeScriptSharada"
+		case UnicodeScriptPalmyrene: return "UnicodeScriptPalmyrene"
+		case UnicodeScriptOldHungarian: return "UnicodeScriptOldHungarian"
+		case UnicodeScriptNewTaiLue: return "UnicodeScriptNewTaiLue"
+		case UnicodeScriptYi: return "UnicodeScriptYi"
+		case UnicodeScriptVai: return "UnicodeScriptVai"
+		case UnicodeScriptBamum: return "UnicodeScriptBamum"
+		case UnicodeScriptMeeteiMayek: return "UnicodeScriptMeeteiMayek"
+		case UnicodeScriptMarchen: return "UnicodeScriptMarchen"
+		case UnicodeScriptDogra: return "UnicodeScriptDogra"
+		case UnicodeScriptCyrillic: return "UnicodeScriptCyrillic"
+		case UnicodeScriptCanadianAboriginal: return "UnicodeScriptCanadianAboriginal"
+		case UnicodeScriptOlChiki: return "UnicodeScriptOlChiki"
+		case UnicodeScriptCaucasianAlbanian: return "UnicodeScriptCaucasianAlbanian"
+		case UnicodeScriptShavian: return "UnicodeScriptShavian"
+		case UnicodeScriptTifinagh: return "UnicodeScriptTifinagh"
+		case UnicodeScriptNko: return "UnicodeScriptNko"
+		case UnicodeScriptTaiViet: return "UnicodeScriptTaiViet"
+		case UnicodeScriptMakasar: return "UnicodeScriptMakasar"
+		case UnicodeScriptNandinagari: return "UnicodeScriptNandinagari"
+		case UnicodeScriptCuneiform: return "UnicodeScriptCuneiform"
+		case UnicodeScriptEgyptianHieroglyphs: return "UnicodeScriptEgyptianHieroglyphs"
+		case UnicodeScriptTaiTham: return "UnicodeScriptTaiTham"
+		case UnicodeScriptChakma: return "UnicodeScriptChakma"
+		case UnicodeScriptKhudawadi: return "UnicodeScriptKhudawadi"
+		case UnicodeScriptMro: return "UnicodeScriptMro"
+		default: return fmt.Sprintf("UnicodeScript(%d)", e)
+	}
+}
+
 // UnicodeType wraps GUnicodeType
 //
 // These are the possible character classifications from the
@@ -2621,6 +3190,42 @@ const (
 )
 
 
+func (e UnicodeType) String() string {
+	switch e {
+		case UnicodeControl: return "UnicodeControl"
+		case UnicodeLowercaseLetter: return "UnicodeLowercaseLetter"
+		case UnicodeUppercaseLetter: return "UnicodeUppercaseLetter"
+		case UnicodeClosePunctuation: return "UnicodeClosePunctuation"
+		case UnicodeTitlecaseLetter: return "UnicodeTitlecaseLetter"
+		case UnicodeInitialPunctuation: return "UnicodeInitialPunctuation"
+		case UnicodeCurrencySymbol: return "UnicodeCurrencySymbol"
+		case UnicodeSurrogate: return "UnicodeSurrogate"
+		case UnicodeMathSymbol: return "UnicodeMathSymbol"
+		case UnicodeLineSeparator: return "UnicodeLineSeparator"
+		case UnicodeFormat: return "UnicodeFormat"
+		case UnicodeSpacingMark: return "UnicodeSpacingMark"
+		case UnicodeModifierLetter: return "UnicodeModifierLetter"
+		case UnicodeLetterNumber: return "UnicodeLetterNumber"
+		case UnicodeOtherNumber: return "UnicodeOtherNumber"
+		case UnicodeOtherSymbol: return "UnicodeOtherSymbol"
+		case UnicodeOtherLetter: return "UnicodeOtherLetter"
+		case UnicodeNonSpacingMark: return "UnicodeNonSpacingMark"
+		case UnicodeModifierSymbol: return "UnicodeModifierSymbol"
+		case UnicodeUnassigned: return "UnicodeUnassigned"
+		case UnicodePrivateUse: return "UnicodePrivateUse"
+		case UnicodeDecimalNumber: return "UnicodeDecimalNumber"
+		case UnicodeEnclosingMark: return "UnicodeEnclosingMark"
+		case UnicodeConnectPunctuation: return "UnicodeConnectPunctuation"
+		case UnicodeDashPunctuation: return "UnicodeDashPunctuation"
+		case UnicodeFinalPunctuation: return "UnicodeFinalPunctuation"
+		case UnicodeOtherPunctuation: return "UnicodeOtherPunctuation"
+		case UnicodeOpenPunctuation: return "UnicodeOpenPunctuation"
+		case UnicodeParagraphSeparator: return "UnicodeParagraphSeparator"
+		case UnicodeSpaceSeparator: return "UnicodeSpaceSeparator"
+		default: return fmt.Sprintf("UnicodeType(%d)", e)
+	}
+}
+
 // URIError wraps GUriError
 //
 // Error codes returned by #GUri methods.
@@ -2670,6 +3275,22 @@ const (
 	URIErrorBadFragment URIError = 9
 )
 
+
+func (e URIError) String() string {
+	switch e {
+		case URIErrorBadAuthParams: return "URIErrorBadAuthParams"
+		case URIErrorBadHost: return "URIErrorBadHost"
+		case URIErrorBadPort: return "URIErrorBadPort"
+		case URIErrorBadPath: return "URIErrorBadPath"
+		case URIErrorBadQuery: return "URIErrorBadQuery"
+		case URIErrorFailed: return "URIErrorFailed"
+		case URIErrorBadScheme: return "URIErrorBadScheme"
+		case URIErrorBadPassword: return "URIErrorBadPassword"
+		case URIErrorBadFragment: return "URIErrorBadFragment"
+		case URIErrorBadUser: return "URIErrorBadUser"
+		default: return fmt.Sprintf("URIError(%d)", e)
+	}
+}
 
 // UserDirectory wraps GUserDirectory
 //
@@ -2721,6 +3342,21 @@ const (
 	UserNDirectories UserDirectory = 8
 )
 
+
+func (e UserDirectory) String() string {
+	switch e {
+		case UserNDirectories: return "UserNDirectories"
+		case UserDirectoryDocuments: return "UserDirectoryDocuments"
+		case UserDirectoryMusic: return "UserDirectoryMusic"
+		case UserDirectoryTemplates: return "UserDirectoryTemplates"
+		case UserDirectoryDesktop: return "UserDirectoryDesktop"
+		case UserDirectoryDownload: return "UserDirectoryDownload"
+		case UserDirectoryPictures: return "UserDirectoryPictures"
+		case UserDirectoryPublicShare: return "UserDirectoryPublicShare"
+		case UserDirectoryVideos: return "UserDirectoryVideos"
+		default: return fmt.Sprintf("UserDirectory(%d)", e)
+	}
+}
 
 // VariantClass wraps GVariantClass
 //
@@ -2804,6 +3440,30 @@ const (
 	VariantClassDictEntry VariantClass = 123
 )
 
+
+func (e VariantClass) String() string {
+	switch e {
+		case VariantClassDouble: return "VariantClassDouble"
+		case VariantClassString: return "VariantClassString"
+		case VariantClassInt16: return "VariantClassInt16"
+		case VariantClassHandle: return "VariantClassHandle"
+		case VariantClassBoolean: return "VariantClassBoolean"
+		case VariantClassByte: return "VariantClassByte"
+		case VariantClassInt32: return "VariantClassInt32"
+		case VariantClassUint32: return "VariantClassUint32"
+		case VariantClassUint64: return "VariantClassUint64"
+		case VariantClassObjectPath: return "VariantClassObjectPath"
+		case VariantClassMaybe: return "VariantClassMaybe"
+		case VariantClassUint16: return "VariantClassUint16"
+		case VariantClassInt64: return "VariantClassInt64"
+		case VariantClassSignature: return "VariantClassSignature"
+		case VariantClassVariant: return "VariantClassVariant"
+		case VariantClassArray: return "VariantClassArray"
+		case VariantClassTuple: return "VariantClassTuple"
+		case VariantClassDictEntry: return "VariantClassDictEntry"
+		default: return fmt.Sprintf("VariantClass(%d)", e)
+	}
+}
 
 // VariantParseError wraps GVariantParseError
 //
@@ -2890,6 +3550,31 @@ const (
 )
 
 
+func (e VariantParseError) String() string {
+	switch e {
+		case VariantParseErrorInputNotAtEnd: return "VariantParseErrorInputNotAtEnd"
+		case VariantParseErrorInvalidCharacter: return "VariantParseErrorInvalidCharacter"
+		case VariantParseErrorInvalidFormatString: return "VariantParseErrorInvalidFormatString"
+		case VariantParseErrorInvalidTypeString: return "VariantParseErrorInvalidTypeString"
+		case VariantParseErrorNoCommonType: return "VariantParseErrorNoCommonType"
+		case VariantParseErrorNumberTooBig: return "VariantParseErrorNumberTooBig"
+		case VariantParseErrorUnexpectedToken: return "VariantParseErrorUnexpectedToken"
+		case VariantParseErrorValueExpected: return "VariantParseErrorValueExpected"
+		case VariantParseErrorDefiniteTypeExpected: return "VariantParseErrorDefiniteTypeExpected"
+		case VariantParseErrorInvalidObjectPath: return "VariantParseErrorInvalidObjectPath"
+		case VariantParseErrorUnknownKeyword: return "VariantParseErrorUnknownKeyword"
+		case VariantParseErrorRecursion: return "VariantParseErrorRecursion"
+		case VariantParseErrorFailed: return "VariantParseErrorFailed"
+		case VariantParseErrorCannotInferType: return "VariantParseErrorCannotInferType"
+		case VariantParseErrorNumberOutOfRange: return "VariantParseErrorNumberOutOfRange"
+		case VariantParseErrorTypeError: return "VariantParseErrorTypeError"
+		case VariantParseErrorUnterminatedStringConstant: return "VariantParseErrorUnterminatedStringConstant"
+		case VariantParseErrorBasicTypeExpected: return "VariantParseErrorBasicTypeExpected"
+		case VariantParseErrorInvalidSignature: return "VariantParseErrorInvalidSignature"
+		default: return fmt.Sprintf("VariantParseError(%d)", e)
+	}
+}
+
 // FileSetContentsFlags wraps GFileSetContentsFlags
 //
 // Flags to pass to g_file_set_contents_full() to affect its safety and
@@ -2932,6 +3617,27 @@ func (f FileSetContentsFlags) Has(other FileSetContentsFlags) bool {
 	return (f & other) == other
 }
 
+func (f FileSetContentsFlags) String() string {
+	if f == 0 {
+		return "FileSetContentsFlags(0)"
+	}
+
+	var parts []string
+	if (f & FileSetContentsNone) != 0 {
+		parts = append(parts, "FileSetContentsNone")
+	}
+	if (f & FileSetContentsConsistent) != 0 {
+		parts = append(parts, "FileSetContentsConsistent")
+	}
+	if (f & FileSetContentsDurable) != 0 {
+		parts = append(parts, "FileSetContentsDurable")
+	}
+	if (f & FileSetContentsOnlyExisting) != 0 {
+		parts = append(parts, "FileSetContentsOnlyExisting")
+	}
+	return "FileSetContentsFlags(" + strings.Join(parts, "|") + ")"
+}
+
 // FileTest wraps GFileTest
 //
 // A test to perform on a file using g_file_test().
@@ -2966,6 +3672,30 @@ const (
 // Has returns true if f contains other
 func (f FileTest) Has(other FileTest) bool {
 	return (f & other) == other
+}
+
+func (f FileTest) String() string {
+	if f == 0 {
+		return "FileTest(0)"
+	}
+
+	var parts []string
+	if (f & FileTestIsRegular) != 0 {
+		parts = append(parts, "FileTestIsRegular")
+	}
+	if (f & FileTestIsSymlink) != 0 {
+		parts = append(parts, "FileTestIsSymlink")
+	}
+	if (f & FileTestIsDir) != 0 {
+		parts = append(parts, "FileTestIsDir")
+	}
+	if (f & FileTestIsExecutable) != 0 {
+		parts = append(parts, "FileTestIsExecutable")
+	}
+	if (f & FileTestExists) != 0 {
+		parts = append(parts, "FileTestExists")
+	}
+	return "FileTest(" + strings.Join(parts, "|") + ")"
 }
 
 // FormatSizeFlags wraps GFormatSizeFlags
@@ -3014,6 +3744,33 @@ func (f FormatSizeFlags) Has(other FormatSizeFlags) bool {
 	return (f & other) == other
 }
 
+func (f FormatSizeFlags) String() string {
+	if f == 0 {
+		return "FormatSizeFlags(0)"
+	}
+
+	var parts []string
+	if (f & FormatSizeDefault) != 0 {
+		parts = append(parts, "FormatSizeDefault")
+	}
+	if (f & FormatSizeLongFormat) != 0 {
+		parts = append(parts, "FormatSizeLongFormat")
+	}
+	if (f & FormatSizeIecUnits) != 0 {
+		parts = append(parts, "FormatSizeIecUnits")
+	}
+	if (f & FormatSizeBits) != 0 {
+		parts = append(parts, "FormatSizeBits")
+	}
+	if (f & FormatSizeOnlyValue) != 0 {
+		parts = append(parts, "FormatSizeOnlyValue")
+	}
+	if (f & FormatSizeOnlyUnit) != 0 {
+		parts = append(parts, "FormatSizeOnlyUnit")
+	}
+	return "FormatSizeFlags(" + strings.Join(parts, "|") + ")"
+}
+
 // IOCondition wraps GIOCondition
 //
 // A bitwise combination representing a condition to watch for on an
@@ -3051,6 +3808,33 @@ const (
 // Has returns true if i contains other
 func (i IOCondition) Has(other IOCondition) bool {
 	return (i & other) == other
+}
+
+func (f IOCondition) String() string {
+	if f == 0 {
+		return "IOCondition(0)"
+	}
+
+	var parts []string
+	if (f & IOIn) != 0 {
+		parts = append(parts, "IOIn")
+	}
+	if (f & IOOut) != 0 {
+		parts = append(parts, "IOOut")
+	}
+	if (f & IOPri) != 0 {
+		parts = append(parts, "IOPri")
+	}
+	if (f & IOErr) != 0 {
+		parts = append(parts, "IOErr")
+	}
+	if (f & IOHup) != 0 {
+		parts = append(parts, "IOHup")
+	}
+	if (f & IONval) != 0 {
+		parts = append(parts, "IONval")
+	}
+	return "IOCondition(" + strings.Join(parts, "|") + ")"
 }
 
 // IOFlags wraps GIOFlags
@@ -3119,6 +3903,45 @@ func (i IOFlags) Has(other IOFlags) bool {
 	return (i & other) == other
 }
 
+func (f IOFlags) String() string {
+	if f == 0 {
+		return "IOFlags(0)"
+	}
+
+	var parts []string
+	if (f & IOFlagNone) != 0 {
+		parts = append(parts, "IOFlagNone")
+	}
+	if (f & IOFlagAppend) != 0 {
+		parts = append(parts, "IOFlagAppend")
+	}
+	if (f & IOFlagNonblock) != 0 {
+		parts = append(parts, "IOFlagNonblock")
+	}
+	if (f & IOFlagIsReadable) != 0 {
+		parts = append(parts, "IOFlagIsReadable")
+	}
+	if (f & IOFlagIsWritable) != 0 {
+		parts = append(parts, "IOFlagIsWritable")
+	}
+	if (f & IOFlagIsWriteable) != 0 {
+		parts = append(parts, "IOFlagIsWriteable")
+	}
+	if (f & IOFlagIsSeekable) != 0 {
+		parts = append(parts, "IOFlagIsSeekable")
+	}
+	if (f & IOFlagMask) != 0 {
+		parts = append(parts, "IOFlagMask")
+	}
+	if (f & IOFlagGetMask) != 0 {
+		parts = append(parts, "IOFlagGetMask")
+	}
+	if (f & IOFlagSetMask) != 0 {
+		parts = append(parts, "IOFlagSetMask")
+	}
+	return "IOFlags(" + strings.Join(parts, "|") + ")"
+}
+
 // KeyFileFlags wraps GKeyFileFlags
 //
 // Flags which influence the parsing.
@@ -3148,6 +3971,24 @@ const (
 // Has returns true if k contains other
 func (k KeyFileFlags) Has(other KeyFileFlags) bool {
 	return (k & other) == other
+}
+
+func (f KeyFileFlags) String() string {
+	if f == 0 {
+		return "KeyFileFlags(0)"
+	}
+
+	var parts []string
+	if (f & KeyFileNone) != 0 {
+		parts = append(parts, "KeyFileNone")
+	}
+	if (f & KeyFileKeepComments) != 0 {
+		parts = append(parts, "KeyFileKeepComments")
+	}
+	if (f & KeyFileKeepTranslations) != 0 {
+		parts = append(parts, "KeyFileKeepTranslations")
+	}
+	return "KeyFileFlags(" + strings.Join(parts, "|") + ")"
 }
 
 // LogLevelFlags wraps GLogLevelFlags
@@ -3205,6 +4046,42 @@ func (l LogLevelFlags) Has(other LogLevelFlags) bool {
 	return (l & other) == other
 }
 
+func (f LogLevelFlags) String() string {
+	if f == 0 {
+		return "LogLevelFlags(0)"
+	}
+
+	var parts []string
+	if (f & LogFlagRecursion) != 0 {
+		parts = append(parts, "LogFlagRecursion")
+	}
+	if (f & LogFlagFatal) != 0 {
+		parts = append(parts, "LogFlagFatal")
+	}
+	if (f & LogLevelError) != 0 {
+		parts = append(parts, "LogLevelError")
+	}
+	if (f & LogLevelCritical) != 0 {
+		parts = append(parts, "LogLevelCritical")
+	}
+	if (f & LogLevelWarning) != 0 {
+		parts = append(parts, "LogLevelWarning")
+	}
+	if (f & LogLevelMessage) != 0 {
+		parts = append(parts, "LogLevelMessage")
+	}
+	if (f & LogLevelInfo) != 0 {
+		parts = append(parts, "LogLevelInfo")
+	}
+	if (f & LogLevelDebug) != 0 {
+		parts = append(parts, "LogLevelDebug")
+	}
+	if (f & LogLevelMask) != 0 {
+		parts = append(parts, "LogLevelMask")
+	}
+	return "LogLevelFlags(" + strings.Join(parts, "|") + ")"
+}
+
 // MainContextFlags wraps GMainContextFlags
 //
 // Flags to pass to [ctor@GLib.MainContext.new_with_flags] which affect the
@@ -3228,6 +4105,21 @@ const (
 // Has returns true if m contains other
 func (m MainContextFlags) Has(other MainContextFlags) bool {
 	return (m & other) == other
+}
+
+func (f MainContextFlags) String() string {
+	if f == 0 {
+		return "MainContextFlags(0)"
+	}
+
+	var parts []string
+	if (f & MainContextFlagsNone) != 0 {
+		parts = append(parts, "MainContextFlagsNone")
+	}
+	if (f & MainContextFlagsOwnerlessPolling) != 0 {
+		parts = append(parts, "MainContextFlagsOwnerlessPolling")
+	}
+	return "MainContextFlags(" + strings.Join(parts, "|") + ")"
 }
 
 // MarkupCollectType wraps GMarkupCollectType
@@ -3287,6 +4179,33 @@ func (m MarkupCollectType) Has(other MarkupCollectType) bool {
 	return (m & other) == other
 }
 
+func (f MarkupCollectType) String() string {
+	if f == 0 {
+		return "MarkupCollectType(0)"
+	}
+
+	var parts []string
+	if (f & MarkupCollectInvalid) != 0 {
+		parts = append(parts, "MarkupCollectInvalid")
+	}
+	if (f & MarkupCollectString) != 0 {
+		parts = append(parts, "MarkupCollectString")
+	}
+	if (f & MarkupCollectStrdup) != 0 {
+		parts = append(parts, "MarkupCollectStrdup")
+	}
+	if (f & MarkupCollectBoolean) != 0 {
+		parts = append(parts, "MarkupCollectBoolean")
+	}
+	if (f & MarkupCollectTristate) != 0 {
+		parts = append(parts, "MarkupCollectTristate")
+	}
+	if (f & MarkupCollectOptional) != 0 {
+		parts = append(parts, "MarkupCollectOptional")
+	}
+	return "MarkupCollectType(" + strings.Join(parts, "|") + ")"
+}
+
 // MarkupParseFlags wraps GMarkupParseFlags
 //
 // Flags that affect the behaviour of the parser.
@@ -3329,6 +4248,30 @@ const (
 // Has returns true if m contains other
 func (m MarkupParseFlags) Has(other MarkupParseFlags) bool {
 	return (m & other) == other
+}
+
+func (f MarkupParseFlags) String() string {
+	if f == 0 {
+		return "MarkupParseFlags(0)"
+	}
+
+	var parts []string
+	if (f & MarkupDefaultFlags) != 0 {
+		parts = append(parts, "MarkupDefaultFlags")
+	}
+	if (f & MarkupDoNotUseThisUnsupportedFlag) != 0 {
+		parts = append(parts, "MarkupDoNotUseThisUnsupportedFlag")
+	}
+	if (f & MarkupTreatCdataAsText) != 0 {
+		parts = append(parts, "MarkupTreatCdataAsText")
+	}
+	if (f & MarkupPrefixErrorPosition) != 0 {
+		parts = append(parts, "MarkupPrefixErrorPosition")
+	}
+	if (f & MarkupIgnoreQualified) != 0 {
+		parts = append(parts, "MarkupIgnoreQualified")
+	}
+	return "MarkupParseFlags(" + strings.Join(parts, "|") + ")"
 }
 
 // OptionFlags wraps GOptionFlags
@@ -3389,6 +4332,39 @@ const (
 // Has returns true if o contains other
 func (o OptionFlags) Has(other OptionFlags) bool {
 	return (o & other) == other
+}
+
+func (f OptionFlags) String() string {
+	if f == 0 {
+		return "OptionFlags(0)"
+	}
+
+	var parts []string
+	if (f & OptionFlagNone) != 0 {
+		parts = append(parts, "OptionFlagNone")
+	}
+	if (f & OptionFlagHidden) != 0 {
+		parts = append(parts, "OptionFlagHidden")
+	}
+	if (f & OptionFlagInMain) != 0 {
+		parts = append(parts, "OptionFlagInMain")
+	}
+	if (f & OptionFlagReverse) != 0 {
+		parts = append(parts, "OptionFlagReverse")
+	}
+	if (f & OptionFlagNoArg) != 0 {
+		parts = append(parts, "OptionFlagNoArg")
+	}
+	if (f & OptionFlagFilename) != 0 {
+		parts = append(parts, "OptionFlagFilename")
+	}
+	if (f & OptionFlagOptionalArg) != 0 {
+		parts = append(parts, "OptionFlagOptionalArg")
+	}
+	if (f & OptionFlagNoalias) != 0 {
+		parts = append(parts, "OptionFlagNoalias")
+	}
+	return "OptionFlags(" + strings.Join(parts, "|") + ")"
 }
 
 // RegexCompileFlags wraps GRegexCompileFlags
@@ -3536,6 +4512,72 @@ func (r RegexCompileFlags) Has(other RegexCompileFlags) bool {
 	return (r & other) == other
 }
 
+func (f RegexCompileFlags) String() string {
+	if f == 0 {
+		return "RegexCompileFlags(0)"
+	}
+
+	var parts []string
+	if (f & RegexDefault) != 0 {
+		parts = append(parts, "RegexDefault")
+	}
+	if (f & RegexCaseless) != 0 {
+		parts = append(parts, "RegexCaseless")
+	}
+	if (f & RegexMultiline) != 0 {
+		parts = append(parts, "RegexMultiline")
+	}
+	if (f & RegexDotall) != 0 {
+		parts = append(parts, "RegexDotall")
+	}
+	if (f & RegexExtended) != 0 {
+		parts = append(parts, "RegexExtended")
+	}
+	if (f & RegexAnchored) != 0 {
+		parts = append(parts, "RegexAnchored")
+	}
+	if (f & RegexDollarEndonly) != 0 {
+		parts = append(parts, "RegexDollarEndonly")
+	}
+	if (f & RegexUngreedy) != 0 {
+		parts = append(parts, "RegexUngreedy")
+	}
+	if (f & RegexRaw) != 0 {
+		parts = append(parts, "RegexRaw")
+	}
+	if (f & RegexNoAutoCapture) != 0 {
+		parts = append(parts, "RegexNoAutoCapture")
+	}
+	if (f & RegexOptimize) != 0 {
+		parts = append(parts, "RegexOptimize")
+	}
+	if (f & RegexFirstline) != 0 {
+		parts = append(parts, "RegexFirstline")
+	}
+	if (f & RegexDupnames) != 0 {
+		parts = append(parts, "RegexDupnames")
+	}
+	if (f & RegexNewlineCr) != 0 {
+		parts = append(parts, "RegexNewlineCr")
+	}
+	if (f & RegexNewlineLf) != 0 {
+		parts = append(parts, "RegexNewlineLf")
+	}
+	if (f & RegexNewlineCrlf) != 0 {
+		parts = append(parts, "RegexNewlineCrlf")
+	}
+	if (f & RegexNewlineAnycrlf) != 0 {
+		parts = append(parts, "RegexNewlineAnycrlf")
+	}
+	if (f & RegexBsrAnycrlf) != 0 {
+		parts = append(parts, "RegexBsrAnycrlf")
+	}
+	if (f & RegexJavascriptCompat) != 0 {
+		parts = append(parts, "RegexJavascriptCompat")
+	}
+	return "RegexCompileFlags(" + strings.Join(parts, "|") + ")"
+}
+
 // RegexMatchFlags wraps GRegexMatchFlags
 //
 // Flags specifying match-time options.
@@ -3657,6 +4699,63 @@ func (r RegexMatchFlags) Has(other RegexMatchFlags) bool {
 	return (r & other) == other
 }
 
+func (f RegexMatchFlags) String() string {
+	if f == 0 {
+		return "RegexMatchFlags(0)"
+	}
+
+	var parts []string
+	if (f & RegexMatchDefault) != 0 {
+		parts = append(parts, "RegexMatchDefault")
+	}
+	if (f & RegexMatchAnchored) != 0 {
+		parts = append(parts, "RegexMatchAnchored")
+	}
+	if (f & RegexMatchNotbol) != 0 {
+		parts = append(parts, "RegexMatchNotbol")
+	}
+	if (f & RegexMatchNoteol) != 0 {
+		parts = append(parts, "RegexMatchNoteol")
+	}
+	if (f & RegexMatchNotempty) != 0 {
+		parts = append(parts, "RegexMatchNotempty")
+	}
+	if (f & RegexMatchPartial) != 0 {
+		parts = append(parts, "RegexMatchPartial")
+	}
+	if (f & RegexMatchNewlineCr) != 0 {
+		parts = append(parts, "RegexMatchNewlineCr")
+	}
+	if (f & RegexMatchNewlineLf) != 0 {
+		parts = append(parts, "RegexMatchNewlineLf")
+	}
+	if (f & RegexMatchNewlineCrlf) != 0 {
+		parts = append(parts, "RegexMatchNewlineCrlf")
+	}
+	if (f & RegexMatchNewlineAny) != 0 {
+		parts = append(parts, "RegexMatchNewlineAny")
+	}
+	if (f & RegexMatchNewlineAnycrlf) != 0 {
+		parts = append(parts, "RegexMatchNewlineAnycrlf")
+	}
+	if (f & RegexMatchBsrAnycrlf) != 0 {
+		parts = append(parts, "RegexMatchBsrAnycrlf")
+	}
+	if (f & RegexMatchBsrAny) != 0 {
+		parts = append(parts, "RegexMatchBsrAny")
+	}
+	if (f & RegexMatchPartialSoft) != 0 {
+		parts = append(parts, "RegexMatchPartialSoft")
+	}
+	if (f & RegexMatchPartialHard) != 0 {
+		parts = append(parts, "RegexMatchPartialHard")
+	}
+	if (f & RegexMatchNotemptyAtstart) != 0 {
+		parts = append(parts, "RegexMatchNotemptyAtstart")
+	}
+	return "RegexMatchFlags(" + strings.Join(parts, "|") + ")"
+}
+
 // SpawnFlags wraps GSpawnFlags
 //
 // Flags passed to g_spawn_sync(), g_spawn_async() and g_spawn_async_with_pipes().
@@ -3735,6 +4834,54 @@ func (s SpawnFlags) Has(other SpawnFlags) bool {
 	return (s & other) == other
 }
 
+func (f SpawnFlags) String() string {
+	if f == 0 {
+		return "SpawnFlags(0)"
+	}
+
+	var parts []string
+	if (f & SpawnDefault) != 0 {
+		parts = append(parts, "SpawnDefault")
+	}
+	if (f & SpawnLeaveDescriptorsOpen) != 0 {
+		parts = append(parts, "SpawnLeaveDescriptorsOpen")
+	}
+	if (f & SpawnDoNotReapChild) != 0 {
+		parts = append(parts, "SpawnDoNotReapChild")
+	}
+	if (f & SpawnSearchPath) != 0 {
+		parts = append(parts, "SpawnSearchPath")
+	}
+	if (f & SpawnStdoutToDevNull) != 0 {
+		parts = append(parts, "SpawnStdoutToDevNull")
+	}
+	if (f & SpawnStderrToDevNull) != 0 {
+		parts = append(parts, "SpawnStderrToDevNull")
+	}
+	if (f & SpawnChildInheritsStdin) != 0 {
+		parts = append(parts, "SpawnChildInheritsStdin")
+	}
+	if (f & SpawnFileAndArgvZero) != 0 {
+		parts = append(parts, "SpawnFileAndArgvZero")
+	}
+	if (f & SpawnSearchPathFromEnvp) != 0 {
+		parts = append(parts, "SpawnSearchPathFromEnvp")
+	}
+	if (f & SpawnCloexecPipes) != 0 {
+		parts = append(parts, "SpawnCloexecPipes")
+	}
+	if (f & SpawnChildInheritsStdout) != 0 {
+		parts = append(parts, "SpawnChildInheritsStdout")
+	}
+	if (f & SpawnChildInheritsStderr) != 0 {
+		parts = append(parts, "SpawnChildInheritsStderr")
+	}
+	if (f & SpawnStdinFromDevNull) != 0 {
+		parts = append(parts, "SpawnStdinFromDevNull")
+	}
+	return "SpawnFlags(" + strings.Join(parts, "|") + ")"
+}
+
 // TraverseFlags wraps GTraverseFlags
 //
 // Specifies which nodes are visited during several of the tree
@@ -3775,6 +4922,33 @@ const (
 // Has returns true if t contains other
 func (t TraverseFlags) Has(other TraverseFlags) bool {
 	return (t & other) == other
+}
+
+func (f TraverseFlags) String() string {
+	if f == 0 {
+		return "TraverseFlags(0)"
+	}
+
+	var parts []string
+	if (f & TraverseLeaves) != 0 {
+		parts = append(parts, "TraverseLeaves")
+	}
+	if (f & TraverseNonLeaves) != 0 {
+		parts = append(parts, "TraverseNonLeaves")
+	}
+	if (f & TraverseAll) != 0 {
+		parts = append(parts, "TraverseAll")
+	}
+	if (f & TraverseMask) != 0 {
+		parts = append(parts, "TraverseMask")
+	}
+	if (f & TraverseLeafs) != 0 {
+		parts = append(parts, "TraverseLeafs")
+	}
+	if (f & TraverseNonLeafs) != 0 {
+		parts = append(parts, "TraverseNonLeafs")
+	}
+	return "TraverseFlags(" + strings.Join(parts, "|") + ")"
 }
 
 // URIFlags wraps GUriFlags
@@ -3854,6 +5028,45 @@ func (u URIFlags) Has(other URIFlags) bool {
 	return (u & other) == other
 }
 
+func (f URIFlags) String() string {
+	if f == 0 {
+		return "URIFlags(0)"
+	}
+
+	var parts []string
+	if (f & URIFlagsNone) != 0 {
+		parts = append(parts, "URIFlagsNone")
+	}
+	if (f & URIFlagsParseRelaxed) != 0 {
+		parts = append(parts, "URIFlagsParseRelaxed")
+	}
+	if (f & URIFlagsHasPassword) != 0 {
+		parts = append(parts, "URIFlagsHasPassword")
+	}
+	if (f & URIFlagsHasAuthParams) != 0 {
+		parts = append(parts, "URIFlagsHasAuthParams")
+	}
+	if (f & URIFlagsEncoded) != 0 {
+		parts = append(parts, "URIFlagsEncoded")
+	}
+	if (f & URIFlagsNonDns) != 0 {
+		parts = append(parts, "URIFlagsNonDns")
+	}
+	if (f & URIFlagsEncodedQuery) != 0 {
+		parts = append(parts, "URIFlagsEncodedQuery")
+	}
+	if (f & URIFlagsEncodedPath) != 0 {
+		parts = append(parts, "URIFlagsEncodedPath")
+	}
+	if (f & URIFlagsEncodedFragment) != 0 {
+		parts = append(parts, "URIFlagsEncodedFragment")
+	}
+	if (f & URIFlagsSchemeNormalize) != 0 {
+		parts = append(parts, "URIFlagsSchemeNormalize")
+	}
+	return "URIFlags(" + strings.Join(parts, "|") + ")"
+}
+
 // URIHideFlags wraps GUriHideFlags
 //
 // Flags describing what parts of the URI to hide in
@@ -3894,6 +5107,33 @@ func (u URIHideFlags) Has(other URIHideFlags) bool {
 	return (u & other) == other
 }
 
+func (f URIHideFlags) String() string {
+	if f == 0 {
+		return "URIHideFlags(0)"
+	}
+
+	var parts []string
+	if (f & URIHideNone) != 0 {
+		parts = append(parts, "URIHideNone")
+	}
+	if (f & URIHideUserinfo) != 0 {
+		parts = append(parts, "URIHideUserinfo")
+	}
+	if (f & URIHidePassword) != 0 {
+		parts = append(parts, "URIHidePassword")
+	}
+	if (f & URIHideAuthParams) != 0 {
+		parts = append(parts, "URIHideAuthParams")
+	}
+	if (f & URIHideQuery) != 0 {
+		parts = append(parts, "URIHideQuery")
+	}
+	if (f & URIHideFragment) != 0 {
+		parts = append(parts, "URIHideFragment")
+	}
+	return "URIHideFlags(" + strings.Join(parts, "|") + ")"
+}
+
 // URIParamsFlags wraps GUriParamsFlags
 //
 // Flags modifying the way parameters are handled by g_uri_parse_params() and
@@ -3923,6 +5163,27 @@ const (
 // Has returns true if u contains other
 func (u URIParamsFlags) Has(other URIParamsFlags) bool {
 	return (u & other) == other
+}
+
+func (f URIParamsFlags) String() string {
+	if f == 0 {
+		return "URIParamsFlags(0)"
+	}
+
+	var parts []string
+	if (f & URIParamsNone) != 0 {
+		parts = append(parts, "URIParamsNone")
+	}
+	if (f & URIParamsCaseInsensitive) != 0 {
+		parts = append(parts, "URIParamsCaseInsensitive")
+	}
+	if (f & URIParamsWwwForm) != 0 {
+		parts = append(parts, "URIParamsWwwForm")
+	}
+	if (f & URIParamsParseRelaxed) != 0 {
+		parts = append(parts, "URIParamsParseRelaxed")
+	}
+	return "URIParamsFlags(" + strings.Join(parts, "|") + ")"
 }
 
 // CompareDataFunc wraps GCompareDataFunc

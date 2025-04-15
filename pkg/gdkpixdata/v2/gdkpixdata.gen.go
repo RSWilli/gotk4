@@ -4,6 +4,7 @@ package gdkpixdata
 
 import (
 	"runtime"
+	"strings"
 	"unsafe"
 
 	"github.com/diamondburned/gotk4/pkg/gdkpixbuf/v2"
@@ -88,6 +89,39 @@ func (p PixdataDumpType) Has(other PixdataDumpType) bool {
 	return (p & other) == other
 }
 
+func (f PixdataDumpType) String() string {
+	if f == 0 {
+		return "PixdataDumpType(0)"
+	}
+
+	var parts []string
+	if (f & PixdataDumpPixdataStream) != 0 {
+		parts = append(parts, "PixdataDumpPixdataStream")
+	}
+	if (f & PixdataDumpPixdataStruct) != 0 {
+		parts = append(parts, "PixdataDumpPixdataStruct")
+	}
+	if (f & PixdataDumpMacros) != 0 {
+		parts = append(parts, "PixdataDumpMacros")
+	}
+	if (f & PixdataDumpGTypes) != 0 {
+		parts = append(parts, "PixdataDumpGTypes")
+	}
+	if (f & PixdataDumpCtypes) != 0 {
+		parts = append(parts, "PixdataDumpCtypes")
+	}
+	if (f & PixdataDumpStatic) != 0 {
+		parts = append(parts, "PixdataDumpStatic")
+	}
+	if (f & PixdataDumpConst) != 0 {
+		parts = append(parts, "PixdataDumpConst")
+	}
+	if (f & PixdataDumpRLEDecoder) != 0 {
+		parts = append(parts, "PixdataDumpRLEDecoder")
+	}
+	return "PixdataDumpType(" + strings.Join(parts, "|") + ")"
+}
+
 // PixdataType wraps GdkPixdataType
 //
 // An enumeration containing three sets of flags for a #GdkPixdata struct:
@@ -140,6 +174,39 @@ const (
 // Has returns true if p contains other
 func (p PixdataType) Has(other PixdataType) bool {
 	return (p & other) == other
+}
+
+func (f PixdataType) String() string {
+	if f == 0 {
+		return "PixdataType(0)"
+	}
+
+	var parts []string
+	if (f & PixdataColorTypeRGB) != 0 {
+		parts = append(parts, "PixdataColorTypeRGB")
+	}
+	if (f & PixdataColorTypeRGBA) != 0 {
+		parts = append(parts, "PixdataColorTypeRGBA")
+	}
+	if (f & PixdataColorTypeMask) != 0 {
+		parts = append(parts, "PixdataColorTypeMask")
+	}
+	if (f & PixdataSampleWidth8) != 0 {
+		parts = append(parts, "PixdataSampleWidth8")
+	}
+	if (f & PixdataSampleWidthMask) != 0 {
+		parts = append(parts, "PixdataSampleWidthMask")
+	}
+	if (f & PixdataEncodingRaw) != 0 {
+		parts = append(parts, "PixdataEncodingRaw")
+	}
+	if (f & PixdataEncodingRLE) != 0 {
+		parts = append(parts, "PixdataEncodingRLE")
+	}
+	if (f & PixdataEncodingMask) != 0 {
+		parts = append(parts, "PixdataEncodingMask")
+	}
+	return "PixdataType(" + strings.Join(parts, "|") + ")"
 }
 
 // PixbufFromPixdata wraps gdk_pixbuf_from_pixdata

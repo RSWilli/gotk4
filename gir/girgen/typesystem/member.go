@@ -95,3 +95,23 @@ func valueToInt32(value string) string {
 
 	return fmt.Sprintf("%d", int32(v))
 }
+
+type Members []*Member
+
+func (m Members) Uniques() []*Member {
+	unique := make(map[string]*Member)
+
+	for _, mem := range m {
+		if _, ok := unique[mem.Value]; !ok {
+			unique[mem.Value] = mem
+		}
+	}
+
+	var uniques []*Member
+
+	for _, mem := range unique {
+		uniques = append(uniques, mem)
+	}
+
+	return uniques
+}

@@ -4,6 +4,7 @@ package gobject
 
 import (
 	"runtime"
+	"strings"
 	"unsafe"
 
 	"github.com/diamondburned/gotk4/pkg/glib/v2"
@@ -166,6 +167,27 @@ func (f BindingFlags) InitGoValue(v *Value) {
 	v.SetFlags(int(f))
 }
 
+func (f BindingFlags) String() string {
+	if f == 0 {
+		return "BindingFlags(0)"
+	}
+
+	var parts []string
+	if (f & BindingDefault) != 0 {
+		parts = append(parts, "BindingDefault")
+	}
+	if (f & BindingBidirectional) != 0 {
+		parts = append(parts, "BindingBidirectional")
+	}
+	if (f & BindingSyncCreate) != 0 {
+		parts = append(parts, "BindingSyncCreate")
+	}
+	if (f & BindingInvertBoolean) != 0 {
+		parts = append(parts, "BindingInvertBoolean")
+	}
+	return "BindingFlags(" + strings.Join(parts, "|") + ")"
+}
+
 // ConnectFlags wraps GConnectFlags
 //
 // The connection flags are used to specify the behaviour of a signal's
@@ -193,6 +215,24 @@ const (
 // Has returns true if c contains other
 func (c ConnectFlags) Has(other ConnectFlags) bool {
 	return (c & other) == other
+}
+
+func (f ConnectFlags) String() string {
+	if f == 0 {
+		return "ConnectFlags(0)"
+	}
+
+	var parts []string
+	if (f & ConnectDefault) != 0 {
+		parts = append(parts, "ConnectDefault")
+	}
+	if (f & ConnectAfter) != 0 {
+		parts = append(parts, "ConnectAfter")
+	}
+	if (f & ConnectSwapped) != 0 {
+		parts = append(parts, "ConnectSwapped")
+	}
+	return "ConnectFlags(" + strings.Join(parts, "|") + ")"
 }
 
 // IOCondition wraps GIOCondition
@@ -226,6 +266,33 @@ var _ GoValueInitializer = IOCondition(0)
 func (f IOCondition) InitGoValue(v *Value) {
 	v.Init(TypeIOCondition)
 	v.SetFlags(int(f))
+}
+
+func (f IOCondition) String() string {
+	if f == 0 {
+		return "IOCondition(0)"
+	}
+
+	var parts []string
+	if (f & IOIn) != 0 {
+		parts = append(parts, "IOIn")
+	}
+	if (f & IOOut) != 0 {
+		parts = append(parts, "IOOut")
+	}
+	if (f & IOPri) != 0 {
+		parts = append(parts, "IOPri")
+	}
+	if (f & IOErr) != 0 {
+		parts = append(parts, "IOErr")
+	}
+	if (f & IOHup) != 0 {
+		parts = append(parts, "IOHup")
+	}
+	if (f & IONval) != 0 {
+		parts = append(parts, "IONval")
+	}
+	return "IOCondition(" + strings.Join(parts, "|") + ")"
 }
 
 // SignalFlags wraps GSignalFlags
@@ -294,6 +361,45 @@ func (s SignalFlags) Has(other SignalFlags) bool {
 	return (s & other) == other
 }
 
+func (f SignalFlags) String() string {
+	if f == 0 {
+		return "SignalFlags(0)"
+	}
+
+	var parts []string
+	if (f & SignalRunFirst) != 0 {
+		parts = append(parts, "SignalRunFirst")
+	}
+	if (f & SignalRunLast) != 0 {
+		parts = append(parts, "SignalRunLast")
+	}
+	if (f & SignalRunCleanup) != 0 {
+		parts = append(parts, "SignalRunCleanup")
+	}
+	if (f & SignalNoRecurse) != 0 {
+		parts = append(parts, "SignalNoRecurse")
+	}
+	if (f & SignalDetailed) != 0 {
+		parts = append(parts, "SignalDetailed")
+	}
+	if (f & SignalAction) != 0 {
+		parts = append(parts, "SignalAction")
+	}
+	if (f & SignalNoHooks) != 0 {
+		parts = append(parts, "SignalNoHooks")
+	}
+	if (f & SignalMustCollect) != 0 {
+		parts = append(parts, "SignalMustCollect")
+	}
+	if (f & SignalDeprecated) != 0 {
+		parts = append(parts, "SignalDeprecated")
+	}
+	if (f & SignalAccumulatorFirstRun) != 0 {
+		parts = append(parts, "SignalAccumulatorFirstRun")
+	}
+	return "SignalFlags(" + strings.Join(parts, "|") + ")"
+}
+
 // SignalMatchType wraps GSignalMatchType
 //
 // The match types specify what g_signal_handlers_block_matched(),
@@ -331,6 +437,33 @@ const (
 // Has returns true if s contains other
 func (s SignalMatchType) Has(other SignalMatchType) bool {
 	return (s & other) == other
+}
+
+func (f SignalMatchType) String() string {
+	if f == 0 {
+		return "SignalMatchType(0)"
+	}
+
+	var parts []string
+	if (f & SignalMatchID) != 0 {
+		parts = append(parts, "SignalMatchID")
+	}
+	if (f & SignalMatchDetail) != 0 {
+		parts = append(parts, "SignalMatchDetail")
+	}
+	if (f & SignalMatchClosure) != 0 {
+		parts = append(parts, "SignalMatchClosure")
+	}
+	if (f & SignalMatchFunc) != 0 {
+		parts = append(parts, "SignalMatchFunc")
+	}
+	if (f & SignalMatchData) != 0 {
+		parts = append(parts, "SignalMatchData")
+	}
+	if (f & SignalMatchUnblocked) != 0 {
+		parts = append(parts, "SignalMatchUnblocked")
+	}
+	return "SignalMatchType(" + strings.Join(parts, "|") + ")"
 }
 
 // TypeFlags wraps GTypeFlags
@@ -372,6 +505,30 @@ func (t TypeFlags) Has(other TypeFlags) bool {
 	return (t & other) == other
 }
 
+func (f TypeFlags) String() string {
+	if f == 0 {
+		return "TypeFlags(0)"
+	}
+
+	var parts []string
+	if (f & TypeFlagNone) != 0 {
+		parts = append(parts, "TypeFlagNone")
+	}
+	if (f & TypeFlagAbstract) != 0 {
+		parts = append(parts, "TypeFlagAbstract")
+	}
+	if (f & TypeFlagValueAbstract) != 0 {
+		parts = append(parts, "TypeFlagValueAbstract")
+	}
+	if (f & TypeFlagFinal) != 0 {
+		parts = append(parts, "TypeFlagFinal")
+	}
+	if (f & TypeFlagDeprecated) != 0 {
+		parts = append(parts, "TypeFlagDeprecated")
+	}
+	return "TypeFlags(" + strings.Join(parts, "|") + ")"
+}
+
 // TypeFundamentalFlags wraps GTypeFundamentalFlags
 //
 // Bit masks used to check or determine specific characteristics of a
@@ -400,6 +557,27 @@ const (
 // Has returns true if t contains other
 func (t TypeFundamentalFlags) Has(other TypeFundamentalFlags) bool {
 	return (t & other) == other
+}
+
+func (f TypeFundamentalFlags) String() string {
+	if f == 0 {
+		return "TypeFundamentalFlags(0)"
+	}
+
+	var parts []string
+	if (f & TypeFlagClassed) != 0 {
+		parts = append(parts, "TypeFlagClassed")
+	}
+	if (f & TypeFlagInstantiatable) != 0 {
+		parts = append(parts, "TypeFlagInstantiatable")
+	}
+	if (f & TypeFlagDerivable) != 0 {
+		parts = append(parts, "TypeFlagDerivable")
+	}
+	if (f & TypeFlagDeepDerivable) != 0 {
+		parts = append(parts, "TypeFlagDeepDerivable")
+	}
+	return "TypeFundamentalFlags(" + strings.Join(parts, "|") + ")"
 }
 
 // BoxedCopy wraps g_boxed_copy

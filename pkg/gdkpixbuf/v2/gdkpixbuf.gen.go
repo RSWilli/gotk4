@@ -4,7 +4,9 @@ package gdkpixbuf
 
 import (
 	"context"
+	"fmt"
 	"runtime"
+	"strings"
 	"unsafe"
 
 	"github.com/diamondburned/gotk4/pkg/core/userdata"
@@ -86,6 +88,13 @@ func (e Colorspace) InitGoValue(v *gobject.Value) {
 	v.SetEnum(int(e))
 }
 
+func (e Colorspace) String() string {
+	switch e {
+		case ColorspaceRGB: return "ColorspaceRGB"
+		default: return fmt.Sprintf("Colorspace(%d)", e)
+	}
+}
+
 // InterpType wraps GdkInterpType
 //
 // Interpolation modes for scaling functions.
@@ -146,6 +155,16 @@ func (e InterpType) InitGoValue(v *gobject.Value) {
 	v.SetEnum(int(e))
 }
 
+func (e InterpType) String() string {
+	switch e {
+		case InterpTiles: return "InterpTiles"
+		case InterpBilinear: return "InterpBilinear"
+		case InterpHyper: return "InterpHyper"
+		case InterpNearest: return "InterpNearest"
+		default: return fmt.Sprintf("InterpType(%d)", e)
+	}
+}
+
 // PixbufAlphaMode wraps GdkPixbufAlphaMode
 //
 // Control the alpha channel for drawables.
@@ -190,6 +209,14 @@ var _ gobject.GoValueInitializer = PixbufAlphaMode(0)
 func (e PixbufAlphaMode) InitGoValue(v *gobject.Value) {
 	v.Init(TypePixbufAlphaMode)
 	v.SetEnum(int(e))
+}
+
+func (e PixbufAlphaMode) String() string {
+	switch e {
+		case PixbufAlphaBilevel: return "PixbufAlphaBilevel"
+		case PixbufAlphaFull: return "PixbufAlphaFull"
+		default: return fmt.Sprintf("PixbufAlphaMode(%d)", e)
+	}
 }
 
 // PixbufError wraps GdkPixbufError
@@ -243,6 +270,19 @@ func (e PixbufError) InitGoValue(v *gobject.Value) {
 	v.SetEnum(int(e))
 }
 
+func (e PixbufError) String() string {
+	switch e {
+		case PixbufErrorUnknownType: return "PixbufErrorUnknownType"
+		case PixbufErrorUnsupportedOperation: return "PixbufErrorUnsupportedOperation"
+		case PixbufErrorFailed: return "PixbufErrorFailed"
+		case PixbufErrorIncompleteAnimation: return "PixbufErrorIncompleteAnimation"
+		case PixbufErrorCorruptImage: return "PixbufErrorCorruptImage"
+		case PixbufErrorInsufficientMemory: return "PixbufErrorInsufficientMemory"
+		case PixbufErrorBadOption: return "PixbufErrorBadOption"
+		default: return fmt.Sprintf("PixbufError(%d)", e)
+	}
+}
+
 // PixbufRotation wraps GdkPixbufRotation
 //
 // The possible rotations which can be passed to gdk_pixbuf_rotate_simple().
@@ -280,6 +320,16 @@ func (e PixbufRotation) InitGoValue(v *gobject.Value) {
 	v.SetEnum(int(e))
 }
 
+func (e PixbufRotation) String() string {
+	switch e {
+		case PixbufRotateClockwise: return "PixbufRotateClockwise"
+		case PixbufRotateNone: return "PixbufRotateNone"
+		case PixbufRotateCounterclockwise: return "PixbufRotateCounterclockwise"
+		case PixbufRotateUpsidedown: return "PixbufRotateUpsidedown"
+		default: return fmt.Sprintf("PixbufRotation(%d)", e)
+	}
+}
+
 // PixbufFormatFlags wraps GdkPixbufFormatFlags
 //
 // Flags which allow a module to specify further details about the supported
@@ -305,6 +355,24 @@ const (
 // Has returns true if p contains other
 func (p PixbufFormatFlags) Has(other PixbufFormatFlags) bool {
 	return (p & other) == other
+}
+
+func (f PixbufFormatFlags) String() string {
+	if f == 0 {
+		return "PixbufFormatFlags(0)"
+	}
+
+	var parts []string
+	if (f & PixbufFormatWritable) != 0 {
+		parts = append(parts, "PixbufFormatWritable")
+	}
+	if (f & PixbufFormatScalable) != 0 {
+		parts = append(parts, "PixbufFormatScalable")
+	}
+	if (f & PixbufFormatThreadsafe) != 0 {
+		parts = append(parts, "PixbufFormatThreadsafe")
+	}
+	return "PixbufFormatFlags(" + strings.Join(parts, "|") + ")"
 }
 
 // PixbufModuleSizeFunc wraps GdkPixbufModuleSizeFunc

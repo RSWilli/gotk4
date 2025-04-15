@@ -3,7 +3,9 @@
 package atk
 
 import (
+	"fmt"
 	"runtime"
+	"strings"
 	"unsafe"
 
 	"github.com/diamondburned/gotk4/pkg/glib/v2"
@@ -204,6 +206,15 @@ func (e CoordType) InitGoValue(v *gobject.Value) {
 	v.SetEnum(int(e))
 }
 
+func (e CoordType) String() string {
+	switch e {
+		case XYScreen: return "XYScreen"
+		case XYWindow: return "XYWindow"
+		case XYParent: return "XYParent"
+		default: return fmt.Sprintf("CoordType(%d)", e)
+	}
+}
+
 // KeyEventType wraps AtkKeyEventType
 //
 // Specifies the type of a keyboard evemt.
@@ -233,6 +244,15 @@ var _ gobject.GoValueInitializer = KeyEventType(0)
 func (e KeyEventType) InitGoValue(v *gobject.Value) {
 	v.Init(TypeKeyEventType)
 	v.SetEnum(int(e))
+}
+
+func (e KeyEventType) String() string {
+	switch e {
+		case KeyEventPress: return "KeyEventPress"
+		case KeyEventRelease: return "KeyEventRelease"
+		case KeyEventLastDefined: return "KeyEventLastDefined"
+		default: return fmt.Sprintf("KeyEventType(%d)", e)
+	}
 }
 
 // Layer wraps AtkLayer
@@ -290,6 +310,20 @@ func (e Layer) InitGoValue(v *gobject.Value) {
 	v.SetEnum(int(e))
 }
 
+func (e Layer) String() string {
+	switch e {
+		case LayerPopup: return "LayerPopup"
+		case LayerOverlay: return "LayerOverlay"
+		case LayerWindow: return "LayerWindow"
+		case LayerInvalid: return "LayerInvalid"
+		case LayerBackground: return "LayerBackground"
+		case LayerCanvas: return "LayerCanvas"
+		case LayerWidget: return "LayerWidget"
+		case LayerMDI: return "LayerMDI"
+		default: return fmt.Sprintf("Layer(%d)", e)
+	}
+}
+
 // Live wraps AtkLive
 //
 // Enumeration used to indicate a type of live region and how assertive it
@@ -322,6 +356,15 @@ var _ gobject.GoValueInitializer = Live(0)
 func (e Live) InitGoValue(v *gobject.Value) {
 	v.Init(TypeLive)
 	v.SetEnum(int(e))
+}
+
+func (e Live) String() string {
+	switch e {
+		case LiveNone: return "LiveNone"
+		case LivePolite: return "LivePolite"
+		case LiveAssertive: return "LiveAssertive"
+		default: return fmt.Sprintf("Live(%d)", e)
+	}
 }
 
 // RelationType wraps AtkRelationType
@@ -458,6 +501,34 @@ var _ gobject.GoValueInitializer = RelationType(0)
 func (e RelationType) InitGoValue(v *gobject.Value) {
 	v.Init(TypeRelationType)
 	v.SetEnum(int(e))
+}
+
+func (e RelationType) String() string {
+	switch e {
+		case RelationDescriptionFor: return "RelationDescriptionFor"
+		case RelationDetails: return "RelationDetails"
+		case RelationDetailsFor: return "RelationDetailsFor"
+		case RelationControlledBy: return "RelationControlledBy"
+		case RelationControllerFor: return "RelationControllerFor"
+		case RelationLabelFor: return "RelationLabelFor"
+		case RelationMemberOf: return "RelationMemberOf"
+		case RelationNodeParentOf: return "RelationNodeParentOf"
+		case RelationErrorFor: return "RelationErrorFor"
+		case RelationNodeChildOf: return "RelationNodeChildOf"
+		case RelationFlowsTo: return "RelationFlowsTo"
+		case RelationSubwindowOf: return "RelationSubwindowOf"
+		case RelationEmbeddedBy: return "RelationEmbeddedBy"
+		case RelationLastDefined: return "RelationLastDefined"
+		case RelationLabelledBy: return "RelationLabelledBy"
+		case RelationFlowsFrom: return "RelationFlowsFrom"
+		case RelationPopupFor: return "RelationPopupFor"
+		case RelationParentWindowOf: return "RelationParentWindowOf"
+		case RelationDescribedBy: return "RelationDescribedBy"
+		case RelationErrorMessage: return "RelationErrorMessage"
+		case RelationNull: return "RelationNull"
+		case RelationEmbeds: return "RelationEmbeds"
+		default: return fmt.Sprintf("RelationType(%d)", e)
+	}
 }
 
 // Role wraps AtkRole
@@ -1076,6 +1147,141 @@ func (e Role) InitGoValue(v *gobject.Value) {
 	v.SetEnum(int(e))
 }
 
+func (e Role) String() string {
+	switch e {
+		case RoleSeparator: return "RoleSeparator"
+		case RoleVideo: return "RoleVideo"
+		case RoleFileChooser: return "RoleFileChooser"
+		case RoleIcon: return "RoleIcon"
+		case RolePageTab: return "RolePageTab"
+		case RoleTerminal: return "RoleTerminal"
+		case RoleMark: return "RoleMark"
+		case RoleAudio: return "RoleAudio"
+		case RoleRating: return "RoleRating"
+		case RoleInvalid: return "RoleInvalid"
+		case RoleArrow: return "RoleArrow"
+		case RoleList: return "RoleList"
+		case RoleToolTip: return "RoleToolTip"
+		case RoleViewport: return "RoleViewport"
+		case RoleDefinition: return "RoleDefinition"
+		case RoleMath: return "RoleMath"
+		case RoleTimer: return "RoleTimer"
+		case RoleDial: return "RoleDial"
+		case RoleRadioButton: return "RoleRadioButton"
+		case RoleStatic: return "RoleStatic"
+		case RoleFontChooser: return "RoleFontChooser"
+		case RoleToggleButton: return "RoleToggleButton"
+		case RoleEmbedded: return "RoleEmbedded"
+		case RoleRedundantObject: return "RoleRedundantObject"
+		case RoleNotification: return "RoleNotification"
+		case RoleCheckMenuItem: return "RoleCheckMenuItem"
+		case RoleWindow: return "RoleWindow"
+		case RolePushButtonMenu: return "RolePushButtonMenu"
+		case RoleOptionPane: return "RoleOptionPane"
+		case RolePopupMenu: return "RolePopupMenu"
+		case RoleCheckBox: return "RoleCheckBox"
+		case RoleImage: return "RoleImage"
+		case RoleLayeredPane: return "RoleLayeredPane"
+		case RoleArticle: return "RoleArticle"
+		case RoleSubscript: return "RoleSubscript"
+		case RoleSuggestion: return "RoleSuggestion"
+		case RoleListItem: return "RoleListItem"
+		case RolePanel: return "RolePanel"
+		case RoleHeader: return "RoleHeader"
+		case RoleDocumentFrame: return "RoleDocumentFrame"
+		case RoleHeading: return "RoleHeading"
+		case RoleSpinButton: return "RoleSpinButton"
+		case RoleTableColumnHeader: return "RoleTableColumnHeader"
+		case RoleComment: return "RoleComment"
+		case RoleTitleBar: return "RoleTitleBar"
+		case RoleRootPane: return "RoleRootPane"
+		case RoleText: return "RoleText"
+		case RoleMenuBar: return "RoleMenuBar"
+		case RoleTreeTable: return "RoleTreeTable"
+		case RoleEntry: return "RoleEntry"
+		case RoleImageMap: return "RoleImageMap"
+		case RoleComboBox: return "RoleComboBox"
+		case RoleMenuItem: return "RoleMenuItem"
+		case RoleSplitPane: return "RoleSplitPane"
+		case RoleApplication: return "RoleApplication"
+		case RolePage: return "RolePage"
+		case RoleDocumentPresentation: return "RoleDocumentPresentation"
+		case RoleLog: return "RoleLog"
+		case RoleAlert: return "RoleAlert"
+		case RoleMathRoot: return "RoleMathRoot"
+		case RoleContentInsertion: return "RoleContentInsertion"
+		case RoleHtmlContainer: return "RoleHtmlContainer"
+		case RoleScrollPane: return "RoleScrollPane"
+		case RoleTable: return "RoleTable"
+		case RoleLink: return "RoleLink"
+		case RoleDocumentWeb: return "RoleDocumentWeb"
+		case RoleTearOffMenuItem: return "RoleTearOffMenuItem"
+		case RoleUnknown: return "RoleUnknown"
+		case RoleTreeItem: return "RoleTreeItem"
+		case RoleInfoBar: return "RoleInfoBar"
+		case RoleDialog: return "RoleDialog"
+		case RoleFiller: return "RoleFiller"
+		case RoleDesktopFrame: return "RoleDesktopFrame"
+		case RoleProgressBar: return "RoleProgressBar"
+		case RoleRowHeader: return "RoleRowHeader"
+		case RoleScrollBar: return "RoleScrollBar"
+		case RoleDocumentSpreadsheet: return "RoleDocumentSpreadsheet"
+		case RoleDocumentEmail: return "RoleDocumentEmail"
+		case RoleColumnHeader: return "RoleColumnHeader"
+		case RoleInternalFrame: return "RoleInternalFrame"
+		case RoleCalendar: return "RoleCalendar"
+		case RoleColorChooser: return "RoleColorChooser"
+		case RoleFrame: return "RoleFrame"
+		case RoleBlockQuote: return "RoleBlockQuote"
+		case RoleDescriptionList: return "RoleDescriptionList"
+		case RoleAnimation: return "RoleAnimation"
+		case RoleToolBar: return "RoleToolBar"
+		case RoleEditbar: return "RoleEditbar"
+		case RoleSection: return "RoleSection"
+		case RoleListBox: return "RoleListBox"
+		case RoleGrouping: return "RoleGrouping"
+		case RoleLevelBar: return "RoleLevelBar"
+		case RoleTableRowHeader: return "RoleTableRowHeader"
+		case RoleRuler: return "RoleRuler"
+		case RoleChart: return "RoleChart"
+		case RoleTableRow: return "RoleTableRow"
+		case RoleLabel: return "RoleLabel"
+		case RoleTableCell: return "RoleTableCell"
+		case RoleMarquee: return "RoleMarquee"
+		case RoleFootnote: return "RoleFootnote"
+		case RoleDateEditor: return "RoleDateEditor"
+		case RoleDirectoryPane: return "RoleDirectoryPane"
+		case RoleDrawingArea: return "RoleDrawingArea"
+		case RoleRadioMenuItem: return "RoleRadioMenuItem"
+		case RoleParagraph: return "RoleParagraph"
+		case RoleCaption: return "RoleCaption"
+		case RoleDescriptionValue: return "RoleDescriptionValue"
+		case RoleAccelLabel: return "RoleAccelLabel"
+		case RoleGlassPane: return "RoleGlassPane"
+		case RolePasswordText: return "RolePasswordText"
+		case RoleSlider: return "RoleSlider"
+		case RoleStatusbar: return "RoleStatusbar"
+		case RoleAutocomplete: return "RoleAutocomplete"
+		case RolePageTabList: return "RolePageTabList"
+		case RoleForm: return "RoleForm"
+		case RoleDescriptionTerm: return "RoleDescriptionTerm"
+		case RoleLastDefined: return "RoleLastDefined"
+		case RoleTree: return "RoleTree"
+		case RoleLandmark: return "RoleLandmark"
+		case RoleSuperscript: return "RoleSuperscript"
+		case RoleCanvas: return "RoleCanvas"
+		case RoleMenu: return "RoleMenu"
+		case RoleMathFraction: return "RoleMathFraction"
+		case RoleContentDeletion: return "RoleContentDeletion"
+		case RoleButton: return "RoleButton"
+		case RoleFooter: return "RoleFooter"
+		case RoleInputMethodWindow: return "RoleInputMethodWindow"
+		case RoleDocumentText: return "RoleDocumentText"
+		case RoleDesktopIcon: return "RoleDesktopIcon"
+		default: return fmt.Sprintf("Role(%d)", e)
+	}
+}
+
 // ScrollType wraps AtkScrollType
 //
 // Specifies where an object should be placed on the screen when using scroll_to.
@@ -1129,6 +1335,19 @@ var _ gobject.GoValueInitializer = ScrollType(0)
 func (e ScrollType) InitGoValue(v *gobject.Value) {
 	v.Init(TypeScrollType)
 	v.SetEnum(int(e))
+}
+
+func (e ScrollType) String() string {
+	switch e {
+		case ScrollTopEdge: return "ScrollTopEdge"
+		case ScrollBottomEdge: return "ScrollBottomEdge"
+		case ScrollLeftEdge: return "ScrollLeftEdge"
+		case ScrollRightEdge: return "ScrollRightEdge"
+		case ScrollAnywhere: return "ScrollAnywhere"
+		case ScrollTopLeft: return "ScrollTopLeft"
+		case ScrollBottomRight: return "ScrollBottomRight"
+		default: return fmt.Sprintf("ScrollType(%d)", e)
+	}
 }
 
 // StateType wraps AtkStateType
@@ -1397,6 +1616,57 @@ func (e StateType) InitGoValue(v *gobject.Value) {
 	v.SetEnum(int(e))
 }
 
+func (e StateType) String() string {
+	switch e {
+		case StatePressed: return "StatePressed"
+		case StateRequired: return "StateRequired"
+		case StateVertical: return "StateVertical"
+		case StateBusy: return "StateBusy"
+		case StateDefunct: return "StateDefunct"
+		case StateExpandable: return "StateExpandable"
+		case StateOpaque: return "StateOpaque"
+		case StateSensitive: return "StateSensitive"
+		case StateManagesDescendants: return "StateManagesDescendants"
+		case StateLastDefined: return "StateLastDefined"
+		case StateEditable: return "StateEditable"
+		case StateIndeterminate: return "StateIndeterminate"
+		case StateInvalidEntry: return "StateInvalidEntry"
+		case StateAnimated: return "StateAnimated"
+		case StateHasPopup: return "StateHasPopup"
+		case StateHasTooltip: return "StateHasTooltip"
+		case StateInvalid: return "StateInvalid"
+		case StateArmed: return "StateArmed"
+		case StateExpanded: return "StateExpanded"
+		case StateFocusable: return "StateFocusable"
+		case StateVisible: return "StateVisible"
+		case StateVisited: return "StateVisited"
+		case StateCollapsed: return "StateCollapsed"
+		case StateFocused: return "StateFocused"
+		case StateIconified: return "StateIconified"
+		case StateShowing: return "StateShowing"
+		case StateSelectableText: return "StateSelectableText"
+		case StateActive: return "StateActive"
+		case StateHorizontal: return "StateHorizontal"
+		case StateMultiselectable: return "StateMultiselectable"
+		case StateResizable: return "StateResizable"
+		case StateSingleLine: return "StateSingleLine"
+		case StateTruncated: return "StateTruncated"
+		case StateSupportsAutocompletion: return "StateSupportsAutocompletion"
+		case StateStale: return "StateStale"
+		case StateChecked: return "StateChecked"
+		case StateEnabled: return "StateEnabled"
+		case StateModal: return "StateModal"
+		case StateSelectable: return "StateSelectable"
+		case StateSelected: return "StateSelected"
+		case StateDefault: return "StateDefault"
+		case StateCheckable: return "StateCheckable"
+		case StateMultiLine: return "StateMultiLine"
+		case StateTransient: return "StateTransient"
+		case StateReadOnly: return "StateReadOnly"
+		default: return fmt.Sprintf("StateType(%d)", e)
+	}
+}
+
 // TextAttribute wraps AtkTextAttribute
 //
 // Describes the text attributes supported
@@ -1536,6 +1806,42 @@ func (e TextAttribute) InitGoValue(v *gobject.Value) {
 	v.SetEnum(int(e))
 }
 
+func (e TextAttribute) String() string {
+	switch e {
+		case TextAttrStyle: return "TextAttrStyle"
+		case TextAttrLastDefined: return "TextAttrLastDefined"
+		case TextAttrRise: return "TextAttrRise"
+		case TextAttrFamilyName: return "TextAttrFamilyName"
+		case TextAttrFgColor: return "TextAttrFgColor"
+		case TextAttrEditable: return "TextAttrEditable"
+		case TextAttrPixelsInsideWrap: return "TextAttrPixelsInsideWrap"
+		case TextAttrWrapMode: return "TextAttrWrapMode"
+		case TextAttrRightMargin: return "TextAttrRightMargin"
+		case TextAttrPixelsAboveLines: return "TextAttrPixelsAboveLines"
+		case TextAttrStrikethrough: return "TextAttrStrikethrough"
+		case TextAttrTextPosition: return "TextAttrTextPosition"
+		case TextAttrIndent: return "TextAttrIndent"
+		case TextAttrBgFullHeight: return "TextAttrBgFullHeight"
+		case TextAttrWeight: return "TextAttrWeight"
+		case TextAttrStretch: return "TextAttrStretch"
+		case TextAttrScale: return "TextAttrScale"
+		case TextAttrBgStipple: return "TextAttrBgStipple"
+		case TextAttrJustification: return "TextAttrJustification"
+		case TextAttrVariant: return "TextAttrVariant"
+		case TextAttrInvalid: return "TextAttrInvalid"
+		case TextAttrLeftMargin: return "TextAttrLeftMargin"
+		case TextAttrInvisible: return "TextAttrInvisible"
+		case TextAttrPixelsBelowLines: return "TextAttrPixelsBelowLines"
+		case TextAttrDirection: return "TextAttrDirection"
+		case TextAttrLanguage: return "TextAttrLanguage"
+		case TextAttrBgColor: return "TextAttrBgColor"
+		case TextAttrFgStipple: return "TextAttrFgStipple"
+		case TextAttrUnderline: return "TextAttrUnderline"
+		case TextAttrSize: return "TextAttrSize"
+		default: return fmt.Sprintf("TextAttribute(%d)", e)
+	}
+}
+
 // TextBoundary wraps AtkTextBoundary
 //
 // Text boundary types used for specifying boundaries for regions of text.
@@ -1592,6 +1898,19 @@ func (e TextBoundary) InitGoValue(v *gobject.Value) {
 	v.SetEnum(int(e))
 }
 
+func (e TextBoundary) String() string {
+	switch e {
+		case TextBoundaryWordStart: return "TextBoundaryWordStart"
+		case TextBoundaryWordEnd: return "TextBoundaryWordEnd"
+		case TextBoundarySentenceStart: return "TextBoundarySentenceStart"
+		case TextBoundarySentenceEnd: return "TextBoundarySentenceEnd"
+		case TextBoundaryLineStart: return "TextBoundaryLineStart"
+		case TextBoundaryLineEnd: return "TextBoundaryLineEnd"
+		case TextBoundaryChar: return "TextBoundaryChar"
+		default: return fmt.Sprintf("TextBoundary(%d)", e)
+	}
+}
+
 // TextClipType wraps AtkTextClipType
 //
 // Describes the type of clipping required.
@@ -1625,6 +1944,16 @@ var _ gobject.GoValueInitializer = TextClipType(0)
 func (e TextClipType) InitGoValue(v *gobject.Value) {
 	v.Init(TypeTextClipType)
 	v.SetEnum(int(e))
+}
+
+func (e TextClipType) String() string {
+	switch e {
+		case TextClipNone: return "TextClipNone"
+		case TextClipMin: return "TextClipMin"
+		case TextClipMax: return "TextClipMax"
+		case TextClipBoth: return "TextClipBoth"
+		default: return fmt.Sprintf("TextClipType(%d)", e)
+	}
 }
 
 // TextGranularity wraps AtkTextGranularity
@@ -1674,6 +2003,17 @@ var _ gobject.GoValueInitializer = TextGranularity(0)
 func (e TextGranularity) InitGoValue(v *gobject.Value) {
 	v.Init(TypeTextGranularity)
 	v.SetEnum(int(e))
+}
+
+func (e TextGranularity) String() string {
+	switch e {
+		case TextGranularityChar: return "TextGranularityChar"
+		case TextGranularityWord: return "TextGranularityWord"
+		case TextGranularitySentence: return "TextGranularitySentence"
+		case TextGranularityLine: return "TextGranularityLine"
+		case TextGranularityParagraph: return "TextGranularityParagraph"
+		default: return fmt.Sprintf("TextGranularity(%d)", e)
+	}
 }
 
 // ValueType wraps AtkValueType
@@ -1729,6 +2069,28 @@ func (e ValueType) InitGoValue(v *gobject.Value) {
 	v.SetEnum(int(e))
 }
 
+func (e ValueType) String() string {
+	switch e {
+		case ValueVeryWeak: return "ValueVeryWeak"
+		case ValueStrong: return "ValueStrong"
+		case ValueLow: return "ValueLow"
+		case ValueBad: return "ValueBad"
+		case ValueAcceptable: return "ValueAcceptable"
+		case ValueVeryStrong: return "ValueVeryStrong"
+		case ValueVeryGood: return "ValueVeryGood"
+		case ValueBest: return "ValueBest"
+		case ValueVeryLow: return "ValueVeryLow"
+		case ValueMedium: return "ValueMedium"
+		case ValueHigh: return "ValueHigh"
+		case ValueVeryBad: return "ValueVeryBad"
+		case ValueLastDefined: return "ValueLastDefined"
+		case ValueWeak: return "ValueWeak"
+		case ValueVeryHigh: return "ValueVeryHigh"
+		case ValueGood: return "ValueGood"
+		default: return fmt.Sprintf("ValueType(%d)", e)
+	}
+}
+
 // HyperlinkStateFlags wraps AtkHyperlinkStateFlags
 //
 // Describes the type of link
@@ -1754,6 +2116,18 @@ var _ gobject.GoValueInitializer = HyperlinkStateFlags(0)
 func (f HyperlinkStateFlags) InitGoValue(v *gobject.Value) {
 	v.Init(TypeHyperlinkStateFlags)
 	v.SetFlags(int(f))
+}
+
+func (f HyperlinkStateFlags) String() string {
+	if f == 0 {
+		return "HyperlinkStateFlags(0)"
+	}
+
+	var parts []string
+	if (f & HyperlinkIsInline) != 0 {
+		parts = append(parts, "HyperlinkIsInline")
+	}
+	return "HyperlinkStateFlags(" + strings.Join(parts, "|") + ")"
 }
 
 // Function wraps AtkFunction

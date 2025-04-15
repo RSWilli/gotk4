@@ -10,7 +10,7 @@ type Enum struct {
 	Doc
 	Marshaler
 
-	Members []*Member
+	Members Members
 }
 
 func DeclareEnum(e *env, v gir.Enum) *Enum {

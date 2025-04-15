@@ -4,7 +4,9 @@ package gtk
 
 import (
 	"context"
+	"fmt"
 	"runtime"
+	"strings"
 	"unsafe"
 
 	"github.com/diamondburned/gotk4/pkg/atk"
@@ -924,7 +926,7 @@ func init() {
 // Like gtk_get_binary_age(), but from the headers used at
 // application compile time, rather than from the library linked
 // against at application run time.
-const BINARY_AGE = 2443
+const BINARY_AGE = 2448
 // INPUT_ERROR wraps GTK_INPUT_ERROR
 //
 // Constant to return from a signal handler for the #GtkSpinButton::input
@@ -951,7 +953,7 @@ const MAX_COMPOSE_LEN = 7
 // Like gtk_get_micro_version(), but from the headers used at
 // application compile time, rather than from the library linked
 // against at application run time.
-const MICRO_VERSION = 43
+const MICRO_VERSION = 48
 // MINOR_VERSION wraps GTK_MINOR_VERSION
 //
 // Like gtk_get_minor_version(), but from the headers used at
@@ -1089,6 +1091,17 @@ func (e Align) InitGoValue(v *gobject.Value) {
 	v.SetEnum(int(e))
 }
 
+func (e Align) String() string {
+	switch e {
+		case AlignFill: return "AlignFill"
+		case AlignStart: return "AlignStart"
+		case AlignEnd: return "AlignEnd"
+		case AlignCenter: return "AlignCenter"
+		case AlignBaseline: return "AlignBaseline"
+		default: return fmt.Sprintf("Align(%d)", e)
+	}
+}
+
 // ArrowPlacement wraps GtkArrowPlacement
 //
 // Used to specify the placement of scroll arrows in scrolling menus.
@@ -1118,6 +1131,15 @@ var _ gobject.GoValueInitializer = ArrowPlacement(0)
 func (e ArrowPlacement) InitGoValue(v *gobject.Value) {
 	v.Init(TypeArrowPlacement)
 	v.SetEnum(int(e))
+}
+
+func (e ArrowPlacement) String() string {
+	switch e {
+		case ArrowsBoth: return "ArrowsBoth"
+		case ArrowsStart: return "ArrowsStart"
+		case ArrowsEnd: return "ArrowsEnd"
+		default: return fmt.Sprintf("ArrowPlacement(%d)", e)
+	}
 }
 
 // ArrowType wraps GtkArrowType
@@ -1157,6 +1179,17 @@ var _ gobject.GoValueInitializer = ArrowType(0)
 func (e ArrowType) InitGoValue(v *gobject.Value) {
 	v.Init(TypeArrowType)
 	v.SetEnum(int(e))
+}
+
+func (e ArrowType) String() string {
+	switch e {
+		case ArrowNone: return "ArrowNone"
+		case ArrowUp: return "ArrowUp"
+		case ArrowDown: return "ArrowDown"
+		case ArrowLeft: return "ArrowLeft"
+		case ArrowRight: return "ArrowRight"
+		default: return fmt.Sprintf("ArrowType(%d)", e)
+	}
 }
 
 // AssistantPageType wraps GtkAssistantPageType
@@ -1219,6 +1252,18 @@ func (e AssistantPageType) InitGoValue(v *gobject.Value) {
 	v.SetEnum(int(e))
 }
 
+func (e AssistantPageType) String() string {
+	switch e {
+		case AssistantPageIntro: return "AssistantPageIntro"
+		case AssistantPageConfirm: return "AssistantPageConfirm"
+		case AssistantPageSummary: return "AssistantPageSummary"
+		case AssistantPageProgress: return "AssistantPageProgress"
+		case AssistantPageCustom: return "AssistantPageCustom"
+		case AssistantPageContent: return "AssistantPageContent"
+		default: return fmt.Sprintf("AssistantPageType(%d)", e)
+	}
+}
+
 // BaselinePosition wraps GtkBaselinePosition
 //
 // Whenever a container has some form of natural row it may align
@@ -1253,6 +1298,15 @@ var _ gobject.GoValueInitializer = BaselinePosition(0)
 func (e BaselinePosition) InitGoValue(v *gobject.Value) {
 	v.Init(TypeBaselinePosition)
 	v.SetEnum(int(e))
+}
+
+func (e BaselinePosition) String() string {
+	switch e {
+		case BaselinePositionTop: return "BaselinePositionTop"
+		case BaselinePositionCenter: return "BaselinePositionCenter"
+		case BaselinePositionBottom: return "BaselinePositionBottom"
+		default: return fmt.Sprintf("BaselinePosition(%d)", e)
+	}
 }
 
 // BorderStyle wraps GtkBorderStyle
@@ -1312,6 +1366,22 @@ var _ gobject.GoValueInitializer = BorderStyle(0)
 func (e BorderStyle) InitGoValue(v *gobject.Value) {
 	v.Init(TypeBorderStyle)
 	v.SetEnum(int(e))
+}
+
+func (e BorderStyle) String() string {
+	switch e {
+		case BorderStyleDashed: return "BorderStyleDashed"
+		case BorderStyleDouble: return "BorderStyleDouble"
+		case BorderStyleNone: return "BorderStyleNone"
+		case BorderStyleSolid: return "BorderStyleSolid"
+		case BorderStyleOutset: return "BorderStyleOutset"
+		case BorderStyleHidden: return "BorderStyleHidden"
+		case BorderStyleGroove: return "BorderStyleGroove"
+		case BorderStyleRidge: return "BorderStyleRidge"
+		case BorderStyleInset: return "BorderStyleInset"
+		case BorderStyleDotted: return "BorderStyleDotted"
+		default: return fmt.Sprintf("BorderStyle(%d)", e)
+	}
 }
 
 // BuilderError wraps GtkBuilderError
@@ -1399,6 +1469,26 @@ func (e BuilderError) InitGoValue(v *gobject.Value) {
 	v.SetEnum(int(e))
 }
 
+func (e BuilderError) String() string {
+	switch e {
+		case BuilderErrorInvalidTypeFunction: return "BuilderErrorInvalidTypeFunction"
+		case BuilderErrorUnhandledTag: return "BuilderErrorUnhandledTag"
+		case BuilderErrorMissingAttribute: return "BuilderErrorMissingAttribute"
+		case BuilderErrorInvalidAttribute: return "BuilderErrorInvalidAttribute"
+		case BuilderErrorMissingPropertyValue: return "BuilderErrorMissingPropertyValue"
+		case BuilderErrorInvalidValue: return "BuilderErrorInvalidValue"
+		case BuilderErrorVersionMismatch: return "BuilderErrorVersionMismatch"
+		case BuilderErrorObjectTypeRefused: return "BuilderErrorObjectTypeRefused"
+		case BuilderErrorInvalidTag: return "BuilderErrorInvalidTag"
+		case BuilderErrorDuplicateID: return "BuilderErrorDuplicateID"
+		case BuilderErrorTemplateMismatch: return "BuilderErrorTemplateMismatch"
+		case BuilderErrorInvalidProperty: return "BuilderErrorInvalidProperty"
+		case BuilderErrorInvalidSignal: return "BuilderErrorInvalidSignal"
+		case BuilderErrorInvalidID: return "BuilderErrorInvalidID"
+		default: return fmt.Sprintf("BuilderError(%d)", e)
+	}
+}
+
 // ButtonBoxStyle wraps GtkButtonBoxStyle
 //
 // Used to dictate the style that a #GtkButtonBox uses to layout the buttons it
@@ -1448,6 +1538,18 @@ func (e ButtonBoxStyle) InitGoValue(v *gobject.Value) {
 	v.SetEnum(int(e))
 }
 
+func (e ButtonBoxStyle) String() string {
+	switch e {
+		case ButtonboxExpand: return "ButtonboxExpand"
+		case ButtonboxSpread: return "ButtonboxSpread"
+		case ButtonboxEdge: return "ButtonboxEdge"
+		case ButtonboxStart: return "ButtonboxStart"
+		case ButtonboxEnd: return "ButtonboxEnd"
+		case ButtonboxCenter: return "ButtonboxCenter"
+		default: return fmt.Sprintf("ButtonBoxStyle(%d)", e)
+	}
+}
+
 // ButtonRole wraps GtkButtonRole
 //
 // The role specifies the desired appearance of a #GtkModelButton.
@@ -1477,6 +1579,15 @@ var _ gobject.GoValueInitializer = ButtonRole(0)
 func (e ButtonRole) InitGoValue(v *gobject.Value) {
 	v.Init(TypeButtonRole)
 	v.SetEnum(int(e))
+}
+
+func (e ButtonRole) String() string {
+	switch e {
+		case ButtonRoleNormal: return "ButtonRoleNormal"
+		case ButtonRoleCheck: return "ButtonRoleCheck"
+		case ButtonRoleRadio: return "ButtonRoleRadio"
+		default: return fmt.Sprintf("ButtonRole(%d)", e)
+	}
 }
 
 // ButtonsType wraps GtkButtonsType
@@ -1528,6 +1639,18 @@ func (e ButtonsType) InitGoValue(v *gobject.Value) {
 	v.SetEnum(int(e))
 }
 
+func (e ButtonsType) String() string {
+	switch e {
+		case ButtonsYesNo: return "ButtonsYesNo"
+		case ButtonsOKCancel: return "ButtonsOKCancel"
+		case ButtonsNone: return "ButtonsNone"
+		case ButtonsOK: return "ButtonsOK"
+		case ButtonsClose: return "ButtonsClose"
+		case ButtonsCancel: return "ButtonsCancel"
+		default: return fmt.Sprintf("ButtonsType(%d)", e)
+	}
+}
+
 // CellRendererAccelMode wraps GtkCellRendererAccelMode
 //
 // Determines if the edited accelerators are GTK+ accelerators. If
@@ -1556,6 +1679,14 @@ var _ gobject.GoValueInitializer = CellRendererAccelMode(0)
 func (e CellRendererAccelMode) InitGoValue(v *gobject.Value) {
 	v.Init(TypeCellRendererAccelMode)
 	v.SetEnum(int(e))
+}
+
+func (e CellRendererAccelMode) String() string {
+	switch e {
+		case CellRendererAccelModeGTK: return "CellRendererAccelModeGTK"
+		case CellRendererAccelModeOther: return "CellRendererAccelModeOther"
+		default: return fmt.Sprintf("CellRendererAccelMode(%d)", e)
+	}
 }
 
 // CellRendererMode wraps GtkCellRendererMode
@@ -1590,6 +1721,15 @@ var _ gobject.GoValueInitializer = CellRendererMode(0)
 func (e CellRendererMode) InitGoValue(v *gobject.Value) {
 	v.Init(TypeCellRendererMode)
 	v.SetEnum(int(e))
+}
+
+func (e CellRendererMode) String() string {
+	switch e {
+		case CellRendererModeInert: return "CellRendererModeInert"
+		case CellRendererModeActivatable: return "CellRendererModeActivatable"
+		case CellRendererModeEditable: return "CellRendererModeEditable"
+		default: return fmt.Sprintf("CellRendererMode(%d)", e)
+	}
 }
 
 // CornerType wraps GtkCornerType
@@ -1633,6 +1773,16 @@ func (e CornerType) InitGoValue(v *gobject.Value) {
 	v.SetEnum(int(e))
 }
 
+func (e CornerType) String() string {
+	switch e {
+		case CornerBottomRight: return "CornerBottomRight"
+		case CornerTopLeft: return "CornerTopLeft"
+		case CornerBottomLeft: return "CornerBottomLeft"
+		case CornerTopRight: return "CornerTopRight"
+		default: return fmt.Sprintf("CornerType(%d)", e)
+	}
+}
+
 // CSSProviderError wraps GtkCssProviderError
 //
 // Error codes for %GTK_CSS_PROVIDER_ERROR.
@@ -1674,6 +1824,18 @@ var _ gobject.GoValueInitializer = CSSProviderError(0)
 func (e CSSProviderError) InitGoValue(v *gobject.Value) {
 	v.Init(TypeCssProviderError)
 	v.SetEnum(int(e))
+}
+
+func (e CSSProviderError) String() string {
+	switch e {
+		case CSSProviderErrorUnknownValue: return "CSSProviderErrorUnknownValue"
+		case CSSProviderErrorFailed: return "CSSProviderErrorFailed"
+		case CSSProviderErrorSyntax: return "CSSProviderErrorSyntax"
+		case CSSProviderErrorImport: return "CSSProviderErrorImport"
+		case CSSProviderErrorName: return "CSSProviderErrorName"
+		case CSSProviderErrorDeprecated: return "CSSProviderErrorDeprecated"
+		default: return fmt.Sprintf("CSSProviderError(%d)", e)
+	}
 }
 
 // CSSSectionType wraps GtkCssSectionType
@@ -1743,6 +1905,21 @@ func (e CSSSectionType) InitGoValue(v *gobject.Value) {
 	v.SetEnum(int(e))
 }
 
+func (e CSSSectionType) String() string {
+	switch e {
+		case CSSSectionSelector: return "CSSSectionSelector"
+		case CSSSectionImport: return "CSSSectionImport"
+		case CSSSectionDeclaration: return "CSSSectionDeclaration"
+		case CSSSectionValue: return "CSSSectionValue"
+		case CSSSectionKeyframes: return "CSSSectionKeyframes"
+		case CSSSectionDocument: return "CSSSectionDocument"
+		case CSSSectionColorDefinition: return "CSSSectionColorDefinition"
+		case CSSSectionBindingSet: return "CSSSectionBindingSet"
+		case CSSSectionRuleset: return "CSSSectionRuleset"
+		default: return fmt.Sprintf("CSSSectionType(%d)", e)
+	}
+}
+
 // DeleteType wraps GtkDeleteType
 //
 // See also: #GtkEntry::delete-from-cursor.
@@ -1800,6 +1977,20 @@ func (e DeleteType) InitGoValue(v *gobject.Value) {
 	v.SetEnum(int(e))
 }
 
+func (e DeleteType) String() string {
+	switch e {
+		case DeleteWordEnds: return "DeleteWordEnds"
+		case DeleteWords: return "DeleteWords"
+		case DeleteDisplayLines: return "DeleteDisplayLines"
+		case DeleteDisplayLineEnds: return "DeleteDisplayLineEnds"
+		case DeleteParagraphEnds: return "DeleteParagraphEnds"
+		case DeleteParagraphs: return "DeleteParagraphs"
+		case DeleteWhitespace: return "DeleteWhitespace"
+		case DeleteChars: return "DeleteChars"
+		default: return fmt.Sprintf("DeleteType(%d)", e)
+	}
+}
+
 // DirectionType wraps GtkDirectionType
 //
 // Focus movement types.
@@ -1841,6 +2032,18 @@ var _ gobject.GoValueInitializer = DirectionType(0)
 func (e DirectionType) InitGoValue(v *gobject.Value) {
 	v.Init(TypeDirectionType)
 	v.SetEnum(int(e))
+}
+
+func (e DirectionType) String() string {
+	switch e {
+		case DirTabBackward: return "DirTabBackward"
+		case DirUp: return "DirUp"
+		case DirDown: return "DirDown"
+		case DirLeft: return "DirLeft"
+		case DirRight: return "DirRight"
+		case DirTabForward: return "DirTabForward"
+		default: return fmt.Sprintf("DirectionType(%d)", e)
+	}
 }
 
 // DragResult wraps GtkDragResult
@@ -1890,6 +2093,18 @@ func (e DragResult) InitGoValue(v *gobject.Value) {
 	v.SetEnum(int(e))
 }
 
+func (e DragResult) String() string {
+	switch e {
+		case DragResultSuccess: return "DragResultSuccess"
+		case DragResultNoTarget: return "DragResultNoTarget"
+		case DragResultUserCancelled: return "DragResultUserCancelled"
+		case DragResultTimeoutExpired: return "DragResultTimeoutExpired"
+		case DragResultGrabBroken: return "DragResultGrabBroken"
+		case DragResultError: return "DragResultError"
+		default: return fmt.Sprintf("DragResult(%d)", e)
+	}
+}
+
 // EntryIconPosition wraps GtkEntryIconPosition
 //
 // Specifies the side of the entry at which an icon is placed.
@@ -1915,6 +2130,14 @@ var _ gobject.GoValueInitializer = EntryIconPosition(0)
 func (e EntryIconPosition) InitGoValue(v *gobject.Value) {
 	v.Init(TypeEntryIconPosition)
 	v.SetEnum(int(e))
+}
+
+func (e EntryIconPosition) String() string {
+	switch e {
+		case EntryIconPrimary: return "EntryIconPrimary"
+		case EntryIconSecondary: return "EntryIconSecondary"
+		default: return fmt.Sprintf("EntryIconPosition(%d)", e)
+	}
 }
 
 // EventSequenceState wraps GtkEventSequenceState
@@ -1946,6 +2169,15 @@ var _ gobject.GoValueInitializer = EventSequenceState(0)
 func (e EventSequenceState) InitGoValue(v *gobject.Value) {
 	v.Init(TypeEventSequenceState)
 	v.SetEnum(int(e))
+}
+
+func (e EventSequenceState) String() string {
+	switch e {
+		case EventSequenceDenied: return "EventSequenceDenied"
+		case EventSequenceNone: return "EventSequenceNone"
+		case EventSequenceClaimed: return "EventSequenceClaimed"
+		default: return fmt.Sprintf("EventSequenceState(%d)", e)
+	}
 }
 
 // ExpanderStyle wraps GtkExpanderStyle
@@ -1981,6 +2213,16 @@ var _ gobject.GoValueInitializer = ExpanderStyle(0)
 func (e ExpanderStyle) InitGoValue(v *gobject.Value) {
 	v.Init(TypeExpanderStyle)
 	v.SetEnum(int(e))
+}
+
+func (e ExpanderStyle) String() string {
+	switch e {
+		case ExpanderSemiExpanded: return "ExpanderSemiExpanded"
+		case ExpanderExpanded: return "ExpanderExpanded"
+		case ExpanderCollapsed: return "ExpanderCollapsed"
+		case ExpanderSemiCollapsed: return "ExpanderSemiCollapsed"
+		default: return fmt.Sprintf("ExpanderStyle(%d)", e)
+	}
 }
 
 // FileChooserAction wraps GtkFileChooserAction
@@ -2026,6 +2268,16 @@ func (e FileChooserAction) InitGoValue(v *gobject.Value) {
 	v.SetEnum(int(e))
 }
 
+func (e FileChooserAction) String() string {
+	switch e {
+		case FileChooserActionCreateFolder: return "FileChooserActionCreateFolder"
+		case FileChooserActionOpen: return "FileChooserActionOpen"
+		case FileChooserActionSave: return "FileChooserActionSave"
+		case FileChooserActionSelectFolder: return "FileChooserActionSelectFolder"
+		default: return fmt.Sprintf("FileChooserAction(%d)", e)
+	}
+}
+
 // FileChooserConfirmation wraps GtkFileChooserConfirmation
 //
 // Used as a return value of handlers for the
@@ -2064,6 +2316,15 @@ func (e FileChooserConfirmation) InitGoValue(v *gobject.Value) {
 	v.SetEnum(int(e))
 }
 
+func (e FileChooserConfirmation) String() string {
+	switch e {
+		case FileChooserConfirmationSelectAgain: return "FileChooserConfirmationSelectAgain"
+		case FileChooserConfirmationConfirm: return "FileChooserConfirmationConfirm"
+		case FileChooserConfirmationAcceptFilename: return "FileChooserConfirmationAcceptFilename"
+		default: return fmt.Sprintf("FileChooserConfirmation(%d)", e)
+	}
+}
+
 // FileChooserError wraps GtkFileChooserError
 //
 // These identify the various errors that can occur while calling
@@ -2099,6 +2360,16 @@ var _ gobject.GoValueInitializer = FileChooserError(0)
 func (e FileChooserError) InitGoValue(v *gobject.Value) {
 	v.Init(TypeFileChooserError)
 	v.SetEnum(int(e))
+}
+
+func (e FileChooserError) String() string {
+	switch e {
+		case FileChooserErrorIncompleteHostname: return "FileChooserErrorIncompleteHostname"
+		case FileChooserErrorNonexistent: return "FileChooserErrorNonexistent"
+		case FileChooserErrorBadFilename: return "FileChooserErrorBadFilename"
+		case FileChooserErrorAlreadyExists: return "FileChooserErrorAlreadyExists"
+		default: return fmt.Sprintf("FileChooserError(%d)", e)
+	}
 }
 
 // IconSize wraps GtkIconSize
@@ -2148,6 +2419,19 @@ func (e IconSize) InitGoValue(v *gobject.Value) {
 	v.SetEnum(int(e))
 }
 
+func (e IconSize) String() string {
+	switch e {
+		case IconSizeMenu: return "IconSizeMenu"
+		case IconSizeSmallToolbar: return "IconSizeSmallToolbar"
+		case IconSizeLargeToolbar: return "IconSizeLargeToolbar"
+		case IconSizeButton: return "IconSizeButton"
+		case IconSizeDND: return "IconSizeDND"
+		case IconSizeDialog: return "IconSizeDialog"
+		case IconSizeInvalid: return "IconSizeInvalid"
+		default: return fmt.Sprintf("IconSize(%d)", e)
+	}
+}
+
 // IconThemeError wraps GtkIconThemeError
 //
 // Error codes for GtkIconTheme operations.
@@ -2173,6 +2457,14 @@ var _ gobject.GoValueInitializer = IconThemeError(0)
 func (e IconThemeError) InitGoValue(v *gobject.Value) {
 	v.Init(TypeIconThemeError)
 	v.SetEnum(int(e))
+}
+
+func (e IconThemeError) String() string {
+	switch e {
+		case IconThemeNotFound: return "IconThemeNotFound"
+		case IconThemeFailed: return "IconThemeFailed"
+		default: return fmt.Sprintf("IconThemeError(%d)", e)
+	}
 }
 
 // IconViewDropPosition wraps GtkIconViewDropPosition
@@ -2216,6 +2508,18 @@ var _ gobject.GoValueInitializer = IconViewDropPosition(0)
 func (e IconViewDropPosition) InitGoValue(v *gobject.Value) {
 	v.Init(TypeIconViewDropPosition)
 	v.SetEnum(int(e))
+}
+
+func (e IconViewDropPosition) String() string {
+	switch e {
+		case IconViewDropInto: return "IconViewDropInto"
+		case IconViewDropLeft: return "IconViewDropLeft"
+		case IconViewDropRight: return "IconViewDropRight"
+		case IconViewDropAbove: return "IconViewDropAbove"
+		case IconViewDropBelow: return "IconViewDropBelow"
+		case IconViewNoDrop: return "IconViewNoDrop"
+		default: return fmt.Sprintf("IconViewDropPosition(%d)", e)
+	}
 }
 
 // ImageType wraps GtkImageType
@@ -2276,6 +2580,20 @@ var _ gobject.GoValueInitializer = ImageType(0)
 func (e ImageType) InitGoValue(v *gobject.Value) {
 	v.Init(TypeImageType)
 	v.SetEnum(int(e))
+}
+
+func (e ImageType) String() string {
+	switch e {
+		case ImageIconSet: return "ImageIconSet"
+		case ImageAnimation: return "ImageAnimation"
+		case ImageIconName: return "ImageIconName"
+		case ImageGIcon: return "ImageGIcon"
+		case ImageSurface: return "ImageSurface"
+		case ImageEmpty: return "ImageEmpty"
+		case ImagePixbuf: return "ImagePixbuf"
+		case ImageStock: return "ImageStock"
+		default: return fmt.Sprintf("ImageType(%d)", e)
+	}
 }
 
 // InputPurpose wraps GtkInputPurpose
@@ -2358,6 +2676,23 @@ func (e InputPurpose) InitGoValue(v *gobject.Value) {
 	v.SetEnum(int(e))
 }
 
+func (e InputPurpose) String() string {
+	switch e {
+		case InputPurposeName: return "InputPurposeName"
+		case InputPurposeTerminal: return "InputPurposeTerminal"
+		case InputPurposeFreeForm: return "InputPurposeFreeForm"
+		case InputPurposeURL: return "InputPurposeURL"
+		case InputPurposePassword: return "InputPurposePassword"
+		case InputPurposePIN: return "InputPurposePIN"
+		case InputPurposeAlpha: return "InputPurposeAlpha"
+		case InputPurposeDigits: return "InputPurposeDigits"
+		case InputPurposeNumber: return "InputPurposeNumber"
+		case InputPurposePhone: return "InputPurposePhone"
+		case InputPurposeEmail: return "InputPurposeEmail"
+		default: return fmt.Sprintf("InputPurpose(%d)", e)
+	}
+}
+
 // Justification wraps GtkJustification
 //
 // Used for justifying the text inside a #GtkLabel widget. (See also
@@ -2394,6 +2729,16 @@ func (e Justification) InitGoValue(v *gobject.Value) {
 	v.SetEnum(int(e))
 }
 
+func (e Justification) String() string {
+	switch e {
+		case JustifyLeft: return "JustifyLeft"
+		case JustifyRight: return "JustifyRight"
+		case JustifyCenter: return "JustifyCenter"
+		case JustifyFill: return "JustifyFill"
+		default: return fmt.Sprintf("Justification(%d)", e)
+	}
+}
+
 // LevelBarMode wraps GtkLevelBarMode
 //
 // Describes how #GtkLevelBar contents should be rendered.
@@ -2421,6 +2766,14 @@ var _ gobject.GoValueInitializer = LevelBarMode(0)
 func (e LevelBarMode) InitGoValue(v *gobject.Value) {
 	v.Init(TypeLevelBarMode)
 	v.SetEnum(int(e))
+}
+
+func (e LevelBarMode) String() string {
+	switch e {
+		case LevelBarModeContinuous: return "LevelBarModeContinuous"
+		case LevelBarModeDiscrete: return "LevelBarModeDiscrete"
+		default: return fmt.Sprintf("LevelBarMode(%d)", e)
+	}
 }
 
 // License wraps GtkLicense
@@ -2517,6 +2870,30 @@ func (e License) InitGoValue(v *gobject.Value) {
 	v.SetEnum(int(e))
 }
 
+func (e License) String() string {
+	switch e {
+		case LicenseGPL20: return "LicenseGPL20"
+		case LicenseLGPL21: return "LicenseLGPL21"
+		case LicenseBSD: return "LicenseBSD"
+		case LicenseGPL30_Only: return "LicenseGPL30Only"
+		case LicenseLGPL21_Only: return "LicenseLGPL21Only"
+		case LicenseAGPL30: return "LicenseAGPL30"
+		case LicenseMPL20: return "LicenseMPL20"
+		case LicenseCustom: return "LicenseCustom"
+		case LicenseLGPL30: return "LicenseLGPL30"
+		case LicenseMITX11: return "LicenseMITX11"
+		case LicenseAGPL30_Only: return "LicenseAGPL30Only"
+		case LicenseGPL30: return "LicenseGPL30"
+		case LicenseArtistic: return "LicenseArtistic"
+		case LicenseBSD3: return "LicenseBSD3"
+		case LicenseApache20: return "LicenseApache20"
+		case LicenseUnknown: return "LicenseUnknown"
+		case LicenseGPL20_Only: return "LicenseGPL20Only"
+		case LicenseLGPL30_Only: return "LicenseLGPL30Only"
+		default: return fmt.Sprintf("License(%d)", e)
+	}
+}
+
 // MenuDirectionType wraps GtkMenuDirectionType
 //
 // An enumeration representing directional movements within a menu.
@@ -2550,6 +2927,16 @@ var _ gobject.GoValueInitializer = MenuDirectionType(0)
 func (e MenuDirectionType) InitGoValue(v *gobject.Value) {
 	v.Init(TypeMenuDirectionType)
 	v.SetEnum(int(e))
+}
+
+func (e MenuDirectionType) String() string {
+	switch e {
+		case MenuDirParent: return "MenuDirParent"
+		case MenuDirChild: return "MenuDirChild"
+		case MenuDirNext: return "MenuDirNext"
+		case MenuDirPrev: return "MenuDirPrev"
+		default: return fmt.Sprintf("MenuDirectionType(%d)", e)
+	}
 }
 
 // MessageType wraps GtkMessageType
@@ -2589,6 +2976,17 @@ var _ gobject.GoValueInitializer = MessageType(0)
 func (e MessageType) InitGoValue(v *gobject.Value) {
 	v.Init(TypeMessageType)
 	v.SetEnum(int(e))
+}
+
+func (e MessageType) String() string {
+	switch e {
+		case MessageQuestion: return "MessageQuestion"
+		case MessageError: return "MessageError"
+		case MessageOther: return "MessageOther"
+		case MessageInfo: return "MessageInfo"
+		case MessageWarning: return "MessageWarning"
+		default: return fmt.Sprintf("MessageType(%d)", e)
+	}
 }
 
 // MovementStep wraps GtkMovementStep
@@ -2648,6 +3046,22 @@ func (e MovementStep) InitGoValue(v *gobject.Value) {
 	v.SetEnum(int(e))
 }
 
+func (e MovementStep) String() string {
+	switch e {
+		case MovementLogicalPositions: return "MovementLogicalPositions"
+		case MovementDisplayLines: return "MovementDisplayLines"
+		case MovementParagraphEnds: return "MovementParagraphEnds"
+		case MovementHorizontalPages: return "MovementHorizontalPages"
+		case MovementVisualPositions: return "MovementVisualPositions"
+		case MovementWords: return "MovementWords"
+		case MovementDisplayLineEnds: return "MovementDisplayLineEnds"
+		case MovementParagraphs: return "MovementParagraphs"
+		case MovementPages: return "MovementPages"
+		case MovementBufferEnds: return "MovementBufferEnds"
+		default: return fmt.Sprintf("MovementStep(%d)", e)
+	}
+}
+
 // NotebookTab wraps GtkNotebookTab
 type NotebookTab C.int
 
@@ -2667,6 +3081,14 @@ var _ gobject.GoValueInitializer = NotebookTab(0)
 func (e NotebookTab) InitGoValue(v *gobject.Value) {
 	v.Init(TypeNotebookTab)
 	v.SetEnum(int(e))
+}
+
+func (e NotebookTab) String() string {
+	switch e {
+		case NotebookTabFirst: return "NotebookTabFirst"
+		case NotebookTabLast: return "NotebookTabLast"
+		default: return fmt.Sprintf("NotebookTab(%d)", e)
+	}
 }
 
 // NumberUpLayout wraps GtkNumberUpLayout
@@ -2721,6 +3143,20 @@ func (e NumberUpLayout) InitGoValue(v *gobject.Value) {
 	v.SetEnum(int(e))
 }
 
+func (e NumberUpLayout) String() string {
+	switch e {
+		case NumberUpLayoutTopToBottomRightToLeft: return "NumberUpLayoutTopToBottomRightToLeft"
+		case NumberUpLayoutBottomToTopLeftToRight: return "NumberUpLayoutBottomToTopLeftToRight"
+		case NumberUpLayoutBottomToTopRightToLeft: return "NumberUpLayoutBottomToTopRightToLeft"
+		case NumberUpLayoutLeftToRightTopToBottom: return "NumberUpLayoutLeftToRightTopToBottom"
+		case NumberUpLayoutLeftToRightBottomToTop: return "NumberUpLayoutLeftToRightBottomToTop"
+		case NumberUpLayoutRightToLeftTopToBottom: return "NumberUpLayoutRightToLeftTopToBottom"
+		case NumberUpLayoutRightToLeftBottomToTop: return "NumberUpLayoutRightToLeftBottomToTop"
+		case NumberUpLayoutTopToBottomLeftToRight: return "NumberUpLayoutTopToBottomLeftToRight"
+		default: return fmt.Sprintf("NumberUpLayout(%d)", e)
+	}
+}
+
 // Orientation wraps GtkOrientation
 //
 // Represents the orientation of widgets and other objects which can be switched
@@ -2748,6 +3184,14 @@ var _ gobject.GoValueInitializer = Orientation(0)
 func (e Orientation) InitGoValue(v *gobject.Value) {
 	v.Init(TypeOrientation)
 	v.SetEnum(int(e))
+}
+
+func (e Orientation) String() string {
+	switch e {
+		case OrientationHorizontal: return "OrientationHorizontal"
+		case OrientationVertical: return "OrientationVertical"
+		default: return fmt.Sprintf("Orientation(%d)", e)
+	}
 }
 
 // PackDirection wraps GtkPackDirection
@@ -2786,6 +3230,16 @@ func (e PackDirection) InitGoValue(v *gobject.Value) {
 	v.SetEnum(int(e))
 }
 
+func (e PackDirection) String() string {
+	switch e {
+		case PackDirectionLTR: return "PackDirectionLTR"
+		case PackDirectionRTL: return "PackDirectionRTL"
+		case PackDirectionTtb: return "PackDirectionTtb"
+		case PackDirectionBtt: return "PackDirectionBtt"
+		default: return fmt.Sprintf("PackDirection(%d)", e)
+	}
+}
+
 // PackType wraps GtkPackType
 //
 // Represents the packing location #GtkBox children. (See: #GtkVBox,
@@ -2812,6 +3266,14 @@ var _ gobject.GoValueInitializer = PackType(0)
 func (e PackType) InitGoValue(v *gobject.Value) {
 	v.Init(TypePackType)
 	v.SetEnum(int(e))
+}
+
+func (e PackType) String() string {
+	switch e {
+		case PackEnd: return "PackEnd"
+		case PackStart: return "PackStart"
+		default: return fmt.Sprintf("PackType(%d)", e)
+	}
 }
 
 // PadActionType wraps GtkPadActionType
@@ -2843,6 +3305,15 @@ var _ gobject.GoValueInitializer = PadActionType(0)
 func (e PadActionType) InitGoValue(v *gobject.Value) {
 	v.Init(TypePadActionType)
 	v.SetEnum(int(e))
+}
+
+func (e PadActionType) String() string {
+	switch e {
+		case PadActionButton: return "PadActionButton"
+		case PadActionRing: return "PadActionRing"
+		case PadActionStrip: return "PadActionStrip"
+		default: return fmt.Sprintf("PadActionType(%d)", e)
+	}
 }
 
 // PageOrientation wraps GtkPageOrientation
@@ -2880,6 +3351,16 @@ func (e PageOrientation) InitGoValue(v *gobject.Value) {
 	v.SetEnum(int(e))
 }
 
+func (e PageOrientation) String() string {
+	switch e {
+		case PageOrientationPortrait: return "PageOrientationPortrait"
+		case PageOrientationLandscape: return "PageOrientationLandscape"
+		case PageOrientationReversePortrait: return "PageOrientationReversePortrait"
+		case PageOrientationReverseLandscape: return "PageOrientationReverseLandscape"
+		default: return fmt.Sprintf("PageOrientation(%d)", e)
+	}
+}
+
 // PageSet wraps GtkPageSet
 //
 // See also gtk_print_job_set_page_set().
@@ -2909,6 +3390,15 @@ var _ gobject.GoValueInitializer = PageSet(0)
 func (e PageSet) InitGoValue(v *gobject.Value) {
 	v.Init(TypePageSet)
 	v.SetEnum(int(e))
+}
+
+func (e PageSet) String() string {
+	switch e {
+		case PageSetAll: return "PageSetAll"
+		case PageSetEven: return "PageSetEven"
+		case PageSetOdd: return "PageSetOdd"
+		default: return fmt.Sprintf("PageSet(%d)", e)
+	}
 }
 
 // PanDirection wraps GtkPanDirection
@@ -2944,6 +3434,16 @@ var _ gobject.GoValueInitializer = PanDirection(0)
 func (e PanDirection) InitGoValue(v *gobject.Value) {
 	v.Init(TypePanDirection)
 	v.SetEnum(int(e))
+}
+
+func (e PanDirection) String() string {
+	switch e {
+		case PanDirectionLeft: return "PanDirectionLeft"
+		case PanDirectionRight: return "PanDirectionRight"
+		case PanDirectionUp: return "PanDirectionUp"
+		case PanDirectionDown: return "PanDirectionDown"
+		default: return fmt.Sprintf("PanDirection(%d)", e)
+	}
 }
 
 // PolicyType wraps GtkPolicyType
@@ -2987,6 +3487,16 @@ func (e PolicyType) InitGoValue(v *gobject.Value) {
 	v.SetEnum(int(e))
 }
 
+func (e PolicyType) String() string {
+	switch e {
+		case PolicyAlways: return "PolicyAlways"
+		case PolicyAutomatic: return "PolicyAutomatic"
+		case PolicyNever: return "PolicyNever"
+		case PolicyExternal: return "PolicyExternal"
+		default: return fmt.Sprintf("PolicyType(%d)", e)
+	}
+}
+
 // PopoverConstraint wraps GtkPopoverConstraint
 //
 // Describes constraints to positioning of popovers. More values
@@ -3015,6 +3525,14 @@ var _ gobject.GoValueInitializer = PopoverConstraint(0)
 func (e PopoverConstraint) InitGoValue(v *gobject.Value) {
 	v.Init(TypePopoverConstraint)
 	v.SetEnum(int(e))
+}
+
+func (e PopoverConstraint) String() string {
+	switch e {
+		case PopoverConstraintNone: return "PopoverConstraintNone"
+		case PopoverConstraintWindow: return "PopoverConstraintWindow"
+		default: return fmt.Sprintf("PopoverConstraint(%d)", e)
+	}
 }
 
 // PositionType wraps GtkPositionType
@@ -3054,6 +3572,16 @@ func (e PositionType) InitGoValue(v *gobject.Value) {
 	v.SetEnum(int(e))
 }
 
+func (e PositionType) String() string {
+	switch e {
+		case PosLeft: return "PosLeft"
+		case PosRight: return "PosRight"
+		case PosTop: return "PosTop"
+		case PosBottom: return "PosBottom"
+		default: return fmt.Sprintf("PositionType(%d)", e)
+	}
+}
+
 // PrintDuplex wraps GtkPrintDuplex
 //
 // See also gtk_print_settings_set_duplex().
@@ -3083,6 +3611,15 @@ var _ gobject.GoValueInitializer = PrintDuplex(0)
 func (e PrintDuplex) InitGoValue(v *gobject.Value) {
 	v.Init(TypePrintDuplex)
 	v.SetEnum(int(e))
+}
+
+func (e PrintDuplex) String() string {
+	switch e {
+		case PrintDuplexSimplex: return "PrintDuplexSimplex"
+		case PrintDuplexHorizontal: return "PrintDuplexHorizontal"
+		case PrintDuplexVertical: return "PrintDuplexVertical"
+		default: return fmt.Sprintf("PrintDuplex(%d)", e)
+	}
 }
 
 // PrintError wraps GtkPrintError
@@ -3120,6 +3657,16 @@ var _ gobject.GoValueInitializer = PrintError(0)
 func (e PrintError) InitGoValue(v *gobject.Value) {
 	v.Init(TypePrintError)
 	v.SetEnum(int(e))
+}
+
+func (e PrintError) String() string {
+	switch e {
+		case PrintErrorGeneral: return "PrintErrorGeneral"
+		case PrintErrorInternalError: return "PrintErrorInternalError"
+		case PrintErrorNOMEM: return "PrintErrorNOMEM"
+		case PrintErrorInvalidFile: return "PrintErrorInvalidFile"
+		default: return fmt.Sprintf("PrintError(%d)", e)
+	}
 }
 
 // PrintOperationAction wraps GtkPrintOperationAction
@@ -3160,6 +3707,16 @@ func (e PrintOperationAction) InitGoValue(v *gobject.Value) {
 	v.SetEnum(int(e))
 }
 
+func (e PrintOperationAction) String() string {
+	switch e {
+		case PrintOperationActionPrintDialog: return "PrintOperationActionPrintDialog"
+		case PrintOperationActionPrint: return "PrintOperationActionPrint"
+		case PrintOperationActionPreview: return "PrintOperationActionPreview"
+		case PrintOperationActionExport: return "PrintOperationActionExport"
+		default: return fmt.Sprintf("PrintOperationAction(%d)", e)
+	}
+}
+
 // PrintOperationResult wraps GtkPrintOperationResult
 //
 // A value of this type is returned by gtk_print_operation_run().
@@ -3197,6 +3754,16 @@ func (e PrintOperationResult) InitGoValue(v *gobject.Value) {
 	v.SetEnum(int(e))
 }
 
+func (e PrintOperationResult) String() string {
+	switch e {
+		case PrintOperationResultError: return "PrintOperationResultError"
+		case PrintOperationResultApply: return "PrintOperationResultApply"
+		case PrintOperationResultCancel: return "PrintOperationResultCancel"
+		case PrintOperationResultInProgress: return "PrintOperationResultInProgress"
+		default: return fmt.Sprintf("PrintOperationResult(%d)", e)
+	}
+}
+
 // PrintPages wraps GtkPrintPages
 //
 // See also gtk_print_job_set_pages()
@@ -3232,6 +3799,16 @@ func (e PrintPages) InitGoValue(v *gobject.Value) {
 	v.SetEnum(int(e))
 }
 
+func (e PrintPages) String() string {
+	switch e {
+		case PrintPagesAll: return "PrintPagesAll"
+		case PrintPagesCurrent: return "PrintPagesCurrent"
+		case PrintPagesRanges: return "PrintPagesRanges"
+		case PrintPagesSelection: return "PrintPagesSelection"
+		default: return fmt.Sprintf("PrintPages(%d)", e)
+	}
+}
+
 // PrintQuality wraps GtkPrintQuality
 //
 // See also gtk_print_settings_set_quality().
@@ -3265,6 +3842,16 @@ var _ gobject.GoValueInitializer = PrintQuality(0)
 func (e PrintQuality) InitGoValue(v *gobject.Value) {
 	v.Init(TypePrintQuality)
 	v.SetEnum(int(e))
+}
+
+func (e PrintQuality) String() string {
+	switch e {
+		case PrintQualityHigh: return "PrintQualityHigh"
+		case PrintQualityDraft: return "PrintQualityDraft"
+		case PrintQualityLow: return "PrintQualityLow"
+		case PrintQualityNormal: return "PrintQualityNormal"
+		default: return fmt.Sprintf("PrintQuality(%d)", e)
+	}
 }
 
 // PrintStatus wraps GtkPrintStatus
@@ -3329,6 +3916,21 @@ func (e PrintStatus) InitGoValue(v *gobject.Value) {
 	v.SetEnum(int(e))
 }
 
+func (e PrintStatus) String() string {
+	switch e {
+		case PrintStatusSendingData: return "PrintStatusSendingData"
+		case PrintStatusPending: return "PrintStatusPending"
+		case PrintStatusPendingIssue: return "PrintStatusPendingIssue"
+		case PrintStatusPrinting: return "PrintStatusPrinting"
+		case PrintStatusFinished: return "PrintStatusFinished"
+		case PrintStatusFinishedAborted: return "PrintStatusFinishedAborted"
+		case PrintStatusInitial: return "PrintStatusInitial"
+		case PrintStatusPreparing: return "PrintStatusPreparing"
+		case PrintStatusGeneratingData: return "PrintStatusGeneratingData"
+		default: return fmt.Sprintf("PrintStatus(%d)", e)
+	}
+}
+
 // PropagationPhase wraps GtkPropagationPhase
 //
 // Describes the stage at which events are fed into a #GtkEventController.
@@ -3374,6 +3976,16 @@ func (e PropagationPhase) InitGoValue(v *gobject.Value) {
 	v.SetEnum(int(e))
 }
 
+func (e PropagationPhase) String() string {
+	switch e {
+		case PhaseNone: return "PhaseNone"
+		case PhaseCapture: return "PhaseCapture"
+		case PhaseBubble: return "PhaseBubble"
+		case PhaseTarget: return "PhaseTarget"
+		default: return fmt.Sprintf("PropagationPhase(%d)", e)
+	}
+}
+
 // RecentChooserError wraps GtkRecentChooserError
 //
 // These identify the various errors that can occur while calling
@@ -3400,6 +4012,14 @@ var _ gobject.GoValueInitializer = RecentChooserError(0)
 func (e RecentChooserError) InitGoValue(v *gobject.Value) {
 	v.Init(TypeRecentChooserError)
 	v.SetEnum(int(e))
+}
+
+func (e RecentChooserError) String() string {
+	switch e {
+		case RecentChooserErrorNotFound: return "RecentChooserErrorNotFound"
+		case RecentChooserErrorInvalidURI: return "RecentChooserErrorInvalidURI"
+		default: return fmt.Sprintf("RecentChooserError(%d)", e)
+	}
 }
 
 // RecentManagerError wraps GtkRecentManagerError
@@ -3454,6 +4074,19 @@ func (e RecentManagerError) InitGoValue(v *gobject.Value) {
 	v.SetEnum(int(e))
 }
 
+func (e RecentManagerError) String() string {
+	switch e {
+		case RecentManagerErrorInvalidEncoding: return "RecentManagerErrorInvalidEncoding"
+		case RecentManagerErrorNotRegistered: return "RecentManagerErrorNotRegistered"
+		case RecentManagerErrorRead: return "RecentManagerErrorRead"
+		case RecentManagerErrorWrite: return "RecentManagerErrorWrite"
+		case RecentManagerErrorUnknown: return "RecentManagerErrorUnknown"
+		case RecentManagerErrorNotFound: return "RecentManagerErrorNotFound"
+		case RecentManagerErrorInvalidURI: return "RecentManagerErrorInvalidURI"
+		default: return fmt.Sprintf("RecentManagerError(%d)", e)
+	}
+}
+
 // RecentSortType wraps GtkRecentSortType
 //
 // Used to specify the sorting method to be applyed to the recently
@@ -3494,6 +4127,16 @@ func (e RecentSortType) InitGoValue(v *gobject.Value) {
 	v.SetEnum(int(e))
 }
 
+func (e RecentSortType) String() string {
+	switch e {
+		case RecentSortNone: return "RecentSortNone"
+		case RecentSortMru: return "RecentSortMru"
+		case RecentSortLru: return "RecentSortLru"
+		case RecentSortCustom: return "RecentSortCustom"
+		default: return fmt.Sprintf("RecentSortType(%d)", e)
+	}
+}
+
 // ReliefStyle wraps GtkReliefStyle
 //
 // Indicated the relief to be drawn around a #GtkButton.
@@ -3525,6 +4168,15 @@ func (e ReliefStyle) InitGoValue(v *gobject.Value) {
 	v.SetEnum(int(e))
 }
 
+func (e ReliefStyle) String() string {
+	switch e {
+		case ReliefNormal: return "ReliefNormal"
+		case ReliefHalf: return "ReliefHalf"
+		case ReliefNone: return "ReliefNone"
+		default: return fmt.Sprintf("ReliefStyle(%d)", e)
+	}
+}
+
 // ResizeMode wraps GtkResizeMode
 type ResizeMode C.int
 
@@ -3552,6 +4204,15 @@ var _ gobject.GoValueInitializer = ResizeMode(0)
 func (e ResizeMode) InitGoValue(v *gobject.Value) {
 	v.Init(TypeResizeMode)
 	v.SetEnum(int(e))
+}
+
+func (e ResizeMode) String() string {
+	switch e {
+		case ResizeQueue: return "ResizeQueue"
+		case ResizeImmediate: return "ResizeImmediate"
+		case ResizeParent: return "ResizeParent"
+		default: return fmt.Sprintf("ResizeMode(%d)", e)
+	}
 }
 
 // ResponseType wraps GtkResponseType
@@ -3620,6 +4281,23 @@ func (e ResponseType) InitGoValue(v *gobject.Value) {
 	v.SetEnum(int(e))
 }
 
+func (e ResponseType) String() string {
+	switch e {
+		case ResponseNo: return "ResponseNo"
+		case ResponseApply: return "ResponseApply"
+		case ResponseReject: return "ResponseReject"
+		case ResponseAccept: return "ResponseAccept"
+		case ResponseDeleteEvent: return "ResponseDeleteEvent"
+		case ResponseCancel: return "ResponseCancel"
+		case ResponseClose: return "ResponseClose"
+		case ResponseHelp: return "ResponseHelp"
+		case ResponseNone: return "ResponseNone"
+		case ResponseOK: return "ResponseOK"
+		case ResponseYes: return "ResponseYes"
+		default: return fmt.Sprintf("ResponseType(%d)", e)
+	}
+}
+
 // RevealerTransitionType wraps GtkRevealerTransitionType
 //
 // These enumeration values describe the possible transitions
@@ -3664,6 +4342,18 @@ func (e RevealerTransitionType) InitGoValue(v *gobject.Value) {
 	v.SetEnum(int(e))
 }
 
+func (e RevealerTransitionType) String() string {
+	switch e {
+		case RevealerTransitionTypeNone: return "RevealerTransitionTypeNone"
+		case RevealerTransitionTypeCrossfade: return "RevealerTransitionTypeCrossfade"
+		case RevealerTransitionTypeSlideRight: return "RevealerTransitionTypeSlideRight"
+		case RevealerTransitionTypeSlideLeft: return "RevealerTransitionTypeSlideLeft"
+		case RevealerTransitionTypeSlideUp: return "RevealerTransitionTypeSlideUp"
+		case RevealerTransitionTypeSlideDown: return "RevealerTransitionTypeSlideDown"
+		default: return fmt.Sprintf("RevealerTransitionType(%d)", e)
+	}
+}
+
 // ScrollStep wraps GtkScrollStep
 type ScrollStep C.int
 
@@ -3703,6 +4393,18 @@ var _ gobject.GoValueInitializer = ScrollStep(0)
 func (e ScrollStep) InitGoValue(v *gobject.Value) {
 	v.Init(TypeScrollStep)
 	v.SetEnum(int(e))
+}
+
+func (e ScrollStep) String() string {
+	switch e {
+		case ScrollHorizontalPages: return "ScrollHorizontalPages"
+		case ScrollHorizontalEnds: return "ScrollHorizontalEnds"
+		case ScrollSteps: return "ScrollSteps"
+		case ScrollPages: return "ScrollPages"
+		case ScrollEnds: return "ScrollEnds"
+		case ScrollHorizontalSteps: return "ScrollHorizontalSteps"
+		default: return fmt.Sprintf("ScrollStep(%d)", e)
+	}
 }
 
 // ScrollType wraps GtkScrollType
@@ -3788,6 +4490,28 @@ func (e ScrollType) InitGoValue(v *gobject.Value) {
 	v.SetEnum(int(e))
 }
 
+func (e ScrollType) String() string {
+	switch e {
+		case ScrollPageRight: return "ScrollPageRight"
+		case ScrollStepForward: return "ScrollStepForward"
+		case ScrollStepRight: return "ScrollStepRight"
+		case ScrollStart: return "ScrollStart"
+		case ScrollJump: return "ScrollJump"
+		case ScrollPageBackward: return "ScrollPageBackward"
+		case ScrollPageForward: return "ScrollPageForward"
+		case ScrollStepDown: return "ScrollStepDown"
+		case ScrollPageUp: return "ScrollPageUp"
+		case ScrollPageLeft: return "ScrollPageLeft"
+		case ScrollStepBackward: return "ScrollStepBackward"
+		case ScrollEnd: return "ScrollEnd"
+		case ScrollNone: return "ScrollNone"
+		case ScrollStepUp: return "ScrollStepUp"
+		case ScrollPageDown: return "ScrollPageDown"
+		case ScrollStepLeft: return "ScrollStepLeft"
+		default: return fmt.Sprintf("ScrollType(%d)", e)
+	}
+}
+
 // ScrollablePolicy wraps GtkScrollablePolicy
 //
 // Defines the policy to be used in a scrollable widget when updating
@@ -3814,6 +4538,14 @@ var _ gobject.GoValueInitializer = ScrollablePolicy(0)
 func (e ScrollablePolicy) InitGoValue(v *gobject.Value) {
 	v.Init(TypeScrollablePolicy)
 	v.SetEnum(int(e))
+}
+
+func (e ScrollablePolicy) String() string {
+	switch e {
+		case ScrollMinimum: return "ScrollMinimum"
+		case ScrollNatural: return "ScrollNatural"
+		default: return fmt.Sprintf("ScrollablePolicy(%d)", e)
+	}
 }
 
 // SelectionMode wraps GtkSelectionMode
@@ -3859,6 +4591,16 @@ func (e SelectionMode) InitGoValue(v *gobject.Value) {
 	v.SetEnum(int(e))
 }
 
+func (e SelectionMode) String() string {
+	switch e {
+		case SelectionNone: return "SelectionNone"
+		case SelectionSingle: return "SelectionSingle"
+		case SelectionBrowse: return "SelectionBrowse"
+		case SelectionMultiple: return "SelectionMultiple"
+		default: return fmt.Sprintf("SelectionMode(%d)", e)
+	}
+}
+
 // SensitivityType wraps GtkSensitivityType
 //
 // Determines how GTK+ handles the sensitivity of stepper arrows
@@ -3890,6 +4632,15 @@ var _ gobject.GoValueInitializer = SensitivityType(0)
 func (e SensitivityType) InitGoValue(v *gobject.Value) {
 	v.Init(TypeSensitivityType)
 	v.SetEnum(int(e))
+}
+
+func (e SensitivityType) String() string {
+	switch e {
+		case SensitivityOff: return "SensitivityOff"
+		case SensitivityAuto: return "SensitivityAuto"
+		case SensitivityOn: return "SensitivityOn"
+		default: return fmt.Sprintf("SensitivityType(%d)", e)
+	}
 }
 
 // ShadowType wraps GtkShadowType
@@ -3933,6 +4684,17 @@ var _ gobject.GoValueInitializer = ShadowType(0)
 func (e ShadowType) InitGoValue(v *gobject.Value) {
 	v.Init(TypeShadowType)
 	v.SetEnum(int(e))
+}
+
+func (e ShadowType) String() string {
+	switch e {
+		case ShadowNone: return "ShadowNone"
+		case ShadowIn: return "ShadowIn"
+		case ShadowOut: return "ShadowOut"
+		case ShadowEtchedIn: return "ShadowEtchedIn"
+		case ShadowEtchedOut: return "ShadowEtchedOut"
+		default: return fmt.Sprintf("ShadowType(%d)", e)
+	}
 }
 
 // ShortcutType wraps GtkShortcutType
@@ -3989,6 +4751,20 @@ func (e ShortcutType) InitGoValue(v *gobject.Value) {
 	v.SetEnum(int(e))
 }
 
+func (e ShortcutType) String() string {
+	switch e {
+		case ShortcutGestureTwoFingerSwipeRight: return "ShortcutGestureTwoFingerSwipeRight"
+		case ShortcutGesture: return "ShortcutGesture"
+		case ShortcutAccelerator: return "ShortcutAccelerator"
+		case ShortcutGesturePinch: return "ShortcutGesturePinch"
+		case ShortcutGestureStretch: return "ShortcutGestureStretch"
+		case ShortcutGestureRotateClockwise: return "ShortcutGestureRotateClockwise"
+		case ShortcutGestureRotateCounterclockwise: return "ShortcutGestureRotateCounterclockwise"
+		case ShortcutGestureTwoFingerSwipeLeft: return "ShortcutGestureTwoFingerSwipeLeft"
+		default: return fmt.Sprintf("ShortcutType(%d)", e)
+	}
+}
+
 // SizeGroupMode wraps GtkSizeGroupMode
 //
 // The mode of the size group determines the directions in which the size
@@ -4025,6 +4801,16 @@ func (e SizeGroupMode) InitGoValue(v *gobject.Value) {
 	v.SetEnum(int(e))
 }
 
+func (e SizeGroupMode) String() string {
+	switch e {
+		case SizeGroupVertical: return "SizeGroupVertical"
+		case SizeGroupBoth: return "SizeGroupBoth"
+		case SizeGroupNone: return "SizeGroupNone"
+		case SizeGroupHorizontal: return "SizeGroupHorizontal"
+		default: return fmt.Sprintf("SizeGroupMode(%d)", e)
+	}
+}
+
 // SizeRequestMode wraps GtkSizeRequestMode
 //
 // Specifies a preference for height-for-width or
@@ -4057,6 +4843,15 @@ func (e SizeRequestMode) InitGoValue(v *gobject.Value) {
 	v.SetEnum(int(e))
 }
 
+func (e SizeRequestMode) String() string {
+	switch e {
+		case SizeRequestHeightForWidth: return "SizeRequestHeightForWidth"
+		case SizeRequestWidthForHeight: return "SizeRequestWidthForHeight"
+		case SizeRequestConstantSize: return "SizeRequestConstantSize"
+		default: return fmt.Sprintf("SizeRequestMode(%d)", e)
+	}
+}
+
 // SortType wraps GtkSortType
 //
 // Determines the direction of a sort.
@@ -4082,6 +4877,14 @@ var _ gobject.GoValueInitializer = SortType(0)
 func (e SortType) InitGoValue(v *gobject.Value) {
 	v.Init(TypeSortType)
 	v.SetEnum(int(e))
+}
+
+func (e SortType) String() string {
+	switch e {
+		case SortAscending: return "SortAscending"
+		case SortDescending: return "SortDescending"
+		default: return fmt.Sprintf("SortType(%d)", e)
+	}
 }
 
 // SpinButtonUpdatePolicy wraps GtkSpinButtonUpdatePolicy
@@ -4114,6 +4917,14 @@ var _ gobject.GoValueInitializer = SpinButtonUpdatePolicy(0)
 func (e SpinButtonUpdatePolicy) InitGoValue(v *gobject.Value) {
 	v.Init(TypeSpinButtonUpdatePolicy)
 	v.SetEnum(int(e))
+}
+
+func (e SpinButtonUpdatePolicy) String() string {
+	switch e {
+		case UpdateAlways: return "UpdateAlways"
+		case UpdateIfValid: return "UpdateIfValid"
+		default: return fmt.Sprintf("SpinButtonUpdatePolicy(%d)", e)
+	}
 }
 
 // SpinType wraps GtkSpinType
@@ -4162,6 +4973,19 @@ var _ gobject.GoValueInitializer = SpinType(0)
 func (e SpinType) InitGoValue(v *gobject.Value) {
 	v.Init(TypeSpinType)
 	v.SetEnum(int(e))
+}
+
+func (e SpinType) String() string {
+	switch e {
+		case SpinHome: return "SpinHome"
+		case SpinEnd: return "SpinEnd"
+		case SpinUserDefined: return "SpinUserDefined"
+		case SpinStepForward: return "SpinStepForward"
+		case SpinStepBackward: return "SpinStepBackward"
+		case SpinPageForward: return "SpinPageForward"
+		case SpinPageBackward: return "SpinPageBackward"
+		default: return fmt.Sprintf("SpinType(%d)", e)
+	}
 }
 
 // StackTransitionType wraps GtkStackTransitionType
@@ -4266,6 +5090,32 @@ func (e StackTransitionType) InitGoValue(v *gobject.Value) {
 	v.SetEnum(int(e))
 }
 
+func (e StackTransitionType) String() string {
+	switch e {
+		case StackTransitionTypeOverDownUp: return "StackTransitionTypeOverDownUp"
+		case StackTransitionTypeOverLeftRight: return "StackTransitionTypeOverLeftRight"
+		case StackTransitionTypeSlideLeft: return "StackTransitionTypeSlideLeft"
+		case StackTransitionTypeSlideUpDown: return "StackTransitionTypeSlideUpDown"
+		case StackTransitionTypeOverLeft: return "StackTransitionTypeOverLeft"
+		case StackTransitionTypeOverUpDown: return "StackTransitionTypeOverUpDown"
+		case StackTransitionTypeOverRightLeft: return "StackTransitionTypeOverRightLeft"
+		case StackTransitionTypeNone: return "StackTransitionTypeNone"
+		case StackTransitionTypeSlideLeftRight: return "StackTransitionTypeSlideLeftRight"
+		case StackTransitionTypeOverRight: return "StackTransitionTypeOverRight"
+		case StackTransitionTypeUnderDown: return "StackTransitionTypeUnderDown"
+		case StackTransitionTypeUnderRight: return "StackTransitionTypeUnderRight"
+		case StackTransitionTypeCrossfade: return "StackTransitionTypeCrossfade"
+		case StackTransitionTypeSlideUp: return "StackTransitionTypeSlideUp"
+		case StackTransitionTypeSlideDown: return "StackTransitionTypeSlideDown"
+		case StackTransitionTypeUnderLeft: return "StackTransitionTypeUnderLeft"
+		case StackTransitionTypeSlideRight: return "StackTransitionTypeSlideRight"
+		case StackTransitionTypeOverUp: return "StackTransitionTypeOverUp"
+		case StackTransitionTypeOverDown: return "StackTransitionTypeOverDown"
+		case StackTransitionTypeUnderUp: return "StackTransitionTypeUnderUp"
+		default: return fmt.Sprintf("StackTransitionType(%d)", e)
+	}
+}
+
 // TextBufferTargetInfo wraps GtkTextBufferTargetInfo
 //
 // These values are used as “info” for the targets contained in the
@@ -4302,6 +5152,15 @@ func (e TextBufferTargetInfo) InitGoValue(v *gobject.Value) {
 	v.SetEnum(int(e))
 }
 
+func (e TextBufferTargetInfo) String() string {
+	switch e {
+		case TextBufferTargetInfoText: return "TextBufferTargetInfoText"
+		case TextBufferTargetInfoBufferContents: return "TextBufferTargetInfoBufferContents"
+		case TextBufferTargetInfoRichText: return "TextBufferTargetInfoRichText"
+		default: return fmt.Sprintf("TextBufferTargetInfo(%d)", e)
+	}
+}
+
 // TextDirection wraps GtkTextDirection
 //
 // Reading directions for text.
@@ -4333,6 +5192,15 @@ func (e TextDirection) InitGoValue(v *gobject.Value) {
 	v.SetEnum(int(e))
 }
 
+func (e TextDirection) String() string {
+	switch e {
+		case TextDirNone: return "TextDirNone"
+		case TextDirLTR: return "TextDirLTR"
+		case TextDirRTL: return "TextDirRTL"
+		default: return fmt.Sprintf("TextDirection(%d)", e)
+	}
+}
+
 // TextExtendSelection wraps GtkTextExtendSelection
 //
 // Granularity types that extend the text selection. Use the
@@ -4361,6 +5229,14 @@ var _ gobject.GoValueInitializer = TextExtendSelection(0)
 func (e TextExtendSelection) InitGoValue(v *gobject.Value) {
 	v.Init(TypeTextExtendSelection)
 	v.SetEnum(int(e))
+}
+
+func (e TextExtendSelection) String() string {
+	switch e {
+		case TextExtendSelectionWord: return "TextExtendSelectionWord"
+		case TextExtendSelectionLine: return "TextExtendSelectionLine"
+		default: return fmt.Sprintf("TextExtendSelection(%d)", e)
+	}
 }
 
 // TextViewLayer wraps GtkTextViewLayer
@@ -4397,6 +5273,16 @@ var _ gobject.GoValueInitializer = TextViewLayer(0)
 func (e TextViewLayer) InitGoValue(v *gobject.Value) {
 	v.Init(TypeTextViewLayer)
 	v.SetEnum(int(e))
+}
+
+func (e TextViewLayer) String() string {
+	switch e {
+		case TextViewLayerBelow: return "TextViewLayerBelow"
+		case TextViewLayerAbove: return "TextViewLayerAbove"
+		case TextViewLayerBelowText: return "TextViewLayerBelowText"
+		case TextViewLayerAboveText: return "TextViewLayerAboveText"
+		default: return fmt.Sprintf("TextViewLayer(%d)", e)
+	}
 }
 
 // TextWindowType wraps GtkTextWindowType
@@ -4446,6 +5332,19 @@ func (e TextWindowType) InitGoValue(v *gobject.Value) {
 	v.SetEnum(int(e))
 }
 
+func (e TextWindowType) String() string {
+	switch e {
+		case TextWindowTop: return "TextWindowTop"
+		case TextWindowBottom: return "TextWindowBottom"
+		case TextWindowPrivate: return "TextWindowPrivate"
+		case TextWindowWidget: return "TextWindowWidget"
+		case TextWindowText: return "TextWindowText"
+		case TextWindowLeft: return "TextWindowLeft"
+		case TextWindowRight: return "TextWindowRight"
+		default: return fmt.Sprintf("TextWindowType(%d)", e)
+	}
+}
+
 // ToolbarStyle wraps GtkToolbarStyle
 //
 // Used to customize the appearance of a #GtkToolbar. Note that
@@ -4486,6 +5385,16 @@ func (e ToolbarStyle) InitGoValue(v *gobject.Value) {
 	v.SetEnum(int(e))
 }
 
+func (e ToolbarStyle) String() string {
+	switch e {
+		case ToolbarBothHoriz: return "ToolbarBothHoriz"
+		case ToolbarIcons: return "ToolbarIcons"
+		case ToolbarText: return "ToolbarText"
+		case ToolbarBoth: return "ToolbarBoth"
+		default: return fmt.Sprintf("ToolbarStyle(%d)", e)
+	}
+}
+
 // TreeViewColumnSizing wraps GtkTreeViewColumnSizing
 //
 // The sizing method the column uses to determine its width.  Please note
@@ -4517,6 +5426,15 @@ var _ gobject.GoValueInitializer = TreeViewColumnSizing(0)
 func (e TreeViewColumnSizing) InitGoValue(v *gobject.Value) {
 	v.Init(TypeTreeViewColumnSizing)
 	v.SetEnum(int(e))
+}
+
+func (e TreeViewColumnSizing) String() string {
+	switch e {
+		case TreeViewColumnGrowOnly: return "TreeViewColumnGrowOnly"
+		case TreeViewColumnAutosize: return "TreeViewColumnAutosize"
+		case TreeViewColumnFixed: return "TreeViewColumnFixed"
+		default: return fmt.Sprintf("TreeViewColumnSizing(%d)", e)
+	}
 }
 
 // TreeViewDropPosition wraps GtkTreeViewDropPosition
@@ -4554,6 +5472,16 @@ func (e TreeViewDropPosition) InitGoValue(v *gobject.Value) {
 	v.SetEnum(int(e))
 }
 
+func (e TreeViewDropPosition) String() string {
+	switch e {
+		case TreeViewDropBefore: return "TreeViewDropBefore"
+		case TreeViewDropAfter: return "TreeViewDropAfter"
+		case TreeViewDropIntoOrBefore: return "TreeViewDropIntoOrBefore"
+		case TreeViewDropIntoOrAfter: return "TreeViewDropIntoOrAfter"
+		default: return fmt.Sprintf("TreeViewDropPosition(%d)", e)
+	}
+}
+
 // TreeViewGridLines wraps GtkTreeViewGridLines
 //
 // Used to indicate which grid lines to draw in a tree view.
@@ -4587,6 +5515,16 @@ var _ gobject.GoValueInitializer = TreeViewGridLines(0)
 func (e TreeViewGridLines) InitGoValue(v *gobject.Value) {
 	v.Init(TypeTreeViewGridLines)
 	v.SetEnum(int(e))
+}
+
+func (e TreeViewGridLines) String() string {
+	switch e {
+		case TreeViewGridLinesNone: return "TreeViewGridLinesNone"
+		case TreeViewGridLinesHorizontal: return "TreeViewGridLinesHorizontal"
+		case TreeViewGridLinesVertical: return "TreeViewGridLinesVertical"
+		case TreeViewGridLinesBoth: return "TreeViewGridLinesBoth"
+		default: return fmt.Sprintf("TreeViewGridLines(%d)", e)
+	}
 }
 
 // Unit wraps GtkUnit
@@ -4624,6 +5562,16 @@ func (e Unit) InitGoValue(v *gobject.Value) {
 	v.SetEnum(int(e))
 }
 
+func (e Unit) String() string {
+	switch e {
+		case UnitPoints: return "UnitPoints"
+		case UnitInch: return "UnitInch"
+		case UnitMm: return "UnitMm"
+		case UnitNone: return "UnitNone"
+		default: return fmt.Sprintf("Unit(%d)", e)
+	}
+}
+
 // WidgetHelpType wraps GtkWidgetHelpType
 //
 // Kinds of widget-specific help. Used by the ::show-help signal.
@@ -4649,6 +5597,14 @@ var _ gobject.GoValueInitializer = WidgetHelpType(0)
 func (e WidgetHelpType) InitGoValue(v *gobject.Value) {
 	v.Init(TypeWidgetHelpType)
 	v.SetEnum(int(e))
+}
+
+func (e WidgetHelpType) String() string {
+	switch e {
+		case WidgetHelpTooltip: return "WidgetHelpTooltip"
+		case WidgetHelpWhatsThis: return "WidgetHelpWhatsThis"
+		default: return fmt.Sprintf("WidgetHelpType(%d)", e)
+	}
 }
 
 // WindowPosition wraps GtkWindowPosition
@@ -4693,6 +5649,17 @@ func (e WindowPosition) InitGoValue(v *gobject.Value) {
 	v.SetEnum(int(e))
 }
 
+func (e WindowPosition) String() string {
+	switch e {
+		case WinPosCenterAlways: return "WinPosCenterAlways"
+		case WinPosCenterOnParent: return "WinPosCenterOnParent"
+		case WinPosNone: return "WinPosNone"
+		case WinPosCenter: return "WinPosCenter"
+		case WinPosMouse: return "WinPosMouse"
+		default: return fmt.Sprintf("WindowPosition(%d)", e)
+	}
+}
+
 // WindowType wraps GtkWindowType
 //
 // A #GtkWindow can be one of these types. Most things you’d consider a
@@ -4730,6 +5697,14 @@ var _ gobject.GoValueInitializer = WindowType(0)
 func (e WindowType) InitGoValue(v *gobject.Value) {
 	v.Init(TypeWindowType)
 	v.SetEnum(int(e))
+}
+
+func (e WindowType) String() string {
+	switch e {
+		case WindowToplevel: return "WindowToplevel"
+		case WindowPopup: return "WindowPopup"
+		default: return fmt.Sprintf("WindowType(%d)", e)
+	}
 }
 
 // WrapMode wraps GtkWrapMode
@@ -4770,6 +5745,16 @@ func (e WrapMode) InitGoValue(v *gobject.Value) {
 	v.SetEnum(int(e))
 }
 
+func (e WrapMode) String() string {
+	switch e {
+		case WrapChar: return "WrapChar"
+		case WrapWord: return "WrapWord"
+		case WrapWordChar: return "WrapWordChar"
+		case WrapNone: return "WrapNone"
+		default: return fmt.Sprintf("WrapMode(%d)", e)
+	}
+}
+
 // AccelFlags wraps GtkAccelFlags
 //
 // Accelerator flags used with gtk_accel_group_connect().
@@ -4803,6 +5788,24 @@ var _ gobject.GoValueInitializer = AccelFlags(0)
 func (f AccelFlags) InitGoValue(v *gobject.Value) {
 	v.Init(TypeAccelFlags)
 	v.SetFlags(int(f))
+}
+
+func (f AccelFlags) String() string {
+	if f == 0 {
+		return "AccelFlags(0)"
+	}
+
+	var parts []string
+	if (f & AccelVisible) != 0 {
+		parts = append(parts, "AccelVisible")
+	}
+	if (f & AccelLocked) != 0 {
+		parts = append(parts, "AccelLocked")
+	}
+	if (f & AccelMask) != 0 {
+		parts = append(parts, "AccelMask")
+	}
+	return "AccelFlags(" + strings.Join(parts, "|") + ")"
 }
 
 // ApplicationInhibitFlags wraps GtkApplicationInhibitFlags
@@ -4847,6 +5850,27 @@ func (f ApplicationInhibitFlags) InitGoValue(v *gobject.Value) {
 	v.SetFlags(int(f))
 }
 
+func (f ApplicationInhibitFlags) String() string {
+	if f == 0 {
+		return "ApplicationInhibitFlags(0)"
+	}
+
+	var parts []string
+	if (f & ApplicationInhibitLogout) != 0 {
+		parts = append(parts, "ApplicationInhibitLogout")
+	}
+	if (f & ApplicationInhibitSwitch) != 0 {
+		parts = append(parts, "ApplicationInhibitSwitch")
+	}
+	if (f & ApplicationInhibitSuspend) != 0 {
+		parts = append(parts, "ApplicationInhibitSuspend")
+	}
+	if (f & ApplicationInhibitIdle) != 0 {
+		parts = append(parts, "ApplicationInhibitIdle")
+	}
+	return "ApplicationInhibitFlags(" + strings.Join(parts, "|") + ")"
+}
+
 // AttachOptions wraps GtkAttachOptions
 //
 // Denotes the expansion properties that a widget will have when it (or its
@@ -4882,6 +5906,24 @@ var _ gobject.GoValueInitializer = AttachOptions(0)
 func (f AttachOptions) InitGoValue(v *gobject.Value) {
 	v.Init(TypeAttachOptions)
 	v.SetFlags(int(f))
+}
+
+func (f AttachOptions) String() string {
+	if f == 0 {
+		return "AttachOptions(0)"
+	}
+
+	var parts []string
+	if (f & Expand) != 0 {
+		parts = append(parts, "Expand")
+	}
+	if (f & Shrink) != 0 {
+		parts = append(parts, "Shrink")
+	}
+	if (f & Fill) != 0 {
+		parts = append(parts, "Fill")
+	}
+	return "AttachOptions(" + strings.Join(parts, "|") + ")"
 }
 
 // CalendarDisplayOptions wraps GtkCalendarDisplayOptions
@@ -4927,6 +5969,30 @@ var _ gobject.GoValueInitializer = CalendarDisplayOptions(0)
 func (f CalendarDisplayOptions) InitGoValue(v *gobject.Value) {
 	v.Init(TypeCalendarDisplayOptions)
 	v.SetFlags(int(f))
+}
+
+func (f CalendarDisplayOptions) String() string {
+	if f == 0 {
+		return "CalendarDisplayOptions(0)"
+	}
+
+	var parts []string
+	if (f & CalendarShowHeading) != 0 {
+		parts = append(parts, "CalendarShowHeading")
+	}
+	if (f & CalendarShowDayNames) != 0 {
+		parts = append(parts, "CalendarShowDayNames")
+	}
+	if (f & CalendarNoMonthChange) != 0 {
+		parts = append(parts, "CalendarNoMonthChange")
+	}
+	if (f & CalendarShowWeekNumbers) != 0 {
+		parts = append(parts, "CalendarShowWeekNumbers")
+	}
+	if (f & CalendarShowDetails) != 0 {
+		parts = append(parts, "CalendarShowDetails")
+	}
+	return "CalendarDisplayOptions(" + strings.Join(parts, "|") + ")"
 }
 
 // CellRendererState wraps GtkCellRendererState
@@ -4979,6 +6045,36 @@ var _ gobject.GoValueInitializer = CellRendererState(0)
 func (f CellRendererState) InitGoValue(v *gobject.Value) {
 	v.Init(TypeCellRendererState)
 	v.SetFlags(int(f))
+}
+
+func (f CellRendererState) String() string {
+	if f == 0 {
+		return "CellRendererState(0)"
+	}
+
+	var parts []string
+	if (f & CellRendererSelected) != 0 {
+		parts = append(parts, "CellRendererSelected")
+	}
+	if (f & CellRendererPrelit) != 0 {
+		parts = append(parts, "CellRendererPrelit")
+	}
+	if (f & CellRendererInsensitive) != 0 {
+		parts = append(parts, "CellRendererInsensitive")
+	}
+	if (f & CellRendererSorted) != 0 {
+		parts = append(parts, "CellRendererSorted")
+	}
+	if (f & CellRendererFocused) != 0 {
+		parts = append(parts, "CellRendererFocused")
+	}
+	if (f & CellRendererExpandable) != 0 {
+		parts = append(parts, "CellRendererExpandable")
+	}
+	if (f & CellRendererExpanded) != 0 {
+		parts = append(parts, "CellRendererExpanded")
+	}
+	return "CellRendererState(" + strings.Join(parts, "|") + ")"
 }
 
 // DebugFlag wraps GtkDebugFlag
@@ -5046,6 +6142,81 @@ func (f DebugFlag) InitGoValue(v *gobject.Value) {
 	v.SetFlags(int(f))
 }
 
+func (f DebugFlag) String() string {
+	if f == 0 {
+		return "DebugFlag(0)"
+	}
+
+	var parts []string
+	if (f & DebugMisc) != 0 {
+		parts = append(parts, "DebugMisc")
+	}
+	if (f & DebugPlugsocket) != 0 {
+		parts = append(parts, "DebugPlugsocket")
+	}
+	if (f & DebugText) != 0 {
+		parts = append(parts, "DebugText")
+	}
+	if (f & DebugTree) != 0 {
+		parts = append(parts, "DebugTree")
+	}
+	if (f & DebugUpdates) != 0 {
+		parts = append(parts, "DebugUpdates")
+	}
+	if (f & DebugKeybindings) != 0 {
+		parts = append(parts, "DebugKeybindings")
+	}
+	if (f & DebugMultihead) != 0 {
+		parts = append(parts, "DebugMultihead")
+	}
+	if (f & DebugModules) != 0 {
+		parts = append(parts, "DebugModules")
+	}
+	if (f & DebugGeometry) != 0 {
+		parts = append(parts, "DebugGeometry")
+	}
+	if (f & DebugIcontheme) != 0 {
+		parts = append(parts, "DebugIcontheme")
+	}
+	if (f & DebugPrinting) != 0 {
+		parts = append(parts, "DebugPrinting")
+	}
+	if (f & DebugBuilder) != 0 {
+		parts = append(parts, "DebugBuilder")
+	}
+	if (f & DebugSizeRequest) != 0 {
+		parts = append(parts, "DebugSizeRequest")
+	}
+	if (f & DebugNoCSSCache) != 0 {
+		parts = append(parts, "DebugNoCSSCache")
+	}
+	if (f & DebugBaselines) != 0 {
+		parts = append(parts, "DebugBaselines")
+	}
+	if (f & DebugPixelCache) != 0 {
+		parts = append(parts, "DebugPixelCache")
+	}
+	if (f & DebugNoPixelCache) != 0 {
+		parts = append(parts, "DebugNoPixelCache")
+	}
+	if (f & DebugInteractive) != 0 {
+		parts = append(parts, "DebugInteractive")
+	}
+	if (f & DebugTouchscreen) != 0 {
+		parts = append(parts, "DebugTouchscreen")
+	}
+	if (f & DebugActions) != 0 {
+		parts = append(parts, "DebugActions")
+	}
+	if (f & DebugResize) != 0 {
+		parts = append(parts, "DebugResize")
+	}
+	if (f & DebugLayout) != 0 {
+		parts = append(parts, "DebugLayout")
+	}
+	return "DebugFlag(" + strings.Join(parts, "|") + ")"
+}
+
 // DestDefaults wraps GtkDestDefaults
 //
 // The #GtkDestDefaults enumeration specifies the various
@@ -5098,6 +6269,27 @@ func (f DestDefaults) InitGoValue(v *gobject.Value) {
 	v.SetFlags(int(f))
 }
 
+func (f DestDefaults) String() string {
+	if f == 0 {
+		return "DestDefaults(0)"
+	}
+
+	var parts []string
+	if (f & DestDefaultMotion) != 0 {
+		parts = append(parts, "DestDefaultMotion")
+	}
+	if (f & DestDefaultHighlight) != 0 {
+		parts = append(parts, "DestDefaultHighlight")
+	}
+	if (f & DestDefaultDrop) != 0 {
+		parts = append(parts, "DestDefaultDrop")
+	}
+	if (f & DestDefaultAll) != 0 {
+		parts = append(parts, "DestDefaultAll")
+	}
+	return "DestDefaults(" + strings.Join(parts, "|") + ")"
+}
+
 // DialogFlags wraps GtkDialogFlags
 //
 // Flags used to influence dialog construction.
@@ -5134,6 +6326,24 @@ var _ gobject.GoValueInitializer = DialogFlags(0)
 func (f DialogFlags) InitGoValue(v *gobject.Value) {
 	v.Init(TypeDialogFlags)
 	v.SetFlags(int(f))
+}
+
+func (f DialogFlags) String() string {
+	if f == 0 {
+		return "DialogFlags(0)"
+	}
+
+	var parts []string
+	if (f & DialogModal) != 0 {
+		parts = append(parts, "DialogModal")
+	}
+	if (f & DialogDestroyWithParent) != 0 {
+		parts = append(parts, "DialogDestroyWithParent")
+	}
+	if (f & DialogUseHeaderBar) != 0 {
+		parts = append(parts, "DialogUseHeaderBar")
+	}
+	return "DialogFlags(" + strings.Join(parts, "|") + ")"
 }
 
 // EventControllerScrollFlags wraps GtkEventControllerScrollFlags
@@ -5184,6 +6394,33 @@ func (f EventControllerScrollFlags) InitGoValue(v *gobject.Value) {
 	v.SetFlags(int(f))
 }
 
+func (f EventControllerScrollFlags) String() string {
+	if f == 0 {
+		return "EventControllerScrollFlags(0)"
+	}
+
+	var parts []string
+	if (f & EventControllerScrollNone) != 0 {
+		parts = append(parts, "EventControllerScrollNone")
+	}
+	if (f & EventControllerScrollVertical) != 0 {
+		parts = append(parts, "EventControllerScrollVertical")
+	}
+	if (f & EventControllerScrollHorizontal) != 0 {
+		parts = append(parts, "EventControllerScrollHorizontal")
+	}
+	if (f & EventControllerScrollDiscrete) != 0 {
+		parts = append(parts, "EventControllerScrollDiscrete")
+	}
+	if (f & EventControllerScrollKinetic) != 0 {
+		parts = append(parts, "EventControllerScrollKinetic")
+	}
+	if (f & EventControllerScrollBothAxes) != 0 {
+		parts = append(parts, "EventControllerScrollBothAxes")
+	}
+	return "EventControllerScrollFlags(" + strings.Join(parts, "|") + ")"
+}
+
 // FileFilterFlags wraps GtkFileFilterFlags
 //
 // These flags indicate what parts of a #GtkFileFilterInfo struct
@@ -5223,6 +6460,27 @@ var _ gobject.GoValueInitializer = FileFilterFlags(0)
 func (f FileFilterFlags) InitGoValue(v *gobject.Value) {
 	v.Init(TypeFileFilterFlags)
 	v.SetFlags(int(f))
+}
+
+func (f FileFilterFlags) String() string {
+	if f == 0 {
+		return "FileFilterFlags(0)"
+	}
+
+	var parts []string
+	if (f & FileFilterFilename) != 0 {
+		parts = append(parts, "FileFilterFilename")
+	}
+	if (f & FileFilterURI) != 0 {
+		parts = append(parts, "FileFilterURI")
+	}
+	if (f & FileFilterDisplayName) != 0 {
+		parts = append(parts, "FileFilterDisplayName")
+	}
+	if (f & FileFilterMIMEType) != 0 {
+		parts = append(parts, "FileFilterMIMEType")
+	}
+	return "FileFilterFlags(" + strings.Join(parts, "|") + ")"
 }
 
 // FontChooserLevel wraps GtkFontChooserLevel
@@ -5268,6 +6526,30 @@ var _ gobject.GoValueInitializer = FontChooserLevel(0)
 func (f FontChooserLevel) InitGoValue(v *gobject.Value) {
 	v.Init(TypeFontChooserLevel)
 	v.SetFlags(int(f))
+}
+
+func (f FontChooserLevel) String() string {
+	if f == 0 {
+		return "FontChooserLevel(0)"
+	}
+
+	var parts []string
+	if (f & FontChooserLevelFamily) != 0 {
+		parts = append(parts, "FontChooserLevelFamily")
+	}
+	if (f & FontChooserLevelStyle) != 0 {
+		parts = append(parts, "FontChooserLevelStyle")
+	}
+	if (f & FontChooserLevelSize) != 0 {
+		parts = append(parts, "FontChooserLevelSize")
+	}
+	if (f & FontChooserLevelVariations) != 0 {
+		parts = append(parts, "FontChooserLevelVariations")
+	}
+	if (f & FontChooserLevelFeatures) != 0 {
+		parts = append(parts, "FontChooserLevelFeatures")
+	}
+	return "FontChooserLevel(" + strings.Join(parts, "|") + ")"
 }
 
 // IconLookupFlags wraps GtkIconLookupFlags
@@ -5341,6 +6623,42 @@ var _ gobject.GoValueInitializer = IconLookupFlags(0)
 func (f IconLookupFlags) InitGoValue(v *gobject.Value) {
 	v.Init(TypeIconLookupFlags)
 	v.SetFlags(int(f))
+}
+
+func (f IconLookupFlags) String() string {
+	if f == 0 {
+		return "IconLookupFlags(0)"
+	}
+
+	var parts []string
+	if (f & IconLookupNoSVG) != 0 {
+		parts = append(parts, "IconLookupNoSVG")
+	}
+	if (f & IconLookupForceSVG) != 0 {
+		parts = append(parts, "IconLookupForceSVG")
+	}
+	if (f & IconLookupUseBuiltin) != 0 {
+		parts = append(parts, "IconLookupUseBuiltin")
+	}
+	if (f & IconLookupGenericFallback) != 0 {
+		parts = append(parts, "IconLookupGenericFallback")
+	}
+	if (f & IconLookupForceSize) != 0 {
+		parts = append(parts, "IconLookupForceSize")
+	}
+	if (f & IconLookupForceRegular) != 0 {
+		parts = append(parts, "IconLookupForceRegular")
+	}
+	if (f & IconLookupForceSymbolic) != 0 {
+		parts = append(parts, "IconLookupForceSymbolic")
+	}
+	if (f & IconLookupDirLTR) != 0 {
+		parts = append(parts, "IconLookupDirLTR")
+	}
+	if (f & IconLookupDirRTL) != 0 {
+		parts = append(parts, "IconLookupDirRTL")
+	}
+	return "IconLookupFlags(" + strings.Join(parts, "|") + ")"
 }
 
 // InputHints wraps GtkInputHints
@@ -5425,6 +6743,51 @@ func (f InputHints) InitGoValue(v *gobject.Value) {
 	v.SetFlags(int(f))
 }
 
+func (f InputHints) String() string {
+	if f == 0 {
+		return "InputHints(0)"
+	}
+
+	var parts []string
+	if (f & InputHintNone) != 0 {
+		parts = append(parts, "InputHintNone")
+	}
+	if (f & InputHintSpellcheck) != 0 {
+		parts = append(parts, "InputHintSpellcheck")
+	}
+	if (f & InputHintNoSpellcheck) != 0 {
+		parts = append(parts, "InputHintNoSpellcheck")
+	}
+	if (f & InputHintWordCompletion) != 0 {
+		parts = append(parts, "InputHintWordCompletion")
+	}
+	if (f & InputHintLowercase) != 0 {
+		parts = append(parts, "InputHintLowercase")
+	}
+	if (f & InputHintUppercaseChars) != 0 {
+		parts = append(parts, "InputHintUppercaseChars")
+	}
+	if (f & InputHintUppercaseWords) != 0 {
+		parts = append(parts, "InputHintUppercaseWords")
+	}
+	if (f & InputHintUppercaseSentences) != 0 {
+		parts = append(parts, "InputHintUppercaseSentences")
+	}
+	if (f & InputHintInhibitOSK) != 0 {
+		parts = append(parts, "InputHintInhibitOSK")
+	}
+	if (f & InputHintVerticalWriting) != 0 {
+		parts = append(parts, "InputHintVerticalWriting")
+	}
+	if (f & InputHintEmoji) != 0 {
+		parts = append(parts, "InputHintEmoji")
+	}
+	if (f & InputHintNoEmoji) != 0 {
+		parts = append(parts, "InputHintNoEmoji")
+	}
+	return "InputHints(" + strings.Join(parts, "|") + ")"
+}
+
 // JunctionSides wraps GtkJunctionSides
 //
 // Describes how a rendered element connects to adjacent elements.
@@ -5484,6 +6847,42 @@ func (f JunctionSides) InitGoValue(v *gobject.Value) {
 	v.SetFlags(int(f))
 }
 
+func (f JunctionSides) String() string {
+	if f == 0 {
+		return "JunctionSides(0)"
+	}
+
+	var parts []string
+	if (f & JunctionNone) != 0 {
+		parts = append(parts, "JunctionNone")
+	}
+	if (f & JunctionCornerTopleft) != 0 {
+		parts = append(parts, "JunctionCornerTopleft")
+	}
+	if (f & JunctionCornerTopright) != 0 {
+		parts = append(parts, "JunctionCornerTopright")
+	}
+	if (f & JunctionCornerBottomleft) != 0 {
+		parts = append(parts, "JunctionCornerBottomleft")
+	}
+	if (f & JunctionCornerBottomright) != 0 {
+		parts = append(parts, "JunctionCornerBottomright")
+	}
+	if (f & JunctionTop) != 0 {
+		parts = append(parts, "JunctionTop")
+	}
+	if (f & JunctionBottom) != 0 {
+		parts = append(parts, "JunctionBottom")
+	}
+	if (f & JunctionLeft) != 0 {
+		parts = append(parts, "JunctionLeft")
+	}
+	if (f & JunctionRight) != 0 {
+		parts = append(parts, "JunctionRight")
+	}
+	return "JunctionSides(" + strings.Join(parts, "|") + ")"
+}
+
 // PlacesOpenFlags wraps GtkPlacesOpenFlags
 //
 // These flags serve two purposes.  First, the application can call gtk_places_sidebar_set_open_flags()
@@ -5538,6 +6937,24 @@ func (f PlacesOpenFlags) InitGoValue(v *gobject.Value) {
 	v.SetFlags(int(f))
 }
 
+func (f PlacesOpenFlags) String() string {
+	if f == 0 {
+		return "PlacesOpenFlags(0)"
+	}
+
+	var parts []string
+	if (f & PlacesOpenNormal) != 0 {
+		parts = append(parts, "PlacesOpenNormal")
+	}
+	if (f & PlacesOpenNewTab) != 0 {
+		parts = append(parts, "PlacesOpenNewTab")
+	}
+	if (f & PlacesOpenNewWindow) != 0 {
+		parts = append(parts, "PlacesOpenNewWindow")
+	}
+	return "PlacesOpenFlags(" + strings.Join(parts, "|") + ")"
+}
+
 // RCFlags wraps GtkRcFlags
 //
 // Deprecated
@@ -5575,6 +6992,27 @@ var _ gobject.GoValueInitializer = RCFlags(0)
 func (f RCFlags) InitGoValue(v *gobject.Value) {
 	v.Init(TypeRcFlags)
 	v.SetFlags(int(f))
+}
+
+func (f RCFlags) String() string {
+	if f == 0 {
+		return "RCFlags(0)"
+	}
+
+	var parts []string
+	if (f & RCFg) != 0 {
+		parts = append(parts, "RCFg")
+	}
+	if (f & RCBg) != 0 {
+		parts = append(parts, "RCBg")
+	}
+	if (f & RCText) != 0 {
+		parts = append(parts, "RCText")
+	}
+	if (f & RCBase) != 0 {
+		parts = append(parts, "RCBase")
+	}
+	return "RCFlags(" + strings.Join(parts, "|") + ")"
 }
 
 // RecentFilterFlags wraps GtkRecentFilterFlags
@@ -5628,6 +7066,33 @@ func (f RecentFilterFlags) InitGoValue(v *gobject.Value) {
 	v.SetFlags(int(f))
 }
 
+func (f RecentFilterFlags) String() string {
+	if f == 0 {
+		return "RecentFilterFlags(0)"
+	}
+
+	var parts []string
+	if (f & RecentFilterURI) != 0 {
+		parts = append(parts, "RecentFilterURI")
+	}
+	if (f & RecentFilterDisplayName) != 0 {
+		parts = append(parts, "RecentFilterDisplayName")
+	}
+	if (f & RecentFilterMIMEType) != 0 {
+		parts = append(parts, "RecentFilterMIMEType")
+	}
+	if (f & RecentFilterApplication) != 0 {
+		parts = append(parts, "RecentFilterApplication")
+	}
+	if (f & RecentFilterGroup) != 0 {
+		parts = append(parts, "RecentFilterGroup")
+	}
+	if (f & RecentFilterAge) != 0 {
+		parts = append(parts, "RecentFilterAge")
+	}
+	return "RecentFilterFlags(" + strings.Join(parts, "|") + ")"
+}
+
 // RegionFlags wraps GtkRegionFlags
 //
 // Describes a region within a widget.
@@ -5673,6 +7138,33 @@ var _ gobject.GoValueInitializer = RegionFlags(0)
 func (f RegionFlags) InitGoValue(v *gobject.Value) {
 	v.Init(TypeRegionFlags)
 	v.SetFlags(int(f))
+}
+
+func (f RegionFlags) String() string {
+	if f == 0 {
+		return "RegionFlags(0)"
+	}
+
+	var parts []string
+	if (f & RegionEven) != 0 {
+		parts = append(parts, "RegionEven")
+	}
+	if (f & RegionOdd) != 0 {
+		parts = append(parts, "RegionOdd")
+	}
+	if (f & RegionFirst) != 0 {
+		parts = append(parts, "RegionFirst")
+	}
+	if (f & RegionLast) != 0 {
+		parts = append(parts, "RegionLast")
+	}
+	if (f & RegionOnly) != 0 {
+		parts = append(parts, "RegionOnly")
+	}
+	if (f & RegionSorted) != 0 {
+		parts = append(parts, "RegionSorted")
+	}
+	return "RegionFlags(" + strings.Join(parts, "|") + ")"
 }
 
 // StateFlags wraps GtkStateFlags
@@ -5756,6 +7248,57 @@ func (f StateFlags) InitGoValue(v *gobject.Value) {
 	v.SetFlags(int(f))
 }
 
+func (f StateFlags) String() string {
+	if f == 0 {
+		return "StateFlags(0)"
+	}
+
+	var parts []string
+	if (f & StateFlagNormal) != 0 {
+		parts = append(parts, "StateFlagNormal")
+	}
+	if (f & StateFlagActive) != 0 {
+		parts = append(parts, "StateFlagActive")
+	}
+	if (f & StateFlagPrelight) != 0 {
+		parts = append(parts, "StateFlagPrelight")
+	}
+	if (f & StateFlagSelected) != 0 {
+		parts = append(parts, "StateFlagSelected")
+	}
+	if (f & StateFlagInsensitive) != 0 {
+		parts = append(parts, "StateFlagInsensitive")
+	}
+	if (f & StateFlagInconsistent) != 0 {
+		parts = append(parts, "StateFlagInconsistent")
+	}
+	if (f & StateFlagFocused) != 0 {
+		parts = append(parts, "StateFlagFocused")
+	}
+	if (f & StateFlagBackdrop) != 0 {
+		parts = append(parts, "StateFlagBackdrop")
+	}
+	if (f & StateFlagDirLTR) != 0 {
+		parts = append(parts, "StateFlagDirLTR")
+	}
+	if (f & StateFlagDirRTL) != 0 {
+		parts = append(parts, "StateFlagDirRTL")
+	}
+	if (f & StateFlagLink) != 0 {
+		parts = append(parts, "StateFlagLink")
+	}
+	if (f & StateFlagVisited) != 0 {
+		parts = append(parts, "StateFlagVisited")
+	}
+	if (f & StateFlagChecked) != 0 {
+		parts = append(parts, "StateFlagChecked")
+	}
+	if (f & StateFlagDropActive) != 0 {
+		parts = append(parts, "StateFlagDropActive")
+	}
+	return "StateFlags(" + strings.Join(parts, "|") + ")"
+}
+
 // StyleContextPrintFlags wraps GtkStyleContextPrintFlags
 //
 // Flags that modify the behavior of gtk_style_context_to_string().
@@ -5790,6 +7333,24 @@ var _ gobject.GoValueInitializer = StyleContextPrintFlags(0)
 func (f StyleContextPrintFlags) InitGoValue(v *gobject.Value) {
 	v.Init(TypeStyleContextPrintFlags)
 	v.SetFlags(int(f))
+}
+
+func (f StyleContextPrintFlags) String() string {
+	if f == 0 {
+		return "StyleContextPrintFlags(0)"
+	}
+
+	var parts []string
+	if (f & StyleContextPrintNone) != 0 {
+		parts = append(parts, "StyleContextPrintNone")
+	}
+	if (f & StyleContextPrintRecurse) != 0 {
+		parts = append(parts, "StyleContextPrintRecurse")
+	}
+	if (f & StyleContextPrintShowStyle) != 0 {
+		parts = append(parts, "StyleContextPrintShowStyle")
+	}
+	return "StyleContextPrintFlags(" + strings.Join(parts, "|") + ")"
 }
 
 // TargetFlags wraps GtkTargetFlags
@@ -5836,6 +7397,27 @@ func (f TargetFlags) InitGoValue(v *gobject.Value) {
 	v.SetFlags(int(f))
 }
 
+func (f TargetFlags) String() string {
+	if f == 0 {
+		return "TargetFlags(0)"
+	}
+
+	var parts []string
+	if (f & TargetSameApp) != 0 {
+		parts = append(parts, "TargetSameApp")
+	}
+	if (f & TargetSameWidget) != 0 {
+		parts = append(parts, "TargetSameWidget")
+	}
+	if (f & TargetOtherApp) != 0 {
+		parts = append(parts, "TargetOtherApp")
+	}
+	if (f & TargetOtherWidget) != 0 {
+		parts = append(parts, "TargetOtherWidget")
+	}
+	return "TargetFlags(" + strings.Join(parts, "|") + ")"
+}
+
 // TextSearchFlags wraps GtkTextSearchFlags
 //
 // Flags affecting how a search is done.
@@ -5878,6 +7460,24 @@ func (f TextSearchFlags) InitGoValue(v *gobject.Value) {
 	v.SetFlags(int(f))
 }
 
+func (f TextSearchFlags) String() string {
+	if f == 0 {
+		return "TextSearchFlags(0)"
+	}
+
+	var parts []string
+	if (f & TextSearchVisibleOnly) != 0 {
+		parts = append(parts, "TextSearchVisibleOnly")
+	}
+	if (f & TextSearchTextOnly) != 0 {
+		parts = append(parts, "TextSearchTextOnly")
+	}
+	if (f & TextSearchCaseInsensitive) != 0 {
+		parts = append(parts, "TextSearchCaseInsensitive")
+	}
+	return "TextSearchFlags(" + strings.Join(parts, "|") + ")"
+}
+
 // ToolPaletteDragTargets wraps GtkToolPaletteDragTargets
 //
 // Flags used to specify the supported drag targets.
@@ -5907,6 +7507,21 @@ var _ gobject.GoValueInitializer = ToolPaletteDragTargets(0)
 func (f ToolPaletteDragTargets) InitGoValue(v *gobject.Value) {
 	v.Init(TypeToolPaletteDragTargets)
 	v.SetFlags(int(f))
+}
+
+func (f ToolPaletteDragTargets) String() string {
+	if f == 0 {
+		return "ToolPaletteDragTargets(0)"
+	}
+
+	var parts []string
+	if (f & ToolPaletteDragItems) != 0 {
+		parts = append(parts, "ToolPaletteDragItems")
+	}
+	if (f & ToolPaletteDragGroups) != 0 {
+		parts = append(parts, "ToolPaletteDragGroups")
+	}
+	return "ToolPaletteDragTargets(" + strings.Join(parts, "|") + ")"
 }
 
 // TreeModelFlags wraps GtkTreeModelFlags
@@ -5945,6 +7560,21 @@ var _ gobject.GoValueInitializer = TreeModelFlags(0)
 func (f TreeModelFlags) InitGoValue(v *gobject.Value) {
 	v.Init(TypeTreeModelFlags)
 	v.SetFlags(int(f))
+}
+
+func (f TreeModelFlags) String() string {
+	if f == 0 {
+		return "TreeModelFlags(0)"
+	}
+
+	var parts []string
+	if (f & TreeModelItersPersist) != 0 {
+		parts = append(parts, "TreeModelItersPersist")
+	}
+	if (f & TreeModelListOnly) != 0 {
+		parts = append(parts, "TreeModelListOnly")
+	}
+	return "TreeModelFlags(" + strings.Join(parts, "|") + ")"
 }
 
 // AssistantPageFunc wraps GtkAssistantPageFunc
@@ -6498,14 +8128,14 @@ func AcceleratorNameWithKeycode(display gdk.Display, acceleratorKey uint, keycod
 //     modifier mask, %NULL 
 //
 // Parses a string representing an accelerator. The format looks like
-// “&lt;Control&gt;a” or “&lt;Shift&gt;&lt;Alt&gt;F1” or “&lt;Release&gt;z” (the last one is
+// `&lt;Control&gt;a` or `&lt;Shift&gt;&lt;Alt&gt;F1` or `&lt;Release&gt;z` (the last one is
 // for key release).
 // 
 // The parser is fairly liberal and allows lower or upper case, and also
-// abbreviations such as “&lt;Ctl&gt;” and “&lt;Ctrl&gt;”. Key names are parsed using
+// abbreviations such as `&lt;Ctl&gt;` and `&lt;Ctrl&gt;`. Key names are parsed using
 // gdk_keyval_from_name(). For character keys the name is not the symbol,
-// but the lowercase name, e.g. one would use “&lt;Ctrl&gt;minus” instead of
-// “&lt;Ctrl&gt;-”.
+// but the lowercase name, e.g. one would use `&lt;Ctrl&gt;minus` instead of
+// `&lt;Ctrl&gt;-`.
 // 
 // If the parse fails, @accelerator_key and @accelerator_mods will
 // be set to 0 (zero).

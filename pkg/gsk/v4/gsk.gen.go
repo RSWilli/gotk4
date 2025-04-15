@@ -3,7 +3,9 @@
 package gsk
 
 import (
+	"fmt"
 	"runtime"
+	"strings"
 	"unsafe"
 
 	"github.com/diamondburned/gotk4/pkg/core/userdata"
@@ -175,6 +177,28 @@ func (e BlendMode) InitGoValue(v *gobject.Value) {
 	v.SetEnum(int(e))
 }
 
+func (e BlendMode) String() string {
+	switch e {
+		case BlendModeDefault: return "BlendModeDefault"
+		case BlendModeScreen: return "BlendModeScreen"
+		case BlendModeDifference: return "BlendModeDifference"
+		case BlendModeMultiply: return "BlendModeMultiply"
+		case BlendModeOverlay: return "BlendModeOverlay"
+		case BlendModeExclusion: return "BlendModeExclusion"
+		case BlendModeLuminosity: return "BlendModeLuminosity"
+		case BlendModeLighten: return "BlendModeLighten"
+		case BlendModeColorBurn: return "BlendModeColorBurn"
+		case BlendModeHardLight: return "BlendModeHardLight"
+		case BlendModeSoftLight: return "BlendModeSoftLight"
+		case BlendModeHue: return "BlendModeHue"
+		case BlendModeSaturation: return "BlendModeSaturation"
+		case BlendModeDarken: return "BlendModeDarken"
+		case BlendModeColorDodge: return "BlendModeColorDodge"
+		case BlendModeColor: return "BlendModeColor"
+		default: return fmt.Sprintf("BlendMode(%d)", e)
+	}
+}
+
 // Corner wraps GskCorner
 //
 // The corner indices used by `GskRoundedRect`.
@@ -208,6 +232,16 @@ var _ gobject.GoValueInitializer = Corner(0)
 func (e Corner) InitGoValue(v *gobject.Value) {
 	v.Init(TypeCorner)
 	v.SetEnum(int(e))
+}
+
+func (e Corner) String() string {
+	switch e {
+		case CornerBottomRight: return "CornerBottomRight"
+		case CornerBottomLeft: return "CornerBottomLeft"
+		case CornerTopLeft: return "CornerTopLeft"
+		case CornerTopRight: return "CornerTopRight"
+		default: return fmt.Sprintf("Corner(%d)", e)
+	}
 }
 
 // FillRule wraps GskFillRule
@@ -253,6 +287,14 @@ var _ gobject.GoValueInitializer = FillRule(0)
 func (e FillRule) InitGoValue(v *gobject.Value) {
 	v.Init(TypeFillRule)
 	v.SetEnum(int(e))
+}
+
+func (e FillRule) String() string {
+	switch e {
+		case FillRuleWinding: return "FillRuleWinding"
+		case FillRuleEvenOdd: return "FillRuleEvenOdd"
+		default: return fmt.Sprintf("FillRule(%d)", e)
+	}
 }
 
 // GLUniformType wraps GskGLUniformType
@@ -310,6 +352,20 @@ func (e GLUniformType) InitGoValue(v *gobject.Value) {
 	v.SetEnum(int(e))
 }
 
+func (e GLUniformType) String() string {
+	switch e {
+		case GLUniformTypeUint: return "GLUniformTypeUint"
+		case GLUniformTypeBool: return "GLUniformTypeBool"
+		case GLUniformTypeVec2: return "GLUniformTypeVec2"
+		case GLUniformTypeVec3: return "GLUniformTypeVec3"
+		case GLUniformTypeVec4: return "GLUniformTypeVec4"
+		case GLUniformTypeNone: return "GLUniformTypeNone"
+		case GLUniformTypeFloat: return "GLUniformTypeFloat"
+		case GLUniformTypeInt: return "GLUniformTypeInt"
+		default: return fmt.Sprintf("GLUniformType(%d)", e)
+	}
+}
+
 // LineCap wraps GskLineCap
 //
 // Specifies how to render the start and end points of contours or
@@ -357,6 +413,15 @@ func (e LineCap) InitGoValue(v *gobject.Value) {
 	v.SetEnum(int(e))
 }
 
+func (e LineCap) String() string {
+	switch e {
+		case LineCapRound: return "LineCapRound"
+		case LineCapSquare: return "LineCapSquare"
+		case LineCapButt: return "LineCapButt"
+		default: return fmt.Sprintf("LineCap(%d)", e)
+	}
+}
+
 // LineJoin wraps GskLineJoin
 //
 // Specifies how to render the junction of two lines when stroking.
@@ -402,6 +467,15 @@ func (e LineJoin) InitGoValue(v *gobject.Value) {
 	v.SetEnum(int(e))
 }
 
+func (e LineJoin) String() string {
+	switch e {
+		case LineJoinMiter: return "LineJoinMiter"
+		case LineJoinRound: return "LineJoinRound"
+		case LineJoinBevel: return "LineJoinBevel"
+		default: return fmt.Sprintf("LineJoin(%d)", e)
+	}
+}
+
 // MaskMode wraps GskMaskMode
 //
 // The mask modes available for mask nodes.
@@ -437,6 +511,16 @@ var _ gobject.GoValueInitializer = MaskMode(0)
 func (e MaskMode) InitGoValue(v *gobject.Value) {
 	v.Init(TypeMaskMode)
 	v.SetEnum(int(e))
+}
+
+func (e MaskMode) String() string {
+	switch e {
+		case MaskModeAlpha: return "MaskModeAlpha"
+		case MaskModeInvertedAlpha: return "MaskModeInvertedAlpha"
+		case MaskModeLuminance: return "MaskModeLuminance"
+		case MaskModeInvertedLuminance: return "MaskModeInvertedLuminance"
+		default: return fmt.Sprintf("MaskMode(%d)", e)
+	}
 }
 
 // PathDirection wraps GskPathDirection
@@ -486,6 +570,16 @@ var _ gobject.GoValueInitializer = PathDirection(0)
 func (e PathDirection) InitGoValue(v *gobject.Value) {
 	v.Init(TypePathDirection)
 	v.SetEnum(int(e))
+}
+
+func (e PathDirection) String() string {
+	switch e {
+		case PathFromStart: return "PathFromStart"
+		case PathToStart: return "PathToStart"
+		case PathToEnd: return "PathToEnd"
+		case PathFromEnd: return "PathFromEnd"
+		default: return fmt.Sprintf("PathDirection(%d)", e)
+	}
 }
 
 // PathOperation wraps GskPathOperation
@@ -539,6 +633,18 @@ var _ gobject.GoValueInitializer = PathOperation(0)
 func (e PathOperation) InitGoValue(v *gobject.Value) {
 	v.Init(TypePathOperation)
 	v.SetEnum(int(e))
+}
+
+func (e PathOperation) String() string {
+	switch e {
+		case PathMove: return "PathMove"
+		case PathClose: return "PathClose"
+		case PathLine: return "PathLine"
+		case PathQuad: return "PathQuad"
+		case PathCubic: return "PathCubic"
+		case PathConic: return "PathConic"
+		default: return fmt.Sprintf("PathOperation(%d)", e)
+	}
 }
 
 // RenderNodeType wraps GskRenderNodeType
@@ -684,6 +790,43 @@ func (e RenderNodeType) InitGoValue(v *gobject.Value) {
 	v.SetEnum(int(e))
 }
 
+func (e RenderNodeType) String() string {
+	switch e {
+		case TextureNodeType: return "TextureNodeType"
+		case RoundedClipNodeType: return "RoundedClipNodeType"
+		case BlendNodeType: return "BlendNodeType"
+		case ClipNodeType: return "ClipNodeType"
+		case TextNodeType: return "TextNodeType"
+		case NotARenderNodeType: return "NotARenderNodeType"
+		case ContainerNodeType: return "ContainerNodeType"
+		case ColorNodeType: return "ColorNodeType"
+		case RepeatingLinearGradientNodeType: return "RepeatingLinearGradientNodeType"
+		case FillNodeType: return "FillNodeType"
+		case ConicGradientNodeType: return "ConicGradientNodeType"
+		case GLShaderNodeType: return "GLShaderNodeType"
+		case InsetShadowNodeType: return "InsetShadowNodeType"
+		case OpacityNodeType: return "OpacityNodeType"
+		case RepeatNodeType: return "RepeatNodeType"
+		case CrossFadeNodeType: return "CrossFadeNodeType"
+		case BlurNodeType: return "BlurNodeType"
+		case OutsetShadowNodeType: return "OutsetShadowNodeType"
+		case TransformNodeType: return "TransformNodeType"
+		case LinearGradientNodeType: return "LinearGradientNodeType"
+		case ColorMatrixNodeType: return "ColorMatrixNodeType"
+		case StrokeNodeType: return "StrokeNodeType"
+		case SubsurfaceNodeType: return "SubsurfaceNodeType"
+		case RepeatingRadialGradientNodeType: return "RepeatingRadialGradientNodeType"
+		case MaskNodeType: return "MaskNodeType"
+		case CairoNodeType: return "CairoNodeType"
+		case BorderNodeType: return "BorderNodeType"
+		case ShadowNodeType: return "ShadowNodeType"
+		case DebugNodeType: return "DebugNodeType"
+		case TextureScaleNodeType: return "TextureScaleNodeType"
+		case RadialGradientNodeType: return "RadialGradientNodeType"
+		default: return fmt.Sprintf("RenderNodeType(%d)", e)
+	}
+}
+
 // ScalingFilter wraps GskScalingFilter
 //
 // The filters used when scaling texture data.
@@ -720,6 +863,15 @@ func (e ScalingFilter) InitGoValue(v *gobject.Value) {
 	v.SetEnum(int(e))
 }
 
+func (e ScalingFilter) String() string {
+	switch e {
+		case ScalingFilterLinear: return "ScalingFilterLinear"
+		case ScalingFilterNearest: return "ScalingFilterNearest"
+		case ScalingFilterTrilinear: return "ScalingFilterTrilinear"
+		default: return fmt.Sprintf("ScalingFilter(%d)", e)
+	}
+}
+
 // SerializationError wraps GskSerializationError
 //
 // Errors that can happen during (de)serialization.
@@ -751,6 +903,15 @@ var _ gobject.GoValueInitializer = SerializationError(0)
 func (e SerializationError) InitGoValue(v *gobject.Value) {
 	v.Init(TypeSerializationError)
 	v.SetEnum(int(e))
+}
+
+func (e SerializationError) String() string {
+	switch e {
+		case SerializationUnsupportedFormat: return "SerializationUnsupportedFormat"
+		case SerializationUnsupportedVersion: return "SerializationUnsupportedVersion"
+		case SerializationInvalidData: return "SerializationInvalidData"
+		default: return fmt.Sprintf("SerializationError(%d)", e)
+	}
 }
 
 // TransformCategory wraps GskTransformCategory
@@ -816,6 +977,19 @@ func (e TransformCategory) InitGoValue(v *gobject.Value) {
 	v.SetEnum(int(e))
 }
 
+func (e TransformCategory) String() string {
+	switch e {
+		case TransformCategory2DAffine: return "TransformCategory2DAffine"
+		case TransformCategory2DTranslate: return "TransformCategory2DTranslate"
+		case TransformCategoryIdentity: return "TransformCategoryIdentity"
+		case TransformCategoryUnknown: return "TransformCategoryUnknown"
+		case TransformCategoryAny: return "TransformCategoryAny"
+		case TransformCategory3D: return "TransformCategory3D"
+		case TransformCategory2D: return "TransformCategory2D"
+		default: return fmt.Sprintf("TransformCategory(%d)", e)
+	}
+}
+
 // PathForEachFlags wraps GskPathForeachFlags
 //
 // Flags that can be passed to gsk_path_foreach() to influence what
@@ -859,6 +1033,27 @@ var _ gobject.GoValueInitializer = PathForEachFlags(0)
 func (f PathForEachFlags) InitGoValue(v *gobject.Value) {
 	v.Init(TypePathForeachFlags)
 	v.SetFlags(int(f))
+}
+
+func (f PathForEachFlags) String() string {
+	if f == 0 {
+		return "PathForEachFlags(0)"
+	}
+
+	var parts []string
+	if (f & PathForEachAllowOnlyLines) != 0 {
+		parts = append(parts, "PathForEachAllowOnlyLines")
+	}
+	if (f & PathForEachAllowQuad) != 0 {
+		parts = append(parts, "PathForEachAllowQuad")
+	}
+	if (f & PathForEachAllowCubic) != 0 {
+		parts = append(parts, "PathForEachAllowCubic")
+	}
+	if (f & PathForEachAllowConic) != 0 {
+		parts = append(parts, "PathForEachAllowConic")
+	}
+	return "PathForEachFlags(" + strings.Join(parts, "|") + ")"
 }
 
 // ParseErrorFunc wraps GskParseErrorFunc

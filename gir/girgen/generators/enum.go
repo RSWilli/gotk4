@@ -188,7 +188,7 @@ type EnumGenerator struct {
 }
 
 func (g *EnumGenerator) Generate(w *file.Package) {
-	// TODO: use gencontext Lookup
+	w.GoImport("fmt")
 
 	g.Doc.Generate(w.Go())
 
@@ -224,6 +224,20 @@ func (g *EnumGenerator) Generate(w *file.Package) {
 		w.Go().Unindent()
 		fmt.Fprintf(w.Go(), "}\n\n")
 	}
+
+	// Stringer:
+	fmt.Fprintf(w.Go(), "func (e %s) String() string {\n", g.GoType(0))
+	w.Go().Indent()
+	fmt.Fprintf(w.Go(), "switch e {\n")
+	w.Go().Indent()
+	for _, member := range g.Enum.Members.Uniques() {
+		fmt.Fprintf(w.Go(), "case %s: return \"%s\"\n", member.GoIndentifier(), strcases.SnakeToGo(true, member.GoIndentifier()))
+	}
+	fmt.Fprintf(w.Go(), "default: return fmt.Sprintf(\"%s(%%d)\", e)\n", g.GoType(0))
+	w.Go().Unindent()
+	fmt.Fprintf(w.Go(), "}\n")
+	w.Go().Unindent()
+	fmt.Fprintf(w.Go(), "}\n\n")
 }
 
 func NewEnumGenerator(enum *typesystem.Enum) *EnumGenerator {

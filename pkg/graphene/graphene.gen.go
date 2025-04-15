@@ -3,6 +3,7 @@
 package graphene
 
 import (
+	"fmt"
 	"runtime"
 	"unsafe"
 
@@ -258,6 +259,43 @@ const (
 )
 
 
+func (e EulerOrder) String() string {
+	switch e {
+		case EulerOrderYXZ: return "EulerOrderYXZ"
+		case EulerOrderSYXY: return "EulerOrderSYXY"
+		case EulerOrderRZYZ: return "EulerOrderRZYZ"
+		case EulerOrderSZYX: return "EulerOrderSZYX"
+		case EulerOrderRYZX: return "EulerOrderRYZX"
+		case EulerOrderRZXY: return "EulerOrderRZXY"
+		case EulerOrderRYXZ: return "EulerOrderRYXZ"
+		case EulerOrderZXY: return "EulerOrderZXY"
+		case EulerOrderXZY: return "EulerOrderXZY"
+		case EulerOrderSYZY: return "EulerOrderSYZY"
+		case EulerOrderSZXZ: return "EulerOrderSZXZ"
+		case EulerOrderRXZX: return "EulerOrderRXZX"
+		case EulerOrderRYXY: return "EulerOrderRYXY"
+		case EulerOrderYZX: return "EulerOrderYZX"
+		case EulerOrderSXYX: return "EulerOrderSXYX"
+		case EulerOrderZYX: return "EulerOrderZYX"
+		case EulerOrderSXYZ: return "EulerOrderSXYZ"
+		case EulerOrderSYZX: return "EulerOrderSYZX"
+		case EulerOrderRXZY: return "EulerOrderRXZY"
+		case EulerOrderRXYX: return "EulerOrderRXYX"
+		case EulerOrderDefault: return "EulerOrderDefault"
+		case EulerOrderSXZY: return "EulerOrderSXZY"
+		case EulerOrderSXZX: return "EulerOrderSXZX"
+		case EulerOrderSZXY: return "EulerOrderSZXY"
+		case EulerOrderRXYZ: return "EulerOrderRXYZ"
+		case EulerOrderSZYZ: return "EulerOrderSZYZ"
+		case EulerOrderRZYX: return "EulerOrderRZYX"
+		case EulerOrderRYZY: return "EulerOrderRYZY"
+		case EulerOrderSYXZ: return "EulerOrderSYXZ"
+		case EulerOrderRZXZ: return "EulerOrderRZXZ"
+		case EulerOrderXYZ: return "EulerOrderXYZ"
+		default: return fmt.Sprintf("EulerOrder(%d)", e)
+	}
+}
+
 // RayIntersectionKind wraps graphene_ray_intersection_kind_t
 //
 // The type of intersection.
@@ -280,6 +318,15 @@ const (
 	RayIntersectionKindLeave RayIntersectionKind = 2
 )
 
+
+func (e RayIntersectionKind) String() string {
+	switch e {
+		case RayIntersectionKindNone: return "RayIntersectionKindNone"
+		case RayIntersectionKindEnter: return "RayIntersectionKindEnter"
+		case RayIntersectionKindLeave: return "RayIntersectionKindLeave"
+		default: return fmt.Sprintf("RayIntersectionKind(%d)", e)
+	}
+}
 
 // Box wraps graphene_box_t
 //

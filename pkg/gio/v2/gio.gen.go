@@ -4,7 +4,9 @@ package gio
 
 import (
 	"context"
+	"fmt"
 	"runtime"
+	"strings"
 	"unsafe"
 
 	"github.com/diamondburned/gotk4/pkg/core/userdata"
@@ -527,6 +529,16 @@ func (e BusType) InitGoValue(v *gobject.Value) {
 	v.SetEnum(int(e))
 }
 
+func (e BusType) String() string {
+	switch e {
+		case BusTypeStarter: return "BusTypeStarter"
+		case BusTypeNone: return "BusTypeNone"
+		case BusTypeSystem: return "BusTypeSystem"
+		case BusTypeSession: return "BusTypeSession"
+		default: return fmt.Sprintf("BusType(%d)", e)
+	}
+}
+
 // ConverterResult wraps GConverterResult
 //
 // Results returned from g_converter_convert().
@@ -560,6 +572,16 @@ var _ gobject.GoValueInitializer = ConverterResult(0)
 func (e ConverterResult) InitGoValue(v *gobject.Value) {
 	v.Init(TypeConverterResult)
 	v.SetEnum(int(e))
+}
+
+func (e ConverterResult) String() string {
+	switch e {
+		case ConverterError: return "ConverterError"
+		case ConverterConverted: return "ConverterConverted"
+		case ConverterFinished: return "ConverterFinished"
+		case ConverterFlushed: return "ConverterFlushed"
+		default: return fmt.Sprintf("ConverterResult(%d)", e)
+	}
 }
 
 // CredentialsType wraps GCredentialsType
@@ -611,6 +633,20 @@ var _ gobject.GoValueInitializer = CredentialsType(0)
 func (e CredentialsType) InitGoValue(v *gobject.Value) {
 	v.Init(TypeCredentialsType)
 	v.SetEnum(int(e))
+}
+
+func (e CredentialsType) String() string {
+	switch e {
+		case CredentialsTypeSolarisUcred: return "CredentialsTypeSolarisUcred"
+		case CredentialsTypeNetbsdUnpcbid: return "CredentialsTypeNetbsdUnpcbid"
+		case CredentialsTypeAppleXucred: return "CredentialsTypeAppleXucred"
+		case CredentialsTypeWin32Pid: return "CredentialsTypeWin32Pid"
+		case CredentialsTypeInvalid: return "CredentialsTypeInvalid"
+		case CredentialsTypeLinuxUcred: return "CredentialsTypeLinuxUcred"
+		case CredentialsTypeFreebsdCmsgcred: return "CredentialsTypeFreebsdCmsgcred"
+		case CredentialsTypeOpenbsdSockpeercred: return "CredentialsTypeOpenbsdSockpeercred"
+		default: return fmt.Sprintf("CredentialsType(%d)", e)
+	}
 }
 
 // DBusError wraps GDBusError
@@ -818,6 +854,56 @@ func (e DBusError) InitGoValue(v *gobject.Value) {
 	v.SetEnum(int(e))
 }
 
+func (e DBusError) String() string {
+	switch e {
+		case DBusErrorNoMemory: return "DBusErrorNoMemory"
+		case DBusErrorBadAddress: return "DBusErrorBadAddress"
+		case DBusErrorAccessDenied: return "DBusErrorAccessDenied"
+		case DBusErrorTimeout: return "DBusErrorTimeout"
+		case DBusErrorMatchRuleInvalid: return "DBusErrorMatchRuleInvalid"
+		case DBusErrorFailed: return "DBusErrorFailed"
+		case DBusErrorNameHasNoOwner: return "DBusErrorNameHasNoOwner"
+		case DBusErrorAddressInUse: return "DBusErrorAddressInUse"
+		case DBusErrorSpawnForkFailed: return "DBusErrorSpawnForkFailed"
+		case DBusErrorPropertyReadOnly: return "DBusErrorPropertyReadOnly"
+		case DBusErrorServiceUnknown: return "DBusErrorServiceUnknown"
+		case DBusErrorNotSupported: return "DBusErrorNotSupported"
+		case DBusErrorDisconnected: return "DBusErrorDisconnected"
+		case DBusErrorMatchRuleNotFound: return "DBusErrorMatchRuleNotFound"
+		case DBusErrorSpawnFileInvalid: return "DBusErrorSpawnFileInvalid"
+		case DBusErrorLimitsExceeded: return "DBusErrorLimitsExceeded"
+		case DBusErrorFileExists: return "DBusErrorFileExists"
+		case DBusErrorUnknownMethod: return "DBusErrorUnknownMethod"
+		case DBusErrorSpawnFailed: return "DBusErrorSpawnFailed"
+		case DBusErrorSpawnSetupFailed: return "DBusErrorSpawnSetupFailed"
+		case DBusErrorSpawnConfigInvalid: return "DBusErrorSpawnConfigInvalid"
+		case DBusErrorSpawnPermissionsInvalid: return "DBusErrorSpawnPermissionsInvalid"
+		case DBusErrorSelinuxSecurityContextUnknown: return "DBusErrorSelinuxSecurityContextUnknown"
+		case DBusErrorNoReply: return "DBusErrorNoReply"
+		case DBusErrorInvalidArgs: return "DBusErrorInvalidArgs"
+		case DBusErrorSpawnChildExited: return "DBusErrorSpawnChildExited"
+		case DBusErrorSpawnServiceNotFound: return "DBusErrorSpawnServiceNotFound"
+		case DBusErrorSpawnNoMemory: return "DBusErrorSpawnNoMemory"
+		case DBusErrorInvalidSignature: return "DBusErrorInvalidSignature"
+		case DBusErrorInvalidFileContent: return "DBusErrorInvalidFileContent"
+		case DBusErrorObjectPathInUse: return "DBusErrorObjectPathInUse"
+		case DBusErrorAuthFailed: return "DBusErrorAuthFailed"
+		case DBusErrorFileNotFound: return "DBusErrorFileNotFound"
+		case DBusErrorSpawnServiceInvalid: return "DBusErrorSpawnServiceInvalid"
+		case DBusErrorUnknownObject: return "DBusErrorUnknownObject"
+		case DBusErrorNoNetwork: return "DBusErrorNoNetwork"
+		case DBusErrorSpawnChildSignaled: return "DBusErrorSpawnChildSignaled"
+		case DBusErrorAdtAuditDataUnknown: return "DBusErrorAdtAuditDataUnknown"
+		case DBusErrorUnknownProperty: return "DBusErrorUnknownProperty"
+		case DBusErrorIOError: return "DBusErrorIOError"
+		case DBusErrorNoServer: return "DBusErrorNoServer"
+		case DBusErrorTimedOut: return "DBusErrorTimedOut"
+		case DBusErrorSpawnExecFailed: return "DBusErrorSpawnExecFailed"
+		case DBusErrorUnknownInterface: return "DBusErrorUnknownInterface"
+		default: return fmt.Sprintf("DBusError(%d)", e)
+	}
+}
+
 // DBusMessageByteOrder wraps GDBusMessageByteOrder
 //
 // Enumeration used to describe the byte order of a D-Bus message.
@@ -843,6 +929,14 @@ var _ gobject.GoValueInitializer = DBusMessageByteOrder(0)
 func (e DBusMessageByteOrder) InitGoValue(v *gobject.Value) {
 	v.Init(TypeDBusMessageByteOrder)
 	v.SetEnum(int(e))
+}
+
+func (e DBusMessageByteOrder) String() string {
+	switch e {
+		case DBusMessageByteOrderBigEndian: return "DBusMessageByteOrderBigEndian"
+		case DBusMessageByteOrderLittleEndian: return "DBusMessageByteOrderLittleEndian"
+		default: return fmt.Sprintf("DBusMessageByteOrder(%d)", e)
+	}
 }
 
 // DBusMessageHeaderField wraps GDBusMessageHeaderField
@@ -900,6 +994,21 @@ func (e DBusMessageHeaderField) InitGoValue(v *gobject.Value) {
 	v.SetEnum(int(e))
 }
 
+func (e DBusMessageHeaderField) String() string {
+	switch e {
+		case DBusMessageHeaderFieldInvalid: return "DBusMessageHeaderFieldInvalid"
+		case DBusMessageHeaderFieldPath: return "DBusMessageHeaderFieldPath"
+		case DBusMessageHeaderFieldInterface: return "DBusMessageHeaderFieldInterface"
+		case DBusMessageHeaderFieldReplySerial: return "DBusMessageHeaderFieldReplySerial"
+		case DBusMessageHeaderFieldMember: return "DBusMessageHeaderFieldMember"
+		case DBusMessageHeaderFieldErrorName: return "DBusMessageHeaderFieldErrorName"
+		case DBusMessageHeaderFieldDestination: return "DBusMessageHeaderFieldDestination"
+		case DBusMessageHeaderFieldSender: return "DBusMessageHeaderFieldSender"
+		case DBusMessageHeaderFieldSignature: return "DBusMessageHeaderFieldSignature"
+		default: return fmt.Sprintf("DBusMessageHeaderField(%d)", e)
+	}
+}
+
 // DBusMessageType wraps GDBusMessageType
 //
 // Message types used in #GDBusMessage.
@@ -939,6 +1048,17 @@ func (e DBusMessageType) InitGoValue(v *gobject.Value) {
 	v.SetEnum(int(e))
 }
 
+func (e DBusMessageType) String() string {
+	switch e {
+		case DBusMessageTypeMethodReturn: return "DBusMessageTypeMethodReturn"
+		case DBusMessageTypeError: return "DBusMessageTypeError"
+		case DBusMessageTypeSignal: return "DBusMessageTypeSignal"
+		case DBusMessageTypeInvalid: return "DBusMessageTypeInvalid"
+		case DBusMessageTypeMethodCall: return "DBusMessageTypeMethodCall"
+		default: return fmt.Sprintf("DBusMessageType(%d)", e)
+	}
+}
+
 // DataStreamByteOrder wraps GDataStreamByteOrder
 //
 // #GDataStreamByteOrder is used to ensure proper endianness of streaming data sources
@@ -969,6 +1089,15 @@ var _ gobject.GoValueInitializer = DataStreamByteOrder(0)
 func (e DataStreamByteOrder) InitGoValue(v *gobject.Value) {
 	v.Init(TypeDataStreamByteOrder)
 	v.SetEnum(int(e))
+}
+
+func (e DataStreamByteOrder) String() string {
+	switch e {
+		case DataStreamByteOrderBigEndian: return "DataStreamByteOrderBigEndian"
+		case DataStreamByteOrderLittleEndian: return "DataStreamByteOrderLittleEndian"
+		case DataStreamByteOrderHostEndian: return "DataStreamByteOrderHostEndian"
+		default: return fmt.Sprintf("DataStreamByteOrder(%d)", e)
+	}
 }
 
 // DataStreamNewlineType wraps GDataStreamNewlineType
@@ -1004,6 +1133,16 @@ var _ gobject.GoValueInitializer = DataStreamNewlineType(0)
 func (e DataStreamNewlineType) InitGoValue(v *gobject.Value) {
 	v.Init(TypeDataStreamNewlineType)
 	v.SetEnum(int(e))
+}
+
+func (e DataStreamNewlineType) String() string {
+	switch e {
+		case DataStreamNewlineTypeLf: return "DataStreamNewlineTypeLf"
+		case DataStreamNewlineTypeCr: return "DataStreamNewlineTypeCr"
+		case DataStreamNewlineTypeCrLf: return "DataStreamNewlineTypeCrLf"
+		case DataStreamNewlineTypeAny: return "DataStreamNewlineTypeAny"
+		default: return fmt.Sprintf("DataStreamNewlineType(%d)", e)
+	}
 }
 
 // DriveStartStopType wraps GDriveStartStopType
@@ -1053,6 +1192,17 @@ func (e DriveStartStopType) InitGoValue(v *gobject.Value) {
 	v.SetEnum(int(e))
 }
 
+func (e DriveStartStopType) String() string {
+	switch e {
+		case DriveStartStopTypeUnknown: return "DriveStartStopTypeUnknown"
+		case DriveStartStopTypeShutdown: return "DriveStartStopTypeShutdown"
+		case DriveStartStopTypeNetwork: return "DriveStartStopTypeNetwork"
+		case DriveStartStopTypeMultidisk: return "DriveStartStopTypeMultidisk"
+		case DriveStartStopTypePassword: return "DriveStartStopTypePassword"
+		default: return fmt.Sprintf("DriveStartStopType(%d)", e)
+	}
+}
+
 // EmblemOrigin wraps GEmblemOrigin
 //
 // GEmblemOrigin is used to add information about the origin of the emblem
@@ -1089,6 +1239,16 @@ func (e EmblemOrigin) InitGoValue(v *gobject.Value) {
 	v.SetEnum(int(e))
 }
 
+func (e EmblemOrigin) String() string {
+	switch e {
+		case EmblemOriginUnknown: return "EmblemOriginUnknown"
+		case EmblemOriginDevice: return "EmblemOriginDevice"
+		case EmblemOriginLivemetadata: return "EmblemOriginLivemetadata"
+		case EmblemOriginTag: return "EmblemOriginTag"
+		default: return fmt.Sprintf("EmblemOrigin(%d)", e)
+	}
+}
+
 // FileAttributeStatus wraps GFileAttributeStatus
 //
 // Used by g_file_set_attributes_from_info() when setting file attributes.
@@ -1118,6 +1278,15 @@ var _ gobject.GoValueInitializer = FileAttributeStatus(0)
 func (e FileAttributeStatus) InitGoValue(v *gobject.Value) {
 	v.Init(TypeFileAttributeStatus)
 	v.SetEnum(int(e))
+}
+
+func (e FileAttributeStatus) String() string {
+	switch e {
+		case FileAttributeStatusUnset: return "FileAttributeStatusUnset"
+		case FileAttributeStatusSet: return "FileAttributeStatusSet"
+		case FileAttributeStatusErrorSetting: return "FileAttributeStatusErrorSetting"
+		default: return fmt.Sprintf("FileAttributeStatus(%d)", e)
+	}
 }
 
 // FileAttributeType wraps GFileAttributeType
@@ -1177,6 +1346,22 @@ var _ gobject.GoValueInitializer = FileAttributeType(0)
 func (e FileAttributeType) InitGoValue(v *gobject.Value) {
 	v.Init(TypeFileAttributeType)
 	v.SetEnum(int(e))
+}
+
+func (e FileAttributeType) String() string {
+	switch e {
+		case FileAttributeTypeInt64: return "FileAttributeTypeInt64"
+		case FileAttributeTypeString: return "FileAttributeTypeString"
+		case FileAttributeTypeByteString: return "FileAttributeTypeByteString"
+		case FileAttributeTypeBoolean: return "FileAttributeTypeBoolean"
+		case FileAttributeTypeUint32: return "FileAttributeTypeUint32"
+		case FileAttributeTypeInt32: return "FileAttributeTypeInt32"
+		case FileAttributeTypeUint64: return "FileAttributeTypeUint64"
+		case FileAttributeTypeObject: return "FileAttributeTypeObject"
+		case FileAttributeTypeStringv: return "FileAttributeTypeStringv"
+		case FileAttributeTypeInvalid: return "FileAttributeTypeInvalid"
+		default: return fmt.Sprintf("FileAttributeType(%d)", e)
+	}
 }
 
 // FileMonitorEvent wraps GFileMonitorEvent
@@ -1249,6 +1434,23 @@ func (e FileMonitorEvent) InitGoValue(v *gobject.Value) {
 	v.SetEnum(int(e))
 }
 
+func (e FileMonitorEvent) String() string {
+	switch e {
+		case FileMonitorEventMovedIn: return "FileMonitorEventMovedIn"
+		case FileMonitorEventMovedOut: return "FileMonitorEventMovedOut"
+		case FileMonitorEventChangesDoneHint: return "FileMonitorEventChangesDoneHint"
+		case FileMonitorEventDeleted: return "FileMonitorEventDeleted"
+		case FileMonitorEventCreated: return "FileMonitorEventCreated"
+		case FileMonitorEventPreUnmount: return "FileMonitorEventPreUnmount"
+		case FileMonitorEventUnmounted: return "FileMonitorEventUnmounted"
+		case FileMonitorEventRenamed: return "FileMonitorEventRenamed"
+		case FileMonitorEventChanged: return "FileMonitorEventChanged"
+		case FileMonitorEventAttributeChanged: return "FileMonitorEventAttributeChanged"
+		case FileMonitorEventMoved: return "FileMonitorEventMoved"
+		default: return fmt.Sprintf("FileMonitorEvent(%d)", e)
+	}
+}
+
 // FileType wraps GFileType
 //
 // Indicates the file's on-disk type.
@@ -1307,6 +1509,19 @@ func (e FileType) InitGoValue(v *gobject.Value) {
 	v.SetEnum(int(e))
 }
 
+func (e FileType) String() string {
+	switch e {
+		case FileTypeUnknown: return "FileTypeUnknown"
+		case FileTypeRegular: return "FileTypeRegular"
+		case FileTypeDirectory: return "FileTypeDirectory"
+		case FileTypeSymbolicLink: return "FileTypeSymbolicLink"
+		case FileTypeSpecial: return "FileTypeSpecial"
+		case FileTypeShortcut: return "FileTypeShortcut"
+		case FileTypeMountable: return "FileTypeMountable"
+		default: return fmt.Sprintf("FileType(%d)", e)
+	}
+}
+
 // FilesystemPreviewType wraps GFilesystemPreviewType
 //
 // Indicates a hint from the file system whether files should be
@@ -1338,6 +1553,15 @@ var _ gobject.GoValueInitializer = FilesystemPreviewType(0)
 func (e FilesystemPreviewType) InitGoValue(v *gobject.Value) {
 	v.Init(TypeFilesystemPreviewType)
 	v.SetEnum(int(e))
+}
+
+func (e FilesystemPreviewType) String() string {
+	switch e {
+		case FilesystemPreviewTypeIfAlways: return "FilesystemPreviewTypeIfAlways"
+		case FilesystemPreviewTypeIfLocal: return "FilesystemPreviewTypeIfLocal"
+		case FilesystemPreviewTypeNever: return "FilesystemPreviewTypeNever"
+		default: return fmt.Sprintf("FilesystemPreviewType(%d)", e)
+	}
 }
 
 // IOErrorEnum wraps GIOErrorEnum
@@ -1589,6 +1813,61 @@ func (e IOErrorEnum) InitGoValue(v *gobject.Value) {
 	v.SetEnum(int(e))
 }
 
+func (e IOErrorEnum) String() string {
+	switch e {
+		case IOErrorAlreadyMounted: return "IOErrorAlreadyMounted"
+		case IOErrorPending: return "IOErrorPending"
+		case IOErrorMessageTooLarge: return "IOErrorMessageTooLarge"
+		case IOErrorNoSuchDevice: return "IOErrorNoSuchDevice"
+		case IOErrorNotFound: return "IOErrorNotFound"
+		case IOErrorNotEmpty: return "IOErrorNotEmpty"
+		case IOErrorPartialInput: return "IOErrorPartialInput"
+		case IOErrorInvalidData: return "IOErrorInvalidData"
+		case IOErrorDestinationUnset: return "IOErrorDestinationUnset"
+		case IOErrorFailed: return "IOErrorFailed"
+		case IOErrorFilenameTooLong: return "IOErrorFilenameTooLong"
+		case IOErrorProxyFailed: return "IOErrorProxyFailed"
+		case IOErrorCantCreateBackup: return "IOErrorCantCreateBackup"
+		case IOErrorWrongETag: return "IOErrorWrongETag"
+		case IOErrorBusy: return "IOErrorBusy"
+		case IOErrorDBusError: return "IOErrorDBusError"
+		case IOErrorConnectionRefused: return "IOErrorConnectionRefused"
+		case IOErrorBrokenPipe: return "IOErrorBrokenPipe"
+		case IOErrorExists: return "IOErrorExists"
+		case IOErrorPermissionDenied: return "IOErrorPermissionDenied"
+		case IOErrorCancelled: return "IOErrorCancelled"
+		case IOErrorReadOnly: return "IOErrorReadOnly"
+		case IOErrorTimedOut: return "IOErrorTimedOut"
+		case IOErrorTooManyOpenFiles: return "IOErrorTooManyOpenFiles"
+		case IOErrorNotMountableFile: return "IOErrorNotMountableFile"
+		case IOErrorInvalidFilename: return "IOErrorInvalidFilename"
+		case IOErrorNoSpace: return "IOErrorNoSpace"
+		case IOErrorInvalidArgument: return "IOErrorInvalidArgument"
+		case IOErrorWouldRecurse: return "IOErrorWouldRecurse"
+		case IOErrorHostNotFound: return "IOErrorHostNotFound"
+		case IOErrorNetworkUnreachable: return "IOErrorNetworkUnreachable"
+		case IOErrorNotDirectory: return "IOErrorNotDirectory"
+		case IOErrorTooManyLinks: return "IOErrorTooManyLinks"
+		case IOErrorNotSupported: return "IOErrorNotSupported"
+		case IOErrorNotMounted: return "IOErrorNotMounted"
+		case IOErrorClosed: return "IOErrorClosed"
+		case IOErrorWouldBlock: return "IOErrorWouldBlock"
+		case IOErrorFailedHandled: return "IOErrorFailedHandled"
+		case IOErrorProxyAuthFailed: return "IOErrorProxyAuthFailed"
+		case IOErrorIsDirectory: return "IOErrorIsDirectory"
+		case IOErrorWouldMerge: return "IOErrorWouldMerge"
+		case IOErrorNotInitialized: return "IOErrorNotInitialized"
+		case IOErrorAddressInUse: return "IOErrorAddressInUse"
+		case IOErrorHostUnreachable: return "IOErrorHostUnreachable"
+		case IOErrorProxyNeedAuth: return "IOErrorProxyNeedAuth"
+		case IOErrorProxyNotAllowed: return "IOErrorProxyNotAllowed"
+		case IOErrorNotConnected: return "IOErrorNotConnected"
+		case IOErrorNotRegularFile: return "IOErrorNotRegularFile"
+		case IOErrorNotSymbolicLink: return "IOErrorNotSymbolicLink"
+		default: return fmt.Sprintf("IOErrorEnum(%d)", e)
+	}
+}
+
 // IOModuleScopeFlags wraps GIOModuleScopeFlags
 //
 // Flags for use with g_io_module_scope_new().
@@ -1616,6 +1895,14 @@ var _ gobject.GoValueInitializer = IOModuleScopeFlags(0)
 func (e IOModuleScopeFlags) InitGoValue(v *gobject.Value) {
 	v.Init(TypeIOModuleScopeFlags)
 	v.SetEnum(int(e))
+}
+
+func (e IOModuleScopeFlags) String() string {
+	switch e {
+		case IOModuleScopeNone: return "IOModuleScopeNone"
+		case IOModuleScopeBlockDuplicates: return "IOModuleScopeBlockDuplicates"
+		default: return fmt.Sprintf("IOModuleScopeFlags(%d)", e)
+	}
 }
 
 // MemoryMonitorWarningLevel wraps GMemoryMonitorWarningLevel
@@ -1662,6 +1949,15 @@ func (e MemoryMonitorWarningLevel) InitGoValue(v *gobject.Value) {
 	v.SetEnum(int(e))
 }
 
+func (e MemoryMonitorWarningLevel) String() string {
+	switch e {
+		case MemoryMonitorWarningLevelCritical: return "MemoryMonitorWarningLevelCritical"
+		case MemoryMonitorWarningLevelLow: return "MemoryMonitorWarningLevelLow"
+		case MemoryMonitorWarningLevelMedium: return "MemoryMonitorWarningLevelMedium"
+		default: return fmt.Sprintf("MemoryMonitorWarningLevel(%d)", e)
+	}
+}
+
 // MountOperationResult wraps GMountOperationResult
 //
 // #GMountOperationResult is returned as a result when a request for
@@ -1695,6 +1991,15 @@ var _ gobject.GoValueInitializer = MountOperationResult(0)
 func (e MountOperationResult) InitGoValue(v *gobject.Value) {
 	v.Init(TypeMountOperationResult)
 	v.SetEnum(int(e))
+}
+
+func (e MountOperationResult) String() string {
+	switch e {
+		case MountOperationHandled: return "MountOperationHandled"
+		case MountOperationAborted: return "MountOperationAborted"
+		case MountOperationUnhandled: return "MountOperationUnhandled"
+		default: return fmt.Sprintf("MountOperationResult(%d)", e)
+	}
 }
 
 // NetworkConnectivity wraps GNetworkConnectivity
@@ -1736,6 +2041,16 @@ var _ gobject.GoValueInitializer = NetworkConnectivity(0)
 func (e NetworkConnectivity) InitGoValue(v *gobject.Value) {
 	v.Init(TypeNetworkConnectivity)
 	v.SetEnum(int(e))
+}
+
+func (e NetworkConnectivity) String() string {
+	switch e {
+		case NetworkConnectivityFull: return "NetworkConnectivityFull"
+		case NetworkConnectivityLocal: return "NetworkConnectivityLocal"
+		case NetworkConnectivityLimited: return "NetworkConnectivityLimited"
+		case NetworkConnectivityPortal: return "NetworkConnectivityPortal"
+		default: return fmt.Sprintf("NetworkConnectivity(%d)", e)
+	}
 }
 
 // NotificationPriority wraps GNotificationPriority
@@ -1781,6 +2096,16 @@ func (e NotificationPriority) InitGoValue(v *gobject.Value) {
 	v.SetEnum(int(e))
 }
 
+func (e NotificationPriority) String() string {
+	switch e {
+		case NotificationPriorityLow: return "NotificationPriorityLow"
+		case NotificationPriorityHigh: return "NotificationPriorityHigh"
+		case NotificationPriorityUrgent: return "NotificationPriorityUrgent"
+		case NotificationPriorityNormal: return "NotificationPriorityNormal"
+		default: return fmt.Sprintf("NotificationPriority(%d)", e)
+	}
+}
+
 // PasswordSave wraps GPasswordSave
 //
 // #GPasswordSave is used to indicate the lifespan of a saved password.
@@ -1813,6 +2138,15 @@ var _ gobject.GoValueInitializer = PasswordSave(0)
 func (e PasswordSave) InitGoValue(v *gobject.Value) {
 	v.Init(TypePasswordSave)
 	v.SetEnum(int(e))
+}
+
+func (e PasswordSave) String() string {
+	switch e {
+		case PasswordSaveForSession: return "PasswordSaveForSession"
+		case PasswordSavePermanently: return "PasswordSavePermanently"
+		case PasswordSaveNever: return "PasswordSaveNever"
+		default: return fmt.Sprintf("PasswordSave(%d)", e)
+	}
 }
 
 // PollableReturn wraps GPollableReturn
@@ -1854,6 +2188,15 @@ func (e PollableReturn) InitGoValue(v *gobject.Value) {
 	v.SetEnum(int(e))
 }
 
+func (e PollableReturn) String() string {
+	switch e {
+		case PollableReturnOK: return "PollableReturnOK"
+		case PollableReturnWouldBlock: return "PollableReturnWouldBlock"
+		case PollableReturnFailed: return "PollableReturnFailed"
+		default: return fmt.Sprintf("PollableReturn(%d)", e)
+	}
+}
+
 // ResolverError wraps GResolverError
 //
 // An error code used with %G_RESOLVER_ERROR in a #GError returned
@@ -1886,6 +2229,15 @@ var _ gobject.GoValueInitializer = ResolverError(0)
 func (e ResolverError) InitGoValue(v *gobject.Value) {
 	v.Init(TypeResolverError)
 	v.SetEnum(int(e))
+}
+
+func (e ResolverError) String() string {
+	switch e {
+		case ResolverErrorTemporaryFailure: return "ResolverErrorTemporaryFailure"
+		case ResolverErrorInternal: return "ResolverErrorInternal"
+		case ResolverErrorNotFound: return "ResolverErrorNotFound"
+		default: return fmt.Sprintf("ResolverError(%d)", e)
+	}
 }
 
 // ResolverRecordType wraps GResolverRecordType
@@ -1956,6 +2308,17 @@ func (e ResolverRecordType) InitGoValue(v *gobject.Value) {
 	v.SetEnum(int(e))
 }
 
+func (e ResolverRecordType) String() string {
+	switch e {
+		case ResolverRecordSrv: return "ResolverRecordSrv"
+		case ResolverRecordMx: return "ResolverRecordMx"
+		case ResolverRecordTxt: return "ResolverRecordTxt"
+		case ResolverRecordSoa: return "ResolverRecordSoa"
+		case ResolverRecordNs: return "ResolverRecordNs"
+		default: return fmt.Sprintf("ResolverRecordType(%d)", e)
+	}
+}
+
 // ResourceError wraps GResourceError
 //
 // An error code used with %G_RESOURCE_ERROR in a #GError returned
@@ -1982,6 +2345,14 @@ var _ gobject.GoValueInitializer = ResourceError(0)
 func (e ResourceError) InitGoValue(v *gobject.Value) {
 	v.Init(TypeResourceError)
 	v.SetEnum(int(e))
+}
+
+func (e ResourceError) String() string {
+	switch e {
+		case ResourceErrorNotFound: return "ResourceErrorNotFound"
+		case ResourceErrorInternal: return "ResourceErrorInternal"
+		default: return fmt.Sprintf("ResourceError(%d)", e)
+	}
 }
 
 // SocketClientEvent wraps GSocketClientEvent
@@ -2049,6 +2420,21 @@ func (e SocketClientEvent) InitGoValue(v *gobject.Value) {
 	v.SetEnum(int(e))
 }
 
+func (e SocketClientEvent) String() string {
+	switch e {
+		case SocketClientConnecting: return "SocketClientConnecting"
+		case SocketClientProxyNegotiating: return "SocketClientProxyNegotiating"
+		case SocketClientTLSHandshaking: return "SocketClientTLSHandshaking"
+		case SocketClientTLSHandshaked: return "SocketClientTLSHandshaked"
+		case SocketClientResolving: return "SocketClientResolving"
+		case SocketClientConnected: return "SocketClientConnected"
+		case SocketClientProxyNegotiated: return "SocketClientProxyNegotiated"
+		case SocketClientComplete: return "SocketClientComplete"
+		case SocketClientResolved: return "SocketClientResolved"
+		default: return fmt.Sprintf("SocketClientEvent(%d)", e)
+	}
+}
+
 // SocketFamily wraps GSocketFamily
 //
 // The protocol family of a #GSocketAddress. (These values are
@@ -2080,6 +2466,15 @@ var _ gobject.GoValueInitializer = SocketFamily(0)
 func (e SocketFamily) InitGoValue(v *gobject.Value) {
 	v.Init(TypeSocketFamily)
 	v.SetEnum(int(e))
+}
+
+func (e SocketFamily) String() string {
+	switch e {
+		case SocketFamilyInvalid: return "SocketFamilyInvalid"
+		case SocketFamilyIPv4: return "SocketFamilyIPv4"
+		case SocketFamilyIPv6: return "SocketFamilyIPv6"
+		default: return fmt.Sprintf("SocketFamily(%d)", e)
+	}
 }
 
 // SocketListenerEvent wraps GSocketListenerEvent
@@ -2120,6 +2515,16 @@ var _ gobject.GoValueInitializer = SocketListenerEvent(0)
 func (e SocketListenerEvent) InitGoValue(v *gobject.Value) {
 	v.Init(TypeSocketListenerEvent)
 	v.SetEnum(int(e))
+}
+
+func (e SocketListenerEvent) String() string {
+	switch e {
+		case SocketListenerBinding: return "SocketListenerBinding"
+		case SocketListenerBound: return "SocketListenerBound"
+		case SocketListenerListening: return "SocketListenerListening"
+		case SocketListenerListened: return "SocketListenerListened"
+		default: return fmt.Sprintf("SocketListenerEvent(%d)", e)
+	}
 }
 
 // SocketProtocol wraps GSocketProtocol
@@ -2167,6 +2572,17 @@ func (e SocketProtocol) InitGoValue(v *gobject.Value) {
 	v.SetEnum(int(e))
 }
 
+func (e SocketProtocol) String() string {
+	switch e {
+		case SocketProtocolUnknown: return "SocketProtocolUnknown"
+		case SocketProtocolDefault: return "SocketProtocolDefault"
+		case SocketProtocolTCP: return "SocketProtocolTCP"
+		case SocketProtocolUDP: return "SocketProtocolUDP"
+		case SocketProtocolSCTP: return "SocketProtocolSCTP"
+		default: return fmt.Sprintf("SocketProtocol(%d)", e)
+	}
+}
+
 // SocketType wraps GSocketType
 //
 // Flags used when creating a #GSocket. Some protocols may not implement
@@ -2205,6 +2621,16 @@ func (e SocketType) InitGoValue(v *gobject.Value) {
 	v.SetEnum(int(e))
 }
 
+func (e SocketType) String() string {
+	switch e {
+		case SocketTypeInvalid: return "SocketTypeInvalid"
+		case SocketTypeStream: return "SocketTypeStream"
+		case SocketTypeDatagram: return "SocketTypeDatagram"
+		case SocketTypeSeqpacket: return "SocketTypeSeqpacket"
+		default: return fmt.Sprintf("SocketType(%d)", e)
+	}
+}
+
 // TLSAuthenticationMode wraps GTlsAuthenticationMode
 //
 // The client authentication mode for a #GTlsServerConnection.
@@ -2236,6 +2662,15 @@ func (e TLSAuthenticationMode) InitGoValue(v *gobject.Value) {
 	v.SetEnum(int(e))
 }
 
+func (e TLSAuthenticationMode) String() string {
+	switch e {
+		case TLSAuthenticationNone: return "TLSAuthenticationNone"
+		case TLSAuthenticationRequested: return "TLSAuthenticationRequested"
+		case TLSAuthenticationRequired: return "TLSAuthenticationRequired"
+		default: return fmt.Sprintf("TLSAuthenticationMode(%d)", e)
+	}
+}
+
 // TLSCertificateRequestFlags wraps GTlsCertificateRequestFlags
 //
 // Flags for g_tls_interaction_request_certificate(),
@@ -2259,6 +2694,13 @@ var _ gobject.GoValueInitializer = TLSCertificateRequestFlags(0)
 func (e TLSCertificateRequestFlags) InitGoValue(v *gobject.Value) {
 	v.Init(TypeTlsCertificateRequestFlags)
 	v.SetEnum(int(e))
+}
+
+func (e TLSCertificateRequestFlags) String() string {
+	switch e {
+		case TLSCertificateRequestNone: return "TLSCertificateRequestNone"
+		default: return fmt.Sprintf("TLSCertificateRequestFlags(%d)", e)
+	}
 }
 
 // TLSChannelBindingError wraps GTlsChannelBindingError
@@ -2312,6 +2754,17 @@ func (e TLSChannelBindingError) InitGoValue(v *gobject.Value) {
 	v.SetEnum(int(e))
 }
 
+func (e TLSChannelBindingError) String() string {
+	switch e {
+		case TLSChannelBindingErrorInvalidState: return "TLSChannelBindingErrorInvalidState"
+		case TLSChannelBindingErrorNotAvailable: return "TLSChannelBindingErrorNotAvailable"
+		case TLSChannelBindingErrorNotSupported: return "TLSChannelBindingErrorNotSupported"
+		case TLSChannelBindingErrorGeneralError: return "TLSChannelBindingErrorGeneralError"
+		case TLSChannelBindingErrorNotImplemented: return "TLSChannelBindingErrorNotImplemented"
+		default: return fmt.Sprintf("TLSChannelBindingError(%d)", e)
+	}
+}
+
 // TLSChannelBindingType wraps GTlsChannelBindingType
 //
 // The type of TLS channel binding data to retrieve from #GTlsConnection
@@ -2349,6 +2802,15 @@ func (e TLSChannelBindingType) InitGoValue(v *gobject.Value) {
 	v.SetEnum(int(e))
 }
 
+func (e TLSChannelBindingType) String() string {
+	switch e {
+		case TLSChannelBindingTLSServerEndPoint: return "TLSChannelBindingTLSServerEndPoint"
+		case TLSChannelBindingTLSExporter: return "TLSChannelBindingTLSExporter"
+		case TLSChannelBindingTLSUnique: return "TLSChannelBindingTLSUnique"
+		default: return fmt.Sprintf("TLSChannelBindingType(%d)", e)
+	}
+}
+
 // TLSDatabaseLookupFlags wraps GTlsDatabaseLookupFlags
 //
 // Flags for g_tls_database_lookup_certificate_for_handle(),
@@ -2377,6 +2839,14 @@ var _ gobject.GoValueInitializer = TLSDatabaseLookupFlags(0)
 func (e TLSDatabaseLookupFlags) InitGoValue(v *gobject.Value) {
 	v.Init(TypeTlsDatabaseLookupFlags)
 	v.SetEnum(int(e))
+}
+
+func (e TLSDatabaseLookupFlags) String() string {
+	switch e {
+		case TLSDatabaseLookupNone: return "TLSDatabaseLookupNone"
+		case TLSDatabaseLookupKeypair: return "TLSDatabaseLookupKeypair"
+		default: return fmt.Sprintf("TLSDatabaseLookupFlags(%d)", e)
+	}
 }
 
 // TLSError wraps GTlsError
@@ -2445,6 +2915,21 @@ func (e TLSError) InitGoValue(v *gobject.Value) {
 	v.SetEnum(int(e))
 }
 
+func (e TLSError) String() string {
+	switch e {
+		case TLSErrorUnavailable: return "TLSErrorUnavailable"
+		case TLSErrorMisc: return "TLSErrorMisc"
+		case TLSErrorCertificateRequired: return "TLSErrorCertificateRequired"
+		case TLSErrorInappropriateFallback: return "TLSErrorInappropriateFallback"
+		case TLSErrorBadCertificatePassword: return "TLSErrorBadCertificatePassword"
+		case TLSErrorBadCertificate: return "TLSErrorBadCertificate"
+		case TLSErrorNotTLS: return "TLSErrorNotTLS"
+		case TLSErrorHandshake: return "TLSErrorHandshake"
+		case TLSErrorEOF: return "TLSErrorEOF"
+		default: return fmt.Sprintf("TLSError(%d)", e)
+	}
+}
+
 // TLSInteractionResult wraps GTlsInteractionResult
 //
 // #GTlsInteractionResult is returned by various functions in #GTlsInteraction
@@ -2478,6 +2963,15 @@ var _ gobject.GoValueInitializer = TLSInteractionResult(0)
 func (e TLSInteractionResult) InitGoValue(v *gobject.Value) {
 	v.Init(TypeTlsInteractionResult)
 	v.SetEnum(int(e))
+}
+
+func (e TLSInteractionResult) String() string {
+	switch e {
+		case TLSInteractionFailed: return "TLSInteractionFailed"
+		case TLSInteractionUnhandled: return "TLSInteractionUnhandled"
+		case TLSInteractionHandled: return "TLSInteractionHandled"
+		default: return fmt.Sprintf("TLSInteractionResult(%d)", e)
+	}
 }
 
 // TLSProtocolVersion wraps GTlsProtocolVersion
@@ -2539,6 +3033,20 @@ func (e TLSProtocolVersion) InitGoValue(v *gobject.Value) {
 	v.SetEnum(int(e))
 }
 
+func (e TLSProtocolVersion) String() string {
+	switch e {
+		case TLSProtocolVersionDTLS10: return "TLSProtocolVersionDTLS10"
+		case TLSProtocolVersionDTLS12: return "TLSProtocolVersionDTLS12"
+		case TLSProtocolVersionUnknown: return "TLSProtocolVersionUnknown"
+		case TLSProtocolVersionSSL30: return "TLSProtocolVersionSSL30"
+		case TLSProtocolVersionTLS10: return "TLSProtocolVersionTLS10"
+		case TLSProtocolVersionTLS11: return "TLSProtocolVersionTLS11"
+		case TLSProtocolVersionTLS12: return "TLSProtocolVersionTLS12"
+		case TLSProtocolVersionTLS13: return "TLSProtocolVersionTLS13"
+		default: return fmt.Sprintf("TLSProtocolVersion(%d)", e)
+	}
+}
+
 // TLSRehandshakeMode wraps GTlsRehandshakeMode
 //
 // When to allow rehandshaking. See
@@ -2575,6 +3083,15 @@ func (e TLSRehandshakeMode) InitGoValue(v *gobject.Value) {
 	v.SetEnum(int(e))
 }
 
+func (e TLSRehandshakeMode) String() string {
+	switch e {
+		case TLSRehandshakeNever: return "TLSRehandshakeNever"
+		case TLSRehandshakeSafely: return "TLSRehandshakeSafely"
+		case TLSRehandshakeUnsafely: return "TLSRehandshakeUnsafely"
+		default: return fmt.Sprintf("TLSRehandshakeMode(%d)", e)
+	}
+}
+
 // ZlibCompressorFormat wraps GZlibCompressorFormat
 //
 // Used to select the type of data format to use for #GZlibDecompressor
@@ -2605,6 +3122,15 @@ var _ gobject.GoValueInitializer = ZlibCompressorFormat(0)
 func (e ZlibCompressorFormat) InitGoValue(v *gobject.Value) {
 	v.Init(TypeZlibCompressorFormat)
 	v.SetEnum(int(e))
+}
+
+func (e ZlibCompressorFormat) String() string {
+	switch e {
+		case ZlibCompressorFormatZlib: return "ZlibCompressorFormatZlib"
+		case ZlibCompressorFormatGzip: return "ZlibCompressorFormatGzip"
+		case ZlibCompressorFormatRaw: return "ZlibCompressorFormatRaw"
+		default: return fmt.Sprintf("ZlibCompressorFormat(%d)", e)
+	}
 }
 
 // AppInfoCreateFlags wraps GAppInfoCreateFlags
@@ -2644,6 +3170,27 @@ var _ gobject.GoValueInitializer = AppInfoCreateFlags(0)
 func (f AppInfoCreateFlags) InitGoValue(v *gobject.Value) {
 	v.Init(TypeAppInfoCreateFlags)
 	v.SetFlags(int(f))
+}
+
+func (f AppInfoCreateFlags) String() string {
+	if f == 0 {
+		return "AppInfoCreateFlags(0)"
+	}
+
+	var parts []string
+	if (f & AppInfoCreateNone) != 0 {
+		parts = append(parts, "AppInfoCreateNone")
+	}
+	if (f & AppInfoCreateNeedsTerminal) != 0 {
+		parts = append(parts, "AppInfoCreateNeedsTerminal")
+	}
+	if (f & AppInfoCreateSupportsURIs) != 0 {
+		parts = append(parts, "AppInfoCreateSupportsURIs")
+	}
+	if (f & AppInfoCreateSupportsStartupNotification) != 0 {
+		parts = append(parts, "AppInfoCreateSupportsStartupNotification")
+	}
+	return "AppInfoCreateFlags(" + strings.Join(parts, "|") + ")"
 }
 
 // ApplicationFlags wraps GApplicationFlags
@@ -2741,6 +3288,48 @@ func (f ApplicationFlags) InitGoValue(v *gobject.Value) {
 	v.SetFlags(int(f))
 }
 
+func (f ApplicationFlags) String() string {
+	if f == 0 {
+		return "ApplicationFlags(0)"
+	}
+
+	var parts []string
+	if (f & ApplicationFlagsNone) != 0 {
+		parts = append(parts, "ApplicationFlagsNone")
+	}
+	if (f & ApplicationDefaultFlags) != 0 {
+		parts = append(parts, "ApplicationDefaultFlags")
+	}
+	if (f & ApplicationIsService) != 0 {
+		parts = append(parts, "ApplicationIsService")
+	}
+	if (f & ApplicationIsLauncher) != 0 {
+		parts = append(parts, "ApplicationIsLauncher")
+	}
+	if (f & ApplicationHandlesOpen) != 0 {
+		parts = append(parts, "ApplicationHandlesOpen")
+	}
+	if (f & ApplicationHandlesCommandLine) != 0 {
+		parts = append(parts, "ApplicationHandlesCommandLine")
+	}
+	if (f & ApplicationSendEnvironment) != 0 {
+		parts = append(parts, "ApplicationSendEnvironment")
+	}
+	if (f & ApplicationNonUnique) != 0 {
+		parts = append(parts, "ApplicationNonUnique")
+	}
+	if (f & ApplicationCanOverrideAppID) != 0 {
+		parts = append(parts, "ApplicationCanOverrideAppID")
+	}
+	if (f & ApplicationAllowReplacement) != 0 {
+		parts = append(parts, "ApplicationAllowReplacement")
+	}
+	if (f & ApplicationReplace) != 0 {
+		parts = append(parts, "ApplicationReplace")
+	}
+	return "ApplicationFlags(" + strings.Join(parts, "|") + ")"
+}
+
 // AskPasswordFlags wraps GAskPasswordFlags
 //
 // #GAskPasswordFlags are used to request specific information from the
@@ -2790,6 +3379,33 @@ func (f AskPasswordFlags) InitGoValue(v *gobject.Value) {
 	v.SetFlags(int(f))
 }
 
+func (f AskPasswordFlags) String() string {
+	if f == 0 {
+		return "AskPasswordFlags(0)"
+	}
+
+	var parts []string
+	if (f & AskPasswordNeedPassword) != 0 {
+		parts = append(parts, "AskPasswordNeedPassword")
+	}
+	if (f & AskPasswordNeedUsername) != 0 {
+		parts = append(parts, "AskPasswordNeedUsername")
+	}
+	if (f & AskPasswordNeedDomain) != 0 {
+		parts = append(parts, "AskPasswordNeedDomain")
+	}
+	if (f & AskPasswordSavingSupported) != 0 {
+		parts = append(parts, "AskPasswordSavingSupported")
+	}
+	if (f & AskPasswordAnonymousSupported) != 0 {
+		parts = append(parts, "AskPasswordAnonymousSupported")
+	}
+	if (f & AskPasswordTcrypt) != 0 {
+		parts = append(parts, "AskPasswordTcrypt")
+	}
+	return "AskPasswordFlags(" + strings.Join(parts, "|") + ")"
+}
+
 // BusNameOwnerFlags wraps GBusNameOwnerFlags
 //
 // Flags used in g_bus_own_name().
@@ -2831,6 +3447,27 @@ func (f BusNameOwnerFlags) InitGoValue(v *gobject.Value) {
 	v.SetFlags(int(f))
 }
 
+func (f BusNameOwnerFlags) String() string {
+	if f == 0 {
+		return "BusNameOwnerFlags(0)"
+	}
+
+	var parts []string
+	if (f & BusNameOwnerFlagsNone) != 0 {
+		parts = append(parts, "BusNameOwnerFlagsNone")
+	}
+	if (f & BusNameOwnerFlagsAllowReplacement) != 0 {
+		parts = append(parts, "BusNameOwnerFlagsAllowReplacement")
+	}
+	if (f & BusNameOwnerFlagsReplace) != 0 {
+		parts = append(parts, "BusNameOwnerFlagsReplace")
+	}
+	if (f & BusNameOwnerFlagsDoNotQueue) != 0 {
+		parts = append(parts, "BusNameOwnerFlagsDoNotQueue")
+	}
+	return "BusNameOwnerFlags(" + strings.Join(parts, "|") + ")"
+}
+
 // BusNameWatcherFlags wraps GBusNameWatcherFlags
 //
 // Flags used in g_bus_watch_name().
@@ -2862,6 +3499,21 @@ var _ gobject.GoValueInitializer = BusNameWatcherFlags(0)
 func (f BusNameWatcherFlags) InitGoValue(v *gobject.Value) {
 	v.Init(TypeBusNameWatcherFlags)
 	v.SetFlags(int(f))
+}
+
+func (f BusNameWatcherFlags) String() string {
+	if f == 0 {
+		return "BusNameWatcherFlags(0)"
+	}
+
+	var parts []string
+	if (f & BusNameWatcherFlagsNone) != 0 {
+		parts = append(parts, "BusNameWatcherFlagsNone")
+	}
+	if (f & BusNameWatcherFlagsAutoStart) != 0 {
+		parts = append(parts, "BusNameWatcherFlagsAutoStart")
+	}
+	return "BusNameWatcherFlags(" + strings.Join(parts, "|") + ")"
 }
 
 // ConverterFlags wraps GConverterFlags
@@ -2897,6 +3549,24 @@ var _ gobject.GoValueInitializer = ConverterFlags(0)
 func (f ConverterFlags) InitGoValue(v *gobject.Value) {
 	v.Init(TypeConverterFlags)
 	v.SetFlags(int(f))
+}
+
+func (f ConverterFlags) String() string {
+	if f == 0 {
+		return "ConverterFlags(0)"
+	}
+
+	var parts []string
+	if (f & ConverterNoFlags) != 0 {
+		parts = append(parts, "ConverterNoFlags")
+	}
+	if (f & ConverterInputAtEnd) != 0 {
+		parts = append(parts, "ConverterInputAtEnd")
+	}
+	if (f & ConverterFlush) != 0 {
+		parts = append(parts, "ConverterFlush")
+	}
+	return "ConverterFlags(" + strings.Join(parts, "|") + ")"
 }
 
 // DBusCallFlags wraps GDBusCallFlags
@@ -2937,6 +3607,24 @@ func (f DBusCallFlags) InitGoValue(v *gobject.Value) {
 	v.SetFlags(int(f))
 }
 
+func (f DBusCallFlags) String() string {
+	if f == 0 {
+		return "DBusCallFlags(0)"
+	}
+
+	var parts []string
+	if (f & DBusCallFlagsNone) != 0 {
+		parts = append(parts, "DBusCallFlagsNone")
+	}
+	if (f & DBusCallFlagsNoAutoStart) != 0 {
+		parts = append(parts, "DBusCallFlagsNoAutoStart")
+	}
+	if (f & DBusCallFlagsAllowInteractiveAuthorization) != 0 {
+		parts = append(parts, "DBusCallFlagsAllowInteractiveAuthorization")
+	}
+	return "DBusCallFlags(" + strings.Join(parts, "|") + ")"
+}
+
 // DBusCapabilityFlags wraps GDBusCapabilityFlags
 //
 // Capabilities negotiated with the remote peer.
@@ -2962,6 +3650,18 @@ var _ gobject.GoValueInitializer = DBusCapabilityFlags(0)
 func (f DBusCapabilityFlags) InitGoValue(v *gobject.Value) {
 	v.Init(TypeDBusCapabilityFlags)
 	v.SetFlags(int(f))
+}
+
+func (f DBusCapabilityFlags) String() string {
+	if f == 0 {
+		return "DBusCapabilityFlags(0)"
+	}
+
+	var parts []string
+	if (f & DBusCapabilityFlagsNone) != 0 {
+		parts = append(parts, "DBusCapabilityFlagsNone")
+	}
+	return "DBusCapabilityFlags(" + strings.Join(parts, "|") + ")"
 }
 
 // DBusConnectionFlags wraps GDBusConnectionFlags
@@ -3029,6 +3729,39 @@ func (f DBusConnectionFlags) InitGoValue(v *gobject.Value) {
 	v.SetFlags(int(f))
 }
 
+func (f DBusConnectionFlags) String() string {
+	if f == 0 {
+		return "DBusConnectionFlags(0)"
+	}
+
+	var parts []string
+	if (f & DBusConnectionFlagsNone) != 0 {
+		parts = append(parts, "DBusConnectionFlagsNone")
+	}
+	if (f & DBusConnectionFlagsAuthenticationClient) != 0 {
+		parts = append(parts, "DBusConnectionFlagsAuthenticationClient")
+	}
+	if (f & DBusConnectionFlagsAuthenticationServer) != 0 {
+		parts = append(parts, "DBusConnectionFlagsAuthenticationServer")
+	}
+	if (f & DBusConnectionFlagsAuthenticationAllowAnonymous) != 0 {
+		parts = append(parts, "DBusConnectionFlagsAuthenticationAllowAnonymous")
+	}
+	if (f & DBusConnectionFlagsMessageBusConnection) != 0 {
+		parts = append(parts, "DBusConnectionFlagsMessageBusConnection")
+	}
+	if (f & DBusConnectionFlagsDelayMessageProcessing) != 0 {
+		parts = append(parts, "DBusConnectionFlagsDelayMessageProcessing")
+	}
+	if (f & DBusConnectionFlagsAuthenticationRequireSameUser) != 0 {
+		parts = append(parts, "DBusConnectionFlagsAuthenticationRequireSameUser")
+	}
+	if (f & DBusConnectionFlagsCrossNamespace) != 0 {
+		parts = append(parts, "DBusConnectionFlagsCrossNamespace")
+	}
+	return "DBusConnectionFlags(" + strings.Join(parts, "|") + ")"
+}
+
 // DBusInterfaceSkeletonFlags wraps GDBusInterfaceSkeletonFlags
 //
 // Flags describing the behavior of a #GDBusInterfaceSkeleton instance.
@@ -3061,6 +3794,21 @@ var _ gobject.GoValueInitializer = DBusInterfaceSkeletonFlags(0)
 func (f DBusInterfaceSkeletonFlags) InitGoValue(v *gobject.Value) {
 	v.Init(TypeDBusInterfaceSkeletonFlags)
 	v.SetFlags(int(f))
+}
+
+func (f DBusInterfaceSkeletonFlags) String() string {
+	if f == 0 {
+		return "DBusInterfaceSkeletonFlags(0)"
+	}
+
+	var parts []string
+	if (f & DBusInterfaceSkeletonFlagsNone) != 0 {
+		parts = append(parts, "DBusInterfaceSkeletonFlagsNone")
+	}
+	if (f & DBusInterfaceSkeletonFlagsHandleMethodInvocationsInThread) != 0 {
+		parts = append(parts, "DBusInterfaceSkeletonFlagsHandleMethodInvocationsInThread")
+	}
+	return "DBusInterfaceSkeletonFlags(" + strings.Join(parts, "|") + ")"
 }
 
 // DBusMessageFlags wraps GDBusMessageFlags
@@ -3105,6 +3853,27 @@ func (f DBusMessageFlags) InitGoValue(v *gobject.Value) {
 	v.SetFlags(int(f))
 }
 
+func (f DBusMessageFlags) String() string {
+	if f == 0 {
+		return "DBusMessageFlags(0)"
+	}
+
+	var parts []string
+	if (f & DBusMessageFlagsNone) != 0 {
+		parts = append(parts, "DBusMessageFlagsNone")
+	}
+	if (f & DBusMessageFlagsNoReplyExpected) != 0 {
+		parts = append(parts, "DBusMessageFlagsNoReplyExpected")
+	}
+	if (f & DBusMessageFlagsNoAutoStart) != 0 {
+		parts = append(parts, "DBusMessageFlagsNoAutoStart")
+	}
+	if (f & DBusMessageFlagsAllowInteractiveAuthorization) != 0 {
+		parts = append(parts, "DBusMessageFlagsAllowInteractiveAuthorization")
+	}
+	return "DBusMessageFlags(" + strings.Join(parts, "|") + ")"
+}
+
 // DBusObjectManagerClientFlags wraps GDBusObjectManagerClientFlags
 //
 // Flags used when constructing a #GDBusObjectManagerClient.
@@ -3137,6 +3906,21 @@ var _ gobject.GoValueInitializer = DBusObjectManagerClientFlags(0)
 func (f DBusObjectManagerClientFlags) InitGoValue(v *gobject.Value) {
 	v.Init(TypeDBusObjectManagerClientFlags)
 	v.SetFlags(int(f))
+}
+
+func (f DBusObjectManagerClientFlags) String() string {
+	if f == 0 {
+		return "DBusObjectManagerClientFlags(0)"
+	}
+
+	var parts []string
+	if (f & DBusObjectManagerClientFlagsNone) != 0 {
+		parts = append(parts, "DBusObjectManagerClientFlagsNone")
+	}
+	if (f & DBusObjectManagerClientFlagsDoNotAutoStart) != 0 {
+		parts = append(parts, "DBusObjectManagerClientFlagsDoNotAutoStart")
+	}
+	return "DBusObjectManagerClientFlags(" + strings.Join(parts, "|") + ")"
 }
 
 // DBusPropertyInfoFlags wraps GDBusPropertyInfoFlags
@@ -3172,6 +3956,24 @@ var _ gobject.GoValueInitializer = DBusPropertyInfoFlags(0)
 func (f DBusPropertyInfoFlags) InitGoValue(v *gobject.Value) {
 	v.Init(TypeDBusPropertyInfoFlags)
 	v.SetFlags(int(f))
+}
+
+func (f DBusPropertyInfoFlags) String() string {
+	if f == 0 {
+		return "DBusPropertyInfoFlags(0)"
+	}
+
+	var parts []string
+	if (f & DBusPropertyInfoFlagsNone) != 0 {
+		parts = append(parts, "DBusPropertyInfoFlagsNone")
+	}
+	if (f & DBusPropertyInfoFlagsReadable) != 0 {
+		parts = append(parts, "DBusPropertyInfoFlagsReadable")
+	}
+	if (f & DBusPropertyInfoFlagsWritable) != 0 {
+		parts = append(parts, "DBusPropertyInfoFlagsWritable")
+	}
+	return "DBusPropertyInfoFlags(" + strings.Join(parts, "|") + ")"
 }
 
 // DBusProxyFlags wraps GDBusProxyFlags
@@ -3232,6 +4034,36 @@ func (f DBusProxyFlags) InitGoValue(v *gobject.Value) {
 	v.SetFlags(int(f))
 }
 
+func (f DBusProxyFlags) String() string {
+	if f == 0 {
+		return "DBusProxyFlags(0)"
+	}
+
+	var parts []string
+	if (f & DBusProxyFlagsNone) != 0 {
+		parts = append(parts, "DBusProxyFlagsNone")
+	}
+	if (f & DBusProxyFlagsDoNotLoadProperties) != 0 {
+		parts = append(parts, "DBusProxyFlagsDoNotLoadProperties")
+	}
+	if (f & DBusProxyFlagsDoNotConnectSignals) != 0 {
+		parts = append(parts, "DBusProxyFlagsDoNotConnectSignals")
+	}
+	if (f & DBusProxyFlagsDoNotAutoStart) != 0 {
+		parts = append(parts, "DBusProxyFlagsDoNotAutoStart")
+	}
+	if (f & DBusProxyFlagsGetInvalidatedProperties) != 0 {
+		parts = append(parts, "DBusProxyFlagsGetInvalidatedProperties")
+	}
+	if (f & DBusProxyFlagsDoNotAutoStartAtConstruction) != 0 {
+		parts = append(parts, "DBusProxyFlagsDoNotAutoStartAtConstruction")
+	}
+	if (f & DBusProxyFlagsNoMatchRule) != 0 {
+		parts = append(parts, "DBusProxyFlagsNoMatchRule")
+	}
+	return "DBusProxyFlags(" + strings.Join(parts, "|") + ")"
+}
+
 // DBusSendMessageFlags wraps GDBusSendMessageFlags
 //
 // Flags used when sending #GDBusMessages on a #GDBusConnection.
@@ -3263,6 +4095,21 @@ var _ gobject.GoValueInitializer = DBusSendMessageFlags(0)
 func (f DBusSendMessageFlags) InitGoValue(v *gobject.Value) {
 	v.Init(TypeDBusSendMessageFlags)
 	v.SetFlags(int(f))
+}
+
+func (f DBusSendMessageFlags) String() string {
+	if f == 0 {
+		return "DBusSendMessageFlags(0)"
+	}
+
+	var parts []string
+	if (f & DBusSendMessageFlagsNone) != 0 {
+		parts = append(parts, "DBusSendMessageFlagsNone")
+	}
+	if (f & DBusSendMessageFlagsPreserveSerial) != 0 {
+		parts = append(parts, "DBusSendMessageFlagsPreserveSerial")
+	}
+	return "DBusSendMessageFlags(" + strings.Join(parts, "|") + ")"
 }
 
 // DBusServerFlags wraps GDBusServerFlags
@@ -3306,6 +4153,27 @@ var _ gobject.GoValueInitializer = DBusServerFlags(0)
 func (f DBusServerFlags) InitGoValue(v *gobject.Value) {
 	v.Init(TypeDBusServerFlags)
 	v.SetFlags(int(f))
+}
+
+func (f DBusServerFlags) String() string {
+	if f == 0 {
+		return "DBusServerFlags(0)"
+	}
+
+	var parts []string
+	if (f & DBusServerFlagsNone) != 0 {
+		parts = append(parts, "DBusServerFlagsNone")
+	}
+	if (f & DBusServerFlagsRunInThread) != 0 {
+		parts = append(parts, "DBusServerFlagsRunInThread")
+	}
+	if (f & DBusServerFlagsAuthenticationAllowAnonymous) != 0 {
+		parts = append(parts, "DBusServerFlagsAuthenticationAllowAnonymous")
+	}
+	if (f & DBusServerFlagsAuthenticationRequireSameUser) != 0 {
+		parts = append(parts, "DBusServerFlagsAuthenticationRequireSameUser")
+	}
+	return "DBusServerFlags(" + strings.Join(parts, "|") + ")"
 }
 
 // DBusSignalFlags wraps GDBusSignalFlags
@@ -3352,6 +4220,27 @@ func (f DBusSignalFlags) InitGoValue(v *gobject.Value) {
 	v.SetFlags(int(f))
 }
 
+func (f DBusSignalFlags) String() string {
+	if f == 0 {
+		return "DBusSignalFlags(0)"
+	}
+
+	var parts []string
+	if (f & DBusSignalFlagsNone) != 0 {
+		parts = append(parts, "DBusSignalFlagsNone")
+	}
+	if (f & DBusSignalFlagsNoMatchRule) != 0 {
+		parts = append(parts, "DBusSignalFlagsNoMatchRule")
+	}
+	if (f & DBusSignalFlagsMatchArg0Namespace) != 0 {
+		parts = append(parts, "DBusSignalFlagsMatchArg0Namespace")
+	}
+	if (f & DBusSignalFlagsMatchArg0Path) != 0 {
+		parts = append(parts, "DBusSignalFlagsMatchArg0Path")
+	}
+	return "DBusSignalFlags(" + strings.Join(parts, "|") + ")"
+}
+
 // DBusSubtreeFlags wraps GDBusSubtreeFlags
 //
 // Flags passed to g_dbus_connection_register_subtree().
@@ -3385,6 +4274,21 @@ func (f DBusSubtreeFlags) InitGoValue(v *gobject.Value) {
 	v.SetFlags(int(f))
 }
 
+func (f DBusSubtreeFlags) String() string {
+	if f == 0 {
+		return "DBusSubtreeFlags(0)"
+	}
+
+	var parts []string
+	if (f & DBusSubtreeFlagsNone) != 0 {
+		parts = append(parts, "DBusSubtreeFlagsNone")
+	}
+	if (f & DBusSubtreeFlagsDispatchToUnenumeratedNodes) != 0 {
+		parts = append(parts, "DBusSubtreeFlagsDispatchToUnenumeratedNodes")
+	}
+	return "DBusSubtreeFlags(" + strings.Join(parts, "|") + ")"
+}
+
 // DriveStartFlags wraps GDriveStartFlags
 //
 // Flags used when starting a drive.
@@ -3410,6 +4314,18 @@ var _ gobject.GoValueInitializer = DriveStartFlags(0)
 func (f DriveStartFlags) InitGoValue(v *gobject.Value) {
 	v.Init(TypeDriveStartFlags)
 	v.SetFlags(int(f))
+}
+
+func (f DriveStartFlags) String() string {
+	if f == 0 {
+		return "DriveStartFlags(0)"
+	}
+
+	var parts []string
+	if (f & DriveStartNone) != 0 {
+		parts = append(parts, "DriveStartNone")
+	}
+	return "DriveStartFlags(" + strings.Join(parts, "|") + ")"
 }
 
 // FileAttributeInfoFlags wraps GFileAttributeInfoFlags
@@ -3445,6 +4361,24 @@ var _ gobject.GoValueInitializer = FileAttributeInfoFlags(0)
 func (f FileAttributeInfoFlags) InitGoValue(v *gobject.Value) {
 	v.Init(TypeFileAttributeInfoFlags)
 	v.SetFlags(int(f))
+}
+
+func (f FileAttributeInfoFlags) String() string {
+	if f == 0 {
+		return "FileAttributeInfoFlags(0)"
+	}
+
+	var parts []string
+	if (f & FileAttributeInfoNone) != 0 {
+		parts = append(parts, "FileAttributeInfoNone")
+	}
+	if (f & FileAttributeInfoCopyWithFile) != 0 {
+		parts = append(parts, "FileAttributeInfoCopyWithFile")
+	}
+	if (f & FileAttributeInfoCopyWhenMoved) != 0 {
+		parts = append(parts, "FileAttributeInfoCopyWhenMoved")
+	}
+	return "FileAttributeInfoFlags(" + strings.Join(parts, "|") + ")"
 }
 
 // FileCopyFlags wraps GFileCopyFlags
@@ -3503,6 +4437,39 @@ func (f FileCopyFlags) InitGoValue(v *gobject.Value) {
 	v.SetFlags(int(f))
 }
 
+func (f FileCopyFlags) String() string {
+	if f == 0 {
+		return "FileCopyFlags(0)"
+	}
+
+	var parts []string
+	if (f & FileCopyNone) != 0 {
+		parts = append(parts, "FileCopyNone")
+	}
+	if (f & FileCopyOverwrite) != 0 {
+		parts = append(parts, "FileCopyOverwrite")
+	}
+	if (f & FileCopyBackup) != 0 {
+		parts = append(parts, "FileCopyBackup")
+	}
+	if (f & FileCopyNofollowSymlinks) != 0 {
+		parts = append(parts, "FileCopyNofollowSymlinks")
+	}
+	if (f & FileCopyAllMetadata) != 0 {
+		parts = append(parts, "FileCopyAllMetadata")
+	}
+	if (f & FileCopyNoFallbackForMove) != 0 {
+		parts = append(parts, "FileCopyNoFallbackForMove")
+	}
+	if (f & FileCopyTargetDefaultPerms) != 0 {
+		parts = append(parts, "FileCopyTargetDefaultPerms")
+	}
+	if (f & FileCopyTargetDefaultModifiedTime) != 0 {
+		parts = append(parts, "FileCopyTargetDefaultModifiedTime")
+	}
+	return "FileCopyFlags(" + strings.Join(parts, "|") + ")"
+}
+
 // FileCreateFlags wraps GFileCreateFlags
 //
 // Flags used when an operation may create a file.
@@ -3546,6 +4513,24 @@ var _ gobject.GoValueInitializer = FileCreateFlags(0)
 func (f FileCreateFlags) InitGoValue(v *gobject.Value) {
 	v.Init(TypeFileCreateFlags)
 	v.SetFlags(int(f))
+}
+
+func (f FileCreateFlags) String() string {
+	if f == 0 {
+		return "FileCreateFlags(0)"
+	}
+
+	var parts []string
+	if (f & FileCreateNone) != 0 {
+		parts = append(parts, "FileCreateNone")
+	}
+	if (f & FileCreatePrivate) != 0 {
+		parts = append(parts, "FileCreatePrivate")
+	}
+	if (f & FileCreateReplaceDestination) != 0 {
+		parts = append(parts, "FileCreateReplaceDestination")
+	}
+	return "FileCreateFlags(" + strings.Join(parts, "|") + ")"
 }
 
 // FileMeasureFlags wraps GFileMeasureFlags
@@ -3594,6 +4579,27 @@ var _ gobject.GoValueInitializer = FileMeasureFlags(0)
 func (f FileMeasureFlags) InitGoValue(v *gobject.Value) {
 	v.Init(TypeFileMeasureFlags)
 	v.SetFlags(int(f))
+}
+
+func (f FileMeasureFlags) String() string {
+	if f == 0 {
+		return "FileMeasureFlags(0)"
+	}
+
+	var parts []string
+	if (f & FileMeasureNone) != 0 {
+		parts = append(parts, "FileMeasureNone")
+	}
+	if (f & FileMeasureReportAnyError) != 0 {
+		parts = append(parts, "FileMeasureReportAnyError")
+	}
+	if (f & FileMeasureApparentSize) != 0 {
+		parts = append(parts, "FileMeasureApparentSize")
+	}
+	if (f & FileMeasureNoXdev) != 0 {
+		parts = append(parts, "FileMeasureNoXdev")
+	}
+	return "FileMeasureFlags(" + strings.Join(parts, "|") + ")"
 }
 
 // FileMonitorFlags wraps GFileMonitorFlags
@@ -3648,6 +4654,30 @@ func (f FileMonitorFlags) InitGoValue(v *gobject.Value) {
 	v.SetFlags(int(f))
 }
 
+func (f FileMonitorFlags) String() string {
+	if f == 0 {
+		return "FileMonitorFlags(0)"
+	}
+
+	var parts []string
+	if (f & FileMonitorNone) != 0 {
+		parts = append(parts, "FileMonitorNone")
+	}
+	if (f & FileMonitorWatchMounts) != 0 {
+		parts = append(parts, "FileMonitorWatchMounts")
+	}
+	if (f & FileMonitorSendMoved) != 0 {
+		parts = append(parts, "FileMonitorSendMoved")
+	}
+	if (f & FileMonitorWatchHardLinks) != 0 {
+		parts = append(parts, "FileMonitorWatchHardLinks")
+	}
+	if (f & FileMonitorWatchMoves) != 0 {
+		parts = append(parts, "FileMonitorWatchMoves")
+	}
+	return "FileMonitorFlags(" + strings.Join(parts, "|") + ")"
+}
+
 // FileQueryInfoFlags wraps GFileQueryInfoFlags
 //
 // Flags used when querying a #GFileInfo.
@@ -3677,6 +4707,21 @@ var _ gobject.GoValueInitializer = FileQueryInfoFlags(0)
 func (f FileQueryInfoFlags) InitGoValue(v *gobject.Value) {
 	v.Init(TypeFileQueryInfoFlags)
 	v.SetFlags(int(f))
+}
+
+func (f FileQueryInfoFlags) String() string {
+	if f == 0 {
+		return "FileQueryInfoFlags(0)"
+	}
+
+	var parts []string
+	if (f & FileQueryInfoNone) != 0 {
+		parts = append(parts, "FileQueryInfoNone")
+	}
+	if (f & FileQueryInfoNofollowSymlinks) != 0 {
+		parts = append(parts, "FileQueryInfoNofollowSymlinks")
+	}
+	return "FileQueryInfoFlags(" + strings.Join(parts, "|") + ")"
 }
 
 // IOStreamSpliceFlags wraps GIOStreamSpliceFlags
@@ -3721,6 +4766,27 @@ func (f IOStreamSpliceFlags) InitGoValue(v *gobject.Value) {
 	v.SetFlags(int(f))
 }
 
+func (f IOStreamSpliceFlags) String() string {
+	if f == 0 {
+		return "IOStreamSpliceFlags(0)"
+	}
+
+	var parts []string
+	if (f & IOStreamSpliceNone) != 0 {
+		parts = append(parts, "IOStreamSpliceNone")
+	}
+	if (f & IOStreamSpliceCloseStream1) != 0 {
+		parts = append(parts, "IOStreamSpliceCloseStream1")
+	}
+	if (f & IOStreamSpliceCloseStream2) != 0 {
+		parts = append(parts, "IOStreamSpliceCloseStream2")
+	}
+	if (f & IOStreamSpliceWaitForBoth) != 0 {
+		parts = append(parts, "IOStreamSpliceWaitForBoth")
+	}
+	return "IOStreamSpliceFlags(" + strings.Join(parts, "|") + ")"
+}
+
 // MountMountFlags wraps GMountMountFlags
 //
 // Flags used when mounting a mount.
@@ -3746,6 +4812,18 @@ var _ gobject.GoValueInitializer = MountMountFlags(0)
 func (f MountMountFlags) InitGoValue(v *gobject.Value) {
 	v.Init(TypeMountMountFlags)
 	v.SetFlags(int(f))
+}
+
+func (f MountMountFlags) String() string {
+	if f == 0 {
+		return "MountMountFlags(0)"
+	}
+
+	var parts []string
+	if (f & MountMountNone) != 0 {
+		parts = append(parts, "MountMountNone")
+	}
+	return "MountMountFlags(" + strings.Join(parts, "|") + ")"
 }
 
 // MountUnmountFlags wraps GMountUnmountFlags
@@ -3778,6 +4856,21 @@ var _ gobject.GoValueInitializer = MountUnmountFlags(0)
 func (f MountUnmountFlags) InitGoValue(v *gobject.Value) {
 	v.Init(TypeMountUnmountFlags)
 	v.SetFlags(int(f))
+}
+
+func (f MountUnmountFlags) String() string {
+	if f == 0 {
+		return "MountUnmountFlags(0)"
+	}
+
+	var parts []string
+	if (f & MountUnmountNone) != 0 {
+		parts = append(parts, "MountUnmountNone")
+	}
+	if (f & MountUnmountForce) != 0 {
+		parts = append(parts, "MountUnmountForce")
+	}
+	return "MountUnmountFlags(" + strings.Join(parts, "|") + ")"
 }
 
 // OutputStreamSpliceFlags wraps GOutputStreamSpliceFlags
@@ -3817,6 +4910,24 @@ func (f OutputStreamSpliceFlags) InitGoValue(v *gobject.Value) {
 	v.SetFlags(int(f))
 }
 
+func (f OutputStreamSpliceFlags) String() string {
+	if f == 0 {
+		return "OutputStreamSpliceFlags(0)"
+	}
+
+	var parts []string
+	if (f & OutputStreamSpliceNone) != 0 {
+		parts = append(parts, "OutputStreamSpliceNone")
+	}
+	if (f & OutputStreamSpliceCloseSource) != 0 {
+		parts = append(parts, "OutputStreamSpliceCloseSource")
+	}
+	if (f & OutputStreamSpliceCloseTarget) != 0 {
+		parts = append(parts, "OutputStreamSpliceCloseTarget")
+	}
+	return "OutputStreamSpliceFlags(" + strings.Join(parts, "|") + ")"
+}
+
 // ResolverNameLookupFlags wraps GResolverNameLookupFlags
 //
 // Flags to modify lookup behavior.
@@ -3852,6 +4963,24 @@ func (f ResolverNameLookupFlags) InitGoValue(v *gobject.Value) {
 	v.SetFlags(int(f))
 }
 
+func (f ResolverNameLookupFlags) String() string {
+	if f == 0 {
+		return "ResolverNameLookupFlags(0)"
+	}
+
+	var parts []string
+	if (f & ResolverNameLookupFlagsDefault) != 0 {
+		parts = append(parts, "ResolverNameLookupFlagsDefault")
+	}
+	if (f & ResolverNameLookupFlagsIPv4Only) != 0 {
+		parts = append(parts, "ResolverNameLookupFlagsIPv4Only")
+	}
+	if (f & ResolverNameLookupFlagsIPv6Only) != 0 {
+		parts = append(parts, "ResolverNameLookupFlagsIPv6Only")
+	}
+	return "ResolverNameLookupFlags(" + strings.Join(parts, "|") + ")"
+}
+
 // ResourceFlags wraps GResourceFlags
 //
 // GResourceFlags give information about a particular file inside a resource
@@ -3884,6 +5013,21 @@ func (f ResourceFlags) InitGoValue(v *gobject.Value) {
 	v.SetFlags(int(f))
 }
 
+func (f ResourceFlags) String() string {
+	if f == 0 {
+		return "ResourceFlags(0)"
+	}
+
+	var parts []string
+	if (f & ResourceFlagsNone) != 0 {
+		parts = append(parts, "ResourceFlagsNone")
+	}
+	if (f & ResourceFlagsCompressed) != 0 {
+		parts = append(parts, "ResourceFlagsCompressed")
+	}
+	return "ResourceFlags(" + strings.Join(parts, "|") + ")"
+}
+
 // ResourceLookupFlags wraps GResourceLookupFlags
 //
 // GResourceLookupFlags determine how resource path lookups are handled.
@@ -3909,6 +5053,18 @@ var _ gobject.GoValueInitializer = ResourceLookupFlags(0)
 func (f ResourceLookupFlags) InitGoValue(v *gobject.Value) {
 	v.Init(TypeResourceLookupFlags)
 	v.SetFlags(int(f))
+}
+
+func (f ResourceLookupFlags) String() string {
+	if f == 0 {
+		return "ResourceLookupFlags(0)"
+	}
+
+	var parts []string
+	if (f & ResourceLookupFlagsNone) != 0 {
+		parts = append(parts, "ResourceLookupFlagsNone")
+	}
+	return "ResourceLookupFlags(" + strings.Join(parts, "|") + ")"
 }
 
 // SettingsBindFlags wraps GSettingsBindFlags
@@ -3965,6 +5121,33 @@ func (f SettingsBindFlags) InitGoValue(v *gobject.Value) {
 	v.SetFlags(int(f))
 }
 
+func (f SettingsBindFlags) String() string {
+	if f == 0 {
+		return "SettingsBindFlags(0)"
+	}
+
+	var parts []string
+	if (f & SettingsBindDefault) != 0 {
+		parts = append(parts, "SettingsBindDefault")
+	}
+	if (f & SettingsBindGet) != 0 {
+		parts = append(parts, "SettingsBindGet")
+	}
+	if (f & SettingsBindSet) != 0 {
+		parts = append(parts, "SettingsBindSet")
+	}
+	if (f & SettingsBindNoSensitivity) != 0 {
+		parts = append(parts, "SettingsBindNoSensitivity")
+	}
+	if (f & SettingsBindGetNoChanges) != 0 {
+		parts = append(parts, "SettingsBindGetNoChanges")
+	}
+	if (f & SettingsBindInvertBoolean) != 0 {
+		parts = append(parts, "SettingsBindInvertBoolean")
+	}
+	return "SettingsBindFlags(" + strings.Join(parts, "|") + ")"
+}
+
 // SocketMsgFlags wraps GSocketMsgFlags
 //
 // Flags used in g_socket_receive_message() and g_socket_send_message().
@@ -4010,6 +5193,27 @@ func (f SocketMsgFlags) InitGoValue(v *gobject.Value) {
 	v.SetFlags(int(f))
 }
 
+func (f SocketMsgFlags) String() string {
+	if f == 0 {
+		return "SocketMsgFlags(0)"
+	}
+
+	var parts []string
+	if (f & SocketMsgNone) != 0 {
+		parts = append(parts, "SocketMsgNone")
+	}
+	if (f & SocketMsgOob) != 0 {
+		parts = append(parts, "SocketMsgOob")
+	}
+	if (f & SocketMsgPeek) != 0 {
+		parts = append(parts, "SocketMsgPeek")
+	}
+	if (f & SocketMsgDontroute) != 0 {
+		parts = append(parts, "SocketMsgDontroute")
+	}
+	return "SocketMsgFlags(" + strings.Join(parts, "|") + ")"
+}
+
 // TestDBusFlags wraps GTestDBusFlags
 //
 // Flags to define future #GTestDBus behaviour.
@@ -4035,6 +5239,18 @@ var _ gobject.GoValueInitializer = TestDBusFlags(0)
 func (f TestDBusFlags) InitGoValue(v *gobject.Value) {
 	v.Init(TypeTestDBusFlags)
 	v.SetFlags(int(f))
+}
+
+func (f TestDBusFlags) String() string {
+	if f == 0 {
+		return "TestDBusFlags(0)"
+	}
+
+	var parts []string
+	if (f & TestDBusNone) != 0 {
+		parts = append(parts, "TestDBusNone")
+	}
+	return "TestDBusFlags(" + strings.Join(parts, "|") + ")"
 }
 
 // TLSCertificateFlags wraps GTlsCertificateFlags
@@ -4113,6 +5329,42 @@ func (f TLSCertificateFlags) InitGoValue(v *gobject.Value) {
 	v.SetFlags(int(f))
 }
 
+func (f TLSCertificateFlags) String() string {
+	if f == 0 {
+		return "TLSCertificateFlags(0)"
+	}
+
+	var parts []string
+	if (f & TLSCertificateNoFlags) != 0 {
+		parts = append(parts, "TLSCertificateNoFlags")
+	}
+	if (f & TLSCertificateUnknownCa) != 0 {
+		parts = append(parts, "TLSCertificateUnknownCa")
+	}
+	if (f & TLSCertificateBadIdentity) != 0 {
+		parts = append(parts, "TLSCertificateBadIdentity")
+	}
+	if (f & TLSCertificateNotActivated) != 0 {
+		parts = append(parts, "TLSCertificateNotActivated")
+	}
+	if (f & TLSCertificateExpired) != 0 {
+		parts = append(parts, "TLSCertificateExpired")
+	}
+	if (f & TLSCertificateRevoked) != 0 {
+		parts = append(parts, "TLSCertificateRevoked")
+	}
+	if (f & TLSCertificateInsecure) != 0 {
+		parts = append(parts, "TLSCertificateInsecure")
+	}
+	if (f & TLSCertificateGenericError) != 0 {
+		parts = append(parts, "TLSCertificateGenericError")
+	}
+	if (f & TLSCertificateValidateAll) != 0 {
+		parts = append(parts, "TLSCertificateValidateAll")
+	}
+	return "TLSCertificateFlags(" + strings.Join(parts, "|") + ")"
+}
+
 // TLSDatabaseVerifyFlags wraps GTlsDatabaseVerifyFlags
 //
 // Flags for g_tls_database_verify_chain().
@@ -4138,6 +5390,18 @@ var _ gobject.GoValueInitializer = TLSDatabaseVerifyFlags(0)
 func (f TLSDatabaseVerifyFlags) InitGoValue(v *gobject.Value) {
 	v.Init(TypeTlsDatabaseVerifyFlags)
 	v.SetFlags(int(f))
+}
+
+func (f TLSDatabaseVerifyFlags) String() string {
+	if f == 0 {
+		return "TLSDatabaseVerifyFlags(0)"
+	}
+
+	var parts []string
+	if (f & TLSDatabaseVerifyNone) != 0 {
+		parts = append(parts, "TLSDatabaseVerifyNone")
+	}
+	return "TLSDatabaseVerifyFlags(" + strings.Join(parts, "|") + ")"
 }
 
 // TLSPasswordFlags wraps GTlsPasswordFlags
@@ -4194,6 +5458,36 @@ var _ gobject.GoValueInitializer = TLSPasswordFlags(0)
 func (f TLSPasswordFlags) InitGoValue(v *gobject.Value) {
 	v.Init(TypeTlsPasswordFlags)
 	v.SetFlags(int(f))
+}
+
+func (f TLSPasswordFlags) String() string {
+	if f == 0 {
+		return "TLSPasswordFlags(0)"
+	}
+
+	var parts []string
+	if (f & TLSPasswordNone) != 0 {
+		parts = append(parts, "TLSPasswordNone")
+	}
+	if (f & TLSPasswordRetry) != 0 {
+		parts = append(parts, "TLSPasswordRetry")
+	}
+	if (f & TLSPasswordManyTries) != 0 {
+		parts = append(parts, "TLSPasswordManyTries")
+	}
+	if (f & TLSPasswordFinalTry) != 0 {
+		parts = append(parts, "TLSPasswordFinalTry")
+	}
+	if (f & TLSPasswordPKCS11User) != 0 {
+		parts = append(parts, "TLSPasswordPKCS11User")
+	}
+	if (f & TLSPasswordPKCS11SecurityOfficer) != 0 {
+		parts = append(parts, "TLSPasswordPKCS11SecurityOfficer")
+	}
+	if (f & TLSPasswordPKCS11ContextSpecific) != 0 {
+		parts = append(parts, "TLSPasswordPKCS11ContextSpecific")
+	}
+	return "TLSPasswordFlags(" + strings.Join(parts, "|") + ")"
 }
 
 // AsyncReadyCallback wraps GAsyncReadyCallback

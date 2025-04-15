@@ -3,7 +3,9 @@
 package pango
 
 import (
+	"fmt"
 	"runtime"
+	"strings"
 	"unsafe"
 
 	"github.com/diamondburned/gotk4/pkg/core/userdata"
@@ -244,6 +246,15 @@ func (e Alignment) InitGoValue(v *gobject.Value) {
 	v.SetEnum(int(e))
 }
 
+func (e Alignment) String() string {
+	switch e {
+		case AlignLeft: return "AlignLeft"
+		case AlignCenter: return "AlignCenter"
+		case AlignRight: return "AlignRight"
+		default: return fmt.Sprintf("Alignment(%d)", e)
+	}
+}
+
 // AttrType wraps PangoAttrType
 //
 // The `PangoAttrType` distinguishes between different types of attributes.
@@ -418,6 +429,50 @@ func (e AttrType) InitGoValue(v *gobject.Value) {
 	v.SetEnum(int(e))
 }
 
+func (e AttrType) String() string {
+	switch e {
+		case AttrTypeUnderline: return "AttrTypeUnderline"
+		case AttrTypeRise: return "AttrTypeRise"
+		case AttrTypeFallback: return "AttrTypeFallback"
+		case AttrTypeSize: return "AttrTypeSize"
+		case AttrTypeBackground: return "AttrTypeBackground"
+		case AttrTypeStrikethrough: return "AttrTypeStrikethrough"
+		case AttrTypeScale: return "AttrTypeScale"
+		case AttrTypeLetterSpacing: return "AttrTypeLetterSpacing"
+		case AttrTypeGravityHint: return "AttrTypeGravityHint"
+		case AttrTypeWord: return "AttrTypeWord"
+		case AttrTypeFamily: return "AttrTypeFamily"
+		case AttrTypeStyle: return "AttrTypeStyle"
+		case AttrTypeForeground: return "AttrTypeForeground"
+		case AttrTypeStrikethroughColor: return "AttrTypeStrikethroughColor"
+		case AttrTypeInsertHyphens: return "AttrTypeInsertHyphens"
+		case AttrTypeWeight: return "AttrTypeWeight"
+		case AttrTypeShape: return "AttrTypeShape"
+		case AttrTypeGravity: return "AttrTypeGravity"
+		case AttrTypeForegroundAlpha: return "AttrTypeForegroundAlpha"
+		case AttrTypeInvalid: return "AttrTypeInvalid"
+		case AttrTypeLanguage: return "AttrTypeLanguage"
+		case AttrTypeStretch: return "AttrTypeStretch"
+		case AttrTypeUnderlineColor: return "AttrTypeUnderlineColor"
+		case AttrTypeFontFeatures: return "AttrTypeFontFeatures"
+		case AttrTypeTextTransform: return "AttrTypeTextTransform"
+		case AttrTypeBackgroundAlpha: return "AttrTypeBackgroundAlpha"
+		case AttrTypeShow: return "AttrTypeShow"
+		case AttrTypeAbsoluteLineHeight: return "AttrTypeAbsoluteLineHeight"
+		case AttrTypeFontScale: return "AttrTypeFontScale"
+		case AttrTypeVariant: return "AttrTypeVariant"
+		case AttrTypeFontDesc: return "AttrTypeFontDesc"
+		case AttrTypeAbsoluteSize: return "AttrTypeAbsoluteSize"
+		case AttrTypeOverline: return "AttrTypeOverline"
+		case AttrTypeSentence: return "AttrTypeSentence"
+		case AttrTypeAllowBreaks: return "AttrTypeAllowBreaks"
+		case AttrTypeOverlineColor: return "AttrTypeOverlineColor"
+		case AttrTypeLineHeight: return "AttrTypeLineHeight"
+		case AttrTypeBaselineShift: return "AttrTypeBaselineShift"
+		default: return fmt.Sprintf("AttrType(%d)", e)
+	}
+}
+
 // BaselineShift wraps PangoBaselineShift
 //
 // An enumeration that affects baseline shifts between runs.
@@ -449,6 +504,15 @@ var _ gobject.GoValueInitializer = BaselineShift(0)
 func (e BaselineShift) InitGoValue(v *gobject.Value) {
 	v.Init(TypeBaselineShift)
 	v.SetEnum(int(e))
+}
+
+func (e BaselineShift) String() string {
+	switch e {
+		case BaselineShiftNone: return "BaselineShiftNone"
+		case BaselineShiftSuperscript: return "BaselineShiftSuperscript"
+		case BaselineShiftSubscript: return "BaselineShiftSubscript"
+		default: return fmt.Sprintf("BaselineShift(%d)", e)
+	}
 }
 
 // BidiType wraps PangoBidiType
@@ -568,6 +632,35 @@ func (e BidiType) InitGoValue(v *gobject.Value) {
 	v.SetEnum(int(e))
 }
 
+func (e BidiType) String() string {
+	switch e {
+		case BidiTypePDF: return "BidiTypePDF"
+		case BidiTypeEt: return "BidiTypeEt"
+		case BidiTypeBn: return "BidiTypeBn"
+		case BidiTypeWs: return "BidiTypeWs"
+		case BidiTypeRli: return "BidiTypeRli"
+		case BidiTypePdi: return "BidiTypePdi"
+		case BidiTypeLro: return "BidiTypeLro"
+		case BidiTypeEn: return "BidiTypeEn"
+		case BidiTypeAn: return "BidiTypeAn"
+		case BidiTypeNsm: return "BidiTypeNsm"
+		case BidiTypeS: return "BidiTypeS"
+		case BidiTypeLri: return "BidiTypeLri"
+		case BidiTypeFsi: return "BidiTypeFsi"
+		case BidiTypeAl: return "BidiTypeAl"
+		case BidiTypeRlo: return "BidiTypeRlo"
+		case BidiTypeB: return "BidiTypeB"
+		case BidiTypeOn: return "BidiTypeOn"
+		case BidiTypeL: return "BidiTypeL"
+		case BidiTypeLre: return "BidiTypeLre"
+		case BidiTypeES: return "BidiTypeES"
+		case BidiTypeCs: return "BidiTypeCs"
+		case BidiTypeR: return "BidiTypeR"
+		case BidiTypeRLE: return "BidiTypeRLE"
+		default: return fmt.Sprintf("BidiType(%d)", e)
+	}
+}
+
 // CoverageLevel wraps PangoCoverageLevel
 //
 // `PangoCoverageLevel` is used to indicate how well a font can
@@ -613,6 +706,16 @@ var _ gobject.GoValueInitializer = CoverageLevel(0)
 func (e CoverageLevel) InitGoValue(v *gobject.Value) {
 	v.Init(TypeCoverageLevel)
 	v.SetEnum(int(e))
+}
+
+func (e CoverageLevel) String() string {
+	switch e {
+		case CoverageNone: return "CoverageNone"
+		case CoverageFallback: return "CoverageFallback"
+		case CoverageApproximate: return "CoverageApproximate"
+		case CoverageExact: return "CoverageExact"
+		default: return fmt.Sprintf("CoverageLevel(%d)", e)
+	}
 }
 
 // Direction wraps PangoDirection
@@ -681,6 +784,19 @@ func (e Direction) InitGoValue(v *gobject.Value) {
 	v.SetEnum(int(e))
 }
 
+func (e Direction) String() string {
+	switch e {
+		case DirectionRTL: return "DirectionRTL"
+		case DirectionTtbLTR: return "DirectionTtbLTR"
+		case DirectionTtbRTL: return "DirectionTtbRTL"
+		case DirectionWeakLTR: return "DirectionWeakLTR"
+		case DirectionWeakRTL: return "DirectionWeakRTL"
+		case DirectionNeutral: return "DirectionNeutral"
+		case DirectionLTR: return "DirectionLTR"
+		default: return fmt.Sprintf("Direction(%d)", e)
+	}
+}
+
 // EllipsizeMode wraps PangoEllipsizeMode
 //
 // `PangoEllipsizeMode` describes what sort of ellipsization
@@ -721,6 +837,16 @@ func (e EllipsizeMode) InitGoValue(v *gobject.Value) {
 	v.SetEnum(int(e))
 }
 
+func (e EllipsizeMode) String() string {
+	switch e {
+		case EllipsizeEnd: return "EllipsizeEnd"
+		case EllipsizeNone: return "EllipsizeNone"
+		case EllipsizeStart: return "EllipsizeStart"
+		case EllipsizeMiddle: return "EllipsizeMiddle"
+		default: return fmt.Sprintf("EllipsizeMode(%d)", e)
+	}
+}
+
 // FontScale wraps PangoFontScale
 //
 // An enumeration that affects font sizes for superscript
@@ -755,6 +881,16 @@ var _ gobject.GoValueInitializer = FontScale(0)
 func (e FontScale) InitGoValue(v *gobject.Value) {
 	v.Init(TypeFontScale)
 	v.SetEnum(int(e))
+}
+
+func (e FontScale) String() string {
+	switch e {
+		case FontScaleNone: return "FontScaleNone"
+		case FontScaleSuperscript: return "FontScaleSuperscript"
+		case FontScaleSubscript: return "FontScaleSubscript"
+		case FontScaleSmallCaps: return "FontScaleSmallCaps"
+		default: return fmt.Sprintf("FontScale(%d)", e)
+	}
 }
 
 // Gravity wraps PangoGravity
@@ -808,6 +944,17 @@ func (e Gravity) InitGoValue(v *gobject.Value) {
 	v.SetEnum(int(e))
 }
 
+func (e Gravity) String() string {
+	switch e {
+		case GravitySouth: return "GravitySouth"
+		case GravityEast: return "GravityEast"
+		case GravityNorth: return "GravityNorth"
+		case GravityWest: return "GravityWest"
+		case GravityAuto: return "GravityAuto"
+		default: return fmt.Sprintf("Gravity(%d)", e)
+	}
+}
+
 // GravityHint wraps PangoGravityHint
 //
 // `PangoGravityHint` defines how horizontal scripts should behave in a
@@ -849,6 +996,15 @@ func (e GravityHint) InitGoValue(v *gobject.Value) {
 	v.SetEnum(int(e))
 }
 
+func (e GravityHint) String() string {
+	switch e {
+		case GravityHintNatural: return "GravityHintNatural"
+		case GravityHintStrong: return "GravityHintStrong"
+		case GravityHintLine: return "GravityHintLine"
+		default: return fmt.Sprintf("GravityHint(%d)", e)
+	}
+}
+
 // LayoutDeserializeError wraps PangoLayoutDeserializeError
 //
 // Errors that can be returned by [func@Pango.Layout.deserialize].
@@ -882,6 +1038,15 @@ func (e LayoutDeserializeError) InitGoValue(v *gobject.Value) {
 	v.SetEnum(int(e))
 }
 
+func (e LayoutDeserializeError) String() string {
+	switch e {
+		case LayoutDeserializeInvalid: return "LayoutDeserializeInvalid"
+		case LayoutDeserializeInvalidValue: return "LayoutDeserializeInvalidValue"
+		case LayoutDeserializeMissingValue: return "LayoutDeserializeMissingValue"
+		default: return fmt.Sprintf("LayoutDeserializeError(%d)", e)
+	}
+}
+
 // Overline wraps PangoOverline
 //
 // The `PangoOverline` enumeration is used to specify whether text
@@ -909,6 +1074,14 @@ var _ gobject.GoValueInitializer = Overline(0)
 func (e Overline) InitGoValue(v *gobject.Value) {
 	v.Init(TypeOverline)
 	v.SetEnum(int(e))
+}
+
+func (e Overline) String() string {
+	switch e {
+		case OverlineNone: return "OverlineNone"
+		case OverlineSingle: return "OverlineSingle"
+		default: return fmt.Sprintf("Overline(%d)", e)
+	}
 }
 
 // RenderPart wraps PangoRenderPart
@@ -949,6 +1122,17 @@ var _ gobject.GoValueInitializer = RenderPart(0)
 func (e RenderPart) InitGoValue(v *gobject.Value) {
 	v.Init(TypeRenderPart)
 	v.SetEnum(int(e))
+}
+
+func (e RenderPart) String() string {
+	switch e {
+		case RenderPartUnderline: return "RenderPartUnderline"
+		case RenderPartStrikethrough: return "RenderPartStrikethrough"
+		case RenderPartOverline: return "RenderPartOverline"
+		case RenderPartForeground: return "RenderPartForeground"
+		case RenderPartBackground: return "RenderPartBackground"
+		default: return fmt.Sprintf("RenderPart(%d)", e)
+	}
 }
 
 // Script wraps PangoScript
@@ -1452,6 +1636,130 @@ func (e Script) InitGoValue(v *gobject.Value) {
 	v.SetEnum(int(e))
 }
 
+func (e Script) String() string {
+	switch e {
+		case ScriptLao: return "ScriptLao"
+		case ScriptYi: return "ScriptYi"
+		case ScriptPauCinHau: return "ScriptPauCinHau"
+		case ScriptMeroiticCursive: return "ScriptMeroiticCursive"
+		case ScriptGrantha: return "ScriptGrantha"
+		case ScriptOldNorthArabian: return "ScriptOldNorthArabian"
+		case ScriptOldHungarian: return "ScriptOldHungarian"
+		case ScriptBengali: return "ScriptBengali"
+		case ScriptTelugu: return "ScriptTelugu"
+		case ScriptLimbu: return "ScriptLimbu"
+		case ScriptOsmanya: return "ScriptOsmanya"
+		case ScriptBalinese: return "ScriptBalinese"
+		case ScriptPhagsPa: return "ScriptPhagsPa"
+		case ScriptKhudawadi: return "ScriptKhudawadi"
+		case ScriptMultani: return "ScriptMultani"
+		case ScriptArmenian: return "ScriptArmenian"
+		case ScriptDevanagari: return "ScriptDevanagari"
+		case ScriptGothic: return "ScriptGothic"
+		case ScriptGreek: return "ScriptGreek"
+		case ScriptOldPersian: return "ScriptOldPersian"
+		case ScriptLepcha: return "ScriptLepcha"
+		case ScriptLycian: return "ScriptLycian"
+		case ScriptElbasan: return "ScriptElbasan"
+		case ScriptCherokee: return "ScriptCherokee"
+		case ScriptTagbanwa: return "ScriptTagbanwa"
+		case ScriptRejang: return "ScriptRejang"
+		case ScriptCaucasianAlbanian: return "ScriptCaucasianAlbanian"
+		case ScriptManichaean: return "ScriptManichaean"
+		case ScriptGeorgian: return "ScriptGeorgian"
+		case ScriptTamil: return "ScriptTamil"
+		case ScriptNewTaiLue: return "ScriptNewTaiLue"
+		case ScriptNko: return "ScriptNko"
+		case ScriptSundanese: return "ScriptSundanese"
+		case ScriptEthiopic: return "ScriptEthiopic"
+		case ScriptBraille: return "ScriptBraille"
+		case ScriptOldPermic: return "ScriptOldPermic"
+		case ScriptPahawhHmong: return "ScriptPahawhHmong"
+		case ScriptOriya: return "ScriptOriya"
+		case ScriptSinhala: return "ScriptSinhala"
+		case ScriptBuhid: return "ScriptBuhid"
+		case ScriptCypriot: return "ScriptCypriot"
+		case ScriptBatak: return "ScriptBatak"
+		case ScriptAhom: return "ScriptAhom"
+		case ScriptInvalidCode: return "ScriptInvalidCode"
+		case ScriptArabic: return "ScriptArabic"
+		case ScriptGujarati: return "ScriptGujarati"
+		case ScriptRunic: return "ScriptRunic"
+		case ScriptUnknown: return "ScriptUnknown"
+		case ScriptWarangCiti: return "ScriptWarangCiti"
+		case ScriptKhmer: return "ScriptKhmer"
+		case ScriptChakma: return "ScriptChakma"
+		case ScriptBopomofo: return "ScriptBopomofo"
+		case ScriptUgaritic: return "ScriptUgaritic"
+		case ScriptHan: return "ScriptHan"
+		case ScriptLatin: return "ScriptLatin"
+		case ScriptOgham: return "ScriptOgham"
+		case ScriptKannada: return "ScriptKannada"
+		case ScriptMendeKikakui: return "ScriptMendeKikakui"
+		case ScriptSyriac: return "ScriptSyriac"
+		case ScriptHangul: return "ScriptHangul"
+		case ScriptHiragana: return "ScriptHiragana"
+		case ScriptShavian: return "ScriptShavian"
+		case ScriptLinearB: return "ScriptLinearB"
+		case ScriptAnatolianHieroglyphs: return "ScriptAnatolianHieroglyphs"
+		case ScriptMeroiticHieroglyphs: return "ScriptMeroiticHieroglyphs"
+		case ScriptTakri: return "ScriptTakri"
+		case ScriptCommon: return "ScriptCommon"
+		case ScriptDeseret: return "ScriptDeseret"
+		case ScriptMongolian: return "ScriptMongolian"
+		case ScriptTibetan: return "ScriptTibetan"
+		case ScriptKharoshthi: return "ScriptKharoshthi"
+		case ScriptKhojki: return "ScriptKhojki"
+		case ScriptGurmukhi: return "ScriptGurmukhi"
+		case ScriptLydian: return "ScriptLydian"
+		case ScriptSharada: return "ScriptSharada"
+		case ScriptCarian: return "ScriptCarian"
+		case ScriptSiddham: return "ScriptSiddham"
+		case ScriptThaana: return "ScriptThaana"
+		case ScriptThai: return "ScriptThai"
+		case ScriptTifinagh: return "ScriptTifinagh"
+		case ScriptPsalterPahlavi: return "ScriptPsalterPahlavi"
+		case ScriptKayahLi: return "ScriptKayahLi"
+		case ScriptSaurashtra: return "ScriptSaurashtra"
+		case ScriptHebrew: return "ScriptHebrew"
+		case ScriptOlChiki: return "ScriptOlChiki"
+		case ScriptTagalog: return "ScriptTagalog"
+		case ScriptNabataean: return "ScriptNabataean"
+		case ScriptBrahmi: return "ScriptBrahmi"
+		case ScriptPalmyrene: return "ScriptPalmyrene"
+		case ScriptSignwriting: return "ScriptSignwriting"
+		case ScriptOldItalic: return "ScriptOldItalic"
+		case ScriptCanadianAboriginal: return "ScriptCanadianAboriginal"
+		case ScriptTaiLe: return "ScriptTaiLe"
+		case ScriptCuneiform: return "ScriptCuneiform"
+		case ScriptSoraSompeng: return "ScriptSoraSompeng"
+		case ScriptDuployan: return "ScriptDuployan"
+		case ScriptTirhuta: return "ScriptTirhuta"
+		case ScriptInherited: return "ScriptInherited"
+		case ScriptPhoenician: return "ScriptPhoenician"
+		case ScriptCham: return "ScriptCham"
+		case ScriptMro: return "ScriptMro"
+		case ScriptCoptic: return "ScriptCoptic"
+		case ScriptCyrillic: return "ScriptCyrillic"
+		case ScriptHanunoo: return "ScriptHanunoo"
+		case ScriptHatran: return "ScriptHatran"
+		case ScriptMalayalam: return "ScriptMalayalam"
+		case ScriptMyanmar: return "ScriptMyanmar"
+		case ScriptBuginese: return "ScriptBuginese"
+		case ScriptGlagolitic: return "ScriptGlagolitic"
+		case ScriptMandaic: return "ScriptMandaic"
+		case ScriptMiao: return "ScriptMiao"
+		case ScriptModi: return "ScriptModi"
+		case ScriptKatakana: return "ScriptKatakana"
+		case ScriptVai: return "ScriptVai"
+		case ScriptSylotiNagri: return "ScriptSylotiNagri"
+		case ScriptLinearA: return "ScriptLinearA"
+		case ScriptBassaVah: return "ScriptBassaVah"
+		case ScriptMahajani: return "ScriptMahajani"
+		default: return fmt.Sprintf("Script(%d)", e)
+	}
+}
+
 // Stretch wraps PangoStretch
 //
 // An enumeration specifying the width of the font relative to other designs
@@ -1508,6 +1816,21 @@ func (e Stretch) InitGoValue(v *gobject.Value) {
 	v.SetEnum(int(e))
 }
 
+func (e Stretch) String() string {
+	switch e {
+		case StretchSemiExpanded: return "StretchSemiExpanded"
+		case StretchExpanded: return "StretchExpanded"
+		case StretchExtraExpanded: return "StretchExtraExpanded"
+		case StretchUltraExpanded: return "StretchUltraExpanded"
+		case StretchNormal: return "StretchNormal"
+		case StretchUltraCondensed: return "StretchUltraCondensed"
+		case StretchExtraCondensed: return "StretchExtraCondensed"
+		case StretchCondensed: return "StretchCondensed"
+		case StretchSemiCondensed: return "StretchSemiCondensed"
+		default: return fmt.Sprintf("Stretch(%d)", e)
+	}
+}
+
 // Style wraps PangoStyle
 //
 // An enumeration specifying the various slant styles possible for a font.
@@ -1537,6 +1860,15 @@ var _ gobject.GoValueInitializer = Style(0)
 func (e Style) InitGoValue(v *gobject.Value) {
 	v.Init(TypeStyle)
 	v.SetEnum(int(e))
+}
+
+func (e Style) String() string {
+	switch e {
+		case StyleNormal: return "StyleNormal"
+		case StyleOblique: return "StyleOblique"
+		case StyleItalic: return "StyleItalic"
+		default: return fmt.Sprintf("Style(%d)", e)
+	}
 }
 
 // TabAlign wraps PangoTabAlign
@@ -1579,6 +1911,16 @@ func (e TabAlign) InitGoValue(v *gobject.Value) {
 	v.SetEnum(int(e))
 }
 
+func (e TabAlign) String() string {
+	switch e {
+		case TabCenter: return "TabCenter"
+		case TabDecimal: return "TabDecimal"
+		case TabLeft: return "TabLeft"
+		case TabRight: return "TabRight"
+		default: return fmt.Sprintf("TabAlign(%d)", e)
+	}
+}
+
 // TextTransform wraps PangoTextTransform
 //
 // An enumeration that affects how Pango treats characters during shaping.
@@ -1613,6 +1955,16 @@ var _ gobject.GoValueInitializer = TextTransform(0)
 func (e TextTransform) InitGoValue(v *gobject.Value) {
 	v.Init(TypeTextTransform)
 	v.SetEnum(int(e))
+}
+
+func (e TextTransform) String() string {
+	switch e {
+		case TextTransformNone: return "TextTransformNone"
+		case TextTransformLowercase: return "TextTransformLowercase"
+		case TextTransformUppercase: return "TextTransformUppercase"
+		case TextTransformCapitalize: return "TextTransformCapitalize"
+		default: return fmt.Sprintf("TextTransform(%d)", e)
+	}
 }
 
 // Underline wraps PangoUnderline
@@ -1685,6 +2037,20 @@ func (e Underline) InitGoValue(v *gobject.Value) {
 	v.SetEnum(int(e))
 }
 
+func (e Underline) String() string {
+	switch e {
+		case UnderlineDoubleLine: return "UnderlineDoubleLine"
+		case UnderlineErrorLine: return "UnderlineErrorLine"
+		case UnderlineNone: return "UnderlineNone"
+		case UnderlineSingle: return "UnderlineSingle"
+		case UnderlineDouble: return "UnderlineDouble"
+		case UnderlineLow: return "UnderlineLow"
+		case UnderlineError: return "UnderlineError"
+		case UnderlineSingleLine: return "UnderlineSingleLine"
+		default: return fmt.Sprintf("Underline(%d)", e)
+	}
+}
+
 // Variant wraps PangoVariant
 //
 // An enumeration specifying capitalization variant of the font.
@@ -1738,6 +2104,19 @@ var _ gobject.GoValueInitializer = Variant(0)
 func (e Variant) InitGoValue(v *gobject.Value) {
 	v.Init(TypeVariant)
 	v.SetEnum(int(e))
+}
+
+func (e Variant) String() string {
+	switch e {
+		case VariantPetiteCaps: return "VariantPetiteCaps"
+		case VariantAllPetiteCaps: return "VariantAllPetiteCaps"
+		case VariantUnicase: return "VariantUnicase"
+		case VariantTitleCaps: return "VariantTitleCaps"
+		case VariantNormal: return "VariantNormal"
+		case VariantSmallCaps: return "VariantSmallCaps"
+		case VariantAllSmallCaps: return "VariantAllSmallCaps"
+		default: return fmt.Sprintf("Variant(%d)", e)
+	}
 }
 
 // Weight wraps PangoWeight
@@ -1810,6 +2189,24 @@ func (e Weight) InitGoValue(v *gobject.Value) {
 	v.SetEnum(int(e))
 }
 
+func (e Weight) String() string {
+	switch e {
+		case WeightHeavy: return "WeightHeavy"
+		case WeightThin: return "WeightThin"
+		case WeightUltralight: return "WeightUltralight"
+		case WeightLight: return "WeightLight"
+		case WeightMedium: return "WeightMedium"
+		case WeightBold: return "WeightBold"
+		case WeightUltrabold: return "WeightUltrabold"
+		case WeightUltraheavy: return "WeightUltraheavy"
+		case WeightSemilight: return "WeightSemilight"
+		case WeightBook: return "WeightBook"
+		case WeightNormal: return "WeightNormal"
+		case WeightSemibold: return "WeightSemibold"
+		default: return fmt.Sprintf("Weight(%d)", e)
+	}
+}
+
 // WrapMode wraps PangoWrapMode
 //
 // `PangoWrapMode` describes how to wrap the lines of a `PangoLayout`
@@ -1850,6 +2247,16 @@ var _ gobject.GoValueInitializer = WrapMode(0)
 func (e WrapMode) InitGoValue(v *gobject.Value) {
 	v.Init(TypeWrapMode)
 	v.SetEnum(int(e))
+}
+
+func (e WrapMode) String() string {
+	switch e {
+		case WrapChar: return "WrapChar"
+		case WrapWordChar: return "WrapWordChar"
+		case WrapNone: return "WrapNone"
+		case WrapWord: return "WrapWord"
+		default: return fmt.Sprintf("WrapMode(%d)", e)
+	}
 }
 
 // FontMask wraps PangoFontMask
@@ -1912,6 +2319,42 @@ func (f FontMask) InitGoValue(v *gobject.Value) {
 	v.SetFlags(int(f))
 }
 
+func (f FontMask) String() string {
+	if f == 0 {
+		return "FontMask(0)"
+	}
+
+	var parts []string
+	if (f & FontMaskFamily) != 0 {
+		parts = append(parts, "FontMaskFamily")
+	}
+	if (f & FontMaskStyle) != 0 {
+		parts = append(parts, "FontMaskStyle")
+	}
+	if (f & FontMaskVariant) != 0 {
+		parts = append(parts, "FontMaskVariant")
+	}
+	if (f & FontMaskWeight) != 0 {
+		parts = append(parts, "FontMaskWeight")
+	}
+	if (f & FontMaskStretch) != 0 {
+		parts = append(parts, "FontMaskStretch")
+	}
+	if (f & FontMaskSize) != 0 {
+		parts = append(parts, "FontMaskSize")
+	}
+	if (f & FontMaskGravity) != 0 {
+		parts = append(parts, "FontMaskGravity")
+	}
+	if (f & FontMaskVariations) != 0 {
+		parts = append(parts, "FontMaskVariations")
+	}
+	if (f & FontMaskFeatures) != 0 {
+		parts = append(parts, "FontMaskFeatures")
+	}
+	return "FontMask(" + strings.Join(parts, "|") + ")"
+}
+
 // LayoutDeserializeFlags wraps PangoLayoutDeserializeFlags
 //
 // Flags that influence the behavior of [func@Pango.Layout.deserialize].
@@ -1944,6 +2387,21 @@ var _ gobject.GoValueInitializer = LayoutDeserializeFlags(0)
 func (f LayoutDeserializeFlags) InitGoValue(v *gobject.Value) {
 	v.Init(TypeLayoutDeserializeFlags)
 	v.SetFlags(int(f))
+}
+
+func (f LayoutDeserializeFlags) String() string {
+	if f == 0 {
+		return "LayoutDeserializeFlags(0)"
+	}
+
+	var parts []string
+	if (f & LayoutDeserializeDefault) != 0 {
+		parts = append(parts, "LayoutDeserializeDefault")
+	}
+	if (f & LayoutDeserializeContext) != 0 {
+		parts = append(parts, "LayoutDeserializeContext")
+	}
+	return "LayoutDeserializeFlags(" + strings.Join(parts, "|") + ")"
 }
 
 // LayoutSerializeFlags wraps PangoLayoutSerializeFlags
@@ -1983,6 +2441,24 @@ func (f LayoutSerializeFlags) InitGoValue(v *gobject.Value) {
 	v.SetFlags(int(f))
 }
 
+func (f LayoutSerializeFlags) String() string {
+	if f == 0 {
+		return "LayoutSerializeFlags(0)"
+	}
+
+	var parts []string
+	if (f & LayoutSerializeDefault) != 0 {
+		parts = append(parts, "LayoutSerializeDefault")
+	}
+	if (f & LayoutSerializeContext) != 0 {
+		parts = append(parts, "LayoutSerializeContext")
+	}
+	if (f & LayoutSerializeOutput) != 0 {
+		parts = append(parts, "LayoutSerializeOutput")
+	}
+	return "LayoutSerializeFlags(" + strings.Join(parts, "|") + ")"
+}
+
 // ShapeFlags wraps PangoShapeFlags
 //
 // Flags influencing the shaping process.
@@ -2015,6 +2491,21 @@ var _ gobject.GoValueInitializer = ShapeFlags(0)
 func (f ShapeFlags) InitGoValue(v *gobject.Value) {
 	v.Init(TypeShapeFlags)
 	v.SetFlags(int(f))
+}
+
+func (f ShapeFlags) String() string {
+	if f == 0 {
+		return "ShapeFlags(0)"
+	}
+
+	var parts []string
+	if (f & ShapeNone) != 0 {
+		parts = append(parts, "ShapeNone")
+	}
+	if (f & ShapeRoundPositions) != 0 {
+		parts = append(parts, "ShapeRoundPositions")
+	}
+	return "ShapeFlags(" + strings.Join(parts, "|") + ")"
 }
 
 // ShowFlags wraps PangoShowFlags
@@ -2056,6 +2547,27 @@ var _ gobject.GoValueInitializer = ShowFlags(0)
 func (f ShowFlags) InitGoValue(v *gobject.Value) {
 	v.Init(TypeShowFlags)
 	v.SetFlags(int(f))
+}
+
+func (f ShowFlags) String() string {
+	if f == 0 {
+		return "ShowFlags(0)"
+	}
+
+	var parts []string
+	if (f & ShowNone) != 0 {
+		parts = append(parts, "ShowNone")
+	}
+	if (f & ShowSpaces) != 0 {
+		parts = append(parts, "ShowSpaces")
+	}
+	if (f & ShowLineBreaks) != 0 {
+		parts = append(parts, "ShowLineBreaks")
+	}
+	if (f & ShowIgnorables) != 0 {
+		parts = append(parts, "ShowIgnorables")
+	}
+	return "ShowFlags(" + strings.Join(parts, "|") + ")"
 }
 
 // AttrDataCopyFunc wraps PangoAttrDataCopyFunc

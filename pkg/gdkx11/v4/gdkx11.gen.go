@@ -3,6 +3,7 @@
 package gdkx11
 
 import (
+	"fmt"
 	"runtime"
 	"unsafe"
 
@@ -55,6 +56,15 @@ const (
 	X11DeviceTypeFloating X11DeviceType = 2
 )
 
+
+func (e X11DeviceType) String() string {
+	switch e {
+		case X11DeviceTypeLogical: return "X11DeviceTypeLogical"
+		case X11DeviceTypePhysical: return "X11DeviceTypePhysical"
+		case X11DeviceTypeFloating: return "X11DeviceTypeFloating"
+		default: return fmt.Sprintf("X11DeviceType(%d)", e)
+	}
+}
 
 // X11DeviceGetID wraps gdk_x11_device_get_id
 // 

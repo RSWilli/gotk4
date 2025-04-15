@@ -4,7 +4,9 @@ package gdk
 
 import (
 	"context"
+	"fmt"
 	"runtime"
+	"strings"
 	"unsafe"
 
 	"github.com/diamondburned/gotk4/pkg/core/userdata"
@@ -4875,6 +4877,25 @@ func (e AxisUse) InitGoValue(v *gobject.Value) {
 	v.SetEnum(int(e))
 }
 
+func (e AxisUse) String() string {
+	switch e {
+		case AxisDeltaX: return "AxisDeltaX"
+		case AxisDeltaY: return "AxisDeltaY"
+		case AxisYtilt: return "AxisYtilt"
+		case AxisSlider: return "AxisSlider"
+		case AxisIgnore: return "AxisIgnore"
+		case AxisY: return "AxisY"
+		case AxisPressure: return "AxisPressure"
+		case AxisXtilt: return "AxisXtilt"
+		case AxisWheel: return "AxisWheel"
+		case AxisDistance: return "AxisDistance"
+		case AxisRotation: return "AxisRotation"
+		case AxisLast: return "AxisLast"
+		case AxisX: return "AxisX"
+		default: return fmt.Sprintf("AxisUse(%d)", e)
+	}
+}
+
 // CicpRange wraps GdkCicpRange
 //
 // The values of this enumeration describe whether image data uses
@@ -4905,6 +4926,14 @@ var _ gobject.GoValueInitializer = CicpRange(0)
 func (e CicpRange) InitGoValue(v *gobject.Value) {
 	v.Init(TypeCicpRange)
 	v.SetEnum(int(e))
+}
+
+func (e CicpRange) String() string {
+	switch e {
+		case CicpRangeNarrow: return "CicpRangeNarrow"
+		case CicpRangeFull: return "CicpRangeFull"
+		default: return fmt.Sprintf("CicpRange(%d)", e)
+	}
 }
 
 // CrossingMode wraps GdkCrossingMode
@@ -4967,6 +4996,21 @@ func (e CrossingMode) InitGoValue(v *gobject.Value) {
 	v.SetEnum(int(e))
 }
 
+func (e CrossingMode) String() string {
+	switch e {
+		case CrossingStateChanged: return "CrossingStateChanged"
+		case CrossingTouchBegin: return "CrossingTouchBegin"
+		case CrossingTouchEnd: return "CrossingTouchEnd"
+		case CrossingUngrab: return "CrossingUngrab"
+		case CrossingDeviceSwitch: return "CrossingDeviceSwitch"
+		case CrossingNormal: return "CrossingNormal"
+		case CrossingGrab: return "CrossingGrab"
+		case CrossingGTKGrab: return "CrossingGTKGrab"
+		case CrossingGTKUngrab: return "CrossingGTKUngrab"
+		default: return fmt.Sprintf("CrossingMode(%d)", e)
+	}
+}
+
 // DevicePadFeature wraps GdkDevicePadFeature
 //
 // A pad feature.
@@ -4996,6 +5040,15 @@ var _ gobject.GoValueInitializer = DevicePadFeature(0)
 func (e DevicePadFeature) InitGoValue(v *gobject.Value) {
 	v.Init(TypeDevicePadFeature)
 	v.SetEnum(int(e))
+}
+
+func (e DevicePadFeature) String() string {
+	switch e {
+		case DevicePadFeatureStrip: return "DevicePadFeatureStrip"
+		case DevicePadFeatureButton: return "DevicePadFeatureButton"
+		case DevicePadFeatureRing: return "DevicePadFeatureRing"
+		default: return fmt.Sprintf("DevicePadFeature(%d)", e)
+	}
 }
 
 // DeviceToolType wraps GdkDeviceToolType
@@ -5050,6 +5103,20 @@ func (e DeviceToolType) InitGoValue(v *gobject.Value) {
 	v.SetEnum(int(e))
 }
 
+func (e DeviceToolType) String() string {
+	switch e {
+		case DeviceToolTypePencil: return "DeviceToolTypePencil"
+		case DeviceToolTypeAirbrush: return "DeviceToolTypeAirbrush"
+		case DeviceToolTypeMouse: return "DeviceToolTypeMouse"
+		case DeviceToolTypeLens: return "DeviceToolTypeLens"
+		case DeviceToolTypeUnknown: return "DeviceToolTypeUnknown"
+		case DeviceToolTypePen: return "DeviceToolTypePen"
+		case DeviceToolTypeEraser: return "DeviceToolTypeEraser"
+		case DeviceToolTypeBrush: return "DeviceToolTypeBrush"
+		default: return fmt.Sprintf("DeviceToolType(%d)", e)
+	}
+}
+
 // DmabufError wraps GdkDmabufError
 //
 // Error enumeration for `GdkDmabufTexture`.
@@ -5083,6 +5150,15 @@ func (e DmabufError) InitGoValue(v *gobject.Value) {
 	v.SetEnum(int(e))
 }
 
+func (e DmabufError) String() string {
+	switch e {
+		case DmabufErrorNotAvailable: return "DmabufErrorNotAvailable"
+		case DmabufErrorUnsupportedFormat: return "DmabufErrorUnsupportedFormat"
+		case DmabufErrorCreationFailed: return "DmabufErrorCreationFailed"
+		default: return fmt.Sprintf("DmabufError(%d)", e)
+	}
+}
+
 // DragCancelReason wraps GdkDragCancelReason
 //
 // Used in `GdkDrag` to the reason of a cancelled DND operation.
@@ -5112,6 +5188,15 @@ var _ gobject.GoValueInitializer = DragCancelReason(0)
 func (e DragCancelReason) InitGoValue(v *gobject.Value) {
 	v.Init(TypeDragCancelReason)
 	v.SetEnum(int(e))
+}
+
+func (e DragCancelReason) String() string {
+	switch e {
+		case DragCancelError: return "DragCancelError"
+		case DragCancelNoTarget: return "DragCancelNoTarget"
+		case DragCancelUserCancelled: return "DragCancelUserCancelled"
+		default: return fmt.Sprintf("DragCancelReason(%d)", e)
+	}
 }
 
 // EventType wraps GdkEventType
@@ -5261,6 +5346,42 @@ func (e EventType) InitGoValue(v *gobject.Value) {
 	v.SetEnum(int(e))
 }
 
+func (e EventType) String() string {
+	switch e {
+		case ButtonPress: return "ButtonPress"
+		case ButtonRelease: return "ButtonRelease"
+		case EnterNotify: return "EnterNotify"
+		case ProximityOut: return "ProximityOut"
+		case DropStart: return "DropStart"
+		case Scroll: return "Scroll"
+		case TouchpadHold: return "TouchpadHold"
+		case DragEnter: return "DragEnter"
+		case KeyRelease: return "KeyRelease"
+		case LeaveNotify: return "LeaveNotify"
+		case GrabBroken: return "GrabBroken"
+		case PadButtonRelease: return "PadButtonRelease"
+		case TouchUpdate: return "TouchUpdate"
+		case TouchCancel: return "TouchCancel"
+		case TouchpadSwipe: return "TouchpadSwipe"
+		case TouchpadPinch: return "TouchpadPinch"
+		case PadRing: return "PadRing"
+		case PadStrip: return "PadStrip"
+		case DragLeave: return "DragLeave"
+		case TouchEnd: return "TouchEnd"
+		case KeyPress: return "KeyPress"
+		case TouchBegin: return "TouchBegin"
+		case PadButtonPress: return "PadButtonPress"
+		case DragMotion: return "DragMotion"
+		case Delete: return "Delete"
+		case PadGroupMode: return "PadGroupMode"
+		case MotionNotify: return "MotionNotify"
+		case FocusChange: return "FocusChange"
+		case ProximityIn: return "ProximityIn"
+		case EventLast: return "EventLast"
+		default: return fmt.Sprintf("EventType(%d)", e)
+	}
+}
+
 // FullscreenMode wraps GdkFullscreenMode
 //
 // Indicates which monitor a surface should span over when in fullscreen mode.
@@ -5286,6 +5407,14 @@ var _ gobject.GoValueInitializer = FullscreenMode(0)
 func (e FullscreenMode) InitGoValue(v *gobject.Value) {
 	v.Init(TypeFullscreenMode)
 	v.SetEnum(int(e))
+}
+
+func (e FullscreenMode) String() string {
+	switch e {
+		case FullscreenOnCurrentMonitor: return "FullscreenOnCurrentMonitor"
+		case FullscreenOnAllMonitors: return "FullscreenOnAllMonitors"
+		default: return fmt.Sprintf("FullscreenMode(%d)", e)
+	}
 }
 
 // GLError wraps GdkGLError
@@ -5325,6 +5454,17 @@ var _ gobject.GoValueInitializer = GLError(0)
 func (e GLError) InitGoValue(v *gobject.Value) {
 	v.Init(TypeGLError)
 	v.SetEnum(int(e))
+}
+
+func (e GLError) String() string {
+	switch e {
+		case GLErrorNotAvailable: return "GLErrorNotAvailable"
+		case GLErrorUnsupportedFormat: return "GLErrorUnsupportedFormat"
+		case GLErrorUnsupportedProfile: return "GLErrorUnsupportedProfile"
+		case GLErrorCompilationFailed: return "GLErrorCompilationFailed"
+		case GLErrorLinkFailed: return "GLErrorLinkFailed"
+		default: return fmt.Sprintf("GLError(%d)", e)
+	}
 }
 
 // Gravity wraps GdkGravity
@@ -5387,6 +5527,22 @@ func (e Gravity) InitGoValue(v *gobject.Value) {
 	v.SetEnum(int(e))
 }
 
+func (e Gravity) String() string {
+	switch e {
+		case GravityNorthWest: return "GravityNorthWest"
+		case GravityNorth: return "GravityNorth"
+		case GravityNorthEast: return "GravityNorthEast"
+		case GravityWest: return "GravityWest"
+		case GravitySouthWest: return "GravitySouthWest"
+		case GravityCenter: return "GravityCenter"
+		case GravityEast: return "GravityEast"
+		case GravitySouth: return "GravitySouth"
+		case GravitySouthEast: return "GravitySouthEast"
+		case GravityStatic: return "GravityStatic"
+		default: return fmt.Sprintf("Gravity(%d)", e)
+	}
+}
+
 // InputSource wraps GdkInputSource
 //
 // An enumeration describing the type of an input device in general terms.
@@ -5438,6 +5594,19 @@ func (e InputSource) InitGoValue(v *gobject.Value) {
 	v.SetEnum(int(e))
 }
 
+func (e InputSource) String() string {
+	switch e {
+		case SourceMouse: return "SourceMouse"
+		case SourcePen: return "SourcePen"
+		case SourceKeyboard: return "SourceKeyboard"
+		case SourceTouchscreen: return "SourceTouchscreen"
+		case SourceTouchpad: return "SourceTouchpad"
+		case SourceTrackpoint: return "SourceTrackpoint"
+		case SourceTabletPad: return "SourceTabletPad"
+		default: return fmt.Sprintf("InputSource(%d)", e)
+	}
+}
+
 // KeyMatch wraps GdkKeyMatch
 //
 // Describes how well an event matches a given keyval and modifiers.
@@ -5470,6 +5639,15 @@ var _ gobject.GoValueInitializer = KeyMatch(0)
 func (e KeyMatch) InitGoValue(v *gobject.Value) {
 	v.Init(TypeKeyMatch)
 	v.SetEnum(int(e))
+}
+
+func (e KeyMatch) String() string {
+	switch e {
+		case KeyMatchNone: return "KeyMatchNone"
+		case KeyMatchPartial: return "KeyMatchPartial"
+		case KeyMatchExact: return "KeyMatchExact"
+		default: return fmt.Sprintf("KeyMatch(%d)", e)
+	}
 }
 
 // MemoryFormat wraps GdkMemoryFormat
@@ -5647,6 +5825,46 @@ func (e MemoryFormat) InitGoValue(v *gobject.Value) {
 	v.SetEnum(int(e))
 }
 
+func (e MemoryFormat) String() string {
+	switch e {
+		case MemoryR16G16B16A16FloatPremultiplied: return "MemoryR16G16B16A16FloatPremultiplied"
+		case MemoryR32G32B32Float: return "MemoryR32G32B32Float"
+		case MemoryA16: return "MemoryA16"
+		case MemoryA16Float: return "MemoryA16Float"
+		case MemoryA8: return "MemoryA8"
+		case MemoryB8G8R8A8Premultiplied: return "MemoryB8G8R8A8Premultiplied"
+		case MemoryR16G16B16A16: return "MemoryR16G16B16A16"
+		case MemoryR16G16B16A16Float: return "MemoryR16G16B16A16Float"
+		case MemoryR8G8B8A8Premultiplied: return "MemoryR8G8B8A8Premultiplied"
+		case MemoryA8R8G8B8: return "MemoryA8R8G8B8"
+		case MemoryA8B8G8R8: return "MemoryA8B8G8R8"
+		case MemoryR16G16B16: return "MemoryR16G16B16"
+		case MemoryG8A8: return "MemoryG8A8"
+		case MemoryR8G8B8X8: return "MemoryR8G8B8X8"
+		case MemorYX8B8G8R8: return "MemorYX8B8G8R8"
+		case MemoryA32Float: return "MemoryA32Float"
+		case MemoryA8B8G8R8Premultiplied: return "MemoryA8B8G8R8Premultiplied"
+		case MemoryR8G8B8: return "MemoryR8G8B8"
+		case MemoryG16A16: return "MemoryG16A16"
+		case MemoryNFormats: return "MemoryNFormats"
+		case MemoryR8G8B8A8: return "MemoryR8G8B8A8"
+		case MemoryR16G16B16A16Premultiplied: return "MemoryR16G16B16A16Premultiplied"
+		case MemoryR32G32B32A32Float: return "MemoryR32G32B32A32Float"
+		case MemoryG8: return "MemoryG8"
+		case MemoryG16: return "MemoryG16"
+		case MemoryB8G8R8X8: return "MemoryB8G8R8X8"
+		case MemorYX8R8G8B8: return "MemorYX8R8G8B8"
+		case MemoryA8R8G8B8Premultiplied: return "MemoryA8R8G8B8Premultiplied"
+		case MemoryR32G32B32A32FloatPremultiplied: return "MemoryR32G32B32A32FloatPremultiplied"
+		case MemoryG8A8Premultiplied: return "MemoryG8A8Premultiplied"
+		case MemoryB8G8R8A8: return "MemoryB8G8R8A8"
+		case MemoryB8G8R8: return "MemoryB8G8R8"
+		case MemoryR16G16B16Float: return "MemoryR16G16B16Float"
+		case MemoryG16A16Premultiplied: return "MemoryG16A16Premultiplied"
+		default: return fmt.Sprintf("MemoryFormat(%d)", e)
+	}
+}
+
 // NotifyType wraps GdkNotifyType
 //
 // Specifies the kind of crossing for enter and leave events.
@@ -5700,6 +5918,18 @@ func (e NotifyType) InitGoValue(v *gobject.Value) {
 	v.SetEnum(int(e))
 }
 
+func (e NotifyType) String() string {
+	switch e {
+		case NotifyNonlinearVirtual: return "NotifyNonlinearVirtual"
+		case NotifyUnknown: return "NotifyUnknown"
+		case NotifyAncestor: return "NotifyAncestor"
+		case NotifyVirtual: return "NotifyVirtual"
+		case NotifyInferior: return "NotifyInferior"
+		case NotifyNonlinear: return "NotifyNonlinear"
+		default: return fmt.Sprintf("NotifyType(%d)", e)
+	}
+}
+
 // ScrollDirection wraps GdkScrollDirection
 //
 // Specifies the direction for scroll events.
@@ -5738,6 +5968,17 @@ var _ gobject.GoValueInitializer = ScrollDirection(0)
 func (e ScrollDirection) InitGoValue(v *gobject.Value) {
 	v.Init(TypeScrollDirection)
 	v.SetEnum(int(e))
+}
+
+func (e ScrollDirection) String() string {
+	switch e {
+		case ScrollSmooth: return "ScrollSmooth"
+		case ScrollUp: return "ScrollUp"
+		case ScrollDown: return "ScrollDown"
+		case ScrollLeft: return "ScrollLeft"
+		case ScrollRight: return "ScrollRight"
+		default: return fmt.Sprintf("ScrollDirection(%d)", e)
+	}
 }
 
 // ScrollUnit wraps GdkScrollUnit
@@ -5783,6 +6024,14 @@ func (e ScrollUnit) InitGoValue(v *gobject.Value) {
 	v.SetEnum(int(e))
 }
 
+func (e ScrollUnit) String() string {
+	switch e {
+		case ScrollUnitWheel: return "ScrollUnitWheel"
+		case ScrollUnitSurface: return "ScrollUnitSurface"
+		default: return fmt.Sprintf("ScrollUnit(%d)", e)
+	}
+}
+
 // SubpixelLayout wraps GdkSubpixelLayout
 //
 // This enumeration describes how the red, green and blue components
@@ -5825,6 +6074,18 @@ var _ gobject.GoValueInitializer = SubpixelLayout(0)
 func (e SubpixelLayout) InitGoValue(v *gobject.Value) {
 	v.Init(TypeSubpixelLayout)
 	v.SetEnum(int(e))
+}
+
+func (e SubpixelLayout) String() string {
+	switch e {
+		case SubpixelLayoutVerticalRGB: return "SubpixelLayoutVerticalRGB"
+		case SubpixelLayoutVerticalBGR: return "SubpixelLayoutVerticalBGR"
+		case SubpixelLayoutUnknown: return "SubpixelLayoutUnknown"
+		case SubpixelLayoutNone: return "SubpixelLayoutNone"
+		case SubpixelLayoutHorizontalRGB: return "SubpixelLayoutHorizontalRGB"
+		case SubpixelLayoutHorizontalBGR: return "SubpixelLayoutHorizontalBGR"
+		default: return fmt.Sprintf("SubpixelLayout(%d)", e)
+	}
 }
 
 // SurfaceEdge wraps GdkSurfaceEdge
@@ -5878,6 +6139,20 @@ func (e SurfaceEdge) InitGoValue(v *gobject.Value) {
 	v.SetEnum(int(e))
 }
 
+func (e SurfaceEdge) String() string {
+	switch e {
+		case SurfaceEdgeSouth: return "SurfaceEdgeSouth"
+		case SurfaceEdgeSouthEast: return "SurfaceEdgeSouthEast"
+		case SurfaceEdgeNorthWest: return "SurfaceEdgeNorthWest"
+		case SurfaceEdgeNorth: return "SurfaceEdgeNorth"
+		case SurfaceEdgeNorthEast: return "SurfaceEdgeNorthEast"
+		case SurfaceEdgeWest: return "SurfaceEdgeWest"
+		case SurfaceEdgeEast: return "SurfaceEdgeEast"
+		case SurfaceEdgeSouthWest: return "SurfaceEdgeSouthWest"
+		default: return fmt.Sprintf("SurfaceEdge(%d)", e)
+	}
+}
+
 // TextureError wraps GdkTextureError
 //
 // Possible errors that can be returned by `GdkTexture` constructors.
@@ -5914,6 +6189,16 @@ func (e TextureError) InitGoValue(v *gobject.Value) {
 	v.SetEnum(int(e))
 }
 
+func (e TextureError) String() string {
+	switch e {
+		case TextureErrorTooLarge: return "TextureErrorTooLarge"
+		case TextureErrorCorruptImage: return "TextureErrorCorruptImage"
+		case TextureErrorUnsupportedContent: return "TextureErrorUnsupportedContent"
+		case TextureErrorUnsupportedFormat: return "TextureErrorUnsupportedFormat"
+		default: return fmt.Sprintf("TextureError(%d)", e)
+	}
+}
+
 // TitlebarGesture wraps GdkTitlebarGesture
 //
 // The kind of title bar gesture to emit with
@@ -5944,6 +6229,15 @@ var _ gobject.GoValueInitializer = TitlebarGesture(0)
 func (e TitlebarGesture) InitGoValue(v *gobject.Value) {
 	v.Init(TypeTitlebarGesture)
 	v.SetEnum(int(e))
+}
+
+func (e TitlebarGesture) String() string {
+	switch e {
+		case TitlebarGestureDoubleClick: return "TitlebarGestureDoubleClick"
+		case TitlebarGestureRightClick: return "TitlebarGestureRightClick"
+		case TitlebarGestureMiddleClick: return "TitlebarGestureMiddleClick"
+		default: return fmt.Sprintf("TitlebarGesture(%d)", e)
+	}
 }
 
 // TouchpadGesturePhase wraps GdkTouchpadGesturePhase
@@ -6000,6 +6294,16 @@ func (e TouchpadGesturePhase) InitGoValue(v *gobject.Value) {
 	v.SetEnum(int(e))
 }
 
+func (e TouchpadGesturePhase) String() string {
+	switch e {
+		case TouchpadGesturePhaseBegin: return "TouchpadGesturePhaseBegin"
+		case TouchpadGesturePhaseUpdate: return "TouchpadGesturePhaseUpdate"
+		case TouchpadGesturePhaseEnd: return "TouchpadGesturePhaseEnd"
+		case TouchpadGesturePhaseCancel: return "TouchpadGesturePhaseCancel"
+		default: return fmt.Sprintf("TouchpadGesturePhase(%d)", e)
+	}
+}
+
 // VulkanError wraps GdkVulkanError
 //
 // Error enumeration for `GdkVulkanContext`.
@@ -6026,6 +6330,14 @@ var _ gobject.GoValueInitializer = VulkanError(0)
 func (e VulkanError) InitGoValue(v *gobject.Value) {
 	v.Init(TypeVulkanError)
 	v.SetEnum(int(e))
+}
+
+func (e VulkanError) String() string {
+	switch e {
+		case VulkanErrorNotAvailable: return "VulkanErrorNotAvailable"
+		case VulkanErrorUnsupported: return "VulkanErrorUnsupported"
+		default: return fmt.Sprintf("VulkanError(%d)", e)
+	}
 }
 
 // AnchorHints wraps GdkAnchorHints
@@ -6101,6 +6413,42 @@ func (f AnchorHints) InitGoValue(v *gobject.Value) {
 	v.SetFlags(int(f))
 }
 
+func (f AnchorHints) String() string {
+	if f == 0 {
+		return "AnchorHints(0)"
+	}
+
+	var parts []string
+	if (f & AnchorFlipX) != 0 {
+		parts = append(parts, "AnchorFlipX")
+	}
+	if (f & AnchorFlipY) != 0 {
+		parts = append(parts, "AnchorFlipY")
+	}
+	if (f & AnchorSlideX) != 0 {
+		parts = append(parts, "AnchorSlideX")
+	}
+	if (f & AnchorSlideY) != 0 {
+		parts = append(parts, "AnchorSlideY")
+	}
+	if (f & AnchorResizeX) != 0 {
+		parts = append(parts, "AnchorResizeX")
+	}
+	if (f & AnchorResizeY) != 0 {
+		parts = append(parts, "AnchorResizeY")
+	}
+	if (f & AnchorFlip) != 0 {
+		parts = append(parts, "AnchorFlip")
+	}
+	if (f & AnchorSlide) != 0 {
+		parts = append(parts, "AnchorSlide")
+	}
+	if (f & AnchorResize) != 0 {
+		parts = append(parts, "AnchorResize")
+	}
+	return "AnchorHints(" + strings.Join(parts, "|") + ")"
+}
+
 // AxisFlags wraps GdkAxisFlags
 //
 // Flags describing the current capabilities of a device/tool.
@@ -6168,6 +6516,48 @@ func (f AxisFlags) InitGoValue(v *gobject.Value) {
 	v.SetFlags(int(f))
 }
 
+func (f AxisFlags) String() string {
+	if f == 0 {
+		return "AxisFlags(0)"
+	}
+
+	var parts []string
+	if (f & AxisFlagX) != 0 {
+		parts = append(parts, "AxisFlagX")
+	}
+	if (f & AxisFlagY) != 0 {
+		parts = append(parts, "AxisFlagY")
+	}
+	if (f & AxisFlagDeltaX) != 0 {
+		parts = append(parts, "AxisFlagDeltaX")
+	}
+	if (f & AxisFlagDeltaY) != 0 {
+		parts = append(parts, "AxisFlagDeltaY")
+	}
+	if (f & AxisFlagPressure) != 0 {
+		parts = append(parts, "AxisFlagPressure")
+	}
+	if (f & AxisFlagXtilt) != 0 {
+		parts = append(parts, "AxisFlagXtilt")
+	}
+	if (f & AxisFlagYtilt) != 0 {
+		parts = append(parts, "AxisFlagYtilt")
+	}
+	if (f & AxisFlagWheel) != 0 {
+		parts = append(parts, "AxisFlagWheel")
+	}
+	if (f & AxisFlagDistance) != 0 {
+		parts = append(parts, "AxisFlagDistance")
+	}
+	if (f & AxisFlagRotation) != 0 {
+		parts = append(parts, "AxisFlagRotation")
+	}
+	if (f & AxisFlagSlider) != 0 {
+		parts = append(parts, "AxisFlagSlider")
+	}
+	return "AxisFlags(" + strings.Join(parts, "|") + ")"
+}
+
 // DragAction wraps GdkDragAction
 //
 // Used in `GdkDrop` and `GdkDrag` to indicate the actions that the
@@ -6209,6 +6599,27 @@ var _ gobject.GoValueInitializer = DragAction(0)
 func (f DragAction) InitGoValue(v *gobject.Value) {
 	v.Init(TypeDragAction)
 	v.SetFlags(int(f))
+}
+
+func (f DragAction) String() string {
+	if f == 0 {
+		return "DragAction(0)"
+	}
+
+	var parts []string
+	if (f & ActionCopy) != 0 {
+		parts = append(parts, "ActionCopy")
+	}
+	if (f & ActionMove) != 0 {
+		parts = append(parts, "ActionMove")
+	}
+	if (f & ActionLink) != 0 {
+		parts = append(parts, "ActionLink")
+	}
+	if (f & ActionAsk) != 0 {
+		parts = append(parts, "ActionAsk")
+	}
+	return "DragAction(" + strings.Join(parts, "|") + ")"
 }
 
 // FrameClockPhase wraps GdkFrameClockPhase
@@ -6268,6 +6679,39 @@ func (f FrameClockPhase) InitGoValue(v *gobject.Value) {
 	v.SetFlags(int(f))
 }
 
+func (f FrameClockPhase) String() string {
+	if f == 0 {
+		return "FrameClockPhase(0)"
+	}
+
+	var parts []string
+	if (f & FrameClockPhaseNone) != 0 {
+		parts = append(parts, "FrameClockPhaseNone")
+	}
+	if (f & FrameClockPhaseFlushEvents) != 0 {
+		parts = append(parts, "FrameClockPhaseFlushEvents")
+	}
+	if (f & FrameClockPhaseBeforePaint) != 0 {
+		parts = append(parts, "FrameClockPhaseBeforePaint")
+	}
+	if (f & FrameClockPhaseUpdate) != 0 {
+		parts = append(parts, "FrameClockPhaseUpdate")
+	}
+	if (f & FrameClockPhaseLayout) != 0 {
+		parts = append(parts, "FrameClockPhaseLayout")
+	}
+	if (f & FrameClockPhasePaint) != 0 {
+		parts = append(parts, "FrameClockPhasePaint")
+	}
+	if (f & FrameClockPhaseResumeEvents) != 0 {
+		parts = append(parts, "FrameClockPhaseResumeEvents")
+	}
+	if (f & FrameClockPhaseAfterPaint) != 0 {
+		parts = append(parts, "FrameClockPhaseAfterPaint")
+	}
+	return "FrameClockPhase(" + strings.Join(parts, "|") + ")"
+}
+
 // GLAPI wraps GdkGLAPI
 //
 // The list of the different APIs that GdkGLContext can potentially support.
@@ -6297,6 +6741,21 @@ var _ gobject.GoValueInitializer = GLAPI(0)
 func (f GLAPI) InitGoValue(v *gobject.Value) {
 	v.Init(TypeGLAPI)
 	v.SetFlags(int(f))
+}
+
+func (f GLAPI) String() string {
+	if f == 0 {
+		return "GLAPI(0)"
+	}
+
+	var parts []string
+	if (f & GLApiGL) != 0 {
+		parts = append(parts, "GLApiGL")
+	}
+	if (f & GLApiGles) != 0 {
+		parts = append(parts, "GLApiGles")
+	}
+	return "GLAPI(" + strings.Join(parts, "|") + ")"
 }
 
 // ModifierType wraps GdkModifierType
@@ -6385,6 +6844,54 @@ func (f ModifierType) InitGoValue(v *gobject.Value) {
 	v.SetFlags(int(f))
 }
 
+func (f ModifierType) String() string {
+	if f == 0 {
+		return "ModifierType(0)"
+	}
+
+	var parts []string
+	if (f & NoModifierMask) != 0 {
+		parts = append(parts, "NoModifierMask")
+	}
+	if (f & ShiftMask) != 0 {
+		parts = append(parts, "ShiftMask")
+	}
+	if (f & LockMask) != 0 {
+		parts = append(parts, "LockMask")
+	}
+	if (f & ControlMask) != 0 {
+		parts = append(parts, "ControlMask")
+	}
+	if (f & AltMask) != 0 {
+		parts = append(parts, "AltMask")
+	}
+	if (f & Button1Mask) != 0 {
+		parts = append(parts, "Button1Mask")
+	}
+	if (f & Button2Mask) != 0 {
+		parts = append(parts, "Button2Mask")
+	}
+	if (f & Button3Mask) != 0 {
+		parts = append(parts, "Button3Mask")
+	}
+	if (f & Button4Mask) != 0 {
+		parts = append(parts, "Button4Mask")
+	}
+	if (f & Button5Mask) != 0 {
+		parts = append(parts, "Button5Mask")
+	}
+	if (f & SuperMask) != 0 {
+		parts = append(parts, "SuperMask")
+	}
+	if (f & HyperMask) != 0 {
+		parts = append(parts, "HyperMask")
+	}
+	if (f & MetaMask) != 0 {
+		parts = append(parts, "MetaMask")
+	}
+	return "ModifierType(" + strings.Join(parts, "|") + ")"
+}
+
 // PaintableFlags wraps GdkPaintableFlags
 //
 // Flags about a paintable object.
@@ -6420,6 +6927,21 @@ var _ gobject.GoValueInitializer = PaintableFlags(0)
 func (f PaintableFlags) InitGoValue(v *gobject.Value) {
 	v.Init(TypePaintableFlags)
 	v.SetFlags(int(f))
+}
+
+func (f PaintableFlags) String() string {
+	if f == 0 {
+		return "PaintableFlags(0)"
+	}
+
+	var parts []string
+	if (f & PaintableStaticSize) != 0 {
+		parts = append(parts, "PaintableStaticSize")
+	}
+	if (f & PaintableStaticContents) != 0 {
+		parts = append(parts, "PaintableStaticContents")
+	}
+	return "PaintableFlags(" + strings.Join(parts, "|") + ")"
 }
 
 // SeatCapabilities wraps GdkSeatCapabilities
@@ -6475,6 +6997,39 @@ var _ gobject.GoValueInitializer = SeatCapabilities(0)
 func (f SeatCapabilities) InitGoValue(v *gobject.Value) {
 	v.Init(TypeSeatCapabilities)
 	v.SetFlags(int(f))
+}
+
+func (f SeatCapabilities) String() string {
+	if f == 0 {
+		return "SeatCapabilities(0)"
+	}
+
+	var parts []string
+	if (f & SeatCapabilityNone) != 0 {
+		parts = append(parts, "SeatCapabilityNone")
+	}
+	if (f & SeatCapabilityPointer) != 0 {
+		parts = append(parts, "SeatCapabilityPointer")
+	}
+	if (f & SeatCapabilityTouch) != 0 {
+		parts = append(parts, "SeatCapabilityTouch")
+	}
+	if (f & SeatCapabilityTabletStylus) != 0 {
+		parts = append(parts, "SeatCapabilityTabletStylus")
+	}
+	if (f & SeatCapabilityKeyboard) != 0 {
+		parts = append(parts, "SeatCapabilityKeyboard")
+	}
+	if (f & SeatCapabilityTabletPad) != 0 {
+		parts = append(parts, "SeatCapabilityTabletPad")
+	}
+	if (f & SeatCapabilityAllPointing) != 0 {
+		parts = append(parts, "SeatCapabilityAllPointing")
+	}
+	if (f & SeatCapabilityAll) != 0 {
+		parts = append(parts, "SeatCapabilityAll")
+	}
+	return "SeatCapabilities(" + strings.Join(parts, "|") + ")"
 }
 
 // ToplevelState wraps GdkToplevelState
@@ -6572,6 +7127,66 @@ var _ gobject.GoValueInitializer = ToplevelState(0)
 func (f ToplevelState) InitGoValue(v *gobject.Value) {
 	v.Init(TypeToplevelState)
 	v.SetFlags(int(f))
+}
+
+func (f ToplevelState) String() string {
+	if f == 0 {
+		return "ToplevelState(0)"
+	}
+
+	var parts []string
+	if (f & ToplevelStateMinimized) != 0 {
+		parts = append(parts, "ToplevelStateMinimized")
+	}
+	if (f & ToplevelStateMaximized) != 0 {
+		parts = append(parts, "ToplevelStateMaximized")
+	}
+	if (f & ToplevelStateSticky) != 0 {
+		parts = append(parts, "ToplevelStateSticky")
+	}
+	if (f & ToplevelStateFullscreen) != 0 {
+		parts = append(parts, "ToplevelStateFullscreen")
+	}
+	if (f & ToplevelStateAbove) != 0 {
+		parts = append(parts, "ToplevelStateAbove")
+	}
+	if (f & ToplevelStateBelow) != 0 {
+		parts = append(parts, "ToplevelStateBelow")
+	}
+	if (f & ToplevelStateFocused) != 0 {
+		parts = append(parts, "ToplevelStateFocused")
+	}
+	if (f & ToplevelStateTiled) != 0 {
+		parts = append(parts, "ToplevelStateTiled")
+	}
+	if (f & ToplevelStateTopTiled) != 0 {
+		parts = append(parts, "ToplevelStateTopTiled")
+	}
+	if (f & ToplevelStateTopResizable) != 0 {
+		parts = append(parts, "ToplevelStateTopResizable")
+	}
+	if (f & ToplevelStateRightTiled) != 0 {
+		parts = append(parts, "ToplevelStateRightTiled")
+	}
+	if (f & ToplevelStateRightResizable) != 0 {
+		parts = append(parts, "ToplevelStateRightResizable")
+	}
+	if (f & ToplevelStateBottomTiled) != 0 {
+		parts = append(parts, "ToplevelStateBottomTiled")
+	}
+	if (f & ToplevelStateBottomResizable) != 0 {
+		parts = append(parts, "ToplevelStateBottomResizable")
+	}
+	if (f & ToplevelStateLeftTiled) != 0 {
+		parts = append(parts, "ToplevelStateLeftTiled")
+	}
+	if (f & ToplevelStateLeftResizable) != 0 {
+		parts = append(parts, "ToplevelStateLeftResizable")
+	}
+	if (f & ToplevelStateSuspended) != 0 {
+		parts = append(parts, "ToplevelStateSuspended")
+	}
+	return "ToplevelState(" + strings.Join(parts, "|") + ")"
 }
 
 // ContentDeserializeAsync wraps gdk_content_deserialize_async

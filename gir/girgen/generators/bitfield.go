@@ -189,6 +189,8 @@ type BitfieldGenerator struct {
 func (g *BitfieldGenerator) Generate(w *file.Package) {
 	g.Doc.Generate(w.Go())
 
+	w.GoImport("strings")
+
 	fmt.Fprintf(w.Go(), "type %s C.gint\n\n", g.GoType(0))
 
 	fmt.Fprintln(w.Go(), "const (")
@@ -221,6 +223,22 @@ func (g *BitfieldGenerator) Generate(w *file.Package) {
 		w.Go().Unindent()
 		fmt.Fprintf(w.Go(), "}\n\n")
 	}
+
+	// Stringer:
+	fmt.Fprintf(w.Go(), "func (f %s) String() string {\n", g.GoType(0))
+	w.Go().Indent()
+	fmt.Fprintf(w.Go(), "if f == 0 {\n")
+	fmt.Fprintf(w.Go(), "\treturn \"%s(0)\"\n", g.GoType(0))
+	fmt.Fprintf(w.Go(), "}\n\n")
+	fmt.Fprintf(w.Go(), "var parts []string\n")
+	for _, member := range g.Members {
+		fmt.Fprintf(w.Go(), "if (f & %s) != 0 {\n", member.GoIndentifier())
+		fmt.Fprintf(w.Go(), "\tparts = append(parts, \"%s\")\n", strcases.SnakeToGo(true, member.GoIndentifier()))
+		fmt.Fprintf(w.Go(), "}\n")
+	}
+	fmt.Fprintf(w.Go(), "return \"%s(\" + strings.Join(parts, \"|\") + \")\"\n", g.GoType(0))
+	w.Go().Unindent()
+	fmt.Fprintf(w.Go(), "}\n\n")
 }
 
 func NewBitfieldGenerator(bf *typesystem.Bitfield) *BitfieldGenerator {
