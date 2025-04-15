@@ -179,22 +179,22 @@ func (e BlendMode) InitGoValue(v *gobject.Value) {
 
 func (e BlendMode) String() string {
 	switch e {
+		case BlendModeColor: return "BlendModeColor"
+		case BlendModeColorBurn: return "BlendModeColorBurn"
+		case BlendModeColorDodge: return "BlendModeColorDodge"
+		case BlendModeDarken: return "BlendModeDarken"
 		case BlendModeDefault: return "BlendModeDefault"
-		case BlendModeScreen: return "BlendModeScreen"
 		case BlendModeDifference: return "BlendModeDifference"
+		case BlendModeExclusion: return "BlendModeExclusion"
+		case BlendModeHardLight: return "BlendModeHardLight"
+		case BlendModeHue: return "BlendModeHue"
+		case BlendModeLighten: return "BlendModeLighten"
+		case BlendModeLuminosity: return "BlendModeLuminosity"
 		case BlendModeMultiply: return "BlendModeMultiply"
 		case BlendModeOverlay: return "BlendModeOverlay"
-		case BlendModeExclusion: return "BlendModeExclusion"
-		case BlendModeLuminosity: return "BlendModeLuminosity"
-		case BlendModeLighten: return "BlendModeLighten"
-		case BlendModeColorBurn: return "BlendModeColorBurn"
-		case BlendModeHardLight: return "BlendModeHardLight"
-		case BlendModeSoftLight: return "BlendModeSoftLight"
-		case BlendModeHue: return "BlendModeHue"
 		case BlendModeSaturation: return "BlendModeSaturation"
-		case BlendModeDarken: return "BlendModeDarken"
-		case BlendModeColorDodge: return "BlendModeColorDodge"
-		case BlendModeColor: return "BlendModeColor"
+		case BlendModeScreen: return "BlendModeScreen"
+		case BlendModeSoftLight: return "BlendModeSoftLight"
 		default: return fmt.Sprintf("BlendMode(%d)", e)
 	}
 }
@@ -236,8 +236,8 @@ func (e Corner) InitGoValue(v *gobject.Value) {
 
 func (e Corner) String() string {
 	switch e {
-		case CornerBottomRight: return "CornerBottomRight"
 		case CornerBottomLeft: return "CornerBottomLeft"
+		case CornerBottomRight: return "CornerBottomRight"
 		case CornerTopLeft: return "CornerTopLeft"
 		case CornerTopRight: return "CornerTopRight"
 		default: return fmt.Sprintf("Corner(%d)", e)
@@ -291,8 +291,8 @@ func (e FillRule) InitGoValue(v *gobject.Value) {
 
 func (e FillRule) String() string {
 	switch e {
-		case FillRuleWinding: return "FillRuleWinding"
 		case FillRuleEvenOdd: return "FillRuleEvenOdd"
+		case FillRuleWinding: return "FillRuleWinding"
 		default: return fmt.Sprintf("FillRule(%d)", e)
 	}
 }
@@ -354,14 +354,14 @@ func (e GLUniformType) InitGoValue(v *gobject.Value) {
 
 func (e GLUniformType) String() string {
 	switch e {
-		case GLUniformTypeUint: return "GLUniformTypeUint"
 		case GLUniformTypeBool: return "GLUniformTypeBool"
+		case GLUniformTypeFloat: return "GLUniformTypeFloat"
+		case GLUniformTypeInt: return "GLUniformTypeInt"
+		case GLUniformTypeNone: return "GLUniformTypeNone"
+		case GLUniformTypeUint: return "GLUniformTypeUint"
 		case GLUniformTypeVec2: return "GLUniformTypeVec2"
 		case GLUniformTypeVec3: return "GLUniformTypeVec3"
 		case GLUniformTypeVec4: return "GLUniformTypeVec4"
-		case GLUniformTypeNone: return "GLUniformTypeNone"
-		case GLUniformTypeFloat: return "GLUniformTypeFloat"
-		case GLUniformTypeInt: return "GLUniformTypeInt"
 		default: return fmt.Sprintf("GLUniformType(%d)", e)
 	}
 }
@@ -415,9 +415,9 @@ func (e LineCap) InitGoValue(v *gobject.Value) {
 
 func (e LineCap) String() string {
 	switch e {
+		case LineCapButt: return "LineCapButt"
 		case LineCapRound: return "LineCapRound"
 		case LineCapSquare: return "LineCapSquare"
-		case LineCapButt: return "LineCapButt"
 		default: return fmt.Sprintf("LineCap(%d)", e)
 	}
 }
@@ -469,9 +469,9 @@ func (e LineJoin) InitGoValue(v *gobject.Value) {
 
 func (e LineJoin) String() string {
 	switch e {
+		case LineJoinBevel: return "LineJoinBevel"
 		case LineJoinMiter: return "LineJoinMiter"
 		case LineJoinRound: return "LineJoinRound"
-		case LineJoinBevel: return "LineJoinBevel"
 		default: return fmt.Sprintf("LineJoin(%d)", e)
 	}
 }
@@ -517,8 +517,8 @@ func (e MaskMode) String() string {
 	switch e {
 		case MaskModeAlpha: return "MaskModeAlpha"
 		case MaskModeInvertedAlpha: return "MaskModeInvertedAlpha"
-		case MaskModeLuminance: return "MaskModeLuminance"
 		case MaskModeInvertedLuminance: return "MaskModeInvertedLuminance"
+		case MaskModeLuminance: return "MaskModeLuminance"
 		default: return fmt.Sprintf("MaskMode(%d)", e)
 	}
 }
@@ -574,10 +574,10 @@ func (e PathDirection) InitGoValue(v *gobject.Value) {
 
 func (e PathDirection) String() string {
 	switch e {
-		case PathFromStart: return "PathFromStart"
-		case PathToStart: return "PathToStart"
-		case PathToEnd: return "PathToEnd"
 		case PathFromEnd: return "PathFromEnd"
+		case PathFromStart: return "PathFromStart"
+		case PathToEnd: return "PathToEnd"
+		case PathToStart: return "PathToStart"
 		default: return fmt.Sprintf("PathDirection(%d)", e)
 	}
 }
@@ -637,12 +637,12 @@ func (e PathOperation) InitGoValue(v *gobject.Value) {
 
 func (e PathOperation) String() string {
 	switch e {
-		case PathMove: return "PathMove"
 		case PathClose: return "PathClose"
-		case PathLine: return "PathLine"
-		case PathQuad: return "PathQuad"
-		case PathCubic: return "PathCubic"
 		case PathConic: return "PathConic"
+		case PathCubic: return "PathCubic"
+		case PathLine: return "PathLine"
+		case PathMove: return "PathMove"
+		case PathQuad: return "PathQuad"
 		default: return fmt.Sprintf("PathOperation(%d)", e)
 	}
 }
@@ -792,37 +792,37 @@ func (e RenderNodeType) InitGoValue(v *gobject.Value) {
 
 func (e RenderNodeType) String() string {
 	switch e {
-		case TextureNodeType: return "TextureNodeType"
-		case RoundedClipNodeType: return "RoundedClipNodeType"
 		case BlendNodeType: return "BlendNodeType"
+		case BlurNodeType: return "BlurNodeType"
+		case BorderNodeType: return "BorderNodeType"
+		case CairoNodeType: return "CairoNodeType"
 		case ClipNodeType: return "ClipNodeType"
-		case TextNodeType: return "TextNodeType"
-		case NotARenderNodeType: return "NotARenderNodeType"
-		case ContainerNodeType: return "ContainerNodeType"
+		case ColorMatrixNodeType: return "ColorMatrixNodeType"
 		case ColorNodeType: return "ColorNodeType"
-		case RepeatingLinearGradientNodeType: return "RepeatingLinearGradientNodeType"
-		case FillNodeType: return "FillNodeType"
 		case ConicGradientNodeType: return "ConicGradientNodeType"
+		case ContainerNodeType: return "ContainerNodeType"
+		case CrossFadeNodeType: return "CrossFadeNodeType"
+		case DebugNodeType: return "DebugNodeType"
+		case FillNodeType: return "FillNodeType"
 		case GLShaderNodeType: return "GLShaderNodeType"
 		case InsetShadowNodeType: return "InsetShadowNodeType"
-		case OpacityNodeType: return "OpacityNodeType"
-		case RepeatNodeType: return "RepeatNodeType"
-		case CrossFadeNodeType: return "CrossFadeNodeType"
-		case BlurNodeType: return "BlurNodeType"
-		case OutsetShadowNodeType: return "OutsetShadowNodeType"
-		case TransformNodeType: return "TransformNodeType"
 		case LinearGradientNodeType: return "LinearGradientNodeType"
-		case ColorMatrixNodeType: return "ColorMatrixNodeType"
+		case MaskNodeType: return "MaskNodeType"
+		case NotARenderNodeType: return "NotARenderNodeType"
+		case OpacityNodeType: return "OpacityNodeType"
+		case OutsetShadowNodeType: return "OutsetShadowNodeType"
+		case RadialGradientNodeType: return "RadialGradientNodeType"
+		case RepeatNodeType: return "RepeatNodeType"
+		case RepeatingLinearGradientNodeType: return "RepeatingLinearGradientNodeType"
+		case RepeatingRadialGradientNodeType: return "RepeatingRadialGradientNodeType"
+		case RoundedClipNodeType: return "RoundedClipNodeType"
+		case ShadowNodeType: return "ShadowNodeType"
 		case StrokeNodeType: return "StrokeNodeType"
 		case SubsurfaceNodeType: return "SubsurfaceNodeType"
-		case RepeatingRadialGradientNodeType: return "RepeatingRadialGradientNodeType"
-		case MaskNodeType: return "MaskNodeType"
-		case CairoNodeType: return "CairoNodeType"
-		case BorderNodeType: return "BorderNodeType"
-		case ShadowNodeType: return "ShadowNodeType"
-		case DebugNodeType: return "DebugNodeType"
+		case TextNodeType: return "TextNodeType"
+		case TextureNodeType: return "TextureNodeType"
 		case TextureScaleNodeType: return "TextureScaleNodeType"
-		case RadialGradientNodeType: return "RadialGradientNodeType"
+		case TransformNodeType: return "TransformNodeType"
 		default: return fmt.Sprintf("RenderNodeType(%d)", e)
 	}
 }
@@ -907,9 +907,9 @@ func (e SerializationError) InitGoValue(v *gobject.Value) {
 
 func (e SerializationError) String() string {
 	switch e {
+		case SerializationInvalidData: return "SerializationInvalidData"
 		case SerializationUnsupportedFormat: return "SerializationUnsupportedFormat"
 		case SerializationUnsupportedVersion: return "SerializationUnsupportedVersion"
-		case SerializationInvalidData: return "SerializationInvalidData"
 		default: return fmt.Sprintf("SerializationError(%d)", e)
 	}
 }
@@ -979,13 +979,13 @@ func (e TransformCategory) InitGoValue(v *gobject.Value) {
 
 func (e TransformCategory) String() string {
 	switch e {
+		case TransformCategory2D: return "TransformCategory2D"
 		case TransformCategory2DAffine: return "TransformCategory2DAffine"
 		case TransformCategory2DTranslate: return "TransformCategory2DTranslate"
+		case TransformCategory3D: return "TransformCategory3D"
+		case TransformCategoryAny: return "TransformCategoryAny"
 		case TransformCategoryIdentity: return "TransformCategoryIdentity"
 		case TransformCategoryUnknown: return "TransformCategoryUnknown"
-		case TransformCategoryAny: return "TransformCategoryAny"
-		case TransformCategory3D: return "TransformCategory3D"
-		case TransformCategory2D: return "TransformCategory2D"
 		default: return fmt.Sprintf("TransformCategory(%d)", e)
 	}
 }

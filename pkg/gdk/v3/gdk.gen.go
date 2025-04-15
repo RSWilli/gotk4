@@ -4832,17 +4832,17 @@ func (e AxisUse) InitGoValue(v *gobject.Value) {
 
 func (e AxisUse) String() string {
 	switch e {
+		case AxisDistance: return "AxisDistance"
+		case AxisIgnore: return "AxisIgnore"
+		case AxisLast: return "AxisLast"
+		case AxisPressure: return "AxisPressure"
 		case AxisRotation: return "AxisRotation"
 		case AxisSlider: return "AxisSlider"
-		case AxisY: return "AxisY"
-		case AxisXtilt: return "AxisXtilt"
-		case AxisDistance: return "AxisDistance"
-		case AxisLast: return "AxisLast"
-		case AxisIgnore: return "AxisIgnore"
-		case AxisX: return "AxisX"
-		case AxisPressure: return "AxisPressure"
-		case AxisYtilt: return "AxisYtilt"
 		case AxisWheel: return "AxisWheel"
+		case AxisX: return "AxisX"
+		case AxisXtilt: return "AxisXtilt"
+		case AxisY: return "AxisY"
+		case AxisYtilt: return "AxisYtilt"
 		default: return fmt.Sprintf("AxisUse(%d)", e)
 	}
 }
@@ -4949,14 +4949,14 @@ func (e CrossingMode) InitGoValue(v *gobject.Value) {
 
 func (e CrossingMode) String() string {
 	switch e {
+		case CrossingDeviceSwitch: return "CrossingDeviceSwitch"
 		case CrossingGTKGrab: return "CrossingGTKGrab"
-		case CrossingGrab: return "CrossingGrab"
 		case CrossingGTKUngrab: return "CrossingGTKUngrab"
+		case CrossingGrab: return "CrossingGrab"
+		case CrossingNormal: return "CrossingNormal"
 		case CrossingStateChanged: return "CrossingStateChanged"
 		case CrossingTouchBegin: return "CrossingTouchBegin"
 		case CrossingTouchEnd: return "CrossingTouchEnd"
-		case CrossingDeviceSwitch: return "CrossingDeviceSwitch"
-		case CrossingNormal: return "CrossingNormal"
 		case CrossingUngrab: return "CrossingUngrab"
 		default: return fmt.Sprintf("CrossingMode(%d)", e)
 	}
@@ -5309,86 +5309,86 @@ func (e CursorType) InitGoValue(v *gobject.Value) {
 
 func (e CursorType) String() string {
 	switch e {
-		case XCursor: return "XCursor"
-		case CenterPtr: return "CenterPtr"
-		case LeftPtr: return "LeftPtr"
-		case Pencil: return "Pencil"
-		case SbLeftArrow: return "SbLeftArrow"
-		case Spider: return "Spider"
-		case Trek: return "Trek"
-		case Bogosity: return "Bogosity"
-		case BoxSpiral: return "BoxSpiral"
-		case Crosshair: return "Crosshair"
-		case DraftSmall: return "DraftSmall"
-		case Hand2: return "Hand2"
-		case BlankCursor: return "BlankCursor"
-		case BottomTee: return "BottomTee"
-		case Exchange: return "Exchange"
-		case LastCursor: return "LastCursor"
-		case Man: return "Man"
-		case QuestionArrow: return "QuestionArrow"
-		case Shuttle: return "Shuttle"
-		case Umbrella: return "Umbrella"
-		case SbHDoubleArrow: return "SbHDoubleArrow"
-		case Clock: return "Clock"
-		case Hand1: return "Hand1"
-		case RightTee: return "RightTee"
-		case TopLeftArrow: return "TopLeftArrow"
-		case CursorIsPixmap: return "CursorIsPixmap"
-		case BottomLeftCorner: return "BottomLeftCorner"
-		case CoffeeMug: return "CoffeeMug"
-		case IronCross: return "IronCross"
-		case LrAngle: return "LrAngle"
-		case SbUpArrow: return "SbUpArrow"
-		case Xterm: return "Xterm"
-		case Cross: return "Cross"
-		case DrapedBox: return "DrapedBox"
-		case Middlebutton: return "Middlebutton"
-		case Fleur: return "Fleur"
-		case Mouse: return "Mouse"
-		case TopLeftCorner: return "TopLeftCorner"
-		case TopSide: return "TopSide"
-		case Gobbler: return "Gobbler"
-		case BasedArrowUp: return "BasedArrowUp"
-		case BottomRightCorner: return "BottomRightCorner"
-		case Heart: return "Heart"
-		case Sailboat: return "Sailboat"
-		case SbRightArrow: return "SbRightArrow"
-		case CrossReverse: return "CrossReverse"
-		case Leftbutton: return "Leftbutton"
 		case Arrow: return "Arrow"
-		case Circle: return "Circle"
-		case Gumby: return "Gumby"
-		case Icon: return "Icon"
-		case RightPtr: return "RightPtr"
-		case SbDownArrow: return "SbDownArrow"
-		case SbVDoubleArrow: return "SbVDoubleArrow"
-		case TopRightCorner: return "TopRightCorner"
-		case Dot: return "Dot"
-		case RTLLogo: return "RTLLogo"
-		case Target: return "Target"
-		case Tcross: return "Tcross"
-		case UlAngle: return "UlAngle"
-		case BottomSide: return "BottomSide"
-		case DiamondCross: return "DiamondCross"
-		case DraftLarge: return "DraftLarge"
-		case Pirate: return "Pirate"
-		case Rightbutton: return "Rightbutton"
-		case Sizing: return "Sizing"
-		case Spraycan: return "Spraycan"
 		case BasedArrowDown: return "BasedArrowDown"
+		case BasedArrowUp: return "BasedArrowUp"
+		case BlankCursor: return "BlankCursor"
+		case Boat: return "Boat"
+		case Bogosity: return "Bogosity"
+		case BottomLeftCorner: return "BottomLeftCorner"
+		case BottomRightCorner: return "BottomRightCorner"
+		case BottomSide: return "BottomSide"
+		case BottomTee: return "BottomTee"
+		case BoxSpiral: return "BoxSpiral"
+		case CenterPtr: return "CenterPtr"
+		case Circle: return "Circle"
+		case Clock: return "Clock"
+		case CoffeeMug: return "CoffeeMug"
+		case Cross: return "Cross"
+		case CrossReverse: return "CrossReverse"
+		case Crosshair: return "Crosshair"
+		case CursorIsPixmap: return "CursorIsPixmap"
+		case DiamondCross: return "DiamondCross"
+		case Dot: return "Dot"
 		case Dotbox: return "Dotbox"
+		case DoubleArrow: return "DoubleArrow"
+		case DraftLarge: return "DraftLarge"
+		case DraftSmall: return "DraftSmall"
+		case DrapedBox: return "DrapedBox"
+		case Exchange: return "Exchange"
+		case Fleur: return "Fleur"
+		case Gobbler: return "Gobbler"
+		case Gumby: return "Gumby"
+		case Hand1: return "Hand1"
+		case Hand2: return "Hand2"
+		case Heart: return "Heart"
+		case Icon: return "Icon"
+		case IronCross: return "IronCross"
+		case LastCursor: return "LastCursor"
+		case LeftPtr: return "LeftPtr"
 		case LeftSide: return "LeftSide"
 		case LeftTee: return "LeftTee"
-		case Star: return "Star"
-		case TopTee: return "TopTee"
-		case Watch: return "Watch"
-		case Boat: return "Boat"
-		case DoubleArrow: return "DoubleArrow"
+		case Leftbutton: return "Leftbutton"
 		case LlAngle: return "LlAngle"
+		case LrAngle: return "LrAngle"
+		case Man: return "Man"
+		case Middlebutton: return "Middlebutton"
+		case Mouse: return "Mouse"
+		case Pencil: return "Pencil"
+		case Pirate: return "Pirate"
 		case Plus: return "Plus"
+		case QuestionArrow: return "QuestionArrow"
+		case RTLLogo: return "RTLLogo"
+		case RightPtr: return "RightPtr"
 		case RightSide: return "RightSide"
+		case RightTee: return "RightTee"
+		case Rightbutton: return "Rightbutton"
+		case Sailboat: return "Sailboat"
+		case SbDownArrow: return "SbDownArrow"
+		case SbHDoubleArrow: return "SbHDoubleArrow"
+		case SbLeftArrow: return "SbLeftArrow"
+		case SbRightArrow: return "SbRightArrow"
+		case SbUpArrow: return "SbUpArrow"
+		case SbVDoubleArrow: return "SbVDoubleArrow"
+		case Shuttle: return "Shuttle"
+		case Sizing: return "Sizing"
+		case Spider: return "Spider"
+		case Spraycan: return "Spraycan"
+		case Star: return "Star"
+		case Target: return "Target"
+		case Tcross: return "Tcross"
+		case TopLeftArrow: return "TopLeftArrow"
+		case TopLeftCorner: return "TopLeftCorner"
+		case TopRightCorner: return "TopRightCorner"
+		case TopSide: return "TopSide"
+		case TopTee: return "TopTee"
+		case Trek: return "Trek"
+		case UlAngle: return "UlAngle"
+		case Umbrella: return "Umbrella"
 		case UrAngle: return "UrAngle"
+		case Watch: return "Watch"
+		case XCursor: return "XCursor"
+		case Xterm: return "Xterm"
 		default: return fmt.Sprintf("CursorType(%d)", e)
 	}
 }
@@ -5426,9 +5426,9 @@ func (e DevicePadFeature) InitGoValue(v *gobject.Value) {
 
 func (e DevicePadFeature) String() string {
 	switch e {
+		case DevicePadFeatureButton: return "DevicePadFeatureButton"
 		case DevicePadFeatureRing: return "DevicePadFeatureRing"
 		case DevicePadFeatureStrip: return "DevicePadFeatureStrip"
-		case DevicePadFeatureButton: return "DevicePadFeatureButton"
 		default: return fmt.Sprintf("DevicePadFeature(%d)", e)
 	}
 }
@@ -5487,14 +5487,14 @@ func (e DeviceToolType) InitGoValue(v *gobject.Value) {
 
 func (e DeviceToolType) String() string {
 	switch e {
-		case DeviceToolTypeBrush: return "DeviceToolTypeBrush"
-		case DeviceToolTypePencil: return "DeviceToolTypePencil"
 		case DeviceToolTypeAirbrush: return "DeviceToolTypeAirbrush"
-		case DeviceToolTypeMouse: return "DeviceToolTypeMouse"
-		case DeviceToolTypeLens: return "DeviceToolTypeLens"
-		case DeviceToolTypeUnknown: return "DeviceToolTypeUnknown"
-		case DeviceToolTypePen: return "DeviceToolTypePen"
+		case DeviceToolTypeBrush: return "DeviceToolTypeBrush"
 		case DeviceToolTypeEraser: return "DeviceToolTypeEraser"
+		case DeviceToolTypeLens: return "DeviceToolTypeLens"
+		case DeviceToolTypeMouse: return "DeviceToolTypeMouse"
+		case DeviceToolTypePen: return "DeviceToolTypePen"
+		case DeviceToolTypePencil: return "DeviceToolTypePencil"
+		case DeviceToolTypeUnknown: return "DeviceToolTypeUnknown"
 		default: return fmt.Sprintf("DeviceToolType(%d)", e)
 	}
 }
@@ -5535,9 +5535,9 @@ func (e DeviceType) InitGoValue(v *gobject.Value) {
 
 func (e DeviceType) String() string {
 	switch e {
-		case DeviceTypeSlave: return "DeviceTypeSlave"
 		case DeviceTypeFloating: return "DeviceTypeFloating"
 		case DeviceTypeMaster: return "DeviceTypeMaster"
+		case DeviceTypeSlave: return "DeviceTypeSlave"
 		default: return fmt.Sprintf("DeviceType(%d)", e)
 	}
 }
@@ -5637,14 +5637,14 @@ func (e DragProtocol) InitGoValue(v *gobject.Value) {
 
 func (e DragProtocol) String() string {
 	switch e {
-		case DragProtoXdnd: return "DragProtoXdnd"
-		case DragProtoRootwin: return "DragProtoRootwin"
-		case DragProtoWin32Dropfiles: return "DragProtoWin32Dropfiles"
-		case DragProtoOle2: return "DragProtoOle2"
 		case DragProtoLocal: return "DragProtoLocal"
-		case DragProtoWayland: return "DragProtoWayland"
-		case DragProtoNone: return "DragProtoNone"
 		case DragProtoMotif: return "DragProtoMotif"
+		case DragProtoNone: return "DragProtoNone"
+		case DragProtoOle2: return "DragProtoOle2"
+		case DragProtoRootwin: return "DragProtoRootwin"
+		case DragProtoWayland: return "DragProtoWayland"
+		case DragProtoWin32Dropfiles: return "DragProtoWin32Dropfiles"
+		case DragProtoXdnd: return "DragProtoXdnd"
 		default: return fmt.Sprintf("DragProtocol(%d)", e)
 	}
 }
@@ -5912,54 +5912,54 @@ func (e EventType) InitGoValue(v *gobject.Value) {
 func (e EventType) String() string {
 	switch e {
 		case ButtonPressType: return "ButtonPressType"
-		case KeyPressType: return "KeyPressType"
-		case ProximityOutType: return "ProximityOutType"
-		case DropStartType: return "DropStartType"
-		case PadRingType: return "PadRingType"
-		case EventLastType: return "EventLastType"
-		case MapType: return "MapType"
-		case SelectionClearType: return "SelectionClearType"
-		case SelectionRequestType: return "SelectionRequestType"
-		case DamageType: return "DamageType"
-		case TouchUpdateType: return "TouchUpdateType"
-		case FocusChangeType: return "FocusChangeType"
-		case DestroyType: return "DestroyType"
-		case Gotk2ButtonPressType: return "Gotk2ButtonPressType"
-		case KeyReleaseType: return "KeyReleaseType"
-		case SelectionNotifyType: return "SelectionNotifyType"
-		case ScrollType: return "ScrollType"
-		case TouchEndType: return "TouchEndType"
-		case TouchpadPinchType: return "TouchpadPinchType"
 		case ButtonReleaseType: return "ButtonReleaseType"
-		case EnterNotifyType: return "EnterNotifyType"
-		case ProximityInType: return "ProximityInType"
-		case DragLeaveType: return "DragLeaveType"
-		case DropFinishedType: return "DropFinishedType"
-		case OwnerChangeType: return "OwnerChangeType"
-		case PadButtonReleaseType: return "PadButtonReleaseType"
-		case PadStripType: return "PadStripType"
-		case Gotk3ButtonPressType: return "Gotk3ButtonPressType"
-		case PropertyNotifyType: return "PropertyNotifyType"
-		case DragEnterType: return "DragEnterType"
-		case DragMotionType: return "DragMotionType"
-		case WindowStateType: return "WindowStateType"
-		case TouchCancelType: return "TouchCancelType"
-		case PadGroupModeType: return "PadGroupModeType"
-		case LeaveNotifyType: return "LeaveNotifyType"
-		case ConfigureType: return "ConfigureType"
-		case VisibilityNotifyType: return "VisibilityNotifyType"
-		case GrabBrokenType: return "GrabBrokenType"
-		case PadButtonPressType: return "PadButtonPressType"
-		case NothingType: return "NothingType"
-		case MotionNotifyType: return "MotionNotifyType"
-		case DragStatusType: return "DragStatusType"
 		case ClientEventType: return "ClientEventType"
+		case ConfigureType: return "ConfigureType"
+		case DamageType: return "DamageType"
+		case DeleteType: return "DeleteType"
+		case DestroyType: return "DestroyType"
+		case DragEnterType: return "DragEnterType"
+		case DragLeaveType: return "DragLeaveType"
+		case DragMotionType: return "DragMotionType"
+		case DragStatusType: return "DragStatusType"
+		case DropFinishedType: return "DropFinishedType"
+		case DropStartType: return "DropStartType"
+		case EnterNotifyType: return "EnterNotifyType"
+		case EventLastType: return "EventLastType"
+		case ExposeType: return "ExposeType"
+		case FocusChangeType: return "FocusChangeType"
+		case Gotk2ButtonPressType: return "Gotk2ButtonPressType"
+		case Gotk3ButtonPressType: return "Gotk3ButtonPressType"
+		case GrabBrokenType: return "GrabBrokenType"
+		case KeyPressType: return "KeyPressType"
+		case KeyReleaseType: return "KeyReleaseType"
+		case LeaveNotifyType: return "LeaveNotifyType"
+		case MapType: return "MapType"
+		case MotionNotifyType: return "MotionNotifyType"
+		case NothingType: return "NothingType"
+		case OwnerChangeType: return "OwnerChangeType"
+		case PadButtonPressType: return "PadButtonPressType"
+		case PadButtonReleaseType: return "PadButtonReleaseType"
+		case PadGroupModeType: return "PadGroupModeType"
+		case PadRingType: return "PadRingType"
+		case PadStripType: return "PadStripType"
+		case PropertyNotifyType: return "PropertyNotifyType"
+		case ProximityInType: return "ProximityInType"
+		case ProximityOutType: return "ProximityOutType"
+		case ScrollType: return "ScrollType"
+		case SelectionClearType: return "SelectionClearType"
+		case SelectionNotifyType: return "SelectionNotifyType"
+		case SelectionRequestType: return "SelectionRequestType"
 		case SettingType: return "SettingType"
 		case TouchBeginType: return "TouchBeginType"
-		case DeleteType: return "DeleteType"
-		case ExposeType: return "ExposeType"
-		case UnmapType: return "UnmapType"
+		case TouchCancelType: return "TouchCancelType"
+		case TouchEndType: return "TouchEndType"
+		case TouchUpdateType: return "TouchUpdateType"
+		case TouchpadPinchType: return "TouchpadPinchType"
 		case TouchpadSwipeType: return "TouchpadSwipeType"
+		case UnmapType: return "UnmapType"
+		case VisibilityNotifyType: return "VisibilityNotifyType"
+		case WindowStateType: return "WindowStateType"
 		default: return fmt.Sprintf("EventType(%d)", e)
 	}
 }
@@ -5999,8 +5999,8 @@ func (e FilterReturn) InitGoValue(v *gobject.Value) {
 func (e FilterReturn) String() string {
 	switch e {
 		case FilterContinue: return "FilterContinue"
-		case FilterTranslate: return "FilterTranslate"
 		case FilterRemove: return "FilterRemove"
+		case FilterTranslate: return "FilterTranslate"
 		default: return fmt.Sprintf("FilterReturn(%d)", e)
 	}
 }
@@ -6035,8 +6035,8 @@ func (e FullscreenMode) InitGoValue(v *gobject.Value) {
 
 func (e FullscreenMode) String() string {
 	switch e {
-		case FullscreenOnCurrentMonitor: return "FullscreenOnCurrentMonitor"
 		case FullscreenOnAllMonitors: return "FullscreenOnAllMonitors"
+		case FullscreenOnCurrentMonitor: return "FullscreenOnCurrentMonitor"
 		default: return fmt.Sprintf("FullscreenMode(%d)", e)
 	}
 }
@@ -6114,9 +6114,9 @@ func (e GrabOwnership) InitGoValue(v *gobject.Value) {
 
 func (e GrabOwnership) String() string {
 	switch e {
+		case OwnershipApplication: return "OwnershipApplication"
 		case OwnershipNone: return "OwnershipNone"
 		case OwnershipWindow: return "OwnershipWindow"
-		case OwnershipApplication: return "OwnershipApplication"
 		default: return fmt.Sprintf("GrabOwnership(%d)", e)
 	}
 }
@@ -6169,12 +6169,12 @@ func (e GrabStatus) InitGoValue(v *gobject.Value) {
 
 func (e GrabStatus) String() string {
 	switch e {
-		case GrabSuccess: return "GrabSuccess"
 		case GrabAlreadyGrabbed: return "GrabAlreadyGrabbed"
+		case GrabFailed: return "GrabFailed"
+		case GrabFrozen: return "GrabFrozen"
 		case GrabInvalidTime: return "GrabInvalidTime"
 		case GrabNotViewable: return "GrabNotViewable"
-		case GrabFrozen: return "GrabFrozen"
-		case GrabFailed: return "GrabFailed"
+		case GrabSuccess: return "GrabSuccess"
 		default: return fmt.Sprintf("GrabStatus(%d)", e)
 	}
 }
@@ -6245,16 +6245,16 @@ func (e Gravity) InitGoValue(v *gobject.Value) {
 
 func (e Gravity) String() string {
 	switch e {
-		case GravityNorth: return "GravityNorth"
-		case GravitySouthWest: return "GravitySouthWest"
-		case GravitySouth: return "GravitySouth"
-		case GravityNorthEast: return "GravityNorthEast"
-		case GravityWest: return "GravityWest"
 		case GravityCenter: return "GravityCenter"
 		case GravityEast: return "GravityEast"
-		case GravitySouthEast: return "GravitySouthEast"
-		case GravityStatic: return "GravityStatic"
+		case GravityNorth: return "GravityNorth"
+		case GravityNorthEast: return "GravityNorthEast"
 		case GravityNorthWest: return "GravityNorthWest"
+		case GravitySouth: return "GravitySouth"
+		case GravitySouthEast: return "GravitySouthEast"
+		case GravitySouthWest: return "GravitySouthWest"
+		case GravityStatic: return "GravityStatic"
+		case GravityWest: return "GravityWest"
 		default: return fmt.Sprintf("Gravity(%d)", e)
 	}
 }
@@ -6296,9 +6296,9 @@ func (e InputMode) InitGoValue(v *gobject.Value) {
 
 func (e InputMode) String() string {
 	switch e {
-		case ModeWindow: return "ModeWindow"
 		case ModeDisabled: return "ModeDisabled"
 		case ModeScreen: return "ModeScreen"
+		case ModeWindow: return "ModeWindow"
 		default: return fmt.Sprintf("InputMode(%d)", e)
 	}
 }
@@ -6367,15 +6367,15 @@ func (e InputSource) InitGoValue(v *gobject.Value) {
 
 func (e InputSource) String() string {
 	switch e {
-		case SourceTouchscreen: return "SourceTouchscreen"
-		case SourceTabletPad: return "SourceTabletPad"
-		case SourceEraser: return "SourceEraser"
 		case SourceCursor: return "SourceCursor"
-		case SourceTouchpad: return "SourceTouchpad"
-		case SourceTrackpoint: return "SourceTrackpoint"
+		case SourceEraser: return "SourceEraser"
+		case SourceKeyboard: return "SourceKeyboard"
 		case SourceMouse: return "SourceMouse"
 		case SourcePen: return "SourcePen"
-		case SourceKeyboard: return "SourceKeyboard"
+		case SourceTabletPad: return "SourceTabletPad"
+		case SourceTouchpad: return "SourceTouchpad"
+		case SourceTouchscreen: return "SourceTouchscreen"
+		case SourceTrackpoint: return "SourceTrackpoint"
 		default: return fmt.Sprintf("InputSource(%d)", e)
 	}
 }
@@ -6447,12 +6447,12 @@ func (e ModifierIntent) InitGoValue(v *gobject.Value) {
 
 func (e ModifierIntent) String() string {
 	switch e {
-		case ModifierIntentDefaultModMask: return "ModifierIntentDefaultModMask"
-		case ModifierIntentPrimaryAccelerator: return "ModifierIntentPrimaryAccelerator"
 		case ModifierIntentContextMenu: return "ModifierIntentContextMenu"
+		case ModifierIntentDefaultModMask: return "ModifierIntentDefaultModMask"
 		case ModifierIntentExtendSelection: return "ModifierIntentExtendSelection"
 		case ModifierIntentModifySelection: return "ModifierIntentModifySelection"
 		case ModifierIntentNoTextInput: return "ModifierIntentNoTextInput"
+		case ModifierIntentPrimaryAccelerator: return "ModifierIntentPrimaryAccelerator"
 		case ModifierIntentShiftGroup: return "ModifierIntentShiftGroup"
 		default: return fmt.Sprintf("ModifierIntent(%d)", e)
 	}
@@ -6513,12 +6513,12 @@ func (e NotifyType) InitGoValue(v *gobject.Value) {
 
 func (e NotifyType) String() string {
 	switch e {
+		case NotifyAncestor: return "NotifyAncestor"
+		case NotifyInferior: return "NotifyInferior"
 		case NotifyNonlinear: return "NotifyNonlinear"
 		case NotifyNonlinearVirtual: return "NotifyNonlinearVirtual"
 		case NotifyUnknown: return "NotifyUnknown"
-		case NotifyAncestor: return "NotifyAncestor"
 		case NotifyVirtual: return "NotifyVirtual"
-		case NotifyInferior: return "NotifyInferior"
 		default: return fmt.Sprintf("NotifyType(%d)", e)
 	}
 }
@@ -6557,8 +6557,8 @@ func (e OwnerChange) InitGoValue(v *gobject.Value) {
 func (e OwnerChange) String() string {
 	switch e {
 		case OwnerChangeClose: return "OwnerChangeClose"
-		case OwnerChangeNewOwner: return "OwnerChangeNewOwner"
 		case OwnerChangeDestroy: return "OwnerChangeDestroy"
+		case OwnerChangeNewOwner: return "OwnerChangeNewOwner"
 		default: return fmt.Sprintf("OwnerChange(%d)", e)
 	}
 }
@@ -6597,9 +6597,9 @@ func (e PropMode) InitGoValue(v *gobject.Value) {
 
 func (e PropMode) String() string {
 	switch e {
-		case PropModeReplace: return "PropModeReplace"
-		case PropModePrepend: return "PropModePrepend"
 		case PropModeAppend: return "PropModeAppend"
+		case PropModePrepend: return "PropModePrepend"
+		case PropModeReplace: return "PropModeReplace"
 		default: return fmt.Sprintf("PropMode(%d)", e)
 	}
 }
@@ -6633,8 +6633,8 @@ func (e PropertyState) InitGoValue(v *gobject.Value) {
 
 func (e PropertyState) String() string {
 	switch e {
-		case PropertyNewValue: return "PropertyNewValue"
 		case PropertyDelete: return "PropertyDelete"
+		case PropertyNewValue: return "PropertyNewValue"
 		default: return fmt.Sprintf("PropertyState(%d)", e)
 	}
 }
@@ -6681,11 +6681,11 @@ func (e ScrollDirection) InitGoValue(v *gobject.Value) {
 
 func (e ScrollDirection) String() string {
 	switch e {
-		case ScrollUp: return "ScrollUp"
 		case ScrollDown: return "ScrollDown"
 		case ScrollLeft: return "ScrollLeft"
 		case ScrollRight: return "ScrollRight"
 		case ScrollSmooth: return "ScrollSmooth"
+		case ScrollUp: return "ScrollUp"
 		default: return fmt.Sprintf("ScrollDirection(%d)", e)
 	}
 }
@@ -6760,11 +6760,11 @@ func (e Status) InitGoValue(v *gobject.Value) {
 
 func (e Status) String() string {
 	switch e {
-		case OK: return "OK"
 		case Error: return "Error"
-		case ErrorParam: return "ErrorParam"
 		case ErrorFile: return "ErrorFile"
 		case ErrorMem: return "ErrorMem"
+		case ErrorParam: return "ErrorParam"
+		case OK: return "OK"
 		default: return fmt.Sprintf("Status(%d)", e)
 	}
 }
@@ -6815,12 +6815,12 @@ func (e SubpixelLayout) InitGoValue(v *gobject.Value) {
 
 func (e SubpixelLayout) String() string {
 	switch e {
-		case SubpixelLayoutNone: return "SubpixelLayoutNone"
-		case SubpixelLayoutHorizontalRGB: return "SubpixelLayoutHorizontalRGB"
 		case SubpixelLayoutHorizontalBGR: return "SubpixelLayoutHorizontalBGR"
-		case SubpixelLayoutVerticalRGB: return "SubpixelLayoutVerticalRGB"
-		case SubpixelLayoutVerticalBGR: return "SubpixelLayoutVerticalBGR"
+		case SubpixelLayoutHorizontalRGB: return "SubpixelLayoutHorizontalRGB"
+		case SubpixelLayoutNone: return "SubpixelLayoutNone"
 		case SubpixelLayoutUnknown: return "SubpixelLayoutUnknown"
+		case SubpixelLayoutVerticalBGR: return "SubpixelLayoutVerticalBGR"
+		case SubpixelLayoutVerticalRGB: return "SubpixelLayoutVerticalRGB"
 		default: return fmt.Sprintf("SubpixelLayout(%d)", e)
 	}
 }
@@ -6882,9 +6882,9 @@ func (e TouchpadGesturePhase) InitGoValue(v *gobject.Value) {
 func (e TouchpadGesturePhase) String() string {
 	switch e {
 		case TouchpadGesturePhaseBegin: return "TouchpadGesturePhaseBegin"
-		case TouchpadGesturePhaseUpdate: return "TouchpadGesturePhaseUpdate"
-		case TouchpadGesturePhaseEnd: return "TouchpadGesturePhaseEnd"
 		case TouchpadGesturePhaseCancel: return "TouchpadGesturePhaseCancel"
+		case TouchpadGesturePhaseEnd: return "TouchpadGesturePhaseEnd"
+		case TouchpadGesturePhaseUpdate: return "TouchpadGesturePhaseUpdate"
 		default: return fmt.Sprintf("TouchpadGesturePhase(%d)", e)
 	}
 }
@@ -6922,9 +6922,9 @@ func (e VisibilityState) InitGoValue(v *gobject.Value) {
 
 func (e VisibilityState) String() string {
 	switch e {
-		case VisibilityUnobscured: return "VisibilityUnobscured"
-		case VisibilityPartial: return "VisibilityPartial"
 		case VisibilityFullyObscured: return "VisibilityFullyObscured"
+		case VisibilityPartial: return "VisibilityPartial"
+		case VisibilityUnobscured: return "VisibilityUnobscured"
 		default: return fmt.Sprintf("VisibilityState(%d)", e)
 	}
 }
@@ -6987,12 +6987,12 @@ func (e VisualType) InitGoValue(v *gobject.Value) {
 
 func (e VisualType) String() string {
 	switch e {
-		case VisualStaticGray: return "VisualStaticGray"
-		case VisualGrayscale: return "VisualGrayscale"
-		case VisualStaticColor: return "VisualStaticColor"
-		case VisualPseudoColor: return "VisualPseudoColor"
-		case VisualTrueColor: return "VisualTrueColor"
 		case VisualDirectColor: return "VisualDirectColor"
+		case VisualGrayscale: return "VisualGrayscale"
+		case VisualPseudoColor: return "VisualPseudoColor"
+		case VisualStaticColor: return "VisualStaticColor"
+		case VisualStaticGray: return "VisualStaticGray"
+		case VisualTrueColor: return "VisualTrueColor"
 		default: return fmt.Sprintf("VisualType(%d)", e)
 	}
 }
@@ -7050,14 +7050,14 @@ func (e WindowEdge) InitGoValue(v *gobject.Value) {
 
 func (e WindowEdge) String() string {
 	switch e {
+		case WindowEdgeEast: return "WindowEdgeEast"
 		case WindowEdgeNorth: return "WindowEdgeNorth"
 		case WindowEdgeNorthEast: return "WindowEdgeNorthEast"
-		case WindowEdgeWest: return "WindowEdgeWest"
-		case WindowEdgeEast: return "WindowEdgeEast"
-		case WindowEdgeSouthWest: return "WindowEdgeSouthWest"
+		case WindowEdgeNorthWest: return "WindowEdgeNorthWest"
 		case WindowEdgeSouth: return "WindowEdgeSouth"
 		case WindowEdgeSouthEast: return "WindowEdgeSouthEast"
-		case WindowEdgeNorthWest: return "WindowEdgeNorthWest"
+		case WindowEdgeSouthWest: return "WindowEdgeSouthWest"
+		case WindowEdgeWest: return "WindowEdgeWest"
 		default: return fmt.Sprintf("WindowEdge(%d)", e)
 	}
 }
@@ -7116,13 +7116,13 @@ func (e WindowType) InitGoValue(v *gobject.Value) {
 
 func (e WindowType) String() string {
 	switch e {
-		case WindowRoot: return "WindowRoot"
-		case WindowToplevel: return "WindowToplevel"
 		case WindowChild: return "WindowChild"
-		case WindowTemp: return "WindowTemp"
 		case WindowForeign: return "WindowForeign"
 		case WindowOffscreen: return "WindowOffscreen"
+		case WindowRoot: return "WindowRoot"
 		case WindowSubsurface: return "WindowSubsurface"
+		case WindowTemp: return "WindowTemp"
+		case WindowToplevel: return "WindowToplevel"
 		default: return fmt.Sprintf("WindowType(%d)", e)
 	}
 }
@@ -7215,20 +7215,20 @@ func (e WindowTypeHint) InitGoValue(v *gobject.Value) {
 
 func (e WindowTypeHint) String() string {
 	switch e {
-		case WindowTypeHintDialog: return "WindowTypeHintDialog"
-		case WindowTypeHintToolbar: return "WindowTypeHintToolbar"
-		case WindowTypeHintDock: return "WindowTypeHintDock"
-		case WindowTypeHintDropdownMenu: return "WindowTypeHintDropdownMenu"
-		case WindowTypeHintTooltip: return "WindowTypeHintTooltip"
 		case WindowTypeHintCombo: return "WindowTypeHintCombo"
 		case WindowTypeHintDND: return "WindowTypeHintDND"
-		case WindowTypeHintNormal: return "WindowTypeHintNormal"
-		case WindowTypeHintMenu: return "WindowTypeHintMenu"
-		case WindowTypeHintSplashscreen: return "WindowTypeHintSplashscreen"
-		case WindowTypeHintUtility: return "WindowTypeHintUtility"
 		case WindowTypeHintDesktop: return "WindowTypeHintDesktop"
-		case WindowTypeHintPopupMenu: return "WindowTypeHintPopupMenu"
+		case WindowTypeHintDialog: return "WindowTypeHintDialog"
+		case WindowTypeHintDock: return "WindowTypeHintDock"
+		case WindowTypeHintDropdownMenu: return "WindowTypeHintDropdownMenu"
+		case WindowTypeHintMenu: return "WindowTypeHintMenu"
+		case WindowTypeHintNormal: return "WindowTypeHintNormal"
 		case WindowTypeHintNotification: return "WindowTypeHintNotification"
+		case WindowTypeHintPopupMenu: return "WindowTypeHintPopupMenu"
+		case WindowTypeHintSplashscreen: return "WindowTypeHintSplashscreen"
+		case WindowTypeHintToolbar: return "WindowTypeHintToolbar"
+		case WindowTypeHintTooltip: return "WindowTypeHintTooltip"
+		case WindowTypeHintUtility: return "WindowTypeHintUtility"
 		default: return fmt.Sprintf("WindowTypeHint(%d)", e)
 	}
 }
@@ -7266,8 +7266,8 @@ func (e WindowWindowClass) InitGoValue(v *gobject.Value) {
 
 func (e WindowWindowClass) String() string {
 	switch e {
-		case InputOutput: return "InputOutput"
 		case InputOnly: return "InputOnly"
+		case InputOutput: return "InputOutput"
 		default: return fmt.Sprintf("WindowWindowClass(%d)", e)
 	}
 }

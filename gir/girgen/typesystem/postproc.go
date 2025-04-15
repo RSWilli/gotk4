@@ -2,20 +2,13 @@ package typesystem
 
 import (
 	"fmt"
-
-	"github.com/diamondburned/gotk4/gir"
 )
 
 type PostProcessor func(*Registry) error
 
-func MarkAsManuallyExtended(namespace string, majorversion int, typ string) PostProcessor {
+func MarkAsManuallyExtended(namespace string, typ string) PostProcessor {
 	return func(r *Registry) error {
-		ns := r.FindNamespace(versionedName{
-			name: namespace,
-			version: gir.Version{
-				Major: majorversion,
-			},
-		})
+		ns := r.FindNamespaceByName(namespace)
 		if ns == nil {
 			return fmt.Errorf("could not find namespace %s", namespace)
 		}

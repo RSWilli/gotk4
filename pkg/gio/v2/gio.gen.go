@@ -531,10 +531,10 @@ func (e BusType) InitGoValue(v *gobject.Value) {
 
 func (e BusType) String() string {
 	switch e {
-		case BusTypeStarter: return "BusTypeStarter"
 		case BusTypeNone: return "BusTypeNone"
-		case BusTypeSystem: return "BusTypeSystem"
 		case BusTypeSession: return "BusTypeSession"
+		case BusTypeStarter: return "BusTypeStarter"
+		case BusTypeSystem: return "BusTypeSystem"
 		default: return fmt.Sprintf("BusType(%d)", e)
 	}
 }
@@ -576,8 +576,8 @@ func (e ConverterResult) InitGoValue(v *gobject.Value) {
 
 func (e ConverterResult) String() string {
 	switch e {
-		case ConverterError: return "ConverterError"
 		case ConverterConverted: return "ConverterConverted"
+		case ConverterError: return "ConverterError"
 		case ConverterFinished: return "ConverterFinished"
 		case ConverterFlushed: return "ConverterFlushed"
 		default: return fmt.Sprintf("ConverterResult(%d)", e)
@@ -637,14 +637,14 @@ func (e CredentialsType) InitGoValue(v *gobject.Value) {
 
 func (e CredentialsType) String() string {
 	switch e {
-		case CredentialsTypeSolarisUcred: return "CredentialsTypeSolarisUcred"
-		case CredentialsTypeNetbsdUnpcbid: return "CredentialsTypeNetbsdUnpcbid"
 		case CredentialsTypeAppleXucred: return "CredentialsTypeAppleXucred"
-		case CredentialsTypeWin32Pid: return "CredentialsTypeWin32Pid"
+		case CredentialsTypeFreebsdCmsgcred: return "CredentialsTypeFreebsdCmsgcred"
 		case CredentialsTypeInvalid: return "CredentialsTypeInvalid"
 		case CredentialsTypeLinuxUcred: return "CredentialsTypeLinuxUcred"
-		case CredentialsTypeFreebsdCmsgcred: return "CredentialsTypeFreebsdCmsgcred"
+		case CredentialsTypeNetbsdUnpcbid: return "CredentialsTypeNetbsdUnpcbid"
 		case CredentialsTypeOpenbsdSockpeercred: return "CredentialsTypeOpenbsdSockpeercred"
+		case CredentialsTypeSolarisUcred: return "CredentialsTypeSolarisUcred"
+		case CredentialsTypeWin32Pid: return "CredentialsTypeWin32Pid"
 		default: return fmt.Sprintf("CredentialsType(%d)", e)
 	}
 }
@@ -856,50 +856,50 @@ func (e DBusError) InitGoValue(v *gobject.Value) {
 
 func (e DBusError) String() string {
 	switch e {
-		case DBusErrorNoMemory: return "DBusErrorNoMemory"
-		case DBusErrorBadAddress: return "DBusErrorBadAddress"
 		case DBusErrorAccessDenied: return "DBusErrorAccessDenied"
-		case DBusErrorTimeout: return "DBusErrorTimeout"
-		case DBusErrorMatchRuleInvalid: return "DBusErrorMatchRuleInvalid"
-		case DBusErrorFailed: return "DBusErrorFailed"
-		case DBusErrorNameHasNoOwner: return "DBusErrorNameHasNoOwner"
 		case DBusErrorAddressInUse: return "DBusErrorAddressInUse"
-		case DBusErrorSpawnForkFailed: return "DBusErrorSpawnForkFailed"
-		case DBusErrorPropertyReadOnly: return "DBusErrorPropertyReadOnly"
-		case DBusErrorServiceUnknown: return "DBusErrorServiceUnknown"
-		case DBusErrorNotSupported: return "DBusErrorNotSupported"
-		case DBusErrorDisconnected: return "DBusErrorDisconnected"
-		case DBusErrorMatchRuleNotFound: return "DBusErrorMatchRuleNotFound"
-		case DBusErrorSpawnFileInvalid: return "DBusErrorSpawnFileInvalid"
-		case DBusErrorLimitsExceeded: return "DBusErrorLimitsExceeded"
-		case DBusErrorFileExists: return "DBusErrorFileExists"
-		case DBusErrorUnknownMethod: return "DBusErrorUnknownMethod"
-		case DBusErrorSpawnFailed: return "DBusErrorSpawnFailed"
-		case DBusErrorSpawnSetupFailed: return "DBusErrorSpawnSetupFailed"
-		case DBusErrorSpawnConfigInvalid: return "DBusErrorSpawnConfigInvalid"
-		case DBusErrorSpawnPermissionsInvalid: return "DBusErrorSpawnPermissionsInvalid"
-		case DBusErrorSelinuxSecurityContextUnknown: return "DBusErrorSelinuxSecurityContextUnknown"
-		case DBusErrorNoReply: return "DBusErrorNoReply"
-		case DBusErrorInvalidArgs: return "DBusErrorInvalidArgs"
-		case DBusErrorSpawnChildExited: return "DBusErrorSpawnChildExited"
-		case DBusErrorSpawnServiceNotFound: return "DBusErrorSpawnServiceNotFound"
-		case DBusErrorSpawnNoMemory: return "DBusErrorSpawnNoMemory"
-		case DBusErrorInvalidSignature: return "DBusErrorInvalidSignature"
-		case DBusErrorInvalidFileContent: return "DBusErrorInvalidFileContent"
-		case DBusErrorObjectPathInUse: return "DBusErrorObjectPathInUse"
-		case DBusErrorAuthFailed: return "DBusErrorAuthFailed"
-		case DBusErrorFileNotFound: return "DBusErrorFileNotFound"
-		case DBusErrorSpawnServiceInvalid: return "DBusErrorSpawnServiceInvalid"
-		case DBusErrorUnknownObject: return "DBusErrorUnknownObject"
-		case DBusErrorNoNetwork: return "DBusErrorNoNetwork"
-		case DBusErrorSpawnChildSignaled: return "DBusErrorSpawnChildSignaled"
 		case DBusErrorAdtAuditDataUnknown: return "DBusErrorAdtAuditDataUnknown"
-		case DBusErrorUnknownProperty: return "DBusErrorUnknownProperty"
+		case DBusErrorAuthFailed: return "DBusErrorAuthFailed"
+		case DBusErrorBadAddress: return "DBusErrorBadAddress"
+		case DBusErrorDisconnected: return "DBusErrorDisconnected"
+		case DBusErrorFailed: return "DBusErrorFailed"
+		case DBusErrorFileExists: return "DBusErrorFileExists"
+		case DBusErrorFileNotFound: return "DBusErrorFileNotFound"
 		case DBusErrorIOError: return "DBusErrorIOError"
+		case DBusErrorInvalidArgs: return "DBusErrorInvalidArgs"
+		case DBusErrorInvalidFileContent: return "DBusErrorInvalidFileContent"
+		case DBusErrorInvalidSignature: return "DBusErrorInvalidSignature"
+		case DBusErrorLimitsExceeded: return "DBusErrorLimitsExceeded"
+		case DBusErrorMatchRuleInvalid: return "DBusErrorMatchRuleInvalid"
+		case DBusErrorMatchRuleNotFound: return "DBusErrorMatchRuleNotFound"
+		case DBusErrorNameHasNoOwner: return "DBusErrorNameHasNoOwner"
+		case DBusErrorNoMemory: return "DBusErrorNoMemory"
+		case DBusErrorNoNetwork: return "DBusErrorNoNetwork"
+		case DBusErrorNoReply: return "DBusErrorNoReply"
 		case DBusErrorNoServer: return "DBusErrorNoServer"
-		case DBusErrorTimedOut: return "DBusErrorTimedOut"
+		case DBusErrorNotSupported: return "DBusErrorNotSupported"
+		case DBusErrorObjectPathInUse: return "DBusErrorObjectPathInUse"
+		case DBusErrorPropertyReadOnly: return "DBusErrorPropertyReadOnly"
+		case DBusErrorSelinuxSecurityContextUnknown: return "DBusErrorSelinuxSecurityContextUnknown"
+		case DBusErrorServiceUnknown: return "DBusErrorServiceUnknown"
+		case DBusErrorSpawnChildExited: return "DBusErrorSpawnChildExited"
+		case DBusErrorSpawnChildSignaled: return "DBusErrorSpawnChildSignaled"
+		case DBusErrorSpawnConfigInvalid: return "DBusErrorSpawnConfigInvalid"
 		case DBusErrorSpawnExecFailed: return "DBusErrorSpawnExecFailed"
+		case DBusErrorSpawnFailed: return "DBusErrorSpawnFailed"
+		case DBusErrorSpawnFileInvalid: return "DBusErrorSpawnFileInvalid"
+		case DBusErrorSpawnForkFailed: return "DBusErrorSpawnForkFailed"
+		case DBusErrorSpawnNoMemory: return "DBusErrorSpawnNoMemory"
+		case DBusErrorSpawnPermissionsInvalid: return "DBusErrorSpawnPermissionsInvalid"
+		case DBusErrorSpawnServiceInvalid: return "DBusErrorSpawnServiceInvalid"
+		case DBusErrorSpawnServiceNotFound: return "DBusErrorSpawnServiceNotFound"
+		case DBusErrorSpawnSetupFailed: return "DBusErrorSpawnSetupFailed"
+		case DBusErrorTimedOut: return "DBusErrorTimedOut"
+		case DBusErrorTimeout: return "DBusErrorTimeout"
 		case DBusErrorUnknownInterface: return "DBusErrorUnknownInterface"
+		case DBusErrorUnknownMethod: return "DBusErrorUnknownMethod"
+		case DBusErrorUnknownObject: return "DBusErrorUnknownObject"
+		case DBusErrorUnknownProperty: return "DBusErrorUnknownProperty"
 		default: return fmt.Sprintf("DBusError(%d)", e)
 	}
 }
@@ -996,13 +996,13 @@ func (e DBusMessageHeaderField) InitGoValue(v *gobject.Value) {
 
 func (e DBusMessageHeaderField) String() string {
 	switch e {
-		case DBusMessageHeaderFieldInvalid: return "DBusMessageHeaderFieldInvalid"
-		case DBusMessageHeaderFieldPath: return "DBusMessageHeaderFieldPath"
-		case DBusMessageHeaderFieldInterface: return "DBusMessageHeaderFieldInterface"
-		case DBusMessageHeaderFieldReplySerial: return "DBusMessageHeaderFieldReplySerial"
-		case DBusMessageHeaderFieldMember: return "DBusMessageHeaderFieldMember"
-		case DBusMessageHeaderFieldErrorName: return "DBusMessageHeaderFieldErrorName"
 		case DBusMessageHeaderFieldDestination: return "DBusMessageHeaderFieldDestination"
+		case DBusMessageHeaderFieldErrorName: return "DBusMessageHeaderFieldErrorName"
+		case DBusMessageHeaderFieldInterface: return "DBusMessageHeaderFieldInterface"
+		case DBusMessageHeaderFieldInvalid: return "DBusMessageHeaderFieldInvalid"
+		case DBusMessageHeaderFieldMember: return "DBusMessageHeaderFieldMember"
+		case DBusMessageHeaderFieldPath: return "DBusMessageHeaderFieldPath"
+		case DBusMessageHeaderFieldReplySerial: return "DBusMessageHeaderFieldReplySerial"
 		case DBusMessageHeaderFieldSender: return "DBusMessageHeaderFieldSender"
 		case DBusMessageHeaderFieldSignature: return "DBusMessageHeaderFieldSignature"
 		default: return fmt.Sprintf("DBusMessageHeaderField(%d)", e)
@@ -1050,11 +1050,11 @@ func (e DBusMessageType) InitGoValue(v *gobject.Value) {
 
 func (e DBusMessageType) String() string {
 	switch e {
-		case DBusMessageTypeMethodReturn: return "DBusMessageTypeMethodReturn"
 		case DBusMessageTypeError: return "DBusMessageTypeError"
-		case DBusMessageTypeSignal: return "DBusMessageTypeSignal"
 		case DBusMessageTypeInvalid: return "DBusMessageTypeInvalid"
 		case DBusMessageTypeMethodCall: return "DBusMessageTypeMethodCall"
+		case DBusMessageTypeMethodReturn: return "DBusMessageTypeMethodReturn"
+		case DBusMessageTypeSignal: return "DBusMessageTypeSignal"
 		default: return fmt.Sprintf("DBusMessageType(%d)", e)
 	}
 }
@@ -1094,8 +1094,8 @@ func (e DataStreamByteOrder) InitGoValue(v *gobject.Value) {
 func (e DataStreamByteOrder) String() string {
 	switch e {
 		case DataStreamByteOrderBigEndian: return "DataStreamByteOrderBigEndian"
-		case DataStreamByteOrderLittleEndian: return "DataStreamByteOrderLittleEndian"
 		case DataStreamByteOrderHostEndian: return "DataStreamByteOrderHostEndian"
+		case DataStreamByteOrderLittleEndian: return "DataStreamByteOrderLittleEndian"
 		default: return fmt.Sprintf("DataStreamByteOrder(%d)", e)
 	}
 }
@@ -1137,10 +1137,10 @@ func (e DataStreamNewlineType) InitGoValue(v *gobject.Value) {
 
 func (e DataStreamNewlineType) String() string {
 	switch e {
-		case DataStreamNewlineTypeLf: return "DataStreamNewlineTypeLf"
+		case DataStreamNewlineTypeAny: return "DataStreamNewlineTypeAny"
 		case DataStreamNewlineTypeCr: return "DataStreamNewlineTypeCr"
 		case DataStreamNewlineTypeCrLf: return "DataStreamNewlineTypeCrLf"
-		case DataStreamNewlineTypeAny: return "DataStreamNewlineTypeAny"
+		case DataStreamNewlineTypeLf: return "DataStreamNewlineTypeLf"
 		default: return fmt.Sprintf("DataStreamNewlineType(%d)", e)
 	}
 }
@@ -1194,11 +1194,11 @@ func (e DriveStartStopType) InitGoValue(v *gobject.Value) {
 
 func (e DriveStartStopType) String() string {
 	switch e {
-		case DriveStartStopTypeUnknown: return "DriveStartStopTypeUnknown"
-		case DriveStartStopTypeShutdown: return "DriveStartStopTypeShutdown"
-		case DriveStartStopTypeNetwork: return "DriveStartStopTypeNetwork"
 		case DriveStartStopTypeMultidisk: return "DriveStartStopTypeMultidisk"
+		case DriveStartStopTypeNetwork: return "DriveStartStopTypeNetwork"
 		case DriveStartStopTypePassword: return "DriveStartStopTypePassword"
+		case DriveStartStopTypeShutdown: return "DriveStartStopTypeShutdown"
+		case DriveStartStopTypeUnknown: return "DriveStartStopTypeUnknown"
 		default: return fmt.Sprintf("DriveStartStopType(%d)", e)
 	}
 }
@@ -1241,10 +1241,10 @@ func (e EmblemOrigin) InitGoValue(v *gobject.Value) {
 
 func (e EmblemOrigin) String() string {
 	switch e {
-		case EmblemOriginUnknown: return "EmblemOriginUnknown"
 		case EmblemOriginDevice: return "EmblemOriginDevice"
 		case EmblemOriginLivemetadata: return "EmblemOriginLivemetadata"
 		case EmblemOriginTag: return "EmblemOriginTag"
+		case EmblemOriginUnknown: return "EmblemOriginUnknown"
 		default: return fmt.Sprintf("EmblemOrigin(%d)", e)
 	}
 }
@@ -1282,9 +1282,9 @@ func (e FileAttributeStatus) InitGoValue(v *gobject.Value) {
 
 func (e FileAttributeStatus) String() string {
 	switch e {
-		case FileAttributeStatusUnset: return "FileAttributeStatusUnset"
-		case FileAttributeStatusSet: return "FileAttributeStatusSet"
 		case FileAttributeStatusErrorSetting: return "FileAttributeStatusErrorSetting"
+		case FileAttributeStatusSet: return "FileAttributeStatusSet"
+		case FileAttributeStatusUnset: return "FileAttributeStatusUnset"
 		default: return fmt.Sprintf("FileAttributeStatus(%d)", e)
 	}
 }
@@ -1350,16 +1350,16 @@ func (e FileAttributeType) InitGoValue(v *gobject.Value) {
 
 func (e FileAttributeType) String() string {
 	switch e {
-		case FileAttributeTypeInt64: return "FileAttributeTypeInt64"
-		case FileAttributeTypeString: return "FileAttributeTypeString"
-		case FileAttributeTypeByteString: return "FileAttributeTypeByteString"
 		case FileAttributeTypeBoolean: return "FileAttributeTypeBoolean"
-		case FileAttributeTypeUint32: return "FileAttributeTypeUint32"
+		case FileAttributeTypeByteString: return "FileAttributeTypeByteString"
 		case FileAttributeTypeInt32: return "FileAttributeTypeInt32"
-		case FileAttributeTypeUint64: return "FileAttributeTypeUint64"
-		case FileAttributeTypeObject: return "FileAttributeTypeObject"
-		case FileAttributeTypeStringv: return "FileAttributeTypeStringv"
+		case FileAttributeTypeInt64: return "FileAttributeTypeInt64"
 		case FileAttributeTypeInvalid: return "FileAttributeTypeInvalid"
+		case FileAttributeTypeObject: return "FileAttributeTypeObject"
+		case FileAttributeTypeString: return "FileAttributeTypeString"
+		case FileAttributeTypeStringv: return "FileAttributeTypeStringv"
+		case FileAttributeTypeUint32: return "FileAttributeTypeUint32"
+		case FileAttributeTypeUint64: return "FileAttributeTypeUint64"
 		default: return fmt.Sprintf("FileAttributeType(%d)", e)
 	}
 }
@@ -1436,17 +1436,17 @@ func (e FileMonitorEvent) InitGoValue(v *gobject.Value) {
 
 func (e FileMonitorEvent) String() string {
 	switch e {
+		case FileMonitorEventAttributeChanged: return "FileMonitorEventAttributeChanged"
+		case FileMonitorEventChanged: return "FileMonitorEventChanged"
+		case FileMonitorEventChangesDoneHint: return "FileMonitorEventChangesDoneHint"
+		case FileMonitorEventCreated: return "FileMonitorEventCreated"
+		case FileMonitorEventDeleted: return "FileMonitorEventDeleted"
+		case FileMonitorEventMoved: return "FileMonitorEventMoved"
 		case FileMonitorEventMovedIn: return "FileMonitorEventMovedIn"
 		case FileMonitorEventMovedOut: return "FileMonitorEventMovedOut"
-		case FileMonitorEventChangesDoneHint: return "FileMonitorEventChangesDoneHint"
-		case FileMonitorEventDeleted: return "FileMonitorEventDeleted"
-		case FileMonitorEventCreated: return "FileMonitorEventCreated"
 		case FileMonitorEventPreUnmount: return "FileMonitorEventPreUnmount"
-		case FileMonitorEventUnmounted: return "FileMonitorEventUnmounted"
 		case FileMonitorEventRenamed: return "FileMonitorEventRenamed"
-		case FileMonitorEventChanged: return "FileMonitorEventChanged"
-		case FileMonitorEventAttributeChanged: return "FileMonitorEventAttributeChanged"
-		case FileMonitorEventMoved: return "FileMonitorEventMoved"
+		case FileMonitorEventUnmounted: return "FileMonitorEventUnmounted"
 		default: return fmt.Sprintf("FileMonitorEvent(%d)", e)
 	}
 }
@@ -1511,13 +1511,13 @@ func (e FileType) InitGoValue(v *gobject.Value) {
 
 func (e FileType) String() string {
 	switch e {
-		case FileTypeUnknown: return "FileTypeUnknown"
-		case FileTypeRegular: return "FileTypeRegular"
 		case FileTypeDirectory: return "FileTypeDirectory"
-		case FileTypeSymbolicLink: return "FileTypeSymbolicLink"
-		case FileTypeSpecial: return "FileTypeSpecial"
-		case FileTypeShortcut: return "FileTypeShortcut"
 		case FileTypeMountable: return "FileTypeMountable"
+		case FileTypeRegular: return "FileTypeRegular"
+		case FileTypeShortcut: return "FileTypeShortcut"
+		case FileTypeSpecial: return "FileTypeSpecial"
+		case FileTypeSymbolicLink: return "FileTypeSymbolicLink"
+		case FileTypeUnknown: return "FileTypeUnknown"
 		default: return fmt.Sprintf("FileType(%d)", e)
 	}
 }
@@ -1815,55 +1815,55 @@ func (e IOErrorEnum) InitGoValue(v *gobject.Value) {
 
 func (e IOErrorEnum) String() string {
 	switch e {
-		case IOErrorAlreadyMounted: return "IOErrorAlreadyMounted"
-		case IOErrorPending: return "IOErrorPending"
-		case IOErrorMessageTooLarge: return "IOErrorMessageTooLarge"
-		case IOErrorNoSuchDevice: return "IOErrorNoSuchDevice"
-		case IOErrorNotFound: return "IOErrorNotFound"
-		case IOErrorNotEmpty: return "IOErrorNotEmpty"
-		case IOErrorPartialInput: return "IOErrorPartialInput"
-		case IOErrorInvalidData: return "IOErrorInvalidData"
-		case IOErrorDestinationUnset: return "IOErrorDestinationUnset"
-		case IOErrorFailed: return "IOErrorFailed"
-		case IOErrorFilenameTooLong: return "IOErrorFilenameTooLong"
-		case IOErrorProxyFailed: return "IOErrorProxyFailed"
-		case IOErrorCantCreateBackup: return "IOErrorCantCreateBackup"
-		case IOErrorWrongETag: return "IOErrorWrongETag"
-		case IOErrorBusy: return "IOErrorBusy"
-		case IOErrorDBusError: return "IOErrorDBusError"
-		case IOErrorConnectionRefused: return "IOErrorConnectionRefused"
-		case IOErrorBrokenPipe: return "IOErrorBrokenPipe"
-		case IOErrorExists: return "IOErrorExists"
-		case IOErrorPermissionDenied: return "IOErrorPermissionDenied"
-		case IOErrorCancelled: return "IOErrorCancelled"
-		case IOErrorReadOnly: return "IOErrorReadOnly"
-		case IOErrorTimedOut: return "IOErrorTimedOut"
-		case IOErrorTooManyOpenFiles: return "IOErrorTooManyOpenFiles"
-		case IOErrorNotMountableFile: return "IOErrorNotMountableFile"
-		case IOErrorInvalidFilename: return "IOErrorInvalidFilename"
-		case IOErrorNoSpace: return "IOErrorNoSpace"
-		case IOErrorInvalidArgument: return "IOErrorInvalidArgument"
-		case IOErrorWouldRecurse: return "IOErrorWouldRecurse"
-		case IOErrorHostNotFound: return "IOErrorHostNotFound"
-		case IOErrorNetworkUnreachable: return "IOErrorNetworkUnreachable"
-		case IOErrorNotDirectory: return "IOErrorNotDirectory"
-		case IOErrorTooManyLinks: return "IOErrorTooManyLinks"
-		case IOErrorNotSupported: return "IOErrorNotSupported"
-		case IOErrorNotMounted: return "IOErrorNotMounted"
-		case IOErrorClosed: return "IOErrorClosed"
-		case IOErrorWouldBlock: return "IOErrorWouldBlock"
-		case IOErrorFailedHandled: return "IOErrorFailedHandled"
-		case IOErrorProxyAuthFailed: return "IOErrorProxyAuthFailed"
-		case IOErrorIsDirectory: return "IOErrorIsDirectory"
-		case IOErrorWouldMerge: return "IOErrorWouldMerge"
-		case IOErrorNotInitialized: return "IOErrorNotInitialized"
 		case IOErrorAddressInUse: return "IOErrorAddressInUse"
+		case IOErrorAlreadyMounted: return "IOErrorAlreadyMounted"
+		case IOErrorBrokenPipe: return "IOErrorBrokenPipe"
+		case IOErrorBusy: return "IOErrorBusy"
+		case IOErrorCancelled: return "IOErrorCancelled"
+		case IOErrorCantCreateBackup: return "IOErrorCantCreateBackup"
+		case IOErrorClosed: return "IOErrorClosed"
+		case IOErrorConnectionRefused: return "IOErrorConnectionRefused"
+		case IOErrorDBusError: return "IOErrorDBusError"
+		case IOErrorDestinationUnset: return "IOErrorDestinationUnset"
+		case IOErrorExists: return "IOErrorExists"
+		case IOErrorFailed: return "IOErrorFailed"
+		case IOErrorFailedHandled: return "IOErrorFailedHandled"
+		case IOErrorFilenameTooLong: return "IOErrorFilenameTooLong"
+		case IOErrorHostNotFound: return "IOErrorHostNotFound"
 		case IOErrorHostUnreachable: return "IOErrorHostUnreachable"
+		case IOErrorInvalidArgument: return "IOErrorInvalidArgument"
+		case IOErrorInvalidData: return "IOErrorInvalidData"
+		case IOErrorInvalidFilename: return "IOErrorInvalidFilename"
+		case IOErrorIsDirectory: return "IOErrorIsDirectory"
+		case IOErrorMessageTooLarge: return "IOErrorMessageTooLarge"
+		case IOErrorNetworkUnreachable: return "IOErrorNetworkUnreachable"
+		case IOErrorNoSpace: return "IOErrorNoSpace"
+		case IOErrorNoSuchDevice: return "IOErrorNoSuchDevice"
+		case IOErrorNotConnected: return "IOErrorNotConnected"
+		case IOErrorNotDirectory: return "IOErrorNotDirectory"
+		case IOErrorNotEmpty: return "IOErrorNotEmpty"
+		case IOErrorNotFound: return "IOErrorNotFound"
+		case IOErrorNotInitialized: return "IOErrorNotInitialized"
+		case IOErrorNotMountableFile: return "IOErrorNotMountableFile"
+		case IOErrorNotMounted: return "IOErrorNotMounted"
+		case IOErrorNotRegularFile: return "IOErrorNotRegularFile"
+		case IOErrorNotSupported: return "IOErrorNotSupported"
+		case IOErrorNotSymbolicLink: return "IOErrorNotSymbolicLink"
+		case IOErrorPartialInput: return "IOErrorPartialInput"
+		case IOErrorPending: return "IOErrorPending"
+		case IOErrorPermissionDenied: return "IOErrorPermissionDenied"
+		case IOErrorProxyAuthFailed: return "IOErrorProxyAuthFailed"
+		case IOErrorProxyFailed: return "IOErrorProxyFailed"
 		case IOErrorProxyNeedAuth: return "IOErrorProxyNeedAuth"
 		case IOErrorProxyNotAllowed: return "IOErrorProxyNotAllowed"
-		case IOErrorNotConnected: return "IOErrorNotConnected"
-		case IOErrorNotRegularFile: return "IOErrorNotRegularFile"
-		case IOErrorNotSymbolicLink: return "IOErrorNotSymbolicLink"
+		case IOErrorReadOnly: return "IOErrorReadOnly"
+		case IOErrorTimedOut: return "IOErrorTimedOut"
+		case IOErrorTooManyLinks: return "IOErrorTooManyLinks"
+		case IOErrorTooManyOpenFiles: return "IOErrorTooManyOpenFiles"
+		case IOErrorWouldBlock: return "IOErrorWouldBlock"
+		case IOErrorWouldMerge: return "IOErrorWouldMerge"
+		case IOErrorWouldRecurse: return "IOErrorWouldRecurse"
+		case IOErrorWrongETag: return "IOErrorWrongETag"
 		default: return fmt.Sprintf("IOErrorEnum(%d)", e)
 	}
 }
@@ -1899,8 +1899,8 @@ func (e IOModuleScopeFlags) InitGoValue(v *gobject.Value) {
 
 func (e IOModuleScopeFlags) String() string {
 	switch e {
-		case IOModuleScopeNone: return "IOModuleScopeNone"
 		case IOModuleScopeBlockDuplicates: return "IOModuleScopeBlockDuplicates"
+		case IOModuleScopeNone: return "IOModuleScopeNone"
 		default: return fmt.Sprintf("IOModuleScopeFlags(%d)", e)
 	}
 }
@@ -1995,8 +1995,8 @@ func (e MountOperationResult) InitGoValue(v *gobject.Value) {
 
 func (e MountOperationResult) String() string {
 	switch e {
-		case MountOperationHandled: return "MountOperationHandled"
 		case MountOperationAborted: return "MountOperationAborted"
+		case MountOperationHandled: return "MountOperationHandled"
 		case MountOperationUnhandled: return "MountOperationUnhandled"
 		default: return fmt.Sprintf("MountOperationResult(%d)", e)
 	}
@@ -2046,8 +2046,8 @@ func (e NetworkConnectivity) InitGoValue(v *gobject.Value) {
 func (e NetworkConnectivity) String() string {
 	switch e {
 		case NetworkConnectivityFull: return "NetworkConnectivityFull"
-		case NetworkConnectivityLocal: return "NetworkConnectivityLocal"
 		case NetworkConnectivityLimited: return "NetworkConnectivityLimited"
+		case NetworkConnectivityLocal: return "NetworkConnectivityLocal"
 		case NetworkConnectivityPortal: return "NetworkConnectivityPortal"
 		default: return fmt.Sprintf("NetworkConnectivity(%d)", e)
 	}
@@ -2098,10 +2098,10 @@ func (e NotificationPriority) InitGoValue(v *gobject.Value) {
 
 func (e NotificationPriority) String() string {
 	switch e {
-		case NotificationPriorityLow: return "NotificationPriorityLow"
 		case NotificationPriorityHigh: return "NotificationPriorityHigh"
-		case NotificationPriorityUrgent: return "NotificationPriorityUrgent"
+		case NotificationPriorityLow: return "NotificationPriorityLow"
 		case NotificationPriorityNormal: return "NotificationPriorityNormal"
+		case NotificationPriorityUrgent: return "NotificationPriorityUrgent"
 		default: return fmt.Sprintf("NotificationPriority(%d)", e)
 	}
 }
@@ -2143,8 +2143,8 @@ func (e PasswordSave) InitGoValue(v *gobject.Value) {
 func (e PasswordSave) String() string {
 	switch e {
 		case PasswordSaveForSession: return "PasswordSaveForSession"
-		case PasswordSavePermanently: return "PasswordSavePermanently"
 		case PasswordSaveNever: return "PasswordSaveNever"
+		case PasswordSavePermanently: return "PasswordSavePermanently"
 		default: return fmt.Sprintf("PasswordSave(%d)", e)
 	}
 }
@@ -2190,9 +2190,9 @@ func (e PollableReturn) InitGoValue(v *gobject.Value) {
 
 func (e PollableReturn) String() string {
 	switch e {
+		case PollableReturnFailed: return "PollableReturnFailed"
 		case PollableReturnOK: return "PollableReturnOK"
 		case PollableReturnWouldBlock: return "PollableReturnWouldBlock"
-		case PollableReturnFailed: return "PollableReturnFailed"
 		default: return fmt.Sprintf("PollableReturn(%d)", e)
 	}
 }
@@ -2233,9 +2233,9 @@ func (e ResolverError) InitGoValue(v *gobject.Value) {
 
 func (e ResolverError) String() string {
 	switch e {
-		case ResolverErrorTemporaryFailure: return "ResolverErrorTemporaryFailure"
 		case ResolverErrorInternal: return "ResolverErrorInternal"
 		case ResolverErrorNotFound: return "ResolverErrorNotFound"
+		case ResolverErrorTemporaryFailure: return "ResolverErrorTemporaryFailure"
 		default: return fmt.Sprintf("ResolverError(%d)", e)
 	}
 }
@@ -2310,11 +2310,11 @@ func (e ResolverRecordType) InitGoValue(v *gobject.Value) {
 
 func (e ResolverRecordType) String() string {
 	switch e {
-		case ResolverRecordSrv: return "ResolverRecordSrv"
 		case ResolverRecordMx: return "ResolverRecordMx"
-		case ResolverRecordTxt: return "ResolverRecordTxt"
-		case ResolverRecordSoa: return "ResolverRecordSoa"
 		case ResolverRecordNs: return "ResolverRecordNs"
+		case ResolverRecordSoa: return "ResolverRecordSoa"
+		case ResolverRecordSrv: return "ResolverRecordSrv"
+		case ResolverRecordTxt: return "ResolverRecordTxt"
 		default: return fmt.Sprintf("ResolverRecordType(%d)", e)
 	}
 }
@@ -2349,8 +2349,8 @@ func (e ResourceError) InitGoValue(v *gobject.Value) {
 
 func (e ResourceError) String() string {
 	switch e {
-		case ResourceErrorNotFound: return "ResourceErrorNotFound"
 		case ResourceErrorInternal: return "ResourceErrorInternal"
+		case ResourceErrorNotFound: return "ResourceErrorNotFound"
 		default: return fmt.Sprintf("ResourceError(%d)", e)
 	}
 }
@@ -2422,15 +2422,15 @@ func (e SocketClientEvent) InitGoValue(v *gobject.Value) {
 
 func (e SocketClientEvent) String() string {
 	switch e {
-		case SocketClientConnecting: return "SocketClientConnecting"
-		case SocketClientProxyNegotiating: return "SocketClientProxyNegotiating"
-		case SocketClientTLSHandshaking: return "SocketClientTLSHandshaking"
-		case SocketClientTLSHandshaked: return "SocketClientTLSHandshaked"
-		case SocketClientResolving: return "SocketClientResolving"
-		case SocketClientConnected: return "SocketClientConnected"
-		case SocketClientProxyNegotiated: return "SocketClientProxyNegotiated"
 		case SocketClientComplete: return "SocketClientComplete"
+		case SocketClientConnected: return "SocketClientConnected"
+		case SocketClientConnecting: return "SocketClientConnecting"
+		case SocketClientProxyNegotiated: return "SocketClientProxyNegotiated"
+		case SocketClientProxyNegotiating: return "SocketClientProxyNegotiating"
 		case SocketClientResolved: return "SocketClientResolved"
+		case SocketClientResolving: return "SocketClientResolving"
+		case SocketClientTLSHandshaked: return "SocketClientTLSHandshaked"
+		case SocketClientTLSHandshaking: return "SocketClientTLSHandshaking"
 		default: return fmt.Sprintf("SocketClientEvent(%d)", e)
 	}
 }
@@ -2470,9 +2470,9 @@ func (e SocketFamily) InitGoValue(v *gobject.Value) {
 
 func (e SocketFamily) String() string {
 	switch e {
-		case SocketFamilyInvalid: return "SocketFamilyInvalid"
 		case SocketFamilyIPv4: return "SocketFamilyIPv4"
 		case SocketFamilyIPv6: return "SocketFamilyIPv6"
+		case SocketFamilyInvalid: return "SocketFamilyInvalid"
 		default: return fmt.Sprintf("SocketFamily(%d)", e)
 	}
 }
@@ -2521,8 +2521,8 @@ func (e SocketListenerEvent) String() string {
 	switch e {
 		case SocketListenerBinding: return "SocketListenerBinding"
 		case SocketListenerBound: return "SocketListenerBound"
-		case SocketListenerListening: return "SocketListenerListening"
 		case SocketListenerListened: return "SocketListenerListened"
+		case SocketListenerListening: return "SocketListenerListening"
 		default: return fmt.Sprintf("SocketListenerEvent(%d)", e)
 	}
 }
@@ -2574,11 +2574,11 @@ func (e SocketProtocol) InitGoValue(v *gobject.Value) {
 
 func (e SocketProtocol) String() string {
 	switch e {
-		case SocketProtocolUnknown: return "SocketProtocolUnknown"
 		case SocketProtocolDefault: return "SocketProtocolDefault"
+		case SocketProtocolSCTP: return "SocketProtocolSCTP"
 		case SocketProtocolTCP: return "SocketProtocolTCP"
 		case SocketProtocolUDP: return "SocketProtocolUDP"
-		case SocketProtocolSCTP: return "SocketProtocolSCTP"
+		case SocketProtocolUnknown: return "SocketProtocolUnknown"
 		default: return fmt.Sprintf("SocketProtocol(%d)", e)
 	}
 }
@@ -2623,10 +2623,10 @@ func (e SocketType) InitGoValue(v *gobject.Value) {
 
 func (e SocketType) String() string {
 	switch e {
-		case SocketTypeInvalid: return "SocketTypeInvalid"
-		case SocketTypeStream: return "SocketTypeStream"
 		case SocketTypeDatagram: return "SocketTypeDatagram"
+		case SocketTypeInvalid: return "SocketTypeInvalid"
 		case SocketTypeSeqpacket: return "SocketTypeSeqpacket"
+		case SocketTypeStream: return "SocketTypeStream"
 		default: return fmt.Sprintf("SocketType(%d)", e)
 	}
 }
@@ -2756,11 +2756,11 @@ func (e TLSChannelBindingError) InitGoValue(v *gobject.Value) {
 
 func (e TLSChannelBindingError) String() string {
 	switch e {
+		case TLSChannelBindingErrorGeneralError: return "TLSChannelBindingErrorGeneralError"
 		case TLSChannelBindingErrorInvalidState: return "TLSChannelBindingErrorInvalidState"
 		case TLSChannelBindingErrorNotAvailable: return "TLSChannelBindingErrorNotAvailable"
-		case TLSChannelBindingErrorNotSupported: return "TLSChannelBindingErrorNotSupported"
-		case TLSChannelBindingErrorGeneralError: return "TLSChannelBindingErrorGeneralError"
 		case TLSChannelBindingErrorNotImplemented: return "TLSChannelBindingErrorNotImplemented"
+		case TLSChannelBindingErrorNotSupported: return "TLSChannelBindingErrorNotSupported"
 		default: return fmt.Sprintf("TLSChannelBindingError(%d)", e)
 	}
 }
@@ -2804,8 +2804,8 @@ func (e TLSChannelBindingType) InitGoValue(v *gobject.Value) {
 
 func (e TLSChannelBindingType) String() string {
 	switch e {
-		case TLSChannelBindingTLSServerEndPoint: return "TLSChannelBindingTLSServerEndPoint"
 		case TLSChannelBindingTLSExporter: return "TLSChannelBindingTLSExporter"
+		case TLSChannelBindingTLSServerEndPoint: return "TLSChannelBindingTLSServerEndPoint"
 		case TLSChannelBindingTLSUnique: return "TLSChannelBindingTLSUnique"
 		default: return fmt.Sprintf("TLSChannelBindingType(%d)", e)
 	}
@@ -2843,8 +2843,8 @@ func (e TLSDatabaseLookupFlags) InitGoValue(v *gobject.Value) {
 
 func (e TLSDatabaseLookupFlags) String() string {
 	switch e {
-		case TLSDatabaseLookupNone: return "TLSDatabaseLookupNone"
 		case TLSDatabaseLookupKeypair: return "TLSDatabaseLookupKeypair"
+		case TLSDatabaseLookupNone: return "TLSDatabaseLookupNone"
 		default: return fmt.Sprintf("TLSDatabaseLookupFlags(%d)", e)
 	}
 }
@@ -2917,15 +2917,15 @@ func (e TLSError) InitGoValue(v *gobject.Value) {
 
 func (e TLSError) String() string {
 	switch e {
-		case TLSErrorUnavailable: return "TLSErrorUnavailable"
-		case TLSErrorMisc: return "TLSErrorMisc"
-		case TLSErrorCertificateRequired: return "TLSErrorCertificateRequired"
-		case TLSErrorInappropriateFallback: return "TLSErrorInappropriateFallback"
-		case TLSErrorBadCertificatePassword: return "TLSErrorBadCertificatePassword"
 		case TLSErrorBadCertificate: return "TLSErrorBadCertificate"
-		case TLSErrorNotTLS: return "TLSErrorNotTLS"
-		case TLSErrorHandshake: return "TLSErrorHandshake"
+		case TLSErrorBadCertificatePassword: return "TLSErrorBadCertificatePassword"
+		case TLSErrorCertificateRequired: return "TLSErrorCertificateRequired"
 		case TLSErrorEOF: return "TLSErrorEOF"
+		case TLSErrorHandshake: return "TLSErrorHandshake"
+		case TLSErrorInappropriateFallback: return "TLSErrorInappropriateFallback"
+		case TLSErrorMisc: return "TLSErrorMisc"
+		case TLSErrorNotTLS: return "TLSErrorNotTLS"
+		case TLSErrorUnavailable: return "TLSErrorUnavailable"
 		default: return fmt.Sprintf("TLSError(%d)", e)
 	}
 }
@@ -2968,8 +2968,8 @@ func (e TLSInteractionResult) InitGoValue(v *gobject.Value) {
 func (e TLSInteractionResult) String() string {
 	switch e {
 		case TLSInteractionFailed: return "TLSInteractionFailed"
-		case TLSInteractionUnhandled: return "TLSInteractionUnhandled"
 		case TLSInteractionHandled: return "TLSInteractionHandled"
+		case TLSInteractionUnhandled: return "TLSInteractionUnhandled"
 		default: return fmt.Sprintf("TLSInteractionResult(%d)", e)
 	}
 }
@@ -3037,12 +3037,12 @@ func (e TLSProtocolVersion) String() string {
 	switch e {
 		case TLSProtocolVersionDTLS10: return "TLSProtocolVersionDTLS10"
 		case TLSProtocolVersionDTLS12: return "TLSProtocolVersionDTLS12"
-		case TLSProtocolVersionUnknown: return "TLSProtocolVersionUnknown"
 		case TLSProtocolVersionSSL30: return "TLSProtocolVersionSSL30"
 		case TLSProtocolVersionTLS10: return "TLSProtocolVersionTLS10"
 		case TLSProtocolVersionTLS11: return "TLSProtocolVersionTLS11"
 		case TLSProtocolVersionTLS12: return "TLSProtocolVersionTLS12"
 		case TLSProtocolVersionTLS13: return "TLSProtocolVersionTLS13"
+		case TLSProtocolVersionUnknown: return "TLSProtocolVersionUnknown"
 		default: return fmt.Sprintf("TLSProtocolVersion(%d)", e)
 	}
 }
@@ -3126,9 +3126,9 @@ func (e ZlibCompressorFormat) InitGoValue(v *gobject.Value) {
 
 func (e ZlibCompressorFormat) String() string {
 	switch e {
-		case ZlibCompressorFormatZlib: return "ZlibCompressorFormatZlib"
 		case ZlibCompressorFormatGzip: return "ZlibCompressorFormatGzip"
 		case ZlibCompressorFormatRaw: return "ZlibCompressorFormatRaw"
+		case ZlibCompressorFormatZlib: return "ZlibCompressorFormatZlib"
 		default: return fmt.Sprintf("ZlibCompressorFormat(%d)", e)
 	}
 }

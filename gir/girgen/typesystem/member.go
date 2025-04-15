@@ -1,7 +1,9 @@
 package typesystem
 
 import (
+	"cmp"
 	"fmt"
+	"slices"
 	"strconv"
 	"strings"
 	"unicode"
@@ -112,6 +114,11 @@ func (m Members) Uniques() []*Member {
 	for _, mem := range unique {
 		uniques = append(uniques, mem)
 	}
+
+	// need to sort because the map ordering above is not stable:
+	slices.SortFunc(uniques, func(i, j *Member) int {
+		return cmp.Compare(i.GoIndentifier(), j.GoIndentifier())
+	})
 
 	return uniques
 }

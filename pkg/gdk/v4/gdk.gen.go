@@ -4881,17 +4881,17 @@ func (e AxisUse) String() string {
 	switch e {
 		case AxisDeltaX: return "AxisDeltaX"
 		case AxisDeltaY: return "AxisDeltaY"
-		case AxisYtilt: return "AxisYtilt"
-		case AxisSlider: return "AxisSlider"
-		case AxisIgnore: return "AxisIgnore"
-		case AxisY: return "AxisY"
-		case AxisPressure: return "AxisPressure"
-		case AxisXtilt: return "AxisXtilt"
-		case AxisWheel: return "AxisWheel"
 		case AxisDistance: return "AxisDistance"
-		case AxisRotation: return "AxisRotation"
+		case AxisIgnore: return "AxisIgnore"
 		case AxisLast: return "AxisLast"
+		case AxisPressure: return "AxisPressure"
+		case AxisRotation: return "AxisRotation"
+		case AxisSlider: return "AxisSlider"
+		case AxisWheel: return "AxisWheel"
 		case AxisX: return "AxisX"
+		case AxisXtilt: return "AxisXtilt"
+		case AxisY: return "AxisY"
+		case AxisYtilt: return "AxisYtilt"
 		default: return fmt.Sprintf("AxisUse(%d)", e)
 	}
 }
@@ -4930,8 +4930,8 @@ func (e CicpRange) InitGoValue(v *gobject.Value) {
 
 func (e CicpRange) String() string {
 	switch e {
-		case CicpRangeNarrow: return "CicpRangeNarrow"
 		case CicpRangeFull: return "CicpRangeFull"
+		case CicpRangeNarrow: return "CicpRangeNarrow"
 		default: return fmt.Sprintf("CicpRange(%d)", e)
 	}
 }
@@ -4998,15 +4998,15 @@ func (e CrossingMode) InitGoValue(v *gobject.Value) {
 
 func (e CrossingMode) String() string {
 	switch e {
+		case CrossingDeviceSwitch: return "CrossingDeviceSwitch"
+		case CrossingGTKGrab: return "CrossingGTKGrab"
+		case CrossingGTKUngrab: return "CrossingGTKUngrab"
+		case CrossingGrab: return "CrossingGrab"
+		case CrossingNormal: return "CrossingNormal"
 		case CrossingStateChanged: return "CrossingStateChanged"
 		case CrossingTouchBegin: return "CrossingTouchBegin"
 		case CrossingTouchEnd: return "CrossingTouchEnd"
 		case CrossingUngrab: return "CrossingUngrab"
-		case CrossingDeviceSwitch: return "CrossingDeviceSwitch"
-		case CrossingNormal: return "CrossingNormal"
-		case CrossingGrab: return "CrossingGrab"
-		case CrossingGTKGrab: return "CrossingGTKGrab"
-		case CrossingGTKUngrab: return "CrossingGTKUngrab"
 		default: return fmt.Sprintf("CrossingMode(%d)", e)
 	}
 }
@@ -5044,9 +5044,9 @@ func (e DevicePadFeature) InitGoValue(v *gobject.Value) {
 
 func (e DevicePadFeature) String() string {
 	switch e {
-		case DevicePadFeatureStrip: return "DevicePadFeatureStrip"
 		case DevicePadFeatureButton: return "DevicePadFeatureButton"
 		case DevicePadFeatureRing: return "DevicePadFeatureRing"
+		case DevicePadFeatureStrip: return "DevicePadFeatureStrip"
 		default: return fmt.Sprintf("DevicePadFeature(%d)", e)
 	}
 }
@@ -5105,14 +5105,14 @@ func (e DeviceToolType) InitGoValue(v *gobject.Value) {
 
 func (e DeviceToolType) String() string {
 	switch e {
-		case DeviceToolTypePencil: return "DeviceToolTypePencil"
 		case DeviceToolTypeAirbrush: return "DeviceToolTypeAirbrush"
-		case DeviceToolTypeMouse: return "DeviceToolTypeMouse"
-		case DeviceToolTypeLens: return "DeviceToolTypeLens"
-		case DeviceToolTypeUnknown: return "DeviceToolTypeUnknown"
-		case DeviceToolTypePen: return "DeviceToolTypePen"
-		case DeviceToolTypeEraser: return "DeviceToolTypeEraser"
 		case DeviceToolTypeBrush: return "DeviceToolTypeBrush"
+		case DeviceToolTypeEraser: return "DeviceToolTypeEraser"
+		case DeviceToolTypeLens: return "DeviceToolTypeLens"
+		case DeviceToolTypeMouse: return "DeviceToolTypeMouse"
+		case DeviceToolTypePen: return "DeviceToolTypePen"
+		case DeviceToolTypePencil: return "DeviceToolTypePencil"
+		case DeviceToolTypeUnknown: return "DeviceToolTypeUnknown"
 		default: return fmt.Sprintf("DeviceToolType(%d)", e)
 	}
 }
@@ -5152,9 +5152,9 @@ func (e DmabufError) InitGoValue(v *gobject.Value) {
 
 func (e DmabufError) String() string {
 	switch e {
+		case DmabufErrorCreationFailed: return "DmabufErrorCreationFailed"
 		case DmabufErrorNotAvailable: return "DmabufErrorNotAvailable"
 		case DmabufErrorUnsupportedFormat: return "DmabufErrorUnsupportedFormat"
-		case DmabufErrorCreationFailed: return "DmabufErrorCreationFailed"
 		default: return fmt.Sprintf("DmabufError(%d)", e)
 	}
 }
@@ -5350,34 +5350,34 @@ func (e EventType) String() string {
 	switch e {
 		case ButtonPress: return "ButtonPress"
 		case ButtonRelease: return "ButtonRelease"
-		case EnterNotify: return "EnterNotify"
-		case ProximityOut: return "ProximityOut"
-		case DropStart: return "DropStart"
-		case Scroll: return "Scroll"
-		case TouchpadHold: return "TouchpadHold"
+		case Delete: return "Delete"
 		case DragEnter: return "DragEnter"
+		case DragLeave: return "DragLeave"
+		case DragMotion: return "DragMotion"
+		case DropStart: return "DropStart"
+		case EnterNotify: return "EnterNotify"
+		case EventLast: return "EventLast"
+		case FocusChange: return "FocusChange"
+		case GrabBroken: return "GrabBroken"
+		case KeyPress: return "KeyPress"
 		case KeyRelease: return "KeyRelease"
 		case LeaveNotify: return "LeaveNotify"
-		case GrabBroken: return "GrabBroken"
+		case MotionNotify: return "MotionNotify"
+		case PadButtonPress: return "PadButtonPress"
 		case PadButtonRelease: return "PadButtonRelease"
-		case TouchUpdate: return "TouchUpdate"
-		case TouchCancel: return "TouchCancel"
-		case TouchpadSwipe: return "TouchpadSwipe"
-		case TouchpadPinch: return "TouchpadPinch"
+		case PadGroupMode: return "PadGroupMode"
 		case PadRing: return "PadRing"
 		case PadStrip: return "PadStrip"
-		case DragLeave: return "DragLeave"
-		case TouchEnd: return "TouchEnd"
-		case KeyPress: return "KeyPress"
-		case TouchBegin: return "TouchBegin"
-		case PadButtonPress: return "PadButtonPress"
-		case DragMotion: return "DragMotion"
-		case Delete: return "Delete"
-		case PadGroupMode: return "PadGroupMode"
-		case MotionNotify: return "MotionNotify"
-		case FocusChange: return "FocusChange"
 		case ProximityIn: return "ProximityIn"
-		case EventLast: return "EventLast"
+		case ProximityOut: return "ProximityOut"
+		case Scroll: return "Scroll"
+		case TouchBegin: return "TouchBegin"
+		case TouchCancel: return "TouchCancel"
+		case TouchEnd: return "TouchEnd"
+		case TouchUpdate: return "TouchUpdate"
+		case TouchpadHold: return "TouchpadHold"
+		case TouchpadPinch: return "TouchpadPinch"
+		case TouchpadSwipe: return "TouchpadSwipe"
 		default: return fmt.Sprintf("EventType(%d)", e)
 	}
 }
@@ -5411,8 +5411,8 @@ func (e FullscreenMode) InitGoValue(v *gobject.Value) {
 
 func (e FullscreenMode) String() string {
 	switch e {
-		case FullscreenOnCurrentMonitor: return "FullscreenOnCurrentMonitor"
 		case FullscreenOnAllMonitors: return "FullscreenOnAllMonitors"
+		case FullscreenOnCurrentMonitor: return "FullscreenOnCurrentMonitor"
 		default: return fmt.Sprintf("FullscreenMode(%d)", e)
 	}
 }
@@ -5458,11 +5458,11 @@ func (e GLError) InitGoValue(v *gobject.Value) {
 
 func (e GLError) String() string {
 	switch e {
+		case GLErrorCompilationFailed: return "GLErrorCompilationFailed"
+		case GLErrorLinkFailed: return "GLErrorLinkFailed"
 		case GLErrorNotAvailable: return "GLErrorNotAvailable"
 		case GLErrorUnsupportedFormat: return "GLErrorUnsupportedFormat"
 		case GLErrorUnsupportedProfile: return "GLErrorUnsupportedProfile"
-		case GLErrorCompilationFailed: return "GLErrorCompilationFailed"
-		case GLErrorLinkFailed: return "GLErrorLinkFailed"
 		default: return fmt.Sprintf("GLError(%d)", e)
 	}
 }
@@ -5529,16 +5529,16 @@ func (e Gravity) InitGoValue(v *gobject.Value) {
 
 func (e Gravity) String() string {
 	switch e {
-		case GravityNorthWest: return "GravityNorthWest"
-		case GravityNorth: return "GravityNorth"
-		case GravityNorthEast: return "GravityNorthEast"
-		case GravityWest: return "GravityWest"
-		case GravitySouthWest: return "GravitySouthWest"
 		case GravityCenter: return "GravityCenter"
 		case GravityEast: return "GravityEast"
+		case GravityNorth: return "GravityNorth"
+		case GravityNorthEast: return "GravityNorthEast"
+		case GravityNorthWest: return "GravityNorthWest"
 		case GravitySouth: return "GravitySouth"
 		case GravitySouthEast: return "GravitySouthEast"
+		case GravitySouthWest: return "GravitySouthWest"
 		case GravityStatic: return "GravityStatic"
+		case GravityWest: return "GravityWest"
 		default: return fmt.Sprintf("Gravity(%d)", e)
 	}
 }
@@ -5596,13 +5596,13 @@ func (e InputSource) InitGoValue(v *gobject.Value) {
 
 func (e InputSource) String() string {
 	switch e {
+		case SourceKeyboard: return "SourceKeyboard"
 		case SourceMouse: return "SourceMouse"
 		case SourcePen: return "SourcePen"
-		case SourceKeyboard: return "SourceKeyboard"
-		case SourceTouchscreen: return "SourceTouchscreen"
-		case SourceTouchpad: return "SourceTouchpad"
-		case SourceTrackpoint: return "SourceTrackpoint"
 		case SourceTabletPad: return "SourceTabletPad"
+		case SourceTouchpad: return "SourceTouchpad"
+		case SourceTouchscreen: return "SourceTouchscreen"
+		case SourceTrackpoint: return "SourceTrackpoint"
 		default: return fmt.Sprintf("InputSource(%d)", e)
 	}
 }
@@ -5643,9 +5643,9 @@ func (e KeyMatch) InitGoValue(v *gobject.Value) {
 
 func (e KeyMatch) String() string {
 	switch e {
+		case KeyMatchExact: return "KeyMatchExact"
 		case KeyMatchNone: return "KeyMatchNone"
 		case KeyMatchPartial: return "KeyMatchPartial"
-		case KeyMatchExact: return "KeyMatchExact"
 		default: return fmt.Sprintf("KeyMatch(%d)", e)
 	}
 }
@@ -5827,40 +5827,40 @@ func (e MemoryFormat) InitGoValue(v *gobject.Value) {
 
 func (e MemoryFormat) String() string {
 	switch e {
-		case MemoryR16G16B16A16FloatPremultiplied: return "MemoryR16G16B16A16FloatPremultiplied"
-		case MemoryR32G32B32Float: return "MemoryR32G32B32Float"
+		case MemorYX8B8G8R8: return "MemorYX8B8G8R8"
+		case MemorYX8R8G8B8: return "MemorYX8R8G8B8"
 		case MemoryA16: return "MemoryA16"
 		case MemoryA16Float: return "MemoryA16Float"
+		case MemoryA32Float: return "MemoryA32Float"
 		case MemoryA8: return "MemoryA8"
+		case MemoryA8B8G8R8: return "MemoryA8B8G8R8"
+		case MemoryA8B8G8R8Premultiplied: return "MemoryA8B8G8R8Premultiplied"
+		case MemoryA8R8G8B8: return "MemoryA8R8G8B8"
+		case MemoryA8R8G8B8Premultiplied: return "MemoryA8R8G8B8Premultiplied"
+		case MemoryB8G8R8: return "MemoryB8G8R8"
+		case MemoryB8G8R8A8: return "MemoryB8G8R8A8"
 		case MemoryB8G8R8A8Premultiplied: return "MemoryB8G8R8A8Premultiplied"
+		case MemoryB8G8R8X8: return "MemoryB8G8R8X8"
+		case MemoryG16: return "MemoryG16"
+		case MemoryG16A16: return "MemoryG16A16"
+		case MemoryG16A16Premultiplied: return "MemoryG16A16Premultiplied"
+		case MemoryG8: return "MemoryG8"
+		case MemoryG8A8: return "MemoryG8A8"
+		case MemoryG8A8Premultiplied: return "MemoryG8A8Premultiplied"
+		case MemoryNFormats: return "MemoryNFormats"
+		case MemoryR16G16B16: return "MemoryR16G16B16"
 		case MemoryR16G16B16A16: return "MemoryR16G16B16A16"
 		case MemoryR16G16B16A16Float: return "MemoryR16G16B16A16Float"
-		case MemoryR8G8B8A8Premultiplied: return "MemoryR8G8B8A8Premultiplied"
-		case MemoryA8R8G8B8: return "MemoryA8R8G8B8"
-		case MemoryA8B8G8R8: return "MemoryA8B8G8R8"
-		case MemoryR16G16B16: return "MemoryR16G16B16"
-		case MemoryG8A8: return "MemoryG8A8"
-		case MemoryR8G8B8X8: return "MemoryR8G8B8X8"
-		case MemorYX8B8G8R8: return "MemorYX8B8G8R8"
-		case MemoryA32Float: return "MemoryA32Float"
-		case MemoryA8B8G8R8Premultiplied: return "MemoryA8B8G8R8Premultiplied"
-		case MemoryR8G8B8: return "MemoryR8G8B8"
-		case MemoryG16A16: return "MemoryG16A16"
-		case MemoryNFormats: return "MemoryNFormats"
-		case MemoryR8G8B8A8: return "MemoryR8G8B8A8"
+		case MemoryR16G16B16A16FloatPremultiplied: return "MemoryR16G16B16A16FloatPremultiplied"
 		case MemoryR16G16B16A16Premultiplied: return "MemoryR16G16B16A16Premultiplied"
-		case MemoryR32G32B32A32Float: return "MemoryR32G32B32A32Float"
-		case MemoryG8: return "MemoryG8"
-		case MemoryG16: return "MemoryG16"
-		case MemoryB8G8R8X8: return "MemoryB8G8R8X8"
-		case MemorYX8R8G8B8: return "MemorYX8R8G8B8"
-		case MemoryA8R8G8B8Premultiplied: return "MemoryA8R8G8B8Premultiplied"
-		case MemoryR32G32B32A32FloatPremultiplied: return "MemoryR32G32B32A32FloatPremultiplied"
-		case MemoryG8A8Premultiplied: return "MemoryG8A8Premultiplied"
-		case MemoryB8G8R8A8: return "MemoryB8G8R8A8"
-		case MemoryB8G8R8: return "MemoryB8G8R8"
 		case MemoryR16G16B16Float: return "MemoryR16G16B16Float"
-		case MemoryG16A16Premultiplied: return "MemoryG16A16Premultiplied"
+		case MemoryR32G32B32A32Float: return "MemoryR32G32B32A32Float"
+		case MemoryR32G32B32A32FloatPremultiplied: return "MemoryR32G32B32A32FloatPremultiplied"
+		case MemoryR32G32B32Float: return "MemoryR32G32B32Float"
+		case MemoryR8G8B8: return "MemoryR8G8B8"
+		case MemoryR8G8B8A8: return "MemoryR8G8B8A8"
+		case MemoryR8G8B8A8Premultiplied: return "MemoryR8G8B8A8Premultiplied"
+		case MemoryR8G8B8X8: return "MemoryR8G8B8X8"
 		default: return fmt.Sprintf("MemoryFormat(%d)", e)
 	}
 }
@@ -5920,12 +5920,12 @@ func (e NotifyType) InitGoValue(v *gobject.Value) {
 
 func (e NotifyType) String() string {
 	switch e {
-		case NotifyNonlinearVirtual: return "NotifyNonlinearVirtual"
-		case NotifyUnknown: return "NotifyUnknown"
 		case NotifyAncestor: return "NotifyAncestor"
-		case NotifyVirtual: return "NotifyVirtual"
 		case NotifyInferior: return "NotifyInferior"
 		case NotifyNonlinear: return "NotifyNonlinear"
+		case NotifyNonlinearVirtual: return "NotifyNonlinearVirtual"
+		case NotifyUnknown: return "NotifyUnknown"
+		case NotifyVirtual: return "NotifyVirtual"
 		default: return fmt.Sprintf("NotifyType(%d)", e)
 	}
 }
@@ -5972,11 +5972,11 @@ func (e ScrollDirection) InitGoValue(v *gobject.Value) {
 
 func (e ScrollDirection) String() string {
 	switch e {
-		case ScrollSmooth: return "ScrollSmooth"
-		case ScrollUp: return "ScrollUp"
 		case ScrollDown: return "ScrollDown"
 		case ScrollLeft: return "ScrollLeft"
 		case ScrollRight: return "ScrollRight"
+		case ScrollSmooth: return "ScrollSmooth"
+		case ScrollUp: return "ScrollUp"
 		default: return fmt.Sprintf("ScrollDirection(%d)", e)
 	}
 }
@@ -6026,8 +6026,8 @@ func (e ScrollUnit) InitGoValue(v *gobject.Value) {
 
 func (e ScrollUnit) String() string {
 	switch e {
-		case ScrollUnitWheel: return "ScrollUnitWheel"
 		case ScrollUnitSurface: return "ScrollUnitSurface"
+		case ScrollUnitWheel: return "ScrollUnitWheel"
 		default: return fmt.Sprintf("ScrollUnit(%d)", e)
 	}
 }
@@ -6078,12 +6078,12 @@ func (e SubpixelLayout) InitGoValue(v *gobject.Value) {
 
 func (e SubpixelLayout) String() string {
 	switch e {
-		case SubpixelLayoutVerticalRGB: return "SubpixelLayoutVerticalRGB"
-		case SubpixelLayoutVerticalBGR: return "SubpixelLayoutVerticalBGR"
-		case SubpixelLayoutUnknown: return "SubpixelLayoutUnknown"
-		case SubpixelLayoutNone: return "SubpixelLayoutNone"
-		case SubpixelLayoutHorizontalRGB: return "SubpixelLayoutHorizontalRGB"
 		case SubpixelLayoutHorizontalBGR: return "SubpixelLayoutHorizontalBGR"
+		case SubpixelLayoutHorizontalRGB: return "SubpixelLayoutHorizontalRGB"
+		case SubpixelLayoutNone: return "SubpixelLayoutNone"
+		case SubpixelLayoutUnknown: return "SubpixelLayoutUnknown"
+		case SubpixelLayoutVerticalBGR: return "SubpixelLayoutVerticalBGR"
+		case SubpixelLayoutVerticalRGB: return "SubpixelLayoutVerticalRGB"
 		default: return fmt.Sprintf("SubpixelLayout(%d)", e)
 	}
 }
@@ -6141,14 +6141,14 @@ func (e SurfaceEdge) InitGoValue(v *gobject.Value) {
 
 func (e SurfaceEdge) String() string {
 	switch e {
-		case SurfaceEdgeSouth: return "SurfaceEdgeSouth"
-		case SurfaceEdgeSouthEast: return "SurfaceEdgeSouthEast"
-		case SurfaceEdgeNorthWest: return "SurfaceEdgeNorthWest"
+		case SurfaceEdgeEast: return "SurfaceEdgeEast"
 		case SurfaceEdgeNorth: return "SurfaceEdgeNorth"
 		case SurfaceEdgeNorthEast: return "SurfaceEdgeNorthEast"
-		case SurfaceEdgeWest: return "SurfaceEdgeWest"
-		case SurfaceEdgeEast: return "SurfaceEdgeEast"
+		case SurfaceEdgeNorthWest: return "SurfaceEdgeNorthWest"
+		case SurfaceEdgeSouth: return "SurfaceEdgeSouth"
+		case SurfaceEdgeSouthEast: return "SurfaceEdgeSouthEast"
 		case SurfaceEdgeSouthWest: return "SurfaceEdgeSouthWest"
+		case SurfaceEdgeWest: return "SurfaceEdgeWest"
 		default: return fmt.Sprintf("SurfaceEdge(%d)", e)
 	}
 }
@@ -6191,8 +6191,8 @@ func (e TextureError) InitGoValue(v *gobject.Value) {
 
 func (e TextureError) String() string {
 	switch e {
-		case TextureErrorTooLarge: return "TextureErrorTooLarge"
 		case TextureErrorCorruptImage: return "TextureErrorCorruptImage"
+		case TextureErrorTooLarge: return "TextureErrorTooLarge"
 		case TextureErrorUnsupportedContent: return "TextureErrorUnsupportedContent"
 		case TextureErrorUnsupportedFormat: return "TextureErrorUnsupportedFormat"
 		default: return fmt.Sprintf("TextureError(%d)", e)
@@ -6234,8 +6234,8 @@ func (e TitlebarGesture) InitGoValue(v *gobject.Value) {
 func (e TitlebarGesture) String() string {
 	switch e {
 		case TitlebarGestureDoubleClick: return "TitlebarGestureDoubleClick"
-		case TitlebarGestureRightClick: return "TitlebarGestureRightClick"
 		case TitlebarGestureMiddleClick: return "TitlebarGestureMiddleClick"
+		case TitlebarGestureRightClick: return "TitlebarGestureRightClick"
 		default: return fmt.Sprintf("TitlebarGesture(%d)", e)
 	}
 }
@@ -6297,9 +6297,9 @@ func (e TouchpadGesturePhase) InitGoValue(v *gobject.Value) {
 func (e TouchpadGesturePhase) String() string {
 	switch e {
 		case TouchpadGesturePhaseBegin: return "TouchpadGesturePhaseBegin"
-		case TouchpadGesturePhaseUpdate: return "TouchpadGesturePhaseUpdate"
-		case TouchpadGesturePhaseEnd: return "TouchpadGesturePhaseEnd"
 		case TouchpadGesturePhaseCancel: return "TouchpadGesturePhaseCancel"
+		case TouchpadGesturePhaseEnd: return "TouchpadGesturePhaseEnd"
+		case TouchpadGesturePhaseUpdate: return "TouchpadGesturePhaseUpdate"
 		default: return fmt.Sprintf("TouchpadGesturePhase(%d)", e)
 	}
 }

@@ -157,10 +157,10 @@ func (e InterpType) InitGoValue(v *gobject.Value) {
 
 func (e InterpType) String() string {
 	switch e {
-		case InterpTiles: return "InterpTiles"
 		case InterpBilinear: return "InterpBilinear"
 		case InterpHyper: return "InterpHyper"
 		case InterpNearest: return "InterpNearest"
+		case InterpTiles: return "InterpTiles"
 		default: return fmt.Sprintf("InterpType(%d)", e)
 	}
 }
@@ -272,13 +272,13 @@ func (e PixbufError) InitGoValue(v *gobject.Value) {
 
 func (e PixbufError) String() string {
 	switch e {
-		case PixbufErrorUnknownType: return "PixbufErrorUnknownType"
-		case PixbufErrorUnsupportedOperation: return "PixbufErrorUnsupportedOperation"
+		case PixbufErrorBadOption: return "PixbufErrorBadOption"
+		case PixbufErrorCorruptImage: return "PixbufErrorCorruptImage"
 		case PixbufErrorFailed: return "PixbufErrorFailed"
 		case PixbufErrorIncompleteAnimation: return "PixbufErrorIncompleteAnimation"
-		case PixbufErrorCorruptImage: return "PixbufErrorCorruptImage"
 		case PixbufErrorInsufficientMemory: return "PixbufErrorInsufficientMemory"
-		case PixbufErrorBadOption: return "PixbufErrorBadOption"
+		case PixbufErrorUnknownType: return "PixbufErrorUnknownType"
+		case PixbufErrorUnsupportedOperation: return "PixbufErrorUnsupportedOperation"
 		default: return fmt.Sprintf("PixbufError(%d)", e)
 	}
 }
@@ -323,8 +323,8 @@ func (e PixbufRotation) InitGoValue(v *gobject.Value) {
 func (e PixbufRotation) String() string {
 	switch e {
 		case PixbufRotateClockwise: return "PixbufRotateClockwise"
-		case PixbufRotateNone: return "PixbufRotateNone"
 		case PixbufRotateCounterclockwise: return "PixbufRotateCounterclockwise"
+		case PixbufRotateNone: return "PixbufRotateNone"
 		case PixbufRotateUpsidedown: return "PixbufRotateUpsidedown"
 		default: return fmt.Sprintf("PixbufRotation(%d)", e)
 	}

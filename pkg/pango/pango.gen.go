@@ -248,8 +248,8 @@ func (e Alignment) InitGoValue(v *gobject.Value) {
 
 func (e Alignment) String() string {
 	switch e {
-		case AlignLeft: return "AlignLeft"
 		case AlignCenter: return "AlignCenter"
+		case AlignLeft: return "AlignLeft"
 		case AlignRight: return "AlignRight"
 		default: return fmt.Sprintf("Alignment(%d)", e)
 	}
@@ -431,44 +431,44 @@ func (e AttrType) InitGoValue(v *gobject.Value) {
 
 func (e AttrType) String() string {
 	switch e {
-		case AttrTypeUnderline: return "AttrTypeUnderline"
-		case AttrTypeRise: return "AttrTypeRise"
-		case AttrTypeFallback: return "AttrTypeFallback"
-		case AttrTypeSize: return "AttrTypeSize"
+		case AttrTypeAbsoluteLineHeight: return "AttrTypeAbsoluteLineHeight"
+		case AttrTypeAbsoluteSize: return "AttrTypeAbsoluteSize"
+		case AttrTypeAllowBreaks: return "AttrTypeAllowBreaks"
 		case AttrTypeBackground: return "AttrTypeBackground"
-		case AttrTypeStrikethrough: return "AttrTypeStrikethrough"
-		case AttrTypeScale: return "AttrTypeScale"
-		case AttrTypeLetterSpacing: return "AttrTypeLetterSpacing"
-		case AttrTypeGravityHint: return "AttrTypeGravityHint"
-		case AttrTypeWord: return "AttrTypeWord"
+		case AttrTypeBackgroundAlpha: return "AttrTypeBackgroundAlpha"
+		case AttrTypeBaselineShift: return "AttrTypeBaselineShift"
+		case AttrTypeFallback: return "AttrTypeFallback"
 		case AttrTypeFamily: return "AttrTypeFamily"
-		case AttrTypeStyle: return "AttrTypeStyle"
+		case AttrTypeFontDesc: return "AttrTypeFontDesc"
+		case AttrTypeFontFeatures: return "AttrTypeFontFeatures"
+		case AttrTypeFontScale: return "AttrTypeFontScale"
 		case AttrTypeForeground: return "AttrTypeForeground"
-		case AttrTypeStrikethroughColor: return "AttrTypeStrikethroughColor"
-		case AttrTypeInsertHyphens: return "AttrTypeInsertHyphens"
-		case AttrTypeWeight: return "AttrTypeWeight"
-		case AttrTypeShape: return "AttrTypeShape"
-		case AttrTypeGravity: return "AttrTypeGravity"
 		case AttrTypeForegroundAlpha: return "AttrTypeForegroundAlpha"
+		case AttrTypeGravity: return "AttrTypeGravity"
+		case AttrTypeGravityHint: return "AttrTypeGravityHint"
+		case AttrTypeInsertHyphens: return "AttrTypeInsertHyphens"
 		case AttrTypeInvalid: return "AttrTypeInvalid"
 		case AttrTypeLanguage: return "AttrTypeLanguage"
-		case AttrTypeStretch: return "AttrTypeStretch"
-		case AttrTypeUnderlineColor: return "AttrTypeUnderlineColor"
-		case AttrTypeFontFeatures: return "AttrTypeFontFeatures"
-		case AttrTypeTextTransform: return "AttrTypeTextTransform"
-		case AttrTypeBackgroundAlpha: return "AttrTypeBackgroundAlpha"
-		case AttrTypeShow: return "AttrTypeShow"
-		case AttrTypeAbsoluteLineHeight: return "AttrTypeAbsoluteLineHeight"
-		case AttrTypeFontScale: return "AttrTypeFontScale"
-		case AttrTypeVariant: return "AttrTypeVariant"
-		case AttrTypeFontDesc: return "AttrTypeFontDesc"
-		case AttrTypeAbsoluteSize: return "AttrTypeAbsoluteSize"
-		case AttrTypeOverline: return "AttrTypeOverline"
-		case AttrTypeSentence: return "AttrTypeSentence"
-		case AttrTypeAllowBreaks: return "AttrTypeAllowBreaks"
-		case AttrTypeOverlineColor: return "AttrTypeOverlineColor"
+		case AttrTypeLetterSpacing: return "AttrTypeLetterSpacing"
 		case AttrTypeLineHeight: return "AttrTypeLineHeight"
-		case AttrTypeBaselineShift: return "AttrTypeBaselineShift"
+		case AttrTypeOverline: return "AttrTypeOverline"
+		case AttrTypeOverlineColor: return "AttrTypeOverlineColor"
+		case AttrTypeRise: return "AttrTypeRise"
+		case AttrTypeScale: return "AttrTypeScale"
+		case AttrTypeSentence: return "AttrTypeSentence"
+		case AttrTypeShape: return "AttrTypeShape"
+		case AttrTypeShow: return "AttrTypeShow"
+		case AttrTypeSize: return "AttrTypeSize"
+		case AttrTypeStretch: return "AttrTypeStretch"
+		case AttrTypeStrikethrough: return "AttrTypeStrikethrough"
+		case AttrTypeStrikethroughColor: return "AttrTypeStrikethroughColor"
+		case AttrTypeStyle: return "AttrTypeStyle"
+		case AttrTypeTextTransform: return "AttrTypeTextTransform"
+		case AttrTypeUnderline: return "AttrTypeUnderline"
+		case AttrTypeUnderlineColor: return "AttrTypeUnderlineColor"
+		case AttrTypeVariant: return "AttrTypeVariant"
+		case AttrTypeWeight: return "AttrTypeWeight"
+		case AttrTypeWord: return "AttrTypeWord"
 		default: return fmt.Sprintf("AttrType(%d)", e)
 	}
 }
@@ -509,8 +509,8 @@ func (e BaselineShift) InitGoValue(v *gobject.Value) {
 func (e BaselineShift) String() string {
 	switch e {
 		case BaselineShiftNone: return "BaselineShiftNone"
-		case BaselineShiftSuperscript: return "BaselineShiftSuperscript"
 		case BaselineShiftSubscript: return "BaselineShiftSubscript"
+		case BaselineShiftSuperscript: return "BaselineShiftSuperscript"
 		default: return fmt.Sprintf("BaselineShift(%d)", e)
 	}
 }
@@ -634,29 +634,29 @@ func (e BidiType) InitGoValue(v *gobject.Value) {
 
 func (e BidiType) String() string {
 	switch e {
-		case BidiTypePDF: return "BidiTypePDF"
-		case BidiTypeEt: return "BidiTypeEt"
-		case BidiTypeBn: return "BidiTypeBn"
-		case BidiTypeWs: return "BidiTypeWs"
-		case BidiTypeRli: return "BidiTypeRli"
-		case BidiTypePdi: return "BidiTypePdi"
-		case BidiTypeLro: return "BidiTypeLro"
-		case BidiTypeEn: return "BidiTypeEn"
-		case BidiTypeAn: return "BidiTypeAn"
-		case BidiTypeNsm: return "BidiTypeNsm"
-		case BidiTypeS: return "BidiTypeS"
-		case BidiTypeLri: return "BidiTypeLri"
-		case BidiTypeFsi: return "BidiTypeFsi"
 		case BidiTypeAl: return "BidiTypeAl"
-		case BidiTypeRlo: return "BidiTypeRlo"
+		case BidiTypeAn: return "BidiTypeAn"
 		case BidiTypeB: return "BidiTypeB"
-		case BidiTypeOn: return "BidiTypeOn"
+		case BidiTypeBn: return "BidiTypeBn"
+		case BidiTypeCs: return "BidiTypeCs"
+		case BidiTypeES: return "BidiTypeES"
+		case BidiTypeEn: return "BidiTypeEn"
+		case BidiTypeEt: return "BidiTypeEt"
+		case BidiTypeFsi: return "BidiTypeFsi"
 		case BidiTypeL: return "BidiTypeL"
 		case BidiTypeLre: return "BidiTypeLre"
-		case BidiTypeES: return "BidiTypeES"
-		case BidiTypeCs: return "BidiTypeCs"
+		case BidiTypeLri: return "BidiTypeLri"
+		case BidiTypeLro: return "BidiTypeLro"
+		case BidiTypeNsm: return "BidiTypeNsm"
+		case BidiTypeOn: return "BidiTypeOn"
+		case BidiTypePDF: return "BidiTypePDF"
+		case BidiTypePdi: return "BidiTypePdi"
 		case BidiTypeR: return "BidiTypeR"
 		case BidiTypeRLE: return "BidiTypeRLE"
+		case BidiTypeRli: return "BidiTypeRli"
+		case BidiTypeRlo: return "BidiTypeRlo"
+		case BidiTypeS: return "BidiTypeS"
+		case BidiTypeWs: return "BidiTypeWs"
 		default: return fmt.Sprintf("BidiType(%d)", e)
 	}
 }
@@ -710,10 +710,10 @@ func (e CoverageLevel) InitGoValue(v *gobject.Value) {
 
 func (e CoverageLevel) String() string {
 	switch e {
-		case CoverageNone: return "CoverageNone"
-		case CoverageFallback: return "CoverageFallback"
 		case CoverageApproximate: return "CoverageApproximate"
 		case CoverageExact: return "CoverageExact"
+		case CoverageFallback: return "CoverageFallback"
+		case CoverageNone: return "CoverageNone"
 		default: return fmt.Sprintf("CoverageLevel(%d)", e)
 	}
 }
@@ -786,13 +786,13 @@ func (e Direction) InitGoValue(v *gobject.Value) {
 
 func (e Direction) String() string {
 	switch e {
+		case DirectionLTR: return "DirectionLTR"
+		case DirectionNeutral: return "DirectionNeutral"
 		case DirectionRTL: return "DirectionRTL"
 		case DirectionTtbLTR: return "DirectionTtbLTR"
 		case DirectionTtbRTL: return "DirectionTtbRTL"
 		case DirectionWeakLTR: return "DirectionWeakLTR"
 		case DirectionWeakRTL: return "DirectionWeakRTL"
-		case DirectionNeutral: return "DirectionNeutral"
-		case DirectionLTR: return "DirectionLTR"
 		default: return fmt.Sprintf("Direction(%d)", e)
 	}
 }
@@ -840,9 +840,9 @@ func (e EllipsizeMode) InitGoValue(v *gobject.Value) {
 func (e EllipsizeMode) String() string {
 	switch e {
 		case EllipsizeEnd: return "EllipsizeEnd"
+		case EllipsizeMiddle: return "EllipsizeMiddle"
 		case EllipsizeNone: return "EllipsizeNone"
 		case EllipsizeStart: return "EllipsizeStart"
-		case EllipsizeMiddle: return "EllipsizeMiddle"
 		default: return fmt.Sprintf("EllipsizeMode(%d)", e)
 	}
 }
@@ -886,9 +886,9 @@ func (e FontScale) InitGoValue(v *gobject.Value) {
 func (e FontScale) String() string {
 	switch e {
 		case FontScaleNone: return "FontScaleNone"
-		case FontScaleSuperscript: return "FontScaleSuperscript"
-		case FontScaleSubscript: return "FontScaleSubscript"
 		case FontScaleSmallCaps: return "FontScaleSmallCaps"
+		case FontScaleSubscript: return "FontScaleSubscript"
+		case FontScaleSuperscript: return "FontScaleSuperscript"
 		default: return fmt.Sprintf("FontScale(%d)", e)
 	}
 }
@@ -946,11 +946,11 @@ func (e Gravity) InitGoValue(v *gobject.Value) {
 
 func (e Gravity) String() string {
 	switch e {
-		case GravitySouth: return "GravitySouth"
+		case GravityAuto: return "GravityAuto"
 		case GravityEast: return "GravityEast"
 		case GravityNorth: return "GravityNorth"
+		case GravitySouth: return "GravitySouth"
 		case GravityWest: return "GravityWest"
-		case GravityAuto: return "GravityAuto"
 		default: return fmt.Sprintf("Gravity(%d)", e)
 	}
 }
@@ -998,9 +998,9 @@ func (e GravityHint) InitGoValue(v *gobject.Value) {
 
 func (e GravityHint) String() string {
 	switch e {
+		case GravityHintLine: return "GravityHintLine"
 		case GravityHintNatural: return "GravityHintNatural"
 		case GravityHintStrong: return "GravityHintStrong"
-		case GravityHintLine: return "GravityHintLine"
 		default: return fmt.Sprintf("GravityHint(%d)", e)
 	}
 }
@@ -1126,11 +1126,11 @@ func (e RenderPart) InitGoValue(v *gobject.Value) {
 
 func (e RenderPart) String() string {
 	switch e {
-		case RenderPartUnderline: return "RenderPartUnderline"
-		case RenderPartStrikethrough: return "RenderPartStrikethrough"
-		case RenderPartOverline: return "RenderPartOverline"
-		case RenderPartForeground: return "RenderPartForeground"
 		case RenderPartBackground: return "RenderPartBackground"
+		case RenderPartForeground: return "RenderPartForeground"
+		case RenderPartOverline: return "RenderPartOverline"
+		case RenderPartStrikethrough: return "RenderPartStrikethrough"
+		case RenderPartUnderline: return "RenderPartUnderline"
 		default: return fmt.Sprintf("RenderPart(%d)", e)
 	}
 }
@@ -1638,124 +1638,124 @@ func (e Script) InitGoValue(v *gobject.Value) {
 
 func (e Script) String() string {
 	switch e {
-		case ScriptLao: return "ScriptLao"
-		case ScriptYi: return "ScriptYi"
-		case ScriptPauCinHau: return "ScriptPauCinHau"
-		case ScriptMeroiticCursive: return "ScriptMeroiticCursive"
-		case ScriptGrantha: return "ScriptGrantha"
-		case ScriptOldNorthArabian: return "ScriptOldNorthArabian"
-		case ScriptOldHungarian: return "ScriptOldHungarian"
-		case ScriptBengali: return "ScriptBengali"
-		case ScriptTelugu: return "ScriptTelugu"
-		case ScriptLimbu: return "ScriptLimbu"
-		case ScriptOsmanya: return "ScriptOsmanya"
-		case ScriptBalinese: return "ScriptBalinese"
-		case ScriptPhagsPa: return "ScriptPhagsPa"
-		case ScriptKhudawadi: return "ScriptKhudawadi"
-		case ScriptMultani: return "ScriptMultani"
-		case ScriptArmenian: return "ScriptArmenian"
-		case ScriptDevanagari: return "ScriptDevanagari"
-		case ScriptGothic: return "ScriptGothic"
-		case ScriptGreek: return "ScriptGreek"
-		case ScriptOldPersian: return "ScriptOldPersian"
-		case ScriptLepcha: return "ScriptLepcha"
-		case ScriptLycian: return "ScriptLycian"
-		case ScriptElbasan: return "ScriptElbasan"
-		case ScriptCherokee: return "ScriptCherokee"
-		case ScriptTagbanwa: return "ScriptTagbanwa"
-		case ScriptRejang: return "ScriptRejang"
-		case ScriptCaucasianAlbanian: return "ScriptCaucasianAlbanian"
-		case ScriptManichaean: return "ScriptManichaean"
-		case ScriptGeorgian: return "ScriptGeorgian"
-		case ScriptTamil: return "ScriptTamil"
-		case ScriptNewTaiLue: return "ScriptNewTaiLue"
-		case ScriptNko: return "ScriptNko"
-		case ScriptSundanese: return "ScriptSundanese"
-		case ScriptEthiopic: return "ScriptEthiopic"
-		case ScriptBraille: return "ScriptBraille"
-		case ScriptOldPermic: return "ScriptOldPermic"
-		case ScriptPahawhHmong: return "ScriptPahawhHmong"
-		case ScriptOriya: return "ScriptOriya"
-		case ScriptSinhala: return "ScriptSinhala"
-		case ScriptBuhid: return "ScriptBuhid"
-		case ScriptCypriot: return "ScriptCypriot"
-		case ScriptBatak: return "ScriptBatak"
 		case ScriptAhom: return "ScriptAhom"
-		case ScriptInvalidCode: return "ScriptInvalidCode"
-		case ScriptArabic: return "ScriptArabic"
-		case ScriptGujarati: return "ScriptGujarati"
-		case ScriptRunic: return "ScriptRunic"
-		case ScriptUnknown: return "ScriptUnknown"
-		case ScriptWarangCiti: return "ScriptWarangCiti"
-		case ScriptKhmer: return "ScriptKhmer"
-		case ScriptChakma: return "ScriptChakma"
-		case ScriptBopomofo: return "ScriptBopomofo"
-		case ScriptUgaritic: return "ScriptUgaritic"
-		case ScriptHan: return "ScriptHan"
-		case ScriptLatin: return "ScriptLatin"
-		case ScriptOgham: return "ScriptOgham"
-		case ScriptKannada: return "ScriptKannada"
-		case ScriptMendeKikakui: return "ScriptMendeKikakui"
-		case ScriptSyriac: return "ScriptSyriac"
-		case ScriptHangul: return "ScriptHangul"
-		case ScriptHiragana: return "ScriptHiragana"
-		case ScriptShavian: return "ScriptShavian"
-		case ScriptLinearB: return "ScriptLinearB"
 		case ScriptAnatolianHieroglyphs: return "ScriptAnatolianHieroglyphs"
-		case ScriptMeroiticHieroglyphs: return "ScriptMeroiticHieroglyphs"
-		case ScriptTakri: return "ScriptTakri"
-		case ScriptCommon: return "ScriptCommon"
-		case ScriptDeseret: return "ScriptDeseret"
-		case ScriptMongolian: return "ScriptMongolian"
-		case ScriptTibetan: return "ScriptTibetan"
-		case ScriptKharoshthi: return "ScriptKharoshthi"
-		case ScriptKhojki: return "ScriptKhojki"
-		case ScriptGurmukhi: return "ScriptGurmukhi"
-		case ScriptLydian: return "ScriptLydian"
-		case ScriptSharada: return "ScriptSharada"
-		case ScriptCarian: return "ScriptCarian"
-		case ScriptSiddham: return "ScriptSiddham"
-		case ScriptThaana: return "ScriptThaana"
-		case ScriptThai: return "ScriptThai"
-		case ScriptTifinagh: return "ScriptTifinagh"
-		case ScriptPsalterPahlavi: return "ScriptPsalterPahlavi"
-		case ScriptKayahLi: return "ScriptKayahLi"
-		case ScriptSaurashtra: return "ScriptSaurashtra"
-		case ScriptHebrew: return "ScriptHebrew"
-		case ScriptOlChiki: return "ScriptOlChiki"
-		case ScriptTagalog: return "ScriptTagalog"
-		case ScriptNabataean: return "ScriptNabataean"
+		case ScriptArabic: return "ScriptArabic"
+		case ScriptArmenian: return "ScriptArmenian"
+		case ScriptBalinese: return "ScriptBalinese"
+		case ScriptBassaVah: return "ScriptBassaVah"
+		case ScriptBatak: return "ScriptBatak"
+		case ScriptBengali: return "ScriptBengali"
+		case ScriptBopomofo: return "ScriptBopomofo"
 		case ScriptBrahmi: return "ScriptBrahmi"
-		case ScriptPalmyrene: return "ScriptPalmyrene"
-		case ScriptSignwriting: return "ScriptSignwriting"
-		case ScriptOldItalic: return "ScriptOldItalic"
+		case ScriptBraille: return "ScriptBraille"
+		case ScriptBuginese: return "ScriptBuginese"
+		case ScriptBuhid: return "ScriptBuhid"
 		case ScriptCanadianAboriginal: return "ScriptCanadianAboriginal"
-		case ScriptTaiLe: return "ScriptTaiLe"
-		case ScriptCuneiform: return "ScriptCuneiform"
-		case ScriptSoraSompeng: return "ScriptSoraSompeng"
-		case ScriptDuployan: return "ScriptDuployan"
-		case ScriptTirhuta: return "ScriptTirhuta"
-		case ScriptInherited: return "ScriptInherited"
-		case ScriptPhoenician: return "ScriptPhoenician"
+		case ScriptCarian: return "ScriptCarian"
+		case ScriptCaucasianAlbanian: return "ScriptCaucasianAlbanian"
+		case ScriptChakma: return "ScriptChakma"
 		case ScriptCham: return "ScriptCham"
-		case ScriptMro: return "ScriptMro"
+		case ScriptCherokee: return "ScriptCherokee"
+		case ScriptCommon: return "ScriptCommon"
 		case ScriptCoptic: return "ScriptCoptic"
+		case ScriptCuneiform: return "ScriptCuneiform"
+		case ScriptCypriot: return "ScriptCypriot"
 		case ScriptCyrillic: return "ScriptCyrillic"
+		case ScriptDeseret: return "ScriptDeseret"
+		case ScriptDevanagari: return "ScriptDevanagari"
+		case ScriptDuployan: return "ScriptDuployan"
+		case ScriptElbasan: return "ScriptElbasan"
+		case ScriptEthiopic: return "ScriptEthiopic"
+		case ScriptGeorgian: return "ScriptGeorgian"
+		case ScriptGlagolitic: return "ScriptGlagolitic"
+		case ScriptGothic: return "ScriptGothic"
+		case ScriptGrantha: return "ScriptGrantha"
+		case ScriptGreek: return "ScriptGreek"
+		case ScriptGujarati: return "ScriptGujarati"
+		case ScriptGurmukhi: return "ScriptGurmukhi"
+		case ScriptHan: return "ScriptHan"
+		case ScriptHangul: return "ScriptHangul"
 		case ScriptHanunoo: return "ScriptHanunoo"
 		case ScriptHatran: return "ScriptHatran"
+		case ScriptHebrew: return "ScriptHebrew"
+		case ScriptHiragana: return "ScriptHiragana"
+		case ScriptInherited: return "ScriptInherited"
+		case ScriptInvalidCode: return "ScriptInvalidCode"
+		case ScriptKannada: return "ScriptKannada"
+		case ScriptKatakana: return "ScriptKatakana"
+		case ScriptKayahLi: return "ScriptKayahLi"
+		case ScriptKharoshthi: return "ScriptKharoshthi"
+		case ScriptKhmer: return "ScriptKhmer"
+		case ScriptKhojki: return "ScriptKhojki"
+		case ScriptKhudawadi: return "ScriptKhudawadi"
+		case ScriptLao: return "ScriptLao"
+		case ScriptLatin: return "ScriptLatin"
+		case ScriptLepcha: return "ScriptLepcha"
+		case ScriptLimbu: return "ScriptLimbu"
+		case ScriptLinearA: return "ScriptLinearA"
+		case ScriptLinearB: return "ScriptLinearB"
+		case ScriptLycian: return "ScriptLycian"
+		case ScriptLydian: return "ScriptLydian"
+		case ScriptMahajani: return "ScriptMahajani"
 		case ScriptMalayalam: return "ScriptMalayalam"
-		case ScriptMyanmar: return "ScriptMyanmar"
-		case ScriptBuginese: return "ScriptBuginese"
-		case ScriptGlagolitic: return "ScriptGlagolitic"
 		case ScriptMandaic: return "ScriptMandaic"
+		case ScriptManichaean: return "ScriptManichaean"
+		case ScriptMendeKikakui: return "ScriptMendeKikakui"
+		case ScriptMeroiticCursive: return "ScriptMeroiticCursive"
+		case ScriptMeroiticHieroglyphs: return "ScriptMeroiticHieroglyphs"
 		case ScriptMiao: return "ScriptMiao"
 		case ScriptModi: return "ScriptModi"
-		case ScriptKatakana: return "ScriptKatakana"
-		case ScriptVai: return "ScriptVai"
+		case ScriptMongolian: return "ScriptMongolian"
+		case ScriptMro: return "ScriptMro"
+		case ScriptMultani: return "ScriptMultani"
+		case ScriptMyanmar: return "ScriptMyanmar"
+		case ScriptNabataean: return "ScriptNabataean"
+		case ScriptNewTaiLue: return "ScriptNewTaiLue"
+		case ScriptNko: return "ScriptNko"
+		case ScriptOgham: return "ScriptOgham"
+		case ScriptOlChiki: return "ScriptOlChiki"
+		case ScriptOldHungarian: return "ScriptOldHungarian"
+		case ScriptOldItalic: return "ScriptOldItalic"
+		case ScriptOldNorthArabian: return "ScriptOldNorthArabian"
+		case ScriptOldPermic: return "ScriptOldPermic"
+		case ScriptOldPersian: return "ScriptOldPersian"
+		case ScriptOriya: return "ScriptOriya"
+		case ScriptOsmanya: return "ScriptOsmanya"
+		case ScriptPahawhHmong: return "ScriptPahawhHmong"
+		case ScriptPalmyrene: return "ScriptPalmyrene"
+		case ScriptPauCinHau: return "ScriptPauCinHau"
+		case ScriptPhagsPa: return "ScriptPhagsPa"
+		case ScriptPhoenician: return "ScriptPhoenician"
+		case ScriptPsalterPahlavi: return "ScriptPsalterPahlavi"
+		case ScriptRejang: return "ScriptRejang"
+		case ScriptRunic: return "ScriptRunic"
+		case ScriptSaurashtra: return "ScriptSaurashtra"
+		case ScriptSharada: return "ScriptSharada"
+		case ScriptShavian: return "ScriptShavian"
+		case ScriptSiddham: return "ScriptSiddham"
+		case ScriptSignwriting: return "ScriptSignwriting"
+		case ScriptSinhala: return "ScriptSinhala"
+		case ScriptSoraSompeng: return "ScriptSoraSompeng"
+		case ScriptSundanese: return "ScriptSundanese"
 		case ScriptSylotiNagri: return "ScriptSylotiNagri"
-		case ScriptLinearA: return "ScriptLinearA"
-		case ScriptBassaVah: return "ScriptBassaVah"
-		case ScriptMahajani: return "ScriptMahajani"
+		case ScriptSyriac: return "ScriptSyriac"
+		case ScriptTagalog: return "ScriptTagalog"
+		case ScriptTagbanwa: return "ScriptTagbanwa"
+		case ScriptTaiLe: return "ScriptTaiLe"
+		case ScriptTakri: return "ScriptTakri"
+		case ScriptTamil: return "ScriptTamil"
+		case ScriptTelugu: return "ScriptTelugu"
+		case ScriptThaana: return "ScriptThaana"
+		case ScriptThai: return "ScriptThai"
+		case ScriptTibetan: return "ScriptTibetan"
+		case ScriptTifinagh: return "ScriptTifinagh"
+		case ScriptTirhuta: return "ScriptTirhuta"
+		case ScriptUgaritic: return "ScriptUgaritic"
+		case ScriptUnknown: return "ScriptUnknown"
+		case ScriptVai: return "ScriptVai"
+		case ScriptWarangCiti: return "ScriptWarangCiti"
+		case ScriptYi: return "ScriptYi"
 		default: return fmt.Sprintf("Script(%d)", e)
 	}
 }
@@ -1818,15 +1818,15 @@ func (e Stretch) InitGoValue(v *gobject.Value) {
 
 func (e Stretch) String() string {
 	switch e {
-		case StretchSemiExpanded: return "StretchSemiExpanded"
-		case StretchExpanded: return "StretchExpanded"
-		case StretchExtraExpanded: return "StretchExtraExpanded"
-		case StretchUltraExpanded: return "StretchUltraExpanded"
-		case StretchNormal: return "StretchNormal"
-		case StretchUltraCondensed: return "StretchUltraCondensed"
-		case StretchExtraCondensed: return "StretchExtraCondensed"
 		case StretchCondensed: return "StretchCondensed"
+		case StretchExpanded: return "StretchExpanded"
+		case StretchExtraCondensed: return "StretchExtraCondensed"
+		case StretchExtraExpanded: return "StretchExtraExpanded"
+		case StretchNormal: return "StretchNormal"
 		case StretchSemiCondensed: return "StretchSemiCondensed"
+		case StretchSemiExpanded: return "StretchSemiExpanded"
+		case StretchUltraCondensed: return "StretchUltraCondensed"
+		case StretchUltraExpanded: return "StretchUltraExpanded"
 		default: return fmt.Sprintf("Stretch(%d)", e)
 	}
 }
@@ -1864,9 +1864,9 @@ func (e Style) InitGoValue(v *gobject.Value) {
 
 func (e Style) String() string {
 	switch e {
+		case StyleItalic: return "StyleItalic"
 		case StyleNormal: return "StyleNormal"
 		case StyleOblique: return "StyleOblique"
-		case StyleItalic: return "StyleItalic"
 		default: return fmt.Sprintf("Style(%d)", e)
 	}
 }
@@ -1959,10 +1959,10 @@ func (e TextTransform) InitGoValue(v *gobject.Value) {
 
 func (e TextTransform) String() string {
 	switch e {
-		case TextTransformNone: return "TextTransformNone"
-		case TextTransformLowercase: return "TextTransformLowercase"
-		case TextTransformUppercase: return "TextTransformUppercase"
 		case TextTransformCapitalize: return "TextTransformCapitalize"
+		case TextTransformLowercase: return "TextTransformLowercase"
+		case TextTransformNone: return "TextTransformNone"
+		case TextTransformUppercase: return "TextTransformUppercase"
 		default: return fmt.Sprintf("TextTransform(%d)", e)
 	}
 }
@@ -2039,13 +2039,13 @@ func (e Underline) InitGoValue(v *gobject.Value) {
 
 func (e Underline) String() string {
 	switch e {
+		case UnderlineDouble: return "UnderlineDouble"
 		case UnderlineDoubleLine: return "UnderlineDoubleLine"
+		case UnderlineError: return "UnderlineError"
 		case UnderlineErrorLine: return "UnderlineErrorLine"
+		case UnderlineLow: return "UnderlineLow"
 		case UnderlineNone: return "UnderlineNone"
 		case UnderlineSingle: return "UnderlineSingle"
-		case UnderlineDouble: return "UnderlineDouble"
-		case UnderlineLow: return "UnderlineLow"
-		case UnderlineError: return "UnderlineError"
 		case UnderlineSingleLine: return "UnderlineSingleLine"
 		default: return fmt.Sprintf("Underline(%d)", e)
 	}
@@ -2108,13 +2108,13 @@ func (e Variant) InitGoValue(v *gobject.Value) {
 
 func (e Variant) String() string {
 	switch e {
-		case VariantPetiteCaps: return "VariantPetiteCaps"
 		case VariantAllPetiteCaps: return "VariantAllPetiteCaps"
-		case VariantUnicase: return "VariantUnicase"
-		case VariantTitleCaps: return "VariantTitleCaps"
-		case VariantNormal: return "VariantNormal"
-		case VariantSmallCaps: return "VariantSmallCaps"
 		case VariantAllSmallCaps: return "VariantAllSmallCaps"
+		case VariantNormal: return "VariantNormal"
+		case VariantPetiteCaps: return "VariantPetiteCaps"
+		case VariantSmallCaps: return "VariantSmallCaps"
+		case VariantTitleCaps: return "VariantTitleCaps"
+		case VariantUnicase: return "VariantUnicase"
 		default: return fmt.Sprintf("Variant(%d)", e)
 	}
 }
@@ -2191,18 +2191,18 @@ func (e Weight) InitGoValue(v *gobject.Value) {
 
 func (e Weight) String() string {
 	switch e {
+		case WeightBold: return "WeightBold"
+		case WeightBook: return "WeightBook"
 		case WeightHeavy: return "WeightHeavy"
-		case WeightThin: return "WeightThin"
-		case WeightUltralight: return "WeightUltralight"
 		case WeightLight: return "WeightLight"
 		case WeightMedium: return "WeightMedium"
-		case WeightBold: return "WeightBold"
-		case WeightUltrabold: return "WeightUltrabold"
-		case WeightUltraheavy: return "WeightUltraheavy"
-		case WeightSemilight: return "WeightSemilight"
-		case WeightBook: return "WeightBook"
 		case WeightNormal: return "WeightNormal"
 		case WeightSemibold: return "WeightSemibold"
+		case WeightSemilight: return "WeightSemilight"
+		case WeightThin: return "WeightThin"
+		case WeightUltrabold: return "WeightUltrabold"
+		case WeightUltraheavy: return "WeightUltraheavy"
+		case WeightUltralight: return "WeightUltralight"
 		default: return fmt.Sprintf("Weight(%d)", e)
 	}
 }
@@ -2252,9 +2252,9 @@ func (e WrapMode) InitGoValue(v *gobject.Value) {
 func (e WrapMode) String() string {
 	switch e {
 		case WrapChar: return "WrapChar"
-		case WrapWordChar: return "WrapWordChar"
 		case WrapNone: return "WrapNone"
 		case WrapWord: return "WrapWord"
+		case WrapWordChar: return "WrapWordChar"
 		default: return fmt.Sprintf("WrapMode(%d)", e)
 	}
 }

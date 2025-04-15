@@ -1093,11 +1093,11 @@ func (e Align) InitGoValue(v *gobject.Value) {
 
 func (e Align) String() string {
 	switch e {
+		case AlignBaseline: return "AlignBaseline"
+		case AlignCenter: return "AlignCenter"
+		case AlignEnd: return "AlignEnd"
 		case AlignFill: return "AlignFill"
 		case AlignStart: return "AlignStart"
-		case AlignEnd: return "AlignEnd"
-		case AlignCenter: return "AlignCenter"
-		case AlignBaseline: return "AlignBaseline"
 		default: return fmt.Sprintf("Align(%d)", e)
 	}
 }
@@ -1136,8 +1136,8 @@ func (e ArrowPlacement) InitGoValue(v *gobject.Value) {
 func (e ArrowPlacement) String() string {
 	switch e {
 		case ArrowsBoth: return "ArrowsBoth"
-		case ArrowsStart: return "ArrowsStart"
 		case ArrowsEnd: return "ArrowsEnd"
+		case ArrowsStart: return "ArrowsStart"
 		default: return fmt.Sprintf("ArrowPlacement(%d)", e)
 	}
 }
@@ -1183,11 +1183,11 @@ func (e ArrowType) InitGoValue(v *gobject.Value) {
 
 func (e ArrowType) String() string {
 	switch e {
-		case ArrowNone: return "ArrowNone"
-		case ArrowUp: return "ArrowUp"
 		case ArrowDown: return "ArrowDown"
 		case ArrowLeft: return "ArrowLeft"
+		case ArrowNone: return "ArrowNone"
 		case ArrowRight: return "ArrowRight"
+		case ArrowUp: return "ArrowUp"
 		default: return fmt.Sprintf("ArrowType(%d)", e)
 	}
 }
@@ -1254,12 +1254,12 @@ func (e AssistantPageType) InitGoValue(v *gobject.Value) {
 
 func (e AssistantPageType) String() string {
 	switch e {
-		case AssistantPageIntro: return "AssistantPageIntro"
 		case AssistantPageConfirm: return "AssistantPageConfirm"
-		case AssistantPageSummary: return "AssistantPageSummary"
-		case AssistantPageProgress: return "AssistantPageProgress"
-		case AssistantPageCustom: return "AssistantPageCustom"
 		case AssistantPageContent: return "AssistantPageContent"
+		case AssistantPageCustom: return "AssistantPageCustom"
+		case AssistantPageIntro: return "AssistantPageIntro"
+		case AssistantPageProgress: return "AssistantPageProgress"
+		case AssistantPageSummary: return "AssistantPageSummary"
 		default: return fmt.Sprintf("AssistantPageType(%d)", e)
 	}
 }
@@ -1302,9 +1302,9 @@ func (e BaselinePosition) InitGoValue(v *gobject.Value) {
 
 func (e BaselinePosition) String() string {
 	switch e {
-		case BaselinePositionTop: return "BaselinePositionTop"
-		case BaselinePositionCenter: return "BaselinePositionCenter"
 		case BaselinePositionBottom: return "BaselinePositionBottom"
+		case BaselinePositionCenter: return "BaselinePositionCenter"
+		case BaselinePositionTop: return "BaselinePositionTop"
 		default: return fmt.Sprintf("BaselinePosition(%d)", e)
 	}
 }
@@ -1371,15 +1371,15 @@ func (e BorderStyle) InitGoValue(v *gobject.Value) {
 func (e BorderStyle) String() string {
 	switch e {
 		case BorderStyleDashed: return "BorderStyleDashed"
-		case BorderStyleDouble: return "BorderStyleDouble"
-		case BorderStyleNone: return "BorderStyleNone"
-		case BorderStyleSolid: return "BorderStyleSolid"
-		case BorderStyleOutset: return "BorderStyleOutset"
-		case BorderStyleHidden: return "BorderStyleHidden"
-		case BorderStyleGroove: return "BorderStyleGroove"
-		case BorderStyleRidge: return "BorderStyleRidge"
-		case BorderStyleInset: return "BorderStyleInset"
 		case BorderStyleDotted: return "BorderStyleDotted"
+		case BorderStyleDouble: return "BorderStyleDouble"
+		case BorderStyleGroove: return "BorderStyleGroove"
+		case BorderStyleHidden: return "BorderStyleHidden"
+		case BorderStyleInset: return "BorderStyleInset"
+		case BorderStyleNone: return "BorderStyleNone"
+		case BorderStyleOutset: return "BorderStyleOutset"
+		case BorderStyleRidge: return "BorderStyleRidge"
+		case BorderStyleSolid: return "BorderStyleSolid"
 		default: return fmt.Sprintf("BorderStyle(%d)", e)
 	}
 }
@@ -1471,20 +1471,20 @@ func (e BuilderError) InitGoValue(v *gobject.Value) {
 
 func (e BuilderError) String() string {
 	switch e {
-		case BuilderErrorInvalidTypeFunction: return "BuilderErrorInvalidTypeFunction"
-		case BuilderErrorUnhandledTag: return "BuilderErrorUnhandledTag"
-		case BuilderErrorMissingAttribute: return "BuilderErrorMissingAttribute"
-		case BuilderErrorInvalidAttribute: return "BuilderErrorInvalidAttribute"
-		case BuilderErrorMissingPropertyValue: return "BuilderErrorMissingPropertyValue"
-		case BuilderErrorInvalidValue: return "BuilderErrorInvalidValue"
-		case BuilderErrorVersionMismatch: return "BuilderErrorVersionMismatch"
-		case BuilderErrorObjectTypeRefused: return "BuilderErrorObjectTypeRefused"
-		case BuilderErrorInvalidTag: return "BuilderErrorInvalidTag"
 		case BuilderErrorDuplicateID: return "BuilderErrorDuplicateID"
-		case BuilderErrorTemplateMismatch: return "BuilderErrorTemplateMismatch"
+		case BuilderErrorInvalidAttribute: return "BuilderErrorInvalidAttribute"
+		case BuilderErrorInvalidID: return "BuilderErrorInvalidID"
 		case BuilderErrorInvalidProperty: return "BuilderErrorInvalidProperty"
 		case BuilderErrorInvalidSignal: return "BuilderErrorInvalidSignal"
-		case BuilderErrorInvalidID: return "BuilderErrorInvalidID"
+		case BuilderErrorInvalidTag: return "BuilderErrorInvalidTag"
+		case BuilderErrorInvalidTypeFunction: return "BuilderErrorInvalidTypeFunction"
+		case BuilderErrorInvalidValue: return "BuilderErrorInvalidValue"
+		case BuilderErrorMissingAttribute: return "BuilderErrorMissingAttribute"
+		case BuilderErrorMissingPropertyValue: return "BuilderErrorMissingPropertyValue"
+		case BuilderErrorObjectTypeRefused: return "BuilderErrorObjectTypeRefused"
+		case BuilderErrorTemplateMismatch: return "BuilderErrorTemplateMismatch"
+		case BuilderErrorUnhandledTag: return "BuilderErrorUnhandledTag"
+		case BuilderErrorVersionMismatch: return "BuilderErrorVersionMismatch"
 		default: return fmt.Sprintf("BuilderError(%d)", e)
 	}
 }
@@ -1540,12 +1540,12 @@ func (e ButtonBoxStyle) InitGoValue(v *gobject.Value) {
 
 func (e ButtonBoxStyle) String() string {
 	switch e {
+		case ButtonboxCenter: return "ButtonboxCenter"
+		case ButtonboxEdge: return "ButtonboxEdge"
+		case ButtonboxEnd: return "ButtonboxEnd"
 		case ButtonboxExpand: return "ButtonboxExpand"
 		case ButtonboxSpread: return "ButtonboxSpread"
-		case ButtonboxEdge: return "ButtonboxEdge"
 		case ButtonboxStart: return "ButtonboxStart"
-		case ButtonboxEnd: return "ButtonboxEnd"
-		case ButtonboxCenter: return "ButtonboxCenter"
 		default: return fmt.Sprintf("ButtonBoxStyle(%d)", e)
 	}
 }
@@ -1583,8 +1583,8 @@ func (e ButtonRole) InitGoValue(v *gobject.Value) {
 
 func (e ButtonRole) String() string {
 	switch e {
-		case ButtonRoleNormal: return "ButtonRoleNormal"
 		case ButtonRoleCheck: return "ButtonRoleCheck"
+		case ButtonRoleNormal: return "ButtonRoleNormal"
 		case ButtonRoleRadio: return "ButtonRoleRadio"
 		default: return fmt.Sprintf("ButtonRole(%d)", e)
 	}
@@ -1641,12 +1641,12 @@ func (e ButtonsType) InitGoValue(v *gobject.Value) {
 
 func (e ButtonsType) String() string {
 	switch e {
-		case ButtonsYesNo: return "ButtonsYesNo"
-		case ButtonsOKCancel: return "ButtonsOKCancel"
+		case ButtonsCancel: return "ButtonsCancel"
+		case ButtonsClose: return "ButtonsClose"
 		case ButtonsNone: return "ButtonsNone"
 		case ButtonsOK: return "ButtonsOK"
-		case ButtonsClose: return "ButtonsClose"
-		case ButtonsCancel: return "ButtonsCancel"
+		case ButtonsOKCancel: return "ButtonsOKCancel"
+		case ButtonsYesNo: return "ButtonsYesNo"
 		default: return fmt.Sprintf("ButtonsType(%d)", e)
 	}
 }
@@ -1725,9 +1725,9 @@ func (e CellRendererMode) InitGoValue(v *gobject.Value) {
 
 func (e CellRendererMode) String() string {
 	switch e {
-		case CellRendererModeInert: return "CellRendererModeInert"
 		case CellRendererModeActivatable: return "CellRendererModeActivatable"
 		case CellRendererModeEditable: return "CellRendererModeEditable"
+		case CellRendererModeInert: return "CellRendererModeInert"
 		default: return fmt.Sprintf("CellRendererMode(%d)", e)
 	}
 }
@@ -1775,9 +1775,9 @@ func (e CornerType) InitGoValue(v *gobject.Value) {
 
 func (e CornerType) String() string {
 	switch e {
+		case CornerBottomLeft: return "CornerBottomLeft"
 		case CornerBottomRight: return "CornerBottomRight"
 		case CornerTopLeft: return "CornerTopLeft"
-		case CornerBottomLeft: return "CornerBottomLeft"
 		case CornerTopRight: return "CornerTopRight"
 		default: return fmt.Sprintf("CornerType(%d)", e)
 	}
@@ -1828,12 +1828,12 @@ func (e CSSProviderError) InitGoValue(v *gobject.Value) {
 
 func (e CSSProviderError) String() string {
 	switch e {
-		case CSSProviderErrorUnknownValue: return "CSSProviderErrorUnknownValue"
+		case CSSProviderErrorDeprecated: return "CSSProviderErrorDeprecated"
 		case CSSProviderErrorFailed: return "CSSProviderErrorFailed"
-		case CSSProviderErrorSyntax: return "CSSProviderErrorSyntax"
 		case CSSProviderErrorImport: return "CSSProviderErrorImport"
 		case CSSProviderErrorName: return "CSSProviderErrorName"
-		case CSSProviderErrorDeprecated: return "CSSProviderErrorDeprecated"
+		case CSSProviderErrorSyntax: return "CSSProviderErrorSyntax"
+		case CSSProviderErrorUnknownValue: return "CSSProviderErrorUnknownValue"
 		default: return fmt.Sprintf("CSSProviderError(%d)", e)
 	}
 }
@@ -1907,15 +1907,15 @@ func (e CSSSectionType) InitGoValue(v *gobject.Value) {
 
 func (e CSSSectionType) String() string {
 	switch e {
-		case CSSSectionSelector: return "CSSSectionSelector"
-		case CSSSectionImport: return "CSSSectionImport"
-		case CSSSectionDeclaration: return "CSSSectionDeclaration"
-		case CSSSectionValue: return "CSSSectionValue"
-		case CSSSectionKeyframes: return "CSSSectionKeyframes"
-		case CSSSectionDocument: return "CSSSectionDocument"
-		case CSSSectionColorDefinition: return "CSSSectionColorDefinition"
 		case CSSSectionBindingSet: return "CSSSectionBindingSet"
+		case CSSSectionColorDefinition: return "CSSSectionColorDefinition"
+		case CSSSectionDeclaration: return "CSSSectionDeclaration"
+		case CSSSectionDocument: return "CSSSectionDocument"
+		case CSSSectionImport: return "CSSSectionImport"
+		case CSSSectionKeyframes: return "CSSSectionKeyframes"
 		case CSSSectionRuleset: return "CSSSectionRuleset"
+		case CSSSectionSelector: return "CSSSectionSelector"
+		case CSSSectionValue: return "CSSSectionValue"
 		default: return fmt.Sprintf("CSSSectionType(%d)", e)
 	}
 }
@@ -1979,14 +1979,14 @@ func (e DeleteType) InitGoValue(v *gobject.Value) {
 
 func (e DeleteType) String() string {
 	switch e {
-		case DeleteWordEnds: return "DeleteWordEnds"
-		case DeleteWords: return "DeleteWords"
-		case DeleteDisplayLines: return "DeleteDisplayLines"
+		case DeleteChars: return "DeleteChars"
 		case DeleteDisplayLineEnds: return "DeleteDisplayLineEnds"
+		case DeleteDisplayLines: return "DeleteDisplayLines"
 		case DeleteParagraphEnds: return "DeleteParagraphEnds"
 		case DeleteParagraphs: return "DeleteParagraphs"
 		case DeleteWhitespace: return "DeleteWhitespace"
-		case DeleteChars: return "DeleteChars"
+		case DeleteWordEnds: return "DeleteWordEnds"
+		case DeleteWords: return "DeleteWords"
 		default: return fmt.Sprintf("DeleteType(%d)", e)
 	}
 }
@@ -2036,12 +2036,12 @@ func (e DirectionType) InitGoValue(v *gobject.Value) {
 
 func (e DirectionType) String() string {
 	switch e {
-		case DirTabBackward: return "DirTabBackward"
-		case DirUp: return "DirUp"
 		case DirDown: return "DirDown"
 		case DirLeft: return "DirLeft"
 		case DirRight: return "DirRight"
+		case DirTabBackward: return "DirTabBackward"
 		case DirTabForward: return "DirTabForward"
+		case DirUp: return "DirUp"
 		default: return fmt.Sprintf("DirectionType(%d)", e)
 	}
 }
@@ -2095,12 +2095,12 @@ func (e DragResult) InitGoValue(v *gobject.Value) {
 
 func (e DragResult) String() string {
 	switch e {
-		case DragResultSuccess: return "DragResultSuccess"
-		case DragResultNoTarget: return "DragResultNoTarget"
-		case DragResultUserCancelled: return "DragResultUserCancelled"
-		case DragResultTimeoutExpired: return "DragResultTimeoutExpired"
-		case DragResultGrabBroken: return "DragResultGrabBroken"
 		case DragResultError: return "DragResultError"
+		case DragResultGrabBroken: return "DragResultGrabBroken"
+		case DragResultNoTarget: return "DragResultNoTarget"
+		case DragResultSuccess: return "DragResultSuccess"
+		case DragResultTimeoutExpired: return "DragResultTimeoutExpired"
+		case DragResultUserCancelled: return "DragResultUserCancelled"
 		default: return fmt.Sprintf("DragResult(%d)", e)
 	}
 }
@@ -2173,9 +2173,9 @@ func (e EventSequenceState) InitGoValue(v *gobject.Value) {
 
 func (e EventSequenceState) String() string {
 	switch e {
+		case EventSequenceClaimed: return "EventSequenceClaimed"
 		case EventSequenceDenied: return "EventSequenceDenied"
 		case EventSequenceNone: return "EventSequenceNone"
-		case EventSequenceClaimed: return "EventSequenceClaimed"
 		default: return fmt.Sprintf("EventSequenceState(%d)", e)
 	}
 }
@@ -2217,10 +2217,10 @@ func (e ExpanderStyle) InitGoValue(v *gobject.Value) {
 
 func (e ExpanderStyle) String() string {
 	switch e {
-		case ExpanderSemiExpanded: return "ExpanderSemiExpanded"
-		case ExpanderExpanded: return "ExpanderExpanded"
 		case ExpanderCollapsed: return "ExpanderCollapsed"
+		case ExpanderExpanded: return "ExpanderExpanded"
 		case ExpanderSemiCollapsed: return "ExpanderSemiCollapsed"
+		case ExpanderSemiExpanded: return "ExpanderSemiExpanded"
 		default: return fmt.Sprintf("ExpanderStyle(%d)", e)
 	}
 }
@@ -2318,9 +2318,9 @@ func (e FileChooserConfirmation) InitGoValue(v *gobject.Value) {
 
 func (e FileChooserConfirmation) String() string {
 	switch e {
-		case FileChooserConfirmationSelectAgain: return "FileChooserConfirmationSelectAgain"
-		case FileChooserConfirmationConfirm: return "FileChooserConfirmationConfirm"
 		case FileChooserConfirmationAcceptFilename: return "FileChooserConfirmationAcceptFilename"
+		case FileChooserConfirmationConfirm: return "FileChooserConfirmationConfirm"
+		case FileChooserConfirmationSelectAgain: return "FileChooserConfirmationSelectAgain"
 		default: return fmt.Sprintf("FileChooserConfirmation(%d)", e)
 	}
 }
@@ -2364,10 +2364,10 @@ func (e FileChooserError) InitGoValue(v *gobject.Value) {
 
 func (e FileChooserError) String() string {
 	switch e {
+		case FileChooserErrorAlreadyExists: return "FileChooserErrorAlreadyExists"
+		case FileChooserErrorBadFilename: return "FileChooserErrorBadFilename"
 		case FileChooserErrorIncompleteHostname: return "FileChooserErrorIncompleteHostname"
 		case FileChooserErrorNonexistent: return "FileChooserErrorNonexistent"
-		case FileChooserErrorBadFilename: return "FileChooserErrorBadFilename"
-		case FileChooserErrorAlreadyExists: return "FileChooserErrorAlreadyExists"
 		default: return fmt.Sprintf("FileChooserError(%d)", e)
 	}
 }
@@ -2421,13 +2421,13 @@ func (e IconSize) InitGoValue(v *gobject.Value) {
 
 func (e IconSize) String() string {
 	switch e {
-		case IconSizeMenu: return "IconSizeMenu"
-		case IconSizeSmallToolbar: return "IconSizeSmallToolbar"
-		case IconSizeLargeToolbar: return "IconSizeLargeToolbar"
 		case IconSizeButton: return "IconSizeButton"
 		case IconSizeDND: return "IconSizeDND"
 		case IconSizeDialog: return "IconSizeDialog"
 		case IconSizeInvalid: return "IconSizeInvalid"
+		case IconSizeLargeToolbar: return "IconSizeLargeToolbar"
+		case IconSizeMenu: return "IconSizeMenu"
+		case IconSizeSmallToolbar: return "IconSizeSmallToolbar"
 		default: return fmt.Sprintf("IconSize(%d)", e)
 	}
 }
@@ -2461,8 +2461,8 @@ func (e IconThemeError) InitGoValue(v *gobject.Value) {
 
 func (e IconThemeError) String() string {
 	switch e {
-		case IconThemeNotFound: return "IconThemeNotFound"
 		case IconThemeFailed: return "IconThemeFailed"
+		case IconThemeNotFound: return "IconThemeNotFound"
 		default: return fmt.Sprintf("IconThemeError(%d)", e)
 	}
 }
@@ -2512,11 +2512,11 @@ func (e IconViewDropPosition) InitGoValue(v *gobject.Value) {
 
 func (e IconViewDropPosition) String() string {
 	switch e {
+		case IconViewDropAbove: return "IconViewDropAbove"
+		case IconViewDropBelow: return "IconViewDropBelow"
 		case IconViewDropInto: return "IconViewDropInto"
 		case IconViewDropLeft: return "IconViewDropLeft"
 		case IconViewDropRight: return "IconViewDropRight"
-		case IconViewDropAbove: return "IconViewDropAbove"
-		case IconViewDropBelow: return "IconViewDropBelow"
 		case IconViewNoDrop: return "IconViewNoDrop"
 		default: return fmt.Sprintf("IconViewDropPosition(%d)", e)
 	}
@@ -2584,14 +2584,14 @@ func (e ImageType) InitGoValue(v *gobject.Value) {
 
 func (e ImageType) String() string {
 	switch e {
-		case ImageIconSet: return "ImageIconSet"
 		case ImageAnimation: return "ImageAnimation"
-		case ImageIconName: return "ImageIconName"
-		case ImageGIcon: return "ImageGIcon"
-		case ImageSurface: return "ImageSurface"
 		case ImageEmpty: return "ImageEmpty"
+		case ImageGIcon: return "ImageGIcon"
+		case ImageIconName: return "ImageIconName"
+		case ImageIconSet: return "ImageIconSet"
 		case ImagePixbuf: return "ImagePixbuf"
 		case ImageStock: return "ImageStock"
+		case ImageSurface: return "ImageSurface"
 		default: return fmt.Sprintf("ImageType(%d)", e)
 	}
 }
@@ -2678,17 +2678,17 @@ func (e InputPurpose) InitGoValue(v *gobject.Value) {
 
 func (e InputPurpose) String() string {
 	switch e {
-		case InputPurposeName: return "InputPurposeName"
-		case InputPurposeTerminal: return "InputPurposeTerminal"
-		case InputPurposeFreeForm: return "InputPurposeFreeForm"
-		case InputPurposeURL: return "InputPurposeURL"
-		case InputPurposePassword: return "InputPurposePassword"
-		case InputPurposePIN: return "InputPurposePIN"
 		case InputPurposeAlpha: return "InputPurposeAlpha"
 		case InputPurposeDigits: return "InputPurposeDigits"
-		case InputPurposeNumber: return "InputPurposeNumber"
-		case InputPurposePhone: return "InputPurposePhone"
 		case InputPurposeEmail: return "InputPurposeEmail"
+		case InputPurposeFreeForm: return "InputPurposeFreeForm"
+		case InputPurposeName: return "InputPurposeName"
+		case InputPurposeNumber: return "InputPurposeNumber"
+		case InputPurposePIN: return "InputPurposePIN"
+		case InputPurposePassword: return "InputPurposePassword"
+		case InputPurposePhone: return "InputPurposePhone"
+		case InputPurposeTerminal: return "InputPurposeTerminal"
+		case InputPurposeURL: return "InputPurposeURL"
 		default: return fmt.Sprintf("InputPurpose(%d)", e)
 	}
 }
@@ -2731,10 +2731,10 @@ func (e Justification) InitGoValue(v *gobject.Value) {
 
 func (e Justification) String() string {
 	switch e {
-		case JustifyLeft: return "JustifyLeft"
-		case JustifyRight: return "JustifyRight"
 		case JustifyCenter: return "JustifyCenter"
 		case JustifyFill: return "JustifyFill"
+		case JustifyLeft: return "JustifyLeft"
+		case JustifyRight: return "JustifyRight"
 		default: return fmt.Sprintf("Justification(%d)", e)
 	}
 }
@@ -2872,24 +2872,24 @@ func (e License) InitGoValue(v *gobject.Value) {
 
 func (e License) String() string {
 	switch e {
-		case LicenseGPL20: return "LicenseGPL20"
-		case LicenseLGPL21: return "LicenseLGPL21"
-		case LicenseBSD: return "LicenseBSD"
-		case LicenseGPL30_Only: return "LicenseGPL30Only"
-		case LicenseLGPL21_Only: return "LicenseLGPL21Only"
 		case LicenseAGPL30: return "LicenseAGPL30"
-		case LicenseMPL20: return "LicenseMPL20"
-		case LicenseCustom: return "LicenseCustom"
-		case LicenseLGPL30: return "LicenseLGPL30"
-		case LicenseMITX11: return "LicenseMITX11"
 		case LicenseAGPL30_Only: return "LicenseAGPL30Only"
-		case LicenseGPL30: return "LicenseGPL30"
-		case LicenseArtistic: return "LicenseArtistic"
-		case LicenseBSD3: return "LicenseBSD3"
 		case LicenseApache20: return "LicenseApache20"
-		case LicenseUnknown: return "LicenseUnknown"
+		case LicenseArtistic: return "LicenseArtistic"
+		case LicenseBSD: return "LicenseBSD"
+		case LicenseBSD3: return "LicenseBSD3"
+		case LicenseCustom: return "LicenseCustom"
+		case LicenseGPL20: return "LicenseGPL20"
 		case LicenseGPL20_Only: return "LicenseGPL20Only"
+		case LicenseGPL30: return "LicenseGPL30"
+		case LicenseGPL30_Only: return "LicenseGPL30Only"
+		case LicenseLGPL21: return "LicenseLGPL21"
+		case LicenseLGPL21_Only: return "LicenseLGPL21Only"
+		case LicenseLGPL30: return "LicenseLGPL30"
 		case LicenseLGPL30_Only: return "LicenseLGPL30Only"
+		case LicenseMITX11: return "LicenseMITX11"
+		case LicenseMPL20: return "LicenseMPL20"
+		case LicenseUnknown: return "LicenseUnknown"
 		default: return fmt.Sprintf("License(%d)", e)
 	}
 }
@@ -2931,9 +2931,9 @@ func (e MenuDirectionType) InitGoValue(v *gobject.Value) {
 
 func (e MenuDirectionType) String() string {
 	switch e {
-		case MenuDirParent: return "MenuDirParent"
 		case MenuDirChild: return "MenuDirChild"
 		case MenuDirNext: return "MenuDirNext"
+		case MenuDirParent: return "MenuDirParent"
 		case MenuDirPrev: return "MenuDirPrev"
 		default: return fmt.Sprintf("MenuDirectionType(%d)", e)
 	}
@@ -2980,10 +2980,10 @@ func (e MessageType) InitGoValue(v *gobject.Value) {
 
 func (e MessageType) String() string {
 	switch e {
-		case MessageQuestion: return "MessageQuestion"
 		case MessageError: return "MessageError"
-		case MessageOther: return "MessageOther"
 		case MessageInfo: return "MessageInfo"
+		case MessageOther: return "MessageOther"
+		case MessageQuestion: return "MessageQuestion"
 		case MessageWarning: return "MessageWarning"
 		default: return fmt.Sprintf("MessageType(%d)", e)
 	}
@@ -3048,16 +3048,16 @@ func (e MovementStep) InitGoValue(v *gobject.Value) {
 
 func (e MovementStep) String() string {
 	switch e {
-		case MovementLogicalPositions: return "MovementLogicalPositions"
+		case MovementBufferEnds: return "MovementBufferEnds"
+		case MovementDisplayLineEnds: return "MovementDisplayLineEnds"
 		case MovementDisplayLines: return "MovementDisplayLines"
-		case MovementParagraphEnds: return "MovementParagraphEnds"
 		case MovementHorizontalPages: return "MovementHorizontalPages"
+		case MovementLogicalPositions: return "MovementLogicalPositions"
+		case MovementPages: return "MovementPages"
+		case MovementParagraphEnds: return "MovementParagraphEnds"
+		case MovementParagraphs: return "MovementParagraphs"
 		case MovementVisualPositions: return "MovementVisualPositions"
 		case MovementWords: return "MovementWords"
-		case MovementDisplayLineEnds: return "MovementDisplayLineEnds"
-		case MovementParagraphs: return "MovementParagraphs"
-		case MovementPages: return "MovementPages"
-		case MovementBufferEnds: return "MovementBufferEnds"
 		default: return fmt.Sprintf("MovementStep(%d)", e)
 	}
 }
@@ -3145,14 +3145,14 @@ func (e NumberUpLayout) InitGoValue(v *gobject.Value) {
 
 func (e NumberUpLayout) String() string {
 	switch e {
-		case NumberUpLayoutTopToBottomRightToLeft: return "NumberUpLayoutTopToBottomRightToLeft"
 		case NumberUpLayoutBottomToTopLeftToRight: return "NumberUpLayoutBottomToTopLeftToRight"
 		case NumberUpLayoutBottomToTopRightToLeft: return "NumberUpLayoutBottomToTopRightToLeft"
-		case NumberUpLayoutLeftToRightTopToBottom: return "NumberUpLayoutLeftToRightTopToBottom"
 		case NumberUpLayoutLeftToRightBottomToTop: return "NumberUpLayoutLeftToRightBottomToTop"
-		case NumberUpLayoutRightToLeftTopToBottom: return "NumberUpLayoutRightToLeftTopToBottom"
+		case NumberUpLayoutLeftToRightTopToBottom: return "NumberUpLayoutLeftToRightTopToBottom"
 		case NumberUpLayoutRightToLeftBottomToTop: return "NumberUpLayoutRightToLeftBottomToTop"
+		case NumberUpLayoutRightToLeftTopToBottom: return "NumberUpLayoutRightToLeftTopToBottom"
 		case NumberUpLayoutTopToBottomLeftToRight: return "NumberUpLayoutTopToBottomLeftToRight"
+		case NumberUpLayoutTopToBottomRightToLeft: return "NumberUpLayoutTopToBottomRightToLeft"
 		default: return fmt.Sprintf("NumberUpLayout(%d)", e)
 	}
 }
@@ -3232,10 +3232,10 @@ func (e PackDirection) InitGoValue(v *gobject.Value) {
 
 func (e PackDirection) String() string {
 	switch e {
+		case PackDirectionBtt: return "PackDirectionBtt"
 		case PackDirectionLTR: return "PackDirectionLTR"
 		case PackDirectionRTL: return "PackDirectionRTL"
 		case PackDirectionTtb: return "PackDirectionTtb"
-		case PackDirectionBtt: return "PackDirectionBtt"
 		default: return fmt.Sprintf("PackDirection(%d)", e)
 	}
 }
@@ -3353,10 +3353,10 @@ func (e PageOrientation) InitGoValue(v *gobject.Value) {
 
 func (e PageOrientation) String() string {
 	switch e {
-		case PageOrientationPortrait: return "PageOrientationPortrait"
 		case PageOrientationLandscape: return "PageOrientationLandscape"
-		case PageOrientationReversePortrait: return "PageOrientationReversePortrait"
+		case PageOrientationPortrait: return "PageOrientationPortrait"
 		case PageOrientationReverseLandscape: return "PageOrientationReverseLandscape"
+		case PageOrientationReversePortrait: return "PageOrientationReversePortrait"
 		default: return fmt.Sprintf("PageOrientation(%d)", e)
 	}
 }
@@ -3438,10 +3438,10 @@ func (e PanDirection) InitGoValue(v *gobject.Value) {
 
 func (e PanDirection) String() string {
 	switch e {
+		case PanDirectionDown: return "PanDirectionDown"
 		case PanDirectionLeft: return "PanDirectionLeft"
 		case PanDirectionRight: return "PanDirectionRight"
 		case PanDirectionUp: return "PanDirectionUp"
-		case PanDirectionDown: return "PanDirectionDown"
 		default: return fmt.Sprintf("PanDirection(%d)", e)
 	}
 }
@@ -3491,8 +3491,8 @@ func (e PolicyType) String() string {
 	switch e {
 		case PolicyAlways: return "PolicyAlways"
 		case PolicyAutomatic: return "PolicyAutomatic"
-		case PolicyNever: return "PolicyNever"
 		case PolicyExternal: return "PolicyExternal"
+		case PolicyNever: return "PolicyNever"
 		default: return fmt.Sprintf("PolicyType(%d)", e)
 	}
 }
@@ -3574,10 +3574,10 @@ func (e PositionType) InitGoValue(v *gobject.Value) {
 
 func (e PositionType) String() string {
 	switch e {
+		case PosBottom: return "PosBottom"
 		case PosLeft: return "PosLeft"
 		case PosRight: return "PosRight"
 		case PosTop: return "PosTop"
-		case PosBottom: return "PosBottom"
 		default: return fmt.Sprintf("PositionType(%d)", e)
 	}
 }
@@ -3615,8 +3615,8 @@ func (e PrintDuplex) InitGoValue(v *gobject.Value) {
 
 func (e PrintDuplex) String() string {
 	switch e {
-		case PrintDuplexSimplex: return "PrintDuplexSimplex"
 		case PrintDuplexHorizontal: return "PrintDuplexHorizontal"
+		case PrintDuplexSimplex: return "PrintDuplexSimplex"
 		case PrintDuplexVertical: return "PrintDuplexVertical"
 		default: return fmt.Sprintf("PrintDuplex(%d)", e)
 	}
@@ -3663,8 +3663,8 @@ func (e PrintError) String() string {
 	switch e {
 		case PrintErrorGeneral: return "PrintErrorGeneral"
 		case PrintErrorInternalError: return "PrintErrorInternalError"
-		case PrintErrorNOMEM: return "PrintErrorNOMEM"
 		case PrintErrorInvalidFile: return "PrintErrorInvalidFile"
+		case PrintErrorNOMEM: return "PrintErrorNOMEM"
 		default: return fmt.Sprintf("PrintError(%d)", e)
 	}
 }
@@ -3709,10 +3709,10 @@ func (e PrintOperationAction) InitGoValue(v *gobject.Value) {
 
 func (e PrintOperationAction) String() string {
 	switch e {
-		case PrintOperationActionPrintDialog: return "PrintOperationActionPrintDialog"
-		case PrintOperationActionPrint: return "PrintOperationActionPrint"
-		case PrintOperationActionPreview: return "PrintOperationActionPreview"
 		case PrintOperationActionExport: return "PrintOperationActionExport"
+		case PrintOperationActionPreview: return "PrintOperationActionPreview"
+		case PrintOperationActionPrint: return "PrintOperationActionPrint"
+		case PrintOperationActionPrintDialog: return "PrintOperationActionPrintDialog"
 		default: return fmt.Sprintf("PrintOperationAction(%d)", e)
 	}
 }
@@ -3756,9 +3756,9 @@ func (e PrintOperationResult) InitGoValue(v *gobject.Value) {
 
 func (e PrintOperationResult) String() string {
 	switch e {
-		case PrintOperationResultError: return "PrintOperationResultError"
 		case PrintOperationResultApply: return "PrintOperationResultApply"
 		case PrintOperationResultCancel: return "PrintOperationResultCancel"
+		case PrintOperationResultError: return "PrintOperationResultError"
 		case PrintOperationResultInProgress: return "PrintOperationResultInProgress"
 		default: return fmt.Sprintf("PrintOperationResult(%d)", e)
 	}
@@ -3846,8 +3846,8 @@ func (e PrintQuality) InitGoValue(v *gobject.Value) {
 
 func (e PrintQuality) String() string {
 	switch e {
-		case PrintQualityHigh: return "PrintQualityHigh"
 		case PrintQualityDraft: return "PrintQualityDraft"
+		case PrintQualityHigh: return "PrintQualityHigh"
 		case PrintQualityLow: return "PrintQualityLow"
 		case PrintQualityNormal: return "PrintQualityNormal"
 		default: return fmt.Sprintf("PrintQuality(%d)", e)
@@ -3918,15 +3918,15 @@ func (e PrintStatus) InitGoValue(v *gobject.Value) {
 
 func (e PrintStatus) String() string {
 	switch e {
-		case PrintStatusSendingData: return "PrintStatusSendingData"
-		case PrintStatusPending: return "PrintStatusPending"
-		case PrintStatusPendingIssue: return "PrintStatusPendingIssue"
-		case PrintStatusPrinting: return "PrintStatusPrinting"
 		case PrintStatusFinished: return "PrintStatusFinished"
 		case PrintStatusFinishedAborted: return "PrintStatusFinishedAborted"
-		case PrintStatusInitial: return "PrintStatusInitial"
-		case PrintStatusPreparing: return "PrintStatusPreparing"
 		case PrintStatusGeneratingData: return "PrintStatusGeneratingData"
+		case PrintStatusInitial: return "PrintStatusInitial"
+		case PrintStatusPending: return "PrintStatusPending"
+		case PrintStatusPendingIssue: return "PrintStatusPendingIssue"
+		case PrintStatusPreparing: return "PrintStatusPreparing"
+		case PrintStatusPrinting: return "PrintStatusPrinting"
+		case PrintStatusSendingData: return "PrintStatusSendingData"
 		default: return fmt.Sprintf("PrintStatus(%d)", e)
 	}
 }
@@ -3978,9 +3978,9 @@ func (e PropagationPhase) InitGoValue(v *gobject.Value) {
 
 func (e PropagationPhase) String() string {
 	switch e {
-		case PhaseNone: return "PhaseNone"
-		case PhaseCapture: return "PhaseCapture"
 		case PhaseBubble: return "PhaseBubble"
+		case PhaseCapture: return "PhaseCapture"
+		case PhaseNone: return "PhaseNone"
 		case PhaseTarget: return "PhaseTarget"
 		default: return fmt.Sprintf("PropagationPhase(%d)", e)
 	}
@@ -4016,8 +4016,8 @@ func (e RecentChooserError) InitGoValue(v *gobject.Value) {
 
 func (e RecentChooserError) String() string {
 	switch e {
-		case RecentChooserErrorNotFound: return "RecentChooserErrorNotFound"
 		case RecentChooserErrorInvalidURI: return "RecentChooserErrorInvalidURI"
+		case RecentChooserErrorNotFound: return "RecentChooserErrorNotFound"
 		default: return fmt.Sprintf("RecentChooserError(%d)", e)
 	}
 }
@@ -4077,12 +4077,12 @@ func (e RecentManagerError) InitGoValue(v *gobject.Value) {
 func (e RecentManagerError) String() string {
 	switch e {
 		case RecentManagerErrorInvalidEncoding: return "RecentManagerErrorInvalidEncoding"
+		case RecentManagerErrorInvalidURI: return "RecentManagerErrorInvalidURI"
+		case RecentManagerErrorNotFound: return "RecentManagerErrorNotFound"
 		case RecentManagerErrorNotRegistered: return "RecentManagerErrorNotRegistered"
 		case RecentManagerErrorRead: return "RecentManagerErrorRead"
-		case RecentManagerErrorWrite: return "RecentManagerErrorWrite"
 		case RecentManagerErrorUnknown: return "RecentManagerErrorUnknown"
-		case RecentManagerErrorNotFound: return "RecentManagerErrorNotFound"
-		case RecentManagerErrorInvalidURI: return "RecentManagerErrorInvalidURI"
+		case RecentManagerErrorWrite: return "RecentManagerErrorWrite"
 		default: return fmt.Sprintf("RecentManagerError(%d)", e)
 	}
 }
@@ -4129,10 +4129,10 @@ func (e RecentSortType) InitGoValue(v *gobject.Value) {
 
 func (e RecentSortType) String() string {
 	switch e {
-		case RecentSortNone: return "RecentSortNone"
-		case RecentSortMru: return "RecentSortMru"
-		case RecentSortLru: return "RecentSortLru"
 		case RecentSortCustom: return "RecentSortCustom"
+		case RecentSortLru: return "RecentSortLru"
+		case RecentSortMru: return "RecentSortMru"
+		case RecentSortNone: return "RecentSortNone"
 		default: return fmt.Sprintf("RecentSortType(%d)", e)
 	}
 }
@@ -4170,9 +4170,9 @@ func (e ReliefStyle) InitGoValue(v *gobject.Value) {
 
 func (e ReliefStyle) String() string {
 	switch e {
-		case ReliefNormal: return "ReliefNormal"
 		case ReliefHalf: return "ReliefHalf"
 		case ReliefNone: return "ReliefNone"
+		case ReliefNormal: return "ReliefNormal"
 		default: return fmt.Sprintf("ReliefStyle(%d)", e)
 	}
 }
@@ -4208,9 +4208,9 @@ func (e ResizeMode) InitGoValue(v *gobject.Value) {
 
 func (e ResizeMode) String() string {
 	switch e {
-		case ResizeQueue: return "ResizeQueue"
 		case ResizeImmediate: return "ResizeImmediate"
 		case ResizeParent: return "ResizeParent"
+		case ResizeQueue: return "ResizeQueue"
 		default: return fmt.Sprintf("ResizeMode(%d)", e)
 	}
 }
@@ -4283,16 +4283,16 @@ func (e ResponseType) InitGoValue(v *gobject.Value) {
 
 func (e ResponseType) String() string {
 	switch e {
-		case ResponseNo: return "ResponseNo"
-		case ResponseApply: return "ResponseApply"
-		case ResponseReject: return "ResponseReject"
 		case ResponseAccept: return "ResponseAccept"
-		case ResponseDeleteEvent: return "ResponseDeleteEvent"
+		case ResponseApply: return "ResponseApply"
 		case ResponseCancel: return "ResponseCancel"
 		case ResponseClose: return "ResponseClose"
+		case ResponseDeleteEvent: return "ResponseDeleteEvent"
 		case ResponseHelp: return "ResponseHelp"
+		case ResponseNo: return "ResponseNo"
 		case ResponseNone: return "ResponseNone"
 		case ResponseOK: return "ResponseOK"
+		case ResponseReject: return "ResponseReject"
 		case ResponseYes: return "ResponseYes"
 		default: return fmt.Sprintf("ResponseType(%d)", e)
 	}
@@ -4344,12 +4344,12 @@ func (e RevealerTransitionType) InitGoValue(v *gobject.Value) {
 
 func (e RevealerTransitionType) String() string {
 	switch e {
-		case RevealerTransitionTypeNone: return "RevealerTransitionTypeNone"
 		case RevealerTransitionTypeCrossfade: return "RevealerTransitionTypeCrossfade"
-		case RevealerTransitionTypeSlideRight: return "RevealerTransitionTypeSlideRight"
-		case RevealerTransitionTypeSlideLeft: return "RevealerTransitionTypeSlideLeft"
-		case RevealerTransitionTypeSlideUp: return "RevealerTransitionTypeSlideUp"
+		case RevealerTransitionTypeNone: return "RevealerTransitionTypeNone"
 		case RevealerTransitionTypeSlideDown: return "RevealerTransitionTypeSlideDown"
+		case RevealerTransitionTypeSlideLeft: return "RevealerTransitionTypeSlideLeft"
+		case RevealerTransitionTypeSlideRight: return "RevealerTransitionTypeSlideRight"
+		case RevealerTransitionTypeSlideUp: return "RevealerTransitionTypeSlideUp"
 		default: return fmt.Sprintf("RevealerTransitionType(%d)", e)
 	}
 }
@@ -4397,12 +4397,12 @@ func (e ScrollStep) InitGoValue(v *gobject.Value) {
 
 func (e ScrollStep) String() string {
 	switch e {
-		case ScrollHorizontalPages: return "ScrollHorizontalPages"
-		case ScrollHorizontalEnds: return "ScrollHorizontalEnds"
-		case ScrollSteps: return "ScrollSteps"
-		case ScrollPages: return "ScrollPages"
 		case ScrollEnds: return "ScrollEnds"
+		case ScrollHorizontalEnds: return "ScrollHorizontalEnds"
+		case ScrollHorizontalPages: return "ScrollHorizontalPages"
 		case ScrollHorizontalSteps: return "ScrollHorizontalSteps"
+		case ScrollPages: return "ScrollPages"
+		case ScrollSteps: return "ScrollSteps"
 		default: return fmt.Sprintf("ScrollStep(%d)", e)
 	}
 }
@@ -4492,22 +4492,22 @@ func (e ScrollType) InitGoValue(v *gobject.Value) {
 
 func (e ScrollType) String() string {
 	switch e {
-		case ScrollPageRight: return "ScrollPageRight"
-		case ScrollStepForward: return "ScrollStepForward"
-		case ScrollStepRight: return "ScrollStepRight"
-		case ScrollStart: return "ScrollStart"
-		case ScrollJump: return "ScrollJump"
-		case ScrollPageBackward: return "ScrollPageBackward"
-		case ScrollPageForward: return "ScrollPageForward"
-		case ScrollStepDown: return "ScrollStepDown"
-		case ScrollPageUp: return "ScrollPageUp"
-		case ScrollPageLeft: return "ScrollPageLeft"
-		case ScrollStepBackward: return "ScrollStepBackward"
 		case ScrollEnd: return "ScrollEnd"
+		case ScrollJump: return "ScrollJump"
 		case ScrollNone: return "ScrollNone"
-		case ScrollStepUp: return "ScrollStepUp"
+		case ScrollPageBackward: return "ScrollPageBackward"
 		case ScrollPageDown: return "ScrollPageDown"
+		case ScrollPageForward: return "ScrollPageForward"
+		case ScrollPageLeft: return "ScrollPageLeft"
+		case ScrollPageRight: return "ScrollPageRight"
+		case ScrollPageUp: return "ScrollPageUp"
+		case ScrollStart: return "ScrollStart"
+		case ScrollStepBackward: return "ScrollStepBackward"
+		case ScrollStepDown: return "ScrollStepDown"
+		case ScrollStepForward: return "ScrollStepForward"
 		case ScrollStepLeft: return "ScrollStepLeft"
+		case ScrollStepRight: return "ScrollStepRight"
+		case ScrollStepUp: return "ScrollStepUp"
 		default: return fmt.Sprintf("ScrollType(%d)", e)
 	}
 }
@@ -4593,10 +4593,10 @@ func (e SelectionMode) InitGoValue(v *gobject.Value) {
 
 func (e SelectionMode) String() string {
 	switch e {
-		case SelectionNone: return "SelectionNone"
-		case SelectionSingle: return "SelectionSingle"
 		case SelectionBrowse: return "SelectionBrowse"
 		case SelectionMultiple: return "SelectionMultiple"
+		case SelectionNone: return "SelectionNone"
+		case SelectionSingle: return "SelectionSingle"
 		default: return fmt.Sprintf("SelectionMode(%d)", e)
 	}
 }
@@ -4636,8 +4636,8 @@ func (e SensitivityType) InitGoValue(v *gobject.Value) {
 
 func (e SensitivityType) String() string {
 	switch e {
-		case SensitivityOff: return "SensitivityOff"
 		case SensitivityAuto: return "SensitivityAuto"
+		case SensitivityOff: return "SensitivityOff"
 		case SensitivityOn: return "SensitivityOn"
 		default: return fmt.Sprintf("SensitivityType(%d)", e)
 	}
@@ -4688,11 +4688,11 @@ func (e ShadowType) InitGoValue(v *gobject.Value) {
 
 func (e ShadowType) String() string {
 	switch e {
-		case ShadowNone: return "ShadowNone"
-		case ShadowIn: return "ShadowIn"
-		case ShadowOut: return "ShadowOut"
 		case ShadowEtchedIn: return "ShadowEtchedIn"
 		case ShadowEtchedOut: return "ShadowEtchedOut"
+		case ShadowIn: return "ShadowIn"
+		case ShadowNone: return "ShadowNone"
+		case ShadowOut: return "ShadowOut"
 		default: return fmt.Sprintf("ShadowType(%d)", e)
 	}
 }
@@ -4753,14 +4753,14 @@ func (e ShortcutType) InitGoValue(v *gobject.Value) {
 
 func (e ShortcutType) String() string {
 	switch e {
-		case ShortcutGestureTwoFingerSwipeRight: return "ShortcutGestureTwoFingerSwipeRight"
-		case ShortcutGesture: return "ShortcutGesture"
 		case ShortcutAccelerator: return "ShortcutAccelerator"
+		case ShortcutGesture: return "ShortcutGesture"
 		case ShortcutGesturePinch: return "ShortcutGesturePinch"
-		case ShortcutGestureStretch: return "ShortcutGestureStretch"
 		case ShortcutGestureRotateClockwise: return "ShortcutGestureRotateClockwise"
 		case ShortcutGestureRotateCounterclockwise: return "ShortcutGestureRotateCounterclockwise"
+		case ShortcutGestureStretch: return "ShortcutGestureStretch"
 		case ShortcutGestureTwoFingerSwipeLeft: return "ShortcutGestureTwoFingerSwipeLeft"
+		case ShortcutGestureTwoFingerSwipeRight: return "ShortcutGestureTwoFingerSwipeRight"
 		default: return fmt.Sprintf("ShortcutType(%d)", e)
 	}
 }
@@ -4803,10 +4803,10 @@ func (e SizeGroupMode) InitGoValue(v *gobject.Value) {
 
 func (e SizeGroupMode) String() string {
 	switch e {
-		case SizeGroupVertical: return "SizeGroupVertical"
 		case SizeGroupBoth: return "SizeGroupBoth"
-		case SizeGroupNone: return "SizeGroupNone"
 		case SizeGroupHorizontal: return "SizeGroupHorizontal"
+		case SizeGroupNone: return "SizeGroupNone"
+		case SizeGroupVertical: return "SizeGroupVertical"
 		default: return fmt.Sprintf("SizeGroupMode(%d)", e)
 	}
 }
@@ -4845,9 +4845,9 @@ func (e SizeRequestMode) InitGoValue(v *gobject.Value) {
 
 func (e SizeRequestMode) String() string {
 	switch e {
+		case SizeRequestConstantSize: return "SizeRequestConstantSize"
 		case SizeRequestHeightForWidth: return "SizeRequestHeightForWidth"
 		case SizeRequestWidthForHeight: return "SizeRequestWidthForHeight"
-		case SizeRequestConstantSize: return "SizeRequestConstantSize"
 		default: return fmt.Sprintf("SizeRequestMode(%d)", e)
 	}
 }
@@ -4977,13 +4977,13 @@ func (e SpinType) InitGoValue(v *gobject.Value) {
 
 func (e SpinType) String() string {
 	switch e {
-		case SpinHome: return "SpinHome"
 		case SpinEnd: return "SpinEnd"
-		case SpinUserDefined: return "SpinUserDefined"
-		case SpinStepForward: return "SpinStepForward"
-		case SpinStepBackward: return "SpinStepBackward"
-		case SpinPageForward: return "SpinPageForward"
+		case SpinHome: return "SpinHome"
 		case SpinPageBackward: return "SpinPageBackward"
+		case SpinPageForward: return "SpinPageForward"
+		case SpinStepBackward: return "SpinStepBackward"
+		case SpinStepForward: return "SpinStepForward"
+		case SpinUserDefined: return "SpinUserDefined"
 		default: return fmt.Sprintf("SpinType(%d)", e)
 	}
 }
@@ -5092,25 +5092,25 @@ func (e StackTransitionType) InitGoValue(v *gobject.Value) {
 
 func (e StackTransitionType) String() string {
 	switch e {
-		case StackTransitionTypeOverDownUp: return "StackTransitionTypeOverDownUp"
-		case StackTransitionTypeOverLeftRight: return "StackTransitionTypeOverLeftRight"
-		case StackTransitionTypeSlideLeft: return "StackTransitionTypeSlideLeft"
-		case StackTransitionTypeSlideUpDown: return "StackTransitionTypeSlideUpDown"
-		case StackTransitionTypeOverLeft: return "StackTransitionTypeOverLeft"
-		case StackTransitionTypeOverUpDown: return "StackTransitionTypeOverUpDown"
-		case StackTransitionTypeOverRightLeft: return "StackTransitionTypeOverRightLeft"
-		case StackTransitionTypeNone: return "StackTransitionTypeNone"
-		case StackTransitionTypeSlideLeftRight: return "StackTransitionTypeSlideLeftRight"
-		case StackTransitionTypeOverRight: return "StackTransitionTypeOverRight"
-		case StackTransitionTypeUnderDown: return "StackTransitionTypeUnderDown"
-		case StackTransitionTypeUnderRight: return "StackTransitionTypeUnderRight"
 		case StackTransitionTypeCrossfade: return "StackTransitionTypeCrossfade"
-		case StackTransitionTypeSlideUp: return "StackTransitionTypeSlideUp"
-		case StackTransitionTypeSlideDown: return "StackTransitionTypeSlideDown"
-		case StackTransitionTypeUnderLeft: return "StackTransitionTypeUnderLeft"
-		case StackTransitionTypeSlideRight: return "StackTransitionTypeSlideRight"
-		case StackTransitionTypeOverUp: return "StackTransitionTypeOverUp"
+		case StackTransitionTypeNone: return "StackTransitionTypeNone"
 		case StackTransitionTypeOverDown: return "StackTransitionTypeOverDown"
+		case StackTransitionTypeOverDownUp: return "StackTransitionTypeOverDownUp"
+		case StackTransitionTypeOverLeft: return "StackTransitionTypeOverLeft"
+		case StackTransitionTypeOverLeftRight: return "StackTransitionTypeOverLeftRight"
+		case StackTransitionTypeOverRight: return "StackTransitionTypeOverRight"
+		case StackTransitionTypeOverRightLeft: return "StackTransitionTypeOverRightLeft"
+		case StackTransitionTypeOverUp: return "StackTransitionTypeOverUp"
+		case StackTransitionTypeOverUpDown: return "StackTransitionTypeOverUpDown"
+		case StackTransitionTypeSlideDown: return "StackTransitionTypeSlideDown"
+		case StackTransitionTypeSlideLeft: return "StackTransitionTypeSlideLeft"
+		case StackTransitionTypeSlideLeftRight: return "StackTransitionTypeSlideLeftRight"
+		case StackTransitionTypeSlideRight: return "StackTransitionTypeSlideRight"
+		case StackTransitionTypeSlideUp: return "StackTransitionTypeSlideUp"
+		case StackTransitionTypeSlideUpDown: return "StackTransitionTypeSlideUpDown"
+		case StackTransitionTypeUnderDown: return "StackTransitionTypeUnderDown"
+		case StackTransitionTypeUnderLeft: return "StackTransitionTypeUnderLeft"
+		case StackTransitionTypeUnderRight: return "StackTransitionTypeUnderRight"
 		case StackTransitionTypeUnderUp: return "StackTransitionTypeUnderUp"
 		default: return fmt.Sprintf("StackTransitionType(%d)", e)
 	}
@@ -5154,9 +5154,9 @@ func (e TextBufferTargetInfo) InitGoValue(v *gobject.Value) {
 
 func (e TextBufferTargetInfo) String() string {
 	switch e {
-		case TextBufferTargetInfoText: return "TextBufferTargetInfoText"
 		case TextBufferTargetInfoBufferContents: return "TextBufferTargetInfoBufferContents"
 		case TextBufferTargetInfoRichText: return "TextBufferTargetInfoRichText"
+		case TextBufferTargetInfoText: return "TextBufferTargetInfoText"
 		default: return fmt.Sprintf("TextBufferTargetInfo(%d)", e)
 	}
 }
@@ -5194,8 +5194,8 @@ func (e TextDirection) InitGoValue(v *gobject.Value) {
 
 func (e TextDirection) String() string {
 	switch e {
-		case TextDirNone: return "TextDirNone"
 		case TextDirLTR: return "TextDirLTR"
+		case TextDirNone: return "TextDirNone"
 		case TextDirRTL: return "TextDirRTL"
 		default: return fmt.Sprintf("TextDirection(%d)", e)
 	}
@@ -5233,8 +5233,8 @@ func (e TextExtendSelection) InitGoValue(v *gobject.Value) {
 
 func (e TextExtendSelection) String() string {
 	switch e {
-		case TextExtendSelectionWord: return "TextExtendSelectionWord"
 		case TextExtendSelectionLine: return "TextExtendSelectionLine"
+		case TextExtendSelectionWord: return "TextExtendSelectionWord"
 		default: return fmt.Sprintf("TextExtendSelection(%d)", e)
 	}
 }
@@ -5277,10 +5277,10 @@ func (e TextViewLayer) InitGoValue(v *gobject.Value) {
 
 func (e TextViewLayer) String() string {
 	switch e {
-		case TextViewLayerBelow: return "TextViewLayerBelow"
 		case TextViewLayerAbove: return "TextViewLayerAbove"
-		case TextViewLayerBelowText: return "TextViewLayerBelowText"
 		case TextViewLayerAboveText: return "TextViewLayerAboveText"
+		case TextViewLayerBelow: return "TextViewLayerBelow"
+		case TextViewLayerBelowText: return "TextViewLayerBelowText"
 		default: return fmt.Sprintf("TextViewLayer(%d)", e)
 	}
 }
@@ -5334,13 +5334,13 @@ func (e TextWindowType) InitGoValue(v *gobject.Value) {
 
 func (e TextWindowType) String() string {
 	switch e {
-		case TextWindowTop: return "TextWindowTop"
 		case TextWindowBottom: return "TextWindowBottom"
-		case TextWindowPrivate: return "TextWindowPrivate"
-		case TextWindowWidget: return "TextWindowWidget"
-		case TextWindowText: return "TextWindowText"
 		case TextWindowLeft: return "TextWindowLeft"
+		case TextWindowPrivate: return "TextWindowPrivate"
 		case TextWindowRight: return "TextWindowRight"
+		case TextWindowText: return "TextWindowText"
+		case TextWindowTop: return "TextWindowTop"
+		case TextWindowWidget: return "TextWindowWidget"
 		default: return fmt.Sprintf("TextWindowType(%d)", e)
 	}
 }
@@ -5387,10 +5387,10 @@ func (e ToolbarStyle) InitGoValue(v *gobject.Value) {
 
 func (e ToolbarStyle) String() string {
 	switch e {
+		case ToolbarBoth: return "ToolbarBoth"
 		case ToolbarBothHoriz: return "ToolbarBothHoriz"
 		case ToolbarIcons: return "ToolbarIcons"
 		case ToolbarText: return "ToolbarText"
-		case ToolbarBoth: return "ToolbarBoth"
 		default: return fmt.Sprintf("ToolbarStyle(%d)", e)
 	}
 }
@@ -5430,9 +5430,9 @@ func (e TreeViewColumnSizing) InitGoValue(v *gobject.Value) {
 
 func (e TreeViewColumnSizing) String() string {
 	switch e {
-		case TreeViewColumnGrowOnly: return "TreeViewColumnGrowOnly"
 		case TreeViewColumnAutosize: return "TreeViewColumnAutosize"
 		case TreeViewColumnFixed: return "TreeViewColumnFixed"
+		case TreeViewColumnGrowOnly: return "TreeViewColumnGrowOnly"
 		default: return fmt.Sprintf("TreeViewColumnSizing(%d)", e)
 	}
 }
@@ -5474,10 +5474,10 @@ func (e TreeViewDropPosition) InitGoValue(v *gobject.Value) {
 
 func (e TreeViewDropPosition) String() string {
 	switch e {
-		case TreeViewDropBefore: return "TreeViewDropBefore"
 		case TreeViewDropAfter: return "TreeViewDropAfter"
-		case TreeViewDropIntoOrBefore: return "TreeViewDropIntoOrBefore"
+		case TreeViewDropBefore: return "TreeViewDropBefore"
 		case TreeViewDropIntoOrAfter: return "TreeViewDropIntoOrAfter"
+		case TreeViewDropIntoOrBefore: return "TreeViewDropIntoOrBefore"
 		default: return fmt.Sprintf("TreeViewDropPosition(%d)", e)
 	}
 }
@@ -5519,10 +5519,10 @@ func (e TreeViewGridLines) InitGoValue(v *gobject.Value) {
 
 func (e TreeViewGridLines) String() string {
 	switch e {
-		case TreeViewGridLinesNone: return "TreeViewGridLinesNone"
-		case TreeViewGridLinesHorizontal: return "TreeViewGridLinesHorizontal"
-		case TreeViewGridLinesVertical: return "TreeViewGridLinesVertical"
 		case TreeViewGridLinesBoth: return "TreeViewGridLinesBoth"
+		case TreeViewGridLinesHorizontal: return "TreeViewGridLinesHorizontal"
+		case TreeViewGridLinesNone: return "TreeViewGridLinesNone"
+		case TreeViewGridLinesVertical: return "TreeViewGridLinesVertical"
 		default: return fmt.Sprintf("TreeViewGridLines(%d)", e)
 	}
 }
@@ -5564,10 +5564,10 @@ func (e Unit) InitGoValue(v *gobject.Value) {
 
 func (e Unit) String() string {
 	switch e {
-		case UnitPoints: return "UnitPoints"
 		case UnitInch: return "UnitInch"
 		case UnitMm: return "UnitMm"
 		case UnitNone: return "UnitNone"
+		case UnitPoints: return "UnitPoints"
 		default: return fmt.Sprintf("Unit(%d)", e)
 	}
 }
@@ -5651,11 +5651,11 @@ func (e WindowPosition) InitGoValue(v *gobject.Value) {
 
 func (e WindowPosition) String() string {
 	switch e {
+		case WinPosCenter: return "WinPosCenter"
 		case WinPosCenterAlways: return "WinPosCenterAlways"
 		case WinPosCenterOnParent: return "WinPosCenterOnParent"
-		case WinPosNone: return "WinPosNone"
-		case WinPosCenter: return "WinPosCenter"
 		case WinPosMouse: return "WinPosMouse"
+		case WinPosNone: return "WinPosNone"
 		default: return fmt.Sprintf("WindowPosition(%d)", e)
 	}
 }
@@ -5701,8 +5701,8 @@ func (e WindowType) InitGoValue(v *gobject.Value) {
 
 func (e WindowType) String() string {
 	switch e {
-		case WindowToplevel: return "WindowToplevel"
 		case WindowPopup: return "WindowPopup"
+		case WindowToplevel: return "WindowToplevel"
 		default: return fmt.Sprintf("WindowType(%d)", e)
 	}
 }
@@ -5748,9 +5748,9 @@ func (e WrapMode) InitGoValue(v *gobject.Value) {
 func (e WrapMode) String() string {
 	switch e {
 		case WrapChar: return "WrapChar"
+		case WrapNone: return "WrapNone"
 		case WrapWord: return "WrapWord"
 		case WrapWordChar: return "WrapWordChar"
-		case WrapNone: return "WrapNone"
 		default: return fmt.Sprintf("WrapMode(%d)", e)
 	}
 }

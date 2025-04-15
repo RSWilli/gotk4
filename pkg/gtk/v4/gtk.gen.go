@@ -912,9 +912,9 @@ func (e AccessibleAnnouncementPriority) InitGoValue(v *gobject.Value) {
 
 func (e AccessibleAnnouncementPriority) String() string {
 	switch e {
+		case AccessibleAnnouncementPriorityHigh: return "AccessibleAnnouncementPriorityHigh"
 		case AccessibleAnnouncementPriorityLow: return "AccessibleAnnouncementPriorityLow"
 		case AccessibleAnnouncementPriorityMedium: return "AccessibleAnnouncementPriorityMedium"
-		case AccessibleAnnouncementPriorityHigh: return "AccessibleAnnouncementPriorityHigh"
 		default: return fmt.Sprintf("AccessibleAnnouncementPriority(%d)", e)
 	}
 }
@@ -965,10 +965,10 @@ func (e AccessibleAutocomplete) InitGoValue(v *gobject.Value) {
 
 func (e AccessibleAutocomplete) String() string {
 	switch e {
-		case AccessibleAutocompleteList: return "AccessibleAutocompleteList"
 		case AccessibleAutocompleteBoth: return "AccessibleAutocompleteBoth"
-		case AccessibleAutocompleteNone: return "AccessibleAutocompleteNone"
 		case AccessibleAutocompleteInline: return "AccessibleAutocompleteInline"
+		case AccessibleAutocompleteList: return "AccessibleAutocompleteList"
+		case AccessibleAutocompleteNone: return "AccessibleAutocompleteNone"
 		default: return fmt.Sprintf("AccessibleAutocomplete(%d)", e)
 	}
 }
@@ -1015,10 +1015,10 @@ func (e AccessibleInvalidState) InitGoValue(v *gobject.Value) {
 
 func (e AccessibleInvalidState) String() string {
 	switch e {
-		case AccessibleInvalidTrue: return "AccessibleInvalidTrue"
+		case AccessibleInvalidFalse: return "AccessibleInvalidFalse"
 		case AccessibleInvalidGrammar: return "AccessibleInvalidGrammar"
 		case AccessibleInvalidSpelling: return "AccessibleInvalidSpelling"
-		case AccessibleInvalidFalse: return "AccessibleInvalidFalse"
+		case AccessibleInvalidTrue: return "AccessibleInvalidTrue"
 		default: return fmt.Sprintf("AccessibleInvalidState(%d)", e)
 	}
 }
@@ -1057,9 +1057,9 @@ func (e AccessiblePlatformState) InitGoValue(v *gobject.Value) {
 
 func (e AccessiblePlatformState) String() string {
 	switch e {
+		case AccessiblePlatformStateActive: return "AccessiblePlatformStateActive"
 		case AccessiblePlatformStateFocusable: return "AccessiblePlatformStateFocusable"
 		case AccessiblePlatformStateFocused: return "AccessiblePlatformStateFocused"
-		case AccessiblePlatformStateActive: return "AccessiblePlatformStateActive"
 		default: return fmt.Sprintf("AccessiblePlatformState(%d)", e)
 	}
 }
@@ -1193,26 +1193,26 @@ func (e AccessibleProperty) InitGoValue(v *gobject.Value) {
 
 func (e AccessibleProperty) String() string {
 	switch e {
-		case AccessiblePropertyKeyShortcuts: return "AccessiblePropertyKeyShortcuts"
-		case AccessiblePropertyLevel: return "AccessiblePropertyLevel"
-		case AccessiblePropertyMultiSelectable: return "AccessiblePropertyMultiSelectable"
-		case AccessiblePropertyPlaceholder: return "AccessiblePropertyPlaceholder"
-		case AccessiblePropertyReadOnly: return "AccessiblePropertyReadOnly"
-		case AccessiblePropertyValueText: return "AccessiblePropertyValueText"
 		case AccessiblePropertyAutocomplete: return "AccessiblePropertyAutocomplete"
 		case AccessiblePropertyDescription: return "AccessiblePropertyDescription"
-		case AccessiblePropertyOrientation: return "AccessiblePropertyOrientation"
-		case AccessiblePropertyRoleDescription: return "AccessiblePropertyRoleDescription"
+		case AccessiblePropertyHasPopup: return "AccessiblePropertyHasPopup"
+		case AccessiblePropertyHelpText: return "AccessiblePropertyHelpText"
+		case AccessiblePropertyKeyShortcuts: return "AccessiblePropertyKeyShortcuts"
 		case AccessiblePropertyLabel: return "AccessiblePropertyLabel"
+		case AccessiblePropertyLevel: return "AccessiblePropertyLevel"
 		case AccessiblePropertyModal: return "AccessiblePropertyModal"
 		case AccessiblePropertyMultiLine: return "AccessiblePropertyMultiLine"
+		case AccessiblePropertyMultiSelectable: return "AccessiblePropertyMultiSelectable"
+		case AccessiblePropertyOrientation: return "AccessiblePropertyOrientation"
+		case AccessiblePropertyPlaceholder: return "AccessiblePropertyPlaceholder"
+		case AccessiblePropertyReadOnly: return "AccessiblePropertyReadOnly"
+		case AccessiblePropertyRequired: return "AccessiblePropertyRequired"
+		case AccessiblePropertyRoleDescription: return "AccessiblePropertyRoleDescription"
 		case AccessiblePropertySort: return "AccessiblePropertySort"
 		case AccessiblePropertyValueMax: return "AccessiblePropertyValueMax"
-		case AccessiblePropertyValueNow: return "AccessiblePropertyValueNow"
-		case AccessiblePropertyHelpText: return "AccessiblePropertyHelpText"
-		case AccessiblePropertyHasPopup: return "AccessiblePropertyHasPopup"
-		case AccessiblePropertyRequired: return "AccessiblePropertyRequired"
 		case AccessiblePropertyValueMin: return "AccessiblePropertyValueMin"
+		case AccessiblePropertyValueNow: return "AccessiblePropertyValueNow"
+		case AccessiblePropertyValueText: return "AccessiblePropertyValueText"
 		default: return fmt.Sprintf("AccessibleProperty(%d)", e)
 	}
 }
@@ -1338,23 +1338,23 @@ func (e AccessibleRelation) InitGoValue(v *gobject.Value) {
 
 func (e AccessibleRelation) String() string {
 	switch e {
-		case AccessibleRelationControls: return "AccessibleRelationControls"
-		case AccessibleRelationErrorMessage: return "AccessibleRelationErrorMessage"
-		case AccessibleRelationPosInSet: return "AccessibleRelationPosInSet"
+		case AccessibleRelationActiveDescendant: return "AccessibleRelationActiveDescendant"
+		case AccessibleRelationColCount: return "AccessibleRelationColCount"
 		case AccessibleRelationColIndex: return "AccessibleRelationColIndex"
+		case AccessibleRelationColIndexText: return "AccessibleRelationColIndexText"
+		case AccessibleRelationColSpan: return "AccessibleRelationColSpan"
+		case AccessibleRelationControls: return "AccessibleRelationControls"
 		case AccessibleRelationDescribedBy: return "AccessibleRelationDescribedBy"
 		case AccessibleRelationDetails: return "AccessibleRelationDetails"
-		case AccessibleRelationRowCount: return "AccessibleRelationRowCount"
-		case AccessibleRelationRowIndex: return "AccessibleRelationRowIndex"
-		case AccessibleRelationActiveDescendant: return "AccessibleRelationActiveDescendant"
-		case AccessibleRelationColIndexText: return "AccessibleRelationColIndexText"
+		case AccessibleRelationErrorMessage: return "AccessibleRelationErrorMessage"
+		case AccessibleRelationFlowTo: return "AccessibleRelationFlowTo"
 		case AccessibleRelationLabelledBy: return "AccessibleRelationLabelledBy"
 		case AccessibleRelationOwns: return "AccessibleRelationOwns"
+		case AccessibleRelationPosInSet: return "AccessibleRelationPosInSet"
+		case AccessibleRelationRowCount: return "AccessibleRelationRowCount"
+		case AccessibleRelationRowIndex: return "AccessibleRelationRowIndex"
 		case AccessibleRelationRowIndexText: return "AccessibleRelationRowIndexText"
 		case AccessibleRelationRowSpan: return "AccessibleRelationRowSpan"
-		case AccessibleRelationColCount: return "AccessibleRelationColCount"
-		case AccessibleRelationColSpan: return "AccessibleRelationColSpan"
-		case AccessibleRelationFlowTo: return "AccessibleRelationFlowTo"
 		case AccessibleRelationSetSize: return "AccessibleRelationSetSize"
 		default: return fmt.Sprintf("AccessibleRelation(%d)", e)
 	}
@@ -1752,91 +1752,91 @@ func (e AccessibleRole) InitGoValue(v *gobject.Value) {
 
 func (e AccessibleRole) String() string {
 	switch e {
+		case AccessibleRoleAlert: return "AccessibleRoleAlert"
 		case AccessibleRoleAlertDialog: return "AccessibleRoleAlertDialog"
-		case AccessibleRoleSection: return "AccessibleRoleSection"
-		case AccessibleRoleDialog: return "AccessibleRoleDialog"
-		case AccessibleRoleSearch: return "AccessibleRoleSearch"
-		case AccessibleRoleSelect: return "AccessibleRoleSelect"
-		case AccessibleRoleTabList: return "AccessibleRoleTabList"
-		case AccessibleRoleTabPanel: return "AccessibleRoleTabPanel"
-		case AccessibleRoleTooltip: return "AccessibleRoleTooltip"
-		case AccessibleRoleTree: return "AccessibleRoleTree"
-		case AccessibleRoleWidget: return "AccessibleRoleWidget"
+		case AccessibleRoleApplication: return "AccessibleRoleApplication"
+		case AccessibleRoleArticle: return "AccessibleRoleArticle"
+		case AccessibleRoleBanner: return "AccessibleRoleBanner"
+		case AccessibleRoleBlockQuote: return "AccessibleRoleBlockQuote"
 		case AccessibleRoleButton: return "AccessibleRoleButton"
-		case AccessibleRoleComposite: return "AccessibleRoleComposite"
-		case AccessibleRoleGeneric: return "AccessibleRoleGeneric"
-		case AccessibleRoleImg: return "AccessibleRoleImg"
-		case AccessibleRoleNote: return "AccessibleRoleNote"
-		case AccessibleRoleRange: return "AccessibleRoleRange"
-		case AccessibleRoleWindow: return "AccessibleRoleWindow"
-		case AccessibleRoleList: return "AccessibleRoleList"
-		case AccessibleRoleMenuBar: return "AccessibleRoleMenuBar"
-		case AccessibleRoleProgressBar: return "AccessibleRoleProgressBar"
-		case AccessibleRoleSectionHead: return "AccessibleRoleSectionHead"
-		case AccessibleRoleTable: return "AccessibleRoleTable"
-		case AccessibleRoleToolbar: return "AccessibleRoleToolbar"
-		case AccessibleRoleNone: return "AccessibleRoleNone"
-		case AccessibleRoleSlider: return "AccessibleRoleSlider"
-		case AccessibleRoleTab: return "AccessibleRoleTab"
+		case AccessibleRoleCaption: return "AccessibleRoleCaption"
+		case AccessibleRoleCell: return "AccessibleRoleCell"
+		case AccessibleRoleCheckbox: return "AccessibleRoleCheckbox"
 		case AccessibleRoleColumnHeader: return "AccessibleRoleColumnHeader"
+		case AccessibleRoleComboBox: return "AccessibleRoleComboBox"
+		case AccessibleRoleCommand: return "AccessibleRoleCommand"
+		case AccessibleRoleComment: return "AccessibleRoleComment"
+		case AccessibleRoleComposite: return "AccessibleRoleComposite"
+		case AccessibleRoleDialog: return "AccessibleRoleDialog"
+		case AccessibleRoleDocument: return "AccessibleRoleDocument"
+		case AccessibleRoleFeed: return "AccessibleRoleFeed"
+		case AccessibleRoleForm: return "AccessibleRoleForm"
+		case AccessibleRoleGeneric: return "AccessibleRoleGeneric"
+		case AccessibleRoleGrid: return "AccessibleRoleGrid"
+		case AccessibleRoleGridCell: return "AccessibleRoleGridCell"
 		case AccessibleRoleGroup: return "AccessibleRoleGroup"
+		case AccessibleRoleHeading: return "AccessibleRoleHeading"
+		case AccessibleRoleImg: return "AccessibleRoleImg"
 		case AccessibleRoleInput: return "AccessibleRoleInput"
-		case AccessibleRoleLog: return "AccessibleRoleLog"
-		case AccessibleRoleMath: return "AccessibleRoleMath"
-		case AccessibleRoleOption: return "AccessibleRoleOption"
-		case AccessibleRoleStatus: return "AccessibleRoleStatus"
-		case AccessibleRoleTextBox: return "AccessibleRoleTextBox"
+		case AccessibleRoleLabel: return "AccessibleRoleLabel"
+		case AccessibleRoleLandmark: return "AccessibleRoleLandmark"
 		case AccessibleRoleLegend: return "AccessibleRoleLegend"
 		case AccessibleRoleLink: return "AccessibleRoleLink"
-		case AccessibleRoleListItem: return "AccessibleRoleListItem"
-		case AccessibleRoleTerminal: return "AccessibleRoleTerminal"
-		case AccessibleRoleCell: return "AccessibleRoleCell"
-		case AccessibleRoleMenu: return "AccessibleRoleMenu"
-		case AccessibleRoleBlockQuote: return "AccessibleRoleBlockQuote"
-		case AccessibleRoleComment: return "AccessibleRoleComment"
-		case AccessibleRoleHeading: return "AccessibleRoleHeading"
-		case AccessibleRoleLandmark: return "AccessibleRoleLandmark"
-		case AccessibleRoleMenuItemCheckbox: return "AccessibleRoleMenuItemCheckbox"
-		case AccessibleRoleRowGroup: return "AccessibleRoleRowGroup"
-		case AccessibleRoleSeparator: return "AccessibleRoleSeparator"
-		case AccessibleRoleStructure: return "AccessibleRoleStructure"
-		case AccessibleRoleTimer: return "AccessibleRoleTimer"
-		case AccessibleRoleApplication: return "AccessibleRoleApplication"
-		case AccessibleRoleCaption: return "AccessibleRoleCaption"
-		case AccessibleRoleCommand: return "AccessibleRoleCommand"
-		case AccessibleRoleDocument: return "AccessibleRoleDocument"
-		case AccessibleRoleLabel: return "AccessibleRoleLabel"
-		case AccessibleRoleMarquee: return "AccessibleRoleMarquee"
-		case AccessibleRoleSwitch: return "AccessibleRoleSwitch"
-		case AccessibleRoleAlert: return "AccessibleRoleAlert"
-		case AccessibleRoleForm: return "AccessibleRoleForm"
+		case AccessibleRoleList: return "AccessibleRoleList"
 		case AccessibleRoleListBox: return "AccessibleRoleListBox"
-		case AccessibleRoleTreeGrid: return "AccessibleRoleTreeGrid"
-		case AccessibleRoleBanner: return "AccessibleRoleBanner"
-		case AccessibleRoleFeed: return "AccessibleRoleFeed"
-		case AccessibleRoleGrid: return "AccessibleRoleGrid"
-		case AccessibleRoleMenuItem: return "AccessibleRoleMenuItem"
-		case AccessibleRoleSearchBox: return "AccessibleRoleSearchBox"
-		case AccessibleRoleToggleButton: return "AccessibleRoleToggleButton"
-		case AccessibleRoleParagraph: return "AccessibleRoleParagraph"
-		case AccessibleRoleArticle: return "AccessibleRoleArticle"
-		case AccessibleRoleMeter: return "AccessibleRoleMeter"
-		case AccessibleRolePresentation: return "AccessibleRolePresentation"
-		case AccessibleRoleScrollbar: return "AccessibleRoleScrollbar"
-		case AccessibleRoleSpinButton: return "AccessibleRoleSpinButton"
-		case AccessibleRoleTime: return "AccessibleRoleTime"
-		case AccessibleRoleCheckbox: return "AccessibleRoleCheckbox"
-		case AccessibleRoleGridCell: return "AccessibleRoleGridCell"
-		case AccessibleRoleMenuItemRadio: return "AccessibleRoleMenuItemRadio"
-		case AccessibleRoleRowHeader: return "AccessibleRoleRowHeader"
-		case AccessibleRoleTreeItem: return "AccessibleRoleTreeItem"
-		case AccessibleRoleComboBox: return "AccessibleRoleComboBox"
+		case AccessibleRoleListItem: return "AccessibleRoleListItem"
+		case AccessibleRoleLog: return "AccessibleRoleLog"
 		case AccessibleRoleMain: return "AccessibleRoleMain"
+		case AccessibleRoleMarquee: return "AccessibleRoleMarquee"
+		case AccessibleRoleMath: return "AccessibleRoleMath"
+		case AccessibleRoleMenu: return "AccessibleRoleMenu"
+		case AccessibleRoleMenuBar: return "AccessibleRoleMenuBar"
+		case AccessibleRoleMenuItem: return "AccessibleRoleMenuItem"
+		case AccessibleRoleMenuItemCheckbox: return "AccessibleRoleMenuItemCheckbox"
+		case AccessibleRoleMenuItemRadio: return "AccessibleRoleMenuItemRadio"
+		case AccessibleRoleMeter: return "AccessibleRoleMeter"
 		case AccessibleRoleNavigation: return "AccessibleRoleNavigation"
+		case AccessibleRoleNone: return "AccessibleRoleNone"
+		case AccessibleRoleNote: return "AccessibleRoleNote"
+		case AccessibleRoleOption: return "AccessibleRoleOption"
+		case AccessibleRoleParagraph: return "AccessibleRoleParagraph"
+		case AccessibleRolePresentation: return "AccessibleRolePresentation"
+		case AccessibleRoleProgressBar: return "AccessibleRoleProgressBar"
 		case AccessibleRoleRadio: return "AccessibleRoleRadio"
 		case AccessibleRoleRadioGroup: return "AccessibleRoleRadioGroup"
+		case AccessibleRoleRange: return "AccessibleRoleRange"
 		case AccessibleRoleRegion: return "AccessibleRoleRegion"
 		case AccessibleRoleRow: return "AccessibleRoleRow"
+		case AccessibleRoleRowGroup: return "AccessibleRoleRowGroup"
+		case AccessibleRoleRowHeader: return "AccessibleRoleRowHeader"
+		case AccessibleRoleScrollbar: return "AccessibleRoleScrollbar"
+		case AccessibleRoleSearch: return "AccessibleRoleSearch"
+		case AccessibleRoleSearchBox: return "AccessibleRoleSearchBox"
+		case AccessibleRoleSection: return "AccessibleRoleSection"
+		case AccessibleRoleSectionHead: return "AccessibleRoleSectionHead"
+		case AccessibleRoleSelect: return "AccessibleRoleSelect"
+		case AccessibleRoleSeparator: return "AccessibleRoleSeparator"
+		case AccessibleRoleSlider: return "AccessibleRoleSlider"
+		case AccessibleRoleSpinButton: return "AccessibleRoleSpinButton"
+		case AccessibleRoleStatus: return "AccessibleRoleStatus"
+		case AccessibleRoleStructure: return "AccessibleRoleStructure"
+		case AccessibleRoleSwitch: return "AccessibleRoleSwitch"
+		case AccessibleRoleTab: return "AccessibleRoleTab"
+		case AccessibleRoleTabList: return "AccessibleRoleTabList"
+		case AccessibleRoleTabPanel: return "AccessibleRoleTabPanel"
+		case AccessibleRoleTable: return "AccessibleRoleTable"
+		case AccessibleRoleTerminal: return "AccessibleRoleTerminal"
+		case AccessibleRoleTextBox: return "AccessibleRoleTextBox"
+		case AccessibleRoleTime: return "AccessibleRoleTime"
+		case AccessibleRoleTimer: return "AccessibleRoleTimer"
+		case AccessibleRoleToggleButton: return "AccessibleRoleToggleButton"
+		case AccessibleRoleToolbar: return "AccessibleRoleToolbar"
+		case AccessibleRoleTooltip: return "AccessibleRoleTooltip"
+		case AccessibleRoleTree: return "AccessibleRoleTree"
+		case AccessibleRoleTreeGrid: return "AccessibleRoleTreeGrid"
+		case AccessibleRoleTreeItem: return "AccessibleRoleTreeItem"
+		case AccessibleRoleWidget: return "AccessibleRoleWidget"
+		case AccessibleRoleWindow: return "AccessibleRoleWindow"
 		default: return fmt.Sprintf("AccessibleRole(%d)", e)
 	}
 }
@@ -1880,9 +1880,9 @@ func (e AccessibleSort) InitGoValue(v *gobject.Value) {
 
 func (e AccessibleSort) String() string {
 	switch e {
-		case AccessibleSortNone: return "AccessibleSortNone"
 		case AccessibleSortAscending: return "AccessibleSortAscending"
 		case AccessibleSortDescending: return "AccessibleSortDescending"
+		case AccessibleSortNone: return "AccessibleSortNone"
 		case AccessibleSortOther: return "AccessibleSortOther"
 		default: return fmt.Sprintf("AccessibleSort(%d)", e)
 	}
@@ -1959,15 +1959,15 @@ func (e AccessibleState) InitGoValue(v *gobject.Value) {
 
 func (e AccessibleState) String() string {
 	switch e {
+		case AccessibleStateBusy: return "AccessibleStateBusy"
+		case AccessibleStateChecked: return "AccessibleStateChecked"
+		case AccessibleStateDisabled: return "AccessibleStateDisabled"
+		case AccessibleStateExpanded: return "AccessibleStateExpanded"
+		case AccessibleStateHidden: return "AccessibleStateHidden"
 		case AccessibleStateInvalid: return "AccessibleStateInvalid"
 		case AccessibleStatePressed: return "AccessibleStatePressed"
 		case AccessibleStateSelected: return "AccessibleStateSelected"
 		case AccessibleStateVisited: return "AccessibleStateVisited"
-		case AccessibleStateChecked: return "AccessibleStateChecked"
-		case AccessibleStateBusy: return "AccessibleStateBusy"
-		case AccessibleStateDisabled: return "AccessibleStateDisabled"
-		case AccessibleStateExpanded: return "AccessibleStateExpanded"
-		case AccessibleStateHidden: return "AccessibleStateHidden"
 		default: return fmt.Sprintf("AccessibleState(%d)", e)
 	}
 }
@@ -2060,11 +2060,11 @@ func (e AccessibleTextGranularity) InitGoValue(v *gobject.Value) {
 
 func (e AccessibleTextGranularity) String() string {
 	switch e {
-		case AccessibleTextGranularityWord: return "AccessibleTextGranularityWord"
-		case AccessibleTextGranularitySentence: return "AccessibleTextGranularitySentence"
+		case AccessibleTextGranularityCharacter: return "AccessibleTextGranularityCharacter"
 		case AccessibleTextGranularityLine: return "AccessibleTextGranularityLine"
 		case AccessibleTextGranularityParagraph: return "AccessibleTextGranularityParagraph"
-		case AccessibleTextGranularityCharacter: return "AccessibleTextGranularityCharacter"
+		case AccessibleTextGranularitySentence: return "AccessibleTextGranularitySentence"
+		case AccessibleTextGranularityWord: return "AccessibleTextGranularityWord"
 		default: return fmt.Sprintf("AccessibleTextGranularity(%d)", e)
 	}
 }
@@ -2108,8 +2108,8 @@ func (e AccessibleTristate) InitGoValue(v *gobject.Value) {
 func (e AccessibleTristate) String() string {
 	switch e {
 		case AccessibleTristateFalse: return "AccessibleTristateFalse"
-		case AccessibleTristateTrue: return "AccessibleTristateTrue"
 		case AccessibleTristateMixed: return "AccessibleTristateMixed"
+		case AccessibleTristateTrue: return "AccessibleTristateTrue"
 		default: return fmt.Sprintf("AccessibleTristate(%d)", e)
 	}
 }
@@ -2179,10 +2179,10 @@ func (e Align) InitGoValue(v *gobject.Value) {
 
 func (e Align) String() string {
 	switch e {
-		case AlignEnd: return "AlignEnd"
-		case AlignCenter: return "AlignCenter"
-		case AlignBaselineFill: return "AlignBaselineFill"
 		case AlignBaselineCenter: return "AlignBaselineCenter"
+		case AlignBaselineFill: return "AlignBaselineFill"
+		case AlignCenter: return "AlignCenter"
+		case AlignEnd: return "AlignEnd"
 		case AlignFill: return "AlignFill"
 		case AlignStart: return "AlignStart"
 		default: return fmt.Sprintf("Align(%d)", e)
@@ -2230,11 +2230,11 @@ func (e ArrowType) InitGoValue(v *gobject.Value) {
 
 func (e ArrowType) String() string {
 	switch e {
-		case ArrowUp: return "ArrowUp"
 		case ArrowDown: return "ArrowDown"
 		case ArrowLeft: return "ArrowLeft"
-		case ArrowRight: return "ArrowRight"
 		case ArrowNone: return "ArrowNone"
+		case ArrowRight: return "ArrowRight"
+		case ArrowUp: return "ArrowUp"
 		default: return fmt.Sprintf("ArrowType(%d)", e)
 	}
 }
@@ -2302,12 +2302,12 @@ func (e AssistantPageType) InitGoValue(v *gobject.Value) {
 
 func (e AssistantPageType) String() string {
 	switch e {
-		case AssistantPageContent: return "AssistantPageContent"
-		case AssistantPageIntro: return "AssistantPageIntro"
 		case AssistantPageConfirm: return "AssistantPageConfirm"
-		case AssistantPageSummary: return "AssistantPageSummary"
-		case AssistantPageProgress: return "AssistantPageProgress"
+		case AssistantPageContent: return "AssistantPageContent"
 		case AssistantPageCustom: return "AssistantPageCustom"
+		case AssistantPageIntro: return "AssistantPageIntro"
+		case AssistantPageProgress: return "AssistantPageProgress"
+		case AssistantPageSummary: return "AssistantPageSummary"
 		default: return fmt.Sprintf("AssistantPageType(%d)", e)
 	}
 }
@@ -2352,9 +2352,9 @@ func (e BaselinePosition) InitGoValue(v *gobject.Value) {
 
 func (e BaselinePosition) String() string {
 	switch e {
-		case BaselinePositionTop: return "BaselinePositionTop"
-		case BaselinePositionCenter: return "BaselinePositionCenter"
 		case BaselinePositionBottom: return "BaselinePositionBottom"
+		case BaselinePositionCenter: return "BaselinePositionCenter"
+		case BaselinePositionTop: return "BaselinePositionTop"
 		default: return fmt.Sprintf("BaselinePosition(%d)", e)
 	}
 }
@@ -2420,16 +2420,16 @@ func (e BorderStyle) InitGoValue(v *gobject.Value) {
 
 func (e BorderStyle) String() string {
 	switch e {
+		case BorderStyleDashed: return "BorderStyleDashed"
 		case BorderStyleDotted: return "BorderStyleDotted"
 		case BorderStyleDouble: return "BorderStyleDouble"
 		case BorderStyleGroove: return "BorderStyleGroove"
-		case BorderStyleRidge: return "BorderStyleRidge"
-		case BorderStyleNone: return "BorderStyleNone"
 		case BorderStyleHidden: return "BorderStyleHidden"
-		case BorderStyleDashed: return "BorderStyleDashed"
-		case BorderStyleSolid: return "BorderStyleSolid"
 		case BorderStyleInset: return "BorderStyleInset"
+		case BorderStyleNone: return "BorderStyleNone"
 		case BorderStyleOutset: return "BorderStyleOutset"
+		case BorderStyleRidge: return "BorderStyleRidge"
+		case BorderStyleSolid: return "BorderStyleSolid"
 		default: return fmt.Sprintf("BorderStyle(%d)", e)
 	}
 }
@@ -2527,21 +2527,21 @@ func (e BuilderError) InitGoValue(v *gobject.Value) {
 
 func (e BuilderError) String() string {
 	switch e {
+		case BuilderErrorDuplicateID: return "BuilderErrorDuplicateID"
+		case BuilderErrorInvalidAttribute: return "BuilderErrorInvalidAttribute"
+		case BuilderErrorInvalidFunction: return "BuilderErrorInvalidFunction"
+		case BuilderErrorInvalidID: return "BuilderErrorInvalidID"
+		case BuilderErrorInvalidProperty: return "BuilderErrorInvalidProperty"
+		case BuilderErrorInvalidSignal: return "BuilderErrorInvalidSignal"
 		case BuilderErrorInvalidTag: return "BuilderErrorInvalidTag"
-		case BuilderErrorMissingPropertyValue: return "BuilderErrorMissingPropertyValue"
+		case BuilderErrorInvalidTypeFunction: return "BuilderErrorInvalidTypeFunction"
 		case BuilderErrorInvalidValue: return "BuilderErrorInvalidValue"
-		case BuilderErrorVersionMismatch: return "BuilderErrorVersionMismatch"
+		case BuilderErrorMissingAttribute: return "BuilderErrorMissingAttribute"
+		case BuilderErrorMissingPropertyValue: return "BuilderErrorMissingPropertyValue"
+		case BuilderErrorObjectTypeRefused: return "BuilderErrorObjectTypeRefused"
 		case BuilderErrorTemplateMismatch: return "BuilderErrorTemplateMismatch"
 		case BuilderErrorUnhandledTag: return "BuilderErrorUnhandledTag"
-		case BuilderErrorInvalidAttribute: return "BuilderErrorInvalidAttribute"
-		case BuilderErrorDuplicateID: return "BuilderErrorDuplicateID"
-		case BuilderErrorInvalidSignal: return "BuilderErrorInvalidSignal"
-		case BuilderErrorInvalidTypeFunction: return "BuilderErrorInvalidTypeFunction"
-		case BuilderErrorObjectTypeRefused: return "BuilderErrorObjectTypeRefused"
-		case BuilderErrorInvalidFunction: return "BuilderErrorInvalidFunction"
-		case BuilderErrorInvalidProperty: return "BuilderErrorInvalidProperty"
-		case BuilderErrorInvalidID: return "BuilderErrorInvalidID"
-		case BuilderErrorMissingAttribute: return "BuilderErrorMissingAttribute"
+		case BuilderErrorVersionMismatch: return "BuilderErrorVersionMismatch"
 		default: return fmt.Sprintf("BuilderError(%d)", e)
 	}
 }
@@ -2598,12 +2598,12 @@ func (e ButtonsType) InitGoValue(v *gobject.Value) {
 
 func (e ButtonsType) String() string {
 	switch e {
+		case ButtonsCancel: return "ButtonsCancel"
+		case ButtonsClose: return "ButtonsClose"
 		case ButtonsNone: return "ButtonsNone"
 		case ButtonsOK: return "ButtonsOK"
-		case ButtonsClose: return "ButtonsClose"
-		case ButtonsCancel: return "ButtonsCancel"
-		case ButtonsYesNo: return "ButtonsYesNo"
 		case ButtonsOKCancel: return "ButtonsOKCancel"
+		case ButtonsYesNo: return "ButtonsYesNo"
 		default: return fmt.Sprintf("ButtonsType(%d)", e)
 	}
 }
@@ -2679,9 +2679,9 @@ func (e CellRendererMode) InitGoValue(v *gobject.Value) {
 
 func (e CellRendererMode) String() string {
 	switch e {
-		case CellRendererModeInert: return "CellRendererModeInert"
 		case CellRendererModeActivatable: return "CellRendererModeActivatable"
 		case CellRendererModeEditable: return "CellRendererModeEditable"
+		case CellRendererModeInert: return "CellRendererModeInert"
 		default: return fmt.Sprintf("CellRendererMode(%d)", e)
 	}
 }
@@ -2723,9 +2723,9 @@ func (e Collation) InitGoValue(v *gobject.Value) {
 
 func (e Collation) String() string {
 	switch e {
-		case CollationUnicode: return "CollationUnicode"
 		case CollationFilename: return "CollationFilename"
 		case CollationNone: return "CollationNone"
+		case CollationUnicode: return "CollationUnicode"
 		default: return fmt.Sprintf("Collation(%d)", e)
 	}
 }
@@ -2808,18 +2808,18 @@ func (e ConstraintAttribute) InitGoValue(v *gobject.Value) {
 
 func (e ConstraintAttribute) String() string {
 	switch e {
-		case ConstraintAttributeLeft: return "ConstraintAttributeLeft"
-		case ConstraintAttributeRight: return "ConstraintAttributeRight"
-		case ConstraintAttributeTop: return "ConstraintAttributeTop"
-		case ConstraintAttributeBottom: return "ConstraintAttributeBottom"
-		case ConstraintAttributeEnd: return "ConstraintAttributeEnd"
-		case ConstraintAttributeCenterX: return "ConstraintAttributeCenterX"
 		case ConstraintAttributeBaseline: return "ConstraintAttributeBaseline"
-		case ConstraintAttributeNone: return "ConstraintAttributeNone"
-		case ConstraintAttributeStart: return "ConstraintAttributeStart"
-		case ConstraintAttributeWidth: return "ConstraintAttributeWidth"
-		case ConstraintAttributeHeight: return "ConstraintAttributeHeight"
+		case ConstraintAttributeBottom: return "ConstraintAttributeBottom"
+		case ConstraintAttributeCenterX: return "ConstraintAttributeCenterX"
 		case ConstraintAttributeCenterY: return "ConstraintAttributeCenterY"
+		case ConstraintAttributeEnd: return "ConstraintAttributeEnd"
+		case ConstraintAttributeHeight: return "ConstraintAttributeHeight"
+		case ConstraintAttributeLeft: return "ConstraintAttributeLeft"
+		case ConstraintAttributeNone: return "ConstraintAttributeNone"
+		case ConstraintAttributeRight: return "ConstraintAttributeRight"
+		case ConstraintAttributeStart: return "ConstraintAttributeStart"
+		case ConstraintAttributeTop: return "ConstraintAttributeTop"
+		case ConstraintAttributeWidth: return "ConstraintAttributeWidth"
 		default: return fmt.Sprintf("ConstraintAttribute(%d)", e)
 	}
 }
@@ -2857,9 +2857,9 @@ func (e ConstraintRelation) InitGoValue(v *gobject.Value) {
 
 func (e ConstraintRelation) String() string {
 	switch e {
-		case ConstraintRelationLE: return "ConstraintRelationLE"
 		case ConstraintRelationEq: return "ConstraintRelationEq"
 		case ConstraintRelationGE: return "ConstraintRelationGE"
+		case ConstraintRelationLE: return "ConstraintRelationLE"
 		default: return fmt.Sprintf("ConstraintRelation(%d)", e)
 	}
 }
@@ -2904,9 +2904,9 @@ func (e ConstraintStrength) InitGoValue(v *gobject.Value) {
 
 func (e ConstraintStrength) String() string {
 	switch e {
+		case ConstraintStrengthMedium: return "ConstraintStrengthMedium"
 		case ConstraintStrengthRequired: return "ConstraintStrengthRequired"
 		case ConstraintStrengthStrong: return "ConstraintStrengthStrong"
-		case ConstraintStrengthMedium: return "ConstraintStrengthMedium"
 		case ConstraintStrengthWeak: return "ConstraintStrengthWeak"
 		default: return fmt.Sprintf("ConstraintStrength(%d)", e)
 	}
@@ -2957,12 +2957,12 @@ func (e ConstraintVflParserError) InitGoValue(v *gobject.Value) {
 
 func (e ConstraintVflParserError) String() string {
 	switch e {
-		case ConstraintVflParserErrorInvalidRelation: return "ConstraintVflParserErrorInvalidRelation"
-		case ConstraintVflParserErrorInvalidSymbol: return "ConstraintVflParserErrorInvalidSymbol"
 		case ConstraintVflParserErrorInvalidAttribute: return "ConstraintVflParserErrorInvalidAttribute"
-		case ConstraintVflParserErrorInvalidView: return "ConstraintVflParserErrorInvalidView"
 		case ConstraintVflParserErrorInvalidMetric: return "ConstraintVflParserErrorInvalidMetric"
 		case ConstraintVflParserErrorInvalidPriority: return "ConstraintVflParserErrorInvalidPriority"
+		case ConstraintVflParserErrorInvalidRelation: return "ConstraintVflParserErrorInvalidRelation"
+		case ConstraintVflParserErrorInvalidSymbol: return "ConstraintVflParserErrorInvalidSymbol"
+		case ConstraintVflParserErrorInvalidView: return "ConstraintVflParserErrorInvalidView"
 		default: return fmt.Sprintf("ConstraintVflParserError(%d)", e)
 	}
 }
@@ -3016,8 +3016,8 @@ func (e ContentFit) String() string {
 	switch e {
 		case ContentFitContain: return "ContentFitContain"
 		case ContentFitCover: return "ContentFitCover"
-		case ContentFitScaleDown: return "ContentFitScaleDown"
 		case ContentFitFill: return "ContentFitFill"
+		case ContentFitScaleDown: return "ContentFitScaleDown"
 		default: return fmt.Sprintf("ContentFit(%d)", e)
 	}
 }
@@ -3066,9 +3066,9 @@ func (e CornerType) InitGoValue(v *gobject.Value) {
 
 func (e CornerType) String() string {
 	switch e {
+		case CornerBottomLeft: return "CornerBottomLeft"
 		case CornerBottomRight: return "CornerBottomRight"
 		case CornerTopLeft: return "CornerTopLeft"
-		case CornerBottomLeft: return "CornerBottomLeft"
 		case CornerTopRight: return "CornerTopRight"
 		default: return fmt.Sprintf("CornerType(%d)", e)
 	}
@@ -3109,9 +3109,9 @@ const (
 func (e CSSParserError) String() string {
 	switch e {
 		case CSSParserErrorFailed: return "CSSParserErrorFailed"
-		case CSSParserErrorSyntax: return "CSSParserErrorSyntax"
 		case CSSParserErrorImport: return "CSSParserErrorImport"
 		case CSSParserErrorName: return "CSSParserErrorName"
+		case CSSParserErrorSyntax: return "CSSParserErrorSyntax"
 		case CSSParserErrorUnknownValue: return "CSSParserErrorUnknownValue"
 		default: return fmt.Sprintf("CSSParserError(%d)", e)
 	}
@@ -3211,14 +3211,14 @@ func (e DeleteType) InitGoValue(v *gobject.Value) {
 
 func (e DeleteType) String() string {
 	switch e {
-		case DeleteWordEnds: return "DeleteWordEnds"
-		case DeleteWords: return "DeleteWords"
-		case DeleteDisplayLines: return "DeleteDisplayLines"
+		case DeleteChars: return "DeleteChars"
 		case DeleteDisplayLineEnds: return "DeleteDisplayLineEnds"
+		case DeleteDisplayLines: return "DeleteDisplayLines"
 		case DeleteParagraphEnds: return "DeleteParagraphEnds"
 		case DeleteParagraphs: return "DeleteParagraphs"
 		case DeleteWhitespace: return "DeleteWhitespace"
-		case DeleteChars: return "DeleteChars"
+		case DeleteWordEnds: return "DeleteWordEnds"
+		case DeleteWords: return "DeleteWords"
 		default: return fmt.Sprintf("DeleteType(%d)", e)
 	}
 }
@@ -3260,9 +3260,9 @@ func (e DialogError) InitGoValue(v *gobject.Value) {
 
 func (e DialogError) String() string {
 	switch e {
-		case DialogErrorFailed: return "DialogErrorFailed"
 		case DialogErrorCancelled: return "DialogErrorCancelled"
 		case DialogErrorDismissed: return "DialogErrorDismissed"
+		case DialogErrorFailed: return "DialogErrorFailed"
 		default: return fmt.Sprintf("DialogError(%d)", e)
 	}
 }
@@ -3312,12 +3312,12 @@ func (e DirectionType) InitGoValue(v *gobject.Value) {
 
 func (e DirectionType) String() string {
 	switch e {
-		case DirTabForward: return "DirTabForward"
-		case DirTabBackward: return "DirTabBackward"
-		case DirUp: return "DirUp"
 		case DirDown: return "DirDown"
 		case DirLeft: return "DirLeft"
 		case DirRight: return "DirRight"
+		case DirTabBackward: return "DirTabBackward"
+		case DirTabForward: return "DirTabForward"
+		case DirUp: return "DirUp"
 		default: return fmt.Sprintf("DirectionType(%d)", e)
 	}
 }
@@ -3382,15 +3382,15 @@ func (e EditableProperties) InitGoValue(v *gobject.Value) {
 
 func (e EditableProperties) String() string {
 	switch e {
-		case EditablePropText: return "EditablePropText"
-		case EditablePropEditable: return "EditablePropEditable"
-		case EditablePropWidthChars: return "EditablePropWidthChars"
-		case EditablePropMaxWidthChars: return "EditablePropMaxWidthChars"
-		case EditablePropXAlign: return "EditablePropXAlign"
 		case EditableNumProperties: return "EditableNumProperties"
 		case EditablePropCursorPosition: return "EditablePropCursorPosition"
-		case EditablePropSelectionBound: return "EditablePropSelectionBound"
+		case EditablePropEditable: return "EditablePropEditable"
 		case EditablePropEnableUndo: return "EditablePropEnableUndo"
+		case EditablePropMaxWidthChars: return "EditablePropMaxWidthChars"
+		case EditablePropSelectionBound: return "EditablePropSelectionBound"
+		case EditablePropText: return "EditablePropText"
+		case EditablePropWidthChars: return "EditablePropWidthChars"
+		case EditablePropXAlign: return "EditablePropXAlign"
 		default: return fmt.Sprintf("EditableProperties(%d)", e)
 	}
 }
@@ -3463,9 +3463,9 @@ func (e EventSequenceState) InitGoValue(v *gobject.Value) {
 
 func (e EventSequenceState) String() string {
 	switch e {
-		case EventSequenceNone: return "EventSequenceNone"
 		case EventSequenceClaimed: return "EventSequenceClaimed"
 		case EventSequenceDenied: return "EventSequenceDenied"
+		case EventSequenceNone: return "EventSequenceNone"
 		default: return fmt.Sprintf("EventSequenceState(%d)", e)
 	}
 }
@@ -3557,9 +3557,9 @@ func (e FileChooserError) InitGoValue(v *gobject.Value) {
 func (e FileChooserError) String() string {
 	switch e {
 		case FileChooserErrorAlreadyExists: return "FileChooserErrorAlreadyExists"
+		case FileChooserErrorBadFilename: return "FileChooserErrorBadFilename"
 		case FileChooserErrorIncompleteHostname: return "FileChooserErrorIncompleteHostname"
 		case FileChooserErrorNonexistent: return "FileChooserErrorNonexistent"
-		case FileChooserErrorBadFilename: return "FileChooserErrorBadFilename"
 		default: return fmt.Sprintf("FileChooserError(%d)", e)
 	}
 }
@@ -3607,9 +3607,9 @@ func (e FilterChange) InitGoValue(v *gobject.Value) {
 
 func (e FilterChange) String() string {
 	switch e {
+		case FilterChangeDifferent: return "FilterChangeDifferent"
 		case FilterChangeLessStrict: return "FilterChangeLessStrict"
 		case FilterChangeMoreStrict: return "FilterChangeMoreStrict"
-		case FilterChangeDifferent: return "FilterChangeDifferent"
 		default: return fmt.Sprintf("FilterChange(%d)", e)
 	}
 }
@@ -3654,9 +3654,9 @@ func (e FilterMatch) InitGoValue(v *gobject.Value) {
 
 func (e FilterMatch) String() string {
 	switch e {
-		case FilterMatchSome: return "FilterMatchSome"
-		case FilterMatchNone: return "FilterMatchNone"
 		case FilterMatchAll: return "FilterMatchAll"
+		case FilterMatchNone: return "FilterMatchNone"
+		case FilterMatchSome: return "FilterMatchSome"
 		default: return fmt.Sprintf("FilterMatch(%d)", e)
 	}
 }
@@ -3702,9 +3702,9 @@ func (e FontLevel) InitGoValue(v *gobject.Value) {
 
 func (e FontLevel) String() string {
 	switch e {
-		case FontLevelFeatures: return "FontLevelFeatures"
-		case FontLevelFamily: return "FontLevelFamily"
 		case FontLevelFace: return "FontLevelFace"
+		case FontLevelFamily: return "FontLevelFamily"
+		case FontLevelFeatures: return "FontLevelFeatures"
 		case FontLevelFont: return "FontLevelFont"
 		default: return fmt.Sprintf("FontLevel(%d)", e)
 	}
@@ -3777,8 +3777,8 @@ func (e GraphicsOffloadEnabled) InitGoValue(v *gobject.Value) {
 
 func (e GraphicsOffloadEnabled) String() string {
 	switch e {
-		case GraphicsOffloadEnabledType: return "GraphicsOffloadEnabledType"
 		case GraphicsOffloadDisabledType: return "GraphicsOffloadDisabledType"
+		case GraphicsOffloadEnabledType: return "GraphicsOffloadEnabledType"
 		default: return fmt.Sprintf("GraphicsOffloadEnabled(%d)", e)
 	}
 }
@@ -3825,8 +3825,8 @@ func (e IconSize) InitGoValue(v *gobject.Value) {
 func (e IconSize) String() string {
 	switch e {
 		case IconSizeInherit: return "IconSizeInherit"
-		case IconSizeNormal: return "IconSizeNormal"
 		case IconSizeLarge: return "IconSizeLarge"
+		case IconSizeNormal: return "IconSizeNormal"
 		default: return fmt.Sprintf("IconSize(%d)", e)
 	}
 }
@@ -3860,8 +3860,8 @@ func (e IconThemeError) InitGoValue(v *gobject.Value) {
 
 func (e IconThemeError) String() string {
 	switch e {
-		case IconThemeNotFound: return "IconThemeNotFound"
 		case IconThemeFailed: return "IconThemeFailed"
+		case IconThemeNotFound: return "IconThemeNotFound"
 		default: return fmt.Sprintf("IconThemeError(%d)", e)
 	}
 }
@@ -3911,12 +3911,12 @@ func (e IconViewDropPosition) InitGoValue(v *gobject.Value) {
 
 func (e IconViewDropPosition) String() string {
 	switch e {
-		case IconViewDropLeft: return "IconViewDropLeft"
-		case IconViewDropRight: return "IconViewDropRight"
 		case IconViewDropAbove: return "IconViewDropAbove"
 		case IconViewDropBelow: return "IconViewDropBelow"
-		case IconViewNoDrop: return "IconViewNoDrop"
 		case IconViewDropInto: return "IconViewDropInto"
+		case IconViewDropLeft: return "IconViewDropLeft"
+		case IconViewDropRight: return "IconViewDropRight"
+		case IconViewNoDrop: return "IconViewNoDrop"
 		default: return fmt.Sprintf("IconViewDropPosition(%d)", e)
 	}
 }
@@ -3966,8 +3966,8 @@ func (e ImageType) InitGoValue(v *gobject.Value) {
 func (e ImageType) String() string {
 	switch e {
 		case ImageEmpty: return "ImageEmpty"
-		case ImageIconName: return "ImageIconName"
 		case ImageGIcon: return "ImageGIcon"
+		case ImageIconName: return "ImageIconName"
 		case ImagePaintable: return "ImagePaintable"
 		default: return fmt.Sprintf("ImageType(%d)", e)
 	}
@@ -4056,17 +4056,17 @@ func (e InputPurpose) InitGoValue(v *gobject.Value) {
 
 func (e InputPurpose) String() string {
 	switch e {
-		case InputPurposeFreeForm: return "InputPurposeFreeForm"
 		case InputPurposeAlpha: return "InputPurposeAlpha"
-		case InputPurposeNumber: return "InputPurposeNumber"
-		case InputPurposeURL: return "InputPurposeURL"
-		case InputPurposeEmail: return "InputPurposeEmail"
-		case InputPurposePassword: return "InputPurposePassword"
-		case InputPurposePIN: return "InputPurposePIN"
-		case InputPurposeTerminal: return "InputPurposeTerminal"
 		case InputPurposeDigits: return "InputPurposeDigits"
-		case InputPurposePhone: return "InputPurposePhone"
+		case InputPurposeEmail: return "InputPurposeEmail"
+		case InputPurposeFreeForm: return "InputPurposeFreeForm"
 		case InputPurposeName: return "InputPurposeName"
+		case InputPurposeNumber: return "InputPurposeNumber"
+		case InputPurposePIN: return "InputPurposePIN"
+		case InputPurposePassword: return "InputPurposePassword"
+		case InputPurposePhone: return "InputPurposePhone"
+		case InputPurposeTerminal: return "InputPurposeTerminal"
+		case InputPurposeURL: return "InputPurposeURL"
 		default: return fmt.Sprintf("InputPurpose(%d)", e)
 	}
 }
@@ -4110,9 +4110,9 @@ func (e InscriptionOverflow) InitGoValue(v *gobject.Value) {
 func (e InscriptionOverflow) String() string {
 	switch e {
 		case InscriptionOverflowClip: return "InscriptionOverflowClip"
-		case InscriptionOverflowEllipsizeStart: return "InscriptionOverflowEllipsizeStart"
-		case InscriptionOverflowEllipsizeMiddle: return "InscriptionOverflowEllipsizeMiddle"
 		case InscriptionOverflowEllipsizeEnd: return "InscriptionOverflowEllipsizeEnd"
+		case InscriptionOverflowEllipsizeMiddle: return "InscriptionOverflowEllipsizeMiddle"
+		case InscriptionOverflowEllipsizeStart: return "InscriptionOverflowEllipsizeStart"
 		default: return fmt.Sprintf("InscriptionOverflow(%d)", e)
 	}
 }
@@ -4154,10 +4154,10 @@ func (e Justification) InitGoValue(v *gobject.Value) {
 
 func (e Justification) String() string {
 	switch e {
-		case JustifyLeft: return "JustifyLeft"
-		case JustifyRight: return "JustifyRight"
 		case JustifyCenter: return "JustifyCenter"
 		case JustifyFill: return "JustifyFill"
+		case JustifyLeft: return "JustifyLeft"
+		case JustifyRight: return "JustifyRight"
 		default: return fmt.Sprintf("Justification(%d)", e)
 	}
 }
@@ -4300,25 +4300,25 @@ func (e License) InitGoValue(v *gobject.Value) {
 
 func (e License) String() string {
 	switch e {
-		case LicenseApache20: return "LicenseApache20"
-		case LicenseMPL20: return "LicenseMPL20"
-		case LicenseLGPL21: return "LicenseLGPL21"
-		case LicenseMITX11: return "LicenseMITX11"
-		case LicenseGPL20_Only: return "LicenseGPL20Only"
-		case LicenseAGPL30: return "LicenseAGPL30"
-		case LicenseBSD3: return "LicenseBSD3"
-		case LicenseUnknown: return "LicenseUnknown"
-		case LicenseCustom: return "LicenseCustom"
-		case LicenseLGPL30_Only: return "LicenseLGPL30Only"
-		case LicenseAGPL30_Only: return "LicenseAGPL30Only"
-		case LicenseGPL30_Only: return "LicenseGPL30Only"
-		case LicenseLGPL21_Only: return "LicenseLGPL21Only"
 		case License0BSD: return "License0BSD"
-		case LicenseGPL20: return "LicenseGPL20"
-		case LicenseGPL30: return "LicenseGPL30"
-		case LicenseLGPL30: return "LicenseLGPL30"
-		case LicenseBSD: return "LicenseBSD"
+		case LicenseAGPL30: return "LicenseAGPL30"
+		case LicenseAGPL30_Only: return "LicenseAGPL30Only"
+		case LicenseApache20: return "LicenseApache20"
 		case LicenseArtistic: return "LicenseArtistic"
+		case LicenseBSD: return "LicenseBSD"
+		case LicenseBSD3: return "LicenseBSD3"
+		case LicenseCustom: return "LicenseCustom"
+		case LicenseGPL20: return "LicenseGPL20"
+		case LicenseGPL20_Only: return "LicenseGPL20Only"
+		case LicenseGPL30: return "LicenseGPL30"
+		case LicenseGPL30_Only: return "LicenseGPL30Only"
+		case LicenseLGPL21: return "LicenseLGPL21"
+		case LicenseLGPL21_Only: return "LicenseLGPL21Only"
+		case LicenseLGPL30: return "LicenseLGPL30"
+		case LicenseLGPL30_Only: return "LicenseLGPL30Only"
+		case LicenseMITX11: return "LicenseMITX11"
+		case LicenseMPL20: return "LicenseMPL20"
+		case LicenseUnknown: return "LicenseUnknown"
 		default: return fmt.Sprintf("License(%d)", e)
 	}
 }
@@ -4364,8 +4364,8 @@ func (e ListTabBehavior) InitGoValue(v *gobject.Value) {
 
 func (e ListTabBehavior) String() string {
 	switch e {
-		case ListTabCell: return "ListTabCell"
 		case ListTabAll: return "ListTabAll"
+		case ListTabCell: return "ListTabCell"
 		case ListTabItem: return "ListTabItem"
 		default: return fmt.Sprintf("ListTabBehavior(%d)", e)
 	}
@@ -4412,11 +4412,11 @@ func (e MessageType) InitGoValue(v *gobject.Value) {
 
 func (e MessageType) String() string {
 	switch e {
-		case MessageOther: return "MessageOther"
-		case MessageInfo: return "MessageInfo"
-		case MessageWarning: return "MessageWarning"
-		case MessageQuestion: return "MessageQuestion"
 		case MessageError: return "MessageError"
+		case MessageInfo: return "MessageInfo"
+		case MessageOther: return "MessageOther"
+		case MessageQuestion: return "MessageQuestion"
+		case MessageWarning: return "MessageWarning"
 		default: return fmt.Sprintf("MessageType(%d)", e)
 	}
 }
@@ -4483,16 +4483,16 @@ func (e MovementStep) InitGoValue(v *gobject.Value) {
 
 func (e MovementStep) String() string {
 	switch e {
+		case MovementBufferEnds: return "MovementBufferEnds"
+		case MovementDisplayLineEnds: return "MovementDisplayLineEnds"
+		case MovementDisplayLines: return "MovementDisplayLines"
+		case MovementHorizontalPages: return "MovementHorizontalPages"
 		case MovementLogicalPositions: return "MovementLogicalPositions"
 		case MovementPages: return "MovementPages"
-		case MovementBufferEnds: return "MovementBufferEnds"
-		case MovementHorizontalPages: return "MovementHorizontalPages"
+		case MovementParagraphEnds: return "MovementParagraphEnds"
+		case MovementParagraphs: return "MovementParagraphs"
 		case MovementVisualPositions: return "MovementVisualPositions"
 		case MovementWords: return "MovementWords"
-		case MovementDisplayLines: return "MovementDisplayLines"
-		case MovementDisplayLineEnds: return "MovementDisplayLineEnds"
-		case MovementParagraphs: return "MovementParagraphs"
-		case MovementParagraphEnds: return "MovementParagraphEnds"
 		default: return fmt.Sprintf("MovementStep(%d)", e)
 	}
 }
@@ -4634,14 +4634,14 @@ func (e NumberUpLayout) InitGoValue(v *gobject.Value) {
 
 func (e NumberUpLayout) String() string {
 	switch e {
-		case NumberUpLayoutRightToLeftBottomToTop: return "NumberUpLayoutRightToLeftBottomToTop"
-		case NumberUpLayoutTopToBottomLeftToRight: return "NumberUpLayoutTopToBottomLeftToRight"
-		case NumberUpLayoutTopToBottomRightToLeft: return "NumberUpLayoutTopToBottomRightToLeft"
 		case NumberUpLayoutBottomToTopLeftToRight: return "NumberUpLayoutBottomToTopLeftToRight"
 		case NumberUpLayoutBottomToTopRightToLeft: return "NumberUpLayoutBottomToTopRightToLeft"
-		case NumberUpLayoutLeftToRightTopToBottom: return "NumberUpLayoutLeftToRightTopToBottom"
 		case NumberUpLayoutLeftToRightBottomToTop: return "NumberUpLayoutLeftToRightBottomToTop"
+		case NumberUpLayoutLeftToRightTopToBottom: return "NumberUpLayoutLeftToRightTopToBottom"
+		case NumberUpLayoutRightToLeftBottomToTop: return "NumberUpLayoutRightToLeftBottomToTop"
 		case NumberUpLayoutRightToLeftTopToBottom: return "NumberUpLayoutRightToLeftTopToBottom"
+		case NumberUpLayoutTopToBottomLeftToRight: return "NumberUpLayoutTopToBottomLeftToRight"
+		case NumberUpLayoutTopToBottomRightToLeft: return "NumberUpLayoutTopToBottomRightToLeft"
 		default: return fmt.Sprintf("NumberUpLayout(%d)", e)
 	}
 }
@@ -4684,9 +4684,9 @@ func (e Ordering) InitGoValue(v *gobject.Value) {
 
 func (e Ordering) String() string {
 	switch e {
-		case OrderingSmaller: return "OrderingSmaller"
 		case OrderingEqual: return "OrderingEqual"
 		case OrderingLarger: return "OrderingLarger"
+		case OrderingSmaller: return "OrderingSmaller"
 		default: return fmt.Sprintf("Ordering(%d)", e)
 	}
 }
@@ -4763,8 +4763,8 @@ func (e Overflow) InitGoValue(v *gobject.Value) {
 
 func (e Overflow) String() string {
 	switch e {
-		case OverflowVisible: return "OverflowVisible"
 		case OverflowHidden: return "OverflowHidden"
+		case OverflowVisible: return "OverflowVisible"
 		default: return fmt.Sprintf("Overflow(%d)", e)
 	}
 }
@@ -4839,9 +4839,9 @@ func (e PadActionType) InitGoValue(v *gobject.Value) {
 
 func (e PadActionType) String() string {
 	switch e {
+		case PadActionButton: return "PadActionButton"
 		case PadActionRing: return "PadActionRing"
 		case PadActionStrip: return "PadActionStrip"
-		case PadActionButton: return "PadActionButton"
 		default: return fmt.Sprintf("PadActionType(%d)", e)
 	}
 }
@@ -4883,10 +4883,10 @@ func (e PageOrientation) InitGoValue(v *gobject.Value) {
 
 func (e PageOrientation) String() string {
 	switch e {
-		case PageOrientationPortrait: return "PageOrientationPortrait"
 		case PageOrientationLandscape: return "PageOrientationLandscape"
-		case PageOrientationReversePortrait: return "PageOrientationReversePortrait"
+		case PageOrientationPortrait: return "PageOrientationPortrait"
 		case PageOrientationReverseLandscape: return "PageOrientationReverseLandscape"
+		case PageOrientationReversePortrait: return "PageOrientationReversePortrait"
 		default: return fmt.Sprintf("PageOrientation(%d)", e)
 	}
 }
@@ -4968,10 +4968,10 @@ func (e PanDirection) InitGoValue(v *gobject.Value) {
 
 func (e PanDirection) String() string {
 	switch e {
+		case PanDirectionDown: return "PanDirectionDown"
 		case PanDirectionLeft: return "PanDirectionLeft"
 		case PanDirectionRight: return "PanDirectionRight"
 		case PanDirectionUp: return "PanDirectionUp"
-		case PanDirectionDown: return "PanDirectionDown"
 		default: return fmt.Sprintf("PanDirection(%d)", e)
 	}
 }
@@ -5021,8 +5021,8 @@ func (e PolicyType) String() string {
 	switch e {
 		case PolicyAlways: return "PolicyAlways"
 		case PolicyAutomatic: return "PolicyAutomatic"
-		case PolicyNever: return "PolicyNever"
 		case PolicyExternal: return "PolicyExternal"
+		case PolicyNever: return "PolicyNever"
 		default: return fmt.Sprintf("PolicyType(%d)", e)
 	}
 }
@@ -5067,10 +5067,10 @@ func (e PositionType) InitGoValue(v *gobject.Value) {
 
 func (e PositionType) String() string {
 	switch e {
+		case PosBottom: return "PosBottom"
 		case PosLeft: return "PosLeft"
 		case PosRight: return "PosRight"
 		case PosTop: return "PosTop"
-		case PosBottom: return "PosBottom"
 		default: return fmt.Sprintf("PositionType(%d)", e)
 	}
 }
@@ -5158,9 +5158,9 @@ func (e PropagationPhase) InitGoValue(v *gobject.Value) {
 
 func (e PropagationPhase) String() string {
 	switch e {
-		case PhaseNone: return "PhaseNone"
-		case PhaseCapture: return "PhaseCapture"
 		case PhaseBubble: return "PhaseBubble"
+		case PhaseCapture: return "PhaseCapture"
+		case PhaseNone: return "PhaseNone"
 		case PhaseTarget: return "PhaseTarget"
 		default: return fmt.Sprintf("PropagationPhase(%d)", e)
 	}
@@ -5220,13 +5220,13 @@ func (e RecentManagerError) InitGoValue(v *gobject.Value) {
 
 func (e RecentManagerError) String() string {
 	switch e {
-		case RecentManagerErrorInvalidURI: return "RecentManagerErrorInvalidURI"
 		case RecentManagerErrorInvalidEncoding: return "RecentManagerErrorInvalidEncoding"
+		case RecentManagerErrorInvalidURI: return "RecentManagerErrorInvalidURI"
+		case RecentManagerErrorNotFound: return "RecentManagerErrorNotFound"
 		case RecentManagerErrorNotRegistered: return "RecentManagerErrorNotRegistered"
 		case RecentManagerErrorRead: return "RecentManagerErrorRead"
-		case RecentManagerErrorWrite: return "RecentManagerErrorWrite"
 		case RecentManagerErrorUnknown: return "RecentManagerErrorUnknown"
-		case RecentManagerErrorNotFound: return "RecentManagerErrorNotFound"
+		case RecentManagerErrorWrite: return "RecentManagerErrorWrite"
 		default: return fmt.Sprintf("RecentManagerError(%d)", e)
 	}
 }
@@ -5300,17 +5300,17 @@ func (e ResponseType) InitGoValue(v *gobject.Value) {
 
 func (e ResponseType) String() string {
 	switch e {
-		case ResponseHelp: return "ResponseHelp"
-		case ResponseNone: return "ResponseNone"
-		case ResponseReject: return "ResponseReject"
 		case ResponseAccept: return "ResponseAccept"
-		case ResponseYes: return "ResponseYes"
-		case ResponseNo: return "ResponseNo"
 		case ResponseApply: return "ResponseApply"
-		case ResponseDeleteEvent: return "ResponseDeleteEvent"
-		case ResponseOK: return "ResponseOK"
 		case ResponseCancel: return "ResponseCancel"
 		case ResponseClose: return "ResponseClose"
+		case ResponseDeleteEvent: return "ResponseDeleteEvent"
+		case ResponseHelp: return "ResponseHelp"
+		case ResponseNo: return "ResponseNo"
+		case ResponseNone: return "ResponseNone"
+		case ResponseOK: return "ResponseOK"
+		case ResponseReject: return "ResponseReject"
+		case ResponseYes: return "ResponseYes"
 		default: return fmt.Sprintf("ResponseType(%d)", e)
 	}
 }
@@ -5377,16 +5377,16 @@ func (e RevealerTransitionType) InitGoValue(v *gobject.Value) {
 
 func (e RevealerTransitionType) String() string {
 	switch e {
-		case RevealerTransitionTypeNone: return "RevealerTransitionTypeNone"
 		case RevealerTransitionTypeCrossfade: return "RevealerTransitionTypeCrossfade"
-		case RevealerTransitionTypeSlideRight: return "RevealerTransitionTypeSlideRight"
-		case RevealerTransitionTypeSlideLeft: return "RevealerTransitionTypeSlideLeft"
-		case RevealerTransitionTypeSwingRight: return "RevealerTransitionTypeSwingRight"
-		case RevealerTransitionTypeSlideUp: return "RevealerTransitionTypeSlideUp"
+		case RevealerTransitionTypeNone: return "RevealerTransitionTypeNone"
 		case RevealerTransitionTypeSlideDown: return "RevealerTransitionTypeSlideDown"
-		case RevealerTransitionTypeSwingLeft: return "RevealerTransitionTypeSwingLeft"
-		case RevealerTransitionTypeSwingUp: return "RevealerTransitionTypeSwingUp"
+		case RevealerTransitionTypeSlideLeft: return "RevealerTransitionTypeSlideLeft"
+		case RevealerTransitionTypeSlideRight: return "RevealerTransitionTypeSlideRight"
+		case RevealerTransitionTypeSlideUp: return "RevealerTransitionTypeSlideUp"
 		case RevealerTransitionTypeSwingDown: return "RevealerTransitionTypeSwingDown"
+		case RevealerTransitionTypeSwingLeft: return "RevealerTransitionTypeSwingLeft"
+		case RevealerTransitionTypeSwingRight: return "RevealerTransitionTypeSwingRight"
+		case RevealerTransitionTypeSwingUp: return "RevealerTransitionTypeSwingUp"
 		default: return fmt.Sprintf("RevealerTransitionType(%d)", e)
 	}
 }
@@ -5436,12 +5436,12 @@ func (e ScrollStep) InitGoValue(v *gobject.Value) {
 
 func (e ScrollStep) String() string {
 	switch e {
-		case ScrollSteps: return "ScrollSteps"
-		case ScrollPages: return "ScrollPages"
 		case ScrollEnds: return "ScrollEnds"
-		case ScrollHorizontalSteps: return "ScrollHorizontalSteps"
-		case ScrollHorizontalPages: return "ScrollHorizontalPages"
 		case ScrollHorizontalEnds: return "ScrollHorizontalEnds"
+		case ScrollHorizontalPages: return "ScrollHorizontalPages"
+		case ScrollHorizontalSteps: return "ScrollHorizontalSteps"
+		case ScrollPages: return "ScrollPages"
+		case ScrollSteps: return "ScrollSteps"
 		default: return fmt.Sprintf("ScrollStep(%d)", e)
 	}
 }
@@ -5531,22 +5531,22 @@ func (e ScrollType) InitGoValue(v *gobject.Value) {
 
 func (e ScrollType) String() string {
 	switch e {
-		case ScrollStepForward: return "ScrollStepForward"
-		case ScrollStepRight: return "ScrollStepRight"
-		case ScrollPageRight: return "ScrollPageRight"
+		case ScrollEnd: return "ScrollEnd"
+		case ScrollJump: return "ScrollJump"
 		case ScrollNone: return "ScrollNone"
 		case ScrollPageBackward: return "ScrollPageBackward"
-		case ScrollPageUp: return "ScrollPageUp"
-		case ScrollJump: return "ScrollJump"
-		case ScrollStepBackward: return "ScrollStepBackward"
-		case ScrollPageForward: return "ScrollPageForward"
-		case ScrollStepDown: return "ScrollStepDown"
-		case ScrollStart: return "ScrollStart"
-		case ScrollEnd: return "ScrollEnd"
-		case ScrollStepUp: return "ScrollStepUp"
 		case ScrollPageDown: return "ScrollPageDown"
-		case ScrollStepLeft: return "ScrollStepLeft"
+		case ScrollPageForward: return "ScrollPageForward"
 		case ScrollPageLeft: return "ScrollPageLeft"
+		case ScrollPageRight: return "ScrollPageRight"
+		case ScrollPageUp: return "ScrollPageUp"
+		case ScrollStart: return "ScrollStart"
+		case ScrollStepBackward: return "ScrollStepBackward"
+		case ScrollStepDown: return "ScrollStepDown"
+		case ScrollStepForward: return "ScrollStepForward"
+		case ScrollStepLeft: return "ScrollStepLeft"
+		case ScrollStepRight: return "ScrollStepRight"
+		case ScrollStepUp: return "ScrollStepUp"
 		default: return fmt.Sprintf("ScrollType(%d)", e)
 	}
 }
@@ -5632,10 +5632,10 @@ func (e SelectionMode) InitGoValue(v *gobject.Value) {
 
 func (e SelectionMode) String() string {
 	switch e {
-		case SelectionNone: return "SelectionNone"
-		case SelectionSingle: return "SelectionSingle"
 		case SelectionBrowse: return "SelectionBrowse"
 		case SelectionMultiple: return "SelectionMultiple"
+		case SelectionNone: return "SelectionNone"
+		case SelectionSingle: return "SelectionSingle"
 		default: return fmt.Sprintf("SelectionMode(%d)", e)
 	}
 }
@@ -5675,9 +5675,9 @@ func (e SensitivityType) InitGoValue(v *gobject.Value) {
 
 func (e SensitivityType) String() string {
 	switch e {
-		case SensitivityOn: return "SensitivityOn"
-		case SensitivityOff: return "SensitivityOff"
 		case SensitivityAuto: return "SensitivityAuto"
+		case SensitivityOff: return "SensitivityOff"
+		case SensitivityOn: return "SensitivityOn"
 		default: return fmt.Sprintf("SensitivityType(%d)", e)
 	}
 }
@@ -5719,9 +5719,9 @@ func (e ShortcutScope) InitGoValue(v *gobject.Value) {
 
 func (e ShortcutScope) String() string {
 	switch e {
-		case ShortcutScopeManaged: return "ShortcutScopeManaged"
 		case ShortcutScopeGlobal: return "ShortcutScopeGlobal"
 		case ShortcutScopeLocal: return "ShortcutScopeLocal"
+		case ShortcutScopeManaged: return "ShortcutScopeManaged"
 		default: return fmt.Sprintf("ShortcutScope(%d)", e)
 	}
 }
@@ -5791,16 +5791,16 @@ func (e ShortcutType) InitGoValue(v *gobject.Value) {
 
 func (e ShortcutType) String() string {
 	switch e {
+		case ShortcutAccelerator: return "ShortcutAccelerator"
+		case ShortcutGesture: return "ShortcutGesture"
+		case ShortcutGesturePinch: return "ShortcutGesturePinch"
+		case ShortcutGestureRotateClockwise: return "ShortcutGestureRotateClockwise"
 		case ShortcutGestureRotateCounterclockwise: return "ShortcutGestureRotateCounterclockwise"
+		case ShortcutGestureStretch: return "ShortcutGestureStretch"
+		case ShortcutGestureSwipeLeft: return "ShortcutGestureSwipeLeft"
+		case ShortcutGestureSwipeRight: return "ShortcutGestureSwipeRight"
 		case ShortcutGestureTwoFingerSwipeLeft: return "ShortcutGestureTwoFingerSwipeLeft"
 		case ShortcutGestureTwoFingerSwipeRight: return "ShortcutGestureTwoFingerSwipeRight"
-		case ShortcutGestureSwipeLeft: return "ShortcutGestureSwipeLeft"
-		case ShortcutGestureStretch: return "ShortcutGestureStretch"
-		case ShortcutGestureRotateClockwise: return "ShortcutGestureRotateClockwise"
-		case ShortcutGesture: return "ShortcutGesture"
-		case ShortcutGestureSwipeRight: return "ShortcutGestureSwipeRight"
-		case ShortcutAccelerator: return "ShortcutAccelerator"
-		case ShortcutGesturePinch: return "ShortcutGesturePinch"
 		default: return fmt.Sprintf("ShortcutType(%d)", e)
 	}
 }
@@ -5843,10 +5843,10 @@ func (e SizeGroupMode) InitGoValue(v *gobject.Value) {
 
 func (e SizeGroupMode) String() string {
 	switch e {
-		case SizeGroupVertical: return "SizeGroupVertical"
 		case SizeGroupBoth: return "SizeGroupBoth"
-		case SizeGroupNone: return "SizeGroupNone"
 		case SizeGroupHorizontal: return "SizeGroupHorizontal"
+		case SizeGroupNone: return "SizeGroupNone"
+		case SizeGroupVertical: return "SizeGroupVertical"
 		default: return fmt.Sprintf("SizeGroupMode(%d)", e)
 	}
 }
@@ -5885,9 +5885,9 @@ func (e SizeRequestMode) InitGoValue(v *gobject.Value) {
 
 func (e SizeRequestMode) String() string {
 	switch e {
+		case SizeRequestConstantSize: return "SizeRequestConstantSize"
 		case SizeRequestHeightForWidth: return "SizeRequestHeightForWidth"
 		case SizeRequestWidthForHeight: return "SizeRequestWidthForHeight"
-		case SizeRequestConstantSize: return "SizeRequestConstantSize"
 		default: return fmt.Sprintf("SizeRequestMode(%d)", e)
 	}
 }
@@ -6015,8 +6015,8 @@ func (e SorterOrder) InitGoValue(v *gobject.Value) {
 func (e SorterOrder) String() string {
 	switch e {
 		case SorterOrderNone: return "SorterOrderNone"
-		case SorterOrderTotal: return "SorterOrderTotal"
 		case SorterOrderPartial: return "SorterOrderPartial"
+		case SorterOrderTotal: return "SorterOrderTotal"
 		default: return fmt.Sprintf("SorterOrder(%d)", e)
 	}
 }
@@ -6112,12 +6112,12 @@ func (e SpinType) InitGoValue(v *gobject.Value) {
 
 func (e SpinType) String() string {
 	switch e {
-		case SpinStepForward: return "SpinStepForward"
-		case SpinStepBackward: return "SpinStepBackward"
-		case SpinPageForward: return "SpinPageForward"
-		case SpinPageBackward: return "SpinPageBackward"
-		case SpinHome: return "SpinHome"
 		case SpinEnd: return "SpinEnd"
+		case SpinHome: return "SpinHome"
+		case SpinPageBackward: return "SpinPageBackward"
+		case SpinPageForward: return "SpinPageForward"
+		case SpinStepBackward: return "SpinStepBackward"
+		case SpinStepForward: return "SpinStepForward"
 		case SpinUserDefined: return "SpinUserDefined"
 		default: return fmt.Sprintf("SpinType(%d)", e)
 	}
@@ -6238,29 +6238,29 @@ func (e StackTransitionType) InitGoValue(v *gobject.Value) {
 
 func (e StackTransitionType) String() string {
 	switch e {
-		case StackTransitionTypeOverLeftRight: return "StackTransitionTypeOverLeftRight"
-		case StackTransitionTypeOverRightLeft: return "StackTransitionTypeOverRightLeft"
-		case StackTransitionTypeSlideUp: return "StackTransitionTypeSlideUp"
-		case StackTransitionTypeSlideLeftRight: return "StackTransitionTypeSlideLeftRight"
-		case StackTransitionTypeSlideUpDown: return "StackTransitionTypeSlideUpDown"
-		case StackTransitionTypeOverRight: return "StackTransitionTypeOverRight"
-		case StackTransitionTypeUnderUp: return "StackTransitionTypeUnderUp"
-		case StackTransitionTypeRotateLeft: return "StackTransitionTypeRotateLeft"
-		case StackTransitionTypeRotateRight: return "StackTransitionTypeRotateRight"
-		case StackTransitionTypeSlideLeft: return "StackTransitionTypeSlideLeft"
-		case StackTransitionTypeUnderDown: return "StackTransitionTypeUnderDown"
-		case StackTransitionTypeRotateLeftRight: return "StackTransitionTypeRotateLeftRight"
 		case StackTransitionTypeCrossfade: return "StackTransitionTypeCrossfade"
-		case StackTransitionTypeOverUp: return "StackTransitionTypeOverUp"
+		case StackTransitionTypeNone: return "StackTransitionTypeNone"
+		case StackTransitionTypeOverDown: return "StackTransitionTypeOverDown"
+		case StackTransitionTypeOverDownUp: return "StackTransitionTypeOverDownUp"
 		case StackTransitionTypeOverLeft: return "StackTransitionTypeOverLeft"
+		case StackTransitionTypeOverLeftRight: return "StackTransitionTypeOverLeftRight"
+		case StackTransitionTypeOverRight: return "StackTransitionTypeOverRight"
+		case StackTransitionTypeOverRightLeft: return "StackTransitionTypeOverRightLeft"
+		case StackTransitionTypeOverUp: return "StackTransitionTypeOverUp"
+		case StackTransitionTypeOverUpDown: return "StackTransitionTypeOverUpDown"
+		case StackTransitionTypeRotateLeft: return "StackTransitionTypeRotateLeft"
+		case StackTransitionTypeRotateLeftRight: return "StackTransitionTypeRotateLeftRight"
+		case StackTransitionTypeRotateRight: return "StackTransitionTypeRotateRight"
+		case StackTransitionTypeSlideDown: return "StackTransitionTypeSlideDown"
+		case StackTransitionTypeSlideLeft: return "StackTransitionTypeSlideLeft"
+		case StackTransitionTypeSlideLeftRight: return "StackTransitionTypeSlideLeftRight"
+		case StackTransitionTypeSlideRight: return "StackTransitionTypeSlideRight"
+		case StackTransitionTypeSlideUp: return "StackTransitionTypeSlideUp"
+		case StackTransitionTypeSlideUpDown: return "StackTransitionTypeSlideUpDown"
+		case StackTransitionTypeUnderDown: return "StackTransitionTypeUnderDown"
 		case StackTransitionTypeUnderLeft: return "StackTransitionTypeUnderLeft"
 		case StackTransitionTypeUnderRight: return "StackTransitionTypeUnderRight"
-		case StackTransitionTypeNone: return "StackTransitionTypeNone"
-		case StackTransitionTypeSlideRight: return "StackTransitionTypeSlideRight"
-		case StackTransitionTypeSlideDown: return "StackTransitionTypeSlideDown"
-		case StackTransitionTypeOverDown: return "StackTransitionTypeOverDown"
-		case StackTransitionTypeOverUpDown: return "StackTransitionTypeOverUpDown"
-		case StackTransitionTypeOverDownUp: return "StackTransitionTypeOverDownUp"
+		case StackTransitionTypeUnderUp: return "StackTransitionTypeUnderUp"
 		default: return fmt.Sprintf("StackTransitionType(%d)", e)
 	}
 }
@@ -6302,8 +6302,8 @@ func (e StringFilterMatchMode) InitGoValue(v *gobject.Value) {
 func (e StringFilterMatchMode) String() string {
 	switch e {
 		case StringFilterMatchModeExact: return "StringFilterMatchModeExact"
-		case StringFilterMatchModeSubstring: return "StringFilterMatchModeSubstring"
 		case StringFilterMatchModePrefix: return "StringFilterMatchModePrefix"
+		case StringFilterMatchModeSubstring: return "StringFilterMatchModeSubstring"
 		default: return fmt.Sprintf("StringFilterMatchMode(%d)", e)
 	}
 }
@@ -6348,10 +6348,10 @@ func (e SymbolicColor) InitGoValue(v *gobject.Value) {
 
 func (e SymbolicColor) String() string {
 	switch e {
-		case SymbolicColorForeground: return "SymbolicColorForeground"
 		case SymbolicColorError: return "SymbolicColorError"
-		case SymbolicColorWarning: return "SymbolicColorWarning"
+		case SymbolicColorForeground: return "SymbolicColorForeground"
 		case SymbolicColorSuccess: return "SymbolicColorSuccess"
+		case SymbolicColorWarning: return "SymbolicColorWarning"
 		default: return fmt.Sprintf("SymbolicColor(%d)", e)
 	}
 }
@@ -6412,11 +6412,11 @@ func (e SystemSetting) InitGoValue(v *gobject.Value) {
 
 func (e SystemSetting) String() string {
 	switch e {
-		case SystemSettingFontName: return "SystemSettingFontName"
-		case SystemSettingFontConfig: return "SystemSettingFontConfig"
-		case SystemSettingDisplay: return "SystemSettingDisplay"
-		case SystemSettingIconTheme: return "SystemSettingIconTheme"
 		case SystemSettingDPI: return "SystemSettingDPI"
+		case SystemSettingDisplay: return "SystemSettingDisplay"
+		case SystemSettingFontConfig: return "SystemSettingFontConfig"
+		case SystemSettingFontName: return "SystemSettingFontName"
+		case SystemSettingIconTheme: return "SystemSettingIconTheme"
 		default: return fmt.Sprintf("SystemSetting(%d)", e)
 	}
 }
@@ -6454,9 +6454,9 @@ func (e TextDirection) InitGoValue(v *gobject.Value) {
 
 func (e TextDirection) String() string {
 	switch e {
-		case TextDirRTL: return "TextDirRTL"
-		case TextDirNone: return "TextDirNone"
 		case TextDirLTR: return "TextDirLTR"
+		case TextDirNone: return "TextDirNone"
+		case TextDirRTL: return "TextDirRTL"
 		default: return fmt.Sprintf("TextDirection(%d)", e)
 	}
 }
@@ -6493,8 +6493,8 @@ func (e TextExtendSelection) InitGoValue(v *gobject.Value) {
 
 func (e TextExtendSelection) String() string {
 	switch e {
-		case TextExtendSelectionWord: return "TextExtendSelectionWord"
 		case TextExtendSelectionLine: return "TextExtendSelectionLine"
+		case TextExtendSelectionWord: return "TextExtendSelectionWord"
 		default: return fmt.Sprintf("TextExtendSelection(%d)", e)
 	}
 }
@@ -6529,8 +6529,8 @@ func (e TextViewLayer) InitGoValue(v *gobject.Value) {
 
 func (e TextViewLayer) String() string {
 	switch e {
-		case TextViewLayerBelowText: return "TextViewLayerBelowText"
 		case TextViewLayerAboveText: return "TextViewLayerAboveText"
+		case TextViewLayerBelowText: return "TextViewLayerBelowText"
 		default: return fmt.Sprintf("TextViewLayer(%d)", e)
 	}
 }
@@ -6580,12 +6580,12 @@ func (e TextWindowType) InitGoValue(v *gobject.Value) {
 
 func (e TextWindowType) String() string {
 	switch e {
-		case TextWindowWidget: return "TextWindowWidget"
-		case TextWindowText: return "TextWindowText"
+		case TextWindowBottom: return "TextWindowBottom"
 		case TextWindowLeft: return "TextWindowLeft"
 		case TextWindowRight: return "TextWindowRight"
+		case TextWindowText: return "TextWindowText"
 		case TextWindowTop: return "TextWindowTop"
-		case TextWindowBottom: return "TextWindowBottom"
+		case TextWindowWidget: return "TextWindowWidget"
 		default: return fmt.Sprintf("TextWindowType(%d)", e)
 	}
 }
@@ -6625,9 +6625,9 @@ func (e TreeViewColumnSizing) InitGoValue(v *gobject.Value) {
 
 func (e TreeViewColumnSizing) String() string {
 	switch e {
-		case TreeViewColumnGrowOnly: return "TreeViewColumnGrowOnly"
 		case TreeViewColumnAutosize: return "TreeViewColumnAutosize"
 		case TreeViewColumnFixed: return "TreeViewColumnFixed"
+		case TreeViewColumnGrowOnly: return "TreeViewColumnGrowOnly"
 		default: return fmt.Sprintf("TreeViewColumnSizing(%d)", e)
 	}
 }
@@ -6669,10 +6669,10 @@ func (e TreeViewDropPosition) InitGoValue(v *gobject.Value) {
 
 func (e TreeViewDropPosition) String() string {
 	switch e {
-		case TreeViewDropBefore: return "TreeViewDropBefore"
 		case TreeViewDropAfter: return "TreeViewDropAfter"
-		case TreeViewDropIntoOrBefore: return "TreeViewDropIntoOrBefore"
+		case TreeViewDropBefore: return "TreeViewDropBefore"
 		case TreeViewDropIntoOrAfter: return "TreeViewDropIntoOrAfter"
+		case TreeViewDropIntoOrBefore: return "TreeViewDropIntoOrBefore"
 		default: return fmt.Sprintf("TreeViewDropPosition(%d)", e)
 	}
 }
@@ -6715,8 +6715,8 @@ func (e TreeViewGridLines) InitGoValue(v *gobject.Value) {
 func (e TreeViewGridLines) String() string {
 	switch e {
 		case TreeViewGridLinesBoth: return "TreeViewGridLinesBoth"
-		case TreeViewGridLinesNone: return "TreeViewGridLinesNone"
 		case TreeViewGridLinesHorizontal: return "TreeViewGridLinesHorizontal"
+		case TreeViewGridLinesNone: return "TreeViewGridLinesNone"
 		case TreeViewGridLinesVertical: return "TreeViewGridLinesVertical"
 		default: return fmt.Sprintf("TreeViewGridLines(%d)", e)
 	}
@@ -6759,10 +6759,10 @@ func (e Unit) InitGoValue(v *gobject.Value) {
 
 func (e Unit) String() string {
 	switch e {
-		case UnitNone: return "UnitNone"
-		case UnitPoints: return "UnitPoints"
 		case UnitInch: return "UnitInch"
 		case UnitMm: return "UnitMm"
+		case UnitNone: return "UnitNone"
+		case UnitPoints: return "UnitPoints"
 		default: return fmt.Sprintf("Unit(%d)", e)
 	}
 }
@@ -6807,8 +6807,8 @@ func (e WrapMode) InitGoValue(v *gobject.Value) {
 
 func (e WrapMode) String() string {
 	switch e {
-		case WrapNone: return "WrapNone"
 		case WrapChar: return "WrapChar"
+		case WrapNone: return "WrapNone"
 		case WrapWord: return "WrapWord"
 		case WrapWordChar: return "WrapWordChar"
 		default: return fmt.Sprintf("WrapMode(%d)", e)

@@ -49,7 +49,7 @@ func (reg *Registry) newNamespace(cfg Config, ns *namespaceWithIncludes) *Namesp
 	}
 
 	for ident, incl := range ns.includes {
-		reffedNS := reg.FindNamespace(incl.versionedName)
+		reffedNS := reg.findNamespace(incl.versionedName)
 
 		if reffedNS == nil {
 			log.Printf("could not find referenced namespace %s for %s\n", incl.versionedName, ns.versionedName)

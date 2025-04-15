@@ -1,6 +1,9 @@
 package typesystem
 
 import (
+	"fmt"
+	"strings"
+
 	"github.com/diamondburned/gotk4/gir"
 )
 
@@ -40,7 +43,31 @@ func FromRepositories(cfg Config, repos gir.Repositories) *Registry {
 	return r
 }
 
-func (r *Registry) FindNamespace(v versionedName) *Namespace {
+// FindNamespaceByName finds the given namespace, e.g. "Gtk-4"
+func (r *Registry) FindNamespaceByName(name string) *Namespace {
+
+	parts := strings.Split(name, "-")
+
+	if len(parts) != 2 {
+		panic(fmt.Errorf("namespace name %s is not in the format <name>-<version>", name))
+	}
+	nsName := parts[0]
+	nsMajor := parts[1]
+
+	v, err := gir.ParseVersion(nsMajor)
+
+	if err != nil {
+		return nil
+	}
+
+	return r.findNamespace(versionedName{
+
+		name:    nsName,
+		version: v,
+	})
+}
+
+func (r *Registry) findNamespace(v versionedName) *Namespace {
 	for _, repo := range r.Repositories {
 		for _, ns := range repo.Namespaces {
 			if ns.v == v {
