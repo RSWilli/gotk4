@@ -1926,6 +1926,32 @@ func PixbufGetFileInfoFinish(asyncResult gio.AsyncResult) (int, int, *PixbufForm
 	return width, height, goret, _goerr
 }
 
+// PixbufGetFormats wraps gdk_pixbuf_get_formats
+// The function returns the following values:
+// 
+// 	- goret []*PixbufFormat 
+//
+// Obtains the available information about the image formats supported
+// by GdkPixbuf.
+func PixbufGetFormats() []*PixbufFormat {
+	var cret *C.GSList // container, transfer: container
+
+	cret = C.gdk_pixbuf_get_formats()
+
+	var goret []*PixbufFormat
+
+	goret = glib.UnsafeSListFromGlibFull(
+		unsafe.Pointer(cret),
+		func(v unsafe.Pointer) *PixbufFormat {
+			var dst *PixbufFormat // converted
+			dst = UnsafePixbufFormatFromGlibNone(v)
+			return dst
+		},
+	)
+
+	return goret
+}
+
 // PixbufInitModules wraps gdk_pixbuf_init_modules
 // 
 // The function takes the following parameters:

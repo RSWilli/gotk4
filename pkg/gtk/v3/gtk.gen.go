@@ -7910,6 +7910,40 @@ func AccelGroupsActivate(object gobject.Object, accelKey uint, accelMods gdk.Mod
 	return goret
 }
 
+// AccelGroupsFromObject wraps gtk_accel_groups_from_object
+// 
+// The function takes the following parameters:
+// 
+// 	- object gobject.Object: a #GObject, usually a #GtkWindow 
+// 
+// The function returns the following values:
+// 
+// 	- goret []AccelGroup 
+//
+// Gets a list of all accel groups which are attached to @object.
+func AccelGroupsFromObject(object gobject.Object) []AccelGroup {
+	var carg1 *C.GObject // in, none, converted
+	var cret  *C.GSList  // container, transfer: none
+
+	carg1 = (*C.GObject)(gobject.UnsafeObjectToGlibNone(object))
+
+	cret = C.gtk_accel_groups_from_object(carg1)
+	runtime.KeepAlive(object)
+
+	var goret []AccelGroup
+
+	goret = glib.UnsafeSListFromGlibNone(
+		unsafe.Pointer(cret),
+		func(v unsafe.Pointer) AccelGroup {
+			var dst AccelGroup // converted
+			dst = UnsafeAccelGroupFromGlibNone(v)
+			return dst
+		},
+	)
+
+	return goret
+}
+
 // AcceleratorGetDefaultModMask wraps gtk_accelerator_get_default_mod_mask
 // The function returns the following values:
 // 
@@ -11233,6 +11267,13 @@ type CellLayout interface {
 	// if called on a #GtkCellArea or might be %NULL if no #GtkCellArea
 	// is used by @cell_layout.
 	GetArea() CellArea
+	// GetCells wraps gtk_cell_layout_get_cells
+	// The function returns the following values:
+	// 
+	// 	- goret []CellRenderer 
+	//
+	// Returns the cell renderers which have been added to @cell_layout.
+	GetCells() []CellRenderer
 	// PackEnd wraps gtk_cell_layout_pack_end
 	// 
 	// The function takes the following parameters:
@@ -11412,6 +11453,35 @@ func (cellLayout *CellLayoutInstance) GetArea() CellArea {
 	var goret CellArea
 
 	goret = UnsafeCellAreaFromGlibNone(unsafe.Pointer(cret))
+
+	return goret
+}
+
+// GetCells wraps gtk_cell_layout_get_cells
+// The function returns the following values:
+// 
+// 	- goret []CellRenderer 
+//
+// Returns the cell renderers which have been added to @cell_layout.
+func (cellLayout *CellLayoutInstance) GetCells() []CellRenderer {
+	var carg0 *C.GtkCellLayout // in, none, converted
+	var cret  *C.GList         // container, transfer: container
+
+	carg0 = (*C.GtkCellLayout)(UnsafeCellLayoutToGlibNone(cellLayout))
+
+	cret = C.gtk_cell_layout_get_cells(carg0)
+	runtime.KeepAlive(cellLayout)
+
+	var goret []CellRenderer
+
+	goret = glib.UnsafeListFromGlibFull(
+		unsafe.Pointer(cret),
+		func(v unsafe.Pointer) CellRenderer {
+			var dst CellRenderer // converted
+			dst = UnsafeCellRendererFromGlibNone(v)
+			return dst
+		},
+	)
 
 	return goret
 }
@@ -12690,6 +12760,24 @@ type FileChooser interface {
 	// If the file chooser is in folder mode, this function returns the selected
 	// folder.
 	GetFilename() string
+	// GetFilenames wraps gtk_file_chooser_get_filenames
+	// The function returns the following values:
+	// 
+	// 	- goret []string 
+	//
+	// Lists all the selected files and subfolders in the current folder of
+	// @chooser. The returned names are full absolute paths. If files in the current
+	// folder cannot be represented as local filenames they will be ignored. (See
+	// gtk_file_chooser_get_uris())
+	GetFilenames() []string
+	// GetFiles wraps gtk_file_chooser_get_files
+	// The function returns the following values:
+	// 
+	// 	- goret []gio.File 
+	//
+	// Lists all the selected files and subfolders in the current folder of @chooser
+	// as #GFile. An internal function, see gtk_file_chooser_get_uris().
+	GetFiles() []gio.File
 	// GetFilter wraps gtk_file_chooser_get_filter
 	// The function returns the following values:
 	// 
@@ -12774,6 +12862,14 @@ type FileChooser interface {
 	// If the file chooser is in folder mode, this function returns the selected
 	// folder.
 	GetURI() string
+	// GetURIs wraps gtk_file_chooser_get_uris
+	// The function returns the following values:
+	// 
+	// 	- goret []string 
+	//
+	// Lists all the selected files and subfolders in the current folder of
+	// @chooser. The returned names are full absolute URIs.
+	GetURIs() []string
 	// GetUsePreviewLabel wraps gtk_file_chooser_get_use_preview_label
 	// The function returns the following values:
 	// 
@@ -12782,6 +12878,30 @@ type FileChooser interface {
 	// Gets whether a stock label should be drawn with the name of the previewed
 	// file.  See gtk_file_chooser_set_use_preview_label().
 	GetUsePreviewLabel() bool
+	// ListFilters wraps gtk_file_chooser_list_filters
+	// The function returns the following values:
+	// 
+	// 	- goret []FileFilter 
+	//
+	// Lists the current set of user-selectable filters; see
+	// gtk_file_chooser_add_filter(), gtk_file_chooser_remove_filter().
+	ListFilters() []FileFilter
+	// ListShortcutFolderURIs wraps gtk_file_chooser_list_shortcut_folder_uris
+	// The function returns the following values:
+	// 
+	// 	- goret []string 
+	//
+	// Queries the list of shortcut folders in the file chooser, as set by
+	// gtk_file_chooser_add_shortcut_folder_uri().
+	ListShortcutFolderURIs() []string
+	// ListShortcutFolders wraps gtk_file_chooser_list_shortcut_folders
+	// The function returns the following values:
+	// 
+	// 	- goret []string 
+	//
+	// Queries the list of shortcut folders in the file chooser, as set by
+	// gtk_file_chooser_add_shortcut_folder().
+	ListShortcutFolders() []string
 	// RemoveChoice wraps gtk_file_chooser_remove_choice
 	// 
 	// The function takes the following parameters:
@@ -13880,6 +14000,69 @@ func (chooser *FileChooserInstance) GetFilename() string {
 	return goret
 }
 
+// GetFilenames wraps gtk_file_chooser_get_filenames
+// The function returns the following values:
+// 
+// 	- goret []string 
+//
+// Lists all the selected files and subfolders in the current folder of
+// @chooser. The returned names are full absolute paths. If files in the current
+// folder cannot be represented as local filenames they will be ignored. (See
+// gtk_file_chooser_get_uris())
+func (chooser *FileChooserInstance) GetFilenames() []string {
+	var carg0 *C.GtkFileChooser // in, none, converted
+	var cret  *C.GSList         // container, transfer: full
+
+	carg0 = (*C.GtkFileChooser)(UnsafeFileChooserToGlibNone(chooser))
+
+	cret = C.gtk_file_chooser_get_filenames(carg0)
+	runtime.KeepAlive(chooser)
+
+	var goret []string
+
+	goret = glib.UnsafeSListFromGlibFull(
+		unsafe.Pointer(cret),
+		func(v unsafe.Pointer) string {
+			var dst string // string
+			dst = C.GoString((*C.char)(v))
+			defer C.free(v)
+			return dst
+		},
+	)
+
+	return goret
+}
+
+// GetFiles wraps gtk_file_chooser_get_files
+// The function returns the following values:
+// 
+// 	- goret []gio.File 
+//
+// Lists all the selected files and subfolders in the current folder of @chooser
+// as #GFile. An internal function, see gtk_file_chooser_get_uris().
+func (chooser *FileChooserInstance) GetFiles() []gio.File {
+	var carg0 *C.GtkFileChooser // in, none, converted
+	var cret  *C.GSList         // container, transfer: full
+
+	carg0 = (*C.GtkFileChooser)(UnsafeFileChooserToGlibNone(chooser))
+
+	cret = C.gtk_file_chooser_get_files(carg0)
+	runtime.KeepAlive(chooser)
+
+	var goret []gio.File
+
+	goret = glib.UnsafeSListFromGlibFull(
+		unsafe.Pointer(cret),
+		func(v unsafe.Pointer) gio.File {
+			var dst gio.File // converted
+			dst = gio.UnsafeFileFromGlibFull(v)
+			return dst
+		},
+	)
+
+	return goret
+}
+
 // GetFilter wraps gtk_file_chooser_get_filter
 // The function returns the following values:
 // 
@@ -14125,6 +14308,37 @@ func (chooser *FileChooserInstance) GetURI() string {
 	return goret
 }
 
+// GetURIs wraps gtk_file_chooser_get_uris
+// The function returns the following values:
+// 
+// 	- goret []string 
+//
+// Lists all the selected files and subfolders in the current folder of
+// @chooser. The returned names are full absolute URIs.
+func (chooser *FileChooserInstance) GetURIs() []string {
+	var carg0 *C.GtkFileChooser // in, none, converted
+	var cret  *C.GSList         // container, transfer: full
+
+	carg0 = (*C.GtkFileChooser)(UnsafeFileChooserToGlibNone(chooser))
+
+	cret = C.gtk_file_chooser_get_uris(carg0)
+	runtime.KeepAlive(chooser)
+
+	var goret []string
+
+	goret = glib.UnsafeSListFromGlibFull(
+		unsafe.Pointer(cret),
+		func(v unsafe.Pointer) string {
+			var dst string // string
+			dst = C.GoString((*C.char)(v))
+			defer C.free(v)
+			return dst
+		},
+	)
+
+	return goret
+}
+
 // GetUsePreviewLabel wraps gtk_file_chooser_get_use_preview_label
 // The function returns the following values:
 // 
@@ -14146,6 +14360,98 @@ func (chooser *FileChooserInstance) GetUsePreviewLabel() bool {
 	if cret != 0 {
 		goret = true
 	}
+
+	return goret
+}
+
+// ListFilters wraps gtk_file_chooser_list_filters
+// The function returns the following values:
+// 
+// 	- goret []FileFilter 
+//
+// Lists the current set of user-selectable filters; see
+// gtk_file_chooser_add_filter(), gtk_file_chooser_remove_filter().
+func (chooser *FileChooserInstance) ListFilters() []FileFilter {
+	var carg0 *C.GtkFileChooser // in, none, converted
+	var cret  *C.GSList         // container, transfer: container
+
+	carg0 = (*C.GtkFileChooser)(UnsafeFileChooserToGlibNone(chooser))
+
+	cret = C.gtk_file_chooser_list_filters(carg0)
+	runtime.KeepAlive(chooser)
+
+	var goret []FileFilter
+
+	goret = glib.UnsafeSListFromGlibFull(
+		unsafe.Pointer(cret),
+		func(v unsafe.Pointer) FileFilter {
+			var dst FileFilter // converted
+			dst = UnsafeFileFilterFromGlibNone(v)
+			return dst
+		},
+	)
+
+	return goret
+}
+
+// ListShortcutFolderURIs wraps gtk_file_chooser_list_shortcut_folder_uris
+// The function returns the following values:
+// 
+// 	- goret []string 
+//
+// Queries the list of shortcut folders in the file chooser, as set by
+// gtk_file_chooser_add_shortcut_folder_uri().
+func (chooser *FileChooserInstance) ListShortcutFolderURIs() []string {
+	var carg0 *C.GtkFileChooser // in, none, converted
+	var cret  *C.GSList         // container, transfer: full
+
+	carg0 = (*C.GtkFileChooser)(UnsafeFileChooserToGlibNone(chooser))
+
+	cret = C.gtk_file_chooser_list_shortcut_folder_uris(carg0)
+	runtime.KeepAlive(chooser)
+
+	var goret []string
+
+	goret = glib.UnsafeSListFromGlibFull(
+		unsafe.Pointer(cret),
+		func(v unsafe.Pointer) string {
+			var dst string // string
+			dst = C.GoString((*C.char)(v))
+			defer C.free(v)
+			return dst
+		},
+	)
+
+	return goret
+}
+
+// ListShortcutFolders wraps gtk_file_chooser_list_shortcut_folders
+// The function returns the following values:
+// 
+// 	- goret []string 
+//
+// Queries the list of shortcut folders in the file chooser, as set by
+// gtk_file_chooser_add_shortcut_folder().
+func (chooser *FileChooserInstance) ListShortcutFolders() []string {
+	var carg0 *C.GtkFileChooser // in, none, converted
+	var cret  *C.GSList         // container, transfer: full
+
+	carg0 = (*C.GtkFileChooser)(UnsafeFileChooserToGlibNone(chooser))
+
+	cret = C.gtk_file_chooser_list_shortcut_folders(carg0)
+	runtime.KeepAlive(chooser)
+
+	var goret []string
+
+	goret = glib.UnsafeSListFromGlibFull(
+		unsafe.Pointer(cret),
+		func(v unsafe.Pointer) string {
+			var dst string // string
+			dst = C.GoString((*C.char)(v))
+			defer C.free(v)
+			return dst
+		},
+	)
 
 	return goret
 }
@@ -16351,6 +16657,16 @@ type RecentChooser interface {
 	// Gets the #GtkRecentFilter object currently used by @chooser to affect
 	// the display of the recently used resources.
 	GetFilter() RecentFilter
+	// GetItems wraps gtk_recent_chooser_get_items
+	// The function returns the following values:
+	// 
+	// 	- goret []*RecentInfo 
+	//
+	// Gets the list of recently used resources in form of #GtkRecentInfo objects.
+	// 
+	// The return value of this function is affected by the “sort-type” and
+	// “limit” properties of @chooser.
+	GetItems() []*RecentInfo
 	// GetLimit wraps gtk_recent_chooser_get_limit
 	// The function returns the following values:
 	// 
@@ -16426,6 +16742,13 @@ type RecentChooser interface {
 	// 
 	// Since the returned array is %NULL terminated, @length may be %NULL.
 	GetURIs() (uint, []string)
+	// ListFilters wraps gtk_recent_chooser_list_filters
+	// The function returns the following values:
+	// 
+	// 	- goret []RecentFilter 
+	//
+	// Gets the #GtkRecentFilter objects held by @chooser.
+	ListFilters() []RecentFilter
 	// RemoveFilter wraps gtk_recent_chooser_remove_filter
 	// 
 	// The function takes the following parameters:
@@ -16717,6 +17040,38 @@ func (chooser *RecentChooserInstance) GetFilter() RecentFilter {
 	return goret
 }
 
+// GetItems wraps gtk_recent_chooser_get_items
+// The function returns the following values:
+// 
+// 	- goret []*RecentInfo 
+//
+// Gets the list of recently used resources in form of #GtkRecentInfo objects.
+// 
+// The return value of this function is affected by the “sort-type” and
+// “limit” properties of @chooser.
+func (chooser *RecentChooserInstance) GetItems() []*RecentInfo {
+	var carg0 *C.GtkRecentChooser // in, none, converted
+	var cret  *C.GList            // container, transfer: full
+
+	carg0 = (*C.GtkRecentChooser)(UnsafeRecentChooserToGlibNone(chooser))
+
+	cret = C.gtk_recent_chooser_get_items(carg0)
+	runtime.KeepAlive(chooser)
+
+	var goret []*RecentInfo
+
+	goret = glib.UnsafeListFromGlibFull(
+		unsafe.Pointer(cret),
+		func(v unsafe.Pointer) *RecentInfo {
+			var dst *RecentInfo // converted
+			dst = UnsafeRecentInfoFromGlibFull(v)
+			return dst
+		},
+	)
+
+	return goret
+}
+
 // GetLimit wraps gtk_recent_chooser_get_limit
 // The function returns the following values:
 // 
@@ -16942,6 +17297,35 @@ func (chooser *RecentChooserInstance) GetURIs() (uint, []string) {
 	panic("unimplemented conversion of []string (gchar**)")
 
 	return length, goret
+}
+
+// ListFilters wraps gtk_recent_chooser_list_filters
+// The function returns the following values:
+// 
+// 	- goret []RecentFilter 
+//
+// Gets the #GtkRecentFilter objects held by @chooser.
+func (chooser *RecentChooserInstance) ListFilters() []RecentFilter {
+	var carg0 *C.GtkRecentChooser // in, none, converted
+	var cret  *C.GSList           // container, transfer: container
+
+	carg0 = (*C.GtkRecentChooser)(UnsafeRecentChooserToGlibNone(chooser))
+
+	cret = C.gtk_recent_chooser_list_filters(carg0)
+	runtime.KeepAlive(chooser)
+
+	var goret []RecentFilter
+
+	goret = glib.UnsafeSListFromGlibFull(
+		unsafe.Pointer(cret),
+		func(v unsafe.Pointer) RecentFilter {
+			var dst RecentFilter // converted
+			dst = UnsafeRecentFilterFromGlibNone(v)
+			return dst
+		},
+	)
+
+	return goret
 }
 
 // RemoveFilter wraps gtk_recent_chooser_remove_filter
@@ -22416,6 +22800,21 @@ type Application interface {
 	// The ID of a #GtkApplicationWindow can be retrieved with
 	// gtk_application_window_get_id().
 	GetWindowByID(uint) Window
+	// GetWindows wraps gtk_application_get_windows
+	// The function returns the following values:
+	// 
+	// 	- goret []Window 
+	//
+	// Gets a list of the #GtkWindows associated with @application.
+	// 
+	// The list is sorted by most recently focused window, such that the first
+	// element is the currently focused window. (Useful for choosing a parent
+	// for a transient window.)
+	// 
+	// The list that is returned should not be modified in any way. It will
+	// only remain valid until the next focus change or window creation or
+	// deletion.
+	GetWindows() []Window
 	// Inhibit wraps gtk_application_inhibit
 	// 
 	// The function takes the following parameters:
@@ -22977,6 +23376,43 @@ func (application *ApplicationInstance) GetWindowByID(id uint) Window {
 	var goret Window
 
 	goret = UnsafeWindowFromGlibNone(unsafe.Pointer(cret))
+
+	return goret
+}
+
+// GetWindows wraps gtk_application_get_windows
+// The function returns the following values:
+// 
+// 	- goret []Window 
+//
+// Gets a list of the #GtkWindows associated with @application.
+// 
+// The list is sorted by most recently focused window, such that the first
+// element is the currently focused window. (Useful for choosing a parent
+// for a transient window.)
+// 
+// The list that is returned should not be modified in any way. It will
+// only remain valid until the next focus change or window creation or
+// deletion.
+func (application *ApplicationInstance) GetWindows() []Window {
+	var carg0 *C.GtkApplication // in, none, converted
+	var cret  *C.GList          // container, transfer: none
+
+	carg0 = (*C.GtkApplication)(UnsafeApplicationToGlibNone(application))
+
+	cret = C.gtk_application_get_windows(carg0)
+	runtime.KeepAlive(application)
+
+	var goret []Window
+
+	goret = glib.UnsafeListFromGlibNone(
+		unsafe.Pointer(cret),
+		func(v unsafe.Pointer) Window {
+			var dst Window // converted
+			dst = UnsafeWindowFromGlibNone(v)
+			return dst
+		},
+	)
 
 	return goret
 }
@@ -23756,6 +24192,15 @@ type Builder interface {
 	// Gets the object named @name. Note that this function does not
 	// increment the reference count of the returned object.
 	GetObject(string) gobject.Object
+	// GetObjects wraps gtk_builder_get_objects
+	// The function returns the following values:
+	// 
+	// 	- goret []gobject.Object 
+	//
+	// Gets all objects that have been constructed by @builder. Note that
+	// this function does not increment the reference counts of the returned
+	// objects.
+	GetObjects() []gobject.Object
 	// GetTranslationDomain wraps gtk_builder_get_translation_domain
 	// The function returns the following values:
 	// 
@@ -24457,6 +24902,37 @@ func (builder *BuilderInstance) GetObject(name string) gobject.Object {
 	var goret gobject.Object
 
 	goret = gobject.UnsafeObjectFromGlibNone(unsafe.Pointer(cret))
+
+	return goret
+}
+
+// GetObjects wraps gtk_builder_get_objects
+// The function returns the following values:
+// 
+// 	- goret []gobject.Object 
+//
+// Gets all objects that have been constructed by @builder. Note that
+// this function does not increment the reference counts of the returned
+// objects.
+func (builder *BuilderInstance) GetObjects() []gobject.Object {
+	var carg0 *C.GtkBuilder // in, none, converted
+	var cret  *C.GSList     // container, transfer: container
+
+	carg0 = (*C.GtkBuilder)(UnsafeBuilderToGlibNone(builder))
+
+	cret = C.gtk_builder_get_objects(carg0)
+	runtime.KeepAlive(builder)
+
+	var goret []gobject.Object
+
+	goret = glib.UnsafeSListFromGlibFull(
+		unsafe.Pointer(cret),
+		func(v unsafe.Pointer) gobject.Object {
+			var dst gobject.Object // converted
+			dst = gobject.UnsafeObjectFromGlibNone(v)
+			return dst
+		},
+	)
 
 	return goret
 }
@@ -25283,6 +25759,18 @@ type CellArea interface {
 	// then chose to activate the focus cell for which the event
 	// cell may have been a sibling.
 	GetFocusFromSibling(CellRenderer) CellRenderer
+	// GetFocusSiblings wraps gtk_cell_area_get_focus_siblings
+	// 
+	// The function takes the following parameters:
+	// 
+	// 	- renderer CellRenderer: the #GtkCellRenderer expected to have focus 
+	// 
+	// The function returns the following values:
+	// 
+	// 	- goret []CellRenderer 
+	//
+	// Gets the focus sibling cell renderers for @renderer.
+	GetFocusSiblings(CellRenderer) []CellRenderer
 	// GetPreferredHeight wraps gtk_cell_area_get_preferred_height
 	// 
 	// The function takes the following parameters:
@@ -26244,6 +26732,43 @@ func (area *CellAreaInstance) GetFocusFromSibling(renderer CellRenderer) CellRen
 	var goret CellRenderer
 
 	goret = UnsafeCellRendererFromGlibNone(unsafe.Pointer(cret))
+
+	return goret
+}
+
+// GetFocusSiblings wraps gtk_cell_area_get_focus_siblings
+// 
+// The function takes the following parameters:
+// 
+// 	- renderer CellRenderer: the #GtkCellRenderer expected to have focus 
+// 
+// The function returns the following values:
+// 
+// 	- goret []CellRenderer 
+//
+// Gets the focus sibling cell renderers for @renderer.
+func (area *CellAreaInstance) GetFocusSiblings(renderer CellRenderer) []CellRenderer {
+	var carg0 *C.GtkCellArea     // in, none, converted
+	var carg1 *C.GtkCellRenderer // in, none, converted
+	var cret  *C.GList           // container, transfer: none
+
+	carg0 = (*C.GtkCellArea)(UnsafeCellAreaToGlibNone(area))
+	carg1 = (*C.GtkCellRenderer)(UnsafeCellRendererToGlibNone(renderer))
+
+	cret = C.gtk_cell_area_get_focus_siblings(carg0, carg1)
+	runtime.KeepAlive(area)
+	runtime.KeepAlive(renderer)
+
+	var goret []CellRenderer
+
+	goret = glib.UnsafeListFromGlibNone(
+		unsafe.Pointer(cret),
+		func(v unsafe.Pointer) CellRenderer {
+			var dst CellRenderer // converted
+			dst = UnsafeCellRendererFromGlibNone(v)
+			return dst
+		},
+	)
 
 	return goret
 }
@@ -30079,6 +30604,13 @@ type ContainerCellAccessible interface {
 	// 
 	// 	- child CellAccessible 
 	AddChild(CellAccessible)
+	// GetChildren wraps gtk_container_cell_accessible_get_children
+	// The function returns the following values:
+	// 
+	// 	- goret []CellAccessible 
+	//
+	// Get a list of children.
+	GetChildren() []CellAccessible
 	// RemoveChild wraps gtk_container_cell_accessible_remove_child
 	// 
 	// The function takes the following parameters:
@@ -30167,6 +30699,35 @@ func (container *ContainerCellAccessibleInstance) AddChild(child CellAccessible)
 	C.gtk_container_cell_accessible_add_child(carg0, carg1)
 	runtime.KeepAlive(container)
 	runtime.KeepAlive(child)
+}
+
+// GetChildren wraps gtk_container_cell_accessible_get_children
+// The function returns the following values:
+// 
+// 	- goret []CellAccessible 
+//
+// Get a list of children.
+func (container *ContainerCellAccessibleInstance) GetChildren() []CellAccessible {
+	var carg0 *C.GtkContainerCellAccessible // in, none, converted
+	var cret  *C.GList                      // container, transfer: none
+
+	carg0 = (*C.GtkContainerCellAccessible)(UnsafeContainerCellAccessibleToGlibNone(container))
+
+	cret = C.gtk_container_cell_accessible_get_children(carg0)
+	runtime.KeepAlive(container)
+
+	var goret []CellAccessible
+
+	goret = glib.UnsafeListFromGlibNone(
+		unsafe.Pointer(cret),
+		func(v unsafe.Pointer) CellAccessible {
+			var dst CellAccessible // converted
+			dst = UnsafeCellAccessibleFromGlibNone(v)
+			return dst
+		},
+	)
+
+	return goret
 }
 
 // RemoveChild wraps gtk_container_cell_accessible_remove_child
@@ -33517,6 +34078,13 @@ type Gesture interface {
 	// Returns the master #GdkDevice that is currently operating
 	// on @gesture, or %NULL if the gesture is not being interacted.
 	GetDevice() gdk.Device
+	// GetGroup wraps gtk_gesture_get_group
+	// The function returns the following values:
+	// 
+	// 	- goret []Gesture 
+	//
+	// Returns all gestures in the group of @gesture
+	GetGroup() []Gesture
 	// GetLastUpdatedSequence wraps gtk_gesture_get_last_updated_sequence
 	// The function returns the following values:
 	// 
@@ -33553,6 +34121,14 @@ type Gesture interface {
 	//
 	// Returns the @sequence state, as seen by @gesture.
 	GetSequenceState(*gdk.EventSequence) EventSequenceState
+	// GetSequences wraps gtk_gesture_get_sequences
+	// The function returns the following values:
+	// 
+	// 	- goret []*gdk.EventSequence 
+	//
+	// Returns the list of #GdkEventSequences currently being interpreted
+	// by @gesture.
+	GetSequences() []*gdk.EventSequence
 	// GetWindow wraps gtk_gesture_get_window
 	// The function returns the following values:
 	// 
@@ -33883,6 +34459,35 @@ func (gesture *GestureInstance) GetDevice() gdk.Device {
 	return goret
 }
 
+// GetGroup wraps gtk_gesture_get_group
+// The function returns the following values:
+// 
+// 	- goret []Gesture 
+//
+// Returns all gestures in the group of @gesture
+func (gesture *GestureInstance) GetGroup() []Gesture {
+	var carg0 *C.GtkGesture // in, none, converted
+	var cret  *C.GList      // container, transfer: container
+
+	carg0 = (*C.GtkGesture)(UnsafeGestureToGlibNone(gesture))
+
+	cret = C.gtk_gesture_get_group(carg0)
+	runtime.KeepAlive(gesture)
+
+	var goret []Gesture
+
+	goret = glib.UnsafeListFromGlibFull(
+		unsafe.Pointer(cret),
+		func(v unsafe.Pointer) Gesture {
+			var dst Gesture // converted
+			dst = UnsafeGestureFromGlibNone(v)
+			return dst
+		},
+	)
+
+	return goret
+}
+
 // GetLastUpdatedSequence wraps gtk_gesture_get_last_updated_sequence
 // The function returns the following values:
 // 
@@ -33976,6 +34581,36 @@ func (gesture *GestureInstance) GetSequenceState(sequence *gdk.EventSequence) Ev
 	var goret EventSequenceState
 
 	goret = EventSequenceState(cret)
+
+	return goret
+}
+
+// GetSequences wraps gtk_gesture_get_sequences
+// The function returns the following values:
+// 
+// 	- goret []*gdk.EventSequence 
+//
+// Returns the list of #GdkEventSequences currently being interpreted
+// by @gesture.
+func (gesture *GestureInstance) GetSequences() []*gdk.EventSequence {
+	var carg0 *C.GtkGesture // in, none, converted
+	var cret  *C.GList      // container, transfer: container
+
+	carg0 = (*C.GtkGesture)(UnsafeGestureToGlibNone(gesture))
+
+	cret = C.gtk_gesture_get_sequences(carg0)
+	runtime.KeepAlive(gesture)
+
+	var goret []*gdk.EventSequence
+
+	goret = glib.UnsafeListFromGlibFull(
+		unsafe.Pointer(cret),
+		func(v unsafe.Pointer) *gdk.EventSequence {
+			var dst *gdk.EventSequence // converted
+			dst = gdk.UnsafeEventSequenceFromGlibNone(v)
+			return dst
+		},
+	)
 
 	return goret
 }
@@ -37363,6 +37998,36 @@ type IconTheme interface {
 	// Checks whether an icon theme includes an icon
 	// for a particular name.
 	HasIcon(string) bool
+	// ListContexts wraps gtk_icon_theme_list_contexts
+	// The function returns the following values:
+	// 
+	// 	- goret []string 
+	//
+	// Gets the list of contexts available within the current
+	// hierarchy of icon themes.
+	// See gtk_icon_theme_list_icons() for details about contexts.
+	ListContexts() []string
+	// ListIcons wraps gtk_icon_theme_list_icons
+	// 
+	// The function takes the following parameters:
+	// 
+	// 	- _context string (nullable): a string identifying a particular type of
+	//           icon, or %NULL to list all icons. 
+	// 
+	// The function returns the following values:
+	// 
+	// 	- goret []string 
+	//
+	// Lists the icons in the current icon theme. Only a subset
+	// of the icons can be listed by providing a context string.
+	// The set of values for the context string is system dependent,
+	// but will typically include such values as “Applications” and
+	// “MimeTypes”. Contexts are explained in the
+	// [Icon Theme Specification](http://www.freedesktop.org/wiki/Specifications/icon-theme-spec).
+	// The standard contexts are listed in the
+	// [Icon Naming Specification](http://www.freedesktop.org/wiki/Specifications/icon-naming-spec).
+	// Also see gtk_icon_theme_list_contexts().
+	ListIcons(string) []string
 	// LoadIcon wraps gtk_icon_theme_load_icon
 	// 
 	// The function takes the following parameters:
@@ -37953,6 +38618,88 @@ func (iconTheme *IconThemeInstance) HasIcon(iconName string) bool {
 	if cret != 0 {
 		goret = true
 	}
+
+	return goret
+}
+
+// ListContexts wraps gtk_icon_theme_list_contexts
+// The function returns the following values:
+// 
+// 	- goret []string 
+//
+// Gets the list of contexts available within the current
+// hierarchy of icon themes.
+// See gtk_icon_theme_list_icons() for details about contexts.
+func (iconTheme *IconThemeInstance) ListContexts() []string {
+	var carg0 *C.GtkIconTheme // in, none, converted
+	var cret  *C.GList        // container, transfer: full
+
+	carg0 = (*C.GtkIconTheme)(UnsafeIconThemeToGlibNone(iconTheme))
+
+	cret = C.gtk_icon_theme_list_contexts(carg0)
+	runtime.KeepAlive(iconTheme)
+
+	var goret []string
+
+	goret = glib.UnsafeListFromGlibFull(
+		unsafe.Pointer(cret),
+		func(v unsafe.Pointer) string {
+			var dst string // string
+			dst = C.GoString((*C.char)(v))
+			defer C.free(v)
+			return dst
+		},
+	)
+
+	return goret
+}
+
+// ListIcons wraps gtk_icon_theme_list_icons
+// 
+// The function takes the following parameters:
+// 
+// 	- _context string (nullable): a string identifying a particular type of
+//           icon, or %NULL to list all icons. 
+// 
+// The function returns the following values:
+// 
+// 	- goret []string 
+//
+// Lists the icons in the current icon theme. Only a subset
+// of the icons can be listed by providing a context string.
+// The set of values for the context string is system dependent,
+// but will typically include such values as “Applications” and
+// “MimeTypes”. Contexts are explained in the
+// [Icon Theme Specification](http://www.freedesktop.org/wiki/Specifications/icon-theme-spec).
+// The standard contexts are listed in the
+// [Icon Naming Specification](http://www.freedesktop.org/wiki/Specifications/icon-naming-spec).
+// Also see gtk_icon_theme_list_contexts().
+func (iconTheme *IconThemeInstance) ListIcons(_context string) []string {
+	var carg0 *C.GtkIconTheme // in, none, converted
+	var carg1 *C.gchar        // in, none, string, nullable-string
+	var cret  *C.GList        // container, transfer: full
+
+	carg0 = (*C.GtkIconTheme)(UnsafeIconThemeToGlibNone(iconTheme))
+	if _context != "" {
+		carg1 = (*C.gchar)(unsafe.Pointer(C.CString(_context)))
+		defer C.free(unsafe.Pointer(carg1))
+	}
+
+	cret = C.gtk_icon_theme_list_icons(carg0, carg1)
+	runtime.KeepAlive(iconTheme)
+	runtime.KeepAlive(_context)
+
+	var goret []string
+
+	goret = glib.UnsafeListFromGlibFull(
+		unsafe.Pointer(cret),
+		func(v unsafe.Pointer) string {
+			var dst string // string
+			dst = C.GoString((*C.char)(v))
+			defer C.free(v)
+			return dst
+		},
+	)
 
 	return goret
 }
@@ -46782,6 +47529,13 @@ type RecentManager interface {
 	// See gtk_recent_manager_add_full() if you want to explicitly
 	// define the metadata for the resource pointed by @uri.
 	AddItem(string) bool
+	// GetItems wraps gtk_recent_manager_get_items
+	// The function returns the following values:
+	// 
+	// 	- goret []*RecentInfo 
+	//
+	// Gets the list of recently used resources.
+	GetItems() []*RecentInfo
 	// HasItem wraps gtk_recent_manager_has_item
 	// 
 	// The function takes the following parameters:
@@ -47027,6 +47781,35 @@ func (manager *RecentManagerInstance) AddItem(uri string) bool {
 	if cret != 0 {
 		goret = true
 	}
+
+	return goret
+}
+
+// GetItems wraps gtk_recent_manager_get_items
+// The function returns the following values:
+// 
+// 	- goret []*RecentInfo 
+//
+// Gets the list of recently used resources.
+func (manager *RecentManagerInstance) GetItems() []*RecentInfo {
+	var carg0 *C.GtkRecentManager // in, none, converted
+	var cret  *C.GList            // container, transfer: full
+
+	carg0 = (*C.GtkRecentManager)(UnsafeRecentManagerToGlibNone(manager))
+
+	cret = C.gtk_recent_manager_get_items(carg0)
+	runtime.KeepAlive(manager)
+
+	var goret []*RecentInfo
+
+	goret = glib.UnsafeListFromGlibFull(
+		unsafe.Pointer(cret),
+		func(v unsafe.Pointer) *RecentInfo {
+			var dst *RecentInfo // converted
+			dst = UnsafeRecentInfoFromGlibFull(v)
+			return dst
+		},
+	)
 
 	return goret
 }
@@ -47586,6 +48369,13 @@ type SizeGroup interface {
 	//
 	// Gets the current mode of the size group. See gtk_size_group_set_mode().
 	GetMode() SizeGroupMode
+	// GetWidgets wraps gtk_size_group_get_widgets
+	// The function returns the following values:
+	// 
+	// 	- goret []Widget 
+	//
+	// Returns the list of widgets associated with @size_group.
+	GetWidgets() []Widget
 	// RemoveWidget wraps gtk_size_group_remove_widget
 	// 
 	// The function takes the following parameters:
@@ -47714,6 +48504,35 @@ func (sizeGroup *SizeGroupInstance) GetMode() SizeGroupMode {
 	var goret SizeGroupMode
 
 	goret = SizeGroupMode(cret)
+
+	return goret
+}
+
+// GetWidgets wraps gtk_size_group_get_widgets
+// The function returns the following values:
+// 
+// 	- goret []Widget 
+//
+// Returns the list of widgets associated with @size_group.
+func (sizeGroup *SizeGroupInstance) GetWidgets() []Widget {
+	var carg0 *C.GtkSizeGroup // in, none, converted
+	var cret  *C.GSList       // container, transfer: none
+
+	carg0 = (*C.GtkSizeGroup)(UnsafeSizeGroupToGlibNone(sizeGroup))
+
+	cret = C.gtk_size_group_get_widgets(carg0)
+	runtime.KeepAlive(sizeGroup)
+
+	var goret []Widget
+
+	goret = glib.UnsafeSListFromGlibNone(
+		unsafe.Pointer(cret),
+		func(v unsafe.Pointer) Widget {
+			var dst Widget // converted
+			dst = UnsafeWidgetFromGlibNone(v)
+			return dst
+		},
+	)
 
 	return goret
 }
@@ -48472,6 +49291,13 @@ type StyleContext interface {
 	// Returns %TRUE if @context currently has defined the
 	// given class name.
 	HasClass(string) bool
+	// ListClasses wraps gtk_style_context_list_classes
+	// The function returns the following values:
+	// 
+	// 	- goret []string 
+	//
+	// Returns the list of classes currently defined in @context.
+	ListClasses() []string
 	// LookupColor wraps gtk_style_context_lookup_color
 	// 
 	// The function takes the following parameters:
@@ -49291,6 +50117,35 @@ func (_context *StyleContextInstance) HasClass(className string) bool {
 	if cret != 0 {
 		goret = true
 	}
+
+	return goret
+}
+
+// ListClasses wraps gtk_style_context_list_classes
+// The function returns the following values:
+// 
+// 	- goret []string 
+//
+// Returns the list of classes currently defined in @context.
+func (_context *StyleContextInstance) ListClasses() []string {
+	var carg0 *C.GtkStyleContext // in, none, converted
+	var cret  *C.GList           // container, transfer: container
+
+	carg0 = (*C.GtkStyleContext)(UnsafeStyleContextToGlibNone(_context))
+
+	cret = C.gtk_style_context_list_classes(carg0)
+	runtime.KeepAlive(_context)
+
+	var goret []string
+
+	goret = glib.UnsafeListFromGlibFull(
+		unsafe.Pointer(cret),
+		func(v unsafe.Pointer) string {
+			var dst string // string
+			dst = C.GoString((*C.char)(v))
+			return dst
+		},
+	)
 
 	return goret
 }
@@ -52831,6 +53686,14 @@ type TextChildAnchor interface {
 	// to use this function — otherwise all deleted child anchors
 	// will also be finalized.
 	GetDeleted() bool
+	// GetWidgets wraps gtk_text_child_anchor_get_widgets
+	// The function returns the following values:
+	// 
+	// 	- goret []Widget 
+	//
+	// Gets a list of all widgets anchored at this child anchor.
+	// The returned list should be freed with g_list_free().
+	GetWidgets() []Widget
 }
 
 func unsafeWrapTextChildAnchor(base *gobject.ObjectInstance) *TextChildAnchorInstance {
@@ -52913,6 +53776,36 @@ func (anchor *TextChildAnchorInstance) GetDeleted() bool {
 	if cret != 0 {
 		goret = true
 	}
+
+	return goret
+}
+
+// GetWidgets wraps gtk_text_child_anchor_get_widgets
+// The function returns the following values:
+// 
+// 	- goret []Widget 
+//
+// Gets a list of all widgets anchored at this child anchor.
+// The returned list should be freed with g_list_free().
+func (anchor *TextChildAnchorInstance) GetWidgets() []Widget {
+	var carg0 *C.GtkTextChildAnchor // in, none, converted
+	var cret  *C.GList              // container, transfer: container
+
+	carg0 = (*C.GtkTextChildAnchor)(UnsafeTextChildAnchorToGlibNone(anchor))
+
+	cret = C.gtk_text_child_anchor_get_widgets(carg0)
+	runtime.KeepAlive(anchor)
+
+	var goret []Widget
+
+	goret = glib.UnsafeListFromGlibFull(
+		unsafe.Pointer(cret),
+		func(v unsafe.Pointer) Widget {
+			var dst Widget // converted
+			dst = UnsafeWidgetFromGlibNone(v)
+			return dst
+		},
+	)
 
 	return goret
 }
@@ -54236,6 +55129,12 @@ var _ ToplevelAccessible = (*ToplevelAccessibleInstance)(nil)
 type ToplevelAccessible interface {
 	atk.Object
 	upcastToGtkToplevelAccessible() *ToplevelAccessibleInstance
+
+	// GetChildren wraps gtk_toplevel_accessible_get_children
+	// The function returns the following values:
+	// 
+	// 	- goret []Window 
+	GetChildren() []Window
 }
 
 func unsafeWrapToplevelAccessible(base *gobject.ObjectInstance) *ToplevelAccessibleInstance {
@@ -54272,6 +55171,33 @@ func UnsafeToplevelAccessibleToGlibNone(c ToplevelAccessible) unsafe.Pointer {
 // UnsafeToplevelAccessibleToGlibFull is used to convert the instance to it's C value GtkToplevelAccessible, while removeing the finalizer. This is used by the bindings internally.
 func UnsafeToplevelAccessibleToGlibFull(c ToplevelAccessible) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
+}
+
+// GetChildren wraps gtk_toplevel_accessible_get_children
+// The function returns the following values:
+// 
+// 	- goret []Window 
+func (accessible *ToplevelAccessibleInstance) GetChildren() []Window {
+	var carg0 *C.GtkToplevelAccessible // in, none, converted
+	var cret  *C.GList                 // container, transfer: none
+
+	carg0 = (*C.GtkToplevelAccessible)(UnsafeToplevelAccessibleToGlibNone(accessible))
+
+	cret = C.gtk_toplevel_accessible_get_children(carg0)
+	runtime.KeepAlive(accessible)
+
+	var goret []Window
+
+	goret = glib.UnsafeListFromGlibNone(
+		unsafe.Pointer(cret),
+		func(v unsafe.Pointer) Window {
+			var dst Window // converted
+			dst = UnsafeWindowFromGlibNone(v)
+			return dst
+		},
+	)
+
+	return goret
 }
 
 // TreeModelFilterInstance is the instance type used by all types extending GtkTreeModelFilter. It is used internally by the bindings. Users should use the interface [TreeModelFilter] instead.
@@ -55422,6 +56348,26 @@ type TreeSelection interface {
 	// This function will not work with %GTK_SELECTION_MULTIPLE. See
 	// gtk_tree_selection_get_selected_rows() instead.
 	GetSelected() (TreeModel, TreeIter, bool)
+	// GetSelectedRows wraps gtk_tree_selection_get_selected_rows
+	// The function returns the following values:
+	// 
+	// 	- model TreeModel: A pointer to set to the #GtkTreeModel, or %NULL. 
+	// 	- goret []*TreePath 
+	//
+	// Creates a list of path of all selected rows.
+	// 
+	// Additionally, if you are planning on modifying the model after calling
+	// this function, you may want to convert the returned list into a list
+	// of #GtkTreeRowReferences.
+	// 
+	// To do this, you can use gtk_tree_row_reference_new().
+	// 
+	// To free the return value, use:
+	// 
+	// |[&lt;!-- language="C" --&gt;
+	// g_list_free_full (list, (GDestroyNotify) gtk_tree_path_free);
+	// ]|
+	GetSelectedRows() (TreeModel, []*TreePath)
 	// GetTreeView wraps gtk_tree_selection_get_tree_view
 	// The function returns the following values:
 	// 
@@ -55677,6 +56623,51 @@ func (selection *TreeSelectionInstance) GetSelected() (TreeModel, TreeIter, bool
 	}
 
 	return model, iter, goret
+}
+
+// GetSelectedRows wraps gtk_tree_selection_get_selected_rows
+// The function returns the following values:
+// 
+// 	- model TreeModel: A pointer to set to the #GtkTreeModel, or %NULL. 
+// 	- goret []*TreePath 
+//
+// Creates a list of path of all selected rows.
+// 
+// Additionally, if you are planning on modifying the model after calling
+// this function, you may want to convert the returned list into a list
+// of #GtkTreeRowReferences.
+// 
+// To do this, you can use gtk_tree_row_reference_new().
+// 
+// To free the return value, use:
+// 
+// |[&lt;!-- language="C" --&gt;
+// g_list_free_full (list, (GDestroyNotify) gtk_tree_path_free);
+// ]|
+func (selection *TreeSelectionInstance) GetSelectedRows() (TreeModel, []*TreePath) {
+	var carg0 *C.GtkTreeSelection // in, none, converted
+	var carg1 *C.GtkTreeModel     // out, none, converted
+	var cret  *C.GList            // container, transfer: full
+
+	carg0 = (*C.GtkTreeSelection)(UnsafeTreeSelectionToGlibNone(selection))
+
+	cret = C.gtk_tree_selection_get_selected_rows(carg0, &carg1)
+	runtime.KeepAlive(selection)
+
+	var model TreeModel
+	var goret []*TreePath
+
+	model = UnsafeTreeModelFromGlibNone(unsafe.Pointer(carg1))
+	goret = glib.UnsafeListFromGlibFull(
+		unsafe.Pointer(cret),
+		func(v unsafe.Pointer) *TreePath {
+			var dst *TreePath // converted
+			dst = UnsafeTreePathFromGlibFull(v)
+			return dst
+		},
+	)
+
+	return model, goret
 }
 
 // GetTreeView wraps gtk_tree_selection_get_tree_view
@@ -61088,6 +62079,22 @@ type Widget interface {
 	// Retrieves a %NULL-terminated array of strings containing the prefixes of
 	// #GActionGroup's available to @widget.
 	ListActionPrefixes() []string
+	// ListMnemonicLabels wraps gtk_widget_list_mnemonic_labels
+	// The function returns the following values:
+	// 
+	// 	- goret []Widget 
+	//
+	// Returns a newly allocated list of the widgets, normally labels, for
+	// which this widget is the target of a mnemonic (see for example,
+	// gtk_label_set_mnemonic_widget()).
+	// 
+	// The widgets in the list are not individually referenced. If you
+	// want to iterate through the list and perform actions involving
+	// callbacks that might destroy the widgets, you
+	// must call `g_list_foreach (result,
+	// (GFunc)g_object_ref, NULL)` first, and then unref all the
+	// widgets afterwards.
+	ListMnemonicLabels() []Widget
 	// Map wraps gtk_widget_map
 	//
 	// This function is only for use in widget implementations. Causes
@@ -66374,6 +67381,44 @@ func (widget *WidgetInstance) ListActionPrefixes() []string {
 	return goret
 }
 
+// ListMnemonicLabels wraps gtk_widget_list_mnemonic_labels
+// The function returns the following values:
+// 
+// 	- goret []Widget 
+//
+// Returns a newly allocated list of the widgets, normally labels, for
+// which this widget is the target of a mnemonic (see for example,
+// gtk_label_set_mnemonic_widget()).
+// 
+// The widgets in the list are not individually referenced. If you
+// want to iterate through the list and perform actions involving
+// callbacks that might destroy the widgets, you
+// must call `g_list_foreach (result,
+// (GFunc)g_object_ref, NULL)` first, and then unref all the
+// widgets afterwards.
+func (widget *WidgetInstance) ListMnemonicLabels() []Widget {
+	var carg0 *C.GtkWidget // in, none, converted
+	var cret  *C.GList     // container, transfer: container
+
+	carg0 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(widget))
+
+	cret = C.gtk_widget_list_mnemonic_labels(carg0)
+	runtime.KeepAlive(widget)
+
+	var goret []Widget
+
+	goret = glib.UnsafeListFromGlibFull(
+		unsafe.Pointer(cret),
+		func(v unsafe.Pointer) Widget {
+			var dst Widget // converted
+			dst = UnsafeWidgetFromGlibNone(v)
+			return dst
+		},
+	)
+
+	return goret
+}
+
 // Map wraps gtk_widget_map
 //
 // This function is only for use in widget implementations. Causes
@@ -69049,6 +70094,13 @@ type WindowGroup interface {
 	// Gets the current grab widget of the given group,
 	// see gtk_grab_add().
 	GetCurrentGrab() Widget
+	// ListWindows wraps gtk_window_group_list_windows
+	// The function returns the following values:
+	// 
+	// 	- goret []Window 
+	//
+	// Returns a list of the #GtkWindows that belong to @window_group.
+	ListWindows() []Window
 	// RemoveWindow wraps gtk_window_group_remove_window
 	// 
 	// The function takes the following parameters:
@@ -69180,6 +70232,35 @@ func (windowGroup *WindowGroupInstance) GetCurrentGrab() Widget {
 	var goret Widget
 
 	goret = UnsafeWidgetFromGlibNone(unsafe.Pointer(cret))
+
+	return goret
+}
+
+// ListWindows wraps gtk_window_group_list_windows
+// The function returns the following values:
+// 
+// 	- goret []Window 
+//
+// Returns a list of the #GtkWindows that belong to @window_group.
+func (windowGroup *WindowGroupInstance) ListWindows() []Window {
+	var carg0 *C.GtkWindowGroup // in, none, converted
+	var cret  *C.GList          // container, transfer: container
+
+	carg0 = (*C.GtkWindowGroup)(UnsafeWindowGroupToGlibNone(windowGroup))
+
+	cret = C.gtk_window_group_list_windows(carg0)
+	runtime.KeepAlive(windowGroup)
+
+	var goret []Window
+
+	goret = glib.UnsafeListFromGlibFull(
+		unsafe.Pointer(cret),
+		func(v unsafe.Pointer) Window {
+			var dst Window // converted
+			dst = UnsafeWindowFromGlibNone(v)
+			return dst
+		},
+	)
 
 	return goret
 }
@@ -71119,6 +72200,14 @@ type Container interface {
 	// Retrieves the border width of the container. See
 	// gtk_container_set_border_width().
 	GetBorderWidth() uint
+	// GetChildren wraps gtk_container_get_children
+	// The function returns the following values:
+	// 
+	// 	- goret []Widget 
+	//
+	// Returns the container’s non-internal children. See
+	// gtk_container_forall() for details on what constitutes an "internal" child.
+	GetChildren() []Widget
 	// GetFocusChild wraps gtk_container_get_focus_child
 	// The function returns the following values:
 	// 
@@ -71533,6 +72622,36 @@ func (container *ContainerInstance) GetBorderWidth() uint {
 	var goret uint
 
 	goret = uint(cret)
+
+	return goret
+}
+
+// GetChildren wraps gtk_container_get_children
+// The function returns the following values:
+// 
+// 	- goret []Widget 
+//
+// Returns the container’s non-internal children. See
+// gtk_container_forall() for details on what constitutes an "internal" child.
+func (container *ContainerInstance) GetChildren() []Widget {
+	var carg0 *C.GtkContainer // in, none, converted
+	var cret  *C.GList        // container, transfer: container
+
+	carg0 = (*C.GtkContainer)(UnsafeContainerToGlibNone(container))
+
+	cret = C.gtk_container_get_children(carg0)
+	runtime.KeepAlive(container)
+
+	var goret []Widget
+
+	goret = glib.UnsafeListFromGlibFull(
+		unsafe.Pointer(cret),
+		func(v unsafe.Pointer) Widget {
+			var dst Widget // converted
+			dst = UnsafeWidgetFromGlibNone(v)
+			return dst
+		},
+	)
 
 	return goret
 }
@@ -76027,6 +77146,13 @@ type FlowBox interface {
 	//
 	// Gets the vertical spacing.
 	GetRowSpacing() uint
+	// GetSelectedChildren wraps gtk_flow_box_get_selected_children
+	// The function returns the following values:
+	// 
+	// 	- goret []FlowBoxChild 
+	//
+	// Creates a list of all selected children.
+	GetSelectedChildren() []FlowBoxChild
 	// GetSelectionMode wraps gtk_flow_box_get_selection_mode
 	// The function returns the following values:
 	// 
@@ -76578,6 +77704,35 @@ func (box *FlowBoxInstance) GetRowSpacing() uint {
 	var goret uint
 
 	goret = uint(cret)
+
+	return goret
+}
+
+// GetSelectedChildren wraps gtk_flow_box_get_selected_children
+// The function returns the following values:
+// 
+// 	- goret []FlowBoxChild 
+//
+// Creates a list of all selected children.
+func (box *FlowBoxInstance) GetSelectedChildren() []FlowBoxChild {
+	var carg0 *C.GtkFlowBox // in, none, converted
+	var cret  *C.GList      // container, transfer: container
+
+	carg0 = (*C.GtkFlowBox)(UnsafeFlowBoxToGlibNone(box))
+
+	cret = C.gtk_flow_box_get_selected_children(carg0)
+	runtime.KeepAlive(box)
+
+	var goret []FlowBoxChild
+
+	goret = glib.UnsafeListFromGlibFull(
+		unsafe.Pointer(cret),
+		func(v unsafe.Pointer) FlowBoxChild {
+			var dst FlowBoxChild // converted
+			dst = UnsafeFlowBoxChildFromGlibNone(v)
+			return dst
+		},
+	)
 
 	return goret
 }
@@ -80889,6 +82044,21 @@ type IconView interface {
 	//
 	// Returns the value of the ::row-spacing property.
 	GetRowSpacing() int
+	// GetSelectedItems wraps gtk_icon_view_get_selected_items
+	// The function returns the following values:
+	// 
+	// 	- goret []*TreePath 
+	//
+	// Creates a list of paths of all selected items. Additionally, if you are
+	// planning on modifying the model after calling this function, you may
+	// want to convert the returned list into a list of #GtkTreeRowReferences.
+	// To do this, you can use gtk_tree_row_reference_new().
+	// 
+	// To free the return value, use:
+	// |[&lt;!-- language="C" --&gt;
+	// g_list_free_full (list, (GDestroyNotify) gtk_tree_path_free);
+	// ]|
+	GetSelectedItems() []*TreePath
 	// GetSelectionMode wraps gtk_icon_view_get_selection_mode
 	// The function returns the following values:
 	// 
@@ -82136,6 +83306,43 @@ func (iconView *IconViewInstance) GetRowSpacing() int {
 	var goret int
 
 	goret = int(cret)
+
+	return goret
+}
+
+// GetSelectedItems wraps gtk_icon_view_get_selected_items
+// The function returns the following values:
+// 
+// 	- goret []*TreePath 
+//
+// Creates a list of paths of all selected items. Additionally, if you are
+// planning on modifying the model after calling this function, you may
+// want to convert the returned list into a list of #GtkTreeRowReferences.
+// To do this, you can use gtk_tree_row_reference_new().
+// 
+// To free the return value, use:
+// |[&lt;!-- language="C" --&gt;
+// g_list_free_full (list, (GDestroyNotify) gtk_tree_path_free);
+// ]|
+func (iconView *IconViewInstance) GetSelectedItems() []*TreePath {
+	var carg0 *C.GtkIconView // in, none, converted
+	var cret  *C.GList       // container, transfer: full
+
+	carg0 = (*C.GtkIconView)(UnsafeIconViewToGlibNone(iconView))
+
+	cret = C.gtk_icon_view_get_selected_items(carg0)
+	runtime.KeepAlive(iconView)
+
+	var goret []*TreePath
+
+	goret = glib.UnsafeListFromGlibFull(
+		unsafe.Pointer(cret),
+		func(v unsafe.Pointer) *TreePath {
+			var dst *TreePath // converted
+			dst = UnsafeTreePathFromGlibFull(v)
+			return dst
+		},
+	)
 
 	return goret
 }
@@ -84633,6 +85840,13 @@ type ListBox interface {
 	// case you should use gtk_list_box_selected_foreach() to
 	// find all selected rows.
 	GetSelectedRow() ListBoxRow
+	// GetSelectedRows wraps gtk_list_box_get_selected_rows
+	// The function returns the following values:
+	// 
+	// 	- goret []ListBoxRow 
+	//
+	// Creates a list of all selected children.
+	GetSelectedRows() []ListBoxRow
 	// GetSelectionMode wraps gtk_list_box_get_selection_mode
 	// The function returns the following values:
 	// 
@@ -85092,6 +86306,35 @@ func (box *ListBoxInstance) GetSelectedRow() ListBoxRow {
 	var goret ListBoxRow
 
 	goret = UnsafeListBoxRowFromGlibNone(unsafe.Pointer(cret))
+
+	return goret
+}
+
+// GetSelectedRows wraps gtk_list_box_get_selected_rows
+// The function returns the following values:
+// 
+// 	- goret []ListBoxRow 
+//
+// Creates a list of all selected children.
+func (box *ListBoxInstance) GetSelectedRows() []ListBoxRow {
+	var carg0 *C.GtkListBox // in, none, converted
+	var cret  *C.GList      // container, transfer: container
+
+	carg0 = (*C.GtkListBox)(UnsafeListBoxToGlibNone(box))
+
+	cret = C.gtk_list_box_get_selected_rows(carg0)
+	runtime.KeepAlive(box)
+
+	var goret []ListBoxRow
+
+	goret = glib.UnsafeListFromGlibFull(
+		unsafe.Pointer(cret),
+		func(v unsafe.Pointer) ListBoxRow {
+			var dst ListBoxRow // converted
+			dst = UnsafeListBoxRowFromGlibNone(v)
+			return dst
+		},
+	)
 
 	return goret
 }
@@ -101421,6 +102664,14 @@ type TreeView interface {
 	//
 	// Gets the #GtkTreeViewColumn at the given position in the #tree_view.
 	GetColumn(int) TreeViewColumn
+	// GetColumns wraps gtk_tree_view_get_columns
+	// The function returns the following values:
+	// 
+	// 	- goret []TreeViewColumn 
+	//
+	// Returns a #GList of all the #GtkTreeViewColumn s currently in @tree_view.
+	// The returned list must be freed with g_list_free ().
+	GetColumns() []TreeViewColumn
 	// GetCursor wraps gtk_tree_view_get_cursor
 	// The function returns the following values:
 	// 
@@ -102986,6 +104237,36 @@ func (treeView *TreeViewInstance) GetColumn(n int) TreeViewColumn {
 	var goret TreeViewColumn
 
 	goret = UnsafeTreeViewColumnFromGlibNone(unsafe.Pointer(cret))
+
+	return goret
+}
+
+// GetColumns wraps gtk_tree_view_get_columns
+// The function returns the following values:
+// 
+// 	- goret []TreeViewColumn 
+//
+// Returns a #GList of all the #GtkTreeViewColumn s currently in @tree_view.
+// The returned list must be freed with g_list_free ().
+func (treeView *TreeViewInstance) GetColumns() []TreeViewColumn {
+	var carg0 *C.GtkTreeView // in, none, converted
+	var cret  *C.GList       // container, transfer: container
+
+	carg0 = (*C.GtkTreeView)(UnsafeTreeViewToGlibNone(treeView))
+
+	cret = C.gtk_tree_view_get_columns(carg0)
+	runtime.KeepAlive(treeView)
+
+	var goret []TreeViewColumn
+
+	goret = glib.UnsafeListFromGlibFull(
+		unsafe.Pointer(cret),
+		func(v unsafe.Pointer) TreeViewColumn {
+			var dst TreeViewColumn // converted
+			dst = UnsafeTreeViewColumnFromGlibNone(v)
+			return dst
+		},
+	)
 
 	return goret
 }
@@ -118635,6 +119916,41 @@ func NewMenuFromModel(model gio.MenuModel) Widget {
 	return goret
 }
 
+// MenuGetForAttachWidget wraps gtk_menu_get_for_attach_widget
+// 
+// The function takes the following parameters:
+// 
+// 	- widget Widget: a #GtkWidget 
+// 
+// The function returns the following values:
+// 
+// 	- goret []Widget 
+//
+// Returns a list of the menus which are attached to this widget.
+// This list is owned by GTK+ and must not be modified.
+func MenuGetForAttachWidget(widget Widget) []Widget {
+	var carg1 *C.GtkWidget // in, none, converted
+	var cret  *C.GList     // container, transfer: none
+
+	carg1 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(widget))
+
+	cret = C.gtk_menu_get_for_attach_widget(carg1)
+	runtime.KeepAlive(widget)
+
+	var goret []Widget
+
+	goret = glib.UnsafeListFromGlibNone(
+		unsafe.Pointer(cret),
+		func(v unsafe.Pointer) Widget {
+			var dst Widget // converted
+			dst = UnsafeWidgetFromGlibNone(v)
+			return dst
+		},
+	)
+
+	return goret
+}
+
 // Attach wraps gtk_menu_attach
 // 
 // The function takes the following parameters:
@@ -128145,6 +129461,15 @@ type Window interface {
 	// called gtk_window_set_icon_list(), gets the first icon in
 	// the icon list).
 	GetIcon() gdkpixbuf.Pixbuf
+	// GetIconList wraps gtk_window_get_icon_list
+	// The function returns the following values:
+	// 
+	// 	- goret []gdkpixbuf.Pixbuf 
+	//
+	// Retrieves the list of icons set by gtk_window_set_icon_list().
+	// The list is copied, but the reference count on each
+	// member won’t be incremented.
+	GetIconList() []gdkpixbuf.Pixbuf
 	// GetIconName wraps gtk_window_get_icon_name
 	// The function returns the following values:
 	// 
@@ -129343,6 +130668,34 @@ func NewWindow(typ WindowType) Widget {
 	return goret
 }
 
+// WindowGetDefaultIconList wraps gtk_window_get_default_icon_list
+// The function returns the following values:
+// 
+// 	- goret []gdkpixbuf.Pixbuf 
+//
+// Gets the value set by gtk_window_set_default_icon_list().
+// The list is a copy and should be freed with g_list_free(),
+// but the pixbufs in the list have not had their reference count
+// incremented.
+func WindowGetDefaultIconList() []gdkpixbuf.Pixbuf {
+	var cret *C.GList // container, transfer: container
+
+	cret = C.gtk_window_get_default_icon_list()
+
+	var goret []gdkpixbuf.Pixbuf
+
+	goret = glib.UnsafeListFromGlibFull(
+		unsafe.Pointer(cret),
+		func(v unsafe.Pointer) gdkpixbuf.Pixbuf {
+			var dst gdkpixbuf.Pixbuf // converted
+			dst = gdkpixbuf.UnsafePixbufFromGlibNone(v)
+			return dst
+		},
+	)
+
+	return goret
+}
+
 // WindowGetDefaultIconName wraps gtk_window_get_default_icon_name
 // The function returns the following values:
 // 
@@ -129361,6 +130714,36 @@ func WindowGetDefaultIconName() string {
 	var goret string
 
 	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+
+	return goret
+}
+
+// WindowListToplevels wraps gtk_window_list_toplevels
+// The function returns the following values:
+// 
+// 	- goret []Widget 
+//
+// Returns a list of all existing toplevel windows. The widgets
+// in the list are not individually referenced. If you want
+// to iterate through the list and perform actions involving
+// callbacks that might destroy the widgets, you must call
+// `g_list_foreach (result, (GFunc)g_object_ref, NULL)` first, and
+// then unref all the widgets afterwards.
+func WindowListToplevels() []Widget {
+	var cret *C.GList // container, transfer: container
+
+	cret = C.gtk_window_list_toplevels()
+
+	var goret []Widget
+
+	goret = glib.UnsafeListFromGlibFull(
+		unsafe.Pointer(cret),
+		func(v unsafe.Pointer) Widget {
+			var dst Widget // converted
+			dst = UnsafeWidgetFromGlibNone(v)
+			return dst
+		},
+	)
 
 	return goret
 }
@@ -130135,6 +131518,37 @@ func (window *WindowInstance) GetIcon() gdkpixbuf.Pixbuf {
 	var goret gdkpixbuf.Pixbuf
 
 	goret = gdkpixbuf.UnsafePixbufFromGlibNone(unsafe.Pointer(cret))
+
+	return goret
+}
+
+// GetIconList wraps gtk_window_get_icon_list
+// The function returns the following values:
+// 
+// 	- goret []gdkpixbuf.Pixbuf 
+//
+// Retrieves the list of icons set by gtk_window_set_icon_list().
+// The list is copied, but the reference count on each
+// member won’t be incremented.
+func (window *WindowInstance) GetIconList() []gdkpixbuf.Pixbuf {
+	var carg0 *C.GtkWindow // in, none, converted
+	var cret  *C.GList     // container, transfer: container
+
+	carg0 = (*C.GtkWindow)(UnsafeWindowToGlibNone(window))
+
+	cret = C.gtk_window_get_icon_list(carg0)
+	runtime.KeepAlive(window)
+
+	var goret []gdkpixbuf.Pixbuf
+
+	goret = glib.UnsafeListFromGlibFull(
+		unsafe.Pointer(cret),
+		func(v unsafe.Pointer) gdkpixbuf.Pixbuf {
+			var dst gdkpixbuf.Pixbuf // converted
+			dst = gdkpixbuf.UnsafePixbufFromGlibNone(v)
+			return dst
+		},
+	)
 
 	return goret
 }
@@ -138406,6 +139820,13 @@ type PlacesSidebar interface {
 	//
 	// Returns the value previously set with gtk_places_sidebar_set_show_trash()
 	GetShowTrash() bool
+	// ListShortcuts wraps gtk_places_sidebar_list_shortcuts
+	// The function returns the following values:
+	// 
+	// 	- goret []gio.File 
+	//
+	// Gets the list of shortcuts.
+	ListShortcuts() []gio.File
 	// RemoveShortcut wraps gtk_places_sidebar_remove_shortcut
 	// 
 	// The function takes the following parameters:
@@ -138548,26 +139969,6 @@ type PlacesSidebar interface {
 	// The places sidebar emits this signal when it needs to ask the application
 	// to pop up a menu to ask the user for which drag action to perform.
 	ConnectDragActionAsk(func(PlacesSidebar, int) int) gobject.SignalHandle
-	// ConnectDragActionRequested connects the provided callback to the "drag-action-requested" signal
-	//
-	// When the user starts a drag-and-drop operation and the sidebar needs
-	// to ask the application for which drag action to perform, then the
-	// sidebar will emit this signal.
-	// 
-	// The application can evaluate the @context for customary actions, or
-	// it can check the type of the files indicated by @source_file_list against the
-	// possible actions for the destination @dest_file.
-	// 
-	// The drag action to use must be the return value of the signal handler.
-	ConnectDragActionRequested(func(PlacesSidebar, gdk.DragContext, gio.File, unsafe.Pointer) int) gobject.SignalHandle
-	// ConnectDragPerformDrop connects the provided callback to the "drag-perform-drop" signal
-	//
-	// The places sidebar emits this signal when the user completes a
-	// drag-and-drop operation and one of the sidebar's items is the
-	// destination.  This item is in the @dest_file, and the
-	// @source_file_list has the list of files that are dropped into it and
-	// which should be copied/moved/etc. based on the specified @action.
-	ConnectDragPerformDrop(func(PlacesSidebar, gio.File, unsafe.Pointer, int)) gobject.SignalHandle
 	// ConnectMount connects the provided callback to the "mount" signal
 	//
 	// The places sidebar emits this signal when it starts a new operation
@@ -139016,6 +140417,35 @@ func (sidebar *PlacesSidebarInstance) GetShowTrash() bool {
 	return goret
 }
 
+// ListShortcuts wraps gtk_places_sidebar_list_shortcuts
+// The function returns the following values:
+// 
+// 	- goret []gio.File 
+//
+// Gets the list of shortcuts.
+func (sidebar *PlacesSidebarInstance) ListShortcuts() []gio.File {
+	var carg0 *C.GtkPlacesSidebar // in, none, converted
+	var cret  *C.GSList           // container, transfer: full
+
+	carg0 = (*C.GtkPlacesSidebar)(UnsafePlacesSidebarToGlibNone(sidebar))
+
+	cret = C.gtk_places_sidebar_list_shortcuts(carg0)
+	runtime.KeepAlive(sidebar)
+
+	var goret []gio.File
+
+	goret = glib.UnsafeSListFromGlibFull(
+		unsafe.Pointer(cret),
+		func(v unsafe.Pointer) gio.File {
+			var dst gio.File // converted
+			dst = gio.UnsafeFileFromGlibFull(v)
+			return dst
+		},
+	)
+
+	return goret
+}
+
 // RemoveShortcut wraps gtk_places_sidebar_remove_shortcut
 // 
 // The function takes the following parameters:
@@ -139301,30 +140731,6 @@ func (sidebar *PlacesSidebarInstance) SetShowTrash(showTrash bool) {
 // to pop up a menu to ask the user for which drag action to perform.
 func (o *PlacesSidebarInstance) ConnectDragActionAsk(fn func(PlacesSidebar, int) int) gobject.SignalHandle {
 	return o.Connect("drag-action-ask", fn)
-}
-// ConnectDragActionRequested connects the provided callback to the "drag-action-requested" signal
-//
-// When the user starts a drag-and-drop operation and the sidebar needs
-// to ask the application for which drag action to perform, then the
-// sidebar will emit this signal.
-// 
-// The application can evaluate the @context for customary actions, or
-// it can check the type of the files indicated by @source_file_list against the
-// possible actions for the destination @dest_file.
-// 
-// The drag action to use must be the return value of the signal handler.
-func (o *PlacesSidebarInstance) ConnectDragActionRequested(fn func(PlacesSidebar, gdk.DragContext, gio.File, unsafe.Pointer) int) gobject.SignalHandle {
-	return o.Connect("drag-action-requested", fn)
-}
-// ConnectDragPerformDrop connects the provided callback to the "drag-perform-drop" signal
-//
-// The places sidebar emits this signal when the user completes a
-// drag-and-drop operation and one of the sidebar's items is the
-// destination.  This item is in the @dest_file, and the
-// @source_file_list has the list of files that are dropped into it and
-// which should be copied/moved/etc. based on the specified @action.
-func (o *PlacesSidebarInstance) ConnectDragPerformDrop(fn func(PlacesSidebar, gio.File, unsafe.Pointer, int)) gobject.SignalHandle {
-	return o.Connect("drag-perform-drop", fn)
 }
 // ConnectMount connects the provided callback to the "mount" signal
 //
@@ -139692,6 +141098,13 @@ type RadioButton interface {
 	CheckButton
 	upcastToGtkRadioButton() *RadioButtonInstance
 
+	// GetGroup wraps gtk_radio_button_get_group
+	// The function returns the following values:
+	// 
+	// 	- goret []RadioButton 
+	//
+	// Retrieves the group assigned to a radio button.
+	GetGroup() []RadioButton
 	// JoinGroup wraps gtk_radio_button_join_group
 	// 
 	// The function takes the following parameters:
@@ -139889,6 +141302,35 @@ func NewRadioButtonWithMnemonicFromWidget(radioGroupMember RadioButton, label st
 	return goret
 }
 
+// GetGroup wraps gtk_radio_button_get_group
+// The function returns the following values:
+// 
+// 	- goret []RadioButton 
+//
+// Retrieves the group assigned to a radio button.
+func (radioButton *RadioButtonInstance) GetGroup() []RadioButton {
+	var carg0 *C.GtkRadioButton // in, none, converted
+	var cret  *C.GSList         // container, transfer: none
+
+	carg0 = (*C.GtkRadioButton)(UnsafeRadioButtonToGlibNone(radioButton))
+
+	cret = C.gtk_radio_button_get_group(carg0)
+	runtime.KeepAlive(radioButton)
+
+	var goret []RadioButton
+
+	goret = glib.UnsafeSListFromGlibNone(
+		unsafe.Pointer(cret),
+		func(v unsafe.Pointer) RadioButton {
+			var dst RadioButton // converted
+			dst = UnsafeRadioButtonFromGlibNone(v)
+			return dst
+		},
+	)
+
+	return goret
+}
+
 // JoinGroup wraps gtk_radio_button_join_group
 // 
 // The function takes the following parameters:
@@ -140057,6 +141499,14 @@ type RadioMenuItem interface {
 	CheckMenuItem
 	upcastToGtkRadioMenuItem() *RadioMenuItemInstance
 
+	// GetGroup wraps gtk_radio_menu_item_get_group
+	// The function returns the following values:
+	// 
+	// 	- goret []RadioMenuItem 
+	//
+	// Returns the group to which the radio menu item belongs, as a #GList of
+	// #GtkRadioMenuItem. The list belongs to GTK+ and should not be freed.
+	GetGroup() []RadioMenuItem
 	// JoinGroup wraps gtk_radio_menu_item_join_group
 	// 
 	// The function takes the following parameters:
@@ -140250,6 +141700,36 @@ func NewRadioMenuItemWithMnemonicFromWidget(group RadioMenuItem, label string) W
 	var goret Widget
 
 	goret = UnsafeWidgetFromGlibNone(unsafe.Pointer(cret))
+
+	return goret
+}
+
+// GetGroup wraps gtk_radio_menu_item_get_group
+// The function returns the following values:
+// 
+// 	- goret []RadioMenuItem 
+//
+// Returns the group to which the radio menu item belongs, as a #GList of
+// #GtkRadioMenuItem. The list belongs to GTK+ and should not be freed.
+func (radioMenuItem *RadioMenuItemInstance) GetGroup() []RadioMenuItem {
+	var carg0 *C.GtkRadioMenuItem // in, none, converted
+	var cret  *C.GSList           // container, transfer: none
+
+	carg0 = (*C.GtkRadioMenuItem)(UnsafeRadioMenuItemToGlibNone(radioMenuItem))
+
+	cret = C.gtk_radio_menu_item_get_group(carg0)
+	runtime.KeepAlive(radioMenuItem)
+
+	var goret []RadioMenuItem
+
+	goret = glib.UnsafeSListFromGlibNone(
+		unsafe.Pointer(cret),
+		func(v unsafe.Pointer) RadioMenuItem {
+			var dst RadioMenuItem // converted
+			dst = UnsafeRadioMenuItemFromGlibNone(v)
+			return dst
+		},
+	)
 
 	return goret
 }
@@ -143299,6 +144779,14 @@ var _ RadioToolButton = (*RadioToolButtonInstance)(nil)
 type RadioToolButton interface {
 	ToggleToolButton
 	upcastToGtkRadioToolButton() *RadioToolButtonInstance
+
+	// GetGroup wraps gtk_radio_tool_button_get_group
+	// The function returns the following values:
+	// 
+	// 	- goret []RadioButton 
+	//
+	// Returns the radio button group @button belongs to.
+	GetGroup() []RadioButton
 }
 
 func unsafeWrapRadioToolButton(base *gobject.ObjectInstance) *RadioToolButtonInstance {
@@ -143383,6 +144871,35 @@ func NewRadioToolButtonFromWidget(group RadioToolButton) ToolItem {
 	var goret ToolItem
 
 	goret = UnsafeToolItemFromGlibNone(unsafe.Pointer(cret))
+
+	return goret
+}
+
+// GetGroup wraps gtk_radio_tool_button_get_group
+// The function returns the following values:
+// 
+// 	- goret []RadioButton 
+//
+// Returns the radio button group @button belongs to.
+func (button *RadioToolButtonInstance) GetGroup() []RadioButton {
+	var carg0 *C.GtkRadioToolButton // in, none, converted
+	var cret  *C.GSList             // container, transfer: none
+
+	carg0 = (*C.GtkRadioToolButton)(UnsafeRadioToolButtonToGlibNone(button))
+
+	cret = C.gtk_radio_tool_button_get_group(carg0)
+	runtime.KeepAlive(button)
+
+	var goret []RadioButton
+
+	goret = glib.UnsafeSListFromGlibNone(
+		unsafe.Pointer(cret),
+		func(v unsafe.Pointer) RadioButton {
+			var dst RadioButton // converted
+			dst = UnsafeRadioButtonFromGlibNone(v)
+			return dst
+		},
+	)
 
 	return goret
 }
@@ -164397,6 +165914,39 @@ func (iter *TextIter) GetLineOffset() int {
 	return goret
 }
 
+// GetMarks wraps gtk_text_iter_get_marks
+// The function returns the following values:
+// 
+// 	- goret []TextMark 
+//
+// Returns a list of all #GtkTextMark at this location. Because marks
+// are not iterable (they don’t take up any "space" in the buffer,
+// they are just marks in between iterable locations), multiple marks
+// can exist in the same place. The returned list is not in any
+// meaningful order.
+func (iter *TextIter) GetMarks() []TextMark {
+	var carg0 *C.GtkTextIter // in, none, converted
+	var cret  *C.GSList      // container, transfer: container
+
+	carg0 = (*C.GtkTextIter)(UnsafeTextIterToGlibNone(iter))
+
+	cret = C.gtk_text_iter_get_marks(carg0)
+	runtime.KeepAlive(iter)
+
+	var goret []TextMark
+
+	goret = glib.UnsafeSListFromGlibFull(
+		unsafe.Pointer(cret),
+		func(v unsafe.Pointer) TextMark {
+			var dst TextMark // converted
+			dst = UnsafeTextMarkFromGlibNone(v)
+			return dst
+		},
+	)
+
+	return goret
+}
+
 // GetOffset wraps gtk_text_iter_get_offset
 // The function returns the following values:
 // 
@@ -164485,6 +166035,38 @@ func (start *TextIter) GetSlice(end *TextIter) string {
 	return goret
 }
 
+// GetTags wraps gtk_text_iter_get_tags
+// The function returns the following values:
+// 
+// 	- goret []TextTag 
+//
+// Returns a list of tags that apply to @iter, in ascending order of
+// priority (highest-priority tags are last). The #GtkTextTag in the
+// list don’t have a reference added, but you have to free the list
+// itself.
+func (iter *TextIter) GetTags() []TextTag {
+	var carg0 *C.GtkTextIter // in, none, converted
+	var cret  *C.GSList      // container, transfer: container
+
+	carg0 = (*C.GtkTextIter)(UnsafeTextIterToGlibNone(iter))
+
+	cret = C.gtk_text_iter_get_tags(carg0)
+	runtime.KeepAlive(iter)
+
+	var goret []TextTag
+
+	goret = glib.UnsafeSListFromGlibFull(
+		unsafe.Pointer(cret),
+		func(v unsafe.Pointer) TextTag {
+			var dst TextTag // converted
+			dst = UnsafeTextTagFromGlibNone(v)
+			return dst
+		},
+	)
+
+	return goret
+}
+
 // GetText wraps gtk_text_iter_get_text
 // 
 // The function takes the following parameters:
@@ -164516,6 +166098,50 @@ func (start *TextIter) GetText(end *TextIter) string {
 
 	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 	defer C.free(unsafe.Pointer(cret))
+
+	return goret
+}
+
+// GetToggledTags wraps gtk_text_iter_get_toggled_tags
+// 
+// The function takes the following parameters:
+// 
+// 	- toggledOn bool: %TRUE to get toggled-on tags 
+// 
+// The function returns the following values:
+// 
+// 	- goret []TextTag 
+//
+// Returns a list of #GtkTextTag that are toggled on or off at this
+// point.  (If @toggled_on is %TRUE, the list contains tags that are
+// toggled on.) If a tag is toggled on at @iter, then some non-empty
+// range of characters following @iter has that tag applied to it.  If
+// a tag is toggled off, then some non-empty range following @iter
+// does not have the tag applied to it.
+func (iter *TextIter) GetToggledTags(toggledOn bool) []TextTag {
+	var carg0 *C.GtkTextIter // in, none, converted
+	var carg1 C.gboolean     // in
+	var cret  *C.GSList      // container, transfer: container
+
+	carg0 = (*C.GtkTextIter)(UnsafeTextIterToGlibNone(iter))
+	if toggledOn {
+		carg1 = C.TRUE
+	}
+
+	cret = C.gtk_text_iter_get_toggled_tags(carg0, carg1)
+	runtime.KeepAlive(iter)
+	runtime.KeepAlive(toggledOn)
+
+	var goret []TextTag
+
+	goret = glib.UnsafeSListFromGlibFull(
+		unsafe.Pointer(cret),
+		func(v unsafe.Pointer) TextTag {
+			var dst TextTag // converted
+			dst = UnsafeTextTagFromGlibNone(v)
+			return dst
+		},
+	)
 
 	return goret
 }
@@ -169391,6 +171017,44 @@ func (path *WidgetPath) IterHasQname(pos int, qname glib.Quark) bool {
 	if cret != 0 {
 		goret = true
 	}
+
+	return goret
+}
+
+// IterListClasses wraps gtk_widget_path_iter_list_classes
+// 
+// The function takes the following parameters:
+// 
+// 	- pos int: position to query, -1 for the path head 
+// 
+// The function returns the following values:
+// 
+// 	- goret []string 
+//
+// Returns a list with all the class names defined for the widget
+// at position @pos in the hierarchy defined in @path.
+func (path *WidgetPath) IterListClasses(pos int) []string {
+	var carg0 *C.GtkWidgetPath // in, none, converted
+	var carg1 C.gint           // in, none, casted
+	var cret  *C.GSList        // container, transfer: container
+
+	carg0 = (*C.GtkWidgetPath)(UnsafeWidgetPathToGlibNone(path))
+	carg1 = C.gint(pos)
+
+	cret = C.gtk_widget_path_iter_list_classes(carg0, carg1)
+	runtime.KeepAlive(path)
+	runtime.KeepAlive(pos)
+
+	var goret []string
+
+	goret = glib.UnsafeSListFromGlibFull(
+		unsafe.Pointer(cret),
+		func(v unsafe.Pointer) string {
+			var dst string // string
+			dst = C.GoString((*C.char)(v))
+			return dst
+		},
+	)
 
 	return goret
 }

@@ -3876,6 +3876,143 @@ func IsZeroWidth(ch uint32) bool {
 	return goret
 }
 
+// Itemize wraps pango_itemize
+// 
+// The function takes the following parameters:
+// 
+// 	- _context Context: a structure holding information that affects
+//   the itemization process. 
+// 	- text string: the text to itemize. Must be valid UTF-8 
+// 	- startIndex int: first byte in @text to process 
+// 	- length int: the number of bytes (not characters) to process
+//   after @start_index. This must be &gt;= 0. 
+// 	- attrs *AttrList: the set of attributes that apply to @text. 
+// 	- cachedIter *AttrIterator (nullable): Cached attribute iterator 
+// 
+// The function returns the following values:
+// 
+// 	- goret []*Item 
+//
+// Breaks a piece of text into segments with consistent directional
+// level and font.
+// 
+// Each byte of @text will be contained in exactly one of the items in the
+// returned list; the generated list of items will be in logical order (the
+// start offsets of the items are ascending).
+// 
+// @cached_iter should be an iterator over @attrs currently positioned
+// at a range before or containing @start_index; @cached_iter will be
+// advanced to the range covering the position just after
+// @start_index + @length. (i.e. if itemizing in a loop, just keep passing
+// in the same @cached_iter).
+func Itemize(_context Context, text string, startIndex int, length int, attrs *AttrList, cachedIter *AttrIterator) []*Item {
+	var carg1 *C.PangoContext      // in, none, converted
+	var carg2 *C.char              // in, none, string, casted *C.gchar
+	var carg3 C.int                // in, none, casted, casted C.gint
+	var carg4 C.int                // in, none, casted, casted C.gint
+	var carg5 *C.PangoAttrList     // in, none, converted
+	var carg6 *C.PangoAttrIterator // in, none, converted, nullable
+	var cret  *C.GList             // container, transfer: full
+
+	carg1 = (*C.PangoContext)(UnsafeContextToGlibNone(_context))
+	carg2 = (*C.char)(unsafe.Pointer(C.CString(text)))
+	defer C.free(unsafe.Pointer(carg2))
+	carg3 = C.int(startIndex)
+	carg4 = C.int(length)
+	carg5 = (*C.PangoAttrList)(UnsafeAttrListToGlibNone(attrs))
+	if cachedIter != nil {
+		carg6 = (*C.PangoAttrIterator)(UnsafeAttrIteratorToGlibNone(cachedIter))
+	}
+
+	cret = C.pango_itemize(carg1, carg2, carg3, carg4, carg5, carg6)
+	runtime.KeepAlive(_context)
+	runtime.KeepAlive(text)
+	runtime.KeepAlive(startIndex)
+	runtime.KeepAlive(length)
+	runtime.KeepAlive(attrs)
+	runtime.KeepAlive(cachedIter)
+
+	var goret []*Item
+
+	goret = glib.UnsafeListFromGlibFull(
+		unsafe.Pointer(cret),
+		func(v unsafe.Pointer) *Item {
+			var dst *Item // converted
+			dst = UnsafeItemFromGlibFull(v)
+			return dst
+		},
+	)
+
+	return goret
+}
+
+// ItemizeWithBaseDir wraps pango_itemize_with_base_dir
+// 
+// The function takes the following parameters:
+// 
+// 	- _context Context: a structure holding information that affects
+//   the itemization process. 
+// 	- baseDir Direction: base direction to use for bidirectional processing 
+// 	- text string: the text to itemize. 
+// 	- startIndex int: first byte in @text to process 
+// 	- length int: the number of bytes (not characters) to process
+//   after @start_index. This must be &gt;= 0. 
+// 	- attrs *AttrList: the set of attributes that apply to @text. 
+// 	- cachedIter *AttrIterator (nullable): Cached attribute iterator 
+// 
+// The function returns the following values:
+// 
+// 	- goret []*Item 
+//
+// Like `pango_itemize()`, but with an explicitly specified base direction.
+// 
+// The base direction is used when computing bidirectional levels.
+// [func@itemize] gets the base direction from the `PangoContext`
+// (see [method@Pango.Context.set_base_dir]).
+func ItemizeWithBaseDir(_context Context, baseDir Direction, text string, startIndex int, length int, attrs *AttrList, cachedIter *AttrIterator) []*Item {
+	var carg1 *C.PangoContext      // in, none, converted
+	var carg2 C.PangoDirection     // in, none, casted
+	var carg3 *C.char              // in, none, string, casted *C.gchar
+	var carg4 C.int                // in, none, casted, casted C.gint
+	var carg5 C.int                // in, none, casted, casted C.gint
+	var carg6 *C.PangoAttrList     // in, none, converted
+	var carg7 *C.PangoAttrIterator // in, none, converted, nullable
+	var cret  *C.GList             // container, transfer: full
+
+	carg1 = (*C.PangoContext)(UnsafeContextToGlibNone(_context))
+	carg2 = C.PangoDirection(baseDir)
+	carg3 = (*C.char)(unsafe.Pointer(C.CString(text)))
+	defer C.free(unsafe.Pointer(carg3))
+	carg4 = C.int(startIndex)
+	carg5 = C.int(length)
+	carg6 = (*C.PangoAttrList)(UnsafeAttrListToGlibNone(attrs))
+	if cachedIter != nil {
+		carg7 = (*C.PangoAttrIterator)(UnsafeAttrIteratorToGlibNone(cachedIter))
+	}
+
+	cret = C.pango_itemize_with_base_dir(carg1, carg2, carg3, carg4, carg5, carg6, carg7)
+	runtime.KeepAlive(_context)
+	runtime.KeepAlive(baseDir)
+	runtime.KeepAlive(text)
+	runtime.KeepAlive(startIndex)
+	runtime.KeepAlive(length)
+	runtime.KeepAlive(attrs)
+	runtime.KeepAlive(cachedIter)
+
+	var goret []*Item
+
+	goret = glib.UnsafeListFromGlibFull(
+		unsafe.Pointer(cret),
+		func(v unsafe.Pointer) *Item {
+			var dst *Item // converted
+			dst = UnsafeItemFromGlibFull(v)
+			return dst
+		},
+	)
+
+	return goret
+}
+
 // MarkupParserFinish wraps pango_markup_parser_finish
 // 
 // The function takes the following parameters:
@@ -8085,6 +8222,27 @@ type Layout interface {
 	// 
 	// See [method@Pango.Layout.set_line_spacing].
 	GetLineSpacing() float32
+	// GetLines wraps pango_layout_get_lines
+	// The function returns the following values:
+	// 
+	// 	- goret []*LayoutLine 
+	//
+	// Returns the lines of the @layout as a list.
+	// 
+	// Use the faster [method@Pango.Layout.get_lines_readonly] if you do not
+	// plan to modify the contents of the lines (glyphs, glyph widths, etc.).
+	GetLines() []*LayoutLine
+	// GetLinesReadonly wraps pango_layout_get_lines_readonly
+	// The function returns the following values:
+	// 
+	// 	- goret []*LayoutLine 
+	//
+	// Returns the lines of the @layout as a list.
+	// 
+	// This is a faster alternative to [method@Pango.Layout.get_lines],
+	// but the user is not expected to modify the contents of the lines
+	// (glyphs, glyph widths, etc.).
+	GetLinesReadonly() []*LayoutLine
 	// GetLogAttrsReadonly wraps pango_layout_get_log_attrs_readonly
 	// The function returns the following values:
 	// 
@@ -9492,6 +9650,71 @@ func (layout *LayoutInstance) GetLineSpacing() float32 {
 	var goret float32
 
 	goret = float32(cret)
+
+	return goret
+}
+
+// GetLines wraps pango_layout_get_lines
+// The function returns the following values:
+// 
+// 	- goret []*LayoutLine 
+//
+// Returns the lines of the @layout as a list.
+// 
+// Use the faster [method@Pango.Layout.get_lines_readonly] if you do not
+// plan to modify the contents of the lines (glyphs, glyph widths, etc.).
+func (layout *LayoutInstance) GetLines() []*LayoutLine {
+	var carg0 *C.PangoLayout // in, none, converted
+	var cret  *C.GSList      // container, transfer: none
+
+	carg0 = (*C.PangoLayout)(UnsafeLayoutToGlibNone(layout))
+
+	cret = C.pango_layout_get_lines(carg0)
+	runtime.KeepAlive(layout)
+
+	var goret []*LayoutLine
+
+	goret = glib.UnsafeSListFromGlibNone(
+		unsafe.Pointer(cret),
+		func(v unsafe.Pointer) *LayoutLine {
+			var dst *LayoutLine // converted
+			dst = UnsafeLayoutLineFromGlibNone(v)
+			return dst
+		},
+	)
+
+	return goret
+}
+
+// GetLinesReadonly wraps pango_layout_get_lines_readonly
+// The function returns the following values:
+// 
+// 	- goret []*LayoutLine 
+//
+// Returns the lines of the @layout as a list.
+// 
+// This is a faster alternative to [method@Pango.Layout.get_lines],
+// but the user is not expected to modify the contents of the lines
+// (glyphs, glyph widths, etc.).
+func (layout *LayoutInstance) GetLinesReadonly() []*LayoutLine {
+	var carg0 *C.PangoLayout // in, none, converted
+	var cret  *C.GSList      // container, transfer: none
+
+	carg0 = (*C.PangoLayout)(UnsafeLayoutToGlibNone(layout))
+
+	cret = C.pango_layout_get_lines_readonly(carg0)
+	runtime.KeepAlive(layout)
+
+	var goret []*LayoutLine
+
+	goret = glib.UnsafeSListFromGlibNone(
+		unsafe.Pointer(cret),
+		func(v unsafe.Pointer) *LayoutLine {
+			var dst *LayoutLine // converted
+			dst = UnsafeLayoutLineFromGlibNone(v)
+			return dst
+		},
+	)
 
 	return goret
 }
@@ -12266,6 +12489,36 @@ func (iterator *AttrIterator) Get(typ AttrType) *Attribute {
 	return goret
 }
 
+// GetAttrs wraps pango_attr_iterator_get_attrs
+// The function returns the following values:
+// 
+// 	- goret []*Attribute 
+//
+// Gets a list of all attributes at the current position of the
+// iterator.
+func (iterator *AttrIterator) GetAttrs() []*Attribute {
+	var carg0 *C.PangoAttrIterator // in, none, converted
+	var cret  *C.GSList            // container, transfer: full
+
+	carg0 = (*C.PangoAttrIterator)(UnsafeAttrIteratorToGlibNone(iterator))
+
+	cret = C.pango_attr_iterator_get_attrs(carg0)
+	runtime.KeepAlive(iterator)
+
+	var goret []*Attribute
+
+	goret = glib.UnsafeSListFromGlibFull(
+		unsafe.Pointer(cret),
+		func(v unsafe.Pointer) *Attribute {
+			var dst *Attribute // converted
+			dst = UnsafeAttributeFromGlibFull(v)
+			return dst
+		},
+	)
+
+	return goret
+}
+
 // Next wraps pango_attr_iterator_next
 // The function returns the following values:
 // 
@@ -12615,6 +12868,35 @@ func (list *AttrList) Filter(fn AttrFilterFunc) *AttrList {
 	var goret *AttrList
 
 	goret = UnsafeAttrListFromGlibFull(unsafe.Pointer(cret))
+
+	return goret
+}
+
+// GetAttributes wraps pango_attr_list_get_attributes
+// The function returns the following values:
+// 
+// 	- goret []*Attribute 
+//
+// Gets a list of all attributes in @list.
+func (list *AttrList) GetAttributes() []*Attribute {
+	var carg0 *C.PangoAttrList // in, none, converted
+	var cret  *C.GSList        // container, transfer: full
+
+	carg0 = (*C.PangoAttrList)(UnsafeAttrListToGlibNone(list))
+
+	cret = C.pango_attr_list_get_attributes(carg0)
+	runtime.KeepAlive(list)
+
+	var goret []*Attribute
+
+	goret = glib.UnsafeSListFromGlibFull(
+		unsafe.Pointer(cret),
+		func(v unsafe.Pointer) *Attribute {
+			var dst *Attribute // converted
+			dst = UnsafeAttributeFromGlibFull(v)
+			return dst
+		},
+	)
 
 	return goret
 }
@@ -15618,6 +15900,64 @@ func UnsafeGlyphItemToGlibFull(g *GlyphItem) unsafe.Pointer {
 	g.native = nil // GlyphItem is invalid from here on
 	return _p
 }
+// ApplyAttrs wraps pango_glyph_item_apply_attrs
+// 
+// The function takes the following parameters:
+// 
+// 	- text string: text that @list applies to 
+// 	- list *AttrList: a `PangoAttrList` 
+// 
+// The function returns the following values:
+// 
+// 	- goret []*GlyphItem 
+//
+// Splits a shaped item (`PangoGlyphItem`) into multiple items based
+// on an attribute list.
+// 
+// The idea is that if you have attributes that don't affect shaping,
+// such as color or underline, to avoid affecting shaping, you filter
+// them out ([method@Pango.AttrList.filter]), apply the shaping process
+// and then reapply them to the result using this function.
+// 
+// All attributes that start or end inside a cluster are applied
+// to that cluster; for instance, if half of a cluster is underlined
+// and the other-half strikethrough, then the cluster will end
+// up with both underline and strikethrough attributes. In these
+// cases, it may happen that @item-&gt;extra_attrs for some of the
+// result items can have multiple attributes of the same type.
+// 
+// This function takes ownership of @glyph_item; it will be reused
+// as one of the elements in the list.
+func (glyphItem *GlyphItem) ApplyAttrs(text string, list *AttrList) []*GlyphItem {
+	var carg0 *C.PangoGlyphItem // in, none, converted
+	var carg1 *C.char           // in, none, string, casted *C.gchar
+	var carg2 *C.PangoAttrList  // in, none, converted
+	var cret  *C.GSList         // container, transfer: full
+
+	carg0 = (*C.PangoGlyphItem)(UnsafeGlyphItemToGlibNone(glyphItem))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(text)))
+	defer C.free(unsafe.Pointer(carg1))
+	carg2 = (*C.PangoAttrList)(UnsafeAttrListToGlibNone(list))
+
+	cret = C.pango_glyph_item_apply_attrs(carg0, carg1, carg2)
+	runtime.KeepAlive(glyphItem)
+	runtime.KeepAlive(text)
+	runtime.KeepAlive(list)
+
+	var goret []*GlyphItem
+
+	goret = glib.UnsafeSListFromGlibFull(
+		unsafe.Pointer(cret),
+		func(v unsafe.Pointer) *GlyphItem {
+			var dst *GlyphItem // converted
+			dst = UnsafeGlyphItemFromGlibFull(v)
+			return dst
+		},
+	)
+
+	return goret
+}
+
 // Copy wraps pango_glyph_item_copy
 // The function returns the following values:
 // 

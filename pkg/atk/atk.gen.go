@@ -8093,6 +8093,14 @@ type Value interface {
 	//
 	// Gets the range of this object.
 	GetRange() *Range
+	// GetSubRanges wraps atk_value_get_sub_ranges
+	// The function returns the following values:
+	// 
+	// 	- goret []*Range 
+	//
+	// Gets the list of subranges defined for this object. See #AtkValue
+	// introduction for examples of subranges and when to expose them.
+	GetSubRanges() []*Range
 	// GetValueAndText wraps atk_value_get_value_and_text
 	// The function returns the following values:
 	// 
@@ -8223,6 +8231,36 @@ func (obj *ValueInstance) GetRange() *Range {
 	var goret *Range
 
 	goret = UnsafeRangeFromGlibFull(unsafe.Pointer(cret))
+
+	return goret
+}
+
+// GetSubRanges wraps atk_value_get_sub_ranges
+// The function returns the following values:
+// 
+// 	- goret []*Range 
+//
+// Gets the list of subranges defined for this object. See #AtkValue
+// introduction for examples of subranges and when to expose them.
+func (obj *ValueInstance) GetSubRanges() []*Range {
+	var carg0 *C.AtkValue // in, none, converted
+	var cret  *C.GSList   // container, transfer: full
+
+	carg0 = (*C.AtkValue)(UnsafeValueToGlibNone(obj))
+
+	cret = C.atk_value_get_sub_ranges(carg0)
+	runtime.KeepAlive(obj)
+
+	var goret []*Range
+
+	goret = glib.UnsafeSListFromGlibFull(
+		unsafe.Pointer(cret),
+		func(v unsafe.Pointer) *Range {
+			var dst *Range // converted
+			dst = UnsafeRangeFromGlibFull(v)
+			return dst
+		},
+	)
 
 	return goret
 }

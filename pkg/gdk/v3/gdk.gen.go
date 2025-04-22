@@ -11407,6 +11407,23 @@ type Device interface {
 	// function may not be called on devices of type %GDK_DEVICE_TYPE_SLAVE,
 	// unless there is an ongoing grab on them, see gdk_device_grab().
 	GetWindowAtPositionDouble() (float64, float64, Window)
+	// ListAxes wraps gdk_device_list_axes
+	// The function returns the following values:
+	// 
+	// 	- goret []*Atom 
+	//
+	// Returns a #GList of #GdkAtoms, containing the labels for
+	// the axes that @device currently has.
+	ListAxes() []*Atom
+	// ListSlaveDevices wraps gdk_device_list_slave_devices
+	// The function returns the following values:
+	// 
+	// 	- goret []Device 
+	//
+	// If the device if of type %GDK_DEVICE_TYPE_MASTER, it will return
+	// the list of slave devices attached to it, otherwise it will return
+	// %NULL
+	ListSlaveDevices() []Device
 	// SetAxisUse wraps gdk_device_set_axis_use
 	// 
 	// The function takes the following parameters:
@@ -12078,6 +12095,67 @@ func (device *DeviceInstance) GetWindowAtPositionDouble() (float64, float64, Win
 	goret = UnsafeWindowFromGlibNone(unsafe.Pointer(cret))
 
 	return winX, winY, goret
+}
+
+// ListAxes wraps gdk_device_list_axes
+// The function returns the following values:
+// 
+// 	- goret []*Atom 
+//
+// Returns a #GList of #GdkAtoms, containing the labels for
+// the axes that @device currently has.
+func (device *DeviceInstance) ListAxes() []*Atom {
+	var carg0 *C.GdkDevice // in, none, converted
+	var cret  *C.GList     // container, transfer: container
+
+	carg0 = (*C.GdkDevice)(UnsafeDeviceToGlibNone(device))
+
+	cret = C.gdk_device_list_axes(carg0)
+	runtime.KeepAlive(device)
+
+	var goret []*Atom
+
+	goret = glib.UnsafeListFromGlibFull(
+		unsafe.Pointer(cret),
+		func(v unsafe.Pointer) *Atom {
+			var dst *Atom // converted
+			dst = UnsafeAtomFromGlibNone(v)
+			return dst
+		},
+	)
+
+	return goret
+}
+
+// ListSlaveDevices wraps gdk_device_list_slave_devices
+// The function returns the following values:
+// 
+// 	- goret []Device 
+//
+// If the device if of type %GDK_DEVICE_TYPE_MASTER, it will return
+// the list of slave devices attached to it, otherwise it will return
+// %NULL
+func (device *DeviceInstance) ListSlaveDevices() []Device {
+	var carg0 *C.GdkDevice // in, none, converted
+	var cret  *C.GList     // container, transfer: container
+
+	carg0 = (*C.GdkDevice)(UnsafeDeviceToGlibNone(device))
+
+	cret = C.gdk_device_list_slave_devices(carg0)
+	runtime.KeepAlive(device)
+
+	var goret []Device
+
+	goret = glib.UnsafeListFromGlibFull(
+		unsafe.Pointer(cret),
+		func(v unsafe.Pointer) Device {
+			var dst Device // converted
+			dst = UnsafeDeviceFromGlibNone(v)
+			return dst
+		},
+	)
+
+	return goret
 }
 
 // SetAxisUse wraps gdk_device_set_axis_use
@@ -12823,6 +12901,13 @@ type Display interface {
 	//
 	// Finds out if the display has been closed.
 	IsClosed() bool
+	// ListSeats wraps gdk_display_list_seats
+	// The function returns the following values:
+	// 
+	// 	- goret []Seat 
+	//
+	// Returns the list of seats known to @display.
+	ListSeats() []Seat
 	// NotifyStartupComplete wraps gdk_display_notify_startup_complete
 	// 
 	// The function takes the following parameters:
@@ -13475,6 +13560,35 @@ func (display *DisplayInstance) IsClosed() bool {
 	return goret
 }
 
+// ListSeats wraps gdk_display_list_seats
+// The function returns the following values:
+// 
+// 	- goret []Seat 
+//
+// Returns the list of seats known to @display.
+func (display *DisplayInstance) ListSeats() []Seat {
+	var carg0 *C.GdkDisplay // in, none, converted
+	var cret  *C.GList      // container, transfer: container
+
+	carg0 = (*C.GdkDisplay)(UnsafeDisplayToGlibNone(display))
+
+	cret = C.gdk_display_list_seats(carg0)
+	runtime.KeepAlive(display)
+
+	var goret []Seat
+
+	goret = glib.UnsafeListFromGlibFull(
+		unsafe.Pointer(cret),
+		func(v unsafe.Pointer) Seat {
+			var dst Seat // converted
+			dst = UnsafeSeatFromGlibNone(v)
+			return dst
+		},
+	)
+
+	return goret
+}
+
 // NotifyStartupComplete wraps gdk_display_notify_startup_complete
 // 
 // The function takes the following parameters:
@@ -13823,6 +13937,13 @@ type DisplayManager interface {
 	//
 	// Gets the default #GdkDisplay.
 	GetDefaultDisplay() Display
+	// ListDisplays wraps gdk_display_manager_list_displays
+	// The function returns the following values:
+	// 
+	// 	- goret []Display 
+	//
+	// List all currently open displays.
+	ListDisplays() []Display
 	// OpenDisplay wraps gdk_display_manager_open_display
 	// 
 	// The function takes the following parameters:
@@ -13925,6 +14046,35 @@ func (manager *DisplayManagerInstance) GetDefaultDisplay() Display {
 	var goret Display
 
 	goret = UnsafeDisplayFromGlibNone(unsafe.Pointer(cret))
+
+	return goret
+}
+
+// ListDisplays wraps gdk_display_manager_list_displays
+// The function returns the following values:
+// 
+// 	- goret []Display 
+//
+// List all currently open displays.
+func (manager *DisplayManagerInstance) ListDisplays() []Display {
+	var carg0 *C.GdkDisplayManager // in, none, converted
+	var cret  *C.GSList            // container, transfer: container
+
+	carg0 = (*C.GdkDisplayManager)(UnsafeDisplayManagerToGlibNone(manager))
+
+	cret = C.gdk_display_manager_list_displays(carg0)
+	runtime.KeepAlive(manager)
+
+	var goret []Display
+
+	goret = glib.UnsafeSListFromGlibFull(
+		unsafe.Pointer(cret),
+		func(v unsafe.Pointer) Display {
+			var dst Display // converted
+			dst = UnsafeDisplayFromGlibNone(v)
+			return dst
+		},
+	)
 
 	return goret
 }
@@ -14060,6 +14210,13 @@ type DragContext interface {
 	//
 	// Determines the suggested drag action of the context.
 	GetSuggestedAction() DragAction
+	// ListTargets wraps gdk_drag_context_list_targets
+	// The function returns the following values:
+	// 
+	// 	- goret []*Atom 
+	//
+	// Retrieves the list of targets of the context.
+	ListTargets() []*Atom
 	// ManageDND wraps gdk_drag_context_manage_dnd
 	// 
 	// The function takes the following parameters:
@@ -14356,6 +14513,35 @@ func (_context *DragContextInstance) GetSuggestedAction() DragAction {
 	var goret DragAction
 
 	goret = DragAction(cret)
+
+	return goret
+}
+
+// ListTargets wraps gdk_drag_context_list_targets
+// The function returns the following values:
+// 
+// 	- goret []*Atom 
+//
+// Retrieves the list of targets of the context.
+func (_context *DragContextInstance) ListTargets() []*Atom {
+	var carg0 *C.GdkDragContext // in, none, converted
+	var cret  *C.GList          // container, transfer: none
+
+	carg0 = (*C.GdkDragContext)(UnsafeDragContextToGlibNone(_context))
+
+	cret = C.gdk_drag_context_list_targets(carg0)
+	runtime.KeepAlive(_context)
+
+	var goret []*Atom
+
+	goret = glib.UnsafeListFromGlibNone(
+		unsafe.Pointer(cret),
+		func(v unsafe.Pointer) *Atom {
+			var dst *Atom // converted
+			dst = UnsafeAtomFromGlibNone(v)
+			return dst
+		},
+	)
 
 	return goret
 }
@@ -16949,6 +17135,39 @@ type Screen interface {
 	// This is the visual for the root window of the display.
 	// The return value should not be freed.
 	GetSystemVisual() Visual
+	// GetToplevelWindows wraps gdk_screen_get_toplevel_windows
+	// The function returns the following values:
+	// 
+	// 	- goret []Window 
+	//
+	// Obtains a list of all toplevel windows known to GDK on the screen @screen.
+	// A toplevel window is a child of the root window (see
+	// gdk_get_default_root_window()).
+	// 
+	// The returned list should be freed with g_list_free(), but
+	// its elements need not be freed.
+	GetToplevelWindows() []Window
+	// GetWindowStack wraps gdk_screen_get_window_stack
+	// The function returns the following values:
+	// 
+	// 	- goret []Window 
+	//
+	// Returns a #GList of #GdkWindows representing the current
+	// window stack.
+	// 
+	// On X11, this is done by inspecting the _NET_CLIENT_LIST_STACKING
+	// property on the root window, as described in the
+	// [Extended Window Manager Hints](http://www.freedesktop.org/Standards/wm-spec).
+	// If the window manager does not support the
+	// _NET_CLIENT_LIST_STACKING hint, this function returns %NULL.
+	// 
+	// On other platforms, this function may return %NULL, depending on whether
+	// it is implementable on that platform.
+	// 
+	// The returned list is newly allocated and owns references to the
+	// windows it contains, so it should be freed using g_list_free() and
+	// its windows unrefed using g_object_unref() when no longer needed.
+	GetWindowStack() []Window
 	// IsComposited wraps gdk_screen_is_composited
 	// The function returns the following values:
 	// 
@@ -16961,6 +17180,18 @@ type Screen interface {
 	// On X11 this function returns whether a compositing manager is
 	// compositing @screen.
 	IsComposited() bool
+	// ListVisuals wraps gdk_screen_list_visuals
+	// The function returns the following values:
+	// 
+	// 	- goret []Visual 
+	//
+	// Lists the available visuals for the specified @screen.
+	// A visual describes a hardware image data format.
+	// For example, a visual might support 24-bit color, or 8-bit color,
+	// and might expect pixels to be in a certain format.
+	// 
+	// Call g_list_free() on the return value when you’re finished with it.
+	ListVisuals() []Visual
 	// SetResolution wraps gdk_screen_set_resolution
 	// 
 	// The function takes the following parameters:
@@ -17212,6 +17443,83 @@ func (screen *ScreenInstance) GetSystemVisual() Visual {
 	return goret
 }
 
+// GetToplevelWindows wraps gdk_screen_get_toplevel_windows
+// The function returns the following values:
+// 
+// 	- goret []Window 
+//
+// Obtains a list of all toplevel windows known to GDK on the screen @screen.
+// A toplevel window is a child of the root window (see
+// gdk_get_default_root_window()).
+// 
+// The returned list should be freed with g_list_free(), but
+// its elements need not be freed.
+func (screen *ScreenInstance) GetToplevelWindows() []Window {
+	var carg0 *C.GdkScreen // in, none, converted
+	var cret  *C.GList     // container, transfer: container
+
+	carg0 = (*C.GdkScreen)(UnsafeScreenToGlibNone(screen))
+
+	cret = C.gdk_screen_get_toplevel_windows(carg0)
+	runtime.KeepAlive(screen)
+
+	var goret []Window
+
+	goret = glib.UnsafeListFromGlibFull(
+		unsafe.Pointer(cret),
+		func(v unsafe.Pointer) Window {
+			var dst Window // converted
+			dst = UnsafeWindowFromGlibNone(v)
+			return dst
+		},
+	)
+
+	return goret
+}
+
+// GetWindowStack wraps gdk_screen_get_window_stack
+// The function returns the following values:
+// 
+// 	- goret []Window 
+//
+// Returns a #GList of #GdkWindows representing the current
+// window stack.
+// 
+// On X11, this is done by inspecting the _NET_CLIENT_LIST_STACKING
+// property on the root window, as described in the
+// [Extended Window Manager Hints](http://www.freedesktop.org/Standards/wm-spec).
+// If the window manager does not support the
+// _NET_CLIENT_LIST_STACKING hint, this function returns %NULL.
+// 
+// On other platforms, this function may return %NULL, depending on whether
+// it is implementable on that platform.
+// 
+// The returned list is newly allocated and owns references to the
+// windows it contains, so it should be freed using g_list_free() and
+// its windows unrefed using g_object_unref() when no longer needed.
+func (screen *ScreenInstance) GetWindowStack() []Window {
+	var carg0 *C.GdkScreen // in, none, converted
+	var cret  *C.GList     // container, transfer: full
+
+	carg0 = (*C.GdkScreen)(UnsafeScreenToGlibNone(screen))
+
+	cret = C.gdk_screen_get_window_stack(carg0)
+	runtime.KeepAlive(screen)
+
+	var goret []Window
+
+	goret = glib.UnsafeListFromGlibFull(
+		unsafe.Pointer(cret),
+		func(v unsafe.Pointer) Window {
+			var dst Window // converted
+			dst = UnsafeWindowFromGlibFull(v)
+			return dst
+		},
+	)
+
+	return goret
+}
+
 // IsComposited wraps gdk_screen_is_composited
 // The function returns the following values:
 // 
@@ -17237,6 +17545,40 @@ func (screen *ScreenInstance) IsComposited() bool {
 	if cret != 0 {
 		goret = true
 	}
+
+	return goret
+}
+
+// ListVisuals wraps gdk_screen_list_visuals
+// The function returns the following values:
+// 
+// 	- goret []Visual 
+//
+// Lists the available visuals for the specified @screen.
+// A visual describes a hardware image data format.
+// For example, a visual might support 24-bit color, or 8-bit color,
+// and might expect pixels to be in a certain format.
+// 
+// Call g_list_free() on the return value when you’re finished with it.
+func (screen *ScreenInstance) ListVisuals() []Visual {
+	var carg0 *C.GdkScreen // in, none, converted
+	var cret  *C.GList     // container, transfer: container
+
+	carg0 = (*C.GdkScreen)(UnsafeScreenToGlibNone(screen))
+
+	cret = C.gdk_screen_list_visuals(carg0)
+	runtime.KeepAlive(screen)
+
+	var goret []Visual
+
+	goret = glib.UnsafeListFromGlibFull(
+		unsafe.Pointer(cret),
+		func(v unsafe.Pointer) Visual {
+			var dst Visual // converted
+			dst = UnsafeVisualFromGlibNone(v)
+			return dst
+		},
+	)
 
 	return goret
 }
@@ -17332,6 +17674,18 @@ type Seat interface {
 	//
 	// Returns the master device that routes pointer events.
 	GetPointer() Device
+	// GetSlaves wraps gdk_seat_get_slaves
+	// 
+	// The function takes the following parameters:
+	// 
+	// 	- capabilities SeatCapabilities: capabilities to get devices for 
+	// 
+	// The function returns the following values:
+	// 
+	// 	- goret []Device 
+	//
+	// Returns the slave devices that match the given capabilities.
+	GetSlaves(SeatCapabilities) []Device
 	// Ungrab wraps gdk_seat_ungrab
 	//
 	// Releases a grab added through gdk_seat_grab().
@@ -17480,6 +17834,43 @@ func (seat *SeatInstance) GetPointer() Device {
 	var goret Device
 
 	goret = UnsafeDeviceFromGlibNone(unsafe.Pointer(cret))
+
+	return goret
+}
+
+// GetSlaves wraps gdk_seat_get_slaves
+// 
+// The function takes the following parameters:
+// 
+// 	- capabilities SeatCapabilities: capabilities to get devices for 
+// 
+// The function returns the following values:
+// 
+// 	- goret []Device 
+//
+// Returns the slave devices that match the given capabilities.
+func (seat *SeatInstance) GetSlaves(capabilities SeatCapabilities) []Device {
+	var carg0 *C.GdkSeat            // in, none, converted
+	var carg1 C.GdkSeatCapabilities // in, none, casted
+	var cret  *C.GList              // container, transfer: container
+
+	carg0 = (*C.GdkSeat)(UnsafeSeatToGlibNone(seat))
+	carg1 = C.GdkSeatCapabilities(capabilities)
+
+	cret = C.gdk_seat_get_slaves(carg0, carg1)
+	runtime.KeepAlive(seat)
+	runtime.KeepAlive(capabilities)
+
+	var goret []Device
+
+	goret = glib.UnsafeListFromGlibFull(
+		unsafe.Pointer(cret),
+		func(v unsafe.Pointer) Device {
+			var dst Device // converted
+			dst = UnsafeDeviceFromGlibNone(v)
+			return dst
+		},
+	)
 
 	return goret
 }
@@ -18079,6 +18470,19 @@ type Window interface {
 	// Determines whether or not the desktop environment shuld be hinted that
 	// the window does not want to receive input focus.
 	GetAcceptFocus() bool
+	// GetChildren wraps gdk_window_get_children
+	// The function returns the following values:
+	// 
+	// 	- goret []Window 
+	//
+	// Gets the list of children of @window known to GDK.
+	// This function only returns children created via GDK,
+	// so for example it’s useless when used with the root window;
+	// it only returns windows an application created itself.
+	// 
+	// The returned list must be freed, but the elements in the
+	// list need not be.
+	GetChildren() []Window
 	// GetCursor wraps gdk_window_get_cursor
 	// The function returns the following values:
 	// 
@@ -18667,6 +19071,14 @@ type Window interface {
 	// Connect to the #GdkWindow::moved-to-rect signal to find out how it was
 	// actually positioned.
 	MoveToRect(*Rectangle, Gravity, Gravity, AnchorHints, int, int)
+	// PeekChildren wraps gdk_window_peek_children
+	// The function returns the following values:
+	// 
+	// 	- goret []Window 
+	//
+	// Like gdk_window_get_children(), but does not copy the list of
+	// children, so the list does not need to be freed.
+	PeekChildren() []Window
 	// Raise wraps gdk_window_raise
 	//
 	// Raises @window to the top of the Z-order (stacking order), so that
@@ -20016,6 +20428,41 @@ func (window *WindowInstance) GetAcceptFocus() bool {
 	if cret != 0 {
 		goret = true
 	}
+
+	return goret
+}
+
+// GetChildren wraps gdk_window_get_children
+// The function returns the following values:
+// 
+// 	- goret []Window 
+//
+// Gets the list of children of @window known to GDK.
+// This function only returns children created via GDK,
+// so for example it’s useless when used with the root window;
+// it only returns windows an application created itself.
+// 
+// The returned list must be freed, but the elements in the
+// list need not be.
+func (window *WindowInstance) GetChildren() []Window {
+	var carg0 *C.GdkWindow // in, none, converted
+	var cret  *C.GList     // container, transfer: container
+
+	carg0 = (*C.GdkWindow)(UnsafeWindowToGlibNone(window))
+
+	cret = C.gdk_window_get_children(carg0)
+	runtime.KeepAlive(window)
+
+	var goret []Window
+
+	goret = glib.UnsafeListFromGlibFull(
+		unsafe.Pointer(cret),
+		func(v unsafe.Pointer) Window {
+			var dst Window // converted
+			dst = UnsafeWindowFromGlibNone(v)
+			return dst
+		},
+	)
 
 	return goret
 }
@@ -21457,6 +21904,36 @@ func (window *WindowInstance) MoveToRect(rect *Rectangle, rectAnchor Gravity, wi
 	runtime.KeepAlive(anchorHints)
 	runtime.KeepAlive(rectAnchorDx)
 	runtime.KeepAlive(rectAnchorDy)
+}
+
+// PeekChildren wraps gdk_window_peek_children
+// The function returns the following values:
+// 
+// 	- goret []Window 
+//
+// Like gdk_window_get_children(), but does not copy the list of
+// children, so the list does not need to be freed.
+func (window *WindowInstance) PeekChildren() []Window {
+	var carg0 *C.GdkWindow // in, none, converted
+	var cret  *C.GList     // container, transfer: none
+
+	carg0 = (*C.GdkWindow)(UnsafeWindowToGlibNone(window))
+
+	cret = C.gdk_window_peek_children(carg0)
+	runtime.KeepAlive(window)
+
+	var goret []Window
+
+	goret = glib.UnsafeListFromGlibNone(
+		unsafe.Pointer(cret),
+		func(v unsafe.Pointer) Window {
+			var dst Window // converted
+			dst = UnsafeWindowFromGlibNone(v)
+			return dst
+		},
+	)
+
+	return goret
 }
 
 // Raise wraps gdk_window_raise

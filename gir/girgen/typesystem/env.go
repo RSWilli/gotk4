@@ -175,6 +175,32 @@ func (e *env) referencedNamespace(t string) (foreign bool, ns *Namespace, localt
 
 // findType searches for a declared type in the namespace
 func (e *env) findType(t *gir.Type) (*Namespace, Type) {
+	ns, typ := e.findOuterType(t)
+
+	container, ok := typ.(*Container)
+
+	if len(t.Types) == 0 && !ok {
+		// resolve the non container type
+		return ns, typ
+	}
+
+	// typ has to be a container type
+	if !ok {
+		e.logger.Warn("type has inner types but is not a container", "type", t.Name, "ctype", t.CType, "inner-types", t.Types)
+		return nil, nil
+	}
+
+	typ = e.resolveContainerInnerTypes(container, t.Types)
+
+	if typ == nil {
+		return nil, nil
+	}
+
+	return ns, typ
+}
+
+// findOuterType searches for a declared type in the namespace, it ignores any inner types
+func (e *env) findOuterType(t *gir.Type) (*Namespace, Type) {
 	// Ctype resolving is often more reliable than GIR name resolving, so we try it first
 
 	typename := t.Name

@@ -47,6 +47,28 @@ var Main = genmain.Data{
 			"GLib-2": {
 				MinVersion: "2.80",
 				ManualTypes: []typesystem.Type{
+					&typesystem.Container{
+						GirName: "List",
+						C:       "GList",
+						CGo:     "C.GList",
+						MakeGoType: func(innerTypes []typesystem.CouldBeForeign[typesystem.Type]) string {
+							return "[]" + innerTypes[0].NamespacedGoType(1)
+						},
+						NumInnerTypes:        1,
+						FromGlibFullFunction: "UnsafeListFromGlibFull",
+						FromGlibNoneFunction: "UnsafeListFromGlibNone",
+					},
+					&typesystem.Container{
+						GirName: "SList",
+						C:       "GSList",
+						CGo:     "C.GSList",
+						MakeGoType: func(innerTypes []typesystem.CouldBeForeign[typesystem.Type]) string {
+							return "[]" + innerTypes[0].NamespacedGoType(1)
+						},
+						NumInnerTypes:        1,
+						FromGlibFullFunction: "UnsafeSListFromGlibFull",
+						FromGlibNoneFunction: "UnsafeSListFromGlibNone",
+					},
 					&typesystem.Callback{
 						BaseType: typesystem.BaseType{
 							GirName: "DestroyNotify",
@@ -257,6 +279,7 @@ var Main = genmain.Data{
 					typesystem.IgnoreMatching("ParamSpec"),
 					typesystem.IgnoreMatching("ParamFlags"),
 					typesystem.IgnoreMatching("Closure"),
+					typesystem.IgnoreMatching("SignalGroup"),
 					typesystem.IgnoreMatching("SignalQuery"),
 					typesystem.IgnoreMatching("TypeQuery"),
 

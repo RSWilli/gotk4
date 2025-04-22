@@ -32,7 +32,7 @@ func (f CouldBeForeign[T]) WithForeignNamespace(goidentifier string) string {
 
 // GoType is a shorthand method since the go type always needs the foreign namespace
 func (f CouldBeForeign[T]) NamespacedGoType(pointers int) string {
-	if f.Namespace == nil {
+	if f.Namespace == nil || isContainerInstance(f.Type) {
 		return f.Type.GoType(pointers)
 	}
 

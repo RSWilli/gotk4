@@ -27,6 +27,10 @@ func NewCToGoConverter(p *typesystem.Param) Converter {
 		}
 	}
 
+	if _, ok := p.Type.Type.(*typesystem.ContainerInstance); ok {
+		return newCToGoContainerConverter(p)
+	}
+
 	if _, ok := p.Type.Type.(*typesystem.Array); ok {
 		return newCToGoArrayConverter(p)
 	}

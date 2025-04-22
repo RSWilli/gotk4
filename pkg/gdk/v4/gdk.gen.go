@@ -13718,6 +13718,13 @@ type Display interface {
 	// 
 	// On modern displays, this value is always %TRUE.
 	IsRGBA() bool
+	// ListSeats wraps gdk_display_list_seats
+	// The function returns the following values:
+	// 
+	// 	- goret []Seat 
+	//
+	// Returns the list of seats known to @display.
+	ListSeats() []Seat
 	// PrepareGL wraps gdk_display_prepare_gl
 	// The function returns the following values:
 	// 
@@ -14371,6 +14378,35 @@ func (display *DisplayInstance) IsRGBA() bool {
 	return goret
 }
 
+// ListSeats wraps gdk_display_list_seats
+// The function returns the following values:
+// 
+// 	- goret []Seat 
+//
+// Returns the list of seats known to @display.
+func (display *DisplayInstance) ListSeats() []Seat {
+	var carg0 *C.GdkDisplay // in, none, converted
+	var cret  *C.GList      // container, transfer: container
+
+	carg0 = (*C.GdkDisplay)(UnsafeDisplayToGlibNone(display))
+
+	cret = C.gdk_display_list_seats(carg0)
+	runtime.KeepAlive(display)
+
+	var goret []Seat
+
+	goret = glib.UnsafeListFromGlibFull(
+		unsafe.Pointer(cret),
+		func(v unsafe.Pointer) Seat {
+			var dst Seat // converted
+			dst = UnsafeSeatFromGlibNone(v)
+			return dst
+		},
+	)
+
+	return goret
+}
+
 // PrepareGL wraps gdk_display_prepare_gl
 // The function returns the following values:
 // 
@@ -14659,6 +14695,13 @@ type DisplayManager interface {
 	//
 	// Gets the default `GdkDisplay`.
 	GetDefaultDisplay() Display
+	// ListDisplays wraps gdk_display_manager_list_displays
+	// The function returns the following values:
+	// 
+	// 	- goret []Display 
+	//
+	// List all currently open displays.
+	ListDisplays() []Display
 	// OpenDisplay wraps gdk_display_manager_open_display
 	// 
 	// The function takes the following parameters:
@@ -14763,6 +14806,35 @@ func (manager *DisplayManagerInstance) GetDefaultDisplay() Display {
 	var goret Display
 
 	goret = UnsafeDisplayFromGlibNone(unsafe.Pointer(cret))
+
+	return goret
+}
+
+// ListDisplays wraps gdk_display_manager_list_displays
+// The function returns the following values:
+// 
+// 	- goret []Display 
+//
+// List all currently open displays.
+func (manager *DisplayManagerInstance) ListDisplays() []Display {
+	var carg0 *C.GdkDisplayManager // in, none, converted
+	var cret  *C.GSList            // container, transfer: container
+
+	carg0 = (*C.GdkDisplayManager)(UnsafeDisplayManagerToGlibNone(manager))
+
+	cret = C.gdk_display_manager_list_displays(carg0)
+	runtime.KeepAlive(manager)
+
+	var goret []Display
+
+	goret = glib.UnsafeSListFromGlibFull(
+		unsafe.Pointer(cret),
+		func(v unsafe.Pointer) Display {
+			var dst Display // converted
+			dst = UnsafeDisplayFromGlibNone(v)
+			return dst
+		},
+	)
 
 	return goret
 }
@@ -20043,6 +20115,18 @@ type Seat interface {
 	//
 	// Returns the capabilities this `GdkSeat` currently has.
 	GetCapabilities() SeatCapabilities
+	// GetDevices wraps gdk_seat_get_devices
+	// 
+	// The function takes the following parameters:
+	// 
+	// 	- capabilities SeatCapabilities: capabilities to get devices for 
+	// 
+	// The function returns the following values:
+	// 
+	// 	- goret []Device 
+	//
+	// Returns the devices that match the given capabilities.
+	GetDevices(SeatCapabilities) []Device
 	// GetDisplay wraps gdk_seat_get_display
 	// The function returns the following values:
 	// 
@@ -20064,6 +20148,13 @@ type Seat interface {
 	//
 	// Returns the device that routes pointer events.
 	GetPointer() Device
+	// GetTools wraps gdk_seat_get_tools
+	// The function returns the following values:
+	// 
+	// 	- goret []DeviceTool 
+	//
+	// Returns all `GdkDeviceTools` that are known to the application.
+	GetTools() []DeviceTool
 	// ConnectDeviceAdded connects the provided callback to the "device-added" signal
 	//
 	// Emitted when a new input device is related to this seat.
@@ -20144,6 +20235,43 @@ func (seat *SeatInstance) GetCapabilities() SeatCapabilities {
 	return goret
 }
 
+// GetDevices wraps gdk_seat_get_devices
+// 
+// The function takes the following parameters:
+// 
+// 	- capabilities SeatCapabilities: capabilities to get devices for 
+// 
+// The function returns the following values:
+// 
+// 	- goret []Device 
+//
+// Returns the devices that match the given capabilities.
+func (seat *SeatInstance) GetDevices(capabilities SeatCapabilities) []Device {
+	var carg0 *C.GdkSeat            // in, none, converted
+	var carg1 C.GdkSeatCapabilities // in, none, casted
+	var cret  *C.GList              // container, transfer: container
+
+	carg0 = (*C.GdkSeat)(UnsafeSeatToGlibNone(seat))
+	carg1 = C.GdkSeatCapabilities(capabilities)
+
+	cret = C.gdk_seat_get_devices(carg0, carg1)
+	runtime.KeepAlive(seat)
+	runtime.KeepAlive(capabilities)
+
+	var goret []Device
+
+	goret = glib.UnsafeListFromGlibFull(
+		unsafe.Pointer(cret),
+		func(v unsafe.Pointer) Device {
+			var dst Device // converted
+			dst = UnsafeDeviceFromGlibNone(v)
+			return dst
+		},
+	)
+
+	return goret
+}
+
 // GetDisplay wraps gdk_seat_get_display
 // The function returns the following values:
 // 
@@ -20206,6 +20334,35 @@ func (seat *SeatInstance) GetPointer() Device {
 	var goret Device
 
 	goret = UnsafeDeviceFromGlibNone(unsafe.Pointer(cret))
+
+	return goret
+}
+
+// GetTools wraps gdk_seat_get_tools
+// The function returns the following values:
+// 
+// 	- goret []DeviceTool 
+//
+// Returns all `GdkDeviceTools` that are known to the application.
+func (seat *SeatInstance) GetTools() []DeviceTool {
+	var carg0 *C.GdkSeat // in, none, converted
+	var cret  *C.GList   // container, transfer: container
+
+	carg0 = (*C.GdkSeat)(UnsafeSeatToGlibNone(seat))
+
+	cret = C.gdk_seat_get_tools(carg0)
+	runtime.KeepAlive(seat)
+
+	var goret []DeviceTool
+
+	goret = glib.UnsafeListFromGlibFull(
+		unsafe.Pointer(cret),
+		func(v unsafe.Pointer) DeviceTool {
+			var dst DeviceTool // converted
+			dst = UnsafeDeviceToolFromGlibNone(v)
+			return dst
+		},
+	)
 
 	return goret
 }
@@ -23930,6 +24087,37 @@ func NewFileListFromArray(files []gio.File) *FileList {
 	var goret *FileList
 
 	goret = UnsafeFileListFromGlibFull(unsafe.Pointer(cret))
+
+	return goret
+}
+
+// GetFiles wraps gdk_file_list_get_files
+// The function returns the following values:
+// 
+// 	- goret []gio.File 
+//
+// Retrieves the list of files inside a `GdkFileList`.
+// 
+// This function is meant for language bindings.
+func (fileList *FileList) GetFiles() []gio.File {
+	var carg0 *C.GdkFileList // in, none, converted
+	var cret  *C.GSList      // container, transfer: container
+
+	carg0 = (*C.GdkFileList)(UnsafeFileListToGlibNone(fileList))
+
+	cret = C.gdk_file_list_get_files(carg0)
+	runtime.KeepAlive(fileList)
+
+	var goret []gio.File
+
+	goret = glib.UnsafeSListFromGlibFull(
+		unsafe.Pointer(cret),
+		func(v unsafe.Pointer) gio.File {
+			var dst gio.File // converted
+			dst = gio.UnsafeFileFromGlibNone(v)
+			return dst
+		},
+	)
 
 	return goret
 }

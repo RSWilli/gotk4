@@ -127,9 +127,11 @@ type ObjectInstance struct {
 	*objectInstance
 }
 
-// InitGoValue implements Object.
+// InitGoValue implements GoValueInitializer.
 func (obj *ObjectInstance) InitGoValue(v *Value) {
-	v.Init(TypeObject)
+	// always use the type from the object instance, instead of the base type,
+	// since this is inherited by all extending types
+	v.Init(obj.typeFromInstance())
 	v.SetObject(obj)
 }
 
@@ -188,11 +190,7 @@ func (v *ObjectInstance) SetObjectProperty(name string, value interface{}) {
 // NotifyProperty adds a handler that's called when the object's property is
 // updated.
 func (v *ObjectInstance) NotifyProperty(property string, f func()) SignalHandle {
-	panic("unimplemented")
-	// return ConnectGeneratedClosure(
-	// 	v, "notify::"+property, false,
-	// 	unsafe.Pointer(C._gotk4_notifyHandlerTramp), f,
-	// )
+	return v.Connect("notify::"+property, f)
 }
 
 // FreezeNotify increases the freeze count on object. If the freeze count is

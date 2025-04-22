@@ -14185,6 +14185,21 @@ type Application interface {
 	// The ID of a `GtkApplicationWindow` can be retrieved with
 	// [method@Gtk.ApplicationWindow.get_id].
 	GetWindowByID(uint) Window
+	// GetWindows wraps gtk_application_get_windows
+	// The function returns the following values:
+	// 
+	// 	- goret []Window 
+	//
+	// Gets a list of the [class@Gtk.Window] instances associated with `application`.
+	// 
+	// The list is sorted by most recently focused window, such that the first
+	// element is the currently focused window. (Useful for choosing a parent
+	// for a transient window.)
+	// 
+	// The list that is returned should not be modified in any way. It will
+	// only remain valid until the next focus change or window creation or
+	// deletion.
+	GetWindows() []Window
 	// Inhibit wraps gtk_application_inhibit
 	// 
 	// The function takes the following parameters:
@@ -14650,6 +14665,43 @@ func (application *ApplicationInstance) GetWindowByID(id uint) Window {
 	var goret Window
 
 	goret = UnsafeWindowFromGlibNone(unsafe.Pointer(cret))
+
+	return goret
+}
+
+// GetWindows wraps gtk_application_get_windows
+// The function returns the following values:
+// 
+// 	- goret []Window 
+//
+// Gets a list of the [class@Gtk.Window] instances associated with `application`.
+// 
+// The list is sorted by most recently focused window, such that the first
+// element is the currently focused window. (Useful for choosing a parent
+// for a transient window.)
+// 
+// The list that is returned should not be modified in any way. It will
+// only remain valid until the next focus change or window creation or
+// deletion.
+func (application *ApplicationInstance) GetWindows() []Window {
+	var carg0 *C.GtkApplication // in, none, converted
+	var cret  *C.GList          // container, transfer: none
+
+	carg0 = (*C.GtkApplication)(UnsafeApplicationToGlibNone(application))
+
+	cret = C.gtk_application_get_windows(carg0)
+	runtime.KeepAlive(application)
+
+	var goret []Window
+
+	goret = glib.UnsafeListFromGlibNone(
+		unsafe.Pointer(cret),
+		func(v unsafe.Pointer) Window {
+			var dst Window // converted
+			dst = UnsafeWindowFromGlibNone(v)
+			return dst
+		},
+	)
 
 	return goret
 }
@@ -15762,6 +15814,16 @@ type Builder interface {
 	// Note that this function does not increment the reference count
 	// of the returned object.
 	GetObject(string) gobject.Object
+	// GetObjects wraps gtk_builder_get_objects
+	// The function returns the following values:
+	// 
+	// 	- goret []gobject.Object 
+	//
+	// Gets all objects that have been constructed by @builder.
+	// 
+	// Note that this function does not increment the reference
+	// counts of the returned objects.
+	GetObjects() []gobject.Object
 	// GetScope wraps gtk_builder_get_scope
 	// The function returns the following values:
 	// 
@@ -16482,6 +16544,38 @@ func (builder *BuilderInstance) GetObject(name string) gobject.Object {
 	var goret gobject.Object
 
 	goret = gobject.UnsafeObjectFromGlibNone(unsafe.Pointer(cret))
+
+	return goret
+}
+
+// GetObjects wraps gtk_builder_get_objects
+// The function returns the following values:
+// 
+// 	- goret []gobject.Object 
+//
+// Gets all objects that have been constructed by @builder.
+// 
+// Note that this function does not increment the reference
+// counts of the returned objects.
+func (builder *BuilderInstance) GetObjects() []gobject.Object {
+	var carg0 *C.GtkBuilder // in, none, converted
+	var cret  *C.GSList     // container, transfer: container
+
+	carg0 = (*C.GtkBuilder)(UnsafeBuilderToGlibNone(builder))
+
+	cret = C.gtk_builder_get_objects(carg0)
+	runtime.KeepAlive(builder)
+
+	var goret []gobject.Object
+
+	goret = glib.UnsafeSListFromGlibFull(
+		unsafe.Pointer(cret),
+		func(v unsafe.Pointer) gobject.Object {
+			var dst gobject.Object // converted
+			dst = gobject.UnsafeObjectFromGlibNone(v)
+			return dst
+		},
+	)
 
 	return goret
 }
@@ -25403,6 +25497,13 @@ type Gesture interface {
 	// 
 	// This returns %NULL if the gesture is not being interacted.
 	GetDevice() gdk.Device
+	// GetGroup wraps gtk_gesture_get_group
+	// The function returns the following values:
+	// 
+	// 	- goret []Gesture 
+	//
+	// Returns all gestures in the group of @gesture
+	GetGroup() []Gesture
 	// GetLastUpdatedSequence wraps gtk_gesture_get_last_updated_sequence
 	// The function returns the following values:
 	// 
@@ -25440,6 +25541,14 @@ type Gesture interface {
 	//
 	// Returns the @sequence state, as seen by @gesture.
 	GetSequenceState(*gdk.EventSequence) EventSequenceState
+	// GetSequences wraps gtk_gesture_get_sequences
+	// The function returns the following values:
+	// 
+	// 	- goret []*gdk.EventSequence 
+	//
+	// Returns the list of `GdkEventSequences` currently being interpreted
+	// by @gesture.
+	GetSequences() []*gdk.EventSequence
 	// Group wraps gtk_gesture_group
 	// 
 	// The function takes the following parameters:
@@ -25756,6 +25865,35 @@ func (gesture *GestureInstance) GetDevice() gdk.Device {
 	return goret
 }
 
+// GetGroup wraps gtk_gesture_get_group
+// The function returns the following values:
+// 
+// 	- goret []Gesture 
+//
+// Returns all gestures in the group of @gesture
+func (gesture *GestureInstance) GetGroup() []Gesture {
+	var carg0 *C.GtkGesture // in, none, converted
+	var cret  *C.GList      // container, transfer: container
+
+	carg0 = (*C.GtkGesture)(UnsafeGestureToGlibNone(gesture))
+
+	cret = C.gtk_gesture_get_group(carg0)
+	runtime.KeepAlive(gesture)
+
+	var goret []Gesture
+
+	goret = glib.UnsafeListFromGlibFull(
+		unsafe.Pointer(cret),
+		func(v unsafe.Pointer) Gesture {
+			var dst Gesture // converted
+			dst = UnsafeGestureFromGlibNone(v)
+			return dst
+		},
+	)
+
+	return goret
+}
+
 // GetLastUpdatedSequence wraps gtk_gesture_get_last_updated_sequence
 // The function returns the following values:
 // 
@@ -25850,6 +25988,36 @@ func (gesture *GestureInstance) GetSequenceState(sequence *gdk.EventSequence) Ev
 	var goret EventSequenceState
 
 	goret = EventSequenceState(cret)
+
+	return goret
+}
+
+// GetSequences wraps gtk_gesture_get_sequences
+// The function returns the following values:
+// 
+// 	- goret []*gdk.EventSequence 
+//
+// Returns the list of `GdkEventSequences` currently being interpreted
+// by @gesture.
+func (gesture *GestureInstance) GetSequences() []*gdk.EventSequence {
+	var carg0 *C.GtkGesture // in, none, converted
+	var cret  *C.GList      // container, transfer: container
+
+	carg0 = (*C.GtkGesture)(UnsafeGestureToGlibNone(gesture))
+
+	cret = C.gtk_gesture_get_sequences(carg0)
+	runtime.KeepAlive(gesture)
+
+	var goret []*gdk.EventSequence
+
+	goret = glib.UnsafeListFromGlibFull(
+		unsafe.Pointer(cret),
+		func(v unsafe.Pointer) *gdk.EventSequence {
+			var dst *gdk.EventSequence // converted
+			dst = gdk.UnsafeEventSequenceFromGlibNone(v)
+			return dst
+		},
+	)
 
 	return goret
 }
@@ -34869,6 +35037,13 @@ type RecentManager interface {
 	// See [method@Gtk.RecentManager.add_full] if you want to explicitly
 	// define the metadata for the resource pointed by @uri.
 	AddItem(string) bool
+	// GetItems wraps gtk_recent_manager_get_items
+	// The function returns the following values:
+	// 
+	// 	- goret []*RecentInfo 
+	//
+	// Gets the list of recently used resources.
+	GetItems() []*RecentInfo
 	// HasItem wraps gtk_recent_manager_has_item
 	// 
 	// The function takes the following parameters:
@@ -35119,6 +35294,35 @@ func (manager *RecentManagerInstance) AddItem(uri string) bool {
 	if cret != 0 {
 		goret = true
 	}
+
+	return goret
+}
+
+// GetItems wraps gtk_recent_manager_get_items
+// The function returns the following values:
+// 
+// 	- goret []*RecentInfo 
+//
+// Gets the list of recently used resources.
+func (manager *RecentManagerInstance) GetItems() []*RecentInfo {
+	var carg0 *C.GtkRecentManager // in, none, converted
+	var cret  *C.GList            // container, transfer: full
+
+	carg0 = (*C.GtkRecentManager)(UnsafeRecentManagerToGlibNone(manager))
+
+	cret = C.gtk_recent_manager_get_items(carg0)
+	runtime.KeepAlive(manager)
+
+	var goret []*RecentInfo
+
+	goret = glib.UnsafeListFromGlibFull(
+		unsafe.Pointer(cret),
+		func(v unsafe.Pointer) *RecentInfo {
+			var dst *RecentInfo // converted
+			dst = UnsafeRecentInfoFromGlibFull(v)
+			return dst
+		},
+	)
 
 	return goret
 }
@@ -37382,6 +37586,13 @@ type SizeGroup interface {
 	//
 	// Gets the current mode of the size group.
 	GetMode() SizeGroupMode
+	// GetWidgets wraps gtk_size_group_get_widgets
+	// The function returns the following values:
+	// 
+	// 	- goret []Widget 
+	//
+	// Returns the list of widgets associated with @size_group.
+	GetWidgets() []Widget
 	// RemoveWidget wraps gtk_size_group_remove_widget
 	// 
 	// The function takes the following parameters:
@@ -37514,6 +37725,35 @@ func (sizeGroup *SizeGroupInstance) GetMode() SizeGroupMode {
 	var goret SizeGroupMode
 
 	goret = SizeGroupMode(cret)
+
+	return goret
+}
+
+// GetWidgets wraps gtk_size_group_get_widgets
+// The function returns the following values:
+// 
+// 	- goret []Widget 
+//
+// Returns the list of widgets associated with @size_group.
+func (sizeGroup *SizeGroupInstance) GetWidgets() []Widget {
+	var carg0 *C.GtkSizeGroup // in, none, converted
+	var cret  *C.GSList       // container, transfer: none
+
+	carg0 = (*C.GtkSizeGroup)(UnsafeSizeGroupToGlibNone(sizeGroup))
+
+	cret = C.gtk_size_group_get_widgets(carg0)
+	runtime.KeepAlive(sizeGroup)
+
+	var goret []Widget
+
+	goret = glib.UnsafeSListFromGlibNone(
+		unsafe.Pointer(cret),
+		func(v unsafe.Pointer) Widget {
+			var dst Widget // converted
+			dst = UnsafeWidgetFromGlibNone(v)
+			return dst
+		},
+	)
 
 	return goret
 }
@@ -49323,6 +49563,23 @@ type Widget interface {
 	// the entire row with the cursor keys, as e.g. known from user
 	// interfaces that require entering license keys.
 	KeynavFailed(DirectionType) bool
+	// ListMnemonicLabels wraps gtk_widget_list_mnemonic_labels
+	// The function returns the following values:
+	// 
+	// 	- goret []Widget 
+	//
+	// Returns the widgets for which this widget is the target of a
+	// mnemonic.
+	// 
+	// Typically, these widgets will be labels. See, for example,
+	// [method@Gtk.Label.set_mnemonic_widget].
+	// 
+	// The widgets in the list are not individually referenced.
+	// If you want to iterate through the list and perform actions
+	// involving callbacks that might destroy the widgets, you
+	// must call `g_list_foreach (result, (GFunc)g_object_ref, NULL)`
+	// first, and then unref all the widgets afterwards.
+	ListMnemonicLabels() []Widget
 	// Map wraps gtk_widget_map
 	//
 	// Causes a widget to be mapped if it isn’t already.
@@ -53095,6 +53352,45 @@ func (widget *WidgetInstance) KeynavFailed(direction DirectionType) bool {
 	return goret
 }
 
+// ListMnemonicLabels wraps gtk_widget_list_mnemonic_labels
+// The function returns the following values:
+// 
+// 	- goret []Widget 
+//
+// Returns the widgets for which this widget is the target of a
+// mnemonic.
+// 
+// Typically, these widgets will be labels. See, for example,
+// [method@Gtk.Label.set_mnemonic_widget].
+// 
+// The widgets in the list are not individually referenced.
+// If you want to iterate through the list and perform actions
+// involving callbacks that might destroy the widgets, you
+// must call `g_list_foreach (result, (GFunc)g_object_ref, NULL)`
+// first, and then unref all the widgets afterwards.
+func (widget *WidgetInstance) ListMnemonicLabels() []Widget {
+	var carg0 *C.GtkWidget // in, none, converted
+	var cret  *C.GList     // container, transfer: container
+
+	carg0 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(widget))
+
+	cret = C.gtk_widget_list_mnemonic_labels(carg0)
+	runtime.KeepAlive(widget)
+
+	var goret []Widget
+
+	goret = glib.UnsafeListFromGlibFull(
+		unsafe.Pointer(cret),
+		func(v unsafe.Pointer) Widget {
+			var dst Widget // converted
+			dst = UnsafeWidgetFromGlibNone(v)
+			return dst
+		},
+	)
+
+	return goret
+}
+
 // Map wraps gtk_widget_map
 //
 // Causes a widget to be mapped if it isn’t already.
@@ -55798,6 +56094,37 @@ func WindowGetToplevels() gio.ListModel {
 	return goret
 }
 
+// WindowListToplevels wraps gtk_window_list_toplevels
+// The function returns the following values:
+// 
+// 	- goret []Widget 
+//
+// Returns a list of all existing toplevel windows.
+// 
+// The widgets in the list are not individually referenced.
+// If you want to iterate through the list and perform actions
+// involving callbacks that might destroy the widgets, you must
+// call `g_list_foreach (result, (GFunc)g_object_ref, NULL)` first,
+// and then unref all the widgets afterwards.
+func WindowListToplevels() []Widget {
+	var cret *C.GList // container, transfer: container
+
+	cret = C.gtk_window_list_toplevels()
+
+	var goret []Widget
+
+	goret = glib.UnsafeListFromGlibFull(
+		unsafe.Pointer(cret),
+		func(v unsafe.Pointer) Widget {
+			var dst Widget // converted
+			dst = UnsafeWidgetFromGlibNone(v)
+			return dst
+		},
+	)
+
+	return goret
+}
+
 // WindowSetAutoStartupNotification wraps gtk_window_set_auto_startup_notification
 // 
 // The function takes the following parameters:
@@ -57658,6 +57985,13 @@ type WindowGroup interface {
 	//
 	// Adds a window to a `GtkWindowGroup`.
 	AddWindow(Window)
+	// ListWindows wraps gtk_window_group_list_windows
+	// The function returns the following values:
+	// 
+	// 	- goret []Window 
+	//
+	// Returns a list of the `GtkWindows` that belong to @window_group.
+	ListWindows() []Window
 	// RemoveWindow wraps gtk_window_group_remove_window
 	// 
 	// The function takes the following parameters:
@@ -57740,6 +58074,35 @@ func (windowGroup *WindowGroupInstance) AddWindow(window Window) {
 	C.gtk_window_group_add_window(carg0, carg1)
 	runtime.KeepAlive(windowGroup)
 	runtime.KeepAlive(window)
+}
+
+// ListWindows wraps gtk_window_group_list_windows
+// The function returns the following values:
+// 
+// 	- goret []Window 
+//
+// Returns a list of the `GtkWindows` that belong to @window_group.
+func (windowGroup *WindowGroupInstance) ListWindows() []Window {
+	var carg0 *C.GtkWindowGroup // in, none, converted
+	var cret  *C.GList          // container, transfer: container
+
+	carg0 = (*C.GtkWindowGroup)(UnsafeWindowGroupToGlibNone(windowGroup))
+
+	cret = C.gtk_window_group_list_windows(carg0)
+	runtime.KeepAlive(windowGroup)
+
+	var goret []Window
+
+	goret = glib.UnsafeListFromGlibFull(
+		unsafe.Pointer(cret),
+		func(v unsafe.Pointer) Window {
+			var dst Window // converted
+			dst = UnsafeWindowFromGlibNone(v)
+			return dst
+		},
+	)
+
+	return goret
 }
 
 // RemoveWindow wraps gtk_window_group_remove_window
@@ -74949,6 +75312,13 @@ type FlowBox interface {
 	//
 	// Gets the vertical spacing.
 	GetRowSpacing() uint
+	// GetSelectedChildren wraps gtk_flow_box_get_selected_children
+	// The function returns the following values:
+	// 
+	// 	- goret []FlowBoxChild 
+	//
+	// Creates a list of all selected children.
+	GetSelectedChildren() []FlowBoxChild
 	// GetSelectionMode wraps gtk_flow_box_get_selection_mode
 	// The function returns the following values:
 	// 
@@ -75551,6 +75921,35 @@ func (box *FlowBoxInstance) GetRowSpacing() uint {
 	var goret uint
 
 	goret = uint(cret)
+
+	return goret
+}
+
+// GetSelectedChildren wraps gtk_flow_box_get_selected_children
+// The function returns the following values:
+// 
+// 	- goret []FlowBoxChild 
+//
+// Creates a list of all selected children.
+func (box *FlowBoxInstance) GetSelectedChildren() []FlowBoxChild {
+	var carg0 *C.GtkFlowBox // in, none, converted
+	var cret  *C.GList      // container, transfer: container
+
+	carg0 = (*C.GtkFlowBox)(UnsafeFlowBoxToGlibNone(box))
+
+	cret = C.gtk_flow_box_get_selected_children(carg0)
+	runtime.KeepAlive(box)
+
+	var goret []FlowBoxChild
+
+	goret = glib.UnsafeListFromGlibFull(
+		unsafe.Pointer(cret),
+		func(v unsafe.Pointer) FlowBoxChild {
+			var dst FlowBoxChild // converted
+			dst = UnsafeFlowBoxChildFromGlibNone(v)
+			return dst
+		},
+	)
 
 	return goret
 }
@@ -86812,6 +87211,13 @@ type ListBox interface {
 	// case you should use [method@Gtk.ListBox.selected_foreach] to
 	// find all selected rows.
 	GetSelectedRow() ListBoxRow
+	// GetSelectedRows wraps gtk_list_box_get_selected_rows
+	// The function returns the following values:
+	// 
+	// 	- goret []ListBoxRow 
+	//
+	// Creates a list of all selected children.
+	GetSelectedRows() []ListBoxRow
 	// GetSelectionMode wraps gtk_list_box_get_selection_mode
 	// The function returns the following values:
 	// 
@@ -87373,6 +87779,35 @@ func (box *ListBoxInstance) GetSelectedRow() ListBoxRow {
 	var goret ListBoxRow
 
 	goret = UnsafeListBoxRowFromGlibNone(unsafe.Pointer(cret))
+
+	return goret
+}
+
+// GetSelectedRows wraps gtk_list_box_get_selected_rows
+// The function returns the following values:
+// 
+// 	- goret []ListBoxRow 
+//
+// Creates a list of all selected children.
+func (box *ListBoxInstance) GetSelectedRows() []ListBoxRow {
+	var carg0 *C.GtkListBox // in, none, converted
+	var cret  *C.GList      // container, transfer: container
+
+	carg0 = (*C.GtkListBox)(UnsafeListBoxToGlibNone(box))
+
+	cret = C.gtk_list_box_get_selected_rows(carg0)
+	runtime.KeepAlive(box)
+
+	var goret []ListBoxRow
+
+	goret = glib.UnsafeListFromGlibFull(
+		unsafe.Pointer(cret),
+		func(v unsafe.Pointer) ListBoxRow {
+			var dst ListBoxRow // converted
+			dst = UnsafeListBoxRowFromGlibNone(v)
+			return dst
+		},
+	)
 
 	return goret
 }
@@ -115181,6 +115616,35 @@ func NewAccessibleListFromArray(accessibles []Accessible) *AccessibleList {
 	return goret
 }
 
+// GetObjects wraps gtk_accessible_list_get_objects
+// The function returns the following values:
+// 
+// 	- goret []Accessible 
+//
+// Gets the list of objects this boxed type holds
+func (accessibleList *AccessibleList) GetObjects() []Accessible {
+	var carg0 *C.GtkAccessibleList // in, none, converted
+	var cret  *C.GList             // container, transfer: container
+
+	carg0 = (*C.GtkAccessibleList)(UnsafeAccessibleListToGlibNone(accessibleList))
+
+	cret = C.gtk_accessible_list_get_objects(carg0)
+	runtime.KeepAlive(accessibleList)
+
+	var goret []Accessible
+
+	goret = glib.UnsafeListFromGlibFull(
+		unsafe.Pointer(cret),
+		func(v unsafe.Pointer) Accessible {
+			var dst Accessible // converted
+			dst = UnsafeAccessibleFromGlibNone(v)
+			return dst
+		},
+	)
+
+	return goret
+}
+
 // AccessibleRangeInterface wraps GtkAccessibleRangeInterface
 type AccessibleRangeInterface struct {
 	*accessibleRangeInterface
@@ -131549,6 +132013,41 @@ func (iter *TextIter) GetLineOffset() int {
 	return goret
 }
 
+// GetMarks wraps gtk_text_iter_get_marks
+// The function returns the following values:
+// 
+// 	- goret []TextMark 
+//
+// Returns a list of all `GtkTextMark` at this location.
+// 
+// Because marks are not iterable (they don’t take up any "space"
+// in the buffer, they are just marks in between iterable locations),
+// multiple marks can exist in the same place.
+// 
+// The returned list is not in any meaningful order.
+func (iter *TextIter) GetMarks() []TextMark {
+	var carg0 *C.GtkTextIter // in, none, converted
+	var cret  *C.GSList      // container, transfer: container
+
+	carg0 = (*C.GtkTextIter)(UnsafeTextIterToGlibNone(iter))
+
+	cret = C.gtk_text_iter_get_marks(carg0)
+	runtime.KeepAlive(iter)
+
+	var goret []TextMark
+
+	goret = glib.UnsafeSListFromGlibFull(
+		unsafe.Pointer(cret),
+		func(v unsafe.Pointer) TextMark {
+			var dst TextMark // converted
+			dst = UnsafeTextMarkFromGlibNone(v)
+			return dst
+		},
+	)
+
+	return goret
+}
+
 // GetOffset wraps gtk_text_iter_get_offset
 // The function returns the following values:
 // 
@@ -131640,6 +132139,41 @@ func (start *TextIter) GetSlice(end *TextIter) string {
 	return goret
 }
 
+// GetTags wraps gtk_text_iter_get_tags
+// The function returns the following values:
+// 
+// 	- goret []TextTag 
+//
+// Returns a list of tags that apply to @iter, in ascending order of
+// priority.
+// 
+// The highest-priority tags are last.
+// 
+// The `GtkTextTag`s in the list don’t have a reference added,
+// but you have to free the list itself.
+func (iter *TextIter) GetTags() []TextTag {
+	var carg0 *C.GtkTextIter // in, none, converted
+	var cret  *C.GSList      // container, transfer: container
+
+	carg0 = (*C.GtkTextIter)(UnsafeTextIterToGlibNone(iter))
+
+	cret = C.gtk_text_iter_get_tags(carg0)
+	runtime.KeepAlive(iter)
+
+	var goret []TextTag
+
+	goret = glib.UnsafeSListFromGlibFull(
+		unsafe.Pointer(cret),
+		func(v unsafe.Pointer) TextTag {
+			var dst TextTag // converted
+			dst = UnsafeTextTagFromGlibNone(v)
+			return dst
+		},
+	)
+
+	return goret
+}
+
 // GetText wraps gtk_text_iter_get_text
 // 
 // The function takes the following parameters:
@@ -131673,6 +132207,52 @@ func (start *TextIter) GetText(end *TextIter) string {
 
 	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 	defer C.free(unsafe.Pointer(cret))
+
+	return goret
+}
+
+// GetToggledTags wraps gtk_text_iter_get_toggled_tags
+// 
+// The function takes the following parameters:
+// 
+// 	- toggledOn bool: %TRUE to get toggled-on tags 
+// 
+// The function returns the following values:
+// 
+// 	- goret []TextTag 
+//
+// Returns a list of `GtkTextTag` that are toggled on or off at this
+// point.
+// 
+// If @toggled_on is %TRUE, the list contains tags that are
+// toggled on. If a tag is toggled on at @iter, then some non-empty
+// range of characters following @iter has that tag applied to it.  If
+// a tag is toggled off, then some non-empty range following @iter
+// does not have the tag applied to it.
+func (iter *TextIter) GetToggledTags(toggledOn bool) []TextTag {
+	var carg0 *C.GtkTextIter // in, none, converted
+	var carg1 C.gboolean     // in
+	var cret  *C.GSList      // container, transfer: container
+
+	carg0 = (*C.GtkTextIter)(UnsafeTextIterToGlibNone(iter))
+	if toggledOn {
+		carg1 = C.TRUE
+	}
+
+	cret = C.gtk_text_iter_get_toggled_tags(carg0, carg1)
+	runtime.KeepAlive(iter)
+	runtime.KeepAlive(toggledOn)
+
+	var goret []TextTag
+
+	goret = glib.UnsafeSListFromGlibFull(
+		unsafe.Pointer(cret),
+		func(v unsafe.Pointer) TextTag {
+			var dst TextTag // converted
+			dst = UnsafeTextTagFromGlibNone(v)
+			return dst
+		},
+	)
 
 	return goret
 }

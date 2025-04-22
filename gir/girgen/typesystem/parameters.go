@@ -113,7 +113,7 @@ func (p *Param) CGoType() string {
 }
 
 func (p *Param) GoType() string {
-	return p.Type.WithForeignNamespace(p.Type.Type.GoType(p.CTypePointers))
+	return p.Type.NamespacedGoType(p.CTypePointers)
 }
 
 func (p *Param) CType() string {

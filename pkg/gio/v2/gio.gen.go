@@ -6325,6 +6325,34 @@ func ContentTypeSetMIMEDirs(dirs []string) {
 	runtime.KeepAlive(dirs)
 }
 
+// ContentTypesGetRegistered wraps g_content_types_get_registered
+// The function returns the following values:
+// 
+// 	- goret []string 
+//
+// Gets a list of strings containing all the registered content types
+// known to the system. The list and its data should be freed using
+// `g_list_free_full (list, g_free)`.
+func ContentTypesGetRegistered() []string {
+	var cret *C.GList // container, transfer: full
+
+	cret = C.g_content_types_get_registered()
+
+	var goret []string
+
+	goret = glib.UnsafeListFromGlibFull(
+		unsafe.Pointer(cret),
+		func(v unsafe.Pointer) string {
+			var dst string // string
+			dst = C.GoString((*C.char)(v))
+			defer C.free(v)
+			return dst
+		},
+	)
+
+	return goret
+}
+
 // DBusAddressEscapeValue wraps g_dbus_address_escape_value
 // 
 // The function takes the following parameters:
@@ -7033,6 +7061,90 @@ func IOErrorQuark() glib.Quark {
 	var goret glib.Quark
 
 	goret = glib.Quark(cret)
+
+	return goret
+}
+
+// IOModulesLoadAllInDirectory wraps g_io_modules_load_all_in_directory
+// 
+// The function takes the following parameters:
+// 
+// 	- dirname string: pathname for a directory containing modules
+//     to load. 
+// 
+// The function returns the following values:
+// 
+// 	- goret []IOModule 
+//
+// Loads all the modules in the specified directory.
+// 
+// If don't require all modules to be initialized (and thus registering
+// all gtypes) then you can use g_io_modules_scan_all_in_directory()
+// which allows delayed/lazy loading of modules.
+func IOModulesLoadAllInDirectory(dirname string) []IOModule {
+	var carg1 *C.gchar // in, none, string, casted *C.gchar
+	var cret  *C.GList // container, transfer: full
+
+	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(dirname)))
+	defer C.free(unsafe.Pointer(carg1))
+
+	cret = C.g_io_modules_load_all_in_directory(carg1)
+	runtime.KeepAlive(dirname)
+
+	var goret []IOModule
+
+	goret = glib.UnsafeListFromGlibFull(
+		unsafe.Pointer(cret),
+		func(v unsafe.Pointer) IOModule {
+			var dst IOModule // converted
+			dst = UnsafeIOModuleFromGlibFull(v)
+			return dst
+		},
+	)
+
+	return goret
+}
+
+// IOModulesLoadAllInDirectoryWithScope wraps g_io_modules_load_all_in_directory_with_scope
+// 
+// The function takes the following parameters:
+// 
+// 	- dirname string: pathname for a directory containing modules
+//     to load. 
+// 	- scope *IOModuleScope: a scope to use when scanning the modules. 
+// 
+// The function returns the following values:
+// 
+// 	- goret []IOModule 
+//
+// Loads all the modules in the specified directory.
+// 
+// If don't require all modules to be initialized (and thus registering
+// all gtypes) then you can use g_io_modules_scan_all_in_directory()
+// which allows delayed/lazy loading of modules.
+func IOModulesLoadAllInDirectoryWithScope(dirname string, scope *IOModuleScope) []IOModule {
+	var carg1 *C.gchar          // in, none, string, casted *C.gchar
+	var carg2 *C.GIOModuleScope // in, none, converted
+	var cret  *C.GList          // container, transfer: full
+
+	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(dirname)))
+	defer C.free(unsafe.Pointer(carg1))
+	carg2 = (*C.GIOModuleScope)(UnsafeIOModuleScopeToGlibNone(scope))
+
+	cret = C.g_io_modules_load_all_in_directory_with_scope(carg1, carg2)
+	runtime.KeepAlive(dirname)
+	runtime.KeepAlive(scope)
+
+	var goret []IOModule
+
+	goret = glib.UnsafeListFromGlibFull(
+		unsafe.Pointer(cret),
+		func(v unsafe.Pointer) IOModule {
+			var dst IOModule // converted
+			dst = UnsafeIOModuleFromGlibFull(v)
+			return dst
+		},
+	)
 
 	return goret
 }
@@ -9043,6 +9155,81 @@ func AppInfoCreateFromCommandline(commandline string, applicationName string, fl
 	return goret, _goerr
 }
 
+// AppInfoGetAll wraps g_app_info_get_all
+// The function returns the following values:
+// 
+// 	- goret []AppInfo 
+//
+// Gets a list of all of the applications currently registered
+// on this system.
+// 
+// For desktop files, this includes applications that have
+// [`NoDisplay=true`](https://specifications.freedesktop.org/desktop-entry-spec/latest/ar01s06.html#key-nodisplay)
+// set or are excluded from display by means of
+// [`OnlyShowIn`](https://specifications.freedesktop.org/desktop-entry-spec/latest/ar01s06.html#key-onlyshowin)
+// or [`NotShowIn`](https://specifications.freedesktop.org/desktop-entry-spec/latest/ar01s06.html#key-notshowin).
+// See [method@Gio.AppInfo.should_show].
+// 
+// The returned list does not include applications which have the
+// [`Hidden` key](https://specifications.freedesktop.org/desktop-entry-spec/latest/ar01s06.html#key-hidden)
+// set.
+func AppInfoGetAll() []AppInfo {
+	var cret *C.GList // container, transfer: full
+
+	cret = C.g_app_info_get_all()
+
+	var goret []AppInfo
+
+	goret = glib.UnsafeListFromGlibFull(
+		unsafe.Pointer(cret),
+		func(v unsafe.Pointer) AppInfo {
+			var dst AppInfo // converted
+			dst = UnsafeAppInfoFromGlibFull(v)
+			return dst
+		},
+	)
+
+	return goret
+}
+
+// AppInfoGetAllForType wraps g_app_info_get_all_for_type
+// 
+// The function takes the following parameters:
+// 
+// 	- contentType string: the content type to find a [iface@Gio.AppInfo] for 
+// 
+// The function returns the following values:
+// 
+// 	- goret []AppInfo 
+//
+// Gets a list of all [iface@Gio.AppInfo]s for a given content type,
+// including the recommended and fallback [iface@Gio.AppInfo]s. See
+// [func@Gio.AppInfo.get_recommended_for_type] and
+// [func@Gio.AppInfo.get_fallback_for_type].
+func AppInfoGetAllForType(contentType string) []AppInfo {
+	var carg1 *C.char  // in, none, string, casted *C.gchar
+	var cret  *C.GList // container, transfer: full
+
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(contentType)))
+	defer C.free(unsafe.Pointer(carg1))
+
+	cret = C.g_app_info_get_all_for_type(carg1)
+	runtime.KeepAlive(contentType)
+
+	var goret []AppInfo
+
+	goret = glib.UnsafeListFromGlibFull(
+		unsafe.Pointer(cret),
+		func(v unsafe.Pointer) AppInfo {
+			var dst AppInfo // converted
+			dst = UnsafeAppInfoFromGlibFull(v)
+			return dst
+		},
+	)
+
+	return goret
+}
+
 // AppInfoGetDefaultForType wraps g_app_info_get_default_for_type
 // 
 // The function takes the following parameters:
@@ -9256,6 +9443,84 @@ func AppInfoGetDefaultForURISchemeFinish(result AsyncResult) (AppInfo, error) {
 	}
 
 	return goret, _goerr
+}
+
+// AppInfoGetFallbackForType wraps g_app_info_get_fallback_for_type
+// 
+// The function takes the following parameters:
+// 
+// 	- contentType string: the content type to find a [iface@Gio.AppInfo] for 
+// 
+// The function returns the following values:
+// 
+// 	- goret []AppInfo 
+//
+// Gets a list of fallback [iface@Gio.AppInfo]s for a given content type, i.e.
+// those applications which claim to support the given content type by MIME
+// type subclassing and not directly.
+func AppInfoGetFallbackForType(contentType string) []AppInfo {
+	var carg1 *C.gchar // in, none, string, casted *C.gchar
+	var cret  *C.GList // container, transfer: full
+
+	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(contentType)))
+	defer C.free(unsafe.Pointer(carg1))
+
+	cret = C.g_app_info_get_fallback_for_type(carg1)
+	runtime.KeepAlive(contentType)
+
+	var goret []AppInfo
+
+	goret = glib.UnsafeListFromGlibFull(
+		unsafe.Pointer(cret),
+		func(v unsafe.Pointer) AppInfo {
+			var dst AppInfo // converted
+			dst = UnsafeAppInfoFromGlibFull(v)
+			return dst
+		},
+	)
+
+	return goret
+}
+
+// AppInfoGetRecommendedForType wraps g_app_info_get_recommended_for_type
+// 
+// The function takes the following parameters:
+// 
+// 	- contentType string: the content type to find a [iface@Gio.AppInfo] for 
+// 
+// The function returns the following values:
+// 
+// 	- goret []AppInfo 
+//
+// Gets a list of recommended [iface@Gio.AppInfo]s for a given content type,
+// i.e. those applications which claim to support the given content type
+// exactly, and not by MIME type subclassing.
+// 
+// Note that the first application of the list is the last used one, i.e.
+// the last one for which [method@Gio.AppInfo.set_as_last_used_for_type] has
+// been called.
+func AppInfoGetRecommendedForType(contentType string) []AppInfo {
+	var carg1 *C.gchar // in, none, string, casted *C.gchar
+	var cret  *C.GList // container, transfer: full
+
+	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(contentType)))
+	defer C.free(unsafe.Pointer(carg1))
+
+	cret = C.g_app_info_get_recommended_for_type(carg1)
+	runtime.KeepAlive(contentType)
+
+	var goret []AppInfo
+
+	goret = glib.UnsafeListFromGlibFull(
+		unsafe.Pointer(cret),
+		func(v unsafe.Pointer) AppInfo {
+			var dst AppInfo // converted
+			dst = UnsafeAppInfoFromGlibFull(v)
+			return dst
+		},
+	)
+
+	return goret
 }
 
 // AppInfoLaunchDefaultForURI wraps g_app_info_launch_default_for_uri
@@ -11202,6 +11467,13 @@ type DBusObject interface {
 	// Gets the D-Bus interface with name @interface_name associated with
 	// @object, if any.
 	GetInterface(string) DBusInterface
+	// GetInterfaces wraps g_dbus_object_get_interfaces
+	// The function returns the following values:
+	// 
+	// 	- goret []DBusInterface 
+	//
+	// Gets the D-Bus interfaces associated with @object.
+	GetInterfaces() []DBusInterface
 	// GetObjectPath wraps g_dbus_object_get_object_path
 	// The function returns the following values:
 	// 
@@ -11285,6 +11557,35 @@ func (object *DBusObjectInstance) GetInterface(interfaceName string) DBusInterfa
 	var goret DBusInterface
 
 	goret = UnsafeDBusInterfaceFromGlibFull(unsafe.Pointer(cret))
+
+	return goret
+}
+
+// GetInterfaces wraps g_dbus_object_get_interfaces
+// The function returns the following values:
+// 
+// 	- goret []DBusInterface 
+//
+// Gets the D-Bus interfaces associated with @object.
+func (object *DBusObjectInstance) GetInterfaces() []DBusInterface {
+	var carg0 *C.GDBusObject // in, none, converted
+	var cret  *C.GList       // container, transfer: full
+
+	carg0 = (*C.GDBusObject)(UnsafeDBusObjectToGlibNone(object))
+
+	cret = C.g_dbus_object_get_interfaces(carg0)
+	runtime.KeepAlive(object)
+
+	var goret []DBusInterface
+
+	goret = glib.UnsafeListFromGlibFull(
+		unsafe.Pointer(cret),
+		func(v unsafe.Pointer) DBusInterface {
+			var dst DBusInterface // converted
+			dst = UnsafeDBusInterfaceFromGlibFull(v)
+			return dst
+		},
+	)
 
 	return goret
 }
@@ -11376,6 +11677,13 @@ type DBusObjectManager interface {
 	//
 	// Gets the object path that @manager is for.
 	GetObjectPath() string
+	// GetObjects wraps g_dbus_object_manager_get_objects
+	// The function returns the following values:
+	// 
+	// 	- goret []DBusObject 
+	//
+	// Gets all #GDBusObject objects known to @manager.
+	GetObjects() []DBusObject
 	// ConnectInterfaceAdded connects the provided callback to the "interface-added" signal
 	//
 	// Emitted when @interface is added to @object.
@@ -11524,6 +11832,35 @@ func (manager *DBusObjectManagerInstance) GetObjectPath() string {
 	var goret string
 
 	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+
+	return goret
+}
+
+// GetObjects wraps g_dbus_object_manager_get_objects
+// The function returns the following values:
+// 
+// 	- goret []DBusObject 
+//
+// Gets all #GDBusObject objects known to @manager.
+func (manager *DBusObjectManagerInstance) GetObjects() []DBusObject {
+	var carg0 *C.GDBusObjectManager // in, none, converted
+	var cret  *C.GList              // container, transfer: full
+
+	carg0 = (*C.GDBusObjectManager)(UnsafeDBusObjectManagerToGlibNone(manager))
+
+	cret = C.g_dbus_object_manager_get_objects(carg0)
+	runtime.KeepAlive(manager)
+
+	var goret []DBusObject
+
+	goret = glib.UnsafeListFromGlibFull(
+		unsafe.Pointer(cret),
+		func(v unsafe.Pointer) DBusObject {
+			var dst DBusObject // converted
+			dst = UnsafeDBusObjectFromGlibFull(v)
+			return dst
+		},
+	)
 
 	return goret
 }
@@ -12435,6 +12772,16 @@ type Drive interface {
 	//
 	// Gets the icon for @drive.
 	GetSymbolicIcon() Icon
+	// GetVolumes wraps g_drive_get_volumes
+	// The function returns the following values:
+	// 
+	// 	- goret []Volume 
+	//
+	// Get a list of mountable volumes for @drive.
+	// 
+	// The returned list should be freed with g_list_free(), after
+	// its elements have been unreffed with g_object_unref().
+	GetVolumes() []Volume
 	// HasMedia wraps g_drive_has_media
 	// The function returns the following values:
 	// 
@@ -13065,6 +13412,38 @@ func (drive *DriveInstance) GetSymbolicIcon() Icon {
 	var goret Icon
 
 	goret = UnsafeIconFromGlibFull(unsafe.Pointer(cret))
+
+	return goret
+}
+
+// GetVolumes wraps g_drive_get_volumes
+// The function returns the following values:
+// 
+// 	- goret []Volume 
+//
+// Get a list of mountable volumes for @drive.
+// 
+// The returned list should be freed with g_list_free(), after
+// its elements have been unreffed with g_object_unref().
+func (drive *DriveInstance) GetVolumes() []Volume {
+	var carg0 *C.GDrive // in, none, converted
+	var cret  *C.GList  // container, transfer: full
+
+	carg0 = (*C.GDrive)(UnsafeDriveToGlibNone(drive))
+
+	cret = C.g_drive_get_volumes(carg0)
+	runtime.KeepAlive(drive)
+
+	var goret []Volume
+
+	goret = glib.UnsafeListFromGlibFull(
+		unsafe.Pointer(cret),
+		func(v unsafe.Pointer) Volume {
+			var dst Volume // converted
+			dst = UnsafeVolumeFromGlibFull(v)
+			return dst
+		},
+	)
 
 	return goret
 }
@@ -37470,6 +37849,13 @@ type DBusInterfaceSkeleton interface {
 	//
 	// Gets the first connection that @interface_ is exported on, if any.
 	GetConnection() DBusConnection
+	// GetConnections wraps g_dbus_interface_skeleton_get_connections
+	// The function returns the following values:
+	// 
+	// 	- goret []DBusConnection 
+	//
+	// Gets a list of the connections that @interface_ is exported on.
+	GetConnections() []DBusConnection
 	// GetFlags wraps g_dbus_interface_skeleton_get_flags
 	// The function returns the following values:
 	// 
@@ -37698,6 +38084,35 @@ func (interface_ *DBusInterfaceSkeletonInstance) GetConnection() DBusConnection 
 	var goret DBusConnection
 
 	goret = UnsafeDBusConnectionFromGlibNone(unsafe.Pointer(cret))
+
+	return goret
+}
+
+// GetConnections wraps g_dbus_interface_skeleton_get_connections
+// The function returns the following values:
+// 
+// 	- goret []DBusConnection 
+//
+// Gets a list of the connections that @interface_ is exported on.
+func (interface_ *DBusInterfaceSkeletonInstance) GetConnections() []DBusConnection {
+	var carg0 *C.GDBusInterfaceSkeleton // in, none, converted
+	var cret  *C.GList                  // container, transfer: full
+
+	carg0 = (*C.GDBusInterfaceSkeleton)(UnsafeDBusInterfaceSkeletonToGlibNone(interface_))
+
+	cret = C.g_dbus_interface_skeleton_get_connections(carg0)
+	runtime.KeepAlive(interface_)
+
+	var goret []DBusConnection
+
+	goret = glib.UnsafeListFromGlibFull(
+		unsafe.Pointer(cret),
+		func(v unsafe.Pointer) DBusConnection {
+			var dst DBusConnection // converted
+			dst = UnsafeDBusConnectionFromGlibFull(v)
+			return dst
+		},
+	)
 
 	return goret
 }
@@ -42507,6 +42922,13 @@ type EmblemedIcon interface {
 	//
 	// Removes all the emblems from @icon.
 	ClearEmblems()
+	// GetEmblems wraps g_emblemed_icon_get_emblems
+	// The function returns the following values:
+	// 
+	// 	- goret []Emblem 
+	//
+	// Gets the list of emblems for the @icon.
+	GetEmblems() []Emblem
 	// GetIcon wraps g_emblemed_icon_get_icon
 	// The function returns the following values:
 	// 
@@ -42612,6 +43034,35 @@ func (emblemed *EmblemedIconInstance) ClearEmblems() {
 
 	C.g_emblemed_icon_clear_emblems(carg0)
 	runtime.KeepAlive(emblemed)
+}
+
+// GetEmblems wraps g_emblemed_icon_get_emblems
+// The function returns the following values:
+// 
+// 	- goret []Emblem 
+//
+// Gets the list of emblems for the @icon.
+func (emblemed *EmblemedIconInstance) GetEmblems() []Emblem {
+	var carg0 *C.GEmblemedIcon // in, none, converted
+	var cret  *C.GList         // container, transfer: none
+
+	carg0 = (*C.GEmblemedIcon)(UnsafeEmblemedIconToGlibNone(emblemed))
+
+	cret = C.g_emblemed_icon_get_emblems(carg0)
+	runtime.KeepAlive(emblemed)
+
+	var goret []Emblem
+
+	goret = glib.UnsafeListFromGlibNone(
+		unsafe.Pointer(cret),
+		func(v unsafe.Pointer) Emblem {
+			var dst Emblem // converted
+			dst = UnsafeEmblemFromGlibNone(v)
+			return dst
+		},
+	)
+
+	return goret
 }
 
 // GetIcon wraps g_emblemed_icon_get_icon
@@ -42928,6 +43379,19 @@ type FileEnumerator interface {
 	// be executed before an outstanding request with lower priority. Default
 	// priority is %G_PRIORITY_DEFAULT.
 	NextFilesAsync(context.Context, int, int, AsyncReadyCallback)
+	// NextFilesFinish wraps g_file_enumerator_next_files_finish
+	// 
+	// The function takes the following parameters:
+	// 
+	// 	- result AsyncResult: a #GAsyncResult. 
+	// 
+	// The function returns the following values:
+	// 
+	// 	- goret []FileInfo 
+	// 	- _goerr error (nullable): an error 
+	//
+	// Finishes the asynchronous operation started with g_file_enumerator_next_files_async().
+	NextFilesFinish(AsyncResult) ([]FileInfo, error)
 	// SetPending wraps g_file_enumerator_set_pending
 	// 
 	// The function takes the following parameters:
@@ -43448,6 +43912,49 @@ func (enumerator *FileEnumeratorInstance) NextFilesAsync(cancellable context.Con
 	runtime.KeepAlive(numFiles)
 	runtime.KeepAlive(ioPriority)
 	runtime.KeepAlive(callback)
+}
+
+// NextFilesFinish wraps g_file_enumerator_next_files_finish
+// 
+// The function takes the following parameters:
+// 
+// 	- result AsyncResult: a #GAsyncResult. 
+// 
+// The function returns the following values:
+// 
+// 	- goret []FileInfo 
+// 	- _goerr error (nullable): an error 
+//
+// Finishes the asynchronous operation started with g_file_enumerator_next_files_async().
+func (enumerator *FileEnumeratorInstance) NextFilesFinish(result AsyncResult) ([]FileInfo, error) {
+	var carg0 *C.GFileEnumerator // in, none, converted
+	var carg1 *C.GAsyncResult    // in, none, converted
+	var cret  *C.GList           // container, transfer: full
+	var _cerr *C.GError          // out, full, converted, nullable
+
+	carg0 = (*C.GFileEnumerator)(UnsafeFileEnumeratorToGlibNone(enumerator))
+	carg1 = (*C.GAsyncResult)(UnsafeAsyncResultToGlibNone(result))
+
+	cret = C.g_file_enumerator_next_files_finish(carg0, carg1, &_cerr)
+	runtime.KeepAlive(enumerator)
+	runtime.KeepAlive(result)
+
+	var goret  []FileInfo
+	var _goerr error
+
+	goret = glib.UnsafeListFromGlibFull(
+		unsafe.Pointer(cret),
+		func(v unsafe.Pointer) FileInfo {
+			var dst FileInfo // converted
+			dst = UnsafeFileInfoFromGlibFull(v)
+			return dst
+		},
+	)
+	if _cerr != nil {
+		_goerr = glib.UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
+	}
+
+	return goret, _goerr
 }
 
 // SetPending wraps g_file_enumerator_set_pending
@@ -55977,6 +56484,42 @@ type Resolver interface {
 	// a value from #GResolverError. If the operation was cancelled,
 	// @error will be set to %G_IO_ERROR_CANCELLED.
 	LookupByAddressFinish(AsyncResult) (string, error)
+	// LookupByName wraps g_resolver_lookup_by_name
+	// 
+	// The function takes the following parameters:
+	// 
+	// 	- cancellable context.Context (nullable): a #GCancellable, or %NULL 
+	// 	- hostname string: the hostname to look up 
+	// 
+	// The function returns the following values:
+	// 
+	// 	- goret []InetAddress 
+	// 	- _goerr error (nullable): an error 
+	//
+	// Synchronously resolves @hostname to determine its associated IP
+	// address(es). @hostname may be an ASCII-only or UTF-8 hostname, or
+	// the textual form of an IP address (in which case this just becomes
+	// a wrapper around g_inet_address_new_from_string()).
+	// 
+	// On success, g_resolver_lookup_by_name() will return a non-empty #GList of
+	// #GInetAddress, sorted in order of preference and guaranteed to not
+	// contain duplicates. That is, if using the result to connect to
+	// @hostname, you should attempt to connect to the first address
+	// first, then the second if the first fails, etc. If you are using
+	// the result to listen on a socket, it is appropriate to add each
+	// result using e.g. g_socket_listener_add_address().
+	// 
+	// If the DNS resolution fails, @error (if non-%NULL) will be set to a
+	// value from #GResolverError and %NULL will be returned.
+	// 
+	// If @cancellable is non-%NULL, it can be used to cancel the
+	// operation, in which case @error (if non-%NULL) will be set to
+	// %G_IO_ERROR_CANCELLED.
+	// 
+	// If you are planning to connect to a socket on the resolved IP
+	// address, it may be easier to create a #GNetworkAddress and use its
+	// #GSocketConnectable interface.
+	LookupByName(context.Context, string) ([]InetAddress, error)
 	// LookupByNameAsync wraps g_resolver_lookup_by_name_async
 	// 
 	// The function takes the following parameters:
@@ -55990,6 +56533,41 @@ type Resolver interface {
 	// must call g_resolver_lookup_by_name_finish() to get the result.
 	// See g_resolver_lookup_by_name() for more details.
 	LookupByNameAsync(context.Context, string, AsyncReadyCallback)
+	// LookupByNameFinish wraps g_resolver_lookup_by_name_finish
+	// 
+	// The function takes the following parameters:
+	// 
+	// 	- result AsyncResult: the result passed to your #GAsyncReadyCallback 
+	// 
+	// The function returns the following values:
+	// 
+	// 	- goret []InetAddress 
+	// 	- _goerr error (nullable): an error 
+	//
+	// Retrieves the result of a call to
+	// g_resolver_lookup_by_name_async().
+	// 
+	// If the DNS resolution failed, @error (if non-%NULL) will be set to
+	// a value from #GResolverError. If the operation was cancelled,
+	// @error will be set to %G_IO_ERROR_CANCELLED.
+	LookupByNameFinish(AsyncResult) ([]InetAddress, error)
+	// LookupByNameWithFlags wraps g_resolver_lookup_by_name_with_flags
+	// 
+	// The function takes the following parameters:
+	// 
+	// 	- cancellable context.Context (nullable): a #GCancellable, or %NULL 
+	// 	- hostname string: the hostname to look up 
+	// 	- flags ResolverNameLookupFlags: extra #GResolverNameLookupFlags for the lookup 
+	// 
+	// The function returns the following values:
+	// 
+	// 	- goret []InetAddress 
+	// 	- _goerr error (nullable): an error 
+	//
+	// This differs from g_resolver_lookup_by_name() in that you can modify
+	// the lookup behavior with @flags. For example this can be used to limit
+	// results with %G_RESOLVER_NAME_LOOKUP_FLAGS_IPV4_ONLY.
+	LookupByNameWithFlags(context.Context, string, ResolverNameLookupFlags) ([]InetAddress, error)
 	// LookupByNameWithFlagsAsync wraps g_resolver_lookup_by_name_with_flags_async
 	// 
 	// The function takes the following parameters:
@@ -56004,6 +56582,24 @@ type Resolver interface {
 	// must call g_resolver_lookup_by_name_with_flags_finish() to get the result.
 	// See g_resolver_lookup_by_name() for more details.
 	LookupByNameWithFlagsAsync(context.Context, string, ResolverNameLookupFlags, AsyncReadyCallback)
+	// LookupByNameWithFlagsFinish wraps g_resolver_lookup_by_name_with_flags_finish
+	// 
+	// The function takes the following parameters:
+	// 
+	// 	- result AsyncResult: the result passed to your #GAsyncReadyCallback 
+	// 
+	// The function returns the following values:
+	// 
+	// 	- goret []InetAddress 
+	// 	- _goerr error (nullable): an error 
+	//
+	// Retrieves the result of a call to
+	// g_resolver_lookup_by_name_with_flags_async().
+	// 
+	// If the DNS resolution failed, @error (if non-%NULL) will be set to
+	// a value from #GResolverError. If the operation was cancelled,
+	// @error will be set to %G_IO_ERROR_CANCELLED.
+	LookupByNameWithFlagsFinish(AsyncResult) ([]InetAddress, error)
 	// LookupRecordsAsync wraps g_resolver_lookup_records_async
 	// 
 	// The function takes the following parameters:
@@ -56018,6 +56614,42 @@ type Resolver interface {
 	// g_resolver_lookup_records_finish() to get the final result. See
 	// g_resolver_lookup_records() for more details.
 	LookupRecordsAsync(context.Context, string, ResolverRecordType, AsyncReadyCallback)
+	// LookupService wraps g_resolver_lookup_service
+	// 
+	// The function takes the following parameters:
+	// 
+	// 	- cancellable context.Context (nullable): a #GCancellable, or %NULL 
+	// 	- service string: the service type to look up (eg, "ldap") 
+	// 	- protocol string: the networking protocol to use for @service (eg, "tcp") 
+	// 	- domain string: the DNS domain to look up the service in 
+	// 
+	// The function returns the following values:
+	// 
+	// 	- goret []*SrvTarget 
+	// 	- _goerr error (nullable): an error 
+	//
+	// Synchronously performs a DNS SRV lookup for the given @service and
+	// @protocol in the given @domain and returns an array of #GSrvTarget.
+	// @domain may be an ASCII-only or UTF-8 hostname. Note also that the
+	// @service and @protocol arguments do not include the leading underscore
+	// that appears in the actual DNS entry.
+	// 
+	// On success, g_resolver_lookup_service() will return a non-empty #GList of
+	// #GSrvTarget, sorted in order of preference. (That is, you should
+	// attempt to connect to the first target first, then the second if
+	// the first fails, etc.)
+	// 
+	// If the DNS resolution fails, @error (if non-%NULL) will be set to
+	// a value from #GResolverError and %NULL will be returned.
+	// 
+	// If @cancellable is non-%NULL, it can be used to cancel the
+	// operation, in which case @error (if non-%NULL) will be set to
+	// %G_IO_ERROR_CANCELLED.
+	// 
+	// If you are planning to connect to the service, it is usually easier
+	// to create a #GNetworkService and use its #GSocketConnectable
+	// interface.
+	LookupService(context.Context, string, string, string) ([]*SrvTarget, error)
 	// LookupServiceAsync wraps g_resolver_lookup_service_async
 	// 
 	// The function takes the following parameters:
@@ -56034,6 +56666,24 @@ type Resolver interface {
 	// get the final result. See g_resolver_lookup_service() for more
 	// details.
 	LookupServiceAsync(context.Context, string, string, string, AsyncReadyCallback)
+	// LookupServiceFinish wraps g_resolver_lookup_service_finish
+	// 
+	// The function takes the following parameters:
+	// 
+	// 	- result AsyncResult: the result passed to your #GAsyncReadyCallback 
+	// 
+	// The function returns the following values:
+	// 
+	// 	- goret []*SrvTarget 
+	// 	- _goerr error (nullable): an error 
+	//
+	// Retrieves the result of a previous call to
+	// g_resolver_lookup_service_async().
+	// 
+	// If the DNS resolution failed, @error (if non-%NULL) will be set to
+	// a value from #GResolverError. If the operation was cancelled,
+	// @error will be set to %G_IO_ERROR_CANCELLED.
+	LookupServiceFinish(AsyncResult) ([]*SrvTarget, error)
 	// SetDefault wraps g_resolver_set_default
 	//
 	// Sets @resolver to be the application's default resolver (reffing
@@ -56265,6 +56915,78 @@ func (resolver *ResolverInstance) LookupByAddressFinish(result AsyncResult) (str
 	return goret, _goerr
 }
 
+// LookupByName wraps g_resolver_lookup_by_name
+// 
+// The function takes the following parameters:
+// 
+// 	- cancellable context.Context (nullable): a #GCancellable, or %NULL 
+// 	- hostname string: the hostname to look up 
+// 
+// The function returns the following values:
+// 
+// 	- goret []InetAddress 
+// 	- _goerr error (nullable): an error 
+//
+// Synchronously resolves @hostname to determine its associated IP
+// address(es). @hostname may be an ASCII-only or UTF-8 hostname, or
+// the textual form of an IP address (in which case this just becomes
+// a wrapper around g_inet_address_new_from_string()).
+// 
+// On success, g_resolver_lookup_by_name() will return a non-empty #GList of
+// #GInetAddress, sorted in order of preference and guaranteed to not
+// contain duplicates. That is, if using the result to connect to
+// @hostname, you should attempt to connect to the first address
+// first, then the second if the first fails, etc. If you are using
+// the result to listen on a socket, it is appropriate to add each
+// result using e.g. g_socket_listener_add_address().
+// 
+// If the DNS resolution fails, @error (if non-%NULL) will be set to a
+// value from #GResolverError and %NULL will be returned.
+// 
+// If @cancellable is non-%NULL, it can be used to cancel the
+// operation, in which case @error (if non-%NULL) will be set to
+// %G_IO_ERROR_CANCELLED.
+// 
+// If you are planning to connect to a socket on the resolved IP
+// address, it may be easier to create a #GNetworkAddress and use its
+// #GSocketConnectable interface.
+func (resolver *ResolverInstance) LookupByName(cancellable context.Context, hostname string) ([]InetAddress, error) {
+	var carg0 *C.GResolver    // in, none, converted
+	var carg2 *C.GCancellable // in, none, converted, nullable
+	var carg1 *C.gchar        // in, none, string, casted *C.gchar
+	var cret  *C.GList        // container, transfer: full
+	var _cerr *C.GError       // out, full, converted, nullable
+
+	carg0 = (*C.GResolver)(UnsafeResolverToGlibNone(resolver))
+	if cancellable != nil {
+		carg2 = (*C.GCancellable)(UnsafeGCancellableToGlibNone(cancellable))
+	}
+	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(hostname)))
+	defer C.free(unsafe.Pointer(carg1))
+
+	cret = C.g_resolver_lookup_by_name(carg0, carg1, carg2, &_cerr)
+	runtime.KeepAlive(resolver)
+	runtime.KeepAlive(cancellable)
+	runtime.KeepAlive(hostname)
+
+	var goret  []InetAddress
+	var _goerr error
+
+	goret = glib.UnsafeListFromGlibFull(
+		unsafe.Pointer(cret),
+		func(v unsafe.Pointer) InetAddress {
+			var dst InetAddress // converted
+			dst = UnsafeInetAddressFromGlibFull(v)
+			return dst
+		},
+	)
+	if _cerr != nil {
+		_goerr = glib.UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
+	}
+
+	return goret, _goerr
+}
+
 // LookupByNameAsync wraps g_resolver_lookup_by_name_async
 // 
 // The function takes the following parameters:
@@ -56300,6 +57022,110 @@ func (resolver *ResolverInstance) LookupByNameAsync(cancellable context.Context,
 	runtime.KeepAlive(cancellable)
 	runtime.KeepAlive(hostname)
 	runtime.KeepAlive(callback)
+}
+
+// LookupByNameFinish wraps g_resolver_lookup_by_name_finish
+// 
+// The function takes the following parameters:
+// 
+// 	- result AsyncResult: the result passed to your #GAsyncReadyCallback 
+// 
+// The function returns the following values:
+// 
+// 	- goret []InetAddress 
+// 	- _goerr error (nullable): an error 
+//
+// Retrieves the result of a call to
+// g_resolver_lookup_by_name_async().
+// 
+// If the DNS resolution failed, @error (if non-%NULL) will be set to
+// a value from #GResolverError. If the operation was cancelled,
+// @error will be set to %G_IO_ERROR_CANCELLED.
+func (resolver *ResolverInstance) LookupByNameFinish(result AsyncResult) ([]InetAddress, error) {
+	var carg0 *C.GResolver    // in, none, converted
+	var carg1 *C.GAsyncResult // in, none, converted
+	var cret  *C.GList        // container, transfer: full
+	var _cerr *C.GError       // out, full, converted, nullable
+
+	carg0 = (*C.GResolver)(UnsafeResolverToGlibNone(resolver))
+	carg1 = (*C.GAsyncResult)(UnsafeAsyncResultToGlibNone(result))
+
+	cret = C.g_resolver_lookup_by_name_finish(carg0, carg1, &_cerr)
+	runtime.KeepAlive(resolver)
+	runtime.KeepAlive(result)
+
+	var goret  []InetAddress
+	var _goerr error
+
+	goret = glib.UnsafeListFromGlibFull(
+		unsafe.Pointer(cret),
+		func(v unsafe.Pointer) InetAddress {
+			var dst InetAddress // converted
+			dst = UnsafeInetAddressFromGlibFull(v)
+			return dst
+		},
+	)
+	if _cerr != nil {
+		_goerr = glib.UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
+	}
+
+	return goret, _goerr
+}
+
+// LookupByNameWithFlags wraps g_resolver_lookup_by_name_with_flags
+// 
+// The function takes the following parameters:
+// 
+// 	- cancellable context.Context (nullable): a #GCancellable, or %NULL 
+// 	- hostname string: the hostname to look up 
+// 	- flags ResolverNameLookupFlags: extra #GResolverNameLookupFlags for the lookup 
+// 
+// The function returns the following values:
+// 
+// 	- goret []InetAddress 
+// 	- _goerr error (nullable): an error 
+//
+// This differs from g_resolver_lookup_by_name() in that you can modify
+// the lookup behavior with @flags. For example this can be used to limit
+// results with %G_RESOLVER_NAME_LOOKUP_FLAGS_IPV4_ONLY.
+func (resolver *ResolverInstance) LookupByNameWithFlags(cancellable context.Context, hostname string, flags ResolverNameLookupFlags) ([]InetAddress, error) {
+	var carg0 *C.GResolver               // in, none, converted
+	var carg3 *C.GCancellable            // in, none, converted, nullable
+	var carg1 *C.gchar                   // in, none, string, casted *C.gchar
+	var carg2 C.GResolverNameLookupFlags // in, none, casted
+	var cret  *C.GList                   // container, transfer: full
+	var _cerr *C.GError                  // out, full, converted, nullable
+
+	carg0 = (*C.GResolver)(UnsafeResolverToGlibNone(resolver))
+	if cancellable != nil {
+		carg3 = (*C.GCancellable)(UnsafeGCancellableToGlibNone(cancellable))
+	}
+	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(hostname)))
+	defer C.free(unsafe.Pointer(carg1))
+	carg2 = C.GResolverNameLookupFlags(flags)
+
+	cret = C.g_resolver_lookup_by_name_with_flags(carg0, carg1, carg2, carg3, &_cerr)
+	runtime.KeepAlive(resolver)
+	runtime.KeepAlive(cancellable)
+	runtime.KeepAlive(hostname)
+	runtime.KeepAlive(flags)
+
+	var goret  []InetAddress
+	var _goerr error
+
+	goret = glib.UnsafeListFromGlibFull(
+		unsafe.Pointer(cret),
+		func(v unsafe.Pointer) InetAddress {
+			var dst InetAddress // converted
+			dst = UnsafeInetAddressFromGlibFull(v)
+			return dst
+		},
+	)
+	if _cerr != nil {
+		_goerr = glib.UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
+	}
+
+	return goret, _goerr
 }
 
 // LookupByNameWithFlagsAsync wraps g_resolver_lookup_by_name_with_flags_async
@@ -56343,6 +57169,54 @@ func (resolver *ResolverInstance) LookupByNameWithFlagsAsync(cancellable context
 	runtime.KeepAlive(callback)
 }
 
+// LookupByNameWithFlagsFinish wraps g_resolver_lookup_by_name_with_flags_finish
+// 
+// The function takes the following parameters:
+// 
+// 	- result AsyncResult: the result passed to your #GAsyncReadyCallback 
+// 
+// The function returns the following values:
+// 
+// 	- goret []InetAddress 
+// 	- _goerr error (nullable): an error 
+//
+// Retrieves the result of a call to
+// g_resolver_lookup_by_name_with_flags_async().
+// 
+// If the DNS resolution failed, @error (if non-%NULL) will be set to
+// a value from #GResolverError. If the operation was cancelled,
+// @error will be set to %G_IO_ERROR_CANCELLED.
+func (resolver *ResolverInstance) LookupByNameWithFlagsFinish(result AsyncResult) ([]InetAddress, error) {
+	var carg0 *C.GResolver    // in, none, converted
+	var carg1 *C.GAsyncResult // in, none, converted
+	var cret  *C.GList        // container, transfer: full
+	var _cerr *C.GError       // out, full, converted, nullable
+
+	carg0 = (*C.GResolver)(UnsafeResolverToGlibNone(resolver))
+	carg1 = (*C.GAsyncResult)(UnsafeAsyncResultToGlibNone(result))
+
+	cret = C.g_resolver_lookup_by_name_with_flags_finish(carg0, carg1, &_cerr)
+	runtime.KeepAlive(resolver)
+	runtime.KeepAlive(result)
+
+	var goret  []InetAddress
+	var _goerr error
+
+	goret = glib.UnsafeListFromGlibFull(
+		unsafe.Pointer(cret),
+		func(v unsafe.Pointer) InetAddress {
+			var dst InetAddress // converted
+			dst = UnsafeInetAddressFromGlibFull(v)
+			return dst
+		},
+	)
+	if _cerr != nil {
+		_goerr = glib.UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
+	}
+
+	return goret, _goerr
+}
+
 // LookupRecordsAsync wraps g_resolver_lookup_records_async
 // 
 // The function takes the following parameters:
@@ -56382,6 +57256,86 @@ func (resolver *ResolverInstance) LookupRecordsAsync(cancellable context.Context
 	runtime.KeepAlive(rrname)
 	runtime.KeepAlive(recordType)
 	runtime.KeepAlive(callback)
+}
+
+// LookupService wraps g_resolver_lookup_service
+// 
+// The function takes the following parameters:
+// 
+// 	- cancellable context.Context (nullable): a #GCancellable, or %NULL 
+// 	- service string: the service type to look up (eg, "ldap") 
+// 	- protocol string: the networking protocol to use for @service (eg, "tcp") 
+// 	- domain string: the DNS domain to look up the service in 
+// 
+// The function returns the following values:
+// 
+// 	- goret []*SrvTarget 
+// 	- _goerr error (nullable): an error 
+//
+// Synchronously performs a DNS SRV lookup for the given @service and
+// @protocol in the given @domain and returns an array of #GSrvTarget.
+// @domain may be an ASCII-only or UTF-8 hostname. Note also that the
+// @service and @protocol arguments do not include the leading underscore
+// that appears in the actual DNS entry.
+// 
+// On success, g_resolver_lookup_service() will return a non-empty #GList of
+// #GSrvTarget, sorted in order of preference. (That is, you should
+// attempt to connect to the first target first, then the second if
+// the first fails, etc.)
+// 
+// If the DNS resolution fails, @error (if non-%NULL) will be set to
+// a value from #GResolverError and %NULL will be returned.
+// 
+// If @cancellable is non-%NULL, it can be used to cancel the
+// operation, in which case @error (if non-%NULL) will be set to
+// %G_IO_ERROR_CANCELLED.
+// 
+// If you are planning to connect to the service, it is usually easier
+// to create a #GNetworkService and use its #GSocketConnectable
+// interface.
+func (resolver *ResolverInstance) LookupService(cancellable context.Context, service string, protocol string, domain string) ([]*SrvTarget, error) {
+	var carg0 *C.GResolver    // in, none, converted
+	var carg4 *C.GCancellable // in, none, converted, nullable
+	var carg1 *C.gchar        // in, none, string, casted *C.gchar
+	var carg2 *C.gchar        // in, none, string, casted *C.gchar
+	var carg3 *C.gchar        // in, none, string, casted *C.gchar
+	var cret  *C.GList        // container, transfer: full
+	var _cerr *C.GError       // out, full, converted, nullable
+
+	carg0 = (*C.GResolver)(UnsafeResolverToGlibNone(resolver))
+	if cancellable != nil {
+		carg4 = (*C.GCancellable)(UnsafeGCancellableToGlibNone(cancellable))
+	}
+	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(service)))
+	defer C.free(unsafe.Pointer(carg1))
+	carg2 = (*C.gchar)(unsafe.Pointer(C.CString(protocol)))
+	defer C.free(unsafe.Pointer(carg2))
+	carg3 = (*C.gchar)(unsafe.Pointer(C.CString(domain)))
+	defer C.free(unsafe.Pointer(carg3))
+
+	cret = C.g_resolver_lookup_service(carg0, carg1, carg2, carg3, carg4, &_cerr)
+	runtime.KeepAlive(resolver)
+	runtime.KeepAlive(cancellable)
+	runtime.KeepAlive(service)
+	runtime.KeepAlive(protocol)
+	runtime.KeepAlive(domain)
+
+	var goret  []*SrvTarget
+	var _goerr error
+
+	goret = glib.UnsafeListFromGlibFull(
+		unsafe.Pointer(cret),
+		func(v unsafe.Pointer) *SrvTarget {
+			var dst *SrvTarget // converted
+			dst = UnsafeSrvTargetFromGlibFull(v)
+			return dst
+		},
+	)
+	if _cerr != nil {
+		_goerr = glib.UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
+	}
+
+	return goret, _goerr
 }
 
 // LookupServiceAsync wraps g_resolver_lookup_service_async
@@ -56430,6 +57384,54 @@ func (resolver *ResolverInstance) LookupServiceAsync(cancellable context.Context
 	runtime.KeepAlive(protocol)
 	runtime.KeepAlive(domain)
 	runtime.KeepAlive(callback)
+}
+
+// LookupServiceFinish wraps g_resolver_lookup_service_finish
+// 
+// The function takes the following parameters:
+// 
+// 	- result AsyncResult: the result passed to your #GAsyncReadyCallback 
+// 
+// The function returns the following values:
+// 
+// 	- goret []*SrvTarget 
+// 	- _goerr error (nullable): an error 
+//
+// Retrieves the result of a previous call to
+// g_resolver_lookup_service_async().
+// 
+// If the DNS resolution failed, @error (if non-%NULL) will be set to
+// a value from #GResolverError. If the operation was cancelled,
+// @error will be set to %G_IO_ERROR_CANCELLED.
+func (resolver *ResolverInstance) LookupServiceFinish(result AsyncResult) ([]*SrvTarget, error) {
+	var carg0 *C.GResolver    // in, none, converted
+	var carg1 *C.GAsyncResult // in, none, converted
+	var cret  *C.GList        // container, transfer: full
+	var _cerr *C.GError       // out, full, converted, nullable
+
+	carg0 = (*C.GResolver)(UnsafeResolverToGlibNone(resolver))
+	carg1 = (*C.GAsyncResult)(UnsafeAsyncResultToGlibNone(result))
+
+	cret = C.g_resolver_lookup_service_finish(carg0, carg1, &_cerr)
+	runtime.KeepAlive(resolver)
+	runtime.KeepAlive(result)
+
+	var goret  []*SrvTarget
+	var _goerr error
+
+	goret = glib.UnsafeListFromGlibFull(
+		unsafe.Pointer(cret),
+		func(v unsafe.Pointer) *SrvTarget {
+			var dst *SrvTarget // converted
+			dst = UnsafeSrvTargetFromGlibFull(v)
+			return dst
+		},
+	)
+	if _cerr != nil {
+		_goerr = glib.UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
+	}
+
+	return goret, _goerr
 }
 
 // SetDefault wraps g_resolver_set_default
@@ -70699,6 +71701,51 @@ func NewTlsCertificateFromPKCS12(data []uint8, password string) (TlsCertificate,
 	return goret, _goerr
 }
 
+// TlsCertificateListNewFromFile wraps g_tls_certificate_list_new_from_file
+// 
+// The function takes the following parameters:
+// 
+// 	- file string: file containing PEM-encoded certificates to import 
+// 
+// The function returns the following values:
+// 
+// 	- goret []TlsCertificate 
+// 	- _goerr error (nullable): an error 
+//
+// Creates one or more #GTlsCertificates from the PEM-encoded
+// data in @file. If @file cannot be read or parsed, the function will
+// return %NULL and set @error. If @file does not contain any
+// PEM-encoded certificates, this will return an empty list and not
+// set @error.
+func TlsCertificateListNewFromFile(file string) ([]TlsCertificate, error) {
+	var carg1 *C.gchar  // in, none, string, casted *C.gchar
+	var cret  *C.GList  // container, transfer: full
+	var _cerr *C.GError // out, full, converted, nullable
+
+	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(file)))
+	defer C.free(unsafe.Pointer(carg1))
+
+	cret = C.g_tls_certificate_list_new_from_file(carg1, &_cerr)
+	runtime.KeepAlive(file)
+
+	var goret  []TlsCertificate
+	var _goerr error
+
+	goret = glib.UnsafeListFromGlibFull(
+		unsafe.Pointer(cret),
+		func(v unsafe.Pointer) TlsCertificate {
+			var dst TlsCertificate // converted
+			dst = UnsafeTlsCertificateFromGlibFull(v)
+			return dst
+		},
+	)
+	if _cerr != nil {
+		_goerr = glib.UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
+	}
+
+	return goret, _goerr
+}
+
 // GetIssuer wraps g_tls_certificate_get_issuer
 // The function returns the following values:
 // 
@@ -72252,6 +73299,20 @@ type TlsDatabase interface {
 	// Finish an asynchronous lookup issuer operation. See
 	// g_tls_database_lookup_certificate_issuer() for more information.
 	LookupCertificateIssuerFinish(AsyncResult) (TlsCertificate, error)
+	// LookupCertificatesIssuedByFinish wraps g_tls_database_lookup_certificates_issued_by_finish
+	// 
+	// The function takes the following parameters:
+	// 
+	// 	- result AsyncResult: a #GAsyncResult. 
+	// 
+	// The function returns the following values:
+	// 
+	// 	- goret []TlsCertificate 
+	// 	- _goerr error (nullable): an error 
+	//
+	// Finish an asynchronous lookup of certificates. See
+	// g_tls_database_lookup_certificates_issued_by() for more information.
+	LookupCertificatesIssuedByFinish(AsyncResult) ([]TlsCertificate, error)
 	// VerifyChain wraps g_tls_database_verify_chain
 	// 
 	// The function takes the following parameters:
@@ -72736,6 +73797,50 @@ func (self *TlsDatabaseInstance) LookupCertificateIssuerFinish(result AsyncResul
 	var _goerr error
 
 	goret = UnsafeTlsCertificateFromGlibFull(unsafe.Pointer(cret))
+	if _cerr != nil {
+		_goerr = glib.UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
+	}
+
+	return goret, _goerr
+}
+
+// LookupCertificatesIssuedByFinish wraps g_tls_database_lookup_certificates_issued_by_finish
+// 
+// The function takes the following parameters:
+// 
+// 	- result AsyncResult: a #GAsyncResult. 
+// 
+// The function returns the following values:
+// 
+// 	- goret []TlsCertificate 
+// 	- _goerr error (nullable): an error 
+//
+// Finish an asynchronous lookup of certificates. See
+// g_tls_database_lookup_certificates_issued_by() for more information.
+func (self *TlsDatabaseInstance) LookupCertificatesIssuedByFinish(result AsyncResult) ([]TlsCertificate, error) {
+	var carg0 *C.GTlsDatabase // in, none, converted
+	var carg1 *C.GAsyncResult // in, none, converted
+	var cret  *C.GList        // container, transfer: full
+	var _cerr *C.GError       // out, full, converted, nullable
+
+	carg0 = (*C.GTlsDatabase)(UnsafeTlsDatabaseToGlibNone(self))
+	carg1 = (*C.GAsyncResult)(UnsafeAsyncResultToGlibNone(result))
+
+	cret = C.g_tls_database_lookup_certificates_issued_by_finish(carg0, carg1, &_cerr)
+	runtime.KeepAlive(self)
+	runtime.KeepAlive(result)
+
+	var goret  []TlsCertificate
+	var _goerr error
+
+	goret = glib.UnsafeListFromGlibFull(
+		unsafe.Pointer(cret),
+		func(v unsafe.Pointer) TlsCertificate {
+			var dst TlsCertificate // converted
+			dst = UnsafeTlsCertificateFromGlibFull(v)
+			return dst
+		},
+	)
 	if _cerr != nil {
 		_goerr = glib.UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
 	}
@@ -74482,6 +75587,16 @@ type VolumeMonitor interface {
 	gobject.Object
 	upcastToGVolumeMonitor() *VolumeMonitorInstance
 
+	// GetConnectedDrives wraps g_volume_monitor_get_connected_drives
+	// The function returns the following values:
+	// 
+	// 	- goret []Drive 
+	//
+	// Gets a list of drives connected to the system.
+	// 
+	// The returned list should be freed with g_list_free(), after
+	// its elements have been unreffed with g_object_unref().
+	GetConnectedDrives() []Drive
 	// GetMountForUUID wraps g_volume_monitor_get_mount_for_uuid
 	// 
 	// The function takes the following parameters:
@@ -74494,6 +75609,16 @@ type VolumeMonitor interface {
 	//
 	// Finds a #GMount object by its UUID (see g_mount_get_uuid())
 	GetMountForUUID(string) Mount
+	// GetMounts wraps g_volume_monitor_get_mounts
+	// The function returns the following values:
+	// 
+	// 	- goret []Mount 
+	//
+	// Gets a list of the mounts on the system.
+	// 
+	// The returned list should be freed with g_list_free(), after
+	// its elements have been unreffed with g_object_unref().
+	GetMounts() []Mount
 	// GetVolumeForUUID wraps g_volume_monitor_get_volume_for_uuid
 	// 
 	// The function takes the following parameters:
@@ -74506,6 +75631,16 @@ type VolumeMonitor interface {
 	//
 	// Finds a #GVolume object by its UUID (see g_volume_get_uuid())
 	GetVolumeForUUID(string) Volume
+	// GetVolumes wraps g_volume_monitor_get_volumes
+	// The function returns the following values:
+	// 
+	// 	- goret []Volume 
+	//
+	// Gets a list of the volumes on the system.
+	// 
+	// The returned list should be freed with g_list_free(), after
+	// its elements have been unreffed with g_object_unref().
+	GetVolumes() []Volume
 	// ConnectDriveChanged connects the provided callback to the "drive-changed" signal
 	//
 	// Emitted when a drive changes.
@@ -74671,6 +75806,38 @@ func VolumeMonitorGet() VolumeMonitor {
 	return goret
 }
 
+// GetConnectedDrives wraps g_volume_monitor_get_connected_drives
+// The function returns the following values:
+// 
+// 	- goret []Drive 
+//
+// Gets a list of drives connected to the system.
+// 
+// The returned list should be freed with g_list_free(), after
+// its elements have been unreffed with g_object_unref().
+func (volumeMonitor *VolumeMonitorInstance) GetConnectedDrives() []Drive {
+	var carg0 *C.GVolumeMonitor // in, none, converted
+	var cret  *C.GList          // container, transfer: full
+
+	carg0 = (*C.GVolumeMonitor)(UnsafeVolumeMonitorToGlibNone(volumeMonitor))
+
+	cret = C.g_volume_monitor_get_connected_drives(carg0)
+	runtime.KeepAlive(volumeMonitor)
+
+	var goret []Drive
+
+	goret = glib.UnsafeListFromGlibFull(
+		unsafe.Pointer(cret),
+		func(v unsafe.Pointer) Drive {
+			var dst Drive // converted
+			dst = UnsafeDriveFromGlibFull(v)
+			return dst
+		},
+	)
+
+	return goret
+}
+
 // GetMountForUUID wraps g_volume_monitor_get_mount_for_uuid
 // 
 // The function takes the following parameters:
@@ -74702,6 +75869,38 @@ func (volumeMonitor *VolumeMonitorInstance) GetMountForUUID(uuid string) Mount {
 	return goret
 }
 
+// GetMounts wraps g_volume_monitor_get_mounts
+// The function returns the following values:
+// 
+// 	- goret []Mount 
+//
+// Gets a list of the mounts on the system.
+// 
+// The returned list should be freed with g_list_free(), after
+// its elements have been unreffed with g_object_unref().
+func (volumeMonitor *VolumeMonitorInstance) GetMounts() []Mount {
+	var carg0 *C.GVolumeMonitor // in, none, converted
+	var cret  *C.GList          // container, transfer: full
+
+	carg0 = (*C.GVolumeMonitor)(UnsafeVolumeMonitorToGlibNone(volumeMonitor))
+
+	cret = C.g_volume_monitor_get_mounts(carg0)
+	runtime.KeepAlive(volumeMonitor)
+
+	var goret []Mount
+
+	goret = glib.UnsafeListFromGlibFull(
+		unsafe.Pointer(cret),
+		func(v unsafe.Pointer) Mount {
+			var dst Mount // converted
+			dst = UnsafeMountFromGlibFull(v)
+			return dst
+		},
+	)
+
+	return goret
+}
+
 // GetVolumeForUUID wraps g_volume_monitor_get_volume_for_uuid
 // 
 // The function takes the following parameters:
@@ -74729,6 +75928,38 @@ func (volumeMonitor *VolumeMonitorInstance) GetVolumeForUUID(uuid string) Volume
 	var goret Volume
 
 	goret = UnsafeVolumeFromGlibFull(unsafe.Pointer(cret))
+
+	return goret
+}
+
+// GetVolumes wraps g_volume_monitor_get_volumes
+// The function returns the following values:
+// 
+// 	- goret []Volume 
+//
+// Gets a list of the volumes on the system.
+// 
+// The returned list should be freed with g_list_free(), after
+// its elements have been unreffed with g_object_unref().
+func (volumeMonitor *VolumeMonitorInstance) GetVolumes() []Volume {
+	var carg0 *C.GVolumeMonitor // in, none, converted
+	var cret  *C.GList          // container, transfer: full
+
+	carg0 = (*C.GVolumeMonitor)(UnsafeVolumeMonitorToGlibNone(volumeMonitor))
+
+	cret = C.g_volume_monitor_get_volumes(carg0)
+	runtime.KeepAlive(volumeMonitor)
+
+	var goret []Volume
+
+	goret = glib.UnsafeListFromGlibFull(
+		unsafe.Pointer(cret),
+		func(v unsafe.Pointer) Volume {
+			var dst Volume // converted
+			dst = UnsafeVolumeFromGlibFull(v)
+			return dst
+		},
+	)
 
 	return goret
 }
@@ -85921,6 +87152,36 @@ func (extensionPoint *IOExtensionPoint) GetExtensionByName(name string) *IOExten
 	var goret *IOExtension
 
 	goret = UnsafeIOExtensionFromGlibNone(unsafe.Pointer(cret))
+
+	return goret
+}
+
+// GetExtensions wraps g_io_extension_point_get_extensions
+// The function returns the following values:
+// 
+// 	- goret []*IOExtension 
+//
+// Gets a list of all extensions that implement this extension point.
+// The list is sorted by priority, beginning with the highest priority.
+func (extensionPoint *IOExtensionPoint) GetExtensions() []*IOExtension {
+	var carg0 *C.GIOExtensionPoint // in, none, converted
+	var cret  *C.GList             // container, transfer: none
+
+	carg0 = (*C.GIOExtensionPoint)(UnsafeIOExtensionPointToGlibNone(extensionPoint))
+
+	cret = C.g_io_extension_point_get_extensions(carg0)
+	runtime.KeepAlive(extensionPoint)
+
+	var goret []*IOExtension
+
+	goret = glib.UnsafeListFromGlibNone(
+		unsafe.Pointer(cret),
+		func(v unsafe.Pointer) *IOExtension {
+			var dst *IOExtension // converted
+			dst = UnsafeIOExtensionFromGlibNone(v)
+			return dst
+		},
+	)
 
 	return goret
 }
