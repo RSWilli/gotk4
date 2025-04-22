@@ -146,10 +146,11 @@ var Main = genmain.Data{
 					typesystem.IgnoreByFileNameSubstring("gthreadpool."),
 					typesystem.IgnoreByFileNameSubstring("gtrashstack."),
 
-					// slomo said to consider these as legacy (also see https://gitlab.gnome.org/GNOME/gobject-introspection/-/issues/305#note_981623):
+					// see https://gitlab.gnome.org/GNOME/gobject-introspection/-/issues/305#note_981623
+					// Container structures that are unused:
 					typesystem.IgnoreMatching("Array"),
-					typesystem.IgnoreMatching("List"),
-					typesystem.IgnoreMatching("SList"),
+					typesystem.IgnoreMatching("Queue"),
+					typesystem.IgnoreMatching("Tree"),
 					typesystem.IgnoreMatching("PtrArray"),
 					typesystem.IgnoreMatching("HashTable"),
 				},
