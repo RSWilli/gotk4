@@ -12,16 +12,12 @@ type userdataEntry struct {
 	data any
 	// once tells the lookup to delete the entry after it is used
 	once bool
-	// mustReturn is a marker that we should return the pointer
-	// to the free list when the userdata is deleted. This must only be true
-	// if the pointer was created fro getPointer()
-	mustReturn bool
 }
 
 var userdataLock sync.Mutex
 var userdataRegistry map[unsafe.Pointer]userdataEntry = make(map[unsafe.Pointer]userdataEntry)
 
-func register(cpointer unsafe.Pointer, data any, once bool, mustReturn bool) {
+func register(cpointer unsafe.Pointer, data any, once bool) {
 	userdataLock.Lock()
 	defer userdataLock.Unlock()
 
@@ -30,27 +26,9 @@ func register(cpointer unsafe.Pointer, data any, once bool, mustReturn bool) {
 	}
 
 	userdataRegistry[cpointer] = userdataEntry{
-		data:       data,
-		once:       once,
-		mustReturn: mustReturn,
+		data: data,
+		once: once,
 	}
-}
-
-// RegisterFor registers the given userdata for the given C pointer.
-// This panics if the C pointer is already registered.
-// It is the caller's responsibility to ensure that the C pointer is
-// valid.
-func RegisterFor(cpointer unsafe.Pointer, data any) {
-	register(cpointer, data, false, false)
-}
-
-// RegisterOnceFor registers the given userdata for the given C pointer.
-// This panics if the C pointer is already registered.
-// It is the caller's responsibility to ensure that the C pointer is
-// valid.
-// The userdata will be deleted after it is used.
-func RegisterOnceFor(cpointer unsafe.Pointer, data any) {
-	register(cpointer, data, true, false)
 }
 
 // Register registers the given userdata and returns a valid C pointer
@@ -58,7 +36,7 @@ func RegisterOnceFor(cpointer unsafe.Pointer, data any) {
 func Register(data any) unsafe.Pointer {
 	ptr := getPointer()
 
-	register(ptr, data, false, true)
+	register(ptr, data, false)
 
 	return ptr
 }
@@ -69,7 +47,7 @@ func Register(data any) unsafe.Pointer {
 func RegisterOnce(data any) unsafe.Pointer {
 	ptr := getPointer()
 
-	register(ptr, data, true, true)
+	register(ptr, data, true)
 
 	return ptr
 }
@@ -99,7 +77,7 @@ func Delete(cpointer unsafe.Pointer) {
 }
 
 func deleteUnlocked(cpointer unsafe.Pointer) {
-	entry, ok := userdataRegistry[cpointer]
+	_, ok := userdataRegistry[cpointer]
 
 	if !ok {
 		panic("no userdata for given pointer")
@@ -107,7 +85,5 @@ func deleteUnlocked(cpointer unsafe.Pointer) {
 
 	delete(userdataRegistry, cpointer)
 
-	if entry.mustReturn {
-		returnPointer(cpointer)
-	}
+	returnPointer(cpointer)
 }
