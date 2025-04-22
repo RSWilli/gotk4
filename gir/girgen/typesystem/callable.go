@@ -124,11 +124,12 @@ func DeclarePrefixedFunction(e *env, parent Type, v gir.CallableAttrs) *Callable
 }
 
 func DeclareMethod(e *env, parent Type, v gir.Method) *CallableSignature {
+	e = e.sub("method", v.CIdentifier)
+
 	if !v.IsIntrospectable() {
+		e.logger.Warn("skipping because not introspectable")
 		return nil
 	}
-
-	e = e.sub("method", v.CIdentifier)
 
 	if v.ShadowedBy != "" || v.MovedTo != "" {
 		e.logger.Debug("skipping because shadowed or moved")
