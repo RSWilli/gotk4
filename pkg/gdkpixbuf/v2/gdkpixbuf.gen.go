@@ -1823,7 +1823,7 @@ func PixbufCalculateRowstride(colorspace Colorspace, hasAlpha bool, bitsPerSampl
 //
 // Parses an image file far enough to determine its format and size.
 func PixbufGetFileInfo(filename string) (int, int, *PixbufFormat) {
-	var carg1 *C.gchar           // in, none, string, casted *C.gchar
+	var carg1 *C.gchar           // in, none, string
 	var carg2 C.gint             // out, full, casted
 	var carg3 C.gint             // out, full, casted
 	var cret  *C.GdkPixbufFormat // return, none, converted
@@ -1864,7 +1864,7 @@ func PixbufGetFileInfo(filename string) (int, int, *PixbufFormat) {
 // get the result of the operation.
 func PixbufGetFileInfoAsync(cancellable context.Context, filename string, callback gio.AsyncReadyCallback) {
 	var carg2 *C.GCancellable       // in, none, converted, nullable
-	var carg1 *C.gchar              // in, none, string, casted *C.gchar
+	var carg1 *C.gchar              // in, none, string
 	var carg3 C.GAsyncReadyCallback // callback, scope: async, closure: carg4, nullable
 	var carg4 C.gpointer            // implicit
 
@@ -2757,8 +2757,8 @@ func (pixbuf *PixbufInstance) GetNChannels() int {
 // EXIF tag.
 func (pixbuf *PixbufInstance) GetOption(key string) string {
 	var carg0 *C.GdkPixbuf // in, none, converted
-	var carg1 *C.gchar     // in, none, string, casted *C.gchar
-	var cret  *C.gchar     // return, none, string, casted *C.gchar
+	var carg1 *C.gchar     // in, none, string
+	var cret  *C.gchar     // return, none, string
 
 	carg0 = (*C.GdkPixbuf)(UnsafePixbufToGlibNone(pixbuf))
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(key)))
@@ -2970,7 +2970,7 @@ func (pixbuf *PixbufInstance) ReadPixels() *uint8 {
 // Removes the key/value pair option attached to a `GdkPixbuf`.
 func (pixbuf *PixbufInstance) RemoveOption(key string) bool {
 	var carg0 *C.GdkPixbuf // in, none, converted
-	var carg1 *C.gchar     // in, none, string, casted *C.gchar
+	var carg1 *C.gchar     // in, none, string
 	var cret  C.gboolean   // return
 
 	carg0 = (*C.GdkPixbuf)(UnsafePixbufToGlibNone(pixbuf))
@@ -3287,7 +3287,7 @@ func (pixbuf *PixbufInstance) SaveToStreamvAsync(cancellable context.Context, st
 	var carg0 *C.GdkPixbuf          // in, none, converted
 	var carg5 *C.GCancellable       // in, none, converted, nullable
 	var carg1 *C.GOutputStream      // in, none, converted
-	var carg2 *C.gchar              // in, none, string, casted *C.gchar
+	var carg2 *C.gchar              // in, none, string
 	var carg3 **C.gchar             // in, transfer: none, C Pointers: 2, Name: array[utf8], nullable, array (inner: *typesystem.StringPrimitive, zero-terminated)
 	var carg4 **C.gchar             // in, transfer: none, C Pointers: 2, Name: array[utf8], nullable, array (inner: *typesystem.StringPrimitive, zero-terminated)
 	var carg6 C.GAsyncReadyCallback // callback, scope: async, closure: carg7, nullable
@@ -3522,8 +3522,8 @@ func (src *PixbufInstance) ScaleSimple(destWidth int, destHeight int, interpType
 // the new value is ignored and `FALSE` is returned.
 func (pixbuf *PixbufInstance) SetOption(key string, value string) bool {
 	var carg0 *C.GdkPixbuf // in, none, converted
-	var carg1 *C.gchar     // in, none, string, casted *C.gchar
-	var carg2 *C.gchar     // in, none, string, casted *C.gchar
+	var carg1 *C.gchar     // in, none, string
+	var carg2 *C.gchar     // in, none, string
 	var cret  C.gboolean   // return
 
 	carg0 = (*C.GdkPixbuf)(UnsafePixbufToGlibNone(pixbuf))
@@ -4252,7 +4252,7 @@ func (format *PixbufFormat) Copy() *PixbufFormat {
 // Returns a description of the format.
 func (format *PixbufFormat) GetDescription() string {
 	var carg0 *C.GdkPixbufFormat // in, none, converted
-	var cret  *C.gchar           // return, full, string, casted *C.gchar
+	var cret  *C.gchar           // return, full, string
 
 	carg0 = (*C.GdkPixbufFormat)(UnsafePixbufFormatToGlibNone(format))
 
@@ -4303,7 +4303,7 @@ func (format *PixbufFormat) GetExtensions() []string {
 // "LGPL", "GPL", "QPL", "GPL/QPL", or "other" to indicate some other license.
 func (format *PixbufFormat) GetLicense() string {
 	var carg0 *C.GdkPixbufFormat // in, none, converted
-	var cret  *C.gchar           // return, full, string, casted *C.gchar
+	var cret  *C.gchar           // return, full, string
 
 	carg0 = (*C.GdkPixbufFormat)(UnsafePixbufFormatToGlibNone(format))
 
@@ -4350,7 +4350,7 @@ func (format *PixbufFormat) GetMIMETypes() []string {
 // Returns the name of the format.
 func (format *PixbufFormat) GetName() string {
 	var carg0 *C.GdkPixbufFormat // in, none, converted
-	var cret  *C.gchar           // return, full, string, casted *C.gchar
+	var cret  *C.gchar           // return, full, string
 
 	carg0 = (*C.GdkPixbufFormat)(UnsafePixbufFormatToGlibNone(format))
 
@@ -4407,7 +4407,7 @@ func (format *PixbufFormat) IsDisabled() bool {
 // See gdk_pixbuf_save() for more information about option keys.
 func (format *PixbufFormat) IsSaveOptionSupported(optionKey string) bool {
 	var carg0 *C.GdkPixbufFormat // in, none, converted
-	var carg1 *C.gchar           // in, none, string, casted *C.gchar
+	var carg1 *C.gchar           // in, none, string
 	var cret  C.gboolean         // return
 
 	carg0 = (*C.GdkPixbufFormat)(UnsafePixbufFormatToGlibNone(format))

@@ -423,6 +423,129 @@ func BoxAlloc() *Box {
 	return goret
 }
 
+// BoxEmpty wraps graphene_box_empty
+// The function returns the following values:
+// 
+// 	- goret *Box 
+//
+// A degenerate #graphene_box_t that can only be expanded.
+// 
+// The returned value is owned by Graphene and should not be modified or freed.
+func BoxEmpty() *Box {
+	var cret *C.graphene_box_t // return, none, converted
+
+	cret = C.graphene_box_empty()
+
+	var goret *Box
+
+	goret = UnsafeBoxFromGlibNone(unsafe.Pointer(cret))
+
+	return goret
+}
+
+// BoxInfinite wraps graphene_box_infinite
+// The function returns the following values:
+// 
+// 	- goret *Box 
+//
+// A degenerate #graphene_box_t that cannot be expanded.
+// 
+// The returned value is owned by Graphene and should not be modified or freed.
+func BoxInfinite() *Box {
+	var cret *C.graphene_box_t // return, none, converted
+
+	cret = C.graphene_box_infinite()
+
+	var goret *Box
+
+	goret = UnsafeBoxFromGlibNone(unsafe.Pointer(cret))
+
+	return goret
+}
+
+// BoxMinusOne wraps graphene_box_minus_one
+// The function returns the following values:
+// 
+// 	- goret *Box 
+//
+// A #graphene_box_t with the minimum vertex set at (-1, -1, -1) and the
+// maximum vertex set at (0, 0, 0).
+// 
+// The returned value is owned by Graphene and should not be modified or freed.
+func BoxMinusOne() *Box {
+	var cret *C.graphene_box_t // return, none, converted
+
+	cret = C.graphene_box_minus_one()
+
+	var goret *Box
+
+	goret = UnsafeBoxFromGlibNone(unsafe.Pointer(cret))
+
+	return goret
+}
+
+// BoxOne wraps graphene_box_one
+// The function returns the following values:
+// 
+// 	- goret *Box 
+//
+// A #graphene_box_t with the minimum vertex set at (0, 0, 0) and the
+// maximum vertex set at (1, 1, 1).
+// 
+// The returned value is owned by Graphene and should not be modified or freed.
+func BoxOne() *Box {
+	var cret *C.graphene_box_t // return, none, converted
+
+	cret = C.graphene_box_one()
+
+	var goret *Box
+
+	goret = UnsafeBoxFromGlibNone(unsafe.Pointer(cret))
+
+	return goret
+}
+
+// BoxOneMinusOne wraps graphene_box_one_minus_one
+// The function returns the following values:
+// 
+// 	- goret *Box 
+//
+// A #graphene_box_t with the minimum vertex set at (-1, -1, -1) and the
+// maximum vertex set at (1, 1, 1).
+// 
+// The returned value is owned by Graphene and should not be modified or freed.
+func BoxOneMinusOne() *Box {
+	var cret *C.graphene_box_t // return, none, converted
+
+	cret = C.graphene_box_one_minus_one()
+
+	var goret *Box
+
+	goret = UnsafeBoxFromGlibNone(unsafe.Pointer(cret))
+
+	return goret
+}
+
+// BoxZero wraps graphene_box_zero
+// The function returns the following values:
+// 
+// 	- goret *Box 
+//
+// A #graphene_box_t with both the minimum and maximum vertices set at (0, 0, 0).
+// 
+// The returned value is owned by Graphene and should not be modified or freed.
+func BoxZero() *Box {
+	var cret *C.graphene_box_t // return, none, converted
+
+	cret = C.graphene_box_zero()
+
+	var goret *Box
+
+	goret = UnsafeBoxFromGlibNone(unsafe.Pointer(cret))
+
+	return goret
+}
+
 // ContainsBox wraps graphene_box_contains_box
 // 
 // The function takes the following parameters:
@@ -4853,6 +4976,24 @@ func PointAlloc() *Point {
 	return goret
 }
 
+// PointZero wraps graphene_point_zero
+// The function returns the following values:
+// 
+// 	- goret *Point 
+//
+// Returns a point fixed at (0, 0).
+func PointZero() *Point {
+	var cret *C.graphene_point_t // return, none, converted
+
+	cret = C.graphene_point_zero()
+
+	var goret *Point
+
+	goret = UnsafePointFromGlibNone(unsafe.Pointer(cret))
+
+	return goret
+}
+
 // Distance wraps graphene_point_distance
 // 
 // The function takes the following parameters:
@@ -5208,6 +5349,24 @@ func Point3DAlloc() *Point3D {
 	var goret *Point3D
 
 	goret = UnsafePoint3DFromGlibFull(unsafe.Pointer(cret))
+
+	return goret
+}
+
+// Point3DZero wraps graphene_point3d_zero
+// The function returns the following values:
+// 
+// 	- goret *Point3D 
+//
+// Retrieves a constant point with all three coordinates set to 0.
+func Point3DZero() *Point3D {
+	var cret *C.graphene_point3d_t // return, none, converted
+
+	cret = C.graphene_point3d_zero()
+
+	var goret *Point3D
+
+	goret = UnsafePoint3DFromGlibNone(unsafe.Pointer(cret))
 
 	return goret
 }
@@ -7459,6 +7618,45 @@ func UnsafeRectToGlibFull(r *Rect) unsafe.Pointer {
 	r.native = nil // Rect is invalid from here on
 	return _p
 }
+// RectAlloc wraps graphene_rect_alloc
+// The function returns the following values:
+// 
+// 	- goret *Rect 
+//
+// Allocates a new #graphene_rect_t.
+// 
+// The contents of the returned rectangle are undefined.
+func RectAlloc() *Rect {
+	var cret *C.graphene_rect_t // return, full, converted
+
+	cret = C.graphene_rect_alloc()
+
+	var goret *Rect
+
+	goret = UnsafeRectFromGlibFull(unsafe.Pointer(cret))
+
+	return goret
+}
+
+// RectZero wraps graphene_rect_zero
+// The function returns the following values:
+// 
+// 	- goret *Rect 
+//
+// Returns a degenerate rectangle with origin fixed at (0, 0) and
+// a size of 0, 0.
+func RectZero() *Rect {
+	var cret *C.graphene_rect_t // return, none, converted
+
+	cret = C.graphene_rect_zero()
+
+	var goret *Rect
+
+	goret = UnsafeRectFromGlibNone(unsafe.Pointer(cret))
+
+	return goret
+}
+
 // ContainsPoint wraps graphene_rect_contains_point
 // 
 // The function takes the following parameters:
@@ -8590,6 +8788,25 @@ func SizeAlloc() *Size {
 	var goret *Size
 
 	goret = UnsafeSizeFromGlibFull(unsafe.Pointer(cret))
+
+	return goret
+}
+
+// SizeZero wraps graphene_size_zero
+// The function returns the following values:
+// 
+// 	- goret *Size 
+//
+// A constant pointer to a zero #graphene_size_t, useful for
+// equality checks and interpolations.
+func SizeZero() *Size {
+	var cret *C.graphene_size_t // return, none, converted
+
+	cret = C.graphene_size_zero()
+
+	var goret *Size
+
+	goret = UnsafeSizeFromGlibNone(unsafe.Pointer(cret))
 
 	return goret
 }
@@ -9897,6 +10114,78 @@ func Vec2Alloc() *Vec2 {
 	return goret
 }
 
+// Vec2One wraps graphene_vec2_one
+// The function returns the following values:
+// 
+// 	- goret *Vec2 
+//
+// Retrieves a constant vector with (1, 1) components.
+func Vec2One() *Vec2 {
+	var cret *C.graphene_vec2_t // return, none, converted
+
+	cret = C.graphene_vec2_one()
+
+	var goret *Vec2
+
+	goret = UnsafeVec2FromGlibNone(unsafe.Pointer(cret))
+
+	return goret
+}
+
+// Vec2XAxis wraps graphene_vec2_x_axis
+// The function returns the following values:
+// 
+// 	- goret *Vec2 
+//
+// Retrieves a constant vector with (1, 0) components.
+func Vec2XAxis() *Vec2 {
+	var cret *C.graphene_vec2_t // return, none, converted
+
+	cret = C.graphene_vec2_x_axis()
+
+	var goret *Vec2
+
+	goret = UnsafeVec2FromGlibNone(unsafe.Pointer(cret))
+
+	return goret
+}
+
+// Vec2YAxis wraps graphene_vec2_y_axis
+// The function returns the following values:
+// 
+// 	- goret *Vec2 
+//
+// Retrieves a constant vector with (0, 1) components.
+func Vec2YAxis() *Vec2 {
+	var cret *C.graphene_vec2_t // return, none, converted
+
+	cret = C.graphene_vec2_y_axis()
+
+	var goret *Vec2
+
+	goret = UnsafeVec2FromGlibNone(unsafe.Pointer(cret))
+
+	return goret
+}
+
+// Vec2Zero wraps graphene_vec2_zero
+// The function returns the following values:
+// 
+// 	- goret *Vec2 
+//
+// Retrieves a constant vector with (0, 0) components.
+func Vec2Zero() *Vec2 {
+	var cret *C.graphene_vec2_t // return, none, converted
+
+	cret = C.graphene_vec2_zero()
+
+	var goret *Vec2
+
+	goret = UnsafeVec2FromGlibNone(unsafe.Pointer(cret))
+
+	return goret
+}
+
 // Add wraps graphene_vec2_add
 // 
 // The function takes the following parameters:
@@ -10569,6 +10858,101 @@ func Vec3Alloc() *Vec3 {
 	var goret *Vec3
 
 	goret = UnsafeVec3FromGlibFull(unsafe.Pointer(cret))
+
+	return goret
+}
+
+// Vec3One wraps graphene_vec3_one
+// The function returns the following values:
+// 
+// 	- goret *Vec3 
+//
+// Provides a constant pointer to a vector with three components,
+// all sets to 1.
+func Vec3One() *Vec3 {
+	var cret *C.graphene_vec3_t // return, none, converted
+
+	cret = C.graphene_vec3_one()
+
+	var goret *Vec3
+
+	goret = UnsafeVec3FromGlibNone(unsafe.Pointer(cret))
+
+	return goret
+}
+
+// Vec3XAxis wraps graphene_vec3_x_axis
+// The function returns the following values:
+// 
+// 	- goret *Vec3 
+//
+// Provides a constant pointer to a vector with three components
+// with values set to (1, 0, 0).
+func Vec3XAxis() *Vec3 {
+	var cret *C.graphene_vec3_t // return, none, converted
+
+	cret = C.graphene_vec3_x_axis()
+
+	var goret *Vec3
+
+	goret = UnsafeVec3FromGlibNone(unsafe.Pointer(cret))
+
+	return goret
+}
+
+// Vec3YAxis wraps graphene_vec3_y_axis
+// The function returns the following values:
+// 
+// 	- goret *Vec3 
+//
+// Provides a constant pointer to a vector with three components
+// with values set to (0, 1, 0).
+func Vec3YAxis() *Vec3 {
+	var cret *C.graphene_vec3_t // return, none, converted
+
+	cret = C.graphene_vec3_y_axis()
+
+	var goret *Vec3
+
+	goret = UnsafeVec3FromGlibNone(unsafe.Pointer(cret))
+
+	return goret
+}
+
+// Vec3ZAxis wraps graphene_vec3_z_axis
+// The function returns the following values:
+// 
+// 	- goret *Vec3 
+//
+// Provides a constant pointer to a vector with three components
+// with values set to (0, 0, 1).
+func Vec3ZAxis() *Vec3 {
+	var cret *C.graphene_vec3_t // return, none, converted
+
+	cret = C.graphene_vec3_z_axis()
+
+	var goret *Vec3
+
+	goret = UnsafeVec3FromGlibNone(unsafe.Pointer(cret))
+
+	return goret
+}
+
+// Vec3Zero wraps graphene_vec3_zero
+// The function returns the following values:
+// 
+// 	- goret *Vec3 
+//
+// Provides a constant pointer to a vector with three components,
+// all sets to 0.
+func Vec3Zero() *Vec3 {
+	var cret *C.graphene_vec3_t // return, none, converted
+
+	cret = C.graphene_vec3_zero()
+
+	var goret *Vec3
+
+	goret = UnsafeVec3FromGlibNone(unsafe.Pointer(cret))
 
 	return goret
 }
@@ -11433,6 +11817,120 @@ func Vec4Alloc() *Vec4 {
 	var goret *Vec4
 
 	goret = UnsafeVec4FromGlibFull(unsafe.Pointer(cret))
+
+	return goret
+}
+
+// Vec4One wraps graphene_vec4_one
+// The function returns the following values:
+// 
+// 	- goret *Vec4 
+//
+// Retrieves a pointer to a #graphene_vec4_t with all its
+// components set to 1.
+func Vec4One() *Vec4 {
+	var cret *C.graphene_vec4_t // return, none, converted
+
+	cret = C.graphene_vec4_one()
+
+	var goret *Vec4
+
+	goret = UnsafeVec4FromGlibNone(unsafe.Pointer(cret))
+
+	return goret
+}
+
+// Vec4WAxis wraps graphene_vec4_w_axis
+// The function returns the following values:
+// 
+// 	- goret *Vec4 
+//
+// Retrieves a pointer to a #graphene_vec4_t with its
+// components set to (0, 0, 0, 1).
+func Vec4WAxis() *Vec4 {
+	var cret *C.graphene_vec4_t // return, none, converted
+
+	cret = C.graphene_vec4_w_axis()
+
+	var goret *Vec4
+
+	goret = UnsafeVec4FromGlibNone(unsafe.Pointer(cret))
+
+	return goret
+}
+
+// Vec4XAxis wraps graphene_vec4_x_axis
+// The function returns the following values:
+// 
+// 	- goret *Vec4 
+//
+// Retrieves a pointer to a #graphene_vec4_t with its
+// components set to (1, 0, 0, 0).
+func Vec4XAxis() *Vec4 {
+	var cret *C.graphene_vec4_t // return, none, converted
+
+	cret = C.graphene_vec4_x_axis()
+
+	var goret *Vec4
+
+	goret = UnsafeVec4FromGlibNone(unsafe.Pointer(cret))
+
+	return goret
+}
+
+// Vec4YAxis wraps graphene_vec4_y_axis
+// The function returns the following values:
+// 
+// 	- goret *Vec4 
+//
+// Retrieves a pointer to a #graphene_vec4_t with its
+// components set to (0, 1, 0, 0).
+func Vec4YAxis() *Vec4 {
+	var cret *C.graphene_vec4_t // return, none, converted
+
+	cret = C.graphene_vec4_y_axis()
+
+	var goret *Vec4
+
+	goret = UnsafeVec4FromGlibNone(unsafe.Pointer(cret))
+
+	return goret
+}
+
+// Vec4ZAxis wraps graphene_vec4_z_axis
+// The function returns the following values:
+// 
+// 	- goret *Vec4 
+//
+// Retrieves a pointer to a #graphene_vec4_t with its
+// components set to (0, 0, 1, 0).
+func Vec4ZAxis() *Vec4 {
+	var cret *C.graphene_vec4_t // return, none, converted
+
+	cret = C.graphene_vec4_z_axis()
+
+	var goret *Vec4
+
+	goret = UnsafeVec4FromGlibNone(unsafe.Pointer(cret))
+
+	return goret
+}
+
+// Vec4Zero wraps graphene_vec4_zero
+// The function returns the following values:
+// 
+// 	- goret *Vec4 
+//
+// Retrieves a pointer to a #graphene_vec4_t with all its
+// components set to 0.
+func Vec4Zero() *Vec4 {
+	var cret *C.graphene_vec4_t // return, none, converted
+
+	cret = C.graphene_vec4_zero()
+
+	var goret *Vec4
+
+	goret = UnsafeVec4FromGlibNone(unsafe.Pointer(cret))
 
 	return goret
 }

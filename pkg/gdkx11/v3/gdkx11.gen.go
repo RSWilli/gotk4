@@ -138,25 +138,6 @@ func X11FreeCompoundText(ctext *uint8) {
 	runtime.KeepAlive(ctext)
 }
 
-// X11FreeTextList wraps gdk_x11_free_text_list
-// 
-// The function takes the following parameters:
-// 
-// 	- list string: the value stored in the @list parameter by
-//   a call to gdk_x11_display_text_property_to_text_list(). 
-//
-// Frees the array of strings created by
-// gdk_x11_display_text_property_to_text_list().
-func X11FreeTextList(list string) {
-	var carg1 **C.gchar // in, none, string, casted *C.gchar
-
-	carg1 = (**C.gchar)(unsafe.Pointer(C.CString(list)))
-	defer C.free(unsafe.Pointer(carg1))
-
-	C.gdk_x11_free_text_list(carg1)
-	runtime.KeepAlive(list)
-}
-
 // X11GetDefaultScreen wraps gdk_x11_get_default_screen
 // The function returns the following values:
 // 
@@ -872,7 +853,7 @@ func (display *X11DisplayInstance) ErrorTrapPush() {
 // Gets the startup notification ID for a display.
 func (display *X11DisplayInstance) GetStartupNotificationID() string {
 	var carg0 *C.GdkDisplay // in, none, converted, casted *C.GdkX11Display
-	var cret  *C.gchar      // return, none, string, casted *C.gchar
+	var cret  *C.gchar      // return, none, string
 
 	carg0 = (*C.GdkDisplay)(UnsafeX11DisplayToGlibNone(display))
 
@@ -985,7 +966,7 @@ func (display *X11DisplayInstance) SetCursorTheme(theme string, size int) {
 // gdk_notify_startup_complete()).
 func (display *X11DisplayInstance) SetStartupNotificationID(startupId string) {
 	var carg0 *C.GdkDisplay // in, none, converted, casted *C.GdkX11Display
-	var carg1 *C.gchar      // in, none, string, casted *C.gchar
+	var carg1 *C.gchar      // in, none, string
 
 	carg0 = (*C.GdkDisplay)(UnsafeX11DisplayToGlibNone(display))
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(startupId)))
@@ -1997,7 +1978,7 @@ func (window *X11WindowInstance) SetUserTime(timestamp uint32) {
 // not a toplevel window, it is ignored.
 func (window *X11WindowInstance) SetUTF8Property(name string, value string) {
 	var carg0 *C.GdkWindow // in, none, converted, casted *C.GdkX11Window
-	var carg1 *C.gchar     // in, none, string, casted *C.gchar
+	var carg1 *C.gchar     // in, none, string
 	var carg2 *C.gchar     // in, none, string, nullable-string
 
 	carg0 = (*C.GdkWindow)(UnsafeX11WindowToGlibNone(window))

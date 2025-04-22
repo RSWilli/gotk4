@@ -677,7 +677,7 @@ func EnumGetValue(enumClass *EnumClass, value int) *EnumValue {
 // Looks up a #GEnumValue by name.
 func EnumGetValueByName(enumClass *EnumClass, name string) *EnumValue {
 	var carg1 *C.GEnumClass // in, none, converted
-	var carg2 *C.gchar      // in, none, string, casted *C.gchar
+	var carg2 *C.gchar      // in, none, string
 	var cret  *C.GEnumValue // return, none, converted
 
 	carg1 = (*C.GEnumClass)(UnsafeEnumClassToGlibNone(enumClass))
@@ -709,7 +709,7 @@ func EnumGetValueByName(enumClass *EnumClass, name string) *EnumValue {
 // Looks up a #GEnumValue by nickname.
 func EnumGetValueByNick(enumClass *EnumClass, nick string) *EnumValue {
 	var carg1 *C.GEnumClass // in, none, converted
-	var carg2 *C.gchar      // in, none, string, casted *C.gchar
+	var carg2 *C.gchar      // in, none, string
 	var cret  *C.GEnumValue // return, none, converted
 
 	carg1 = (*C.GEnumClass)(UnsafeEnumClassToGlibNone(enumClass))
@@ -747,7 +747,7 @@ func EnumGetValueByNick(enumClass *EnumClass, nick string) *EnumValue {
 // generate a my_enum_get_type() function from a usual C enumeration
 // definition  than to write one yourself using g_enum_register_static().
 func EnumRegisterStatic(name string, constStaticValues *EnumValue) Type {
-	var carg1 *C.gchar      // in, none, string, casted *C.gchar
+	var carg1 *C.gchar      // in, none, string
 	var carg2 *C.GEnumValue // in, none, converted
 	var cret  C.GType       // return, none, casted, alias
 
@@ -784,7 +784,7 @@ func EnumRegisterStatic(name string, constStaticValues *EnumValue) Type {
 func EnumToString(gEnumType Type, value int) string {
 	var carg1 C.GType  // in, none, casted, alias
 	var carg2 C.gint   // in, none, casted
-	var cret  *C.gchar // return, full, string, casted *C.gchar
+	var cret  *C.gchar // return, full, string
 
 	carg1 = C.GType(gEnumType)
 	carg2 = C.gint(value)
@@ -883,7 +883,7 @@ func FlagsGetFirstValue(flagsClass *FlagsClass, value uint) *FlagsValue {
 // Looks up a #GFlagsValue by name.
 func FlagsGetValueByName(flagsClass *FlagsClass, name string) *FlagsValue {
 	var carg1 *C.GFlagsClass // in, none, converted
-	var carg2 *C.gchar       // in, none, string, casted *C.gchar
+	var carg2 *C.gchar       // in, none, string
 	var cret  *C.GFlagsValue // return, none, converted
 
 	carg1 = (*C.GFlagsClass)(UnsafeFlagsClassToGlibNone(flagsClass))
@@ -915,7 +915,7 @@ func FlagsGetValueByName(flagsClass *FlagsClass, name string) *FlagsValue {
 // Looks up a #GFlagsValue by nickname.
 func FlagsGetValueByNick(flagsClass *FlagsClass, nick string) *FlagsValue {
 	var carg1 *C.GFlagsClass // in, none, converted
-	var carg2 *C.gchar       // in, none, string, casted *C.gchar
+	var carg2 *C.gchar       // in, none, string
 	var cret  *C.GFlagsValue // return, none, converted
 
 	carg1 = (*C.GFlagsClass)(UnsafeFlagsClassToGlibNone(flagsClass))
@@ -952,7 +952,7 @@ func FlagsGetValueByNick(flagsClass *FlagsClass, nick string) *FlagsValue {
 // generate a my_flags_get_type() function from a usual C enumeration
 // definition than to write one yourself using g_flags_register_static().
 func FlagsRegisterStatic(name string, constStaticValues *FlagsValue) Type {
-	var carg1 *C.gchar       // in, none, string, casted *C.gchar
+	var carg1 *C.gchar       // in, none, string
 	var carg2 *C.GFlagsValue // in, none, converted
 	var cret  C.GType        // return, none, casted, alias
 
@@ -990,7 +990,7 @@ func FlagsRegisterStatic(name string, constStaticValues *FlagsValue) Type {
 func FlagsToString(flagsType Type, value uint) string {
 	var carg1 C.GType  // in, none, casted, alias
 	var carg2 C.guint  // in, none, casted
-	var cret  *C.gchar // return, full, string, casted *C.gchar
+	var cret  *C.gchar // return, full, string
 
 	carg1 = C.GType(flagsType)
 	carg2 = C.guint(value)
@@ -1041,7 +1041,7 @@ func GTypeGetType() Type {
 // structure pointed to by @info to manage the #GParamSpec type and its
 // instances.
 func ParamTypeRegisterStatic(name string, pspecInfo *ParamSpecTypeInfo) Type {
-	var carg1 *C.gchar              // in, none, string, casted *C.gchar
+	var carg1 *C.gchar              // in, none, string
 	var carg2 *C.GParamSpecTypeInfo // in, none, converted
 	var cret  C.GType               // return, none, casted, alias
 
@@ -1073,7 +1073,7 @@ func ParamTypeRegisterStatic(name string, pspecInfo *ParamSpecTypeInfo) Type {
 // Creates a new %G_TYPE_POINTER derived type id for a new
 // pointer type with name @name.
 func PointerTypeRegisterStatic(name string) Type {
-	var carg1 *C.gchar // in, none, string, casted *C.gchar
+	var carg1 *C.gchar // in, none, string
 	var cret  C.GType  // return, none, casted, alias
 
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(name)))
@@ -1105,7 +1105,7 @@ func PointerTypeRegisterStatic(name string) Type {
 // See [func@GObject.signal_new] for details of the rules for valid names.
 // The rules for signal names are the same as those for property names.
 func SignalIsValidName(name string) bool {
-	var carg1 *C.gchar   // in, none, string, casted *C.gchar
+	var carg1 *C.gchar   // in, none, string
 	var cret  C.gboolean // return
 
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(name)))
@@ -1181,7 +1181,7 @@ func SignalListIDs(itype Type) (uint, []uint) {
 // 
 // See g_signal_new() for details on allowed signal names.
 func SignalLookup(name string, itype Type) uint {
-	var carg1 *C.gchar // in, none, string, casted *C.gchar
+	var carg1 *C.gchar // in, none, string
 	var carg2 C.GType  // in, none, casted, alias
 	var cret  C.guint  // return, none, casted
 
@@ -1215,7 +1215,7 @@ func SignalLookup(name string, itype Type) uint {
 // Two different signals may have the same name, if they have differing types.
 func SignalName(signalId uint) string {
 	var carg1 C.guint  // in, none, casted
-	var cret  *C.gchar // return, none, string, casted *C.gchar
+	var cret  *C.gchar // return, none, string
 
 	carg1 = C.guint(signalId)
 
@@ -1246,7 +1246,7 @@ func SignalName(signalId uint) string {
 // Internal function to parse a signal name into its @signal_id
 // and @detail quark.
 func SignalParseName(detailedSignal string, itype Type, forceDetailQuark bool) (uint, glib.Quark, bool) {
-	var carg1 *C.gchar   // in, none, string, casted *C.gchar
+	var carg1 *C.gchar   // in, none, string
 	var carg2 C.GType    // in, none, casted, alias
 	var carg5 C.gboolean // in
 	var carg3 C.guint    // out, full, casted
@@ -1654,7 +1654,7 @@ func TypeFreeInstance(instance *TypeInstance) {
 // to find out by name whether a specific type has been registered
 // yet).
 func TypeFromName(name string) Type {
-	var carg1 *C.gchar // in, none, string, casted *C.gchar
+	var carg1 *C.gchar // in, none, string
 	var cret  C.GType  // return, none, casted, alias
 
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(name)))
@@ -1886,7 +1886,7 @@ func TypeIsA(typ Type, isAType Type) bool {
 // not be passed in and will most likely lead to a crash.
 func TypeName(typ Type) string {
 	var carg1 C.GType  // in, none, casted, alias
-	var cret  *C.gchar // return, none, string, casted *C.gchar
+	var cret  *C.gchar // return, none, string
 
 	carg1 = C.GType(typ)
 
@@ -1911,7 +1911,7 @@ func TypeName(typ Type) string {
 // 	- goret string 
 func TypeNameFromInstance(instance *TypeInstance) string {
 	var carg1 *C.GTypeInstance // in, none, converted
-	var cret  *C.gchar         // return, none, string, casted *C.gchar
+	var cret  *C.gchar         // return, none, string
 
 	carg1 = (*C.GTypeInstance)(UnsafeTypeInstanceToGlibNone(instance))
 
@@ -2037,7 +2037,7 @@ func TypeQname(typ Type) glib.Quark {
 // (e.g. abstract or not) of the type.
 func TypeRegisterDynamic(parentType Type, typeName string, plugin TypePlugin, flags TypeFlags) Type {
 	var carg1 C.GType        // in, none, casted, alias
-	var carg2 *C.gchar       // in, none, string, casted *C.gchar
+	var carg2 *C.gchar       // in, none, string
 	var carg3 *C.GTypePlugin // in, none, converted
 	var carg4 C.GTypeFlags   // in, none, casted
 	var cret  C.GType        // return, none, casted, alias
@@ -2724,7 +2724,7 @@ func (module *TypeModuleInstance) AddInterface(instanceType Type, interfaceType 
 // instead. This can be used when making a static build of the module.
 func (module *TypeModuleInstance) RegisterEnum(name string, constStaticValues *EnumValue) Type {
 	var carg0 *C.GTypeModule // in, none, converted
-	var carg1 *C.gchar       // in, none, string, casted *C.gchar
+	var carg1 *C.gchar       // in, none, string
 	var carg2 *C.GEnumValue  // in, none, converted
 	var cret  C.GType        // return, none, casted, alias
 
@@ -2771,7 +2771,7 @@ func (module *TypeModuleInstance) RegisterEnum(name string, constStaticValues *E
 // instead. This can be used when making a static build of the module.
 func (module *TypeModuleInstance) RegisterFlags(name string, constStaticValues *FlagsValue) Type {
 	var carg0 *C.GTypeModule // in, none, converted
-	var carg1 *C.gchar       // in, none, string, casted *C.gchar
+	var carg1 *C.gchar       // in, none, string
 	var carg2 *C.GFlagsValue // in, none, converted
 	var cret  C.GType        // return, none, casted, alias
 
@@ -2822,7 +2822,7 @@ func (module *TypeModuleInstance) RegisterFlags(name string, constStaticValues *
 func (module *TypeModuleInstance) RegisterType(parentType Type, typeName string, typeInfo *TypeInfo, flags TypeFlags) Type {
 	var carg0 *C.GTypeModule // in, none, converted
 	var carg1 C.GType        // in, none, casted, alias
-	var carg2 *C.gchar       // in, none, string, casted *C.gchar
+	var carg2 *C.gchar       // in, none, string
 	var carg3 *C.GTypeInfo   // in, none, converted
 	var carg4 C.GTypeFlags   // in, none, casted
 	var cret  C.GType        // return, none, casted, alias
@@ -2857,7 +2857,7 @@ func (module *TypeModuleInstance) RegisterType(parentType Type, typeName string,
 // Sets the name for a #GTypeModule
 func (module *TypeModuleInstance) SetName(name string) {
 	var carg0 *C.GTypeModule // in, none, converted
-	var carg1 *C.gchar       // in, none, string, casted *C.gchar
+	var carg1 *C.gchar       // in, none, string
 
 	carg0 = (*C.GTypeModule)(UnsafeTypeModuleToGlibNone(module))
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(name)))

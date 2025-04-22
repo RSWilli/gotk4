@@ -26,17 +26,20 @@ func fixCType(resolved Type, requested gir.AnyType) Type {
 	}
 
 	req := requested.Type
-	ctype := cleanCType(trimCTypePointers(req.CType))
 
-	if goEquivalent, ok := cgoPrimitiveTypes[ctype]; ok {
-		ctype = goEquivalent
-	}
-
-	if ctype == "" {
+	if req.CType == "" {
 		return resolved // edge case, hopefully the type resolved by GIR is correct
 	}
 
-	if ctype == resolved.CType(0) {
+	ctypePointers := CountCTypePointers(req.CType)
+	cleanType := cleanCType(req.CType)
+	baseCtype := trimCTypePointers(cleanType)
+
+	if goEquivalent, ok := cgoPrimitiveTypes[baseCtype]; ok {
+		baseCtype = goEquivalent
+	}
+
+	if cleanType == resolved.CType(ctypePointers) {
 		return resolved // no need to override
 	}
 
@@ -44,8 +47,8 @@ func fixCType(resolved Type, requested gir.AnyType) Type {
 	if ok {
 		return &OverriddenCTypeConvertible{
 			Actual:  inter,
-			Ctype:   ctype,
-			Cgotype: "C." + ctype,
+			Ctype:   baseCtype,
+			Cgotype: "C." + baseCtype,
 		}
 	}
 
@@ -54,14 +57,22 @@ func fixCType(resolved Type, requested gir.AnyType) Type {
 	if ok {
 		return &OverriddenCTypeCastable{
 			Actual:  castable,
-			Ctype:   ctype,
-			Cgotype: "C." + ctype,
+			Ctype:   baseCtype,
+			Cgotype: "C." + baseCtype,
+		}
+	}
+
+	if resolved == Utf8 || resolved == Filename {
+		return &OverriddenCTypeString{
+			Actual:  resolved.(*StringPrimitive),
+			Ctype:   baseCtype + GetPointers(ctypePointers),
+			Cgotype: GetPointers(ctypePointers) + "C." + baseCtype,
 		}
 	}
 
 	return &OverriddenCTypeSimple{
 		Actual:  resolved,
-		Ctype:   ctype,
-		Cgotype: "C." + ctype,
+		Ctype:   baseCtype,
+		Cgotype: "C." + baseCtype,
 	}
 }

@@ -20,8 +20,13 @@ func DeclareFunction(e *env, v gir.CallableAttrs) *CallableSignature {
 		return nil
 	}
 
-	if v.ShadowedBy != "" || v.MovedTo != "" {
-		e.logger.Warn("skipping because shadowed or moved")
+	if v.ShadowedBy != "" {
+		e.logger.Warn("skipping because shadowed", "by", v.ShadowedBy)
+		return nil
+	}
+
+	if v.MovedTo != "" {
+		e.logger.Warn("skipping because moved", "to", v.MovedTo)
 		return nil
 	}
 
@@ -98,8 +103,13 @@ func DeclarePrefixedFunction(e *env, parent Type, v gir.CallableAttrs) *Callable
 		return nil
 	}
 
-	if v.ShadowedBy != "" || v.MovedTo != "" {
-		e.logger.Warn("skipping because shadowed or moved")
+	if v.ShadowedBy != "" {
+		e.logger.Warn("skipping because shadowed", "by", v.ShadowedBy)
+		return nil
+	}
+
+	if v.MovedTo != "" {
+		e.logger.Warn("skipping because moved", "to", v.MovedTo)
 		return nil
 	}
 
@@ -131,8 +141,13 @@ func DeclareMethod(e *env, parent Type, v gir.Method) *CallableSignature {
 		return nil
 	}
 
-	if v.ShadowedBy != "" || v.MovedTo != "" {
-		e.logger.Debug("skipping because shadowed or moved")
+	if v.ShadowedBy != "" {
+		e.logger.Warn("skipping because shadowed", "by", v.ShadowedBy)
+		return nil
+	}
+
+	if v.MovedTo != "" {
+		e.logger.Warn("skipping because moved", "to", v.MovedTo)
 		return nil
 	}
 

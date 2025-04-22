@@ -143,25 +143,6 @@ func X11FreeCompoundText(ctext *uint8) {
 	runtime.KeepAlive(ctext)
 }
 
-// X11FreeTextList wraps gdk_x11_free_text_list
-// 
-// The function takes the following parameters:
-// 
-// 	- list string: the value stored in the @list parameter by
-//   a call to gdk_x11_display_text_property_to_text_list(). 
-//
-// Frees the array of strings created by
-// gdk_x11_display_text_property_to_text_list().
-func X11FreeTextList(list string) {
-	var carg1 **C.char // in, none, string, casted *C.gchar
-
-	carg1 = (**C.char)(unsafe.Pointer(C.CString(list)))
-	defer C.free(unsafe.Pointer(carg1))
-
-	C.gdk_x11_free_text_list(carg1)
-	runtime.KeepAlive(list)
-}
-
 // X11GetServerTime wraps gdk_x11_get_server_time
 // 
 // The function takes the following parameters:
@@ -487,29 +468,6 @@ type X11Display interface {
 	// Once the scale is set by this call it will not change in response
 	// to later user configuration changes.
 	SetSurfaceScale(int)
-	// TextPropertyToTextList wraps gdk_x11_display_text_property_to_text_list
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- encoding string: a string representing the encoding. The most
-	//   common values for this are "STRING", or "COMPOUND_TEXT".
-	//   This is value used as the type for the property 
-	// 	- format int: the format of the property 
-	// 	- text *uint8: The text data 
-	// 	- length int: The number of items to transform 
-	// 	- list string: location to store an  array of strings in
-	//   the encoding of the current locale. This array should be
-	//   freed using gdk_x11_free_text_list(). 
-	// 
-	// The function returns the following values:
-	// 
-	// 	- goret int 
-	//
-	// Convert a text string from the encoding as it is stored
-	// in a property into an array of strings in the encoding of
-	// the current locale. (The elements of the array represent the
-	// nul-separated elements of the original text string.)
-	TextPropertyToTextList(string, int, *uint8, int, string) int
 	// Ungrab wraps gdk_x11_display_ungrab
 	//
 	// Ungrab @display after it has been grabbed with
@@ -890,63 +848,6 @@ func (display *X11DisplayInstance) SetSurfaceScale(scale int) {
 	C.gdk_x11_display_set_surface_scale(carg0, carg1)
 	runtime.KeepAlive(display)
 	runtime.KeepAlive(scale)
-}
-
-// TextPropertyToTextList wraps gdk_x11_display_text_property_to_text_list
-// 
-// The function takes the following parameters:
-// 
-// 	- encoding string: a string representing the encoding. The most
-//   common values for this are "STRING", or "COMPOUND_TEXT".
-//   This is value used as the type for the property 
-// 	- format int: the format of the property 
-// 	- text *uint8: The text data 
-// 	- length int: The number of items to transform 
-// 	- list string: location to store an  array of strings in
-//   the encoding of the current locale. This array should be
-//   freed using gdk_x11_free_text_list(). 
-// 
-// The function returns the following values:
-// 
-// 	- goret int 
-//
-// Convert a text string from the encoding as it is stored
-// in a property into an array of strings in the encoding of
-// the current locale. (The elements of the array represent the
-// nul-separated elements of the original text string.)
-func (display *X11DisplayInstance) TextPropertyToTextList(encoding string, format int, text *uint8, length int, list string) int {
-	var carg0 *C.GdkDisplay // in, none, converted, casted *C.GdkX11Display
-	var carg1 *C.char       // in, none, string, casted *C.gchar
-	var carg2 C.int         // in, none, casted, casted C.gint
-	var carg3 *C.guchar     // in, transfer: none, C Pointers: 1, Name: guint8, casted *C.guint8
-	var carg4 C.int         // in, none, casted, casted C.gint
-	var carg5 ***C.char     // in, none, string, casted *C.gchar
-	var cret  C.int         // return, none, casted, casted C.gint
-
-	carg0 = (*C.GdkDisplay)(UnsafeX11DisplayToGlibNone(display))
-	carg1 = (*C.char)(unsafe.Pointer(C.CString(encoding)))
-	defer C.free(unsafe.Pointer(carg1))
-	carg2 = C.int(format)
-	_ = text
-	_ = carg3
-	panic("unimplemented conversion of *uint8 (guchar*)")
-	carg4 = C.int(length)
-	carg5 = (***C.char)(unsafe.Pointer(C.CString(list)))
-	defer C.free(unsafe.Pointer(carg5))
-
-	cret = C.gdk_x11_display_text_property_to_text_list(carg0, carg1, carg2, carg3, carg4, carg5)
-	runtime.KeepAlive(display)
-	runtime.KeepAlive(encoding)
-	runtime.KeepAlive(format)
-	runtime.KeepAlive(text)
-	runtime.KeepAlive(length)
-	runtime.KeepAlive(list)
-
-	var goret int
-
-	goret = int(cret)
-
-	return goret
 }
 
 // Ungrab wraps gdk_x11_display_ungrab

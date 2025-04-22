@@ -2321,7 +2321,7 @@ func GetRoot() Object {
 //
 // Gets name string for the GUI toolkit implementing ATK for this application.
 func GetToolkitName() string {
-	var cret *C.gchar // return, none, string, casted *C.gchar
+	var cret *C.gchar // return, none, string
 
 	cret = C.atk_get_toolkit_name()
 
@@ -2339,7 +2339,7 @@ func GetToolkitName() string {
 //
 // Gets version string for the GUI toolkit implementing ATK for this application.
 func GetToolkitVersion() string {
-	var cret *C.gchar // return, none, string, casted *C.gchar
+	var cret *C.gchar // return, none, string
 
 	cret = C.atk_get_toolkit_version()
 
@@ -2357,7 +2357,7 @@ func GetToolkitVersion() string {
 //
 // Gets the current version for ATK.
 func GetVersion() string {
-	var cret *C.gchar // return, none, string, casted *C.gchar
+	var cret *C.gchar // return, none, string
 
 	cret = C.atk_get_version()
 
@@ -2648,7 +2648,7 @@ func (action *ActionInstance) DoAction(i int) bool {
 func (action *ActionInstance) GetActionDescription(i int) string {
 	var carg0 *C.AtkAction // in, none, converted
 	var carg1 C.gint       // in, none, casted
-	var cret  *C.gchar     // return, none, string, casted *C.gchar
+	var cret  *C.gchar     // return, none, string
 
 	carg0 = (*C.AtkAction)(UnsafeActionToGlibNone(action))
 	carg1 = C.gint(i)
@@ -2699,7 +2699,7 @@ func (action *ActionInstance) GetActionDescription(i int) string {
 func (action *ActionInstance) GetKeybinding(i int) string {
 	var carg0 *C.AtkAction // in, none, converted
 	var carg1 C.gint       // in, none, casted
-	var cret  *C.gchar     // return, none, string, casted *C.gchar
+	var cret  *C.gchar     // return, none, string
 
 	carg0 = (*C.AtkAction)(UnsafeActionToGlibNone(action))
 	carg1 = C.gint(i)
@@ -2729,7 +2729,7 @@ func (action *ActionInstance) GetKeybinding(i int) string {
 func (action *ActionInstance) GetLocalizedName(i int) string {
 	var carg0 *C.AtkAction // in, none, converted
 	var carg1 C.gint       // in, none, casted
-	var cret  *C.gchar     // return, none, string, casted *C.gchar
+	var cret  *C.gchar     // return, none, string
 
 	carg0 = (*C.AtkAction)(UnsafeActionToGlibNone(action))
 	carg1 = C.gint(i)
@@ -2796,7 +2796,7 @@ func (action *ActionInstance) GetNActions() int {
 func (action *ActionInstance) GetActionName(i int) string {
 	var carg0 *C.AtkAction // in, none, converted
 	var carg1 C.gint       // in, none, casted
-	var cret  *C.gchar     // return, none, string, casted *C.gchar
+	var cret  *C.gchar     // return, none, string
 
 	carg0 = (*C.AtkAction)(UnsafeActionToGlibNone(action))
 	carg1 = C.gint(i)
@@ -2827,7 +2827,7 @@ func (action *ActionInstance) GetActionName(i int) string {
 func (action *ActionInstance) SetActionDescription(i int, desc string) bool {
 	var carg0 *C.AtkAction // in, none, converted
 	var carg1 C.gint       // in, none, casted
-	var carg2 *C.gchar     // in, none, string, casted *C.gchar
+	var carg2 *C.gchar     // in, none, string
 	var cret  C.gboolean   // return
 
 	carg0 = (*C.AtkAction)(UnsafeActionToGlibNone(action))
@@ -3683,8 +3683,8 @@ func UnsafeDocumentToGlibFull(c Document) unsafe.Pointer {
 // Retrieves the value of the given @attribute_name inside @document.
 func (document *DocumentInstance) GetAttributeValue(attributeName string) string {
 	var carg0 *C.AtkDocument // in, none, converted
-	var carg1 *C.gchar       // in, none, string, casted *C.gchar
-	var cret  *C.gchar       // return, none, string, casted *C.gchar
+	var carg1 *C.gchar       // in, none, string
+	var cret  *C.gchar       // return, none, string
 
 	carg0 = (*C.AtkDocument)(UnsafeDocumentToGlibNone(document))
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(attributeName)))
@@ -3760,8 +3760,8 @@ func (document *DocumentInstance) GetPageCount() int {
 // Sets the value for the given @attribute_name inside @document.
 func (document *DocumentInstance) SetAttributeValue(attributeName string, attributeValue string) bool {
 	var carg0 *C.AtkDocument // in, none, converted
-	var carg1 *C.gchar       // in, none, string, casted *C.gchar
-	var carg2 *C.gchar       // in, none, string, casted *C.gchar
+	var carg1 *C.gchar       // in, none, string
+	var carg2 *C.gchar       // in, none, string
 	var cret  C.gboolean     // return
 
 	carg0 = (*C.AtkDocument)(UnsafeDocumentToGlibNone(document))
@@ -4040,7 +4040,7 @@ func (text *EditableTextInstance) DeleteText(startPos int, endPos int) {
 // Insert text at a given position.
 func (text *EditableTextInstance) InsertText(str string, length int, position *int) {
 	var carg0 *C.AtkEditableText // in, none, converted
-	var carg1 *C.gchar           // in, none, string, casted *C.gchar
+	var carg1 *C.gchar           // in, none, string
 	var carg2 C.gint             // in, none, casted
 	var carg3 *C.gint            // in, transfer: none, C Pointers: 1, Name: gint
 
@@ -4087,7 +4087,7 @@ func (text *EditableTextInstance) PasteText(position int) {
 // Set text contents of @text.
 func (text *EditableTextInstance) SetTextContents(str string) {
 	var carg0 *C.AtkEditableText // in, none, converted
-	var carg1 *C.gchar           // in, none, string, casted *C.gchar
+	var carg1 *C.gchar           // in, none, string
 
 	carg0 = (*C.AtkEditableText)(UnsafeEditableTextToGlibNone(text))
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(str)))
@@ -4513,7 +4513,7 @@ func UnsafeImageToGlibFull(c Image) unsafe.Pointer {
 // Get a textual description of this image.
 func (image *ImageInstance) GetImageDescription() string {
 	var carg0 *C.AtkImage // in, none, converted
-	var cret  *C.gchar    // return, none, string, casted *C.gchar
+	var cret  *C.gchar    // return, none, string
 
 	carg0 = (*C.AtkImage)(UnsafeImageToGlibNone(image))
 
@@ -4535,7 +4535,7 @@ func (image *ImageInstance) GetImageDescription() string {
 // Retrieves the locale identifier associated to the #AtkImage.
 func (image *ImageInstance) GetImageLocale() string {
 	var carg0 *C.AtkImage // in, none, converted
-	var cret  *C.gchar    // return, none, string, casted *C.gchar
+	var cret  *C.gchar    // return, none, string
 
 	carg0 = (*C.AtkImage)(UnsafeImageToGlibNone(image))
 
@@ -4632,7 +4632,7 @@ func (image *ImageInstance) GetImageSize() (int, int) {
 // Sets the textual description for this image.
 func (image *ImageInstance) SetImageDescription(description string) bool {
 	var carg0 *C.AtkImage // in, none, converted
-	var carg1 *C.gchar    // in, none, string, casted *C.gchar
+	var carg1 *C.gchar    // in, none, string
 	var cret  C.gboolean  // return
 
 	carg0 = (*C.AtkImage)(UnsafeImageToGlibNone(image))
@@ -5223,7 +5223,7 @@ func UnsafeStreamableContentToGlibFull(c StreamableContent) unsafe.Pointer {
 func (streamable *StreamableContentInstance) GetMIMEType(i int) string {
 	var carg0 *C.AtkStreamableContent // in, none, converted
 	var carg1 C.gint                  // in, none, casted
-	var cret  *C.gchar                // return, none, string, casted *C.gchar
+	var cret  *C.gchar                // return, none, string
 
 	carg0 = (*C.AtkStreamableContent)(UnsafeStreamableContentToGlibNone(streamable))
 	carg1 = C.gint(i)
@@ -5274,7 +5274,7 @@ func (streamable *StreamableContentInstance) GetNMIMETypes() int {
 // Gets the content in the specified mime type.
 func (streamable *StreamableContentInstance) GetStream(mimeType string) *glib.IOChannel {
 	var carg0 *C.AtkStreamableContent // in, none, converted
-	var carg1 *C.gchar                // in, none, string, casted *C.gchar
+	var carg1 *C.gchar                // in, none, string
 	var cret  *C.GIOChannel           // return, full, converted
 
 	carg0 = (*C.AtkStreamableContent)(UnsafeStreamableContentToGlibNone(streamable))
@@ -5313,8 +5313,8 @@ func (streamable *StreamableContentInstance) GetStream(mimeType string) *glib.IO
 // get_stream to work nonetheless, since not all GIOChannels connect to URIs.
 func (streamable *StreamableContentInstance) GetURI(mimeType string) string {
 	var carg0 *C.AtkStreamableContent // in, none, converted
-	var carg1 *C.gchar                // in, none, string, casted *C.gchar
-	var cret  *C.gchar                // return, none, string, casted *C.gchar
+	var carg1 *C.gchar                // in, none, string
+	var cret  *C.gchar                // return, none, string
 
 	carg0 = (*C.AtkStreamableContent)(UnsafeStreamableContentToGlibNone(streamable))
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(mimeType)))
@@ -5839,7 +5839,7 @@ func (table *TableInstance) GetCaption() Object {
 func (table *TableInstance) GetColumnDescription(column int) string {
 	var carg0 *C.AtkTable // in, none, converted
 	var carg1 C.gint      // in, none, casted
-	var cret  *C.gchar    // return, none, string, casted *C.gchar
+	var cret  *C.gchar    // return, none, string
 
 	carg0 = (*C.AtkTable)(UnsafeTableToGlibNone(table))
 	carg1 = C.gint(column)
@@ -5978,7 +5978,7 @@ func (table *TableInstance) GetNRows() int {
 func (table *TableInstance) GetRowDescription(row int) string {
 	var carg0 *C.AtkTable // in, none, converted
 	var carg1 C.gint      // in, none, casted
-	var cret  *C.gchar    // return, none, string, casted *C.gchar
+	var cret  *C.gchar    // return, none, string
 
 	carg0 = (*C.AtkTable)(UnsafeTableToGlibNone(table))
 	carg1 = C.gint(row)
@@ -6380,7 +6380,7 @@ func (table *TableInstance) SetCaption(caption Object) {
 func (table *TableInstance) SetColumnDescription(column int, description string) {
 	var carg0 *C.AtkTable // in, none, converted
 	var carg1 C.gint      // in, none, casted
-	var carg2 *C.gchar    // in, none, string, casted *C.gchar
+	var carg2 *C.gchar    // in, none, string
 
 	carg0 = (*C.AtkTable)(UnsafeTableToGlibNone(table))
 	carg1 = C.gint(column)
@@ -6428,7 +6428,7 @@ func (table *TableInstance) SetColumnHeader(column int, header Object) {
 func (table *TableInstance) SetRowDescription(row int, description string) {
 	var carg0 *C.AtkTable // in, none, converted
 	var carg1 C.gint      // in, none, casted
-	var carg2 *C.gchar    // in, none, string, casted *C.gchar
+	var carg2 *C.gchar    // in, none, string
 
 	carg0 = (*C.AtkTable)(UnsafeTableToGlibNone(table))
 	carg1 = C.gint(row)
@@ -7521,7 +7521,7 @@ func (text *TextInstance) GetSelection(selectionNum int) (int, int, string) {
 	var carg1 C.gint     // in, none, casted
 	var carg2 C.gint     // out, full, casted
 	var carg3 C.gint     // out, full, casted
-	var cret  *C.gchar   // return, full, string, casted *C.gchar
+	var cret  *C.gchar   // return, full, string
 
 	carg0 = (*C.AtkText)(UnsafeTextToGlibNone(text))
 	carg1 = C.gint(selectionNum)
@@ -7593,7 +7593,7 @@ func (text *TextInstance) GetStringAtOffset(offset int, granularity TextGranular
 	var carg2 C.AtkTextGranularity // in, none, casted
 	var carg3 C.gint               // out, full, casted
 	var carg4 C.gint               // out, full, casted
-	var cret  *C.gchar             // return, full, string, casted *C.gchar
+	var cret  *C.gchar             // return, full, string
 
 	carg0 = (*C.AtkText)(UnsafeTextToGlibNone(text))
 	carg1 = C.gint(offset)
@@ -7632,7 +7632,7 @@ func (text *TextInstance) GetText(startOffset int, endOffset int) string {
 	var carg0 *C.AtkText // in, none, converted
 	var carg1 C.gint     // in, none, casted
 	var carg2 C.gint     // in, none, casted
-	var cret  *C.gchar   // return, full, string, casted *C.gchar
+	var cret  *C.gchar   // return, full, string
 
 	carg0 = (*C.AtkText)(UnsafeTextToGlibNone(text))
 	carg1 = C.gint(startOffset)
@@ -8278,7 +8278,7 @@ func (obj *ValueInstance) GetSubRanges() []*Range {
 func (obj *ValueInstance) GetValueAndText() (float64, string) {
 	var carg0 *C.AtkValue // in, none, converted
 	var carg1 C.gdouble   // out, full, casted
-	var carg2 *C.gchar    // out, full, string, casted *C.gchar
+	var carg2 *C.gchar    // out, full, string
 
 	carg0 = (*C.AtkValue)(UnsafeValueToGlibNone(obj))
 
@@ -8764,7 +8764,7 @@ func (link_ *HyperlinkInstance) GetStartIndex() int {
 func (link_ *HyperlinkInstance) GetURI(i int) string {
 	var carg0 *C.AtkHyperlink // in, none, converted
 	var carg1 C.gint          // in, none, casted
-	var cret  *C.gchar        // return, full, string, casted *C.gchar
+	var cret  *C.gchar        // return, full, string
 
 	carg0 = (*C.AtkHyperlink)(UnsafeHyperlinkToGlibNone(link_))
 	carg1 = C.gint(i)
@@ -9285,7 +9285,7 @@ func (object *ObjectInstance) AddRelationship(relationship RelationType, target 
 // Gets the accessible id of the accessible.
 func (accessible *ObjectInstance) GetAccessibleID() string {
 	var carg0 *C.AtkObject // in, none, converted
-	var cret  *C.gchar     // return, none, string, casted *C.gchar
+	var cret  *C.gchar     // return, none, string
 
 	carg0 = (*C.AtkObject)(UnsafeObjectToGlibNone(accessible))
 
@@ -9307,7 +9307,7 @@ func (accessible *ObjectInstance) GetAccessibleID() string {
 // Gets the accessible description of the accessible.
 func (accessible *ObjectInstance) GetDescription() string {
 	var carg0 *C.AtkObject // in, none, converted
-	var cret  *C.gchar     // return, none, string, casted *C.gchar
+	var cret  *C.gchar     // return, none, string
 
 	carg0 = (*C.AtkObject)(UnsafeObjectToGlibNone(accessible))
 
@@ -9329,7 +9329,7 @@ func (accessible *ObjectInstance) GetDescription() string {
 // Gets the help text associated with the accessible.
 func (accessible *ObjectInstance) GetHelpText() string {
 	var carg0 *C.AtkObject // in, none, converted
-	var cret  *C.gchar     // return, none, string, casted *C.gchar
+	var cret  *C.gchar     // return, none, string
 
 	carg0 = (*C.AtkObject)(UnsafeObjectToGlibNone(accessible))
 
@@ -9396,7 +9396,7 @@ func (accessible *ObjectInstance) GetNAccessibleChildren() int {
 // Gets the accessible name of the accessible.
 func (accessible *ObjectInstance) GetName() string {
 	var carg0 *C.AtkObject // in, none, converted
-	var cret  *C.gchar     // return, none, string, casted *C.gchar
+	var cret  *C.gchar     // return, none, string
 
 	carg0 = (*C.AtkObject)(UnsafeObjectToGlibNone(accessible))
 
@@ -9419,7 +9419,7 @@ func (accessible *ObjectInstance) GetName() string {
 // of @accessible.
 func (accessible *ObjectInstance) GetObjectLocale() string {
 	var carg0 *C.AtkObject // in, none, converted
-	var cret  *C.gchar     // return, none, string, casted *C.gchar
+	var cret  *C.gchar     // return, none, string
 
 	carg0 = (*C.AtkObject)(UnsafeObjectToGlibNone(accessible))
 
@@ -9666,7 +9666,7 @@ func (object *ObjectInstance) RemoveRelationship(relationship RelationType, targ
 // reading, or for automatic regression testing.
 func (accessible *ObjectInstance) SetAccessibleID(id string) {
 	var carg0 *C.AtkObject // in, none, converted
-	var carg1 *C.gchar     // in, none, string, casted *C.gchar
+	var carg1 *C.gchar     // in, none, string
 
 	carg0 = (*C.AtkObject)(UnsafeObjectToGlibNone(accessible))
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(id)))
@@ -9689,7 +9689,7 @@ func (accessible *ObjectInstance) SetAccessibleID(id string) {
 // the name to a empty value you can use "".
 func (accessible *ObjectInstance) SetDescription(description string) {
 	var carg0 *C.AtkObject // in, none, converted
-	var carg1 *C.gchar     // in, none, string, casted *C.gchar
+	var carg1 *C.gchar     // in, none, string
 
 	carg0 = (*C.AtkObject)(UnsafeObjectToGlibNone(accessible))
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(description)))
@@ -9713,7 +9713,7 @@ func (accessible *ObjectInstance) SetDescription(description string) {
 // an empty value, you can use "".
 func (accessible *ObjectInstance) SetHelpText(helpText string) {
 	var carg0 *C.AtkObject // in, none, converted
-	var carg1 *C.gchar     // in, none, string, casted *C.gchar
+	var carg1 *C.gchar     // in, none, string
 
 	carg0 = (*C.AtkObject)(UnsafeObjectToGlibNone(accessible))
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(helpText)))
@@ -9736,7 +9736,7 @@ func (accessible *ObjectInstance) SetHelpText(helpText string) {
 // a empty value you can use "".
 func (accessible *ObjectInstance) SetName(name string) {
 	var carg0 *C.AtkObject // in, none, converted
-	var carg1 *C.gchar     // in, none, string, casted *C.gchar
+	var carg1 *C.gchar     // in, none, string
 
 	carg0 = (*C.AtkObject)(UnsafeObjectToGlibNone(accessible))
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(name)))
@@ -10138,7 +10138,7 @@ func NewPlug() Object {
 // #AtkSocket, so it could embed the plug.
 func (plug *PlugInstance) GetID() string {
 	var carg0 *C.AtkPlug // in, none, converted
-	var cret  *C.gchar   // return, full, string, casted *C.gchar
+	var cret  *C.gchar   // return, full, string
 
 	carg0 = (*C.AtkPlug)(UnsafePlugToGlibNone(plug))
 
@@ -11100,7 +11100,7 @@ func NewSocket() Object {
 // as needed.
 func (obj *SocketInstance) Embed(plugId string) {
 	var carg0 *C.AtkSocket // in, none, converted
-	var carg1 *C.gchar     // in, none, string, casted *C.gchar
+	var carg1 *C.gchar     // in, none, string
 
 	carg0 = (*C.AtkSocket)(UnsafeSocketToGlibNone(obj))
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(plugId)))
@@ -13312,7 +13312,7 @@ func UnsafeRangeToGlibFull(r *Range) unsafe.Pointer {
 func NewRange(lowerLimit float64, upperLimit float64, description string) *Range {
 	var carg1 C.gdouble   // in, none, casted
 	var carg2 C.gdouble   // in, none, casted
-	var carg3 *C.gchar    // in, none, string, casted *C.gchar
+	var carg3 *C.gchar    // in, none, string
 	var cret  *C.AtkRange // return, full, converted
 
 	carg1 = C.gdouble(lowerLimit)
@@ -13362,7 +13362,7 @@ func (src *Range) Copy() *Range {
 // Returns the human readable description of @range
 func (_range *Range) GetDescription() string {
 	var carg0 *C.AtkRange // in, none, converted
-	var cret  *C.gchar    // return, none, string, casted *C.gchar
+	var cret  *C.gchar    // return, none, string
 
 	carg0 = (*C.AtkRange)(UnsafeRangeToGlibNone(_range))
 

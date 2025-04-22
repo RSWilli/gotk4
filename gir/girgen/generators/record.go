@@ -583,8 +583,7 @@ type RecordGenerator struct {
 	ReceiverName string
 
 	// sub generators:
-	Constructors GeneratorList
-	Methods      GeneratorList
+	SubGenerators GeneratorList
 }
 
 func (g *RecordGenerator) Generate(w *file.Package) {
@@ -695,8 +694,7 @@ func (g *RecordGenerator) Generate(w *file.Package) {
 
 	GenerateAll(
 		w,
-		g.Constructors,
-		g.Methods,
+		g.SubGenerators,
 	)
 }
 
@@ -720,13 +718,19 @@ func NewRecordGenerator(r *typesystem.Record) *RecordGenerator {
 
 	for _, constructor := range r.Constructors {
 		if constGen := NewCallableGenerator(constructor); constGen != nil {
-			g.Constructors = append(g.Constructors, constGen)
+			g.SubGenerators = append(g.SubGenerators, constGen)
+		}
+	}
+
+	for _, method := range r.Functions {
+		if methGen := NewCallableGenerator(method); methGen != nil {
+			g.SubGenerators = append(g.SubGenerators, methGen)
 		}
 	}
 
 	for _, method := range r.Methods {
 		if methGen := NewCallableGenerator(method); methGen != nil {
-			g.Methods = append(g.Methods, methGen)
+			g.SubGenerators = append(g.SubGenerators, methGen)
 		}
 	}
 

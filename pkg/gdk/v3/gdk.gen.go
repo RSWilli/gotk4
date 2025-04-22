@@ -9237,7 +9237,7 @@ func GetDefaultRootWindow() Window {
 // Gets the display name specified in the command line arguments passed
 // to gdk_init() or gdk_parse_args(), if any.
 func GetDisplayArgName() string {
-	var cret *C.gchar // return, none, string, casted *C.gchar
+	var cret *C.gchar // return, none, string
 
 	cret = C.gdk_get_display_arg_name()
 
@@ -9258,7 +9258,7 @@ func GetDisplayArgName() string {
 // commandline option, the default value is the program name (determined
 // with g_get_prgname()) with the first character converted to uppercase.
 func GetProgramClass() string {
-	var cret *C.gchar // return, none, string, casted *C.gchar
+	var cret *C.gchar // return, none, string
 
 	cret = C.gdk_get_program_class()
 
@@ -9337,7 +9337,7 @@ func KeyvalConvertCase(symbol uint) (uint, uint) {
 // `gdk/gdkkeysyms.h` header file
 // but without the leading “GDK_KEY_”.
 func KeyvalFromName(keyvalName string) uint {
-	var carg1 *C.gchar // in, none, string, casted *C.gchar
+	var carg1 *C.gchar // in, none, string
 	var cret  C.guint  // return, none, casted
 
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(keyvalName)))
@@ -9428,7 +9428,7 @@ func KeyvalIsUpper(keyval uint) bool {
 // but without the leading “GDK_KEY_”.
 func KeyvalName(keyval uint) string {
 	var carg1 C.guint  // in, none, casted
-	var cret  *C.gchar // return, none, string, casted *C.gchar
+	var cret  *C.gchar // return, none, string
 
 	carg1 = C.guint(keyval)
 
@@ -9554,7 +9554,7 @@ func NotifyStartupComplete() {
 // gtk_window_set_auto_startup_notification() is called to
 // disable that feature.
 func NotifyStartupCompleteWithID(startupId string) {
-	var carg1 *C.gchar // in, none, string, casted *C.gchar
+	var carg1 *C.gchar // in, none, string
 
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(startupId)))
 	defer C.free(unsafe.Pointer(carg1))
@@ -9830,7 +9830,7 @@ func PixbufGetFromWindow(window Window, srcX int, srcY int, width int, height in
 // gtk_init(), gtk_init_with_args() or gtk_init_check()
 // in order to take effect.
 func SetAllowedBackends(backends string) {
-	var carg1 *C.gchar // in, none, string, casted *C.gchar
+	var carg1 *C.gchar // in, none, string
 
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(backends)))
 	defer C.free(unsafe.Pointer(carg1))
@@ -9872,7 +9872,7 @@ func SetDoubleClickTime(msec uint) {
 // The program class can still be overridden with the --class command
 // line option.
 func SetProgramClass(programClass string) {
-	var carg1 *C.gchar // in, none, string, casted *C.gchar
+	var carg1 *C.gchar // in, none, string
 
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(programClass)))
 	defer C.free(unsafe.Pointer(carg1))
@@ -9916,7 +9916,7 @@ func SetShowEvents(showEvents bool) {
 // Obtains a desktop-wide setting, such as the double-click time,
 // for the default screen. See gdk_screen_get_setting().
 func SettingGet(name string, value *gobject.Value) bool {
-	var carg1 *C.gchar   // in, none, string, casted *C.gchar
+	var carg1 *C.gchar   // in, none, string
 	var carg2 *C.GValue  // in, none, converted
 	var cret  C.gboolean // return
 
@@ -10324,8 +10324,8 @@ func UnicodeToKeyval(wc uint32) uint {
 // is not specified; it may be as pseudo-escape sequences
 // \x{ABCD}, or it may be in some other form of approximation.
 func UTF8ToStringTarget(str string) string {
-	var carg1 *C.gchar // in, none, string, casted *C.gchar
-	var cret  *C.gchar // return, full, string, casted *C.gchar
+	var carg1 *C.gchar // in, none, string
+	var cret  *C.gchar // return, full, string
 
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(str)))
 	defer C.free(unsafe.Pointer(carg1))
@@ -11019,7 +11019,7 @@ func NewCursorForDisplay(display Display, cursorType CursorType) Cursor {
 // - ![](zoom_out_cursor.png) "zoom-out"
 func NewCursorFromName(display Display, name string) Cursor {
 	var carg1 *C.GdkDisplay // in, none, converted
-	var carg2 *C.gchar      // in, none, string, casted *C.gchar
+	var carg2 *C.gchar      // in, none, string
 	var cret  *C.GdkCursor  // return, full, converted
 
 	carg1 = (*C.GdkDisplay)(UnsafeDisplayToGlibNone(display))
@@ -11825,7 +11825,7 @@ func (device *DeviceInstance) GetNKeys() int {
 // Determines the name of the device.
 func (device *DeviceInstance) GetName() string {
 	var carg0 *C.GdkDevice // in, none, converted
-	var cret  *C.gchar     // return, none, string, casted *C.gchar
+	var cret  *C.gchar     // return, none, string
 
 	carg0 = (*C.GdkDevice)(UnsafeDeviceToGlibNone(device))
 
@@ -11917,7 +11917,7 @@ func (device *DeviceInstance) GetPositionDouble() (Screen, float64, float64) {
 // it. See gdk_device_get_vendor_id() for more information.
 func (device *DeviceInstance) GetProductID() string {
 	var carg0 *C.GdkDevice // in, none, converted
-	var cret  *C.gchar     // return, none, string, casted *C.gchar
+	var cret  *C.gchar     // return, none, string
 
 	carg0 = (*C.GdkDevice)(UnsafeDeviceToGlibNone(device))
 
@@ -12008,7 +12008,7 @@ func (device *DeviceInstance) GetSource() InputSource {
 // ]|
 func (device *DeviceInstance) GetVendorID() string {
 	var carg0 *C.GdkDevice // in, none, converted
-	var cret  *C.gchar     // return, none, string, casted *C.gchar
+	var cret  *C.gchar     // return, none, string
 
 	carg0 = (*C.GdkDevice)(UnsafeDeviceToGlibNone(device))
 
@@ -13108,7 +13108,7 @@ func DisplayGetDefault() Display {
 //
 // Opens a display.
 func DisplayOpen(displayName string) Display {
-	var carg1 *C.gchar      // in, none, string, casted *C.gchar
+	var carg1 *C.gchar      // in, none, string
 	var cret  *C.GdkDisplay // return, none, converted
 
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(displayName)))
@@ -13470,7 +13470,7 @@ func (display *DisplayInstance) GetNMonitors() int {
 // Gets the name of the display.
 func (display *DisplayInstance) GetName() string {
 	var carg0 *C.GdkDisplay // in, none, converted
-	var cret  *C.gchar      // return, none, string, casted *C.gchar
+	var cret  *C.gchar      // return, none, string
 
 	carg0 = (*C.GdkDisplay)(UnsafeDisplayToGlibNone(display))
 
@@ -13605,7 +13605,7 @@ func (display *DisplayInstance) ListSeats() []Seat {
 // disable that feature.
 func (display *DisplayInstance) NotifyStartupComplete(startupId string) {
 	var carg0 *C.GdkDisplay // in, none, converted
-	var carg1 *C.gchar      // in, none, string, casted *C.gchar
+	var carg1 *C.gchar      // in, none, string
 
 	carg0 = (*C.GdkDisplay)(UnsafeDisplayToGlibNone(display))
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(startupId)))
@@ -14092,7 +14092,7 @@ func (manager *DisplayManagerInstance) ListDisplays() []Display {
 // Opens a display.
 func (manager *DisplayManagerInstance) OpenDisplay(name string) Display {
 	var carg0 *C.GdkDisplayManager // in, none, converted
-	var carg1 *C.gchar             // in, none, string, casted *C.gchar
+	var carg1 *C.gchar             // in, none, string
 	var cret  *C.GdkDisplay        // return, none, converted
 
 	carg0 = (*C.GdkDisplayManager)(UnsafeDisplayManagerToGlibNone(manager))
@@ -17396,7 +17396,7 @@ func (screen *ScreenInstance) GetRootWindow() Window {
 // more information.
 func (screen *ScreenInstance) GetSetting(name string, value *gobject.Value) bool {
 	var carg0 *C.GdkScreen // in, none, converted
-	var carg1 *C.gchar     // in, none, string, casted *C.gchar
+	var carg1 *C.gchar     // in, none, string
 	var carg2 *C.GValue    // in, none, converted
 	var cret  C.gboolean   // return
 
@@ -22727,7 +22727,7 @@ func (window *WindowInstance) SetPassThrough(passThrough bool) {
 // non-interchangeable kind of window.
 func (window *WindowInstance) SetRole(role string) {
 	var carg0 *C.GdkWindow // in, none, converted
-	var carg1 *C.gchar     // in, none, string, casted *C.gchar
+	var carg1 *C.gchar     // in, none, string
 
 	carg0 = (*C.GdkWindow)(UnsafeWindowToGlibNone(window))
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(role)))
@@ -22867,7 +22867,7 @@ func (window *WindowInstance) SetSourceEvents(source InputSource, eventMask Even
 // instead of this low-level function.
 func (window *WindowInstance) SetStartupID(startupId string) {
 	var carg0 *C.GdkWindow // in, none, converted
-	var carg1 *C.gchar     // in, none, string, casted *C.gchar
+	var carg1 *C.gchar     // in, none, string
 
 	carg0 = (*C.GdkWindow)(UnsafeWindowToGlibNone(window))
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(startupId)))
@@ -22915,7 +22915,7 @@ func (window *WindowInstance) SetSupportMultidevice(supportMultidevice bool) {
 // user-readable strings in GDK/GTK+). @title may not be %NULL.
 func (window *WindowInstance) SetTitle(title string) {
 	var carg0 *C.GdkWindow // in, none, converted
-	var carg1 *C.gchar     // in, none, string, casted *C.gchar
+	var carg1 *C.gchar     // in, none, string
 
 	carg0 = (*C.GdkWindow)(UnsafeWindowToGlibNone(window))
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(title)))
@@ -25653,7 +25653,7 @@ func (rgba *RGBA) Copy() *RGBA {
 // a is a floating point value in the range 0 to 1.
 func (rgba *RGBA) Parse(spec string) bool {
 	var carg0 *C.GdkRGBA // in, none, converted
-	var carg1 *C.gchar   // in, none, string, casted *C.gchar
+	var carg1 *C.gchar   // in, none, string
 	var cret  C.gboolean // return
 
 	carg0 = (*C.GdkRGBA)(UnsafeRGBAToGlibNone(rgba))
@@ -25695,7 +25695,7 @@ func (rgba *RGBA) Parse(spec string) bool {
 // different representation.
 func (rgba *RGBA) ToString() string {
 	var carg0 *C.GdkRGBA // in, none, converted
-	var cret  *C.gchar   // return, full, string, casted *C.gchar
+	var cret  *C.gchar   // return, full, string
 
 	carg0 = (*C.GdkRGBA)(UnsafeRGBAToGlibNone(rgba))
 

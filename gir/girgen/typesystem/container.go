@@ -46,7 +46,7 @@ func (c *Container) CGoType(pointers int) string {
 
 // CType implements Type.
 func (c *Container) CType(pointers int) string {
-	return GetPointers(pointers) + c.C
+	return c.C + GetPointers(pointers)
 }
 
 // GIRName implements Type.

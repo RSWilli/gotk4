@@ -5840,7 +5840,7 @@ func BusUnwatchName(watcherId uint) {
 // Checks if a content type can be executable. Note that for instance
 // things like text files can be executables (i.e. scripts and batch files).
 func ContentTypeCanBeExecutable(typ string) bool {
-	var carg1 *C.gchar   // in, none, string, casted *C.gchar
+	var carg1 *C.gchar   // in, none, string
 	var cret  C.gboolean // return
 
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(typ)))
@@ -5871,8 +5871,8 @@ func ContentTypeCanBeExecutable(typ string) bool {
 //
 // Compares two content types for equality.
 func ContentTypeEquals(type1 string, type2 string) bool {
-	var carg1 *C.gchar   // in, none, string, casted *C.gchar
-	var carg2 *C.gchar   // in, none, string, casted *C.gchar
+	var carg1 *C.gchar   // in, none, string
+	var carg2 *C.gchar   // in, none, string
 	var cret  C.gboolean // return
 
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(type1)))
@@ -5905,8 +5905,8 @@ func ContentTypeEquals(type1 string, type2 string) bool {
 //
 // Tries to find a content type based on the mime type name.
 func ContentTypeFromMIMEType(mimeType string) string {
-	var carg1 *C.gchar // in, none, string, casted *C.gchar
-	var cret  *C.gchar // return, full, string, casted *C.gchar
+	var carg1 *C.gchar // in, none, string
+	var cret  *C.gchar // return, full, string
 
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(mimeType)))
 	defer C.free(unsafe.Pointer(carg1))
@@ -5934,8 +5934,8 @@ func ContentTypeFromMIMEType(mimeType string) string {
 //
 // Gets the human readable description of the content type.
 func ContentTypeGetDescription(typ string) string {
-	var carg1 *C.gchar // in, none, string, casted *C.gchar
-	var cret  *C.gchar // return, full, string, casted *C.gchar
+	var carg1 *C.gchar // in, none, string
+	var cret  *C.gchar // return, full, string
 
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(typ)))
 	defer C.free(unsafe.Pointer(carg1))
@@ -5967,8 +5967,8 @@ func ContentTypeGetDescription(typ string) string {
 // [shared-mime-info](http://www.freedesktop.org/wiki/Specifications/shared-mime-info-spec)
 // specification for more on the generic icon name.
 func ContentTypeGetGenericIconName(typ string) string {
-	var carg1 *C.gchar // in, none, string, casted *C.gchar
-	var cret  *C.gchar // return, full, string, casted *C.gchar
+	var carg1 *C.gchar // in, none, string
+	var cret  *C.gchar // return, full, string
 
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(typ)))
 	defer C.free(unsafe.Pointer(carg1))
@@ -5996,7 +5996,7 @@ func ContentTypeGetGenericIconName(typ string) string {
 //
 // Gets the icon for a content type.
 func ContentTypeGetIcon(typ string) Icon {
-	var carg1 *C.gchar // in, none, string, casted *C.gchar
+	var carg1 *C.gchar // in, none, string
 	var cret  *C.GIcon // return, full, converted
 
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(typ)))
@@ -6045,8 +6045,8 @@ func ContentTypeGetMIMEDirs() []string {
 //
 // Gets the mime type for the content type, if one is registered.
 func ContentTypeGetMIMEType(typ string) string {
-	var carg1 *C.gchar // in, none, string, casted *C.gchar
-	var cret  *C.gchar // return, full, string, casted *C.gchar
+	var carg1 *C.gchar // in, none, string
+	var cret  *C.gchar // return, full, string
 
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(typ)))
 	defer C.free(unsafe.Pointer(carg1))
@@ -6074,7 +6074,7 @@ func ContentTypeGetMIMEType(typ string) string {
 //
 // Gets the symbolic icon for a content type.
 func ContentTypeGetSymbolicIcon(typ string) Icon {
-	var carg1 *C.gchar // in, none, string, casted *C.gchar
+	var carg1 *C.gchar // in, none, string
 	var cret  *C.GIcon // return, full, converted
 
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(typ)))
@@ -6112,7 +6112,7 @@ func ContentTypeGuess(filename string, data []byte) (bool, string) {
 	var carg2 *C.guchar  // in, transfer: none, C Pointers: 1, Name: array[guchar], nullable, array (inner: *typesystem.CastablePrimitive, length-by: carg3)
 	var carg3 C.gsize    // implicit
 	var carg4 C.gboolean // out
-	var cret  *C.gchar   // return, full, string, casted *C.gchar
+	var cret  *C.gchar   // return, full, string
 
 	if filename != "" {
 		carg1 = (*C.gchar)(unsafe.Pointer(C.CString(filename)))
@@ -6192,8 +6192,8 @@ func ContentTypeGuessForTree(root File) []string {
 //
 // Determines if @type is a subset of @supertype.
 func ContentTypeIsA(typ string, supertype string) bool {
-	var carg1 *C.gchar   // in, none, string, casted *C.gchar
-	var carg2 *C.gchar   // in, none, string, casted *C.gchar
+	var carg1 *C.gchar   // in, none, string
+	var carg2 *C.gchar   // in, none, string
 	var cret  C.gboolean // return
 
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(typ)))
@@ -6228,8 +6228,8 @@ func ContentTypeIsA(typ string, supertype string) bool {
 // Determines if @type is a subset of @mime_type.
 // Convenience wrapper around g_content_type_is_a().
 func ContentTypeIsMIMEType(typ string, mimeType string) bool {
-	var carg1 *C.gchar   // in, none, string, casted *C.gchar
-	var carg2 *C.gchar   // in, none, string, casted *C.gchar
+	var carg1 *C.gchar   // in, none, string
+	var carg2 *C.gchar   // in, none, string
 	var cret  C.gboolean // return
 
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(typ)))
@@ -6265,7 +6265,7 @@ func ContentTypeIsMIMEType(typ string, mimeType string) bool {
 // while on win32 it is "*" and on OSX it is a dynamic type
 // or octet-stream.
 func ContentTypeIsUnknown(typ string) bool {
-	var carg1 *C.gchar   // in, none, string, casted *C.gchar
+	var carg1 *C.gchar   // in, none, string
 	var cret  C.gboolean // return
 
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(typ)))
@@ -6372,8 +6372,8 @@ func ContentTypesGetRegistered() []string {
 // which could be used in a D-Bus address like
 // `unix:nonce-tcp:host=127.0.0.1,port=42,noncefile=/run/bus-for-%3A0`.
 func DBusAddressEscapeValue(str string) string {
-	var carg1 *C.gchar // in, none, string, casted *C.gchar
-	var cret  *C.gchar // return, full, string, casted *C.gchar
+	var carg1 *C.gchar // in, none, string
+	var cret  *C.gchar // return, full, string
 
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(str)))
 	defer C.free(unsafe.Pointer(carg1))
@@ -6410,7 +6410,7 @@ func DBusAddressEscapeValue(str string) string {
 func DBusAddressGetForBusSync(cancellable context.Context, busType BusType) (string, error) {
 	var carg2 *C.GCancellable // in, none, converted, nullable
 	var carg1 C.GBusType      // in, none, casted
-	var cret  *C.gchar        // return, full, string, casted *C.gchar
+	var cret  *C.gchar        // return, full, string
 	var _cerr *C.GError       // out, full, converted, nullable
 
 	if cancellable != nil {
@@ -6455,7 +6455,7 @@ func DBusAddressGetForBusSync(cancellable context.Context, busType BusType) (str
 // g_dbus_address_get_stream_sync() for the synchronous version.
 func DBusAddressGetStream(cancellable context.Context, address string, callback AsyncReadyCallback) {
 	var carg2 *C.GCancellable       // in, none, converted, nullable
-	var carg1 *C.gchar              // in, none, string, casted *C.gchar
+	var carg1 *C.gchar              // in, none, string
 	var carg3 C.GAsyncReadyCallback // callback, scope: async, closure: carg4, nullable
 	var carg4 C.gpointer            // implicit
 
@@ -6493,7 +6493,7 @@ func DBusAddressGetStream(cancellable context.Context, address string, callback 
 // even on success.
 func DBusAddressGetStreamFinish(res AsyncResult) (string, IOStream, error) {
 	var carg1 *C.GAsyncResult // in, none, converted
-	var carg2 *C.gchar        // out, full, string, casted *C.gchar, nullable
+	var carg2 *C.gchar        // out, full, string, nullable-string
 	var cret  *C.GIOStream    // return, full, converted
 	var _cerr *C.GError       // out, full, converted, nullable
 
@@ -6543,8 +6543,8 @@ func DBusAddressGetStreamFinish(res AsyncResult) (string, IOStream, error) {
 // g_dbus_address_get_stream() for the asynchronous version.
 func DBusAddressGetStreamSync(cancellable context.Context, address string) (string, IOStream, error) {
 	var carg3 *C.GCancellable // in, none, converted, nullable
-	var carg1 *C.gchar        // in, none, string, casted *C.gchar
-	var carg2 *C.gchar        // out, full, string, casted *C.gchar, nullable
+	var carg1 *C.gchar        // in, none, string
+	var carg2 *C.gchar        // out, full, string, nullable-string
 	var cret  *C.GIOStream    // return, full, converted
 	var _cerr *C.GError       // out, full, converted, nullable
 
@@ -6586,8 +6586,8 @@ func DBusAddressGetStreamSync(cancellable context.Context, address string) (stri
 //
 // This is a language binding friendly version of g_dbus_escape_object_path_bytestring().
 func DBusEscapeObjectPath(s string) string {
-	var carg1 *C.gchar // in, none, string, casted *C.gchar
-	var cret  *C.gchar // return, full, string, casted *C.gchar
+	var carg1 *C.gchar // in, none, string
+	var cret  *C.gchar // return, full, string
 
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(s)))
 	defer C.free(unsafe.Pointer(carg1))
@@ -6631,7 +6631,7 @@ func DBusEscapeObjectPath(s string) string {
 // This can be reversed with g_dbus_unescape_object_path().
 func DBusEscapeObjectPathBytestring(bytes []uint8) string {
 	var carg1 *C.guint8 // in, transfer: none, C Pointers: 1, Name: array[guint8], array (inner: *typesystem.CastablePrimitive, zero-terminated)
-	var cret  *C.gchar  // return, full, string, casted *C.gchar
+	var cret  *C.gchar  // return, full, string
 
 	_ = bytes
 	_ = carg1
@@ -6665,7 +6665,7 @@ func DBusEscapeObjectPathBytestring(bytes []uint8) string {
 // Note that D-Bus GUIDs do not follow
 // [RFC 4122](https://datatracker.ietf.org/doc/html/rfc4122).
 func DBusGenerateGUID() string {
-	var cret *C.gchar // return, full, string, casted *C.gchar
+	var cret *C.gchar // return, full, string
 
 	cret = C.g_dbus_generate_guid()
 
@@ -6694,7 +6694,7 @@ func DBusGenerateGUID() string {
 // or #GDBusConnection - use g_dbus_is_supported_address() to do more
 // checks.
 func DBusIsAddress(str string) bool {
-	var carg1 *C.gchar   // in, none, string, casted *C.gchar
+	var carg1 *C.gchar   // in, none, string
 	var cret  C.gboolean // return
 
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(str)))
@@ -6728,7 +6728,7 @@ func DBusIsAddress(str string) bool {
 // because D-Bus error names are defined to have exactly the
 // same syntax as interface names.
 func DBusIsErrorName(str string) bool {
-	var carg1 *C.gchar   // in, none, string, casted *C.gchar
+	var carg1 *C.gchar   // in, none, string
 	var cret  C.gboolean // return
 
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(str)))
@@ -6761,7 +6761,7 @@ func DBusIsErrorName(str string) bool {
 // See the documentation for g_dbus_generate_guid() for more information about
 // the format of a GUID.
 func DBusIsGUID(str string) bool {
-	var carg1 *C.gchar   // in, none, string, casted *C.gchar
+	var carg1 *C.gchar   // in, none, string
 	var cret  C.gboolean // return
 
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(str)))
@@ -6791,7 +6791,7 @@ func DBusIsGUID(str string) bool {
 //
 // Checks if @string is a valid D-Bus interface name.
 func DBusIsInterfaceName(str string) bool {
-	var carg1 *C.gchar   // in, none, string, casted *C.gchar
+	var carg1 *C.gchar   // in, none, string
 	var cret  C.gboolean // return
 
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(str)))
@@ -6821,7 +6821,7 @@ func DBusIsInterfaceName(str string) bool {
 //
 // Checks if @string is a valid D-Bus member (e.g. signal or method) name.
 func DBusIsMemberName(str string) bool {
-	var carg1 *C.gchar   // in, none, string, casted *C.gchar
+	var carg1 *C.gchar   // in, none, string
 	var cret  C.gboolean // return
 
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(str)))
@@ -6851,7 +6851,7 @@ func DBusIsMemberName(str string) bool {
 //
 // Checks if @string is a valid D-Bus bus name (either unique or well-known).
 func DBusIsName(str string) bool {
-	var carg1 *C.gchar   // in, none, string, casted *C.gchar
+	var carg1 *C.gchar   // in, none, string
 	var cret  C.gboolean // return
 
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(str)))
@@ -6885,7 +6885,7 @@ func DBusIsName(str string) bool {
 // are valid. See the specification of the
 // [D-Bus address format](https://dbus.freedesktop.org/doc/dbus-specification.html#addresses).
 func DBusIsSupportedAddress(str string) (bool, error) {
-	var carg1 *C.gchar   // in, none, string, casted *C.gchar
+	var carg1 *C.gchar   // in, none, string
 	var cret  C.gboolean // return
 	var _cerr *C.GError  // out, full, converted, nullable
 
@@ -6920,7 +6920,7 @@ func DBusIsSupportedAddress(str string) (bool, error) {
 //
 // Checks if @string is a valid D-Bus unique bus name.
 func DBusIsUniqueName(str string) bool {
-	var carg1 *C.gchar   // in, none, string, casted *C.gchar
+	var carg1 *C.gchar   // in, none, string
 	var cret  C.gboolean // return
 
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(str)))
@@ -6957,7 +6957,7 @@ func DBusIsUniqueName(str string) bool {
 // encoded is not allowed (e.g `_63` is not valid, the string
 // should contain `c` instead).
 func DBusUnescapeObjectPath(s string) []uint8 {
-	var carg1 *C.gchar  // in, none, string, casted *C.gchar
+	var carg1 *C.gchar  // in, none, string
 	var cret  *C.guint8 // return, transfer: none, C Pointers: 1, Name: array[guint8], scope: , array (inner: *typesystem.CastablePrimitive, zero-terminated)
 
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(s)))
@@ -7082,7 +7082,7 @@ func IOErrorQuark() glib.Quark {
 // all gtypes) then you can use g_io_modules_scan_all_in_directory()
 // which allows delayed/lazy loading of modules.
 func IOModulesLoadAllInDirectory(dirname string) []IOModule {
-	var carg1 *C.gchar // in, none, string, casted *C.gchar
+	var carg1 *C.gchar // in, none, string
 	var cret  *C.GList // container, transfer: full
 
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(dirname)))
@@ -7123,7 +7123,7 @@ func IOModulesLoadAllInDirectory(dirname string) []IOModule {
 // all gtypes) then you can use g_io_modules_scan_all_in_directory()
 // which allows delayed/lazy loading of modules.
 func IOModulesLoadAllInDirectoryWithScope(dirname string, scope *IOModuleScope) []IOModule {
-	var carg1 *C.gchar          // in, none, string, casted *C.gchar
+	var carg1 *C.gchar          // in, none, string
 	var carg2 *C.GIOModuleScope // in, none, converted
 	var cret  *C.GList          // container, transfer: full
 
@@ -7197,7 +7197,7 @@ func IOModulesScanAllInDirectory(dirname string) {
 // If you need to guarantee that all types are loaded in all the modules,
 // use g_io_modules_load_all_in_directory().
 func IOModulesScanAllInDirectoryWithScope(dirname string, scope *IOModuleScope) {
-	var carg1 *C.gchar          // in, none, string, casted *C.gchar
+	var carg1 *C.gchar          // in, none, string
 	var carg2 *C.GIOModuleScope // in, none, converted
 
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(dirname)))
@@ -7867,7 +7867,7 @@ func UnsafeActionToGlibFull(c Action) unsafe.Pointer {
 // It is an error to call this function with a non-UTF-8 @action_name.
 // @action_name must not be `NULL`.
 func ActionNameIsValid(actionName string) bool {
-	var carg1 *C.gchar   // in, none, string, casted *C.gchar
+	var carg1 *C.gchar   // in, none, string
 	var cret  C.gboolean // return
 
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(actionName)))
@@ -7920,7 +7920,7 @@ func (action *ActionInstance) GetEnabled() bool {
 // Queries the name of @action.
 func (action *ActionInstance) GetName() string {
 	var carg0 *C.GAction // in, none, converted
-	var cret  *C.gchar   // return, none, string, casted *C.gchar
+	var cret  *C.gchar   // return, none, string
 
 	carg0 = (*C.GAction)(UnsafeActionToGlibNone(action))
 
@@ -8242,7 +8242,7 @@ func UnsafeActionGroupToGlibFull(c ActionGroup) unsafe.Pointer {
 // This function should only be called by [type@Gio.ActionGroup] implementations.
 func (actionGroup *ActionGroupInstance) ActionAdded(actionName string) {
 	var carg0 *C.GActionGroup // in, none, converted
-	var carg1 *C.gchar        // in, none, string, casted *C.gchar
+	var carg1 *C.gchar        // in, none, string
 
 	carg0 = (*C.GActionGroup)(UnsafeActionGroupToGlibNone(actionGroup))
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(actionName)))
@@ -8265,7 +8265,7 @@ func (actionGroup *ActionGroupInstance) ActionAdded(actionName string) {
 // This function should only be called by [type@Gio.ActionGroup] implementations.
 func (actionGroup *ActionGroupInstance) ActionEnabledChanged(actionName string, enabled bool) {
 	var carg0 *C.GActionGroup // in, none, converted
-	var carg1 *C.gchar        // in, none, string, casted *C.gchar
+	var carg1 *C.gchar        // in, none, string
 	var carg2 C.gboolean      // in
 
 	carg0 = (*C.GActionGroup)(UnsafeActionGroupToGlibNone(actionGroup))
@@ -8292,7 +8292,7 @@ func (actionGroup *ActionGroupInstance) ActionEnabledChanged(actionName string, 
 // This function should only be called by [type@Gio.ActionGroup] implementations.
 func (actionGroup *ActionGroupInstance) ActionRemoved(actionName string) {
 	var carg0 *C.GActionGroup // in, none, converted
-	var carg1 *C.gchar        // in, none, string, casted *C.gchar
+	var carg1 *C.gchar        // in, none, string
 
 	carg0 = (*C.GActionGroup)(UnsafeActionGroupToGlibNone(actionGroup))
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(actionName)))
@@ -8319,7 +8319,7 @@ func (actionGroup *ActionGroupInstance) ActionRemoved(actionName string) {
 // have its state changed from outside callers.
 func (actionGroup *ActionGroupInstance) GetActionEnabled(actionName string) bool {
 	var carg0 *C.GActionGroup // in, none, converted
-	var carg1 *C.gchar        // in, none, string, casted *C.gchar
+	var carg1 *C.gchar        // in, none, string
 	var cret  C.gboolean      // return
 
 	carg0 = (*C.GActionGroup)(UnsafeActionGroupToGlibNone(actionGroup))
@@ -8364,7 +8364,7 @@ func (actionGroup *ActionGroupInstance) GetActionEnabled(actionName string) bool
 // with the same name but a different parameter type.
 func (actionGroup *ActionGroupInstance) GetActionParameterType(actionName string) *glib.VariantType {
 	var carg0 *C.GActionGroup // in, none, converted
-	var carg1 *C.gchar        // in, none, string, casted *C.gchar
+	var carg1 *C.gchar        // in, none, string
 	var cret  *C.GVariantType // return, none, converted
 
 	carg0 = (*C.GActionGroup)(UnsafeActionGroupToGlibNone(actionGroup))
@@ -8410,7 +8410,7 @@ func (actionGroup *ActionGroupInstance) GetActionParameterType(actionName string
 // with the same name but a different state type.
 func (actionGroup *ActionGroupInstance) GetActionStateType(actionName string) *glib.VariantType {
 	var carg0 *C.GActionGroup // in, none, converted
-	var carg1 *C.gchar        // in, none, string, casted *C.gchar
+	var carg1 *C.gchar        // in, none, string
 	var cret  *C.GVariantType // return, none, converted
 
 	carg0 = (*C.GActionGroup)(UnsafeActionGroupToGlibNone(actionGroup))
@@ -8441,7 +8441,7 @@ func (actionGroup *ActionGroupInstance) GetActionStateType(actionName string) *g
 // Checks if the named action exists within @action_group.
 func (actionGroup *ActionGroupInstance) HasAction(actionName string) bool {
 	var carg0 *C.GActionGroup // in, none, converted
-	var carg1 *C.gchar        // in, none, string, casted *C.gchar
+	var carg1 *C.gchar        // in, none, string
 	var cret  C.gboolean      // return
 
 	carg0 = (*C.GActionGroup)(UnsafeActionGroupToGlibNone(actionGroup))
@@ -8682,7 +8682,7 @@ func (actionMap *ActionMapInstance) AddAction(action Action) {
 // If no such action exists, returns `NULL`.
 func (actionMap *ActionMapInstance) LookupAction(actionName string) Action {
 	var carg0 *C.GActionMap // in, none, converted
-	var carg1 *C.gchar      // in, none, string, casted *C.gchar
+	var carg1 *C.gchar      // in, none, string
 	var cret  *C.GAction    // return, none, converted
 
 	carg0 = (*C.GActionMap)(UnsafeActionMapToGlibNone(actionMap))
@@ -8711,7 +8711,7 @@ func (actionMap *ActionMapInstance) LookupAction(actionName string) Action {
 // If no action of this name is in the map then nothing happens.
 func (actionMap *ActionMapInstance) RemoveAction(actionName string) {
 	var carg0 *C.GActionMap // in, none, converted
-	var carg1 *C.gchar      // in, none, string, casted *C.gchar
+	var carg1 *C.gchar      // in, none, string
 
 	carg0 = (*C.GActionMap)(UnsafeActionMapToGlibNone(actionMap))
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(actionName)))
@@ -9459,7 +9459,7 @@ func AppInfoGetDefaultForURISchemeFinish(result AsyncResult) (AppInfo, error) {
 // those applications which claim to support the given content type by MIME
 // type subclassing and not directly.
 func AppInfoGetFallbackForType(contentType string) []AppInfo {
-	var carg1 *C.gchar // in, none, string, casted *C.gchar
+	var carg1 *C.gchar // in, none, string
 	var cret  *C.GList // container, transfer: full
 
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(contentType)))
@@ -9500,7 +9500,7 @@ func AppInfoGetFallbackForType(contentType string) []AppInfo {
 // the last one for which [method@Gio.AppInfo.set_as_last_used_for_type] has
 // been called.
 func AppInfoGetRecommendedForType(contentType string) []AppInfo {
-	var carg1 *C.gchar // in, none, string, casted *C.gchar
+	var carg1 *C.gchar // in, none, string
 	var cret  *C.GList // container, transfer: full
 
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(contentType)))
@@ -11543,7 +11543,7 @@ func UnsafeDBusObjectToGlibFull(c DBusObject) unsafe.Pointer {
 // @object, if any.
 func (object *DBusObjectInstance) GetInterface(interfaceName string) DBusInterface {
 	var carg0 *C.GDBusObject    // in, none, converted
-	var carg1 *C.gchar          // in, none, string, casted *C.gchar
+	var carg1 *C.gchar          // in, none, string
 	var cret  *C.GDBusInterface // return, full, converted
 
 	carg0 = (*C.GDBusObject)(UnsafeDBusObjectToGlibNone(object))
@@ -11598,7 +11598,7 @@ func (object *DBusObjectInstance) GetInterfaces() []DBusInterface {
 // Gets the object path for @object.
 func (object *DBusObjectInstance) GetObjectPath() string {
 	var carg0 *C.GDBusObject // in, none, converted
-	var cret  *C.gchar       // return, none, string, casted *C.gchar
+	var cret  *C.gchar       // return, none, string
 
 	carg0 = (*C.GDBusObject)(UnsafeDBusObjectToGlibNone(object))
 
@@ -11761,8 +11761,8 @@ func UnsafeDBusObjectManagerToGlibFull(c DBusObjectManager) unsafe.Pointer {
 // any.
 func (manager *DBusObjectManagerInstance) GetInterface(objectPath string, interfaceName string) DBusInterface {
 	var carg0 *C.GDBusObjectManager // in, none, converted
-	var carg1 *C.gchar              // in, none, string, casted *C.gchar
-	var carg2 *C.gchar              // in, none, string, casted *C.gchar
+	var carg1 *C.gchar              // in, none, string
+	var carg2 *C.gchar              // in, none, string
 	var cret  *C.GDBusInterface     // return, full, converted
 
 	carg0 = (*C.GDBusObjectManager)(UnsafeDBusObjectManagerToGlibNone(manager))
@@ -11796,7 +11796,7 @@ func (manager *DBusObjectManagerInstance) GetInterface(objectPath string, interf
 // Gets the #GDBusObject at @object_path, if any.
 func (manager *DBusObjectManagerInstance) GetObject(objectPath string) DBusObject {
 	var carg0 *C.GDBusObjectManager // in, none, converted
-	var carg1 *C.gchar              // in, none, string, casted *C.gchar
+	var carg1 *C.gchar              // in, none, string
 	var cret  *C.GDBusObject        // return, full, converted
 
 	carg0 = (*C.GDBusObjectManager)(UnsafeDBusObjectManagerToGlibNone(manager))
@@ -11822,7 +11822,7 @@ func (manager *DBusObjectManagerInstance) GetObject(objectPath string) DBusObjec
 // Gets the object path that @manager is for.
 func (manager *DBusObjectManagerInstance) GetObjectPath() string {
 	var carg0 *C.GDBusObjectManager // in, none, converted
-	var cret  *C.gchar              // return, none, string, casted *C.gchar
+	var cret  *C.gchar              // return, none, string
 
 	carg0 = (*C.GDBusObjectManager)(UnsafeDBusObjectManagerToGlibNone(manager))
 
@@ -13358,7 +13358,7 @@ func (drive *DriveInstance) GetName() string {
 // Gets the sort key for @drive, if any.
 func (drive *DriveInstance) GetSortKey() string {
 	var carg0 *C.GDrive // in, none, converted
-	var cret  *C.gchar  // return, none, string, casted *C.gchar
+	var cret  *C.gchar  // return, none, string
 
 	carg0 = (*C.GDrive)(UnsafeDriveToGlibNone(drive))
 
@@ -14572,7 +14572,7 @@ func (conn *DtlsConnectionInstance) GetCertificate() TlsCertificate {
 // is not recommended.
 func (conn *DtlsConnectionInstance) GetCiphersuiteName() string {
 	var carg0 *C.GDtlsConnection // in, none, converted
-	var cret  *C.gchar           // return, full, string, casted *C.gchar
+	var cret  *C.gchar           // return, full, string
 
 	carg0 = (*C.GDtlsConnection)(UnsafeDtlsConnectionToGlibNone(conn))
 
@@ -14648,7 +14648,7 @@ func (conn *DtlsConnectionInstance) GetInteraction() TlsInteraction {
 // g_dtls_connection_set_advertised_protocols().
 func (conn *DtlsConnectionInstance) GetNegotiatedProtocol() string {
 	var carg0 *C.GDtlsConnection // in, none, converted
-	var cret  *C.gchar           // return, none, string, casted *C.gchar
+	var cret  *C.gchar           // return, none, string
 
 	carg0 = (*C.GDtlsConnection)(UnsafeDtlsConnectionToGlibNone(conn))
 
@@ -18113,8 +18113,8 @@ func NewFileForCommandlineArg(arg string) File {
 // 
 // See also g_application_command_line_create_file_for_arg().
 func NewFileForCommandlineArgAndCwd(arg string, cwd string) File {
-	var carg1 *C.gchar // in, none, string, casted *C.gchar
-	var carg2 *C.gchar // in, none, string, casted *C.gchar
+	var carg1 *C.gchar // in, none, string
+	var carg2 *C.gchar // in, none, string
 	var cret  *C.GFile // return, full, converted
 
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(arg)))
@@ -20156,7 +20156,7 @@ func (file *FileInstance) IsNative() bool {
 func (file *FileInstance) LoadBytes(cancellable context.Context) (string, *glib.Bytes, error) {
 	var carg0 *C.GFile        // in, none, converted
 	var carg1 *C.GCancellable // in, none, converted, nullable
-	var carg2 *C.gchar        // out, full, string, casted *C.gchar, nullable
+	var carg2 *C.gchar        // out, full, string, nullable-string
 	var cret  *C.GBytes       // return, full, converted
 	var _cerr *C.GError       // out, full, converted, nullable
 
@@ -20249,7 +20249,7 @@ func (file *FileInstance) LoadBytesAsync(cancellable context.Context, callback A
 func (file *FileInstance) LoadBytesFinish(result AsyncResult) (string, *glib.Bytes, error) {
 	var carg0 *C.GFile        // in, none, converted
 	var carg1 *C.GAsyncResult // in, none, converted
-	var carg2 *C.gchar        // out, full, string, casted *C.gchar, nullable
+	var carg2 *C.gchar        // out, full, string, nullable-string
 	var cret  *C.GBytes       // return, full, converted
 	var _cerr *C.GError       // out, full, converted, nullable
 
@@ -24200,7 +24200,7 @@ func UnsafeIconToGlibFull(c Icon) unsafe.Pointer {
 // implementations you need to ensure that each #GType is registered
 // with the type system prior to calling g_icon_new_for_string().
 func NewIconForString(str string) (Icon, error) {
-	var carg1 *C.gchar  // in, none, string, casted *C.gchar
+	var carg1 *C.gchar  // in, none, string
 	var cret  *C.GIcon  // return, full, converted
 	var _cerr *C.GError // out, full, converted, nullable
 
@@ -24278,7 +24278,7 @@ func (icon1 *IconInstance) Equal(icon2 Icon) bool {
 //   the encoding is simply the name (such as `network-server`).
 func (icon *IconInstance) ToString() string {
 	var carg0 *C.GIcon // in, none, converted
-	var cret  *C.gchar // return, full, string, casted *C.gchar
+	var cret  *C.gchar // return, full, string
 
 	carg0 = (*C.GIcon)(UnsafeIconToGlibNone(icon))
 
@@ -25984,7 +25984,7 @@ func (mount *MountInstance) GetRoot() File {
 // Gets the sort key for @mount, if any.
 func (mount *MountInstance) GetSortKey() string {
 	var carg0 *C.GMount // in, none, converted
-	var cret  *C.gchar  // return, none, string, casted *C.gchar
+	var cret  *C.gchar  // return, none, string
 
 	carg0 = (*C.GMount)(UnsafeMountToGlibNone(mount))
 
@@ -27883,7 +27883,7 @@ func UnsafeProxyToGlibFull(c Proxy) unsafe.Pointer {
 // Find the `gio-proxy` extension point for a proxy implementation that supports
 // the specified protocol.
 func ProxyGetDefaultForProtocol(protocol string) Proxy {
-	var carg1 *C.gchar  // in, none, string, casted *C.gchar
+	var carg1 *C.gchar  // in, none, string
 	var cret  *C.GProxy // return, full, converted
 
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(protocol)))
@@ -28249,7 +28249,7 @@ func (resolver *ProxyResolverInstance) IsSupported() bool {
 func (resolver *ProxyResolverInstance) Lookup(cancellable context.Context, uri string) ([]string, error) {
 	var carg0 *C.GProxyResolver // in, none, converted
 	var carg2 *C.GCancellable   // in, none, converted, nullable
-	var carg1 *C.gchar          // in, none, string, casted *C.gchar
+	var carg1 *C.gchar          // in, none, string
 	var cret  **C.gchar         // return, transfer: full, C Pointers: 2, Name: array[utf8], scope: , array (inner: *typesystem.StringPrimitive, zero-terminated)
 	var _cerr *C.GError         // out, full, converted, nullable
 
@@ -28291,7 +28291,7 @@ func (resolver *ProxyResolverInstance) Lookup(cancellable context.Context, uri s
 func (resolver *ProxyResolverInstance) LookupAsync(cancellable context.Context, uri string, callback AsyncReadyCallback) {
 	var carg0 *C.GProxyResolver     // in, none, converted
 	var carg2 *C.GCancellable       // in, none, converted, nullable
-	var carg1 *C.gchar              // in, none, string, casted *C.gchar
+	var carg1 *C.gchar              // in, none, string
 	var carg3 C.GAsyncReadyCallback // callback, scope: async, closure: carg4, nullable
 	var carg4 C.gpointer            // implicit
 
@@ -28956,7 +28956,7 @@ func (connectable *SocketConnectableInstance) ProxyEnumerate() SocketAddressEnum
 // the implementation’s type name will be returned as a fallback.
 func (connectable *SocketConnectableInstance) ToString() string {
 	var carg0 *C.GSocketConnectable // in, none, converted
-	var cret  *C.gchar              // return, full, string, casted *C.gchar
+	var cret  *C.gchar              // return, full, string
 
 	carg0 = (*C.GSocketConnectable)(UnsafeSocketConnectableToGlibNone(connectable))
 
@@ -29843,7 +29843,7 @@ func UnsafeTlsFileDatabaseToGlibFull(c TlsFileDatabase) unsafe.Pointer {
 // 
 // The certificates in @anchors must be PEM encoded.
 func NewTlsFileDatabase(anchors string) (TlsFileDatabase, error) {
-	var carg1 *C.gchar        // in, none, string, casted *C.gchar
+	var carg1 *C.gchar        // in, none, string
 	var cret  *C.GTlsDatabase // return, full, converted, casted *C.GTlsFileDatabase
 	var _cerr *C.GError       // out, full, converted, nullable
 
@@ -30699,7 +30699,7 @@ func (volume *VolumeInstance) GetName() string {
 // Gets the sort key for @volume, if any.
 func (volume *VolumeInstance) GetSortKey() string {
 	var carg0 *C.GVolume // in, none, converted
-	var cret  *C.gchar   // return, none, string, casted *C.gchar
+	var cret  *C.gchar   // return, none, string
 
 	carg0 = (*C.GVolume)(UnsafeVolumeToGlibNone(volume))
 
@@ -32656,7 +32656,7 @@ func ApplicationGetDefault() Application {
 // For example, if the owner of 7-zip.org used an application identifier for an
 // archiving application, it might be named `org._7_zip.Archiver`.
 func ApplicationIDIsValid(applicationId string) bool {
-	var carg1 *C.gchar   // in, none, string, casted *C.gchar
+	var carg1 *C.gchar   // in, none, string
 	var cret  C.gboolean // return
 
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(applicationId)))
@@ -32876,7 +32876,7 @@ func (application *ApplicationInstance) AddOptionGroup(group *glib.OptionGroup) 
 // Gets the unique identifier for @application.
 func (application *ApplicationInstance) GetApplicationID() string {
 	var carg0 *C.GApplication // in, none, converted
-	var cret  *C.gchar        // return, none, string, casted *C.gchar
+	var cret  *C.gchar        // return, none, string
 
 	carg0 = (*C.GApplication)(UnsafeApplicationToGlibNone(application))
 
@@ -32945,7 +32945,7 @@ func (application *ApplicationInstance) GetDBusConnection() DBusConnection {
 // registered.  See g_application_get_is_registered().
 func (application *ApplicationInstance) GetDBusObjectPath() string {
 	var carg0 *C.GApplication // in, none, converted
-	var cret  *C.gchar        // return, none, string, casted *C.gchar
+	var cret  *C.gchar        // return, none, string
 
 	carg0 = (*C.GApplication)(UnsafeApplicationToGlibNone(application))
 
@@ -33103,7 +33103,7 @@ func (application *ApplicationInstance) GetIsRemote() bool {
 // See g_application_set_resource_base_path() for more information.
 func (application *ApplicationInstance) GetResourceBasePath() string {
 	var carg0 *C.GApplication // in, none, converted
-	var cret  *C.gchar        // return, none, string, casted *C.gchar
+	var cret  *C.gchar        // return, none, string
 
 	carg0 = (*C.GApplication)(UnsafeApplicationToGlibNone(application))
 
@@ -33125,7 +33125,7 @@ func (application *ApplicationInstance) GetResourceBasePath() string {
 // Gets the version of @application.
 func (application *ApplicationInstance) GetVersion() string {
 	var carg0 *C.GApplication // in, none, converted
-	var cret  *C.gchar        // return, none, string, casted *C.gchar
+	var cret  *C.gchar        // return, none, string
 
 	carg0 = (*C.GApplication)(UnsafeApplicationToGlibNone(application))
 
@@ -33205,7 +33205,7 @@ func (application *ApplicationInstance) Open(files []File, hint string) {
 	var carg0 *C.GApplication // in, none, converted
 	var carg1 **C.GFile       // in, transfer: none, C Pointers: 2, Name: array[File], array (inner: *typesystem.Interface, length-by: carg2)
 	var carg2 C.gint          // implicit
-	var carg3 *C.gchar        // in, none, string, casted *C.gchar
+	var carg3 *C.gchar        // in, none, string
 
 	carg0 = (*C.GApplication)(UnsafeApplicationToGlibNone(application))
 	_ = files
@@ -33762,7 +33762,7 @@ func (application *ApplicationInstance) SetResourceBasePath(resourcePath string)
 // been registered.
 func (application *ApplicationInstance) SetVersion(version string) {
 	var carg0 *C.GApplication // in, none, converted
-	var carg1 *C.gchar        // in, none, string, casted *C.gchar
+	var carg1 *C.gchar        // in, none, string
 
 	carg0 = (*C.GApplication)(UnsafeApplicationToGlibNone(application))
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(version)))
@@ -33812,7 +33812,7 @@ func (application *ApplicationInstance) UnmarkBusy() {
 // there is no need to explicitly withdraw the notification in that case.
 func (application *ApplicationInstance) WithdrawNotification(id string) {
 	var carg0 *C.GApplication // in, none, converted
-	var carg1 *C.gchar        // in, none, string, casted *C.gchar
+	var carg1 *C.gchar        // in, none, string
 
 	carg0 = (*C.GApplication)(UnsafeApplicationToGlibNone(application))
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(id)))
@@ -34365,7 +34365,7 @@ func UnsafeApplicationCommandLineToGlibFull(c ApplicationCommandLine) unsafe.Poi
 // the invoking process rather than the local process.
 func (cmdline *ApplicationCommandLineInstance) CreateFileForArg(arg string) File {
 	var carg0 *C.GApplicationCommandLine // in, none, converted
-	var carg1 *C.gchar                   // in, none, string, casted *C.gchar
+	var carg1 *C.gchar                   // in, none, string
 	var cret  *C.GFile                   // return, full, converted
 
 	carg0 = (*C.GApplicationCommandLine)(UnsafeApplicationCommandLineToGlibNone(cmdline))
@@ -34462,7 +34462,7 @@ func (cmdline *ApplicationCommandLineInstance) GetArguments() (int, []string) {
 // long as @cmdline exists.
 func (cmdline *ApplicationCommandLineInstance) GetCwd() string {
 	var carg0 *C.GApplicationCommandLine // in, none, converted
-	var cret  *C.gchar                   // return, none, string, casted *C.gchar
+	var cret  *C.gchar                   // return, none, string
 
 	carg0 = (*C.GApplicationCommandLine)(UnsafeApplicationCommandLineToGlibNone(cmdline))
 
@@ -34648,8 +34648,8 @@ func (cmdline *ApplicationCommandLineInstance) GetStdin() InputStream {
 // long as @cmdline exists.
 func (cmdline *ApplicationCommandLineInstance) Getenv(name string) string {
 	var carg0 *C.GApplicationCommandLine // in, none, converted
-	var carg1 *C.gchar                   // in, none, string, casted *C.gchar
-	var cret  *C.gchar                   // return, none, string, casted *C.gchar
+	var carg1 *C.gchar                   // in, none, string
+	var cret  *C.gchar                   // return, none, string
 
 	carg0 = (*C.GApplicationCommandLine)(UnsafeApplicationCommandLineToGlibNone(cmdline))
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(name)))
@@ -34679,7 +34679,7 @@ func (cmdline *ApplicationCommandLineInstance) Getenv(name string) string {
 // control over, that could include `printf()` escape sequences.
 func (cmdline *ApplicationCommandLineInstance) PrintLiteral(message string) {
 	var carg0 *C.GApplicationCommandLine // in, none, converted
-	var carg1 *C.gchar                   // in, none, string, casted *C.gchar
+	var carg1 *C.gchar                   // in, none, string
 
 	carg0 = (*C.GApplicationCommandLine)(UnsafeApplicationCommandLineToGlibNone(cmdline))
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(message)))
@@ -34703,7 +34703,7 @@ func (cmdline *ApplicationCommandLineInstance) PrintLiteral(message string) {
 // you don't have control over, that could include `printf()` escape sequences.
 func (cmdline *ApplicationCommandLineInstance) PrinterrLiteral(message string) {
 	var carg0 *C.GApplicationCommandLine // in, none, converted
-	var carg1 *C.gchar                   // in, none, string, casted *C.gchar
+	var carg1 *C.gchar                   // in, none, string
 
 	carg0 = (*C.GApplicationCommandLine)(UnsafeApplicationCommandLineToGlibNone(cmdline))
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(message)))
@@ -34955,8 +34955,8 @@ func UnsafeCharsetConverterToGlibFull(c CharsetConverter) unsafe.Pointer {
 //
 // Creates a new #GCharsetConverter.
 func NewCharsetConverter(toCharset string, fromCharset string) (CharsetConverter, error) {
-	var carg1 *C.gchar             // in, none, string, casted *C.gchar
-	var carg2 *C.gchar             // in, none, string, casted *C.gchar
+	var carg1 *C.gchar             // in, none, string
+	var carg2 *C.gchar             // in, none, string
 	var cret  *C.GCharsetConverter // return, full, converted
 	var _cerr *C.GError            // out, full, converted, nullable
 
@@ -35227,7 +35227,7 @@ func (credentials *CredentialsInstance) IsSameUser(otherCredentials Credentials)
 // returned string may change in future GLib release.
 func (credentials *CredentialsInstance) ToString() string {
 	var carg0 *C.GCredentials // in, none, converted
-	var cret  *C.gchar        // return, full, string, casted *C.gchar
+	var cret  *C.gchar        // return, full, string
 
 	carg0 = (*C.GCredentials)(UnsafeCredentialsToGlibNone(credentials))
 
@@ -35325,7 +35325,7 @@ func UnsafeDBusActionGroupToGlibFull(c DBusActionGroup) unsafe.Pointer {
 func DBusActionGroupGet(connection DBusConnection, busName string, objectPath string) DBusActionGroup {
 	var carg1 *C.GDBusConnection  // in, none, converted
 	var carg2 *C.gchar            // in, none, string, nullable-string
-	var carg3 *C.gchar            // in, none, string, casted *C.gchar
+	var carg3 *C.gchar            // in, none, string
 	var cret  *C.GDBusActionGroup // return, full, converted
 
 	carg1 = (*C.GDBusConnection)(UnsafeDBusConnectionToGlibNone(connection))
@@ -35526,7 +35526,7 @@ func NewDBusAuthObserver() DBusAuthObserver {
 // Emits the #GDBusAuthObserver::allow-mechanism signal on @observer.
 func (observer *DBusAuthObserverInstance) AllowMechanism(mechanism string) bool {
 	var carg0 *C.GDBusAuthObserver // in, none, converted
-	var carg1 *C.gchar             // in, none, string, casted *C.gchar
+	var carg1 *C.gchar             // in, none, string
 	var cret  C.gboolean           // return
 
 	carg0 = (*C.GDBusAuthObserver)(UnsafeDBusAuthObserverToGlibNone(observer))
@@ -36386,7 +36386,7 @@ func NewDBusConnectionForAddressFinish(res AsyncResult) (DBusConnection, error) 
 // authentication process.
 func NewDBusConnectionForAddressSync(cancellable context.Context, address string, flags DBusConnectionFlags, observer DBusAuthObserver) (DBusConnection, error) {
 	var carg4 *C.GCancellable        // in, none, converted, nullable
-	var carg1 *C.gchar               // in, none, string, casted *C.gchar
+	var carg1 *C.gchar               // in, none, string
 	var carg2 C.GDBusConnectionFlags // in, none, casted
 	var carg3 *C.GDBusAuthObserver   // in, none, converted, nullable
 	var cret  *C.GDBusConnection     // return, full, converted
@@ -36589,7 +36589,7 @@ func NewDBusConnection(cancellable context.Context, stream IOStream, guid string
 // version.
 func NewDBusConnectionForAddress(cancellable context.Context, address string, flags DBusConnectionFlags, observer DBusAuthObserver, callback AsyncReadyCallback) {
 	var carg4 *C.GCancellable        // in, none, converted, nullable
-	var carg1 *C.gchar               // in, none, string, casted *C.gchar
+	var carg1 *C.gchar               // in, none, string
 	var carg2 C.GDBusConnectionFlags // in, none, casted
 	var carg3 *C.GDBusAuthObserver   // in, none, converted, nullable
 	var carg5 C.GAsyncReadyCallback  // callback, scope: async, closure: carg6, nullable
@@ -36847,7 +36847,7 @@ func (connection *DBusConnectionInstance) CloseSync(cancellable context.Context)
 // context.
 func (connection *DBusConnectionInstance) ExportActionGroup(objectPath string, actionGroup ActionGroup) (uint, error) {
 	var carg0 *C.GDBusConnection // in, none, converted
-	var carg1 *C.gchar           // in, none, string, casted *C.gchar
+	var carg1 *C.gchar           // in, none, string
 	var carg2 *C.GActionGroup    // in, none, converted
 	var cret  C.guint            // return, none, casted
 	var _cerr *C.GError          // out, full, converted, nullable
@@ -36903,7 +36903,7 @@ func (connection *DBusConnectionInstance) ExportActionGroup(objectPath string, a
 // this function.
 func (connection *DBusConnectionInstance) ExportMenuModel(objectPath string, menu MenuModel) (uint, error) {
 	var carg0 *C.GDBusConnection // in, none, converted
-	var carg1 *C.gchar           // in, none, string, casted *C.gchar
+	var carg1 *C.gchar           // in, none, string
 	var carg2 *C.GMenuModel      // in, none, converted
 	var cret  C.guint            // return, none, casted
 	var _cerr *C.GError          // out, full, converted, nullable
@@ -37133,7 +37133,7 @@ func (connection *DBusConnectionInstance) GetFlags() DBusConnectionFlags {
 // authenticating. See #GDBusConnection:guid for more details.
 func (connection *DBusConnectionInstance) GetGUID() string {
 	var carg0 *C.GDBusConnection // in, none, converted
-	var cret  *C.gchar           // return, none, string, casted *C.gchar
+	var cret  *C.gchar           // return, none, string
 
 	carg0 = (*C.GDBusConnection)(UnsafeDBusConnectionToGlibNone(connection))
 
@@ -37239,7 +37239,7 @@ func (connection *DBusConnectionInstance) GetStream() IOStream {
 // message bus connection.
 func (connection *DBusConnectionInstance) GetUniqueName() string {
 	var carg0 *C.GDBusConnection // in, none, converted
-	var cret  *C.gchar           // return, none, string, casted *C.gchar
+	var cret  *C.gchar           // return, none, string
 
 	carg0 = (*C.GDBusConnection)(UnsafeDBusConnectionToGlibNone(connection))
 
@@ -38020,7 +38020,7 @@ func UnsafeDBusInterfaceSkeletonToGlibFull(c DBusInterfaceSkeleton) unsafe.Point
 func (interface_ *DBusInterfaceSkeletonInstance) Export(connection DBusConnection, objectPath string) (bool, error) {
 	var carg0 *C.GDBusInterfaceSkeleton // in, none, converted
 	var carg1 *C.GDBusConnection        // in, none, converted
-	var carg2 *C.gchar                  // in, none, string, casted *C.gchar
+	var carg2 *C.gchar                  // in, none, string
 	var cret  C.gboolean                // return
 	var _cerr *C.GError                 // out, full, converted, nullable
 
@@ -38171,7 +38171,7 @@ func (interface_ *DBusInterfaceSkeletonInstance) GetInfo() *DBusInterfaceInfo {
 // Gets the object path that @interface_ is exported on, if any.
 func (interface_ *DBusInterfaceSkeletonInstance) GetObjectPath() string {
 	var carg0 *C.GDBusInterfaceSkeleton // in, none, converted
-	var cret  *C.gchar                  // return, none, string, casted *C.gchar
+	var cret  *C.gchar                  // return, none, string
 
 	carg0 = (*C.GDBusInterfaceSkeleton)(UnsafeDBusInterfaceSkeletonToGlibNone(interface_))
 
@@ -38794,9 +38794,9 @@ func NewDBusMessageFromBlob(blob []uint8, capabilities DBusCapabilityFlags) (DBu
 // Creates a new #GDBusMessage for a method call.
 func NewDBusMessageMethodCall(name string, path string, interface_ string, method string) DBusMessage {
 	var carg1 *C.gchar        // in, none, string, nullable-string
-	var carg2 *C.gchar        // in, none, string, casted *C.gchar
+	var carg2 *C.gchar        // in, none, string
 	var carg3 *C.gchar        // in, none, string, nullable-string
-	var carg4 *C.gchar        // in, none, string, casted *C.gchar
+	var carg4 *C.gchar        // in, none, string
 	var cret  *C.GDBusMessage // return, full, converted
 
 	if name != "" {
@@ -38839,9 +38839,9 @@ func NewDBusMessageMethodCall(name string, path string, interface_ string, metho
 //
 // Creates a new #GDBusMessage for a signal emission.
 func NewDBusMessageSignal(path string, interface_ string, signal string) DBusMessage {
-	var carg1 *C.gchar        // in, none, string, casted *C.gchar
-	var carg2 *C.gchar        // in, none, string, casted *C.gchar
-	var carg3 *C.gchar        // in, none, string, casted *C.gchar
+	var carg1 *C.gchar        // in, none, string
+	var carg2 *C.gchar        // in, none, string
+	var carg3 *C.gchar        // in, none, string
 	var cret  *C.GDBusMessage // return, full, converted
 
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(path)))
@@ -38945,7 +38945,7 @@ func (message *DBusMessageInstance) Copy() (DBusMessage, error) {
 // arg0 values.
 func (message *DBusMessageInstance) GetArg0() string {
 	var carg0 *C.GDBusMessage // in, none, converted
-	var cret  *C.gchar        // return, none, string, casted *C.gchar
+	var cret  *C.gchar        // return, none, string
 
 	carg0 = (*C.GDBusMessage)(UnsafeDBusMessageToGlibNone(message))
 
@@ -38969,7 +38969,7 @@ func (message *DBusMessageInstance) GetArg0() string {
 // See [method@Gio.DBusMessage.get_arg0] for returning string-typed arg0 values.
 func (message *DBusMessageInstance) GetArg0Path() string {
 	var carg0 *C.GDBusMessage // in, none, converted
-	var cret  *C.gchar        // return, none, string, casted *C.gchar
+	var cret  *C.gchar        // return, none, string
 
 	carg0 = (*C.GDBusMessage)(UnsafeDBusMessageToGlibNone(message))
 
@@ -39013,7 +39013,7 @@ func (message *DBusMessageInstance) GetByteOrder() DBusMessageByteOrder {
 // Convenience getter for the %G_DBUS_MESSAGE_HEADER_FIELD_DESTINATION header field.
 func (message *DBusMessageInstance) GetDestination() string {
 	var carg0 *C.GDBusMessage // in, none, converted
-	var cret  *C.gchar        // return, none, string, casted *C.gchar
+	var cret  *C.gchar        // return, none, string
 
 	carg0 = (*C.GDBusMessage)(UnsafeDBusMessageToGlibNone(message))
 
@@ -39035,7 +39035,7 @@ func (message *DBusMessageInstance) GetDestination() string {
 // Convenience getter for the %G_DBUS_MESSAGE_HEADER_FIELD_ERROR_NAME header field.
 func (message *DBusMessageInstance) GetErrorName() string {
 	var carg0 *C.GDBusMessage // in, none, converted
-	var cret  *C.gchar        // return, none, string, casted *C.gchar
+	var cret  *C.gchar        // return, none, string
 
 	carg0 = (*C.GDBusMessage)(UnsafeDBusMessageToGlibNone(message))
 
@@ -39103,7 +39103,7 @@ func (message *DBusMessageInstance) GetHeaderFields() []byte {
 // Convenience getter for the %G_DBUS_MESSAGE_HEADER_FIELD_INTERFACE header field.
 func (message *DBusMessageInstance) GetInterface() string {
 	var carg0 *C.GDBusMessage // in, none, converted
-	var cret  *C.gchar        // return, none, string, casted *C.gchar
+	var cret  *C.gchar        // return, none, string
 
 	carg0 = (*C.GDBusMessage)(UnsafeDBusMessageToGlibNone(message))
 
@@ -39151,7 +39151,7 @@ func (message *DBusMessageInstance) GetLocked() bool {
 // Convenience getter for the %G_DBUS_MESSAGE_HEADER_FIELD_MEMBER header field.
 func (message *DBusMessageInstance) GetMember() string {
 	var carg0 *C.GDBusMessage // in, none, converted
-	var cret  *C.gchar        // return, none, string, casted *C.gchar
+	var cret  *C.gchar        // return, none, string
 
 	carg0 = (*C.GDBusMessage)(UnsafeDBusMessageToGlibNone(message))
 
@@ -39195,7 +39195,7 @@ func (message *DBusMessageInstance) GetMessageType() DBusMessageType {
 // Convenience getter for the %G_DBUS_MESSAGE_HEADER_FIELD_PATH header field.
 func (message *DBusMessageInstance) GetPath() string {
 	var carg0 *C.GDBusMessage // in, none, converted
-	var cret  *C.gchar        // return, none, string, casted *C.gchar
+	var cret  *C.gchar        // return, none, string
 
 	carg0 = (*C.GDBusMessage)(UnsafeDBusMessageToGlibNone(message))
 
@@ -39239,7 +39239,7 @@ func (message *DBusMessageInstance) GetReplySerial() uint32 {
 // Convenience getter for the %G_DBUS_MESSAGE_HEADER_FIELD_SENDER header field.
 func (message *DBusMessageInstance) GetSender() string {
 	var carg0 *C.GDBusMessage // in, none, converted
-	var cret  *C.gchar        // return, none, string, casted *C.gchar
+	var cret  *C.gchar        // return, none, string
 
 	carg0 = (*C.GDBusMessage)(UnsafeDBusMessageToGlibNone(message))
 
@@ -39285,7 +39285,7 @@ func (message *DBusMessageInstance) GetSerial() uint32 {
 // This will always be non-%NULL, but may be an empty string.
 func (message *DBusMessageInstance) GetSignature() string {
 	var carg0 *C.GDBusMessage // in, none, converted
-	var cret  *C.gchar        // return, none, string, casted *C.gchar
+	var cret  *C.gchar        // return, none, string
 
 	carg0 = (*C.GDBusMessage)(UnsafeDBusMessageToGlibNone(message))
 
@@ -39325,8 +39325,8 @@ func (message *DBusMessageInstance) Lock() {
 // Creates a new #GDBusMessage that is an error reply to @method_call_message.
 func (methodCallMessage *DBusMessageInstance) NewMethodErrorLiteral(errorName string, errorMessage string) DBusMessage {
 	var carg0 *C.GDBusMessage // in, none, converted
-	var carg1 *C.gchar        // in, none, string, casted *C.gchar
-	var carg2 *C.gchar        // in, none, string, casted *C.gchar
+	var carg1 *C.gchar        // in, none, string
+	var carg2 *C.gchar        // in, none, string
 	var cret  *C.GDBusMessage // return, full, converted
 
 	carg0 = (*C.GDBusMessage)(UnsafeDBusMessageToGlibNone(methodCallMessage))
@@ -39414,7 +39414,7 @@ func (methodCallMessage *DBusMessageInstance) NewMethodReply() DBusMessage {
 func (message *DBusMessageInstance) Print(indent uint) string {
 	var carg0 *C.GDBusMessage // in, none, converted
 	var carg1 C.guint         // in, none, casted
-	var cret  *C.gchar        // return, full, string, casted *C.gchar
+	var cret  *C.gchar        // return, full, string
 
 	carg0 = (*C.GDBusMessage)(UnsafeDBusMessageToGlibNone(message))
 	carg1 = C.guint(indent)
@@ -39481,7 +39481,7 @@ func (message *DBusMessageInstance) SetDestination(value string) {
 // Convenience setter for the %G_DBUS_MESSAGE_HEADER_FIELD_ERROR_NAME header field.
 func (message *DBusMessageInstance) SetErrorName(value string) {
 	var carg0 *C.GDBusMessage // in, none, converted
-	var carg1 *C.gchar        // in, none, string, casted *C.gchar
+	var carg1 *C.gchar        // in, none, string
 
 	carg0 = (*C.GDBusMessage)(UnsafeDBusMessageToGlibNone(message))
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(value)))
@@ -39974,7 +39974,7 @@ func (invocation *DBusMethodInvocationInstance) GetConnection() DBusConnection {
 // #GDBusInterfaceVTable for more information.
 func (invocation *DBusMethodInvocationInstance) GetInterfaceName() string {
 	var carg0 *C.GDBusMethodInvocation // in, none, converted
-	var cret  *C.gchar                 // return, none, string, casted *C.gchar
+	var cret  *C.gchar                 // return, none, string
 
 	carg0 = (*C.GDBusMethodInvocation)(UnsafeDBusMethodInvocationToGlibNone(invocation))
 
@@ -40052,7 +40052,7 @@ func (invocation *DBusMethodInvocationInstance) GetMethodInfo() *DBusMethodInfo 
 // Gets the name of the method that was invoked.
 func (invocation *DBusMethodInvocationInstance) GetMethodName() string {
 	var carg0 *C.GDBusMethodInvocation // in, none, converted
-	var cret  *C.gchar                 // return, none, string, casted *C.gchar
+	var cret  *C.gchar                 // return, none, string
 
 	carg0 = (*C.GDBusMethodInvocation)(UnsafeDBusMethodInvocationToGlibNone(invocation))
 
@@ -40074,7 +40074,7 @@ func (invocation *DBusMethodInvocationInstance) GetMethodName() string {
 // Gets the object path the method was invoked on.
 func (invocation *DBusMethodInvocationInstance) GetObjectPath() string {
 	var carg0 *C.GDBusMethodInvocation // in, none, converted
-	var cret  *C.gchar                 // return, none, string, casted *C.gchar
+	var cret  *C.gchar                 // return, none, string
 
 	carg0 = (*C.GDBusMethodInvocation)(UnsafeDBusMethodInvocationToGlibNone(invocation))
 
@@ -40128,7 +40128,7 @@ func (invocation *DBusMethodInvocationInstance) GetPropertyInfo() *DBusPropertyI
 // Gets the bus name that invoked the method.
 func (invocation *DBusMethodInvocationInstance) GetSender() string {
 	var carg0 *C.GDBusMethodInvocation // in, none, converted
-	var cret  *C.gchar                 // return, none, string, casted *C.gchar
+	var cret  *C.gchar                 // return, none, string
 
 	carg0 = (*C.GDBusMethodInvocation)(UnsafeDBusMethodInvocationToGlibNone(invocation))
 
@@ -40156,8 +40156,8 @@ func (invocation *DBusMethodInvocationInstance) GetSender() string {
 // @invocation.
 func (invocation *DBusMethodInvocationInstance) ReturnDBusError(errorName string, errorMessage string) {
 	var carg0 *C.GDBusMethodInvocation // in, none, converted
-	var carg1 *C.gchar                 // in, none, string, casted *C.gchar
-	var carg2 *C.gchar                 // in, none, string, casted *C.gchar
+	var carg1 *C.gchar                 // in, none, string
+	var carg2 *C.gchar                 // in, none, string
 
 	carg0 = (*C.GDBusMethodInvocation)(UnsafeDBusMethodInvocationToGlibNone(invocation))
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(errorName)))
@@ -40188,7 +40188,7 @@ func (invocation *DBusMethodInvocationInstance) ReturnErrorLiteral(domain glib.Q
 	var carg0 *C.GDBusMethodInvocation // in, none, converted
 	var carg1 C.GQuark                 // in, none, casted, alias
 	var carg2 C.gint                   // in, none, casted
-	var carg3 *C.gchar                 // in, none, string, casted *C.gchar
+	var carg3 *C.gchar                 // in, none, string
 
 	carg0 = (*C.GDBusMethodInvocation)(UnsafeDBusMethodInvocationToGlibNone(invocation))
 	carg1 = C.GQuark(domain)
@@ -40506,7 +40506,7 @@ func (manager *DBusObjectManagerClientInstance) GetFlags() DBusObjectManagerClie
 // connection.
 func (manager *DBusObjectManagerClientInstance) GetName() string {
 	var carg0 *C.GDBusObjectManagerClient // in, none, converted
-	var cret  *C.gchar                    // return, none, string, casted *C.gchar
+	var cret  *C.gchar                    // return, none, string
 
 	carg0 = (*C.GDBusObjectManagerClient)(UnsafeDBusObjectManagerClientToGlibNone(manager))
 
@@ -40531,7 +40531,7 @@ func (manager *DBusObjectManagerClientInstance) GetName() string {
 // #GDBusObjectManagerClient:name-owner property.
 func (manager *DBusObjectManagerClientInstance) GetNameOwner() string {
 	var carg0 *C.GDBusObjectManagerClient // in, none, converted
-	var cret  *C.gchar                    // return, full, string, casted *C.gchar
+	var cret  *C.gchar                    // return, full, string
 
 	carg0 = (*C.GDBusObjectManagerClient)(UnsafeDBusObjectManagerClientToGlibNone(manager))
 
@@ -40707,7 +40707,7 @@ func UnsafeDBusObjectManagerServerToGlibFull(c DBusObjectManagerServer) unsafe.P
 // [InterfacesAdded](http://dbus.freedesktop.org/doc/dbus-specification.html#standard-interfaces-objectmanager)
 // signals being emitted.
 func NewDBusObjectManagerServer(objectPath string) DBusObjectManagerServer {
-	var carg1 *C.gchar                    // in, none, string, casted *C.gchar
+	var carg1 *C.gchar                    // in, none, string
 	var cret  *C.GDBusObjectManagerServer // return, full, converted
 
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(objectPath)))
@@ -40866,7 +40866,7 @@ func (manager *DBusObjectManagerServerInstance) SetConnection(connection DBusCon
 // object path for @manager.
 func (manager *DBusObjectManagerServerInstance) Unexport(objectPath string) bool {
 	var carg0 *C.GDBusObjectManagerServer // in, none, converted
-	var carg1 *C.gchar                    // in, none, string, casted *C.gchar
+	var carg1 *C.gchar                    // in, none, string
 	var cret  C.gboolean                  // return
 
 	carg0 = (*C.GDBusObjectManagerServer)(UnsafeDBusObjectManagerServerToGlibNone(manager))
@@ -40962,7 +40962,7 @@ func UnsafeDBusObjectProxyToGlibFull(c DBusObjectProxy) unsafe.Pointer {
 // object path.
 func NewDBusObjectProxy(connection DBusConnection, objectPath string) DBusObjectProxy {
 	var carg1 *C.GDBusConnection  // in, none, converted
-	var carg2 *C.gchar            // in, none, string, casted *C.gchar
+	var carg2 *C.gchar            // in, none, string
 	var cret  *C.GDBusObjectProxy // return, full, converted
 
 	carg1 = (*C.GDBusConnection)(UnsafeDBusConnectionToGlibNone(connection))
@@ -41127,7 +41127,7 @@ func UnsafeDBusObjectSkeletonToGlibFull(c DBusObjectSkeleton) unsafe.Pointer {
 //
 // Creates a new #GDBusObjectSkeleton.
 func NewDBusObjectSkeleton(objectPath string) DBusObjectSkeleton {
-	var carg1 *C.gchar               // in, none, string, casted *C.gchar
+	var carg1 *C.gchar               // in, none, string
 	var cret  *C.GDBusObjectSkeleton // return, full, converted
 
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(objectPath)))
@@ -41213,7 +41213,7 @@ func (object *DBusObjectSkeletonInstance) RemoveInterface(interface_ DBusInterfa
 // does nothing.
 func (object *DBusObjectSkeletonInstance) RemoveInterfaceByName(interfaceName string) {
 	var carg0 *C.GDBusObjectSkeleton // in, none, converted
-	var carg1 *C.gchar               // in, none, string, casted *C.gchar
+	var carg1 *C.gchar               // in, none, string
 
 	carg0 = (*C.GDBusObjectSkeleton)(UnsafeDBusObjectSkeletonToGlibNone(object))
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(interfaceName)))
@@ -41233,7 +41233,7 @@ func (object *DBusObjectSkeletonInstance) RemoveInterfaceByName(interfaceName st
 // Sets the object path for @object.
 func (object *DBusObjectSkeletonInstance) SetObjectPath(objectPath string) {
 	var carg0 *C.GDBusObjectSkeleton // in, none, converted
-	var carg1 *C.gchar               // in, none, string, casted *C.gchar
+	var carg1 *C.gchar               // in, none, string
 
 	carg0 = (*C.GDBusObjectSkeleton)(UnsafeDBusObjectSkeletonToGlibNone(object))
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(objectPath)))
@@ -41544,9 +41544,9 @@ func NewDBusProxyForBusSync(cancellable context.Context, busType BusType, flags 
 	var carg1 C.GBusType            // in, none, casted
 	var carg2 C.GDBusProxyFlags     // in, none, casted
 	var carg3 *C.GDBusInterfaceInfo // in, none, converted, nullable
-	var carg4 *C.gchar              // in, none, string, casted *C.gchar
-	var carg5 *C.gchar              // in, none, string, casted *C.gchar
-	var carg6 *C.gchar              // in, none, string, casted *C.gchar
+	var carg4 *C.gchar              // in, none, string
+	var carg5 *C.gchar              // in, none, string
+	var carg6 *C.gchar              // in, none, string
 	var cret  *C.GDBusProxy         // return, full, converted
 	var _cerr *C.GError             // out, full, converted, nullable
 
@@ -41630,8 +41630,8 @@ func NewDBusProxySync(cancellable context.Context, connection DBusConnection, fl
 	var carg2 C.GDBusProxyFlags     // in, none, casted
 	var carg3 *C.GDBusInterfaceInfo // in, none, converted, nullable
 	var carg4 *C.gchar              // in, none, string, nullable-string
-	var carg5 *C.gchar              // in, none, string, casted *C.gchar
-	var carg6 *C.gchar              // in, none, string, casted *C.gchar
+	var carg5 *C.gchar              // in, none, string
+	var carg6 *C.gchar              // in, none, string
 	var cret  *C.GDBusProxy         // return, full, converted
 	var _cerr *C.GError             // out, full, converted, nullable
 
@@ -41718,8 +41718,8 @@ func NewDBusProxy(cancellable context.Context, connection DBusConnection, flags 
 	var carg2 C.GDBusProxyFlags     // in, none, casted
 	var carg3 *C.GDBusInterfaceInfo // in, none, converted, nullable
 	var carg4 *C.gchar              // in, none, string, nullable-string
-	var carg5 *C.gchar              // in, none, string, casted *C.gchar
-	var carg6 *C.gchar              // in, none, string, casted *C.gchar
+	var carg5 *C.gchar              // in, none, string
+	var carg6 *C.gchar              // in, none, string
 	var carg8 C.GAsyncReadyCallback // callback, scope: async, closure: carg9, nullable
 	var carg9 C.gpointer            // implicit
 
@@ -41776,9 +41776,9 @@ func NewDBusProxyForBus(cancellable context.Context, busType BusType, flags DBus
 	var carg1 C.GBusType            // in, none, casted
 	var carg2 C.GDBusProxyFlags     // in, none, casted
 	var carg3 *C.GDBusInterfaceInfo // in, none, converted, nullable
-	var carg4 *C.gchar              // in, none, string, casted *C.gchar
-	var carg5 *C.gchar              // in, none, string, casted *C.gchar
-	var carg6 *C.gchar              // in, none, string, casted *C.gchar
+	var carg4 *C.gchar              // in, none, string
+	var carg5 *C.gchar              // in, none, string
+	var carg6 *C.gchar              // in, none, string
 	var carg8 C.GAsyncReadyCallback // callback, scope: async, closure: carg9, nullable
 	var carg9 C.gpointer            // implicit
 
@@ -41938,7 +41938,7 @@ func (proxy *DBusProxyInstance) GetInterfaceInfo() *DBusInterfaceInfo {
 // Gets the D-Bus interface name @proxy is for.
 func (proxy *DBusProxyInstance) GetInterfaceName() string {
 	var carg0 *C.GDBusProxy // in, none, converted
-	var cret  *C.gchar      // return, none, string, casted *C.gchar
+	var cret  *C.gchar      // return, none, string
 
 	carg0 = (*C.GDBusProxy)(UnsafeDBusProxyToGlibNone(proxy))
 
@@ -41964,7 +41964,7 @@ func (proxy *DBusProxyInstance) GetInterfaceName() string {
 // pattern.
 func (proxy *DBusProxyInstance) GetName() string {
 	var carg0 *C.GDBusProxy // in, none, converted
-	var cret  *C.gchar      // return, none, string, casted *C.gchar
+	var cret  *C.gchar      // return, none, string
 
 	carg0 = (*C.GDBusProxy)(UnsafeDBusProxyToGlibNone(proxy))
 
@@ -41989,7 +41989,7 @@ func (proxy *DBusProxyInstance) GetName() string {
 // #GDBusProxy:g-name-owner property.
 func (proxy *DBusProxyInstance) GetNameOwner() string {
 	var carg0 *C.GDBusProxy // in, none, converted
-	var cret  *C.gchar      // return, full, string, casted *C.gchar
+	var cret  *C.gchar      // return, full, string
 
 	carg0 = (*C.GDBusProxy)(UnsafeDBusProxyToGlibNone(proxy))
 
@@ -42012,7 +42012,7 @@ func (proxy *DBusProxyInstance) GetNameOwner() string {
 // Gets the object path @proxy is for.
 func (proxy *DBusProxyInstance) GetObjectPath() string {
 	var carg0 *C.GDBusProxy // in, none, converted
-	var cret  *C.gchar      // return, none, string, casted *C.gchar
+	var cret  *C.gchar      // return, none, string
 
 	carg0 = (*C.GDBusProxy)(UnsafeDBusProxyToGlibNone(proxy))
 
@@ -42244,9 +42244,9 @@ func UnsafeDBusServerToGlibFull(c DBusServer) unsafe.Pointer {
 // asynchronous version.
 func NewDBusServerSync(cancellable context.Context, address string, flags DBusServerFlags, guid string, observer DBusAuthObserver) (DBusServer, error) {
 	var carg5 *C.GCancellable      // in, none, converted, nullable
-	var carg1 *C.gchar             // in, none, string, casted *C.gchar
+	var carg1 *C.gchar             // in, none, string
 	var carg2 C.GDBusServerFlags   // in, none, casted
-	var carg3 *C.gchar             // in, none, string, casted *C.gchar
+	var carg3 *C.gchar             // in, none, string
 	var carg4 *C.GDBusAuthObserver // in, none, converted, nullable
 	var cret  *C.GDBusServer       // return, full, converted
 	var _cerr *C.GError            // out, full, converted, nullable
@@ -42293,7 +42293,7 @@ func NewDBusServerSync(cancellable context.Context, address string, flags DBusSe
 // This is valid and non-empty if initializing the #GDBusServer succeeded.
 func (server *DBusServerInstance) GetClientAddress() string {
 	var carg0 *C.GDBusServer // in, none, converted
-	var cret  *C.gchar       // return, none, string, casted *C.gchar
+	var cret  *C.gchar       // return, none, string
 
 	carg0 = (*C.GDBusServer)(UnsafeDBusServerToGlibNone(server))
 
@@ -42337,7 +42337,7 @@ func (server *DBusServerInstance) GetFlags() DBusServerFlags {
 // Gets the GUID for @server, as provided to g_dbus_server_new_sync().
 func (server *DBusServerInstance) GetGUID() string {
 	var carg0 *C.GDBusServer // in, none, converted
-	var cret  *C.gchar       // return, none, string, casted *C.gchar
+	var cret  *C.gchar       // return, none, string
 
 	carg0 = (*C.GDBusServer)(UnsafeDBusServerToGlibNone(server))
 
@@ -47198,7 +47198,7 @@ func UnsafeIOModuleToGlibFull(c IOModule) unsafe.Pointer {
 // Creates a new GIOModule that will load the specific
 // shared library when in use.
 func NewIOModule(filename string) IOModule {
-	var carg1 *C.gchar     // in, none, string, casted *C.gchar
+	var carg1 *C.gchar     // in, none, string
 	var cret  *C.GIOModule // return, full, converted
 
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(filename)))
@@ -48086,7 +48086,7 @@ func NewInetAddressAny(family SocketFamily) InetAddress {
 //
 // Parses @string as an IP address and creates a new #GInetAddress.
 func NewInetAddressFromString(str string) InetAddress {
-	var carg1 *C.gchar        // in, none, string, casted *C.gchar
+	var carg1 *C.gchar        // in, none, string
 	var cret  *C.GInetAddress // return, full, converted
 
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(str)))
@@ -48459,7 +48459,7 @@ func (address *InetAddressInstance) GetNativeSize() uint {
 // Converts @address to string form.
 func (address *InetAddressInstance) ToString() string {
 	var carg0 *C.GInetAddress // in, none, converted
-	var cret  *C.gchar        // return, full, string, casted *C.gchar
+	var cret  *C.gchar        // return, full, string
 
 	carg0 = (*C.GInetAddress)(UnsafeInetAddressToGlibNone(address))
 
@@ -48634,7 +48634,7 @@ func NewInetAddressMask(addr InetAddress, length uint) (InetAddressMask, error) 
 // delimited by a "/". If it is not present, then the length is
 // assumed to be the full length of the address.
 func NewInetAddressMaskFromString(maskString string) (InetAddressMask, error) {
-	var carg1 *C.gchar            // in, none, string, casted *C.gchar
+	var carg1 *C.gchar            // in, none, string
 	var cret  *C.GInetAddressMask // return, full, converted
 	var _cerr *C.GError           // out, full, converted, nullable
 
@@ -48793,7 +48793,7 @@ func (mask *InetAddressMaskInstance) Matches(address InetAddress) bool {
 // Converts @mask back to its corresponding string form.
 func (mask *InetAddressMaskInstance) ToString() string {
 	var carg0 *C.GInetAddressMask // in, none, converted
-	var cret  *C.gchar            // return, full, string, casted *C.gchar
+	var cret  *C.gchar            // return, full, string
 
 	carg0 = (*C.GInetAddressMask)(UnsafeInetAddressMaskToGlibNone(mask))
 
@@ -50551,7 +50551,7 @@ func UnsafeMenuAttributeIterToGlibFull(c MenuAttributeIter) unsafe.Pointer {
 // The iterator is not advanced.
 func (iter *MenuAttributeIterInstance) GetName() string {
 	var carg0 *C.GMenuAttributeIter // in, none, converted
-	var cret  *C.gchar              // return, none, string, casted *C.gchar
+	var cret  *C.gchar              // return, none, string
 
 	carg0 = (*C.GMenuAttributeIter)(UnsafeMenuAttributeIterToGlibNone(iter))
 
@@ -50977,7 +50977,7 @@ func NewMenuItemSubmenu(label string, submenu MenuModel) MenuItem {
 // Queries the named @link on @menu_item.
 func (menuItem *MenuItemInstance) GetLink(link string) MenuModel {
 	var carg0 *C.GMenuItem  // in, none, converted
-	var carg1 *C.gchar      // in, none, string, casted *C.gchar
+	var carg1 *C.gchar      // in, none, string
 	var cret  *C.GMenuModel // return, full, converted
 
 	carg0 = (*C.GMenuItem)(UnsafeMenuItemToGlibNone(menuItem))
@@ -51014,7 +51014,7 @@ func (menuItem *MenuItemInstance) GetLink(link string) MenuModel {
 // the semantics of the action and target attributes.
 func (menuItem *MenuItemInstance) SetDetailedAction(detailedAction string) {
 	var carg0 *C.GMenuItem // in, none, converted
-	var carg1 *C.gchar     // in, none, string, casted *C.gchar
+	var carg1 *C.gchar     // in, none, string
 
 	carg0 = (*C.GMenuItem)(UnsafeMenuItemToGlibNone(menuItem))
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(detailedAction)))
@@ -51099,7 +51099,7 @@ func (menuItem *MenuItemInstance) SetLabel(label string) {
 // must not end with a '-', and must not contain consecutive dashes.
 func (menuItem *MenuItemInstance) SetLink(link string, model MenuModel) {
 	var carg0 *C.GMenuItem  // in, none, converted
-	var carg1 *C.gchar      // in, none, string, casted *C.gchar
+	var carg1 *C.gchar      // in, none, string
 	var carg2 *C.GMenuModel // in, none, converted, nullable
 
 	carg0 = (*C.GMenuItem)(UnsafeMenuItemToGlibNone(menuItem))
@@ -51285,7 +51285,7 @@ func UnsafeMenuLinkIterToGlibFull(c MenuLinkIter) unsafe.Pointer {
 // The iterator is not advanced.
 func (iter *MenuLinkIterInstance) GetName() string {
 	var carg0 *C.GMenuLinkIter // in, none, converted
-	var cret  *C.gchar         // return, none, string, casted *C.gchar
+	var cret  *C.gchar         // return, none, string
 
 	carg0 = (*C.GMenuLinkIter)(UnsafeMenuLinkIterToGlibNone(iter))
 
@@ -51322,7 +51322,7 @@ func (iter *MenuLinkIterInstance) GetName() string {
 // be unreffed using g_object_unref() when it is no longer in use.
 func (iter *MenuLinkIterInstance) GetNext() (string, MenuModel, bool) {
 	var carg0 *C.GMenuLinkIter // in, none, converted
-	var carg1 *C.gchar         // out, none, string, casted *C.gchar
+	var carg1 *C.gchar         // out, none, string
 	var carg2 *C.GMenuModel    // out, full, converted
 	var cret  C.gboolean       // return
 
@@ -51698,7 +51698,7 @@ func UnsafeMenuModelToGlibFull(c MenuModel) unsafe.Pointer {
 func (model *MenuModelInstance) GetItemLink(itemIndex int, link string) MenuModel {
 	var carg0 *C.GMenuModel // in, none, converted
 	var carg1 C.gint        // in, none, casted
-	var carg2 *C.gchar      // in, none, string, casted *C.gchar
+	var carg2 *C.gchar      // in, none, string
 	var cret  *C.GMenuModel // return, full, converted
 
 	carg0 = (*C.GMenuModel)(UnsafeMenuModelToGlibNone(model))
@@ -52735,7 +52735,7 @@ func UnsafeNetworkAddressToGlibFull(c NetworkAddress) unsafe.Pointer {
 // g_network_address_new_loopback() to create a #GNetworkAddress that
 // is guaranteed to resolve to both addresses.
 func NewNetworkAddress(hostname string, port uint16) NetworkAddress {
-	var carg1 *C.gchar              // in, none, string, casted *C.gchar
+	var carg1 *C.gchar              // in, none, string
 	var carg2 C.guint16             // in, none, casted
 	var cret  *C.GSocketConnectable // return, full, converted, casted *C.GNetworkAddress
 
@@ -52826,7 +52826,7 @@ func NewNetworkAddressLoopback(port uint16) NetworkAddress {
 // is deprecated, because it depends on the contents of /etc/services,
 // which is generally quite sparse on platforms other than Linux.)
 func NetworkAddressParse(hostAndPort string, defaultPort uint16) (NetworkAddress, error) {
-	var carg1 *C.gchar              // in, none, string, casted *C.gchar
+	var carg1 *C.gchar              // in, none, string
 	var carg2 C.guint16             // in, none, casted
 	var cret  *C.GSocketConnectable // return, full, converted, casted *C.GNetworkAddress
 	var _cerr *C.GError             // out, full, converted, nullable
@@ -52869,7 +52869,7 @@ func NetworkAddressParse(hostAndPort string, defaultPort uint16) (NetworkAddress
 // g_network_address_parse() allows #GSocketClient to determine
 // when to use application-specific proxy protocols.
 func NetworkAddressParseURI(uri string, defaultPort uint16) (NetworkAddress, error) {
-	var carg1 *C.gchar              // in, none, string, casted *C.gchar
+	var carg1 *C.gchar              // in, none, string
 	var carg2 C.guint16             // in, none, casted
 	var cret  *C.GSocketConnectable // return, full, converted, casted *C.GNetworkAddress
 	var _cerr *C.GError             // out, full, converted, nullable
@@ -52902,7 +52902,7 @@ func NetworkAddressParseURI(uri string, defaultPort uint16) (NetworkAddress, err
 // depending on what @addr was created with.
 func (addr *NetworkAddressInstance) GetHostname() string {
 	var carg0 *C.GNetworkAddress // in, none, converted
-	var cret  *C.gchar           // return, none, string, casted *C.gchar
+	var cret  *C.gchar           // return, none, string
 
 	carg0 = (*C.GNetworkAddress)(UnsafeNetworkAddressToGlibNone(addr))
 
@@ -52946,7 +52946,7 @@ func (addr *NetworkAddressInstance) GetPort() uint16 {
 // Gets @addr's scheme
 func (addr *NetworkAddressInstance) GetScheme() string {
 	var carg0 *C.GNetworkAddress // in, none, converted
-	var cret  *C.gchar           // return, none, string, casted *C.gchar
+	var cret  *C.gchar           // return, none, string
 
 	carg0 = (*C.GNetworkAddress)(UnsafeNetworkAddressToGlibNone(addr))
 
@@ -53074,9 +53074,9 @@ func UnsafeNetworkServiceToGlibFull(c NetworkService) unsafe.Pointer {
 // @protocol, and @domain. This will initially be unresolved; use the
 // #GSocketConnectable interface to resolve it.
 func NewNetworkService(service string, protocol string, domain string) NetworkService {
-	var carg1 *C.gchar              // in, none, string, casted *C.gchar
-	var carg2 *C.gchar              // in, none, string, casted *C.gchar
-	var carg3 *C.gchar              // in, none, string, casted *C.gchar
+	var carg1 *C.gchar              // in, none, string
+	var carg2 *C.gchar              // in, none, string
+	var carg3 *C.gchar              // in, none, string
 	var cret  *C.GSocketConnectable // return, full, converted, casted *C.GNetworkService
 
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(service)))
@@ -53107,7 +53107,7 @@ func NewNetworkService(service string, protocol string, domain string) NetworkSe
 // ASCII-encoded, depending on what @srv was created with.
 func (srv *NetworkServiceInstance) GetDomain() string {
 	var carg0 *C.GNetworkService // in, none, converted
-	var cret  *C.gchar           // return, none, string, casted *C.gchar
+	var cret  *C.gchar           // return, none, string
 
 	carg0 = (*C.GNetworkService)(UnsafeNetworkServiceToGlibNone(srv))
 
@@ -53129,7 +53129,7 @@ func (srv *NetworkServiceInstance) GetDomain() string {
 // Gets @srv's protocol name (eg, "tcp").
 func (srv *NetworkServiceInstance) GetProtocol() string {
 	var carg0 *C.GNetworkService // in, none, converted
-	var cret  *C.gchar           // return, none, string, casted *C.gchar
+	var cret  *C.gchar           // return, none, string
 
 	carg0 = (*C.GNetworkService)(UnsafeNetworkServiceToGlibNone(srv))
 
@@ -53152,7 +53152,7 @@ func (srv *NetworkServiceInstance) GetProtocol() string {
 // is used as scheme.
 func (srv *NetworkServiceInstance) GetScheme() string {
 	var carg0 *C.GNetworkService // in, none, converted
-	var cret  *C.gchar           // return, none, string, casted *C.gchar
+	var cret  *C.gchar           // return, none, string
 
 	carg0 = (*C.GNetworkService)(UnsafeNetworkServiceToGlibNone(srv))
 
@@ -53174,7 +53174,7 @@ func (srv *NetworkServiceInstance) GetScheme() string {
 // Gets @srv's service name (eg, "ldap").
 func (srv *NetworkServiceInstance) GetService() string {
 	var carg0 *C.GNetworkService // in, none, converted
-	var cret  *C.gchar           // return, none, string, casted *C.gchar
+	var cret  *C.gchar           // return, none, string
 
 	carg0 = (*C.GNetworkService)(UnsafeNetworkServiceToGlibNone(srv))
 
@@ -53198,7 +53198,7 @@ func (srv *NetworkServiceInstance) GetService() string {
 // is used as scheme.
 func (srv *NetworkServiceInstance) SetScheme(scheme string) {
 	var carg0 *C.GNetworkService // in, none, converted
-	var carg1 *C.gchar           // in, none, string, casted *C.gchar
+	var carg1 *C.gchar           // in, none, string
 
 	carg0 = (*C.GNetworkService)(UnsafeNetworkServiceToGlibNone(srv))
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(scheme)))
@@ -53412,7 +53412,7 @@ func UnsafeNotificationToGlibFull(c Notification) unsafe.Pointer {
 // any properties after this call will not have any effect until
 // resending @notification.
 func NewNotification(title string) Notification {
-	var carg1 *C.gchar         // in, none, string, casted *C.gchar
+	var carg1 *C.gchar         // in, none, string
 	var cret  *C.GNotification // return, full, converted
 
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(title)))
@@ -53445,8 +53445,8 @@ func NewNotification(title string) Notification {
 // for @detailed_action.
 func (notification *NotificationInstance) AddButton(label string, detailedAction string) {
 	var carg0 *C.GNotification // in, none, converted
-	var carg1 *C.gchar         // in, none, string, casted *C.gchar
-	var carg2 *C.gchar         // in, none, string, casted *C.gchar
+	var carg1 *C.gchar         // in, none, string
+	var carg2 *C.gchar         // in, none, string
 
 	carg0 = (*C.GNotification)(UnsafeNotificationToGlibNone(notification))
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(label)))
@@ -53528,7 +53528,7 @@ func (notification *NotificationInstance) SetCategory(category string) {
 // was sent on is activated.
 func (notification *NotificationInstance) SetDefaultAction(detailedAction string) {
 	var carg0 *C.GNotification // in, none, converted
-	var carg1 *C.gchar         // in, none, string, casted *C.gchar
+	var carg1 *C.gchar         // in, none, string
 
 	carg0 = (*C.GNotification)(UnsafeNotificationToGlibNone(notification))
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(detailedAction)))
@@ -53587,7 +53587,7 @@ func (notification *NotificationInstance) SetPriority(priority NotificationPrior
 // Sets the title of @notification to @title.
 func (notification *NotificationInstance) SetTitle(title string) {
 	var carg0 *C.GNotification // in, none, converted
-	var carg1 *C.gchar         // in, none, string, casted *C.gchar
+	var carg1 *C.gchar         // in, none, string
 
 	carg0 = (*C.GNotification)(UnsafeNotificationToGlibNone(notification))
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(title)))
@@ -56812,7 +56812,7 @@ func (resolver *ResolverInstance) LookupByAddress(cancellable context.Context, a
 	var carg0 *C.GResolver    // in, none, converted
 	var carg2 *C.GCancellable // in, none, converted, nullable
 	var carg1 *C.GInetAddress // in, none, converted
-	var cret  *C.gchar        // return, full, string, casted *C.gchar
+	var cret  *C.gchar        // return, full, string
 	var _cerr *C.GError       // out, full, converted, nullable
 
 	carg0 = (*C.GResolver)(UnsafeResolverToGlibNone(resolver))
@@ -56893,7 +56893,7 @@ func (resolver *ResolverInstance) LookupByAddressAsync(cancellable context.Conte
 func (resolver *ResolverInstance) LookupByAddressFinish(result AsyncResult) (string, error) {
 	var carg0 *C.GResolver    // in, none, converted
 	var carg1 *C.GAsyncResult // in, none, converted
-	var cret  *C.gchar        // return, full, string, casted *C.gchar
+	var cret  *C.gchar        // return, full, string
 	var _cerr *C.GError       // out, full, converted, nullable
 
 	carg0 = (*C.GResolver)(UnsafeResolverToGlibNone(resolver))
@@ -56953,7 +56953,7 @@ func (resolver *ResolverInstance) LookupByAddressFinish(result AsyncResult) (str
 func (resolver *ResolverInstance) LookupByName(cancellable context.Context, hostname string) ([]InetAddress, error) {
 	var carg0 *C.GResolver    // in, none, converted
 	var carg2 *C.GCancellable // in, none, converted, nullable
-	var carg1 *C.gchar        // in, none, string, casted *C.gchar
+	var carg1 *C.gchar        // in, none, string
 	var cret  *C.GList        // container, transfer: full
 	var _cerr *C.GError       // out, full, converted, nullable
 
@@ -57002,7 +57002,7 @@ func (resolver *ResolverInstance) LookupByName(cancellable context.Context, host
 func (resolver *ResolverInstance) LookupByNameAsync(cancellable context.Context, hostname string, callback AsyncReadyCallback) {
 	var carg0 *C.GResolver          // in, none, converted
 	var carg2 *C.GCancellable       // in, none, converted, nullable
-	var carg1 *C.gchar              // in, none, string, casted *C.gchar
+	var carg1 *C.gchar              // in, none, string
 	var carg3 C.GAsyncReadyCallback // callback, scope: async, closure: carg4, nullable
 	var carg4 C.gpointer            // implicit
 
@@ -57091,7 +57091,7 @@ func (resolver *ResolverInstance) LookupByNameFinish(result AsyncResult) ([]Inet
 func (resolver *ResolverInstance) LookupByNameWithFlags(cancellable context.Context, hostname string, flags ResolverNameLookupFlags) ([]InetAddress, error) {
 	var carg0 *C.GResolver               // in, none, converted
 	var carg3 *C.GCancellable            // in, none, converted, nullable
-	var carg1 *C.gchar                   // in, none, string, casted *C.gchar
+	var carg1 *C.gchar                   // in, none, string
 	var carg2 C.GResolverNameLookupFlags // in, none, casted
 	var cret  *C.GList                   // container, transfer: full
 	var _cerr *C.GError                  // out, full, converted, nullable
@@ -57144,7 +57144,7 @@ func (resolver *ResolverInstance) LookupByNameWithFlags(cancellable context.Cont
 func (resolver *ResolverInstance) LookupByNameWithFlagsAsync(cancellable context.Context, hostname string, flags ResolverNameLookupFlags, callback AsyncReadyCallback) {
 	var carg0 *C.GResolver               // in, none, converted
 	var carg3 *C.GCancellable            // in, none, converted, nullable
-	var carg1 *C.gchar                   // in, none, string, casted *C.gchar
+	var carg1 *C.gchar                   // in, none, string
 	var carg2 C.GResolverNameLookupFlags // in, none, casted
 	var carg4 C.GAsyncReadyCallback      // callback, scope: async, closure: carg5, nullable
 	var carg5 C.gpointer                 // implicit
@@ -57233,7 +57233,7 @@ func (resolver *ResolverInstance) LookupByNameWithFlagsFinish(result AsyncResult
 func (resolver *ResolverInstance) LookupRecordsAsync(cancellable context.Context, rrname string, recordType ResolverRecordType, callback AsyncReadyCallback) {
 	var carg0 *C.GResolver          // in, none, converted
 	var carg3 *C.GCancellable       // in, none, converted, nullable
-	var carg1 *C.gchar              // in, none, string, casted *C.gchar
+	var carg1 *C.gchar              // in, none, string
 	var carg2 C.GResolverRecordType // in, none, casted
 	var carg4 C.GAsyncReadyCallback // callback, scope: async, closure: carg5, nullable
 	var carg5 C.gpointer            // implicit
@@ -57296,9 +57296,9 @@ func (resolver *ResolverInstance) LookupRecordsAsync(cancellable context.Context
 func (resolver *ResolverInstance) LookupService(cancellable context.Context, service string, protocol string, domain string) ([]*SrvTarget, error) {
 	var carg0 *C.GResolver    // in, none, converted
 	var carg4 *C.GCancellable // in, none, converted, nullable
-	var carg1 *C.gchar        // in, none, string, casted *C.gchar
-	var carg2 *C.gchar        // in, none, string, casted *C.gchar
-	var carg3 *C.gchar        // in, none, string, casted *C.gchar
+	var carg1 *C.gchar        // in, none, string
+	var carg2 *C.gchar        // in, none, string
+	var carg3 *C.gchar        // in, none, string
 	var cret  *C.GList        // container, transfer: full
 	var _cerr *C.GError       // out, full, converted, nullable
 
@@ -57356,9 +57356,9 @@ func (resolver *ResolverInstance) LookupService(cancellable context.Context, ser
 func (resolver *ResolverInstance) LookupServiceAsync(cancellable context.Context, service string, protocol string, domain string, callback AsyncReadyCallback) {
 	var carg0 *C.GResolver          // in, none, converted
 	var carg4 *C.GCancellable       // in, none, converted, nullable
-	var carg1 *C.gchar              // in, none, string, casted *C.gchar
-	var carg2 *C.gchar              // in, none, string, casted *C.gchar
-	var carg3 *C.gchar              // in, none, string, casted *C.gchar
+	var carg1 *C.gchar              // in, none, string
+	var carg2 *C.gchar              // in, none, string
+	var carg3 *C.gchar              // in, none, string
 	var carg5 C.GAsyncReadyCallback // callback, scope: async, closure: carg6, nullable
 	var carg6 C.gpointer            // implicit
 
@@ -58411,7 +58411,7 @@ func UnsafeSettingsToGlibFull(c Settings) unsafe.Pointer {
 // call to g_settings_new().  The new #GSettings will hold a reference
 // on the context.  See g_main_context_push_thread_default().
 func NewSettings(schemaId string) Settings {
-	var carg1 *C.gchar     // in, none, string, casted *C.gchar
+	var carg1 *C.gchar     // in, none, string
 	var cret  *C.GSettings // return, full, converted
 
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(schemaId)))
@@ -58452,8 +58452,8 @@ func NewSettings(schemaId string) Settings {
 // begins and ends with '/' and does not contain two consecutive '/'
 // characters.
 func NewSettingsWithPath(schemaId string, path string) Settings {
-	var carg1 *C.gchar     // in, none, string, casted *C.gchar
-	var carg2 *C.gchar     // in, none, string, casted *C.gchar
+	var carg1 *C.gchar     // in, none, string
+	var carg2 *C.gchar     // in, none, string
 	var cret  *C.GSettings // return, full, converted
 
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(schemaId)))
@@ -58577,7 +58577,7 @@ func (settings *SettingsInstance) Apply() {
 // correct type).
 func (settings *SettingsInstance) CreateAction(key string) Action {
 	var carg0 *C.GSettings // in, none, converted
-	var carg1 *C.gchar     // in, none, string, casted *C.gchar
+	var carg1 *C.gchar     // in, none, string
 	var cret  *C.GAction   // return, full, converted
 
 	carg0 = (*C.GSettings)(UnsafeSettingsToGlibNone(settings))
@@ -58627,7 +58627,7 @@ func (settings *SettingsInstance) Delay() {
 // having a boolean type in the schema for @settings.
 func (settings *SettingsInstance) GetBoolean(key string) bool {
 	var carg0 *C.GSettings // in, none, converted
-	var carg1 *C.gchar     // in, none, string, casted *C.gchar
+	var carg1 *C.gchar     // in, none, string
 	var cret  C.gboolean   // return
 
 	carg0 = (*C.GSettings)(UnsafeSettingsToGlibNone(settings))
@@ -58668,7 +58668,7 @@ func (settings *SettingsInstance) GetBoolean(key string) bool {
 // mode from @settings.
 func (settings *SettingsInstance) GetChild(name string) Settings {
 	var carg0 *C.GSettings // in, none, converted
-	var carg1 *C.gchar     // in, none, string, casted *C.gchar
+	var carg1 *C.gchar     // in, none, string
 	var cret  *C.GSettings // return, full, converted
 
 	carg0 = (*C.GSettings)(UnsafeSettingsToGlibNone(settings))
@@ -58704,7 +58704,7 @@ func (settings *SettingsInstance) GetChild(name string) Settings {
 // having a 'double' type in the schema for @settings.
 func (settings *SettingsInstance) GetDouble(key string) float64 {
 	var carg0 *C.GSettings // in, none, converted
-	var carg1 *C.gchar     // in, none, string, casted *C.gchar
+	var carg1 *C.gchar     // in, none, string
 	var cret  C.gdouble    // return, none, casted
 
 	carg0 = (*C.GSettings)(UnsafeSettingsToGlibNone(settings))
@@ -58746,7 +58746,7 @@ func (settings *SettingsInstance) GetDouble(key string) float64 {
 // default value.
 func (settings *SettingsInstance) GetEnum(key string) int {
 	var carg0 *C.GSettings // in, none, converted
-	var carg1 *C.gchar     // in, none, string, casted *C.gchar
+	var carg1 *C.gchar     // in, none, string
 	var cret  C.gint       // return, none, casted
 
 	carg0 = (*C.GSettings)(UnsafeSettingsToGlibNone(settings))
@@ -58788,7 +58788,7 @@ func (settings *SettingsInstance) GetEnum(key string) int {
 // value.
 func (settings *SettingsInstance) GetFlags(key string) uint {
 	var carg0 *C.GSettings // in, none, converted
-	var carg1 *C.gchar     // in, none, string, casted *C.gchar
+	var carg1 *C.gchar     // in, none, string
 	var cret  C.guint      // return, none, casted
 
 	carg0 = (*C.GSettings)(UnsafeSettingsToGlibNone(settings))
@@ -58849,7 +58849,7 @@ func (settings *SettingsInstance) GetHasUnapplied() bool {
 // having a int32 type in the schema for @settings.
 func (settings *SettingsInstance) GetInt(key string) int {
 	var carg0 *C.GSettings // in, none, converted
-	var carg1 *C.gchar     // in, none, string, casted *C.gchar
+	var carg1 *C.gchar     // in, none, string
 	var cret  C.gint       // return, none, casted
 
 	carg0 = (*C.GSettings)(UnsafeSettingsToGlibNone(settings))
@@ -58885,7 +58885,7 @@ func (settings *SettingsInstance) GetInt(key string) int {
 // having a int64 type in the schema for @settings.
 func (settings *SettingsInstance) GetInt64(key string) int64 {
 	var carg0 *C.GSettings // in, none, converted
-	var carg1 *C.gchar     // in, none, string, casted *C.gchar
+	var carg1 *C.gchar     // in, none, string
 	var cret  C.gint64     // return, none, casted
 
 	carg0 = (*C.GSettings)(UnsafeSettingsToGlibNone(settings))
@@ -58921,8 +58921,8 @@ func (settings *SettingsInstance) GetInt64(key string) int64 {
 // having a string type in the schema for @settings.
 func (settings *SettingsInstance) GetString(key string) string {
 	var carg0 *C.GSettings // in, none, converted
-	var carg1 *C.gchar     // in, none, string, casted *C.gchar
-	var cret  *C.gchar     // return, full, string, casted *C.gchar
+	var carg1 *C.gchar     // in, none, string
+	var cret  *C.gchar     // return, full, string
 
 	carg0 = (*C.GSettings)(UnsafeSettingsToGlibNone(settings))
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(key)))
@@ -58956,7 +58956,7 @@ func (settings *SettingsInstance) GetString(key string) string {
 // having an array of strings type in the schema for @settings.
 func (settings *SettingsInstance) GetStrv(key string) []string {
 	var carg0 *C.GSettings // in, none, converted
-	var carg1 *C.gchar     // in, none, string, casted *C.gchar
+	var carg1 *C.gchar     // in, none, string
 	var cret  **C.gchar    // return, transfer: full, C Pointers: 2, Name: array[utf8], scope: , array (inner: *typesystem.StringPrimitive, zero-terminated)
 
 	carg0 = (*C.GSettings)(UnsafeSettingsToGlibNone(settings))
@@ -58995,7 +58995,7 @@ func (settings *SettingsInstance) GetStrv(key string) []string {
 // having a uint32 type in the schema for @settings.
 func (settings *SettingsInstance) GetUint(key string) uint {
 	var carg0 *C.GSettings // in, none, converted
-	var carg1 *C.gchar     // in, none, string, casted *C.gchar
+	var carg1 *C.gchar     // in, none, string
 	var cret  C.guint      // return, none, casted
 
 	carg0 = (*C.GSettings)(UnsafeSettingsToGlibNone(settings))
@@ -59032,7 +59032,7 @@ func (settings *SettingsInstance) GetUint(key string) uint {
 // having a uint64 type in the schema for @settings.
 func (settings *SettingsInstance) GetUint64(key string) uint64 {
 	var carg0 *C.GSettings // in, none, converted
-	var carg1 *C.gchar     // in, none, string, casted *C.gchar
+	var carg1 *C.gchar     // in, none, string
 	var cret  C.guint64    // return, none, casted
 
 	carg0 = (*C.GSettings)(UnsafeSettingsToGlibNone(settings))
@@ -59063,7 +59063,7 @@ func (settings *SettingsInstance) GetUint64(key string) uint64 {
 // Finds out if a key can be written or not
 func (settings *SettingsInstance) IsWritable(name string) bool {
 	var carg0 *C.GSettings // in, none, converted
-	var carg1 *C.gchar     // in, none, string, casted *C.gchar
+	var carg1 *C.gchar     // in, none, string
 	var cret  C.gboolean   // return
 
 	carg0 = (*C.GSettings)(UnsafeSettingsToGlibNone(settings))
@@ -59163,7 +59163,7 @@ func (settings *SettingsInstance) ListKeys() []string {
 // administrator.
 func (settings *SettingsInstance) Reset(key string) {
 	var carg0 *C.GSettings // in, none, converted
-	var carg1 *C.gchar     // in, none, string, casted *C.gchar
+	var carg1 *C.gchar     // in, none, string
 
 	carg0 = (*C.GSettings)(UnsafeSettingsToGlibNone(settings))
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(key)))
@@ -59210,7 +59210,7 @@ func (settings *SettingsInstance) Revert() {
 // having a boolean type in the schema for @settings.
 func (settings *SettingsInstance) SetBoolean(key string, value bool) bool {
 	var carg0 *C.GSettings // in, none, converted
-	var carg1 *C.gchar     // in, none, string, casted *C.gchar
+	var carg1 *C.gchar     // in, none, string
 	var carg2 C.gboolean   // in
 	var cret  C.gboolean   // return
 
@@ -59254,7 +59254,7 @@ func (settings *SettingsInstance) SetBoolean(key string, value bool) bool {
 // having a 'double' type in the schema for @settings.
 func (settings *SettingsInstance) SetDouble(key string, value float64) bool {
 	var carg0 *C.GSettings // in, none, converted
-	var carg1 *C.gchar     // in, none, string, casted *C.gchar
+	var carg1 *C.gchar     // in, none, string
 	var carg2 C.gdouble    // in, none, casted
 	var cret  C.gboolean   // return
 
@@ -59300,7 +59300,7 @@ func (settings *SettingsInstance) SetDouble(key string, value float64) bool {
 // @value.
 func (settings *SettingsInstance) SetEnum(key string, value int) bool {
 	var carg0 *C.GSettings // in, none, converted
-	var carg1 *C.gchar     // in, none, string, casted *C.gchar
+	var carg1 *C.gchar     // in, none, string
 	var carg2 C.gint       // in, none, casted
 	var cret  C.gboolean   // return
 
@@ -59347,7 +59347,7 @@ func (settings *SettingsInstance) SetEnum(key string, value int) bool {
 // bit in @value.
 func (settings *SettingsInstance) SetFlags(key string, value uint) bool {
 	var carg0 *C.GSettings // in, none, converted
-	var carg1 *C.gchar     // in, none, string, casted *C.gchar
+	var carg1 *C.gchar     // in, none, string
 	var carg2 C.guint      // in, none, casted
 	var cret  C.gboolean   // return
 
@@ -59389,7 +59389,7 @@ func (settings *SettingsInstance) SetFlags(key string, value uint) bool {
 // having a int32 type in the schema for @settings.
 func (settings *SettingsInstance) SetInt(key string, value int) bool {
 	var carg0 *C.GSettings // in, none, converted
-	var carg1 *C.gchar     // in, none, string, casted *C.gchar
+	var carg1 *C.gchar     // in, none, string
 	var carg2 C.gint       // in, none, casted
 	var cret  C.gboolean   // return
 
@@ -59431,7 +59431,7 @@ func (settings *SettingsInstance) SetInt(key string, value int) bool {
 // having a int64 type in the schema for @settings.
 func (settings *SettingsInstance) SetInt64(key string, value int64) bool {
 	var carg0 *C.GSettings // in, none, converted
-	var carg1 *C.gchar     // in, none, string, casted *C.gchar
+	var carg1 *C.gchar     // in, none, string
 	var carg2 C.gint64     // in, none, casted
 	var cret  C.gboolean   // return
 
@@ -59473,8 +59473,8 @@ func (settings *SettingsInstance) SetInt64(key string, value int64) bool {
 // having a string type in the schema for @settings.
 func (settings *SettingsInstance) SetString(key string, value string) bool {
 	var carg0 *C.GSettings // in, none, converted
-	var carg1 *C.gchar     // in, none, string, casted *C.gchar
-	var carg2 *C.gchar     // in, none, string, casted *C.gchar
+	var carg1 *C.gchar     // in, none, string
+	var carg2 *C.gchar     // in, none, string
 	var cret  C.gboolean   // return
 
 	carg0 = (*C.GSettings)(UnsafeSettingsToGlibNone(settings))
@@ -59517,7 +59517,7 @@ func (settings *SettingsInstance) SetString(key string, value string) bool {
 // having an array of strings type in the schema for @settings.
 func (settings *SettingsInstance) SetStrv(key string, value []string) bool {
 	var carg0 *C.GSettings // in, none, converted
-	var carg1 *C.gchar     // in, none, string, casted *C.gchar
+	var carg1 *C.gchar     // in, none, string
 	var carg2 **C.gchar    // in, transfer: none, C Pointers: 2, Name: array[utf8], nullable, array (inner: *typesystem.StringPrimitive, zero-terminated)
 	var cret  C.gboolean   // return
 
@@ -59562,7 +59562,7 @@ func (settings *SettingsInstance) SetStrv(key string, value []string) bool {
 // having a uint32 type in the schema for @settings.
 func (settings *SettingsInstance) SetUint(key string, value uint) bool {
 	var carg0 *C.GSettings // in, none, converted
-	var carg1 *C.gchar     // in, none, string, casted *C.gchar
+	var carg1 *C.gchar     // in, none, string
 	var carg2 C.guint      // in, none, casted
 	var cret  C.gboolean   // return
 
@@ -59605,7 +59605,7 @@ func (settings *SettingsInstance) SetUint(key string, value uint) bool {
 // having a uint64 type in the schema for @settings.
 func (settings *SettingsInstance) SetUint64(key string, value uint64) bool {
 	var carg0 *C.GSettings // in, none, converted
-	var carg1 *C.gchar     // in, none, string, casted *C.gchar
+	var carg1 *C.gchar     // in, none, string
 	var carg2 C.guint64    // in, none, casted
 	var cret  C.gboolean   // return
 
@@ -59782,7 +59782,7 @@ func UnsafeSimpleActionToGlibFull(c SimpleAction) unsafe.Pointer {
 // The created action is stateless. See g_simple_action_new_stateful() to create
 // an action that has state.
 func NewSimpleAction(name string, parameterType *glib.VariantType) SimpleAction {
-	var carg1 *C.gchar         // in, none, string, casted *C.gchar
+	var carg1 *C.gchar         // in, none, string
 	var carg2 *C.GVariantType  // in, none, converted, nullable
 	var cret  *C.GSimpleAction // return, full, converted
 
@@ -59987,7 +59987,7 @@ func (simple *SimpleActionGroupInstance) Insert(action Action) {
 // Deprecated: (since 2.38.0) Use g_action_map_lookup_action()
 func (simple *SimpleActionGroupInstance) Lookup(actionName string) Action {
 	var carg0 *C.GSimpleActionGroup // in, none, converted
-	var carg1 *C.gchar              // in, none, string, casted *C.gchar
+	var carg1 *C.gchar              // in, none, string
 	var cret  *C.GAction            // return, none, converted
 
 	carg0 = (*C.GSimpleActionGroup)(UnsafeSimpleActionGroupToGlibNone(simple))
@@ -60018,7 +60018,7 @@ func (simple *SimpleActionGroupInstance) Lookup(actionName string) Action {
 // Deprecated: (since 2.38.0) Use g_action_map_remove_action()
 func (simple *SimpleActionGroupInstance) Remove(actionName string) {
 	var carg0 *C.GSimpleActionGroup // in, none, converted
-	var carg1 *C.gchar              // in, none, string, casted *C.gchar
+	var carg1 *C.gchar              // in, none, string
 
 	carg0 = (*C.GSimpleActionGroup)(UnsafeSimpleActionGroupToGlibNone(simple))
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(actionName)))
@@ -61062,8 +61062,8 @@ func (resolver *SimpleProxyResolverInstance) SetIgnoreHosts(ignoreHosts []string
 // types.
 func (resolver *SimpleProxyResolverInstance) SetURIProxy(uriScheme string, proxy string) {
 	var carg0 *C.GSimpleProxyResolver // in, none, converted
-	var carg1 *C.gchar                // in, none, string, casted *C.gchar
-	var carg2 *C.gchar                // in, none, string, casted *C.gchar
+	var carg1 *C.gchar                // in, none, string
+	var carg2 *C.gchar                // in, none, string
 
 	carg0 = (*C.GSimpleProxyResolver)(UnsafeSimpleProxyResolverToGlibNone(resolver))
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(uriScheme)))
@@ -65916,7 +65916,7 @@ func NewSocketClient() SocketClient {
 // specific handshake.
 func (client *SocketClientInstance) AddApplicationProxy(protocol string) {
 	var carg0 *C.GSocketClient // in, none, converted
-	var carg1 *C.gchar         // in, none, string, casted *C.gchar
+	var carg1 *C.gchar         // in, none, string
 
 	carg0 = (*C.GSocketClient)(UnsafeSocketClientToGlibNone(client))
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(protocol)))
@@ -66114,7 +66114,7 @@ func (client *SocketClientInstance) ConnectFinish(result AsyncResult) (SocketCon
 func (client *SocketClientInstance) ConnectToHost(cancellable context.Context, hostAndPort string, defaultPort uint16) (SocketConnection, error) {
 	var carg0 *C.GSocketClient     // in, none, converted
 	var carg3 *C.GCancellable      // in, none, converted, nullable
-	var carg1 *C.gchar             // in, none, string, casted *C.gchar
+	var carg1 *C.gchar             // in, none, string
 	var carg2 C.guint16            // in, none, casted
 	var cret  *C.GSocketConnection // return, full, converted
 	var _cerr *C.GError            // out, full, converted, nullable
@@ -66161,7 +66161,7 @@ func (client *SocketClientInstance) ConnectToHost(cancellable context.Context, h
 func (client *SocketClientInstance) ConnectToHostAsync(cancellable context.Context, hostAndPort string, defaultPort uint16, callback AsyncReadyCallback) {
 	var carg0 *C.GSocketClient      // in, none, converted
 	var carg3 *C.GCancellable       // in, none, converted, nullable
-	var carg1 *C.gchar              // in, none, string, casted *C.gchar
+	var carg1 *C.gchar              // in, none, string
 	var carg2 C.guint16             // in, none, casted
 	var carg4 C.GAsyncReadyCallback // callback, scope: async, closure: carg5, nullable
 	var carg5 C.gpointer            // implicit
@@ -66252,8 +66252,8 @@ func (client *SocketClientInstance) ConnectToHostFinish(result AsyncResult) (Soc
 func (client *SocketClientInstance) ConnectToService(cancellable context.Context, domain string, service string) (SocketConnection, error) {
 	var carg0 *C.GSocketClient     // in, none, converted
 	var carg3 *C.GCancellable      // in, none, converted, nullable
-	var carg1 *C.gchar             // in, none, string, casted *C.gchar
-	var carg2 *C.gchar             // in, none, string, casted *C.gchar
+	var carg1 *C.gchar             // in, none, string
+	var carg2 *C.gchar             // in, none, string
 	var cret  *C.GSocketConnection // return, full, converted
 	var _cerr *C.GError            // out, full, converted, nullable
 
@@ -66297,8 +66297,8 @@ func (client *SocketClientInstance) ConnectToService(cancellable context.Context
 func (client *SocketClientInstance) ConnectToServiceAsync(cancellable context.Context, domain string, service string, callback AsyncReadyCallback) {
 	var carg0 *C.GSocketClient      // in, none, converted
 	var carg3 *C.GCancellable       // in, none, converted, nullable
-	var carg1 *C.gchar              // in, none, string, casted *C.gchar
-	var carg2 *C.gchar              // in, none, string, casted *C.gchar
+	var carg1 *C.gchar              // in, none, string
+	var carg2 *C.gchar              // in, none, string
 	var carg4 C.GAsyncReadyCallback // callback, scope: async, closure: carg5, nullable
 	var carg5 C.gpointer            // implicit
 
@@ -66396,7 +66396,7 @@ func (client *SocketClientInstance) ConnectToServiceFinish(result AsyncResult) (
 func (client *SocketClientInstance) ConnectToURI(cancellable context.Context, uri string, defaultPort uint16) (SocketConnection, error) {
 	var carg0 *C.GSocketClient     // in, none, converted
 	var carg3 *C.GCancellable      // in, none, converted, nullable
-	var carg1 *C.gchar             // in, none, string, casted *C.gchar
+	var carg1 *C.gchar             // in, none, string
 	var carg2 C.guint16            // in, none, casted
 	var cret  *C.GSocketConnection // return, full, converted
 	var _cerr *C.GError            // out, full, converted, nullable
@@ -66443,7 +66443,7 @@ func (client *SocketClientInstance) ConnectToURI(cancellable context.Context, ur
 func (client *SocketClientInstance) ConnectToURIAsync(cancellable context.Context, uri string, defaultPort uint16, callback AsyncReadyCallback) {
 	var carg0 *C.GSocketClient      // in, none, converted
 	var carg3 *C.GCancellable       // in, none, converted, nullable
-	var carg1 *C.gchar              // in, none, string, casted *C.gchar
+	var carg1 *C.gchar              // in, none, string
 	var carg2 C.guint16             // in, none, casted
 	var carg4 C.GAsyncReadyCallback // callback, scope: async, closure: carg5, nullable
 	var carg5 C.gpointer            // implicit
@@ -69721,7 +69721,7 @@ func (task *TaskInstance) GetContext() *glib.MainContext {
 // Gets @task’s name. See g_task_set_name().
 func (task *TaskInstance) GetName() string {
 	var carg0 *C.GTask // in, none, converted
-	var cret  *C.gchar // return, none, string, casted *C.gchar
+	var cret  *C.gchar // return, none, string
 
 	carg0 = (*C.GTask)(UnsafeTaskToGlibNone(task))
 
@@ -70750,7 +70750,7 @@ func TestDBusUnset() {
 // called after g_test_dbus_up().
 func (self *TestDBusInstance) AddServiceDir(path string) {
 	var carg0 *C.GTestDBus // in, none, converted
-	var carg1 *C.gchar     // in, none, string, casted *C.gchar
+	var carg1 *C.gchar     // in, none, string
 
 	carg0 = (*C.GTestDBus)(UnsafeTestDBusToGlibNone(self))
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(path)))
@@ -70787,7 +70787,7 @@ func (self *TestDBusInstance) Down() {
 // g_dbus_connection_new_for_address().
 func (self *TestDBusInstance) GetBusAddress() string {
 	var carg0 *C.GTestDBus // in, none, converted
-	var cret  *C.gchar     // return, none, string, casted *C.gchar
+	var cret  *C.gchar     // return, none, string
 
 	carg0 = (*C.GTestDBus)(UnsafeTestDBusToGlibNone(self))
 
@@ -71405,7 +71405,7 @@ func UnsafeTlsCertificateToGlibFull(c TlsCertificate) unsafe.Pointer {
 // If @file cannot be read or parsed, the function will return %NULL and
 // set @error.
 func NewTlsCertificateFromFile(file string) (TlsCertificate, error) {
-	var carg1 *C.gchar           // in, none, string, casted *C.gchar
+	var carg1 *C.gchar           // in, none, string
 	var cret  *C.GTlsCertificate // return, full, converted
 	var _cerr *C.GError          // out, full, converted, nullable
 
@@ -71447,8 +71447,8 @@ func NewTlsCertificateFromFile(file string) (TlsCertificate, error) {
 // Currently only `.p12` and `.pfx` files are supported.
 // See g_tls_certificate_new_from_pkcs12() for more details.
 func NewTlsCertificateFromFileWithPassword(file string, password string) (TlsCertificate, error) {
-	var carg1 *C.gchar           // in, none, string, casted *C.gchar
-	var carg2 *C.gchar           // in, none, string, casted *C.gchar
+	var carg1 *C.gchar           // in, none, string
+	var carg2 *C.gchar           // in, none, string
 	var cret  *C.GTlsCertificate // return, full, converted
 	var _cerr *C.GError          // out, full, converted, nullable
 
@@ -71501,8 +71501,8 @@ func NewTlsCertificateFromFileWithPassword(file string, password string) (TlsCer
 // %NULL and set @error. Otherwise, this behaves like
 // g_tls_certificate_new_from_pem().
 func NewTlsCertificateFromFiles(certFile string, keyFile string) (TlsCertificate, error) {
-	var carg1 *C.gchar           // in, none, string, casted *C.gchar
-	var carg2 *C.gchar           // in, none, string, casted *C.gchar
+	var carg1 *C.gchar           // in, none, string
+	var carg2 *C.gchar           // in, none, string
 	var cret  *C.GTlsCertificate // return, full, converted
 	var _cerr *C.GError          // out, full, converted, nullable
 
@@ -71553,7 +71553,7 @@ func NewTlsCertificateFromFiles(certFile string, keyFile string) (TlsCertificate
 // certificate in the chain cannot be verified, the first certificate in
 // the file will still be returned.
 func NewTlsCertificateFromPem(data string, length int) (TlsCertificate, error) {
-	var carg1 *C.gchar           // in, none, string, casted *C.gchar
+	var carg1 *C.gchar           // in, none, string
 	var carg2 C.gssize           // in, none, casted
 	var cret  *C.GTlsCertificate // return, full, converted
 	var _cerr *C.GError          // out, full, converted, nullable
@@ -71614,7 +71614,7 @@ func NewTlsCertificateFromPem(data string, length int) (TlsCertificate, error) {
 // 
 // Note that the private key is not accessed until usage and may fail or require a PIN later.
 func NewTlsCertificateFromPKCS11URIs(pkcs11Uri string, privateKeyPkcs11Uri string) (TlsCertificate, error) {
-	var carg1 *C.gchar           // in, none, string, casted *C.gchar
+	var carg1 *C.gchar           // in, none, string
 	var carg2 *C.gchar           // in, none, string, nullable-string
 	var cret  *C.GTlsCertificate // return, full, converted
 	var _cerr *C.GError          // out, full, converted, nullable
@@ -71718,7 +71718,7 @@ func NewTlsCertificateFromPKCS12(data []uint8, password string) (TlsCertificate,
 // PEM-encoded certificates, this will return an empty list and not
 // set @error.
 func TlsCertificateListNewFromFile(file string) ([]TlsCertificate, error) {
-	var carg1 *C.gchar  // in, none, string, casted *C.gchar
+	var carg1 *C.gchar  // in, none, string
 	var cret  *C.GList  // container, transfer: full
 	var _cerr *C.GError // out, full, converted, nullable
 
@@ -71776,7 +71776,7 @@ func (cert *TlsCertificateInstance) GetIssuer() TlsCertificate {
 // Returns the issuer name from the certificate.
 func (cert *TlsCertificateInstance) GetIssuerName() string {
 	var carg0 *C.GTlsCertificate // in, none, converted
-	var cret  *C.gchar           // return, full, string, casted *C.gchar
+	var cret  *C.gchar           // return, full, string
 
 	carg0 = (*C.GTlsCertificate)(UnsafeTlsCertificateToGlibNone(cert))
 
@@ -71843,7 +71843,7 @@ func (cert *TlsCertificateInstance) GetNotValidBefore() *glib.DateTime {
 // Returns the subject name from the certificate.
 func (cert *TlsCertificateInstance) GetSubjectName() string {
 	var carg0 *C.GTlsCertificate // in, none, converted
-	var cret  *C.gchar           // return, full, string, casted *C.gchar
+	var cret  *C.gchar           // return, full, string
 
 	carg0 = (*C.GTlsCertificate)(UnsafeTlsCertificateToGlibNone(cert))
 
@@ -72477,7 +72477,7 @@ func (conn *TlsConnectionInstance) GetCertificate() TlsCertificate {
 // is not recommended.
 func (conn *TlsConnectionInstance) GetCiphersuiteName() string {
 	var carg0 *C.GTlsConnection // in, none, converted
-	var cret  *C.gchar          // return, full, string, casted *C.gchar
+	var cret  *C.gchar          // return, full, string
 
 	carg0 = (*C.GTlsConnection)(UnsafeTlsConnectionToGlibNone(conn))
 
@@ -72553,7 +72553,7 @@ func (conn *TlsConnectionInstance) GetInteraction() TlsInteraction {
 // g_tls_connection_set_advertised_protocols().
 func (conn *TlsConnectionInstance) GetNegotiatedProtocol() string {
 	var carg0 *C.GTlsConnection // in, none, converted
-	var cret  *C.gchar          // return, none, string, casted *C.gchar
+	var cret  *C.gchar          // return, none, string
 
 	carg0 = (*C.GTlsConnection)(UnsafeTlsConnectionToGlibNone(conn))
 
@@ -73486,7 +73486,7 @@ func UnsafeTlsDatabaseToGlibFull(c TlsDatabase) unsafe.Pointer {
 func (self *TlsDatabaseInstance) CreateCertificateHandle(certificate TlsCertificate) string {
 	var carg0 *C.GTlsDatabase    // in, none, converted
 	var carg1 *C.GTlsCertificate // in, none, converted
-	var cret  *C.gchar           // return, full, string, casted *C.gchar
+	var cret  *C.gchar           // return, full, string
 
 	carg0 = (*C.GTlsDatabase)(UnsafeTlsDatabaseToGlibNone(self))
 	carg1 = (*C.GTlsCertificate)(UnsafeTlsCertificateToGlibNone(certificate))
@@ -73532,7 +73532,7 @@ func (self *TlsDatabaseInstance) CreateCertificateHandle(certificate TlsCertific
 func (self *TlsDatabaseInstance) LookupCertificateForHandle(cancellable context.Context, handle string, interaction TlsInteraction, flags TLSDatabaseLookupFlags) (TlsCertificate, error) {
 	var carg0 *C.GTlsDatabase           // in, none, converted
 	var carg4 *C.GCancellable           // in, none, converted, nullable
-	var carg1 *C.gchar                  // in, none, string, casted *C.gchar
+	var carg1 *C.gchar                  // in, none, string
 	var carg2 *C.GTlsInteraction        // in, none, converted, nullable
 	var carg3 C.GTlsDatabaseLookupFlags // in, none, casted
 	var cret  *C.GTlsCertificate        // return, full, converted
@@ -73582,7 +73582,7 @@ func (self *TlsDatabaseInstance) LookupCertificateForHandle(cancellable context.
 func (self *TlsDatabaseInstance) LookupCertificateForHandleAsync(cancellable context.Context, handle string, interaction TlsInteraction, flags TLSDatabaseLookupFlags, callback AsyncReadyCallback) {
 	var carg0 *C.GTlsDatabase           // in, none, converted
 	var carg4 *C.GCancellable           // in, none, converted, nullable
-	var carg1 *C.gchar                  // in, none, string, casted *C.gchar
+	var carg1 *C.gchar                  // in, none, string
 	var carg2 *C.GTlsInteraction        // in, none, converted, nullable
 	var carg3 C.GTlsDatabaseLookupFlags // in, none, casted
 	var carg5 C.GAsyncReadyCallback     // callback, scope: async, closure: carg6, nullable
@@ -73928,7 +73928,7 @@ func (self *TlsDatabaseInstance) VerifyChain(cancellable context.Context, chain 
 	var carg0 *C.GTlsDatabase           // in, none, converted
 	var carg6 *C.GCancellable           // in, none, converted, nullable
 	var carg1 *C.GTlsCertificate        // in, none, converted
-	var carg2 *C.gchar                  // in, none, string, casted *C.gchar
+	var carg2 *C.gchar                  // in, none, string
 	var carg3 *C.GSocketConnectable     // in, none, converted, nullable
 	var carg4 *C.GTlsInteraction        // in, none, converted, nullable
 	var carg5 C.GTlsDatabaseVerifyFlags // in, none, casted
@@ -73989,7 +73989,7 @@ func (self *TlsDatabaseInstance) VerifyChainAsync(cancellable context.Context, c
 	var carg0 *C.GTlsDatabase           // in, none, converted
 	var carg6 *C.GCancellable           // in, none, converted, nullable
 	var carg1 *C.GTlsCertificate        // in, none, converted
-	var carg2 *C.gchar                  // in, none, string, casted *C.gchar
+	var carg2 *C.gchar                  // in, none, string
 	var carg3 *C.GSocketConnectable     // in, none, converted, nullable
 	var carg4 *C.GTlsInteraction        // in, none, converted, nullable
 	var carg5 C.GTlsDatabaseVerifyFlags // in, none, casted
@@ -74910,7 +74910,7 @@ func UnsafeTlsPasswordToGlibFull(c TlsPassword) unsafe.Pointer {
 // Create a new #GTlsPassword object.
 func NewTlsPassword(flags TLSPasswordFlags, description string) TlsPassword {
 	var carg1 C.GTlsPasswordFlags // in, none, casted
-	var carg2 *C.gchar            // in, none, string, casted *C.gchar
+	var carg2 *C.gchar            // in, none, string
 	var cret  *C.GTlsPassword     // return, full, converted
 
 	carg1 = C.GTlsPasswordFlags(flags)
@@ -74936,7 +74936,7 @@ func NewTlsPassword(flags TLSPasswordFlags, description string) TlsPassword {
 // Get a description string about what the password will be used for.
 func (password *TlsPasswordInstance) GetDescription() string {
 	var carg0 *C.GTlsPassword // in, none, converted
-	var cret  *C.gchar        // return, none, string, casted *C.gchar
+	var cret  *C.gchar        // return, none, string
 
 	carg0 = (*C.GTlsPassword)(UnsafeTlsPasswordToGlibNone(password))
 
@@ -75016,7 +75016,7 @@ func (password *TlsPasswordInstance) GetValue() (uint, []byte) {
 // g_tls_password_get_flags().
 func (password *TlsPasswordInstance) GetWarning() string {
 	var carg0 *C.GTlsPassword // in, none, converted
-	var cret  *C.gchar        // return, none, string, casted *C.gchar
+	var cret  *C.gchar        // return, none, string
 
 	carg0 = (*C.GTlsPassword)(UnsafeTlsPasswordToGlibNone(password))
 
@@ -75039,7 +75039,7 @@ func (password *TlsPasswordInstance) GetWarning() string {
 // Set a description string about what the password will be used for.
 func (password *TlsPasswordInstance) SetDescription(description string) {
 	var carg0 *C.GTlsPassword // in, none, converted
-	var carg1 *C.gchar        // in, none, string, casted *C.gchar
+	var carg1 *C.gchar        // in, none, string
 
 	carg0 = (*C.GTlsPassword)(UnsafeTlsPasswordToGlibNone(password))
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(description)))
@@ -75109,7 +75109,7 @@ func (password *TlsPasswordInstance) SetValue(value []byte) {
 // g_tls_password_get_flags().
 func (password *TlsPasswordInstance) SetWarning(warning string) {
 	var carg0 *C.GTlsPassword // in, none, converted
-	var carg1 *C.gchar        // in, none, string, casted *C.gchar
+	var carg1 *C.gchar        // in, none, string
 
 	carg0 = (*C.GTlsPassword)(UnsafeTlsPasswordToGlibNone(password))
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(warning)))
@@ -76388,7 +76388,7 @@ func UnsafeDBusMenuModelToGlibFull(c DBusMenuModel) unsafe.Pointer {
 func DBusMenuModelGet(connection DBusConnection, busName string, objectPath string) DBusMenuModel {
 	var carg1 *C.GDBusConnection // in, none, converted
 	var carg2 *C.gchar           // in, none, string, nullable-string
-	var carg3 *C.gchar           // in, none, string, casted *C.gchar
+	var carg3 *C.gchar           // in, none, string
 	var cret  *C.GDBusMenuModel  // return, full, converted
 
 	carg1 = (*C.GDBusConnection)(UnsafeDBusConnectionToGlibNone(connection))
@@ -78955,8 +78955,8 @@ func UnsafeProxyAddressToGlibFull(c ProxyAddress) unsafe.Pointer {
 func NewProxyAddress(inetaddr InetAddress, port uint16, protocol string, destHostname string, destPort uint16, username string, password string) SocketAddress {
 	var carg1 *C.GInetAddress   // in, none, converted
 	var carg2 C.guint16         // in, none, casted
-	var carg3 *C.gchar          // in, none, string, casted *C.gchar
-	var carg4 *C.gchar          // in, none, string, casted *C.gchar
+	var carg3 *C.gchar          // in, none, string
+	var carg4 *C.gchar          // in, none, string
 	var carg5 C.guint16         // in, none, casted
 	var carg6 *C.gchar          // in, none, string, nullable-string
 	var carg7 *C.gchar          // in, none, string, nullable-string
@@ -79004,7 +79004,7 @@ func NewProxyAddress(inetaddr InetAddress, port uint16, protocol string, destHos
 // itself.
 func (proxy *ProxyAddressInstance) GetDestinationHostname() string {
 	var carg0 *C.GProxyAddress // in, none, converted
-	var cret  *C.gchar         // return, none, string, casted *C.gchar
+	var cret  *C.gchar         // return, none, string
 
 	carg0 = (*C.GProxyAddress)(UnsafeProxyAddressToGlibNone(proxy))
 
@@ -79051,7 +79051,7 @@ func (proxy *ProxyAddressInstance) GetDestinationPort() uint16 {
 // server; eg, "http" or "ftp".
 func (proxy *ProxyAddressInstance) GetDestinationProtocol() string {
 	var carg0 *C.GProxyAddress // in, none, converted
-	var cret  *C.gchar         // return, none, string, casted *C.gchar
+	var cret  *C.gchar         // return, none, string
 
 	carg0 = (*C.GProxyAddress)(UnsafeProxyAddressToGlibNone(proxy))
 
@@ -79073,7 +79073,7 @@ func (proxy *ProxyAddressInstance) GetDestinationProtocol() string {
 // Gets @proxy's password.
 func (proxy *ProxyAddressInstance) GetPassword() string {
 	var carg0 *C.GProxyAddress // in, none, converted
-	var cret  *C.gchar         // return, none, string, casted *C.gchar
+	var cret  *C.gchar         // return, none, string
 
 	carg0 = (*C.GProxyAddress)(UnsafeProxyAddressToGlibNone(proxy))
 
@@ -79095,7 +79095,7 @@ func (proxy *ProxyAddressInstance) GetPassword() string {
 // Gets @proxy's protocol. eg, "socks" or "http"
 func (proxy *ProxyAddressInstance) GetProtocol() string {
 	var carg0 *C.GProxyAddress // in, none, converted
-	var cret  *C.gchar         // return, none, string, casted *C.gchar
+	var cret  *C.gchar         // return, none, string
 
 	carg0 = (*C.GProxyAddress)(UnsafeProxyAddressToGlibNone(proxy))
 
@@ -79117,7 +79117,7 @@ func (proxy *ProxyAddressInstance) GetProtocol() string {
 // Gets the proxy URI that @proxy was constructed from.
 func (proxy *ProxyAddressInstance) GetURI() string {
 	var carg0 *C.GProxyAddress // in, none, converted
-	var cret  *C.gchar         // return, none, string, casted *C.gchar
+	var cret  *C.gchar         // return, none, string
 
 	carg0 = (*C.GProxyAddress)(UnsafeProxyAddressToGlibNone(proxy))
 
@@ -79139,7 +79139,7 @@ func (proxy *ProxyAddressInstance) GetURI() string {
 // Gets @proxy's username.
 func (proxy *ProxyAddressInstance) GetUsername() string {
 	var carg0 *C.GProxyAddress // in, none, converted
-	var cret  *C.gchar         // return, none, string, casted *C.gchar
+	var cret  *C.gchar         // return, none, string
 
 	carg0 = (*C.GProxyAddress)(UnsafeProxyAddressToGlibNone(proxy))
 
@@ -81347,7 +81347,7 @@ func (stream *DataInputStreamInstance) ReadUint64(cancellable context.Context) (
 func (stream *DataInputStreamInstance) ReadUntil(cancellable context.Context, stopChars string) (uint, string, error) {
 	var carg0 *C.GDataInputStream // in, none, converted
 	var carg3 *C.GCancellable     // in, none, converted, nullable
-	var carg1 *C.gchar            // in, none, string, casted *C.gchar
+	var carg1 *C.gchar            // in, none, string
 	var carg2 C.gsize             // out, full, casted
 	var cret  *C.char             // return, full, string, casted *C.gchar
 	var _cerr *C.GError           // out, full, converted, nullable
@@ -81408,7 +81408,7 @@ func (stream *DataInputStreamInstance) ReadUntil(cancellable context.Context, st
 func (stream *DataInputStreamInstance) ReadUntilAsync(cancellable context.Context, stopChars string, ioPriority int, callback AsyncReadyCallback) {
 	var carg0 *C.GDataInputStream   // in, none, converted
 	var carg3 *C.GCancellable       // in, none, converted, nullable
-	var carg1 *C.gchar              // in, none, string, casted *C.gchar
+	var carg1 *C.gchar              // in, none, string
 	var carg2 C.gint                // in, none, casted
 	var carg4 C.GAsyncReadyCallback // callback, scope: async, closure: carg5, nullable
 	var carg5 C.gpointer            // implicit
@@ -81508,7 +81508,7 @@ func (stream *DataInputStreamInstance) ReadUntilFinish(result AsyncResult) (uint
 func (stream *DataInputStreamInstance) ReadUpto(cancellable context.Context, stopChars string, stopCharsLen int) (uint, string, error) {
 	var carg0 *C.GDataInputStream // in, none, converted
 	var carg4 *C.GCancellable     // in, none, converted, nullable
-	var carg1 *C.gchar            // in, none, string, casted *C.gchar
+	var carg1 *C.gchar            // in, none, string
 	var carg2 C.gssize            // in, none, casted
 	var carg3 C.gsize             // out, full, casted
 	var cret  *C.char             // return, full, string, casted *C.gchar
@@ -81570,7 +81570,7 @@ func (stream *DataInputStreamInstance) ReadUpto(cancellable context.Context, sto
 func (stream *DataInputStreamInstance) ReadUptoAsync(cancellable context.Context, stopChars string, stopCharsLen int, ioPriority int, callback AsyncReadyCallback) {
 	var carg0 *C.GDataInputStream   // in, none, converted
 	var carg4 *C.GCancellable       // in, none, converted, nullable
-	var carg1 *C.gchar              // in, none, string, casted *C.gchar
+	var carg1 *C.gchar              // in, none, string
 	var carg2 C.gssize              // in, none, casted
 	var carg3 C.gint                // in, none, casted
 	var carg5 C.GAsyncReadyCallback // callback, scope: async, closure: carg6, nullable
@@ -83495,6 +83495,42 @@ func UnsafeDBusAnnotationInfoToGlibFull(d *DBusAnnotationInfo) unsafe.Pointer {
 	d.native = nil // DBusAnnotationInfo is invalid from here on
 	return _p
 }
+// DBusAnnotationInfoLookup wraps g_dbus_annotation_info_lookup
+// 
+// The function takes the following parameters:
+// 
+// 	- annotations []*DBusAnnotationInfo (nullable): A %NULL-terminated array of annotations or %NULL. 
+// 	- name string: The name of the annotation to look up. 
+// 
+// The function returns the following values:
+// 
+// 	- goret string 
+//
+// Looks up the value of an annotation.
+// 
+// The cost of this function is O(n) in number of annotations.
+func DBusAnnotationInfoLookup(annotations []*DBusAnnotationInfo, name string) string {
+	var carg1 **C.GDBusAnnotationInfo // in, transfer: none, C Pointers: 2, Name: array[DBusAnnotationInfo], nullable, array (inner: *typesystem.Record, zero-terminated)
+	var carg2 *C.gchar                // in, none, string
+	var cret  *C.gchar                // return, none, string
+
+	_ = annotations
+	_ = carg1
+	panic("unimplemented conversion of []*DBusAnnotationInfo (GDBusAnnotationInfo**)")
+	carg2 = (*C.gchar)(unsafe.Pointer(C.CString(name)))
+	defer C.free(unsafe.Pointer(carg2))
+
+	cret = C.g_dbus_annotation_info_lookup(carg1, carg2)
+	runtime.KeepAlive(annotations)
+	runtime.KeepAlive(name)
+
+	var goret string
+
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+
+	return goret
+}
+
 // DBusArgInfo wraps GDBusArgInfo
 //
 // Information about an argument for a method or a signal.
@@ -83832,7 +83868,7 @@ func (info *DBusInterfaceInfo) CacheRelease() {
 // g_dbus_interface_info_cache_build() has been used on @info.
 func (info *DBusInterfaceInfo) LookupMethod(name string) *DBusMethodInfo {
 	var carg0 *C.GDBusInterfaceInfo // in, none, converted
-	var carg1 *C.gchar              // in, none, string, casted *C.gchar
+	var carg1 *C.gchar              // in, none, string
 	var cret  *C.GDBusMethodInfo    // return, none, converted
 
 	carg0 = (*C.GDBusInterfaceInfo)(UnsafeDBusInterfaceInfoToGlibNone(info))
@@ -83866,7 +83902,7 @@ func (info *DBusInterfaceInfo) LookupMethod(name string) *DBusMethodInfo {
 // g_dbus_interface_info_cache_build() has been used on @info.
 func (info *DBusInterfaceInfo) LookupProperty(name string) *DBusPropertyInfo {
 	var carg0 *C.GDBusInterfaceInfo // in, none, converted
-	var carg1 *C.gchar              // in, none, string, casted *C.gchar
+	var carg1 *C.gchar              // in, none, string
 	var cret  *C.GDBusPropertyInfo  // return, none, converted
 
 	carg0 = (*C.GDBusInterfaceInfo)(UnsafeDBusInterfaceInfoToGlibNone(info))
@@ -83900,7 +83936,7 @@ func (info *DBusInterfaceInfo) LookupProperty(name string) *DBusPropertyInfo {
 // g_dbus_interface_info_cache_build() has been used on @info.
 func (info *DBusInterfaceInfo) LookupSignal(name string) *DBusSignalInfo {
 	var carg0 *C.GDBusInterfaceInfo // in, none, converted
-	var carg1 *C.gchar              // in, none, string, casted *C.gchar
+	var carg1 *C.gchar              // in, none, string
 	var cret  *C.GDBusSignalInfo    // return, none, converted
 
 	carg0 = (*C.GDBusInterfaceInfo)(UnsafeDBusInterfaceInfoToGlibNone(info))
@@ -84264,7 +84300,7 @@ func UnsafeDBusNodeInfoToGlibFull(d *DBusNodeInfo) unsafe.Pointer {
 // [GMarkup][glib-Simple-XML-Subset-Parser.description]-based
 // parser that only accepts a subset of valid XML documents.
 func NewDBusNodeInfoForXML(xmlData string) (*DBusNodeInfo, error) {
-	var carg1 *C.gchar         // in, none, string, casted *C.gchar
+	var carg1 *C.gchar         // in, none, string
 	var cret  *C.GDBusNodeInfo // return, full, converted
 	var _cerr *C.GError        // out, full, converted, nullable
 
@@ -84300,7 +84336,7 @@ func NewDBusNodeInfoForXML(xmlData string) (*DBusNodeInfo, error) {
 // The cost of this function is O(n) in number of interfaces.
 func (info *DBusNodeInfo) LookupInterface(name string) *DBusInterfaceInfo {
 	var carg0 *C.GDBusNodeInfo      // in, none, converted
-	var carg1 *C.gchar              // in, none, string, casted *C.gchar
+	var carg1 *C.gchar              // in, none, string
 	var cret  *C.GDBusInterfaceInfo // return, none, converted
 
 	carg0 = (*C.GDBusNodeInfo)(UnsafeDBusNodeInfoToGlibNone(info))
@@ -87125,6 +87161,107 @@ func UnsafeIOExtensionPointToGlibFull(i *IOExtensionPoint) unsafe.Pointer {
 	i.native = nil // IOExtensionPoint is invalid from here on
 	return _p
 }
+// IOExtensionPointImplement wraps g_io_extension_point_implement
+// 
+// The function takes the following parameters:
+// 
+// 	- extensionPointName string: the name of the extension point 
+// 	- typ gobject.Type: the #GType to register as extension 
+// 	- extensionName string: the name for the extension 
+// 	- priority int: the priority for the extension 
+// 
+// The function returns the following values:
+// 
+// 	- goret *IOExtension 
+//
+// Registers @type as extension for the extension point with name
+// @extension_point_name.
+// 
+// If @type has already been registered as an extension for this
+// extension point, the existing #GIOExtension object is returned.
+func IOExtensionPointImplement(extensionPointName string, typ gobject.Type, extensionName string, priority int) *IOExtension {
+	var carg1 *C.char         // in, none, string, casted *C.gchar
+	var carg2 C.GType         // in, none, casted, alias
+	var carg3 *C.char         // in, none, string, casted *C.gchar
+	var carg4 C.gint          // in, none, casted
+	var cret  *C.GIOExtension // return, none, converted
+
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(extensionPointName)))
+	defer C.free(unsafe.Pointer(carg1))
+	carg2 = C.GType(typ)
+	carg3 = (*C.char)(unsafe.Pointer(C.CString(extensionName)))
+	defer C.free(unsafe.Pointer(carg3))
+	carg4 = C.gint(priority)
+
+	cret = C.g_io_extension_point_implement(carg1, carg2, carg3, carg4)
+	runtime.KeepAlive(extensionPointName)
+	runtime.KeepAlive(typ)
+	runtime.KeepAlive(extensionName)
+	runtime.KeepAlive(priority)
+
+	var goret *IOExtension
+
+	goret = UnsafeIOExtensionFromGlibNone(unsafe.Pointer(cret))
+
+	return goret
+}
+
+// IOExtensionPointLookup wraps g_io_extension_point_lookup
+// 
+// The function takes the following parameters:
+// 
+// 	- name string: the name of the extension point 
+// 
+// The function returns the following values:
+// 
+// 	- goret *IOExtensionPoint 
+//
+// Looks up an existing extension point.
+func IOExtensionPointLookup(name string) *IOExtensionPoint {
+	var carg1 *C.char              // in, none, string, casted *C.gchar
+	var cret  *C.GIOExtensionPoint // return, none, converted
+
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(name)))
+	defer C.free(unsafe.Pointer(carg1))
+
+	cret = C.g_io_extension_point_lookup(carg1)
+	runtime.KeepAlive(name)
+
+	var goret *IOExtensionPoint
+
+	goret = UnsafeIOExtensionPointFromGlibNone(unsafe.Pointer(cret))
+
+	return goret
+}
+
+// IOExtensionPointRegister wraps g_io_extension_point_register
+// 
+// The function takes the following parameters:
+// 
+// 	- name string: The name of the extension point 
+// 
+// The function returns the following values:
+// 
+// 	- goret *IOExtensionPoint 
+//
+// Registers an extension point.
+func IOExtensionPointRegister(name string) *IOExtensionPoint {
+	var carg1 *C.char              // in, none, string, casted *C.gchar
+	var cret  *C.GIOExtensionPoint // return, none, converted
+
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(name)))
+	defer C.free(unsafe.Pointer(carg1))
+
+	cret = C.g_io_extension_point_register(carg1)
+	runtime.KeepAlive(name)
+
+	var goret *IOExtensionPoint
+
+	goret = UnsafeIOExtensionPointFromGlibNone(unsafe.Pointer(cret))
+
+	return goret
+}
+
 // GetExtensionByName wraps g_io_extension_point_get_extension_by_name
 // 
 // The function takes the following parameters:
@@ -87365,7 +87502,7 @@ func UnsafeIOModuleScopeToGlibFull(i *IOModuleScope) unsafe.Pointer {
 // or g_io_modules_load_all_in_directory_with_scope().
 func (scope *IOModuleScope) Block(basename string) {
 	var carg0 *C.GIOModuleScope // in, none, converted
-	var carg1 *C.gchar          // in, none, string, casted *C.gchar
+	var carg1 *C.gchar          // in, none, string
 
 	carg0 = (*C.GIOModuleScope)(UnsafeIOModuleScopeToGlibNone(scope))
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(basename)))
@@ -90234,6 +90371,49 @@ func NewResourceFromData(data *glib.Bytes) (*Resource, error) {
 	return goret, _goerr
 }
 
+// ResourceLoad wraps g_resource_load
+// 
+// The function takes the following parameters:
+// 
+// 	- filename string: the path of a filename to load, in the GLib filename encoding 
+// 
+// The function returns the following values:
+// 
+// 	- goret *Resource 
+// 	- _goerr error (nullable): an error 
+//
+// Loads a binary resource bundle and creates a #GResource representation of it, allowing
+// you to query it for data.
+// 
+// If you want to use this resource in the global resource namespace you need
+// to register it with g_resources_register().
+// 
+// If @filename is empty or the data in it is corrupt,
+// %G_RESOURCE_ERROR_INTERNAL will be returned. If @filename doesn’t exist, or
+// there is an error in reading it, an error from g_mapped_file_new() will be
+// returned.
+func ResourceLoad(filename string) (*Resource, error) {
+	var carg1 *C.gchar     // in, none, string
+	var cret  *C.GResource // return, full, converted
+	var _cerr *C.GError    // out, full, converted, nullable
+
+	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(filename)))
+	defer C.free(unsafe.Pointer(carg1))
+
+	cret = C.g_resource_load(carg1, &_cerr)
+	runtime.KeepAlive(filename)
+
+	var goret  *Resource
+	var _goerr error
+
+	goret = UnsafeResourceFromGlibFull(unsafe.Pointer(cret))
+	if _cerr != nil {
+		_goerr = glib.UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
+	}
+
+	return goret, _goerr
+}
+
 // EnumerateChildren wraps g_resource_enumerate_children
 // 
 // The function takes the following parameters:
@@ -90738,7 +90918,7 @@ func UnsafeSettingsSchemaToGlibFull(s *SettingsSchema) unsafe.Pointer {
 // Get the ID of @schema.
 func (schema *SettingsSchema) GetID() string {
 	var carg0 *C.GSettingsSchema // in, none, converted
-	var cret  *C.gchar           // return, none, string, casted *C.gchar
+	var cret  *C.gchar           // return, none, string
 
 	carg0 = (*C.GSettingsSchema)(UnsafeSettingsSchemaToGlibNone(schema))
 
@@ -90768,7 +90948,7 @@ func (schema *SettingsSchema) GetID() string {
 // g_settings_schema_list_keys().
 func (schema *SettingsSchema) GetKey(name string) *SettingsSchemaKey {
 	var carg0 *C.GSettingsSchema    // in, none, converted
-	var carg1 *C.gchar              // in, none, string, casted *C.gchar
+	var carg1 *C.gchar              // in, none, string
 	var cret  *C.GSettingsSchemaKey // return, full, converted
 
 	carg0 = (*C.GSettingsSchema)(UnsafeSettingsSchemaToGlibNone(schema))
@@ -90802,7 +90982,7 @@ func (schema *SettingsSchema) GetKey(name string) *SettingsSchemaKey {
 // relocatable schemas, this function will return %NULL.
 func (schema *SettingsSchema) GetPath() string {
 	var carg0 *C.GSettingsSchema // in, none, converted
-	var cret  *C.gchar           // return, none, string, casted *C.gchar
+	var cret  *C.gchar           // return, none, string
 
 	carg0 = (*C.GSettingsSchema)(UnsafeSettingsSchemaToGlibNone(schema))
 
@@ -90829,7 +91009,7 @@ func (schema *SettingsSchema) GetPath() string {
 // Checks if @schema has a key named @name.
 func (schema *SettingsSchema) HasKey(name string) bool {
 	var carg0 *C.GSettingsSchema // in, none, converted
-	var carg1 *C.gchar           // in, none, string, casted *C.gchar
+	var carg1 *C.gchar           // in, none, string
 	var cret  C.gboolean         // return
 
 	carg0 = (*C.GSettingsSchema)(UnsafeSettingsSchemaToGlibNone(schema))
@@ -91007,7 +91187,7 @@ func UnsafeSettingsSchemaKeyToGlibFull(s *SettingsSchemaKey) unsafe.Pointer {
 // directory.
 func (key *SettingsSchemaKey) GetDescription() string {
 	var carg0 *C.GSettingsSchemaKey // in, none, converted
-	var cret  *C.gchar              // return, none, string, casted *C.gchar
+	var cret  *C.gchar              // return, none, string
 
 	carg0 = (*C.GSettingsSchemaKey)(UnsafeSettingsSchemaKeyToGlibNone(key))
 
@@ -91029,7 +91209,7 @@ func (key *SettingsSchemaKey) GetDescription() string {
 // Gets the name of @key.
 func (key *SettingsSchemaKey) GetName() string {
 	var carg0 *C.GSettingsSchemaKey // in, none, converted
-	var cret  *C.gchar              // return, none, string, casted *C.gchar
+	var cret  *C.gchar              // return, none, string
 
 	carg0 = (*C.GSettingsSchemaKey)(UnsafeSettingsSchemaKeyToGlibNone(key))
 
@@ -91063,7 +91243,7 @@ func (key *SettingsSchemaKey) GetName() string {
 // directory.
 func (key *SettingsSchemaKey) GetSummary() string {
 	var carg0 *C.GSettingsSchemaKey // in, none, converted
-	var cret  *C.gchar              // return, none, string, casted *C.gchar
+	var cret  *C.gchar              // return, none, string
 
 	carg0 = (*C.GSettingsSchemaKey)(UnsafeSettingsSchemaKeyToGlibNone(key))
 
@@ -91225,7 +91405,7 @@ func UnsafeSettingsSchemaSourceToGlibFull(s *SettingsSchemaSource) unsafe.Pointe
 // @parent should probably be given as the default schema source, as
 // returned by g_settings_schema_source_get_default().
 func NewSettingsSchemaSourceFromDirectory(directory string, parent *SettingsSchemaSource, trusted bool) (*SettingsSchemaSource, error) {
-	var carg1 *C.gchar                 // in, none, string, casted *C.gchar
+	var carg1 *C.gchar                 // in, none, string
 	var carg2 *C.GSettingsSchemaSource // in, none, converted, nullable
 	var carg3 C.gboolean               // in
 	var cret  *C.GSettingsSchemaSource // return, full, converted
@@ -91256,6 +91436,36 @@ func NewSettingsSchemaSourceFromDirectory(directory string, parent *SettingsSche
 	return goret, _goerr
 }
 
+// SettingsSchemaSourceGetDefault wraps g_settings_schema_source_get_default
+// The function returns the following values:
+// 
+// 	- goret *SettingsSchemaSource 
+//
+// Gets the default system schema source.
+// 
+// This function is not required for normal uses of #GSettings but it
+// may be useful to authors of plugin management systems or to those who
+// want to introspect the content of schemas.
+// 
+// If no schemas are installed, %NULL will be returned.
+// 
+// The returned source may actually consist of multiple schema sources
+// from different directories, depending on which directories were given
+// in `XDG_DATA_DIRS` and `GSETTINGS_SCHEMA_DIR`. For this reason, all
+// lookups performed against the default source should probably be done
+// recursively.
+func SettingsSchemaSourceGetDefault() *SettingsSchemaSource {
+	var cret *C.GSettingsSchemaSource // return, none, converted
+
+	cret = C.g_settings_schema_source_get_default()
+
+	var goret *SettingsSchemaSource
+
+	goret = UnsafeSettingsSchemaSourceFromGlibNone(unsafe.Pointer(cret))
+
+	return goret
+}
+
 // Lookup wraps g_settings_schema_source_lookup
 // 
 // The function takes the following parameters:
@@ -91279,7 +91489,7 @@ func NewSettingsSchemaSourceFromDirectory(directory string, parent *SettingsSche
 // If the schema isn't found, %NULL is returned.
 func (source *SettingsSchemaSource) Lookup(schemaId string, recursive bool) *SettingsSchema {
 	var carg0 *C.GSettingsSchemaSource // in, none, converted
-	var carg1 *C.gchar                 // in, none, string, casted *C.gchar
+	var carg1 *C.gchar                 // in, none, string
 	var carg2 C.gboolean               // in
 	var cret  *C.GSettingsSchema       // return, full, converted
 
@@ -92140,7 +92350,7 @@ func UnsafeSrvTargetToGlibFull(s *SrvTarget) unsafe.Pointer {
 // You should not need to use this; normally #GSrvTargets are
 // created by #GResolver.
 func NewSrvTarget(hostname string, port uint16, priority uint16, weight uint16) *SrvTarget {
-	var carg1 *C.gchar      // in, none, string, casted *C.gchar
+	var carg1 *C.gchar      // in, none, string
 	var carg2 C.guint16     // in, none, casted
 	var carg3 C.guint16     // in, none, casted
 	var carg4 C.guint16     // in, none, casted
@@ -92198,7 +92408,7 @@ func (target *SrvTarget) Copy() *SrvTarget {
 // g_hostname_to_unicode() to convert it if it does.)
 func (target *SrvTarget) GetHostname() string {
 	var carg0 *C.GSrvTarget // in, none, converted
-	var cret  *C.gchar      // return, none, string, casted *C.gchar
+	var cret  *C.gchar      // return, none, string
 
 	carg0 = (*C.GSrvTarget)(UnsafeSrvTargetToGlibNone(target))
 

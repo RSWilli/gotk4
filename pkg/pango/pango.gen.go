@@ -3686,7 +3686,7 @@ func ExtentsToPixels(inclusive *Rectangle, nearest *Rectangle) {
 // Searches a string the first character that has a strong
 // direction, according to the Unicode bidirectional algorithm.
 func FindBaseDir(text string, length int) Direction {
-	var carg1 *C.gchar         // in, none, string, casted *C.gchar
+	var carg1 *C.gchar         // in, none, string
 	var carg2 C.gint           // in, none, casted
 	var cret  C.PangoDirection // return, none, casted
 
@@ -12226,6 +12226,36 @@ func UnsafeAttrFontDescToGlibFull(a *AttrFontDesc) unsafe.Pointer {
 	a.native = nil // AttrFontDesc is invalid from here on
 	return _p
 }
+// NewAttrFontDesc wraps pango_attr_font_desc_new
+// 
+// The function takes the following parameters:
+// 
+// 	- desc *FontDescription: the font description 
+// 
+// The function returns the following values:
+// 
+// 	- goret *Attribute 
+//
+// Create a new font description attribute.
+// 
+// This attribute allows setting family, style, weight, variant,
+// stretch, and size simultaneously.
+func NewAttrFontDesc(desc *FontDescription) *Attribute {
+	var carg1 *C.PangoFontDescription // in, none, converted
+	var cret  *C.PangoAttribute       // return, full, converted
+
+	carg1 = (*C.PangoFontDescription)(UnsafeFontDescriptionToGlibNone(desc))
+
+	cret = C.pango_attr_font_desc_new(carg1)
+	runtime.KeepAlive(desc)
+
+	var goret *Attribute
+
+	goret = UnsafeAttributeFromGlibFull(unsafe.Pointer(cret))
+
+	return goret
+}
+
 // AttrFontFeatures wraps PangoAttrFontFeatures
 //
 // The `PangoAttrFontFeatures` structure is used to represent OpenType
@@ -12289,6 +12319,38 @@ func UnsafeAttrFontFeaturesToGlibFull(a *AttrFontFeatures) unsafe.Pointer {
 	a.native = nil // AttrFontFeatures is invalid from here on
 	return _p
 }
+// NewAttrFontFeatures wraps pango_attr_font_features_new
+// 
+// The function takes the following parameters:
+// 
+// 	- features string: a string with OpenType font features, with the syntax of the [CSS
+// font-feature-settings property](https://www.w3.org/TR/css-fonts-4/#font-rend-desc) 
+// 
+// The function returns the following values:
+// 
+// 	- goret *Attribute 
+//
+// Create a new font features tag attribute.
+// 
+// You can use this attribute to select OpenType font features like small-caps,
+// alternative glyphs, ligatures, etc. for fonts that support them.
+func NewAttrFontFeatures(features string) *Attribute {
+	var carg1 *C.char           // in, none, string, casted *C.gchar
+	var cret  *C.PangoAttribute // return, full, converted
+
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(features)))
+	defer C.free(unsafe.Pointer(carg1))
+
+	cret = C.pango_attr_font_features_new(carg1)
+	runtime.KeepAlive(features)
+
+	var goret *Attribute
+
+	goret = UnsafeAttributeFromGlibFull(unsafe.Pointer(cret))
+
+	return goret
+}
+
 // AttrInt wraps PangoAttrInt
 //
 // The `PangoAttrInt` structure is used to represent attributes with
@@ -12637,6 +12699,33 @@ func UnsafeAttrLanguageToGlibFull(a *AttrLanguage) unsafe.Pointer {
 	a.native = nil // AttrLanguage is invalid from here on
 	return _p
 }
+// NewAttrLanguage wraps pango_attr_language_new
+// 
+// The function takes the following parameters:
+// 
+// 	- language *Language: language tag 
+// 
+// The function returns the following values:
+// 
+// 	- goret *Attribute 
+//
+// Create a new language tag attribute.
+func NewAttrLanguage(language *Language) *Attribute {
+	var carg1 *C.PangoLanguage  // in, none, converted
+	var cret  *C.PangoAttribute // return, full, converted
+
+	carg1 = (*C.PangoLanguage)(UnsafeLanguageToGlibNone(language))
+
+	cret = C.pango_attr_language_new(carg1)
+	runtime.KeepAlive(language)
+
+	var goret *Attribute
+
+	goret = UnsafeAttributeFromGlibFull(unsafe.Pointer(cret))
+
+	return goret
+}
+
 // AttrList wraps PangoAttrList
 //
 // A `PangoAttrList` represents a list of attributes that apply to a section
@@ -12739,6 +12828,37 @@ func NewAttrList() *AttrList {
 	var cret *C.PangoAttrList // return, full, converted
 
 	cret = C.pango_attr_list_new()
+
+	var goret *AttrList
+
+	goret = UnsafeAttrListFromGlibFull(unsafe.Pointer(cret))
+
+	return goret
+}
+
+// AttrListFromString wraps pango_attr_list_from_string
+// 
+// The function takes the following parameters:
+// 
+// 	- text string: a string 
+// 
+// The function returns the following values:
+// 
+// 	- goret *AttrList 
+//
+// Deserializes a `PangoAttrList` from a string.
+// 
+// This is the counterpart to [method@Pango.AttrList.to_string].
+// See that functions for details about the format.
+func AttrListFromString(text string) *AttrList {
+	var carg1 *C.char          // in, none, string, casted *C.gchar
+	var cret  *C.PangoAttrList // return, full, converted
+
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(text)))
+	defer C.free(unsafe.Pointer(carg1))
+
+	cret = C.pango_attr_list_from_string(carg1)
+	runtime.KeepAlive(text)
 
 	var goret *AttrList
 
@@ -13174,6 +13294,42 @@ func UnsafeAttrShapeToGlibFull(a *AttrShape) unsafe.Pointer {
 	a.native = nil // AttrShape is invalid from here on
 	return _p
 }
+// NewAttrShape wraps pango_attr_shape_new
+// 
+// The function takes the following parameters:
+// 
+// 	- inkRect *Rectangle: ink rectangle to assign to each character 
+// 	- logicalRect *Rectangle: logical rectangle to assign to each character 
+// 
+// The function returns the following values:
+// 
+// 	- goret *Attribute 
+//
+// Create a new shape attribute.
+// 
+// A shape is used to impose a particular ink and logical
+// rectangle on the result of shaping a particular glyph.
+// This might be used, for instance, for embedding a picture
+// or a widget inside a `PangoLayout`.
+func NewAttrShape(inkRect *Rectangle, logicalRect *Rectangle) *Attribute {
+	var carg1 *C.PangoRectangle // in, none, converted
+	var carg2 *C.PangoRectangle // in, none, converted
+	var cret  *C.PangoAttribute // return, full, converted
+
+	carg1 = (*C.PangoRectangle)(UnsafeRectangleToGlibNone(inkRect))
+	carg2 = (*C.PangoRectangle)(UnsafeRectangleToGlibNone(logicalRect))
+
+	cret = C.pango_attr_shape_new(carg1, carg2)
+	runtime.KeepAlive(inkRect)
+	runtime.KeepAlive(logicalRect)
+
+	var goret *Attribute
+
+	goret = UnsafeAttributeFromGlibFull(unsafe.Pointer(cret))
+
+	return goret
+}
+
 // AttrSize wraps PangoAttrSize
 //
 // The `PangoAttrSize` structure is used to represent attributes which
@@ -13237,6 +13393,60 @@ func UnsafeAttrSizeToGlibFull(a *AttrSize) unsafe.Pointer {
 	a.native = nil // AttrSize is invalid from here on
 	return _p
 }
+// NewAttrSize wraps pango_attr_size_new
+// 
+// The function takes the following parameters:
+// 
+// 	- size int: the font size, in %PANGO_SCALE-ths of a point 
+// 
+// The function returns the following values:
+// 
+// 	- goret *Attribute 
+//
+// Create a new font-size attribute in fractional points.
+func NewAttrSize(size int) *Attribute {
+	var carg1 C.int             // in, none, casted, casted C.gint
+	var cret  *C.PangoAttribute // return, full, converted
+
+	carg1 = C.int(size)
+
+	cret = C.pango_attr_size_new(carg1)
+	runtime.KeepAlive(size)
+
+	var goret *Attribute
+
+	goret = UnsafeAttributeFromGlibFull(unsafe.Pointer(cret))
+
+	return goret
+}
+
+// NewAttrSizeAbsolute wraps pango_attr_size_new_absolute
+// 
+// The function takes the following parameters:
+// 
+// 	- size int: the font size, in %PANGO_SCALE-ths of a device unit 
+// 
+// The function returns the following values:
+// 
+// 	- goret *Attribute 
+//
+// Create a new font-size attribute in device units.
+func NewAttrSizeAbsolute(size int) *Attribute {
+	var carg1 C.int             // in, none, casted, casted C.gint
+	var cret  *C.PangoAttribute // return, full, converted
+
+	carg1 = C.int(size)
+
+	cret = C.pango_attr_size_new_absolute(carg1)
+	runtime.KeepAlive(size)
+
+	var goret *Attribute
+
+	goret = UnsafeAttributeFromGlibFull(unsafe.Pointer(cret))
+
+	return goret
+}
+
 // AttrString wraps PangoAttrString
 //
 // The `PangoAttrString` structure is used to represent attributes with
@@ -14107,6 +14317,81 @@ func NewFontDescription() *FontDescription {
 	var cret *C.PangoFontDescription // return, full, converted
 
 	cret = C.pango_font_description_new()
+
+	var goret *FontDescription
+
+	goret = UnsafeFontDescriptionFromGlibFull(unsafe.Pointer(cret))
+
+	return goret
+}
+
+// FontDescriptionFromString wraps pango_font_description_from_string
+// 
+// The function takes the following parameters:
+// 
+// 	- str string: string representation of a font description. 
+// 
+// The function returns the following values:
+// 
+// 	- goret *FontDescription 
+//
+// Creates a new font description from a string representation.
+// 
+// The string must have the form
+// 
+//     [FAMILY-LIST] [STYLE-OPTIONS] [SIZE] [VARIATIONS] [FEATURES]
+// 
+// where FAMILY-LIST is a comma-separated list of families optionally
+// terminated by a comma, STYLE_OPTIONS is a whitespace-separated list
+// of words where each word describes one of style, variant, weight,
+// stretch, or gravity, and SIZE is a decimal number (size in points)
+// or optionally followed by the unit modifier "px" for absolute size.
+// 
+// The following words are understood as styles:
+// "Normal", "Roman", "Oblique", "Italic".
+// 
+// The following words are understood as variants:
+// "Small-Caps", "All-Small-Caps", "Petite-Caps", "All-Petite-Caps",
+// "Unicase", "Title-Caps".
+// 
+// The following words are understood as weights:
+// "Thin", "Ultra-Light", "Extra-Light", "Light", "Semi-Light",
+// "Demi-Light", "Book", "Regular", "Medium", "Semi-Bold", "Demi-Bold",
+// "Bold", "Ultra-Bold", "Extra-Bold", "Heavy", "Black", "Ultra-Black",
+// "Extra-Black".
+// 
+// The following words are understood as stretch values:
+// "Ultra-Condensed", "Extra-Condensed", "Condensed", "Semi-Condensed",
+// "Semi-Expanded", "Expanded", "Extra-Expanded", "Ultra-Expanded".
+// 
+// The following words are understood as gravity values:
+// "Not-Rotated", "South", "Upside-Down", "North", "Rotated-Left",
+// "East", "Rotated-Right", "West".
+// 
+// VARIATIONS is a comma-separated list of font variations
+// of the form @‍axis1=value,axis2=value,...
+// 
+// FEATURES is a comma-separated list of font features of the form
+// \#‍feature1=value,feature2=value,...
+// 
+// Any one of the options may be absent. If FAMILY-LIST is absent, then
+// the family_name field of the resulting font description will be
+// initialized to %NULL. If STYLE-OPTIONS is missing, then all style
+// options will be set to the default values. If SIZE is missing, the
+// size in the resulting font description will be set to 0.
+// 
+// A typical example:
+// 
+//     Cantarell Italic Light 15 @‍wght=200 #‍tnum=1
+func FontDescriptionFromString(str string) *FontDescription {
+	var carg1 *C.char                 // in, none, string, casted *C.gchar
+	var cret  *C.PangoFontDescription // return, full, converted
+
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(str)))
+	defer C.free(unsafe.Pointer(carg1))
+
+	cret = C.pango_font_description_from_string(carg1)
+	runtime.KeepAlive(str)
 
 	var goret *FontDescription
 
@@ -17097,6 +17382,125 @@ func UnsafeLanguageToGlibFull(l *Language) unsafe.Pointer {
 	l.native = nil // Language is invalid from here on
 	return _p
 }
+// LanguageFromString wraps pango_language_from_string
+// 
+// The function takes the following parameters:
+// 
+// 	- language string (nullable): a string representing a language tag 
+// 
+// The function returns the following values:
+// 
+// 	- goret *Language 
+//
+// Convert a language tag to a `PangoLanguage`.
+// 
+// The language tag must be in a RFC-3066 format. `PangoLanguage` pointers
+// can be efficiently copied (copy the pointer) and compared with other
+// language tags (compare the pointer.)
+// 
+// This function first canonicalizes the string by converting it to
+// lowercase, mapping '_' to '-', and stripping all characters other
+// than letters and '-'.
+// 
+// Use [func@Pango.Language.get_default] if you want to get the
+// `PangoLanguage` for the current locale of the process.
+func LanguageFromString(language string) *Language {
+	var carg1 *C.char          // in, none, string, nullable-string
+	var cret  *C.PangoLanguage // return, none, converted
+
+	if language != "" {
+		carg1 = (*C.char)(unsafe.Pointer(C.CString(language)))
+		defer C.free(unsafe.Pointer(carg1))
+	}
+
+	cret = C.pango_language_from_string(carg1)
+	runtime.KeepAlive(language)
+
+	var goret *Language
+
+	goret = UnsafeLanguageFromGlibNone(unsafe.Pointer(cret))
+
+	return goret
+}
+
+// LanguageGetDefault wraps pango_language_get_default
+// The function returns the following values:
+// 
+// 	- goret *Language 
+//
+// Returns the `PangoLanguage` for the current locale of the process.
+// 
+// On Unix systems, this is the return value is derived from
+// `setlocale (LC_CTYPE, NULL)`, and the user can
+// affect this through the environment variables LC_ALL, LC_CTYPE or
+// LANG (checked in that order). The locale string typically is in
+// the form lang_COUNTRY, where lang is an ISO-639 language code, and
+// COUNTRY is an ISO-3166 country code. For instance, sv_FI for
+// Swedish as written in Finland or pt_BR for Portuguese as written in
+// Brazil.
+// 
+// On Windows, the C library does not use any such environment
+// variables, and setting them won't affect the behavior of functions
+// like ctime(). The user sets the locale through the Regional Options
+// in the Control Panel. The C library (in the setlocale() function)
+// does not use country and language codes, but country and language
+// names spelled out in English.
+// However, this function does check the above environment
+// variables, and does return a Unix-style locale string based on
+// either said environment variables or the thread's current locale.
+// 
+// Your application should call `setlocale(LC_ALL, "")` for the user
+// settings to take effect. GTK does this in its initialization
+// functions automatically (by calling gtk_set_locale()).
+// See the setlocale() manpage for more details.
+// 
+// Note that the default language can change over the life of an application.
+// 
+// Also note that this function will not do the right thing if you
+// use per-thread locales with uselocale(). In that case, you should
+// just call pango_language_from_string() yourself.
+func LanguageGetDefault() *Language {
+	var cret *C.PangoLanguage // return, none, converted
+
+	cret = C.pango_language_get_default()
+
+	var goret *Language
+
+	goret = UnsafeLanguageFromGlibNone(unsafe.Pointer(cret))
+
+	return goret
+}
+
+// LanguageGetPreferred wraps pango_language_get_preferred
+// The function returns the following values:
+// 
+// 	- goret []*Language 
+//
+// Returns the list of languages that the user prefers.
+// 
+// The list is specified by the `PANGO_LANGUAGE` or `LANGUAGE`
+// environment variables, in order of preference. Note that this
+// list does not necessarily include the language returned by
+// [func@Pango.Language.get_default].
+// 
+// When choosing language-specific resources, such as the sample
+// text returned by [method@Pango.Language.get_sample_string],
+// you should first try the default language, followed by the
+// languages returned by this function.
+func LanguageGetPreferred() []*Language {
+	var cret **C.PangoLanguage // return, transfer: none, C Pointers: 2, Name: array[Language], scope: , array (inner: *typesystem.Record, zero-terminated)
+
+	cret = C.pango_language_get_preferred()
+
+	var goret []*Language
+
+	_ = goret
+	_ = cret
+	panic("unimplemented conversion of []*Language (PangoLanguage**)")
+
+	return goret
+}
+
 // GetSampleString wraps pango_language_get_sample_string
 // The function returns the following values:
 // 
@@ -19142,6 +19546,37 @@ func NewTabArray(initialSize int, positionsInPixels bool) *TabArray {
 	cret = C.pango_tab_array_new(carg1, carg2)
 	runtime.KeepAlive(initialSize)
 	runtime.KeepAlive(positionsInPixels)
+
+	var goret *TabArray
+
+	goret = UnsafeTabArrayFromGlibFull(unsafe.Pointer(cret))
+
+	return goret
+}
+
+// TabArrayFromString wraps pango_tab_array_from_string
+// 
+// The function takes the following parameters:
+// 
+// 	- text string: a string 
+// 
+// The function returns the following values:
+// 
+// 	- goret *TabArray 
+//
+// Deserializes a `PangoTabArray` from a string.
+// 
+// This is the counterpart to [method@Pango.TabArray.to_string].
+// See that functions for details about the format.
+func TabArrayFromString(text string) *TabArray {
+	var carg1 *C.char          // in, none, string, casted *C.gchar
+	var cret  *C.PangoTabArray // return, full, converted
+
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(text)))
+	defer C.free(unsafe.Pointer(carg1))
+
+	cret = C.pango_tab_array_from_string(carg1)
+	runtime.KeepAlive(text)
 
 	var goret *TabArray
 

@@ -2256,6 +2256,58 @@ func UnsafePathToGlibFull(p *Path) unsafe.Pointer {
 	p.native = nil // Path is invalid from here on
 	return _p
 }
+// PathParse wraps gsk_path_parse
+// 
+// The function takes the following parameters:
+// 
+// 	- str string: a string 
+// 
+// The function returns the following values:
+// 
+// 	- goret *Path 
+//
+// This is a convenience function that constructs a `GskPath`
+// from a serialized form.
+// 
+// The string is expected to be in (a superset of)
+// [SVG path syntax](https://www.w3.org/TR/SVG11/paths.html#PathData),
+// as e.g. produced by [method@Gsk.Path.to_string].
+// 
+// A high-level summary of the syntax:
+// 
+// - `M x y` Move to `(x, y)`
+// - `L x y` Add a line from the current point to `(x, y)`
+// - `Q x1 y1 x2 y2` Add a quadratic Bézier from the current point to `(x2, y2)`, with control point `(x1, y1)`
+// - `C x1 y1 x2 y2 x3 y3` Add a cubic Bézier from the current point to `(x3, y3)`, with control points `(x1, y1)` and `(x2, y2)`
+// - `Z` Close the contour by drawing a line back to the start point
+// - `H x` Add a horizontal line from the current point to the given x value
+// - `V y` Add a vertical line from the current point to the given y value
+// - `T x2 y2` Add a quadratic Bézier, using the reflection of the previous segments' control point as control point
+// - `S x2 y2 x3 y3` Add a cubic Bézier, using the reflection of the previous segments' second control point as first control point
+// - `A rx ry r l s x y` Add an elliptical arc from the current point to `(x, y)` with radii rx and ry. See the SVG documentation for how the other parameters influence the arc.
+// - `O x1 y1 x2 y2 w` Add a rational quadratic Bézier from the current point to `(x2, y2)` with control point `(x1, y1)` and weight `w`.
+// 
+// All the commands have lowercase variants that interpret coordinates
+// relative to the current point.
+// 
+// The `O` command is an extension that is not supported in SVG.
+func PathParse(str string) *Path {
+	var carg1 *C.char    // in, none, string, casted *C.gchar
+	var cret  *C.GskPath // return, full, converted
+
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(str)))
+	defer C.free(unsafe.Pointer(carg1))
+
+	cret = C.gsk_path_parse(carg1)
+	runtime.KeepAlive(str)
+
+	var goret *Path
+
+	goret = UnsafePathFromGlibFull(unsafe.Pointer(cret))
+
+	return goret
+}
+
 // ForEach wraps gsk_path_foreach
 // 
 // The function takes the following parameters:
@@ -5046,6 +5098,43 @@ func NewStroke(lineWidth float32) *Stroke {
 	return goret
 }
 
+// StrokeEqual wraps gsk_stroke_equal
+// 
+// The function takes the following parameters:
+// 
+// 	- stroke1 unsafe.Pointer (nullable): the first `GskStroke` 
+// 	- stroke2 unsafe.Pointer (nullable): the second `GskStroke` 
+// 
+// The function returns the following values:
+// 
+// 	- goret bool 
+//
+// Checks if 2 strokes are identical.
+func StrokeEqual(stroke1 unsafe.Pointer, stroke2 unsafe.Pointer) bool {
+	var carg1 C.gconstpointer // in, none, casted, nullable
+	var carg2 C.gconstpointer // in, none, casted, nullable
+	var cret  C.gboolean      // return
+
+	if stroke1 != nil {
+		carg1 = C.gconstpointer(stroke1)
+	}
+	if stroke2 != nil {
+		carg2 = C.gconstpointer(stroke2)
+	}
+
+	cret = C.gsk_stroke_equal(carg1, carg2)
+	runtime.KeepAlive(stroke1)
+	runtime.KeepAlive(stroke2)
+
+	var goret bool
+
+	if cret != 0 {
+		goret = true
+	}
+
+	return goret
+}
+
 // Copy wraps gsk_stroke_copy
 // The function returns the following values:
 // 
@@ -5477,6 +5566,47 @@ func NewTransform() *Transform {
 	goret = UnsafeTransformFromGlibFull(unsafe.Pointer(cret))
 
 	return goret
+}
+
+// TransformParse wraps gsk_transform_parse
+// 
+// The function takes the following parameters:
+// 
+// 	- str string: the string to parse 
+// 
+// The function returns the following values:
+// 
+// 	- outTransform *Transform: The location to put the transform in 
+// 	- goret bool 
+//
+// Parses the given @string into a transform and puts it in
+// @out_transform.
+// 
+// Strings printed via [method@Gsk.Transform.to_string]
+// can be read in again successfully using this function.
+// 
+// If @string does not describe a valid transform, %FALSE is
+// returned and %NULL is put in @out_transform.
+func TransformParse(str string) (*Transform, bool) {
+	var carg1 *C.char         // in, none, string, casted *C.gchar
+	var carg2 *C.GskTransform // out, full, converted
+	var cret  C.gboolean      // return
+
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(str)))
+	defer C.free(unsafe.Pointer(carg1))
+
+	cret = C.gsk_transform_parse(carg1, &carg2)
+	runtime.KeepAlive(str)
+
+	var outTransform *Transform
+	var goret        bool
+
+	outTransform = UnsafeTransformFromGlibFull(unsafe.Pointer(carg2))
+	if cret != 0 {
+		goret = true
+	}
+
+	return outTransform, goret
 }
 
 // Equal wraps gsk_transform_equal

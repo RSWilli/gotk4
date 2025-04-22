@@ -54,8 +54,8 @@ func _gotk4_gtk3_BuilderConnectFunc(carg1 *C.GtkBuilder, carg2 *C.GObject, carg3
 
 	var builder       Builder              // in, none, converted
 	var object        gobject.Object       // in, none, converted
-	var signalName    string               // in, none, string, casted *C.gchar
-	var handlerName   string               // in, none, string, casted *C.gchar
+	var signalName    string               // in, none, string
+	var handlerName   string               // in, none, string
 	var connectObject gobject.Object       // in, none, converted, nullable
 	var flags         gobject.ConnectFlags // in, none, casted
 
@@ -219,7 +219,7 @@ func _gotk4_gtk3_ClipboardTextReceivedFunc(carg1 *C.GtkClipboard, carg2 *C.gchar
 	}
 
 	var clipboard Clipboard // in, none, converted
-	var text      string    // in, none, string, casted *C.gchar, nullable
+	var text      string    // in, none, string, nullable-string
 
 	clipboard = UnsafeClipboardFromGlibNone(unsafe.Pointer(carg1))
 	if carg2 != nil {
@@ -263,7 +263,7 @@ func _gotk4_gtk3_EntryCompletionMatchFunc(carg1 *C.GtkEntryCompletion, carg2 *C.
 	}
 
 	var completion EntryCompletion // in, none, converted
-	var key        string          // in, none, string, casted *C.gchar
+	var key        string          // in, none, string
 	var iter       *TreeIter       // in, none, converted
 	var goret      bool            // return
 
@@ -386,8 +386,8 @@ func _gotk4_gtk3_PrintSettingsFunc(carg1 *C.gchar, carg2 *C.gchar, carg3 C.gpoin
 		fn = v.(PrintSettingsFunc)
 	}
 
-	var key   string // in, none, string, casted *C.gchar
-	var value string // in, none, string, casted *C.gchar
+	var key   string // in, none, string
+	var value string // in, none, string
 
 	key = C.GoString((*C.char)(unsafe.Pointer(carg1)))
 	value = C.GoString((*C.char)(unsafe.Pointer(carg2)))
@@ -817,7 +817,7 @@ func _gotk4_gtk3_TreeViewSearchEqualFunc(carg1 *C.GtkTreeModel, carg2 C.gint, ca
 
 	var model  TreeModel // in, none, converted
 	var column int       // in, none, casted
-	var key    string    // in, none, string, casted *C.gchar
+	var key    string    // in, none, string
 	var iter   *TreeIter // in, none, converted
 	var goret  bool      // return
 
@@ -850,7 +850,7 @@ func _gotk4_gtk3_CalendarDetailFunc(carg1 *C.GtkCalendar, carg2 C.guint, carg3 C
 	var year     uint     // in, none, casted
 	var month    uint     // in, none, casted
 	var day      uint     // in, none, casted
-	var goret    string   // return, full, string, casted *C.gchar
+	var goret    string   // return, full, string
 
 	calendar = UnsafeCalendarFromGlibNone(unsafe.Pointer(carg1))
 	year = uint(carg2)

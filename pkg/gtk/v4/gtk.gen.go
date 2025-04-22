@@ -117264,6 +117264,136 @@ func UnsafeBitsetIterToGlibFull(b *BitsetIter) unsafe.Pointer {
 	b.native = nil // BitsetIter is invalid from here on
 	return _p
 }
+// BitsetIterInitAt wraps gtk_bitset_iter_init_at
+// 
+// The function takes the following parameters:
+// 
+// 	- set *Bitset: a `GtkBitset` 
+// 	- target uint: target value to start iterating at 
+// 
+// The function returns the following values:
+// 
+// 	- iter BitsetIter: a pointer to an uninitialized `GtkBitsetIter` 
+// 	- value uint: Set to the found value in @set 
+// 	- goret bool 
+//
+// Initializes @iter to point to @target.
+// 
+// If @target is not found, finds the next value after it.
+// If no value &gt;= @target exists in @set, this function returns %FALSE.
+func BitsetIterInitAt(set *Bitset, target uint) (BitsetIter, uint, bool) {
+	var carg2 *C.GtkBitset    // in, none, converted
+	var carg3 C.guint         // in, none, casted
+	var carg1 C.GtkBitsetIter // out, transfer: none, C Pointers: 0, Name: BitsetIter, caller-allocates
+	var carg4 C.guint         // out, full, casted
+	var cret  C.gboolean      // return
+
+	carg2 = (*C.GtkBitset)(UnsafeBitsetToGlibNone(set))
+	carg3 = C.guint(target)
+
+	cret = C.gtk_bitset_iter_init_at(&carg1, carg2, carg3, &carg4)
+	runtime.KeepAlive(set)
+	runtime.KeepAlive(target)
+
+	var iter  BitsetIter
+	var value uint
+	var goret bool
+
+	_ = iter
+	_ = carg1
+	panic("unimplemented conversion of BitsetIter (GtkBitsetIter)")
+	value = uint(carg4)
+	if cret != 0 {
+		goret = true
+	}
+
+	return iter, value, goret
+}
+
+// BitsetIterInitFirst wraps gtk_bitset_iter_init_first
+// 
+// The function takes the following parameters:
+// 
+// 	- set *Bitset: a `GtkBitset` 
+// 
+// The function returns the following values:
+// 
+// 	- iter BitsetIter: a pointer to an uninitialized `GtkBitsetIter` 
+// 	- value uint: Set to the first value in @set 
+// 	- goret bool 
+//
+// Initializes an iterator for @set and points it to the first
+// value in @set.
+// 
+// If @set is empty, %FALSE is returned and @value is set to %G_MAXUINT.
+func BitsetIterInitFirst(set *Bitset) (BitsetIter, uint, bool) {
+	var carg2 *C.GtkBitset    // in, none, converted
+	var carg1 C.GtkBitsetIter // out, transfer: none, C Pointers: 0, Name: BitsetIter, caller-allocates
+	var carg3 C.guint         // out, full, casted
+	var cret  C.gboolean      // return
+
+	carg2 = (*C.GtkBitset)(UnsafeBitsetToGlibNone(set))
+
+	cret = C.gtk_bitset_iter_init_first(&carg1, carg2, &carg3)
+	runtime.KeepAlive(set)
+
+	var iter  BitsetIter
+	var value uint
+	var goret bool
+
+	_ = iter
+	_ = carg1
+	panic("unimplemented conversion of BitsetIter (GtkBitsetIter)")
+	value = uint(carg3)
+	if cret != 0 {
+		goret = true
+	}
+
+	return iter, value, goret
+}
+
+// BitsetIterInitLast wraps gtk_bitset_iter_init_last
+// 
+// The function takes the following parameters:
+// 
+// 	- set *Bitset: a `GtkBitset` 
+// 
+// The function returns the following values:
+// 
+// 	- iter BitsetIter: a pointer to an uninitialized `GtkBitsetIter` 
+// 	- value uint: Set to the last value in @set 
+// 	- goret bool 
+//
+// Initializes an iterator for @set and points it to the last
+// value in @set.
+// 
+// If @set is empty, %FALSE is returned.
+func BitsetIterInitLast(set *Bitset) (BitsetIter, uint, bool) {
+	var carg2 *C.GtkBitset    // in, none, converted
+	var carg1 C.GtkBitsetIter // out, transfer: none, C Pointers: 0, Name: BitsetIter, caller-allocates
+	var carg3 C.guint         // out, full, casted
+	var cret  C.gboolean      // return
+
+	carg2 = (*C.GtkBitset)(UnsafeBitsetToGlibNone(set))
+
+	cret = C.gtk_bitset_iter_init_last(&carg1, carg2, &carg3)
+	runtime.KeepAlive(set)
+
+	var iter  BitsetIter
+	var value uint
+	var goret bool
+
+	_ = iter
+	_ = carg1
+	panic("unimplemented conversion of BitsetIter (GtkBitsetIter)")
+	value = uint(carg3)
+	if cret != 0 {
+		goret = true
+	}
+
+	return iter, value, goret
+}
+
 // GetValue wraps gtk_bitset_iter_get_value
 // The function returns the following values:
 // 
@@ -126179,6 +126309,62 @@ func NewPaperSizeFromPPD(ppdName string, ppdDisplayName string, width float64, h
 	var goret *PaperSize
 
 	goret = UnsafePaperSizeFromGlibFull(unsafe.Pointer(cret))
+
+	return goret
+}
+
+// PaperSizeGetDefault wraps gtk_paper_size_get_default
+// The function returns the following values:
+// 
+// 	- goret string 
+//
+// Returns the name of the default paper size, which
+// depends on the current locale.
+func PaperSizeGetDefault() string {
+	var cret *C.char // return, none, string, casted *C.gchar
+
+	cret = C.gtk_paper_size_get_default()
+
+	var goret string
+
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+
+	return goret
+}
+
+// PaperSizeGetPaperSizes wraps gtk_paper_size_get_paper_sizes
+// 
+// The function takes the following parameters:
+// 
+// 	- includeCustom bool: whether to include custom paper sizes
+//   as defined in the page setup dialog 
+// 
+// The function returns the following values:
+// 
+// 	- goret []*PaperSize 
+//
+// Creates a list of known paper sizes.
+func PaperSizeGetPaperSizes(includeCustom bool) []*PaperSize {
+	var carg1 C.gboolean // in
+	var cret  *C.GList   // container, transfer: full
+
+	if includeCustom {
+		carg1 = C.TRUE
+	}
+
+	cret = C.gtk_paper_size_get_paper_sizes(carg1)
+	runtime.KeepAlive(includeCustom)
+
+	var goret []*PaperSize
+
+	goret = glib.UnsafeListFromGlibFull(
+		unsafe.Pointer(cret),
+		func(v unsafe.Pointer) *PaperSize {
+			var dst *PaperSize // converted
+			dst = UnsafePaperSizeFromGlibFull(v)
+			return dst
+		},
+	)
 
 	return goret
 }

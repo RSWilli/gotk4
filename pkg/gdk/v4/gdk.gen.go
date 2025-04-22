@@ -22469,6 +22469,109 @@ func UnsafeColorStateToGlibFull(c *ColorState) unsafe.Pointer {
 	c.native = nil // ColorState is invalid from here on
 	return _p
 }
+// ColorStateGetRec2100Linear wraps gdk_color_state_get_rec2100_linear
+// The function returns the following values:
+// 
+// 	- goret *ColorState 
+//
+// Returns the color state object representing the linear rec2100 color space.
+// 
+// This color state uses the primaries defined by BT.2020-2 and BT.2100-0 and a linear
+// transfer function.
+// 
+// It is equivalent to the [Cicp](class.CicpParams.html) tuple 9/8/0/1.
+// 
+// See e.g. [the CSS HDR Module](https://drafts.csswg.org/css-color-hdr/#valdef-color-rec2100-linear)
+// for details about this colorstate.
+func ColorStateGetRec2100Linear() *ColorState {
+	var cret *C.GdkColorState // return, full, converted
+
+	cret = C.gdk_color_state_get_rec2100_linear()
+
+	var goret *ColorState
+
+	goret = UnsafeColorStateFromGlibFull(unsafe.Pointer(cret))
+
+	return goret
+}
+
+// ColorStateGetRec2100Pq wraps gdk_color_state_get_rec2100_pq
+// The function returns the following values:
+// 
+// 	- goret *ColorState 
+//
+// Returns the color state object representing the rec2100-pq color space.
+// 
+// This color state uses the primaries defined by BT.2020-2 and BT.2100-0 and the transfer
+// function defined by SMPTE ST 2084 and BT.2100-2.
+// 
+// It is equivalent to the [Cicp](class.CicpParams.html) tuple 9/16/0/1.
+// 
+// See e.g. [the CSS HDR Module](https://drafts.csswg.org/css-color-hdr/#valdef-color-rec2100-pq)
+// for details about this colorstate.
+func ColorStateGetRec2100Pq() *ColorState {
+	var cret *C.GdkColorState // return, full, converted
+
+	cret = C.gdk_color_state_get_rec2100_pq()
+
+	var goret *ColorState
+
+	goret = UnsafeColorStateFromGlibFull(unsafe.Pointer(cret))
+
+	return goret
+}
+
+// ColorStateGetSrgb wraps gdk_color_state_get_srgb
+// The function returns the following values:
+// 
+// 	- goret *ColorState 
+//
+// Returns the color state object representing the sRGB color space.
+// 
+// This color state uses the primaries defined by BT.709-6 and the transfer function
+// defined by IEC 61966-2-1.
+// 
+// It is equivalent to the [Cicp](class.CicpParams.html) tuple 1/13/0/1.
+// 
+// See e.g. [the CSS Color Module](https://www.w3.org/TR/css-color-4/#predefined-sRGB)
+// for details about this colorstate.
+func ColorStateGetSrgb() *ColorState {
+	var cret *C.GdkColorState // return, full, converted
+
+	cret = C.gdk_color_state_get_srgb()
+
+	var goret *ColorState
+
+	goret = UnsafeColorStateFromGlibFull(unsafe.Pointer(cret))
+
+	return goret
+}
+
+// ColorStateGetSrgbLinear wraps gdk_color_state_get_srgb_linear
+// The function returns the following values:
+// 
+// 	- goret *ColorState 
+//
+// Returns the color state object representing the linearized sRGB color space.
+// 
+// This color state uses the primaries defined by BT.709-6 and a linear transfer function.
+// 
+// It is equivalent to the [Cicp](class.CicpParams.html) tuple 1/8/0/1.
+// 
+// See e.g. [the CSS Color Module](https://www.w3.org/TR/css-color-4/#predefined-sRGB-linear)
+// for details about this colorstate.
+func ColorStateGetSrgbLinear() *ColorState {
+	var cret *C.GdkColorState // return, full, converted
+
+	cret = C.gdk_color_state_get_srgb_linear()
+
+	var goret *ColorState
+
+	goret = UnsafeColorStateFromGlibFull(unsafe.Pointer(cret))
+
+	return goret
+}
+
 // CreateCicpParams wraps gdk_color_state_create_cicp_params
 // The function returns the following values:
 // 
@@ -22698,6 +22801,41 @@ func NewContentFormatsForGType(typ gobject.Type) *ContentFormats {
 
 	cret = C.gdk_content_formats_new_for_gtype(carg1)
 	runtime.KeepAlive(typ)
+
+	var goret *ContentFormats
+
+	goret = UnsafeContentFormatsFromGlibFull(unsafe.Pointer(cret))
+
+	return goret
+}
+
+// ContentFormatsParse wraps gdk_content_formats_parse
+// 
+// The function takes the following parameters:
+// 
+// 	- str string: the string to parse 
+// 
+// The function returns the following values:
+// 
+// 	- goret *ContentFormats 
+//
+// Parses the given @string into `GdkContentFormats` and
+// returns the formats.
+// 
+// Strings printed via [method@Gdk.ContentFormats.to_string]
+// can be read in again successfully using this function.
+// 
+// If @string does not describe valid content formats, %NULL
+// is returned.
+func ContentFormatsParse(str string) *ContentFormats {
+	var carg1 *C.char              // in, none, string, casted *C.gchar
+	var cret  *C.GdkContentFormats // return, full, converted
+
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(str)))
+	defer C.free(unsafe.Pointer(carg1))
+
+	cret = C.gdk_content_formats_parse(carg1)
+	runtime.KeepAlive(str)
 
 	var goret *ContentFormats
 
