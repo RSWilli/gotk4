@@ -165,15 +165,6 @@ type BitfieldMember struct {
 	*typesystem.Member
 }
 
-func bits(v string) string {
-	b, err := strconv.ParseUint(v, 10, 64)
-	if err != nil {
-		return v
-	}
-
-	return "0b" + strconv.FormatUint(b, 2)
-}
-
 type BitfieldGenerator struct {
 	Doc SubGenerator
 
@@ -184,6 +175,8 @@ type BitfieldGenerator struct {
 	Marshaler Generator
 
 	Members []BitfieldMember
+
+	SubGenerators GeneratorList
 }
 
 func (g *BitfieldGenerator) Generate(w *file.Package) {
@@ -239,6 +232,8 @@ func (g *BitfieldGenerator) Generate(w *file.Package) {
 	fmt.Fprintf(w.Go(), "return \"%s(\" + strings.Join(parts, \"|\") + \")\"\n", g.GoType(0))
 	w.Go().Unindent()
 	fmt.Fprintf(w.Go(), "}\n\n")
+
+	g.SubGenerators.Generate(w)
 }
 
 func NewBitfieldGenerator(bf *typesystem.Bitfield) *BitfieldGenerator {
@@ -258,7 +253,7 @@ func NewBitfieldGenerator(bf *typesystem.Bitfield) *BitfieldGenerator {
 		marshalGen = NewMarshalBifieldGenerator(bf)
 	}
 
-	return &BitfieldGenerator{
+	gen := &BitfieldGenerator{
 		Doc:      NewTypeGoDocGenerator(bf),
 		Bitfield: bf,
 
@@ -266,4 +261,10 @@ func NewBitfieldGenerator(bf *typesystem.Bitfield) *BitfieldGenerator {
 		MethodReceiver: strcases.ReceiverName(bf.GoType(0)),
 		Marshaler:      marshalGen,
 	}
+
+	for _, f := range bf.Functions {
+		gen.SubGenerators = append(gen.SubGenerators, NewCallableGenerator(f))
+	}
+
+	return gen
 }

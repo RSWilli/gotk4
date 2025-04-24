@@ -10,7 +10,11 @@ type Enum struct {
 	Doc
 	Marshaler
 
+	gir gir.Enum
+
 	Members Members
+
+	Functions []*CallableSignature
 }
 
 func DeclareEnum(e *env, v gir.Enum) *Enum {
@@ -26,6 +30,7 @@ func DeclareEnum(e *env, v gir.Enum) *Enum {
 	}
 
 	enum := &Enum{
+		gir: v,
 		BaseType: BaseType{
 			GirName: v.Name,
 			GoTyp:   strcases.PascalToGo(v.Name),
@@ -39,6 +44,14 @@ func DeclareEnum(e *env, v gir.Enum) *Enum {
 	enum.Members = GetMembers(e, enum, v.Members)
 
 	return enum
+}
+
+func (enum *Enum) declareNested(e *env) {
+	for _, v := range enum.gir.Functions {
+		if t := DeclarePrefixedFunction(e, enum, v.CallableAttrs); t != nil {
+			enum.Functions = append(enum.Functions, t)
+		}
+	}
 }
 
 // maxPointersAllowed implements maxPointerConstrainedType.

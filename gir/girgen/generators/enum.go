@@ -185,6 +185,8 @@ type EnumGenerator struct {
 	Members []EnumMember
 
 	Marshaler Generator
+
+	SubGenerators GeneratorList
 }
 
 func (g *EnumGenerator) Generate(w *file.Package) {
@@ -238,6 +240,8 @@ func (g *EnumGenerator) Generate(w *file.Package) {
 	fmt.Fprintf(w.Go(), "}\n")
 	w.Go().Unindent()
 	fmt.Fprintf(w.Go(), "}\n\n")
+
+	g.SubGenerators.Generate(w)
 }
 
 func NewEnumGenerator(enum *typesystem.Enum) *EnumGenerator {
@@ -257,10 +261,16 @@ func NewEnumGenerator(enum *typesystem.Enum) *EnumGenerator {
 		marshalGen = NewMarshalEnumGenerator(enum)
 	}
 
-	return &EnumGenerator{
+	gen := &EnumGenerator{
 		Doc:       NewTypeGoDocGenerator(enum),
 		Enum:      enum,
 		Members:   members,
 		Marshaler: marshalGen,
 	}
+
+	for _, f := range enum.Functions {
+		gen.SubGenerators = append(gen.SubGenerators, NewCallableGenerator(f))
+	}
+
+	return gen
 }

@@ -9,10 +9,13 @@ import (
 type Bitfield struct {
 	BaseType
 	Doc
-
 	Marshaler
 
+	gir gir.Bitfield
+
 	Members []*Member
+
+	Functions []*CallableSignature
 }
 
 func DeclareBitfield(e *env, v gir.Bitfield) *Bitfield {
@@ -28,6 +31,7 @@ func DeclareBitfield(e *env, v gir.Bitfield) *Bitfield {
 	}
 
 	b := &Bitfield{
+		gir: v,
 		BaseType: BaseType{
 			GirName: v.Name,
 			GoTyp:   strcases.PascalToGo(v.Name),
@@ -41,6 +45,14 @@ func DeclareBitfield(e *env, v gir.Bitfield) *Bitfield {
 	b.Members = GetMembers(e, b, v.Members)
 
 	return b
+}
+
+func (b *Bitfield) declareNested(e *env) {
+	for _, v := range b.gir.Functions {
+		if t := DeclarePrefixedFunction(e, b, v.CallableAttrs); t != nil {
+			b.Functions = append(b.Functions, t)
+		}
+	}
 }
 
 func (a *Bitfield) maxPointersAllowed() int {
